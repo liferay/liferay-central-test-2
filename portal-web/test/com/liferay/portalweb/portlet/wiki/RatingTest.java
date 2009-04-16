@@ -26,13 +26,13 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="AddChildTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="RatingTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class AddChildTest extends BaseTestCase {
-	public void testAddChild() throws Exception {
+public class RatingTest extends BaseTestCase {
+	public void testRating() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -51,18 +51,32 @@ public class AddChildTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Wiki Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Add Child Page"));
-		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_36_title", RuntimeVariables.replace("Test"));
-		selenium.type("_36_title", RuntimeVariables.replace("Test"));
-		selenium.type("_36_content",
-			RuntimeVariables.replace(
-				"==Test Child Article==\n\n//this is italics//\n\n**bold**\n\n[[http://www.liferay.com|Link to website]]\n\n*this is a list item\n**this is a sub list item"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("Children"));
-		selenium.click(RuntimeVariables.replace("link=Test"));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("Test Child Article"));
+		assertTrue(selenium.isElementPresent("//td[1]/ul/li[2]/a[2]"));
+		assertEquals("(0 Votes)", selenium.getText("//td[1]/ul/li[3]"));
+		assertEquals("\u00b10", selenium.getText("//td[1]/ul/li[1]/span"));
+		assertEquals("(0 Votes)",
+			selenium.getText("//tr[5]/td[2]/table[1]/tbody/tr/td[1]/ul/li[3]"));
+		assertEquals("\u00b10",
+			selenium.getText(
+				"//tr[5]/td[2]/table[1]/tbody/tr/td[1]/ul/li[1]/span"));
+		selenium.click("//td[1]/ul/li[2]/a[2]");
+		Thread.sleep(5000);
+		assertEquals("(1 Vote)", selenium.getText("//td[1]/ul/li[3]"));
+		assertEquals("-1", selenium.getText("//td[1]/ul/li[1]/span"));
+		assertEquals("(0 Votes)",
+			selenium.getText("//tr[5]/td[2]/table[1]/tbody/tr/td[1]/ul/li[3]"));
+		assertEquals("\u00b10",
+			selenium.getText(
+				"//tr[5]/td[2]/table[1]/tbody/tr/td[1]/ul/li[1]/span"));
+		selenium.click("//td[1]/ul/li[2]/a[1]");
+		Thread.sleep(5000);
+		assertEquals("(1 Vote)", selenium.getText("//td[1]/ul/li[3]"));
+		assertEquals("+1", selenium.getText("//td[1]/ul/li[1]/span"));
+		assertEquals("(0 Votes)",
+			selenium.getText("//tr[5]/td[2]/table[1]/tbody/tr/td[1]/ul/li[3]"));
+		assertEquals("\u00b10",
+			selenium.getText(
+				"//tr[5]/td[2]/table[1]/tbody/tr/td[1]/ul/li[1]/span"));
+		selenium.click("//td[1]/ul/li[2]/a[1]");
 	}
 }

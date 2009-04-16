@@ -9,6 +9,11 @@
 <tr><td rowspan="1" colspan="3">CompareVersionsTest</td></tr>
 </thead><tbody>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>link=Wiki Test Page</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>link=Wiki Test Page</td>
 	<td></td>
@@ -20,7 +25,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//img[@alt='Edit']</td>
+	<td>//img[@alt='Details']</td>
 	<td></td>
 </tr>
 <tr>
@@ -29,8 +34,23 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>_36_rowIds</td>
+	<td></td>
+</tr>
+<tr>
 	<td>click</td>
 	<td>_36_rowIds</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>_36_rowIds</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//input[@name='_36_rowIds' and @value='1.0']</td>
 	<td></td>
 </tr>
 <tr>
@@ -39,8 +59,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>//input[@value='Compare Versions']</td>
+	<td>assertChecked</td>
+	<td>//input[@name='_36_rowIds' and @value='1.0']</td>
 	<td></td>
 </tr>
 <tr>
@@ -49,8 +69,28 @@
 	<td></td>
 </tr>
 <tr>
+	<td>assertText</td>
+	<td>//div[2]/div/div/table/tbody/tr[1]/td[2]</td>
+	<td>FrontPage 1.3</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[2]/div/div/table/tbody/tr[1]/td[1]</td>
+	<td>FrontPage 1.0</td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>I love Liferay! This Wiki has been EDITED!</td>
+	<td></td>
+</tr>
+<tr>
 	<td>assertTextPresent</td>
 	<td>Oh NOES! I've made a minor change. Please revert this!</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Return to Full Page</td>
 	<td></td>
 </tr>
 

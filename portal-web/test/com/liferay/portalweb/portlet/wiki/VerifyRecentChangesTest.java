@@ -55,8 +55,37 @@ public class VerifyRecentChangesTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Recent Changes"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent("link=Link Me 2"));
-		assertTrue(selenium.isElementPresent("link=Link Me 1"));
-		assertTrue(selenium.isElementPresent("link=1.4"));
+		assertEquals("Link Me 2", selenium.getText("//td[1]/a"));
+		selenium.click(RuntimeVariables.replace("link=Link Me 1"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("//img[@alt='Edit']"));
+		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("_36_content")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.type("_36_content",
+			RuntimeVariables.replace(
+				"Hi Administrator! Hope you are well! Please link me to another page!\n\n-testing\n\n-Recent Changes"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
+		selenium.click(RuntimeVariables.replace("link=Recent Changes"));
+		selenium.waitForPageToLoad("30000");
+		assertEquals("Link Me 1", selenium.getText("//td[1]/a"));
 	}
 }

@@ -33,6 +33,22 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class MinorArticleChangeTest extends BaseTestCase {
 	public void testMinorArticleChange() throws Exception {
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Wiki Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click(RuntimeVariables.replace("link=Wiki Test Page"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Second Edited Wiki Test"));
@@ -59,6 +75,8 @@ public class MinorArticleChangeTest extends BaseTestCase {
 		selenium.type("_36_content",
 			RuntimeVariables.replace(
 				"&lt;&lt;TableOfContents&gt;&gt;\n\n== This is a second test article ==\n\n====Yes this is a second test article ====\n\nI love Liferay! This Wiki has been EDITED!\n\nOh NOES! I've made a minor change. Please revert this!"));
+		assertTrue(selenium.isElementPresent("_36_minorEditCheckbox"));
+		assertTrue(selenium.isChecked("_36_minorEditCheckbox"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(

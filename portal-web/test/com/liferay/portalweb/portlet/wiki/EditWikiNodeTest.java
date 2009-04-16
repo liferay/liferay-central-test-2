@@ -53,7 +53,6 @@ public class EditWikiNodeTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("//img[@alt='Manage Wikis']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//tr[4]/td[4]/ul/li/strong/span");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -61,7 +60,7 @@ public class EditWikiNodeTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//div[4]/ul/li[1]/a")) {
+				if (selenium.isElementPresent("//tr[4]/td[4]/ul/li/strong/span")) {
 					break;
 				}
 			}
@@ -71,6 +70,7 @@ public class EditWikiNodeTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.click("//tr[4]/td[4]/ul/li/strong/span");
 		selenium.click(RuntimeVariables.replace("//div[4]/ul/li[1]/a"));
 		selenium.waitForPageToLoad("30000");
 
@@ -95,13 +95,14 @@ public class EditWikiNodeTest extends BaseTestCase {
 		selenium.type("_36_name",
 			RuntimeVariables.replace("Second Edited Wiki Test"));
 		selenium.typeKeys("_36_description",
-			RuntimeVariables.replace("This is a second edited test wiki!"));
+			RuntimeVariables.replace("This is a edited wiki test!"));
 		selenium.type("_36_description",
-			RuntimeVariables.replace("This is a second edited test wiki!"));
+			RuntimeVariables.replace("This is a edited wiki test!"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
 		assertTrue(selenium.isElementPresent("link=Second Edited Wiki Test"));
+		assertFalse(selenium.isElementPresent("link=Wiki Test"));
 	}
 }

@@ -19,33 +19,33 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>//tr[5]/td[2]/table[1]/tbody/tr/td[4]/span/a[2]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>click</td>
-	<td>//td[4]/span/a[2]</td>
+	<td>//tr[5]/td[2]/table[1]/tbody/tr/td[4]/span/a[2]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>_36_editBody1</td>
+	<td>_36_editBody2</td>
 	<td></td>
 </tr>
 <tr>
 	<td>typeKeys</td>
-	<td>_36_editBody1</td>
-	<td>This is a test edited post repl!</td>
+	<td>_36_editBody2</td>
+	<td>This is a edited test comment.</td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>_36_editBody1</td>
-	<td>This is a test edited post reply!</td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>_36_updateReplyButton1</td>
-	<td></td>
+	<td>_36_editBody2</td>
+	<td>This is a edited test comment.</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>_36_updateReplyButton1</td>
+	<td>_36_updateReplyButton2</td>
 	<td></td>
 </tr>
 <tr>
@@ -54,8 +54,18 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
-	<td>This is a test edited post reply!</td>
+	<td>assertElementPresent</td>
+	<td>link=This is a edited test comment.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tr[5]/td[2]/div[1]</td>
+	<td>This is a edited test comment.</td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>link=This is a second test comment.</td>
 	<td></td>
 </tr>
 

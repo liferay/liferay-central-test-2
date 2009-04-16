@@ -33,25 +33,13 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class CompareVersionsTest extends BaseTestCase {
 	public void testCompareVersions() throws Exception {
-		selenium.click(RuntimeVariables.replace("link=Wiki Test Page"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Second Edited Wiki Test"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//img[@alt='Edit']"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=History"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click("_36_rowIds");
-		selenium.click("//input[@name='_36_rowIds' and @value='1.0']");
-
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent(
-							"//input[@value='Compare Versions']")) {
+				if (selenium.isElementPresent("link=Wiki Test Page")) {
 					break;
 				}
 			}
@@ -61,10 +49,66 @@ public class CompareVersionsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.click(RuntimeVariables.replace("link=Wiki Test Page"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("link=Second Edited Wiki Test"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("//img[@alt='Details']"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("link=History"));
+		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("_36_rowIds")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("_36_rowIds");
+		assertTrue(selenium.isChecked("_36_rowIds"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent(
+							"//input[@name='_36_rowIds' and @value='1.0']")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("//input[@name='_36_rowIds' and @value='1.0']");
+		assertTrue(selenium.isChecked(
+				"//input[@name='_36_rowIds' and @value='1.0']"));
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Compare Versions']"));
 		selenium.waitForPageToLoad("30000");
+		assertEquals("FrontPage 1.3",
+			selenium.getText("//div[2]/div/div/table/tbody/tr[1]/td[2]"));
+		assertEquals("FrontPage 1.0",
+			selenium.getText("//div[2]/div/div/table/tbody/tr[1]/td[1]"));
+		assertTrue(selenium.isTextPresent(
+				"I love Liferay! This Wiki has been EDITED!"));
 		assertTrue(selenium.isTextPresent(
 				"Oh NOES! I've made a minor change. Please revert this!"));
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
+		selenium.waitForPageToLoad("30000");
 	}
 }

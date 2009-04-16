@@ -25,17 +25,12 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//img[@alt='Edit']</td>
+	<td>//img[@alt='Details']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
 	<td>link=History</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>link=Revert</td>
 	<td></td>
 </tr>
 <tr>
@@ -49,18 +44,38 @@
 	<td></td>
 </tr>
 <tr>
+	<td>assertText</td>
+	<td>//td[3]/a</td>
+	<td>1.4</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tr[3]/td[6]</td>
+	<td>Reverted to 1.2</td>
+</tr>
+<tr>
 	<td>assertElementPresent</td>
 	<td>link=1.4</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=FrontPage</td>
+	<td>link=1.4</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextNotPresent</td>
-	<td>Oh NOES! I've made a minor change. Please revert this!</td>
+	<td>assertText</td>
+	<td>//div[2]/div/h2</td>
+	<td>This is a second test article</td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>I love Liferay! This Wiki has been EDITED!</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Yes this is a second test article</td>
 	<td></td>
 </tr>
 

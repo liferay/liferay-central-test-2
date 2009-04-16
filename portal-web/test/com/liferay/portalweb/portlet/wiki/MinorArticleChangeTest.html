@@ -9,6 +9,11 @@
 <tr><td rowspan="1" colspan="3">MinorArticleChangeTest</td></tr>
 </thead><tbody>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>link=Wiki Test Page</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>link=Wiki Test Page</td>
 	<td></td>
@@ -32,6 +37,16 @@
 	<td>type</td>
 	<td>_36_content</td>
 	<td>&lt;&lt;TableOfContents&gt;&gt;<br /><br />== This is a second test article ==<br /><br />====Yes this is a second test article ====<br /><br />I love Liferay! This Wiki has been EDITED!<br /><br />Oh NOES! I've made a minor change. Please revert this!</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>_36_minorEditCheckbox</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>_36_minorEditCheckbox</td>
+	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>

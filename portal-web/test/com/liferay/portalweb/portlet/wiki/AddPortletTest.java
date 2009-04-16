@@ -125,15 +125,14 @@ public class AddPortletTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.click("//tr[4]/td[4]/ul/li/strong/span");
-
 				for (int second = 0;; second++) {
 					if (second >= 60) {
 						fail("timeout");
 					}
 
 					try {
-						if (selenium.isElementPresent("//div[4]/ul/li[6]/a")) {
+						if (selenium.isElementPresent(
+									"//tr[4]/td[4]/ul/li/strong/span")) {
 							break;
 						}
 					}
@@ -143,7 +142,8 @@ public class AddPortletTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click(RuntimeVariables.replace("//div[4]/ul/li[6]/a"));
+				selenium.click("//tr[4]/td[4]/ul/li/strong/span");
+				selenium.click(RuntimeVariables.replace("//div[2]/ul/li[6]/a"));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));

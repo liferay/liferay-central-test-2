@@ -51,6 +51,10 @@ public class AddArticleTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Wiki Test Page"));
 		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("link=FrontPage"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent(
+				"This page is empty. Edit it to add some text."));
 		selenium.click(RuntimeVariables.replace(
 				"link=This page is empty. Edit it to add some text."));
 		selenium.waitForPageToLoad("30000");
@@ -76,6 +80,8 @@ public class AddArticleTest extends BaseTestCase {
 				"==Test Wiki Article==\n\n//this is italics//\n\n**bold**\n\n[[http://www.liferay.com|Link to website]]\n\n*this is a list item\n**this is a sub list item"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("Test Wiki Article"));
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
+		assertEquals("Test Wiki Article", selenium.getText("//div[3]/div/h2"));
 	}
 }

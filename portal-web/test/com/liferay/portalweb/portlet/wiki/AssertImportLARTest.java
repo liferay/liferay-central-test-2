@@ -57,9 +57,7 @@ public class AssertImportLARTest extends BaseTestCase {
 		assertTrue(selenium.isElementPresent("link=Link to website"));
 		assertTrue(selenium.isTextPresent("this is a list item"));
 		assertTrue(selenium.isTextPresent("this is a sub list item"));
-		assertTrue(selenium.isTextPresent("Children Pages"));
 		assertTrue(selenium.isElementPresent("link=Test"));
-		assertTrue(selenium.isTextPresent("This is a test edited post reply!"));
 		selenium.click(RuntimeVariables.replace("link=Test"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Test Child Article"));
@@ -68,7 +66,7 @@ public class AssertImportLARTest extends BaseTestCase {
 		assertTrue(selenium.isElementPresent("link=Link to website"));
 		assertTrue(selenium.isTextPresent("this is a list item"));
 		assertTrue(selenium.isTextPresent("this is a sub list item"));
-		selenium.click(RuntimeVariables.replace("//a[2]/span"));
+		selenium.click(RuntimeVariables.replace("Link=Second Edited Wiki Test"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Yes this is a second test article"));
 		assertTrue(selenium.isTextPresent(

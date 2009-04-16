@@ -51,7 +51,6 @@ public class EditCommentTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Wiki Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//td[4]/span/a[2]");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -59,7 +58,8 @@ public class EditCommentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_36_editBody1")) {
+				if (selenium.isElementPresent(
+							"//tr[5]/td[2]/table[1]/tbody/tr/td[4]/span/a[2]")) {
 					break;
 				}
 			}
@@ -69,10 +69,7 @@ public class EditCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("_36_editBody1",
-			RuntimeVariables.replace("This is a test edited post repl!"));
-		selenium.type("_36_editBody1",
-			RuntimeVariables.replace("This is a test edited post reply!"));
+		selenium.click("//tr[5]/td[2]/table[1]/tbody/tr/td[4]/span/a[2]");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -80,7 +77,7 @@ public class EditCommentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_36_updateReplyButton1")) {
+				if (selenium.isElementPresent("_36_editBody2")) {
 					break;
 				}
 			}
@@ -90,10 +87,19 @@ public class EditCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("_36_updateReplyButton1"));
+		selenium.typeKeys("_36_editBody2",
+			RuntimeVariables.replace("This is a edited test comment."));
+		selenium.type("_36_editBody2",
+			RuntimeVariables.replace("This is a edited test comment."));
+		selenium.click(RuntimeVariables.replace("_36_updateReplyButton2"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
-		assertTrue(selenium.isTextPresent("This is a test edited post reply!"));
+		assertTrue(selenium.isElementPresent(
+				"link=This is a edited test comment."));
+		assertEquals("This is a edited test comment.",
+			selenium.getText("//tr[5]/td[2]/div[1]"));
+		assertFalse(selenium.isElementPresent(
+				"link=This is a second test comment."));
 	}
 }

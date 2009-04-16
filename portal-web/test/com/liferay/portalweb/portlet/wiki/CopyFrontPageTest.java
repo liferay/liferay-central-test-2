@@ -26,13 +26,13 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="SearchTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="CopyFrontPageTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class SearchTest extends BaseTestCase {
-	public void testSearch() throws Exception {
+public class CopyFrontPageTest extends BaseTestCase {
+	public void testCopyFrontPage() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -51,6 +51,14 @@ public class SearchTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Wiki Test Page"));
 		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("link=Second Edited Wiki Test"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("//img[@alt='Details']"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("link=Copy"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent(
+				"This page does not exist yet. Use the form below to create it."));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -58,7 +66,7 @@ public class SearchTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_36_keywords")) {
+				if (selenium.isElementPresent("_36_title")) {
 					break;
 				}
 			}
@@ -68,15 +76,15 @@ public class SearchTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("_36_keywords", RuntimeVariables.replace("test"));
-		selenium.type("_36_keywords", RuntimeVariables.replace("test"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
+		selenium.typeKeys("_36_title", RuntimeVariables.replace("Cop FrontPage"));
+		selenium.type("_36_title", RuntimeVariables.replace("Copy FrontPage"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent("link=Test"));
-		selenium.typeKeys("_36_keywords", RuntimeVariables.replace("test1"));
-		selenium.type("_36_keywords", RuntimeVariables.replace("test1"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
+		selenium.click(RuntimeVariables.replace("link=All Pages"));
 		selenium.waitForPageToLoad("30000");
-		assertFalse(selenium.isElementPresent("link=Test"));
+		assertTrue(selenium.isElementPresent("link=Copy FrontPage"));
+		assertTrue(selenium.isElementPresent("link=FrontPage"));
 	}
 }

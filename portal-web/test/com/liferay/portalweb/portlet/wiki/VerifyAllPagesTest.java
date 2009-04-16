@@ -57,6 +57,9 @@ public class VerifyAllPagesTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=Link Me 2"));
 		assertTrue(selenium.isElementPresent("link=Link Me 1"));
-		assertTrue(selenium.isElementPresent("link=1.4"));
+		assertTrue(selenium.isElementPresent("link=First"));
+		assertTrue(selenium.isElementPresent("link=Rename to Second"));
+		assertTrue(selenium.isElementPresent("link=Copy FrontPage"));
+		assertTrue(selenium.isElementPresent("link=FrontPage"));
 	}
 }

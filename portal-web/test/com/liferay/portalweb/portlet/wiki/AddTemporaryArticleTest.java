@@ -79,6 +79,8 @@ public class AddTemporaryArticleTest extends BaseTestCase {
 				"== Delete Me! ==\n\n=== Reasons Why to Delete Me ===\n\n#This is a test.\n#I don't like Star Wars.\n#I put my left sock on before my right sock."));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
 		assertTrue(selenium.isElementPresent("link=Delete Me!"));
 		selenium.click(RuntimeVariables.replace("link=Delete Me!"));
 		selenium.waitForPageToLoad("30000");

@@ -29,19 +29,49 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
-	<td>link=Link Me 2</td>
-	<td></td>
+	<td>assertText</td>
+	<td>//td[1]/a</td>
+	<td>Link Me 2</td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
+	<td>clickAndWait</td>
 	<td>link=Link Me 1</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
-	<td>link=1.4</td>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Edit']</td>
 	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>_36_content</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_36_content</td>
+	<td>Hi Administrator! Hope you are well! Please link me to another page!<br /><br />-testing<br /><br />-Recent Changes</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Save']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Your request processed successfully.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Recent Changes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//td[1]/a</td>
+	<td>Link Me 1</td>
 </tr>
 
 </tbody></table>

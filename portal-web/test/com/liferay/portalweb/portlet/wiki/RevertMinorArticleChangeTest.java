@@ -53,35 +53,23 @@ public class RevertMinorArticleChangeTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Second Edited Wiki Test"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//img[@alt='Edit']"));
+		selenium.click(RuntimeVariables.replace("//img[@alt='Details']"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=History"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Revert")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.click(RuntimeVariables.replace("link=Revert"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
+		assertEquals("1.4", selenium.getText("//td[3]/a"));
+		assertEquals("Reverted to 1.2", selenium.getText("//tr[3]/td[6]"));
 		assertTrue(selenium.isElementPresent("link=1.4"));
-		selenium.click(RuntimeVariables.replace("link=FrontPage"));
+		selenium.click(RuntimeVariables.replace("link=1.4"));
 		selenium.waitForPageToLoad("30000");
-		assertFalse(selenium.isTextPresent(
-				"Oh NOES! I've made a minor change. Please revert this!"));
+		assertEquals("This is a second test article",
+			selenium.getText("//div[2]/div/h2"));
+		assertTrue(selenium.isTextPresent(
+				"I love Liferay! This Wiki has been EDITED!"));
+		assertTrue(selenium.isTextPresent("Yes this is a second test article"));
 	}
 }

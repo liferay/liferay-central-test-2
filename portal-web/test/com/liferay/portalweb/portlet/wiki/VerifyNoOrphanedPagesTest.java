@@ -57,6 +57,5 @@ public class VerifyNoOrphanedPagesTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		assertFalse(selenium.isElementPresent("link=Link Me 1"));
 		assertFalse(selenium.isElementPresent("link=Link Me 2"));
-		assertFalse(selenium.isElementPresent("link=1.4"));
 	}
 }

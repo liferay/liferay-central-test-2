@@ -53,6 +53,8 @@ public class AddSecondArticleTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Second Edited Wiki Test"));
 		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent(
+				"This page is empty. Edit it to add some text."));
 		selenium.click(RuntimeVariables.replace(
 				"link=This page is empty. Edit it to add some text."));
 		selenium.waitForPageToLoad("30000");
@@ -78,6 +80,9 @@ public class AddSecondArticleTest extends BaseTestCase {
 				"&lt;&lt;TableOfContents&gt;&gt;\n\n== This is a second test article ==\n\n====Yes this is a second test article ===="));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("This is a second test article"));
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
+		assertEquals("This is a second test article",
+			selenium.getText("//div[3]/div/h2"));
 	}
 }

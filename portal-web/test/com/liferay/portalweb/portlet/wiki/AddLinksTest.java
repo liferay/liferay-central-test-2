@@ -79,23 +79,6 @@ public class AddLinksTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Link Me 1")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.click(RuntimeVariables.replace("link=Link Me 1"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("//img[@alt='Edit']"));
@@ -125,23 +108,6 @@ public class AddLinksTest extends BaseTestCase {
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
 		assertTrue(selenium.isElementPresent("//p[2]/a"));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Link Me 2")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.click(RuntimeVariables.replace("link=Link Me 2"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("//img[@alt='Edit']"));

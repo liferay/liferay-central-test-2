@@ -55,7 +55,6 @@ public class DeleteArticleTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Recent Changes"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//td[6]/ul/li/strong/span");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -63,7 +62,7 @@ public class DeleteArticleTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//div[4]/ul/li[6]/a")) {
+				if (selenium.isElementPresent("//td[6]/ul/li/strong/span")) {
 					break;
 				}
 			}
@@ -73,6 +72,7 @@ public class DeleteArticleTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.click("//td[6]/ul/li/strong/span");
 		selenium.click(RuntimeVariables.replace("//div[4]/ul/li[6]/a"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.getConfirmation()

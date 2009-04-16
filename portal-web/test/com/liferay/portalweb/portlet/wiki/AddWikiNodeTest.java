@@ -72,17 +72,16 @@ public class AddWikiNodeTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("_36_name",
-			RuntimeVariables.replace("Second Wiki Test"));
-		selenium.type("_36_name", RuntimeVariables.replace("Second Wiki Test"));
+		selenium.typeKeys("_36_name", RuntimeVariables.replace("Wiki Test"));
+		selenium.type("_36_name", RuntimeVariables.replace("Wiki Test"));
 		selenium.typeKeys("_36_description",
-			RuntimeVariables.replace("This is a second test wiki!"));
+			RuntimeVariables.replace("This is a Wiki Test!"));
 		selenium.type("_36_description",
-			RuntimeVariables.replace("This is a second test wiki!"));
+			RuntimeVariables.replace("This is a Wiki Test!"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
-		assertTrue(selenium.isElementPresent("link=Second Wiki Test"));
+		assertTrue(selenium.isElementPresent("link=Wiki Test"));
 	}
 }

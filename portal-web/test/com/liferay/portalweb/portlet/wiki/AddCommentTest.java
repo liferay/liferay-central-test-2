@@ -70,13 +70,15 @@ public class AddCommentTest extends BaseTestCase {
 		}
 
 		selenium.typeKeys("_36_postReplyBody0",
-			RuntimeVariables.replace("This is a test Post Repl."));
+			RuntimeVariables.replace("This is a test comment."));
 		selenium.type("_36_postReplyBody0",
-			RuntimeVariables.replace("This is a test Post Reply."));
+			RuntimeVariables.replace("This is a test comment."));
 		selenium.click(RuntimeVariables.replace("_36_postReplyButton0"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
-		assertTrue(selenium.isTextPresent("This is a test Post Reply."));
+		assertTrue(selenium.isElementPresent("link=This is a test comment."));
+		assertEquals("This is a test comment.",
+			selenium.getText("//td[2]/div[1]"));
 	}
 }

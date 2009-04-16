@@ -41,11 +41,29 @@ public class WikiTests extends BaseTests {
 		testSuite.addTestSuite(AddPageTest.class);
 		testSuite.addTestSuite(AddPortletTest.class);
 		testSuite.addTestSuite(AddArticleTest.class);
-		testSuite.addTestSuite(AddChildTest.class);
+		testSuite.addTestSuite(AddChildPageTest.class);
+		testSuite.addTestSuite(AddSecondChildPageTest.class);
+		testSuite.addTestSuite(AddNullTitleChildPageTest.class);
+		testSuite.addTestSuite(AddSymbolTitleChildPageTest.class);
+		testSuite.addTestSuite(AddDuplicateTitleChildPageTest.class);
+		testSuite.addTestSuite(PreviewChildPageTest.class);
+		testSuite.addTestSuite(CancelAddChildPageTest.class);
+		testSuite.addTestSuite(MoveChangeParentTest.class);
 		testSuite.addTestSuite(AddCommentTest.class);
+		testSuite.addTestSuite(AddNullCommentTest.class);
+		testSuite.addTestSuite(AddSecondCommentTest.class);
 		testSuite.addTestSuite(EditCommentTest.class);
-		testSuite.addTestSuite(SearchTest.class);
+		testSuite.addTestSuite(RatingTest.class);
+		testSuite.addTestSuite(DeleteCommentTest.class);
+		testSuite.addTestSuite(AddAttachmentsTest.class);
+		testSuite.addTestSuite(DeleteAttachmentsTest.class);
+		testSuite.addTestSuite(SearchTitleTest.class);
+		testSuite.addTestSuite(SearchContentTest.class);
 		testSuite.addTestSuite(AddWikiNodeTest.class);
+		testSuite.addTestSuite(AddNullNameWikiTest.class);
+		testSuite.addTestSuite(AddNumberNameWikiTest.class);
+		testSuite.addTestSuite(AddSymbolNameWikiTest.class);
+		testSuite.addTestSuite(AddDuplicateNodeNameWikiTest.class);
 		testSuite.addTestSuite(EditWikiNodeTest.class);
 		testSuite.addTestSuite(AddSecondArticleTest.class);
 		testSuite.addTestSuite(EditSecondArticleTest.class);
@@ -54,18 +72,27 @@ public class WikiTests extends BaseTests {
 		testSuite.addTestSuite(RevertMinorArticleChangeTest.class);
 		testSuite.addTestSuite(AddTemporaryArticleTest.class);
 		testSuite.addTestSuite(DeleteArticleTest.class);
+		testSuite.addTestSuite(CopyFrontPageTest.class);
+		testSuite.addTestSuite(MovePageTest.class);
+		testSuite.addTestSuite(RemoveRedirectTest.class);
+		testSuite.addTestSuite(DisableCommentsTest.class);
+		testSuite.addTestSuite(DisableRatingsTest.class);
+		testSuite.addTestSuite(VisibleTest.class);
+		testSuite.addTestSuite(AddNullVisibleTest.class);
 		testSuite.addTestSuite(AddOrphanedArticlesTest.class);
 		testSuite.addTestSuite(VerifyRecentChangesTest.class);
 		testSuite.addTestSuite(VerifyAllPagesTest.class);
 		testSuite.addTestSuite(VerifyOrphanedPagesTest.class);
 		testSuite.addTestSuite(AddLinksTest.class);
 		testSuite.addTestSuite(VerifyNoOrphanedPagesTest.class);
-		testSuite.addTestSuite(DeleteAllTest.class);
+		testSuite.addTestSuite(VerifyPropertyLinksTest.class);
+		testSuite.addTestSuite(VerifyPropertyHistoryTest.class);
+		testSuite.addTestSuite(VerifyPageFormatTest.class);
+		testSuite.addTestSuite(DeleteWikiNodeTest.class);
 		testSuite.addTestSuite(ImportLARTest.class);
 		testSuite.addTestSuite(AssertImportLARTest.class);
 		testSuite.addTestSuite(TearDownTest.class);
 
 		return testSuite;
 	}
-
 }
