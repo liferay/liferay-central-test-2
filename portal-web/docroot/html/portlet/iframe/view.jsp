@@ -33,16 +33,16 @@ if (relative) {
 
 iframeSrc += (String)request.getAttribute(WebKeys.IFRAME_SRC);
 
-if (Validator.isNotNull(iframeVariables)){
+if (Validator.isNotNull(iframeVariables)) {
 	StringBuilder sb = new StringBuilder();
 
 	sb.append(iframeSrc);
 
-	if (iframeSrc.indexOf('?') != -1){
-		sb.append('&');
+	if (iframeSrc.indexOf(StringPool.QUESTION) != -1) {
+		sb.append(StringPool.AMPERSAND);
 	}
 	else {
-		sb.append('?');
+		sb.append(StringPool.QUESTION);
 	}
 
 	sb.append(StringUtil.merge(iframeVariables, StringPool.AMPERSAND));
@@ -69,17 +69,20 @@ if (windowState.equals(WindowState.MAXIMIZED)) {
 	function <portlet:namespace />init() {
 		var hash = document.location.hash;
 
-		if (hash != '#' && hash != '') {
+		if ((hash != '#') && (hash != '')) {
 			var src = '';
+
 			var path = hash.substring(1);
 
-			if (path.indexOf('http://')!=0){
+			if (path.indexOf('http://') != 0) {
 				src = '<%= baseSrc %>';
 			}
 
 			src += path;
 
-			jQuery('#<portlet:namespace />iframe').attr('src', src);
+			var iframe = jQuery('#<portlet:namespace />iframe');
+
+			iframe.attr('src', src);
 		}
 	}
 
@@ -114,58 +117,67 @@ if (windowState.equals(WindowState.MAXIMIZED)) {
 		iframe.height = (winHeight - 139);
 	}
 
-	function <portlet:namespace />startsWith(str, prefix) {
-		if (str.match("^"+prefix) == prefix) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	function <portlet:namespace />monitorIframeUrl() {
-
-		var url;
+	function <portlet:namespace />monitorIframe() {
+		var url = null;
 
 		try {
-			var iframeDocument = document.getElementById('<portlet:namespace />iframe').contentWindow.document;
-			url = iframeDocument.location;
+			var iframe = document.getElementById('<portlet:namespace />iframe');
+
+			url = iframe.contentWindow.document.location.href;
 		}
-		catch (error) {
+		catch (e) {
 			return true;
 		}
-
-		var appUrl = url.href;
 
 		var baseSrc = '<%= baseSrc %>';
 		var iframeSrc = '<%= iframeSrc %>';
 
-		if ((appUrl == iframeSrc) || (appUrl == iframeSrc + '/')) {
+		if ((url == iframeSrc) || (url == iframeSrc + '/')) {
 		}
-		else if (<portlet:namespace />startsWith(appUrl, baseSrc)){
-			appUrl = appUrl.substring(baseSrc.length);
+		else if (Liferay.Util.startsWith(url, baseSrc)) {
+			url = url.substring(baseSrc.length);
 
-			<portlet:namespace />updateHash(appUrl);
+			<portlet:namespace />updateHash(url);
 		}
 		else {
-			<portlet:namespace />updateHash(appUrl);
+			<portlet:namespace />updateHash(url);
 		}
 
 		return true;
 	}
 
-	function  <portlet:namespace />updateHash(appUrl) {
-		document.location.hash = appUrl;
+	function <portlet:namespace />resizeIframe() {
+		var iframe = document.getElementById('<portlet:namespace />iframe');
+
+		var height = null;
+
+		try {
+			height = iframe.contentWindow.document.body.scrollHeight;
+		}
+		catch (e) {
+			<portlet:namespace />maximizeIframe(iframe);
+
+			return true;
+		}
+
+		iframe.height = height + 50;
+
+		return true;
+	}
+
+	function <portlet:namespace />updateHash(url) {
+		document.location.hash = url;
+
 		var maximize = jQuery('#p_p_id<portlet:namespace /> .portlet-maximize-icon a');
 
 		if (maximize.length != 0) {
 			var href = maximize.attr('href');
 
-			if (href.indexOf('#')!= -1){
+			if (href.indexOf('#') != -1) {
 				href = href.substring(0, href.indexOf('#'));
 			}
 
-			maximize.attr('href', href + '#' + appUrl);
+			maximize.attr('href', href + '#' + url);
 		}
 
 		var restore = jQuery('#p_p_id<portlet:namespace /> a.portlet-icon-back');
@@ -173,35 +185,19 @@ if (windowState.equals(WindowState.MAXIMIZED)) {
 		if (restore.length != 0) {
 			var href = restore.attr('href');
 
-			if (href.indexOf('#')!= -1){
+			if (href.indexOf('#') != -1) {
 				href = href.substring(0, href.indexOf('#'));
 			}
 
-			restore.attr('href', href + '#' + appUrl);
+			restore.attr('href', href + '#' + url);
 		}
-
 	}
 
-	function <portlet:namespace />resizeIframe() {
-		var iframe = document.getElementById('<portlet:namespace />iframe');
-
-		var iframeHeight;
-
-		try {
-			iframeHeight = iframe.contentWindow.document.body.scrollHeight;
+	jQuery(
+		function() {
+			<portlet:namespace />init();
 		}
-		catch (error) {
-			<portlet:namespace />maximizeIframe(iframe);
-
-			return true;
-		}
-
-		var extraHeight = 50;
-
-		document.getElementById('<portlet:namespace />iframe').height = iframeHeight + extraHeight;
-
-		return true;
-	}
+	);
 </script>
 
 <c:choose>
@@ -211,13 +207,8 @@ if (windowState.equals(WindowState.MAXIMIZED)) {
 		</div>
 	</c:when>
 	<c:otherwise>
-		<div id="<portlet:namespace />iframe_div">
-			<iframe border="<%= border %>" bordercolor="<%= bordercolor %>" frameborder="<%= frameborder %>" height="<%= iframeHeight %>" hspace="<%= hspace %>" id="<portlet:namespace />iframe" name="<portlet:namespace />iframe" onLoad="<portlet:namespace />monitorIframeUrl(); <portlet:namespace />resizeIframe();" scrolling="<%= scrolling %>" src="<%= iframeSrc %>" vspace="<%= vspace %>" width="<%= width %>"></iframe>
+		<div>
+			<iframe border="<%= border %>" bordercolor="<%= bordercolor %>" frameborder="<%= frameborder %>" height="<%= iframeHeight %>" hspace="<%= hspace %>" id="<portlet:namespace />iframe" name="<portlet:namespace />iframe" onload="<portlet:namespace />monitorIframe(); <portlet:namespace />resizeIframe();" scrolling="<%= scrolling %>" src="<%= iframeSrc %>" vspace="<%= vspace %>" width="<%= width %>"></iframe>
 		</div>
 	</c:otherwise>
 </c:choose>
-
-
-<script type="text/javascript">
-	<portlet:namespace />init();
-</script>

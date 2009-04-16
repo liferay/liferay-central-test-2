@@ -57,13 +57,15 @@ String width = preferences.getValue("width", "100%");
 
 List<String> iframeVariables = new ArrayList<String>();
 
-for (Enumeration e = request.getParameterNames(); e.hasMoreElements();) {
-	String name = (String)e.nextElement();
+Enumeration<String> enu = request.getParameterNames();
+
+while (enu.hasMoreElements()) {
+	String name = enu.nextElement();
 
 	if (name.startsWith("iframe_")){
 		StringBuilder sb = new StringBuilder();
 
-		sb.append(name.substring("iframe_".length()));
+		sb.append(name.substring(7));
 		sb.append(StringPool.EQUAL);
 		sb.append(request.getParameter(name));
 
