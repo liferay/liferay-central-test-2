@@ -1045,7 +1045,7 @@
 	<sql id="com.liferay.portal.service.persistence.UserFinder.findByC_FN_MN_LN_SN_EA_A">
 		<![CDATA[
 			SELECT
-				DISTINCT {User_.*}, Contact_.firstName, Contact_.middleName, Contact_.lastName, Contact_.jobtitle
+				DISTINCT {User_.*}, Contact_.firstName, Contact_.middleName, Contact_.lastName, Contact_.jobTitle
 			FROM
 				User_
 			INNER JOIN
