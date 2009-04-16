@@ -78,6 +78,11 @@ long reportedUserId = ParamUtil.getLong(request, "reportedUserId");
 						var confirmationMessage = jQuery('#<portlet:namespace />confirmation');
 
 						jQuery('#<portlet:namespace />flagsPopup').html(confirmationMessage.html());
+					},
+					error: function() {
+						var errorMessage = jQuery('#<portlet:namespace />error');
+
+						jQuery('#<portlet:namespace />flagsPopup').html(errorMessage.html());
 					}
 				}
 			);
@@ -136,4 +141,8 @@ long reportedUserId = ParamUtil.getLong(request, "reportedUserId");
 	<p><strong><liferay-ui:message key="thank-you-for-your-report" /></strong></p>
 
 	<p><%= LanguageUtil.format(pageContext, "although-we-cannot-disclose-our-final-decision,-we-do-review-every-report-and-appreciate-your-effort-to-make-sure-x-is-a-safe-environment-for-everyone", company.getName()) %></p>
+</div>
+
+<div id="<portlet:namespace />error" style="display: none;">
+	<p><strong><liferay-ui:message key="an-error-occurred-while-sending-the-report.-please-try-again-in-a-few-minutes" /></strong></p>
 </div>
