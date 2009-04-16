@@ -25,6 +25,7 @@ package com.liferay.portal.kernel.bi.reporting;
 import java.util.Map;
 
 import javax.servlet.ServletContext;
+
 import javax.sql.DataSource;
 
 /**
@@ -35,10 +36,10 @@ import javax.sql.DataSource;
  */
 public interface ReportEngine {
 
-	public void destroy();
-
 	public void compile(ReportRequest reportRequest)
 		throws ReportGenerationException;
+
+	public void destroy();
 
 	public void execute(
 			ReportRequest reportRequest,

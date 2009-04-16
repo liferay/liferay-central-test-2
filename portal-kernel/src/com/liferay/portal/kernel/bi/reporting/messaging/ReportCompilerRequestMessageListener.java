@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -33,10 +33,11 @@ import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.messaging.MessageListener;
 
 /**
- * <a href="ReportCompilerRequestMessageListener.java.html"><b><i>View
- * Source</i></b></a>
+ * <a href="ReportCompilerRequestMessageListener.java.html"><b><i>View Source
+ * </i></b></a>
  *
  * @author Michael C. Han
+ *
  */
 public class ReportCompilerRequestMessageListener implements MessageListener {
 
@@ -49,27 +50,24 @@ public class ReportCompilerRequestMessageListener implements MessageListener {
 	}
 
 	public void receive(Message message) {
-
-		ReportRequest request = (ReportRequest) message.getPayload();
+		ReportRequest reportRequest = (ReportRequest)message.getPayload();
 
 		ReportResultContainer reportResultContainer =
-			_reportResultContainer.clone(request.getReportName());
-
-		Message replyMessage = new Message();
-		replyMessage.setDestination(message.getResponseDestination());
-		replyMessage.setResponseId(message.getResponseId());
+			_reportResultContainer.clone(reportRequest.getReportName());
 
 		try {
-			_reportEngine.compile(request);
+			_reportEngine.compile(reportRequest);
 		}
 		catch (ReportGenerationException rge) {
 			_log.error("Unable to generate report", rge);
+
 			reportResultContainer.setReportGenerationException(rge);
 		}
 		finally {
-			replyMessage.setPayload(true);
+			message.setPayload(true);
+
 			MessageBusUtil.sendMessage(
-				message.getResponseDestination(), replyMessage);
+				message.getResponseDestination(), message);
 		}
 	}
 

@@ -22,9 +22,6 @@
 
 package com.liferay.portal.kernel.bi.reporting;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * <a href="ReportFormat.java.html"><b><i>View Source</i></b></a>
  *
@@ -32,24 +29,12 @@ import java.util.Map;
  */
 public enum ReportFormat {
 
-	EXCEL("excel"), HTML("html"), PDF("pdf"), CSV("csv"),
-	RTF("rtf"), XML("xml"), TEXT("text");
-	private static final Map<String, ReportFormat> _FORMATS =
-		new HashMap<String, ReportFormat>();
-
-	static {
-		_FORMATS.put(EXCEL.toString(), EXCEL);
-		_FORMATS.put(PDF.toString(), PDF);
-		_FORMATS.put(HTML.toString(), HTML);
-		_FORMATS.put(CSV.toString(), CSV);
-		_FORMATS.put(RTF.toString(), RTF);
-		_FORMATS.put(XML.toString(), XML);
-		_FORMATS.put(TEXT.toString(), TEXT);
-
-	}
+	CSV("csv"), EXCEL("excel"), HTML("html"), PDF("pdf"), RTF("rtf"),
+	TEXT("text"), XML("xml");
 
 	public static ReportFormat parse(String value) {
-		ReportFormat format = _FORMATS.get(value);
+		ReportFormat format = _reportFormats.get(value);
+
 		if (format != null) {
 			return format;
 		}
@@ -73,6 +58,19 @@ public enum ReportFormat {
 
 	private ReportFormat(String value) {
 		_value = value;
+	}
+
+	private static final java.util.Map<String, ReportFormat> _reportFormats =
+		new java.util.HashMap<String, ReportFormat>();
+
+	static {
+		_reportFormats.put(CSV.toString(), CSV);
+		_reportFormats.put(EXCEL.toString(), EXCEL);
+		_reportFormats.put(HTML.toString(), HTML);
+		_reportFormats.put(PDF.toString(), PDF);
+		_reportFormats.put(RTF.toString(), RTF);
+		_reportFormats.put(TEXT.toString(), TEXT);
+		_reportFormats.put(XML.toString(), XML);
 	}
 
 	private String _value;
