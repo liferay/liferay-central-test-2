@@ -169,22 +169,6 @@ if (organization != null) {
 		</c:otherwise>
 	</c:choose>
 
-	<liferay-ui:error exception="<%= NoSuchCountryException.class %>" message="please-select-a-country" />
-
-	<div id="<portlet:namespace />countryDiv" <%= GetterUtil.getBoolean(PropsUtil.get(PropsKeys.ORGANIZATIONS_COUNTRY_ENABLED, new Filter(String.valueOf(type))))? StringPool.BLANK : "style=\"display: none;\"" %>>
-		<div class="ctrl-holder">
-			<label for="<portlet:namespace />countryId"><liferay-ui:message key="country" /> </label>
-
-			<select id="<portlet:namespace />countryId" name="<portlet:namespace />countryId"></select>
-		</div>
-
-		<div class="ctrl-holder">
-			<label for="<portlet:namespace />regionId"><liferay-ui:message key="region" /></label>
-
-			<select id="<portlet:namespace />regionId" name="<portlet:namespace />regionId"></select>
-		</div>
-	</div>
-
 	<div class="ctrl-holder">
 		<label for="<portlet:namespace />type"><liferay-ui:message key="type" /></label>
 
@@ -210,6 +194,22 @@ if (organization != null) {
 				<input name="<portlet:namespace />type" type="hidden" value="<%= organization.getType() %>" />
 			</c:otherwise>
 		</c:choose>
+	</div>
+
+	<liferay-ui:error exception="<%= NoSuchCountryException.class %>" message="please-select-a-country" />
+
+	<div id="<portlet:namespace />countryDiv" <%= GetterUtil.getBoolean(PropsUtil.get(PropsKeys.ORGANIZATIONS_COUNTRY_ENABLED, new Filter(String.valueOf(type))))? StringPool.BLANK : "style=\"display: none;\"" %>>
+		<div class="ctrl-holder">
+			<label for="<portlet:namespace />countryId"><liferay-ui:message key="country" /> </label>
+
+			<select id="<portlet:namespace />countryId" name="<portlet:namespace />countryId"></select>
+		</div>
+
+		<div class="ctrl-holder">
+			<label for="<portlet:namespace />regionId"><liferay-ui:message key="region" /></label>
+
+			<select id="<portlet:namespace />regionId" name="<portlet:namespace />regionId"></select>
+		</div>
 	</div>
 
 	<c:if test="<%= organization != null %>">
