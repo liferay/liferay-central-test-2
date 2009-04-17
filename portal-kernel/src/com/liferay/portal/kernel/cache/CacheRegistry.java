@@ -40,7 +40,26 @@ public class CacheRegistry {
 		for (Map.Entry<String, CacheRegistryItem> entry : _items.entrySet()) {
 			CacheRegistryItem item = entry.getValue();
 
+			if (_log.isDebugEnabled()) {
+				_log.debug("Invalidating " + item.getRegistryName());
+			}
+
 			item.invalidate();
+		}
+	}
+
+	public static void clear(String name) {
+		CacheRegistryItem item = _items.get(name);
+
+		if (item != null) {
+			if (_log.isDebugEnabled()) {
+				_log.debug("Invalidating " + name);
+			}
+
+			item.invalidate();
+		}
+		else {
+			_log.error("No cache registry found with name " + name);
 		}
 	}
 
