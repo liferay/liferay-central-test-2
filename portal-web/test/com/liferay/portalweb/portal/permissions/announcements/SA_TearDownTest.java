@@ -104,8 +104,6 @@ public class SA_TearDownTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
-				assertFalse(selenium.isElementPresent(
-						"link=Test Guest Announcement"));
 
 			case 2:
 				selenium.select("_84_distributionScope", "label=General");
@@ -142,8 +140,6 @@ public class SA_TearDownTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
-				assertFalse(selenium.isElementPresent(
-						"link=Test General Announcement"));
 
 			case 3:
 				selenium.select("_84_distributionScope", "label=Community Admin");
@@ -180,8 +176,6 @@ public class SA_TearDownTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
-				assertFalse(selenium.isElementPresent(
-						"link=Test CA Announcement"));
 
 			case 4:
 				selenium.select("_84_distributionScope", "label=Member");
@@ -218,8 +212,6 @@ public class SA_TearDownTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
-				assertFalse(selenium.isElementPresent(
-						"link=Test Member Announcement"));
 
 			case 5:
 				selenium.click(RuntimeVariables.replace(
@@ -242,12 +234,8 @@ public class SA_TearDownTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete the selected page[\\s\\S]$"));
-				assertTrue(selenium.isTextPresent(
-						"Your request processed successfully."));
 				selenium.click(RuntimeVariables.replace("link=Welcome"));
 				selenium.waitForPageToLoad("30000");
-				assertFalse(selenium.isElementPresent(
-						"link=Announcements Permissions Page"));
 				selenium.click(RuntimeVariables.replace("link=Sign Out"));
 				selenium.waitForPageToLoad("30000");
 

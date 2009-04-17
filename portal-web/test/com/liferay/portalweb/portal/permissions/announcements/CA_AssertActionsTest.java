@@ -64,7 +64,7 @@ public class CA_AssertActionsTest extends BaseTestCase {
 			}
 
 			try {
-				if (!selenium.isElementPresent("link=Mark as Read")) {
+				if (selenium.isElementPresent("link=Show")) {
 					break;
 				}
 			}

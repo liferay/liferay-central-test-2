@@ -61,7 +61,7 @@ public class Member_DismissAnnouncementTest extends BaseTestCase {
 			}
 
 			try {
-				if (!selenium.isElementPresent("link=Mark as Read")) {
+				if (selenium.isElementPresent("link=Show")) {
 					break;
 				}
 			}
