@@ -57,11 +57,8 @@
 			FROM
 				MBMessage
 			INNER JOIN
-				MBThread ON
-					(MBThread.threadId = MBMessage.threadId)
-			INNER JOIN
 				MBDiscussion ON
-					(MBDiscussion.threadId = MBThread.threadId)
+					(MBDiscussion.threadId = MBMessage.threadId)
 			WHERE
 				(MBDiscussion.classNameId = ?) AND
 				(MBDiscussion.classPK = ?)
@@ -149,9 +146,6 @@
 			FROM
 				MBThread
 			INNER JOIN
-				MBMessage ON
-					(MBMessage.threadId = MBThread.threadId)
-			INNER JOIN
 				Subscription ON
 					(Subscription.classNameId = ?) AND
 					(Subscription.classPK = MBThread.threadId)
@@ -201,9 +195,6 @@
 				DISTINCT {MBThread.*}
 			FROM
 				MBThread
-			INNER JOIN
-				MBMessage ON
-					(MBMessage.threadId = MBThread.threadId)
 			INNER JOIN
 				Subscription ON
 					(Subscription.classNameId = ?) AND
