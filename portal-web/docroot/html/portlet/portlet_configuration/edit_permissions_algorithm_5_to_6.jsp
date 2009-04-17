@@ -86,20 +86,31 @@ catch (NoSuchResourceException nsre) {
 	resource = ResourceLocalServiceUtil.getResource(company.getCompanyId(), selResource, ResourceConstants.SCOPE_INDIVIDUAL, resourcePrimKey);
 }
 
-PortletURL portletURL = renderResponse.createActionURL();
+PortletURL actionPortletURL = renderResponse.createActionURL();
 
-portletURL.setParameter("struts_action", "/portlet_configuration/edit_permissions");
-portletURL.setParameter("tabs2", tabs2);
-portletURL.setParameter("redirect", redirect);
-portletURL.setParameter("returnToFullPageURL", returnToFullPageURL);
-portletURL.setParameter("portletResource", portletResource);
-portletURL.setParameter("modelResource", modelResource);
-portletURL.setParameter("modelResourceDescription", modelResourceDescription);
-portletURL.setParameter("resourcePrimKey", resourcePrimKey);
+actionPortletURL.setParameter("struts_action", "/portlet_configuration/edit_permissions");
+actionPortletURL.setParameter("tabs2", tabs2);
+actionPortletURL.setParameter("redirect", redirect);
+actionPortletURL.setParameter("returnToFullPageURL", returnToFullPageURL);
+actionPortletURL.setParameter("portletResource", portletResource);
+actionPortletURL.setParameter("modelResource", modelResource);
+actionPortletURL.setParameter("modelResourceDescription", modelResourceDescription);
+actionPortletURL.setParameter("resourcePrimKey", resourcePrimKey);
+
+PortletURL renderPortletURL = renderResponse.createRenderURL();
+
+renderPortletURL.setParameter("struts_action", "/portlet_configuration/edit_permissions");
+renderPortletURL.setParameter("tabs2", tabs2);
+renderPortletURL.setParameter("redirect", redirect);
+renderPortletURL.setParameter("returnToFullPageURL", returnToFullPageURL);
+renderPortletURL.setParameter("portletResource", portletResource);
+renderPortletURL.setParameter("modelResource", modelResource);
+renderPortletURL.setParameter("modelResourceDescription", modelResourceDescription);
+renderPortletURL.setParameter("resourcePrimKey", resourcePrimKey);	
 %>
 
 <div class="edit-permissions">
-	<form action="<%= portletURL.toString() %>" method="post" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
+	<form action="<%= actionPortletURL.toString() %>" method="post" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
 	<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="role_permissions" />
 	<input name="<portlet:namespace />resourceId" type="hidden" value="<%= resource.getResourceId() %>" />
 
@@ -123,7 +134,7 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 		<liferay-ui:tabs
 			names="permissions"
 			param="tabs2"
-			url="<%= portletURL.toString() %>"
+			url="<%= renderPortletURL.toString() %>"
 			backURL="<%= redirect %>"
 		/>
 	</c:if>
@@ -132,7 +143,7 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 	List<String> actions = ResourceActionsUtil.getResourceActions(portletResource, modelResource);
 	List<String> actionsNames = ResourceActionsUtil.getActionsNames(pageContext, actions);
 
-	RoleSearch searchContainer = new RoleSearch(renderRequest, portletURL);
+	RoleSearch searchContainer = new RoleSearch(renderRequest, renderPortletURL);
 
 	List<String> headerNames = new ArrayList<String>();
 
@@ -144,18 +155,20 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 
 	searchContainer.setHeaderNames(headerNames);
 
-	List<Role> results = ResourceActionsUtil.getRoles(group, modelResource);
+	List<Role> allRoles = ResourceActionsUtil.getRoles(group, modelResource);
 
+	Role administrator = RoleLocalServiceUtil.getRole(company.getCompanyId(), RoleConstants.ADMINISTRATOR);
+	allRoles.remove(administrator);
+
+	List<Role> results = ListUtil.subList(allRoles, searchContainer.getStart(), searchContainer.getEnd());
+
+	searchContainer.setTotal(allRoles.size());
 	searchContainer.setResults(results);
 
 	List resultRows = searchContainer.getResultRows();
 
 	for (int i = 0; i < results.size(); i++) {
 		Role role = results.get(i);
-
-		if (role.getName().equals(RoleConstants.ADMINISTRATOR)) {
-			continue;
-		}
 
 		ResultRow row = new ResultRow(role, role.getRoleId(), i);
 
@@ -209,7 +222,7 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 	}
 	%>
 
-	<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" paginate="<%= false %>" />
+	<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 
 	<br />
 
