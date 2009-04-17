@@ -593,22 +593,6 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 			</#list>
 
 			) throws SystemException {
-				int count = countBy${finder.name}(
-
-					<#list finderColsList as finderCol>
-						${finderCol.name}
-
-						<#if finderCol_has_next>
-							,
-						</#if>
-					</#list>
-
-				);
-
-				if (count == 0) {
-					return Collections.EMPTY_LIST;
-				}
-
 				Object[] finderArgs = new Object[] {
 					<#list finderColsList as finderCol>
 						<#if finderCol.isPrimitiveType()>
@@ -758,22 +742,6 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 			</#list>
 
 			int start, int end, OrderByComparator obc) throws SystemException {
-				int count = countBy${finder.name}(
-
-					<#list finderColsList as finderCol>
-						${finderCol.name}
-
-						<#if finderCol_has_next>
-							,
-						</#if>
-					</#list>
-
-				);
-
-				if (count == 0) {
-					return Collections.EMPTY_LIST;
-				}
-
 				Object[] finderArgs = new Object[] {
 					<#list finderColsList as finderCol>
 						<#if finderCol.isPrimitiveType()>
