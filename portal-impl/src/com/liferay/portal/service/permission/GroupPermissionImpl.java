@@ -56,45 +56,36 @@ public class GroupPermissionImpl implements GroupPermission {
 			PermissionChecker permissionChecker, long groupId, String actionId)
 		throws PortalException, SystemException {
 
-		if (actionId.equals(ActionKeys.ASSIGN_MEMBERS)) {
-			Group group = GroupLocalServiceUtil.getGroup(groupId);
+		Group group = GroupLocalServiceUtil.getGroup(groupId);
 
-			if (group.isOrganization()) {
-				long organizationId = group.getClassPK();
-
-				return OrganizationPermissionUtil.contains(
-					permissionChecker, organizationId, ActionKeys.MANAGE_USERS);
-			}
+		if (group.isStagingGroup()) {
+			group = group.getLiveGroup();
 		}
-		else if (actionId.equals(ActionKeys.MANAGE_LAYOUTS)) {
-			Group group = GroupLocalServiceUtil.getGroup(groupId);
 
-			if (group.isOrganization()) {
-				long organizationId = group.getClassPK();
+		if (group.isOrganization()) {
+			long organizationId = group.getClassPK();
 
-				return OrganizationPermissionUtil.contains(
-					permissionChecker, organizationId, actionId);
-			}
-			else if (group.isUser()) {
+			return OrganizationPermissionUtil.contains(
+				permissionChecker, organizationId, actionId);
+		}
+		else if (group.isUser()) {
 
-				// An individual user would never reach this block because he
-				// would be an administrator of his own layouts. However, a user
-				// who manages a set of organizations may be modifying pages of
-				// a user he manages.
+			// An individual user would never reach this block because he would
+			// be an administrator of his own layouts. However, a user who
+			// manages a set of organizations may be modifying pages of a user
+			// he manages.
 
-				long userId = group.getClassPK();
+			long userId = group.getClassPK();
 
-				List<Organization> organizations =
-					OrganizationLocalServiceUtil.getUserOrganizations(
-						userId);
+			List<Organization> organizations =
+				OrganizationLocalServiceUtil.getUserOrganizations(userId);
 
-				for (Organization organization : organizations) {
-					if (OrganizationPermissionUtil.contains(
-							permissionChecker, organization.getOrganizationId(),
-							ActionKeys.MANAGE_USERS)) {
+			for (Organization organization : organizations) {
+				if (OrganizationPermissionUtil.contains(
+						permissionChecker, organization.getOrganizationId(),
+						ActionKeys.MANAGE_USERS)) {
 
-						return true;
-					}
+					return true;
 				}
 			}
 		}
