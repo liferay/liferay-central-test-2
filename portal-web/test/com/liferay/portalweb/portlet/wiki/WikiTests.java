@@ -95,4 +95,5 @@ public class WikiTests extends BaseTests {
 
 		return testSuite;
 	}
+
 }
