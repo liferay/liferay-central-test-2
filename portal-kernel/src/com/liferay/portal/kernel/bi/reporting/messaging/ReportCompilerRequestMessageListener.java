@@ -55,11 +55,6 @@ public class ReportCompilerRequestMessageListener implements MessageListener {
 		ReportResultContainer reportResultContainer =
 			_reportResultContainer.clone(reportRequest.getReportName());
 
-		Message replyMessage = new Message();
-
-		replyMessage.setDestination(message.getResponseDestination());
-		replyMessage.setResponseId(message.getResponseId());
-
 		try {
 			_reportEngine.compile(reportRequest);
 		}
@@ -69,9 +64,10 @@ public class ReportCompilerRequestMessageListener implements MessageListener {
 			reportResultContainer.setReportGenerationException(rge);
 		}
 		finally {
-			replyMessage.setPayload(reportResultContainer);
+			message.setPayload(reportResultContainer);
+
 			MessageBusUtil.sendMessage(
-				message.getResponseDestination(), replyMessage);
+				message.getResponseDestination(), message);
 		}
 	}
 
