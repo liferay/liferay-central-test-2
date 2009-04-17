@@ -143,6 +143,22 @@ public interface UserModel extends BaseModel<User> {
 
 	public void setComments(String comments);
 
+	public String getFirstName();
+
+	public void setFirstName(String firstName);
+
+	public String getMiddleName();
+
+	public void setMiddleName(String middleName);
+
+	public String getLastName();
+
+	public void setLastName(String lastName);
+
+	public String getJobTitle();
+
+	public void setJobTitle(String jobTitle);
+
 	public Date getLoginDate();
 
 	public void setLoginDate(Date loginDate);

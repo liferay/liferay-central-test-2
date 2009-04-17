@@ -53,7 +53,23 @@ public class UpgradeUser extends UpgradeProcess {
 		if (isSupportsAlterColumnName()) {
 			runSQL("alter_column_type User_ greeting VARCHAR(255) null");
 		}
-		else {
+
+		if (isSupportsUpdateWithInnerJoin()) {
+			StringBuilder sb = new StringBuilder();
+
+			sb.append("update User_ inner join Contact_ on ");
+			sb.append("Contact_.contactId = User_.contactId set ");
+			sb.append("User_.firstName = Contact_.firstName, ");
+			sb.append("User_.middleName = Contact_.middleName, ");
+			sb.append("User_.lastName = Contact_.lastName, ");
+			sb.append("User_.jobTitle = Contact_.jobTitle");
+
+			runSQL(sb.toString());
+		}
+
+		if (!isSupportsAlterColumnName()) {
+			if (!isSupportsUpdateWithInnerJoin()) {
+			}
 
 			// User_
 

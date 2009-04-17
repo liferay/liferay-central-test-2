@@ -72,6 +72,10 @@ public class UserSoap implements Serializable {
 		soapModel.setTimeZoneId(model.getTimeZoneId());
 		soapModel.setGreeting(model.getGreeting());
 		soapModel.setComments(model.getComments());
+		soapModel.setFirstName(model.getFirstName());
+		soapModel.setMiddleName(model.getMiddleName());
+		soapModel.setLastName(model.getLastName());
+		soapModel.setJobTitle(model.getJobTitle());
 		soapModel.setLoginDate(model.getLoginDate());
 		soapModel.setLoginIP(model.getLoginIP());
 		soapModel.setLastLoginDate(model.getLastLoginDate());
@@ -295,6 +299,38 @@ public class UserSoap implements Serializable {
 		_comments = comments;
 	}
 
+	public String getFirstName() {
+		return _firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		_firstName = firstName;
+	}
+
+	public String getMiddleName() {
+		return _middleName;
+	}
+
+	public void setMiddleName(String middleName) {
+		_middleName = middleName;
+	}
+
+	public String getLastName() {
+		return _lastName;
+	}
+
+	public void setLastName(String lastName) {
+		_lastName = lastName;
+	}
+
+	public String getJobTitle() {
+		return _jobTitle;
+	}
+
+	public void setJobTitle(String jobTitle) {
+		_jobTitle = jobTitle;
+	}
+
 	public Date getLoginDate() {
 		return _loginDate;
 	}
@@ -409,6 +445,10 @@ public class UserSoap implements Serializable {
 	private String _timeZoneId;
 	private String _greeting;
 	private String _comments;
+	private String _firstName;
+	private String _middleName;
+	private String _lastName;
+	private String _jobTitle;
 	private Date _loginDate;
 	private String _loginIP;
 	private Date _lastLoginDate;

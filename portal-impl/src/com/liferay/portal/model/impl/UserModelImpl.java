@@ -130,6 +130,18 @@ public class UserModelImpl extends BaseModelImpl<User> {
 			{ "comments", new Integer(Types.VARCHAR) },
 			
 
+			{ "firstName", new Integer(Types.VARCHAR) },
+			
+
+			{ "middleName", new Integer(Types.VARCHAR) },
+			
+
+			{ "lastName", new Integer(Types.VARCHAR) },
+			
+
+			{ "jobTitle", new Integer(Types.VARCHAR) },
+			
+
 			{ "loginDate", new Integer(Types.TIMESTAMP) },
 			
 
@@ -159,7 +171,7 @@ public class UserModelImpl extends BaseModelImpl<User> {
 
 			{ "active_", new Integer(Types.BOOLEAN) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table User_ (uuid_ VARCHAR(75) null,userId LONG not null primary key,companyId LONG,createDate DATE null,modifiedDate DATE null,defaultUser BOOLEAN,contactId LONG,password_ VARCHAR(75) null,passwordEncrypted BOOLEAN,passwordReset BOOLEAN,passwordModifiedDate DATE null,reminderQueryQuestion VARCHAR(75) null,reminderQueryAnswer VARCHAR(75) null,graceLoginCount INTEGER,screenName VARCHAR(75) null,emailAddress VARCHAR(75) null,openId VARCHAR(1024) null,portraitId LONG,languageId VARCHAR(75) null,timeZoneId VARCHAR(75) null,greeting VARCHAR(255) null,comments STRING null,loginDate DATE null,loginIP VARCHAR(75) null,lastLoginDate DATE null,lastLoginIP VARCHAR(75) null,lastFailedLoginDate DATE null,failedLoginAttempts INTEGER,lockout BOOLEAN,lockoutDate DATE null,agreedToTermsOfUse BOOLEAN,active_ BOOLEAN)";
+	public static final String TABLE_SQL_CREATE = "create table User_ (uuid_ VARCHAR(75) null,userId LONG not null primary key,companyId LONG,createDate DATE null,modifiedDate DATE null,defaultUser BOOLEAN,contactId LONG,password_ VARCHAR(75) null,passwordEncrypted BOOLEAN,passwordReset BOOLEAN,passwordModifiedDate DATE null,reminderQueryQuestion VARCHAR(75) null,reminderQueryAnswer VARCHAR(75) null,graceLoginCount INTEGER,screenName VARCHAR(75) null,emailAddress VARCHAR(75) null,openId VARCHAR(1024) null,portraitId LONG,languageId VARCHAR(75) null,timeZoneId VARCHAR(75) null,greeting VARCHAR(255) null,comments STRING null,firstName VARCHAR(75) null,middleName VARCHAR(75) null,lastName VARCHAR(75) null,jobTitle VARCHAR(75) null,loginDate DATE null,loginIP VARCHAR(75) null,lastLoginDate DATE null,lastLoginIP VARCHAR(75) null,lastFailedLoginDate DATE null,failedLoginAttempts INTEGER,lockout BOOLEAN,lockoutDate DATE null,agreedToTermsOfUse BOOLEAN,active_ BOOLEAN)";
 	public static final String TABLE_SQL_DROP = "drop table User_";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -196,6 +208,10 @@ public class UserModelImpl extends BaseModelImpl<User> {
 		model.setTimeZoneId(soapModel.getTimeZoneId());
 		model.setGreeting(soapModel.getGreeting());
 		model.setComments(soapModel.getComments());
+		model.setFirstName(soapModel.getFirstName());
+		model.setMiddleName(soapModel.getMiddleName());
+		model.setLastName(soapModel.getLastName());
+		model.setJobTitle(soapModel.getJobTitle());
 		model.setLoginDate(soapModel.getLoginDate());
 		model.setLoginIP(soapModel.getLoginIP());
 		model.setLastLoginDate(soapModel.getLastLoginDate());
@@ -510,6 +526,38 @@ public class UserModelImpl extends BaseModelImpl<User> {
 		_comments = comments;
 	}
 
+	public String getFirstName() {
+		return GetterUtil.getString(_firstName);
+	}
+
+	public void setFirstName(String firstName) {
+		_firstName = firstName;
+	}
+
+	public String getMiddleName() {
+		return GetterUtil.getString(_middleName);
+	}
+
+	public void setMiddleName(String middleName) {
+		_middleName = middleName;
+	}
+
+	public String getLastName() {
+		return GetterUtil.getString(_lastName);
+	}
+
+	public void setLastName(String lastName) {
+		_lastName = lastName;
+	}
+
+	public String getJobTitle() {
+		return GetterUtil.getString(_jobTitle);
+	}
+
+	public void setJobTitle(String jobTitle) {
+		_jobTitle = jobTitle;
+	}
+
 	public Date getLoginDate() {
 		return _loginDate;
 	}
@@ -636,6 +684,10 @@ public class UserModelImpl extends BaseModelImpl<User> {
 			model.setTimeZoneId(HtmlUtil.escape(getTimeZoneId()));
 			model.setGreeting(HtmlUtil.escape(getGreeting()));
 			model.setComments(HtmlUtil.escape(getComments()));
+			model.setFirstName(HtmlUtil.escape(getFirstName()));
+			model.setMiddleName(HtmlUtil.escape(getMiddleName()));
+			model.setLastName(HtmlUtil.escape(getLastName()));
+			model.setJobTitle(HtmlUtil.escape(getJobTitle()));
 			model.setLoginDate(getLoginDate());
 			model.setLoginIP(HtmlUtil.escape(getLoginIP()));
 			model.setLastLoginDate(getLastLoginDate());
@@ -688,6 +740,10 @@ public class UserModelImpl extends BaseModelImpl<User> {
 		clone.setTimeZoneId(getTimeZoneId());
 		clone.setGreeting(getGreeting());
 		clone.setComments(getComments());
+		clone.setFirstName(getFirstName());
+		clone.setMiddleName(getMiddleName());
+		clone.setLastName(getLastName());
+		clone.setJobTitle(getJobTitle());
 		clone.setLoginDate(getLoginDate());
 		clone.setLoginIP(getLoginIP());
 		clone.setLastLoginDate(getLastLoginDate());
@@ -779,6 +835,10 @@ public class UserModelImpl extends BaseModelImpl<User> {
 	private String _timeZoneId;
 	private String _greeting;
 	private String _comments;
+	private String _firstName;
+	private String _middleName;
+	private String _lastName;
+	private String _jobTitle;
 	private Date _loginDate;
 	private String _loginIP;
 	private Date _lastLoginDate;

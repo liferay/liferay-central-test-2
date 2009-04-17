@@ -533,6 +533,10 @@
 		<property name="timeZoneId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="greeting" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="comments" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="firstName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="middleName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="lastName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="jobTitle" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="loginDate" type="org.hibernate.type.TimestampType" />
 		<property name="loginIP" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="lastLoginDate" type="org.hibernate.type.TimestampType" />

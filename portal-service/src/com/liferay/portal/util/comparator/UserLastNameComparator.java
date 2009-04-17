@@ -26,27 +26,24 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.User;
 
 /**
- * <a href="ContactFirstNameComparator.java.html"><b><i>View Source</i></b></a>
+ * <a href="UserLastNameComparator.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
- * @deprecated This class has been renamed to <code>UserFirstNameComparator
- * </code>.
- *
  */
-public class ContactFirstNameComparator extends OrderByComparator {
+public class UserLastNameComparator extends OrderByComparator {
 
 	public static String ORDER_BY_ASC =
-		"User_.firstName ASC, User_.middleName ASC, User_.lastName ASC";
+		"User_.lastName ASC, User_.firstName ASC, User_.middleName ASC";
 
 	public static String ORDER_BY_DESC =
-		"User_.firstName DESC, User_.middleName DESC, User_.lastName DESC";
+		"User_.lastName DESC, User_.firstName DESC, User_.middleName DESC";
 
-	public ContactFirstNameComparator() {
+	public UserLastNameComparator() {
 		this(false);
 	}
 
-	public ContactFirstNameComparator(boolean asc) {
+	public UserLastNameComparator(boolean asc) {
 		_asc = asc;
 	}
 
@@ -54,14 +51,14 @@ public class ContactFirstNameComparator extends OrderByComparator {
 		User user1 = (User)obj1;
 		User user2 = (User)obj2;
 
-		int value = user1.getFirstName().compareTo(user2.getFirstName());
+		int value = user1.getLastName().compareTo(user2.getLastName());
 
 		if (value == 0) {
-			value = user1.getMiddleName().compareTo(user2.getMiddleName());
+			value = user1.getFirstName().compareTo(user2.getFirstName());
 		}
 
 		if (value == 0) {
-			value = user1.getLastName().compareTo(user2.getLastName());
+			value = user1.getMiddleName().compareTo(user2.getMiddleName());
 		}
 
 		if (_asc) {

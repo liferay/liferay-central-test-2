@@ -36,6 +36,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.Contact;
+import com.liferay.portal.model.ContactConstants;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.PasswordPolicy;
@@ -148,12 +149,9 @@ public class UserImpl extends UserModelImpl implements User {
 		return !getMale();
 	}
 
-	public String getFirstName() {
-		return getContact().getFirstName();
-	}
-
 	public String getFullName() {
-		return getContact().getFullName();
+		return ContactConstants.getFullName(
+			getFirstName(), getMiddleName(), getLastName());
 	}
 
 	public Group getGroup() {
@@ -196,10 +194,6 @@ public class UserImpl extends UserModelImpl implements User {
 		return new ArrayList<Group>();
 	}
 
-	public String getLastName() {
-		return getContact().getLastName();
-	}
-
 	public Locale getLocale() {
 		return _locale;
 	}
@@ -225,10 +219,6 @@ public class UserImpl extends UserModelImpl implements User {
 
 	public boolean getMale() {
 		return getContact().getMale();
-	}
-
-	public String getMiddleName() {
-		return getContact().getMiddleName();
 	}
 
 	public List<Group> getMyPlaces() {

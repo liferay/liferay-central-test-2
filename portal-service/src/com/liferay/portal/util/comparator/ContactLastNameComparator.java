@@ -30,16 +30,17 @@ import com.liferay.portal.model.User;
  *
  * @author Brian Wing Shun Chan
  *
+ * @deprecated This class has been renamed to <code>UserLastNameComparator
+ * </code>.
+ *
  */
 public class ContactLastNameComparator extends OrderByComparator {
 
 	public static String ORDER_BY_ASC =
-		"Contact_.lastName ASC, Contact_.firstName ASC, " +
-			"Contact_.middleName ASC";
+		"User_.lastName ASC, User_.firstName ASC, User_.middleName ASC";
 
 	public static String ORDER_BY_DESC =
-		"Contact_.lastName DESC, Contact_.firstName DESC, " +
-			"Contact_.middleName DESC";
+		"User_.lastName DESC, User_.firstName DESC, User_.middleName DESC";
 
 	public ContactLastNameComparator() {
 		this(false);

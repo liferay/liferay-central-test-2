@@ -33,7 +33,7 @@ import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portal.util.comparator.ContactLastNameComparator;
+import com.liferay.portal.util.comparator.UserLastNameComparator;
 
 import java.util.Date;
 import java.util.List;
@@ -78,7 +78,7 @@ public class DirectoryOpenSearchImpl extends BaseOpenSearchImpl {
 
 		List<User> results = UserLocalServiceUtil.search(
 			themeDisplay.getCompanyId(), keywords, Boolean.TRUE, null, start,
-			end, new ContactLastNameComparator(true));
+			end, new UserLastNameComparator(true));
 
 		int total = UserLocalServiceUtil.searchCount(
 			themeDisplay.getCompanyId(), keywords, Boolean.TRUE, null);

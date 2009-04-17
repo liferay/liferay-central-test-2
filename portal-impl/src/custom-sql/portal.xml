@@ -1007,18 +1007,15 @@
 				COUNT(DISTINCT User_.userId) AS COUNT_VALUE
 			FROM
 				User_
-			INNER JOIN
-				Contact_ ON
-					(Contact_.contactId = User_.contactId)
 			[$JOIN$]
 			WHERE
 				[$WHERE$]
 				(User_.companyId = ?) AND
 				(User_.defaultUser = ?) AND
 				(
-					(lower(Contact_.firstName) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
-					(lower(Contact_.middleName) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
-					(lower(Contact_.lastName) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
+					(lower(User_.firstName) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
+					(lower(User_.middleName) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
+					(lower(User_.lastName) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
 					(lower(User_.screenName) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
 					(lower(User_.emailAddress) LIKE ? [$AND_OR_NULL_CHECK$])
 				) AND (User_.active_ = ?)
@@ -1045,32 +1042,32 @@
 	<sql id="com.liferay.portal.service.persistence.UserFinder.findByC_FN_MN_LN_SN_EA_A">
 		<![CDATA[
 			SELECT
-				DISTINCT {User_.*}, Contact_.firstName, Contact_.middleName, Contact_.lastName, Contact_.jobTitle
+				DISTINCT {User_.*}
 			FROM
 				User_
-			INNER JOIN
-				Contact_ ON
-					(Contact_.contactId = User_.contactId)
 			[$JOIN$]
 			WHERE
 				[$WHERE$]
 				(User_.companyId = ?) AND
 				(User_.defaultUser = ?) AND
 				(
-					(lower(Contact_.firstName) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
-					(lower(Contact_.middleName) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
-					(lower(Contact_.lastName) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
+					(lower(User_.firstName) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
+					(lower(User_.middleName) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
+					(lower(User_.lastName) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
 					(lower(User_.screenName) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
 					(lower(User_.emailAddress) LIKE ? [$AND_OR_NULL_CHECK$])
 				) AND (User_.active_ = ?)
 			ORDER BY
-				Contact_.firstName ASC,
-				Contact_.middleName ASC,
-				Contact_.lastName ASC
+				User_.firstName ASC,
+				User_.middleName ASC,
+				User_.lastName ASC
 		]]>
 	</sql>
 	<sql id="com.liferay.portal.service.persistence.UserFinder.joinByContactTwitterSN">
 		<![CDATA[
+			INNER JOIN
+				Contact_ ON
+					(Contact_.contactId = User_.contactId)
 			WHERE
 				(Contact_.twitterSn != '')
 		]]>

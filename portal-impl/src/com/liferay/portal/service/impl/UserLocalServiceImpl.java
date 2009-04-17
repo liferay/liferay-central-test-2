@@ -326,6 +326,10 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		user.setLanguageId(locale.toString());
 		user.setTimeZoneId(defaultUser.getTimeZoneId());
 		user.setGreeting(greeting);
+		user.setFirstName(firstName);
+		user.setMiddleName(middleName);
+		user.setLastName(lastName);
+		user.setJobTitle(jobTitle);
 		user.setActive(true);
 
 		userPersistence.update(user, false);
@@ -2308,6 +2312,10 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		user.setTimeZoneId(timeZoneId);
 		user.setGreeting(greeting);
 		user.setComments(comments);
+		user.setFirstName(firstName);
+		user.setMiddleName(middleName);
+		user.setLastName(lastName);
+		user.setJobTitle(jobTitle);
 
 		userPersistence.update(user, false);
 

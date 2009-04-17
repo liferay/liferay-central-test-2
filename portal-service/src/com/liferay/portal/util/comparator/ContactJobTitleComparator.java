@@ -30,16 +30,19 @@ import com.liferay.portal.model.User;
  *
  * @author Brian Wing Shun Chan
  *
+ * @deprecated This class has been renamed to <code>UserJobTitleComparator
+ * </code>.
+ *
  */
 public class ContactJobTitleComparator extends OrderByComparator {
 
 	public static String ORDER_BY_ASC =
-		"Contact_.jobTitle ASC, Contact_.lastName ASC, " +
-			"Contact_.firstName ASC, Contact_.middleName ASC";
+		"User_.jobTitle ASC, User_.lastName ASC, User_.firstName ASC, " +
+			"User_.middleName ASC";
 
 	public static String ORDER_BY_DESC =
-		"Contact_.jobTitle DESC, Contact_.lastName DESC, " +
-			"Contact_.firstName DESC, Contact_.middleName DESC";
+		"User_.jobTitle DESC, User_.lastName DESC, User_.firstName DESC, " +
+			"User_.middleName DESC";
 
 	public ContactJobTitleComparator() {
 		this(false);

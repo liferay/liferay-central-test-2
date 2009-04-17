@@ -103,6 +103,10 @@ public class UserJSONSerializer {
 		jsonObj.put("timeZoneId", model.getTimeZoneId());
 		jsonObj.put("greeting", model.getGreeting());
 		jsonObj.put("comments", model.getComments());
+		jsonObj.put("firstName", model.getFirstName());
+		jsonObj.put("middleName", model.getMiddleName());
+		jsonObj.put("lastName", model.getLastName());
+		jsonObj.put("jobTitle", model.getJobTitle());
 
 		Date loginDate = model.getLoginDate();
 

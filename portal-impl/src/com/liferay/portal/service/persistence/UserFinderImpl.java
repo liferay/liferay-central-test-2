@@ -163,13 +163,13 @@ public class UserFinderImpl extends BasePersistenceImpl implements UserFinder {
 			String sql = CustomSQLUtil.get(COUNT_BY_C_FN_MN_LN_SN_EA_A);
 
 			sql = CustomSQLUtil.replaceKeywords(
-				sql, "lower(Contact_.firstName)", StringPool.LIKE, false,
+				sql, "lower(User_.firstName)", StringPool.LIKE, false,
 				firstNames);
 			sql = CustomSQLUtil.replaceKeywords(
-				sql, "lower(Contact_.middleName)", StringPool.LIKE, false,
+				sql, "lower(User_.middleName)", StringPool.LIKE, false,
 				middleNames);
 			sql = CustomSQLUtil.replaceKeywords(
-				sql, "lower(Contact_.lastName)", StringPool.LIKE, false,
+				sql, "lower(User_.lastName)", StringPool.LIKE, false,
 				lastNames);
 			sql = CustomSQLUtil.replaceKeywords(
 				sql, "lower(User_.screenName)", StringPool.LIKE, false,
@@ -317,13 +317,13 @@ public class UserFinderImpl extends BasePersistenceImpl implements UserFinder {
 			String sql = CustomSQLUtil.get(FIND_BY_C_FN_MN_LN_SN_EA_A);
 
 			sql = CustomSQLUtil.replaceKeywords(
-				sql, "lower(Contact_.firstName)", StringPool.LIKE, false,
+				sql, "lower(User_.firstName)", StringPool.LIKE, false,
 				firstNames);
 			sql = CustomSQLUtil.replaceKeywords(
-				sql, "lower(Contact_.middleName)", StringPool.LIKE, false,
+				sql, "lower(User_.middleName)", StringPool.LIKE, false,
 				middleNames);
 			sql = CustomSQLUtil.replaceKeywords(
-				sql, "lower(Contact_.lastName)", StringPool.LIKE, false,
+				sql, "lower(User_.lastName)", StringPool.LIKE, false,
 				lastNames);
 			sql = CustomSQLUtil.replaceKeywords(
 				sql, "lower(User_.screenName)", StringPool.LIKE, false,

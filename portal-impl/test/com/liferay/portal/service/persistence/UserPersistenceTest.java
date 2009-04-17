@@ -92,6 +92,10 @@ public class UserPersistenceTest extends BasePersistenceTestCase {
 		newUser.setTimeZoneId(randomString());
 		newUser.setGreeting(randomString());
 		newUser.setComments(randomString());
+		newUser.setFirstName(randomString());
+		newUser.setMiddleName(randomString());
+		newUser.setLastName(randomString());
+		newUser.setJobTitle(randomString());
 		newUser.setLoginDate(nextDate());
 		newUser.setLoginIP(randomString());
 		newUser.setLastLoginDate(nextDate());
@@ -137,6 +141,10 @@ public class UserPersistenceTest extends BasePersistenceTestCase {
 		assertEquals(existingUser.getTimeZoneId(), newUser.getTimeZoneId());
 		assertEquals(existingUser.getGreeting(), newUser.getGreeting());
 		assertEquals(existingUser.getComments(), newUser.getComments());
+		assertEquals(existingUser.getFirstName(), newUser.getFirstName());
+		assertEquals(existingUser.getMiddleName(), newUser.getMiddleName());
+		assertEquals(existingUser.getLastName(), newUser.getLastName());
+		assertEquals(existingUser.getJobTitle(), newUser.getJobTitle());
 		assertEquals(Time.getShortTimestamp(existingUser.getLoginDate()),
 			Time.getShortTimestamp(newUser.getLoginDate()));
 		assertEquals(existingUser.getLoginIP(), newUser.getLoginIP());
@@ -218,6 +226,10 @@ public class UserPersistenceTest extends BasePersistenceTestCase {
 		user.setTimeZoneId(randomString());
 		user.setGreeting(randomString());
 		user.setComments(randomString());
+		user.setFirstName(randomString());
+		user.setMiddleName(randomString());
+		user.setLastName(randomString());
+		user.setJobTitle(randomString());
 		user.setLoginDate(nextDate());
 		user.setLoginIP(randomString());
 		user.setLastLoginDate(nextDate());

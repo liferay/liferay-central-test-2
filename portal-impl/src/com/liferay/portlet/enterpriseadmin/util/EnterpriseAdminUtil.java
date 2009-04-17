@@ -63,9 +63,6 @@ import com.liferay.portal.service.permission.OrganizationPermissionUtil;
 import com.liferay.portal.service.permission.RolePermissionUtil;
 import com.liferay.portal.service.permission.UserGroupPermissionUtil;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.comparator.ContactFirstNameComparator;
-import com.liferay.portal.util.comparator.ContactJobTitleComparator;
-import com.liferay.portal.util.comparator.ContactLastNameComparator;
 import com.liferay.portal.util.comparator.GroupNameComparator;
 import com.liferay.portal.util.comparator.GroupTypeComparator;
 import com.liferay.portal.util.comparator.OrganizationNameComparator;
@@ -76,8 +73,11 @@ import com.liferay.portal.util.comparator.RoleDescriptionComparator;
 import com.liferay.portal.util.comparator.RoleNameComparator;
 import com.liferay.portal.util.comparator.RoleTypeComparator;
 import com.liferay.portal.util.comparator.UserEmailAddressComparator;
+import com.liferay.portal.util.comparator.UserFirstNameComparator;
 import com.liferay.portal.util.comparator.UserGroupDescriptionComparator;
 import com.liferay.portal.util.comparator.UserGroupNameComparator;
+import com.liferay.portal.util.comparator.UserJobTitleComparator;
+import com.liferay.portal.util.comparator.UserLastNameComparator;
 import com.liferay.portal.util.comparator.UserScreenNameComparator;
 import com.liferay.util.UniqueList;
 
@@ -735,19 +735,19 @@ public class EnterpriseAdminUtil {
 			orderByComparator = new UserEmailAddressComparator(orderByAsc);
 		}
 		else if (orderByCol.equals("first-name")) {
-			orderByComparator = new ContactFirstNameComparator(orderByAsc);
+			orderByComparator = new UserFirstNameComparator(orderByAsc);
 		}
 		else if (orderByCol.equals("job-title")) {
-			orderByComparator = new ContactJobTitleComparator(orderByAsc);
+			orderByComparator = new UserJobTitleComparator(orderByAsc);
 		}
 		else if (orderByCol.equals("last-name")) {
-			orderByComparator = new ContactLastNameComparator(orderByAsc);
+			orderByComparator = new UserLastNameComparator(orderByAsc);
 		}
 		else if (orderByCol.equals("screen-name")) {
 			orderByComparator = new UserScreenNameComparator(orderByAsc);
 		}
 		else {
-			orderByComparator = new ContactLastNameComparator(orderByAsc);
+			orderByComparator = new UserLastNameComparator(orderByAsc);
 		}
 
 		return orderByComparator;

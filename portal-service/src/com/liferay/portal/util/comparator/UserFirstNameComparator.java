@@ -26,15 +26,12 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.User;
 
 /**
- * <a href="ContactFirstNameComparator.java.html"><b><i>View Source</i></b></a>
+ * <a href="UserFirstNameComparator.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
- * @deprecated This class has been renamed to <code>UserFirstNameComparator
- * </code>.
- *
  */
-public class ContactFirstNameComparator extends OrderByComparator {
+public class UserFirstNameComparator extends OrderByComparator {
 
 	public static String ORDER_BY_ASC =
 		"User_.firstName ASC, User_.middleName ASC, User_.lastName ASC";
@@ -42,11 +39,11 @@ public class ContactFirstNameComparator extends OrderByComparator {
 	public static String ORDER_BY_DESC =
 		"User_.firstName DESC, User_.middleName DESC, User_.lastName DESC";
 
-	public ContactFirstNameComparator() {
+	public UserFirstNameComparator() {
 		this(false);
 	}
 
-	public ContactFirstNameComparator(boolean asc) {
+	public UserFirstNameComparator(boolean asc) {
 		_asc = asc;
 	}
 

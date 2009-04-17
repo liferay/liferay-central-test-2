@@ -63,8 +63,6 @@ public interface User extends UserModel {
 
 	public boolean getFemale();
 
-	public java.lang.String getFirstName();
-
 	public java.lang.String getFullName();
 
 	public com.liferay.portal.model.Group getGroup();
@@ -73,8 +71,6 @@ public interface User extends UserModel {
 
 	public java.util.List<com.liferay.portal.model.Group> getGroups();
 
-	public java.lang.String getLastName();
-
 	public java.util.Locale getLocale();
 
 	public java.lang.String getLogin()
@@ -82,8 +78,6 @@ public interface User extends UserModel {
 			com.liferay.portal.SystemException;
 
 	public boolean getMale();
-
-	public java.lang.String getMiddleName();
 
 	public java.util.List<com.liferay.portal.model.Group> getMyPlaces();
 

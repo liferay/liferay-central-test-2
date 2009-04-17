@@ -545,6 +545,10 @@
 			<hint-collection name="TEXTAREA" />
 			<hint name="display-width">400</hint>
 		</field>
+		<field name="firstName" type="String" />
+		<field name="middleName" type="String" />
+		<field name="lastName" type="String" />
+		<field name="jobTitle" type="String" />
 		<field name="loginDate" type="Date" />
 		<field name="loginIP" type="String" />
 		<field name="lastLoginDate" type="Date" />
