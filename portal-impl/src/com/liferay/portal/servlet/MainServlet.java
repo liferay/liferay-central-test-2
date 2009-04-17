@@ -1076,7 +1076,7 @@ public class MainServlet extends ActionServlet {
 
 				redirect = HttpUtil.addParameter(redirect, "p_l_id", plid);
 			}
-			catch (Exception e1) {
+			catch (Exception e) {
 			}
 		}
 
