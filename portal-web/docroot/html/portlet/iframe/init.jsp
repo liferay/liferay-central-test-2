@@ -62,14 +62,18 @@ Enumeration<String> enu = request.getParameterNames();
 while (enu.hasMoreElements()) {
 	String name = enu.nextElement();
 
-	if (name.startsWith("iframe_")){
+	if (name.startsWith(_IFRAME_PREFIX)){
 		StringBuilder sb = new StringBuilder();
 
-		sb.append(name.substring(7));
+		sb.append(name.substring(_IFRAME_PREFIX.length()));
 		sb.append(StringPool.EQUAL);
 		sb.append(request.getParameter(name));
 
 		iframeVariables.add(sb.toString());
 	}
 }
+%>
+
+<%!
+private static final String _IFRAME_PREFIX = "iframe_";
 %>
