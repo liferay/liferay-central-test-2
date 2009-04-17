@@ -63,6 +63,7 @@
 		portletURL.setParameter("struts_action", "/admin/view");
 		portletURL.setParameter("tabs1", tabs1);
 		portletURL.setParameter("tabs2", tabs2);
+		portletURL.setParameter("tabs3", tabs3);
 		%>
 
 		<script type="text/javascript">
