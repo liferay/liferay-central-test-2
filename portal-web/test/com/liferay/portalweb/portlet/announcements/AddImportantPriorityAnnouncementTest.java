@@ -84,7 +84,7 @@ public class AddImportantPriorityAnnouncementTest extends BaseTestCase {
 			RuntimeVariables.replace(
 				"Hi everyone. This is an important priority announcement."));
 		selenium.select("_84_priority",
-			RuntimeVariables.replace("label=important"));
+			RuntimeVariables.replace("label=Important"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Entries"));
