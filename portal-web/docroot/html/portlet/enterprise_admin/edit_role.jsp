@@ -65,7 +65,7 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 <fieldset class="block-labels">
 	<c:if test="<%= role != null %>">
 		<div class="ctrl-holder">
-			<label><%= LanguageUtil.get(pageContext, ((PortalUtil.isSystemRole(role.getName())) ? "name" : "old-name")) %></label>
+			<label><%= LanguageUtil.get(pageContext, PortalUtil.isSystemRole(role.getName()) ? "name" : "old-name") %></label>
 
 			<%= role.getName() %>
 		</div>
@@ -73,7 +73,7 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 
 	<c:choose>
 		<c:when test="<%= (role != null) && PortalUtil.isSystemRole(role.getName()) %>">
-			<input type="hidden" name="name" value="<%= role.getName() %>"/>
+			<input type="hidden" name="name" value="<%= role.getName() %>" />
 		</c:when>
 		<c:otherwise>
 			<div class="ctrl-holder">
