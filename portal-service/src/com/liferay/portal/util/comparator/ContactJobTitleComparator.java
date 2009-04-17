@@ -22,9 +22,6 @@
 
 package com.liferay.portal.util.comparator;
 
-import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.model.User;
-
 /**
  * <a href="ContactJobTitleComparator.java.html"><b><i>View Source</i></b></a>
  *
@@ -34,60 +31,14 @@ import com.liferay.portal.model.User;
  * </code>.
  *
  */
-public class ContactJobTitleComparator extends OrderByComparator {
-
-	public static String ORDER_BY_ASC =
-		"User_.jobTitle ASC, User_.lastName ASC, User_.firstName ASC, " +
-			"User_.middleName ASC";
-
-	public static String ORDER_BY_DESC =
-		"User_.jobTitle DESC, User_.lastName DESC, User_.firstName DESC, " +
-			"User_.middleName DESC";
+public class ContactJobTitleComparator extends UserJobTitleComparator {
 
 	public ContactJobTitleComparator() {
-		this(false);
+		super();
 	}
 
 	public ContactJobTitleComparator(boolean asc) {
-		_asc = asc;
+		super(asc);
 	}
-
-	public int compare(Object obj1, Object obj2) {
-		User user1 = (User)obj1;
-		User user2 = (User)obj2;
-
-		int value = user1.getContact().getJobTitle().compareTo(
-			user2.getContact().getJobTitle());
-
-		if (value == 0) {
-			value = user1.getLastName().compareTo(user2.getLastName());
-		}
-
-		if (value == 0) {
-			value = user1.getFirstName().compareTo(user2.getFirstName());
-		}
-
-		if (value == 0) {
-			value = user1.getMiddleName().compareTo(user2.getMiddleName());
-		}
-
-		if (_asc) {
-			return value;
-		}
-		else {
-			return -value;
-		}
-	}
-
-	public String getOrderBy() {
-		if (_asc) {
-			return ORDER_BY_ASC;
-		}
-		else {
-			return ORDER_BY_DESC;
-		}
-	}
-
-	private boolean _asc;
 
 }
