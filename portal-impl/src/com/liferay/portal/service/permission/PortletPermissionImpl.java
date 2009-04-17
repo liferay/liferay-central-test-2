@@ -26,8 +26,6 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.Layout;
@@ -36,14 +34,12 @@ import com.liferay.portal.model.PortletConstants;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
-import com.liferay.portal.security.permission.RenderRulesEvaluator;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.util.PropsValues;
 
 import java.util.List;
-import java.util.ArrayList;
 
 /**
  * <a href="PortletPermissionImpl.java.html"><b><i>View Source</i></b></a>
@@ -149,27 +145,6 @@ public class PortletPermissionImpl implements PortletPermission {
 					return true;
 				}
 			}
-
-			if (!_renderRulesEvaluators.isEmpty()) {
-
-				for (RenderRulesEvaluator evaluator : _renderRulesEvaluators) {
-
-					String suffix = evaluator.getClass().getName();
-
-					UnicodeProperties typeSettingsProperties =
-						layout.getTypeSettingsProperties();
-
-					String rules = typeSettingsProperties.getProperty(
-						portletId + "_" + suffix);
-
-					if (Validator.isNotNull(rules) &&
-						!evaluator.isRenderable(
-							permissionChecker.getUserId(), groupId, rules)) {
-
-						return false;
-					}
-				}
-			}
 		}
 		else {
 			name = portletId;
@@ -245,31 +220,7 @@ public class PortletPermissionImpl implements PortletPermission {
 		return layoutManagerActions.contains(actionId);
 	}
 
-	protected static List<RenderRulesEvaluator> _renderRulesEvaluators =
-		new ArrayList<RenderRulesEvaluator>();
-
 	private static Log _log =
 		 LogFactoryUtil.getLog(PortletPermissionImpl.class);
 
-	static {
-
-		for (String className: PropsValues.PORTLET_RENDER_RULES_EVALUATORS) {
-			
-			try {
-				RenderRulesEvaluator renderRulesEvaluator =
-					(RenderRulesEvaluator)Class.forName(
-						className).newInstance();
-				_renderRulesEvaluators.add(renderRulesEvaluator);
-			}
-			catch (ClassNotFoundException e) {
-				_log.error(e, e);
-			}
-			catch (InstantiationException e) {
-				_log.error(e, e);
-			}
-			catch (IllegalAccessException e) {
-				_log.error(e, e);
-			}
-		}
-	}
 }

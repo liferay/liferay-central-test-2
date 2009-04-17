@@ -1078,9 +1078,6 @@ public class PropsValues {
 	public static final String PORTLET_PUBLIC_RENDER_PARAMETER_DISTRIBUTION =
 		PropsUtil.get(PropsKeys.PORTLET_PUBLIC_RENDER_PARAMETER_DISTRIBUTION);
 
-	public static final String[] PORTLET_RENDER_RULES_EVALUATORS =
-		PropsUtil.getArray(PropsKeys.PORTLET_RENDER_RULES_EVALUATORS);
-
 	public static final boolean PORTLET_URL_ANCHOR_ENABLE =
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.PORTLET_URL_ANCHOR_ENABLE));

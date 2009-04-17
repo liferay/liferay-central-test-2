@@ -895,10 +895,6 @@
 		<put name="portlet_content" value="/portlet/portlet_configuration/edit_permissions.jsp" />
 	</definition>
 
-	<definition name="portlet.portlet_configuration.edit_render_rules" extends="portlet.portlet_configuration">
-		<put name="portlet_content" value="/portlet/portlet_configuration/edit_render_rules.jsp" />
-	</definition>
-
 	<definition name="portlet.portlet_configuration.edit_scope" extends="portlet.portlet_configuration">
 		<put name="portlet_content" value="/portlet/portlet_configuration/edit_scope.jsp" />
 	</definition>
