@@ -58,6 +58,10 @@ public class SQLServerUtil extends DBUtil {
 		return template;
 	}
 
+	public boolean isSupportsUpdateWithInnerJoin() {
+		return _SUPPORTS_UPDATE_WITH_INNER_JOIN;
+	}
+
 	protected SQLServerUtil() {
 		super(TYPE_SQLSERVER);
 	}
@@ -140,6 +144,8 @@ public class SQLServerUtil extends DBUtil {
 		" varchar(2000)", " text", " varchar",
 		"  identity(1,1)", "go"
 	};
+
+	private static boolean _SUPPORTS_UPDATE_WITH_INNER_JOIN = true;
 
 	private static SQLServerUtil _instance = new SQLServerUtil();
 
