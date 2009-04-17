@@ -106,7 +106,7 @@ renderPortletURL.setParameter("returnToFullPageURL", returnToFullPageURL);
 renderPortletURL.setParameter("portletResource", portletResource);
 renderPortletURL.setParameter("modelResource", modelResource);
 renderPortletURL.setParameter("modelResourceDescription", modelResourceDescription);
-renderPortletURL.setParameter("resourcePrimKey", resourcePrimKey);	
+renderPortletURL.setParameter("resourcePrimKey", resourcePrimKey);
 %>
 
 <div class="edit-permissions">
@@ -158,11 +158,13 @@ renderPortletURL.setParameter("resourcePrimKey", resourcePrimKey);
 	List<Role> allRoles = ResourceActionsUtil.getRoles(group, modelResource);
 
 	Role administrator = RoleLocalServiceUtil.getRole(company.getCompanyId(), RoleConstants.ADMINISTRATOR);
+
 	allRoles.remove(administrator);
+
+	searchContainer.setTotal(allRoles.size());
 
 	List<Role> results = ListUtil.subList(allRoles, searchContainer.getStart(), searchContainer.getEnd());
 
-	searchContainer.setTotal(allRoles.size());
 	searchContainer.setResults(results);
 
 	List resultRows = searchContainer.getResultRows();
