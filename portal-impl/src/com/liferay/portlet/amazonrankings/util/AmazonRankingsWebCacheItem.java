@@ -62,25 +62,25 @@ public class AmazonRankingsWebCacheItem implements WebCacheItem {
 		try {
 			StringBuilder sb = new StringBuilder();
 
-			sb.append("http://ecs.amazonaws.com/onca/xml");
-			sb.append("?Service=AWSECommerceService&AWSAccessKeyId=");
+			sb.append("http://ecs.amazonaws.com/onca/xml?Service=");
+			sb.append("AWSECommerceService&AWSAccessKeyId=");
 			sb.append(AmazonRankingsUtil.getAmazonAccessKeyId());
 			sb.append("&Operation=ItemLookup&IdType=ASIN&ItemId=");
 			sb.append(isbn);
-			sb.append("&ResponseGroup=Images,ItemAttributes,Offers,SalesRank");
-			sb.append("&Version=2009-02-01");
+			sb.append("&ResponseGroup=Images,ItemAttributes,Offers,SalesRank&");
+			sb.append("Version=2009-02-01");
 
 			String xml = HttpUtil.URLtoString(sb.toString());
 
 			Document doc = SAXReaderUtil.read(xml);
 
-			Element itemLookupResponse = doc.getRootElement();
+			Element root = doc.getRootElement();
 
-			if (itemLookupResponse == null) {
+			if (root == null) {
 				return null;
 			}
 
-			Element items = itemLookupResponse.element("Items");
+			Element items = root.element("Items");
 
 			if (items == null) {
 				return null;
@@ -127,11 +127,11 @@ public class AmazonRankingsWebCacheItem implements WebCacheItem {
 			if (offerSummary != null) {
 				usedPrice = getPrice(offerSummary.element("LowestUsedPrice"));
 
-				collectiblePrice = getPrice(offerSummary.element(
-					"LowestCollectiblePrice"));
+				collectiblePrice = getPrice(
+					offerSummary.element("LowestCollectiblePrice"));
 
-				thirdPartyNewPrice = getPrice(offerSummary.element(
-					"LowestNewPrice"));
+				thirdPartyNewPrice = getPrice(
+					offerSummary.element("LowestNewPrice"));
 			}
 
 			int salesRank = GetterUtil.getInteger(
