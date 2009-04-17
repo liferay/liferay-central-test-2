@@ -179,15 +179,15 @@ public class JSONServiceAction extends JSONAction {
 
 						return jsonArray.toString();
 					}
-					else if (returnObj instanceof JSONObject) {
-						JSONObject jsonObj = (JSONObject)returnObj;
-
-						return jsonObj.toString();
-					}
 					else if (returnObj instanceof JSONArray) {
 						JSONArray jsonArray = (JSONArray)returnObj;
 
 						return jsonArray.toString();
+					}
+					else if (returnObj instanceof JSONObject) {
+						JSONObject jsonObj = (JSONObject)returnObj;
+
+						return jsonObj.toString();
 					}
 					else if (returnObj instanceof Boolean ||
 							 returnObj instanceof Double ||
