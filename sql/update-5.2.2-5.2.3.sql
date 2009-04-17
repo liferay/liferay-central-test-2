@@ -13,6 +13,13 @@ alter table MBMessage add groupId LONG;
 
 alter table MBThread add groupId LONG;
 
+alter table Organization_ add leftOrganizationId LONG;
+alter table Organization_ add rightOrganizationId LONG;
+
+COMMIT_TRANSACTION;
+
+update Organization_ set leftOrganizationId = 0, rightOrganizationId = 0;
+
 update Region set regionCode = 'AB' where countryId = 1 and name = 'Alberta';
 
 create table ResourceAction (

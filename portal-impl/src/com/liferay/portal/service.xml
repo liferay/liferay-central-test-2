@@ -635,6 +635,8 @@
 		<!-- Other fields -->
 
 		<column name="parentOrganizationId" type="long" />
+		<column name="leftOrganizationId" type="long" />
+		<column name="rightOrganizationId" type="long" />
 		<column name="name" type="String" />
 		<column name="type" type="String" />
 		<column name="recursable" type="boolean" />

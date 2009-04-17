@@ -432,6 +432,12 @@ public class OrganizationLocalServiceImpl
 			passwordPolicyId, Organization.class.getName(), organizationId);
 	}
 
+	public void rebuildTree(long companyId, boolean force)
+		throws SystemException {
+
+		organizationPersistence.rebuildTree(companyId, force);
+	}
+
 	public List<Organization> search(
 			long companyId, long parentOrganizationId, String keywords,
 			String type, Long regionId, Long countryId,

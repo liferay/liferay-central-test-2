@@ -22,52 +22,60 @@
 
 package com.liferay.portal.verify;
 
+import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.service.OrganizationLocalServiceUtil;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 /**
- * <a href="VerifyProcessSuite.java.html"><b><i>View Source</i></b></a>
+ * <a href="VerifyOrganization.java.html"><b><i>View Source</i></b></a>
  *
- * @author Alexander Chow
+ * @author Brian Wing Shun Chan
  *
  */
-public class VerifyProcessSuite extends VerifyProcess {
+public class VerifyOrganization extends VerifyProcess {
 
 	public void verify() throws VerifyException {
 		_log.info("Verifying");
 
-		verify(new VerifyProperties());
-		verify(new VerifyLucene());
-
-		verify(new VerifyMySQL());
-
-		verify(new VerifyCounter());
-		verify(new VerifyUUID());
-
-		verify(new VerifyBlogs());
-		verify(new VerifyBookmarks());
-		verify(new VerifyDocumentLibrary());
-		verify(new VerifyGroup());
-		verify(new VerifyImageGallery());
-		verify(new VerifyJournal());
-		verify(new VerifyLayout());
-		verify(new VerifyMessageBoards());
-		verify(new VerifyOrganization());
-		verify(new VerifySocial());
-		verify(new VerifyWiki());
-
-		// VerifyBlogsTrackbacks looks at every blog comment to see if it is a
-		// trackback and verifies that the source URL is a valid URL.
-
-		//verify(new VerifyBlogsTrackbacks());
-
-		// VerifyImage is very powerful because it removes all images that it
-		// believes is stale. Do not run this unless you are also not managing
-		// images in Liferay's Image service for your custom models.
-
-		//verify(new VerifyImage());
+		try {
+			verifyOrganization();
+		}
+		catch (Exception e) {
+			throw new VerifyException(e);
+		}
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(VerifyProcessSuite.class);
+	protected void verifyOrganization() throws Exception {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = DataAccess.getConnection();
+
+			ps = con.prepareStatement(_GET_COMPANY_IDS);
+
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				long companyId = rs.getLong("companyId");
+
+				OrganizationLocalServiceUtil.rebuildTree(companyId, false);
+			}
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
+		}
+	}
+
+	private static final String _GET_COMPANY_IDS =
+		"select companyId from Company";
+
+	private static Log _log = LogFactoryUtil.getLog(VerifyOrganization.class);
 
 }
