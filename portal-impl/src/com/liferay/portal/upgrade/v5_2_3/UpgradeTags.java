@@ -103,18 +103,34 @@ public class UpgradeTags extends UpgradeProcess {
 
 		StringBuilder sb = new StringBuilder();
 
-		sb.append("UPDATE TagsAsset SET TagsAsset.viewCount = (SELECT ");
-		sb.append(tableName);
-		sb.append(".");
-		sb.append(columnViewCount);
-		sb.append(" FROM ");
-		sb.append(tableName);
-		sb.append(" WHERE TagsAsset.classPK = ");
-		sb.append(tableName);
-		sb.append(".");
-		sb.append(columnClassPK);
-		sb.append(") WHERE TagsAsset.classNameId = ");
-		sb.append(classNameId);
+		if (isSupportsUpdateWithInnerJoin()) {
+			sb.append("update TagsAsset inner join ");
+			sb.append(tableName);
+			sb.append(" on TagsAsset.classPK = ");
+			sb.append(tableName);
+			sb.append(".");
+			sb.append(columnClassPK);
+			sb.append(" set TagsAsset.viewCount = ");
+			sb.append(tableName);
+			sb.append(".");
+			sb.append(columnViewCount);
+			sb.append(" where TagsAsset.classNameId = ");
+			sb.append(classNameId);
+		}
+		else {
+			sb.append("update TagsAsset set TagsAsset.viewCount = (select ");
+			sb.append(tableName);
+			sb.append(".");
+			sb.append(columnViewCount);
+			sb.append(" from ");
+			sb.append(tableName);
+			sb.append(" where TagsAsset.classPK = ");
+			sb.append(tableName);
+			sb.append(".");
+			sb.append(columnClassPK);
+			sb.append(") where TagsAsset.classNameId = ");
+			sb.append(classNameId);
+		}
 
 		runSQL(sb.toString());
 	}

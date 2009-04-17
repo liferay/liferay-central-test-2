@@ -279,6 +279,10 @@ public abstract class DBUtil {
 		return _SUPPORTS_ALTER_COLUMN_TYPE;
 	}
 
+	public boolean isSupportsUpdateWithInnerJoin() {
+		return _SUPPORTS_UPDATE_WITH_INNER_JOIN;
+	}
+
 	public void runSQL(String sql)
 		throws IOException, NamingException, SQLException {
 
@@ -819,6 +823,8 @@ public abstract class DBUtil {
 	private static boolean _SUPPORTS_ALTER_COLUMN_NAME = true;
 
 	private static boolean _SUPPORTS_ALTER_COLUMN_TYPE = true;
+
+	private static boolean _SUPPORTS_UPDATE_WITH_INNER_JOIN;
 
 	private static Log _log = LogFactoryUtil.getLog(DBUtil.class);
 

@@ -55,6 +55,10 @@ public class MySQLUtil extends DBUtil {
 		return template;
 	}
 
+	public boolean isSupportsUpdateWithInnerJoin() {
+		return _SUPPORTS_UPDATE_WITH_INNER_JOIN;
+	}
+
 	protected MySQLUtil() {
 		super(TYPE_MYSQL);
 	}
@@ -151,6 +155,8 @@ public class MySQLUtil extends DBUtil {
 		" longtext", " longtext", " varchar",
 		"  auto_increment", "commit"
 	};
+
+	private static boolean _SUPPORTS_UPDATE_WITH_INNER_JOIN = true;
 
 	private static MySQLUtil _instance = new MySQLUtil();
 

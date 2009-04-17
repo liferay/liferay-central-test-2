@@ -60,6 +60,10 @@ public abstract class UpgradeProcess {
 		return DBUtil.getInstance().isSupportsAlterColumnType();
 	}
 
+	public boolean isSupportsUpdateWithInnerJoin() {
+		return DBUtil.getInstance().isSupportsUpdateWithInnerJoin();
+	}
+
 	public void runSQL(String template)
 		throws IOException, NamingException, SQLException {
 
