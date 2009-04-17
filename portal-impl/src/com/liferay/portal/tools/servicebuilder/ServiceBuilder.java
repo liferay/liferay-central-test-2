@@ -1347,6 +1347,33 @@ public class ServiceBuilder {
 		}
 	}
 
+	public String getSqlType(String type) {
+		if (type.equals("boolean") || type.equals("Boolean")) {
+			return "BOOLEAN";
+		}
+		else if (type.equals("double") || type.equals("Double")) {
+			return "DOUBLE";
+		}
+		else if (type.equals("float") || type.equals("Float")) {
+			return "FLOAT";
+		}
+		else if (type.equals("int") || type.equals("Integer")) {
+			return "INTEGER";
+		}
+		else if (type.equals("long") || type.equals("Long")) {
+			return "BIGINT";
+		}
+		else if (type.equals("short") || type.equals("Short")) {
+			return "INTEGER";
+		}
+		else if (type.equals("Date")) {
+			return "TIMESTAMP";
+		}
+		else {
+			return null;
+		}
+	}
+
 	public String getSqlType(String model, String field, String type) {
 		if (type.equals("boolean") || type.equals("Boolean")) {
 			return "BOOLEAN";

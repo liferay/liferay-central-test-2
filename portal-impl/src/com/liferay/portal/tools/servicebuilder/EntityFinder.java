@@ -44,12 +44,20 @@ public class EntityFinder {
 		_columns = columns;
 	}
 
+	public List<EntityColumn> getColumns() {
+		return _columns;
+	}
+
 	public String getName() {
 		return _name;
 	}
 
 	public String getReturnType() {
 		return _returnType;
+	}
+
+	public String getWhere() {
+		return _where;
 	}
 
 	public boolean isCollection() {
@@ -61,27 +69,19 @@ public class EntityFinder {
 		}
 	}
 
-	public boolean isUnique() {
-		return _unique;
-	}
-
-	public String getWhere() {
-		return _where;
-	}
-
 	public boolean isDBIndex() {
 		return _dbIndex;
 	}
 
-	public List<EntityColumn> getColumns() {
-		return _columns;
+	public boolean isUnique() {
+		return _unique;
 	}
 
+	private List<EntityColumn> _columns;
+	private boolean _dbIndex;
 	private String _name;
 	private String _returnType;
 	private boolean _unique;
 	private String _where;
-	private boolean _dbIndex;
-	private List<EntityColumn> _columns;
 
 }

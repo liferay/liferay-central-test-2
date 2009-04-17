@@ -37,12 +37,12 @@ public class EntityOrder {
 		_columns = columns;
 	}
 
-	public boolean isAscending() {
-		return _asc;
-	}
-
 	public List<EntityColumn> getColumns() {
 		return _columns;
+	}
+
+	public boolean isAscending() {
+		return _asc;
 	}
 
 	private boolean _asc;

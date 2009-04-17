@@ -42,16 +42,6 @@ public class EntityColumn implements Cloneable {
 
 	public EntityColumn(
 		String name, String dbName, String type, boolean primary,
-		String ejbName, String mappingKey, String mappingTable, String idType,
-		String idParam, boolean convertNull) {
-
-		this(
-			name, dbName, type, primary, ejbName, mappingKey, mappingTable,
-			true, true, null, idType, idParam, convertNull);
-	}
-
-	public EntityColumn(
-		String name, String dbName, String type, boolean primary,
 		String ejbName, String mappingKey, String mappingTable,
 		boolean caseSensitive, boolean orderByAscending, String comparator,
 		String idType, String idParam, boolean convertNull) {
@@ -72,122 +62,14 @@ public class EntityColumn implements Cloneable {
 		_convertNull = convertNull;
 	}
 
-	public String getName() {
-		return _name;
-	}
+	public EntityColumn(
+		String name, String dbName, String type, boolean primary,
+		String ejbName, String mappingKey, String mappingTable, String idType,
+		String idParam, boolean convertNull) {
 
-	public String getDBName() {
-		return _dbName;
-	}
-
-	public void setDBName(String dbName) {
-		_dbName = dbName;
-	}
-
-	public String getType() {
-		return _type;
-	}
-
-	public boolean isPrimitiveType() {
-		if (Character.isLowerCase(_type.charAt(0))) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	public boolean isCollection() {
-		if (_type.equals("Collection")) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	public boolean isPrimary() {
-		return _primary;
-	}
-
-	public String getMethodName() {
-		return _methodName;
-	}
-
-	public String getEJBName() {
-		return _ejbName;
-	}
-
-	public String getMappingKey() {
-		return _mappingKey;
-	}
-
-	public String getMappingTable() {
-		return _mappingTable;
-	}
-
-	public boolean isMappingOneToMany() {
-		return Validator.isNotNull(_mappingKey);
-	}
-
-	public boolean isMappingManyToMany() {
-		return Validator.isNotNull(_mappingTable);
-	}
-
-	public boolean isCaseSensitive() {
-		return _caseSensitive;
-	}
-
-	public void setCaseSensitive(boolean caseSensitive) {
-		_caseSensitive = caseSensitive;
-	}
-
-	public boolean isOrderByAscending() {
-		return _orderByAscending;
-	}
-
-	public void setOrderByAscending(boolean orderByAscending) {
-		_orderByAscending = orderByAscending;
-	}
-
-	public String getComparator() {
-		return _comparator;
-	}
-
-	public void setComparator(String comparator) {
-		_comparator = comparator;
-	}
-
-	public String getIdType() {
-		return _idType;
-	}
-
-	public void setIdType(String idType) {
-		_idType = idType;
-	}
-
-	public String getIdParam() {
-		return _idParam;
-	}
-
-	public void setIdParam(String idParam) {
-		_idParam = idParam;
-	}
-
-	public boolean isConvertNull() {
-		return _convertNull;
-	}
-
-	public void setConvertNull(boolean convertNull) {
-		_convertNull = convertNull;
-	}
-
-	public boolean isFetchFinderPath() {
-		return _fetchFinderPath;
-	}
-
-	public void setFetchFinderPath(boolean fetchFinderPath) {
-		_fetchFinderPath = fetchFinderPath;
+		this(
+			name, dbName, type, primary, ejbName, mappingKey, mappingTable,
+			true, true, null, idType, idParam, convertNull);
 	}
 
 	public Object clone() {
@@ -211,20 +93,142 @@ public class EntityColumn implements Cloneable {
 		}
 	}
 
-	private String _name;
+	public String getComparator() {
+		return _comparator;
+	}
+
+	public String getDBName() {
+		return _dbName;
+	}
+
+	public String getEJBName() {
+		return _ejbName;
+	}
+
+	public String getIdParam() {
+		return _idParam;
+	}
+
+	public String getIdType() {
+		return _idType;
+	}
+
+	public String getMappingKey() {
+		return _mappingKey;
+	}
+
+	public String getMappingTable() {
+		return _mappingTable;
+	}
+
+	public String getMethodName() {
+		return _methodName;
+	}
+
+	public String getName() {
+		return _name;
+	}
+
+	public String getNames() {
+		return TextFormatter.formatPlural(new String(_name));
+	}
+
+	public String getType() {
+		return _type;
+	}
+
+	public boolean isCaseSensitive() {
+		return _caseSensitive;
+	}
+
+	public boolean isCollection() {
+		if (_type.equals("Collection")) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public boolean isConvertNull() {
+		return _convertNull;
+	}
+
+	public boolean isFetchFinderPath() {
+		return _fetchFinderPath;
+	}
+
+	public boolean isMappingManyToMany() {
+		return Validator.isNotNull(_mappingTable);
+	}
+
+	public boolean isMappingOneToMany() {
+		return Validator.isNotNull(_mappingKey);
+	}
+
+	public boolean isOrderByAscending() {
+		return _orderByAscending;
+	}
+
+	public boolean isPrimary() {
+		return _primary;
+	}
+
+	public boolean isPrimitiveType() {
+		if (Character.isLowerCase(_type.charAt(0))) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public void setCaseSensitive(boolean caseSensitive) {
+		_caseSensitive = caseSensitive;
+	}
+
+	public void setComparator(String comparator) {
+		_comparator = comparator;
+	}
+
+	public void setConvertNull(boolean convertNull) {
+		_convertNull = convertNull;
+	}
+
+	public void setDBName(String dbName) {
+		_dbName = dbName;
+	}
+
+	public void setFetchFinderPath(boolean fetchFinderPath) {
+		_fetchFinderPath = fetchFinderPath;
+	}
+
+	public void setIdParam(String idParam) {
+		_idParam = idParam;
+	}
+
+	public void setIdType(String idType) {
+		_idType = idType;
+	}
+
+	public void setOrderByAscending(boolean orderByAscending) {
+		_orderByAscending = orderByAscending;
+	}
+
+	private boolean _caseSensitive;
+	private String _comparator;
+	private boolean _convertNull;
 	private String _dbName;
-	private String _type;
-	private boolean _primary;
-	private String _methodName;
 	private String _ejbName;
+	private boolean _fetchFinderPath;
+	private String _idParam;
+	private String _idType;
 	private String _mappingKey;
 	private String _mappingTable;
-	private boolean _caseSensitive;
+	private String _methodName;
+	private String _name;
 	private boolean _orderByAscending;
-	private String _comparator;
-	private String _idType;
-	private String _idParam;
-	private boolean _convertNull;
-	private boolean _fetchFinderPath;
+	private boolean _primary;
+	private String _type;
 
 }

@@ -1,3 +1,11 @@
+<#assign parentPKColumn = "">
+
+<#if entity.isHierarchicalTree()>
+	<#assign pkColumn = entity.getPKList()?first>
+
+	<#assign parentPKColumn = entity.getColumn("parent" + pkColumn.methodName)>
+</#if>
+
 package ${packagePath}.model.impl;
 
 <#if entity.hasCompoundPK()>
@@ -224,45 +232,31 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> {
 
 		public void set${column.methodName}(${column.type} ${column.name}) {
 			<#if column.name == "uuid">
-				if ((uuid != null) && !uuid.equals(_uuid)) {
-					_uuid = uuid;
+				_uuid = uuid;
 
-					<#if column.isFetchFinderPath()>
-						if (_originalUuid == null) {
-							_originalUuid = uuid;
-						}
-					</#if>
-				}
-			<#else>
-				if (
-
-				<#if column.isPrimitiveType()>
-					${column.name} != _${column.name}
-				<#else>
-					(${column.name} != _${column.name}) ||
-					(${column.name} != null && !${column.name}.equals(_${column.name}))
+				<#if column.isFetchFinderPath()>
+					if (_originalUuid == null) {
+						_originalUuid = uuid;
+					}
 				</#if>
+			<#else>
+				_${column.name} = ${column.name};
 
-				) {
-					_${column.name} = ${column.name};
-
-					<#if column.isFetchFinderPath()>
-						<#if column.isPrimitiveType()>
-							if (!_setOriginal${column.methodName}) {
-								_setOriginal${column.methodName} = true;
-						<#else>
-							if (_original${column.methodName} == null) {
-						</#if>
-
-							_original${column.methodName} = ${column.name};
-						}
+				<#if column.isFetchFinderPath() || ((parentPKColumn != "") && (parentPKColumn.name == column.name))>
+					<#if column.isPrimitiveType()>
+						if (!_setOriginal${column.methodName}) {
+							_setOriginal${column.methodName} = true;
+					<#else>
+						if (_original${column.methodName} == null) {
 					</#if>
 
-				}
+						_original${column.methodName} = ${column.name};
+					}
+				</#if>
 			</#if>
 		}
 
-		<#if column.isFetchFinderPath()>
+		<#if column.isFetchFinderPath() || ((parentPKColumn != "") && (parentPKColumn.name == column.name))>
 			public ${column.type} getOriginal${column.methodName}() {
 				<#if column.type == "String" && column.isConvertNull()>
 					return GetterUtil.getString(_original${column.methodName});
@@ -461,7 +455,7 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> {
 	<#list entity.regularColList as column>
 		private ${column.type} _${column.name};
 
-		<#if column.isFetchFinderPath()>
+		<#if column.isFetchFinderPath() || ((parentPKColumn != "") && (parentPKColumn.name == column.name))>
 			private ${column.type} _original${column.methodName};
 
 			<#if column.isPrimitiveType()>

@@ -37,10 +37,6 @@ public class EntityMapping {
 		_entities[1] = entity2;
 	}
 
-	public String getTable() {
-		return _table;
-	}
-
 	public String getEntity(int index) {
 		try {
 			return _entities[index];
@@ -50,7 +46,11 @@ public class EntityMapping {
 		}
 	}
 
-	private String _table;
+	public String getTable() {
+		return _table;
+	}
+
 	private String[] _entities = new String[2];
+	private String _table;
 
 }

@@ -1,3 +1,13 @@
+<#if entity.isHierarchicalTree()>
+	<#if entity.hasColumn("groupId")>
+		<#assign scopeColumn = entity.getColumn("groupId")>
+	<#else>
+		<#assign scopeColumn = entity.getColumn("companyId")>
+	</#if>
+
+	<#assign pkColumn = entity.getPKList()?first>
+</#if>
+
 package ${packagePath}.service.persistence;
 
 <#assign noSuchEntity = serviceBuilder.getNoSuchEntityException(entity)>
@@ -9,6 +19,7 @@ import ${packagePath}.model.impl.${entity.name}ModelImpl;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
+import com.liferay.portal.kernel.cache.CacheRegistry;
 import com.liferay.portal.kernel.dao.jdbc.MappingSqlQuery;
 import com.liferay.portal.kernel.dao.jdbc.MappingSqlQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.jdbc.RowMapper;
@@ -259,6 +270,10 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 			</#if>
 		</#list>
 
+		<#if entity.isHierarchicalTree()>
+			shrinkTree(${entity.varName});
+		</#if>
+
 		Session session = null;
 
 		try {
@@ -377,8 +392,10 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 	public ${entity.name} updateImpl(${packagePath}.model.${entity.name} ${entity.varName}, boolean merge) throws SystemException {
 		<#assign uniqueFinderList = entity.getUniqueFinderList()>
 
-		<#if uniqueFinderList?size != 0>
+		<#if (uniqueFinderList?size != 0) || entity.isHierarchicalTree()>
 			boolean isNew = ${entity.varName}.isNew();
+
+			${entity.name}ModelImpl ${entity.varName}ModelImpl = (${entity.name}ModelImpl)${entity.varName};
 		</#if>
 
 		<#if entity.hasUuid()>
@@ -386,6 +403,18 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 				String uuid = PortalUUIDUtil.generate();
 
 				${entity.varName}.setUuid(uuid);
+			}
+		</#if>
+
+		<#if entity.isHierarchicalTree()>
+			if (isNew) {
+				expandTree(${entity.varName});
+			}
+			else {
+				if (${entity.varName}.getParent${pkColumn.methodName}() != ${entity.varName}ModelImpl.getOriginalParent${pkColumn.methodName}()) {
+					shrinkTree(${entity.varName});
+					expandTree(${entity.varName});
+				}
 			}
 		</#if>
 
@@ -408,10 +437,6 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
 		EntityCacheUtil.putResult(${entity.name}ModelImpl.ENTITY_CACHE_ENABLED, ${entity.name}Impl.class, ${entity.varName}.getPrimaryKey(), ${entity.varName});
-
-		<#if uniqueFinderList?size != 0>
-			${entity.name}ModelImpl ${entity.varName}ModelImpl = (${entity.name}ModelImpl)${entity.varName};
-		</#if>
 
 		<#list uniqueFinderList as finder>
 			<#assign finderColsList = finder.getColumns()>
@@ -2095,6 +2120,162 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 		</#if>
 	</#list>
 
+	<#if entity.isHierarchicalTree()>
+		public void rebuildTree(long ${scopeColumn.name}, boolean force) throws SystemException {
+			if (force || (countOrphanTreeNodes(${scopeColumn.name}) > 0)) {
+				rebuildTree(${scopeColumn.name}, 0, 1);
+
+				CacheRegistry.clear(${entity.name}Impl.class.getName());
+				EntityCacheUtil.clearCache(${entity.name}Impl.class.getName());
+				FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
+				FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
+			}
+		}
+
+		protected long countOrphanTreeNodes(long ${scopeColumn.name}) throws SystemException {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				SQLQuery q = session.createSQLQuery("SELECT COUNT(*) AS COUNT_VALUE FROM ${entity.table} WHERE ${scopeColumn.name} = ? AND (left${pkColumn.methodName} = 0 OR left${pkColumn.methodName} IS NULL OR right${pkColumn.methodName} = 0 OR right${pkColumn.methodName} IS NULL)");
+
+				q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(${scopeColumn.name});
+
+				return (Long)q.uniqueResult();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		protected void expandTree(${entity.name} ${entity.varName}) throws SystemException {
+			long ${scopeColumn.name} = ${entity.varName}.get${scopeColumn.methodName}();
+
+			long lastRight${pkColumn.methodName} = getLastRight${pkColumn.methodName}(${scopeColumn.name}, ${entity.varName}.getParent${pkColumn.methodName}());
+
+			long left${pkColumn.methodName} = 2;
+			long right${pkColumn.methodName} = 3;
+
+			if (lastRight${pkColumn.methodName} > 0) {
+				left${pkColumn.methodName} = lastRight${pkColumn.methodName} + 1;
+				right${pkColumn.methodName} = lastRight${pkColumn.methodName} + 2;
+
+				expandTreeLeft${pkColumn.methodName}.expand(${scopeColumn.name}, lastRight${pkColumn.methodName});
+				expandTreeRight${pkColumn.methodName}.expand(${scopeColumn.name}, lastRight${pkColumn.methodName});
+
+				CacheRegistry.clear(${entity.name}Impl.class.getName());
+				EntityCacheUtil.clearCache(${entity.name}Impl.class.getName());
+				FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
+				FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
+			}
+
+			${entity.varName}.setLeft${pkColumn.methodName}(left${pkColumn.methodName});
+			${entity.varName}.setRight${pkColumn.methodName}(right${pkColumn.methodName});
+		}
+
+		protected long getLastRight${pkColumn.methodName}(long ${scopeColumn.name}, long parent${pkColumn.methodName}) throws SystemException {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				SQLQuery q = session.createSQLQuery("SELECT right${pkColumn.methodName} FROM ${entity.table} WHERE (${scopeColumn.name} = ?) AND (parent${pkColumn.methodName} = ?) ORDER BY ${pkColumn.name} DESC");
+
+				q.addScalar("right${pkColumn.methodName}", Type.LONG);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(${scopeColumn.name});
+				qPos.add(parent${pkColumn.methodName});
+
+				List<Long> list = (List<Long>)QueryUtil.list(q, getDialect(), 0, 1);
+
+				if (list.isEmpty()) {
+					if (parent${pkColumn.methodName} > 0) {
+						${entity.name} parent${entity.name} = findByPrimaryKey(parent${pkColumn.methodName});
+
+						return parent${entity.name}.getRight${pkColumn.methodName}();
+					}
+
+					return 0;
+				}
+				else {
+					return list.get(0);
+				}
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		protected long rebuildTree(long ${scopeColumn.name}, long parent${pkColumn.methodName}, long left${pkColumn.methodName}) throws SystemException {
+			List<Long> ${pkColumn.names} = null;
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				SQLQuery q = session.createSQLQuery("SELECT ${pkColumn.name} FROM ${entity.table} WHERE ${scopeColumn.name} = ? AND parent${pkColumn.methodName} = ? ORDER BY ${pkColumn.name} ASC");
+
+				q.addScalar("${pkColumn.name}", Type.LONG);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(${scopeColumn.name});
+				qPos.add(parent${pkColumn.methodName});
+
+				${pkColumn.names} = q.list();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+
+			long right${pkColumn.methodName} = left${pkColumn.methodName} + 1;
+
+			for (long ${pkColumn.name} : ${pkColumn.names}) {
+				right${pkColumn.methodName} = rebuildTree(${scopeColumn.name}, ${pkColumn.name}, right${pkColumn.methodName});
+			}
+
+			if (parent${pkColumn.methodName} > 0) {
+				updateTree.update(parent${pkColumn.methodName}, left${pkColumn.methodName}, right${pkColumn.methodName});
+			}
+
+			return right${pkColumn.methodName} + 1;
+		}
+
+		protected void shrinkTree(${entity.name} ${entity.varName}) throws SystemException {
+			long ${scopeColumn.name} = ${entity.varName}.get${scopeColumn.methodName}();
+
+			long left${pkColumn.methodName} = ${entity.varName}.getLeft${pkColumn.methodName}();
+			long right${pkColumn.methodName} = ${entity.varName}.getRight${pkColumn.methodName}();
+
+			long delta = (right${pkColumn.methodName} - left${pkColumn.methodName}) + 1;
+
+			shrinkTreeLeft${pkColumn.methodName}.shrink(${scopeColumn.name}, right${pkColumn.methodName}, delta);
+			shrinkTreeRight${pkColumn.methodName}.shrink(${scopeColumn.name}, right${pkColumn.methodName}, delta);
+
+			CacheRegistry.clear(${entity.name}Impl.class.getName());
+			EntityCacheUtil.clearCache(${entity.name}Impl.class.getName());
+			FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
+			FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
+		}
+	</#if>
+
 	public void afterPropertiesSet() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(${propsUtil}.get("value.object.listener.${packagePath}.model.${entity.name}")));
 
@@ -2126,6 +2307,14 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 				</#if>
 			</#if>
 		</#list>
+
+		<#if entity.isHierarchicalTree()>
+			expandTreeLeft${pkColumn.methodName} = new ExpandTreeLeft${pkColumn.methodName}(this);
+			expandTreeRight${pkColumn.methodName} = new ExpandTreeRight${pkColumn.methodName}(this);
+			shrinkTreeLeft${pkColumn.methodName} = new ShrinkTreeLeft${pkColumn.methodName}(this);
+			shrinkTreeRight${pkColumn.methodName} = new ShrinkTreeRight${pkColumn.methodName}(this);
+			updateTree = new UpdateTree(this);
+		</#if>
 	}
 
 	<#list referenceList as tempEntity>
@@ -2312,6 +2501,94 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 			</#if>
 		</#if>
 	</#list>
+
+	<#if entity.isHierarchicalTree()>
+		protected ExpandTreeLeft${pkColumn.methodName} expandTreeLeft${pkColumn.methodName};
+		protected ExpandTreeRight${pkColumn.methodName} expandTreeRight${pkColumn.methodName};
+		protected ShrinkTreeLeft${pkColumn.methodName} shrinkTreeLeft${pkColumn.methodName};
+		protected ShrinkTreeRight${pkColumn.methodName} shrinkTreeRight${pkColumn.methodName};
+		protected UpdateTree updateTree;
+
+		protected class ExpandTreeLeft${pkColumn.methodName} {
+
+			protected ExpandTreeLeft${pkColumn.methodName}(${entity.name}PersistenceImpl persistenceImpl) {
+				_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(), "UPDATE ${entity.table} SET left${pkColumn.methodName} = (left${pkColumn.methodName} + 2) WHERE (${scopeColumn.name} = ?) AND (left${pkColumn.methodName} > ?)", new int[] {Types.${serviceBuilder.getSqlType("long")}, Types.${serviceBuilder.getSqlType("long")}});
+				_persistenceImpl = persistenceImpl;
+			}
+
+			protected void expand(long ${scopeColumn.name}, long left${pkColumn.methodName}) throws SystemException {
+				_sqlUpdate.update(new Object[] {${scopeColumn.name}, left${pkColumn.methodName}});
+			}
+
+			private SqlUpdate _sqlUpdate;
+			private ${entity.name}PersistenceImpl _persistenceImpl;
+
+		}
+
+		protected class ExpandTreeRight${pkColumn.methodName} {
+
+			protected ExpandTreeRight${pkColumn.methodName}(${entity.name}PersistenceImpl persistenceImpl) {
+				_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(), "UPDATE ${entity.table} SET right${pkColumn.methodName} = (right${pkColumn.methodName} + 2) WHERE (${scopeColumn.name} = ?) AND (right${pkColumn.methodName} > ?)", new int[] {Types.${serviceBuilder.getSqlType("long")}, Types.${serviceBuilder.getSqlType("long")}});
+				_persistenceImpl = persistenceImpl;
+			}
+
+			protected void expand(long ${scopeColumn.name}, long right${pkColumn.methodName}) throws SystemException {
+				_sqlUpdate.update(new Object[] {${scopeColumn.name}, right${pkColumn.methodName}});
+			}
+
+			private SqlUpdate _sqlUpdate;
+			private ${entity.name}PersistenceImpl _persistenceImpl;
+
+		}
+
+		protected class ShrinkTreeLeft${pkColumn.methodName} {
+
+			protected ShrinkTreeLeft${pkColumn.methodName}(${entity.name}PersistenceImpl persistenceImpl) {
+				_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(), "UPDATE ${entity.table} SET left${pkColumn.methodName} = (left${pkColumn.methodName} - ?) WHERE (${scopeColumn.name} = ?) AND (left${pkColumn.methodName} > ?)", new int[] {Types.${serviceBuilder.getSqlType("long")}, Types.${serviceBuilder.getSqlType("long")}, Types.${serviceBuilder.getSqlType("long")}});
+				_persistenceImpl = persistenceImpl;
+			}
+
+			protected void shrink(long ${scopeColumn.name}, long left${pkColumn.methodName}, long delta) throws SystemException {
+				_sqlUpdate.update(new Object[] {delta, ${scopeColumn.name}, left${pkColumn.methodName}});
+			}
+
+			private SqlUpdate _sqlUpdate;
+			private ${entity.name}PersistenceImpl _persistenceImpl;
+
+		}
+
+		protected class ShrinkTreeRight${pkColumn.methodName} {
+
+			protected ShrinkTreeRight${pkColumn.methodName}(${entity.name}PersistenceImpl persistenceImpl) {
+				_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(), "UPDATE ${entity.table} SET right${pkColumn.methodName} = (right${pkColumn.methodName} - ?) WHERE (${scopeColumn.name} = ?) AND (right${pkColumn.methodName} > ?)", new int[] {Types.${serviceBuilder.getSqlType("long")}, Types.${serviceBuilder.getSqlType("long")}, Types.${serviceBuilder.getSqlType("long")}});
+				_persistenceImpl = persistenceImpl;
+			}
+
+			protected void shrink(long ${scopeColumn.name}, long right${pkColumn.methodName}, long delta) throws SystemException {
+				_sqlUpdate.update(new Object[] {delta, ${scopeColumn.name}, right${pkColumn.methodName}});
+			}
+
+			private SqlUpdate _sqlUpdate;
+			private ${entity.name}PersistenceImpl _persistenceImpl;
+
+		}
+
+		protected class UpdateTree {
+
+			protected UpdateTree(${entity.name}PersistenceImpl persistenceImpl) {
+				_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(), "UPDATE ${entity.table} SET left${pkColumn.methodName} = ?, right${pkColumn.methodName} = ? WHERE ${pkColumn.name} = ?", new int[] {Types.${serviceBuilder.getSqlType("long")}, Types.${serviceBuilder.getSqlType("long")}, Types.${serviceBuilder.getSqlType("long")}});
+				_persistenceImpl = persistenceImpl;
+			}
+
+			protected void update(long ${pkColumn.name}, long left${pkColumn.methodName}, long right${pkColumn.methodName}) throws SystemException {
+				_sqlUpdate.update(new Object[] {left${pkColumn.methodName}, right${pkColumn.methodName}, ${pkColumn.name}});
+			}
+
+			private SqlUpdate _sqlUpdate;
+			private ${entity.name}PersistenceImpl _persistenceImpl;
+
+		}
+	</#if>
 
 	<#list entity.columnList as column>
 		<#if column.isCollection()>

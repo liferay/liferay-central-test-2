@@ -50,11 +50,25 @@ public class Entity {
 
 		int pos = columnList.indexOf(new EntityColumn(name));
 
-		if (pos == -1) {
+		if (pos != -1) {
+			return columnList.get(pos);
+		}
+		else {
 			throw new RuntimeException("Column " + name + " not found");
 		}
+	}
 
-		return columnList.get(pos);
+	public static boolean hasColumn(
+		String name, List<EntityColumn> columnList) {
+
+		int pos = columnList.indexOf(new EntityColumn(name));
+
+		if (pos != -1) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	public Entity(String name) {
@@ -99,210 +113,17 @@ public class Entity {
 		_txRequiredList = txRequiredList;
 	}
 
-	public String getPackagePath() {
-		return _packagePath;
-	}
+	public boolean equals(Object obj) {
+		Entity entity = (Entity)obj;
 
-	public String getPortletName() {
-		return _portletName;
-	}
+		String name = entity.getName();
 
-	public String getPortletShortName() {
-		return _portletShortName;
-	}
-
-	public String getName() {
-		return _name;
-	}
-
-	public String getNames() {
-		return TextFormatter.formatPlural(new String(_name));
-	}
-
-	public String getVarName() {
-		return TextFormatter.format(_name, TextFormatter.I);
-	}
-
-	public String getVarNames() {
-		return TextFormatter.formatPlural(new String(getVarName()));
-	}
-
-	public String getShortName() {
-		if (_name.startsWith(_portletShortName)) {
-			return _name.substring(_portletShortName.length());
-		}
-		else {
-			return _name;
-		}
-	}
-
-	public String getSpringPropertyName() {
-		return TextFormatter.format(_name, TextFormatter.L);
-	}
-
-	public String getTable() {
-		return _table;
-	}
-
-	public boolean hasUuid() {
-		return _uuid;
-	}
-
-	public boolean hasLocalService() {
-		return _localService;
-	}
-
-	public boolean hasRemoteService() {
-		return _remoteService;
-	}
-
-	public String getPersistenceClass() {
-		return _persistenceClass;
-	}
-
-	public String getFinderClass() {
-		return _finderClass;
-	}
-
-	public boolean hasFinderClass() {
-		if (Validator.isNull(_finderClass)) {
-			return false;
-		}
-		else {
-			return true;
-		}
-	}
-
-	public String getDataSource() {
-		return _dataSource;
-	}
-
-	public boolean isDefaultDataSource() {
-		if (_dataSource.equals(DEFAULT_DATA_SOURCE)) {
+		if (_name.equals(name)) {
 			return true;
 		}
 		else {
 			return false;
 		}
-	}
-
-	public String getSessionFactory() {
-		return _sessionFactory;
-	}
-
-	public boolean isDefaultSessionFactory() {
-		if (_sessionFactory.equals(DEFAULT_SESSION_FACTORY)) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	public String getTXManager() {
-		return _txManager;
-	}
-
-	public boolean isDefaultTXManager() {
-		if (_txManager.equals(DEFAULT_TX_MANAGER)) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	public boolean isCacheEnabled() {
-		return _cacheEnabled;
-	}
-
-	public String getPKClassName() {
-		if (hasCompoundPK()) {
-			return _name + "PK";
-		}
-		else {
-			EntityColumn col = _pkList.get(0);
-
-			return col.getType();
-		}
-	}
-
-	public String getPKVarName() {
-		if (hasCompoundPK()) {
-			return getVarName() + "PK";
-		}
-		else {
-			EntityColumn col = _pkList.get(0);
-
-			return col.getName();
-		}
-	}
-
-	public boolean hasPrimitivePK() {
-		if (hasCompoundPK()) {
-			return false;
-		}
-		else {
-			EntityColumn col = _pkList.get(0);
-
-			if (col.isPrimitiveType()) {
-				return true;
-			}
-			else {
-				return false;
-			}
-		}
-	}
-
-	public boolean hasCompoundPK() {
-		if (_pkList.size() > 1) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	public List<EntityColumn> getPKList() {
-		return _pkList;
-	}
-
-	public List<EntityColumn> getRegularColList() {
-		return _regularColList;
-	}
-
-	public List<EntityColumn> getCollectionList() {
-		return _collectionList;
-	}
-
-	public List<EntityColumn> getColumnList() {
-		return _columnList;
-	}
-
-	public boolean hasColumns() {
-		if ((_columnList == null) || (_columnList.size() == 0)) {
-			return false;
-		}
-		else {
-			return true;
-		}
-	}
-
-	public EntityOrder getOrder() {
-		return _order;
-	}
-
-	public boolean isOrdered() {
-		if (_order != null) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	public List<EntityFinder> getFinderList() {
-		return _finderList;
 	}
 
 	public List<EntityFinder> getCollectionFinderList() {
@@ -321,36 +142,8 @@ public class Entity {
 		return finderList;
 	}
 
-	public List<EntityFinder> getUniqueFinderList() {
-		List<EntityFinder> finderList = ListUtil.copy(_finderList);
-
-		Iterator<EntityFinder> itr = finderList.iterator();
-
-		while (itr.hasNext()) {
-			EntityFinder finder = itr.next();
-
-			if (finder.isCollection()) {
-				itr.remove();
-			}
-		}
-
-		return finderList;
-	}
-
-	public boolean isPortalReference() {
-		return _portalReference;
-	}
-
-	public void setPortalReference(boolean portalReference) {
-		_portalReference = portalReference;
-	}
-
-	public List<Entity> getReferenceList() {
-		return _referenceList;
-	}
-
-	public List<String> getTxRequiredList() {
-		return _txRequiredList;
+	public List<EntityColumn> getCollectionList() {
+		return _collectionList;
 	}
 
 	public EntityColumn getColumn(String name) {
@@ -371,12 +164,152 @@ public class Entity {
 		return null;
 	}
 
-	public boolean equals(Object obj) {
-		Entity entity = (Entity)obj;
+	public List<EntityColumn> getColumnList() {
+		return _columnList;
+	}
 
-		String name = entity.getName();
+	public String getDataSource() {
+		return _dataSource;
+	}
 
-		if (_name.equals(name)) {
+	public String getFinderClass() {
+		return _finderClass;
+	}
+
+	public List<EntityFinder> getFinderList() {
+		return _finderList;
+	}
+
+	public String getName() {
+		return _name;
+	}
+
+	public String getNames() {
+		return TextFormatter.formatPlural(new String(_name));
+	}
+
+	public EntityOrder getOrder() {
+		return _order;
+	}
+
+	public String getPackagePath() {
+		return _packagePath;
+	}
+
+	public String getPersistenceClass() {
+		return _persistenceClass;
+	}
+
+	public String getPKClassName() {
+		if (hasCompoundPK()) {
+			return _name + "PK";
+		}
+		else {
+			EntityColumn col = _pkList.get(0);
+
+			return col.getType();
+		}
+	}
+
+	public List<EntityColumn> getPKList() {
+		return _pkList;
+	}
+
+	public String getPKVarName() {
+		if (hasCompoundPK()) {
+			return getVarName() + "PK";
+		}
+		else {
+			EntityColumn col = _pkList.get(0);
+
+			return col.getName();
+		}
+	}
+
+	public String getPortletName() {
+		return _portletName;
+	}
+
+	public String getPortletShortName() {
+		return _portletShortName;
+	}
+
+	public List<Entity> getReferenceList() {
+		return _referenceList;
+	}
+
+	public List<EntityColumn> getRegularColList() {
+		return _regularColList;
+	}
+
+	public String getSessionFactory() {
+		return _sessionFactory;
+	}
+
+	public String getShortName() {
+		if (_name.startsWith(_portletShortName)) {
+			return _name.substring(_portletShortName.length());
+		}
+		else {
+			return _name;
+		}
+	}
+
+	public String getSpringPropertyName() {
+		return TextFormatter.format(_name, TextFormatter.L);
+	}
+
+	public String getTable() {
+		return _table;
+	}
+
+	public String getTXManager() {
+		return _txManager;
+	}
+
+	public List<String> getTxRequiredList() {
+		return _txRequiredList;
+	}
+
+	public List<EntityFinder> getUniqueFinderList() {
+		List<EntityFinder> finderList = ListUtil.copy(_finderList);
+
+		Iterator<EntityFinder> itr = finderList.iterator();
+
+		while (itr.hasNext()) {
+			EntityFinder finder = itr.next();
+
+			if (finder.isCollection()) {
+				itr.remove();
+			}
+		}
+
+		return finderList;
+	}
+
+	public String getVarName() {
+		return TextFormatter.format(_name, TextFormatter.I);
+	}
+
+	public String getVarNames() {
+		return TextFormatter.formatPlural(new String(getVarName()));
+	}
+
+	public boolean hasColumn(String name) {
+		return hasColumn(name, _columnList);
+	}
+
+	public boolean hasColumns() {
+		if ((_columnList == null) || (_columnList.size() == 0)) {
+			return false;
+		}
+		else {
+			return true;
+		}
+	}
+
+	public boolean hasCompoundPK() {
+		if (_pkList.size() > 1) {
 			return true;
 		}
 		else {
@@ -384,28 +317,134 @@ public class Entity {
 		}
 	}
 
-	private String _packagePath;
-	private String _portletName;
-	private String _portletShortName;
-	private String _name;
-	private String _table;
-	private boolean _uuid;
-	private boolean _localService;
-	private boolean _remoteService;
-	private String _persistenceClass;
-	private String _finderClass;
-	private String _dataSource;
-	private String _sessionFactory;
-	private String _txManager;
+	public boolean hasFinderClass() {
+		if (Validator.isNull(_finderClass)) {
+			return false;
+		}
+		else {
+			return true;
+		}
+	}
+
+	public boolean hasLocalService() {
+		return _localService;
+	}
+
+	public boolean hasPrimitivePK() {
+		if (hasCompoundPK()) {
+			return false;
+		}
+		else {
+			EntityColumn col = _pkList.get(0);
+
+			if (col.isPrimitiveType()) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+	}
+
+	public boolean hasRemoteService() {
+		return _remoteService;
+	}
+
+	public boolean hasUuid() {
+		return _uuid;
+	}
+
+	public boolean isCacheEnabled() {
+		return _cacheEnabled;
+	}
+
+	public boolean isDefaultDataSource() {
+		if (_dataSource.equals(DEFAULT_DATA_SOURCE)) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public boolean isDefaultSessionFactory() {
+		if (_sessionFactory.equals(DEFAULT_SESSION_FACTORY)) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public boolean isDefaultTXManager() {
+		if (_txManager.equals(DEFAULT_TX_MANAGER)) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public boolean isHierarchicalTree() {
+		if (!hasPrimitivePK()) {
+			return false;
+		}
+
+		EntityColumn col = _pkList.get(0);
+
+		if ((_columnList.indexOf(
+				new EntityColumn("parent" + col.getMethodName())) != -1) &&
+			(_columnList.indexOf(
+				new EntityColumn("left" + col.getMethodName())) != -1) &&
+			(_columnList.indexOf(
+				new EntityColumn("right" + col.getMethodName())) != -1)) {
+
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public boolean isOrdered() {
+		if (_order != null) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public boolean isPortalReference() {
+		return _portalReference;
+	}
+
+	public void setPortalReference(boolean portalReference) {
+		_portalReference = portalReference;
+	}
+
 	private boolean _cacheEnabled;
-	private List<EntityColumn> _pkList;
-	private List<EntityColumn> _regularColList;
 	private List<EntityColumn> _collectionList;
 	private List<EntityColumn> _columnList;
-	private EntityOrder _order;
+	private String _dataSource;
+	private String _finderClass;
 	private List<EntityFinder> _finderList;
+	private boolean _localService;
+	private String _name;
+	private EntityOrder _order;
+	private String _packagePath;
+	private String _persistenceClass;
+	private List<EntityColumn> _pkList;
 	private boolean _portalReference;
+	private String _portletName;
+	private String _portletShortName;
 	private List<Entity> _referenceList;
+	private List<EntityColumn> _regularColList;
+	private boolean _remoteService;
+	private String _sessionFactory;
+	private String _table;
+	private String _txManager;
 	private List<String> _txRequiredList;
+	private boolean _uuid;
 
 }
