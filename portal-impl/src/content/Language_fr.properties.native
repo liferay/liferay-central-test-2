@@ -623,6 +623,7 @@ an-error-occurred-while-processing-your-xml-and-xsl=Une erreur s'est produite en
 an-error-occurred-while-resetting-your-preferences=Une erreur s'est produite lors de la remise à zéro de vos préférences.
 an-error-occurred-while-retrieving-available-plugins=Une erreur s'est produite lors de la recherche des plugins disponibles.
 an-error-occurred-while-sending-the-form-information=Une erreur s'est produite tout en envoyant l'information de forme.
+an-error-occurred-while-sending-the-report.-please-try-again-in-a-few-minutes=Une erreur s'est produite tout en envoyant le rapport. Essayez svp encore en quelques minutes.
 an-error-occurred-while-updating-your-preferences=Une erreur s'est produite lors de la mise à jour de vos préférences.
 an-unexpected-database-error-occurred-while-querying-the-given-city-and-state=Une erreur inattendue de base de données s'est produite
 an-unexpected-database-error-occurred-while-querying-the-given-street-city-and-state=Une erreur inattendue de base de données s'est produite

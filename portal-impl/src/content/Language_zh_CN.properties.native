@@ -623,6 +623,7 @@ an-error-occurred-while-processing-your-xml-and-xsl=处理 XML 和 XSL 时发生
 an-error-occurred-while-resetting-your-preferences=重置您的首选项时出错。
 an-error-occurred-while-retrieving-available-plugins=获取可用插件时出错。
 an-error-occurred-while-sending-the-form-information=发送表单信息时发生错误。
+an-error-occurred-while-sending-the-report.-please-try-again-in-a-few-minutes=错误生成了，当送报告时。 请再试试在几分钟之内。
 an-error-occurred-while-updating-your-preferences=更新您的首选项时出错。
 an-unexpected-database-error-occurred-while-querying-the-given-city-and-state=查询指定的城市和州时发生数据库异常错误。
 an-unexpected-database-error-occurred-while-querying-the-given-street-city-and-state=查询指定的街道、城市和州时发生数据库异常错误。

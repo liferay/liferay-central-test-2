@@ -623,6 +623,7 @@ an-error-occurred-while-processing-your-xml-and-xsl=XMLとXSLの処理中にエ�
 an-error-occurred-while-resetting-your-preferences=設定のリセット中にエラーが発生しました。
 an-error-occurred-while-retrieving-available-plugins=利用可能プラグインの検索中にエラーが発生しました。
 an-error-occurred-while-sending-the-form-information=フォームの情報を送信中にエラーが発生しました。
+an-error-occurred-while-sending-the-report.-please-try-again-in-a-few-minutes=間違いはレポートを送っている間生じた。 数分の内にもう一度試しなさい。
 an-error-occurred-while-updating-your-preferences=設定の更新中にエラーが発生しました。
 an-unexpected-database-error-occurred-while-querying-the-given-city-and-state=入力した都市と州の検索中に予期せぬデータベースエラーが発生しました。
 an-unexpected-database-error-occurred-while-querying-the-given-street-city-and-state=入力した通り名や都市、州の検索中に予期せぬデータベースエラーが発生しました。

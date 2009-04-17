@@ -623,6 +623,7 @@ an-error-occurred-while-processing-your-xml-and-xsl=XML XSL                     
 an-error-occurred-while-resetting-your-preferences=너의 특혜를 다시 놓고 있는 동안 과실은 일어났다.
 an-error-occurred-while-retrieving-available-plugins=유효한plugins을 만회하고 있는 동안 과실은 일어났다.
 an-error-occurred-while-sending-the-form-information=과실은 양식 정보를 보내고 있는 동안 발생했다.
+an-error-occurred-while-sending-the-report.-please-try-again-in-a-few-minutes=과실은 보고를 보내고 있는 동안 발생했다. 재시도 해주십시오 즉시.
 an-error-occurred-while-updating-your-preferences=너의 특혜를 새롭게 하고 있는 동안 과실은 일어났다.
 an-unexpected-database-error-occurred-while-querying-the-given-city-and-state=준 도시 및 국가를 질문하고 있는 동안 의외
 an-unexpected-database-error-occurred-while-querying-the-given-street-city-and-state=준 거리, 도시, 및 국가를 질문하고 있는 동안

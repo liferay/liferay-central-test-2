@@ -623,6 +623,7 @@ an-error-occurred-while-processing-your-xml-and-xsl=Si è verificato un errore n
 an-error-occurred-while-resetting-your-preferences=Si è verificato un errore nella reimpostazione delle tue preferenze.
 an-error-occurred-while-retrieving-available-plugins=Si è verificato un errore nel recupero dei plugins disponibili.
 an-error-occurred-while-sending-the-form-information=Si è verificato un errore nell'invio del modulo delle informazioni.
+an-error-occurred-while-sending-the-report.-please-try-again-in-a-few-minutes=Un errore ha accaduto mentre trasmetteva il rapporto. Provi prego ancora in alcuni minuti.
 an-error-occurred-while-updating-your-preferences=Si è verificato un errore nell'aggiornamento delle tue preferenze.
 an-unexpected-database-error-occurred-while-querying-the-given-city-and-state=Si è verificato un errore inatteso nel database cercando la città e lo stato indicati
 an-unexpected-database-error-occurred-while-querying-the-given-street-city-and-state=Si è verificato un errore inatteso nel database cercando la via, la città e lo stato indicati

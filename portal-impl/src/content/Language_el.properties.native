@@ -623,6 +623,7 @@ an-error-occurred-while-processing-your-xml-and-xsl=XML     XSL    .
 an-error-occurred-while-resetting-your-preferences=Ένα λάθος εμφανίστηκε επαναρυθμίζοντας τις προτιμήσεις σας.
 an-error-occurred-while-retrieving-available-plugins=Ένα λάθος εμφανίστηκε ανακτώντας τα διαθέσιμα plugins.
 an-error-occurred-while-sending-the-form-information=Ένα λάθος εμφανίστηκε στέλνοντας τις πληροφορίες μορφής.
+an-error-occurred-while-sending-the-report.-please-try-again-in-a-few-minutes=Ένα λάθος εμφανίστηκε στέλνοντας την έκθεση. Παρακαλώ προσπαθήστε πάλι σε λεπτά.
 an-error-occurred-while-updating-your-preferences=Ένα λάθος εμφανίστηκε ενημερώνοντας τις προτιμήσεις σας.
 an-unexpected-database-error-occurred-while-querying-the-given-city-and-state=Ένα απροσδόκητο σφάλμα βάσης δεδομένων εμφανίστηκε κατα την αναζήτηση της δοσμένης πόλης και κράτους.
 an-unexpected-database-error-occurred-while-querying-the-given-street-city-and-state=Ένα απροσδόκητο σφάλμα βάσης δεδομένων εμφανίστηκε κατα την αναζήτηση της δοσμένης οδού, πόλης, και το κράτους.
