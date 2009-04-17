@@ -96,5 +96,6 @@ else {
 
 <%!
 private static final String[] _ASSET_TYPES = {BlogsEntry.class.getName(), BookmarksEntry.class.getName(), IGImage.class.getName(), DLFileEntry.class.getName(), MBMessage.class.getName(), WikiPage.class.getName()};
+
 private static final String[] _ASSET_TITLES = {"blogs", "bookmarks", "images", "documents", "threads", "wiki-pages"};
 %>
