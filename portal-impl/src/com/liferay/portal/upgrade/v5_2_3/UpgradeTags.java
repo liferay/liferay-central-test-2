@@ -106,11 +106,11 @@ public class UpgradeTags extends UpgradeProcess {
 		if (isSupportsUpdateWithInnerJoin()) {
 			sb.append("update TagsAsset inner join ");
 			sb.append(tableName);
-			sb.append(" on TagsAsset.classPK = ");
+			sb.append(" on ");
 			sb.append(tableName);
 			sb.append(".");
 			sb.append(columnClassPK);
-			sb.append(" set TagsAsset.viewCount = ");
+			sb.append(" = TagsAsset.classPK set TagsAsset.viewCount = ");
 			sb.append(tableName);
 			sb.append(".");
 			sb.append(columnViewCount);
