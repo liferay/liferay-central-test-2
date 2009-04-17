@@ -23,7 +23,6 @@
 %>
 
 <%@ page import="com.liferay.portal.kernel.servlet.HttpHeaders" %>
-<%@ page import="com.liferay.portal.kernel.util.StaticResourcesUtil" %>
 <%@ page import="com.liferay.portal.model.LayoutSet" %>
 <%@ page import="com.liferay.portal.util.PortalUtil" %>
 <%@ page import="com.liferay.portal.util.WebKeys" %>
@@ -53,14 +52,7 @@ if (!request.isRequestedSessionIdFromCookie()) {
 
 response.setHeader(HttpHeaders.CONNECTION, HttpHeaders.CONNECTION_CLOSE_VALUE);
 
-if (StaticResourcesUtil.isStaticPath(PortalUtil.getCurrentURL(request))) {
-	response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-}
-else {
-	response.setHeader(HttpHeaders.LOCATION, redirect);
-
-	response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
-}
+response.setStatus(HttpServletResponse.SC_NOT_FOUND);
 %>
 
 <html>
