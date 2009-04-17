@@ -362,6 +362,12 @@
 			<finder-column name="liveGroupId" />
 			<finder-column name="name" />
 		</finder>
+		<finder name="C_C_L_N" return-type="Group" unique="true">
+			<finder-column name="companyId" />
+			<finder-column name="classNameId" />
+			<finder-column name="liveGroupId" />
+			<finder-column name="name" />
+		</finder>
 
 		<!-- References -->
 

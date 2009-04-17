@@ -112,6 +112,7 @@ create unique index IX_B5984EDA on ExpandoValue (tableId, columnId, rowId_);
 create index IX_B71E92D5 on ExpandoValue (tableId, rowId_);
 
 create unique index IX_D0D5E397 on Group_ (companyId, classNameId, classPK);
+create unique index IX_5DE0BE11 on Group_ (companyId, classNameId, liveGroupId, name);
 create unique index IX_5BDDB872 on Group_ (companyId, friendlyURL);
 create unique index IX_BBCA55B on Group_ (companyId, liveGroupId, name);
 create unique index IX_5AA68501 on Group_ (companyId, name);

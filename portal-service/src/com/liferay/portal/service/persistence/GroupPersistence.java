@@ -167,6 +167,19 @@ public interface GroupPersistence extends BasePersistence {
 		long liveGroupId, java.lang.String name, boolean retrieveFromCache)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.Group findByC_C_L_N(long companyId,
+		long classNameId, long liveGroupId, java.lang.String name)
+		throws com.liferay.portal.NoSuchGroupException,
+			com.liferay.portal.SystemException;
+
+	public com.liferay.portal.model.Group fetchByC_C_L_N(long companyId,
+		long classNameId, long liveGroupId, java.lang.String name)
+		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portal.model.Group fetchByC_C_L_N(long companyId,
+		long classNameId, long liveGroupId, java.lang.String name,
+		boolean retrieveFromCache) throws com.liferay.portal.SystemException;
+
 	public java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException;
@@ -209,6 +222,11 @@ public interface GroupPersistence extends BasePersistence {
 		throws com.liferay.portal.NoSuchGroupException,
 			com.liferay.portal.SystemException;
 
+	public void removeByC_C_L_N(long companyId, long classNameId,
+		long liveGroupId, java.lang.String name)
+		throws com.liferay.portal.NoSuchGroupException,
+			com.liferay.portal.SystemException;
+
 	public void removeAll() throws com.liferay.portal.SystemException;
 
 	public int countByLiveGroupId(long liveGroupId)
@@ -228,6 +246,10 @@ public interface GroupPersistence extends BasePersistence {
 
 	public int countByC_L_N(long companyId, long liveGroupId,
 		java.lang.String name) throws com.liferay.portal.SystemException;
+
+	public int countByC_C_L_N(long companyId, long classNameId,
+		long liveGroupId, java.lang.String name)
+		throws com.liferay.portal.SystemException;
 
 	public int countAll() throws com.liferay.portal.SystemException;
 
