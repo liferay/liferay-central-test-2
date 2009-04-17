@@ -68,7 +68,7 @@ public class ClassUtil {
 		while (st.nextToken() != StreamTokenizer.TT_EOF) {
 			if (st.ttype == StreamTokenizer.TT_WORD) {
 				if (st.sval.equals("class") || st.sval.equals("interface") ||
-					st.sval.equals("@interface")) {
+					st.sval.equals("@interface") || st.sval.equals("enum")) {
 
 					break;
 				}
