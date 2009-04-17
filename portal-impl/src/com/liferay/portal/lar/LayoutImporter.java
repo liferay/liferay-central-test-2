@@ -81,6 +81,7 @@ import com.liferay.portal.theme.ThemeLoaderFactory;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsValues;
+import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.tags.DuplicateEntryException;
 import com.liferay.portlet.tags.DuplicateVocabularyException;
 import com.liferay.portlet.tags.model.TagsEntryConstants;
@@ -309,6 +310,8 @@ public class LayoutImporter {
 		List<Layout> previousLayouts = LayoutUtil.findByG_P(
 			groupId, privateLayout);
 
+		List<Layout> newLayouts = new ArrayList<Layout>();
+
 		Set<Long> newLayoutIds = new HashSet<Long>();
 
 		Map<Long, Long> newLayoutIdPlidMap =
@@ -504,6 +507,8 @@ public class LayoutImporter {
 
 			newLayoutIds.add(layoutId);
 
+			newLayouts.add(layout);
+
 			Element permissionsEl = layoutEl.element("permissions");
 
 			// Layout permissions
@@ -687,6 +692,27 @@ public class LayoutImporter {
 
 		if (_log.isInfoEnabled()) {
 			_log.info("Importing layouts takes " + stopWatch.getTime() + " ms");
+		}
+
+		// Web content layout type
+
+		for (Layout layout : newLayouts) {
+			UnicodeProperties typeSettingsProperties =
+				layout.getTypeSettingsProperties();
+
+			String articleId = typeSettingsProperties.getProperty("article-id");
+
+			if (Validator.isNotNull(articleId)) {
+				Map<String, String> articleIds =
+					(Map<String, String>)context.getNewPrimaryKeysMap(
+						JournalArticle.class);
+
+				typeSettingsProperties.setProperty(
+					"article-id",
+					MapUtil.getString(articleIds, articleId, articleId));
+
+				LayoutUtil.update(layout, false);
+			}
 		}
 	}
 
