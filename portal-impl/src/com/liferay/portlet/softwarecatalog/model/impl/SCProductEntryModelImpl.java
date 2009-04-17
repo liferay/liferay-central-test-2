@@ -183,9 +183,7 @@ public class SCProductEntryModelImpl extends BaseModelImpl<SCProductEntry> {
 	}
 
 	public void setProductEntryId(long productEntryId) {
-		if (productEntryId != _productEntryId) {
-			_productEntryId = productEntryId;
-		}
+		_productEntryId = productEntryId;
 	}
 
 	public long getGroupId() {
@@ -193,9 +191,7 @@ public class SCProductEntryModelImpl extends BaseModelImpl<SCProductEntry> {
 	}
 
 	public void setGroupId(long groupId) {
-		if (groupId != _groupId) {
-			_groupId = groupId;
-		}
+		_groupId = groupId;
 	}
 
 	public long getCompanyId() {
@@ -203,9 +199,7 @@ public class SCProductEntryModelImpl extends BaseModelImpl<SCProductEntry> {
 	}
 
 	public void setCompanyId(long companyId) {
-		if (companyId != _companyId) {
-			_companyId = companyId;
-		}
+		_companyId = companyId;
 	}
 
 	public long getUserId() {
@@ -213,9 +207,7 @@ public class SCProductEntryModelImpl extends BaseModelImpl<SCProductEntry> {
 	}
 
 	public void setUserId(long userId) {
-		if (userId != _userId) {
-			_userId = userId;
-		}
+		_userId = userId;
 	}
 
 	public String getUserName() {
@@ -223,10 +215,7 @@ public class SCProductEntryModelImpl extends BaseModelImpl<SCProductEntry> {
 	}
 
 	public void setUserName(String userName) {
-		if ((userName != _userName) ||
-				((userName != null) && !userName.equals(_userName))) {
-			_userName = userName;
-		}
+		_userName = userName;
 	}
 
 	public Date getCreateDate() {
@@ -234,10 +223,7 @@ public class SCProductEntryModelImpl extends BaseModelImpl<SCProductEntry> {
 	}
 
 	public void setCreateDate(Date createDate) {
-		if ((createDate != _createDate) ||
-				((createDate != null) && !createDate.equals(_createDate))) {
-			_createDate = createDate;
-		}
+		_createDate = createDate;
 	}
 
 	public Date getModifiedDate() {
@@ -245,10 +231,7 @@ public class SCProductEntryModelImpl extends BaseModelImpl<SCProductEntry> {
 	}
 
 	public void setModifiedDate(Date modifiedDate) {
-		if ((modifiedDate != _modifiedDate) ||
-				((modifiedDate != null) && !modifiedDate.equals(_modifiedDate))) {
-			_modifiedDate = modifiedDate;
-		}
+		_modifiedDate = modifiedDate;
 	}
 
 	public String getName() {
@@ -256,9 +239,7 @@ public class SCProductEntryModelImpl extends BaseModelImpl<SCProductEntry> {
 	}
 
 	public void setName(String name) {
-		if ((name != _name) || ((name != null) && !name.equals(_name))) {
-			_name = name;
-		}
+		_name = name;
 	}
 
 	public String getType() {
@@ -266,9 +247,7 @@ public class SCProductEntryModelImpl extends BaseModelImpl<SCProductEntry> {
 	}
 
 	public void setType(String type) {
-		if ((type != _type) || ((type != null) && !type.equals(_type))) {
-			_type = type;
-		}
+		_type = type;
 	}
 
 	public String getTags() {
@@ -276,9 +255,7 @@ public class SCProductEntryModelImpl extends BaseModelImpl<SCProductEntry> {
 	}
 
 	public void setTags(String tags) {
-		if ((tags != _tags) || ((tags != null) && !tags.equals(_tags))) {
-			_tags = tags;
-		}
+		_tags = tags;
 	}
 
 	public String getShortDescription() {
@@ -286,11 +263,7 @@ public class SCProductEntryModelImpl extends BaseModelImpl<SCProductEntry> {
 	}
 
 	public void setShortDescription(String shortDescription) {
-		if ((shortDescription != _shortDescription) ||
-				((shortDescription != null) &&
-				!shortDescription.equals(_shortDescription))) {
-			_shortDescription = shortDescription;
-		}
+		_shortDescription = shortDescription;
 	}
 
 	public String getLongDescription() {
@@ -298,11 +271,7 @@ public class SCProductEntryModelImpl extends BaseModelImpl<SCProductEntry> {
 	}
 
 	public void setLongDescription(String longDescription) {
-		if ((longDescription != _longDescription) ||
-				((longDescription != null) &&
-				!longDescription.equals(_longDescription))) {
-			_longDescription = longDescription;
-		}
+		_longDescription = longDescription;
 	}
 
 	public String getPageURL() {
@@ -310,10 +279,7 @@ public class SCProductEntryModelImpl extends BaseModelImpl<SCProductEntry> {
 	}
 
 	public void setPageURL(String pageURL) {
-		if ((pageURL != _pageURL) ||
-				((pageURL != null) && !pageURL.equals(_pageURL))) {
-			_pageURL = pageURL;
-		}
+		_pageURL = pageURL;
 	}
 
 	public String getAuthor() {
@@ -321,10 +287,7 @@ public class SCProductEntryModelImpl extends BaseModelImpl<SCProductEntry> {
 	}
 
 	public void setAuthor(String author) {
-		if ((author != _author) ||
-				((author != null) && !author.equals(_author))) {
-			_author = author;
-		}
+		_author = author;
 	}
 
 	public String getRepoGroupId() {
@@ -332,13 +295,10 @@ public class SCProductEntryModelImpl extends BaseModelImpl<SCProductEntry> {
 	}
 
 	public void setRepoGroupId(String repoGroupId) {
-		if ((repoGroupId != _repoGroupId) ||
-				((repoGroupId != null) && !repoGroupId.equals(_repoGroupId))) {
-			_repoGroupId = repoGroupId;
+		_repoGroupId = repoGroupId;
 
-			if (_originalRepoGroupId == null) {
-				_originalRepoGroupId = repoGroupId;
-			}
+		if (_originalRepoGroupId == null) {
+			_originalRepoGroupId = repoGroupId;
 		}
 	}
 
@@ -351,14 +311,10 @@ public class SCProductEntryModelImpl extends BaseModelImpl<SCProductEntry> {
 	}
 
 	public void setRepoArtifactId(String repoArtifactId) {
-		if ((repoArtifactId != _repoArtifactId) ||
-				((repoArtifactId != null) &&
-				!repoArtifactId.equals(_repoArtifactId))) {
-			_repoArtifactId = repoArtifactId;
+		_repoArtifactId = repoArtifactId;
 
-			if (_originalRepoArtifactId == null) {
-				_originalRepoArtifactId = repoArtifactId;
-			}
+		if (_originalRepoArtifactId == null) {
+			_originalRepoArtifactId = repoArtifactId;
 		}
 	}
 

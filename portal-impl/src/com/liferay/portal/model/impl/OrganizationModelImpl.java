@@ -72,6 +72,12 @@ public class OrganizationModelImpl extends BaseModelImpl<Organization> {
 			{ "parentOrganizationId", new Integer(Types.BIGINT) },
 			
 
+			{ "leftOrganizationId", new Integer(Types.BIGINT) },
+			
+
+			{ "rightOrganizationId", new Integer(Types.BIGINT) },
+			
+
 			{ "name", new Integer(Types.VARCHAR) },
 			
 
@@ -92,7 +98,7 @@ public class OrganizationModelImpl extends BaseModelImpl<Organization> {
 
 			{ "comments", new Integer(Types.VARCHAR) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table Organization_ (organizationId LONG not null primary key,companyId LONG,parentOrganizationId LONG,name VARCHAR(100) null,type_ VARCHAR(75) null,recursable BOOLEAN,regionId LONG,countryId LONG,statusId INTEGER,comments STRING null)";
+	public static final String TABLE_SQL_CREATE = "create table Organization_ (organizationId LONG not null primary key,companyId LONG,parentOrganizationId LONG,leftOrganizationId LONG,rightOrganizationId LONG,name VARCHAR(100) null,type_ VARCHAR(75) null,recursable BOOLEAN,regionId LONG,countryId LONG,statusId INTEGER,comments STRING null)";
 	public static final String TABLE_SQL_DROP = "drop table Organization_";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -110,6 +116,8 @@ public class OrganizationModelImpl extends BaseModelImpl<Organization> {
 		model.setOrganizationId(soapModel.getOrganizationId());
 		model.setCompanyId(soapModel.getCompanyId());
 		model.setParentOrganizationId(soapModel.getParentOrganizationId());
+		model.setLeftOrganizationId(soapModel.getLeftOrganizationId());
+		model.setRightOrganizationId(soapModel.getRightOrganizationId());
 		model.setName(soapModel.getName());
 		model.setType(soapModel.getType());
 		model.setRecursable(soapModel.getRecursable());
@@ -156,9 +164,7 @@ public class OrganizationModelImpl extends BaseModelImpl<Organization> {
 	}
 
 	public void setOrganizationId(long organizationId) {
-		if (organizationId != _organizationId) {
-			_organizationId = organizationId;
-		}
+		_organizationId = organizationId;
 	}
 
 	public long getCompanyId() {
@@ -166,14 +172,12 @@ public class OrganizationModelImpl extends BaseModelImpl<Organization> {
 	}
 
 	public void setCompanyId(long companyId) {
-		if (companyId != _companyId) {
-			_companyId = companyId;
+		_companyId = companyId;
 
-			if (!_setOriginalCompanyId) {
-				_setOriginalCompanyId = true;
+		if (!_setOriginalCompanyId) {
+			_setOriginalCompanyId = true;
 
-				_originalCompanyId = companyId;
-			}
+			_originalCompanyId = companyId;
 		}
 	}
 
@@ -186,9 +190,33 @@ public class OrganizationModelImpl extends BaseModelImpl<Organization> {
 	}
 
 	public void setParentOrganizationId(long parentOrganizationId) {
-		if (parentOrganizationId != _parentOrganizationId) {
-			_parentOrganizationId = parentOrganizationId;
+		_parentOrganizationId = parentOrganizationId;
+
+		if (!_setOriginalParentOrganizationId) {
+			_setOriginalParentOrganizationId = true;
+
+			_originalParentOrganizationId = parentOrganizationId;
 		}
+	}
+
+	public long getOriginalParentOrganizationId() {
+		return _originalParentOrganizationId;
+	}
+
+	public long getLeftOrganizationId() {
+		return _leftOrganizationId;
+	}
+
+	public void setLeftOrganizationId(long leftOrganizationId) {
+		_leftOrganizationId = leftOrganizationId;
+	}
+
+	public long getRightOrganizationId() {
+		return _rightOrganizationId;
+	}
+
+	public void setRightOrganizationId(long rightOrganizationId) {
+		_rightOrganizationId = rightOrganizationId;
 	}
 
 	public String getName() {
@@ -196,12 +224,10 @@ public class OrganizationModelImpl extends BaseModelImpl<Organization> {
 	}
 
 	public void setName(String name) {
-		if ((name != _name) || ((name != null) && !name.equals(_name))) {
-			_name = name;
+		_name = name;
 
-			if (_originalName == null) {
-				_originalName = name;
-			}
+		if (_originalName == null) {
+			_originalName = name;
 		}
 	}
 
@@ -214,9 +240,7 @@ public class OrganizationModelImpl extends BaseModelImpl<Organization> {
 	}
 
 	public void setType(String type) {
-		if ((type != _type) || ((type != null) && !type.equals(_type))) {
-			_type = type;
-		}
+		_type = type;
 	}
 
 	public boolean getRecursable() {
@@ -228,9 +252,7 @@ public class OrganizationModelImpl extends BaseModelImpl<Organization> {
 	}
 
 	public void setRecursable(boolean recursable) {
-		if (recursable != _recursable) {
-			_recursable = recursable;
-		}
+		_recursable = recursable;
 	}
 
 	public long getRegionId() {
@@ -238,9 +260,7 @@ public class OrganizationModelImpl extends BaseModelImpl<Organization> {
 	}
 
 	public void setRegionId(long regionId) {
-		if (regionId != _regionId) {
-			_regionId = regionId;
-		}
+		_regionId = regionId;
 	}
 
 	public long getCountryId() {
@@ -248,9 +268,7 @@ public class OrganizationModelImpl extends BaseModelImpl<Organization> {
 	}
 
 	public void setCountryId(long countryId) {
-		if (countryId != _countryId) {
-			_countryId = countryId;
-		}
+		_countryId = countryId;
 	}
 
 	public int getStatusId() {
@@ -258,9 +276,7 @@ public class OrganizationModelImpl extends BaseModelImpl<Organization> {
 	}
 
 	public void setStatusId(int statusId) {
-		if (statusId != _statusId) {
-			_statusId = statusId;
-		}
+		_statusId = statusId;
 	}
 
 	public String getComments() {
@@ -268,10 +284,7 @@ public class OrganizationModelImpl extends BaseModelImpl<Organization> {
 	}
 
 	public void setComments(String comments) {
-		if ((comments != _comments) ||
-				((comments != null) && !comments.equals(_comments))) {
-			_comments = comments;
-		}
+		_comments = comments;
 	}
 
 	public Organization toEscapedModel() {
@@ -287,6 +300,8 @@ public class OrganizationModelImpl extends BaseModelImpl<Organization> {
 			model.setOrganizationId(getOrganizationId());
 			model.setCompanyId(getCompanyId());
 			model.setParentOrganizationId(getParentOrganizationId());
+			model.setLeftOrganizationId(getLeftOrganizationId());
+			model.setRightOrganizationId(getRightOrganizationId());
 			model.setName(HtmlUtil.escape(getName()));
 			model.setType(getType());
 			model.setRecursable(getRecursable());
@@ -318,6 +333,8 @@ public class OrganizationModelImpl extends BaseModelImpl<Organization> {
 		clone.setOrganizationId(getOrganizationId());
 		clone.setCompanyId(getCompanyId());
 		clone.setParentOrganizationId(getParentOrganizationId());
+		clone.setLeftOrganizationId(getLeftOrganizationId());
+		clone.setRightOrganizationId(getRightOrganizationId());
 		clone.setName(getName());
 		clone.setType(getType());
 		clone.setRecursable(getRecursable());
@@ -374,6 +391,10 @@ public class OrganizationModelImpl extends BaseModelImpl<Organization> {
 	private long _originalCompanyId;
 	private boolean _setOriginalCompanyId;
 	private long _parentOrganizationId;
+	private long _originalParentOrganizationId;
+	private boolean _setOriginalParentOrganizationId;
+	private long _leftOrganizationId;
+	private long _rightOrganizationId;
 	private String _name;
 	private String _originalName;
 	private String _type;

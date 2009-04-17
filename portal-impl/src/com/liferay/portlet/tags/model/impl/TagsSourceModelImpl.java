@@ -131,9 +131,7 @@ public class TagsSourceModelImpl extends BaseModelImpl<TagsSource> {
 	}
 
 	public void setSourceId(long sourceId) {
-		if (sourceId != _sourceId) {
-			_sourceId = sourceId;
-		}
+		_sourceId = sourceId;
 	}
 
 	public long getParentSourceId() {
@@ -141,9 +139,7 @@ public class TagsSourceModelImpl extends BaseModelImpl<TagsSource> {
 	}
 
 	public void setParentSourceId(long parentSourceId) {
-		if (parentSourceId != _parentSourceId) {
-			_parentSourceId = parentSourceId;
-		}
+		_parentSourceId = parentSourceId;
 	}
 
 	public String getName() {
@@ -151,9 +147,7 @@ public class TagsSourceModelImpl extends BaseModelImpl<TagsSource> {
 	}
 
 	public void setName(String name) {
-		if ((name != _name) || ((name != null) && !name.equals(_name))) {
-			_name = name;
-		}
+		_name = name;
 	}
 
 	public String getAcronym() {
@@ -161,10 +155,7 @@ public class TagsSourceModelImpl extends BaseModelImpl<TagsSource> {
 	}
 
 	public void setAcronym(String acronym) {
-		if ((acronym != _acronym) ||
-				((acronym != null) && !acronym.equals(_acronym))) {
-			_acronym = acronym;
-		}
+		_acronym = acronym;
 	}
 
 	public TagsSource toEscapedModel() {

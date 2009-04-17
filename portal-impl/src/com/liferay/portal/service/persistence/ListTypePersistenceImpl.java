@@ -311,12 +311,6 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl
 	}
 
 	public List<ListType> findByType(String type) throws SystemException {
-		int count = countByType(type);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { type };
 
 		List<ListType> list = (List<ListType>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_TYPE,
@@ -382,12 +376,6 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl
 
 	public List<ListType> findByType(String type, int start, int end,
 		OrderByComparator obc) throws SystemException {
-		int count = countByType(type);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				type,
 				

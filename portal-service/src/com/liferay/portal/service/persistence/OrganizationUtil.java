@@ -510,6 +510,11 @@ public class OrganizationUtil {
 		getPersistence().setUsers(pk, users);
 	}
 
+	public static void rebuildTree(long companyId, boolean force)
+		throws com.liferay.portal.SystemException {
+		getPersistence().rebuildTree(companyId, force);
+	}
+
 	public static OrganizationPersistence getPersistence() {
 		return _persistence;
 	}

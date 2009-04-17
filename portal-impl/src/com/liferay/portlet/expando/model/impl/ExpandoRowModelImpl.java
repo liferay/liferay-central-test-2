@@ -128,9 +128,7 @@ public class ExpandoRowModelImpl extends BaseModelImpl<ExpandoRow> {
 	}
 
 	public void setRowId(long rowId) {
-		if (rowId != _rowId) {
-			_rowId = rowId;
-		}
+		_rowId = rowId;
 	}
 
 	public long getCompanyId() {
@@ -138,9 +136,7 @@ public class ExpandoRowModelImpl extends BaseModelImpl<ExpandoRow> {
 	}
 
 	public void setCompanyId(long companyId) {
-		if (companyId != _companyId) {
-			_companyId = companyId;
-		}
+		_companyId = companyId;
 	}
 
 	public long getTableId() {
@@ -148,14 +144,12 @@ public class ExpandoRowModelImpl extends BaseModelImpl<ExpandoRow> {
 	}
 
 	public void setTableId(long tableId) {
-		if (tableId != _tableId) {
-			_tableId = tableId;
+		_tableId = tableId;
 
-			if (!_setOriginalTableId) {
-				_setOriginalTableId = true;
+		if (!_setOriginalTableId) {
+			_setOriginalTableId = true;
 
-				_originalTableId = tableId;
-			}
+			_originalTableId = tableId;
 		}
 	}
 
@@ -168,14 +162,12 @@ public class ExpandoRowModelImpl extends BaseModelImpl<ExpandoRow> {
 	}
 
 	public void setClassPK(long classPK) {
-		if (classPK != _classPK) {
-			_classPK = classPK;
+		_classPK = classPK;
 
-			if (!_setOriginalClassPK) {
-				_setOriginalClassPK = true;
+		if (!_setOriginalClassPK) {
+			_setOriginalClassPK = true;
 
-				_originalClassPK = classPK;
-			}
+			_originalClassPK = classPK;
 		}
 	}
 

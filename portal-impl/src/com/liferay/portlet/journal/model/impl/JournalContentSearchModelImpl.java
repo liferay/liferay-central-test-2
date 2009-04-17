@@ -145,9 +145,7 @@ public class JournalContentSearchModelImpl extends BaseModelImpl<JournalContentS
 	}
 
 	public void setContentSearchId(long contentSearchId) {
-		if (contentSearchId != _contentSearchId) {
-			_contentSearchId = contentSearchId;
-		}
+		_contentSearchId = contentSearchId;
 	}
 
 	public long getGroupId() {
@@ -155,14 +153,12 @@ public class JournalContentSearchModelImpl extends BaseModelImpl<JournalContentS
 	}
 
 	public void setGroupId(long groupId) {
-		if (groupId != _groupId) {
-			_groupId = groupId;
+		_groupId = groupId;
 
-			if (!_setOriginalGroupId) {
-				_setOriginalGroupId = true;
+		if (!_setOriginalGroupId) {
+			_setOriginalGroupId = true;
 
-				_originalGroupId = groupId;
-			}
+			_originalGroupId = groupId;
 		}
 	}
 
@@ -175,9 +171,7 @@ public class JournalContentSearchModelImpl extends BaseModelImpl<JournalContentS
 	}
 
 	public void setCompanyId(long companyId) {
-		if (companyId != _companyId) {
-			_companyId = companyId;
-		}
+		_companyId = companyId;
 	}
 
 	public boolean getPrivateLayout() {
@@ -189,14 +183,12 @@ public class JournalContentSearchModelImpl extends BaseModelImpl<JournalContentS
 	}
 
 	public void setPrivateLayout(boolean privateLayout) {
-		if (privateLayout != _privateLayout) {
-			_privateLayout = privateLayout;
+		_privateLayout = privateLayout;
 
-			if (!_setOriginalPrivateLayout) {
-				_setOriginalPrivateLayout = true;
+		if (!_setOriginalPrivateLayout) {
+			_setOriginalPrivateLayout = true;
 
-				_originalPrivateLayout = privateLayout;
-			}
+			_originalPrivateLayout = privateLayout;
 		}
 	}
 
@@ -209,14 +201,12 @@ public class JournalContentSearchModelImpl extends BaseModelImpl<JournalContentS
 	}
 
 	public void setLayoutId(long layoutId) {
-		if (layoutId != _layoutId) {
-			_layoutId = layoutId;
+		_layoutId = layoutId;
 
-			if (!_setOriginalLayoutId) {
-				_setOriginalLayoutId = true;
+		if (!_setOriginalLayoutId) {
+			_setOriginalLayoutId = true;
 
-				_originalLayoutId = layoutId;
-			}
+			_originalLayoutId = layoutId;
 		}
 	}
 
@@ -229,13 +219,10 @@ public class JournalContentSearchModelImpl extends BaseModelImpl<JournalContentS
 	}
 
 	public void setPortletId(String portletId) {
-		if ((portletId != _portletId) ||
-				((portletId != null) && !portletId.equals(_portletId))) {
-			_portletId = portletId;
+		_portletId = portletId;
 
-			if (_originalPortletId == null) {
-				_originalPortletId = portletId;
-			}
+		if (_originalPortletId == null) {
+			_originalPortletId = portletId;
 		}
 	}
 
@@ -248,13 +235,10 @@ public class JournalContentSearchModelImpl extends BaseModelImpl<JournalContentS
 	}
 
 	public void setArticleId(String articleId) {
-		if ((articleId != _articleId) ||
-				((articleId != null) && !articleId.equals(_articleId))) {
-			_articleId = articleId;
+		_articleId = articleId;
 
-			if (_originalArticleId == null) {
-				_originalArticleId = articleId;
-			}
+		if (_originalArticleId == null) {
+			_originalArticleId = articleId;
 		}
 	}
 

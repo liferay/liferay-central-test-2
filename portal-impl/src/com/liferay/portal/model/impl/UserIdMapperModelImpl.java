@@ -134,9 +134,7 @@ public class UserIdMapperModelImpl extends BaseModelImpl<UserIdMapper> {
 	}
 
 	public void setUserIdMapperId(long userIdMapperId) {
-		if (userIdMapperId != _userIdMapperId) {
-			_userIdMapperId = userIdMapperId;
-		}
+		_userIdMapperId = userIdMapperId;
 	}
 
 	public long getUserId() {
@@ -144,14 +142,12 @@ public class UserIdMapperModelImpl extends BaseModelImpl<UserIdMapper> {
 	}
 
 	public void setUserId(long userId) {
-		if (userId != _userId) {
-			_userId = userId;
+		_userId = userId;
 
-			if (!_setOriginalUserId) {
-				_setOriginalUserId = true;
+		if (!_setOriginalUserId) {
+			_setOriginalUserId = true;
 
-				_originalUserId = userId;
-			}
+			_originalUserId = userId;
 		}
 	}
 
@@ -164,12 +160,10 @@ public class UserIdMapperModelImpl extends BaseModelImpl<UserIdMapper> {
 	}
 
 	public void setType(String type) {
-		if ((type != _type) || ((type != null) && !type.equals(_type))) {
-			_type = type;
+		_type = type;
 
-			if (_originalType == null) {
-				_originalType = type;
-			}
+		if (_originalType == null) {
+			_originalType = type;
 		}
 	}
 
@@ -182,10 +176,7 @@ public class UserIdMapperModelImpl extends BaseModelImpl<UserIdMapper> {
 	}
 
 	public void setDescription(String description) {
-		if ((description != _description) ||
-				((description != null) && !description.equals(_description))) {
-			_description = description;
-		}
+		_description = description;
 	}
 
 	public String getExternalUserId() {
@@ -193,14 +184,10 @@ public class UserIdMapperModelImpl extends BaseModelImpl<UserIdMapper> {
 	}
 
 	public void setExternalUserId(String externalUserId) {
-		if ((externalUserId != _externalUserId) ||
-				((externalUserId != null) &&
-				!externalUserId.equals(_externalUserId))) {
-			_externalUserId = externalUserId;
+		_externalUserId = externalUserId;
 
-			if (_originalExternalUserId == null) {
-				_originalExternalUserId = externalUserId;
-			}
+		if (_originalExternalUserId == null) {
+			_originalExternalUserId = externalUserId;
 		}
 	}
 

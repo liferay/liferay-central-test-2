@@ -165,9 +165,7 @@ public class SCFrameworkVersionModelImpl extends BaseModelImpl<SCFrameworkVersio
 	}
 
 	public void setFrameworkVersionId(long frameworkVersionId) {
-		if (frameworkVersionId != _frameworkVersionId) {
-			_frameworkVersionId = frameworkVersionId;
-		}
+		_frameworkVersionId = frameworkVersionId;
 	}
 
 	public long getGroupId() {
@@ -175,9 +173,7 @@ public class SCFrameworkVersionModelImpl extends BaseModelImpl<SCFrameworkVersio
 	}
 
 	public void setGroupId(long groupId) {
-		if (groupId != _groupId) {
-			_groupId = groupId;
-		}
+		_groupId = groupId;
 	}
 
 	public long getCompanyId() {
@@ -185,9 +181,7 @@ public class SCFrameworkVersionModelImpl extends BaseModelImpl<SCFrameworkVersio
 	}
 
 	public void setCompanyId(long companyId) {
-		if (companyId != _companyId) {
-			_companyId = companyId;
-		}
+		_companyId = companyId;
 	}
 
 	public long getUserId() {
@@ -195,9 +189,7 @@ public class SCFrameworkVersionModelImpl extends BaseModelImpl<SCFrameworkVersio
 	}
 
 	public void setUserId(long userId) {
-		if (userId != _userId) {
-			_userId = userId;
-		}
+		_userId = userId;
 	}
 
 	public String getUserName() {
@@ -205,10 +197,7 @@ public class SCFrameworkVersionModelImpl extends BaseModelImpl<SCFrameworkVersio
 	}
 
 	public void setUserName(String userName) {
-		if ((userName != _userName) ||
-				((userName != null) && !userName.equals(_userName))) {
-			_userName = userName;
-		}
+		_userName = userName;
 	}
 
 	public Date getCreateDate() {
@@ -216,10 +205,7 @@ public class SCFrameworkVersionModelImpl extends BaseModelImpl<SCFrameworkVersio
 	}
 
 	public void setCreateDate(Date createDate) {
-		if ((createDate != _createDate) ||
-				((createDate != null) && !createDate.equals(_createDate))) {
-			_createDate = createDate;
-		}
+		_createDate = createDate;
 	}
 
 	public Date getModifiedDate() {
@@ -227,10 +213,7 @@ public class SCFrameworkVersionModelImpl extends BaseModelImpl<SCFrameworkVersio
 	}
 
 	public void setModifiedDate(Date modifiedDate) {
-		if ((modifiedDate != _modifiedDate) ||
-				((modifiedDate != null) && !modifiedDate.equals(_modifiedDate))) {
-			_modifiedDate = modifiedDate;
-		}
+		_modifiedDate = modifiedDate;
 	}
 
 	public String getName() {
@@ -238,9 +221,7 @@ public class SCFrameworkVersionModelImpl extends BaseModelImpl<SCFrameworkVersio
 	}
 
 	public void setName(String name) {
-		if ((name != _name) || ((name != null) && !name.equals(_name))) {
-			_name = name;
-		}
+		_name = name;
 	}
 
 	public String getUrl() {
@@ -248,9 +229,7 @@ public class SCFrameworkVersionModelImpl extends BaseModelImpl<SCFrameworkVersio
 	}
 
 	public void setUrl(String url) {
-		if ((url != _url) || ((url != null) && !url.equals(_url))) {
-			_url = url;
-		}
+		_url = url;
 	}
 
 	public boolean getActive() {
@@ -262,9 +241,7 @@ public class SCFrameworkVersionModelImpl extends BaseModelImpl<SCFrameworkVersio
 	}
 
 	public void setActive(boolean active) {
-		if (active != _active) {
-			_active = active;
-		}
+		_active = active;
 	}
 
 	public int getPriority() {
@@ -272,9 +249,7 @@ public class SCFrameworkVersionModelImpl extends BaseModelImpl<SCFrameworkVersio
 	}
 
 	public void setPriority(int priority) {
-		if (priority != _priority) {
-			_priority = priority;
-		}
+		_priority = priority;
 	}
 
 	public SCFrameworkVersion toEscapedModel() {

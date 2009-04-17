@@ -155,9 +155,7 @@ public class ShoppingItemPriceModelImpl extends BaseModelImpl<ShoppingItemPrice>
 	}
 
 	public void setItemPriceId(long itemPriceId) {
-		if (itemPriceId != _itemPriceId) {
-			_itemPriceId = itemPriceId;
-		}
+		_itemPriceId = itemPriceId;
 	}
 
 	public long getItemId() {
@@ -165,9 +163,7 @@ public class ShoppingItemPriceModelImpl extends BaseModelImpl<ShoppingItemPrice>
 	}
 
 	public void setItemId(long itemId) {
-		if (itemId != _itemId) {
-			_itemId = itemId;
-		}
+		_itemId = itemId;
 	}
 
 	public int getMinQuantity() {
@@ -175,9 +171,7 @@ public class ShoppingItemPriceModelImpl extends BaseModelImpl<ShoppingItemPrice>
 	}
 
 	public void setMinQuantity(int minQuantity) {
-		if (minQuantity != _minQuantity) {
-			_minQuantity = minQuantity;
-		}
+		_minQuantity = minQuantity;
 	}
 
 	public int getMaxQuantity() {
@@ -185,9 +179,7 @@ public class ShoppingItemPriceModelImpl extends BaseModelImpl<ShoppingItemPrice>
 	}
 
 	public void setMaxQuantity(int maxQuantity) {
-		if (maxQuantity != _maxQuantity) {
-			_maxQuantity = maxQuantity;
-		}
+		_maxQuantity = maxQuantity;
 	}
 
 	public double getPrice() {
@@ -195,9 +187,7 @@ public class ShoppingItemPriceModelImpl extends BaseModelImpl<ShoppingItemPrice>
 	}
 
 	public void setPrice(double price) {
-		if (price != _price) {
-			_price = price;
-		}
+		_price = price;
 	}
 
 	public double getDiscount() {
@@ -205,9 +195,7 @@ public class ShoppingItemPriceModelImpl extends BaseModelImpl<ShoppingItemPrice>
 	}
 
 	public void setDiscount(double discount) {
-		if (discount != _discount) {
-			_discount = discount;
-		}
+		_discount = discount;
 	}
 
 	public boolean getTaxable() {
@@ -219,9 +207,7 @@ public class ShoppingItemPriceModelImpl extends BaseModelImpl<ShoppingItemPrice>
 	}
 
 	public void setTaxable(boolean taxable) {
-		if (taxable != _taxable) {
-			_taxable = taxable;
-		}
+		_taxable = taxable;
 	}
 
 	public double getShipping() {
@@ -229,9 +215,7 @@ public class ShoppingItemPriceModelImpl extends BaseModelImpl<ShoppingItemPrice>
 	}
 
 	public void setShipping(double shipping) {
-		if (shipping != _shipping) {
-			_shipping = shipping;
-		}
+		_shipping = shipping;
 	}
 
 	public boolean getUseShippingFormula() {
@@ -243,9 +227,7 @@ public class ShoppingItemPriceModelImpl extends BaseModelImpl<ShoppingItemPrice>
 	}
 
 	public void setUseShippingFormula(boolean useShippingFormula) {
-		if (useShippingFormula != _useShippingFormula) {
-			_useShippingFormula = useShippingFormula;
-		}
+		_useShippingFormula = useShippingFormula;
 	}
 
 	public int getStatus() {
@@ -253,9 +235,7 @@ public class ShoppingItemPriceModelImpl extends BaseModelImpl<ShoppingItemPrice>
 	}
 
 	public void setStatus(int status) {
-		if (status != _status) {
-			_status = status;
-		}
+		_status = status;
 	}
 
 	public ShoppingItemPrice toEscapedModel() {

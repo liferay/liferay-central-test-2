@@ -334,6 +334,8 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		boolean isNew = igImage.isNew();
 
+		IGImageModelImpl igImageModelImpl = (IGImageModelImpl)igImage;
+
 		if (Validator.isNull(igImage.getUuid())) {
 			String uuid = PortalUUIDUtil.generate();
 
@@ -360,8 +362,6 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl
 
 		EntityCacheUtil.putResult(IGImageModelImpl.ENTITY_CACHE_ENABLED,
 			IGImageImpl.class, igImage.getPrimaryKey(), igImage);
-
-		IGImageModelImpl igImageModelImpl = (IGImageModelImpl)igImage;
 
 		if (!isNew &&
 				(igImage.getSmallImageId() != igImageModelImpl.getOriginalSmallImageId())) {
@@ -467,12 +467,6 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl
 	}
 
 	public List<IGImage> findByUuid(String uuid) throws SystemException {
-		int count = countByUuid(uuid);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { uuid };
 
 		List<IGImage> list = (List<IGImage>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_UUID,
@@ -539,12 +533,6 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl
 
 	public List<IGImage> findByUuid(String uuid, int start, int end,
 		OrderByComparator obc) throws SystemException {
-		int count = countByUuid(uuid);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				uuid,
 				
@@ -721,12 +709,6 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl
 
 	public List<IGImage> findByFolderId(long folderId)
 		throws SystemException {
-		int count = countByFolderId(folderId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { new Long(folderId) };
 
 		List<IGImage> list = (List<IGImage>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_FOLDERID,
@@ -786,12 +768,6 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl
 
 	public List<IGImage> findByFolderId(long folderId, int start, int end,
 		OrderByComparator obc) throws SystemException {
-		int count = countByFolderId(folderId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(folderId),
 				
@@ -1370,12 +1346,6 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl
 
 	public List<IGImage> findByF_N(long folderId, String name)
 		throws SystemException {
-		int count = countByF_N(folderId, name);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { new Long(folderId), name };
 
 		List<IGImage> list = (List<IGImage>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_F_N,
@@ -1448,12 +1418,6 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl
 
 	public List<IGImage> findByF_N(long folderId, String name, int start,
 		int end, OrderByComparator obc) throws SystemException {
-		int count = countByF_N(folderId, name);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(folderId),
 				

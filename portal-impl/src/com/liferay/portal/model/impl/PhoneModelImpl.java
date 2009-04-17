@@ -166,9 +166,7 @@ public class PhoneModelImpl extends BaseModelImpl<Phone> {
 	}
 
 	public void setPhoneId(long phoneId) {
-		if (phoneId != _phoneId) {
-			_phoneId = phoneId;
-		}
+		_phoneId = phoneId;
 	}
 
 	public long getCompanyId() {
@@ -176,9 +174,7 @@ public class PhoneModelImpl extends BaseModelImpl<Phone> {
 	}
 
 	public void setCompanyId(long companyId) {
-		if (companyId != _companyId) {
-			_companyId = companyId;
-		}
+		_companyId = companyId;
 	}
 
 	public long getUserId() {
@@ -186,9 +182,7 @@ public class PhoneModelImpl extends BaseModelImpl<Phone> {
 	}
 
 	public void setUserId(long userId) {
-		if (userId != _userId) {
-			_userId = userId;
-		}
+		_userId = userId;
 	}
 
 	public String getUserName() {
@@ -196,10 +190,7 @@ public class PhoneModelImpl extends BaseModelImpl<Phone> {
 	}
 
 	public void setUserName(String userName) {
-		if ((userName != _userName) ||
-				((userName != null) && !userName.equals(_userName))) {
-			_userName = userName;
-		}
+		_userName = userName;
 	}
 
 	public Date getCreateDate() {
@@ -207,10 +198,7 @@ public class PhoneModelImpl extends BaseModelImpl<Phone> {
 	}
 
 	public void setCreateDate(Date createDate) {
-		if ((createDate != _createDate) ||
-				((createDate != null) && !createDate.equals(_createDate))) {
-			_createDate = createDate;
-		}
+		_createDate = createDate;
 	}
 
 	public Date getModifiedDate() {
@@ -218,10 +206,7 @@ public class PhoneModelImpl extends BaseModelImpl<Phone> {
 	}
 
 	public void setModifiedDate(Date modifiedDate) {
-		if ((modifiedDate != _modifiedDate) ||
-				((modifiedDate != null) && !modifiedDate.equals(_modifiedDate))) {
-			_modifiedDate = modifiedDate;
-		}
+		_modifiedDate = modifiedDate;
 	}
 
 	public String getClassName() {
@@ -237,9 +222,7 @@ public class PhoneModelImpl extends BaseModelImpl<Phone> {
 	}
 
 	public void setClassNameId(long classNameId) {
-		if (classNameId != _classNameId) {
-			_classNameId = classNameId;
-		}
+		_classNameId = classNameId;
 	}
 
 	public long getClassPK() {
@@ -247,9 +230,7 @@ public class PhoneModelImpl extends BaseModelImpl<Phone> {
 	}
 
 	public void setClassPK(long classPK) {
-		if (classPK != _classPK) {
-			_classPK = classPK;
-		}
+		_classPK = classPK;
 	}
 
 	public String getNumber() {
@@ -257,10 +238,7 @@ public class PhoneModelImpl extends BaseModelImpl<Phone> {
 	}
 
 	public void setNumber(String number) {
-		if ((number != _number) ||
-				((number != null) && !number.equals(_number))) {
-			_number = number;
-		}
+		_number = number;
 	}
 
 	public String getExtension() {
@@ -268,10 +246,7 @@ public class PhoneModelImpl extends BaseModelImpl<Phone> {
 	}
 
 	public void setExtension(String extension) {
-		if ((extension != _extension) ||
-				((extension != null) && !extension.equals(_extension))) {
-			_extension = extension;
-		}
+		_extension = extension;
 	}
 
 	public int getTypeId() {
@@ -279,9 +254,7 @@ public class PhoneModelImpl extends BaseModelImpl<Phone> {
 	}
 
 	public void setTypeId(int typeId) {
-		if (typeId != _typeId) {
-			_typeId = typeId;
-		}
+		_typeId = typeId;
 	}
 
 	public boolean getPrimary() {
@@ -293,9 +266,7 @@ public class PhoneModelImpl extends BaseModelImpl<Phone> {
 	}
 
 	public void setPrimary(boolean primary) {
-		if (primary != _primary) {
-			_primary = primary;
-		}
+		_primary = primary;
 	}
 
 	public Phone toEscapedModel() {

@@ -278,6 +278,8 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl
 		boolean merge) throws SystemException {
 		boolean isNew = layoutSet.isNew();
 
+		LayoutSetModelImpl layoutSetModelImpl = (LayoutSetModelImpl)layoutSet;
+
 		Session session = null;
 
 		try {
@@ -298,8 +300,6 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl
 
 		EntityCacheUtil.putResult(LayoutSetModelImpl.ENTITY_CACHE_ENABLED,
 			LayoutSetImpl.class, layoutSet.getPrimaryKey(), layoutSet);
-
-		LayoutSetModelImpl layoutSetModelImpl = (LayoutSetModelImpl)layoutSet;
 
 		if (!isNew &&
 				(!layoutSet.getVirtualHost()
@@ -387,12 +387,6 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl
 
 	public List<LayoutSet> findByGroupId(long groupId)
 		throws SystemException {
-		int count = countByGroupId(groupId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { new Long(groupId) };
 
 		List<LayoutSet> list = (List<LayoutSet>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_GROUPID,
@@ -447,12 +441,6 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl
 
 	public List<LayoutSet> findByGroupId(long groupId, int start, int end,
 		OrderByComparator obc) throws SystemException {
-		int count = countByGroupId(groupId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				

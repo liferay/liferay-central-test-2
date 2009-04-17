@@ -133,9 +133,7 @@ public class PasswordTrackerModelImpl extends BaseModelImpl<PasswordTracker> {
 	}
 
 	public void setPasswordTrackerId(long passwordTrackerId) {
-		if (passwordTrackerId != _passwordTrackerId) {
-			_passwordTrackerId = passwordTrackerId;
-		}
+		_passwordTrackerId = passwordTrackerId;
 	}
 
 	public long getUserId() {
@@ -143,9 +141,7 @@ public class PasswordTrackerModelImpl extends BaseModelImpl<PasswordTracker> {
 	}
 
 	public void setUserId(long userId) {
-		if (userId != _userId) {
-			_userId = userId;
-		}
+		_userId = userId;
 	}
 
 	public Date getCreateDate() {
@@ -153,10 +149,7 @@ public class PasswordTrackerModelImpl extends BaseModelImpl<PasswordTracker> {
 	}
 
 	public void setCreateDate(Date createDate) {
-		if ((createDate != _createDate) ||
-				((createDate != null) && !createDate.equals(_createDate))) {
-			_createDate = createDate;
-		}
+		_createDate = createDate;
 	}
 
 	public String getPassword() {
@@ -164,10 +157,7 @@ public class PasswordTrackerModelImpl extends BaseModelImpl<PasswordTracker> {
 	}
 
 	public void setPassword(String password) {
-		if ((password != _password) ||
-				((password != null) && !password.equals(_password))) {
-			_password = password;
-		}
+		_password = password;
 	}
 
 	public PasswordTracker toEscapedModel() {

@@ -132,9 +132,7 @@ public class ClassNameModelImpl extends BaseModelImpl<ClassName> {
 	}
 
 	public void setClassNameId(long classNameId) {
-		if (classNameId != _classNameId) {
-			_classNameId = classNameId;
-		}
+		_classNameId = classNameId;
 	}
 
 	public String getValue() {
@@ -142,12 +140,10 @@ public class ClassNameModelImpl extends BaseModelImpl<ClassName> {
 	}
 
 	public void setValue(String value) {
-		if ((value != _value) || ((value != null) && !value.equals(_value))) {
-			_value = value;
+		_value = value;
 
-			if (_originalValue == null) {
-				_originalValue = value;
-			}
+		if (_originalValue == null) {
+			_originalValue = value;
 		}
 	}
 

@@ -208,12 +208,10 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed> {
 	}
 
 	public void setUuid(String uuid) {
-		if ((uuid != null) && !uuid.equals(_uuid)) {
-			_uuid = uuid;
+		_uuid = uuid;
 
-			if (_originalUuid == null) {
-				_originalUuid = uuid;
-			}
+		if (_originalUuid == null) {
+			_originalUuid = uuid;
 		}
 	}
 
@@ -226,9 +224,7 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed> {
 	}
 
 	public void setId(long id) {
-		if (id != _id) {
-			_id = id;
-		}
+		_id = id;
 	}
 
 	public long getGroupId() {
@@ -236,14 +232,12 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed> {
 	}
 
 	public void setGroupId(long groupId) {
-		if (groupId != _groupId) {
-			_groupId = groupId;
+		_groupId = groupId;
 
-			if (!_setOriginalGroupId) {
-				_setOriginalGroupId = true;
+		if (!_setOriginalGroupId) {
+			_setOriginalGroupId = true;
 
-				_originalGroupId = groupId;
-			}
+			_originalGroupId = groupId;
 		}
 	}
 
@@ -256,9 +250,7 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed> {
 	}
 
 	public void setCompanyId(long companyId) {
-		if (companyId != _companyId) {
-			_companyId = companyId;
-		}
+		_companyId = companyId;
 	}
 
 	public long getUserId() {
@@ -266,9 +258,7 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed> {
 	}
 
 	public void setUserId(long userId) {
-		if (userId != _userId) {
-			_userId = userId;
-		}
+		_userId = userId;
 	}
 
 	public String getUserName() {
@@ -276,10 +266,7 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed> {
 	}
 
 	public void setUserName(String userName) {
-		if ((userName != _userName) ||
-				((userName != null) && !userName.equals(_userName))) {
-			_userName = userName;
-		}
+		_userName = userName;
 	}
 
 	public Date getCreateDate() {
@@ -287,10 +274,7 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed> {
 	}
 
 	public void setCreateDate(Date createDate) {
-		if ((createDate != _createDate) ||
-				((createDate != null) && !createDate.equals(_createDate))) {
-			_createDate = createDate;
-		}
+		_createDate = createDate;
 	}
 
 	public Date getModifiedDate() {
@@ -298,10 +282,7 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed> {
 	}
 
 	public void setModifiedDate(Date modifiedDate) {
-		if ((modifiedDate != _modifiedDate) ||
-				((modifiedDate != null) && !modifiedDate.equals(_modifiedDate))) {
-			_modifiedDate = modifiedDate;
-		}
+		_modifiedDate = modifiedDate;
 	}
 
 	public String getFeedId() {
@@ -309,13 +290,10 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed> {
 	}
 
 	public void setFeedId(String feedId) {
-		if ((feedId != _feedId) ||
-				((feedId != null) && !feedId.equals(_feedId))) {
-			_feedId = feedId;
+		_feedId = feedId;
 
-			if (_originalFeedId == null) {
-				_originalFeedId = feedId;
-			}
+		if (_originalFeedId == null) {
+			_originalFeedId = feedId;
 		}
 	}
 
@@ -328,9 +306,7 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed> {
 	}
 
 	public void setName(String name) {
-		if ((name != _name) || ((name != null) && !name.equals(_name))) {
-			_name = name;
-		}
+		_name = name;
 	}
 
 	public String getDescription() {
@@ -338,10 +314,7 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed> {
 	}
 
 	public void setDescription(String description) {
-		if ((description != _description) ||
-				((description != null) && !description.equals(_description))) {
-			_description = description;
-		}
+		_description = description;
 	}
 
 	public String getType() {
@@ -349,9 +322,7 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed> {
 	}
 
 	public void setType(String type) {
-		if ((type != _type) || ((type != null) && !type.equals(_type))) {
-			_type = type;
-		}
+		_type = type;
 	}
 
 	public String getStructureId() {
@@ -359,10 +330,7 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed> {
 	}
 
 	public void setStructureId(String structureId) {
-		if ((structureId != _structureId) ||
-				((structureId != null) && !structureId.equals(_structureId))) {
-			_structureId = structureId;
-		}
+		_structureId = structureId;
 	}
 
 	public String getTemplateId() {
@@ -370,10 +338,7 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed> {
 	}
 
 	public void setTemplateId(String templateId) {
-		if ((templateId != _templateId) ||
-				((templateId != null) && !templateId.equals(_templateId))) {
-			_templateId = templateId;
-		}
+		_templateId = templateId;
 	}
 
 	public String getRendererTemplateId() {
@@ -381,11 +346,7 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed> {
 	}
 
 	public void setRendererTemplateId(String rendererTemplateId) {
-		if ((rendererTemplateId != _rendererTemplateId) ||
-				((rendererTemplateId != null) &&
-				!rendererTemplateId.equals(_rendererTemplateId))) {
-			_rendererTemplateId = rendererTemplateId;
-		}
+		_rendererTemplateId = rendererTemplateId;
 	}
 
 	public int getDelta() {
@@ -393,9 +354,7 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed> {
 	}
 
 	public void setDelta(int delta) {
-		if (delta != _delta) {
-			_delta = delta;
-		}
+		_delta = delta;
 	}
 
 	public String getOrderByCol() {
@@ -403,10 +362,7 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed> {
 	}
 
 	public void setOrderByCol(String orderByCol) {
-		if ((orderByCol != _orderByCol) ||
-				((orderByCol != null) && !orderByCol.equals(_orderByCol))) {
-			_orderByCol = orderByCol;
-		}
+		_orderByCol = orderByCol;
 	}
 
 	public String getOrderByType() {
@@ -414,10 +370,7 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed> {
 	}
 
 	public void setOrderByType(String orderByType) {
-		if ((orderByType != _orderByType) ||
-				((orderByType != null) && !orderByType.equals(_orderByType))) {
-			_orderByType = orderByType;
-		}
+		_orderByType = orderByType;
 	}
 
 	public String getTargetLayoutFriendlyUrl() {
@@ -425,11 +378,7 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed> {
 	}
 
 	public void setTargetLayoutFriendlyUrl(String targetLayoutFriendlyUrl) {
-		if ((targetLayoutFriendlyUrl != _targetLayoutFriendlyUrl) ||
-				((targetLayoutFriendlyUrl != null) &&
-				!targetLayoutFriendlyUrl.equals(_targetLayoutFriendlyUrl))) {
-			_targetLayoutFriendlyUrl = targetLayoutFriendlyUrl;
-		}
+		_targetLayoutFriendlyUrl = targetLayoutFriendlyUrl;
 	}
 
 	public String getTargetPortletId() {
@@ -437,11 +386,7 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed> {
 	}
 
 	public void setTargetPortletId(String targetPortletId) {
-		if ((targetPortletId != _targetPortletId) ||
-				((targetPortletId != null) &&
-				!targetPortletId.equals(_targetPortletId))) {
-			_targetPortletId = targetPortletId;
-		}
+		_targetPortletId = targetPortletId;
 	}
 
 	public String getContentField() {
@@ -449,10 +394,7 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed> {
 	}
 
 	public void setContentField(String contentField) {
-		if ((contentField != _contentField) ||
-				((contentField != null) && !contentField.equals(_contentField))) {
-			_contentField = contentField;
-		}
+		_contentField = contentField;
 	}
 
 	public String getFeedType() {
@@ -460,10 +402,7 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed> {
 	}
 
 	public void setFeedType(String feedType) {
-		if ((feedType != _feedType) ||
-				((feedType != null) && !feedType.equals(_feedType))) {
-			_feedType = feedType;
-		}
+		_feedType = feedType;
 	}
 
 	public double getFeedVersion() {
@@ -471,9 +410,7 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed> {
 	}
 
 	public void setFeedVersion(double feedVersion) {
-		if (feedVersion != _feedVersion) {
-			_feedVersion = feedVersion;
-		}
+		_feedVersion = feedVersion;
 	}
 
 	public JournalFeed toEscapedModel() {

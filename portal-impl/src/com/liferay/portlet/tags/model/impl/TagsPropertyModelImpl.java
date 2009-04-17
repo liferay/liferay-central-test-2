@@ -152,9 +152,7 @@ public class TagsPropertyModelImpl extends BaseModelImpl<TagsProperty> {
 	}
 
 	public void setPropertyId(long propertyId) {
-		if (propertyId != _propertyId) {
-			_propertyId = propertyId;
-		}
+		_propertyId = propertyId;
 	}
 
 	public long getCompanyId() {
@@ -162,9 +160,7 @@ public class TagsPropertyModelImpl extends BaseModelImpl<TagsProperty> {
 	}
 
 	public void setCompanyId(long companyId) {
-		if (companyId != _companyId) {
-			_companyId = companyId;
-		}
+		_companyId = companyId;
 	}
 
 	public long getUserId() {
@@ -172,9 +168,7 @@ public class TagsPropertyModelImpl extends BaseModelImpl<TagsProperty> {
 	}
 
 	public void setUserId(long userId) {
-		if (userId != _userId) {
-			_userId = userId;
-		}
+		_userId = userId;
 	}
 
 	public String getUserName() {
@@ -182,10 +176,7 @@ public class TagsPropertyModelImpl extends BaseModelImpl<TagsProperty> {
 	}
 
 	public void setUserName(String userName) {
-		if ((userName != _userName) ||
-				((userName != null) && !userName.equals(_userName))) {
-			_userName = userName;
-		}
+		_userName = userName;
 	}
 
 	public Date getCreateDate() {
@@ -193,10 +184,7 @@ public class TagsPropertyModelImpl extends BaseModelImpl<TagsProperty> {
 	}
 
 	public void setCreateDate(Date createDate) {
-		if ((createDate != _createDate) ||
-				((createDate != null) && !createDate.equals(_createDate))) {
-			_createDate = createDate;
-		}
+		_createDate = createDate;
 	}
 
 	public Date getModifiedDate() {
@@ -204,10 +192,7 @@ public class TagsPropertyModelImpl extends BaseModelImpl<TagsProperty> {
 	}
 
 	public void setModifiedDate(Date modifiedDate) {
-		if ((modifiedDate != _modifiedDate) ||
-				((modifiedDate != null) && !modifiedDate.equals(_modifiedDate))) {
-			_modifiedDate = modifiedDate;
-		}
+		_modifiedDate = modifiedDate;
 	}
 
 	public long getEntryId() {
@@ -215,14 +200,12 @@ public class TagsPropertyModelImpl extends BaseModelImpl<TagsProperty> {
 	}
 
 	public void setEntryId(long entryId) {
-		if (entryId != _entryId) {
-			_entryId = entryId;
+		_entryId = entryId;
 
-			if (!_setOriginalEntryId) {
-				_setOriginalEntryId = true;
+		if (!_setOriginalEntryId) {
+			_setOriginalEntryId = true;
 
-				_originalEntryId = entryId;
-			}
+			_originalEntryId = entryId;
 		}
 	}
 
@@ -235,12 +218,10 @@ public class TagsPropertyModelImpl extends BaseModelImpl<TagsProperty> {
 	}
 
 	public void setKey(String key) {
-		if ((key != _key) || ((key != null) && !key.equals(_key))) {
-			_key = key;
+		_key = key;
 
-			if (_originalKey == null) {
-				_originalKey = key;
-			}
+		if (_originalKey == null) {
+			_originalKey = key;
 		}
 	}
 
@@ -253,9 +234,7 @@ public class TagsPropertyModelImpl extends BaseModelImpl<TagsProperty> {
 	}
 
 	public void setValue(String value) {
-		if ((value != _value) || ((value != null) && !value.equals(_value))) {
-			_value = value;
-		}
+		_value = value;
 	}
 
 	public TagsProperty toEscapedModel() {

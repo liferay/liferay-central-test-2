@@ -163,9 +163,7 @@ public class SocialActivityModelImpl extends BaseModelImpl<SocialActivity> {
 	}
 
 	public void setActivityId(long activityId) {
-		if (activityId != _activityId) {
-			_activityId = activityId;
-		}
+		_activityId = activityId;
 	}
 
 	public long getGroupId() {
@@ -173,14 +171,12 @@ public class SocialActivityModelImpl extends BaseModelImpl<SocialActivity> {
 	}
 
 	public void setGroupId(long groupId) {
-		if (groupId != _groupId) {
-			_groupId = groupId;
+		_groupId = groupId;
 
-			if (!_setOriginalGroupId) {
-				_setOriginalGroupId = true;
+		if (!_setOriginalGroupId) {
+			_setOriginalGroupId = true;
 
-				_originalGroupId = groupId;
-			}
+			_originalGroupId = groupId;
 		}
 	}
 
@@ -193,9 +189,7 @@ public class SocialActivityModelImpl extends BaseModelImpl<SocialActivity> {
 	}
 
 	public void setCompanyId(long companyId) {
-		if (companyId != _companyId) {
-			_companyId = companyId;
-		}
+		_companyId = companyId;
 	}
 
 	public long getUserId() {
@@ -203,14 +197,12 @@ public class SocialActivityModelImpl extends BaseModelImpl<SocialActivity> {
 	}
 
 	public void setUserId(long userId) {
-		if (userId != _userId) {
-			_userId = userId;
+		_userId = userId;
 
-			if (!_setOriginalUserId) {
-				_setOriginalUserId = true;
+		if (!_setOriginalUserId) {
+			_setOriginalUserId = true;
 
-				_originalUserId = userId;
-			}
+			_originalUserId = userId;
 		}
 	}
 
@@ -223,13 +215,10 @@ public class SocialActivityModelImpl extends BaseModelImpl<SocialActivity> {
 	}
 
 	public void setCreateDate(Date createDate) {
-		if ((createDate != _createDate) ||
-				((createDate != null) && !createDate.equals(_createDate))) {
-			_createDate = createDate;
+		_createDate = createDate;
 
-			if (_originalCreateDate == null) {
-				_originalCreateDate = createDate;
-			}
+		if (_originalCreateDate == null) {
+			_originalCreateDate = createDate;
 		}
 	}
 
@@ -242,14 +231,12 @@ public class SocialActivityModelImpl extends BaseModelImpl<SocialActivity> {
 	}
 
 	public void setMirrorActivityId(long mirrorActivityId) {
-		if (mirrorActivityId != _mirrorActivityId) {
-			_mirrorActivityId = mirrorActivityId;
+		_mirrorActivityId = mirrorActivityId;
 
-			if (!_setOriginalMirrorActivityId) {
-				_setOriginalMirrorActivityId = true;
+		if (!_setOriginalMirrorActivityId) {
+			_setOriginalMirrorActivityId = true;
 
-				_originalMirrorActivityId = mirrorActivityId;
-			}
+			_originalMirrorActivityId = mirrorActivityId;
 		}
 	}
 
@@ -270,14 +257,12 @@ public class SocialActivityModelImpl extends BaseModelImpl<SocialActivity> {
 	}
 
 	public void setClassNameId(long classNameId) {
-		if (classNameId != _classNameId) {
-			_classNameId = classNameId;
+		_classNameId = classNameId;
 
-			if (!_setOriginalClassNameId) {
-				_setOriginalClassNameId = true;
+		if (!_setOriginalClassNameId) {
+			_setOriginalClassNameId = true;
 
-				_originalClassNameId = classNameId;
-			}
+			_originalClassNameId = classNameId;
 		}
 	}
 
@@ -290,14 +275,12 @@ public class SocialActivityModelImpl extends BaseModelImpl<SocialActivity> {
 	}
 
 	public void setClassPK(long classPK) {
-		if (classPK != _classPK) {
-			_classPK = classPK;
+		_classPK = classPK;
 
-			if (!_setOriginalClassPK) {
-				_setOriginalClassPK = true;
+		if (!_setOriginalClassPK) {
+			_setOriginalClassPK = true;
 
-				_originalClassPK = classPK;
-			}
+			_originalClassPK = classPK;
 		}
 	}
 
@@ -310,14 +293,12 @@ public class SocialActivityModelImpl extends BaseModelImpl<SocialActivity> {
 	}
 
 	public void setType(int type) {
-		if (type != _type) {
-			_type = type;
+		_type = type;
 
-			if (!_setOriginalType) {
-				_setOriginalType = true;
+		if (!_setOriginalType) {
+			_setOriginalType = true;
 
-				_originalType = type;
-			}
+			_originalType = type;
 		}
 	}
 
@@ -330,10 +311,7 @@ public class SocialActivityModelImpl extends BaseModelImpl<SocialActivity> {
 	}
 
 	public void setExtraData(String extraData) {
-		if ((extraData != _extraData) ||
-				((extraData != null) && !extraData.equals(_extraData))) {
-			_extraData = extraData;
-		}
+		_extraData = extraData;
 	}
 
 	public long getReceiverUserId() {
@@ -341,14 +319,12 @@ public class SocialActivityModelImpl extends BaseModelImpl<SocialActivity> {
 	}
 
 	public void setReceiverUserId(long receiverUserId) {
-		if (receiverUserId != _receiverUserId) {
-			_receiverUserId = receiverUserId;
+		_receiverUserId = receiverUserId;
 
-			if (!_setOriginalReceiverUserId) {
-				_setOriginalReceiverUserId = true;
+		if (!_setOriginalReceiverUserId) {
+			_setOriginalReceiverUserId = true;
 
-				_originalReceiverUserId = receiverUserId;
-			}
+			_originalReceiverUserId = receiverUserId;
 		}
 	}
 

@@ -236,12 +236,10 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle> {
 	}
 
 	public void setUuid(String uuid) {
-		if ((uuid != null) && !uuid.equals(_uuid)) {
-			_uuid = uuid;
+		_uuid = uuid;
 
-			if (_originalUuid == null) {
-				_originalUuid = uuid;
-			}
+		if (_originalUuid == null) {
+			_originalUuid = uuid;
 		}
 	}
 
@@ -254,9 +252,7 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle> {
 	}
 
 	public void setId(long id) {
-		if (id != _id) {
-			_id = id;
-		}
+		_id = id;
 	}
 
 	public long getResourcePrimKey() {
@@ -264,9 +260,7 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle> {
 	}
 
 	public void setResourcePrimKey(long resourcePrimKey) {
-		if (resourcePrimKey != _resourcePrimKey) {
-			_resourcePrimKey = resourcePrimKey;
-		}
+		_resourcePrimKey = resourcePrimKey;
 	}
 
 	public long getGroupId() {
@@ -274,14 +268,12 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle> {
 	}
 
 	public void setGroupId(long groupId) {
-		if (groupId != _groupId) {
-			_groupId = groupId;
+		_groupId = groupId;
 
-			if (!_setOriginalGroupId) {
-				_setOriginalGroupId = true;
+		if (!_setOriginalGroupId) {
+			_setOriginalGroupId = true;
 
-				_originalGroupId = groupId;
-			}
+			_originalGroupId = groupId;
 		}
 	}
 
@@ -294,9 +286,7 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle> {
 	}
 
 	public void setCompanyId(long companyId) {
-		if (companyId != _companyId) {
-			_companyId = companyId;
-		}
+		_companyId = companyId;
 	}
 
 	public long getUserId() {
@@ -304,9 +294,7 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle> {
 	}
 
 	public void setUserId(long userId) {
-		if (userId != _userId) {
-			_userId = userId;
-		}
+		_userId = userId;
 	}
 
 	public String getUserName() {
@@ -314,10 +302,7 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle> {
 	}
 
 	public void setUserName(String userName) {
-		if ((userName != _userName) ||
-				((userName != null) && !userName.equals(_userName))) {
-			_userName = userName;
-		}
+		_userName = userName;
 	}
 
 	public Date getCreateDate() {
@@ -325,10 +310,7 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle> {
 	}
 
 	public void setCreateDate(Date createDate) {
-		if ((createDate != _createDate) ||
-				((createDate != null) && !createDate.equals(_createDate))) {
-			_createDate = createDate;
-		}
+		_createDate = createDate;
 	}
 
 	public Date getModifiedDate() {
@@ -336,10 +318,7 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle> {
 	}
 
 	public void setModifiedDate(Date modifiedDate) {
-		if ((modifiedDate != _modifiedDate) ||
-				((modifiedDate != null) && !modifiedDate.equals(_modifiedDate))) {
-			_modifiedDate = modifiedDate;
-		}
+		_modifiedDate = modifiedDate;
 	}
 
 	public String getArticleId() {
@@ -347,13 +326,10 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle> {
 	}
 
 	public void setArticleId(String articleId) {
-		if ((articleId != _articleId) ||
-				((articleId != null) && !articleId.equals(_articleId))) {
-			_articleId = articleId;
+		_articleId = articleId;
 
-			if (_originalArticleId == null) {
-				_originalArticleId = articleId;
-			}
+		if (_originalArticleId == null) {
+			_originalArticleId = articleId;
 		}
 	}
 
@@ -366,14 +342,12 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle> {
 	}
 
 	public void setVersion(double version) {
-		if (version != _version) {
-			_version = version;
+		_version = version;
 
-			if (!_setOriginalVersion) {
-				_setOriginalVersion = true;
+		if (!_setOriginalVersion) {
+			_setOriginalVersion = true;
 
-				_originalVersion = version;
-			}
+			_originalVersion = version;
 		}
 	}
 
@@ -386,9 +360,7 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle> {
 	}
 
 	public void setTitle(String title) {
-		if ((title != _title) || ((title != null) && !title.equals(_title))) {
-			_title = title;
-		}
+		_title = title;
 	}
 
 	public String getUrlTitle() {
@@ -396,13 +368,10 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle> {
 	}
 
 	public void setUrlTitle(String urlTitle) {
-		if ((urlTitle != _urlTitle) ||
-				((urlTitle != null) && !urlTitle.equals(_urlTitle))) {
-			_urlTitle = urlTitle;
+		_urlTitle = urlTitle;
 
-			if (_originalUrlTitle == null) {
-				_originalUrlTitle = urlTitle;
-			}
+		if (_originalUrlTitle == null) {
+			_originalUrlTitle = urlTitle;
 		}
 	}
 
@@ -415,10 +384,7 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle> {
 	}
 
 	public void setDescription(String description) {
-		if ((description != _description) ||
-				((description != null) && !description.equals(_description))) {
-			_description = description;
-		}
+		_description = description;
 	}
 
 	public String getContent() {
@@ -426,10 +392,7 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle> {
 	}
 
 	public void setContent(String content) {
-		if ((content != _content) ||
-				((content != null) && !content.equals(_content))) {
-			_content = content;
-		}
+		_content = content;
 	}
 
 	public String getType() {
@@ -437,9 +400,7 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle> {
 	}
 
 	public void setType(String type) {
-		if ((type != _type) || ((type != null) && !type.equals(_type))) {
-			_type = type;
-		}
+		_type = type;
 	}
 
 	public String getStructureId() {
@@ -447,10 +408,7 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle> {
 	}
 
 	public void setStructureId(String structureId) {
-		if ((structureId != _structureId) ||
-				((structureId != null) && !structureId.equals(_structureId))) {
-			_structureId = structureId;
-		}
+		_structureId = structureId;
 	}
 
 	public String getTemplateId() {
@@ -458,10 +416,7 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle> {
 	}
 
 	public void setTemplateId(String templateId) {
-		if ((templateId != _templateId) ||
-				((templateId != null) && !templateId.equals(_templateId))) {
-			_templateId = templateId;
-		}
+		_templateId = templateId;
 	}
 
 	public Date getDisplayDate() {
@@ -469,10 +424,7 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle> {
 	}
 
 	public void setDisplayDate(Date displayDate) {
-		if ((displayDate != _displayDate) ||
-				((displayDate != null) && !displayDate.equals(_displayDate))) {
-			_displayDate = displayDate;
-		}
+		_displayDate = displayDate;
 	}
 
 	public boolean getApproved() {
@@ -484,9 +436,7 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle> {
 	}
 
 	public void setApproved(boolean approved) {
-		if (approved != _approved) {
-			_approved = approved;
-		}
+		_approved = approved;
 	}
 
 	public long getApprovedByUserId() {
@@ -494,9 +444,7 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle> {
 	}
 
 	public void setApprovedByUserId(long approvedByUserId) {
-		if (approvedByUserId != _approvedByUserId) {
-			_approvedByUserId = approvedByUserId;
-		}
+		_approvedByUserId = approvedByUserId;
 	}
 
 	public String getApprovedByUserName() {
@@ -504,11 +452,7 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle> {
 	}
 
 	public void setApprovedByUserName(String approvedByUserName) {
-		if ((approvedByUserName != _approvedByUserName) ||
-				((approvedByUserName != null) &&
-				!approvedByUserName.equals(_approvedByUserName))) {
-			_approvedByUserName = approvedByUserName;
-		}
+		_approvedByUserName = approvedByUserName;
 	}
 
 	public Date getApprovedDate() {
@@ -516,10 +460,7 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle> {
 	}
 
 	public void setApprovedDate(Date approvedDate) {
-		if ((approvedDate != _approvedDate) ||
-				((approvedDate != null) && !approvedDate.equals(_approvedDate))) {
-			_approvedDate = approvedDate;
-		}
+		_approvedDate = approvedDate;
 	}
 
 	public boolean getExpired() {
@@ -531,9 +472,7 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle> {
 	}
 
 	public void setExpired(boolean expired) {
-		if (expired != _expired) {
-			_expired = expired;
-		}
+		_expired = expired;
 	}
 
 	public Date getExpirationDate() {
@@ -541,11 +480,7 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle> {
 	}
 
 	public void setExpirationDate(Date expirationDate) {
-		if ((expirationDate != _expirationDate) ||
-				((expirationDate != null) &&
-				!expirationDate.equals(_expirationDate))) {
-			_expirationDate = expirationDate;
-		}
+		_expirationDate = expirationDate;
 	}
 
 	public Date getReviewDate() {
@@ -553,10 +488,7 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle> {
 	}
 
 	public void setReviewDate(Date reviewDate) {
-		if ((reviewDate != _reviewDate) ||
-				((reviewDate != null) && !reviewDate.equals(_reviewDate))) {
-			_reviewDate = reviewDate;
-		}
+		_reviewDate = reviewDate;
 	}
 
 	public boolean getIndexable() {
@@ -568,9 +500,7 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle> {
 	}
 
 	public void setIndexable(boolean indexable) {
-		if (indexable != _indexable) {
-			_indexable = indexable;
-		}
+		_indexable = indexable;
 	}
 
 	public boolean getSmallImage() {
@@ -582,9 +512,7 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle> {
 	}
 
 	public void setSmallImage(boolean smallImage) {
-		if (smallImage != _smallImage) {
-			_smallImage = smallImage;
-		}
+		_smallImage = smallImage;
 	}
 
 	public long getSmallImageId() {
@@ -592,9 +520,7 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle> {
 	}
 
 	public void setSmallImageId(long smallImageId) {
-		if (smallImageId != _smallImageId) {
-			_smallImageId = smallImageId;
-		}
+		_smallImageId = smallImageId;
 	}
 
 	public String getSmallImageURL() {
@@ -602,11 +528,7 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle> {
 	}
 
 	public void setSmallImageURL(String smallImageURL) {
-		if ((smallImageURL != _smallImageURL) ||
-				((smallImageURL != null) &&
-				!smallImageURL.equals(_smallImageURL))) {
-			_smallImageURL = smallImageURL;
-		}
+		_smallImageURL = smallImageURL;
 	}
 
 	public JournalArticle toEscapedModel() {

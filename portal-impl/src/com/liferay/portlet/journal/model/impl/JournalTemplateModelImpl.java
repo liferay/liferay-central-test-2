@@ -189,12 +189,10 @@ public class JournalTemplateModelImpl extends BaseModelImpl<JournalTemplate> {
 	}
 
 	public void setUuid(String uuid) {
-		if ((uuid != null) && !uuid.equals(_uuid)) {
-			_uuid = uuid;
+		_uuid = uuid;
 
-			if (_originalUuid == null) {
-				_originalUuid = uuid;
-			}
+		if (_originalUuid == null) {
+			_originalUuid = uuid;
 		}
 	}
 
@@ -207,9 +205,7 @@ public class JournalTemplateModelImpl extends BaseModelImpl<JournalTemplate> {
 	}
 
 	public void setId(long id) {
-		if (id != _id) {
-			_id = id;
-		}
+		_id = id;
 	}
 
 	public long getGroupId() {
@@ -217,14 +213,12 @@ public class JournalTemplateModelImpl extends BaseModelImpl<JournalTemplate> {
 	}
 
 	public void setGroupId(long groupId) {
-		if (groupId != _groupId) {
-			_groupId = groupId;
+		_groupId = groupId;
 
-			if (!_setOriginalGroupId) {
-				_setOriginalGroupId = true;
+		if (!_setOriginalGroupId) {
+			_setOriginalGroupId = true;
 
-				_originalGroupId = groupId;
-			}
+			_originalGroupId = groupId;
 		}
 	}
 
@@ -237,9 +231,7 @@ public class JournalTemplateModelImpl extends BaseModelImpl<JournalTemplate> {
 	}
 
 	public void setCompanyId(long companyId) {
-		if (companyId != _companyId) {
-			_companyId = companyId;
-		}
+		_companyId = companyId;
 	}
 
 	public long getUserId() {
@@ -247,9 +239,7 @@ public class JournalTemplateModelImpl extends BaseModelImpl<JournalTemplate> {
 	}
 
 	public void setUserId(long userId) {
-		if (userId != _userId) {
-			_userId = userId;
-		}
+		_userId = userId;
 	}
 
 	public String getUserName() {
@@ -257,10 +247,7 @@ public class JournalTemplateModelImpl extends BaseModelImpl<JournalTemplate> {
 	}
 
 	public void setUserName(String userName) {
-		if ((userName != _userName) ||
-				((userName != null) && !userName.equals(_userName))) {
-			_userName = userName;
-		}
+		_userName = userName;
 	}
 
 	public Date getCreateDate() {
@@ -268,10 +255,7 @@ public class JournalTemplateModelImpl extends BaseModelImpl<JournalTemplate> {
 	}
 
 	public void setCreateDate(Date createDate) {
-		if ((createDate != _createDate) ||
-				((createDate != null) && !createDate.equals(_createDate))) {
-			_createDate = createDate;
-		}
+		_createDate = createDate;
 	}
 
 	public Date getModifiedDate() {
@@ -279,10 +263,7 @@ public class JournalTemplateModelImpl extends BaseModelImpl<JournalTemplate> {
 	}
 
 	public void setModifiedDate(Date modifiedDate) {
-		if ((modifiedDate != _modifiedDate) ||
-				((modifiedDate != null) && !modifiedDate.equals(_modifiedDate))) {
-			_modifiedDate = modifiedDate;
-		}
+		_modifiedDate = modifiedDate;
 	}
 
 	public String getTemplateId() {
@@ -290,13 +271,10 @@ public class JournalTemplateModelImpl extends BaseModelImpl<JournalTemplate> {
 	}
 
 	public void setTemplateId(String templateId) {
-		if ((templateId != _templateId) ||
-				((templateId != null) && !templateId.equals(_templateId))) {
-			_templateId = templateId;
+		_templateId = templateId;
 
-			if (_originalTemplateId == null) {
-				_originalTemplateId = templateId;
-			}
+		if (_originalTemplateId == null) {
+			_originalTemplateId = templateId;
 		}
 	}
 
@@ -309,10 +287,7 @@ public class JournalTemplateModelImpl extends BaseModelImpl<JournalTemplate> {
 	}
 
 	public void setStructureId(String structureId) {
-		if ((structureId != _structureId) ||
-				((structureId != null) && !structureId.equals(_structureId))) {
-			_structureId = structureId;
-		}
+		_structureId = structureId;
 	}
 
 	public String getName() {
@@ -320,9 +295,7 @@ public class JournalTemplateModelImpl extends BaseModelImpl<JournalTemplate> {
 	}
 
 	public void setName(String name) {
-		if ((name != _name) || ((name != null) && !name.equals(_name))) {
-			_name = name;
-		}
+		_name = name;
 	}
 
 	public String getDescription() {
@@ -330,10 +303,7 @@ public class JournalTemplateModelImpl extends BaseModelImpl<JournalTemplate> {
 	}
 
 	public void setDescription(String description) {
-		if ((description != _description) ||
-				((description != null) && !description.equals(_description))) {
-			_description = description;
-		}
+		_description = description;
 	}
 
 	public String getXsl() {
@@ -341,9 +311,7 @@ public class JournalTemplateModelImpl extends BaseModelImpl<JournalTemplate> {
 	}
 
 	public void setXsl(String xsl) {
-		if ((xsl != _xsl) || ((xsl != null) && !xsl.equals(_xsl))) {
-			_xsl = xsl;
-		}
+		_xsl = xsl;
 	}
 
 	public String getLangType() {
@@ -351,10 +319,7 @@ public class JournalTemplateModelImpl extends BaseModelImpl<JournalTemplate> {
 	}
 
 	public void setLangType(String langType) {
-		if ((langType != _langType) ||
-				((langType != null) && !langType.equals(_langType))) {
-			_langType = langType;
-		}
+		_langType = langType;
 	}
 
 	public boolean getCacheable() {
@@ -366,9 +331,7 @@ public class JournalTemplateModelImpl extends BaseModelImpl<JournalTemplate> {
 	}
 
 	public void setCacheable(boolean cacheable) {
-		if (cacheable != _cacheable) {
-			_cacheable = cacheable;
-		}
+		_cacheable = cacheable;
 	}
 
 	public boolean getSmallImage() {
@@ -380,9 +343,7 @@ public class JournalTemplateModelImpl extends BaseModelImpl<JournalTemplate> {
 	}
 
 	public void setSmallImage(boolean smallImage) {
-		if (smallImage != _smallImage) {
-			_smallImage = smallImage;
-		}
+		_smallImage = smallImage;
 	}
 
 	public long getSmallImageId() {
@@ -390,14 +351,12 @@ public class JournalTemplateModelImpl extends BaseModelImpl<JournalTemplate> {
 	}
 
 	public void setSmallImageId(long smallImageId) {
-		if (smallImageId != _smallImageId) {
-			_smallImageId = smallImageId;
+		_smallImageId = smallImageId;
 
-			if (!_setOriginalSmallImageId) {
-				_setOriginalSmallImageId = true;
+		if (!_setOriginalSmallImageId) {
+			_setOriginalSmallImageId = true;
 
-				_originalSmallImageId = smallImageId;
-			}
+			_originalSmallImageId = smallImageId;
 		}
 	}
 
@@ -410,11 +369,7 @@ public class JournalTemplateModelImpl extends BaseModelImpl<JournalTemplate> {
 	}
 
 	public void setSmallImageURL(String smallImageURL) {
-		if ((smallImageURL != _smallImageURL) ||
-				((smallImageURL != null) &&
-				!smallImageURL.equals(_smallImageURL))) {
-			_smallImageURL = smallImageURL;
-		}
+		_smallImageURL = smallImageURL;
 	}
 
 	public JournalTemplate toEscapedModel() {

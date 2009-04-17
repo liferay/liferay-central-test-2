@@ -392,12 +392,6 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl
 
 	public List<UserGroupRole> findByUserId(long userId)
 		throws SystemException {
-		int count = countByUserId(userId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { new Long(userId) };
 
 		List<UserGroupRole> list = (List<UserGroupRole>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_USERID,
@@ -453,12 +447,6 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl
 
 	public List<UserGroupRole> findByUserId(long userId, int start, int end,
 		OrderByComparator obc) throws SystemException {
-		int count = countByUserId(userId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(userId),
 				
@@ -611,12 +599,6 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl
 
 	public List<UserGroupRole> findByGroupId(long groupId)
 		throws SystemException {
-		int count = countByGroupId(groupId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { new Long(groupId) };
 
 		List<UserGroupRole> list = (List<UserGroupRole>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_GROUPID,
@@ -672,12 +654,6 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl
 
 	public List<UserGroupRole> findByGroupId(long groupId, int start, int end,
 		OrderByComparator obc) throws SystemException {
-		int count = countByGroupId(groupId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				
@@ -830,12 +806,6 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl
 
 	public List<UserGroupRole> findByRoleId(long roleId)
 		throws SystemException {
-		int count = countByRoleId(roleId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { new Long(roleId) };
 
 		List<UserGroupRole> list = (List<UserGroupRole>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_ROLEID,
@@ -891,12 +861,6 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl
 
 	public List<UserGroupRole> findByRoleId(long roleId, int start, int end,
 		OrderByComparator obc) throws SystemException {
-		int count = countByRoleId(roleId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(roleId),
 				
@@ -1049,12 +1013,6 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl
 
 	public List<UserGroupRole> findByU_G(long userId, long groupId)
 		throws SystemException {
-		int count = countByU_G(userId, groupId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { new Long(userId), new Long(groupId) };
 
 		List<UserGroupRole> list = (List<UserGroupRole>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_U_G,
@@ -1116,12 +1074,6 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl
 
 	public List<UserGroupRole> findByU_G(long userId, long groupId, int start,
 		int end, OrderByComparator obc) throws SystemException {
-		int count = countByU_G(userId, groupId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(userId), new Long(groupId),
 				
@@ -1296,12 +1248,6 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl
 
 	public List<UserGroupRole> findByG_R(long groupId, long roleId)
 		throws SystemException {
-		int count = countByG_R(groupId, roleId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { new Long(groupId), new Long(roleId) };
 
 		List<UserGroupRole> list = (List<UserGroupRole>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_G_R,
@@ -1363,12 +1309,6 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl
 
 	public List<UserGroupRole> findByG_R(long groupId, long roleId, int start,
 		int end, OrderByComparator obc) throws SystemException {
-		int count = countByG_R(groupId, roleId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), new Long(roleId),
 				

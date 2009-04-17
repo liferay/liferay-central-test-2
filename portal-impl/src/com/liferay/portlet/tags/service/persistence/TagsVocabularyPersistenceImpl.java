@@ -295,6 +295,8 @@ public class TagsVocabularyPersistenceImpl extends BasePersistenceImpl
 		boolean merge) throws SystemException {
 		boolean isNew = tagsVocabulary.isNew();
 
+		TagsVocabularyModelImpl tagsVocabularyModelImpl = (TagsVocabularyModelImpl)tagsVocabulary;
+
 		Session session = null;
 
 		try {
@@ -316,8 +318,6 @@ public class TagsVocabularyPersistenceImpl extends BasePersistenceImpl
 		EntityCacheUtil.putResult(TagsVocabularyModelImpl.ENTITY_CACHE_ENABLED,
 			TagsVocabularyImpl.class, tagsVocabulary.getPrimaryKey(),
 			tagsVocabulary);
-
-		TagsVocabularyModelImpl tagsVocabularyModelImpl = (TagsVocabularyModelImpl)tagsVocabulary;
 
 		if (!isNew &&
 				((tagsVocabulary.getGroupId() != tagsVocabularyModelImpl.getOriginalGroupId()) ||
@@ -515,12 +515,6 @@ public class TagsVocabularyPersistenceImpl extends BasePersistenceImpl
 
 	public List<TagsVocabulary> findByG_F(long groupId, boolean folksonomy)
 		throws SystemException {
-		int count = countByG_F(groupId, folksonomy);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), Boolean.valueOf(folksonomy)
 			};
@@ -588,12 +582,6 @@ public class TagsVocabularyPersistenceImpl extends BasePersistenceImpl
 
 	public List<TagsVocabulary> findByG_F(long groupId, boolean folksonomy,
 		int start, int end, OrderByComparator obc) throws SystemException {
-		int count = countByG_F(groupId, folksonomy);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), Boolean.valueOf(folksonomy),
 				
@@ -780,12 +768,6 @@ public class TagsVocabularyPersistenceImpl extends BasePersistenceImpl
 
 	public List<TagsVocabulary> findByC_F(long companyId, boolean folksonomy)
 		throws SystemException {
-		int count = countByC_F(companyId, folksonomy);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(companyId), Boolean.valueOf(folksonomy)
 			};
@@ -853,12 +835,6 @@ public class TagsVocabularyPersistenceImpl extends BasePersistenceImpl
 
 	public List<TagsVocabulary> findByC_F(long companyId, boolean folksonomy,
 		int start, int end, OrderByComparator obc) throws SystemException {
-		int count = countByC_F(companyId, folksonomy);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(companyId), Boolean.valueOf(folksonomy),
 				

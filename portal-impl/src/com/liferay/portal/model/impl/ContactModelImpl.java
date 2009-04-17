@@ -235,9 +235,7 @@ public class ContactModelImpl extends BaseModelImpl<Contact> {
 	}
 
 	public void setContactId(long contactId) {
-		if (contactId != _contactId) {
-			_contactId = contactId;
-		}
+		_contactId = contactId;
 	}
 
 	public long getCompanyId() {
@@ -245,9 +243,7 @@ public class ContactModelImpl extends BaseModelImpl<Contact> {
 	}
 
 	public void setCompanyId(long companyId) {
-		if (companyId != _companyId) {
-			_companyId = companyId;
-		}
+		_companyId = companyId;
 	}
 
 	public long getUserId() {
@@ -255,9 +251,7 @@ public class ContactModelImpl extends BaseModelImpl<Contact> {
 	}
 
 	public void setUserId(long userId) {
-		if (userId != _userId) {
-			_userId = userId;
-		}
+		_userId = userId;
 	}
 
 	public String getUserName() {
@@ -265,10 +259,7 @@ public class ContactModelImpl extends BaseModelImpl<Contact> {
 	}
 
 	public void setUserName(String userName) {
-		if ((userName != _userName) ||
-				((userName != null) && !userName.equals(_userName))) {
-			_userName = userName;
-		}
+		_userName = userName;
 	}
 
 	public Date getCreateDate() {
@@ -276,10 +267,7 @@ public class ContactModelImpl extends BaseModelImpl<Contact> {
 	}
 
 	public void setCreateDate(Date createDate) {
-		if ((createDate != _createDate) ||
-				((createDate != null) && !createDate.equals(_createDate))) {
-			_createDate = createDate;
-		}
+		_createDate = createDate;
 	}
 
 	public Date getModifiedDate() {
@@ -287,10 +275,7 @@ public class ContactModelImpl extends BaseModelImpl<Contact> {
 	}
 
 	public void setModifiedDate(Date modifiedDate) {
-		if ((modifiedDate != _modifiedDate) ||
-				((modifiedDate != null) && !modifiedDate.equals(_modifiedDate))) {
-			_modifiedDate = modifiedDate;
-		}
+		_modifiedDate = modifiedDate;
 	}
 
 	public long getAccountId() {
@@ -298,9 +283,7 @@ public class ContactModelImpl extends BaseModelImpl<Contact> {
 	}
 
 	public void setAccountId(long accountId) {
-		if (accountId != _accountId) {
-			_accountId = accountId;
-		}
+		_accountId = accountId;
 	}
 
 	public long getParentContactId() {
@@ -308,9 +291,7 @@ public class ContactModelImpl extends BaseModelImpl<Contact> {
 	}
 
 	public void setParentContactId(long parentContactId) {
-		if (parentContactId != _parentContactId) {
-			_parentContactId = parentContactId;
-		}
+		_parentContactId = parentContactId;
 	}
 
 	public String getFirstName() {
@@ -318,10 +299,7 @@ public class ContactModelImpl extends BaseModelImpl<Contact> {
 	}
 
 	public void setFirstName(String firstName) {
-		if ((firstName != _firstName) ||
-				((firstName != null) && !firstName.equals(_firstName))) {
-			_firstName = firstName;
-		}
+		_firstName = firstName;
 	}
 
 	public String getMiddleName() {
@@ -329,10 +307,7 @@ public class ContactModelImpl extends BaseModelImpl<Contact> {
 	}
 
 	public void setMiddleName(String middleName) {
-		if ((middleName != _middleName) ||
-				((middleName != null) && !middleName.equals(_middleName))) {
-			_middleName = middleName;
-		}
+		_middleName = middleName;
 	}
 
 	public String getLastName() {
@@ -340,10 +315,7 @@ public class ContactModelImpl extends BaseModelImpl<Contact> {
 	}
 
 	public void setLastName(String lastName) {
-		if ((lastName != _lastName) ||
-				((lastName != null) && !lastName.equals(_lastName))) {
-			_lastName = lastName;
-		}
+		_lastName = lastName;
 	}
 
 	public int getPrefixId() {
@@ -351,9 +323,7 @@ public class ContactModelImpl extends BaseModelImpl<Contact> {
 	}
 
 	public void setPrefixId(int prefixId) {
-		if (prefixId != _prefixId) {
-			_prefixId = prefixId;
-		}
+		_prefixId = prefixId;
 	}
 
 	public int getSuffixId() {
@@ -361,9 +331,7 @@ public class ContactModelImpl extends BaseModelImpl<Contact> {
 	}
 
 	public void setSuffixId(int suffixId) {
-		if (suffixId != _suffixId) {
-			_suffixId = suffixId;
-		}
+		_suffixId = suffixId;
 	}
 
 	public boolean getMale() {
@@ -375,9 +343,7 @@ public class ContactModelImpl extends BaseModelImpl<Contact> {
 	}
 
 	public void setMale(boolean male) {
-		if (male != _male) {
-			_male = male;
-		}
+		_male = male;
 	}
 
 	public Date getBirthday() {
@@ -385,10 +351,7 @@ public class ContactModelImpl extends BaseModelImpl<Contact> {
 	}
 
 	public void setBirthday(Date birthday) {
-		if ((birthday != _birthday) ||
-				((birthday != null) && !birthday.equals(_birthday))) {
-			_birthday = birthday;
-		}
+		_birthday = birthday;
 	}
 
 	public String getSmsSn() {
@@ -396,9 +359,7 @@ public class ContactModelImpl extends BaseModelImpl<Contact> {
 	}
 
 	public void setSmsSn(String smsSn) {
-		if ((smsSn != _smsSn) || ((smsSn != null) && !smsSn.equals(_smsSn))) {
-			_smsSn = smsSn;
-		}
+		_smsSn = smsSn;
 	}
 
 	public String getAimSn() {
@@ -406,9 +367,7 @@ public class ContactModelImpl extends BaseModelImpl<Contact> {
 	}
 
 	public void setAimSn(String aimSn) {
-		if ((aimSn != _aimSn) || ((aimSn != null) && !aimSn.equals(_aimSn))) {
-			_aimSn = aimSn;
-		}
+		_aimSn = aimSn;
 	}
 
 	public String getFacebookSn() {
@@ -416,10 +375,7 @@ public class ContactModelImpl extends BaseModelImpl<Contact> {
 	}
 
 	public void setFacebookSn(String facebookSn) {
-		if ((facebookSn != _facebookSn) ||
-				((facebookSn != null) && !facebookSn.equals(_facebookSn))) {
-			_facebookSn = facebookSn;
-		}
+		_facebookSn = facebookSn;
 	}
 
 	public String getIcqSn() {
@@ -427,9 +383,7 @@ public class ContactModelImpl extends BaseModelImpl<Contact> {
 	}
 
 	public void setIcqSn(String icqSn) {
-		if ((icqSn != _icqSn) || ((icqSn != null) && !icqSn.equals(_icqSn))) {
-			_icqSn = icqSn;
-		}
+		_icqSn = icqSn;
 	}
 
 	public String getJabberSn() {
@@ -437,10 +391,7 @@ public class ContactModelImpl extends BaseModelImpl<Contact> {
 	}
 
 	public void setJabberSn(String jabberSn) {
-		if ((jabberSn != _jabberSn) ||
-				((jabberSn != null) && !jabberSn.equals(_jabberSn))) {
-			_jabberSn = jabberSn;
-		}
+		_jabberSn = jabberSn;
 	}
 
 	public String getMsnSn() {
@@ -448,9 +399,7 @@ public class ContactModelImpl extends BaseModelImpl<Contact> {
 	}
 
 	public void setMsnSn(String msnSn) {
-		if ((msnSn != _msnSn) || ((msnSn != null) && !msnSn.equals(_msnSn))) {
-			_msnSn = msnSn;
-		}
+		_msnSn = msnSn;
 	}
 
 	public String getMySpaceSn() {
@@ -458,10 +407,7 @@ public class ContactModelImpl extends BaseModelImpl<Contact> {
 	}
 
 	public void setMySpaceSn(String mySpaceSn) {
-		if ((mySpaceSn != _mySpaceSn) ||
-				((mySpaceSn != null) && !mySpaceSn.equals(_mySpaceSn))) {
-			_mySpaceSn = mySpaceSn;
-		}
+		_mySpaceSn = mySpaceSn;
 	}
 
 	public String getSkypeSn() {
@@ -469,10 +415,7 @@ public class ContactModelImpl extends BaseModelImpl<Contact> {
 	}
 
 	public void setSkypeSn(String skypeSn) {
-		if ((skypeSn != _skypeSn) ||
-				((skypeSn != null) && !skypeSn.equals(_skypeSn))) {
-			_skypeSn = skypeSn;
-		}
+		_skypeSn = skypeSn;
 	}
 
 	public String getTwitterSn() {
@@ -480,10 +423,7 @@ public class ContactModelImpl extends BaseModelImpl<Contact> {
 	}
 
 	public void setTwitterSn(String twitterSn) {
-		if ((twitterSn != _twitterSn) ||
-				((twitterSn != null) && !twitterSn.equals(_twitterSn))) {
-			_twitterSn = twitterSn;
-		}
+		_twitterSn = twitterSn;
 	}
 
 	public String getYmSn() {
@@ -491,9 +431,7 @@ public class ContactModelImpl extends BaseModelImpl<Contact> {
 	}
 
 	public void setYmSn(String ymSn) {
-		if ((ymSn != _ymSn) || ((ymSn != null) && !ymSn.equals(_ymSn))) {
-			_ymSn = ymSn;
-		}
+		_ymSn = ymSn;
 	}
 
 	public String getEmployeeStatusId() {
@@ -501,11 +439,7 @@ public class ContactModelImpl extends BaseModelImpl<Contact> {
 	}
 
 	public void setEmployeeStatusId(String employeeStatusId) {
-		if ((employeeStatusId != _employeeStatusId) ||
-				((employeeStatusId != null) &&
-				!employeeStatusId.equals(_employeeStatusId))) {
-			_employeeStatusId = employeeStatusId;
-		}
+		_employeeStatusId = employeeStatusId;
 	}
 
 	public String getEmployeeNumber() {
@@ -513,11 +447,7 @@ public class ContactModelImpl extends BaseModelImpl<Contact> {
 	}
 
 	public void setEmployeeNumber(String employeeNumber) {
-		if ((employeeNumber != _employeeNumber) ||
-				((employeeNumber != null) &&
-				!employeeNumber.equals(_employeeNumber))) {
-			_employeeNumber = employeeNumber;
-		}
+		_employeeNumber = employeeNumber;
 	}
 
 	public String getJobTitle() {
@@ -525,10 +455,7 @@ public class ContactModelImpl extends BaseModelImpl<Contact> {
 	}
 
 	public void setJobTitle(String jobTitle) {
-		if ((jobTitle != _jobTitle) ||
-				((jobTitle != null) && !jobTitle.equals(_jobTitle))) {
-			_jobTitle = jobTitle;
-		}
+		_jobTitle = jobTitle;
 	}
 
 	public String getJobClass() {
@@ -536,10 +463,7 @@ public class ContactModelImpl extends BaseModelImpl<Contact> {
 	}
 
 	public void setJobClass(String jobClass) {
-		if ((jobClass != _jobClass) ||
-				((jobClass != null) && !jobClass.equals(_jobClass))) {
-			_jobClass = jobClass;
-		}
+		_jobClass = jobClass;
 	}
 
 	public String getHoursOfOperation() {
@@ -547,11 +471,7 @@ public class ContactModelImpl extends BaseModelImpl<Contact> {
 	}
 
 	public void setHoursOfOperation(String hoursOfOperation) {
-		if ((hoursOfOperation != _hoursOfOperation) ||
-				((hoursOfOperation != null) &&
-				!hoursOfOperation.equals(_hoursOfOperation))) {
-			_hoursOfOperation = hoursOfOperation;
-		}
+		_hoursOfOperation = hoursOfOperation;
 	}
 
 	public Contact toEscapedModel() {

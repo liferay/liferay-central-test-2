@@ -372,6 +372,8 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl
 		boolean merge) throws SystemException {
 		boolean isNew = journalTemplate.isNew();
 
+		JournalTemplateModelImpl journalTemplateModelImpl = (JournalTemplateModelImpl)journalTemplate;
+
 		if (Validator.isNull(journalTemplate.getUuid())) {
 			String uuid = PortalUUIDUtil.generate();
 
@@ -399,8 +401,6 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl
 		EntityCacheUtil.putResult(JournalTemplateModelImpl.ENTITY_CACHE_ENABLED,
 			JournalTemplateImpl.class, journalTemplate.getPrimaryKey(),
 			journalTemplate);
-
-		JournalTemplateModelImpl journalTemplateModelImpl = (JournalTemplateModelImpl)journalTemplate;
 
 		if (!isNew &&
 				(!journalTemplate.getUuid()
@@ -513,12 +513,6 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl
 
 	public List<JournalTemplate> findByUuid(String uuid)
 		throws SystemException {
-		int count = countByUuid(uuid);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { uuid };
 
 		List<JournalTemplate> list = (List<JournalTemplate>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_UUID,
@@ -585,12 +579,6 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl
 
 	public List<JournalTemplate> findByUuid(String uuid, int start, int end,
 		OrderByComparator obc) throws SystemException {
-		int count = countByUuid(uuid);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				uuid,
 				
@@ -889,12 +877,6 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl
 
 	public List<JournalTemplate> findByGroupId(long groupId)
 		throws SystemException {
-		int count = countByGroupId(groupId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { new Long(groupId) };
 
 		List<JournalTemplate> list = (List<JournalTemplate>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_GROUPID,
@@ -954,12 +936,6 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl
 
 	public List<JournalTemplate> findByGroupId(long groupId, int start,
 		int end, OrderByComparator obc) throws SystemException {
-		int count = countByGroupId(groupId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				
@@ -1125,12 +1101,6 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl
 
 	public List<JournalTemplate> findByTemplateId(String templateId)
 		throws SystemException {
-		int count = countByTemplateId(templateId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { templateId };
 
 		List<JournalTemplate> list = (List<JournalTemplate>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_TEMPLATEID,
@@ -1197,12 +1167,6 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl
 
 	public List<JournalTemplate> findByTemplateId(String templateId, int start,
 		int end, OrderByComparator obc) throws SystemException {
-		int count = countByTemplateId(templateId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				templateId,
 				
@@ -1607,12 +1571,6 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl
 
 	public List<JournalTemplate> findByG_S(long groupId, String structureId)
 		throws SystemException {
-		int count = countByG_S(groupId, structureId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { new Long(groupId), structureId };
 
 		List<JournalTemplate> list = (List<JournalTemplate>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_G_S,
@@ -1685,12 +1643,6 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl
 
 	public List<JournalTemplate> findByG_S(long groupId, String structureId,
 		int start, int end, OrderByComparator obc) throws SystemException {
-		int count = countByG_S(groupId, structureId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				

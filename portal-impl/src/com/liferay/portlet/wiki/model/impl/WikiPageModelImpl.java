@@ -188,9 +188,7 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage> {
 	}
 
 	public void setUuid(String uuid) {
-		if ((uuid != null) && !uuid.equals(_uuid)) {
-			_uuid = uuid;
-		}
+		_uuid = uuid;
 	}
 
 	public long getPageId() {
@@ -198,9 +196,7 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage> {
 	}
 
 	public void setPageId(long pageId) {
-		if (pageId != _pageId) {
-			_pageId = pageId;
-		}
+		_pageId = pageId;
 	}
 
 	public long getResourcePrimKey() {
@@ -208,9 +204,7 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage> {
 	}
 
 	public void setResourcePrimKey(long resourcePrimKey) {
-		if (resourcePrimKey != _resourcePrimKey) {
-			_resourcePrimKey = resourcePrimKey;
-		}
+		_resourcePrimKey = resourcePrimKey;
 	}
 
 	public long getCompanyId() {
@@ -218,9 +212,7 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage> {
 	}
 
 	public void setCompanyId(long companyId) {
-		if (companyId != _companyId) {
-			_companyId = companyId;
-		}
+		_companyId = companyId;
 	}
 
 	public long getUserId() {
@@ -228,9 +220,7 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage> {
 	}
 
 	public void setUserId(long userId) {
-		if (userId != _userId) {
-			_userId = userId;
-		}
+		_userId = userId;
 	}
 
 	public String getUserName() {
@@ -238,10 +228,7 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage> {
 	}
 
 	public void setUserName(String userName) {
-		if ((userName != _userName) ||
-				((userName != null) && !userName.equals(_userName))) {
-			_userName = userName;
-		}
+		_userName = userName;
 	}
 
 	public Date getCreateDate() {
@@ -249,10 +236,7 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage> {
 	}
 
 	public void setCreateDate(Date createDate) {
-		if ((createDate != _createDate) ||
-				((createDate != null) && !createDate.equals(_createDate))) {
-			_createDate = createDate;
-		}
+		_createDate = createDate;
 	}
 
 	public Date getModifiedDate() {
@@ -260,10 +244,7 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage> {
 	}
 
 	public void setModifiedDate(Date modifiedDate) {
-		if ((modifiedDate != _modifiedDate) ||
-				((modifiedDate != null) && !modifiedDate.equals(_modifiedDate))) {
-			_modifiedDate = modifiedDate;
-		}
+		_modifiedDate = modifiedDate;
 	}
 
 	public long getNodeId() {
@@ -271,14 +252,12 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage> {
 	}
 
 	public void setNodeId(long nodeId) {
-		if (nodeId != _nodeId) {
-			_nodeId = nodeId;
+		_nodeId = nodeId;
 
-			if (!_setOriginalNodeId) {
-				_setOriginalNodeId = true;
+		if (!_setOriginalNodeId) {
+			_setOriginalNodeId = true;
 
-				_originalNodeId = nodeId;
-			}
+			_originalNodeId = nodeId;
 		}
 	}
 
@@ -291,12 +270,10 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage> {
 	}
 
 	public void setTitle(String title) {
-		if ((title != _title) || ((title != null) && !title.equals(_title))) {
-			_title = title;
+		_title = title;
 
-			if (_originalTitle == null) {
-				_originalTitle = title;
-			}
+		if (_originalTitle == null) {
+			_originalTitle = title;
 		}
 	}
 
@@ -309,14 +286,12 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage> {
 	}
 
 	public void setVersion(double version) {
-		if (version != _version) {
-			_version = version;
+		_version = version;
 
-			if (!_setOriginalVersion) {
-				_setOriginalVersion = true;
+		if (!_setOriginalVersion) {
+			_setOriginalVersion = true;
 
-				_originalVersion = version;
-			}
+			_originalVersion = version;
 		}
 	}
 
@@ -333,9 +308,7 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage> {
 	}
 
 	public void setMinorEdit(boolean minorEdit) {
-		if (minorEdit != _minorEdit) {
-			_minorEdit = minorEdit;
-		}
+		_minorEdit = minorEdit;
 	}
 
 	public String getContent() {
@@ -343,10 +316,7 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage> {
 	}
 
 	public void setContent(String content) {
-		if ((content != _content) ||
-				((content != null) && !content.equals(_content))) {
-			_content = content;
-		}
+		_content = content;
 	}
 
 	public String getSummary() {
@@ -354,10 +324,7 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage> {
 	}
 
 	public void setSummary(String summary) {
-		if ((summary != _summary) ||
-				((summary != null) && !summary.equals(_summary))) {
-			_summary = summary;
-		}
+		_summary = summary;
 	}
 
 	public String getFormat() {
@@ -365,10 +332,7 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage> {
 	}
 
 	public void setFormat(String format) {
-		if ((format != _format) ||
-				((format != null) && !format.equals(_format))) {
-			_format = format;
-		}
+		_format = format;
 	}
 
 	public boolean getHead() {
@@ -380,9 +344,7 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage> {
 	}
 
 	public void setHead(boolean head) {
-		if (head != _head) {
-			_head = head;
-		}
+		_head = head;
 	}
 
 	public String getParentTitle() {
@@ -390,10 +352,7 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage> {
 	}
 
 	public void setParentTitle(String parentTitle) {
-		if ((parentTitle != _parentTitle) ||
-				((parentTitle != null) && !parentTitle.equals(_parentTitle))) {
-			_parentTitle = parentTitle;
-		}
+		_parentTitle = parentTitle;
 	}
 
 	public String getRedirectTitle() {
@@ -401,11 +360,7 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage> {
 	}
 
 	public void setRedirectTitle(String redirectTitle) {
-		if ((redirectTitle != _redirectTitle) ||
-				((redirectTitle != null) &&
-				!redirectTitle.equals(_redirectTitle))) {
-			_redirectTitle = redirectTitle;
-		}
+		_redirectTitle = redirectTitle;
 	}
 
 	public WikiPage toEscapedModel() {

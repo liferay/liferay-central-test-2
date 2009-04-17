@@ -248,9 +248,7 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem> {
 	}
 
 	public void setItemId(long itemId) {
-		if (itemId != _itemId) {
-			_itemId = itemId;
-		}
+		_itemId = itemId;
 	}
 
 	public long getCompanyId() {
@@ -258,14 +256,12 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem> {
 	}
 
 	public void setCompanyId(long companyId) {
-		if (companyId != _companyId) {
-			_companyId = companyId;
+		_companyId = companyId;
 
-			if (!_setOriginalCompanyId) {
-				_setOriginalCompanyId = true;
+		if (!_setOriginalCompanyId) {
+			_setOriginalCompanyId = true;
 
-				_originalCompanyId = companyId;
-			}
+			_originalCompanyId = companyId;
 		}
 	}
 
@@ -278,9 +274,7 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem> {
 	}
 
 	public void setUserId(long userId) {
-		if (userId != _userId) {
-			_userId = userId;
-		}
+		_userId = userId;
 	}
 
 	public String getUserName() {
@@ -288,10 +282,7 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem> {
 	}
 
 	public void setUserName(String userName) {
-		if ((userName != _userName) ||
-				((userName != null) && !userName.equals(_userName))) {
-			_userName = userName;
-		}
+		_userName = userName;
 	}
 
 	public Date getCreateDate() {
@@ -299,10 +290,7 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem> {
 	}
 
 	public void setCreateDate(Date createDate) {
-		if ((createDate != _createDate) ||
-				((createDate != null) && !createDate.equals(_createDate))) {
-			_createDate = createDate;
-		}
+		_createDate = createDate;
 	}
 
 	public Date getModifiedDate() {
@@ -310,10 +298,7 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem> {
 	}
 
 	public void setModifiedDate(Date modifiedDate) {
-		if ((modifiedDate != _modifiedDate) ||
-				((modifiedDate != null) && !modifiedDate.equals(_modifiedDate))) {
-			_modifiedDate = modifiedDate;
-		}
+		_modifiedDate = modifiedDate;
 	}
 
 	public long getCategoryId() {
@@ -321,9 +306,7 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem> {
 	}
 
 	public void setCategoryId(long categoryId) {
-		if (categoryId != _categoryId) {
-			_categoryId = categoryId;
-		}
+		_categoryId = categoryId;
 	}
 
 	public String getSku() {
@@ -331,12 +314,10 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem> {
 	}
 
 	public void setSku(String sku) {
-		if ((sku != _sku) || ((sku != null) && !sku.equals(_sku))) {
-			_sku = sku;
+		_sku = sku;
 
-			if (_originalSku == null) {
-				_originalSku = sku;
-			}
+		if (_originalSku == null) {
+			_originalSku = sku;
 		}
 	}
 
@@ -349,9 +330,7 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem> {
 	}
 
 	public void setName(String name) {
-		if ((name != _name) || ((name != null) && !name.equals(_name))) {
-			_name = name;
-		}
+		_name = name;
 	}
 
 	public String getDescription() {
@@ -359,10 +338,7 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem> {
 	}
 
 	public void setDescription(String description) {
-		if ((description != _description) ||
-				((description != null) && !description.equals(_description))) {
-			_description = description;
-		}
+		_description = description;
 	}
 
 	public String getProperties() {
@@ -370,10 +346,7 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem> {
 	}
 
 	public void setProperties(String properties) {
-		if ((properties != _properties) ||
-				((properties != null) && !properties.equals(_properties))) {
-			_properties = properties;
-		}
+		_properties = properties;
 	}
 
 	public boolean getFields() {
@@ -385,9 +358,7 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem> {
 	}
 
 	public void setFields(boolean fields) {
-		if (fields != _fields) {
-			_fields = fields;
-		}
+		_fields = fields;
 	}
 
 	public String getFieldsQuantities() {
@@ -395,11 +366,7 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem> {
 	}
 
 	public void setFieldsQuantities(String fieldsQuantities) {
-		if ((fieldsQuantities != _fieldsQuantities) ||
-				((fieldsQuantities != null) &&
-				!fieldsQuantities.equals(_fieldsQuantities))) {
-			_fieldsQuantities = fieldsQuantities;
-		}
+		_fieldsQuantities = fieldsQuantities;
 	}
 
 	public int getMinQuantity() {
@@ -407,9 +374,7 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem> {
 	}
 
 	public void setMinQuantity(int minQuantity) {
-		if (minQuantity != _minQuantity) {
-			_minQuantity = minQuantity;
-		}
+		_minQuantity = minQuantity;
 	}
 
 	public int getMaxQuantity() {
@@ -417,9 +382,7 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem> {
 	}
 
 	public void setMaxQuantity(int maxQuantity) {
-		if (maxQuantity != _maxQuantity) {
-			_maxQuantity = maxQuantity;
-		}
+		_maxQuantity = maxQuantity;
 	}
 
 	public double getPrice() {
@@ -427,9 +390,7 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem> {
 	}
 
 	public void setPrice(double price) {
-		if (price != _price) {
-			_price = price;
-		}
+		_price = price;
 	}
 
 	public double getDiscount() {
@@ -437,9 +398,7 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem> {
 	}
 
 	public void setDiscount(double discount) {
-		if (discount != _discount) {
-			_discount = discount;
-		}
+		_discount = discount;
 	}
 
 	public boolean getTaxable() {
@@ -451,9 +410,7 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem> {
 	}
 
 	public void setTaxable(boolean taxable) {
-		if (taxable != _taxable) {
-			_taxable = taxable;
-		}
+		_taxable = taxable;
 	}
 
 	public double getShipping() {
@@ -461,9 +418,7 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem> {
 	}
 
 	public void setShipping(double shipping) {
-		if (shipping != _shipping) {
-			_shipping = shipping;
-		}
+		_shipping = shipping;
 	}
 
 	public boolean getUseShippingFormula() {
@@ -475,9 +430,7 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem> {
 	}
 
 	public void setUseShippingFormula(boolean useShippingFormula) {
-		if (useShippingFormula != _useShippingFormula) {
-			_useShippingFormula = useShippingFormula;
-		}
+		_useShippingFormula = useShippingFormula;
 	}
 
 	public boolean getRequiresShipping() {
@@ -489,9 +442,7 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem> {
 	}
 
 	public void setRequiresShipping(boolean requiresShipping) {
-		if (requiresShipping != _requiresShipping) {
-			_requiresShipping = requiresShipping;
-		}
+		_requiresShipping = requiresShipping;
 	}
 
 	public int getStockQuantity() {
@@ -499,9 +450,7 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem> {
 	}
 
 	public void setStockQuantity(int stockQuantity) {
-		if (stockQuantity != _stockQuantity) {
-			_stockQuantity = stockQuantity;
-		}
+		_stockQuantity = stockQuantity;
 	}
 
 	public boolean getFeatured() {
@@ -513,9 +462,7 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem> {
 	}
 
 	public void setFeatured(boolean featured) {
-		if (featured != _featured) {
-			_featured = featured;
-		}
+		_featured = featured;
 	}
 
 	public boolean getSale() {
@@ -527,9 +474,7 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem> {
 	}
 
 	public void setSale(boolean sale) {
-		if (sale != _sale) {
-			_sale = sale;
-		}
+		_sale = sale;
 	}
 
 	public boolean getSmallImage() {
@@ -541,9 +486,7 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem> {
 	}
 
 	public void setSmallImage(boolean smallImage) {
-		if (smallImage != _smallImage) {
-			_smallImage = smallImage;
-		}
+		_smallImage = smallImage;
 	}
 
 	public long getSmallImageId() {
@@ -551,14 +494,12 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem> {
 	}
 
 	public void setSmallImageId(long smallImageId) {
-		if (smallImageId != _smallImageId) {
-			_smallImageId = smallImageId;
+		_smallImageId = smallImageId;
 
-			if (!_setOriginalSmallImageId) {
-				_setOriginalSmallImageId = true;
+		if (!_setOriginalSmallImageId) {
+			_setOriginalSmallImageId = true;
 
-				_originalSmallImageId = smallImageId;
-			}
+			_originalSmallImageId = smallImageId;
 		}
 	}
 
@@ -571,11 +512,7 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem> {
 	}
 
 	public void setSmallImageURL(String smallImageURL) {
-		if ((smallImageURL != _smallImageURL) ||
-				((smallImageURL != null) &&
-				!smallImageURL.equals(_smallImageURL))) {
-			_smallImageURL = smallImageURL;
-		}
+		_smallImageURL = smallImageURL;
 	}
 
 	public boolean getMediumImage() {
@@ -587,9 +524,7 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem> {
 	}
 
 	public void setMediumImage(boolean mediumImage) {
-		if (mediumImage != _mediumImage) {
-			_mediumImage = mediumImage;
-		}
+		_mediumImage = mediumImage;
 	}
 
 	public long getMediumImageId() {
@@ -597,14 +532,12 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem> {
 	}
 
 	public void setMediumImageId(long mediumImageId) {
-		if (mediumImageId != _mediumImageId) {
-			_mediumImageId = mediumImageId;
+		_mediumImageId = mediumImageId;
 
-			if (!_setOriginalMediumImageId) {
-				_setOriginalMediumImageId = true;
+		if (!_setOriginalMediumImageId) {
+			_setOriginalMediumImageId = true;
 
-				_originalMediumImageId = mediumImageId;
-			}
+			_originalMediumImageId = mediumImageId;
 		}
 	}
 
@@ -617,11 +550,7 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem> {
 	}
 
 	public void setMediumImageURL(String mediumImageURL) {
-		if ((mediumImageURL != _mediumImageURL) ||
-				((mediumImageURL != null) &&
-				!mediumImageURL.equals(_mediumImageURL))) {
-			_mediumImageURL = mediumImageURL;
-		}
+		_mediumImageURL = mediumImageURL;
 	}
 
 	public boolean getLargeImage() {
@@ -633,9 +562,7 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem> {
 	}
 
 	public void setLargeImage(boolean largeImage) {
-		if (largeImage != _largeImage) {
-			_largeImage = largeImage;
-		}
+		_largeImage = largeImage;
 	}
 
 	public long getLargeImageId() {
@@ -643,14 +570,12 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem> {
 	}
 
 	public void setLargeImageId(long largeImageId) {
-		if (largeImageId != _largeImageId) {
-			_largeImageId = largeImageId;
+		_largeImageId = largeImageId;
 
-			if (!_setOriginalLargeImageId) {
-				_setOriginalLargeImageId = true;
+		if (!_setOriginalLargeImageId) {
+			_setOriginalLargeImageId = true;
 
-				_originalLargeImageId = largeImageId;
-			}
+			_originalLargeImageId = largeImageId;
 		}
 	}
 
@@ -663,11 +588,7 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem> {
 	}
 
 	public void setLargeImageURL(String largeImageURL) {
-		if ((largeImageURL != _largeImageURL) ||
-				((largeImageURL != null) &&
-				!largeImageURL.equals(_largeImageURL))) {
-			_largeImageURL = largeImageURL;
-		}
+		_largeImageURL = largeImageURL;
 	}
 
 	public ShoppingItem toEscapedModel() {

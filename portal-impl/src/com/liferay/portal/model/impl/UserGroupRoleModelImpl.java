@@ -125,9 +125,7 @@ public class UserGroupRoleModelImpl extends BaseModelImpl<UserGroupRole> {
 	}
 
 	public void setUserId(long userId) {
-		if (userId != _userId) {
-			_userId = userId;
-		}
+		_userId = userId;
 	}
 
 	public long getGroupId() {
@@ -135,9 +133,7 @@ public class UserGroupRoleModelImpl extends BaseModelImpl<UserGroupRole> {
 	}
 
 	public void setGroupId(long groupId) {
-		if (groupId != _groupId) {
-			_groupId = groupId;
-		}
+		_groupId = groupId;
 	}
 
 	public long getRoleId() {
@@ -145,9 +141,7 @@ public class UserGroupRoleModelImpl extends BaseModelImpl<UserGroupRole> {
 	}
 
 	public void setRoleId(long roleId) {
-		if (roleId != _roleId) {
-			_roleId = roleId;
-		}
+		_roleId = roleId;
 	}
 
 	public UserGroupRole toEscapedModel() {

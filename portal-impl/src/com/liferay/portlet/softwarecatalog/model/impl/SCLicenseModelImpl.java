@@ -143,9 +143,7 @@ public class SCLicenseModelImpl extends BaseModelImpl<SCLicense> {
 	}
 
 	public void setLicenseId(long licenseId) {
-		if (licenseId != _licenseId) {
-			_licenseId = licenseId;
-		}
+		_licenseId = licenseId;
 	}
 
 	public String getName() {
@@ -153,9 +151,7 @@ public class SCLicenseModelImpl extends BaseModelImpl<SCLicense> {
 	}
 
 	public void setName(String name) {
-		if ((name != _name) || ((name != null) && !name.equals(_name))) {
-			_name = name;
-		}
+		_name = name;
 	}
 
 	public String getUrl() {
@@ -163,9 +159,7 @@ public class SCLicenseModelImpl extends BaseModelImpl<SCLicense> {
 	}
 
 	public void setUrl(String url) {
-		if ((url != _url) || ((url != null) && !url.equals(_url))) {
-			_url = url;
-		}
+		_url = url;
 	}
 
 	public boolean getOpenSource() {
@@ -177,9 +171,7 @@ public class SCLicenseModelImpl extends BaseModelImpl<SCLicense> {
 	}
 
 	public void setOpenSource(boolean openSource) {
-		if (openSource != _openSource) {
-			_openSource = openSource;
-		}
+		_openSource = openSource;
 	}
 
 	public boolean getActive() {
@@ -191,9 +183,7 @@ public class SCLicenseModelImpl extends BaseModelImpl<SCLicense> {
 	}
 
 	public void setActive(boolean active) {
-		if (active != _active) {
-			_active = active;
-		}
+		_active = active;
 	}
 
 	public boolean getRecommended() {
@@ -205,9 +195,7 @@ public class SCLicenseModelImpl extends BaseModelImpl<SCLicense> {
 	}
 
 	public void setRecommended(boolean recommended) {
-		if (recommended != _recommended) {
-			_recommended = recommended;
-		}
+		_recommended = recommended;
 	}
 
 	public SCLicense toEscapedModel() {

@@ -55,6 +55,8 @@ public class OrganizationJSONSerializer {
 		jsonObj.put("organizationId", model.getOrganizationId());
 		jsonObj.put("companyId", model.getCompanyId());
 		jsonObj.put("parentOrganizationId", model.getParentOrganizationId());
+		jsonObj.put("leftOrganizationId", model.getLeftOrganizationId());
+		jsonObj.put("rightOrganizationId", model.getRightOrganizationId());
 		jsonObj.put("name", model.getName());
 		jsonObj.put("type", model.getType());
 		jsonObj.put("recursable", model.getRecursable());

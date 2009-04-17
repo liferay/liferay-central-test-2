@@ -309,6 +309,8 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		boolean isNew = portletItem.isNew();
 
+		PortletItemModelImpl portletItemModelImpl = (PortletItemModelImpl)portletItem;
+
 		Session session = null;
 
 		try {
@@ -329,8 +331,6 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl
 
 		EntityCacheUtil.putResult(PortletItemModelImpl.ENTITY_CACHE_ENABLED,
 			PortletItemImpl.class, portletItem.getPrimaryKey(), portletItem);
-
-		PortletItemModelImpl portletItemModelImpl = (PortletItemModelImpl)portletItem;
 
 		if (!isNew &&
 				((portletItem.getGroupId() != portletItemModelImpl.getOriginalGroupId()) ||
@@ -419,12 +419,6 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl
 
 	public List<PortletItem> findByG_C(long groupId, long classNameId)
 		throws SystemException {
-		int count = countByG_C(groupId, classNameId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), new Long(classNameId)
 			};
@@ -487,12 +481,6 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl
 
 	public List<PortletItem> findByG_C(long groupId, long classNameId,
 		int start, int end, OrderByComparator obc) throws SystemException {
-		int count = countByG_C(groupId, classNameId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), new Long(classNameId),
 				
@@ -665,12 +653,6 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl
 
 	public List<PortletItem> findByG_P_C(long groupId, String portletId,
 		long classNameId) throws SystemException {
-		int count = countByG_P_C(groupId, portletId, classNameId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				
@@ -749,12 +731,6 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl
 	public List<PortletItem> findByG_P_C(long groupId, String portletId,
 		long classNameId, int start, int end, OrderByComparator obc)
 		throws SystemException {
-		int count = countByG_P_C(groupId, portletId, classNameId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				

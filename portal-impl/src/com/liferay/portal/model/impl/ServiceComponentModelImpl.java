@@ -135,9 +135,7 @@ public class ServiceComponentModelImpl extends BaseModelImpl<ServiceComponent> {
 	}
 
 	public void setServiceComponentId(long serviceComponentId) {
-		if (serviceComponentId != _serviceComponentId) {
-			_serviceComponentId = serviceComponentId;
-		}
+		_serviceComponentId = serviceComponentId;
 	}
 
 	public String getBuildNamespace() {
@@ -145,14 +143,10 @@ public class ServiceComponentModelImpl extends BaseModelImpl<ServiceComponent> {
 	}
 
 	public void setBuildNamespace(String buildNamespace) {
-		if ((buildNamespace != _buildNamespace) ||
-				((buildNamespace != null) &&
-				!buildNamespace.equals(_buildNamespace))) {
-			_buildNamespace = buildNamespace;
+		_buildNamespace = buildNamespace;
 
-			if (_originalBuildNamespace == null) {
-				_originalBuildNamespace = buildNamespace;
-			}
+		if (_originalBuildNamespace == null) {
+			_originalBuildNamespace = buildNamespace;
 		}
 	}
 
@@ -165,14 +159,12 @@ public class ServiceComponentModelImpl extends BaseModelImpl<ServiceComponent> {
 	}
 
 	public void setBuildNumber(long buildNumber) {
-		if (buildNumber != _buildNumber) {
-			_buildNumber = buildNumber;
+		_buildNumber = buildNumber;
 
-			if (!_setOriginalBuildNumber) {
-				_setOriginalBuildNumber = true;
+		if (!_setOriginalBuildNumber) {
+			_setOriginalBuildNumber = true;
 
-				_originalBuildNumber = buildNumber;
-			}
+			_originalBuildNumber = buildNumber;
 		}
 	}
 
@@ -185,9 +177,7 @@ public class ServiceComponentModelImpl extends BaseModelImpl<ServiceComponent> {
 	}
 
 	public void setBuildDate(long buildDate) {
-		if (buildDate != _buildDate) {
-			_buildDate = buildDate;
-		}
+		_buildDate = buildDate;
 	}
 
 	public String getData() {
@@ -195,9 +185,7 @@ public class ServiceComponentModelImpl extends BaseModelImpl<ServiceComponent> {
 	}
 
 	public void setData(String data) {
-		if ((data != _data) || ((data != null) && !data.equals(_data))) {
-			_data = data;
-		}
+		_data = data;
 	}
 
 	public ServiceComponent toEscapedModel() {

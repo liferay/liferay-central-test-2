@@ -144,9 +144,7 @@ public class SocialRelationModelImpl extends BaseModelImpl<SocialRelation> {
 	}
 
 	public void setUuid(String uuid) {
-		if ((uuid != null) && !uuid.equals(_uuid)) {
-			_uuid = uuid;
-		}
+		_uuid = uuid;
 	}
 
 	public long getRelationId() {
@@ -154,9 +152,7 @@ public class SocialRelationModelImpl extends BaseModelImpl<SocialRelation> {
 	}
 
 	public void setRelationId(long relationId) {
-		if (relationId != _relationId) {
-			_relationId = relationId;
-		}
+		_relationId = relationId;
 	}
 
 	public long getCompanyId() {
@@ -164,9 +160,7 @@ public class SocialRelationModelImpl extends BaseModelImpl<SocialRelation> {
 	}
 
 	public void setCompanyId(long companyId) {
-		if (companyId != _companyId) {
-			_companyId = companyId;
-		}
+		_companyId = companyId;
 	}
 
 	public Date getCreateDate() {
@@ -174,10 +168,7 @@ public class SocialRelationModelImpl extends BaseModelImpl<SocialRelation> {
 	}
 
 	public void setCreateDate(Date createDate) {
-		if ((createDate != _createDate) ||
-				((createDate != null) && !createDate.equals(_createDate))) {
-			_createDate = createDate;
-		}
+		_createDate = createDate;
 	}
 
 	public long getUserId1() {
@@ -185,14 +176,12 @@ public class SocialRelationModelImpl extends BaseModelImpl<SocialRelation> {
 	}
 
 	public void setUserId1(long userId1) {
-		if (userId1 != _userId1) {
-			_userId1 = userId1;
+		_userId1 = userId1;
 
-			if (!_setOriginalUserId1) {
-				_setOriginalUserId1 = true;
+		if (!_setOriginalUserId1) {
+			_setOriginalUserId1 = true;
 
-				_originalUserId1 = userId1;
-			}
+			_originalUserId1 = userId1;
 		}
 	}
 
@@ -205,14 +194,12 @@ public class SocialRelationModelImpl extends BaseModelImpl<SocialRelation> {
 	}
 
 	public void setUserId2(long userId2) {
-		if (userId2 != _userId2) {
-			_userId2 = userId2;
+		_userId2 = userId2;
 
-			if (!_setOriginalUserId2) {
-				_setOriginalUserId2 = true;
+		if (!_setOriginalUserId2) {
+			_setOriginalUserId2 = true;
 
-				_originalUserId2 = userId2;
-			}
+			_originalUserId2 = userId2;
 		}
 	}
 
@@ -225,14 +212,12 @@ public class SocialRelationModelImpl extends BaseModelImpl<SocialRelation> {
 	}
 
 	public void setType(int type) {
-		if (type != _type) {
-			_type = type;
+		_type = type;
 
-			if (!_setOriginalType) {
-				_setOriginalType = true;
+		if (!_setOriginalType) {
+			_setOriginalType = true;
 
-				_originalType = type;
-			}
+			_originalType = type;
 		}
 	}
 

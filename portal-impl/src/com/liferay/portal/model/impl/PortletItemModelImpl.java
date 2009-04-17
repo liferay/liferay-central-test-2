@@ -157,9 +157,7 @@ public class PortletItemModelImpl extends BaseModelImpl<PortletItem> {
 	}
 
 	public void setPortletItemId(long portletItemId) {
-		if (portletItemId != _portletItemId) {
-			_portletItemId = portletItemId;
-		}
+		_portletItemId = portletItemId;
 	}
 
 	public long getGroupId() {
@@ -167,14 +165,12 @@ public class PortletItemModelImpl extends BaseModelImpl<PortletItem> {
 	}
 
 	public void setGroupId(long groupId) {
-		if (groupId != _groupId) {
-			_groupId = groupId;
+		_groupId = groupId;
 
-			if (!_setOriginalGroupId) {
-				_setOriginalGroupId = true;
+		if (!_setOriginalGroupId) {
+			_setOriginalGroupId = true;
 
-				_originalGroupId = groupId;
-			}
+			_originalGroupId = groupId;
 		}
 	}
 
@@ -187,9 +183,7 @@ public class PortletItemModelImpl extends BaseModelImpl<PortletItem> {
 	}
 
 	public void setCompanyId(long companyId) {
-		if (companyId != _companyId) {
-			_companyId = companyId;
-		}
+		_companyId = companyId;
 	}
 
 	public long getUserId() {
@@ -197,9 +191,7 @@ public class PortletItemModelImpl extends BaseModelImpl<PortletItem> {
 	}
 
 	public void setUserId(long userId) {
-		if (userId != _userId) {
-			_userId = userId;
-		}
+		_userId = userId;
 	}
 
 	public String getUserName() {
@@ -207,10 +199,7 @@ public class PortletItemModelImpl extends BaseModelImpl<PortletItem> {
 	}
 
 	public void setUserName(String userName) {
-		if ((userName != _userName) ||
-				((userName != null) && !userName.equals(_userName))) {
-			_userName = userName;
-		}
+		_userName = userName;
 	}
 
 	public Date getCreateDate() {
@@ -218,10 +207,7 @@ public class PortletItemModelImpl extends BaseModelImpl<PortletItem> {
 	}
 
 	public void setCreateDate(Date createDate) {
-		if ((createDate != _createDate) ||
-				((createDate != null) && !createDate.equals(_createDate))) {
-			_createDate = createDate;
-		}
+		_createDate = createDate;
 	}
 
 	public Date getModifiedDate() {
@@ -229,10 +215,7 @@ public class PortletItemModelImpl extends BaseModelImpl<PortletItem> {
 	}
 
 	public void setModifiedDate(Date modifiedDate) {
-		if ((modifiedDate != _modifiedDate) ||
-				((modifiedDate != null) && !modifiedDate.equals(_modifiedDate))) {
-			_modifiedDate = modifiedDate;
-		}
+		_modifiedDate = modifiedDate;
 	}
 
 	public String getName() {
@@ -240,12 +223,10 @@ public class PortletItemModelImpl extends BaseModelImpl<PortletItem> {
 	}
 
 	public void setName(String name) {
-		if ((name != _name) || ((name != null) && !name.equals(_name))) {
-			_name = name;
+		_name = name;
 
-			if (_originalName == null) {
-				_originalName = name;
-			}
+		if (_originalName == null) {
+			_originalName = name;
 		}
 	}
 
@@ -258,13 +239,10 @@ public class PortletItemModelImpl extends BaseModelImpl<PortletItem> {
 	}
 
 	public void setPortletId(String portletId) {
-		if ((portletId != _portletId) ||
-				((portletId != null) && !portletId.equals(_portletId))) {
-			_portletId = portletId;
+		_portletId = portletId;
 
-			if (_originalPortletId == null) {
-				_originalPortletId = portletId;
-			}
+		if (_originalPortletId == null) {
+			_originalPortletId = portletId;
 		}
 	}
 
@@ -285,14 +263,12 @@ public class PortletItemModelImpl extends BaseModelImpl<PortletItem> {
 	}
 
 	public void setClassNameId(long classNameId) {
-		if (classNameId != _classNameId) {
-			_classNameId = classNameId;
+		_classNameId = classNameId;
 
-			if (!_setOriginalClassNameId) {
-				_setOriginalClassNameId = true;
+		if (!_setOriginalClassNameId) {
+			_setOriginalClassNameId = true;
 
-				_originalClassNameId = classNameId;
-			}
+			_originalClassNameId = classNameId;
 		}
 	}
 

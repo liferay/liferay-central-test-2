@@ -139,9 +139,7 @@ public class PortletPreferencesModelImpl extends BaseModelImpl<PortletPreference
 	}
 
 	public void setPortletPreferencesId(long portletPreferencesId) {
-		if (portletPreferencesId != _portletPreferencesId) {
-			_portletPreferencesId = portletPreferencesId;
-		}
+		_portletPreferencesId = portletPreferencesId;
 	}
 
 	public long getOwnerId() {
@@ -149,14 +147,12 @@ public class PortletPreferencesModelImpl extends BaseModelImpl<PortletPreference
 	}
 
 	public void setOwnerId(long ownerId) {
-		if (ownerId != _ownerId) {
-			_ownerId = ownerId;
+		_ownerId = ownerId;
 
-			if (!_setOriginalOwnerId) {
-				_setOriginalOwnerId = true;
+		if (!_setOriginalOwnerId) {
+			_setOriginalOwnerId = true;
 
-				_originalOwnerId = ownerId;
-			}
+			_originalOwnerId = ownerId;
 		}
 	}
 
@@ -169,14 +165,12 @@ public class PortletPreferencesModelImpl extends BaseModelImpl<PortletPreference
 	}
 
 	public void setOwnerType(int ownerType) {
-		if (ownerType != _ownerType) {
-			_ownerType = ownerType;
+		_ownerType = ownerType;
 
-			if (!_setOriginalOwnerType) {
-				_setOriginalOwnerType = true;
+		if (!_setOriginalOwnerType) {
+			_setOriginalOwnerType = true;
 
-				_originalOwnerType = ownerType;
-			}
+			_originalOwnerType = ownerType;
 		}
 	}
 
@@ -189,14 +183,12 @@ public class PortletPreferencesModelImpl extends BaseModelImpl<PortletPreference
 	}
 
 	public void setPlid(long plid) {
-		if (plid != _plid) {
-			_plid = plid;
+		_plid = plid;
 
-			if (!_setOriginalPlid) {
-				_setOriginalPlid = true;
+		if (!_setOriginalPlid) {
+			_setOriginalPlid = true;
 
-				_originalPlid = plid;
-			}
+			_originalPlid = plid;
 		}
 	}
 
@@ -209,13 +201,10 @@ public class PortletPreferencesModelImpl extends BaseModelImpl<PortletPreference
 	}
 
 	public void setPortletId(String portletId) {
-		if ((portletId != _portletId) ||
-				((portletId != null) && !portletId.equals(_portletId))) {
-			_portletId = portletId;
+		_portletId = portletId;
 
-			if (_originalPortletId == null) {
-				_originalPortletId = portletId;
-			}
+		if (_originalPortletId == null) {
+			_originalPortletId = portletId;
 		}
 	}
 
@@ -228,10 +217,7 @@ public class PortletPreferencesModelImpl extends BaseModelImpl<PortletPreference
 	}
 
 	public void setPreferences(String preferences) {
-		if ((preferences != _preferences) ||
-				((preferences != null) && !preferences.equals(_preferences))) {
-			_preferences = preferences;
-		}
+		_preferences = preferences;
 	}
 
 	public PortletPreferences toEscapedModel() {

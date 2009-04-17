@@ -266,6 +266,8 @@ public class PortletPersistenceImpl extends BasePersistenceImpl
 		boolean merge) throws SystemException {
 		boolean isNew = portlet.isNew();
 
+		PortletModelImpl portletModelImpl = (PortletModelImpl)portlet;
+
 		Session session = null;
 
 		try {
@@ -286,8 +288,6 @@ public class PortletPersistenceImpl extends BasePersistenceImpl
 
 		EntityCacheUtil.putResult(PortletModelImpl.ENTITY_CACHE_ENABLED,
 			PortletImpl.class, portlet.getPrimaryKey(), portlet);
-
-		PortletModelImpl portletModelImpl = (PortletModelImpl)portlet;
 
 		if (!isNew &&
 				((portlet.getCompanyId() != portletModelImpl.getOriginalCompanyId()) ||
@@ -361,12 +361,6 @@ public class PortletPersistenceImpl extends BasePersistenceImpl
 
 	public List<Portlet> findByCompanyId(long companyId)
 		throws SystemException {
-		int count = countByCompanyId(companyId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { new Long(companyId) };
 
 		List<Portlet> list = (List<Portlet>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_COMPANYID,
@@ -421,12 +415,6 @@ public class PortletPersistenceImpl extends BasePersistenceImpl
 
 	public List<Portlet> findByCompanyId(long companyId, int start, int end,
 		OrderByComparator obc) throws SystemException {
-		int count = countByCompanyId(companyId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(companyId),
 				

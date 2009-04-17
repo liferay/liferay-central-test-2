@@ -307,6 +307,8 @@ public class TagsPropertyPersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		boolean isNew = tagsProperty.isNew();
 
+		TagsPropertyModelImpl tagsPropertyModelImpl = (TagsPropertyModelImpl)tagsProperty;
+
 		Session session = null;
 
 		try {
@@ -327,8 +329,6 @@ public class TagsPropertyPersistenceImpl extends BasePersistenceImpl
 
 		EntityCacheUtil.putResult(TagsPropertyModelImpl.ENTITY_CACHE_ENABLED,
 			TagsPropertyImpl.class, tagsProperty.getPrimaryKey(), tagsProperty);
-
-		TagsPropertyModelImpl tagsPropertyModelImpl = (TagsPropertyModelImpl)tagsProperty;
 
 		if (!isNew &&
 				((tagsProperty.getEntryId() != tagsPropertyModelImpl.getOriginalEntryId()) ||
@@ -405,12 +405,6 @@ public class TagsPropertyPersistenceImpl extends BasePersistenceImpl
 
 	public List<TagsProperty> findByCompanyId(long companyId)
 		throws SystemException {
-		int count = countByCompanyId(companyId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { new Long(companyId) };
 
 		List<TagsProperty> list = (List<TagsProperty>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_COMPANYID,
@@ -470,12 +464,6 @@ public class TagsPropertyPersistenceImpl extends BasePersistenceImpl
 
 	public List<TagsProperty> findByCompanyId(long companyId, int start,
 		int end, OrderByComparator obc) throws SystemException {
-		int count = countByCompanyId(companyId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(companyId),
 				
@@ -642,12 +630,6 @@ public class TagsPropertyPersistenceImpl extends BasePersistenceImpl
 
 	public List<TagsProperty> findByEntryId(long entryId)
 		throws SystemException {
-		int count = countByEntryId(entryId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { new Long(entryId) };
 
 		List<TagsProperty> list = (List<TagsProperty>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_ENTRYID,
@@ -707,12 +689,6 @@ public class TagsPropertyPersistenceImpl extends BasePersistenceImpl
 
 	public List<TagsProperty> findByEntryId(long entryId, int start, int end,
 		OrderByComparator obc) throws SystemException {
-		int count = countByEntryId(entryId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(entryId),
 				
@@ -878,12 +854,6 @@ public class TagsPropertyPersistenceImpl extends BasePersistenceImpl
 
 	public List<TagsProperty> findByC_K(long companyId, String key)
 		throws SystemException {
-		int count = countByC_K(companyId, key);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { new Long(companyId), key };
 
 		List<TagsProperty> list = (List<TagsProperty>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_C_K,
@@ -956,12 +926,6 @@ public class TagsPropertyPersistenceImpl extends BasePersistenceImpl
 
 	public List<TagsProperty> findByC_K(long companyId, String key, int start,
 		int end, OrderByComparator obc) throws SystemException {
-		int count = countByC_K(companyId, key);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(companyId),
 				

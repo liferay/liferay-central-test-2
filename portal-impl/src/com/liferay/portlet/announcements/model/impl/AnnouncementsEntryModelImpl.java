@@ -188,9 +188,7 @@ public class AnnouncementsEntryModelImpl extends BaseModelImpl<AnnouncementsEntr
 	}
 
 	public void setUuid(String uuid) {
-		if ((uuid != null) && !uuid.equals(_uuid)) {
-			_uuid = uuid;
-		}
+		_uuid = uuid;
 	}
 
 	public long getEntryId() {
@@ -198,9 +196,7 @@ public class AnnouncementsEntryModelImpl extends BaseModelImpl<AnnouncementsEntr
 	}
 
 	public void setEntryId(long entryId) {
-		if (entryId != _entryId) {
-			_entryId = entryId;
-		}
+		_entryId = entryId;
 	}
 
 	public long getCompanyId() {
@@ -208,9 +204,7 @@ public class AnnouncementsEntryModelImpl extends BaseModelImpl<AnnouncementsEntr
 	}
 
 	public void setCompanyId(long companyId) {
-		if (companyId != _companyId) {
-			_companyId = companyId;
-		}
+		_companyId = companyId;
 	}
 
 	public long getUserId() {
@@ -218,9 +212,7 @@ public class AnnouncementsEntryModelImpl extends BaseModelImpl<AnnouncementsEntr
 	}
 
 	public void setUserId(long userId) {
-		if (userId != _userId) {
-			_userId = userId;
-		}
+		_userId = userId;
 	}
 
 	public String getUserName() {
@@ -228,10 +220,7 @@ public class AnnouncementsEntryModelImpl extends BaseModelImpl<AnnouncementsEntr
 	}
 
 	public void setUserName(String userName) {
-		if ((userName != _userName) ||
-				((userName != null) && !userName.equals(_userName))) {
-			_userName = userName;
-		}
+		_userName = userName;
 	}
 
 	public Date getCreateDate() {
@@ -239,10 +228,7 @@ public class AnnouncementsEntryModelImpl extends BaseModelImpl<AnnouncementsEntr
 	}
 
 	public void setCreateDate(Date createDate) {
-		if ((createDate != _createDate) ||
-				((createDate != null) && !createDate.equals(_createDate))) {
-			_createDate = createDate;
-		}
+		_createDate = createDate;
 	}
 
 	public Date getModifiedDate() {
@@ -250,10 +236,7 @@ public class AnnouncementsEntryModelImpl extends BaseModelImpl<AnnouncementsEntr
 	}
 
 	public void setModifiedDate(Date modifiedDate) {
-		if ((modifiedDate != _modifiedDate) ||
-				((modifiedDate != null) && !modifiedDate.equals(_modifiedDate))) {
-			_modifiedDate = modifiedDate;
-		}
+		_modifiedDate = modifiedDate;
 	}
 
 	public String getClassName() {
@@ -269,9 +252,7 @@ public class AnnouncementsEntryModelImpl extends BaseModelImpl<AnnouncementsEntr
 	}
 
 	public void setClassNameId(long classNameId) {
-		if (classNameId != _classNameId) {
-			_classNameId = classNameId;
-		}
+		_classNameId = classNameId;
 	}
 
 	public long getClassPK() {
@@ -279,9 +260,7 @@ public class AnnouncementsEntryModelImpl extends BaseModelImpl<AnnouncementsEntr
 	}
 
 	public void setClassPK(long classPK) {
-		if (classPK != _classPK) {
-			_classPK = classPK;
-		}
+		_classPK = classPK;
 	}
 
 	public String getTitle() {
@@ -289,9 +268,7 @@ public class AnnouncementsEntryModelImpl extends BaseModelImpl<AnnouncementsEntr
 	}
 
 	public void setTitle(String title) {
-		if ((title != _title) || ((title != null) && !title.equals(_title))) {
-			_title = title;
-		}
+		_title = title;
 	}
 
 	public String getContent() {
@@ -299,10 +276,7 @@ public class AnnouncementsEntryModelImpl extends BaseModelImpl<AnnouncementsEntr
 	}
 
 	public void setContent(String content) {
-		if ((content != _content) ||
-				((content != null) && !content.equals(_content))) {
-			_content = content;
-		}
+		_content = content;
 	}
 
 	public String getUrl() {
@@ -310,9 +284,7 @@ public class AnnouncementsEntryModelImpl extends BaseModelImpl<AnnouncementsEntr
 	}
 
 	public void setUrl(String url) {
-		if ((url != _url) || ((url != null) && !url.equals(_url))) {
-			_url = url;
-		}
+		_url = url;
 	}
 
 	public String getType() {
@@ -320,9 +292,7 @@ public class AnnouncementsEntryModelImpl extends BaseModelImpl<AnnouncementsEntr
 	}
 
 	public void setType(String type) {
-		if ((type != _type) || ((type != null) && !type.equals(_type))) {
-			_type = type;
-		}
+		_type = type;
 	}
 
 	public Date getDisplayDate() {
@@ -330,10 +300,7 @@ public class AnnouncementsEntryModelImpl extends BaseModelImpl<AnnouncementsEntr
 	}
 
 	public void setDisplayDate(Date displayDate) {
-		if ((displayDate != _displayDate) ||
-				((displayDate != null) && !displayDate.equals(_displayDate))) {
-			_displayDate = displayDate;
-		}
+		_displayDate = displayDate;
 	}
 
 	public Date getExpirationDate() {
@@ -341,11 +308,7 @@ public class AnnouncementsEntryModelImpl extends BaseModelImpl<AnnouncementsEntr
 	}
 
 	public void setExpirationDate(Date expirationDate) {
-		if ((expirationDate != _expirationDate) ||
-				((expirationDate != null) &&
-				!expirationDate.equals(_expirationDate))) {
-			_expirationDate = expirationDate;
-		}
+		_expirationDate = expirationDate;
 	}
 
 	public int getPriority() {
@@ -353,9 +316,7 @@ public class AnnouncementsEntryModelImpl extends BaseModelImpl<AnnouncementsEntr
 	}
 
 	public void setPriority(int priority) {
-		if (priority != _priority) {
-			_priority = priority;
-		}
+		_priority = priority;
 	}
 
 	public boolean getAlert() {
@@ -367,9 +328,7 @@ public class AnnouncementsEntryModelImpl extends BaseModelImpl<AnnouncementsEntr
 	}
 
 	public void setAlert(boolean alert) {
-		if (alert != _alert) {
-			_alert = alert;
-		}
+		_alert = alert;
 	}
 
 	public AnnouncementsEntry toEscapedModel() {

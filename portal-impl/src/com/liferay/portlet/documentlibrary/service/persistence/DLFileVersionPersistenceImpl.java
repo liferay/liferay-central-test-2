@@ -285,6 +285,8 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl
 		boolean merge) throws SystemException {
 		boolean isNew = dlFileVersion.isNew();
 
+		DLFileVersionModelImpl dlFileVersionModelImpl = (DLFileVersionModelImpl)dlFileVersion;
+
 		Session session = null;
 
 		try {
@@ -306,8 +308,6 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl
 		EntityCacheUtil.putResult(DLFileVersionModelImpl.ENTITY_CACHE_ENABLED,
 			DLFileVersionImpl.class, dlFileVersion.getPrimaryKey(),
 			dlFileVersion);
-
-		DLFileVersionModelImpl dlFileVersionModelImpl = (DLFileVersionModelImpl)dlFileVersion;
 
 		if (!isNew &&
 				((dlFileVersion.getFolderId() != dlFileVersionModelImpl.getOriginalFolderId()) ||
@@ -388,12 +388,6 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl
 
 	public List<DLFileVersion> findByF_N(long folderId, String name)
 		throws SystemException {
-		int count = countByF_N(folderId, name);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { new Long(folderId), name };
 
 		List<DLFileVersion> list = (List<DLFileVersion>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_F_N,
@@ -468,12 +462,6 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl
 
 	public List<DLFileVersion> findByF_N(long folderId, String name, int start,
 		int end, OrderByComparator obc) throws SystemException {
-		int count = countByF_N(folderId, name);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(folderId),
 				

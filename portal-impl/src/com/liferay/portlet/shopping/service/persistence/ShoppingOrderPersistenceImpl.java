@@ -307,6 +307,8 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl
 		boolean merge) throws SystemException {
 		boolean isNew = shoppingOrder.isNew();
 
+		ShoppingOrderModelImpl shoppingOrderModelImpl = (ShoppingOrderModelImpl)shoppingOrder;
+
 		Session session = null;
 
 		try {
@@ -328,8 +330,6 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl
 		EntityCacheUtil.putResult(ShoppingOrderModelImpl.ENTITY_CACHE_ENABLED,
 			ShoppingOrderImpl.class, shoppingOrder.getPrimaryKey(),
 			shoppingOrder);
-
-		ShoppingOrderModelImpl shoppingOrderModelImpl = (ShoppingOrderModelImpl)shoppingOrder;
 
 		if (!isNew &&
 				(!shoppingOrder.getNumber()
@@ -410,12 +410,6 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl
 
 	public List<ShoppingOrder> findByGroupId(long groupId)
 		throws SystemException {
-		int count = countByGroupId(groupId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { new Long(groupId) };
 
 		List<ShoppingOrder> list = (List<ShoppingOrder>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_GROUPID,
@@ -475,12 +469,6 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl
 
 	public List<ShoppingOrder> findByGroupId(long groupId, int start, int end,
 		OrderByComparator obc) throws SystemException {
-		int count = countByGroupId(groupId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				
@@ -867,12 +855,6 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl
 
 	public List<ShoppingOrder> findByG_U_PPPS(long groupId, long userId,
 		String ppPaymentStatus) throws SystemException {
-		int count = countByG_U_PPPS(groupId, userId, ppPaymentStatus);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), new Long(userId),
 				
@@ -956,12 +938,6 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl
 	public List<ShoppingOrder> findByG_U_PPPS(long groupId, long userId,
 		String ppPaymentStatus, int start, int end, OrderByComparator obc)
 		throws SystemException {
-		int count = countByG_U_PPPS(groupId, userId, ppPaymentStatus);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), new Long(userId),
 				

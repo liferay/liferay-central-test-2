@@ -213,9 +213,7 @@ public class TagsAssetModelImpl extends BaseModelImpl<TagsAsset> {
 	}
 
 	public void setAssetId(long assetId) {
-		if (assetId != _assetId) {
-			_assetId = assetId;
-		}
+		_assetId = assetId;
 	}
 
 	public long getGroupId() {
@@ -223,9 +221,7 @@ public class TagsAssetModelImpl extends BaseModelImpl<TagsAsset> {
 	}
 
 	public void setGroupId(long groupId) {
-		if (groupId != _groupId) {
-			_groupId = groupId;
-		}
+		_groupId = groupId;
 	}
 
 	public long getCompanyId() {
@@ -233,9 +229,7 @@ public class TagsAssetModelImpl extends BaseModelImpl<TagsAsset> {
 	}
 
 	public void setCompanyId(long companyId) {
-		if (companyId != _companyId) {
-			_companyId = companyId;
-		}
+		_companyId = companyId;
 	}
 
 	public long getUserId() {
@@ -243,9 +237,7 @@ public class TagsAssetModelImpl extends BaseModelImpl<TagsAsset> {
 	}
 
 	public void setUserId(long userId) {
-		if (userId != _userId) {
-			_userId = userId;
-		}
+		_userId = userId;
 	}
 
 	public String getUserName() {
@@ -253,10 +245,7 @@ public class TagsAssetModelImpl extends BaseModelImpl<TagsAsset> {
 	}
 
 	public void setUserName(String userName) {
-		if ((userName != _userName) ||
-				((userName != null) && !userName.equals(_userName))) {
-			_userName = userName;
-		}
+		_userName = userName;
 	}
 
 	public Date getCreateDate() {
@@ -264,10 +253,7 @@ public class TagsAssetModelImpl extends BaseModelImpl<TagsAsset> {
 	}
 
 	public void setCreateDate(Date createDate) {
-		if ((createDate != _createDate) ||
-				((createDate != null) && !createDate.equals(_createDate))) {
-			_createDate = createDate;
-		}
+		_createDate = createDate;
 	}
 
 	public Date getModifiedDate() {
@@ -275,10 +261,7 @@ public class TagsAssetModelImpl extends BaseModelImpl<TagsAsset> {
 	}
 
 	public void setModifiedDate(Date modifiedDate) {
-		if ((modifiedDate != _modifiedDate) ||
-				((modifiedDate != null) && !modifiedDate.equals(_modifiedDate))) {
-			_modifiedDate = modifiedDate;
-		}
+		_modifiedDate = modifiedDate;
 	}
 
 	public String getClassName() {
@@ -294,14 +277,12 @@ public class TagsAssetModelImpl extends BaseModelImpl<TagsAsset> {
 	}
 
 	public void setClassNameId(long classNameId) {
-		if (classNameId != _classNameId) {
-			_classNameId = classNameId;
+		_classNameId = classNameId;
 
-			if (!_setOriginalClassNameId) {
-				_setOriginalClassNameId = true;
+		if (!_setOriginalClassNameId) {
+			_setOriginalClassNameId = true;
 
-				_originalClassNameId = classNameId;
-			}
+			_originalClassNameId = classNameId;
 		}
 	}
 
@@ -314,14 +295,12 @@ public class TagsAssetModelImpl extends BaseModelImpl<TagsAsset> {
 	}
 
 	public void setClassPK(long classPK) {
-		if (classPK != _classPK) {
-			_classPK = classPK;
+		_classPK = classPK;
 
-			if (!_setOriginalClassPK) {
-				_setOriginalClassPK = true;
+		if (!_setOriginalClassPK) {
+			_setOriginalClassPK = true;
 
-				_originalClassPK = classPK;
-			}
+			_originalClassPK = classPK;
 		}
 	}
 
@@ -338,9 +317,7 @@ public class TagsAssetModelImpl extends BaseModelImpl<TagsAsset> {
 	}
 
 	public void setVisible(boolean visible) {
-		if (visible != _visible) {
-			_visible = visible;
-		}
+		_visible = visible;
 	}
 
 	public Date getStartDate() {
@@ -348,10 +325,7 @@ public class TagsAssetModelImpl extends BaseModelImpl<TagsAsset> {
 	}
 
 	public void setStartDate(Date startDate) {
-		if ((startDate != _startDate) ||
-				((startDate != null) && !startDate.equals(_startDate))) {
-			_startDate = startDate;
-		}
+		_startDate = startDate;
 	}
 
 	public Date getEndDate() {
@@ -359,10 +333,7 @@ public class TagsAssetModelImpl extends BaseModelImpl<TagsAsset> {
 	}
 
 	public void setEndDate(Date endDate) {
-		if ((endDate != _endDate) ||
-				((endDate != null) && !endDate.equals(_endDate))) {
-			_endDate = endDate;
-		}
+		_endDate = endDate;
 	}
 
 	public Date getPublishDate() {
@@ -370,10 +341,7 @@ public class TagsAssetModelImpl extends BaseModelImpl<TagsAsset> {
 	}
 
 	public void setPublishDate(Date publishDate) {
-		if ((publishDate != _publishDate) ||
-				((publishDate != null) && !publishDate.equals(_publishDate))) {
-			_publishDate = publishDate;
-		}
+		_publishDate = publishDate;
 	}
 
 	public Date getExpirationDate() {
@@ -381,11 +349,7 @@ public class TagsAssetModelImpl extends BaseModelImpl<TagsAsset> {
 	}
 
 	public void setExpirationDate(Date expirationDate) {
-		if ((expirationDate != _expirationDate) ||
-				((expirationDate != null) &&
-				!expirationDate.equals(_expirationDate))) {
-			_expirationDate = expirationDate;
-		}
+		_expirationDate = expirationDate;
 	}
 
 	public String getMimeType() {
@@ -393,10 +357,7 @@ public class TagsAssetModelImpl extends BaseModelImpl<TagsAsset> {
 	}
 
 	public void setMimeType(String mimeType) {
-		if ((mimeType != _mimeType) ||
-				((mimeType != null) && !mimeType.equals(_mimeType))) {
-			_mimeType = mimeType;
-		}
+		_mimeType = mimeType;
 	}
 
 	public String getTitle() {
@@ -404,9 +365,7 @@ public class TagsAssetModelImpl extends BaseModelImpl<TagsAsset> {
 	}
 
 	public void setTitle(String title) {
-		if ((title != _title) || ((title != null) && !title.equals(_title))) {
-			_title = title;
-		}
+		_title = title;
 	}
 
 	public String getDescription() {
@@ -414,10 +373,7 @@ public class TagsAssetModelImpl extends BaseModelImpl<TagsAsset> {
 	}
 
 	public void setDescription(String description) {
-		if ((description != _description) ||
-				((description != null) && !description.equals(_description))) {
-			_description = description;
-		}
+		_description = description;
 	}
 
 	public String getSummary() {
@@ -425,10 +381,7 @@ public class TagsAssetModelImpl extends BaseModelImpl<TagsAsset> {
 	}
 
 	public void setSummary(String summary) {
-		if ((summary != _summary) ||
-				((summary != null) && !summary.equals(_summary))) {
-			_summary = summary;
-		}
+		_summary = summary;
 	}
 
 	public String getUrl() {
@@ -436,9 +389,7 @@ public class TagsAssetModelImpl extends BaseModelImpl<TagsAsset> {
 	}
 
 	public void setUrl(String url) {
-		if ((url != _url) || ((url != null) && !url.equals(_url))) {
-			_url = url;
-		}
+		_url = url;
 	}
 
 	public int getHeight() {
@@ -446,9 +397,7 @@ public class TagsAssetModelImpl extends BaseModelImpl<TagsAsset> {
 	}
 
 	public void setHeight(int height) {
-		if (height != _height) {
-			_height = height;
-		}
+		_height = height;
 	}
 
 	public int getWidth() {
@@ -456,9 +405,7 @@ public class TagsAssetModelImpl extends BaseModelImpl<TagsAsset> {
 	}
 
 	public void setWidth(int width) {
-		if (width != _width) {
-			_width = width;
-		}
+		_width = width;
 	}
 
 	public double getPriority() {
@@ -466,9 +413,7 @@ public class TagsAssetModelImpl extends BaseModelImpl<TagsAsset> {
 	}
 
 	public void setPriority(double priority) {
-		if (priority != _priority) {
-			_priority = priority;
-		}
+		_priority = priority;
 	}
 
 	public int getViewCount() {
@@ -476,9 +421,7 @@ public class TagsAssetModelImpl extends BaseModelImpl<TagsAsset> {
 	}
 
 	public void setViewCount(int viewCount) {
-		if (viewCount != _viewCount) {
-			_viewCount = viewCount;
-		}
+		_viewCount = viewCount;
 	}
 
 	public TagsAsset toEscapedModel() {

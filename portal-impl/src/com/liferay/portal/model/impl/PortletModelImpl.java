@@ -134,9 +134,7 @@ public class PortletModelImpl extends BaseModelImpl<Portlet> {
 	}
 
 	public void setId(long id) {
-		if (id != _id) {
-			_id = id;
-		}
+		_id = id;
 	}
 
 	public long getCompanyId() {
@@ -144,14 +142,12 @@ public class PortletModelImpl extends BaseModelImpl<Portlet> {
 	}
 
 	public void setCompanyId(long companyId) {
-		if (companyId != _companyId) {
-			_companyId = companyId;
+		_companyId = companyId;
 
-			if (!_setOriginalCompanyId) {
-				_setOriginalCompanyId = true;
+		if (!_setOriginalCompanyId) {
+			_setOriginalCompanyId = true;
 
-				_originalCompanyId = companyId;
-			}
+			_originalCompanyId = companyId;
 		}
 	}
 
@@ -164,13 +160,10 @@ public class PortletModelImpl extends BaseModelImpl<Portlet> {
 	}
 
 	public void setPortletId(String portletId) {
-		if ((portletId != _portletId) ||
-				((portletId != null) && !portletId.equals(_portletId))) {
-			_portletId = portletId;
+		_portletId = portletId;
 
-			if (_originalPortletId == null) {
-				_originalPortletId = portletId;
-			}
+		if (_originalPortletId == null) {
+			_originalPortletId = portletId;
 		}
 	}
 
@@ -183,9 +176,7 @@ public class PortletModelImpl extends BaseModelImpl<Portlet> {
 	}
 
 	public void setRoles(String roles) {
-		if ((roles != _roles) || ((roles != null) && !roles.equals(_roles))) {
-			_roles = roles;
-		}
+		_roles = roles;
 	}
 
 	public boolean getActive() {
@@ -197,9 +188,7 @@ public class PortletModelImpl extends BaseModelImpl<Portlet> {
 	}
 
 	public void setActive(boolean active) {
-		if (active != _active) {
-			_active = active;
-		}
+		_active = active;
 	}
 
 	public Portlet toEscapedModel() {

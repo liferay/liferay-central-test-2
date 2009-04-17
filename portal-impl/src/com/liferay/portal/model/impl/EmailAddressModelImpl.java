@@ -162,9 +162,7 @@ public class EmailAddressModelImpl extends BaseModelImpl<EmailAddress> {
 	}
 
 	public void setEmailAddressId(long emailAddressId) {
-		if (emailAddressId != _emailAddressId) {
-			_emailAddressId = emailAddressId;
-		}
+		_emailAddressId = emailAddressId;
 	}
 
 	public long getCompanyId() {
@@ -172,9 +170,7 @@ public class EmailAddressModelImpl extends BaseModelImpl<EmailAddress> {
 	}
 
 	public void setCompanyId(long companyId) {
-		if (companyId != _companyId) {
-			_companyId = companyId;
-		}
+		_companyId = companyId;
 	}
 
 	public long getUserId() {
@@ -182,9 +178,7 @@ public class EmailAddressModelImpl extends BaseModelImpl<EmailAddress> {
 	}
 
 	public void setUserId(long userId) {
-		if (userId != _userId) {
-			_userId = userId;
-		}
+		_userId = userId;
 	}
 
 	public String getUserName() {
@@ -192,10 +186,7 @@ public class EmailAddressModelImpl extends BaseModelImpl<EmailAddress> {
 	}
 
 	public void setUserName(String userName) {
-		if ((userName != _userName) ||
-				((userName != null) && !userName.equals(_userName))) {
-			_userName = userName;
-		}
+		_userName = userName;
 	}
 
 	public Date getCreateDate() {
@@ -203,10 +194,7 @@ public class EmailAddressModelImpl extends BaseModelImpl<EmailAddress> {
 	}
 
 	public void setCreateDate(Date createDate) {
-		if ((createDate != _createDate) ||
-				((createDate != null) && !createDate.equals(_createDate))) {
-			_createDate = createDate;
-		}
+		_createDate = createDate;
 	}
 
 	public Date getModifiedDate() {
@@ -214,10 +202,7 @@ public class EmailAddressModelImpl extends BaseModelImpl<EmailAddress> {
 	}
 
 	public void setModifiedDate(Date modifiedDate) {
-		if ((modifiedDate != _modifiedDate) ||
-				((modifiedDate != null) && !modifiedDate.equals(_modifiedDate))) {
-			_modifiedDate = modifiedDate;
-		}
+		_modifiedDate = modifiedDate;
 	}
 
 	public String getClassName() {
@@ -233,9 +218,7 @@ public class EmailAddressModelImpl extends BaseModelImpl<EmailAddress> {
 	}
 
 	public void setClassNameId(long classNameId) {
-		if (classNameId != _classNameId) {
-			_classNameId = classNameId;
-		}
+		_classNameId = classNameId;
 	}
 
 	public long getClassPK() {
@@ -243,9 +226,7 @@ public class EmailAddressModelImpl extends BaseModelImpl<EmailAddress> {
 	}
 
 	public void setClassPK(long classPK) {
-		if (classPK != _classPK) {
-			_classPK = classPK;
-		}
+		_classPK = classPK;
 	}
 
 	public String getAddress() {
@@ -253,10 +234,7 @@ public class EmailAddressModelImpl extends BaseModelImpl<EmailAddress> {
 	}
 
 	public void setAddress(String address) {
-		if ((address != _address) ||
-				((address != null) && !address.equals(_address))) {
-			_address = address;
-		}
+		_address = address;
 	}
 
 	public int getTypeId() {
@@ -264,9 +242,7 @@ public class EmailAddressModelImpl extends BaseModelImpl<EmailAddress> {
 	}
 
 	public void setTypeId(int typeId) {
-		if (typeId != _typeId) {
-			_typeId = typeId;
-		}
+		_typeId = typeId;
 	}
 
 	public boolean getPrimary() {
@@ -278,9 +254,7 @@ public class EmailAddressModelImpl extends BaseModelImpl<EmailAddress> {
 	}
 
 	public void setPrimary(boolean primary) {
-		if (primary != _primary) {
-			_primary = primary;
-		}
+		_primary = primary;
 	}
 
 	public EmailAddress toEscapedModel() {

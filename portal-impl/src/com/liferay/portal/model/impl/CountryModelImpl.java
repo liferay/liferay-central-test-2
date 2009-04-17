@@ -142,9 +142,7 @@ public class CountryModelImpl extends BaseModelImpl<Country> {
 	}
 
 	public void setCountryId(long countryId) {
-		if (countryId != _countryId) {
-			_countryId = countryId;
-		}
+		_countryId = countryId;
 	}
 
 	public String getName() {
@@ -152,12 +150,10 @@ public class CountryModelImpl extends BaseModelImpl<Country> {
 	}
 
 	public void setName(String name) {
-		if ((name != _name) || ((name != null) && !name.equals(_name))) {
-			_name = name;
+		_name = name;
 
-			if (_originalName == null) {
-				_originalName = name;
-			}
+		if (_originalName == null) {
+			_originalName = name;
 		}
 	}
 
@@ -170,12 +166,10 @@ public class CountryModelImpl extends BaseModelImpl<Country> {
 	}
 
 	public void setA2(String a2) {
-		if ((a2 != _a2) || ((a2 != null) && !a2.equals(_a2))) {
-			_a2 = a2;
+		_a2 = a2;
 
-			if (_originalA2 == null) {
-				_originalA2 = a2;
-			}
+		if (_originalA2 == null) {
+			_originalA2 = a2;
 		}
 	}
 
@@ -188,12 +182,10 @@ public class CountryModelImpl extends BaseModelImpl<Country> {
 	}
 
 	public void setA3(String a3) {
-		if ((a3 != _a3) || ((a3 != null) && !a3.equals(_a3))) {
-			_a3 = a3;
+		_a3 = a3;
 
-			if (_originalA3 == null) {
-				_originalA3 = a3;
-			}
+		if (_originalA3 == null) {
+			_originalA3 = a3;
 		}
 	}
 
@@ -206,10 +198,7 @@ public class CountryModelImpl extends BaseModelImpl<Country> {
 	}
 
 	public void setNumber(String number) {
-		if ((number != _number) ||
-				((number != null) && !number.equals(_number))) {
-			_number = number;
-		}
+		_number = number;
 	}
 
 	public String getIdd() {
@@ -217,9 +206,7 @@ public class CountryModelImpl extends BaseModelImpl<Country> {
 	}
 
 	public void setIdd(String idd) {
-		if ((idd != _idd) || ((idd != null) && !idd.equals(_idd))) {
-			_idd = idd;
-		}
+		_idd = idd;
 	}
 
 	public boolean getActive() {
@@ -231,9 +218,7 @@ public class CountryModelImpl extends BaseModelImpl<Country> {
 	}
 
 	public void setActive(boolean active) {
-		if (active != _active) {
-			_active = active;
-		}
+		_active = active;
 	}
 
 	public Country toEscapedModel() {

@@ -381,12 +381,6 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 
 	public List<SCFrameworkVersion> findByGroupId(long groupId)
 		throws SystemException {
-		int count = countByGroupId(groupId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { new Long(groupId) };
 
 		List<SCFrameworkVersion> list = (List<SCFrameworkVersion>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_GROUPID,
@@ -446,12 +440,6 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 
 	public List<SCFrameworkVersion> findByGroupId(long groupId, int start,
 		int end, OrderByComparator obc) throws SystemException {
-		int count = countByGroupId(groupId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				
@@ -620,12 +608,6 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 
 	public List<SCFrameworkVersion> findByCompanyId(long companyId)
 		throws SystemException {
-		int count = countByCompanyId(companyId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { new Long(companyId) };
 
 		List<SCFrameworkVersion> list = (List<SCFrameworkVersion>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_COMPANYID,
@@ -685,12 +667,6 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 
 	public List<SCFrameworkVersion> findByCompanyId(long companyId, int start,
 		int end, OrderByComparator obc) throws SystemException {
-		int count = countByCompanyId(companyId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(companyId),
 				
@@ -859,12 +835,6 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 
 	public List<SCFrameworkVersion> findByG_A(long groupId, boolean active)
 		throws SystemException {
-		int count = countByG_A(groupId, active);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), Boolean.valueOf(active)
 			};
@@ -932,12 +902,6 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 
 	public List<SCFrameworkVersion> findByG_A(long groupId, boolean active,
 		int start, int end, OrderByComparator obc) throws SystemException {
-		int count = countByG_A(groupId, active);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), Boolean.valueOf(active),
 				

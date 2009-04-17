@@ -172,12 +172,10 @@ public class MBCategoryModelImpl extends BaseModelImpl<MBCategory> {
 	}
 
 	public void setUuid(String uuid) {
-		if ((uuid != null) && !uuid.equals(_uuid)) {
-			_uuid = uuid;
+		_uuid = uuid;
 
-			if (_originalUuid == null) {
-				_originalUuid = uuid;
-			}
+		if (_originalUuid == null) {
+			_originalUuid = uuid;
 		}
 	}
 
@@ -190,9 +188,7 @@ public class MBCategoryModelImpl extends BaseModelImpl<MBCategory> {
 	}
 
 	public void setCategoryId(long categoryId) {
-		if (categoryId != _categoryId) {
-			_categoryId = categoryId;
-		}
+		_categoryId = categoryId;
 	}
 
 	public long getGroupId() {
@@ -200,14 +196,12 @@ public class MBCategoryModelImpl extends BaseModelImpl<MBCategory> {
 	}
 
 	public void setGroupId(long groupId) {
-		if (groupId != _groupId) {
-			_groupId = groupId;
+		_groupId = groupId;
 
-			if (!_setOriginalGroupId) {
-				_setOriginalGroupId = true;
+		if (!_setOriginalGroupId) {
+			_setOriginalGroupId = true;
 
-				_originalGroupId = groupId;
-			}
+			_originalGroupId = groupId;
 		}
 	}
 
@@ -220,9 +214,7 @@ public class MBCategoryModelImpl extends BaseModelImpl<MBCategory> {
 	}
 
 	public void setCompanyId(long companyId) {
-		if (companyId != _companyId) {
-			_companyId = companyId;
-		}
+		_companyId = companyId;
 	}
 
 	public long getUserId() {
@@ -230,9 +222,7 @@ public class MBCategoryModelImpl extends BaseModelImpl<MBCategory> {
 	}
 
 	public void setUserId(long userId) {
-		if (userId != _userId) {
-			_userId = userId;
-		}
+		_userId = userId;
 	}
 
 	public String getUserName() {
@@ -240,10 +230,7 @@ public class MBCategoryModelImpl extends BaseModelImpl<MBCategory> {
 	}
 
 	public void setUserName(String userName) {
-		if ((userName != _userName) ||
-				((userName != null) && !userName.equals(_userName))) {
-			_userName = userName;
-		}
+		_userName = userName;
 	}
 
 	public Date getCreateDate() {
@@ -251,10 +238,7 @@ public class MBCategoryModelImpl extends BaseModelImpl<MBCategory> {
 	}
 
 	public void setCreateDate(Date createDate) {
-		if ((createDate != _createDate) ||
-				((createDate != null) && !createDate.equals(_createDate))) {
-			_createDate = createDate;
-		}
+		_createDate = createDate;
 	}
 
 	public Date getModifiedDate() {
@@ -262,10 +246,7 @@ public class MBCategoryModelImpl extends BaseModelImpl<MBCategory> {
 	}
 
 	public void setModifiedDate(Date modifiedDate) {
-		if ((modifiedDate != _modifiedDate) ||
-				((modifiedDate != null) && !modifiedDate.equals(_modifiedDate))) {
-			_modifiedDate = modifiedDate;
-		}
+		_modifiedDate = modifiedDate;
 	}
 
 	public long getParentCategoryId() {
@@ -273,9 +254,7 @@ public class MBCategoryModelImpl extends BaseModelImpl<MBCategory> {
 	}
 
 	public void setParentCategoryId(long parentCategoryId) {
-		if (parentCategoryId != _parentCategoryId) {
-			_parentCategoryId = parentCategoryId;
-		}
+		_parentCategoryId = parentCategoryId;
 	}
 
 	public String getName() {
@@ -283,9 +262,7 @@ public class MBCategoryModelImpl extends BaseModelImpl<MBCategory> {
 	}
 
 	public void setName(String name) {
-		if ((name != _name) || ((name != null) && !name.equals(_name))) {
-			_name = name;
-		}
+		_name = name;
 	}
 
 	public String getDescription() {
@@ -293,10 +270,7 @@ public class MBCategoryModelImpl extends BaseModelImpl<MBCategory> {
 	}
 
 	public void setDescription(String description) {
-		if ((description != _description) ||
-				((description != null) && !description.equals(_description))) {
-			_description = description;
-		}
+		_description = description;
 	}
 
 	public int getThreadCount() {
@@ -304,9 +278,7 @@ public class MBCategoryModelImpl extends BaseModelImpl<MBCategory> {
 	}
 
 	public void setThreadCount(int threadCount) {
-		if (threadCount != _threadCount) {
-			_threadCount = threadCount;
-		}
+		_threadCount = threadCount;
 	}
 
 	public int getMessageCount() {
@@ -314,9 +286,7 @@ public class MBCategoryModelImpl extends BaseModelImpl<MBCategory> {
 	}
 
 	public void setMessageCount(int messageCount) {
-		if (messageCount != _messageCount) {
-			_messageCount = messageCount;
-		}
+		_messageCount = messageCount;
 	}
 
 	public Date getLastPostDate() {
@@ -324,10 +294,7 @@ public class MBCategoryModelImpl extends BaseModelImpl<MBCategory> {
 	}
 
 	public void setLastPostDate(Date lastPostDate) {
-		if ((lastPostDate != _lastPostDate) ||
-				((lastPostDate != null) && !lastPostDate.equals(_lastPostDate))) {
-			_lastPostDate = lastPostDate;
-		}
+		_lastPostDate = lastPostDate;
 	}
 
 	public MBCategory toEscapedModel() {

@@ -128,9 +128,7 @@ public class WikiPageResourceModelImpl extends BaseModelImpl<WikiPageResource> {
 	}
 
 	public void setResourcePrimKey(long resourcePrimKey) {
-		if (resourcePrimKey != _resourcePrimKey) {
-			_resourcePrimKey = resourcePrimKey;
-		}
+		_resourcePrimKey = resourcePrimKey;
 	}
 
 	public long getNodeId() {
@@ -138,14 +136,12 @@ public class WikiPageResourceModelImpl extends BaseModelImpl<WikiPageResource> {
 	}
 
 	public void setNodeId(long nodeId) {
-		if (nodeId != _nodeId) {
-			_nodeId = nodeId;
+		_nodeId = nodeId;
 
-			if (!_setOriginalNodeId) {
-				_setOriginalNodeId = true;
+		if (!_setOriginalNodeId) {
+			_setOriginalNodeId = true;
 
-				_originalNodeId = nodeId;
-			}
+			_originalNodeId = nodeId;
 		}
 	}
 
@@ -158,12 +154,10 @@ public class WikiPageResourceModelImpl extends BaseModelImpl<WikiPageResource> {
 	}
 
 	public void setTitle(String title) {
-		if ((title != _title) || ((title != null) && !title.equals(_title))) {
-			_title = title;
+		_title = title;
 
-			if (_originalTitle == null) {
-				_originalTitle = title;
-			}
+		if (_originalTitle == null) {
+			_originalTitle = title;
 		}
 	}
 

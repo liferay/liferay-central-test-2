@@ -263,6 +263,8 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl
 		boolean merge) throws SystemException {
 		boolean isNew = wikiPageResource.isNew();
 
+		WikiPageResourceModelImpl wikiPageResourceModelImpl = (WikiPageResourceModelImpl)wikiPageResource;
+
 		Session session = null;
 
 		try {
@@ -284,8 +286,6 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl
 		EntityCacheUtil.putResult(WikiPageResourceModelImpl.ENTITY_CACHE_ENABLED,
 			WikiPageResourceImpl.class, wikiPageResource.getPrimaryKey(),
 			wikiPageResource);
-
-		WikiPageResourceModelImpl wikiPageResourceModelImpl = (WikiPageResourceModelImpl)wikiPageResource;
 
 		if (!isNew &&
 				((wikiPageResource.getNodeId() != wikiPageResourceModelImpl.getOriginalNodeId()) ||

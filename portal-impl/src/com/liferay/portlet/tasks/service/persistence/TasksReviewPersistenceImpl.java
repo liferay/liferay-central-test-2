@@ -351,6 +351,8 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		boolean isNew = tasksReview.isNew();
 
+		TasksReviewModelImpl tasksReviewModelImpl = (TasksReviewModelImpl)tasksReview;
+
 		Session session = null;
 
 		try {
@@ -371,8 +373,6 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 
 		EntityCacheUtil.putResult(TasksReviewModelImpl.ENTITY_CACHE_ENABLED,
 			TasksReviewImpl.class, tasksReview.getPrimaryKey(), tasksReview);
-
-		TasksReviewModelImpl tasksReviewModelImpl = (TasksReviewModelImpl)tasksReview;
 
 		if (!isNew &&
 				((tasksReview.getUserId() != tasksReviewModelImpl.getOriginalUserId()) ||
@@ -445,12 +445,6 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 
 	public List<TasksReview> findByUserId(long userId)
 		throws SystemException {
-		int count = countByUserId(userId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { new Long(userId) };
 
 		List<TasksReview> list = (List<TasksReview>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_USERID,
@@ -510,12 +504,6 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 
 	public List<TasksReview> findByUserId(long userId, int start, int end,
 		OrderByComparator obc) throws SystemException {
-		int count = countByUserId(userId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(userId),
 				
@@ -680,12 +668,6 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 
 	public List<TasksReview> findByProposalId(long proposalId)
 		throws SystemException {
-		int count = countByProposalId(proposalId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { new Long(proposalId) };
 
 		List<TasksReview> list = (List<TasksReview>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_PROPOSALID,
@@ -745,12 +727,6 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 
 	public List<TasksReview> findByProposalId(long proposalId, int start,
 		int end, OrderByComparator obc) throws SystemException {
-		int count = countByProposalId(proposalId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(proposalId),
 				
@@ -1032,12 +1008,6 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 
 	public List<TasksReview> findByP_S(long proposalId, int stage)
 		throws SystemException {
-		int count = countByP_S(proposalId, stage);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(proposalId), new Integer(stage)
 			};
@@ -1105,12 +1075,6 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 
 	public List<TasksReview> findByP_S(long proposalId, int stage, int start,
 		int end, OrderByComparator obc) throws SystemException {
-		int count = countByP_S(proposalId, stage);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(proposalId), new Integer(stage),
 				
@@ -1295,12 +1259,6 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 
 	public List<TasksReview> findByP_S_C(long proposalId, int stage,
 		boolean completed) throws SystemException {
-		int count = countByP_S_C(proposalId, stage, completed);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(proposalId), new Integer(stage),
 				Boolean.valueOf(completed)
@@ -1376,12 +1334,6 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 	public List<TasksReview> findByP_S_C(long proposalId, int stage,
 		boolean completed, int start, int end, OrderByComparator obc)
 		throws SystemException {
-		int count = countByP_S_C(proposalId, stage, completed);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(proposalId), new Integer(stage),
 				Boolean.valueOf(completed),
@@ -1588,12 +1540,6 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 
 	public List<TasksReview> findByP_S_C_R(long proposalId, int stage,
 		boolean completed, boolean rejected) throws SystemException {
-		int count = countByP_S_C_R(proposalId, stage, completed, rejected);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(proposalId), new Integer(stage),
 				Boolean.valueOf(completed), Boolean.valueOf(rejected)
@@ -1677,12 +1623,6 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 	public List<TasksReview> findByP_S_C_R(long proposalId, int stage,
 		boolean completed, boolean rejected, int start, int end,
 		OrderByComparator obc) throws SystemException {
-		int count = countByP_S_C_R(proposalId, stage, completed, rejected);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(proposalId), new Integer(stage),
 				Boolean.valueOf(completed), Boolean.valueOf(rejected),

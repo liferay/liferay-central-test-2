@@ -177,12 +177,10 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage> {
 	}
 
 	public void setUuid(String uuid) {
-		if ((uuid != null) && !uuid.equals(_uuid)) {
-			_uuid = uuid;
+		_uuid = uuid;
 
-			if (_originalUuid == null) {
-				_originalUuid = uuid;
-			}
+		if (_originalUuid == null) {
+			_originalUuid = uuid;
 		}
 	}
 
@@ -195,9 +193,7 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage> {
 	}
 
 	public void setMessageId(long messageId) {
-		if (messageId != _messageId) {
-			_messageId = messageId;
-		}
+		_messageId = messageId;
 	}
 
 	public long getGroupId() {
@@ -205,14 +201,12 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage> {
 	}
 
 	public void setGroupId(long groupId) {
-		if (groupId != _groupId) {
-			_groupId = groupId;
+		_groupId = groupId;
 
-			if (!_setOriginalGroupId) {
-				_setOriginalGroupId = true;
+		if (!_setOriginalGroupId) {
+			_setOriginalGroupId = true;
 
-				_originalGroupId = groupId;
-			}
+			_originalGroupId = groupId;
 		}
 	}
 
@@ -225,9 +219,7 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage> {
 	}
 
 	public void setCompanyId(long companyId) {
-		if (companyId != _companyId) {
-			_companyId = companyId;
-		}
+		_companyId = companyId;
 	}
 
 	public long getUserId() {
@@ -235,9 +227,7 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage> {
 	}
 
 	public void setUserId(long userId) {
-		if (userId != _userId) {
-			_userId = userId;
-		}
+		_userId = userId;
 	}
 
 	public String getUserName() {
@@ -245,10 +235,7 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage> {
 	}
 
 	public void setUserName(String userName) {
-		if ((userName != _userName) ||
-				((userName != null) && !userName.equals(_userName))) {
-			_userName = userName;
-		}
+		_userName = userName;
 	}
 
 	public Date getCreateDate() {
@@ -256,10 +243,7 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage> {
 	}
 
 	public void setCreateDate(Date createDate) {
-		if ((createDate != _createDate) ||
-				((createDate != null) && !createDate.equals(_createDate))) {
-			_createDate = createDate;
-		}
+		_createDate = createDate;
 	}
 
 	public Date getModifiedDate() {
@@ -267,10 +251,7 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage> {
 	}
 
 	public void setModifiedDate(Date modifiedDate) {
-		if ((modifiedDate != _modifiedDate) ||
-				((modifiedDate != null) && !modifiedDate.equals(_modifiedDate))) {
-			_modifiedDate = modifiedDate;
-		}
+		_modifiedDate = modifiedDate;
 	}
 
 	public long getCategoryId() {
@@ -278,9 +259,7 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage> {
 	}
 
 	public void setCategoryId(long categoryId) {
-		if (categoryId != _categoryId) {
-			_categoryId = categoryId;
-		}
+		_categoryId = categoryId;
 	}
 
 	public long getThreadId() {
@@ -288,9 +267,7 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage> {
 	}
 
 	public void setThreadId(long threadId) {
-		if (threadId != _threadId) {
-			_threadId = threadId;
-		}
+		_threadId = threadId;
 	}
 
 	public long getParentMessageId() {
@@ -298,9 +275,7 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage> {
 	}
 
 	public void setParentMessageId(long parentMessageId) {
-		if (parentMessageId != _parentMessageId) {
-			_parentMessageId = parentMessageId;
-		}
+		_parentMessageId = parentMessageId;
 	}
 
 	public String getSubject() {
@@ -308,10 +283,7 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage> {
 	}
 
 	public void setSubject(String subject) {
-		if ((subject != _subject) ||
-				((subject != null) && !subject.equals(_subject))) {
-			_subject = subject;
-		}
+		_subject = subject;
 	}
 
 	public String getBody() {
@@ -319,9 +291,7 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage> {
 	}
 
 	public void setBody(String body) {
-		if ((body != _body) || ((body != null) && !body.equals(_body))) {
-			_body = body;
-		}
+		_body = body;
 	}
 
 	public boolean getAttachments() {
@@ -333,9 +303,7 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage> {
 	}
 
 	public void setAttachments(boolean attachments) {
-		if (attachments != _attachments) {
-			_attachments = attachments;
-		}
+		_attachments = attachments;
 	}
 
 	public boolean getAnonymous() {
@@ -347,9 +315,7 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage> {
 	}
 
 	public void setAnonymous(boolean anonymous) {
-		if (anonymous != _anonymous) {
-			_anonymous = anonymous;
-		}
+		_anonymous = anonymous;
 	}
 
 	public MBMessage toEscapedModel() {

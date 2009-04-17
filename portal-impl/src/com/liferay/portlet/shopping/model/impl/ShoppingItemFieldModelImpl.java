@@ -136,9 +136,7 @@ public class ShoppingItemFieldModelImpl extends BaseModelImpl<ShoppingItemField>
 	}
 
 	public void setItemFieldId(long itemFieldId) {
-		if (itemFieldId != _itemFieldId) {
-			_itemFieldId = itemFieldId;
-		}
+		_itemFieldId = itemFieldId;
 	}
 
 	public long getItemId() {
@@ -146,9 +144,7 @@ public class ShoppingItemFieldModelImpl extends BaseModelImpl<ShoppingItemField>
 	}
 
 	public void setItemId(long itemId) {
-		if (itemId != _itemId) {
-			_itemId = itemId;
-		}
+		_itemId = itemId;
 	}
 
 	public String getName() {
@@ -156,9 +152,7 @@ public class ShoppingItemFieldModelImpl extends BaseModelImpl<ShoppingItemField>
 	}
 
 	public void setName(String name) {
-		if ((name != _name) || ((name != null) && !name.equals(_name))) {
-			_name = name;
-		}
+		_name = name;
 	}
 
 	public String getValues() {
@@ -166,10 +160,7 @@ public class ShoppingItemFieldModelImpl extends BaseModelImpl<ShoppingItemField>
 	}
 
 	public void setValues(String values) {
-		if ((values != _values) ||
-				((values != null) && !values.equals(_values))) {
-			_values = values;
-		}
+		_values = values;
 	}
 
 	public String getDescription() {
@@ -177,10 +168,7 @@ public class ShoppingItemFieldModelImpl extends BaseModelImpl<ShoppingItemField>
 	}
 
 	public void setDescription(String description) {
-		if ((description != _description) ||
-				((description != null) && !description.equals(_description))) {
-			_description = description;
-		}
+		_description = description;
 	}
 
 	public ShoppingItemField toEscapedModel() {

@@ -255,6 +255,8 @@ public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		boolean isNew = webDAVProps.isNew();
 
+		WebDAVPropsModelImpl webDAVPropsModelImpl = (WebDAVPropsModelImpl)webDAVProps;
+
 		Session session = null;
 
 		try {
@@ -275,8 +277,6 @@ public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl
 
 		EntityCacheUtil.putResult(WebDAVPropsModelImpl.ENTITY_CACHE_ENABLED,
 			WebDAVPropsImpl.class, webDAVProps.getPrimaryKey(), webDAVProps);
-
-		WebDAVPropsModelImpl webDAVPropsModelImpl = (WebDAVPropsModelImpl)webDAVProps;
 
 		if (!isNew &&
 				((webDAVProps.getClassNameId() != webDAVPropsModelImpl.getOriginalClassNameId()) ||

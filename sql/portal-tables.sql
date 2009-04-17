@@ -725,6 +725,8 @@ create table Organization_ (
 	organizationId LONG not null primary key,
 	companyId LONG,
 	parentOrganizationId LONG,
+	leftOrganizationId LONG,
+	rightOrganizationId LONG,
 	name VARCHAR(100) null,
 	type_ VARCHAR(75) null,
 	recursable BOOLEAN,

@@ -156,9 +156,7 @@ public class RoleModelImpl extends BaseModelImpl<Role> {
 	}
 
 	public void setRoleId(long roleId) {
-		if (roleId != _roleId) {
-			_roleId = roleId;
-		}
+		_roleId = roleId;
 	}
 
 	public long getCompanyId() {
@@ -166,14 +164,12 @@ public class RoleModelImpl extends BaseModelImpl<Role> {
 	}
 
 	public void setCompanyId(long companyId) {
-		if (companyId != _companyId) {
-			_companyId = companyId;
+		_companyId = companyId;
 
-			if (!_setOriginalCompanyId) {
-				_setOriginalCompanyId = true;
+		if (!_setOriginalCompanyId) {
+			_setOriginalCompanyId = true;
 
-				_originalCompanyId = companyId;
-			}
+			_originalCompanyId = companyId;
 		}
 	}
 
@@ -194,14 +190,12 @@ public class RoleModelImpl extends BaseModelImpl<Role> {
 	}
 
 	public void setClassNameId(long classNameId) {
-		if (classNameId != _classNameId) {
-			_classNameId = classNameId;
+		_classNameId = classNameId;
 
-			if (!_setOriginalClassNameId) {
-				_setOriginalClassNameId = true;
+		if (!_setOriginalClassNameId) {
+			_setOriginalClassNameId = true;
 
-				_originalClassNameId = classNameId;
-			}
+			_originalClassNameId = classNameId;
 		}
 	}
 
@@ -214,14 +208,12 @@ public class RoleModelImpl extends BaseModelImpl<Role> {
 	}
 
 	public void setClassPK(long classPK) {
-		if (classPK != _classPK) {
-			_classPK = classPK;
+		_classPK = classPK;
 
-			if (!_setOriginalClassPK) {
-				_setOriginalClassPK = true;
+		if (!_setOriginalClassPK) {
+			_setOriginalClassPK = true;
 
-				_originalClassPK = classPK;
-			}
+			_originalClassPK = classPK;
 		}
 	}
 
@@ -234,12 +226,10 @@ public class RoleModelImpl extends BaseModelImpl<Role> {
 	}
 
 	public void setName(String name) {
-		if ((name != _name) || ((name != null) && !name.equals(_name))) {
-			_name = name;
+		_name = name;
 
-			if (_originalName == null) {
-				_originalName = name;
-			}
+		if (_originalName == null) {
+			_originalName = name;
 		}
 	}
 
@@ -252,9 +242,7 @@ public class RoleModelImpl extends BaseModelImpl<Role> {
 	}
 
 	public void setTitle(String title) {
-		if ((title != _title) || ((title != null) && !title.equals(_title))) {
-			_title = title;
-		}
+		_title = title;
 	}
 
 	public String getDescription() {
@@ -262,10 +250,7 @@ public class RoleModelImpl extends BaseModelImpl<Role> {
 	}
 
 	public void setDescription(String description) {
-		if ((description != _description) ||
-				((description != null) && !description.equals(_description))) {
-			_description = description;
-		}
+		_description = description;
 	}
 
 	public int getType() {
@@ -273,9 +258,7 @@ public class RoleModelImpl extends BaseModelImpl<Role> {
 	}
 
 	public void setType(int type) {
-		if (type != _type) {
-			_type = type;
-		}
+		_type = type;
 	}
 
 	public String getSubtype() {
@@ -283,10 +266,7 @@ public class RoleModelImpl extends BaseModelImpl<Role> {
 	}
 
 	public void setSubtype(String subtype) {
-		if ((subtype != _subtype) ||
-				((subtype != null) && !subtype.equals(_subtype))) {
-			_subtype = subtype;
-		}
+		_subtype = subtype;
 	}
 
 	public Role toEscapedModel() {

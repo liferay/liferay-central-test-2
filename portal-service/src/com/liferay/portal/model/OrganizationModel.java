@@ -60,6 +60,14 @@ public interface OrganizationModel extends BaseModel<Organization> {
 
 	public void setParentOrganizationId(long parentOrganizationId);
 
+	public long getLeftOrganizationId();
+
+	public void setLeftOrganizationId(long leftOrganizationId);
+
+	public long getRightOrganizationId();
+
+	public void setRightOrganizationId(long rightOrganizationId);
+
 	public String getName();
 
 	public void setName(String name);

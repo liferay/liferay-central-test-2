@@ -286,6 +286,8 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl
 		boolean merge) throws SystemException {
 		boolean isNew = announcementsFlag.isNew();
 
+		AnnouncementsFlagModelImpl announcementsFlagModelImpl = (AnnouncementsFlagModelImpl)announcementsFlag;
+
 		Session session = null;
 
 		try {
@@ -307,8 +309,6 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl
 		EntityCacheUtil.putResult(AnnouncementsFlagModelImpl.ENTITY_CACHE_ENABLED,
 			AnnouncementsFlagImpl.class, announcementsFlag.getPrimaryKey(),
 			announcementsFlag);
-
-		AnnouncementsFlagModelImpl announcementsFlagModelImpl = (AnnouncementsFlagModelImpl)announcementsFlag;
 
 		if (!isNew &&
 				((announcementsFlag.getUserId() != announcementsFlagModelImpl.getOriginalUserId()) ||
@@ -385,12 +385,6 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl
 
 	public List<AnnouncementsFlag> findByEntryId(long entryId)
 		throws SystemException {
-		int count = countByEntryId(entryId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { new Long(entryId) };
 
 		List<AnnouncementsFlag> list = (List<AnnouncementsFlag>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_ENTRYID,
@@ -451,12 +445,6 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl
 
 	public List<AnnouncementsFlag> findByEntryId(long entryId, int start,
 		int end, OrderByComparator obc) throws SystemException {
-		int count = countByEntryId(entryId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(entryId),
 				

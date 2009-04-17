@@ -353,12 +353,6 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl
 
 	public List<SCLicense> findByActive(boolean active)
 		throws SystemException {
-		int count = countByActive(active);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { Boolean.valueOf(active) };
 
 		List<SCLicense> list = (List<SCLicense>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_ACTIVE,
@@ -418,12 +412,6 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl
 
 	public List<SCLicense> findByActive(boolean active, int start, int end,
 		OrderByComparator obc) throws SystemException {
-		int count = countByActive(active);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				Boolean.valueOf(active),
 				
@@ -588,12 +576,6 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl
 
 	public List<SCLicense> findByA_R(boolean active, boolean recommended)
 		throws SystemException {
-		int count = countByA_R(active, recommended);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				Boolean.valueOf(active), Boolean.valueOf(recommended)
 			};
@@ -661,12 +643,6 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl
 
 	public List<SCLicense> findByA_R(boolean active, boolean recommended,
 		int start, int end, OrderByComparator obc) throws SystemException {
-		int count = countByA_R(active, recommended);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				Boolean.valueOf(active), Boolean.valueOf(recommended),
 				

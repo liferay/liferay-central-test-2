@@ -485,6 +485,8 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl
 		boolean merge) throws SystemException {
 		boolean isNew = socialRequest.isNew();
 
+		SocialRequestModelImpl socialRequestModelImpl = (SocialRequestModelImpl)socialRequest;
+
 		if (Validator.isNull(socialRequest.getUuid())) {
 			String uuid = PortalUUIDUtil.generate();
 
@@ -512,8 +514,6 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl
 		EntityCacheUtil.putResult(SocialRequestModelImpl.ENTITY_CACHE_ENABLED,
 			SocialRequestImpl.class, socialRequest.getPrimaryKey(),
 			socialRequest);
-
-		SocialRequestModelImpl socialRequestModelImpl = (SocialRequestModelImpl)socialRequest;
 
 		if (!isNew &&
 				(!socialRequest.getUuid()
@@ -656,12 +656,6 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl
 
 	public List<SocialRequest> findByUuid(String uuid)
 		throws SystemException {
-		int count = countByUuid(uuid);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { uuid };
 
 		List<SocialRequest> list = (List<SocialRequest>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_UUID,
@@ -728,12 +722,6 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl
 
 	public List<SocialRequest> findByUuid(String uuid, int start, int end,
 		OrderByComparator obc) throws SystemException {
-		int count = countByUuid(uuid);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				uuid,
 				
@@ -1032,12 +1020,6 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl
 
 	public List<SocialRequest> findByCompanyId(long companyId)
 		throws SystemException {
-		int count = countByCompanyId(companyId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { new Long(companyId) };
 
 		List<SocialRequest> list = (List<SocialRequest>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_COMPANYID,
@@ -1097,12 +1079,6 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl
 
 	public List<SocialRequest> findByCompanyId(long companyId, int start,
 		int end, OrderByComparator obc) throws SystemException {
-		int count = countByCompanyId(companyId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(companyId),
 				
@@ -1269,12 +1245,6 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl
 
 	public List<SocialRequest> findByUserId(long userId)
 		throws SystemException {
-		int count = countByUserId(userId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { new Long(userId) };
 
 		List<SocialRequest> list = (List<SocialRequest>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_USERID,
@@ -1334,12 +1304,6 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl
 
 	public List<SocialRequest> findByUserId(long userId, int start, int end,
 		OrderByComparator obc) throws SystemException {
-		int count = countByUserId(userId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(userId),
 				
@@ -1505,12 +1469,6 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl
 
 	public List<SocialRequest> findByReceiverUserId(long receiverUserId)
 		throws SystemException {
-		int count = countByReceiverUserId(receiverUserId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { new Long(receiverUserId) };
 
 		List<SocialRequest> list = (List<SocialRequest>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_RECEIVERUSERID,
@@ -1570,12 +1528,6 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl
 
 	public List<SocialRequest> findByReceiverUserId(long receiverUserId,
 		int start, int end, OrderByComparator obc) throws SystemException {
-		int count = countByReceiverUserId(receiverUserId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(receiverUserId),
 				
@@ -1743,12 +1695,6 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl
 
 	public List<SocialRequest> findByU_S(long userId, int status)
 		throws SystemException {
-		int count = countByU_S(userId, status);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { new Long(userId), new Integer(status) };
 
 		List<SocialRequest> list = (List<SocialRequest>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_U_S,
@@ -1814,12 +1760,6 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl
 
 	public List<SocialRequest> findByU_S(long userId, int status, int start,
 		int end, OrderByComparator obc) throws SystemException {
-		int count = countByU_S(userId, status);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(userId), new Integer(status),
 				
@@ -2004,12 +1944,6 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl
 
 	public List<SocialRequest> findByR_S(long receiverUserId, int status)
 		throws SystemException {
-		int count = countByR_S(receiverUserId, status);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(receiverUserId), new Integer(status)
 			};
@@ -2077,12 +2011,6 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl
 
 	public List<SocialRequest> findByR_S(long receiverUserId, int status,
 		int start, int end, OrderByComparator obc) throws SystemException {
-		int count = countByR_S(receiverUserId, status);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(receiverUserId), new Integer(status),
 				
@@ -2414,12 +2342,6 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl
 
 	public List<SocialRequest> findByU_C_C_T_S(long userId, long classNameId,
 		long classPK, int type, int status) throws SystemException {
-		int count = countByU_C_C_T_S(userId, classNameId, classPK, type, status);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(userId), new Long(classNameId), new Long(classPK),
 				new Integer(type), new Integer(status)
@@ -2509,12 +2431,6 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl
 	public List<SocialRequest> findByU_C_C_T_S(long userId, long classNameId,
 		long classPK, int type, int status, int start, int end,
 		OrderByComparator obc) throws SystemException {
-		int count = countByU_C_C_T_S(userId, classNameId, classPK, type, status);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(userId), new Long(classNameId), new Long(classPK),
 				new Integer(type), new Integer(status),
@@ -2757,13 +2673,6 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl
 
 	public List<SocialRequest> findByC_C_T_R_S(long classNameId, long classPK,
 		int type, long receiverUserId, int status) throws SystemException {
-		int count = countByC_C_T_R_S(classNameId, classPK, type,
-				receiverUserId, status);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(classNameId), new Long(classPK), new Integer(type),
 				new Long(receiverUserId), new Integer(status)
@@ -2853,13 +2762,6 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl
 	public List<SocialRequest> findByC_C_T_R_S(long classNameId, long classPK,
 		int type, long receiverUserId, int status, int start, int end,
 		OrderByComparator obc) throws SystemException {
-		int count = countByC_C_T_R_S(classNameId, classPK, type,
-				receiverUserId, status);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(classNameId), new Long(classPK), new Integer(type),
 				new Long(receiverUserId), new Integer(status),

@@ -160,9 +160,7 @@ public class ShoppingCartModelImpl extends BaseModelImpl<ShoppingCart> {
 	}
 
 	public void setCartId(long cartId) {
-		if (cartId != _cartId) {
-			_cartId = cartId;
-		}
+		_cartId = cartId;
 	}
 
 	public long getGroupId() {
@@ -170,14 +168,12 @@ public class ShoppingCartModelImpl extends BaseModelImpl<ShoppingCart> {
 	}
 
 	public void setGroupId(long groupId) {
-		if (groupId != _groupId) {
-			_groupId = groupId;
+		_groupId = groupId;
 
-			if (!_setOriginalGroupId) {
-				_setOriginalGroupId = true;
+		if (!_setOriginalGroupId) {
+			_setOriginalGroupId = true;
 
-				_originalGroupId = groupId;
-			}
+			_originalGroupId = groupId;
 		}
 	}
 
@@ -190,9 +186,7 @@ public class ShoppingCartModelImpl extends BaseModelImpl<ShoppingCart> {
 	}
 
 	public void setCompanyId(long companyId) {
-		if (companyId != _companyId) {
-			_companyId = companyId;
-		}
+		_companyId = companyId;
 	}
 
 	public long getUserId() {
@@ -200,14 +194,12 @@ public class ShoppingCartModelImpl extends BaseModelImpl<ShoppingCart> {
 	}
 
 	public void setUserId(long userId) {
-		if (userId != _userId) {
-			_userId = userId;
+		_userId = userId;
 
-			if (!_setOriginalUserId) {
-				_setOriginalUserId = true;
+		if (!_setOriginalUserId) {
+			_setOriginalUserId = true;
 
-				_originalUserId = userId;
-			}
+			_originalUserId = userId;
 		}
 	}
 
@@ -220,10 +212,7 @@ public class ShoppingCartModelImpl extends BaseModelImpl<ShoppingCart> {
 	}
 
 	public void setUserName(String userName) {
-		if ((userName != _userName) ||
-				((userName != null) && !userName.equals(_userName))) {
-			_userName = userName;
-		}
+		_userName = userName;
 	}
 
 	public Date getCreateDate() {
@@ -231,10 +220,7 @@ public class ShoppingCartModelImpl extends BaseModelImpl<ShoppingCart> {
 	}
 
 	public void setCreateDate(Date createDate) {
-		if ((createDate != _createDate) ||
-				((createDate != null) && !createDate.equals(_createDate))) {
-			_createDate = createDate;
-		}
+		_createDate = createDate;
 	}
 
 	public Date getModifiedDate() {
@@ -242,10 +228,7 @@ public class ShoppingCartModelImpl extends BaseModelImpl<ShoppingCart> {
 	}
 
 	public void setModifiedDate(Date modifiedDate) {
-		if ((modifiedDate != _modifiedDate) ||
-				((modifiedDate != null) && !modifiedDate.equals(_modifiedDate))) {
-			_modifiedDate = modifiedDate;
-		}
+		_modifiedDate = modifiedDate;
 	}
 
 	public String getItemIds() {
@@ -253,10 +236,7 @@ public class ShoppingCartModelImpl extends BaseModelImpl<ShoppingCart> {
 	}
 
 	public void setItemIds(String itemIds) {
-		if ((itemIds != _itemIds) ||
-				((itemIds != null) && !itemIds.equals(_itemIds))) {
-			_itemIds = itemIds;
-		}
+		_itemIds = itemIds;
 	}
 
 	public String getCouponCodes() {
@@ -264,10 +244,7 @@ public class ShoppingCartModelImpl extends BaseModelImpl<ShoppingCart> {
 	}
 
 	public void setCouponCodes(String couponCodes) {
-		if ((couponCodes != _couponCodes) ||
-				((couponCodes != null) && !couponCodes.equals(_couponCodes))) {
-			_couponCodes = couponCodes;
-		}
+		_couponCodes = couponCodes;
 	}
 
 	public int getAltShipping() {
@@ -275,9 +252,7 @@ public class ShoppingCartModelImpl extends BaseModelImpl<ShoppingCart> {
 	}
 
 	public void setAltShipping(int altShipping) {
-		if (altShipping != _altShipping) {
-			_altShipping = altShipping;
-		}
+		_altShipping = altShipping;
 	}
 
 	public boolean getInsure() {
@@ -289,9 +264,7 @@ public class ShoppingCartModelImpl extends BaseModelImpl<ShoppingCart> {
 	}
 
 	public void setInsure(boolean insure) {
-		if (insure != _insure) {
-			_insure = insure;
-		}
+		_insure = insure;
 	}
 
 	public ShoppingCart toEscapedModel() {

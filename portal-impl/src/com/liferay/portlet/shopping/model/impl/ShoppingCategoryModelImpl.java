@@ -157,9 +157,7 @@ public class ShoppingCategoryModelImpl extends BaseModelImpl<ShoppingCategory> {
 	}
 
 	public void setCategoryId(long categoryId) {
-		if (categoryId != _categoryId) {
-			_categoryId = categoryId;
-		}
+		_categoryId = categoryId;
 	}
 
 	public long getGroupId() {
@@ -167,9 +165,7 @@ public class ShoppingCategoryModelImpl extends BaseModelImpl<ShoppingCategory> {
 	}
 
 	public void setGroupId(long groupId) {
-		if (groupId != _groupId) {
-			_groupId = groupId;
-		}
+		_groupId = groupId;
 	}
 
 	public long getCompanyId() {
@@ -177,9 +173,7 @@ public class ShoppingCategoryModelImpl extends BaseModelImpl<ShoppingCategory> {
 	}
 
 	public void setCompanyId(long companyId) {
-		if (companyId != _companyId) {
-			_companyId = companyId;
-		}
+		_companyId = companyId;
 	}
 
 	public long getUserId() {
@@ -187,9 +181,7 @@ public class ShoppingCategoryModelImpl extends BaseModelImpl<ShoppingCategory> {
 	}
 
 	public void setUserId(long userId) {
-		if (userId != _userId) {
-			_userId = userId;
-		}
+		_userId = userId;
 	}
 
 	public String getUserName() {
@@ -197,10 +189,7 @@ public class ShoppingCategoryModelImpl extends BaseModelImpl<ShoppingCategory> {
 	}
 
 	public void setUserName(String userName) {
-		if ((userName != _userName) ||
-				((userName != null) && !userName.equals(_userName))) {
-			_userName = userName;
-		}
+		_userName = userName;
 	}
 
 	public Date getCreateDate() {
@@ -208,10 +197,7 @@ public class ShoppingCategoryModelImpl extends BaseModelImpl<ShoppingCategory> {
 	}
 
 	public void setCreateDate(Date createDate) {
-		if ((createDate != _createDate) ||
-				((createDate != null) && !createDate.equals(_createDate))) {
-			_createDate = createDate;
-		}
+		_createDate = createDate;
 	}
 
 	public Date getModifiedDate() {
@@ -219,10 +205,7 @@ public class ShoppingCategoryModelImpl extends BaseModelImpl<ShoppingCategory> {
 	}
 
 	public void setModifiedDate(Date modifiedDate) {
-		if ((modifiedDate != _modifiedDate) ||
-				((modifiedDate != null) && !modifiedDate.equals(_modifiedDate))) {
-			_modifiedDate = modifiedDate;
-		}
+		_modifiedDate = modifiedDate;
 	}
 
 	public long getParentCategoryId() {
@@ -230,9 +213,7 @@ public class ShoppingCategoryModelImpl extends BaseModelImpl<ShoppingCategory> {
 	}
 
 	public void setParentCategoryId(long parentCategoryId) {
-		if (parentCategoryId != _parentCategoryId) {
-			_parentCategoryId = parentCategoryId;
-		}
+		_parentCategoryId = parentCategoryId;
 	}
 
 	public String getName() {
@@ -240,9 +221,7 @@ public class ShoppingCategoryModelImpl extends BaseModelImpl<ShoppingCategory> {
 	}
 
 	public void setName(String name) {
-		if ((name != _name) || ((name != null) && !name.equals(_name))) {
-			_name = name;
-		}
+		_name = name;
 	}
 
 	public String getDescription() {
@@ -250,10 +229,7 @@ public class ShoppingCategoryModelImpl extends BaseModelImpl<ShoppingCategory> {
 	}
 
 	public void setDescription(String description) {
-		if ((description != _description) ||
-				((description != null) && !description.equals(_description))) {
-			_description = description;
-		}
+		_description = description;
 	}
 
 	public ShoppingCategory toEscapedModel() {

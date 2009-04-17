@@ -286,6 +286,8 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl
 		boolean merge) throws SystemException {
 		boolean isNew = mbDiscussion.isNew();
 
+		MBDiscussionModelImpl mbDiscussionModelImpl = (MBDiscussionModelImpl)mbDiscussion;
+
 		Session session = null;
 
 		try {
@@ -306,8 +308,6 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl
 
 		EntityCacheUtil.putResult(MBDiscussionModelImpl.ENTITY_CACHE_ENABLED,
 			MBDiscussionImpl.class, mbDiscussion.getPrimaryKey(), mbDiscussion);
-
-		MBDiscussionModelImpl mbDiscussionModelImpl = (MBDiscussionModelImpl)mbDiscussion;
 
 		if (!isNew &&
 				(mbDiscussion.getThreadId() != mbDiscussionModelImpl.getOriginalThreadId())) {
@@ -395,12 +395,6 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl
 
 	public List<MBDiscussion> findByClassNameId(long classNameId)
 		throws SystemException {
-		int count = countByClassNameId(classNameId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { new Long(classNameId) };
 
 		List<MBDiscussion> list = (List<MBDiscussion>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_CLASSNAMEID,
@@ -456,12 +450,6 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl
 
 	public List<MBDiscussion> findByClassNameId(long classNameId, int start,
 		int end, OrderByComparator obc) throws SystemException {
-		int count = countByClassNameId(classNameId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(classNameId),
 				

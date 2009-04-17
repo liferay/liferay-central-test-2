@@ -171,9 +171,7 @@ public class TasksProposalModelImpl extends BaseModelImpl<TasksProposal> {
 	}
 
 	public void setProposalId(long proposalId) {
-		if (proposalId != _proposalId) {
-			_proposalId = proposalId;
-		}
+		_proposalId = proposalId;
 	}
 
 	public long getGroupId() {
@@ -181,9 +179,7 @@ public class TasksProposalModelImpl extends BaseModelImpl<TasksProposal> {
 	}
 
 	public void setGroupId(long groupId) {
-		if (groupId != _groupId) {
-			_groupId = groupId;
-		}
+		_groupId = groupId;
 	}
 
 	public long getCompanyId() {
@@ -191,9 +187,7 @@ public class TasksProposalModelImpl extends BaseModelImpl<TasksProposal> {
 	}
 
 	public void setCompanyId(long companyId) {
-		if (companyId != _companyId) {
-			_companyId = companyId;
-		}
+		_companyId = companyId;
 	}
 
 	public long getUserId() {
@@ -201,9 +195,7 @@ public class TasksProposalModelImpl extends BaseModelImpl<TasksProposal> {
 	}
 
 	public void setUserId(long userId) {
-		if (userId != _userId) {
-			_userId = userId;
-		}
+		_userId = userId;
 	}
 
 	public String getUserName() {
@@ -211,10 +203,7 @@ public class TasksProposalModelImpl extends BaseModelImpl<TasksProposal> {
 	}
 
 	public void setUserName(String userName) {
-		if ((userName != _userName) ||
-				((userName != null) && !userName.equals(_userName))) {
-			_userName = userName;
-		}
+		_userName = userName;
 	}
 
 	public Date getCreateDate() {
@@ -222,10 +211,7 @@ public class TasksProposalModelImpl extends BaseModelImpl<TasksProposal> {
 	}
 
 	public void setCreateDate(Date createDate) {
-		if ((createDate != _createDate) ||
-				((createDate != null) && !createDate.equals(_createDate))) {
-			_createDate = createDate;
-		}
+		_createDate = createDate;
 	}
 
 	public Date getModifiedDate() {
@@ -233,10 +219,7 @@ public class TasksProposalModelImpl extends BaseModelImpl<TasksProposal> {
 	}
 
 	public void setModifiedDate(Date modifiedDate) {
-		if ((modifiedDate != _modifiedDate) ||
-				((modifiedDate != null) && !modifiedDate.equals(_modifiedDate))) {
-			_modifiedDate = modifiedDate;
-		}
+		_modifiedDate = modifiedDate;
 	}
 
 	public String getClassName() {
@@ -252,14 +235,12 @@ public class TasksProposalModelImpl extends BaseModelImpl<TasksProposal> {
 	}
 
 	public void setClassNameId(long classNameId) {
-		if (classNameId != _classNameId) {
-			_classNameId = classNameId;
+		_classNameId = classNameId;
 
-			if (!_setOriginalClassNameId) {
-				_setOriginalClassNameId = true;
+		if (!_setOriginalClassNameId) {
+			_setOriginalClassNameId = true;
 
-				_originalClassNameId = classNameId;
-			}
+			_originalClassNameId = classNameId;
 		}
 	}
 
@@ -272,13 +253,10 @@ public class TasksProposalModelImpl extends BaseModelImpl<TasksProposal> {
 	}
 
 	public void setClassPK(String classPK) {
-		if ((classPK != _classPK) ||
-				((classPK != null) && !classPK.equals(_classPK))) {
-			_classPK = classPK;
+		_classPK = classPK;
 
-			if (_originalClassPK == null) {
-				_originalClassPK = classPK;
-			}
+		if (_originalClassPK == null) {
+			_originalClassPK = classPK;
 		}
 	}
 
@@ -291,9 +269,7 @@ public class TasksProposalModelImpl extends BaseModelImpl<TasksProposal> {
 	}
 
 	public void setName(String name) {
-		if ((name != _name) || ((name != null) && !name.equals(_name))) {
-			_name = name;
-		}
+		_name = name;
 	}
 
 	public String getDescription() {
@@ -301,10 +277,7 @@ public class TasksProposalModelImpl extends BaseModelImpl<TasksProposal> {
 	}
 
 	public void setDescription(String description) {
-		if ((description != _description) ||
-				((description != null) && !description.equals(_description))) {
-			_description = description;
-		}
+		_description = description;
 	}
 
 	public Date getPublishDate() {
@@ -312,10 +285,7 @@ public class TasksProposalModelImpl extends BaseModelImpl<TasksProposal> {
 	}
 
 	public void setPublishDate(Date publishDate) {
-		if ((publishDate != _publishDate) ||
-				((publishDate != null) && !publishDate.equals(_publishDate))) {
-			_publishDate = publishDate;
-		}
+		_publishDate = publishDate;
 	}
 
 	public Date getDueDate() {
@@ -323,10 +293,7 @@ public class TasksProposalModelImpl extends BaseModelImpl<TasksProposal> {
 	}
 
 	public void setDueDate(Date dueDate) {
-		if ((dueDate != _dueDate) ||
-				((dueDate != null) && !dueDate.equals(_dueDate))) {
-			_dueDate = dueDate;
-		}
+		_dueDate = dueDate;
 	}
 
 	public TasksProposal toEscapedModel() {

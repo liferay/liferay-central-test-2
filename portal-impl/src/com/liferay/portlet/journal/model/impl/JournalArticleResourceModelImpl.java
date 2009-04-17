@@ -129,9 +129,7 @@ public class JournalArticleResourceModelImpl extends BaseModelImpl<JournalArticl
 	}
 
 	public void setResourcePrimKey(long resourcePrimKey) {
-		if (resourcePrimKey != _resourcePrimKey) {
-			_resourcePrimKey = resourcePrimKey;
-		}
+		_resourcePrimKey = resourcePrimKey;
 	}
 
 	public long getGroupId() {
@@ -139,14 +137,12 @@ public class JournalArticleResourceModelImpl extends BaseModelImpl<JournalArticl
 	}
 
 	public void setGroupId(long groupId) {
-		if (groupId != _groupId) {
-			_groupId = groupId;
+		_groupId = groupId;
 
-			if (!_setOriginalGroupId) {
-				_setOriginalGroupId = true;
+		if (!_setOriginalGroupId) {
+			_setOriginalGroupId = true;
 
-				_originalGroupId = groupId;
-			}
+			_originalGroupId = groupId;
 		}
 	}
 
@@ -159,13 +155,10 @@ public class JournalArticleResourceModelImpl extends BaseModelImpl<JournalArticl
 	}
 
 	public void setArticleId(String articleId) {
-		if ((articleId != _articleId) ||
-				((articleId != null) && !articleId.equals(_articleId))) {
-			_articleId = articleId;
+		_articleId = articleId;
 
-			if (_originalArticleId == null) {
-				_originalArticleId = articleId;
-			}
+		if (_originalArticleId == null) {
+			_originalArticleId = articleId;
 		}
 	}
 

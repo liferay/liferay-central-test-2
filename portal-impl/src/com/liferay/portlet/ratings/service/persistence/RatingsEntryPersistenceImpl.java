@@ -280,6 +280,8 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl
 		boolean merge) throws SystemException {
 		boolean isNew = ratingsEntry.isNew();
 
+		RatingsEntryModelImpl ratingsEntryModelImpl = (RatingsEntryModelImpl)ratingsEntry;
+
 		Session session = null;
 
 		try {
@@ -300,8 +302,6 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl
 
 		EntityCacheUtil.putResult(RatingsEntryModelImpl.ENTITY_CACHE_ENABLED,
 			RatingsEntryImpl.class, ratingsEntry.getPrimaryKey(), ratingsEntry);
-
-		RatingsEntryModelImpl ratingsEntryModelImpl = (RatingsEntryModelImpl)ratingsEntry;
 
 		if (!isNew &&
 				((ratingsEntry.getUserId() != ratingsEntryModelImpl.getOriginalUserId()) ||
@@ -378,12 +378,6 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl
 
 	public List<RatingsEntry> findByC_C(long classNameId, long classPK)
 		throws SystemException {
-		int count = countByC_C(classNameId, classPK);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(classNameId), new Long(classPK)
 			};
@@ -447,12 +441,6 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl
 
 	public List<RatingsEntry> findByC_C(long classNameId, long classPK,
 		int start, int end, OrderByComparator obc) throws SystemException {
-		int count = countByC_C(classNameId, classPK);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(classNameId), new Long(classPK),
 				

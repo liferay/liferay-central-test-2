@@ -216,12 +216,10 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList> {
 	}
 
 	public void setUuid(String uuid) {
-		if ((uuid != null) && !uuid.equals(_uuid)) {
-			_uuid = uuid;
+		_uuid = uuid;
 
-			if (_originalUuid == null) {
-				_originalUuid = uuid;
-			}
+		if (_originalUuid == null) {
+			_originalUuid = uuid;
 		}
 	}
 
@@ -234,9 +232,7 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList> {
 	}
 
 	public void setMailingListId(long mailingListId) {
-		if (mailingListId != _mailingListId) {
-			_mailingListId = mailingListId;
-		}
+		_mailingListId = mailingListId;
 	}
 
 	public long getGroupId() {
@@ -244,14 +240,12 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList> {
 	}
 
 	public void setGroupId(long groupId) {
-		if (groupId != _groupId) {
-			_groupId = groupId;
+		_groupId = groupId;
 
-			if (!_setOriginalGroupId) {
-				_setOriginalGroupId = true;
+		if (!_setOriginalGroupId) {
+			_setOriginalGroupId = true;
 
-				_originalGroupId = groupId;
-			}
+			_originalGroupId = groupId;
 		}
 	}
 
@@ -264,9 +258,7 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList> {
 	}
 
 	public void setCompanyId(long companyId) {
-		if (companyId != _companyId) {
-			_companyId = companyId;
-		}
+		_companyId = companyId;
 	}
 
 	public long getUserId() {
@@ -274,9 +266,7 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList> {
 	}
 
 	public void setUserId(long userId) {
-		if (userId != _userId) {
-			_userId = userId;
-		}
+		_userId = userId;
 	}
 
 	public String getUserName() {
@@ -284,10 +274,7 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList> {
 	}
 
 	public void setUserName(String userName) {
-		if ((userName != _userName) ||
-				((userName != null) && !userName.equals(_userName))) {
-			_userName = userName;
-		}
+		_userName = userName;
 	}
 
 	public Date getCreateDate() {
@@ -295,10 +282,7 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList> {
 	}
 
 	public void setCreateDate(Date createDate) {
-		if ((createDate != _createDate) ||
-				((createDate != null) && !createDate.equals(_createDate))) {
-			_createDate = createDate;
-		}
+		_createDate = createDate;
 	}
 
 	public Date getModifiedDate() {
@@ -306,10 +290,7 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList> {
 	}
 
 	public void setModifiedDate(Date modifiedDate) {
-		if ((modifiedDate != _modifiedDate) ||
-				((modifiedDate != null) && !modifiedDate.equals(_modifiedDate))) {
-			_modifiedDate = modifiedDate;
-		}
+		_modifiedDate = modifiedDate;
 	}
 
 	public long getCategoryId() {
@@ -317,14 +298,12 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList> {
 	}
 
 	public void setCategoryId(long categoryId) {
-		if (categoryId != _categoryId) {
-			_categoryId = categoryId;
+		_categoryId = categoryId;
 
-			if (!_setOriginalCategoryId) {
-				_setOriginalCategoryId = true;
+		if (!_setOriginalCategoryId) {
+			_setOriginalCategoryId = true;
 
-				_originalCategoryId = categoryId;
-			}
+			_originalCategoryId = categoryId;
 		}
 	}
 
@@ -337,10 +316,7 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList> {
 	}
 
 	public void setEmailAddress(String emailAddress) {
-		if ((emailAddress != _emailAddress) ||
-				((emailAddress != null) && !emailAddress.equals(_emailAddress))) {
-			_emailAddress = emailAddress;
-		}
+		_emailAddress = emailAddress;
 	}
 
 	public String getInProtocol() {
@@ -348,10 +324,7 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList> {
 	}
 
 	public void setInProtocol(String inProtocol) {
-		if ((inProtocol != _inProtocol) ||
-				((inProtocol != null) && !inProtocol.equals(_inProtocol))) {
-			_inProtocol = inProtocol;
-		}
+		_inProtocol = inProtocol;
 	}
 
 	public String getInServerName() {
@@ -359,10 +332,7 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList> {
 	}
 
 	public void setInServerName(String inServerName) {
-		if ((inServerName != _inServerName) ||
-				((inServerName != null) && !inServerName.equals(_inServerName))) {
-			_inServerName = inServerName;
-		}
+		_inServerName = inServerName;
 	}
 
 	public int getInServerPort() {
@@ -370,9 +340,7 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList> {
 	}
 
 	public void setInServerPort(int inServerPort) {
-		if (inServerPort != _inServerPort) {
-			_inServerPort = inServerPort;
-		}
+		_inServerPort = inServerPort;
 	}
 
 	public boolean getInUseSSL() {
@@ -384,9 +352,7 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList> {
 	}
 
 	public void setInUseSSL(boolean inUseSSL) {
-		if (inUseSSL != _inUseSSL) {
-			_inUseSSL = inUseSSL;
-		}
+		_inUseSSL = inUseSSL;
 	}
 
 	public String getInUserName() {
@@ -394,10 +360,7 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList> {
 	}
 
 	public void setInUserName(String inUserName) {
-		if ((inUserName != _inUserName) ||
-				((inUserName != null) && !inUserName.equals(_inUserName))) {
-			_inUserName = inUserName;
-		}
+		_inUserName = inUserName;
 	}
 
 	public String getInPassword() {
@@ -405,10 +368,7 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList> {
 	}
 
 	public void setInPassword(String inPassword) {
-		if ((inPassword != _inPassword) ||
-				((inPassword != null) && !inPassword.equals(_inPassword))) {
-			_inPassword = inPassword;
-		}
+		_inPassword = inPassword;
 	}
 
 	public int getInReadInterval() {
@@ -416,9 +376,7 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList> {
 	}
 
 	public void setInReadInterval(int inReadInterval) {
-		if (inReadInterval != _inReadInterval) {
-			_inReadInterval = inReadInterval;
-		}
+		_inReadInterval = inReadInterval;
 	}
 
 	public String getOutEmailAddress() {
@@ -426,11 +384,7 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList> {
 	}
 
 	public void setOutEmailAddress(String outEmailAddress) {
-		if ((outEmailAddress != _outEmailAddress) ||
-				((outEmailAddress != null) &&
-				!outEmailAddress.equals(_outEmailAddress))) {
-			_outEmailAddress = outEmailAddress;
-		}
+		_outEmailAddress = outEmailAddress;
 	}
 
 	public boolean getOutCustom() {
@@ -442,9 +396,7 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList> {
 	}
 
 	public void setOutCustom(boolean outCustom) {
-		if (outCustom != _outCustom) {
-			_outCustom = outCustom;
-		}
+		_outCustom = outCustom;
 	}
 
 	public String getOutServerName() {
@@ -452,11 +404,7 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList> {
 	}
 
 	public void setOutServerName(String outServerName) {
-		if ((outServerName != _outServerName) ||
-				((outServerName != null) &&
-				!outServerName.equals(_outServerName))) {
-			_outServerName = outServerName;
-		}
+		_outServerName = outServerName;
 	}
 
 	public int getOutServerPort() {
@@ -464,9 +412,7 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList> {
 	}
 
 	public void setOutServerPort(int outServerPort) {
-		if (outServerPort != _outServerPort) {
-			_outServerPort = outServerPort;
-		}
+		_outServerPort = outServerPort;
 	}
 
 	public boolean getOutUseSSL() {
@@ -478,9 +424,7 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList> {
 	}
 
 	public void setOutUseSSL(boolean outUseSSL) {
-		if (outUseSSL != _outUseSSL) {
-			_outUseSSL = outUseSSL;
-		}
+		_outUseSSL = outUseSSL;
 	}
 
 	public String getOutUserName() {
@@ -488,10 +432,7 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList> {
 	}
 
 	public void setOutUserName(String outUserName) {
-		if ((outUserName != _outUserName) ||
-				((outUserName != null) && !outUserName.equals(_outUserName))) {
-			_outUserName = outUserName;
-		}
+		_outUserName = outUserName;
 	}
 
 	public String getOutPassword() {
@@ -499,10 +440,7 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList> {
 	}
 
 	public void setOutPassword(String outPassword) {
-		if ((outPassword != _outPassword) ||
-				((outPassword != null) && !outPassword.equals(_outPassword))) {
-			_outPassword = outPassword;
-		}
+		_outPassword = outPassword;
 	}
 
 	public boolean getActive() {
@@ -514,9 +452,7 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList> {
 	}
 
 	public void setActive(boolean active) {
-		if (active != _active) {
-			_active = active;
-		}
+		_active = active;
 	}
 
 	public MBMailingList toEscapedModel() {

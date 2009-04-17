@@ -264,6 +264,8 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl
 		boolean merge) throws SystemException {
 		boolean isNew = resource.isNew();
 
+		ResourceModelImpl resourceModelImpl = (ResourceModelImpl)resource;
+
 		Session session = null;
 
 		try {
@@ -284,8 +286,6 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl
 
 		EntityCacheUtil.putResult(ResourceModelImpl.ENTITY_CACHE_ENABLED,
 			ResourceImpl.class, resource.getPrimaryKey(), resource);
-
-		ResourceModelImpl resourceModelImpl = (ResourceModelImpl)resource;
 
 		if (!isNew &&
 				((resource.getCodeId() != resourceModelImpl.getOriginalCodeId()) ||
@@ -361,12 +361,6 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl
 	}
 
 	public List<Resource> findByCodeId(long codeId) throws SystemException {
-		int count = countByCodeId(codeId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { new Long(codeId) };
 
 		List<Resource> list = (List<Resource>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_CODEID,
@@ -421,12 +415,6 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl
 
 	public List<Resource> findByCodeId(long codeId, int start, int end,
 		OrderByComparator obc) throws SystemException {
-		int count = countByCodeId(codeId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(codeId),
 				

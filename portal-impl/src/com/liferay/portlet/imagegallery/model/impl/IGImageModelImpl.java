@@ -168,9 +168,7 @@ public class IGImageModelImpl extends BaseModelImpl<IGImage> {
 	}
 
 	public void setUuid(String uuid) {
-		if ((uuid != null) && !uuid.equals(_uuid)) {
-			_uuid = uuid;
-		}
+		_uuid = uuid;
 	}
 
 	public long getImageId() {
@@ -178,9 +176,7 @@ public class IGImageModelImpl extends BaseModelImpl<IGImage> {
 	}
 
 	public void setImageId(long imageId) {
-		if (imageId != _imageId) {
-			_imageId = imageId;
-		}
+		_imageId = imageId;
 	}
 
 	public long getCompanyId() {
@@ -188,9 +184,7 @@ public class IGImageModelImpl extends BaseModelImpl<IGImage> {
 	}
 
 	public void setCompanyId(long companyId) {
-		if (companyId != _companyId) {
-			_companyId = companyId;
-		}
+		_companyId = companyId;
 	}
 
 	public long getUserId() {
@@ -198,9 +192,7 @@ public class IGImageModelImpl extends BaseModelImpl<IGImage> {
 	}
 
 	public void setUserId(long userId) {
-		if (userId != _userId) {
-			_userId = userId;
-		}
+		_userId = userId;
 	}
 
 	public Date getCreateDate() {
@@ -208,10 +200,7 @@ public class IGImageModelImpl extends BaseModelImpl<IGImage> {
 	}
 
 	public void setCreateDate(Date createDate) {
-		if ((createDate != _createDate) ||
-				((createDate != null) && !createDate.equals(_createDate))) {
-			_createDate = createDate;
-		}
+		_createDate = createDate;
 	}
 
 	public Date getModifiedDate() {
@@ -219,10 +208,7 @@ public class IGImageModelImpl extends BaseModelImpl<IGImage> {
 	}
 
 	public void setModifiedDate(Date modifiedDate) {
-		if ((modifiedDate != _modifiedDate) ||
-				((modifiedDate != null) && !modifiedDate.equals(_modifiedDate))) {
-			_modifiedDate = modifiedDate;
-		}
+		_modifiedDate = modifiedDate;
 	}
 
 	public long getFolderId() {
@@ -230,9 +216,7 @@ public class IGImageModelImpl extends BaseModelImpl<IGImage> {
 	}
 
 	public void setFolderId(long folderId) {
-		if (folderId != _folderId) {
-			_folderId = folderId;
-		}
+		_folderId = folderId;
 	}
 
 	public String getName() {
@@ -240,9 +224,7 @@ public class IGImageModelImpl extends BaseModelImpl<IGImage> {
 	}
 
 	public void setName(String name) {
-		if ((name != _name) || ((name != null) && !name.equals(_name))) {
-			_name = name;
-		}
+		_name = name;
 	}
 
 	public String getDescription() {
@@ -250,10 +232,7 @@ public class IGImageModelImpl extends BaseModelImpl<IGImage> {
 	}
 
 	public void setDescription(String description) {
-		if ((description != _description) ||
-				((description != null) && !description.equals(_description))) {
-			_description = description;
-		}
+		_description = description;
 	}
 
 	public long getSmallImageId() {
@@ -261,14 +240,12 @@ public class IGImageModelImpl extends BaseModelImpl<IGImage> {
 	}
 
 	public void setSmallImageId(long smallImageId) {
-		if (smallImageId != _smallImageId) {
-			_smallImageId = smallImageId;
+		_smallImageId = smallImageId;
 
-			if (!_setOriginalSmallImageId) {
-				_setOriginalSmallImageId = true;
+		if (!_setOriginalSmallImageId) {
+			_setOriginalSmallImageId = true;
 
-				_originalSmallImageId = smallImageId;
-			}
+			_originalSmallImageId = smallImageId;
 		}
 	}
 
@@ -281,14 +258,12 @@ public class IGImageModelImpl extends BaseModelImpl<IGImage> {
 	}
 
 	public void setLargeImageId(long largeImageId) {
-		if (largeImageId != _largeImageId) {
-			_largeImageId = largeImageId;
+		_largeImageId = largeImageId;
 
-			if (!_setOriginalLargeImageId) {
-				_setOriginalLargeImageId = true;
+		if (!_setOriginalLargeImageId) {
+			_setOriginalLargeImageId = true;
 
-				_originalLargeImageId = largeImageId;
-			}
+			_originalLargeImageId = largeImageId;
 		}
 	}
 
@@ -301,14 +276,12 @@ public class IGImageModelImpl extends BaseModelImpl<IGImage> {
 	}
 
 	public void setCustom1ImageId(long custom1ImageId) {
-		if (custom1ImageId != _custom1ImageId) {
-			_custom1ImageId = custom1ImageId;
+		_custom1ImageId = custom1ImageId;
 
-			if (!_setOriginalCustom1ImageId) {
-				_setOriginalCustom1ImageId = true;
+		if (!_setOriginalCustom1ImageId) {
+			_setOriginalCustom1ImageId = true;
 
-				_originalCustom1ImageId = custom1ImageId;
-			}
+			_originalCustom1ImageId = custom1ImageId;
 		}
 	}
 
@@ -321,14 +294,12 @@ public class IGImageModelImpl extends BaseModelImpl<IGImage> {
 	}
 
 	public void setCustom2ImageId(long custom2ImageId) {
-		if (custom2ImageId != _custom2ImageId) {
-			_custom2ImageId = custom2ImageId;
+		_custom2ImageId = custom2ImageId;
 
-			if (!_setOriginalCustom2ImageId) {
-				_setOriginalCustom2ImageId = true;
+		if (!_setOriginalCustom2ImageId) {
+			_setOriginalCustom2ImageId = true;
 
-				_originalCustom2ImageId = custom2ImageId;
-			}
+			_originalCustom2ImageId = custom2ImageId;
 		}
 	}
 

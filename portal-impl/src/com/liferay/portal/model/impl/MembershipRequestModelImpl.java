@@ -157,9 +157,7 @@ public class MembershipRequestModelImpl extends BaseModelImpl<MembershipRequest>
 	}
 
 	public void setMembershipRequestId(long membershipRequestId) {
-		if (membershipRequestId != _membershipRequestId) {
-			_membershipRequestId = membershipRequestId;
-		}
+		_membershipRequestId = membershipRequestId;
 	}
 
 	public long getCompanyId() {
@@ -167,9 +165,7 @@ public class MembershipRequestModelImpl extends BaseModelImpl<MembershipRequest>
 	}
 
 	public void setCompanyId(long companyId) {
-		if (companyId != _companyId) {
-			_companyId = companyId;
-		}
+		_companyId = companyId;
 	}
 
 	public long getUserId() {
@@ -177,9 +173,7 @@ public class MembershipRequestModelImpl extends BaseModelImpl<MembershipRequest>
 	}
 
 	public void setUserId(long userId) {
-		if (userId != _userId) {
-			_userId = userId;
-		}
+		_userId = userId;
 	}
 
 	public Date getCreateDate() {
@@ -187,10 +181,7 @@ public class MembershipRequestModelImpl extends BaseModelImpl<MembershipRequest>
 	}
 
 	public void setCreateDate(Date createDate) {
-		if ((createDate != _createDate) ||
-				((createDate != null) && !createDate.equals(_createDate))) {
-			_createDate = createDate;
-		}
+		_createDate = createDate;
 	}
 
 	public long getGroupId() {
@@ -198,9 +189,7 @@ public class MembershipRequestModelImpl extends BaseModelImpl<MembershipRequest>
 	}
 
 	public void setGroupId(long groupId) {
-		if (groupId != _groupId) {
-			_groupId = groupId;
-		}
+		_groupId = groupId;
 	}
 
 	public String getComments() {
@@ -208,10 +197,7 @@ public class MembershipRequestModelImpl extends BaseModelImpl<MembershipRequest>
 	}
 
 	public void setComments(String comments) {
-		if ((comments != _comments) ||
-				((comments != null) && !comments.equals(_comments))) {
-			_comments = comments;
-		}
+		_comments = comments;
 	}
 
 	public String getReplyComments() {
@@ -219,11 +205,7 @@ public class MembershipRequestModelImpl extends BaseModelImpl<MembershipRequest>
 	}
 
 	public void setReplyComments(String replyComments) {
-		if ((replyComments != _replyComments) ||
-				((replyComments != null) &&
-				!replyComments.equals(_replyComments))) {
-			_replyComments = replyComments;
-		}
+		_replyComments = replyComments;
 	}
 
 	public Date getReplyDate() {
@@ -231,10 +213,7 @@ public class MembershipRequestModelImpl extends BaseModelImpl<MembershipRequest>
 	}
 
 	public void setReplyDate(Date replyDate) {
-		if ((replyDate != _replyDate) ||
-				((replyDate != null) && !replyDate.equals(_replyDate))) {
-			_replyDate = replyDate;
-		}
+		_replyDate = replyDate;
 	}
 
 	public long getReplierUserId() {
@@ -242,9 +221,7 @@ public class MembershipRequestModelImpl extends BaseModelImpl<MembershipRequest>
 	}
 
 	public void setReplierUserId(long replierUserId) {
-		if (replierUserId != _replierUserId) {
-			_replierUserId = replierUserId;
-		}
+		_replierUserId = replierUserId;
 	}
 
 	public int getStatusId() {
@@ -252,9 +229,7 @@ public class MembershipRequestModelImpl extends BaseModelImpl<MembershipRequest>
 	}
 
 	public void setStatusId(int statusId) {
-		if (statusId != _statusId) {
-			_statusId = statusId;
-		}
+		_statusId = statusId;
 	}
 
 	public MembershipRequest toEscapedModel() {

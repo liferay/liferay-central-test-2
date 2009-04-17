@@ -168,9 +168,7 @@ public class SCProductVersionModelImpl extends BaseModelImpl<SCProductVersion> {
 	}
 
 	public void setProductVersionId(long productVersionId) {
-		if (productVersionId != _productVersionId) {
-			_productVersionId = productVersionId;
-		}
+		_productVersionId = productVersionId;
 	}
 
 	public long getCompanyId() {
@@ -178,9 +176,7 @@ public class SCProductVersionModelImpl extends BaseModelImpl<SCProductVersion> {
 	}
 
 	public void setCompanyId(long companyId) {
-		if (companyId != _companyId) {
-			_companyId = companyId;
-		}
+		_companyId = companyId;
 	}
 
 	public long getUserId() {
@@ -188,9 +184,7 @@ public class SCProductVersionModelImpl extends BaseModelImpl<SCProductVersion> {
 	}
 
 	public void setUserId(long userId) {
-		if (userId != _userId) {
-			_userId = userId;
-		}
+		_userId = userId;
 	}
 
 	public String getUserName() {
@@ -198,10 +192,7 @@ public class SCProductVersionModelImpl extends BaseModelImpl<SCProductVersion> {
 	}
 
 	public void setUserName(String userName) {
-		if ((userName != _userName) ||
-				((userName != null) && !userName.equals(_userName))) {
-			_userName = userName;
-		}
+		_userName = userName;
 	}
 
 	public Date getCreateDate() {
@@ -209,10 +200,7 @@ public class SCProductVersionModelImpl extends BaseModelImpl<SCProductVersion> {
 	}
 
 	public void setCreateDate(Date createDate) {
-		if ((createDate != _createDate) ||
-				((createDate != null) && !createDate.equals(_createDate))) {
-			_createDate = createDate;
-		}
+		_createDate = createDate;
 	}
 
 	public Date getModifiedDate() {
@@ -220,10 +208,7 @@ public class SCProductVersionModelImpl extends BaseModelImpl<SCProductVersion> {
 	}
 
 	public void setModifiedDate(Date modifiedDate) {
-		if ((modifiedDate != _modifiedDate) ||
-				((modifiedDate != null) && !modifiedDate.equals(_modifiedDate))) {
-			_modifiedDate = modifiedDate;
-		}
+		_modifiedDate = modifiedDate;
 	}
 
 	public long getProductEntryId() {
@@ -231,9 +216,7 @@ public class SCProductVersionModelImpl extends BaseModelImpl<SCProductVersion> {
 	}
 
 	public void setProductEntryId(long productEntryId) {
-		if (productEntryId != _productEntryId) {
-			_productEntryId = productEntryId;
-		}
+		_productEntryId = productEntryId;
 	}
 
 	public String getVersion() {
@@ -241,10 +224,7 @@ public class SCProductVersionModelImpl extends BaseModelImpl<SCProductVersion> {
 	}
 
 	public void setVersion(String version) {
-		if ((version != _version) ||
-				((version != null) && !version.equals(_version))) {
-			_version = version;
-		}
+		_version = version;
 	}
 
 	public String getChangeLog() {
@@ -252,10 +232,7 @@ public class SCProductVersionModelImpl extends BaseModelImpl<SCProductVersion> {
 	}
 
 	public void setChangeLog(String changeLog) {
-		if ((changeLog != _changeLog) ||
-				((changeLog != null) && !changeLog.equals(_changeLog))) {
-			_changeLog = changeLog;
-		}
+		_changeLog = changeLog;
 	}
 
 	public String getDownloadPageURL() {
@@ -263,11 +240,7 @@ public class SCProductVersionModelImpl extends BaseModelImpl<SCProductVersion> {
 	}
 
 	public void setDownloadPageURL(String downloadPageURL) {
-		if ((downloadPageURL != _downloadPageURL) ||
-				((downloadPageURL != null) &&
-				!downloadPageURL.equals(_downloadPageURL))) {
-			_downloadPageURL = downloadPageURL;
-		}
+		_downloadPageURL = downloadPageURL;
 	}
 
 	public String getDirectDownloadURL() {
@@ -275,14 +248,10 @@ public class SCProductVersionModelImpl extends BaseModelImpl<SCProductVersion> {
 	}
 
 	public void setDirectDownloadURL(String directDownloadURL) {
-		if ((directDownloadURL != _directDownloadURL) ||
-				((directDownloadURL != null) &&
-				!directDownloadURL.equals(_directDownloadURL))) {
-			_directDownloadURL = directDownloadURL;
+		_directDownloadURL = directDownloadURL;
 
-			if (_originalDirectDownloadURL == null) {
-				_originalDirectDownloadURL = directDownloadURL;
-			}
+		if (_originalDirectDownloadURL == null) {
+			_originalDirectDownloadURL = directDownloadURL;
 		}
 	}
 
@@ -299,9 +268,7 @@ public class SCProductVersionModelImpl extends BaseModelImpl<SCProductVersion> {
 	}
 
 	public void setRepoStoreArtifact(boolean repoStoreArtifact) {
-		if (repoStoreArtifact != _repoStoreArtifact) {
-			_repoStoreArtifact = repoStoreArtifact;
-		}
+		_repoStoreArtifact = repoStoreArtifact;
 	}
 
 	public SCProductVersion toEscapedModel() {

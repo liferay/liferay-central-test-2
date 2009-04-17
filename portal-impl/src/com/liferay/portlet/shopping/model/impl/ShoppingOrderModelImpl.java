@@ -321,9 +321,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder> {
 	}
 
 	public void setOrderId(long orderId) {
-		if (orderId != _orderId) {
-			_orderId = orderId;
-		}
+		_orderId = orderId;
 	}
 
 	public long getGroupId() {
@@ -331,9 +329,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder> {
 	}
 
 	public void setGroupId(long groupId) {
-		if (groupId != _groupId) {
-			_groupId = groupId;
-		}
+		_groupId = groupId;
 	}
 
 	public long getCompanyId() {
@@ -341,9 +337,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder> {
 	}
 
 	public void setCompanyId(long companyId) {
-		if (companyId != _companyId) {
-			_companyId = companyId;
-		}
+		_companyId = companyId;
 	}
 
 	public long getUserId() {
@@ -351,9 +345,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder> {
 	}
 
 	public void setUserId(long userId) {
-		if (userId != _userId) {
-			_userId = userId;
-		}
+		_userId = userId;
 	}
 
 	public String getUserName() {
@@ -361,10 +353,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder> {
 	}
 
 	public void setUserName(String userName) {
-		if ((userName != _userName) ||
-				((userName != null) && !userName.equals(_userName))) {
-			_userName = userName;
-		}
+		_userName = userName;
 	}
 
 	public Date getCreateDate() {
@@ -372,10 +361,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder> {
 	}
 
 	public void setCreateDate(Date createDate) {
-		if ((createDate != _createDate) ||
-				((createDate != null) && !createDate.equals(_createDate))) {
-			_createDate = createDate;
-		}
+		_createDate = createDate;
 	}
 
 	public Date getModifiedDate() {
@@ -383,10 +369,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder> {
 	}
 
 	public void setModifiedDate(Date modifiedDate) {
-		if ((modifiedDate != _modifiedDate) ||
-				((modifiedDate != null) && !modifiedDate.equals(_modifiedDate))) {
-			_modifiedDate = modifiedDate;
-		}
+		_modifiedDate = modifiedDate;
 	}
 
 	public String getNumber() {
@@ -394,13 +377,10 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder> {
 	}
 
 	public void setNumber(String number) {
-		if ((number != _number) ||
-				((number != null) && !number.equals(_number))) {
-			_number = number;
+		_number = number;
 
-			if (_originalNumber == null) {
-				_originalNumber = number;
-			}
+		if (_originalNumber == null) {
+			_originalNumber = number;
 		}
 	}
 
@@ -413,9 +393,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder> {
 	}
 
 	public void setTax(double tax) {
-		if (tax != _tax) {
-			_tax = tax;
-		}
+		_tax = tax;
 	}
 
 	public double getShipping() {
@@ -423,9 +401,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder> {
 	}
 
 	public void setShipping(double shipping) {
-		if (shipping != _shipping) {
-			_shipping = shipping;
-		}
+		_shipping = shipping;
 	}
 
 	public String getAltShipping() {
@@ -433,10 +409,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder> {
 	}
 
 	public void setAltShipping(String altShipping) {
-		if ((altShipping != _altShipping) ||
-				((altShipping != null) && !altShipping.equals(_altShipping))) {
-			_altShipping = altShipping;
-		}
+		_altShipping = altShipping;
 	}
 
 	public boolean getRequiresShipping() {
@@ -448,9 +421,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder> {
 	}
 
 	public void setRequiresShipping(boolean requiresShipping) {
-		if (requiresShipping != _requiresShipping) {
-			_requiresShipping = requiresShipping;
-		}
+		_requiresShipping = requiresShipping;
 	}
 
 	public boolean getInsure() {
@@ -462,9 +433,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder> {
 	}
 
 	public void setInsure(boolean insure) {
-		if (insure != _insure) {
-			_insure = insure;
-		}
+		_insure = insure;
 	}
 
 	public double getInsurance() {
@@ -472,9 +441,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder> {
 	}
 
 	public void setInsurance(double insurance) {
-		if (insurance != _insurance) {
-			_insurance = insurance;
-		}
+		_insurance = insurance;
 	}
 
 	public String getCouponCodes() {
@@ -482,10 +449,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder> {
 	}
 
 	public void setCouponCodes(String couponCodes) {
-		if ((couponCodes != _couponCodes) ||
-				((couponCodes != null) && !couponCodes.equals(_couponCodes))) {
-			_couponCodes = couponCodes;
-		}
+		_couponCodes = couponCodes;
 	}
 
 	public double getCouponDiscount() {
@@ -493,9 +457,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder> {
 	}
 
 	public void setCouponDiscount(double couponDiscount) {
-		if (couponDiscount != _couponDiscount) {
-			_couponDiscount = couponDiscount;
-		}
+		_couponDiscount = couponDiscount;
 	}
 
 	public String getBillingFirstName() {
@@ -503,11 +465,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder> {
 	}
 
 	public void setBillingFirstName(String billingFirstName) {
-		if ((billingFirstName != _billingFirstName) ||
-				((billingFirstName != null) &&
-				!billingFirstName.equals(_billingFirstName))) {
-			_billingFirstName = billingFirstName;
-		}
+		_billingFirstName = billingFirstName;
 	}
 
 	public String getBillingLastName() {
@@ -515,11 +473,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder> {
 	}
 
 	public void setBillingLastName(String billingLastName) {
-		if ((billingLastName != _billingLastName) ||
-				((billingLastName != null) &&
-				!billingLastName.equals(_billingLastName))) {
-			_billingLastName = billingLastName;
-		}
+		_billingLastName = billingLastName;
 	}
 
 	public String getBillingEmailAddress() {
@@ -527,11 +481,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder> {
 	}
 
 	public void setBillingEmailAddress(String billingEmailAddress) {
-		if ((billingEmailAddress != _billingEmailAddress) ||
-				((billingEmailAddress != null) &&
-				!billingEmailAddress.equals(_billingEmailAddress))) {
-			_billingEmailAddress = billingEmailAddress;
-		}
+		_billingEmailAddress = billingEmailAddress;
 	}
 
 	public String getBillingCompany() {
@@ -539,11 +489,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder> {
 	}
 
 	public void setBillingCompany(String billingCompany) {
-		if ((billingCompany != _billingCompany) ||
-				((billingCompany != null) &&
-				!billingCompany.equals(_billingCompany))) {
-			_billingCompany = billingCompany;
-		}
+		_billingCompany = billingCompany;
 	}
 
 	public String getBillingStreet() {
@@ -551,11 +497,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder> {
 	}
 
 	public void setBillingStreet(String billingStreet) {
-		if ((billingStreet != _billingStreet) ||
-				((billingStreet != null) &&
-				!billingStreet.equals(_billingStreet))) {
-			_billingStreet = billingStreet;
-		}
+		_billingStreet = billingStreet;
 	}
 
 	public String getBillingCity() {
@@ -563,10 +505,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder> {
 	}
 
 	public void setBillingCity(String billingCity) {
-		if ((billingCity != _billingCity) ||
-				((billingCity != null) && !billingCity.equals(_billingCity))) {
-			_billingCity = billingCity;
-		}
+		_billingCity = billingCity;
 	}
 
 	public String getBillingState() {
@@ -574,10 +513,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder> {
 	}
 
 	public void setBillingState(String billingState) {
-		if ((billingState != _billingState) ||
-				((billingState != null) && !billingState.equals(_billingState))) {
-			_billingState = billingState;
-		}
+		_billingState = billingState;
 	}
 
 	public String getBillingZip() {
@@ -585,10 +521,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder> {
 	}
 
 	public void setBillingZip(String billingZip) {
-		if ((billingZip != _billingZip) ||
-				((billingZip != null) && !billingZip.equals(_billingZip))) {
-			_billingZip = billingZip;
-		}
+		_billingZip = billingZip;
 	}
 
 	public String getBillingCountry() {
@@ -596,11 +529,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder> {
 	}
 
 	public void setBillingCountry(String billingCountry) {
-		if ((billingCountry != _billingCountry) ||
-				((billingCountry != null) &&
-				!billingCountry.equals(_billingCountry))) {
-			_billingCountry = billingCountry;
-		}
+		_billingCountry = billingCountry;
 	}
 
 	public String getBillingPhone() {
@@ -608,10 +537,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder> {
 	}
 
 	public void setBillingPhone(String billingPhone) {
-		if ((billingPhone != _billingPhone) ||
-				((billingPhone != null) && !billingPhone.equals(_billingPhone))) {
-			_billingPhone = billingPhone;
-		}
+		_billingPhone = billingPhone;
 	}
 
 	public boolean getShipToBilling() {
@@ -623,9 +549,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder> {
 	}
 
 	public void setShipToBilling(boolean shipToBilling) {
-		if (shipToBilling != _shipToBilling) {
-			_shipToBilling = shipToBilling;
-		}
+		_shipToBilling = shipToBilling;
 	}
 
 	public String getShippingFirstName() {
@@ -633,11 +557,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder> {
 	}
 
 	public void setShippingFirstName(String shippingFirstName) {
-		if ((shippingFirstName != _shippingFirstName) ||
-				((shippingFirstName != null) &&
-				!shippingFirstName.equals(_shippingFirstName))) {
-			_shippingFirstName = shippingFirstName;
-		}
+		_shippingFirstName = shippingFirstName;
 	}
 
 	public String getShippingLastName() {
@@ -645,11 +565,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder> {
 	}
 
 	public void setShippingLastName(String shippingLastName) {
-		if ((shippingLastName != _shippingLastName) ||
-				((shippingLastName != null) &&
-				!shippingLastName.equals(_shippingLastName))) {
-			_shippingLastName = shippingLastName;
-		}
+		_shippingLastName = shippingLastName;
 	}
 
 	public String getShippingEmailAddress() {
@@ -657,11 +573,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder> {
 	}
 
 	public void setShippingEmailAddress(String shippingEmailAddress) {
-		if ((shippingEmailAddress != _shippingEmailAddress) ||
-				((shippingEmailAddress != null) &&
-				!shippingEmailAddress.equals(_shippingEmailAddress))) {
-			_shippingEmailAddress = shippingEmailAddress;
-		}
+		_shippingEmailAddress = shippingEmailAddress;
 	}
 
 	public String getShippingCompany() {
@@ -669,11 +581,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder> {
 	}
 
 	public void setShippingCompany(String shippingCompany) {
-		if ((shippingCompany != _shippingCompany) ||
-				((shippingCompany != null) &&
-				!shippingCompany.equals(_shippingCompany))) {
-			_shippingCompany = shippingCompany;
-		}
+		_shippingCompany = shippingCompany;
 	}
 
 	public String getShippingStreet() {
@@ -681,11 +589,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder> {
 	}
 
 	public void setShippingStreet(String shippingStreet) {
-		if ((shippingStreet != _shippingStreet) ||
-				((shippingStreet != null) &&
-				!shippingStreet.equals(_shippingStreet))) {
-			_shippingStreet = shippingStreet;
-		}
+		_shippingStreet = shippingStreet;
 	}
 
 	public String getShippingCity() {
@@ -693,10 +597,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder> {
 	}
 
 	public void setShippingCity(String shippingCity) {
-		if ((shippingCity != _shippingCity) ||
-				((shippingCity != null) && !shippingCity.equals(_shippingCity))) {
-			_shippingCity = shippingCity;
-		}
+		_shippingCity = shippingCity;
 	}
 
 	public String getShippingState() {
@@ -704,11 +605,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder> {
 	}
 
 	public void setShippingState(String shippingState) {
-		if ((shippingState != _shippingState) ||
-				((shippingState != null) &&
-				!shippingState.equals(_shippingState))) {
-			_shippingState = shippingState;
-		}
+		_shippingState = shippingState;
 	}
 
 	public String getShippingZip() {
@@ -716,10 +613,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder> {
 	}
 
 	public void setShippingZip(String shippingZip) {
-		if ((shippingZip != _shippingZip) ||
-				((shippingZip != null) && !shippingZip.equals(_shippingZip))) {
-			_shippingZip = shippingZip;
-		}
+		_shippingZip = shippingZip;
 	}
 
 	public String getShippingCountry() {
@@ -727,11 +621,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder> {
 	}
 
 	public void setShippingCountry(String shippingCountry) {
-		if ((shippingCountry != _shippingCountry) ||
-				((shippingCountry != null) &&
-				!shippingCountry.equals(_shippingCountry))) {
-			_shippingCountry = shippingCountry;
-		}
+		_shippingCountry = shippingCountry;
 	}
 
 	public String getShippingPhone() {
@@ -739,11 +629,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder> {
 	}
 
 	public void setShippingPhone(String shippingPhone) {
-		if ((shippingPhone != _shippingPhone) ||
-				((shippingPhone != null) &&
-				!shippingPhone.equals(_shippingPhone))) {
-			_shippingPhone = shippingPhone;
-		}
+		_shippingPhone = shippingPhone;
 	}
 
 	public String getCcName() {
@@ -751,10 +637,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder> {
 	}
 
 	public void setCcName(String ccName) {
-		if ((ccName != _ccName) ||
-				((ccName != null) && !ccName.equals(_ccName))) {
-			_ccName = ccName;
-		}
+		_ccName = ccName;
 	}
 
 	public String getCcType() {
@@ -762,10 +645,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder> {
 	}
 
 	public void setCcType(String ccType) {
-		if ((ccType != _ccType) ||
-				((ccType != null) && !ccType.equals(_ccType))) {
-			_ccType = ccType;
-		}
+		_ccType = ccType;
 	}
 
 	public String getCcNumber() {
@@ -773,10 +653,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder> {
 	}
 
 	public void setCcNumber(String ccNumber) {
-		if ((ccNumber != _ccNumber) ||
-				((ccNumber != null) && !ccNumber.equals(_ccNumber))) {
-			_ccNumber = ccNumber;
-		}
+		_ccNumber = ccNumber;
 	}
 
 	public int getCcExpMonth() {
@@ -784,9 +661,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder> {
 	}
 
 	public void setCcExpMonth(int ccExpMonth) {
-		if (ccExpMonth != _ccExpMonth) {
-			_ccExpMonth = ccExpMonth;
-		}
+		_ccExpMonth = ccExpMonth;
 	}
 
 	public int getCcExpYear() {
@@ -794,9 +669,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder> {
 	}
 
 	public void setCcExpYear(int ccExpYear) {
-		if (ccExpYear != _ccExpYear) {
-			_ccExpYear = ccExpYear;
-		}
+		_ccExpYear = ccExpYear;
 	}
 
 	public String getCcVerNumber() {
@@ -804,10 +677,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder> {
 	}
 
 	public void setCcVerNumber(String ccVerNumber) {
-		if ((ccVerNumber != _ccVerNumber) ||
-				((ccVerNumber != null) && !ccVerNumber.equals(_ccVerNumber))) {
-			_ccVerNumber = ccVerNumber;
-		}
+		_ccVerNumber = ccVerNumber;
 	}
 
 	public String getComments() {
@@ -815,10 +685,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder> {
 	}
 
 	public void setComments(String comments) {
-		if ((comments != _comments) ||
-				((comments != null) && !comments.equals(_comments))) {
-			_comments = comments;
-		}
+		_comments = comments;
 	}
 
 	public String getPpTxnId() {
@@ -826,13 +693,10 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder> {
 	}
 
 	public void setPpTxnId(String ppTxnId) {
-		if ((ppTxnId != _ppTxnId) ||
-				((ppTxnId != null) && !ppTxnId.equals(_ppTxnId))) {
-			_ppTxnId = ppTxnId;
+		_ppTxnId = ppTxnId;
 
-			if (_originalPpTxnId == null) {
-				_originalPpTxnId = ppTxnId;
-			}
+		if (_originalPpTxnId == null) {
+			_originalPpTxnId = ppTxnId;
 		}
 	}
 
@@ -845,11 +709,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder> {
 	}
 
 	public void setPpPaymentStatus(String ppPaymentStatus) {
-		if ((ppPaymentStatus != _ppPaymentStatus) ||
-				((ppPaymentStatus != null) &&
-				!ppPaymentStatus.equals(_ppPaymentStatus))) {
-			_ppPaymentStatus = ppPaymentStatus;
-		}
+		_ppPaymentStatus = ppPaymentStatus;
 	}
 
 	public double getPpPaymentGross() {
@@ -857,9 +717,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder> {
 	}
 
 	public void setPpPaymentGross(double ppPaymentGross) {
-		if (ppPaymentGross != _ppPaymentGross) {
-			_ppPaymentGross = ppPaymentGross;
-		}
+		_ppPaymentGross = ppPaymentGross;
 	}
 
 	public String getPpReceiverEmail() {
@@ -867,11 +725,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder> {
 	}
 
 	public void setPpReceiverEmail(String ppReceiverEmail) {
-		if ((ppReceiverEmail != _ppReceiverEmail) ||
-				((ppReceiverEmail != null) &&
-				!ppReceiverEmail.equals(_ppReceiverEmail))) {
-			_ppReceiverEmail = ppReceiverEmail;
-		}
+		_ppReceiverEmail = ppReceiverEmail;
 	}
 
 	public String getPpPayerEmail() {
@@ -879,10 +733,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder> {
 	}
 
 	public void setPpPayerEmail(String ppPayerEmail) {
-		if ((ppPayerEmail != _ppPayerEmail) ||
-				((ppPayerEmail != null) && !ppPayerEmail.equals(_ppPayerEmail))) {
-			_ppPayerEmail = ppPayerEmail;
-		}
+		_ppPayerEmail = ppPayerEmail;
 	}
 
 	public boolean getSendOrderEmail() {
@@ -894,9 +745,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder> {
 	}
 
 	public void setSendOrderEmail(boolean sendOrderEmail) {
-		if (sendOrderEmail != _sendOrderEmail) {
-			_sendOrderEmail = sendOrderEmail;
-		}
+		_sendOrderEmail = sendOrderEmail;
 	}
 
 	public boolean getSendShippingEmail() {
@@ -908,9 +757,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder> {
 	}
 
 	public void setSendShippingEmail(boolean sendShippingEmail) {
-		if (sendShippingEmail != _sendShippingEmail) {
-			_sendShippingEmail = sendShippingEmail;
-		}
+		_sendShippingEmail = sendShippingEmail;
 	}
 
 	public ShoppingOrder toEscapedModel() {

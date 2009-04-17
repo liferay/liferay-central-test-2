@@ -137,9 +137,7 @@ public class AnnouncementsFlagModelImpl extends BaseModelImpl<AnnouncementsFlag>
 	}
 
 	public void setFlagId(long flagId) {
-		if (flagId != _flagId) {
-			_flagId = flagId;
-		}
+		_flagId = flagId;
 	}
 
 	public long getUserId() {
@@ -147,14 +145,12 @@ public class AnnouncementsFlagModelImpl extends BaseModelImpl<AnnouncementsFlag>
 	}
 
 	public void setUserId(long userId) {
-		if (userId != _userId) {
-			_userId = userId;
+		_userId = userId;
 
-			if (!_setOriginalUserId) {
-				_setOriginalUserId = true;
+		if (!_setOriginalUserId) {
+			_setOriginalUserId = true;
 
-				_originalUserId = userId;
-			}
+			_originalUserId = userId;
 		}
 	}
 
@@ -167,10 +163,7 @@ public class AnnouncementsFlagModelImpl extends BaseModelImpl<AnnouncementsFlag>
 	}
 
 	public void setCreateDate(Date createDate) {
-		if ((createDate != _createDate) ||
-				((createDate != null) && !createDate.equals(_createDate))) {
-			_createDate = createDate;
-		}
+		_createDate = createDate;
 	}
 
 	public long getEntryId() {
@@ -178,14 +171,12 @@ public class AnnouncementsFlagModelImpl extends BaseModelImpl<AnnouncementsFlag>
 	}
 
 	public void setEntryId(long entryId) {
-		if (entryId != _entryId) {
-			_entryId = entryId;
+		_entryId = entryId;
 
-			if (!_setOriginalEntryId) {
-				_setOriginalEntryId = true;
+		if (!_setOriginalEntryId) {
+			_setOriginalEntryId = true;
 
-				_originalEntryId = entryId;
-			}
+			_originalEntryId = entryId;
 		}
 	}
 
@@ -198,14 +189,12 @@ public class AnnouncementsFlagModelImpl extends BaseModelImpl<AnnouncementsFlag>
 	}
 
 	public void setValue(int value) {
-		if (value != _value) {
-			_value = value;
+		_value = value;
 
-			if (!_setOriginalValue) {
-				_setOriginalValue = true;
+		if (!_setOriginalValue) {
+			_setOriginalValue = true;
 
-				_originalValue = value;
-			}
+			_originalValue = value;
 		}
 	}
 

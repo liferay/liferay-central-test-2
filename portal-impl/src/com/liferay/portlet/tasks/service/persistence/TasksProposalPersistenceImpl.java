@@ -295,6 +295,8 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl
 		boolean merge) throws SystemException {
 		boolean isNew = tasksProposal.isNew();
 
+		TasksProposalModelImpl tasksProposalModelImpl = (TasksProposalModelImpl)tasksProposal;
+
 		Session session = null;
 
 		try {
@@ -316,8 +318,6 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl
 		EntityCacheUtil.putResult(TasksProposalModelImpl.ENTITY_CACHE_ENABLED,
 			TasksProposalImpl.class, tasksProposal.getPrimaryKey(),
 			tasksProposal);
-
-		TasksProposalModelImpl tasksProposalModelImpl = (TasksProposalModelImpl)tasksProposal;
 
 		if (!isNew &&
 				((tasksProposal.getClassNameId() != tasksProposalModelImpl.getOriginalClassNameId()) ||
@@ -394,12 +394,6 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl
 
 	public List<TasksProposal> findByGroupId(long groupId)
 		throws SystemException {
-		int count = countByGroupId(groupId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { new Long(groupId) };
 
 		List<TasksProposal> list = (List<TasksProposal>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_GROUPID,
@@ -460,12 +454,6 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl
 
 	public List<TasksProposal> findByGroupId(long groupId, int start, int end,
 		OrderByComparator obc) throws SystemException {
-		int count = countByGroupId(groupId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				
@@ -633,12 +621,6 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl
 
 	public List<TasksProposal> findByG_U(long groupId, long userId)
 		throws SystemException {
-		int count = countByG_U(groupId, userId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { new Long(groupId), new Long(userId) };
 
 		List<TasksProposal> list = (List<TasksProposal>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_G_U,
@@ -705,12 +687,6 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl
 
 	public List<TasksProposal> findByG_U(long groupId, long userId, int start,
 		int end, OrderByComparator obc) throws SystemException {
-		int count = countByG_U(groupId, userId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), new Long(userId),
 				

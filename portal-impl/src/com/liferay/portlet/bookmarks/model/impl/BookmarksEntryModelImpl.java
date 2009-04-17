@@ -164,9 +164,7 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry> {
 	}
 
 	public void setUuid(String uuid) {
-		if ((uuid != null) && !uuid.equals(_uuid)) {
-			_uuid = uuid;
-		}
+		_uuid = uuid;
 	}
 
 	public long getEntryId() {
@@ -174,9 +172,7 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry> {
 	}
 
 	public void setEntryId(long entryId) {
-		if (entryId != _entryId) {
-			_entryId = entryId;
-		}
+		_entryId = entryId;
 	}
 
 	public long getCompanyId() {
@@ -184,9 +180,7 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry> {
 	}
 
 	public void setCompanyId(long companyId) {
-		if (companyId != _companyId) {
-			_companyId = companyId;
-		}
+		_companyId = companyId;
 	}
 
 	public long getUserId() {
@@ -194,9 +188,7 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry> {
 	}
 
 	public void setUserId(long userId) {
-		if (userId != _userId) {
-			_userId = userId;
-		}
+		_userId = userId;
 	}
 
 	public Date getCreateDate() {
@@ -204,10 +196,7 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry> {
 	}
 
 	public void setCreateDate(Date createDate) {
-		if ((createDate != _createDate) ||
-				((createDate != null) && !createDate.equals(_createDate))) {
-			_createDate = createDate;
-		}
+		_createDate = createDate;
 	}
 
 	public Date getModifiedDate() {
@@ -215,10 +204,7 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry> {
 	}
 
 	public void setModifiedDate(Date modifiedDate) {
-		if ((modifiedDate != _modifiedDate) ||
-				((modifiedDate != null) && !modifiedDate.equals(_modifiedDate))) {
-			_modifiedDate = modifiedDate;
-		}
+		_modifiedDate = modifiedDate;
 	}
 
 	public long getFolderId() {
@@ -226,9 +212,7 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry> {
 	}
 
 	public void setFolderId(long folderId) {
-		if (folderId != _folderId) {
-			_folderId = folderId;
-		}
+		_folderId = folderId;
 	}
 
 	public String getName() {
@@ -236,9 +220,7 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry> {
 	}
 
 	public void setName(String name) {
-		if ((name != _name) || ((name != null) && !name.equals(_name))) {
-			_name = name;
-		}
+		_name = name;
 	}
 
 	public String getUrl() {
@@ -246,9 +228,7 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry> {
 	}
 
 	public void setUrl(String url) {
-		if ((url != _url) || ((url != null) && !url.equals(_url))) {
-			_url = url;
-		}
+		_url = url;
 	}
 
 	public String getComments() {
@@ -256,10 +236,7 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry> {
 	}
 
 	public void setComments(String comments) {
-		if ((comments != _comments) ||
-				((comments != null) && !comments.equals(_comments))) {
-			_comments = comments;
-		}
+		_comments = comments;
 	}
 
 	public int getVisits() {
@@ -267,9 +244,7 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry> {
 	}
 
 	public void setVisits(int visits) {
-		if (visits != _visits) {
-			_visits = visits;
-		}
+		_visits = visits;
 	}
 
 	public int getPriority() {
@@ -277,9 +252,7 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry> {
 	}
 
 	public void setPriority(int priority) {
-		if (priority != _priority) {
-			_priority = priority;
-		}
+		_priority = priority;
 	}
 
 	public BookmarksEntry toEscapedModel() {

@@ -284,6 +284,8 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		boolean isNew = pollsVote.isNew();
 
+		PollsVoteModelImpl pollsVoteModelImpl = (PollsVoteModelImpl)pollsVote;
+
 		Session session = null;
 
 		try {
@@ -304,8 +306,6 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl
 
 		EntityCacheUtil.putResult(PollsVoteModelImpl.ENTITY_CACHE_ENABLED,
 			PollsVoteImpl.class, pollsVote.getPrimaryKey(), pollsVote);
-
-		PollsVoteModelImpl pollsVoteModelImpl = (PollsVoteModelImpl)pollsVote;
 
 		if (!isNew &&
 				((pollsVote.getQuestionId() != pollsVoteModelImpl.getOriginalQuestionId()) ||
@@ -376,12 +376,6 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl
 
 	public List<PollsVote> findByQuestionId(long questionId)
 		throws SystemException {
-		int count = countByQuestionId(questionId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { new Long(questionId) };
 
 		List<PollsVote> list = (List<PollsVote>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_QUESTIONID,
@@ -437,12 +431,6 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl
 
 	public List<PollsVote> findByQuestionId(long questionId, int start,
 		int end, OrderByComparator obc) throws SystemException {
-		int count = countByQuestionId(questionId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(questionId),
 				
@@ -597,12 +585,6 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl
 
 	public List<PollsVote> findByChoiceId(long choiceId)
 		throws SystemException {
-		int count = countByChoiceId(choiceId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { new Long(choiceId) };
 
 		List<PollsVote> list = (List<PollsVote>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_CHOICEID,
@@ -658,12 +640,6 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl
 
 	public List<PollsVote> findByChoiceId(long choiceId, int start, int end,
 		OrderByComparator obc) throws SystemException {
-		int count = countByChoiceId(choiceId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(choiceId),
 				

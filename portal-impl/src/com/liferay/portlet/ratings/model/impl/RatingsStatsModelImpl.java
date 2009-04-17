@@ -140,9 +140,7 @@ public class RatingsStatsModelImpl extends BaseModelImpl<RatingsStats> {
 	}
 
 	public void setStatsId(long statsId) {
-		if (statsId != _statsId) {
-			_statsId = statsId;
-		}
+		_statsId = statsId;
 	}
 
 	public String getClassName() {
@@ -158,14 +156,12 @@ public class RatingsStatsModelImpl extends BaseModelImpl<RatingsStats> {
 	}
 
 	public void setClassNameId(long classNameId) {
-		if (classNameId != _classNameId) {
-			_classNameId = classNameId;
+		_classNameId = classNameId;
 
-			if (!_setOriginalClassNameId) {
-				_setOriginalClassNameId = true;
+		if (!_setOriginalClassNameId) {
+			_setOriginalClassNameId = true;
 
-				_originalClassNameId = classNameId;
-			}
+			_originalClassNameId = classNameId;
 		}
 	}
 
@@ -178,14 +174,12 @@ public class RatingsStatsModelImpl extends BaseModelImpl<RatingsStats> {
 	}
 
 	public void setClassPK(long classPK) {
-		if (classPK != _classPK) {
-			_classPK = classPK;
+		_classPK = classPK;
 
-			if (!_setOriginalClassPK) {
-				_setOriginalClassPK = true;
+		if (!_setOriginalClassPK) {
+			_setOriginalClassPK = true;
 
-				_originalClassPK = classPK;
-			}
+			_originalClassPK = classPK;
 		}
 	}
 
@@ -198,9 +192,7 @@ public class RatingsStatsModelImpl extends BaseModelImpl<RatingsStats> {
 	}
 
 	public void setTotalEntries(int totalEntries) {
-		if (totalEntries != _totalEntries) {
-			_totalEntries = totalEntries;
-		}
+		_totalEntries = totalEntries;
 	}
 
 	public double getTotalScore() {
@@ -208,9 +200,7 @@ public class RatingsStatsModelImpl extends BaseModelImpl<RatingsStats> {
 	}
 
 	public void setTotalScore(double totalScore) {
-		if (totalScore != _totalScore) {
-			_totalScore = totalScore;
-		}
+		_totalScore = totalScore;
 	}
 
 	public double getAverageScore() {
@@ -218,9 +208,7 @@ public class RatingsStatsModelImpl extends BaseModelImpl<RatingsStats> {
 	}
 
 	public void setAverageScore(double averageScore) {
-		if (averageScore != _averageScore) {
-			_averageScore = averageScore;
-		}
+		_averageScore = averageScore;
 	}
 
 	public RatingsStats toEscapedModel() {

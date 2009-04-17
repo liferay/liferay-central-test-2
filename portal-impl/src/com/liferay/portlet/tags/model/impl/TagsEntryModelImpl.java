@@ -157,9 +157,7 @@ public class TagsEntryModelImpl extends BaseModelImpl<TagsEntry> {
 	}
 
 	public void setEntryId(long entryId) {
-		if (entryId != _entryId) {
-			_entryId = entryId;
-		}
+		_entryId = entryId;
 	}
 
 	public long getGroupId() {
@@ -167,9 +165,7 @@ public class TagsEntryModelImpl extends BaseModelImpl<TagsEntry> {
 	}
 
 	public void setGroupId(long groupId) {
-		if (groupId != _groupId) {
-			_groupId = groupId;
-		}
+		_groupId = groupId;
 	}
 
 	public long getCompanyId() {
@@ -177,9 +173,7 @@ public class TagsEntryModelImpl extends BaseModelImpl<TagsEntry> {
 	}
 
 	public void setCompanyId(long companyId) {
-		if (companyId != _companyId) {
-			_companyId = companyId;
-		}
+		_companyId = companyId;
 	}
 
 	public long getUserId() {
@@ -187,9 +181,7 @@ public class TagsEntryModelImpl extends BaseModelImpl<TagsEntry> {
 	}
 
 	public void setUserId(long userId) {
-		if (userId != _userId) {
-			_userId = userId;
-		}
+		_userId = userId;
 	}
 
 	public String getUserName() {
@@ -197,10 +189,7 @@ public class TagsEntryModelImpl extends BaseModelImpl<TagsEntry> {
 	}
 
 	public void setUserName(String userName) {
-		if ((userName != _userName) ||
-				((userName != null) && !userName.equals(_userName))) {
-			_userName = userName;
-		}
+		_userName = userName;
 	}
 
 	public Date getCreateDate() {
@@ -208,10 +197,7 @@ public class TagsEntryModelImpl extends BaseModelImpl<TagsEntry> {
 	}
 
 	public void setCreateDate(Date createDate) {
-		if ((createDate != _createDate) ||
-				((createDate != null) && !createDate.equals(_createDate))) {
-			_createDate = createDate;
-		}
+		_createDate = createDate;
 	}
 
 	public Date getModifiedDate() {
@@ -219,10 +205,7 @@ public class TagsEntryModelImpl extends BaseModelImpl<TagsEntry> {
 	}
 
 	public void setModifiedDate(Date modifiedDate) {
-		if ((modifiedDate != _modifiedDate) ||
-				((modifiedDate != null) && !modifiedDate.equals(_modifiedDate))) {
-			_modifiedDate = modifiedDate;
-		}
+		_modifiedDate = modifiedDate;
 	}
 
 	public long getParentEntryId() {
@@ -230,9 +213,7 @@ public class TagsEntryModelImpl extends BaseModelImpl<TagsEntry> {
 	}
 
 	public void setParentEntryId(long parentEntryId) {
-		if (parentEntryId != _parentEntryId) {
-			_parentEntryId = parentEntryId;
-		}
+		_parentEntryId = parentEntryId;
 	}
 
 	public String getName() {
@@ -240,9 +221,7 @@ public class TagsEntryModelImpl extends BaseModelImpl<TagsEntry> {
 	}
 
 	public void setName(String name) {
-		if ((name != _name) || ((name != null) && !name.equals(_name))) {
-			_name = name;
-		}
+		_name = name;
 	}
 
 	public long getVocabularyId() {
@@ -250,9 +229,7 @@ public class TagsEntryModelImpl extends BaseModelImpl<TagsEntry> {
 	}
 
 	public void setVocabularyId(long vocabularyId) {
-		if (vocabularyId != _vocabularyId) {
-			_vocabularyId = vocabularyId;
-		}
+		_vocabularyId = vocabularyId;
 	}
 
 	public TagsEntry toEscapedModel() {

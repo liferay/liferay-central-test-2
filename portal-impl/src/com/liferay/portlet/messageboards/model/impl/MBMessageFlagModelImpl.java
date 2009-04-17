@@ -130,9 +130,7 @@ public class MBMessageFlagModelImpl extends BaseModelImpl<MBMessageFlag> {
 	}
 
 	public void setMessageFlagId(long messageFlagId) {
-		if (messageFlagId != _messageFlagId) {
-			_messageFlagId = messageFlagId;
-		}
+		_messageFlagId = messageFlagId;
 	}
 
 	public long getUserId() {
@@ -140,14 +138,12 @@ public class MBMessageFlagModelImpl extends BaseModelImpl<MBMessageFlag> {
 	}
 
 	public void setUserId(long userId) {
-		if (userId != _userId) {
-			_userId = userId;
+		_userId = userId;
 
-			if (!_setOriginalUserId) {
-				_setOriginalUserId = true;
+		if (!_setOriginalUserId) {
+			_setOriginalUserId = true;
 
-				_originalUserId = userId;
-			}
+			_originalUserId = userId;
 		}
 	}
 
@@ -160,14 +156,12 @@ public class MBMessageFlagModelImpl extends BaseModelImpl<MBMessageFlag> {
 	}
 
 	public void setMessageId(long messageId) {
-		if (messageId != _messageId) {
-			_messageId = messageId;
+		_messageId = messageId;
 
-			if (!_setOriginalMessageId) {
-				_setOriginalMessageId = true;
+		if (!_setOriginalMessageId) {
+			_setOriginalMessageId = true;
 
-				_originalMessageId = messageId;
-			}
+			_originalMessageId = messageId;
 		}
 	}
 
@@ -180,14 +174,12 @@ public class MBMessageFlagModelImpl extends BaseModelImpl<MBMessageFlag> {
 	}
 
 	public void setFlag(int flag) {
-		if (flag != _flag) {
-			_flag = flag;
+		_flag = flag;
 
-			if (!_setOriginalFlag) {
-				_setOriginalFlag = true;
+		if (!_setOriginalFlag) {
+			_setOriginalFlag = true;
 
-				_originalFlag = flag;
-			}
+			_originalFlag = flag;
 		}
 	}
 

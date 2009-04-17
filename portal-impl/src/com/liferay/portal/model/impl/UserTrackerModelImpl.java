@@ -147,9 +147,7 @@ public class UserTrackerModelImpl extends BaseModelImpl<UserTracker> {
 	}
 
 	public void setUserTrackerId(long userTrackerId) {
-		if (userTrackerId != _userTrackerId) {
-			_userTrackerId = userTrackerId;
-		}
+		_userTrackerId = userTrackerId;
 	}
 
 	public long getCompanyId() {
@@ -157,9 +155,7 @@ public class UserTrackerModelImpl extends BaseModelImpl<UserTracker> {
 	}
 
 	public void setCompanyId(long companyId) {
-		if (companyId != _companyId) {
-			_companyId = companyId;
-		}
+		_companyId = companyId;
 	}
 
 	public long getUserId() {
@@ -167,9 +163,7 @@ public class UserTrackerModelImpl extends BaseModelImpl<UserTracker> {
 	}
 
 	public void setUserId(long userId) {
-		if (userId != _userId) {
-			_userId = userId;
-		}
+		_userId = userId;
 	}
 
 	public Date getModifiedDate() {
@@ -177,10 +171,7 @@ public class UserTrackerModelImpl extends BaseModelImpl<UserTracker> {
 	}
 
 	public void setModifiedDate(Date modifiedDate) {
-		if ((modifiedDate != _modifiedDate) ||
-				((modifiedDate != null) && !modifiedDate.equals(_modifiedDate))) {
-			_modifiedDate = modifiedDate;
-		}
+		_modifiedDate = modifiedDate;
 	}
 
 	public String getSessionId() {
@@ -188,10 +179,7 @@ public class UserTrackerModelImpl extends BaseModelImpl<UserTracker> {
 	}
 
 	public void setSessionId(String sessionId) {
-		if ((sessionId != _sessionId) ||
-				((sessionId != null) && !sessionId.equals(_sessionId))) {
-			_sessionId = sessionId;
-		}
+		_sessionId = sessionId;
 	}
 
 	public String getRemoteAddr() {
@@ -199,10 +187,7 @@ public class UserTrackerModelImpl extends BaseModelImpl<UserTracker> {
 	}
 
 	public void setRemoteAddr(String remoteAddr) {
-		if ((remoteAddr != _remoteAddr) ||
-				((remoteAddr != null) && !remoteAddr.equals(_remoteAddr))) {
-			_remoteAddr = remoteAddr;
-		}
+		_remoteAddr = remoteAddr;
 	}
 
 	public String getRemoteHost() {
@@ -210,10 +195,7 @@ public class UserTrackerModelImpl extends BaseModelImpl<UserTracker> {
 	}
 
 	public void setRemoteHost(String remoteHost) {
-		if ((remoteHost != _remoteHost) ||
-				((remoteHost != null) && !remoteHost.equals(_remoteHost))) {
-			_remoteHost = remoteHost;
-		}
+		_remoteHost = remoteHost;
 	}
 
 	public String getUserAgent() {
@@ -221,10 +203,7 @@ public class UserTrackerModelImpl extends BaseModelImpl<UserTracker> {
 	}
 
 	public void setUserAgent(String userAgent) {
-		if ((userAgent != _userAgent) ||
-				((userAgent != null) && !userAgent.equals(_userAgent))) {
-			_userAgent = userAgent;
-		}
+		_userAgent = userAgent;
 	}
 
 	public UserTracker toEscapedModel() {

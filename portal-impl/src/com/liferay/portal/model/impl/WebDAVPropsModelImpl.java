@@ -145,9 +145,7 @@ public class WebDAVPropsModelImpl extends BaseModelImpl<WebDAVProps> {
 	}
 
 	public void setWebDavPropsId(long webDavPropsId) {
-		if (webDavPropsId != _webDavPropsId) {
-			_webDavPropsId = webDavPropsId;
-		}
+		_webDavPropsId = webDavPropsId;
 	}
 
 	public long getCompanyId() {
@@ -155,9 +153,7 @@ public class WebDAVPropsModelImpl extends BaseModelImpl<WebDAVProps> {
 	}
 
 	public void setCompanyId(long companyId) {
-		if (companyId != _companyId) {
-			_companyId = companyId;
-		}
+		_companyId = companyId;
 	}
 
 	public Date getCreateDate() {
@@ -165,10 +161,7 @@ public class WebDAVPropsModelImpl extends BaseModelImpl<WebDAVProps> {
 	}
 
 	public void setCreateDate(Date createDate) {
-		if ((createDate != _createDate) ||
-				((createDate != null) && !createDate.equals(_createDate))) {
-			_createDate = createDate;
-		}
+		_createDate = createDate;
 	}
 
 	public Date getModifiedDate() {
@@ -176,10 +169,7 @@ public class WebDAVPropsModelImpl extends BaseModelImpl<WebDAVProps> {
 	}
 
 	public void setModifiedDate(Date modifiedDate) {
-		if ((modifiedDate != _modifiedDate) ||
-				((modifiedDate != null) && !modifiedDate.equals(_modifiedDate))) {
-			_modifiedDate = modifiedDate;
-		}
+		_modifiedDate = modifiedDate;
 	}
 
 	public String getClassName() {
@@ -195,14 +185,12 @@ public class WebDAVPropsModelImpl extends BaseModelImpl<WebDAVProps> {
 	}
 
 	public void setClassNameId(long classNameId) {
-		if (classNameId != _classNameId) {
-			_classNameId = classNameId;
+		_classNameId = classNameId;
 
-			if (!_setOriginalClassNameId) {
-				_setOriginalClassNameId = true;
+		if (!_setOriginalClassNameId) {
+			_setOriginalClassNameId = true;
 
-				_originalClassNameId = classNameId;
-			}
+			_originalClassNameId = classNameId;
 		}
 	}
 
@@ -215,14 +203,12 @@ public class WebDAVPropsModelImpl extends BaseModelImpl<WebDAVProps> {
 	}
 
 	public void setClassPK(long classPK) {
-		if (classPK != _classPK) {
-			_classPK = classPK;
+		_classPK = classPK;
 
-			if (!_setOriginalClassPK) {
-				_setOriginalClassPK = true;
+		if (!_setOriginalClassPK) {
+			_setOriginalClassPK = true;
 
-				_originalClassPK = classPK;
-			}
+			_originalClassPK = classPK;
 		}
 	}
 
@@ -235,9 +221,7 @@ public class WebDAVPropsModelImpl extends BaseModelImpl<WebDAVProps> {
 	}
 
 	public void setProps(String props) {
-		if ((props != _props) || ((props != null) && !props.equals(_props))) {
-			_props = props;
-		}
+		_props = props;
 	}
 
 	public WebDAVProps toEscapedModel() {

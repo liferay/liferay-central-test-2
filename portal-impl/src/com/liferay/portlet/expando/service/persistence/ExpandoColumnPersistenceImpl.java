@@ -277,6 +277,8 @@ public class ExpandoColumnPersistenceImpl extends BasePersistenceImpl
 		boolean merge) throws SystemException {
 		boolean isNew = expandoColumn.isNew();
 
+		ExpandoColumnModelImpl expandoColumnModelImpl = (ExpandoColumnModelImpl)expandoColumn;
+
 		Session session = null;
 
 		try {
@@ -298,8 +300,6 @@ public class ExpandoColumnPersistenceImpl extends BasePersistenceImpl
 		EntityCacheUtil.putResult(ExpandoColumnModelImpl.ENTITY_CACHE_ENABLED,
 			ExpandoColumnImpl.class, expandoColumn.getPrimaryKey(),
 			expandoColumn);
-
-		ExpandoColumnModelImpl expandoColumnModelImpl = (ExpandoColumnModelImpl)expandoColumn;
 
 		if (!isNew &&
 				((expandoColumn.getTableId() != expandoColumnModelImpl.getOriginalTableId()) ||
@@ -376,12 +376,6 @@ public class ExpandoColumnPersistenceImpl extends BasePersistenceImpl
 
 	public List<ExpandoColumn> findByTableId(long tableId)
 		throws SystemException {
-		int count = countByTableId(tableId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { new Long(tableId) };
 
 		List<ExpandoColumn> list = (List<ExpandoColumn>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_TABLEID,
@@ -441,12 +435,6 @@ public class ExpandoColumnPersistenceImpl extends BasePersistenceImpl
 
 	public List<ExpandoColumn> findByTableId(long tableId, int start, int end,
 		OrderByComparator obc) throws SystemException {
-		int count = countByTableId(tableId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(tableId),
 				

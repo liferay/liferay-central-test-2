@@ -331,4 +331,7 @@ public interface OrganizationPersistence extends BasePersistence {
 	public void setUsers(long pk,
 		java.util.List<com.liferay.portal.model.User> users)
 		throws com.liferay.portal.SystemException;
+
+	public void rebuildTree(long companyId, boolean force)
+		throws com.liferay.portal.SystemException;
 }

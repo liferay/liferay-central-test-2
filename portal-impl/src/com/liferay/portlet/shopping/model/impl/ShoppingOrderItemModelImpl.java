@@ -157,9 +157,7 @@ public class ShoppingOrderItemModelImpl extends BaseModelImpl<ShoppingOrderItem>
 	}
 
 	public void setOrderItemId(long orderItemId) {
-		if (orderItemId != _orderItemId) {
-			_orderItemId = orderItemId;
-		}
+		_orderItemId = orderItemId;
 	}
 
 	public long getOrderId() {
@@ -167,9 +165,7 @@ public class ShoppingOrderItemModelImpl extends BaseModelImpl<ShoppingOrderItem>
 	}
 
 	public void setOrderId(long orderId) {
-		if (orderId != _orderId) {
-			_orderId = orderId;
-		}
+		_orderId = orderId;
 	}
 
 	public String getItemId() {
@@ -177,10 +173,7 @@ public class ShoppingOrderItemModelImpl extends BaseModelImpl<ShoppingOrderItem>
 	}
 
 	public void setItemId(String itemId) {
-		if ((itemId != _itemId) ||
-				((itemId != null) && !itemId.equals(_itemId))) {
-			_itemId = itemId;
-		}
+		_itemId = itemId;
 	}
 
 	public String getSku() {
@@ -188,9 +181,7 @@ public class ShoppingOrderItemModelImpl extends BaseModelImpl<ShoppingOrderItem>
 	}
 
 	public void setSku(String sku) {
-		if ((sku != _sku) || ((sku != null) && !sku.equals(_sku))) {
-			_sku = sku;
-		}
+		_sku = sku;
 	}
 
 	public String getName() {
@@ -198,9 +189,7 @@ public class ShoppingOrderItemModelImpl extends BaseModelImpl<ShoppingOrderItem>
 	}
 
 	public void setName(String name) {
-		if ((name != _name) || ((name != null) && !name.equals(_name))) {
-			_name = name;
-		}
+		_name = name;
 	}
 
 	public String getDescription() {
@@ -208,10 +197,7 @@ public class ShoppingOrderItemModelImpl extends BaseModelImpl<ShoppingOrderItem>
 	}
 
 	public void setDescription(String description) {
-		if ((description != _description) ||
-				((description != null) && !description.equals(_description))) {
-			_description = description;
-		}
+		_description = description;
 	}
 
 	public String getProperties() {
@@ -219,10 +205,7 @@ public class ShoppingOrderItemModelImpl extends BaseModelImpl<ShoppingOrderItem>
 	}
 
 	public void setProperties(String properties) {
-		if ((properties != _properties) ||
-				((properties != null) && !properties.equals(_properties))) {
-			_properties = properties;
-		}
+		_properties = properties;
 	}
 
 	public double getPrice() {
@@ -230,9 +213,7 @@ public class ShoppingOrderItemModelImpl extends BaseModelImpl<ShoppingOrderItem>
 	}
 
 	public void setPrice(double price) {
-		if (price != _price) {
-			_price = price;
-		}
+		_price = price;
 	}
 
 	public int getQuantity() {
@@ -240,9 +221,7 @@ public class ShoppingOrderItemModelImpl extends BaseModelImpl<ShoppingOrderItem>
 	}
 
 	public void setQuantity(int quantity) {
-		if (quantity != _quantity) {
-			_quantity = quantity;
-		}
+		_quantity = quantity;
 	}
 
 	public Date getShippedDate() {
@@ -250,10 +229,7 @@ public class ShoppingOrderItemModelImpl extends BaseModelImpl<ShoppingOrderItem>
 	}
 
 	public void setShippedDate(Date shippedDate) {
-		if ((shippedDate != _shippedDate) ||
-				((shippedDate != null) && !shippedDate.equals(_shippedDate))) {
-			_shippedDate = shippedDate;
-		}
+		_shippedDate = shippedDate;
 	}
 
 	public ShoppingOrderItem toEscapedModel() {

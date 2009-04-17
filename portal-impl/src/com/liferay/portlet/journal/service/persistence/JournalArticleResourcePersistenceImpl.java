@@ -286,6 +286,8 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl
 		boolean merge) throws SystemException {
 		boolean isNew = journalArticleResource.isNew();
 
+		JournalArticleResourceModelImpl journalArticleResourceModelImpl = (JournalArticleResourceModelImpl)journalArticleResource;
+
 		Session session = null;
 
 		try {
@@ -307,8 +309,6 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl
 		EntityCacheUtil.putResult(JournalArticleResourceModelImpl.ENTITY_CACHE_ENABLED,
 			JournalArticleResourceImpl.class,
 			journalArticleResource.getPrimaryKey(), journalArticleResource);
-
-		JournalArticleResourceModelImpl journalArticleResourceModelImpl = (JournalArticleResourceModelImpl)journalArticleResource;
 
 		if (!isNew &&
 				((journalArticleResource.getGroupId() != journalArticleResourceModelImpl.getOriginalGroupId()) ||
@@ -387,12 +387,6 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl
 
 	public List<JournalArticleResource> findByGroupId(long groupId)
 		throws SystemException {
-		int count = countByGroupId(groupId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { new Long(groupId) };
 
 		List<JournalArticleResource> list = (List<JournalArticleResource>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_GROUPID,
@@ -448,12 +442,6 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl
 
 	public List<JournalArticleResource> findByGroupId(long groupId, int start,
 		int end, OrderByComparator obc) throws SystemException {
-		int count = countByGroupId(groupId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				

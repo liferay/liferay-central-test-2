@@ -130,9 +130,7 @@ public class ResourceCodeModelImpl extends BaseModelImpl<ResourceCode> {
 	}
 
 	public void setCodeId(long codeId) {
-		if (codeId != _codeId) {
-			_codeId = codeId;
-		}
+		_codeId = codeId;
 	}
 
 	public long getCompanyId() {
@@ -140,14 +138,12 @@ public class ResourceCodeModelImpl extends BaseModelImpl<ResourceCode> {
 	}
 
 	public void setCompanyId(long companyId) {
-		if (companyId != _companyId) {
-			_companyId = companyId;
+		_companyId = companyId;
 
-			if (!_setOriginalCompanyId) {
-				_setOriginalCompanyId = true;
+		if (!_setOriginalCompanyId) {
+			_setOriginalCompanyId = true;
 
-				_originalCompanyId = companyId;
-			}
+			_originalCompanyId = companyId;
 		}
 	}
 
@@ -160,12 +156,10 @@ public class ResourceCodeModelImpl extends BaseModelImpl<ResourceCode> {
 	}
 
 	public void setName(String name) {
-		if ((name != _name) || ((name != null) && !name.equals(_name))) {
-			_name = name;
+		_name = name;
 
-			if (_originalName == null) {
-				_originalName = name;
-			}
+		if (_originalName == null) {
+			_originalName = name;
 		}
 	}
 
@@ -178,14 +172,12 @@ public class ResourceCodeModelImpl extends BaseModelImpl<ResourceCode> {
 	}
 
 	public void setScope(int scope) {
-		if (scope != _scope) {
-			_scope = scope;
+		_scope = scope;
 
-			if (!_setOriginalScope) {
-				_setOriginalScope = true;
+		if (!_setOriginalScope) {
+			_setOriginalScope = true;
 
-				_originalScope = scope;
-			}
+			_originalScope = scope;
 		}
 	}
 

@@ -287,6 +287,8 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl
 		boolean merge) throws SystemException {
 		boolean isNew = shoppingCart.isNew();
 
+		ShoppingCartModelImpl shoppingCartModelImpl = (ShoppingCartModelImpl)shoppingCart;
+
 		Session session = null;
 
 		try {
@@ -307,8 +309,6 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl
 
 		EntityCacheUtil.putResult(ShoppingCartModelImpl.ENTITY_CACHE_ENABLED,
 			ShoppingCartImpl.class, shoppingCart.getPrimaryKey(), shoppingCart);
-
-		ShoppingCartModelImpl shoppingCartModelImpl = (ShoppingCartModelImpl)shoppingCart;
 
 		if (!isNew &&
 				((shoppingCart.getGroupId() != shoppingCartModelImpl.getOriginalGroupId()) ||
@@ -381,12 +381,6 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl
 
 	public List<ShoppingCart> findByGroupId(long groupId)
 		throws SystemException {
-		int count = countByGroupId(groupId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { new Long(groupId) };
 
 		List<ShoppingCart> list = (List<ShoppingCart>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_GROUPID,
@@ -442,12 +436,6 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl
 
 	public List<ShoppingCart> findByGroupId(long groupId, int start, int end,
 		OrderByComparator obc) throws SystemException {
-		int count = countByGroupId(groupId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				
@@ -600,12 +588,6 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl
 
 	public List<ShoppingCart> findByUserId(long userId)
 		throws SystemException {
-		int count = countByUserId(userId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { new Long(userId) };
 
 		List<ShoppingCart> list = (List<ShoppingCart>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_USERID,
@@ -661,12 +643,6 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl
 
 	public List<ShoppingCart> findByUserId(long userId, int start, int end,
 		OrderByComparator obc) throws SystemException {
-		int count = countByUserId(userId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(userId),
 				

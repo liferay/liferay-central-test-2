@@ -179,9 +179,7 @@ public class AccountModelImpl extends BaseModelImpl<Account> {
 	}
 
 	public void setAccountId(long accountId) {
-		if (accountId != _accountId) {
-			_accountId = accountId;
-		}
+		_accountId = accountId;
 	}
 
 	public long getCompanyId() {
@@ -189,9 +187,7 @@ public class AccountModelImpl extends BaseModelImpl<Account> {
 	}
 
 	public void setCompanyId(long companyId) {
-		if (companyId != _companyId) {
-			_companyId = companyId;
-		}
+		_companyId = companyId;
 	}
 
 	public long getUserId() {
@@ -199,9 +195,7 @@ public class AccountModelImpl extends BaseModelImpl<Account> {
 	}
 
 	public void setUserId(long userId) {
-		if (userId != _userId) {
-			_userId = userId;
-		}
+		_userId = userId;
 	}
 
 	public String getUserName() {
@@ -209,10 +203,7 @@ public class AccountModelImpl extends BaseModelImpl<Account> {
 	}
 
 	public void setUserName(String userName) {
-		if ((userName != _userName) ||
-				((userName != null) && !userName.equals(_userName))) {
-			_userName = userName;
-		}
+		_userName = userName;
 	}
 
 	public Date getCreateDate() {
@@ -220,10 +211,7 @@ public class AccountModelImpl extends BaseModelImpl<Account> {
 	}
 
 	public void setCreateDate(Date createDate) {
-		if ((createDate != _createDate) ||
-				((createDate != null) && !createDate.equals(_createDate))) {
-			_createDate = createDate;
-		}
+		_createDate = createDate;
 	}
 
 	public Date getModifiedDate() {
@@ -231,10 +219,7 @@ public class AccountModelImpl extends BaseModelImpl<Account> {
 	}
 
 	public void setModifiedDate(Date modifiedDate) {
-		if ((modifiedDate != _modifiedDate) ||
-				((modifiedDate != null) && !modifiedDate.equals(_modifiedDate))) {
-			_modifiedDate = modifiedDate;
-		}
+		_modifiedDate = modifiedDate;
 	}
 
 	public long getParentAccountId() {
@@ -242,9 +227,7 @@ public class AccountModelImpl extends BaseModelImpl<Account> {
 	}
 
 	public void setParentAccountId(long parentAccountId) {
-		if (parentAccountId != _parentAccountId) {
-			_parentAccountId = parentAccountId;
-		}
+		_parentAccountId = parentAccountId;
 	}
 
 	public String getName() {
@@ -252,9 +235,7 @@ public class AccountModelImpl extends BaseModelImpl<Account> {
 	}
 
 	public void setName(String name) {
-		if ((name != _name) || ((name != null) && !name.equals(_name))) {
-			_name = name;
-		}
+		_name = name;
 	}
 
 	public String getLegalName() {
@@ -262,10 +243,7 @@ public class AccountModelImpl extends BaseModelImpl<Account> {
 	}
 
 	public void setLegalName(String legalName) {
-		if ((legalName != _legalName) ||
-				((legalName != null) && !legalName.equals(_legalName))) {
-			_legalName = legalName;
-		}
+		_legalName = legalName;
 	}
 
 	public String getLegalId() {
@@ -273,10 +251,7 @@ public class AccountModelImpl extends BaseModelImpl<Account> {
 	}
 
 	public void setLegalId(String legalId) {
-		if ((legalId != _legalId) ||
-				((legalId != null) && !legalId.equals(_legalId))) {
-			_legalId = legalId;
-		}
+		_legalId = legalId;
 	}
 
 	public String getLegalType() {
@@ -284,10 +259,7 @@ public class AccountModelImpl extends BaseModelImpl<Account> {
 	}
 
 	public void setLegalType(String legalType) {
-		if ((legalType != _legalType) ||
-				((legalType != null) && !legalType.equals(_legalType))) {
-			_legalType = legalType;
-		}
+		_legalType = legalType;
 	}
 
 	public String getSicCode() {
@@ -295,10 +267,7 @@ public class AccountModelImpl extends BaseModelImpl<Account> {
 	}
 
 	public void setSicCode(String sicCode) {
-		if ((sicCode != _sicCode) ||
-				((sicCode != null) && !sicCode.equals(_sicCode))) {
-			_sicCode = sicCode;
-		}
+		_sicCode = sicCode;
 	}
 
 	public String getTickerSymbol() {
@@ -306,10 +275,7 @@ public class AccountModelImpl extends BaseModelImpl<Account> {
 	}
 
 	public void setTickerSymbol(String tickerSymbol) {
-		if ((tickerSymbol != _tickerSymbol) ||
-				((tickerSymbol != null) && !tickerSymbol.equals(_tickerSymbol))) {
-			_tickerSymbol = tickerSymbol;
-		}
+		_tickerSymbol = tickerSymbol;
 	}
 
 	public String getIndustry() {
@@ -317,10 +283,7 @@ public class AccountModelImpl extends BaseModelImpl<Account> {
 	}
 
 	public void setIndustry(String industry) {
-		if ((industry != _industry) ||
-				((industry != null) && !industry.equals(_industry))) {
-			_industry = industry;
-		}
+		_industry = industry;
 	}
 
 	public String getType() {
@@ -328,9 +291,7 @@ public class AccountModelImpl extends BaseModelImpl<Account> {
 	}
 
 	public void setType(String type) {
-		if ((type != _type) || ((type != null) && !type.equals(_type))) {
-			_type = type;
-		}
+		_type = type;
 	}
 
 	public String getSize() {
@@ -338,9 +299,7 @@ public class AccountModelImpl extends BaseModelImpl<Account> {
 	}
 
 	public void setSize(String size) {
-		if ((size != _size) || ((size != null) && !size.equals(_size))) {
-			_size = size;
-		}
+		_size = size;
 	}
 
 	public Account toEscapedModel() {

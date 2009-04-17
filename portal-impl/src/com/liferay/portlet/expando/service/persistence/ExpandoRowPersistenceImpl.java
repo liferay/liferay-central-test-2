@@ -269,6 +269,8 @@ public class ExpandoRowPersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		boolean isNew = expandoRow.isNew();
 
+		ExpandoRowModelImpl expandoRowModelImpl = (ExpandoRowModelImpl)expandoRow;
+
 		Session session = null;
 
 		try {
@@ -289,8 +291,6 @@ public class ExpandoRowPersistenceImpl extends BasePersistenceImpl
 
 		EntityCacheUtil.putResult(ExpandoRowModelImpl.ENTITY_CACHE_ENABLED,
 			ExpandoRowImpl.class, expandoRow.getPrimaryKey(), expandoRow);
-
-		ExpandoRowModelImpl expandoRowModelImpl = (ExpandoRowModelImpl)expandoRow;
 
 		if (!isNew &&
 				((expandoRow.getTableId() != expandoRowModelImpl.getOriginalTableId()) ||
@@ -361,12 +361,6 @@ public class ExpandoRowPersistenceImpl extends BasePersistenceImpl
 
 	public List<ExpandoRow> findByTableId(long tableId)
 		throws SystemException {
-		int count = countByTableId(tableId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { new Long(tableId) };
 
 		List<ExpandoRow> list = (List<ExpandoRow>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_TABLEID,
@@ -422,12 +416,6 @@ public class ExpandoRowPersistenceImpl extends BasePersistenceImpl
 
 	public List<ExpandoRow> findByTableId(long tableId, int start, int end,
 		OrderByComparator obc) throws SystemException {
-		int count = countByTableId(tableId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(tableId),
 				

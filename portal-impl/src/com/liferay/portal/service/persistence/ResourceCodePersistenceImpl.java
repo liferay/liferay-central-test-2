@@ -294,6 +294,8 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		boolean isNew = resourceCode.isNew();
 
+		ResourceCodeModelImpl resourceCodeModelImpl = (ResourceCodeModelImpl)resourceCode;
+
 		Session session = null;
 
 		try {
@@ -314,8 +316,6 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl
 
 		EntityCacheUtil.putResult(ResourceCodeModelImpl.ENTITY_CACHE_ENABLED,
 			ResourceCodeImpl.class, resourceCode.getPrimaryKey(), resourceCode);
-
-		ResourceCodeModelImpl resourceCodeModelImpl = (ResourceCodeModelImpl)resourceCode;
 
 		if (!isNew &&
 				((resourceCode.getCompanyId() != resourceCodeModelImpl.getOriginalCompanyId()) ||
@@ -395,12 +395,6 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl
 
 	public List<ResourceCode> findByCompanyId(long companyId)
 		throws SystemException {
-		int count = countByCompanyId(companyId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { new Long(companyId) };
 
 		List<ResourceCode> list = (List<ResourceCode>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_COMPANYID,
@@ -456,12 +450,6 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl
 
 	public List<ResourceCode> findByCompanyId(long companyId, int start,
 		int end, OrderByComparator obc) throws SystemException {
-		int count = countByCompanyId(companyId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(companyId),
 				
@@ -616,12 +604,6 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl
 	}
 
 	public List<ResourceCode> findByName(String name) throws SystemException {
-		int count = countByName(name);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { name };
 
 		List<ResourceCode> list = (List<ResourceCode>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_NAME,
@@ -684,12 +666,6 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl
 
 	public List<ResourceCode> findByName(String name, int start, int end,
 		OrderByComparator obc) throws SystemException {
-		int count = countByName(name);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				name,
 				

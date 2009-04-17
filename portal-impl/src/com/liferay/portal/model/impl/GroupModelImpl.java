@@ -177,9 +177,7 @@ public class GroupModelImpl extends BaseModelImpl<Group> {
 	}
 
 	public void setGroupId(long groupId) {
-		if (groupId != _groupId) {
-			_groupId = groupId;
-		}
+		_groupId = groupId;
 	}
 
 	public long getCompanyId() {
@@ -187,14 +185,12 @@ public class GroupModelImpl extends BaseModelImpl<Group> {
 	}
 
 	public void setCompanyId(long companyId) {
-		if (companyId != _companyId) {
-			_companyId = companyId;
+		_companyId = companyId;
 
-			if (!_setOriginalCompanyId) {
-				_setOriginalCompanyId = true;
+		if (!_setOriginalCompanyId) {
+			_setOriginalCompanyId = true;
 
-				_originalCompanyId = companyId;
-			}
+			_originalCompanyId = companyId;
 		}
 	}
 
@@ -207,9 +203,7 @@ public class GroupModelImpl extends BaseModelImpl<Group> {
 	}
 
 	public void setCreatorUserId(long creatorUserId) {
-		if (creatorUserId != _creatorUserId) {
-			_creatorUserId = creatorUserId;
-		}
+		_creatorUserId = creatorUserId;
 	}
 
 	public String getClassName() {
@@ -225,14 +219,12 @@ public class GroupModelImpl extends BaseModelImpl<Group> {
 	}
 
 	public void setClassNameId(long classNameId) {
-		if (classNameId != _classNameId) {
-			_classNameId = classNameId;
+		_classNameId = classNameId;
 
-			if (!_setOriginalClassNameId) {
-				_setOriginalClassNameId = true;
+		if (!_setOriginalClassNameId) {
+			_setOriginalClassNameId = true;
 
-				_originalClassNameId = classNameId;
-			}
+			_originalClassNameId = classNameId;
 		}
 	}
 
@@ -245,14 +237,12 @@ public class GroupModelImpl extends BaseModelImpl<Group> {
 	}
 
 	public void setClassPK(long classPK) {
-		if (classPK != _classPK) {
-			_classPK = classPK;
+		_classPK = classPK;
 
-			if (!_setOriginalClassPK) {
-				_setOriginalClassPK = true;
+		if (!_setOriginalClassPK) {
+			_setOriginalClassPK = true;
 
-				_originalClassPK = classPK;
-			}
+			_originalClassPK = classPK;
 		}
 	}
 
@@ -265,9 +255,7 @@ public class GroupModelImpl extends BaseModelImpl<Group> {
 	}
 
 	public void setParentGroupId(long parentGroupId) {
-		if (parentGroupId != _parentGroupId) {
-			_parentGroupId = parentGroupId;
-		}
+		_parentGroupId = parentGroupId;
 	}
 
 	public long getLiveGroupId() {
@@ -275,14 +263,12 @@ public class GroupModelImpl extends BaseModelImpl<Group> {
 	}
 
 	public void setLiveGroupId(long liveGroupId) {
-		if (liveGroupId != _liveGroupId) {
-			_liveGroupId = liveGroupId;
+		_liveGroupId = liveGroupId;
 
-			if (!_setOriginalLiveGroupId) {
-				_setOriginalLiveGroupId = true;
+		if (!_setOriginalLiveGroupId) {
+			_setOriginalLiveGroupId = true;
 
-				_originalLiveGroupId = liveGroupId;
-			}
+			_originalLiveGroupId = liveGroupId;
 		}
 	}
 
@@ -295,12 +281,10 @@ public class GroupModelImpl extends BaseModelImpl<Group> {
 	}
 
 	public void setName(String name) {
-		if ((name != _name) || ((name != null) && !name.equals(_name))) {
-			_name = name;
+		_name = name;
 
-			if (_originalName == null) {
-				_originalName = name;
-			}
+		if (_originalName == null) {
+			_originalName = name;
 		}
 	}
 
@@ -313,10 +297,7 @@ public class GroupModelImpl extends BaseModelImpl<Group> {
 	}
 
 	public void setDescription(String description) {
-		if ((description != _description) ||
-				((description != null) && !description.equals(_description))) {
-			_description = description;
-		}
+		_description = description;
 	}
 
 	public int getType() {
@@ -324,9 +305,7 @@ public class GroupModelImpl extends BaseModelImpl<Group> {
 	}
 
 	public void setType(int type) {
-		if (type != _type) {
-			_type = type;
-		}
+		_type = type;
 	}
 
 	public String getTypeSettings() {
@@ -334,10 +313,7 @@ public class GroupModelImpl extends BaseModelImpl<Group> {
 	}
 
 	public void setTypeSettings(String typeSettings) {
-		if ((typeSettings != _typeSettings) ||
-				((typeSettings != null) && !typeSettings.equals(_typeSettings))) {
-			_typeSettings = typeSettings;
-		}
+		_typeSettings = typeSettings;
 	}
 
 	public String getFriendlyURL() {
@@ -345,13 +321,10 @@ public class GroupModelImpl extends BaseModelImpl<Group> {
 	}
 
 	public void setFriendlyURL(String friendlyURL) {
-		if ((friendlyURL != _friendlyURL) ||
-				((friendlyURL != null) && !friendlyURL.equals(_friendlyURL))) {
-			_friendlyURL = friendlyURL;
+		_friendlyURL = friendlyURL;
 
-			if (_originalFriendlyURL == null) {
-				_originalFriendlyURL = friendlyURL;
-			}
+		if (_originalFriendlyURL == null) {
+			_originalFriendlyURL = friendlyURL;
 		}
 	}
 
@@ -368,9 +341,7 @@ public class GroupModelImpl extends BaseModelImpl<Group> {
 	}
 
 	public void setActive(boolean active) {
-		if (active != _active) {
-			_active = active;
-		}
+		_active = active;
 	}
 
 	public Group toEscapedModel() {

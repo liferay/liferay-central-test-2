@@ -143,9 +143,7 @@ public class ImageModelImpl extends BaseModelImpl<Image> {
 	}
 
 	public void setImageId(long imageId) {
-		if (imageId != _imageId) {
-			_imageId = imageId;
-		}
+		_imageId = imageId;
 	}
 
 	public Date getModifiedDate() {
@@ -153,10 +151,7 @@ public class ImageModelImpl extends BaseModelImpl<Image> {
 	}
 
 	public void setModifiedDate(Date modifiedDate) {
-		if ((modifiedDate != _modifiedDate) ||
-				((modifiedDate != null) && !modifiedDate.equals(_modifiedDate))) {
-			_modifiedDate = modifiedDate;
-		}
+		_modifiedDate = modifiedDate;
 	}
 
 	public String getText() {
@@ -164,9 +159,7 @@ public class ImageModelImpl extends BaseModelImpl<Image> {
 	}
 
 	public void setText(String text) {
-		if ((text != _text) || ((text != null) && !text.equals(_text))) {
-			_text = text;
-		}
+		_text = text;
 	}
 
 	public String getType() {
@@ -174,9 +167,7 @@ public class ImageModelImpl extends BaseModelImpl<Image> {
 	}
 
 	public void setType(String type) {
-		if ((type != _type) || ((type != null) && !type.equals(_type))) {
-			_type = type;
-		}
+		_type = type;
 	}
 
 	public int getHeight() {
@@ -184,9 +175,7 @@ public class ImageModelImpl extends BaseModelImpl<Image> {
 	}
 
 	public void setHeight(int height) {
-		if (height != _height) {
-			_height = height;
-		}
+		_height = height;
 	}
 
 	public int getWidth() {
@@ -194,9 +183,7 @@ public class ImageModelImpl extends BaseModelImpl<Image> {
 	}
 
 	public void setWidth(int width) {
-		if (width != _width) {
-			_width = width;
-		}
+		_width = width;
 	}
 
 	public int getSize() {
@@ -204,9 +191,7 @@ public class ImageModelImpl extends BaseModelImpl<Image> {
 	}
 
 	public void setSize(int size) {
-		if (size != _size) {
-			_size = size;
-		}
+		_size = size;
 	}
 
 	public Image toEscapedModel() {

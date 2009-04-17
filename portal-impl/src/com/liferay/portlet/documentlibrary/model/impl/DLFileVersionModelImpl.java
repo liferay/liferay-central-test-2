@@ -152,9 +152,7 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion> {
 	}
 
 	public void setFileVersionId(long fileVersionId) {
-		if (fileVersionId != _fileVersionId) {
-			_fileVersionId = fileVersionId;
-		}
+		_fileVersionId = fileVersionId;
 	}
 
 	public long getCompanyId() {
@@ -162,9 +160,7 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion> {
 	}
 
 	public void setCompanyId(long companyId) {
-		if (companyId != _companyId) {
-			_companyId = companyId;
-		}
+		_companyId = companyId;
 	}
 
 	public long getUserId() {
@@ -172,9 +168,7 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion> {
 	}
 
 	public void setUserId(long userId) {
-		if (userId != _userId) {
-			_userId = userId;
-		}
+		_userId = userId;
 	}
 
 	public String getUserName() {
@@ -182,10 +176,7 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion> {
 	}
 
 	public void setUserName(String userName) {
-		if ((userName != _userName) ||
-				((userName != null) && !userName.equals(_userName))) {
-			_userName = userName;
-		}
+		_userName = userName;
 	}
 
 	public Date getCreateDate() {
@@ -193,10 +184,7 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion> {
 	}
 
 	public void setCreateDate(Date createDate) {
-		if ((createDate != _createDate) ||
-				((createDate != null) && !createDate.equals(_createDate))) {
-			_createDate = createDate;
-		}
+		_createDate = createDate;
 	}
 
 	public long getFolderId() {
@@ -204,14 +192,12 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion> {
 	}
 
 	public void setFolderId(long folderId) {
-		if (folderId != _folderId) {
-			_folderId = folderId;
+		_folderId = folderId;
 
-			if (!_setOriginalFolderId) {
-				_setOriginalFolderId = true;
+		if (!_setOriginalFolderId) {
+			_setOriginalFolderId = true;
 
-				_originalFolderId = folderId;
-			}
+			_originalFolderId = folderId;
 		}
 	}
 
@@ -224,12 +210,10 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion> {
 	}
 
 	public void setName(String name) {
-		if ((name != _name) || ((name != null) && !name.equals(_name))) {
-			_name = name;
+		_name = name;
 
-			if (_originalName == null) {
-				_originalName = name;
-			}
+		if (_originalName == null) {
+			_originalName = name;
 		}
 	}
 
@@ -242,14 +226,12 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion> {
 	}
 
 	public void setVersion(double version) {
-		if (version != _version) {
-			_version = version;
+		_version = version;
 
-			if (!_setOriginalVersion) {
-				_setOriginalVersion = true;
+		if (!_setOriginalVersion) {
+			_setOriginalVersion = true;
 
-				_originalVersion = version;
-			}
+			_originalVersion = version;
 		}
 	}
 
@@ -262,9 +244,7 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion> {
 	}
 
 	public void setSize(int size) {
-		if (size != _size) {
-			_size = size;
-		}
+		_size = size;
 	}
 
 	public DLFileVersion toEscapedModel() {

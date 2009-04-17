@@ -130,9 +130,7 @@ public class ResourcePermissionModelImpl extends BaseModelImpl<ResourcePermissio
 	}
 
 	public void setResourcePermissionId(long resourcePermissionId) {
-		if (resourcePermissionId != _resourcePermissionId) {
-			_resourcePermissionId = resourcePermissionId;
-		}
+		_resourcePermissionId = resourcePermissionId;
 	}
 
 	public long getResourceId() {
@@ -140,14 +138,12 @@ public class ResourcePermissionModelImpl extends BaseModelImpl<ResourcePermissio
 	}
 
 	public void setResourceId(long resourceId) {
-		if (resourceId != _resourceId) {
-			_resourceId = resourceId;
+		_resourceId = resourceId;
 
-			if (!_setOriginalResourceId) {
-				_setOriginalResourceId = true;
+		if (!_setOriginalResourceId) {
+			_setOriginalResourceId = true;
 
-				_originalResourceId = resourceId;
-			}
+			_originalResourceId = resourceId;
 		}
 	}
 
@@ -160,14 +156,12 @@ public class ResourcePermissionModelImpl extends BaseModelImpl<ResourcePermissio
 	}
 
 	public void setRoleId(long roleId) {
-		if (roleId != _roleId) {
-			_roleId = roleId;
+		_roleId = roleId;
 
-			if (!_setOriginalRoleId) {
-				_setOriginalRoleId = true;
+		if (!_setOriginalRoleId) {
+			_setOriginalRoleId = true;
 
-				_originalRoleId = roleId;
-			}
+			_originalRoleId = roleId;
 		}
 	}
 
@@ -180,9 +174,7 @@ public class ResourcePermissionModelImpl extends BaseModelImpl<ResourcePermissio
 	}
 
 	public void setActionIds(long actionIds) {
-		if (actionIds != _actionIds) {
-			_actionIds = actionIds;
-		}
+		_actionIds = actionIds;
 	}
 
 	public ResourcePermission toEscapedModel() {

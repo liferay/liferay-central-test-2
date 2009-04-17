@@ -293,6 +293,8 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl
 		boolean merge) throws SystemException {
 		boolean isNew = resourcePermission.isNew();
 
+		ResourcePermissionModelImpl resourcePermissionModelImpl = (ResourcePermissionModelImpl)resourcePermission;
+
 		Session session = null;
 
 		try {
@@ -314,8 +316,6 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl
 		EntityCacheUtil.putResult(ResourcePermissionModelImpl.ENTITY_CACHE_ENABLED,
 			ResourcePermissionImpl.class, resourcePermission.getPrimaryKey(),
 			resourcePermission);
-
-		ResourcePermissionModelImpl resourcePermissionModelImpl = (ResourcePermissionModelImpl)resourcePermission;
 
 		if (!isNew &&
 				((resourcePermission.getResourceId() != resourcePermissionModelImpl.getOriginalResourceId()) ||
@@ -389,12 +389,6 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl
 
 	public List<ResourcePermission> findByResourceId(long resourceId)
 		throws SystemException {
-		int count = countByResourceId(resourceId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { new Long(resourceId) };
 
 		List<ResourcePermission> list = (List<ResourcePermission>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_RESOURCEID,
@@ -450,12 +444,6 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl
 
 	public List<ResourcePermission> findByResourceId(long resourceId,
 		int start, int end, OrderByComparator obc) throws SystemException {
-		int count = countByResourceId(resourceId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(resourceId),
 				
@@ -612,12 +600,6 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl
 
 	public List<ResourcePermission> findByRoleId(long roleId)
 		throws SystemException {
-		int count = countByRoleId(roleId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { new Long(roleId) };
 
 		List<ResourcePermission> list = (List<ResourcePermission>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_ROLEID,
@@ -673,12 +655,6 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl
 
 	public List<ResourcePermission> findByRoleId(long roleId, int start,
 		int end, OrderByComparator obc) throws SystemException {
-		int count = countByRoleId(roleId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(roleId),
 				

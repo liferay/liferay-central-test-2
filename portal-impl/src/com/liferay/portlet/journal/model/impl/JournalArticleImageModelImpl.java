@@ -148,9 +148,7 @@ public class JournalArticleImageModelImpl extends BaseModelImpl<JournalArticleIm
 	}
 
 	public void setArticleImageId(long articleImageId) {
-		if (articleImageId != _articleImageId) {
-			_articleImageId = articleImageId;
-		}
+		_articleImageId = articleImageId;
 	}
 
 	public long getGroupId() {
@@ -158,14 +156,12 @@ public class JournalArticleImageModelImpl extends BaseModelImpl<JournalArticleIm
 	}
 
 	public void setGroupId(long groupId) {
-		if (groupId != _groupId) {
-			_groupId = groupId;
+		_groupId = groupId;
 
-			if (!_setOriginalGroupId) {
-				_setOriginalGroupId = true;
+		if (!_setOriginalGroupId) {
+			_setOriginalGroupId = true;
 
-				_originalGroupId = groupId;
-			}
+			_originalGroupId = groupId;
 		}
 	}
 
@@ -178,13 +174,10 @@ public class JournalArticleImageModelImpl extends BaseModelImpl<JournalArticleIm
 	}
 
 	public void setArticleId(String articleId) {
-		if ((articleId != _articleId) ||
-				((articleId != null) && !articleId.equals(_articleId))) {
-			_articleId = articleId;
+		_articleId = articleId;
 
-			if (_originalArticleId == null) {
-				_originalArticleId = articleId;
-			}
+		if (_originalArticleId == null) {
+			_originalArticleId = articleId;
 		}
 	}
 
@@ -197,14 +190,12 @@ public class JournalArticleImageModelImpl extends BaseModelImpl<JournalArticleIm
 	}
 
 	public void setVersion(double version) {
-		if (version != _version) {
-			_version = version;
+		_version = version;
 
-			if (!_setOriginalVersion) {
-				_setOriginalVersion = true;
+		if (!_setOriginalVersion) {
+			_setOriginalVersion = true;
 
-				_originalVersion = version;
-			}
+			_originalVersion = version;
 		}
 	}
 
@@ -217,13 +208,10 @@ public class JournalArticleImageModelImpl extends BaseModelImpl<JournalArticleIm
 	}
 
 	public void setElInstanceId(String elInstanceId) {
-		if ((elInstanceId != _elInstanceId) ||
-				((elInstanceId != null) && !elInstanceId.equals(_elInstanceId))) {
-			_elInstanceId = elInstanceId;
+		_elInstanceId = elInstanceId;
 
-			if (_originalElInstanceId == null) {
-				_originalElInstanceId = elInstanceId;
-			}
+		if (_originalElInstanceId == null) {
+			_originalElInstanceId = elInstanceId;
 		}
 	}
 
@@ -236,13 +224,10 @@ public class JournalArticleImageModelImpl extends BaseModelImpl<JournalArticleIm
 	}
 
 	public void setElName(String elName) {
-		if ((elName != _elName) ||
-				((elName != null) && !elName.equals(_elName))) {
-			_elName = elName;
+		_elName = elName;
 
-			if (_originalElName == null) {
-				_originalElName = elName;
-			}
+		if (_originalElName == null) {
+			_originalElName = elName;
 		}
 	}
 
@@ -255,13 +240,10 @@ public class JournalArticleImageModelImpl extends BaseModelImpl<JournalArticleIm
 	}
 
 	public void setLanguageId(String languageId) {
-		if ((languageId != _languageId) ||
-				((languageId != null) && !languageId.equals(_languageId))) {
-			_languageId = languageId;
+		_languageId = languageId;
 
-			if (_originalLanguageId == null) {
-				_originalLanguageId = languageId;
-			}
+		if (_originalLanguageId == null) {
+			_originalLanguageId = languageId;
 		}
 	}
 
@@ -278,9 +260,7 @@ public class JournalArticleImageModelImpl extends BaseModelImpl<JournalArticleIm
 	}
 
 	public void setTempImage(boolean tempImage) {
-		if (tempImage != _tempImage) {
-			_tempImage = tempImage;
-		}
+		_tempImage = tempImage;
 	}
 
 	public JournalArticleImage toEscapedModel() {

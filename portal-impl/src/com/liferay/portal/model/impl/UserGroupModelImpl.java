@@ -135,9 +135,7 @@ public class UserGroupModelImpl extends BaseModelImpl<UserGroup> {
 	}
 
 	public void setUserGroupId(long userGroupId) {
-		if (userGroupId != _userGroupId) {
-			_userGroupId = userGroupId;
-		}
+		_userGroupId = userGroupId;
 	}
 
 	public long getCompanyId() {
@@ -145,14 +143,12 @@ public class UserGroupModelImpl extends BaseModelImpl<UserGroup> {
 	}
 
 	public void setCompanyId(long companyId) {
-		if (companyId != _companyId) {
-			_companyId = companyId;
+		_companyId = companyId;
 
-			if (!_setOriginalCompanyId) {
-				_setOriginalCompanyId = true;
+		if (!_setOriginalCompanyId) {
+			_setOriginalCompanyId = true;
 
-				_originalCompanyId = companyId;
-			}
+			_originalCompanyId = companyId;
 		}
 	}
 
@@ -165,9 +161,7 @@ public class UserGroupModelImpl extends BaseModelImpl<UserGroup> {
 	}
 
 	public void setParentUserGroupId(long parentUserGroupId) {
-		if (parentUserGroupId != _parentUserGroupId) {
-			_parentUserGroupId = parentUserGroupId;
-		}
+		_parentUserGroupId = parentUserGroupId;
 	}
 
 	public String getName() {
@@ -175,12 +169,10 @@ public class UserGroupModelImpl extends BaseModelImpl<UserGroup> {
 	}
 
 	public void setName(String name) {
-		if ((name != _name) || ((name != null) && !name.equals(_name))) {
-			_name = name;
+		_name = name;
 
-			if (_originalName == null) {
-				_originalName = name;
-			}
+		if (_originalName == null) {
+			_originalName = name;
 		}
 	}
 
@@ -193,10 +185,7 @@ public class UserGroupModelImpl extends BaseModelImpl<UserGroup> {
 	}
 
 	public void setDescription(String description) {
-		if ((description != _description) ||
-				((description != null) && !description.equals(_description))) {
-			_description = description;
-		}
+		_description = description;
 	}
 
 	public UserGroup toEscapedModel() {

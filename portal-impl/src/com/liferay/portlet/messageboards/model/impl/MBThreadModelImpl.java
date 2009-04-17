@@ -152,9 +152,7 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread> {
 	}
 
 	public void setThreadId(long threadId) {
-		if (threadId != _threadId) {
-			_threadId = threadId;
-		}
+		_threadId = threadId;
 	}
 
 	public long getGroupId() {
@@ -162,9 +160,7 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread> {
 	}
 
 	public void setGroupId(long groupId) {
-		if (groupId != _groupId) {
-			_groupId = groupId;
-		}
+		_groupId = groupId;
 	}
 
 	public long getCategoryId() {
@@ -172,9 +168,7 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread> {
 	}
 
 	public void setCategoryId(long categoryId) {
-		if (categoryId != _categoryId) {
-			_categoryId = categoryId;
-		}
+		_categoryId = categoryId;
 	}
 
 	public long getRootMessageId() {
@@ -182,9 +176,7 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread> {
 	}
 
 	public void setRootMessageId(long rootMessageId) {
-		if (rootMessageId != _rootMessageId) {
-			_rootMessageId = rootMessageId;
-		}
+		_rootMessageId = rootMessageId;
 	}
 
 	public int getMessageCount() {
@@ -192,9 +184,7 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread> {
 	}
 
 	public void setMessageCount(int messageCount) {
-		if (messageCount != _messageCount) {
-			_messageCount = messageCount;
-		}
+		_messageCount = messageCount;
 	}
 
 	public int getViewCount() {
@@ -202,9 +192,7 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread> {
 	}
 
 	public void setViewCount(int viewCount) {
-		if (viewCount != _viewCount) {
-			_viewCount = viewCount;
-		}
+		_viewCount = viewCount;
 	}
 
 	public long getLastPostByUserId() {
@@ -212,9 +200,7 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread> {
 	}
 
 	public void setLastPostByUserId(long lastPostByUserId) {
-		if (lastPostByUserId != _lastPostByUserId) {
-			_lastPostByUserId = lastPostByUserId;
-		}
+		_lastPostByUserId = lastPostByUserId;
 	}
 
 	public Date getLastPostDate() {
@@ -222,10 +208,7 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread> {
 	}
 
 	public void setLastPostDate(Date lastPostDate) {
-		if ((lastPostDate != _lastPostDate) ||
-				((lastPostDate != null) && !lastPostDate.equals(_lastPostDate))) {
-			_lastPostDate = lastPostDate;
-		}
+		_lastPostDate = lastPostDate;
 	}
 
 	public double getPriority() {
@@ -233,9 +216,7 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread> {
 	}
 
 	public void setPriority(double priority) {
-		if (priority != _priority) {
-			_priority = priority;
-		}
+		_priority = priority;
 	}
 
 	public MBThread toEscapedModel() {

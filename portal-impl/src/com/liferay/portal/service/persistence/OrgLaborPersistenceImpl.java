@@ -313,12 +313,6 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl
 
 	public List<OrgLabor> findByOrganizationId(long organizationId)
 		throws SystemException {
-		int count = countByOrganizationId(organizationId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { new Long(organizationId) };
 
 		List<OrgLabor> list = (List<OrgLabor>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_ORGANIZATIONID,
@@ -378,12 +372,6 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl
 
 	public List<OrgLabor> findByOrganizationId(long organizationId, int start,
 		int end, OrderByComparator obc) throws SystemException {
-		int count = countByOrganizationId(organizationId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(organizationId),
 				

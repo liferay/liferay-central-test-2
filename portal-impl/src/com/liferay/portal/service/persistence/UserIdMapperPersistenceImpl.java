@@ -295,6 +295,8 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		boolean isNew = userIdMapper.isNew();
 
+		UserIdMapperModelImpl userIdMapperModelImpl = (UserIdMapperModelImpl)userIdMapper;
+
 		Session session = null;
 
 		try {
@@ -315,8 +317,6 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl
 
 		EntityCacheUtil.putResult(UserIdMapperModelImpl.ENTITY_CACHE_ENABLED,
 			UserIdMapperImpl.class, userIdMapper.getPrimaryKey(), userIdMapper);
-
-		UserIdMapperModelImpl userIdMapperModelImpl = (UserIdMapperModelImpl)userIdMapper;
 
 		if (!isNew &&
 				((userIdMapper.getUserId() != userIdMapperModelImpl.getOriginalUserId()) ||
@@ -420,12 +420,6 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl
 
 	public List<UserIdMapper> findByUserId(long userId)
 		throws SystemException {
-		int count = countByUserId(userId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { new Long(userId) };
 
 		List<UserIdMapper> list = (List<UserIdMapper>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_USERID,
@@ -481,12 +475,6 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl
 
 	public List<UserIdMapper> findByUserId(long userId, int start, int end,
 		OrderByComparator obc) throws SystemException {
-		int count = countByUserId(userId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(userId),
 				

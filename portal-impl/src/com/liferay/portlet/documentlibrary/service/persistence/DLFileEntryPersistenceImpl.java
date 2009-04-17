@@ -327,6 +327,8 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl
 		boolean merge) throws SystemException {
 		boolean isNew = dlFileEntry.isNew();
 
+		DLFileEntryModelImpl dlFileEntryModelImpl = (DLFileEntryModelImpl)dlFileEntry;
+
 		if (Validator.isNull(dlFileEntry.getUuid())) {
 			String uuid = PortalUUIDUtil.generate();
 
@@ -353,8 +355,6 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl
 
 		EntityCacheUtil.putResult(DLFileEntryModelImpl.ENTITY_CACHE_ENABLED,
 			DLFileEntryImpl.class, dlFileEntry.getPrimaryKey(), dlFileEntry);
-
-		DLFileEntryModelImpl dlFileEntryModelImpl = (DLFileEntryModelImpl)dlFileEntry;
 
 		if (!isNew &&
 				((dlFileEntry.getFolderId() != dlFileEntryModelImpl.getOriginalFolderId()) ||
@@ -430,12 +430,6 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public List<DLFileEntry> findByUuid(String uuid) throws SystemException {
-		int count = countByUuid(uuid);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { uuid };
 
 		List<DLFileEntry> list = (List<DLFileEntry>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_UUID,
@@ -503,12 +497,6 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl
 
 	public List<DLFileEntry> findByUuid(String uuid, int start, int end,
 		OrderByComparator obc) throws SystemException {
-		int count = countByUuid(uuid);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				uuid,
 				
@@ -689,12 +677,6 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl
 
 	public List<DLFileEntry> findByCompanyId(long companyId)
 		throws SystemException {
-		int count = countByCompanyId(companyId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { new Long(companyId) };
 
 		List<DLFileEntry> list = (List<DLFileEntry>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_COMPANYID,
@@ -755,12 +737,6 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl
 
 	public List<DLFileEntry> findByCompanyId(long companyId, int start,
 		int end, OrderByComparator obc) throws SystemException {
-		int count = countByCompanyId(companyId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(companyId),
 				
@@ -929,12 +905,6 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl
 
 	public List<DLFileEntry> findByFolderId(long folderId)
 		throws SystemException {
-		int count = countByFolderId(folderId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { new Long(folderId) };
 
 		List<DLFileEntry> list = (List<DLFileEntry>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_FOLDERID,
@@ -995,12 +965,6 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl
 
 	public List<DLFileEntry> findByFolderId(long folderId, int start, int end,
 		OrderByComparator obc) throws SystemException {
-		int count = countByFolderId(folderId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(folderId),
 				
@@ -1289,12 +1253,6 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl
 
 	public List<DLFileEntry> findByF_T(long folderId, String title)
 		throws SystemException {
-		int count = countByF_T(folderId, title);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { new Long(folderId), title };
 
 		List<DLFileEntry> list = (List<DLFileEntry>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_F_T,
@@ -1368,12 +1326,6 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl
 
 	public List<DLFileEntry> findByF_T(long folderId, String title, int start,
 		int end, OrderByComparator obc) throws SystemException {
-		int count = countByF_T(folderId, title);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(folderId),
 				

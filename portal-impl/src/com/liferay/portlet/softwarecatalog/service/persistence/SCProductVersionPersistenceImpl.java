@@ -294,6 +294,8 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl
 		boolean merge) throws SystemException {
 		boolean isNew = scProductVersion.isNew();
 
+		SCProductVersionModelImpl scProductVersionModelImpl = (SCProductVersionModelImpl)scProductVersion;
+
 		Session session = null;
 
 		try {
@@ -315,8 +317,6 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl
 		EntityCacheUtil.putResult(SCProductVersionModelImpl.ENTITY_CACHE_ENABLED,
 			SCProductVersionImpl.class, scProductVersion.getPrimaryKey(),
 			scProductVersion);
-
-		SCProductVersionModelImpl scProductVersionModelImpl = (SCProductVersionModelImpl)scProductVersion;
 
 		if (!isNew &&
 				(!scProductVersion.getDirectDownloadURL()
@@ -387,12 +387,6 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl
 
 	public List<SCProductVersion> findByProductEntryId(long productEntryId)
 		throws SystemException {
-		int count = countByProductEntryId(productEntryId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { new Long(productEntryId) };
 
 		List<SCProductVersion> list = (List<SCProductVersion>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_PRODUCTENTRYID,
@@ -452,12 +446,6 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl
 
 	public List<SCProductVersion> findByProductEntryId(long productEntryId,
 		int start, int end, OrderByComparator obc) throws SystemException {
-		int count = countByProductEntryId(productEntryId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(productEntryId),
 				

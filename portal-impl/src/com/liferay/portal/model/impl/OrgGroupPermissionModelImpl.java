@@ -126,9 +126,7 @@ public class OrgGroupPermissionModelImpl extends BaseModelImpl<OrgGroupPermissio
 	}
 
 	public void setOrganizationId(long organizationId) {
-		if (organizationId != _organizationId) {
-			_organizationId = organizationId;
-		}
+		_organizationId = organizationId;
 	}
 
 	public long getGroupId() {
@@ -136,9 +134,7 @@ public class OrgGroupPermissionModelImpl extends BaseModelImpl<OrgGroupPermissio
 	}
 
 	public void setGroupId(long groupId) {
-		if (groupId != _groupId) {
-			_groupId = groupId;
-		}
+		_groupId = groupId;
 	}
 
 	public long getPermissionId() {
@@ -146,9 +142,7 @@ public class OrgGroupPermissionModelImpl extends BaseModelImpl<OrgGroupPermissio
 	}
 
 	public void setPermissionId(long permissionId) {
-		if (permissionId != _permissionId) {
-			_permissionId = permissionId;
-		}
+		_permissionId = permissionId;
 	}
 
 	public OrgGroupPermission toEscapedModel() {

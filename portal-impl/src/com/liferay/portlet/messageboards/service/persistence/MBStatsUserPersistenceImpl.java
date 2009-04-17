@@ -304,6 +304,8 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl
 		boolean merge) throws SystemException {
 		boolean isNew = mbStatsUser.isNew();
 
+		MBStatsUserModelImpl mbStatsUserModelImpl = (MBStatsUserModelImpl)mbStatsUser;
+
 		Session session = null;
 
 		try {
@@ -324,8 +326,6 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl
 
 		EntityCacheUtil.putResult(MBStatsUserModelImpl.ENTITY_CACHE_ENABLED,
 			MBStatsUserImpl.class, mbStatsUser.getPrimaryKey(), mbStatsUser);
-
-		MBStatsUserModelImpl mbStatsUserModelImpl = (MBStatsUserModelImpl)mbStatsUser;
 
 		if (!isNew &&
 				((mbStatsUser.getGroupId() != mbStatsUserModelImpl.getOriginalGroupId()) ||
@@ -398,12 +398,6 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl
 
 	public List<MBStatsUser> findByGroupId(long groupId)
 		throws SystemException {
-		int count = countByGroupId(groupId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { new Long(groupId) };
 
 		List<MBStatsUser> list = (List<MBStatsUser>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_GROUPID,
@@ -463,12 +457,6 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl
 
 	public List<MBStatsUser> findByGroupId(long groupId, int start, int end,
 		OrderByComparator obc) throws SystemException {
-		int count = countByGroupId(groupId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				
@@ -634,12 +622,6 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl
 
 	public List<MBStatsUser> findByUserId(long userId)
 		throws SystemException {
-		int count = countByUserId(userId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { new Long(userId) };
 
 		List<MBStatsUser> list = (List<MBStatsUser>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_USERID,
@@ -699,12 +681,6 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl
 
 	public List<MBStatsUser> findByUserId(long userId, int start, int end,
 		OrderByComparator obc) throws SystemException {
-		int count = countByUserId(userId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(userId),
 				
@@ -983,12 +959,6 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl
 
 	public List<MBStatsUser> findByG_M(long groupId, int messageCount)
 		throws SystemException {
-		int count = countByG_M(groupId, messageCount);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), new Integer(messageCount)
 			};
@@ -1056,12 +1026,6 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl
 
 	public List<MBStatsUser> findByG_M(long groupId, int messageCount,
 		int start, int end, OrderByComparator obc) throws SystemException {
-		int count = countByG_M(groupId, messageCount);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), new Integer(messageCount),
 				

@@ -130,9 +130,7 @@ public class ResourceActionModelImpl extends BaseModelImpl<ResourceAction> {
 	}
 
 	public void setResourceActionId(long resourceActionId) {
-		if (resourceActionId != _resourceActionId) {
-			_resourceActionId = resourceActionId;
-		}
+		_resourceActionId = resourceActionId;
 	}
 
 	public String getName() {
@@ -140,12 +138,10 @@ public class ResourceActionModelImpl extends BaseModelImpl<ResourceAction> {
 	}
 
 	public void setName(String name) {
-		if ((name != _name) || ((name != null) && !name.equals(_name))) {
-			_name = name;
+		_name = name;
 
-			if (_originalName == null) {
-				_originalName = name;
-			}
+		if (_originalName == null) {
+			_originalName = name;
 		}
 	}
 
@@ -158,13 +154,10 @@ public class ResourceActionModelImpl extends BaseModelImpl<ResourceAction> {
 	}
 
 	public void setActionId(String actionId) {
-		if ((actionId != _actionId) ||
-				((actionId != null) && !actionId.equals(_actionId))) {
-			_actionId = actionId;
+		_actionId = actionId;
 
-			if (_originalActionId == null) {
-				_originalActionId = actionId;
-			}
+		if (_originalActionId == null) {
+			_originalActionId = actionId;
 		}
 	}
 
@@ -177,9 +170,7 @@ public class ResourceActionModelImpl extends BaseModelImpl<ResourceAction> {
 	}
 
 	public void setBitwiseValue(long bitwiseValue) {
-		if (bitwiseValue != _bitwiseValue) {
-			_bitwiseValue = bitwiseValue;
-		}
+		_bitwiseValue = bitwiseValue;
 	}
 
 	public ResourceAction toEscapedModel() {

@@ -25,6 +25,7 @@ package com.liferay.portal.service.persistence;
 import com.liferay.portal.NoSuchOrganizationException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
+import com.liferay.portal.kernel.cache.CacheRegistry;
 import com.liferay.portal.kernel.dao.jdbc.MappingSqlQuery;
 import com.liferay.portal.kernel.dao.jdbc.MappingSqlQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.jdbc.RowMapper;
@@ -234,6 +235,8 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl
 			FinderCacheUtil.clearCache("Users_Orgs");
 		}
 
+		shrinkTree(organization);
+
 		Session session = null;
 
 		try {
@@ -334,6 +337,18 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		boolean isNew = organization.isNew();
 
+		OrganizationModelImpl organizationModelImpl = (OrganizationModelImpl)organization;
+
+		if (isNew) {
+			expandTree(organization);
+		}
+		else {
+			if (organization.getParentOrganizationId() != organizationModelImpl.getOriginalParentOrganizationId()) {
+				shrinkTree(organization);
+				expandTree(organization);
+			}
+		}
+
 		Session session = null;
 
 		try {
@@ -354,8 +369,6 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl
 
 		EntityCacheUtil.putResult(OrganizationModelImpl.ENTITY_CACHE_ENABLED,
 			OrganizationImpl.class, organization.getPrimaryKey(), organization);
-
-		OrganizationModelImpl organizationModelImpl = (OrganizationModelImpl)organization;
 
 		if (!isNew &&
 				((organization.getCompanyId() != organizationModelImpl.getOriginalCompanyId()) ||
@@ -433,12 +446,6 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl
 
 	public List<Organization> findByCompanyId(long companyId)
 		throws SystemException {
-		int count = countByCompanyId(companyId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { new Long(companyId) };
 
 		List<Organization> list = (List<Organization>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_COMPANYID,
@@ -498,12 +505,6 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl
 
 	public List<Organization> findByCompanyId(long companyId, int start,
 		int end, OrderByComparator obc) throws SystemException {
-		int count = countByCompanyId(companyId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(companyId),
 				
@@ -671,12 +672,6 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl
 
 	public List<Organization> findByLocations(long companyId)
 		throws SystemException {
-		int count = countByLocations(companyId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { new Long(companyId) };
 
 		List<Organization> list = (List<Organization>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_LOCATIONS,
@@ -736,12 +731,6 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl
 
 	public List<Organization> findByLocations(long companyId, int start,
 		int end, OrderByComparator obc) throws SystemException {
-		int count = countByLocations(companyId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(companyId),
 				
@@ -909,12 +898,6 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl
 
 	public List<Organization> findByC_P(long companyId,
 		long parentOrganizationId) throws SystemException {
-		int count = countByC_P(companyId, parentOrganizationId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(companyId), new Long(parentOrganizationId)
 			};
@@ -984,12 +967,6 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl
 	public List<Organization> findByC_P(long companyId,
 		long parentOrganizationId, int start, int end, OrderByComparator obc)
 		throws SystemException {
-		int count = countByC_P(companyId, parentOrganizationId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(companyId), new Long(parentOrganizationId),
 				
@@ -2325,6 +2302,176 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
+	public void rebuildTree(long companyId, boolean force)
+		throws SystemException {
+		if (force || (countOrphanTreeNodes(companyId) > 0)) {
+			rebuildTree(companyId, 0, 1);
+
+			CacheRegistry.clear(OrganizationImpl.class.getName());
+			EntityCacheUtil.clearCache(OrganizationImpl.class.getName());
+			FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
+			FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
+		}
+	}
+
+	protected long countOrphanTreeNodes(long companyId)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			SQLQuery q = session.createSQLQuery(
+					"SELECT COUNT(*) AS COUNT_VALUE FROM Organization_ WHERE companyId = ? AND (leftOrganizationId = 0 OR leftOrganizationId IS NULL OR rightOrganizationId = 0 OR rightOrganizationId IS NULL)");
+
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(companyId);
+
+			return (Long)q.uniqueResult();
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected void expandTree(Organization organization)
+		throws SystemException {
+		long companyId = organization.getCompanyId();
+
+		long lastRightOrganizationId = getLastRightOrganizationId(companyId,
+				organization.getParentOrganizationId());
+
+		long leftOrganizationId = 2;
+		long rightOrganizationId = 3;
+
+		if (lastRightOrganizationId > 0) {
+			leftOrganizationId = lastRightOrganizationId + 1;
+			rightOrganizationId = lastRightOrganizationId + 2;
+
+			expandTreeLeftOrganizationId.expand(companyId,
+				lastRightOrganizationId);
+			expandTreeRightOrganizationId.expand(companyId,
+				lastRightOrganizationId);
+
+			CacheRegistry.clear(OrganizationImpl.class.getName());
+			EntityCacheUtil.clearCache(OrganizationImpl.class.getName());
+			FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
+			FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
+		}
+
+		organization.setLeftOrganizationId(leftOrganizationId);
+		organization.setRightOrganizationId(rightOrganizationId);
+	}
+
+	protected long getLastRightOrganizationId(long companyId,
+		long parentOrganizationId) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			SQLQuery q = session.createSQLQuery(
+					"SELECT rightOrganizationId FROM Organization_ WHERE (companyId = ?) AND (parentOrganizationId = ?) ORDER BY organizationId DESC");
+
+			q.addScalar("rightOrganizationId", Type.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(companyId);
+			qPos.add(parentOrganizationId);
+
+			List<Long> list = (List<Long>)QueryUtil.list(q, getDialect(), 0, 1);
+
+			if (list.isEmpty()) {
+				if (parentOrganizationId > 0) {
+					Organization parentOrganization = findByPrimaryKey(parentOrganizationId);
+
+					return parentOrganization.getRightOrganizationId();
+				}
+
+				return 0;
+			}
+			else {
+				return list.get(0);
+			}
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected long rebuildTree(long companyId, long parentOrganizationId,
+		long leftOrganizationId) throws SystemException {
+		List<Long> organizationIds = null;
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			SQLQuery q = session.createSQLQuery(
+					"SELECT organizationId FROM Organization_ WHERE companyId = ? AND parentOrganizationId = ? ORDER BY organizationId ASC");
+
+			q.addScalar("organizationId", Type.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(companyId);
+			qPos.add(parentOrganizationId);
+
+			organizationIds = q.list();
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+
+		long rightOrganizationId = leftOrganizationId + 1;
+
+		for (long organizationId : organizationIds) {
+			rightOrganizationId = rebuildTree(companyId, organizationId,
+					rightOrganizationId);
+		}
+
+		if (parentOrganizationId > 0) {
+			updateTree.update(parentOrganizationId, leftOrganizationId,
+				rightOrganizationId);
+		}
+
+		return rightOrganizationId + 1;
+	}
+
+	protected void shrinkTree(Organization organization)
+		throws SystemException {
+		long companyId = organization.getCompanyId();
+
+		long leftOrganizationId = organization.getLeftOrganizationId();
+		long rightOrganizationId = organization.getRightOrganizationId();
+
+		long delta = (rightOrganizationId - leftOrganizationId) + 1;
+
+		shrinkTreeLeftOrganizationId.shrink(companyId, rightOrganizationId,
+			delta);
+		shrinkTreeRightOrganizationId.shrink(companyId, rightOrganizationId,
+			delta);
+
+		CacheRegistry.clear(OrganizationImpl.class.getName());
+		EntityCacheUtil.clearCache(OrganizationImpl.class.getName());
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
+	}
+
 	public void afterPropertiesSet() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
 					com.liferay.portal.util.PropsUtil.get(
@@ -2357,6 +2504,12 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl
 		addUser = new AddUser(this);
 		clearUsers = new ClearUsers(this);
 		removeUser = new RemoveUser(this);
+
+		expandTreeLeftOrganizationId = new ExpandTreeLeftOrganizationId(this);
+		expandTreeRightOrganizationId = new ExpandTreeRightOrganizationId(this);
+		shrinkTreeLeftOrganizationId = new ShrinkTreeLeftOrganizationId(this);
+		shrinkTreeRightOrganizationId = new ShrinkTreeRightOrganizationId(this);
+		updateTree = new UpdateTree(this);
 	}
 
 	@BeanReference(name = "com.liferay.portal.service.persistence.AccountPersistence.impl")
@@ -2778,6 +2931,103 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl
 						Organization.class.getName(), organizationId);
 				}
 			}
+		}
+
+		private SqlUpdate _sqlUpdate;
+		private OrganizationPersistenceImpl _persistenceImpl;
+	}
+
+	protected ExpandTreeLeftOrganizationId expandTreeLeftOrganizationId;
+	protected ExpandTreeRightOrganizationId expandTreeRightOrganizationId;
+	protected ShrinkTreeLeftOrganizationId shrinkTreeLeftOrganizationId;
+	protected ShrinkTreeRightOrganizationId shrinkTreeRightOrganizationId;
+	protected UpdateTree updateTree;
+
+	protected class ExpandTreeLeftOrganizationId {
+		protected ExpandTreeLeftOrganizationId(
+			OrganizationPersistenceImpl persistenceImpl) {
+			_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(),
+					"UPDATE Organization_ SET leftOrganizationId = (leftOrganizationId + 2) WHERE (companyId = ?) AND (leftOrganizationId > ?)",
+					new int[] { Types.BIGINT, Types.BIGINT });
+			_persistenceImpl = persistenceImpl;
+		}
+
+		protected void expand(long companyId, long leftOrganizationId)
+			throws SystemException {
+			_sqlUpdate.update(new Object[] { companyId, leftOrganizationId });
+		}
+
+		private SqlUpdate _sqlUpdate;
+		private OrganizationPersistenceImpl _persistenceImpl;
+	}
+
+	protected class ExpandTreeRightOrganizationId {
+		protected ExpandTreeRightOrganizationId(
+			OrganizationPersistenceImpl persistenceImpl) {
+			_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(),
+					"UPDATE Organization_ SET rightOrganizationId = (rightOrganizationId + 2) WHERE (companyId = ?) AND (rightOrganizationId > ?)",
+					new int[] { Types.BIGINT, Types.BIGINT });
+			_persistenceImpl = persistenceImpl;
+		}
+
+		protected void expand(long companyId, long rightOrganizationId)
+			throws SystemException {
+			_sqlUpdate.update(new Object[] { companyId, rightOrganizationId });
+		}
+
+		private SqlUpdate _sqlUpdate;
+		private OrganizationPersistenceImpl _persistenceImpl;
+	}
+
+	protected class ShrinkTreeLeftOrganizationId {
+		protected ShrinkTreeLeftOrganizationId(
+			OrganizationPersistenceImpl persistenceImpl) {
+			_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(),
+					"UPDATE Organization_ SET leftOrganizationId = (leftOrganizationId - ?) WHERE (companyId = ?) AND (leftOrganizationId > ?)",
+					new int[] { Types.BIGINT, Types.BIGINT, Types.BIGINT });
+			_persistenceImpl = persistenceImpl;
+		}
+
+		protected void shrink(long companyId, long leftOrganizationId,
+			long delta) throws SystemException {
+			_sqlUpdate.update(new Object[] { delta, companyId, leftOrganizationId });
+		}
+
+		private SqlUpdate _sqlUpdate;
+		private OrganizationPersistenceImpl _persistenceImpl;
+	}
+
+	protected class ShrinkTreeRightOrganizationId {
+		protected ShrinkTreeRightOrganizationId(
+			OrganizationPersistenceImpl persistenceImpl) {
+			_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(),
+					"UPDATE Organization_ SET rightOrganizationId = (rightOrganizationId - ?) WHERE (companyId = ?) AND (rightOrganizationId > ?)",
+					new int[] { Types.BIGINT, Types.BIGINT, Types.BIGINT });
+			_persistenceImpl = persistenceImpl;
+		}
+
+		protected void shrink(long companyId, long rightOrganizationId,
+			long delta) throws SystemException {
+			_sqlUpdate.update(new Object[] { delta, companyId, rightOrganizationId });
+		}
+
+		private SqlUpdate _sqlUpdate;
+		private OrganizationPersistenceImpl _persistenceImpl;
+	}
+
+	protected class UpdateTree {
+		protected UpdateTree(OrganizationPersistenceImpl persistenceImpl) {
+			_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(),
+					"UPDATE Organization_ SET leftOrganizationId = ?, rightOrganizationId = ? WHERE organizationId = ?",
+					new int[] { Types.BIGINT, Types.BIGINT, Types.BIGINT });
+			_persistenceImpl = persistenceImpl;
+		}
+
+		protected void update(long organizationId, long leftOrganizationId,
+			long rightOrganizationId) throws SystemException {
+			_sqlUpdate.update(new Object[] {
+					leftOrganizationId, rightOrganizationId, organizationId
+				});
 		}
 
 		private SqlUpdate _sqlUpdate;

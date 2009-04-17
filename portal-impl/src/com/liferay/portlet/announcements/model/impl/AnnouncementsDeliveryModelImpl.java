@@ -145,9 +145,7 @@ public class AnnouncementsDeliveryModelImpl extends BaseModelImpl<AnnouncementsD
 	}
 
 	public void setDeliveryId(long deliveryId) {
-		if (deliveryId != _deliveryId) {
-			_deliveryId = deliveryId;
-		}
+		_deliveryId = deliveryId;
 	}
 
 	public long getCompanyId() {
@@ -155,9 +153,7 @@ public class AnnouncementsDeliveryModelImpl extends BaseModelImpl<AnnouncementsD
 	}
 
 	public void setCompanyId(long companyId) {
-		if (companyId != _companyId) {
-			_companyId = companyId;
-		}
+		_companyId = companyId;
 	}
 
 	public long getUserId() {
@@ -165,14 +161,12 @@ public class AnnouncementsDeliveryModelImpl extends BaseModelImpl<AnnouncementsD
 	}
 
 	public void setUserId(long userId) {
-		if (userId != _userId) {
-			_userId = userId;
+		_userId = userId;
 
-			if (!_setOriginalUserId) {
-				_setOriginalUserId = true;
+		if (!_setOriginalUserId) {
+			_setOriginalUserId = true;
 
-				_originalUserId = userId;
-			}
+			_originalUserId = userId;
 		}
 	}
 
@@ -185,12 +179,10 @@ public class AnnouncementsDeliveryModelImpl extends BaseModelImpl<AnnouncementsD
 	}
 
 	public void setType(String type) {
-		if ((type != _type) || ((type != null) && !type.equals(_type))) {
-			_type = type;
+		_type = type;
 
-			if (_originalType == null) {
-				_originalType = type;
-			}
+		if (_originalType == null) {
+			_originalType = type;
 		}
 	}
 
@@ -207,9 +199,7 @@ public class AnnouncementsDeliveryModelImpl extends BaseModelImpl<AnnouncementsD
 	}
 
 	public void setEmail(boolean email) {
-		if (email != _email) {
-			_email = email;
-		}
+		_email = email;
 	}
 
 	public boolean getSms() {
@@ -221,9 +211,7 @@ public class AnnouncementsDeliveryModelImpl extends BaseModelImpl<AnnouncementsD
 	}
 
 	public void setSms(boolean sms) {
-		if (sms != _sms) {
-			_sms = sms;
-		}
+		_sms = sms;
 	}
 
 	public boolean getWebsite() {
@@ -235,9 +223,7 @@ public class AnnouncementsDeliveryModelImpl extends BaseModelImpl<AnnouncementsD
 	}
 
 	public void setWebsite(boolean website) {
-		if (website != _website) {
-			_website = website;
-		}
+		_website = website;
 	}
 
 	public AnnouncementsDelivery toEscapedModel() {

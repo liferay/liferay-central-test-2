@@ -135,9 +135,7 @@ public class PollsVoteModelImpl extends BaseModelImpl<PollsVote> {
 	}
 
 	public void setVoteId(long voteId) {
-		if (voteId != _voteId) {
-			_voteId = voteId;
-		}
+		_voteId = voteId;
 	}
 
 	public long getUserId() {
@@ -145,14 +143,12 @@ public class PollsVoteModelImpl extends BaseModelImpl<PollsVote> {
 	}
 
 	public void setUserId(long userId) {
-		if (userId != _userId) {
-			_userId = userId;
+		_userId = userId;
 
-			if (!_setOriginalUserId) {
-				_setOriginalUserId = true;
+		if (!_setOriginalUserId) {
+			_setOriginalUserId = true;
 
-				_originalUserId = userId;
-			}
+			_originalUserId = userId;
 		}
 	}
 
@@ -165,14 +161,12 @@ public class PollsVoteModelImpl extends BaseModelImpl<PollsVote> {
 	}
 
 	public void setQuestionId(long questionId) {
-		if (questionId != _questionId) {
-			_questionId = questionId;
+		_questionId = questionId;
 
-			if (!_setOriginalQuestionId) {
-				_setOriginalQuestionId = true;
+		if (!_setOriginalQuestionId) {
+			_setOriginalQuestionId = true;
 
-				_originalQuestionId = questionId;
-			}
+			_originalQuestionId = questionId;
 		}
 	}
 
@@ -185,9 +179,7 @@ public class PollsVoteModelImpl extends BaseModelImpl<PollsVote> {
 	}
 
 	public void setChoiceId(long choiceId) {
-		if (choiceId != _choiceId) {
-			_choiceId = choiceId;
-		}
+		_choiceId = choiceId;
 	}
 
 	public Date getVoteDate() {
@@ -195,10 +187,7 @@ public class PollsVoteModelImpl extends BaseModelImpl<PollsVote> {
 	}
 
 	public void setVoteDate(Date voteDate) {
-		if ((voteDate != _voteDate) ||
-				((voteDate != null) && !voteDate.equals(_voteDate))) {
-			_voteDate = voteDate;
-		}
+		_voteDate = voteDate;
 	}
 
 	public PollsVote toEscapedModel() {

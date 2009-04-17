@@ -343,12 +343,6 @@ public class RegionPersistenceImpl extends BasePersistenceImpl
 
 	public List<Region> findByCountryId(long countryId)
 		throws SystemException {
-		int count = countByCountryId(countryId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { new Long(countryId) };
 
 		List<Region> list = (List<Region>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_COUNTRYID,
@@ -407,12 +401,6 @@ public class RegionPersistenceImpl extends BasePersistenceImpl
 
 	public List<Region> findByCountryId(long countryId, int start, int end,
 		OrderByComparator obc) throws SystemException {
-		int count = countByCountryId(countryId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(countryId),
 				
@@ -572,12 +560,6 @@ public class RegionPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public List<Region> findByActive(boolean active) throws SystemException {
-		int count = countByActive(active);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { Boolean.valueOf(active) };
 
 		List<Region> list = (List<Region>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_ACTIVE,
@@ -636,12 +618,6 @@ public class RegionPersistenceImpl extends BasePersistenceImpl
 
 	public List<Region> findByActive(boolean active, int start, int end,
 		OrderByComparator obc) throws SystemException {
-		int count = countByActive(active);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				Boolean.valueOf(active),
 				
@@ -802,12 +778,6 @@ public class RegionPersistenceImpl extends BasePersistenceImpl
 
 	public List<Region> findByC_A(long countryId, boolean active)
 		throws SystemException {
-		int count = countByC_A(countryId, active);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(countryId), Boolean.valueOf(active)
 			};
@@ -874,12 +844,6 @@ public class RegionPersistenceImpl extends BasePersistenceImpl
 
 	public List<Region> findByC_A(long countryId, boolean active, int start,
 		int end, OrderByComparator obc) throws SystemException {
-		int count = countByC_A(countryId, active);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(countryId), Boolean.valueOf(active),
 				

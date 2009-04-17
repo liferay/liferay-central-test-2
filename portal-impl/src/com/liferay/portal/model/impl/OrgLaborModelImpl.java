@@ -181,9 +181,7 @@ public class OrgLaborModelImpl extends BaseModelImpl<OrgLabor> {
 	}
 
 	public void setOrgLaborId(long orgLaborId) {
-		if (orgLaborId != _orgLaborId) {
-			_orgLaborId = orgLaborId;
-		}
+		_orgLaborId = orgLaborId;
 	}
 
 	public long getOrganizationId() {
@@ -191,9 +189,7 @@ public class OrgLaborModelImpl extends BaseModelImpl<OrgLabor> {
 	}
 
 	public void setOrganizationId(long organizationId) {
-		if (organizationId != _organizationId) {
-			_organizationId = organizationId;
-		}
+		_organizationId = organizationId;
 	}
 
 	public int getTypeId() {
@@ -201,9 +197,7 @@ public class OrgLaborModelImpl extends BaseModelImpl<OrgLabor> {
 	}
 
 	public void setTypeId(int typeId) {
-		if (typeId != _typeId) {
-			_typeId = typeId;
-		}
+		_typeId = typeId;
 	}
 
 	public int getSunOpen() {
@@ -211,9 +205,7 @@ public class OrgLaborModelImpl extends BaseModelImpl<OrgLabor> {
 	}
 
 	public void setSunOpen(int sunOpen) {
-		if (sunOpen != _sunOpen) {
-			_sunOpen = sunOpen;
-		}
+		_sunOpen = sunOpen;
 	}
 
 	public int getSunClose() {
@@ -221,9 +213,7 @@ public class OrgLaborModelImpl extends BaseModelImpl<OrgLabor> {
 	}
 
 	public void setSunClose(int sunClose) {
-		if (sunClose != _sunClose) {
-			_sunClose = sunClose;
-		}
+		_sunClose = sunClose;
 	}
 
 	public int getMonOpen() {
@@ -231,9 +221,7 @@ public class OrgLaborModelImpl extends BaseModelImpl<OrgLabor> {
 	}
 
 	public void setMonOpen(int monOpen) {
-		if (monOpen != _monOpen) {
-			_monOpen = monOpen;
-		}
+		_monOpen = monOpen;
 	}
 
 	public int getMonClose() {
@@ -241,9 +229,7 @@ public class OrgLaborModelImpl extends BaseModelImpl<OrgLabor> {
 	}
 
 	public void setMonClose(int monClose) {
-		if (monClose != _monClose) {
-			_monClose = monClose;
-		}
+		_monClose = monClose;
 	}
 
 	public int getTueOpen() {
@@ -251,9 +237,7 @@ public class OrgLaborModelImpl extends BaseModelImpl<OrgLabor> {
 	}
 
 	public void setTueOpen(int tueOpen) {
-		if (tueOpen != _tueOpen) {
-			_tueOpen = tueOpen;
-		}
+		_tueOpen = tueOpen;
 	}
 
 	public int getTueClose() {
@@ -261,9 +245,7 @@ public class OrgLaborModelImpl extends BaseModelImpl<OrgLabor> {
 	}
 
 	public void setTueClose(int tueClose) {
-		if (tueClose != _tueClose) {
-			_tueClose = tueClose;
-		}
+		_tueClose = tueClose;
 	}
 
 	public int getWedOpen() {
@@ -271,9 +253,7 @@ public class OrgLaborModelImpl extends BaseModelImpl<OrgLabor> {
 	}
 
 	public void setWedOpen(int wedOpen) {
-		if (wedOpen != _wedOpen) {
-			_wedOpen = wedOpen;
-		}
+		_wedOpen = wedOpen;
 	}
 
 	public int getWedClose() {
@@ -281,9 +261,7 @@ public class OrgLaborModelImpl extends BaseModelImpl<OrgLabor> {
 	}
 
 	public void setWedClose(int wedClose) {
-		if (wedClose != _wedClose) {
-			_wedClose = wedClose;
-		}
+		_wedClose = wedClose;
 	}
 
 	public int getThuOpen() {
@@ -291,9 +269,7 @@ public class OrgLaborModelImpl extends BaseModelImpl<OrgLabor> {
 	}
 
 	public void setThuOpen(int thuOpen) {
-		if (thuOpen != _thuOpen) {
-			_thuOpen = thuOpen;
-		}
+		_thuOpen = thuOpen;
 	}
 
 	public int getThuClose() {
@@ -301,9 +277,7 @@ public class OrgLaborModelImpl extends BaseModelImpl<OrgLabor> {
 	}
 
 	public void setThuClose(int thuClose) {
-		if (thuClose != _thuClose) {
-			_thuClose = thuClose;
-		}
+		_thuClose = thuClose;
 	}
 
 	public int getFriOpen() {
@@ -311,9 +285,7 @@ public class OrgLaborModelImpl extends BaseModelImpl<OrgLabor> {
 	}
 
 	public void setFriOpen(int friOpen) {
-		if (friOpen != _friOpen) {
-			_friOpen = friOpen;
-		}
+		_friOpen = friOpen;
 	}
 
 	public int getFriClose() {
@@ -321,9 +293,7 @@ public class OrgLaborModelImpl extends BaseModelImpl<OrgLabor> {
 	}
 
 	public void setFriClose(int friClose) {
-		if (friClose != _friClose) {
-			_friClose = friClose;
-		}
+		_friClose = friClose;
 	}
 
 	public int getSatOpen() {
@@ -331,9 +301,7 @@ public class OrgLaborModelImpl extends BaseModelImpl<OrgLabor> {
 	}
 
 	public void setSatOpen(int satOpen) {
-		if (satOpen != _satOpen) {
-			_satOpen = satOpen;
-		}
+		_satOpen = satOpen;
 	}
 
 	public int getSatClose() {
@@ -341,9 +309,7 @@ public class OrgLaborModelImpl extends BaseModelImpl<OrgLabor> {
 	}
 
 	public void setSatClose(int satClose) {
-		if (satClose != _satClose) {
-			_satClose = satClose;
-		}
+		_satClose = satClose;
 	}
 
 	public OrgLabor toEscapedModel() {

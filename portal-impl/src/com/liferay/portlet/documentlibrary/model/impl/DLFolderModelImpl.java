@@ -164,12 +164,10 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder> {
 	}
 
 	public void setUuid(String uuid) {
-		if ((uuid != null) && !uuid.equals(_uuid)) {
-			_uuid = uuid;
+		_uuid = uuid;
 
-			if (_originalUuid == null) {
-				_originalUuid = uuid;
-			}
+		if (_originalUuid == null) {
+			_originalUuid = uuid;
 		}
 	}
 
@@ -182,9 +180,7 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder> {
 	}
 
 	public void setFolderId(long folderId) {
-		if (folderId != _folderId) {
-			_folderId = folderId;
-		}
+		_folderId = folderId;
 	}
 
 	public long getGroupId() {
@@ -192,14 +188,12 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder> {
 	}
 
 	public void setGroupId(long groupId) {
-		if (groupId != _groupId) {
-			_groupId = groupId;
+		_groupId = groupId;
 
-			if (!_setOriginalGroupId) {
-				_setOriginalGroupId = true;
+		if (!_setOriginalGroupId) {
+			_setOriginalGroupId = true;
 
-				_originalGroupId = groupId;
-			}
+			_originalGroupId = groupId;
 		}
 	}
 
@@ -212,9 +206,7 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder> {
 	}
 
 	public void setCompanyId(long companyId) {
-		if (companyId != _companyId) {
-			_companyId = companyId;
-		}
+		_companyId = companyId;
 	}
 
 	public long getUserId() {
@@ -222,9 +214,7 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder> {
 	}
 
 	public void setUserId(long userId) {
-		if (userId != _userId) {
-			_userId = userId;
-		}
+		_userId = userId;
 	}
 
 	public String getUserName() {
@@ -232,10 +222,7 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder> {
 	}
 
 	public void setUserName(String userName) {
-		if ((userName != _userName) ||
-				((userName != null) && !userName.equals(_userName))) {
-			_userName = userName;
-		}
+		_userName = userName;
 	}
 
 	public Date getCreateDate() {
@@ -243,10 +230,7 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder> {
 	}
 
 	public void setCreateDate(Date createDate) {
-		if ((createDate != _createDate) ||
-				((createDate != null) && !createDate.equals(_createDate))) {
-			_createDate = createDate;
-		}
+		_createDate = createDate;
 	}
 
 	public Date getModifiedDate() {
@@ -254,10 +238,7 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder> {
 	}
 
 	public void setModifiedDate(Date modifiedDate) {
-		if ((modifiedDate != _modifiedDate) ||
-				((modifiedDate != null) && !modifiedDate.equals(_modifiedDate))) {
-			_modifiedDate = modifiedDate;
-		}
+		_modifiedDate = modifiedDate;
 	}
 
 	public long getParentFolderId() {
@@ -265,14 +246,12 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder> {
 	}
 
 	public void setParentFolderId(long parentFolderId) {
-		if (parentFolderId != _parentFolderId) {
-			_parentFolderId = parentFolderId;
+		_parentFolderId = parentFolderId;
 
-			if (!_setOriginalParentFolderId) {
-				_setOriginalParentFolderId = true;
+		if (!_setOriginalParentFolderId) {
+			_setOriginalParentFolderId = true;
 
-				_originalParentFolderId = parentFolderId;
-			}
+			_originalParentFolderId = parentFolderId;
 		}
 	}
 
@@ -285,12 +264,10 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder> {
 	}
 
 	public void setName(String name) {
-		if ((name != _name) || ((name != null) && !name.equals(_name))) {
-			_name = name;
+		_name = name;
 
-			if (_originalName == null) {
-				_originalName = name;
-			}
+		if (_originalName == null) {
+			_originalName = name;
 		}
 	}
 
@@ -303,10 +280,7 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder> {
 	}
 
 	public void setDescription(String description) {
-		if ((description != _description) ||
-				((description != null) && !description.equals(_description))) {
-			_description = description;
-		}
+		_description = description;
 	}
 
 	public Date getLastPostDate() {
@@ -314,10 +288,7 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder> {
 	}
 
 	public void setLastPostDate(Date lastPostDate) {
-		if ((lastPostDate != _lastPostDate) ||
-				((lastPostDate != null) && !lastPostDate.equals(_lastPostDate))) {
-			_lastPostDate = lastPostDate;
-		}
+		_lastPostDate = lastPostDate;
 	}
 
 	public DLFolder toEscapedModel() {

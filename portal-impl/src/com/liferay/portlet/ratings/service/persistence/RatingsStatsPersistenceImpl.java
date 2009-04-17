@@ -257,6 +257,8 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl
 		boolean merge) throws SystemException {
 		boolean isNew = ratingsStats.isNew();
 
+		RatingsStatsModelImpl ratingsStatsModelImpl = (RatingsStatsModelImpl)ratingsStats;
+
 		Session session = null;
 
 		try {
@@ -277,8 +279,6 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl
 
 		EntityCacheUtil.putResult(RatingsStatsModelImpl.ENTITY_CACHE_ENABLED,
 			RatingsStatsImpl.class, ratingsStats.getPrimaryKey(), ratingsStats);
-
-		RatingsStatsModelImpl ratingsStatsModelImpl = (RatingsStatsModelImpl)ratingsStats;
 
 		if (!isNew &&
 				((ratingsStats.getClassNameId() != ratingsStatsModelImpl.getOriginalClassNameId()) ||

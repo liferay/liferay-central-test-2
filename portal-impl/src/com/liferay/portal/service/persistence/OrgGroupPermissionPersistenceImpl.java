@@ -344,12 +344,6 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl
 
 	public List<OrgGroupPermission> findByGroupId(long groupId)
 		throws SystemException {
-		int count = countByGroupId(groupId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { new Long(groupId) };
 
 		List<OrgGroupPermission> list = (List<OrgGroupPermission>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_GROUPID,
@@ -405,12 +399,6 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl
 
 	public List<OrgGroupPermission> findByGroupId(long groupId, int start,
 		int end, OrderByComparator obc) throws SystemException {
-		int count = countByGroupId(groupId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				
@@ -568,12 +556,6 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl
 
 	public List<OrgGroupPermission> findByPermissionId(long permissionId)
 		throws SystemException {
-		int count = countByPermissionId(permissionId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { new Long(permissionId) };
 
 		List<OrgGroupPermission> list = (List<OrgGroupPermission>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_PERMISSIONID,
@@ -629,12 +611,6 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl
 
 	public List<OrgGroupPermission> findByPermissionId(long permissionId,
 		int start, int end, OrderByComparator obc) throws SystemException {
-		int count = countByPermissionId(permissionId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(permissionId),
 				

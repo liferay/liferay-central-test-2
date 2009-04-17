@@ -184,9 +184,7 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry> {
 	}
 
 	public void setUuid(String uuid) {
-		if ((uuid != null) && !uuid.equals(_uuid)) {
-			_uuid = uuid;
-		}
+		_uuid = uuid;
 	}
 
 	public long getFileEntryId() {
@@ -194,9 +192,7 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry> {
 	}
 
 	public void setFileEntryId(long fileEntryId) {
-		if (fileEntryId != _fileEntryId) {
-			_fileEntryId = fileEntryId;
-		}
+		_fileEntryId = fileEntryId;
 	}
 
 	public long getCompanyId() {
@@ -204,9 +200,7 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry> {
 	}
 
 	public void setCompanyId(long companyId) {
-		if (companyId != _companyId) {
-			_companyId = companyId;
-		}
+		_companyId = companyId;
 	}
 
 	public long getUserId() {
@@ -214,9 +208,7 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry> {
 	}
 
 	public void setUserId(long userId) {
-		if (userId != _userId) {
-			_userId = userId;
-		}
+		_userId = userId;
 	}
 
 	public String getUserName() {
@@ -224,10 +216,7 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry> {
 	}
 
 	public void setUserName(String userName) {
-		if ((userName != _userName) ||
-				((userName != null) && !userName.equals(_userName))) {
-			_userName = userName;
-		}
+		_userName = userName;
 	}
 
 	public long getVersionUserId() {
@@ -235,9 +224,7 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry> {
 	}
 
 	public void setVersionUserId(long versionUserId) {
-		if (versionUserId != _versionUserId) {
-			_versionUserId = versionUserId;
-		}
+		_versionUserId = versionUserId;
 	}
 
 	public String getVersionUserName() {
@@ -245,11 +232,7 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry> {
 	}
 
 	public void setVersionUserName(String versionUserName) {
-		if ((versionUserName != _versionUserName) ||
-				((versionUserName != null) &&
-				!versionUserName.equals(_versionUserName))) {
-			_versionUserName = versionUserName;
-		}
+		_versionUserName = versionUserName;
 	}
 
 	public Date getCreateDate() {
@@ -257,10 +240,7 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry> {
 	}
 
 	public void setCreateDate(Date createDate) {
-		if ((createDate != _createDate) ||
-				((createDate != null) && !createDate.equals(_createDate))) {
-			_createDate = createDate;
-		}
+		_createDate = createDate;
 	}
 
 	public Date getModifiedDate() {
@@ -268,10 +248,7 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry> {
 	}
 
 	public void setModifiedDate(Date modifiedDate) {
-		if ((modifiedDate != _modifiedDate) ||
-				((modifiedDate != null) && !modifiedDate.equals(_modifiedDate))) {
-			_modifiedDate = modifiedDate;
-		}
+		_modifiedDate = modifiedDate;
 	}
 
 	public long getFolderId() {
@@ -279,14 +256,12 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry> {
 	}
 
 	public void setFolderId(long folderId) {
-		if (folderId != _folderId) {
-			_folderId = folderId;
+		_folderId = folderId;
 
-			if (!_setOriginalFolderId) {
-				_setOriginalFolderId = true;
+		if (!_setOriginalFolderId) {
+			_setOriginalFolderId = true;
 
-				_originalFolderId = folderId;
-			}
+			_originalFolderId = folderId;
 		}
 	}
 
@@ -299,12 +274,10 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry> {
 	}
 
 	public void setName(String name) {
-		if ((name != _name) || ((name != null) && !name.equals(_name))) {
-			_name = name;
+		_name = name;
 
-			if (_originalName == null) {
-				_originalName = name;
-			}
+		if (_originalName == null) {
+			_originalName = name;
 		}
 	}
 
@@ -317,9 +290,7 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry> {
 	}
 
 	public void setTitle(String title) {
-		if ((title != _title) || ((title != null) && !title.equals(_title))) {
-			_title = title;
-		}
+		_title = title;
 	}
 
 	public String getDescription() {
@@ -327,10 +298,7 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry> {
 	}
 
 	public void setDescription(String description) {
-		if ((description != _description) ||
-				((description != null) && !description.equals(_description))) {
-			_description = description;
-		}
+		_description = description;
 	}
 
 	public double getVersion() {
@@ -338,9 +306,7 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry> {
 	}
 
 	public void setVersion(double version) {
-		if (version != _version) {
-			_version = version;
-		}
+		_version = version;
 	}
 
 	public int getSize() {
@@ -348,9 +314,7 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry> {
 	}
 
 	public void setSize(int size) {
-		if (size != _size) {
-			_size = size;
-		}
+		_size = size;
 	}
 
 	public int getReadCount() {
@@ -358,9 +322,7 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry> {
 	}
 
 	public void setReadCount(int readCount) {
-		if (readCount != _readCount) {
-			_readCount = readCount;
-		}
+		_readCount = readCount;
 	}
 
 	public String getExtraSettings() {
@@ -368,11 +330,7 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry> {
 	}
 
 	public void setExtraSettings(String extraSettings) {
-		if ((extraSettings != _extraSettings) ||
-				((extraSettings != null) &&
-				!extraSettings.equals(_extraSettings))) {
-			_extraSettings = extraSettings;
-		}
+		_extraSettings = extraSettings;
 	}
 
 	public DLFileEntry toEscapedModel() {

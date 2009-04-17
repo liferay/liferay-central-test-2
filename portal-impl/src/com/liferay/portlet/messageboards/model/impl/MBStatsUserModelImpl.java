@@ -135,9 +135,7 @@ public class MBStatsUserModelImpl extends BaseModelImpl<MBStatsUser> {
 	}
 
 	public void setStatsUserId(long statsUserId) {
-		if (statsUserId != _statsUserId) {
-			_statsUserId = statsUserId;
-		}
+		_statsUserId = statsUserId;
 	}
 
 	public long getGroupId() {
@@ -145,14 +143,12 @@ public class MBStatsUserModelImpl extends BaseModelImpl<MBStatsUser> {
 	}
 
 	public void setGroupId(long groupId) {
-		if (groupId != _groupId) {
-			_groupId = groupId;
+		_groupId = groupId;
 
-			if (!_setOriginalGroupId) {
-				_setOriginalGroupId = true;
+		if (!_setOriginalGroupId) {
+			_setOriginalGroupId = true;
 
-				_originalGroupId = groupId;
-			}
+			_originalGroupId = groupId;
 		}
 	}
 
@@ -165,14 +161,12 @@ public class MBStatsUserModelImpl extends BaseModelImpl<MBStatsUser> {
 	}
 
 	public void setUserId(long userId) {
-		if (userId != _userId) {
-			_userId = userId;
+		_userId = userId;
 
-			if (!_setOriginalUserId) {
-				_setOriginalUserId = true;
+		if (!_setOriginalUserId) {
+			_setOriginalUserId = true;
 
-				_originalUserId = userId;
-			}
+			_originalUserId = userId;
 		}
 	}
 
@@ -185,9 +179,7 @@ public class MBStatsUserModelImpl extends BaseModelImpl<MBStatsUser> {
 	}
 
 	public void setMessageCount(int messageCount) {
-		if (messageCount != _messageCount) {
-			_messageCount = messageCount;
-		}
+		_messageCount = messageCount;
 	}
 
 	public Date getLastPostDate() {
@@ -195,10 +187,7 @@ public class MBStatsUserModelImpl extends BaseModelImpl<MBStatsUser> {
 	}
 
 	public void setLastPostDate(Date lastPostDate) {
-		if ((lastPostDate != _lastPostDate) ||
-				((lastPostDate != null) && !lastPostDate.equals(_lastPostDate))) {
-			_lastPostDate = lastPostDate;
-		}
+		_lastPostDate = lastPostDate;
 	}
 
 	public MBStatsUser toEscapedModel() {

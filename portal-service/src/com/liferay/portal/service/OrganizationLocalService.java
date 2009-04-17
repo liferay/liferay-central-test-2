@@ -188,6 +188,9 @@ public interface OrganizationLocalService {
 	public boolean hasPasswordPolicyOrganization(long passwordPolicyId,
 		long organizationId) throws com.liferay.portal.SystemException;
 
+	public void rebuildTree(long companyId, boolean force)
+		throws com.liferay.portal.SystemException;
+
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Organization> search(
 		long companyId, long parentOrganizationId, java.lang.String keywords,

@@ -312,6 +312,8 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl
 		boolean merge) throws SystemException {
 		boolean isNew = scProductScreenshot.isNew();
 
+		SCProductScreenshotModelImpl scProductScreenshotModelImpl = (SCProductScreenshotModelImpl)scProductScreenshot;
+
 		Session session = null;
 
 		try {
@@ -333,8 +335,6 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl
 		EntityCacheUtil.putResult(SCProductScreenshotModelImpl.ENTITY_CACHE_ENABLED,
 			SCProductScreenshotImpl.class, scProductScreenshot.getPrimaryKey(),
 			scProductScreenshot);
-
-		SCProductScreenshotModelImpl scProductScreenshotModelImpl = (SCProductScreenshotModelImpl)scProductScreenshot;
 
 		if (!isNew &&
 				(scProductScreenshot.getThumbnailId() != scProductScreenshotModelImpl.getOriginalThumbnailId())) {
@@ -438,12 +438,6 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl
 
 	public List<SCProductScreenshot> findByProductEntryId(long productEntryId)
 		throws SystemException {
-		int count = countByProductEntryId(productEntryId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { new Long(productEntryId) };
 
 		List<SCProductScreenshot> list = (List<SCProductScreenshot>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_PRODUCTENTRYID,
@@ -504,12 +498,6 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl
 
 	public List<SCProductScreenshot> findByProductEntryId(long productEntryId,
 		int start, int end, OrderByComparator obc) throws SystemException {
-		int count = countByProductEntryId(productEntryId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(productEntryId),
 				

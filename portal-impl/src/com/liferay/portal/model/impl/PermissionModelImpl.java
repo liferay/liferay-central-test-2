@@ -133,9 +133,7 @@ public class PermissionModelImpl extends BaseModelImpl<Permission> {
 	}
 
 	public void setPermissionId(long permissionId) {
-		if (permissionId != _permissionId) {
-			_permissionId = permissionId;
-		}
+		_permissionId = permissionId;
 	}
 
 	public long getCompanyId() {
@@ -143,9 +141,7 @@ public class PermissionModelImpl extends BaseModelImpl<Permission> {
 	}
 
 	public void setCompanyId(long companyId) {
-		if (companyId != _companyId) {
-			_companyId = companyId;
-		}
+		_companyId = companyId;
 	}
 
 	public String getActionId() {
@@ -153,13 +149,10 @@ public class PermissionModelImpl extends BaseModelImpl<Permission> {
 	}
 
 	public void setActionId(String actionId) {
-		if ((actionId != _actionId) ||
-				((actionId != null) && !actionId.equals(_actionId))) {
-			_actionId = actionId;
+		_actionId = actionId;
 
-			if (_originalActionId == null) {
-				_originalActionId = actionId;
-			}
+		if (_originalActionId == null) {
+			_originalActionId = actionId;
 		}
 	}
 
@@ -172,14 +165,12 @@ public class PermissionModelImpl extends BaseModelImpl<Permission> {
 	}
 
 	public void setResourceId(long resourceId) {
-		if (resourceId != _resourceId) {
-			_resourceId = resourceId;
+		_resourceId = resourceId;
 
-			if (!_setOriginalResourceId) {
-				_setOriginalResourceId = true;
+		if (!_setOriginalResourceId) {
+			_setOriginalResourceId = true;
 
-				_originalResourceId = resourceId;
-			}
+			_originalResourceId = resourceId;
 		}
 	}
 

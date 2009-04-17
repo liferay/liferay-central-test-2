@@ -348,12 +348,6 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl
 
 	public List<UserTracker> findByCompanyId(long companyId)
 		throws SystemException {
-		int count = countByCompanyId(companyId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { new Long(companyId) };
 
 		List<UserTracker> list = (List<UserTracker>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_COMPANYID,
@@ -408,12 +402,6 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl
 
 	public List<UserTracker> findByCompanyId(long companyId, int start,
 		int end, OrderByComparator obc) throws SystemException {
-		int count = countByCompanyId(companyId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(companyId),
 				
@@ -568,12 +556,6 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl
 
 	public List<UserTracker> findByUserId(long userId)
 		throws SystemException {
-		int count = countByUserId(userId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { new Long(userId) };
 
 		List<UserTracker> list = (List<UserTracker>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_USERID,
@@ -628,12 +610,6 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl
 
 	public List<UserTracker> findByUserId(long userId, int start, int end,
 		OrderByComparator obc) throws SystemException {
-		int count = countByUserId(userId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(userId),
 				
@@ -785,12 +761,6 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl
 
 	public List<UserTracker> findBySessionId(String sessionId)
 		throws SystemException {
-		int count = countBySessionId(sessionId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { sessionId };
 
 		List<UserTracker> list = (List<UserTracker>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_SESSIONID,
@@ -852,12 +822,6 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl
 
 	public List<UserTracker> findBySessionId(String sessionId, int start,
 		int end, OrderByComparator obc) throws SystemException {
-		int count = countBySessionId(sessionId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				sessionId,
 				

@@ -234,6 +234,8 @@
 		</id>
 		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="parentOrganizationId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="leftOrganizationId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="rightOrganizationId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="type" column="type_" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="recursable" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />

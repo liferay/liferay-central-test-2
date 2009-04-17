@@ -278,6 +278,8 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl
 		boolean merge) throws SystemException {
 		boolean isNew = company.isNew();
 
+		CompanyModelImpl companyModelImpl = (CompanyModelImpl)company;
+
 		Session session = null;
 
 		try {
@@ -298,8 +300,6 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl
 
 		EntityCacheUtil.putResult(CompanyModelImpl.ENTITY_CACHE_ENABLED,
 			CompanyImpl.class, company.getPrimaryKey(), company);
-
-		CompanyModelImpl companyModelImpl = (CompanyModelImpl)company;
 
 		if (!isNew &&
 				(!company.getWebId().equals(companyModelImpl.getOriginalWebId()))) {

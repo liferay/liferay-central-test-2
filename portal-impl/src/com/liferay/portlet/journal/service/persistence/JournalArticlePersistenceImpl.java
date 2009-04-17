@@ -475,6 +475,8 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 		boolean merge) throws SystemException {
 		boolean isNew = journalArticle.isNew();
 
+		JournalArticleModelImpl journalArticleModelImpl = (JournalArticleModelImpl)journalArticle;
+
 		if (Validator.isNull(journalArticle.getUuid())) {
 			String uuid = PortalUUIDUtil.generate();
 
@@ -502,8 +504,6 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 		EntityCacheUtil.putResult(JournalArticleModelImpl.ENTITY_CACHE_ENABLED,
 			JournalArticleImpl.class, journalArticle.getPrimaryKey(),
 			journalArticle);
-
-		JournalArticleModelImpl journalArticleModelImpl = (JournalArticleModelImpl)journalArticle;
 
 		if (!isNew &&
 				(!journalArticle.getUuid()
@@ -629,12 +629,6 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 
 	public List<JournalArticle> findByUuid(String uuid)
 		throws SystemException {
-		int count = countByUuid(uuid);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { uuid };
 
 		List<JournalArticle> list = (List<JournalArticle>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_UUID,
@@ -702,12 +696,6 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 
 	public List<JournalArticle> findByUuid(String uuid, int start, int end,
 		OrderByComparator obc) throws SystemException {
-		int count = countByUuid(uuid);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				uuid,
 				
@@ -1009,12 +997,6 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 
 	public List<JournalArticle> findByGroupId(long groupId)
 		throws SystemException {
-		int count = countByGroupId(groupId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { new Long(groupId) };
 
 		List<JournalArticle> list = (List<JournalArticle>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_GROUPID,
@@ -1075,12 +1057,6 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 
 	public List<JournalArticle> findByGroupId(long groupId, int start, int end,
 		OrderByComparator obc) throws SystemException {
-		int count = countByGroupId(groupId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				
@@ -1247,12 +1223,6 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 
 	public List<JournalArticle> findByCompanyId(long companyId)
 		throws SystemException {
-		int count = countByCompanyId(companyId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { new Long(companyId) };
 
 		List<JournalArticle> list = (List<JournalArticle>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_COMPANYID,
@@ -1313,12 +1283,6 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 
 	public List<JournalArticle> findByCompanyId(long companyId, int start,
 		int end, OrderByComparator obc) throws SystemException {
-		int count = countByCompanyId(companyId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(companyId),
 				
@@ -1487,12 +1451,6 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 
 	public List<JournalArticle> findBySmallImageId(long smallImageId)
 		throws SystemException {
-		int count = countBySmallImageId(smallImageId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { new Long(smallImageId) };
 
 		List<JournalArticle> list = (List<JournalArticle>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_SMALLIMAGEID,
@@ -1553,12 +1511,6 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 
 	public List<JournalArticle> findBySmallImageId(long smallImageId,
 		int start, int end, OrderByComparator obc) throws SystemException {
-		int count = countBySmallImageId(smallImageId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(smallImageId),
 				
@@ -1727,12 +1679,6 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 
 	public List<JournalArticle> findByR_A(long resourcePrimKey, boolean approved)
 		throws SystemException {
-		int count = countByR_A(resourcePrimKey, approved);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(resourcePrimKey), Boolean.valueOf(approved)
 			};
@@ -1802,12 +1748,6 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 	public List<JournalArticle> findByR_A(long resourcePrimKey,
 		boolean approved, int start, int end, OrderByComparator obc)
 		throws SystemException {
-		int count = countByR_A(resourcePrimKey, approved);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(resourcePrimKey), Boolean.valueOf(approved),
 				
@@ -1997,12 +1937,6 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 
 	public List<JournalArticle> findByG_A(long groupId, String articleId)
 		throws SystemException {
-		int count = countByG_A(groupId, articleId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { new Long(groupId), articleId };
 
 		List<JournalArticle> list = (List<JournalArticle>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_G_A,
@@ -2076,12 +2010,6 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 
 	public List<JournalArticle> findByG_A(long groupId, String articleId,
 		int start, int end, OrderByComparator obc) throws SystemException {
-		int count = countByG_A(groupId, articleId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				
@@ -2284,12 +2212,6 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 
 	public List<JournalArticle> findByG_S(long groupId, String structureId)
 		throws SystemException {
-		int count = countByG_S(groupId, structureId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { new Long(groupId), structureId };
 
 		List<JournalArticle> list = (List<JournalArticle>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_G_S,
@@ -2363,12 +2285,6 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 
 	public List<JournalArticle> findByG_S(long groupId, String structureId,
 		int start, int end, OrderByComparator obc) throws SystemException {
-		int count = countByG_S(groupId, structureId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				
@@ -2571,12 +2487,6 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 
 	public List<JournalArticle> findByG_T(long groupId, String templateId)
 		throws SystemException {
-		int count = countByG_T(groupId, templateId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { new Long(groupId), templateId };
 
 		List<JournalArticle> list = (List<JournalArticle>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_G_T,
@@ -2650,12 +2560,6 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 
 	public List<JournalArticle> findByG_T(long groupId, String templateId,
 		int start, int end, OrderByComparator obc) throws SystemException {
-		int count = countByG_T(groupId, templateId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				
@@ -3113,12 +3017,6 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 
 	public List<JournalArticle> findByG_A_A(long groupId, String articleId,
 		boolean approved) throws SystemException {
-		int count = countByG_A_A(groupId, articleId, approved);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				
@@ -3203,12 +3101,6 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 	public List<JournalArticle> findByG_A_A(long groupId, String articleId,
 		boolean approved, int start, int end, OrderByComparator obc)
 		throws SystemException {
-		int count = countByG_A_A(groupId, articleId, approved);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				

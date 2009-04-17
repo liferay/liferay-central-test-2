@@ -138,9 +138,7 @@ public class ReleaseModelImpl extends BaseModelImpl<Release> {
 	}
 
 	public void setReleaseId(long releaseId) {
-		if (releaseId != _releaseId) {
-			_releaseId = releaseId;
-		}
+		_releaseId = releaseId;
 	}
 
 	public Date getCreateDate() {
@@ -148,10 +146,7 @@ public class ReleaseModelImpl extends BaseModelImpl<Release> {
 	}
 
 	public void setCreateDate(Date createDate) {
-		if ((createDate != _createDate) ||
-				((createDate != null) && !createDate.equals(_createDate))) {
-			_createDate = createDate;
-		}
+		_createDate = createDate;
 	}
 
 	public Date getModifiedDate() {
@@ -159,10 +154,7 @@ public class ReleaseModelImpl extends BaseModelImpl<Release> {
 	}
 
 	public void setModifiedDate(Date modifiedDate) {
-		if ((modifiedDate != _modifiedDate) ||
-				((modifiedDate != null) && !modifiedDate.equals(_modifiedDate))) {
-			_modifiedDate = modifiedDate;
-		}
+		_modifiedDate = modifiedDate;
 	}
 
 	public int getBuildNumber() {
@@ -170,9 +162,7 @@ public class ReleaseModelImpl extends BaseModelImpl<Release> {
 	}
 
 	public void setBuildNumber(int buildNumber) {
-		if (buildNumber != _buildNumber) {
-			_buildNumber = buildNumber;
-		}
+		_buildNumber = buildNumber;
 	}
 
 	public Date getBuildDate() {
@@ -180,10 +170,7 @@ public class ReleaseModelImpl extends BaseModelImpl<Release> {
 	}
 
 	public void setBuildDate(Date buildDate) {
-		if ((buildDate != _buildDate) ||
-				((buildDate != null) && !buildDate.equals(_buildDate))) {
-			_buildDate = buildDate;
-		}
+		_buildDate = buildDate;
 	}
 
 	public boolean getVerified() {
@@ -195,9 +182,7 @@ public class ReleaseModelImpl extends BaseModelImpl<Release> {
 	}
 
 	public void setVerified(boolean verified) {
-		if (verified != _verified) {
-			_verified = verified;
-		}
+		_verified = verified;
 	}
 
 	public Release toEscapedModel() {

@@ -162,9 +162,7 @@ public class WebsiteModelImpl extends BaseModelImpl<Website> {
 	}
 
 	public void setWebsiteId(long websiteId) {
-		if (websiteId != _websiteId) {
-			_websiteId = websiteId;
-		}
+		_websiteId = websiteId;
 	}
 
 	public long getCompanyId() {
@@ -172,9 +170,7 @@ public class WebsiteModelImpl extends BaseModelImpl<Website> {
 	}
 
 	public void setCompanyId(long companyId) {
-		if (companyId != _companyId) {
-			_companyId = companyId;
-		}
+		_companyId = companyId;
 	}
 
 	public long getUserId() {
@@ -182,9 +178,7 @@ public class WebsiteModelImpl extends BaseModelImpl<Website> {
 	}
 
 	public void setUserId(long userId) {
-		if (userId != _userId) {
-			_userId = userId;
-		}
+		_userId = userId;
 	}
 
 	public String getUserName() {
@@ -192,10 +186,7 @@ public class WebsiteModelImpl extends BaseModelImpl<Website> {
 	}
 
 	public void setUserName(String userName) {
-		if ((userName != _userName) ||
-				((userName != null) && !userName.equals(_userName))) {
-			_userName = userName;
-		}
+		_userName = userName;
 	}
 
 	public Date getCreateDate() {
@@ -203,10 +194,7 @@ public class WebsiteModelImpl extends BaseModelImpl<Website> {
 	}
 
 	public void setCreateDate(Date createDate) {
-		if ((createDate != _createDate) ||
-				((createDate != null) && !createDate.equals(_createDate))) {
-			_createDate = createDate;
-		}
+		_createDate = createDate;
 	}
 
 	public Date getModifiedDate() {
@@ -214,10 +202,7 @@ public class WebsiteModelImpl extends BaseModelImpl<Website> {
 	}
 
 	public void setModifiedDate(Date modifiedDate) {
-		if ((modifiedDate != _modifiedDate) ||
-				((modifiedDate != null) && !modifiedDate.equals(_modifiedDate))) {
-			_modifiedDate = modifiedDate;
-		}
+		_modifiedDate = modifiedDate;
 	}
 
 	public String getClassName() {
@@ -233,9 +218,7 @@ public class WebsiteModelImpl extends BaseModelImpl<Website> {
 	}
 
 	public void setClassNameId(long classNameId) {
-		if (classNameId != _classNameId) {
-			_classNameId = classNameId;
-		}
+		_classNameId = classNameId;
 	}
 
 	public long getClassPK() {
@@ -243,9 +226,7 @@ public class WebsiteModelImpl extends BaseModelImpl<Website> {
 	}
 
 	public void setClassPK(long classPK) {
-		if (classPK != _classPK) {
-			_classPK = classPK;
-		}
+		_classPK = classPK;
 	}
 
 	public String getUrl() {
@@ -253,9 +234,7 @@ public class WebsiteModelImpl extends BaseModelImpl<Website> {
 	}
 
 	public void setUrl(String url) {
-		if ((url != _url) || ((url != null) && !url.equals(_url))) {
-			_url = url;
-		}
+		_url = url;
 	}
 
 	public int getTypeId() {
@@ -263,9 +242,7 @@ public class WebsiteModelImpl extends BaseModelImpl<Website> {
 	}
 
 	public void setTypeId(int typeId) {
-		if (typeId != _typeId) {
-			_typeId = typeId;
-		}
+		_typeId = typeId;
 	}
 
 	public boolean getPrimary() {
@@ -277,9 +254,7 @@ public class WebsiteModelImpl extends BaseModelImpl<Website> {
 	}
 
 	public void setPrimary(boolean primary) {
-		if (primary != _primary) {
-			_primary = primary;
-		}
+		_primary = primary;
 	}
 
 	public Website toEscapedModel() {

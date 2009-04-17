@@ -280,6 +280,8 @@ public class PasswordPolicyPersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		boolean isNew = passwordPolicy.isNew();
 
+		PasswordPolicyModelImpl passwordPolicyModelImpl = (PasswordPolicyModelImpl)passwordPolicy;
+
 		Session session = null;
 
 		try {
@@ -301,8 +303,6 @@ public class PasswordPolicyPersistenceImpl extends BasePersistenceImpl
 		EntityCacheUtil.putResult(PasswordPolicyModelImpl.ENTITY_CACHE_ENABLED,
 			PasswordPolicyImpl.class, passwordPolicy.getPrimaryKey(),
 			passwordPolicy);
-
-		PasswordPolicyModelImpl passwordPolicyModelImpl = (PasswordPolicyModelImpl)passwordPolicy;
 
 		if (!isNew &&
 				((passwordPolicy.getCompanyId() != passwordPolicyModelImpl.getOriginalCompanyId()) ||

@@ -132,9 +132,7 @@ public class MBDiscussionModelImpl extends BaseModelImpl<MBDiscussion> {
 	}
 
 	public void setDiscussionId(long discussionId) {
-		if (discussionId != _discussionId) {
-			_discussionId = discussionId;
-		}
+		_discussionId = discussionId;
 	}
 
 	public String getClassName() {
@@ -150,14 +148,12 @@ public class MBDiscussionModelImpl extends BaseModelImpl<MBDiscussion> {
 	}
 
 	public void setClassNameId(long classNameId) {
-		if (classNameId != _classNameId) {
-			_classNameId = classNameId;
+		_classNameId = classNameId;
 
-			if (!_setOriginalClassNameId) {
-				_setOriginalClassNameId = true;
+		if (!_setOriginalClassNameId) {
+			_setOriginalClassNameId = true;
 
-				_originalClassNameId = classNameId;
-			}
+			_originalClassNameId = classNameId;
 		}
 	}
 
@@ -170,14 +166,12 @@ public class MBDiscussionModelImpl extends BaseModelImpl<MBDiscussion> {
 	}
 
 	public void setClassPK(long classPK) {
-		if (classPK != _classPK) {
-			_classPK = classPK;
+		_classPK = classPK;
 
-			if (!_setOriginalClassPK) {
-				_setOriginalClassPK = true;
+		if (!_setOriginalClassPK) {
+			_setOriginalClassPK = true;
 
-				_originalClassPK = classPK;
-			}
+			_originalClassPK = classPK;
 		}
 	}
 
@@ -190,14 +184,12 @@ public class MBDiscussionModelImpl extends BaseModelImpl<MBDiscussion> {
 	}
 
 	public void setThreadId(long threadId) {
-		if (threadId != _threadId) {
-			_threadId = threadId;
+		_threadId = threadId;
 
-			if (!_setOriginalThreadId) {
-				_setOriginalThreadId = true;
+		if (!_setOriginalThreadId) {
+			_setOriginalThreadId = true;
 
-				_originalThreadId = threadId;
-			}
+			_originalThreadId = threadId;
 		}
 	}
 

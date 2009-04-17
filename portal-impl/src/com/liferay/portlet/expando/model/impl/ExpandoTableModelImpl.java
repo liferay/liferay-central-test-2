@@ -131,9 +131,7 @@ public class ExpandoTableModelImpl extends BaseModelImpl<ExpandoTable> {
 	}
 
 	public void setTableId(long tableId) {
-		if (tableId != _tableId) {
-			_tableId = tableId;
-		}
+		_tableId = tableId;
 	}
 
 	public long getCompanyId() {
@@ -141,14 +139,12 @@ public class ExpandoTableModelImpl extends BaseModelImpl<ExpandoTable> {
 	}
 
 	public void setCompanyId(long companyId) {
-		if (companyId != _companyId) {
-			_companyId = companyId;
+		_companyId = companyId;
 
-			if (!_setOriginalCompanyId) {
-				_setOriginalCompanyId = true;
+		if (!_setOriginalCompanyId) {
+			_setOriginalCompanyId = true;
 
-				_originalCompanyId = companyId;
-			}
+			_originalCompanyId = companyId;
 		}
 	}
 
@@ -169,14 +165,12 @@ public class ExpandoTableModelImpl extends BaseModelImpl<ExpandoTable> {
 	}
 
 	public void setClassNameId(long classNameId) {
-		if (classNameId != _classNameId) {
-			_classNameId = classNameId;
+		_classNameId = classNameId;
 
-			if (!_setOriginalClassNameId) {
-				_setOriginalClassNameId = true;
+		if (!_setOriginalClassNameId) {
+			_setOriginalClassNameId = true;
 
-				_originalClassNameId = classNameId;
-			}
+			_originalClassNameId = classNameId;
 		}
 	}
 
@@ -189,12 +183,10 @@ public class ExpandoTableModelImpl extends BaseModelImpl<ExpandoTable> {
 	}
 
 	public void setName(String name) {
-		if ((name != _name) || ((name != null) && !name.equals(_name))) {
-			_name = name;
+		_name = name;
 
-			if (_originalName == null) {
-				_originalName = name;
-			}
+		if (_originalName == null) {
+			_originalName = name;
 		}
 	}
 

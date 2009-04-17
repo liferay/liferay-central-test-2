@@ -313,6 +313,8 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		boolean isNew = journalFeed.isNew();
 
+		JournalFeedModelImpl journalFeedModelImpl = (JournalFeedModelImpl)journalFeed;
+
 		if (Validator.isNull(journalFeed.getUuid())) {
 			String uuid = PortalUUIDUtil.generate();
 
@@ -339,8 +341,6 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl
 
 		EntityCacheUtil.putResult(JournalFeedModelImpl.ENTITY_CACHE_ENABLED,
 			JournalFeedImpl.class, journalFeed.getPrimaryKey(), journalFeed);
-
-		JournalFeedModelImpl journalFeedModelImpl = (JournalFeedModelImpl)journalFeed;
 
 		if (!isNew &&
 				(!journalFeed.getUuid()
@@ -435,12 +435,6 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public List<JournalFeed> findByUuid(String uuid) throws SystemException {
-		int count = countByUuid(uuid);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { uuid };
 
 		List<JournalFeed> list = (List<JournalFeed>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_UUID,
@@ -507,12 +501,6 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl
 
 	public List<JournalFeed> findByUuid(String uuid, int start, int end,
 		OrderByComparator obc) throws SystemException {
-		int count = countByUuid(uuid);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				uuid,
 				
@@ -811,12 +799,6 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl
 
 	public List<JournalFeed> findByGroupId(long groupId)
 		throws SystemException {
-		int count = countByGroupId(groupId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { new Long(groupId) };
 
 		List<JournalFeed> list = (List<JournalFeed>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_GROUPID,
@@ -876,12 +858,6 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl
 
 	public List<JournalFeed> findByGroupId(long groupId, int start, int end,
 		OrderByComparator obc) throws SystemException {
-		int count = countByGroupId(groupId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				

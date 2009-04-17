@@ -132,9 +132,7 @@ public class ShardModelImpl extends BaseModelImpl<Shard> {
 	}
 
 	public void setShardId(long shardId) {
-		if (shardId != _shardId) {
-			_shardId = shardId;
-		}
+		_shardId = shardId;
 	}
 
 	public String getClassName() {
@@ -150,14 +148,12 @@ public class ShardModelImpl extends BaseModelImpl<Shard> {
 	}
 
 	public void setClassNameId(long classNameId) {
-		if (classNameId != _classNameId) {
-			_classNameId = classNameId;
+		_classNameId = classNameId;
 
-			if (!_setOriginalClassNameId) {
-				_setOriginalClassNameId = true;
+		if (!_setOriginalClassNameId) {
+			_setOriginalClassNameId = true;
 
-				_originalClassNameId = classNameId;
-			}
+			_originalClassNameId = classNameId;
 		}
 	}
 
@@ -170,14 +166,12 @@ public class ShardModelImpl extends BaseModelImpl<Shard> {
 	}
 
 	public void setClassPK(long classPK) {
-		if (classPK != _classPK) {
-			_classPK = classPK;
+		_classPK = classPK;
 
-			if (!_setOriginalClassPK) {
-				_setOriginalClassPK = true;
+		if (!_setOriginalClassPK) {
+			_setOriginalClassPK = true;
 
-				_originalClassPK = classPK;
-			}
+			_originalClassPK = classPK;
 		}
 	}
 
@@ -190,12 +184,10 @@ public class ShardModelImpl extends BaseModelImpl<Shard> {
 	}
 
 	public void setName(String name) {
-		if ((name != _name) || ((name != null) && !name.equals(_name))) {
-			_name = name;
+		_name = name;
 
-			if (_originalName == null) {
-				_originalName = name;
-			}
+		if (_originalName == null) {
+			_originalName = name;
 		}
 	}
 

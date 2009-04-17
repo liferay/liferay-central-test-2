@@ -190,9 +190,7 @@ public class AddressModelImpl extends BaseModelImpl<Address> {
 	}
 
 	public void setAddressId(long addressId) {
-		if (addressId != _addressId) {
-			_addressId = addressId;
-		}
+		_addressId = addressId;
 	}
 
 	public long getCompanyId() {
@@ -200,9 +198,7 @@ public class AddressModelImpl extends BaseModelImpl<Address> {
 	}
 
 	public void setCompanyId(long companyId) {
-		if (companyId != _companyId) {
-			_companyId = companyId;
-		}
+		_companyId = companyId;
 	}
 
 	public long getUserId() {
@@ -210,9 +206,7 @@ public class AddressModelImpl extends BaseModelImpl<Address> {
 	}
 
 	public void setUserId(long userId) {
-		if (userId != _userId) {
-			_userId = userId;
-		}
+		_userId = userId;
 	}
 
 	public String getUserName() {
@@ -220,10 +214,7 @@ public class AddressModelImpl extends BaseModelImpl<Address> {
 	}
 
 	public void setUserName(String userName) {
-		if ((userName != _userName) ||
-				((userName != null) && !userName.equals(_userName))) {
-			_userName = userName;
-		}
+		_userName = userName;
 	}
 
 	public Date getCreateDate() {
@@ -231,10 +222,7 @@ public class AddressModelImpl extends BaseModelImpl<Address> {
 	}
 
 	public void setCreateDate(Date createDate) {
-		if ((createDate != _createDate) ||
-				((createDate != null) && !createDate.equals(_createDate))) {
-			_createDate = createDate;
-		}
+		_createDate = createDate;
 	}
 
 	public Date getModifiedDate() {
@@ -242,10 +230,7 @@ public class AddressModelImpl extends BaseModelImpl<Address> {
 	}
 
 	public void setModifiedDate(Date modifiedDate) {
-		if ((modifiedDate != _modifiedDate) ||
-				((modifiedDate != null) && !modifiedDate.equals(_modifiedDate))) {
-			_modifiedDate = modifiedDate;
-		}
+		_modifiedDate = modifiedDate;
 	}
 
 	public String getClassName() {
@@ -261,9 +246,7 @@ public class AddressModelImpl extends BaseModelImpl<Address> {
 	}
 
 	public void setClassNameId(long classNameId) {
-		if (classNameId != _classNameId) {
-			_classNameId = classNameId;
-		}
+		_classNameId = classNameId;
 	}
 
 	public long getClassPK() {
@@ -271,9 +254,7 @@ public class AddressModelImpl extends BaseModelImpl<Address> {
 	}
 
 	public void setClassPK(long classPK) {
-		if (classPK != _classPK) {
-			_classPK = classPK;
-		}
+		_classPK = classPK;
 	}
 
 	public String getStreet1() {
@@ -281,10 +262,7 @@ public class AddressModelImpl extends BaseModelImpl<Address> {
 	}
 
 	public void setStreet1(String street1) {
-		if ((street1 != _street1) ||
-				((street1 != null) && !street1.equals(_street1))) {
-			_street1 = street1;
-		}
+		_street1 = street1;
 	}
 
 	public String getStreet2() {
@@ -292,10 +270,7 @@ public class AddressModelImpl extends BaseModelImpl<Address> {
 	}
 
 	public void setStreet2(String street2) {
-		if ((street2 != _street2) ||
-				((street2 != null) && !street2.equals(_street2))) {
-			_street2 = street2;
-		}
+		_street2 = street2;
 	}
 
 	public String getStreet3() {
@@ -303,10 +278,7 @@ public class AddressModelImpl extends BaseModelImpl<Address> {
 	}
 
 	public void setStreet3(String street3) {
-		if ((street3 != _street3) ||
-				((street3 != null) && !street3.equals(_street3))) {
-			_street3 = street3;
-		}
+		_street3 = street3;
 	}
 
 	public String getCity() {
@@ -314,9 +286,7 @@ public class AddressModelImpl extends BaseModelImpl<Address> {
 	}
 
 	public void setCity(String city) {
-		if ((city != _city) || ((city != null) && !city.equals(_city))) {
-			_city = city;
-		}
+		_city = city;
 	}
 
 	public String getZip() {
@@ -324,9 +294,7 @@ public class AddressModelImpl extends BaseModelImpl<Address> {
 	}
 
 	public void setZip(String zip) {
-		if ((zip != _zip) || ((zip != null) && !zip.equals(_zip))) {
-			_zip = zip;
-		}
+		_zip = zip;
 	}
 
 	public long getRegionId() {
@@ -334,9 +302,7 @@ public class AddressModelImpl extends BaseModelImpl<Address> {
 	}
 
 	public void setRegionId(long regionId) {
-		if (regionId != _regionId) {
-			_regionId = regionId;
-		}
+		_regionId = regionId;
 	}
 
 	public long getCountryId() {
@@ -344,9 +310,7 @@ public class AddressModelImpl extends BaseModelImpl<Address> {
 	}
 
 	public void setCountryId(long countryId) {
-		if (countryId != _countryId) {
-			_countryId = countryId;
-		}
+		_countryId = countryId;
 	}
 
 	public int getTypeId() {
@@ -354,9 +318,7 @@ public class AddressModelImpl extends BaseModelImpl<Address> {
 	}
 
 	public void setTypeId(int typeId) {
-		if (typeId != _typeId) {
-			_typeId = typeId;
-		}
+		_typeId = typeId;
 	}
 
 	public boolean getMailing() {
@@ -368,9 +330,7 @@ public class AddressModelImpl extends BaseModelImpl<Address> {
 	}
 
 	public void setMailing(boolean mailing) {
-		if (mailing != _mailing) {
-			_mailing = mailing;
-		}
+		_mailing = mailing;
 	}
 
 	public boolean getPrimary() {
@@ -382,9 +342,7 @@ public class AddressModelImpl extends BaseModelImpl<Address> {
 	}
 
 	public void setPrimary(boolean primary) {
-		if (primary != _primary) {
-			_primary = primary;
-		}
+		_primary = primary;
 	}
 
 	public Address toEscapedModel() {

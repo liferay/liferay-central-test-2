@@ -343,6 +343,8 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl
 		boolean merge) throws SystemException {
 		boolean isNew = journalArticleImage.isNew();
 
+		JournalArticleImageModelImpl journalArticleImageModelImpl = (JournalArticleImageModelImpl)journalArticleImage;
+
 		Session session = null;
 
 		try {
@@ -364,8 +366,6 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl
 		EntityCacheUtil.putResult(JournalArticleImageModelImpl.ENTITY_CACHE_ENABLED,
 			JournalArticleImageImpl.class, journalArticleImage.getPrimaryKey(),
 			journalArticleImage);
-
-		JournalArticleImageModelImpl journalArticleImageModelImpl = (JournalArticleImageModelImpl)journalArticleImage;
 
 		if (!isNew &&
 				((journalArticleImage.getGroupId() != journalArticleImageModelImpl.getOriginalGroupId()) ||
@@ -471,12 +471,6 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl
 
 	public List<JournalArticleImage> findByGroupId(long groupId)
 		throws SystemException {
-		int count = countByGroupId(groupId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { new Long(groupId) };
 
 		List<JournalArticleImage> list = (List<JournalArticleImage>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_GROUPID,
@@ -532,12 +526,6 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl
 
 	public List<JournalArticleImage> findByGroupId(long groupId, int start,
 		int end, OrderByComparator obc) throws SystemException {
-		int count = countByGroupId(groupId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				
@@ -694,12 +682,6 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl
 
 	public List<JournalArticleImage> findByTempImage(boolean tempImage)
 		throws SystemException {
-		int count = countByTempImage(tempImage);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { Boolean.valueOf(tempImage) };
 
 		List<JournalArticleImage> list = (List<JournalArticleImage>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_TEMPIMAGE,
@@ -755,12 +737,6 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl
 
 	public List<JournalArticleImage> findByTempImage(boolean tempImage,
 		int start, int end, OrderByComparator obc) throws SystemException {
-		int count = countByTempImage(tempImage);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				Boolean.valueOf(tempImage),
 				
@@ -917,12 +893,6 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl
 
 	public List<JournalArticleImage> findByG_A_V(long groupId,
 		String articleId, double version) throws SystemException {
-		int count = countByG_A_V(groupId, articleId, version);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				
@@ -1003,12 +973,6 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl
 	public List<JournalArticleImage> findByG_A_V(long groupId,
 		String articleId, double version, int start, int end,
 		OrderByComparator obc) throws SystemException {
-		int count = countByG_A_V(groupId, articleId, version);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				

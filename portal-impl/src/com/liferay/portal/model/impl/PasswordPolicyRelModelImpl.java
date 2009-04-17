@@ -132,9 +132,7 @@ public class PasswordPolicyRelModelImpl extends BaseModelImpl<PasswordPolicyRel>
 	}
 
 	public void setPasswordPolicyRelId(long passwordPolicyRelId) {
-		if (passwordPolicyRelId != _passwordPolicyRelId) {
-			_passwordPolicyRelId = passwordPolicyRelId;
-		}
+		_passwordPolicyRelId = passwordPolicyRelId;
 	}
 
 	public long getPasswordPolicyId() {
@@ -142,14 +140,12 @@ public class PasswordPolicyRelModelImpl extends BaseModelImpl<PasswordPolicyRel>
 	}
 
 	public void setPasswordPolicyId(long passwordPolicyId) {
-		if (passwordPolicyId != _passwordPolicyId) {
-			_passwordPolicyId = passwordPolicyId;
+		_passwordPolicyId = passwordPolicyId;
 
-			if (!_setOriginalPasswordPolicyId) {
-				_setOriginalPasswordPolicyId = true;
+		if (!_setOriginalPasswordPolicyId) {
+			_setOriginalPasswordPolicyId = true;
 
-				_originalPasswordPolicyId = passwordPolicyId;
-			}
+			_originalPasswordPolicyId = passwordPolicyId;
 		}
 	}
 
@@ -170,14 +166,12 @@ public class PasswordPolicyRelModelImpl extends BaseModelImpl<PasswordPolicyRel>
 	}
 
 	public void setClassNameId(long classNameId) {
-		if (classNameId != _classNameId) {
-			_classNameId = classNameId;
+		_classNameId = classNameId;
 
-			if (!_setOriginalClassNameId) {
-				_setOriginalClassNameId = true;
+		if (!_setOriginalClassNameId) {
+			_setOriginalClassNameId = true;
 
-				_originalClassNameId = classNameId;
-			}
+			_originalClassNameId = classNameId;
 		}
 	}
 
@@ -190,14 +184,12 @@ public class PasswordPolicyRelModelImpl extends BaseModelImpl<PasswordPolicyRel>
 	}
 
 	public void setClassPK(long classPK) {
-		if (classPK != _classPK) {
-			_classPK = classPK;
+		_classPK = classPK;
 
-			if (!_setOriginalClassPK) {
-				_setOriginalClassPK = true;
+		if (!_setOriginalClassPK) {
+			_setOriginalClassPK = true;
 
-				_originalClassPK = classPK;
-			}
+			_originalClassPK = classPK;
 		}
 	}
 

@@ -166,9 +166,7 @@ public class LayoutSetModelImpl extends BaseModelImpl<LayoutSet> {
 	}
 
 	public void setLayoutSetId(long layoutSetId) {
-		if (layoutSetId != _layoutSetId) {
-			_layoutSetId = layoutSetId;
-		}
+		_layoutSetId = layoutSetId;
 	}
 
 	public long getGroupId() {
@@ -176,14 +174,12 @@ public class LayoutSetModelImpl extends BaseModelImpl<LayoutSet> {
 	}
 
 	public void setGroupId(long groupId) {
-		if (groupId != _groupId) {
-			_groupId = groupId;
+		_groupId = groupId;
 
-			if (!_setOriginalGroupId) {
-				_setOriginalGroupId = true;
+		if (!_setOriginalGroupId) {
+			_setOriginalGroupId = true;
 
-				_originalGroupId = groupId;
-			}
+			_originalGroupId = groupId;
 		}
 	}
 
@@ -196,9 +192,7 @@ public class LayoutSetModelImpl extends BaseModelImpl<LayoutSet> {
 	}
 
 	public void setCompanyId(long companyId) {
-		if (companyId != _companyId) {
-			_companyId = companyId;
-		}
+		_companyId = companyId;
 	}
 
 	public boolean getPrivateLayout() {
@@ -210,14 +204,12 @@ public class LayoutSetModelImpl extends BaseModelImpl<LayoutSet> {
 	}
 
 	public void setPrivateLayout(boolean privateLayout) {
-		if (privateLayout != _privateLayout) {
-			_privateLayout = privateLayout;
+		_privateLayout = privateLayout;
 
-			if (!_setOriginalPrivateLayout) {
-				_setOriginalPrivateLayout = true;
+		if (!_setOriginalPrivateLayout) {
+			_setOriginalPrivateLayout = true;
 
-				_originalPrivateLayout = privateLayout;
-			}
+			_originalPrivateLayout = privateLayout;
 		}
 	}
 
@@ -234,9 +226,7 @@ public class LayoutSetModelImpl extends BaseModelImpl<LayoutSet> {
 	}
 
 	public void setLogo(boolean logo) {
-		if (logo != _logo) {
-			_logo = logo;
-		}
+		_logo = logo;
 	}
 
 	public long getLogoId() {
@@ -244,9 +234,7 @@ public class LayoutSetModelImpl extends BaseModelImpl<LayoutSet> {
 	}
 
 	public void setLogoId(long logoId) {
-		if (logoId != _logoId) {
-			_logoId = logoId;
-		}
+		_logoId = logoId;
 	}
 
 	public String getThemeId() {
@@ -254,10 +242,7 @@ public class LayoutSetModelImpl extends BaseModelImpl<LayoutSet> {
 	}
 
 	public void setThemeId(String themeId) {
-		if ((themeId != _themeId) ||
-				((themeId != null) && !themeId.equals(_themeId))) {
-			_themeId = themeId;
-		}
+		_themeId = themeId;
 	}
 
 	public String getColorSchemeId() {
@@ -265,11 +250,7 @@ public class LayoutSetModelImpl extends BaseModelImpl<LayoutSet> {
 	}
 
 	public void setColorSchemeId(String colorSchemeId) {
-		if ((colorSchemeId != _colorSchemeId) ||
-				((colorSchemeId != null) &&
-				!colorSchemeId.equals(_colorSchemeId))) {
-			_colorSchemeId = colorSchemeId;
-		}
+		_colorSchemeId = colorSchemeId;
 	}
 
 	public String getWapThemeId() {
@@ -277,10 +258,7 @@ public class LayoutSetModelImpl extends BaseModelImpl<LayoutSet> {
 	}
 
 	public void setWapThemeId(String wapThemeId) {
-		if ((wapThemeId != _wapThemeId) ||
-				((wapThemeId != null) && !wapThemeId.equals(_wapThemeId))) {
-			_wapThemeId = wapThemeId;
-		}
+		_wapThemeId = wapThemeId;
 	}
 
 	public String getWapColorSchemeId() {
@@ -288,11 +266,7 @@ public class LayoutSetModelImpl extends BaseModelImpl<LayoutSet> {
 	}
 
 	public void setWapColorSchemeId(String wapColorSchemeId) {
-		if ((wapColorSchemeId != _wapColorSchemeId) ||
-				((wapColorSchemeId != null) &&
-				!wapColorSchemeId.equals(_wapColorSchemeId))) {
-			_wapColorSchemeId = wapColorSchemeId;
-		}
+		_wapColorSchemeId = wapColorSchemeId;
 	}
 
 	public String getCss() {
@@ -300,9 +274,7 @@ public class LayoutSetModelImpl extends BaseModelImpl<LayoutSet> {
 	}
 
 	public void setCss(String css) {
-		if ((css != _css) || ((css != null) && !css.equals(_css))) {
-			_css = css;
-		}
+		_css = css;
 	}
 
 	public int getPageCount() {
@@ -310,9 +282,7 @@ public class LayoutSetModelImpl extends BaseModelImpl<LayoutSet> {
 	}
 
 	public void setPageCount(int pageCount) {
-		if (pageCount != _pageCount) {
-			_pageCount = pageCount;
-		}
+		_pageCount = pageCount;
 	}
 
 	public String getVirtualHost() {
@@ -320,13 +290,10 @@ public class LayoutSetModelImpl extends BaseModelImpl<LayoutSet> {
 	}
 
 	public void setVirtualHost(String virtualHost) {
-		if ((virtualHost != _virtualHost) ||
-				((virtualHost != null) && !virtualHost.equals(_virtualHost))) {
-			_virtualHost = virtualHost;
+		_virtualHost = virtualHost;
 
-			if (_originalVirtualHost == null) {
-				_originalVirtualHost = virtualHost;
-			}
+		if (_originalVirtualHost == null) {
+			_originalVirtualHost = virtualHost;
 		}
 	}
 

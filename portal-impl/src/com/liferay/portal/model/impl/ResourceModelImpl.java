@@ -126,9 +126,7 @@ public class ResourceModelImpl extends BaseModelImpl<Resource> {
 	}
 
 	public void setResourceId(long resourceId) {
-		if (resourceId != _resourceId) {
-			_resourceId = resourceId;
-		}
+		_resourceId = resourceId;
 	}
 
 	public long getCodeId() {
@@ -136,14 +134,12 @@ public class ResourceModelImpl extends BaseModelImpl<Resource> {
 	}
 
 	public void setCodeId(long codeId) {
-		if (codeId != _codeId) {
-			_codeId = codeId;
+		_codeId = codeId;
 
-			if (!_setOriginalCodeId) {
-				_setOriginalCodeId = true;
+		if (!_setOriginalCodeId) {
+			_setOriginalCodeId = true;
 
-				_originalCodeId = codeId;
-			}
+			_originalCodeId = codeId;
 		}
 	}
 
@@ -156,13 +152,10 @@ public class ResourceModelImpl extends BaseModelImpl<Resource> {
 	}
 
 	public void setPrimKey(String primKey) {
-		if ((primKey != _primKey) ||
-				((primKey != null) && !primKey.equals(_primKey))) {
-			_primKey = primKey;
+		_primKey = primKey;
 
-			if (_originalPrimKey == null) {
-				_originalPrimKey = primKey;
-			}
+		if (_originalPrimKey == null) {
+			_originalPrimKey = primKey;
 		}
 	}
 

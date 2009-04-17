@@ -258,6 +258,8 @@ public class ShardPersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		boolean isNew = shard.isNew();
 
+		ShardModelImpl shardModelImpl = (ShardModelImpl)shard;
+
 		Session session = null;
 
 		try {
@@ -278,8 +280,6 @@ public class ShardPersistenceImpl extends BasePersistenceImpl
 
 		EntityCacheUtil.putResult(ShardModelImpl.ENTITY_CACHE_ENABLED,
 			ShardImpl.class, shard.getPrimaryKey(), shard);
-
-		ShardModelImpl shardModelImpl = (ShardModelImpl)shard;
 
 		if (!isNew &&
 				(!shard.getName().equals(shardModelImpl.getOriginalName()))) {

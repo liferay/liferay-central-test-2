@@ -286,6 +286,8 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		boolean isNew = pluginSetting.isNew();
 
+		PluginSettingModelImpl pluginSettingModelImpl = (PluginSettingModelImpl)pluginSetting;
+
 		Session session = null;
 
 		try {
@@ -307,8 +309,6 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl
 		EntityCacheUtil.putResult(PluginSettingModelImpl.ENTITY_CACHE_ENABLED,
 			PluginSettingImpl.class, pluginSetting.getPrimaryKey(),
 			pluginSetting);
-
-		PluginSettingModelImpl pluginSettingModelImpl = (PluginSettingModelImpl)pluginSetting;
 
 		if (!isNew &&
 				((pluginSetting.getCompanyId() != pluginSettingModelImpl.getOriginalCompanyId()) ||
@@ -394,12 +394,6 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl
 
 	public List<PluginSetting> findByCompanyId(long companyId)
 		throws SystemException {
-		int count = countByCompanyId(companyId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { new Long(companyId) };
 
 		List<PluginSetting> list = (List<PluginSetting>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_COMPANYID,
@@ -455,12 +449,6 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl
 
 	public List<PluginSetting> findByCompanyId(long companyId, int start,
 		int end, OrderByComparator obc) throws SystemException {
-		int count = countByCompanyId(companyId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(companyId),
 				

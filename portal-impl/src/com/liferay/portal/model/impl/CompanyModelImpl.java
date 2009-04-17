@@ -146,9 +146,7 @@ public class CompanyModelImpl extends BaseModelImpl<Company> {
 	}
 
 	public void setCompanyId(long companyId) {
-		if (companyId != _companyId) {
-			_companyId = companyId;
-		}
+		_companyId = companyId;
 	}
 
 	public long getAccountId() {
@@ -156,9 +154,7 @@ public class CompanyModelImpl extends BaseModelImpl<Company> {
 	}
 
 	public void setAccountId(long accountId) {
-		if (accountId != _accountId) {
-			_accountId = accountId;
-		}
+		_accountId = accountId;
 	}
 
 	public String getWebId() {
@@ -166,12 +162,10 @@ public class CompanyModelImpl extends BaseModelImpl<Company> {
 	}
 
 	public void setWebId(String webId) {
-		if ((webId != _webId) || ((webId != null) && !webId.equals(_webId))) {
-			_webId = webId;
+		_webId = webId;
 
-			if (_originalWebId == null) {
-				_originalWebId = webId;
-			}
+		if (_originalWebId == null) {
+			_originalWebId = webId;
 		}
 	}
 
@@ -184,9 +178,7 @@ public class CompanyModelImpl extends BaseModelImpl<Company> {
 	}
 
 	public void setKey(String key) {
-		if ((key != _key) || ((key != null) && !key.equals(_key))) {
-			_key = key;
-		}
+		_key = key;
 	}
 
 	public String getVirtualHost() {
@@ -194,13 +186,10 @@ public class CompanyModelImpl extends BaseModelImpl<Company> {
 	}
 
 	public void setVirtualHost(String virtualHost) {
-		if ((virtualHost != _virtualHost) ||
-				((virtualHost != null) && !virtualHost.equals(_virtualHost))) {
-			_virtualHost = virtualHost;
+		_virtualHost = virtualHost;
 
-			if (_originalVirtualHost == null) {
-				_originalVirtualHost = virtualHost;
-			}
+		if (_originalVirtualHost == null) {
+			_originalVirtualHost = virtualHost;
 		}
 	}
 
@@ -213,12 +202,10 @@ public class CompanyModelImpl extends BaseModelImpl<Company> {
 	}
 
 	public void setMx(String mx) {
-		if ((mx != _mx) || ((mx != null) && !mx.equals(_mx))) {
-			_mx = mx;
+		_mx = mx;
 
-			if (_originalMx == null) {
-				_originalMx = mx;
-			}
+		if (_originalMx == null) {
+			_originalMx = mx;
 		}
 	}
 
@@ -231,10 +218,7 @@ public class CompanyModelImpl extends BaseModelImpl<Company> {
 	}
 
 	public void setHomeURL(String homeURL) {
-		if ((homeURL != _homeURL) ||
-				((homeURL != null) && !homeURL.equals(_homeURL))) {
-			_homeURL = homeURL;
-		}
+		_homeURL = homeURL;
 	}
 
 	public long getLogoId() {
@@ -242,14 +226,12 @@ public class CompanyModelImpl extends BaseModelImpl<Company> {
 	}
 
 	public void setLogoId(long logoId) {
-		if (logoId != _logoId) {
-			_logoId = logoId;
+		_logoId = logoId;
 
-			if (!_setOriginalLogoId) {
-				_setOriginalLogoId = true;
+		if (!_setOriginalLogoId) {
+			_setOriginalLogoId = true;
 
-				_originalLogoId = logoId;
-			}
+			_originalLogoId = logoId;
 		}
 	}
 

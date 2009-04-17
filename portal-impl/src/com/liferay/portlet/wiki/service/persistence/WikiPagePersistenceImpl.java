@@ -429,6 +429,8 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		boolean isNew = wikiPage.isNew();
 
+		WikiPageModelImpl wikiPageModelImpl = (WikiPageModelImpl)wikiPage;
+
 		if (Validator.isNull(wikiPage.getUuid())) {
 			String uuid = PortalUUIDUtil.generate();
 
@@ -455,8 +457,6 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 
 		EntityCacheUtil.putResult(WikiPageModelImpl.ENTITY_CACHE_ENABLED,
 			WikiPageImpl.class, wikiPage.getPrimaryKey(), wikiPage);
-
-		WikiPageModelImpl wikiPageModelImpl = (WikiPageModelImpl)wikiPage;
 
 		if (!isNew &&
 				((wikiPage.getNodeId() != wikiPageModelImpl.getOriginalNodeId()) ||
@@ -531,12 +531,6 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 	}
 
 	public List<WikiPage> findByUuid(String uuid) throws SystemException {
-		int count = countByUuid(uuid);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { uuid };
 
 		List<WikiPage> list = (List<WikiPage>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_UUID,
@@ -605,12 +599,6 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 
 	public List<WikiPage> findByUuid(String uuid, int start, int end,
 		OrderByComparator obc) throws SystemException {
-		int count = countByUuid(uuid);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				uuid,
 				
@@ -790,12 +778,6 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 	}
 
 	public List<WikiPage> findByNodeId(long nodeId) throws SystemException {
-		int count = countByNodeId(nodeId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { new Long(nodeId) };
 
 		List<WikiPage> list = (List<WikiPage>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_NODEID,
@@ -857,12 +839,6 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 
 	public List<WikiPage> findByNodeId(long nodeId, int start, int end,
 		OrderByComparator obc) throws SystemException {
-		int count = countByNodeId(nodeId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(nodeId),
 				
@@ -1028,12 +1004,6 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 	}
 
 	public List<WikiPage> findByFormat(String format) throws SystemException {
-		int count = countByFormat(format);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { format };
 
 		List<WikiPage> list = (List<WikiPage>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_FORMAT,
@@ -1102,12 +1072,6 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 
 	public List<WikiPage> findByFormat(String format, int start, int end,
 		OrderByComparator obc) throws SystemException {
-		int count = countByFormat(format);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				format,
 				
@@ -1288,12 +1252,6 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 
 	public List<WikiPage> findByN_T(long nodeId, String title)
 		throws SystemException {
-		int count = countByN_T(nodeId, title);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { new Long(nodeId), title };
 
 		List<WikiPage> list = (List<WikiPage>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_N_T,
@@ -1368,12 +1326,6 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 
 	public List<WikiPage> findByN_T(long nodeId, String title, int start,
 		int end, OrderByComparator obc) throws SystemException {
-		int count = countByN_T(nodeId, title);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(nodeId),
 				
@@ -1575,12 +1527,6 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 
 	public List<WikiPage> findByN_H(long nodeId, boolean head)
 		throws SystemException {
-		int count = countByN_H(nodeId, head);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(nodeId), Boolean.valueOf(head)
 			};
@@ -1650,12 +1596,6 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 
 	public List<WikiPage> findByN_H(long nodeId, boolean head, int start,
 		int end, OrderByComparator obc) throws SystemException {
-		int count = countByN_H(nodeId, head);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(nodeId), Boolean.valueOf(head),
 				
@@ -1841,12 +1781,6 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 
 	public List<WikiPage> findByN_P(long nodeId, String parentTitle)
 		throws SystemException {
-		int count = countByN_P(nodeId, parentTitle);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { new Long(nodeId), parentTitle };
 
 		List<WikiPage> list = (List<WikiPage>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_N_P,
@@ -1921,12 +1855,6 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 
 	public List<WikiPage> findByN_P(long nodeId, String parentTitle, int start,
 		int end, OrderByComparator obc) throws SystemException {
-		int count = countByN_P(nodeId, parentTitle);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(nodeId),
 				
@@ -2129,12 +2057,6 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 
 	public List<WikiPage> findByN_R(long nodeId, String redirectTitle)
 		throws SystemException {
-		int count = countByN_R(nodeId, redirectTitle);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { new Long(nodeId), redirectTitle };
 
 		List<WikiPage> list = (List<WikiPage>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_N_R,
@@ -2209,12 +2131,6 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 
 	public List<WikiPage> findByN_R(long nodeId, String redirectTitle,
 		int start, int end, OrderByComparator obc) throws SystemException {
-		int count = countByN_R(nodeId, redirectTitle);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(nodeId),
 				
@@ -2552,12 +2468,6 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 
 	public List<WikiPage> findByN_T_H(long nodeId, String title, boolean head)
 		throws SystemException {
-		int count = countByN_T_H(nodeId, title, head);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(nodeId),
 				
@@ -2642,12 +2552,6 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 
 	public List<WikiPage> findByN_T_H(long nodeId, String title, boolean head,
 		int start, int end, OrderByComparator obc) throws SystemException {
-		int count = countByN_T_H(nodeId, title, head);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(nodeId),
 				
@@ -2868,12 +2772,6 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 
 	public List<WikiPage> findByN_H_P(long nodeId, boolean head,
 		String parentTitle) throws SystemException {
-		int count = countByN_H_P(nodeId, head, parentTitle);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(nodeId), Boolean.valueOf(head),
 				
@@ -2959,12 +2857,6 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 	public List<WikiPage> findByN_H_P(long nodeId, boolean head,
 		String parentTitle, int start, int end, OrderByComparator obc)
 		throws SystemException {
-		int count = countByN_H_P(nodeId, head, parentTitle);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(nodeId), Boolean.valueOf(head),
 				

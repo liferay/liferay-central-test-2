@@ -306,6 +306,8 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		boolean isNew = permission.isNew();
 
+		PermissionModelImpl permissionModelImpl = (PermissionModelImpl)permission;
+
 		Session session = null;
 
 		try {
@@ -326,8 +328,6 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 
 		EntityCacheUtil.putResult(PermissionModelImpl.ENTITY_CACHE_ENABLED,
 			PermissionImpl.class, permission.getPrimaryKey(), permission);
-
-		PermissionModelImpl permissionModelImpl = (PermissionModelImpl)permission;
 
 		if (!isNew &&
 				(!permission.getActionId()
@@ -402,12 +402,6 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 
 	public List<Permission> findByResourceId(long resourceId)
 		throws SystemException {
-		int count = countByResourceId(resourceId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { new Long(resourceId) };
 
 		List<Permission> list = (List<Permission>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_RESOURCEID,
@@ -462,12 +456,6 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 
 	public List<Permission> findByResourceId(long resourceId, int start,
 		int end, OrderByComparator obc) throws SystemException {
-		int count = countByResourceId(resourceId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(resourceId),
 				

@@ -319,6 +319,8 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		boolean isNew = subscription.isNew();
 
+		SubscriptionModelImpl subscriptionModelImpl = (SubscriptionModelImpl)subscription;
+
 		Session session = null;
 
 		try {
@@ -339,8 +341,6 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl
 
 		EntityCacheUtil.putResult(SubscriptionModelImpl.ENTITY_CACHE_ENABLED,
 			SubscriptionImpl.class, subscription.getPrimaryKey(), subscription);
-
-		SubscriptionModelImpl subscriptionModelImpl = (SubscriptionModelImpl)subscription;
 
 		if (!isNew &&
 				((subscription.getCompanyId() != subscriptionModelImpl.getOriginalCompanyId()) ||
@@ -422,12 +422,6 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl
 
 	public List<Subscription> findByUserId(long userId)
 		throws SystemException {
-		int count = countByUserId(userId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { new Long(userId) };
 
 		List<Subscription> list = (List<Subscription>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_USERID,
@@ -483,12 +477,6 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl
 
 	public List<Subscription> findByUserId(long userId, int start, int end,
 		OrderByComparator obc) throws SystemException {
-		int count = countByUserId(userId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(userId),
 				
@@ -641,12 +629,6 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl
 
 	public List<Subscription> findByU_C(long userId, long classNameId)
 		throws SystemException {
-		int count = countByU_C(userId, classNameId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(userId), new Long(classNameId)
 			};
@@ -710,12 +692,6 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl
 
 	public List<Subscription> findByU_C(long userId, long classNameId,
 		int start, int end, OrderByComparator obc) throws SystemException {
-		int count = countByU_C(userId, classNameId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(userId), new Long(classNameId),
 				
@@ -889,12 +865,6 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl
 
 	public List<Subscription> findByC_C_C(long companyId, long classNameId,
 		long classPK) throws SystemException {
-		int count = countByC_C_C(companyId, classNameId, classPK);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(companyId), new Long(classNameId), new Long(classPK)
 			};
@@ -965,12 +935,6 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl
 	public List<Subscription> findByC_C_C(long companyId, long classNameId,
 		long classPK, int start, int end, OrderByComparator obc)
 		throws SystemException {
-		int count = countByC_C_C(companyId, classNameId, classPK);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(companyId), new Long(classNameId), new Long(classPK),
 				

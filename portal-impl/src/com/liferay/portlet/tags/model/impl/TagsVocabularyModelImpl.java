@@ -156,9 +156,7 @@ public class TagsVocabularyModelImpl extends BaseModelImpl<TagsVocabulary> {
 	}
 
 	public void setVocabularyId(long vocabularyId) {
-		if (vocabularyId != _vocabularyId) {
-			_vocabularyId = vocabularyId;
-		}
+		_vocabularyId = vocabularyId;
 	}
 
 	public long getGroupId() {
@@ -166,14 +164,12 @@ public class TagsVocabularyModelImpl extends BaseModelImpl<TagsVocabulary> {
 	}
 
 	public void setGroupId(long groupId) {
-		if (groupId != _groupId) {
-			_groupId = groupId;
+		_groupId = groupId;
 
-			if (!_setOriginalGroupId) {
-				_setOriginalGroupId = true;
+		if (!_setOriginalGroupId) {
+			_setOriginalGroupId = true;
 
-				_originalGroupId = groupId;
-			}
+			_originalGroupId = groupId;
 		}
 	}
 
@@ -186,9 +182,7 @@ public class TagsVocabularyModelImpl extends BaseModelImpl<TagsVocabulary> {
 	}
 
 	public void setCompanyId(long companyId) {
-		if (companyId != _companyId) {
-			_companyId = companyId;
-		}
+		_companyId = companyId;
 	}
 
 	public long getUserId() {
@@ -196,9 +190,7 @@ public class TagsVocabularyModelImpl extends BaseModelImpl<TagsVocabulary> {
 	}
 
 	public void setUserId(long userId) {
-		if (userId != _userId) {
-			_userId = userId;
-		}
+		_userId = userId;
 	}
 
 	public String getUserName() {
@@ -206,10 +198,7 @@ public class TagsVocabularyModelImpl extends BaseModelImpl<TagsVocabulary> {
 	}
 
 	public void setUserName(String userName) {
-		if ((userName != _userName) ||
-				((userName != null) && !userName.equals(_userName))) {
-			_userName = userName;
-		}
+		_userName = userName;
 	}
 
 	public Date getCreateDate() {
@@ -217,10 +206,7 @@ public class TagsVocabularyModelImpl extends BaseModelImpl<TagsVocabulary> {
 	}
 
 	public void setCreateDate(Date createDate) {
-		if ((createDate != _createDate) ||
-				((createDate != null) && !createDate.equals(_createDate))) {
-			_createDate = createDate;
-		}
+		_createDate = createDate;
 	}
 
 	public Date getModifiedDate() {
@@ -228,10 +214,7 @@ public class TagsVocabularyModelImpl extends BaseModelImpl<TagsVocabulary> {
 	}
 
 	public void setModifiedDate(Date modifiedDate) {
-		if ((modifiedDate != _modifiedDate) ||
-				((modifiedDate != null) && !modifiedDate.equals(_modifiedDate))) {
-			_modifiedDate = modifiedDate;
-		}
+		_modifiedDate = modifiedDate;
 	}
 
 	public String getName() {
@@ -239,12 +222,10 @@ public class TagsVocabularyModelImpl extends BaseModelImpl<TagsVocabulary> {
 	}
 
 	public void setName(String name) {
-		if ((name != _name) || ((name != null) && !name.equals(_name))) {
-			_name = name;
+		_name = name;
 
-			if (_originalName == null) {
-				_originalName = name;
-			}
+		if (_originalName == null) {
+			_originalName = name;
 		}
 	}
 
@@ -257,10 +238,7 @@ public class TagsVocabularyModelImpl extends BaseModelImpl<TagsVocabulary> {
 	}
 
 	public void setDescription(String description) {
-		if ((description != _description) ||
-				((description != null) && !description.equals(_description))) {
-			_description = description;
-		}
+		_description = description;
 	}
 
 	public boolean getFolksonomy() {
@@ -272,9 +250,7 @@ public class TagsVocabularyModelImpl extends BaseModelImpl<TagsVocabulary> {
 	}
 
 	public void setFolksonomy(boolean folksonomy) {
-		if (folksonomy != _folksonomy) {
-			_folksonomy = folksonomy;
-		}
+		_folksonomy = folksonomy;
 	}
 
 	public TagsVocabulary toEscapedModel() {

@@ -134,9 +134,7 @@ public class RegionModelImpl extends BaseModelImpl<Region> {
 	}
 
 	public void setRegionId(long regionId) {
-		if (regionId != _regionId) {
-			_regionId = regionId;
-		}
+		_regionId = regionId;
 	}
 
 	public long getCountryId() {
@@ -144,9 +142,7 @@ public class RegionModelImpl extends BaseModelImpl<Region> {
 	}
 
 	public void setCountryId(long countryId) {
-		if (countryId != _countryId) {
-			_countryId = countryId;
-		}
+		_countryId = countryId;
 	}
 
 	public String getRegionCode() {
@@ -154,10 +150,7 @@ public class RegionModelImpl extends BaseModelImpl<Region> {
 	}
 
 	public void setRegionCode(String regionCode) {
-		if ((regionCode != _regionCode) ||
-				((regionCode != null) && !regionCode.equals(_regionCode))) {
-			_regionCode = regionCode;
-		}
+		_regionCode = regionCode;
 	}
 
 	public String getName() {
@@ -165,9 +158,7 @@ public class RegionModelImpl extends BaseModelImpl<Region> {
 	}
 
 	public void setName(String name) {
-		if ((name != _name) || ((name != null) && !name.equals(_name))) {
-			_name = name;
-		}
+		_name = name;
 	}
 
 	public boolean getActive() {
@@ -179,9 +170,7 @@ public class RegionModelImpl extends BaseModelImpl<Region> {
 	}
 
 	public void setActive(boolean active) {
-		if (active != _active) {
-			_active = active;
-		}
+		_active = active;
 	}
 
 	public Region toEscapedModel() {

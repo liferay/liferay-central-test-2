@@ -189,9 +189,7 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon> {
 	}
 
 	public void setCouponId(long couponId) {
-		if (couponId != _couponId) {
-			_couponId = couponId;
-		}
+		_couponId = couponId;
 	}
 
 	public long getGroupId() {
@@ -199,9 +197,7 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon> {
 	}
 
 	public void setGroupId(long groupId) {
-		if (groupId != _groupId) {
-			_groupId = groupId;
-		}
+		_groupId = groupId;
 	}
 
 	public long getCompanyId() {
@@ -209,9 +205,7 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon> {
 	}
 
 	public void setCompanyId(long companyId) {
-		if (companyId != _companyId) {
-			_companyId = companyId;
-		}
+		_companyId = companyId;
 	}
 
 	public long getUserId() {
@@ -219,9 +213,7 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon> {
 	}
 
 	public void setUserId(long userId) {
-		if (userId != _userId) {
-			_userId = userId;
-		}
+		_userId = userId;
 	}
 
 	public String getUserName() {
@@ -229,10 +221,7 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon> {
 	}
 
 	public void setUserName(String userName) {
-		if ((userName != _userName) ||
-				((userName != null) && !userName.equals(_userName))) {
-			_userName = userName;
-		}
+		_userName = userName;
 	}
 
 	public Date getCreateDate() {
@@ -240,10 +229,7 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon> {
 	}
 
 	public void setCreateDate(Date createDate) {
-		if ((createDate != _createDate) ||
-				((createDate != null) && !createDate.equals(_createDate))) {
-			_createDate = createDate;
-		}
+		_createDate = createDate;
 	}
 
 	public Date getModifiedDate() {
@@ -251,10 +237,7 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon> {
 	}
 
 	public void setModifiedDate(Date modifiedDate) {
-		if ((modifiedDate != _modifiedDate) ||
-				((modifiedDate != null) && !modifiedDate.equals(_modifiedDate))) {
-			_modifiedDate = modifiedDate;
-		}
+		_modifiedDate = modifiedDate;
 	}
 
 	public String getCode() {
@@ -262,12 +245,10 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon> {
 	}
 
 	public void setCode(String code) {
-		if ((code != _code) || ((code != null) && !code.equals(_code))) {
-			_code = code;
+		_code = code;
 
-			if (_originalCode == null) {
-				_originalCode = code;
-			}
+		if (_originalCode == null) {
+			_originalCode = code;
 		}
 	}
 
@@ -280,9 +261,7 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon> {
 	}
 
 	public void setName(String name) {
-		if ((name != _name) || ((name != null) && !name.equals(_name))) {
-			_name = name;
-		}
+		_name = name;
 	}
 
 	public String getDescription() {
@@ -290,10 +269,7 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon> {
 	}
 
 	public void setDescription(String description) {
-		if ((description != _description) ||
-				((description != null) && !description.equals(_description))) {
-			_description = description;
-		}
+		_description = description;
 	}
 
 	public Date getStartDate() {
@@ -301,10 +277,7 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon> {
 	}
 
 	public void setStartDate(Date startDate) {
-		if ((startDate != _startDate) ||
-				((startDate != null) && !startDate.equals(_startDate))) {
-			_startDate = startDate;
-		}
+		_startDate = startDate;
 	}
 
 	public Date getEndDate() {
@@ -312,10 +285,7 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon> {
 	}
 
 	public void setEndDate(Date endDate) {
-		if ((endDate != _endDate) ||
-				((endDate != null) && !endDate.equals(_endDate))) {
-			_endDate = endDate;
-		}
+		_endDate = endDate;
 	}
 
 	public boolean getActive() {
@@ -327,9 +297,7 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon> {
 	}
 
 	public void setActive(boolean active) {
-		if (active != _active) {
-			_active = active;
-		}
+		_active = active;
 	}
 
 	public String getLimitCategories() {
@@ -337,11 +305,7 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon> {
 	}
 
 	public void setLimitCategories(String limitCategories) {
-		if ((limitCategories != _limitCategories) ||
-				((limitCategories != null) &&
-				!limitCategories.equals(_limitCategories))) {
-			_limitCategories = limitCategories;
-		}
+		_limitCategories = limitCategories;
 	}
 
 	public String getLimitSkus() {
@@ -349,10 +313,7 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon> {
 	}
 
 	public void setLimitSkus(String limitSkus) {
-		if ((limitSkus != _limitSkus) ||
-				((limitSkus != null) && !limitSkus.equals(_limitSkus))) {
-			_limitSkus = limitSkus;
-		}
+		_limitSkus = limitSkus;
 	}
 
 	public double getMinOrder() {
@@ -360,9 +321,7 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon> {
 	}
 
 	public void setMinOrder(double minOrder) {
-		if (minOrder != _minOrder) {
-			_minOrder = minOrder;
-		}
+		_minOrder = minOrder;
 	}
 
 	public double getDiscount() {
@@ -370,9 +329,7 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon> {
 	}
 
 	public void setDiscount(double discount) {
-		if (discount != _discount) {
-			_discount = discount;
-		}
+		_discount = discount;
 	}
 
 	public String getDiscountType() {
@@ -380,10 +337,7 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon> {
 	}
 
 	public void setDiscountType(String discountType) {
-		if ((discountType != _discountType) ||
-				((discountType != null) && !discountType.equals(_discountType))) {
-			_discountType = discountType;
-		}
+		_discountType = discountType;
 	}
 
 	public ShoppingCoupon toEscapedModel() {

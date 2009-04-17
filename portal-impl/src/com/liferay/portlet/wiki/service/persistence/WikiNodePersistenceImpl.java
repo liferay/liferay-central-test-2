@@ -321,6 +321,8 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		boolean isNew = wikiNode.isNew();
 
+		WikiNodeModelImpl wikiNodeModelImpl = (WikiNodeModelImpl)wikiNode;
+
 		if (Validator.isNull(wikiNode.getUuid())) {
 			String uuid = PortalUUIDUtil.generate();
 
@@ -347,8 +349,6 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl
 
 		EntityCacheUtil.putResult(WikiNodeModelImpl.ENTITY_CACHE_ENABLED,
 			WikiNodeImpl.class, wikiNode.getPrimaryKey(), wikiNode);
-
-		WikiNodeModelImpl wikiNodeModelImpl = (WikiNodeModelImpl)wikiNode;
 
 		if (!isNew &&
 				(!wikiNode.getUuid().equals(wikiNodeModelImpl.getOriginalUuid()) ||
@@ -435,12 +435,6 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl
 	}
 
 	public List<WikiNode> findByUuid(String uuid) throws SystemException {
-		int count = countByUuid(uuid);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { uuid };
 
 		List<WikiNode> list = (List<WikiNode>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_UUID,
@@ -507,12 +501,6 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl
 
 	public List<WikiNode> findByUuid(String uuid, int start, int end,
 		OrderByComparator obc) throws SystemException {
-		int count = countByUuid(uuid);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				uuid,
 				
@@ -808,12 +796,6 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl
 	}
 
 	public List<WikiNode> findByGroupId(long groupId) throws SystemException {
-		int count = countByGroupId(groupId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { new Long(groupId) };
 
 		List<WikiNode> list = (List<WikiNode>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_GROUPID,
@@ -873,12 +855,6 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl
 
 	public List<WikiNode> findByGroupId(long groupId, int start, int end,
 		OrderByComparator obc) throws SystemException {
-		int count = countByGroupId(groupId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				
@@ -1041,12 +1017,6 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl
 
 	public List<WikiNode> findByCompanyId(long companyId)
 		throws SystemException {
-		int count = countByCompanyId(companyId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { new Long(companyId) };
 
 		List<WikiNode> list = (List<WikiNode>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_COMPANYID,
@@ -1106,12 +1076,6 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl
 
 	public List<WikiNode> findByCompanyId(long companyId, int start, int end,
 		OrderByComparator obc) throws SystemException {
-		int count = countByCompanyId(companyId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(companyId),
 				

@@ -169,12 +169,10 @@ public class JournalStructureModelImpl extends BaseModelImpl<JournalStructure> {
 	}
 
 	public void setUuid(String uuid) {
-		if ((uuid != null) && !uuid.equals(_uuid)) {
-			_uuid = uuid;
+		_uuid = uuid;
 
-			if (_originalUuid == null) {
-				_originalUuid = uuid;
-			}
+		if (_originalUuid == null) {
+			_originalUuid = uuid;
 		}
 	}
 
@@ -187,9 +185,7 @@ public class JournalStructureModelImpl extends BaseModelImpl<JournalStructure> {
 	}
 
 	public void setId(long id) {
-		if (id != _id) {
-			_id = id;
-		}
+		_id = id;
 	}
 
 	public long getGroupId() {
@@ -197,14 +193,12 @@ public class JournalStructureModelImpl extends BaseModelImpl<JournalStructure> {
 	}
 
 	public void setGroupId(long groupId) {
-		if (groupId != _groupId) {
-			_groupId = groupId;
+		_groupId = groupId;
 
-			if (!_setOriginalGroupId) {
-				_setOriginalGroupId = true;
+		if (!_setOriginalGroupId) {
+			_setOriginalGroupId = true;
 
-				_originalGroupId = groupId;
-			}
+			_originalGroupId = groupId;
 		}
 	}
 
@@ -217,9 +211,7 @@ public class JournalStructureModelImpl extends BaseModelImpl<JournalStructure> {
 	}
 
 	public void setCompanyId(long companyId) {
-		if (companyId != _companyId) {
-			_companyId = companyId;
-		}
+		_companyId = companyId;
 	}
 
 	public long getUserId() {
@@ -227,9 +219,7 @@ public class JournalStructureModelImpl extends BaseModelImpl<JournalStructure> {
 	}
 
 	public void setUserId(long userId) {
-		if (userId != _userId) {
-			_userId = userId;
-		}
+		_userId = userId;
 	}
 
 	public String getUserName() {
@@ -237,10 +227,7 @@ public class JournalStructureModelImpl extends BaseModelImpl<JournalStructure> {
 	}
 
 	public void setUserName(String userName) {
-		if ((userName != _userName) ||
-				((userName != null) && !userName.equals(_userName))) {
-			_userName = userName;
-		}
+		_userName = userName;
 	}
 
 	public Date getCreateDate() {
@@ -248,10 +235,7 @@ public class JournalStructureModelImpl extends BaseModelImpl<JournalStructure> {
 	}
 
 	public void setCreateDate(Date createDate) {
-		if ((createDate != _createDate) ||
-				((createDate != null) && !createDate.equals(_createDate))) {
-			_createDate = createDate;
-		}
+		_createDate = createDate;
 	}
 
 	public Date getModifiedDate() {
@@ -259,10 +243,7 @@ public class JournalStructureModelImpl extends BaseModelImpl<JournalStructure> {
 	}
 
 	public void setModifiedDate(Date modifiedDate) {
-		if ((modifiedDate != _modifiedDate) ||
-				((modifiedDate != null) && !modifiedDate.equals(_modifiedDate))) {
-			_modifiedDate = modifiedDate;
-		}
+		_modifiedDate = modifiedDate;
 	}
 
 	public String getStructureId() {
@@ -270,13 +251,10 @@ public class JournalStructureModelImpl extends BaseModelImpl<JournalStructure> {
 	}
 
 	public void setStructureId(String structureId) {
-		if ((structureId != _structureId) ||
-				((structureId != null) && !structureId.equals(_structureId))) {
-			_structureId = structureId;
+		_structureId = structureId;
 
-			if (_originalStructureId == null) {
-				_originalStructureId = structureId;
-			}
+		if (_originalStructureId == null) {
+			_originalStructureId = structureId;
 		}
 	}
 
@@ -289,11 +267,7 @@ public class JournalStructureModelImpl extends BaseModelImpl<JournalStructure> {
 	}
 
 	public void setParentStructureId(String parentStructureId) {
-		if ((parentStructureId != _parentStructureId) ||
-				((parentStructureId != null) &&
-				!parentStructureId.equals(_parentStructureId))) {
-			_parentStructureId = parentStructureId;
-		}
+		_parentStructureId = parentStructureId;
 	}
 
 	public String getName() {
@@ -301,9 +275,7 @@ public class JournalStructureModelImpl extends BaseModelImpl<JournalStructure> {
 	}
 
 	public void setName(String name) {
-		if ((name != _name) || ((name != null) && !name.equals(_name))) {
-			_name = name;
-		}
+		_name = name;
 	}
 
 	public String getDescription() {
@@ -311,10 +283,7 @@ public class JournalStructureModelImpl extends BaseModelImpl<JournalStructure> {
 	}
 
 	public void setDescription(String description) {
-		if ((description != _description) ||
-				((description != null) && !description.equals(_description))) {
-			_description = description;
-		}
+		_description = description;
 	}
 
 	public String getXsd() {
@@ -322,9 +291,7 @@ public class JournalStructureModelImpl extends BaseModelImpl<JournalStructure> {
 	}
 
 	public void setXsd(String xsd) {
-		if ((xsd != _xsd) || ((xsd != null) && !xsd.equals(_xsd))) {
-			_xsd = xsd;
-		}
+		_xsd = xsd;
 	}
 
 	public JournalStructure toEscapedModel() {

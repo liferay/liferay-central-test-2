@@ -312,12 +312,6 @@ public class ContactPersistenceImpl extends BasePersistenceImpl
 
 	public List<Contact> findByCompanyId(long companyId)
 		throws SystemException {
-		int count = countByCompanyId(companyId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { new Long(companyId) };
 
 		List<Contact> list = (List<Contact>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_COMPANYID,
@@ -372,12 +366,6 @@ public class ContactPersistenceImpl extends BasePersistenceImpl
 
 	public List<Contact> findByCompanyId(long companyId, int start, int end,
 		OrderByComparator obc) throws SystemException {
-		int count = countByCompanyId(companyId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(companyId),
 				

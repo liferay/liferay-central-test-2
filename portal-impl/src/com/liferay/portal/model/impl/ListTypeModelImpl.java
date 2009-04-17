@@ -123,9 +123,7 @@ public class ListTypeModelImpl extends BaseModelImpl<ListType> {
 	}
 
 	public void setListTypeId(int listTypeId) {
-		if (listTypeId != _listTypeId) {
-			_listTypeId = listTypeId;
-		}
+		_listTypeId = listTypeId;
 	}
 
 	public String getName() {
@@ -133,9 +131,7 @@ public class ListTypeModelImpl extends BaseModelImpl<ListType> {
 	}
 
 	public void setName(String name) {
-		if ((name != _name) || ((name != null) && !name.equals(_name))) {
-			_name = name;
-		}
+		_name = name;
 	}
 
 	public String getType() {
@@ -143,9 +139,7 @@ public class ListTypeModelImpl extends BaseModelImpl<ListType> {
 	}
 
 	public void setType(String type) {
-		if ((type != _type) || ((type != null) && !type.equals(_type))) {
-			_type = type;
-		}
+		_type = type;
 	}
 
 	public ListType toEscapedModel() {

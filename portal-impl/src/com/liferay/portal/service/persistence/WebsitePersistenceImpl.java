@@ -389,12 +389,6 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl
 
 	public List<Website> findByCompanyId(long companyId)
 		throws SystemException {
-		int count = countByCompanyId(companyId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { new Long(companyId) };
 
 		List<Website> list = (List<Website>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_COMPANYID,
@@ -453,12 +447,6 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl
 
 	public List<Website> findByCompanyId(long companyId, int start, int end,
 		OrderByComparator obc) throws SystemException {
-		int count = countByCompanyId(companyId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(companyId),
 				
@@ -619,12 +607,6 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl
 	}
 
 	public List<Website> findByUserId(long userId) throws SystemException {
-		int count = countByUserId(userId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { new Long(userId) };
 
 		List<Website> list = (List<Website>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_USERID,
@@ -683,12 +665,6 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl
 
 	public List<Website> findByUserId(long userId, int start, int end,
 		OrderByComparator obc) throws SystemException {
-		int count = countByUserId(userId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(userId),
 				
@@ -849,12 +825,6 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl
 
 	public List<Website> findByC_C(long companyId, long classNameId)
 		throws SystemException {
-		int count = countByC_C(companyId, classNameId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(companyId), new Long(classNameId)
 			};
@@ -921,12 +891,6 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl
 
 	public List<Website> findByC_C(long companyId, long classNameId, int start,
 		int end, OrderByComparator obc) throws SystemException {
-		int count = countByC_C(companyId, classNameId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(companyId), new Long(classNameId),
 				
@@ -1107,12 +1071,6 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl
 
 	public List<Website> findByC_C_C(long companyId, long classNameId,
 		long classPK) throws SystemException {
-		int count = countByC_C_C(companyId, classNameId, classPK);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(companyId), new Long(classNameId), new Long(classPK)
 			};
@@ -1186,12 +1144,6 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl
 	public List<Website> findByC_C_C(long companyId, long classNameId,
 		long classPK, int start, int end, OrderByComparator obc)
 		throws SystemException {
-		int count = countByC_C_C(companyId, classNameId, classPK);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(companyId), new Long(classNameId), new Long(classPK),
 				
@@ -1393,12 +1345,6 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl
 
 	public List<Website> findByC_C_C_P(long companyId, long classNameId,
 		long classPK, boolean primary) throws SystemException {
-		int count = countByC_C_C_P(companyId, classNameId, classPK, primary);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(companyId), new Long(classNameId), new Long(classPK),
 				Boolean.valueOf(primary)
@@ -1481,12 +1427,6 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl
 	public List<Website> findByC_C_C_P(long companyId, long classNameId,
 		long classPK, boolean primary, int start, int end, OrderByComparator obc)
 		throws SystemException {
-		int count = countByC_C_C_P(companyId, classNameId, classPK, primary);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(companyId), new Long(classNameId), new Long(classPK),
 				Boolean.valueOf(primary),

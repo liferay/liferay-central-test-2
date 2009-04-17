@@ -219,9 +219,7 @@ public class PasswordPolicyModelImpl extends BaseModelImpl<PasswordPolicy> {
 	}
 
 	public void setPasswordPolicyId(long passwordPolicyId) {
-		if (passwordPolicyId != _passwordPolicyId) {
-			_passwordPolicyId = passwordPolicyId;
-		}
+		_passwordPolicyId = passwordPolicyId;
 	}
 
 	public long getCompanyId() {
@@ -229,14 +227,12 @@ public class PasswordPolicyModelImpl extends BaseModelImpl<PasswordPolicy> {
 	}
 
 	public void setCompanyId(long companyId) {
-		if (companyId != _companyId) {
-			_companyId = companyId;
+		_companyId = companyId;
 
-			if (!_setOriginalCompanyId) {
-				_setOriginalCompanyId = true;
+		if (!_setOriginalCompanyId) {
+			_setOriginalCompanyId = true;
 
-				_originalCompanyId = companyId;
-			}
+			_originalCompanyId = companyId;
 		}
 	}
 
@@ -249,9 +245,7 @@ public class PasswordPolicyModelImpl extends BaseModelImpl<PasswordPolicy> {
 	}
 
 	public void setUserId(long userId) {
-		if (userId != _userId) {
-			_userId = userId;
-		}
+		_userId = userId;
 	}
 
 	public String getUserName() {
@@ -259,10 +253,7 @@ public class PasswordPolicyModelImpl extends BaseModelImpl<PasswordPolicy> {
 	}
 
 	public void setUserName(String userName) {
-		if ((userName != _userName) ||
-				((userName != null) && !userName.equals(_userName))) {
-			_userName = userName;
-		}
+		_userName = userName;
 	}
 
 	public Date getCreateDate() {
@@ -270,10 +261,7 @@ public class PasswordPolicyModelImpl extends BaseModelImpl<PasswordPolicy> {
 	}
 
 	public void setCreateDate(Date createDate) {
-		if ((createDate != _createDate) ||
-				((createDate != null) && !createDate.equals(_createDate))) {
-			_createDate = createDate;
-		}
+		_createDate = createDate;
 	}
 
 	public Date getModifiedDate() {
@@ -281,10 +269,7 @@ public class PasswordPolicyModelImpl extends BaseModelImpl<PasswordPolicy> {
 	}
 
 	public void setModifiedDate(Date modifiedDate) {
-		if ((modifiedDate != _modifiedDate) ||
-				((modifiedDate != null) && !modifiedDate.equals(_modifiedDate))) {
-			_modifiedDate = modifiedDate;
-		}
+		_modifiedDate = modifiedDate;
 	}
 
 	public boolean getDefaultPolicy() {
@@ -296,14 +281,12 @@ public class PasswordPolicyModelImpl extends BaseModelImpl<PasswordPolicy> {
 	}
 
 	public void setDefaultPolicy(boolean defaultPolicy) {
-		if (defaultPolicy != _defaultPolicy) {
-			_defaultPolicy = defaultPolicy;
+		_defaultPolicy = defaultPolicy;
 
-			if (!_setOriginalDefaultPolicy) {
-				_setOriginalDefaultPolicy = true;
+		if (!_setOriginalDefaultPolicy) {
+			_setOriginalDefaultPolicy = true;
 
-				_originalDefaultPolicy = defaultPolicy;
-			}
+			_originalDefaultPolicy = defaultPolicy;
 		}
 	}
 
@@ -316,12 +299,10 @@ public class PasswordPolicyModelImpl extends BaseModelImpl<PasswordPolicy> {
 	}
 
 	public void setName(String name) {
-		if ((name != _name) || ((name != null) && !name.equals(_name))) {
-			_name = name;
+		_name = name;
 
-			if (_originalName == null) {
-				_originalName = name;
-			}
+		if (_originalName == null) {
+			_originalName = name;
 		}
 	}
 
@@ -334,10 +315,7 @@ public class PasswordPolicyModelImpl extends BaseModelImpl<PasswordPolicy> {
 	}
 
 	public void setDescription(String description) {
-		if ((description != _description) ||
-				((description != null) && !description.equals(_description))) {
-			_description = description;
-		}
+		_description = description;
 	}
 
 	public boolean getChangeable() {
@@ -349,9 +327,7 @@ public class PasswordPolicyModelImpl extends BaseModelImpl<PasswordPolicy> {
 	}
 
 	public void setChangeable(boolean changeable) {
-		if (changeable != _changeable) {
-			_changeable = changeable;
-		}
+		_changeable = changeable;
 	}
 
 	public boolean getChangeRequired() {
@@ -363,9 +339,7 @@ public class PasswordPolicyModelImpl extends BaseModelImpl<PasswordPolicy> {
 	}
 
 	public void setChangeRequired(boolean changeRequired) {
-		if (changeRequired != _changeRequired) {
-			_changeRequired = changeRequired;
-		}
+		_changeRequired = changeRequired;
 	}
 
 	public long getMinAge() {
@@ -373,9 +347,7 @@ public class PasswordPolicyModelImpl extends BaseModelImpl<PasswordPolicy> {
 	}
 
 	public void setMinAge(long minAge) {
-		if (minAge != _minAge) {
-			_minAge = minAge;
-		}
+		_minAge = minAge;
 	}
 
 	public boolean getCheckSyntax() {
@@ -387,9 +359,7 @@ public class PasswordPolicyModelImpl extends BaseModelImpl<PasswordPolicy> {
 	}
 
 	public void setCheckSyntax(boolean checkSyntax) {
-		if (checkSyntax != _checkSyntax) {
-			_checkSyntax = checkSyntax;
-		}
+		_checkSyntax = checkSyntax;
 	}
 
 	public boolean getAllowDictionaryWords() {
@@ -401,9 +371,7 @@ public class PasswordPolicyModelImpl extends BaseModelImpl<PasswordPolicy> {
 	}
 
 	public void setAllowDictionaryWords(boolean allowDictionaryWords) {
-		if (allowDictionaryWords != _allowDictionaryWords) {
-			_allowDictionaryWords = allowDictionaryWords;
-		}
+		_allowDictionaryWords = allowDictionaryWords;
 	}
 
 	public int getMinLength() {
@@ -411,9 +379,7 @@ public class PasswordPolicyModelImpl extends BaseModelImpl<PasswordPolicy> {
 	}
 
 	public void setMinLength(int minLength) {
-		if (minLength != _minLength) {
-			_minLength = minLength;
-		}
+		_minLength = minLength;
 	}
 
 	public boolean getHistory() {
@@ -425,9 +391,7 @@ public class PasswordPolicyModelImpl extends BaseModelImpl<PasswordPolicy> {
 	}
 
 	public void setHistory(boolean history) {
-		if (history != _history) {
-			_history = history;
-		}
+		_history = history;
 	}
 
 	public int getHistoryCount() {
@@ -435,9 +399,7 @@ public class PasswordPolicyModelImpl extends BaseModelImpl<PasswordPolicy> {
 	}
 
 	public void setHistoryCount(int historyCount) {
-		if (historyCount != _historyCount) {
-			_historyCount = historyCount;
-		}
+		_historyCount = historyCount;
 	}
 
 	public boolean getExpireable() {
@@ -449,9 +411,7 @@ public class PasswordPolicyModelImpl extends BaseModelImpl<PasswordPolicy> {
 	}
 
 	public void setExpireable(boolean expireable) {
-		if (expireable != _expireable) {
-			_expireable = expireable;
-		}
+		_expireable = expireable;
 	}
 
 	public long getMaxAge() {
@@ -459,9 +419,7 @@ public class PasswordPolicyModelImpl extends BaseModelImpl<PasswordPolicy> {
 	}
 
 	public void setMaxAge(long maxAge) {
-		if (maxAge != _maxAge) {
-			_maxAge = maxAge;
-		}
+		_maxAge = maxAge;
 	}
 
 	public long getWarningTime() {
@@ -469,9 +427,7 @@ public class PasswordPolicyModelImpl extends BaseModelImpl<PasswordPolicy> {
 	}
 
 	public void setWarningTime(long warningTime) {
-		if (warningTime != _warningTime) {
-			_warningTime = warningTime;
-		}
+		_warningTime = warningTime;
 	}
 
 	public int getGraceLimit() {
@@ -479,9 +435,7 @@ public class PasswordPolicyModelImpl extends BaseModelImpl<PasswordPolicy> {
 	}
 
 	public void setGraceLimit(int graceLimit) {
-		if (graceLimit != _graceLimit) {
-			_graceLimit = graceLimit;
-		}
+		_graceLimit = graceLimit;
 	}
 
 	public boolean getLockout() {
@@ -493,9 +447,7 @@ public class PasswordPolicyModelImpl extends BaseModelImpl<PasswordPolicy> {
 	}
 
 	public void setLockout(boolean lockout) {
-		if (lockout != _lockout) {
-			_lockout = lockout;
-		}
+		_lockout = lockout;
 	}
 
 	public int getMaxFailure() {
@@ -503,9 +455,7 @@ public class PasswordPolicyModelImpl extends BaseModelImpl<PasswordPolicy> {
 	}
 
 	public void setMaxFailure(int maxFailure) {
-		if (maxFailure != _maxFailure) {
-			_maxFailure = maxFailure;
-		}
+		_maxFailure = maxFailure;
 	}
 
 	public long getLockoutDuration() {
@@ -513,9 +463,7 @@ public class PasswordPolicyModelImpl extends BaseModelImpl<PasswordPolicy> {
 	}
 
 	public void setLockoutDuration(long lockoutDuration) {
-		if (lockoutDuration != _lockoutDuration) {
-			_lockoutDuration = lockoutDuration;
-		}
+		_lockoutDuration = lockoutDuration;
 	}
 
 	public boolean getRequireUnlock() {
@@ -527,9 +475,7 @@ public class PasswordPolicyModelImpl extends BaseModelImpl<PasswordPolicy> {
 	}
 
 	public void setRequireUnlock(boolean requireUnlock) {
-		if (requireUnlock != _requireUnlock) {
-			_requireUnlock = requireUnlock;
-		}
+		_requireUnlock = requireUnlock;
 	}
 
 	public long getResetFailureCount() {
@@ -537,9 +483,7 @@ public class PasswordPolicyModelImpl extends BaseModelImpl<PasswordPolicy> {
 	}
 
 	public void setResetFailureCount(long resetFailureCount) {
-		if (resetFailureCount != _resetFailureCount) {
-			_resetFailureCount = resetFailureCount;
-		}
+		_resetFailureCount = resetFailureCount;
 	}
 
 	public PasswordPolicy toEscapedModel() {

@@ -148,9 +148,7 @@ public class MBBanModelImpl extends BaseModelImpl<MBBan> {
 	}
 
 	public void setBanId(long banId) {
-		if (banId != _banId) {
-			_banId = banId;
-		}
+		_banId = banId;
 	}
 
 	public long getGroupId() {
@@ -158,14 +156,12 @@ public class MBBanModelImpl extends BaseModelImpl<MBBan> {
 	}
 
 	public void setGroupId(long groupId) {
-		if (groupId != _groupId) {
-			_groupId = groupId;
+		_groupId = groupId;
 
-			if (!_setOriginalGroupId) {
-				_setOriginalGroupId = true;
+		if (!_setOriginalGroupId) {
+			_setOriginalGroupId = true;
 
-				_originalGroupId = groupId;
-			}
+			_originalGroupId = groupId;
 		}
 	}
 
@@ -178,9 +174,7 @@ public class MBBanModelImpl extends BaseModelImpl<MBBan> {
 	}
 
 	public void setCompanyId(long companyId) {
-		if (companyId != _companyId) {
-			_companyId = companyId;
-		}
+		_companyId = companyId;
 	}
 
 	public long getUserId() {
@@ -188,9 +182,7 @@ public class MBBanModelImpl extends BaseModelImpl<MBBan> {
 	}
 
 	public void setUserId(long userId) {
-		if (userId != _userId) {
-			_userId = userId;
-		}
+		_userId = userId;
 	}
 
 	public String getUserName() {
@@ -198,10 +190,7 @@ public class MBBanModelImpl extends BaseModelImpl<MBBan> {
 	}
 
 	public void setUserName(String userName) {
-		if ((userName != _userName) ||
-				((userName != null) && !userName.equals(_userName))) {
-			_userName = userName;
-		}
+		_userName = userName;
 	}
 
 	public Date getCreateDate() {
@@ -209,10 +198,7 @@ public class MBBanModelImpl extends BaseModelImpl<MBBan> {
 	}
 
 	public void setCreateDate(Date createDate) {
-		if ((createDate != _createDate) ||
-				((createDate != null) && !createDate.equals(_createDate))) {
-			_createDate = createDate;
-		}
+		_createDate = createDate;
 	}
 
 	public Date getModifiedDate() {
@@ -220,10 +206,7 @@ public class MBBanModelImpl extends BaseModelImpl<MBBan> {
 	}
 
 	public void setModifiedDate(Date modifiedDate) {
-		if ((modifiedDate != _modifiedDate) ||
-				((modifiedDate != null) && !modifiedDate.equals(_modifiedDate))) {
-			_modifiedDate = modifiedDate;
-		}
+		_modifiedDate = modifiedDate;
 	}
 
 	public long getBanUserId() {
@@ -231,14 +214,12 @@ public class MBBanModelImpl extends BaseModelImpl<MBBan> {
 	}
 
 	public void setBanUserId(long banUserId) {
-		if (banUserId != _banUserId) {
-			_banUserId = banUserId;
+		_banUserId = banUserId;
 
-			if (!_setOriginalBanUserId) {
-				_setOriginalBanUserId = true;
+		if (!_setOriginalBanUserId) {
+			_setOriginalBanUserId = true;
 
-				_originalBanUserId = banUserId;
-			}
+			_originalBanUserId = banUserId;
 		}
 	}
 

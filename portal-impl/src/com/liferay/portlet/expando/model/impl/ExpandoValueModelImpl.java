@@ -147,9 +147,7 @@ public class ExpandoValueModelImpl extends BaseModelImpl<ExpandoValue> {
 	}
 
 	public void setValueId(long valueId) {
-		if (valueId != _valueId) {
-			_valueId = valueId;
-		}
+		_valueId = valueId;
 	}
 
 	public long getCompanyId() {
@@ -157,9 +155,7 @@ public class ExpandoValueModelImpl extends BaseModelImpl<ExpandoValue> {
 	}
 
 	public void setCompanyId(long companyId) {
-		if (companyId != _companyId) {
-			_companyId = companyId;
-		}
+		_companyId = companyId;
 	}
 
 	public long getTableId() {
@@ -167,14 +163,12 @@ public class ExpandoValueModelImpl extends BaseModelImpl<ExpandoValue> {
 	}
 
 	public void setTableId(long tableId) {
-		if (tableId != _tableId) {
-			_tableId = tableId;
+		_tableId = tableId;
 
-			if (!_setOriginalTableId) {
-				_setOriginalTableId = true;
+		if (!_setOriginalTableId) {
+			_setOriginalTableId = true;
 
-				_originalTableId = tableId;
-			}
+			_originalTableId = tableId;
 		}
 	}
 
@@ -187,14 +181,12 @@ public class ExpandoValueModelImpl extends BaseModelImpl<ExpandoValue> {
 	}
 
 	public void setColumnId(long columnId) {
-		if (columnId != _columnId) {
-			_columnId = columnId;
+		_columnId = columnId;
 
-			if (!_setOriginalColumnId) {
-				_setOriginalColumnId = true;
+		if (!_setOriginalColumnId) {
+			_setOriginalColumnId = true;
 
-				_originalColumnId = columnId;
-			}
+			_originalColumnId = columnId;
 		}
 	}
 
@@ -207,14 +199,12 @@ public class ExpandoValueModelImpl extends BaseModelImpl<ExpandoValue> {
 	}
 
 	public void setRowId(long rowId) {
-		if (rowId != _rowId) {
-			_rowId = rowId;
+		_rowId = rowId;
 
-			if (!_setOriginalRowId) {
-				_setOriginalRowId = true;
+		if (!_setOriginalRowId) {
+			_setOriginalRowId = true;
 
-				_originalRowId = rowId;
-			}
+			_originalRowId = rowId;
 		}
 	}
 
@@ -235,9 +225,7 @@ public class ExpandoValueModelImpl extends BaseModelImpl<ExpandoValue> {
 	}
 
 	public void setClassNameId(long classNameId) {
-		if (classNameId != _classNameId) {
-			_classNameId = classNameId;
-		}
+		_classNameId = classNameId;
 	}
 
 	public long getClassPK() {
@@ -245,9 +233,7 @@ public class ExpandoValueModelImpl extends BaseModelImpl<ExpandoValue> {
 	}
 
 	public void setClassPK(long classPK) {
-		if (classPK != _classPK) {
-			_classPK = classPK;
-		}
+		_classPK = classPK;
 	}
 
 	public String getData() {
@@ -255,9 +241,7 @@ public class ExpandoValueModelImpl extends BaseModelImpl<ExpandoValue> {
 	}
 
 	public void setData(String data) {
-		if ((data != _data) || ((data != null) && !data.equals(_data))) {
-			_data = data;
-		}
+		_data = data;
 	}
 
 	public ExpandoValue toEscapedModel() {

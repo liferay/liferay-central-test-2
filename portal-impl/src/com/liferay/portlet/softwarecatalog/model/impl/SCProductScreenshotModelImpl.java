@@ -143,9 +143,7 @@ public class SCProductScreenshotModelImpl extends BaseModelImpl<SCProductScreens
 	}
 
 	public void setProductScreenshotId(long productScreenshotId) {
-		if (productScreenshotId != _productScreenshotId) {
-			_productScreenshotId = productScreenshotId;
-		}
+		_productScreenshotId = productScreenshotId;
 	}
 
 	public long getCompanyId() {
@@ -153,9 +151,7 @@ public class SCProductScreenshotModelImpl extends BaseModelImpl<SCProductScreens
 	}
 
 	public void setCompanyId(long companyId) {
-		if (companyId != _companyId) {
-			_companyId = companyId;
-		}
+		_companyId = companyId;
 	}
 
 	public long getGroupId() {
@@ -163,9 +159,7 @@ public class SCProductScreenshotModelImpl extends BaseModelImpl<SCProductScreens
 	}
 
 	public void setGroupId(long groupId) {
-		if (groupId != _groupId) {
-			_groupId = groupId;
-		}
+		_groupId = groupId;
 	}
 
 	public long getProductEntryId() {
@@ -173,14 +167,12 @@ public class SCProductScreenshotModelImpl extends BaseModelImpl<SCProductScreens
 	}
 
 	public void setProductEntryId(long productEntryId) {
-		if (productEntryId != _productEntryId) {
-			_productEntryId = productEntryId;
+		_productEntryId = productEntryId;
 
-			if (!_setOriginalProductEntryId) {
-				_setOriginalProductEntryId = true;
+		if (!_setOriginalProductEntryId) {
+			_setOriginalProductEntryId = true;
 
-				_originalProductEntryId = productEntryId;
-			}
+			_originalProductEntryId = productEntryId;
 		}
 	}
 
@@ -193,14 +185,12 @@ public class SCProductScreenshotModelImpl extends BaseModelImpl<SCProductScreens
 	}
 
 	public void setThumbnailId(long thumbnailId) {
-		if (thumbnailId != _thumbnailId) {
-			_thumbnailId = thumbnailId;
+		_thumbnailId = thumbnailId;
 
-			if (!_setOriginalThumbnailId) {
-				_setOriginalThumbnailId = true;
+		if (!_setOriginalThumbnailId) {
+			_setOriginalThumbnailId = true;
 
-				_originalThumbnailId = thumbnailId;
-			}
+			_originalThumbnailId = thumbnailId;
 		}
 	}
 
@@ -213,14 +203,12 @@ public class SCProductScreenshotModelImpl extends BaseModelImpl<SCProductScreens
 	}
 
 	public void setFullImageId(long fullImageId) {
-		if (fullImageId != _fullImageId) {
-			_fullImageId = fullImageId;
+		_fullImageId = fullImageId;
 
-			if (!_setOriginalFullImageId) {
-				_setOriginalFullImageId = true;
+		if (!_setOriginalFullImageId) {
+			_setOriginalFullImageId = true;
 
-				_originalFullImageId = fullImageId;
-			}
+			_originalFullImageId = fullImageId;
 		}
 	}
 
@@ -233,14 +221,12 @@ public class SCProductScreenshotModelImpl extends BaseModelImpl<SCProductScreens
 	}
 
 	public void setPriority(int priority) {
-		if (priority != _priority) {
-			_priority = priority;
+		_priority = priority;
 
-			if (!_setOriginalPriority) {
-				_setOriginalPriority = true;
+		if (!_setOriginalPriority) {
+			_setOriginalPriority = true;
 
-				_originalPriority = priority;
-			}
+			_originalPriority = priority;
 		}
 	}
 

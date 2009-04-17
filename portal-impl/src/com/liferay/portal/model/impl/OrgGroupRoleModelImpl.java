@@ -125,9 +125,7 @@ public class OrgGroupRoleModelImpl extends BaseModelImpl<OrgGroupRole> {
 	}
 
 	public void setOrganizationId(long organizationId) {
-		if (organizationId != _organizationId) {
-			_organizationId = organizationId;
-		}
+		_organizationId = organizationId;
 	}
 
 	public long getGroupId() {
@@ -135,9 +133,7 @@ public class OrgGroupRoleModelImpl extends BaseModelImpl<OrgGroupRole> {
 	}
 
 	public void setGroupId(long groupId) {
-		if (groupId != _groupId) {
-			_groupId = groupId;
-		}
+		_groupId = groupId;
 	}
 
 	public long getRoleId() {
@@ -145,9 +141,7 @@ public class OrgGroupRoleModelImpl extends BaseModelImpl<OrgGroupRole> {
 	}
 
 	public void setRoleId(long roleId) {
-		if (roleId != _roleId) {
-			_roleId = roleId;
-		}
+		_roleId = roleId;
 	}
 
 	public OrgGroupRole toEscapedModel() {

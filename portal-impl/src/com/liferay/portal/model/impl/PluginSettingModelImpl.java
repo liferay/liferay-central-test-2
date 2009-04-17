@@ -138,9 +138,7 @@ public class PluginSettingModelImpl extends BaseModelImpl<PluginSetting> {
 	}
 
 	public void setPluginSettingId(long pluginSettingId) {
-		if (pluginSettingId != _pluginSettingId) {
-			_pluginSettingId = pluginSettingId;
-		}
+		_pluginSettingId = pluginSettingId;
 	}
 
 	public long getCompanyId() {
@@ -148,14 +146,12 @@ public class PluginSettingModelImpl extends BaseModelImpl<PluginSetting> {
 	}
 
 	public void setCompanyId(long companyId) {
-		if (companyId != _companyId) {
-			_companyId = companyId;
+		_companyId = companyId;
 
-			if (!_setOriginalCompanyId) {
-				_setOriginalCompanyId = true;
+		if (!_setOriginalCompanyId) {
+			_setOriginalCompanyId = true;
 
-				_originalCompanyId = companyId;
-			}
+			_originalCompanyId = companyId;
 		}
 	}
 
@@ -168,13 +164,10 @@ public class PluginSettingModelImpl extends BaseModelImpl<PluginSetting> {
 	}
 
 	public void setPluginId(String pluginId) {
-		if ((pluginId != _pluginId) ||
-				((pluginId != null) && !pluginId.equals(_pluginId))) {
-			_pluginId = pluginId;
+		_pluginId = pluginId;
 
-			if (_originalPluginId == null) {
-				_originalPluginId = pluginId;
-			}
+		if (_originalPluginId == null) {
+			_originalPluginId = pluginId;
 		}
 	}
 
@@ -187,13 +180,10 @@ public class PluginSettingModelImpl extends BaseModelImpl<PluginSetting> {
 	}
 
 	public void setPluginType(String pluginType) {
-		if ((pluginType != _pluginType) ||
-				((pluginType != null) && !pluginType.equals(_pluginType))) {
-			_pluginType = pluginType;
+		_pluginType = pluginType;
 
-			if (_originalPluginType == null) {
-				_originalPluginType = pluginType;
-			}
+		if (_originalPluginType == null) {
+			_originalPluginType = pluginType;
 		}
 	}
 
@@ -206,9 +196,7 @@ public class PluginSettingModelImpl extends BaseModelImpl<PluginSetting> {
 	}
 
 	public void setRoles(String roles) {
-		if ((roles != _roles) || ((roles != null) && !roles.equals(_roles))) {
-			_roles = roles;
-		}
+		_roles = roles;
 	}
 
 	public boolean getActive() {
@@ -220,9 +208,7 @@ public class PluginSettingModelImpl extends BaseModelImpl<PluginSetting> {
 	}
 
 	public void setActive(boolean active) {
-		if (active != _active) {
-			_active = active;
-		}
+		_active = active;
 	}
 
 	public PluginSetting toEscapedModel() {

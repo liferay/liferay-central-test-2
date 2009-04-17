@@ -329,6 +329,8 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl
 		boolean merge) throws SystemException {
 		boolean isNew = portletPreferences.isNew();
 
+		PortletPreferencesModelImpl portletPreferencesModelImpl = (PortletPreferencesModelImpl)portletPreferences;
+
 		Session session = null;
 
 		try {
@@ -350,8 +352,6 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl
 		EntityCacheUtil.putResult(PortletPreferencesModelImpl.ENTITY_CACHE_ENABLED,
 			PortletPreferencesImpl.class, portletPreferences.getPrimaryKey(),
 			portletPreferences);
-
-		PortletPreferencesModelImpl portletPreferencesModelImpl = (PortletPreferencesModelImpl)portletPreferences;
 
 		if (!isNew &&
 				((portletPreferences.getOwnerId() != portletPreferencesModelImpl.getOriginalOwnerId()) ||
@@ -437,12 +437,6 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl
 
 	public List<PortletPreferences> findByPlid(long plid)
 		throws SystemException {
-		int count = countByPlid(plid);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { new Long(plid) };
 
 		List<PortletPreferences> list = (List<PortletPreferences>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_PLID,
@@ -498,12 +492,6 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl
 
 	public List<PortletPreferences> findByPlid(long plid, int start, int end,
 		OrderByComparator obc) throws SystemException {
-		int count = countByPlid(plid);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(plid),
 				
@@ -657,12 +645,6 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl
 
 	public List<PortletPreferences> findByP_P(long plid, String portletId)
 		throws SystemException {
-		int count = countByP_P(plid, portletId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { new Long(plid), portletId };
 
 		List<PortletPreferences> list = (List<PortletPreferences>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_P_P,
@@ -731,12 +713,6 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl
 
 	public List<PortletPreferences> findByP_P(long plid, String portletId,
 		int start, int end, OrderByComparator obc) throws SystemException {
-		int count = countByP_P(plid, portletId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(plid),
 				
@@ -928,12 +904,6 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl
 
 	public List<PortletPreferences> findByO_O_P(long ownerId, int ownerType,
 		long plid) throws SystemException {
-		int count = countByO_O_P(ownerId, ownerType, plid);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(ownerId), new Integer(ownerType), new Long(plid)
 			};
@@ -1004,12 +974,6 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl
 	public List<PortletPreferences> findByO_O_P(long ownerId, int ownerType,
 		long plid, int start, int end, OrderByComparator obc)
 		throws SystemException {
-		int count = countByO_O_P(ownerId, ownerType, plid);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(ownerId), new Integer(ownerType), new Long(plid),
 				

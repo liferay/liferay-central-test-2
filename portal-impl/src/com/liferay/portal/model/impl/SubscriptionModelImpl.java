@@ -153,9 +153,7 @@ public class SubscriptionModelImpl extends BaseModelImpl<Subscription> {
 	}
 
 	public void setSubscriptionId(long subscriptionId) {
-		if (subscriptionId != _subscriptionId) {
-			_subscriptionId = subscriptionId;
-		}
+		_subscriptionId = subscriptionId;
 	}
 
 	public long getCompanyId() {
@@ -163,14 +161,12 @@ public class SubscriptionModelImpl extends BaseModelImpl<Subscription> {
 	}
 
 	public void setCompanyId(long companyId) {
-		if (companyId != _companyId) {
-			_companyId = companyId;
+		_companyId = companyId;
 
-			if (!_setOriginalCompanyId) {
-				_setOriginalCompanyId = true;
+		if (!_setOriginalCompanyId) {
+			_setOriginalCompanyId = true;
 
-				_originalCompanyId = companyId;
-			}
+			_originalCompanyId = companyId;
 		}
 	}
 
@@ -183,14 +179,12 @@ public class SubscriptionModelImpl extends BaseModelImpl<Subscription> {
 	}
 
 	public void setUserId(long userId) {
-		if (userId != _userId) {
-			_userId = userId;
+		_userId = userId;
 
-			if (!_setOriginalUserId) {
-				_setOriginalUserId = true;
+		if (!_setOriginalUserId) {
+			_setOriginalUserId = true;
 
-				_originalUserId = userId;
-			}
+			_originalUserId = userId;
 		}
 	}
 
@@ -203,10 +197,7 @@ public class SubscriptionModelImpl extends BaseModelImpl<Subscription> {
 	}
 
 	public void setUserName(String userName) {
-		if ((userName != _userName) ||
-				((userName != null) && !userName.equals(_userName))) {
-			_userName = userName;
-		}
+		_userName = userName;
 	}
 
 	public Date getCreateDate() {
@@ -214,10 +205,7 @@ public class SubscriptionModelImpl extends BaseModelImpl<Subscription> {
 	}
 
 	public void setCreateDate(Date createDate) {
-		if ((createDate != _createDate) ||
-				((createDate != null) && !createDate.equals(_createDate))) {
-			_createDate = createDate;
-		}
+		_createDate = createDate;
 	}
 
 	public Date getModifiedDate() {
@@ -225,10 +213,7 @@ public class SubscriptionModelImpl extends BaseModelImpl<Subscription> {
 	}
 
 	public void setModifiedDate(Date modifiedDate) {
-		if ((modifiedDate != _modifiedDate) ||
-				((modifiedDate != null) && !modifiedDate.equals(_modifiedDate))) {
-			_modifiedDate = modifiedDate;
-		}
+		_modifiedDate = modifiedDate;
 	}
 
 	public String getClassName() {
@@ -244,14 +229,12 @@ public class SubscriptionModelImpl extends BaseModelImpl<Subscription> {
 	}
 
 	public void setClassNameId(long classNameId) {
-		if (classNameId != _classNameId) {
-			_classNameId = classNameId;
+		_classNameId = classNameId;
 
-			if (!_setOriginalClassNameId) {
-				_setOriginalClassNameId = true;
+		if (!_setOriginalClassNameId) {
+			_setOriginalClassNameId = true;
 
-				_originalClassNameId = classNameId;
-			}
+			_originalClassNameId = classNameId;
 		}
 	}
 
@@ -264,14 +247,12 @@ public class SubscriptionModelImpl extends BaseModelImpl<Subscription> {
 	}
 
 	public void setClassPK(long classPK) {
-		if (classPK != _classPK) {
-			_classPK = classPK;
+		_classPK = classPK;
 
-			if (!_setOriginalClassPK) {
-				_setOriginalClassPK = true;
+		if (!_setOriginalClassPK) {
+			_setOriginalClassPK = true;
 
-				_originalClassPK = classPK;
-			}
+			_originalClassPK = classPK;
 		}
 	}
 
@@ -284,10 +265,7 @@ public class SubscriptionModelImpl extends BaseModelImpl<Subscription> {
 	}
 
 	public void setFrequency(String frequency) {
-		if ((frequency != _frequency) ||
-				((frequency != null) && !frequency.equals(_frequency))) {
-			_frequency = frequency;
-		}
+		_frequency = frequency;
 	}
 
 	public Subscription toEscapedModel() {

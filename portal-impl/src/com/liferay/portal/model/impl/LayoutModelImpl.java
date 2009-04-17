@@ -202,9 +202,7 @@ public class LayoutModelImpl extends BaseModelImpl<Layout> {
 	}
 
 	public void setPlid(long plid) {
-		if (plid != _plid) {
-			_plid = plid;
-		}
+		_plid = plid;
 	}
 
 	public long getGroupId() {
@@ -212,14 +210,12 @@ public class LayoutModelImpl extends BaseModelImpl<Layout> {
 	}
 
 	public void setGroupId(long groupId) {
-		if (groupId != _groupId) {
-			_groupId = groupId;
+		_groupId = groupId;
 
-			if (!_setOriginalGroupId) {
-				_setOriginalGroupId = true;
+		if (!_setOriginalGroupId) {
+			_setOriginalGroupId = true;
 
-				_originalGroupId = groupId;
-			}
+			_originalGroupId = groupId;
 		}
 	}
 
@@ -232,9 +228,7 @@ public class LayoutModelImpl extends BaseModelImpl<Layout> {
 	}
 
 	public void setCompanyId(long companyId) {
-		if (companyId != _companyId) {
-			_companyId = companyId;
-		}
+		_companyId = companyId;
 	}
 
 	public boolean getPrivateLayout() {
@@ -246,14 +240,12 @@ public class LayoutModelImpl extends BaseModelImpl<Layout> {
 	}
 
 	public void setPrivateLayout(boolean privateLayout) {
-		if (privateLayout != _privateLayout) {
-			_privateLayout = privateLayout;
+		_privateLayout = privateLayout;
 
-			if (!_setOriginalPrivateLayout) {
-				_setOriginalPrivateLayout = true;
+		if (!_setOriginalPrivateLayout) {
+			_setOriginalPrivateLayout = true;
 
-				_originalPrivateLayout = privateLayout;
-			}
+			_originalPrivateLayout = privateLayout;
 		}
 	}
 
@@ -266,14 +258,12 @@ public class LayoutModelImpl extends BaseModelImpl<Layout> {
 	}
 
 	public void setLayoutId(long layoutId) {
-		if (layoutId != _layoutId) {
-			_layoutId = layoutId;
+		_layoutId = layoutId;
 
-			if (!_setOriginalLayoutId) {
-				_setOriginalLayoutId = true;
+		if (!_setOriginalLayoutId) {
+			_setOriginalLayoutId = true;
 
-				_originalLayoutId = layoutId;
-			}
+			_originalLayoutId = layoutId;
 		}
 	}
 
@@ -286,9 +276,7 @@ public class LayoutModelImpl extends BaseModelImpl<Layout> {
 	}
 
 	public void setParentLayoutId(long parentLayoutId) {
-		if (parentLayoutId != _parentLayoutId) {
-			_parentLayoutId = parentLayoutId;
-		}
+		_parentLayoutId = parentLayoutId;
 	}
 
 	public String getName() {
@@ -296,9 +284,7 @@ public class LayoutModelImpl extends BaseModelImpl<Layout> {
 	}
 
 	public void setName(String name) {
-		if ((name != _name) || ((name != null) && !name.equals(_name))) {
-			_name = name;
-		}
+		_name = name;
 	}
 
 	public String getTitle() {
@@ -306,9 +292,7 @@ public class LayoutModelImpl extends BaseModelImpl<Layout> {
 	}
 
 	public void setTitle(String title) {
-		if ((title != _title) || ((title != null) && !title.equals(_title))) {
-			_title = title;
-		}
+		_title = title;
 	}
 
 	public String getDescription() {
@@ -316,10 +300,7 @@ public class LayoutModelImpl extends BaseModelImpl<Layout> {
 	}
 
 	public void setDescription(String description) {
-		if ((description != _description) ||
-				((description != null) && !description.equals(_description))) {
-			_description = description;
-		}
+		_description = description;
 	}
 
 	public String getType() {
@@ -327,9 +308,7 @@ public class LayoutModelImpl extends BaseModelImpl<Layout> {
 	}
 
 	public void setType(String type) {
-		if ((type != _type) || ((type != null) && !type.equals(_type))) {
-			_type = type;
-		}
+		_type = type;
 	}
 
 	public String getTypeSettings() {
@@ -337,10 +316,7 @@ public class LayoutModelImpl extends BaseModelImpl<Layout> {
 	}
 
 	public void setTypeSettings(String typeSettings) {
-		if ((typeSettings != _typeSettings) ||
-				((typeSettings != null) && !typeSettings.equals(_typeSettings))) {
-			_typeSettings = typeSettings;
-		}
+		_typeSettings = typeSettings;
 	}
 
 	public boolean getHidden() {
@@ -352,9 +328,7 @@ public class LayoutModelImpl extends BaseModelImpl<Layout> {
 	}
 
 	public void setHidden(boolean hidden) {
-		if (hidden != _hidden) {
-			_hidden = hidden;
-		}
+		_hidden = hidden;
 	}
 
 	public String getFriendlyURL() {
@@ -362,13 +336,10 @@ public class LayoutModelImpl extends BaseModelImpl<Layout> {
 	}
 
 	public void setFriendlyURL(String friendlyURL) {
-		if ((friendlyURL != _friendlyURL) ||
-				((friendlyURL != null) && !friendlyURL.equals(_friendlyURL))) {
-			_friendlyURL = friendlyURL;
+		_friendlyURL = friendlyURL;
 
-			if (_originalFriendlyURL == null) {
-				_originalFriendlyURL = friendlyURL;
-			}
+		if (_originalFriendlyURL == null) {
+			_originalFriendlyURL = friendlyURL;
 		}
 	}
 
@@ -385,9 +356,7 @@ public class LayoutModelImpl extends BaseModelImpl<Layout> {
 	}
 
 	public void setIconImage(boolean iconImage) {
-		if (iconImage != _iconImage) {
-			_iconImage = iconImage;
-		}
+		_iconImage = iconImage;
 	}
 
 	public long getIconImageId() {
@@ -395,14 +364,12 @@ public class LayoutModelImpl extends BaseModelImpl<Layout> {
 	}
 
 	public void setIconImageId(long iconImageId) {
-		if (iconImageId != _iconImageId) {
-			_iconImageId = iconImageId;
+		_iconImageId = iconImageId;
 
-			if (!_setOriginalIconImageId) {
-				_setOriginalIconImageId = true;
+		if (!_setOriginalIconImageId) {
+			_setOriginalIconImageId = true;
 
-				_originalIconImageId = iconImageId;
-			}
+			_originalIconImageId = iconImageId;
 		}
 	}
 
@@ -415,10 +382,7 @@ public class LayoutModelImpl extends BaseModelImpl<Layout> {
 	}
 
 	public void setThemeId(String themeId) {
-		if ((themeId != _themeId) ||
-				((themeId != null) && !themeId.equals(_themeId))) {
-			_themeId = themeId;
-		}
+		_themeId = themeId;
 	}
 
 	public String getColorSchemeId() {
@@ -426,11 +390,7 @@ public class LayoutModelImpl extends BaseModelImpl<Layout> {
 	}
 
 	public void setColorSchemeId(String colorSchemeId) {
-		if ((colorSchemeId != _colorSchemeId) ||
-				((colorSchemeId != null) &&
-				!colorSchemeId.equals(_colorSchemeId))) {
-			_colorSchemeId = colorSchemeId;
-		}
+		_colorSchemeId = colorSchemeId;
 	}
 
 	public String getWapThemeId() {
@@ -438,10 +398,7 @@ public class LayoutModelImpl extends BaseModelImpl<Layout> {
 	}
 
 	public void setWapThemeId(String wapThemeId) {
-		if ((wapThemeId != _wapThemeId) ||
-				((wapThemeId != null) && !wapThemeId.equals(_wapThemeId))) {
-			_wapThemeId = wapThemeId;
-		}
+		_wapThemeId = wapThemeId;
 	}
 
 	public String getWapColorSchemeId() {
@@ -449,11 +406,7 @@ public class LayoutModelImpl extends BaseModelImpl<Layout> {
 	}
 
 	public void setWapColorSchemeId(String wapColorSchemeId) {
-		if ((wapColorSchemeId != _wapColorSchemeId) ||
-				((wapColorSchemeId != null) &&
-				!wapColorSchemeId.equals(_wapColorSchemeId))) {
-			_wapColorSchemeId = wapColorSchemeId;
-		}
+		_wapColorSchemeId = wapColorSchemeId;
 	}
 
 	public String getCss() {
@@ -461,9 +414,7 @@ public class LayoutModelImpl extends BaseModelImpl<Layout> {
 	}
 
 	public void setCss(String css) {
-		if ((css != _css) || ((css != null) && !css.equals(_css))) {
-			_css = css;
-		}
+		_css = css;
 	}
 
 	public int getPriority() {
@@ -471,9 +422,7 @@ public class LayoutModelImpl extends BaseModelImpl<Layout> {
 	}
 
 	public void setPriority(int priority) {
-		if (priority != _priority) {
-			_priority = priority;
-		}
+		_priority = priority;
 	}
 
 	public long getDlFolderId() {
@@ -481,14 +430,12 @@ public class LayoutModelImpl extends BaseModelImpl<Layout> {
 	}
 
 	public void setDlFolderId(long dlFolderId) {
-		if (dlFolderId != _dlFolderId) {
-			_dlFolderId = dlFolderId;
+		_dlFolderId = dlFolderId;
 
-			if (!_setOriginalDlFolderId) {
-				_setOriginalDlFolderId = true;
+		if (!_setOriginalDlFolderId) {
+			_setOriginalDlFolderId = true;
 
-				_originalDlFolderId = dlFolderId;
-			}
+			_originalDlFolderId = dlFolderId;
 		}
 	}
 

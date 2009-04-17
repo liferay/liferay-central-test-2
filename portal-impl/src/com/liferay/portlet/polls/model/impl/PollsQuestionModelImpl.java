@@ -165,12 +165,10 @@ public class PollsQuestionModelImpl extends BaseModelImpl<PollsQuestion> {
 	}
 
 	public void setUuid(String uuid) {
-		if ((uuid != null) && !uuid.equals(_uuid)) {
-			_uuid = uuid;
+		_uuid = uuid;
 
-			if (_originalUuid == null) {
-				_originalUuid = uuid;
-			}
+		if (_originalUuid == null) {
+			_originalUuid = uuid;
 		}
 	}
 
@@ -183,9 +181,7 @@ public class PollsQuestionModelImpl extends BaseModelImpl<PollsQuestion> {
 	}
 
 	public void setQuestionId(long questionId) {
-		if (questionId != _questionId) {
-			_questionId = questionId;
-		}
+		_questionId = questionId;
 	}
 
 	public long getGroupId() {
@@ -193,14 +189,12 @@ public class PollsQuestionModelImpl extends BaseModelImpl<PollsQuestion> {
 	}
 
 	public void setGroupId(long groupId) {
-		if (groupId != _groupId) {
-			_groupId = groupId;
+		_groupId = groupId;
 
-			if (!_setOriginalGroupId) {
-				_setOriginalGroupId = true;
+		if (!_setOriginalGroupId) {
+			_setOriginalGroupId = true;
 
-				_originalGroupId = groupId;
-			}
+			_originalGroupId = groupId;
 		}
 	}
 
@@ -213,9 +207,7 @@ public class PollsQuestionModelImpl extends BaseModelImpl<PollsQuestion> {
 	}
 
 	public void setCompanyId(long companyId) {
-		if (companyId != _companyId) {
-			_companyId = companyId;
-		}
+		_companyId = companyId;
 	}
 
 	public long getUserId() {
@@ -223,9 +215,7 @@ public class PollsQuestionModelImpl extends BaseModelImpl<PollsQuestion> {
 	}
 
 	public void setUserId(long userId) {
-		if (userId != _userId) {
-			_userId = userId;
-		}
+		_userId = userId;
 	}
 
 	public String getUserName() {
@@ -233,10 +223,7 @@ public class PollsQuestionModelImpl extends BaseModelImpl<PollsQuestion> {
 	}
 
 	public void setUserName(String userName) {
-		if ((userName != _userName) ||
-				((userName != null) && !userName.equals(_userName))) {
-			_userName = userName;
-		}
+		_userName = userName;
 	}
 
 	public Date getCreateDate() {
@@ -244,10 +231,7 @@ public class PollsQuestionModelImpl extends BaseModelImpl<PollsQuestion> {
 	}
 
 	public void setCreateDate(Date createDate) {
-		if ((createDate != _createDate) ||
-				((createDate != null) && !createDate.equals(_createDate))) {
-			_createDate = createDate;
-		}
+		_createDate = createDate;
 	}
 
 	public Date getModifiedDate() {
@@ -255,10 +239,7 @@ public class PollsQuestionModelImpl extends BaseModelImpl<PollsQuestion> {
 	}
 
 	public void setModifiedDate(Date modifiedDate) {
-		if ((modifiedDate != _modifiedDate) ||
-				((modifiedDate != null) && !modifiedDate.equals(_modifiedDate))) {
-			_modifiedDate = modifiedDate;
-		}
+		_modifiedDate = modifiedDate;
 	}
 
 	public String getTitle() {
@@ -266,9 +247,7 @@ public class PollsQuestionModelImpl extends BaseModelImpl<PollsQuestion> {
 	}
 
 	public void setTitle(String title) {
-		if ((title != _title) || ((title != null) && !title.equals(_title))) {
-			_title = title;
-		}
+		_title = title;
 	}
 
 	public String getDescription() {
@@ -276,10 +255,7 @@ public class PollsQuestionModelImpl extends BaseModelImpl<PollsQuestion> {
 	}
 
 	public void setDescription(String description) {
-		if ((description != _description) ||
-				((description != null) && !description.equals(_description))) {
-			_description = description;
-		}
+		_description = description;
 	}
 
 	public Date getExpirationDate() {
@@ -287,11 +263,7 @@ public class PollsQuestionModelImpl extends BaseModelImpl<PollsQuestion> {
 	}
 
 	public void setExpirationDate(Date expirationDate) {
-		if ((expirationDate != _expirationDate) ||
-				((expirationDate != null) &&
-				!expirationDate.equals(_expirationDate))) {
-			_expirationDate = expirationDate;
-		}
+		_expirationDate = expirationDate;
 	}
 
 	public Date getLastVoteDate() {
@@ -299,10 +271,7 @@ public class PollsQuestionModelImpl extends BaseModelImpl<PollsQuestion> {
 	}
 
 	public void setLastVoteDate(Date lastVoteDate) {
-		if ((lastVoteDate != _lastVoteDate) ||
-				((lastVoteDate != null) && !lastVoteDate.equals(_lastVoteDate))) {
-			_lastVoteDate = lastVoteDate;
-		}
+		_lastVoteDate = lastVoteDate;
 	}
 
 	public PollsQuestion toEscapedModel() {

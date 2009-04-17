@@ -156,9 +156,7 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut> {
 	}
 
 	public void setUuid(String uuid) {
-		if ((uuid != null) && !uuid.equals(_uuid)) {
-			_uuid = uuid;
-		}
+		_uuid = uuid;
 	}
 
 	public long getFileShortcutId() {
@@ -166,9 +164,7 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut> {
 	}
 
 	public void setFileShortcutId(long fileShortcutId) {
-		if (fileShortcutId != _fileShortcutId) {
-			_fileShortcutId = fileShortcutId;
-		}
+		_fileShortcutId = fileShortcutId;
 	}
 
 	public long getCompanyId() {
@@ -176,9 +172,7 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut> {
 	}
 
 	public void setCompanyId(long companyId) {
-		if (companyId != _companyId) {
-			_companyId = companyId;
-		}
+		_companyId = companyId;
 	}
 
 	public long getUserId() {
@@ -186,9 +180,7 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut> {
 	}
 
 	public void setUserId(long userId) {
-		if (userId != _userId) {
-			_userId = userId;
-		}
+		_userId = userId;
 	}
 
 	public String getUserName() {
@@ -196,10 +188,7 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut> {
 	}
 
 	public void setUserName(String userName) {
-		if ((userName != _userName) ||
-				((userName != null) && !userName.equals(_userName))) {
-			_userName = userName;
-		}
+		_userName = userName;
 	}
 
 	public Date getCreateDate() {
@@ -207,10 +196,7 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut> {
 	}
 
 	public void setCreateDate(Date createDate) {
-		if ((createDate != _createDate) ||
-				((createDate != null) && !createDate.equals(_createDate))) {
-			_createDate = createDate;
-		}
+		_createDate = createDate;
 	}
 
 	public Date getModifiedDate() {
@@ -218,10 +204,7 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut> {
 	}
 
 	public void setModifiedDate(Date modifiedDate) {
-		if ((modifiedDate != _modifiedDate) ||
-				((modifiedDate != null) && !modifiedDate.equals(_modifiedDate))) {
-			_modifiedDate = modifiedDate;
-		}
+		_modifiedDate = modifiedDate;
 	}
 
 	public long getFolderId() {
@@ -229,9 +212,7 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut> {
 	}
 
 	public void setFolderId(long folderId) {
-		if (folderId != _folderId) {
-			_folderId = folderId;
-		}
+		_folderId = folderId;
 	}
 
 	public long getToFolderId() {
@@ -239,9 +220,7 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut> {
 	}
 
 	public void setToFolderId(long toFolderId) {
-		if (toFolderId != _toFolderId) {
-			_toFolderId = toFolderId;
-		}
+		_toFolderId = toFolderId;
 	}
 
 	public String getToName() {
@@ -249,10 +228,7 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut> {
 	}
 
 	public void setToName(String toName) {
-		if ((toName != _toName) ||
-				((toName != null) && !toName.equals(_toName))) {
-			_toName = toName;
-		}
+		_toName = toName;
 	}
 
 	public DLFileShortcut toEscapedModel() {

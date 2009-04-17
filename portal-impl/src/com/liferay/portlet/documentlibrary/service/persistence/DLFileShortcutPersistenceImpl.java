@@ -372,12 +372,6 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 
 	public List<DLFileShortcut> findByUuid(String uuid)
 		throws SystemException {
-		int count = countByUuid(uuid);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { uuid };
 
 		List<DLFileShortcut> list = (List<DLFileShortcut>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_UUID,
@@ -440,12 +434,6 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 
 	public List<DLFileShortcut> findByUuid(String uuid, int start, int end,
 		OrderByComparator obc) throws SystemException {
-		int count = countByUuid(uuid);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				uuid,
 				
@@ -613,12 +601,6 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 
 	public List<DLFileShortcut> findByFolderId(long folderId)
 		throws SystemException {
-		int count = countByFolderId(folderId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { new Long(folderId) };
 
 		List<DLFileShortcut> list = (List<DLFileShortcut>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_FOLDERID,
@@ -674,12 +656,6 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 
 	public List<DLFileShortcut> findByFolderId(long folderId, int start,
 		int end, OrderByComparator obc) throws SystemException {
-		int count = countByFolderId(folderId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(folderId),
 				
@@ -836,12 +812,6 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 
 	public List<DLFileShortcut> findByTF_TN(long toFolderId, String toName)
 		throws SystemException {
-		int count = countByTF_TN(toFolderId, toName);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { new Long(toFolderId), toName };
 
 		List<DLFileShortcut> list = (List<DLFileShortcut>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_TF_TN,
@@ -910,12 +880,6 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 
 	public List<DLFileShortcut> findByTF_TN(long toFolderId, String toName,
 		int start, int end, OrderByComparator obc) throws SystemException {
-		int count = countByTF_TN(toFolderId, toName);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(toFolderId),
 				

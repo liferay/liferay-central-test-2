@@ -284,6 +284,8 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl
 		boolean merge) throws SystemException {
 		boolean isNew = expandoTable.isNew();
 
+		ExpandoTableModelImpl expandoTableModelImpl = (ExpandoTableModelImpl)expandoTable;
+
 		Session session = null;
 
 		try {
@@ -304,8 +306,6 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl
 
 		EntityCacheUtil.putResult(ExpandoTableModelImpl.ENTITY_CACHE_ENABLED,
 			ExpandoTableImpl.class, expandoTable.getPrimaryKey(), expandoTable);
-
-		ExpandoTableModelImpl expandoTableModelImpl = (ExpandoTableModelImpl)expandoTable;
 
 		if (!isNew &&
 				((expandoTable.getCompanyId() != expandoTableModelImpl.getOriginalCompanyId()) ||
@@ -386,12 +386,6 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl
 
 	public List<ExpandoTable> findByC_C(long companyId, long classNameId)
 		throws SystemException {
-		int count = countByC_C(companyId, classNameId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(companyId), new Long(classNameId)
 			};
@@ -455,12 +449,6 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl
 
 	public List<ExpandoTable> findByC_C(long companyId, long classNameId,
 		int start, int end, OrderByComparator obc) throws SystemException {
-		int count = countByC_C(companyId, classNameId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(companyId), new Long(classNameId),
 				

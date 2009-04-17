@@ -273,6 +273,8 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		boolean isNew = resourceAction.isNew();
 
+		ResourceActionModelImpl resourceActionModelImpl = (ResourceActionModelImpl)resourceAction;
+
 		Session session = null;
 
 		try {
@@ -294,8 +296,6 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl
 		EntityCacheUtil.putResult(ResourceActionModelImpl.ENTITY_CACHE_ENABLED,
 			ResourceActionImpl.class, resourceAction.getPrimaryKey(),
 			resourceAction);
-
-		ResourceActionModelImpl resourceActionModelImpl = (ResourceActionModelImpl)resourceAction;
 
 		if (!isNew &&
 				(!resourceAction.getName()
@@ -375,12 +375,6 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl
 
 	public List<ResourceAction> findByName(String name)
 		throws SystemException {
-		int count = countByName(name);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { name };
 
 		List<ResourceAction> list = (List<ResourceAction>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_NAME,
@@ -448,12 +442,6 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl
 
 	public List<ResourceAction> findByName(String name, int start, int end,
 		OrderByComparator obc) throws SystemException {
-		int count = countByName(name);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				name,
 				

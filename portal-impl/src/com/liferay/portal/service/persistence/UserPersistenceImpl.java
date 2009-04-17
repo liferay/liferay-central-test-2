@@ -448,6 +448,8 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		boolean isNew = user.isNew();
 
+		UserModelImpl userModelImpl = (UserModelImpl)user;
+
 		if (Validator.isNull(user.getUuid())) {
 			String uuid = PortalUUIDUtil.generate();
 
@@ -474,8 +476,6 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 
 		EntityCacheUtil.putResult(UserModelImpl.ENTITY_CACHE_ENABLED,
 			UserImpl.class, user.getPrimaryKey(), user);
-
-		UserModelImpl userModelImpl = (UserModelImpl)user;
 
 		if (!isNew &&
 				(user.getContactId() != userModelImpl.getOriginalContactId())) {
@@ -644,12 +644,6 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public List<User> findByUuid(String uuid) throws SystemException {
-		int count = countByUuid(uuid);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { uuid };
 
 		List<User> list = (List<User>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_UUID,
@@ -711,12 +705,6 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 
 	public List<User> findByUuid(String uuid, int start, int end,
 		OrderByComparator obc) throws SystemException {
-		int count = countByUuid(uuid);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				uuid,
 				
@@ -878,12 +866,6 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public List<User> findByCompanyId(long companyId) throws SystemException {
-		int count = countByCompanyId(companyId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { new Long(companyId) };
 
 		List<User> list = (List<User>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_COMPANYID,
@@ -938,12 +920,6 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 
 	public List<User> findByCompanyId(long companyId, int start, int end,
 		OrderByComparator obc) throws SystemException {
-		int count = countByCompanyId(companyId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(companyId),
 				
@@ -1190,12 +1166,6 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 
 	public List<User> findByEmailAddress(String emailAddress)
 		throws SystemException {
-		int count = countByEmailAddress(emailAddress);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { emailAddress };
 
 		List<User> list = (List<User>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_EMAILADDRESS,
@@ -1257,12 +1227,6 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 
 	public List<User> findByEmailAddress(String emailAddress, int start,
 		int end, OrderByComparator obc) throws SystemException {
-		int count = countByEmailAddress(emailAddress);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				emailAddress,
 				

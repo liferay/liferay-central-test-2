@@ -141,9 +141,7 @@ public class ExpandoColumnModelImpl extends BaseModelImpl<ExpandoColumn> {
 	}
 
 	public void setColumnId(long columnId) {
-		if (columnId != _columnId) {
-			_columnId = columnId;
-		}
+		_columnId = columnId;
 	}
 
 	public long getCompanyId() {
@@ -151,9 +149,7 @@ public class ExpandoColumnModelImpl extends BaseModelImpl<ExpandoColumn> {
 	}
 
 	public void setCompanyId(long companyId) {
-		if (companyId != _companyId) {
-			_companyId = companyId;
-		}
+		_companyId = companyId;
 	}
 
 	public long getTableId() {
@@ -161,14 +157,12 @@ public class ExpandoColumnModelImpl extends BaseModelImpl<ExpandoColumn> {
 	}
 
 	public void setTableId(long tableId) {
-		if (tableId != _tableId) {
-			_tableId = tableId;
+		_tableId = tableId;
 
-			if (!_setOriginalTableId) {
-				_setOriginalTableId = true;
+		if (!_setOriginalTableId) {
+			_setOriginalTableId = true;
 
-				_originalTableId = tableId;
-			}
+			_originalTableId = tableId;
 		}
 	}
 
@@ -181,12 +175,10 @@ public class ExpandoColumnModelImpl extends BaseModelImpl<ExpandoColumn> {
 	}
 
 	public void setName(String name) {
-		if ((name != _name) || ((name != null) && !name.equals(_name))) {
-			_name = name;
+		_name = name;
 
-			if (_originalName == null) {
-				_originalName = name;
-			}
+		if (_originalName == null) {
+			_originalName = name;
 		}
 	}
 
@@ -199,9 +191,7 @@ public class ExpandoColumnModelImpl extends BaseModelImpl<ExpandoColumn> {
 	}
 
 	public void setType(int type) {
-		if (type != _type) {
-			_type = type;
-		}
+		_type = type;
 	}
 
 	public String getDefaultData() {
@@ -209,10 +199,7 @@ public class ExpandoColumnModelImpl extends BaseModelImpl<ExpandoColumn> {
 	}
 
 	public void setDefaultData(String defaultData) {
-		if ((defaultData != _defaultData) ||
-				((defaultData != null) && !defaultData.equals(_defaultData))) {
-			_defaultData = defaultData;
-		}
+		_defaultData = defaultData;
 	}
 
 	public String getTypeSettings() {
@@ -220,10 +207,7 @@ public class ExpandoColumnModelImpl extends BaseModelImpl<ExpandoColumn> {
 	}
 
 	public void setTypeSettings(String typeSettings) {
-		if ((typeSettings != _typeSettings) ||
-				((typeSettings != null) && !typeSettings.equals(_typeSettings))) {
-			_typeSettings = typeSettings;
-		}
+		_typeSettings = typeSettings;
 	}
 
 	public ExpandoColumn toEscapedModel() {

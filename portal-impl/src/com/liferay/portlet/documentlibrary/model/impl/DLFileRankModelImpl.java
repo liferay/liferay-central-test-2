@@ -141,9 +141,7 @@ public class DLFileRankModelImpl extends BaseModelImpl<DLFileRank> {
 	}
 
 	public void setFileRankId(long fileRankId) {
-		if (fileRankId != _fileRankId) {
-			_fileRankId = fileRankId;
-		}
+		_fileRankId = fileRankId;
 	}
 
 	public long getCompanyId() {
@@ -151,14 +149,12 @@ public class DLFileRankModelImpl extends BaseModelImpl<DLFileRank> {
 	}
 
 	public void setCompanyId(long companyId) {
-		if (companyId != _companyId) {
-			_companyId = companyId;
+		_companyId = companyId;
 
-			if (!_setOriginalCompanyId) {
-				_setOriginalCompanyId = true;
+		if (!_setOriginalCompanyId) {
+			_setOriginalCompanyId = true;
 
-				_originalCompanyId = companyId;
-			}
+			_originalCompanyId = companyId;
 		}
 	}
 
@@ -171,14 +167,12 @@ public class DLFileRankModelImpl extends BaseModelImpl<DLFileRank> {
 	}
 
 	public void setUserId(long userId) {
-		if (userId != _userId) {
-			_userId = userId;
+		_userId = userId;
 
-			if (!_setOriginalUserId) {
-				_setOriginalUserId = true;
+		if (!_setOriginalUserId) {
+			_setOriginalUserId = true;
 
-				_originalUserId = userId;
-			}
+			_originalUserId = userId;
 		}
 	}
 
@@ -191,10 +185,7 @@ public class DLFileRankModelImpl extends BaseModelImpl<DLFileRank> {
 	}
 
 	public void setCreateDate(Date createDate) {
-		if ((createDate != _createDate) ||
-				((createDate != null) && !createDate.equals(_createDate))) {
-			_createDate = createDate;
-		}
+		_createDate = createDate;
 	}
 
 	public long getFolderId() {
@@ -202,14 +193,12 @@ public class DLFileRankModelImpl extends BaseModelImpl<DLFileRank> {
 	}
 
 	public void setFolderId(long folderId) {
-		if (folderId != _folderId) {
-			_folderId = folderId;
+		_folderId = folderId;
 
-			if (!_setOriginalFolderId) {
-				_setOriginalFolderId = true;
+		if (!_setOriginalFolderId) {
+			_setOriginalFolderId = true;
 
-				_originalFolderId = folderId;
-			}
+			_originalFolderId = folderId;
 		}
 	}
 
@@ -222,12 +211,10 @@ public class DLFileRankModelImpl extends BaseModelImpl<DLFileRank> {
 	}
 
 	public void setName(String name) {
-		if ((name != _name) || ((name != null) && !name.equals(_name))) {
-			_name = name;
+		_name = name;
 
-			if (_originalName == null) {
-				_originalName = name;
-			}
+		if (_originalName == null) {
+			_originalName = name;
 		}
 	}
 

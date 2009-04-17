@@ -151,9 +151,7 @@ public class BlogsStatsUserModelImpl extends BaseModelImpl<BlogsStatsUser> {
 	}
 
 	public void setStatsUserId(long statsUserId) {
-		if (statsUserId != _statsUserId) {
-			_statsUserId = statsUserId;
-		}
+		_statsUserId = statsUserId;
 	}
 
 	public long getGroupId() {
@@ -161,14 +159,12 @@ public class BlogsStatsUserModelImpl extends BaseModelImpl<BlogsStatsUser> {
 	}
 
 	public void setGroupId(long groupId) {
-		if (groupId != _groupId) {
-			_groupId = groupId;
+		_groupId = groupId;
 
-			if (!_setOriginalGroupId) {
-				_setOriginalGroupId = true;
+		if (!_setOriginalGroupId) {
+			_setOriginalGroupId = true;
 
-				_originalGroupId = groupId;
-			}
+			_originalGroupId = groupId;
 		}
 	}
 
@@ -181,9 +177,7 @@ public class BlogsStatsUserModelImpl extends BaseModelImpl<BlogsStatsUser> {
 	}
 
 	public void setCompanyId(long companyId) {
-		if (companyId != _companyId) {
-			_companyId = companyId;
-		}
+		_companyId = companyId;
 	}
 
 	public long getUserId() {
@@ -191,14 +185,12 @@ public class BlogsStatsUserModelImpl extends BaseModelImpl<BlogsStatsUser> {
 	}
 
 	public void setUserId(long userId) {
-		if (userId != _userId) {
-			_userId = userId;
+		_userId = userId;
 
-			if (!_setOriginalUserId) {
-				_setOriginalUserId = true;
+		if (!_setOriginalUserId) {
+			_setOriginalUserId = true;
 
-				_originalUserId = userId;
-			}
+			_originalUserId = userId;
 		}
 	}
 
@@ -211,9 +203,7 @@ public class BlogsStatsUserModelImpl extends BaseModelImpl<BlogsStatsUser> {
 	}
 
 	public void setEntryCount(int entryCount) {
-		if (entryCount != _entryCount) {
-			_entryCount = entryCount;
-		}
+		_entryCount = entryCount;
 	}
 
 	public Date getLastPostDate() {
@@ -221,10 +211,7 @@ public class BlogsStatsUserModelImpl extends BaseModelImpl<BlogsStatsUser> {
 	}
 
 	public void setLastPostDate(Date lastPostDate) {
-		if ((lastPostDate != _lastPostDate) ||
-				((lastPostDate != null) && !lastPostDate.equals(_lastPostDate))) {
-			_lastPostDate = lastPostDate;
-		}
+		_lastPostDate = lastPostDate;
 	}
 
 	public int getRatingsTotalEntries() {
@@ -232,9 +219,7 @@ public class BlogsStatsUserModelImpl extends BaseModelImpl<BlogsStatsUser> {
 	}
 
 	public void setRatingsTotalEntries(int ratingsTotalEntries) {
-		if (ratingsTotalEntries != _ratingsTotalEntries) {
-			_ratingsTotalEntries = ratingsTotalEntries;
-		}
+		_ratingsTotalEntries = ratingsTotalEntries;
 	}
 
 	public double getRatingsTotalScore() {
@@ -242,9 +227,7 @@ public class BlogsStatsUserModelImpl extends BaseModelImpl<BlogsStatsUser> {
 	}
 
 	public void setRatingsTotalScore(double ratingsTotalScore) {
-		if (ratingsTotalScore != _ratingsTotalScore) {
-			_ratingsTotalScore = ratingsTotalScore;
-		}
+		_ratingsTotalScore = ratingsTotalScore;
 	}
 
 	public double getRatingsAverageScore() {
@@ -252,9 +235,7 @@ public class BlogsStatsUserModelImpl extends BaseModelImpl<BlogsStatsUser> {
 	}
 
 	public void setRatingsAverageScore(double ratingsAverageScore) {
-		if (ratingsAverageScore != _ratingsAverageScore) {
-			_ratingsAverageScore = ratingsAverageScore;
-		}
+		_ratingsAverageScore = ratingsAverageScore;
 	}
 
 	public BlogsStatsUser toEscapedModel() {

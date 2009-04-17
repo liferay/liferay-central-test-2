@@ -132,9 +132,7 @@ public class UserTrackerPathModelImpl extends BaseModelImpl<UserTrackerPath> {
 	}
 
 	public void setUserTrackerPathId(long userTrackerPathId) {
-		if (userTrackerPathId != _userTrackerPathId) {
-			_userTrackerPathId = userTrackerPathId;
-		}
+		_userTrackerPathId = userTrackerPathId;
 	}
 
 	public long getUserTrackerId() {
@@ -142,9 +140,7 @@ public class UserTrackerPathModelImpl extends BaseModelImpl<UserTrackerPath> {
 	}
 
 	public void setUserTrackerId(long userTrackerId) {
-		if (userTrackerId != _userTrackerId) {
-			_userTrackerId = userTrackerId;
-		}
+		_userTrackerId = userTrackerId;
 	}
 
 	public String getPath() {
@@ -152,9 +148,7 @@ public class UserTrackerPathModelImpl extends BaseModelImpl<UserTrackerPath> {
 	}
 
 	public void setPath(String path) {
-		if ((path != _path) || ((path != null) && !path.equals(_path))) {
-			_path = path;
-		}
+		_path = path;
 	}
 
 	public Date getPathDate() {
@@ -162,10 +156,7 @@ public class UserTrackerPathModelImpl extends BaseModelImpl<UserTrackerPath> {
 	}
 
 	public void setPathDate(Date pathDate) {
-		if ((pathDate != _pathDate) ||
-				((pathDate != null) && !pathDate.equals(_pathDate))) {
-			_pathDate = pathDate;
-		}
+		_pathDate = pathDate;
 	}
 
 	public UserTrackerPath toEscapedModel() {

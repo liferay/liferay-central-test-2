@@ -306,12 +306,6 @@ public class ImagePersistenceImpl extends BasePersistenceImpl
 	}
 
 	public List<Image> findBySize(int size) throws SystemException {
-		int count = countBySize(size);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { new Integer(size) };
 
 		List<Image> list = (List<Image>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_SIZE,
@@ -370,12 +364,6 @@ public class ImagePersistenceImpl extends BasePersistenceImpl
 
 	public List<Image> findBySize(int size, int start, int end,
 		OrderByComparator obc) throws SystemException {
-		int count = countBySize(size);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Integer(size),
 				

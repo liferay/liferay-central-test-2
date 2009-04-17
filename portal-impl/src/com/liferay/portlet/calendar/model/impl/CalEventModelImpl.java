@@ -205,12 +205,10 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent> {
 	}
 
 	public void setUuid(String uuid) {
-		if ((uuid != null) && !uuid.equals(_uuid)) {
-			_uuid = uuid;
+		_uuid = uuid;
 
-			if (_originalUuid == null) {
-				_originalUuid = uuid;
-			}
+		if (_originalUuid == null) {
+			_originalUuid = uuid;
 		}
 	}
 
@@ -223,9 +221,7 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent> {
 	}
 
 	public void setEventId(long eventId) {
-		if (eventId != _eventId) {
-			_eventId = eventId;
-		}
+		_eventId = eventId;
 	}
 
 	public long getGroupId() {
@@ -233,14 +229,12 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent> {
 	}
 
 	public void setGroupId(long groupId) {
-		if (groupId != _groupId) {
-			_groupId = groupId;
+		_groupId = groupId;
 
-			if (!_setOriginalGroupId) {
-				_setOriginalGroupId = true;
+		if (!_setOriginalGroupId) {
+			_setOriginalGroupId = true;
 
-				_originalGroupId = groupId;
-			}
+			_originalGroupId = groupId;
 		}
 	}
 
@@ -253,9 +247,7 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent> {
 	}
 
 	public void setCompanyId(long companyId) {
-		if (companyId != _companyId) {
-			_companyId = companyId;
-		}
+		_companyId = companyId;
 	}
 
 	public long getUserId() {
@@ -263,9 +255,7 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent> {
 	}
 
 	public void setUserId(long userId) {
-		if (userId != _userId) {
-			_userId = userId;
-		}
+		_userId = userId;
 	}
 
 	public String getUserName() {
@@ -273,10 +263,7 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent> {
 	}
 
 	public void setUserName(String userName) {
-		if ((userName != _userName) ||
-				((userName != null) && !userName.equals(_userName))) {
-			_userName = userName;
-		}
+		_userName = userName;
 	}
 
 	public Date getCreateDate() {
@@ -284,10 +271,7 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent> {
 	}
 
 	public void setCreateDate(Date createDate) {
-		if ((createDate != _createDate) ||
-				((createDate != null) && !createDate.equals(_createDate))) {
-			_createDate = createDate;
-		}
+		_createDate = createDate;
 	}
 
 	public Date getModifiedDate() {
@@ -295,10 +279,7 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent> {
 	}
 
 	public void setModifiedDate(Date modifiedDate) {
-		if ((modifiedDate != _modifiedDate) ||
-				((modifiedDate != null) && !modifiedDate.equals(_modifiedDate))) {
-			_modifiedDate = modifiedDate;
-		}
+		_modifiedDate = modifiedDate;
 	}
 
 	public String getTitle() {
@@ -306,9 +287,7 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent> {
 	}
 
 	public void setTitle(String title) {
-		if ((title != _title) || ((title != null) && !title.equals(_title))) {
-			_title = title;
-		}
+		_title = title;
 	}
 
 	public String getDescription() {
@@ -316,10 +295,7 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent> {
 	}
 
 	public void setDescription(String description) {
-		if ((description != _description) ||
-				((description != null) && !description.equals(_description))) {
-			_description = description;
-		}
+		_description = description;
 	}
 
 	public Date getStartDate() {
@@ -327,10 +303,7 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent> {
 	}
 
 	public void setStartDate(Date startDate) {
-		if ((startDate != _startDate) ||
-				((startDate != null) && !startDate.equals(_startDate))) {
-			_startDate = startDate;
-		}
+		_startDate = startDate;
 	}
 
 	public Date getEndDate() {
@@ -338,10 +311,7 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent> {
 	}
 
 	public void setEndDate(Date endDate) {
-		if ((endDate != _endDate) ||
-				((endDate != null) && !endDate.equals(_endDate))) {
-			_endDate = endDate;
-		}
+		_endDate = endDate;
 	}
 
 	public int getDurationHour() {
@@ -349,9 +319,7 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent> {
 	}
 
 	public void setDurationHour(int durationHour) {
-		if (durationHour != _durationHour) {
-			_durationHour = durationHour;
-		}
+		_durationHour = durationHour;
 	}
 
 	public int getDurationMinute() {
@@ -359,9 +327,7 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent> {
 	}
 
 	public void setDurationMinute(int durationMinute) {
-		if (durationMinute != _durationMinute) {
-			_durationMinute = durationMinute;
-		}
+		_durationMinute = durationMinute;
 	}
 
 	public boolean getAllDay() {
@@ -373,9 +339,7 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent> {
 	}
 
 	public void setAllDay(boolean allDay) {
-		if (allDay != _allDay) {
-			_allDay = allDay;
-		}
+		_allDay = allDay;
 	}
 
 	public boolean getTimeZoneSensitive() {
@@ -387,9 +351,7 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent> {
 	}
 
 	public void setTimeZoneSensitive(boolean timeZoneSensitive) {
-		if (timeZoneSensitive != _timeZoneSensitive) {
-			_timeZoneSensitive = timeZoneSensitive;
-		}
+		_timeZoneSensitive = timeZoneSensitive;
 	}
 
 	public String getType() {
@@ -397,9 +359,7 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent> {
 	}
 
 	public void setType(String type) {
-		if ((type != _type) || ((type != null) && !type.equals(_type))) {
-			_type = type;
-		}
+		_type = type;
 	}
 
 	public boolean getRepeating() {
@@ -411,9 +371,7 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent> {
 	}
 
 	public void setRepeating(boolean repeating) {
-		if (repeating != _repeating) {
-			_repeating = repeating;
-		}
+		_repeating = repeating;
 	}
 
 	public String getRecurrence() {
@@ -421,10 +379,7 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent> {
 	}
 
 	public void setRecurrence(String recurrence) {
-		if ((recurrence != _recurrence) ||
-				((recurrence != null) && !recurrence.equals(_recurrence))) {
-			_recurrence = recurrence;
-		}
+		_recurrence = recurrence;
 	}
 
 	public String getRemindBy() {
@@ -432,10 +387,7 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent> {
 	}
 
 	public void setRemindBy(String remindBy) {
-		if ((remindBy != _remindBy) ||
-				((remindBy != null) && !remindBy.equals(_remindBy))) {
-			_remindBy = remindBy;
-		}
+		_remindBy = remindBy;
 	}
 
 	public int getFirstReminder() {
@@ -443,9 +395,7 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent> {
 	}
 
 	public void setFirstReminder(int firstReminder) {
-		if (firstReminder != _firstReminder) {
-			_firstReminder = firstReminder;
-		}
+		_firstReminder = firstReminder;
 	}
 
 	public int getSecondReminder() {
@@ -453,9 +403,7 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent> {
 	}
 
 	public void setSecondReminder(int secondReminder) {
-		if (secondReminder != _secondReminder) {
-			_secondReminder = secondReminder;
-		}
+		_secondReminder = secondReminder;
 	}
 
 	public CalEvent toEscapedModel() {

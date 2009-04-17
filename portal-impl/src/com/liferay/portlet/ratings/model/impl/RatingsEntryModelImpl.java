@@ -154,9 +154,7 @@ public class RatingsEntryModelImpl extends BaseModelImpl<RatingsEntry> {
 	}
 
 	public void setEntryId(long entryId) {
-		if (entryId != _entryId) {
-			_entryId = entryId;
-		}
+		_entryId = entryId;
 	}
 
 	public long getCompanyId() {
@@ -164,9 +162,7 @@ public class RatingsEntryModelImpl extends BaseModelImpl<RatingsEntry> {
 	}
 
 	public void setCompanyId(long companyId) {
-		if (companyId != _companyId) {
-			_companyId = companyId;
-		}
+		_companyId = companyId;
 	}
 
 	public long getUserId() {
@@ -174,14 +170,12 @@ public class RatingsEntryModelImpl extends BaseModelImpl<RatingsEntry> {
 	}
 
 	public void setUserId(long userId) {
-		if (userId != _userId) {
-			_userId = userId;
+		_userId = userId;
 
-			if (!_setOriginalUserId) {
-				_setOriginalUserId = true;
+		if (!_setOriginalUserId) {
+			_setOriginalUserId = true;
 
-				_originalUserId = userId;
-			}
+			_originalUserId = userId;
 		}
 	}
 
@@ -194,10 +188,7 @@ public class RatingsEntryModelImpl extends BaseModelImpl<RatingsEntry> {
 	}
 
 	public void setUserName(String userName) {
-		if ((userName != _userName) ||
-				((userName != null) && !userName.equals(_userName))) {
-			_userName = userName;
-		}
+		_userName = userName;
 	}
 
 	public Date getCreateDate() {
@@ -205,10 +196,7 @@ public class RatingsEntryModelImpl extends BaseModelImpl<RatingsEntry> {
 	}
 
 	public void setCreateDate(Date createDate) {
-		if ((createDate != _createDate) ||
-				((createDate != null) && !createDate.equals(_createDate))) {
-			_createDate = createDate;
-		}
+		_createDate = createDate;
 	}
 
 	public Date getModifiedDate() {
@@ -216,10 +204,7 @@ public class RatingsEntryModelImpl extends BaseModelImpl<RatingsEntry> {
 	}
 
 	public void setModifiedDate(Date modifiedDate) {
-		if ((modifiedDate != _modifiedDate) ||
-				((modifiedDate != null) && !modifiedDate.equals(_modifiedDate))) {
-			_modifiedDate = modifiedDate;
-		}
+		_modifiedDate = modifiedDate;
 	}
 
 	public String getClassName() {
@@ -235,14 +220,12 @@ public class RatingsEntryModelImpl extends BaseModelImpl<RatingsEntry> {
 	}
 
 	public void setClassNameId(long classNameId) {
-		if (classNameId != _classNameId) {
-			_classNameId = classNameId;
+		_classNameId = classNameId;
 
-			if (!_setOriginalClassNameId) {
-				_setOriginalClassNameId = true;
+		if (!_setOriginalClassNameId) {
+			_setOriginalClassNameId = true;
 
-				_originalClassNameId = classNameId;
-			}
+			_originalClassNameId = classNameId;
 		}
 	}
 
@@ -255,14 +238,12 @@ public class RatingsEntryModelImpl extends BaseModelImpl<RatingsEntry> {
 	}
 
 	public void setClassPK(long classPK) {
-		if (classPK != _classPK) {
-			_classPK = classPK;
+		_classPK = classPK;
 
-			if (!_setOriginalClassPK) {
-				_setOriginalClassPK = true;
+		if (!_setOriginalClassPK) {
+			_setOriginalClassPK = true;
 
-				_originalClassPK = classPK;
-			}
+			_originalClassPK = classPK;
 		}
 	}
 
@@ -275,9 +256,7 @@ public class RatingsEntryModelImpl extends BaseModelImpl<RatingsEntry> {
 	}
 
 	public void setScore(double score) {
-		if (score != _score) {
-			_score = score;
-		}
+		_score = score;
 	}
 
 	public RatingsEntry toEscapedModel() {

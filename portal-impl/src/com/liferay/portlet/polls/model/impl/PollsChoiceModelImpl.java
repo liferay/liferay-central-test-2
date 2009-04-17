@@ -135,9 +135,7 @@ public class PollsChoiceModelImpl extends BaseModelImpl<PollsChoice> {
 	}
 
 	public void setUuid(String uuid) {
-		if ((uuid != null) && !uuid.equals(_uuid)) {
-			_uuid = uuid;
-		}
+		_uuid = uuid;
 	}
 
 	public long getChoiceId() {
@@ -145,9 +143,7 @@ public class PollsChoiceModelImpl extends BaseModelImpl<PollsChoice> {
 	}
 
 	public void setChoiceId(long choiceId) {
-		if (choiceId != _choiceId) {
-			_choiceId = choiceId;
-		}
+		_choiceId = choiceId;
 	}
 
 	public long getQuestionId() {
@@ -155,14 +151,12 @@ public class PollsChoiceModelImpl extends BaseModelImpl<PollsChoice> {
 	}
 
 	public void setQuestionId(long questionId) {
-		if (questionId != _questionId) {
-			_questionId = questionId;
+		_questionId = questionId;
 
-			if (!_setOriginalQuestionId) {
-				_setOriginalQuestionId = true;
+		if (!_setOriginalQuestionId) {
+			_setOriginalQuestionId = true;
 
-				_originalQuestionId = questionId;
-			}
+			_originalQuestionId = questionId;
 		}
 	}
 
@@ -175,12 +169,10 @@ public class PollsChoiceModelImpl extends BaseModelImpl<PollsChoice> {
 	}
 
 	public void setName(String name) {
-		if ((name != _name) || ((name != null) && !name.equals(_name))) {
-			_name = name;
+		_name = name;
 
-			if (_originalName == null) {
-				_originalName = name;
-			}
+		if (_originalName == null) {
+			_originalName = name;
 		}
 	}
 
@@ -193,10 +185,7 @@ public class PollsChoiceModelImpl extends BaseModelImpl<PollsChoice> {
 	}
 
 	public void setDescription(String description) {
-		if ((description != _description) ||
-				((description != null) && !description.equals(_description))) {
-			_description = description;
-		}
+		_description = description;
 	}
 
 	public PollsChoice toEscapedModel() {

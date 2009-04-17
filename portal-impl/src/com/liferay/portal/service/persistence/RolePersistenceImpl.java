@@ -322,6 +322,8 @@ public class RolePersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		boolean isNew = role.isNew();
 
+		RoleModelImpl roleModelImpl = (RoleModelImpl)role;
+
 		Session session = null;
 
 		try {
@@ -342,8 +344,6 @@ public class RolePersistenceImpl extends BasePersistenceImpl
 
 		EntityCacheUtil.putResult(RoleModelImpl.ENTITY_CACHE_ENABLED,
 			RoleImpl.class, role.getPrimaryKey(), role);
-
-		RoleModelImpl roleModelImpl = (RoleModelImpl)role;
 
 		if (!isNew &&
 				((role.getCompanyId() != roleModelImpl.getOriginalCompanyId()) ||
@@ -434,12 +434,6 @@ public class RolePersistenceImpl extends BasePersistenceImpl
 	}
 
 	public List<Role> findByCompanyId(long companyId) throws SystemException {
-		int count = countByCompanyId(companyId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { new Long(companyId) };
 
 		List<Role> list = (List<Role>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_COMPANYID,
@@ -498,12 +492,6 @@ public class RolePersistenceImpl extends BasePersistenceImpl
 
 	public List<Role> findByCompanyId(long companyId, int start, int end,
 		OrderByComparator obc) throws SystemException {
-		int count = countByCompanyId(companyId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(companyId),
 				

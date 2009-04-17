@@ -345,12 +345,6 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistenceImpl
 
 	public List<ShoppingCategory> findByGroupId(long groupId)
 		throws SystemException {
-		int count = countByGroupId(groupId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { new Long(groupId) };
 
 		List<ShoppingCategory> list = (List<ShoppingCategory>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_GROUPID,
@@ -411,12 +405,6 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistenceImpl
 
 	public List<ShoppingCategory> findByGroupId(long groupId, int start,
 		int end, OrderByComparator obc) throws SystemException {
-		int count = countByGroupId(groupId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				
@@ -585,12 +573,6 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistenceImpl
 
 	public List<ShoppingCategory> findByG_P(long groupId, long parentCategoryId)
 		throws SystemException {
-		int count = countByG_P(groupId, parentCategoryId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), new Long(parentCategoryId)
 			};
@@ -660,12 +642,6 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistenceImpl
 	public List<ShoppingCategory> findByG_P(long groupId,
 		long parentCategoryId, int start, int end, OrderByComparator obc)
 		throws SystemException {
-		int count = countByG_P(groupId, parentCategoryId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), new Long(parentCategoryId),
 				

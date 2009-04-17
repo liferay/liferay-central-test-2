@@ -329,6 +329,8 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl
 		boolean merge) throws SystemException {
 		boolean isNew = shoppingItem.isNew();
 
+		ShoppingItemModelImpl shoppingItemModelImpl = (ShoppingItemModelImpl)shoppingItem;
+
 		Session session = null;
 
 		try {
@@ -349,8 +351,6 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl
 
 		EntityCacheUtil.putResult(ShoppingItemModelImpl.ENTITY_CACHE_ENABLED,
 			ShoppingItemImpl.class, shoppingItem.getPrimaryKey(), shoppingItem);
-
-		ShoppingItemModelImpl shoppingItemModelImpl = (ShoppingItemModelImpl)shoppingItem;
 
 		if (!isNew &&
 				(shoppingItem.getSmallImageId() != shoppingItemModelImpl.getOriginalSmallImageId())) {
@@ -472,12 +472,6 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl
 
 	public List<ShoppingItem> findByCategoryId(long categoryId)
 		throws SystemException {
-		int count = countByCategoryId(categoryId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { new Long(categoryId) };
 
 		List<ShoppingItem> list = (List<ShoppingItem>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_CATEGORYID,
@@ -537,12 +531,6 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl
 
 	public List<ShoppingItem> findByCategoryId(long categoryId, int start,
 		int end, OrderByComparator obc) throws SystemException {
-		int count = countByCategoryId(categoryId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(categoryId),
 				

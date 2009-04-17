@@ -318,6 +318,8 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl
 		boolean merge) throws SystemException {
 		boolean isNew = mbMessageFlag.isNew();
 
+		MBMessageFlagModelImpl mbMessageFlagModelImpl = (MBMessageFlagModelImpl)mbMessageFlag;
+
 		Session session = null;
 
 		try {
@@ -339,8 +341,6 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl
 		EntityCacheUtil.putResult(MBMessageFlagModelImpl.ENTITY_CACHE_ENABLED,
 			MBMessageFlagImpl.class, mbMessageFlag.getPrimaryKey(),
 			mbMessageFlag);
-
-		MBMessageFlagModelImpl mbMessageFlagModelImpl = (MBMessageFlagModelImpl)mbMessageFlag;
 
 		if (!isNew &&
 				((mbMessageFlag.getUserId() != mbMessageFlagModelImpl.getOriginalUserId()) ||
@@ -418,12 +418,6 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl
 
 	public List<MBMessageFlag> findByUserId(long userId)
 		throws SystemException {
-		int count = countByUserId(userId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { new Long(userId) };
 
 		List<MBMessageFlag> list = (List<MBMessageFlag>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_USERID,
@@ -479,12 +473,6 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl
 
 	public List<MBMessageFlag> findByUserId(long userId, int start, int end,
 		OrderByComparator obc) throws SystemException {
-		int count = countByUserId(userId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(userId),
 				
@@ -638,12 +626,6 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl
 
 	public List<MBMessageFlag> findByMessageId(long messageId)
 		throws SystemException {
-		int count = countByMessageId(messageId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { new Long(messageId) };
 
 		List<MBMessageFlag> list = (List<MBMessageFlag>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_MESSAGEID,
@@ -699,12 +681,6 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl
 
 	public List<MBMessageFlag> findByMessageId(long messageId, int start,
 		int end, OrderByComparator obc) throws SystemException {
-		int count = countByMessageId(messageId);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(messageId),
 				
@@ -861,12 +837,6 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl
 
 	public List<MBMessageFlag> findByM_F(long messageId, int flag)
 		throws SystemException {
-		int count = countByM_F(messageId, flag);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(messageId), new Integer(flag)
 			};
@@ -930,12 +900,6 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl
 
 	public List<MBMessageFlag> findByM_F(long messageId, int flag, int start,
 		int end, OrderByComparator obc) throws SystemException {
-		int count = countByM_F(messageId, flag);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				new Long(messageId), new Integer(flag),
 				

@@ -228,6 +228,11 @@ public class OrganizationLocalServiceUtil {
 			organizationId);
 	}
 
+	public static void rebuildTree(long companyId, boolean force)
+		throws com.liferay.portal.SystemException {
+		getService().rebuildTree(companyId, force);
+	}
+
 	public static java.util.List<com.liferay.portal.model.Organization> search(
 		long companyId, long parentOrganizationId, java.lang.String keywords,
 		java.lang.String type, java.lang.Long regionId,

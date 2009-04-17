@@ -243,6 +243,8 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl
 		boolean merge) throws SystemException {
 		boolean isNew = className.isNew();
 
+		ClassNameModelImpl classNameModelImpl = (ClassNameModelImpl)className;
+
 		Session session = null;
 
 		try {
@@ -263,8 +265,6 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl
 
 		EntityCacheUtil.putResult(ClassNameModelImpl.ENTITY_CACHE_ENABLED,
 			ClassNameImpl.class, className.getPrimaryKey(), className);
-
-		ClassNameModelImpl classNameModelImpl = (ClassNameModelImpl)className;
 
 		if (!isNew &&
 				(!className.getValue()

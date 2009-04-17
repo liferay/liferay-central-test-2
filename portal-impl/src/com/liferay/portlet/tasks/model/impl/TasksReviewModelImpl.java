@@ -169,9 +169,7 @@ public class TasksReviewModelImpl extends BaseModelImpl<TasksReview> {
 	}
 
 	public void setReviewId(long reviewId) {
-		if (reviewId != _reviewId) {
-			_reviewId = reviewId;
-		}
+		_reviewId = reviewId;
 	}
 
 	public long getGroupId() {
@@ -179,9 +177,7 @@ public class TasksReviewModelImpl extends BaseModelImpl<TasksReview> {
 	}
 
 	public void setGroupId(long groupId) {
-		if (groupId != _groupId) {
-			_groupId = groupId;
-		}
+		_groupId = groupId;
 	}
 
 	public long getCompanyId() {
@@ -189,9 +185,7 @@ public class TasksReviewModelImpl extends BaseModelImpl<TasksReview> {
 	}
 
 	public void setCompanyId(long companyId) {
-		if (companyId != _companyId) {
-			_companyId = companyId;
-		}
+		_companyId = companyId;
 	}
 
 	public long getUserId() {
@@ -199,14 +193,12 @@ public class TasksReviewModelImpl extends BaseModelImpl<TasksReview> {
 	}
 
 	public void setUserId(long userId) {
-		if (userId != _userId) {
-			_userId = userId;
+		_userId = userId;
 
-			if (!_setOriginalUserId) {
-				_setOriginalUserId = true;
+		if (!_setOriginalUserId) {
+			_setOriginalUserId = true;
 
-				_originalUserId = userId;
-			}
+			_originalUserId = userId;
 		}
 	}
 
@@ -219,10 +211,7 @@ public class TasksReviewModelImpl extends BaseModelImpl<TasksReview> {
 	}
 
 	public void setUserName(String userName) {
-		if ((userName != _userName) ||
-				((userName != null) && !userName.equals(_userName))) {
-			_userName = userName;
-		}
+		_userName = userName;
 	}
 
 	public Date getCreateDate() {
@@ -230,10 +219,7 @@ public class TasksReviewModelImpl extends BaseModelImpl<TasksReview> {
 	}
 
 	public void setCreateDate(Date createDate) {
-		if ((createDate != _createDate) ||
-				((createDate != null) && !createDate.equals(_createDate))) {
-			_createDate = createDate;
-		}
+		_createDate = createDate;
 	}
 
 	public Date getModifiedDate() {
@@ -241,10 +227,7 @@ public class TasksReviewModelImpl extends BaseModelImpl<TasksReview> {
 	}
 
 	public void setModifiedDate(Date modifiedDate) {
-		if ((modifiedDate != _modifiedDate) ||
-				((modifiedDate != null) && !modifiedDate.equals(_modifiedDate))) {
-			_modifiedDate = modifiedDate;
-		}
+		_modifiedDate = modifiedDate;
 	}
 
 	public long getProposalId() {
@@ -252,14 +235,12 @@ public class TasksReviewModelImpl extends BaseModelImpl<TasksReview> {
 	}
 
 	public void setProposalId(long proposalId) {
-		if (proposalId != _proposalId) {
-			_proposalId = proposalId;
+		_proposalId = proposalId;
 
-			if (!_setOriginalProposalId) {
-				_setOriginalProposalId = true;
+		if (!_setOriginalProposalId) {
+			_setOriginalProposalId = true;
 
-				_originalProposalId = proposalId;
-			}
+			_originalProposalId = proposalId;
 		}
 	}
 
@@ -272,9 +253,7 @@ public class TasksReviewModelImpl extends BaseModelImpl<TasksReview> {
 	}
 
 	public void setAssignedByUserId(long assignedByUserId) {
-		if (assignedByUserId != _assignedByUserId) {
-			_assignedByUserId = assignedByUserId;
-		}
+		_assignedByUserId = assignedByUserId;
 	}
 
 	public String getAssignedByUserName() {
@@ -282,11 +261,7 @@ public class TasksReviewModelImpl extends BaseModelImpl<TasksReview> {
 	}
 
 	public void setAssignedByUserName(String assignedByUserName) {
-		if ((assignedByUserName != _assignedByUserName) ||
-				((assignedByUserName != null) &&
-				!assignedByUserName.equals(_assignedByUserName))) {
-			_assignedByUserName = assignedByUserName;
-		}
+		_assignedByUserName = assignedByUserName;
 	}
 
 	public int getStage() {
@@ -294,9 +269,7 @@ public class TasksReviewModelImpl extends BaseModelImpl<TasksReview> {
 	}
 
 	public void setStage(int stage) {
-		if (stage != _stage) {
-			_stage = stage;
-		}
+		_stage = stage;
 	}
 
 	public boolean getCompleted() {
@@ -308,9 +281,7 @@ public class TasksReviewModelImpl extends BaseModelImpl<TasksReview> {
 	}
 
 	public void setCompleted(boolean completed) {
-		if (completed != _completed) {
-			_completed = completed;
-		}
+		_completed = completed;
 	}
 
 	public boolean getRejected() {
@@ -322,9 +293,7 @@ public class TasksReviewModelImpl extends BaseModelImpl<TasksReview> {
 	}
 
 	public void setRejected(boolean rejected) {
-		if (rejected != _rejected) {
-			_rejected = rejected;
-		}
+		_rejected = rejected;
 	}
 
 	public TasksReview toEscapedModel() {

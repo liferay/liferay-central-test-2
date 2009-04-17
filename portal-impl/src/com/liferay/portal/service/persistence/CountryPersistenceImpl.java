@@ -281,6 +281,8 @@ public class CountryPersistenceImpl extends BasePersistenceImpl
 		boolean merge) throws SystemException {
 		boolean isNew = country.isNew();
 
+		CountryModelImpl countryModelImpl = (CountryModelImpl)country;
+
 		Session session = null;
 
 		try {
@@ -301,8 +303,6 @@ public class CountryPersistenceImpl extends BasePersistenceImpl
 
 		EntityCacheUtil.putResult(CountryModelImpl.ENTITY_CACHE_ENABLED,
 			CountryImpl.class, country.getPrimaryKey(), country);
-
-		CountryModelImpl countryModelImpl = (CountryModelImpl)country;
 
 		if (!isNew &&
 				(!country.getName().equals(countryModelImpl.getOriginalName()))) {
@@ -716,12 +716,6 @@ public class CountryPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public List<Country> findByActive(boolean active) throws SystemException {
-		int count = countByActive(active);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] { Boolean.valueOf(active) };
 
 		List<Country> list = (List<Country>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_ACTIVE,
@@ -780,12 +774,6 @@ public class CountryPersistenceImpl extends BasePersistenceImpl
 
 	public List<Country> findByActive(boolean active, int start, int end,
 		OrderByComparator obc) throws SystemException {
-		int count = countByActive(active);
-
-		if (count == 0) {
-			return Collections.EMPTY_LIST;
-		}
-
 		Object[] finderArgs = new Object[] {
 				Boolean.valueOf(active),
 				
