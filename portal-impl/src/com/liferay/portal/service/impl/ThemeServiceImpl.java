@@ -45,15 +45,16 @@ public class ThemeServiceImpl extends ThemeServiceBaseImpl {
 	public JSONArray getWARThemes() {
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
-		List<Theme> warThemes = themeLocalService.getWARThemes();
+		List<Theme> themes = themeLocalService.getWARThemes();
 
-		for(Theme theme : warThemes) {
-			JSONObject jsonObject= JSONFactoryUtil.createJSONObject();
+		for (Theme theme : themes) {
+			JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
+
 			jsonObject.put("theme_id", theme.getThemeId());
 			jsonObject.put("theme_name", theme.getName());
 			jsonObject.put(
-				"servlet_context_name",
-				theme.getServletContextName());
+				"servlet_context_name", theme.getServletContextName());
+
 			jsonArray.put(jsonObject);
 		}
 

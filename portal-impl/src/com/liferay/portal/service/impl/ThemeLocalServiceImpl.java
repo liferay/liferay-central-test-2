@@ -199,22 +199,19 @@ public class ThemeLocalServiceImpl extends ThemeLocalServiceBaseImpl {
 	}
 
 	public List<Theme> getWARThemes() {
-		Iterator<Map.Entry<String, Theme>> itr =
-			_themes.entrySet().iterator();
+		List<Theme> themes = ListUtil.fromCollection(_themes.values());
 
-		List<Theme> warThemes = new ArrayList();
+		Iterator<Theme> itr = themes.iterator();
 
 		while (itr.hasNext()) {
-			Map.Entry<String, Theme> entry = itr.next();
+			Theme theme = itr.next();
 
-			Theme theme = entry.getValue();
-
-			if (theme.isWARFile()) {
-				warThemes.add(theme);
+			if (!theme.isWARFile()) {
+				itr.remove();
 			}
 		}
 
-		return warThemes;
+		return themes;
 	}
 
 	public List<String> init(
