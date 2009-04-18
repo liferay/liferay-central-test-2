@@ -71,7 +71,6 @@ public class OrganizationPersistenceTest extends BasePersistenceTestCase {
 		Organization newOrganization = _persistence.create(pk);
 
 		newOrganization.setCompanyId(nextLong());
-		newOrganization.setParentOrganizationId(nextLong());
 		newOrganization.setLeftOrganizationId(nextLong());
 		newOrganization.setRightOrganizationId(nextLong());
 		newOrganization.setName(randomString());
@@ -152,7 +151,6 @@ public class OrganizationPersistenceTest extends BasePersistenceTestCase {
 		Organization organization = _persistence.create(pk);
 
 		organization.setCompanyId(nextLong());
-		organization.setParentOrganizationId(nextLong());
 		organization.setLeftOrganizationId(nextLong());
 		organization.setRightOrganizationId(nextLong());
 		organization.setName(randomString());

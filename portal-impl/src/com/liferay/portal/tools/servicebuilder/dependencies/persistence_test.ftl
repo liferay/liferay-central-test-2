@@ -1,3 +1,11 @@
+<#assign parentPKColumn = "">
+
+<#if entity.isHierarchicalTree()>
+	<#assign pkColumn = entity.getPKList()?first>
+
+	<#assign parentPKColumn = entity.getColumn("parent" + pkColumn.methodName)>
+</#if>
+
 package ${packagePath}.service.persistence;
 
 <#assign noSuchEntity = serviceBuilder.getNoSuchEntityException(entity)>
@@ -111,7 +119,7 @@ public class ${entity.name}PersistenceTest extends BasePersistenceTestCase {
 		${entity.name} new${entity.name} = _persistence.create(pk);
 
 		<#list entity.regularColList as column>
-			<#if !column.primary>
+			<#if !column.primary && ((parentPKColumn == "") || (parentPKColumn.name != column.name))>
 				new${entity.name}.set${column.methodName}(
 
 				<#if column.type == "boolean">
@@ -283,7 +291,7 @@ public class ${entity.name}PersistenceTest extends BasePersistenceTestCase {
 		${entity.name} ${entity.varName} = _persistence.create(pk);
 
 		<#list entity.regularColList as column>
-			<#if !column.primary>
+			<#if !column.primary && ((parentPKColumn == "") || (parentPKColumn.name != column.name))>
 				${entity.varName}.set${column.methodName}(
 
 				<#if column.type == "boolean">
