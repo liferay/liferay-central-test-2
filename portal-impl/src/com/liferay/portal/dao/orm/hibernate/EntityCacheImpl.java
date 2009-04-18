@@ -285,7 +285,7 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 		StringBuilder sb = new StringBuilder();
 
 		sb.append(CACHE_NAME);
-		sb.append(StringPool.POUND);
+		sb.append(StringPool.PERIOD);
 		sb.append(className);
 
 		return sb.toString();
@@ -297,7 +297,7 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 		StringBuilder sb = new StringBuilder();
 
 		sb.append(classObj.getName());
-		sb.append(StringPool.POUND);
+		sb.append(StringPool.PERIOD);
 		sb.append(primaryKeyObj);
 
 		return sb.toString();
