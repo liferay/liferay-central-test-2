@@ -38,6 +38,8 @@ boolean urlIsNull = !urlIsNotNull;
 
 if (urlIsNull && (userDisplay != null)) {
 	url = userDisplay.getDisplayURL(themeDisplay);
+	urlIsNotNull = true;
+	urlIsNull = false;
 }
 
 List<Presence> presences = null;
