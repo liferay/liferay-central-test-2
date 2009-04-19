@@ -52,6 +52,18 @@ String keywords = ParamUtil.getString(request, "keywords");
 <h1 class="page-title"><liferay-ui:message key="search-results" /></h1>
 
 <%
+PortletURL newPageURL = renderResponse.createRenderURL();
+
+newPageURL.setParameter("struts_action", "/wiki/edit_page");
+newPageURL.setParameter("redirect", redirect);
+newPageURL.setParameter("nodeId", String.valueOf(nodeId));
+newPageURL.setParameter("title", keywords);
+newPageURL.setParameter("editTitle", "1");
+%>
+
+<%= LanguageUtil.format(pageContext, "if-you-do-not-find-what-you-are-looking-for-you-can-create-a-new-page-about-this-topic-yourself", newPageURL.toString()) %>
+
+<%
 PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setParameter("struts_action", "/wiki/search");
