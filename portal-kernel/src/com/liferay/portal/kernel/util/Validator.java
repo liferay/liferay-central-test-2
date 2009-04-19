@@ -175,6 +175,10 @@ public class Validator {
 		String[] domainNameArray = StringUtil.split(
 			domainName, StringPool.PERIOD);
 
+		if (!domainName.equals("localhost") && domainNameArray.length < 2) {
+			return false;
+		}
+
 		for (String domainNamePart : domainNameArray) {
 			char[] domainNamePartCharArray = domainNamePart.toCharArray();
 
