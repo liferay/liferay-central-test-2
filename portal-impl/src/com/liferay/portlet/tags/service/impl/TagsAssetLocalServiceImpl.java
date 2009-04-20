@@ -523,8 +523,6 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 			asset.setPriority(priority.intValue());
 		}
 
-		tagsAssetPersistence.update(asset, false);
-
 		// Entries
 
 		List<TagsEntry> entries = new ArrayList<TagsEntry>(entryNames.length);
@@ -568,6 +566,9 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 		}
 
 		tagsAssetPersistence.setTagsEntries(asset.getAssetId(), entries);
+		
+		// LPS-3006
+		tagsAssetPersistence.update(asset, false);
 
 		// Synchronize
 
