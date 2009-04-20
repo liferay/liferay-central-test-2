@@ -55,6 +55,7 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 
 	protected void doUpgrade() throws Exception {
 		updateGroupId();
+		updateMessageFlagThreadId();
 		updateMessagePriority();
 	}
 
