@@ -333,6 +333,10 @@ public interface MBMessageLocalService {
 	public void reIndex(long messageId)
 		throws com.liferay.portal.SystemException;
 
+	public void reIndex(
+		com.liferay.portlet.messageboards.model.MBMessage message)
+		throws com.liferay.portal.SystemException;
+
 	public void subscribeMessage(long userId, long messageId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;

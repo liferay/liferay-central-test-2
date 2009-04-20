@@ -1073,15 +1073,17 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			return;
 		}
 
-		MBCategory category = mbCategoryPersistence.fetchByPrimaryKey(
-			message.getCategoryId());
+		reIndex(message);
+	}
 
-		long companyId = category.getCompanyId();
-		long groupId = category.getGroupId();
+	public void reIndex(MBMessage message) throws SystemException {
+		long companyId = message.getCompanyId();
+		long groupId = message.getGroupId();
 		long userId = message.getUserId();
 		String userName = message.getUserName();
-		long categoryId = category.getCategoryId();
+		long categoryId = message.getCategoryId();
 		long threadId = message.getThreadId();
+		long messageId = message.getMessageId();
 		String title = message.getSubject();
 		String content = message.getBody();
 		boolean anonymous = message.isAnonymous();

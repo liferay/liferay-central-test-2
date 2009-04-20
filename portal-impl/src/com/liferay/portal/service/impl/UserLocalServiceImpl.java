@@ -1489,18 +1489,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		long companyId = GetterUtil.getLong(ids[0]);
 
 		try {
-			for (User user : userPersistence.findByCompanyId(companyId)) {
-				if (user.isDefaultUser()) {
-					continue;
-				}
-
-				try {
-					UserIndexer.updateUser(user);
-				}
-				catch (SearchException se) {
-					_log.error("Reindexing " + user.getUserId(), se);
-				}
-			}
+			reIndexUsers(companyId);
 		}
 		catch (SystemException se) {
 			throw se;
@@ -3063,6 +3052,39 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			}
 			else {
 				searchQuery.addTerm(key, String.valueOf(value));
+			}
+		}
+	}
+
+	protected void reIndexUsers(long companyId) throws SystemException {
+		int count = userPersistence.countByCompanyId(companyId);
+
+		int pages = count / UserIndexer.DEFAULT_INTERVAL;
+
+		for (int i = 0; i <= pages; i++) {
+			int start = (i * UserIndexer.DEFAULT_INTERVAL);
+			int end = start + UserIndexer.DEFAULT_INTERVAL;
+
+			reIndexUsers(companyId, start, end);
+		}
+	}
+
+	protected void reIndexUsers(long companyId, int start, int end)
+		throws SystemException {
+
+		List<User> users = userPersistence.findByCompanyId(
+			companyId, start, end);
+
+		for (User user : users) {
+			if (user.isDefaultUser()) {
+				continue;
+			}
+
+			try {
+				UserIndexer.updateUser(user);
+			}
+			catch (SearchException se) {
+				_log.error("Reindexing " + user.getUserId(), se);
 			}
 		}
 	}

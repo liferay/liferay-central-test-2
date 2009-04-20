@@ -712,30 +712,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		long companyId = GetterUtil.getLong(ids[0]);
 
 		try {
-			for (CalEvent event :
-					calEventPersistence.findByCompanyId(companyId)) {
-
-				long groupId = event.getGroupId();
-				long userId = event.getUserId();
-				String userName = event.getUserName();
-				long eventId = event.getEventId();
-				String title = event.getTitle();
-				String description = event.getDescription();
-				Date modifiedDate = event.getModifiedDate();
-
-				String[] tagsEntries = tagsEntryLocalService.getEntryNames(
-					CalEvent.class.getName(), eventId);
-
-				try {
-					Indexer.updateEvent(
-						companyId, groupId, userId, userName, eventId, title,
-						description, modifiedDate, tagsEntries,
-						event.getExpandoBridge());
-				}
-				catch (SearchException se) {
-					_log.error("Reindexing " + eventId, se);
-				}
-			}
+			reIndexEvents(companyId);
 		}
 		catch (SystemException se) {
 			throw se;
@@ -1173,6 +1150,49 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		}
 
 		return false;
+	}
+
+	protected void reIndexEvents(long companyId) throws SystemException {
+		int count = calEventPersistence.countByCompanyId(companyId);
+
+		int pages = count / Indexer.DEFAULT_INTERVAL;
+
+		for (int i = 0; i <= pages; i++) {
+			int start = (i * Indexer.DEFAULT_INTERVAL);
+			int end = start + Indexer.DEFAULT_INTERVAL;
+
+			reIndexEvents(companyId, start, end);
+		}
+	}
+
+	protected void reIndexEvents(long companyId, int start, int end)
+		throws SystemException {
+
+		List<CalEvent> events = calEventPersistence.findByCompanyId(
+			companyId, start, end);
+
+		for (CalEvent event : events) {
+			long groupId = event.getGroupId();
+			long userId = event.getUserId();
+			String userName = event.getUserName();
+			long eventId = event.getEventId();
+			String title = event.getTitle();
+			String description = event.getDescription();
+			Date modifiedDate = event.getModifiedDate();
+
+			String[] tagsEntries = tagsEntryLocalService.getEntryNames(
+				CalEvent.class.getName(), eventId);
+
+			try {
+				Indexer.updateEvent(
+					companyId, groupId, userId, userName, eventId, title,
+					description, modifiedDate, tagsEntries,
+					event.getExpandoBridge());
+			}
+			catch (SearchException se) {
+				_log.error("Reindexing " + eventId, se);
+			}
+		}
 	}
 
 	protected void remindUser(CalEvent event, User user, Calendar startDate) {

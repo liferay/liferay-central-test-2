@@ -428,6 +428,12 @@ public class MBMessageLocalServiceUtil {
 		getService().reIndex(messageId);
 	}
 
+	public static void reIndex(
+		com.liferay.portlet.messageboards.model.MBMessage message)
+		throws com.liferay.portal.SystemException {
+		getService().reIndex(message);
+	}
+
 	public static void subscribeMessage(long userId, long messageId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {

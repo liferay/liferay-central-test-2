@@ -33,6 +33,8 @@ import javax.portlet.PortletURL;
  */
 public interface Indexer {
 
+	public static final int DEFAULT_INTERVAL = 1000;
+
 	public String[] getClassNames();
 
 	public DocumentSummary getDocumentSummary(

@@ -345,41 +345,7 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 		long companyId = GetterUtil.getLong(ids[0]);
 
 		try {
-			List<MBCategory> categories = mbCategoryPersistence.findByCompanyId(
-				companyId);
-
-			for (MBCategory category : categories) {
-				long categoryId = category.getCategoryId();
-
-				List<MBMessage> messages =
-					mbMessagePersistence.findByCategoryId(categoryId);
-
-				for (MBMessage message : messages) {
-					long groupId = category.getGroupId();
-					long userId = message.getUserId();
-					String userName = message.getUserName();
-					long threadId = message.getThreadId();
-					long messageId = message.getMessageId();
-					String title = message.getSubject();
-					String content = message.getBody();
-					boolean anonymous = message.isAnonymous();
-					Date modifiedDate = message.getModifiedDate();
-
-					String[] tagsEntries = tagsEntryLocalService.getEntryNames(
-						MBMessage.class.getName(), messageId);
-
-					try {
-						Indexer.updateMessage(
-							companyId, groupId, userId, userName, categoryId,
-							threadId, messageId, title, content, anonymous,
-							modifiedDate, tagsEntries,
-							message.getExpandoBridge());
-					}
-					catch (SearchException se) {
-						_log.error("Reindexing " + messageId, se);
-					}
-				}
-			}
+			reIndexCategories(companyId);
 		}
 		catch (SystemException se) {
 			throw se;
@@ -630,6 +596,55 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 
 		subscriptionLocalService.deleteSubscription(
 			userId, MBCategory.class.getName(), categoryId);
+	}
+
+	protected void reIndexCategories(long companyId) throws SystemException {
+		int categoryCount = userPersistence.countByCompanyId(companyId);
+
+		int categoryPages = categoryCount / Indexer.DEFAULT_INTERVAL;
+
+		for (int i = 0; i <= categoryPages; i++) {
+			int categoryStart = (i * Indexer.DEFAULT_INTERVAL);
+			int categoryEnd = categoryStart + Indexer.DEFAULT_INTERVAL;
+
+			reIndexCategories(companyId, categoryStart, categoryEnd);
+		}
+	}
+
+	protected void reIndexCategories(
+			long companyId, int categoryStart, int categoryEnd)
+		throws SystemException {
+
+		List<MBCategory> categories = mbCategoryPersistence.findByCompanyId(
+			companyId, categoryStart, categoryEnd);
+
+		for (MBCategory category : categories) {
+			long categoryId = category.getCategoryId();
+
+			int messageCount = mbMessagePersistence.countByCategoryId(
+				categoryId);
+
+			int messagePages = messageCount / Indexer.DEFAULT_INTERVAL;
+
+			for (int i = 0; i <= messagePages; i++) {
+				int messageStart = (i * Indexer.DEFAULT_INTERVAL);
+				int messageEnd = messageStart + Indexer.DEFAULT_INTERVAL;
+
+				reIndexMessages(categoryId, messageStart, messageEnd);
+			}
+		}
+	}
+
+	protected void reIndexMessages(
+			long categoryId, int messageStart, int messageEnd)
+		throws SystemException {
+
+		List<MBMessage> messages = mbMessagePersistence.findByCategoryId(
+			categoryId, messageStart, messageEnd);
+
+		for (MBMessage message : messages) {
+			mbMessageLocalService.reIndex(message);
+		}
 	}
 
 	protected void validate(String name) throws PortalException {
