@@ -362,6 +362,8 @@ public interface PropsKeys {
 
 	public static final String DEFAULT_WAP_THEME_ID = "default.wap.theme.id";
 
+	public static final String DISCUSSION_THREAD_VIEW = "discussion.thread.view";
+
 	public static final String DL_COMPARABLE_FILE_EXTENSIONS = "dl.comparable.file.extensions";
 
 	public static final String DL_FILE_ENTRY_COMMENTS_ENABLED = "dl.file.entry.comments.enabled";

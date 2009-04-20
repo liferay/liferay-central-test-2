@@ -147,6 +147,21 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl
 	public static final FinderPath FINDER_PATH_COUNT_BY_THREADID = new FinderPath(MBMessageModelImpl.ENTITY_CACHE_ENABLED,
 			MBMessageModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"countByThreadId", new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_THREADREPLIES = new FinderPath(MBMessageModelImpl.ENTITY_CACHE_ENABLED,
+			MBMessageModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByThreadReplies", new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_THREADREPLIES = new FinderPath(MBMessageModelImpl.ENTITY_CACHE_ENABLED,
+			MBMessageModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByThreadReplies",
+			new String[] {
+				Long.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_THREADREPLIES = new FinderPath(MBMessageModelImpl.ENTITY_CACHE_ENABLED,
+			MBMessageModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByThreadReplies", new String[] { Long.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_BY_G_U = new FinderPath(MBMessageModelImpl.ENTITY_CACHE_ENABLED,
 			MBMessageModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findByG_U",
@@ -1758,6 +1773,234 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
+	public List<MBMessage> findByThreadReplies(long threadId)
+		throws SystemException {
+		Object[] finderArgs = new Object[] { new Long(threadId) };
+
+		List<MBMessage> list = (List<MBMessage>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_THREADREPLIES,
+				finderArgs, this);
+
+		if (list == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append(
+					"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
+
+				query.append("threadId = ?");
+
+				query.append(" AND parentMessageId != 0 ");
+
+				query.append("ORDER BY ");
+
+				query.append("createDate ASC, ");
+				query.append("messageId ASC");
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(threadId);
+
+				list = q.list();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<MBMessage>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_THREADREPLIES,
+					finderArgs, list);
+
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	public List<MBMessage> findByThreadReplies(long threadId, int start, int end)
+		throws SystemException {
+		return findByThreadReplies(threadId, start, end, null);
+	}
+
+	public List<MBMessage> findByThreadReplies(long threadId, int start,
+		int end, OrderByComparator obc) throws SystemException {
+		Object[] finderArgs = new Object[] {
+				new Long(threadId),
+				
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+			};
+
+		List<MBMessage> list = (List<MBMessage>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_THREADREPLIES,
+				finderArgs, this);
+
+		if (list == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append(
+					"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
+
+				query.append("threadId = ?");
+
+				query.append(" AND parentMessageId != 0 ");
+
+				if (obc != null) {
+					query.append("ORDER BY ");
+					query.append(obc.getOrderBy());
+				}
+
+				else {
+					query.append("ORDER BY ");
+
+					query.append("createDate ASC, ");
+					query.append("messageId ASC");
+				}
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(threadId);
+
+				list = (List<MBMessage>)QueryUtil.list(q, getDialect(), start,
+						end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<MBMessage>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_THREADREPLIES,
+					finderArgs, list);
+
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	public MBMessage findByThreadReplies_First(long threadId,
+		OrderByComparator obc) throws NoSuchMessageException, SystemException {
+		List<MBMessage> list = findByThreadReplies(threadId, 0, 1, obc);
+
+		if (list.isEmpty()) {
+			StringBuilder msg = new StringBuilder();
+
+			msg.append("No MBMessage exists with the key {");
+
+			msg.append("threadId=" + threadId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchMessageException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public MBMessage findByThreadReplies_Last(long threadId,
+		OrderByComparator obc) throws NoSuchMessageException, SystemException {
+		int count = countByThreadReplies(threadId);
+
+		List<MBMessage> list = findByThreadReplies(threadId, count - 1, count,
+				obc);
+
+		if (list.isEmpty()) {
+			StringBuilder msg = new StringBuilder();
+
+			msg.append("No MBMessage exists with the key {");
+
+			msg.append("threadId=" + threadId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchMessageException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public MBMessage[] findByThreadReplies_PrevAndNext(long messageId,
+		long threadId, OrderByComparator obc)
+		throws NoSuchMessageException, SystemException {
+		MBMessage mbMessage = findByPrimaryKey(messageId);
+
+		int count = countByThreadReplies(threadId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuilder query = new StringBuilder();
+
+			query.append(
+				"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
+
+			query.append("threadId = ?");
+
+			query.append(" AND parentMessageId != 0 ");
+
+			if (obc != null) {
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
+			}
+
+			else {
+				query.append("ORDER BY ");
+
+				query.append("createDate ASC, ");
+				query.append("messageId ASC");
+			}
+
+			Query q = session.createQuery(query.toString());
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(threadId);
+
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
+					mbMessage);
+
+			MBMessage[] array = new MBMessageImpl[3];
+
+			array[0] = (MBMessage)objArray[0];
+			array[1] = (MBMessage)objArray[1];
+			array[2] = (MBMessage)objArray[2];
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public List<MBMessage> findByG_U(long groupId, long userId)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(groupId), new Long(userId) };
@@ -2667,6 +2910,12 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
+	public void removeByThreadReplies(long threadId) throws SystemException {
+		for (MBMessage mbMessage : findByThreadReplies(threadId)) {
+			remove(mbMessage);
+		}
+	}
+
 	public void removeByG_U(long groupId, long userId)
 		throws SystemException {
 		for (MBMessage mbMessage : findByG_U(groupId, userId)) {
@@ -2994,6 +3243,54 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl
 				}
 
 				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_THREADID,
+					finderArgs, count);
+
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	public int countByThreadReplies(long threadId) throws SystemException {
+		Object[] finderArgs = new Object[] { new Long(threadId) };
+
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_THREADREPLIES,
+				finderArgs, this);
+
+		if (count == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append("SELECT COUNT(*) ");
+				query.append(
+					"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
+
+				query.append("threadId = ?");
+
+				query.append(" AND parentMessageId != 0 ");
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(threadId);
+
+				count = (Long)q.uniqueResult();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_THREADREPLIES,
 					finderArgs, count);
 
 				closeSession(session);

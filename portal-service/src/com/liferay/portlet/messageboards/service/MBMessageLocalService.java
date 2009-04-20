@@ -234,6 +234,13 @@ public interface MBMessageLocalService {
 			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portlet.messageboards.model.MBMessageDisplay getDiscussionMessageDisplay(
+		long userId, java.lang.String className, long classPK,
+		java.lang.String threadView)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getDiscussionMessagesCount(long classNameId, long classPK)
 		throws com.liferay.portal.SystemException;
 
@@ -316,6 +323,11 @@ public interface MBMessageLocalService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getThreadMessagesCount(long threadId)
+		throws com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.liferay.portlet.messageboards.model.MBMessage> getThreadRepliesMessages(
+		long threadId, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public void reIndex(long messageId)

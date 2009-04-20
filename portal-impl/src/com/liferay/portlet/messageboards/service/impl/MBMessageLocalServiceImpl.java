@@ -848,6 +848,14 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			long userId, String className, long classPK)
 		throws PortalException, SystemException {
 
+		return getDiscussionMessageDisplay(
+			userId, className, classPK, MBThreadImpl.THREAD_VIEW_COMBINATION);
+	}
+
+	public MBMessageDisplay getDiscussionMessageDisplay(
+			long userId, String className, long classPK, String threadView)
+		throws PortalException, SystemException {
+
 		long classNameId = PortalUtil.getClassNameId(className);
 
 		MBMessage message = null;
@@ -890,7 +898,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			}
 		}
 
-		return getMessageDisplay(message, MBThreadImpl.THREAD_VIEW_COMBINATION);
+		return getMessageDisplay(message, threadView);
 	}
 
 	public int getDiscussionMessagesCount(long classNameId, long classPK)
@@ -1045,6 +1053,13 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 	public int getThreadMessagesCount(long threadId) throws SystemException {
 		return mbMessagePersistence.countByThreadId(threadId);
+	}
+
+	public List<MBMessage> getThreadRepliesMessages(
+			long threadId, int start, int end)
+		throws SystemException {
+
+		return mbMessagePersistence.findByThreadReplies(threadId, start, end);
 	}
 
 	public void reIndex(long messageId) throws SystemException {

@@ -441,6 +441,9 @@ public class PropsValues {
 	public static final String DEFAULT_WAP_THEME_ID =
 		PropsUtil.get(PropsKeys.DEFAULT_WAP_THEME_ID);
 
+	public static final String DISCUSSION_THREAD_VIEW =
+		PropsUtil.get(PropsKeys.DISCUSSION_THREAD_VIEW);
+
 	public static final String[] DL_COMPARABLE_FILE_EXTENSIONS =
 		PropsUtil.getArray(PropsKeys.DL_COMPARABLE_FILE_EXTENSIONS);
 

@@ -328,6 +328,47 @@ public class MBMessageUtil {
 				   .findByThreadId_PrevAndNext(messageId, threadId, obc);
 	}
 
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> findByThreadReplies(
+		long threadId) throws com.liferay.portal.SystemException {
+		return getPersistence().findByThreadReplies(threadId);
+	}
+
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> findByThreadReplies(
+		long threadId, int start, int end)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByThreadReplies(threadId, start, end);
+	}
+
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> findByThreadReplies(
+		long threadId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByThreadReplies(threadId, start, end, obc);
+	}
+
+	public static com.liferay.portlet.messageboards.model.MBMessage findByThreadReplies_First(
+		long threadId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.messageboards.NoSuchMessageException {
+		return getPersistence().findByThreadReplies_First(threadId, obc);
+	}
+
+	public static com.liferay.portlet.messageboards.model.MBMessage findByThreadReplies_Last(
+		long threadId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.messageboards.NoSuchMessageException {
+		return getPersistence().findByThreadReplies_Last(threadId, obc);
+	}
+
+	public static com.liferay.portlet.messageboards.model.MBMessage[] findByThreadReplies_PrevAndNext(
+		long messageId, long threadId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.messageboards.NoSuchMessageException {
+		return getPersistence()
+				   .findByThreadReplies_PrevAndNext(messageId, threadId, obc);
+	}
+
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> findByG_U(
 		long groupId, long userId) throws com.liferay.portal.SystemException {
 		return getPersistence().findByG_U(groupId, userId);
@@ -520,6 +561,11 @@ public class MBMessageUtil {
 		getPersistence().removeByThreadId(threadId);
 	}
 
+	public static void removeByThreadReplies(long threadId)
+		throws com.liferay.portal.SystemException {
+		getPersistence().removeByThreadReplies(threadId);
+	}
+
 	public static void removeByG_U(long groupId, long userId)
 		throws com.liferay.portal.SystemException {
 		getPersistence().removeByG_U(groupId, userId);
@@ -567,6 +613,11 @@ public class MBMessageUtil {
 	public static int countByThreadId(long threadId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByThreadId(threadId);
+	}
+
+	public static int countByThreadReplies(long threadId)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByThreadReplies(threadId);
 	}
 
 	public static int countByG_U(long groupId, long userId)

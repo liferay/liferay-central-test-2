@@ -30,10 +30,13 @@
 <%@ page import="com.liferay.portlet.messageboards.model.MBMessageDisplay" %>
 <%@ page import="com.liferay.portlet.messageboards.model.MBThread" %>
 <%@ page import="com.liferay.portlet.messageboards.model.MBTreeWalker" %>
+<%@ page import="com.liferay.portlet.messageboards.model.impl.MBThreadImpl" %>
 <%@ page import="com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.messageboards.service.permission.MBDiscussionPermission" %>
 <%@ page import="com.liferay.portlet.messageboards.util.BBCodeUtil" %>
 <%@ page import="com.liferay.portlet.messageboards.util.comparator.MessageCreateDateComparator" %>
+
+<portlet:defineObjects />
 
 <%
 String formName = namespace + request.getAttribute("liferay-ui:discussion:formName");
@@ -44,18 +47,31 @@ long userId = GetterUtil.getLong((String)request.getAttribute("liferay-ui:discus
 String redirect = (String)request.getAttribute("liferay-ui:discussion:redirect");
 boolean ratingsEnabled = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:discussion:ratingsEnabled"));
 
-MBMessageDisplay messageDisplay = MBMessageLocalServiceUtil.getDiscussionMessageDisplay(userId, className, classPK);
+String threadView = PropsValues.DISCUSSION_THREAD_VIEW;
+
+MBMessageDisplay messageDisplay = MBMessageLocalServiceUtil.getDiscussionMessageDisplay(userId, className, classPK, threadView);
 
 MBCategory category = messageDisplay.getCategory();
 MBThread thread = messageDisplay.getThread();
 MBTreeWalker treeWalker = messageDisplay.getTreeWalker();
-MBMessage rootMessage = treeWalker.getRoot();
-List<MBMessage> messages = treeWalker.getMessages();
+MBMessage rootMessage = null;
+List<MBMessage> messages = null;
+int messagesCount = 0;
+
+if (treeWalker != null) {
+	rootMessage = treeWalker.getRoot();
+	messages = treeWalker.getMessages();
+	messagesCount = messages.size();
+}
+else {
+	rootMessage = MBMessageLocalServiceUtil.getMessage(thread.getRootMessageId());
+	messagesCount = MBMessageLocalServiceUtil.getThreadMessagesCount(rootMessage.getThreadId());
+}
 
 DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
 %>
 
-<c:if test="<%= (messages.size() > 1) || MBDiscussionPermission.contains(permissionChecker, company.getCompanyId(), scopeGroupId, className, classPK, userId, ActionKeys.ADD_DISCUSSION) %>">
+<c:if test="<%= (messagesCount > 1) || MBDiscussionPermission.contains(permissionChecker, company.getCompanyId(), scopeGroupId, className, classPK, userId, ActionKeys.ADD_DISCUSSION) %>">
 	<div class="taglib-discussion">
 		<script type="text/javascript">
 			function <%= namespace %>deleteMessage(i) {
@@ -148,63 +164,84 @@ DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
 			</table>
 		</c:if>
 
-		<c:if test="<%= messages.size() > 1 %>">
+		<c:if test="<%= messagesCount > 1 %>">
 			<c:if test="<%= MBDiscussionPermission.contains(permissionChecker, company.getCompanyId(), scopeGroupId, className, classPK, userId, ActionKeys.ADD_DISCUSSION) %>">
 				<br />
 			</c:if>
 
 			<a name="<portlet:namespace />messages_top"></a>
 
-			<table border="0" cellpadding="4" cellspacing="0" width="100%">
-			<tr class="portlet-section-header results-header" style="font-size: x-small; font-weight: bold;">
-				<td colspan="2">
-					<liferay-ui:message key="threaded-replies" />
-				</td>
-				<td colspan="2">
-					<liferay-ui:message key="author" />
-				</td>
-				<td>
-					<liferay-ui:message key="date" />
-				</td>
-			</tr>
+			<c:if test="<%= treeWalker != null %>">
+				<table border="0" cellpadding="4" cellspacing="0" width="100%">
+				<tr class="portlet-section-header results-header" style="font-size: x-small; font-weight: bold;">
+					<td colspan="2">
+						<liferay-ui:message key="threaded-replies" />
+					</td>
+					<td colspan="2">
+						<liferay-ui:message key="author" />
+					</td>
+					<td>
+						<liferay-ui:message key="date" />
+					</td>
+				</tr>
 
-			<%
-			int[] range = treeWalker.getChildrenRange(rootMessage);
+				<%
+				int[] range = treeWalker.getChildrenRange(rootMessage);
 
-			for (i = range[0]; i < range[1]; i++) {
-				message = (MBMessage)messages.get(i);
+				for (i = range[0]; i < range[1]; i++) {
+					message = (MBMessage)messages.get(i);
 
-				boolean lastChildNode = false;
+					boolean lastChildNode = false;
 
-				if ((i + 1) == range[1]) {
-					lastChildNode = true;
+					if ((i + 1) == range[1]) {
+						lastChildNode = true;
+					}
+
+					request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER, treeWalker);
+					request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_SEL_MESSAGE, rootMessage);
+					request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_CUR_MESSAGE, message);
+					request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_CATEGORY, category);
+					request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_THREAD, thread);
+					request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_LAST_NODE, Boolean.valueOf(lastChildNode));
+					request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_DEPTH, new Integer(0));
+				%>
+
+					<liferay-util:include page="/html/taglib/ui/discussion/view_message_thread.jsp" />
+
+				<%
 				}
+				%>
 
-				request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER, treeWalker);
-				request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_SEL_MESSAGE, rootMessage);
-				request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_CUR_MESSAGE, message);
-				request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_CATEGORY, category);
-				request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_THREAD, thread);
-				request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_LAST_NODE, Boolean.valueOf(lastChildNode));
-				request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_DEPTH, new Integer(0));
-			%>
+				</table>
 
-				<liferay-util:include page="/html/taglib/ui/discussion/view_message_thread.jsp" />
-
-			<%
-			}
-			%>
-
-			</table>
-
-			<br />
+				<br />
+			</c:if>
 
 			<table class="lfr-table" width="100%">
 
 			<%
-			messages = ListUtil.sort(messages, new MessageCreateDateComparator(true, false));
+			SearchContainer searchContainer = null;
 
-			for (i = 1; i < messages.size(); i++) {
+			if (messages != null) {
+				messages = ListUtil.sort(messages, new MessageCreateDateComparator(true, false));
+
+				messages = ListUtil.copy(messages);
+
+				messages.remove(0);
+			}
+			else {
+				PortletURL currentURLObj = PortletURLUtil.getCurrent(renderRequest, renderResponse);
+
+				searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, currentURLObj, null, null);
+
+				searchContainer.setTotal(messagesCount - 1);
+
+				messages = MBMessageLocalServiceUtil.getThreadRepliesMessages(message.getThreadId(), searchContainer.getStart(), searchContainer.getEnd());
+
+				searchContainer.setResults(messages);
+			}
+
+			for (i = 0; i < messages.size(); i++) {
 				message = (MBMessage)messages.get(i);
 			%>
 
@@ -368,7 +405,7 @@ DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
 					</td>
 				</tr>
 
-				<c:if test="<%= (i + 1) < messages.size() %>">
+				<c:if test="<%= (treeWalker == null) || ((i + 1) < messages.size()) %>">
 					<tr>
 						<td colspan="2">
 							<div class="separator"><!-- --></div>
@@ -381,6 +418,10 @@ DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
 			%>
 
 			</table>
+
+			<c:if test="<%= (searchContainer != null) && (searchContainer.getTotal() > searchContainer.getDelta()) %>">
+				<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
+			</c:if>
 		</c:if>
 
 		</form>

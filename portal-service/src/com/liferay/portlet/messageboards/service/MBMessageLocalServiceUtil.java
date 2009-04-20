@@ -305,6 +305,16 @@ public class MBMessageLocalServiceUtil {
 				   .getDiscussionMessageDisplay(userId, className, classPK);
 	}
 
+	public static com.liferay.portlet.messageboards.model.MBMessageDisplay getDiscussionMessageDisplay(
+		long userId, java.lang.String className, long classPK,
+		java.lang.String threadView)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService()
+				   .getDiscussionMessageDisplay(userId, className, classPK,
+			threadView);
+	}
+
 	public static int getDiscussionMessagesCount(long classNameId, long classPK)
 		throws com.liferay.portal.SystemException {
 		return getService().getDiscussionMessagesCount(classNameId, classPK);
@@ -405,6 +415,12 @@ public class MBMessageLocalServiceUtil {
 	public static int getThreadMessagesCount(long threadId)
 		throws com.liferay.portal.SystemException {
 		return getService().getThreadMessagesCount(threadId);
+	}
+
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> getThreadRepliesMessages(
+		long threadId, int start, int end)
+		throws com.liferay.portal.SystemException {
+		return getService().getThreadRepliesMessages(threadId, start, end);
 	}
 
 	public static void reIndex(long messageId)

@@ -240,6 +240,34 @@ public interface MBMessagePersistence extends BasePersistence {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageException;
 
+	public java.util.List<com.liferay.portlet.messageboards.model.MBMessage> findByThreadReplies(
+		long threadId) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.messageboards.model.MBMessage> findByThreadReplies(
+		long threadId, int start, int end)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.messageboards.model.MBMessage> findByThreadReplies(
+		long threadId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.messageboards.model.MBMessage findByThreadReplies_First(
+		long threadId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.messageboards.NoSuchMessageException;
+
+	public com.liferay.portlet.messageboards.model.MBMessage findByThreadReplies_Last(
+		long threadId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.messageboards.NoSuchMessageException;
+
+	public com.liferay.portlet.messageboards.model.MBMessage[] findByThreadReplies_PrevAndNext(
+		long messageId, long threadId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.messageboards.NoSuchMessageException;
+
 	public java.util.List<com.liferay.portlet.messageboards.model.MBMessage> findByG_U(
 		long groupId, long userId) throws com.liferay.portal.SystemException;
 
@@ -369,6 +397,9 @@ public interface MBMessagePersistence extends BasePersistence {
 	public void removeByThreadId(long threadId)
 		throws com.liferay.portal.SystemException;
 
+	public void removeByThreadReplies(long threadId)
+		throws com.liferay.portal.SystemException;
+
 	public void removeByG_U(long groupId, long userId)
 		throws com.liferay.portal.SystemException;
 
@@ -396,6 +427,9 @@ public interface MBMessagePersistence extends BasePersistence {
 		throws com.liferay.portal.SystemException;
 
 	public int countByThreadId(long threadId)
+		throws com.liferay.portal.SystemException;
+
+	public int countByThreadReplies(long threadId)
 		throws com.liferay.portal.SystemException;
 
 	public int countByG_U(long groupId, long userId)

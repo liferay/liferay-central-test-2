@@ -232,6 +232,9 @@
 		<finder name="ThreadId" return-type="Collection">
 			<finder-column name="threadId" />
 		</finder>
+		<finder name="ThreadReplies" return-type="Collection" where="parentMessageId != 0" db-index="false">
+			<finder-column name="threadId" />
+		</finder>
 		<finder name="G_U" return-type="Collection">
 			<finder-column name="groupId" />
 			<finder-column name="userId" />
