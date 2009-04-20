@@ -1270,9 +1270,7 @@ Liferay.PortletCSS = {
 	_setSelect: function(obj, value) {
 		var instance = this;
 
-		if (value != '') {
-			obj.find('option[value=' + value + ']').attr('selected', 'selected');
-		}
+		obj.find('option[value=' + value + ']').attr('selected', 'selected');
 	},
 
 	_setTextarea: function(obj, value) {
