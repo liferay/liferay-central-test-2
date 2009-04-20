@@ -125,49 +125,6 @@
 				modifiedDate DESC
 		]]>
 	</sql>
-	<sql id="com.liferay.portlet.messageboards.service.persistence.MBMessageFlagFinder.countByU_T">
-		<![CDATA[
-			SELECT
-				COUNT(*) AS COUNT_VALUE
-			FROM
-				MBMessageFlag
-			INNER JOIN
-				MBMessage ON
-					(MBMessage.messageId = MBMessageFlag.messageId)
-			WHERE
-				(MBMessageFlag.userId = ?) AND
-				(MBMessage.threadId = ?)
-		]]>
-	</sql>
-	<sql id="com.liferay.portlet.messageboards.service.persistence.MBMessageFlagFinder.countByT_F">
-		<![CDATA[
-			SELECT
-				COUNT(*) AS COUNT_VALUE
-			FROM
-				MBMessageFlag
-			INNER JOIN
-				MBMessage ON
-					(MBMessage.messageId = MBMessageFlag.messageId)
-			WHERE
-				(MBMessage.threadId = ?) AND
-				(MBMessageFlag.flag = ?)
-		]]>
-	</sql>
-	<sql id="com.liferay.portlet.messageboards.service.persistence.MBMessageFlagFinder.countByU_T_F">
-		<![CDATA[
-			SELECT
-				COUNT(*) AS COUNT_VALUE
-			FROM
-				MBMessageFlag
-			INNER JOIN
-				MBMessage ON
-					(MBMessage.messageId = MBMessageFlag.messageId)
-			WHERE
-				(MBMessageFlag.userId = ?) AND
-				(MBMessage.threadId = ?) AND
-				(MBMessageFlag.flag = ?)
-		]]>
-	</sql>
 	<sql id="com.liferay.portlet.messageboards.service.persistence.MBThreadFinder.countByS_G_U">
 		<![CDATA[
 			SELECT

@@ -57,6 +57,10 @@ public interface MBMessageFlagModel extends BaseModel<MBMessageFlag> {
 
 	public void setUserId(long userId);
 
+	public long getThreadId();
+
+	public void setThreadId(long threadId);
+
 	public long getMessageId();
 
 	public void setMessageId(long messageId);

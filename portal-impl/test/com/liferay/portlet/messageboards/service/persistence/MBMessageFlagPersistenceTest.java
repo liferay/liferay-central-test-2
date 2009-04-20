@@ -72,6 +72,7 @@ public class MBMessageFlagPersistenceTest extends BasePersistenceTestCase {
 		MBMessageFlag newMBMessageFlag = _persistence.create(pk);
 
 		newMBMessageFlag.setUserId(nextLong());
+		newMBMessageFlag.setThreadId(nextLong());
 		newMBMessageFlag.setMessageId(nextLong());
 		newMBMessageFlag.setFlag(nextInt());
 
@@ -83,6 +84,8 @@ public class MBMessageFlagPersistenceTest extends BasePersistenceTestCase {
 			newMBMessageFlag.getMessageFlagId());
 		assertEquals(existingMBMessageFlag.getUserId(),
 			newMBMessageFlag.getUserId());
+		assertEquals(existingMBMessageFlag.getThreadId(),
+			newMBMessageFlag.getThreadId());
 		assertEquals(existingMBMessageFlag.getMessageId(),
 			newMBMessageFlag.getMessageId());
 		assertEquals(existingMBMessageFlag.getFlag(), newMBMessageFlag.getFlag());
@@ -130,6 +133,7 @@ public class MBMessageFlagPersistenceTest extends BasePersistenceTestCase {
 		MBMessageFlag mbMessageFlag = _persistence.create(pk);
 
 		mbMessageFlag.setUserId(nextLong());
+		mbMessageFlag.setThreadId(nextLong());
 		mbMessageFlag.setMessageId(nextLong());
 		mbMessageFlag.setFlag(nextInt());
 

@@ -55,6 +55,7 @@ public class MBMessageFlagJSONSerializer {
 
 		jsonObj.put("messageFlagId", model.getMessageFlagId());
 		jsonObj.put("userId", model.getUserId());
+		jsonObj.put("threadId", model.getThreadId());
 		jsonObj.put("messageId", model.getMessageId());
 		jsonObj.put("flag", model.getFlag());
 

@@ -292,7 +292,7 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 			return true;
 		}
 
-		int readThreadMessageCount = mbMessageFlagFinder.countByU_T_F(
+		int readThreadMessageCount = mbMessageFlagPersistence.countByU_T_F(
 			userId, threadId, MBMessageFlagImpl.READ_FLAG);
 
 		if (readThreadMessageCount != threadMessageCount) {
@@ -379,7 +379,7 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 
 		// Message flags
 
-		mbMessageFlagLocalService.deleteQuestionAndAnswerFlags(oldThreadId);
+		mbMessageFlagLocalService.deleteThreadFlags(oldThreadId);
 
 		// Create new thread
 

@@ -137,6 +137,11 @@ public class MBMessageFlagLocalServiceUtil {
 		getService().deleteQuestionAndAnswerFlags(threadId);
 	}
 
+	public static void deleteThreadFlags(long threadId)
+		throws com.liferay.portal.SystemException {
+		getService().deleteThreadFlags(threadId);
+	}
+
 	public static boolean hasAnswerFlag(long messageId)
 		throws com.liferay.portal.SystemException {
 		return getService().hasAnswerFlag(messageId);

@@ -55,7 +55,7 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 
 	protected void doUpgrade() throws Exception {
 		updateGroupId();
-		updatePriority();
+		updateMessagePriority();
 	}
 
 	protected void updateGroupId() throws Exception {
@@ -99,7 +99,45 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 		}
 	}
 
-	protected void updatePriority() throws Exception {
+	protected void updateMessageFlagThreadId() throws Exception {
+		if (isSupportsUpdateWithInnerJoin()) {
+			StringBuilder sb = new StringBuilder();
+
+			sb.append("update MBMessageFlag inner join MBMessage on ");
+			sb.append("MBMessage.messageId = MBMessageFlag.messageId set ");
+			sb.append("MBMessageFlag.threadId = MBMessage.threadId");
+
+			runSQL(sb.toString());
+		}
+		else {
+			Connection con = null;
+			PreparedStatement ps = null;
+			ResultSet rs = null;
+
+			try {
+				con = DataAccess.getConnection();
+
+				ps = con.prepareStatement(
+					"select messageId, threadId from MBMessage");
+
+				rs = ps.executeQuery();
+
+				while (rs.next()) {
+					long messageId = rs.getLong("messageId");
+					long threadId = rs.getLong("threadId");
+
+					runSQL(
+						"update MBMessageFlag set threadId = " + threadId +
+							" where messageId = " + messageId);
+				}
+			}
+			finally {
+				DataAccess.cleanUp(con, ps, rs);
+			}
+		}
+	}
+
+	protected void updateMessagePriority() throws Exception {
 		if (isSupportsUpdateWithInnerJoin()) {
 			StringBuilder sb = new StringBuilder();
 

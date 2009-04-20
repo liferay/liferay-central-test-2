@@ -51,6 +51,7 @@ public class MBMessageFlagSoap implements Serializable {
 
 		soapModel.setMessageFlagId(model.getMessageFlagId());
 		soapModel.setUserId(model.getUserId());
+		soapModel.setThreadId(model.getThreadId());
 		soapModel.setMessageId(model.getMessageId());
 		soapModel.setFlag(model.getFlag());
 
@@ -94,6 +95,14 @@ public class MBMessageFlagSoap implements Serializable {
 		_userId = userId;
 	}
 
+	public long getThreadId() {
+		return _threadId;
+	}
+
+	public void setThreadId(long threadId) {
+		_threadId = threadId;
+	}
+
 	public long getMessageId() {
 		return _messageId;
 	}
@@ -112,6 +121,7 @@ public class MBMessageFlagSoap implements Serializable {
 
 	private long _messageFlagId;
 	private long _userId;
+	private long _threadId;
 	private long _messageId;
 	private int _flag;
 }

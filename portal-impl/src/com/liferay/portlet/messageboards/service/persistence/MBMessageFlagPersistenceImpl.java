@@ -79,6 +79,23 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl
 			MBMessageFlagModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "countByUserId",
 			new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_THREADID = new FinderPath(MBMessageFlagModelImpl.ENTITY_CACHE_ENABLED,
+			MBMessageFlagModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByThreadId",
+			new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_THREADID = new FinderPath(MBMessageFlagModelImpl.ENTITY_CACHE_ENABLED,
+			MBMessageFlagModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByThreadId",
+			new String[] {
+				Long.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_THREADID = new FinderPath(MBMessageFlagModelImpl.ENTITY_CACHE_ENABLED,
+			MBMessageFlagModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countByThreadId",
+			new String[] { Long.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_BY_MESSAGEID = new FinderPath(MBMessageFlagModelImpl.ENTITY_CACHE_ENABLED,
 			MBMessageFlagModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "findByMessageId",
@@ -96,6 +113,23 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl
 			MBMessageFlagModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "countByMessageId",
 			new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_T_F = new FinderPath(MBMessageFlagModelImpl.ENTITY_CACHE_ENABLED,
+			MBMessageFlagModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByT_F",
+			new String[] { Long.class.getName(), Integer.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_T_F = new FinderPath(MBMessageFlagModelImpl.ENTITY_CACHE_ENABLED,
+			MBMessageFlagModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByT_F",
+			new String[] {
+				Long.class.getName(), Integer.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_T_F = new FinderPath(MBMessageFlagModelImpl.ENTITY_CACHE_ENABLED,
+			MBMessageFlagModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countByT_F",
+			new String[] { Long.class.getName(), Integer.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_BY_M_F = new FinderPath(MBMessageFlagModelImpl.ENTITY_CACHE_ENABLED,
 			MBMessageFlagModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "findByM_F",
@@ -113,6 +147,30 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl
 			MBMessageFlagModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "countByM_F",
 			new String[] { Long.class.getName(), Integer.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_U_T_F = new FinderPath(MBMessageFlagModelImpl.ENTITY_CACHE_ENABLED,
+			MBMessageFlagModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByU_T_F",
+			new String[] {
+				Long.class.getName(), Long.class.getName(),
+				Integer.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_U_T_F = new FinderPath(MBMessageFlagModelImpl.ENTITY_CACHE_ENABLED,
+			MBMessageFlagModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByU_T_F",
+			new String[] {
+				Long.class.getName(), Long.class.getName(),
+				Integer.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_U_T_F = new FinderPath(MBMessageFlagModelImpl.ENTITY_CACHE_ENABLED,
+			MBMessageFlagModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countByU_T_F",
+			new String[] {
+				Long.class.getName(), Long.class.getName(),
+				Integer.class.getName()
+			});
 	public static final FinderPath FINDER_PATH_FETCH_BY_U_M_F = new FinderPath(MBMessageFlagModelImpl.ENTITY_CACHE_ENABLED,
 			MBMessageFlagModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_ENTITY, "fetchByU_M_F",
@@ -624,6 +682,217 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
+	public List<MBMessageFlag> findByThreadId(long threadId)
+		throws SystemException {
+		Object[] finderArgs = new Object[] { new Long(threadId) };
+
+		List<MBMessageFlag> list = (List<MBMessageFlag>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_THREADID,
+				finderArgs, this);
+
+		if (list == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append(
+					"FROM com.liferay.portlet.messageboards.model.MBMessageFlag WHERE ");
+
+				query.append("threadId = ?");
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(threadId);
+
+				list = q.list();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<MBMessageFlag>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_THREADID,
+					finderArgs, list);
+
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	public List<MBMessageFlag> findByThreadId(long threadId, int start, int end)
+		throws SystemException {
+		return findByThreadId(threadId, start, end, null);
+	}
+
+	public List<MBMessageFlag> findByThreadId(long threadId, int start,
+		int end, OrderByComparator obc) throws SystemException {
+		Object[] finderArgs = new Object[] {
+				new Long(threadId),
+				
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+			};
+
+		List<MBMessageFlag> list = (List<MBMessageFlag>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_THREADID,
+				finderArgs, this);
+
+		if (list == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append(
+					"FROM com.liferay.portlet.messageboards.model.MBMessageFlag WHERE ");
+
+				query.append("threadId = ?");
+
+				query.append(" ");
+
+				if (obc != null) {
+					query.append("ORDER BY ");
+					query.append(obc.getOrderBy());
+				}
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(threadId);
+
+				list = (List<MBMessageFlag>)QueryUtil.list(q, getDialect(),
+						start, end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<MBMessageFlag>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_THREADID,
+					finderArgs, list);
+
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	public MBMessageFlag findByThreadId_First(long threadId,
+		OrderByComparator obc)
+		throws NoSuchMessageFlagException, SystemException {
+		List<MBMessageFlag> list = findByThreadId(threadId, 0, 1, obc);
+
+		if (list.isEmpty()) {
+			StringBuilder msg = new StringBuilder();
+
+			msg.append("No MBMessageFlag exists with the key {");
+
+			msg.append("threadId=" + threadId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchMessageFlagException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public MBMessageFlag findByThreadId_Last(long threadId,
+		OrderByComparator obc)
+		throws NoSuchMessageFlagException, SystemException {
+		int count = countByThreadId(threadId);
+
+		List<MBMessageFlag> list = findByThreadId(threadId, count - 1, count,
+				obc);
+
+		if (list.isEmpty()) {
+			StringBuilder msg = new StringBuilder();
+
+			msg.append("No MBMessageFlag exists with the key {");
+
+			msg.append("threadId=" + threadId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchMessageFlagException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public MBMessageFlag[] findByThreadId_PrevAndNext(long messageFlagId,
+		long threadId, OrderByComparator obc)
+		throws NoSuchMessageFlagException, SystemException {
+		MBMessageFlag mbMessageFlag = findByPrimaryKey(messageFlagId);
+
+		int count = countByThreadId(threadId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuilder query = new StringBuilder();
+
+			query.append(
+				"FROM com.liferay.portlet.messageboards.model.MBMessageFlag WHERE ");
+
+			query.append("threadId = ?");
+
+			query.append(" ");
+
+			if (obc != null) {
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
+			}
+
+			Query q = session.createQuery(query.toString());
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(threadId);
+
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
+					mbMessageFlag);
+
+			MBMessageFlag[] array = new MBMessageFlagImpl[3];
+
+			array[0] = (MBMessageFlag)objArray[0];
+			array[1] = (MBMessageFlag)objArray[1];
+			array[2] = (MBMessageFlag)objArray[2];
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public List<MBMessageFlag> findByMessageId(long messageId)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(messageId) };
@@ -815,6 +1084,241 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			qPos.add(messageId);
+
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
+					mbMessageFlag);
+
+			MBMessageFlag[] array = new MBMessageFlagImpl[3];
+
+			array[0] = (MBMessageFlag)objArray[0];
+			array[1] = (MBMessageFlag)objArray[1];
+			array[2] = (MBMessageFlag)objArray[2];
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public List<MBMessageFlag> findByT_F(long threadId, int flag)
+		throws SystemException {
+		Object[] finderArgs = new Object[] { new Long(threadId), new Integer(flag) };
+
+		List<MBMessageFlag> list = (List<MBMessageFlag>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_T_F,
+				finderArgs, this);
+
+		if (list == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append(
+					"FROM com.liferay.portlet.messageboards.model.MBMessageFlag WHERE ");
+
+				query.append("threadId = ?");
+
+				query.append(" AND ");
+
+				query.append("flag = ?");
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(threadId);
+
+				qPos.add(flag);
+
+				list = q.list();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<MBMessageFlag>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_T_F, finderArgs,
+					list);
+
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	public List<MBMessageFlag> findByT_F(long threadId, int flag, int start,
+		int end) throws SystemException {
+		return findByT_F(threadId, flag, start, end, null);
+	}
+
+	public List<MBMessageFlag> findByT_F(long threadId, int flag, int start,
+		int end, OrderByComparator obc) throws SystemException {
+		Object[] finderArgs = new Object[] {
+				new Long(threadId), new Integer(flag),
+				
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+			};
+
+		List<MBMessageFlag> list = (List<MBMessageFlag>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_T_F,
+				finderArgs, this);
+
+		if (list == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append(
+					"FROM com.liferay.portlet.messageboards.model.MBMessageFlag WHERE ");
+
+				query.append("threadId = ?");
+
+				query.append(" AND ");
+
+				query.append("flag = ?");
+
+				query.append(" ");
+
+				if (obc != null) {
+					query.append("ORDER BY ");
+					query.append(obc.getOrderBy());
+				}
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(threadId);
+
+				qPos.add(flag);
+
+				list = (List<MBMessageFlag>)QueryUtil.list(q, getDialect(),
+						start, end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<MBMessageFlag>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_T_F,
+					finderArgs, list);
+
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	public MBMessageFlag findByT_F_First(long threadId, int flag,
+		OrderByComparator obc)
+		throws NoSuchMessageFlagException, SystemException {
+		List<MBMessageFlag> list = findByT_F(threadId, flag, 0, 1, obc);
+
+		if (list.isEmpty()) {
+			StringBuilder msg = new StringBuilder();
+
+			msg.append("No MBMessageFlag exists with the key {");
+
+			msg.append("threadId=" + threadId);
+
+			msg.append(", ");
+			msg.append("flag=" + flag);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchMessageFlagException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public MBMessageFlag findByT_F_Last(long threadId, int flag,
+		OrderByComparator obc)
+		throws NoSuchMessageFlagException, SystemException {
+		int count = countByT_F(threadId, flag);
+
+		List<MBMessageFlag> list = findByT_F(threadId, flag, count - 1, count,
+				obc);
+
+		if (list.isEmpty()) {
+			StringBuilder msg = new StringBuilder();
+
+			msg.append("No MBMessageFlag exists with the key {");
+
+			msg.append("threadId=" + threadId);
+
+			msg.append(", ");
+			msg.append("flag=" + flag);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchMessageFlagException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public MBMessageFlag[] findByT_F_PrevAndNext(long messageFlagId,
+		long threadId, int flag, OrderByComparator obc)
+		throws NoSuchMessageFlagException, SystemException {
+		MBMessageFlag mbMessageFlag = findByPrimaryKey(messageFlagId);
+
+		int count = countByT_F(threadId, flag);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuilder query = new StringBuilder();
+
+			query.append(
+				"FROM com.liferay.portlet.messageboards.model.MBMessageFlag WHERE ");
+
+			query.append("threadId = ?");
+
+			query.append(" AND ");
+
+			query.append("flag = ?");
+
+			query.append(" ");
+
+			if (obc != null) {
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
+			}
+
+			Query q = session.createQuery(query.toString());
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(threadId);
+
+			qPos.add(flag);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					mbMessageFlag);
@@ -1072,6 +1576,268 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
+	public List<MBMessageFlag> findByU_T_F(long userId, long threadId, int flag)
+		throws SystemException {
+		Object[] finderArgs = new Object[] {
+				new Long(userId), new Long(threadId), new Integer(flag)
+			};
+
+		List<MBMessageFlag> list = (List<MBMessageFlag>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_U_T_F,
+				finderArgs, this);
+
+		if (list == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append(
+					"FROM com.liferay.portlet.messageboards.model.MBMessageFlag WHERE ");
+
+				query.append("userId = ?");
+
+				query.append(" AND ");
+
+				query.append("threadId = ?");
+
+				query.append(" AND ");
+
+				query.append("flag = ?");
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(userId);
+
+				qPos.add(threadId);
+
+				qPos.add(flag);
+
+				list = q.list();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<MBMessageFlag>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_U_T_F,
+					finderArgs, list);
+
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	public List<MBMessageFlag> findByU_T_F(long userId, long threadId,
+		int flag, int start, int end) throws SystemException {
+		return findByU_T_F(userId, threadId, flag, start, end, null);
+	}
+
+	public List<MBMessageFlag> findByU_T_F(long userId, long threadId,
+		int flag, int start, int end, OrderByComparator obc)
+		throws SystemException {
+		Object[] finderArgs = new Object[] {
+				new Long(userId), new Long(threadId), new Integer(flag),
+				
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+			};
+
+		List<MBMessageFlag> list = (List<MBMessageFlag>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_U_T_F,
+				finderArgs, this);
+
+		if (list == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append(
+					"FROM com.liferay.portlet.messageboards.model.MBMessageFlag WHERE ");
+
+				query.append("userId = ?");
+
+				query.append(" AND ");
+
+				query.append("threadId = ?");
+
+				query.append(" AND ");
+
+				query.append("flag = ?");
+
+				query.append(" ");
+
+				if (obc != null) {
+					query.append("ORDER BY ");
+					query.append(obc.getOrderBy());
+				}
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(userId);
+
+				qPos.add(threadId);
+
+				qPos.add(flag);
+
+				list = (List<MBMessageFlag>)QueryUtil.list(q, getDialect(),
+						start, end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<MBMessageFlag>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_U_T_F,
+					finderArgs, list);
+
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	public MBMessageFlag findByU_T_F_First(long userId, long threadId,
+		int flag, OrderByComparator obc)
+		throws NoSuchMessageFlagException, SystemException {
+		List<MBMessageFlag> list = findByU_T_F(userId, threadId, flag, 0, 1, obc);
+
+		if (list.isEmpty()) {
+			StringBuilder msg = new StringBuilder();
+
+			msg.append("No MBMessageFlag exists with the key {");
+
+			msg.append("userId=" + userId);
+
+			msg.append(", ");
+			msg.append("threadId=" + threadId);
+
+			msg.append(", ");
+			msg.append("flag=" + flag);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchMessageFlagException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public MBMessageFlag findByU_T_F_Last(long userId, long threadId, int flag,
+		OrderByComparator obc)
+		throws NoSuchMessageFlagException, SystemException {
+		int count = countByU_T_F(userId, threadId, flag);
+
+		List<MBMessageFlag> list = findByU_T_F(userId, threadId, flag,
+				count - 1, count, obc);
+
+		if (list.isEmpty()) {
+			StringBuilder msg = new StringBuilder();
+
+			msg.append("No MBMessageFlag exists with the key {");
+
+			msg.append("userId=" + userId);
+
+			msg.append(", ");
+			msg.append("threadId=" + threadId);
+
+			msg.append(", ");
+			msg.append("flag=" + flag);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchMessageFlagException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public MBMessageFlag[] findByU_T_F_PrevAndNext(long messageFlagId,
+		long userId, long threadId, int flag, OrderByComparator obc)
+		throws NoSuchMessageFlagException, SystemException {
+		MBMessageFlag mbMessageFlag = findByPrimaryKey(messageFlagId);
+
+		int count = countByU_T_F(userId, threadId, flag);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuilder query = new StringBuilder();
+
+			query.append(
+				"FROM com.liferay.portlet.messageboards.model.MBMessageFlag WHERE ");
+
+			query.append("userId = ?");
+
+			query.append(" AND ");
+
+			query.append("threadId = ?");
+
+			query.append(" AND ");
+
+			query.append("flag = ?");
+
+			query.append(" ");
+
+			if (obc != null) {
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
+			}
+
+			Query q = session.createQuery(query.toString());
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(userId);
+
+			qPos.add(threadId);
+
+			qPos.add(flag);
+
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
+					mbMessageFlag);
+
+			MBMessageFlag[] array = new MBMessageFlagImpl[3];
+
+			array[0] = (MBMessageFlag)objArray[0];
+			array[1] = (MBMessageFlag)objArray[1];
+			array[2] = (MBMessageFlag)objArray[2];
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public MBMessageFlag findByU_M_F(long userId, long messageId, int flag)
 		throws NoSuchMessageFlagException, SystemException {
 		MBMessageFlag mbMessageFlag = fetchByU_M_F(userId, messageId, flag);
@@ -1304,14 +2070,33 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
+	public void removeByThreadId(long threadId) throws SystemException {
+		for (MBMessageFlag mbMessageFlag : findByThreadId(threadId)) {
+			remove(mbMessageFlag);
+		}
+	}
+
 	public void removeByMessageId(long messageId) throws SystemException {
 		for (MBMessageFlag mbMessageFlag : findByMessageId(messageId)) {
 			remove(mbMessageFlag);
 		}
 	}
 
+	public void removeByT_F(long threadId, int flag) throws SystemException {
+		for (MBMessageFlag mbMessageFlag : findByT_F(threadId, flag)) {
+			remove(mbMessageFlag);
+		}
+	}
+
 	public void removeByM_F(long messageId, int flag) throws SystemException {
 		for (MBMessageFlag mbMessageFlag : findByM_F(messageId, flag)) {
+			remove(mbMessageFlag);
+		}
+	}
+
+	public void removeByU_T_F(long userId, long threadId, int flag)
+		throws SystemException {
+		for (MBMessageFlag mbMessageFlag : findByU_T_F(userId, threadId, flag)) {
 			remove(mbMessageFlag);
 		}
 	}
@@ -1377,6 +2162,54 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl
 		return count.intValue();
 	}
 
+	public int countByThreadId(long threadId) throws SystemException {
+		Object[] finderArgs = new Object[] { new Long(threadId) };
+
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_THREADID,
+				finderArgs, this);
+
+		if (count == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append("SELECT COUNT(*) ");
+				query.append(
+					"FROM com.liferay.portlet.messageboards.model.MBMessageFlag WHERE ");
+
+				query.append("threadId = ?");
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(threadId);
+
+				count = (Long)q.uniqueResult();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_THREADID,
+					finderArgs, count);
+
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
 	public int countByMessageId(long messageId) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(messageId) };
 
@@ -1417,6 +2250,60 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl
 
 				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_MESSAGEID,
 					finderArgs, count);
+
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	public int countByT_F(long threadId, int flag) throws SystemException {
+		Object[] finderArgs = new Object[] { new Long(threadId), new Integer(flag) };
+
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_T_F,
+				finderArgs, this);
+
+		if (count == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append("SELECT COUNT(*) ");
+				query.append(
+					"FROM com.liferay.portlet.messageboards.model.MBMessageFlag WHERE ");
+
+				query.append("threadId = ?");
+
+				query.append(" AND ");
+
+				query.append("flag = ?");
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(threadId);
+
+				qPos.add(flag);
+
+				count = (Long)q.uniqueResult();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_T_F, finderArgs,
+					count);
 
 				closeSession(session);
 			}
@@ -1473,6 +2360,69 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl
 
 				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_M_F, finderArgs,
 					count);
+
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	public int countByU_T_F(long userId, long threadId, int flag)
+		throws SystemException {
+		Object[] finderArgs = new Object[] {
+				new Long(userId), new Long(threadId), new Integer(flag)
+			};
+
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_U_T_F,
+				finderArgs, this);
+
+		if (count == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append("SELECT COUNT(*) ");
+				query.append(
+					"FROM com.liferay.portlet.messageboards.model.MBMessageFlag WHERE ");
+
+				query.append("userId = ?");
+
+				query.append(" AND ");
+
+				query.append("threadId = ?");
+
+				query.append(" AND ");
+
+				query.append("flag = ?");
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(userId);
+
+				qPos.add(threadId);
+
+				qPos.add(flag);
+
+				count = (Long)q.uniqueResult();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_U_T_F,
+					finderArgs, count);
 
 				closeSession(session);
 			}

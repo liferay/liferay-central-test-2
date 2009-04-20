@@ -1170,6 +1170,7 @@
 	<model name="com.liferay.portlet.messageboards.model.MBMessageFlag">
 		<field name="messageFlagId" type="long" />
 		<field name="userId" type="long" />
+		<field name="threadId" type="long" />
 		<field name="messageId" type="long" />
 		<field name="flag" type="int" />
 	</model>

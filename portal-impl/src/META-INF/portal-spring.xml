@@ -1325,10 +1325,6 @@
 	<bean id="com.liferay.portlet.messageboards.service.persistence.MBMessageFlagUtil" class="com.liferay.portlet.messageboards.service.persistence.MBMessageFlagUtil">
 		<property name="persistence" ref="com.liferay.portlet.messageboards.service.persistence.MBMessageFlagPersistence.impl" />
 	</bean>
-	<bean id="com.liferay.portlet.messageboards.service.persistence.MBMessageFlagFinder.impl" class="com.liferay.portlet.messageboards.service.persistence.MBMessageFlagFinderImpl" parent="basePersistence" />
-	<bean id="com.liferay.portlet.messageboards.service.persistence.MBMessageFlagFinderUtil" class="com.liferay.portlet.messageboards.service.persistence.MBMessageFlagFinderUtil">
-		<property name="finder" ref="com.liferay.portlet.messageboards.service.persistence.MBMessageFlagFinder.impl" />
-	</bean>
 	<bean id="com.liferay.portlet.messageboards.service.MBStatsUserLocalService.impl" class="com.liferay.portlet.messageboards.service.impl.MBStatsUserLocalServiceImpl" />
 	<bean id="com.liferay.portlet.messageboards.service.MBStatsUserLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService">
 		<property name="target" ref="com.liferay.portlet.messageboards.service.MBStatsUserLocalService.impl" />

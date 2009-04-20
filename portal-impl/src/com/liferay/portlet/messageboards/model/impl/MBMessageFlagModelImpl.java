@@ -69,12 +69,15 @@ public class MBMessageFlagModelImpl extends BaseModelImpl<MBMessageFlag> {
 			{ "userId", new Integer(Types.BIGINT) },
 			
 
+			{ "threadId", new Integer(Types.BIGINT) },
+			
+
 			{ "messageId", new Integer(Types.BIGINT) },
 			
 
 			{ "flag", new Integer(Types.INTEGER) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table MBMessageFlag (messageFlagId LONG not null primary key,userId LONG,messageId LONG,flag INTEGER)";
+	public static final String TABLE_SQL_CREATE = "create table MBMessageFlag (messageFlagId LONG not null primary key,userId LONG,threadId LONG,messageId LONG,flag INTEGER)";
 	public static final String TABLE_SQL_DROP = "drop table MBMessageFlag";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -91,6 +94,7 @@ public class MBMessageFlagModelImpl extends BaseModelImpl<MBMessageFlag> {
 
 		model.setMessageFlagId(soapModel.getMessageFlagId());
 		model.setUserId(soapModel.getUserId());
+		model.setThreadId(soapModel.getThreadId());
 		model.setMessageId(soapModel.getMessageId());
 		model.setFlag(soapModel.getFlag());
 
@@ -151,6 +155,14 @@ public class MBMessageFlagModelImpl extends BaseModelImpl<MBMessageFlag> {
 		return _originalUserId;
 	}
 
+	public long getThreadId() {
+		return _threadId;
+	}
+
+	public void setThreadId(long threadId) {
+		_threadId = threadId;
+	}
+
 	public long getMessageId() {
 		return _messageId;
 	}
@@ -199,6 +211,7 @@ public class MBMessageFlagModelImpl extends BaseModelImpl<MBMessageFlag> {
 
 			model.setMessageFlagId(getMessageFlagId());
 			model.setUserId(getUserId());
+			model.setThreadId(getThreadId());
 			model.setMessageId(getMessageId());
 			model.setFlag(getFlag());
 
@@ -224,6 +237,7 @@ public class MBMessageFlagModelImpl extends BaseModelImpl<MBMessageFlag> {
 
 		clone.setMessageFlagId(getMessageFlagId());
 		clone.setUserId(getUserId());
+		clone.setThreadId(getThreadId());
 		clone.setMessageId(getMessageId());
 		clone.setFlag(getFlag());
 
@@ -276,6 +290,7 @@ public class MBMessageFlagModelImpl extends BaseModelImpl<MBMessageFlag> {
 	private long _userId;
 	private long _originalUserId;
 	private boolean _setOriginalUserId;
+	private long _threadId;
 	private long _messageId;
 	private long _originalMessageId;
 	private boolean _setOriginalMessageId;

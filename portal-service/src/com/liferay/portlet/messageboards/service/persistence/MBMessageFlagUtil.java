@@ -144,6 +144,47 @@ public class MBMessageFlagUtil {
 				   .findByUserId_PrevAndNext(messageFlagId, userId, obc);
 	}
 
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessageFlag> findByThreadId(
+		long threadId) throws com.liferay.portal.SystemException {
+		return getPersistence().findByThreadId(threadId);
+	}
+
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessageFlag> findByThreadId(
+		long threadId, int start, int end)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByThreadId(threadId, start, end);
+	}
+
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessageFlag> findByThreadId(
+		long threadId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByThreadId(threadId, start, end, obc);
+	}
+
+	public static com.liferay.portlet.messageboards.model.MBMessageFlag findByThreadId_First(
+		long threadId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.messageboards.NoSuchMessageFlagException {
+		return getPersistence().findByThreadId_First(threadId, obc);
+	}
+
+	public static com.liferay.portlet.messageboards.model.MBMessageFlag findByThreadId_Last(
+		long threadId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.messageboards.NoSuchMessageFlagException {
+		return getPersistence().findByThreadId_Last(threadId, obc);
+	}
+
+	public static com.liferay.portlet.messageboards.model.MBMessageFlag[] findByThreadId_PrevAndNext(
+		long messageFlagId, long threadId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.messageboards.NoSuchMessageFlagException {
+		return getPersistence()
+				   .findByThreadId_PrevAndNext(messageFlagId, threadId, obc);
+	}
+
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessageFlag> findByMessageId(
 		long messageId) throws com.liferay.portal.SystemException {
 		return getPersistence().findByMessageId(messageId);
@@ -183,6 +224,49 @@ public class MBMessageFlagUtil {
 			com.liferay.portlet.messageboards.NoSuchMessageFlagException {
 		return getPersistence()
 				   .findByMessageId_PrevAndNext(messageFlagId, messageId, obc);
+	}
+
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessageFlag> findByT_F(
+		long threadId, int flag) throws com.liferay.portal.SystemException {
+		return getPersistence().findByT_F(threadId, flag);
+	}
+
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessageFlag> findByT_F(
+		long threadId, int flag, int start, int end)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByT_F(threadId, flag, start, end);
+	}
+
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessageFlag> findByT_F(
+		long threadId, int flag, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByT_F(threadId, flag, start, end, obc);
+	}
+
+	public static com.liferay.portlet.messageboards.model.MBMessageFlag findByT_F_First(
+		long threadId, int flag,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.messageboards.NoSuchMessageFlagException {
+		return getPersistence().findByT_F_First(threadId, flag, obc);
+	}
+
+	public static com.liferay.portlet.messageboards.model.MBMessageFlag findByT_F_Last(
+		long threadId, int flag,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.messageboards.NoSuchMessageFlagException {
+		return getPersistence().findByT_F_Last(threadId, flag, obc);
+	}
+
+	public static com.liferay.portlet.messageboards.model.MBMessageFlag[] findByT_F_PrevAndNext(
+		long messageFlagId, long threadId, int flag,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.messageboards.NoSuchMessageFlagException {
+		return getPersistence()
+				   .findByT_F_PrevAndNext(messageFlagId, threadId, flag, obc);
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessageFlag> findByM_F(
@@ -226,6 +310,52 @@ public class MBMessageFlagUtil {
 			com.liferay.portlet.messageboards.NoSuchMessageFlagException {
 		return getPersistence()
 				   .findByM_F_PrevAndNext(messageFlagId, messageId, flag, obc);
+	}
+
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessageFlag> findByU_T_F(
+		long userId, long threadId, int flag)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByU_T_F(userId, threadId, flag);
+	}
+
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessageFlag> findByU_T_F(
+		long userId, long threadId, int flag, int start, int end)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByU_T_F(userId, threadId, flag, start, end);
+	}
+
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessageFlag> findByU_T_F(
+		long userId, long threadId, int flag, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException {
+		return getPersistence()
+				   .findByU_T_F(userId, threadId, flag, start, end, obc);
+	}
+
+	public static com.liferay.portlet.messageboards.model.MBMessageFlag findByU_T_F_First(
+		long userId, long threadId, int flag,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.messageboards.NoSuchMessageFlagException {
+		return getPersistence().findByU_T_F_First(userId, threadId, flag, obc);
+	}
+
+	public static com.liferay.portlet.messageboards.model.MBMessageFlag findByU_T_F_Last(
+		long userId, long threadId, int flag,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.messageboards.NoSuchMessageFlagException {
+		return getPersistence().findByU_T_F_Last(userId, threadId, flag, obc);
+	}
+
+	public static com.liferay.portlet.messageboards.model.MBMessageFlag[] findByU_T_F_PrevAndNext(
+		long messageFlagId, long userId, long threadId, int flag,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.messageboards.NoSuchMessageFlagException {
+		return getPersistence()
+				   .findByU_T_F_PrevAndNext(messageFlagId, userId, threadId,
+			flag, obc);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessageFlag findByU_M_F(
@@ -281,14 +411,29 @@ public class MBMessageFlagUtil {
 		getPersistence().removeByUserId(userId);
 	}
 
+	public static void removeByThreadId(long threadId)
+		throws com.liferay.portal.SystemException {
+		getPersistence().removeByThreadId(threadId);
+	}
+
 	public static void removeByMessageId(long messageId)
 		throws com.liferay.portal.SystemException {
 		getPersistence().removeByMessageId(messageId);
 	}
 
+	public static void removeByT_F(long threadId, int flag)
+		throws com.liferay.portal.SystemException {
+		getPersistence().removeByT_F(threadId, flag);
+	}
+
 	public static void removeByM_F(long messageId, int flag)
 		throws com.liferay.portal.SystemException {
 		getPersistence().removeByM_F(messageId, flag);
+	}
+
+	public static void removeByU_T_F(long userId, long threadId, int flag)
+		throws com.liferay.portal.SystemException {
+		getPersistence().removeByU_T_F(userId, threadId, flag);
 	}
 
 	public static void removeByU_M_F(long userId, long messageId, int flag)
@@ -306,14 +451,29 @@ public class MBMessageFlagUtil {
 		return getPersistence().countByUserId(userId);
 	}
 
+	public static int countByThreadId(long threadId)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByThreadId(threadId);
+	}
+
 	public static int countByMessageId(long messageId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByMessageId(messageId);
 	}
 
+	public static int countByT_F(long threadId, int flag)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByT_F(threadId, flag);
+	}
+
 	public static int countByM_F(long messageId, int flag)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByM_F(messageId, flag);
+	}
+
+	public static int countByU_T_F(long userId, long threadId, int flag)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByU_T_F(userId, threadId, flag);
 	}
 
 	public static int countByU_M_F(long userId, long messageId, int flag)

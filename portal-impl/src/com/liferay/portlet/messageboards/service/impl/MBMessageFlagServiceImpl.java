@@ -129,7 +129,7 @@ public class MBMessageFlagServiceImpl extends MBMessageFlagServiceBaseImpl {
 			return;
 		}
 
-		int answerFlagsCount = mbMessageFlagFinder.countByT_F(
+		int answerFlagsCount = mbMessageFlagPersistence.countByT_F(
 			message.getThreadId(), MBMessageFlagImpl.ANSWER_FLAG);
 
 		if (answerFlagsCount == 0) {

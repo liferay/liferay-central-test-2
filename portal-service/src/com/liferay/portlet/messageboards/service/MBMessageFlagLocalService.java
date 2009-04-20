@@ -118,6 +118,9 @@ public interface MBMessageFlagLocalService {
 	public void deleteQuestionAndAnswerFlags(long threadId)
 		throws com.liferay.portal.SystemException;
 
+	public void deleteThreadFlags(long threadId)
+		throws com.liferay.portal.SystemException;
+
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public boolean hasAnswerFlag(long messageId)
 		throws com.liferay.portal.SystemException;

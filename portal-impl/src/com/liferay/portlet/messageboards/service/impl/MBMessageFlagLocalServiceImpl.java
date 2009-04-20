@@ -66,6 +66,7 @@ public class MBMessageFlagLocalServiceImpl
 				messageFlag = mbMessageFlagPersistence.create(messageFlagId);
 
 				messageFlag.setUserId(userId);
+				messageFlag.setThreadId(message.getThreadId());
 				messageFlag.setMessageId(messageId);
 				messageFlag.setFlag(flag);
 
@@ -119,6 +120,7 @@ public class MBMessageFlagLocalServiceImpl
 				messageFlagId);
 
 			questionMessageFlag.setUserId(message.getUserId());
+			questionMessageFlag.setThreadId(message.getThreadId());
 			questionMessageFlag.setMessageId(message.getMessageId());
 			questionMessageFlag.setFlag(MBMessageFlagImpl.QUESTION_FLAG);
 
@@ -149,6 +151,10 @@ public class MBMessageFlagLocalServiceImpl
 			mbMessageFlagPersistence.removeByM_F(
 				message.getMessageId(), MBMessageFlagImpl.ANSWER_FLAG);
 		}
+	}
+
+	public void deleteThreadFlags(long threadId) throws SystemException {
+		mbMessageFlagPersistence.removeByThreadId(threadId);
 	}
 
 	public boolean hasAnswerFlag(long messageId) throws SystemException {

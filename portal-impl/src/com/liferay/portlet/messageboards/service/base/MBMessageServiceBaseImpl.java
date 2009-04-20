@@ -77,7 +77,6 @@ import com.liferay.portlet.messageboards.service.persistence.MBCategoryPersisten
 import com.liferay.portlet.messageboards.service.persistence.MBDiscussionPersistence;
 import com.liferay.portlet.messageboards.service.persistence.MBMailingListPersistence;
 import com.liferay.portlet.messageboards.service.persistence.MBMessageFinder;
-import com.liferay.portlet.messageboards.service.persistence.MBMessageFlagFinder;
 import com.liferay.portlet.messageboards.service.persistence.MBMessageFlagPersistence;
 import com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence;
 import com.liferay.portlet.messageboards.service.persistence.MBStatsUserPersistence;
@@ -258,14 +257,6 @@ public abstract class MBMessageServiceBaseImpl extends PrincipalBean
 	public void setMBMessageFlagPersistence(
 		MBMessageFlagPersistence mbMessageFlagPersistence) {
 		this.mbMessageFlagPersistence = mbMessageFlagPersistence;
-	}
-
-	public MBMessageFlagFinder getMBMessageFlagFinder() {
-		return mbMessageFlagFinder;
-	}
-
-	public void setMBMessageFlagFinder(MBMessageFlagFinder mbMessageFlagFinder) {
-		this.mbMessageFlagFinder = mbMessageFlagFinder;
 	}
 
 	public MBStatsUserLocalService getMBStatsUserLocalService() {
@@ -717,8 +708,6 @@ public abstract class MBMessageServiceBaseImpl extends PrincipalBean
 	protected MBMessageFlagService mbMessageFlagService;
 	@BeanReference(name = "com.liferay.portlet.messageboards.service.persistence.MBMessageFlagPersistence.impl")
 	protected MBMessageFlagPersistence mbMessageFlagPersistence;
-	@BeanReference(name = "com.liferay.portlet.messageboards.service.persistence.MBMessageFlagFinder.impl")
-	protected MBMessageFlagFinder mbMessageFlagFinder;
 	@BeanReference(name = "com.liferay.portlet.messageboards.service.MBStatsUserLocalService.impl")
 	protected MBStatsUserLocalService mbStatsUserLocalService;
 	@BeanReference(name = "com.liferay.portlet.messageboards.service.persistence.MBStatsUserPersistence.impl")
