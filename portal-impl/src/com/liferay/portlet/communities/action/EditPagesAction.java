@@ -522,6 +522,11 @@ public class EditPagesAction extends PortletAction {
 				LayoutServiceUtil.updateLayout(
 					layout.getGroupId(), layout.isPrivateLayout(),
 					layout.getLayoutId(), parentLayout.getTypeSettings());
+
+				if (parentLayout.getType().equals(
+						LayoutConstants.TYPE_PORTLET)) {
+					copyPreferences(actionRequest, layout, parentLayout);
+				}
 			}
 			else {
 				LayoutServiceUtil.addLayout(
