@@ -339,15 +339,7 @@ if (message != null) {
 		<td>
 
 			<%
-			double threadPriority = 0.0;
-
-			if (threadId > 0) {
-				thread = MBThreadLocalServiceUtil.getThread(threadId);
-
-				threadPriority = thread.getPriority();
-			}
-
-			threadPriority = ParamUtil.getDouble(request, "priority", threadPriority);
+			double threadPriority = BeanParamUtil.getDouble(message, request, "priority");
 			%>
 
 			<select name="<portlet:namespace />priority">

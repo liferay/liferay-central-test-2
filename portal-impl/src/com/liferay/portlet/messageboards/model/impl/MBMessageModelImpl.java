@@ -108,9 +108,12 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage> {
 			{ "attachments", new Integer(Types.BOOLEAN) },
 			
 
-			{ "anonymous", new Integer(Types.BOOLEAN) }
+			{ "anonymous", new Integer(Types.BOOLEAN) },
+			
+
+			{ "priority", new Integer(Types.DOUBLE) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table MBMessage (uuid_ VARCHAR(75) null,messageId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,categoryId LONG,threadId LONG,parentMessageId LONG,subject VARCHAR(75) null,body TEXT null,attachments BOOLEAN,anonymous BOOLEAN)";
+	public static final String TABLE_SQL_CREATE = "create table MBMessage (uuid_ VARCHAR(75) null,messageId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,categoryId LONG,threadId LONG,parentMessageId LONG,subject VARCHAR(75) null,body TEXT null,attachments BOOLEAN,anonymous BOOLEAN,priority DOUBLE)";
 	public static final String TABLE_SQL_DROP = "drop table MBMessage";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -140,6 +143,7 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage> {
 		model.setBody(soapModel.getBody());
 		model.setAttachments(soapModel.getAttachments());
 		model.setAnonymous(soapModel.getAnonymous());
+		model.setPriority(soapModel.getPriority());
 
 		return model;
 	}
@@ -318,6 +322,14 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage> {
 		_anonymous = anonymous;
 	}
 
+	public double getPriority() {
+		return _priority;
+	}
+
+	public void setPriority(double priority) {
+		_priority = priority;
+	}
+
 	public MBMessage toEscapedModel() {
 		if (isEscapedModel()) {
 			return (MBMessage)this;
@@ -343,6 +355,7 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage> {
 			model.setBody(HtmlUtil.escape(getBody()));
 			model.setAttachments(getAttachments());
 			model.setAnonymous(getAnonymous());
+			model.setPriority(getPriority());
 
 			model = (MBMessage)Proxy.newProxyInstance(MBMessage.class.getClassLoader(),
 					new Class[] { MBMessage.class },
@@ -379,6 +392,7 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage> {
 		clone.setBody(getBody());
 		clone.setAttachments(getAttachments());
 		clone.setAnonymous(getAnonymous());
+		clone.setPriority(getPriority());
 
 		return clone;
 	}
@@ -455,5 +469,6 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage> {
 	private String _body;
 	private boolean _attachments;
 	private boolean _anonymous;
+	private double _priority;
 	private transient ExpandoBridge _expandoBridge;
 }

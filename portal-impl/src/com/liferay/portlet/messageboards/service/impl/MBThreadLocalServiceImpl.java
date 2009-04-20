@@ -44,6 +44,7 @@ import com.liferay.portlet.messageboards.model.impl.MBThreadImpl;
 import com.liferay.portlet.messageboards.service.base.MBThreadLocalServiceBaseImpl;
 import com.liferay.portlet.messageboards.util.Indexer;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -175,14 +176,14 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 
 	public List<MBThread> getGroupThreads(
 			long groupId, long userId, int start, int end)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		return getGroupThreads(groupId, userId, false, start, end);
 	}
 
 	public List<MBThread> getGroupThreads(
 			long groupId, long userId, boolean subscribed, int start, int end)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		return getGroupThreads(groupId, userId, subscribed, true, start, end);
 	}
@@ -190,7 +191,7 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 	public List<MBThread> getGroupThreads(
 			long groupId, long userId, boolean subscribed,
 			boolean includeAnonymous, int start, int end)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		if (userId <= 0) {
 			return mbThreadPersistence.findByGroupId(groupId, start, end);
@@ -200,14 +201,27 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 				return mbThreadFinder.findByS_G_U(groupId, userId, start, end);
 			}
 			else {
+				List<Long> threadIds = null;
+
 				if (includeAnonymous) {
-					return mbThreadFinder.findByG_U(
+					threadIds = mbMessageFinder.findByG_U(
 						groupId, userId, start, end);
 				}
 				else {
-					return mbThreadFinder.findByG_U_A(
+					threadIds = mbMessageFinder.findByG_U_A(
 						groupId, userId, false, start, end);
 				}
+
+				List<MBThread> threads = new ArrayList(threadIds.size());
+
+				for (long threadId : threadIds) {
+					MBThread thread = mbThreadPersistence.findByPrimaryKey(
+						threadId);
+
+					threads.add(thread);
+				}
+
+				return threads;
 			}
 		}
 	}
@@ -243,10 +257,10 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 			}
 			else {
 				if (includeAnonymous) {
-					return mbThreadFinder.countByG_U(groupId, userId);
+					return mbMessageFinder.countByG_U(groupId, userId);
 				}
 				else {
-					return mbThreadFinder.countByG_U_A(groupId, userId, false);
+					return mbMessageFinder.countByG_U_A(groupId, userId, false);
 				}
 			}
 		}

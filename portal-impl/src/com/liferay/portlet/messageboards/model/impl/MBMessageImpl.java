@@ -150,20 +150,6 @@ public class MBMessageImpl extends MBMessageModelImpl implements MBMessage {
 		return fileNames;
 	}
 
-	public double getPriority() throws PortalException, SystemException {
-		if (_priority == -1) {
-			MBThread thread = getThread();
-
-			_priority = thread.getPriority();
-		}
-
-		return _priority;
-	}
-
-	public void setPriority(double priority) {
-		_priority = priority;
-	}
-
 	public String[] getTagsEntries() throws SystemException {
 		return TagsEntryLocalServiceUtil.getEntryNames(
 			MBMessage.class.getName(), getMessageId());
@@ -172,7 +158,6 @@ public class MBMessageImpl extends MBMessageModelImpl implements MBMessage {
 	private static Log _log = LogFactoryUtil.getLog(MBMessageImpl.class);
 
 	private String _userUuid;
-	private double _priority = -1;
 	private String _attachmentDirs;
 
 }

@@ -33,6 +33,35 @@
 				MBCategory.lastPostDate DESC
 		]]>
 	</sql>
+	<sql id="com.liferay.portlet.messageboards.service.persistence.MBMessageFinder.countByG_U">
+		<![CDATA[
+			SELECT
+				COUNT(DISTINCT threadId) AS COUNT_VALUE
+			FROM
+				MBMessage
+			WHERE
+				(groupId = ?) AND
+				(userId = ?)
+			ORDER BY
+				priority DESC,
+				modifiedDate DESC
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.messageboards.service.persistence.MBMessageFinder.countByG_U_A">
+		<![CDATA[
+			SELECT
+				COUNT(DISTINCT threadId) AS COUNT_VALUE
+			FROM
+				MBMessage
+			WHERE
+				(groupId = ?) AND
+				(userId = ?) AND
+				(anonymous = ?)
+			ORDER BY
+				priority DESC,
+				modifiedDate DESC
+		]]>
+	</sql>
 	<sql id="com.liferay.portlet.messageboards.service.persistence.MBMessageFinder.findByNoAssets">
 		<![CDATA[
 			SELECT
@@ -50,6 +79,20 @@
 				))
 		]]>
 	</sql>
+	<sql id="com.liferay.portlet.messageboards.service.persistence.MBMessageFinder.findByG_U">
+		<![CDATA[
+			SELECT
+				DISTINCT threadId
+			FROM
+				MBMessage
+			WHERE
+				(groupId = ?) AND
+				(userId = ?)
+			ORDER BY
+				priority DESC,
+				modifiedDate DESC
+		]]>
+	</sql>
 	<sql id="com.liferay.portlet.messageboards.service.persistence.MBMessageFinder.findByC_C">
 		<![CDATA[
 			SELECT
@@ -65,6 +108,21 @@
 			ORDER BY
 				MBMessage.createDate ASC,
 				MBMessage.messageId ASC
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.messageboards.service.persistence.MBMessageFinder.findByG_U_A">
+		<![CDATA[
+			SELECT
+				DISTINCT threadId
+			FROM
+				MBMessage
+			WHERE
+				(groupId = ?) AND
+				(userId = ?) AND
+				(anonymous = ?)
+			ORDER BY
+				priority DESC,
+				modifiedDate DESC
 		]]>
 	</sql>
 	<sql id="com.liferay.portlet.messageboards.service.persistence.MBMessageFlagFinder.countByU_T">
@@ -110,35 +168,6 @@
 				(MBMessageFlag.flag = ?)
 		]]>
 	</sql>
-	<sql id="com.liferay.portlet.messageboards.service.persistence.MBThreadFinder.countByG_U">
-		<![CDATA[
-			SELECT
-				COUNT(DISTINCT MBThread.threadId) AS COUNT_VALUE
-			FROM
-				MBThread
-			INNER JOIN
-				MBMessage ON
-					(MBMessage.threadId = MBThread.threadId)
-			WHERE
-				(MBThread.groupId = ?) AND
-				(MBMessage.userId = ?)
-		]]>
-	</sql>
-	<sql id="com.liferay.portlet.messageboards.service.persistence.MBThreadFinder.countByG_U_A">
-		<![CDATA[
-			SELECT
-				COUNT(DISTINCT MBThread.threadId) AS COUNT_VALUE
-			FROM
-				MBThread
-			INNER JOIN
-				MBMessage ON
-					(MBMessage.threadId = MBThread.threadId)
-			WHERE
-				(MBThread.groupId = ?) AND
-				(MBMessage.userId = ?) AND
-				(MBMessage.anonymous = ?)
-		]]>
-	</sql>
 	<sql id="com.liferay.portlet.messageboards.service.persistence.MBThreadFinder.countByS_G_U">
 		<![CDATA[
 			SELECT
@@ -152,41 +181,6 @@
 			WHERE
 				(MBThread.groupId = ?) AND
 				(Subscription.userId = ?)
-		]]>
-	</sql>
-	<sql id="com.liferay.portlet.messageboards.service.persistence.MBThreadFinder.findByG_U">
-		<![CDATA[
-			SELECT
-				DISTINCT {MBThread.*}
-			FROM
-				MBThread
-			INNER JOIN
-				MBMessage ON
-					(MBMessage.threadId = MBThread.threadId)
-			WHERE
-				(MBThread.groupId = ?) AND
-				(MBMessage.userId = ?)
-			ORDER BY
-				MBThread.priority DESC,
-				MBThread.lastPostDate DESC
-		]]>
-	</sql>
-	<sql id="com.liferay.portlet.messageboards.service.persistence.MBThreadFinder.findByG_U_A">
-		<![CDATA[
-			SELECT
-				DISTINCT {MBThread.*}
-			FROM
-				MBThread
-			INNER JOIN
-				MBMessage ON
-					(MBMessage.threadId = MBThread.threadId)
-			WHERE
-				(MBThread.groupId = ?) AND
-				(MBMessage.userId = ?) AND
-				(MBMessage.anonymous = ?)
-			ORDER BY
-				MBThread.priority DESC,
-				MBThread.lastPostDate DESC
 		]]>
 	</sql>
 	<sql id="com.liferay.portlet.messageboards.service.persistence.MBThreadFinder.findByS_G_U">

@@ -78,12 +78,6 @@ public interface MBMessage extends MBMessageModel {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public double getPriority()
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
-	public void setPriority(double priority);
-
 	public java.lang.String[] getTagsEntries()
 		throws com.liferay.portal.SystemException;
 }

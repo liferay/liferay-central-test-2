@@ -86,6 +86,7 @@ public class MBMessagePersistenceTest extends BasePersistenceTestCase {
 		newMBMessage.setBody(randomString());
 		newMBMessage.setAttachments(randomBoolean());
 		newMBMessage.setAnonymous(randomBoolean());
+		newMBMessage.setPriority(nextDouble());
 
 		_persistence.update(newMBMessage, false);
 
@@ -114,6 +115,7 @@ public class MBMessagePersistenceTest extends BasePersistenceTestCase {
 			newMBMessage.getAttachments());
 		assertEquals(existingMBMessage.getAnonymous(),
 			newMBMessage.getAnonymous());
+		assertEquals(existingMBMessage.getPriority(), newMBMessage.getPriority());
 	}
 
 	public void testFindByPrimaryKeyExisting() throws Exception {
@@ -171,6 +173,7 @@ public class MBMessagePersistenceTest extends BasePersistenceTestCase {
 		mbMessage.setBody(randomString());
 		mbMessage.setAttachments(randomBoolean());
 		mbMessage.setAnonymous(randomBoolean());
+		mbMessage.setPriority(nextDouble());
 
 		_persistence.update(mbMessage, false);
 

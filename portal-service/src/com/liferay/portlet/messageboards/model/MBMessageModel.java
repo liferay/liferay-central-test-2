@@ -115,5 +115,9 @@ public interface MBMessageModel extends BaseModel<MBMessage> {
 
 	public void setAnonymous(boolean anonymous);
 
+	public double getPriority();
+
+	public void setPriority(double priority);
+
 	public MBMessage toEscapedModel();
 }

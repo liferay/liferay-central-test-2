@@ -1165,6 +1165,7 @@
 		</field>
 		<field name="attachments" type="boolean" />
 		<field name="anonymous" type="boolean" />
+		<field name="priority" type="double" />
 	</model>
 	<model name="com.liferay.portlet.messageboards.model.MBMessageFlag">
 		<field name="messageFlagId" type="long" />

@@ -65,6 +65,7 @@ public class MBMessageSoap implements Serializable {
 		soapModel.setBody(model.getBody());
 		soapModel.setAttachments(model.getAttachments());
 		soapModel.setAnonymous(model.getAnonymous());
+		soapModel.setPriority(model.getPriority());
 
 		return soapModel;
 	}
@@ -218,6 +219,14 @@ public class MBMessageSoap implements Serializable {
 		_anonymous = anonymous;
 	}
 
+	public double getPriority() {
+		return _priority;
+	}
+
+	public void setPriority(double priority) {
+		_priority = priority;
+	}
+
 	private String _uuid;
 	private long _messageId;
 	private long _groupId;
@@ -233,4 +242,5 @@ public class MBMessageSoap implements Serializable {
 	private String _body;
 	private boolean _attachments;
 	private boolean _anonymous;
+	private double _priority;
 }

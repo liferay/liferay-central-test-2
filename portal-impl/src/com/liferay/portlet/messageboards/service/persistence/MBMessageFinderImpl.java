@@ -24,13 +24,16 @@ package com.liferay.portlet.messageboards.service.persistence;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.orm.QueryPos;
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.SQLQuery;
 import com.liferay.portal.kernel.dao.orm.Session;
+import com.liferay.portal.kernel.dao.orm.Type;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.impl.MBMessageImpl;
 import com.liferay.util.dao.orm.CustomSQLUtil;
 
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -42,11 +45,101 @@ import java.util.List;
 public class MBMessageFinderImpl
 	extends BasePersistenceImpl implements MBMessageFinder {
 
+	public static String COUNT_BY_G_U =
+		MBMessageFinder.class.getName() + ".countByG_U";
+
+	public static String COUNT_BY_G_U_A =
+		MBMessageFinder.class.getName() + ".countByG_U_A";
+
 	public static String FIND_BY_NO_ASSETS =
 		MBMessageFinder.class.getName() + ".findByNoAssets";
 
+	public static String FIND_BY_G_U =
+		MBMessageFinder.class.getName() + ".findByG_U";
+
 	public static String FIND_BY_C_C =
 		MBMessageFinder.class.getName() + ".findByC_C";
+
+	public static String FIND_BY_G_U_A =
+		MBMessageFinder.class.getName() + ".findByG_U_A";
+
+	public int countByG_U(long groupId, long userId) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			String sql = CustomSQLUtil.get(COUNT_BY_G_U);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+			qPos.add(userId);
+
+			Iterator<Long> itr = q.list().iterator();
+
+			if (itr.hasNext()) {
+				Long count = itr.next();
+
+				if (count != null) {
+					return count.intValue();
+				}
+			}
+
+			return 0;
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public int countByG_U_A(
+			long groupId, long userId, boolean anonymous)
+		throws SystemException {
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			String sql = CustomSQLUtil.get(COUNT_BY_G_U_A);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+			qPos.add(userId);
+			qPos.add(anonymous);
+
+			Iterator<Long> itr = q.list().iterator();
+
+			if (itr.hasNext()) {
+				Long count = itr.next();
+
+				if (count != null) {
+					return count.intValue();
+				}
+			}
+
+			return 0;
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
 
 	public List<MBMessage> findByNoAssets() throws SystemException {
 		Session session = null;
@@ -61,6 +154,36 @@ public class MBMessageFinderImpl
 			q.addEntity("MBMessage", MBMessageImpl.class);
 
 			return q.list();
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public List<Long> findByG_U(
+			long groupId, long userId, int start, int end)
+		throws SystemException {
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			String sql = CustomSQLUtil.get(FIND_BY_G_U);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addScalar("threadId", Type.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+			qPos.add(userId);
+
+			return (List<Long>)QueryUtil.list(q, getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -90,6 +213,37 @@ public class MBMessageFinderImpl
 			qPos.add(classPK);
 
 			return q.list();
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public List<Long> findByG_U_A(
+			long groupId, long userId, boolean anonymous, int start, int end)
+		throws SystemException {
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			String sql = CustomSQLUtil.get(FIND_BY_G_U_A);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addScalar("threadId", Type.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+			qPos.add(userId);
+			qPos.add(anonymous);
+
+			return (List<Long>)QueryUtil.list(q, getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

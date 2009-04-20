@@ -314,8 +314,12 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		thread.setLastPostDate(now);
 
-		if (priority != MBThreadImpl.PRIORITY_NOT_GIVEN) {
+		if ((priority != MBThreadImpl.PRIORITY_NOT_GIVEN) &&
+			(thread.getPriority() != priority)) {
+
 			thread.setPriority(priority);
+
+			updatePriorities(thread.getThreadId(), priority);
 		}
 
 		logAddMessage(messageId, stopWatch, 2);
@@ -329,6 +333,10 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		message.setBody(body);
 		message.setAttachments(!files.isEmpty());
 		message.setAnonymous(anonymous);
+
+		if (priority != MBThreadImpl.PRIORITY_NOT_GIVEN) {
+			message.setPriority(priority);
+		}
 
 		// Attachments
 
@@ -1138,6 +1146,10 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		message.setBody(body);
 		message.setAttachments(!files.isEmpty() || !existingFiles.isEmpty());
 
+		if (priority != MBThreadImpl.PRIORITY_NOT_GIVEN) {
+			message.setPriority(priority);
+		}
+
 		// Attachments
 
 		long companyId = message.getCompanyId();
@@ -1196,11 +1208,15 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		MBThread thread = mbThreadPersistence.findByPrimaryKey(
 			message.getThreadId());
 
-		if (priority != MBThreadImpl.PRIORITY_NOT_GIVEN) {
-			thread.setPriority(priority);
-		}
+		if ((priority != MBThreadImpl.PRIORITY_NOT_GIVEN) &&
+			(thread.getPriority() != priority)) {
 
-		mbThreadPersistence.update(thread, false);
+			thread.setPriority(priority);
+
+			mbThreadPersistence.update(thread, false);
+
+			updatePriorities(thread.getThreadId(), priority);
+		}
 
 		// Category
 
@@ -1722,6 +1738,21 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			from, to, subject, body, true);
 
 		mailService.sendEmail(mailMessage);
+	}
+
+	protected void updatePriorities(long threadId, double priority)
+		throws PortalException, SystemException {
+
+		List<MBMessage> messages = mbMessagePersistence.findByThreadId(
+			threadId);
+
+		for (MBMessage message : messages) {
+			if (message.getPriority() != priority) {
+				message.setPriority(priority);
+
+				mbMessagePersistence.update(message, false);
+			}
+		}
 	}
 
 	protected void validate(String subject, String body)

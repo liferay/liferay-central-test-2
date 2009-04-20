@@ -678,7 +678,8 @@ create table MBMessage (
 	subject VARCHAR(75) null,
 	body TEXT null,
 	attachments BOOLEAN,
-	anonymous BOOLEAN
+	anonymous BOOLEAN,
+	priority DOUBLE
 );
 
 create table MBMessageFlag (

@@ -54,6 +54,11 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 	}
 
 	protected void doUpgrade() throws Exception {
+		updateGroupId();
+		updatePriority();
+	}
+
+	protected void updateGroupId() throws Exception {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -91,6 +96,44 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 		}
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
+		}
+	}
+
+	protected void updatePriority() throws Exception {
+		if (isSupportsUpdateWithInnerJoin()) {
+			StringBuilder sb = new StringBuilder();
+
+			sb.append("update MBMessage inner join MBThread on ");
+			sb.append("MBThread.threadId = MBMessage.threadId set ");
+			sb.append("MBMessage.priority = MBThread.priority");
+
+			runSQL(sb.toString());
+		}
+		else {
+			Connection con = null;
+			PreparedStatement ps = null;
+			ResultSet rs = null;
+
+			try {
+				con = DataAccess.getConnection();
+
+				ps = con.prepareStatement(
+					"select threadId, priority from MBThread");
+
+				rs = ps.executeQuery();
+
+				while (rs.next()) {
+					long threadId = rs.getLong("threadId");
+					double priority = rs.getDouble("priority");
+
+					runSQL(
+						"update MBMessage set priority = " + priority +
+							" where threadId = " + threadId);
+				}
+			}
+			finally {
+				DataAccess.cleanUp(con, ps, rs);
+			}
 		}
 	}
 
