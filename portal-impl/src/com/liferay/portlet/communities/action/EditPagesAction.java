@@ -525,6 +525,7 @@ public class EditPagesAction extends PortletAction {
 
 				if (parentLayout.getType().equals(
 						LayoutConstants.TYPE_PORTLET)) {
+
 					copyPreferences(actionRequest, layout, parentLayout);
 				}
 			}
