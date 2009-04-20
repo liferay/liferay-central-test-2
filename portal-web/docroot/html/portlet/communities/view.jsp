@@ -30,7 +30,12 @@ String tabs1 = ParamUtil.getString(request, "tabs1", "communities-owned");
 boolean showTabs1 = true;
 
 if (portletName.equals(PortletKeys.ENTERPRISE_ADMIN_COMMUNITIES)) {
-	tabs1 = "all-communities";
+	if (permissionChecker.isCompanyAdmin()) {
+		tabs1 = "all-communities";
+	}
+	else {
+		tabs1 = "communities-joined";
+	}
 
 	showTabs1 = false;
 }
