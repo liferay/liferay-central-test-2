@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.util.Randomizer;
 import com.liferay.portal.kernel.util.UnmodifiableList;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -148,96 +149,24 @@ public class QueryUtil {
 		Query query, int count, OrderByComparator obc,
 		Comparable<?> comparable) {
 
-		int pos = count;
-		int boundary = 0;
-
 		Comparable<?>[] array = new Comparable[3];
 
-		ScrollableResults sr = query.scroll();
+		List<?> entries = query.list();
 
-		if (sr.first()) {
-			while (true) {
-				Object obj = sr.get(0);
+		List<?> sortedEntries = new ArrayList(entries);
 
-				if (obj == null) {
-					if (_log.isWarnEnabled()) {
-						_log.warn("Object is null");
-					}
+		Collections.sort(sortedEntries, obc);
 
-					break;
-				}
+		int index = Collections.binarySearch(sortedEntries, comparable, obc);
 
-				Comparable<?> curComparable = (Comparable<?>)obj;
+		array[1] = (Comparable<?>)sortedEntries.get(index);
 
-				int value = obc.compare(comparable, curComparable);
+		if (index != 0) {
+			array[0] = (Comparable<?>) sortedEntries.get(index-1);
+		}
 
-				if (_log.isDebugEnabled()) {
-					_log.debug("Comparison result is " + value);
-				}
-
-				if (value == 0) {
-					if (!comparable.equals(curComparable)) {
-						break;
-					}
-
-					array[1] = curComparable;
-
-					if (sr.previous()) {
-						array[0] = (Comparable<?>)sr.get(0);
-					}
-
-					sr.next();
-
-					if (sr.next()) {
-						array[2] = (Comparable<?>)sr.get(0);
-					}
-
-					break;
-				}
-
-				if (pos == 1) {
-					break;
-				}
-
-				pos = (int)Math.ceil(pos / 2.0);
-
-				int scrollPos = pos;
-
-				if (value < 0) {
-					scrollPos = scrollPos * -1;
-				}
-
-				boundary += scrollPos;
-
-				if (boundary < 0) {
-					scrollPos = scrollPos + (boundary * -1) + 1;
-
-					boundary = 0;
-				}
-
-				if (boundary > count) {
-					scrollPos = scrollPos - (boundary - count);
-
-					boundary = scrollPos;
-				}
-
-				if (_log.isDebugEnabled()) {
-					_log.debug("Scroll " + scrollPos);
-				}
-
-				if (!sr.scroll(scrollPos)) {
-					if (value < 0) {
-						if (!sr.next()) {
-							break;
-						}
-					}
-					else {
-						if (!sr.previous()) {
-							break;
-						}
-					}
-				}
-			}
+		if (index != (count-1)) {
+			array[2] = (Comparable<?>) sortedEntries.get(index + 1);
 		}
 
 		return array;

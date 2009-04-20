@@ -54,6 +54,15 @@ public class EntryDisplayDateComparator extends OrderByComparator {
 		int value = DateUtil.compareTo(
 			entry1.getDisplayDate(), entry2.getDisplayDate());
 
+		if (value == 0) {
+			if (entry1.getEntryId() < entry2.getEntryId()) {
+				value = -1;
+			}
+			else if (entry1.getEntryId() > entry2.getEntryId()) {
+				value = 1;
+			}
+		}
+
 		if (_asc) {
 			return value;
 		}
