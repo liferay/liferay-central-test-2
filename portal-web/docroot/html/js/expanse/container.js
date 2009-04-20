@@ -204,20 +204,6 @@
 					Dom.addClass(instance.element, options.className);
 				}
 
-/*
-				if (options.body) {
-					if (options.body.url) {
-						instance._ajaxConfig = options.body;
-
-						options.body = '<div class="loading-animation" />';
-
-						instance.renderEvent.subscribe(instance._loadBody);
-					}
-
-					instance.setBody(options.body);
-				}
-*/
-
 				if (options.onOpen) {
 					instance.subscribe('render', options.onOpen, instance, true);
 				}
