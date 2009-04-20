@@ -22,19 +22,23 @@
 
 package com.liferay.portlet.expando.model.impl;
 
+import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portlet.expando.model.ExpandoBridge;
-import com.liferay.portlet.expando.model.ExpandoColumnConstants;
+import com.liferay.portlet.expando.model.ExpandoColumn;
 import com.liferay.portlet.expando.model.ExpandoTableConstants;
+import com.liferay.portlet.expando.model.ExpandoValue;
+import com.liferay.portlet.expando.service.ExpandoColumnLocalServiceUtil;
 import com.liferay.portlet.expando.service.ExpandoValueLocalServiceUtil;
 import com.liferay.portlet.expando.util.ExpandoBridgeIndexer;
 
-import java.util.Enumeration;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <a href="ExpandoBridgeIndexerImpl.java.html"><b><i>View Source</i></b></a>
@@ -49,38 +53,73 @@ public class ExpandoBridgeIndexerImpl implements ExpandoBridgeIndexer {
 			return;
 		}
 
-		Enumeration<String> enu = expandoBridge.getAttributeNames();
+		try {
+			doAddAttributes(doc, expandoBridge);
+		}
+		catch (SystemException se) {
+			_log.error(se, se);
+		}
+	}
 
-		while (enu.hasMoreElements()) {
-			String name = enu.nextElement();
+	protected void doAddAttributes(Document doc, ExpandoBridge expandoBridge)
+		throws SystemException {
 
-			int type = expandoBridge.getAttributeType(name);
+		List<ExpandoColumn> expandoColumns =
+			ExpandoColumnLocalServiceUtil.getDefaultTableColumns(
+				expandoBridge.getClassName());
 
-			UnicodeProperties properties = expandoBridge.getAttributeProperties(
-				name);
+		if ((expandoColumns == null) || expandoColumns.isEmpty()) {
+			return;
+		}
+
+		List<ExpandoColumn> indexedColumns = new ArrayList<ExpandoColumn>();
+
+		for (ExpandoColumn expandoColumn : expandoColumns) {
+			UnicodeProperties properties =
+				expandoColumn.getTypeSettingsProperties();
 
 			boolean indexable = GetterUtil.getBoolean(
 				properties.get(ExpandoBridgeIndexer.INDEXABLE));
 
-			if (!indexable || (type != ExpandoColumnConstants.STRING)) {
-				continue;
+			if (indexable) {
+				indexedColumns.add(expandoColumn);
 			}
+		}
 
+		if (indexedColumns.isEmpty()) {
+			return;
+		}
+
+		List<ExpandoValue> expandoValues =
+			ExpandoValueLocalServiceUtil.getRowValues(
+				expandoBridge.getClassName(),
+				ExpandoTableConstants.DEFAULT_TABLE_NAME,
+				expandoBridge.getClassPK(), QueryUtil.ALL_POS,
+				QueryUtil.ALL_POS);
+
+		for (ExpandoColumn expandoColumn : indexedColumns) {
 			try {
-				String value = ExpandoValueLocalServiceUtil.getData(
-					expandoBridge.getClassName(),
-					ExpandoTableConstants.DEFAULT_TABLE_NAME, name,
-					expandoBridge.getClassPK(), StringPool.BLANK);
+				String value = expandoColumn.getDefaultData();
 
-				doc.addText(name, value);
+				for (ExpandoValue expandoValue : expandoValues) {
+					if (expandoValue.getColumnId() ==
+							expandoColumn.getColumnId()) {
+
+						value = expandoValue.getData();
+
+						break;
+					}
+				}
+
+				doc.addText(expandoColumn.getName(), value);
 			}
 			catch (Exception e) {
-				_log.error("Indexing " + name, e);
+				_log.error("Indexing " + expandoColumn.getName(), e);
 			}
 		}
 	}
 
 	private static Log _log =
-		 LogFactoryUtil.getLog(ExpandoBridgeIndexerImpl.class);
+		LogFactoryUtil.getLog(ExpandoBridgeIndexerImpl.class);
 
 }
