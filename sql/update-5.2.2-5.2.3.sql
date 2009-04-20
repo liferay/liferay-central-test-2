@@ -50,3 +50,10 @@ alter table User_ add firstName VARCHAR(75) null;
 alter table User_ add middleName VARCHAR(75) null;
 alter table User_ add lastName VARCHAR(75) null;
 alter table User_ add jobTitle VARCHAR(75) null;
+
+COMMIT_TRANSACTION;
+
+update User_ set firstName = (select firstName from Contact_ where Contact_.contactId = User_.contactId);
+update User_ set middleName = (select middleName from Contact_ where Contact_.contactId = User_.contactId);
+update User_ set lastName = (select lastName from Contact_ where Contact_.contactId = User_.contactId);
+update User_ set jobTitle = (select jobTitle from Contact_ where Contact_.contactId = User_.contactId);
