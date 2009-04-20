@@ -53,6 +53,7 @@ import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.ShutdownUtil;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.util.log4j.Log4JUtil;
 
 import java.util.Enumeration;
 import java.util.Map;
@@ -397,9 +398,7 @@ public class EditServerAction extends PortletAction {
 				String priority = ParamUtil.getString(
 					actionRequest, name, Level.INFO.toString());
 
-				Logger logger = Logger.getLogger(loggerName);
-
-				logger.setLevel(Level.toLevel(priority));
+				Log4JUtil.setLevel(loggerName, priority);
 			}
 		}
 	}

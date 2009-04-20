@@ -84,14 +84,38 @@ public class Log4JUtil {
 					String priority =
 						category.element("priority").attributeValue("value");
 
-					Logger logger = Logger.getLogger(name);
-
-					logger.setLevel(Level.toLevel(priority));
+					setLevel(name, priority);
 				}
 			}
 			catch (Exception e) {
 				e.printStackTrace();
 			}
+		}
+	}
+
+	public static void setLevel(String name, String priority) {
+		Logger logger = Logger.getLogger(name);
+
+		logger.setLevel(Level.toLevel(priority));
+
+		java.util.logging.Logger jdkLogger = java.util.logging.Logger.getLogger(
+			name);
+
+		jdkLogger.setLevel(_getJdkLevel(priority));
+	}
+
+	private static java.util.logging.Level _getJdkLevel(String priority) {
+		if (priority.equalsIgnoreCase(Level.DEBUG.toString())) {
+			return java.util.logging.Level.FINE;
+		}
+		else if (priority.equalsIgnoreCase(Level.ERROR.toString())) {
+			return java.util.logging.Level.SEVERE;
+		}
+		else if (priority.equalsIgnoreCase(Level.WARN.toString())) {
+			return java.util.logging.Level.WARNING;
+		}
+		else {
+			return java.util.logging.Level.INFO;
 		}
 	}
 
