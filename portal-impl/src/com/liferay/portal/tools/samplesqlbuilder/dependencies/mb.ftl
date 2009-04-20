@@ -21,7 +21,7 @@
 				<#assign parentMessageId = 0>
 
 				<#list 1..maxMBMessageCount as mbMessageCount>
-					${mbMessageCounter.increment()}
+					<#assign mbMessageCounterIncrement = mbMessageCounter.increment()>
 
 					<#assign messageId = messageCounterOffset + mbMessageCount>
 
