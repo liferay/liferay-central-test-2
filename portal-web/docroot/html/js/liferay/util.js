@@ -504,6 +504,22 @@ Liferay.Util = {
 
 						var popup = new Expanse.Popup(
 							{
+								body: {
+									url: url + '&rt=' + Liferay.Util.randomInt(),
+									success: function(message) {
+										var body = jQuery(popup.body);
+
+										body.html(message);
+
+										form = body.find('form');
+
+										if (textarea) {
+											var usingPlainEditor = body.find('.lfr-textarea').length;
+
+											Liferay.Util.resizeTextarea(textarea, !usingPlainEditor, true);
+										}
+									}
+								},
 								height: 640,
 								width: 680,
 								onClose: function() {
@@ -521,20 +537,6 @@ Liferay.Util = {
 									form.css(dimensions);
 
 									Expanse.getDocument().trigger('popupResize');
-								},
-								url: url + '&rt=' + Liferay.Util.randomInt(),
-								urlSuccess: function(message) {
-									var body = jQuery(popup.body);
-
-									body.html(message);
-
-									form = body.find('form');
-
-									if (textarea) {
-										var usingPlainEditor = body.find('.lfr-textarea').length;
-
-										Liferay.Util.resizeTextarea(textarea, !usingPlainEditor, true);
-									}
 								}
 							}
 						);

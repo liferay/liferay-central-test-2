@@ -8,10 +8,12 @@ Liferay.PortletSharing = {
 
 		new Expanse.Popup(
 			{
+				body: {
+					url: portletURL.toString()
+				},
 				fixedcenter: true,
 				header: Liferay.Language.get('add-to-netvibes'),
 				modal: true,
-				url: portletURL.toString(),
 				width: 550
 			}
 		);
@@ -25,10 +27,12 @@ Liferay.PortletSharing = {
 
 		new Expanse.Popup(
 			{
+				body: {
+					url: portletURL.toString()
+				},
 				fixedcenter: true,
 				header: Liferay.Language.get('add-to-any-website'),
 				modal: true,
-				url: portletURL.toString(),
 				width: 550
 			}
 		);

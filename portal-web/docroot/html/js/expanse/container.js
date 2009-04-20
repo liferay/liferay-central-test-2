@@ -11,6 +11,54 @@
 	Expanse.Tooltip = new Expanse.Class(Widget.Tooltip);
 	Expanse.Panel = new Expanse.Class(Widget.Panel);
 
+	var baseContainerImpl = {
+		initialize: function(el, options) {
+			var instance = this;
+
+			instance._super.apply(instance, arguments);
+
+			if (options.body) {
+				if (options.body.url) {
+					instance._ajaxConfig = options.body;
+
+					options.body = '<div class="loading-animation" />';
+
+					instance.renderEvent.subscribe(instance._loadBody);
+				}
+
+				instance.setBody(options.body);
+			}
+		},
+
+		_loadBody: function() {
+			var instance = this;
+
+			var ajaxConfig = instance._ajaxConfig;
+
+			ajaxConfig.url = ajaxConfig.url.replace(/p_p_state=(maximized|pop_up)/g, 'p_p_state=exclusive');
+
+			if (!ajaxConfig.success) {
+				ajaxConfig.success = function(message) {
+					instance.setBody('');
+
+					jQuery(instance.body).html(message);
+
+					if (!instance.cfg.getProperty('width')) {
+						instance.cfg.setProperty('width', 'auto');
+					}
+				};
+			}
+
+			jQuery.ajax(ajaxConfig);
+		}
+	};
+
+	Expanse.Module = Expanse.Module.extend(baseContainerImpl);
+	Expanse.Overlay = Expanse.Overlay.extend(baseContainerImpl);
+	Expanse.Dialog = Expanse.Dialog.extend(baseContainerImpl);
+	Expanse.SimpleDialog = Expanse.SimpleDialog.extend(baseContainerImpl);
+	Expanse.Panel = Expanse.Panel.extend(baseContainerImpl);
+
 	Expanse.Overlay = Expanse.Overlay.extend(
 		{
 			initialize: function(el, options) {
@@ -156,35 +204,19 @@
 					Dom.addClass(instance.element, options.className);
 				}
 
+/*
 				if (options.body) {
-					instance.setBody(options.body);
-				}
-				else if (options.url) {
-					instance.setBody('<div class="loading-animation" />');
+					if (options.body.url) {
+						instance._ajaxConfig = options.body;
 
-					var onComplete = options.urlComplete;
-					var onError = options.urlError;
-					var onSuccess = options.urlSuccess;
-					var url = options.url.replace(/p_p_state=(maximized|pop_up)/g, 'p_p_state=exclusive');
+						options.body = '<div class="loading-animation" />';
 
-					if (!onSuccess) {
-						onSuccess = function(message) {
-							instance.setBody('');
-
-							jQuery(instance.body).html(message);
-						};
+						instance.renderEvent.subscribe(instance._loadBody);
 					}
 
-					jQuery.ajax(
-						{
-							url: url,
-							data: options.urlData,
-							complete: onComplete,
-							error: onError,
-							success: onSuccess
-						}
-					);
+					instance.setBody(options.body);
 				}
+*/
 
 				if (options.onOpen) {
 					instance.subscribe('render', options.onOpen, instance, true);

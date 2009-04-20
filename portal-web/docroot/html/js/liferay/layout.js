@@ -55,14 +55,16 @@
 
 			new Expanse.Popup(
 				{
+					body: {
+						url: url,
+						data: {
+							p_l_id: themeDisplay.getPlid(),
+							doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
+							redirect: Liferay.currentURL
+						}
+					},
 					header: Liferay.Language.get('layout'),
 					modal: true,
-					url: url,
-					urlData: {
-						p_l_id: themeDisplay.getPlid(),
-						doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
-						redirect: Liferay.currentURL
-					},
 					width: 700,
 					xy: ['center', 100]
 				}

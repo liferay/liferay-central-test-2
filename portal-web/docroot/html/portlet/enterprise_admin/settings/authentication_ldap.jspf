@@ -163,10 +163,12 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 
 			var popup = new Expanse.Popup(
 				{
+					body: {
+						url: url,
+						data: data
+					},
 					fixedcenter: true,
 					modal: true,
-					url: url,
-					urlData: data,
 					width: 600
 				}
 			);

@@ -102,11 +102,13 @@ Liferay.LayoutExporter = {
 
 		var exportLayoutsPopup = new Expanse.Popup(
 			{
+				body: {
+					url: url
+				},
 				fixedcenter: true,
 				header: title,
 				modal: true,
 				messageId: messageId,
-				url: url,
 				width: 600
 			}
 		);

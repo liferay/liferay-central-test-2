@@ -92,23 +92,25 @@
 
 				instance._dialog = new Expanse.Popup(
 					{
+						body: {
+							url: url,
+							data: {
+								p_l_id: plid,
+								p_p_id: ppid,
+								p_p_state: 'exclusive',
+								doAsUserId: doAsUserId
+							},
+							success: function(message) {
+								instance._dialog.setBody(message);
+								instance._loadContent();
+							}
+						},
 						header: Liferay.Language.get('add-application'),
 						onClose: function() {
 							instance.menu = null;
 							body.removeClass('lfr-has-sidebar');
 						},
 						resizable: false,
-						url: url,
-						urlData: {
-							p_l_id: plid,
-							p_p_id: ppid,
-							p_p_state: 'exclusive',
-							doAsUserId: doAsUserId
-						},
-						urlSuccess: function(message) {
-							instance._dialog.setBody(message);
-							instance._loadContent();
-						},
 						xy: [5,5],
 						width: popupWidth
 					}

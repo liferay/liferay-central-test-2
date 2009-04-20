@@ -47,6 +47,16 @@ window.Class = Expanse.Class;
 		options.onClose = options.close;
 		options.onOpen = options.open;
 
+		if (options.url) {
+			options.body = {
+				url: options.url,
+				data: options.urlData,
+				complete: options.urlComplete,
+				error: options.urlError,
+				success: options.urlSuccess
+			};
+		}
+
 		if (options.position) {
 			options.xy = options.position;
 		}

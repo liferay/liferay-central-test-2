@@ -53,18 +53,20 @@ long reportedUserId = GetterUtil.getLong((String)request.getAttribute("liferay-u
 				function() {
 					var popup = new Expanse.Popup(
 						{
+							body: {
+								url:  '<liferay-portlet:renderURL portletName="<%= PortletKeys.FLAGS %>" windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><liferay-portlet:param name="struts_action" value="/flags/edit_entry" /></liferay-portlet:renderURL> ',
+								data: {
+									className: '<%= className %>',
+									classPK: '<%= classPK %>',
+									contentTitle: '<%= HtmlUtil.escape(contentTitle) %>',
+									contentURL: '<%= PortalUtil.getPortalURL(request) + currentURL %>',
+									reportedUserId: '<%= reportedUserId %>'
+								}
+							}
 							constraintoviewport: true,
 							header: '<liferay-ui:message key="report-inappropriate-content" />',
 							modal: true,
 							position: [150, 150],
-							url:  '<liferay-portlet:renderURL portletName="<%= PortletKeys.FLAGS %>" windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><liferay-portlet:param name="struts_action" value="/flags/edit_entry" /></liferay-portlet:renderURL> ',
-							urlData: {
-								className: '<%= className %>',
-								classPK: '<%= classPK %>',
-								contentTitle: '<%= HtmlUtil.escape(contentTitle) %>',
-								contentURL: '<%= PortalUtil.getPortalURL(request) + currentURL %>',
-								reportedUserId: '<%= reportedUserId %>'
-							},
 							width: 500,
 							xy: ['center', 100]
 						}
