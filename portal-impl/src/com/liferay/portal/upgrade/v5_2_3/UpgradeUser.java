@@ -22,6 +22,7 @@
 
 package com.liferay.portal.upgrade.v5_2_3;
 
+import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.model.impl.UserImpl;
@@ -29,6 +30,10 @@ import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
 import com.liferay.portal.upgrade.util.UpgradeTable;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 /**
  * <a href="UpgradeUser.java.html"><b><i>View Source</i></b></a>
@@ -53,6 +58,17 @@ public class UpgradeUser extends UpgradeProcess {
 		if (isSupportsAlterColumnName()) {
 			runSQL("alter_column_type User_ greeting VARCHAR(255) null");
 		}
+		else {
+
+			// User_
+
+			UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
+				UserImpl.TABLE_NAME, UserImpl.TABLE_COLUMNS);
+
+			upgradeTable.setCreateSQL(UserImpl.TABLE_SQL_CREATE);
+
+			upgradeTable.updateTable();
+		}
 
 		if (isSupportsUpdateWithInnerJoin()) {
 			StringBuilder sb = new StringBuilder();
@@ -66,19 +82,45 @@ public class UpgradeUser extends UpgradeProcess {
 
 			runSQL(sb.toString());
 		}
+		else {
+			Connection con = null;
+			PreparedStatement ps = null;
+			ResultSet rs = null;
 
-		if (!isSupportsAlterColumnName()) {
-			if (!isSupportsUpdateWithInnerJoin()) {
+			try {
+				con = DataAccess.getConnection();
+
+				ps = con.prepareStatement(
+					"select contactId, firstName, middleName, lastName, " +
+						"jobTitle from Contact_");
+
+				rs = ps.executeQuery();
+
+				while (rs.next()) {
+					long contactId = rs.getLong("contactId");
+					String firstName = rs.getString("firstName");
+					String middleName = rs.getString("middleName");
+					String lastName = rs.getString("lastName");
+					String jobTitle = rs.getString("jobTitle");
+
+					ps = con.prepareStatement(
+						"update User_ set firstName = ?, middleName = ?, " +
+							"lastName = ?, jobTitle = ? where contactId = ?");
+
+					ps.setString(1, firstName);
+					ps.setString(2, middleName);
+					ps.setString(3, lastName);
+					ps.setString(4, jobTitle);
+					ps.setLong(5, contactId);
+
+					ps.executeUpdate();
+
+					ps.close();
+				}
 			}
-
-			// User_
-
-			UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
-				UserImpl.TABLE_NAME, UserImpl.TABLE_COLUMNS);
-
-			upgradeTable.setCreateSQL(UserImpl.TABLE_SQL_CREATE);
-
-			upgradeTable.updateTable();
+			finally {
+				DataAccess.cleanUp(con, ps, rs);
+			}
 		}
 	}
 
