@@ -33,13 +33,8 @@ if (userDisplay != null) {
 	tokenId = ImageServletTokenUtil.getToken(userDisplay.getPortraitId());
 }
 
-boolean urlIsNotNull = Validator.isNotNull(url);
-boolean urlIsNull = !urlIsNotNull;
-
-if (urlIsNull && (userDisplay != null)) {
+if (Validator.isNull(url) && (userDisplay != null)) {
 	url = userDisplay.getDisplayURL(themeDisplay);
-	urlIsNotNull = true;
-	urlIsNull = false;
 }
 
 List<Presence> presences = null;
@@ -78,6 +73,11 @@ if ((presences != null) && (presences.size() > 0)) {
 	</c:if>
 
 	<div class="user-profile-image">
+
+		<%
+		boolean urlIsNotNull = Validator.isNotNull(url);
+		%>
+
 		<c:if test="<%= urlIsNotNull %>"><a href="<%= url %>"></c:if>
 
 		<img alt="<%= (userDisplay != null) ? userDisplay.getFullName() : LanguageUtil.get(pageContext, "generic-portrait") %>" class="avatar" src="<%= themeDisplay.getPathImage() %>/user_<%= (userDisplay != null) && userDisplay.isFemale() ? "female" : "male" %>_portrait?img_id=<%= portraitId %>&t=<%= tokenId %>" width="65" />
