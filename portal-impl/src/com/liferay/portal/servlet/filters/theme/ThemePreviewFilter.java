@@ -44,6 +44,7 @@ package com.liferay.portal.servlet.filters.theme;
 import com.liferay.portal.kernel.servlet.StringServletResponse;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.servlet.filters.BasePortalFilter;
+import com.liferay.portal.servlet.filters.strip.StripFilter;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.util.servlet.ServletResponseUtil;
@@ -64,54 +65,31 @@ import javax.servlet.http.HttpServletResponse;
  * @author Ganesh P Ram
  *
  */
-
 public class ThemePreviewFilter extends BasePortalFilter {
 
-	protected void processFilter(
-			HttpServletRequest request, HttpServletResponse response,
-			FilterChain filterChain)
-		throws IOException, ServletException {
+	protected String getContent(HttpServletRequest request, String content) {
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
-		boolean isThemePreview = _isThemePreview(request);
+		Pattern cssPattern = Pattern.compile(
+			themeDisplay.getPathThemeCss());
 
-		if (isThemePreview){
+		Matcher cssMatcher = cssPattern.matcher(content);
 
-			request.setAttribute(_STRIP, false);
+		content = cssMatcher.replaceAll("css");
 
-			StringServletResponse stringServerRes =
-				new StringServletResponse(response);
+		Pattern imagePattern = Pattern.compile(
+			themeDisplay.getPathThemeImages());
 
-			processFilter(ThemePreviewFilter.class,
-					request, stringServerRes, filterChain);
+		Matcher imageMatcher = imagePattern.matcher(content);
 
-			String s = stringServerRes.getString();
+		content = imageMatcher.replaceAll("images");
 
-			ThemeDisplay themeDisplay = (ThemeDisplay) request.getAttribute(
-					WebKeys.THEME_DISPLAY);
-
-			Pattern cssPattern = Pattern.compile(
-					themeDisplay.getPathThemeCss());
-
-			Matcher cssMatcher = cssPattern.matcher(s);
-			String cssOutput = cssMatcher.replaceAll(_CSS);
-
-			Pattern imagePattern = Pattern.compile(
-					themeDisplay.getPathThemeImages());
-
-			Matcher imageMatcher = imagePattern.matcher(cssOutput);
-
-			String imageOutput = imageMatcher.replaceAll(_IMAGES);
-
-			ServletResponseUtil.write(response,imageOutput);
-
-		}else {
-			processFilter(ThemePreviewFilter.class,
-				request, response, filterChain);
-		}
+		return content;
 	}
 
-	private boolean _isThemePreview(HttpServletRequest request) {
-		if (ParamUtil.getBoolean(request, _THEME_PREVIEW, false)) {
+	protected boolean isThemePreview(HttpServletRequest request) {
+		if (ParamUtil.getBoolean(request, _THEME_PREVIEW)) {
 			return true;
 		}
 		else {
@@ -119,9 +97,32 @@ public class ThemePreviewFilter extends BasePortalFilter {
 		}
 	}
 
-	private static final String _CSS = "css";
-	private static final String _IMAGES = "images";
-	private static final String _STRIP = "strip";
+	protected void processFilter(
+			HttpServletRequest request, HttpServletResponse response,
+			FilterChain filterChain)
+		throws IOException, ServletException {
+
+		if (isThemePreview(request)) {
+			request.setAttribute(StripFilter.SKIP_FILTER, Boolean.TRUE);
+
+			StringServletResponse stringServerResponse =
+				new StringServletResponse(response);
+
+			processFilter(
+				ThemePreviewFilter.class, request, stringServerResponse,
+				filterChain);
+
+			String content = getContent(
+				request, stringServerResponse.getString());
+
+			ServletResponseUtil.write(response, content);
+		}
+		else {
+			processFilter(
+				ThemePreviewFilter.class, request, response, filterChain);
+		}
+	}
+
 	private static final String _THEME_PREVIEW = "themePreview";
 
 }

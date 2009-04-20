@@ -494,7 +494,7 @@
 		<url-pattern>/web/*</url-pattern>
 		<dispatcher>REQUEST</dispatcher>
 		<dispatcher>FORWARD</dispatcher>
-	</filter-mapping>	
+	</filter-mapping>
 	<filter-mapping>
 		<filter-name>Strip Filter</filter-name>
 		<url-pattern>/c/portal/*</url-pattern>
