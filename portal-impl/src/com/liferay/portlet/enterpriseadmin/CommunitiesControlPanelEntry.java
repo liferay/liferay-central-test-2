@@ -42,13 +42,13 @@ public class CommunitiesControlPanelEntry extends BaseControlPanelEntry {
 			PermissionChecker permissionChecker, Portlet portlet)
 		throws Exception {
 
-		LinkedHashMap groupParams = new LinkedHashMap();
+		LinkedHashMap<String, Object> groupParams =
+			new LinkedHashMap<String, Object>();
 
 		groupParams.put("usersGroups", new Long(permissionChecker.getUserId()));
 
-		int count =
-			GroupLocalServiceUtil.searchCount(
-				permissionChecker.getCompanyId(), null, null, groupParams);
+		int count = GroupLocalServiceUtil.searchCount(
+			permissionChecker.getCompanyId(), null, null, groupParams);
 
 		if (count > 0) {
 			return true;
