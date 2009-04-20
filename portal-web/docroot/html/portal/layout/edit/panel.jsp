@@ -87,7 +87,7 @@ String panelTreeKey = "panelSelectedPortletsPanelTree";
 			href: '<%= treeNodeView.getHref() %>',
 			parentId: '<%= treeNodeView.getParentId() %>',
 			objId: '<%= treeNodeView.getObjId() %>',
-			name: '<%= treeNodeView.getName() %>'
+			name: '<%= UnicodeFormatter.toString(treeNodeView.getName()) %>'
 		};
 
 	<%
