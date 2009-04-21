@@ -2277,11 +2277,11 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 		</#list>
 
 		<#if entity.isHierarchicalTree()>
-			expandTreeLeft${pkColumn.methodName} = new ExpandTreeLeft${pkColumn.methodName}(this);
-			expandTreeRight${pkColumn.methodName} = new ExpandTreeRight${pkColumn.methodName}(this);
-			shrinkTreeLeft${pkColumn.methodName} = new ShrinkTreeLeft${pkColumn.methodName}(this);
-			shrinkTreeRight${pkColumn.methodName} = new ShrinkTreeRight${pkColumn.methodName}(this);
-			updateTree = new UpdateTree(this);
+			expandTreeLeft${pkColumn.methodName} = new ExpandTreeLeft${pkColumn.methodName}();
+			expandTreeRight${pkColumn.methodName} = new ExpandTreeRight${pkColumn.methodName}();
+			shrinkTreeLeft${pkColumn.methodName} = new ShrinkTreeLeft${pkColumn.methodName}();
+			shrinkTreeRight${pkColumn.methodName} = new ShrinkTreeRight${pkColumn.methodName}();
+			updateTree = new UpdateTree();
 		</#if>
 	}
 
@@ -2479,81 +2479,71 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 
 		protected class ExpandTreeLeft${pkColumn.methodName} {
 
-			protected ExpandTreeLeft${pkColumn.methodName}(${entity.name}PersistenceImpl persistenceImpl) {
+			protected ExpandTreeLeft${pkColumn.methodName}() {
 				_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(), "UPDATE ${entity.table} SET left${pkColumn.methodName} = (left${pkColumn.methodName} + 2) WHERE (${scopeColumn.name} = ?) AND (left${pkColumn.methodName} > ?)", new int[] {Types.${serviceBuilder.getSqlType("long")}, Types.${serviceBuilder.getSqlType("long")}});
-				_persistenceImpl = persistenceImpl;
 			}
 
-			protected void expand(long ${scopeColumn.name}, long left${pkColumn.methodName}) throws SystemException {
+			protected void expand(long ${scopeColumn.name}, long left${pkColumn.methodName}) {
 				_sqlUpdate.update(new Object[] {${scopeColumn.name}, left${pkColumn.methodName}});
 			}
 
 			private SqlUpdate _sqlUpdate;
-			private ${entity.name}PersistenceImpl _persistenceImpl;
 
 		}
 
 		protected class ExpandTreeRight${pkColumn.methodName} {
 
-			protected ExpandTreeRight${pkColumn.methodName}(${entity.name}PersistenceImpl persistenceImpl) {
+			protected ExpandTreeRight${pkColumn.methodName}() {
 				_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(), "UPDATE ${entity.table} SET right${pkColumn.methodName} = (right${pkColumn.methodName} + 2) WHERE (${scopeColumn.name} = ?) AND (right${pkColumn.methodName} > ?)", new int[] {Types.${serviceBuilder.getSqlType("long")}, Types.${serviceBuilder.getSqlType("long")}});
-				_persistenceImpl = persistenceImpl;
 			}
 
-			protected void expand(long ${scopeColumn.name}, long right${pkColumn.methodName}) throws SystemException {
+			protected void expand(long ${scopeColumn.name}, long right${pkColumn.methodName}) {
 				_sqlUpdate.update(new Object[] {${scopeColumn.name}, right${pkColumn.methodName}});
 			}
 
 			private SqlUpdate _sqlUpdate;
-			private ${entity.name}PersistenceImpl _persistenceImpl;
 
 		}
 
 		protected class ShrinkTreeLeft${pkColumn.methodName} {
 
-			protected ShrinkTreeLeft${pkColumn.methodName}(${entity.name}PersistenceImpl persistenceImpl) {
+			protected ShrinkTreeLeft${pkColumn.methodName}() {
 				_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(), "UPDATE ${entity.table} SET left${pkColumn.methodName} = (left${pkColumn.methodName} - ?) WHERE (${scopeColumn.name} = ?) AND (left${pkColumn.methodName} > ?)", new int[] {Types.${serviceBuilder.getSqlType("long")}, Types.${serviceBuilder.getSqlType("long")}, Types.${serviceBuilder.getSqlType("long")}});
-				_persistenceImpl = persistenceImpl;
 			}
 
-			protected void shrink(long ${scopeColumn.name}, long left${pkColumn.methodName}, long delta) throws SystemException {
+			protected void shrink(long ${scopeColumn.name}, long left${pkColumn.methodName}, long delta) {
 				_sqlUpdate.update(new Object[] {delta, ${scopeColumn.name}, left${pkColumn.methodName}});
 			}
 
 			private SqlUpdate _sqlUpdate;
-			private ${entity.name}PersistenceImpl _persistenceImpl;
 
 		}
 
 		protected class ShrinkTreeRight${pkColumn.methodName} {
 
-			protected ShrinkTreeRight${pkColumn.methodName}(${entity.name}PersistenceImpl persistenceImpl) {
+			protected ShrinkTreeRight${pkColumn.methodName}() {
 				_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(), "UPDATE ${entity.table} SET right${pkColumn.methodName} = (right${pkColumn.methodName} - ?) WHERE (${scopeColumn.name} = ?) AND (right${pkColumn.methodName} > ?)", new int[] {Types.${serviceBuilder.getSqlType("long")}, Types.${serviceBuilder.getSqlType("long")}, Types.${serviceBuilder.getSqlType("long")}});
-				_persistenceImpl = persistenceImpl;
 			}
 
-			protected void shrink(long ${scopeColumn.name}, long right${pkColumn.methodName}, long delta) throws SystemException {
+			protected void shrink(long ${scopeColumn.name}, long right${pkColumn.methodName}, long delta) {
 				_sqlUpdate.update(new Object[] {delta, ${scopeColumn.name}, right${pkColumn.methodName}});
 			}
 
 			private SqlUpdate _sqlUpdate;
-			private ${entity.name}PersistenceImpl _persistenceImpl;
 
 		}
 
 		protected class UpdateTree {
 
-			protected UpdateTree(${entity.name}PersistenceImpl persistenceImpl) {
+			protected UpdateTree() {
 				_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(), "UPDATE ${entity.table} SET left${pkColumn.methodName} = ?, right${pkColumn.methodName} = ? WHERE ${pkColumn.name} = ?", new int[] {Types.${serviceBuilder.getSqlType("long")}, Types.${serviceBuilder.getSqlType("long")}, Types.${serviceBuilder.getSqlType("long")}});
-				_persistenceImpl = persistenceImpl;
 			}
 
-			protected void update(long ${pkColumn.name}, long left${pkColumn.methodName}, long right${pkColumn.methodName}) throws SystemException {
+			protected void update(long ${pkColumn.name}, long left${pkColumn.methodName}, long right${pkColumn.methodName}) {
 				_sqlUpdate.update(new Object[] {left${pkColumn.methodName}, right${pkColumn.methodName}, ${pkColumn.name}});
 			}
 
 			private SqlUpdate _sqlUpdate;
-			private ${entity.name}PersistenceImpl _persistenceImpl;
 
 		}
 	</#if>

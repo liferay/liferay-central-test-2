@@ -201,8 +201,6 @@ public class SocialRequestLocalServiceImpl
 		SocialRequest request = socialRequestPersistence.findByPrimaryKey(
 			requestId);
 
-		int oldStatus = request.getStatus();
-
 		request.setModifiedDate(new Date());
 		request.setStatus(status);
 

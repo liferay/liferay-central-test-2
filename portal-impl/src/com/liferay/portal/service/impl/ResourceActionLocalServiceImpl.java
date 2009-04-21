@@ -27,8 +27,6 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.Propagation;
 import com.liferay.portal.kernel.annotation.Transactional;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.MathUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -162,9 +160,6 @@ public class ResourceActionLocalServiceImpl
 
 		return sb.toString();
 	}
-
-	private static Log _log =
-		LogFactoryUtil.getLog(ResourceActionLocalServiceImpl.class);
 
 	private static Map<String, ResourceAction> _resourceActions =
 		new HashMap<String, ResourceAction>();

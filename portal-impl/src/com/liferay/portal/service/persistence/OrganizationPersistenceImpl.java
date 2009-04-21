@@ -2505,11 +2505,11 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl
 		clearUsers = new ClearUsers(this);
 		removeUser = new RemoveUser(this);
 
-		expandTreeLeftOrganizationId = new ExpandTreeLeftOrganizationId(this);
-		expandTreeRightOrganizationId = new ExpandTreeRightOrganizationId(this);
-		shrinkTreeLeftOrganizationId = new ShrinkTreeLeftOrganizationId(this);
-		shrinkTreeRightOrganizationId = new ShrinkTreeRightOrganizationId(this);
-		updateTree = new UpdateTree(this);
+		expandTreeLeftOrganizationId = new ExpandTreeLeftOrganizationId();
+		expandTreeRightOrganizationId = new ExpandTreeRightOrganizationId();
+		shrinkTreeLeftOrganizationId = new ShrinkTreeLeftOrganizationId();
+		shrinkTreeRightOrganizationId = new ShrinkTreeRightOrganizationId();
+		updateTree = new UpdateTree();
 	}
 
 	@BeanReference(name = "com.liferay.portal.service.persistence.AccountPersistence.impl")
@@ -2944,94 +2944,78 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl
 	protected UpdateTree updateTree;
 
 	protected class ExpandTreeLeftOrganizationId {
-		protected ExpandTreeLeftOrganizationId(
-			OrganizationPersistenceImpl persistenceImpl) {
+		protected ExpandTreeLeftOrganizationId() {
 			_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(),
 					"UPDATE Organization_ SET leftOrganizationId = (leftOrganizationId + 2) WHERE (companyId = ?) AND (leftOrganizationId > ?)",
 					new int[] { Types.BIGINT, Types.BIGINT });
-			_persistenceImpl = persistenceImpl;
 		}
 
-		protected void expand(long companyId, long leftOrganizationId)
-			throws SystemException {
+		protected void expand(long companyId, long leftOrganizationId) {
 			_sqlUpdate.update(new Object[] { companyId, leftOrganizationId });
 		}
 
 		private SqlUpdate _sqlUpdate;
-		private OrganizationPersistenceImpl _persistenceImpl;
 	}
 
 	protected class ExpandTreeRightOrganizationId {
-		protected ExpandTreeRightOrganizationId(
-			OrganizationPersistenceImpl persistenceImpl) {
+		protected ExpandTreeRightOrganizationId() {
 			_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(),
 					"UPDATE Organization_ SET rightOrganizationId = (rightOrganizationId + 2) WHERE (companyId = ?) AND (rightOrganizationId > ?)",
 					new int[] { Types.BIGINT, Types.BIGINT });
-			_persistenceImpl = persistenceImpl;
 		}
 
-		protected void expand(long companyId, long rightOrganizationId)
-			throws SystemException {
+		protected void expand(long companyId, long rightOrganizationId) {
 			_sqlUpdate.update(new Object[] { companyId, rightOrganizationId });
 		}
 
 		private SqlUpdate _sqlUpdate;
-		private OrganizationPersistenceImpl _persistenceImpl;
 	}
 
 	protected class ShrinkTreeLeftOrganizationId {
-		protected ShrinkTreeLeftOrganizationId(
-			OrganizationPersistenceImpl persistenceImpl) {
+		protected ShrinkTreeLeftOrganizationId() {
 			_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(),
 					"UPDATE Organization_ SET leftOrganizationId = (leftOrganizationId - ?) WHERE (companyId = ?) AND (leftOrganizationId > ?)",
 					new int[] { Types.BIGINT, Types.BIGINT, Types.BIGINT });
-			_persistenceImpl = persistenceImpl;
 		}
 
 		protected void shrink(long companyId, long leftOrganizationId,
-			long delta) throws SystemException {
+			long delta) {
 			_sqlUpdate.update(new Object[] { delta, companyId, leftOrganizationId });
 		}
 
 		private SqlUpdate _sqlUpdate;
-		private OrganizationPersistenceImpl _persistenceImpl;
 	}
 
 	protected class ShrinkTreeRightOrganizationId {
-		protected ShrinkTreeRightOrganizationId(
-			OrganizationPersistenceImpl persistenceImpl) {
+		protected ShrinkTreeRightOrganizationId() {
 			_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(),
 					"UPDATE Organization_ SET rightOrganizationId = (rightOrganizationId - ?) WHERE (companyId = ?) AND (rightOrganizationId > ?)",
 					new int[] { Types.BIGINT, Types.BIGINT, Types.BIGINT });
-			_persistenceImpl = persistenceImpl;
 		}
 
 		protected void shrink(long companyId, long rightOrganizationId,
-			long delta) throws SystemException {
+			long delta) {
 			_sqlUpdate.update(new Object[] { delta, companyId, rightOrganizationId });
 		}
 
 		private SqlUpdate _sqlUpdate;
-		private OrganizationPersistenceImpl _persistenceImpl;
 	}
 
 	protected class UpdateTree {
-		protected UpdateTree(OrganizationPersistenceImpl persistenceImpl) {
+		protected UpdateTree() {
 			_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(),
 					"UPDATE Organization_ SET leftOrganizationId = ?, rightOrganizationId = ? WHERE organizationId = ?",
 					new int[] { Types.BIGINT, Types.BIGINT, Types.BIGINT });
-			_persistenceImpl = persistenceImpl;
 		}
 
 		protected void update(long organizationId, long leftOrganizationId,
-			long rightOrganizationId) throws SystemException {
+			long rightOrganizationId) {
 			_sqlUpdate.update(new Object[] {
 					leftOrganizationId, rightOrganizationId, organizationId
 				});
 		}
 
 		private SqlUpdate _sqlUpdate;
-		private OrganizationPersistenceImpl _persistenceImpl;
 	}
 
 	private static final String _SQL_GETGROUPS = "SELECT {Group_.*} FROM Group_ INNER JOIN Groups_Orgs ON (Groups_Orgs.groupId = Group_.groupId) WHERE (Groups_Orgs.organizationId = ?)";

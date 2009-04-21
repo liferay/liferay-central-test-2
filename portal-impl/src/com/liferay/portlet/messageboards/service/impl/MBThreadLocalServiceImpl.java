@@ -121,7 +121,7 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 
 			if (!category.isDiscussion()) {
 				mbStatsUserLocalService.updateStatsUser(
-					category.getGroupId(), message.getUserId());
+					message.getGroupId(), message.getUserId());
 			}
 
 			// Message flags
@@ -212,7 +212,8 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 						groupId, userId, false, start, end);
 				}
 
-				List<MBThread> threads = new ArrayList(threadIds.size());
+				List<MBThread> threads = new ArrayList<MBThread>(
+					threadIds.size());
 
 				for (long threadId : threadIds) {
 					MBThread thread = mbThreadPersistence.findByPrimaryKey(
@@ -332,7 +333,7 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 			try {
 				if (!category.isDiscussion()) {
 					Indexer.updateMessage(
-						message.getCompanyId(), category.getGroupId(),
+						message.getCompanyId(), message.getGroupId(),
 						message.getUserId(), message.getUserName(),
 						category.getCategoryId(), message.getThreadId(),
 						message.getMessageId(), message.getSubject(),
@@ -402,7 +403,7 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 		try {
 			if (!category.isDiscussion()) {
 				Indexer.updateMessage(
-					message.getCompanyId(), category.getGroupId(),
+					message.getCompanyId(), message.getGroupId(),
 					message.getUserId(), message.getUserName(),
 					category.getCategoryId(), message.getThreadId(),
 					message.getMessageId(), message.getSubject(),
@@ -452,7 +453,7 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 	}
 
 	protected MBThread addThread(long categoryId, MBMessage message)
-		throws SystemException, PortalException {
+		throws SystemException {
 
 		long threadId = counterLocalService.increment();
 
@@ -550,7 +551,7 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 			try {
 				if (!category.isDiscussion()) {
 					Indexer.updateMessage(
-						message.getCompanyId(), category.getGroupId(),
+						message.getCompanyId(), message.getGroupId(),
 						message.getUserId(), message.getUserName(),
 						category.getCategoryId(), message.getThreadId(),
 						message.getMessageId(), message.getSubject(),
