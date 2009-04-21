@@ -415,7 +415,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		if (!category.isDiscussion()) {
 			mbStatsUserLocalService.updateStatsUser(
-				category.getGroupId(), userId, now);
+				message.getGroupId(), userId, now);
 		}
 
 		logAddMessage(messageId, stopWatch, 6);
@@ -474,7 +474,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				Indexer.addMessage(
 					message.getCompanyId(), message.getGroupId(),
 					message.getUserId(), message.getUserName(),
-					category.getCategoryId(), threadId, messageId, subject,
+					message.getCategoryId(), threadId, messageId, subject,
 					body, anonymous, message.getModifiedDate(),
 					serviceContext.getTagsEntries(),
 					message.getExpandoBridge());
@@ -1227,7 +1227,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				Indexer.updateMessage(
 					message.getCompanyId(), message.getGroupId(),
 					message.getUserId(), message.getUserName(),
-					category.getCategoryId(), message.getThreadId(), messageId,
+					message.getCategoryId(), message.getThreadId(), messageId,
 					subject, body, message.isAnonymous(),
 					message.getModifiedDate(), serviceContext.getTagsEntries(),
 					message.getExpandoBridge());
