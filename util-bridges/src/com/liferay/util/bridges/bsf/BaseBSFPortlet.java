@@ -20,35 +20,16 @@
  * SOFTWARE.
  */
 
-package com.liferay.util.bridges.scripting;
+package com.liferay.util.bridges.bsf;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
-import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.kernel.util.LocaleUtil;
-import com.liferay.portal.kernel.servlet.SessionErrors;
-import com.liferay.portal.kernel.language.LanguageUtil;
-import com.liferay.portal.scripting.ScriptExecutionException;
-import com.liferay.portal.scripting.ScriptingUtil;
-import com.liferay.portal.scripting.UnsupportedLanguageException;
-import com.liferay.portal.security.auth.PrincipalException;
-import com.liferay.portal.security.permission.ActionKeys;
-import com.liferay.portal.security.permission.PermissionChecker;
-import com.liferay.portal.security.permission.PermissionThreadLocal;
-import com.liferay.portal.service.base.PrincipalBean;
-import com.liferay.portal.service.permission.PortalPermissionUtil;
-import com.liferay.portal.model.User;
-import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.SystemException;
-import com.liferay.portal.PortalException;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 
 import java.util.Map;
 
@@ -58,6 +39,7 @@ import javax.portlet.GenericPortlet;
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletContext;
 import javax.portlet.PortletException;
+import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
 import javax.portlet.RenderRequest;
@@ -66,16 +48,16 @@ import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
 
 import org.apache.bsf.BSFException;
+import org.apache.bsf.BSFManager;
 
 /**
- * <a href="ScriptingPortlet.java.html"><b><i>View Source</i></b></a>
+ * <a href="BaseBSFPortlet.java.html"><b><i>View Source</i></b></a>
  *
  * @author Jorge Ferrer
  * @author Brian Wing Shun Chan
- * @author Alberto Montero
  *
  */
-public class ScriptingPortlet extends GenericPortlet {
+public abstract class BaseBSFPortlet extends GenericPortlet {
 
 	public void init() {
 		editFile = getInitParameter("edit-file");
@@ -84,14 +66,19 @@ public class ScriptingPortlet extends GenericPortlet {
 		actionFile = getInitParameter("action-file");
 		resourceFile = getInitParameter("resource-file");
 		globalFiles = StringUtil.split(getInitParameter("global-files"));
-		scriptingLanguage = getInitParameter("scripting-language");
+
+		BSFManager.registerScriptingEngine(
+			getScriptingEngineLanguage(), getScriptingEngineClassName(),
+			new String[] {getScriptingEngineExtension()});
+
+		bsfManager = new BSFManager();
 	}
 
 	public void doDispatch(
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
 
-		String file = getFileName(renderRequest);
+		String file = renderRequest.getParameter(getFileParam());
 
 		if (file != null) {
 			include(file, renderRequest, renderResponse);
@@ -134,42 +121,6 @@ public class ScriptingPortlet extends GenericPortlet {
 		include(actionFile, actionRequest, actionResponse);
 	}
 
-	public void render(
-			RenderRequest renderRequest, RenderResponse renderResponse)
-		throws IOException, PortletException {
-
-		Object errorMsg = SessionErrors.get(
-				renderRequest, "scriptExecutionError");
-
-		try {
-			if (Validator.isNotNull(errorMsg)) {
-				showErrorMessage(
-					renderRequest, renderResponse,
-					((Exception)errorMsg).getMessage());
-
-				return;
-			}
-
-			super.render(renderRequest, renderResponse);
-
-			errorMsg = SessionErrors.get(renderRequest, "scriptExecutionError");
-
-			if (Validator.isNotNull(errorMsg)) {
-				showErrorMessage(
-					renderRequest, renderResponse,
-					((Exception)errorMsg).getMessage());
-
-				return;
-			}
-		}
-		catch (SystemException se) {
-			throw new PortletException(se);
-		}
-		catch (PortalException pe) {
-			throw new PortletException(pe);
-		}
-	}
-
 	public void serveResource(
 			ResourceRequest resourceRequest, ResourceResponse resourceResponse)
 		throws IOException {
@@ -180,8 +131,7 @@ public class ScriptingPortlet extends GenericPortlet {
 	protected void declareBeans(
 			InputStream is, PortletRequest portletRequest,
 			PortletResponse portletResponse)
-		throws IOException, ScriptExecutionException,
-			UnsupportedLanguageException {
+		throws BSFException, IOException {
 
 		declareBeans(
 			new String(FileUtil.getBytes(is)), portletRequest, portletResponse);
@@ -190,8 +140,7 @@ public class ScriptingPortlet extends GenericPortlet {
 	protected void declareBeans(
 			String code, PortletRequest portletRequest,
 			PortletResponse portletResponse)
-		throws IOException, ScriptExecutionException,
-			UnsupportedLanguageException {
+		throws BSFException, IOException {
 
 		StringBuilder sb = new StringBuilder();
 
@@ -202,20 +151,46 @@ public class ScriptingPortlet extends GenericPortlet {
 
 		PortletConfig portletConfig = getPortletConfig();
 		PortletContext portletContext = getPortletContext();
+		PortletPreferences preferences = portletRequest.getPreferences();
+		Map<String, String> userInfo =
+			(Map<String, String>)portletRequest.getAttribute(
+				PortletRequest.USER_INFO);
 
-		Map[] portletObjects =
-			ScriptingUtil.getPortletObjects(
-				portletConfig, portletContext, portletRequest, portletResponse);
+		bsfManager.declareBean(
+			"portletConfig", portletConfig, PortletConfig.class);
+		bsfManager.declareBean(
+			"portletContext", portletContext, PortletContext.class);
+		bsfManager.declareBean(
+			"preferences", preferences, PortletPreferences.class);
+		bsfManager.declareBean("userInfo", userInfo, Map.class);
 
-		Map<String, Object> inputObjects = portletObjects[0];
-		Map<String, Class> inputObjectTypes = portletObjects[1];
+		if (portletRequest instanceof ActionRequest) {
+			bsfManager.declareBean(
+				"actionRequest", portletRequest, ActionRequest.class);
+		}
+		else if (portletRequest instanceof RenderRequest) {
+			bsfManager.declareBean(
+				"renderRequest", portletRequest, RenderRequest.class);
+		}
+		else if (portletRequest instanceof ResourceRequest) {
+			bsfManager.declareBean(
+				"resourceRequest", portletRequest, ResourceRequest.class);
+		}
 
-		ScriptingUtil.exec(
-			inputObjects, inputObjectTypes, scriptingLanguage, script);
-	}
+		if (portletResponse instanceof ActionResponse) {
+			bsfManager.declareBean(
+				"actionResponse", portletResponse, ActionResponse.class);
+		}
+		else if (portletResponse instanceof RenderResponse) {
+			bsfManager.declareBean(
+				"renderResponse", portletResponse, RenderResponse.class);
+		}
+		else if (portletResponse instanceof ResourceResponse) {
+			bsfManager.declareBean(
+				"resourceResponse", portletResponse, ResourceResponse.class);
+		}
 
-	protected String getFileName(RenderRequest renderRequest) {
-		return renderRequest.getParameter("file");
+		bsfManager.exec(getScriptingEngineLanguage(), "(java)", 1, 1, script);
 	}
 
 	protected String getGlobalScript() throws IOException {
@@ -223,12 +198,12 @@ public class ScriptingPortlet extends GenericPortlet {
 
 		for (int i = 0; i < globalFiles.length; i++) {
 			InputStream is = getPortletContext().getResourceAsStream(
-					globalFiles[i]);
+				globalFiles[i]);
 
 			if (is == null) {
 				if (_log.isWarnEnabled()) {
 					_log.warn(
-							"Global file " + globalFiles[i] + " does not exist");
+						"Global file " + globalFiles[i] + " does not exist");
 				}
 			}
 
@@ -246,6 +221,14 @@ public class ScriptingPortlet extends GenericPortlet {
 		return sb.toString();
 	}
 
+	protected abstract String getFileParam();
+
+	protected abstract String getScriptingEngineClassName();
+
+	protected abstract String getScriptingEngineExtension();
+
+	protected abstract String getScriptingEngineLanguage();
+
 	protected void include(
 			String path, PortletRequest portletRequest,
 			PortletResponse portletResponse)
@@ -255,7 +238,8 @@ public class ScriptingPortlet extends GenericPortlet {
 
 		if (is == null) {
 			_log.error(
-				path + " is not a valid " + scriptingLanguage + " file");
+				path + " is not a valid " + getScriptingEngineLanguage() +
+					" file");
 
 			return;
 		}
@@ -263,11 +247,8 @@ public class ScriptingPortlet extends GenericPortlet {
 		try {
 			declareBeans(is, portletRequest, portletResponse);
 		}
-		catch (ScriptExecutionException see) {
-			SessionErrors.add(portletRequest, "scriptExecutionError", see);
-		}
-		catch (UnsupportedLanguageException ule) {
-			SessionErrors.add(portletRequest, "scriptExecutionError", ule);
+		catch (BSFException bsfe) {
+			logBSFException(bsfe, path);
 		}
 		finally {
 			is.close();
@@ -283,55 +264,14 @@ public class ScriptingPortlet extends GenericPortlet {
 		_log.error(message, t);
 	}
 
-	protected void showErrorMessage(
-			RenderRequest renderRequest, RenderResponse renderResponse,
-			String errorMessage)
-		throws IOException, SystemException, PortalException {
-
-		boolean showDetailedInformation = false;
-
-		PermissionChecker permissionChecker =
-			PermissionThreadLocal.getPermissionChecker();
-
-		showDetailedInformation = PortalPermissionUtil.contains(
-			permissionChecker, ActionKeys.CONFIGURATION);
-
-		renderResponse.resetBuffer();
-		renderResponse.setContentType("text/html");
-		OutputStream os = renderResponse.getPortletOutputStream();
-
-		StringBuilder sb = new StringBuilder();
-
-		if (showDetailedInformation) {
-			User user = PortalUtil.getUser(renderRequest);
-			sb.append("<span class='portlet-msg-error'>");
-			sb.append(
-				LanguageUtil.get(user.getLocale(), "error-running-script"));
-			sb.append("</span>");
-			sb.append("<pre>");
-			sb.append(HtmlUtil.escape(errorMessage));
-			sb.append("</pre>");
-		}
-		else {
-			sb.append("<span class='portlet-msg-error'>");
-			sb.append(
-				LanguageUtil.get(
-					LocaleUtil.getDefault(),
-					"an-error-occurred.-please-contact-an-administrator"));
-			sb.append("</span>");
-		}
-
-		os.write(sb.toString().getBytes());
-	}
-
 	protected String editFile;
 	protected String helpFile;
 	protected String viewFile;
 	protected String actionFile;
 	protected String resourceFile;
 	protected String[] globalFiles;
-	protected String scriptingLanguage;
+	protected BSFManager bsfManager;
 
-	private static Log _log = LogFactoryUtil.getLog(ScriptingPortlet.class);
+	private static Log _log = LogFactoryUtil.getLog(BaseBSFPortlet.class);
 
 }

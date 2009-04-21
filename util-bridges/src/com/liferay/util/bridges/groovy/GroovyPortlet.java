@@ -22,9 +22,7 @@
 
 package com.liferay.util.bridges.groovy;
 
-import com.liferay.util.bridges.scripting.ScriptingPortlet;
-
-import javax.portlet.RenderRequest;
+import com.liferay.util.bridges.bsf.BaseBSFPortlet;
 
 /**
  * <a href="GroovyPortlet.java.html"><b><i>View Source</i></b></a>
@@ -34,16 +32,31 @@ import javax.portlet.RenderRequest;
  * @author Brian Wing Shun Chan
  *
  */
-public class GroovyPortlet extends ScriptingPortlet {
+public class GroovyPortlet extends BaseBSFPortlet {
 
-	public void init() {
-		super.init();
-
-		scriptingLanguage = "groovy";
+	protected String getFileParam() {
+		return _FILE_PARAM;
 	}
 
-	protected String getFileName(RenderRequest renderRequest) {
-		return renderRequest.getParameter("groovyFile");
+	protected String getScriptingEngineClassName() {
+		return _SCRIPTING_ENGINE_CLASS_NAME;
 	}
+
+	protected String getScriptingEngineExtension() {
+		return _SCRIPTING_ENGINE_EXTENSION;
+	}
+
+	protected String getScriptingEngineLanguage() {
+		return _SCRIPTING_ENGINE_LANGUAGE;
+	}
+
+	private static final String _FILE_PARAM = "groovyFile";
+
+	private static final String _SCRIPTING_ENGINE_CLASS_NAME =
+		"org.codehaus.groovy.bsf.GroovyEngine";
+
+	private static final String _SCRIPTING_ENGINE_EXTENSION = "groovy";
+
+	private static final String _SCRIPTING_ENGINE_LANGUAGE = "groovy";
 
 }

@@ -22,9 +22,7 @@
 
 package com.liferay.util.bridges.python;
 
-import com.liferay.util.bridges.scripting.ScriptingPortlet;
-
-import javax.portlet.RenderRequest;
+import com.liferay.util.bridges.bsf.BaseBSFPortlet;
 
 /**
  * <a href="PythonPortlet.java.html"><b><i>View Source</i></b></a>
@@ -32,16 +30,31 @@ import javax.portlet.RenderRequest;
  * @author Alberto Montero
  *
  */
-public class PythonPortlet extends ScriptingPortlet {
+public class PythonPortlet extends BaseBSFPortlet {
 
-	public void init() {
-		super.init();
-
-		scriptingLanguage = "python";
+	protected String getFileParam() {
+		return _FILE_PARAM;
 	}
 
-	protected String getFileName(RenderRequest renderRequest) {
-		return renderRequest.getParameter("pythonFile");
+	protected String getScriptingEngineClassName() {
+		return _SCRIPTING_ENGINE_CLASS_NAME;
 	}
+
+	protected String getScriptingEngineExtension() {
+		return _SCRIPTING_ENGINE_EXTENSION;
+	}
+
+	protected String getScriptingEngineLanguage() {
+		return _SCRIPTING_ENGINE_LANGUAGE;
+	}
+
+	private static final String _FILE_PARAM = "pythonFile";
+
+	private static final String _SCRIPTING_ENGINE_CLASS_NAME =
+		"org.apache.bsf.engines.jython.JythonEngine";
+
+	private static final String _SCRIPTING_ENGINE_EXTENSION = "py";
+
+	private static final String _SCRIPTING_ENGINE_LANGUAGE = "python";
 
 }
