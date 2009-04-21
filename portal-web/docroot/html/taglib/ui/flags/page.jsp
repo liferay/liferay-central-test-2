@@ -62,7 +62,7 @@ long reportedUserId = GetterUtil.getLong((String)request.getAttribute("liferay-u
 									contentURL: '<%= PortalUtil.getPortalURL(request) + currentURL %>',
 									reportedUserId: '<%= reportedUserId %>'
 								}
-							}
+							},
 							constraintoviewport: true,
 							header: '<liferay-ui:message key="report-inappropriate-content" />',
 							modal: true,
