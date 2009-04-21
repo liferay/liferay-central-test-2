@@ -114,26 +114,24 @@ public interface BookmarksEntryLocalService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public void addEntryResources(long folderId, long entryId,
+	public void addEntryResources(long entryId,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	public void addEntryResources(
-		com.liferay.portlet.bookmarks.model.BookmarksFolder folder,
 		com.liferay.portlet.bookmarks.model.BookmarksEntry entry,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public void addEntryResources(long folderId, long entryId,
+	public void addEntryResources(long entryId,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	public void addEntryResources(
-		com.liferay.portlet.bookmarks.model.BookmarksFolder folder,
 		com.liferay.portlet.bookmarks.model.BookmarksEntry entry,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)

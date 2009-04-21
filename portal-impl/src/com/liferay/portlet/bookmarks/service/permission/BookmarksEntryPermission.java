@@ -27,7 +27,6 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
-import com.liferay.portlet.bookmarks.model.BookmarksFolder;
 import com.liferay.portlet.bookmarks.service.BookmarksEntryLocalServiceUtil;
 
 /**
@@ -79,10 +78,8 @@ public class BookmarksEntryPermission {
 			return true;
 		}
 
-		BookmarksFolder folder = entry.getFolder();
-
 		return permissionChecker.hasPermission(
-			folder.getGroupId(), BookmarksEntry.class.getName(),
+			entry.getGroupId(), BookmarksEntry.class.getName(),
 			entry.getEntryId(), actionId);
 	}
 

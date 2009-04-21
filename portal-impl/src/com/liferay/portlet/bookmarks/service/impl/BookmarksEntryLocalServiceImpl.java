@@ -92,6 +92,7 @@ public class BookmarksEntryLocalServiceImpl
 		BookmarksEntry entry = bookmarksEntryPersistence.create(entryId);
 
 		entry.setUuid(uuid);
+		entry.setGroupId(folder.getGroupId());
 		entry.setCompanyId(user.getCompanyId());
 		entry.setUserId(user.getUserId());
 		entry.setCreateDate(now);
@@ -109,12 +110,12 @@ public class BookmarksEntryLocalServiceImpl
 			serviceContext.getAddGuestPermissions()) {
 
 			addEntryResources(
-				folder, entry, serviceContext.getAddCommunityPermissions(),
+				entry, serviceContext.getAddCommunityPermissions(),
 				serviceContext.getAddGuestPermissions());
 		}
 		else {
 			addEntryResources(
-				folder, entry, serviceContext.getCommunityPermissions(),
+				entry, serviceContext.getCommunityPermissions(),
 				serviceContext.getGuestPermissions());
 		}
 
@@ -132,7 +133,7 @@ public class BookmarksEntryLocalServiceImpl
 
 		try {
 			Indexer.addEntry(
-				entry.getCompanyId(), folder.getGroupId(), folderId, entryId,
+				entry.getCompanyId(), entry.getGroupId(), folderId, entryId,
 				name, url, comments, entry.getModifiedDate(),
 				serviceContext.getTagsEntries(), entry.getExpandoBridge());
 		}
@@ -144,51 +145,45 @@ public class BookmarksEntryLocalServiceImpl
 	}
 
 	public void addEntryResources(
-			long folderId, long entryId, boolean addCommunityPermissions,
+			long entryId, boolean addCommunityPermissions,
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
-		BookmarksFolder folder =
-			bookmarksFolderPersistence.findByPrimaryKey(folderId);
 		BookmarksEntry entry =
 			bookmarksEntryPersistence.findByPrimaryKey(entryId);
 
-		addEntryResources(
-			folder, entry, addCommunityPermissions, addGuestPermissions);
+		addEntryResources(entry, addCommunityPermissions, addGuestPermissions);
 	}
 
 	public void addEntryResources(
-			BookmarksFolder folder, BookmarksEntry entry,
-			boolean addCommunityPermissions, boolean addGuestPermissions)
+			BookmarksEntry entry, boolean addCommunityPermissions,
+			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		resourceLocalService.addResources(
-			entry.getCompanyId(), folder.getGroupId(), entry.getUserId(),
+			entry.getCompanyId(), entry.getGroupId(), entry.getUserId(),
 			BookmarksEntry.class.getName(), entry.getEntryId(), false,
 			addCommunityPermissions, addGuestPermissions);
 	}
 
 	public void addEntryResources(
-			long folderId, long entryId, String[] communityPermissions,
+			long entryId, String[] communityPermissions,
 			String[] guestPermissions)
 		throws PortalException, SystemException {
 
-		BookmarksFolder folder =
-			bookmarksFolderPersistence.findByPrimaryKey(folderId);
 		BookmarksEntry entry =
 			bookmarksEntryPersistence.findByPrimaryKey(entryId);
 
-		addEntryResources(
-			folder, entry, communityPermissions, guestPermissions);
+		addEntryResources(entry, communityPermissions, guestPermissions);
 	}
 
 	public void addEntryResources(
-			BookmarksFolder folder, BookmarksEntry entry,
-			String[] communityPermissions, String[] guestPermissions)
+			BookmarksEntry entry, String[] communityPermissions,
+			String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		resourceLocalService.addModelResources(
-			entry.getCompanyId(), folder.getGroupId(), entry.getUserId(),
+			entry.getCompanyId(), entry.getGroupId(), entry.getUserId(),
 			BookmarksEntry.class.getName(), entry.getEntryId(),
 			communityPermissions, guestPermissions);
 	}
@@ -412,7 +407,7 @@ public class BookmarksEntryLocalServiceImpl
 
 		try {
 			Indexer.updateEntry(
-				entry.getCompanyId(), folder.getGroupId(), entry.getFolderId(),
+				entry.getCompanyId(), entry.getGroupId(), entry.getFolderId(),
 				entry.getEntryId(), name, url, comments,
 				entry.getModifiedDate(), serviceContext.getTagsEntries(),
 				entry.getExpandoBridge());
@@ -429,11 +424,10 @@ public class BookmarksEntryLocalServiceImpl
 		throws PortalException, SystemException {
 
 		tagsAssetLocalService.updateAsset(
-			userId, entry.getFolder().getGroupId(),
-			BookmarksEntry.class.getName(), entry.getEntryId(), null,
-			tagsEntries, true, null, null, null, null, ContentTypes.TEXT_PLAIN,
-			entry.getName(), entry.getComments(), null, entry.getUrl(), 0, 0,
-			null, false);
+			userId, entry.getGroupId(), BookmarksEntry.class.getName(),
+			entry.getEntryId(), null, tagsEntries, true, null, null, null, null,
+			ContentTypes.TEXT_PLAIN, entry.getName(), entry.getComments(), null,
+			entry.getUrl(), 0, 0, null, false);
 	}
 
 	protected BookmarksFolder getFolder(BookmarksEntry entry, long folderId)
