@@ -211,12 +211,12 @@ public class DLFileEntryLocalServiceImpl
 				serviceContext.getAddGuestPermissions()) {
 
 			addFileEntryResources(
-				folder, fileEntry, serviceContext.getAddCommunityPermissions(),
+				fileEntry, serviceContext.getAddCommunityPermissions(),
 				serviceContext.getAddGuestPermissions());
 		}
 		else {
 			addFileEntryResources(
-				folder, fileEntry, serviceContext.getCommunityPermissions(),
+				fileEntry, serviceContext.getCommunityPermissions(),
 				serviceContext.getGuestPermissions());
 		}
 
@@ -230,7 +230,7 @@ public class DLFileEntryLocalServiceImpl
 
 		dlLocalService.addFile(
 			user.getCompanyId(), PortletKeys.DOCUMENT_LIBRARY,
-			folder.getGroupId(), folderId, name, fileEntryId,
+			fileEntry.getGroupId(), folderId, name, fileEntryId,
 			fileEntry.getLuceneProperties(), fileEntry.getModifiedDate(),
 			serviceContext.getTagsCategories(), serviceContext.getTagsEntries(),
 			is);
@@ -246,7 +246,7 @@ public class DLFileEntryLocalServiceImpl
 		// Social
 
 		socialActivityLocalService.addActivity(
-			userId, folder.getGroupId(), DLFileEntry.class.getName(),
+			userId, fileEntry.getGroupId(), DLFileEntry.class.getName(),
 			fileEntryId, DLActivityKeys.ADD_FILE_ENTRY, StringPool.BLANK, 0);
 
 		// Tags
@@ -265,50 +265,48 @@ public class DLFileEntryLocalServiceImpl
 	}
 
 	public void addFileEntryResources(
-			long folderId, String name, boolean addCommunityPermissions,
+			long fileEntryId, boolean addCommunityPermissions,
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
-		DLFolder folder = dlFolderPersistence.findByPrimaryKey(folderId);
-		DLFileEntry fileEntry = dlFileEntryPersistence.findByF_N(
-			folderId, name);
+		DLFileEntry fileEntry = dlFileEntryPersistence.findByPrimaryKey(
+			fileEntryId);
 
 		addFileEntryResources(
-			folder, fileEntry, addCommunityPermissions, addGuestPermissions);
+			fileEntry, addCommunityPermissions, addGuestPermissions);
 	}
 
 	public void addFileEntryResources(
-			DLFolder folder, DLFileEntry fileEntry,
-			boolean addCommunityPermissions, boolean addGuestPermissions)
+			DLFileEntry fileEntry, boolean addCommunityPermissions,
+			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		resourceLocalService.addResources(
-			fileEntry.getCompanyId(), folder.getGroupId(),
+			fileEntry.getCompanyId(), fileEntry.getGroupId(),
 			fileEntry.getUserId(), DLFileEntry.class.getName(),
 			fileEntry.getFileEntryId(), false, addCommunityPermissions,
 			addGuestPermissions);
 	}
 
 	public void addFileEntryResources(
-			long folderId, String name, String[] communityPermissions,
+			long fileEntryId, String[] communityPermissions,
 			String[] guestPermissions)
 		throws PortalException, SystemException {
 
-		DLFolder folder = dlFolderPersistence.findByPrimaryKey(folderId);
-		DLFileEntry fileEntry = dlFileEntryPersistence.findByF_N(
-			folderId, name);
+		DLFileEntry fileEntry = dlFileEntryPersistence.findByPrimaryKey(
+			fileEntryId);
 
 		addFileEntryResources(
-			folder, fileEntry, communityPermissions, guestPermissions);
+			fileEntry, communityPermissions, guestPermissions);
 	}
 
 	public void addFileEntryResources(
-			DLFolder folder, DLFileEntry fileEntry,
-			String[] communityPermissions, String[] guestPermissions)
+			DLFileEntry fileEntry, String[] communityPermissions,
+			String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		resourceLocalService.addModelResources(
-			fileEntry.getCompanyId(), folder.getGroupId(),
+			fileEntry.getCompanyId(), fileEntry.getGroupId(),
 			fileEntry.getUserId(), DLFileEntry.class.getName(),
 			fileEntry.getFileEntryId(), communityPermissions, guestPermissions);
 	}
@@ -508,15 +506,13 @@ public class DLFileEntryLocalServiceImpl
 			double version)
 		throws PortalException, SystemException {
 
-		if (userId > 0) {
-			DLFolder folder = dlFolderPersistence.findByPrimaryKey(folderId);
-
-			dlFileRankLocalService.updateFileRank(
-				folder.getGroupId(), companyId, userId, folderId, name);
-		}
-
 		DLFileEntry fileEntry = dlFileEntryPersistence.findByF_N(
 			folderId, name);
+
+		if (userId > 0) {
+			dlFileRankLocalService.updateFileRank(
+				fileEntry.getGroupId(), companyId, userId, folderId, name);
+		}
 
 		fileEntry.setReadCount(fileEntry.getReadCount() + 1);
 
@@ -883,7 +879,7 @@ public class DLFileEntryLocalServiceImpl
 
 			dlService.updateFile(
 				user.getCompanyId(), PortletKeys.DOCUMENT_LIBRARY,
-				folder.getGroupId(), folderId, newFolderId, name,
+				newFileEntry.getGroupId(), folderId, newFolderId, name,
 				newFileEntryId);
 
 			// Ratings
@@ -942,7 +938,7 @@ public class DLFileEntryLocalServiceImpl
 		// Social
 
 		socialActivityLocalService.addActivity(
-			userId, folder.getGroupId(), DLFileEntry.class.getName(),
+			userId, fileEntry.getGroupId(), DLFileEntry.class.getName(),
 			fileEntry.getFileEntryId(), DLActivityKeys.UPDATE_FILE_ENTRY,
 			StringPool.BLANK, 0);
 
@@ -967,7 +963,7 @@ public class DLFileEntryLocalServiceImpl
 
 			dlLocalService.updateFile(
 				user.getCompanyId(), PortletKeys.DOCUMENT_LIBRARY,
-				folder.getGroupId(), folderId, name, newVersion, name,
+				fileEntry.getGroupId(), folderId, name, newVersion, name,
 				fileEntry.getFileEntryId(), fileEntry.getLuceneProperties(),
 				fileEntry.getModifiedDate(), serviceContext.getTagsCategories(),
 				serviceContext.getTagsEntries(), is);
@@ -1015,7 +1011,7 @@ public class DLFileEntryLocalServiceImpl
 
 		dlLocalService.updateFile(
 			user.getCompanyId(), PortletKeys.DOCUMENT_LIBRARY,
-			folder.getGroupId(), folderId, name, newVersion, sourceFileName,
+			fileEntry.getGroupId(), folderId, name, newVersion, sourceFileName,
 			fileEntry.getFileEntryId(), fileEntry.getLuceneProperties(),
 			fileEntry.getModifiedDate(), serviceContext.getTagsCategories(),
 			serviceContext.getTagsEntries(), is);
@@ -1037,11 +1033,10 @@ public class DLFileEntryLocalServiceImpl
 		String mimeType = MimeTypesUtil.getContentType(fileEntry.getName());
 
 		tagsAssetLocalService.updateAsset(
-			userId, fileEntry.getFolder().getGroupId(),
-			DLFileEntry.class.getName(), fileEntry.getFileEntryId(),
-			tagsCategories, tagsEntries, true, null, null, null, null, mimeType,
-			fileEntry.getTitle(), fileEntry.getDescription(), null, null, 0, 0,
-			null, false);
+			userId, fileEntry.getGroupId(), DLFileEntry.class.getName(),
+			fileEntry.getFileEntryId(), tagsCategories, tagsEntries, true, null,
+			null, null, null, mimeType, fileEntry.getTitle(),
+			fileEntry.getDescription(), null, null, 0, 0, null, false);
 	}
 
 	protected long getFolderId(long companyId, long folderId)

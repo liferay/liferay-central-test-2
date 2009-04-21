@@ -119,12 +119,12 @@ public class DLFileShortcutLocalServiceImpl
 			(addGuestPermissions != null)) {
 
 			addFileShortcutResources(
-				folder, fileShortcut, addCommunityPermissions.booleanValue(),
+				fileShortcut, addCommunityPermissions.booleanValue(),
 				addGuestPermissions.booleanValue());
 		}
 		else {
 			addFileShortcutResources(
-				folder, fileShortcut, communityPermissions, guestPermissions);
+				fileShortcut, communityPermissions, guestPermissions);
 		}
 
 		// Folder
@@ -143,19 +143,18 @@ public class DLFileShortcutLocalServiceImpl
 
 		DLFileShortcut fileShortcut =
 			dlFileShortcutPersistence.findByPrimaryKey(fileShortcutId);
-		DLFolder folder = fileShortcut.getFolder();
 
 		addFileShortcutResources(
-			folder, fileShortcut, addCommunityPermissions, addGuestPermissions);
+			fileShortcut, addCommunityPermissions, addGuestPermissions);
 	}
 
 	public void addFileShortcutResources(
-			DLFolder folder, DLFileShortcut fileShortcut,
-			boolean addCommunityPermissions, boolean addGuestPermissions)
+			DLFileShortcut fileShortcut, boolean addCommunityPermissions,
+			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		resourceLocalService.addResources(
-			fileShortcut.getCompanyId(), folder.getGroupId(),
+			fileShortcut.getCompanyId(), fileShortcut.getGroupId(),
 			fileShortcut.getUserId(), DLFileShortcut.class.getName(),
 			fileShortcut.getFileShortcutId(), false, addCommunityPermissions,
 			addGuestPermissions);
@@ -168,19 +167,18 @@ public class DLFileShortcutLocalServiceImpl
 
 		DLFileShortcut fileShortcut =
 			dlFileShortcutPersistence.findByPrimaryKey(fileShortcutId);
-		DLFolder folder = fileShortcut.getFolder();
 
 		addFileShortcutResources(
-			folder, fileShortcut, communityPermissions, guestPermissions);
+			fileShortcut, communityPermissions, guestPermissions);
 	}
 
 	public void addFileShortcutResources(
-			DLFolder folder, DLFileShortcut fileShortcut,
-			String[] communityPermissions, String[] guestPermissions)
+			DLFileShortcut fileShortcut, String[] communityPermissions,
+			String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		resourceLocalService.addModelResources(
-			fileShortcut.getCompanyId(), folder.getGroupId(),
+			fileShortcut.getCompanyId(), fileShortcut.getGroupId(),
 			fileShortcut.getUserId(), DLFileShortcut.class.getName(),
 			fileShortcut.getFileShortcutId(), communityPermissions,
 			guestPermissions);

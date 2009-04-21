@@ -135,7 +135,6 @@ public interface DLFileShortcutLocalService {
 			com.liferay.portal.SystemException;
 
 	public void addFileShortcutResources(
-		com.liferay.portlet.documentlibrary.model.DLFolder folder,
 		com.liferay.portlet.documentlibrary.model.DLFileShortcut fileShortcut,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
@@ -148,7 +147,6 @@ public interface DLFileShortcutLocalService {
 			com.liferay.portal.SystemException;
 
 	public void addFileShortcutResources(
-		com.liferay.portlet.documentlibrary.model.DLFolder folder,
 		com.liferay.portlet.documentlibrary.model.DLFileShortcut fileShortcut,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)

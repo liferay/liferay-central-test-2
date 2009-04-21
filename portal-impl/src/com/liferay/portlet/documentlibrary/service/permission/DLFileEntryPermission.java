@@ -27,7 +27,6 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
-import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 
 /**
@@ -81,10 +80,8 @@ public class DLFileEntryPermission {
 			return true;
 		}
 
-		DLFolder folder = fileEntry.getFolder();
-
 		return permissionChecker.hasPermission(
-			folder.getGroupId(), DLFileEntry.class.getName(),
+			fileEntry.getGroupId(), DLFileEntry.class.getName(),
 			fileEntry.getFileEntryId(), actionId);
 	}
 

@@ -133,26 +133,24 @@ public interface DLFileEntryLocalService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public void addFileEntryResources(long folderId, java.lang.String name,
+	public void addFileEntryResources(long fileEntryId,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	public void addFileEntryResources(
-		com.liferay.portlet.documentlibrary.model.DLFolder folder,
 		com.liferay.portlet.documentlibrary.model.DLFileEntry fileEntry,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public void addFileEntryResources(long folderId, java.lang.String name,
+	public void addFileEntryResources(long fileEntryId,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	public void addFileEntryResources(
-		com.liferay.portlet.documentlibrary.model.DLFolder folder,
 		com.liferay.portlet.documentlibrary.model.DLFileEntry fileEntry,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)

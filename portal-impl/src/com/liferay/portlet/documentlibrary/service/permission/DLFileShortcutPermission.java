@@ -27,7 +27,6 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
-import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.service.DLFileShortcutLocalServiceUtil;
 
 /**
@@ -81,10 +80,8 @@ public class DLFileShortcutPermission {
 			return true;
 		}
 
-		DLFolder folder = fileShortcut.getFolder();
-
 		return permissionChecker.hasPermission(
-			folder.getGroupId(), DLFileShortcut.class.getName(),
+			fileShortcut.getGroupId(), DLFileShortcut.class.getName(),
 			fileShortcut.getFileShortcutId(), actionId);
 	}
 

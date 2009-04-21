@@ -158,46 +158,43 @@ public class DLFileEntryLocalServiceUtil {
 			description, extraSettings, is, size, serviceContext);
 	}
 
-	public static void addFileEntryResources(long folderId,
-		java.lang.String name, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
+	public static void addFileEntryResources(long fileEntryId,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		getService()
-			.addFileEntryResources(folderId, name, addCommunityPermissions,
+			.addFileEntryResources(fileEntryId, addCommunityPermissions,
 			addGuestPermissions);
 	}
 
 	public static void addFileEntryResources(
-		com.liferay.portlet.documentlibrary.model.DLFolder folder,
 		com.liferay.portlet.documentlibrary.model.DLFileEntry fileEntry,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		getService()
-			.addFileEntryResources(folder, fileEntry, addCommunityPermissions,
+			.addFileEntryResources(fileEntry, addCommunityPermissions,
 			addGuestPermissions);
 	}
 
-	public static void addFileEntryResources(long folderId,
-		java.lang.String name, java.lang.String[] communityPermissions,
+	public static void addFileEntryResources(long fileEntryId,
+		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		getService()
-			.addFileEntryResources(folderId, name, communityPermissions,
+			.addFileEntryResources(fileEntryId, communityPermissions,
 			guestPermissions);
 	}
 
 	public static void addFileEntryResources(
-		com.liferay.portlet.documentlibrary.model.DLFolder folder,
 		com.liferay.portlet.documentlibrary.model.DLFileEntry fileEntry,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		getService()
-			.addFileEntryResources(folder, fileEntry, communityPermissions,
+			.addFileEntryResources(fileEntry, communityPermissions,
 			guestPermissions);
 	}
 
