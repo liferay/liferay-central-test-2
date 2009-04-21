@@ -566,8 +566,10 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 		}
 
 		tagsAssetPersistence.setTagsEntries(asset.getAssetId(), entries);
-		
-		// LPS-3006
+
+		// Update asset after entries so that asset listeners have access the
+		// saved entries
+
 		tagsAssetPersistence.update(asset, false);
 
 		// Synchronize
