@@ -840,6 +840,13 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		// Indexer
 
+		try {
+			Indexer.deletePage(page.getCompanyId(), page.getGroupId(), title);
+		}
+		catch (SearchException se) {
+			_log.error("Indexing " + newTitle, se);
+		}
+
 		reIndex(page);
 	}
 
