@@ -643,6 +643,12 @@ public class JournalArticleLocalServiceUtil {
 		getService().reIndex(resourcePrimKey);
 	}
 
+	public static void reIndex(
+		com.liferay.portlet.journal.model.JournalArticle article)
+		throws com.liferay.portal.SystemException {
+		getService().reIndex(article);
+	}
+
 	public static void reIndex(java.lang.String[] ids)
 		throws com.liferay.portal.SystemException {
 		getService().reIndex(ids);
