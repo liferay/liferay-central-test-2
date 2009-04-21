@@ -1177,26 +1177,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 			companyId, start, end);
 
 		for (CalEvent event : events) {
-			long groupId = event.getGroupId();
-			long userId = event.getUserId();
-			String userName = event.getUserName();
-			long eventId = event.getEventId();
-			String title = event.getTitle();
-			String description = event.getDescription();
-			Date modifiedDate = event.getModifiedDate();
-
-			String[] tagsEntries = tagsEntryLocalService.getEntryNames(
-				CalEvent.class.getName(), eventId);
-
-			try {
-				Indexer.updateEvent(
-					companyId, groupId, userId, userName, eventId, title,
-					description, modifiedDate, tagsEntries,
-					event.getExpandoBridge());
-			}
-			catch (SearchException se) {
-				_log.error("Reindexing " + eventId, se);
-			}
+			reIndex(event);
 		}
 	}
 

@@ -354,6 +354,11 @@ public class BlogsEntryLocalServiceUtil {
 		getService().reIndex(entryId);
 	}
 
+	public static void reIndex(com.liferay.portlet.blogs.model.BlogsEntry entry)
+		throws com.liferay.portal.SystemException {
+		getService().reIndex(entry);
+	}
+
 	public static void reIndex(java.lang.String[] ids)
 		throws com.liferay.portal.SystemException {
 		getService().reIndex(ids);

@@ -967,26 +967,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			companyId, start, end);
 
 		for (BlogsEntry entry : entries) {
-			long groupId = entry.getGroupId();
-			long userId = entry.getUserId();
-			String userName = entry.getUserName();
-			long entryId = entry.getEntryId();
-			String title = entry.getTitle();
-			String content = entry.getContent();
-			Date displayDate = entry.getDisplayDate();
-
-			String[] tagsEntries = tagsEntryLocalService.getEntryNames(
-				BlogsEntry.class.getName(), entryId);
-
-			try {
-				Indexer.updateEntry(
-					companyId, groupId, userId, userName, entryId, title,
-					content, displayDate, tagsEntries,
-					entry.getExpandoBridge());
-			}
-			catch (SearchException se) {
-				_log.error("Reindexing " + entryId, se);
-			}
+			reIndex(entry);
 		}
 	}
 
