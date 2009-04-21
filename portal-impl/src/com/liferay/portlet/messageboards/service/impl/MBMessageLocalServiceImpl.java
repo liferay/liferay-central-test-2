@@ -131,6 +131,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
+		long classNameId = PortalUtil.getClassNameId(className);
 		long categoryId = CompanyConstants.SYSTEM;
 
 		if (Validator.isNull(subject)) {
@@ -150,6 +151,11 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		MBMessage message = addMessage(
 			userId, userName, categoryId, threadId, parentMessageId, subject,
 			body, files, anonymous, priority, serviceContext);
+
+		message.setClassNameId(classNameId);
+		message.setClassPK(classPK);
+
+		mbMessagePersistence.update(message, false);
 
 		if (className.equals(BlogsEntry.class.getName()) &&
 			parentMessageId != MBMessageImpl.DEFAULT_PARENT_MESSAGE_ID) {
@@ -178,8 +184,6 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		}
 
 		if (parentMessageId == MBMessageImpl.DEFAULT_PARENT_MESSAGE_ID) {
-			long classNameId = PortalUtil.getClassNameId(className);
-
 			MBDiscussion discussion = mbDiscussionPersistence.fetchByC_C(
 				classNameId, classPK);
 
@@ -938,7 +942,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
-		return mbMessageFinder.findByC_C(classNameId, classPK);
+		return mbMessagePersistence.findByC_C(classNameId, classPK);
 	}
 
 	public MBMessageDisplay getMessageDisplay(long messageId, String threadView)

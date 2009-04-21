@@ -26,7 +26,9 @@ import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.impl.BaseModelImpl;
+import com.liferay.portal.util.PortalUtil;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
@@ -90,6 +92,12 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage> {
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
 			
 
+			{ "classNameId", new Integer(Types.BIGINT) },
+			
+
+			{ "classPK", new Integer(Types.BIGINT) },
+			
+
 			{ "categoryId", new Integer(Types.BIGINT) },
 			
 
@@ -113,7 +121,7 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage> {
 
 			{ "priority", new Integer(Types.DOUBLE) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table MBMessage (uuid_ VARCHAR(75) null,messageId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,categoryId LONG,threadId LONG,parentMessageId LONG,subject VARCHAR(75) null,body TEXT null,attachments BOOLEAN,anonymous BOOLEAN,priority DOUBLE)";
+	public static final String TABLE_SQL_CREATE = "create table MBMessage (uuid_ VARCHAR(75) null,messageId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,categoryId LONG,threadId LONG,parentMessageId LONG,subject VARCHAR(75) null,body TEXT null,attachments BOOLEAN,anonymous BOOLEAN,priority DOUBLE)";
 	public static final String TABLE_SQL_DROP = "drop table MBMessage";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -136,6 +144,8 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage> {
 		model.setUserName(soapModel.getUserName());
 		model.setCreateDate(soapModel.getCreateDate());
 		model.setModifiedDate(soapModel.getModifiedDate());
+		model.setClassNameId(soapModel.getClassNameId());
+		model.setClassPK(soapModel.getClassPK());
 		model.setCategoryId(soapModel.getCategoryId());
 		model.setThreadId(soapModel.getThreadId());
 		model.setParentMessageId(soapModel.getParentMessageId());
@@ -258,6 +268,30 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage> {
 		_modifiedDate = modifiedDate;
 	}
 
+	public String getClassName() {
+		if (getClassNameId() <= 0) {
+			return StringPool.BLANK;
+		}
+
+		return PortalUtil.getClassName(getClassNameId());
+	}
+
+	public long getClassNameId() {
+		return _classNameId;
+	}
+
+	public void setClassNameId(long classNameId) {
+		_classNameId = classNameId;
+	}
+
+	public long getClassPK() {
+		return _classPK;
+	}
+
+	public void setClassPK(long classPK) {
+		_classPK = classPK;
+	}
+
 	public long getCategoryId() {
 		return _categoryId;
 	}
@@ -348,6 +382,8 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage> {
 			model.setUserName(HtmlUtil.escape(getUserName()));
 			model.setCreateDate(getCreateDate());
 			model.setModifiedDate(getModifiedDate());
+			model.setClassNameId(getClassNameId());
+			model.setClassPK(getClassPK());
 			model.setCategoryId(getCategoryId());
 			model.setThreadId(getThreadId());
 			model.setParentMessageId(getParentMessageId());
@@ -385,6 +421,8 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage> {
 		clone.setUserName(getUserName());
 		clone.setCreateDate(getCreateDate());
 		clone.setModifiedDate(getModifiedDate());
+		clone.setClassNameId(getClassNameId());
+		clone.setClassPK(getClassPK());
 		clone.setCategoryId(getCategoryId());
 		clone.setThreadId(getThreadId());
 		clone.setParentMessageId(getParentMessageId());
@@ -462,6 +500,8 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage> {
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
+	private long _classNameId;
+	private long _classPK;
 	private long _categoryId;
 	private long _threadId;
 	private long _parentMessageId;

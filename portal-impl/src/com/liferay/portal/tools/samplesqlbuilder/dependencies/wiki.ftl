@@ -18,7 +18,7 @@
 				<#assign mbCategoryId = 0>
 				<#assign mbThreadId = counter.get()>
 
-				<#assign mbRootMessage = dataFactory.addMBMessage(counter.get(), mbGroupId, mbUserId, mbCategoryId, mbThreadId, 0, stringUtil.valueOf(wikiPage.resourcePrimKey), stringUtil.valueOf(wikiPage.resourcePrimKey))>
+				<#assign mbRootMessage = dataFactory.addMBMessage(counter.get(), mbGroupId, mbUserId, dataFactory.wikiPageClassName.classNameId, wikiPage.resourcePrimKey, mbCategoryId, mbThreadId, 0, stringUtil.valueOf(wikiPage.resourcePrimKey), stringUtil.valueOf(wikiPage.resourcePrimKey))>
 
 				${sampleSQLBuilder.insertMBMessage(mbRootMessage)}
 
@@ -28,7 +28,7 @@
 
 				<#if (maxWikiPageCommentCount > 0)>
 					<#list 1..maxWikiPageCommentCount as wikiPageComment>
-						<#assign mbMessage = dataFactory.addMBMessage(counter.get(), mbGroupId, mbUserId, mbCategoryId, mbThreadId, mbRootMessage.messageId, "N/A", "This is a test comment " + wikiPageComment + ".")>
+						<#assign mbMessage = dataFactory.addMBMessage(counter.get(), mbGroupId, mbUserId, dataFactory.wikiPageClassName.classNameId, wikiPage.resourcePrimKey, mbCategoryId, mbThreadId, mbRootMessage.messageId, "N/A", "This is a test comment " + wikiPageComment + ".")>
 
 						${sampleSQLBuilder.insertMBMessage(mbMessage)}
 					</#list>

@@ -25,7 +25,7 @@
 
 					<#assign messageId = messageCounterOffset + mbMessageCount>
 
-					<#assign mbMessage = dataFactory.addMBMessage(messageId, mbCategory.groupId, firstUserId, categoryId, threadId, parentMessageId, "Test Message " + mbMessageCount, "This is a test message " + mbMessageCount + ".")>
+					<#assign mbMessage = dataFactory.addMBMessage(messageId, mbCategory.groupId, firstUserId, 0, 0, categoryId, threadId, parentMessageId, "Test Message " + mbMessageCount, "This is a test message " + mbMessageCount + ".")>
 
 					${sampleSQLBuilder.insertMBMessage(mbMessage)}
 

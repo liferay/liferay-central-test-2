@@ -58,6 +58,8 @@ public class MBMessageSoap implements Serializable {
 		soapModel.setUserName(model.getUserName());
 		soapModel.setCreateDate(model.getCreateDate());
 		soapModel.setModifiedDate(model.getModifiedDate());
+		soapModel.setClassNameId(model.getClassNameId());
+		soapModel.setClassPK(model.getClassPK());
 		soapModel.setCategoryId(model.getCategoryId());
 		soapModel.setThreadId(model.getThreadId());
 		soapModel.setParentMessageId(model.getParentMessageId());
@@ -155,6 +157,22 @@ public class MBMessageSoap implements Serializable {
 		_modifiedDate = modifiedDate;
 	}
 
+	public long getClassNameId() {
+		return _classNameId;
+	}
+
+	public void setClassNameId(long classNameId) {
+		_classNameId = classNameId;
+	}
+
+	public long getClassPK() {
+		return _classPK;
+	}
+
+	public void setClassPK(long classPK) {
+		_classPK = classPK;
+	}
+
 	public long getCategoryId() {
 		return _categoryId;
 	}
@@ -235,6 +253,8 @@ public class MBMessageSoap implements Serializable {
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
+	private long _classNameId;
+	private long _classPK;
 	private long _categoryId;
 	private long _threadId;
 	private long _parentMessageId;

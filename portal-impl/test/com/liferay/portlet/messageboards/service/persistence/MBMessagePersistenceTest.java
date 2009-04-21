@@ -79,6 +79,8 @@ public class MBMessagePersistenceTest extends BasePersistenceTestCase {
 		newMBMessage.setUserName(randomString());
 		newMBMessage.setCreateDate(nextDate());
 		newMBMessage.setModifiedDate(nextDate());
+		newMBMessage.setClassNameId(nextLong());
+		newMBMessage.setClassPK(nextLong());
 		newMBMessage.setCategoryId(nextLong());
 		newMBMessage.setThreadId(nextLong());
 		newMBMessage.setParentMessageId(nextLong());
@@ -104,6 +106,9 @@ public class MBMessagePersistenceTest extends BasePersistenceTestCase {
 			Time.getShortTimestamp(newMBMessage.getCreateDate()));
 		assertEquals(Time.getShortTimestamp(existingMBMessage.getModifiedDate()),
 			Time.getShortTimestamp(newMBMessage.getModifiedDate()));
+		assertEquals(existingMBMessage.getClassNameId(),
+			newMBMessage.getClassNameId());
+		assertEquals(existingMBMessage.getClassPK(), newMBMessage.getClassPK());
 		assertEquals(existingMBMessage.getCategoryId(),
 			newMBMessage.getCategoryId());
 		assertEquals(existingMBMessage.getThreadId(), newMBMessage.getThreadId());
@@ -166,6 +171,8 @@ public class MBMessagePersistenceTest extends BasePersistenceTestCase {
 		mbMessage.setUserName(randomString());
 		mbMessage.setCreateDate(nextDate());
 		mbMessage.setModifiedDate(nextDate());
+		mbMessage.setClassNameId(nextLong());
+		mbMessage.setClassPK(nextLong());
 		mbMessage.setCategoryId(nextLong());
 		mbMessage.setThreadId(nextLong());
 		mbMessage.setParentMessageId(nextLong());

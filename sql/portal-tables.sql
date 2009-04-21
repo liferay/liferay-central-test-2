@@ -678,6 +678,8 @@ create table MBMessage (
 	userName VARCHAR(75) null,
 	createDate DATE null,
 	modifiedDate DATE null,
+	classNameId LONG,
+	classPK LONG,
 	categoryId LONG,
 	threadId LONG,
 	parentMessageId LONG,

@@ -245,6 +245,7 @@ create unique index IX_E858F170 on MBMailingList (uuid_, groupId);
 
 create index IX_3C865EE5 on MBMessage (categoryId);
 create index IX_138C7F1E on MBMessage (categoryId, threadId);
+create index IX_51A8D44D on MBMessage (classNameId, classPK);
 create index IX_B1432D30 on MBMessage (companyId);
 create index IX_5B153FB2 on MBMessage (groupId);
 create index IX_8EB8C5EC on MBMessage (groupId, userId);

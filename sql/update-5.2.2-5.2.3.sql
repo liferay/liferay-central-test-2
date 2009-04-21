@@ -22,6 +22,8 @@ alter table MBCategory add threadCount INTEGER;
 alter table MBCategory add messageCount INTEGER;
 
 alter table MBMessage add groupId LONG;
+alter table MBMessage add classNameId LONG;
+alter table MBMessage add classPK LONG;
 alter table MBMessage add priority DOUBLE;
 
 alter table MBMessageFlag add threadId LONG;

@@ -55,6 +55,7 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 
 	protected void doUpgrade() throws Exception {
 		updateGroupId();
+		updateMessageClassNameId();
 		updateMessageFlagThreadId();
 		updateMessagePriority();
 	}
@@ -93,6 +94,35 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 				runSQL(
 					"update MBThread set groupId = " + groupId +
 						" where categoryId = " + categoryId);
+			}
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
+		}
+	}
+
+	protected void updateMessageClassNameId() throws Exception {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = DataAccess.getConnection();
+
+			ps = con.prepareStatement(
+				"select classNameId, classPK, threadId from MBDiscussion");
+
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				long classNameId = rs.getLong("classNameId");
+				long classPK = rs.getLong("classPK");
+				long threadId = rs.getLong("threadId");
+
+				runSQL(
+					"update MBMessage set classNameId = " + classNameId +
+						", classPK = " + classPK + " where threadId = " +
+							threadId);
 			}
 		}
 		finally {

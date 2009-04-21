@@ -81,6 +81,8 @@ public class MBMessageJSONSerializer {
 		}
 
 		jsonObj.put("modifiedDate", modifiedDateJSON);
+		jsonObj.put("classNameId", model.getClassNameId());
+		jsonObj.put("classPK", model.getClassPK());
 		jsonObj.put("categoryId", model.getCategoryId());
 		jsonObj.put("threadId", model.getThreadId());
 		jsonObj.put("parentMessageId", model.getParentMessageId());

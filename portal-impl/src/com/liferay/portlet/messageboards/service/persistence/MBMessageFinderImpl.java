@@ -57,9 +57,6 @@ public class MBMessageFinderImpl
 	public static String FIND_BY_G_U =
 		MBMessageFinder.class.getName() + ".findByG_U";
 
-	public static String FIND_BY_C_C =
-		MBMessageFinder.class.getName() + ".findByC_C";
-
 	public static String FIND_BY_G_U_A =
 		MBMessageFinder.class.getName() + ".findByG_U_A";
 
@@ -184,35 +181,6 @@ public class MBMessageFinderImpl
 			qPos.add(userId);
 
 			return (List<Long>)QueryUtil.list(q, getDialect(), start, end);
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List<MBMessage> findByC_C(long classNameId, long classPK)
-		throws SystemException {
-
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			String sql = CustomSQLUtil.get(FIND_BY_C_C);
-
-			SQLQuery q = session.createSQLQuery(sql);
-
-			q.addEntity("MBMessage", MBMessageImpl.class);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(classNameId);
-			qPos.add(classPK);
-
-			return q.list();
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

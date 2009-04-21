@@ -202,6 +202,8 @@
 
 		<!-- Other fields -->
 
+		<column name="classNameId" type="long" />
+		<column name="classPK" type="long" />
 		<column name="categoryId" type="long" />
 		<column name="threadId" type="long" />
 		<column name="parentMessageId" type="long" />
@@ -238,6 +240,10 @@
 		<finder name="G_U" return-type="Collection">
 			<finder-column name="groupId" />
 			<finder-column name="userId" />
+		</finder>
+		<finder name="C_C" return-type="Collection">
+			<finder-column name="classNameId" />
+			<finder-column name="classPK" />
 		</finder>
 		<finder name="C_T" return-type="Collection">
 			<finder-column name="categoryId" />

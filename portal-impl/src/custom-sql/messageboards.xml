@@ -93,23 +93,6 @@
 				modifiedDate DESC
 		]]>
 	</sql>
-	<sql id="com.liferay.portlet.messageboards.service.persistence.MBMessageFinder.findByC_C">
-		<![CDATA[
-			SELECT
-				{MBMessage.*}
-			FROM
-				MBMessage
-			INNER JOIN
-				MBDiscussion ON
-					(MBDiscussion.threadId = MBMessage.threadId)
-			WHERE
-				(MBDiscussion.classNameId = ?) AND
-				(MBDiscussion.classPK = ?)
-			ORDER BY
-				MBMessage.createDate ASC,
-				MBMessage.messageId ASC
-		]]>
-	</sql>
 	<sql id="com.liferay.portlet.messageboards.service.persistence.MBMessageFinder.findByG_U_A">
 		<![CDATA[
 			SELECT

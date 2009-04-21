@@ -83,6 +83,16 @@ public interface MBMessageModel extends BaseModel<MBMessage> {
 
 	public void setModifiedDate(Date modifiedDate);
 
+	public String getClassName();
+
+	public long getClassNameId();
+
+	public void setClassNameId(long classNameId);
+
+	public long getClassPK();
+
+	public void setClassPK(long classPK);
+
 	public long getCategoryId();
 
 	public void setCategoryId(long categoryId);
