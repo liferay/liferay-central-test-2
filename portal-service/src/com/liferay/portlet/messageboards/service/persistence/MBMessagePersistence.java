@@ -298,6 +298,37 @@ public interface MBMessagePersistence extends BasePersistence {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageException;
 
+	public java.util.List<com.liferay.portlet.messageboards.model.MBMessage> findByC_C(
+		long classNameId, long classPK)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.messageboards.model.MBMessage> findByC_C(
+		long classNameId, long classPK, int start, int end)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.messageboards.model.MBMessage> findByC_C(
+		long classNameId, long classPK, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.messageboards.model.MBMessage findByC_C_First(
+		long classNameId, long classPK,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.messageboards.NoSuchMessageException;
+
+	public com.liferay.portlet.messageboards.model.MBMessage findByC_C_Last(
+		long classNameId, long classPK,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.messageboards.NoSuchMessageException;
+
+	public com.liferay.portlet.messageboards.model.MBMessage[] findByC_C_PrevAndNext(
+		long messageId, long classNameId, long classPK,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.messageboards.NoSuchMessageException;
+
 	public java.util.List<com.liferay.portlet.messageboards.model.MBMessage> findByC_T(
 		long categoryId, long threadId)
 		throws com.liferay.portal.SystemException;
@@ -403,6 +434,9 @@ public interface MBMessagePersistence extends BasePersistence {
 	public void removeByG_U(long groupId, long userId)
 		throws com.liferay.portal.SystemException;
 
+	public void removeByC_C(long classNameId, long classPK)
+		throws com.liferay.portal.SystemException;
+
 	public void removeByC_T(long categoryId, long threadId)
 		throws com.liferay.portal.SystemException;
 
@@ -433,6 +467,9 @@ public interface MBMessagePersistence extends BasePersistence {
 		throws com.liferay.portal.SystemException;
 
 	public int countByG_U(long groupId, long userId)
+		throws com.liferay.portal.SystemException;
+
+	public int countByC_C(long classNameId, long classPK)
 		throws com.liferay.portal.SystemException;
 
 	public int countByC_T(long categoryId, long threadId)

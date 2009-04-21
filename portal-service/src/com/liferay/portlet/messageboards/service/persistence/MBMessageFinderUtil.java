@@ -49,12 +49,6 @@ public class MBMessageFinderUtil {
 		return getFinder().findByG_U(groupId, userId, start, end);
 	}
 
-	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> findByC_C(
-		long classNameId, long classPK)
-		throws com.liferay.portal.SystemException {
-		return getFinder().findByC_C(classNameId, classPK);
-	}
-
 	public static java.util.List<Long> findByG_U_A(long groupId, long userId,
 		boolean anonymous, int start, int end)
 		throws com.liferay.portal.SystemException {
