@@ -563,24 +563,6 @@ public class SCProductEntryLocalServiceImpl
 			saveProductScreenshots(productEntry, thumbnails, fullImages);
 		}
 
-		// Latest product version
-
-		String version = StringPool.BLANK;
-
-		List<SCProductVersion> productVersions =
-			scProductVersionPersistence.findByProductEntryId(
-				productEntryId, 0, 1);
-
-		if (productVersions.size() > 0) {
-			SCProductVersion productVersion = productVersions.get(0);
-
-			productVersion.setModifiedDate(now);
-
-			scProductVersionPersistence.update(productVersion, false);
-
-			version = productVersion.getVersion();
-		}
-
 		// Indexer
 
 		reIndex(productEntry);
