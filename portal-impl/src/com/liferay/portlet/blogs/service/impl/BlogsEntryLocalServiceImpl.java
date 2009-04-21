@@ -188,18 +188,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		// Indexer
 
-		try {
-			if (!draft) {
-				Indexer.addEntry(
-					entry.getCompanyId(), entry.getGroupId(), userId,
-					entry.getUserName(), entryId, title, content,
-					displayDate, serviceContext.getTagsEntries(),
-					entry.getExpandoBridge());
-			}
-		}
-		catch (SearchException se) {
-			_log.error("Indexing " + entryId, se);
-		}
+		reIndex(entry);
 
 		// Ping
 
@@ -524,6 +513,10 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 	}
 
 	public void reIndex(BlogsEntry entry) throws SystemException {
+		if (entry.isDraft()) {
+			return;
+		}
+
 		long companyId = entry.getCompanyId();
 		long groupId = entry.getGroupId();
 		long userId = entry.getUserId();
@@ -682,18 +675,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		// Indexer
 
-		try {
-			if (!draft) {
-				Indexer.updateEntry(
-					entry.getCompanyId(), entry.getGroupId(), userId,
-					entry.getUserName(), entryId, title, content,
-					displayDate, serviceContext.getTagsEntries(),
-					entry.getExpandoBridge());
-			}
-		}
-		catch (SearchException se) {
-			_log.error("Indexing " + entryId, se);
-		}
+		reIndex(entry);
 
 		// Ping
 

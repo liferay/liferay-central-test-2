@@ -276,16 +276,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 
 		// Indexer
 
-		try {
-			com.liferay.portlet.calendar.util.Indexer.addEvent(
-				event.getCompanyId(), event.getGroupId(), userId,
-				event.getUserName(), event.getEventId(), title, description,
-				event.getModifiedDate(), serviceContext.getTagsEntries(),
-				event.getExpandoBridge());
-		}
-		catch (SearchException se) {
-			_log.error("Indexing " + eventId, se);
-		}
+		reIndex(event);
 
 		// Pool
 
@@ -866,16 +857,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 
 		// Indexer
 
-		try {
-			com.liferay.portlet.calendar.util.Indexer.updateEvent(
-				event.getCompanyId(), event.getGroupId(), userId,
-				event.getUserName(), eventId, title, description,
-				event.getModifiedDate(), serviceContext.getTagsEntries(),
-				event.getExpandoBridge());
-		}
-		catch (SearchException se) {
-			_log.error("Indexing " + eventId, se);
-		}
+		reIndex(event);
 
 		// Pool
 

@@ -225,16 +225,7 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 
 			// Indexer
 
-			try {
-				Indexer.addImage(
-					image.getCompanyId(), image.getGroupId(), folderId,
-					imageId, name, description, image.getModifiedDate(),
-					serviceContext.getTagsCategories(),
-					serviceContext.getTagsEntries(), image.getExpandoBridge());
-			}
-			catch (SearchException se) {
-				_log.error("Indexing " + imageId, se);
-			}
+			reIndex(image);
 
 			return image;
 		}
@@ -596,16 +587,7 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 
 			// Indexer
 
-			try {
-				Indexer.updateImage(
-					image.getCompanyId(), image.getGroupId(),
-					image.getFolderId(), imageId, name, description,
-					image.getModifiedDate(), tagsCategories, tagsEntries,
-					image.getExpandoBridge());
-			}
-			catch (SearchException se) {
-				_log.error("Indexing " + imageId, se);
-			}
+			reIndex(image);
 
 			return image;
 		}

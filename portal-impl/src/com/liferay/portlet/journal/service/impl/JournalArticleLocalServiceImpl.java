@@ -443,28 +443,7 @@ public class JournalArticleLocalServiceImpl
 
 		// Indexer
 
-		try {
-			if (article.isIndexable()) {
-				String[] tagsCategories = tagsEntryLocalService.getEntryNames(
-					JournalArticle.class.getName(),
-					article.getResourcePrimKey(),
-					TagsEntryConstants.FOLKSONOMY_CATEGORY);
-				String[] tagsEntries = tagsEntryLocalService.getEntryNames(
-					JournalArticle.class.getName(),
-					article.getResourcePrimKey());
-
-				Indexer.updateArticle(
-					article.getCompanyId(), article.getGroupId(),
-					article.getArticleId(), article.getVersion(),
-					article.getTitle(), article.getDescription(),
-					article.getContent(), article.getType(),
-					article.getDisplayDate(), tagsCategories, tagsEntries,
-					expandoBridge);
-			}
-		}
-		catch (SearchException se) {
-			_log.error("Indexing " + article.getId(), se);
-		}
+		reIndex(article);
 
 		return article;
 	}
@@ -1868,26 +1847,7 @@ public class JournalArticleLocalServiceImpl
 
 		// Indexer
 
-		try {
-			if (article.isIndexable()) {
-				if (article.isApproved()) {
-					Indexer.updateArticle(
-						article.getCompanyId(), article.getGroupId(),
-						article.getArticleId(), article.getVersion(),
-						article.getTitle(), article.getDescription(),
-						article.getContent(), article.getType(),
-						article.getDisplayDate(), tagsCategories, tagsEntries,
-						expandoBridge);
-				}
-				else {
-					Indexer.deleteArticle(
-						article.getCompanyId(), article.getArticleId());
-				}
-			}
-		}
-		catch (SearchException se) {
-			_log.error("Indexing " + article.getPrimaryKey(), se);
-		}
+		reIndex(article);
 
 		return article;
 	}

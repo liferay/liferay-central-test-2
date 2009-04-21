@@ -132,15 +132,7 @@ public class BookmarksEntryLocalServiceImpl
 
 		// Indexer
 
-		try {
-			Indexer.addEntry(
-				entry.getCompanyId(), entry.getGroupId(), folderId, entryId,
-				name, url, comments, entry.getModifiedDate(),
-				serviceContext.getTagsEntries(), entry.getExpandoBridge());
-		}
-		catch (SearchException se) {
-			_log.error("Indexing " + entryId, se);
-		}
+		reIndex(entry);
 
 		return entry;
 	}
@@ -412,16 +404,7 @@ public class BookmarksEntryLocalServiceImpl
 
 		// Indexer
 
-		try {
-			Indexer.updateEntry(
-				entry.getCompanyId(), entry.getGroupId(), entry.getFolderId(),
-				entry.getEntryId(), name, url, comments,
-				entry.getModifiedDate(), serviceContext.getTagsEntries(),
-				entry.getExpandoBridge());
-		}
-		catch (SearchException se) {
-			_log.error("Indexing " + entryId, se);
-		}
+		reIndex(entry);
 
 		return entry;
 	}

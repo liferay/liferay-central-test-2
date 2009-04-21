@@ -164,16 +164,7 @@ public class SCProductEntryLocalServiceImpl
 
 		// Indexer
 
-		try {
-			Indexer.addProductEntry(
-				productEntry.getCompanyId(), groupId, userId,
-				user.getFullName(), productEntryId, name, now, StringPool.BLANK,
-				type, shortDescription, longDescription, pageURL, repoGroupId,
-				repoArtifactId, productEntry.getExpandoBridge());
-		}
-		catch (SearchException se) {
-			_log.error("Indexing " + productEntryId, se);
-		}
+		reIndex(productEntry);
 
 		return productEntry;
 	}
@@ -592,17 +583,7 @@ public class SCProductEntryLocalServiceImpl
 
 		// Indexer
 
-		try {
-			Indexer.updateProductEntry(
-				productEntry.getCompanyId(), productEntry.getGroupId(),
-				productEntry.getUserId(), productEntry.getUserName(),
-				productEntryId, name, now, version, type, shortDescription,
-				longDescription, pageURL, repoGroupId, repoArtifactId,
-				productEntry.getExpandoBridge());
-		}
-		catch (SearchException se) {
-			_log.error("Indexing " + productEntryId, se);
-		}
+		reIndex(productEntry);
 
 		return productEntry;
 	}
