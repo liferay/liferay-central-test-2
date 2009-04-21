@@ -470,20 +470,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		// Indexer
 
-		try {
-			if (!category.isDiscussion()) {
-				Indexer.addMessage(
-					message.getCompanyId(), message.getGroupId(),
-					message.getUserId(), message.getUserName(),
-					message.getCategoryId(), threadId, messageId, subject,
-					body, anonymous, message.getModifiedDate(),
-					serviceContext.getTagsEntries(),
-					message.getExpandoBridge());
-			}
-		}
-		catch (SearchException se) {
-			_log.error("Indexing " + messageId, se);
-		}
+		reIndex(message);
 
 		logAddMessage(messageId, stopWatch, 11);
 
@@ -1049,6 +1036,10 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 	}
 
 	public void reIndex(MBMessage message) throws SystemException {
+		if (message.isDiscussion()) {
+			return;
+		}
+
 		long companyId = message.getCompanyId();
 		long groupId = message.getGroupId();
 		long userId = message.getUserId();
@@ -1225,20 +1216,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		// Indexer
 
-		try {
-			if (!category.isDiscussion()) {
-				Indexer.updateMessage(
-					message.getCompanyId(), message.getGroupId(),
-					message.getUserId(), message.getUserName(),
-					message.getCategoryId(), message.getThreadId(), messageId,
-					subject, body, message.isAnonymous(),
-					message.getModifiedDate(), serviceContext.getTagsEntries(),
-					message.getExpandoBridge());
-			}
-		}
-		catch (SearchException se) {
-			_log.error("Indexing " + messageId, se);
-		}
+		reIndex(message);
 
 		return message;
 	}

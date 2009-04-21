@@ -558,26 +558,7 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 
 				// Indexer
 
-				try {
-					if (!fromCategory.isDiscussion()) {
-						String[] tagsEntries =
-							tagsEntryLocalService.getEntryNames(
-								MBMessage.class.getName(),
-								message.getMessageId());
-
-						Indexer.updateMessage(
-							message.getCompanyId(), fromCategory.getGroupId(),
-							message.getUserId(), message.getUserName(),
-							toCategoryId, message.getThreadId(),
-							message.getMessageId(), message.getSubject(),
-							message.getBody(), message.isAnonymous(),
-							message.getModifiedDate(), tagsEntries,
-							message.getExpandoBridge());
-					}
-				}
-				catch (SearchException se) {
-					_log.error("Indexing " + message.getMessageId(), se);
-				}
+				mbMessageLocalService.reIndex(message);
 			}
 		}
 
