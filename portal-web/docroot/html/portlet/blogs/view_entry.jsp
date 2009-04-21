@@ -63,31 +63,45 @@ TagsUtil.addLayoutTagsEntries(request, TagsEntryLocalServiceUtil.getEntries(Blog
 </form>
 
 <div class="entry-navigation">
-	[
-
-	<c:if test="<%= previousEntry != null %>">
-		<a href="<portlet:renderURL><portlet:param name="struts_action" value="/blogs/view_entry" /><portlet:param name="entryId" value="<%= String.valueOf(previousEntry.getEntryId()) %>" /></portlet:renderURL>">
-	</c:if>
+	<c:choose>
+		<c:when test="<%= previousEntry != null %>">
+			<a class="previous" href="<portlet:renderURL><portlet:param name="struts_action" value="/blogs/view_entry" /><portlet:param name="entryId" value="<%= String.valueOf(previousEntry.getEntryId()) %>" /></portlet:renderURL>">
+		</c:when>
+		<c:otherwise>
+			<span class="previous">
+		</c:otherwise>
+	</c:choose>
 
 	<liferay-ui:message key="previous" />
 
-	<c:if test="<%= previousEntry != null %>">
-		</a>
-	</c:if>
+	<c:choose>
+		<c:when test="<%= previousEntry != null %>">
+			</a>
+		</c:when>
+		<c:otherwise>
+			</span>
+		</c:otherwise>
+	</c:choose>
 
-	|
-
-	<c:if test="<%= nextEntry != null %>">
-		<a href="<portlet:renderURL><portlet:param name="struts_action" value="/blogs/view_entry" /><portlet:param name="entryId" value="<%= String.valueOf(nextEntry.getEntryId()) %>" /></portlet:renderURL>">
-	</c:if>
+	<c:choose>
+		<c:when test="<%= nextEntry != null %>">
+			<a class="next" href="<portlet:renderURL><portlet:param name="struts_action" value="/blogs/view_entry" /><portlet:param name="entryId" value="<%= String.valueOf(nextEntry.getEntryId()) %>" /></portlet:renderURL>">
+		</c:when>
+		<c:otherwise>
+			<span class="next">
+		</c:otherwise>
+	</c:choose>
 
 	<liferay-ui:message key="next" />
 
-	<c:if test="<%= nextEntry != null %>">
-		</a>
-	</c:if>
-
-	]
+	<c:choose>
+		<c:when test="<%= nextEntry != null %>">
+			</a>
+		</c:when>
+		<c:otherwise>
+			</span>
+		</c:otherwise>
+	</c:choose>
 </div>
 
 <c:if test="<%= enableComments %>">

@@ -75,6 +75,39 @@
 	padding: 5px;
 }
 
+.portlet-blogs .entry-navigation {
+	background: #eee;
+	border-top: 1px solid #ccc;
+	margin: 15px 0 0;
+	overflow: hidden;
+	padding: 5px;
+}
+
+.portlet-blogs .entry-navigation a, .portlet-blogs .entry-navigation span {
+	background: url() no-repeat;
+}
+
+.portlet-blogs .entry-navigation .previous {
+	background-image: url(<%= themeImagesPath %>/arrows/paging_previous.png);
+	float: left;
+	padding-left: 15px;
+}
+
+.portlet-blogs .entry-navigation span.previous {
+	background-position: 0 100%;
+}
+
+.portlet-blogs .entry-navigation .next {
+	background-image: url(<%= themeImagesPath %>/arrows/paging_next.png);
+	background-position: 100% 0;
+	float: right;
+	padding-right: 15px;
+}
+
+.portlet-blogs .entry-navigation span.next {
+	background-position: 100% 100%;
+}
+
 .portlet-blogs .taglib-flags {
 	border-left: 1px solid #999;
 	color: #999;
