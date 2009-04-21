@@ -520,11 +520,12 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 		String[] tagsEntries = tagsEntryLocalService.getEntryNames(
 			IGImage.class.getName(), imageId);
 
+		ExpandoBridge expandoBridge = image.getExpandoBridge();
+
 		try {
 			Indexer.updateImage(
 				companyId, groupId, folderId, imageId, name, description,
-				modifiedDate, tagsCategories, tagsEntries,
-				image.getExpandoBridge());
+				modifiedDate, tagsCategories, tagsEntries, expandoBridge);
 		}
 		catch (SearchException se) {
 			_log.error("Reindexing " + imageId, se);

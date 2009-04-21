@@ -1511,11 +1511,13 @@ public class JournalArticleLocalServiceImpl
 		String[] tagsEntries = tagsEntryLocalService.getEntryNames(
 			JournalArticle.class.getName(), resourcePrimKey);
 
+		ExpandoBridge expandoBridge = article.getExpandoBridge();
+
 		try {
 			Indexer.updateArticle(
 				companyId, groupId, articleId, version, title, description,
 				content, type, displayDate, tagsCategories, tagsEntries,
-				article.getExpandoBridge());
+				expandoBridge);
 		}
 		catch (SearchException se) {
 			_log.error("Reindexing " + article.getId(), se);

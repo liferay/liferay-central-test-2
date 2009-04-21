@@ -362,10 +362,12 @@ public class BookmarksEntryLocalServiceImpl
 		String[] tagsEntries = tagsEntryLocalService.getEntryNames(
 			BookmarksEntry.class.getName(), entryId);
 
+		ExpandoBridge expandoBridge = entry.getExpandoBridge();
+
 		try {
 			Indexer.updateEntry(
 				companyId, groupId, folderId, entryId, name, url, comments,
-				modifiedDate, tagsEntries, entry.getExpandoBridge());
+				modifiedDate, tagsEntries, expandoBridge);
 		}
 		catch (SearchException se) {
 			_log.error("Reindexing " + entryId, se);

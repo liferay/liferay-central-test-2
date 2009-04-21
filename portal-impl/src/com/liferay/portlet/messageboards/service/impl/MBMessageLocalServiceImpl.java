@@ -63,6 +63,7 @@ import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.social.BlogsActivityKeys;
+import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.messageboards.MessageBodyException;
 import com.liferay.portlet.messageboards.MessageSubjectException;
 import com.liferay.portlet.messageboards.NoSuchDiscussionException;
@@ -1063,11 +1064,13 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		String[] tagsEntries = tagsEntryLocalService.getEntryNames(
 			MBMessage.class.getName(), messageId);
 
+		ExpandoBridge expandoBridge = message.getExpandoBridge();
+
 		try {
 			Indexer.updateMessage(
 				companyId, groupId, userId, userName, categoryId, threadId,
 				messageId, title, content, anonymous, modifiedDate, tagsEntries,
-				message.getExpandoBridge());
+				expandoBridge);
 		}
 		catch (SearchException se) {
 			_log.error("Reindexing " + messageId, se);

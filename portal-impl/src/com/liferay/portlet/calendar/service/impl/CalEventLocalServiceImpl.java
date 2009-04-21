@@ -698,11 +698,12 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		String[] tagsEntries = tagsEntryLocalService.getEntryNames(
 			CalEvent.class.getName(), eventId);
 
+		ExpandoBridge expandoBridge = event.getExpandoBridge();
+
 		try {
 			Indexer.updateEvent(
 				companyId, groupId, userId, userName, eventId, title,
-				description, modifiedDate, tagsEntries,
-				event.getExpandoBridge());
+				description, modifiedDate, tagsEntries, expandoBridge);
 		}
 		catch (SearchException se) {
 			_log.error("Reindexing " + eventId, se);

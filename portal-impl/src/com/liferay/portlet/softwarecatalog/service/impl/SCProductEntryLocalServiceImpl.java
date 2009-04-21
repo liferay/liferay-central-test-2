@@ -452,6 +452,7 @@ public class SCProductEntryLocalServiceImpl
 		String pageURL = productEntry.getPageURL();
 		String repoGroupId = productEntry.getRepoGroupId();
 		String repoArtifactId = productEntry.getRepoArtifactId();
+
 		ExpandoBridge expandoBridge = productEntry.getExpandoBridge();
 
 		try {
