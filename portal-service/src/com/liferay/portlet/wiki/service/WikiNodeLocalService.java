@@ -173,6 +173,7 @@ public interface WikiNodeLocalService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public void reIndex(java.lang.String[] ids)
 		throws com.liferay.portal.SystemException;
 

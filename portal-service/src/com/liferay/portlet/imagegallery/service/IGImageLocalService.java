@@ -273,6 +273,7 @@ public interface IGImageLocalService {
 	public java.util.List<com.liferay.portlet.imagegallery.model.IGImage> getNoAssetImages()
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public void reIndex(long imageId) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.imagegallery.model.IGImage updateImage(

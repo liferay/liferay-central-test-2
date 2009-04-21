@@ -170,6 +170,7 @@ public interface BookmarksFolderLocalService {
 	public void getSubfolderIds(java.util.List<Long> folderIds, long groupId,
 		long folderId) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public void reIndex(java.lang.String[] ids)
 		throws com.liferay.portal.SystemException;
 

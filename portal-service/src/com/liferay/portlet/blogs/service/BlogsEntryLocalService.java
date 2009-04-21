@@ -276,8 +276,10 @@ public interface BlogsEntryLocalService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.lang.String getUrlTitle(long entryId, java.lang.String title);
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public void reIndex(long entryId) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public void reIndex(java.lang.String[] ids)
 		throws com.liferay.portal.SystemException;
 

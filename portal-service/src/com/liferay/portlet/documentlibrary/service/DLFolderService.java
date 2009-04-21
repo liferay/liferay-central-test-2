@@ -119,6 +119,7 @@ public interface DLFolderService {
 		java.lang.String lockUuid, long expirationTime)
 		throws com.liferay.portal.PortalException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public void reIndexSearch(long companyId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;

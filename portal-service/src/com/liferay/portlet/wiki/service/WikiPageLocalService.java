@@ -286,6 +286,7 @@ public interface WikiPageLocalService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public void reIndex(long resourcePrimKey)
 		throws com.liferay.portal.SystemException;
 

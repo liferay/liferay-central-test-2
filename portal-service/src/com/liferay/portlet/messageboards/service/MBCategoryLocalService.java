@@ -210,6 +210,7 @@ public interface MBCategoryLocalService {
 	public com.liferay.portlet.messageboards.model.MBCategory getSystemCategory()
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public void reIndex(java.lang.String[] ids)
 		throws com.liferay.portal.SystemException;
 
