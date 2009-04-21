@@ -31,12 +31,12 @@ DLFolder folder = (DLFolder)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_FOLDER
 
 long folderId = BeanParamUtil.getLong(folder, request, "folderId");
 
-long parentFolderId = BeanParamUtil.getLong(folder, request, "parentFolderId", DLFolderImpl.DEFAULT_PARENT_FOLDER_ID);
+long parentFolderId = BeanParamUtil.getLong(folder, request, "parentFolderId", DLFolderConstants.DEFAULT_PARENT_FOLDER_ID);
 %>
 
 <script type="text/javascript">
 	function <portlet:namespace />removeFolder() {
-		document.<portlet:namespace />fm.<portlet:namespace />parentFolderId.value = "<%= DLFolderImpl.DEFAULT_PARENT_FOLDER_ID %>";
+		document.<portlet:namespace />fm.<portlet:namespace />parentFolderId.value = "<%= DLFolderConstants.DEFAULT_PARENT_FOLDER_ID %>";
 
 		var nameEl = document.getElementById("<portlet:namespace />parentFolderName");
 
@@ -150,7 +150,7 @@ long parentFolderId = BeanParamUtil.getLong(folder, request, "parentFolderId", D
 					sb.insert(0, WebDAVUtil.encodeURL(curFolder.getName()));
 					sb.insert(0, StringPool.SLASH);
 
-					if (curFolder.getParentFolderId() == DLFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
+					if (curFolder.getParentFolderId() == DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
 						break;
 					}
 					else {

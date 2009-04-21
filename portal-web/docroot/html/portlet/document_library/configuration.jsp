@@ -36,7 +36,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 <script type="text/javascript">
 	function <portlet:namespace />removeFolder() {
-		document.<portlet:namespace />fm.<portlet:namespace />rootFolderId.value = "<%= DLFolderImpl.DEFAULT_PARENT_FOLDER_ID %>";
+		document.<portlet:namespace />fm.<portlet:namespace />rootFolderId.value = "<%= DLFolderConstants.DEFAULT_PARENT_FOLDER_ID %>";
 
 		var nameEl = document.getElementById("<portlet:namespace />rootFolderName");
 

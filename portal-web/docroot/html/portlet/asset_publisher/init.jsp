@@ -46,6 +46,7 @@
 <%@ page import="com.liferay.portlet.bookmarks.util.BookmarksUtil" %>
 <%@ page import="com.liferay.portlet.documentlibrary.model.DLFileEntry" %>
 <%@ page import="com.liferay.portlet.documentlibrary.model.DLFolder" %>
+<%@ page import="com.liferay.portlet.documentlibrary.model.DLFolderConstants" %>
 <%@ page import="com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl" %>
 <%@ page import="com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl" %>
 <%@ page import="com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil" %>

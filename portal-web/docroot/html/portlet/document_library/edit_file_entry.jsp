@@ -320,7 +320,7 @@ portletURL.setParameter("name", name);
 				sb.insert(0, WebDAVUtil.encodeURL(curFolder.getName()));
 				sb.insert(0, StringPool.SLASH);
 
-				if (curFolder.getParentFolderId() == DLFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
+				if (curFolder.getParentFolderId() == DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
 					break;
 				}
 				else {

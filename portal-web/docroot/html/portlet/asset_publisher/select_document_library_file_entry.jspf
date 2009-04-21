@@ -24,7 +24,7 @@
 
 <%
 int assetOrder = ParamUtil.getInteger(request, "assetOrder", -1);
-long folderId = ParamUtil.getLong(request, "assetParentId", DLFolderImpl.DEFAULT_PARENT_FOLDER_ID);
+long folderId = ParamUtil.getLong(request, "assetParentId", DLFolderConstants.DEFAULT_PARENT_FOLDER_ID);
 
 DLFolder folder = null;
 

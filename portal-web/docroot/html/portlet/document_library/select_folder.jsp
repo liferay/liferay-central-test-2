@@ -27,7 +27,7 @@
 <%
 DLFolder folder = (DLFolder)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_FOLDER);
 
-long folderId = BeanParamUtil.getLong(folder, request, "folderId", DLFolderImpl.DEFAULT_PARENT_FOLDER_ID);
+long folderId = BeanParamUtil.getLong(folder, request, "folderId", DLFolderConstants.DEFAULT_PARENT_FOLDER_ID);
 %>
 
 <form method="post" name="<portlet:namespace />fm">

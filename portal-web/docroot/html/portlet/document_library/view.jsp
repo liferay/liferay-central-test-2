@@ -29,16 +29,16 @@ String tabs1 = ParamUtil.getString(request, "tabs1", "folders");
 
 DLFolder folder = (DLFolder)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_FOLDER);
 
-long defaultFolderId = GetterUtil.getLong(preferences.getValue("rootFolderId", StringPool.BLANK), DLFolderImpl.DEFAULT_PARENT_FOLDER_ID);
+long defaultFolderId = GetterUtil.getLong(preferences.getValue("rootFolderId", StringPool.BLANK), DLFolderConstants.DEFAULT_PARENT_FOLDER_ID);
 
 long folderId = BeanParamUtil.getLong(folder, request, "folderId", defaultFolderId);
 
-if ((folder == null) && (defaultFolderId != DLFolderImpl.DEFAULT_PARENT_FOLDER_ID)) {
+if ((folder == null) && (defaultFolderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID)) {
 	try {
 		folder = DLFolderLocalServiceUtil.getFolder(folderId);
 	}
 	catch (NoSuchFolderException nsfe) {
-		folderId = DLFolderImpl.DEFAULT_PARENT_FOLDER_ID;
+		folderId = DLFolderConstants.DEFAULT_PARENT_FOLDER_ID;
 	}
 }
 
@@ -308,7 +308,7 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 				sb.insert(0, WebDAVUtil.encodeURL(curFolder.getName()));
 				sb.insert(0, StringPool.SLASH);
 
-				if (curFolder.getParentFolderId() == DLFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
+				if (curFolder.getParentFolderId() == DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
 					break;
 				}
 				else {
