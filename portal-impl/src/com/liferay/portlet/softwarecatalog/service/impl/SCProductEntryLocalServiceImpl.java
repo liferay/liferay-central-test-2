@@ -425,6 +425,10 @@ public class SCProductEntryLocalServiceImpl
 			return;
 		}
 
+		reIndex(productEntry);
+	}
+
+	public void reIndex(SCProductEntry productEntry) throws SystemException {
 		String version = StringPool.BLANK;
 
 		SCProductVersion latestProductVersion = productEntry.getLatestVersion();
@@ -437,7 +441,7 @@ public class SCProductEntryLocalServiceImpl
 			Indexer.updateProductEntry(
 				productEntry.getCompanyId(), productEntry.getGroupId(),
 				productEntry.getUserId(), productEntry.getUserName(),
-				productEntryId, productEntry.getName(),
+				productEntry.getProductEntryId(), productEntry.getName(),
 				productEntry.getModifiedDate(), version, productEntry.getType(),
 				productEntry.getShortDescription(),
 				productEntry.getLongDescription(), productEntry.getPageURL(),
@@ -445,7 +449,7 @@ public class SCProductEntryLocalServiceImpl
 				productEntry.getExpandoBridge());
 		}
 		catch (SearchException se) {
-			_log.error("Reindexing " + productEntryId, se);
+			_log.error("Reindexing " + productEntry.getProductEntryId(), se);
 		}
 	}
 
@@ -457,39 +461,7 @@ public class SCProductEntryLocalServiceImpl
 		long companyId = GetterUtil.getLong(ids[0]);
 
 		try {
-			List<SCProductEntry> productEntries =
-				scProductEntryPersistence.findByCompanyId(companyId);
-
-			for (SCProductEntry productEntry : productEntries) {
-				long productEntryId = productEntry.getProductEntryId();
-
-				String version = StringPool.BLANK;
-
-				SCProductVersion latestProductVersion =
-					productEntry.getLatestVersion();
-
-				if (latestProductVersion != null) {
-					version = latestProductVersion.getVersion();
-				}
-
-				try {
-					Indexer.updateProductEntry(
-						companyId, productEntry.getGroupId(),
-						productEntry.getUserId(), productEntry.getUserName(),
-						productEntryId, productEntry.getName(),
-						productEntry.getModifiedDate(), version,
-						productEntry.getType(),
-						productEntry.getShortDescription(),
-						productEntry.getLongDescription(),
-						productEntry.getPageURL(),
-						productEntry.getRepoGroupId(),
-						productEntry.getRepoArtifactId(),
-						productEntry.getExpandoBridge());
-				}
-				catch (SearchException se) {
-					_log.error("Reindexing " + productEntryId, se);
-				}
-			}
+			reIndexProductEntries(companyId);
 		}
 		catch (SystemException se) {
 			throw se;
@@ -748,6 +720,32 @@ public class SCProductEntryLocalServiceImpl
 
 			settingEl.addAttribute("name", key);
 			settingEl.addAttribute("value", repoSettings.getProperty(key));
+		}
+	}
+
+	protected void reIndexProductEntries(long companyId)
+		throws SystemException {
+
+		int count = scProductEntryPersistence.countByCompanyId(companyId);
+
+		int pages = count / Indexer.DEFAULT_INTERVAL;
+
+		for (int i = 0; i <= pages; i++) {
+			int start = (i * Indexer.DEFAULT_INTERVAL);
+			int end = start + Indexer.DEFAULT_INTERVAL;
+
+			reIndexProductEntries(companyId, start, end);
+		}
+	}
+
+	protected void reIndexProductEntries(long companyId, int start, int end)
+		throws SystemException {
+
+		List<SCProductEntry> productEntries =
+			scProductEntryPersistence.findByCompanyId(companyId, start, end);
+
+		for (SCProductEntry productEntry : productEntries) {
+			reIndex(productEntry);
 		}
 	}
 
