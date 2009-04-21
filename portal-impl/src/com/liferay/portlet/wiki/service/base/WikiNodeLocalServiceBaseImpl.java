@@ -40,10 +40,6 @@ import com.liferay.portal.service.persistence.SubscriptionPersistence;
 import com.liferay.portal.service.persistence.UserFinder;
 import com.liferay.portal.service.persistence.UserPersistence;
 
-import com.liferay.portlet.tags.service.TagsEntryLocalService;
-import com.liferay.portlet.tags.service.TagsEntryService;
-import com.liferay.portlet.tags.service.persistence.TagsEntryFinder;
-import com.liferay.portlet.tags.service.persistence.TagsEntryPersistence;
 import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.service.WikiNodeLocalService;
 import com.liferay.portlet.wiki.service.WikiNodeService;
@@ -296,40 +292,6 @@ public abstract class WikiNodeLocalServiceBaseImpl
 		this.userFinder = userFinder;
 	}
 
-	public TagsEntryLocalService getTagsEntryLocalService() {
-		return tagsEntryLocalService;
-	}
-
-	public void setTagsEntryLocalService(
-		TagsEntryLocalService tagsEntryLocalService) {
-		this.tagsEntryLocalService = tagsEntryLocalService;
-	}
-
-	public TagsEntryService getTagsEntryService() {
-		return tagsEntryService;
-	}
-
-	public void setTagsEntryService(TagsEntryService tagsEntryService) {
-		this.tagsEntryService = tagsEntryService;
-	}
-
-	public TagsEntryPersistence getTagsEntryPersistence() {
-		return tagsEntryPersistence;
-	}
-
-	public void setTagsEntryPersistence(
-		TagsEntryPersistence tagsEntryPersistence) {
-		this.tagsEntryPersistence = tagsEntryPersistence;
-	}
-
-	public TagsEntryFinder getTagsEntryFinder() {
-		return tagsEntryFinder;
-	}
-
-	public void setTagsEntryFinder(TagsEntryFinder tagsEntryFinder) {
-		this.tagsEntryFinder = tagsEntryFinder;
-	}
-
 	@BeanReference(name = "com.liferay.portlet.wiki.service.WikiNodeLocalService.impl")
 	protected WikiNodeLocalService wikiNodeLocalService;
 	@BeanReference(name = "com.liferay.portlet.wiki.service.WikiNodeService.impl")
@@ -372,12 +334,4 @@ public abstract class WikiNodeLocalServiceBaseImpl
 	protected UserPersistence userPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.UserFinder.impl")
 	protected UserFinder userFinder;
-	@BeanReference(name = "com.liferay.portlet.tags.service.TagsEntryLocalService.impl")
-	protected TagsEntryLocalService tagsEntryLocalService;
-	@BeanReference(name = "com.liferay.portlet.tags.service.TagsEntryService.impl")
-	protected TagsEntryService tagsEntryService;
-	@BeanReference(name = "com.liferay.portlet.tags.service.persistence.TagsEntryPersistence.impl")
-	protected TagsEntryPersistence tagsEntryPersistence;
-	@BeanReference(name = "com.liferay.portlet.tags.service.persistence.TagsEntryFinder.impl")
-	protected TagsEntryFinder tagsEntryFinder;
 }

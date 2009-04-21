@@ -44,7 +44,6 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.portlet.tags.model.TagsEntryConstants;
 import com.liferay.portlet.wiki.DuplicateNodeNameException;
 import com.liferay.portlet.wiki.NodeNameException;
 import com.liferay.portlet.wiki.importers.WikiImporter;
@@ -265,44 +264,7 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 		long companyId = GetterUtil.getLong(ids[0]);
 
 		try {
-			Iterator<WikiNode> nodesItr = wikiNodePersistence.findByCompanyId(
-				companyId).iterator();
-
-			while (nodesItr.hasNext()) {
-				WikiNode node = nodesItr.next();
-
-				long nodeId = node.getNodeId();
-
-				Iterator<WikiPage> pagesItr = wikiPagePersistence.findByN_H(
-					nodeId, true).iterator();
-
-				while (pagesItr.hasNext()) {
-					WikiPage page = pagesItr.next();
-
-					long groupId = node.getGroupId();
-					long resourcePrimKey = page.getResourcePrimKey();
-					String title = page.getTitle();
-					String content = page.getContent();
-					Date modifiedDate = page.getModifiedDate();
-
-					String[] tagsCategories =
-						tagsEntryLocalService.getEntryNames(
-							WikiPage.class.getName(), resourcePrimKey,
-							TagsEntryConstants.FOLKSONOMY_CATEGORY);
-					String[] tagsEntries = tagsEntryLocalService.getEntryNames(
-						WikiPage.class.getName(), resourcePrimKey);
-
-					try {
-						Indexer.updatePage(
-							companyId, groupId, resourcePrimKey, nodeId, title,
-							content, modifiedDate, tagsCategories, tagsEntries,
-							page.getExpandoBridge());
-					}
-					catch (SearchException se) {
-						_log.error("Reindexing " + page.getPrimaryKey(), se);
-					}
-				}
-			}
+			reIndexNodes(companyId);
 		}
 		catch (SystemException se) {
 			throw se;
@@ -426,6 +388,52 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 		}
 
 		return wikiImporter;
+	}
+
+	protected void reIndexNodes(long companyId) throws SystemException {
+		int nodeCount = wikiNodePersistence.countByCompanyId(companyId);
+
+		int nodePages = nodeCount / Indexer.DEFAULT_INTERVAL;
+
+		for (int i = 0; i <= nodePages; i++) {
+			int nodeStart = (i * Indexer.DEFAULT_INTERVAL);
+			int nodeEnd = nodeStart + Indexer.DEFAULT_INTERVAL;
+
+			reIndexNodes(companyId, nodeStart, nodeEnd);
+		}
+	}
+
+	protected void reIndexNodes(long companyId, int nodeStart, int nodeEnd)
+		throws SystemException {
+
+		List<WikiNode> nodes = wikiNodePersistence.findByCompanyId(
+			companyId, nodeStart, nodeEnd);
+
+		for (WikiNode node : nodes) {
+			long nodeId = node.getNodeId();
+
+			int pageCount = wikiPagePersistence.countByN_H(nodeId, true);
+
+			int pagePages = pageCount / Indexer.DEFAULT_INTERVAL;
+
+			for (int i = 0; i <= pagePages; i++) {
+				int pageStart = (i * Indexer.DEFAULT_INTERVAL);
+				int pageEnd = pageStart + Indexer.DEFAULT_INTERVAL;
+
+				reIndexPages(nodeId, pageStart, pageEnd);
+			}
+		}
+	}
+
+	protected void reIndexPages(long nodeId, int pageStart, int pageEnd)
+		throws SystemException {
+
+		List<WikiPage> pages = wikiPagePersistence.findByN_H(
+			nodeId, true, pageStart, pageEnd);
+
+		for (WikiPage page : pages) {
+			wikiPageLocalService.reIndex(page);
+		}
 	}
 
 	protected void validate(long groupId, String name)

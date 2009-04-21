@@ -59,6 +59,7 @@ import com.liferay.portal.util.Portal;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsValues;
+import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.tags.model.TagsEntryConstants;
 import com.liferay.portlet.wiki.DuplicatePageException;
 import com.liferay.portlet.wiki.NoSuchPageException;
@@ -206,16 +207,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		// Indexer
 
-		try {
-			Indexer.addPage(
-				page.getCompanyId(), page.getGroupId(), resourcePrimKey, nodeId,
-				title, content, page.getModifiedDate(),
-				serviceContext.getTagsCategories(),
-				serviceContext.getTagsEntries(), page.getExpandoBridge());
-		}
-		catch (SearchException se) {
-			_log.error("Indexing " + pageId, se);
-		}
+		reIndex(page);
 
 		// Cache
 
@@ -848,17 +840,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		// Indexer
 
-		try {
-			Indexer.updatePage(
-				page.getCompanyId(), page.getGroupId(), resourcePrimKey, nodeId,
-				newTitle, page.getContent(), page.getModifiedDate(),
-				tagsCategories, tagsEntries, page.getExpandoBridge());
-
-			Indexer.deletePage(page.getCompanyId(), page.getGroupId(), title);
-		}
-		catch (SearchException se) {
-			_log.error("Indexing " + newTitle, se);
-		}
+		reIndex(page);
 	}
 
 	public void reIndex(long resourcePrimKey) throws SystemException {
@@ -875,8 +857,17 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			return;
 		}
 
+		reIndex(page);
+	}
+
+	public void reIndex(WikiPage page) throws SystemException {
+		if (Validator.isNull(page.getRedirectTitle())) {
+			return;
+		}
+
 		long companyId = page.getCompanyId();
 		long groupId = page.getGroupId();
+		long resourcePrimKey = page.getResourcePrimKey();
 		long nodeId = page.getNodeId();
 		String title = page.getTitle();
 		String content = page.getContent();
@@ -888,13 +879,12 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		String[] tagsEntries = tagsEntryLocalService.getEntryNames(
 			WikiPage.class.getName(), resourcePrimKey);
 
+		ExpandoBridge expandoBridge = page.getExpandoBridge();
+
 		try {
-			if (Validator.isNull(page.getRedirectTitle())) {
-				Indexer.updatePage(
-					companyId, groupId, resourcePrimKey, nodeId, title, content,
-					modifiedDate, tagsCategories, tagsEntries,
-					page.getExpandoBridge());
-			}
+			Indexer.updatePage(
+				companyId, groupId, resourcePrimKey, nodeId, title, content,
+				modifiedDate, tagsCategories, tagsEntries, expandoBridge);
 		}
 		catch (SearchException se) {
 			_log.error("Reindexing " + page.getPrimaryKey(), se);
@@ -1034,18 +1024,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		// Indexer
 
-		try {
-			if (Validator.isNull(page.getRedirectTitle())) {
-				Indexer.updatePage(
-					page.getCompanyId(), page.getGroupId(), resourcePrimKey,
-					nodeId, title, content, page.getModifiedDate(),
-					serviceContext.getTagsCategories(),
-					serviceContext.getTagsEntries(), page.getExpandoBridge());
-			}
-		}
-		catch (SearchException se) {
-			_log.error("Indexing " + page.getPrimaryKey(), se);
-		}
+		reIndex(page);
 
 		// Cache
 
