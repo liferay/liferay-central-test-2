@@ -57,6 +57,7 @@ public class BookmarksEntryJSONSerializer {
 
 		jsonObj.put("uuid", model.getUuid());
 		jsonObj.put("entryId", model.getEntryId());
+		jsonObj.put("groupId", model.getGroupId());
 		jsonObj.put("companyId", model.getCompanyId());
 		jsonObj.put("userId", model.getUserId());
 

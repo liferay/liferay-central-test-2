@@ -52,6 +52,7 @@ public class BookmarksEntrySoap implements Serializable {
 
 		soapModel.setUuid(model.getUuid());
 		soapModel.setEntryId(model.getEntryId());
+		soapModel.setGroupId(model.getGroupId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserId(model.getUserId());
 		soapModel.setCreateDate(model.getCreateDate());
@@ -101,6 +102,14 @@ public class BookmarksEntrySoap implements Serializable {
 
 	public void setEntryId(long entryId) {
 		_entryId = entryId;
+	}
+
+	public long getGroupId() {
+		return _groupId;
+	}
+
+	public void setGroupId(long groupId) {
+		_groupId = groupId;
 	}
 
 	public long getCompanyId() {
@@ -185,6 +194,7 @@ public class BookmarksEntrySoap implements Serializable {
 
 	private String _uuid;
 	private long _entryId;
+	private long _groupId;
 	private long _companyId;
 	private long _userId;
 	private Date _createDate;

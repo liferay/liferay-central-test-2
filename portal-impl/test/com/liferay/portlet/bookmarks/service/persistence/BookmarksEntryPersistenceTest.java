@@ -73,6 +73,7 @@ public class BookmarksEntryPersistenceTest extends BasePersistenceTestCase {
 		BookmarksEntry newBookmarksEntry = _persistence.create(pk);
 
 		newBookmarksEntry.setUuid(randomString());
+		newBookmarksEntry.setGroupId(nextLong());
 		newBookmarksEntry.setCompanyId(nextLong());
 		newBookmarksEntry.setUserId(nextLong());
 		newBookmarksEntry.setCreateDate(nextDate());
@@ -92,6 +93,8 @@ public class BookmarksEntryPersistenceTest extends BasePersistenceTestCase {
 			newBookmarksEntry.getUuid());
 		assertEquals(existingBookmarksEntry.getEntryId(),
 			newBookmarksEntry.getEntryId());
+		assertEquals(existingBookmarksEntry.getGroupId(),
+			newBookmarksEntry.getGroupId());
 		assertEquals(existingBookmarksEntry.getCompanyId(),
 			newBookmarksEntry.getCompanyId());
 		assertEquals(existingBookmarksEntry.getUserId(),
@@ -157,6 +160,7 @@ public class BookmarksEntryPersistenceTest extends BasePersistenceTestCase {
 		BookmarksEntry bookmarksEntry = _persistence.create(pk);
 
 		bookmarksEntry.setUuid(randomString());
+		bookmarksEntry.setGroupId(nextLong());
 		bookmarksEntry.setCompanyId(nextLong());
 		bookmarksEntry.setUserId(nextLong());
 		bookmarksEntry.setCreateDate(nextDate());

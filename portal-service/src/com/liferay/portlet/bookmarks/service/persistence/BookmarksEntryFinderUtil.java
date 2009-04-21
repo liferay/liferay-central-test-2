@@ -34,38 +34,9 @@ public class BookmarksEntryFinderUtil {
 		return getFinder().countByFolderIds(folderIds);
 	}
 
-	public static int countByGroupId(long groupId)
-		throws com.liferay.portal.SystemException {
-		return getFinder().countByGroupId(groupId);
-	}
-
-	public static int countByG_U(long groupId, long userId)
-		throws com.liferay.portal.SystemException {
-		return getFinder().countByG_U(groupId, userId);
-	}
-
-	public static java.util.List<com.liferay.portlet.bookmarks.model.BookmarksEntry> findByGroupId(
-		long groupId, int start, int end)
-		throws com.liferay.portal.SystemException {
-		return getFinder().findByGroupId(groupId, start, end);
-	}
-
 	public static java.util.List<com.liferay.portlet.bookmarks.model.BookmarksEntry> findByNoAssets()
 		throws com.liferay.portal.SystemException {
 		return getFinder().findByNoAssets();
-	}
-
-	public static com.liferay.portlet.bookmarks.model.BookmarksEntry findByUuid_G(
-		java.lang.String uuid, long groupId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.bookmarks.NoSuchEntryException {
-		return getFinder().findByUuid_G(uuid, groupId);
-	}
-
-	public static java.util.List<com.liferay.portlet.bookmarks.model.BookmarksEntry> findByG_U(
-		long groupId, long userId, int start, int end)
-		throws com.liferay.portal.SystemException {
-		return getFinder().findByG_U(groupId, userId, start, end);
 	}
 
 	public static BookmarksEntryFinder getFinder() {

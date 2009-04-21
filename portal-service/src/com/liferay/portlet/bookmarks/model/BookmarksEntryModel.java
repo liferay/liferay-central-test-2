@@ -59,6 +59,10 @@ public interface BookmarksEntryModel extends BaseModel<BookmarksEntry> {
 
 	public void setEntryId(long entryId);
 
+	public long getGroupId();
+
+	public void setGroupId(long groupId);
+
 	public long getCompanyId();
 
 	public void setCompanyId(long companyId);

@@ -682,9 +682,14 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 			return;
 		}
 
+		reIndex(event);
+	}
+
+	public void reIndex(CalEvent event) throws SystemException {
 		long companyId = event.getCompanyId();
 		long groupId = event.getGroupId();
 		long userId = event.getUserId();
+		long eventId = event.getEventId();
 		String userName = event.getUserName();
 		String title = event.getTitle();
 		String description = event.getDescription();

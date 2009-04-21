@@ -283,7 +283,7 @@ public class BookmarksEntryLocalServiceImpl
 			long groupId, int start, int end)
 		throws SystemException {
 
-		return bookmarksEntryFinder.findByGroupId(groupId, start, end);
+		return bookmarksEntryPersistence.findByGroupId(groupId, start, end);
 	}
 
 	public List<BookmarksEntry> getGroupEntries(
@@ -291,25 +291,26 @@ public class BookmarksEntryLocalServiceImpl
 		throws SystemException {
 
 		if (userId <= 0) {
-			return bookmarksEntryFinder.findByGroupId(groupId, start, end);
+			return bookmarksEntryPersistence.findByGroupId(groupId, start, end);
 		}
 		else {
-			return bookmarksEntryFinder.findByG_U(groupId, userId, start, end);
+			return bookmarksEntryPersistence.findByG_U(
+				groupId, userId, start, end);
 		}
 	}
 
 	public int getGroupEntriesCount(long groupId) throws SystemException {
-		return bookmarksEntryFinder.countByGroupId(groupId);
+		return bookmarksEntryPersistence.countByGroupId(groupId);
 	}
 
 	public int getGroupEntriesCount(long groupId, long userId)
 		throws SystemException {
 
 		if (userId <= 0) {
-			return bookmarksEntryFinder.countByGroupId(groupId);
+			return bookmarksEntryPersistence.countByGroupId(groupId);
 		}
 		else {
-			return bookmarksEntryFinder.countByG_U(groupId, userId);
+			return bookmarksEntryPersistence.countByG_U(groupId, userId);
 		}
 	}
 
@@ -345,12 +346,14 @@ public class BookmarksEntryLocalServiceImpl
 			return;
 		}
 
-		BookmarksFolder folder = bookmarksFolderPersistence.fetchByPrimaryKey(
-			entry.getFolderId());
+		reIndex(entry);
+	}
 
-		long companyId = folder.getCompanyId();
-		long groupId = folder.getGroupId();
-		long folderId = folder.getFolderId();
+	public void reIndex(BookmarksEntry entry) throws SystemException {
+		long companyId = entry.getCompanyId();
+		long groupId = entry.getGroupId();
+		long folderId = entry.getFolderId();
+		long entryId = entry.getEntryId();
 		String name = entry.getName();
 		String url = entry.getUrl();
 		String comments = entry.getComments();
@@ -361,8 +364,8 @@ public class BookmarksEntryLocalServiceImpl
 
 		try {
 			Indexer.updateEntry(
-				companyId, groupId, folderId, entryId, name, url,
-				comments, modifiedDate, tagsEntries, entry.getExpandoBridge());
+				companyId, groupId, folderId, entryId, name, url, comments,
+				modifiedDate, tagsEntries, entry.getExpandoBridge());
 		}
 		catch (SearchException se) {
 			_log.error("Reindexing " + entryId, se);

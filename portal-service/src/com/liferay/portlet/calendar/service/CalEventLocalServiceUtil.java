@@ -281,6 +281,12 @@ public class CalEventLocalServiceUtil {
 		getService().reIndex(eventId);
 	}
 
+	public static void reIndex(
+		com.liferay.portlet.calendar.model.CalEvent event)
+		throws com.liferay.portal.SystemException {
+		getService().reIndex(event);
+	}
+
 	public static void reIndex(java.lang.String[] ids)
 		throws com.liferay.portal.SystemException {
 		getService().reIndex(ids);

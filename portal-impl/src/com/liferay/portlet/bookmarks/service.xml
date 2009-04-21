@@ -9,6 +9,10 @@
 
 		<column name="entryId" type="long" primary="true" />
 
+		<!-- Group instance -->
+
+		<column name="groupId" type="long" />
+
 		<!-- Audit fields -->
 
 		<column name="companyId" type="long" />
@@ -34,8 +38,15 @@
 
 		<!-- Finder methods -->
 
+		<finder name="GroupId" return-type="Collection">
+			<finder-column name="groupId" />
+		</finder>
 		<finder name="FolderId" return-type="Collection">
 			<finder-column name="folderId" />
+		</finder>
+		<finder name="G_U" return-type="Collection">
+			<finder-column name="groupId" />
+			<finder-column name="userId" />
 		</finder>
 
 		<!-- References -->

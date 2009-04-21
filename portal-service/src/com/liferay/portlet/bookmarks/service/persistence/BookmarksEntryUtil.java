@@ -145,6 +145,65 @@ public class BookmarksEntryUtil {
 		return getPersistence().findByUuid_PrevAndNext(entryId, uuid, obc);
 	}
 
+	public static com.liferay.portlet.bookmarks.model.BookmarksEntry findByUUID_G(
+		java.lang.String uuid, long groupId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.bookmarks.NoSuchEntryException {
+		return getPersistence().findByUUID_G(uuid, groupId);
+	}
+
+	public static com.liferay.portlet.bookmarks.model.BookmarksEntry fetchByUUID_G(
+		java.lang.String uuid, long groupId)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByUUID_G(uuid, groupId);
+	}
+
+	public static com.liferay.portlet.bookmarks.model.BookmarksEntry fetchByUUID_G(
+		java.lang.String uuid, long groupId, boolean retrieveFromCache)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByUUID_G(uuid, groupId, retrieveFromCache);
+	}
+
+	public static java.util.List<com.liferay.portlet.bookmarks.model.BookmarksEntry> findByGroupId(
+		long groupId) throws com.liferay.portal.SystemException {
+		return getPersistence().findByGroupId(groupId);
+	}
+
+	public static java.util.List<com.liferay.portlet.bookmarks.model.BookmarksEntry> findByGroupId(
+		long groupId, int start, int end)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByGroupId(groupId, start, end);
+	}
+
+	public static java.util.List<com.liferay.portlet.bookmarks.model.BookmarksEntry> findByGroupId(
+		long groupId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByGroupId(groupId, start, end, obc);
+	}
+
+	public static com.liferay.portlet.bookmarks.model.BookmarksEntry findByGroupId_First(
+		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.bookmarks.NoSuchEntryException {
+		return getPersistence().findByGroupId_First(groupId, obc);
+	}
+
+	public static com.liferay.portlet.bookmarks.model.BookmarksEntry findByGroupId_Last(
+		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.bookmarks.NoSuchEntryException {
+		return getPersistence().findByGroupId_Last(groupId, obc);
+	}
+
+	public static com.liferay.portlet.bookmarks.model.BookmarksEntry[] findByGroupId_PrevAndNext(
+		long entryId, long groupId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.bookmarks.NoSuchEntryException {
+		return getPersistence().findByGroupId_PrevAndNext(entryId, groupId, obc);
+	}
+
 	public static java.util.List<com.liferay.portlet.bookmarks.model.BookmarksEntry> findByFolderId(
 		long folderId) throws com.liferay.portal.SystemException {
 		return getPersistence().findByFolderId(folderId);
@@ -186,6 +245,49 @@ public class BookmarksEntryUtil {
 				   .findByFolderId_PrevAndNext(entryId, folderId, obc);
 	}
 
+	public static java.util.List<com.liferay.portlet.bookmarks.model.BookmarksEntry> findByG_U(
+		long groupId, long userId) throws com.liferay.portal.SystemException {
+		return getPersistence().findByG_U(groupId, userId);
+	}
+
+	public static java.util.List<com.liferay.portlet.bookmarks.model.BookmarksEntry> findByG_U(
+		long groupId, long userId, int start, int end)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByG_U(groupId, userId, start, end);
+	}
+
+	public static java.util.List<com.liferay.portlet.bookmarks.model.BookmarksEntry> findByG_U(
+		long groupId, long userId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByG_U(groupId, userId, start, end, obc);
+	}
+
+	public static com.liferay.portlet.bookmarks.model.BookmarksEntry findByG_U_First(
+		long groupId, long userId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.bookmarks.NoSuchEntryException {
+		return getPersistence().findByG_U_First(groupId, userId, obc);
+	}
+
+	public static com.liferay.portlet.bookmarks.model.BookmarksEntry findByG_U_Last(
+		long groupId, long userId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.bookmarks.NoSuchEntryException {
+		return getPersistence().findByG_U_Last(groupId, userId, obc);
+	}
+
+	public static com.liferay.portlet.bookmarks.model.BookmarksEntry[] findByG_U_PrevAndNext(
+		long entryId, long groupId, long userId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.bookmarks.NoSuchEntryException {
+		return getPersistence()
+				   .findByG_U_PrevAndNext(entryId, groupId, userId, obc);
+	}
+
 	public static java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
@@ -219,9 +321,25 @@ public class BookmarksEntryUtil {
 		getPersistence().removeByUuid(uuid);
 	}
 
+	public static void removeByUUID_G(java.lang.String uuid, long groupId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.bookmarks.NoSuchEntryException {
+		getPersistence().removeByUUID_G(uuid, groupId);
+	}
+
+	public static void removeByGroupId(long groupId)
+		throws com.liferay.portal.SystemException {
+		getPersistence().removeByGroupId(groupId);
+	}
+
 	public static void removeByFolderId(long folderId)
 		throws com.liferay.portal.SystemException {
 		getPersistence().removeByFolderId(folderId);
+	}
+
+	public static void removeByG_U(long groupId, long userId)
+		throws com.liferay.portal.SystemException {
+		getPersistence().removeByG_U(groupId, userId);
 	}
 
 	public static void removeAll() throws com.liferay.portal.SystemException {
@@ -233,9 +351,24 @@ public class BookmarksEntryUtil {
 		return getPersistence().countByUuid(uuid);
 	}
 
+	public static int countByUUID_G(java.lang.String uuid, long groupId)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByUUID_G(uuid, groupId);
+	}
+
+	public static int countByGroupId(long groupId)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByGroupId(groupId);
+	}
+
 	public static int countByFolderId(long folderId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByFolderId(folderId);
+	}
+
+	public static int countByG_U(long groupId, long userId)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByG_U(groupId, userId);
 	}
 
 	public static int countAll() throws com.liferay.portal.SystemException {

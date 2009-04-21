@@ -208,6 +208,11 @@ public interface BookmarksEntryLocalService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public void reIndex(long entryId) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public void reIndex(
+		com.liferay.portlet.bookmarks.model.BookmarksEntry entry)
+		throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.bookmarks.model.BookmarksEntry updateEntry(
 		long userId, long entryId, long folderId, java.lang.String name,
 		java.lang.String url, java.lang.String comments,

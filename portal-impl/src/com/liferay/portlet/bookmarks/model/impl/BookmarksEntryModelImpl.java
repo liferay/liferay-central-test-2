@@ -71,6 +71,9 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry> {
 			{ "entryId", new Integer(Types.BIGINT) },
 			
 
+			{ "groupId", new Integer(Types.BIGINT) },
+			
+
 			{ "companyId", new Integer(Types.BIGINT) },
 			
 
@@ -100,7 +103,7 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry> {
 
 			{ "priority", new Integer(Types.INTEGER) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table BookmarksEntry (uuid_ VARCHAR(75) null,entryId LONG not null primary key,companyId LONG,userId LONG,createDate DATE null,modifiedDate DATE null,folderId LONG,name VARCHAR(255) null,url STRING null,comments STRING null,visits INTEGER,priority INTEGER)";
+	public static final String TABLE_SQL_CREATE = "create table BookmarksEntry (uuid_ VARCHAR(75) null,entryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,createDate DATE null,modifiedDate DATE null,folderId LONG,name VARCHAR(255) null,url STRING null,comments STRING null,visits INTEGER,priority INTEGER)";
 	public static final String TABLE_SQL_DROP = "drop table BookmarksEntry";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -117,6 +120,7 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry> {
 
 		model.setUuid(soapModel.getUuid());
 		model.setEntryId(soapModel.getEntryId());
+		model.setGroupId(soapModel.getGroupId());
 		model.setCompanyId(soapModel.getCompanyId());
 		model.setUserId(soapModel.getUserId());
 		model.setCreateDate(soapModel.getCreateDate());
@@ -165,6 +169,14 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry> {
 
 	public void setUuid(String uuid) {
 		_uuid = uuid;
+
+		if (_originalUuid == null) {
+			_originalUuid = uuid;
+		}
+	}
+
+	public String getOriginalUuid() {
+		return GetterUtil.getString(_originalUuid);
 	}
 
 	public long getEntryId() {
@@ -173,6 +185,24 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry> {
 
 	public void setEntryId(long entryId) {
 		_entryId = entryId;
+	}
+
+	public long getGroupId() {
+		return _groupId;
+	}
+
+	public void setGroupId(long groupId) {
+		_groupId = groupId;
+
+		if (!_setOriginalGroupId) {
+			_setOriginalGroupId = true;
+
+			_originalGroupId = groupId;
+		}
+	}
+
+	public long getOriginalGroupId() {
+		return _originalGroupId;
 	}
 
 	public long getCompanyId() {
@@ -267,6 +297,7 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry> {
 
 			model.setUuid(HtmlUtil.escape(getUuid()));
 			model.setEntryId(getEntryId());
+			model.setGroupId(getGroupId());
 			model.setCompanyId(getCompanyId());
 			model.setUserId(getUserId());
 			model.setCreateDate(getCreateDate());
@@ -300,6 +331,7 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry> {
 
 		clone.setUuid(getUuid());
 		clone.setEntryId(getEntryId());
+		clone.setGroupId(getGroupId());
 		clone.setCompanyId(getCompanyId());
 		clone.setUserId(getUserId());
 		clone.setCreateDate(getCreateDate());
@@ -370,7 +402,11 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry> {
 	}
 
 	private String _uuid;
+	private String _originalUuid;
 	private long _entryId;
+	private long _groupId;
+	private long _originalGroupId;
+	private boolean _setOriginalGroupId;
 	private long _companyId;
 	private long _userId;
 	private Date _createDate;

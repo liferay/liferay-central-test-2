@@ -1,3 +1,5 @@
+alter table BookmarksEntry add groupId LONG;
+
 update Group_ set name = classPK where classPK > 0 and name = '';
 
 alter table JournalArticle add urlTitle VARCHAR(150) null;

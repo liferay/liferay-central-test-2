@@ -22,6 +22,7 @@
 
 package com.liferay.portal.upgrade.v5_2_3;
 
+import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.upgrade.UpgradeException;
@@ -29,6 +30,10 @@ import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
 import com.liferay.portal.upgrade.util.UpgradeTable;
 import com.liferay.portlet.bookmarks.model.impl.BookmarksEntryImpl;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 /**
  * <a href="UpgradeBookmarks.java.html"><b><i>View Source</i></b></a>
@@ -64,6 +69,37 @@ public class UpgradeBookmarks extends UpgradeProcess {
 			upgradeTable.setCreateSQL(BookmarksEntryImpl.TABLE_SQL_CREATE);
 
 			upgradeTable.updateTable();
+		}
+
+		// groupId
+
+		updateGroupId();
+	}
+
+	protected void updateGroupId() throws Exception {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = DataAccess.getConnection();
+
+			ps = con.prepareStatement(
+				"select folderId, groupId from BookmarksFolder");
+
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				long folderId = rs.getLong("folderId");
+				long groupId = rs.getLong("groupId");
+
+				runSQL(
+					"update BookmarksEntry set groupId = " + groupId +
+						" where folderId = " + folderId);
+			}
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
 		}
 	}
 

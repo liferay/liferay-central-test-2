@@ -115,6 +115,47 @@ public interface BookmarksEntryPersistence extends BasePersistence {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.bookmarks.NoSuchEntryException;
 
+	public com.liferay.portlet.bookmarks.model.BookmarksEntry findByUUID_G(
+		java.lang.String uuid, long groupId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.bookmarks.NoSuchEntryException;
+
+	public com.liferay.portlet.bookmarks.model.BookmarksEntry fetchByUUID_G(
+		java.lang.String uuid, long groupId)
+		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.bookmarks.model.BookmarksEntry fetchByUUID_G(
+		java.lang.String uuid, long groupId, boolean retrieveFromCache)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.bookmarks.model.BookmarksEntry> findByGroupId(
+		long groupId) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.bookmarks.model.BookmarksEntry> findByGroupId(
+		long groupId, int start, int end)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.bookmarks.model.BookmarksEntry> findByGroupId(
+		long groupId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.bookmarks.model.BookmarksEntry findByGroupId_First(
+		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.bookmarks.NoSuchEntryException;
+
+	public com.liferay.portlet.bookmarks.model.BookmarksEntry findByGroupId_Last(
+		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.bookmarks.NoSuchEntryException;
+
+	public com.liferay.portlet.bookmarks.model.BookmarksEntry[] findByGroupId_PrevAndNext(
+		long entryId, long groupId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.bookmarks.NoSuchEntryException;
+
 	public java.util.List<com.liferay.portlet.bookmarks.model.BookmarksEntry> findByFolderId(
 		long folderId) throws com.liferay.portal.SystemException;
 
@@ -143,6 +184,36 @@ public interface BookmarksEntryPersistence extends BasePersistence {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.bookmarks.NoSuchEntryException;
 
+	public java.util.List<com.liferay.portlet.bookmarks.model.BookmarksEntry> findByG_U(
+		long groupId, long userId) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.bookmarks.model.BookmarksEntry> findByG_U(
+		long groupId, long userId, int start, int end)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.bookmarks.model.BookmarksEntry> findByG_U(
+		long groupId, long userId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.bookmarks.model.BookmarksEntry findByG_U_First(
+		long groupId, long userId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.bookmarks.NoSuchEntryException;
+
+	public com.liferay.portlet.bookmarks.model.BookmarksEntry findByG_U_Last(
+		long groupId, long userId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.bookmarks.NoSuchEntryException;
+
+	public com.liferay.portlet.bookmarks.model.BookmarksEntry[] findByG_U_PrevAndNext(
+		long entryId, long groupId, long userId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.bookmarks.NoSuchEntryException;
+
 	public java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException;
@@ -164,7 +235,17 @@ public interface BookmarksEntryPersistence extends BasePersistence {
 	public void removeByUuid(java.lang.String uuid)
 		throws com.liferay.portal.SystemException;
 
+	public void removeByUUID_G(java.lang.String uuid, long groupId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.bookmarks.NoSuchEntryException;
+
+	public void removeByGroupId(long groupId)
+		throws com.liferay.portal.SystemException;
+
 	public void removeByFolderId(long folderId)
+		throws com.liferay.portal.SystemException;
+
+	public void removeByG_U(long groupId, long userId)
 		throws com.liferay.portal.SystemException;
 
 	public void removeAll() throws com.liferay.portal.SystemException;
@@ -172,7 +253,16 @@ public interface BookmarksEntryPersistence extends BasePersistence {
 	public int countByUuid(java.lang.String uuid)
 		throws com.liferay.portal.SystemException;
 
+	public int countByUUID_G(java.lang.String uuid, long groupId)
+		throws com.liferay.portal.SystemException;
+
+	public int countByGroupId(long groupId)
+		throws com.liferay.portal.SystemException;
+
 	public int countByFolderId(long folderId)
+		throws com.liferay.portal.SystemException;
+
+	public int countByG_U(long groupId, long userId)
 		throws com.liferay.portal.SystemException;
 
 	public int countAll() throws com.liferay.portal.SystemException;

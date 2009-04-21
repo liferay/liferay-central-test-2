@@ -109,6 +109,7 @@ create table BlogsStatsUser (
 create table BookmarksEntry (
 	uuid_ VARCHAR(75) null,
 	entryId LONG not null primary key,
+	groupId LONG,
 	companyId LONG,
 	userId LONG,
 	createDate DATE null,

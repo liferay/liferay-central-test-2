@@ -33,7 +33,10 @@ create unique index IX_82254C25 on BlogsStatsUser (groupId, userId);
 create index IX_BB51F1D9 on BlogsStatsUser (userId);
 
 create index IX_443BDC38 on BookmarksEntry (folderId);
+create index IX_E52FF7EF on BookmarksEntry (groupId);
+create index IX_E2E9F129 on BookmarksEntry (groupId, userId);
 create index IX_B670BA39 on BookmarksEntry (uuid_);
+create unique index IX_EAA02A91 on BookmarksEntry (uuid_, groupId);
 
 create index IX_2ABA25D7 on BookmarksFolder (companyId);
 create index IX_7F703619 on BookmarksFolder (groupId);

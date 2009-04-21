@@ -599,7 +599,7 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 	}
 
 	protected void reIndexCategories(long companyId) throws SystemException {
-		int categoryCount = userPersistence.countByCompanyId(companyId);
+		int categoryCount = mbCategoryPersistence.countByCompanyId(companyId);
 
 		int categoryPages = categoryCount / Indexer.DEFAULT_INTERVAL;
 

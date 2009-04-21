@@ -32,7 +32,6 @@ import com.liferay.portal.kernel.search.BooleanQueryFactoryUtil;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
-import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.search.TermQuery;
 import com.liferay.portal.kernel.search.TermQueryFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -265,37 +264,7 @@ public class BookmarksFolderLocalServiceImpl
 		long companyId = GetterUtil.getLong(ids[0]);
 
 		try {
-			List<BookmarksFolder> folders =
-				bookmarksFolderPersistence.findByCompanyId(companyId);
-
-			for (BookmarksFolder folder : folders) {
-				long folderId = folder.getFolderId();
-
-				List<BookmarksEntry> entries =
-					bookmarksEntryPersistence.findByFolderId(folderId);
-
-				for (BookmarksEntry entry : entries) {
-					long groupId = folder.getGroupId();
-					long entryId = entry.getEntryId();
-					String name = entry.getName();
-					String url = entry.getUrl();
-					String comments = entry.getComments();
-					Date modifiedDate = entry.getModifiedDate();
-
-					String[] tagsEntries = tagsEntryLocalService.getEntryNames(
-						BookmarksEntry.class.getName(), entryId);
-
-					try {
-						Indexer.updateEntry(
-							companyId, groupId, folderId, entryId, name, url,
-							comments, modifiedDate, tagsEntries,
-							entry.getExpandoBridge());
-					}
-					catch (SearchException se) {
-						_log.error("Reindexing " + entryId, se);
-					}
-				}
-			}
+			reIndexFolders(companyId);
 		}
 		catch (SystemException se) {
 			throw se;
@@ -477,6 +446,56 @@ public class BookmarksFolderLocalServiceImpl
 		}
 
 		deleteFolder(fromFolder);
+	}
+
+	protected void reIndexFolders(long companyId) throws SystemException {
+		int folderCount = bookmarksFolderPersistence.countByCompanyId(
+			companyId);
+
+		int folderPages = folderCount / Indexer.DEFAULT_INTERVAL;
+
+		for (int i = 0; i <= folderPages; i++) {
+			int folderStart = (i * Indexer.DEFAULT_INTERVAL);
+			int folderEnd = folderStart + Indexer.DEFAULT_INTERVAL;
+
+			reIndexFolders(companyId, folderStart, folderEnd);
+		}
+	}
+
+	protected void reIndexFolders(
+			long companyId, int folderStart, int folderEnd)
+		throws SystemException {
+
+		List<BookmarksFolder> folders =
+			bookmarksFolderPersistence.findByCompanyId(
+				companyId, folderStart, folderEnd);
+
+		for (BookmarksFolder folder : folders) {
+			long folderId = folder.getFolderId();
+
+			int entryCount = bookmarksEntryPersistence.countByFolderId(
+				folderId);
+
+			int entryPages = entryCount / Indexer.DEFAULT_INTERVAL;
+
+			for (int i = 0; i <= entryPages; i++) {
+				int entryStart = (i * Indexer.DEFAULT_INTERVAL);
+				int entryEnd = entryStart + Indexer.DEFAULT_INTERVAL;
+
+				reIndexEntries(folderId, entryStart, entryEnd);
+			}
+		}
+	}
+
+	protected void reIndexEntries(long folderId, int entryStart, int entryEnd)
+		throws SystemException {
+
+		List<BookmarksEntry> entries = bookmarksEntryPersistence.findByFolderId(
+			folderId, entryStart, entryEnd);
+
+		for (BookmarksEntry entry : entries) {
+			bookmarksEntryLocalService.reIndex(entry);
+		}
 	}
 
 	protected void validate(String name) throws PortalException {

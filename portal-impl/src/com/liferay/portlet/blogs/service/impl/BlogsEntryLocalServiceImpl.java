@@ -518,10 +518,15 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			return;
 		}
 
+		reIndex(entry);
+	}
+
+	public void reIndex(BlogsEntry entry) throws SystemException {
 		long companyId = entry.getCompanyId();
 		long groupId = entry.getGroupId();
 		long userId = entry.getUserId();
 		String userName = entry.getUserName();
+		long entryId = entry.getEntryId();
 		String title = entry.getTitle();
 		String content = entry.getContent();
 		Date displayDate = entry.getDisplayDate();
@@ -547,30 +552,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		long companyId = GetterUtil.getLong(ids[0]);
 
 		try {
-			for (BlogsEntry entry :
-					blogsEntryPersistence.findByCompanyId(companyId)) {
-
-				long groupId = entry.getGroupId();
-				long userId = entry.getUserId();
-				String userName = entry.getUserName();
-				long entryId = entry.getEntryId();
-				String title = entry.getTitle();
-				String content = entry.getContent();
-				Date displayDate = entry.getDisplayDate();
-
-				String[] tagsEntries = tagsEntryLocalService.getEntryNames(
-					BlogsEntry.class.getName(), entryId);
-
-				try {
-					Indexer.updateEntry(
-						companyId, groupId, userId, userName, entryId, title,
-						content, displayDate, tagsEntries,
-						entry.getExpandoBridge());
-				}
-				catch (SearchException se) {
-					_log.error("Reindexing " + entryId, se);
-				}
-			}
+			reIndexEntries(companyId);
 		}
 		catch (SystemException se) {
 			throw se;
@@ -962,6 +944,49 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			entry.setTrackbacks(newTrackbacks);
 
 			blogsEntryPersistence.update(entry, false);
+		}
+	}
+
+	protected void reIndexEntries(long companyId) throws SystemException {
+		int count = blogsEntryPersistence.countByCompanyId(companyId);
+
+		int pages = count / Indexer.DEFAULT_INTERVAL;
+
+		for (int i = 0; i <= pages; i++) {
+			int start = (i * Indexer.DEFAULT_INTERVAL);
+			int end = start + Indexer.DEFAULT_INTERVAL;
+
+			reIndexEntries(companyId, start, end);
+		}
+	}
+
+	protected void reIndexEntries(long companyId, int start, int end)
+		throws SystemException {
+
+		List<BlogsEntry> entries = blogsEntryPersistence.findByCompanyId(
+			companyId, start, end);
+
+		for (BlogsEntry entry : entries) {
+			long groupId = entry.getGroupId();
+			long userId = entry.getUserId();
+			String userName = entry.getUserName();
+			long entryId = entry.getEntryId();
+			String title = entry.getTitle();
+			String content = entry.getContent();
+			Date displayDate = entry.getDisplayDate();
+
+			String[] tagsEntries = tagsEntryLocalService.getEntryNames(
+				BlogsEntry.class.getName(), entryId);
+
+			try {
+				Indexer.updateEntry(
+					companyId, groupId, userId, userName, entryId, title,
+					content, displayDate, tagsEntries,
+					entry.getExpandoBridge());
+			}
+			catch (SearchException se) {
+				_log.error("Reindexing " + entryId, se);
+			}
 		}
 	}
 

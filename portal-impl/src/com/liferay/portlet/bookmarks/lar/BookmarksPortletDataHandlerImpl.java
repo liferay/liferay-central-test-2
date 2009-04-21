@@ -45,7 +45,6 @@ import com.liferay.portlet.bookmarks.model.BookmarksFolder;
 import com.liferay.portlet.bookmarks.model.impl.BookmarksFolderImpl;
 import com.liferay.portlet.bookmarks.service.BookmarksEntryLocalServiceUtil;
 import com.liferay.portlet.bookmarks.service.BookmarksFolderLocalServiceUtil;
-import com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryFinderUtil;
 import com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryUtil;
 import com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderUtil;
 
@@ -341,7 +340,7 @@ public class BookmarksPortletDataHandlerImpl extends BasePortletDataHandler {
 					PortletDataHandlerKeys.DATA_STRATEGY_MIRROR)) {
 
 				try {
-					existingEntry = BookmarksEntryFinderUtil.findByUuid_G(
+					existingEntry = BookmarksEntryUtil.findByUUID_G(
 						entry.getUuid(), context.getGroupId());
 
 					BookmarksEntryLocalServiceUtil.updateEntry(
