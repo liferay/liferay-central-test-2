@@ -57,6 +57,7 @@ import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.service.base.BlogsEntryLocalServiceBaseImpl;
 import com.liferay.portlet.blogs.social.BlogsActivityKeys;
 import com.liferay.portlet.blogs.util.Indexer;
+import com.liferay.portlet.blogs.util.comparator.EntryDisplayDateComparator;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 
 import java.io.IOException;
@@ -372,7 +373,8 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		BlogsEntry entry = blogsEntryPersistence.findByPrimaryKey(entryId);
 
 		return blogsEntryPersistence.findByGroupId_PrevAndNext(
-			entry.getEntryId(), entry.getGroupId(), null);
+			entry.getEntryId(), entry.getGroupId(),
+			new EntryDisplayDateComparator(true));
 	}
 
 	public BlogsEntry getEntry(long entryId)

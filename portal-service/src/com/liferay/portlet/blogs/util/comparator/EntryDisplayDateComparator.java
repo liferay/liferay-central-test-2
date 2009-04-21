@@ -35,9 +35,9 @@ import com.liferay.portlet.blogs.model.BlogsEntry;
  */
 public class EntryDisplayDateComparator extends OrderByComparator {
 
-	public static String ORDER_BY_ASC = "displayDate ASC";
+	public static String ORDER_BY_ASC = "displayDate ASC, entryId ASC";
 
-	public static String ORDER_BY_DESC = "displayDate DESC";
+	public static String ORDER_BY_DESC = "displayDate DESC, entryId DESC";
 
 	public EntryDisplayDateComparator() {
 		this(false);
@@ -48,11 +48,20 @@ public class EntryDisplayDateComparator extends OrderByComparator {
 	}
 
 	public int compare(Object obj1, Object obj2) {
-		BlogsEntry entry1 = (BlogsEntry)obj1;
-		BlogsEntry entry2 = (BlogsEntry)obj2;
+		BlogsEntry entry1 = (BlogsEntry) obj1;
+		BlogsEntry entry2 = (BlogsEntry) obj2;
 
 		int value = DateUtil.compareTo(
 			entry1.getDisplayDate(), entry2.getDisplayDate());
+
+		if (value == 0) {
+			if (entry1.getEntryId() < entry2.getEntryId()) {
+				value = -1;
+			}
+			else if (entry1.getEntryId() > entry2.getEntryId()) {
+				value = 1;
+			}
+		}
 
 		if (_asc) {
 			return value;
