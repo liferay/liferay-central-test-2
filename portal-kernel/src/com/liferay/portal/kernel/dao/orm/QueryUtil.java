@@ -29,7 +29,6 @@ import com.liferay.portal.kernel.util.Randomizer;
 import com.liferay.portal.kernel.util.UnmodifiableList;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -149,24 +148,96 @@ public class QueryUtil {
 		Query query, int count, OrderByComparator obc,
 		Comparable<?> comparable) {
 
+		int pos = count;
+		int boundary = 0;
+
 		Comparable<?>[] array = new Comparable[3];
 
-		List<?> entries = query.list();
+		ScrollableResults sr = query.scroll();
 
-		List<?> sortedEntries = new ArrayList(entries);
+		if (sr.first()) {
+			while (true) {
+				Object obj = sr.get(0);
 
-		Collections.sort(sortedEntries, obc);
+				if (obj == null) {
+					if (_log.isWarnEnabled()) {
+						_log.warn("Object is null");
+					}
 
-		int index = Collections.binarySearch(sortedEntries, comparable, obc);
+					break;
+				}
 
-		array[1] = (Comparable<?>)sortedEntries.get(index);
+				Comparable<?> curComparable = (Comparable<?>)obj;
 
-		if (index != 0) {
-			array[0] = (Comparable<?>) sortedEntries.get(index-1);
-		}
+				int value = obc.compare(comparable, curComparable);
 
-		if (index != (count-1)) {
-			array[2] = (Comparable<?>) sortedEntries.get(index + 1);
+				if (_log.isDebugEnabled()) {
+					_log.debug("Comparison result is " + value);
+				}
+
+				if (value == 0) {
+					if (!comparable.equals(curComparable)) {
+						break;
+					}
+
+					array[1] = curComparable;
+
+					if (sr.previous()) {
+						array[0] = (Comparable<?>)sr.get(0);
+					}
+
+					sr.next();
+
+					if (sr.next()) {
+						array[2] = (Comparable<?>)sr.get(0);
+					}
+
+					break;
+				}
+
+				if (pos == 1) {
+					break;
+				}
+
+				pos = (int)Math.ceil(pos / 2.0);
+
+				int scrollPos = pos;
+
+				if (value < 0) {
+					scrollPos = scrollPos * -1;
+				}
+
+				boundary += scrollPos;
+
+				if (boundary < 0) {
+					scrollPos = scrollPos + (boundary * -1) + 1;
+
+					boundary = 0;
+				}
+
+				if (boundary > count) {
+					scrollPos = scrollPos - (boundary - count);
+
+					boundary = scrollPos;
+				}
+
+				if (_log.isDebugEnabled()) {
+					_log.debug("Scroll " + scrollPos);
+				}
+
+				if (!sr.scroll(scrollPos)) {
+					if (value < 0) {
+						if (!sr.next()) {
+							break;
+						}
+					}
+					else {
+						if (!sr.previous()) {
+							break;
+						}
+					}
+				}
+			}
 		}
 
 		return array;
