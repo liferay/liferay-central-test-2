@@ -50,10 +50,6 @@ import com.liferay.portlet.expando.service.ExpandoValueLocalService;
 import com.liferay.portlet.expando.service.ExpandoValueService;
 import com.liferay.portlet.expando.service.persistence.ExpandoValueFinder;
 import com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence;
-import com.liferay.portlet.tags.service.TagsEntryLocalService;
-import com.liferay.portlet.tags.service.TagsEntryService;
-import com.liferay.portlet.tags.service.persistence.TagsEntryFinder;
-import com.liferay.portlet.tags.service.persistence.TagsEntryPersistence;
 
 import java.util.List;
 
@@ -304,40 +300,6 @@ public abstract class BookmarksFolderLocalServiceBaseImpl
 		this.expandoValueFinder = expandoValueFinder;
 	}
 
-	public TagsEntryLocalService getTagsEntryLocalService() {
-		return tagsEntryLocalService;
-	}
-
-	public void setTagsEntryLocalService(
-		TagsEntryLocalService tagsEntryLocalService) {
-		this.tagsEntryLocalService = tagsEntryLocalService;
-	}
-
-	public TagsEntryService getTagsEntryService() {
-		return tagsEntryService;
-	}
-
-	public void setTagsEntryService(TagsEntryService tagsEntryService) {
-		this.tagsEntryService = tagsEntryService;
-	}
-
-	public TagsEntryPersistence getTagsEntryPersistence() {
-		return tagsEntryPersistence;
-	}
-
-	public void setTagsEntryPersistence(
-		TagsEntryPersistence tagsEntryPersistence) {
-		this.tagsEntryPersistence = tagsEntryPersistence;
-	}
-
-	public TagsEntryFinder getTagsEntryFinder() {
-		return tagsEntryFinder;
-	}
-
-	public void setTagsEntryFinder(TagsEntryFinder tagsEntryFinder) {
-		this.tagsEntryFinder = tagsEntryFinder;
-	}
-
 	@BeanReference(name = "com.liferay.portlet.bookmarks.service.BookmarksEntryLocalService.impl")
 	protected BookmarksEntryLocalService bookmarksEntryLocalService;
 	@BeanReference(name = "com.liferay.portlet.bookmarks.service.BookmarksEntryService.impl")
@@ -380,12 +342,4 @@ public abstract class BookmarksFolderLocalServiceBaseImpl
 	protected ExpandoValuePersistence expandoValuePersistence;
 	@BeanReference(name = "com.liferay.portlet.expando.service.persistence.ExpandoValueFinder.impl")
 	protected ExpandoValueFinder expandoValueFinder;
-	@BeanReference(name = "com.liferay.portlet.tags.service.TagsEntryLocalService.impl")
-	protected TagsEntryLocalService tagsEntryLocalService;
-	@BeanReference(name = "com.liferay.portlet.tags.service.TagsEntryService.impl")
-	protected TagsEntryService tagsEntryService;
-	@BeanReference(name = "com.liferay.portlet.tags.service.persistence.TagsEntryPersistence.impl")
-	protected TagsEntryPersistence tagsEntryPersistence;
-	@BeanReference(name = "com.liferay.portlet.tags.service.persistence.TagsEntryFinder.impl")
-	protected TagsEntryFinder tagsEntryFinder;
 }

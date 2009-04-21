@@ -24,8 +24,6 @@ package com.liferay.portlet.imagegallery.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.BooleanClauseOccur;
 import com.liferay.portal.kernel.search.BooleanQuery;
 import com.liferay.portal.kernel.search.BooleanQueryFactoryUtil;
@@ -532,8 +530,5 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 			}
 		}
 	}
-
-	private static Log _log =
-		 LogFactoryUtil.getLog(IGFolderLocalServiceImpl.class);
 
 }
