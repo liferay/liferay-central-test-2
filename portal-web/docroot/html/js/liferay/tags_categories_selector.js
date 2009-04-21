@@ -141,14 +141,16 @@ Liferay.TagsCategoriesSelector = new Expanse.Class(
 						fixedcenter: true,
 						header: Liferay.Language.get('categories'),
 						modal: false,
-						onOpen: function() {
-	 						var inputSearch = jQuery('.lfr-tag-search-input');
+						on: {
+							render: function() {
+		 						var inputSearch = jQuery('.lfr-tag-search-input');
 
-							Liferay.Util.defaultValue(inputSearch, Liferay.Language.get('search'));
-						},
-						onClose: function() {
-							instance._popupVisible = false;
-							instance.selectTagCategoryPopup = null;
+								Liferay.Util.defaultValue(inputSearch, Liferay.Language.get('search'));
+							},
+							close: function() {
+								instance._popupVisible = false;
+								instance.selectTagCategoryPopup = null;
+							}
 						},
 						resizable: false,
 						width: 400

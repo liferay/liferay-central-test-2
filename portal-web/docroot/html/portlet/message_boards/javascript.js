@@ -430,8 +430,10 @@ if (!Liferay.Editor.bbCode) {
 				var colorPicker = new Expanse.ColorPickerPanel(
 					{
 						hasImage: true,
-						onClose: function() {
-							instance._insertColor();
+						on: {
+							close: function() {
+								instance._insertColor();
+							}
 						}
 					}
 				);

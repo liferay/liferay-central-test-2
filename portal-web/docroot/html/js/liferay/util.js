@@ -522,21 +522,23 @@ Liferay.Util = {
 								},
 								height: 640,
 								width: 680,
-								onClose: function() {
-									Expanse.getDocument().unbind('popupResize.liferay');
-									clicked = false;
-								},
-								onResize: function(options) {
-									var panelBody = this.body;
+								on: {
+									close: function() {
+										Expanse.getDocument().unbind('popupResize.liferay');
+										clicked = false;
+									},
+									resize: function(options) {
+										var panelBody = this.body;
 
-									var dimensions = {
-										height: panelBody.offsetHeight,
-										width: panelBody.offsetWidth - 20
-									};
+										var dimensions = {
+											height: panelBody.offsetHeight,
+											width: panelBody.offsetWidth - 20
+										};
 
-									form.css(dimensions);
+										form.css(dimensions);
 
-									Expanse.getDocument().trigger('popupResize');
+										Expanse.getDocument().trigger('popupResize');
+									}
 								}
 							}
 						);

@@ -44,8 +44,10 @@ window.Class = Expanse.Class;
 		options.body = options.message;
 		options.header = options.title;
 		options.fixedcenter = !options.noCenter;
-		options.onClose = options.close;
-		options.onOpen = options.open;
+
+		options.on = {};
+		options.on.close = options.close;
+		options.on.open = options.open;
 
 		if (options.url) {
 			options.body = {

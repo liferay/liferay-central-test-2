@@ -197,14 +197,16 @@ Liferay.TagsEntriesSelector = new Expanse.Class(
 						fixedcenter: true,
 						modal: false,
 						header: Liferay.Language.get('tags'),
-						onOpen: function() {
-	 						var inputSearch = jQuery('.lfr-tag-search-input');
+						on: {
+							render: function() {
+		 						var inputSearch = jQuery('.lfr-tag-search-input');
 
-							Liferay.Util.defaultValue(inputSearch, Liferay.Language.get('search'));
-						},
-						onClose: function() {
-							instance._popupVisible = false;
-							instance.selectTagEntryPopup = null;
+								Liferay.Util.defaultValue(inputSearch, Liferay.Language.get('search'));
+							},
+							close: function() {
+								instance._popupVisible = false;
+								instance.selectTagEntryPopup = null;
+							}
 						},
 						resizable: false,
 						width: 400

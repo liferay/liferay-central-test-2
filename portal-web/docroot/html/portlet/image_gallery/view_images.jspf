@@ -70,10 +70,12 @@
 				header: false,
 				messageId: messageId,
 				modal: true,
-				onClose: function() {
-					var buttons = jQuery("#<portlet:namespace />buttons_" + id);
+				on: {
+					close: function() {
+						var buttons = jQuery("#<portlet:namespace />buttons_" + id);
 
-					jQuery("#<portlet:namespace />buttonsContainer_" + id).append(buttons);
+						jQuery("#<portlet:namespace />buttonsContainer_" + id).append(buttons);
+					}
 				},
 				width: winWidth,
 				xy: ['center', 20]

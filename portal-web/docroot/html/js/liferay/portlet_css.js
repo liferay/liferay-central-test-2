@@ -29,15 +29,17 @@ Liferay.PortletCSS = {
 					{
 						body: content[0],
 						height: 'auto',
-						onClose: function() {
-							instance._newPanel.removeClass('instantiated');
-							instance._newPanel.appendTo('body');
-							instance._newPanel.hide();
+						on: {
+							close: function() {
+								instance._newPanel.removeClass('instantiated');
+								instance._newPanel.appendTo('body');
+								instance._newPanel.hide();
 
-							instance._currentPopup = null;
+								instance._currentPopup = null;
 
-							if (Liferay.Browser.isIe() && Liferay.Browser.getMajorVersion() == 6) {
-								window.location.reload(true);
+								if (Liferay.Browser.isIe() && Liferay.Browser.getMajorVersion() == 6) {
+									window.location.reload(true);
+								}
 							}
 						},
 						width: 820,
@@ -116,8 +118,10 @@ Liferay.PortletCSS = {
 			{
 				buttonContext: instance._newPanel[0],
 				item: backgroundColor[0],
-				onChange: function() {
-					setColor(backgroundColor[0]);
+				on: {
+					change: function() {
+						setColor(backgroundColor[0]);
+					}
 				}
 			}
 		);
@@ -376,7 +380,9 @@ Liferay.PortletCSS = {
 			{
 				buttonContext: jQuery('#portlet-set-properties')[0],
 				item: cTopColor[0],
-				onChange: changeColor
+				on: {
+					change: changeColor
+				}
 			}
 		);
 
@@ -384,7 +390,9 @@ Liferay.PortletCSS = {
 			{
 				buttonContext: jQuery('#portlet-set-properties')[0],
 				item: cRightColor[0],
-				onChange: changeColor
+				on: {
+					change: changeColor
+				}
 			}
 		);
 
@@ -392,7 +400,9 @@ Liferay.PortletCSS = {
 			{
 				buttonContext: jQuery('#portlet-set-properties')[0],
 				item: cBottomColor[0],
-				onChange: changeColor
+				on: {
+					change: changeColor
+				}
 			}
 		);
 
@@ -400,7 +410,9 @@ Liferay.PortletCSS = {
 			{
 				buttonContext: jQuery('#portlet-set-properties')[0],
 				item: cLeftColor[0],
-				onChange: changeColor
+				on: {
+					change: changeColor
+				}
 			}
 		);
 
@@ -1520,8 +1532,10 @@ Liferay.PortletCSS = {
 			{
 				buttonContext: jQuery('#portlet-set-properties')[0],
 				item: fontColor[0],
-				onChange: function() {
-					setColor(fontColor[0]);
+				on: {
+					change: function() {
+						setColor(fontColor[0]);
+					}
 				}
 			}
 		);

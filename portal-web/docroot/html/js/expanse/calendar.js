@@ -28,7 +28,7 @@
 		}
 	);
 
-	Expanse.Calendar = new Expanse.Class(YAHOO.widget.Calendar);
+	Expanse.Calendar = new Expanse.Widget(YAHOO.widget.Calendar);
 
 	Expanse.Calendar = Expanse.Calendar.extend(
 		{

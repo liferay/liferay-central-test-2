@@ -45,6 +45,7 @@
 
 				var defaults = {
 					constraintoviewport: true,
+					on: {},
 					preventcontextoverlap: true,
 					visible: false
 				};
@@ -53,11 +54,15 @@
 
 				instance.options = options;
 
-				instance._onClose = options.onClose;
-				instance._onChange = options.onChange;
+				if (options.on.close) {
+					options.on.hide = options.on.close;
+				}
+
 				instance._buttonContext = options.buttonContext || document.body;
 				instance._hasImage =  options.hasImage || false;
 				instance._item = jQuery(options.item || '.use-colorpicker', instance._buttonContext);
+
+				instance.changeEvent = new Expanse.CustomEvent('change', instance);
 
 				instance._insertImages();
 
@@ -102,10 +107,6 @@
 				Event.on(instance.element, 'click', instance._swallowEvent, instance, true);
 
 				instance.picker.on('rgbChange', instance.onColorChange, instance, true);
-
-				if (instance._onClose) {
-					instance.hideEvent.subscribe(instance._onClose, instance, true);
-				}
 			},
 
 			blur: function(event) {
@@ -140,9 +141,7 @@
 
 				instance._currentInput.val('#' + hexValue);
 
-				if (instance._onChange) {
-					instance._onChange(args);
-				}
+				instance.changeEvent.fire();
 			},
 
 			show: function() {

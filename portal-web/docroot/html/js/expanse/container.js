@@ -3,13 +3,14 @@
 	var Event = Expanse.Event;
 	var Widget = YAHOO.widget;
 
-	Expanse.Module = new Expanse.Class(Widget.Module);
-	Expanse.Overlay = new Expanse.Class(Widget.Overlay);
 	Expanse.OverlayManager = new Expanse.Class(Widget.OverlayManager);
-	Expanse.Dialog = new Expanse.Class(Widget.Dialog);
-	Expanse.SimpleDialog = new Expanse.Class(Widget.SimpleDialog);
-	Expanse.Tooltip = new Expanse.Class(Widget.Tooltip);
-	Expanse.Panel = new Expanse.Class(Widget.Panel);
+
+	Expanse.Module = new Expanse.Widget(Widget.Module);
+	Expanse.Overlay = new Expanse.Widget(Widget.Overlay);
+	Expanse.Dialog = new Expanse.Widget(Widget.Dialog);
+	Expanse.SimpleDialog = new Expanse.Widget(Widget.SimpleDialog);
+	Expanse.Tooltip = new Expanse.Widget(Widget.Tooltip);
+	Expanse.Panel = new Expanse.Widget(Widget.Panel);
 
 	var baseContainerImpl = {
 		initialize: function(el, options) {
@@ -149,6 +150,20 @@
 			initialize: function(options) {
 				var instance = this;
 
+				options.on = options.on || {};
+
+				instance._destroyOnClose = options.destroyOnClose;
+
+				if (options.on.close) {
+					var closeEvent = 'destroy';
+
+					if (options.destroyOnClose === false) {
+						closeEvent = 'hide';
+					}
+
+					options.on[closeEvent] = options.on.close;
+				}
+
 				if (options.width && (options.width != 'auto')) {
 					options.width = (parseInt(options.width, 10) || 300) + 'px';
 				}
@@ -204,16 +219,11 @@
 					Dom.addClass(instance.element, options.className);
 				}
 
-				if (options.onOpen) {
-					instance.subscribe('render', options.onOpen, instance, true);
-				}
-
 				if (options.footer) {
 					instance.setFooter(options.footer);
 				}
 
-				instance._options = options;
-				instance._options._el = el;
+				instance.options._el = el;
 
 				if (!options.deferRender) {
 					instance.render(options.renderTo || document.body);
@@ -245,25 +255,14 @@
 			_onRender: function() {
 				var instance = this;
 
-				var options = instance._options;
+				var options = instance.options;
 				var el = options._el;
 
-				var closeEvent = 'destroy';
+				options.on = options.on || {};
 
-				instance._destroyOnClose = options.destroyOnClose;
-
-				if (options.destroyOnClose !== false) {
+				if (instance._destroyOnClose !== false) {
 					Event.un(instance.close, 'click', instance._doClose);
 					Event.on(instance.close, 'click', instance.destroy, instance, true);
-				}
-				else {
-					if (options.onClose) {
-						closeEvent = 'hide';
-					}
-				}
-
-				if (options.onClose) {
-					instance.subscribe(closeEvent, options.onClose, instance, true);
 				}
 
 				if (options.messageId) {
@@ -291,8 +290,8 @@
 
 					resize.on('resize', instance._resizeBody, instance, true);
 
-					if (options.onResize) {
-						resize.on('resize', options.onResize, instance, true);
+					if (options.on.resize) {
+						resize.on('resize', options.on.resize, instance, true);
 					}
 
 					instance.resizable = resize;
