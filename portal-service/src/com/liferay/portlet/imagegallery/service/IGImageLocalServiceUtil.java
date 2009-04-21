@@ -182,46 +182,42 @@ public class IGImageLocalServiceUtil {
 			fileName, is, contentType, serviceContext);
 	}
 
-	public static void addImageResources(long folderId, long imageId,
+	public static void addImageResources(long imageId,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		getService()
-			.addImageResources(folderId, imageId, addCommunityPermissions,
+			.addImageResources(imageId, addCommunityPermissions,
 			addGuestPermissions);
 	}
 
 	public static void addImageResources(
-		com.liferay.portlet.imagegallery.model.IGFolder folder,
 		com.liferay.portlet.imagegallery.model.IGImage image,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		getService()
-			.addImageResources(folder, image, addCommunityPermissions,
+			.addImageResources(image, addCommunityPermissions,
 			addGuestPermissions);
 	}
 
-	public static void addImageResources(long folderId, long imageId,
+	public static void addImageResources(long imageId,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		getService()
-			.addImageResources(folderId, imageId, communityPermissions,
-			guestPermissions);
+			.addImageResources(imageId, communityPermissions, guestPermissions);
 	}
 
 	public static void addImageResources(
-		com.liferay.portlet.imagegallery.model.IGFolder folder,
 		com.liferay.portlet.imagegallery.model.IGImage image,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		getService()
-			.addImageResources(folder, image, communityPermissions,
-			guestPermissions);
+			.addImageResources(image, communityPermissions, guestPermissions);
 	}
 
 	public static void deleteImage(long imageId)

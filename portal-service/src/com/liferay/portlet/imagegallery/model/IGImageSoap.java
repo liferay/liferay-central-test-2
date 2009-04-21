@@ -52,6 +52,7 @@ public class IGImageSoap implements Serializable {
 
 		soapModel.setUuid(model.getUuid());
 		soapModel.setImageId(model.getImageId());
+		soapModel.setGroupId(model.getGroupId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserId(model.getUserId());
 		soapModel.setCreateDate(model.getCreateDate());
@@ -102,6 +103,14 @@ public class IGImageSoap implements Serializable {
 
 	public void setImageId(long imageId) {
 		_imageId = imageId;
+	}
+
+	public long getGroupId() {
+		return _groupId;
+	}
+
+	public void setGroupId(long groupId) {
+		_groupId = groupId;
 	}
 
 	public long getCompanyId() {
@@ -194,6 +203,7 @@ public class IGImageSoap implements Serializable {
 
 	private String _uuid;
 	private long _imageId;
+	private long _groupId;
 	private long _companyId;
 	private long _userId;
 	private Date _createDate;

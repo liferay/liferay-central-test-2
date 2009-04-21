@@ -59,6 +59,10 @@ public interface IGImageModel extends BaseModel<IGImage> {
 
 	public void setImageId(long imageId);
 
+	public long getGroupId();
+
+	public void setGroupId(long groupId);
+
 	public long getCompanyId();
 
 	public void setCompanyId(long companyId);

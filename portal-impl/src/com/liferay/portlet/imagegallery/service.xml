@@ -67,6 +67,10 @@
 
 		<column name="imageId" type="long" primary="true" />
 
+		<!-- Group instance -->
+
+		<column name="groupId" type="long" />
+
 		<!-- Audit fields -->
 
 		<column name="companyId" type="long" />
@@ -92,6 +96,9 @@
 
 		<!-- Finder methods -->
 
+		<finder name="GroupId" return-type="Collection">
+			<finder-column name="groupId" />
+		</finder>
 		<finder name="FolderId" return-type="Collection">
 			<finder-column name="folderId" />
 		</finder>
@@ -106,6 +113,10 @@
 		</finder>
 		<finder name="Custom2ImageId" return-type="IGImage">
 			<finder-column name="custom2ImageId" />
+		</finder>
+		<finder name="G_U" return-type="Collection">
+			<finder-column name="groupId" />
+			<finder-column name="userId" />
 		</finder>
 		<finder name="F_N" return-type="Collection">
 			<finder-column name="folderId" />

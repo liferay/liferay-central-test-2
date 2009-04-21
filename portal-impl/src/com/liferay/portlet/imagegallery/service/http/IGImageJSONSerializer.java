@@ -57,6 +57,7 @@ public class IGImageJSONSerializer {
 
 		jsonObj.put("uuid", model.getUuid());
 		jsonObj.put("imageId", model.getImageId());
+		jsonObj.put("groupId", model.getGroupId());
 		jsonObj.put("companyId", model.getCompanyId());
 		jsonObj.put("userId", model.getUserId());
 

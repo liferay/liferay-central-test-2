@@ -148,26 +148,24 @@ public interface IGImageLocalService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public void addImageResources(long folderId, long imageId,
+	public void addImageResources(long imageId,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	public void addImageResources(
-		com.liferay.portlet.imagegallery.model.IGFolder folder,
 		com.liferay.portlet.imagegallery.model.IGImage image,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public void addImageResources(long folderId, long imageId,
+	public void addImageResources(long imageId,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	public void addImageResources(
-		com.liferay.portlet.imagegallery.model.IGFolder folder,
 		com.liferay.portlet.imagegallery.model.IGImage image,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)

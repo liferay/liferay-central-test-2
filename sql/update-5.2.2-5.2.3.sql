@@ -2,6 +2,8 @@ alter table BookmarksEntry add groupId LONG;
 
 update Group_ set name = classPK where classPK > 0 and name = '';
 
+alter table IGImage add groupId LONG;
+
 alter table JournalArticle add urlTitle VARCHAR(150) null;
 
 COMMIT_TRANSACTION;

@@ -54,6 +54,7 @@ import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.imagegallery.model.impl.IGImageImpl;
 import com.liferay.portlet.imagegallery.service.base.IGImageLocalServiceBaseImpl;
 import com.liferay.portlet.imagegallery.util.Indexer;
+import com.liferay.portlet.imagegallery.util.comparator.ImageModifiedDateComparator;
 import com.liferay.portlet.tags.model.TagsEntryConstants;
 
 import com.sun.media.jai.codec.ImageCodec;
@@ -167,6 +168,7 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 			IGImage image = igImagePersistence.create(imageId);
 
 			image.setUuid(uuid);
+			image.setGroupId(folder.getGroupId());
 			image.setCompanyId(user.getCompanyId());
 			image.setUserId(user.getUserId());
 			image.setCreateDate(now);
@@ -200,12 +202,12 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 				serviceContext.getAddGuestPermissions()) {
 
 				addImageResources(
-					folder, image, serviceContext.getAddCommunityPermissions(),
+					image, serviceContext.getAddCommunityPermissions(),
 					serviceContext.getAddGuestPermissions());
 			}
 			else {
 				addImageResources(
-					folder, image, serviceContext.getCommunityPermissions(),
+					image, serviceContext.getCommunityPermissions(),
 					serviceContext.getGuestPermissions());
 			}
 
@@ -225,7 +227,7 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 
 			try {
 				Indexer.addImage(
-					image.getCompanyId(), folder.getGroupId(), folderId,
+					image.getCompanyId(), image.getGroupId(), folderId,
 					imageId, name, description, image.getModifiedDate(),
 					serviceContext.getTagsCategories(),
 					serviceContext.getTagsEntries(), image.getExpandoBridge());
@@ -260,47 +262,43 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 	}
 
 	public void addImageResources(
-			long folderId, long imageId, boolean addCommunityPermissions,
+			long imageId, boolean addCommunityPermissions,
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
-		IGFolder folder = igFolderPersistence.findByPrimaryKey(folderId);
 		IGImage image = igImagePersistence.findByPrimaryKey(imageId);
 
-		addImageResources(
-			folder, image, addCommunityPermissions, addGuestPermissions);
+		addImageResources(image, addCommunityPermissions, addGuestPermissions);
 	}
 
 	public void addImageResources(
-			IGFolder folder, IGImage image, boolean addCommunityPermissions,
+			IGImage image, boolean addCommunityPermissions,
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		resourceLocalService.addResources(
-			image.getCompanyId(), folder.getGroupId(), image.getUserId(),
+			image.getCompanyId(), image.getGroupId(), image.getUserId(),
 			IGImage.class.getName(), image.getImageId(), false,
 			addCommunityPermissions, addGuestPermissions);
 	}
 
 	public void addImageResources(
-			long folderId, long imageId, String[] communityPermissions,
+			long imageId, String[] communityPermissions,
 			String[] guestPermissions)
 		throws PortalException, SystemException {
 
-		IGFolder folder = igFolderPersistence.findByPrimaryKey(folderId);
 		IGImage image = igImagePersistence.findByPrimaryKey(imageId);
 
-		addImageResources(
-			folder, image, communityPermissions, guestPermissions);
+		addImageResources(image, communityPermissions, guestPermissions);
 	}
 
 	public void addImageResources(
-			IGFolder folder, IGImage image, String[] communityPermissions,
+			IGImage image, String[] communityPermissions,
 			String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		resourceLocalService.addModelResources(
-			image.getCompanyId(), folder.getGroupId(), image.getUserId(),
+			image.getCompanyId(), image.getGroupId(), image.getUserId(),
 			IGImage.class.getName(), image.getImageId(), communityPermissions,
 			guestPermissions);
 	}
@@ -370,33 +368,38 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 	public List<IGImage> getGroupImages(long groupId, int start, int end)
 		throws SystemException {
 
-		return igImageFinder.findByGroupId(groupId, start, end);
+		return igImagePersistence.findByGroupId(
+			groupId, start, end, new ImageModifiedDateComparator());
 	}
 
 	public List<IGImage> getGroupImages(
 			long groupId, long userId, int start, int end)
 		throws SystemException {
 
+		OrderByComparator orderByComparator = new ImageModifiedDateComparator();
+
 		if (userId <= 0) {
-			return igImageFinder.findByGroupId(groupId, start, end);
+			return igImagePersistence.findByGroupId(
+				groupId, start, end, orderByComparator);
 		}
 		else {
-			return igImageFinder.findByG_U(groupId, userId, start, end);
+			return igImagePersistence.findByG_U(
+				groupId, userId, start, end, orderByComparator);
 		}
 	}
 
 	public int getGroupImagesCount(long groupId) throws SystemException {
-		return igImageFinder.countByGroupId(groupId);
+		return igImagePersistence.countByGroupId(groupId);
 	}
 
 	public int getGroupImagesCount(long groupId, long userId)
 		throws SystemException {
 
 		if (userId <= 0) {
-			return igImageFinder.countByGroupId(groupId);
+			return igImagePersistence.countByGroupId(groupId);
 		}
 		else {
-			return igImageFinder.countByG_U(groupId, userId);
+			return igImagePersistence.countByG_U(groupId, userId);
 		}
 	}
 
@@ -460,7 +463,7 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 	public IGImage getImageByUuidAndGroupId(String uuid, long groupId)
 		throws PortalException, SystemException {
 
-		return igImageFinder.findByUuid_G(uuid, groupId);
+		return igImagePersistence.findByUUID_G(uuid, groupId);
 	}
 
 	public List<IGImage> getImages(long folderId) throws SystemException {
@@ -499,12 +502,9 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 			return;
 		}
 
-		IGFolder folder = igFolderPersistence.fetchByPrimaryKey(
-			image.getFolderId());
-
-		long companyId = folder.getCompanyId();
-		long groupId = folder.getGroupId();
-		long folderId = folder.getFolderId();
+		long companyId = image.getCompanyId();
+		long groupId = image.getGroupId();
+		long folderId = image.getFolderId();
 		String name = image.getName();
 		String description = image.getDescription();
 		Date modifiedDate = image.getModifiedDate();
@@ -592,8 +592,8 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 
 			try {
 				Indexer.updateImage(
-					image.getCompanyId(), folder.getGroupId(),
-					folder.getFolderId(), imageId, name, description,
+					image.getCompanyId(), image.getGroupId(),
+					image.getFolderId(), imageId, name, description,
 					image.getModifiedDate(), tagsCategories, tagsEntries,
 					image.getExpandoBridge());
 			}
@@ -664,7 +664,7 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 		}
 
 		tagsAssetLocalService.updateAsset(
-			userId, image.getFolder().getGroupId(), IGImage.class.getName(),
+			userId, image.getGroupId(), IGImage.class.getName(),
 			image.getImageId(), tagsCategories, tagsEntries, true, null, null,
 			null, null, largeImage.getType(), image.getName(),
 			image.getDescription(), null, null, largeImage.getHeight(),

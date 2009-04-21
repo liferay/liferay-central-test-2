@@ -408,6 +408,7 @@ create table IGFolder (
 create table IGImage (
 	uuid_ VARCHAR(75) null,
 	imageId LONG not null primary key,
+	groupId LONG,
 	companyId LONG,
 	userId LONG,
 	createDate DATE null,
