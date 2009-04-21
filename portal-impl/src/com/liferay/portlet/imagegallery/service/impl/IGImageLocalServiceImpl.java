@@ -502,9 +502,14 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 			return;
 		}
 
+		reIndex(image);
+	}
+
+	public void reIndex(IGImage image) throws SystemException {
 		long companyId = image.getCompanyId();
 		long groupId = image.getGroupId();
 		long folderId = image.getFolderId();
+		long imageId = image.getImageId();
 		String name = image.getName();
 		String description = image.getDescription();
 		Date modifiedDate = image.getModifiedDate();
@@ -517,8 +522,8 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 
 		try {
 			Indexer.updateImage(
-				companyId, groupId, folderId, imageId, name,
-				description, modifiedDate, tagsCategories, tagsEntries,
+				companyId, groupId, folderId, imageId, name, description,
+				modifiedDate, tagsCategories, tagsEntries,
 				image.getExpandoBridge());
 		}
 		catch (SearchException se) {

@@ -32,7 +32,6 @@ import com.liferay.portal.kernel.search.BooleanQueryFactoryUtil;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
-import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.search.TermQuery;
 import com.liferay.portal.kernel.search.TermQueryFactoryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
@@ -50,7 +49,6 @@ import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.imagegallery.model.impl.IGFolderImpl;
 import com.liferay.portlet.imagegallery.service.base.IGFolderLocalServiceBaseImpl;
 import com.liferay.portlet.imagegallery.util.Indexer;
-import com.liferay.portlet.tags.model.TagsEntryConstants;
 import com.liferay.portlet.tags.util.TagsUtil;
 
 import java.util.ArrayList;
@@ -279,40 +277,7 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 		long companyId = GetterUtil.getLong(ids[0]);
 
 		try {
-			List<IGFolder> folders = igFolderPersistence.findByCompanyId(
-				companyId);
-
-			for (IGFolder folder : folders) {
-				long folderId = folder.getFolderId();
-
-				List<IGImage> images = igImagePersistence.findByFolderId(
-					folderId);
-
-				for (IGImage image : images) {
-					long groupId = folder.getGroupId();
-					long imageId = image.getImageId();
-					String name = image.getName();
-					String description = image.getDescription();
-					Date modifiedDate = image.getModifiedDate();
-
-					String[] tagsCategories =
-						tagsEntryLocalService.getEntryNames(
-							IGImage.class.getName(), imageId,
-							TagsEntryConstants.FOLKSONOMY_CATEGORY);
-					String[] tagsEntries = tagsEntryLocalService.getEntryNames(
-						IGImage.class.getName(), imageId);
-
-					try {
-						Indexer.updateImage(
-							companyId, groupId, folderId, imageId, name,
-							description, modifiedDate, tagsCategories,
-							tagsEntries, image.getExpandoBridge());
-					}
-					catch (SearchException se) {
-						_log.error("Reindexing " + imageId, se);
-					}
-				}
-			}
+			reIndexFolders(companyId);
 		}
 		catch (SystemException se) {
 			throw se;
@@ -480,6 +445,53 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 		}
 
 		deleteFolder(fromFolder);
+	}
+
+	protected void reIndexFolders(long companyId) throws SystemException {
+		int folderCount = igFolderPersistence.countByCompanyId(companyId);
+
+		int folderPages = folderCount / Indexer.DEFAULT_INTERVAL;
+
+		for (int i = 0; i <= folderPages; i++) {
+			int folderStart = (i * Indexer.DEFAULT_INTERVAL);
+			int folderEnd = folderStart + Indexer.DEFAULT_INTERVAL;
+
+			reIndexFolders(companyId, folderStart, folderEnd);
+		}
+	}
+
+	protected void reIndexFolders(
+			long companyId, int folderStart, int folderEnd)
+		throws SystemException {
+
+		List<IGFolder> folders = igFolderPersistence.findByCompanyId(
+			companyId, folderStart, folderEnd);
+
+		for (IGFolder folder : folders) {
+			long folderId = folder.getFolderId();
+
+			int entryCount = igImagePersistence.countByFolderId(folderId);
+
+			int entryPages = entryCount / Indexer.DEFAULT_INTERVAL;
+
+			for (int i = 0; i <= entryPages; i++) {
+				int entryStart = (i * Indexer.DEFAULT_INTERVAL);
+				int entryEnd = entryStart + Indexer.DEFAULT_INTERVAL;
+
+				reIndexImages(folderId, entryStart, entryEnd);
+			}
+		}
+	}
+
+	protected void reIndexImages(long folderId, int entryStart, int entryEnd)
+		throws SystemException {
+
+		List<IGImage> images = igImagePersistence.findByFolderId(
+			folderId, entryStart, entryEnd);
+
+		for (IGImage entry : images) {
+			igImageLocalService.reIndex(entry);
+		}
 	}
 
 	protected void validate(long groupId, long parentFolderId, String name)

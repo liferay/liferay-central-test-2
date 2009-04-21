@@ -274,6 +274,10 @@ public interface IGImageLocalService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public void reIndex(long imageId) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public void reIndex(com.liferay.portlet.imagegallery.model.IGImage image)
+		throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.imagegallery.model.IGImage updateImage(
 		long userId, long imageId, long folderId, java.lang.String name,
 		java.lang.String description, byte[] bytes,
