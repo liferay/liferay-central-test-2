@@ -37,23 +37,16 @@ BlogsEntry entry = (BlogsEntry)request.getAttribute(WebKeys.BLOGS_ENTRY);
 
 long entryId = BeanParamUtil.getLong(entry, request, "entryId");
 
+BlogsEntry[] prevAndNext = BlogsEntryLocalServiceUtil.getEntriesPrevAndNext(entryId);
+
+BlogsEntry previousEntry = prevAndNext[0];
+BlogsEntry nextEntry = prevAndNext[2];
+
 pageDisplayStyle = RSSUtil.DISPLAY_STYLE_FULL_CONTENT;
 
 TagsAssetLocalServiceUtil.incrementViewCounter(BlogsEntry.class.getName(), entry.getEntryId());
 
 TagsUtil.addLayoutTagsEntries(request, TagsEntryLocalServiceUtil.getEntries(BlogsEntry.class.getName(), entry.getEntryId(), true));
-
-BlogsEntry[] prevAndNext = BlogsEntryLocalServiceUtil.getEntriesPrevAndNext(entryId);
-
-long prevEntryId = 0;
-long nextEntryId = 0;
-
-if (Validator.isNotNull(prevAndNext[0])) {
-	prevEntryId = prevAndNext[0].getEntryId();
-}
-if (Validator.isNotNull(prevAndNext[2])) {
-	nextEntryId = prevAndNext[2].getEntryId();
-}
 %>
 
 <form action="<portlet:actionURL><portlet:param name="struts_action" value="/blogs/edit_entry" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm1" onSubmit="<portlet:namespace />saveEntry(); return false;">
@@ -69,42 +62,30 @@ if (Validator.isNotNull(prevAndNext[2])) {
 
 </form>
 
-<br />
+<div class="entry-navigation">
+	[
 
-<div class="blog-entry-navigation">
-	<liferay-ui:message key="entries" /> [
+	<c:if test="<%= previousEntry != null %>">
+		<a href="<portlet:renderURL><portlet:param name="struts_action" value="/blogs/view_entry" /><portlet:param name="entryId" value="<%= String.valueOf(previousEntry.getEntryId()) %>" /></portlet:renderURL>">
+	</c:if>
 
-	<c:choose>
-		<c:when test="<%= prevEntryId != 0 %>">
-			<portlet:renderURL var="prevEntryURL">
-				<portlet:param name="entryId" value="<%= String.valueOf(prevEntryId) %>" />
-				<portlet:param name="redirect" value="<%= currentURL %>" />
-				<portlet:param name="struts_action" value="/blogs/view_entry" />
-			</portlet:renderURL>
+	<liferay-ui:message key="previous" />
 
-			<a href="<%= prevEntryURL %>"> <liferay-ui:message key="previous" /></a>
-		</c:when>
-		<c:otherwise>
-			<liferay-ui:message key="previous" />
-		</c:otherwise>
-	</c:choose>
+	<c:if test="<%= previousEntry != null %>">
+		</a>
+	</c:if>
 
 	|
 
-	<c:choose>
-		<c:when test="<%= nextEntryId != 0 %>">
-			<portlet:renderURL var="nextEntryURL">
-				<portlet:param name="entryId" value="<%= String.valueOf(nextEntryId) %>" />
-				<portlet:param name="redirect" value="<%= currentURL %>" />
-				<portlet:param name="struts_action" value="/blogs/view_entry" />
-			</portlet:renderURL>
+	<c:if test="<%= nextEntry != null %>">
+		<a href="<portlet:renderURL><portlet:param name="struts_action" value="/blogs/view_entry" /><portlet:param name="entryId" value="<%= String.valueOf(nextEntry.getEntryId()) %>" /></portlet:renderURL>">
+	</c:if>
 
-			<a href="<%= nextEntryURL %>"> <liferay-ui:message key="next" /> </a>
-		</c:when>
-		<c:otherwise>
-			<liferay-ui:message key="next" />
-		</c:otherwise>
-	</c:choose>
+	<liferay-ui:message key="next" />
+
+	<c:if test="<%= nextEntry != null %>">
+		</a>
+	</c:if>
 
 	]
 </div>

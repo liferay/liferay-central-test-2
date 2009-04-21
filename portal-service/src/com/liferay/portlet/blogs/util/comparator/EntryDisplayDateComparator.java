@@ -48,8 +48,8 @@ public class EntryDisplayDateComparator extends OrderByComparator {
 	}
 
 	public int compare(Object obj1, Object obj2) {
-		BlogsEntry entry1 = (BlogsEntry) obj1;
-		BlogsEntry entry2 = (BlogsEntry) obj2;
+		BlogsEntry entry1 = (BlogsEntry)obj1;
+		BlogsEntry entry2 = (BlogsEntry)obj2;
 
 		int value = DateUtil.compareTo(
 			entry1.getDisplayDate(), entry2.getDisplayDate());
