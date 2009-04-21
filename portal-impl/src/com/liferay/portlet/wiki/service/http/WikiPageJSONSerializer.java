@@ -58,6 +58,7 @@ public class WikiPageJSONSerializer {
 		jsonObj.put("uuid", model.getUuid());
 		jsonObj.put("pageId", model.getPageId());
 		jsonObj.put("resourcePrimKey", model.getResourcePrimKey());
+		jsonObj.put("groupId", model.getGroupId());
 		jsonObj.put("companyId", model.getCompanyId());
 		jsonObj.put("userId", model.getUserId());
 		jsonObj.put("userName", model.getUserName());

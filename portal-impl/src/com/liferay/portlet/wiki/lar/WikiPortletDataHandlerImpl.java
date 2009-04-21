@@ -52,7 +52,6 @@ import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.portlet.wiki.service.WikiNodeLocalServiceUtil;
 import com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil;
 import com.liferay.portlet.wiki.service.persistence.WikiNodeUtil;
-import com.liferay.portlet.wiki.service.persistence.WikiPageFinderUtil;
 import com.liferay.portlet.wiki.service.persistence.WikiPageUtil;
 import com.liferay.portlet.wiki.util.comparator.PageCreateDateComparator;
 
@@ -391,7 +390,7 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 					PortletDataHandlerKeys.DATA_STRATEGY_MIRROR)) {
 
 				try {
-					existingPage = WikiPageFinderUtil.findByUuid_G(
+					existingPage = WikiPageUtil.findByUUID_G(
 						page.getUuid(), context.getGroupId());
 				}
 				catch (NoSuchPageException nspe) {

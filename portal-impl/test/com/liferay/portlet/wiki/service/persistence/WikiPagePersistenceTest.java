@@ -74,6 +74,7 @@ public class WikiPagePersistenceTest extends BasePersistenceTestCase {
 
 		newWikiPage.setUuid(randomString());
 		newWikiPage.setResourcePrimKey(nextLong());
+		newWikiPage.setGroupId(nextLong());
 		newWikiPage.setCompanyId(nextLong());
 		newWikiPage.setUserId(nextLong());
 		newWikiPage.setUserName(randomString());
@@ -98,6 +99,7 @@ public class WikiPagePersistenceTest extends BasePersistenceTestCase {
 		assertEquals(existingWikiPage.getPageId(), newWikiPage.getPageId());
 		assertEquals(existingWikiPage.getResourcePrimKey(),
 			newWikiPage.getResourcePrimKey());
+		assertEquals(existingWikiPage.getGroupId(), newWikiPage.getGroupId());
 		assertEquals(existingWikiPage.getCompanyId(), newWikiPage.getCompanyId());
 		assertEquals(existingWikiPage.getUserId(), newWikiPage.getUserId());
 		assertEquals(existingWikiPage.getUserName(), newWikiPage.getUserName());
@@ -162,6 +164,7 @@ public class WikiPagePersistenceTest extends BasePersistenceTestCase {
 
 		wikiPage.setUuid(randomString());
 		wikiPage.setResourcePrimKey(nextLong());
+		wikiPage.setGroupId(nextLong());
 		wikiPage.setCompanyId(nextLong());
 		wikiPage.setUserId(nextLong());
 		wikiPage.setUserName(randomString());

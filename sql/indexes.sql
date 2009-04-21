@@ -552,5 +552,6 @@ create index IX_997EEDD2 on WikiPage (nodeId, title);
 create index IX_E745EA26 on WikiPage (nodeId, title, head);
 create unique index IX_3D4AF476 on WikiPage (nodeId, title, version);
 create index IX_9C0E478F on WikiPage (uuid_);
+create unique index IX_899D3DFB on WikiPage (uuid_, groupId);
 
 create unique index IX_21277664 on WikiPageResource (nodeId, title);

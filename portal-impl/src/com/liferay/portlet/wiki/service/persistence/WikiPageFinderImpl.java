@@ -63,9 +63,6 @@ public class WikiPageFinderImpl
 	public static String FIND_BY_NO_ASSETS =
 		WikiPageFinder.class.getName() + ".findByNoAssets";
 
-	public static String FIND_BY_UUID_G =
-		WikiPageFinder.class.getName() + ".findByUuid_G";
-
 	public int countByCreateDate(long nodeId, Date createDate, boolean before)
 		throws SystemException {
 
@@ -229,53 +226,6 @@ public class WikiPageFinderImpl
 			q.addEntity("WikiPage", WikiPageImpl.class);
 
 			return q.list();
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public WikiPage findByUuid_G(String uuid, long groupId)
-		throws NoSuchPageException, SystemException {
-
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			String sql = CustomSQLUtil.get(FIND_BY_UUID_G);
-
-			SQLQuery q = session.createSQLQuery(sql);
-
-			q.addEntity("WikiPage", WikiPageImpl.class);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(uuid);
-			qPos.add(groupId);
-
-			List<WikiPage> list = q.list();
-
-			if (list.size() == 0) {
-				StringBuilder sb = new StringBuilder();
-
-				sb.append("No WikiPage exists with the key {uuid=");
-				sb.append(uuid);
-				sb.append(", groupId=");
-				sb.append(groupId);
-				sb.append("}");
-
-				throw new NoSuchPageException(sb.toString());
-			}
-			else {
-				return list.get(0);
-			}
-		}
-		catch (NoSuchPageException nspe) {
-			throw nspe;
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

@@ -1584,6 +1584,7 @@ create table WikiPage (
 	uuid_ VARCHAR(75) null,
 	pageId LONG not null primary key,
 	resourcePrimKey LONG,
+	groupId LONG,
 	companyId LONG,
 	userId LONG,
 	userName VARCHAR(75) null,

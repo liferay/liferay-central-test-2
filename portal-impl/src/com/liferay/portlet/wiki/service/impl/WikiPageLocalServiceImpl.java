@@ -149,6 +149,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		page.setUuid(uuid);
 		page.setResourcePrimKey(resourcePrimKey);
+		page.setGroupId(node.getGroupId());
 		page.setCompanyId(user.getCompanyId());
 		page.setUserId(user.getUserId());
 		page.setUserName(user.getFullName());
@@ -169,7 +170,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		// Resources
 
-		addPageResources(page.getNode(), page, true, true);
+		addPageResources(page, true, true);
 
 		// Node
 
@@ -188,7 +189,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		// Social
 
 		socialActivityLocalService.addActivity(
-			userId, node.getGroupId(), WikiPage.class.getName(),
+			userId, page.getGroupId(), WikiPage.class.getName(),
 			resourcePrimKey, WikiActivityKeys.ADD_PAGE, StringPool.BLANK, 0);
 
 		// Subscriptions
@@ -207,7 +208,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		try {
 			Indexer.addPage(
-				page.getCompanyId(), node.getGroupId(), resourcePrimKey, nodeId,
+				page.getCompanyId(), page.getGroupId(), resourcePrimKey, nodeId,
 				title, content, page.getModifiedDate(),
 				serviceContext.getTagsCategories(),
 				serviceContext.getTagsEntries(), page.getExpandoBridge());
@@ -274,20 +275,18 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
-		WikiNode node = wikiNodePersistence.findByPrimaryKey(nodeId);
 		WikiPage page = getPage(nodeId, title);
 
-		addPageResources(
-			node, page, addCommunityPermissions, addGuestPermissions);
+		addPageResources(page, addCommunityPermissions, addGuestPermissions);
 	}
 
 	public void addPageResources(
-			WikiNode node, WikiPage page, boolean addCommunityPermissions,
+			WikiPage page, boolean addCommunityPermissions,
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		resourceLocalService.addResources(
-			page.getCompanyId(), node.getGroupId(),	page.getUserId(),
+			page.getCompanyId(), page.getGroupId(),	page.getUserId(),
 			WikiPage.class.getName(), page.getResourcePrimKey(), false,
 			addCommunityPermissions, addGuestPermissions);
 	}
@@ -297,19 +296,18 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			String[] guestPermissions)
 		throws PortalException, SystemException {
 
-		WikiNode node = wikiNodePersistence.findByPrimaryKey(nodeId);
 		WikiPage page = getPage(nodeId, title);
 
-		addPageResources(node, page, communityPermissions, guestPermissions);
+		addPageResources(page, communityPermissions, guestPermissions);
 	}
 
 	public void addPageResources(
-			WikiNode node, WikiPage page, String[] communityPermissions,
+			WikiPage page, String[] communityPermissions,
 			String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		resourceLocalService.addModelResources(
-			page.getCompanyId(), node.getGroupId(),	page.getUserId(),
+			page.getCompanyId(), page.getGroupId(),	page.getUserId(),
 			WikiPage.class.getName(), page.getResourcePrimKey(),
 			communityPermissions, guestPermissions);
 	}
@@ -851,14 +849,12 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		// Indexer
 
 		try {
-			WikiNode node = page.getNode();
-
 			Indexer.updatePage(
-				page.getCompanyId(), node.getGroupId(), resourcePrimKey, nodeId,
+				page.getCompanyId(), page.getGroupId(), resourcePrimKey, nodeId,
 				newTitle, page.getContent(), page.getModifiedDate(),
 				tagsCategories, tagsEntries, page.getExpandoBridge());
 
-			Indexer.deletePage(page.getCompanyId(), node.getGroupId(), title);
+			Indexer.deletePage(page.getCompanyId(), page.getGroupId(), title);
 		}
 		catch (SearchException se) {
 			_log.error("Indexing " + newTitle, se);
@@ -879,11 +875,9 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			return;
 		}
 
-		WikiNode node = wikiNodePersistence.fetchByPrimaryKey(page.getNodeId());
-
-		long companyId = node.getCompanyId();
-		long groupId = node.getGroupId();
-		long nodeId = node.getNodeId();
+		long companyId = page.getCompanyId();
+		long groupId = page.getGroupId();
+		long nodeId = page.getNodeId();
 		String title = page.getTitle();
 		String content = page.getContent();
 		Date modifiedDate = page.getModifiedDate();
@@ -972,6 +966,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		}
 
 		long resourcePrimKey = page.getResourcePrimKey();
+		long groupId = page.getGroupId();
 
 		page.setHead(false);
 		page.setModifiedDate(now);
@@ -985,6 +980,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		page = wikiPagePersistence.create(pageId);
 
 		page.setResourcePrimKey(resourcePrimKey);
+		page.setGroupId(groupId);
 		page.setCompanyId(user.getCompanyId());
 		page.setUserId(user.getUserId());
 		page.setUserName(user.getFullName());
@@ -1020,7 +1016,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		// Social
 
 		socialActivityLocalService.addActivity(
-			userId, node.getGroupId(), WikiPage.class.getName(),
+			userId, page.getGroupId(), WikiPage.class.getName(),
 			page.getResourcePrimKey(), WikiActivityKeys.UPDATE_PAGE,
 			StringPool.BLANK, 0);
 
@@ -1041,7 +1037,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		try {
 			if (Validator.isNull(page.getRedirectTitle())) {
 				Indexer.updatePage(
-					node.getCompanyId(), node.getGroupId(), resourcePrimKey,
+					page.getCompanyId(), page.getGroupId(), resourcePrimKey,
 					nodeId, title, content, page.getModifiedDate(),
 					serviceContext.getTagsCategories(),
 					serviceContext.getTagsEntries(), page.getExpandoBridge());
@@ -1064,7 +1060,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		tagsAssetLocalService.updateAsset(
-			userId, page.getNode().getGroupId(), WikiPage.class.getName(),
+			userId, page.getGroupId(), WikiPage.class.getName(),
 			page.getResourcePrimKey(), tagsCategories, tagsEntries, true, null,
 			null, null, null, ContentTypes.TEXT_HTML, page.getTitle(), null,
 			null, null, 0, 0, null, false);

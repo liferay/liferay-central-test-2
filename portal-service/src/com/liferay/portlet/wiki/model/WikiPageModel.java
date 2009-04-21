@@ -63,6 +63,10 @@ public interface WikiPageModel extends BaseModel<WikiPage> {
 
 	public void setResourcePrimKey(long resourcePrimKey);
 
+	public long getGroupId();
+
+	public void setGroupId(long groupId);
+
 	public long getCompanyId();
 
 	public void setCompanyId(long companyId);

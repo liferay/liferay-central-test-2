@@ -123,8 +123,7 @@ public interface WikiPageLocalService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public void addPageResources(com.liferay.portlet.wiki.model.WikiNode node,
-		com.liferay.portlet.wiki.model.WikiPage page,
+	public void addPageResources(com.liferay.portlet.wiki.model.WikiPage page,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
@@ -135,8 +134,7 @@ public interface WikiPageLocalService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public void addPageResources(com.liferay.portlet.wiki.model.WikiNode node,
-		com.liferay.portlet.wiki.model.WikiPage page,
+	public void addPageResources(com.liferay.portlet.wiki.model.WikiPage page,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,

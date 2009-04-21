@@ -28,7 +28,6 @@ import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portlet.wiki.NoSuchPageException;
-import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil;
 
@@ -105,10 +104,8 @@ public class WikiPagePermission {
 			return true;
 		}
 
-		WikiNode node = page.getNode();
-
 		return permissionChecker.hasPermission(
-			node.getGroupId(), WikiPage.class.getName(),
+			page.getGroupId(), WikiPage.class.getName(),
 			page.getResourcePrimKey(), actionId);
 	}
 

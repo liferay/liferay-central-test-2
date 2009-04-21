@@ -66,13 +66,6 @@ public class WikiPageFinderUtil {
 		return getFinder().findByNoAssets();
 	}
 
-	public static com.liferay.portlet.wiki.model.WikiPage findByUuid_G(
-		java.lang.String uuid, long groupId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.wiki.NoSuchPageException {
-		return getFinder().findByUuid_G(uuid, groupId);
-	}
-
 	public static WikiPageFinder getFinder() {
 		return _finder;
 	}

@@ -152,14 +152,12 @@ public class WikiPageLocalServiceUtil {
 	}
 
 	public static void addPageResources(
-		com.liferay.portlet.wiki.model.WikiNode node,
 		com.liferay.portlet.wiki.model.WikiPage page,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		getService()
-			.addPageResources(node, page, addCommunityPermissions,
-			addGuestPermissions);
+			.addPageResources(page, addCommunityPermissions, addGuestPermissions);
 	}
 
 	public static void addPageResources(long nodeId, java.lang.String title,
@@ -173,14 +171,13 @@ public class WikiPageLocalServiceUtil {
 	}
 
 	public static void addPageResources(
-		com.liferay.portlet.wiki.model.WikiNode node,
 		com.liferay.portlet.wiki.model.WikiPage page,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		getService()
-			.addPageResources(node, page, communityPermissions, guestPermissions);
+			.addPageResources(page, communityPermissions, guestPermissions);
 	}
 
 	public static void changeParent(long userId, long nodeId,

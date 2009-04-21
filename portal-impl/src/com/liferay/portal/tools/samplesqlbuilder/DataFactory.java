@@ -449,14 +449,15 @@ public class DataFactory {
 	}
 
 	public WikiPage addWikiPage(
-			long userId, long nodeId, String title, double version,
-			String content, boolean head)
+			long groupId, long userId, long nodeId, String title,
+			double version, String content, boolean head)
 		throws Exception {
 
 		WikiPage wikiPage = new WikiPageImpl();
 
 		wikiPage.setPageId(_counter.get());
 		wikiPage.setResourcePrimKey(_counter.get());
+		wikiPage.setGroupId(groupId);
 		wikiPage.setUserId(userId);
 		wikiPage.setNodeId(nodeId);
 		wikiPage.setTitle(title);

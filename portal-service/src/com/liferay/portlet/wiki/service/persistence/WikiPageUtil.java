@@ -143,6 +143,25 @@ public class WikiPageUtil {
 		return getPersistence().findByUuid_PrevAndNext(pageId, uuid, obc);
 	}
 
+	public static com.liferay.portlet.wiki.model.WikiPage findByUUID_G(
+		java.lang.String uuid, long groupId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.wiki.NoSuchPageException {
+		return getPersistence().findByUUID_G(uuid, groupId);
+	}
+
+	public static com.liferay.portlet.wiki.model.WikiPage fetchByUUID_G(
+		java.lang.String uuid, long groupId)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByUUID_G(uuid, groupId);
+	}
+
+	public static com.liferay.portlet.wiki.model.WikiPage fetchByUUID_G(
+		java.lang.String uuid, long groupId, boolean retrieveFromCache)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByUUID_G(uuid, groupId, retrieveFromCache);
+	}
+
 	public static java.util.List<com.liferay.portlet.wiki.model.WikiPage> findByNodeId(
 		long nodeId) throws com.liferay.portal.SystemException {
 		return getPersistence().findByNodeId(nodeId);
@@ -542,6 +561,12 @@ public class WikiPageUtil {
 		getPersistence().removeByUuid(uuid);
 	}
 
+	public static void removeByUUID_G(java.lang.String uuid, long groupId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.wiki.NoSuchPageException {
+		getPersistence().removeByUUID_G(uuid, groupId);
+	}
+
 	public static void removeByNodeId(long nodeId)
 		throws com.liferay.portal.SystemException {
 		getPersistence().removeByNodeId(nodeId);
@@ -596,6 +621,11 @@ public class WikiPageUtil {
 	public static int countByUuid(java.lang.String uuid)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByUuid(uuid);
+	}
+
+	public static int countByUUID_G(java.lang.String uuid, long groupId)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByUUID_G(uuid, groupId);
 	}
 
 	public static int countByNodeId(long nodeId)

@@ -74,6 +74,9 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage> {
 			{ "resourcePrimKey", new Integer(Types.BIGINT) },
 			
 
+			{ "groupId", new Integer(Types.BIGINT) },
+			
+
 			{ "companyId", new Integer(Types.BIGINT) },
 			
 
@@ -118,7 +121,7 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage> {
 
 			{ "redirectTitle", new Integer(Types.VARCHAR) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table WikiPage (uuid_ VARCHAR(75) null,pageId LONG not null primary key,resourcePrimKey LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,nodeId LONG,title VARCHAR(255) null,version DOUBLE,minorEdit BOOLEAN,content TEXT null,summary STRING null,format VARCHAR(75) null,head BOOLEAN,parentTitle VARCHAR(75) null,redirectTitle VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table WikiPage (uuid_ VARCHAR(75) null,pageId LONG not null primary key,resourcePrimKey LONG,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,nodeId LONG,title VARCHAR(255) null,version DOUBLE,minorEdit BOOLEAN,content TEXT null,summary STRING null,format VARCHAR(75) null,head BOOLEAN,parentTitle VARCHAR(75) null,redirectTitle VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table WikiPage";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -136,6 +139,7 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage> {
 		model.setUuid(soapModel.getUuid());
 		model.setPageId(soapModel.getPageId());
 		model.setResourcePrimKey(soapModel.getResourcePrimKey());
+		model.setGroupId(soapModel.getGroupId());
 		model.setCompanyId(soapModel.getCompanyId());
 		model.setUserId(soapModel.getUserId());
 		model.setUserName(soapModel.getUserName());
@@ -189,6 +193,14 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage> {
 
 	public void setUuid(String uuid) {
 		_uuid = uuid;
+
+		if (_originalUuid == null) {
+			_originalUuid = uuid;
+		}
+	}
+
+	public String getOriginalUuid() {
+		return GetterUtil.getString(_originalUuid);
 	}
 
 	public long getPageId() {
@@ -205,6 +217,24 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage> {
 
 	public void setResourcePrimKey(long resourcePrimKey) {
 		_resourcePrimKey = resourcePrimKey;
+	}
+
+	public long getGroupId() {
+		return _groupId;
+	}
+
+	public void setGroupId(long groupId) {
+		_groupId = groupId;
+
+		if (!_setOriginalGroupId) {
+			_setOriginalGroupId = true;
+
+			_originalGroupId = groupId;
+		}
+	}
+
+	public long getOriginalGroupId() {
+		return _originalGroupId;
 	}
 
 	public long getCompanyId() {
@@ -376,6 +406,7 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage> {
 			model.setUuid(HtmlUtil.escape(getUuid()));
 			model.setPageId(getPageId());
 			model.setResourcePrimKey(getResourcePrimKey());
+			model.setGroupId(getGroupId());
 			model.setCompanyId(getCompanyId());
 			model.setUserId(getUserId());
 			model.setUserName(HtmlUtil.escape(getUserName()));
@@ -415,6 +446,7 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage> {
 		clone.setUuid(getUuid());
 		clone.setPageId(getPageId());
 		clone.setResourcePrimKey(getResourcePrimKey());
+		clone.setGroupId(getGroupId());
 		clone.setCompanyId(getCompanyId());
 		clone.setUserId(getUserId());
 		clone.setUserName(getUserName());
@@ -504,8 +536,12 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage> {
 	}
 
 	private String _uuid;
+	private String _originalUuid;
 	private long _pageId;
 	private long _resourcePrimKey;
+	private long _groupId;
+	private long _originalGroupId;
+	private boolean _setOriginalGroupId;
 	private long _companyId;
 	private long _userId;
 	private String _userName;

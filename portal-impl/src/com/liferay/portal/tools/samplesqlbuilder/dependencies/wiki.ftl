@@ -8,7 +8,7 @@
 			<#list 1..maxWikiPageCount as wikiPageCount>
 				<#assign wikiPageCounterIncrement = wikiPageCounter.increment()>
 
-				<#assign wikiPage = dataFactory.addWikiPage(firstUserId, wikiNode.nodeId, "Test Page " + wikiPageCount, 1.0, "This is a test page " + wikiPageCount + ".", true)>
+				<#assign wikiPage = dataFactory.addWikiPage(groupId, firstUserId, wikiNode.nodeId, "Test Page " + wikiPageCount, 1.0, "This is a test page " + wikiPageCount + ".", true)>
 
 				${sampleSQLBuilder.insertWikiPage(wikiNode, wikiPage)}
 
