@@ -487,8 +487,8 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 		List<IGImage> images = igImagePersistence.findByFolderId(
 			folderId, entryStart, entryEnd);
 
-		for (IGImage entry : images) {
-			igImageLocalService.reIndex(entry);
+		for (IGImage image : images) {
+			igImageLocalService.reIndex(image);
 		}
 	}
 
