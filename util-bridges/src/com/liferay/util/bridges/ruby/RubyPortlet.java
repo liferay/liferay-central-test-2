@@ -22,14 +22,9 @@
 
 package com.liferay.util.bridges.ruby;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.util.bridges.bsf.BaseBSFPortlet;
+import com.liferay.util.bridges.scripting.ScriptingPortlet;
 
-import org.apache.bsf.BSFException;
-
-import org.jruby.RubyException;
-import org.jruby.exceptions.RaiseException;
+import javax.portlet.RenderRequest;
 
 /**
  * <a href="RubyPortlet.java.html"><b><i>View Source</i></b></a>
@@ -37,56 +32,16 @@ import org.jruby.exceptions.RaiseException;
  * @author Jorge Ferrer
  *
  */
-public class RubyPortlet extends BaseBSFPortlet {
+public class RubyPortlet extends ScriptingPortlet {
 
-	protected String getFileParam() {
-		return _FILE_PARAM;
+	public void init() {
+		super.init();
+
+		scriptingLanguage = "ruby";
 	}
 
-	protected String getScriptingEngineClassName() {
-		return _SCRIPTING_ENGINE_CLASS_NAME;
+	protected String getFileName(RenderRequest renderRequest) {
+		return renderRequest.getParameter("rubyFile");
 	}
-
-	protected String getScriptingEngineExtension() {
-		return _SCRIPTING_ENGINE_EXTENSION;
-	}
-
-	protected String getScriptingEngineLanguage() {
-		return _SCRIPTING_ENGINE_LANGUAGE;
-	}
-
-	protected void logBSFException(BSFException bsfe, String path) {
-		String message =
-			"The script at " + path + " or one of the global files has errors.";
-
-		Throwable t = bsfe.getTargetException();
-
-		if (t instanceof RaiseException) {
-			RubyException re = ((RaiseException)t).getException();
-
-			message +=
-				re.message + " (" + re.getMetaClass().toString() + ")";
-
-			_log.error(message);
-
-			if (_log.isDebugEnabled()) {
-				_log.debug(t, t);
-			}
-		}
-		else {
-			_log.error(message, t);
-		}
-	}
-
-	private static final String _FILE_PARAM = "rubyFile";
-
-	private static final String _SCRIPTING_ENGINE_CLASS_NAME =
-		"org.jruby.javasupport.bsf.JRubyEngine";
-
-	private static final String _SCRIPTING_ENGINE_EXTENSION = "rb";
-
-	private static final String _SCRIPTING_ENGINE_LANGUAGE = "ruby";
-
-	private static Log _log = LogFactoryUtil.getLog(RubyPortlet.class);
 
 }

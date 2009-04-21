@@ -20,30 +20,31 @@
  * SOFTWARE.
  */
 
-package com.liferay.util.bridges.groovy;
+package com.liferay.portal.scripting;
 
-import com.liferay.util.bridges.scripting.ScriptingPortlet;
-
-import javax.portlet.RenderRequest;
+import com.liferay.portal.PortalException;
 
 /**
- * <a href="GroovyPortlet.java.html"><b><i>View Source</i></b></a>
+ * <a href="ScriptExecutionException.java.html"><b><i>View Source</i></b></a>
  *
- * @author Jorge Ferrer
  * @author Alberto Montero
- * @author Brian Wing Shun Chan
- *
  */
-public class GroovyPortlet extends ScriptingPortlet {
+public class ScriptExecutionException extends PortalException {
 
-	public void init() {
-		super.init();
-
-		scriptingLanguage = "groovy";
+	public ScriptExecutionException() {
+		super();
 	}
 
-	protected String getFileName(RenderRequest renderRequest) {
-		return renderRequest.getParameter("groovyFile");
+	public ScriptExecutionException(String msg) {
+		super(msg);
+	}
+
+	public ScriptExecutionException(String msg, Throwable cause) {
+		super(msg, cause);
+	}
+
+	public ScriptExecutionException(Throwable cause) {
+		super(cause);
 	}
 
 }

@@ -154,13 +154,13 @@
 		</licenses>
 	</library>
 	<library>
-		<file-name>development/groovy.jar</file-name>
-		<version>1.5.6</version>
+		<file-name>portal/groovy-all.jar</file-name>
+		<version>1.6.1</version>
 		<project-name>Groovy</project-name>
 		<project-url>http://groovy.codehaus.org</project-url>
 		<licenses>
 			<license>
-				<license-name>BSD Style License</license-name>
+				<license-name>Apache License 2.0</license-name>
 			</license>
 		</licenses>
 	</library>
@@ -548,6 +548,17 @@
 		<licenses>
 			<license>
 				<license-name>GPL 2.0</license-name>
+			</license>
+		</licenses>
+	</library>
+	<library>
+		<file-name>portal/jython.jar</file-name>
+		<version>2.2.1</version>
+		<project-name>Jython</project-name>
+		<project-url>http://www.jython.org</project-url>
+		<licenses>
+			<license>
+				<license-name>PYTHON SOFTWARE FOUNDATION LICENSE VERSION 2</license-name>
 			</license>
 		</licenses>
 	</library>

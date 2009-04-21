@@ -282,6 +282,11 @@
 	<bean id="com.liferay.portal.kernel.uuid.PortalUUIDUtil" class="com.liferay.portal.kernel.uuid.PortalUUIDUtil">
 		<property name="portalUUID" ref="com.liferay.portal.kernel.uuid.PortalUUID" />
 	</bean>
+	<bean id="com.liferay.portal.scripting.ScriptingUtil" class="com.liferay.portal.scripting.ScriptingUtil">
+		<property name="scripting">
+			<bean class="com.liferay.portal.scripting.ScriptingImpl" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.kernel.velocity.VelocityEngine" class="com.liferay.portal.velocity.VelocityEngineImpl" />
 	<bean id="com.liferay.portal.kernel.velocity.VelocityEngineUtil" class="com.liferay.portal.kernel.velocity.VelocityEngineUtil">
 		<property name="velocityEngine" ref="com.liferay.portal.kernel.velocity.VelocityEngine" />
