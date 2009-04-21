@@ -241,8 +241,8 @@ DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
 				searchContainer.setResults(messages);
 			}
 
-			for (i = 0; i < messages.size(); i++) {
-				message = (MBMessage)messages.get(i);
+			for (i = 1; i <= messages.size(); i++) {
+				message = (MBMessage)messages.get(i - 1);
 			%>
 
 				<tr>
