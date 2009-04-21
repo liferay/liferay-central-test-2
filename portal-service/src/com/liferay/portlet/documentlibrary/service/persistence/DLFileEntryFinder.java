@@ -32,35 +32,6 @@ public interface DLFileEntryFinder {
 	public int countByFolderIds(java.util.List<Long> folderIds)
 		throws com.liferay.portal.SystemException;
 
-	public int countByGroupId(long groupId)
-		throws com.liferay.portal.SystemException;
-
-	public int countByG_U(long groupId, long userId)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> findByGroupId(
-		long groupId, int start, int end)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> findByGroupId(
-		long groupId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException;
-
 	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> findByNoAssets()
 		throws com.liferay.portal.SystemException;
-
-	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> findByG_U(
-		long groupId, long userId, int start, int end)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> findByG_U(
-		long groupId, long userId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException;
-
-	public com.liferay.portlet.documentlibrary.model.DLFileEntry findByUuid_G(
-		java.lang.String uuid, long groupId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 }

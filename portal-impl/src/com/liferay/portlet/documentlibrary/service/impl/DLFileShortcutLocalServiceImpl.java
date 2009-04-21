@@ -101,6 +101,7 @@ public class DLFileShortcutLocalServiceImpl
 			fileShortcutId);
 
 		fileShortcut.setUuid(uuid);
+		fileShortcut.setGroupId(folder.getGroupId());
 		fileShortcut.setCompanyId(user.getCompanyId());
 		fileShortcut.setUserId(user.getUserId());
 		fileShortcut.setUserName(user.getFullName());

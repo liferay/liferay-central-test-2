@@ -57,6 +57,7 @@ public class DLFileShortcutJSONSerializer {
 
 		jsonObj.put("uuid", model.getUuid());
 		jsonObj.put("fileShortcutId", model.getFileShortcutId());
+		jsonObj.put("groupId", model.getGroupId());
 		jsonObj.put("companyId", model.getCompanyId());
 		jsonObj.put("userId", model.getUserId());
 		jsonObj.put("userName", model.getUserName());

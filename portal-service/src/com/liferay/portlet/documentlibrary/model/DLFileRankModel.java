@@ -55,6 +55,10 @@ public interface DLFileRankModel extends BaseModel<DLFileRank> {
 
 	public void setFileRankId(long fileRankId);
 
+	public long getGroupId();
+
+	public void setGroupId(long groupId);
+
 	public long getCompanyId();
 
 	public void setCompanyId(long companyId);

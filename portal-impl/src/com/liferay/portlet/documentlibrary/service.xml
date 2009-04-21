@@ -9,6 +9,10 @@
 
 		<column name="fileEntryId" type="long" primary="true" />
 
+		<!-- Group instance -->
+
+		<column name="groupId" type="long" />
+
 		<!-- Audit fields -->
 
 		<column name="companyId" type="long" />
@@ -39,11 +43,18 @@
 
 		<!-- Finder methods -->
 
+		<finder name="GroupId" return-type="Collection">
+			<finder-column name="groupId" />
+		</finder>
 		<finder name="CompanyId" return-type="Collection">
 			<finder-column name="companyId" />
 		</finder>
 		<finder name="FolderId" return-type="Collection">
 			<finder-column name="folderId" />
+		</finder>
+		<finder name="G_U" return-type="Collection">
+			<finder-column name="groupId" />
+			<finder-column name="userId" />
 		</finder>
 		<finder name="F_N" return-type="DLFileEntry" unique="true">
 			<finder-column name="folderId" />
@@ -81,6 +92,10 @@
 
 		<column name="fileRankId" type="long" primary="true" />
 
+		<!-- Group instance -->
+
+		<column name="groupId" type="long" />
+
 		<!-- Audit fields -->
 
 		<column name="companyId" type="long" />
@@ -101,6 +116,10 @@
 		<!-- Finders -->
 
 		<finder name="UserId" return-type="Collection">
+			<finder-column name="userId" />
+		</finder>
+		<finder name="G_U" return-type="Collection">
+			<finder-column name="groupId" />
 			<finder-column name="userId" />
 		</finder>
 		<finder name="F_N" return-type="Collection">
@@ -124,6 +143,10 @@
 		<!-- PK fields -->
 
 		<column name="fileShortcutId" type="long" primary="true" />
+
+		<!-- Group instance -->
+
+		<column name="groupId" type="long" />
 
 		<!-- Audit fields -->
 
@@ -160,6 +183,10 @@
 		<!-- PK fields -->
 
 		<column name="fileVersionId" type="long" primary="true" />
+
+		<!-- Group instance -->
+
+		<column name="groupId" type="long" />
 
 		<!-- Audit fields -->
 

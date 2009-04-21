@@ -116,5 +116,7 @@ public interface DLFileRankLocalService {
 
 	public com.liferay.portlet.documentlibrary.model.DLFileRank updateFileRank(
 		long groupId, long companyId, long userId, long folderId,
-		java.lang.String name) throws com.liferay.portal.SystemException;
+		java.lang.String name)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 }

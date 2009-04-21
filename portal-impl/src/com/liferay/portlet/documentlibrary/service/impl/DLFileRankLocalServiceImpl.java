@@ -22,10 +22,14 @@
 
 package com.liferay.portlet.documentlibrary.service.impl;
 
+import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portlet.documentlibrary.NoSuchFileRankException;
 import com.liferay.portlet.documentlibrary.model.DLFileRank;
+import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.service.base.DLFileRankLocalServiceBaseImpl;
+import com.liferay.portlet.documentlibrary.util.comparator.FileRankCreateDateComparator;
 
 import java.util.Date;
 import java.util.List;
@@ -51,20 +55,22 @@ public class DLFileRankLocalServiceImpl extends DLFileRankLocalServiceBaseImpl {
 	public List<DLFileRank> getFileRanks(long groupId, long userId)
 		throws SystemException {
 
-		return dlFileRankFinder.findByG_U(groupId, userId);
+		return getFileRanks(
+			groupId, userId, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 	}
 
 	public List<DLFileRank> getFileRanks(
 			long groupId, long userId, int start, int end)
 		throws SystemException {
 
-		return dlFileRankFinder.findByG_U(groupId, userId, start, end);
+		return dlFileRankPersistence.findByG_U(
+			groupId, userId, start, end, new FileRankCreateDateComparator());
 	}
 
 	public DLFileRank updateFileRank(
 			long groupId, long companyId, long userId, long folderId,
 			String name)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		try {
 			dlFileRankPersistence.removeByC_U_F_N(
@@ -73,10 +79,13 @@ public class DLFileRankLocalServiceImpl extends DLFileRankLocalServiceBaseImpl {
 		catch (NoSuchFileRankException nsfre) {
 		}
 
+		DLFolder folder = dlFolderPersistence.findByPrimaryKey(folderId);
+
 		long fileRankId = counterLocalService.increment();
 
 		DLFileRank fileRank = dlFileRankPersistence.create(fileRankId);
 
+		fileRank.setGroupId(folder.getGroupId());
 		fileRank.setCompanyId(companyId);
 		fileRank.setUserId(userId);
 		fileRank.setCreateDate(new Date());
@@ -85,9 +94,8 @@ public class DLFileRankLocalServiceImpl extends DLFileRankLocalServiceBaseImpl {
 
 		dlFileRankPersistence.update(fileRank, false);
 
-		if (dlFileRankFinder.countByG_U(groupId, userId) > 5) {
-			List<DLFileRank> fileRanks = dlFileRankFinder.findByG_U(
-				groupId, userId);
+		if (dlFileRankPersistence.countByG_U(groupId, userId) > 5) {
+			List<DLFileRank> fileRanks = getFileRanks(groupId, userId);
 
 			DLFileRank lastFileRank = fileRanks.get(fileRanks.size() - 1);
 

@@ -71,6 +71,9 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry> {
 			{ "fileEntryId", new Integer(Types.BIGINT) },
 			
 
+			{ "groupId", new Integer(Types.BIGINT) },
+			
+
 			{ "companyId", new Integer(Types.BIGINT) },
 			
 
@@ -115,7 +118,7 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry> {
 
 			{ "extraSettings", new Integer(Types.CLOB) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table DLFileEntry (uuid_ VARCHAR(75) null,fileEntryId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,versionUserId LONG,versionUserName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,folderId LONG,name VARCHAR(255) null,title VARCHAR(255) null,description STRING null,version DOUBLE,size_ INTEGER,readCount INTEGER,extraSettings TEXT null)";
+	public static final String TABLE_SQL_CREATE = "create table DLFileEntry (uuid_ VARCHAR(75) null,fileEntryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,versionUserId LONG,versionUserName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,folderId LONG,name VARCHAR(255) null,title VARCHAR(255) null,description STRING null,version DOUBLE,size_ INTEGER,readCount INTEGER,extraSettings TEXT null)";
 	public static final String TABLE_SQL_DROP = "drop table DLFileEntry";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -132,6 +135,7 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry> {
 
 		model.setUuid(soapModel.getUuid());
 		model.setFileEntryId(soapModel.getFileEntryId());
+		model.setGroupId(soapModel.getGroupId());
 		model.setCompanyId(soapModel.getCompanyId());
 		model.setUserId(soapModel.getUserId());
 		model.setUserName(soapModel.getUserName());
@@ -185,6 +189,14 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry> {
 
 	public void setUuid(String uuid) {
 		_uuid = uuid;
+
+		if (_originalUuid == null) {
+			_originalUuid = uuid;
+		}
+	}
+
+	public String getOriginalUuid() {
+		return GetterUtil.getString(_originalUuid);
 	}
 
 	public long getFileEntryId() {
@@ -193,6 +205,24 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry> {
 
 	public void setFileEntryId(long fileEntryId) {
 		_fileEntryId = fileEntryId;
+	}
+
+	public long getGroupId() {
+		return _groupId;
+	}
+
+	public void setGroupId(long groupId) {
+		_groupId = groupId;
+
+		if (!_setOriginalGroupId) {
+			_setOriginalGroupId = true;
+
+			_originalGroupId = groupId;
+		}
+	}
+
+	public long getOriginalGroupId() {
+		return _originalGroupId;
 	}
 
 	public long getCompanyId() {
@@ -345,6 +375,7 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry> {
 
 			model.setUuid(HtmlUtil.escape(getUuid()));
 			model.setFileEntryId(getFileEntryId());
+			model.setGroupId(getGroupId());
 			model.setCompanyId(getCompanyId());
 			model.setUserId(getUserId());
 			model.setUserName(HtmlUtil.escape(getUserName()));
@@ -383,6 +414,7 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry> {
 
 		clone.setUuid(getUuid());
 		clone.setFileEntryId(getFileEntryId());
+		clone.setGroupId(getGroupId());
 		clone.setCompanyId(getCompanyId());
 		clone.setUserId(getUserId());
 		clone.setUserName(getUserName());
@@ -457,7 +489,11 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry> {
 	}
 
 	private String _uuid;
+	private String _originalUuid;
 	private long _fileEntryId;
+	private long _groupId;
+	private long _originalGroupId;
+	private boolean _setOriginalGroupId;
 	private long _companyId;
 	private long _userId;
 	private String _userName;

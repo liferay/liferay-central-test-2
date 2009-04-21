@@ -71,6 +71,9 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut> {
 			{ "fileShortcutId", new Integer(Types.BIGINT) },
 			
 
+			{ "groupId", new Integer(Types.BIGINT) },
+			
+
 			{ "companyId", new Integer(Types.BIGINT) },
 			
 
@@ -94,7 +97,7 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut> {
 
 			{ "toName", new Integer(Types.VARCHAR) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table DLFileShortcut (uuid_ VARCHAR(75) null,fileShortcutId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,folderId LONG,toFolderId LONG,toName VARCHAR(255) null)";
+	public static final String TABLE_SQL_CREATE = "create table DLFileShortcut (uuid_ VARCHAR(75) null,fileShortcutId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,folderId LONG,toFolderId LONG,toName VARCHAR(255) null)";
 	public static final String TABLE_SQL_DROP = "drop table DLFileShortcut";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -111,6 +114,7 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut> {
 
 		model.setUuid(soapModel.getUuid());
 		model.setFileShortcutId(soapModel.getFileShortcutId());
+		model.setGroupId(soapModel.getGroupId());
 		model.setCompanyId(soapModel.getCompanyId());
 		model.setUserId(soapModel.getUserId());
 		model.setUserName(soapModel.getUserName());
@@ -157,6 +161,14 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut> {
 
 	public void setUuid(String uuid) {
 		_uuid = uuid;
+
+		if (_originalUuid == null) {
+			_originalUuid = uuid;
+		}
+	}
+
+	public String getOriginalUuid() {
+		return GetterUtil.getString(_originalUuid);
 	}
 
 	public long getFileShortcutId() {
@@ -165,6 +177,24 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut> {
 
 	public void setFileShortcutId(long fileShortcutId) {
 		_fileShortcutId = fileShortcutId;
+	}
+
+	public long getGroupId() {
+		return _groupId;
+	}
+
+	public void setGroupId(long groupId) {
+		_groupId = groupId;
+
+		if (!_setOriginalGroupId) {
+			_setOriginalGroupId = true;
+
+			_originalGroupId = groupId;
+		}
+	}
+
+	public long getOriginalGroupId() {
+		return _originalGroupId;
 	}
 
 	public long getCompanyId() {
@@ -243,6 +273,7 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut> {
 
 			model.setUuid(HtmlUtil.escape(getUuid()));
 			model.setFileShortcutId(getFileShortcutId());
+			model.setGroupId(getGroupId());
 			model.setCompanyId(getCompanyId());
 			model.setUserId(getUserId());
 			model.setUserName(HtmlUtil.escape(getUserName()));
@@ -274,6 +305,7 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut> {
 
 		clone.setUuid(getUuid());
 		clone.setFileShortcutId(getFileShortcutId());
+		clone.setGroupId(getGroupId());
 		clone.setCompanyId(getCompanyId());
 		clone.setUserId(getUserId());
 		clone.setUserName(getUserName());
@@ -329,7 +361,11 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut> {
 	}
 
 	private String _uuid;
+	private String _originalUuid;
 	private long _fileShortcutId;
+	private long _groupId;
+	private long _originalGroupId;
+	private boolean _setOriginalGroupId;
 	private long _companyId;
 	private long _userId;
 	private String _userName;

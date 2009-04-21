@@ -81,6 +81,14 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 			DLFileShortcutModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "countByUuid",
 			new String[] { String.class.getName() });
+	public static final FinderPath FINDER_PATH_FETCH_BY_UUID_G = new FinderPath(DLFileShortcutModelImpl.ENTITY_CACHE_ENABLED,
+			DLFileShortcutModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_ENTITY, "fetchByUUID_G",
+			new String[] { String.class.getName(), Long.class.getName() });
+	public static final FinderPath FINDER_PATH_COUNT_BY_UUID_G = new FinderPath(DLFileShortcutModelImpl.ENTITY_CACHE_ENABLED,
+			DLFileShortcutModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countByUUID_G",
+			new String[] { String.class.getName(), Long.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_BY_FOLDERID = new FinderPath(DLFileShortcutModelImpl.ENTITY_CACHE_ENABLED,
 			DLFileShortcutModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "findByFolderId",
@@ -126,6 +134,11 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 		EntityCacheUtil.putResult(DLFileShortcutModelImpl.ENTITY_CACHE_ENABLED,
 			DLFileShortcutImpl.class, dlFileShortcut.getPrimaryKey(),
 			dlFileShortcut);
+
+		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
+			new Object[] {
+				dlFileShortcut.getUuid(), new Long(dlFileShortcut.getGroupId())
+			}, dlFileShortcut);
 	}
 
 	public void cacheResult(List<DLFileShortcut> dlFileShortcuts) {
@@ -230,6 +243,14 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
+		DLFileShortcutModelImpl dlFileShortcutModelImpl = (DLFileShortcutModelImpl)dlFileShortcut;
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
+			new Object[] {
+				dlFileShortcutModelImpl.getOriginalUuid(),
+				new Long(dlFileShortcutModelImpl.getOriginalGroupId())
+			});
+
 		EntityCacheUtil.removeResult(DLFileShortcutModelImpl.ENTITY_CACHE_ENABLED,
 			DLFileShortcutImpl.class, dlFileShortcut.getPrimaryKey());
 
@@ -292,6 +313,10 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 	public DLFileShortcut updateImpl(
 		com.liferay.portlet.documentlibrary.model.DLFileShortcut dlFileShortcut,
 		boolean merge) throws SystemException {
+		boolean isNew = dlFileShortcut.isNew();
+
+		DLFileShortcutModelImpl dlFileShortcutModelImpl = (DLFileShortcutModelImpl)dlFileShortcut;
+
 		if (Validator.isNull(dlFileShortcut.getUuid())) {
 			String uuid = PortalUUIDUtil.generate();
 
@@ -319,6 +344,28 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 		EntityCacheUtil.putResult(DLFileShortcutModelImpl.ENTITY_CACHE_ENABLED,
 			DLFileShortcutImpl.class, dlFileShortcut.getPrimaryKey(),
 			dlFileShortcut);
+
+		if (!isNew &&
+				(!dlFileShortcut.getUuid()
+									.equals(dlFileShortcutModelImpl.getOriginalUuid()) ||
+				(dlFileShortcut.getGroupId() != dlFileShortcutModelImpl.getOriginalGroupId()))) {
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
+				new Object[] {
+					dlFileShortcutModelImpl.getOriginalUuid(),
+					new Long(dlFileShortcutModelImpl.getOriginalGroupId())
+				});
+		}
+
+		if (isNew ||
+				(!dlFileShortcut.getUuid()
+									.equals(dlFileShortcutModelImpl.getOriginalUuid()) ||
+				(dlFileShortcut.getGroupId() != dlFileShortcutModelImpl.getOriginalGroupId()))) {
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
+				new Object[] {
+					dlFileShortcut.getUuid(),
+					new Long(dlFileShortcut.getGroupId())
+				}, dlFileShortcut);
+		}
 
 		return dlFileShortcut;
 	}
@@ -596,6 +643,122 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 		}
 		finally {
 			closeSession(session);
+		}
+	}
+
+	public DLFileShortcut findByUUID_G(String uuid, long groupId)
+		throws NoSuchFileShortcutException, SystemException {
+		DLFileShortcut dlFileShortcut = fetchByUUID_G(uuid, groupId);
+
+		if (dlFileShortcut == null) {
+			StringBuilder msg = new StringBuilder();
+
+			msg.append("No DLFileShortcut exists with the key {");
+
+			msg.append("uuid=" + uuid);
+
+			msg.append(", ");
+			msg.append("groupId=" + groupId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchFileShortcutException(msg.toString());
+		}
+
+		return dlFileShortcut;
+	}
+
+	public DLFileShortcut fetchByUUID_G(String uuid, long groupId)
+		throws SystemException {
+		return fetchByUUID_G(uuid, groupId, true);
+	}
+
+	public DLFileShortcut fetchByUUID_G(String uuid, long groupId,
+		boolean retrieveFromCache) throws SystemException {
+		Object[] finderArgs = new Object[] { uuid, new Long(groupId) };
+
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_UUID_G,
+					finderArgs, this);
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append(
+					"FROM com.liferay.portlet.documentlibrary.model.DLFileShortcut WHERE ");
+
+				if (uuid == null) {
+					query.append("uuid_ IS NULL");
+				}
+				else {
+					query.append("uuid_ = ?");
+				}
+
+				query.append(" AND ");
+
+				query.append("groupId = ?");
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (uuid != null) {
+					qPos.add(uuid);
+				}
+
+				qPos.add(groupId);
+
+				List<DLFileShortcut> list = q.list();
+
+				result = list;
+
+				DLFileShortcut dlFileShortcut = null;
+
+				if (list.isEmpty()) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
+						finderArgs, list);
+				}
+				else {
+					dlFileShortcut = list.get(0);
+
+					cacheResult(dlFileShortcut);
+				}
+
+				return dlFileShortcut;
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (result == null) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
+						finderArgs, new ArrayList<DLFileShortcut>());
+				}
+
+				closeSession(session);
+			}
+		}
+		else {
+			if (result instanceof List) {
+				return null;
+			}
+			else {
+				return (DLFileShortcut)result;
+			}
 		}
 	}
 
@@ -1180,6 +1343,13 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
+	public void removeByUUID_G(String uuid, long groupId)
+		throws NoSuchFileShortcutException, SystemException {
+		DLFileShortcut dlFileShortcut = findByUUID_G(uuid, groupId);
+
+		remove(dlFileShortcut);
+	}
+
 	public void removeByFolderId(long folderId) throws SystemException {
 		for (DLFileShortcut dlFileShortcut : findByFolderId(folderId)) {
 			remove(dlFileShortcut);
@@ -1245,6 +1415,68 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 				}
 
 				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_UUID,
+					finderArgs, count);
+
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	public int countByUUID_G(String uuid, long groupId)
+		throws SystemException {
+		Object[] finderArgs = new Object[] { uuid, new Long(groupId) };
+
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_UUID_G,
+				finderArgs, this);
+
+		if (count == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append("SELECT COUNT(*) ");
+				query.append(
+					"FROM com.liferay.portlet.documentlibrary.model.DLFileShortcut WHERE ");
+
+				if (uuid == null) {
+					query.append("uuid_ IS NULL");
+				}
+				else {
+					query.append("uuid_ = ?");
+				}
+
+				query.append(" AND ");
+
+				query.append("groupId = ?");
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (uuid != null) {
+					qPos.add(uuid);
+				}
+
+				qPos.add(groupId);
+
+				count = (Long)q.uniqueResult();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_UUID_G,
 					finderArgs, count);
 
 				closeSession(session);

@@ -115,6 +115,19 @@ public interface DLFileShortcutPersistence extends BasePersistence {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFileShortcutException;
 
+	public com.liferay.portlet.documentlibrary.model.DLFileShortcut findByUUID_G(
+		java.lang.String uuid, long groupId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.documentlibrary.NoSuchFileShortcutException;
+
+	public com.liferay.portlet.documentlibrary.model.DLFileShortcut fetchByUUID_G(
+		java.lang.String uuid, long groupId)
+		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.documentlibrary.model.DLFileShortcut fetchByUUID_G(
+		java.lang.String uuid, long groupId, boolean retrieveFromCache)
+		throws com.liferay.portal.SystemException;
+
 	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileShortcut> findByFolderId(
 		long folderId) throws com.liferay.portal.SystemException;
 
@@ -195,6 +208,10 @@ public interface DLFileShortcutPersistence extends BasePersistence {
 	public void removeByUuid(java.lang.String uuid)
 		throws com.liferay.portal.SystemException;
 
+	public void removeByUUID_G(java.lang.String uuid, long groupId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.documentlibrary.NoSuchFileShortcutException;
+
 	public void removeByFolderId(long folderId)
 		throws com.liferay.portal.SystemException;
 
@@ -204,6 +221,9 @@ public interface DLFileShortcutPersistence extends BasePersistence {
 	public void removeAll() throws com.liferay.portal.SystemException;
 
 	public int countByUuid(java.lang.String uuid)
+		throws com.liferay.portal.SystemException;
+
+	public int countByUUID_G(java.lang.String uuid, long groupId)
 		throws com.liferay.portal.SystemException;
 
 	public int countByFolderId(long folderId)

@@ -57,6 +57,7 @@ import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl;
 import com.liferay.portlet.documentlibrary.service.base.DLFileEntryLocalServiceBaseImpl;
 import com.liferay.portlet.documentlibrary.social.DLActivityKeys;
+import com.liferay.portlet.documentlibrary.util.comparator.FileEntryModifiedDateComparator;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.messageboards.model.MBDiscussion;
 import com.liferay.portlet.ratings.model.RatingsEntry;
@@ -185,6 +186,7 @@ public class DLFileEntryLocalServiceImpl
 		DLFileEntry fileEntry = dlFileEntryPersistence.create(fileEntryId);
 
 		fileEntry.setUuid(uuid);
+		fileEntry.setGroupId(folder.getGroupId());
 		fileEntry.setCompanyId(user.getCompanyId());
 		fileEntry.setUserId(user.getUserId());
 		fileEntry.setUserName(user.getFullName());
@@ -570,7 +572,7 @@ public class DLFileEntryLocalServiceImpl
 	public DLFileEntry getFileEntryByUuidAndGroupId(String uuid, long groupId)
 		throws PortalException, SystemException {
 
-		return dlFileEntryFinder.findByUuid_G(uuid, groupId);
+		return dlFileEntryPersistence.findByUUID_G(uuid, groupId);
 	}
 
 	public DLFileEntry getFileEntryByTitle(
@@ -610,26 +612,23 @@ public class DLFileEntryLocalServiceImpl
 			long groupId, int start, int end)
 		throws SystemException {
 
-		return dlFileEntryFinder.findByGroupId(groupId, start, end);
+		return getGroupFileEntries(
+			groupId, start, end, new FileEntryModifiedDateComparator());
 	}
 
 	public List<DLFileEntry> getGroupFileEntries(
 			long groupId, int start, int end, OrderByComparator obc)
 		throws SystemException {
 
-		return dlFileEntryFinder.findByGroupId(groupId, start, end, obc);
+		return dlFileEntryPersistence.findByGroupId(groupId, start, end, obc);
 	}
 
 	public List<DLFileEntry> getGroupFileEntries(
 			long groupId, long userId, int start, int end)
 		throws SystemException {
 
-		if (userId <= 0) {
-			return dlFileEntryFinder.findByGroupId(groupId, start, end);
-		}
-		else {
-			return dlFileEntryFinder.findByG_U(groupId, userId, start, end);
-		}
+		return getGroupFileEntries(
+			groupId, userId, start, end, new FileEntryModifiedDateComparator());
 	}
 
 	public List<DLFileEntry> getGroupFileEntries(
@@ -638,26 +637,27 @@ public class DLFileEntryLocalServiceImpl
 		throws SystemException {
 
 		if (userId <= 0) {
-			return dlFileEntryFinder.findByGroupId(groupId, start, end, obc);
+			return dlFileEntryPersistence.findByGroupId(
+				groupId, start, end, obc);
 		}
 		else {
-			return dlFileEntryFinder.findByG_U(
+			return dlFileEntryPersistence.findByG_U(
 				groupId, userId, start, end, obc);
 		}
 	}
 
 	public int getGroupFileEntriesCount(long groupId) throws SystemException {
-		return dlFileEntryFinder.countByGroupId(groupId);
+		return dlFileEntryPersistence.countByGroupId(groupId);
 	}
 
 	public int getGroupFileEntriesCount(long groupId, long userId)
 		throws SystemException {
 
 		if (userId <= 0) {
-			return dlFileEntryFinder.countByGroupId(groupId);
+			return dlFileEntryPersistence.countByGroupId(groupId);
 		}
 		else {
-			return dlFileEntryFinder.countByG_U(groupId, userId);
+			return dlFileEntryPersistence.countByG_U(groupId, userId);
 		}
 	}
 
@@ -815,6 +815,7 @@ public class DLFileEntryLocalServiceImpl
 			DLFileEntry newFileEntry = dlFileEntryPersistence.create(
 				newFileEntryId);
 
+			newFileEntry.setGroupId(fileEntry.getGroupId());
 			newFileEntry.setCompanyId(fileEntry.getCompanyId());
 			newFileEntry.setUserId(fileEntry.getUserId());
 			newFileEntry.setUserName(fileEntry.getUserName());
@@ -844,6 +845,7 @@ public class DLFileEntryLocalServiceImpl
 				DLFileVersion newFileVersion = dlFileVersionPersistence.create(
 					newFileVersionId);
 
+				newFileVersion.setGroupId(fileVersion.getGroupId());
 				newFileVersion.setCompanyId(fileVersion.getCompanyId());
 				newFileVersion.setUserId(fileVersion.getUserId());
 				newFileVersion.setUserName(fileVersion.getUserName());
@@ -987,6 +989,7 @@ public class DLFileEntryLocalServiceImpl
 		String versionUserName = GetterUtil.getString(
 			fileEntry.getVersionUserName(), fileEntry.getUserName());
 
+		fileVersion.setGroupId(fileEntry.getGroupId());
 		fileVersion.setCompanyId(fileEntry.getCompanyId());
 		fileVersion.setUserId(versionUserId);
 		fileVersion.setUserName(versionUserName);

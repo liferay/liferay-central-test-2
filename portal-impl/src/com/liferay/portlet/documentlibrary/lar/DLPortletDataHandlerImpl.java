@@ -52,10 +52,8 @@ import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFileRankLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFileShortcutLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
-import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinderUtil;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryUtil;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileRankUtil;
-import com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutFinderUtil;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutUtil;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFolderUtil;
 
@@ -243,7 +241,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 					PortletDataHandlerKeys.DATA_STRATEGY_MIRROR)) {
 
 				try {
-					existingFileEntry = DLFileEntryFinderUtil.findByUuid_G(
+					existingFileEntry = DLFileEntryUtil.findByUUID_G(
 						fileEntry.getUuid(), context.getGroupId());
 
 					existingFileEntry =
@@ -779,7 +777,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 
 				try {
 					DLFileShortcut existingFileShortcut =
-						DLFileShortcutFinderUtil.findByUuid_G(
+						DLFileShortcutUtil.findByUUID_G(
 							fileShortcut.getUuid(), context.getGroupId());
 
 					DLFileShortcutLocalServiceUtil.updateFileShortcut(

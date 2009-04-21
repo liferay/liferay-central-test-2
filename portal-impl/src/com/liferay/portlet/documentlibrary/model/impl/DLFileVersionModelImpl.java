@@ -68,6 +68,9 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion> {
 			{ "fileVersionId", new Integer(Types.BIGINT) },
 			
 
+			{ "groupId", new Integer(Types.BIGINT) },
+			
+
 			{ "companyId", new Integer(Types.BIGINT) },
 			
 
@@ -91,7 +94,7 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion> {
 
 			{ "size_", new Integer(Types.INTEGER) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table DLFileVersion (fileVersionId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,folderId LONG,name VARCHAR(255) null,version DOUBLE,size_ INTEGER)";
+	public static final String TABLE_SQL_CREATE = "create table DLFileVersion (fileVersionId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,folderId LONG,name VARCHAR(255) null,version DOUBLE,size_ INTEGER)";
 	public static final String TABLE_SQL_DROP = "drop table DLFileVersion";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -107,6 +110,7 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion> {
 		DLFileVersion model = new DLFileVersionImpl();
 
 		model.setFileVersionId(soapModel.getFileVersionId());
+		model.setGroupId(soapModel.getGroupId());
 		model.setCompanyId(soapModel.getCompanyId());
 		model.setUserId(soapModel.getUserId());
 		model.setUserName(soapModel.getUserName());
@@ -153,6 +157,14 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion> {
 
 	public void setFileVersionId(long fileVersionId) {
 		_fileVersionId = fileVersionId;
+	}
+
+	public long getGroupId() {
+		return _groupId;
+	}
+
+	public void setGroupId(long groupId) {
+		_groupId = groupId;
 	}
 
 	public long getCompanyId() {
@@ -258,6 +270,7 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion> {
 			model.setEscapedModel(true);
 
 			model.setFileVersionId(getFileVersionId());
+			model.setGroupId(getGroupId());
 			model.setCompanyId(getCompanyId());
 			model.setUserId(getUserId());
 			model.setUserName(HtmlUtil.escape(getUserName()));
@@ -288,6 +301,7 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion> {
 		DLFileVersionImpl clone = new DLFileVersionImpl();
 
 		clone.setFileVersionId(getFileVersionId());
+		clone.setGroupId(getGroupId());
 		clone.setCompanyId(getCompanyId());
 		clone.setUserId(getUserId());
 		clone.setUserName(getUserName());
@@ -375,6 +389,7 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion> {
 	}
 
 	private long _fileVersionId;
+	private long _groupId;
 	private long _companyId;
 	private long _userId;
 	private String _userName;

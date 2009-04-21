@@ -73,6 +73,7 @@ public class DLFileEntryPersistenceTest extends BasePersistenceTestCase {
 		DLFileEntry newDLFileEntry = _persistence.create(pk);
 
 		newDLFileEntry.setUuid(randomString());
+		newDLFileEntry.setGroupId(nextLong());
 		newDLFileEntry.setCompanyId(nextLong());
 		newDLFileEntry.setUserId(nextLong());
 		newDLFileEntry.setUserName(randomString());
@@ -96,6 +97,8 @@ public class DLFileEntryPersistenceTest extends BasePersistenceTestCase {
 		assertEquals(existingDLFileEntry.getUuid(), newDLFileEntry.getUuid());
 		assertEquals(existingDLFileEntry.getFileEntryId(),
 			newDLFileEntry.getFileEntryId());
+		assertEquals(existingDLFileEntry.getGroupId(),
+			newDLFileEntry.getGroupId());
 		assertEquals(existingDLFileEntry.getCompanyId(),
 			newDLFileEntry.getCompanyId());
 		assertEquals(existingDLFileEntry.getUserId(), newDLFileEntry.getUserId());
@@ -167,6 +170,7 @@ public class DLFileEntryPersistenceTest extends BasePersistenceTestCase {
 		DLFileEntry dlFileEntry = _persistence.create(pk);
 
 		dlFileEntry.setUuid(randomString());
+		dlFileEntry.setGroupId(nextLong());
 		dlFileEntry.setCompanyId(nextLong());
 		dlFileEntry.setUserId(nextLong());
 		dlFileEntry.setUserName(randomString());

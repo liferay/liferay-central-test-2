@@ -55,6 +55,10 @@ public interface DLFileVersionModel extends BaseModel<DLFileVersion> {
 
 	public void setFileVersionId(long fileVersionId);
 
+	public long getGroupId();
+
+	public void setGroupId(long groupId);
+
 	public long getCompanyId();
 
 	public void setCompanyId(long companyId);

@@ -20,29 +20,57 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.documentlibrary.service.persistence;
+package com.liferay.portlet.documentlibrary.util.comparator;
+
+import com.liferay.portal.kernel.util.DateUtil;
+import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portlet.documentlibrary.model.DLFileRank;
 
 /**
- * <a href="DLFileShortcutFinderUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="FileRankCreateDateComparator.java.html"><b><i>View Source</i></b>
+ * </a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class DLFileShortcutFinderUtil {
-	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut findByUuid_G(
-		java.lang.String uuid, long groupId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.documentlibrary.NoSuchFileShortcutException {
-		return getFinder().findByUuid_G(uuid, groupId);
+public class FileRankCreateDateComparator extends OrderByComparator {
+
+	public static String ORDER_BY_ASC = "DLFileRank.createDate ASC";
+
+	public static String ORDER_BY_DESC = "DLFileRank.createDate DESC";
+
+	public FileRankCreateDateComparator() {
+		this(false);
 	}
 
-	public static DLFileShortcutFinder getFinder() {
-		return _finder;
+	public FileRankCreateDateComparator(boolean asc) {
+		_asc = asc;
 	}
 
-	public void setFinder(DLFileShortcutFinder finder) {
-		_finder = finder;
+	public int compare(Object obj1, Object obj2) {
+		DLFileRank fileRank1 = (DLFileRank)obj1;
+		DLFileRank fileRank2 = (DLFileRank)obj2;
+
+		int value = DateUtil.compareTo(
+			fileRank1.getCreateDate(), fileRank2.getCreateDate());
+
+		if (_asc) {
+			return value;
+		}
+		else {
+			return -value;
+		}
 	}
 
-	private static DLFileShortcutFinder _finder;
+	public String getOrderBy() {
+		if (_asc) {
+			return ORDER_BY_ASC;
+		}
+		else {
+			return ORDER_BY_DESC;
+		}
+	}
+
+	private boolean _asc;
+
 }

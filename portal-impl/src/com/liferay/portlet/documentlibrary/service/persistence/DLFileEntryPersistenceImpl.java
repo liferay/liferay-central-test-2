@@ -79,6 +79,29 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl
 	public static final FinderPath FINDER_PATH_COUNT_BY_UUID = new FinderPath(DLFileEntryModelImpl.ENTITY_CACHE_ENABLED,
 			DLFileEntryModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"countByUuid", new String[] { String.class.getName() });
+	public static final FinderPath FINDER_PATH_FETCH_BY_UUID_G = new FinderPath(DLFileEntryModelImpl.ENTITY_CACHE_ENABLED,
+			DLFileEntryModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_ENTITY, "fetchByUUID_G",
+			new String[] { String.class.getName(), Long.class.getName() });
+	public static final FinderPath FINDER_PATH_COUNT_BY_UUID_G = new FinderPath(DLFileEntryModelImpl.ENTITY_CACHE_ENABLED,
+			DLFileEntryModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByUUID_G",
+			new String[] { String.class.getName(), Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_GROUPID = new FinderPath(DLFileEntryModelImpl.ENTITY_CACHE_ENABLED,
+			DLFileEntryModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByGroupId", new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_GROUPID = new FinderPath(DLFileEntryModelImpl.ENTITY_CACHE_ENABLED,
+			DLFileEntryModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByGroupId",
+			new String[] {
+				Long.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_GROUPID = new FinderPath(DLFileEntryModelImpl.ENTITY_CACHE_ENABLED,
+			DLFileEntryModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByGroupId", new String[] { Long.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_BY_COMPANYID = new FinderPath(DLFileEntryModelImpl.ENTITY_CACHE_ENABLED,
 			DLFileEntryModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findByCompanyId", new String[] { Long.class.getName() });
@@ -109,6 +132,23 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl
 	public static final FinderPath FINDER_PATH_COUNT_BY_FOLDERID = new FinderPath(DLFileEntryModelImpl.ENTITY_CACHE_ENABLED,
 			DLFileEntryModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"countByFolderId", new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_G_U = new FinderPath(DLFileEntryModelImpl.ENTITY_CACHE_ENABLED,
+			DLFileEntryModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByG_U",
+			new String[] { Long.class.getName(), Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_G_U = new FinderPath(DLFileEntryModelImpl.ENTITY_CACHE_ENABLED,
+			DLFileEntryModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByG_U",
+			new String[] {
+				Long.class.getName(), Long.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_G_U = new FinderPath(DLFileEntryModelImpl.ENTITY_CACHE_ENABLED,
+			DLFileEntryModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByG_U",
+			new String[] { Long.class.getName(), Long.class.getName() });
 	public static final FinderPath FINDER_PATH_FETCH_BY_F_N = new FinderPath(DLFileEntryModelImpl.ENTITY_CACHE_ENABLED,
 			DLFileEntryModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_ENTITY, "fetchByF_N",
@@ -144,6 +184,11 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl
 	public void cacheResult(DLFileEntry dlFileEntry) {
 		EntityCacheUtil.putResult(DLFileEntryModelImpl.ENTITY_CACHE_ENABLED,
 			DLFileEntryImpl.class, dlFileEntry.getPrimaryKey(), dlFileEntry);
+
+		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
+			new Object[] {
+				dlFileEntry.getUuid(), new Long(dlFileEntry.getGroupId())
+			}, dlFileEntry);
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_F_N,
 			new Object[] {
@@ -256,6 +301,12 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl
 
 		DLFileEntryModelImpl dlFileEntryModelImpl = (DLFileEntryModelImpl)dlFileEntry;
 
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
+			new Object[] {
+				dlFileEntryModelImpl.getOriginalUuid(),
+				new Long(dlFileEntryModelImpl.getOriginalGroupId())
+			});
+
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_F_N,
 			new Object[] {
 				new Long(dlFileEntryModelImpl.getOriginalFolderId()),
@@ -355,6 +406,27 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl
 
 		EntityCacheUtil.putResult(DLFileEntryModelImpl.ENTITY_CACHE_ENABLED,
 			DLFileEntryImpl.class, dlFileEntry.getPrimaryKey(), dlFileEntry);
+
+		if (!isNew &&
+				(!dlFileEntry.getUuid()
+								 .equals(dlFileEntryModelImpl.getOriginalUuid()) ||
+				(dlFileEntry.getGroupId() != dlFileEntryModelImpl.getOriginalGroupId()))) {
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
+				new Object[] {
+					dlFileEntryModelImpl.getOriginalUuid(),
+					new Long(dlFileEntryModelImpl.getOriginalGroupId())
+				});
+		}
+
+		if (isNew ||
+				(!dlFileEntry.getUuid()
+								 .equals(dlFileEntryModelImpl.getOriginalUuid()) ||
+				(dlFileEntry.getGroupId() != dlFileEntryModelImpl.getOriginalGroupId()))) {
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
+				new Object[] {
+					dlFileEntry.getUuid(), new Long(dlFileEntry.getGroupId())
+				}, dlFileEntry);
+		}
 
 		if (!isNew &&
 				((dlFileEntry.getFolderId() != dlFileEntryModelImpl.getOriginalFolderId()) ||
@@ -655,6 +727,354 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl
 			if (uuid != null) {
 				qPos.add(uuid);
 			}
+
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
+					dlFileEntry);
+
+			DLFileEntry[] array = new DLFileEntryImpl[3];
+
+			array[0] = (DLFileEntry)objArray[0];
+			array[1] = (DLFileEntry)objArray[1];
+			array[2] = (DLFileEntry)objArray[2];
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public DLFileEntry findByUUID_G(String uuid, long groupId)
+		throws NoSuchFileEntryException, SystemException {
+		DLFileEntry dlFileEntry = fetchByUUID_G(uuid, groupId);
+
+		if (dlFileEntry == null) {
+			StringBuilder msg = new StringBuilder();
+
+			msg.append("No DLFileEntry exists with the key {");
+
+			msg.append("uuid=" + uuid);
+
+			msg.append(", ");
+			msg.append("groupId=" + groupId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchFileEntryException(msg.toString());
+		}
+
+		return dlFileEntry;
+	}
+
+	public DLFileEntry fetchByUUID_G(String uuid, long groupId)
+		throws SystemException {
+		return fetchByUUID_G(uuid, groupId, true);
+	}
+
+	public DLFileEntry fetchByUUID_G(String uuid, long groupId,
+		boolean retrieveFromCache) throws SystemException {
+		Object[] finderArgs = new Object[] { uuid, new Long(groupId) };
+
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_UUID_G,
+					finderArgs, this);
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append(
+					"FROM com.liferay.portlet.documentlibrary.model.DLFileEntry WHERE ");
+
+				if (uuid == null) {
+					query.append("uuid_ IS NULL");
+				}
+				else {
+					query.append("uuid_ = ?");
+				}
+
+				query.append(" AND ");
+
+				query.append("groupId = ?");
+
+				query.append(" ");
+
+				query.append("ORDER BY ");
+
+				query.append("folderId ASC, ");
+				query.append("name ASC");
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (uuid != null) {
+					qPos.add(uuid);
+				}
+
+				qPos.add(groupId);
+
+				List<DLFileEntry> list = q.list();
+
+				result = list;
+
+				DLFileEntry dlFileEntry = null;
+
+				if (list.isEmpty()) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
+						finderArgs, list);
+				}
+				else {
+					dlFileEntry = list.get(0);
+
+					cacheResult(dlFileEntry);
+				}
+
+				return dlFileEntry;
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (result == null) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
+						finderArgs, new ArrayList<DLFileEntry>());
+				}
+
+				closeSession(session);
+			}
+		}
+		else {
+			if (result instanceof List) {
+				return null;
+			}
+			else {
+				return (DLFileEntry)result;
+			}
+		}
+	}
+
+	public List<DLFileEntry> findByGroupId(long groupId)
+		throws SystemException {
+		Object[] finderArgs = new Object[] { new Long(groupId) };
+
+		List<DLFileEntry> list = (List<DLFileEntry>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_GROUPID,
+				finderArgs, this);
+
+		if (list == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append(
+					"FROM com.liferay.portlet.documentlibrary.model.DLFileEntry WHERE ");
+
+				query.append("groupId = ?");
+
+				query.append(" ");
+
+				query.append("ORDER BY ");
+
+				query.append("folderId ASC, ");
+				query.append("name ASC");
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(groupId);
+
+				list = q.list();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<DLFileEntry>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_GROUPID,
+					finderArgs, list);
+
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	public List<DLFileEntry> findByGroupId(long groupId, int start, int end)
+		throws SystemException {
+		return findByGroupId(groupId, start, end, null);
+	}
+
+	public List<DLFileEntry> findByGroupId(long groupId, int start, int end,
+		OrderByComparator obc) throws SystemException {
+		Object[] finderArgs = new Object[] {
+				new Long(groupId),
+				
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+			};
+
+		List<DLFileEntry> list = (List<DLFileEntry>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_GROUPID,
+				finderArgs, this);
+
+		if (list == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append(
+					"FROM com.liferay.portlet.documentlibrary.model.DLFileEntry WHERE ");
+
+				query.append("groupId = ?");
+
+				query.append(" ");
+
+				if (obc != null) {
+					query.append("ORDER BY ");
+					query.append(obc.getOrderBy());
+				}
+
+				else {
+					query.append("ORDER BY ");
+
+					query.append("folderId ASC, ");
+					query.append("name ASC");
+				}
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(groupId);
+
+				list = (List<DLFileEntry>)QueryUtil.list(q, getDialect(),
+						start, end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<DLFileEntry>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_GROUPID,
+					finderArgs, list);
+
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	public DLFileEntry findByGroupId_First(long groupId, OrderByComparator obc)
+		throws NoSuchFileEntryException, SystemException {
+		List<DLFileEntry> list = findByGroupId(groupId, 0, 1, obc);
+
+		if (list.isEmpty()) {
+			StringBuilder msg = new StringBuilder();
+
+			msg.append("No DLFileEntry exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchFileEntryException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public DLFileEntry findByGroupId_Last(long groupId, OrderByComparator obc)
+		throws NoSuchFileEntryException, SystemException {
+		int count = countByGroupId(groupId);
+
+		List<DLFileEntry> list = findByGroupId(groupId, count - 1, count, obc);
+
+		if (list.isEmpty()) {
+			StringBuilder msg = new StringBuilder();
+
+			msg.append("No DLFileEntry exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchFileEntryException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public DLFileEntry[] findByGroupId_PrevAndNext(long fileEntryId,
+		long groupId, OrderByComparator obc)
+		throws NoSuchFileEntryException, SystemException {
+		DLFileEntry dlFileEntry = findByPrimaryKey(fileEntryId);
+
+		int count = countByGroupId(groupId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuilder query = new StringBuilder();
+
+			query.append(
+				"FROM com.liferay.portlet.documentlibrary.model.DLFileEntry WHERE ");
+
+			query.append("groupId = ?");
+
+			query.append(" ");
+
+			if (obc != null) {
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
+			}
+
+			else {
+				query.append("ORDER BY ");
+
+				query.append("folderId ASC, ");
+				query.append("name ASC");
+			}
+
+			Query q = session.createQuery(query.toString());
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					dlFileEntry);
@@ -1110,6 +1530,258 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			qPos.add(folderId);
+
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
+					dlFileEntry);
+
+			DLFileEntry[] array = new DLFileEntryImpl[3];
+
+			array[0] = (DLFileEntry)objArray[0];
+			array[1] = (DLFileEntry)objArray[1];
+			array[2] = (DLFileEntry)objArray[2];
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public List<DLFileEntry> findByG_U(long groupId, long userId)
+		throws SystemException {
+		Object[] finderArgs = new Object[] { new Long(groupId), new Long(userId) };
+
+		List<DLFileEntry> list = (List<DLFileEntry>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_G_U,
+				finderArgs, this);
+
+		if (list == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append(
+					"FROM com.liferay.portlet.documentlibrary.model.DLFileEntry WHERE ");
+
+				query.append("groupId = ?");
+
+				query.append(" AND ");
+
+				query.append("userId = ?");
+
+				query.append(" ");
+
+				query.append("ORDER BY ");
+
+				query.append("folderId ASC, ");
+				query.append("name ASC");
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(groupId);
+
+				qPos.add(userId);
+
+				list = q.list();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<DLFileEntry>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_U, finderArgs,
+					list);
+
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	public List<DLFileEntry> findByG_U(long groupId, long userId, int start,
+		int end) throws SystemException {
+		return findByG_U(groupId, userId, start, end, null);
+	}
+
+	public List<DLFileEntry> findByG_U(long groupId, long userId, int start,
+		int end, OrderByComparator obc) throws SystemException {
+		Object[] finderArgs = new Object[] {
+				new Long(groupId), new Long(userId),
+				
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+			};
+
+		List<DLFileEntry> list = (List<DLFileEntry>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_G_U,
+				finderArgs, this);
+
+		if (list == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append(
+					"FROM com.liferay.portlet.documentlibrary.model.DLFileEntry WHERE ");
+
+				query.append("groupId = ?");
+
+				query.append(" AND ");
+
+				query.append("userId = ?");
+
+				query.append(" ");
+
+				if (obc != null) {
+					query.append("ORDER BY ");
+					query.append(obc.getOrderBy());
+				}
+
+				else {
+					query.append("ORDER BY ");
+
+					query.append("folderId ASC, ");
+					query.append("name ASC");
+				}
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(groupId);
+
+				qPos.add(userId);
+
+				list = (List<DLFileEntry>)QueryUtil.list(q, getDialect(),
+						start, end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<DLFileEntry>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_G_U,
+					finderArgs, list);
+
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	public DLFileEntry findByG_U_First(long groupId, long userId,
+		OrderByComparator obc) throws NoSuchFileEntryException, SystemException {
+		List<DLFileEntry> list = findByG_U(groupId, userId, 0, 1, obc);
+
+		if (list.isEmpty()) {
+			StringBuilder msg = new StringBuilder();
+
+			msg.append("No DLFileEntry exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
+			msg.append(", ");
+			msg.append("userId=" + userId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchFileEntryException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public DLFileEntry findByG_U_Last(long groupId, long userId,
+		OrderByComparator obc) throws NoSuchFileEntryException, SystemException {
+		int count = countByG_U(groupId, userId);
+
+		List<DLFileEntry> list = findByG_U(groupId, userId, count - 1, count,
+				obc);
+
+		if (list.isEmpty()) {
+			StringBuilder msg = new StringBuilder();
+
+			msg.append("No DLFileEntry exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
+			msg.append(", ");
+			msg.append("userId=" + userId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchFileEntryException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public DLFileEntry[] findByG_U_PrevAndNext(long fileEntryId, long groupId,
+		long userId, OrderByComparator obc)
+		throws NoSuchFileEntryException, SystemException {
+		DLFileEntry dlFileEntry = findByPrimaryKey(fileEntryId);
+
+		int count = countByG_U(groupId, userId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuilder query = new StringBuilder();
+
+			query.append(
+				"FROM com.liferay.portlet.documentlibrary.model.DLFileEntry WHERE ");
+
+			query.append("groupId = ?");
+
+			query.append(" AND ");
+
+			query.append("userId = ?");
+
+			query.append(" ");
+
+			if (obc != null) {
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
+			}
+
+			else {
+				query.append("ORDER BY ");
+
+				query.append("folderId ASC, ");
+				query.append("name ASC");
+			}
+
+			Query q = session.createQuery(query.toString());
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			qPos.add(userId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					dlFileEntry);
@@ -1645,6 +2317,19 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
+	public void removeByUUID_G(String uuid, long groupId)
+		throws NoSuchFileEntryException, SystemException {
+		DLFileEntry dlFileEntry = findByUUID_G(uuid, groupId);
+
+		remove(dlFileEntry);
+	}
+
+	public void removeByGroupId(long groupId) throws SystemException {
+		for (DLFileEntry dlFileEntry : findByGroupId(groupId)) {
+			remove(dlFileEntry);
+		}
+	}
+
 	public void removeByCompanyId(long companyId) throws SystemException {
 		for (DLFileEntry dlFileEntry : findByCompanyId(companyId)) {
 			remove(dlFileEntry);
@@ -1653,6 +2338,13 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl
 
 	public void removeByFolderId(long folderId) throws SystemException {
 		for (DLFileEntry dlFileEntry : findByFolderId(folderId)) {
+			remove(dlFileEntry);
+		}
+	}
+
+	public void removeByG_U(long groupId, long userId)
+		throws SystemException {
+		for (DLFileEntry dlFileEntry : findByG_U(groupId, userId)) {
 			remove(dlFileEntry);
 		}
 	}
@@ -1723,6 +2415,116 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl
 				}
 
 				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_UUID,
+					finderArgs, count);
+
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	public int countByUUID_G(String uuid, long groupId)
+		throws SystemException {
+		Object[] finderArgs = new Object[] { uuid, new Long(groupId) };
+
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_UUID_G,
+				finderArgs, this);
+
+		if (count == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append("SELECT COUNT(*) ");
+				query.append(
+					"FROM com.liferay.portlet.documentlibrary.model.DLFileEntry WHERE ");
+
+				if (uuid == null) {
+					query.append("uuid_ IS NULL");
+				}
+				else {
+					query.append("uuid_ = ?");
+				}
+
+				query.append(" AND ");
+
+				query.append("groupId = ?");
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (uuid != null) {
+					qPos.add(uuid);
+				}
+
+				qPos.add(groupId);
+
+				count = (Long)q.uniqueResult();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_UUID_G,
+					finderArgs, count);
+
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	public int countByGroupId(long groupId) throws SystemException {
+		Object[] finderArgs = new Object[] { new Long(groupId) };
+
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_GROUPID,
+				finderArgs, this);
+
+		if (count == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append("SELECT COUNT(*) ");
+				query.append(
+					"FROM com.liferay.portlet.documentlibrary.model.DLFileEntry WHERE ");
+
+				query.append("groupId = ?");
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(groupId);
+
+				count = (Long)q.uniqueResult();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_GROUPID,
 					finderArgs, count);
 
 				closeSession(session);
@@ -1820,6 +2622,60 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl
 
 				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_FOLDERID,
 					finderArgs, count);
+
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	public int countByG_U(long groupId, long userId) throws SystemException {
+		Object[] finderArgs = new Object[] { new Long(groupId), new Long(userId) };
+
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_U,
+				finderArgs, this);
+
+		if (count == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append("SELECT COUNT(*) ");
+				query.append(
+					"FROM com.liferay.portlet.documentlibrary.model.DLFileEntry WHERE ");
+
+				query.append("groupId = ?");
+
+				query.append(" AND ");
+
+				query.append("userId = ?");
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(groupId);
+
+				qPos.add(userId);
+
+				count = (Long)q.uniqueResult();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_U, finderArgs,
+					count);
 
 				closeSession(session);
 			}

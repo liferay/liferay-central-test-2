@@ -59,6 +59,10 @@ public interface DLFileEntryModel extends BaseModel<DLFileEntry> {
 
 	public void setFileEntryId(long fileEntryId);
 
+	public long getGroupId();
+
+	public void setGroupId(long groupId);
+
 	public long getCompanyId();
 
 	public void setCompanyId(long companyId);

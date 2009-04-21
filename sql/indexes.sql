@@ -69,15 +69,20 @@ create index IX_4CB1B2B4 on DLFileEntry (companyId);
 create index IX_24A846D1 on DLFileEntry (folderId);
 create unique index IX_8F6C75D0 on DLFileEntry (folderId, name);
 create index IX_A9951F17 on DLFileEntry (folderId, title);
+create index IX_F4AF5636 on DLFileEntry (groupId);
+create index IX_43261870 on DLFileEntry (groupId, userId);
 create index IX_64F0FE40 on DLFileEntry (uuid_);
+create unique index IX_BC2E7E6A on DLFileEntry (uuid_, groupId);
 
 create unique index IX_CE705D48 on DLFileRank (companyId, userId, folderId, name);
 create index IX_40B56512 on DLFileRank (folderId, name);
+create index IX_BAFB116E on DLFileRank (groupId, userId);
 create index IX_EED06670 on DLFileRank (userId);
 
 create index IX_E56EC6AD on DLFileShortcut (folderId);
 create index IX_CA2708A2 on DLFileShortcut (toFolderId, toName);
 create index IX_4831EBE4 on DLFileShortcut (uuid_);
+create unique index IX_FDB4A946 on DLFileShortcut (uuid_, groupId);
 
 create index IX_9CD91DB6 on DLFileVersion (folderId, name);
 create unique index IX_6C5E6512 on DLFileVersion (folderId, name, version);

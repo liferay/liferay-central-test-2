@@ -776,6 +776,7 @@
 	<model name="com.liferay.portlet.documentlibrary.model.DLFileEntry">
 		<field name="uuid" type="String" />
 		<field name="fileEntryId" type="long" />
+		<field name="groupId" type="long" />
 		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
 		<field name="userName" type="String" />
@@ -802,6 +803,7 @@
 	</model>
 	<model name="com.liferay.portlet.documentlibrary.model.DLFileRank">
 		<field name="fileRankId" type="long" />
+		<field name="groupId" type="long" />
 		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
 		<field name="createDate" type="Date" />
@@ -813,6 +815,7 @@
 	<model name="com.liferay.portlet.documentlibrary.model.DLFileShortcut">
 		<field name="uuid" type="String" />
 		<field name="fileShortcutId" type="long" />
+		<field name="groupId" type="long" />
 		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
 		<field name="userName" type="String" />
@@ -826,6 +829,7 @@
 	</model>
 	<model name="com.liferay.portlet.documentlibrary.model.DLFileVersion">
 		<field name="fileVersionId" type="long" />
+		<field name="groupId" type="long" />
 		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
 		<field name="userName" type="String" />

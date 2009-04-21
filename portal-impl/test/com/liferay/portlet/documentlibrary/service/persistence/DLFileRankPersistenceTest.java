@@ -72,6 +72,7 @@ public class DLFileRankPersistenceTest extends BasePersistenceTestCase {
 
 		DLFileRank newDLFileRank = _persistence.create(pk);
 
+		newDLFileRank.setGroupId(nextLong());
 		newDLFileRank.setCompanyId(nextLong());
 		newDLFileRank.setUserId(nextLong());
 		newDLFileRank.setCreateDate(nextDate());
@@ -84,6 +85,7 @@ public class DLFileRankPersistenceTest extends BasePersistenceTestCase {
 
 		assertEquals(existingDLFileRank.getFileRankId(),
 			newDLFileRank.getFileRankId());
+		assertEquals(existingDLFileRank.getGroupId(), newDLFileRank.getGroupId());
 		assertEquals(existingDLFileRank.getCompanyId(),
 			newDLFileRank.getCompanyId());
 		assertEquals(existingDLFileRank.getUserId(), newDLFileRank.getUserId());
@@ -135,6 +137,7 @@ public class DLFileRankPersistenceTest extends BasePersistenceTestCase {
 
 		DLFileRank dlFileRank = _persistence.create(pk);
 
+		dlFileRank.setGroupId(nextLong());
 		dlFileRank.setCompanyId(nextLong());
 		dlFileRank.setUserId(nextLong());
 		dlFileRank.setCreateDate(nextDate());

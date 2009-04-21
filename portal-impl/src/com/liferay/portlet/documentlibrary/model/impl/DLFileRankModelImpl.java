@@ -69,6 +69,9 @@ public class DLFileRankModelImpl extends BaseModelImpl<DLFileRank> {
 			{ "fileRankId", new Integer(Types.BIGINT) },
 			
 
+			{ "groupId", new Integer(Types.BIGINT) },
+			
+
 			{ "companyId", new Integer(Types.BIGINT) },
 			
 
@@ -83,7 +86,7 @@ public class DLFileRankModelImpl extends BaseModelImpl<DLFileRank> {
 
 			{ "name", new Integer(Types.VARCHAR) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table DLFileRank (fileRankId LONG not null primary key,companyId LONG,userId LONG,createDate DATE null,folderId LONG,name VARCHAR(255) null)";
+	public static final String TABLE_SQL_CREATE = "create table DLFileRank (fileRankId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,createDate DATE null,folderId LONG,name VARCHAR(255) null)";
 	public static final String TABLE_SQL_DROP = "drop table DLFileRank";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -99,6 +102,7 @@ public class DLFileRankModelImpl extends BaseModelImpl<DLFileRank> {
 		DLFileRank model = new DLFileRankImpl();
 
 		model.setFileRankId(soapModel.getFileRankId());
+		model.setGroupId(soapModel.getGroupId());
 		model.setCompanyId(soapModel.getCompanyId());
 		model.setUserId(soapModel.getUserId());
 		model.setCreateDate(soapModel.getCreateDate());
@@ -142,6 +146,14 @@ public class DLFileRankModelImpl extends BaseModelImpl<DLFileRank> {
 
 	public void setFileRankId(long fileRankId) {
 		_fileRankId = fileRankId;
+	}
+
+	public long getGroupId() {
+		return _groupId;
+	}
+
+	public void setGroupId(long groupId) {
+		_groupId = groupId;
 	}
 
 	public long getCompanyId() {
@@ -233,6 +245,7 @@ public class DLFileRankModelImpl extends BaseModelImpl<DLFileRank> {
 			model.setEscapedModel(true);
 
 			model.setFileRankId(getFileRankId());
+			model.setGroupId(getGroupId());
 			model.setCompanyId(getCompanyId());
 			model.setUserId(getUserId());
 			model.setCreateDate(getCreateDate());
@@ -260,6 +273,7 @@ public class DLFileRankModelImpl extends BaseModelImpl<DLFileRank> {
 		DLFileRankImpl clone = new DLFileRankImpl();
 
 		clone.setFileRankId(getFileRankId());
+		clone.setGroupId(getGroupId());
 		clone.setCompanyId(getCompanyId());
 		clone.setUserId(getUserId());
 		clone.setCreateDate(getCreateDate());
@@ -312,6 +326,7 @@ public class DLFileRankModelImpl extends BaseModelImpl<DLFileRank> {
 	}
 
 	private long _fileRankId;
+	private long _groupId;
 	private long _companyId;
 	private long _originalCompanyId;
 	private boolean _setOriginalCompanyId;

@@ -34,52 +34,9 @@ public class DLFileEntryFinderUtil {
 		return getFinder().countByFolderIds(folderIds);
 	}
 
-	public static int countByGroupId(long groupId)
-		throws com.liferay.portal.SystemException {
-		return getFinder().countByGroupId(groupId);
-	}
-
-	public static int countByG_U(long groupId, long userId)
-		throws com.liferay.portal.SystemException {
-		return getFinder().countByG_U(groupId, userId);
-	}
-
-	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> findByGroupId(
-		long groupId, int start, int end)
-		throws com.liferay.portal.SystemException {
-		return getFinder().findByGroupId(groupId, start, end);
-	}
-
-	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> findByGroupId(
-		long groupId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException {
-		return getFinder().findByGroupId(groupId, start, end, obc);
-	}
-
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> findByNoAssets()
 		throws com.liferay.portal.SystemException {
 		return getFinder().findByNoAssets();
-	}
-
-	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> findByG_U(
-		long groupId, long userId, int start, int end)
-		throws com.liferay.portal.SystemException {
-		return getFinder().findByG_U(groupId, userId, start, end);
-	}
-
-	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> findByG_U(
-		long groupId, long userId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException {
-		return getFinder().findByG_U(groupId, userId, start, end, obc);
-	}
-
-	public static com.liferay.portlet.documentlibrary.model.DLFileEntry findByUuid_G(
-		java.lang.String uuid, long groupId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.documentlibrary.NoSuchFileEntryException {
-		return getFinder().findByUuid_G(uuid, groupId);
 	}
 
 	public static DLFileEntryFinder getFinder() {

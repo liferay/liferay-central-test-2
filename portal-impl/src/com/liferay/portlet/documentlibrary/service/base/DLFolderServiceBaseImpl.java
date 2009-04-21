@@ -57,9 +57,7 @@ import com.liferay.portlet.documentlibrary.service.DLFolderLocalService;
 import com.liferay.portlet.documentlibrary.service.DLFolderService;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPersistence;
-import com.liferay.portlet.documentlibrary.service.persistence.DLFileRankFinder;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPersistence;
-import com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutFinder;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutPersistence;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionPersistence;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFolderFinder;
@@ -129,14 +127,6 @@ public abstract class DLFolderServiceBaseImpl extends PrincipalBean
 		this.dlFileRankPersistence = dlFileRankPersistence;
 	}
 
-	public DLFileRankFinder getDLFileRankFinder() {
-		return dlFileRankFinder;
-	}
-
-	public void setDLFileRankFinder(DLFileRankFinder dlFileRankFinder) {
-		this.dlFileRankFinder = dlFileRankFinder;
-	}
-
 	public DLFileShortcutLocalService getDLFileShortcutLocalService() {
 		return dlFileShortcutLocalService;
 	}
@@ -162,15 +152,6 @@ public abstract class DLFolderServiceBaseImpl extends PrincipalBean
 	public void setDLFileShortcutPersistence(
 		DLFileShortcutPersistence dlFileShortcutPersistence) {
 		this.dlFileShortcutPersistence = dlFileShortcutPersistence;
-	}
-
-	public DLFileShortcutFinder getDLFileShortcutFinder() {
-		return dlFileShortcutFinder;
-	}
-
-	public void setDLFileShortcutFinder(
-		DLFileShortcutFinder dlFileShortcutFinder) {
-		this.dlFileShortcutFinder = dlFileShortcutFinder;
 	}
 
 	public DLFileVersionLocalService getDLFileVersionLocalService() {
@@ -425,16 +406,12 @@ public abstract class DLFolderServiceBaseImpl extends PrincipalBean
 	protected DLFileRankLocalService dlFileRankLocalService;
 	@BeanReference(name = "com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPersistence.impl")
 	protected DLFileRankPersistence dlFileRankPersistence;
-	@BeanReference(name = "com.liferay.portlet.documentlibrary.service.persistence.DLFileRankFinder.impl")
-	protected DLFileRankFinder dlFileRankFinder;
 	@BeanReference(name = "com.liferay.portlet.documentlibrary.service.DLFileShortcutLocalService.impl")
 	protected DLFileShortcutLocalService dlFileShortcutLocalService;
 	@BeanReference(name = "com.liferay.portlet.documentlibrary.service.DLFileShortcutService.impl")
 	protected DLFileShortcutService dlFileShortcutService;
 	@BeanReference(name = "com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutPersistence.impl")
 	protected DLFileShortcutPersistence dlFileShortcutPersistence;
-	@BeanReference(name = "com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutFinder.impl")
-	protected DLFileShortcutFinder dlFileShortcutFinder;
 	@BeanReference(name = "com.liferay.portlet.documentlibrary.service.DLFileVersionLocalService.impl")
 	protected DLFileVersionLocalService dlFileVersionLocalService;
 	@BeanReference(name = "com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionPersistence.impl")

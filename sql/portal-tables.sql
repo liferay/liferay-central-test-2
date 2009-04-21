@@ -237,6 +237,7 @@ create table CyrusVirtual (
 create table DLFileEntry (
 	uuid_ VARCHAR(75) null,
 	fileEntryId LONG not null primary key,
+	groupId LONG,
 	companyId LONG,
 	userId LONG,
 	userName VARCHAR(75) null,
@@ -256,6 +257,7 @@ create table DLFileEntry (
 
 create table DLFileRank (
 	fileRankId LONG not null primary key,
+	groupId LONG,
 	companyId LONG,
 	userId LONG,
 	createDate DATE null,
@@ -266,6 +268,7 @@ create table DLFileRank (
 create table DLFileShortcut (
 	uuid_ VARCHAR(75) null,
 	fileShortcutId LONG not null primary key,
+	groupId LONG,
 	companyId LONG,
 	userId LONG,
 	userName VARCHAR(75) null,
@@ -278,6 +281,7 @@ create table DLFileShortcut (
 
 create table DLFileVersion (
 	fileVersionId LONG not null primary key,
+	groupId LONG,
 	companyId LONG,
 	userId LONG,
 	userName VARCHAR(75) null,

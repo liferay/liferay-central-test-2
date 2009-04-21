@@ -52,6 +52,7 @@ public class DLFileEntrySoap implements Serializable {
 
 		soapModel.setUuid(model.getUuid());
 		soapModel.setFileEntryId(model.getFileEntryId());
+		soapModel.setGroupId(model.getGroupId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserId(model.getUserId());
 		soapModel.setUserName(model.getUserName());
@@ -106,6 +107,14 @@ public class DLFileEntrySoap implements Serializable {
 
 	public void setFileEntryId(long fileEntryId) {
 		_fileEntryId = fileEntryId;
+	}
+
+	public long getGroupId() {
+		return _groupId;
+	}
+
+	public void setGroupId(long groupId) {
+		_groupId = groupId;
 	}
 
 	public long getCompanyId() {
@@ -230,6 +239,7 @@ public class DLFileEntrySoap implements Serializable {
 
 	private String _uuid;
 	private long _fileEntryId;
+	private long _groupId;
 	private long _companyId;
 	private long _userId;
 	private String _userName;

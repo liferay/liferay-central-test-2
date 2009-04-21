@@ -926,10 +926,6 @@
 	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFileRankUtil" class="com.liferay.portlet.documentlibrary.service.persistence.DLFileRankUtil">
 		<property name="persistence" ref="com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPersistence.impl" />
 	</bean>
-	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFileRankFinder.impl" class="com.liferay.portlet.documentlibrary.service.persistence.DLFileRankFinderImpl" parent="basePersistence" />
-	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFileRankFinderUtil" class="com.liferay.portlet.documentlibrary.service.persistence.DLFileRankFinderUtil">
-		<property name="finder" ref="com.liferay.portlet.documentlibrary.service.persistence.DLFileRankFinder.impl" />
-	</bean>
 	<bean id="com.liferay.portlet.documentlibrary.service.DLFileShortcutLocalService.impl" class="com.liferay.portlet.documentlibrary.service.impl.DLFileShortcutLocalServiceImpl" />
 	<bean id="com.liferay.portlet.documentlibrary.service.DLFileShortcutLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService">
 		<property name="target" ref="com.liferay.portlet.documentlibrary.service.DLFileShortcutLocalService.impl" />
@@ -947,10 +943,6 @@
 	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutPersistence.impl" class="com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutUtil" class="com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutUtil">
 		<property name="persistence" ref="com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutPersistence.impl" />
-	</bean>
-	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutFinder.impl" class="com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutFinderImpl" parent="basePersistence" />
-	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutFinderUtil" class="com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutFinderUtil">
-		<property name="finder" ref="com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutFinder.impl" />
 	</bean>
 	<bean id="com.liferay.portlet.documentlibrary.service.DLFileVersionLocalService.impl" class="com.liferay.portlet.documentlibrary.service.impl.DLFileVersionLocalServiceImpl" />
 	<bean id="com.liferay.portlet.documentlibrary.service.DLFileVersionLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService">

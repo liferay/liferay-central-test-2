@@ -145,6 +145,25 @@ public class DLFileShortcutUtil {
 		return getPersistence().findByUuid_PrevAndNext(fileShortcutId, uuid, obc);
 	}
 
+	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut findByUUID_G(
+		java.lang.String uuid, long groupId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.documentlibrary.NoSuchFileShortcutException {
+		return getPersistence().findByUUID_G(uuid, groupId);
+	}
+
+	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut fetchByUUID_G(
+		java.lang.String uuid, long groupId)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByUUID_G(uuid, groupId);
+	}
+
+	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut fetchByUUID_G(
+		java.lang.String uuid, long groupId, boolean retrieveFromCache)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByUUID_G(uuid, groupId, retrieveFromCache);
+	}
+
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileShortcut> findByFolderId(
 		long folderId) throws com.liferay.portal.SystemException {
 		return getPersistence().findByFolderId(folderId);
@@ -264,6 +283,12 @@ public class DLFileShortcutUtil {
 		getPersistence().removeByUuid(uuid);
 	}
 
+	public static void removeByUUID_G(java.lang.String uuid, long groupId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.documentlibrary.NoSuchFileShortcutException {
+		getPersistence().removeByUUID_G(uuid, groupId);
+	}
+
 	public static void removeByFolderId(long folderId)
 		throws com.liferay.portal.SystemException {
 		getPersistence().removeByFolderId(folderId);
@@ -281,6 +306,11 @@ public class DLFileShortcutUtil {
 	public static int countByUuid(java.lang.String uuid)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByUuid(uuid);
+	}
+
+	public static int countByUUID_G(java.lang.String uuid, long groupId)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByUUID_G(uuid, groupId);
 	}
 
 	public static int countByFolderId(long folderId)

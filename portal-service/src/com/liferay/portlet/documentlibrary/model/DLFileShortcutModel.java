@@ -59,6 +59,10 @@ public interface DLFileShortcutModel extends BaseModel<DLFileShortcut> {
 
 	public void setFileShortcutId(long fileShortcutId);
 
+	public long getGroupId();
+
+	public void setGroupId(long groupId);
+
 	public long getCompanyId();
 
 	public void setCompanyId(long companyId);

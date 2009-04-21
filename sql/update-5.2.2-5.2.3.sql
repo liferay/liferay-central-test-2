@@ -1,5 +1,13 @@
 alter table BookmarksEntry add groupId LONG;
 
+alter table DLFileEntry add groupId LONG;
+
+alter table DLFileRank add groupId LONG;
+
+alter table DLFileShortcut add groupId LONG;
+
+alter table DLFileVersion add groupId LONG;
+
 update Group_ set name = classPK where classPK > 0 and name = '';
 
 alter table IGImage add groupId LONG;

@@ -113,6 +113,36 @@ public interface DLFileRankPersistence extends BasePersistence {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFileRankException;
 
+	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileRank> findByG_U(
+		long groupId, long userId) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileRank> findByG_U(
+		long groupId, long userId, int start, int end)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileRank> findByG_U(
+		long groupId, long userId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.documentlibrary.model.DLFileRank findByG_U_First(
+		long groupId, long userId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.documentlibrary.NoSuchFileRankException;
+
+	public com.liferay.portlet.documentlibrary.model.DLFileRank findByG_U_Last(
+		long groupId, long userId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.documentlibrary.NoSuchFileRankException;
+
+	public com.liferay.portlet.documentlibrary.model.DLFileRank[] findByG_U_PrevAndNext(
+		long fileRankId, long groupId, long userId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.documentlibrary.NoSuchFileRankException;
+
 	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileRank> findByF_N(
 		long folderId, java.lang.String name)
 		throws com.liferay.portal.SystemException;
@@ -178,6 +208,9 @@ public interface DLFileRankPersistence extends BasePersistence {
 	public void removeByUserId(long userId)
 		throws com.liferay.portal.SystemException;
 
+	public void removeByG_U(long groupId, long userId)
+		throws com.liferay.portal.SystemException;
+
 	public void removeByF_N(long folderId, java.lang.String name)
 		throws com.liferay.portal.SystemException;
 
@@ -189,6 +222,9 @@ public interface DLFileRankPersistence extends BasePersistence {
 	public void removeAll() throws com.liferay.portal.SystemException;
 
 	public int countByUserId(long userId)
+		throws com.liferay.portal.SystemException;
+
+	public int countByG_U(long groupId, long userId)
 		throws com.liferay.portal.SystemException;
 
 	public int countByF_N(long folderId, java.lang.String name)

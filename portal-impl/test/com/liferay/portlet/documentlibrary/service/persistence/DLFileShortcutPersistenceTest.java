@@ -73,6 +73,7 @@ public class DLFileShortcutPersistenceTest extends BasePersistenceTestCase {
 		DLFileShortcut newDLFileShortcut = _persistence.create(pk);
 
 		newDLFileShortcut.setUuid(randomString());
+		newDLFileShortcut.setGroupId(nextLong());
 		newDLFileShortcut.setCompanyId(nextLong());
 		newDLFileShortcut.setUserId(nextLong());
 		newDLFileShortcut.setUserName(randomString());
@@ -90,6 +91,8 @@ public class DLFileShortcutPersistenceTest extends BasePersistenceTestCase {
 			newDLFileShortcut.getUuid());
 		assertEquals(existingDLFileShortcut.getFileShortcutId(),
 			newDLFileShortcut.getFileShortcutId());
+		assertEquals(existingDLFileShortcut.getGroupId(),
+			newDLFileShortcut.getGroupId());
 		assertEquals(existingDLFileShortcut.getCompanyId(),
 			newDLFileShortcut.getCompanyId());
 		assertEquals(existingDLFileShortcut.getUserId(),
@@ -152,6 +155,7 @@ public class DLFileShortcutPersistenceTest extends BasePersistenceTestCase {
 		DLFileShortcut dlFileShortcut = _persistence.create(pk);
 
 		dlFileShortcut.setUuid(randomString());
+		dlFileShortcut.setGroupId(nextLong());
 		dlFileShortcut.setCompanyId(nextLong());
 		dlFileShortcut.setUserId(nextLong());
 		dlFileShortcut.setUserName(randomString());

@@ -169,7 +169,6 @@ import com.liferay.portlet.blogs.service.BlogsStatsUserLocalService;
 import com.liferay.portlet.blogs.service.persistence.BlogsStatsUserFinder;
 import com.liferay.portlet.blogs.service.persistence.BlogsStatsUserPersistence;
 import com.liferay.portlet.documentlibrary.service.DLFileRankLocalService;
-import com.liferay.portlet.documentlibrary.service.persistence.DLFileRankFinder;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPersistence;
 import com.liferay.portlet.expando.service.ExpandoValueLocalService;
 import com.liferay.portlet.expando.service.ExpandoValueService;
@@ -1479,14 +1478,6 @@ public abstract class UserLocalServiceBaseImpl implements UserLocalService {
 		this.dlFileRankPersistence = dlFileRankPersistence;
 	}
 
-	public DLFileRankFinder getDLFileRankFinder() {
-		return dlFileRankFinder;
-	}
-
-	public void setDLFileRankFinder(DLFileRankFinder dlFileRankFinder) {
-		this.dlFileRankFinder = dlFileRankFinder;
-	}
-
 	public MBBanLocalService getMBBanLocalService() {
 		return mbBanLocalService;
 	}
@@ -1941,8 +1932,6 @@ public abstract class UserLocalServiceBaseImpl implements UserLocalService {
 	protected DLFileRankLocalService dlFileRankLocalService;
 	@BeanReference(name = "com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPersistence.impl")
 	protected DLFileRankPersistence dlFileRankPersistence;
-	@BeanReference(name = "com.liferay.portlet.documentlibrary.service.persistence.DLFileRankFinder.impl")
-	protected DLFileRankFinder dlFileRankFinder;
 	@BeanReference(name = "com.liferay.portlet.messageboards.service.MBBanLocalService.impl")
 	protected MBBanLocalService mbBanLocalService;
 	@BeanReference(name = "com.liferay.portlet.messageboards.service.MBBanService.impl")

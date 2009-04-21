@@ -134,9 +134,48 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 			upgradeTable.updateTable();
 		}
 
+		// groupId
+
+		updateGroupId();
+
 		// PortletPreferences
 
 		updatePortletPreferences();
+	}
+
+	protected void updateGroupId() throws Exception {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = DataAccess.getConnection();
+
+			ps = con.prepareStatement("select folderId, groupId from DLFolder");
+
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				long folderId = rs.getLong("folderId");
+				long groupId = rs.getLong("groupId");
+
+				runSQL(
+					"update DLFileEntry set groupId = " + groupId +
+						" where folderId = " + folderId);
+				runSQL(
+					"update DLFileRank set groupId = " + groupId +
+						" where folderId = " + folderId);
+				runSQL(
+					"update DLFileShortcut set groupId = " + groupId +
+						" where folderId = " + folderId);
+				runSQL(
+					"update DLFileVersion set groupId = " + groupId +
+						" where folderId = " + folderId);
+			}
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
+		}
 	}
 
 	protected void updatePortletPreferences() throws Exception {
