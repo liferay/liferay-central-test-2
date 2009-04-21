@@ -48,6 +48,7 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.plugin.ModuleId;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PropsValues;
+import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.softwarecatalog.DuplicateProductEntryModuleIdException;
 import com.liferay.portlet.softwarecatalog.ProductEntryAuthorException;
 import com.liferay.portlet.softwarecatalog.ProductEntryLicenseException;
@@ -429,6 +430,14 @@ public class SCProductEntryLocalServiceImpl
 	}
 
 	public void reIndex(SCProductEntry productEntry) throws SystemException {
+		long companyId = productEntry.getCompanyId();
+		long groupId = productEntry.getGroupId();
+		long userId = productEntry.getUserId();
+		String userName = productEntry.getUserName();
+		long productEntryId = productEntry.getProductEntryId();
+		String name = productEntry.getName();
+		Date modifiedDate = productEntry.getModifiedDate();
+
 		String version = StringPool.BLANK;
 
 		SCProductVersion latestProductVersion = productEntry.getLatestVersion();
@@ -437,16 +446,19 @@ public class SCProductEntryLocalServiceImpl
 			version = latestProductVersion.getVersion();
 		}
 
+		String type = productEntry.getType();
+		String shortDescription = productEntry.getShortDescription();
+		String longDescription = productEntry.getLongDescription();
+		String pageURL = productEntry.getPageURL();
+		String repoGroupId = productEntry.getRepoGroupId();
+		String repoArtifactId = productEntry.getRepoArtifactId();
+		ExpandoBridge expandoBridge = productEntry.getExpandoBridge();
+
 		try {
 			Indexer.updateProductEntry(
-				productEntry.getCompanyId(), productEntry.getGroupId(),
-				productEntry.getUserId(), productEntry.getUserName(),
-				productEntry.getProductEntryId(), productEntry.getName(),
-				productEntry.getModifiedDate(), version, productEntry.getType(),
-				productEntry.getShortDescription(),
-				productEntry.getLongDescription(), productEntry.getPageURL(),
-				productEntry.getRepoGroupId(), productEntry.getRepoArtifactId(),
-				productEntry.getExpandoBridge());
+				companyId, groupId, userId, userName, productEntryId, name,
+				modifiedDate, version, type, shortDescription, longDescription,
+				pageURL, repoGroupId, repoArtifactId, expandoBridge);
 		}
 		catch (SearchException se) {
 			_log.error("Reindexing " + productEntry.getProductEntryId(), se);
