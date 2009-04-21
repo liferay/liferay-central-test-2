@@ -1486,12 +1486,17 @@ public class JournalArticleLocalServiceImpl
 			}
 		}
 
+		reIndex(article);
+	}
+
+	public void reIndex(JournalArticle article) throws SystemException {
 		if (!article.isApproved() || !article.isIndexable()) {
 			return;
 		}
 
 		long companyId = article.getCompanyId();
 		long groupId = article.getGroupId();
+		long resourcePrimKey = article.getResourcePrimKey();
 		String articleId = article.getArticleId();
 		double version = article.getVersion();
 		String title = article.getTitle();
@@ -1525,39 +1530,7 @@ public class JournalArticleLocalServiceImpl
 		long companyId = GetterUtil.getLong(ids[0]);
 
 		try {
-			for (JournalArticle article :
-					journalArticlePersistence.findByCompanyId(companyId)) {
-
-				if (!article.isApproved() || !article.isIndexable()) {
-					continue;
-				}
-
-				long resourcePrimKey = article.getResourcePrimKey();
-				long groupId = article.getGroupId();
-				String articleId = article.getArticleId();
-				double version = article.getVersion();
-				String title = article.getTitle();
-				String description = article.getDescription();
-				String content = article.getContent();
-				String type = article.getType();
-				Date displayDate = article.getDisplayDate();
-
-				String[] tagsCategories = tagsEntryLocalService.getEntryNames(
-					JournalArticle.class.getName(), resourcePrimKey,
-					TagsEntryConstants.FOLKSONOMY_CATEGORY);
-				String[] tagsEntries = tagsEntryLocalService.getEntryNames(
-					JournalArticle.class.getName(), resourcePrimKey);
-
-				try {
-					Indexer.updateArticle(
-						companyId, groupId, articleId, version, title,
-						description, content, type, displayDate, tagsCategories,
-						tagsEntries, article.getExpandoBridge());
-				}
-				catch (SearchException se) {
-					_log.error("Reindexing " + article.getId(), se);
-				}
-			}
+			reIndexArticles(companyId);
 		}
 		catch (SystemException se) {
 			throw se;
@@ -2413,6 +2386,30 @@ public class JournalArticleLocalServiceImpl
 		else {
 			return FriendlyURLNormalizer.normalize(
 				title, _URL_TITLE_REPLACE_CHARS);
+		}
+	}
+
+	protected void reIndexArticles(long companyId) throws SystemException {
+		int count = journalArticlePersistence.countByCompanyId(companyId);
+
+		int pages = count / Indexer.DEFAULT_INTERVAL;
+
+		for (int i = 0; i <= pages; i++) {
+			int start = (i * Indexer.DEFAULT_INTERVAL);
+			int end = start + Indexer.DEFAULT_INTERVAL;
+
+			reIndexArticles(companyId, start, end);
+		}
+	}
+
+	protected void reIndexArticles(long companyId, int start, int end)
+		throws SystemException {
+
+		List<JournalArticle> articles =
+			journalArticlePersistence.findByCompanyId(companyId, start, end);
+
+		for (JournalArticle article : articles) {
+			reIndex(article);
 		}
 	}
 
