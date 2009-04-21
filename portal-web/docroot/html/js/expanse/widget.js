@@ -6,13 +6,19 @@
 			Class = new Expanse.Class(properties);
 		}
 
-		Class.prototype.initialize = function(el, options) {
-			this.options = options;
+		var widgetConstructor = function(el, options) {
+			this.options = options || {};
 
-			this.constructor.apply(this, arguments);
+			this._super.apply(this, arguments);
 
 			this.configureCallbacks();
 		};
+
+		if (Class.prototype.initialize) {
+			widgetConstructor = Expanse.Class.createSuper(Class.prototype.initialize, widgetConstructor);
+		}
+
+		Class.prototype.initialize = widgetConstructor;
 
 		Class.prototype.configureCallbacks = function() {
 			var callbacks = this.options.on;
