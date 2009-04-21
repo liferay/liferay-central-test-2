@@ -118,7 +118,7 @@ public class UpgradeTags extends UpgradeProcess {
 			sb.append(classNameId);
 		}
 		else {
-			sb.append("update TagsAsset set TagsAsset.viewCount = (select ");
+			sb.append("update TagsAsset set viewCount = (select ");
 			sb.append(tableName);
 			sb.append(".");
 			sb.append(columnViewCount);
