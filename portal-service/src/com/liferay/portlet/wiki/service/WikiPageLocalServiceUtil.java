@@ -373,6 +373,11 @@ public class WikiPageLocalServiceUtil {
 		getService().reIndex(resourcePrimKey);
 	}
 
+	public static void reIndex(com.liferay.portlet.wiki.model.WikiPage page)
+		throws com.liferay.portal.SystemException {
+		getService().reIndex(page);
+	}
+
 	public static com.liferay.portlet.wiki.model.WikiPage revertPage(
 		long userId, long nodeId, java.lang.String title, double version,
 		com.liferay.portal.service.ServiceContext serviceContext)

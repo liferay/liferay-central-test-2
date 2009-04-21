@@ -288,6 +288,10 @@ public interface WikiPageLocalService {
 	public void reIndex(long resourcePrimKey)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public void reIndex(com.liferay.portlet.wiki.model.WikiPage page)
+		throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.wiki.model.WikiPage revertPage(long userId,
 		long nodeId, java.lang.String title, double version,
 		com.liferay.portal.service.ServiceContext serviceContext)
