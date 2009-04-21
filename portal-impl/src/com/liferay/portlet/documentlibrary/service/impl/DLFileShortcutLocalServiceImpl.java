@@ -30,7 +30,7 @@ import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
-import com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl;
+import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.service.base.DLFileShortcutLocalServiceBaseImpl;
 
 import java.util.Date;
@@ -273,14 +273,14 @@ public class DLFileShortcutLocalServiceImpl
 	protected long getFolderId(long companyId, long folderId)
 		throws SystemException {
 
-		if (folderId != DLFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
+		if (folderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
 
 			// Ensure folder exists and belongs to the proper company
 
 			DLFolder folder = dlFolderPersistence.fetchByPrimaryKey(folderId);
 
 			if ((folder == null) || (companyId != folder.getCompanyId())) {
-				folderId = DLFolderImpl.DEFAULT_PARENT_FOLDER_ID;
+				folderId = DLFolderConstants.DEFAULT_PARENT_FOLDER_ID;
 			}
 		}
 

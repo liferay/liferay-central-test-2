@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
+import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
 
 /**
@@ -37,8 +38,6 @@ import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
  *
  */
 public class DLFolderImpl extends DLFolderModelImpl implements DLFolder {
-
-	public static final long DEFAULT_PARENT_FOLDER_ID = 0;
 
 	public DLFolderImpl() {
 	}
@@ -52,7 +51,7 @@ public class DLFolderImpl extends DLFolderModelImpl implements DLFolder {
 	}
 
 	public boolean isRoot() {
-		if (getParentFolderId() == DEFAULT_PARENT_FOLDER_ID) {
+		if (getParentFolderId() == DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
 			return true;
 		}
 		else {
@@ -69,7 +68,9 @@ public class DLFolderImpl extends DLFolderModelImpl implements DLFolder {
 			sb.insert(0, folder.getName());
 			sb.insert(0, StringPool.SLASH);
 
-			if (folder.getParentFolderId() != DEFAULT_PARENT_FOLDER_ID) {
+			if (folder.getParentFolderId() !=
+					DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
+
 				folder = DLFolderLocalServiceUtil.getFolder(
 					folder.getParentFolderId());
 			}

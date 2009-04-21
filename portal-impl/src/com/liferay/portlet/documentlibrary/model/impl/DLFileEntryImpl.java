@@ -51,10 +51,6 @@ import java.util.Properties;
 public class DLFileEntryImpl
 	extends DLFileEntryModelImpl implements DLFileEntry {
 
-	public static final double DEFAULT_VERSION = 1.0;
-
-	public static final int DEFAULT_READ_COUNT = 0;
-
 	public static String stripExtension(String name, String title) {
 		String extension = FileUtil.getExtension(name);
 

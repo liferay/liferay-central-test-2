@@ -47,7 +47,7 @@ import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileRank;
 import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
-import com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl;
+import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFileRankLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFileShortcutLocalServiceUtil;
@@ -221,7 +221,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		byte[] bytes = context.getZipEntryAsByteArray(binPath);
 
-		if ((folderId != DLFolderImpl.DEFAULT_PARENT_FOLDER_ID) &&
+		if ((folderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) &&
 			(folderId == fileEntry.getFolderId())) {
 
 			String path = getImportFolderPath(context, folderId);
@@ -308,7 +308,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 			name = rank.getName();
 		}
 
-		if ((folderId != DLFolderImpl.DEFAULT_PARENT_FOLDER_ID) &&
+		if ((folderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) &&
 			(folderId == rank.getFolderId())) {
 
 			String path = getImportFolderPath(context, folderId);
@@ -349,7 +349,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 		serviceContext.setAddCommunityPermissions(true);
 		serviceContext.setAddGuestPermissions(true);
 
-		if ((parentFolderId != DLFolderImpl.DEFAULT_PARENT_FOLDER_ID) &&
+		if ((parentFolderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) &&
 			(parentFolderId == folder.getParentFolderId())) {
 
 			String path = getImportFolderPath(context, parentFolderId);
@@ -366,7 +366,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 		DLFolder existingFolder = null;
 
 		try {
-			if (parentFolderId != DLFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
+			if (parentFolderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
 				DLFolderUtil.findByPrimaryKey(parentFolderId);
 			}
 
@@ -618,7 +618,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 			PortletDataContext context, Element foldersEl, long folderId)
 		throws PortalException, SystemException {
 
-		if (folderId == DLFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
+		if (folderId == DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
 			return;
 		}
 

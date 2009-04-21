@@ -50,10 +50,11 @@ import com.liferay.portlet.documentlibrary.DuplicateFolderNameException;
 import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.NoSuchFolderException;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
+import com.liferay.portlet.documentlibrary.model.DLFileEntryConstants;
 import com.liferay.portlet.documentlibrary.model.DLFileVersion;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
+import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl;
-import com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl;
 import com.liferay.portlet.documentlibrary.service.base.DLFileEntryLocalServiceBaseImpl;
 import com.liferay.portlet.documentlibrary.social.DLActivityKeys;
 import com.liferay.portlet.expando.model.ExpandoBridge;
@@ -195,9 +196,9 @@ public class DLFileEntryLocalServiceImpl
 		fileEntry.setName(name);
 		fileEntry.setTitle(title);
 		fileEntry.setDescription(description);
-		fileEntry.setVersion(DLFileEntryImpl.DEFAULT_VERSION);
+		fileEntry.setVersion(DLFileEntryConstants.DEFAULT_VERSION);
 		fileEntry.setSize((int)size);
-		fileEntry.setReadCount(DLFileEntryImpl.DEFAULT_READ_COUNT);
+		fileEntry.setReadCount(DLFileEntryConstants.DEFAULT_READ_COUNT);
 		fileEntry.setExtraSettings(extraSettings);
 
 		dlFileEntryPersistence.update(fileEntry, false);
@@ -1043,14 +1044,14 @@ public class DLFileEntryLocalServiceImpl
 	protected long getFolderId(long companyId, long folderId)
 		throws SystemException {
 
-		if (folderId != DLFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
+		if (folderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
 
 			// Ensure folder exists and belongs to the proper company
 
 			DLFolder folder = dlFolderPersistence.fetchByPrimaryKey(folderId);
 
 			if ((folder == null) || (companyId != folder.getCompanyId())) {
-				folderId = DLFolderImpl.DEFAULT_PARENT_FOLDER_ID;
+				folderId = DLFolderConstants.DEFAULT_PARENT_FOLDER_ID;
 			}
 		}
 

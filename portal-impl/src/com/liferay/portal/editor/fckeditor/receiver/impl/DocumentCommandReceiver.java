@@ -31,6 +31,7 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
+import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFolderServiceUtil;
@@ -178,7 +179,7 @@ public class DocumentCommandReceiver extends BaseCommandReceiver {
 
 		DLFolder folder = new DLFolderImpl();
 
-		folder.setFolderId(DLFolderImpl.DEFAULT_PARENT_FOLDER_ID);
+		folder.setFolderId(DLFolderConstants.DEFAULT_PARENT_FOLDER_ID);
 
 		if (folderName.equals(StringPool.SLASH)) {
 			return folder;

@@ -49,7 +49,7 @@ import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.NoSuchFolderException;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
-import com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl;
+import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFolderServiceUtil;
@@ -82,7 +82,7 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			String[] destinationArray = WebDAVUtil.getPathArray(
 				destination, true);
 
-			long parentFolderId = DLFolderImpl.DEFAULT_PARENT_FOLDER_ID;
+			long parentFolderId = DLFolderConstants.DEFAULT_PARENT_FOLDER_ID;
 
 			try {
 				parentFolderId = getParentFolderId(destinationArray);
@@ -147,7 +147,7 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			String[] destinationArray = WebDAVUtil.getPathArray(
 				destination, true);
 
-			long parentFolderId = DLFolderImpl.DEFAULT_PARENT_FOLDER_ID;
+			long parentFolderId = DLFolderConstants.DEFAULT_PARENT_FOLDER_ID;
 
 			try {
 				parentFolderId = getParentFolderId(destinationArray);
@@ -756,7 +756,7 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 	protected long getFolderId(String[] pathArray, boolean parent)
 		throws Exception {
 
-		long folderId = DLFolderImpl.DEFAULT_PARENT_FOLDER_ID;
+		long folderId = DLFolderConstants.DEFAULT_PARENT_FOLDER_ID;
 
 		if (pathArray.length <= 2) {
 			return folderId;

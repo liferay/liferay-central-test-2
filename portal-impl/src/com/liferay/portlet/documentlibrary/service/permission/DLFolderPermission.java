@@ -28,7 +28,7 @@ import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
-import com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl;
+import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
 
 /**
@@ -73,7 +73,7 @@ public class DLFolderPermission {
 			String actionId)
 		throws PortalException, SystemException {
 
-		if (folderId == DLFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
+		if (folderId == DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
 			return DLPermission.contains(permissionChecker, groupId, actionId);
 		}
 		else {
@@ -101,7 +101,7 @@ public class DLFolderPermission {
 
 		long folderId = folder.getFolderId();
 
-		while (folderId != DLFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
+		while (folderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
 			if (permissionChecker.hasOwnerPermission(
 					folder.getCompanyId(), DLFolder.class.getName(),
 					folder.getFolderId(), folder.getUserId(), actionId)) {

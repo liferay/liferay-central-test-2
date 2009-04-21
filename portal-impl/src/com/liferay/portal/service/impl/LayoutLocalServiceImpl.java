@@ -66,7 +66,7 @@ import com.liferay.portal.util.comparator.LayoutPriorityComparator;
 import com.liferay.portlet.documentlibrary.DuplicateFolderNameException;
 import com.liferay.portlet.documentlibrary.NoSuchFolderException;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
-import com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl;
+import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -126,7 +126,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		return addLayout(
 			userId, groupId, privateLayout, parentLayoutId, localeNamesMap,
 			localeTitlesMap, description, type, hidden, friendlyURL,
-			DLFolderImpl.DEFAULT_PARENT_FOLDER_ID);
+			DLFolderConstants.DEFAULT_PARENT_FOLDER_ID);
 	}
 
 	public Layout addLayout(

@@ -30,7 +30,7 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.TestPropsValues;
 import com.liferay.portlet.documentlibrary.NoSuchFolderException;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
-import com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl;
+import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 
 /**
  * <a href="DLFileEntryServiceTest.java.html"><b><i>View Source</i></b></a>
@@ -84,13 +84,13 @@ public class DLFileEntryServiceTest extends BaseServiceTestCase {
 
 		try {
 			DLFolderServiceUtil.deleteFolder(
-				groupId, DLFolderImpl.DEFAULT_PARENT_FOLDER_ID, name);
+				groupId, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, name);
 		}
 		catch (NoSuchFolderException nsfe) {
 		}
 
 		_folder = DLFolderServiceUtil.addFolder(
-			groupId, DLFolderImpl.DEFAULT_PARENT_FOLDER_ID,
+			groupId, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
 			name, description, serviceContext);
 	}
 

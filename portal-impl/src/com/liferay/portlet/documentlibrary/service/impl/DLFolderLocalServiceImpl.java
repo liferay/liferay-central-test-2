@@ -43,7 +43,7 @@ import com.liferay.portlet.documentlibrary.DuplicateFolderNameException;
 import com.liferay.portlet.documentlibrary.FolderNameException;
 import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
-import com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl;
+import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.service.base.DLFolderLocalServiceBaseImpl;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.tags.util.TagsUtil;
@@ -122,7 +122,7 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 
 		// Parent folder
 
-		if (parentFolderId != DLFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
+		if (parentFolderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
 			DLFolder parentFolder = dlFolderPersistence.findByPrimaryKey(
 				parentFolderId);
 
@@ -134,7 +134,7 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 		// Layout
 
 		if (PropsValues.DL_LAYOUTS_SYNC_ENABLED &&
-			(parentFolderId != DLFolderImpl.DEFAULT_PARENT_FOLDER_ID)) {
+			(parentFolderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID)) {
 
 			String[] pathArray = folder.getPathArray();
 
@@ -272,7 +272,7 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		List<DLFolder> folders = dlFolderPersistence.findByG_P(
-			groupId, DLFolderImpl.DEFAULT_PARENT_FOLDER_ID);
+			groupId, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID);
 
 		for (DLFolder folder : folders) {
 			deleteFolder(folder);
@@ -494,14 +494,14 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 	protected long getParentFolderId(long groupId, long parentFolderId)
 		throws SystemException {
 
-		if (parentFolderId != DLFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
+		if (parentFolderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
 			DLFolder parentFolder = dlFolderPersistence.fetchByPrimaryKey(
 				parentFolderId);
 
 			if ((parentFolder == null) ||
 				(groupId != parentFolder.getGroupId())) {
 
-				parentFolderId = DLFolderImpl.DEFAULT_PARENT_FOLDER_ID;
+				parentFolderId = DLFolderConstants.DEFAULT_PARENT_FOLDER_ID;
 			}
 		}
 
@@ -511,7 +511,7 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 	protected long getParentFolderId(DLFolder folder, long parentFolderId)
 		throws SystemException {
 
-		if (parentFolderId == DLFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
+		if (parentFolderId == DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
 			return parentFolderId;
 		}
 
