@@ -39,6 +39,7 @@ import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
 import com.liferay.portlet.bookmarks.service.base.BookmarksEntryLocalServiceBaseImpl;
 import com.liferay.portlet.bookmarks.util.Indexer;
+import com.liferay.portlet.bookmarks.util.comparator.EntryModifiedDateComparator;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 
 import java.net.MalformedURLException;
@@ -278,19 +279,23 @@ public class BookmarksEntryLocalServiceImpl
 			long groupId, int start, int end)
 		throws SystemException {
 
-		return bookmarksEntryPersistence.findByGroupId(groupId, start, end);
+		return bookmarksEntryPersistence.findByGroupId(
+			groupId, start, end, new EntryModifiedDateComparator());
 	}
 
 	public List<BookmarksEntry> getGroupEntries(
 			long groupId, long userId, int start, int end)
 		throws SystemException {
 
+		OrderByComparator orderByComparator = new EntryModifiedDateComparator();
+
 		if (userId <= 0) {
-			return bookmarksEntryPersistence.findByGroupId(groupId, start, end);
+			return bookmarksEntryPersistence.findByGroupId(
+				groupId, start, end, orderByComparator);
 		}
 		else {
 			return bookmarksEntryPersistence.findByG_U(
-				groupId, userId, start, end);
+				groupId, userId, start, end, orderByComparator);
 		}
 	}
 
