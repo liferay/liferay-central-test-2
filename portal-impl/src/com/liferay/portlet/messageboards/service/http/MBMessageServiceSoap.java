@@ -208,21 +208,6 @@ public class MBMessageServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.messageboards.model.MBMessageDisplay getMessageDisplay(
-		long messageId, java.lang.String threadView) throws RemoteException {
-		try {
-			com.liferay.portlet.messageboards.model.MBMessageDisplay returnValue =
-				MBMessageServiceUtil.getMessageDisplay(messageId, threadView);
-
-			return returnValue;
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
 	public static void subscribeMessage(long messageId)
 		throws RemoteException {
 		try {
