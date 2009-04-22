@@ -606,15 +606,15 @@ public class LayoutTypePortletImpl
 
 				String[] portletIds = StringUtil.split(oldColumnValue);
 
-				for (int i = 0; i < portletIds.length; i++) {
-					lastNewColumnValue =
-						StringUtil.add(lastNewColumnValue, portletIds[i]);
+				for (String portletId : portletIds) {
+					lastNewColumnValue = StringUtil.add(
+						lastNewColumnValue, portletId);
 				}
 			}
 		}
 
-		for (int j = oldColumns.size(); j <= 20; j++) {
-			String oldColumnId = "column-" + j;
+		for (int i = oldColumns.size(); i <= 20; i++) {
+			String oldColumnId = "column-" + i;
 
 			if (!newColumns.contains(oldColumnId)) {
 				String oldColumnValue = getTypeSettingsProperties().remove(
@@ -622,9 +622,9 @@ public class LayoutTypePortletImpl
 
 				String[] portletIds = StringUtil.split(oldColumnValue);
 
-				for (int i = 0; i < portletIds.length; i++) {
-					lastNewColumnValue =
-						StringUtil.add(lastNewColumnValue, portletIds[i]);
+				for (String portletId : portletIds) {
+					lastNewColumnValue = StringUtil.add(
+						lastNewColumnValue, portletId);
 				}
 			}
 		}
