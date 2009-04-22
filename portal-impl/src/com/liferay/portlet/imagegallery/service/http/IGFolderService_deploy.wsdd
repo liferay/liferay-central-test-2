@@ -26,12 +26,12 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="folderId" type="tns:long"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.imagegallery.portlet.liferay.com" xmlns:rtns="http://model.imagegallery.portlet.liferay.com" name="getFolder" qname="operNS:getFolder" returnQName="getFolderReturn" returnType="rtns:IGFolderSoap" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="folderId" type="tns:long"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.imagegallery.portlet.liferay.com" xmlns:rtns="http://model.imagegallery.portlet.liferay.com" name="getFolder" qname="operNS:getFolder" returnQName="getFolderReturn" returnType="rtns:IGFolderSoap" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="groupId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="parentFolderId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="name" type="tns:string"></parameter>
-		</operation>
-		<operation xmlns:operNS="urn:http.service.imagegallery.portlet.liferay.com" xmlns:rtns="http://model.imagegallery.portlet.liferay.com" name="getFolder" qname="operNS:getFolder" returnQName="getFolderReturn" returnType="rtns:IGFolderSoap" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="folderId" type="tns:long"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.imagegallery.portlet.liferay.com" xmlns:rtns="urn:http.service.imagegallery.portlet.liferay.com" xmlns:tns2="http://model.imagegallery.portlet.liferay.com" name="getFolders" qname="operNS:getFolders" returnQName="getFoldersReturn" returnType="rtns:ArrayOf_tns4_IGFolderSoap" returnItemType="tns2:IGFolderSoap" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="groupId" type="tns:long"></parameter>

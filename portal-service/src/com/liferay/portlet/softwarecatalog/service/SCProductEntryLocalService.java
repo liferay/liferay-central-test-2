@@ -202,6 +202,11 @@ public interface SCProductEntryLocalService {
 		throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public void reIndex(
+		com.liferay.portlet.softwarecatalog.model.SCProductEntry productEntry)
+		throws com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public void reIndex(java.lang.String[] ids)
 		throws com.liferay.portal.SystemException;
 

@@ -9,6 +9,9 @@
 		<parameter name="className" value="com.liferay.portlet.tags.service.http.TagsPropertyServiceSoap"/>
 		<parameter name="wsdlPortType" value="TagsPropertyServiceSoap"/>
 		<parameter name="typeMappingVersion" value="1.2"/>
+		<operation xmlns:operNS="urn:http.service.tags.portlet.liferay.com" xmlns:rtns="urn:http.service.tags.portlet.liferay.com" xmlns:tns2="http://model.tags.portlet.liferay.com" name="getProperties" qname="operNS:getProperties" returnQName="getPropertiesReturn" returnType="rtns:ArrayOf_tns2_TagsPropertySoap" returnItemType="tns2:TagsPropertySoap" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="entryId" type="tns:long"></parameter>
+		</operation>
 		<operation xmlns:operNS="urn:http.service.tags.portlet.liferay.com" xmlns:rtns="http://model.tags.portlet.liferay.com" name="addProperty" qname="operNS:addProperty" returnQName="addPropertyReturn" returnType="rtns:TagsPropertySoap" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="entryId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="key" type="tns:string"></parameter>
@@ -25,9 +28,6 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="propertyId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="key" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="value" type="tns:string"></parameter>
-		</operation>
-		<operation xmlns:operNS="urn:http.service.tags.portlet.liferay.com" xmlns:rtns="urn:http.service.tags.portlet.liferay.com" xmlns:tns2="http://model.tags.portlet.liferay.com" name="getProperties" qname="operNS:getProperties" returnQName="getPropertiesReturn" returnType="rtns:ArrayOf_tns2_TagsPropertySoap" returnItemType="tns2:TagsPropertySoap" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="entryId" type="tns:long"></parameter>
 		</operation>
 		<parameter name="allowedMethods" value="getProperties deleteProperty updateProperty addProperty getPropertyValues"/>
 		<typeMapping xmlns:ns="http://model.tags.portlet.liferay.com" qname="ns:TagsPropertySoap" type="java:com.liferay.portlet.tags.model.TagsPropertySoap" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>

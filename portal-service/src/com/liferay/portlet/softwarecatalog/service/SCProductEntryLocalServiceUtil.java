@@ -251,6 +251,12 @@ public class SCProductEntryLocalServiceUtil {
 		getService().reIndex(productEntryId);
 	}
 
+	public static void reIndex(
+		com.liferay.portlet.softwarecatalog.model.SCProductEntry productEntry)
+		throws com.liferay.portal.SystemException {
+		getService().reIndex(productEntry);
+	}
+
 	public static void reIndex(java.lang.String[] ids)
 		throws com.liferay.portal.SystemException {
 		getService().reIndex(ids);
