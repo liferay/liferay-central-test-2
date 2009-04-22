@@ -136,6 +136,8 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 				"A tag entry with the name " + name + " already exists");
 		}
 
+		validate(name);
+
 		entry.setName(name);
 
 		if (Validator.isNotNull(parentEntryName)) {
