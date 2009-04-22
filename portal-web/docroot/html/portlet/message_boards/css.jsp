@@ -151,11 +151,6 @@ td.user-info {
 	float: right;
 }
 
-.portlet-message-boards .taglib-flags {
-	float: left;
-	margin-left: 20px;
-}
-
 .portlet-message-boards .emoticons {
 	border: 1px solid #ccc;
 	margin-left: 10px;
@@ -181,4 +176,9 @@ td.user-info {
 
 .portlet-message-boards .subcategories {
 	text-decoration: underline;
+}
+
+.portlet-message-boards .taglib-flags {
+	float: left;
+	margin-left: 20px;
 }
