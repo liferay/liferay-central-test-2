@@ -472,7 +472,7 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 			names="<%= tabs1Names %>"
 			param="tabs1"
 			value="<%= tabs1 %>"
-			url="<%= currentURL %>"
+			url="<%= portletURL.toString() %>"
 			backURL="<%= redirect %>"
 		/>
 	</c:if>
