@@ -145,13 +145,13 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		articleEl.addAttribute("path", path);
 
-		if (article.isSmallImage()) {
+		Image smallImage = ImageUtil.fetchByPrimaryKey(
+			article.getSmallImageId());
+
+		if (article.isSmallImage() && (smallImage != null)) {
 			String smallImagePath = getArticleSmallImagePath(context, article);
 
 			articleEl.addAttribute("small-image-path", smallImagePath);
-
-			Image smallImage = ImageUtil.fetchByPrimaryKey(
-				article.getSmallImageId());
 
 			article.setSmallImageType(smallImage.getType());
 
@@ -699,10 +699,9 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		File smallFile = null;
 
-		if (article.isSmallImage()) {
-			String smallImagePath = articleEl.attributeValue(
-				"small-image-path");
+		String smallImagePath = articleEl.attributeValue("small-image-path");
 
+		if (article.isSmallImage() && Validator.isNotNull(smallImagePath)) {
 			byte[] bytes = context.getZipEntryAsByteArray(smallImagePath);
 
 			smallFile = File.createTempFile(
@@ -804,11 +803,11 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 				String templatePath = getImportTemplatePath(
 					context, article.getTemplateId());
 
-				String smallImagePath = getImportTemplateSmallImagePath(
+				String templateSmallImagePath = getImportTemplateSmallImagePath(
 					context, article.getTemplateId());
 
 				importTemplate(
-					context, structureIds, templateIds, smallImagePath,
+					context, structureIds, templateIds, templateSmallImagePath,
 					templatePath);
 			}
 		}
