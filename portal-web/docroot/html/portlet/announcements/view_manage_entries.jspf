@@ -164,6 +164,8 @@ if ((classNameId == 0) && (classPK == 0) && !permissionChecker.isOmniadmin()) {
 	<div class="separator"><!-- --></div>
 
 	<%
+	portletURL.setParameter("distributionScope", distributionScope);
+
 	List<String> headerNames = new ArrayList<String>();
 
 	headerNames.add("title");
