@@ -50,23 +50,8 @@ public class IGImageFinderImpl
 	public static String COUNT_BY_FOLDER_IDS =
 		IGImageFinder.class.getName() + ".countByFolderIds";
 
-	public static String COUNT_BY_GROUP_ID =
-		IGImageFinder.class.getName() + ".countByGroupId";
-
-	public static String COUNT_BY_G_U =
-		IGImageFinder.class.getName() + ".countByG_U";
-
-	public static String FIND_BY_GROUP_ID =
-		IGImageFinder.class.getName() + ".findByGroupId";
-
 	public static String FIND_BY_NO_ASSETS =
 		IGImageFinder.class.getName() + ".findByNoAssets";
-
-	public static String FIND_BY_UUID_G =
-		IGImageFinder.class.getName() + ".findByUuid_G";
-
-	public static String FIND_BY_G_U =
-		IGImageFinder.class.getName() + ".findByG_U";
 
 	public int countByFolderIds(List<Long> folderIds) throws SystemException {
 		Session session = null;
@@ -111,109 +96,6 @@ public class IGImageFinderImpl
 		}
 	}
 
-	public int countByGroupId(long groupId) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			String sql = CustomSQLUtil.get(COUNT_BY_GROUP_ID);
-
-			SQLQuery q = session.createSQLQuery(sql);
-
-			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(groupId);
-
-			Iterator<Long> itr = q.list().iterator();
-
-			if (itr.hasNext()) {
-				Long count = itr.next();
-
-				if (count != null) {
-					return count.intValue();
-				}
-			}
-
-			return 0;
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public int countByG_U(long groupId, long userId)
-		throws SystemException {
-
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			String sql = CustomSQLUtil.get(COUNT_BY_G_U);
-
-			SQLQuery q = session.createSQLQuery(sql);
-
-			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(groupId);
-			qPos.add(userId);
-
-			Iterator<Long> itr = q.list().iterator();
-
-			if (itr.hasNext()) {
-				Long count = itr.next();
-
-				if (count != null) {
-					return count.intValue();
-				}
-			}
-
-			return 0;
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List<IGImage> findByGroupId(long groupId, int start, int end)
-		throws SystemException {
-
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			String sql = CustomSQLUtil.get(FIND_BY_GROUP_ID);
-
-			SQLQuery q = session.createSQLQuery(sql);
-
-			q.addEntity("IGImage", IGImageImpl.class);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(groupId);
-
-			return (List<IGImage>)QueryUtil.list(q, getDialect(), start, end);
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
 	public List<IGImage> findByNoAssets() throws SystemException {
 		Session session = null;
 
@@ -227,83 +109,6 @@ public class IGImageFinderImpl
 			q.addEntity("IGImage", IGImageImpl.class);
 
 			return q.list();
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public IGImage findByUuid_G(String uuid, long groupId)
-		throws NoSuchImageException, SystemException {
-
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			String sql = CustomSQLUtil.get(FIND_BY_UUID_G);
-
-			SQLQuery q = session.createSQLQuery(sql);
-
-			q.addEntity("IGImage", IGImageImpl.class);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(uuid);
-			qPos.add(groupId);
-
-			List<IGImage> list = q.list();
-
-			if (list.size() == 0) {
-				StringBuilder sb = new StringBuilder();
-
-				sb.append("No IGImage exists with the key {uuid=");
-				sb.append(uuid);
-				sb.append(", groupId=");
-				sb.append(groupId);
-				sb.append("}");
-
-				throw new NoSuchImageException(sb.toString());
-			}
-			else {
-				return list.get(0);
-			}
-		}
-		catch (NoSuchImageException nsie) {
-			throw nsie;
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List<IGImage> findByG_U(
-			long groupId, long userId, int start, int end)
-		throws SystemException {
-
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			String sql = CustomSQLUtil.get(FIND_BY_G_U);
-
-			SQLQuery q = session.createSQLQuery(sql);
-
-			q.addEntity("IGImage", IGImageImpl.class);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(groupId);
-			qPos.add(userId);
-
-			return (List<IGImage>)QueryUtil.list(q, getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

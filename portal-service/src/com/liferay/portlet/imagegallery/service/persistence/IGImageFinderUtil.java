@@ -34,38 +34,9 @@ public class IGImageFinderUtil {
 		return getFinder().countByFolderIds(folderIds);
 	}
 
-	public static int countByGroupId(long groupId)
-		throws com.liferay.portal.SystemException {
-		return getFinder().countByGroupId(groupId);
-	}
-
-	public static int countByG_U(long groupId, long userId)
-		throws com.liferay.portal.SystemException {
-		return getFinder().countByG_U(groupId, userId);
-	}
-
-	public static java.util.List<com.liferay.portlet.imagegallery.model.IGImage> findByGroupId(
-		long groupId, int start, int end)
-		throws com.liferay.portal.SystemException {
-		return getFinder().findByGroupId(groupId, start, end);
-	}
-
 	public static java.util.List<com.liferay.portlet.imagegallery.model.IGImage> findByNoAssets()
 		throws com.liferay.portal.SystemException {
 		return getFinder().findByNoAssets();
-	}
-
-	public static com.liferay.portlet.imagegallery.model.IGImage findByUuid_G(
-		java.lang.String uuid, long groupId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.imagegallery.NoSuchImageException {
-		return getFinder().findByUuid_G(uuid, groupId);
-	}
-
-	public static java.util.List<com.liferay.portlet.imagegallery.model.IGImage> findByG_U(
-		long groupId, long userId, int start, int end)
-		throws com.liferay.portal.SystemException {
-		return getFinder().findByG_U(groupId, userId, start, end);
 	}
 
 	public static IGImageFinder getFinder() {

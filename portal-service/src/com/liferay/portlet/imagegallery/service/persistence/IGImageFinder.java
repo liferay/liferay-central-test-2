@@ -32,25 +32,6 @@ public interface IGImageFinder {
 	public int countByFolderIds(java.util.List<Long> folderIds)
 		throws com.liferay.portal.SystemException;
 
-	public int countByGroupId(long groupId)
-		throws com.liferay.portal.SystemException;
-
-	public int countByG_U(long groupId, long userId)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List<com.liferay.portlet.imagegallery.model.IGImage> findByGroupId(
-		long groupId, int start, int end)
-		throws com.liferay.portal.SystemException;
-
 	public java.util.List<com.liferay.portlet.imagegallery.model.IGImage> findByNoAssets()
-		throws com.liferay.portal.SystemException;
-
-	public com.liferay.portlet.imagegallery.model.IGImage findByUuid_G(
-		java.lang.String uuid, long groupId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.imagegallery.NoSuchImageException;
-
-	public java.util.List<com.liferay.portlet.imagegallery.model.IGImage> findByG_U(
-		long groupId, long userId, int start, int end)
 		throws com.liferay.portal.SystemException;
 }

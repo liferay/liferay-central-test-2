@@ -50,7 +50,6 @@ import com.liferay.portlet.imagegallery.model.impl.IGFolderImpl;
 import com.liferay.portlet.imagegallery.service.IGFolderLocalServiceUtil;
 import com.liferay.portlet.imagegallery.service.IGImageLocalServiceUtil;
 import com.liferay.portlet.imagegallery.service.persistence.IGFolderUtil;
-import com.liferay.portlet.imagegallery.service.persistence.IGImageFinderUtil;
 import com.liferay.portlet.imagegallery.service.persistence.IGImageUtil;
 
 import java.io.File;
@@ -246,7 +245,7 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 					PortletDataHandlerKeys.DATA_STRATEGY_MIRROR)) {
 
 				try {
-					existingImage = IGImageFinderUtil.findByUuid_G(
+					existingImage = IGImageUtil.findByUUID_G(
 						image.getUuid(), context.getGroupId());
 
 					IGImageLocalServiceUtil.updateImage(
