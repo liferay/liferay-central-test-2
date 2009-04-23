@@ -116,8 +116,9 @@ public class OrganizationPermissionImpl implements OrganizationPermission {
 			Organization organization, String actionId)
 		throws PortalException, SystemException {
 
-		while (organization.getOrganizationId() !=
-					OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID) {
+		while ((organization != null) &&
+			   (organization.getOrganizationId() !=
+					OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID)) {
 
 			if (permissionChecker.hasPermission(
 					groupId, Organization.class.getName(),
