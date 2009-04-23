@@ -105,6 +105,8 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			actionRequest, "enableComments");
 		boolean enableCommentRatings = ParamUtil.getBoolean(
 			actionRequest, "enableCommentRatings");
+		boolean enablePageRatings = ParamUtil.getBoolean(
+			actionRequest, "enablePageRatings");
 		String visibleNodes = ParamUtil.getString(
 			actionRequest, "visibleNodes");
 		String hiddenNodes = ParamUtil.getString(actionRequest, "hiddenNodes");
@@ -117,6 +119,8 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 				"enable-comments", String.valueOf(enableComments));
 			preferences.setValue(
 				"enable-comment-ratings", String.valueOf(enableCommentRatings));
+			preferences.setValue(
+				"enable-page-ratings", String.valueOf(enablePageRatings));
 			preferences.setValue("visible-nodes", visibleNodes);
 			preferences.setValue("hidden-nodes", hiddenNodes);
 		}

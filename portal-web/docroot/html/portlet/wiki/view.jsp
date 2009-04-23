@@ -258,6 +258,12 @@ TagsUtil.addLayoutTagsEntries(request, TagsEntryLocalServiceUtil.getEntries(Wiki
 		</div>
 	</div>
 
+	<c:if test="<%= enablePageRatings %>">
+		<br />
+
+		<liferay-ui:ratings className="<%= WikiPage.class.getName() %>" classPK="<%= wikiPage.getResourcePrimKey() %>" />
+	</c:if>
+
 	<c:if test="<%= enableComments %>">
 
 		<%
