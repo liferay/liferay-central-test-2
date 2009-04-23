@@ -51,50 +51,61 @@ public class OrganizationPermissionImpl implements OrganizationPermission {
 		}
 	}
 
+	public void check(
+			PermissionChecker permissionChecker, Organization organization,
+			String actionId)
+		throws PortalException, SystemException {
+
+		if (!contains(permissionChecker, organization, actionId)) {
+			throw new PrincipalException();
+		}
+	}
+
 	public boolean contains(
 			PermissionChecker permissionChecker, long organizationId,
 			String actionId)
 		throws PortalException, SystemException {
 
-		Organization organization = null;
-
-		long groupId = 0;
-		long parentOrganizationId =
-			OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID;
-
 		if (organizationId > 0) {
-			organization = OrganizationLocalServiceUtil.getOrganization(
-				organizationId);
+			Organization organization =
+				OrganizationLocalServiceUtil.getOrganization(organizationId);
 
-			Group group = organization.getGroup();
-
-			groupId = group.getGroupId();
-			parentOrganizationId = organization.getParentOrganizationId();
+			return contains(permissionChecker, organization, actionId);
 		}
+		else {
+			return false;
+		}
+	}
 
-		if (contains(permissionChecker, groupId, organizationId, actionId)) {
+	public boolean contains(
+			PermissionChecker permissionChecker, Organization organization,
+			String actionId)
+		throws PortalException, SystemException {
+
+		Group group = organization.getGroup();
+
+		long groupId = group.getGroupId();
+
+		if (contains(permissionChecker, groupId, organization, actionId)) {
 			return true;
 		}
 
-		if (organization != null) {
-			while (!organization.isRoot()) {
-				Organization parentOrganization =
-					organization.getParentOrganization();
+		while (!organization.isRoot()) {
+			Organization parentOrganization =
+				organization.getParentOrganization();
 
-				Group parentGroup = parentOrganization.getGroup();
+			Group parentGroup = parentOrganization.getGroup();
 
-				groupId = parentGroup.getGroupId();
-				parentOrganizationId = parentOrganization.getOrganizationId();
+			groupId = parentGroup.getGroupId();
 
-				if (contains(
-						permissionChecker, groupId, parentOrganizationId,
-						ActionKeys.MANAGE_SUBORGANIZATIONS)) {
+			if (contains(
+					permissionChecker, groupId, parentOrganization,
+					ActionKeys.MANAGE_SUBORGANIZATIONS)) {
 
-					return true;
-				}
-
-				organization = parentOrganization;
+				return true;
 			}
+
+			organization = parentOrganization;
 		}
 
 		return false;
@@ -102,23 +113,20 @@ public class OrganizationPermissionImpl implements OrganizationPermission {
 
 	protected boolean contains(
 			PermissionChecker permissionChecker, long groupId,
-			long organizationId, String actionId)
+			Organization organization, String actionId)
 		throws PortalException, SystemException {
 
-		while (organizationId !=
+		while (organization.getOrganizationId() !=
 					OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID) {
 
 			if (permissionChecker.hasPermission(
-					groupId, Organization.class.getName(), organizationId,
-					actionId)) {
+					groupId, Organization.class.getName(),
+					organization.getOrganizationId(), actionId)) {
 
 				return true;
 			}
 
-			Organization organization =
-				OrganizationLocalServiceUtil.getOrganization(organizationId);
-
-			organizationId = organization.getParentOrganizationId();
+			organization = organization.getParentOrganization();
 		}
 
 		return false;

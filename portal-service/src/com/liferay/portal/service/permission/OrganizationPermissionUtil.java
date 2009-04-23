@@ -24,6 +24,7 @@ package com.liferay.portal.service.permission;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.model.Organization;
 import com.liferay.portal.security.permission.PermissionChecker;
 
 /**
@@ -43,6 +44,15 @@ public class OrganizationPermissionUtil {
 			permissionChecker, organizationId, actionId);
 	}
 
+	public static void check(
+			PermissionChecker permissionChecker, Organization organization,
+			String actionId)
+		throws PortalException, SystemException {
+
+		getOrganizationPermission().check(
+			permissionChecker, organization, actionId);
+	}
+
 	public static boolean contains(
 			PermissionChecker permissionChecker, long organizationId,
 			String actionId)
@@ -50,6 +60,15 @@ public class OrganizationPermissionUtil {
 
 		return getOrganizationPermission().contains(
 			permissionChecker, organizationId, actionId);
+	}
+
+	public static boolean contains(
+			PermissionChecker permissionChecker, Organization organization,
+			String actionId)
+		throws PortalException, SystemException {
+
+		return getOrganizationPermission().contains(
+			permissionChecker, organization, actionId);
 	}
 
 	public static OrganizationPermission getOrganizationPermission() {

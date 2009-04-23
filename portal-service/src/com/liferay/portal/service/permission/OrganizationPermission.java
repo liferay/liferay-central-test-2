@@ -24,6 +24,7 @@ package com.liferay.portal.service.permission;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.model.Organization;
 import com.liferay.portal.security.permission.PermissionChecker;
 
 /**
@@ -39,8 +40,18 @@ public interface OrganizationPermission {
 			String actionId)
 		throws PortalException, SystemException;
 
+	public void check(
+			PermissionChecker permissionChecker, Organization organization,
+			String actionId)
+		throws PortalException, SystemException;
+
 	public boolean contains(
 			PermissionChecker permissionChecker, long organizationId,
+			String actionId)
+		throws PortalException, SystemException;
+
+	public boolean contains(
+			PermissionChecker permissionChecker, Organization organization,
 			String actionId)
 		throws PortalException, SystemException;
 
