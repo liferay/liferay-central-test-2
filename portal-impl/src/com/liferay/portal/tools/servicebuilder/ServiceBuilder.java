@@ -218,6 +218,9 @@ public class ServiceBuilder {
 				"\t-Dservice.tpl.remoting_xml=" + _TPL_ROOT + "remoting_xml.ftl\n"+
 				"\t-Dservice.tpl.service=" + _TPL_ROOT + "service.ftl\n"+
 				"\t-Dservice.tpl.service_base_impl=" + _TPL_ROOT + "service_base_impl.ftl\n"+
+				"\t-Dservice.tpl.service_clp=" + _TPL_ROOT + "service_clp.ftl\n"+
+				"\t-Dservice.tpl.service_clp_message_listener=" + _TPL_ROOT + "service_clp_message_listener.ftl\n"+
+				"\t-Dservice.tpl.service_clp_serializer=" + _TPL_ROOT + "service_clp_serializer.ftl\n"+
 				"\t-Dservice.tpl.service_factory=" + _TPL_ROOT + "service_factory.ftl\n"+
 				"\t-Dservice.tpl.service_http=" + _TPL_ROOT + "service_http.ftl\n"+
 				"\t-Dservice.tpl.service_impl=" + _TPL_ROOT + "service_impl.ftl\n"+
@@ -449,6 +452,8 @@ public class ServiceBuilder {
 		_tplServiceBaseImpl = _getTplProperty(
 			"service_base_impl", _tplServiceBaseImpl);
 		_tplServiceClp = _getTplProperty("service_clp", _tplServiceClp);
+		_tplServiceClpMessageListener = _getTplProperty(
+			"service_clp_message_listener", _tplServiceClpMessageListener);
 		_tplServiceClpSerializer = _getTplProperty(
 			"service_clp_serializer", _tplServiceClpSerializer);
 		_tplServiceFactory = _getTplProperty(
@@ -999,6 +1004,7 @@ public class ServiceBuilder {
 				_createModelHintsXml();
 				_createSpringXml();
 
+				_createServiceClpMessageListener();
 				_createServiceClpSerializer();
 
 				if (Validator.isNotNull(_jsonFileName)) {
@@ -2526,6 +2532,28 @@ public class ServiceBuilder {
 		writeFile(ejbFile, content, _author);
 	}
 
+	private void _createServiceClpMessageListener() throws Exception {
+		if (Validator.isNull(_pluginName)) {
+			return;
+		}
+
+		Map<String, Object> context = _getContext();
+
+		context.put("entities", _ejbList);
+
+		// Content
+
+		String content = _processTemplate(
+			_tplServiceClpMessageListener, context);
+
+		// Write file
+
+		File ejbFile = new File(
+			_serviceOutputPath + "/service/messaging/ClpMessageListener.java");
+
+		writeFile(ejbFile, content);
+	}
+
 	private void _createServiceClpSerializer() throws Exception {
 		if (Validator.isNull(_pluginName)) {
 			return;
@@ -3825,6 +3853,8 @@ public class ServiceBuilder {
 	private String _tplService = _TPL_ROOT + "service.ftl";
 	private String _tplServiceBaseImpl = _TPL_ROOT + "service_base_impl.ftl";
 	private String _tplServiceClp = _TPL_ROOT + "service_clp.ftl";
+	private String _tplServiceClpMessageListener =
+		_TPL_ROOT + "service_clp_message_listener.ftl";
 	private String _tplServiceClpSerializer =
 		_TPL_ROOT + "service_clp_serializer.ftl";
 	private String _tplServiceFactory = _TPL_ROOT + "service_factory.ftl";

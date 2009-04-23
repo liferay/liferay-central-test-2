@@ -28,10 +28,15 @@ import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 
 import java.io.File;
+import java.io.IOException;
 
+import java.util.HashSet;
 import java.util.Set;
+import java.util.jar.JarEntry;
+import java.util.jar.JarInputStream;
 
 import javax.servlet.ServletContext;
 
@@ -52,6 +57,17 @@ public class ServletContextUtil {
 
 	public static final String LOG_INFO_SPRITES =
 		LOG_INFO_PREFIX + "enable sprites for best performance";
+
+	public static Set<String> getClassNames(ServletContext servletContext)
+		throws IOException {
+
+		Set<String> classNames = new HashSet<String>();
+
+		_getClassNames(servletContext, "/WEB-INF/classes", classNames);
+		_getClassNames(servletContext, "/WEB-INF/lib", classNames);
+
+		return classNames;
+	}
 
 	public static long getLastModified(ServletContext servletContext) {
 		return getLastModified(servletContext, StringPool.SLASH);
@@ -172,6 +188,79 @@ public class ServletContextUtil {
 
 		return rootDir;
 	}
+
+	private static String _getClassName(String path) {
+		return _getClassName(null, path);
+	}
+
+	private static String _getClassName(String rootResourcePath, String path) {
+		String className = path.substring(
+			0, path.length() - _EXT_CLASS.length());
+
+		if (rootResourcePath != null) {
+			className = className.substring(rootResourcePath.length());
+		}
+
+		className = StringUtil.replace(
+			className, StringPool.SLASH, StringPool.PERIOD);
+
+		return className;
+	}
+
+	private static void _getClassNames(
+			ServletContext servletContext, String rootResourcePath,
+			Set<String> classNames)
+		throws IOException {
+
+		_getClassNames(
+			servletContext, rootResourcePath,
+			servletContext.getResourcePaths(rootResourcePath), classNames);
+	}
+
+	private static void _getClassNames(
+			ServletContext servletContext, String rootResourcePath,
+			Set<String> resourcePaths, Set<String> classNames)
+		throws IOException {
+
+		for (String resourcePath : resourcePaths) {
+			if (resourcePath.endsWith(_EXT_CLASS)) {
+				String className = _getClassName(
+					rootResourcePath, resourcePath);
+
+				classNames.add(className);
+			}
+			else if (resourcePath.endsWith(_EXT_JAR)) {
+				JarInputStream jarFile = new JarInputStream(
+					servletContext.getResourceAsStream(resourcePath));
+
+				while (true) {
+					JarEntry jarEntry = jarFile.getNextJarEntry();
+
+					if (jarEntry == null) {
+						break;
+					}
+
+					String jarEntryName = jarEntry.getName();
+
+					if (jarEntryName.endsWith(_EXT_CLASS)) {
+						String className = _getClassName(jarEntryName);
+
+						classNames.add(className);
+					}
+				}
+
+			}
+			else if (resourcePath.endsWith(StringPool.SLASH)) {
+				_getClassNames(
+					servletContext, rootResourcePath,
+					servletContext.getResourcePaths(resourcePath), classNames);
+			}
+		}
+	}
+
+	private static final String _EXT_CLASS = ".class";
+
+	private static final String _EXT_JAR = ".jar";
 
 	private static Log _log = LogFactoryUtil.getLog(ServletContextUtil.class);
 

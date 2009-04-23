@@ -381,6 +381,8 @@ public class HookHotDeployListener
 
 		// End backwards compatibility for 5.1.0
 
+		registerClpMessageListeners(servletContext, portletClassLoader);
+
 		if (_log.isInfoEnabled()) {
 			_log.info(
 				"Hook for " + servletContextName + " is available for use");
@@ -441,6 +443,8 @@ public class HookHotDeployListener
 		if (portalProperties != null) {
 			destroyPortalProperties(portalProperties);
 		}
+
+		unregisterClpMessageListeners(servletContext);
 
 		if (_log.isInfoEnabled()) {
 			_log.info("Hook for " + servletContextName + " was unregistered");

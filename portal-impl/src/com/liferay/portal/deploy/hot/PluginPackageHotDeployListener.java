@@ -216,7 +216,11 @@ public class PluginPackageHotDeployListener extends BaseHotDeployListener {
 
 		PluginPackageUtil.registerInstalledPluginPackage(pluginPackage);
 
-		initServiceComponent(servletContext, event.getContextClassLoader());
+		ClassLoader portletClassLoader = event.getContextClassLoader();
+
+		initServiceComponent(servletContext, portletClassLoader);
+
+		registerClpMessageListeners(servletContext, portletClassLoader);
 
 		if (_log.isInfoEnabled()) {
 			_log.info(
@@ -245,6 +249,8 @@ public class PluginPackageHotDeployListener extends BaseHotDeployListener {
 		PluginPackageUtil.unregisterInstalledPluginPackage(pluginPackage);
 
 		destroyServiceComponent(servletContext, event.getContextClassLoader());
+
+		unregisterClpMessageListeners(servletContext);
 
 		if (_log.isInfoEnabled()) {
 			_log.info(

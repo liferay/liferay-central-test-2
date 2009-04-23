@@ -325,6 +325,10 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 			}
 		}
 
+		// ClpMessageListener
+
+		registerClpMessageListeners(servletContext, portletClassLoader);
+
 		// Variables
 
 		_vars.put(
@@ -395,6 +399,8 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 		}
 
 		PortletResourceBundles.remove(servletContextName);
+
+		unregisterClpMessageListeners(servletContext);
 
 		if (_log.isInfoEnabled()) {
 			if (portlets.size() == 1) {

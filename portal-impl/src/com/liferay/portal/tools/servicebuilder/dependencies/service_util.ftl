@@ -72,11 +72,17 @@ public class ${entity.name}${sessionTypeName}ServiceUtil {
 		</#if>
 	</#list>
 
+	<#if pluginName != "">
+		public static void clearService() {
+			_service = null;
+		}
+	</#if>
+
 	public static ${entity.name}${sessionTypeName}Service getService() {
 		if (_service == null) {
 			<#if pluginName != "">
-				Object obj = PortletBeanLocatorUtil.locate("${pluginName}", ${entity.name}${sessionTypeName}ServiceUtil.class.getName());
-				ClassLoader portletClassLoader = (ClassLoader)PortletBeanLocatorUtil.locate("${pluginName}", "portletClassLoader");
+				Object obj = PortletBeanLocatorUtil.locate(ClpSerializer.SERVLET_CONTEXT_NAME, ${entity.name}${sessionTypeName}ServiceUtil.class.getName());
+				ClassLoader portletClassLoader = (ClassLoader)PortletBeanLocatorUtil.locate(ClpSerializer.SERVLET_CONTEXT_NAME, "portletClassLoader");
 
 				ClassLoaderProxy classLoaderProxy = new ClassLoaderProxy(obj, portletClassLoader);
 
