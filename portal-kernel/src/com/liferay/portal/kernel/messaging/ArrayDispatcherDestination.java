@@ -105,7 +105,8 @@ public abstract class ArrayDispatcherDestination extends BaseDestination {
 	protected abstract void dispatch(
 		MessageListener[] listeners, Message message);
 
-	private static Log _log = LogFactoryUtil.getLog(ArrayDispatcherDestination.class);
+	private static Log _log =
+		LogFactoryUtil.getLog(ArrayDispatcherDestination.class);
 
 	private MessageListener[] _listeners = new MessageListener[0];
 
