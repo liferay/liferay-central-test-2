@@ -91,7 +91,7 @@ public abstract class IteratorDispatcherDestination extends BaseDestination {
 	protected abstract void dispatch(
 		Iterator<MessageListener> listenersItr, Message message);
 
-	private static Log _log = LogFactoryUtil.getLog(BaseDestination.class);
+	private static Log _log = LogFactoryUtil.getLog(IteratorDispatcherDestination.class);
 
 	private Set<MessageListener> _listeners =
 		new ConcurrentHashSet<MessageListener>();
