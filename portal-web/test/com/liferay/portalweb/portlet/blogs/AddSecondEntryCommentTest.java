@@ -94,8 +94,7 @@ public class AddSecondEntryCommentTest extends BaseTestCase {
 			RuntimeVariables.replace("This is a second entry comment!"));
 		selenium.click(RuntimeVariables.replace("_33_postReplyButton0"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent(
-				"link=This is a second entry comment!"));
+		assertTrue(selenium.isTextPresent("This is a second entry comment!"));
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
 	}

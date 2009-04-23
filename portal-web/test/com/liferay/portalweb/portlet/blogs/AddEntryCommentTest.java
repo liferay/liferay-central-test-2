@@ -94,8 +94,7 @@ public class AddEntryCommentTest extends BaseTestCase {
 			RuntimeVariables.replace("This is a test entry comment!"));
 		selenium.click(RuntimeVariables.replace("_33_postReplyButton0"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent(
-				"link=This is a test entry comment!"));
+		assertTrue(selenium.isTextPresent("This is a test entry comment!"));
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
 	}
