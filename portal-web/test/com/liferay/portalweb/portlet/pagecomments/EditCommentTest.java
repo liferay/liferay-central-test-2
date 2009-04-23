@@ -77,7 +77,6 @@ public class EditCommentTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
-		assertEquals("This is a edited test page comment!",
-			selenium.getText("//td[1]/a"));
+		assertTrue(selenium.isTextPresent("This is a edited test page comment!"));
 	}
 }
