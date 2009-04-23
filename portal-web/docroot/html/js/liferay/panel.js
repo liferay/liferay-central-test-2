@@ -1,4 +1,4 @@
-Liferay.Panel = Liferay.Observable.extend(
+Liferay.Panel = Expanse.Observable.extend(
 	{
 
 		/**

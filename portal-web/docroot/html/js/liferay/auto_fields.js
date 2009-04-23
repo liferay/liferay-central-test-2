@@ -1,4 +1,4 @@
-Liferay.AutoFields = Liferay.Observable.extend(
+Liferay.AutoFields = Expanse.Observable.extend(
 	{
 
 		/**

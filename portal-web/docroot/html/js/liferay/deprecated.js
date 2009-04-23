@@ -210,3 +210,7 @@ Expanse.TabView = Expanse.TabView.extend(
 		}
 	};
 })();
+
+// LPS-3059
+
+Liferay.Observable = Expanse.Observable;
