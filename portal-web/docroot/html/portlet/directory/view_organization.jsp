@@ -38,8 +38,6 @@ request.setAttribute("phones.className", Organization.class.getName());
 request.setAttribute("phones.classPK", organizationId);
 request.setAttribute("websites.className", Organization.class.getName());
 request.setAttribute("websites.classPK", organizationId);
-
-String redirect = ParamUtil.getString(request, "redirect");
 %>
 
 <liferay-util:include page="/html/portlet/directory/tabs1.jsp" />
@@ -73,7 +71,3 @@ String redirect = ParamUtil.getString(request, "redirect");
 		<liferay-util:include page="/html/portlet/directory/organization/comments.jsp" />
 	</div>
 </div>
-
-<c:if test="<%= Validator.isNotNull(redirect) %>">
-	<input type="button" value="<liferay-ui:message key="back" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
-</c:if>

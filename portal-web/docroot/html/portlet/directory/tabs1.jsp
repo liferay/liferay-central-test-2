@@ -35,7 +35,8 @@ String tabs1Names = "users,organizations,user-groups";
 
 String tabs1Values = tabs1Names;
 
-String backURL = ParamUtil.getString(request, "backURL");
+String redirect = ParamUtil.getString(request, "redirect");
+String backURL = ParamUtil.getString(request, "backURL", redirect);
 %>
 
 <liferay-ui:tabs
