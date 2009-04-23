@@ -35,6 +35,7 @@ import com.liferay.portlet.ratings.model.RatingsStatsSoap;
 
 import java.io.Serializable;
 
+import java.lang.StringBuilder;
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
@@ -298,6 +299,52 @@ public class RatingsStatsModelImpl extends BaseModelImpl<RatingsStats> {
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public String toHtmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<table class=\"lfr-table\">\n");
+
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>statsId</b></td><td>" +
+			getStatsId() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>classNameId</b></td><td>" +
+			getClassNameId() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>classPK</b></td><td>" +
+			getClassPK() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>totalEntries</b></td><td>" +
+			getTotalEntries() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>totalScore</b></td><td>" +
+			getTotalScore() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>averageScore</b></td><td>" +
+			getAverageScore() + "</td></tr>\n");
+
+		sb.append("</table>");
+
+		return sb.toString();
+	}
+
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("com.liferay.portlet.ratings.model.RatingsStats (");
+
+		sb.append("statsId: " + getStatsId() + ", ");
+		sb.append("classNameId: " + getClassNameId() + ", ");
+		sb.append("classPK: " + getClassPK() + ", ");
+		sb.append("totalEntries: " + getTotalEntries() + ", ");
+		sb.append("totalScore: " + getTotalScore() + ", ");
+		sb.append("averageScore: " + getAverageScore() + ", ");
+
+		sb.append(")");
+
+		return sb.toString();
 	}
 
 	private long _statsId;

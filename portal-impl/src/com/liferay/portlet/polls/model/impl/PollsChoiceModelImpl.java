@@ -34,6 +34,7 @@ import com.liferay.portlet.polls.model.PollsChoiceSoap;
 
 import java.io.Serializable;
 
+import java.lang.StringBuilder;
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
@@ -285,6 +286,46 @@ public class PollsChoiceModelImpl extends BaseModelImpl<PollsChoice> {
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public String toHtmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<table class=\"lfr-table\">\n");
+
+		sb.append("<tr><td align=\"right\" valign=\"top\"><b>uuid</b></td><td>" +
+			getUuid() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>choiceId</b></td><td>" +
+			getChoiceId() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>questionId</b></td><td>" +
+			getQuestionId() + "</td></tr>\n");
+		sb.append("<tr><td align=\"right\" valign=\"top\"><b>name</b></td><td>" +
+			getName() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>description</b></td><td>" +
+			getDescription() + "</td></tr>\n");
+
+		sb.append("</table>");
+
+		return sb.toString();
+	}
+
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("com.liferay.portlet.polls.model.PollsChoice (");
+
+		sb.append("uuid: " + getUuid() + ", ");
+		sb.append("choiceId: " + getChoiceId() + ", ");
+		sb.append("questionId: " + getQuestionId() + ", ");
+		sb.append("name: " + getName() + ", ");
+		sb.append("description: " + getDescription() + ", ");
+
+		sb.append(")");
+
+		return sb.toString();
 	}
 
 	private String _uuid;

@@ -33,6 +33,7 @@ import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
 
 import java.io.Serializable;
 
+import java.lang.StringBuilder;
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
@@ -308,6 +309,52 @@ public class CountryModelImpl extends BaseModelImpl<Country> {
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public String toHtmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<table class=\"lfr-table\">\n");
+
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>countryId</b></td><td>" +
+			getCountryId() + "</td></tr>\n");
+		sb.append("<tr><td align=\"right\" valign=\"top\"><b>name</b></td><td>" +
+			getName() + "</td></tr>\n");
+		sb.append("<tr><td align=\"right\" valign=\"top\"><b>a2</b></td><td>" +
+			getA2() + "</td></tr>\n");
+		sb.append("<tr><td align=\"right\" valign=\"top\"><b>a3</b></td><td>" +
+			getA3() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>number</b></td><td>" +
+			getNumber() + "</td></tr>\n");
+		sb.append("<tr><td align=\"right\" valign=\"top\"><b>idd</b></td><td>" +
+			getIdd() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>active</b></td><td>" +
+			getActive() + "</td></tr>\n");
+
+		sb.append("</table>");
+
+		return sb.toString();
+	}
+
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("com.liferay.portal.model.Country (");
+
+		sb.append("countryId: " + getCountryId() + ", ");
+		sb.append("name: " + getName() + ", ");
+		sb.append("a2: " + getA2() + ", ");
+		sb.append("a3: " + getA3() + ", ");
+		sb.append("number: " + getNumber() + ", ");
+		sb.append("idd: " + getIdd() + ", ");
+		sb.append("active: " + getActive() + ", ");
+
+		sb.append(")");
+
+		return sb.toString();
 	}
 
 	private long _countryId;

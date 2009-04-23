@@ -35,6 +35,7 @@ import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
 
 import java.io.Serializable;
 
+import java.lang.StringBuilder;
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
@@ -359,6 +360,62 @@ public class RoleModelImpl extends BaseModelImpl<Role> {
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public String toHtmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<table class=\"lfr-table\">\n");
+
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>roleId</b></td><td>" +
+			getRoleId() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>companyId</b></td><td>" +
+			getCompanyId() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>classNameId</b></td><td>" +
+			getClassNameId() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>classPK</b></td><td>" +
+			getClassPK() + "</td></tr>\n");
+		sb.append("<tr><td align=\"right\" valign=\"top\"><b>name</b></td><td>" +
+			getName() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>title</b></td><td>" +
+			getTitle() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>description</b></td><td>" +
+			getDescription() + "</td></tr>\n");
+		sb.append("<tr><td align=\"right\" valign=\"top\"><b>type</b></td><td>" +
+			getType() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>subtype</b></td><td>" +
+			getSubtype() + "</td></tr>\n");
+
+		sb.append("</table>");
+
+		return sb.toString();
+	}
+
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("com.liferay.portal.model.Role (");
+
+		sb.append("roleId: " + getRoleId() + ", ");
+		sb.append("companyId: " + getCompanyId() + ", ");
+		sb.append("classNameId: " + getClassNameId() + ", ");
+		sb.append("classPK: " + getClassPK() + ", ");
+		sb.append("name: " + getName() + ", ");
+		sb.append("title: " + getTitle() + ", ");
+		sb.append("description: " + getDescription() + ", ");
+		sb.append("type: " + getType() + ", ");
+		sb.append("subtype: " + getSubtype() + ", ");
+
+		sb.append(")");
+
+		return sb.toString();
 	}
 
 	private long _roleId;

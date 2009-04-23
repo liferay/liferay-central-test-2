@@ -35,6 +35,7 @@ import com.liferay.portlet.tasks.model.TasksReviewSoap;
 
 import java.io.Serializable;
 
+import java.lang.StringBuilder;
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
@@ -395,6 +396,80 @@ public class TasksReviewModelImpl extends BaseModelImpl<TasksReview> {
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public String toHtmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<table class=\"lfr-table\">\n");
+
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>reviewId</b></td><td>" +
+			getReviewId() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>groupId</b></td><td>" +
+			getGroupId() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>companyId</b></td><td>" +
+			getCompanyId() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>userId</b></td><td>" +
+			getUserId() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>userName</b></td><td>" +
+			getUserName() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>createDate</b></td><td>" +
+			getCreateDate() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>modifiedDate</b></td><td>" +
+			getModifiedDate() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>proposalId</b></td><td>" +
+			getProposalId() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>assignedByUserId</b></td><td>" +
+			getAssignedByUserId() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>assignedByUserName</b></td><td>" +
+			getAssignedByUserName() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>stage</b></td><td>" +
+			getStage() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>completed</b></td><td>" +
+			getCompleted() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>rejected</b></td><td>" +
+			getRejected() + "</td></tr>\n");
+
+		sb.append("</table>");
+
+		return sb.toString();
+	}
+
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("com.liferay.portlet.tasks.model.TasksReview (");
+
+		sb.append("reviewId: " + getReviewId() + ", ");
+		sb.append("groupId: " + getGroupId() + ", ");
+		sb.append("companyId: " + getCompanyId() + ", ");
+		sb.append("userId: " + getUserId() + ", ");
+		sb.append("userName: " + getUserName() + ", ");
+		sb.append("createDate: " + getCreateDate() + ", ");
+		sb.append("modifiedDate: " + getModifiedDate() + ", ");
+		sb.append("proposalId: " + getProposalId() + ", ");
+		sb.append("assignedByUserId: " + getAssignedByUserId() + ", ");
+		sb.append("assignedByUserName: " + getAssignedByUserName() + ", ");
+		sb.append("stage: " + getStage() + ", ");
+		sb.append("completed: " + getCompleted() + ", ");
+		sb.append("rejected: " + getRejected() + ", ");
+
+		sb.append(")");
+
+		return sb.toString();
 	}
 
 	private long _reviewId;

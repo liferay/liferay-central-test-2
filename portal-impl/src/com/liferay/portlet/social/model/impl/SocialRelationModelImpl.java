@@ -34,6 +34,7 @@ import com.liferay.portlet.social.model.SocialRelationSoap;
 
 import java.io.Serializable;
 
+import java.lang.StringBuilder;
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
@@ -314,6 +315,54 @@ public class SocialRelationModelImpl extends BaseModelImpl<SocialRelation> {
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public String toHtmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<table class=\"lfr-table\">\n");
+
+		sb.append("<tr><td align=\"right\" valign=\"top\"><b>uuid</b></td><td>" +
+			getUuid() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>relationId</b></td><td>" +
+			getRelationId() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>companyId</b></td><td>" +
+			getCompanyId() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>createDate</b></td><td>" +
+			getCreateDate() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>userId1</b></td><td>" +
+			getUserId1() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>userId2</b></td><td>" +
+			getUserId2() + "</td></tr>\n");
+		sb.append("<tr><td align=\"right\" valign=\"top\"><b>type</b></td><td>" +
+			getType() + "</td></tr>\n");
+
+		sb.append("</table>");
+
+		return sb.toString();
+	}
+
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("com.liferay.portlet.social.model.SocialRelation (");
+
+		sb.append("uuid: " + getUuid() + ", ");
+		sb.append("relationId: " + getRelationId() + ", ");
+		sb.append("companyId: " + getCompanyId() + ", ");
+		sb.append("createDate: " + getCreateDate() + ", ");
+		sb.append("userId1: " + getUserId1() + ", ");
+		sb.append("userId2: " + getUserId2() + ", ");
+		sb.append("type: " + getType() + ", ");
+
+		sb.append(")");
+
+		return sb.toString();
 	}
 
 	private String _uuid;

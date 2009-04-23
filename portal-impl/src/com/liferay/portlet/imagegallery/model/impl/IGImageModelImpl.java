@@ -34,6 +34,7 @@ import com.liferay.portlet.imagegallery.model.IGImageSoap;
 
 import java.io.Serializable;
 
+import java.lang.StringBuilder;
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
@@ -446,6 +447,82 @@ public class IGImageModelImpl extends BaseModelImpl<IGImage> {
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public String toHtmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<table class=\"lfr-table\">\n");
+
+		sb.append("<tr><td align=\"right\" valign=\"top\"><b>uuid</b></td><td>" +
+			getUuid() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>imageId</b></td><td>" +
+			getImageId() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>groupId</b></td><td>" +
+			getGroupId() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>companyId</b></td><td>" +
+			getCompanyId() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>userId</b></td><td>" +
+			getUserId() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>createDate</b></td><td>" +
+			getCreateDate() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>modifiedDate</b></td><td>" +
+			getModifiedDate() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>folderId</b></td><td>" +
+			getFolderId() + "</td></tr>\n");
+		sb.append("<tr><td align=\"right\" valign=\"top\"><b>name</b></td><td>" +
+			getName() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>description</b></td><td>" +
+			getDescription() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>smallImageId</b></td><td>" +
+			getSmallImageId() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>largeImageId</b></td><td>" +
+			getLargeImageId() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>custom1ImageId</b></td><td>" +
+			getCustom1ImageId() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>custom2ImageId</b></td><td>" +
+			getCustom2ImageId() + "</td></tr>\n");
+
+		sb.append("</table>");
+
+		return sb.toString();
+	}
+
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("com.liferay.portlet.imagegallery.model.IGImage (");
+
+		sb.append("uuid: " + getUuid() + ", ");
+		sb.append("imageId: " + getImageId() + ", ");
+		sb.append("groupId: " + getGroupId() + ", ");
+		sb.append("companyId: " + getCompanyId() + ", ");
+		sb.append("userId: " + getUserId() + ", ");
+		sb.append("createDate: " + getCreateDate() + ", ");
+		sb.append("modifiedDate: " + getModifiedDate() + ", ");
+		sb.append("folderId: " + getFolderId() + ", ");
+		sb.append("name: " + getName() + ", ");
+		sb.append("description: " + getDescription() + ", ");
+		sb.append("smallImageId: " + getSmallImageId() + ", ");
+		sb.append("largeImageId: " + getLargeImageId() + ", ");
+		sb.append("custom1ImageId: " + getCustom1ImageId() + ", ");
+		sb.append("custom2ImageId: " + getCustom2ImageId() + ", ");
+
+		sb.append(")");
+
+		return sb.toString();
 	}
 
 	private String _uuid;

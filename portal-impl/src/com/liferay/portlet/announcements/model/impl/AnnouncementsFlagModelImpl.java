@@ -34,6 +34,7 @@ import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
 
 import java.io.Serializable;
 
+import java.lang.StringBuilder;
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
@@ -300,6 +301,48 @@ public class AnnouncementsFlagModelImpl extends BaseModelImpl<AnnouncementsFlag>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public String toHtmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<table class=\"lfr-table\">\n");
+
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>flagId</b></td><td>" +
+			getFlagId() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>userId</b></td><td>" +
+			getUserId() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>createDate</b></td><td>" +
+			getCreateDate() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>entryId</b></td><td>" +
+			getEntryId() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>value</b></td><td>" +
+			getValue() + "</td></tr>\n");
+
+		sb.append("</table>");
+
+		return sb.toString();
+	}
+
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("com.liferay.portlet.announcements.model.AnnouncementsFlag (");
+
+		sb.append("flagId: " + getFlagId() + ", ");
+		sb.append("userId: " + getUserId() + ", ");
+		sb.append("createDate: " + getCreateDate() + ", ");
+		sb.append("entryId: " + getEntryId() + ", ");
+		sb.append("value: " + getValue() + ", ");
+
+		sb.append(")");
+
+		return sb.toString();
 	}
 
 	private long _flagId;

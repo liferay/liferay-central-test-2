@@ -33,6 +33,7 @@ import com.liferay.portlet.messageboards.model.MBMessageFlagSoap;
 
 import java.io.Serializable;
 
+import java.lang.StringBuilder;
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
@@ -284,6 +285,47 @@ public class MBMessageFlagModelImpl extends BaseModelImpl<MBMessageFlag> {
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public String toHtmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<table class=\"lfr-table\">\n");
+
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>messageFlagId</b></td><td>" +
+			getMessageFlagId() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>userId</b></td><td>" +
+			getUserId() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>threadId</b></td><td>" +
+			getThreadId() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>messageId</b></td><td>" +
+			getMessageId() + "</td></tr>\n");
+		sb.append("<tr><td align=\"right\" valign=\"top\"><b>flag</b></td><td>" +
+			getFlag() + "</td></tr>\n");
+
+		sb.append("</table>");
+
+		return sb.toString();
+	}
+
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("com.liferay.portlet.messageboards.model.MBMessageFlag (");
+
+		sb.append("messageFlagId: " + getMessageFlagId() + ", ");
+		sb.append("userId: " + getUserId() + ", ");
+		sb.append("threadId: " + getThreadId() + ", ");
+		sb.append("messageId: " + getMessageId() + ", ");
+		sb.append("flag: " + getFlag() + ", ");
+
+		sb.append(")");
+
+		return sb.toString();
 	}
 
 	private long _messageFlagId;

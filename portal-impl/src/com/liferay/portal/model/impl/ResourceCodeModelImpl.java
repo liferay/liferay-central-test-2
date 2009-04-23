@@ -33,6 +33,7 @@ import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
 
 import java.io.Serializable;
 
+import java.lang.StringBuilder;
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
@@ -268,6 +269,43 @@ public class ResourceCodeModelImpl extends BaseModelImpl<ResourceCode> {
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public String toHtmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<table class=\"lfr-table\">\n");
+
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>codeId</b></td><td>" +
+			getCodeId() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>companyId</b></td><td>" +
+			getCompanyId() + "</td></tr>\n");
+		sb.append("<tr><td align=\"right\" valign=\"top\"><b>name</b></td><td>" +
+			getName() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>scope</b></td><td>" +
+			getScope() + "</td></tr>\n");
+
+		sb.append("</table>");
+
+		return sb.toString();
+	}
+
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("com.liferay.portal.model.ResourceCode (");
+
+		sb.append("codeId: " + getCodeId() + ", ");
+		sb.append("companyId: " + getCompanyId() + ", ");
+		sb.append("name: " + getName() + ", ");
+		sb.append("scope: " + getScope() + ", ");
+
+		sb.append(")");
+
+		return sb.toString();
 	}
 
 	private long _codeId;

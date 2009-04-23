@@ -33,6 +33,7 @@ import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
 
 import java.io.Serializable;
 
+import java.lang.StringBuilder;
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
@@ -280,6 +281,47 @@ public class UserIdMapperModelImpl extends BaseModelImpl<UserIdMapper> {
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public String toHtmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<table class=\"lfr-table\">\n");
+
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>userIdMapperId</b></td><td>" +
+			getUserIdMapperId() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>userId</b></td><td>" +
+			getUserId() + "</td></tr>\n");
+		sb.append("<tr><td align=\"right\" valign=\"top\"><b>type</b></td><td>" +
+			getType() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>description</b></td><td>" +
+			getDescription() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>externalUserId</b></td><td>" +
+			getExternalUserId() + "</td></tr>\n");
+
+		sb.append("</table>");
+
+		return sb.toString();
+	}
+
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("com.liferay.portal.model.UserIdMapper (");
+
+		sb.append("userIdMapperId: " + getUserIdMapperId() + ", ");
+		sb.append("userId: " + getUserId() + ", ");
+		sb.append("type: " + getType() + ", ");
+		sb.append("description: " + getDescription() + ", ");
+		sb.append("externalUserId: " + getExternalUserId() + ", ");
+
+		sb.append(")");
+
+		return sb.toString();
 	}
 
 	private long _userIdMapperId;

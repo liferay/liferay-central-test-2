@@ -34,6 +34,7 @@ import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
 
 import java.io.Serializable;
 
+import java.lang.StringBuilder;
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
@@ -358,6 +359,71 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut> {
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public String toHtmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<table class=\"lfr-table\">\n");
+
+		sb.append("<tr><td align=\"right\" valign=\"top\"><b>uuid</b></td><td>" +
+			getUuid() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>fileShortcutId</b></td><td>" +
+			getFileShortcutId() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>groupId</b></td><td>" +
+			getGroupId() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>companyId</b></td><td>" +
+			getCompanyId() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>userId</b></td><td>" +
+			getUserId() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>userName</b></td><td>" +
+			getUserName() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>createDate</b></td><td>" +
+			getCreateDate() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>modifiedDate</b></td><td>" +
+			getModifiedDate() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>folderId</b></td><td>" +
+			getFolderId() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>toFolderId</b></td><td>" +
+			getToFolderId() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>toName</b></td><td>" +
+			getToName() + "</td></tr>\n");
+
+		sb.append("</table>");
+
+		return sb.toString();
+	}
+
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("com.liferay.portlet.documentlibrary.model.DLFileShortcut (");
+
+		sb.append("uuid: " + getUuid() + ", ");
+		sb.append("fileShortcutId: " + getFileShortcutId() + ", ");
+		sb.append("groupId: " + getGroupId() + ", ");
+		sb.append("companyId: " + getCompanyId() + ", ");
+		sb.append("userId: " + getUserId() + ", ");
+		sb.append("userName: " + getUserName() + ", ");
+		sb.append("createDate: " + getCreateDate() + ", ");
+		sb.append("modifiedDate: " + getModifiedDate() + ", ");
+		sb.append("folderId: " + getFolderId() + ", ");
+		sb.append("toFolderId: " + getToFolderId() + ", ");
+		sb.append("toName: " + getToName() + ", ");
+
+		sb.append(")");
+
+		return sb.toString();
 	}
 
 	private String _uuid;

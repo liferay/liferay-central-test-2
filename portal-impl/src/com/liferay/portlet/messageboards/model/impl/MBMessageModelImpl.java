@@ -37,6 +37,7 @@ import com.liferay.portlet.messageboards.model.MBMessageSoap;
 
 import java.io.Serializable;
 
+import java.lang.StringBuilder;
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
@@ -487,6 +488,98 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage> {
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public String toHtmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<table class=\"lfr-table\">\n");
+
+		sb.append("<tr><td align=\"right\" valign=\"top\"><b>uuid</b></td><td>" +
+			getUuid() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>messageId</b></td><td>" +
+			getMessageId() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>groupId</b></td><td>" +
+			getGroupId() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>companyId</b></td><td>" +
+			getCompanyId() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>userId</b></td><td>" +
+			getUserId() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>userName</b></td><td>" +
+			getUserName() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>createDate</b></td><td>" +
+			getCreateDate() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>modifiedDate</b></td><td>" +
+			getModifiedDate() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>classNameId</b></td><td>" +
+			getClassNameId() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>classPK</b></td><td>" +
+			getClassPK() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>categoryId</b></td><td>" +
+			getCategoryId() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>threadId</b></td><td>" +
+			getThreadId() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>parentMessageId</b></td><td>" +
+			getParentMessageId() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>subject</b></td><td>" +
+			getSubject() + "</td></tr>\n");
+		sb.append("<tr><td align=\"right\" valign=\"top\"><b>body</b></td><td>" +
+			getBody() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>attachments</b></td><td>" +
+			getAttachments() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>anonymous</b></td><td>" +
+			getAnonymous() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>priority</b></td><td>" +
+			getPriority() + "</td></tr>\n");
+
+		sb.append("</table>");
+
+		return sb.toString();
+	}
+
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("com.liferay.portlet.messageboards.model.MBMessage (");
+
+		sb.append("uuid: " + getUuid() + ", ");
+		sb.append("messageId: " + getMessageId() + ", ");
+		sb.append("groupId: " + getGroupId() + ", ");
+		sb.append("companyId: " + getCompanyId() + ", ");
+		sb.append("userId: " + getUserId() + ", ");
+		sb.append("userName: " + getUserName() + ", ");
+		sb.append("createDate: " + getCreateDate() + ", ");
+		sb.append("modifiedDate: " + getModifiedDate() + ", ");
+		sb.append("classNameId: " + getClassNameId() + ", ");
+		sb.append("classPK: " + getClassPK() + ", ");
+		sb.append("categoryId: " + getCategoryId() + ", ");
+		sb.append("threadId: " + getThreadId() + ", ");
+		sb.append("parentMessageId: " + getParentMessageId() + ", ");
+		sb.append("subject: " + getSubject() + ", ");
+		sb.append("body: " + getBody() + ", ");
+		sb.append("attachments: " + getAttachments() + ", ");
+		sb.append("anonymous: " + getAnonymous() + ", ");
+		sb.append("priority: " + getPriority() + ", ");
+
+		sb.append(")");
+
+		return sb.toString();
 	}
 
 	private String _uuid;

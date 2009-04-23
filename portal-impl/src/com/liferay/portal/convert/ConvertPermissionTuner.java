@@ -1,4 +1,3 @@
-<%
 /**
  * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
  *
@@ -20,28 +19,38 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%>
 
-<%@ include file="/html/portlet/directory/init.jsp" %>
+package com.liferay.portal.convert;
 
-<%
-PortletURL tabs1URL = renderResponse.createRenderURL();
+import com.liferay.portal.util.PropsValues;
 
-tabs1URL.setWindowState(WindowState.MAXIMIZED);
+/**
+ * <a href="ConvertPermissionTuner.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Alexander Chow
+ *
+ */
+public class ConvertPermissionTuner extends ConvertProcess {
 
-tabs1URL.setParameter("struts_action", "/directory/view");
+	public String getPath() {
+		return "/admin_server/edit_permissions_algorithm_5";
+	}
 
-String tabs1Names = ParamUtil.getString(request, "tabs1Names", "users,organizations,user-groups");
+	public String getDescription() {
+		return "fine-tune-generated-roles";
+	}
 
-String tabs1Values = tabs1Names;
+	public boolean isEnabled() {
+		boolean enabled = false;
 
-String redirect = ParamUtil.getString(request, "redirect");
-String backURL = ParamUtil.getString(request, "backURL", redirect);
-%>
+		if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 5) {
+			enabled = true;
+		}
 
-<liferay-ui:tabs
-	names="<%= tabs1Names %>"
-	tabsValues="<%= tabs1Values %>"
-	url="<%= tabs1URL.toString() %>"
-	backURL="<%= backURL %>"
-/>
+		return enabled;
+	}
+
+	protected void doConvert() throws Exception {
+	}
+
+}

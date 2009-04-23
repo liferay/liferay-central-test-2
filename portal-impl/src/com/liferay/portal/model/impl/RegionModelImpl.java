@@ -33,6 +33,7 @@ import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
 
 import java.io.Serializable;
 
+import java.lang.StringBuilder;
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
@@ -255,6 +256,47 @@ public class RegionModelImpl extends BaseModelImpl<Region> {
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public String toHtmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<table class=\"lfr-table\">\n");
+
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>regionId</b></td><td>" +
+			getRegionId() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>countryId</b></td><td>" +
+			getCountryId() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>regionCode</b></td><td>" +
+			getRegionCode() + "</td></tr>\n");
+		sb.append("<tr><td align=\"right\" valign=\"top\"><b>name</b></td><td>" +
+			getName() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>active</b></td><td>" +
+			getActive() + "</td></tr>\n");
+
+		sb.append("</table>");
+
+		return sb.toString();
+	}
+
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("com.liferay.portal.model.Region (");
+
+		sb.append("regionId: " + getRegionId() + ", ");
+		sb.append("countryId: " + getCountryId() + ", ");
+		sb.append("regionCode: " + getRegionCode() + ", ");
+		sb.append("name: " + getName() + ", ");
+		sb.append("active: " + getActive() + ", ");
+
+		sb.append(")");
+
+		return sb.toString();
 	}
 
 	private long _regionId;

@@ -97,6 +97,10 @@
 		<put name="portlet_content" value="/portlet/admin/error.jsp" />
 	</definition>
 
+	<definition name="portlet.admin.edit_permissions_algorithm_5" extends="portlet.admin">
+		<put name="portlet_content" value="/portlet/admin/edit_permissions_algorithm_5.jsp" />
+	</definition>
+
 	<definition name="portlet.admin.view" extends="portlet.admin">
 		<put name="portlet_content" value="/portlet/admin/view.jsp" />
 	</definition>

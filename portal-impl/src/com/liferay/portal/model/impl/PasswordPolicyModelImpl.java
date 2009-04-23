@@ -33,6 +33,7 @@ import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
 
 import java.io.Serializable;
 
+import java.lang.StringBuilder;
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
@@ -613,6 +614,131 @@ public class PasswordPolicyModelImpl extends BaseModelImpl<PasswordPolicy> {
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public String toHtmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<table class=\"lfr-table\">\n");
+
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>passwordPolicyId</b></td><td>" +
+			getPasswordPolicyId() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>companyId</b></td><td>" +
+			getCompanyId() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>userId</b></td><td>" +
+			getUserId() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>userName</b></td><td>" +
+			getUserName() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>createDate</b></td><td>" +
+			getCreateDate() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>modifiedDate</b></td><td>" +
+			getModifiedDate() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>defaultPolicy</b></td><td>" +
+			getDefaultPolicy() + "</td></tr>\n");
+		sb.append("<tr><td align=\"right\" valign=\"top\"><b>name</b></td><td>" +
+			getName() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>description</b></td><td>" +
+			getDescription() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>changeable</b></td><td>" +
+			getChangeable() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>changeRequired</b></td><td>" +
+			getChangeRequired() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>minAge</b></td><td>" +
+			getMinAge() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>checkSyntax</b></td><td>" +
+			getCheckSyntax() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>allowDictionaryWords</b></td><td>" +
+			getAllowDictionaryWords() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>minLength</b></td><td>" +
+			getMinLength() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>history</b></td><td>" +
+			getHistory() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>historyCount</b></td><td>" +
+			getHistoryCount() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>expireable</b></td><td>" +
+			getExpireable() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>maxAge</b></td><td>" +
+			getMaxAge() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>warningTime</b></td><td>" +
+			getWarningTime() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>graceLimit</b></td><td>" +
+			getGraceLimit() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>lockout</b></td><td>" +
+			getLockout() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>maxFailure</b></td><td>" +
+			getMaxFailure() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>lockoutDuration</b></td><td>" +
+			getLockoutDuration() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>requireUnlock</b></td><td>" +
+			getRequireUnlock() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>resetFailureCount</b></td><td>" +
+			getResetFailureCount() + "</td></tr>\n");
+
+		sb.append("</table>");
+
+		return sb.toString();
+	}
+
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("com.liferay.portal.model.PasswordPolicy (");
+
+		sb.append("passwordPolicyId: " + getPasswordPolicyId() + ", ");
+		sb.append("companyId: " + getCompanyId() + ", ");
+		sb.append("userId: " + getUserId() + ", ");
+		sb.append("userName: " + getUserName() + ", ");
+		sb.append("createDate: " + getCreateDate() + ", ");
+		sb.append("modifiedDate: " + getModifiedDate() + ", ");
+		sb.append("defaultPolicy: " + getDefaultPolicy() + ", ");
+		sb.append("name: " + getName() + ", ");
+		sb.append("description: " + getDescription() + ", ");
+		sb.append("changeable: " + getChangeable() + ", ");
+		sb.append("changeRequired: " + getChangeRequired() + ", ");
+		sb.append("minAge: " + getMinAge() + ", ");
+		sb.append("checkSyntax: " + getCheckSyntax() + ", ");
+		sb.append("allowDictionaryWords: " + getAllowDictionaryWords() + ", ");
+		sb.append("minLength: " + getMinLength() + ", ");
+		sb.append("history: " + getHistory() + ", ");
+		sb.append("historyCount: " + getHistoryCount() + ", ");
+		sb.append("expireable: " + getExpireable() + ", ");
+		sb.append("maxAge: " + getMaxAge() + ", ");
+		sb.append("warningTime: " + getWarningTime() + ", ");
+		sb.append("graceLimit: " + getGraceLimit() + ", ");
+		sb.append("lockout: " + getLockout() + ", ");
+		sb.append("maxFailure: " + getMaxFailure() + ", ");
+		sb.append("lockoutDuration: " + getLockoutDuration() + ", ");
+		sb.append("requireUnlock: " + getRequireUnlock() + ", ");
+		sb.append("resetFailureCount: " + getResetFailureCount() + ", ");
+
+		sb.append(")");
+
+		return sb.toString();
 	}
 
 	private long _passwordPolicyId;

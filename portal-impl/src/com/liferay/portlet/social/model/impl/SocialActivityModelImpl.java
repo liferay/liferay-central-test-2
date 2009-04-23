@@ -37,6 +37,7 @@ import com.liferay.portlet.social.model.SocialActivitySoap;
 
 import java.io.Serializable;
 
+import java.lang.StringBuilder;
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
@@ -430,6 +431,71 @@ public class SocialActivityModelImpl extends BaseModelImpl<SocialActivity> {
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public String toHtmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<table class=\"lfr-table\">\n");
+
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>activityId</b></td><td>" +
+			getActivityId() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>groupId</b></td><td>" +
+			getGroupId() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>companyId</b></td><td>" +
+			getCompanyId() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>userId</b></td><td>" +
+			getUserId() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>createDate</b></td><td>" +
+			getCreateDate() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>mirrorActivityId</b></td><td>" +
+			getMirrorActivityId() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>classNameId</b></td><td>" +
+			getClassNameId() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>classPK</b></td><td>" +
+			getClassPK() + "</td></tr>\n");
+		sb.append("<tr><td align=\"right\" valign=\"top\"><b>type</b></td><td>" +
+			getType() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>extraData</b></td><td>" +
+			getExtraData() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>receiverUserId</b></td><td>" +
+			getReceiverUserId() + "</td></tr>\n");
+
+		sb.append("</table>");
+
+		return sb.toString();
+	}
+
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("com.liferay.portlet.social.model.SocialActivity (");
+
+		sb.append("activityId: " + getActivityId() + ", ");
+		sb.append("groupId: " + getGroupId() + ", ");
+		sb.append("companyId: " + getCompanyId() + ", ");
+		sb.append("userId: " + getUserId() + ", ");
+		sb.append("createDate: " + getCreateDate() + ", ");
+		sb.append("mirrorActivityId: " + getMirrorActivityId() + ", ");
+		sb.append("classNameId: " + getClassNameId() + ", ");
+		sb.append("classPK: " + getClassPK() + ", ");
+		sb.append("type: " + getType() + ", ");
+		sb.append("extraData: " + getExtraData() + ", ");
+		sb.append("receiverUserId: " + getReceiverUserId() + ", ");
+
+		sb.append(")");
+
+		return sb.toString();
 	}
 
 	private long _activityId;

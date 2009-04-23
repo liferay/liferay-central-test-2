@@ -34,6 +34,7 @@ import com.liferay.portlet.journal.model.JournalArticleImageSoap;
 
 import java.io.Serializable;
 
+import java.lang.StringBuilder;
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
@@ -354,6 +355,60 @@ public class JournalArticleImageModelImpl extends BaseModelImpl<JournalArticleIm
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public String toHtmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<table class=\"lfr-table\">\n");
+
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>articleImageId</b></td><td>" +
+			getArticleImageId() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>groupId</b></td><td>" +
+			getGroupId() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>articleId</b></td><td>" +
+			getArticleId() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>version</b></td><td>" +
+			getVersion() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>elInstanceId</b></td><td>" +
+			getElInstanceId() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>elName</b></td><td>" +
+			getElName() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>languageId</b></td><td>" +
+			getLanguageId() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>tempImage</b></td><td>" +
+			getTempImage() + "</td></tr>\n");
+
+		sb.append("</table>");
+
+		return sb.toString();
+	}
+
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("com.liferay.portlet.journal.model.JournalArticleImage (");
+
+		sb.append("articleImageId: " + getArticleImageId() + ", ");
+		sb.append("groupId: " + getGroupId() + ", ");
+		sb.append("articleId: " + getArticleId() + ", ");
+		sb.append("version: " + getVersion() + ", ");
+		sb.append("elInstanceId: " + getElInstanceId() + ", ");
+		sb.append("elName: " + getElName() + ", ");
+		sb.append("languageId: " + getLanguageId() + ", ");
+		sb.append("tempImage: " + getTempImage() + ", ");
+
+		sb.append(")");
+
+		return sb.toString();
 	}
 
 	private long _articleImageId;

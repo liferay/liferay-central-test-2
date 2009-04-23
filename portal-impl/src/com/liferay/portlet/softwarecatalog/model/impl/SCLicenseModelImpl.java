@@ -34,6 +34,7 @@ import com.liferay.portlet.softwarecatalog.model.SCLicenseSoap;
 
 import java.io.Serializable;
 
+import java.lang.StringBuilder;
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
@@ -283,6 +284,50 @@ public class SCLicenseModelImpl extends BaseModelImpl<SCLicense> {
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public String toHtmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<table class=\"lfr-table\">\n");
+
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>licenseId</b></td><td>" +
+			getLicenseId() + "</td></tr>\n");
+		sb.append("<tr><td align=\"right\" valign=\"top\"><b>name</b></td><td>" +
+			getName() + "</td></tr>\n");
+		sb.append("<tr><td align=\"right\" valign=\"top\"><b>url</b></td><td>" +
+			getUrl() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>openSource</b></td><td>" +
+			getOpenSource() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>active</b></td><td>" +
+			getActive() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>recommended</b></td><td>" +
+			getRecommended() + "</td></tr>\n");
+
+		sb.append("</table>");
+
+		return sb.toString();
+	}
+
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("com.liferay.portlet.softwarecatalog.model.SCLicense (");
+
+		sb.append("licenseId: " + getLicenseId() + ", ");
+		sb.append("name: " + getName() + ", ");
+		sb.append("url: " + getUrl() + ", ");
+		sb.append("openSource: " + getOpenSource() + ", ");
+		sb.append("active: " + getActive() + ", ");
+		sb.append("recommended: " + getRecommended() + ", ");
+
+		sb.append(")");
+
+		return sb.toString();
 	}
 
 	private long _licenseId;

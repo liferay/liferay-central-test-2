@@ -33,6 +33,7 @@ import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
 
 import java.io.Serializable;
 
+import java.lang.StringBuilder;
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
@@ -276,6 +277,47 @@ public class PortletModelImpl extends BaseModelImpl<Portlet> {
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public String toHtmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<table class=\"lfr-table\">\n");
+
+		sb.append("<tr><td align=\"right\" valign=\"top\"><b>id</b></td><td>" +
+			getId() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>companyId</b></td><td>" +
+			getCompanyId() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>portletId</b></td><td>" +
+			getPortletId() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>roles</b></td><td>" +
+			getRoles() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>active</b></td><td>" +
+			getActive() + "</td></tr>\n");
+
+		sb.append("</table>");
+
+		return sb.toString();
+	}
+
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("com.liferay.portal.model.Portlet (");
+
+		sb.append("id: " + getId() + ", ");
+		sb.append("companyId: " + getCompanyId() + ", ");
+		sb.append("portletId: " + getPortletId() + ", ");
+		sb.append("roles: " + getRoles() + ", ");
+		sb.append("active: " + getActive() + ", ");
+
+		sb.append(")");
+
+		return sb.toString();
 	}
 
 	private long _id;

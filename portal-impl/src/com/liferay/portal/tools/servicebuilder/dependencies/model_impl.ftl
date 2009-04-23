@@ -31,6 +31,7 @@ import com.liferay.portal.util.PortalUtil;
 import java.io.Serializable;
 
 import java.lang.reflect.Proxy;
+import java.lang.StringBuilder;
 
 import java.sql.Types;
 
@@ -450,6 +451,34 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> {
 		<#else>
 			return getPrimaryKey().hashCode();
 		</#if>
+	}
+
+	public String toHtmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<table class=\"lfr-table\">\n");
+
+		<#list entity.regularColList as column>
+			sb.append("<tr><td align=\"right\" valign=\"top\"><b>${column.name}</b></td><td>" + get${column.methodName}() + "</td></tr>\n");
+		</#list>
+
+		sb.append("</table>");
+
+		return sb.toString();
+	}
+
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("${packagePath}.model.${entity.name} (");
+
+		<#list entity.regularColList as column>
+			sb.append("${column.name}: " + get${column.methodName}() + ", ");
+		</#list>
+
+		sb.append(")");
+
+		return sb.toString();
 	}
 
 	<#list entity.regularColList as column>

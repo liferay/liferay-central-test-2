@@ -34,6 +34,7 @@ import com.liferay.portlet.journal.model.JournalArticleResourceSoap;
 
 import java.io.Serializable;
 
+import java.lang.StringBuilder;
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
@@ -247,6 +248,40 @@ public class JournalArticleResourceModelImpl extends BaseModelImpl<JournalArticl
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public String toHtmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<table class=\"lfr-table\">\n");
+
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>resourcePrimKey</b></td><td>" +
+			getResourcePrimKey() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>groupId</b></td><td>" +
+			getGroupId() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>articleId</b></td><td>" +
+			getArticleId() + "</td></tr>\n");
+
+		sb.append("</table>");
+
+		return sb.toString();
+	}
+
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("com.liferay.portlet.journal.model.JournalArticleResource (");
+
+		sb.append("resourcePrimKey: " + getResourcePrimKey() + ", ");
+		sb.append("groupId: " + getGroupId() + ", ");
+		sb.append("articleId: " + getArticleId() + ", ");
+
+		sb.append(")");
+
+		return sb.toString();
 	}
 
 	private long _resourcePrimKey;

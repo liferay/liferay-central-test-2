@@ -35,6 +35,7 @@ import com.liferay.portlet.shopping.model.ShoppingOrderSoap;
 
 import java.io.Serializable;
 
+import java.lang.StringBuilder;
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
@@ -940,6 +941,231 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder> {
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public String toHtmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<table class=\"lfr-table\">\n");
+
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>orderId</b></td><td>" +
+			getOrderId() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>groupId</b></td><td>" +
+			getGroupId() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>companyId</b></td><td>" +
+			getCompanyId() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>userId</b></td><td>" +
+			getUserId() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>userName</b></td><td>" +
+			getUserName() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>createDate</b></td><td>" +
+			getCreateDate() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>modifiedDate</b></td><td>" +
+			getModifiedDate() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>number</b></td><td>" +
+			getNumber() + "</td></tr>\n");
+		sb.append("<tr><td align=\"right\" valign=\"top\"><b>tax</b></td><td>" +
+			getTax() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>shipping</b></td><td>" +
+			getShipping() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>altShipping</b></td><td>" +
+			getAltShipping() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>requiresShipping</b></td><td>" +
+			getRequiresShipping() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>insure</b></td><td>" +
+			getInsure() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>insurance</b></td><td>" +
+			getInsurance() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>couponCodes</b></td><td>" +
+			getCouponCodes() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>couponDiscount</b></td><td>" +
+			getCouponDiscount() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>billingFirstName</b></td><td>" +
+			getBillingFirstName() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>billingLastName</b></td><td>" +
+			getBillingLastName() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>billingEmailAddress</b></td><td>" +
+			getBillingEmailAddress() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>billingCompany</b></td><td>" +
+			getBillingCompany() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>billingStreet</b></td><td>" +
+			getBillingStreet() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>billingCity</b></td><td>" +
+			getBillingCity() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>billingState</b></td><td>" +
+			getBillingState() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>billingZip</b></td><td>" +
+			getBillingZip() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>billingCountry</b></td><td>" +
+			getBillingCountry() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>billingPhone</b></td><td>" +
+			getBillingPhone() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>shipToBilling</b></td><td>" +
+			getShipToBilling() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>shippingFirstName</b></td><td>" +
+			getShippingFirstName() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>shippingLastName</b></td><td>" +
+			getShippingLastName() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>shippingEmailAddress</b></td><td>" +
+			getShippingEmailAddress() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>shippingCompany</b></td><td>" +
+			getShippingCompany() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>shippingStreet</b></td><td>" +
+			getShippingStreet() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>shippingCity</b></td><td>" +
+			getShippingCity() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>shippingState</b></td><td>" +
+			getShippingState() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>shippingZip</b></td><td>" +
+			getShippingZip() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>shippingCountry</b></td><td>" +
+			getShippingCountry() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>shippingPhone</b></td><td>" +
+			getShippingPhone() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>ccName</b></td><td>" +
+			getCcName() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>ccType</b></td><td>" +
+			getCcType() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>ccNumber</b></td><td>" +
+			getCcNumber() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>ccExpMonth</b></td><td>" +
+			getCcExpMonth() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>ccExpYear</b></td><td>" +
+			getCcExpYear() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>ccVerNumber</b></td><td>" +
+			getCcVerNumber() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>comments</b></td><td>" +
+			getComments() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>ppTxnId</b></td><td>" +
+			getPpTxnId() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>ppPaymentStatus</b></td><td>" +
+			getPpPaymentStatus() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>ppPaymentGross</b></td><td>" +
+			getPpPaymentGross() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>ppReceiverEmail</b></td><td>" +
+			getPpReceiverEmail() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>ppPayerEmail</b></td><td>" +
+			getPpPayerEmail() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>sendOrderEmail</b></td><td>" +
+			getSendOrderEmail() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>sendShippingEmail</b></td><td>" +
+			getSendShippingEmail() + "</td></tr>\n");
+
+		sb.append("</table>");
+
+		return sb.toString();
+	}
+
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("com.liferay.portlet.shopping.model.ShoppingOrder (");
+
+		sb.append("orderId: " + getOrderId() + ", ");
+		sb.append("groupId: " + getGroupId() + ", ");
+		sb.append("companyId: " + getCompanyId() + ", ");
+		sb.append("userId: " + getUserId() + ", ");
+		sb.append("userName: " + getUserName() + ", ");
+		sb.append("createDate: " + getCreateDate() + ", ");
+		sb.append("modifiedDate: " + getModifiedDate() + ", ");
+		sb.append("number: " + getNumber() + ", ");
+		sb.append("tax: " + getTax() + ", ");
+		sb.append("shipping: " + getShipping() + ", ");
+		sb.append("altShipping: " + getAltShipping() + ", ");
+		sb.append("requiresShipping: " + getRequiresShipping() + ", ");
+		sb.append("insure: " + getInsure() + ", ");
+		sb.append("insurance: " + getInsurance() + ", ");
+		sb.append("couponCodes: " + getCouponCodes() + ", ");
+		sb.append("couponDiscount: " + getCouponDiscount() + ", ");
+		sb.append("billingFirstName: " + getBillingFirstName() + ", ");
+		sb.append("billingLastName: " + getBillingLastName() + ", ");
+		sb.append("billingEmailAddress: " + getBillingEmailAddress() + ", ");
+		sb.append("billingCompany: " + getBillingCompany() + ", ");
+		sb.append("billingStreet: " + getBillingStreet() + ", ");
+		sb.append("billingCity: " + getBillingCity() + ", ");
+		sb.append("billingState: " + getBillingState() + ", ");
+		sb.append("billingZip: " + getBillingZip() + ", ");
+		sb.append("billingCountry: " + getBillingCountry() + ", ");
+		sb.append("billingPhone: " + getBillingPhone() + ", ");
+		sb.append("shipToBilling: " + getShipToBilling() + ", ");
+		sb.append("shippingFirstName: " + getShippingFirstName() + ", ");
+		sb.append("shippingLastName: " + getShippingLastName() + ", ");
+		sb.append("shippingEmailAddress: " + getShippingEmailAddress() + ", ");
+		sb.append("shippingCompany: " + getShippingCompany() + ", ");
+		sb.append("shippingStreet: " + getShippingStreet() + ", ");
+		sb.append("shippingCity: " + getShippingCity() + ", ");
+		sb.append("shippingState: " + getShippingState() + ", ");
+		sb.append("shippingZip: " + getShippingZip() + ", ");
+		sb.append("shippingCountry: " + getShippingCountry() + ", ");
+		sb.append("shippingPhone: " + getShippingPhone() + ", ");
+		sb.append("ccName: " + getCcName() + ", ");
+		sb.append("ccType: " + getCcType() + ", ");
+		sb.append("ccNumber: " + getCcNumber() + ", ");
+		sb.append("ccExpMonth: " + getCcExpMonth() + ", ");
+		sb.append("ccExpYear: " + getCcExpYear() + ", ");
+		sb.append("ccVerNumber: " + getCcVerNumber() + ", ");
+		sb.append("comments: " + getComments() + ", ");
+		sb.append("ppTxnId: " + getPpTxnId() + ", ");
+		sb.append("ppPaymentStatus: " + getPpPaymentStatus() + ", ");
+		sb.append("ppPaymentGross: " + getPpPaymentGross() + ", ");
+		sb.append("ppReceiverEmail: " + getPpReceiverEmail() + ", ");
+		sb.append("ppPayerEmail: " + getPpPayerEmail() + ", ");
+		sb.append("sendOrderEmail: " + getSendOrderEmail() + ", ");
+		sb.append("sendShippingEmail: " + getSendShippingEmail() + ", ");
+
+		sb.append(")");
+
+		return sb.toString();
 	}
 
 	private long _orderId;

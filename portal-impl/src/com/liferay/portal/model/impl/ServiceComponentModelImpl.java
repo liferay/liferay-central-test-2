@@ -33,6 +33,7 @@ import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
 
 import java.io.Serializable;
 
+import java.lang.StringBuilder;
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
@@ -290,6 +291,47 @@ public class ServiceComponentModelImpl extends BaseModelImpl<ServiceComponent> {
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public String toHtmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<table class=\"lfr-table\">\n");
+
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>serviceComponentId</b></td><td>" +
+			getServiceComponentId() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>buildNamespace</b></td><td>" +
+			getBuildNamespace() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>buildNumber</b></td><td>" +
+			getBuildNumber() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>buildDate</b></td><td>" +
+			getBuildDate() + "</td></tr>\n");
+		sb.append("<tr><td align=\"right\" valign=\"top\"><b>data</b></td><td>" +
+			getData() + "</td></tr>\n");
+
+		sb.append("</table>");
+
+		return sb.toString();
+	}
+
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("com.liferay.portal.model.ServiceComponent (");
+
+		sb.append("serviceComponentId: " + getServiceComponentId() + ", ");
+		sb.append("buildNamespace: " + getBuildNamespace() + ", ");
+		sb.append("buildNumber: " + getBuildNumber() + ", ");
+		sb.append("buildDate: " + getBuildDate() + ", ");
+		sb.append("data: " + getData() + ", ");
+
+		sb.append(")");
+
+		return sb.toString();
 	}
 
 	private long _serviceComponentId;

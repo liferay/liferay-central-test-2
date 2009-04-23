@@ -35,6 +35,7 @@ import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
 
 import java.io.Serializable;
 
+import java.lang.StringBuilder;
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
@@ -230,6 +231,36 @@ public class ClassNameModelImpl extends BaseModelImpl<ClassName> {
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public String toHtmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<table class=\"lfr-table\">\n");
+
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>classNameId</b></td><td>" +
+			getClassNameId() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>value</b></td><td>" +
+			getValue() + "</td></tr>\n");
+
+		sb.append("</table>");
+
+		return sb.toString();
+	}
+
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("com.liferay.portal.model.ClassName (");
+
+		sb.append("classNameId: " + getClassNameId() + ", ");
+		sb.append("value: " + getValue() + ", ");
+
+		sb.append(")");
+
+		return sb.toString();
 	}
 
 	private long _classNameId;

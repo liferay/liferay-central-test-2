@@ -34,6 +34,7 @@ import com.liferay.portlet.messageboards.model.MBThreadSoap;
 
 import java.io.Serializable;
 
+import java.lang.StringBuilder;
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
@@ -328,6 +329,64 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread> {
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public String toHtmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<table class=\"lfr-table\">\n");
+
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>threadId</b></td><td>" +
+			getThreadId() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>groupId</b></td><td>" +
+			getGroupId() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>categoryId</b></td><td>" +
+			getCategoryId() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>rootMessageId</b></td><td>" +
+			getRootMessageId() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>messageCount</b></td><td>" +
+			getMessageCount() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>viewCount</b></td><td>" +
+			getViewCount() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>lastPostByUserId</b></td><td>" +
+			getLastPostByUserId() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>lastPostDate</b></td><td>" +
+			getLastPostDate() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>priority</b></td><td>" +
+			getPriority() + "</td></tr>\n");
+
+		sb.append("</table>");
+
+		return sb.toString();
+	}
+
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("com.liferay.portlet.messageboards.model.MBThread (");
+
+		sb.append("threadId: " + getThreadId() + ", ");
+		sb.append("groupId: " + getGroupId() + ", ");
+		sb.append("categoryId: " + getCategoryId() + ", ");
+		sb.append("rootMessageId: " + getRootMessageId() + ", ");
+		sb.append("messageCount: " + getMessageCount() + ", ");
+		sb.append("viewCount: " + getViewCount() + ", ");
+		sb.append("lastPostByUserId: " + getLastPostByUserId() + ", ");
+		sb.append("lastPostDate: " + getLastPostDate() + ", ");
+		sb.append("priority: " + getPriority() + ", ");
+
+		sb.append(")");
+
+		return sb.toString();
 	}
 
 	private long _threadId;

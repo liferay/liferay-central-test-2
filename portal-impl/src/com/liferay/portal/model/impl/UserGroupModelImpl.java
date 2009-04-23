@@ -33,6 +33,7 @@ import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
 
 import java.io.Serializable;
 
+import java.lang.StringBuilder;
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
@@ -271,6 +272,47 @@ public class UserGroupModelImpl extends BaseModelImpl<UserGroup> {
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public String toHtmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<table class=\"lfr-table\">\n");
+
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>userGroupId</b></td><td>" +
+			getUserGroupId() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>companyId</b></td><td>" +
+			getCompanyId() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>parentUserGroupId</b></td><td>" +
+			getParentUserGroupId() + "</td></tr>\n");
+		sb.append("<tr><td align=\"right\" valign=\"top\"><b>name</b></td><td>" +
+			getName() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>description</b></td><td>" +
+			getDescription() + "</td></tr>\n");
+
+		sb.append("</table>");
+
+		return sb.toString();
+	}
+
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("com.liferay.portal.model.UserGroup (");
+
+		sb.append("userGroupId: " + getUserGroupId() + ", ");
+		sb.append("companyId: " + getCompanyId() + ", ");
+		sb.append("parentUserGroupId: " + getParentUserGroupId() + ", ");
+		sb.append("name: " + getName() + ", ");
+		sb.append("description: " + getDescription() + ", ");
+
+		sb.append(")");
+
+		return sb.toString();
 	}
 
 	private long _userGroupId;

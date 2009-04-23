@@ -33,6 +33,7 @@ import com.liferay.portlet.messageboards.model.MBStatsUserSoap;
 
 import java.io.Serializable;
 
+import java.lang.StringBuilder;
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
@@ -283,6 +284,48 @@ public class MBStatsUserModelImpl extends BaseModelImpl<MBStatsUser> {
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public String toHtmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<table class=\"lfr-table\">\n");
+
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>statsUserId</b></td><td>" +
+			getStatsUserId() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>groupId</b></td><td>" +
+			getGroupId() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>userId</b></td><td>" +
+			getUserId() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>messageCount</b></td><td>" +
+			getMessageCount() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>lastPostDate</b></td><td>" +
+			getLastPostDate() + "</td></tr>\n");
+
+		sb.append("</table>");
+
+		return sb.toString();
+	}
+
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("com.liferay.portlet.messageboards.model.MBStatsUser (");
+
+		sb.append("statsUserId: " + getStatsUserId() + ", ");
+		sb.append("groupId: " + getGroupId() + ", ");
+		sb.append("userId: " + getUserId() + ", ");
+		sb.append("messageCount: " + getMessageCount() + ", ");
+		sb.append("lastPostDate: " + getLastPostDate() + ", ");
+
+		sb.append(")");
+
+		return sb.toString();
 	}
 
 	private long _statsUserId;

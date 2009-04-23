@@ -30,6 +30,7 @@ import com.liferay.portal.model.ListTypeSoap;
 
 import java.io.Serializable;
 
+import java.lang.StringBuilder;
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
@@ -213,6 +214,38 @@ public class ListTypeModelImpl extends BaseModelImpl<ListType> {
 
 	public int hashCode() {
 		return getPrimaryKey();
+	}
+
+	public String toHtmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<table class=\"lfr-table\">\n");
+
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>listTypeId</b></td><td>" +
+			getListTypeId() + "</td></tr>\n");
+		sb.append("<tr><td align=\"right\" valign=\"top\"><b>name</b></td><td>" +
+			getName() + "</td></tr>\n");
+		sb.append("<tr><td align=\"right\" valign=\"top\"><b>type</b></td><td>" +
+			getType() + "</td></tr>\n");
+
+		sb.append("</table>");
+
+		return sb.toString();
+	}
+
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("com.liferay.portal.model.ListType (");
+
+		sb.append("listTypeId: " + getListTypeId() + ", ");
+		sb.append("name: " + getName() + ", ");
+		sb.append("type: " + getType() + ", ");
+
+		sb.append(")");
+
+		return sb.toString();
 	}
 
 	private int _listTypeId;

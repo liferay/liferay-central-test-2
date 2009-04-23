@@ -184,6 +184,10 @@ public interface PermissionLocalService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	public void mergePermissions(long fromRoleId, long toRoleId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
 	public void setGroupPermissions(long groupId, java.lang.String[] actionIds,
 		long resourceId)
 		throws com.liferay.portal.PortalException,
@@ -228,6 +232,9 @@ public interface PermissionLocalService {
 	public void unsetRolePermission(long roleId, long companyId,
 		java.lang.String name, int scope, java.lang.String primKey,
 		java.lang.String actionId) throws com.liferay.portal.SystemException;
+
+	public void unsetRolePermissions(long roleId, long[] permissionIds)
+		throws com.liferay.portal.SystemException;
 
 	public void unsetRolePermissions(long roleId, long companyId,
 		java.lang.String name, int scope, java.lang.String actionId)

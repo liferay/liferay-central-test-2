@@ -30,6 +30,7 @@ import com.liferay.portal.service.persistence.OrgGroupPermissionPK;
 
 import java.io.Serializable;
 
+import java.lang.StringBuilder;
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
@@ -209,6 +210,40 @@ public class OrgGroupPermissionModelImpl extends BaseModelImpl<OrgGroupPermissio
 
 	public int hashCode() {
 		return getPrimaryKey().hashCode();
+	}
+
+	public String toHtmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<table class=\"lfr-table\">\n");
+
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>organizationId</b></td><td>" +
+			getOrganizationId() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>groupId</b></td><td>" +
+			getGroupId() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>permissionId</b></td><td>" +
+			getPermissionId() + "</td></tr>\n");
+
+		sb.append("</table>");
+
+		return sb.toString();
+	}
+
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("com.liferay.portal.model.OrgGroupPermission (");
+
+		sb.append("organizationId: " + getOrganizationId() + ", ");
+		sb.append("groupId: " + getGroupId() + ", ");
+		sb.append("permissionId: " + getPermissionId() + ", ");
+
+		sb.append(")");
+
+		return sb.toString();
 	}
 
 	private long _organizationId;

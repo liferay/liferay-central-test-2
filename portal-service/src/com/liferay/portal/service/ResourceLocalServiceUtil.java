@@ -188,6 +188,13 @@ public class ResourceLocalServiceUtil {
 		return getService().getLatestResourceId();
 	}
 
+	public static java.lang.Object getModel(
+		com.liferay.portal.model.Resource resource)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService().getModel(resource);
+	}
+
 	public static com.liferay.portal.model.Resource getResource(
 		long companyId, java.lang.String name, int scope,
 		java.lang.String primKey)

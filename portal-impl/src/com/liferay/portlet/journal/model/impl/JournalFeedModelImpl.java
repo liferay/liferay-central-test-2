@@ -34,6 +34,7 @@ import com.liferay.portlet.journal.model.JournalFeedSoap;
 
 import java.io.Serializable;
 
+import java.lang.StringBuilder;
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
@@ -533,6 +534,117 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed> {
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public String toHtmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<table class=\"lfr-table\">\n");
+
+		sb.append("<tr><td align=\"right\" valign=\"top\"><b>uuid</b></td><td>" +
+			getUuid() + "</td></tr>\n");
+		sb.append("<tr><td align=\"right\" valign=\"top\"><b>id</b></td><td>" +
+			getId() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>groupId</b></td><td>" +
+			getGroupId() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>companyId</b></td><td>" +
+			getCompanyId() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>userId</b></td><td>" +
+			getUserId() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>userName</b></td><td>" +
+			getUserName() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>createDate</b></td><td>" +
+			getCreateDate() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>modifiedDate</b></td><td>" +
+			getModifiedDate() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>feedId</b></td><td>" +
+			getFeedId() + "</td></tr>\n");
+		sb.append("<tr><td align=\"right\" valign=\"top\"><b>name</b></td><td>" +
+			getName() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>description</b></td><td>" +
+			getDescription() + "</td></tr>\n");
+		sb.append("<tr><td align=\"right\" valign=\"top\"><b>type</b></td><td>" +
+			getType() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>structureId</b></td><td>" +
+			getStructureId() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>templateId</b></td><td>" +
+			getTemplateId() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>rendererTemplateId</b></td><td>" +
+			getRendererTemplateId() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>delta</b></td><td>" +
+			getDelta() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>orderByCol</b></td><td>" +
+			getOrderByCol() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>orderByType</b></td><td>" +
+			getOrderByType() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>targetLayoutFriendlyUrl</b></td><td>" +
+			getTargetLayoutFriendlyUrl() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>targetPortletId</b></td><td>" +
+			getTargetPortletId() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>contentField</b></td><td>" +
+			getContentField() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>feedType</b></td><td>" +
+			getFeedType() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>feedVersion</b></td><td>" +
+			getFeedVersion() + "</td></tr>\n");
+
+		sb.append("</table>");
+
+		return sb.toString();
+	}
+
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("com.liferay.portlet.journal.model.JournalFeed (");
+
+		sb.append("uuid: " + getUuid() + ", ");
+		sb.append("id: " + getId() + ", ");
+		sb.append("groupId: " + getGroupId() + ", ");
+		sb.append("companyId: " + getCompanyId() + ", ");
+		sb.append("userId: " + getUserId() + ", ");
+		sb.append("userName: " + getUserName() + ", ");
+		sb.append("createDate: " + getCreateDate() + ", ");
+		sb.append("modifiedDate: " + getModifiedDate() + ", ");
+		sb.append("feedId: " + getFeedId() + ", ");
+		sb.append("name: " + getName() + ", ");
+		sb.append("description: " + getDescription() + ", ");
+		sb.append("type: " + getType() + ", ");
+		sb.append("structureId: " + getStructureId() + ", ");
+		sb.append("templateId: " + getTemplateId() + ", ");
+		sb.append("rendererTemplateId: " + getRendererTemplateId() + ", ");
+		sb.append("delta: " + getDelta() + ", ");
+		sb.append("orderByCol: " + getOrderByCol() + ", ");
+		sb.append("orderByType: " + getOrderByType() + ", ");
+		sb.append("targetLayoutFriendlyUrl: " + getTargetLayoutFriendlyUrl() +
+			", ");
+		sb.append("targetPortletId: " + getTargetPortletId() + ", ");
+		sb.append("contentField: " + getContentField() + ", ");
+		sb.append("feedType: " + getFeedType() + ", ");
+		sb.append("feedVersion: " + getFeedVersion() + ", ");
+
+		sb.append(")");
+
+		return sb.toString();
 	}
 
 	private String _uuid;

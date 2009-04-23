@@ -33,6 +33,7 @@ import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
 
 import java.io.Serializable;
 
+import java.lang.StringBuilder;
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
@@ -307,6 +308,51 @@ public class PortletPreferencesModelImpl extends BaseModelImpl<PortletPreference
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public String toHtmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<table class=\"lfr-table\">\n");
+
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>portletPreferencesId</b></td><td>" +
+			getPortletPreferencesId() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>ownerId</b></td><td>" +
+			getOwnerId() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>ownerType</b></td><td>" +
+			getOwnerType() + "</td></tr>\n");
+		sb.append("<tr><td align=\"right\" valign=\"top\"><b>plid</b></td><td>" +
+			getPlid() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>portletId</b></td><td>" +
+			getPortletId() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>preferences</b></td><td>" +
+			getPreferences() + "</td></tr>\n");
+
+		sb.append("</table>");
+
+		return sb.toString();
+	}
+
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("com.liferay.portal.model.PortletPreferences (");
+
+		sb.append("portletPreferencesId: " + getPortletPreferencesId() + ", ");
+		sb.append("ownerId: " + getOwnerId() + ", ");
+		sb.append("ownerType: " + getOwnerType() + ", ");
+		sb.append("plid: " + getPlid() + ", ");
+		sb.append("portletId: " + getPortletId() + ", ");
+		sb.append("preferences: " + getPreferences() + ", ");
+
+		sb.append(")");
+
+		return sb.toString();
 	}
 
 	private long _portletPreferencesId;

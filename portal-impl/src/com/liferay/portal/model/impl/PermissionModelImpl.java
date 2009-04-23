@@ -33,6 +33,7 @@ import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
 
 import java.io.Serializable;
 
+import java.lang.StringBuilder;
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
@@ -261,6 +262,44 @@ public class PermissionModelImpl extends BaseModelImpl<Permission> {
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public String toHtmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<table class=\"lfr-table\">\n");
+
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>permissionId</b></td><td>" +
+			getPermissionId() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>companyId</b></td><td>" +
+			getCompanyId() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>actionId</b></td><td>" +
+			getActionId() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>resourceId</b></td><td>" +
+			getResourceId() + "</td></tr>\n");
+
+		sb.append("</table>");
+
+		return sb.toString();
+	}
+
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("com.liferay.portal.model.Permission (");
+
+		sb.append("permissionId: " + getPermissionId() + ", ");
+		sb.append("companyId: " + getCompanyId() + ", ");
+		sb.append("actionId: " + getActionId() + ", ");
+		sb.append("resourceId: " + getResourceId() + ", ");
+
+		sb.append(")");
+
+		return sb.toString();
 	}
 
 	private long _permissionId;

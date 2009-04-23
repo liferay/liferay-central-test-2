@@ -32,6 +32,7 @@ import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
 
 import java.io.Serializable;
 
+import java.lang.StringBuilder;
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
@@ -441,6 +442,96 @@ public class OrgLaborModelImpl extends BaseModelImpl<OrgLabor> {
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public String toHtmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<table class=\"lfr-table\">\n");
+
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>orgLaborId</b></td><td>" +
+			getOrgLaborId() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>organizationId</b></td><td>" +
+			getOrganizationId() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>typeId</b></td><td>" +
+			getTypeId() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>sunOpen</b></td><td>" +
+			getSunOpen() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>sunClose</b></td><td>" +
+			getSunClose() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>monOpen</b></td><td>" +
+			getMonOpen() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>monClose</b></td><td>" +
+			getMonClose() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>tueOpen</b></td><td>" +
+			getTueOpen() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>tueClose</b></td><td>" +
+			getTueClose() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>wedOpen</b></td><td>" +
+			getWedOpen() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>wedClose</b></td><td>" +
+			getWedClose() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>thuOpen</b></td><td>" +
+			getThuOpen() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>thuClose</b></td><td>" +
+			getThuClose() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>friOpen</b></td><td>" +
+			getFriOpen() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>friClose</b></td><td>" +
+			getFriClose() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>satOpen</b></td><td>" +
+			getSatOpen() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>satClose</b></td><td>" +
+			getSatClose() + "</td></tr>\n");
+
+		sb.append("</table>");
+
+		return sb.toString();
+	}
+
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("com.liferay.portal.model.OrgLabor (");
+
+		sb.append("orgLaborId: " + getOrgLaborId() + ", ");
+		sb.append("organizationId: " + getOrganizationId() + ", ");
+		sb.append("typeId: " + getTypeId() + ", ");
+		sb.append("sunOpen: " + getSunOpen() + ", ");
+		sb.append("sunClose: " + getSunClose() + ", ");
+		sb.append("monOpen: " + getMonOpen() + ", ");
+		sb.append("monClose: " + getMonClose() + ", ");
+		sb.append("tueOpen: " + getTueOpen() + ", ");
+		sb.append("tueClose: " + getTueClose() + ", ");
+		sb.append("wedOpen: " + getWedOpen() + ", ");
+		sb.append("wedClose: " + getWedClose() + ", ");
+		sb.append("thuOpen: " + getThuOpen() + ", ");
+		sb.append("thuClose: " + getThuClose() + ", ");
+		sb.append("friOpen: " + getFriOpen() + ", ");
+		sb.append("friClose: " + getFriClose() + ", ");
+		sb.append("satOpen: " + getSatOpen() + ", ");
+		sb.append("satClose: " + getSatClose() + ", ");
+
+		sb.append(")");
+
+		return sb.toString();
 	}
 
 	private long _orgLaborId;

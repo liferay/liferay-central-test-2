@@ -34,6 +34,7 @@ import com.liferay.portlet.wiki.model.WikiPageResourceSoap;
 
 import java.io.Serializable;
 
+import java.lang.StringBuilder;
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
@@ -246,6 +247,40 @@ public class WikiPageResourceModelImpl extends BaseModelImpl<WikiPageResource> {
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public String toHtmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<table class=\"lfr-table\">\n");
+
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>resourcePrimKey</b></td><td>" +
+			getResourcePrimKey() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>nodeId</b></td><td>" +
+			getNodeId() + "</td></tr>\n");
+		sb.append(
+			"<tr><td align=\"right\" valign=\"top\"><b>title</b></td><td>" +
+			getTitle() + "</td></tr>\n");
+
+		sb.append("</table>");
+
+		return sb.toString();
+	}
+
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("com.liferay.portlet.wiki.model.WikiPageResource (");
+
+		sb.append("resourcePrimKey: " + getResourcePrimKey() + ", ");
+		sb.append("nodeId: " + getNodeId() + ", ");
+		sb.append("title: " + getTitle() + ", ");
+
+		sb.append(")");
+
+		return sb.toString();
 	}
 
 	private long _resourcePrimKey;
