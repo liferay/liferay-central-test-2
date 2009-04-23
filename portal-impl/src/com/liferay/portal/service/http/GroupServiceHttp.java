@@ -345,17 +345,17 @@ public class GroupServiceHttp {
 	}
 
 	public static java.util.List<com.liferay.portal.model.Group> getManageableGroups(
-		HttpPrincipal httpPrincipal, long userId, java.lang.String actionId)
+		HttpPrincipal httpPrincipal, java.lang.String actionId, int max)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(userId);
-
-			Object paramObj1 = actionId;
+			Object paramObj0 = actionId;
 
 			if (actionId == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
+				paramObj0 = new NullWrapper("java.lang.String");
 			}
+
+			Object paramObj1 = new IntegerWrapper(max);
 
 			MethodWrapper methodWrapper = new MethodWrapper(GroupServiceUtil.class.getName(),
 					"getManageableGroups", new Object[] { paramObj0, paramObj1 });

@@ -29,6 +29,12 @@ package com.liferay.portal.service.persistence;
  *
  */
 public class UserFinderUtil {
+	public static int countByUser(long userId,
+		java.util.LinkedHashMap<String, Object> params)
+		throws com.liferay.portal.SystemException {
+		return getFinder().countByUser(userId, params);
+	}
+
 	public static int countByKeywords(long companyId,
 		java.lang.String keywords, java.lang.Boolean active,
 		java.util.LinkedHashMap<String, Object> params)

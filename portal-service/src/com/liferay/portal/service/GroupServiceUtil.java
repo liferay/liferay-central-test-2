@@ -90,10 +90,10 @@ public class GroupServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portal.model.Group> getManageableGroups(
-		long userId, java.lang.String actionId)
+		java.lang.String actionId, int max)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return getService().getManageableGroups(userId, actionId);
+		return getService().getManageableGroups(actionId, max);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Group> getOrganizationsGroups(

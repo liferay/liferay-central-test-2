@@ -26,14 +26,6 @@
 
 <%
 PortletURL portletURL = (PortletURL)request.getAttribute("view.jsp-portletURL");
-
-List<Organization> manageableOrganizations = null;
-Long[] manageableOrganizationIds = null;
-
-if (filterManageableOrganizations) {
-	manageableOrganizations = OrganizationServiceUtil.getManageableOrganizations(themeDisplay.getUserId(), ActionKeys.UPDATE, false);
-	manageableOrganizationIds = EnterpriseAdminUtil.getOrganizationIds(manageableOrganizations);
-}
 %>
 
 <liferay-ui:error exception="<%= RequiredUserException.class %>" message="you-cannot-delete-or-deactivate-yourself" />
@@ -69,7 +61,9 @@ if (filterManageableOrganizations) {
 		}
 		else {
 			if (filterManageableOrganizations) {
-				userParams.put("usersOrgs", manageableOrganizationIds);
+				Long[] organizationIds = EnterpriseAdminUtil.getOrganizationIds(user.getOrganizations());
+
+				userParams.put("usersOrgs", organizationIds);
 			}
 		}
 

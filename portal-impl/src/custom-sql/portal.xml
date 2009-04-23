@@ -1001,6 +1001,18 @@
 				(Users_Roles.userId = ?)
 		]]>
 	</sql>
+	<sql id="com.liferay.portal.service.persistence.UserFinder.countByUser">
+		<![CDATA[
+			SELECT
+				COUNT(DISTINCT User_.userId) AS COUNT_VALUE
+			FROM
+				User_
+			[$JOIN$]
+			WHERE
+				[$WHERE$]
+				(User_.userId = ?)
+		]]>
+	</sql>
 	<sql id="com.liferay.portal.service.persistence.UserFinder.countByC_FN_MN_LN_SN_EA_A">
 		<![CDATA[
 			SELECT
@@ -1109,6 +1121,16 @@
 					(Users_Orgs.userId = User_.userId)
 			WHERE
 				(Users_Orgs.organizationId = ?)
+		]]>
+	</sql>
+	<sql id="com.liferay.portal.service.persistence.UserFinder.joinByUsersOrgsTree">
+		<![CDATA[
+			INNER JOIN
+				Users_Orgs ON
+					(Users_Orgs.userId = User_.userId)
+			INNER JOIN
+				Organization_ ON
+					(Organization_.organizationId = Users_Orgs.organizationId)
 		]]>
 	</sql>
 	<sql id="com.liferay.portal.service.persistence.UserFinder.joinByUsersPasswordPolicies">

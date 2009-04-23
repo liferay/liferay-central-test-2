@@ -468,22 +468,6 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		return groupPersistence.findByC_C_C(companyId, classNameId, plid);
 	}
 
-	public List<Group> getManageableGroups(long userId)
-		throws PortalException, SystemException {
-
-		List<Group> manageableGroups = new UniqueList<Group>();
-
-		User user = userLocalService.getUser(userId);
-
-		if (user.hasPrivateLayouts() || user.hasPublicLayouts() ) {
-			manageableGroups.add(user.getGroup());
-		}
-
-		manageableGroups.addAll(userPersistence.getGroups(userId));
-
-		return manageableGroups;
-	}
-
 	public List<Group> getNoLayoutsGroups(
 			String className, boolean privateLayout, int start, int end)
 		throws SystemException {

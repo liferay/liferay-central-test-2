@@ -404,67 +404,21 @@ public class OrganizationServiceHttp {
 	}
 
 	public static java.util.List<com.liferay.portal.model.Organization> getManageableOrganizations(
-		HttpPrincipal httpPrincipal, long userId, java.lang.String actionId)
+		HttpPrincipal httpPrincipal, java.lang.String actionId, int max)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(userId);
-
-			Object paramObj1 = actionId;
+			Object paramObj0 = actionId;
 
 			if (actionId == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
+				paramObj0 = new NullWrapper("java.lang.String");
 			}
+
+			Object paramObj1 = new IntegerWrapper(max);
 
 			MethodWrapper methodWrapper = new MethodWrapper(OrganizationServiceUtil.class.getName(),
 					"getManageableOrganizations",
 					new Object[] { paramObj0, paramObj1 });
-
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
-				throw new com.liferay.portal.SystemException(e);
-			}
-
-			return (java.util.List<com.liferay.portal.model.Organization>)returnObj;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			_log.error(se, se);
-
-			throw se;
-		}
-	}
-
-	public static java.util.List<com.liferay.portal.model.Organization> getManageableOrganizations(
-		HttpPrincipal httpPrincipal, long userId, java.lang.String actionId,
-		boolean recurse)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		try {
-			Object paramObj0 = new LongWrapper(userId);
-
-			Object paramObj1 = actionId;
-
-			if (actionId == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj2 = new BooleanWrapper(recurse);
-
-			MethodWrapper methodWrapper = new MethodWrapper(OrganizationServiceUtil.class.getName(),
-					"getManageableOrganizations",
-					new Object[] { paramObj0, paramObj1, paramObj2 });
 
 			Object returnObj = null;
 

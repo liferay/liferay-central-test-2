@@ -93,19 +93,7 @@ String property = (String)request.getAttribute("liferay-ui:write:property");
 			<c:when test='<%= property.equals("organizations") %>'>
 
 				<%
-				boolean filterManageableOrganizations = true;
-
-				if (permissionChecker.isCompanyAdmin()) {
-					filterManageableOrganizations = false;
-				}
-
-				List organizations = user2.getOrganizations();
-
-				if (filterManageableOrganizations) {
-					List<Organization> manageableOrganizations = OrganizationLocalServiceUtil.getManageableOrganizations(themeDisplay.getUserId());
-
-					organizations = OrganizationLocalServiceUtil.getSubsetOrganizations(organizations, manageableOrganizations);
-				}
+				List<Organization> organizations = user2.getOrganizations();
 				%>
 
 				<%= ListUtil.toString(organizations, "name", StringPool.COMMA_AND_SPACE) %>

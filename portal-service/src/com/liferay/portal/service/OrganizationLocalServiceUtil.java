@@ -150,11 +150,6 @@ public class OrganizationLocalServiceUtil {
 		return getService().getGroupOrganizations(groupId);
 	}
 
-	public static java.util.List<com.liferay.portal.model.Organization> getManageableOrganizations(
-		long userId) throws com.liferay.portal.SystemException {
-		return getService().getManageableOrganizations(userId);
-	}
-
 	public static com.liferay.portal.model.Organization getOrganization(
 		long companyId, java.lang.String name)
 		throws com.liferay.portal.PortalException,
@@ -219,6 +214,15 @@ public class OrganizationLocalServiceUtil {
 	public static boolean hasUserOrganization(long userId, long organizationId)
 		throws com.liferay.portal.SystemException {
 		return getService().hasUserOrganization(userId, organizationId);
+	}
+
+	public static boolean hasUserOrganization(long userId, long organizationId,
+		boolean inherited, boolean includeSpecifiedOrganization)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService()
+				   .hasUserOrganization(userId, organizationId, inherited,
+			includeSpecifiedOrganization);
 	}
 
 	public static boolean hasPasswordPolicyOrganization(long passwordPolicyId,

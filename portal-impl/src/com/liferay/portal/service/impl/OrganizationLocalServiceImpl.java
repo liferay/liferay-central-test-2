@@ -51,8 +51,8 @@ import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.comparator.OrganizationNameComparator;
+import com.liferay.portlet.enterpriseadmin.util.EnterpriseAdminUtil;
 import com.liferay.portlet.expando.model.ExpandoBridge;
-import com.liferay.util.UniqueList;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -277,29 +277,6 @@ public class OrganizationLocalServiceImpl
 		return groupPersistence.getOrganizations(groupId);
 	}
 
-	/**
-	 * Gets a list of organizations that a user has access to administrate. This
-	 * includes organizations that a user belongs to and all suborganizations of
-	 * those organizations.
-	 *
-	 * @param		userId the user id of the user
-	 * @return		a list of organizations
-	 */
-	public List<Organization> getManageableOrganizations(long userId)
-		throws SystemException {
-
-		List<Organization> manageableOrganizations =
-			new UniqueList<Organization>();
-
-		List<Organization> userOrganizations = userPersistence.getOrganizations(
-			userId);
-
-		manageableOrganizations.addAll(userOrganizations);
-		manageableOrganizations.addAll(getSuborganizations(userOrganizations));
-
-		return manageableOrganizations;
-	}
-
 	public Organization getOrganization(long organizationId)
 		throws PortalException, SystemException {
 
@@ -422,6 +399,40 @@ public class OrganizationLocalServiceImpl
 		throws SystemException {
 
 		return userPersistence.containsOrganization(userId, organizationId);
+	}
+
+	public boolean hasUserOrganization(
+			long userId, long organizationId, boolean inherited,
+			boolean includeSpecifiedOrganization)
+		throws PortalException, SystemException {
+
+		if (inherited) {
+			LinkedHashMap<String, Object> params =
+				new LinkedHashMap<String, Object>();
+
+			Long[][] leftAndRightOrganizationIds =
+				EnterpriseAdminUtil.getLeftAndRightOrganizationIds(
+					organizationId);
+
+			if (!includeSpecifiedOrganization) {
+				leftAndRightOrganizationIds[0][0] =
+					leftAndRightOrganizationIds[0][0].longValue() + 1;
+			}
+
+			params.put("usersOrgsTree", leftAndRightOrganizationIds);
+
+			int count = userFinder.countByUser(userId, params);
+
+			if (count > 0) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+		else {
+			return userPersistence.containsOrganization(userId, organizationId);
+		}
 	}
 
 	public boolean hasPasswordPolicyOrganization(

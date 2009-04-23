@@ -24,7 +24,7 @@ package com.liferay.portal.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.model.Address;
 import com.liferay.portal.model.EmailAddress;
 import com.liferay.portal.model.OrgLabor;
@@ -41,10 +41,10 @@ import com.liferay.portal.service.permission.GroupPermissionUtil;
 import com.liferay.portal.service.permission.OrganizationPermissionUtil;
 import com.liferay.portal.service.permission.PasswordPolicyPermissionUtil;
 import com.liferay.portal.service.permission.PortalPermissionUtil;
-import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.enterpriseadmin.util.EnterpriseAdminUtil;
-import com.liferay.util.UniqueList;
 
+import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 /**
@@ -154,14 +154,7 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 	}
 
 	public List<Organization> getManageableOrganizations(
-			long userId, String actionId)
-		throws PortalException, SystemException {
-
-		return getManageableOrganizations(userId, actionId, true);
-	}
-
-	public List<Organization> getManageableOrganizations(
-			long userId, String actionId, boolean recurse)
+			String actionId, int max)
 		throws PortalException, SystemException {
 
 		PermissionChecker permissionChecker = getPermissionChecker();
@@ -170,34 +163,38 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 			return organizationLocalService.search(
 				permissionChecker.getCompanyId(),
 				OrganizationConstants.ANY_PARENT_ORGANIZATION_ID, null, null,
-				null, null, null, 0,
-				PropsValues.CONTROL_PANEL_NAVIGATION_MAX_ORGANIZATIONS);
+				null, null, null, 0, max);
 		}
 
-		if (Validator.isNull(actionId)) {
-			return organizationLocalService.getManageableOrganizations(userId);
-		}
+		LinkedHashMap params = new LinkedHashMap();
+
+		List<Organization> userOrganizations =
+			organizationLocalService.getUserOrganizations(
+				permissionChecker.getUserId());
+
+		Long[][] leftAndRightOrganizationIds =
+			EnterpriseAdminUtil.getLeftAndRightOrganizationIds(
+				userOrganizations);
+
+		params.put("organizationsTree", leftAndRightOrganizationIds);
 
 		List<Organization> manageableOrganizations =
-			new UniqueList<Organization>();
+			organizationLocalService.search(
+				permissionChecker.getCompanyId(),
+				OrganizationConstants.ANY_PARENT_ORGANIZATION_ID, null, null,
+				null, null, params, 0, max);
 
-		List<Organization> userOrganizations = userPersistence.getOrganizations(
-			userId);
+		manageableOrganizations = ListUtil.copy(manageableOrganizations);
 
-		for (Organization userOrganization : userOrganizations) {
-			if (OrganizationPermissionUtil.contains(
-					permissionChecker, userOrganization.getOrganizationId(),
-					actionId)) {
+		Iterator<Organization> itr = manageableOrganizations.iterator();
 
-				manageableOrganizations.add(userOrganization);
-			}
+		while (itr.hasNext()) {
+			Organization organization = itr.next();
 
-			if (recurse && OrganizationPermissionUtil.contains(
-					permissionChecker, userOrganization.getOrganizationId(),
-					ActionKeys.MANAGE_SUBORGANIZATIONS)) {
+			if (!OrganizationPermissionUtil.contains(
+					permissionChecker, organization, actionId)) {
 
-				manageableOrganizations.addAll(
-					userOrganization.getDescendants());
+				itr.remove();
 			}
 		}
 

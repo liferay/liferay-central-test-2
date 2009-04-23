@@ -37,7 +37,7 @@ String toolbarItem = ParamUtil.getString(request, "toolbarItem", "view-all");
 		<a href="<%= viewOrganizationsURL %>"><liferay-ui:message key="view-all" /></a>
 	</span>
 
-	<c:if test="<%= PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_ORGANIZATION) || !OrganizationServiceUtil.getManageableOrganizations(permissionChecker.getUserId(), ActionKeys.MANAGE_SUBORGANIZATIONS).isEmpty() %>">
+	<c:if test="<%= PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_ORGANIZATION) %>">
 		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="addOrganizationURL">
 			<portlet:param name="struts_action" value="/enterprise_admin/edit_organization" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />

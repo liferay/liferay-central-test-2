@@ -836,15 +836,39 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 		}
 
 		List<Organization> organizations =
-			organizationService.getManageableOrganizations(
-				getUserId(), ActionKeys.MANAGE_USERS);
+			organizationLocalService.getUserOrganizations(
+				permissionChecker.getUserId());
 
 		for (long userId : userIds) {
 			boolean allowed = false;
 
 			for (Organization organization : organizations) {
-				if (userLocalService.hasOrganizationUser(
-						organization.getOrganizationId(), userId)) {
+				boolean manageUsers = OrganizationPermissionUtil.contains(
+					permissionChecker, organization, ActionKeys.MANAGE_USERS);
+				boolean manageSuborganizations =
+					OrganizationPermissionUtil.contains(
+						permissionChecker, organization,
+						ActionKeys.MANAGE_SUBORGANIZATIONS);
+
+				if (!manageUsers && !manageSuborganizations) {
+					continue;
+				}
+
+				boolean inherited = false;
+				boolean includeSpecifiedOrganization = false;
+
+				if (manageUsers && manageSuborganizations) {
+					inherited = true;
+					includeSpecifiedOrganization = true;
+				}
+				else if (!manageUsers && manageSuborganizations) {
+					inherited = true;
+					includeSpecifiedOrganization = false;
+				}
+
+				if (organizationLocalService.hasUserOrganization(
+						userId, organization.getOrganizationId(), inherited,
+						includeSpecifiedOrganization)) {
 
 					allowed = true;
 

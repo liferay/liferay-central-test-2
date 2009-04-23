@@ -22,15 +22,9 @@
 
 package com.liferay.portlet.enterpriseadmin;
 
-import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.Portlet;
-import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
-import com.liferay.portal.service.OrganizationLocalServiceUtil;
-import com.liferay.portal.service.permission.OrganizationPermissionUtil;
 import com.liferay.portlet.BaseControlPanelEntry;
-
-import java.util.List;
 
 /**
  * <a href="UsersControlPanelEntry.java.html"><b><i>View Source</i></b></a>
@@ -44,33 +38,7 @@ public class UsersControlPanelEntry extends BaseControlPanelEntry {
 			PermissionChecker permissionChecker, Portlet portlet)
 		throws Exception {
 
-		List<Organization> organizations =
-			OrganizationLocalServiceUtil.getManageableOrganizations(
-				permissionChecker.getUserId());
-
-		for (Organization organization : organizations) {
-			if (permissionChecker.isCommunityAdmin(
-					organization.getGroup().getGroupId())) {
-
-				return true;
-			}
-
-			if (OrganizationPermissionUtil.contains(
-					permissionChecker, organization.getOrganizationId(),
-					ActionKeys.MANAGE_USERS)) {
-
-				return true;
-			}
-
-			if (OrganizationPermissionUtil.contains(
-					permissionChecker, organization.getOrganizationId(),
-					ActionKeys.MANAGE_SUBORGANIZATIONS)) {
-
-				return true;
-			}
-		}
-
-		return false;
+		return true;
 	}
 
 }

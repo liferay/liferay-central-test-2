@@ -884,6 +884,26 @@ public class OrganizationFinderImpl
 		else if (key.equals("organizationsRoles")) {
 			join = CustomSQLUtil.get(JOIN_BY_ORGANIZATIONS_ROLES);
 		}
+		else if (key.equals("organizationsTree")) {
+			Long[][] leftAndRightOrganizationIds = (Long[][])value;
+
+			StringBuilder sb = new StringBuilder();
+
+			sb.append("WHERE (");
+
+			for (int i = 0; i < leftAndRightOrganizationIds.length; i++) {
+				sb.append(
+					"(Organization_.leftOrganizationId BETWEEN ? AND ?) ");
+
+				if ((i + 1) < leftAndRightOrganizationIds.length) {
+					sb.append("OR ");
+				}
+			}
+
+			sb.append(")");
+
+			join = sb.toString();
+		}
 		else if (key.equals("organizationsUsers")) {
 			join = CustomSQLUtil.get(JOIN_BY_ORGANIZATIONS_USERS);
 		}
@@ -935,6 +955,15 @@ public class OrganizationFinderImpl
 					for (int i = 0; i < valueArray.length; i++) {
 						if (Validator.isNotNull(valueArray[i])) {
 							qPos.add(valueArray[i]);
+						}
+					}
+				}
+				else if (value instanceof Long[][]) {
+					Long[][] valueDoubleArray = (Long[][])value;
+
+					for (Long[] valueArray : valueDoubleArray) {
+						for (Long valueLong : valueArray) {
+							qPos.add(valueLong);
 						}
 					}
 				}

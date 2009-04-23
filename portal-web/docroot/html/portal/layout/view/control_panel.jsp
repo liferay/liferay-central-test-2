@@ -130,8 +130,8 @@ List<Layout> scopeLayouts = new ArrayList<Layout>();
 								<liferay-ui:panel-floating-container id="groupSelectorPanel" trigger=".lfr-group-selector" paging="<%= true %>">
 
 									<%
-									List<Group> manageableGroups = GroupServiceUtil.getManageableGroups(themeDisplay.getUserId(), ActionKeys.MANAGE_LAYOUTS);
-									List<Organization> manageableOrganizations = OrganizationServiceUtil.getManageableOrganizations(themeDisplay.getUserId(), ActionKeys.MANAGE_LAYOUTS);
+									List<Group> manageableGroups = GroupServiceUtil.getManageableGroups(ActionKeys.MANAGE_LAYOUTS, PropsValues.CONTROL_PANEL_NAVIGATION_MAX_COMMUNITIES);
+									List<Organization> manageableOrganizations = OrganizationServiceUtil.getManageableOrganizations(ActionKeys.MANAGE_LAYOUTS, PropsValues.CONTROL_PANEL_NAVIGATION_MAX_ORGANIZATIONS);
 									%>
 
 									<c:if test="<%= !manageableGroups.isEmpty() %>">
@@ -159,6 +159,7 @@ List<Layout> scopeLayouts = new ArrayList<Layout>();
 											</ul>
 										</liferay-ui:panel>
 									</c:if>
+
 									<c:if test="<%= !manageableOrganizations.isEmpty() %>">
 										<liferay-ui:panel id="organizationsPanel" title='<%= LanguageUtil.get(pageContext, "organizations") %>' collapsible="<%= true %>" persistState="<%= true %>" extended="<%= true %>">
 											<ul>

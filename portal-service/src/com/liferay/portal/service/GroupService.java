@@ -88,7 +88,7 @@ public interface GroupService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Group> getManageableGroups(
-		long userId, java.lang.String actionId)
+		java.lang.String actionId, int max)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 

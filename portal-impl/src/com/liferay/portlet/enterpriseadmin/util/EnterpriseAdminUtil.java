@@ -54,6 +54,7 @@ import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.AddressServiceUtil;
 import com.liferay.portal.service.EmailAddressServiceUtil;
 import com.liferay.portal.service.OrgLaborServiceUtil;
+import com.liferay.portal.service.OrganizationLocalServiceUtil;
 import com.liferay.portal.service.PhoneServiceUtil;
 import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
@@ -445,6 +446,44 @@ public class EnterpriseAdminUtil {
 		}
 
 		return orderByComparator;
+	}
+
+	public static Long[][] getLeftAndRightOrganizationIds(long organizationId)
+		throws PortalException, SystemException {
+
+		Organization organization =
+			OrganizationLocalServiceUtil.getOrganization(organizationId);
+
+		return getLeftAndRightOrganizationIds(organization);
+	}
+
+	public static Long[][] getLeftAndRightOrganizationIds(
+		Organization organization) {
+
+		return new Long[][] {
+			new Long[] {
+				organization.getLeftOrganizationId(),
+				organization.getRightOrganizationId()
+			}
+		};
+	}
+
+	public static Long[][] getLeftAndRightOrganizationIds(
+		List<Organization> organizations) {
+
+		Long[][] leftAndRightOrganizationIds = new Long[organizations.size()][];
+
+		for (int i = 0; i < organizations.size(); i++) {
+			Organization organization = organizations.get(i);
+
+			leftAndRightOrganizationIds[i] =
+				new Long[] {
+					organization.getLeftOrganizationId(),
+					organization.getRightOrganizationId()
+				};
+		}
+
+		return leftAndRightOrganizationIds;
 	}
 
 	public static Long[] getOrganizationIds(List<Organization> organizations) {

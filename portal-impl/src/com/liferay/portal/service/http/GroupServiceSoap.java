@@ -166,10 +166,10 @@ public class GroupServiceSoap {
 	}
 
 	public static com.liferay.portal.model.GroupSoap[] getManageableGroups(
-		long userId, java.lang.String actionId) throws RemoteException {
+		java.lang.String actionId, int max) throws RemoteException {
 		try {
-			java.util.List<com.liferay.portal.model.Group> returnValue = GroupServiceUtil.getManageableGroups(userId,
-					actionId);
+			java.util.List<com.liferay.portal.model.Group> returnValue = GroupServiceUtil.getManageableGroups(actionId,
+					max);
 
 			return com.liferay.portal.model.GroupSoap.toSoapModels(returnValue);
 		}

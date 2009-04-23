@@ -173,13 +173,6 @@ public class GroupLocalServiceUtil {
 		return getService().getLayoutGroup(companyId, plid);
 	}
 
-	public static java.util.List<com.liferay.portal.model.Group> getManageableGroups(
-		long userId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return getService().getManageableGroups(userId);
-	}
-
 	public static java.util.List<com.liferay.portal.model.Group> getNoLayoutsGroups(
 		java.lang.String className, boolean privateLayout, int start, int end)
 		throws com.liferay.portal.SystemException {

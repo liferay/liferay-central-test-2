@@ -128,10 +128,6 @@ public interface OrganizationLocalService {
 		long groupId) throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.liferay.portal.model.Organization> getManageableOrganizations(
-		long userId) throws com.liferay.portal.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.Organization getOrganization(
 		long companyId, java.lang.String name)
 		throws com.liferay.portal.PortalException,
@@ -183,6 +179,12 @@ public interface OrganizationLocalService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public boolean hasUserOrganization(long userId, long organizationId)
 		throws com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public boolean hasUserOrganization(long userId, long organizationId,
+		boolean inherited, boolean includeSpecifiedOrganization)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public boolean hasPasswordPolicyOrganization(long passwordPolicyId,

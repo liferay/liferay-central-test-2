@@ -37,7 +37,7 @@ String toolbarItem = ParamUtil.getString(request, "toolbarItem", "view-all");
 		<a href="<%= viewUsersURL %>"><liferay-ui:message key="view-all" /></a>
 	</span>
 
-	<c:if test="<%= PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_USER) || !OrganizationServiceUtil.getManageableOrganizations(permissionChecker.getUserId(), ActionKeys.MANAGE_USERS).isEmpty() %>">
+	<c:if test="<%= PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_USER) %>">
 		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="addUserURL">
 			<portlet:param name="struts_action" value="/enterprise_admin/edit_user" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />

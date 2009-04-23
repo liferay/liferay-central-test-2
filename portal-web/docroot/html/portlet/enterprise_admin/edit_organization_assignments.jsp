@@ -92,16 +92,9 @@ portletURL.setParameter("organizationId", String.valueOf(organization.getOrganiz
 		userParams.put("usersOrgs", new Long(organization.getOrganizationId()));
 	}
 	else if (PropsValues.ORGANIZATIONS_ASSIGNMENT_STRICT && !permissionChecker.isCompanyAdmin()) {
-		List<Organization> manageableOrganizations = OrganizationLocalServiceUtil.getManageableOrganizations(themeDisplay.getUserId());
-		List<Long> manageableOrganizationIds = new ArrayList<Long>();
+		Long[][] leftAndRightOrganizationIds = EnterpriseAdminUtil.getLeftAndRightOrganizationIds(user.getOrganizations());
 
-		for (Organization manageableOrganization : manageableOrganizations) {
-			if (OrganizationPermissionUtil.contains(permissionChecker, manageableOrganization.getOrganizationId(), ActionKeys.MANAGE_USERS)) {
-				manageableOrganizationIds.add(manageableOrganization.getOrganizationId());
-			}
-		}
-
-		userParams.put("usersOrgs", manageableOrganizationIds.toArray(new Long[manageableOrganizationIds.size()]));
+		userParams.put("usersOrgsTree", leftAndRightOrganizationIds);
 	}
 	%>
 

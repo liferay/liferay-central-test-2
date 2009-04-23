@@ -53,6 +53,9 @@ import java.util.Map;
  */
 public class UserFinderImpl extends BasePersistenceImpl implements UserFinder {
 
+	public static String COUNT_BY_USER =
+		UserFinder.class.getName() + ".countByUser";
+
 	public static String COUNT_BY_C_FN_MN_LN_SN_EA_A =
 		UserFinder.class.getName() + ".countByC_FN_MN_LN_SN_EA_A";
 
@@ -77,6 +80,9 @@ public class UserFinderImpl extends BasePersistenceImpl implements UserFinder {
 	public static String JOIN_BY_USERS_ORGS =
 		UserFinder.class.getName() + ".joinByUsersOrgs";
 
+	public static String JOIN_BY_USERS_ORGS_TREE =
+		UserFinder.class.getName() + ".joinByUsersOrgsTree";
+
 	public static String JOIN_BY_USERS_PASSWORD_POLICIES =
 		UserFinder.class.getName() + ".joinByUsersPasswordPolicies";
 
@@ -100,6 +106,48 @@ public class UserFinderImpl extends BasePersistenceImpl implements UserFinder {
 
 	public static String JOIN_BY_SOCIAL_RELATION_TYPE =
 		UserFinder.class.getName() + ".joinBySocialRelationType";
+
+	public int countByUser(long userId, LinkedHashMap<String, Object> params)
+		throws SystemException {
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			String sql = CustomSQLUtil.get(COUNT_BY_USER);
+
+			sql = StringUtil.replace(sql, "[$JOIN$]", getJoin(params));
+			sql = StringUtil.replace(sql, "[$WHERE$]", getWhere(params));
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			setJoin(qPos, params);
+			qPos.add(userId);
+
+			Iterator<Long> itr = q.list().iterator();
+
+			if (itr.hasNext()) {
+				Long count = itr.next();
+
+				if (count != null) {
+					return count.intValue();
+				}
+			}
+
+			return 0;
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
 
 	public int countByKeywords(
 			long companyId, String keywords, Boolean active,
@@ -411,6 +459,9 @@ public class UserFinderImpl extends BasePersistenceImpl implements UserFinder {
 		else if (key.equals("usersOrgs")) {
 			join = CustomSQLUtil.get(JOIN_BY_USERS_ORGS);
 		}
+		else if (key.equals("usersOrgsTree")) {
+			join = CustomSQLUtil.get(JOIN_BY_USERS_ORGS_TREE);
+		}
 		else if (key.equals("usersPasswordPolicies")) {
 			join = CustomSQLUtil.get(JOIN_BY_USERS_PASSWORD_POLICIES);
 		}
@@ -518,6 +569,26 @@ public class UserFinderImpl extends BasePersistenceImpl implements UserFinder {
 				join = sb.toString();
 			}
 		}
+		else if (key.equals("usersOrgsTree")) {
+			Long[][] leftAndRightOrganizationIds = (Long[][])value;
+
+			StringBuilder sb = new StringBuilder();
+
+			sb.append("WHERE (");
+
+			for (int i = 0; i < leftAndRightOrganizationIds.length; i++) {
+				sb.append(
+					"(Organization_.leftOrganizationId BETWEEN ? AND ?) ");
+
+				if ((i + 1) < leftAndRightOrganizationIds.length) {
+					sb.append("OR ");
+				}
+			}
+
+			sb.append(")");
+
+			join = sb.toString();
+		}
 		else if (key.equals("usersPasswordPolicies")) {
 			join = CustomSQLUtil.get(JOIN_BY_USERS_PASSWORD_POLICIES);
 		}
@@ -593,6 +664,15 @@ public class UserFinderImpl extends BasePersistenceImpl implements UserFinder {
 					for (int i = 0; i < valueArray.length; i++) {
 						if (Validator.isNotNull(valueArray[i])) {
 							qPos.add(valueArray[i]);
+						}
+					}
+				}
+				else if (value instanceof Long[][]) {
+					Long[][] valueDoubleArray = (Long[][])value;
+
+					for (Long[] valueArray : valueDoubleArray) {
+						for (Long valueLong : valueArray) {
+							qPos.add(valueLong);
 						}
 					}
 				}

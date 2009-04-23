@@ -24,8 +24,8 @@ package com.liferay.portal.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.MapUtil;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.UserGroup;
@@ -35,7 +35,6 @@ import com.liferay.portal.service.base.GroupServiceBaseImpl;
 import com.liferay.portal.service.permission.GroupPermissionUtil;
 import com.liferay.portal.service.permission.PortalPermissionUtil;
 import com.liferay.portal.service.permission.RolePermissionUtil;
-import com.liferay.portal.util.PropsValues;
 
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -104,37 +103,34 @@ public class GroupServiceImpl extends GroupServiceBaseImpl {
 		return groupLocalService.getGroup(companyId, name);
 	}
 
-	public List<Group> getManageableGroups(long userId, String actionId)
+	public List<Group> getManageableGroups(String actionId, int max)
 		throws PortalException, SystemException {
 
 		PermissionChecker permissionChecker = getPermissionChecker();
 
 		if (permissionChecker.isCompanyAdmin()) {
 			return groupLocalService.search(
-				permissionChecker.getCompanyId(), null, null, null, 0,
-				PropsValues.CONTROL_PANEL_NAVIGATION_MAX_COMMUNITIES);
+				permissionChecker.getCompanyId(), null, null, null, 0, max);
 		}
 
-		List<Group> manageableGroups = groupLocalService.getManageableGroups(
-			userId);
+		List<Group> groups = userPersistence.getGroups(
+			permissionChecker.getUserId(), 0, max);
 
-		if (Validator.isNull(actionId) || permissionChecker.isCompanyAdmin()) {
-			return manageableGroups;
-		}
+		groups = ListUtil.copy(groups);
 
-		Iterator<Group> itr = manageableGroups.iterator();
+		Iterator<Group> itr = groups.iterator();
 
 		while (itr.hasNext()) {
 			Group group = itr.next();
 
 			if (!GroupPermissionUtil.contains(
-					permissionChecker, group.getGroupId(),actionId)) {
+					permissionChecker, group.getGroupId(), actionId)) {
 
 				itr.remove();
 			}
 		}
 
-		return manageableGroups;
+		return groups;
 	}
 
 	public List<Group> getOrganizationsGroups(
