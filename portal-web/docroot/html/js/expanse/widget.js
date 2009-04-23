@@ -9,9 +9,13 @@
 		var widgetConstructor = function(el, options) {
 			this.options = options || {};
 
-			this._super.apply(this, arguments);
+			if (this.initEvents) {
+				this.initEvents();
+			}
 
 			this.configureCallbacks();
+
+			this._super.apply(this, arguments);
 		};
 
 		if (Class.prototype.initialize) {
@@ -31,7 +35,7 @@
 					eventObj = this[i + 'Event'];
 					callback = callbacks[i];
 
-					if (eventObj) {
+					if (eventObj && callback) {
 						eventObj.subscribe(callback);
 					}
 				}
