@@ -68,6 +68,7 @@
 
 		Class.extend = this.extend;
 		Class.implement = this.implement;
+		Class.mixin = this.mixin;
 		Class.prototype = properties;
 
 		Class.prototype.superclass = superclass;
@@ -110,9 +111,13 @@
 		implement: function(properties) {
 			var instance = this;
 
-			for (var property in properties) {
-				instance.prototype[property] = properties[property];
-			}
+			return YAHOO.lang.augmentObject(instance.prototype, properties, true);
+		},
+
+		mixin: function(module, override) {
+			var instance = this;
+
+			return YAHOO.lang.augmentProto(instance, module, override);
 		}
 	};
 
