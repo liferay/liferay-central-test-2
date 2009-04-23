@@ -323,7 +323,7 @@ MultiValueMap mvp = new MultiValueMap();
 		headerNames.add("name");
 		headerNames.add("role");
 		headerNames.add("resource");
-		headerNames.add("action");
+		headerNames.add("actions");
 		headerNames.add("potential-actions");
 		headerNames.add(StringPool.BLANK);
 
