@@ -392,7 +392,14 @@ public class CacheFilter extends BasePortalFilter {
 					cacheResponseData.setAttribute(WebKeys.LAST_PATH, lastPath);
 				}
 
-				if (cacheResponseData.getData().length > 0) {
+				// Cache the result if and only if there is a result and the
+				// request is cacheable. We have to test the cacheability of a
+				// request twice because the user could have been authenticated
+				// after the initial test.
+
+				if ((cacheResponseData.getData().length > 0) &&
+					(isCacheableRequest(request))) {
+
 					CacheUtil.putCacheResponseData(
 						companyId, key, cacheResponseData);
 				}
