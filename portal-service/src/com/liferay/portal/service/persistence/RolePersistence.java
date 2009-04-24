@@ -118,6 +118,36 @@ public interface RolePersistence extends BasePersistence {
 		java.lang.String name, boolean retrieveFromCache)
 		throws com.liferay.portal.SystemException;
 
+	public java.util.List<com.liferay.portal.model.Role> findByT_S(int type,
+		java.lang.String subtype) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portal.model.Role> findByT_S(int type,
+		java.lang.String subtype, int start, int end)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portal.model.Role> findByT_S(int type,
+		java.lang.String subtype, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portal.model.Role findByT_S_First(int type,
+		java.lang.String subtype,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.NoSuchRoleException,
+			com.liferay.portal.SystemException;
+
+	public com.liferay.portal.model.Role findByT_S_Last(int type,
+		java.lang.String subtype,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.NoSuchRoleException,
+			com.liferay.portal.SystemException;
+
+	public com.liferay.portal.model.Role[] findByT_S_PrevAndNext(long roleId,
+		int type, java.lang.String subtype,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.NoSuchRoleException,
+			com.liferay.portal.SystemException;
+
 	public com.liferay.portal.model.Role findByC_C_C(long companyId,
 		long classNameId, long classPK)
 		throws com.liferay.portal.NoSuchRoleException,
@@ -156,6 +186,9 @@ public interface RolePersistence extends BasePersistence {
 		throws com.liferay.portal.NoSuchRoleException,
 			com.liferay.portal.SystemException;
 
+	public void removeByT_S(int type, java.lang.String subtype)
+		throws com.liferay.portal.SystemException;
+
 	public void removeByC_C_C(long companyId, long classNameId, long classPK)
 		throws com.liferay.portal.NoSuchRoleException,
 			com.liferay.portal.SystemException;
@@ -166,6 +199,9 @@ public interface RolePersistence extends BasePersistence {
 		throws com.liferay.portal.SystemException;
 
 	public int countByC_N(long companyId, java.lang.String name)
+		throws com.liferay.portal.SystemException;
+
+	public int countByT_S(int type, java.lang.String subtype)
 		throws com.liferay.portal.SystemException;
 
 	public int countByC_C_C(long companyId, long classNameId, long classPK)

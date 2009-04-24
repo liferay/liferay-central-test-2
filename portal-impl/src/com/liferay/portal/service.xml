@@ -1350,6 +1350,10 @@
 			<finder-column name="companyId" />
 			<finder-column name="name" />
 		</finder>
+		<finder name="T_S" return-type="Collection">
+			<finder-column name="type" />
+			<finder-column name="subtype" />
+		</finder>
 		<finder name="C_C_C" return-type="Role" unique="true">
 			<finder-column name="companyId" />
 			<finder-column name="classNameId" />
