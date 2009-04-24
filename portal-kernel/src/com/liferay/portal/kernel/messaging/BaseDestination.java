@@ -71,7 +71,7 @@ public abstract class BaseDestination implements Destination {
 		statistics.setMaxThreadPoolSize(
 			_threadPoolExecutor.getMaximumPoolSize());
 		statistics.setMinThreadPoolSize(_threadPoolExecutor.getCorePoolSize());
-		statistics.setPendingMessageCount(_threadPoolExecutor.getTaskCount());
+		statistics.setPendingMessageCount(_threadPoolExecutor.getQueue().size());
 		statistics.setSentMessageCount(
 			_threadPoolExecutor.getCompletedTaskCount());
 
