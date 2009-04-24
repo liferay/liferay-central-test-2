@@ -20,39 +20,56 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.upgrade;
+package com.liferay.portal.upgrade.v5_0_0;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.ReleaseInfo;
-import com.liferay.portal.upgrade.v5_0_0.UpgradeImageGallery;
-import com.liferay.portal.upgrade.v5_0_0.UpgradeLayout;
-import com.liferay.portal.upgrade.v5_0_0.UpgradeLayoutSet;
-import com.liferay.portal.upgrade.v5_0_0.UpgradeSchema;
-import com.liferay.portal.upgrade.v5_0_0.UpgradeSoftwareCatalog;
+import com.liferay.portal.kernel.util.LocaleUtil;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.upgrade.UpgradeException;
+import com.liferay.portal.upgrade.UpgradeProcess;
+
+import java.util.Locale;
 
 /**
- * <a href="UpgradeProcess_5_0_0.java.html"><b><i>View Source</i></b></a>
+ * <a href="UpgradeLayout.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
+ * @author Samuel Kong
  *
  */
-public class UpgradeProcess_5_0_0 extends UpgradeProcess {
-
-	public int getThreshold() {
-		return ReleaseInfo.RELEASE_5_0_0_BUILD_NUMBER;
-	}
+public class UpgradeLayout extends UpgradeProcess {
 
 	public void upgrade() throws UpgradeException {
 		_log.info("Upgrading");
 
-		upgrade(UpgradeSchema.class);
-		upgrade(UpgradeImageGallery.class);
-		upgrade(UpgradeLayout.class);
-		upgrade(UpgradeLayoutSet.class);
-		upgrade(UpgradeSoftwareCatalog.class);
+		try {
+			doUpgrade();
+		}
+		catch (Exception e) {
+			throw new UpgradeException(e);
+		}
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(UpgradeProcess_5_0_0.class);
+	protected void doUpgrade() throws Exception {
+		Locale locale = LocaleUtil.getDefault();
+
+		String language =
+			locale.getLanguage() + StringPool.UNDERLINE + locale.getCountry();
+
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("update Layout set typeSettings = replace(replace(replace(");
+		sb.append("typeSettings, 'meta-description=', 'meta-description_");
+		sb.append(language);
+		sb.append("='), 'meta-keywords=', 'meta-keywords_");
+		sb.append(language);
+		sb.append("='), 'meta-robots=', 'meta-robots_");
+		sb.append(language);
+		sb.append("=') where typeSettings like '%meta-description=%'");
+
+		runSQL(sb.toString());
+	}
+
+	private static Log _log = LogFactoryUtil.getLog(UpgradeLayout.class);
 
 }
