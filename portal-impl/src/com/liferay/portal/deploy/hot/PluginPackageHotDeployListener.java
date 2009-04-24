@@ -291,11 +291,14 @@ public class PluginPackageHotDeployListener extends BaseHotDeployListener {
 			serviceBuilderProperties.getProperty("build.number"));
 		long buildDate = GetterUtil.getLong(
 			serviceBuilderProperties.getProperty("build.date"));
+		boolean buildAutoUpgrade = GetterUtil.getBoolean(
+			serviceBuilderProperties.getProperty("build.auto.upgrade"), true);
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Build namespace " + buildNamespace);
 			_log.debug("Build number " + buildNumber);
 			_log.debug("Build date " + buildDate);
+			_log.debug("Build auto upgrade " + buildAutoUpgrade);
 		}
 
 		if (Validator.isNull(buildNamespace)) {
@@ -304,7 +307,7 @@ public class PluginPackageHotDeployListener extends BaseHotDeployListener {
 
 		ServiceComponentLocalServiceUtil.initServiceComponent(
 			servletContext, classLoader, buildNamespace, buildNumber,
-			buildDate);
+			buildDate, buildAutoUpgrade);
 	}
 
 	private static Log _log =

@@ -119,12 +119,12 @@ public class ServiceComponentLocalServiceUtil {
 	public static com.liferay.portal.model.ServiceComponent initServiceComponent(
 		javax.servlet.ServletContext servletContext,
 		java.lang.ClassLoader classLoader, java.lang.String buildNamespace,
-		long buildNumber, long buildDate)
+		long buildNumber, long buildDate, boolean buildAutoUpgrade)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
 				   .initServiceComponent(servletContext, classLoader,
-			buildNamespace, buildNumber, buildDate);
+			buildNamespace, buildNumber, buildDate, buildAutoUpgrade);
 	}
 
 	public static ServiceComponentLocalService getService() {

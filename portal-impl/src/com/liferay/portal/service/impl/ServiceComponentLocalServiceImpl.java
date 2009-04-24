@@ -77,7 +77,8 @@ public class ServiceComponentLocalServiceImpl
 
 	public ServiceComponent initServiceComponent(
 			ServletContext servletContext, ClassLoader classLoader,
-			String buildNamespace, long buildNumber, long buildDate)
+			String buildNamespace, long buildNumber, long buildDate,
+			boolean buildAutoUpgrade)
 		throws PortalException, SystemException {
 
 		try {
@@ -166,7 +167,7 @@ public class ServiceComponentLocalServiceImpl
 			serviceComponentPersistence.update(serviceComponent, false);
 
 			upgradeDB(
-				classLoader, buildNamespace, buildNumber,
+				classLoader, buildNamespace, buildNumber, buildAutoUpgrade,
 				previousServiceComponent, tablesSQL, sequencesSQL, indexesSQL);
 
 			removeOldServiceComponents(buildNamespace);
@@ -253,8 +254,8 @@ public class ServiceComponentLocalServiceImpl
 
 	protected void upgradeDB(
 			ClassLoader classLoader, String buildNamespace, long buildNumber,
-			ServiceComponent previousServiceComponent, String tablesSQL,
-			String sequencesSQL, String indexesSQL)
+			boolean buildAutoUpgrade, ServiceComponent previousServiceComponent,
+			String tablesSQL, String sequencesSQL, String indexesSQL)
 		throws Exception {
 
 		DBUtil dbUtil = DBUtil.getInstance();
@@ -270,7 +271,7 @@ public class ServiceComponentLocalServiceImpl
 			dbUtil.runSQLTemplateString(sequencesSQL, true, false);
 			dbUtil.runSQLTemplateString(indexesSQL, true, false);
 		}
-		else {
+		else if (buildAutoUpgrade) {
 			if (_log.isInfoEnabled()) {
 				_log.info(
 					"Upgrading " + buildNamespace +

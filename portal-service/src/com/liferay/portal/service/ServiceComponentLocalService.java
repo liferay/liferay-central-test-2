@@ -108,7 +108,7 @@ public interface ServiceComponentLocalService {
 	public com.liferay.portal.model.ServiceComponent initServiceComponent(
 		javax.servlet.ServletContext servletContext,
 		java.lang.ClassLoader classLoader, java.lang.String buildNamespace,
-		long buildNumber, long buildDate)
+		long buildNumber, long buildDate, boolean buildAutoUpgrade)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 }
