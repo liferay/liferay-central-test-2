@@ -33,7 +33,6 @@ import com.liferay.portlet.softwarecatalog.model.SCProductScreenshotSoap;
 
 import java.io.Serializable;
 
-import java.lang.StringBuilder;
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
@@ -344,57 +343,6 @@ public class SCProductScreenshotModelImpl extends BaseModelImpl<SCProductScreens
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
-	}
-
-	public String toHtmlString() {
-		StringBuilder sb = new StringBuilder();
-
-		sb.append("<table class=\"lfr-table\">\n");
-
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>productScreenshotId</b></td><td>" +
-			getProductScreenshotId() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>companyId</b></td><td>" +
-			getCompanyId() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>groupId</b></td><td>" +
-			getGroupId() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>productEntryId</b></td><td>" +
-			getProductEntryId() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>thumbnailId</b></td><td>" +
-			getThumbnailId() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>fullImageId</b></td><td>" +
-			getFullImageId() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>priority</b></td><td>" +
-			getPriority() + "</td></tr>\n");
-
-		sb.append("</table>");
-
-		return sb.toString();
-	}
-
-	public String toString() {
-		StringBuilder sb = new StringBuilder();
-
-		sb.append(
-			"com.liferay.portlet.softwarecatalog.model.SCProductScreenshot (");
-
-		sb.append("productScreenshotId: " + getProductScreenshotId() + ", ");
-		sb.append("companyId: " + getCompanyId() + ", ");
-		sb.append("groupId: " + getGroupId() + ", ");
-		sb.append("productEntryId: " + getProductEntryId() + ", ");
-		sb.append("thumbnailId: " + getThumbnailId() + ", ");
-		sb.append("fullImageId: " + getFullImageId() + ", ");
-		sb.append("priority: " + getPriority() + ", ");
-
-		sb.append(")");
-
-		return sb.toString();
 	}
 
 	private long _productScreenshotId;

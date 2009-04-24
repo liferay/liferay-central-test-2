@@ -35,10 +35,6 @@ import com.liferay.portal.util.MaintenanceUtil;
 public abstract class ConvertProcess {
 
 	public void convert() throws ConvertException {
-		if (getPath() != null) {
-			return;
-		}
-
 		try {
 			_log.info("Converting");
 
@@ -52,10 +48,6 @@ public abstract class ConvertProcess {
 		finally {
 			MaintenanceUtil.cancel();
 		}
-	}
-
-	public String getPath() {
-		return null;
 	}
 
 	public abstract String getDescription();

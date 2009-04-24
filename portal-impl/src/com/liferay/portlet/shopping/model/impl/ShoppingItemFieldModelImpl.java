@@ -34,7 +34,6 @@ import com.liferay.portlet.shopping.model.ShoppingItemFieldSoap;
 
 import java.io.Serializable;
 
-import java.lang.StringBuilder;
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
@@ -270,47 +269,6 @@ public class ShoppingItemFieldModelImpl extends BaseModelImpl<ShoppingItemField>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
-	}
-
-	public String toHtmlString() {
-		StringBuilder sb = new StringBuilder();
-
-		sb.append("<table class=\"lfr-table\">\n");
-
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>itemFieldId</b></td><td>" +
-			getItemFieldId() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>itemId</b></td><td>" +
-			getItemId() + "</td></tr>\n");
-		sb.append("<tr><td align=\"right\" valign=\"top\"><b>name</b></td><td>" +
-			getName() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>values</b></td><td>" +
-			getValues() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>description</b></td><td>" +
-			getDescription() + "</td></tr>\n");
-
-		sb.append("</table>");
-
-		return sb.toString();
-	}
-
-	public String toString() {
-		StringBuilder sb = new StringBuilder();
-
-		sb.append("com.liferay.portlet.shopping.model.ShoppingItemField (");
-
-		sb.append("itemFieldId: " + getItemFieldId() + ", ");
-		sb.append("itemId: " + getItemId() + ", ");
-		sb.append("name: " + getName() + ", ");
-		sb.append("values: " + getValues() + ", ");
-		sb.append("description: " + getDescription() + ", ");
-
-		sb.append(")");
-
-		return sb.toString();
 	}
 
 	private long _itemFieldId;

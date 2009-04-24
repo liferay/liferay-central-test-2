@@ -30,7 +30,6 @@ import com.liferay.portal.service.persistence.UserGroupRolePK;
 
 import java.io.Serializable;
 
-import java.lang.StringBuilder;
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
@@ -209,40 +208,6 @@ public class UserGroupRoleModelImpl extends BaseModelImpl<UserGroupRole> {
 
 	public int hashCode() {
 		return getPrimaryKey().hashCode();
-	}
-
-	public String toHtmlString() {
-		StringBuilder sb = new StringBuilder();
-
-		sb.append("<table class=\"lfr-table\">\n");
-
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>userId</b></td><td>" +
-			getUserId() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>groupId</b></td><td>" +
-			getGroupId() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>roleId</b></td><td>" +
-			getRoleId() + "</td></tr>\n");
-
-		sb.append("</table>");
-
-		return sb.toString();
-	}
-
-	public String toString() {
-		StringBuilder sb = new StringBuilder();
-
-		sb.append("com.liferay.portal.model.UserGroupRole (");
-
-		sb.append("userId: " + getUserId() + ", ");
-		sb.append("groupId: " + getGroupId() + ", ");
-		sb.append("roleId: " + getRoleId() + ", ");
-
-		sb.append(")");
-
-		return sb.toString();
 	}
 
 	private long _userId;

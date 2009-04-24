@@ -32,7 +32,6 @@ import com.liferay.portlet.expando.model.ExpandoColumnSoap;
 
 import java.io.Serializable;
 
-import java.lang.StringBuilder;
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
@@ -289,54 +288,6 @@ public class ExpandoColumnModelImpl extends BaseModelImpl<ExpandoColumn> {
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
-	}
-
-	public String toHtmlString() {
-		StringBuilder sb = new StringBuilder();
-
-		sb.append("<table class=\"lfr-table\">\n");
-
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>columnId</b></td><td>" +
-			getColumnId() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>companyId</b></td><td>" +
-			getCompanyId() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>tableId</b></td><td>" +
-			getTableId() + "</td></tr>\n");
-		sb.append("<tr><td align=\"right\" valign=\"top\"><b>name</b></td><td>" +
-			getName() + "</td></tr>\n");
-		sb.append("<tr><td align=\"right\" valign=\"top\"><b>type</b></td><td>" +
-			getType() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>defaultData</b></td><td>" +
-			getDefaultData() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>typeSettings</b></td><td>" +
-			getTypeSettings() + "</td></tr>\n");
-
-		sb.append("</table>");
-
-		return sb.toString();
-	}
-
-	public String toString() {
-		StringBuilder sb = new StringBuilder();
-
-		sb.append("com.liferay.portlet.expando.model.ExpandoColumn (");
-
-		sb.append("columnId: " + getColumnId() + ", ");
-		sb.append("companyId: " + getCompanyId() + ", ");
-		sb.append("tableId: " + getTableId() + ", ");
-		sb.append("name: " + getName() + ", ");
-		sb.append("type: " + getType() + ", ");
-		sb.append("defaultData: " + getDefaultData() + ", ");
-		sb.append("typeSettings: " + getTypeSettings() + ", ");
-
-		sb.append(")");
-
-		return sb.toString();
 	}
 
 	private long _columnId;

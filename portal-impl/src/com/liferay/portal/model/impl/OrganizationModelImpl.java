@@ -33,7 +33,6 @@ import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
 
 import java.io.Serializable;
 
-import java.lang.StringBuilder;
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
@@ -385,74 +384,6 @@ public class OrganizationModelImpl extends BaseModelImpl<Organization> {
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
-	}
-
-	public String toHtmlString() {
-		StringBuilder sb = new StringBuilder();
-
-		sb.append("<table class=\"lfr-table\">\n");
-
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>organizationId</b></td><td>" +
-			getOrganizationId() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>companyId</b></td><td>" +
-			getCompanyId() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>parentOrganizationId</b></td><td>" +
-			getParentOrganizationId() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>leftOrganizationId</b></td><td>" +
-			getLeftOrganizationId() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>rightOrganizationId</b></td><td>" +
-			getRightOrganizationId() + "</td></tr>\n");
-		sb.append("<tr><td align=\"right\" valign=\"top\"><b>name</b></td><td>" +
-			getName() + "</td></tr>\n");
-		sb.append("<tr><td align=\"right\" valign=\"top\"><b>type</b></td><td>" +
-			getType() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>recursable</b></td><td>" +
-			getRecursable() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>regionId</b></td><td>" +
-			getRegionId() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>countryId</b></td><td>" +
-			getCountryId() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>statusId</b></td><td>" +
-			getStatusId() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>comments</b></td><td>" +
-			getComments() + "</td></tr>\n");
-
-		sb.append("</table>");
-
-		return sb.toString();
-	}
-
-	public String toString() {
-		StringBuilder sb = new StringBuilder();
-
-		sb.append("com.liferay.portal.model.Organization (");
-
-		sb.append("organizationId: " + getOrganizationId() + ", ");
-		sb.append("companyId: " + getCompanyId() + ", ");
-		sb.append("parentOrganizationId: " + getParentOrganizationId() + ", ");
-		sb.append("leftOrganizationId: " + getLeftOrganizationId() + ", ");
-		sb.append("rightOrganizationId: " + getRightOrganizationId() + ", ");
-		sb.append("name: " + getName() + ", ");
-		sb.append("type: " + getType() + ", ");
-		sb.append("recursable: " + getRecursable() + ", ");
-		sb.append("regionId: " + getRegionId() + ", ");
-		sb.append("countryId: " + getCountryId() + ", ");
-		sb.append("statusId: " + getStatusId() + ", ");
-		sb.append("comments: " + getComments() + ", ");
-
-		sb.append(")");
-
-		return sb.toString();
 	}
 
 	private long _organizationId;

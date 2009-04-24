@@ -35,7 +35,6 @@ import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
 
 import java.io.Serializable;
 
-import java.lang.StringBuilder;
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
@@ -531,114 +530,6 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent> {
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
-	}
-
-	public String toHtmlString() {
-		StringBuilder sb = new StringBuilder();
-
-		sb.append("<table class=\"lfr-table\">\n");
-
-		sb.append("<tr><td align=\"right\" valign=\"top\"><b>uuid</b></td><td>" +
-			getUuid() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>eventId</b></td><td>" +
-			getEventId() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>groupId</b></td><td>" +
-			getGroupId() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>companyId</b></td><td>" +
-			getCompanyId() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>userId</b></td><td>" +
-			getUserId() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>userName</b></td><td>" +
-			getUserName() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>createDate</b></td><td>" +
-			getCreateDate() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>modifiedDate</b></td><td>" +
-			getModifiedDate() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>title</b></td><td>" +
-			getTitle() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>description</b></td><td>" +
-			getDescription() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>startDate</b></td><td>" +
-			getStartDate() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>endDate</b></td><td>" +
-			getEndDate() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>durationHour</b></td><td>" +
-			getDurationHour() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>durationMinute</b></td><td>" +
-			getDurationMinute() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>allDay</b></td><td>" +
-			getAllDay() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>timeZoneSensitive</b></td><td>" +
-			getTimeZoneSensitive() + "</td></tr>\n");
-		sb.append("<tr><td align=\"right\" valign=\"top\"><b>type</b></td><td>" +
-			getType() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>repeating</b></td><td>" +
-			getRepeating() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>recurrence</b></td><td>" +
-			getRecurrence() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>remindBy</b></td><td>" +
-			getRemindBy() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>firstReminder</b></td><td>" +
-			getFirstReminder() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>secondReminder</b></td><td>" +
-			getSecondReminder() + "</td></tr>\n");
-
-		sb.append("</table>");
-
-		return sb.toString();
-	}
-
-	public String toString() {
-		StringBuilder sb = new StringBuilder();
-
-		sb.append("com.liferay.portlet.calendar.model.CalEvent (");
-
-		sb.append("uuid: " + getUuid() + ", ");
-		sb.append("eventId: " + getEventId() + ", ");
-		sb.append("groupId: " + getGroupId() + ", ");
-		sb.append("companyId: " + getCompanyId() + ", ");
-		sb.append("userId: " + getUserId() + ", ");
-		sb.append("userName: " + getUserName() + ", ");
-		sb.append("createDate: " + getCreateDate() + ", ");
-		sb.append("modifiedDate: " + getModifiedDate() + ", ");
-		sb.append("title: " + getTitle() + ", ");
-		sb.append("description: " + getDescription() + ", ");
-		sb.append("startDate: " + getStartDate() + ", ");
-		sb.append("endDate: " + getEndDate() + ", ");
-		sb.append("durationHour: " + getDurationHour() + ", ");
-		sb.append("durationMinute: " + getDurationMinute() + ", ");
-		sb.append("allDay: " + getAllDay() + ", ");
-		sb.append("timeZoneSensitive: " + getTimeZoneSensitive() + ", ");
-		sb.append("type: " + getType() + ", ");
-		sb.append("repeating: " + getRepeating() + ", ");
-		sb.append("recurrence: " + getRecurrence() + ", ");
-		sb.append("remindBy: " + getRemindBy() + ", ");
-		sb.append("firstReminder: " + getFirstReminder() + ", ");
-		sb.append("secondReminder: " + getSecondReminder() + ", ");
-
-		sb.append(")");
-
-		return sb.toString();
 	}
 
 	private String _uuid;

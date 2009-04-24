@@ -33,7 +33,6 @@ import com.liferay.portlet.shopping.model.ShoppingItemPriceSoap;
 
 import java.io.Serializable;
 
-import java.lang.StringBuilder;
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
@@ -354,68 +353,6 @@ public class ShoppingItemPriceModelImpl extends BaseModelImpl<ShoppingItemPrice>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
-	}
-
-	public String toHtmlString() {
-		StringBuilder sb = new StringBuilder();
-
-		sb.append("<table class=\"lfr-table\">\n");
-
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>itemPriceId</b></td><td>" +
-			getItemPriceId() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>itemId</b></td><td>" +
-			getItemId() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>minQuantity</b></td><td>" +
-			getMinQuantity() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>maxQuantity</b></td><td>" +
-			getMaxQuantity() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>price</b></td><td>" +
-			getPrice() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>discount</b></td><td>" +
-			getDiscount() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>taxable</b></td><td>" +
-			getTaxable() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>shipping</b></td><td>" +
-			getShipping() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>useShippingFormula</b></td><td>" +
-			getUseShippingFormula() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>status</b></td><td>" +
-			getStatus() + "</td></tr>\n");
-
-		sb.append("</table>");
-
-		return sb.toString();
-	}
-
-	public String toString() {
-		StringBuilder sb = new StringBuilder();
-
-		sb.append("com.liferay.portlet.shopping.model.ShoppingItemPrice (");
-
-		sb.append("itemPriceId: " + getItemPriceId() + ", ");
-		sb.append("itemId: " + getItemId() + ", ");
-		sb.append("minQuantity: " + getMinQuantity() + ", ");
-		sb.append("maxQuantity: " + getMaxQuantity() + ", ");
-		sb.append("price: " + getPrice() + ", ");
-		sb.append("discount: " + getDiscount() + ", ");
-		sb.append("taxable: " + getTaxable() + ", ");
-		sb.append("shipping: " + getShipping() + ", ");
-		sb.append("useShippingFormula: " + getUseShippingFormula() + ", ");
-		sb.append("status: " + getStatus() + ", ");
-
-		sb.append(")");
-
-		return sb.toString();
 	}
 
 	private long _itemPriceId;

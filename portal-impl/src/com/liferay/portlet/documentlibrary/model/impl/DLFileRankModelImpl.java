@@ -35,7 +35,6 @@ import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
 
 import java.io.Serializable;
 
-import java.lang.StringBuilder;
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
@@ -324,55 +323,6 @@ public class DLFileRankModelImpl extends BaseModelImpl<DLFileRank> {
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
-	}
-
-	public String toHtmlString() {
-		StringBuilder sb = new StringBuilder();
-
-		sb.append("<table class=\"lfr-table\">\n");
-
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>fileRankId</b></td><td>" +
-			getFileRankId() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>groupId</b></td><td>" +
-			getGroupId() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>companyId</b></td><td>" +
-			getCompanyId() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>userId</b></td><td>" +
-			getUserId() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>createDate</b></td><td>" +
-			getCreateDate() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>folderId</b></td><td>" +
-			getFolderId() + "</td></tr>\n");
-		sb.append("<tr><td align=\"right\" valign=\"top\"><b>name</b></td><td>" +
-			getName() + "</td></tr>\n");
-
-		sb.append("</table>");
-
-		return sb.toString();
-	}
-
-	public String toString() {
-		StringBuilder sb = new StringBuilder();
-
-		sb.append("com.liferay.portlet.documentlibrary.model.DLFileRank (");
-
-		sb.append("fileRankId: " + getFileRankId() + ", ");
-		sb.append("groupId: " + getGroupId() + ", ");
-		sb.append("companyId: " + getCompanyId() + ", ");
-		sb.append("userId: " + getUserId() + ", ");
-		sb.append("createDate: " + getCreateDate() + ", ");
-		sb.append("folderId: " + getFolderId() + ", ");
-		sb.append("name: " + getName() + ", ");
-
-		sb.append(")");
-
-		return sb.toString();
 	}
 
 	private long _fileRankId;

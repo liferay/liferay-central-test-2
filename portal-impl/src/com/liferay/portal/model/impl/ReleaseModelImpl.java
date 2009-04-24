@@ -32,7 +32,6 @@ import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
 
 import java.io.Serializable;
 
-import java.lang.StringBuilder;
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
@@ -273,52 +272,6 @@ public class ReleaseModelImpl extends BaseModelImpl<Release> {
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
-	}
-
-	public String toHtmlString() {
-		StringBuilder sb = new StringBuilder();
-
-		sb.append("<table class=\"lfr-table\">\n");
-
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>releaseId</b></td><td>" +
-			getReleaseId() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>createDate</b></td><td>" +
-			getCreateDate() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>modifiedDate</b></td><td>" +
-			getModifiedDate() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>buildNumber</b></td><td>" +
-			getBuildNumber() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>buildDate</b></td><td>" +
-			getBuildDate() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>verified</b></td><td>" +
-			getVerified() + "</td></tr>\n");
-
-		sb.append("</table>");
-
-		return sb.toString();
-	}
-
-	public String toString() {
-		StringBuilder sb = new StringBuilder();
-
-		sb.append("com.liferay.portal.model.Release (");
-
-		sb.append("releaseId: " + getReleaseId() + ", ");
-		sb.append("createDate: " + getCreateDate() + ", ");
-		sb.append("modifiedDate: " + getModifiedDate() + ", ");
-		sb.append("buildNumber: " + getBuildNumber() + ", ");
-		sb.append("buildDate: " + getBuildDate() + ", ");
-		sb.append("verified: " + getVerified() + ", ");
-
-		sb.append(")");
-
-		return sb.toString();
 	}
 
 	private long _releaseId;

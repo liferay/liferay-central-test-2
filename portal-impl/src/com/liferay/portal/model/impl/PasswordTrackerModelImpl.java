@@ -34,7 +34,6 @@ import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
 
 import java.io.Serializable;
 
-import java.lang.StringBuilder;
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
@@ -261,44 +260,6 @@ public class PasswordTrackerModelImpl extends BaseModelImpl<PasswordTracker> {
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
-	}
-
-	public String toHtmlString() {
-		StringBuilder sb = new StringBuilder();
-
-		sb.append("<table class=\"lfr-table\">\n");
-
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>passwordTrackerId</b></td><td>" +
-			getPasswordTrackerId() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>userId</b></td><td>" +
-			getUserId() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>createDate</b></td><td>" +
-			getCreateDate() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>password</b></td><td>" +
-			getPassword() + "</td></tr>\n");
-
-		sb.append("</table>");
-
-		return sb.toString();
-	}
-
-	public String toString() {
-		StringBuilder sb = new StringBuilder();
-
-		sb.append("com.liferay.portal.model.PasswordTracker (");
-
-		sb.append("passwordTrackerId: " + getPasswordTrackerId() + ", ");
-		sb.append("userId: " + getUserId() + ", ");
-		sb.append("createDate: " + getCreateDate() + ", ");
-		sb.append("password: " + getPassword() + ", ");
-
-		sb.append(")");
-
-		return sb.toString();
 	}
 
 	private long _passwordTrackerId;

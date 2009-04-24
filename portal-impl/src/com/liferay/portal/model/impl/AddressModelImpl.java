@@ -36,7 +36,6 @@ import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
 
 import java.io.Serializable;
 
-import java.lang.StringBuilder;
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
@@ -455,98 +454,6 @@ public class AddressModelImpl extends BaseModelImpl<Address> {
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
-	}
-
-	public String toHtmlString() {
-		StringBuilder sb = new StringBuilder();
-
-		sb.append("<table class=\"lfr-table\">\n");
-
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>addressId</b></td><td>" +
-			getAddressId() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>companyId</b></td><td>" +
-			getCompanyId() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>userId</b></td><td>" +
-			getUserId() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>userName</b></td><td>" +
-			getUserName() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>createDate</b></td><td>" +
-			getCreateDate() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>modifiedDate</b></td><td>" +
-			getModifiedDate() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>classNameId</b></td><td>" +
-			getClassNameId() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>classPK</b></td><td>" +
-			getClassPK() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>street1</b></td><td>" +
-			getStreet1() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>street2</b></td><td>" +
-			getStreet2() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>street3</b></td><td>" +
-			getStreet3() + "</td></tr>\n");
-		sb.append("<tr><td align=\"right\" valign=\"top\"><b>city</b></td><td>" +
-			getCity() + "</td></tr>\n");
-		sb.append("<tr><td align=\"right\" valign=\"top\"><b>zip</b></td><td>" +
-			getZip() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>regionId</b></td><td>" +
-			getRegionId() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>countryId</b></td><td>" +
-			getCountryId() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>typeId</b></td><td>" +
-			getTypeId() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>mailing</b></td><td>" +
-			getMailing() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>primary</b></td><td>" +
-			getPrimary() + "</td></tr>\n");
-
-		sb.append("</table>");
-
-		return sb.toString();
-	}
-
-	public String toString() {
-		StringBuilder sb = new StringBuilder();
-
-		sb.append("com.liferay.portal.model.Address (");
-
-		sb.append("addressId: " + getAddressId() + ", ");
-		sb.append("companyId: " + getCompanyId() + ", ");
-		sb.append("userId: " + getUserId() + ", ");
-		sb.append("userName: " + getUserName() + ", ");
-		sb.append("createDate: " + getCreateDate() + ", ");
-		sb.append("modifiedDate: " + getModifiedDate() + ", ");
-		sb.append("classNameId: " + getClassNameId() + ", ");
-		sb.append("classPK: " + getClassPK() + ", ");
-		sb.append("street1: " + getStreet1() + ", ");
-		sb.append("street2: " + getStreet2() + ", ");
-		sb.append("street3: " + getStreet3() + ", ");
-		sb.append("city: " + getCity() + ", ");
-		sb.append("zip: " + getZip() + ", ");
-		sb.append("regionId: " + getRegionId() + ", ");
-		sb.append("countryId: " + getCountryId() + ", ");
-		sb.append("typeId: " + getTypeId() + ", ");
-		sb.append("mailing: " + getMailing() + ", ");
-		sb.append("primary: " + getPrimary() + ", ");
-
-		sb.append(")");
-
-		return sb.toString();
 	}
 
 	private long _addressId;

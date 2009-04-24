@@ -34,7 +34,6 @@ import com.liferay.portlet.tags.model.TagsSourceSoap;
 
 import java.io.Serializable;
 
-import java.lang.StringBuilder;
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
@@ -242,43 +241,6 @@ public class TagsSourceModelImpl extends BaseModelImpl<TagsSource> {
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
-	}
-
-	public String toHtmlString() {
-		StringBuilder sb = new StringBuilder();
-
-		sb.append("<table class=\"lfr-table\">\n");
-
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>sourceId</b></td><td>" +
-			getSourceId() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>parentSourceId</b></td><td>" +
-			getParentSourceId() + "</td></tr>\n");
-		sb.append("<tr><td align=\"right\" valign=\"top\"><b>name</b></td><td>" +
-			getName() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>acronym</b></td><td>" +
-			getAcronym() + "</td></tr>\n");
-
-		sb.append("</table>");
-
-		return sb.toString();
-	}
-
-	public String toString() {
-		StringBuilder sb = new StringBuilder();
-
-		sb.append("com.liferay.portlet.tags.model.TagsSource (");
-
-		sb.append("sourceId: " + getSourceId() + ", ");
-		sb.append("parentSourceId: " + getParentSourceId() + ", ");
-		sb.append("name: " + getName() + ", ");
-		sb.append("acronym: " + getAcronym() + ", ");
-
-		sb.append(")");
-
-		return sb.toString();
 	}
 
 	private long _sourceId;

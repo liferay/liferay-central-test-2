@@ -35,7 +35,6 @@ import com.liferay.portlet.shopping.model.ShoppingCouponSoap;
 
 import java.io.Serializable;
 
-import java.lang.StringBuilder;
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
@@ -451,98 +450,6 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon> {
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
-	}
-
-	public String toHtmlString() {
-		StringBuilder sb = new StringBuilder();
-
-		sb.append("<table class=\"lfr-table\">\n");
-
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>couponId</b></td><td>" +
-			getCouponId() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>groupId</b></td><td>" +
-			getGroupId() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>companyId</b></td><td>" +
-			getCompanyId() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>userId</b></td><td>" +
-			getUserId() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>userName</b></td><td>" +
-			getUserName() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>createDate</b></td><td>" +
-			getCreateDate() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>modifiedDate</b></td><td>" +
-			getModifiedDate() + "</td></tr>\n");
-		sb.append("<tr><td align=\"right\" valign=\"top\"><b>code</b></td><td>" +
-			getCode() + "</td></tr>\n");
-		sb.append("<tr><td align=\"right\" valign=\"top\"><b>name</b></td><td>" +
-			getName() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>description</b></td><td>" +
-			getDescription() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>startDate</b></td><td>" +
-			getStartDate() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>endDate</b></td><td>" +
-			getEndDate() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>active</b></td><td>" +
-			getActive() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>limitCategories</b></td><td>" +
-			getLimitCategories() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>limitSkus</b></td><td>" +
-			getLimitSkus() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>minOrder</b></td><td>" +
-			getMinOrder() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>discount</b></td><td>" +
-			getDiscount() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>discountType</b></td><td>" +
-			getDiscountType() + "</td></tr>\n");
-
-		sb.append("</table>");
-
-		return sb.toString();
-	}
-
-	public String toString() {
-		StringBuilder sb = new StringBuilder();
-
-		sb.append("com.liferay.portlet.shopping.model.ShoppingCoupon (");
-
-		sb.append("couponId: " + getCouponId() + ", ");
-		sb.append("groupId: " + getGroupId() + ", ");
-		sb.append("companyId: " + getCompanyId() + ", ");
-		sb.append("userId: " + getUserId() + ", ");
-		sb.append("userName: " + getUserName() + ", ");
-		sb.append("createDate: " + getCreateDate() + ", ");
-		sb.append("modifiedDate: " + getModifiedDate() + ", ");
-		sb.append("code: " + getCode() + ", ");
-		sb.append("name: " + getName() + ", ");
-		sb.append("description: " + getDescription() + ", ");
-		sb.append("startDate: " + getStartDate() + ", ");
-		sb.append("endDate: " + getEndDate() + ", ");
-		sb.append("active: " + getActive() + ", ");
-		sb.append("limitCategories: " + getLimitCategories() + ", ");
-		sb.append("limitSkus: " + getLimitSkus() + ", ");
-		sb.append("minOrder: " + getMinOrder() + ", ");
-		sb.append("discount: " + getDiscount() + ", ");
-		sb.append("discountType: " + getDiscountType() + ", ");
-
-		sb.append(")");
-
-		return sb.toString();
 	}
 
 	private long _couponId;

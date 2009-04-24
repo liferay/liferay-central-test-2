@@ -34,7 +34,6 @@ import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
 
 import java.io.Serializable;
 
-import java.lang.StringBuilder;
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
@@ -281,44 +280,6 @@ public class PasswordPolicyRelModelImpl extends BaseModelImpl<PasswordPolicyRel>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
-	}
-
-	public String toHtmlString() {
-		StringBuilder sb = new StringBuilder();
-
-		sb.append("<table class=\"lfr-table\">\n");
-
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>passwordPolicyRelId</b></td><td>" +
-			getPasswordPolicyRelId() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>passwordPolicyId</b></td><td>" +
-			getPasswordPolicyId() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>classNameId</b></td><td>" +
-			getClassNameId() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>classPK</b></td><td>" +
-			getClassPK() + "</td></tr>\n");
-
-		sb.append("</table>");
-
-		return sb.toString();
-	}
-
-	public String toString() {
-		StringBuilder sb = new StringBuilder();
-
-		sb.append("com.liferay.portal.model.PasswordPolicyRel (");
-
-		sb.append("passwordPolicyRelId: " + getPasswordPolicyRelId() + ", ");
-		sb.append("passwordPolicyId: " + getPasswordPolicyId() + ", ");
-		sb.append("classNameId: " + getClassNameId() + ", ");
-		sb.append("classPK: " + getClassPK() + ", ");
-
-		sb.append(")");
-
-		return sb.toString();
 	}
 
 	private long _passwordPolicyRelId;

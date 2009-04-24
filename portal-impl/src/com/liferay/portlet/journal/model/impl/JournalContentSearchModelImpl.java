@@ -34,7 +34,6 @@ import com.liferay.portlet.journal.model.JournalContentSearchSoap;
 
 import java.io.Serializable;
 
-import java.lang.StringBuilder;
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
@@ -336,56 +335,6 @@ public class JournalContentSearchModelImpl extends BaseModelImpl<JournalContentS
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
-	}
-
-	public String toHtmlString() {
-		StringBuilder sb = new StringBuilder();
-
-		sb.append("<table class=\"lfr-table\">\n");
-
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>contentSearchId</b></td><td>" +
-			getContentSearchId() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>groupId</b></td><td>" +
-			getGroupId() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>companyId</b></td><td>" +
-			getCompanyId() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>privateLayout</b></td><td>" +
-			getPrivateLayout() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>layoutId</b></td><td>" +
-			getLayoutId() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>portletId</b></td><td>" +
-			getPortletId() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>articleId</b></td><td>" +
-			getArticleId() + "</td></tr>\n");
-
-		sb.append("</table>");
-
-		return sb.toString();
-	}
-
-	public String toString() {
-		StringBuilder sb = new StringBuilder();
-
-		sb.append("com.liferay.portlet.journal.model.JournalContentSearch (");
-
-		sb.append("contentSearchId: " + getContentSearchId() + ", ");
-		sb.append("groupId: " + getGroupId() + ", ");
-		sb.append("companyId: " + getCompanyId() + ", ");
-		sb.append("privateLayout: " + getPrivateLayout() + ", ");
-		sb.append("layoutId: " + getLayoutId() + ", ");
-		sb.append("portletId: " + getPortletId() + ", ");
-		sb.append("articleId: " + getArticleId() + ", ");
-
-		sb.append(")");
-
-		return sb.toString();
 	}
 
 	private long _contentSearchId;

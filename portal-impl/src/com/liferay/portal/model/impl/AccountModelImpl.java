@@ -33,7 +33,6 @@ import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
 
 import java.io.Serializable;
 
-import java.lang.StringBuilder;
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
@@ -410,89 +409,6 @@ public class AccountModelImpl extends BaseModelImpl<Account> {
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
-	}
-
-	public String toHtmlString() {
-		StringBuilder sb = new StringBuilder();
-
-		sb.append("<table class=\"lfr-table\">\n");
-
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>accountId</b></td><td>" +
-			getAccountId() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>companyId</b></td><td>" +
-			getCompanyId() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>userId</b></td><td>" +
-			getUserId() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>userName</b></td><td>" +
-			getUserName() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>createDate</b></td><td>" +
-			getCreateDate() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>modifiedDate</b></td><td>" +
-			getModifiedDate() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>parentAccountId</b></td><td>" +
-			getParentAccountId() + "</td></tr>\n");
-		sb.append("<tr><td align=\"right\" valign=\"top\"><b>name</b></td><td>" +
-			getName() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>legalName</b></td><td>" +
-			getLegalName() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>legalId</b></td><td>" +
-			getLegalId() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>legalType</b></td><td>" +
-			getLegalType() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>sicCode</b></td><td>" +
-			getSicCode() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>tickerSymbol</b></td><td>" +
-			getTickerSymbol() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>industry</b></td><td>" +
-			getIndustry() + "</td></tr>\n");
-		sb.append("<tr><td align=\"right\" valign=\"top\"><b>type</b></td><td>" +
-			getType() + "</td></tr>\n");
-		sb.append("<tr><td align=\"right\" valign=\"top\"><b>size</b></td><td>" +
-			getSize() + "</td></tr>\n");
-
-		sb.append("</table>");
-
-		return sb.toString();
-	}
-
-	public String toString() {
-		StringBuilder sb = new StringBuilder();
-
-		sb.append("com.liferay.portal.model.Account (");
-
-		sb.append("accountId: " + getAccountId() + ", ");
-		sb.append("companyId: " + getCompanyId() + ", ");
-		sb.append("userId: " + getUserId() + ", ");
-		sb.append("userName: " + getUserName() + ", ");
-		sb.append("createDate: " + getCreateDate() + ", ");
-		sb.append("modifiedDate: " + getModifiedDate() + ", ");
-		sb.append("parentAccountId: " + getParentAccountId() + ", ");
-		sb.append("name: " + getName() + ", ");
-		sb.append("legalName: " + getLegalName() + ", ");
-		sb.append("legalId: " + getLegalId() + ", ");
-		sb.append("legalType: " + getLegalType() + ", ");
-		sb.append("sicCode: " + getSicCode() + ", ");
-		sb.append("tickerSymbol: " + getTickerSymbol() + ", ");
-		sb.append("industry: " + getIndustry() + ", ");
-		sb.append("type: " + getType() + ", ");
-		sb.append("size: " + getSize() + ", ");
-
-		sb.append(")");
-
-		return sb.toString();
 	}
 
 	private long _accountId;

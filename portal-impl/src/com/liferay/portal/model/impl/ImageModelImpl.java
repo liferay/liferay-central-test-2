@@ -33,7 +33,6 @@ import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
 
 import java.io.Serializable;
 
-import java.lang.StringBuilder;
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
@@ -289,53 +288,6 @@ public class ImageModelImpl extends BaseModelImpl<Image> {
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
-	}
-
-	public String toHtmlString() {
-		StringBuilder sb = new StringBuilder();
-
-		sb.append("<table class=\"lfr-table\">\n");
-
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>imageId</b></td><td>" +
-			getImageId() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>modifiedDate</b></td><td>" +
-			getModifiedDate() + "</td></tr>\n");
-		sb.append("<tr><td align=\"right\" valign=\"top\"><b>text</b></td><td>" +
-			getText() + "</td></tr>\n");
-		sb.append("<tr><td align=\"right\" valign=\"top\"><b>type</b></td><td>" +
-			getType() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>height</b></td><td>" +
-			getHeight() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>width</b></td><td>" +
-			getWidth() + "</td></tr>\n");
-		sb.append("<tr><td align=\"right\" valign=\"top\"><b>size</b></td><td>" +
-			getSize() + "</td></tr>\n");
-
-		sb.append("</table>");
-
-		return sb.toString();
-	}
-
-	public String toString() {
-		StringBuilder sb = new StringBuilder();
-
-		sb.append("com.liferay.portal.model.Image (");
-
-		sb.append("imageId: " + getImageId() + ", ");
-		sb.append("modifiedDate: " + getModifiedDate() + ", ");
-		sb.append("text: " + getText() + ", ");
-		sb.append("type: " + getType() + ", ");
-		sb.append("height: " + getHeight() + ", ");
-		sb.append("width: " + getWidth() + ", ");
-		sb.append("size: " + getSize() + ", ");
-
-		sb.append(")");
-
-		return sb.toString();
 	}
 
 	private long _imageId;

@@ -34,7 +34,6 @@ import com.liferay.portlet.shopping.model.ShoppingOrderItemSoap;
 
 import java.io.Serializable;
 
-import java.lang.StringBuilder;
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
@@ -332,66 +331,6 @@ public class ShoppingOrderItemModelImpl extends BaseModelImpl<ShoppingOrderItem>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
-	}
-
-	public String toHtmlString() {
-		StringBuilder sb = new StringBuilder();
-
-		sb.append("<table class=\"lfr-table\">\n");
-
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>orderItemId</b></td><td>" +
-			getOrderItemId() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>orderId</b></td><td>" +
-			getOrderId() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>itemId</b></td><td>" +
-			getItemId() + "</td></tr>\n");
-		sb.append("<tr><td align=\"right\" valign=\"top\"><b>sku</b></td><td>" +
-			getSku() + "</td></tr>\n");
-		sb.append("<tr><td align=\"right\" valign=\"top\"><b>name</b></td><td>" +
-			getName() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>description</b></td><td>" +
-			getDescription() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>properties</b></td><td>" +
-			getProperties() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>price</b></td><td>" +
-			getPrice() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>quantity</b></td><td>" +
-			getQuantity() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>shippedDate</b></td><td>" +
-			getShippedDate() + "</td></tr>\n");
-
-		sb.append("</table>");
-
-		return sb.toString();
-	}
-
-	public String toString() {
-		StringBuilder sb = new StringBuilder();
-
-		sb.append("com.liferay.portlet.shopping.model.ShoppingOrderItem (");
-
-		sb.append("orderItemId: " + getOrderItemId() + ", ");
-		sb.append("orderId: " + getOrderId() + ", ");
-		sb.append("itemId: " + getItemId() + ", ");
-		sb.append("sku: " + getSku() + ", ");
-		sb.append("name: " + getName() + ", ");
-		sb.append("description: " + getDescription() + ", ");
-		sb.append("properties: " + getProperties() + ", ");
-		sb.append("price: " + getPrice() + ", ");
-		sb.append("quantity: " + getQuantity() + ", ");
-		sb.append("shippedDate: " + getShippedDate() + ", ");
-
-		sb.append(")");
-
-		return sb.toString();
 	}
 
 	private long _orderItemId;

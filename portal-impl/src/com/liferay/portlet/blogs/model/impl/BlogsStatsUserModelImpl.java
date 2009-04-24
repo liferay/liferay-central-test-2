@@ -33,7 +33,6 @@ import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
 
 import java.io.Serializable;
 
-import java.lang.StringBuilder;
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
@@ -340,64 +339,6 @@ public class BlogsStatsUserModelImpl extends BaseModelImpl<BlogsStatsUser> {
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
-	}
-
-	public String toHtmlString() {
-		StringBuilder sb = new StringBuilder();
-
-		sb.append("<table class=\"lfr-table\">\n");
-
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>statsUserId</b></td><td>" +
-			getStatsUserId() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>groupId</b></td><td>" +
-			getGroupId() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>companyId</b></td><td>" +
-			getCompanyId() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>userId</b></td><td>" +
-			getUserId() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>entryCount</b></td><td>" +
-			getEntryCount() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>lastPostDate</b></td><td>" +
-			getLastPostDate() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>ratingsTotalEntries</b></td><td>" +
-			getRatingsTotalEntries() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>ratingsTotalScore</b></td><td>" +
-			getRatingsTotalScore() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>ratingsAverageScore</b></td><td>" +
-			getRatingsAverageScore() + "</td></tr>\n");
-
-		sb.append("</table>");
-
-		return sb.toString();
-	}
-
-	public String toString() {
-		StringBuilder sb = new StringBuilder();
-
-		sb.append("com.liferay.portlet.blogs.model.BlogsStatsUser (");
-
-		sb.append("statsUserId: " + getStatsUserId() + ", ");
-		sb.append("groupId: " + getGroupId() + ", ");
-		sb.append("companyId: " + getCompanyId() + ", ");
-		sb.append("userId: " + getUserId() + ", ");
-		sb.append("entryCount: " + getEntryCount() + ", ");
-		sb.append("lastPostDate: " + getLastPostDate() + ", ");
-		sb.append("ratingsTotalEntries: " + getRatingsTotalEntries() + ", ");
-		sb.append("ratingsTotalScore: " + getRatingsTotalScore() + ", ");
-		sb.append("ratingsAverageScore: " + getRatingsAverageScore() + ", ");
-
-		sb.append(")");
-
-		return sb.toString();
 	}
 
 	private long _statsUserId;

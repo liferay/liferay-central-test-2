@@ -35,7 +35,6 @@ import com.liferay.portlet.messageboards.model.MBDiscussionSoap;
 
 import java.io.Serializable;
 
-import java.lang.StringBuilder;
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
@@ -281,44 +280,6 @@ public class MBDiscussionModelImpl extends BaseModelImpl<MBDiscussion> {
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
-	}
-
-	public String toHtmlString() {
-		StringBuilder sb = new StringBuilder();
-
-		sb.append("<table class=\"lfr-table\">\n");
-
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>discussionId</b></td><td>" +
-			getDiscussionId() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>classNameId</b></td><td>" +
-			getClassNameId() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>classPK</b></td><td>" +
-			getClassPK() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>threadId</b></td><td>" +
-			getThreadId() + "</td></tr>\n");
-
-		sb.append("</table>");
-
-		return sb.toString();
-	}
-
-	public String toString() {
-		StringBuilder sb = new StringBuilder();
-
-		sb.append("com.liferay.portlet.messageboards.model.MBDiscussion (");
-
-		sb.append("discussionId: " + getDiscussionId() + ", ");
-		sb.append("classNameId: " + getClassNameId() + ", ");
-		sb.append("classPK: " + getClassPK() + ", ");
-		sb.append("threadId: " + getThreadId() + ", ");
-
-		sb.append(")");
-
-		return sb.toString();
 	}
 
 	private long _discussionId;

@@ -33,7 +33,6 @@ import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
 
 import java.io.Serializable;
 
-import java.lang.StringBuilder;
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
@@ -582,112 +581,6 @@ public class LayoutModelImpl extends BaseModelImpl<Layout> {
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
-	}
-
-	public String toHtmlString() {
-		StringBuilder sb = new StringBuilder();
-
-		sb.append("<table class=\"lfr-table\">\n");
-
-		sb.append("<tr><td align=\"right\" valign=\"top\"><b>plid</b></td><td>" +
-			getPlid() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>groupId</b></td><td>" +
-			getGroupId() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>companyId</b></td><td>" +
-			getCompanyId() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>privateLayout</b></td><td>" +
-			getPrivateLayout() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>layoutId</b></td><td>" +
-			getLayoutId() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>parentLayoutId</b></td><td>" +
-			getParentLayoutId() + "</td></tr>\n");
-		sb.append("<tr><td align=\"right\" valign=\"top\"><b>name</b></td><td>" +
-			getName() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>title</b></td><td>" +
-			getTitle() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>description</b></td><td>" +
-			getDescription() + "</td></tr>\n");
-		sb.append("<tr><td align=\"right\" valign=\"top\"><b>type</b></td><td>" +
-			getType() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>typeSettings</b></td><td>" +
-			getTypeSettings() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>hidden</b></td><td>" +
-			getHidden() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>friendlyURL</b></td><td>" +
-			getFriendlyURL() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>iconImage</b></td><td>" +
-			getIconImage() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>iconImageId</b></td><td>" +
-			getIconImageId() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>themeId</b></td><td>" +
-			getThemeId() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>colorSchemeId</b></td><td>" +
-			getColorSchemeId() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>wapThemeId</b></td><td>" +
-			getWapThemeId() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>wapColorSchemeId</b></td><td>" +
-			getWapColorSchemeId() + "</td></tr>\n");
-		sb.append("<tr><td align=\"right\" valign=\"top\"><b>css</b></td><td>" +
-			getCss() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>priority</b></td><td>" +
-			getPriority() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>dlFolderId</b></td><td>" +
-			getDlFolderId() + "</td></tr>\n");
-
-		sb.append("</table>");
-
-		return sb.toString();
-	}
-
-	public String toString() {
-		StringBuilder sb = new StringBuilder();
-
-		sb.append("com.liferay.portal.model.Layout (");
-
-		sb.append("plid: " + getPlid() + ", ");
-		sb.append("groupId: " + getGroupId() + ", ");
-		sb.append("companyId: " + getCompanyId() + ", ");
-		sb.append("privateLayout: " + getPrivateLayout() + ", ");
-		sb.append("layoutId: " + getLayoutId() + ", ");
-		sb.append("parentLayoutId: " + getParentLayoutId() + ", ");
-		sb.append("name: " + getName() + ", ");
-		sb.append("title: " + getTitle() + ", ");
-		sb.append("description: " + getDescription() + ", ");
-		sb.append("type: " + getType() + ", ");
-		sb.append("typeSettings: " + getTypeSettings() + ", ");
-		sb.append("hidden: " + getHidden() + ", ");
-		sb.append("friendlyURL: " + getFriendlyURL() + ", ");
-		sb.append("iconImage: " + getIconImage() + ", ");
-		sb.append("iconImageId: " + getIconImageId() + ", ");
-		sb.append("themeId: " + getThemeId() + ", ");
-		sb.append("colorSchemeId: " + getColorSchemeId() + ", ");
-		sb.append("wapThemeId: " + getWapThemeId() + ", ");
-		sb.append("wapColorSchemeId: " + getWapColorSchemeId() + ", ");
-		sb.append("css: " + getCss() + ", ");
-		sb.append("priority: " + getPriority() + ", ");
-		sb.append("dlFolderId: " + getDlFolderId() + ", ");
-
-		sb.append(")");
-
-		return sb.toString();
 	}
 
 	private long _plid;

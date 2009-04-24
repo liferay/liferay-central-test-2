@@ -34,7 +34,6 @@ import com.liferay.portlet.expando.model.ExpandoValueSoap;
 
 import java.io.Serializable;
 
-import java.lang.StringBuilder;
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
@@ -361,59 +360,6 @@ public class ExpandoValueModelImpl extends BaseModelImpl<ExpandoValue> {
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
-	}
-
-	public String toHtmlString() {
-		StringBuilder sb = new StringBuilder();
-
-		sb.append("<table class=\"lfr-table\">\n");
-
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>valueId</b></td><td>" +
-			getValueId() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>companyId</b></td><td>" +
-			getCompanyId() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>tableId</b></td><td>" +
-			getTableId() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>columnId</b></td><td>" +
-			getColumnId() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>rowId</b></td><td>" +
-			getRowId() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>classNameId</b></td><td>" +
-			getClassNameId() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>classPK</b></td><td>" +
-			getClassPK() + "</td></tr>\n");
-		sb.append("<tr><td align=\"right\" valign=\"top\"><b>data</b></td><td>" +
-			getData() + "</td></tr>\n");
-
-		sb.append("</table>");
-
-		return sb.toString();
-	}
-
-	public String toString() {
-		StringBuilder sb = new StringBuilder();
-
-		sb.append("com.liferay.portlet.expando.model.ExpandoValue (");
-
-		sb.append("valueId: " + getValueId() + ", ");
-		sb.append("companyId: " + getCompanyId() + ", ");
-		sb.append("tableId: " + getTableId() + ", ");
-		sb.append("columnId: " + getColumnId() + ", ");
-		sb.append("rowId: " + getRowId() + ", ");
-		sb.append("classNameId: " + getClassNameId() + ", ");
-		sb.append("classPK: " + getClassPK() + ", ");
-		sb.append("data: " + getData() + ", ");
-
-		sb.append(")");
-
-		return sb.toString();
 	}
 
 	private long _valueId;

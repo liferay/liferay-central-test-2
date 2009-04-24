@@ -36,7 +36,6 @@ import com.liferay.portlet.tags.model.TagsAssetSoap;
 
 import java.io.Serializable;
 
-import java.lang.StringBuilder;
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
@@ -546,119 +545,6 @@ public class TagsAssetModelImpl extends BaseModelImpl<TagsAsset> {
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
-	}
-
-	public String toHtmlString() {
-		StringBuilder sb = new StringBuilder();
-
-		sb.append("<table class=\"lfr-table\">\n");
-
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>assetId</b></td><td>" +
-			getAssetId() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>groupId</b></td><td>" +
-			getGroupId() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>companyId</b></td><td>" +
-			getCompanyId() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>userId</b></td><td>" +
-			getUserId() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>userName</b></td><td>" +
-			getUserName() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>createDate</b></td><td>" +
-			getCreateDate() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>modifiedDate</b></td><td>" +
-			getModifiedDate() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>classNameId</b></td><td>" +
-			getClassNameId() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>classPK</b></td><td>" +
-			getClassPK() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>visible</b></td><td>" +
-			getVisible() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>startDate</b></td><td>" +
-			getStartDate() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>endDate</b></td><td>" +
-			getEndDate() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>publishDate</b></td><td>" +
-			getPublishDate() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>expirationDate</b></td><td>" +
-			getExpirationDate() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>mimeType</b></td><td>" +
-			getMimeType() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>title</b></td><td>" +
-			getTitle() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>description</b></td><td>" +
-			getDescription() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>summary</b></td><td>" +
-			getSummary() + "</td></tr>\n");
-		sb.append("<tr><td align=\"right\" valign=\"top\"><b>url</b></td><td>" +
-			getUrl() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>height</b></td><td>" +
-			getHeight() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>width</b></td><td>" +
-			getWidth() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>priority</b></td><td>" +
-			getPriority() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>viewCount</b></td><td>" +
-			getViewCount() + "</td></tr>\n");
-
-		sb.append("</table>");
-
-		return sb.toString();
-	}
-
-	public String toString() {
-		StringBuilder sb = new StringBuilder();
-
-		sb.append("com.liferay.portlet.tags.model.TagsAsset (");
-
-		sb.append("assetId: " + getAssetId() + ", ");
-		sb.append("groupId: " + getGroupId() + ", ");
-		sb.append("companyId: " + getCompanyId() + ", ");
-		sb.append("userId: " + getUserId() + ", ");
-		sb.append("userName: " + getUserName() + ", ");
-		sb.append("createDate: " + getCreateDate() + ", ");
-		sb.append("modifiedDate: " + getModifiedDate() + ", ");
-		sb.append("classNameId: " + getClassNameId() + ", ");
-		sb.append("classPK: " + getClassPK() + ", ");
-		sb.append("visible: " + getVisible() + ", ");
-		sb.append("startDate: " + getStartDate() + ", ");
-		sb.append("endDate: " + getEndDate() + ", ");
-		sb.append("publishDate: " + getPublishDate() + ", ");
-		sb.append("expirationDate: " + getExpirationDate() + ", ");
-		sb.append("mimeType: " + getMimeType() + ", ");
-		sb.append("title: " + getTitle() + ", ");
-		sb.append("description: " + getDescription() + ", ");
-		sb.append("summary: " + getSummary() + ", ");
-		sb.append("url: " + getUrl() + ", ");
-		sb.append("height: " + getHeight() + ", ");
-		sb.append("width: " + getWidth() + ", ");
-		sb.append("priority: " + getPriority() + ", ");
-		sb.append("viewCount: " + getViewCount() + ", ");
-
-		sb.append(")");
-
-		return sb.toString();
 	}
 
 	private long _assetId;

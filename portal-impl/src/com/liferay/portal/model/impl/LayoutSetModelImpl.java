@@ -33,7 +33,6 @@ import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
 
 import java.io.Serializable;
 
-import java.lang.StringBuilder;
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
@@ -403,78 +402,6 @@ public class LayoutSetModelImpl extends BaseModelImpl<LayoutSet> {
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
-	}
-
-	public String toHtmlString() {
-		StringBuilder sb = new StringBuilder();
-
-		sb.append("<table class=\"lfr-table\">\n");
-
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>layoutSetId</b></td><td>" +
-			getLayoutSetId() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>groupId</b></td><td>" +
-			getGroupId() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>companyId</b></td><td>" +
-			getCompanyId() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>privateLayout</b></td><td>" +
-			getPrivateLayout() + "</td></tr>\n");
-		sb.append("<tr><td align=\"right\" valign=\"top\"><b>logo</b></td><td>" +
-			getLogo() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>logoId</b></td><td>" +
-			getLogoId() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>themeId</b></td><td>" +
-			getThemeId() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>colorSchemeId</b></td><td>" +
-			getColorSchemeId() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>wapThemeId</b></td><td>" +
-			getWapThemeId() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>wapColorSchemeId</b></td><td>" +
-			getWapColorSchemeId() + "</td></tr>\n");
-		sb.append("<tr><td align=\"right\" valign=\"top\"><b>css</b></td><td>" +
-			getCss() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>pageCount</b></td><td>" +
-			getPageCount() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>virtualHost</b></td><td>" +
-			getVirtualHost() + "</td></tr>\n");
-
-		sb.append("</table>");
-
-		return sb.toString();
-	}
-
-	public String toString() {
-		StringBuilder sb = new StringBuilder();
-
-		sb.append("com.liferay.portal.model.LayoutSet (");
-
-		sb.append("layoutSetId: " + getLayoutSetId() + ", ");
-		sb.append("groupId: " + getGroupId() + ", ");
-		sb.append("companyId: " + getCompanyId() + ", ");
-		sb.append("privateLayout: " + getPrivateLayout() + ", ");
-		sb.append("logo: " + getLogo() + ", ");
-		sb.append("logoId: " + getLogoId() + ", ");
-		sb.append("themeId: " + getThemeId() + ", ");
-		sb.append("colorSchemeId: " + getColorSchemeId() + ", ");
-		sb.append("wapThemeId: " + getWapThemeId() + ", ");
-		sb.append("wapColorSchemeId: " + getWapColorSchemeId() + ", ");
-		sb.append("css: " + getCss() + ", ");
-		sb.append("pageCount: " + getPageCount() + ", ");
-		sb.append("virtualHost: " + getVirtualHost() + ", ");
-
-		sb.append(")");
-
-		return sb.toString();
 	}
 
 	private long _layoutSetId;

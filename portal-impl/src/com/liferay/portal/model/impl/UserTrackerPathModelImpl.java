@@ -33,7 +33,6 @@ import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
 
 import java.io.Serializable;
 
-import java.lang.StringBuilder;
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
@@ -243,43 +242,6 @@ public class UserTrackerPathModelImpl extends BaseModelImpl<UserTrackerPath> {
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
-	}
-
-	public String toHtmlString() {
-		StringBuilder sb = new StringBuilder();
-
-		sb.append("<table class=\"lfr-table\">\n");
-
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>userTrackerPathId</b></td><td>" +
-			getUserTrackerPathId() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>userTrackerId</b></td><td>" +
-			getUserTrackerId() + "</td></tr>\n");
-		sb.append("<tr><td align=\"right\" valign=\"top\"><b>path</b></td><td>" +
-			getPath() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>pathDate</b></td><td>" +
-			getPathDate() + "</td></tr>\n");
-
-		sb.append("</table>");
-
-		return sb.toString();
-	}
-
-	public String toString() {
-		StringBuilder sb = new StringBuilder();
-
-		sb.append("com.liferay.portal.model.UserTrackerPath (");
-
-		sb.append("userTrackerPathId: " + getUserTrackerPathId() + ", ");
-		sb.append("userTrackerId: " + getUserTrackerId() + ", ");
-		sb.append("path: " + getPath() + ", ");
-		sb.append("pathDate: " + getPathDate() + ", ");
-
-		sb.append(")");
-
-		return sb.toString();
 	}
 
 	private long _userTrackerPathId;

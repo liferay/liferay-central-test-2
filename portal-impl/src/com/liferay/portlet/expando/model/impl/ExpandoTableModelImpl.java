@@ -34,7 +34,6 @@ import com.liferay.portlet.expando.model.ExpandoTableSoap;
 
 import java.io.Serializable;
 
-import java.lang.StringBuilder;
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
@@ -269,43 +268,6 @@ public class ExpandoTableModelImpl extends BaseModelImpl<ExpandoTable> {
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
-	}
-
-	public String toHtmlString() {
-		StringBuilder sb = new StringBuilder();
-
-		sb.append("<table class=\"lfr-table\">\n");
-
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>tableId</b></td><td>" +
-			getTableId() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>companyId</b></td><td>" +
-			getCompanyId() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>classNameId</b></td><td>" +
-			getClassNameId() + "</td></tr>\n");
-		sb.append("<tr><td align=\"right\" valign=\"top\"><b>name</b></td><td>" +
-			getName() + "</td></tr>\n");
-
-		sb.append("</table>");
-
-		return sb.toString();
-	}
-
-	public String toString() {
-		StringBuilder sb = new StringBuilder();
-
-		sb.append("com.liferay.portlet.expando.model.ExpandoTable (");
-
-		sb.append("tableId: " + getTableId() + ", ");
-		sb.append("companyId: " + getCompanyId() + ", ");
-		sb.append("classNameId: " + getClassNameId() + ", ");
-		sb.append("name: " + getName() + ", ");
-
-		sb.append(")");
-
-		return sb.toString();
 	}
 
 	private long _tableId;

@@ -33,7 +33,6 @@ import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
 
 import java.io.Serializable;
 
-import java.lang.StringBuilder;
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
@@ -331,58 +330,6 @@ public class CompanyModelImpl extends BaseModelImpl<Company> {
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
-	}
-
-	public String toHtmlString() {
-		StringBuilder sb = new StringBuilder();
-
-		sb.append("<table class=\"lfr-table\">\n");
-
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>companyId</b></td><td>" +
-			getCompanyId() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>accountId</b></td><td>" +
-			getAccountId() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>webId</b></td><td>" +
-			getWebId() + "</td></tr>\n");
-		sb.append("<tr><td align=\"right\" valign=\"top\"><b>key</b></td><td>" +
-			getKey() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>virtualHost</b></td><td>" +
-			getVirtualHost() + "</td></tr>\n");
-		sb.append("<tr><td align=\"right\" valign=\"top\"><b>mx</b></td><td>" +
-			getMx() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>homeURL</b></td><td>" +
-			getHomeURL() + "</td></tr>\n");
-		sb.append(
-			"<tr><td align=\"right\" valign=\"top\"><b>logoId</b></td><td>" +
-			getLogoId() + "</td></tr>\n");
-
-		sb.append("</table>");
-
-		return sb.toString();
-	}
-
-	public String toString() {
-		StringBuilder sb = new StringBuilder();
-
-		sb.append("com.liferay.portal.model.Company (");
-
-		sb.append("companyId: " + getCompanyId() + ", ");
-		sb.append("accountId: " + getAccountId() + ", ");
-		sb.append("webId: " + getWebId() + ", ");
-		sb.append("key: " + getKey() + ", ");
-		sb.append("virtualHost: " + getVirtualHost() + ", ");
-		sb.append("mx: " + getMx() + ", ");
-		sb.append("homeURL: " + getHomeURL() + ", ");
-		sb.append("logoId: " + getLogoId() + ", ");
-
-		sb.append(")");
-
-		return sb.toString();
 	}
 
 	private long _companyId;
