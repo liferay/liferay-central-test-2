@@ -179,6 +179,49 @@ public class RoleUtil {
 			retrieveFromCache);
 	}
 
+	public static java.util.List<com.liferay.portal.model.Role> findByT_S(
+		int type, java.lang.String subtype)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByT_S(type, subtype);
+	}
+
+	public static java.util.List<com.liferay.portal.model.Role> findByT_S(
+		int type, java.lang.String subtype, int start, int end)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByT_S(type, subtype, start, end);
+	}
+
+	public static java.util.List<com.liferay.portal.model.Role> findByT_S(
+		int type, java.lang.String subtype, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByT_S(type, subtype, start, end, obc);
+	}
+
+	public static com.liferay.portal.model.Role findByT_S_First(int type,
+		java.lang.String subtype,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.NoSuchRoleException,
+			com.liferay.portal.SystemException {
+		return getPersistence().findByT_S_First(type, subtype, obc);
+	}
+
+	public static com.liferay.portal.model.Role findByT_S_Last(int type,
+		java.lang.String subtype,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.NoSuchRoleException,
+			com.liferay.portal.SystemException {
+		return getPersistence().findByT_S_Last(type, subtype, obc);
+	}
+
+	public static com.liferay.portal.model.Role[] findByT_S_PrevAndNext(
+		long roleId, int type, java.lang.String subtype,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.NoSuchRoleException,
+			com.liferay.portal.SystemException {
+		return getPersistence().findByT_S_PrevAndNext(roleId, type, subtype, obc);
+	}
+
 	public static java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
@@ -225,6 +268,11 @@ public class RoleUtil {
 		getPersistence().removeByC_C_C(companyId, classNameId, classPK);
 	}
 
+	public static void removeByT_S(int type, java.lang.String subtype)
+		throws com.liferay.portal.SystemException {
+		getPersistence().removeByT_S(type, subtype);
+	}
+
 	public static void removeAll() throws com.liferay.portal.SystemException {
 		getPersistence().removeAll();
 	}
@@ -242,6 +290,11 @@ public class RoleUtil {
 	public static int countByC_C_C(long companyId, long classNameId,
 		long classPK) throws com.liferay.portal.SystemException {
 		return getPersistence().countByC_C_C(companyId, classNameId, classPK);
+	}
+
+	public static int countByT_S(int type, java.lang.String subtype)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByT_S(type, subtype);
 	}
 
 	public static int countAll() throws com.liferay.portal.SystemException {

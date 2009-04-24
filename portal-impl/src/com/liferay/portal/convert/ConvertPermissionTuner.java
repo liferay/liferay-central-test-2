@@ -20,38 +20,37 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.model;
+package com.liferay.portal.convert;
 
-import com.liferay.portlet.expando.model.ExpandoBridge;
-
-import java.io.Serializable;
+import com.liferay.portal.util.PropsValues;
 
 /**
- * <a href="BaseModel.java.html"><b><i>View Source</i></b></a>
+ * <a href="ConvertPermissionTuner.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
+ * @author Alexander Chow
  *
  */
-public interface BaseModel<T> extends Cloneable, Comparable<T>, Serializable {
+public class ConvertPermissionTuner extends ConvertProcess {
 
-	public boolean isNew();
+	public String getPath() {
+		return "/admin_server/edit_permissions_algorithm_5";
+	}
 
-	public boolean setNew(boolean n);
+	public String getDescription() {
+		return "fine-tune-generated-roles";
+	}
 
-	public boolean isCachedModel();
+	public boolean isEnabled() {
+		boolean enabled = false;
 
-	public void setCachedModel(boolean cachedModel);
+		if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 5) {
+			enabled = true;
+		}
 
-	public boolean isEscapedModel();
+		return enabled;
+	}
 
-	public void setEscapedModel(boolean escapedModel);
-
-	public Serializable getPrimaryKeyObj();
-
-	public ExpandoBridge getExpandoBridge();
-
-	public Object clone();
-
-	public String toHtmlString();
+	protected void doConvert() throws Exception {
+	}
 
 }

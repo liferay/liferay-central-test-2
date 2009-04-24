@@ -22,6 +22,10 @@
 
 package com.liferay.portal.model.impl;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 
@@ -63,6 +67,72 @@ public abstract class BaseModelImpl<T> implements BaseModel<T> {
 	public ExpandoBridge getExpandoBridge() {
 		throw new UnsupportedOperationException();
 	}
+
+	public String toHtmlString() {
+		try {
+			Field field = getClass().getField("TABLE_COLUMNS");
+
+			Object[][] tableColumns = (Object[][])field.get(this);
+
+			StringBuilder sb = new StringBuilder();
+
+			sb.append("<table class=\"lfr-table\">\n");
+
+			for (Object[] tableColumn : tableColumns) {
+				String column = ((String)tableColumn[0]).replaceAll("_$", "");
+				String getter = "get" + StringUtil.upperCaseFirstLetter(column);
+
+				Method method = getClass().getMethod(getter);
+
+				sb.append("<tr>");
+				sb.append("<td align=\"right\" valign=\"top\">");
+				sb.append("<b>" + column + "</b>");
+				sb.append("</td>");
+				sb.append("<td>");
+				sb.append(method.invoke(this));
+				sb.append("</td>");
+				sb.append("</tr>");
+			}
+
+			sb.append("</table>");
+
+			return sb.toString();
+		}
+		catch (Exception e) {
+		}
+
+		return toString();
+	}
+
+	public String toString() {
+		try {
+			Field field = getClass().getField("TABLE_COLUMNS");
+
+			Object[][] tableColumns = (Object[][])field.get(this);
+
+			StringBuilder sb = new StringBuilder();
+
+			sb.append(getClass().getName() + " (");
+
+			for (Object[] tableColumn : tableColumns) {
+				String column = ((String)tableColumn[0]).replaceAll("_$", "");
+				String getter = "get" + StringUtil.upperCaseFirstLetter(column);
+
+				Method method = getClass().getMethod(getter);
+
+				sb.append(column + ": " + method.invoke(this) + ", ");
+			}
+
+			sb.append(")");
+
+			return sb.toString();
+		}
+		catch (Exception e) {
+		}
+
+		return super.toString();
+	}
+
 
 	public abstract Object clone();
 

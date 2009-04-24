@@ -211,9 +211,11 @@ request.setAttribute("edit_role_permissions.jsp-portletResource", portletResourc
 		portletURL.setParameter(Constants.CMD, Constants.VIEW);
 		%>
 
-		<div class="breadcrumbs">
-			<%= breadcrumbs %>
-		</div>
+		<c:if test="<%= !portletName.equals(PortletKeys.ADMIN_SERVER) %>">
+			<div class="breadcrumbs">
+				<%= breadcrumbs %>
+			</div>
+		</c:if>
 
 		<liferay-ui:success key="permissionDeleted" message="the-permission-was-deleted" />
 		<liferay-ui:success key="permissionsUpdated" message="the-role-permissions-were-updated" />
@@ -419,6 +421,12 @@ request.setAttribute("edit_role_permissions.jsp-portletResource", portletResourc
 		<br /><br />
 
 		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+
+		<c:if test="<%= portletName.equals(PortletKeys.ADMIN_SERVER) %>">
+			<br />
+
+			<input type="button" value="<liferay-ui:message key="back" />" onClick="location.href = '<%= HtmlUtil.escape(ParamUtil.getString(request, "redirect")) %>';" />			</div>
+		</c:if>
 	</c:when>
 	<c:when test="<%= Validator.isNotNull(portletResource) %>">
 		<liferay-ui:error key="missingGroupIdsForAction" message="select-at-least-one-community-for-each-action-with-scope-set-to-communities" />
