@@ -27,14 +27,6 @@
 <%
 String tabs1 = ParamUtil.getString(request, "tabs1", "folders");
 
-String tabs1Names = "folders";
-
-if (themeDisplay.isSignedIn()) {
-	tabs1Names += ",my-images";
-}
-
-tabs1Names += ",recent-images";
-
 IGFolder folder = (IGFolder)request.getAttribute(WebKeys.IMAGE_GALLERY_FOLDER);
 
 long folderId = BeanParamUtil.getLong(folder, request, "folderId", IGFolderImpl.DEFAULT_PARENT_FOLDER_ID);
@@ -57,6 +49,16 @@ List scores = null;
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escape(currentURL) %>" />
 <input name="<portlet:namespace />breadcrumbsFolderId" type="hidden" value="<%= folderId %>" />
 <input name="<portlet:namespace />searchFolderIds" type="hidden" value="<%= folderId %>" />
+
+<%
+String tabs1Names = "folders";
+
+if (themeDisplay.isSignedIn()) {
+	tabs1Names += ",my-images";
+}
+
+tabs1Names += ",recent-images";
+%>
 
 <liferay-ui:tabs
 	names="<%= tabs1Names %>"
