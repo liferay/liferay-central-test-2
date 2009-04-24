@@ -44,6 +44,7 @@ import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.OrganizationLocalServiceUtil;
 import com.liferay.portal.service.PermissionLocalServiceUtil;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
+import com.liferay.portal.service.ResourcePermissionLocalServiceUtil;
 import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.UserGroupLocalServiceUtil;
 import com.liferay.portal.service.permission.PortletPermissionUtil;
@@ -74,6 +75,12 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 
 		if (ownerId == getUserId()) {
 			try {
+				if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
+					return ResourcePermissionLocalServiceUtil.hasResourcePermission(
+						companyId, name, ResourceConstants.SCOPE_INDIVIDUAL,
+						primKey, getOwnerRoleId(), actionId);
+				}
+
 				Resource resource = ResourceLocalServiceUtil.getResource(
 					companyId, name, ResourceConstants.SCOPE_INDIVIDUAL,
 					primKey);
