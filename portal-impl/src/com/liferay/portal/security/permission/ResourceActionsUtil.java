@@ -221,9 +221,7 @@ public class ResourceActionsUtil {
 		return _instance._getPortletNames();
 	}
 
-	public static List<String> getPortletResourceActions(String name)
-		throws SystemException {
-
+	public static List<String> getPortletResourceActions(String name) {
 		return _instance._getPortletResourceActions(name);
 	}
 
@@ -252,8 +250,7 @@ public class ResourceActionsUtil {
 	}
 
 	public static List<String> getResourceActions(
-			String portletResource, String modelResource)
-		throws SystemException {
+		String portletResource, String modelResource) {
 
 		List<String> actions = null;
 
@@ -514,9 +511,7 @@ public class ResourceActionsUtil {
 		return ListUtil.fromCollection(_portletModelResources.keySet());
 	}
 
-	private List<String> _getPortletResourceActions(String name)
-		throws SystemException {
-
+	private List<String> _getPortletResourceActions(String name) {
 		name = PortletConstants.getRootPortletId(name);
 
 		List<String> actions = _getActions(_portletResourceActions, name);

@@ -843,7 +843,7 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 	}
 
 	protected void validate(String name, boolean portletActions)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		List<String> actions = null;
 

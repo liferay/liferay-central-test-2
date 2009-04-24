@@ -166,7 +166,8 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 				null, null, null, 0, max);
 		}
 
-		LinkedHashMap params = new LinkedHashMap();
+		LinkedHashMap<String, Object> params =
+			new LinkedHashMap<String, Object>();
 
 		List<Organization> userOrganizations =
 			organizationLocalService.getUserOrganizations(

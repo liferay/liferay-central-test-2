@@ -25,11 +25,8 @@ package com.liferay.portal.upgrade.v5_0_0;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
-
-import java.util.Locale;
 
 /**
  * <a href="UpgradeLayout.java.html"><b><i>View Source</i></b></a>
@@ -51,20 +48,17 @@ public class UpgradeLayout extends UpgradeProcess {
 	}
 
 	protected void doUpgrade() throws Exception {
-		Locale locale = LocaleUtil.getDefault();
-
-		String language =
-			locale.getLanguage() + StringPool.UNDERLINE + locale.getCountry();
+		String languageId = LocaleUtil.toLanguageId(LocaleUtil.getDefault());
 
 		StringBuilder sb = new StringBuilder();
 
 		sb.append("update Layout set typeSettings = replace(replace(replace(");
 		sb.append("typeSettings, 'meta-description=', 'meta-description_");
-		sb.append(language);
+		sb.append(languageId);
 		sb.append("='), 'meta-keywords=', 'meta-keywords_");
-		sb.append(language);
+		sb.append(languageId);
 		sb.append("='), 'meta-robots=', 'meta-robots_");
-		sb.append(language);
+		sb.append(languageId);
 		sb.append("=') where typeSettings like '%meta-description=%'");
 
 		runSQL(sb.toString());

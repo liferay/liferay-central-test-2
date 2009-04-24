@@ -2452,8 +2452,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl
 		return rightOrganizationId + 1;
 	}
 
-	protected void shrinkTree(Organization organization)
-		throws SystemException {
+	protected void shrinkTree(Organization organization) {
 		long companyId = organization.getCompanyId();
 
 		long leftOrganizationId = organization.getLeftOrganizationId();

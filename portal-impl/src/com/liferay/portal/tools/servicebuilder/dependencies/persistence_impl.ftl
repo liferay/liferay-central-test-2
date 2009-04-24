@@ -2226,7 +2226,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 			return right${pkColumn.methodName} + 1;
 		}
 
-		protected void shrinkTree(${entity.name} ${entity.varName}) throws SystemException {
+		protected void shrinkTree(${entity.name} ${entity.varName}) {
 			long ${scopeColumn.name} = ${entity.varName}.get${scopeColumn.methodName}();
 
 			long left${pkColumn.methodName} = ${entity.varName}.getLeft${pkColumn.methodName}();

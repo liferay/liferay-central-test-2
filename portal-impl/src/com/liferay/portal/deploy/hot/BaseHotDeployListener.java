@@ -77,7 +77,7 @@ public abstract class BaseHotDeployListener implements HotDeployListener {
 
 		for (String className : classNames) {
 			if (className.endsWith(".ClpMessageListener")) {
-				Class clpMessageListenerClass = portletClassLoader.loadClass(
+				Class<?> clpMessageListenerClass = portletClassLoader.loadClass(
 					className);
 
 				MessageListener clpMessageListener =
