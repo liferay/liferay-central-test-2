@@ -46,7 +46,6 @@ import com.liferay.portal.security.permission.PermissionCheckerBag;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.service.base.PermissionLocalServiceBaseImpl;
 import com.liferay.portal.service.persistence.OrgGroupPermissionPK;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.comparator.PermissionComparator;
 
@@ -472,35 +471,6 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 		return false;
 	}
 
-	public void mergePermissions(long fromRoleId, long toRoleId)
-		throws PortalException, SystemException {
-
-		Role fromRole = rolePersistence.findByPrimaryKey(fromRoleId);
-		Role toRole = rolePersistence.findByPrimaryKey(toRoleId);
-
-		if (fromRole.getType() != toRole.getType()) {
-			throw new PortalException("Role types are mismatched");
-		}
-		else if (PortalUtil.isSystemRole(toRole.getName())) {
-			throw new PortalException("Cannot move permissions to system role");
-		}
-		else if (PortalUtil.isSystemRole(fromRole.getName())) {
-			throw new PortalException(
-				"Cannot move permissions from system role");
-		}
-
-		List<Permission> permissions = getRolePermissions(fromRoleId);
-
-		for (Permission permission : permissions) {
-			rolePersistence.addPermission(toRoleId, permission);
-			rolePersistence.removePermission(fromRoleId, permission);
-		}
-
-		roleLocalService.deleteRole(fromRoleId);
-
-		PermissionCacheUtil.clearCache();
-	}
-
 	public void setGroupPermissions(
 			long groupId, String[] actionIds, long resourceId)
 		throws PortalException, SystemException {
@@ -722,21 +692,6 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 		if (resource != null) {
 			Permission permission = permissionPersistence.fetchByA_R(
 				actionId, resource.getResourceId());
-
-			if (permission != null) {
-				rolePersistence.removePermission(roleId, permission);
-			}
-		}
-
-		PermissionCacheUtil.clearCache();
-	}
-
-	public void unsetRolePermissions(long roleId, long[] permissionIds)
-		throws SystemException {
-
-		for (long permissionId : permissionIds) {
-			Permission permission = permissionPersistence.fetchByPrimaryKey(
-				permissionId);
 
 			if (permission != null) {
 				rolePersistence.removePermission(roleId, permission);

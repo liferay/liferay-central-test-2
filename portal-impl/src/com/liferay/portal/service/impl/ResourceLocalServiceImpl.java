@@ -28,8 +28,6 @@ import com.liferay.portal.ResourceActionsException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.Layout;
@@ -46,8 +44,6 @@ import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.service.base.ResourceLocalServiceBaseImpl;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.comparator.ResourceComparator;
-
-import java.lang.reflect.Method;
 
 import java.util.List;
 
@@ -296,56 +292,6 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 
 			return resource.getResourceId();
 		}
-	}
-
-	public BaseModel getModel(Resource resource)
-		throws PortalException, SystemException {
-
-		ResourceCode resourceCode =
-			resourceCodeLocalService.getResourceCode(resource.getCodeId());
-
-		String resourceName = resourceCode.getName();
-
-		if (resourceName.contains(".model.")) {
-			String[] parts = StringUtil.split(resourceName, ".");
-
-			if (parts.length > 2 && parts[parts.length - 2].equals("model")) {
-				parts[parts.length - 2] = "service";
-
-				String serviceName =
-					StringUtil.merge(parts, ".") + "LocalServiceUtil";
-				String methodName = "get" + parts[parts.length - 1];
-
-				Method method = null;
-
-				try {
-					Class serviceUtil = Class.forName(serviceName);
-
-					method = serviceUtil.getMethod(
-						methodName, new Class[] { Long.TYPE });
-				}
-				catch (Exception e) {
-					return null;
-				}
-
-				try {
-					return (BaseModel)method.invoke(
-						null, new Long(resource.getPrimKey()));
-				}
-				catch (Exception e) {
-					Throwable cause = e.getCause();
-
-					if (cause instanceof PortalException) {
-						throw (PortalException)cause;
-					}
-					else if (cause instanceof SystemException) {
-						throw (SystemException)cause;
-					}
-				}
-			}
-		}
-
-		return null;
 	}
 
 	public Resource getResource(long resourceId)

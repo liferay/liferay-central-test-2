@@ -52,6 +52,4 @@ public interface BaseModel<T> extends Cloneable, Comparable<T>, Serializable {
 
 	public Object clone();
 
-	public String toHtmlString();
-
 }

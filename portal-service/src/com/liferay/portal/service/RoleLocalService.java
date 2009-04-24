@@ -146,10 +146,6 @@ public interface RoleLocalService {
 			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.liferay.portal.model.Role> getRoles(int type,
-		java.lang.String subtype) throws com.liferay.portal.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Role> getUserGroupRoles(
 		long userId, long groupId) throws com.liferay.portal.SystemException;
 

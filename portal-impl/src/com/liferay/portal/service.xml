@@ -1355,10 +1355,6 @@
 			<finder-column name="classNameId" />
 			<finder-column name="classPK" />
 		</finder>
-		<finder name="T_S" return-type="Collection">
-			<finder-column name="type" />
-			<finder-column name="subtype" />
-		</finder>
 
 		<!-- References -->
 
@@ -1405,11 +1401,11 @@
 		<column name="shardId" type="long" primary="true" />
 
 		<!-- Other fields -->
-
+		
 		<column name="classNameId" type="long" />
 		<column name="classPK" type="long" />
 		<column name="name" type="String" />
-
+		
 		<!-- Finder methods -->
 
 		<finder name="Name" return-type="Shard">

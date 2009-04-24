@@ -231,12 +231,6 @@ public class PermissionLocalServiceUtil {
 			permissionCheckerBag);
 	}
 
-	public static void mergePermissions(long fromRoleId, long toRoleId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		getService().mergePermissions(fromRoleId, toRoleId);
-	}
-
 	public static void setGroupPermissions(long groupId,
 		java.lang.String[] actionIds, long resourceId)
 		throws com.liferay.portal.PortalException,
@@ -307,11 +301,6 @@ public class PermissionLocalServiceUtil {
 		getService()
 			.unsetRolePermission(roleId, companyId, name, scope, primKey,
 			actionId);
-	}
-
-	public static void unsetRolePermissions(long roleId, long[] permissionIds)
-		throws com.liferay.portal.SystemException {
-		getService().unsetRolePermissions(roleId, permissionIds);
 	}
 
 	public static void unsetRolePermissions(long roleId, long companyId,
