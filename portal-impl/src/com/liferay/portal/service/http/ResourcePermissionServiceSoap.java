@@ -80,12 +80,12 @@ import java.rmi.RemoteException;
  *
  */
 public class ResourcePermissionServiceSoap {
-	public static void setResourcePermission(long roleId, long groupId,
+	public static void addResourcePermission(long groupId, long companyId,
 		java.lang.String name, int scope, java.lang.String primKey,
-		java.lang.String actionId) throws RemoteException {
+		long roleId, java.lang.String actionId) throws RemoteException {
 		try {
-			ResourcePermissionServiceUtil.setResourcePermission(roleId,
-				groupId, name, scope, primKey, actionId);
+			ResourcePermissionServiceUtil.addResourcePermission(groupId,
+				companyId, name, scope, primKey, roleId, actionId);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -94,39 +94,40 @@ public class ResourcePermissionServiceSoap {
 		}
 	}
 
-	public static void setResourcePermissions(long roleId, long groupId,
-		java.lang.String[] actionIds, long resourceId)
+	public static void setIndividualResourcePermissions(long groupId,
+		long companyId, java.lang.String name, java.lang.String primKey,
+		long roleId, java.lang.String[] actionIds) throws RemoteException {
+		try {
+			ResourcePermissionServiceUtil.setIndividualResourcePermissions(groupId,
+				companyId, name, primKey, roleId, actionIds);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void removeResourcePermission(long groupId, long companyId,
+		java.lang.String name, int scope, java.lang.String primKey,
+		long roleId, java.lang.String actionId) throws RemoteException {
+		try {
+			ResourcePermissionServiceUtil.removeResourcePermission(groupId,
+				companyId, name, scope, primKey, roleId, actionId);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void removeResourcePermissions(long groupId, long companyId,
+		java.lang.String name, int scope, long roleId, java.lang.String actionId)
 		throws RemoteException {
 		try {
-			ResourcePermissionServiceUtil.setResourcePermissions(roleId,
-				groupId, actionIds, resourceId);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static void unsetResourcePermission(long roleId, long groupId,
-		long resourceId, java.lang.String actionId) throws RemoteException {
-		try {
-			ResourcePermissionServiceUtil.unsetResourcePermission(roleId,
-				groupId, resourceId, actionId);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static void unsetResourcePermissions(long roleId, long groupId,
-		java.lang.String name, int scope, java.lang.String actionId)
-		throws RemoteException {
-		try {
-			ResourcePermissionServiceUtil.unsetResourcePermissions(roleId,
-				groupId, name, scope, actionId);
+			ResourcePermissionServiceUtil.removeResourcePermissions(groupId,
+				companyId, name, scope, roleId, actionId);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

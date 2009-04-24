@@ -245,10 +245,10 @@ Liferay.Service.registerClass(
 Liferay.Service.registerClass(
 	Liferay.Service.Portal, "ResourcePermission",
 	{
-		setResourcePermission: true,
-		setResourcePermissions: true,
-		unsetResourcePermission: true,
-		unsetResourcePermissions: true
+		addResourcePermission: true,
+		setIndividualResourcePermissions: true,
+		removeResourcePermission: true,
+		removeResourcePermissions: true
 	}
 );
 

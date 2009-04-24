@@ -79,7 +79,8 @@ public interface PermissionService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public boolean hasUserPermissions(long userId, long groupId,
-		java.lang.String actionId, java.lang.String name, long[] resourceIds,
+		java.util.List<com.liferay.portal.model.Resource> resources,
+		java.lang.String actionId,
 		com.liferay.portal.security.permission.PermissionCheckerBag permissionCheckerBag)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;

@@ -49,7 +49,21 @@ package com.liferay.portal.model;
  *
  */
 public interface Resource extends ResourceModel {
+	public long getCompanyId()
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
 	public java.lang.String getName()
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
+
+	public int getScope()
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	public void setCompanyId(long companyId);
+
+	public void setName(java.lang.String name);
+
+	public void setScope(int scope);
 }

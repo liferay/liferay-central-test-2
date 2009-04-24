@@ -48,7 +48,10 @@ create table ResourceAction (
 
 create table ResourcePermission (
 	resourcePermissionId LONG not null primary key,
-	resourceId LONG,
+	companyId LONG,
+	name VARCHAR(255) null,
+	scope INTEGER,
+	primKey VARCHAR(255) null,
 	roleId LONG,
 	actionIds LONG
 );

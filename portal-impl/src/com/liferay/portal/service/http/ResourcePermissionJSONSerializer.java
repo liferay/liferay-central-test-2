@@ -53,7 +53,10 @@ public class ResourcePermissionJSONSerializer {
 		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
 
 		jsonObj.put("resourcePermissionId", model.getResourcePermissionId());
-		jsonObj.put("resourceId", model.getResourceId());
+		jsonObj.put("companyId", model.getCompanyId());
+		jsonObj.put("name", model.getName());
+		jsonObj.put("scope", model.getScope());
+		jsonObj.put("primKey", model.getPrimKey());
 		jsonObj.put("roleId", model.getRoleId());
 		jsonObj.put("actionIds", model.getActionIds());
 

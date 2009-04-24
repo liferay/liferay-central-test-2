@@ -50,7 +50,10 @@ public class ResourcePermissionSoap implements Serializable {
 		ResourcePermissionSoap soapModel = new ResourcePermissionSoap();
 
 		soapModel.setResourcePermissionId(model.getResourcePermissionId());
-		soapModel.setResourceId(model.getResourceId());
+		soapModel.setCompanyId(model.getCompanyId());
+		soapModel.setName(model.getName());
+		soapModel.setScope(model.getScope());
+		soapModel.setPrimKey(model.getPrimKey());
 		soapModel.setRoleId(model.getRoleId());
 		soapModel.setActionIds(model.getActionIds());
 
@@ -87,12 +90,36 @@ public class ResourcePermissionSoap implements Serializable {
 		_resourcePermissionId = resourcePermissionId;
 	}
 
-	public long getResourceId() {
-		return _resourceId;
+	public long getCompanyId() {
+		return _companyId;
 	}
 
-	public void setResourceId(long resourceId) {
-		_resourceId = resourceId;
+	public void setCompanyId(long companyId) {
+		_companyId = companyId;
+	}
+
+	public String getName() {
+		return _name;
+	}
+
+	public void setName(String name) {
+		_name = name;
+	}
+
+	public int getScope() {
+		return _scope;
+	}
+
+	public void setScope(int scope) {
+		_scope = scope;
+	}
+
+	public String getPrimKey() {
+		return _primKey;
+	}
+
+	public void setPrimKey(String primKey) {
+		_primKey = primKey;
 	}
 
 	public long getRoleId() {
@@ -112,7 +139,10 @@ public class ResourcePermissionSoap implements Serializable {
 	}
 
 	private long _resourcePermissionId;
-	private long _resourceId;
+	private long _companyId;
+	private String _name;
+	private int _scope;
+	private String _primKey;
 	private long _roleId;
 	private long _actionIds;
 }

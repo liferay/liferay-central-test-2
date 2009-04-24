@@ -49,4 +49,15 @@ package com.liferay.portal.model;
  *
  */
 public interface Permission extends PermissionModel {
+	public java.lang.String getName();
+
+	public java.lang.String getPrimKey();
+
+	public int getScope();
+
+	public void setName(java.lang.String name);
+
+	public void setPrimKey(java.lang.String primKey);
+
+	public void setScope(int scope);
 }

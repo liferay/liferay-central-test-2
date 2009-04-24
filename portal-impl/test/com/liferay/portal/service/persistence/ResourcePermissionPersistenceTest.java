@@ -70,7 +70,10 @@ public class ResourcePermissionPersistenceTest extends BasePersistenceTestCase {
 
 		ResourcePermission newResourcePermission = _persistence.create(pk);
 
-		newResourcePermission.setResourceId(nextLong());
+		newResourcePermission.setCompanyId(nextLong());
+		newResourcePermission.setName(randomString());
+		newResourcePermission.setScope(nextInt());
+		newResourcePermission.setPrimKey(randomString());
 		newResourcePermission.setRoleId(nextLong());
 		newResourcePermission.setActionIds(nextLong());
 
@@ -80,8 +83,14 @@ public class ResourcePermissionPersistenceTest extends BasePersistenceTestCase {
 
 		assertEquals(existingResourcePermission.getResourcePermissionId(),
 			newResourcePermission.getResourcePermissionId());
-		assertEquals(existingResourcePermission.getResourceId(),
-			newResourcePermission.getResourceId());
+		assertEquals(existingResourcePermission.getCompanyId(),
+			newResourcePermission.getCompanyId());
+		assertEquals(existingResourcePermission.getName(),
+			newResourcePermission.getName());
+		assertEquals(existingResourcePermission.getScope(),
+			newResourcePermission.getScope());
+		assertEquals(existingResourcePermission.getPrimKey(),
+			newResourcePermission.getPrimKey());
 		assertEquals(existingResourcePermission.getRoleId(),
 			newResourcePermission.getRoleId());
 		assertEquals(existingResourcePermission.getActionIds(),
@@ -131,7 +140,10 @@ public class ResourcePermissionPersistenceTest extends BasePersistenceTestCase {
 
 		ResourcePermission resourcePermission = _persistence.create(pk);
 
-		resourcePermission.setResourceId(nextLong());
+		resourcePermission.setCompanyId(nextLong());
+		resourcePermission.setName(randomString());
+		resourcePermission.setScope(nextInt());
+		resourcePermission.setPrimKey(randomString());
 		resourcePermission.setRoleId(nextLong());
 		resourcePermission.setActionIds(nextLong());
 

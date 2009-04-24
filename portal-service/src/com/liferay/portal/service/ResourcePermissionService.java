@@ -54,24 +54,26 @@ import com.liferay.portal.kernel.annotation.Transactional;
 @Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
 	PortalException.class, SystemException.class})
 public interface ResourcePermissionService {
-	public void setResourcePermission(long roleId, long groupId,
+	public void addResourcePermission(long groupId, long companyId,
 		java.lang.String name, int scope, java.lang.String primKey,
-		java.lang.String actionId)
+		long roleId, java.lang.String actionId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public void setResourcePermissions(long roleId, long groupId,
-		java.lang.String[] actionIds, long resourceId)
+	public void setIndividualResourcePermissions(long groupId, long companyId,
+		java.lang.String name, java.lang.String primKey, long roleId,
+		java.lang.String[] actionIds)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public void unsetResourcePermission(long roleId, long groupId,
-		long resourceId, java.lang.String actionId)
+	public void removeResourcePermission(long groupId, long companyId,
+		java.lang.String name, int scope, java.lang.String primKey,
+		long roleId, java.lang.String actionId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public void unsetResourcePermissions(long roleId, long groupId,
-		java.lang.String name, int scope, java.lang.String actionId)
+	public void removeResourcePermissions(long groupId, long companyId,
+		java.lang.String name, int scope, long roleId, java.lang.String actionId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 }

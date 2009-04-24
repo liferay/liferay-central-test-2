@@ -24,6 +24,7 @@ package com.liferay.portal.model.impl;
 
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.ResourcePermission;
 import com.liferay.portal.model.ResourcePermissionSoap;
 
@@ -65,7 +66,16 @@ public class ResourcePermissionModelImpl extends BaseModelImpl<ResourcePermissio
 			{ "resourcePermissionId", new Integer(Types.BIGINT) },
 			
 
-			{ "resourceId", new Integer(Types.BIGINT) },
+			{ "companyId", new Integer(Types.BIGINT) },
+			
+
+			{ "name", new Integer(Types.VARCHAR) },
+			
+
+			{ "scope", new Integer(Types.INTEGER) },
+			
+
+			{ "primKey", new Integer(Types.VARCHAR) },
 			
 
 			{ "roleId", new Integer(Types.BIGINT) },
@@ -73,7 +83,7 @@ public class ResourcePermissionModelImpl extends BaseModelImpl<ResourcePermissio
 
 			{ "actionIds", new Integer(Types.BIGINT) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table ResourcePermission (resourcePermissionId LONG not null primary key,resourceId LONG,roleId LONG,actionIds LONG)";
+	public static final String TABLE_SQL_CREATE = "create table ResourcePermission (resourcePermissionId LONG not null primary key,companyId LONG,name VARCHAR(255) null,scope INTEGER,primKey VARCHAR(255) null,roleId LONG,actionIds LONG)";
 	public static final String TABLE_SQL_DROP = "drop table ResourcePermission";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -89,7 +99,10 @@ public class ResourcePermissionModelImpl extends BaseModelImpl<ResourcePermissio
 		ResourcePermission model = new ResourcePermissionImpl();
 
 		model.setResourcePermissionId(soapModel.getResourcePermissionId());
-		model.setResourceId(soapModel.getResourceId());
+		model.setCompanyId(soapModel.getCompanyId());
+		model.setName(soapModel.getName());
+		model.setScope(soapModel.getScope());
+		model.setPrimKey(soapModel.getPrimKey());
 		model.setRoleId(soapModel.getRoleId());
 		model.setActionIds(soapModel.getActionIds());
 
@@ -133,22 +146,72 @@ public class ResourcePermissionModelImpl extends BaseModelImpl<ResourcePermissio
 		_resourcePermissionId = resourcePermissionId;
 	}
 
-	public long getResourceId() {
-		return _resourceId;
+	public long getCompanyId() {
+		return _companyId;
 	}
 
-	public void setResourceId(long resourceId) {
-		_resourceId = resourceId;
+	public void setCompanyId(long companyId) {
+		_companyId = companyId;
 
-		if (!_setOriginalResourceId) {
-			_setOriginalResourceId = true;
+		if (!_setOriginalCompanyId) {
+			_setOriginalCompanyId = true;
 
-			_originalResourceId = resourceId;
+			_originalCompanyId = companyId;
 		}
 	}
 
-	public long getOriginalResourceId() {
-		return _originalResourceId;
+	public long getOriginalCompanyId() {
+		return _originalCompanyId;
+	}
+
+	public String getName() {
+		return GetterUtil.getString(_name);
+	}
+
+	public void setName(String name) {
+		_name = name;
+
+		if (_originalName == null) {
+			_originalName = name;
+		}
+	}
+
+	public String getOriginalName() {
+		return GetterUtil.getString(_originalName);
+	}
+
+	public int getScope() {
+		return _scope;
+	}
+
+	public void setScope(int scope) {
+		_scope = scope;
+
+		if (!_setOriginalScope) {
+			_setOriginalScope = true;
+
+			_originalScope = scope;
+		}
+	}
+
+	public int getOriginalScope() {
+		return _originalScope;
+	}
+
+	public String getPrimKey() {
+		return GetterUtil.getString(_primKey);
+	}
+
+	public void setPrimKey(String primKey) {
+		_primKey = primKey;
+
+		if (_originalPrimKey == null) {
+			_originalPrimKey = primKey;
+		}
+	}
+
+	public String getOriginalPrimKey() {
+		return GetterUtil.getString(_originalPrimKey);
 	}
 
 	public long getRoleId() {
@@ -188,7 +251,10 @@ public class ResourcePermissionModelImpl extends BaseModelImpl<ResourcePermissio
 			model.setEscapedModel(true);
 
 			model.setResourcePermissionId(getResourcePermissionId());
-			model.setResourceId(getResourceId());
+			model.setCompanyId(getCompanyId());
+			model.setName(HtmlUtil.escape(getName()));
+			model.setScope(getScope());
+			model.setPrimKey(HtmlUtil.escape(getPrimKey()));
 			model.setRoleId(getRoleId());
 			model.setActionIds(getActionIds());
 
@@ -213,7 +279,10 @@ public class ResourcePermissionModelImpl extends BaseModelImpl<ResourcePermissio
 		ResourcePermissionImpl clone = new ResourcePermissionImpl();
 
 		clone.setResourcePermissionId(getResourcePermissionId());
-		clone.setResourceId(getResourceId());
+		clone.setCompanyId(getCompanyId());
+		clone.setName(getName());
+		clone.setScope(getScope());
+		clone.setPrimKey(getPrimKey());
 		clone.setRoleId(getRoleId());
 		clone.setActionIds(getActionIds());
 
@@ -263,9 +332,16 @@ public class ResourcePermissionModelImpl extends BaseModelImpl<ResourcePermissio
 	}
 
 	private long _resourcePermissionId;
-	private long _resourceId;
-	private long _originalResourceId;
-	private boolean _setOriginalResourceId;
+	private long _companyId;
+	private long _originalCompanyId;
+	private boolean _setOriginalCompanyId;
+	private String _name;
+	private String _originalName;
+	private int _scope;
+	private int _originalScope;
+	private boolean _setOriginalScope;
+	private String _primKey;
+	private String _originalPrimKey;
 	private long _roleId;
 	private long _originalRoleId;
 	private boolean _setOriginalRoleId;

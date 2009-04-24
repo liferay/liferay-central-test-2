@@ -147,12 +147,15 @@ public class PermissionServiceSoap {
 	}
 
 	public static boolean hasUserPermissions(long userId, long groupId,
-		java.lang.String actionId, java.lang.String name, long[] resourceIds,
+		com.liferay.portal.model.ResourceSoap[] resources,
+		java.lang.String actionId,
 		com.liferay.portal.security.permission.PermissionCheckerBag permissionCheckerBag)
 		throws RemoteException {
 		try {
 			boolean returnValue = PermissionServiceUtil.hasUserPermissions(userId,
-					groupId, actionId, name, resourceIds, permissionCheckerBag);
+					groupId,
+					com.liferay.portal.model.impl.ResourceModelImpl.toModels(
+						resources), actionId, permissionCheckerBag);
 
 			return returnValue;
 		}

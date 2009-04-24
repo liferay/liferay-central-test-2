@@ -45,38 +45,43 @@ package com.liferay.portal.service;
  *
  */
 public class ResourcePermissionServiceUtil {
-	public static void setResourcePermission(long roleId, long groupId,
+	public static void addResourcePermission(long groupId, long companyId,
 		java.lang.String name, int scope, java.lang.String primKey,
-		java.lang.String actionId)
+		long roleId, java.lang.String actionId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		getService()
-			.setResourcePermission(roleId, groupId, name, scope, primKey,
+			.addResourcePermission(groupId, companyId, name, scope, primKey,
+			roleId, actionId);
+	}
+
+	public static void setIndividualResourcePermissions(long groupId,
+		long companyId, java.lang.String name, java.lang.String primKey,
+		long roleId, java.lang.String[] actionIds)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		getService()
+			.setIndividualResourcePermissions(groupId, companyId, name,
+			primKey, roleId, actionIds);
+	}
+
+	public static void removeResourcePermission(long groupId, long companyId,
+		java.lang.String name, int scope, java.lang.String primKey,
+		long roleId, java.lang.String actionId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		getService()
+			.removeResourcePermission(groupId, companyId, name, scope, primKey,
+			roleId, actionId);
+	}
+
+	public static void removeResourcePermissions(long groupId, long companyId,
+		java.lang.String name, int scope, long roleId, java.lang.String actionId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		getService()
+			.removeResourcePermissions(groupId, companyId, name, scope, roleId,
 			actionId);
-	}
-
-	public static void setResourcePermissions(long roleId, long groupId,
-		java.lang.String[] actionIds, long resourceId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		getService()
-			.setResourcePermissions(roleId, groupId, actionIds, resourceId);
-	}
-
-	public static void unsetResourcePermission(long roleId, long groupId,
-		long resourceId, java.lang.String actionId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		getService()
-			.unsetResourcePermission(roleId, groupId, resourceId, actionId);
-	}
-
-	public static void unsetResourcePermissions(long roleId, long groupId,
-		java.lang.String name, int scope, java.lang.String actionId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		getService()
-			.unsetResourcePermissions(roleId, groupId, name, scope, actionId);
 	}
 
 	public static ResourcePermissionService getService() {

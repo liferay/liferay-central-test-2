@@ -52,9 +52,21 @@ public interface ResourcePermissionModel extends BaseModel<ResourcePermission> {
 
 	public void setResourcePermissionId(long resourcePermissionId);
 
-	public long getResourceId();
+	public long getCompanyId();
 
-	public void setResourceId(long resourceId);
+	public void setCompanyId(long companyId);
+
+	public String getName();
+
+	public void setName(String name);
+
+	public int getScope();
+
+	public void setScope(int scope);
+
+	public String getPrimKey();
+
+	public void setPrimKey(String primKey);
 
 	public long getRoleId();
 

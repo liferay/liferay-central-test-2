@@ -71,15 +71,15 @@ import com.liferay.portal.service.ResourcePermissionServiceUtil;
  *
  */
 public class ResourcePermissionServiceHttp {
-	public static void setResourcePermission(HttpPrincipal httpPrincipal,
-		long roleId, long groupId, java.lang.String name, int scope,
-		java.lang.String primKey, java.lang.String actionId)
+	public static void addResourcePermission(HttpPrincipal httpPrincipal,
+		long groupId, long companyId, java.lang.String name, int scope,
+		java.lang.String primKey, long roleId, java.lang.String actionId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(roleId);
+			Object paramObj0 = new LongWrapper(groupId);
 
-			Object paramObj1 = new LongWrapper(groupId);
+			Object paramObj1 = new LongWrapper(companyId);
 
 			Object paramObj2 = name;
 
@@ -95,14 +95,76 @@ public class ResourcePermissionServiceHttp {
 				paramObj4 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj5 = actionId;
+			Object paramObj5 = new LongWrapper(roleId);
+
+			Object paramObj6 = actionId;
 
 			if (actionId == null) {
-				paramObj5 = new NullWrapper("java.lang.String");
+				paramObj6 = new NullWrapper("java.lang.String");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(ResourcePermissionServiceUtil.class.getName(),
-					"setResourcePermission",
+					"addResourcePermission",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
+						paramObj5, paramObj6
+					});
+
+			try {
+				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static void setIndividualResourcePermissions(
+		HttpPrincipal httpPrincipal, long groupId, long companyId,
+		java.lang.String name, java.lang.String primKey, long roleId,
+		java.lang.String[] actionIds)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		try {
+			Object paramObj0 = new LongWrapper(groupId);
+
+			Object paramObj1 = new LongWrapper(companyId);
+
+			Object paramObj2 = name;
+
+			if (name == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj3 = primKey;
+
+			if (primKey == null) {
+				paramObj3 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj4 = new LongWrapper(roleId);
+
+			Object paramObj5 = actionIds;
+
+			if (actionIds == null) {
+				paramObj5 = new NullWrapper("[Ljava.lang.String;");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(ResourcePermissionServiceUtil.class.getName(),
+					"setIndividualResourcePermissions",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
 						paramObj5
@@ -130,101 +192,15 @@ public class ResourcePermissionServiceHttp {
 		}
 	}
 
-	public static void setResourcePermissions(HttpPrincipal httpPrincipal,
-		long roleId, long groupId, java.lang.String[] actionIds, long resourceId)
+	public static void removeResourcePermission(HttpPrincipal httpPrincipal,
+		long groupId, long companyId, java.lang.String name, int scope,
+		java.lang.String primKey, long roleId, java.lang.String actionId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(roleId);
+			Object paramObj0 = new LongWrapper(groupId);
 
-			Object paramObj1 = new LongWrapper(groupId);
-
-			Object paramObj2 = actionIds;
-
-			if (actionIds == null) {
-				paramObj2 = new NullWrapper("[Ljava.lang.String;");
-			}
-
-			Object paramObj3 = new LongWrapper(resourceId);
-
-			MethodWrapper methodWrapper = new MethodWrapper(ResourcePermissionServiceUtil.class.getName(),
-					"setResourcePermissions",
-					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
-
-			try {
-				TunnelUtil.invoke(httpPrincipal, methodWrapper);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
-				throw new com.liferay.portal.SystemException(e);
-			}
-		}
-		catch (com.liferay.portal.SystemException se) {
-			_log.error(se, se);
-
-			throw se;
-		}
-	}
-
-	public static void unsetResourcePermission(HttpPrincipal httpPrincipal,
-		long roleId, long groupId, long resourceId, java.lang.String actionId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		try {
-			Object paramObj0 = new LongWrapper(roleId);
-
-			Object paramObj1 = new LongWrapper(groupId);
-
-			Object paramObj2 = new LongWrapper(resourceId);
-
-			Object paramObj3 = actionId;
-
-			if (actionId == null) {
-				paramObj3 = new NullWrapper("java.lang.String");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(ResourcePermissionServiceUtil.class.getName(),
-					"unsetResourcePermission",
-					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
-
-			try {
-				TunnelUtil.invoke(httpPrincipal, methodWrapper);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
-				throw new com.liferay.portal.SystemException(e);
-			}
-		}
-		catch (com.liferay.portal.SystemException se) {
-			_log.error(se, se);
-
-			throw se;
-		}
-	}
-
-	public static void unsetResourcePermissions(HttpPrincipal httpPrincipal,
-		long roleId, long groupId, java.lang.String name, int scope,
-		java.lang.String actionId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		try {
-			Object paramObj0 = new LongWrapper(roleId);
-
-			Object paramObj1 = new LongWrapper(groupId);
+			Object paramObj1 = new LongWrapper(companyId);
 
 			Object paramObj2 = name;
 
@@ -234,16 +210,80 @@ public class ResourcePermissionServiceHttp {
 
 			Object paramObj3 = new IntegerWrapper(scope);
 
-			Object paramObj4 = actionId;
+			Object paramObj4 = primKey;
 
-			if (actionId == null) {
+			if (primKey == null) {
 				paramObj4 = new NullWrapper("java.lang.String");
 			}
 
+			Object paramObj5 = new LongWrapper(roleId);
+
+			Object paramObj6 = actionId;
+
+			if (actionId == null) {
+				paramObj6 = new NullWrapper("java.lang.String");
+			}
+
 			MethodWrapper methodWrapper = new MethodWrapper(ResourcePermissionServiceUtil.class.getName(),
-					"unsetResourcePermissions",
+					"removeResourcePermission",
 					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
+						paramObj5, paramObj6
+					});
+
+			try {
+				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static void removeResourcePermissions(HttpPrincipal httpPrincipal,
+		long groupId, long companyId, java.lang.String name, int scope,
+		long roleId, java.lang.String actionId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		try {
+			Object paramObj0 = new LongWrapper(groupId);
+
+			Object paramObj1 = new LongWrapper(companyId);
+
+			Object paramObj2 = name;
+
+			if (name == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj3 = new IntegerWrapper(scope);
+
+			Object paramObj4 = new LongWrapper(roleId);
+
+			Object paramObj5 = actionId;
+
+			if (actionId == null) {
+				paramObj5 = new NullWrapper("java.lang.String");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(ResourcePermissionServiceUtil.class.getName(),
+					"removeResourcePermissions",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
+						paramObj5
 					});
 
 			try {

@@ -100,12 +100,23 @@ public interface ResourcePermissionLocalService {
 		com.liferay.portal.model.ResourcePermission resourcePermission,
 		boolean merge) throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<String> getAvailableResourcePermissionActionIds(
-		long resourceId, long roleId, java.lang.String name,
-		java.util.List<String> actionIds)
+	public void addResourcePermission(long companyId, java.lang.String name,
+		int scope, java.lang.String primKey, long roleId,
+		java.lang.String actionId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<String> getAvailableResourcePermissionActionIds(
+		long companyId, java.lang.String name, int scope,
+		java.lang.String primKey, long roleId, java.util.List<String> actionIds)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getResourcePermissionsCount(long companyId,
+		java.lang.String name, int scope, java.lang.String primKey)
+		throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.ResourcePermission> getRoleResourcePermissions(
@@ -117,35 +128,32 @@ public interface ResourcePermissionLocalService {
 		com.liferay.portal.model.ResourceAction resourceAction);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public boolean hasResourcePermission(long resourceId, long roleId,
-		java.lang.String name, java.lang.String actionId)
+	public boolean hasResourcePermission(long companyId, java.lang.String name,
+		int scope, java.lang.String primKey, long roleId,
+		java.lang.String actionId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public boolean hasScopeResourcePermission(long roleId, long companyId,
-		java.lang.String name, int scope, java.lang.String actionId)
+	public boolean hasScopeResourcePermission(long companyId,
+		java.lang.String name, int scope, long roleId, java.lang.String actionId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public void setResourcePermission(long roleId, long companyId,
-		java.lang.String name, int scope, java.lang.String primKey,
+	public void removeResourcePermission(long companyId, java.lang.String name,
+		int scope, java.lang.String primKey, long roleId,
 		java.lang.String actionId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public void setResourcePermissions(long roleId,
-		java.lang.String[] actionIds, long resourceId)
+	public void removeResourcePermissions(long companyId,
+		java.lang.String name, int scope, long roleId, java.lang.String actionId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public void unsetResourcePermission(long roleId, long resourceId,
-		java.lang.String actionId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
-	public void unsetResourcePermissions(long roleId, long companyId,
-		java.lang.String name, int scope, java.lang.String actionId)
+	public void setResourcePermissions(long companyId, java.lang.String name,
+		int scope, java.lang.String primKey, long roleId,
+		java.lang.String[] actionIds)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 }
