@@ -29,23 +29,33 @@
 	<td></td>
 </tr>
 <tr>
-	<td>type</td>
-	<td>_36_title</td>
-	<td>This is Test Page Format</td>
-</tr>
-<tr>
 	<td>selectAndWait</td>
 	<td>_36_format</td>
 	<td>label=HTML</td>
 </tr>
 <tr>
-	<td>pause</td>
-	<td>5000</td>
+	<td>waitForElementPresent</td>
+	<td>_36_title</td>
 	<td></td>
 </tr>
 <tr>
+	<td>type</td>
+	<td>_36_title</td>
+	<td>This is Test Page Format</td>
+</tr>
+<tr>
 	<td>waitForElementPresent</td>
-	<td>//td[@id='xToolbar']/table[8]/tbody/tr/td[2]/div/table/tbody/tr/td[2]</td>
+	<td>_36_editor</td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectFrame</td>
+	<td>_36_editor</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
 	<td></td>
 </tr>
 <tr>
@@ -54,13 +64,18 @@
 	<td></td>
 </tr>
 <tr>
+	<td>typeKeys</td>
+	<td>//td[@id='xEditingArea']/textarea</td>
+	<td><a herf=http://www.lifera.com>Welcome to LIFERA</a></td>
+</tr>
+<tr>
 	<td>type</td>
 	<td>//td[@id='xEditingArea']/textarea</td>
-	<td><a href=http://www.liferay.com>Welcome to LIFERAY</a></td>
+	<td><a herf=http://www.liferay.com>Welcome to LIFERAY</a></td>
 </tr>
 <tr>
 	<td>selectFrame</td>
-	<td>relative=up</td>
+	<td>relative=top</td>
 	<td></td>
 </tr>
 <tr>

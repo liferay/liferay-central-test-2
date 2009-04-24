@@ -19,13 +19,33 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>link=Main</td>
-	<td></td>
+	<td>store</td>
+	<td>eval(selenium.isElementPresent('link=Second Edited Wiki Test'))</td>
+	<td>SecondWikiPresent</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>!${SecondWikiPresent}</td>
+	<td>SecondWikiNotPresent</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Test</td>
+	<td>link=Second Edited Wiki Test</td>
+	<td></td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>eval(selenium.isElementPresent('link=First'))</td>
+	<td>FirstPresent</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>!${FirstPresent}</td>
+	<td>FirstNotPresent</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=First</td>
 	<td></td>
 </tr>
 <tr>
@@ -44,14 +64,339 @@
 	<td></td>
 </tr>
 <tr>
+	<td>label</td>
+	<td>FirstNotPresent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>eval(selenium.isElementPresent('link=Link Me 1'))</td>
+	<td>LinkMe1Present</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>!${LinkMe1Present}</td>
+	<td>LinkMe1NotPresent</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Link Me 1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>eval(selenium.isElementPresent('//h1/div/span[2]/a[1]/img'))</td>
+	<td>LinkMe1Filled</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>!${LinkMe1Filled}</td>
+	<td>LinkMe1NotFilled</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Details']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Delete</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure you want to delete this?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>LinkMe1NotFilled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>LinkMe1NotPresent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>eval(selenium.isElementPresent('link=Link Me 2'))</td>
+	<td>LinkMe2Present</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>!${LinkMe2Present}</td>
+	<td>LinkMe2NotPresent</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Link Me 2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>eval(selenium.isElementPresent('//h1/div/span[2]/a[1]/img'))</td>
+	<td>LinkMe2Filled</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>!${LinkMe2Filled}</td>
+	<td>LinkMe2NotFilled</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Details']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Delete</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure you want to delete this?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>LinkMe2NotFilled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>LinkMe2NotPresent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>eval(selenium.isElementPresent('link=Rename to Second'))</td>
+	<td>RenameToSecondPresent</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>!${RenameToSecondPresent}</td>
+	<td>RenameToSecondNotPresent</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Rename to Second</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Details']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Delete</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure you want to delete this?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>RenameToSecondNotPresent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>eval(selenium.isElementPresent('link=This is Test Page Format'))</td>
+	<td>TestPageFormatPresent</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>!${TestPageFormatPresent}</td>
+	<td>TestPageFormatNotPresent</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=This is Test Page Format</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Details']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Delete</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure you want to delete this?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>TestPageFormatNotPresent</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>link=All Pages</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>//td[5]/ul/li/strong/span</td>
+	<td>store</td>
+	<td>eval(selenium.isElementPresent('//td[5]/ul/li/strong'))</td>
+	<td>PageAPresent</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>!${PageAPresent}</td>
+	<td>PageANotPresent</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//td[5]/ul/li/strong</td>
 	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[4]/ul/li[6]/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure you want to delete this?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>PageANotPresent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>eval(selenium.isElementPresent('//td[5]/ul/li/strong'))</td>
+	<td>PageBPresent</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>!${PageBPresent}</td>
+	<td>PageBNotPresent</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//td[5]/ul/li/strong</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[4]/ul/li[6]/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure you want to delete this?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>PageBNotPresent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Main</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>SecondWikiNotPresent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>eval(selenium.isElementPresent('link=Test Child Page'))</td>
+	<td>TestChildPagePresent</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>!${TestChildPagePresent}</td>
+	<td>TestChildPageNotPresent</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Test Child Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Details']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Delete</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure you want to delete this?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>TestChildPageNotPresent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>eval(selenium.isElementPresent('link=Test Second Child Page'))</td>
+	<td>TestSecondChildPagePresent</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>!${TestSecondChildPagePresent}</td>
+	<td>TestSecondChildPageNotPresent</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Test Second Child Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Details']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Delete</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure you want to delete this?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>TestSecondChildPageNotPresent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=All Pages</td>
+	<td></td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>eval(selenium.isElementPresent('//td[5]/ul/li/strong/span'))</td>
+	<td>PageCPresent</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>!${PageCPresent}</td>
+	<td>PageCNotPresent</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -69,74 +414,19 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>link=Second Edited Wiki Test</td>
+	<td>label</td>
+	<td>PageCNotPresent</td>
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>link=FrontPage</td>
-	<td></td>
+	<td>store</td>
+	<td>eval(selenium.isElementPresent('//td[5]/ul/li/strong/span'))</td>
+	<td>PageDPresent</td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>link=Link Me 1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//img[@alt='Details']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Delete</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertConfirmation</td>
-	<td>Are you sure you want to delete this?</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Second Edited Wiki Test</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=FrontPage</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Link Me 2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//img[@alt='Details']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Delete</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertConfirmation</td>
-	<td>Are you sure you want to delete this?</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=All Pages</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//td[5]/ul/li/strong/span</td>
-	<td></td>
+	<td>gotoIf</td>
+	<td>!${PageDPresent}</td>
+	<td>PageDNotPresent</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -145,7 +435,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Delete</td>
+	<td>//div[4]/ul/li[6]/a</td>
 	<td></td>
 </tr>
 <tr>
@@ -154,8 +444,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>link=Wiki Test Page</td>
+	<td>label</td>
+	<td>PageDNotPresent</td>
 	<td></td>
 </tr>
 <tr>
@@ -164,9 +454,14 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>//td[4]/ul/li/strong/span</td>
-	<td></td>
+	<td>store</td>
+	<td>eval(selenium.isElementPresent('//td[4]/ul/li/strong/span'))</td>
+	<td>WikiNodeAPresent</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>!${WikiNodeAPresent}</td>
+	<td>WikiNodeANotPresent</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -184,9 +479,19 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>//td[4]/ul/li/strong/span</td>
+	<td>label</td>
+	<td>WikiNodeANotPresent</td>
 	<td></td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>eval(selenium.isElementPresent('//td[4]/ul/li/strong/span'))</td>
+	<td>WikiNodeBPresent</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>!${WikiNodeBPresent}</td>
+	<td>WikiNodeBNotPresent</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -204,8 +509,23 @@
 	<td></td>
 </tr>
 <tr>
+	<td>label</td>
+	<td>WikiNodeBNotPresent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//img[@alt='Remove']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure you want to remove this component?</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
-	<td>//div[2]/ul/li[1]/a/span</td>
+	<td>//div[2]/ul/li[1]/a</td>
 	<td></td>
 </tr>
 <tr>
@@ -225,12 +545,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@id='portlet-wrapper-2']/div[2]/div/div/form/table/tbody/tr/td[2]/table/tbody/tr/td[2]/a[3]/img</td>
+	<td>//a[3]/img</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[@id='portlet-wrapper-2']/div[2]/div/div/form/table/tbody/tr/td[2]/table/tbody/tr/td[2]/a[3]/img</td>
+	<td>//a[3]/img</td>
 	<td></td>
 </tr>
 <tr>

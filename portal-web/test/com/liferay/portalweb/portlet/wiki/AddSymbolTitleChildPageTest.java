@@ -72,6 +72,10 @@ public class AddSymbolTitleChildPageTest extends BaseTestCase {
 
 		selenium.typeKeys("_36_title", RuntimeVariables.replace("Test@"));
 		selenium.type("_36_title", RuntimeVariables.replace("Test@"));
+		selenium.typeKeys("_36_content",
+			RuntimeVariables.replace("This is a Symbol Title Child Page Test!"));
+		selenium.type("_36_content",
+			RuntimeVariables.replace("This is a Symbol Title Child Page Test!"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
@@ -102,6 +106,10 @@ public class AddSymbolTitleChildPageTest extends BaseTestCase {
 
 		selenium.typeKeys("_36_title", RuntimeVariables.replace("Test%"));
 		selenium.type("_36_title", RuntimeVariables.replace("Test%"));
+		selenium.typeKeys("_36_content",
+			RuntimeVariables.replace("This is a Symbol Title Child Page Test!"));
+		selenium.type("_36_content",
+			RuntimeVariables.replace("This is a Symbol Title Child Page Test!"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
@@ -130,8 +138,12 @@ public class AddSymbolTitleChildPageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("_36_title", RuntimeVariables.replace("Test&amp;"));
-		selenium.type("_36_title", RuntimeVariables.replace("Test&amp;"));
+		selenium.typeKeys("_36_title", RuntimeVariables.replace("Test&"));
+		selenium.type("_36_title", RuntimeVariables.replace("Test&"));
+		selenium.typeKeys("_36_content",
+			RuntimeVariables.replace("This is a Symbol Title Child Page Test!"));
+		selenium.type("_36_content",
+			RuntimeVariables.replace("This is a Symbol Title Child Page Test!"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
@@ -162,6 +174,10 @@ public class AddSymbolTitleChildPageTest extends BaseTestCase {
 
 		selenium.typeKeys("_36_title", RuntimeVariables.replace("Test/"));
 		selenium.type("_36_title", RuntimeVariables.replace("Test/"));
+		selenium.typeKeys("_36_content",
+			RuntimeVariables.replace("This is a Symbol Title Child Page Test!"));
+		selenium.type("_36_content",
+			RuntimeVariables.replace("This is a Symbol Title Child Page Test!"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
@@ -192,6 +208,10 @@ public class AddSymbolTitleChildPageTest extends BaseTestCase {
 
 		selenium.typeKeys("_36_title", RuntimeVariables.replace("Test?"));
 		selenium.type("_36_title", RuntimeVariables.replace("Test?"));
+		selenium.typeKeys("_36_content",
+			RuntimeVariables.replace("This is a Symbol Title Child Page Test!"));
+		selenium.type("_36_content",
+			RuntimeVariables.replace("This is a Symbol Title Child Page Test!"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(

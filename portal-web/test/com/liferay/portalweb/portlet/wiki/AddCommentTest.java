@@ -77,7 +77,6 @@ public class AddCommentTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
-		assertTrue(selenium.isElementPresent("link=This is a test comment."));
 		assertEquals("This is a test comment.",
 			selenium.getText("//td[2]/div[1]"));
 	}

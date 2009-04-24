@@ -55,11 +55,8 @@ public class VerifyPageFormatTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Add Child Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.type("_36_title",
-			RuntimeVariables.replace("This is Test Page Format"));
 		selenium.select("_36_format", "label=HTML");
 		selenium.waitForPageToLoad("30000");
-		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -67,8 +64,7 @@ public class VerifyPageFormatTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent(
-							"//td[@id='xToolbar']/table[8]/tbody/tr/td[2]/div/table/tbody/tr/td[2]")) {
+				if (selenium.isElementPresent("_36_title")) {
 					break;
 				}
 			}
@@ -78,12 +74,36 @@ public class VerifyPageFormatTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.type("_36_title",
+			RuntimeVariables.replace("This is Test Page Format"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("_36_editor")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.selectFrame("_36_editor");
+		Thread.sleep(5000);
 		selenium.click(
 			"//td[@id='xToolbar']/table[8]/tbody/tr/td[2]/div/table/tbody/tr/td[2]");
+		selenium.typeKeys("//td[@id='xEditingArea']/textarea",
+			RuntimeVariables.replace(
+				"<a herf=http://www.lifera.com>Welcome to LIFERA</a>"));
 		selenium.type("//td[@id='xEditingArea']/textarea",
 			RuntimeVariables.replace(
-				"<a href=http://www.liferay.com>Welcome to LIFERAY</a>"));
-		selenium.selectFrame("relative=up");
+				"<a herf=http://www.liferay.com>Welcome to LIFERAY</a>"));
+		selenium.selectFrame("relative=top");
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
