@@ -24,18 +24,6 @@
 
 <%@ include file="/html/portlet/asset_publisher/init.jsp" %>
 
-<c:if test="<%= !showAssetTitle %>">
-	<style type="text/css">
-		.portlet-asset-publisher .asset-metadata, .portlet-asset-publisher .asset-content {
-			margin-left: 10px;
-		}
-
-		.portlet-asset-publisher .asset-metadata {
-			margin-top: 10px;
-		}
-	</style>
-</c:if>
-
 <%
 if (mergeUrlTags) {
 	String[] compilerEntries = (String[])request.getAttribute(WebKeys.TAGS_COMPILER_ENTRIES);

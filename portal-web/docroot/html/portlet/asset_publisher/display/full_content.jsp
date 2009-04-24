@@ -41,7 +41,7 @@ boolean show = ((Boolean)request.getAttribute("view.jsp-show")).booleanValue();
 request.setAttribute("view.jsp-showIconLabel", true);
 %>
 
-<div class="asset-full-content">
+<div class="asset-full-content <%= showAssetTitle ? "show-asset-title" : "" %>">
 	<c:choose>
 		<c:when test="<%= className.equals(BlogsEntry.class.getName()) %>">
 

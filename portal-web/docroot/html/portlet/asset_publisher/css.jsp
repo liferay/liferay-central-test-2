@@ -43,6 +43,14 @@
 	margin-right: 10px;
 }
 
+.portlet-asset-publisher .asset-full-content .asset-content {
+	margin-right: 25px;
+}
+
+.portlet-asset-publisher .asset-full-content.show-asset-title .asset-content {
+	margin-right: 10px;
+}
+
 .portlet-asset-publisher .asset-edit {
 	text-align: right;
 }
@@ -168,7 +176,7 @@
 .portlet-asset-publisher .separator {
 	border-right: 1px solid #999;
 	clear: both;
-	margin: 25px 10px;
+	margin: 25px 25px;
 }
 
 .portlet-asset-publisher .taglib-tags-summary {
