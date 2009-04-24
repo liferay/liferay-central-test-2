@@ -201,22 +201,27 @@ public class Table {
 	}
 
 	public String getSelectSQL() throws Exception {
-		/*String sql = "SELECT ";
+		if (_selectSQL == null) {
+			/*String sql = "SELECT ";
 
-		for (int i = 0; i < _columns.length; i++) {
-			sql += _columns[i][0];
+			for (int i = 0; i < _columns.length; i++) {
+				sql += _columns[i][0];
 
-			if ((i + 1) < _columns.length) {
-				sql += ", ";
+				if ((i + 1) < _columns.length) {
+					sql += ", ";
+				}
+				else {
+					sql += " FROM " + _tableName;
+				}
 			}
-			else {
-				sql += " FROM " + _tableName;
-			}
+
+			return sql;*/
+
+			return "SELECT * FROM " + _tableName;
 		}
-
-		return sql;*/
-
-		return "SELECT * FROM " + _tableName;
+		else {
+			return _selectSQL;
+		}
 	}
 
 	public String getTableName() {
@@ -568,11 +573,16 @@ public class Table {
 		_createSQL = createSQL;
 	}
 
+	public void setSelectSQL(String selectSQL) throws Exception {
+		_selectSQL = selectSQL;
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(Table.class);
 
 	private Object[][] _columns;
 	private String _createSQL;
 	private int[] _order;
+	private String _selectSQL;
 	private String _tableName;
 	private long _totalRows = 0;
 
