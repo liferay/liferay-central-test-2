@@ -232,7 +232,7 @@ public class MailEngine {
 
 		send(
 			from, to, cc, bcc, bulkAddresses, subject, body, htmlFormat,
-			replyTo, messageId, inReplyTo, null, null);
+			replyTo, messageId, inReplyTo, attachments, null);
 	}
 
 	public static void send(
