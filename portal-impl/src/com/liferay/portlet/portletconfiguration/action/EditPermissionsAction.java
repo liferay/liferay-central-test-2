@@ -24,6 +24,7 @@ package com.liferay.portlet.portletconfiguration.action;
 
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -310,17 +311,26 @@ public class EditPermissionsAction extends EditConfigurationAction {
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
+		String portletResource = ParamUtil.getString(
+			actionRequest, "portletResource");
 		String modelResource = ParamUtil.getString(
 			actionRequest, "modelResource");
-		long resourceId = ParamUtil.getLong(actionRequest, "resourceId");
-		long resourcePrimKey = ParamUtil.getLong(
+
+		String selResource = portletResource;
+
+		if (Validator.isNotNull(modelResource)) {
+			selResource = modelResource;
+		}
+
+		String resourcePrimKey = ParamUtil.getString(
 			actionRequest, "resourcePrimKey");
 
 		Group group = themeDisplay.getScopeGroup();
 
 		if (modelResource.equals(Layout.class.getName())) {
-			Layout layout = LayoutLocalServiceUtil.getLayout(
-				resourcePrimKey);
+			long plid = GetterUtil.getLong(resourcePrimKey);
+
+			Layout layout = LayoutLocalServiceUtil.getLayout(plid);
 
 			group = layout.getGroup();
 		}
@@ -330,9 +340,9 @@ public class EditPermissionsAction extends EditConfigurationAction {
 		for (Role role : roles) {
 			String[] actionIds = getActionIds(actionRequest, role.getRoleId());
 
-			ResourcePermissionServiceUtil.setResourcePermissions(
-				role.getRoleId(), themeDisplay.getScopeGroupId(), actionIds,
-				resourceId);
+			ResourcePermissionServiceUtil.setIndividualResourcePermissions(
+				themeDisplay.getScopeGroupId(), themeDisplay.getCompanyId(),
+				selResource, resourcePrimKey, role.getRoleId(), actionIds);
 		}
 	}
 

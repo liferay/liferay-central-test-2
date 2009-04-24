@@ -227,20 +227,20 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 		}
 	}
 
-	protected long[] getResourceIds(
+	protected List<Resource> getResources(
 			long companyId, long groupId, String name, String primKey,
 			String actionId)
 		throws Exception {
 
 		// Individual
 
-		List<Long> resourceIds = new ArrayList<Long>(4);
+		List<Resource> resources = new ArrayList<Resource>(4);
 
 		try {
 			Resource resource = ResourceLocalServiceUtil.getResource(
 				companyId, name, ResourceConstants.SCOPE_INDIVIDUAL, primKey);
 
-			resourceIds.add(resource.getResourceId());
+			resources.add(resource);
 		}
 		catch (NoSuchResourceException nsre) {
 			if (_log.isWarnEnabled()) {
@@ -259,7 +259,7 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 					companyId, name, ResourceConstants.SCOPE_GROUP,
 					String.valueOf(groupId));
 
-				resourceIds.add(resource.getResourceId());
+				resources.add(resource);
 			}
 		}
 		catch (NoSuchResourceException nsre) {
@@ -279,7 +279,7 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 					companyId, name, ResourceConstants.SCOPE_GROUP_TEMPLATE,
 					String.valueOf(GroupConstants.DEFAULT_PARENT_GROUP_ID));
 
-				resourceIds.add(resource.getResourceId());
+				resources.add(resource);
 			}
 		}
 		catch (NoSuchResourceException nsre) {
@@ -299,7 +299,7 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 				companyId, name, ResourceConstants.SCOPE_COMPANY,
 				String.valueOf(companyId));
 
-			resourceIds.add(resource.getResourceId());
+			resources.add(resource);
 		}
 		catch (NoSuchResourceException nsre) {
 			if (_log.isWarnEnabled()) {
@@ -310,13 +310,7 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 			}
 		}
 
-		long[] resourceIdsArray = new long[resourceIds.size()];
-
-		for (int i = 0; i < resourceIdsArray.length; i++) {
-			resourceIdsArray[i] = resourceIds.get(i);
-		}
-
-		return resourceIdsArray;
+		return resources;
 	}
 
 	protected PermissionCheckerBag getUserBag(long userId, long groupId)
@@ -480,7 +474,7 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 
 		long companyId = user.getCompanyId();
 
-		long[] resourceIds = getResourceIds(
+		List<Resource> resources = getResources(
 			companyId, groupId, name, primKey, actionId);
 
 		Group guestGroup = GroupLocalServiceUtil.getGroup(
@@ -519,7 +513,7 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 
 		try {
 			return PermissionLocalServiceUtil.hasUserPermissions(
-				defaultUserId, groupId, actionId, name, resourceIds, bag);
+				defaultUserId, groupId, resources, actionId, bag);
 		}
 		catch (Exception e) {
 			return false;
@@ -594,7 +588,7 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 
 		logHasUserPermission(groupId, name, primKey, actionId, stopWatch, 1);
 
-		long[] resourceIds = getResourceIds(
+		List<Resource> resources = getResources(
 			companyId, groupId, name, primKey, actionId);
 
 		logHasUserPermission(groupId, name, primKey, actionId, stopWatch, 2);
@@ -607,7 +601,7 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 		PermissionCheckerBag bag = getUserBag(user.getUserId(), groupId);
 
 		boolean value = PermissionLocalServiceUtil.hasUserPermissions(
-			user.getUserId(), groupId, actionId, name, resourceIds, bag);
+			user.getUserId(), groupId, resources, actionId, bag);
 
 		logHasUserPermission(groupId, name, primKey, actionId, stopWatch, 3);
 

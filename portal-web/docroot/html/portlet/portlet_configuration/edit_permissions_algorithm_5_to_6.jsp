@@ -76,6 +76,12 @@ if (modelResource.equals(Layout.class.getName())) {
 Resource resource = null;
 
 try {
+	if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
+		if (ResourcePermissionLocalServiceUtil.getResourcePermissionsCount(company.getCompanyId(), selResource, ResourceConstants.SCOPE_INDIVIDUAL, resourcePrimKey) == 0) {
+			throw new NoSuchResourceException();
+		}
+	}
+
 	resource = ResourceLocalServiceUtil.getResource(company.getCompanyId(), selResource, ResourceConstants.SCOPE_INDIVIDUAL, resourcePrimKey);
 }
 catch (NoSuchResourceException nsre) {
@@ -183,7 +189,7 @@ renderPortletURL.setParameter("resourcePrimKey", resourcePrimKey);
 		List currentActions = null;
 
 		if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
-			currentActions = ResourcePermissionLocalServiceUtil.getAvailableResourcePermissionActionIds(resource.getResourceId(), role.getRoleId(), selResource, actions);
+			currentActions = ResourcePermissionLocalServiceUtil.getAvailableResourcePermissionActionIds(resource.getCompanyId(), resource.getName(), resource.getScope(), resource.getPrimKey(), role.getRoleId(), actions);
 		}
 		else {
 			List permissions = PermissionLocalServiceUtil.getRolePermissions(role.getRoleId(), resource.getResourceId());

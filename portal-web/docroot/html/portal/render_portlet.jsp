@@ -44,7 +44,14 @@ boolean runtimePortlet = (renderPortletResource != null) && renderPortletResourc
 boolean denyAccess = false;
 
 try {
-	ResourceLocalServiceUtil.getResource(company.getCompanyId(), rootPortletId, ResourceConstants.SCOPE_INDIVIDUAL, portletPrimaryKey);
+	if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
+		if (ResourcePermissionLocalServiceUtil.getResourcePermissionsCount(company.getCompanyId(), rootPortletId, ResourceConstants.SCOPE_INDIVIDUAL, portletPrimaryKey) == 0) {
+			throw new NoSuchResourceException();
+		}
+	}
+	else {
+		ResourceLocalServiceUtil.getResource(company.getCompanyId(), rootPortletId, ResourceConstants.SCOPE_INDIVIDUAL, portletPrimaryKey);
+	}
 }
 catch (NoSuchResourceException nsre) {
 	boolean addDefaultResource = false;

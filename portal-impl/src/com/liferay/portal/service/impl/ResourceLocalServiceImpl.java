@@ -37,6 +37,7 @@ import com.liferay.portal.model.ResourceCode;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.RoleConstants;
+import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.security.permission.PermissionsListFilter;
 import com.liferay.portal.security.permission.PermissionsListFilterFactory;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
@@ -125,42 +126,12 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 			long companyId, String name, int scope, String primKey)
 		throws SystemException {
 
-		ResourceCode resourceCode = resourceCodeLocalService.getResourceCode(
-			companyId, name, scope);
-
-		long codeId = resourceCode.getCodeId();
-
-		Resource resource = resourcePersistence.fetchByC_P(codeId, primKey);
-
-		if (resource == null) {
-			long resourceId = counterLocalService.increment(
-				Resource.class.getName());
-
-			resource = resourcePersistence.create(resourceId);
-
-			resource.setCodeId(codeId);
-			resource.setPrimKey(primKey);
-
-			try {
-				resourcePersistence.update(resource, false);
-			}
-			catch (SystemException se) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(
-						"Add failed, fetch {codeId=" + codeId + ", primKey=" +
-							primKey + "}");
-				}
-
-				resource = resourcePersistence.fetchByC_P(
-					codeId, primKey, false);
-
-				if (resource == null) {
-					throw se;
-				}
-			}
+		if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
+			return addResource_6(companyId, name, scope, primKey);
 		}
-
-		return resource;
+		else {
+			return addResource_1to5(companyId, name, scope, primKey);
+		}
 	}
 
 	public void addResources(
@@ -256,28 +227,18 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 	}
 
 	public void deleteResource(Resource resource) throws SystemException {
-		if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
 
-			// Resource permissions
+		// Permissions
 
-			resourcePermissionPersistence.removeByResourceId(
-				resource.getResourceId());
+		List<Permission> permissions = permissionPersistence.findByResourceId(
+			resource.getResourceId());
+
+		for (Permission permission : permissions) {
+			orgGroupPermissionPersistence.removeByPermissionId(
+				permission.getPermissionId());
 		}
-		else {
 
-			// Permissions
-
-			List<Permission> permissions =
-				permissionPersistence.findByResourceId(
-					resource.getResourceId());
-
-			for (Permission permission : permissions) {
-				orgGroupPermissionPersistence.removeByPermissionId(
-					permission.getPermissionId());
-			}
-
-			permissionPersistence.removeByResourceId(resource.getResourceId());
-		}
+		permissionPersistence.removeByResourceId(resource.getResourceId());
 
 		// Resource
 
@@ -294,6 +255,10 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 	public void deleteResource(
 			long companyId, String name, int scope, String primKey)
 		throws PortalException, SystemException {
+
+		if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
+			return;
+		}
 
 		try {
 			Resource resource = getResource(companyId, name, scope, primKey);
@@ -339,10 +304,12 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 			long companyId, String name, int scope, String primKey)
 		throws PortalException, SystemException {
 
-		ResourceCode resourceCode = resourceCodeLocalService.getResourceCode(
-			companyId, name, scope);
-
-		return resourcePersistence.findByC_P(resourceCode.getCodeId(), primKey);
+		if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
+			return getResource_6(companyId, name, scope, primKey);
+		}
+		else {
+			return getResource_1to5(companyId, name, scope, primKey);
+		}
 	}
 
 	public List<Resource> getResources() throws SystemException {
@@ -455,7 +422,8 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 		Role role = getRole(groupId);
 
 		resourcePermissionLocalService.setResourcePermissions(
-			role.getRoleId(), actionIds, resource.getResourceId());
+			resource.getCompanyId(), resource.getName(), resource.getScope(),
+			resource.getPrimKey(), role.getRoleId(), actionIds);
 	}
 
 	protected void addGuestPermissions(
@@ -525,7 +493,8 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 			companyId, RoleConstants.GUEST);
 
 		resourcePermissionLocalService.setResourcePermissions(
-			guestRole.getRoleId(), actionIds, resource.getResourceId());
+			resource.getCompanyId(), resource.getName(), resource.getScope(),
+			resource.getPrimKey(), guestRole.getRoleId(), actionIds);
 	}
 
 	protected void addModelResources_1to5(
@@ -634,9 +603,9 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 			resource.getName());
 
 		resourcePermissionLocalService.setResourcePermissions(
-			ownerRole.getRoleId(),
-			actionIds.toArray(new String[actionIds.size()]),
-			resource.getResourceId());
+			resource.getCompanyId(), resource.getName(), resource.getScope(),
+			resource.getPrimKey(), ownerRole.getRoleId(),
+			actionIds.toArray(new String[actionIds.size()]));
 
 		// Community permissions
 
@@ -648,8 +617,9 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 			}
 
 			resourcePermissionLocalService.setResourcePermissions(
-				role.getRoleId(), communityPermissions,
-				resource.getResourceId());
+				resource.getCompanyId(), resource.getName(),
+				resource.getScope(), resource.getPrimKey(), role.getRoleId(),
+				communityPermissions);
 		}
 
 		// Guest permissions
@@ -662,7 +632,63 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 		}
 
 		resourcePermissionLocalService.setResourcePermissions(
-			guestRole.getRoleId(), guestPermissions, resource.getResourceId());
+			resource.getCompanyId(), resource.getName(), resource.getScope(),
+			resource.getPrimKey(), guestRole.getRoleId(), guestPermissions);
+	}
+
+	protected Resource addResource_1to5(
+			long companyId, String name, int scope, String primKey)
+		throws SystemException {
+
+		ResourceCode resourceCode = resourceCodeLocalService.getResourceCode(
+			companyId, name, scope);
+
+		long codeId = resourceCode.getCodeId();
+
+		Resource resource = resourcePersistence.fetchByC_P(codeId, primKey);
+
+		if (resource == null) {
+			long resourceId = counterLocalService.increment(
+				Resource.class.getName());
+
+			resource = resourcePersistence.create(resourceId);
+
+			resource.setCodeId(codeId);
+			resource.setPrimKey(primKey);
+
+			try {
+				resourcePersistence.update(resource, false);
+			}
+			catch (SystemException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(
+						"Add failed, fetch {codeId=" + codeId + ", primKey=" +
+							primKey + "}");
+				}
+
+				resource = resourcePersistence.fetchByC_P(
+					codeId, primKey, false);
+
+				if (resource == null) {
+					throw se;
+				}
+			}
+		}
+
+		return resource;
+	}
+
+	protected Resource addResource_6(
+		long companyId, String name, int scope, String primKey) {
+
+		Resource resource = new ResourceImpl();
+
+		resource.setCompanyId(companyId);
+		resource.setName(name);
+		resource.setScope(scope);
+		resource.setPrimKey(primKey);
+
+		return resource;
 	}
 
 	protected void addResources_1to5(
@@ -724,8 +750,32 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 		Role role = roleLocalService.getRole(companyId, RoleConstants.OWNER);
 
 		resourcePermissionLocalService.setResourcePermissions(
-			role.getRoleId(), actionIds.toArray(new String[actionIds.size()]),
-			resource.getResourceId());
+			resource.getCompanyId(), resource.getName(), resource.getScope(),
+			resource.getPrimKey(), role.getRoleId(),
+			actionIds.toArray(new String[actionIds.size()]));
+	}
+
+	protected Resource getResource_1to5(
+			long companyId, String name, int scope, String primKey)
+		throws PortalException, SystemException {
+
+		ResourceCode resourceCode = resourceCodeLocalService.getResourceCode(
+			companyId, name, scope);
+
+		return resourcePersistence.findByC_P(resourceCode.getCodeId(), primKey);
+	}
+
+	protected Resource getResource_6(
+		long companyId, String name, int scope, String primKey) {
+
+		Resource resource = new ResourceImpl();
+
+		resource.setCompanyId(companyId);
+		resource.setName(name);
+		resource.setScope(scope);
+		resource.setPrimKey(primKey);
+
+		return resource;
 	}
 
 	protected Role getRole(long groupId)
@@ -782,12 +832,14 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 		Role role = getRole(groupId);
 
 		resourcePermissionLocalService.setResourcePermissions(
-			role.getRoleId(), communityPermissions, resource.getResourceId());
+			resource.getCompanyId(), resource.getName(), resource.getScope(),
+			resource.getPrimKey(), role.getRoleId(), communityPermissions);
 
 		role = roleLocalService.getRole(companyId, RoleConstants.GUEST);
 
 		resourcePermissionLocalService.setResourcePermissions(
-			role.getRoleId(), guestPermissions, resource.getResourceId());
+			resource.getCompanyId(), resource.getName(), resource.getScope(),
+			resource.getPrimKey(), role.getRoleId(), guestPermissions);
 	}
 
 	protected void validate(String name, boolean portletActions)

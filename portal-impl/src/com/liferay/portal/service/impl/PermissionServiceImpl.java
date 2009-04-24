@@ -72,6 +72,8 @@ import com.liferay.portlet.softwarecatalog.service.permission.SCProductEntryPerm
 import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.service.permission.WikiNodePermission;
 
+import java.util.List;
+
 /**
  * <a href="PermissionServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
@@ -116,13 +118,12 @@ public class PermissionServiceImpl extends PermissionServiceBaseImpl {
 	}
 
 	public boolean hasUserPermissions(
-			long userId, long groupId, String actionId, String name,
-			long[] resourceIds,
-			PermissionCheckerBag permissionCheckerBag)
+			long userId, long groupId, List<Resource> resources,
+			String actionId, PermissionCheckerBag permissionCheckerBag)
 		throws PortalException, SystemException {
 
 		return permissionLocalService.hasUserPermissions(
-			userId, groupId, actionId, name, resourceIds, permissionCheckerBag);
+			userId, groupId, resources, actionId, permissionCheckerBag);
 	}
 
 	public void setGroupPermissions(

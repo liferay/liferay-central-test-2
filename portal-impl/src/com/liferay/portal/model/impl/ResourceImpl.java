@@ -39,11 +39,56 @@ public class ResourceImpl extends ResourceModelImpl implements Resource {
 	public ResourceImpl() {
 	}
 
-	public String getName() throws PortalException, SystemException {
-		ResourceCode resourceCode =
-			ResourceCodeLocalServiceUtil.getResourceCode(getCodeId());
+	public long getCompanyId() throws PortalException, SystemException {
+		if (_companyId != 0) {
+			return _companyId;
+		}
+		else {
+			ResourceCode resourceCode =
+				ResourceCodeLocalServiceUtil.getResourceCode(getCodeId());
 
-		return resourceCode.getName();
+			return resourceCode.getCompanyId();
+		}
 	}
+
+	public String getName() throws PortalException, SystemException {
+		if (_name != null) {
+			return _name;
+		}
+		else {
+			ResourceCode resourceCode =
+				ResourceCodeLocalServiceUtil.getResourceCode(getCodeId());
+
+			return resourceCode.getName();
+		}
+	}
+
+	public int getScope() throws PortalException, SystemException {
+		if (_scope != 0) {
+			return _scope;
+		}
+		else {
+			ResourceCode resourceCode =
+				ResourceCodeLocalServiceUtil.getResourceCode(getCodeId());
+
+			return resourceCode.getScope();
+		}
+	}
+
+	public void setCompanyId(long companyId) {
+		_companyId = companyId;
+	}
+
+	public void setName(String name) {
+		_name = name;
+	}
+
+	public void setScope(int scope) {
+		_scope = scope;
+	}
+
+	private long _companyId;
+	private String _name;
+	private int _scope;
 
 }

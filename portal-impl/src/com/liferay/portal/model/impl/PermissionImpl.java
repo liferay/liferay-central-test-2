@@ -35,4 +35,32 @@ public class PermissionImpl extends PermissionModelImpl implements Permission {
 	public PermissionImpl() {
 	}
 
+	public String getName() {
+		return _name;
+	}
+
+	public String getPrimKey() {
+		return _primKey;
+	}
+
+	public int getScope() {
+		return _scope;
+	}
+
+	public void setName(String name) {
+		_name = name;
+	}
+
+	public void setPrimKey(String primKey) {
+		_primKey = primKey;
+	}
+
+	public void setScope(int scope) {
+		_scope = scope;
+	}
+
+	private String _name;
+	private String _primKey;
+	private int _scope;
+
 }

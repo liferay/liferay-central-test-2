@@ -25,9 +25,7 @@ package com.liferay.portal.service.impl;
 import com.liferay.portal.NoSuchResourcePermissionException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.ResourceAction;
-import com.liferay.portal.model.ResourceCode;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.ResourcePermission;
 import com.liferay.portal.model.ResourcePermissionConstants;
@@ -48,12 +46,46 @@ import java.util.List;
 public class ResourcePermissionLocalServiceImpl
 	extends ResourcePermissionLocalServiceBaseImpl {
 
+	public void addResourcePermission(
+			long companyId, String name, int scope, String primKey, long roleId,
+			String actionId)
+		throws PortalException, SystemException {
+
+		if (scope == ResourceConstants.SCOPE_COMPANY) {
+
+			// Remove group permission
+
+			removeResourcePermissions(
+				companyId, name, ResourceConstants.SCOPE_GROUP, roleId,
+				actionId);
+		}
+		else if (scope == ResourceConstants.SCOPE_GROUP) {
+
+			// Remove company permission
+
+			removeResourcePermissions(
+				companyId, name, ResourceConstants.SCOPE_COMPANY, roleId,
+				actionId);
+		}
+		else if (scope == ResourceConstants.SCOPE_INDIVIDUAL) {
+			throw new NoSuchResourcePermissionException();
+		}
+
+		updateResourcePermission(
+			companyId, name, scope, primKey, roleId, new String[] {actionId},
+			ResourcePermissionConstants.OPERATOR_ADD);
+
+		PermissionCacheUtil.clearCache();
+	}
+
 	public List<String> getAvailableResourcePermissionActionIds(
-			long resourceId, long roleId, String name, List<String> actionIds)
+			long companyId, String name, int scope, String primKey, long roleId,
+			List<String> actionIds)
 		throws PortalException, SystemException {
 
 		ResourcePermission resourcePermission =
-			resourcePermissionPersistence.fetchByR_R(resourceId, roleId);
+			resourcePermissionPersistence.fetchByC_N_S_P_R(
+				companyId, name, scope, primKey, roleId);
 
 		if (resourcePermission == null) {
 			return Collections.EMPTY_LIST;
@@ -72,6 +104,14 @@ public class ResourcePermissionLocalServiceImpl
 		}
 
 		return availableActionIds;
+	}
+
+	public int getResourcePermissionsCount(
+			long companyId, String name, int scope, String primKey)
+		throws SystemException {
+
+		return resourcePermissionPersistence.countByC_N_S_P(
+			companyId, name, scope, primKey);
 	}
 
 	public List<ResourcePermission> getRoleResourcePermissions(long roleId)
@@ -95,11 +135,13 @@ public class ResourcePermissionLocalServiceImpl
 	}
 
 	public boolean hasResourcePermission(
-			long resourceId, long roleId, String name, String actionId)
+			long companyId, String name, int scope, String primKey, long roleId,
+			String actionId)
 		throws PortalException, SystemException {
 
 		ResourcePermission resourcePermission =
-			resourcePermissionPersistence.fetchByR_R(resourceId, roleId);
+			resourcePermissionPersistence.fetchByC_N_S_P_R(
+				companyId, name, scope, primKey, roleId);
 
 		if (resourcePermission == null) {
 			return false;
@@ -117,19 +159,17 @@ public class ResourcePermissionLocalServiceImpl
 	}
 
 	public boolean hasScopeResourcePermission(
-			long roleId, long companyId, String name, int scope,
+			long companyId, String name, int scope, long roleId,
 			String actionId)
 		throws PortalException, SystemException {
 
-		ResourceCode resourceCode = resourceCodeLocalService.getResourceCode(
-			companyId, name, scope);
+		List<ResourcePermission> resourcePermissions =
+			resourcePermissionPersistence.findByC_N_S(companyId, name, scope);
 
-		List<Resource> resources = resourcePersistence.findByCodeId(
-			resourceCode.getCodeId());
-
-		for (Resource resource : resources) {
+		for (ResourcePermission resourcePermission : resourcePermissions) {
 			if (hasResourcePermission(
-					resource.getResourceId(), roleId, name, actionId)) {
+					companyId, name, scope, resourcePermission.getPrimKey(),
+					roleId, actionId)) {
 
 				return true;
 			}
@@ -138,89 +178,54 @@ public class ResourcePermissionLocalServiceImpl
 		return false;
 	}
 
-	public void setResourcePermission(
-			long roleId, long companyId, String name, int scope, String primKey,
+	public void removeResourcePermission(
+			long companyId, String name, int scope, String primKey, long roleId,
 			String actionId)
 		throws PortalException, SystemException {
 
-		if (scope == ResourceConstants.SCOPE_COMPANY) {
-
-			// Remove group permission
-
-			unsetResourcePermissions(
-				roleId, companyId, name, ResourceConstants.SCOPE_GROUP,
-				actionId);
-		}
-		else if (scope == ResourceConstants.SCOPE_GROUP) {
-
-			// Remove company permission
-
-			unsetResourcePermissions(
-				roleId, companyId, name, ResourceConstants.SCOPE_COMPANY,
-				actionId);
-		}
-		else if (scope == ResourceConstants.SCOPE_INDIVIDUAL) {
-			throw new NoSuchResourcePermissionException();
-		}
-
-		Resource resource = resourceLocalService.addResource(
-			companyId, name, scope, primKey);
-
-		long resourceId = resource.getResourceId();
-
 		updateResourcePermission(
-			roleId, new String[] {actionId}, resource.getResourceId(),
-			ResourcePermissionConstants.OPERATOR_ADD);
-
-		PermissionCacheUtil.clearCache();
-	}
-
-	public void setResourcePermissions(
-			long roleId, String[] actionIds, long resourceId)
-		throws PortalException, SystemException {
-
-		updateResourcePermission(
-			roleId, actionIds, resourceId,
-			ResourcePermissionConstants.OPERATOR_SET);
-	}
-
-	public void unsetResourcePermission(
-			long roleId, long resourceId, String actionId)
-		throws PortalException, SystemException {
-
-		updateResourcePermission(
-			roleId, new String[] {actionId}, resourceId,
+			companyId, name, scope, primKey, roleId, new String[] {actionId},
 			ResourcePermissionConstants.OPERATOR_REMOVE);
 
 		PermissionCacheUtil.clearCache();
 	}
 
-	public void unsetResourcePermissions(
-			long roleId, long companyId, String name, int scope,
+	public void removeResourcePermissions(
+			long companyId, String name, int scope, long roleId,
 			String actionId)
 		throws PortalException, SystemException {
 
-		ResourceCode resourceCode = resourceCodeLocalService.getResourceCode(
-			companyId, name, scope);
+		List<ResourcePermission> resourcePermissions =
+			resourcePermissionPersistence.findByC_N_S(companyId, name, scope);
 
-		List<Resource> resources = resourcePersistence.findByCodeId(
-			resourceCode.getCodeId());
-
-		for (Resource resource : resources) {
+		for (ResourcePermission resourcePermission : resourcePermissions) {
 			updateResourcePermission(
-				roleId, new String[] {actionId}, resource.getResourceId(),
+				companyId, name, scope, resourcePermission.getPrimKey(), roleId,
+				new String[] {actionId},
 				ResourcePermissionConstants.OPERATOR_REMOVE);
 		}
 
 		PermissionCacheUtil.clearCache();
 	}
 
+	public void setResourcePermissions(
+			long companyId, String name, int scope, String primKey, long roleId,
+			String[] actionIds)
+		throws PortalException, SystemException {
+
+		updateResourcePermission(
+			companyId, name, scope, primKey, roleId, actionIds,
+			ResourcePermissionConstants.OPERATOR_SET);
+	}
+
 	protected void updateResourcePermission(
-			long roleId, String[] actionIds, long resourceId, int operator)
+			long companyId, String name, int scope, String primKey, long roleId,
+			String[] actionIds, int operator)
 		throws PortalException, SystemException {
 
 		ResourcePermission resourcePermission =
-			resourcePermissionPersistence.fetchByR_R(resourceId, roleId);
+			resourcePermissionPersistence.fetchByC_N_S_P_R(
+				companyId, name, scope, primKey, roleId);
 
 		if (resourcePermission == null) {
 			if (operator == ResourcePermissionConstants.OPERATOR_REMOVE) {
@@ -233,7 +238,10 @@ public class ResourcePermissionLocalServiceImpl
 			resourcePermission = resourcePermissionPersistence.create(
 				resourcePermissionId);
 
-			resourcePermission.setResourceId(resourceId);
+			resourcePermission.setCompanyId(companyId);
+			resourcePermission.setName(name);
+			resourcePermission.setScope(scope);
+			resourcePermission.setPrimKey(primKey);
 			resourcePermission.setRoleId(roleId);
 		}
 
@@ -243,12 +251,9 @@ public class ResourcePermissionLocalServiceImpl
 			actionIdsLong = 0;
 		}
 
-		Resource resource = resourcePersistence.findByPrimaryKey(resourceId);
-
 		for (String actionId : actionIds) {
 			ResourceAction resourceAction =
-				resourceActionLocalService.getResourceAction(
-					resource.getName(), actionId);
+				resourceActionLocalService.getResourceAction(name, actionId);
 
 			if ((operator == ResourcePermissionConstants.OPERATOR_ADD) ||
 				(operator == ResourcePermissionConstants.OPERATOR_SET)) {

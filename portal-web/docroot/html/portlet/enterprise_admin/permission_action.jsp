@@ -40,7 +40,9 @@ Role role = (Role)objArray[1];
 		<portlet:param name="redirect" value="<%= currentURL %>" />
 		<portlet:param name="roleId" value="<%= String.valueOf(role.getRoleId()) %>" />
 		<portlet:param name="permissionId" value="<%= String.valueOf(permission.getPermissionId()) %>" />
-		<portlet:param name="resourceId" value="<%= String.valueOf(permission.getResourceId()) %>" />
+		<portlet:param name="name" value="<%= permission.getName() %>" />
+		<portlet:param name="scope" value="<%= String.valueOf(permission.getScope()) %>" />
+		<portlet:param name="primKey" value="<%= permission.getPrimKey() %>" />
 		<portlet:param name="actionId" value="<%= String.valueOf(permission.getActionId()) %>" />
 	</portlet:actionURL>
 

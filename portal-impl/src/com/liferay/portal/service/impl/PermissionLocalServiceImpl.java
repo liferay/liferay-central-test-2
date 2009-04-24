@@ -360,8 +360,8 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 	}
 
 	public boolean hasUserPermissions(
-			long userId, long groupId, String actionId, String name,
-			long[] resourceIds, PermissionCheckerBag permissionCheckerBag)
+			long userId, long groupId, List<Resource> resources,
+			String actionId, PermissionCheckerBag permissionCheckerBag)
 		throws PortalException, SystemException {
 
 		StopWatch stopWatch = null;
@@ -376,10 +376,20 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 
 		// Return false if there are no resources
 
-		if ((Validator.isNull(actionId)) || (resourceIds == null) ||
-			(resourceIds.length == 0)) {
-
+		if (Validator.isNull(actionId) || resources.isEmpty()) {
 			return false;
+		}
+
+		long[] resourceIds = null;
+
+		if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM != 6) {
+			resourceIds = new long[resources.size()];
+
+			for (int i = 0; i < resources.size(); i++) {
+				Resource resource = resources.get(i);
+
+				resourceIds[i] = resource.getResourceId();
+			}
 		}
 
 		List<Permission> permissions = null;
@@ -396,9 +406,16 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 
 		// Record logs with the first resource id
 
-		long resourceId = resourceIds[0];
+		long resourceId = 0;
 
-		logHasUserPermissions(userId, actionId, resourceId, stopWatch, block++);
+		if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM != 6) {
+			resourceId = resourceIds[0];
+		}
+		else {
+			resourceId = resources.get(0).getResourceId();
+		}
+
+		logHasUserPermissions(userId, resourceId, actionId, stopWatch, block++);
 
 		//List<Group> userGroups = permissionCheckerBag.getUserGroups();
 		//List<Organization> userOrgs = permissionCheckerBag.getUserOrgs();
@@ -408,7 +425,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 		List<Group> groups = permissionCheckerBag.getGroups();
 		List<Role> roles = permissionCheckerBag.getRoles();
 
-		logHasUserPermissions(userId, actionId, resourceId, stopWatch, block++);
+		logHasUserPermissions(userId, resourceId, actionId, stopWatch, block++);
 
 		// Check the organization and community intersection table. Break out of
 		// this method if the user has one of the permissions set at the
@@ -418,37 +435,37 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 		//	return true;
 		//}
 
-		logHasUserPermissions(userId, actionId, resourceId, stopWatch, block++);
+		logHasUserPermissions(userId, resourceId, actionId, stopWatch, block++);
 
 		if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 1) {
 			return hasUserPermissions_1(
-				userId, actionId, resourceId, permissions, groups, groupId,
+				userId, resourceId, actionId, permissions, groups, groupId,
 				stopWatch, block);
 		}
 		else if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 2) {
 			return hasUserPermissions_2(
-				userId, actionId, resourceId, permissions, groups, groupId,
+				userId, resourceId, actionId, permissions, groups, groupId,
 				stopWatch, block);
 		}
 		else if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 3) {
 			return hasUserPermissions_3(
-				userId, actionId, resourceId, permissions, groups, roles,
+				userId, resourceId, actionId, permissions, groups, roles,
 				stopWatch, block);
 		}
 		else if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 4) {
 			return hasUserPermissions_4(
-				userId, actionId, resourceId, permissions, groups, roles,
+				userId, resourceId, actionId, permissions, groups, roles,
 				stopWatch, block);
 		}
 		else if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 5) {
 			return hasUserPermissions_5(
-				userId, actionId, resourceId, permissions, roles, stopWatch,
+				userId, resourceId, actionId, permissions, roles, stopWatch,
 				block);
 		}
 		else if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
 			return hasUserPermissions_6(
-				userId, actionId, name, resourceId, permissions, roles,
-				stopWatch, block);
+				userId, resourceId, resources, actionId, roles, stopWatch,
+				block);
 		}
 
 		return false;
@@ -773,7 +790,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 	}
 
 	protected boolean hasUserPermissions_1(
-			long userId, String actionId, long resourceId,
+			long userId, long resourceId, String actionId,
 			List<Permission> permissions, List<Group> groups, long groupId,
 			StopWatch stopWatch, int block)
 		throws SystemException {
@@ -787,7 +804,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 			}
 		}
 
-		logHasUserPermissions(userId, actionId, resourceId, stopWatch, block++);
+		logHasUserPermissions(userId, resourceId, actionId, stopWatch, block++);
 
 		// Is the user associated with groups or organizations that are directly
 		// connected to one of the permissions?
@@ -800,7 +817,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 			}
 		}
 
-		logHasUserPermissions(userId, actionId, resourceId, stopWatch, block++);
+		logHasUserPermissions(userId, resourceId, actionId, stopWatch, block++);
 
 		// Is the user connected to one of the permissions via user roles?
 
@@ -808,7 +825,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 			return true;
 		}
 
-		logHasUserPermissions(userId, actionId, resourceId, stopWatch, block++);
+		logHasUserPermissions(userId, resourceId, actionId, stopWatch, block++);
 
 		// Is the user connected to one of the permissions via user group roles?
 
@@ -818,7 +835,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 			return true;
 		}
 
-		logHasUserPermissions(userId, actionId, resourceId, stopWatch, block++);
+		logHasUserPermissions(userId, resourceId, actionId, stopWatch, block++);
 
 		// Is the user directly connected to one of the permissions?
 
@@ -826,13 +843,13 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 			return true;
 		}
 
-		logHasUserPermissions(userId, actionId, resourceId, stopWatch, block++);
+		logHasUserPermissions(userId, resourceId, actionId, stopWatch, block++);
 
 		return false;
 	}
 
 	protected boolean hasUserPermissions_2(
-			long userId, String actionId, long resourceId,
+			long userId, long resourceId, String actionId,
 			List<Permission> permissions, List<Group> groups, long groupId,
 			StopWatch stopWatch, int block)
 		throws SystemException {
@@ -846,13 +863,13 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 			return true;
 		}
 
-		logHasUserPermissions(userId, actionId, resourceId, stopWatch, block++);
+		logHasUserPermissions(userId, resourceId, actionId, stopWatch, block++);
 
 		return false;
 	}
 
 	protected boolean hasUserPermissions_3(
-			long userId, String actionId, long resourceId,
+			long userId, long resourceId, String actionId,
 			List<Permission> permissions, List<Group> groups, List<Role> roles,
 			StopWatch stopWatch, int block)
 		throws SystemException {
@@ -868,7 +885,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 			}
 		}
 
-		logHasUserPermissions(userId, actionId, resourceId, stopWatch, block++);
+		logHasUserPermissions(userId, resourceId, actionId, stopWatch, block++);
 
 		// Is the user associated with a role that is directly connected to one
 		// of the permissions?
@@ -881,7 +898,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 			}
 		}
 
-		logHasUserPermissions(userId, actionId, resourceId, stopWatch, block++);
+		logHasUserPermissions(userId, resourceId, actionId, stopWatch, block++);
 
 		// Is the user directly connected to one of the permissions?
 
@@ -889,13 +906,13 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 			return true;
 		}
 
-		logHasUserPermissions(userId, actionId, resourceId, stopWatch, block++);
+		logHasUserPermissions(userId, resourceId, actionId, stopWatch, block++);
 
 		return false;
 	}
 
 	protected boolean hasUserPermissions_4(
-			long userId, String actionId, long resourceId,
+			long userId, long resourceId, String actionId,
 			List<Permission> permissions, List<Group> groups, List<Role> roles,
 			StopWatch stopWatch, int block)
 		throws SystemException {
@@ -909,13 +926,13 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 			return true;
 		}
 
-		logHasUserPermissions(userId, actionId, resourceId, stopWatch, block++);
+		logHasUserPermissions(userId, resourceId, actionId, stopWatch, block++);
 
 		return false;
 	}
 
 	protected boolean hasUserPermissions_5(
-			long userId, String actionId, long resourceId,
+			long userId, long resourceId, String actionId,
 			List<Permission> permissions, List<Role> roles, StopWatch stopWatch,
 			int block)
 		throws SystemException {
@@ -928,32 +945,44 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 			}
 		}
 
-		logHasUserPermissions(userId, actionId, resourceId, stopWatch, block++);
+		logHasUserPermissions(userId, resourceId, actionId, stopWatch, block++);
 
 		return false;
 	}
 
 	protected boolean hasUserPermissions_6(
-			long userId, String actionId, String name, long resourceId,
-			List<Permission> permissions, List<Role> roles, StopWatch stopWatch,
+			long userId, long resourceId, List<Resource> resources,
+			String actionId, List<Role> roles, StopWatch stopWatch,
 			int block)
 		throws PortalException, SystemException {
 
-		for (Role role : roles) {
-			if (resourcePermissionLocalService.hasResourcePermission(
-					resourceId, role.getRoleId(), name, actionId)) {
+		// Iterate the list of resources in reverse order to test permissions
+		// from company scope to individual scope because it is more likely that
+		// a permission is assigned at a higher scope. Optimizing this method
+		// to one SQL call may actually slow things down since most of the calls
+		// will pull from the cache after the first request.
 
-				return true;
+		for (int i = resources.size() - 1; i >= 0; i--) {
+			Resource resource = resources.get(i);
+
+			for (Role role : roles) {
+				if (resourcePermissionLocalService.hasResourcePermission(
+						resource.getCompanyId(), resource.getName(),
+						resource.getScope(), resource.getPrimKey(),
+						role.getRoleId(), actionId)) {
+
+					return true;
+				}
 			}
 		}
 
-		logHasUserPermissions(userId, actionId, resourceId, stopWatch, block++);
+		logHasUserPermissions(userId, resourceId, actionId, stopWatch, block++);
 
 		return false;
 	}
 
 	protected void logHasUserPermissions(
-		long userId, String actionId, long resourceId, StopWatch stopWatch,
+		long userId, long resourceId, String actionId, StopWatch stopWatch,
 		int block) {
 
 		if (!_log.isDebugEnabled()) {
@@ -962,7 +991,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 
 		_log.debug(
 			"Checking user permissions block " + block + " for " + userId +
-				" " + actionId + " " + resourceId + " takes " +
+				" " + resourceId + " " + actionId + " takes " +
 					stopWatch.getTime() + " ms");
 	}
 

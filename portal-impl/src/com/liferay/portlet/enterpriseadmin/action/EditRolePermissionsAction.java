@@ -134,7 +134,9 @@ public class EditRolePermissionsAction extends PortletAction {
 
 		long roleId = ParamUtil.getLong(actionRequest, "roleId");
 		long permissionId = ParamUtil.getLong(actionRequest, "permissionId");
-		long resourceId = ParamUtil.getLong(actionRequest, "resourceId");
+		String name = ParamUtil.getString(actionRequest, "name");
+		int scope = ParamUtil.getInteger(actionRequest, "scope");
+		String primKey = ParamUtil.getString(actionRequest, "primKey");
 		String actionId = ParamUtil.getString(actionRequest, "actionId");
 
 		Role role = RoleLocalServiceUtil.getRole(roleId);
@@ -150,8 +152,9 @@ public class EditRolePermissionsAction extends PortletAction {
 		}
 
 		if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
-			ResourcePermissionServiceUtil.unsetResourcePermission(
-				roleId, themeDisplay.getScopeGroupId(), resourceId, actionId);
+			ResourcePermissionServiceUtil.removeResourcePermission(
+				themeDisplay.getScopeGroupId(), themeDisplay.getCompanyId(),
+				name, scope, primKey, roleId, actionId);
 		}
 		else {
 			PermissionServiceUtil.unsetRolePermission(
@@ -240,25 +243,26 @@ public class EditRolePermissionsAction extends PortletAction {
 			String selResource, String actionId)
 		throws Exception {
 
+		long companyId = role.getCompanyId();
 		long roleId = role.getRoleId();
 
 		int scope = ParamUtil.getInteger(
 			actionRequest, "scope" + selResource + actionId);
 
 		if (scope == ResourceConstants.SCOPE_COMPANY) {
-			ResourcePermissionServiceUtil.setResourcePermission(
-				roleId, groupId, selResource, scope,
-				String.valueOf(role.getCompanyId()), actionId);
+			ResourcePermissionServiceUtil.addResourcePermission(
+				groupId, companyId, selResource, scope,
+				String.valueOf(role.getCompanyId()), roleId, actionId);
 		}
 		else if (scope == ResourceConstants.SCOPE_GROUP) {
 			if ((role.getType() == RoleConstants.TYPE_COMMUNITY) ||
 				(role.getType() == RoleConstants.TYPE_ORGANIZATION)) {
 
-				ResourcePermissionServiceUtil.setResourcePermission(
-					roleId, groupId, selResource,
+				ResourcePermissionServiceUtil.addResourcePermission(
+					groupId, companyId, selResource,
 					ResourceConstants.SCOPE_GROUP_TEMPLATE,
 					String.valueOf(GroupConstants.DEFAULT_PARENT_GROUP_ID),
-					actionId);
+					roleId, actionId);
 			}
 			else {
 				String[] groupIds = StringUtil.split(
@@ -274,14 +278,15 @@ public class EditRolePermissionsAction extends PortletAction {
 
 				groupIds = ArrayUtil.distinct(groupIds);
 
-				ResourcePermissionServiceUtil.unsetResourcePermissions(
-					roleId, groupId, selResource, ResourceConstants.SCOPE_GROUP,
-					actionId);
+				ResourcePermissionServiceUtil.removeResourcePermissions(
+					groupId, companyId, selResource,
+					ResourceConstants.SCOPE_GROUP, roleId, actionId);
 
 				for (String curGroupId : groupIds) {
-					ResourcePermissionServiceUtil.setResourcePermission(
-						roleId, groupId, selResource,
-						ResourceConstants.SCOPE_GROUP, curGroupId, actionId);
+					ResourcePermissionServiceUtil.addResourcePermission(
+						groupId, companyId, selResource,
+						ResourceConstants.SCOPE_GROUP, curGroupId, roleId,
+						actionId);
 				}
 			}
 		}
@@ -289,17 +294,17 @@ public class EditRolePermissionsAction extends PortletAction {
 
 			// Remove company, group template, and group permissions
 
-			ResourcePermissionServiceUtil.unsetResourcePermissions(
-				roleId, groupId, selResource, ResourceConstants.SCOPE_COMPANY,
-				actionId);
+			ResourcePermissionServiceUtil.removeResourcePermissions(
+				groupId, companyId, selResource,
+				ResourceConstants.SCOPE_COMPANY, roleId, actionId);
 
-			ResourcePermissionServiceUtil.unsetResourcePermissions(
-				roleId, groupId, selResource,
-				ResourceConstants.SCOPE_GROUP_TEMPLATE, actionId);
+			ResourcePermissionServiceUtil.removeResourcePermissions(
+				groupId, companyId, selResource,
+				ResourceConstants.SCOPE_GROUP_TEMPLATE, roleId, actionId);
 
-			ResourcePermissionServiceUtil.unsetResourcePermissions(
-				roleId, groupId, selResource, ResourceConstants.SCOPE_GROUP,
-				actionId);
+			ResourcePermissionServiceUtil.removeResourcePermissions(
+				groupId, companyId, selResource, ResourceConstants.SCOPE_GROUP,
+				roleId, actionId);
 		}
 	}
 

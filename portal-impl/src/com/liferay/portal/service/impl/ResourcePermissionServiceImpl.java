@@ -24,6 +24,7 @@ package com.liferay.portal.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.service.base.ResourcePermissionServiceBaseImpl;
 
@@ -37,48 +38,52 @@ import com.liferay.portal.service.base.ResourcePermissionServiceBaseImpl;
 public class ResourcePermissionServiceImpl
 	extends ResourcePermissionServiceBaseImpl {
 
-	public void setResourcePermission(
-			long roleId, long groupId, String name, int scope, String primKey,
+	public void addResourcePermission(
+			long groupId, long companyId, String name, int scope,
+			String primKey, long roleId, String actionId)
+		throws PortalException, SystemException {
+
+		permissionService.checkPermission(
+			groupId, Role.class.getName(), roleId);
+
+		resourcePermissionLocalService.addResourcePermission(
+			companyId, name, scope, primKey, roleId, actionId);
+	}
+
+	public void setIndividualResourcePermissions(
+			long groupId, long companyId, String name, String primKey,
+			long roleId, String[] actionIds)
+		throws PortalException, SystemException {
+
+		permissionService.checkPermission(groupId, name, primKey);
+
+		resourcePermissionLocalService.setResourcePermissions(
+			companyId, name, ResourceConstants.SCOPE_INDIVIDUAL, primKey,
+			roleId, actionIds);
+	}
+
+	public void removeResourcePermission(
+			long groupId, long companyId, String name, int scope,
+			String primKey, long roleId, String actionId)
+		throws PortalException, SystemException {
+
+		permissionService.checkPermission(
+			groupId, Role.class.getName(), roleId);
+
+		resourcePermissionLocalService.removeResourcePermission(
+			companyId, name, scope, primKey, roleId, actionId);
+	}
+
+	public void removeResourcePermissions(
+			long groupId, long companyId, String name, int scope, long roleId,
 			String actionId)
 		throws PortalException, SystemException {
 
 		permissionService.checkPermission(
 			groupId, Role.class.getName(), roleId);
 
-		resourcePermissionLocalService.setResourcePermission(
-			roleId, getUser().getCompanyId(), name, scope, primKey, actionId);
-	}
-
-	public void setResourcePermissions(
-			long roleId, long groupId, String[] actionIds, long resourceId)
-		throws PortalException, SystemException {
-
-		permissionService.checkPermission(groupId, resourceId);
-
-		resourcePermissionLocalService.setResourcePermissions(
-			roleId, actionIds, resourceId);
-	}
-
-	public void unsetResourcePermission(
-			long roleId, long groupId, long resourceId, String actionId)
-		throws PortalException, SystemException {
-
-		permissionService.checkPermission(
-			groupId, Role.class.getName(), roleId);
-
-		resourcePermissionLocalService.unsetResourcePermission(
-			roleId, resourceId, actionId);
-	}
-
-	public void unsetResourcePermissions(
-			long roleId, long groupId, String name, int scope, String actionId)
-		throws PortalException, SystemException {
-
-		permissionService.checkPermission(
-			groupId, Role.class.getName(), roleId);
-
-		resourcePermissionLocalService.unsetResourcePermissions(
-			roleId, getUser().getCompanyId(), name, scope, actionId);
+		resourcePermissionLocalService.removeResourcePermissions(
+			companyId, name, scope, roleId, actionId);
 	}
 
 }

@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.ResourceCode;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.service.base.ResourceCodeLocalServiceBaseImpl;
+import com.liferay.portal.util.PropsValues;
 
 import java.util.List;
 import java.util.Map;
@@ -82,6 +83,10 @@ public class ResourceCodeLocalServiceImpl
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public void checkResourceCodes() throws SystemException {
+		if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
+			return;
+		}
+
 		if (_resourceCodes.isEmpty()) {
 			List<ResourceCode> resourceCodes =
 				resourceCodePersistence.findAll();
@@ -99,6 +104,10 @@ public class ResourceCodeLocalServiceImpl
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public void checkResourceCodes(long companyId, String name)
 		throws SystemException {
+
+		if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
+			return;
+		}
 
 		getResourceCode(companyId, name, ResourceConstants.SCOPE_COMPANY);
 		getResourceCode(companyId, name, ResourceConstants.SCOPE_GROUP);

@@ -36,6 +36,8 @@ String curModelResourceName = (String)request.getAttribute("edit_role_permission
 List curActions = ResourceActionsUtil.getResourceActions(curPortletResource, curModelResource);
 
 curActions = ListUtil.sort(curActions, new ActionComparator(company.getCompanyId(), locale));
+
+List guestUnsupportedActions = ResourceActionsUtil.getResourceGuestUnsupportedActions(curPortletResource, curModelResource);
 %>
 
 <table class="lfr-table">
@@ -55,7 +57,7 @@ curActions = ListUtil.sort(curActions, new ActionComparator(company.getCompanyId
 
 <%
 for (int i = 0; i < curActions.size(); i++) {
-	String actionId = (String) curActions.get(i);
+	String actionId = (String)curActions.get(i);
 
 	String curResource = null;
 
@@ -81,9 +83,9 @@ for (int i = 0; i < curActions.size(); i++) {
 	}
 	else {
 		if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
-			hasCompanyScope = (role.getType() == RoleConstants.TYPE_REGULAR) && ResourcePermissionLocalServiceUtil.hasScopeResourcePermission(role.getRoleId(), company.getCompanyId(), curResource, ResourceConstants.SCOPE_COMPANY, actionId);
-			hasGroupTemplateScope = ((role.getType() == RoleConstants.TYPE_COMMUNITY) || (role.getType() == RoleConstants.TYPE_ORGANIZATION)) && ResourcePermissionLocalServiceUtil.hasScopeResourcePermission(role.getRoleId(), company.getCompanyId(), curResource, ResourceConstants.SCOPE_GROUP_TEMPLATE, actionId);
-			hasGroupScope = (role.getType() == RoleConstants.TYPE_REGULAR) && ResourcePermissionLocalServiceUtil.hasScopeResourcePermission(role.getRoleId(), company.getCompanyId(), curResource, ResourceConstants.SCOPE_GROUP, actionId);
+			hasCompanyScope = (role.getType() == RoleConstants.TYPE_REGULAR) && ResourcePermissionLocalServiceUtil.hasScopeResourcePermission(company.getCompanyId(), curResource, ResourceConstants.SCOPE_COMPANY, role.getRoleId(), actionId);
+			hasGroupTemplateScope = ((role.getType() == RoleConstants.TYPE_COMMUNITY) || (role.getType() == RoleConstants.TYPE_ORGANIZATION)) && ResourcePermissionLocalServiceUtil.hasScopeResourcePermission(company.getCompanyId(), curResource, ResourceConstants.SCOPE_GROUP_TEMPLATE, role.getRoleId(), actionId);
+			hasGroupScope = (role.getType() == RoleConstants.TYPE_REGULAR) && ResourcePermissionLocalServiceUtil.hasScopeResourcePermission(company.getCompanyId(), curResource, ResourceConstants.SCOPE_GROUP, role.getRoleId(), actionId);
 		}
 		else {
 			hasCompanyScope = (role.getType() == RoleConstants.TYPE_REGULAR) && PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), curResource, ResourceConstants.SCOPE_COMPANY, actionId);
@@ -100,7 +102,16 @@ for (int i = 0; i < curActions.size(); i++) {
 		<td>
 			<c:choose>
 				<c:when test="<%= role.getType() == RoleConstants.TYPE_REGULAR %>">
-					<select name="<portlet:namespace />scope<%= target %>" onchange="<portlet:namespace/>toggleGroupDiv('<%= target %>');">
+
+					<%
+					boolean disabled = false;
+
+					if (role.getName().equals(RoleConstants.GUEST) && guestUnsupportedActions.contains(actionId)) {
+						disabled = true;
+					}
+					%>
+
+					<select <%= disabled ? "disabled" : "" %> name="<portlet:namespace />scope<%= target %>" onchange="<portlet:namespace/>toggleGroupDiv('<%= target %>');">
 						<option value=""></option>
 							<option <%= hasCompanyScope ? "selected" : "" %> value="<%= ResourceConstants.SCOPE_COMPANY %>"><liferay-ui:message key="enterprise" /></option>
 

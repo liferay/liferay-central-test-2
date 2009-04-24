@@ -35,6 +35,7 @@ import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
+import com.liferay.portal.service.ResourcePermissionLocalServiceUtil;
 import com.liferay.portal.util.PropsValues;
 
 /**
@@ -136,10 +137,22 @@ public class LayoutPermissionImpl implements LayoutPermission {
 		}
 
 		try {
-			ResourceLocalServiceUtil.getResource(
-				layout.getCompanyId(), Layout.class.getName(),
-				ResourceConstants.SCOPE_INDIVIDUAL,
-				String.valueOf(layout.getPlid()));
+			if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
+				if (ResourcePermissionLocalServiceUtil.
+						getResourcePermissionsCount(
+							layout.getCompanyId(), Layout.class.getName(),
+							ResourceConstants.SCOPE_INDIVIDUAL,
+							String.valueOf(layout.getPlid())) == 0) {
+
+					throw new NoSuchResourceException();
+				}
+			}
+			else {
+				ResourceLocalServiceUtil.getResource(
+					layout.getCompanyId(), Layout.class.getName(),
+					ResourceConstants.SCOPE_INDIVIDUAL,
+					String.valueOf(layout.getPlid()));
+			}
 		}
 		catch (NoSuchResourceException nsre) {
 			boolean addCommunityPermission = true;
