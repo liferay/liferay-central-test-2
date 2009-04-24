@@ -396,39 +396,24 @@ String emailPageUpdatedSignature = ParamUtil.getString(request, "emailPageUpdate
 		</table>
 	</c:when>
 	<c:when test='<%= tabs2.equals("display-settings") %>'>
-		<c:if test="<%= (PropsValues.WIKI_PAGE_COMMENTS_ENABLED || PropsValues.WIKI_PAGE_RATINGS_ENABLED) %>">
+		<c:if test="<%= PropsValues.WIKI_PAGE_COMMENTS_ENABLED %>">
 			<table class="lfr-table">
-
-				<c:if test="<%= PropsValues.WIKI_PAGE_COMMENTS_ENABLED %>">
-					<tr>
-						<td class="lfr-label">
-							<liferay-ui:message key="enable-comments" />
-						</td>
-						<td>
-							<liferay-ui:input-checkbox param="enableComments" defaultValue="<%= enableComments %>" />
-						</td>
-					</tr>
-					<tr>
-						<td class="lfr-label">
-							<liferay-ui:message key="enable-comment-ratings" />
-						</td>
-						<td>
-							<liferay-ui:input-checkbox param="enableCommentRatings" defaultValue="<%= enableCommentRatings %>" />
-						</td>
-					</tr>
-				</c:if>
-
-				<c:if test="<%= PropsValues.WIKI_PAGE_RATINGS_ENABLED %>">
-					<tr>
-						<td class="lfr-label">
-							<liferay-ui:message key="enable-page-ratings" />
-						</td>
-						<td>
-							<liferay-ui:input-checkbox param="enablePageRatings" defaultValue="<%= enablePageRatings %>" />
-						</td>
-					</tr>
-				</c:if>
-
+			<tr>
+				<td class="lfr-label">
+					<liferay-ui:message key="enable-comments" />
+				</td>
+				<td>
+					<liferay-ui:input-checkbox param="enableComments" defaultValue="<%= enableComments %>" />
+				</td>
+			</tr>
+			<tr>
+				<td class="lfr-label">
+					<liferay-ui:message key="enable-comment-ratings" />
+				</td>
+				<td>
+					<liferay-ui:input-checkbox param="enableCommentRatings" defaultValue="<%= enableCommentRatings %>" />
+				</td>
+			</tr>
 			</table>
 
 			<br />
