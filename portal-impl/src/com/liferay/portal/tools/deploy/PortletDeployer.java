@@ -62,6 +62,9 @@ public class PortletDeployer extends BaseDeployer {
 	public static final String JSF_MYFACES =
 		"org.apache.myfaces.portlet.MyFacesGenericPortlet";
 
+	public static final String JSF_STANDARD =
+		"javax.portlet.faces.GenericFacesPortlet";
+
 	public static final String JSF_SUN =
 		"com.sun.faces.portlet.FacesPortlet";
 

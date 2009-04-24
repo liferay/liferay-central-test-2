@@ -297,6 +297,8 @@ public class InvokerPortletImpl implements InvokerPortlet {
 		if (ClassUtil.isSubclass(
 				_portlet.getClass(), PortletDeployer.JSF_MYFACES) ||
 			ClassUtil.isSubclass(
+				_portlet.getClass(), PortletDeployer.JSF_STANDARD) ||
+			ClassUtil.isSubclass(
 				_portlet.getClass(), PortletDeployer.JSF_SUN)) {
 
 			_facesPortlet = true;
