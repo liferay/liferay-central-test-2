@@ -222,6 +222,10 @@ public class ServletContextUtil {
 			Set<String> resourcePaths, Set<String> classNames)
 		throws IOException {
 
+		if (resourcePaths == null) {
+			return;
+		}
+
 		for (String resourcePath : resourcePaths) {
 			if (resourcePath.endsWith(_EXT_CLASS)) {
 				String className = _getClassName(
