@@ -177,6 +177,14 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 	}
 
 	public File createTempFile(String extension) {
+		return new File(createTempFileName(extension));
+	}
+
+	public String createTempFileName() {
+		return createTempFileName(null);
+	}
+
+	public String createTempFileName(String extension) {
 		StringBuilder sb = new StringBuilder();
 
 		sb.append(SystemProperties.get(SystemProperties.TMP_DIR));
@@ -189,7 +197,7 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 			sb.append(extension);
 		}
 
-		return new File(sb.toString());
+		return sb.toString();
 	}
 
 	public boolean delete(String file) {

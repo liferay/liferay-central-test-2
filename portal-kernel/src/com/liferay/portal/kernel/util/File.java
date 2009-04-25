@@ -55,6 +55,10 @@ public interface File {
 
 	public java.io.File createTempFile(String extension);
 
+	public String createTempFileName();
+
+	public String createTempFileName(String extension);
+
 	public boolean delete(String file);
 
 	public boolean delete(java.io.File file);

@@ -76,6 +76,14 @@ public class FileUtil {
 		return getFile().createTempFile(extension);
 	}
 
+	public static String createTempFileName() {
+		return getFile().createTempFileName();
+	}
+
+	public static String createTempFileName(String extension) {
+		return getFile().createTempFileName(extension);
+	}
+
 	public static boolean delete(String file) {
 		return getFile().delete(file);
 	}
