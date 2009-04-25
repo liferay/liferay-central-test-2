@@ -73,14 +73,17 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 		long companyId, String name, String primKey, long ownerId,
 		String actionId) {
 
-		if (ownerId == getUserId()) {
-			try {
-				if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
-					return ResourcePermissionLocalServiceUtil.hasResourcePermission(
-						companyId, name, ResourceConstants.SCOPE_INDIVIDUAL,
-						primKey, getOwnerRoleId(), actionId);
-				}
+		if (ownerId != getUserId()) {
+			return false;
+		}
 
+		try {
+			if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
+				return ResourcePermissionLocalServiceUtil.hasResourcePermission(
+					companyId, name, ResourceConstants.SCOPE_INDIVIDUAL,
+					primKey, getOwnerRoleId(), actionId);
+			}
+			else {
 				Resource resource = ResourceLocalServiceUtil.getResource(
 					companyId, name, ResourceConstants.SCOPE_INDIVIDUAL,
 					primKey);
@@ -96,10 +99,10 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 					return true;
 				}
 			}
-			catch (Exception e) {
-				if (_log.isDebugEnabled()) {
-					_log.debug(e, e);
-				}
+		}
+		catch (Exception e) {
+			if (_log.isDebugEnabled()) {
+				_log.debug(e, e);
 			}
 		}
 
