@@ -1062,6 +1062,10 @@ public class PropsValues {
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.PORTAL_JAAS_STRICT_PASSWORD));
 
+	public static final boolean PORTAL_SECURITY_MANAGER_ENABLE =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsKeys.PORTAL_SECURITY_MANAGER_ENABLE));
+
 	public static final String PORTLET_CONTAINER_IMPL =
 		PropsUtil.get(PropsKeys.PORTLET_CONTAINER_IMPL);
 

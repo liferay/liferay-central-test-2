@@ -43,11 +43,13 @@ import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.Release;
 import com.liferay.portal.scheduler.SchedulerEngineProxy;
 import com.liferay.portal.search.lucene.LuceneUtil;
+import com.liferay.portal.security.lang.PortalSecurityManager;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.service.ClassNameLocalServiceUtil;
 import com.liferay.portal.service.ReleaseLocalServiceUtil;
 import com.liferay.portal.service.ResourceActionLocalServiceUtil;
 import com.liferay.portal.service.ResourceCodeLocalServiceUtil;
+import com.liferay.portal.util.PropsValues;
 
 /**
  * <a href="StartupAction.java.html"><b><i>View Source</i></b></a>
@@ -89,9 +91,17 @@ public class StartupAction extends SimpleAction {
 			_log.error(e, e);
 		}
 
-		// Add shutdown hook
+		// Shutdown hook
 
 		Runtime.getRuntime().addShutdownHook(new Thread(new ShutdownHook()));
+
+		// Security manager
+
+		if ((System.getSecurityManager() == null) &&
+			(PropsValues.PORTAL_SECURITY_MANAGER_ENABLE)) {
+
+			System.setSecurityManager(new PortalSecurityManager());
+		}
 
 		// Velocity
 
