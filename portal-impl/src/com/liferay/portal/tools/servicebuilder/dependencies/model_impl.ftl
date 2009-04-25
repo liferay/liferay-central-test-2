@@ -452,6 +452,26 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> {
 		</#if>
 	}
 
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		<#list entity.regularColList as column>
+			<#if column_index == 0>
+				sb.append("{${column.name}=");
+				sb.append(get${column.methodName}());
+			<#elseif column_has_next>
+				sb.append(", ${column.name}=");
+				sb.append(get${column.methodName}());
+			<#else>
+				sb.append(", ${column.name}=");
+				sb.append(get${column.methodName}());
+				sb.append("}");
+			</#if>
+		</#list>
+
+		return sb.toString();
+	}
+
 	<#list entity.regularColList as column>
 		private ${column.type} _${column.name};
 
