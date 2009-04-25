@@ -330,6 +330,81 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread> {
 		return (int)getPrimaryKey();
 	}
 
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("{threadId=");
+		sb.append(getThreadId());
+		sb.append(", groupId=");
+		sb.append(getGroupId());
+		sb.append(", categoryId=");
+		sb.append(getCategoryId());
+		sb.append(", rootMessageId=");
+		sb.append(getRootMessageId());
+		sb.append(", messageCount=");
+		sb.append(getMessageCount());
+		sb.append(", viewCount=");
+		sb.append(getViewCount());
+		sb.append(", lastPostByUserId=");
+		sb.append(getLastPostByUserId());
+		sb.append(", lastPostDate=");
+		sb.append(getLastPostDate());
+		sb.append(", priority=");
+		sb.append(getPriority());
+		sb.append("}");
+
+		return sb.toString();
+	}
+
+	public String toXmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<model><model-name>");
+		sb.append("com.liferay.portlet.messageboards.model.MBThread");
+		sb.append("</model-name>");
+
+		sb.append(
+			"<column><column-name>threadId</column-name><column-value><![CDATA[");
+		sb.append("getThreadId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>groupId</column-name><column-value><![CDATA[");
+		sb.append("getGroupId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>categoryId</column-name><column-value><![CDATA[");
+		sb.append("getCategoryId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>rootMessageId</column-name><column-value><![CDATA[");
+		sb.append("getRootMessageId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>messageCount</column-name><column-value><![CDATA[");
+		sb.append("getMessageCount()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>viewCount</column-name><column-value><![CDATA[");
+		sb.append("getViewCount()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>lastPostByUserId</column-name><column-value><![CDATA[");
+		sb.append("getLastPostByUserId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>lastPostDate</column-name><column-value><![CDATA[");
+		sb.append("getLastPostDate()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>priority</column-name><column-value><![CDATA[");
+		sb.append("getPriority()");
+		sb.append("]]></column-value></column>");
+
+		sb.append("</model>");
+
+		return sb.toString();
+	}
+
 	private long _threadId;
 	private long _groupId;
 	private long _categoryId;

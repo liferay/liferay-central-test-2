@@ -232,6 +232,39 @@ public class ClassNameModelImpl extends BaseModelImpl<ClassName> {
 		return (int)getPrimaryKey();
 	}
 
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("{classNameId=");
+		sb.append(getClassNameId());
+		sb.append(", value=");
+		sb.append(getValue());
+		sb.append("}");
+
+		return sb.toString();
+	}
+
+	public String toXmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<model><model-name>");
+		sb.append("com.liferay.portal.model.ClassName");
+		sb.append("</model-name>");
+
+		sb.append(
+			"<column><column-name>classNameId</column-name><column-value><![CDATA[");
+		sb.append("getClassNameId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>value</column-name><column-value><![CDATA[");
+		sb.append("getValue()");
+		sb.append("]]></column-value></column>");
+
+		sb.append("</model>");
+
+		return sb.toString();
+	}
+
 	private long _classNameId;
 	private String _value;
 	private String _originalValue;

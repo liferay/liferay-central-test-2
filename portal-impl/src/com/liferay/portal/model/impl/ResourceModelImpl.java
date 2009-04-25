@@ -246,6 +246,45 @@ public class ResourceModelImpl extends BaseModelImpl<Resource> {
 		return (int)getPrimaryKey();
 	}
 
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("{resourceId=");
+		sb.append(getResourceId());
+		sb.append(", codeId=");
+		sb.append(getCodeId());
+		sb.append(", primKey=");
+		sb.append(getPrimKey());
+		sb.append("}");
+
+		return sb.toString();
+	}
+
+	public String toXmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<model><model-name>");
+		sb.append("com.liferay.portal.model.Resource");
+		sb.append("</model-name>");
+
+		sb.append(
+			"<column><column-name>resourceId</column-name><column-value><![CDATA[");
+		sb.append("getResourceId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>codeId</column-name><column-value><![CDATA[");
+		sb.append("getCodeId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>primKey</column-name><column-value><![CDATA[");
+		sb.append("getPrimKey()");
+		sb.append("]]></column-value></column>");
+
+		sb.append("</model>");
+
+		return sb.toString();
+	}
+
 	private long _resourceId;
 	private long _codeId;
 	private long _originalCodeId;

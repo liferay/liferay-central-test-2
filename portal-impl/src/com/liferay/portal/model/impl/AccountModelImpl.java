@@ -411,6 +411,123 @@ public class AccountModelImpl extends BaseModelImpl<Account> {
 		return (int)getPrimaryKey();
 	}
 
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("{accountId=");
+		sb.append(getAccountId());
+		sb.append(", companyId=");
+		sb.append(getCompanyId());
+		sb.append(", userId=");
+		sb.append(getUserId());
+		sb.append(", userName=");
+		sb.append(getUserName());
+		sb.append(", createDate=");
+		sb.append(getCreateDate());
+		sb.append(", modifiedDate=");
+		sb.append(getModifiedDate());
+		sb.append(", parentAccountId=");
+		sb.append(getParentAccountId());
+		sb.append(", name=");
+		sb.append(getName());
+		sb.append(", legalName=");
+		sb.append(getLegalName());
+		sb.append(", legalId=");
+		sb.append(getLegalId());
+		sb.append(", legalType=");
+		sb.append(getLegalType());
+		sb.append(", sicCode=");
+		sb.append(getSicCode());
+		sb.append(", tickerSymbol=");
+		sb.append(getTickerSymbol());
+		sb.append(", industry=");
+		sb.append(getIndustry());
+		sb.append(", type=");
+		sb.append(getType());
+		sb.append(", size=");
+		sb.append(getSize());
+		sb.append("}");
+
+		return sb.toString();
+	}
+
+	public String toXmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<model><model-name>");
+		sb.append("com.liferay.portal.model.Account");
+		sb.append("</model-name>");
+
+		sb.append(
+			"<column><column-name>accountId</column-name><column-value><![CDATA[");
+		sb.append("getAccountId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>companyId</column-name><column-value><![CDATA[");
+		sb.append("getCompanyId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>userId</column-name><column-value><![CDATA[");
+		sb.append("getUserId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>userName</column-name><column-value><![CDATA[");
+		sb.append("getUserName()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>createDate</column-name><column-value><![CDATA[");
+		sb.append("getCreateDate()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>modifiedDate</column-name><column-value><![CDATA[");
+		sb.append("getModifiedDate()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>parentAccountId</column-name><column-value><![CDATA[");
+		sb.append("getParentAccountId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>name</column-name><column-value><![CDATA[");
+		sb.append("getName()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>legalName</column-name><column-value><![CDATA[");
+		sb.append("getLegalName()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>legalId</column-name><column-value><![CDATA[");
+		sb.append("getLegalId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>legalType</column-name><column-value><![CDATA[");
+		sb.append("getLegalType()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>sicCode</column-name><column-value><![CDATA[");
+		sb.append("getSicCode()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>tickerSymbol</column-name><column-value><![CDATA[");
+		sb.append("getTickerSymbol()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>industry</column-name><column-value><![CDATA[");
+		sb.append("getIndustry()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>type</column-name><column-value><![CDATA[");
+		sb.append("getType()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>size</column-name><column-value><![CDATA[");
+		sb.append("getSize()");
+		sb.append("]]></column-value></column>");
+
+		sb.append("</model>");
+
+		return sb.toString();
+	}
+
 	private long _accountId;
 	private long _companyId;
 	private long _userId;

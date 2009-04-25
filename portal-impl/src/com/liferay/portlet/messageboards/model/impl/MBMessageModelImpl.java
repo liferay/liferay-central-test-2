@@ -489,6 +489,135 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage> {
 		return (int)getPrimaryKey();
 	}
 
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("{uuid=");
+		sb.append(getUuid());
+		sb.append(", messageId=");
+		sb.append(getMessageId());
+		sb.append(", groupId=");
+		sb.append(getGroupId());
+		sb.append(", companyId=");
+		sb.append(getCompanyId());
+		sb.append(", userId=");
+		sb.append(getUserId());
+		sb.append(", userName=");
+		sb.append(getUserName());
+		sb.append(", createDate=");
+		sb.append(getCreateDate());
+		sb.append(", modifiedDate=");
+		sb.append(getModifiedDate());
+		sb.append(", classNameId=");
+		sb.append(getClassNameId());
+		sb.append(", classPK=");
+		sb.append(getClassPK());
+		sb.append(", categoryId=");
+		sb.append(getCategoryId());
+		sb.append(", threadId=");
+		sb.append(getThreadId());
+		sb.append(", parentMessageId=");
+		sb.append(getParentMessageId());
+		sb.append(", subject=");
+		sb.append(getSubject());
+		sb.append(", body=");
+		sb.append(getBody());
+		sb.append(", attachments=");
+		sb.append(getAttachments());
+		sb.append(", anonymous=");
+		sb.append(getAnonymous());
+		sb.append(", priority=");
+		sb.append(getPriority());
+		sb.append("}");
+
+		return sb.toString();
+	}
+
+	public String toXmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<model><model-name>");
+		sb.append("com.liferay.portlet.messageboards.model.MBMessage");
+		sb.append("</model-name>");
+
+		sb.append(
+			"<column><column-name>uuid</column-name><column-value><![CDATA[");
+		sb.append("getUuid()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>messageId</column-name><column-value><![CDATA[");
+		sb.append("getMessageId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>groupId</column-name><column-value><![CDATA[");
+		sb.append("getGroupId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>companyId</column-name><column-value><![CDATA[");
+		sb.append("getCompanyId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>userId</column-name><column-value><![CDATA[");
+		sb.append("getUserId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>userName</column-name><column-value><![CDATA[");
+		sb.append("getUserName()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>createDate</column-name><column-value><![CDATA[");
+		sb.append("getCreateDate()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>modifiedDate</column-name><column-value><![CDATA[");
+		sb.append("getModifiedDate()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>classNameId</column-name><column-value><![CDATA[");
+		sb.append("getClassNameId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>classPK</column-name><column-value><![CDATA[");
+		sb.append("getClassPK()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>categoryId</column-name><column-value><![CDATA[");
+		sb.append("getCategoryId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>threadId</column-name><column-value><![CDATA[");
+		sb.append("getThreadId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>parentMessageId</column-name><column-value><![CDATA[");
+		sb.append("getParentMessageId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>subject</column-name><column-value><![CDATA[");
+		sb.append("getSubject()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>body</column-name><column-value><![CDATA[");
+		sb.append("getBody()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>attachments</column-name><column-value><![CDATA[");
+		sb.append("getAttachments()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>anonymous</column-name><column-value><![CDATA[");
+		sb.append("getAnonymous()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>priority</column-name><column-value><![CDATA[");
+		sb.append("getPriority()");
+		sb.append("]]></column-value></column>");
+
+		sb.append("</model>");
+
+		return sb.toString();
+	}
+
 	private String _uuid;
 	private String _originalUuid;
 	private long _messageId;

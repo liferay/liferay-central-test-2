@@ -309,6 +309,63 @@ public class PortletPreferencesModelImpl extends BaseModelImpl<PortletPreference
 		return (int)getPrimaryKey();
 	}
 
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("{portletPreferencesId=");
+		sb.append(getPortletPreferencesId());
+		sb.append(", ownerId=");
+		sb.append(getOwnerId());
+		sb.append(", ownerType=");
+		sb.append(getOwnerType());
+		sb.append(", plid=");
+		sb.append(getPlid());
+		sb.append(", portletId=");
+		sb.append(getPortletId());
+		sb.append(", preferences=");
+		sb.append(getPreferences());
+		sb.append("}");
+
+		return sb.toString();
+	}
+
+	public String toXmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<model><model-name>");
+		sb.append("com.liferay.portal.model.PortletPreferences");
+		sb.append("</model-name>");
+
+		sb.append(
+			"<column><column-name>portletPreferencesId</column-name><column-value><![CDATA[");
+		sb.append("getPortletPreferencesId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>ownerId</column-name><column-value><![CDATA[");
+		sb.append("getOwnerId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>ownerType</column-name><column-value><![CDATA[");
+		sb.append("getOwnerType()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>plid</column-name><column-value><![CDATA[");
+		sb.append("getPlid()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>portletId</column-name><column-value><![CDATA[");
+		sb.append("getPortletId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>preferences</column-name><column-value><![CDATA[");
+		sb.append("getPreferences()");
+		sb.append("]]></column-value></column>");
+
+		sb.append("</model>");
+
+		return sb.toString();
+	}
+
 	private long _portletPreferencesId;
 	private long _ownerId;
 	private long _originalOwnerId;

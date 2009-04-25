@@ -317,6 +317,70 @@ public class AnnouncementsDeliveryModelImpl extends BaseModelImpl<AnnouncementsD
 		return (int)getPrimaryKey();
 	}
 
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("{deliveryId=");
+		sb.append(getDeliveryId());
+		sb.append(", companyId=");
+		sb.append(getCompanyId());
+		sb.append(", userId=");
+		sb.append(getUserId());
+		sb.append(", type=");
+		sb.append(getType());
+		sb.append(", email=");
+		sb.append(getEmail());
+		sb.append(", sms=");
+		sb.append(getSms());
+		sb.append(", website=");
+		sb.append(getWebsite());
+		sb.append("}");
+
+		return sb.toString();
+	}
+
+	public String toXmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<model><model-name>");
+		sb.append(
+			"com.liferay.portlet.announcements.model.AnnouncementsDelivery");
+		sb.append("</model-name>");
+
+		sb.append(
+			"<column><column-name>deliveryId</column-name><column-value><![CDATA[");
+		sb.append("getDeliveryId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>companyId</column-name><column-value><![CDATA[");
+		sb.append("getCompanyId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>userId</column-name><column-value><![CDATA[");
+		sb.append("getUserId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>type</column-name><column-value><![CDATA[");
+		sb.append("getType()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>email</column-name><column-value><![CDATA[");
+		sb.append("getEmail()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>sms</column-name><column-value><![CDATA[");
+		sb.append("getSms()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>website</column-name><column-value><![CDATA[");
+		sb.append("getWebsite()");
+		sb.append("]]></column-value></column>");
+
+		sb.append("</model>");
+
+		return sb.toString();
+	}
+
 	private long _deliveryId;
 	private long _companyId;
 	private long _userId;

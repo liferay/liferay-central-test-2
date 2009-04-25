@@ -345,6 +345,70 @@ public class SCProductScreenshotModelImpl extends BaseModelImpl<SCProductScreens
 		return (int)getPrimaryKey();
 	}
 
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("{productScreenshotId=");
+		sb.append(getProductScreenshotId());
+		sb.append(", companyId=");
+		sb.append(getCompanyId());
+		sb.append(", groupId=");
+		sb.append(getGroupId());
+		sb.append(", productEntryId=");
+		sb.append(getProductEntryId());
+		sb.append(", thumbnailId=");
+		sb.append(getThumbnailId());
+		sb.append(", fullImageId=");
+		sb.append(getFullImageId());
+		sb.append(", priority=");
+		sb.append(getPriority());
+		sb.append("}");
+
+		return sb.toString();
+	}
+
+	public String toXmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<model><model-name>");
+		sb.append(
+			"com.liferay.portlet.softwarecatalog.model.SCProductScreenshot");
+		sb.append("</model-name>");
+
+		sb.append(
+			"<column><column-name>productScreenshotId</column-name><column-value><![CDATA[");
+		sb.append("getProductScreenshotId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>companyId</column-name><column-value><![CDATA[");
+		sb.append("getCompanyId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>groupId</column-name><column-value><![CDATA[");
+		sb.append("getGroupId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>productEntryId</column-name><column-value><![CDATA[");
+		sb.append("getProductEntryId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>thumbnailId</column-name><column-value><![CDATA[");
+		sb.append("getThumbnailId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>fullImageId</column-name><column-value><![CDATA[");
+		sb.append("getFullImageId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>priority</column-name><column-value><![CDATA[");
+		sb.append("getPriority()");
+		sb.append("]]></column-value></column>");
+
+		sb.append("</model>");
+
+		return sb.toString();
+	}
+
 	private long _productScreenshotId;
 	private long _companyId;
 	private long _groupId;

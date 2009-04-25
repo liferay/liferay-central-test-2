@@ -325,6 +325,69 @@ public class DLFileRankModelImpl extends BaseModelImpl<DLFileRank> {
 		return (int)getPrimaryKey();
 	}
 
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("{fileRankId=");
+		sb.append(getFileRankId());
+		sb.append(", groupId=");
+		sb.append(getGroupId());
+		sb.append(", companyId=");
+		sb.append(getCompanyId());
+		sb.append(", userId=");
+		sb.append(getUserId());
+		sb.append(", createDate=");
+		sb.append(getCreateDate());
+		sb.append(", folderId=");
+		sb.append(getFolderId());
+		sb.append(", name=");
+		sb.append(getName());
+		sb.append("}");
+
+		return sb.toString();
+	}
+
+	public String toXmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<model><model-name>");
+		sb.append("com.liferay.portlet.documentlibrary.model.DLFileRank");
+		sb.append("</model-name>");
+
+		sb.append(
+			"<column><column-name>fileRankId</column-name><column-value><![CDATA[");
+		sb.append("getFileRankId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>groupId</column-name><column-value><![CDATA[");
+		sb.append("getGroupId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>companyId</column-name><column-value><![CDATA[");
+		sb.append("getCompanyId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>userId</column-name><column-value><![CDATA[");
+		sb.append("getUserId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>createDate</column-name><column-value><![CDATA[");
+		sb.append("getCreateDate()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>folderId</column-name><column-value><![CDATA[");
+		sb.append("getFolderId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>name</column-name><column-value><![CDATA[");
+		sb.append("getName()");
+		sb.append("]]></column-value></column>");
+
+		sb.append("</model>");
+
+		return sb.toString();
+	}
+
 	private long _fileRankId;
 	private long _groupId;
 	private long _companyId;

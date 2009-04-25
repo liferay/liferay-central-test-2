@@ -300,6 +300,63 @@ public class PluginSettingModelImpl extends BaseModelImpl<PluginSetting> {
 		return (int)getPrimaryKey();
 	}
 
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("{pluginSettingId=");
+		sb.append(getPluginSettingId());
+		sb.append(", companyId=");
+		sb.append(getCompanyId());
+		sb.append(", pluginId=");
+		sb.append(getPluginId());
+		sb.append(", pluginType=");
+		sb.append(getPluginType());
+		sb.append(", roles=");
+		sb.append(getRoles());
+		sb.append(", active=");
+		sb.append(getActive());
+		sb.append("}");
+
+		return sb.toString();
+	}
+
+	public String toXmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<model><model-name>");
+		sb.append("com.liferay.portal.model.PluginSetting");
+		sb.append("</model-name>");
+
+		sb.append(
+			"<column><column-name>pluginSettingId</column-name><column-value><![CDATA[");
+		sb.append("getPluginSettingId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>companyId</column-name><column-value><![CDATA[");
+		sb.append("getCompanyId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>pluginId</column-name><column-value><![CDATA[");
+		sb.append("getPluginId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>pluginType</column-name><column-value><![CDATA[");
+		sb.append("getPluginType()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>roles</column-name><column-value><![CDATA[");
+		sb.append("getRoles()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>active</column-name><column-value><![CDATA[");
+		sb.append("getActive()");
+		sb.append("]]></column-value></column>");
+
+		sb.append("</model>");
+
+		return sb.toString();
+	}
+
 	private long _pluginSettingId;
 	private long _companyId;
 	private long _originalCompanyId;

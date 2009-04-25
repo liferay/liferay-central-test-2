@@ -547,6 +547,165 @@ public class TagsAssetModelImpl extends BaseModelImpl<TagsAsset> {
 		return (int)getPrimaryKey();
 	}
 
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("{assetId=");
+		sb.append(getAssetId());
+		sb.append(", groupId=");
+		sb.append(getGroupId());
+		sb.append(", companyId=");
+		sb.append(getCompanyId());
+		sb.append(", userId=");
+		sb.append(getUserId());
+		sb.append(", userName=");
+		sb.append(getUserName());
+		sb.append(", createDate=");
+		sb.append(getCreateDate());
+		sb.append(", modifiedDate=");
+		sb.append(getModifiedDate());
+		sb.append(", classNameId=");
+		sb.append(getClassNameId());
+		sb.append(", classPK=");
+		sb.append(getClassPK());
+		sb.append(", visible=");
+		sb.append(getVisible());
+		sb.append(", startDate=");
+		sb.append(getStartDate());
+		sb.append(", endDate=");
+		sb.append(getEndDate());
+		sb.append(", publishDate=");
+		sb.append(getPublishDate());
+		sb.append(", expirationDate=");
+		sb.append(getExpirationDate());
+		sb.append(", mimeType=");
+		sb.append(getMimeType());
+		sb.append(", title=");
+		sb.append(getTitle());
+		sb.append(", description=");
+		sb.append(getDescription());
+		sb.append(", summary=");
+		sb.append(getSummary());
+		sb.append(", url=");
+		sb.append(getUrl());
+		sb.append(", height=");
+		sb.append(getHeight());
+		sb.append(", width=");
+		sb.append(getWidth());
+		sb.append(", priority=");
+		sb.append(getPriority());
+		sb.append(", viewCount=");
+		sb.append(getViewCount());
+		sb.append("}");
+
+		return sb.toString();
+	}
+
+	public String toXmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<model><model-name>");
+		sb.append("com.liferay.portlet.tags.model.TagsAsset");
+		sb.append("</model-name>");
+
+		sb.append(
+			"<column><column-name>assetId</column-name><column-value><![CDATA[");
+		sb.append("getAssetId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>groupId</column-name><column-value><![CDATA[");
+		sb.append("getGroupId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>companyId</column-name><column-value><![CDATA[");
+		sb.append("getCompanyId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>userId</column-name><column-value><![CDATA[");
+		sb.append("getUserId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>userName</column-name><column-value><![CDATA[");
+		sb.append("getUserName()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>createDate</column-name><column-value><![CDATA[");
+		sb.append("getCreateDate()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>modifiedDate</column-name><column-value><![CDATA[");
+		sb.append("getModifiedDate()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>classNameId</column-name><column-value><![CDATA[");
+		sb.append("getClassNameId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>classPK</column-name><column-value><![CDATA[");
+		sb.append("getClassPK()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>visible</column-name><column-value><![CDATA[");
+		sb.append("getVisible()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>startDate</column-name><column-value><![CDATA[");
+		sb.append("getStartDate()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>endDate</column-name><column-value><![CDATA[");
+		sb.append("getEndDate()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>publishDate</column-name><column-value><![CDATA[");
+		sb.append("getPublishDate()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>expirationDate</column-name><column-value><![CDATA[");
+		sb.append("getExpirationDate()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>mimeType</column-name><column-value><![CDATA[");
+		sb.append("getMimeType()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>title</column-name><column-value><![CDATA[");
+		sb.append("getTitle()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>description</column-name><column-value><![CDATA[");
+		sb.append("getDescription()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>summary</column-name><column-value><![CDATA[");
+		sb.append("getSummary()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>url</column-name><column-value><![CDATA[");
+		sb.append("getUrl()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>height</column-name><column-value><![CDATA[");
+		sb.append("getHeight()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>width</column-name><column-value><![CDATA[");
+		sb.append("getWidth()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>priority</column-name><column-value><![CDATA[");
+		sb.append("getPriority()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>viewCount</column-name><column-value><![CDATA[");
+		sb.append("getViewCount()");
+		sb.append("]]></column-value></column>");
+
+		sb.append("</model>");
+
+		return sb.toString();
+	}
+
 	private long _assetId;
 	private long _groupId;
 	private long _companyId;

@@ -274,6 +274,63 @@ public class ReleaseModelImpl extends BaseModelImpl<Release> {
 		return (int)getPrimaryKey();
 	}
 
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("{releaseId=");
+		sb.append(getReleaseId());
+		sb.append(", createDate=");
+		sb.append(getCreateDate());
+		sb.append(", modifiedDate=");
+		sb.append(getModifiedDate());
+		sb.append(", buildNumber=");
+		sb.append(getBuildNumber());
+		sb.append(", buildDate=");
+		sb.append(getBuildDate());
+		sb.append(", verified=");
+		sb.append(getVerified());
+		sb.append("}");
+
+		return sb.toString();
+	}
+
+	public String toXmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<model><model-name>");
+		sb.append("com.liferay.portal.model.Release");
+		sb.append("</model-name>");
+
+		sb.append(
+			"<column><column-name>releaseId</column-name><column-value><![CDATA[");
+		sb.append("getReleaseId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>createDate</column-name><column-value><![CDATA[");
+		sb.append("getCreateDate()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>modifiedDate</column-name><column-value><![CDATA[");
+		sb.append("getModifiedDate()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>buildNumber</column-name><column-value><![CDATA[");
+		sb.append("getBuildNumber()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>buildDate</column-name><column-value><![CDATA[");
+		sb.append("getBuildDate()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>verified</column-name><column-value><![CDATA[");
+		sb.append("getVerified()");
+		sb.append("]]></column-value></column>");
+
+		sb.append("</model>");
+
+		return sb.toString();
+	}
+
 	private long _releaseId;
 	private Date _createDate;
 	private Date _modifiedDate;

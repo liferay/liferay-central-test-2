@@ -432,6 +432,93 @@ public class SocialActivityModelImpl extends BaseModelImpl<SocialActivity> {
 		return (int)getPrimaryKey();
 	}
 
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("{activityId=");
+		sb.append(getActivityId());
+		sb.append(", groupId=");
+		sb.append(getGroupId());
+		sb.append(", companyId=");
+		sb.append(getCompanyId());
+		sb.append(", userId=");
+		sb.append(getUserId());
+		sb.append(", createDate=");
+		sb.append(getCreateDate());
+		sb.append(", mirrorActivityId=");
+		sb.append(getMirrorActivityId());
+		sb.append(", classNameId=");
+		sb.append(getClassNameId());
+		sb.append(", classPK=");
+		sb.append(getClassPK());
+		sb.append(", type=");
+		sb.append(getType());
+		sb.append(", extraData=");
+		sb.append(getExtraData());
+		sb.append(", receiverUserId=");
+		sb.append(getReceiverUserId());
+		sb.append("}");
+
+		return sb.toString();
+	}
+
+	public String toXmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<model><model-name>");
+		sb.append("com.liferay.portlet.social.model.SocialActivity");
+		sb.append("</model-name>");
+
+		sb.append(
+			"<column><column-name>activityId</column-name><column-value><![CDATA[");
+		sb.append("getActivityId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>groupId</column-name><column-value><![CDATA[");
+		sb.append("getGroupId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>companyId</column-name><column-value><![CDATA[");
+		sb.append("getCompanyId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>userId</column-name><column-value><![CDATA[");
+		sb.append("getUserId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>createDate</column-name><column-value><![CDATA[");
+		sb.append("getCreateDate()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>mirrorActivityId</column-name><column-value><![CDATA[");
+		sb.append("getMirrorActivityId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>classNameId</column-name><column-value><![CDATA[");
+		sb.append("getClassNameId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>classPK</column-name><column-value><![CDATA[");
+		sb.append("getClassPK()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>type</column-name><column-value><![CDATA[");
+		sb.append("getType()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>extraData</column-name><column-value><![CDATA[");
+		sb.append("getExtraData()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>receiverUserId</column-name><column-value><![CDATA[");
+		sb.append("getReceiverUserId()");
+		sb.append("]]></column-value></column>");
+
+		sb.append("</model>");
+
+		return sb.toString();
+	}
+
 	private long _activityId;
 	private long _groupId;
 	private long _originalGroupId;

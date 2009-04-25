@@ -270,6 +270,51 @@ public class ExpandoTableModelImpl extends BaseModelImpl<ExpandoTable> {
 		return (int)getPrimaryKey();
 	}
 
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("{tableId=");
+		sb.append(getTableId());
+		sb.append(", companyId=");
+		sb.append(getCompanyId());
+		sb.append(", classNameId=");
+		sb.append(getClassNameId());
+		sb.append(", name=");
+		sb.append(getName());
+		sb.append("}");
+
+		return sb.toString();
+	}
+
+	public String toXmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<model><model-name>");
+		sb.append("com.liferay.portlet.expando.model.ExpandoTable");
+		sb.append("</model-name>");
+
+		sb.append(
+			"<column><column-name>tableId</column-name><column-value><![CDATA[");
+		sb.append("getTableId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>companyId</column-name><column-value><![CDATA[");
+		sb.append("getCompanyId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>classNameId</column-name><column-value><![CDATA[");
+		sb.append("getClassNameId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>name</column-name><column-value><![CDATA[");
+		sb.append("getName()");
+		sb.append("]]></column-value></column>");
+
+		sb.append("</model>");
+
+		return sb.toString();
+	}
+
 	private long _tableId;
 	private long _companyId;
 	private long _originalCompanyId;

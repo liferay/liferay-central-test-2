@@ -292,6 +292,57 @@ public class ServiceComponentModelImpl extends BaseModelImpl<ServiceComponent> {
 		return (int)getPrimaryKey();
 	}
 
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("{serviceComponentId=");
+		sb.append(getServiceComponentId());
+		sb.append(", buildNamespace=");
+		sb.append(getBuildNamespace());
+		sb.append(", buildNumber=");
+		sb.append(getBuildNumber());
+		sb.append(", buildDate=");
+		sb.append(getBuildDate());
+		sb.append(", data=");
+		sb.append(getData());
+		sb.append("}");
+
+		return sb.toString();
+	}
+
+	public String toXmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<model><model-name>");
+		sb.append("com.liferay.portal.model.ServiceComponent");
+		sb.append("</model-name>");
+
+		sb.append(
+			"<column><column-name>serviceComponentId</column-name><column-value><![CDATA[");
+		sb.append("getServiceComponentId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>buildNamespace</column-name><column-value><![CDATA[");
+		sb.append("getBuildNamespace()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>buildNumber</column-name><column-value><![CDATA[");
+		sb.append("getBuildNumber()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>buildDate</column-name><column-value><![CDATA[");
+		sb.append("getBuildDate()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>data</column-name><column-value><![CDATA[");
+		sb.append("getData()");
+		sb.append("]]></column-value></column>");
+
+		sb.append("</model>");
+
+		return sb.toString();
+	}
+
 	private long _serviceComponentId;
 	private String _buildNamespace;
 	private String _originalBuildNamespace;

@@ -488,6 +488,135 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry> {
 		return (int)getPrimaryKey();
 	}
 
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("{uuid=");
+		sb.append(getUuid());
+		sb.append(", fileEntryId=");
+		sb.append(getFileEntryId());
+		sb.append(", groupId=");
+		sb.append(getGroupId());
+		sb.append(", companyId=");
+		sb.append(getCompanyId());
+		sb.append(", userId=");
+		sb.append(getUserId());
+		sb.append(", userName=");
+		sb.append(getUserName());
+		sb.append(", versionUserId=");
+		sb.append(getVersionUserId());
+		sb.append(", versionUserName=");
+		sb.append(getVersionUserName());
+		sb.append(", createDate=");
+		sb.append(getCreateDate());
+		sb.append(", modifiedDate=");
+		sb.append(getModifiedDate());
+		sb.append(", folderId=");
+		sb.append(getFolderId());
+		sb.append(", name=");
+		sb.append(getName());
+		sb.append(", title=");
+		sb.append(getTitle());
+		sb.append(", description=");
+		sb.append(getDescription());
+		sb.append(", version=");
+		sb.append(getVersion());
+		sb.append(", size=");
+		sb.append(getSize());
+		sb.append(", readCount=");
+		sb.append(getReadCount());
+		sb.append(", extraSettings=");
+		sb.append(getExtraSettings());
+		sb.append("}");
+
+		return sb.toString();
+	}
+
+	public String toXmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<model><model-name>");
+		sb.append("com.liferay.portlet.documentlibrary.model.DLFileEntry");
+		sb.append("</model-name>");
+
+		sb.append(
+			"<column><column-name>uuid</column-name><column-value><![CDATA[");
+		sb.append("getUuid()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>fileEntryId</column-name><column-value><![CDATA[");
+		sb.append("getFileEntryId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>groupId</column-name><column-value><![CDATA[");
+		sb.append("getGroupId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>companyId</column-name><column-value><![CDATA[");
+		sb.append("getCompanyId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>userId</column-name><column-value><![CDATA[");
+		sb.append("getUserId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>userName</column-name><column-value><![CDATA[");
+		sb.append("getUserName()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>versionUserId</column-name><column-value><![CDATA[");
+		sb.append("getVersionUserId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>versionUserName</column-name><column-value><![CDATA[");
+		sb.append("getVersionUserName()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>createDate</column-name><column-value><![CDATA[");
+		sb.append("getCreateDate()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>modifiedDate</column-name><column-value><![CDATA[");
+		sb.append("getModifiedDate()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>folderId</column-name><column-value><![CDATA[");
+		sb.append("getFolderId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>name</column-name><column-value><![CDATA[");
+		sb.append("getName()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>title</column-name><column-value><![CDATA[");
+		sb.append("getTitle()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>description</column-name><column-value><![CDATA[");
+		sb.append("getDescription()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>version</column-name><column-value><![CDATA[");
+		sb.append("getVersion()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>size</column-name><column-value><![CDATA[");
+		sb.append("getSize()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>readCount</column-name><column-value><![CDATA[");
+		sb.append("getReadCount()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>extraSettings</column-name><column-value><![CDATA[");
+		sb.append("getExtraSettings()");
+		sb.append("]]></column-value></column>");
+
+		sb.append("</model>");
+
+		return sb.toString();
+	}
+
 	private String _uuid;
 	private String _originalUuid;
 	private long _fileEntryId;

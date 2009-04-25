@@ -942,6 +942,333 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder> {
 		return (int)getPrimaryKey();
 	}
 
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("{orderId=");
+		sb.append(getOrderId());
+		sb.append(", groupId=");
+		sb.append(getGroupId());
+		sb.append(", companyId=");
+		sb.append(getCompanyId());
+		sb.append(", userId=");
+		sb.append(getUserId());
+		sb.append(", userName=");
+		sb.append(getUserName());
+		sb.append(", createDate=");
+		sb.append(getCreateDate());
+		sb.append(", modifiedDate=");
+		sb.append(getModifiedDate());
+		sb.append(", number=");
+		sb.append(getNumber());
+		sb.append(", tax=");
+		sb.append(getTax());
+		sb.append(", shipping=");
+		sb.append(getShipping());
+		sb.append(", altShipping=");
+		sb.append(getAltShipping());
+		sb.append(", requiresShipping=");
+		sb.append(getRequiresShipping());
+		sb.append(", insure=");
+		sb.append(getInsure());
+		sb.append(", insurance=");
+		sb.append(getInsurance());
+		sb.append(", couponCodes=");
+		sb.append(getCouponCodes());
+		sb.append(", couponDiscount=");
+		sb.append(getCouponDiscount());
+		sb.append(", billingFirstName=");
+		sb.append(getBillingFirstName());
+		sb.append(", billingLastName=");
+		sb.append(getBillingLastName());
+		sb.append(", billingEmailAddress=");
+		sb.append(getBillingEmailAddress());
+		sb.append(", billingCompany=");
+		sb.append(getBillingCompany());
+		sb.append(", billingStreet=");
+		sb.append(getBillingStreet());
+		sb.append(", billingCity=");
+		sb.append(getBillingCity());
+		sb.append(", billingState=");
+		sb.append(getBillingState());
+		sb.append(", billingZip=");
+		sb.append(getBillingZip());
+		sb.append(", billingCountry=");
+		sb.append(getBillingCountry());
+		sb.append(", billingPhone=");
+		sb.append(getBillingPhone());
+		sb.append(", shipToBilling=");
+		sb.append(getShipToBilling());
+		sb.append(", shippingFirstName=");
+		sb.append(getShippingFirstName());
+		sb.append(", shippingLastName=");
+		sb.append(getShippingLastName());
+		sb.append(", shippingEmailAddress=");
+		sb.append(getShippingEmailAddress());
+		sb.append(", shippingCompany=");
+		sb.append(getShippingCompany());
+		sb.append(", shippingStreet=");
+		sb.append(getShippingStreet());
+		sb.append(", shippingCity=");
+		sb.append(getShippingCity());
+		sb.append(", shippingState=");
+		sb.append(getShippingState());
+		sb.append(", shippingZip=");
+		sb.append(getShippingZip());
+		sb.append(", shippingCountry=");
+		sb.append(getShippingCountry());
+		sb.append(", shippingPhone=");
+		sb.append(getShippingPhone());
+		sb.append(", ccName=");
+		sb.append(getCcName());
+		sb.append(", ccType=");
+		sb.append(getCcType());
+		sb.append(", ccNumber=");
+		sb.append(getCcNumber());
+		sb.append(", ccExpMonth=");
+		sb.append(getCcExpMonth());
+		sb.append(", ccExpYear=");
+		sb.append(getCcExpYear());
+		sb.append(", ccVerNumber=");
+		sb.append(getCcVerNumber());
+		sb.append(", comments=");
+		sb.append(getComments());
+		sb.append(", ppTxnId=");
+		sb.append(getPpTxnId());
+		sb.append(", ppPaymentStatus=");
+		sb.append(getPpPaymentStatus());
+		sb.append(", ppPaymentGross=");
+		sb.append(getPpPaymentGross());
+		sb.append(", ppReceiverEmail=");
+		sb.append(getPpReceiverEmail());
+		sb.append(", ppPayerEmail=");
+		sb.append(getPpPayerEmail());
+		sb.append(", sendOrderEmail=");
+		sb.append(getSendOrderEmail());
+		sb.append(", sendShippingEmail=");
+		sb.append(getSendShippingEmail());
+		sb.append("}");
+
+		return sb.toString();
+	}
+
+	public String toXmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<model><model-name>");
+		sb.append("com.liferay.portlet.shopping.model.ShoppingOrder");
+		sb.append("</model-name>");
+
+		sb.append(
+			"<column><column-name>orderId</column-name><column-value><![CDATA[");
+		sb.append("getOrderId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>groupId</column-name><column-value><![CDATA[");
+		sb.append("getGroupId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>companyId</column-name><column-value><![CDATA[");
+		sb.append("getCompanyId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>userId</column-name><column-value><![CDATA[");
+		sb.append("getUserId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>userName</column-name><column-value><![CDATA[");
+		sb.append("getUserName()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>createDate</column-name><column-value><![CDATA[");
+		sb.append("getCreateDate()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>modifiedDate</column-name><column-value><![CDATA[");
+		sb.append("getModifiedDate()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>number</column-name><column-value><![CDATA[");
+		sb.append("getNumber()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>tax</column-name><column-value><![CDATA[");
+		sb.append("getTax()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>shipping</column-name><column-value><![CDATA[");
+		sb.append("getShipping()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>altShipping</column-name><column-value><![CDATA[");
+		sb.append("getAltShipping()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>requiresShipping</column-name><column-value><![CDATA[");
+		sb.append("getRequiresShipping()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>insure</column-name><column-value><![CDATA[");
+		sb.append("getInsure()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>insurance</column-name><column-value><![CDATA[");
+		sb.append("getInsurance()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>couponCodes</column-name><column-value><![CDATA[");
+		sb.append("getCouponCodes()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>couponDiscount</column-name><column-value><![CDATA[");
+		sb.append("getCouponDiscount()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>billingFirstName</column-name><column-value><![CDATA[");
+		sb.append("getBillingFirstName()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>billingLastName</column-name><column-value><![CDATA[");
+		sb.append("getBillingLastName()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>billingEmailAddress</column-name><column-value><![CDATA[");
+		sb.append("getBillingEmailAddress()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>billingCompany</column-name><column-value><![CDATA[");
+		sb.append("getBillingCompany()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>billingStreet</column-name><column-value><![CDATA[");
+		sb.append("getBillingStreet()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>billingCity</column-name><column-value><![CDATA[");
+		sb.append("getBillingCity()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>billingState</column-name><column-value><![CDATA[");
+		sb.append("getBillingState()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>billingZip</column-name><column-value><![CDATA[");
+		sb.append("getBillingZip()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>billingCountry</column-name><column-value><![CDATA[");
+		sb.append("getBillingCountry()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>billingPhone</column-name><column-value><![CDATA[");
+		sb.append("getBillingPhone()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>shipToBilling</column-name><column-value><![CDATA[");
+		sb.append("getShipToBilling()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>shippingFirstName</column-name><column-value><![CDATA[");
+		sb.append("getShippingFirstName()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>shippingLastName</column-name><column-value><![CDATA[");
+		sb.append("getShippingLastName()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>shippingEmailAddress</column-name><column-value><![CDATA[");
+		sb.append("getShippingEmailAddress()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>shippingCompany</column-name><column-value><![CDATA[");
+		sb.append("getShippingCompany()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>shippingStreet</column-name><column-value><![CDATA[");
+		sb.append("getShippingStreet()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>shippingCity</column-name><column-value><![CDATA[");
+		sb.append("getShippingCity()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>shippingState</column-name><column-value><![CDATA[");
+		sb.append("getShippingState()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>shippingZip</column-name><column-value><![CDATA[");
+		sb.append("getShippingZip()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>shippingCountry</column-name><column-value><![CDATA[");
+		sb.append("getShippingCountry()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>shippingPhone</column-name><column-value><![CDATA[");
+		sb.append("getShippingPhone()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>ccName</column-name><column-value><![CDATA[");
+		sb.append("getCcName()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>ccType</column-name><column-value><![CDATA[");
+		sb.append("getCcType()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>ccNumber</column-name><column-value><![CDATA[");
+		sb.append("getCcNumber()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>ccExpMonth</column-name><column-value><![CDATA[");
+		sb.append("getCcExpMonth()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>ccExpYear</column-name><column-value><![CDATA[");
+		sb.append("getCcExpYear()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>ccVerNumber</column-name><column-value><![CDATA[");
+		sb.append("getCcVerNumber()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>comments</column-name><column-value><![CDATA[");
+		sb.append("getComments()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>ppTxnId</column-name><column-value><![CDATA[");
+		sb.append("getPpTxnId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>ppPaymentStatus</column-name><column-value><![CDATA[");
+		sb.append("getPpPaymentStatus()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>ppPaymentGross</column-name><column-value><![CDATA[");
+		sb.append("getPpPaymentGross()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>ppReceiverEmail</column-name><column-value><![CDATA[");
+		sb.append("getPpReceiverEmail()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>ppPayerEmail</column-name><column-value><![CDATA[");
+		sb.append("getPpPayerEmail()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>sendOrderEmail</column-name><column-value><![CDATA[");
+		sb.append("getSendOrderEmail()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>sendShippingEmail</column-name><column-value><![CDATA[");
+		sb.append("getSendShippingEmail()");
+		sb.append("]]></column-value></column>");
+
+		sb.append("</model>");
+
+		return sb.toString();
+	}
+
 	private long _orderId;
 	private long _groupId;
 	private long _companyId;

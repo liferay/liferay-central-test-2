@@ -360,6 +360,93 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut> {
 		return (int)getPrimaryKey();
 	}
 
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("{uuid=");
+		sb.append(getUuid());
+		sb.append(", fileShortcutId=");
+		sb.append(getFileShortcutId());
+		sb.append(", groupId=");
+		sb.append(getGroupId());
+		sb.append(", companyId=");
+		sb.append(getCompanyId());
+		sb.append(", userId=");
+		sb.append(getUserId());
+		sb.append(", userName=");
+		sb.append(getUserName());
+		sb.append(", createDate=");
+		sb.append(getCreateDate());
+		sb.append(", modifiedDate=");
+		sb.append(getModifiedDate());
+		sb.append(", folderId=");
+		sb.append(getFolderId());
+		sb.append(", toFolderId=");
+		sb.append(getToFolderId());
+		sb.append(", toName=");
+		sb.append(getToName());
+		sb.append("}");
+
+		return sb.toString();
+	}
+
+	public String toXmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<model><model-name>");
+		sb.append("com.liferay.portlet.documentlibrary.model.DLFileShortcut");
+		sb.append("</model-name>");
+
+		sb.append(
+			"<column><column-name>uuid</column-name><column-value><![CDATA[");
+		sb.append("getUuid()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>fileShortcutId</column-name><column-value><![CDATA[");
+		sb.append("getFileShortcutId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>groupId</column-name><column-value><![CDATA[");
+		sb.append("getGroupId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>companyId</column-name><column-value><![CDATA[");
+		sb.append("getCompanyId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>userId</column-name><column-value><![CDATA[");
+		sb.append("getUserId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>userName</column-name><column-value><![CDATA[");
+		sb.append("getUserName()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>createDate</column-name><column-value><![CDATA[");
+		sb.append("getCreateDate()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>modifiedDate</column-name><column-value><![CDATA[");
+		sb.append("getModifiedDate()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>folderId</column-name><column-value><![CDATA[");
+		sb.append("getFolderId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>toFolderId</column-name><column-value><![CDATA[");
+		sb.append("getToFolderId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>toName</column-name><column-value><![CDATA[");
+		sb.append("getToName()");
+		sb.append("]]></column-value></column>");
+
+		sb.append("</model>");
+
+		return sb.toString();
+	}
+
 	private String _uuid;
 	private String _originalUuid;
 	private long _fileShortcutId;

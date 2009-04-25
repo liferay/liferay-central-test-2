@@ -270,6 +270,51 @@ public class ResourceCodeModelImpl extends BaseModelImpl<ResourceCode> {
 		return (int)getPrimaryKey();
 	}
 
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("{codeId=");
+		sb.append(getCodeId());
+		sb.append(", companyId=");
+		sb.append(getCompanyId());
+		sb.append(", name=");
+		sb.append(getName());
+		sb.append(", scope=");
+		sb.append(getScope());
+		sb.append("}");
+
+		return sb.toString();
+	}
+
+	public String toXmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<model><model-name>");
+		sb.append("com.liferay.portal.model.ResourceCode");
+		sb.append("</model-name>");
+
+		sb.append(
+			"<column><column-name>codeId</column-name><column-value><![CDATA[");
+		sb.append("getCodeId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>companyId</column-name><column-value><![CDATA[");
+		sb.append("getCompanyId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>name</column-name><column-value><![CDATA[");
+		sb.append("getName()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>scope</column-name><column-value><![CDATA[");
+		sb.append("getScope()");
+		sb.append("]]></column-value></column>");
+
+		sb.append("</model>");
+
+		return sb.toString();
+	}
+
 	private long _codeId;
 	private long _companyId;
 	private long _originalCompanyId;

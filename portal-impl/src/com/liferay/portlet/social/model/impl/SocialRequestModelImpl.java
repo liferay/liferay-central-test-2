@@ -466,6 +466,105 @@ public class SocialRequestModelImpl extends BaseModelImpl<SocialRequest> {
 		return (int)getPrimaryKey();
 	}
 
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("{uuid=");
+		sb.append(getUuid());
+		sb.append(", requestId=");
+		sb.append(getRequestId());
+		sb.append(", groupId=");
+		sb.append(getGroupId());
+		sb.append(", companyId=");
+		sb.append(getCompanyId());
+		sb.append(", userId=");
+		sb.append(getUserId());
+		sb.append(", createDate=");
+		sb.append(getCreateDate());
+		sb.append(", modifiedDate=");
+		sb.append(getModifiedDate());
+		sb.append(", classNameId=");
+		sb.append(getClassNameId());
+		sb.append(", classPK=");
+		sb.append(getClassPK());
+		sb.append(", type=");
+		sb.append(getType());
+		sb.append(", extraData=");
+		sb.append(getExtraData());
+		sb.append(", receiverUserId=");
+		sb.append(getReceiverUserId());
+		sb.append(", status=");
+		sb.append(getStatus());
+		sb.append("}");
+
+		return sb.toString();
+	}
+
+	public String toXmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<model><model-name>");
+		sb.append("com.liferay.portlet.social.model.SocialRequest");
+		sb.append("</model-name>");
+
+		sb.append(
+			"<column><column-name>uuid</column-name><column-value><![CDATA[");
+		sb.append("getUuid()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>requestId</column-name><column-value><![CDATA[");
+		sb.append("getRequestId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>groupId</column-name><column-value><![CDATA[");
+		sb.append("getGroupId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>companyId</column-name><column-value><![CDATA[");
+		sb.append("getCompanyId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>userId</column-name><column-value><![CDATA[");
+		sb.append("getUserId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>createDate</column-name><column-value><![CDATA[");
+		sb.append("getCreateDate()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>modifiedDate</column-name><column-value><![CDATA[");
+		sb.append("getModifiedDate()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>classNameId</column-name><column-value><![CDATA[");
+		sb.append("getClassNameId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>classPK</column-name><column-value><![CDATA[");
+		sb.append("getClassPK()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>type</column-name><column-value><![CDATA[");
+		sb.append("getType()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>extraData</column-name><column-value><![CDATA[");
+		sb.append("getExtraData()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>receiverUserId</column-name><column-value><![CDATA[");
+		sb.append("getReceiverUserId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>status</column-name><column-value><![CDATA[");
+		sb.append("getStatus()");
+		sb.append("]]></column-value></column>");
+
+		sb.append("</model>");
+
+		return sb.toString();
+	}
+
 	private String _uuid;
 	private String _originalUuid;
 	private long _requestId;

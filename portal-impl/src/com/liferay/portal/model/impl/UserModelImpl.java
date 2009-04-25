@@ -800,6 +800,243 @@ public class UserModelImpl extends BaseModelImpl<User> {
 		return (int)getPrimaryKey();
 	}
 
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("{uuid=");
+		sb.append(getUuid());
+		sb.append(", userId=");
+		sb.append(getUserId());
+		sb.append(", companyId=");
+		sb.append(getCompanyId());
+		sb.append(", createDate=");
+		sb.append(getCreateDate());
+		sb.append(", modifiedDate=");
+		sb.append(getModifiedDate());
+		sb.append(", defaultUser=");
+		sb.append(getDefaultUser());
+		sb.append(", contactId=");
+		sb.append(getContactId());
+		sb.append(", password=");
+		sb.append(getPassword());
+		sb.append(", passwordEncrypted=");
+		sb.append(getPasswordEncrypted());
+		sb.append(", passwordReset=");
+		sb.append(getPasswordReset());
+		sb.append(", passwordModifiedDate=");
+		sb.append(getPasswordModifiedDate());
+		sb.append(", reminderQueryQuestion=");
+		sb.append(getReminderQueryQuestion());
+		sb.append(", reminderQueryAnswer=");
+		sb.append(getReminderQueryAnswer());
+		sb.append(", graceLoginCount=");
+		sb.append(getGraceLoginCount());
+		sb.append(", screenName=");
+		sb.append(getScreenName());
+		sb.append(", emailAddress=");
+		sb.append(getEmailAddress());
+		sb.append(", openId=");
+		sb.append(getOpenId());
+		sb.append(", portraitId=");
+		sb.append(getPortraitId());
+		sb.append(", languageId=");
+		sb.append(getLanguageId());
+		sb.append(", timeZoneId=");
+		sb.append(getTimeZoneId());
+		sb.append(", greeting=");
+		sb.append(getGreeting());
+		sb.append(", comments=");
+		sb.append(getComments());
+		sb.append(", firstName=");
+		sb.append(getFirstName());
+		sb.append(", middleName=");
+		sb.append(getMiddleName());
+		sb.append(", lastName=");
+		sb.append(getLastName());
+		sb.append(", jobTitle=");
+		sb.append(getJobTitle());
+		sb.append(", loginDate=");
+		sb.append(getLoginDate());
+		sb.append(", loginIP=");
+		sb.append(getLoginIP());
+		sb.append(", lastLoginDate=");
+		sb.append(getLastLoginDate());
+		sb.append(", lastLoginIP=");
+		sb.append(getLastLoginIP());
+		sb.append(", lastFailedLoginDate=");
+		sb.append(getLastFailedLoginDate());
+		sb.append(", failedLoginAttempts=");
+		sb.append(getFailedLoginAttempts());
+		sb.append(", lockout=");
+		sb.append(getLockout());
+		sb.append(", lockoutDate=");
+		sb.append(getLockoutDate());
+		sb.append(", agreedToTermsOfUse=");
+		sb.append(getAgreedToTermsOfUse());
+		sb.append(", active=");
+		sb.append(getActive());
+		sb.append("}");
+
+		return sb.toString();
+	}
+
+	public String toXmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<model><model-name>");
+		sb.append("com.liferay.portal.model.User");
+		sb.append("</model-name>");
+
+		sb.append(
+			"<column><column-name>uuid</column-name><column-value><![CDATA[");
+		sb.append("getUuid()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>userId</column-name><column-value><![CDATA[");
+		sb.append("getUserId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>companyId</column-name><column-value><![CDATA[");
+		sb.append("getCompanyId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>createDate</column-name><column-value><![CDATA[");
+		sb.append("getCreateDate()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>modifiedDate</column-name><column-value><![CDATA[");
+		sb.append("getModifiedDate()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>defaultUser</column-name><column-value><![CDATA[");
+		sb.append("getDefaultUser()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>contactId</column-name><column-value><![CDATA[");
+		sb.append("getContactId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>password</column-name><column-value><![CDATA[");
+		sb.append("getPassword()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>passwordEncrypted</column-name><column-value><![CDATA[");
+		sb.append("getPasswordEncrypted()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>passwordReset</column-name><column-value><![CDATA[");
+		sb.append("getPasswordReset()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>passwordModifiedDate</column-name><column-value><![CDATA[");
+		sb.append("getPasswordModifiedDate()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>reminderQueryQuestion</column-name><column-value><![CDATA[");
+		sb.append("getReminderQueryQuestion()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>reminderQueryAnswer</column-name><column-value><![CDATA[");
+		sb.append("getReminderQueryAnswer()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>graceLoginCount</column-name><column-value><![CDATA[");
+		sb.append("getGraceLoginCount()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>screenName</column-name><column-value><![CDATA[");
+		sb.append("getScreenName()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>emailAddress</column-name><column-value><![CDATA[");
+		sb.append("getEmailAddress()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>openId</column-name><column-value><![CDATA[");
+		sb.append("getOpenId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>portraitId</column-name><column-value><![CDATA[");
+		sb.append("getPortraitId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>languageId</column-name><column-value><![CDATA[");
+		sb.append("getLanguageId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>timeZoneId</column-name><column-value><![CDATA[");
+		sb.append("getTimeZoneId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>greeting</column-name><column-value><![CDATA[");
+		sb.append("getGreeting()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>comments</column-name><column-value><![CDATA[");
+		sb.append("getComments()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>firstName</column-name><column-value><![CDATA[");
+		sb.append("getFirstName()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>middleName</column-name><column-value><![CDATA[");
+		sb.append("getMiddleName()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>lastName</column-name><column-value><![CDATA[");
+		sb.append("getLastName()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>jobTitle</column-name><column-value><![CDATA[");
+		sb.append("getJobTitle()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>loginDate</column-name><column-value><![CDATA[");
+		sb.append("getLoginDate()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>loginIP</column-name><column-value><![CDATA[");
+		sb.append("getLoginIP()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>lastLoginDate</column-name><column-value><![CDATA[");
+		sb.append("getLastLoginDate()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>lastLoginIP</column-name><column-value><![CDATA[");
+		sb.append("getLastLoginIP()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>lastFailedLoginDate</column-name><column-value><![CDATA[");
+		sb.append("getLastFailedLoginDate()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>failedLoginAttempts</column-name><column-value><![CDATA[");
+		sb.append("getFailedLoginAttempts()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>lockout</column-name><column-value><![CDATA[");
+		sb.append("getLockout()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>lockoutDate</column-name><column-value><![CDATA[");
+		sb.append("getLockoutDate()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>agreedToTermsOfUse</column-name><column-value><![CDATA[");
+		sb.append("getAgreedToTermsOfUse()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>active</column-name><column-value><![CDATA[");
+		sb.append("getActive()");
+		sb.append("]]></column-value></column>");
+
+		sb.append("</model>");
+
+		return sb.toString();
+	}
+
 	private String _uuid;
 	private long _userId;
 	private long _originalUserId;

@@ -354,6 +354,93 @@ public class EmailAddressModelImpl extends BaseModelImpl<EmailAddress> {
 		return (int)getPrimaryKey();
 	}
 
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("{emailAddressId=");
+		sb.append(getEmailAddressId());
+		sb.append(", companyId=");
+		sb.append(getCompanyId());
+		sb.append(", userId=");
+		sb.append(getUserId());
+		sb.append(", userName=");
+		sb.append(getUserName());
+		sb.append(", createDate=");
+		sb.append(getCreateDate());
+		sb.append(", modifiedDate=");
+		sb.append(getModifiedDate());
+		sb.append(", classNameId=");
+		sb.append(getClassNameId());
+		sb.append(", classPK=");
+		sb.append(getClassPK());
+		sb.append(", address=");
+		sb.append(getAddress());
+		sb.append(", typeId=");
+		sb.append(getTypeId());
+		sb.append(", primary=");
+		sb.append(getPrimary());
+		sb.append("}");
+
+		return sb.toString();
+	}
+
+	public String toXmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<model><model-name>");
+		sb.append("com.liferay.portal.model.EmailAddress");
+		sb.append("</model-name>");
+
+		sb.append(
+			"<column><column-name>emailAddressId</column-name><column-value><![CDATA[");
+		sb.append("getEmailAddressId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>companyId</column-name><column-value><![CDATA[");
+		sb.append("getCompanyId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>userId</column-name><column-value><![CDATA[");
+		sb.append("getUserId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>userName</column-name><column-value><![CDATA[");
+		sb.append("getUserName()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>createDate</column-name><column-value><![CDATA[");
+		sb.append("getCreateDate()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>modifiedDate</column-name><column-value><![CDATA[");
+		sb.append("getModifiedDate()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>classNameId</column-name><column-value><![CDATA[");
+		sb.append("getClassNameId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>classPK</column-name><column-value><![CDATA[");
+		sb.append("getClassPK()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>address</column-name><column-value><![CDATA[");
+		sb.append("getAddress()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>typeId</column-name><column-value><![CDATA[");
+		sb.append("getTypeId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>primary</column-name><column-value><![CDATA[");
+		sb.append("getPrimary()");
+		sb.append("]]></column-value></column>");
+
+		sb.append("</model>");
+
+		return sb.toString();
+	}
+
 	private long _emailAddressId;
 	private long _companyId;
 	private long _userId;

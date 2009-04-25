@@ -444,6 +444,105 @@ public class GroupModelImpl extends BaseModelImpl<Group> {
 		return (int)getPrimaryKey();
 	}
 
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("{groupId=");
+		sb.append(getGroupId());
+		sb.append(", companyId=");
+		sb.append(getCompanyId());
+		sb.append(", creatorUserId=");
+		sb.append(getCreatorUserId());
+		sb.append(", classNameId=");
+		sb.append(getClassNameId());
+		sb.append(", classPK=");
+		sb.append(getClassPK());
+		sb.append(", parentGroupId=");
+		sb.append(getParentGroupId());
+		sb.append(", liveGroupId=");
+		sb.append(getLiveGroupId());
+		sb.append(", name=");
+		sb.append(getName());
+		sb.append(", description=");
+		sb.append(getDescription());
+		sb.append(", type=");
+		sb.append(getType());
+		sb.append(", typeSettings=");
+		sb.append(getTypeSettings());
+		sb.append(", friendlyURL=");
+		sb.append(getFriendlyURL());
+		sb.append(", active=");
+		sb.append(getActive());
+		sb.append("}");
+
+		return sb.toString();
+	}
+
+	public String toXmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<model><model-name>");
+		sb.append("com.liferay.portal.model.Group");
+		sb.append("</model-name>");
+
+		sb.append(
+			"<column><column-name>groupId</column-name><column-value><![CDATA[");
+		sb.append("getGroupId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>companyId</column-name><column-value><![CDATA[");
+		sb.append("getCompanyId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>creatorUserId</column-name><column-value><![CDATA[");
+		sb.append("getCreatorUserId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>classNameId</column-name><column-value><![CDATA[");
+		sb.append("getClassNameId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>classPK</column-name><column-value><![CDATA[");
+		sb.append("getClassPK()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>parentGroupId</column-name><column-value><![CDATA[");
+		sb.append("getParentGroupId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>liveGroupId</column-name><column-value><![CDATA[");
+		sb.append("getLiveGroupId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>name</column-name><column-value><![CDATA[");
+		sb.append("getName()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>description</column-name><column-value><![CDATA[");
+		sb.append("getDescription()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>type</column-name><column-value><![CDATA[");
+		sb.append("getType()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>typeSettings</column-name><column-value><![CDATA[");
+		sb.append("getTypeSettings()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>friendlyURL</column-name><column-value><![CDATA[");
+		sb.append("getFriendlyURL()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>active</column-name><column-value><![CDATA[");
+		sb.append("getActive()");
+		sb.append("]]></column-value></column>");
+
+		sb.append("</model>");
+
+		return sb.toString();
+	}
+
 	private long _groupId;
 	private long _companyId;
 	private long _originalCompanyId;

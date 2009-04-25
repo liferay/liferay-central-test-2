@@ -211,6 +211,45 @@ public class OrgGroupPermissionModelImpl extends BaseModelImpl<OrgGroupPermissio
 		return getPrimaryKey().hashCode();
 	}
 
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("{organizationId=");
+		sb.append(getOrganizationId());
+		sb.append(", groupId=");
+		sb.append(getGroupId());
+		sb.append(", permissionId=");
+		sb.append(getPermissionId());
+		sb.append("}");
+
+		return sb.toString();
+	}
+
+	public String toXmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<model><model-name>");
+		sb.append("com.liferay.portal.model.OrgGroupPermission");
+		sb.append("</model-name>");
+
+		sb.append(
+			"<column><column-name>organizationId</column-name><column-value><![CDATA[");
+		sb.append("getOrganizationId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>groupId</column-name><column-value><![CDATA[");
+		sb.append("getGroupId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>permissionId</column-name><column-value><![CDATA[");
+		sb.append("getPermissionId()");
+		sb.append("]]></column-value></column>");
+
+		sb.append("</model>");
+
+		return sb.toString();
+	}
+
 	private long _organizationId;
 	private long _groupId;
 	private long _permissionId;

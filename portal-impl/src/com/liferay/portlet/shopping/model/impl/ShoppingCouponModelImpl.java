@@ -452,6 +452,135 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon> {
 		return (int)getPrimaryKey();
 	}
 
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("{couponId=");
+		sb.append(getCouponId());
+		sb.append(", groupId=");
+		sb.append(getGroupId());
+		sb.append(", companyId=");
+		sb.append(getCompanyId());
+		sb.append(", userId=");
+		sb.append(getUserId());
+		sb.append(", userName=");
+		sb.append(getUserName());
+		sb.append(", createDate=");
+		sb.append(getCreateDate());
+		sb.append(", modifiedDate=");
+		sb.append(getModifiedDate());
+		sb.append(", code=");
+		sb.append(getCode());
+		sb.append(", name=");
+		sb.append(getName());
+		sb.append(", description=");
+		sb.append(getDescription());
+		sb.append(", startDate=");
+		sb.append(getStartDate());
+		sb.append(", endDate=");
+		sb.append(getEndDate());
+		sb.append(", active=");
+		sb.append(getActive());
+		sb.append(", limitCategories=");
+		sb.append(getLimitCategories());
+		sb.append(", limitSkus=");
+		sb.append(getLimitSkus());
+		sb.append(", minOrder=");
+		sb.append(getMinOrder());
+		sb.append(", discount=");
+		sb.append(getDiscount());
+		sb.append(", discountType=");
+		sb.append(getDiscountType());
+		sb.append("}");
+
+		return sb.toString();
+	}
+
+	public String toXmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<model><model-name>");
+		sb.append("com.liferay.portlet.shopping.model.ShoppingCoupon");
+		sb.append("</model-name>");
+
+		sb.append(
+			"<column><column-name>couponId</column-name><column-value><![CDATA[");
+		sb.append("getCouponId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>groupId</column-name><column-value><![CDATA[");
+		sb.append("getGroupId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>companyId</column-name><column-value><![CDATA[");
+		sb.append("getCompanyId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>userId</column-name><column-value><![CDATA[");
+		sb.append("getUserId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>userName</column-name><column-value><![CDATA[");
+		sb.append("getUserName()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>createDate</column-name><column-value><![CDATA[");
+		sb.append("getCreateDate()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>modifiedDate</column-name><column-value><![CDATA[");
+		sb.append("getModifiedDate()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>code</column-name><column-value><![CDATA[");
+		sb.append("getCode()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>name</column-name><column-value><![CDATA[");
+		sb.append("getName()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>description</column-name><column-value><![CDATA[");
+		sb.append("getDescription()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>startDate</column-name><column-value><![CDATA[");
+		sb.append("getStartDate()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>endDate</column-name><column-value><![CDATA[");
+		sb.append("getEndDate()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>active</column-name><column-value><![CDATA[");
+		sb.append("getActive()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>limitCategories</column-name><column-value><![CDATA[");
+		sb.append("getLimitCategories()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>limitSkus</column-name><column-value><![CDATA[");
+		sb.append("getLimitSkus()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>minOrder</column-name><column-value><![CDATA[");
+		sb.append("getMinOrder()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>discount</column-name><column-value><![CDATA[");
+		sb.append("getDiscount()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>discountType</column-name><column-value><![CDATA[");
+		sb.append("getDiscountType()");
+		sb.append("]]></column-value></column>");
+
+		sb.append("</model>");
+
+		return sb.toString();
+	}
+
 	private long _couponId;
 	private long _groupId;
 	private long _companyId;

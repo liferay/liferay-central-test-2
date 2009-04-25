@@ -582,6 +582,177 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList> {
 		return (int)getPrimaryKey();
 	}
 
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("{uuid=");
+		sb.append(getUuid());
+		sb.append(", mailingListId=");
+		sb.append(getMailingListId());
+		sb.append(", groupId=");
+		sb.append(getGroupId());
+		sb.append(", companyId=");
+		sb.append(getCompanyId());
+		sb.append(", userId=");
+		sb.append(getUserId());
+		sb.append(", userName=");
+		sb.append(getUserName());
+		sb.append(", createDate=");
+		sb.append(getCreateDate());
+		sb.append(", modifiedDate=");
+		sb.append(getModifiedDate());
+		sb.append(", categoryId=");
+		sb.append(getCategoryId());
+		sb.append(", emailAddress=");
+		sb.append(getEmailAddress());
+		sb.append(", inProtocol=");
+		sb.append(getInProtocol());
+		sb.append(", inServerName=");
+		sb.append(getInServerName());
+		sb.append(", inServerPort=");
+		sb.append(getInServerPort());
+		sb.append(", inUseSSL=");
+		sb.append(getInUseSSL());
+		sb.append(", inUserName=");
+		sb.append(getInUserName());
+		sb.append(", inPassword=");
+		sb.append(getInPassword());
+		sb.append(", inReadInterval=");
+		sb.append(getInReadInterval());
+		sb.append(", outEmailAddress=");
+		sb.append(getOutEmailAddress());
+		sb.append(", outCustom=");
+		sb.append(getOutCustom());
+		sb.append(", outServerName=");
+		sb.append(getOutServerName());
+		sb.append(", outServerPort=");
+		sb.append(getOutServerPort());
+		sb.append(", outUseSSL=");
+		sb.append(getOutUseSSL());
+		sb.append(", outUserName=");
+		sb.append(getOutUserName());
+		sb.append(", outPassword=");
+		sb.append(getOutPassword());
+		sb.append(", active=");
+		sb.append(getActive());
+		sb.append("}");
+
+		return sb.toString();
+	}
+
+	public String toXmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<model><model-name>");
+		sb.append("com.liferay.portlet.messageboards.model.MBMailingList");
+		sb.append("</model-name>");
+
+		sb.append(
+			"<column><column-name>uuid</column-name><column-value><![CDATA[");
+		sb.append("getUuid()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>mailingListId</column-name><column-value><![CDATA[");
+		sb.append("getMailingListId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>groupId</column-name><column-value><![CDATA[");
+		sb.append("getGroupId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>companyId</column-name><column-value><![CDATA[");
+		sb.append("getCompanyId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>userId</column-name><column-value><![CDATA[");
+		sb.append("getUserId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>userName</column-name><column-value><![CDATA[");
+		sb.append("getUserName()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>createDate</column-name><column-value><![CDATA[");
+		sb.append("getCreateDate()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>modifiedDate</column-name><column-value><![CDATA[");
+		sb.append("getModifiedDate()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>categoryId</column-name><column-value><![CDATA[");
+		sb.append("getCategoryId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>emailAddress</column-name><column-value><![CDATA[");
+		sb.append("getEmailAddress()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>inProtocol</column-name><column-value><![CDATA[");
+		sb.append("getInProtocol()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>inServerName</column-name><column-value><![CDATA[");
+		sb.append("getInServerName()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>inServerPort</column-name><column-value><![CDATA[");
+		sb.append("getInServerPort()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>inUseSSL</column-name><column-value><![CDATA[");
+		sb.append("getInUseSSL()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>inUserName</column-name><column-value><![CDATA[");
+		sb.append("getInUserName()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>inPassword</column-name><column-value><![CDATA[");
+		sb.append("getInPassword()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>inReadInterval</column-name><column-value><![CDATA[");
+		sb.append("getInReadInterval()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>outEmailAddress</column-name><column-value><![CDATA[");
+		sb.append("getOutEmailAddress()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>outCustom</column-name><column-value><![CDATA[");
+		sb.append("getOutCustom()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>outServerName</column-name><column-value><![CDATA[");
+		sb.append("getOutServerName()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>outServerPort</column-name><column-value><![CDATA[");
+		sb.append("getOutServerPort()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>outUseSSL</column-name><column-value><![CDATA[");
+		sb.append("getOutUseSSL()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>outUserName</column-name><column-value><![CDATA[");
+		sb.append("getOutUserName()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>outPassword</column-name><column-value><![CDATA[");
+		sb.append("getOutPassword()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>active</column-name><column-value><![CDATA[");
+		sb.append("getActive()");
+		sb.append("]]></column-value></column>");
+
+		sb.append("</model>");
+
+		return sb.toString();
+	}
+
 	private String _uuid;
 	private String _originalUuid;
 	private long _mailingListId;

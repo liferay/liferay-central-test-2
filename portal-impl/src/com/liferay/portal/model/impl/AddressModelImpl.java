@@ -456,6 +456,135 @@ public class AddressModelImpl extends BaseModelImpl<Address> {
 		return (int)getPrimaryKey();
 	}
 
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("{addressId=");
+		sb.append(getAddressId());
+		sb.append(", companyId=");
+		sb.append(getCompanyId());
+		sb.append(", userId=");
+		sb.append(getUserId());
+		sb.append(", userName=");
+		sb.append(getUserName());
+		sb.append(", createDate=");
+		sb.append(getCreateDate());
+		sb.append(", modifiedDate=");
+		sb.append(getModifiedDate());
+		sb.append(", classNameId=");
+		sb.append(getClassNameId());
+		sb.append(", classPK=");
+		sb.append(getClassPK());
+		sb.append(", street1=");
+		sb.append(getStreet1());
+		sb.append(", street2=");
+		sb.append(getStreet2());
+		sb.append(", street3=");
+		sb.append(getStreet3());
+		sb.append(", city=");
+		sb.append(getCity());
+		sb.append(", zip=");
+		sb.append(getZip());
+		sb.append(", regionId=");
+		sb.append(getRegionId());
+		sb.append(", countryId=");
+		sb.append(getCountryId());
+		sb.append(", typeId=");
+		sb.append(getTypeId());
+		sb.append(", mailing=");
+		sb.append(getMailing());
+		sb.append(", primary=");
+		sb.append(getPrimary());
+		sb.append("}");
+
+		return sb.toString();
+	}
+
+	public String toXmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<model><model-name>");
+		sb.append("com.liferay.portal.model.Address");
+		sb.append("</model-name>");
+
+		sb.append(
+			"<column><column-name>addressId</column-name><column-value><![CDATA[");
+		sb.append("getAddressId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>companyId</column-name><column-value><![CDATA[");
+		sb.append("getCompanyId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>userId</column-name><column-value><![CDATA[");
+		sb.append("getUserId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>userName</column-name><column-value><![CDATA[");
+		sb.append("getUserName()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>createDate</column-name><column-value><![CDATA[");
+		sb.append("getCreateDate()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>modifiedDate</column-name><column-value><![CDATA[");
+		sb.append("getModifiedDate()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>classNameId</column-name><column-value><![CDATA[");
+		sb.append("getClassNameId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>classPK</column-name><column-value><![CDATA[");
+		sb.append("getClassPK()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>street1</column-name><column-value><![CDATA[");
+		sb.append("getStreet1()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>street2</column-name><column-value><![CDATA[");
+		sb.append("getStreet2()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>street3</column-name><column-value><![CDATA[");
+		sb.append("getStreet3()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>city</column-name><column-value><![CDATA[");
+		sb.append("getCity()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>zip</column-name><column-value><![CDATA[");
+		sb.append("getZip()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>regionId</column-name><column-value><![CDATA[");
+		sb.append("getRegionId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>countryId</column-name><column-value><![CDATA[");
+		sb.append("getCountryId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>typeId</column-name><column-value><![CDATA[");
+		sb.append("getTypeId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>mailing</column-name><column-value><![CDATA[");
+		sb.append("getMailing()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>primary</column-name><column-value><![CDATA[");
+		sb.append("getPrimary()");
+		sb.append("]]></column-value></column>");
+
+		sb.append("</model>");
+
+		return sb.toString();
+	}
+
 	private long _addressId;
 	private long _companyId;
 	private long _userId;

@@ -257,6 +257,57 @@ public class RegionModelImpl extends BaseModelImpl<Region> {
 		return (int)getPrimaryKey();
 	}
 
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("{regionId=");
+		sb.append(getRegionId());
+		sb.append(", countryId=");
+		sb.append(getCountryId());
+		sb.append(", regionCode=");
+		sb.append(getRegionCode());
+		sb.append(", name=");
+		sb.append(getName());
+		sb.append(", active=");
+		sb.append(getActive());
+		sb.append("}");
+
+		return sb.toString();
+	}
+
+	public String toXmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<model><model-name>");
+		sb.append("com.liferay.portal.model.Region");
+		sb.append("</model-name>");
+
+		sb.append(
+			"<column><column-name>regionId</column-name><column-value><![CDATA[");
+		sb.append("getRegionId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>countryId</column-name><column-value><![CDATA[");
+		sb.append("getCountryId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>regionCode</column-name><column-value><![CDATA[");
+		sb.append("getRegionCode()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>name</column-name><column-value><![CDATA[");
+		sb.append("getName()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>active</column-name><column-value><![CDATA[");
+		sb.append("getActive()");
+		sb.append("]]></column-value></column>");
+
+		sb.append("</model>");
+
+		return sb.toString();
+	}
+
 	private long _regionId;
 	private long _countryId;
 	private String _regionCode;

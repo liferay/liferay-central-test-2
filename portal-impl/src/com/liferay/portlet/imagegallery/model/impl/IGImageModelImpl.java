@@ -448,6 +448,111 @@ public class IGImageModelImpl extends BaseModelImpl<IGImage> {
 		return (int)getPrimaryKey();
 	}
 
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("{uuid=");
+		sb.append(getUuid());
+		sb.append(", imageId=");
+		sb.append(getImageId());
+		sb.append(", groupId=");
+		sb.append(getGroupId());
+		sb.append(", companyId=");
+		sb.append(getCompanyId());
+		sb.append(", userId=");
+		sb.append(getUserId());
+		sb.append(", createDate=");
+		sb.append(getCreateDate());
+		sb.append(", modifiedDate=");
+		sb.append(getModifiedDate());
+		sb.append(", folderId=");
+		sb.append(getFolderId());
+		sb.append(", name=");
+		sb.append(getName());
+		sb.append(", description=");
+		sb.append(getDescription());
+		sb.append(", smallImageId=");
+		sb.append(getSmallImageId());
+		sb.append(", largeImageId=");
+		sb.append(getLargeImageId());
+		sb.append(", custom1ImageId=");
+		sb.append(getCustom1ImageId());
+		sb.append(", custom2ImageId=");
+		sb.append(getCustom2ImageId());
+		sb.append("}");
+
+		return sb.toString();
+	}
+
+	public String toXmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<model><model-name>");
+		sb.append("com.liferay.portlet.imagegallery.model.IGImage");
+		sb.append("</model-name>");
+
+		sb.append(
+			"<column><column-name>uuid</column-name><column-value><![CDATA[");
+		sb.append("getUuid()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>imageId</column-name><column-value><![CDATA[");
+		sb.append("getImageId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>groupId</column-name><column-value><![CDATA[");
+		sb.append("getGroupId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>companyId</column-name><column-value><![CDATA[");
+		sb.append("getCompanyId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>userId</column-name><column-value><![CDATA[");
+		sb.append("getUserId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>createDate</column-name><column-value><![CDATA[");
+		sb.append("getCreateDate()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>modifiedDate</column-name><column-value><![CDATA[");
+		sb.append("getModifiedDate()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>folderId</column-name><column-value><![CDATA[");
+		sb.append("getFolderId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>name</column-name><column-value><![CDATA[");
+		sb.append("getName()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>description</column-name><column-value><![CDATA[");
+		sb.append("getDescription()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>smallImageId</column-name><column-value><![CDATA[");
+		sb.append("getSmallImageId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>largeImageId</column-name><column-value><![CDATA[");
+		sb.append("getLargeImageId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>custom1ImageId</column-name><column-value><![CDATA[");
+		sb.append("getCustom1ImageId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>custom2ImageId</column-name><column-value><![CDATA[");
+		sb.append("getCustom2ImageId()");
+		sb.append("]]></column-value></column>");
+
+		sb.append("</model>");
+
+		return sb.toString();
+	}
+
 	private String _uuid;
 	private String _originalUuid;
 	private long _imageId;

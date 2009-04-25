@@ -583,6 +583,159 @@ public class LayoutModelImpl extends BaseModelImpl<Layout> {
 		return (int)getPrimaryKey();
 	}
 
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("{plid=");
+		sb.append(getPlid());
+		sb.append(", groupId=");
+		sb.append(getGroupId());
+		sb.append(", companyId=");
+		sb.append(getCompanyId());
+		sb.append(", privateLayout=");
+		sb.append(getPrivateLayout());
+		sb.append(", layoutId=");
+		sb.append(getLayoutId());
+		sb.append(", parentLayoutId=");
+		sb.append(getParentLayoutId());
+		sb.append(", name=");
+		sb.append(getName());
+		sb.append(", title=");
+		sb.append(getTitle());
+		sb.append(", description=");
+		sb.append(getDescription());
+		sb.append(", type=");
+		sb.append(getType());
+		sb.append(", typeSettings=");
+		sb.append(getTypeSettings());
+		sb.append(", hidden=");
+		sb.append(getHidden());
+		sb.append(", friendlyURL=");
+		sb.append(getFriendlyURL());
+		sb.append(", iconImage=");
+		sb.append(getIconImage());
+		sb.append(", iconImageId=");
+		sb.append(getIconImageId());
+		sb.append(", themeId=");
+		sb.append(getThemeId());
+		sb.append(", colorSchemeId=");
+		sb.append(getColorSchemeId());
+		sb.append(", wapThemeId=");
+		sb.append(getWapThemeId());
+		sb.append(", wapColorSchemeId=");
+		sb.append(getWapColorSchemeId());
+		sb.append(", css=");
+		sb.append(getCss());
+		sb.append(", priority=");
+		sb.append(getPriority());
+		sb.append(", dlFolderId=");
+		sb.append(getDlFolderId());
+		sb.append("}");
+
+		return sb.toString();
+	}
+
+	public String toXmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<model><model-name>");
+		sb.append("com.liferay.portal.model.Layout");
+		sb.append("</model-name>");
+
+		sb.append(
+			"<column><column-name>plid</column-name><column-value><![CDATA[");
+		sb.append("getPlid()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>groupId</column-name><column-value><![CDATA[");
+		sb.append("getGroupId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>companyId</column-name><column-value><![CDATA[");
+		sb.append("getCompanyId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>privateLayout</column-name><column-value><![CDATA[");
+		sb.append("getPrivateLayout()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>layoutId</column-name><column-value><![CDATA[");
+		sb.append("getLayoutId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>parentLayoutId</column-name><column-value><![CDATA[");
+		sb.append("getParentLayoutId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>name</column-name><column-value><![CDATA[");
+		sb.append("getName()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>title</column-name><column-value><![CDATA[");
+		sb.append("getTitle()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>description</column-name><column-value><![CDATA[");
+		sb.append("getDescription()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>type</column-name><column-value><![CDATA[");
+		sb.append("getType()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>typeSettings</column-name><column-value><![CDATA[");
+		sb.append("getTypeSettings()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>hidden</column-name><column-value><![CDATA[");
+		sb.append("getHidden()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>friendlyURL</column-name><column-value><![CDATA[");
+		sb.append("getFriendlyURL()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>iconImage</column-name><column-value><![CDATA[");
+		sb.append("getIconImage()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>iconImageId</column-name><column-value><![CDATA[");
+		sb.append("getIconImageId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>themeId</column-name><column-value><![CDATA[");
+		sb.append("getThemeId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>colorSchemeId</column-name><column-value><![CDATA[");
+		sb.append("getColorSchemeId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>wapThemeId</column-name><column-value><![CDATA[");
+		sb.append("getWapThemeId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>wapColorSchemeId</column-name><column-value><![CDATA[");
+		sb.append("getWapColorSchemeId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>css</column-name><column-value><![CDATA[");
+		sb.append("getCss()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>priority</column-name><column-value><![CDATA[");
+		sb.append("getPriority()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>dlFolderId</column-name><column-value><![CDATA[");
+		sb.append("getDlFolderId()");
+		sb.append("]]></column-value></column>");
+
+		sb.append("</model>");
+
+		return sb.toString();
+	}
+
 	private long _plid;
 	private long _groupId;
 	private long _originalGroupId;

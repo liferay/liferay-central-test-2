@@ -273,6 +273,57 @@ public class UserGroupModelImpl extends BaseModelImpl<UserGroup> {
 		return (int)getPrimaryKey();
 	}
 
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("{userGroupId=");
+		sb.append(getUserGroupId());
+		sb.append(", companyId=");
+		sb.append(getCompanyId());
+		sb.append(", parentUserGroupId=");
+		sb.append(getParentUserGroupId());
+		sb.append(", name=");
+		sb.append(getName());
+		sb.append(", description=");
+		sb.append(getDescription());
+		sb.append("}");
+
+		return sb.toString();
+	}
+
+	public String toXmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<model><model-name>");
+		sb.append("com.liferay.portal.model.UserGroup");
+		sb.append("</model-name>");
+
+		sb.append(
+			"<column><column-name>userGroupId</column-name><column-value><![CDATA[");
+		sb.append("getUserGroupId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>companyId</column-name><column-value><![CDATA[");
+		sb.append("getCompanyId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>parentUserGroupId</column-name><column-value><![CDATA[");
+		sb.append("getParentUserGroupId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>name</column-name><column-value><![CDATA[");
+		sb.append("getName()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>description</column-name><column-value><![CDATA[");
+		sb.append("getDescription()");
+		sb.append("]]></column-value></column>");
+
+		sb.append("</model>");
+
+		return sb.toString();
+	}
+
 	private long _userGroupId;
 	private long _companyId;
 	private long _originalCompanyId;

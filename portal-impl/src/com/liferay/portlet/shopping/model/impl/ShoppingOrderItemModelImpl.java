@@ -333,6 +333,87 @@ public class ShoppingOrderItemModelImpl extends BaseModelImpl<ShoppingOrderItem>
 		return (int)getPrimaryKey();
 	}
 
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("{orderItemId=");
+		sb.append(getOrderItemId());
+		sb.append(", orderId=");
+		sb.append(getOrderId());
+		sb.append(", itemId=");
+		sb.append(getItemId());
+		sb.append(", sku=");
+		sb.append(getSku());
+		sb.append(", name=");
+		sb.append(getName());
+		sb.append(", description=");
+		sb.append(getDescription());
+		sb.append(", properties=");
+		sb.append(getProperties());
+		sb.append(", price=");
+		sb.append(getPrice());
+		sb.append(", quantity=");
+		sb.append(getQuantity());
+		sb.append(", shippedDate=");
+		sb.append(getShippedDate());
+		sb.append("}");
+
+		return sb.toString();
+	}
+
+	public String toXmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<model><model-name>");
+		sb.append("com.liferay.portlet.shopping.model.ShoppingOrderItem");
+		sb.append("</model-name>");
+
+		sb.append(
+			"<column><column-name>orderItemId</column-name><column-value><![CDATA[");
+		sb.append("getOrderItemId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>orderId</column-name><column-value><![CDATA[");
+		sb.append("getOrderId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>itemId</column-name><column-value><![CDATA[");
+		sb.append("getItemId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>sku</column-name><column-value><![CDATA[");
+		sb.append("getSku()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>name</column-name><column-value><![CDATA[");
+		sb.append("getName()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>description</column-name><column-value><![CDATA[");
+		sb.append("getDescription()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>properties</column-name><column-value><![CDATA[");
+		sb.append("getProperties()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>price</column-name><column-value><![CDATA[");
+		sb.append("getPrice()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>quantity</column-name><column-value><![CDATA[");
+		sb.append("getQuantity()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>shippedDate</column-name><column-value><![CDATA[");
+		sb.append("getShippedDate()");
+		sb.append("]]></column-value></column>");
+
+		sb.append("</model>");
+
+		return sb.toString();
+	}
+
 	private long _orderItemId;
 	private long _orderId;
 	private String _itemId;

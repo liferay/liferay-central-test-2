@@ -285,6 +285,57 @@ public class MBStatsUserModelImpl extends BaseModelImpl<MBStatsUser> {
 		return (int)getPrimaryKey();
 	}
 
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("{statsUserId=");
+		sb.append(getStatsUserId());
+		sb.append(", groupId=");
+		sb.append(getGroupId());
+		sb.append(", userId=");
+		sb.append(getUserId());
+		sb.append(", messageCount=");
+		sb.append(getMessageCount());
+		sb.append(", lastPostDate=");
+		sb.append(getLastPostDate());
+		sb.append("}");
+
+		return sb.toString();
+	}
+
+	public String toXmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<model><model-name>");
+		sb.append("com.liferay.portlet.messageboards.model.MBStatsUser");
+		sb.append("</model-name>");
+
+		sb.append(
+			"<column><column-name>statsUserId</column-name><column-value><![CDATA[");
+		sb.append("getStatsUserId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>groupId</column-name><column-value><![CDATA[");
+		sb.append("getGroupId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>userId</column-name><column-value><![CDATA[");
+		sb.append("getUserId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>messageCount</column-name><column-value><![CDATA[");
+		sb.append("getMessageCount()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>lastPostDate</column-name><column-value><![CDATA[");
+		sb.append("getLastPostDate()");
+		sb.append("]]></column-value></column>");
+
+		sb.append("</model>");
+
+		return sb.toString();
+	}
+
 	private long _statsUserId;
 	private long _groupId;
 	private long _originalGroupId;

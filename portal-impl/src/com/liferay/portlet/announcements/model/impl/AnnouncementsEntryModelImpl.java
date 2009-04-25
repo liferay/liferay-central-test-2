@@ -455,6 +455,129 @@ public class AnnouncementsEntryModelImpl extends BaseModelImpl<AnnouncementsEntr
 		return (int)getPrimaryKey();
 	}
 
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("{uuid=");
+		sb.append(getUuid());
+		sb.append(", entryId=");
+		sb.append(getEntryId());
+		sb.append(", companyId=");
+		sb.append(getCompanyId());
+		sb.append(", userId=");
+		sb.append(getUserId());
+		sb.append(", userName=");
+		sb.append(getUserName());
+		sb.append(", createDate=");
+		sb.append(getCreateDate());
+		sb.append(", modifiedDate=");
+		sb.append(getModifiedDate());
+		sb.append(", classNameId=");
+		sb.append(getClassNameId());
+		sb.append(", classPK=");
+		sb.append(getClassPK());
+		sb.append(", title=");
+		sb.append(getTitle());
+		sb.append(", content=");
+		sb.append(getContent());
+		sb.append(", url=");
+		sb.append(getUrl());
+		sb.append(", type=");
+		sb.append(getType());
+		sb.append(", displayDate=");
+		sb.append(getDisplayDate());
+		sb.append(", expirationDate=");
+		sb.append(getExpirationDate());
+		sb.append(", priority=");
+		sb.append(getPriority());
+		sb.append(", alert=");
+		sb.append(getAlert());
+		sb.append("}");
+
+		return sb.toString();
+	}
+
+	public String toXmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<model><model-name>");
+		sb.append("com.liferay.portlet.announcements.model.AnnouncementsEntry");
+		sb.append("</model-name>");
+
+		sb.append(
+			"<column><column-name>uuid</column-name><column-value><![CDATA[");
+		sb.append("getUuid()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>entryId</column-name><column-value><![CDATA[");
+		sb.append("getEntryId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>companyId</column-name><column-value><![CDATA[");
+		sb.append("getCompanyId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>userId</column-name><column-value><![CDATA[");
+		sb.append("getUserId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>userName</column-name><column-value><![CDATA[");
+		sb.append("getUserName()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>createDate</column-name><column-value><![CDATA[");
+		sb.append("getCreateDate()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>modifiedDate</column-name><column-value><![CDATA[");
+		sb.append("getModifiedDate()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>classNameId</column-name><column-value><![CDATA[");
+		sb.append("getClassNameId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>classPK</column-name><column-value><![CDATA[");
+		sb.append("getClassPK()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>title</column-name><column-value><![CDATA[");
+		sb.append("getTitle()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>content</column-name><column-value><![CDATA[");
+		sb.append("getContent()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>url</column-name><column-value><![CDATA[");
+		sb.append("getUrl()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>type</column-name><column-value><![CDATA[");
+		sb.append("getType()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>displayDate</column-name><column-value><![CDATA[");
+		sb.append("getDisplayDate()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>expirationDate</column-name><column-value><![CDATA[");
+		sb.append("getExpirationDate()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>priority</column-name><column-value><![CDATA[");
+		sb.append("getPriority()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>alert</column-name><column-value><![CDATA[");
+		sb.append("getAlert()");
+		sb.append("]]></column-value></column>");
+
+		sb.append("</model>");
+
+		return sb.toString();
+	}
+
 	private String _uuid;
 	private long _entryId;
 	private long _companyId;

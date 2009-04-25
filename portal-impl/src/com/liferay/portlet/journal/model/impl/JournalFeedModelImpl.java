@@ -535,6 +535,165 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed> {
 		return (int)getPrimaryKey();
 	}
 
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("{uuid=");
+		sb.append(getUuid());
+		sb.append(", id=");
+		sb.append(getId());
+		sb.append(", groupId=");
+		sb.append(getGroupId());
+		sb.append(", companyId=");
+		sb.append(getCompanyId());
+		sb.append(", userId=");
+		sb.append(getUserId());
+		sb.append(", userName=");
+		sb.append(getUserName());
+		sb.append(", createDate=");
+		sb.append(getCreateDate());
+		sb.append(", modifiedDate=");
+		sb.append(getModifiedDate());
+		sb.append(", feedId=");
+		sb.append(getFeedId());
+		sb.append(", name=");
+		sb.append(getName());
+		sb.append(", description=");
+		sb.append(getDescription());
+		sb.append(", type=");
+		sb.append(getType());
+		sb.append(", structureId=");
+		sb.append(getStructureId());
+		sb.append(", templateId=");
+		sb.append(getTemplateId());
+		sb.append(", rendererTemplateId=");
+		sb.append(getRendererTemplateId());
+		sb.append(", delta=");
+		sb.append(getDelta());
+		sb.append(", orderByCol=");
+		sb.append(getOrderByCol());
+		sb.append(", orderByType=");
+		sb.append(getOrderByType());
+		sb.append(", targetLayoutFriendlyUrl=");
+		sb.append(getTargetLayoutFriendlyUrl());
+		sb.append(", targetPortletId=");
+		sb.append(getTargetPortletId());
+		sb.append(", contentField=");
+		sb.append(getContentField());
+		sb.append(", feedType=");
+		sb.append(getFeedType());
+		sb.append(", feedVersion=");
+		sb.append(getFeedVersion());
+		sb.append("}");
+
+		return sb.toString();
+	}
+
+	public String toXmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<model><model-name>");
+		sb.append("com.liferay.portlet.journal.model.JournalFeed");
+		sb.append("</model-name>");
+
+		sb.append(
+			"<column><column-name>uuid</column-name><column-value><![CDATA[");
+		sb.append("getUuid()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>id</column-name><column-value><![CDATA[");
+		sb.append("getId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>groupId</column-name><column-value><![CDATA[");
+		sb.append("getGroupId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>companyId</column-name><column-value><![CDATA[");
+		sb.append("getCompanyId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>userId</column-name><column-value><![CDATA[");
+		sb.append("getUserId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>userName</column-name><column-value><![CDATA[");
+		sb.append("getUserName()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>createDate</column-name><column-value><![CDATA[");
+		sb.append("getCreateDate()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>modifiedDate</column-name><column-value><![CDATA[");
+		sb.append("getModifiedDate()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>feedId</column-name><column-value><![CDATA[");
+		sb.append("getFeedId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>name</column-name><column-value><![CDATA[");
+		sb.append("getName()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>description</column-name><column-value><![CDATA[");
+		sb.append("getDescription()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>type</column-name><column-value><![CDATA[");
+		sb.append("getType()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>structureId</column-name><column-value><![CDATA[");
+		sb.append("getStructureId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>templateId</column-name><column-value><![CDATA[");
+		sb.append("getTemplateId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>rendererTemplateId</column-name><column-value><![CDATA[");
+		sb.append("getRendererTemplateId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>delta</column-name><column-value><![CDATA[");
+		sb.append("getDelta()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>orderByCol</column-name><column-value><![CDATA[");
+		sb.append("getOrderByCol()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>orderByType</column-name><column-value><![CDATA[");
+		sb.append("getOrderByType()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>targetLayoutFriendlyUrl</column-name><column-value><![CDATA[");
+		sb.append("getTargetLayoutFriendlyUrl()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>targetPortletId</column-name><column-value><![CDATA[");
+		sb.append("getTargetPortletId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>contentField</column-name><column-value><![CDATA[");
+		sb.append("getContentField()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>feedType</column-name><column-value><![CDATA[");
+		sb.append("getFeedType()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>feedVersion</column-name><column-value><![CDATA[");
+		sb.append("getFeedVersion()");
+		sb.append("]]></column-value></column>");
+
+		sb.append("</model>");
+
+		return sb.toString();
+	}
+
 	private String _uuid;
 	private String _originalUuid;
 	private long _id;

@@ -243,6 +243,51 @@ public class TagsSourceModelImpl extends BaseModelImpl<TagsSource> {
 		return (int)getPrimaryKey();
 	}
 
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("{sourceId=");
+		sb.append(getSourceId());
+		sb.append(", parentSourceId=");
+		sb.append(getParentSourceId());
+		sb.append(", name=");
+		sb.append(getName());
+		sb.append(", acronym=");
+		sb.append(getAcronym());
+		sb.append("}");
+
+		return sb.toString();
+	}
+
+	public String toXmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<model><model-name>");
+		sb.append("com.liferay.portlet.tags.model.TagsSource");
+		sb.append("</model-name>");
+
+		sb.append(
+			"<column><column-name>sourceId</column-name><column-value><![CDATA[");
+		sb.append("getSourceId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>parentSourceId</column-name><column-value><![CDATA[");
+		sb.append("getParentSourceId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>name</column-name><column-value><![CDATA[");
+		sb.append("getName()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>acronym</column-name><column-value><![CDATA[");
+		sb.append("getAcronym()");
+		sb.append("]]></column-value></column>");
+
+		sb.append("</model>");
+
+		return sb.toString();
+	}
+
 	private long _sourceId;
 	private long _parentSourceId;
 	private String _name;

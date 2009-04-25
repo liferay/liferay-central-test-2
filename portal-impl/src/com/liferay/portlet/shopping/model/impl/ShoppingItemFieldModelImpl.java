@@ -271,6 +271,57 @@ public class ShoppingItemFieldModelImpl extends BaseModelImpl<ShoppingItemField>
 		return (int)getPrimaryKey();
 	}
 
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("{itemFieldId=");
+		sb.append(getItemFieldId());
+		sb.append(", itemId=");
+		sb.append(getItemId());
+		sb.append(", name=");
+		sb.append(getName());
+		sb.append(", values=");
+		sb.append(getValues());
+		sb.append(", description=");
+		sb.append(getDescription());
+		sb.append("}");
+
+		return sb.toString();
+	}
+
+	public String toXmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<model><model-name>");
+		sb.append("com.liferay.portlet.shopping.model.ShoppingItemField");
+		sb.append("</model-name>");
+
+		sb.append(
+			"<column><column-name>itemFieldId</column-name><column-value><![CDATA[");
+		sb.append("getItemFieldId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>itemId</column-name><column-value><![CDATA[");
+		sb.append("getItemId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>name</column-name><column-value><![CDATA[");
+		sb.append("getName()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>values</column-name><column-value><![CDATA[");
+		sb.append("getValues()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>description</column-name><column-value><![CDATA[");
+		sb.append("getDescription()");
+		sb.append("]]></column-value></column>");
+
+		sb.append("</model>");
+
+		return sb.toString();
+	}
+
 	private long _itemFieldId;
 	private long _itemId;
 	private String _name;

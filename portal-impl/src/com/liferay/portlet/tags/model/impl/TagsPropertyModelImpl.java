@@ -330,6 +330,81 @@ public class TagsPropertyModelImpl extends BaseModelImpl<TagsProperty> {
 		return (int)getPrimaryKey();
 	}
 
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("{propertyId=");
+		sb.append(getPropertyId());
+		sb.append(", companyId=");
+		sb.append(getCompanyId());
+		sb.append(", userId=");
+		sb.append(getUserId());
+		sb.append(", userName=");
+		sb.append(getUserName());
+		sb.append(", createDate=");
+		sb.append(getCreateDate());
+		sb.append(", modifiedDate=");
+		sb.append(getModifiedDate());
+		sb.append(", entryId=");
+		sb.append(getEntryId());
+		sb.append(", key=");
+		sb.append(getKey());
+		sb.append(", value=");
+		sb.append(getValue());
+		sb.append("}");
+
+		return sb.toString();
+	}
+
+	public String toXmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<model><model-name>");
+		sb.append("com.liferay.portlet.tags.model.TagsProperty");
+		sb.append("</model-name>");
+
+		sb.append(
+			"<column><column-name>propertyId</column-name><column-value><![CDATA[");
+		sb.append("getPropertyId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>companyId</column-name><column-value><![CDATA[");
+		sb.append("getCompanyId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>userId</column-name><column-value><![CDATA[");
+		sb.append("getUserId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>userName</column-name><column-value><![CDATA[");
+		sb.append("getUserName()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>createDate</column-name><column-value><![CDATA[");
+		sb.append("getCreateDate()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>modifiedDate</column-name><column-value><![CDATA[");
+		sb.append("getModifiedDate()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>entryId</column-name><column-value><![CDATA[");
+		sb.append("getEntryId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>key</column-name><column-value><![CDATA[");
+		sb.append("getKey()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>value</column-name><column-value><![CDATA[");
+		sb.append("getValue()");
+		sb.append("]]></column-value></column>");
+
+		sb.append("</model>");
+
+		return sb.toString();
+	}
+
 	private long _propertyId;
 	private long _companyId;
 	private long _userId;

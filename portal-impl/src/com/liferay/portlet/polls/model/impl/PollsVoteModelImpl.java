@@ -277,6 +277,57 @@ public class PollsVoteModelImpl extends BaseModelImpl<PollsVote> {
 		return (int)getPrimaryKey();
 	}
 
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("{voteId=");
+		sb.append(getVoteId());
+		sb.append(", userId=");
+		sb.append(getUserId());
+		sb.append(", questionId=");
+		sb.append(getQuestionId());
+		sb.append(", choiceId=");
+		sb.append(getChoiceId());
+		sb.append(", voteDate=");
+		sb.append(getVoteDate());
+		sb.append("}");
+
+		return sb.toString();
+	}
+
+	public String toXmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<model><model-name>");
+		sb.append("com.liferay.portlet.polls.model.PollsVote");
+		sb.append("</model-name>");
+
+		sb.append(
+			"<column><column-name>voteId</column-name><column-value><![CDATA[");
+		sb.append("getVoteId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>userId</column-name><column-value><![CDATA[");
+		sb.append("getUserId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>questionId</column-name><column-value><![CDATA[");
+		sb.append("getQuestionId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>choiceId</column-name><column-value><![CDATA[");
+		sb.append("getChoiceId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>voteDate</column-name><column-value><![CDATA[");
+		sb.append("getVoteDate()");
+		sb.append("]]></column-value></column>");
+
+		sb.append("</model>");
+
+		return sb.toString();
+	}
+
 	private long _voteId;
 	private long _userId;
 	private long _originalUserId;

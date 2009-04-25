@@ -299,6 +299,75 @@ public class UserTrackerModelImpl extends BaseModelImpl<UserTracker> {
 		return (int)getPrimaryKey();
 	}
 
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("{userTrackerId=");
+		sb.append(getUserTrackerId());
+		sb.append(", companyId=");
+		sb.append(getCompanyId());
+		sb.append(", userId=");
+		sb.append(getUserId());
+		sb.append(", modifiedDate=");
+		sb.append(getModifiedDate());
+		sb.append(", sessionId=");
+		sb.append(getSessionId());
+		sb.append(", remoteAddr=");
+		sb.append(getRemoteAddr());
+		sb.append(", remoteHost=");
+		sb.append(getRemoteHost());
+		sb.append(", userAgent=");
+		sb.append(getUserAgent());
+		sb.append("}");
+
+		return sb.toString();
+	}
+
+	public String toXmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<model><model-name>");
+		sb.append("com.liferay.portal.model.UserTracker");
+		sb.append("</model-name>");
+
+		sb.append(
+			"<column><column-name>userTrackerId</column-name><column-value><![CDATA[");
+		sb.append("getUserTrackerId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>companyId</column-name><column-value><![CDATA[");
+		sb.append("getCompanyId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>userId</column-name><column-value><![CDATA[");
+		sb.append("getUserId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>modifiedDate</column-name><column-value><![CDATA[");
+		sb.append("getModifiedDate()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>sessionId</column-name><column-value><![CDATA[");
+		sb.append("getSessionId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>remoteAddr</column-name><column-value><![CDATA[");
+		sb.append("getRemoteAddr()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>remoteHost</column-name><column-value><![CDATA[");
+		sb.append("getRemoteHost()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>userAgent</column-name><column-value><![CDATA[");
+		sb.append("getUserAgent()");
+		sb.append("]]></column-value></column>");
+
+		sb.append("</model>");
+
+		return sb.toString();
+	}
+
 	private long _userTrackerId;
 	private long _companyId;
 	private long _userId;

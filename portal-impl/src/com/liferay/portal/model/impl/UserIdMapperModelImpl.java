@@ -282,6 +282,57 @@ public class UserIdMapperModelImpl extends BaseModelImpl<UserIdMapper> {
 		return (int)getPrimaryKey();
 	}
 
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("{userIdMapperId=");
+		sb.append(getUserIdMapperId());
+		sb.append(", userId=");
+		sb.append(getUserId());
+		sb.append(", type=");
+		sb.append(getType());
+		sb.append(", description=");
+		sb.append(getDescription());
+		sb.append(", externalUserId=");
+		sb.append(getExternalUserId());
+		sb.append("}");
+
+		return sb.toString();
+	}
+
+	public String toXmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<model><model-name>");
+		sb.append("com.liferay.portal.model.UserIdMapper");
+		sb.append("</model-name>");
+
+		sb.append(
+			"<column><column-name>userIdMapperId</column-name><column-value><![CDATA[");
+		sb.append("getUserIdMapperId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>userId</column-name><column-value><![CDATA[");
+		sb.append("getUserId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>type</column-name><column-value><![CDATA[");
+		sb.append("getType()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>description</column-name><column-value><![CDATA[");
+		sb.append("getDescription()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>externalUserId</column-name><column-value><![CDATA[");
+		sb.append("getExternalUserId()");
+		sb.append("]]></column-value></column>");
+
+		sb.append("</model>");
+
+		return sb.toString();
+	}
+
 	private long _userIdMapperId;
 	private long _userId;
 	private long _originalUserId;

@@ -286,6 +286,57 @@ public class MBMessageFlagModelImpl extends BaseModelImpl<MBMessageFlag> {
 		return (int)getPrimaryKey();
 	}
 
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("{messageFlagId=");
+		sb.append(getMessageFlagId());
+		sb.append(", userId=");
+		sb.append(getUserId());
+		sb.append(", threadId=");
+		sb.append(getThreadId());
+		sb.append(", messageId=");
+		sb.append(getMessageId());
+		sb.append(", flag=");
+		sb.append(getFlag());
+		sb.append("}");
+
+		return sb.toString();
+	}
+
+	public String toXmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<model><model-name>");
+		sb.append("com.liferay.portlet.messageboards.model.MBMessageFlag");
+		sb.append("</model-name>");
+
+		sb.append(
+			"<column><column-name>messageFlagId</column-name><column-value><![CDATA[");
+		sb.append("getMessageFlagId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>userId</column-name><column-value><![CDATA[");
+		sb.append("getUserId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>threadId</column-name><column-value><![CDATA[");
+		sb.append("getThreadId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>messageId</column-name><column-value><![CDATA[");
+		sb.append("getMessageId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>flag</column-name><column-value><![CDATA[");
+		sb.append("getFlag()");
+		sb.append("]]></column-value></column>");
+
+		sb.append("</model>");
+
+		return sb.toString();
+	}
+
 	private long _messageFlagId;
 	private long _userId;
 	private long _originalUserId;

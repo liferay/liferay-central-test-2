@@ -210,6 +210,45 @@ public class UserGroupRoleModelImpl extends BaseModelImpl<UserGroupRole> {
 		return getPrimaryKey().hashCode();
 	}
 
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("{userId=");
+		sb.append(getUserId());
+		sb.append(", groupId=");
+		sb.append(getGroupId());
+		sb.append(", roleId=");
+		sb.append(getRoleId());
+		sb.append("}");
+
+		return sb.toString();
+	}
+
+	public String toXmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<model><model-name>");
+		sb.append("com.liferay.portal.model.UserGroupRole");
+		sb.append("</model-name>");
+
+		sb.append(
+			"<column><column-name>userId</column-name><column-value><![CDATA[");
+		sb.append("getUserId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>groupId</column-name><column-value><![CDATA[");
+		sb.append("getGroupId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>roleId</column-name><column-value><![CDATA[");
+		sb.append("getRoleId()");
+		sb.append("]]></column-value></column>");
+
+		sb.append("</model>");
+
+		return sb.toString();
+	}
+
 	private long _userId;
 	private long _groupId;
 	private long _roleId;

@@ -215,6 +215,45 @@ public class ListTypeModelImpl extends BaseModelImpl<ListType> {
 		return getPrimaryKey();
 	}
 
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("{listTypeId=");
+		sb.append(getListTypeId());
+		sb.append(", name=");
+		sb.append(getName());
+		sb.append(", type=");
+		sb.append(getType());
+		sb.append("}");
+
+		return sb.toString();
+	}
+
+	public String toXmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<model><model-name>");
+		sb.append("com.liferay.portal.model.ListType");
+		sb.append("</model-name>");
+
+		sb.append(
+			"<column><column-name>listTypeId</column-name><column-value><![CDATA[");
+		sb.append("getListTypeId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>name</column-name><column-value><![CDATA[");
+		sb.append("getName()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>type</column-name><column-value><![CDATA[");
+		sb.append("getType()");
+		sb.append("]]></column-value></column>");
+
+		sb.append("</model>");
+
+		return sb.toString();
+	}
+
 	private int _listTypeId;
 	private String _name;
 	private String _type;

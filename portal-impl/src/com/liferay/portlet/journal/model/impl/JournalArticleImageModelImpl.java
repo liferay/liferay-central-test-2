@@ -356,6 +356,75 @@ public class JournalArticleImageModelImpl extends BaseModelImpl<JournalArticleIm
 		return (int)getPrimaryKey();
 	}
 
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("{articleImageId=");
+		sb.append(getArticleImageId());
+		sb.append(", groupId=");
+		sb.append(getGroupId());
+		sb.append(", articleId=");
+		sb.append(getArticleId());
+		sb.append(", version=");
+		sb.append(getVersion());
+		sb.append(", elInstanceId=");
+		sb.append(getElInstanceId());
+		sb.append(", elName=");
+		sb.append(getElName());
+		sb.append(", languageId=");
+		sb.append(getLanguageId());
+		sb.append(", tempImage=");
+		sb.append(getTempImage());
+		sb.append("}");
+
+		return sb.toString();
+	}
+
+	public String toXmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<model><model-name>");
+		sb.append("com.liferay.portlet.journal.model.JournalArticleImage");
+		sb.append("</model-name>");
+
+		sb.append(
+			"<column><column-name>articleImageId</column-name><column-value><![CDATA[");
+		sb.append("getArticleImageId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>groupId</column-name><column-value><![CDATA[");
+		sb.append("getGroupId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>articleId</column-name><column-value><![CDATA[");
+		sb.append("getArticleId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>version</column-name><column-value><![CDATA[");
+		sb.append("getVersion()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>elInstanceId</column-name><column-value><![CDATA[");
+		sb.append("getElInstanceId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>elName</column-name><column-value><![CDATA[");
+		sb.append("getElName()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>languageId</column-name><column-value><![CDATA[");
+		sb.append("getLanguageId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>tempImage</column-name><column-value><![CDATA[");
+		sb.append("getTempImage()");
+		sb.append("]]></column-value></column>");
+
+		sb.append("</model>");
+
+		return sb.toString();
+	}
+
 	private long _articleImageId;
 	private long _groupId;
 	private long _originalGroupId;

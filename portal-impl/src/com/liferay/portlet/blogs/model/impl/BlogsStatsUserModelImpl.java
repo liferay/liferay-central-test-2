@@ -341,6 +341,81 @@ public class BlogsStatsUserModelImpl extends BaseModelImpl<BlogsStatsUser> {
 		return (int)getPrimaryKey();
 	}
 
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("{statsUserId=");
+		sb.append(getStatsUserId());
+		sb.append(", groupId=");
+		sb.append(getGroupId());
+		sb.append(", companyId=");
+		sb.append(getCompanyId());
+		sb.append(", userId=");
+		sb.append(getUserId());
+		sb.append(", entryCount=");
+		sb.append(getEntryCount());
+		sb.append(", lastPostDate=");
+		sb.append(getLastPostDate());
+		sb.append(", ratingsTotalEntries=");
+		sb.append(getRatingsTotalEntries());
+		sb.append(", ratingsTotalScore=");
+		sb.append(getRatingsTotalScore());
+		sb.append(", ratingsAverageScore=");
+		sb.append(getRatingsAverageScore());
+		sb.append("}");
+
+		return sb.toString();
+	}
+
+	public String toXmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<model><model-name>");
+		sb.append("com.liferay.portlet.blogs.model.BlogsStatsUser");
+		sb.append("</model-name>");
+
+		sb.append(
+			"<column><column-name>statsUserId</column-name><column-value><![CDATA[");
+		sb.append("getStatsUserId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>groupId</column-name><column-value><![CDATA[");
+		sb.append("getGroupId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>companyId</column-name><column-value><![CDATA[");
+		sb.append("getCompanyId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>userId</column-name><column-value><![CDATA[");
+		sb.append("getUserId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>entryCount</column-name><column-value><![CDATA[");
+		sb.append("getEntryCount()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>lastPostDate</column-name><column-value><![CDATA[");
+		sb.append("getLastPostDate()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>ratingsTotalEntries</column-name><column-value><![CDATA[");
+		sb.append("getRatingsTotalEntries()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>ratingsTotalScore</column-name><column-value><![CDATA[");
+		sb.append("getRatingsTotalScore()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>ratingsAverageScore</column-name><column-value><![CDATA[");
+		sb.append("getRatingsAverageScore()");
+		sb.append("]]></column-value></column>");
+
+		sb.append("</model>");
+
+		return sb.toString();
+	}
+
 	private long _statsUserId;
 	private long _groupId;
 	private long _originalGroupId;

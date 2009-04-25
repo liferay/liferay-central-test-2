@@ -290,6 +290,69 @@ public class ImageModelImpl extends BaseModelImpl<Image> {
 		return (int)getPrimaryKey();
 	}
 
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("{imageId=");
+		sb.append(getImageId());
+		sb.append(", modifiedDate=");
+		sb.append(getModifiedDate());
+		sb.append(", text=");
+		sb.append(getText());
+		sb.append(", type=");
+		sb.append(getType());
+		sb.append(", height=");
+		sb.append(getHeight());
+		sb.append(", width=");
+		sb.append(getWidth());
+		sb.append(", size=");
+		sb.append(getSize());
+		sb.append("}");
+
+		return sb.toString();
+	}
+
+	public String toXmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<model><model-name>");
+		sb.append("com.liferay.portal.model.Image");
+		sb.append("</model-name>");
+
+		sb.append(
+			"<column><column-name>imageId</column-name><column-value><![CDATA[");
+		sb.append("getImageId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>modifiedDate</column-name><column-value><![CDATA[");
+		sb.append("getModifiedDate()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>text</column-name><column-value><![CDATA[");
+		sb.append("getText()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>type</column-name><column-value><![CDATA[");
+		sb.append("getType()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>height</column-name><column-value><![CDATA[");
+		sb.append("getHeight()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>width</column-name><column-value><![CDATA[");
+		sb.append("getWidth()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>size</column-name><column-value><![CDATA[");
+		sb.append("getSize()");
+		sb.append("]]></column-value></column>");
+
+		sb.append("</model>");
+
+		return sb.toString();
+	}
+
 	private long _imageId;
 	private Date _modifiedDate;
 	private String _text;

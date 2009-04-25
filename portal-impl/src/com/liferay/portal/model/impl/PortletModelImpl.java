@@ -278,6 +278,57 @@ public class PortletModelImpl extends BaseModelImpl<Portlet> {
 		return (int)getPrimaryKey();
 	}
 
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("{id=");
+		sb.append(getId());
+		sb.append(", companyId=");
+		sb.append(getCompanyId());
+		sb.append(", portletId=");
+		sb.append(getPortletId());
+		sb.append(", roles=");
+		sb.append(getRoles());
+		sb.append(", active=");
+		sb.append(getActive());
+		sb.append("}");
+
+		return sb.toString();
+	}
+
+	public String toXmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<model><model-name>");
+		sb.append("com.liferay.portal.model.Portlet");
+		sb.append("</model-name>");
+
+		sb.append(
+			"<column><column-name>id</column-name><column-value><![CDATA[");
+		sb.append("getId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>companyId</column-name><column-value><![CDATA[");
+		sb.append("getCompanyId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>portletId</column-name><column-value><![CDATA[");
+		sb.append("getPortletId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>roles</column-name><column-value><![CDATA[");
+		sb.append("getRoles()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>active</column-name><column-value><![CDATA[");
+		sb.append("getActive()");
+		sb.append("]]></column-value></column>");
+
+		sb.append("</model>");
+
+		return sb.toString();
+	}
+
 	private long _id;
 	private long _companyId;
 	private long _originalCompanyId;

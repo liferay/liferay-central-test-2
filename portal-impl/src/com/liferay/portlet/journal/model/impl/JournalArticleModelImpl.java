@@ -682,6 +682,207 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle> {
 		return (int)getPrimaryKey();
 	}
 
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("{uuid=");
+		sb.append(getUuid());
+		sb.append(", id=");
+		sb.append(getId());
+		sb.append(", resourcePrimKey=");
+		sb.append(getResourcePrimKey());
+		sb.append(", groupId=");
+		sb.append(getGroupId());
+		sb.append(", companyId=");
+		sb.append(getCompanyId());
+		sb.append(", userId=");
+		sb.append(getUserId());
+		sb.append(", userName=");
+		sb.append(getUserName());
+		sb.append(", createDate=");
+		sb.append(getCreateDate());
+		sb.append(", modifiedDate=");
+		sb.append(getModifiedDate());
+		sb.append(", articleId=");
+		sb.append(getArticleId());
+		sb.append(", version=");
+		sb.append(getVersion());
+		sb.append(", title=");
+		sb.append(getTitle());
+		sb.append(", urlTitle=");
+		sb.append(getUrlTitle());
+		sb.append(", description=");
+		sb.append(getDescription());
+		sb.append(", content=");
+		sb.append(getContent());
+		sb.append(", type=");
+		sb.append(getType());
+		sb.append(", structureId=");
+		sb.append(getStructureId());
+		sb.append(", templateId=");
+		sb.append(getTemplateId());
+		sb.append(", displayDate=");
+		sb.append(getDisplayDate());
+		sb.append(", approved=");
+		sb.append(getApproved());
+		sb.append(", approvedByUserId=");
+		sb.append(getApprovedByUserId());
+		sb.append(", approvedByUserName=");
+		sb.append(getApprovedByUserName());
+		sb.append(", approvedDate=");
+		sb.append(getApprovedDate());
+		sb.append(", expired=");
+		sb.append(getExpired());
+		sb.append(", expirationDate=");
+		sb.append(getExpirationDate());
+		sb.append(", reviewDate=");
+		sb.append(getReviewDate());
+		sb.append(", indexable=");
+		sb.append(getIndexable());
+		sb.append(", smallImage=");
+		sb.append(getSmallImage());
+		sb.append(", smallImageId=");
+		sb.append(getSmallImageId());
+		sb.append(", smallImageURL=");
+		sb.append(getSmallImageURL());
+		sb.append("}");
+
+		return sb.toString();
+	}
+
+	public String toXmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<model><model-name>");
+		sb.append("com.liferay.portlet.journal.model.JournalArticle");
+		sb.append("</model-name>");
+
+		sb.append(
+			"<column><column-name>uuid</column-name><column-value><![CDATA[");
+		sb.append("getUuid()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>id</column-name><column-value><![CDATA[");
+		sb.append("getId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>resourcePrimKey</column-name><column-value><![CDATA[");
+		sb.append("getResourcePrimKey()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>groupId</column-name><column-value><![CDATA[");
+		sb.append("getGroupId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>companyId</column-name><column-value><![CDATA[");
+		sb.append("getCompanyId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>userId</column-name><column-value><![CDATA[");
+		sb.append("getUserId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>userName</column-name><column-value><![CDATA[");
+		sb.append("getUserName()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>createDate</column-name><column-value><![CDATA[");
+		sb.append("getCreateDate()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>modifiedDate</column-name><column-value><![CDATA[");
+		sb.append("getModifiedDate()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>articleId</column-name><column-value><![CDATA[");
+		sb.append("getArticleId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>version</column-name><column-value><![CDATA[");
+		sb.append("getVersion()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>title</column-name><column-value><![CDATA[");
+		sb.append("getTitle()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>urlTitle</column-name><column-value><![CDATA[");
+		sb.append("getUrlTitle()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>description</column-name><column-value><![CDATA[");
+		sb.append("getDescription()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>content</column-name><column-value><![CDATA[");
+		sb.append("getContent()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>type</column-name><column-value><![CDATA[");
+		sb.append("getType()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>structureId</column-name><column-value><![CDATA[");
+		sb.append("getStructureId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>templateId</column-name><column-value><![CDATA[");
+		sb.append("getTemplateId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>displayDate</column-name><column-value><![CDATA[");
+		sb.append("getDisplayDate()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>approved</column-name><column-value><![CDATA[");
+		sb.append("getApproved()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>approvedByUserId</column-name><column-value><![CDATA[");
+		sb.append("getApprovedByUserId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>approvedByUserName</column-name><column-value><![CDATA[");
+		sb.append("getApprovedByUserName()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>approvedDate</column-name><column-value><![CDATA[");
+		sb.append("getApprovedDate()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>expired</column-name><column-value><![CDATA[");
+		sb.append("getExpired()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>expirationDate</column-name><column-value><![CDATA[");
+		sb.append("getExpirationDate()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>reviewDate</column-name><column-value><![CDATA[");
+		sb.append("getReviewDate()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>indexable</column-name><column-value><![CDATA[");
+		sb.append("getIndexable()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>smallImage</column-name><column-value><![CDATA[");
+		sb.append("getSmallImage()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>smallImageId</column-name><column-value><![CDATA[");
+		sb.append("getSmallImageId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>smallImageURL</column-name><column-value><![CDATA[");
+		sb.append("getSmallImageURL()");
+		sb.append("]]></column-value></column>");
+
+		sb.append("</model>");
+
+		return sb.toString();
+	}
+
 	private String _uuid;
 	private String _originalUuid;
 	private long _id;

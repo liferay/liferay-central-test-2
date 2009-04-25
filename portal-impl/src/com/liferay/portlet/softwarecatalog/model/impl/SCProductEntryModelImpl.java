@@ -440,6 +440,123 @@ public class SCProductEntryModelImpl extends BaseModelImpl<SCProductEntry> {
 		return (int)getPrimaryKey();
 	}
 
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("{productEntryId=");
+		sb.append(getProductEntryId());
+		sb.append(", groupId=");
+		sb.append(getGroupId());
+		sb.append(", companyId=");
+		sb.append(getCompanyId());
+		sb.append(", userId=");
+		sb.append(getUserId());
+		sb.append(", userName=");
+		sb.append(getUserName());
+		sb.append(", createDate=");
+		sb.append(getCreateDate());
+		sb.append(", modifiedDate=");
+		sb.append(getModifiedDate());
+		sb.append(", name=");
+		sb.append(getName());
+		sb.append(", type=");
+		sb.append(getType());
+		sb.append(", tags=");
+		sb.append(getTags());
+		sb.append(", shortDescription=");
+		sb.append(getShortDescription());
+		sb.append(", longDescription=");
+		sb.append(getLongDescription());
+		sb.append(", pageURL=");
+		sb.append(getPageURL());
+		sb.append(", author=");
+		sb.append(getAuthor());
+		sb.append(", repoGroupId=");
+		sb.append(getRepoGroupId());
+		sb.append(", repoArtifactId=");
+		sb.append(getRepoArtifactId());
+		sb.append("}");
+
+		return sb.toString();
+	}
+
+	public String toXmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<model><model-name>");
+		sb.append("com.liferay.portlet.softwarecatalog.model.SCProductEntry");
+		sb.append("</model-name>");
+
+		sb.append(
+			"<column><column-name>productEntryId</column-name><column-value><![CDATA[");
+		sb.append("getProductEntryId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>groupId</column-name><column-value><![CDATA[");
+		sb.append("getGroupId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>companyId</column-name><column-value><![CDATA[");
+		sb.append("getCompanyId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>userId</column-name><column-value><![CDATA[");
+		sb.append("getUserId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>userName</column-name><column-value><![CDATA[");
+		sb.append("getUserName()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>createDate</column-name><column-value><![CDATA[");
+		sb.append("getCreateDate()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>modifiedDate</column-name><column-value><![CDATA[");
+		sb.append("getModifiedDate()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>name</column-name><column-value><![CDATA[");
+		sb.append("getName()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>type</column-name><column-value><![CDATA[");
+		sb.append("getType()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>tags</column-name><column-value><![CDATA[");
+		sb.append("getTags()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>shortDescription</column-name><column-value><![CDATA[");
+		sb.append("getShortDescription()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>longDescription</column-name><column-value><![CDATA[");
+		sb.append("getLongDescription()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>pageURL</column-name><column-value><![CDATA[");
+		sb.append("getPageURL()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>author</column-name><column-value><![CDATA[");
+		sb.append("getAuthor()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>repoGroupId</column-name><column-value><![CDATA[");
+		sb.append("getRepoGroupId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>repoArtifactId</column-name><column-value><![CDATA[");
+		sb.append("getRepoArtifactId()");
+		sb.append("]]></column-value></column>");
+
+		sb.append("</model>");
+
+		return sb.toString();
+	}
+
 	private long _productEntryId;
 	private long _groupId;
 	private long _companyId;

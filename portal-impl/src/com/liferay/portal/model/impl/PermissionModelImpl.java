@@ -263,6 +263,51 @@ public class PermissionModelImpl extends BaseModelImpl<Permission> {
 		return (int)getPrimaryKey();
 	}
 
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("{permissionId=");
+		sb.append(getPermissionId());
+		sb.append(", companyId=");
+		sb.append(getCompanyId());
+		sb.append(", actionId=");
+		sb.append(getActionId());
+		sb.append(", resourceId=");
+		sb.append(getResourceId());
+		sb.append("}");
+
+		return sb.toString();
+	}
+
+	public String toXmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<model><model-name>");
+		sb.append("com.liferay.portal.model.Permission");
+		sb.append("</model-name>");
+
+		sb.append(
+			"<column><column-name>permissionId</column-name><column-value><![CDATA[");
+		sb.append("getPermissionId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>companyId</column-name><column-value><![CDATA[");
+		sb.append("getCompanyId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>actionId</column-name><column-value><![CDATA[");
+		sb.append("getActionId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>resourceId</column-name><column-value><![CDATA[");
+		sb.append("getResourceId()");
+		sb.append("]]></column-value></column>");
+
+		sb.append("</model>");
+
+		return sb.toString();
+	}
+
 	private long _permissionId;
 	private long _companyId;
 	private String _actionId;

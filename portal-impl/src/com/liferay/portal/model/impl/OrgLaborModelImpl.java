@@ -443,6 +443,129 @@ public class OrgLaborModelImpl extends BaseModelImpl<OrgLabor> {
 		return (int)getPrimaryKey();
 	}
 
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("{orgLaborId=");
+		sb.append(getOrgLaborId());
+		sb.append(", organizationId=");
+		sb.append(getOrganizationId());
+		sb.append(", typeId=");
+		sb.append(getTypeId());
+		sb.append(", sunOpen=");
+		sb.append(getSunOpen());
+		sb.append(", sunClose=");
+		sb.append(getSunClose());
+		sb.append(", monOpen=");
+		sb.append(getMonOpen());
+		sb.append(", monClose=");
+		sb.append(getMonClose());
+		sb.append(", tueOpen=");
+		sb.append(getTueOpen());
+		sb.append(", tueClose=");
+		sb.append(getTueClose());
+		sb.append(", wedOpen=");
+		sb.append(getWedOpen());
+		sb.append(", wedClose=");
+		sb.append(getWedClose());
+		sb.append(", thuOpen=");
+		sb.append(getThuOpen());
+		sb.append(", thuClose=");
+		sb.append(getThuClose());
+		sb.append(", friOpen=");
+		sb.append(getFriOpen());
+		sb.append(", friClose=");
+		sb.append(getFriClose());
+		sb.append(", satOpen=");
+		sb.append(getSatOpen());
+		sb.append(", satClose=");
+		sb.append(getSatClose());
+		sb.append("}");
+
+		return sb.toString();
+	}
+
+	public String toXmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<model><model-name>");
+		sb.append("com.liferay.portal.model.OrgLabor");
+		sb.append("</model-name>");
+
+		sb.append(
+			"<column><column-name>orgLaborId</column-name><column-value><![CDATA[");
+		sb.append("getOrgLaborId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>organizationId</column-name><column-value><![CDATA[");
+		sb.append("getOrganizationId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>typeId</column-name><column-value><![CDATA[");
+		sb.append("getTypeId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>sunOpen</column-name><column-value><![CDATA[");
+		sb.append("getSunOpen()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>sunClose</column-name><column-value><![CDATA[");
+		sb.append("getSunClose()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>monOpen</column-name><column-value><![CDATA[");
+		sb.append("getMonOpen()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>monClose</column-name><column-value><![CDATA[");
+		sb.append("getMonClose()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>tueOpen</column-name><column-value><![CDATA[");
+		sb.append("getTueOpen()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>tueClose</column-name><column-value><![CDATA[");
+		sb.append("getTueClose()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>wedOpen</column-name><column-value><![CDATA[");
+		sb.append("getWedOpen()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>wedClose</column-name><column-value><![CDATA[");
+		sb.append("getWedClose()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>thuOpen</column-name><column-value><![CDATA[");
+		sb.append("getThuOpen()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>thuClose</column-name><column-value><![CDATA[");
+		sb.append("getThuClose()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>friOpen</column-name><column-value><![CDATA[");
+		sb.append("getFriOpen()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>friClose</column-name><column-value><![CDATA[");
+		sb.append("getFriClose()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>satOpen</column-name><column-value><![CDATA[");
+		sb.append("getSatOpen()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>satClose</column-name><column-value><![CDATA[");
+		sb.append("getSatClose()");
+		sb.append("]]></column-value></column>");
+
+		sb.append("</model>");
+
+		return sb.toString();
+	}
+
 	private long _orgLaborId;
 	private long _organizationId;
 	private int _typeId;

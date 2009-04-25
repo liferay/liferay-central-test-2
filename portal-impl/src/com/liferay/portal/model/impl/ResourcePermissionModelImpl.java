@@ -331,6 +331,69 @@ public class ResourcePermissionModelImpl extends BaseModelImpl<ResourcePermissio
 		return (int)getPrimaryKey();
 	}
 
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("{resourcePermissionId=");
+		sb.append(getResourcePermissionId());
+		sb.append(", companyId=");
+		sb.append(getCompanyId());
+		sb.append(", name=");
+		sb.append(getName());
+		sb.append(", scope=");
+		sb.append(getScope());
+		sb.append(", primKey=");
+		sb.append(getPrimKey());
+		sb.append(", roleId=");
+		sb.append(getRoleId());
+		sb.append(", actionIds=");
+		sb.append(getActionIds());
+		sb.append("}");
+
+		return sb.toString();
+	}
+
+	public String toXmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<model><model-name>");
+		sb.append("com.liferay.portal.model.ResourcePermission");
+		sb.append("</model-name>");
+
+		sb.append(
+			"<column><column-name>resourcePermissionId</column-name><column-value><![CDATA[");
+		sb.append("getResourcePermissionId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>companyId</column-name><column-value><![CDATA[");
+		sb.append("getCompanyId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>name</column-name><column-value><![CDATA[");
+		sb.append("getName()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>scope</column-name><column-value><![CDATA[");
+		sb.append("getScope()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>primKey</column-name><column-value><![CDATA[");
+		sb.append("getPrimKey()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>roleId</column-name><column-value><![CDATA[");
+		sb.append("getRoleId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>actionIds</column-name><column-value><![CDATA[");
+		sb.append("getActionIds()");
+		sb.append("]]></column-value></column>");
+
+		sb.append("</model>");
+
+		return sb.toString();
+	}
+
 	private long _resourcePermissionId;
 	private long _companyId;
 	private long _originalCompanyId;

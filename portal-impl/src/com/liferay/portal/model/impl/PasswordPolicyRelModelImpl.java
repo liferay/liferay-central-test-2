@@ -282,6 +282,51 @@ public class PasswordPolicyRelModelImpl extends BaseModelImpl<PasswordPolicyRel>
 		return (int)getPrimaryKey();
 	}
 
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("{passwordPolicyRelId=");
+		sb.append(getPasswordPolicyRelId());
+		sb.append(", passwordPolicyId=");
+		sb.append(getPasswordPolicyId());
+		sb.append(", classNameId=");
+		sb.append(getClassNameId());
+		sb.append(", classPK=");
+		sb.append(getClassPK());
+		sb.append("}");
+
+		return sb.toString();
+	}
+
+	public String toXmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<model><model-name>");
+		sb.append("com.liferay.portal.model.PasswordPolicyRel");
+		sb.append("</model-name>");
+
+		sb.append(
+			"<column><column-name>passwordPolicyRelId</column-name><column-value><![CDATA[");
+		sb.append("getPasswordPolicyRelId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>passwordPolicyId</column-name><column-value><![CDATA[");
+		sb.append("getPasswordPolicyId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>classNameId</column-name><column-value><![CDATA[");
+		sb.append("getClassNameId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>classPK</column-name><column-value><![CDATA[");
+		sb.append("getClassPK()");
+		sb.append("]]></column-value></column>");
+
+		sb.append("</model>");
+
+		return sb.toString();
+	}
+
 	private long _passwordPolicyRelId;
 	private long _passwordPolicyId;
 	private long _originalPasswordPolicyId;

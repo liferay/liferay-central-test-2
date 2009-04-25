@@ -397,6 +397,105 @@ public class TasksReviewModelImpl extends BaseModelImpl<TasksReview> {
 		return (int)getPrimaryKey();
 	}
 
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("{reviewId=");
+		sb.append(getReviewId());
+		sb.append(", groupId=");
+		sb.append(getGroupId());
+		sb.append(", companyId=");
+		sb.append(getCompanyId());
+		sb.append(", userId=");
+		sb.append(getUserId());
+		sb.append(", userName=");
+		sb.append(getUserName());
+		sb.append(", createDate=");
+		sb.append(getCreateDate());
+		sb.append(", modifiedDate=");
+		sb.append(getModifiedDate());
+		sb.append(", proposalId=");
+		sb.append(getProposalId());
+		sb.append(", assignedByUserId=");
+		sb.append(getAssignedByUserId());
+		sb.append(", assignedByUserName=");
+		sb.append(getAssignedByUserName());
+		sb.append(", stage=");
+		sb.append(getStage());
+		sb.append(", completed=");
+		sb.append(getCompleted());
+		sb.append(", rejected=");
+		sb.append(getRejected());
+		sb.append("}");
+
+		return sb.toString();
+	}
+
+	public String toXmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<model><model-name>");
+		sb.append("com.liferay.portlet.tasks.model.TasksReview");
+		sb.append("</model-name>");
+
+		sb.append(
+			"<column><column-name>reviewId</column-name><column-value><![CDATA[");
+		sb.append("getReviewId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>groupId</column-name><column-value><![CDATA[");
+		sb.append("getGroupId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>companyId</column-name><column-value><![CDATA[");
+		sb.append("getCompanyId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>userId</column-name><column-value><![CDATA[");
+		sb.append("getUserId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>userName</column-name><column-value><![CDATA[");
+		sb.append("getUserName()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>createDate</column-name><column-value><![CDATA[");
+		sb.append("getCreateDate()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>modifiedDate</column-name><column-value><![CDATA[");
+		sb.append("getModifiedDate()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>proposalId</column-name><column-value><![CDATA[");
+		sb.append("getProposalId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>assignedByUserId</column-name><column-value><![CDATA[");
+		sb.append("getAssignedByUserId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>assignedByUserName</column-name><column-value><![CDATA[");
+		sb.append("getAssignedByUserName()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>stage</column-name><column-value><![CDATA[");
+		sb.append("getStage()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>completed</column-name><column-value><![CDATA[");
+		sb.append("getCompleted()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>rejected</column-name><column-value><![CDATA[");
+		sb.append("getRejected()");
+		sb.append("]]></column-value></column>");
+
+		sb.append("</model>");
+
+		return sb.toString();
+	}
+
 	private long _reviewId;
 	private long _groupId;
 	private long _companyId;

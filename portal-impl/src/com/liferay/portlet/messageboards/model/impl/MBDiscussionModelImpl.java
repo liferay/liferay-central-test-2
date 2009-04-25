@@ -282,6 +282,51 @@ public class MBDiscussionModelImpl extends BaseModelImpl<MBDiscussion> {
 		return (int)getPrimaryKey();
 	}
 
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("{discussionId=");
+		sb.append(getDiscussionId());
+		sb.append(", classNameId=");
+		sb.append(getClassNameId());
+		sb.append(", classPK=");
+		sb.append(getClassPK());
+		sb.append(", threadId=");
+		sb.append(getThreadId());
+		sb.append("}");
+
+		return sb.toString();
+	}
+
+	public String toXmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<model><model-name>");
+		sb.append("com.liferay.portlet.messageboards.model.MBDiscussion");
+		sb.append("</model-name>");
+
+		sb.append(
+			"<column><column-name>discussionId</column-name><column-value><![CDATA[");
+		sb.append("getDiscussionId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>classNameId</column-name><column-value><![CDATA[");
+		sb.append("getClassNameId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>classPK</column-name><column-value><![CDATA[");
+		sb.append("getClassPK()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>threadId</column-name><column-value><![CDATA[");
+		sb.append("getThreadId()");
+		sb.append("]]></column-value></column>");
+
+		sb.append("</model>");
+
+		return sb.toString();
+	}
+
 	private long _discussionId;
 	private long _classNameId;
 	private long _originalClassNameId;

@@ -615,6 +615,183 @@ public class PasswordPolicyModelImpl extends BaseModelImpl<PasswordPolicy> {
 		return (int)getPrimaryKey();
 	}
 
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("{passwordPolicyId=");
+		sb.append(getPasswordPolicyId());
+		sb.append(", companyId=");
+		sb.append(getCompanyId());
+		sb.append(", userId=");
+		sb.append(getUserId());
+		sb.append(", userName=");
+		sb.append(getUserName());
+		sb.append(", createDate=");
+		sb.append(getCreateDate());
+		sb.append(", modifiedDate=");
+		sb.append(getModifiedDate());
+		sb.append(", defaultPolicy=");
+		sb.append(getDefaultPolicy());
+		sb.append(", name=");
+		sb.append(getName());
+		sb.append(", description=");
+		sb.append(getDescription());
+		sb.append(", changeable=");
+		sb.append(getChangeable());
+		sb.append(", changeRequired=");
+		sb.append(getChangeRequired());
+		sb.append(", minAge=");
+		sb.append(getMinAge());
+		sb.append(", checkSyntax=");
+		sb.append(getCheckSyntax());
+		sb.append(", allowDictionaryWords=");
+		sb.append(getAllowDictionaryWords());
+		sb.append(", minLength=");
+		sb.append(getMinLength());
+		sb.append(", history=");
+		sb.append(getHistory());
+		sb.append(", historyCount=");
+		sb.append(getHistoryCount());
+		sb.append(", expireable=");
+		sb.append(getExpireable());
+		sb.append(", maxAge=");
+		sb.append(getMaxAge());
+		sb.append(", warningTime=");
+		sb.append(getWarningTime());
+		sb.append(", graceLimit=");
+		sb.append(getGraceLimit());
+		sb.append(", lockout=");
+		sb.append(getLockout());
+		sb.append(", maxFailure=");
+		sb.append(getMaxFailure());
+		sb.append(", lockoutDuration=");
+		sb.append(getLockoutDuration());
+		sb.append(", requireUnlock=");
+		sb.append(getRequireUnlock());
+		sb.append(", resetFailureCount=");
+		sb.append(getResetFailureCount());
+		sb.append("}");
+
+		return sb.toString();
+	}
+
+	public String toXmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<model><model-name>");
+		sb.append("com.liferay.portal.model.PasswordPolicy");
+		sb.append("</model-name>");
+
+		sb.append(
+			"<column><column-name>passwordPolicyId</column-name><column-value><![CDATA[");
+		sb.append("getPasswordPolicyId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>companyId</column-name><column-value><![CDATA[");
+		sb.append("getCompanyId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>userId</column-name><column-value><![CDATA[");
+		sb.append("getUserId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>userName</column-name><column-value><![CDATA[");
+		sb.append("getUserName()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>createDate</column-name><column-value><![CDATA[");
+		sb.append("getCreateDate()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>modifiedDate</column-name><column-value><![CDATA[");
+		sb.append("getModifiedDate()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>defaultPolicy</column-name><column-value><![CDATA[");
+		sb.append("getDefaultPolicy()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>name</column-name><column-value><![CDATA[");
+		sb.append("getName()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>description</column-name><column-value><![CDATA[");
+		sb.append("getDescription()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>changeable</column-name><column-value><![CDATA[");
+		sb.append("getChangeable()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>changeRequired</column-name><column-value><![CDATA[");
+		sb.append("getChangeRequired()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>minAge</column-name><column-value><![CDATA[");
+		sb.append("getMinAge()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>checkSyntax</column-name><column-value><![CDATA[");
+		sb.append("getCheckSyntax()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>allowDictionaryWords</column-name><column-value><![CDATA[");
+		sb.append("getAllowDictionaryWords()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>minLength</column-name><column-value><![CDATA[");
+		sb.append("getMinLength()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>history</column-name><column-value><![CDATA[");
+		sb.append("getHistory()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>historyCount</column-name><column-value><![CDATA[");
+		sb.append("getHistoryCount()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>expireable</column-name><column-value><![CDATA[");
+		sb.append("getExpireable()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>maxAge</column-name><column-value><![CDATA[");
+		sb.append("getMaxAge()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>warningTime</column-name><column-value><![CDATA[");
+		sb.append("getWarningTime()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>graceLimit</column-name><column-value><![CDATA[");
+		sb.append("getGraceLimit()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>lockout</column-name><column-value><![CDATA[");
+		sb.append("getLockout()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>maxFailure</column-name><column-value><![CDATA[");
+		sb.append("getMaxFailure()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>lockoutDuration</column-name><column-value><![CDATA[");
+		sb.append("getLockoutDuration()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>requireUnlock</column-name><column-value><![CDATA[");
+		sb.append("getRequireUnlock()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>resetFailureCount</column-name><column-value><![CDATA[");
+		sb.append("getResetFailureCount()");
+		sb.append("]]></column-value></column>");
+
+		sb.append("</model>");
+
+		return sb.toString();
+	}
+
 	private long _passwordPolicyId;
 	private long _companyId;
 	private long _originalCompanyId;

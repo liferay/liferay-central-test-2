@@ -535,6 +535,141 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage> {
 		return (int)getPrimaryKey();
 	}
 
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("{uuid=");
+		sb.append(getUuid());
+		sb.append(", pageId=");
+		sb.append(getPageId());
+		sb.append(", resourcePrimKey=");
+		sb.append(getResourcePrimKey());
+		sb.append(", groupId=");
+		sb.append(getGroupId());
+		sb.append(", companyId=");
+		sb.append(getCompanyId());
+		sb.append(", userId=");
+		sb.append(getUserId());
+		sb.append(", userName=");
+		sb.append(getUserName());
+		sb.append(", createDate=");
+		sb.append(getCreateDate());
+		sb.append(", modifiedDate=");
+		sb.append(getModifiedDate());
+		sb.append(", nodeId=");
+		sb.append(getNodeId());
+		sb.append(", title=");
+		sb.append(getTitle());
+		sb.append(", version=");
+		sb.append(getVersion());
+		sb.append(", minorEdit=");
+		sb.append(getMinorEdit());
+		sb.append(", content=");
+		sb.append(getContent());
+		sb.append(", summary=");
+		sb.append(getSummary());
+		sb.append(", format=");
+		sb.append(getFormat());
+		sb.append(", head=");
+		sb.append(getHead());
+		sb.append(", parentTitle=");
+		sb.append(getParentTitle());
+		sb.append(", redirectTitle=");
+		sb.append(getRedirectTitle());
+		sb.append("}");
+
+		return sb.toString();
+	}
+
+	public String toXmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<model><model-name>");
+		sb.append("com.liferay.portlet.wiki.model.WikiPage");
+		sb.append("</model-name>");
+
+		sb.append(
+			"<column><column-name>uuid</column-name><column-value><![CDATA[");
+		sb.append("getUuid()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>pageId</column-name><column-value><![CDATA[");
+		sb.append("getPageId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>resourcePrimKey</column-name><column-value><![CDATA[");
+		sb.append("getResourcePrimKey()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>groupId</column-name><column-value><![CDATA[");
+		sb.append("getGroupId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>companyId</column-name><column-value><![CDATA[");
+		sb.append("getCompanyId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>userId</column-name><column-value><![CDATA[");
+		sb.append("getUserId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>userName</column-name><column-value><![CDATA[");
+		sb.append("getUserName()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>createDate</column-name><column-value><![CDATA[");
+		sb.append("getCreateDate()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>modifiedDate</column-name><column-value><![CDATA[");
+		sb.append("getModifiedDate()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>nodeId</column-name><column-value><![CDATA[");
+		sb.append("getNodeId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>title</column-name><column-value><![CDATA[");
+		sb.append("getTitle()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>version</column-name><column-value><![CDATA[");
+		sb.append("getVersion()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>minorEdit</column-name><column-value><![CDATA[");
+		sb.append("getMinorEdit()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>content</column-name><column-value><![CDATA[");
+		sb.append("getContent()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>summary</column-name><column-value><![CDATA[");
+		sb.append("getSummary()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>format</column-name><column-value><![CDATA[");
+		sb.append("getFormat()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>head</column-name><column-value><![CDATA[");
+		sb.append("getHead()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>parentTitle</column-name><column-value><![CDATA[");
+		sb.append("getParentTitle()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>redirectTitle</column-name><column-value><![CDATA[");
+		sb.append("getRedirectTitle()");
+		sb.append("]]></column-value></column>");
+
+		sb.append("</model>");
+
+		return sb.toString();
+	}
+
 	private String _uuid;
 	private String _originalUuid;
 	private long _pageId;

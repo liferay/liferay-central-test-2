@@ -611,6 +611,207 @@ public class ContactModelImpl extends BaseModelImpl<Contact> {
 		return (int)getPrimaryKey();
 	}
 
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("{contactId=");
+		sb.append(getContactId());
+		sb.append(", companyId=");
+		sb.append(getCompanyId());
+		sb.append(", userId=");
+		sb.append(getUserId());
+		sb.append(", userName=");
+		sb.append(getUserName());
+		sb.append(", createDate=");
+		sb.append(getCreateDate());
+		sb.append(", modifiedDate=");
+		sb.append(getModifiedDate());
+		sb.append(", accountId=");
+		sb.append(getAccountId());
+		sb.append(", parentContactId=");
+		sb.append(getParentContactId());
+		sb.append(", firstName=");
+		sb.append(getFirstName());
+		sb.append(", middleName=");
+		sb.append(getMiddleName());
+		sb.append(", lastName=");
+		sb.append(getLastName());
+		sb.append(", prefixId=");
+		sb.append(getPrefixId());
+		sb.append(", suffixId=");
+		sb.append(getSuffixId());
+		sb.append(", male=");
+		sb.append(getMale());
+		sb.append(", birthday=");
+		sb.append(getBirthday());
+		sb.append(", smsSn=");
+		sb.append(getSmsSn());
+		sb.append(", aimSn=");
+		sb.append(getAimSn());
+		sb.append(", facebookSn=");
+		sb.append(getFacebookSn());
+		sb.append(", icqSn=");
+		sb.append(getIcqSn());
+		sb.append(", jabberSn=");
+		sb.append(getJabberSn());
+		sb.append(", msnSn=");
+		sb.append(getMsnSn());
+		sb.append(", mySpaceSn=");
+		sb.append(getMySpaceSn());
+		sb.append(", skypeSn=");
+		sb.append(getSkypeSn());
+		sb.append(", twitterSn=");
+		sb.append(getTwitterSn());
+		sb.append(", ymSn=");
+		sb.append(getYmSn());
+		sb.append(", employeeStatusId=");
+		sb.append(getEmployeeStatusId());
+		sb.append(", employeeNumber=");
+		sb.append(getEmployeeNumber());
+		sb.append(", jobTitle=");
+		sb.append(getJobTitle());
+		sb.append(", jobClass=");
+		sb.append(getJobClass());
+		sb.append(", hoursOfOperation=");
+		sb.append(getHoursOfOperation());
+		sb.append("}");
+
+		return sb.toString();
+	}
+
+	public String toXmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<model><model-name>");
+		sb.append("com.liferay.portal.model.Contact");
+		sb.append("</model-name>");
+
+		sb.append(
+			"<column><column-name>contactId</column-name><column-value><![CDATA[");
+		sb.append("getContactId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>companyId</column-name><column-value><![CDATA[");
+		sb.append("getCompanyId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>userId</column-name><column-value><![CDATA[");
+		sb.append("getUserId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>userName</column-name><column-value><![CDATA[");
+		sb.append("getUserName()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>createDate</column-name><column-value><![CDATA[");
+		sb.append("getCreateDate()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>modifiedDate</column-name><column-value><![CDATA[");
+		sb.append("getModifiedDate()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>accountId</column-name><column-value><![CDATA[");
+		sb.append("getAccountId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>parentContactId</column-name><column-value><![CDATA[");
+		sb.append("getParentContactId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>firstName</column-name><column-value><![CDATA[");
+		sb.append("getFirstName()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>middleName</column-name><column-value><![CDATA[");
+		sb.append("getMiddleName()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>lastName</column-name><column-value><![CDATA[");
+		sb.append("getLastName()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>prefixId</column-name><column-value><![CDATA[");
+		sb.append("getPrefixId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>suffixId</column-name><column-value><![CDATA[");
+		sb.append("getSuffixId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>male</column-name><column-value><![CDATA[");
+		sb.append("getMale()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>birthday</column-name><column-value><![CDATA[");
+		sb.append("getBirthday()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>smsSn</column-name><column-value><![CDATA[");
+		sb.append("getSmsSn()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>aimSn</column-name><column-value><![CDATA[");
+		sb.append("getAimSn()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>facebookSn</column-name><column-value><![CDATA[");
+		sb.append("getFacebookSn()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>icqSn</column-name><column-value><![CDATA[");
+		sb.append("getIcqSn()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>jabberSn</column-name><column-value><![CDATA[");
+		sb.append("getJabberSn()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>msnSn</column-name><column-value><![CDATA[");
+		sb.append("getMsnSn()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>mySpaceSn</column-name><column-value><![CDATA[");
+		sb.append("getMySpaceSn()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>skypeSn</column-name><column-value><![CDATA[");
+		sb.append("getSkypeSn()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>twitterSn</column-name><column-value><![CDATA[");
+		sb.append("getTwitterSn()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>ymSn</column-name><column-value><![CDATA[");
+		sb.append("getYmSn()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>employeeStatusId</column-name><column-value><![CDATA[");
+		sb.append("getEmployeeStatusId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>employeeNumber</column-name><column-value><![CDATA[");
+		sb.append("getEmployeeNumber()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>jobTitle</column-name><column-value><![CDATA[");
+		sb.append("getJobTitle()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>jobClass</column-name><column-value><![CDATA[");
+		sb.append("getJobClass()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>hoursOfOperation</column-name><column-value><![CDATA[");
+		sb.append("getHoursOfOperation()");
+		sb.append("]]></column-value></column>");
+
+		sb.append("</model>");
+
+		return sb.toString();
+	}
+
 	private long _contactId;
 	private long _companyId;
 	private long _userId;

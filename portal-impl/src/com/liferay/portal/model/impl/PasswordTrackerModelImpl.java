@@ -262,6 +262,51 @@ public class PasswordTrackerModelImpl extends BaseModelImpl<PasswordTracker> {
 		return (int)getPrimaryKey();
 	}
 
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("{passwordTrackerId=");
+		sb.append(getPasswordTrackerId());
+		sb.append(", userId=");
+		sb.append(getUserId());
+		sb.append(", createDate=");
+		sb.append(getCreateDate());
+		sb.append(", password=");
+		sb.append(getPassword());
+		sb.append("}");
+
+		return sb.toString();
+	}
+
+	public String toXmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<model><model-name>");
+		sb.append("com.liferay.portal.model.PasswordTracker");
+		sb.append("</model-name>");
+
+		sb.append(
+			"<column><column-name>passwordTrackerId</column-name><column-value><![CDATA[");
+		sb.append("getPasswordTrackerId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>userId</column-name><column-value><![CDATA[");
+		sb.append("getUserId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>createDate</column-name><column-value><![CDATA[");
+		sb.append("getCreateDate()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>password</column-name><column-value><![CDATA[");
+		sb.append("getPassword()");
+		sb.append("]]></column-value></column>");
+
+		sb.append("</model>");
+
+		return sb.toString();
+	}
+
 	private long _passwordTrackerId;
 	private long _userId;
 	private Date _createDate;

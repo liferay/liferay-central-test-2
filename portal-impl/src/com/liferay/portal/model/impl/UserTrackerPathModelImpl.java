@@ -244,6 +244,51 @@ public class UserTrackerPathModelImpl extends BaseModelImpl<UserTrackerPath> {
 		return (int)getPrimaryKey();
 	}
 
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("{userTrackerPathId=");
+		sb.append(getUserTrackerPathId());
+		sb.append(", userTrackerId=");
+		sb.append(getUserTrackerId());
+		sb.append(", path=");
+		sb.append(getPath());
+		sb.append(", pathDate=");
+		sb.append(getPathDate());
+		sb.append("}");
+
+		return sb.toString();
+	}
+
+	public String toXmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<model><model-name>");
+		sb.append("com.liferay.portal.model.UserTrackerPath");
+		sb.append("</model-name>");
+
+		sb.append(
+			"<column><column-name>userTrackerPathId</column-name><column-value><![CDATA[");
+		sb.append("getUserTrackerPathId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>userTrackerId</column-name><column-value><![CDATA[");
+		sb.append("getUserTrackerId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>path</column-name><column-value><![CDATA[");
+		sb.append("getPath()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>pathDate</column-name><column-value><![CDATA[");
+		sb.append("getPathDate()");
+		sb.append("]]></column-value></column>");
+
+		sb.append("</model>");
+
+		return sb.toString();
+	}
+
 	private long _userTrackerPathId;
 	private long _userTrackerId;
 	private String _path;

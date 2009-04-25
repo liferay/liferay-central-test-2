@@ -248,6 +248,45 @@ public class WikiPageResourceModelImpl extends BaseModelImpl<WikiPageResource> {
 		return (int)getPrimaryKey();
 	}
 
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("{resourcePrimKey=");
+		sb.append(getResourcePrimKey());
+		sb.append(", nodeId=");
+		sb.append(getNodeId());
+		sb.append(", title=");
+		sb.append(getTitle());
+		sb.append("}");
+
+		return sb.toString();
+	}
+
+	public String toXmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<model><model-name>");
+		sb.append("com.liferay.portlet.wiki.model.WikiPageResource");
+		sb.append("</model-name>");
+
+		sb.append(
+			"<column><column-name>resourcePrimKey</column-name><column-value><![CDATA[");
+		sb.append("getResourcePrimKey()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>nodeId</column-name><column-value><![CDATA[");
+		sb.append("getNodeId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>title</column-name><column-value><![CDATA[");
+		sb.append("getTitle()");
+		sb.append("]]></column-value></column>");
+
+		sb.append("</model>");
+
+		return sb.toString();
+	}
+
 	private long _resourcePrimKey;
 	private long _nodeId;
 	private long _originalNodeId;

@@ -433,6 +433,117 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry> {
 		return (int)getPrimaryKey();
 	}
 
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("{uuid=");
+		sb.append(getUuid());
+		sb.append(", entryId=");
+		sb.append(getEntryId());
+		sb.append(", groupId=");
+		sb.append(getGroupId());
+		sb.append(", companyId=");
+		sb.append(getCompanyId());
+		sb.append(", userId=");
+		sb.append(getUserId());
+		sb.append(", userName=");
+		sb.append(getUserName());
+		sb.append(", createDate=");
+		sb.append(getCreateDate());
+		sb.append(", modifiedDate=");
+		sb.append(getModifiedDate());
+		sb.append(", title=");
+		sb.append(getTitle());
+		sb.append(", urlTitle=");
+		sb.append(getUrlTitle());
+		sb.append(", content=");
+		sb.append(getContent());
+		sb.append(", displayDate=");
+		sb.append(getDisplayDate());
+		sb.append(", draft=");
+		sb.append(getDraft());
+		sb.append(", allowTrackbacks=");
+		sb.append(getAllowTrackbacks());
+		sb.append(", trackbacks=");
+		sb.append(getTrackbacks());
+		sb.append("}");
+
+		return sb.toString();
+	}
+
+	public String toXmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<model><model-name>");
+		sb.append("com.liferay.portlet.blogs.model.BlogsEntry");
+		sb.append("</model-name>");
+
+		sb.append(
+			"<column><column-name>uuid</column-name><column-value><![CDATA[");
+		sb.append("getUuid()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>entryId</column-name><column-value><![CDATA[");
+		sb.append("getEntryId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>groupId</column-name><column-value><![CDATA[");
+		sb.append("getGroupId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>companyId</column-name><column-value><![CDATA[");
+		sb.append("getCompanyId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>userId</column-name><column-value><![CDATA[");
+		sb.append("getUserId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>userName</column-name><column-value><![CDATA[");
+		sb.append("getUserName()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>createDate</column-name><column-value><![CDATA[");
+		sb.append("getCreateDate()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>modifiedDate</column-name><column-value><![CDATA[");
+		sb.append("getModifiedDate()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>title</column-name><column-value><![CDATA[");
+		sb.append("getTitle()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>urlTitle</column-name><column-value><![CDATA[");
+		sb.append("getUrlTitle()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>content</column-name><column-value><![CDATA[");
+		sb.append("getContent()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>displayDate</column-name><column-value><![CDATA[");
+		sb.append("getDisplayDate()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>draft</column-name><column-value><![CDATA[");
+		sb.append("getDraft()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>allowTrackbacks</column-name><column-value><![CDATA[");
+		sb.append("getAllowTrackbacks()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>trackbacks</column-name><column-value><![CDATA[");
+		sb.append("getTrackbacks()");
+		sb.append("]]></column-value></column>");
+
+		sb.append("</model>");
+
+		return sb.toString();
+	}
+
 	private String _uuid;
 	private String _originalUuid;
 	private long _entryId;

@@ -270,6 +270,51 @@ public class ResourceActionModelImpl extends BaseModelImpl<ResourceAction> {
 		return (int)getPrimaryKey();
 	}
 
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("{resourceActionId=");
+		sb.append(getResourceActionId());
+		sb.append(", name=");
+		sb.append(getName());
+		sb.append(", actionId=");
+		sb.append(getActionId());
+		sb.append(", bitwiseValue=");
+		sb.append(getBitwiseValue());
+		sb.append("}");
+
+		return sb.toString();
+	}
+
+	public String toXmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<model><model-name>");
+		sb.append("com.liferay.portal.model.ResourceAction");
+		sb.append("</model-name>");
+
+		sb.append(
+			"<column><column-name>resourceActionId</column-name><column-value><![CDATA[");
+		sb.append("getResourceActionId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>name</column-name><column-value><![CDATA[");
+		sb.append("getName()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>actionId</column-name><column-value><![CDATA[");
+		sb.append("getActionId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>bitwiseValue</column-name><column-value><![CDATA[");
+		sb.append("getBitwiseValue()");
+		sb.append("]]></column-value></column>");
+
+		sb.append("</model>");
+
+		return sb.toString();
+	}
+
 	private long _resourceActionId;
 	private String _name;
 	private String _originalName;

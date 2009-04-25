@@ -300,6 +300,63 @@ public class RatingsStatsModelImpl extends BaseModelImpl<RatingsStats> {
 		return (int)getPrimaryKey();
 	}
 
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("{statsId=");
+		sb.append(getStatsId());
+		sb.append(", classNameId=");
+		sb.append(getClassNameId());
+		sb.append(", classPK=");
+		sb.append(getClassPK());
+		sb.append(", totalEntries=");
+		sb.append(getTotalEntries());
+		sb.append(", totalScore=");
+		sb.append(getTotalScore());
+		sb.append(", averageScore=");
+		sb.append(getAverageScore());
+		sb.append("}");
+
+		return sb.toString();
+	}
+
+	public String toXmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<model><model-name>");
+		sb.append("com.liferay.portlet.ratings.model.RatingsStats");
+		sb.append("</model-name>");
+
+		sb.append(
+			"<column><column-name>statsId</column-name><column-value><![CDATA[");
+		sb.append("getStatsId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>classNameId</column-name><column-value><![CDATA[");
+		sb.append("getClassNameId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>classPK</column-name><column-value><![CDATA[");
+		sb.append("getClassPK()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>totalEntries</column-name><column-value><![CDATA[");
+		sb.append("getTotalEntries()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>totalScore</column-name><column-value><![CDATA[");
+		sb.append("getTotalScore()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>averageScore</column-name><column-value><![CDATA[");
+		sb.append("getAverageScore()");
+		sb.append("]]></column-value></column>");
+
+		sb.append("</model>");
+
+		return sb.toString();
+	}
+
 	private long _statsId;
 	private long _classNameId;
 	private long _originalClassNameId;

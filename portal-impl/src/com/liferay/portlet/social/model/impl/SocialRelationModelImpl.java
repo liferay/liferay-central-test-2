@@ -316,6 +316,69 @@ public class SocialRelationModelImpl extends BaseModelImpl<SocialRelation> {
 		return (int)getPrimaryKey();
 	}
 
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("{uuid=");
+		sb.append(getUuid());
+		sb.append(", relationId=");
+		sb.append(getRelationId());
+		sb.append(", companyId=");
+		sb.append(getCompanyId());
+		sb.append(", createDate=");
+		sb.append(getCreateDate());
+		sb.append(", userId1=");
+		sb.append(getUserId1());
+		sb.append(", userId2=");
+		sb.append(getUserId2());
+		sb.append(", type=");
+		sb.append(getType());
+		sb.append("}");
+
+		return sb.toString();
+	}
+
+	public String toXmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<model><model-name>");
+		sb.append("com.liferay.portlet.social.model.SocialRelation");
+		sb.append("</model-name>");
+
+		sb.append(
+			"<column><column-name>uuid</column-name><column-value><![CDATA[");
+		sb.append("getUuid()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>relationId</column-name><column-value><![CDATA[");
+		sb.append("getRelationId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>companyId</column-name><column-value><![CDATA[");
+		sb.append("getCompanyId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>createDate</column-name><column-value><![CDATA[");
+		sb.append("getCreateDate()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>userId1</column-name><column-value><![CDATA[");
+		sb.append("getUserId1()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>userId2</column-name><column-value><![CDATA[");
+		sb.append("getUserId2()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>type</column-name><column-value><![CDATA[");
+		sb.append("getType()");
+		sb.append("]]></column-value></column>");
+
+		sb.append("</model>");
+
+		return sb.toString();
+	}
+
 	private String _uuid;
 	private long _relationId;
 	private long _companyId;

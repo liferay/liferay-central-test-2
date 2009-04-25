@@ -302,6 +302,57 @@ public class AnnouncementsFlagModelImpl extends BaseModelImpl<AnnouncementsFlag>
 		return (int)getPrimaryKey();
 	}
 
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("{flagId=");
+		sb.append(getFlagId());
+		sb.append(", userId=");
+		sb.append(getUserId());
+		sb.append(", createDate=");
+		sb.append(getCreateDate());
+		sb.append(", entryId=");
+		sb.append(getEntryId());
+		sb.append(", value=");
+		sb.append(getValue());
+		sb.append("}");
+
+		return sb.toString();
+	}
+
+	public String toXmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<model><model-name>");
+		sb.append("com.liferay.portlet.announcements.model.AnnouncementsFlag");
+		sb.append("</model-name>");
+
+		sb.append(
+			"<column><column-name>flagId</column-name><column-value><![CDATA[");
+		sb.append("getFlagId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>userId</column-name><column-value><![CDATA[");
+		sb.append("getUserId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>createDate</column-name><column-value><![CDATA[");
+		sb.append("getCreateDate()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>entryId</column-name><column-value><![CDATA[");
+		sb.append("getEntryId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>value</column-name><column-value><![CDATA[");
+		sb.append("getValue()");
+		sb.append("]]></column-value></column>");
+
+		sb.append("</model>");
+
+		return sb.toString();
+	}
+
 	private long _flagId;
 	private long _userId;
 	private long _originalUserId;

@@ -386,6 +386,99 @@ public class OrganizationModelImpl extends BaseModelImpl<Organization> {
 		return (int)getPrimaryKey();
 	}
 
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("{organizationId=");
+		sb.append(getOrganizationId());
+		sb.append(", companyId=");
+		sb.append(getCompanyId());
+		sb.append(", parentOrganizationId=");
+		sb.append(getParentOrganizationId());
+		sb.append(", leftOrganizationId=");
+		sb.append(getLeftOrganizationId());
+		sb.append(", rightOrganizationId=");
+		sb.append(getRightOrganizationId());
+		sb.append(", name=");
+		sb.append(getName());
+		sb.append(", type=");
+		sb.append(getType());
+		sb.append(", recursable=");
+		sb.append(getRecursable());
+		sb.append(", regionId=");
+		sb.append(getRegionId());
+		sb.append(", countryId=");
+		sb.append(getCountryId());
+		sb.append(", statusId=");
+		sb.append(getStatusId());
+		sb.append(", comments=");
+		sb.append(getComments());
+		sb.append("}");
+
+		return sb.toString();
+	}
+
+	public String toXmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<model><model-name>");
+		sb.append("com.liferay.portal.model.Organization");
+		sb.append("</model-name>");
+
+		sb.append(
+			"<column><column-name>organizationId</column-name><column-value><![CDATA[");
+		sb.append("getOrganizationId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>companyId</column-name><column-value><![CDATA[");
+		sb.append("getCompanyId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>parentOrganizationId</column-name><column-value><![CDATA[");
+		sb.append("getParentOrganizationId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>leftOrganizationId</column-name><column-value><![CDATA[");
+		sb.append("getLeftOrganizationId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>rightOrganizationId</column-name><column-value><![CDATA[");
+		sb.append("getRightOrganizationId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>name</column-name><column-value><![CDATA[");
+		sb.append("getName()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>type</column-name><column-value><![CDATA[");
+		sb.append("getType()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>recursable</column-name><column-value><![CDATA[");
+		sb.append("getRecursable()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>regionId</column-name><column-value><![CDATA[");
+		sb.append("getRegionId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>countryId</column-name><column-value><![CDATA[");
+		sb.append("getCountryId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>statusId</column-name><column-value><![CDATA[");
+		sb.append("getStatusId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>comments</column-name><column-value><![CDATA[");
+		sb.append("getComments()");
+		sb.append("]]></column-value></column>");
+
+		sb.append("</model>");
+
+		return sb.toString();
+	}
+
 	private long _organizationId;
 	private long _companyId;
 	private long _originalCompanyId;

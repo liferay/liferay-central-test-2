@@ -310,6 +310,69 @@ public class CountryModelImpl extends BaseModelImpl<Country> {
 		return (int)getPrimaryKey();
 	}
 
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("{countryId=");
+		sb.append(getCountryId());
+		sb.append(", name=");
+		sb.append(getName());
+		sb.append(", a2=");
+		sb.append(getA2());
+		sb.append(", a3=");
+		sb.append(getA3());
+		sb.append(", number=");
+		sb.append(getNumber());
+		sb.append(", idd=");
+		sb.append(getIdd());
+		sb.append(", active=");
+		sb.append(getActive());
+		sb.append("}");
+
+		return sb.toString();
+	}
+
+	public String toXmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<model><model-name>");
+		sb.append("com.liferay.portal.model.Country");
+		sb.append("</model-name>");
+
+		sb.append(
+			"<column><column-name>countryId</column-name><column-value><![CDATA[");
+		sb.append("getCountryId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>name</column-name><column-value><![CDATA[");
+		sb.append("getName()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>a2</column-name><column-value><![CDATA[");
+		sb.append("getA2()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>a3</column-name><column-value><![CDATA[");
+		sb.append("getA3()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>number</column-name><column-value><![CDATA[");
+		sb.append("getNumber()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>idd</column-name><column-value><![CDATA[");
+		sb.append("getIdd()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>active</column-name><column-value><![CDATA[");
+		sb.append("getActive()");
+		sb.append("]]></column-value></column>");
+
+		sb.append("</model>");
+
+		return sb.toString();
+	}
+
 	private long _countryId;
 	private String _name;
 	private String _originalName;

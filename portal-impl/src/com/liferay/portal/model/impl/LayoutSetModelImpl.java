@@ -404,6 +404,105 @@ public class LayoutSetModelImpl extends BaseModelImpl<LayoutSet> {
 		return (int)getPrimaryKey();
 	}
 
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("{layoutSetId=");
+		sb.append(getLayoutSetId());
+		sb.append(", groupId=");
+		sb.append(getGroupId());
+		sb.append(", companyId=");
+		sb.append(getCompanyId());
+		sb.append(", privateLayout=");
+		sb.append(getPrivateLayout());
+		sb.append(", logo=");
+		sb.append(getLogo());
+		sb.append(", logoId=");
+		sb.append(getLogoId());
+		sb.append(", themeId=");
+		sb.append(getThemeId());
+		sb.append(", colorSchemeId=");
+		sb.append(getColorSchemeId());
+		sb.append(", wapThemeId=");
+		sb.append(getWapThemeId());
+		sb.append(", wapColorSchemeId=");
+		sb.append(getWapColorSchemeId());
+		sb.append(", css=");
+		sb.append(getCss());
+		sb.append(", pageCount=");
+		sb.append(getPageCount());
+		sb.append(", virtualHost=");
+		sb.append(getVirtualHost());
+		sb.append("}");
+
+		return sb.toString();
+	}
+
+	public String toXmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<model><model-name>");
+		sb.append("com.liferay.portal.model.LayoutSet");
+		sb.append("</model-name>");
+
+		sb.append(
+			"<column><column-name>layoutSetId</column-name><column-value><![CDATA[");
+		sb.append("getLayoutSetId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>groupId</column-name><column-value><![CDATA[");
+		sb.append("getGroupId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>companyId</column-name><column-value><![CDATA[");
+		sb.append("getCompanyId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>privateLayout</column-name><column-value><![CDATA[");
+		sb.append("getPrivateLayout()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>logo</column-name><column-value><![CDATA[");
+		sb.append("getLogo()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>logoId</column-name><column-value><![CDATA[");
+		sb.append("getLogoId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>themeId</column-name><column-value><![CDATA[");
+		sb.append("getThemeId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>colorSchemeId</column-name><column-value><![CDATA[");
+		sb.append("getColorSchemeId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>wapThemeId</column-name><column-value><![CDATA[");
+		sb.append("getWapThemeId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>wapColorSchemeId</column-name><column-value><![CDATA[");
+		sb.append("getWapColorSchemeId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>css</column-name><column-value><![CDATA[");
+		sb.append("getCss()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>pageCount</column-name><column-value><![CDATA[");
+		sb.append("getPageCount()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>virtualHost</column-name><column-value><![CDATA[");
+		sb.append("getVirtualHost()");
+		sb.append("]]></column-value></column>");
+
+		sb.append("</model>");
+
+		return sb.toString();
+	}
+
 	private long _layoutSetId;
 	private long _groupId;
 	private long _originalGroupId;

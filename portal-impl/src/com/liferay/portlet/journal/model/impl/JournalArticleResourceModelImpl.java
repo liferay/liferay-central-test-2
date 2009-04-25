@@ -249,6 +249,45 @@ public class JournalArticleResourceModelImpl extends BaseModelImpl<JournalArticl
 		return (int)getPrimaryKey();
 	}
 
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("{resourcePrimKey=");
+		sb.append(getResourcePrimKey());
+		sb.append(", groupId=");
+		sb.append(getGroupId());
+		sb.append(", articleId=");
+		sb.append(getArticleId());
+		sb.append("}");
+
+		return sb.toString();
+	}
+
+	public String toXmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<model><model-name>");
+		sb.append("com.liferay.portlet.journal.model.JournalArticleResource");
+		sb.append("</model-name>");
+
+		sb.append(
+			"<column><column-name>resourcePrimKey</column-name><column-value><![CDATA[");
+		sb.append("getResourcePrimKey()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>groupId</column-name><column-value><![CDATA[");
+		sb.append("getGroupId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>articleId</column-name><column-value><![CDATA[");
+		sb.append("getArticleId()");
+		sb.append("]]></column-value></column>");
+
+		sb.append("</model>");
+
+		return sb.toString();
+	}
+
 	private long _resourcePrimKey;
 	private long _groupId;
 	private long _originalGroupId;

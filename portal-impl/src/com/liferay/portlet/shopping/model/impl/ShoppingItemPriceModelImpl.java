@@ -355,6 +355,87 @@ public class ShoppingItemPriceModelImpl extends BaseModelImpl<ShoppingItemPrice>
 		return (int)getPrimaryKey();
 	}
 
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("{itemPriceId=");
+		sb.append(getItemPriceId());
+		sb.append(", itemId=");
+		sb.append(getItemId());
+		sb.append(", minQuantity=");
+		sb.append(getMinQuantity());
+		sb.append(", maxQuantity=");
+		sb.append(getMaxQuantity());
+		sb.append(", price=");
+		sb.append(getPrice());
+		sb.append(", discount=");
+		sb.append(getDiscount());
+		sb.append(", taxable=");
+		sb.append(getTaxable());
+		sb.append(", shipping=");
+		sb.append(getShipping());
+		sb.append(", useShippingFormula=");
+		sb.append(getUseShippingFormula());
+		sb.append(", status=");
+		sb.append(getStatus());
+		sb.append("}");
+
+		return sb.toString();
+	}
+
+	public String toXmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<model><model-name>");
+		sb.append("com.liferay.portlet.shopping.model.ShoppingItemPrice");
+		sb.append("</model-name>");
+
+		sb.append(
+			"<column><column-name>itemPriceId</column-name><column-value><![CDATA[");
+		sb.append("getItemPriceId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>itemId</column-name><column-value><![CDATA[");
+		sb.append("getItemId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>minQuantity</column-name><column-value><![CDATA[");
+		sb.append("getMinQuantity()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>maxQuantity</column-name><column-value><![CDATA[");
+		sb.append("getMaxQuantity()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>price</column-name><column-value><![CDATA[");
+		sb.append("getPrice()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>discount</column-name><column-value><![CDATA[");
+		sb.append("getDiscount()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>taxable</column-name><column-value><![CDATA[");
+		sb.append("getTaxable()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>shipping</column-name><column-value><![CDATA[");
+		sb.append("getShipping()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>useShippingFormula</column-name><column-value><![CDATA[");
+		sb.append("getUseShippingFormula()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>status</column-name><column-value><![CDATA[");
+		sb.append("getStatus()");
+		sb.append("]]></column-value></column>");
+
+		sb.append("</model>");
+
+		return sb.toString();
+	}
+
 	private long _itemPriceId;
 	private long _itemId;
 	private int _minQuantity;

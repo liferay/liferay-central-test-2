@@ -290,6 +290,69 @@ public class ExpandoColumnModelImpl extends BaseModelImpl<ExpandoColumn> {
 		return (int)getPrimaryKey();
 	}
 
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("{columnId=");
+		sb.append(getColumnId());
+		sb.append(", companyId=");
+		sb.append(getCompanyId());
+		sb.append(", tableId=");
+		sb.append(getTableId());
+		sb.append(", name=");
+		sb.append(getName());
+		sb.append(", type=");
+		sb.append(getType());
+		sb.append(", defaultData=");
+		sb.append(getDefaultData());
+		sb.append(", typeSettings=");
+		sb.append(getTypeSettings());
+		sb.append("}");
+
+		return sb.toString();
+	}
+
+	public String toXmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<model><model-name>");
+		sb.append("com.liferay.portlet.expando.model.ExpandoColumn");
+		sb.append("</model-name>");
+
+		sb.append(
+			"<column><column-name>columnId</column-name><column-value><![CDATA[");
+		sb.append("getColumnId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>companyId</column-name><column-value><![CDATA[");
+		sb.append("getCompanyId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>tableId</column-name><column-value><![CDATA[");
+		sb.append("getTableId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>name</column-name><column-value><![CDATA[");
+		sb.append("getName()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>type</column-name><column-value><![CDATA[");
+		sb.append("getType()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>defaultData</column-name><column-value><![CDATA[");
+		sb.append("getDefaultData()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>typeSettings</column-name><column-value><![CDATA[");
+		sb.append("getTypeSettings()");
+		sb.append("]]></column-value></column>");
+
+		sb.append("</model>");
+
+		return sb.toString();
+	}
+
 	private long _columnId;
 	private long _companyId;
 	private long _tableId;
