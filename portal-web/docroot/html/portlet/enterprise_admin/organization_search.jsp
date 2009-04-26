@@ -32,7 +32,23 @@ OrganizationSearch searchContainer = (OrganizationSearch)request.getAttribute("l
 OrganizationDisplayTerms displayTerms = (OrganizationDisplayTerms)searchContainer.getDisplayTerms();
 
 String type = displayTerms.getType();
+
+Organization organization = null;
+
+if (displayTerms.getParentOrganizationId() > 0) {
+	try {
+		organization = OrganizationLocalServiceUtil.getOrganization(displayTerms.getParentOrganizationId());
+	}
+	catch (NoSuchOrganizationException nsoe) {
+	}
+}
 %>
+
+<c:if test="<%= organization != null %>">
+	<input name="<portlet:namespace /><%= UserDisplayTerms.ORGANIZATION_ID %>" type="hidden" value="<%= organization.getOrganizationId() %>" />
+
+	<h3><%= LanguageUtil.format(pageContext, "suborganizations-of-x", organization.getName()) %></h3>
+</c:if>
 
 <liferay-ui:search-toggle
 	id="toggle_id_enterprise_admin_organization_search"
@@ -107,26 +123,6 @@ String type = displayTerms.getType();
 	</tr>
 	</table>
 </liferay-ui:search-toggle>
-
-<%
-Organization organization = null;
-
-if (displayTerms.getParentOrganizationId() > 0) {
-	try {
-		organization = OrganizationLocalServiceUtil.getOrganization(displayTerms.getParentOrganizationId());
-	}
-	catch (NoSuchOrganizationException nsoe) {
-	}
-}
-%>
-
-<c:if test="<%= organization != null %>">
-	<input name="<portlet:namespace /><%= UserDisplayTerms.ORGANIZATION_ID %>" type="hidden" value="<%= organization.getOrganizationId() %>" />
-
-	<br />
-
-	<liferay-ui:message key="filter-by-organization" />: <%= organization.getName() %><br />
-</c:if>
 
 <script type="text/javascript">
 	jQuery(

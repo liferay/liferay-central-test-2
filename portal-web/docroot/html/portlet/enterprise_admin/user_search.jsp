@@ -89,8 +89,9 @@ UserDisplayTerms displayTerms = (UserDisplayTerms)searchContainer.getDisplayTerm
 			<c:when test="<%= showActiveUserSelect %>">
 				<td>
 					<select name="<portlet:namespace /><%= displayTerms.ACTIVE %>">
-						<option <%= displayTerms.isActive() ? "selected" : "" %> value="1"><liferay-ui:message key="yes" /></option>
-						<option <%= !displayTerms.isActive() ? "selected" : "" %> value="0"><liferay-ui:message key="no" /></option>
+						<option <%= (!displayTerms.hasActive()) ? "selected" : "" %> value=""></option>
+						<option <%= (displayTerms.hasActive()) && displayTerms.isActive() ? "selected" : "" %> value="1"><liferay-ui:message key="yes" /></option>
+						<option <%= (displayTerms.hasActive()) && !displayTerms.isActive() ? "selected" : "" %> value="0"><liferay-ui:message key="no" /></option>
 					</select>
 				</td>
 			</c:when>

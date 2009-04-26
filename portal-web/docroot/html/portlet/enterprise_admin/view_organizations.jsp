@@ -26,6 +26,12 @@
 
 <%
 PortletURL portletURL = (PortletURL)request.getAttribute("view.jsp-portletURL");
+
+String viewOrganizationsRedirect = ParamUtil.getString(request, "viewOrganizationsRedirect");
+
+if (Validator.isNotNull(viewOrganizationsRedirect)) {
+	portletURL.setParameter("viewOrganizationsRedirect", viewOrganizationsRedirect);
+}
 %>
 
 <liferay-ui:error exception="<%= RequiredOrganizationException.class %>" message="you-cannot-delete-organizations-that-have-suborganizations-or-users" />
@@ -33,6 +39,14 @@ PortletURL portletURL = (PortletURL)request.getAttribute("view.jsp-portletURL");
 <liferay-util:include page="/html/portlet/enterprise_admin/organization/toolbar.jsp">
 	<liferay-util:param name="toolbarItem" value="view-all" />
 </liferay-util:include>
+
+<c:if test="<%= Validator.isNotNull(viewOrganizationsRedirect) %>">
+	<input name="<portlet:namespace />viewOrganizationsRedirect" type="hidden" value="<%= HtmlUtil.escape(viewOrganizationsRedirect) %>" />
+
+	<div align="right">
+		<a href="<%= HtmlUtil.escape(viewOrganizationsRedirect) %>">&laquo;<liferay-ui:message key="back" /></a>
+	</div>
+</c:if>
 
 <liferay-ui:search-container
 	rowChecker="<%= new RowChecker(renderResponse) %>"
@@ -89,9 +103,11 @@ PortletURL portletURL = (PortletURL)request.getAttribute("view.jsp-portletURL");
 			/>
 		</liferay-ui:search-container-row>
 
-		<div class="separator"><!-- --></div>
+		<c:if test="<%= !results.isEmpty() %>">
+			<div class="separator"><!-- --></div>
 
-		<input type="button" value="<liferay-ui:message key="delete" />" onClick="<portlet:namespace />deleteOrganizations();" />
+			<input type="button" value="<liferay-ui:message key="delete" />" onClick="<portlet:namespace />deleteOrganizations();" />
+		</c:if>
 
 		<br /><br />
 

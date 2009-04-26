@@ -75,6 +75,12 @@ String curSection = mainSections[0];
 	<liferay-util:param name="toolbarItem" value='<%= (organization == null) ? "add" : "view-all" %>' />
 </liferay-util:include>
 
+<c:if test="<%= Validator.isNotNull(backURL) %>">
+	<div align="right">
+		<a href="<%= HtmlUtil.escape(backURL) %>">&laquo;<liferay-ui:message key="back" /></a>
+	</div>
+</c:if>
+
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_organization" /></portlet:actionURL>" class="uni-form" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveOrganization(); return false;">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
 <input name="<portlet:namespace />redirect" type="hidden" value="" />

@@ -191,6 +191,12 @@ String curSection = mainSections[0];
 	</liferay-util:include>
 </c:if>
 
+<c:if test="<%= Validator.isNotNull(backURL) %>">
+	<div align="right">
+		<a href="<%= HtmlUtil.escape(backURL) %>">&laquo;<liferay-ui:message key="back" /></a>
+	</div>
+</c:if>
+
 <form class="uni-form" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
 <input name="<portlet:namespace />redirect" type="hidden" value="" />

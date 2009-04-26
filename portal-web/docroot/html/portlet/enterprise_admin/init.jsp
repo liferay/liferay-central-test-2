@@ -133,8 +133,10 @@ boolean showActiveUserSelect = true;
 if (portletName.equals(PortletKeys.ENTERPRISE_ADMIN_USERS)) {
 	tabs1 = "users";
 }
-else if (portletName.equals(PortletKeys.ENTERPRISE_ADMIN_ORGANIZATIONS) && !tabs1.equals("users")) {
-	tabs1 = "organizations";
+else if (portletName.equals(PortletKeys.ENTERPRISE_ADMIN_ORGANIZATIONS)) {
+	if (!tabs1.equals("users")) {
+		tabs1 = "organizations";
+	}
 }
 else if (portletName.equals(PortletKeys.ENTERPRISE_ADMIN_USER_GROUPS) && !tabs1.equals("users")) {
 	tabs1 = "user-groups";

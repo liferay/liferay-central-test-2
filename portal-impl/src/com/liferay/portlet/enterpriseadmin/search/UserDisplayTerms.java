@@ -24,6 +24,7 @@ package com.liferay.portlet.enterpriseadmin.search;
 
 import com.liferay.portal.kernel.dao.search.DisplayTerms;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.Validator;
 
 import javax.portlet.PortletRequest;
 
@@ -61,7 +62,11 @@ public class UserDisplayTerms extends DisplayTerms {
 		lastName = ParamUtil.getString(portletRequest, LAST_NAME);
 		screenName = ParamUtil.getString(portletRequest, SCREEN_NAME);
 		emailAddress = ParamUtil.getString(portletRequest, EMAIL_ADDRESS);
-		active = ParamUtil.getBoolean(portletRequest, ACTIVE, true);
+
+		if (Validator.isNotNull(ParamUtil.getString(portletRequest, ACTIVE))) {
+			active = ParamUtil.getBoolean(portletRequest, ACTIVE, true);
+		}
+
 		organizationId = ParamUtil.getLong(portletRequest, ORGANIZATION_ID);
 		roleId = ParamUtil.getLong(portletRequest, ROLE_ID);
 		userGroupId = ParamUtil.getLong(portletRequest, USER_GROUP_ID);
@@ -87,11 +92,28 @@ public class UserDisplayTerms extends DisplayTerms {
 		return emailAddress;
 	}
 
-	public boolean isActive() {
+	public Boolean getActive() {
 		return active;
 	}
 
-	public void setActive(boolean active) {
+	public boolean hasActive() {
+		if (active == null) {
+			return false;
+		}
+		else {
+			return true;
+		}
+	}
+
+	public boolean isActive() {
+		if (active == null) {
+			return true;
+		}
+
+		return active.booleanValue();
+	}
+
+	public void setActive(Boolean active) {
 		this.active = active;
 	}
 
@@ -112,7 +134,7 @@ public class UserDisplayTerms extends DisplayTerms {
 	protected String lastName;
 	protected String screenName;
 	protected String emailAddress;
-	protected boolean active;
+	protected Boolean active;
 	protected long organizationId;
 	protected long roleId;
 	protected long userGroupId;

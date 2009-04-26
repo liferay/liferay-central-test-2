@@ -88,7 +88,8 @@ public class UserSearch extends SearchContainer<User> {
 		String portletName = portletConfig.getPortletName();
 
 		if ((!portletName.equals(PortletKeys.ENTERPRISE_ADMIN)) &&
-			(!portletName.equals(PortletKeys.ENTERPRISE_ADMIN_USERS))) {
+			(!portletName.equals(PortletKeys.ENTERPRISE_ADMIN_USERS)) &&
+			(!portletName.equals(PortletKeys.ENTERPRISE_ADMIN_ORGANIZATIONS))) {
 
 			displayTerms.setActive(true);
 			searchTerms.setActive(true);
@@ -104,8 +105,13 @@ public class UserSearch extends SearchContainer<User> {
 			UserDisplayTerms.SCREEN_NAME, displayTerms.getScreenName());
 		iteratorURL.setParameter(
 			UserDisplayTerms.EMAIL_ADDRESS, displayTerms.getEmailAddress());
-		iteratorURL.setParameter(
-			UserDisplayTerms.ACTIVE, String.valueOf(displayTerms.isActive()));
+
+		if (displayTerms.hasActive()) {
+			iteratorURL.setParameter(
+				UserDisplayTerms.ACTIVE,
+				String.valueOf(displayTerms.isActive()));
+		}
+
 		iteratorURL.setParameter(
 			UserDisplayTerms.ORGANIZATION_ID,
 			String.valueOf(displayTerms.getOrganizationId()));

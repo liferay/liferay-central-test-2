@@ -26,6 +26,12 @@
 
 <%
 PortletURL portletURL = (PortletURL)request.getAttribute("view.jsp-portletURL");
+
+String viewUsersRedirect = ParamUtil.getString(request, "viewUsersRedirect");
+
+if (Validator.isNotNull(viewUsersRedirect)) {
+	portletURL.setParameter("viewUsersRedirect", viewUsersRedirect);
+}
 %>
 
 <liferay-ui:error exception="<%= RequiredUserException.class %>" message="you-cannot-delete-or-deactivate-yourself" />
@@ -34,12 +40,76 @@ PortletURL portletURL = (PortletURL)request.getAttribute("view.jsp-portletURL");
 	<liferay-util:param name="toolbarItem" value="view-all" />
 </liferay-util:include>
 
+<c:if test="<%= Validator.isNotNull(viewUsersRedirect) %>">
+	<input name="<portlet:namespace />viewUsersRedirect" type="hidden" value="<%= HtmlUtil.escape(viewUsersRedirect) %>" />
+
+	<div align="right">
+		<a href="<%= HtmlUtil.escape(viewUsersRedirect) %>">&laquo;<liferay-ui:message key="back" /></a>
+	</div>
+</c:if>
+
 <liferay-ui:search-container
 	rowChecker="<%= new RowChecker(renderResponse) %>"
 	searchContainer="<%= new UserSearch(renderRequest, portletURL) %>"
 >
 	<input name="<portlet:namespace />deleteUserIds" type="hidden" value="" />
 	<input name="<portlet:namespace />usersRedirect" type="hidden" value="<%= portletURL.toString() %>" />
+
+	<%
+	UserSearchTerms searchTerms = (UserSearchTerms)searchContainer.getSearchTerms();
+
+	long organizationId = searchTerms.getOrganizationId();
+	long roleId = searchTerms.getRoleId();
+	long userGroupId = searchTerms.getUserGroupId();
+
+	Organization organization = null;
+
+	if ((organizationId > 0)) {
+		try {
+			organization = OrganizationLocalServiceUtil.getOrganization(organizationId);
+		}
+		catch (NoSuchOrganizationException nsoe) {
+		}
+	}
+
+	Role role = null;
+
+	if (roleId > 0) {
+		try {
+			role = RoleLocalServiceUtil.getRole(roleId);
+		}
+		catch (NoSuchRoleException nsre) {
+		}
+	}
+
+	UserGroup userGroup = null;
+
+	if (userGroupId > 0) {
+		try {
+			userGroup = UserGroupLocalServiceUtil.getUserGroup(userGroupId);
+		}
+		catch (NoSuchUserGroupException nsuge) {
+		}
+	}
+	%>
+
+	<c:if test="<%= organization != null %>">
+		<input name="<portlet:namespace /><%= UserDisplayTerms.ORGANIZATION_ID %>" type="hidden" value="<%= organization.getOrganizationId() %>" />
+
+		<h3><%= LanguageUtil.format(pageContext, "users-of-x", organization.getName()) %></h3>
+	</c:if>
+
+	<c:if test="<%= role != null %>">
+		<input name="<portlet:namespace /><%= UserDisplayTerms.ROLE_ID %>" type="hidden" value="<%= role.getRoleId() %>" />
+
+		<h3><%= LanguageUtil.format(pageContext, "users-with-role-x", role.getTitle(locale)) %></h3>
+	</c:if>
+
+	<c:if test="<%= userGroup != null %>">
+		<input name="<portlet:namespace /><%= UserDisplayTerms.USER_GROUP_ID %>" type="hidden" value="<%= userGroup.getUserGroupId() %>" />
+
+		<h3><%= LanguageUtil.format(pageContext, "users-of-x", organization.getName()) %></h3>
+	</c:if>
 
 	<liferay-ui:search-form
 		page="/html/portlet/enterprise_admin/user_search.jsp"
@@ -48,12 +118,6 @@ PortletURL portletURL = (PortletURL)request.getAttribute("view.jsp-portletURL");
 	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 
 		<%
-		UserSearchTerms searchTerms = (UserSearchTerms)searchContainer.getSearchTerms();
-
-		long organizationId = searchTerms.getOrganizationId();
-		long roleId = searchTerms.getRoleId();
-		long userGroupId = searchTerms.getUserGroupId();
-
 		LinkedHashMap userParams = new LinkedHashMap();
 
 		if (organizationId > 0) {
@@ -100,67 +164,13 @@ PortletURL portletURL = (PortletURL)request.getAttribute("view.jsp-portletURL");
 			/>
 		</liferay-ui:search-container-row>
 
-		<%
-		Organization organization = null;
-
-		if ((organizationId > 0)) {
-			try {
-				organization = OrganizationLocalServiceUtil.getOrganization(organizationId);
-			}
-			catch (NoSuchOrganizationException nsoe) {
-			}
-		}
-
-		Role role = null;
-
-		if (roleId > 0) {
-			try {
-				role = RoleLocalServiceUtil.getRole(roleId);
-			}
-			catch (NoSuchRoleException nsre) {
-			}
-		}
-
-		UserGroup userGroup = null;
-
-		if (userGroupId > 0) {
-			try {
-				userGroup = UserGroupLocalServiceUtil.getUserGroup(userGroupId);
-			}
-			catch (NoSuchUserGroupException nsuge) {
-			}
-		}
-		%>
-
-		<c:if test="<%= (organization != null) || (role != null) || (userGroup != null) %>">
-			<br />
-		</c:if>
-
-		<c:if test="<%= organization != null %>">
-			<input name="<portlet:namespace /><%= UserDisplayTerms.ORGANIZATION_ID %>" type="hidden" value="<%= organization.getOrganizationId() %>" />
-
-			<liferay-ui:message key="filter-by-organization" />: <%= organization.getName() %><br />
-		</c:if>
-
-		<c:if test="<%= role != null %>">
-			<input name="<portlet:namespace /><%= UserDisplayTerms.ROLE_ID %>" type="hidden" value="<%= role.getRoleId() %>" />
-
-			<liferay-ui:message key="filter-by-role" />: <%= role.getTitle(locale) %><br />
-		</c:if>
-
-		<c:if test="<%= userGroup != null %>">
-			<input name="<portlet:namespace /><%= UserDisplayTerms.USER_GROUP_ID %>" type="hidden" value="<%= userGroup.getUserGroupId() %>" />
-
-			<liferay-ui:message key="filter-by-user-group" />: <%= userGroup.getName() %><br />
-		</c:if>
-
 		<div class="separator"><!-- --></div>
 
 		<%
 		boolean hasButtons = false;
 		%>
 
-		<c:if test="<%= searchTerms.isActive() || (!searchTerms.isActive() && PropsValues.USERS_DELETE) %>">
+		<c:if test="<%= (searchTerms.hasActive()) && (searchTerms.isActive() || (!searchTerms.isActive() && PropsValues.USERS_DELETE)) %>">
 
 			<%
 			hasButtons = true;
@@ -169,7 +179,7 @@ PortletURL portletURL = (PortletURL)request.getAttribute("view.jsp-portletURL");
 			<input type="button" value='<%= LanguageUtil.get(pageContext, (searchTerms.isActive() ? Constants.DEACTIVATE : Constants.DELETE)) %>' onClick="<portlet:namespace />deleteUsers('<%= searchTerms.isActive() ? Constants.DEACTIVATE : Constants.DELETE %>');" />
 		</c:if>
 
-		<c:if test="<%= !searchTerms.isActive() %>">
+		<c:if test="<%= (searchTerms.hasActive()) && !searchTerms.isActive() %>">
 
 			<%
 			hasButtons = true;
@@ -183,6 +193,12 @@ PortletURL portletURL = (PortletURL)request.getAttribute("view.jsp-portletURL");
 				<br />
 			</div>
 		</c:if>
+
+		<%
+		if (!hasButtons) {
+			searchContainer.setRowChecker(null);
+		}
+		%>
 
 		<liferay-ui:search-iterator />
 	</c:if>

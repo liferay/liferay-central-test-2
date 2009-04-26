@@ -27,13 +27,66 @@
 <%
 PortletURL portletURL = (PortletURL)request.getAttribute("view.jsp-portletURL");
 
+String viewUsersRedirect = ParamUtil.getString(request, "viewUsersRedirect");
+
+if (Validator.isNotNull(viewUsersRedirect)) {
+	portletURL.setParameter("viewUsersRedirect", viewUsersRedirect);
+}
+
 List<Organization> manageableOrganizations = null;
 %>
+
+<c:if test="<%= Validator.isNotNull(viewUsersRedirect) %>">
+	<input name="<portlet:namespace />viewUsersRedirect" type="hidden" value="<%= HtmlUtil.escape(viewUsersRedirect) %>" />
+
+	<div align="right">
+		<a href="<%= HtmlUtil.escape(viewUsersRedirect) %>">&laquo;<liferay-ui:message key="back" /></a>
+	</div>
+</c:if>
 
 <liferay-ui:search-container
 	searchContainer="<%= new UserSearch(renderRequest, portletURL) %>"
 >
 	<input name="<portlet:namespace />usersRedirect" type="hidden" value="<%= portletURL.toString() %>" />
+
+	<%
+	UserSearchTerms searchTerms = (UserSearchTerms)searchContainer.getSearchTerms();
+
+	long organizationId = searchTerms.getOrganizationId();
+	long userGroupId = searchTerms.getUserGroupId();
+
+	Organization organization = null;
+
+	if ((organizationId > 0)) {
+		try {
+			organization = OrganizationLocalServiceUtil.getOrganization(organizationId);
+		}
+		catch (NoSuchOrganizationException nsoe) {
+		}
+	}
+
+	UserGroup userGroup = null;
+
+	if (userGroupId > 0) {
+		try {
+			userGroup = UserGroupLocalServiceUtil.getUserGroup(userGroupId);
+		}
+		catch (NoSuchUserGroupException nsuge) {
+		}
+	}
+	%>
+
+	<c:if test="<%= organization != null %>">
+		<input name="<portlet:namespace /><%= UserDisplayTerms.ORGANIZATION_ID %>" type="hidden" value="<%= organization.getOrganizationId() %>" />
+
+		<h3><%= LanguageUtil.format(pageContext, "users-of-x", organization.getName()) %></h3>
+	</c:if>
+
+	<c:if test="<%= userGroup != null %>">
+		<input name="<portlet:namespace /><%= UserDisplayTerms.USER_GROUP_ID %>" type="hidden" value="<%= userGroup.getUserGroupId() %>" />
+
+		<h3><%= LanguageUtil.format(pageContext, "users-of-x", organization.getName()) %></h3>
+	</c:if>
 
 	<liferay-ui:search-form
 		page="/html/portlet/directory/user_search.jsp"
@@ -42,11 +95,6 @@ List<Organization> manageableOrganizations = null;
 	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 
 		<%
-		UserSearchTerms searchTerms = (UserSearchTerms)searchContainer.getSearchTerms();
-
-		long organizationId = searchTerms.getOrganizationId();
-		long userGroupId = searchTerms.getUserGroupId();
-
 		LinkedHashMap userParams = new LinkedHashMap();
 
 		if (organizationId > 0) {
@@ -77,28 +125,6 @@ List<Organization> manageableOrganizations = null;
 
 			<%@ include file="/html/portlet/directory/user/search_columns.jspf" %>
 		</liferay-ui:search-container-row>
-
-		<%
-		Organization organization = null;
-
-		if ((organizationId > 0)) {
-			try {
-				organization = OrganizationLocalServiceUtil.getOrganization(organizationId);
-			}
-			catch (NoSuchOrganizationException nsoe) {
-			}
-		}
-
-		UserGroup userGroup = null;
-
-		if (userGroupId > 0) {
-			try {
-				userGroup = UserGroupLocalServiceUtil.getUserGroup(userGroupId);
-			}
-			catch (NoSuchUserGroupException nsuge) {
-			}
-		}
-		%>
 
 		<c:if test="<%= (organization != null) || (userGroup != null) %>">
 			<br />
