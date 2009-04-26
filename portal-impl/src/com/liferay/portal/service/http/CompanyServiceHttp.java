@@ -74,7 +74,7 @@ public class CompanyServiceHttp {
 	public static com.liferay.portal.model.Company addCompany(
 		HttpPrincipal httpPrincipal, java.lang.String webId,
 		java.lang.String virtualHost, java.lang.String mx,
-		java.lang.String shardName)
+		java.lang.String shardName, boolean system)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
@@ -102,9 +102,13 @@ public class CompanyServiceHttp {
 				paramObj3 = new NullWrapper("java.lang.String");
 			}
 
+			Object paramObj4 = new BooleanWrapper(system);
+
 			MethodWrapper methodWrapper = new MethodWrapper(CompanyServiceUtil.class.getName(),
 					"addCompany",
-					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
+					});
 
 			Object returnObj = null;
 

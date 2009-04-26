@@ -84,9 +84,12 @@ public class CompanyModelImpl extends BaseModelImpl<Company> {
 			{ "homeURL", new Integer(Types.VARCHAR) },
 			
 
-			{ "logoId", new Integer(Types.BIGINT) }
+			{ "logoId", new Integer(Types.BIGINT) },
+			
+
+			{ "system", new Integer(Types.BOOLEAN) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table Company (companyId LONG not null primary key,accountId LONG,webId VARCHAR(75) null,key_ TEXT null,virtualHost VARCHAR(75) null,mx VARCHAR(75) null,homeURL STRING null,logoId LONG)";
+	public static final String TABLE_SQL_CREATE = "create table Company (companyId LONG not null primary key,accountId LONG,webId VARCHAR(75) null,key_ TEXT null,virtualHost VARCHAR(75) null,mx VARCHAR(75) null,homeURL STRING null,logoId LONG,system BOOLEAN)";
 	public static final String TABLE_SQL_DROP = "drop table Company";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -109,6 +112,7 @@ public class CompanyModelImpl extends BaseModelImpl<Company> {
 		model.setMx(soapModel.getMx());
 		model.setHomeURL(soapModel.getHomeURL());
 		model.setLogoId(soapModel.getLogoId());
+		model.setSystem(soapModel.getSystem());
 
 		return model;
 	}
@@ -239,6 +243,20 @@ public class CompanyModelImpl extends BaseModelImpl<Company> {
 		return _originalLogoId;
 	}
 
+	public boolean getSystem() {
+		return _system;
+	}
+
+	public boolean isSystem() {
+		return _system;
+	}
+
+	public void setSystem(boolean system) {
+		if (system != _system) {
+			_system = system;
+		}
+	}
+
 	public Company toEscapedModel() {
 		if (isEscapedModel()) {
 			return (Company)this;
@@ -257,6 +275,7 @@ public class CompanyModelImpl extends BaseModelImpl<Company> {
 			model.setMx(HtmlUtil.escape(getMx()));
 			model.setHomeURL(HtmlUtil.escape(getHomeURL()));
 			model.setLogoId(getLogoId());
+			model.setSystem(getSystem());
 
 			model = (Company)Proxy.newProxyInstance(Company.class.getClassLoader(),
 					new Class[] { Company.class },
@@ -286,6 +305,7 @@ public class CompanyModelImpl extends BaseModelImpl<Company> {
 		clone.setMx(getMx());
 		clone.setHomeURL(getHomeURL());
 		clone.setLogoId(getLogoId());
+		clone.setSystem(getSystem());
 
 		return clone;
 	}
@@ -414,5 +434,6 @@ public class CompanyModelImpl extends BaseModelImpl<Company> {
 	private long _logoId;
 	private long _originalLogoId;
 	private boolean _setOriginalLogoId;
+	private boolean _system;
 	private transient ExpandoBridge _expandoBridge;
 }

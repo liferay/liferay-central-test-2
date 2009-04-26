@@ -1,3 +1,9 @@
+alter table Company add system BOOLEAN;
+
+COMMIT_TRANSACTION;
+
+update Company set system = FALSE;
+
 alter table BookmarksEntry add groupId LONG;
 
 alter table DLFileEntry add groupId LONG;

@@ -173,7 +173,8 @@ create table Company (
 	virtualHost VARCHAR(75) null,
 	mx VARCHAR(75) null,
 	homeURL STRING null,
-	logoId LONG
+	logoId LONG,
+	system BOOLEAN
 );
 
 create table Contact_ (

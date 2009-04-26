@@ -45,6 +45,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.lar.PortletDataHandlerKeys;
+import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.Layout;
@@ -1052,6 +1053,12 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			long companyId, long groupId, long classNameId, long classPK,
 			String friendlyURL)
 		throws PortalException, SystemException {
+
+		Company company = companyPersistence.findByPrimaryKey(companyId);
+
+		if (company.isSystem()) {
+			return;
+		}
 
 		if (Validator.isNull(friendlyURL)) {
 			return;

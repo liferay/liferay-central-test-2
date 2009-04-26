@@ -60,6 +60,7 @@ public class CompanyJSONSerializer {
 		jsonObj.put("mx", model.getMx());
 		jsonObj.put("homeURL", model.getHomeURL());
 		jsonObj.put("logoId", model.getLogoId());
+		jsonObj.put("system", model.getSystem());
 
 		return jsonObj;
 	}

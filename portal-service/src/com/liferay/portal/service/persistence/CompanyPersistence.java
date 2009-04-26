@@ -122,6 +122,34 @@ public interface CompanyPersistence extends BasePersistence {
 	public com.liferay.portal.model.Company fetchByLogoId(long logoId,
 		boolean retrieveFromCache) throws com.liferay.portal.SystemException;
 
+	public java.util.List<com.liferay.portal.model.Company> findBySystem(
+		boolean system) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portal.model.Company> findBySystem(
+		boolean system, int start, int end)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portal.model.Company> findBySystem(
+		boolean system, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portal.model.Company findBySystem_First(boolean system,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.NoSuchCompanyException,
+			com.liferay.portal.SystemException;
+
+	public com.liferay.portal.model.Company findBySystem_Last(boolean system,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.NoSuchCompanyException,
+			com.liferay.portal.SystemException;
+
+	public com.liferay.portal.model.Company[] findBySystem_PrevAndNext(
+		long companyId, boolean system,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.NoSuchCompanyException,
+			com.liferay.portal.SystemException;
+
 	public java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException;
@@ -156,6 +184,9 @@ public interface CompanyPersistence extends BasePersistence {
 		throws com.liferay.portal.NoSuchCompanyException,
 			com.liferay.portal.SystemException;
 
+	public void removeBySystem(boolean system)
+		throws com.liferay.portal.SystemException;
+
 	public void removeAll() throws com.liferay.portal.SystemException;
 
 	public int countByWebId(java.lang.String webId)
@@ -168,6 +199,9 @@ public interface CompanyPersistence extends BasePersistence {
 		throws com.liferay.portal.SystemException;
 
 	public int countByLogoId(long logoId)
+		throws com.liferay.portal.SystemException;
+
+	public int countBySystem(boolean system)
 		throws com.liferay.portal.SystemException;
 
 	public int countAll() throws com.liferay.portal.SystemException;

@@ -55,6 +55,7 @@ create unique index IX_B27A301F on ClassName_ (value);
 
 create index IX_38EFE3FD on Company (logoId);
 create index IX_12566EC2 on Company (mx);
+create index IX_35E3E7C6 on Company (system);
 create unique index IX_975996C0 on Company (virtualHost);
 create unique index IX_EC00543C on Company (webId);
 

@@ -84,6 +84,7 @@
 			<hint-collection name="URL" />
 		</field>
 		<field name="logoId" type="long" />
+		<field name="system" type="boolean" />
 	</model>
 	<model name="com.liferay.portal.model.Contact">
 		<default-hints>

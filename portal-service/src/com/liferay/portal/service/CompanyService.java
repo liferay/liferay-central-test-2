@@ -57,7 +57,7 @@ import com.liferay.portal.kernel.annotation.Transactional;
 public interface CompanyService {
 	public com.liferay.portal.model.Company addCompany(java.lang.String webId,
 		java.lang.String virtualHost, java.lang.String mx,
-		java.lang.String shardName)
+		java.lang.String shardName, boolean system)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 

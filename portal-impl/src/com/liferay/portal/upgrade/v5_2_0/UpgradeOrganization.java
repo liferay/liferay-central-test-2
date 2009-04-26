@@ -117,7 +117,7 @@ public class UpgradeOrganization extends UpgradeProcess {
 	}
 
 	protected void updateLocationResources() throws Exception {
-		List<Company> companies = CompanyLocalServiceUtil.getCompanies();
+		List<Company> companies = CompanyLocalServiceUtil.getCompanies(true);
 
 		for (Company company : companies) {
 			for (int scope : ResourceConstants.SCOPES) {

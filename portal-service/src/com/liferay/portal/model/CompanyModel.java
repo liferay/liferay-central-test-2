@@ -80,5 +80,11 @@ public interface CompanyModel extends BaseModel<Company> {
 
 	public void setLogoId(long logoId);
 
+	public boolean getSystem();
+
+	public boolean isSystem();
+
+	public void setSystem(boolean system);
+
 	public Company toEscapedModel();
 }

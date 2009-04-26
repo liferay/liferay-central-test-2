@@ -47,10 +47,10 @@ package com.liferay.portal.service;
 public class CompanyServiceUtil {
 	public static com.liferay.portal.model.Company addCompany(
 		java.lang.String webId, java.lang.String virtualHost,
-		java.lang.String mx, java.lang.String shardName)
+		java.lang.String mx, java.lang.String shardName, boolean system)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return getService().addCompany(webId, virtualHost, mx, shardName);
+		return getService().addCompany(webId, virtualHost, mx, shardName, system);
 	}
 
 	public static com.liferay.portal.model.Company getCompanyById(

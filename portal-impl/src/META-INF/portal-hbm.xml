@@ -65,6 +65,7 @@
 		<property name="mx" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="homeURL" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="logoId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="system" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 	</class>
 	<class name="com.liferay.portal.model.impl.ContactImpl" table="Contact_">
 		<cache usage="read-write" />

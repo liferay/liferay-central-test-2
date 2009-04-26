@@ -127,7 +127,7 @@ public class EditInstanceAction extends PortletAction {
 			// Add instance
 
 			Company company = CompanyServiceUtil.addCompany(
-				webId, virtualHost, mx, shardName);
+				webId, virtualHost, mx, shardName, false);
 
 			ServletContext servletContext =
 				(ServletContext)actionRequest.getAttribute(WebKeys.CTX);

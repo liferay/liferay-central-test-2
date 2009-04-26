@@ -3249,6 +3249,12 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			long[] organizationIds)
 		throws PortalException, SystemException {
 
+		Company company = companyPersistence.findByPrimaryKey(companyId);
+
+		if (company.isSystem()) {
+			return;
+		}
+
 		if (!autoScreenName) {
 			validateScreenName(companyId, userId, screenName);
 		}

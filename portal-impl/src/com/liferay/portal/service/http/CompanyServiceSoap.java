@@ -82,11 +82,11 @@ import java.rmi.RemoteException;
 public class CompanyServiceSoap {
 	public static com.liferay.portal.model.CompanySoap addCompany(
 		java.lang.String webId, java.lang.String virtualHost,
-		java.lang.String mx, java.lang.String shardName)
+		java.lang.String mx, java.lang.String shardName, boolean system)
 		throws RemoteException {
 		try {
 			com.liferay.portal.model.Company returnValue = CompanyServiceUtil.addCompany(webId,
-					virtualHost, mx, shardName);
+					virtualHost, mx, shardName, system);
 
 			return com.liferay.portal.model.CompanySoap.toSoapModel(returnValue);
 		}

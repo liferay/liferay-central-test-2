@@ -50,7 +50,8 @@ import java.util.List;
 public class CompanyServiceImpl extends CompanyServiceBaseImpl {
 
 	public Company addCompany(
-			String webId, String virtualHost, String mx, String shardName)
+			String webId, String virtualHost, String mx,
+			String shardName, boolean system)
 		throws PortalException, SystemException {
 
 		if (!getPermissionChecker().isOmniadmin()) {
@@ -58,7 +59,7 @@ public class CompanyServiceImpl extends CompanyServiceBaseImpl {
 		}
 
 		return companyLocalService.addCompany(
-			webId, virtualHost, mx, shardName);
+			webId, virtualHost, mx, shardName, system);
 	}
 
 	public Company getCompanyById(long companyId)
