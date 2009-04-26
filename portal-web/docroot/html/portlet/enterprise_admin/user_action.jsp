@@ -80,7 +80,7 @@ long userId = user2.getUserId();
 	</c:if>
 
 	<c:if test="<%= UserPermissionUtil.contains(permissionChecker, userId, ActionKeys.DELETE) %>">
-		<c:if test="<%= user.isActive() %>">
+		<c:if test="<%= !user.isActive() %>">
 			<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="restoreUserURL">
 				<portlet:param name="struts_action" value="/enterprise_admin/edit_user" />
 				<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.RESTORE %>" />
