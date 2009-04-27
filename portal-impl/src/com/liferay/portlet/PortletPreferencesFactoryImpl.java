@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Layout;
+import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletApp;
@@ -279,64 +280,8 @@ public class PortletPreferencesFactoryImpl
 			Layout layout, String portletId, String defaultPreferences)
 		throws SystemException {
 
-		return getPortletSetup(0, layout, portletId, defaultPreferences);
-	}
-
-	public PortletPreferences getPortletSetup(
-			long scopeGroupId, Layout layout, String portletId,
-			String defaultPreferences)
-		throws SystemException {
-
-		Portlet portlet = PortletLocalServiceUtil.getPortletById(
-			layout.getCompanyId(), portletId);
-
-		boolean uniquePerLayout = false;
-		boolean uniquePerGroup = false;
-
-		if (portlet.isPreferencesCompanyWide()) {
-			portletId = PortletConstants.getRootPortletId(portletId);
-		}
-		else {
-			if (portlet.isPreferencesUniquePerLayout()) {
-				uniquePerLayout = true;
-
-				if (portlet.isPreferencesOwnedByGroup()) {
-					uniquePerGroup = true;
-				}
-			}
-			else {
-				if (portlet.isPreferencesOwnedByGroup()) {
-					uniquePerGroup = true;
-					portletId = PortletConstants.getRootPortletId(portletId);
-				}
-			}
-		}
-
-		long ownerId = PortletKeys.PREFS_OWNER_ID_DEFAULT;
-		int ownerType = PortletKeys.PREFS_OWNER_TYPE_LAYOUT;
-		long plid = layout.getPlid();
-
-		if (!uniquePerLayout) {
-			plid = PortletKeys.PREFS_PLID_SHARED;
-
-			if (uniquePerGroup) {
-				if (scopeGroupId > 0) {
-					ownerId = scopeGroupId;
-				}
-				else {
-					ownerId = layout.getGroupId();
-				}
-
-				ownerType = PortletKeys.PREFS_OWNER_TYPE_GROUP;
-			}
-			else {
-				ownerId = layout.getCompanyId();
-				ownerType = PortletKeys.PREFS_OWNER_TYPE_COMPANY;
-			}
-		}
-
-		return PortletPreferencesLocalServiceUtil.getPreferences(
-			layout.getCompanyId(), ownerId, ownerType, plid, portletId,
+		return getPortletSetup(
+			LayoutConstants.DEFAULT_PLID, layout, portletId,
 			defaultPreferences);
 	}
 
@@ -352,8 +297,8 @@ public class PortletPreferencesFactoryImpl
 			String defaultPreferences)
 		throws SystemException {
 
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)request.getAttribute(WebKeys.THEME_DISPLAY);
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		return getPortletSetup(
 			themeDisplay.getScopeGroupId(), themeDisplay.getLayout(), portletId,
@@ -416,6 +361,64 @@ public class PortletPreferencesFactoryImpl
 
 			return preferencesValidator;
 		}
+	}
+
+	protected PortletPreferences getPortletSetup(
+			long scopeGroupId, Layout layout, String portletId,
+			String defaultPreferences)
+		throws SystemException {
+
+		Portlet portlet = PortletLocalServiceUtil.getPortletById(
+			layout.getCompanyId(), portletId);
+
+		boolean uniquePerLayout = false;
+		boolean uniquePerGroup = false;
+
+		if (portlet.isPreferencesCompanyWide()) {
+			portletId = PortletConstants.getRootPortletId(portletId);
+		}
+		else {
+			if (portlet.isPreferencesUniquePerLayout()) {
+				uniquePerLayout = true;
+
+				if (portlet.isPreferencesOwnedByGroup()) {
+					uniquePerGroup = true;
+				}
+			}
+			else {
+				if (portlet.isPreferencesOwnedByGroup()) {
+					uniquePerGroup = true;
+					portletId = PortletConstants.getRootPortletId(portletId);
+				}
+			}
+		}
+
+		long ownerId = PortletKeys.PREFS_OWNER_ID_DEFAULT;
+		int ownerType = PortletKeys.PREFS_OWNER_TYPE_LAYOUT;
+		long plid = layout.getPlid();
+
+		if (!uniquePerLayout) {
+			plid = PortletKeys.PREFS_PLID_SHARED;
+
+			if (uniquePerGroup) {
+				if (scopeGroupId > LayoutConstants.DEFAULT_PLID) {
+					ownerId = scopeGroupId;
+				}
+				else {
+					ownerId = layout.getGroupId();
+				}
+
+				ownerType = PortletKeys.PREFS_OWNER_TYPE_GROUP;
+			}
+			else {
+				ownerId = layout.getCompanyId();
+				ownerType = PortletKeys.PREFS_OWNER_TYPE_COMPANY;
+			}
+		}
+
+		return PortletPreferencesLocalServiceUtil.getPreferences(
+			layout.getCompanyId(), ownerId, ownerType, plid, portletId,
+			defaultPreferences);
 	}
 
 }

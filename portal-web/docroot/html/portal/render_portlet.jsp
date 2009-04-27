@@ -694,7 +694,6 @@ if (group.getName().equals(GroupConstants.CONTROL_PANEL)) {
 	if (!portlet.isPreferencesUniquePerLayout()) {
 		portletDisplay.setShowConfigurationIcon(true);
 	}
-
 }
 
 // Make sure the Tiles context is reset for the next portlet
