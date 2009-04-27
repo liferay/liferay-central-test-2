@@ -79,8 +79,8 @@ public class IndexWriterFactory {
 		// Create semaphores for all companies
 
 		try {
-			List<Company> companies =
-					CompanyLocalServiceUtil.getCompanies(false);
+			List<Company> companies = CompanyLocalServiceUtil.getCompanies(
+				false);
 
 			for (Company company : companies) {
 				_lockLookup.put(company.getCompanyId(), new Semaphore(1));

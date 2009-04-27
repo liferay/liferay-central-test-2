@@ -134,9 +134,14 @@ public class CompanyLocalServiceUtil {
 		getService().checkCompanyKey(companyId);
 	}
 
+	public static java.util.List<com.liferay.portal.model.Company> getCompanies()
+		throws com.liferay.portal.SystemException {
+		return getService().getCompanies();
+	}
+
 	public static java.util.List<com.liferay.portal.model.Company> getCompanies(
-		boolean includeSystems) throws com.liferay.portal.SystemException {
-		return getService().getCompanies(includeSystems);
+		boolean system) throws com.liferay.portal.SystemException {
+		return getService().getCompanies(system);
 	}
 
 	public static com.liferay.portal.model.Company getCompanyById(

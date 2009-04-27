@@ -42,7 +42,7 @@ headerNames.add("num-of-users");
 
 SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
 
-List companies = CompanyLocalServiceUtil.getCompanies(false);
+List<Company> companies = CompanyLocalServiceUtil.getCompanies(false);
 
 int total = companies.size();
 

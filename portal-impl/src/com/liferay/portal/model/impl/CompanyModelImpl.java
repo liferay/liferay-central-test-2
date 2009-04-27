@@ -252,9 +252,7 @@ public class CompanyModelImpl extends BaseModelImpl<Company> {
 	}
 
 	public void setSystem(boolean system) {
-		if (system != _system) {
-			_system = system;
-		}
+		_system = system;
 	}
 
 	public Company toEscapedModel() {
@@ -371,6 +369,8 @@ public class CompanyModelImpl extends BaseModelImpl<Company> {
 		sb.append(getHomeURL());
 		sb.append(", logoId=");
 		sb.append(getLogoId());
+		sb.append(", system=");
+		sb.append(getSystem());
 		sb.append("}");
 
 		return sb.toString();
@@ -414,6 +414,10 @@ public class CompanyModelImpl extends BaseModelImpl<Company> {
 		sb.append(
 			"<column><column-name>logoId</column-name><column-value><![CDATA[");
 		sb.append("getLogoId()");
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>system</column-name><column-value><![CDATA[");
+		sb.append("getSystem()");
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");

@@ -121,13 +121,14 @@ public class EditInstanceAction extends PortletAction {
 		String mx = ParamUtil.getString(actionRequest, "mx");
 		String shardName = ParamUtil.getString(
 			actionRequest, "shardName", PropsValues.SHARD_DEFAULT_NAME);
+		boolean system = false;
 
 		if (companyId <= 0) {
 
 			// Add instance
 
 			Company company = CompanyServiceUtil.addCompany(
-				webId, virtualHost, mx, shardName, false);
+				webId, virtualHost, mx, shardName, system);
 
 			ServletContext servletContext =
 				(ServletContext)actionRequest.getAttribute(WebKeys.CTX);
