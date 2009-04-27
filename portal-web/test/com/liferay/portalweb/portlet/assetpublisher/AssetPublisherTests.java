@@ -64,6 +64,8 @@ public class AssetPublisherTests extends BaseTests {
 		testSuite.addTestSuite(AssertBlogCommentsTest.class);
 		testSuite.addTestSuite(EnableBlogCommentsRatingsTest.class);
 		testSuite.addTestSuite(AssertBlogCommentsRatingsTest.class);
+		testSuite.addTestSuite(EnableBlogViewCountTest.class);
+		testSuite.addTestSuite(AssertBlogViewCountTest.class);
 		testSuite.addTestSuite(EditDynamicConfigurationBookmarkTest.class);
 		testSuite.addTestSuite(VerifyDynamicConfigurationBookmarkTest.class);
 		testSuite.addTestSuite(EditDynamicConfigurationDocumentTest.class);
