@@ -2231,6 +2231,16 @@
 		</attribute>
 	</tag>
 	<tag>
+		<name>staging</name>
+		<tag-class>com.liferay.taglib.ui.StagingTag</tag-class>
+		<body-content>JSP</body-content>
+		<attribute>
+			<name>page</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	<tag>
 		<name>success</name>
 		<tag-class>com.liferay.taglib.ui.SuccessTag</tag-class>
 		<body-content>JSP</body-content>
