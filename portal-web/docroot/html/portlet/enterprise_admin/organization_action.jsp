@@ -102,8 +102,8 @@ long organizationGroupId = organization.getGroup().getGroupId();
 
 	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="viewUsersURL">
 		<portlet:param name="struts_action" value="/enterprise_admin/view" />
-		<portlet:param name="viewUsersRedirect" value="<%= currentURL %>" />
 		<portlet:param name="tabs1" value="users" />
+		<portlet:param name="viewUsersRedirect" value="<%= currentURL %>" />
 		<portlet:param name="organizationId" value="<%= String.valueOf(organizationId) %>" />
 	</portlet:renderURL>
 

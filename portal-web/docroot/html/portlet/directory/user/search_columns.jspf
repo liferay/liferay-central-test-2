@@ -47,23 +47,12 @@
 	href="<%= rowURL %>"
 	name="job-title"
 	orderable="<%= true %>"
-	value="<%= user2.getContact().getJobTitle() %>"
+	value="<%= user2.getJobTitle() %>"
 />
 
 <liferay-ui:search-container-column-text
-	buffer="buffer"
 	href="<%= rowURL %>"
 	name="organizations"
 >
-
-	<%
-	List organizations = user2.getOrganizations();
-
-	if (filterManageableOrganizations) {
-		organizations = OrganizationLocalServiceUtil.getSubsetOrganizations(organizations, manageableOrganizations);
-	}
-
-	buffer.append(ListUtil.toString(organizations, "name", ", "));
-	%>
-
+	<liferay-ui:write bean="<%= user2 %>" property="organizations" />
 </liferay-ui:search-container-column-text>

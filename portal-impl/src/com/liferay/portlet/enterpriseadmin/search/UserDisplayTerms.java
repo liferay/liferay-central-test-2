@@ -23,6 +23,7 @@
 package com.liferay.portlet.enterpriseadmin.search;
 
 import com.liferay.portal.kernel.dao.search.DisplayTerms;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
 
@@ -63,8 +64,10 @@ public class UserDisplayTerms extends DisplayTerms {
 		screenName = ParamUtil.getString(portletRequest, SCREEN_NAME);
 		emailAddress = ParamUtil.getString(portletRequest, EMAIL_ADDRESS);
 
-		if (Validator.isNotNull(ParamUtil.getString(portletRequest, ACTIVE))) {
-			active = ParamUtil.getBoolean(portletRequest, ACTIVE, true);
+		String activeString = ParamUtil.getString(portletRequest, ACTIVE);
+
+		if (Validator.isNotNull(activeString)) {
+			active = GetterUtil.getBoolean(activeString);
 		}
 
 		organizationId = ParamUtil.getLong(portletRequest, ORGANIZATION_ID);

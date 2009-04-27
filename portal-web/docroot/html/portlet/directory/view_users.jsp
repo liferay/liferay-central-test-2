@@ -32,16 +32,10 @@ String viewUsersRedirect = ParamUtil.getString(request, "viewUsersRedirect");
 if (Validator.isNotNull(viewUsersRedirect)) {
 	portletURL.setParameter("viewUsersRedirect", viewUsersRedirect);
 }
-
-List<Organization> manageableOrganizations = null;
 %>
 
 <c:if test="<%= Validator.isNotNull(viewUsersRedirect) %>">
 	<input name="<portlet:namespace />viewUsersRedirect" type="hidden" value="<%= HtmlUtil.escape(viewUsersRedirect) %>" />
-
-	<div align="right">
-		<a href="<%= HtmlUtil.escape(viewUsersRedirect) %>">&laquo;<liferay-ui:message key="back" /></a>
-	</div>
 </c:if>
 
 <liferay-ui:search-container

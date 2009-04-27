@@ -38,14 +38,11 @@ if (Validator.isNotNull(viewOrganizationsRedirect)) {
 
 <liferay-util:include page="/html/portlet/enterprise_admin/organization/toolbar.jsp">
 	<liferay-util:param name="toolbarItem" value="view-all" />
+	<liferay-util:param name="backURL" value="<%= viewOrganizationsRedirect %>" />
 </liferay-util:include>
 
 <c:if test="<%= Validator.isNotNull(viewOrganizationsRedirect) %>">
 	<input name="<portlet:namespace />viewOrganizationsRedirect" type="hidden" value="<%= HtmlUtil.escape(viewOrganizationsRedirect) %>" />
-
-	<div align="right">
-		<a href="<%= HtmlUtil.escape(viewOrganizationsRedirect) %>">&laquo;<liferay-ui:message key="back" /></a>
-	</div>
 </c:if>
 
 <liferay-ui:search-container
@@ -106,10 +103,12 @@ if (Validator.isNotNull(viewOrganizationsRedirect)) {
 		<c:if test="<%= !results.isEmpty() %>">
 			<div class="separator"><!-- --></div>
 
-			<input type="button" value="<liferay-ui:message key="delete" />" onClick="<portlet:namespace />deleteOrganizations();" />
+			<div>
+				<input type="button" value="<liferay-ui:message key="delete" />" onClick="<portlet:namespace />deleteOrganizations();" />
+			</div>
 		</c:if>
 
-		<br /><br />
+		<br />
 
 		<liferay-ui:search-iterator />
 	</c:if>

@@ -38,14 +38,11 @@ if (Validator.isNotNull(viewUsersRedirect)) {
 
 <liferay-util:include page="/html/portlet/enterprise_admin/user/toolbar.jsp">
 	<liferay-util:param name="toolbarItem" value="view-all" />
+	<liferay-util:param name="backURL" value="<%= viewUsersRedirect %>" />
 </liferay-util:include>
 
 <c:if test="<%= Validator.isNotNull(viewUsersRedirect) %>">
 	<input name="<portlet:namespace />viewUsersRedirect" type="hidden" value="<%= HtmlUtil.escape(viewUsersRedirect) %>" />
-
-	<div align="right">
-		<a href="<%= HtmlUtil.escape(viewUsersRedirect) %>">&laquo;<liferay-ui:message key="back" /></a>
-	</div>
 </c:if>
 
 <liferay-ui:search-container
@@ -170,7 +167,7 @@ if (Validator.isNotNull(viewUsersRedirect)) {
 		boolean hasButtons = false;
 		%>
 
-		<c:if test="<%= (searchTerms.hasActive()) && (searchTerms.isActive() || (!searchTerms.isActive() && PropsValues.USERS_DELETE)) %>">
+		<c:if test="<%= searchTerms.hasActive() && (searchTerms.isActive() || (!searchTerms.isActive() && PropsValues.USERS_DELETE)) %>">
 
 			<%
 			hasButtons = true;
@@ -179,7 +176,7 @@ if (Validator.isNotNull(viewUsersRedirect)) {
 			<input type="button" value='<%= LanguageUtil.get(pageContext, (searchTerms.isActive() ? Constants.DEACTIVATE : Constants.DELETE)) %>' onClick="<portlet:namespace />deleteUsers('<%= searchTerms.isActive() ? Constants.DEACTIVATE : Constants.DELETE %>');" />
 		</c:if>
 
-		<c:if test="<%= (searchTerms.hasActive()) && !searchTerms.isActive() %>">
+		<c:if test="<%= searchTerms.hasActive() && !searchTerms.isActive() %>">
 
 			<%
 			hasButtons = true;

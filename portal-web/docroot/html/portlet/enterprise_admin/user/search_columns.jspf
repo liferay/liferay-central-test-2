@@ -47,7 +47,7 @@
 	href="<%= rowURL %>"
 	name="job-title"
 	orderable="<%= true %>"
-	value="<%= user2.getContact().getJobTitle() %>"
+	value="<%= user2.getJobTitle() %>"
 />
 
 <liferay-ui:search-container-column-text
