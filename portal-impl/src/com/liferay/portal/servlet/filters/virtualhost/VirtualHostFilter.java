@@ -253,7 +253,7 @@ public class VirtualHostFilter extends BasePortalFilter {
 				forwardURL.append(friendlyURL);
 
 				if (_log.isDebugEnabled()) {
-					_log.debug("Forwarding to " + forwardURL);
+					_log.debug("Forward to " + forwardURL);
 				}
 
 				RequestDispatcher requestDispatcher =
