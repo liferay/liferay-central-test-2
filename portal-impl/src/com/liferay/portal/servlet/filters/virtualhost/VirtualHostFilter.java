@@ -227,16 +227,16 @@ public class VirtualHostFilter extends BasePortalFilter {
 
 				prefix.append(group.getFriendlyURL());
 
-				StringBuilder redirect = new StringBuilder();
+				StringBuilder forwardURL = new StringBuilder();
 
 				if (i18nLanguageId != null) {
-					redirect.append(i18nLanguageId);
+					forwardURL.append(i18nLanguageId);
 				}
 
 				if (friendlyURL.startsWith(
 						PropsValues.WIDGET_SERVLET_MAPPING)) {
 
-					redirect.append(PropsValues.WIDGET_SERVLET_MAPPING);
+					forwardURL.append(PropsValues.WIDGET_SERVLET_MAPPING);
 
 					friendlyURL = StringUtil.replaceFirst(
 						friendlyURL, PropsValues.WIDGET_SERVLET_MAPPING,
@@ -247,24 +247,17 @@ public class VirtualHostFilter extends BasePortalFilter {
 					companyId, friendlyURL);
 
 				if (plid <= 0) {
-					redirect.append(prefix);
+					forwardURL.append(prefix);
 				}
 
-				redirect.append(friendlyURL);
-
-				String query = request.getQueryString();
-
-				if (query != null) {
-					redirect.append(StringPool.QUESTION);
-					redirect.append(query);
-				}
+				forwardURL.append(friendlyURL);
 
 				if (_log.isDebugEnabled()) {
-					_log.debug("Redirect to " + redirect);
+					_log.debug("Forwarding to " + forwardURL);
 				}
 
 				RequestDispatcher requestDispatcher =
-					_servletContext.getRequestDispatcher(redirect.toString());
+					_servletContext.getRequestDispatcher(forwardURL.toString());
 
 				requestDispatcher.forward(servletRequest, response);
 
