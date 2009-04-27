@@ -80,7 +80,7 @@ long userId = user2.getUserId();
 	</c:if>
 
 	<c:if test="<%= UserPermissionUtil.contains(permissionChecker, userId, ActionKeys.DELETE) %>">
-		<c:if test="<%= !user.isActive() %>">
+		<c:if test="<%= !user2.isActive() %>">
 			<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="restoreUserURL">
 				<portlet:param name="struts_action" value="/enterprise_admin/edit_user" />
 				<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.RESTORE %>" />
@@ -100,10 +100,10 @@ long userId = user2.getUserId();
 
 		<c:if test="<%= userId != user.getUserId() %>">
 			<c:choose>
-				<c:when test="<%= user.isActive() %>">
+				<c:when test="<%= user2.isActive() %>">
 					<liferay-ui:icon-deactivate url="<%= deleteUserURL %>" />
 				</c:when>
-				<c:when test="<%= !user.isActive() && PropsValues.USERS_DELETE %>">
+				<c:when test="<%= !user2.isActive() && PropsValues.USERS_DELETE %>">
 					<liferay-ui:icon-delete url="<%= deleteUserURL %>" />
 				</c:when>
 			</c:choose>
