@@ -62,7 +62,7 @@ import javax.servlet.http.HttpSession;
  */
 public class SecureFilter extends BasePortalFilter {
 
-	public void init(FilterConfig filterConfig) {
+	public void init(FilterConfig filterConfig) throws ServletException {
 		super.init(filterConfig);
 
 		_basicAuthEnabled = GetterUtil.getBoolean(

@@ -74,7 +74,7 @@ public class CacheFilter extends BasePortalFilter {
 
 	public static final String SKIP_FILTER = CacheFilter.class + "SKIP_FILTER";
 
-	public void init(FilterConfig filterConfig) {
+	public void init(FilterConfig filterConfig) throws ServletException {
 		super.init(filterConfig);
 
 		_pattern = GetterUtil.getInteger(

@@ -55,7 +55,7 @@ import javax.servlet.http.HttpSession;
  */
 public class HeaderFilter extends BasePortalFilter {
 
-	public void init(FilterConfig filterConfig) {
+	public void init(FilterConfig filterConfig) throws ServletException {
 		super.init(filterConfig);
 
 		_filterConfig = filterConfig;

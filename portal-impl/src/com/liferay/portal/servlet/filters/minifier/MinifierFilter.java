@@ -62,7 +62,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class MinifierFilter extends BasePortalFilter {
 
-	public void init(FilterConfig filterConfig) {
+	public void init(FilterConfig filterConfig) throws ServletException {
 		super.init(filterConfig);
 
 		_servletContext = filterConfig.getServletContext();
