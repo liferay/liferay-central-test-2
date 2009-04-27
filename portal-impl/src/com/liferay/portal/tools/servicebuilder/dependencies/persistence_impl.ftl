@@ -2155,7 +2155,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 			try {
 				session = openSession();
 
-				SQLQuery q = session.createSQLQuery("SELECT right${pkColumn.methodName} FROM ${entity.table} WHERE (${scopeColumn.name} = ?) AND (parent${pkColumn.methodName} = ?) ORDER BY ${pkColumn.name} DESC");
+				SQLQuery q = session.createSQLQuery("SELECT right${pkColumn.methodName} FROM ${entity.table} WHERE (${scopeColumn.name} = ?) AND (parent${pkColumn.methodName} = ?) ORDER BY right${pkColumn.methodName} DESC");
 
 				q.addScalar("right${pkColumn.methodName}", Type.LONG);
 
@@ -2170,7 +2170,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 					if (parent${pkColumn.methodName} > 0) {
 						${entity.name} parent${entity.name} = findByPrimaryKey(parent${pkColumn.methodName});
 
-						return parent${entity.name}.getRight${pkColumn.methodName}();
+						return parent${entity.name}.getLeft${pkColumn.methodName}();
 					}
 
 					return 0;

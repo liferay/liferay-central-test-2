@@ -2377,7 +2377,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl
 			session = openSession();
 
 			SQLQuery q = session.createSQLQuery(
-					"SELECT rightOrganizationId FROM Organization_ WHERE (companyId = ?) AND (parentOrganizationId = ?) ORDER BY organizationId DESC");
+					"SELECT rightOrganizationId FROM Organization_ WHERE (companyId = ?) AND (parentOrganizationId = ?) ORDER BY rightOrganizationId DESC");
 
 			q.addScalar("rightOrganizationId", Type.LONG);
 
@@ -2392,7 +2392,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl
 				if (parentOrganizationId > 0) {
 					Organization parentOrganization = findByPrimaryKey(parentOrganizationId);
 
-					return parentOrganization.getRightOrganizationId();
+					return parentOrganization.getLeftOrganizationId();
 				}
 
 				return 0;
