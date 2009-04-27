@@ -49,7 +49,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public abstract class BaseFilter implements Filter {
 
-	public void init(FilterConfig filterConfig) {
+	public void init(FilterConfig filterConfig) throws ServletException {
 		_filterConfig = filterConfig;
 
 		String urlRegexPattern = GetterUtil.getString(
