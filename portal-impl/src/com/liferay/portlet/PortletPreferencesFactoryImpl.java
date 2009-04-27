@@ -279,6 +279,14 @@ public class PortletPreferencesFactoryImpl
 			Layout layout, String portletId, String defaultPreferences)
 		throws SystemException {
 
+		return getPortletSetup(0, layout, portletId, defaultPreferences);
+	}
+
+	public PortletPreferences getPortletSetup(
+			long scopeGroupId, Layout layout, String portletId,
+			String defaultPreferences)
+		throws SystemException {
+
 		Portlet portlet = PortletLocalServiceUtil.getPortletById(
 			layout.getCompanyId(), portletId);
 
@@ -312,7 +320,13 @@ public class PortletPreferencesFactoryImpl
 			plid = PortletKeys.PREFS_PLID_SHARED;
 
 			if (uniquePerGroup) {
-				ownerId = layout.getGroupId();
+				if (scopeGroupId > 0) {
+					ownerId = scopeGroupId;
+				}
+				else {
+					ownerId = layout.getGroupId();
+				}
+
 				ownerType = PortletKeys.PREFS_OWNER_TYPE_GROUP;
 			}
 			else {
@@ -338,9 +352,12 @@ public class PortletPreferencesFactoryImpl
 			String defaultPreferences)
 		throws SystemException {
 
-		Layout layout = (Layout)request.getAttribute(WebKeys.LAYOUT);
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)request.getAttribute(WebKeys.THEME_DISPLAY);
 
-		return getPortletSetup(layout, portletId, defaultPreferences);
+		return getPortletSetup(
+			themeDisplay.getScopeGroupId(), themeDisplay.getLayout(), portletId,
+			defaultPreferences);
 	}
 
 	public PortletPreferences getPortletSetup(PortletRequest portletRequest)

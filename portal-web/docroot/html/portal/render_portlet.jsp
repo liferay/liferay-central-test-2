@@ -685,11 +685,15 @@ if (themeDisplay.isWidget()) {
 
 if (group.getName().equals(GroupConstants.CONTROL_PANEL)) {
 	portletDisplay.setShowBackIcon(false);
-	portletDisplay.setShowConfigurationIcon(false);
 	portletDisplay.setShowMaxIcon(false);
 	portletDisplay.setShowMinIcon(false);
 	portletDisplay.setShowMoveIcon(false);
 	portletDisplay.setShowPortletCssIcon(false);
+
+	if (!portlet.isPreferencesUniquePerLayout()) {
+		portletDisplay.setShowConfigurationIcon(true);
+	}
+
 }
 
 // Make sure the Tiles context is reset for the next portlet
