@@ -35,9 +35,9 @@ import com.liferay.portlet.documentlibrary.model.DLFileEntry;
  */
 public class FileEntryModifiedDateComparator extends OrderByComparator {
 
-	public static String ORDER_BY_ASC = "DLFileEntry.modifiedDate ASC";
+	public static String ORDER_BY_ASC = "modifiedDate ASC";
 
-	public static String ORDER_BY_DESC = "DLFileEntry.modifiedDate DESC";
+	public static String ORDER_BY_DESC = "modifiedDate DESC";
 
 	public FileEntryModifiedDateComparator() {
 		this(false);
