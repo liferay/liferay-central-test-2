@@ -141,6 +141,37 @@ public interface MBThreadPersistence extends BasePersistence {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.messageboards.NoSuchThreadException;
 
+	public java.util.List<com.liferay.portlet.messageboards.model.MBThread> findByC_L(
+		long categoryId, java.util.Date lastPostDate)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.messageboards.model.MBThread> findByC_L(
+		long categoryId, java.util.Date lastPostDate, int start, int end)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.messageboards.model.MBThread> findByC_L(
+		long categoryId, java.util.Date lastPostDate, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.messageboards.model.MBThread findByC_L_First(
+		long categoryId, java.util.Date lastPostDate,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.messageboards.NoSuchThreadException;
+
+	public com.liferay.portlet.messageboards.model.MBThread findByC_L_Last(
+		long categoryId, java.util.Date lastPostDate,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.messageboards.NoSuchThreadException;
+
+	public com.liferay.portlet.messageboards.model.MBThread[] findByC_L_PrevAndNext(
+		long threadId, long categoryId, java.util.Date lastPostDate,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.messageboards.NoSuchThreadException;
+
 	public java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException;
@@ -165,12 +196,18 @@ public interface MBThreadPersistence extends BasePersistence {
 	public void removeByCategoryId(long categoryId)
 		throws com.liferay.portal.SystemException;
 
+	public void removeByC_L(long categoryId, java.util.Date lastPostDate)
+		throws com.liferay.portal.SystemException;
+
 	public void removeAll() throws com.liferay.portal.SystemException;
 
 	public int countByGroupId(long groupId)
 		throws com.liferay.portal.SystemException;
 
 	public int countByCategoryId(long categoryId)
+		throws com.liferay.portal.SystemException;
+
+	public int countByC_L(long categoryId, java.util.Date lastPostDate)
 		throws com.liferay.portal.SystemException;
 
 	public int countAll() throws com.liferay.portal.SystemException;

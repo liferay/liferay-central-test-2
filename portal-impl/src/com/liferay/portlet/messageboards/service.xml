@@ -403,6 +403,10 @@
 		<finder name="CategoryId" return-type="Collection">
 			<finder-column name="categoryId" />
 		</finder>
+		<finder name="C_L" return-type="Collection">
+			<finder-column name="categoryId" />
+			<finder-column name="lastPostDate" />
+		</finder>
 
 		<!-- References -->
 

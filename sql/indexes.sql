@@ -269,6 +269,7 @@ create unique index IX_9168E2C9 on MBStatsUser (groupId, userId);
 create index IX_847F92B5 on MBStatsUser (userId);
 
 create index IX_CB854772 on MBThread (categoryId);
+create index IX_19D8B60A on MBThread (categoryId, lastPostDate);
 create index IX_95C0EA45 on MBThread (groupId);
 
 create index IX_8A1CC4B on MembershipRequest (groupId);
