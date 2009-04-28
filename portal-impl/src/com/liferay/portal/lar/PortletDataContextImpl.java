@@ -47,12 +47,16 @@ import com.liferay.portlet.journal.model.impl.JournalArticleImpl;
 import com.liferay.portlet.journal.model.impl.JournalFeedImpl;
 import com.liferay.portlet.journal.model.impl.JournalStructureImpl;
 import com.liferay.portlet.journal.model.impl.JournalTemplateImpl;
+import com.liferay.portlet.messageboards.model.MBDiscussion;
 import com.liferay.portlet.messageboards.model.MBMessage;
+import com.liferay.portlet.messageboards.model.MBThread;
 import com.liferay.portlet.messageboards.model.impl.MBBanImpl;
 import com.liferay.portlet.messageboards.model.impl.MBCategoryImpl;
 import com.liferay.portlet.messageboards.model.impl.MBMessageFlagImpl;
 import com.liferay.portlet.messageboards.model.impl.MBMessageImpl;
+import com.liferay.portlet.messageboards.service.MBDiscussionLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
+import com.liferay.portlet.messageboards.service.MBThreadLocalServiceUtil;
 import com.liferay.portlet.polls.model.impl.PollsChoiceImpl;
 import com.liferay.portlet.polls.model.impl.PollsQuestionImpl;
 import com.liferay.portlet.polls.model.impl.PollsVoteImpl;
@@ -535,6 +539,9 @@ public class PortletDataContextImpl implements PortletDataContext {
 			return;
 		}
 
+		MBDiscussion discussion = MBDiscussionLocalServiceUtil.getDiscussion(
+			classObj.getName(), newClassPK);
+
 		for (MBMessage message : messages) {
 			long userId = getUserId(message.getUserUuid());
 			long parentMessageId = MapUtil.getLong(
@@ -543,18 +550,34 @@ public class PortletDataContextImpl implements PortletDataContext {
 			long threadId = MapUtil.getLong(
 				threadPKs, message.getThreadId(), message.getThreadId());
 
-			ServiceContext serviceContext = new ServiceContext();
+			if ((message.getParentMessageId() ==
+					MBMessageImpl.DEFAULT_PARENT_MESSAGE_ID) &&
+				(discussion != null)) {
 
-			serviceContext.setScopeGroupId(groupId);
+				MBThread thread = MBThreadLocalServiceUtil.getThread(
+					discussion.getThreadId());
 
-			MBMessage newMessage =
-				MBMessageLocalServiceUtil.addDiscussionMessage(
-					userId, message.getUserName(), classObj.getName(),
-					newClassPK, threadId, parentMessageId, message.getSubject(),
-					message.getBody(), serviceContext);
+				long rootMessageId = thread.getRootMessageId();
 
-			messagePKs.put(message.getMessageId(), newMessage.getMessageId());
-			threadPKs.put(message.getThreadId(), newMessage.getThreadId());
+				messagePKs.put(message.getMessageId(), rootMessageId);
+				threadPKs.put(message.getThreadId(), thread.getThreadId());
+			}
+			else {
+				ServiceContext serviceContext = new ServiceContext();
+
+				serviceContext.setScopeGroupId(groupId);
+
+				MBMessage newMessage =
+					MBMessageLocalServiceUtil.addDiscussionMessage(
+						userId, message.getUserName(), classObj.getName(),
+						newClassPK, threadId, parentMessageId,
+						message.getSubject(), message.getBody(),
+						serviceContext);
+
+				messagePKs.put(
+					message.getMessageId(), newMessage.getMessageId());
+				threadPKs.put(message.getThreadId(), newMessage.getThreadId());
+			}
 		}
 	}
 
