@@ -55,6 +55,10 @@ if (Validator.isNotNull(viewUsersRedirect)) {
 	<%
 	UserSearchTerms searchTerms = (UserSearchTerms)searchContainer.getSearchTerms();
 
+	if (!searchTerms.isAdvancedSearch() && !searchTerms.hasActive()) {
+		searchTerms.setActive(Boolean.TRUE);
+	}
+
 	long organizationId = searchTerms.getOrganizationId();
 	long roleId = searchTerms.getRoleId();
 	long userGroupId = searchTerms.getUserGroupId();
