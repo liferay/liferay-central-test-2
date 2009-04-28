@@ -91,6 +91,10 @@ public class ServiceContextUtil {
 			ServiceContext serviceContext)
 		throws SystemException {
 
+		if (serviceContext == null) {
+			return null;
+		}
+		
 		PortletPreferencesIds portletPreferencesIds =
 			serviceContext.getPortletPreferencesIds();
 
