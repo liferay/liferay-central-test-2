@@ -381,3 +381,11 @@
 .lfr-portlet-toolbar .lfr-toolbar-button.export-button a {
 	background-image: url(<%= themeImagesPath %>/common/export.png);
 }
+
+.lfr-portlet-toolbar .lfr-toolbar-button.back-button {
+	float: right;
+}
+
+.lfr-portlet-toolbar .lfr-toolbar-button.back-button a {
+	padding: 4px 14px;
+}
