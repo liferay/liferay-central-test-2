@@ -868,7 +868,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 	}
 
 	public void reIndex(WikiPage page) throws SystemException {
-		if (Validator.isNull(page.getRedirectTitle())) {
+		if (Validator.isNotNull(page.getRedirectTitle())) {
 			return;
 		}
 
