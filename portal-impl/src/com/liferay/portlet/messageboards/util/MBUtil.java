@@ -663,6 +663,7 @@ public class MBUtil {
 							companyId, statsUser, entityType, entityValue)) {
 
 						rank[1] = curRank;
+
 						break;
 					}
 				}

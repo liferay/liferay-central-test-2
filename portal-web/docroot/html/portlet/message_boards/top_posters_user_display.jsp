@@ -30,12 +30,11 @@ ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_
 MBStatsUser statsUser = (MBStatsUser)row.getObject();
 
 String[] ranks = MBUtil.getUserRank(preferences, themeDisplay.getLanguageId(), statsUser);
-String rank = ranks[0];
 %>
 
 <liferay-ui:user-display userId="<%= statsUser.getUserId() %>">
-	<c:if test="<%= Validator.isNotNull(rank) %>">
-		<liferay-ui:message key="rank" />: <%= rank %><br />
+	<c:if test="<%= Validator.isNotNull(ranks[0]) %>">
+		<liferay-ui:message key="rank" />: <%= ranks[0] %><br />
 	</c:if>
 
 	<liferay-ui:message key="posts" />: <%= statsUser.getMessageCount() %><br />
