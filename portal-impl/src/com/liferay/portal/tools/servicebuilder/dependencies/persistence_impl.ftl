@@ -1287,6 +1287,25 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 							${entity.varName} = list.get(0);
 
 							cacheResult(${entity.varName});
+
+							if (
+
+							<#list finderColsList as finderCol>
+								<#if finderCol.isPrimitiveType()>
+									(${entity.varName}.get${finderCol.methodName}() != ${finderCol.name})
+								<#else>
+									(${entity.varName}.get${finderCol.methodName}() == null) ||
+									!${entity.varName}.get${finderCol.methodName}().equals(${finderCol.name})
+								</#if>
+
+								<#if finderCol_has_next>
+									||
+								</#if>
+							</#list>
+
+							) {
+								FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_${finder.name?upper_case}, finderArgs, list);
+							}
 						}
 
 						return ${entity.varName};
