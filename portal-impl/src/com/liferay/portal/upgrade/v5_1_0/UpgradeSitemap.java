@@ -62,21 +62,9 @@ public class UpgradeSitemap extends UpgradeProcess {
 	protected void deletePortletPreferences(long portletPreferencesId)
 		throws Exception {
 
-		Connection con = null;
-		PreparedStatement ps = null;
-
-		try {
-			con = DataAccess.getConnection();
-
-			ps = con.prepareStatement(
-				"delete from PortletPreferences where portletPreferencesId = " +
-					portletPreferencesId);
-
-			ps.executeUpdate();
-		}
-		finally {
-			DataAccess.cleanUp(con, ps);
-		}
+		runSQL(
+			"delete from PortletPreferences where portletPreferencesId = " +
+				portletPreferencesId);
 	}
 
 	protected void doUpgrade() throws Exception {
