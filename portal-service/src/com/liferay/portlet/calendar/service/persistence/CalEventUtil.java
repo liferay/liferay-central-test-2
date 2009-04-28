@@ -245,6 +245,47 @@ public class CalEventUtil {
 		return getPersistence().findByGroupId_PrevAndNext(eventId, groupId, obc);
 	}
 
+	public static java.util.List<com.liferay.portlet.calendar.model.CalEvent> findByRemindBy(
+		int remindBy) throws com.liferay.portal.SystemException {
+		return getPersistence().findByRemindBy(remindBy);
+	}
+
+	public static java.util.List<com.liferay.portlet.calendar.model.CalEvent> findByRemindBy(
+		int remindBy, int start, int end)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByRemindBy(remindBy, start, end);
+	}
+
+	public static java.util.List<com.liferay.portlet.calendar.model.CalEvent> findByRemindBy(
+		int remindBy, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByRemindBy(remindBy, start, end, obc);
+	}
+
+	public static com.liferay.portlet.calendar.model.CalEvent findByRemindBy_First(
+		int remindBy, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.calendar.NoSuchEventException {
+		return getPersistence().findByRemindBy_First(remindBy, obc);
+	}
+
+	public static com.liferay.portlet.calendar.model.CalEvent findByRemindBy_Last(
+		int remindBy, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.calendar.NoSuchEventException {
+		return getPersistence().findByRemindBy_Last(remindBy, obc);
+	}
+
+	public static com.liferay.portlet.calendar.model.CalEvent[] findByRemindBy_PrevAndNext(
+		long eventId, int remindBy,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.calendar.NoSuchEventException {
+		return getPersistence()
+				   .findByRemindBy_PrevAndNext(eventId, remindBy, obc);
+	}
+
 	public static java.util.List<com.liferay.portlet.calendar.model.CalEvent> findByG_T(
 		long groupId, java.lang.String type)
 		throws com.liferay.portal.SystemException {
@@ -382,6 +423,11 @@ public class CalEventUtil {
 		getPersistence().removeByGroupId(groupId);
 	}
 
+	public static void removeByRemindBy(int remindBy)
+		throws com.liferay.portal.SystemException {
+		getPersistence().removeByRemindBy(remindBy);
+	}
+
 	public static void removeByG_T(long groupId, java.lang.String type)
 		throws com.liferay.portal.SystemException {
 		getPersistence().removeByG_T(groupId, type);
@@ -414,6 +460,11 @@ public class CalEventUtil {
 	public static int countByGroupId(long groupId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByGroupId(groupId);
+	}
+
+	public static int countByRemindBy(int remindBy)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByRemindBy(remindBy);
 	}
 
 	public static int countByG_T(long groupId, java.lang.String type)

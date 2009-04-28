@@ -389,7 +389,7 @@ public class EditEventAction extends PortletAction {
 			}
 		}
 
-		String remindBy = ParamUtil.getString(actionRequest, "remindBy");
+		int remindBy = ParamUtil.getInteger(actionRequest, "remindBy");
 		int firstReminder = ParamUtil.getInteger(
 			actionRequest, "firstReminder");
 		int secondReminder = ParamUtil.getInteger(

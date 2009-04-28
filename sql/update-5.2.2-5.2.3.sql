@@ -6,6 +6,14 @@ COMMIT_TRANSACTION;
 
 update Company set system = FALSE;
 
+update CalEvent set remindBy = '0' where remindBy = 'none';
+update CalEvent set remindBy = '1' where remindBy = 'email';
+update CalEvent set remindBy = '2' where remindBy = 'sms';
+update CalEvent set remindBy = '3' where remindBy = 'aim';
+update CalEvent set remindBy = '4' where remindBy = 'icq';
+update CalEvent set remindBy = '5' where remindBy = 'msn';
+update CalEvent set remindBy = '6' where remindBy = 'ym';
+
 alter table DLFileEntry add groupId LONG;
 
 alter table DLFileRank add groupId LONG;

@@ -777,7 +777,7 @@
 			<hint-collection name="CLOB" />
 			<hint name="auto-escape">false</hint>
 		</field>
-		<field name="remindBy" type="String" />
+		<field name="remindBy" type="int" />
 		<field name="firstReminder" type="int" />
 		<field name="secondReminder" type="int" />
 	</model>

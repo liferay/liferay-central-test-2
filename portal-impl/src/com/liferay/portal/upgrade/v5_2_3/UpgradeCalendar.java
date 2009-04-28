@@ -20,16 +20,52 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.calendar.service.persistence;
+package com.liferay.portal.upgrade.v5_2_3;
+
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.upgrade.UpgradeException;
+import com.liferay.portal.upgrade.UpgradeProcess;
+import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
+import com.liferay.portal.upgrade.util.UpgradeTable;
+import com.liferay.portlet.calendar.model.impl.CalEventImpl;
 
 /**
- * <a href="CalEventFinder.java.html"><b><i>View Source</i></b></a>
+ * <a href="UpgradeCalendar.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public interface CalEventFinder {
-	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> findByG_SD(
-		long groupId, java.util.Date startDateGT, java.util.Date startDateLT,
-		boolean timeZoneSensitive) throws com.liferay.portal.SystemException;
+public class UpgradeCalendar extends UpgradeProcess {
+
+	public void upgrade() throws UpgradeException {
+		_log.info("Upgrading");
+
+		try {
+			doUpgrade();
+		}
+		catch (Exception e) {
+			throw new UpgradeException(e);
+		}
+	}
+
+	protected void doUpgrade() throws Exception {
+		if (isSupportsAlterColumnName()) {
+			runSQL("alter_column_type CalEvent remindBy INTEGER");
+		}
+		else {
+
+			// CalEvent
+
+			UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
+				CalEventImpl.TABLE_NAME, CalEventImpl.TABLE_COLUMNS);
+
+			upgradeTable.setCreateSQL(CalEventImpl.TABLE_SQL_CREATE);
+
+			upgradeTable.updateTable();
+		}
+	}
+
+	private static Log _log = LogFactoryUtil.getLog(UpgradeCalendar.class);
+
 }

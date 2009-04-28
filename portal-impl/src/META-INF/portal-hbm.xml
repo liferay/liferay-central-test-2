@@ -720,7 +720,7 @@
 		<property name="type" column="type_" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="repeating" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 		<property name="recurrence" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="remindBy" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="remindBy" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 		<property name="firstReminder" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 		<property name="secondReminder" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 	</class>

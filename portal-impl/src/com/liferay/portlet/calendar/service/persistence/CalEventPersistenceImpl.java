@@ -117,6 +117,21 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl
 	public static final FinderPath FINDER_PATH_COUNT_BY_GROUPID = new FinderPath(CalEventModelImpl.ENTITY_CACHE_ENABLED,
 			CalEventModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"countByGroupId", new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_REMINDBY = new FinderPath(CalEventModelImpl.ENTITY_CACHE_ENABLED,
+			CalEventModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByRemindBy", new String[] { Integer.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_REMINDBY = new FinderPath(CalEventModelImpl.ENTITY_CACHE_ENABLED,
+			CalEventModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByRemindBy",
+			new String[] {
+				Integer.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_REMINDBY = new FinderPath(CalEventModelImpl.ENTITY_CACHE_ENABLED,
+			CalEventModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByRemindBy", new String[] { Integer.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_BY_G_T = new FinderPath(CalEventModelImpl.ENTITY_CACHE_ENABLED,
 			CalEventModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findByG_T",
@@ -1245,6 +1260,231 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
+	public List<CalEvent> findByRemindBy(int remindBy)
+		throws SystemException {
+		Object[] finderArgs = new Object[] { new Integer(remindBy) };
+
+		List<CalEvent> list = (List<CalEvent>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_REMINDBY,
+				finderArgs, this);
+
+		if (list == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append(
+					"FROM com.liferay.portlet.calendar.model.CalEvent WHERE ");
+
+				query.append("remindBy != ?");
+
+				query.append(" ");
+
+				query.append("ORDER BY ");
+
+				query.append("startDate ASC, ");
+				query.append("title ASC");
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(remindBy);
+
+				list = q.list();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<CalEvent>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_REMINDBY,
+					finderArgs, list);
+
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	public List<CalEvent> findByRemindBy(int remindBy, int start, int end)
+		throws SystemException {
+		return findByRemindBy(remindBy, start, end, null);
+	}
+
+	public List<CalEvent> findByRemindBy(int remindBy, int start, int end,
+		OrderByComparator obc) throws SystemException {
+		Object[] finderArgs = new Object[] {
+				new Integer(remindBy),
+				
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+			};
+
+		List<CalEvent> list = (List<CalEvent>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_REMINDBY,
+				finderArgs, this);
+
+		if (list == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append(
+					"FROM com.liferay.portlet.calendar.model.CalEvent WHERE ");
+
+				query.append("remindBy != ?");
+
+				query.append(" ");
+
+				if (obc != null) {
+					query.append("ORDER BY ");
+					query.append(obc.getOrderBy());
+				}
+
+				else {
+					query.append("ORDER BY ");
+
+					query.append("startDate ASC, ");
+					query.append("title ASC");
+				}
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(remindBy);
+
+				list = (List<CalEvent>)QueryUtil.list(q, getDialect(), start,
+						end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<CalEvent>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_REMINDBY,
+					finderArgs, list);
+
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	public CalEvent findByRemindBy_First(int remindBy, OrderByComparator obc)
+		throws NoSuchEventException, SystemException {
+		List<CalEvent> list = findByRemindBy(remindBy, 0, 1, obc);
+
+		if (list.isEmpty()) {
+			StringBuilder msg = new StringBuilder();
+
+			msg.append("No CalEvent exists with the key {");
+
+			msg.append("remindBy=" + remindBy);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchEventException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public CalEvent findByRemindBy_Last(int remindBy, OrderByComparator obc)
+		throws NoSuchEventException, SystemException {
+		int count = countByRemindBy(remindBy);
+
+		List<CalEvent> list = findByRemindBy(remindBy, count - 1, count, obc);
+
+		if (list.isEmpty()) {
+			StringBuilder msg = new StringBuilder();
+
+			msg.append("No CalEvent exists with the key {");
+
+			msg.append("remindBy=" + remindBy);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchEventException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public CalEvent[] findByRemindBy_PrevAndNext(long eventId, int remindBy,
+		OrderByComparator obc) throws NoSuchEventException, SystemException {
+		CalEvent calEvent = findByPrimaryKey(eventId);
+
+		int count = countByRemindBy(remindBy);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuilder query = new StringBuilder();
+
+			query.append(
+				"FROM com.liferay.portlet.calendar.model.CalEvent WHERE ");
+
+			query.append("remindBy != ?");
+
+			query.append(" ");
+
+			if (obc != null) {
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
+			}
+
+			else {
+				query.append("ORDER BY ");
+
+				query.append("startDate ASC, ");
+				query.append("title ASC");
+			}
+
+			Query q = session.createQuery(query.toString());
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(remindBy);
+
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, calEvent);
+
+			CalEvent[] array = new CalEventImpl[3];
+
+			array[0] = (CalEvent)objArray[0];
+			array[1] = (CalEvent)objArray[1];
+			array[2] = (CalEvent)objArray[2];
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public List<CalEvent> findByG_T(long groupId, String type)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(groupId), type };
@@ -1908,6 +2148,12 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
+	public void removeByRemindBy(int remindBy) throws SystemException {
+		for (CalEvent calEvent : findByRemindBy(remindBy)) {
+			remove(calEvent);
+		}
+	}
+
 	public void removeByG_T(long groupId, String type)
 		throws SystemException {
 		for (CalEvent calEvent : findByG_T(groupId, type)) {
@@ -2132,6 +2378,54 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl
 				}
 
 				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_GROUPID,
+					finderArgs, count);
+
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	public int countByRemindBy(int remindBy) throws SystemException {
+		Object[] finderArgs = new Object[] { new Integer(remindBy) };
+
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_REMINDBY,
+				finderArgs, this);
+
+		if (count == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append("SELECT COUNT(*) ");
+				query.append(
+					"FROM com.liferay.portlet.calendar.model.CalEvent WHERE ");
+
+				query.append("remindBy != ?");
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(remindBy);
+
+				count = (Long)q.uniqueResult();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_REMINDBY,
 					finderArgs, count);
 
 				closeSession(session);

@@ -45,19 +45,19 @@ public class CalEventImpl extends CalEventModelImpl implements CalEvent {
 
 	public static final String BIRTHDAY = "birthday";
 
-	public static final String REMIND_BY_NONE = "none";
+	public static final int REMIND_BY_AIM = 3;
 
-	public static final String REMIND_BY_EMAIL = "email";
+	public static final int REMIND_BY_EMAIL = 1;
 
-	public static final String REMIND_BY_SMS = "sms";
+	public static final int REMIND_BY_ICQ = 4;
 
-	public static final String REMIND_BY_AIM = "aim";
+	public static final int REMIND_BY_MSN = 5;
 
-	public static final String REMIND_BY_ICQ = "icq";
+	public static final int REMIND_BY_NONE = 0;
 
-	public static final String REMIND_BY_MSN = "msn";
+	public static final int REMIND_BY_SMS = 2;
 
-	public static final String REMIND_BY_YM = "ym";
+	public static final int REMIND_BY_YM = 6;
 
 	public static final long[] REMINDERS = {
 		Time.MINUTE * 5, Time.MINUTE * 15, Time.MINUTE * 30, Time.HOUR,

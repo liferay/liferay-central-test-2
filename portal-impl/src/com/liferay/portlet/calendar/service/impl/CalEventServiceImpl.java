@@ -48,7 +48,7 @@ public class CalEventServiceImpl extends CalEventServiceBaseImpl {
 			int startDateMinute, int endDateMonth, int endDateDay,
 			int endDateYear, int durationHour, int durationMinute,
 			boolean allDay, boolean timeZoneSensitive, String type,
-			boolean repeating, TZSRecurrence recurrence, String remindBy,
+			boolean repeating, TZSRecurrence recurrence, int remindBy,
 			int firstReminder, int secondReminder,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
@@ -118,7 +118,7 @@ public class CalEventServiceImpl extends CalEventServiceBaseImpl {
 			int endDateDay, int endDateYear, int durationHour,
 			int durationMinute, boolean allDay, boolean timeZoneSensitive,
 			String type, boolean repeating, TZSRecurrence recurrence,
-			String remindBy, int firstReminder, int secondReminder,
+			int remindBy, int firstReminder, int secondReminder,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 

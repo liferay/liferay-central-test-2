@@ -155,7 +155,7 @@ create table CalEvent (
 	type_ VARCHAR(75) null,
 	repeating BOOLEAN,
 	recurrence TEXT null,
-	remindBy VARCHAR(75) null,
+	remindBy INTEGER,
 	firstReminder INTEGER,
 	secondReminder INTEGER
 );

@@ -15,14 +15,4 @@
 				(repeating = ?)
 		]]>
 	</sql>
-	<sql id="com.liferay.portlet.calendar.service.persistence.CalEventFinder.findByRemindBy">
-		<![CDATA[
-			SELECT
-				{CalEvent.*}
-			FROM
-				CalEvent
-			WHERE
-				remindBy != ?
-		]]>
-	</sql>
 </custom-sql>

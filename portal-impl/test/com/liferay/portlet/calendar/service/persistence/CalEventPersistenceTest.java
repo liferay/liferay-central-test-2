@@ -90,7 +90,7 @@ public class CalEventPersistenceTest extends BasePersistenceTestCase {
 		newCalEvent.setType(randomString());
 		newCalEvent.setRepeating(randomBoolean());
 		newCalEvent.setRecurrence(randomString());
-		newCalEvent.setRemindBy(randomString());
+		newCalEvent.setRemindBy(nextInt());
 		newCalEvent.setFirstReminder(nextInt());
 		newCalEvent.setSecondReminder(nextInt());
 
@@ -192,7 +192,7 @@ public class CalEventPersistenceTest extends BasePersistenceTestCase {
 		calEvent.setType(randomString());
 		calEvent.setRepeating(randomBoolean());
 		calEvent.setRecurrence(randomString());
-		calEvent.setRemindBy(randomString());
+		calEvent.setRemindBy(nextInt());
 		calEvent.setFirstReminder(nextInt());
 		calEvent.setSecondReminder(nextInt());
 

@@ -182,6 +182,34 @@ public interface CalEventPersistence extends BasePersistence {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.calendar.NoSuchEventException;
 
+	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> findByRemindBy(
+		int remindBy) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> findByRemindBy(
+		int remindBy, int start, int end)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> findByRemindBy(
+		int remindBy, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.calendar.model.CalEvent findByRemindBy_First(
+		int remindBy, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.calendar.NoSuchEventException;
+
+	public com.liferay.portlet.calendar.model.CalEvent findByRemindBy_Last(
+		int remindBy, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.calendar.NoSuchEventException;
+
+	public com.liferay.portlet.calendar.model.CalEvent[] findByRemindBy_PrevAndNext(
+		long eventId, int remindBy,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.calendar.NoSuchEventException;
+
 	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> findByG_T(
 		long groupId, java.lang.String type)
 		throws com.liferay.portal.SystemException;
@@ -275,6 +303,9 @@ public interface CalEventPersistence extends BasePersistence {
 	public void removeByGroupId(long groupId)
 		throws com.liferay.portal.SystemException;
 
+	public void removeByRemindBy(int remindBy)
+		throws com.liferay.portal.SystemException;
+
 	public void removeByG_T(long groupId, java.lang.String type)
 		throws com.liferay.portal.SystemException;
 
@@ -293,6 +324,9 @@ public interface CalEventPersistence extends BasePersistence {
 		throws com.liferay.portal.SystemException;
 
 	public int countByGroupId(long groupId)
+		throws com.liferay.portal.SystemException;
+
+	public int countByRemindBy(int remindBy)
 		throws com.liferay.portal.SystemException;
 
 	public int countByG_T(long groupId, java.lang.String type)

@@ -144,7 +144,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 			int startDateMinute, int endDateMonth, int endDateDay,
 			int endDateYear, int durationHour, int durationMinute,
 			boolean allDay, boolean timeZoneSensitive, String type,
-			boolean repeating, TZSRecurrence recurrence, String remindBy,
+			boolean repeating, TZSRecurrence recurrence, int remindBy,
 			int firstReminder, int secondReminder,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
@@ -164,7 +164,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 			int endDateDay, int endDateYear, int durationHour,
 			int durationMinute, boolean allDay, boolean timeZoneSensitive,
 			String type, boolean repeating, TZSRecurrence recurrence,
-			String remindBy, int firstReminder, int secondReminder,
+			int remindBy, int firstReminder, int secondReminder,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
@@ -329,7 +329,8 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 	}
 
 	public void checkEvents() throws PortalException, SystemException {
-		Iterator<CalEvent> itr = calEventFinder.findByRemindBy().iterator();
+		Iterator<CalEvent> itr = calEventPersistence.findByRemindBy(
+			CalEventImpl.REMIND_BY_NONE).iterator();
 
 		while (itr.hasNext()) {
 			CalEvent event = itr.next();
@@ -770,7 +771,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 			int endDateDay, int endDateYear, int durationHour,
 			int durationMinute, boolean allDay, boolean timeZoneSensitive,
 			String type, boolean repeating, TZSRecurrence recurrence,
-			String remindBy, int firstReminder, int secondReminder,
+			int remindBy, int firstReminder, int secondReminder,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
@@ -1106,7 +1107,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 
 		// Reminder
 
-		String remindBy = "none";
+		int remindBy = CalEventImpl.REMIND_BY_NONE;
 		int firstReminder = 300000;
 		int secondReminder = 300000;
 
@@ -1165,9 +1166,9 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 	}
 
 	protected void remindUser(CalEvent event, User user, Calendar startDate) {
-		String remindBy = event.getRemindBy();
+		int remindBy = event.getRemindBy();
 
-		if (remindBy.equals(CalEventImpl.REMIND_BY_NONE)) {
+		if (remindBy == CalEventImpl.REMIND_BY_NONE) {
 			return;
 		}
 
@@ -1195,7 +1196,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 			String toName = user.getFullName();
 			String toAddress = user.getEmailAddress();
 
-			if (remindBy.equals(CalEventImpl.REMIND_BY_SMS)) {
+			if (remindBy == CalEventImpl.REMIND_BY_SMS) {
 				toAddress = contact.getSmsSn();
 			}
 
@@ -1251,8 +1252,8 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 					toName,
 				});
 
-			if (remindBy.equals(CalEventImpl.REMIND_BY_EMAIL) ||
-				remindBy.equals(CalEventImpl.REMIND_BY_SMS)) {
+			if ((remindBy == CalEventImpl.REMIND_BY_EMAIL) ||
+				(remindBy == CalEventImpl.REMIND_BY_SMS)) {
 
 				InternetAddress from = new InternetAddress(
 					fromAddress, fromName);
@@ -1264,23 +1265,23 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 
 				mailService.sendEmail(message);
 			}
-			else if (remindBy.equals(CalEventImpl.REMIND_BY_AIM) &&
-					 Validator.isNotNull(contact.getAimSn())) {
+			else if ((remindBy == CalEventImpl.REMIND_BY_AIM) &&
+					 (Validator.isNotNull(contact.getAimSn()))) {
 
 				AIMConnector.send(contact.getAimSn(), body);
 			}
-			else if (remindBy.equals(CalEventImpl.REMIND_BY_ICQ) &&
-					 Validator.isNotNull(contact.getIcqSn())) {
+			else if ((remindBy == CalEventImpl.REMIND_BY_ICQ) &&
+					 (Validator.isNotNull(contact.getIcqSn()))) {
 
 				ICQConnector.send(contact.getIcqSn(), body);
 			}
-			else if (remindBy.equals(CalEventImpl.REMIND_BY_MSN) &&
-					 Validator.isNotNull(contact.getMsnSn())) {
+			else if ((remindBy == CalEventImpl.REMIND_BY_MSN) &&
+					 (Validator.isNotNull(contact.getMsnSn()))) {
 
 				MSNConnector.send(contact.getMsnSn(), body);
 			}
-			else if (remindBy.equals(CalEventImpl.REMIND_BY_YM) &&
-					 Validator.isNotNull(contact.getYmSn())) {
+			else if ((remindBy == CalEventImpl.REMIND_BY_YM) &&
+					 (Validator.isNotNull(contact.getYmSn()))) {
 
 				YMConnector.send(contact.getYmSn(), body);
 			}

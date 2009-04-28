@@ -116,8 +116,8 @@ public class CalEventLocalServiceUtil {
 		int endDateDay, int endDateYear, int durationHour, int durationMinute,
 		boolean allDay, boolean timeZoneSensitive, java.lang.String type,
 		boolean repeating,
-		com.liferay.portal.kernel.cal.TZSRecurrence recurrence,
-		java.lang.String remindBy, int firstReminder, int secondReminder,
+		com.liferay.portal.kernel.cal.TZSRecurrence recurrence, int remindBy,
+		int firstReminder, int secondReminder,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
@@ -136,8 +136,8 @@ public class CalEventLocalServiceUtil {
 		int endDateMonth, int endDateDay, int endDateYear, int durationHour,
 		int durationMinute, boolean allDay, boolean timeZoneSensitive,
 		java.lang.String type, boolean repeating,
-		com.liferay.portal.kernel.cal.TZSRecurrence recurrence,
-		java.lang.String remindBy, int firstReminder, int secondReminder,
+		com.liferay.portal.kernel.cal.TZSRecurrence recurrence, int remindBy,
+		int firstReminder, int secondReminder,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
@@ -307,8 +307,8 @@ public class CalEventLocalServiceUtil {
 		int endDateMonth, int endDateDay, int endDateYear, int durationHour,
 		int durationMinute, boolean allDay, boolean timeZoneSensitive,
 		java.lang.String type, boolean repeating,
-		com.liferay.portal.kernel.cal.TZSRecurrence recurrence,
-		java.lang.String remindBy, int firstReminder, int secondReminder,
+		com.liferay.portal.kernel.cal.TZSRecurrence recurrence, int remindBy,
+		int firstReminder, int secondReminder,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {

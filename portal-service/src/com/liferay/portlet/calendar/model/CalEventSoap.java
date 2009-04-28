@@ -261,11 +261,11 @@ public class CalEventSoap implements Serializable {
 		_recurrence = recurrence;
 	}
 
-	public String getRemindBy() {
+	public int getRemindBy() {
 		return _remindBy;
 	}
 
-	public void setRemindBy(String remindBy) {
+	public void setRemindBy(int remindBy) {
 		_remindBy = remindBy;
 	}
 
@@ -304,7 +304,7 @@ public class CalEventSoap implements Serializable {
 	private String _type;
 	private boolean _repeating;
 	private String _recurrence;
-	private String _remindBy;
+	private int _remindBy;
 	private int _firstReminder;
 	private int _secondReminder;
 }

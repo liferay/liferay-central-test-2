@@ -123,7 +123,7 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent> {
 			{ "recurrence", new Integer(Types.CLOB) },
 			
 
-			{ "remindBy", new Integer(Types.VARCHAR) },
+			{ "remindBy", new Integer(Types.INTEGER) },
 			
 
 			{ "firstReminder", new Integer(Types.INTEGER) },
@@ -131,7 +131,7 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent> {
 
 			{ "secondReminder", new Integer(Types.INTEGER) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table CalEvent (uuid_ VARCHAR(75) null,eventId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,title VARCHAR(75) null,description STRING null,startDate DATE null,endDate DATE null,durationHour INTEGER,durationMinute INTEGER,allDay BOOLEAN,timeZoneSensitive BOOLEAN,type_ VARCHAR(75) null,repeating BOOLEAN,recurrence TEXT null,remindBy VARCHAR(75) null,firstReminder INTEGER,secondReminder INTEGER)";
+	public static final String TABLE_SQL_CREATE = "create table CalEvent (uuid_ VARCHAR(75) null,eventId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,title VARCHAR(75) null,description STRING null,startDate DATE null,endDate DATE null,durationHour INTEGER,durationMinute INTEGER,allDay BOOLEAN,timeZoneSensitive BOOLEAN,type_ VARCHAR(75) null,repeating BOOLEAN,recurrence TEXT null,remindBy INTEGER,firstReminder INTEGER,secondReminder INTEGER)";
 	public static final String TABLE_SQL_DROP = "drop table CalEvent";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -382,11 +382,11 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent> {
 		_recurrence = recurrence;
 	}
 
-	public String getRemindBy() {
-		return GetterUtil.getString(_remindBy);
+	public int getRemindBy() {
+		return _remindBy;
 	}
 
-	public void setRemindBy(String remindBy) {
+	public void setRemindBy(int remindBy) {
 		_remindBy = remindBy;
 	}
 
@@ -435,7 +435,7 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent> {
 			model.setType(HtmlUtil.escape(getType()));
 			model.setRepeating(getRepeating());
 			model.setRecurrence(getRecurrence());
-			model.setRemindBy(HtmlUtil.escape(getRemindBy()));
+			model.setRemindBy(getRemindBy());
 			model.setFirstReminder(getFirstReminder());
 			model.setSecondReminder(getSecondReminder());
 
@@ -707,7 +707,7 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent> {
 	private String _type;
 	private boolean _repeating;
 	private String _recurrence;
-	private String _remindBy;
+	private int _remindBy;
 	private int _firstReminder;
 	private int _secondReminder;
 	private transient ExpandoBridge _expandoBridge;

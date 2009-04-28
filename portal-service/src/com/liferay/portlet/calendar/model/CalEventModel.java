@@ -133,9 +133,9 @@ public interface CalEventModel extends BaseModel<CalEvent> {
 
 	public void setRecurrence(String recurrence);
 
-	public String getRemindBy();
+	public int getRemindBy();
 
-	public void setRemindBy(String remindBy);
+	public void setRemindBy(int remindBy);
 
 	public int getFirstReminder();
 
