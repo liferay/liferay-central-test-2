@@ -1070,6 +1070,10 @@ public interface PropsKeys {
 
 	public static final String SESSION_COOKIE_DOMAIN = "session.cookie.domain";
 
+	public static final String SESSION_CREATE_EVENTS = "servlet.session.create.events";
+
+	public static final String SESSION_DESTROY_EVENTS = "servlet.session.destroy.events";
+
 	public static final String SESSION_DISABLED = "session.disabled";
 
 	public static final String SESSION_ENABLE_PERSISTENT_COOKIES = "session.enable.persistent.cookies";

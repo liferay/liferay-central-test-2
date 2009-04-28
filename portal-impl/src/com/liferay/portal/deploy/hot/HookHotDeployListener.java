@@ -31,6 +31,8 @@ import com.liferay.portal.kernel.deploy.hot.HotDeployException;
 import com.liferay.portal.kernel.events.Action;
 import com.liferay.portal.kernel.events.ActionWrapper;
 import com.liferay.portal.kernel.events.InvokerSimpleAction;
+import com.liferay.portal.kernel.events.SessionAction;
+import com.liferay.portal.kernel.events.SessionActionWrapper;
 import com.liferay.portal.kernel.events.SimpleAction;
 import com.liferay.portal.kernel.events.SimpleActionWrapper;
 import com.liferay.portal.kernel.language.LanguageUtil;
@@ -606,6 +608,19 @@ public class HookHotDeployListener
 			return action;
 		}
 
+		if (ArrayUtil.contains(_PROPS_SESSION_EVENTS,eventName)) {
+			SessionAction sessionAction =
+				(SessionAction)portletClassLoader.loadClass(
+					eventClass).newInstance();
+
+			sessionAction = new SessionActionWrapper(
+				sessionAction,portletClassLoader);
+
+			EventsProcessor.registerEvent(eventName, sessionAction);
+
+			return sessionAction;
+		}
+
 		return null;
 	}
 
@@ -624,7 +639,8 @@ public class HookHotDeployListener
 			String key = (String)itr.next();
 
 			if (!key.equals(APPLICATION_STARTUP_EVENTS) &&
-				!ArrayUtil.contains(_PROPS_KEYS_EVENTS, key)) {
+				!ArrayUtil.contains(_PROPS_KEYS_EVENTS, key) &&
+				!ArrayUtil.contains(_PROPS_SESSION_EVENTS, key)) {
 
 				continue;
 			}
@@ -842,6 +858,11 @@ public class HookHotDeployListener
 		LOGOUT_EVENTS_PRE,
 		SERVLET_SERVICE_EVENTS_POST,
 		SERVLET_SERVICE_EVENTS_PRE
+	};
+
+	private static final String[] _PROPS_SESSION_EVENTS = new String[] {
+		SESSION_CREATE_EVENTS,
+		SESSION_DESTROY_EVENTS
 	};
 
 	private static final String[] _PROPS_VALUES_BOOLEAN = new String[] {
