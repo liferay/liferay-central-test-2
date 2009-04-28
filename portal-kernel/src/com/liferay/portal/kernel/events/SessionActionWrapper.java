@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2008 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -18,7 +18,9 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
+ */
 
+/**
  * The contents of this file are subject to the terms of the Common Development
  * and Distribution License (the License). You may not use this file except in
  * compliance with the License.
@@ -34,8 +36,8 @@
  * enclosed by brackets [] replaced by your own identifying information:
  * "Portions Copyrighted [year] [name of copyright owner]"
  *
- * Copyright 2008 Sun Microsystems Inc. All rights reserved.
- **/
+ * Copyright 2009 Sun Microsystems Inc. All rights reserved.
+ */
 
 package com.liferay.portal.kernel.events;
 
@@ -49,13 +51,14 @@ import javax.servlet.http.HttpSession;
  */
 public class SessionActionWrapper extends SessionAction {
 
-	public SessionActionWrapper(SessionAction sessionAction, ClassLoader classLoader) {
-		_action = sessionAction;
+	public SessionActionWrapper(
+		SessionAction sessionAction, ClassLoader classLoader) {
+
+		_sessionAction = sessionAction;
 		_classLoader = classLoader;
 	}
 
 	public void run(HttpSession session) throws ActionException {
-
 		Thread currentThread = Thread.currentThread();
 
 		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
@@ -63,13 +66,14 @@ public class SessionActionWrapper extends SessionAction {
 		try {
 			currentThread.setContextClassLoader(_classLoader);
 
-			_action.run(session);
+			_sessionAction.run(session);
 		}
 		finally {
 			currentThread.setContextClassLoader(contextClassLoader);
 		}
 	}
 
-	private SessionAction _action;
+	private SessionAction _sessionAction;
 	private ClassLoader _classLoader;
+
 }
