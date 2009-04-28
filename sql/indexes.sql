@@ -52,6 +52,21 @@ create index IX_F6006202 on CalEvent (remindBy);
 create index IX_C1AD2122 on CalEvent (uuid_);
 create unique index IX_5CCE79C8 on CalEvent (uuid_, groupId);
 
+create index IX_5424AFB7 on CategoriesEntry (parentEntryId);
+create index IX_40D41A36 on CategoriesEntry (parentEntryId, name);
+create index IX_8389E1CC on CategoriesEntry (parentEntryId, vocabularyId);
+create index IX_1DBE7F31 on CategoriesEntry (vocabularyId);
+create index IX_CAF7ADC2 on CategoriesEntry (vocabularyId, parentEntryId);
+
+create index IX_27433811 on CategoriesProperty (companyId);
+create index IX_A8FCA925 on CategoriesProperty (companyId, key_);
+create index IX_557E6F46 on CategoriesProperty (entryId);
+create unique index IX_695CE49A on CategoriesProperty (entryId, key_);
+
+create index IX_966ACFA0 on CategoriesVocabulary (companyId);
+create index IX_ADA2BE22 on CategoriesVocabulary (groupId);
+create unique index IX_B74A6C61 on CategoriesVocabulary (groupId, name);
+
 create unique index IX_B27A301F on ClassName_ (value);
 
 create index IX_38EFE3FD on Company (logoId);
@@ -466,6 +481,9 @@ create index IX_E8F34171 on Subscription (userId, classNameId);
 
 create unique index IX_1AB6D6D2 on TagsAsset (classNameId, classPK);
 create index IX_AB3D8BCB on TagsAsset (companyId);
+
+create index IX_3244E4A4 on TagsAssets_CategoriesEntries (assetId);
+create index IX_C74C7126 on TagsAssets_CategoriesEntries (entryId);
 
 create index IX_B22F3A1 on TagsAssets_TagsEntries (assetId);
 create index IX_A02A8023 on TagsAssets_TagsEntries (entryId);

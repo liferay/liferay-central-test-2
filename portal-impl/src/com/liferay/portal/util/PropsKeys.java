@@ -196,6 +196,10 @@ public interface PropsKeys {
 
 	public static final String CAPTCHA_MAX_CHALLENGES = "captcha.max.challenges";
 
+	public static final String CATEGORIES_PROPERTIES_DEFAULT = "categories.properties.default";
+
+	public static final String CATEGORIES_VOCABULARY_DEFAULT = "categories.vocabulary.default";
+
 	public static final String CAS_AUTH_ENABLED = "cas.auth.enabled";
 
 	public static final String CAS_IMPORT_FROM_LDAP = "cas.import.from.ldap";

@@ -1760,4 +1760,38 @@
 		<field name="nodeId" type="long" />
 		<field name="title" type="String" />
 	</model>
+	<model name="com.liferay.portlet.categories.model.CategoriesEntry">
+		<field name="entryId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="parentEntryId" type="long" />
+		<field name="name" type="String" />
+		<field name="vocabularyId" type="long" />
+	</model>
+	<model name="com.liferay.portlet.categories.model.CategoriesProperty">
+		<field name="propertyId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="entryId" type="long" />
+		<field name="key" type="String" />
+		<field name="value" type="String" />
+	</model>
+	<model name="com.liferay.portlet.categories.model.CategoriesVocabulary">
+		<field name="vocabularyId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="name" type="String" />
+		<field name="description" type="String" />
+	</model>
 </model-hints>

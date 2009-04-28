@@ -874,3 +874,31 @@ Liferay.Service.registerClass(
 		updatePage: true
 	}
 );
+
+Liferay.Service.register("Liferay.Service.Categories", "com.liferay.portlet.categories.service");
+
+Liferay.Service.registerClass(
+	Liferay.Service.Categories, "CategoriesEntry",
+	{
+		addEntry: true,
+		deleteEntry: true,
+		getEntries: true,
+		getEntry: true,
+		getGroupVocabularyEntries: true,
+		getRootVocabularyEntries: true,
+		search: true,
+		updateEntry: true
+	}
+);
+
+Liferay.Service.registerClass(
+	Liferay.Service.Categories, "CategoriesVocabulary",
+	{
+		addVocabulary: true,
+		deleteVocabulary: true,
+		getCompanyVocabularies: true,
+		getGroupVocabularies: true,
+		getVocabulary: true,
+		updateVocabulary: true
+	}
+);

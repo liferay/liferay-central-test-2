@@ -889,4 +889,40 @@
 		<property name="service" ref="com.liferay.portlet.wiki.service.WikiPageService.impl" />
 		<property name="serviceInterface" value="com.liferay.portlet.wiki.service.WikiPageService" />
 	</bean>
+	<bean name="/com_liferay_portlet_categories_service_spring_CategoriesEntryService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portlet.categories.service.CategoriesEntryService.impl" />
+		<property name="serviceInterface" value="com.liferay.portlet.categories.service.CategoriesEntryService" />
+	</bean>
+	<bean name="/com_liferay_portlet_categories_service_spring_CategoriesEntryService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portlet.categories.service.CategoriesEntryService.impl" />
+		<property name="serviceInterface" value="com.liferay.portlet.categories.service.CategoriesEntryService" />
+	</bean>
+	<bean name="/com_liferay_portlet_categories_service_spring_CategoriesEntryService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portlet.categories.service.CategoriesEntryService.impl" />
+		<property name="serviceInterface" value="com.liferay.portlet.categories.service.CategoriesEntryService" />
+	</bean>
+	<bean name="/com_liferay_portlet_categories_service_spring_CategoriesPropertyService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portlet.categories.service.CategoriesPropertyService.impl" />
+		<property name="serviceInterface" value="com.liferay.portlet.categories.service.CategoriesPropertyService" />
+	</bean>
+	<bean name="/com_liferay_portlet_categories_service_spring_CategoriesPropertyService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portlet.categories.service.CategoriesPropertyService.impl" />
+		<property name="serviceInterface" value="com.liferay.portlet.categories.service.CategoriesPropertyService" />
+	</bean>
+	<bean name="/com_liferay_portlet_categories_service_spring_CategoriesPropertyService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portlet.categories.service.CategoriesPropertyService.impl" />
+		<property name="serviceInterface" value="com.liferay.portlet.categories.service.CategoriesPropertyService" />
+	</bean>
+	<bean name="/com_liferay_portlet_categories_service_spring_CategoriesVocabularyService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portlet.categories.service.CategoriesVocabularyService.impl" />
+		<property name="serviceInterface" value="com.liferay.portlet.categories.service.CategoriesVocabularyService" />
+	</bean>
+	<bean name="/com_liferay_portlet_categories_service_spring_CategoriesVocabularyService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portlet.categories.service.CategoriesVocabularyService.impl" />
+		<property name="serviceInterface" value="com.liferay.portlet.categories.service.CategoriesVocabularyService" />
+	</bean>
+	<bean name="/com_liferay_portlet_categories_service_spring_CategoriesVocabularyService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portlet.categories.service.CategoriesVocabularyService.impl" />
+		<property name="serviceInterface" value="com.liferay.portlet.categories.service.CategoriesVocabularyService" />
+	</bean>
 </beans>

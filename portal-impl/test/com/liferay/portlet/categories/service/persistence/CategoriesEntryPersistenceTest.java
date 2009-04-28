@@ -1,0 +1,170 @@
+/**
+ * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
+package com.liferay.portlet.categories.service.persistence;
+
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.Time;
+import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+
+import com.liferay.portlet.categories.NoSuchEntryException;
+import com.liferay.portlet.categories.model.CategoriesEntry;
+
+/**
+ * <a href="CategoriesEntryPersistenceTest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ *
+ */
+public class CategoriesEntryPersistenceTest extends BasePersistenceTestCase {
+	protected void setUp() throws Exception {
+		super.setUp();
+
+		_persistence = (CategoriesEntryPersistence)PortalBeanLocatorUtil.locate(CategoriesEntryPersistence.class.getName() +
+				".impl");
+	}
+
+	public void testCreate() throws Exception {
+		long pk = nextLong();
+
+		CategoriesEntry categoriesEntry = _persistence.create(pk);
+
+		assertNotNull(categoriesEntry);
+
+		assertEquals(categoriesEntry.getPrimaryKey(), pk);
+	}
+
+	public void testRemove() throws Exception {
+		CategoriesEntry newCategoriesEntry = addCategoriesEntry();
+
+		_persistence.remove(newCategoriesEntry);
+
+		CategoriesEntry existingCategoriesEntry = _persistence.fetchByPrimaryKey(newCategoriesEntry.getPrimaryKey());
+
+		assertNull(existingCategoriesEntry);
+	}
+
+	public void testUpdateNew() throws Exception {
+		addCategoriesEntry();
+	}
+
+	public void testUpdateExisting() throws Exception {
+		long pk = nextLong();
+
+		CategoriesEntry newCategoriesEntry = _persistence.create(pk);
+
+		newCategoriesEntry.setGroupId(nextLong());
+		newCategoriesEntry.setCompanyId(nextLong());
+		newCategoriesEntry.setUserId(nextLong());
+		newCategoriesEntry.setUserName(randomString());
+		newCategoriesEntry.setCreateDate(nextDate());
+		newCategoriesEntry.setModifiedDate(nextDate());
+		newCategoriesEntry.setParentEntryId(nextLong());
+		newCategoriesEntry.setName(randomString());
+		newCategoriesEntry.setVocabularyId(nextLong());
+
+		_persistence.update(newCategoriesEntry, false);
+
+		CategoriesEntry existingCategoriesEntry = _persistence.findByPrimaryKey(newCategoriesEntry.getPrimaryKey());
+
+		assertEquals(existingCategoriesEntry.getEntryId(),
+			newCategoriesEntry.getEntryId());
+		assertEquals(existingCategoriesEntry.getGroupId(),
+			newCategoriesEntry.getGroupId());
+		assertEquals(existingCategoriesEntry.getCompanyId(),
+			newCategoriesEntry.getCompanyId());
+		assertEquals(existingCategoriesEntry.getUserId(),
+			newCategoriesEntry.getUserId());
+		assertEquals(existingCategoriesEntry.getUserName(),
+			newCategoriesEntry.getUserName());
+		assertEquals(Time.getShortTimestamp(
+				existingCategoriesEntry.getCreateDate()),
+			Time.getShortTimestamp(newCategoriesEntry.getCreateDate()));
+		assertEquals(Time.getShortTimestamp(
+				existingCategoriesEntry.getModifiedDate()),
+			Time.getShortTimestamp(newCategoriesEntry.getModifiedDate()));
+		assertEquals(existingCategoriesEntry.getParentEntryId(),
+			newCategoriesEntry.getParentEntryId());
+		assertEquals(existingCategoriesEntry.getName(),
+			newCategoriesEntry.getName());
+		assertEquals(existingCategoriesEntry.getVocabularyId(),
+			newCategoriesEntry.getVocabularyId());
+	}
+
+	public void testFindByPrimaryKeyExisting() throws Exception {
+		CategoriesEntry newCategoriesEntry = addCategoriesEntry();
+
+		CategoriesEntry existingCategoriesEntry = _persistence.findByPrimaryKey(newCategoriesEntry.getPrimaryKey());
+
+		assertEquals(existingCategoriesEntry, newCategoriesEntry);
+	}
+
+	public void testFindByPrimaryKeyMissing() throws Exception {
+		long pk = nextLong();
+
+		try {
+			_persistence.findByPrimaryKey(pk);
+
+			fail("Missing entity did not throw NoSuchEntryException");
+		}
+		catch (NoSuchEntryException nsee) {
+		}
+	}
+
+	public void testFetchByPrimaryKeyExisting() throws Exception {
+		CategoriesEntry newCategoriesEntry = addCategoriesEntry();
+
+		CategoriesEntry existingCategoriesEntry = _persistence.fetchByPrimaryKey(newCategoriesEntry.getPrimaryKey());
+
+		assertEquals(existingCategoriesEntry, newCategoriesEntry);
+	}
+
+	public void testFetchByPrimaryKeyMissing() throws Exception {
+		long pk = nextLong();
+
+		CategoriesEntry missingCategoriesEntry = _persistence.fetchByPrimaryKey(pk);
+
+		assertNull(missingCategoriesEntry);
+	}
+
+	protected CategoriesEntry addCategoriesEntry() throws Exception {
+		long pk = nextLong();
+
+		CategoriesEntry categoriesEntry = _persistence.create(pk);
+
+		categoriesEntry.setGroupId(nextLong());
+		categoriesEntry.setCompanyId(nextLong());
+		categoriesEntry.setUserId(nextLong());
+		categoriesEntry.setUserName(randomString());
+		categoriesEntry.setCreateDate(nextDate());
+		categoriesEntry.setModifiedDate(nextDate());
+		categoriesEntry.setParentEntryId(nextLong());
+		categoriesEntry.setName(randomString());
+		categoriesEntry.setVocabularyId(nextLong());
+
+		_persistence.update(categoriesEntry, false);
+
+		return categoriesEntry;
+	}
+
+	private CategoriesEntryPersistence _persistence;
+}

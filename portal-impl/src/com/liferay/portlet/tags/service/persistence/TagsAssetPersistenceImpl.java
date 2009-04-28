@@ -190,6 +190,16 @@ public class TagsAssetPersistenceImpl extends BasePersistenceImpl
 			FinderCacheUtil.clearCache("TagsAssets_TagsEntries");
 		}
 
+		try {
+			clearCategoriesEntries.clear(tagsAsset.getPrimaryKey());
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			FinderCacheUtil.clearCache("TagsAssets_CategoriesEntries");
+		}
+
 		Session session = null;
 
 		try {
@@ -1301,6 +1311,344 @@ public class TagsAssetPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
+	public List<com.liferay.portlet.categories.model.CategoriesEntry> getCategoriesEntries(
+		long pk) throws SystemException {
+		return getCategoriesEntries(pk, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+	}
+
+	public List<com.liferay.portlet.categories.model.CategoriesEntry> getCategoriesEntries(
+		long pk, int start, int end) throws SystemException {
+		return getCategoriesEntries(pk, start, end, null);
+	}
+
+	public static final FinderPath FINDER_PATH_GET_CATEGORIESENTRIES = new FinderPath(com.liferay.portlet.categories.model.impl.CategoriesEntryModelImpl.ENTITY_CACHE_ENABLED,
+			TagsAssetModelImpl.FINDER_CACHE_ENABLED_TAGSASSETS_CATEGORIESENTRIES,
+			"TagsAssets_CategoriesEntries", "getCategoriesEntries",
+			new String[] {
+				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+
+	public List<com.liferay.portlet.categories.model.CategoriesEntry> getCategoriesEntries(
+		long pk, int start, int end, OrderByComparator obc)
+		throws SystemException {
+		Object[] finderArgs = new Object[] {
+				new Long(pk), String.valueOf(start), String.valueOf(end),
+				String.valueOf(obc)
+			};
+
+		List<com.liferay.portlet.categories.model.CategoriesEntry> list = (List<com.liferay.portlet.categories.model.CategoriesEntry>)FinderCacheUtil.getResult(FINDER_PATH_GET_CATEGORIESENTRIES,
+				finderArgs, this);
+
+		if (list == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder sb = new StringBuilder();
+
+				sb.append(_SQL_GETCATEGORIESENTRIES);
+
+				if (obc != null) {
+					sb.append("ORDER BY ");
+					sb.append(obc.getOrderBy());
+				}
+
+				else {
+					sb.append("ORDER BY ");
+
+					sb.append("CategoriesEntry.name ASC");
+				}
+
+				String sql = sb.toString();
+
+				SQLQuery q = session.createSQLQuery(sql);
+
+				q.addEntity("CategoriesEntry",
+					com.liferay.portlet.categories.model.impl.CategoriesEntryImpl.class);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(pk);
+
+				list = (List<com.liferay.portlet.categories.model.CategoriesEntry>)QueryUtil.list(q,
+						getDialect(), start, end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<com.liferay.portlet.categories.model.CategoriesEntry>();
+				}
+
+				categoriesEntryPersistence.cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_GET_CATEGORIESENTRIES,
+					finderArgs, list);
+
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	public static final FinderPath FINDER_PATH_GET_CATEGORIESENTRIES_SIZE = new FinderPath(com.liferay.portlet.categories.model.impl.CategoriesEntryModelImpl.ENTITY_CACHE_ENABLED,
+			TagsAssetModelImpl.FINDER_CACHE_ENABLED_TAGSASSETS_CATEGORIESENTRIES,
+			"TagsAssets_CategoriesEntries", "getCategoriesEntriesSize",
+			new String[] { Long.class.getName() });
+
+	public int getCategoriesEntriesSize(long pk) throws SystemException {
+		Object[] finderArgs = new Object[] { new Long(pk) };
+
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_GET_CATEGORIESENTRIES_SIZE,
+				finderArgs, this);
+
+		if (count == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				SQLQuery q = session.createSQLQuery(_SQL_GETCATEGORIESENTRIESSIZE);
+
+				q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(pk);
+
+				count = (Long)q.uniqueResult();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_GET_CATEGORIESENTRIES_SIZE,
+					finderArgs, count);
+
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	public static final FinderPath FINDER_PATH_CONTAINS_CATEGORIESENTRY = new FinderPath(com.liferay.portlet.categories.model.impl.CategoriesEntryModelImpl.ENTITY_CACHE_ENABLED,
+			TagsAssetModelImpl.FINDER_CACHE_ENABLED_TAGSASSETS_CATEGORIESENTRIES,
+			"TagsAssets_CategoriesEntries", "containsCategoriesEntry",
+			new String[] { Long.class.getName(), Long.class.getName() });
+
+	public boolean containsCategoriesEntry(long pk, long categoriesEntryPK)
+		throws SystemException {
+		Object[] finderArgs = new Object[] {
+				new Long(pk),
+				
+				new Long(categoriesEntryPK)
+			};
+
+		Boolean value = (Boolean)FinderCacheUtil.getResult(FINDER_PATH_CONTAINS_CATEGORIESENTRY,
+				finderArgs, this);
+
+		if (value == null) {
+			try {
+				value = Boolean.valueOf(containsCategoriesEntry.contains(pk,
+							categoriesEntryPK));
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (value == null) {
+					value = Boolean.FALSE;
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_CONTAINS_CATEGORIESENTRY,
+					finderArgs, value);
+			}
+		}
+
+		return value.booleanValue();
+	}
+
+	public boolean containsCategoriesEntries(long pk) throws SystemException {
+		if (getCategoriesEntriesSize(pk) > 0) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public void addCategoriesEntry(long pk, long categoriesEntryPK)
+		throws SystemException {
+		try {
+			addCategoriesEntry.add(pk, categoriesEntryPK);
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			FinderCacheUtil.clearCache("TagsAssets_CategoriesEntries");
+		}
+	}
+
+	public void addCategoriesEntry(long pk,
+		com.liferay.portlet.categories.model.CategoriesEntry categoriesEntry)
+		throws SystemException {
+		try {
+			addCategoriesEntry.add(pk, categoriesEntry.getPrimaryKey());
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			FinderCacheUtil.clearCache("TagsAssets_CategoriesEntries");
+		}
+	}
+
+	public void addCategoriesEntries(long pk, long[] categoriesEntryPKs)
+		throws SystemException {
+		try {
+			for (long categoriesEntryPK : categoriesEntryPKs) {
+				addCategoriesEntry.add(pk, categoriesEntryPK);
+			}
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			FinderCacheUtil.clearCache("TagsAssets_CategoriesEntries");
+		}
+	}
+
+	public void addCategoriesEntries(long pk,
+		List<com.liferay.portlet.categories.model.CategoriesEntry> categoriesEntries)
+		throws SystemException {
+		try {
+			for (com.liferay.portlet.categories.model.CategoriesEntry categoriesEntry : categoriesEntries) {
+				addCategoriesEntry.add(pk, categoriesEntry.getPrimaryKey());
+			}
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			FinderCacheUtil.clearCache("TagsAssets_CategoriesEntries");
+		}
+	}
+
+	public void clearCategoriesEntries(long pk) throws SystemException {
+		try {
+			clearCategoriesEntries.clear(pk);
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			FinderCacheUtil.clearCache("TagsAssets_CategoriesEntries");
+		}
+	}
+
+	public void removeCategoriesEntry(long pk, long categoriesEntryPK)
+		throws SystemException {
+		try {
+			removeCategoriesEntry.remove(pk, categoriesEntryPK);
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			FinderCacheUtil.clearCache("TagsAssets_CategoriesEntries");
+		}
+	}
+
+	public void removeCategoriesEntry(long pk,
+		com.liferay.portlet.categories.model.CategoriesEntry categoriesEntry)
+		throws SystemException {
+		try {
+			removeCategoriesEntry.remove(pk, categoriesEntry.getPrimaryKey());
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			FinderCacheUtil.clearCache("TagsAssets_CategoriesEntries");
+		}
+	}
+
+	public void removeCategoriesEntries(long pk, long[] categoriesEntryPKs)
+		throws SystemException {
+		try {
+			for (long categoriesEntryPK : categoriesEntryPKs) {
+				removeCategoriesEntry.remove(pk, categoriesEntryPK);
+			}
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			FinderCacheUtil.clearCache("TagsAssets_CategoriesEntries");
+		}
+	}
+
+	public void removeCategoriesEntries(long pk,
+		List<com.liferay.portlet.categories.model.CategoriesEntry> categoriesEntries)
+		throws SystemException {
+		try {
+			for (com.liferay.portlet.categories.model.CategoriesEntry categoriesEntry : categoriesEntries) {
+				removeCategoriesEntry.remove(pk, categoriesEntry.getPrimaryKey());
+			}
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			FinderCacheUtil.clearCache("TagsAssets_CategoriesEntries");
+		}
+	}
+
+	public void setCategoriesEntries(long pk, long[] categoriesEntryPKs)
+		throws SystemException {
+		try {
+			clearCategoriesEntries.clear(pk);
+
+			for (long categoriesEntryPK : categoriesEntryPKs) {
+				addCategoriesEntry.add(pk, categoriesEntryPK);
+			}
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			FinderCacheUtil.clearCache("TagsAssets_CategoriesEntries");
+		}
+	}
+
+	public void setCategoriesEntries(long pk,
+		List<com.liferay.portlet.categories.model.CategoriesEntry> categoriesEntries)
+		throws SystemException {
+		try {
+			clearCategoriesEntries.clear(pk);
+
+			for (com.liferay.portlet.categories.model.CategoriesEntry categoriesEntry : categoriesEntries) {
+				addCategoriesEntry.add(pk, categoriesEntry.getPrimaryKey());
+			}
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			FinderCacheUtil.clearCache("TagsAssets_CategoriesEntries");
+		}
+	}
+
 	public void afterPropertiesSet() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
 					com.liferay.portal.util.PropsUtil.get(
@@ -1327,6 +1675,12 @@ public class TagsAssetPersistenceImpl extends BasePersistenceImpl
 		addTagsEntry = new AddTagsEntry(this);
 		clearTagsEntries = new ClearTagsEntries(this);
 		removeTagsEntry = new RemoveTagsEntry(this);
+
+		containsCategoriesEntry = new ContainsCategoriesEntry(this);
+
+		addCategoriesEntry = new AddCategoriesEntry(this);
+		clearCategoriesEntries = new ClearCategoriesEntries(this);
+		removeCategoriesEntry = new RemoveCategoriesEntry(this);
 	}
 
 	@BeanReference(name = "com.liferay.portlet.tags.service.persistence.TagsAssetPersistence.impl")
@@ -1349,6 +1703,8 @@ public class TagsAssetPersistenceImpl extends BasePersistenceImpl
 	protected com.liferay.portlet.blogs.service.persistence.BlogsEntryPersistence blogsEntryPersistence;
 	@BeanReference(name = "com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryPersistence.impl")
 	protected com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryPersistence bookmarksEntryPersistence;
+	@BeanReference(name = "com.liferay.portlet.categories.service.persistence.CategoriesEntryPersistence.impl")
+	protected com.liferay.portlet.categories.service.persistence.CategoriesEntryPersistence categoriesEntryPersistence;
 	@BeanReference(name = "com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPersistence.impl")
 	protected com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPersistence dlFileEntryPersistence;
 	@BeanReference(name = "com.liferay.portlet.journal.service.persistence.JournalArticlePersistence.impl")
@@ -1365,6 +1721,10 @@ public class TagsAssetPersistenceImpl extends BasePersistenceImpl
 	protected AddTagsEntry addTagsEntry;
 	protected ClearTagsEntries clearTagsEntries;
 	protected RemoveTagsEntry removeTagsEntry;
+	protected ContainsCategoriesEntry containsCategoriesEntry;
+	protected AddCategoriesEntry addCategoriesEntry;
+	protected ClearCategoriesEntries clearCategoriesEntries;
+	protected RemoveCategoriesEntry removeCategoriesEntry;
 
 	protected class ContainsTagsEntry {
 		protected ContainsTagsEntry(TagsAssetPersistenceImpl persistenceImpl) {
@@ -1537,8 +1897,190 @@ public class TagsAssetPersistenceImpl extends BasePersistenceImpl
 		private TagsAssetPersistenceImpl _persistenceImpl;
 	}
 
+	protected class ContainsCategoriesEntry {
+		protected ContainsCategoriesEntry(
+			TagsAssetPersistenceImpl persistenceImpl) {
+			super();
+
+			_mappingSqlQuery = MappingSqlQueryFactoryUtil.getMappingSqlQuery(getDataSource(),
+					_SQL_CONTAINSCATEGORIESENTRY,
+					new int[] { Types.BIGINT, Types.BIGINT }, RowMapper.COUNT);
+		}
+
+		protected boolean contains(long assetId, long entryId) {
+			List<Integer> results = _mappingSqlQuery.execute(new Object[] {
+						new Long(assetId), new Long(entryId)
+					});
+
+			if (results.size() > 0) {
+				Integer count = results.get(0);
+
+				if (count.intValue() > 0) {
+					return true;
+				}
+			}
+
+			return false;
+		}
+
+		private MappingSqlQuery _mappingSqlQuery;
+	}
+
+	protected class AddCategoriesEntry {
+		protected AddCategoriesEntry(TagsAssetPersistenceImpl persistenceImpl) {
+			_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(),
+					"INSERT INTO TagsAssets_CategoriesEntries (assetId, entryId) VALUES (?, ?)",
+					new int[] { Types.BIGINT, Types.BIGINT });
+			_persistenceImpl = persistenceImpl;
+		}
+
+		protected void add(long assetId, long entryId)
+			throws SystemException {
+			if (!_persistenceImpl.containsCategoriesEntry.contains(assetId,
+						entryId)) {
+				ModelListener<com.liferay.portlet.categories.model.CategoriesEntry>[] categoriesEntryListeners =
+					categoriesEntryPersistence.getListeners();
+
+				for (ModelListener<TagsAsset> listener : listeners) {
+					listener.onBeforeAddAssociation(assetId,
+						com.liferay.portlet.categories.model.CategoriesEntry.class.getName(),
+						entryId);
+				}
+
+				for (ModelListener<com.liferay.portlet.categories.model.CategoriesEntry> listener : categoriesEntryListeners) {
+					listener.onBeforeAddAssociation(entryId,
+						TagsAsset.class.getName(), assetId);
+				}
+
+				_sqlUpdate.update(new Object[] {
+						new Long(assetId), new Long(entryId)
+					});
+
+				for (ModelListener<TagsAsset> listener : listeners) {
+					listener.onAfterAddAssociation(assetId,
+						com.liferay.portlet.categories.model.CategoriesEntry.class.getName(),
+						entryId);
+				}
+
+				for (ModelListener<com.liferay.portlet.categories.model.CategoriesEntry> listener : categoriesEntryListeners) {
+					listener.onAfterAddAssociation(entryId,
+						TagsAsset.class.getName(), assetId);
+				}
+			}
+		}
+
+		private SqlUpdate _sqlUpdate;
+		private TagsAssetPersistenceImpl _persistenceImpl;
+	}
+
+	protected class ClearCategoriesEntries {
+		protected ClearCategoriesEntries(
+			TagsAssetPersistenceImpl persistenceImpl) {
+			_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(),
+					"DELETE FROM TagsAssets_CategoriesEntries WHERE assetId = ?",
+					new int[] { Types.BIGINT });
+		}
+
+		protected void clear(long assetId) throws SystemException {
+			ModelListener<com.liferay.portlet.categories.model.CategoriesEntry>[] categoriesEntryListeners =
+				categoriesEntryPersistence.getListeners();
+
+			List<com.liferay.portlet.categories.model.CategoriesEntry> categoriesEntries =
+				null;
+
+			if ((listeners.length > 0) ||
+					(categoriesEntryListeners.length > 0)) {
+				categoriesEntries = getCategoriesEntries(assetId);
+
+				for (com.liferay.portlet.categories.model.CategoriesEntry categoriesEntry : categoriesEntries) {
+					for (ModelListener<TagsAsset> listener : listeners) {
+						listener.onBeforeRemoveAssociation(assetId,
+							com.liferay.portlet.categories.model.CategoriesEntry.class.getName(),
+							categoriesEntry.getPrimaryKey());
+					}
+
+					for (ModelListener<com.liferay.portlet.categories.model.CategoriesEntry> listener : categoriesEntryListeners) {
+						listener.onBeforeRemoveAssociation(categoriesEntry.getPrimaryKey(),
+							TagsAsset.class.getName(), assetId);
+					}
+				}
+			}
+
+			_sqlUpdate.update(new Object[] { new Long(assetId) });
+
+			if ((listeners.length > 0) ||
+					(categoriesEntryListeners.length > 0)) {
+				for (com.liferay.portlet.categories.model.CategoriesEntry categoriesEntry : categoriesEntries) {
+					for (ModelListener<TagsAsset> listener : listeners) {
+						listener.onAfterRemoveAssociation(assetId,
+							com.liferay.portlet.categories.model.CategoriesEntry.class.getName(),
+							categoriesEntry.getPrimaryKey());
+					}
+
+					for (ModelListener<com.liferay.portlet.categories.model.CategoriesEntry> listener : categoriesEntryListeners) {
+						listener.onBeforeRemoveAssociation(categoriesEntry.getPrimaryKey(),
+							TagsAsset.class.getName(), assetId);
+					}
+				}
+			}
+		}
+
+		private SqlUpdate _sqlUpdate;
+	}
+
+	protected class RemoveCategoriesEntry {
+		protected RemoveCategoriesEntry(
+			TagsAssetPersistenceImpl persistenceImpl) {
+			_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(),
+					"DELETE FROM TagsAssets_CategoriesEntries WHERE assetId = ? AND entryId = ?",
+					new int[] { Types.BIGINT, Types.BIGINT });
+			_persistenceImpl = persistenceImpl;
+		}
+
+		protected void remove(long assetId, long entryId)
+			throws SystemException {
+			if (_persistenceImpl.containsCategoriesEntry.contains(assetId,
+						entryId)) {
+				ModelListener<com.liferay.portlet.categories.model.CategoriesEntry>[] categoriesEntryListeners =
+					categoriesEntryPersistence.getListeners();
+
+				for (ModelListener<TagsAsset> listener : listeners) {
+					listener.onBeforeRemoveAssociation(assetId,
+						com.liferay.portlet.categories.model.CategoriesEntry.class.getName(),
+						entryId);
+				}
+
+				for (ModelListener<com.liferay.portlet.categories.model.CategoriesEntry> listener : categoriesEntryListeners) {
+					listener.onBeforeRemoveAssociation(entryId,
+						TagsAsset.class.getName(), assetId);
+				}
+
+				_sqlUpdate.update(new Object[] {
+						new Long(assetId), new Long(entryId)
+					});
+
+				for (ModelListener<TagsAsset> listener : listeners) {
+					listener.onAfterRemoveAssociation(assetId,
+						com.liferay.portlet.categories.model.CategoriesEntry.class.getName(),
+						entryId);
+				}
+
+				for (ModelListener<com.liferay.portlet.categories.model.CategoriesEntry> listener : categoriesEntryListeners) {
+					listener.onAfterRemoveAssociation(entryId,
+						TagsAsset.class.getName(), assetId);
+				}
+			}
+		}
+
+		private SqlUpdate _sqlUpdate;
+		private TagsAssetPersistenceImpl _persistenceImpl;
+	}
+
 	private static final String _SQL_GETTAGSENTRIES = "SELECT {TagsEntry.*} FROM TagsEntry INNER JOIN TagsAssets_TagsEntries ON (TagsAssets_TagsEntries.entryId = TagsEntry.entryId) WHERE (TagsAssets_TagsEntries.assetId = ?)";
 	private static final String _SQL_GETTAGSENTRIESSIZE = "SELECT COUNT(*) AS COUNT_VALUE FROM TagsAssets_TagsEntries WHERE assetId = ?";
 	private static final String _SQL_CONTAINSTAGSENTRY = "SELECT COUNT(*) AS COUNT_VALUE FROM TagsAssets_TagsEntries WHERE assetId = ? AND entryId = ?";
+	private static final String _SQL_GETCATEGORIESENTRIES = "SELECT {CategoriesEntry.*} FROM CategoriesEntry INNER JOIN TagsAssets_CategoriesEntries ON (TagsAssets_CategoriesEntries.entryId = CategoriesEntry.entryId) WHERE (TagsAssets_CategoriesEntries.assetId = ?)";
+	private static final String _SQL_GETCATEGORIESENTRIESSIZE = "SELECT COUNT(*) AS COUNT_VALUE FROM TagsAssets_CategoriesEntries WHERE assetId = ?";
+	private static final String _SQL_CONTAINSCATEGORIESENTRY = "SELECT COUNT(*) AS COUNT_VALUE FROM TagsAssets_CategoriesEntries WHERE assetId = ? AND entryId = ?";
 	private static Log _log = LogFactoryUtil.getLog(TagsAssetPersistenceImpl.class);
 }

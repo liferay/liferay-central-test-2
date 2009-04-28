@@ -217,6 +217,12 @@ public class PropsValues {
 	public static final String CAS_VALIDATE_URL =
 		PropsUtil.get(PropsKeys.CAS_VALIDATE_URL);
 
+	public static final String[] CATEGORIES_PROPERTIES_DEFAULT =
+		PropsUtil.getArray(PropsKeys.CATEGORIES_PROPERTIES_DEFAULT);
+
+	public static final String CATEGORIES_VOCABULARY_DEFAULT = PropsUtil.get(
+		PropsKeys.CATEGORIES_VOCABULARY_DEFAULT);
+
 	public static final String COMPANY_DEFAULT_HOME_URL =
 		PropsUtil.get(PropsKeys.COMPANY_DEFAULT_HOME_URL);
 
