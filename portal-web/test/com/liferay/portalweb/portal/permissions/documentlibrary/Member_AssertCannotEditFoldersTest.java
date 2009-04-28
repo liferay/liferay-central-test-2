@@ -66,10 +66,12 @@ public class Member_AssertCannotEditFoldersTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"link=Admin Permissions Edited 1"));
 		selenium.waitForPageToLoad("30000");
-		assertFalse(selenium.isElementPresent("//input[@value='Add Subfolder']"));
+		assertFalse(selenium.isElementPresent("//strong/span"));
+		assertFalse(selenium.isElementPresent("link=Edit"));
 		selenium.click(RuntimeVariables.replace(
 				"link=Admin Permissions Subfolder 1"));
 		selenium.waitForPageToLoad("30000");
-		assertFalse(selenium.isElementPresent("//input[@value='Add Subfolder']"));
+		assertFalse(selenium.isElementPresent("//strong/span"));
+		assertFalse(selenium.isElementPresent("link=Edit"));
 	}
 }

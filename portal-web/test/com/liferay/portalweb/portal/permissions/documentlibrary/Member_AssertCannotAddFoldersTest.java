@@ -54,23 +54,5 @@ public class Member_AssertCannotAddFoldersTest extends BaseTestCase {
 				"link=Document Library Permissions Test Page"));
 		selenium.waitForPageToLoad("30000");
 		assertFalse(selenium.isElementPresent("//input[@value='Add Folder']"));
-		selenium.click(RuntimeVariables.replace("link=Admin Permissions 2"));
-		selenium.waitForPageToLoad("30000");
-		assertFalse(selenium.isElementPresent("//input[@value='Add Subfolder']"));
-		selenium.click(RuntimeVariables.replace(
-				"link=Admin Permissions Subfolder 2"));
-		selenium.waitForPageToLoad("30000");
-		assertFalse(selenium.isElementPresent("//input[@value='Add Subfolder']"));
-		selenium.click(RuntimeVariables.replace(
-				"link=Document Library Permissions Test Page"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"link=Admin Permissions Edited 1"));
-		selenium.waitForPageToLoad("30000");
-		assertFalse(selenium.isElementPresent("//input[@value='Add Subfolder']"));
-		selenium.click(RuntimeVariables.replace(
-				"link=Admin Permissions Subfolder 1"));
-		selenium.waitForPageToLoad("30000");
-		assertFalse(selenium.isElementPresent("//input[@value='Add Subfolder']"));
 	}
 }

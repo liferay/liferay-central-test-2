@@ -86,6 +86,9 @@ public class CA_AssertEditPermissionsTest extends BaseTestCase {
 				"link=Document Library Permissions Test Page"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace(
+				"link=Admin Permissions Edited 1"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace(
 				"link=Admin Permissions Subfolder 1"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click("//strong/span");

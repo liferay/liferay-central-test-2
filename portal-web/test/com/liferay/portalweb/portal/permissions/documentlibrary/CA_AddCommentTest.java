@@ -108,7 +108,7 @@ public class CA_AddCommentTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
-		assertTrue(selenium.isElementPresent(
-				"link=I am a Community Admin and I can write comments!"));
+		assertTrue(selenium.isTextPresent(
+				"I am a Community Admin and I can write comments!"));
 	}
 }
