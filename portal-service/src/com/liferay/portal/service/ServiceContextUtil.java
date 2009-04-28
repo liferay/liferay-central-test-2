@@ -94,7 +94,7 @@ public class ServiceContextUtil {
 		if (serviceContext == null) {
 			return null;
 		}
-		
+
 		PortletPreferencesIds portletPreferencesIds =
 			serviceContext.getPortletPreferencesIds();
 
