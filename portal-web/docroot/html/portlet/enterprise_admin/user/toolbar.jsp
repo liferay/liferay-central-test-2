@@ -62,7 +62,7 @@ String backURL = ParamUtil.getString(request, "backURL");
 
 	<c:if test="<%= Validator.isNotNull(backURL) %>">
 		<span class="lfr-toolbar-button back-button">
-			<a href="<%= HtmlUtil.escape(backURL) %>">&laquo;<liferay-ui:message key="back" /></a>
+			<a href="<%= HtmlUtil.escape(backURL) %>">&laquo; <liferay-ui:message key="back" /></a>
 		</span>
 	</c:if>
 </div>
