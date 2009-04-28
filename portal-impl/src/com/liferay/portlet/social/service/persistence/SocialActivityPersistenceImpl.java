@@ -1304,6 +1304,11 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl
 					socialActivity = list.get(0);
 
 					cacheResult(socialActivity);
+
+					if ((socialActivity.getMirrorActivityId() != mirrorActivityId)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_MIRRORACTIVITYID,
+							finderArgs, list);
+					}
 				}
 
 				return socialActivity;
@@ -2465,6 +2470,18 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl
 					socialActivity = list.get(0);
 
 					cacheResult(socialActivity);
+
+					if ((socialActivity.getGroupId() != groupId) ||
+							(socialActivity.getUserId() != userId) ||
+							(socialActivity.getCreateDate() == null) ||
+							!socialActivity.getCreateDate().equals(createDate) ||
+							(socialActivity.getClassNameId() != classNameId) ||
+							(socialActivity.getClassPK() != classPK) ||
+							(socialActivity.getType() != type) ||
+							(socialActivity.getReceiverUserId() != receiverUserId)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_U_CD_C_C_T_R,
+							finderArgs, list);
+					}
 				}
 
 				return socialActivity;

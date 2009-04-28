@@ -875,6 +875,13 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 					blogsEntry = list.get(0);
 
 					cacheResult(blogsEntry);
+
+					if ((blogsEntry.getUuid() == null) ||
+							!blogsEntry.getUuid().equals(uuid) ||
+							(blogsEntry.getGroupId() != groupId)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
+							finderArgs, list);
+					}
 				}
 
 				return blogsEntry;
@@ -1690,6 +1697,13 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 					blogsEntry = list.get(0);
 
 					cacheResult(blogsEntry);
+
+					if ((blogsEntry.getGroupId() != groupId) ||
+							(blogsEntry.getUrlTitle() == null) ||
+							!blogsEntry.getUrlTitle().equals(urlTitle)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_UT,
+							finderArgs, list);
+					}
 				}
 
 				return blogsEntry;

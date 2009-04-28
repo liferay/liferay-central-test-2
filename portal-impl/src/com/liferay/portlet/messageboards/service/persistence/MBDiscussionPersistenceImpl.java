@@ -678,6 +678,11 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl
 					mbDiscussion = list.get(0);
 
 					cacheResult(mbDiscussion);
+
+					if ((mbDiscussion.getThreadId() != threadId)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_THREADID,
+							finderArgs, list);
+					}
 				}
 
 				return mbDiscussion;
@@ -789,6 +794,12 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl
 					mbDiscussion = list.get(0);
 
 					cacheResult(mbDiscussion);
+
+					if ((mbDiscussion.getClassNameId() != classNameId) ||
+							(mbDiscussion.getClassPK() != classPK)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_C,
+							finderArgs, list);
+					}
 				}
 
 				return mbDiscussion;

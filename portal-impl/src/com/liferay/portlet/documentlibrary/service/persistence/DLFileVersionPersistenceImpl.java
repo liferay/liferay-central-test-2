@@ -775,6 +775,14 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl
 					dlFileVersion = list.get(0);
 
 					cacheResult(dlFileVersion);
+
+					if ((dlFileVersion.getFolderId() != folderId) ||
+							(dlFileVersion.getName() == null) ||
+							!dlFileVersion.getName().equals(name) ||
+							(dlFileVersion.getVersion() != version)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_F_N_V,
+							finderArgs, list);
+					}
 				}
 
 				return dlFileVersion;

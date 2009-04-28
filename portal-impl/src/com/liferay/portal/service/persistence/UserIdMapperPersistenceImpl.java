@@ -715,6 +715,13 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl
 					userIdMapper = list.get(0);
 
 					cacheResult(userIdMapper);
+
+					if ((userIdMapper.getUserId() != userId) ||
+							(userIdMapper.getType() == null) ||
+							!userIdMapper.getType().equals(type)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U_T,
+							finderArgs, list);
+					}
 				}
 
 				return userIdMapper;
@@ -838,6 +845,15 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl
 					userIdMapper = list.get(0);
 
 					cacheResult(userIdMapper);
+
+					if ((userIdMapper.getType() == null) ||
+							!userIdMapper.getType().equals(type) ||
+							(userIdMapper.getExternalUserId() == null) ||
+							!userIdMapper.getExternalUserId()
+											 .equals(externalUserId)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_T_E,
+							finderArgs, list);
+					}
 				}
 
 				return userIdMapper;

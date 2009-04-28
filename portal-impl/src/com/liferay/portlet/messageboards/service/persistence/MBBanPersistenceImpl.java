@@ -1078,6 +1078,12 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl
 					mbBan = list.get(0);
 
 					cacheResult(mbBan);
+
+					if ((mbBan.getGroupId() != groupId) ||
+							(mbBan.getBanUserId() != banUserId)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_B,
+							finderArgs, list);
+					}
 				}
 
 				return mbBan;

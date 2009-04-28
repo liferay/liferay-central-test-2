@@ -671,6 +671,12 @@ public class TagsAssetPersistenceImpl extends BasePersistenceImpl
 					tagsAsset = list.get(0);
 
 					cacheResult(tagsAsset);
+
+					if ((tagsAsset.getClassNameId() != classNameId) ||
+							(tagsAsset.getClassPK() != classPK)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_C,
+							finderArgs, list);
+					}
 				}
 
 				return tagsAsset;

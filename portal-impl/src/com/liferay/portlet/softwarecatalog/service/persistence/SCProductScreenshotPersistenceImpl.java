@@ -746,6 +746,11 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl
 					scProductScreenshot = list.get(0);
 
 					cacheResult(scProductScreenshot);
+
+					if ((scProductScreenshot.getThumbnailId() != thumbnailId)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_THUMBNAILID,
+							finderArgs, list);
+					}
 				}
 
 				return scProductScreenshot;
@@ -851,6 +856,11 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl
 					scProductScreenshot = list.get(0);
 
 					cacheResult(scProductScreenshot);
+
+					if ((scProductScreenshot.getFullImageId() != fullImageId)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_FULLIMAGEID,
+							finderArgs, list);
+					}
 				}
 
 				return scProductScreenshot;
@@ -968,6 +978,12 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl
 					scProductScreenshot = list.get(0);
 
 					cacheResult(scProductScreenshot);
+
+					if ((scProductScreenshot.getProductEntryId() != productEntryId) ||
+							(scProductScreenshot.getPriority() != priority)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_P_P,
+							finderArgs, list);
+					}
 				}
 
 				return scProductScreenshot;

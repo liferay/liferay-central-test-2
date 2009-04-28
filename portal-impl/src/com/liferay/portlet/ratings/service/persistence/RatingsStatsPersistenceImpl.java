@@ -434,6 +434,12 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl
 					ratingsStats = list.get(0);
 
 					cacheResult(ratingsStats);
+
+					if ((ratingsStats.getClassNameId() != classNameId) ||
+							(ratingsStats.getClassPK() != classPK)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_C,
+							finderArgs, list);
+					}
 				}
 
 				return ratingsStats;

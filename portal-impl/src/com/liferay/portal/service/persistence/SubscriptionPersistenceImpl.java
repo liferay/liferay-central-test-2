@@ -1232,6 +1232,14 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl
 					subscription = list.get(0);
 
 					cacheResult(subscription);
+
+					if ((subscription.getCompanyId() != companyId) ||
+							(subscription.getUserId() != userId) ||
+							(subscription.getClassNameId() != classNameId) ||
+							(subscription.getClassPK() != classPK)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_U_C_C,
+							finderArgs, list);
+					}
 				}
 
 				return subscription;

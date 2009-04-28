@@ -1245,6 +1245,13 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl
 					organization = list.get(0);
 
 					cacheResult(organization);
+
+					if ((organization.getCompanyId() != companyId) ||
+							(organization.getName() == null) ||
+							!organization.getName().equals(name)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_N,
+							finderArgs, list);
+					}
 				}
 
 				return organization;

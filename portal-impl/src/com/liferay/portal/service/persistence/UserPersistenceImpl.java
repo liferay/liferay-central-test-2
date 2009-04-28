@@ -1138,6 +1138,11 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 					user = list.get(0);
 
 					cacheResult(user);
+
+					if ((user.getContactId() != contactId)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_CONTACTID,
+							finderArgs, list);
+					}
 				}
 
 				return user;
@@ -1467,6 +1472,12 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 					user = list.get(0);
 
 					cacheResult(user);
+
+					if ((user.getOpenId() == null) ||
+							!user.getOpenId().equals(openId)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_OPENID,
+							finderArgs, list);
+					}
 				}
 
 				return user;
@@ -1565,6 +1576,11 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 					user = list.get(0);
 
 					cacheResult(user);
+
+					if ((user.getPortraitId() != portraitId)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_PORTRAITID,
+							finderArgs, list);
+					}
 				}
 
 				return user;
@@ -1673,6 +1689,12 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 					user = list.get(0);
 
 					cacheResult(user);
+
+					if ((user.getCompanyId() != companyId) ||
+							(user.getUserId() != userId)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_U,
+							finderArgs, list);
+					}
 				}
 
 				return user;
@@ -1783,6 +1805,12 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 					user = list.get(0);
 
 					cacheResult(user);
+
+					if ((user.getCompanyId() != companyId) ||
+							(user.getDefaultUser() != defaultUser)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_DU,
+							finderArgs, list);
+					}
 				}
 
 				return user;
@@ -1898,6 +1926,13 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 					user = list.get(0);
 
 					cacheResult(user);
+
+					if ((user.getCompanyId() != companyId) ||
+							(user.getScreenName() == null) ||
+							!user.getScreenName().equals(screenName)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_SN,
+							finderArgs, list);
+					}
 				}
 
 				return user;
@@ -2013,6 +2048,13 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 					user = list.get(0);
 
 					cacheResult(user);
+
+					if ((user.getCompanyId() != companyId) ||
+							(user.getEmailAddress() == null) ||
+							!user.getEmailAddress().equals(emailAddress)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_EA,
+							finderArgs, list);
+					}
 				}
 
 				return user;

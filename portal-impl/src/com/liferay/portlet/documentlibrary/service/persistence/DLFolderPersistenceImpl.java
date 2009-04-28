@@ -827,6 +827,13 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 					dlFolder = list.get(0);
 
 					cacheResult(dlFolder);
+
+					if ((dlFolder.getUuid() == null) ||
+							!dlFolder.getUuid().equals(uuid) ||
+							(dlFolder.getGroupId() != groupId)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
+							finderArgs, list);
+					}
 				}
 
 				return dlFolder;
@@ -1938,6 +1945,14 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 					dlFolder = list.get(0);
 
 					cacheResult(dlFolder);
+
+					if ((dlFolder.getGroupId() != groupId) ||
+							(dlFolder.getParentFolderId() != parentFolderId) ||
+							(dlFolder.getName() == null) ||
+							!dlFolder.getName().equals(name)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_P_N,
+							finderArgs, list);
+					}
 				}
 
 				return dlFolder;

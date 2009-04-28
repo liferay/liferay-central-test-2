@@ -810,6 +810,13 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl
 					igFolder = list.get(0);
 
 					cacheResult(igFolder);
+
+					if ((igFolder.getUuid() == null) ||
+							!igFolder.getUuid().equals(uuid) ||
+							(igFolder.getGroupId() != groupId)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
+							finderArgs, list);
+					}
 				}
 
 				return igFolder;
@@ -1647,6 +1654,14 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl
 					igFolder = list.get(0);
 
 					cacheResult(igFolder);
+
+					if ((igFolder.getGroupId() != groupId) ||
+							(igFolder.getParentFolderId() != parentFolderId) ||
+							(igFolder.getName() == null) ||
+							!igFolder.getName().equals(name)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_P_N,
+							finderArgs, list);
+					}
 				}
 
 				return igFolder;

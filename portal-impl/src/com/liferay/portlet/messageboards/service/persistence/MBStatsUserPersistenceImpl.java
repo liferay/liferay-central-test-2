@@ -931,6 +931,12 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl
 					mbStatsUser = list.get(0);
 
 					cacheResult(mbStatsUser);
+
+					if ((mbStatsUser.getGroupId() != groupId) ||
+							(mbStatsUser.getUserId() != userId)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_U,
+							finderArgs, list);
+					}
 				}
 
 				return mbStatsUser;

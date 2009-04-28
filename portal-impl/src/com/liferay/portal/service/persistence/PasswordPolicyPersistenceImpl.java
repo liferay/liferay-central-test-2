@@ -484,6 +484,12 @@ public class PasswordPolicyPersistenceImpl extends BasePersistenceImpl
 					passwordPolicy = list.get(0);
 
 					cacheResult(passwordPolicy);
+
+					if ((passwordPolicy.getCompanyId() != companyId) ||
+							(passwordPolicy.getDefaultPolicy() != defaultPolicy)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_DP,
+							finderArgs, list);
+					}
 				}
 
 				return passwordPolicy;
@@ -600,6 +606,13 @@ public class PasswordPolicyPersistenceImpl extends BasePersistenceImpl
 					passwordPolicy = list.get(0);
 
 					cacheResult(passwordPolicy);
+
+					if ((passwordPolicy.getCompanyId() != companyId) ||
+							(passwordPolicy.getName() == null) ||
+							!passwordPolicy.getName().equals(name)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_N,
+							finderArgs, list);
+					}
 				}
 
 				return passwordPolicy;

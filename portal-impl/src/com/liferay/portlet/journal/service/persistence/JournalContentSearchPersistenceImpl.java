@@ -2014,6 +2014,19 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl
 					journalContentSearch = list.get(0);
 
 					cacheResult(journalContentSearch);
+
+					if ((journalContentSearch.getGroupId() != groupId) ||
+							(journalContentSearch.getPrivateLayout() != privateLayout) ||
+							(journalContentSearch.getLayoutId() != layoutId) ||
+							(journalContentSearch.getPortletId() == null) ||
+							!journalContentSearch.getPortletId()
+													 .equals(portletId) ||
+							(journalContentSearch.getArticleId() == null) ||
+							!journalContentSearch.getArticleId()
+													 .equals(articleId)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_P_L_P_A,
+							finderArgs, list);
+					}
 				}
 
 				return journalContentSearch;

@@ -980,6 +980,12 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 					tasksReview = list.get(0);
 
 					cacheResult(tasksReview);
+
+					if ((tasksReview.getUserId() != userId) ||
+							(tasksReview.getProposalId() != proposalId)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U_P,
+							finderArgs, list);
+					}
 				}
 
 				return tasksReview;

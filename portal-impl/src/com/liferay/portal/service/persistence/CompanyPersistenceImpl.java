@@ -493,6 +493,12 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl
 					company = list.get(0);
 
 					cacheResult(company);
+
+					if ((company.getWebId() == null) ||
+							!company.getWebId().equals(webId)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_WEBID,
+							finderArgs, list);
+					}
 				}
 
 				return company;
@@ -599,6 +605,12 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl
 					company = list.get(0);
 
 					cacheResult(company);
+
+					if ((company.getVirtualHost() == null) ||
+							!company.getVirtualHost().equals(virtualHost)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_VIRTUALHOST,
+							finderArgs, list);
+					}
 				}
 
 				return company;
@@ -704,6 +716,12 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl
 					company = list.get(0);
 
 					cacheResult(company);
+
+					if ((company.getMx() == null) ||
+							!company.getMx().equals(mx)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_MX,
+							finderArgs, list);
+					}
 				}
 
 				return company;
@@ -802,6 +820,11 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl
 					company = list.get(0);
 
 					cacheResult(company);
+
+					if ((company.getLogoId() != logoId)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_LOGOID,
+							finderArgs, list);
+					}
 				}
 
 				return company;

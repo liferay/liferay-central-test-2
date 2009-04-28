@@ -487,6 +487,13 @@ public class TagsVocabularyPersistenceImpl extends BasePersistenceImpl
 					tagsVocabulary = list.get(0);
 
 					cacheResult(tagsVocabulary);
+
+					if ((tagsVocabulary.getGroupId() != groupId) ||
+							(tagsVocabulary.getName() == null) ||
+							!tagsVocabulary.getName().equals(name)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_N,
+							finderArgs, list);
+					}
 				}
 
 				return tagsVocabulary;

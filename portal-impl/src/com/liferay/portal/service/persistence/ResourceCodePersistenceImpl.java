@@ -933,6 +933,14 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl
 					resourceCode = list.get(0);
 
 					cacheResult(resourceCode);
+
+					if ((resourceCode.getCompanyId() != companyId) ||
+							(resourceCode.getName() == null) ||
+							!resourceCode.getName().equals(name) ||
+							(resourceCode.getScope() != scope)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_N_S,
+							finderArgs, list);
+					}
 				}
 
 				return resourceCode;

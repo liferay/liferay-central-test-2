@@ -856,6 +856,13 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl
 					mbMessage = list.get(0);
 
 					cacheResult(mbMessage);
+
+					if ((mbMessage.getUuid() == null) ||
+							!mbMessage.getUuid().equals(uuid) ||
+							(mbMessage.getGroupId() != groupId)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
+							finderArgs, list);
+					}
 				}
 
 				return mbMessage;

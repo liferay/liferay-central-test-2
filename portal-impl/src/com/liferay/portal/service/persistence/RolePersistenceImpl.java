@@ -760,6 +760,13 @@ public class RolePersistenceImpl extends BasePersistenceImpl
 					role = list.get(0);
 
 					cacheResult(role);
+
+					if ((role.getCompanyId() != companyId) ||
+							(role.getName() == null) ||
+							!role.getName().equals(name)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_N,
+							finderArgs, list);
+					}
 				}
 
 				return role;
@@ -1148,6 +1155,13 @@ public class RolePersistenceImpl extends BasePersistenceImpl
 					role = list.get(0);
 
 					cacheResult(role);
+
+					if ((role.getCompanyId() != companyId) ||
+							(role.getClassNameId() != classNameId) ||
+							(role.getClassPK() != classPK)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_C_C,
+							finderArgs, list);
+					}
 				}
 
 				return role;

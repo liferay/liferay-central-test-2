@@ -711,6 +711,13 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl
 					announcementsFlag = list.get(0);
 
 					cacheResult(announcementsFlag);
+
+					if ((announcementsFlag.getUserId() != userId) ||
+							(announcementsFlag.getEntryId() != entryId) ||
+							(announcementsFlag.getValue() != value)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U_E_V,
+							finderArgs, list);
+					}
 				}
 
 				return announcementsFlag;

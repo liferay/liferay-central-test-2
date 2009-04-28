@@ -408,6 +408,12 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl
 					className = list.get(0);
 
 					cacheResult(className);
+
+					if ((className.getValue() == null) ||
+							!className.getValue().equals(value)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_VALUE,
+							finderArgs, list);
+					}
 				}
 
 				return className;

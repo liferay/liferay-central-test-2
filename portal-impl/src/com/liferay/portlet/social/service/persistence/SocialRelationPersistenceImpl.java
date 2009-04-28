@@ -2367,6 +2367,13 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 					socialRelation = list.get(0);
 
 					cacheResult(socialRelation);
+
+					if ((socialRelation.getUserId1() != userId1) ||
+							(socialRelation.getUserId2() != userId2) ||
+							(socialRelation.getType() != type)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U1_U2_T,
+							finderArgs, list);
+					}
 				}
 
 				return socialRelation;

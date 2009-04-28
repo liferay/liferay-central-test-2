@@ -1277,6 +1277,15 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl
 					dlFileRank = list.get(0);
 
 					cacheResult(dlFileRank);
+
+					if ((dlFileRank.getCompanyId() != companyId) ||
+							(dlFileRank.getUserId() != userId) ||
+							(dlFileRank.getFolderId() != folderId) ||
+							(dlFileRank.getName() == null) ||
+							!dlFileRank.getName().equals(name)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_U_F_N,
+							finderArgs, list);
+					}
 				}
 
 				return dlFileRank;

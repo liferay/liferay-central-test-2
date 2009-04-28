@@ -769,6 +769,13 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl
 					wikiNode = list.get(0);
 
 					cacheResult(wikiNode);
+
+					if ((wikiNode.getUuid() == null) ||
+							!wikiNode.getUuid().equals(uuid) ||
+							(wikiNode.getGroupId() != groupId)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
+							finderArgs, list);
+					}
 				}
 
 				return wikiNode;
@@ -1330,6 +1337,13 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl
 					wikiNode = list.get(0);
 
 					cacheResult(wikiNode);
+
+					if ((wikiNode.getGroupId() != groupId) ||
+							(wikiNode.getName() == null) ||
+							!wikiNode.getName().equals(name)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_N,
+							finderArgs, list);
+					}
 				}
 
 				return wikiNode;

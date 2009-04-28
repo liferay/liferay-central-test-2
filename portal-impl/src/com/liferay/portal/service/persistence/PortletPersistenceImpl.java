@@ -650,6 +650,13 @@ public class PortletPersistenceImpl extends BasePersistenceImpl
 					portlet = list.get(0);
 
 					cacheResult(portlet);
+
+					if ((portlet.getCompanyId() != companyId) ||
+							(portlet.getPortletId() == null) ||
+							!portlet.getPortletId().equals(portletId)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_P,
+							finderArgs, list);
+					}
 				}
 
 				return portlet;

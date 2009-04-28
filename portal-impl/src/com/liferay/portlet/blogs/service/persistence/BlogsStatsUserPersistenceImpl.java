@@ -955,6 +955,12 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 					blogsStatsUser = list.get(0);
 
 					cacheResult(blogsStatsUser);
+
+					if ((blogsStatsUser.getGroupId() != groupId) ||
+							(blogsStatsUser.getUserId() != userId)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_U,
+							finderArgs, list);
+					}
 				}
 
 				return blogsStatsUser;

@@ -760,6 +760,13 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl
 					mbCategory = list.get(0);
 
 					cacheResult(mbCategory);
+
+					if ((mbCategory.getUuid() == null) ||
+							!mbCategory.getUuid().equals(uuid) ||
+							(mbCategory.getGroupId() != groupId)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
+							finderArgs, list);
+					}
 				}
 
 				return mbCategory;

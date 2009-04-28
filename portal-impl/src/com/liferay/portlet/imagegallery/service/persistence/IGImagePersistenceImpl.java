@@ -869,6 +869,13 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl
 					igImage = list.get(0);
 
 					cacheResult(igImage);
+
+					if ((igImage.getUuid() == null) ||
+							!igImage.getUuid().equals(uuid) ||
+							(igImage.getGroupId() != groupId)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
+							finderArgs, list);
+					}
 				}
 
 				return igImage;
@@ -1414,6 +1421,11 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl
 					igImage = list.get(0);
 
 					cacheResult(igImage);
+
+					if ((igImage.getSmallImageId() != smallImageId)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_SMALLIMAGEID,
+							finderArgs, list);
+					}
 				}
 
 				return igImage;
@@ -1518,6 +1530,11 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl
 					igImage = list.get(0);
 
 					cacheResult(igImage);
+
+					if ((igImage.getLargeImageId() != largeImageId)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_LARGEIMAGEID,
+							finderArgs, list);
+					}
 				}
 
 				return igImage;
@@ -1622,6 +1639,11 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl
 					igImage = list.get(0);
 
 					cacheResult(igImage);
+
+					if ((igImage.getCustom1ImageId() != custom1ImageId)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_CUSTOM1IMAGEID,
+							finderArgs, list);
+					}
 				}
 
 				return igImage;
@@ -1726,6 +1748,11 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl
 					igImage = list.get(0);
 
 					cacheResult(igImage);
+
+					if ((igImage.getCustom2ImageId() != custom2ImageId)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_CUSTOM2IMAGEID,
+							finderArgs, list);
+					}
 				}
 
 				return igImage;

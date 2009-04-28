@@ -849,6 +849,13 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl
 					journalTemplate = list.get(0);
 
 					cacheResult(journalTemplate);
+
+					if ((journalTemplate.getUuid() == null) ||
+							!journalTemplate.getUuid().equals(uuid) ||
+							(journalTemplate.getGroupId() != groupId)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
+							finderArgs, list);
+					}
 				}
 
 				return journalTemplate;
@@ -1423,6 +1430,11 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl
 					journalTemplate = list.get(0);
 
 					cacheResult(journalTemplate);
+
+					if ((journalTemplate.getSmallImageId() != smallImageId)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_SMALLIMAGEID,
+							finderArgs, list);
+					}
 				}
 
 				return journalTemplate;
@@ -1543,6 +1555,13 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl
 					journalTemplate = list.get(0);
 
 					cacheResult(journalTemplate);
+
+					if ((journalTemplate.getGroupId() != groupId) ||
+							(journalTemplate.getTemplateId() == null) ||
+							!journalTemplate.getTemplateId().equals(templateId)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_T,
+							finderArgs, list);
+					}
 				}
 
 				return journalTemplate;

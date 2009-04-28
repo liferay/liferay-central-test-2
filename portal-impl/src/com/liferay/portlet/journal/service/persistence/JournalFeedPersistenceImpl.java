@@ -771,6 +771,13 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl
 					journalFeed = list.get(0);
 
 					cacheResult(journalFeed);
+
+					if ((journalFeed.getUuid() == null) ||
+							!journalFeed.getUuid().equals(uuid) ||
+							(journalFeed.getGroupId() != groupId)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
+							finderArgs, list);
+					}
 				}
 
 				return journalFeed;
@@ -1114,6 +1121,13 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl
 					journalFeed = list.get(0);
 
 					cacheResult(journalFeed);
+
+					if ((journalFeed.getGroupId() != groupId) ||
+							(journalFeed.getFeedId() == null) ||
+							!journalFeed.getFeedId().equals(feedId)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_F,
+							finderArgs, list);
+					}
 				}
 
 				return journalFeed;

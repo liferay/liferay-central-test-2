@@ -471,6 +471,12 @@ public class CountryPersistenceImpl extends BasePersistenceImpl
 					country = list.get(0);
 
 					cacheResult(country);
+
+					if ((country.getName() == null) ||
+							!country.getName().equals(name)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_NAME,
+							finderArgs, list);
+					}
 				}
 
 				return country;
@@ -580,6 +586,12 @@ public class CountryPersistenceImpl extends BasePersistenceImpl
 					country = list.get(0);
 
 					cacheResult(country);
+
+					if ((country.getA2() == null) ||
+							!country.getA2().equals(a2)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_A2,
+							finderArgs, list);
+					}
 				}
 
 				return country;
@@ -689,6 +701,12 @@ public class CountryPersistenceImpl extends BasePersistenceImpl
 					country = list.get(0);
 
 					cacheResult(country);
+
+					if ((country.getA3() == null) ||
+							!country.getA3().equals(a3)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_A3,
+							finderArgs, list);
+					}
 				}
 
 				return country;

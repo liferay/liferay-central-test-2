@@ -1246,6 +1246,15 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 					scProductEntry = list.get(0);
 
 					cacheResult(scProductEntry);
+
+					if ((scProductEntry.getRepoGroupId() == null) ||
+							!scProductEntry.getRepoGroupId().equals(repoGroupId) ||
+							(scProductEntry.getRepoArtifactId() == null) ||
+							!scProductEntry.getRepoArtifactId()
+											   .equals(repoArtifactId)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_RG_RA,
+							finderArgs, list);
+					}
 				}
 
 				return scProductEntry;

@@ -1059,6 +1059,16 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl
 					portletItem = list.get(0);
 
 					cacheResult(portletItem);
+
+					if ((portletItem.getGroupId() != groupId) ||
+							(portletItem.getName() == null) ||
+							!portletItem.getName().equals(name) ||
+							(portletItem.getPortletId() == null) ||
+							!portletItem.getPortletId().equals(portletId) ||
+							(portletItem.getClassNameId() != classNameId)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_N_P_C,
+							finderArgs, list);
+					}
 				}
 
 				return portletItem;

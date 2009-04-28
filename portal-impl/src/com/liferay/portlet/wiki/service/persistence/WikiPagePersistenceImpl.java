@@ -909,6 +909,13 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 					wikiPage = list.get(0);
 
 					cacheResult(wikiPage);
+
+					if ((wikiPage.getUuid() == null) ||
+							!wikiPage.getUuid().equals(uuid) ||
+							(wikiPage.getGroupId() != groupId)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
+							finderArgs, list);
+					}
 				}
 
 				return wikiPage;
@@ -2598,6 +2605,14 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 					wikiPage = list.get(0);
 
 					cacheResult(wikiPage);
+
+					if ((wikiPage.getNodeId() != nodeId) ||
+							(wikiPage.getTitle() == null) ||
+							!wikiPage.getTitle().equals(title) ||
+							(wikiPage.getVersion() != version)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_N_T_V,
+							finderArgs, list);
+					}
 				}
 
 				return wikiPage;

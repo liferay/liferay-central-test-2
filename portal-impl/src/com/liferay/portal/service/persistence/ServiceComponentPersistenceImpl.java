@@ -721,6 +721,14 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl
 					serviceComponent = list.get(0);
 
 					cacheResult(serviceComponent);
+
+					if ((serviceComponent.getBuildNamespace() == null) ||
+							!serviceComponent.getBuildNamespace()
+												 .equals(buildNamespace) ||
+							(serviceComponent.getBuildNumber() != buildNumber)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_BNS_BNU,
+							finderArgs, list);
+					}
 				}
 
 				return serviceComponent;

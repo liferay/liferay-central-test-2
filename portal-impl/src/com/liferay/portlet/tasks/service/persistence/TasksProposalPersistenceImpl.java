@@ -966,6 +966,13 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl
 					tasksProposal = list.get(0);
 
 					cacheResult(tasksProposal);
+
+					if ((tasksProposal.getClassNameId() != classNameId) ||
+							(tasksProposal.getClassPK() == null) ||
+							!tasksProposal.getClassPK().equals(classPK)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_C,
+							finderArgs, list);
+					}
 				}
 
 				return tasksProposal;

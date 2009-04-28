@@ -665,6 +665,12 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl
 					shoppingCoupon = list.get(0);
 
 					cacheResult(shoppingCoupon);
+
+					if ((shoppingCoupon.getCode() == null) ||
+							!shoppingCoupon.getCode().equals(code)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_CODE,
+							finderArgs, list);
+					}
 				}
 
 				return shoppingCoupon;

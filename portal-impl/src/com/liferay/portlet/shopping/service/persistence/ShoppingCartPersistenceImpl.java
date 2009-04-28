@@ -876,6 +876,12 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl
 					shoppingCart = list.get(0);
 
 					cacheResult(shoppingCart);
+
+					if ((shoppingCart.getGroupId() != groupId) ||
+							(shoppingCart.getUserId() != userId)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_U,
+							finderArgs, list);
+					}
 				}
 
 				return shoppingCart;

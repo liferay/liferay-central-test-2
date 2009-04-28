@@ -697,6 +697,13 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 					permission = list.get(0);
 
 					cacheResult(permission);
+
+					if ((permission.getActionId() == null) ||
+							!permission.getActionId().equals(actionId) ||
+							(permission.getResourceId() != resourceId)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_A_R,
+							finderArgs, list);
+					}
 				}
 
 				return permission;

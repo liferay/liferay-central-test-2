@@ -1218,6 +1218,13 @@ public class TagsPropertyPersistenceImpl extends BasePersistenceImpl
 					tagsProperty = list.get(0);
 
 					cacheResult(tagsProperty);
+
+					if ((tagsProperty.getEntryId() != entryId) ||
+							(tagsProperty.getKey() == null) ||
+							!tagsProperty.getKey().equals(key)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_E_K,
+							finderArgs, list);
+					}
 				}
 
 				return tagsProperty;

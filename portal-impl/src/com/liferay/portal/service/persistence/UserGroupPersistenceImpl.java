@@ -957,6 +957,13 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl
 					userGroup = list.get(0);
 
 					cacheResult(userGroup);
+
+					if ((userGroup.getCompanyId() != companyId) ||
+							(userGroup.getName() == null) ||
+							!userGroup.getName().equals(name)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_N,
+							finderArgs, list);
+					}
 				}
 
 				return userGroup;

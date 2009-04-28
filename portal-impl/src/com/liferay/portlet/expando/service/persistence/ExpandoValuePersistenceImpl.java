@@ -1533,6 +1533,12 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 					expandoValue = list.get(0);
 
 					cacheResult(expandoValue);
+
+					if ((expandoValue.getColumnId() != columnId) ||
+							(expandoValue.getRowId() != rowId)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_R,
+							finderArgs, list);
+					}
 				}
 
 				return expandoValue;
@@ -1916,6 +1922,13 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 					expandoValue = list.get(0);
 
 					cacheResult(expandoValue);
+
+					if ((expandoValue.getTableId() != tableId) ||
+							(expandoValue.getColumnId() != columnId) ||
+							(expandoValue.getRowId() != rowId)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_T_C_R,
+							finderArgs, list);
+					}
 				}
 
 				return expandoValue;

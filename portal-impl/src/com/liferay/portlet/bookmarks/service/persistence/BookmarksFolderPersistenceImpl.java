@@ -777,6 +777,13 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl
 					bookmarksFolder = list.get(0);
 
 					cacheResult(bookmarksFolder);
+
+					if ((bookmarksFolder.getUuid() == null) ||
+							!bookmarksFolder.getUuid().equals(uuid) ||
+							(bookmarksFolder.getGroupId() != groupId)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
+							finderArgs, list);
+					}
 				}
 
 				return bookmarksFolder;

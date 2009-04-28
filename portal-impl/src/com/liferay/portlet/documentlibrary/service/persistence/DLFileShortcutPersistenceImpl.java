@@ -736,6 +736,13 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 					dlFileShortcut = list.get(0);
 
 					cacheResult(dlFileShortcut);
+
+					if ((dlFileShortcut.getUuid() == null) ||
+							!dlFileShortcut.getUuid().equals(uuid) ||
+							(dlFileShortcut.getGroupId() != groupId)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
+							finderArgs, list);
+					}
 				}
 
 				return dlFileShortcut;

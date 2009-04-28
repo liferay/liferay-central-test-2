@@ -705,6 +705,13 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl
 					ratingsEntry = list.get(0);
 
 					cacheResult(ratingsEntry);
+
+					if ((ratingsEntry.getUserId() != userId) ||
+							(ratingsEntry.getClassNameId() != classNameId) ||
+							(ratingsEntry.getClassPK() != classPK)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U_C_C,
+							finderArgs, list);
+					}
 				}
 
 				return ratingsEntry;

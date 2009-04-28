@@ -716,6 +716,12 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl
 					shoppingOrder = list.get(0);
 
 					cacheResult(shoppingOrder);
+
+					if ((shoppingOrder.getNumber() == null) ||
+							!shoppingOrder.getNumber().equals(number)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_NUMBER,
+							finderArgs, list);
+					}
 				}
 
 				return shoppingOrder;
@@ -827,6 +833,12 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl
 					shoppingOrder = list.get(0);
 
 					cacheResult(shoppingOrder);
+
+					if ((shoppingOrder.getPpTxnId() == null) ||
+							!shoppingOrder.getPpTxnId().equals(ppTxnId)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_PPTXNID,
+							finderArgs, list);
+					}
 				}
 
 				return shoppingOrder;

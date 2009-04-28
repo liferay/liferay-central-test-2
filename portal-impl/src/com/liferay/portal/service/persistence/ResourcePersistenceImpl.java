@@ -651,6 +651,13 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl
 					resource = list.get(0);
 
 					cacheResult(resource);
+
+					if ((resource.getCodeId() != codeId) ||
+							(resource.getPrimKey() == null) ||
+							!resource.getPrimKey().equals(primKey)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_P,
+							finderArgs, list);
+					}
 				}
 
 				return resource;

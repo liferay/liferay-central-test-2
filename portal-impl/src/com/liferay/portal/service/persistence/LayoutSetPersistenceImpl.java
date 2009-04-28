@@ -670,6 +670,12 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl
 					layoutSet = list.get(0);
 
 					cacheResult(layoutSet);
+
+					if ((layoutSet.getVirtualHost() == null) ||
+							!layoutSet.getVirtualHost().equals(virtualHost)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_VIRTUALHOST,
+							finderArgs, list);
+					}
 				}
 
 				return layoutSet;
@@ -780,6 +786,12 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl
 					layoutSet = list.get(0);
 
 					cacheResult(layoutSet);
+
+					if ((layoutSet.getGroupId() != groupId) ||
+							(layoutSet.getPrivateLayout() != privateLayout)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_P,
+							finderArgs, list);
+					}
 				}
 
 				return layoutSet;

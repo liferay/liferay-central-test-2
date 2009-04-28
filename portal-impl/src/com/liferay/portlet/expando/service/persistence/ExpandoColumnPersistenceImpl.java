@@ -692,6 +692,13 @@ public class ExpandoColumnPersistenceImpl extends BasePersistenceImpl
 					expandoColumn = list.get(0);
 
 					cacheResult(expandoColumn);
+
+					if ((expandoColumn.getTableId() != tableId) ||
+							(expandoColumn.getName() == null) ||
+							!expandoColumn.getName().equals(name)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_T_N,
+							finderArgs, list);
+					}
 				}
 
 				return expandoColumn;

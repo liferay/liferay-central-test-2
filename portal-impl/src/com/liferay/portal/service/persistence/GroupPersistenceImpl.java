@@ -718,6 +718,11 @@ public class GroupPersistenceImpl extends BasePersistenceImpl
 					group = list.get(0);
 
 					cacheResult(group);
+
+					if ((group.getLiveGroupId() != liveGroupId)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_LIVEGROUPID,
+							finderArgs, list);
+					}
 				}
 
 				return group;
@@ -837,6 +842,13 @@ public class GroupPersistenceImpl extends BasePersistenceImpl
 					group = list.get(0);
 
 					cacheResult(group);
+
+					if ((group.getCompanyId() != companyId) ||
+							(group.getName() == null) ||
+							!group.getName().equals(name)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_N,
+							finderArgs, list);
+					}
 				}
 
 				return group;
@@ -956,6 +968,13 @@ public class GroupPersistenceImpl extends BasePersistenceImpl
 					group = list.get(0);
 
 					cacheResult(group);
+
+					if ((group.getCompanyId() != companyId) ||
+							(group.getFriendlyURL() == null) ||
+							!group.getFriendlyURL().equals(friendlyURL)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_F,
+							finderArgs, list);
+					}
 				}
 
 				return group;
@@ -1324,6 +1343,13 @@ public class GroupPersistenceImpl extends BasePersistenceImpl
 					group = list.get(0);
 
 					cacheResult(group);
+
+					if ((group.getCompanyId() != companyId) ||
+							(group.getClassNameId() != classNameId) ||
+							(group.getClassPK() != classPK)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_C_C,
+							finderArgs, list);
+					}
 				}
 
 				return group;
@@ -1456,6 +1482,14 @@ public class GroupPersistenceImpl extends BasePersistenceImpl
 					group = list.get(0);
 
 					cacheResult(group);
+
+					if ((group.getCompanyId() != companyId) ||
+							(group.getLiveGroupId() != liveGroupId) ||
+							(group.getName() == null) ||
+							!group.getName().equals(name)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_L_N,
+							finderArgs, list);
+					}
 				}
 
 				return group;
@@ -1600,6 +1634,15 @@ public class GroupPersistenceImpl extends BasePersistenceImpl
 					group = list.get(0);
 
 					cacheResult(group);
+
+					if ((group.getCompanyId() != companyId) ||
+							(group.getClassNameId() != classNameId) ||
+							(group.getLiveGroupId() != liveGroupId) ||
+							(group.getName() == null) ||
+							!group.getName().equals(name)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_C_L_N,
+							finderArgs, list);
+					}
 				}
 
 				return group;

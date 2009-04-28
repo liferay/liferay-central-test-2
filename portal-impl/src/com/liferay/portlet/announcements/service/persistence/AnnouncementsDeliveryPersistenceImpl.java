@@ -680,6 +680,13 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl
 					announcementsDelivery = list.get(0);
 
 					cacheResult(announcementsDelivery);
+
+					if ((announcementsDelivery.getUserId() != userId) ||
+							(announcementsDelivery.getType() == null) ||
+							!announcementsDelivery.getType().equals(type)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U_T,
+							finderArgs, list);
+					}
 				}
 
 				return announcementsDelivery;

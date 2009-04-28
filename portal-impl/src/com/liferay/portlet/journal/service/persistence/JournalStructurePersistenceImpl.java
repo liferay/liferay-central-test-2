@@ -819,6 +819,13 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 					journalStructure = list.get(0);
 
 					cacheResult(journalStructure);
+
+					if ((journalStructure.getUuid() == null) ||
+							!journalStructure.getUuid().equals(uuid) ||
+							(journalStructure.getGroupId() != groupId)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
+							finderArgs, list);
+					}
 				}
 
 				return journalStructure;
@@ -1409,6 +1416,14 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 					journalStructure = list.get(0);
 
 					cacheResult(journalStructure);
+
+					if ((journalStructure.getGroupId() != groupId) ||
+							(journalStructure.getStructureId() == null) ||
+							!journalStructure.getStructureId()
+												 .equals(structureId)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_S,
+							finderArgs, list);
+					}
 				}
 
 				return journalStructure;

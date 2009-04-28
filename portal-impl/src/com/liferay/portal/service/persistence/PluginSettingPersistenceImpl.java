@@ -715,6 +715,15 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl
 					pluginSetting = list.get(0);
 
 					cacheResult(pluginSetting);
+
+					if ((pluginSetting.getCompanyId() != companyId) ||
+							(pluginSetting.getPluginId() == null) ||
+							!pluginSetting.getPluginId().equals(pluginId) ||
+							(pluginSetting.getPluginType() == null) ||
+							!pluginSetting.getPluginType().equals(pluginType)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_I_T,
+							finderArgs, list);
+					}
 				}
 
 				return pluginSetting;

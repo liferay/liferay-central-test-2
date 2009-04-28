@@ -992,6 +992,13 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl
 					socialRequest = list.get(0);
 
 					cacheResult(socialRequest);
+
+					if ((socialRequest.getUuid() == null) ||
+							!socialRequest.getUuid().equals(uuid) ||
+							(socialRequest.getGroupId() != groupId)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
+							finderArgs, list);
+					}
 				}
 
 				return socialRequest;
@@ -2314,6 +2321,15 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl
 					socialRequest = list.get(0);
 
 					cacheResult(socialRequest);
+
+					if ((socialRequest.getUserId() != userId) ||
+							(socialRequest.getClassNameId() != classNameId) ||
+							(socialRequest.getClassPK() != classPK) ||
+							(socialRequest.getType() != type) ||
+							(socialRequest.getReceiverUserId() != receiverUserId)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U_C_C_T_R,
+							finderArgs, list);
+					}
 				}
 
 				return socialRequest;
@@ -3136,6 +3152,16 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl
 					socialRequest = list.get(0);
 
 					cacheResult(socialRequest);
+
+					if ((socialRequest.getUserId() != userId) ||
+							(socialRequest.getClassNameId() != classNameId) ||
+							(socialRequest.getClassPK() != classPK) ||
+							(socialRequest.getType() != type) ||
+							(socialRequest.getReceiverUserId() != receiverUserId) ||
+							(socialRequest.getStatus() != status)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U_C_C_T_R_S,
+							finderArgs, list);
+					}
 				}
 
 				return socialRequest;

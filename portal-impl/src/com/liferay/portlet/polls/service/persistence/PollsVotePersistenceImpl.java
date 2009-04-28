@@ -875,6 +875,12 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl
 					pollsVote = list.get(0);
 
 					cacheResult(pollsVote);
+
+					if ((pollsVote.getQuestionId() != questionId) ||
+							(pollsVote.getUserId() != userId)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_Q_U,
+							finderArgs, list);
+					}
 				}
 
 				return pollsVote;

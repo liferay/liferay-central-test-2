@@ -451,6 +451,13 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl
 					wikiPageResource = list.get(0);
 
 					cacheResult(wikiPageResource);
+
+					if ((wikiPageResource.getNodeId() != nodeId) ||
+							(wikiPageResource.getTitle() == null) ||
+							!wikiPageResource.getTitle().equals(title)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_N_T,
+							finderArgs, list);
+					}
 				}
 
 				return wikiPageResource;

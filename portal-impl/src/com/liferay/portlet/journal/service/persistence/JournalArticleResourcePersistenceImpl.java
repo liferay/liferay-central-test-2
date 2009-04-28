@@ -687,6 +687,14 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl
 					journalArticleResource = list.get(0);
 
 					cacheResult(journalArticleResource);
+
+					if ((journalArticleResource.getGroupId() != groupId) ||
+							(journalArticleResource.getArticleId() == null) ||
+							!journalArticleResource.getArticleId()
+													   .equals(articleId)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_A,
+							finderArgs, list);
+					}
 				}
 
 				return journalArticleResource;

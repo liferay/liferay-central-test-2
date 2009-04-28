@@ -842,6 +842,13 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl
 					dlFileEntry = list.get(0);
 
 					cacheResult(dlFileEntry);
+
+					if ((dlFileEntry.getUuid() == null) ||
+							!dlFileEntry.getUuid().equals(uuid) ||
+							(dlFileEntry.getGroupId() != groupId)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
+							finderArgs, list);
+					}
 				}
 
 				return dlFileEntry;
@@ -1897,6 +1904,13 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl
 					dlFileEntry = list.get(0);
 
 					cacheResult(dlFileEntry);
+
+					if ((dlFileEntry.getFolderId() != folderId) ||
+							(dlFileEntry.getName() == null) ||
+							!dlFileEntry.getName().equals(name)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_F_N,
+							finderArgs, list);
+					}
 				}
 
 				return dlFileEntry;

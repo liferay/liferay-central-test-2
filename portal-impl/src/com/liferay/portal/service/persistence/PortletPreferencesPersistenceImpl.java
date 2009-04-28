@@ -1281,6 +1281,15 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl
 					portletPreferences = list.get(0);
 
 					cacheResult(portletPreferences);
+
+					if ((portletPreferences.getOwnerId() != ownerId) ||
+							(portletPreferences.getOwnerType() != ownerType) ||
+							(portletPreferences.getPlid() != plid) ||
+							(portletPreferences.getPortletId() == null) ||
+							!portletPreferences.getPortletId().equals(portletId)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_O_O_P_P,
+							finderArgs, list);
+					}
 				}
 
 				return portletPreferences;

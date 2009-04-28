@@ -722,6 +722,14 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl
 					resourceAction = list.get(0);
 
 					cacheResult(resourceAction);
+
+					if ((resourceAction.getName() == null) ||
+							!resourceAction.getName().equals(name) ||
+							(resourceAction.getActionId() == null) ||
+							!resourceAction.getActionId().equals(actionId)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_N_A,
+							finderArgs, list);
+					}
 				}
 
 				return resourceAction;
