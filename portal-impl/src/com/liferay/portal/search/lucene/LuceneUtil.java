@@ -283,7 +283,6 @@ public class LuceneUtil {
 
 			StringBuilder sb = new StringBuilder();
 
-			sb.append(StringPool.STAR);
 			sb.append(value);
 			sb.append(StringPool.STAR);
 
