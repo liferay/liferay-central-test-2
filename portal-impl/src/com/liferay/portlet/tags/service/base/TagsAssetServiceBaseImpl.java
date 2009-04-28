@@ -47,10 +47,6 @@ import com.liferay.portlet.bookmarks.service.BookmarksEntryLocalService;
 import com.liferay.portlet.bookmarks.service.BookmarksEntryService;
 import com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryFinder;
 import com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryPersistence;
-import com.liferay.portlet.categories.service.CategoriesEntryLocalService;
-import com.liferay.portlet.categories.service.CategoriesEntryService;
-import com.liferay.portlet.categories.service.persistence.CategoriesEntryFinder;
-import com.liferay.portlet.categories.service.persistence.CategoriesEntryPersistence;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalService;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryService;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder;
@@ -437,42 +433,6 @@ public abstract class TagsAssetServiceBaseImpl extends PrincipalBean
 		this.bookmarksEntryFinder = bookmarksEntryFinder;
 	}
 
-	public CategoriesEntryLocalService getCategoriesEntryLocalService() {
-		return categoriesEntryLocalService;
-	}
-
-	public void setCategoriesEntryLocalService(
-		CategoriesEntryLocalService categoriesEntryLocalService) {
-		this.categoriesEntryLocalService = categoriesEntryLocalService;
-	}
-
-	public CategoriesEntryService getCategoriesEntryService() {
-		return categoriesEntryService;
-	}
-
-	public void setCategoriesEntryService(
-		CategoriesEntryService categoriesEntryService) {
-		this.categoriesEntryService = categoriesEntryService;
-	}
-
-	public CategoriesEntryPersistence getCategoriesEntryPersistence() {
-		return categoriesEntryPersistence;
-	}
-
-	public void setCategoriesEntryPersistence(
-		CategoriesEntryPersistence categoriesEntryPersistence) {
-		this.categoriesEntryPersistence = categoriesEntryPersistence;
-	}
-
-	public CategoriesEntryFinder getCategoriesEntryFinder() {
-		return categoriesEntryFinder;
-	}
-
-	public void setCategoriesEntryFinder(
-		CategoriesEntryFinder categoriesEntryFinder) {
-		this.categoriesEntryFinder = categoriesEntryFinder;
-	}
-
 	public DLFileEntryLocalService getDLFileEntryLocalService() {
 		return dlFileEntryLocalService;
 	}
@@ -726,14 +686,6 @@ public abstract class TagsAssetServiceBaseImpl extends PrincipalBean
 	protected BookmarksEntryPersistence bookmarksEntryPersistence;
 	@BeanReference(name = "com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryFinder.impl")
 	protected BookmarksEntryFinder bookmarksEntryFinder;
-	@BeanReference(name = "com.liferay.portlet.categories.service.CategoriesEntryLocalService.impl")
-	protected CategoriesEntryLocalService categoriesEntryLocalService;
-	@BeanReference(name = "com.liferay.portlet.categories.service.CategoriesEntryService.impl")
-	protected CategoriesEntryService categoriesEntryService;
-	@BeanReference(name = "com.liferay.portlet.categories.service.persistence.CategoriesEntryPersistence.impl")
-	protected CategoriesEntryPersistence categoriesEntryPersistence;
-	@BeanReference(name = "com.liferay.portlet.categories.service.persistence.CategoriesEntryFinder.impl")
-	protected CategoriesEntryFinder categoriesEntryFinder;
 	@BeanReference(name = "com.liferay.portlet.documentlibrary.service.DLFileEntryLocalService.impl")
 	protected DLFileEntryLocalService dlFileEntryLocalService;
 	@BeanReference(name = "com.liferay.portlet.documentlibrary.service.DLFileEntryService.impl")

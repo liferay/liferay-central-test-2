@@ -160,43 +160,6 @@ create table CalEvent (
 	secondReminder INTEGER
 );
 
-create table CategoriesEntry (
-	entryId LONG not null primary key,
-	groupId LONG,
-	companyId LONG,
-	userId LONG,
-	userName VARCHAR(75) null,
-	createDate DATE null,
-	modifiedDate DATE null,
-	parentEntryId LONG,
-	name VARCHAR(75) null,
-	vocabularyId LONG
-);
-
-create table CategoriesProperty (
-	propertyId LONG not null primary key,
-	companyId LONG,
-	userId LONG,
-	userName VARCHAR(75) null,
-	createDate DATE null,
-	modifiedDate DATE null,
-	entryId LONG,
-	key_ VARCHAR(75) null,
-	value VARCHAR(75) null
-);
-
-create table CategoriesVocabulary (
-	vocabularyId LONG not null primary key,
-	groupId LONG,
-	companyId LONG,
-	userId LONG,
-	userName VARCHAR(75) null,
-	createDate DATE null,
-	modifiedDate DATE null,
-	name VARCHAR(75) null,
-	description VARCHAR(75) null
-);
-
 create table ClassName_ (
 	classNameId LONG not null primary key,
 	value VARCHAR(200) null
@@ -1381,12 +1344,6 @@ create table TagsAsset (
 	width INTEGER,
 	priority DOUBLE,
 	viewCount INTEGER
-);
-
-create table TagsAssets_CategoriesEntries (
-	assetId LONG not null,
-	entryId LONG not null,
-	primary key (assetId, entryId)
 );
 
 create table TagsAssets_TagsEntries (

@@ -43,7 +43,6 @@
 		<!-- Relationships -->
 
 		<column name="entries" type="Collection" entity="TagsEntry" mapping-table="TagsAssets_TagsEntries" />
-		<column name="entries" type="Collection" entity="com.liferay.portlet.categories.CategoriesEntry" mapping-table="TagsAssets_CategoriesEntries" />
 
 		<!-- Finder methods -->
 
@@ -63,7 +62,6 @@
 		<reference package-path="com.liferay.portal" entity="User" />
 		<reference package-path="com.liferay.portlet.blogs" entity="BlogsEntry" />
 		<reference package-path="com.liferay.portlet.bookmarks" entity="BookmarksEntry" />
-		<reference package-path="com.liferay.portlet.categories" entity="CategoriesEntry" />
 		<reference package-path="com.liferay.portlet.documentlibrary" entity="DLFileEntry" />
 		<reference package-path="com.liferay.portlet.journal" entity="JournalArticle" />
 		<reference package-path="com.liferay.portlet.journal" entity="JournalArticleResource" />

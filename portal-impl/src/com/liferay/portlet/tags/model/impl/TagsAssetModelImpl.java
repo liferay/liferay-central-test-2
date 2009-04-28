@@ -190,10 +190,6 @@ public class TagsAssetModelImpl extends BaseModelImpl<TagsAsset> {
 	public static final boolean FINDER_CACHE_ENABLED_TAGSASSETS_TAGSENTRIES = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.TagsAssets_TagsEntries"),
 			true);
-	public static final boolean FINDER_CACHE_ENABLED_TAGSASSETS_CATEGORIESENTRIES =
-		GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
-				"value.object.finder.cache.enabled.TagsAssets_CategoriesEntries"),
-			true);
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.tags.model.TagsAsset"));
 
