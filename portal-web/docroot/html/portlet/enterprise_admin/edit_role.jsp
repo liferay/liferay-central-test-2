@@ -26,6 +26,7 @@
 
 <%
 String redirect = ParamUtil.getString(request, "redirect");
+String backURL = ParamUtil.getString(request, "backURL", redirect);
 
 Role role = (Role)request.getAttribute(WebKeys.ROLE);
 
@@ -44,6 +45,7 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 
 <liferay-util:include page="/html/portlet/enterprise_admin/role/toolbar.jsp">
 	<liferay-util:param name="toolbarItem" value='<%= (role == null) ? "add" : "view-all" %>' />
+	<liferay-util:param name="backURL" value="<%= backURL %>" />
 </liferay-util:include>
 
 <script type="text/javascript">

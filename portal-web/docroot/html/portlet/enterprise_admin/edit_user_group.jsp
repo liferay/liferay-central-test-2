@@ -26,6 +26,7 @@
 
 <%
 String redirect = ParamUtil.getString(request, "redirect");
+String backURL = ParamUtil.getString(request, "backURL", redirect);
 
 UserGroup userGroup = (UserGroup)request.getAttribute(WebKeys.USER_GROUP);
 
@@ -46,6 +47,7 @@ long userGroupId = BeanParamUtil.getLong(userGroup, request, "userGroupId");
 
 <liferay-util:include page="/html/portlet/enterprise_admin/user_group/toolbar.jsp">
 	<liferay-util:param name="toolbarItem" value='<%= (userGroup == null) ? "add" : "view-all" %>' />
+	<liferay-util:param name="backURL" value="<%= backURL %>" />
 </liferay-util:include>
 
 <liferay-ui:error exception="<%= DuplicateUserGroupException.class %>" message="please-enter-a-unique-name" />

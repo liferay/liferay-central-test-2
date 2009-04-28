@@ -26,6 +26,7 @@
 
 <%
 String redirect = ParamUtil.getString(request, "redirect");
+String backURL = ParamUtil.getString(request, "backURL", redirect);
 
 PasswordPolicy passwordPolicy = (PasswordPolicy)request.getAttribute(WebKeys.PASSWORD_POLICY);
 
@@ -43,6 +44,7 @@ long lockoutDuration = BeanParamUtil.getLong(passwordPolicy, request, "lockoutDu
 
 <liferay-util:include page="/html/portlet/enterprise_admin/password_policy/toolbar.jsp">
 	<liferay-util:param name="toolbarItem" value='<%= (passwordPolicy == null) ? "add" : "view-all" %>' />
+	<liferay-util:param name="backURL" value="<%= backURL %>" />
 </liferay-util:include>
 
 <form method="post" name="<portlet:namespace />fm" action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_password_policy" /></portlet:actionURL>">
