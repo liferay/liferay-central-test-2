@@ -61,6 +61,7 @@ import com.liferay.portlet.PortletPreferencesImpl;
 import com.liferay.portlet.PortletPreferencesSerializer;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.ratings.model.RatingsEntry;
+import com.liferay.portlet.social.util.SocialActivityThreadLocal;
 
 import java.io.InputStream;
 
@@ -456,6 +457,8 @@ public class PortletImporter {
 			portletDataRefEl.attributeValue("path"));
 
 		try {
+			SocialActivityThreadLocal.setEnabled(false);
+
 			preferencesImpl =
 				(PortletPreferencesImpl)portletDataHandler.importData(
 					context, portletId, preferencesImpl, portletData);
@@ -465,6 +468,8 @@ public class PortletImporter {
 		}
 		finally {
 			context.setGroupId(groupId);
+
+			SocialActivityThreadLocal.setEnabled(true);
 		}
 
 		if (preferencesImpl == null) {

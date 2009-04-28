@@ -30,6 +30,7 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.social.NoSuchActivityException;
 import com.liferay.portlet.social.model.SocialActivity;
 import com.liferay.portlet.social.service.base.SocialActivityLocalServiceBaseImpl;
+import com.liferay.portlet.social.util.SocialActivityThreadLocal;
 
 import java.util.Date;
 import java.util.List;
@@ -58,6 +59,10 @@ public class SocialActivityLocalServiceImpl
 			long userId, long groupId, Date createDate, String className,
 			long classPK, int type, String extraData, long receiverUserId)
 		throws PortalException, SystemException {
+
+		if (!SocialActivityThreadLocal.isEnabled()) {
+			return null;
+		}
 
 		User user = userPersistence.findByPrimaryKey(userId);
 		long classNameId = PortalUtil.getClassNameId(className);
