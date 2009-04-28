@@ -274,7 +274,7 @@ if (Validator.isNull(endDateOccurrenceParam) && (event != null)) {
 	}
 }
 
-String remindBy = BeanParamUtil.getString(event, request, "remindBy", CalEventImpl.REMIND_BY_EMAIL);
+int remindBy = BeanParamUtil.getInteger(event, request, "remindBy", CalEventImpl.REMIND_BY_EMAIL);
 int firstReminder = BeanParamUtil.getInteger(event, request, "firstReminder", (int)Time.MINUTE * 15);
 int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", (int)Time.MINUTE * 5);
 %>
@@ -714,13 +714,13 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 
 <br /><br />
 
-<input <%= remindBy.equals(CalEventImpl.REMIND_BY_NONE) ? "checked" : "" %> name="<portlet:namespace />remindBy" type="radio" value="<%= CalEventImpl.REMIND_BY_NONE %>"> <liferay-ui:message key="do-not-send-a-reminder" /><br />
-<input <%= remindBy.equals(CalEventImpl.REMIND_BY_EMAIL) ? "checked" : "" %> name="<portlet:namespace />remindBy" type="radio" value="<%= CalEventImpl.REMIND_BY_EMAIL %>"> <liferay-ui:message key="email-address" /> (<%= user.getEmailAddress() %>)<br />
-<input <%= remindBy.equals(CalEventImpl.REMIND_BY_SMS) ? "checked" : "" %> name="<portlet:namespace />remindBy" type="radio" value="<%= CalEventImpl.REMIND_BY_SMS %>"> <liferay-ui:message key="sms" /> <%= Validator.isNotNull(contact.getSmsSn()) ? "(" + contact.getSmsSn() + ")" : "" %><br />
-<input <%= remindBy.equals(CalEventImpl.REMIND_BY_AIM) ? "checked" : "" %> name="<portlet:namespace />remindBy" type="radio" value="<%= CalEventImpl.REMIND_BY_AIM %>"> <liferay-ui:message key="aim" /> <%= Validator.isNotNull(contact.getAimSn()) ? "(" + contact.getAimSn() + ")" : "" %><br />
-<input <%= remindBy.equals(CalEventImpl.REMIND_BY_ICQ) ? "checked" : "" %> name="<portlet:namespace />remindBy" type="radio" value="<%= CalEventImpl.REMIND_BY_ICQ %>"> <liferay-ui:message key="icq" /> <%= Validator.isNotNull(contact.getIcqSn()) ? "(" + contact.getIcqSn() + ")" : "" %><br />
-<input <%= remindBy.equals(CalEventImpl.REMIND_BY_MSN) ? "checked" : "" %> name="<portlet:namespace />remindBy" type="radio" value="<%= CalEventImpl.REMIND_BY_MSN %>"> <liferay-ui:message key="msn" /> <%= Validator.isNotNull(contact.getMsnSn()) ? "(" + contact.getMsnSn() + ")" : "" %><br />
-<input <%= remindBy.equals(CalEventImpl.REMIND_BY_YM) ? "checked" : "" %> name="<portlet:namespace />remindBy" type="radio" value="<%= CalEventImpl.REMIND_BY_YM %>"> <liferay-ui:message key="ym" /> <%= Validator.isNotNull(contact.getYmSn()) ? "(" + contact.getYmSn() + ")" : "" %>
+<input <%= (remindBy == CalEventImpl.REMIND_BY_NONE) ? "checked" : "" %> name="<portlet:namespace />remindBy" type="radio" value="<%= CalEventImpl.REMIND_BY_NONE %>"> <liferay-ui:message key="do-not-send-a-reminder" /><br />
+<input <%= (remindBy == CalEventImpl.REMIND_BY_EMAIL) ? "checked" : "" %> name="<portlet:namespace />remindBy" type="radio" value="<%= CalEventImpl.REMIND_BY_EMAIL %>"> <liferay-ui:message key="email-address" /> (<%= user.getEmailAddress() %>)<br />
+<input <%= (remindBy == CalEventImpl.REMIND_BY_SMS) ? "checked" : "" %> name="<portlet:namespace />remindBy" type="radio" value="<%= CalEventImpl.REMIND_BY_SMS %>"> <liferay-ui:message key="sms" /> <%= Validator.isNotNull(contact.getSmsSn()) ? "(" + contact.getSmsSn() + ")" : "" %><br />
+<input <%= (remindBy == CalEventImpl.REMIND_BY_AIM) ? "checked" : "" %> name="<portlet:namespace />remindBy" type="radio" value="<%= CalEventImpl.REMIND_BY_AIM %>"> <liferay-ui:message key="aim" /> <%= Validator.isNotNull(contact.getAimSn()) ? "(" + contact.getAimSn() + ")" : "" %><br />
+<input <%= (remindBy == CalEventImpl.REMIND_BY_ICQ) ? "checked" : "" %> name="<portlet:namespace />remindBy" type="radio" value="<%= CalEventImpl.REMIND_BY_ICQ %>"> <liferay-ui:message key="icq" /> <%= Validator.isNotNull(contact.getIcqSn()) ? "(" + contact.getIcqSn() + ")" : "" %><br />
+<input <%= (remindBy == CalEventImpl.REMIND_BY_MSN) ? "checked" : "" %> name="<portlet:namespace />remindBy" type="radio" value="<%= CalEventImpl.REMIND_BY_MSN %>"> <liferay-ui:message key="msn" /> <%= Validator.isNotNull(contact.getMsnSn()) ? "(" + contact.getMsnSn() + ")" : "" %><br />
+<input <%= (remindBy == CalEventImpl.REMIND_BY_YM) ? "checked" : "" %> name="<portlet:namespace />remindBy" type="radio" value="<%= CalEventImpl.REMIND_BY_YM %>"> <liferay-ui:message key="ym" /> <%= Validator.isNotNull(contact.getYmSn()) ? "(" + contact.getYmSn() + ")" : "" %>
 
 </form>
 
