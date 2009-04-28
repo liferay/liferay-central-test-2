@@ -647,28 +647,28 @@ public class MBUtil {
 				int posts = GetterUtil.getInteger(curRankValue);
 
 				if ((posts <= statsUser.getMessageCount()) &&
-					(posts > maxPosts)) {
+					(posts >= maxPosts)) {
 
 					rank = curRank;
 					maxPosts = posts;
 				}
 
-				continue;
 			}
+			else{
+				String entityType = curRankValueKvp[0];
+				String entityValue = curRankValueKvp[1];
 
-			String entityType = curRankValueKvp[0];
-			String entityValue = curRankValueKvp[1];
+				try {
+					if (_isEntityRank(
+							companyId, statsUser, entityType, entityValue)) {
 
-			try {
-				if (_isEntityRank(
-						companyId, statsUser, entityType, entityValue)) {
-
-					return curRank;
+						return curRank;
+					}
 				}
-			}
-			catch (Exception e) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(e);
+				catch (Exception e) {
+					if (_log.isWarnEnabled()) {
+						_log.warn(e);
+					}
 				}
 			}
 		}
