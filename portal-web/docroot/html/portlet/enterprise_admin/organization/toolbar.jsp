@@ -26,6 +26,7 @@
 
 <%
 String toolbarItem = ParamUtil.getString(request, "toolbarItem", "view-all");
+String backURL = ParamUtil.getString(request, "backURL");
 %>
 
 <div class="lfr-portlet-toolbar">
@@ -54,5 +55,8 @@ String toolbarItem = ParamUtil.getString(request, "toolbarItem", "view-all");
 		</liferay-portlet:renderURL>
 
 		<span class="lfr-toolbar-button custom-attributes-button"><a href="<%= expandoURL %>"><liferay-ui:message key="custom-attributes" /></a></span>
+	</c:if>
+
+	<c:if test="<%= Validator.isNotNull(backURL) %>">
 	</c:if>
 </div>
