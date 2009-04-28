@@ -22,6 +22,9 @@
 
 package com.liferay.portal.kernel.dao.orm;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+
 /**
  * <a href="FinderCacheUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -46,6 +49,20 @@ public class FinderCacheUtil {
 		return _finderCache;
 	}
 
+	/**
+	 * @deprecated
+	 */
+	public static Object getResult(
+		String className, String methodName, String[] params, Object[] args,
+		SessionFactory sessionFactory) {
+
+		_log.error(
+			"Regenerate " + className +
+				" via \"ant build-service\" or else caching will not work");
+
+		return null;
+	}
+
 	public static Object getResult(
 		FinderPath finderPath, Object[] args, SessionFactory sessionFactory) {
 
@@ -54,6 +71,18 @@ public class FinderCacheUtil {
 
 	public static void invalidate() {
 		getFinderCache().invalidate();
+	}
+
+	/**
+	 * @deprecated
+	 */
+	public static void putResult(
+		boolean classNameCacheEnabled, String className, String methodName,
+		String[] params, Object[] args, Object result) {
+
+		_log.error(
+			"Regenerate " + className +
+				" via \"ant build-service\" or else caching will not work");
 	}
 
 	public static void putResult(
@@ -69,6 +98,8 @@ public class FinderCacheUtil {
 	public void setFinderCache(FinderCache finderCache) {
 		_finderCache = finderCache;
 	}
+
+	private static Log _log = LogFactoryUtil.getLog(FinderCacheUtil.class);
 
 	private static FinderCache _finderCache;
 
