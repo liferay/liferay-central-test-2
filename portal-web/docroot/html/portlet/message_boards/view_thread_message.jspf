@@ -43,11 +43,15 @@
 						MBStatsUser statsUser = MBStatsUserLocalServiceUtil.getStatsUser(scopeGroupId, message.getUserId());
 
 						int posts = statsUser.getMessageCount();
-						String rank = MBUtil.getUserRank(preferences, themeDisplay.getLanguageId(), statsUser);
+						String[] ranks = MBUtil.getUserRank(preferences, themeDisplay.getLanguageId(), statsUser);
 						%>
 
-						<c:if test="<%= Validator.isNotNull(rank) %>">
-							<liferay-ui:message key="rank" />: <%= rank %><br />
+						<c:if test="<%= Validator.isNotNull(ranks[1]) %>">
+							<span class="thread-user-role-<%= ranks[1].toLowerCase() %>"><%= ranks[1] %></span>
+						</c:if>
+
+						<c:if test="<%= Validator.isNotNull(ranks[0]) %>">
+							<span class="thread-user-rank"><liferay-ui:message key="rank" />: <%= ranks[0] %></span>
 						</c:if>
 
 						<liferay-ui:message key="posts" />: <%= posts %><br />

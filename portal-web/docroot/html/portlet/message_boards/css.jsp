@@ -151,6 +151,10 @@ td.user-info {
 	float: right;
 }
 
+.portlet-message-boards .thread-user-rank {
+	display: block;
+}
+
 .portlet-message-boards .emoticons {
 	border: 1px solid #ccc;
 	margin-left: 10px;

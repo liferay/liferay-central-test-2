@@ -617,12 +617,12 @@ public class MBUtil {
 		return rank;
 	}
 
-	public static String getUserRank(
+	public static String[] getUserRank(
 			PortletPreferences preferences, String languageId,
 			MBStatsUser statsUser)
 		throws Exception {
 
-		String rank = StringPool.BLANK;
+		String[] rank = {StringPool.BLANK, StringPool.BLANK};
 
 		int maxPosts = 0;
 
@@ -649,12 +649,12 @@ public class MBUtil {
 				if ((posts <= statsUser.getMessageCount()) &&
 					(posts >= maxPosts)) {
 
-					rank = curRank;
+					rank[0] = curRank;
 					maxPosts = posts;
 				}
 
 			}
-			else{
+			else {
 				String entityType = curRankValueKvp[0];
 				String entityValue = curRankValueKvp[1];
 
@@ -662,7 +662,8 @@ public class MBUtil {
 					if (_isEntityRank(
 							companyId, statsUser, entityType, entityValue)) {
 
-						return curRank;
+						rank[1] = curRank;
+						break;
 					}
 				}
 				catch (Exception e) {
