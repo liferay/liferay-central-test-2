@@ -26,13 +26,13 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="AssertMergeOrganizationPageTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="AssertNotMergeOrganizationPageTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class AssertMergeOrganizationPageTest extends BaseTestCase {
-	public void testAssertMergeOrganizationPage() throws Exception {
+public class AssertNotMergeOrganizationPageTest extends BaseTestCase {
+	public void testAssertNotMergeOrganizationPage() throws Exception {
 		int label = 1;
 
 		while (label >= 1) {
@@ -53,19 +53,15 @@ public class AssertMergeOrganizationPageTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 
 			case 2:
-				assertTrue(selenium.isElementPresent("link=Selenium"));
-				selenium.click(RuntimeVariables.replace("//li[2]/ul/li[1]/a[1]"));
-				selenium.waitForPageToLoad("30000");
-				assertTrue(selenium.isElementPresent("link=Welcome"));
-				assertTrue(selenium.isElementPresent(
-						"link=Selenium Test Home Page"));
 				selenium.click(RuntimeVariables.replace("//li[5]/ul/li[1]/a[1]"));
 				selenium.waitForPageToLoad("30000");
-				assertTrue(selenium.isElementPresent("link=Welcome"));
-				assertTrue(selenium.isElementPresent(
+				assertFalse(selenium.isElementPresent(
 						"link=Selenium Test Home Page"));
+				selenium.click(RuntimeVariables.replace("//li[2]/ul/li[1]/a[1]"));
+				selenium.waitForPageToLoad("30000");
+				assertFalse(selenium.isElementPresent("link=Welcome"));
 				selenium.click(RuntimeVariables.replace(
-						"my-community-public-pages"));
+						"//a[@id='my-community-public-pages']"));
 				selenium.waitForPageToLoad("30000");
 				selenium.click(RuntimeVariables.replace("link=Control Panel"));
 				selenium.waitForPageToLoad("30000");

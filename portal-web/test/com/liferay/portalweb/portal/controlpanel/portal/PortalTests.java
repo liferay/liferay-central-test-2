@@ -71,6 +71,7 @@ public class PortalTests extends BaseTests {
 		testSuite.addTestSuite(AssertApplyOrganizationTest.class);
 		testSuite.addTestSuite(AssertCannotDeleteApplyOrganizationTest.class);
 		testSuite.addTestSuite(AddOrganizationPageTest.class);
+		testSuite.addTestSuite(AssertNotMergeOrganizationPageTest.class);
 		testSuite.addTestSuite(MergeOrganizationPageTest.class);
 		testSuite.addTestSuite(AssertMergeOrganizationPageTest.class);
 		testSuite.addTestSuite(RemoveApplyOrganizationTest.class);

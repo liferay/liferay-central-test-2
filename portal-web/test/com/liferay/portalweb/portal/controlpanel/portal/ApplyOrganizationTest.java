@@ -77,6 +77,18 @@ public class ApplyOrganizationTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Available"));
 		selenium.waitForPageToLoad("30000");
+		selenium.typeKeys("_126_keywords", RuntimeVariables.replace("joebloggs"));
+		selenium.type("_126_keywords", RuntimeVariables.replace("joebloggs"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click("_126_allRowIds");
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Update Associations']"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
+		selenium.click(RuntimeVariables.replace("link=Available"));
+		selenium.waitForPageToLoad("30000");
 		selenium.typeKeys("_126_keywords", RuntimeVariables.replace("selenium"));
 		selenium.type("_126_keywords", RuntimeVariables.replace("selenium"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));

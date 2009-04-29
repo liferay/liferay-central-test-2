@@ -75,6 +75,7 @@ public class AssertRemoveApplyOrganizationTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=View Users"));
 		selenium.waitForPageToLoad("30000");
+		assertFalse(selenium.isElementPresent("link=joebloggs"));
 		assertFalse(selenium.isElementPresent("link=selenium01"));
 		assertFalse(selenium.isElementPresent("link=selenium02"));
 	}

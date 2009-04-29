@@ -1,12 +1,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>AssertMergeOrganizationPageTest</title>
+<title>AssertNotMergeOrganizationPageTest</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">AssertMergeOrganizationPageTest</td></tr>
+<tr><td rowspan="1" colspan="3">AssertNotMergeOrganizationPageTest</td></tr>
 </thead><tbody>
 <tr>
 	<td>store</td>
@@ -29,8 +29,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
-	<td>link=Selenium</td>
+	<td>clickAndWait</td>
+	<td>//li[5]/ul/li[1]/a[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>link=Selenium Test Home Page</td>
 	<td></td>
 </tr>
 <tr>
@@ -39,33 +44,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
+	<td>assertElementNotPresent</td>
 	<td>link=Welcome</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
-	<td>link=Selenium Test Home Page</td>
-	<td></td>
-</tr>
-<tr>
 	<td>clickAndWait</td>
-	<td>//li[5]/ul/li[1]/a[1]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertElementPresent</td>
-	<td>link=Welcome</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertElementPresent</td>
-	<td>link=Selenium Test Home Page</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>my-community-public-pages</td>
+	<td>//a[@id='my-community-public-pages']</td>
 	<td></td>
 </tr>
 <tr>

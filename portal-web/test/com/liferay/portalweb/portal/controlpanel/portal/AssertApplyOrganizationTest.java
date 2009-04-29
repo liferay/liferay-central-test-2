@@ -75,6 +75,7 @@ public class AssertApplyOrganizationTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=View Users"));
 		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isElementPresent("link=joebloggs"));
 		assertTrue(selenium.isElementPresent("link=selenium01"));
 		assertTrue(selenium.isElementPresent("link=selenium02"));
 	}
