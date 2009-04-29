@@ -38,6 +38,7 @@ import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileRank;
 import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
+import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFolderUtil;
 
 import java.util.List;
@@ -96,14 +97,26 @@ public class DLDisplayPortletDataHandlerImpl extends BasePortletDataHandler {
 			Element fileShortcutsEl = root.addElement("file-shortcuts");
 			Element fileRanksEl = root.addElement("file-ranks");
 
-			DLFolder folder = DLFolderUtil.findByPrimaryKey(rootFolderId);
+			if (rootFolderId == DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
+				List<DLFolder> folders = DLFolderUtil.findByGroupId(
+					context.getGroupId());
 
-			root.addAttribute(
-				"root-folder-id", String.valueOf(folder.getFolderId()));
+				for (DLFolder folder : folders) {
+					DLPortletDataHandlerImpl.exportFolder(
+						context, foldersEl, fileEntriesEl, fileShortcutsEl,
+						fileRanksEl, folder);
+				}
+			}
+			else {
+				DLFolder folder = DLFolderUtil.findByPrimaryKey(rootFolderId);
 
-			DLPortletDataHandlerImpl.exportFolder(
-				context, foldersEl, fileEntriesEl, fileShortcutsEl,
-				fileRanksEl, folder);
+				root.addAttribute(
+					"root-folder-id", String.valueOf(folder.getFolderId()));
+
+				DLPortletDataHandlerImpl.exportFolder(
+					context, foldersEl, fileEntriesEl, fileShortcutsEl,
+					fileRanksEl, folder);
+			}
 
 			return doc.formattedString();
 		}
