@@ -99,6 +99,10 @@ public class ExpandoTableLocalServiceImpl
 
 			dbUtil.runSQL(
 				"DELETE FROM ExpandoValue WHERE tableId = " + tableId);
+
+			// Rows
+
+			dbUtil.runSQL("DELETE FROM ExpandoRow WHERE tableId = " + tableId);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
