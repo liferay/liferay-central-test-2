@@ -449,7 +449,7 @@ Liferay.Navigation = new Expanse.Class(
 					};
 
 					onSuccess = function(data) {
-						var newTab = jQuery('<a href="' + data.url + '"><span>' + name + '</span></a>');
+						var newTab = jQuery('<a href="' + data.url + '"><span>' + Liferay.Util.escapeHTML(name) + '</span></a>');
 
 						if (instance._isUseHandle) {
 							enterPage.before('<span class="sort-handle">+</span>');

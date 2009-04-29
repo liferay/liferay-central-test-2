@@ -385,6 +385,26 @@ Liferay.Util = {
 		return (str.lastIndexOf(x) === (str.length - x.length));
 	},
 
+	escapeHTML: function(str) {
+		return str.replace(/<|>|&/gi,
+			function(match) {
+				var str = '';
+
+				if (match == '<') {
+					str = '&lt;';
+				}
+				else if (match == '>') {
+					str = '&gt;';
+				}
+				else if (match == '&') {
+					str = '&amp;';
+				}
+
+				return str;
+			}
+		);
+	},
+
 	focusFormField: function(el, caretPosition) {
 		var interacting = false;
 		var eventData = caretPosition ? [caretPosition] : null;
@@ -660,7 +680,7 @@ Liferay.Util = {
 						);
 					}
 
-					return cruft + value;
+					return cruft + Liferay.Util.escapeHTML(value);
 				},
 				{
 					cssclass: 'text',
