@@ -1,5 +1,6 @@
 package ${packagePath}.service.base;
 
+import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import ${beanLocatorUtil};
@@ -18,7 +19,6 @@ import com.liferay.portal.util.PortalUtil;
 	import ${packagePath}.model.impl.${entity.name}Impl;
 
 	import com.liferay.portal.PortalException;
-	import com.liferay.portal.SystemException;
 	import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 
 	import java.util.List;
