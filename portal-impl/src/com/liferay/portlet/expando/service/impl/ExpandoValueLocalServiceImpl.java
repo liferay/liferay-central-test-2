@@ -26,6 +26,7 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.security.auth.CompanyThreadLocal;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.expando.NoSuchValueException;
 import com.liferay.portlet.expando.model.ExpandoColumn;
 import com.liferay.portlet.expando.model.ExpandoColumnConstants;
 import com.liferay.portlet.expando.model.ExpandoRow;
@@ -1179,6 +1180,20 @@ public class ExpandoValueLocalServiceImpl
 		long classNameId = PortalUtil.getClassNameId(className);
 
 		return getValue(classNameId, tableName, columnName, classPK);
+	}
+
+	public ExpandoValue getValue(
+			long classNameId, long tableId, long columnId, long classPK)
+		throws PortalException, SystemException {
+
+		List<ExpandoValue> list = expandoValuePersistence.findByT_C_C_C(
+			tableId, columnId, classNameId, classPK);
+
+		if (list.isEmpty()) {
+			throw new NoSuchValueException();
+		}
+
+		return list.get(0);
 	}
 
 	public ExpandoValue getValue(
