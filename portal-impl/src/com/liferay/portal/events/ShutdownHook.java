@@ -22,6 +22,10 @@
 
 package com.liferay.portal.events;
 
+import com.liferay.portal.kernel.util.GetterUtil;
+
+import java.util.Map;
+
 /**
  * <a href="ShutdownHook.java.html"><b><i>View Source</i></b></a>
  *
@@ -31,6 +35,56 @@ package com.liferay.portal.events;
 public class ShutdownHook implements Runnable {
 
 	public void run() {
+		if (GetterUtil.getBoolean(
+				System.getProperty("shutdown.hook.print.full.thread.dump"))) {
+
+			printFullThreadDump();
+		}
+	}
+
+	protected void printFullThreadDump() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("Full thread dump ");
+		sb.append(System.getProperty("java.vm.name"));
+		sb.append(" ");
+		sb.append(System.getProperty("java.vm.version"));
+		sb.append("\n\n");
+
+		Map<Thread, StackTraceElement[]> stackTraces =
+			Thread.getAllStackTraces();
+
+		for (Thread thread : stackTraces.keySet()) {
+			StackTraceElement[] elements = stackTraces.get(thread);
+
+			sb.append("\"");
+			sb.append(thread.getName());
+			sb.append("\"");
+
+			if (thread.getThreadGroup() != null) {
+				sb.append(" (");
+				sb.append(thread.getThreadGroup().getName());
+				sb.append(")");
+			}
+
+			sb.append(", priority=");
+			sb.append(thread.getPriority());
+			sb.append(", id=");
+			sb.append(thread.getId());
+			sb.append(", state=");
+			sb.append(thread.getState());
+			sb.append("\n");
+
+			for (int i = 0; i < elements.length; i++) {
+				sb.append("\t");
+				sb.append(elements[i]);
+				sb.append("\n");
+			}
+
+			sb.append("\n");
+		}
+
+		System.out.println(sb);
 	}
 
 }
