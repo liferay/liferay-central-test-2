@@ -103,23 +103,7 @@ NumberFormat numberFormat = NumberFormat.getNumberInstance(locale);
 </c:if>
 
 <c:if test='<%= type.equals("regular") %>'>
-	<div class="search-results">
-		<c:choose>
-			<c:when test="<%= total > resultRowsSize %>">
-				<%= LanguageUtil.format(pageContext, "showing-x-x-of-x-results", new Object[] {numberFormat.format(start + 1), numberFormat.format(end), numberFormat.format(total)}) %>
-			</c:when>
-			<c:otherwise>
-				<c:choose>
-					<c:when test="<%= total != 1 %>">
-						<%= LanguageUtil.format(pageContext, "showing-x-results", numberFormat.format(total)) %>
-					</c:when>
-					<c:otherwise>
-						<%= LanguageUtil.format(pageContext, "showing-x-result", numberFormat.format(total)) %>
-					</c:otherwise>
-				</c:choose>
-			</c:otherwise>
-		</c:choose>
-	</div>
+	<%@ include file="/html/taglib/ui/page_iterator/showing_x_results.jspf" %>
 </c:if>
 
 <c:if test='<%= type.equals("article") && (total > resultRowsSize) %>'>
