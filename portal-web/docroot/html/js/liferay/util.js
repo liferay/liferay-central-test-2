@@ -386,7 +386,8 @@ Liferay.Util = {
 	},
 
 	escapeHTML: function(str) {
-		return str.replace(/<|>|&/gi,
+		return str.replace(
+			/<|>|&/gi,
 			function(match) {
 				var str = '';
 
@@ -680,7 +681,7 @@ Liferay.Util = {
 						);
 					}
 
-					return cruft + Liferay.Util.escapeHTML(value);
+					return cruft + escapeHTML(value);
 				},
 				{
 					cssclass: 'text',
