@@ -657,7 +657,7 @@
 	</category>
 
 	<category name="com.mchange">
-		<priority value="ERROR" />
+		<priority value="WARN" />
 	</category>
 
 	<category name="com.opensymphony.oscache">
