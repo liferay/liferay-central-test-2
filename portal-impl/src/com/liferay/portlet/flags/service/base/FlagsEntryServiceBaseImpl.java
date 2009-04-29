@@ -24,6 +24,7 @@ package com.liferay.portlet.flags.service.base;
 
 import com.liferay.mail.service.MailService;
 
+import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.service.CompanyLocalService;
 import com.liferay.portal.service.CompanyService;

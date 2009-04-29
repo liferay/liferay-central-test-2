@@ -27,6 +27,7 @@ import com.liferay.counter.service.CounterService;
 
 import com.liferay.lock.service.LockService;
 
+import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountService;

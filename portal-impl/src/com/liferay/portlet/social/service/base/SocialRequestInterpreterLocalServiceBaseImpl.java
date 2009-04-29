@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.social.service.base;
 
+import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.util.PortalUtil;
 
