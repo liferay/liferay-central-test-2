@@ -38,6 +38,7 @@ import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.model.impl.ResourceImpl;
+import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.security.permission.PermissionsListFilter;
 import com.liferay.portal.security.permission.PermissionsListFilterFactory;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
@@ -73,6 +74,10 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 			String primKey, String[] communityPermissions,
 			String[] guestPermissions)
 		throws PortalException, SystemException {
+
+		if (PermissionThreadLocal.isSkipAddResource()) {
+			return;
+		}
 
 		validate(name, false);
 
@@ -126,6 +131,10 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 			long companyId, String name, int scope, String primKey)
 		throws SystemException {
 
+		if (PermissionThreadLocal.isSkipAddResource()) {
+			return null;
+		}
+
 		if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
 			return addResource_6(companyId, name, scope, primKey);
 		}
@@ -158,6 +167,10 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 			String primKey, boolean portletActions,
 			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
+
+		if (PermissionThreadLocal.isSkipAddResource()) {
+			return;
+		}
 
 		validate(name, portletActions);
 
