@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ListUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.Document;
@@ -249,6 +250,15 @@ public class ResourceActionsUtil {
 		return _instance._getPortletResourceLayoutManagerActions(name);
 	}
 
+	public static List<String> getResourceActions(String name) {
+		if (name.contains(StringPool.PERIOD)) {
+			return getModelResourceActions(name);
+		}
+		else {
+			return getPortletResourceActions(name);
+		}
+	}
+
 	public static List<String> getResourceActions(
 		String portletResource, String modelResource) {
 
@@ -262,6 +272,15 @@ public class ResourceActionsUtil {
 		}
 
 		return actions;
+	}
+
+	public static List<String> getResourceCommunityDefaultActions(String name) {
+		if (name.contains(StringPool.PERIOD)) {
+			return getModelResourceCommunityDefaultActions(name);
+		}
+		else {
+			return getPortletResourceCommunityDefaultActions(name);
+		}
 	}
 
 	public static List<String> getResourceGuestUnsupportedActions(
