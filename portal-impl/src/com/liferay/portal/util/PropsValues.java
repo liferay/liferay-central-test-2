@@ -1145,10 +1145,6 @@ public class PropsValues {
 		GetterUtil.getIntegerValues(
 			PropsUtil.getArray(PropsKeys.SEARCH_CONTAINER_PAGE_DELTA_VALUES));
 
-	public static boolean SEARCH_CONTAINER_SUMMARY_MAXIMIZED_ONLY =
-		GetterUtil.getBoolean(
-			PropsUtil.get(PropsKeys.SEARCH_CONTAINER_SUMMARY_MAXIMIZED_ONLY));
-
 	public static final String[] SERVICE_BUILDER_SERVICE_READ_ONLY_PREFIXES =
 		PropsUtil.getArray(
 			PropsKeys.SERVICE_BUILDER_SERVICE_READ_ONLY_PREFIXES);

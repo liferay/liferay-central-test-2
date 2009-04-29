@@ -24,8 +24,6 @@
 
 <%@ include file="/html/taglib/init.jsp" %>
 
-<portlet:defineObjects />
-
 <%
 String formName = namespace + request.getAttribute("liferay-ui:page-iterator:formName");
 int cur = GetterUtil.getInteger((String)request.getAttribute("liferay-ui:page-iterator:cur"));
@@ -62,13 +60,6 @@ else {
 }
 
 String deltaURL = HttpUtil.removeParameter(url, namespace + deltaParam);
-
-boolean showResultsSummary = true;
-
-if (PropsValues.SEARCH_CONTAINER_SUMMARY_MAXIMIZED_ONLY &&
-		(renderRequest.getWindowState() != WindowState.MAXIMIZED)) {
-	showResultsSummary = false;
-}
 
 NumberFormat numberFormat = NumberFormat.getNumberInstance(locale);
 %>
@@ -111,7 +102,7 @@ NumberFormat numberFormat = NumberFormat.getNumberInstance(locale);
 	<div class="taglib-page-iterator">
 </c:if>
 
-<c:if test='<%= showResultsSummary && type.equals("regular") %>'>
+<c:if test='<%= type.equals("regular") %>'>
 	<div class="search-results">
 		<c:choose>
 			<c:when test="<%= total > resultRowsSize %>">
