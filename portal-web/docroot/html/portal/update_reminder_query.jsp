@@ -48,7 +48,7 @@
 		<select id="reminderQueryQuestion" name="reminderQueryQuestion">
 
 			<%
-			for (String question : PropsValues.USERS_REMINDER_QUERIES_QUESTIONS) {
+			for (String question : user.getReminderQueryQuestions()) {
 			%>
 
 				<option value="<%= question %>"><liferay-ui:message key="<%= question %>" /></option>
