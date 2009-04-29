@@ -24,8 +24,10 @@ package com.liferay.portlet.expando.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.auth.CompanyThreadLocal;
+import com.liferay.portal.tools.sql.DBUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.expando.DuplicateTableNameException;
 import com.liferay.portlet.expando.TableNameException;
@@ -89,9 +91,21 @@ public class ExpandoTableLocalServiceImpl
 	public void deleteTable(long tableId)
 		throws PortalException, SystemException {
 
-		// Values
+		try {
 
-		expandoValueLocalService.deleteTableValues(tableId);
+			// Values
+
+			DBUtil dbUtil = DBUtil.getInstance();
+
+			dbUtil.runSQL(
+				"DELETE FROM ExpandoValue WHERE tableId = " + tableId);
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			FinderCacheUtil.clearCache();
+		}
 
 		// Columns
 
