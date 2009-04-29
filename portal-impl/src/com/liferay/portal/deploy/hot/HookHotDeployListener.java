@@ -886,6 +886,7 @@ public class HookHotDeployListener
 		"my.places.show.organization.public.sites.with.no.layouts",
 		"my.places.show.user.private.sites.with.no.layouts",
 		"my.places.show.user.public.sites.with.no.layouts",
+		"search.container.summary.maximized.only",
 		"terms.of.use.required",
 		"theme.css.fast.load",
 		"theme.images.fast.load"
