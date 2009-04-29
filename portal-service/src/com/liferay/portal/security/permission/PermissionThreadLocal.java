@@ -22,6 +22,8 @@
 
 package com.liferay.portal.security.permission;
 
+import com.liferay.portal.kernel.util.InitialThreadLocal;
+
 /**
  * <a href="PermissionThreadLocal.java.html"><b><i>View Source</i></b></a>
  *
@@ -31,16 +33,27 @@ package com.liferay.portal.security.permission;
 public class PermissionThreadLocal {
 
 	public static PermissionChecker getPermissionChecker() {
-		return _threadLocal.get();
+		return _permissionChecker.get();
+	}
+
+	public static boolean isAddResource() {
+		return _addResource.get().booleanValue();
+	}
+
+	public static void setAddResource(boolean addResource) {
+		_addResource.set(addResource);
 	}
 
 	public static void setPermissionChecker(
 		PermissionChecker permissionChecker) {
 
-		_threadLocal.set(permissionChecker);
+		_permissionChecker.set(permissionChecker);
 	}
 
-	private static ThreadLocal<PermissionChecker> _threadLocal =
+	private static ThreadLocal<Boolean> _addResource =
+		new InitialThreadLocal<Boolean>(true);
+
+	private static ThreadLocal<PermissionChecker> _permissionChecker =
 		new ThreadLocal<PermissionChecker>();
 
 }
