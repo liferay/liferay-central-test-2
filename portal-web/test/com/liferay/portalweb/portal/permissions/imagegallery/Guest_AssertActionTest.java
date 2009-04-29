@@ -68,9 +68,6 @@ public class Guest_AssertActionTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"link=Image Gallery Permissions Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=My Images"));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("Second Permissions Image Test"));
 		selenium.click(RuntimeVariables.replace("link=Recent Images"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Second Permissions Image Test"));
