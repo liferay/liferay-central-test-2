@@ -37,12 +37,16 @@ import com.liferay.portlet.expando.model.ExpandoBridge;
 import java.io.IOException;
 import java.io.Serializable;
 
+import java.sql.SQLException;
+
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Properties;
 import java.util.TimeZone;
+
+import javax.naming.NamingException;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -505,6 +509,9 @@ public interface Portal {
 			Portlet portlet, String queryString, String columnId,
 			Integer columnPos, Integer columnCount, String path)
 		throws IOException, ServletException;
+
+	public void runSQL(String sql)
+		throws IOException, NamingException, SQLException;
 
 	public void sendError(
 			Exception e, HttpServletRequest request,

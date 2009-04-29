@@ -137,6 +137,8 @@ import java.io.Serializable;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
+import java.sql.SQLException;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -154,6 +156,8 @@ import java.util.Set;
 import java.util.TimeZone;
 import java.util.TreeSet;
 import java.util.concurrent.ConcurrentHashMap;
+
+import javax.naming.NamingException;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -2848,6 +2852,12 @@ public class PortalImpl implements Portal {
 
 			requestDispatcher.include(request, response);
 		}
+	}
+
+	public void runSQL(String sql)
+		throws IOException, NamingException, SQLException {
+
+		DBUtil.getInstance().runSQL(sql);
 	}
 
 	public void sendError(

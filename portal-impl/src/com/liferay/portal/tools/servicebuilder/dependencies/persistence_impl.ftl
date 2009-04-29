@@ -183,6 +183,13 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 		}
 	}
 
+	public void clearCache() {
+		CacheRegistry.clear(${entity.name}Impl.class.getName());
+		EntityCacheUtil.clearCache(${entity.name}Impl.class.getName());
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
+	}
+
 	public ${entity.name} create(${entity.PKClassName} ${entity.PKVarName}) {
 		${entity.name} ${entity.varName} = new ${entity.name}Impl();
 

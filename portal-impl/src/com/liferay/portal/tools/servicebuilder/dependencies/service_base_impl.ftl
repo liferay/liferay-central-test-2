@@ -19,6 +19,7 @@ import ${beanLocatorUtil};
 	import com.liferay.portal.PortalException;
 	import com.liferay.portal.SystemException;
 	import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+	import com.liferay.portal.util.PortalUtil;
 
 	import java.util.List;
 </#if>
@@ -86,6 +87,15 @@ import ${beanLocatorUtil};
 
 	public int get${entity.names}Count() throws SystemException {
 		return ${entity.varName}Persistence.countAll();
+	}
+
+	public void runSQL(String sql) throws SystemException {
+		try {
+			PortalUtil.runSQL(sql);
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
 	}
 
 	public ${entity.name} update${entity.name}(${entity.name} ${entity.varName}) ${serviceBuilder.getServiceBaseThrowsExceptions(methods, "update" + entity.name, [packagePath + ".model." + entity.name], ["SystemException"])} {
