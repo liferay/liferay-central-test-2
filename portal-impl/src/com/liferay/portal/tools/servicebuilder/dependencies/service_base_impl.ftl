@@ -3,6 +3,7 @@ package ${packagePath}.service.base;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import ${beanLocatorUtil};
+import com.liferay.portal.util.PortalUtil;
 
 <#if sessionTypeName == "">
 	import com.liferay.portal.service.base.PrincipalBean;
@@ -19,7 +20,6 @@ import ${beanLocatorUtil};
 	import com.liferay.portal.PortalException;
 	import com.liferay.portal.SystemException;
 	import com.liferay.portal.kernel.dao.orm.DynamicQuery;
-	import com.liferay.portal.util.PortalUtil;
 
 	import java.util.List;
 </#if>
@@ -89,15 +89,6 @@ import ${beanLocatorUtil};
 		return ${entity.varName}Persistence.countAll();
 	}
 
-	public void runSQL(String sql) throws SystemException {
-		try {
-			PortalUtil.runSQL(sql);
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-	}
-
 	public ${entity.name} update${entity.name}(${entity.name} ${entity.varName}) ${serviceBuilder.getServiceBaseThrowsExceptions(methods, "update" + entity.name, [packagePath + ".model." + entity.name], ["SystemException"])} {
 		${entity.varName}.setNew(false);
 
@@ -152,6 +143,15 @@ import ${beanLocatorUtil};
 		}
 	</#if>
 </#list>
+
+protected void runSQL(String sql) throws SystemException {
+	try {
+		PortalUtil.runSQL(sql);
+	}
+	catch (Exception e) {
+		throw new SystemException(e);
+	}
+}
 
 <#list referenceList as tempEntity>
 	<#if tempEntity.hasLocalService()>
