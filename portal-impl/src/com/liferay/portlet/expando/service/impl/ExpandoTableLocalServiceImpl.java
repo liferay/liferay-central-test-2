@@ -46,24 +46,16 @@ import java.util.List;
 public class ExpandoTableLocalServiceImpl
 	extends ExpandoTableLocalServiceBaseImpl {
 
-	public ExpandoTable addDefaultTable(String className)
-		throws PortalException, SystemException {
-
-		return addTable(className, ExpandoTableConstants.DEFAULT_TABLE_NAME);
-	}
-
 	public ExpandoTable addDefaultTable(long classNameId)
 		throws PortalException, SystemException {
 
 		return addTable(classNameId, ExpandoTableConstants.DEFAULT_TABLE_NAME);
 	}
 
-	public ExpandoTable addTable(String className, String name)
+	public ExpandoTable addDefaultTable(String className)
 		throws PortalException, SystemException {
 
-		long classNameId = PortalUtil.getClassNameId(className);
-
-		return addTable(classNameId, name);
+		return addTable(className, ExpandoTableConstants.DEFAULT_TABLE_NAME);
 	}
 
 	public ExpandoTable addTable(long classNameId, String name)
@@ -84,6 +76,14 @@ public class ExpandoTableLocalServiceImpl
 		expandoTablePersistence.update(table, false);
 
 		return table;
+	}
+
+	public ExpandoTable addTable(String className, String name)
+		throws PortalException, SystemException {
+
+		long classNameId = PortalUtil.getClassNameId(className);
+
+		return addTable(classNameId, name);
 	}
 
 	public void deleteTable(long tableId)
@@ -118,14 +118,6 @@ public class ExpandoTableLocalServiceImpl
 		expandoTablePersistence.remove(tableId);
 	}
 
-	public void deleteTable(String className, String name)
-		throws PortalException, SystemException {
-
-		long classNameId = PortalUtil.getClassNameId(className);
-
-		deleteTable(classNameId, name);
-	}
-
 	public void deleteTable(long classNameId, String name)
 		throws PortalException, SystemException {
 
@@ -137,12 +129,12 @@ public class ExpandoTableLocalServiceImpl
 		deleteTable(table.getTableId());
 	}
 
-	public void deleteTables(String className)
+	public void deleteTable(String className, String name)
 		throws PortalException, SystemException {
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
-		deleteTables(classNameId);
+		deleteTable(classNameId, name);
 	}
 
 	public void deleteTables(long classNameId)
@@ -158,12 +150,12 @@ public class ExpandoTableLocalServiceImpl
 		}
 	}
 
-	public ExpandoTable getDefaultTable(String className)
+	public void deleteTables(String className)
 		throws PortalException, SystemException {
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
-		return getTable(classNameId, ExpandoTableConstants.DEFAULT_TABLE_NAME);
+		deleteTables(classNameId);
 	}
 
 	public ExpandoTable getDefaultTable(long classNameId)
@@ -172,18 +164,18 @@ public class ExpandoTableLocalServiceImpl
 		return getTable(classNameId, ExpandoTableConstants.DEFAULT_TABLE_NAME);
 	}
 
-	public ExpandoTable getTable(long tableId)
-		throws PortalException, SystemException {
-
-		return expandoTablePersistence.findByPrimaryKey(tableId);
-	}
-
-	public ExpandoTable getTable(String className, String name)
+	public ExpandoTable getDefaultTable(String className)
 		throws PortalException, SystemException {
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
-		return getTable(classNameId, name);
+		return getTable(classNameId, ExpandoTableConstants.DEFAULT_TABLE_NAME);
+	}
+
+	public ExpandoTable getTable(long tableId)
+		throws PortalException, SystemException {
+
+		return expandoTablePersistence.findByPrimaryKey(tableId);
 	}
 
 	public ExpandoTable getTable(long classNameId, String name)
@@ -195,12 +187,12 @@ public class ExpandoTableLocalServiceImpl
 			companyId, classNameId, name);
 	}
 
-	public List<ExpandoTable> getTables(String className)
-		throws SystemException {
+	public ExpandoTable getTable(String className, String name)
+		throws PortalException, SystemException {
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
-		return getTables(classNameId);
+		return getTable(classNameId, name);
 	}
 
 	public List<ExpandoTable> getTables(long classNameId)
@@ -209,6 +201,14 @@ public class ExpandoTableLocalServiceImpl
 		long companyId = CompanyThreadLocal.getCompanyId();
 
 		return expandoTablePersistence.findByC_C(companyId, classNameId);
+	}
+
+	public List<ExpandoTable> getTables(String className)
+		throws SystemException {
+
+		long classNameId = PortalUtil.getClassNameId(className);
+
+		return getTables(classNameId);
 	}
 
 	public ExpandoTable updateTable(long tableId, String name)

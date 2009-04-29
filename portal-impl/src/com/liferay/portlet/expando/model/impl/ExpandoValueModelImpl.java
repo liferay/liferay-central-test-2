@@ -234,6 +234,16 @@ public class ExpandoValueModelImpl extends BaseModelImpl<ExpandoValue> {
 
 	public void setClassPK(long classPK) {
 		_classPK = classPK;
+
+		if (!_setOriginalClassPK) {
+			_setOriginalClassPK = true;
+
+			_originalClassPK = classPK;
+		}
+	}
+
+	public long getOriginalClassPK() {
+		return _originalClassPK;
 	}
 
 	public String getData() {
@@ -444,5 +454,7 @@ public class ExpandoValueModelImpl extends BaseModelImpl<ExpandoValue> {
 	private boolean _setOriginalRowId;
 	private long _classNameId;
 	private long _classPK;
+	private long _originalClassPK;
+	private boolean _setOriginalClassPK;
 	private String _data;
 }

@@ -169,6 +169,66 @@ public interface ExpandoValuePersistence extends BasePersistence {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.expando.NoSuchValueException;
 
+	public java.util.List<com.liferay.portlet.expando.model.ExpandoValue> findByT_C(
+		long tableId, long columnId) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.expando.model.ExpandoValue> findByT_C(
+		long tableId, long columnId, int start, int end)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.expando.model.ExpandoValue> findByT_C(
+		long tableId, long columnId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.expando.model.ExpandoValue findByT_C_First(
+		long tableId, long columnId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.expando.NoSuchValueException;
+
+	public com.liferay.portlet.expando.model.ExpandoValue findByT_C_Last(
+		long tableId, long columnId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.expando.NoSuchValueException;
+
+	public com.liferay.portlet.expando.model.ExpandoValue[] findByT_C_PrevAndNext(
+		long valueId, long tableId, long columnId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.expando.NoSuchValueException;
+
+	public java.util.List<com.liferay.portlet.expando.model.ExpandoValue> findByT_CPK(
+		long tableId, long classPK) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.expando.model.ExpandoValue> findByT_CPK(
+		long tableId, long classPK, int start, int end)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.expando.model.ExpandoValue> findByT_CPK(
+		long tableId, long classPK, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.expando.model.ExpandoValue findByT_CPK_First(
+		long tableId, long classPK,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.expando.NoSuchValueException;
+
+	public com.liferay.portlet.expando.model.ExpandoValue findByT_CPK_Last(
+		long tableId, long classPK,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.expando.NoSuchValueException;
+
+	public com.liferay.portlet.expando.model.ExpandoValue[] findByT_CPK_PrevAndNext(
+		long valueId, long tableId, long classPK,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.expando.NoSuchValueException;
+
 	public java.util.List<com.liferay.portlet.expando.model.ExpandoValue> findByT_R(
 		long tableId, long rowId) throws com.liferay.portal.SystemException;
 
@@ -255,34 +315,47 @@ public interface ExpandoValuePersistence extends BasePersistence {
 		long tableId, long columnId, long rowId, boolean retrieveFromCache)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portlet.expando.model.ExpandoValue> findByT_C_C_C(
-		long tableId, long columnId, long classNameId, long classPK)
+	public com.liferay.portlet.expando.model.ExpandoValue findByT_C_C(
+		long tableId, long columnId, long classPK)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.expando.NoSuchValueException;
+
+	public com.liferay.portlet.expando.model.ExpandoValue fetchByT_C_C(
+		long tableId, long columnId, long classPK)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portlet.expando.model.ExpandoValue> findByT_C_C_C(
-		long tableId, long columnId, long classNameId, long classPK, int start,
-		int end) throws com.liferay.portal.SystemException;
-
-	public java.util.List<com.liferay.portlet.expando.model.ExpandoValue> findByT_C_C_C(
-		long tableId, long columnId, long classNameId, long classPK, int start,
-		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public com.liferay.portlet.expando.model.ExpandoValue fetchByT_C_C(
+		long tableId, long columnId, long classPK, boolean retrieveFromCache)
 		throws com.liferay.portal.SystemException;
 
-	public com.liferay.portlet.expando.model.ExpandoValue findByT_C_C_C_First(
-		long tableId, long columnId, long classNameId, long classPK,
+	public java.util.List<com.liferay.portlet.expando.model.ExpandoValue> findByT_C_D(
+		long tableId, long columnId, java.lang.String data)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.expando.model.ExpandoValue> findByT_C_D(
+		long tableId, long columnId, java.lang.String data, int start, int end)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.expando.model.ExpandoValue> findByT_C_D(
+		long tableId, long columnId, java.lang.String data, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.expando.model.ExpandoValue findByT_C_D_First(
+		long tableId, long columnId, java.lang.String data,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.expando.NoSuchValueException;
 
-	public com.liferay.portlet.expando.model.ExpandoValue findByT_C_C_C_Last(
-		long tableId, long columnId, long classNameId, long classPK,
+	public com.liferay.portlet.expando.model.ExpandoValue findByT_C_D_Last(
+		long tableId, long columnId, java.lang.String data,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.expando.NoSuchValueException;
 
-	public com.liferay.portlet.expando.model.ExpandoValue[] findByT_C_C_C_PrevAndNext(
-		long valueId, long tableId, long columnId, long classNameId,
-		long classPK, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public com.liferay.portlet.expando.model.ExpandoValue[] findByT_C_D_PrevAndNext(
+		long valueId, long tableId, long columnId, java.lang.String data,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.expando.NoSuchValueException;
 
@@ -313,6 +386,12 @@ public interface ExpandoValuePersistence extends BasePersistence {
 	public void removeByRowId(long rowId)
 		throws com.liferay.portal.SystemException;
 
+	public void removeByT_C(long tableId, long columnId)
+		throws com.liferay.portal.SystemException;
+
+	public void removeByT_CPK(long tableId, long classPK)
+		throws com.liferay.portal.SystemException;
+
 	public void removeByT_R(long tableId, long rowId)
 		throws com.liferay.portal.SystemException;
 
@@ -327,8 +406,12 @@ public interface ExpandoValuePersistence extends BasePersistence {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.expando.NoSuchValueException;
 
-	public void removeByT_C_C_C(long tableId, long columnId, long classNameId,
-		long classPK) throws com.liferay.portal.SystemException;
+	public void removeByT_C_C(long tableId, long columnId, long classPK)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.expando.NoSuchValueException;
+
+	public void removeByT_C_D(long tableId, long columnId, java.lang.String data)
+		throws com.liferay.portal.SystemException;
 
 	public void removeAll() throws com.liferay.portal.SystemException;
 
@@ -339,6 +422,12 @@ public interface ExpandoValuePersistence extends BasePersistence {
 		throws com.liferay.portal.SystemException;
 
 	public int countByRowId(long rowId)
+		throws com.liferay.portal.SystemException;
+
+	public int countByT_C(long tableId, long columnId)
+		throws com.liferay.portal.SystemException;
+
+	public int countByT_CPK(long tableId, long classPK)
 		throws com.liferay.portal.SystemException;
 
 	public int countByT_R(long tableId, long rowId)
@@ -353,8 +442,11 @@ public interface ExpandoValuePersistence extends BasePersistence {
 	public int countByT_C_R(long tableId, long columnId, long rowId)
 		throws com.liferay.portal.SystemException;
 
-	public int countByT_C_C_C(long tableId, long columnId, long classNameId,
-		long classPK) throws com.liferay.portal.SystemException;
+	public int countByT_C_C(long tableId, long columnId, long classPK)
+		throws com.liferay.portal.SystemException;
+
+	public int countByT_C_D(long tableId, long columnId, java.lang.String data)
+		throws com.liferay.portal.SystemException;
 
 	public int countAll() throws com.liferay.portal.SystemException;
 }

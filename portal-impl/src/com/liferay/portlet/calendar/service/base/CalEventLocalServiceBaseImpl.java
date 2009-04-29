@@ -55,7 +55,6 @@ import com.liferay.portlet.calendar.service.persistence.CalEventFinder;
 import com.liferay.portlet.calendar.service.persistence.CalEventPersistence;
 import com.liferay.portlet.expando.service.ExpandoValueLocalService;
 import com.liferay.portlet.expando.service.ExpandoValueService;
-import com.liferay.portlet.expando.service.persistence.ExpandoValueFinder;
 import com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence;
 import com.liferay.portlet.social.service.SocialActivityLocalService;
 import com.liferay.portlet.social.service.persistence.SocialActivityFinder;
@@ -311,14 +310,6 @@ public abstract class CalEventLocalServiceBaseImpl
 		this.expandoValuePersistence = expandoValuePersistence;
 	}
 
-	public ExpandoValueFinder getExpandoValueFinder() {
-		return expandoValueFinder;
-	}
-
-	public void setExpandoValueFinder(ExpandoValueFinder expandoValueFinder) {
-		this.expandoValueFinder = expandoValueFinder;
-	}
-
 	public SocialActivityLocalService getSocialActivityLocalService() {
 		return socialActivityLocalService;
 	}
@@ -497,8 +488,6 @@ public abstract class CalEventLocalServiceBaseImpl
 	protected ExpandoValueService expandoValueService;
 	@BeanReference(name = "com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence.impl")
 	protected ExpandoValuePersistence expandoValuePersistence;
-	@BeanReference(name = "com.liferay.portlet.expando.service.persistence.ExpandoValueFinder.impl")
-	protected ExpandoValueFinder expandoValueFinder;
 	@BeanReference(name = "com.liferay.portlet.social.service.SocialActivityLocalService.impl")
 	protected SocialActivityLocalService socialActivityLocalService;
 	@BeanReference(name = "com.liferay.portlet.social.service.persistence.SocialActivityPersistence.impl")

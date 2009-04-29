@@ -42,7 +42,6 @@ import com.liferay.portal.util.PortalUtil;
 
 import com.liferay.portlet.expando.service.ExpandoValueLocalService;
 import com.liferay.portlet.expando.service.ExpandoValueService;
-import com.liferay.portlet.expando.service.persistence.ExpandoValueFinder;
 import com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence;
 import com.liferay.portlet.imagegallery.service.IGFolderLocalService;
 import com.liferay.portlet.imagegallery.service.IGFolderService;
@@ -248,14 +247,6 @@ public abstract class IGImageServiceBaseImpl extends PrincipalBean
 		this.expandoValuePersistence = expandoValuePersistence;
 	}
 
-	public ExpandoValueFinder getExpandoValueFinder() {
-		return expandoValueFinder;
-	}
-
-	public void setExpandoValueFinder(ExpandoValueFinder expandoValueFinder) {
-		this.expandoValueFinder = expandoValueFinder;
-	}
-
 	public TagsAssetLocalService getTagsAssetLocalService() {
 		return tagsAssetLocalService;
 	}
@@ -377,8 +368,6 @@ public abstract class IGImageServiceBaseImpl extends PrincipalBean
 	protected ExpandoValueService expandoValueService;
 	@BeanReference(name = "com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence.impl")
 	protected ExpandoValuePersistence expandoValuePersistence;
-	@BeanReference(name = "com.liferay.portlet.expando.service.persistence.ExpandoValueFinder.impl")
-	protected ExpandoValueFinder expandoValueFinder;
 	@BeanReference(name = "com.liferay.portlet.tags.service.TagsAssetLocalService.impl")
 	protected TagsAssetLocalService tagsAssetLocalService;
 	@BeanReference(name = "com.liferay.portlet.tags.service.TagsAssetService.impl")

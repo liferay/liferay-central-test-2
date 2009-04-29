@@ -40,12 +40,9 @@ import com.liferay.portlet.expando.service.ExpandoRowLocalService;
 import com.liferay.portlet.expando.service.ExpandoTableLocalService;
 import com.liferay.portlet.expando.service.ExpandoValueLocalService;
 import com.liferay.portlet.expando.service.ExpandoValueService;
-import com.liferay.portlet.expando.service.persistence.ExpandoColumnFinder;
 import com.liferay.portlet.expando.service.persistence.ExpandoColumnPersistence;
-import com.liferay.portlet.expando.service.persistence.ExpandoRowFinder;
 import com.liferay.portlet.expando.service.persistence.ExpandoRowPersistence;
 import com.liferay.portlet.expando.service.persistence.ExpandoTablePersistence;
-import com.liferay.portlet.expando.service.persistence.ExpandoValueFinder;
 import com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence;
 
 /**
@@ -83,14 +80,6 @@ public abstract class ExpandoColumnServiceBaseImpl extends PrincipalBean
 		this.expandoColumnPersistence = expandoColumnPersistence;
 	}
 
-	public ExpandoColumnFinder getExpandoColumnFinder() {
-		return expandoColumnFinder;
-	}
-
-	public void setExpandoColumnFinder(ExpandoColumnFinder expandoColumnFinder) {
-		this.expandoColumnFinder = expandoColumnFinder;
-	}
-
 	public ExpandoRowLocalService getExpandoRowLocalService() {
 		return expandoRowLocalService;
 	}
@@ -107,14 +96,6 @@ public abstract class ExpandoColumnServiceBaseImpl extends PrincipalBean
 	public void setExpandoRowPersistence(
 		ExpandoRowPersistence expandoRowPersistence) {
 		this.expandoRowPersistence = expandoRowPersistence;
-	}
-
-	public ExpandoRowFinder getExpandoRowFinder() {
-		return expandoRowFinder;
-	}
-
-	public void setExpandoRowFinder(ExpandoRowFinder expandoRowFinder) {
-		this.expandoRowFinder = expandoRowFinder;
 	}
 
 	public ExpandoTableLocalService getExpandoTableLocalService() {
@@ -159,14 +140,6 @@ public abstract class ExpandoColumnServiceBaseImpl extends PrincipalBean
 	public void setExpandoValuePersistence(
 		ExpandoValuePersistence expandoValuePersistence) {
 		this.expandoValuePersistence = expandoValuePersistence;
-	}
-
-	public ExpandoValueFinder getExpandoValueFinder() {
-		return expandoValueFinder;
-	}
-
-	public void setExpandoValueFinder(ExpandoValueFinder expandoValueFinder) {
-		this.expandoValueFinder = expandoValueFinder;
 	}
 
 	public CounterLocalService getCounterLocalService() {
@@ -233,14 +206,10 @@ public abstract class ExpandoColumnServiceBaseImpl extends PrincipalBean
 	protected ExpandoColumnService expandoColumnService;
 	@BeanReference(name = "com.liferay.portlet.expando.service.persistence.ExpandoColumnPersistence.impl")
 	protected ExpandoColumnPersistence expandoColumnPersistence;
-	@BeanReference(name = "com.liferay.portlet.expando.service.persistence.ExpandoColumnFinder.impl")
-	protected ExpandoColumnFinder expandoColumnFinder;
 	@BeanReference(name = "com.liferay.portlet.expando.service.ExpandoRowLocalService.impl")
 	protected ExpandoRowLocalService expandoRowLocalService;
 	@BeanReference(name = "com.liferay.portlet.expando.service.persistence.ExpandoRowPersistence.impl")
 	protected ExpandoRowPersistence expandoRowPersistence;
-	@BeanReference(name = "com.liferay.portlet.expando.service.persistence.ExpandoRowFinder.impl")
-	protected ExpandoRowFinder expandoRowFinder;
 	@BeanReference(name = "com.liferay.portlet.expando.service.ExpandoTableLocalService.impl")
 	protected ExpandoTableLocalService expandoTableLocalService;
 	@BeanReference(name = "com.liferay.portlet.expando.service.persistence.ExpandoTablePersistence.impl")
@@ -251,8 +220,6 @@ public abstract class ExpandoColumnServiceBaseImpl extends PrincipalBean
 	protected ExpandoValueService expandoValueService;
 	@BeanReference(name = "com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence.impl")
 	protected ExpandoValuePersistence expandoValuePersistence;
-	@BeanReference(name = "com.liferay.portlet.expando.service.persistence.ExpandoValueFinder.impl")
-	protected ExpandoValueFinder expandoValueFinder;
 	@BeanReference(name = "com.liferay.counter.service.CounterLocalService.impl")
 	protected CounterLocalService counterLocalService;
 	@BeanReference(name = "com.liferay.counter.service.CounterService.impl")

@@ -662,10 +662,9 @@ public class ExpandoValueLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.expando.model.ExpandoValue getValue(
-		long classNameId, long tableId, long columnId, long classPK)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return getService().getValue(classNameId, tableId, columnId, classPK);
+		long tableId, long columnId, long classPK)
+		throws com.liferay.portal.SystemException {
+		return getService().getValue(tableId, columnId, classPK);
 	}
 
 	public static com.liferay.portlet.expando.model.ExpandoValue getValue(

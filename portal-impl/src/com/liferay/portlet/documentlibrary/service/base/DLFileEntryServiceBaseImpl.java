@@ -62,7 +62,6 @@ import com.liferay.portlet.documentlibrary.service.persistence.DLFolderFinder;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersistence;
 import com.liferay.portlet.expando.service.ExpandoValueLocalService;
 import com.liferay.portlet.expando.service.ExpandoValueService;
-import com.liferay.portlet.expando.service.persistence.ExpandoValueFinder;
 import com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence;
 import com.liferay.portlet.messageboards.service.MBDiscussionLocalService;
 import com.liferay.portlet.messageboards.service.MBMessageLocalService;
@@ -374,14 +373,6 @@ public abstract class DLFileEntryServiceBaseImpl extends PrincipalBean
 		this.expandoValuePersistence = expandoValuePersistence;
 	}
 
-	public ExpandoValueFinder getExpandoValueFinder() {
-		return expandoValueFinder;
-	}
-
-	public void setExpandoValueFinder(ExpandoValueFinder expandoValueFinder) {
-		this.expandoValueFinder = expandoValueFinder;
-	}
-
 	public MBDiscussionLocalService getMBDiscussionLocalService() {
 		return mbDiscussionLocalService;
 	}
@@ -648,8 +639,6 @@ public abstract class DLFileEntryServiceBaseImpl extends PrincipalBean
 	protected ExpandoValueService expandoValueService;
 	@BeanReference(name = "com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence.impl")
 	protected ExpandoValuePersistence expandoValuePersistence;
-	@BeanReference(name = "com.liferay.portlet.expando.service.persistence.ExpandoValueFinder.impl")
-	protected ExpandoValueFinder expandoValueFinder;
 	@BeanReference(name = "com.liferay.portlet.messageboards.service.MBDiscussionLocalService.impl")
 	protected MBDiscussionLocalService mbDiscussionLocalService;
 	@BeanReference(name = "com.liferay.portlet.messageboards.service.persistence.MBDiscussionPersistence.impl")

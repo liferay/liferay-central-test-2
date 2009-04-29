@@ -995,10 +995,6 @@
 	<bean id="com.liferay.portlet.expando.service.persistence.ExpandoColumnUtil" class="com.liferay.portlet.expando.service.persistence.ExpandoColumnUtil">
 		<property name="persistence" ref="com.liferay.portlet.expando.service.persistence.ExpandoColumnPersistence.impl" />
 	</bean>
-	<bean id="com.liferay.portlet.expando.service.persistence.ExpandoColumnFinder.impl" class="com.liferay.portlet.expando.service.persistence.ExpandoColumnFinderImpl" parent="basePersistence" />
-	<bean id="com.liferay.portlet.expando.service.persistence.ExpandoColumnFinderUtil" class="com.liferay.portlet.expando.service.persistence.ExpandoColumnFinderUtil">
-		<property name="finder" ref="com.liferay.portlet.expando.service.persistence.ExpandoColumnFinder.impl" />
-	</bean>
 	<bean id="com.liferay.portlet.expando.service.ExpandoRowLocalService.impl" class="com.liferay.portlet.expando.service.impl.ExpandoRowLocalServiceImpl" />
 	<bean id="com.liferay.portlet.expando.service.ExpandoRowLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService">
 		<property name="target" ref="com.liferay.portlet.expando.service.ExpandoRowLocalService.impl" />
@@ -1009,10 +1005,6 @@
 	<bean id="com.liferay.portlet.expando.service.persistence.ExpandoRowPersistence.impl" class="com.liferay.portlet.expando.service.persistence.ExpandoRowPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.expando.service.persistence.ExpandoRowUtil" class="com.liferay.portlet.expando.service.persistence.ExpandoRowUtil">
 		<property name="persistence" ref="com.liferay.portlet.expando.service.persistence.ExpandoRowPersistence.impl" />
-	</bean>
-	<bean id="com.liferay.portlet.expando.service.persistence.ExpandoRowFinder.impl" class="com.liferay.portlet.expando.service.persistence.ExpandoRowFinderImpl" parent="basePersistence" />
-	<bean id="com.liferay.portlet.expando.service.persistence.ExpandoRowFinderUtil" class="com.liferay.portlet.expando.service.persistence.ExpandoRowFinderUtil">
-		<property name="finder" ref="com.liferay.portlet.expando.service.persistence.ExpandoRowFinder.impl" />
 	</bean>
 	<bean id="com.liferay.portlet.expando.service.ExpandoTableLocalService.impl" class="com.liferay.portlet.expando.service.impl.ExpandoTableLocalServiceImpl" />
 	<bean id="com.liferay.portlet.expando.service.ExpandoTableLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService">
@@ -1042,10 +1034,6 @@
 	<bean id="com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence.impl" class="com.liferay.portlet.expando.service.persistence.ExpandoValuePersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.expando.service.persistence.ExpandoValueUtil" class="com.liferay.portlet.expando.service.persistence.ExpandoValueUtil">
 		<property name="persistence" ref="com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence.impl" />
-	</bean>
-	<bean id="com.liferay.portlet.expando.service.persistence.ExpandoValueFinder.impl" class="com.liferay.portlet.expando.service.persistence.ExpandoValueFinderImpl" parent="basePersistence" />
-	<bean id="com.liferay.portlet.expando.service.persistence.ExpandoValueFinderUtil" class="com.liferay.portlet.expando.service.persistence.ExpandoValueFinderUtil">
-		<property name="finder" ref="com.liferay.portlet.expando.service.persistence.ExpandoValueFinder.impl" />
 	</bean>
 	<bean id="com.liferay.portlet.flags.service.FlagsEntryService.impl" class="com.liferay.portlet.flags.service.impl.FlagsEntryServiceImpl" />
 	<bean id="com.liferay.portlet.flags.service.FlagsEntryService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService">

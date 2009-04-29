@@ -51,7 +51,6 @@ import com.liferay.portal.util.PortalUtil;
 
 import com.liferay.portlet.expando.service.ExpandoValueLocalService;
 import com.liferay.portlet.expando.service.ExpandoValueService;
-import com.liferay.portlet.expando.service.persistence.ExpandoValueFinder;
 import com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence;
 import com.liferay.portlet.journal.service.JournalArticleImageLocalService;
 import com.liferay.portlet.journal.service.JournalArticleLocalService;
@@ -485,14 +484,6 @@ public abstract class JournalArticleServiceBaseImpl extends PrincipalBean
 		this.expandoValuePersistence = expandoValuePersistence;
 	}
 
-	public ExpandoValueFinder getExpandoValueFinder() {
-		return expandoValueFinder;
-	}
-
-	public void setExpandoValueFinder(ExpandoValueFinder expandoValueFinder) {
-		this.expandoValueFinder = expandoValueFinder;
-	}
-
 	public MBMessageLocalService getMBMessageLocalService() {
 		return mbMessageLocalService;
 	}
@@ -712,8 +703,6 @@ public abstract class JournalArticleServiceBaseImpl extends PrincipalBean
 	protected ExpandoValueService expandoValueService;
 	@BeanReference(name = "com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence.impl")
 	protected ExpandoValuePersistence expandoValuePersistence;
-	@BeanReference(name = "com.liferay.portlet.expando.service.persistence.ExpandoValueFinder.impl")
-	protected ExpandoValueFinder expandoValueFinder;
 	@BeanReference(name = "com.liferay.portlet.messageboards.service.MBMessageLocalService.impl")
 	protected MBMessageLocalService mbMessageLocalService;
 	@BeanReference(name = "com.liferay.portlet.messageboards.service.MBMessageService.impl")

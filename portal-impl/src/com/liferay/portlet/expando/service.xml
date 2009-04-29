@@ -140,6 +140,14 @@
 		<finder name="RowId" return-type="Collection">
 			<finder-column name="rowId" />
 		</finder>
+		<finder name="T_C" return-type="Collection">
+			<finder-column name="tableId" />
+			<finder-column name="columnId" />
+		</finder>
+		<finder name="T_CPK" return-type="Collection">
+			<finder-column name="tableId" />
+			<finder-column name="classPK" />
+		</finder>
 		<finder name="T_R" return-type="Collection">
 			<finder-column name="tableId" />
 			<finder-column name="rowId" />
@@ -157,11 +165,15 @@
 			<finder-column name="columnId" />
 			<finder-column name="rowId" />
 		</finder>
-		<finder name="T_C_C_C" return-type="Collection">
+		<finder name="T_C_C" return-type="ExpandoValue" unique="true">
 			<finder-column name="tableId" />
 			<finder-column name="columnId" />
-			<finder-column name="classNameId" />
 			<finder-column name="classPK" />
+		</finder>
+		<finder name="T_C_D" return-type="Collection">
+			<finder-column name="tableId" />
+			<finder-column name="columnId" />
+			<finder-column name="data" />
 		</finder>
 
 		<!-- References -->

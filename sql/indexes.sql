@@ -117,7 +117,10 @@ create index IX_F7DD0987 on ExpandoValue (columnId);
 create unique index IX_9DDD21E5 on ExpandoValue (columnId, rowId_);
 create index IX_9112A7A0 on ExpandoValue (rowId_);
 create index IX_F0566A77 on ExpandoValue (tableId);
-create index IX_886B68D1 on ExpandoValue (tableId, columnId, classNameId, classPK);
+create index IX_1BD3F4C on ExpandoValue (tableId, classPK);
+create index IX_CA9AFB7C on ExpandoValue (tableId, columnId);
+create unique index IX_D27B03E7 on ExpandoValue (tableId, columnId, classPK);
+create index IX_2A495469 on ExpandoValue (tableId, columnId, data_);
 create unique index IX_B5984EDA on ExpandoValue (tableId, columnId, rowId_);
 create index IX_B71E92D5 on ExpandoValue (tableId, rowId_);
 

@@ -482,9 +482,8 @@ public interface ExpandoValueLocalService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.expando.model.ExpandoValue getValue(
-		long classNameId, long tableId, long columnId, long classPK)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+		long tableId, long columnId, long classPK)
+		throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.expando.model.ExpandoValue getValue(
