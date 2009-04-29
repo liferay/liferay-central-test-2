@@ -40,7 +40,6 @@ import com.liferay.portal.model.Role;
 import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.model.impl.RoleModelImpl;
 import com.liferay.portal.security.permission.PermissionCacheUtil;
-import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.service.ClassNameLocalServiceUtil;
 import com.liferay.portal.service.GroupLocalServiceUtil;
@@ -52,19 +51,8 @@ import com.liferay.portal.tools.sql.DBUtil;
 import com.liferay.portal.upgrade.util.Table;
 import com.liferay.portal.util.MaintenanceUtil;
 import com.liferay.portal.util.PortalInstances;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsValues;
-import com.liferay.portlet.expando.NoSuchValueException;
-import com.liferay.portlet.expando.model.ExpandoColumn;
-import com.liferay.portlet.expando.model.ExpandoColumnConstants;
-import com.liferay.portlet.expando.model.ExpandoRow;
-import com.liferay.portlet.expando.model.ExpandoTable;
-import com.liferay.portlet.expando.model.ExpandoValue;
-import com.liferay.portlet.expando.service.ExpandoColumnLocalServiceUtil;
-import com.liferay.portlet.expando.service.ExpandoRowLocalServiceUtil;
-import com.liferay.portlet.expando.service.ExpandoTableLocalServiceUtil;
-import com.liferay.portlet.expando.service.ExpandoValueLocalServiceUtil;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -84,6 +72,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.commons.collections.map.MultiValueMap;
+
 /**
  * <a href="ConvertPermissionAlgorithm.java.html"><b><i>View Source</i></b></a>
  *
@@ -96,10 +86,6 @@ import java.util.Set;
  *
  */
 public class ConvertPermissionAlgorithm extends ConvertProcess {
-
-	public ConvertPermissionAlgorithm() {
-		_CLASS_NAME_ID = PortalUtil.getClassNameId(getClass());
-	}
 
 	public String getDescription() {
 		return "convert-legacy-permission-algorithm";
@@ -119,8 +105,6 @@ public class ConvertPermissionAlgorithm extends ConvertProcess {
 		try {
 			BatchSessionUtil.setEnabled(true);
 
-			PermissionThreadLocal.setSkipAddResource(true);
-
 			_convert();
 		}
 		catch (Exception e) {
@@ -130,8 +114,6 @@ public class ConvertPermissionAlgorithm extends ConvertProcess {
 			CacheRegistry.clear();
 
 			BatchSessionUtil.setEnabled(false);
-
-			PermissionThreadLocal.setSkipAddResource(false);
 		}
 	}
 
@@ -197,7 +179,7 @@ public class ConvertPermissionAlgorithm extends ConvertProcess {
 
 				long companyId = PermissionView.getCompanyId(values);
 				long permissionId = PermissionView.getPermissionId(values);
-				int scope = PermissionView.getScope(values);
+				int scope = PermissionView.getScopeId(values);
 				long userId = PermissionView.getPrimaryKey(values);
 
 				if ((scope == ResourceConstants.SCOPE_INDIVIDUAL) &&
@@ -290,18 +272,9 @@ public class ConvertPermissionAlgorithm extends ConvertProcess {
 
 		try {
 
-			// Setup expando
-
-			ExpandoTable expandoTable =
-				ExpandoTableLocalServiceUtil.addTable(
-					_CLASS_NAME_ID, _RBAC_TABLE);
-
-			ExpandoColumn expandoColumn =
-				ExpandoColumnLocalServiceUtil.addColumn(
-					expandoTable.getTableId(), "values",
-					ExpandoColumnConstants.STRING_ARRAY);
-
 			// Group by resource id
+
+			MultiValueMap mvp = new MultiValueMap();
 
 			String line = null;
 
@@ -310,228 +283,177 @@ public class ConvertPermissionAlgorithm extends ConvertProcess {
 
 				long resourceId = PermissionView.getResourceId(values);
 
-				String data = "";
-
-				try {
-					ExpandoValue expandoValue =
-						ExpandoValueLocalServiceUtil.getValue(
-							_CLASS_NAME_ID, expandoTable.getTableId(),
-							expandoColumn.getColumnId(), resourceId);
-
-					data = expandoValue.getData();
-				}
-				catch (NoSuchValueException nsve) {
-				}
-
-				if (data.length() > 0) {
-					data += StringPool.COMMA + _encode(line);
-				}
-				else {
-					data = _encode(line);
-				}
-
-				ExpandoValueLocalServiceUtil.addValue(
-					_CLASS_NAME_ID, expandoTable.getTableId(),
-					expandoColumn.getColumnId(), resourceId, data);
-			}
-
-			if (_log.isInfoEnabled()) {
-				_log.info("Organized data in expando");
+				mvp.put(resourceId, values);
 			}
 
 			// Assign role for each grouping
 
-			List<ExpandoRow> rows = null;
+			for (Long key : (Set<Long>)mvp.keySet()) {
+				List<String[]> valuesList = new ArrayList<String[]>(
+					mvp.getCollection(key));
 
-			int total = ExpandoRowLocalServiceUtil.getRowsCount(
-				expandoTable.getTableId());
+				String[] values = valuesList.get(0);
 
-			int start = 0;
-			int end = 0;
+				long companyId = PermissionView.getCompanyId(values);
+				long groupId = PermissionView.getPrimaryKey(values);
+				String name = PermissionView.getNameId(values);
+				int scope = PermissionView.getScopeId(values);
 
-			for (;;) {
-				start = end;
-				end += _PAGINATION_SIZE;
+				// Group action ids and permission ids
 
-				if (end > total) {
-					end = total;
+				List<String> actionsIds = new ArrayList<String>();
+				List<Long> permissionIds = new ArrayList<Long>();
+
+				for (String[] curValues : valuesList) {
+					String actionId = PermissionView.getActionId(curValues);
+					long permissionId = PermissionView.getPermissionId(
+						curValues);
+
+					actionsIds.add(actionId);
+					permissionIds.add(permissionId);
 				}
 
-				if (start == total) {
-					break;
-				}
+				// Look for owner and system roles
 
-				rows = ExpandoRowLocalServiceUtil.getRows(
-					expandoTable.getTableId(), start, end);
+				if ((type != RoleConstants.TYPE_ORGANIZATION) &&
+					(scope == ResourceConstants.SCOPE_INDIVIDUAL)) {
 
-				for (ExpandoRow row : rows) {
-					ExpandoValue expandoValue =
-						ExpandoValueLocalServiceUtil.getValue(
-							_CLASS_NAME_ID, expandoTable.getTableId(),
-							expandoColumn.getColumnId(),
-							row.getClassPK());
+					// Find default actions
 
-					String[] lines = expandoValue.getStringArray();
+					List<String> defaultActions = null;
 
-					String[] values = StringUtil.split(_decode(lines[0]));
-
-					long companyId = PermissionView.getCompanyId(values);
-					long groupId = PermissionView.getPrimaryKey(values);
-					String name = PermissionView.getName(values);
-					int scope = PermissionView.getScope(values);
-
-					// Group action ids and permission ids
-
-					List<String> actionsIds = new ArrayList<String>();
-					List<Long> permissionIds = new ArrayList<Long>();
-
-					for (String line2 : lines) {
-						String[] values2 = StringUtil.split(_decode(line2));
-
-						String actionId = PermissionView.getActionId(values2);
-						long permissionId = PermissionView.getPermissionId(values2);
-
-						actionsIds.add(actionId);
-						permissionIds.add(permissionId);
-					}
-
-					// Look for owner and system roles
-
-					if ((type != RoleConstants.TYPE_ORGANIZATION) &&
-						(scope == ResourceConstants.SCOPE_INDIVIDUAL)) {
-
-						// Find default actions
-
-						List<String> defaultActions = null;
-
-						if (type == RoleConstants.TYPE_REGULAR) {
-							defaultActions =
-								ResourceActionsUtil.getResourceActions(name);
+					if (type == RoleConstants.TYPE_REGULAR) {
+						if (name.contains(StringPool.PERIOD)) {
+							defaultActions = ResourceActionsUtil.
+								getModelResourceActions(name);
 						}
 						else {
 							defaultActions = ResourceActionsUtil.
-								getResourceCommunityDefaultActions(name);
+								getPortletResourceActions(name);
 						}
-
-						// Resolve owner and system roles
-
-						Role defaultRole = null;
-
-						if (type == RoleConstants.TYPE_REGULAR) {
-							Collections.sort(actionsIds);
-							Collections.sort(defaultActions);
-
-							if (defaultActions.equals(actionsIds)) {
-								defaultRole = _ownerRolesMap.get(companyId);
-							}
+					}
+					else {
+						if (name.contains(StringPool.PERIOD)) {
+							defaultActions = ResourceActionsUtil.
+								getModelResourceCommunityDefaultActions(name);
 						}
 						else {
-							if (defaultActions.containsAll(actionsIds)) {
-								Role[] defaultRoles = _defaultRolesMap.get(
-									companyId);
+							defaultActions = ResourceActionsUtil.
+								getPortletResourceCommunityDefaultActions(name);
+						}
+					}
 
-								Group group = _groupsMap.get(groupId);
+					// Resolve owner and system roles
 
-								if (group.isCommunity()) {
-									defaultRole = defaultRoles[0];
-								}
-								else if (group.isOrganization()) {
-									defaultRole = defaultRoles[1];
-								}
-								else if (group.isUser() || group.isUserGroup()) {
-									defaultRole = defaultRoles[2];
-								}
+					Role defaultRole = null;
+
+					if (type == RoleConstants.TYPE_REGULAR) {
+						Collections.sort(actionsIds);
+						Collections.sort(defaultActions);
+
+						if (defaultActions.equals(actionsIds)) {
+							defaultRole = _ownerRolesMap.get(companyId);
+						}
+					}
+					else {
+						if (defaultActions.containsAll(actionsIds)) {
+							Role[] defaultRoles = _defaultRolesMap.get(
+								companyId);
+
+							Group group = _groupsMap.get(groupId);
+
+							if (group.isCommunity()) {
+								defaultRole = defaultRoles[0];
+							}
+							else if (group.isOrganization()) {
+								defaultRole = defaultRoles[1];
+							}
+							else if (group.isUser() || group.isUserGroup()) {
+								defaultRole = defaultRoles[2];
 							}
 						}
+					}
 
-						if (defaultRole != null) {
-							long roleId = defaultRole.getRoleId();
+					if (defaultRole != null) {
+						long roleId = defaultRole.getRoleId();
 
-							for (Long permissionId : permissionIds) {
-								String curKey = roleId + "_" + permissionId;
+						for (Long permissionId : permissionIds) {
+							String curKey = roleId + "_" + permissionId;
 
-								if (_rolesPermissions.contains(curKey)) {
-									continue;
-								}
-								else {
-									_rolesPermissions.add(curKey);
-								}
-
-								legacyFileExtRolesPermissionsWriter.write(
-									roleId + "," + permissionId + ",\n");
+							if (_rolesPermissions.contains(curKey)) {
+								continue;
+							}
+							else {
+								_rolesPermissions.add(curKey);
 							}
 
-							continue;
-						}
-					}
-
-					// Role_
-
-					long roleId = CounterLocalServiceUtil.increment();
-
-					String roleName = StringUtil.upperCaseFirstLetter(
-						RoleConstants.getTypeLabel(type));
-
-					roleName += " " + Long.toHexString(roleId);
-
-					String[] roleColumns = new String[] {
-						String.valueOf(roleId), String.valueOf(companyId),
-						String.valueOf(
-							ClassNameLocalServiceUtil.getClassNameId(Role.class)),
-						String.valueOf(roleId), roleName, StringPool.BLANK,
-						"Autogenerated role from portal upgrade",
-						String.valueOf(type), "lfr-permission-algorithm-5"
-					};
-
-					for (int i = 0; i < roleColumns.length; i++) {
-						legacyFileExtRoleWriter.write(
-							roleColumns[i] + StringPool.COMMA);
-
-						if (i == (roleColumns.length - 1)) {
-							legacyFileExtRoleWriter.write(StringPool.NEW_LINE);
-						}
-					}
-
-					// Roles_Permissions
-
-					for (Long permissionId : permissionIds) {
-						String curKey = roleId + "_" + permissionId;
-
-						if (_rolesPermissions.contains(curKey)) {
-							continue;
-						}
-						else {
-							_rolesPermissions.add(curKey);
+							legacyFileExtRolesPermissionsWriter.write(
+								roleId + "," + permissionId + ",\n");
 						}
 
-						legacyFileExtRolesPermissionsWriter.write(
-							roleId + "," + permissionId + ",\n");
+						continue;
 					}
-
-					// Others_Roles
-
-					for (int i = 0; i < newColumns.length - 1; i++) {
-						legacyFileExtOtherRolesWriter.write(
-							values[i] + StringPool.COMMA);
-					}
-
-					legacyFileExtOtherRolesWriter.write(roleId + ",\n");
 				}
+
+				// Role_
+
+				long roleId = CounterLocalServiceUtil.increment();
+
+				String roleName = StringUtil.upperCaseFirstLetter(
+					RoleConstants.getTypeLabel(type));
+
+				roleName += " " + Long.toHexString(roleId);
+
+				String[] roleColumns = new String[] {
+					String.valueOf(roleId), String.valueOf(companyId),
+					String.valueOf(
+						ClassNameLocalServiceUtil.getClassNameId(Role.class)),
+					String.valueOf(roleId), roleName, StringPool.BLANK,
+					"Autogenerated role from portal upgrade",
+					String.valueOf(type), "lfr-permission-algorithm-5"
+				};
+
+				for (int i = 0; i < roleColumns.length; i++) {
+					legacyFileExtRoleWriter.write(
+						roleColumns[i] + StringPool.COMMA);
+
+					if (i == (roleColumns.length - 1)) {
+						legacyFileExtRoleWriter.write(StringPool.NEW_LINE);
+					}
+				}
+
+				// Roles_Permissions
+
+				for (Long permissionId : permissionIds) {
+					String curKey = roleId + "_" + permissionId;
+
+					if (_rolesPermissions.contains(curKey)) {
+						continue;
+					}
+					else {
+						_rolesPermissions.add(curKey);
+					}
+
+					legacyFileExtRolesPermissionsWriter.write(
+						roleId + "," + permissionId + ",\n");
+				}
+
+				// Others_Roles
+
+				for (int i = 0; i < newColumns.length - 1; i++) {
+					legacyFileExtOtherRolesWriter.write(
+						values[i] + StringPool.COMMA);
+				}
+
+				legacyFileExtOtherRolesWriter.write(roleId + ",\n");
 			}
 		}
 		finally {
-			if (_log.isInfoEnabled()) {
-				_log.info("Completed sorting new roles");
-			}
-
 			legacyFileReader.close();
 
 			legacyFileExtRoleWriter.close();
 			legacyFileExtRolesPermissionsWriter.close();
 			legacyFileExtOtherRolesWriter.close();
-
-			ExpandoTableLocalServiceUtil.deleteTable(
-				getClass().getName(), _RBAC_TABLE);
 		}
 
 		// Role_
@@ -563,14 +485,6 @@ public class ConvertPermissionAlgorithm extends ConvertProcess {
 		FileUtil.delete(legacyFile + _EXT_ROLE);
 		FileUtil.delete(legacyFile + _EXT_ROLES_PERMIMISSIONS);
 		FileUtil.delete(legacyFile + _EXT_OTHER_ROLES);
-	}
-
-	private String _decode(String str) {
-		return StringUtil.replace(str, _SAFE_COMMA, StringPool.COMMA);
-	}
-
-	private String _encode(String str) {
-		return StringUtil.replace(str, StringPool.COMMA, _SAFE_COMMA);
 	}
 
 	private void _initialize() throws Exception {
@@ -662,29 +576,16 @@ public class ConvertPermissionAlgorithm extends ConvertProcess {
 
 	private static final String _EXT_ROLES_PERMIMISSIONS = ".roles_permissions";
 
-	private static final String _SAFE_COMMA = "_SAFE_COMMA_";
-
-	private static final int _PAGINATION_SIZE = 1000;
-
-	private static final String _RBAC_TABLE = "rbac-table";
-
 	private static final String _UPDATED = ".updated";
 
 	private static final Log _log =
 		LogFactoryUtil.getLog(ConvertPermissionAlgorithm.class);
 
-	private static long _CLASS_NAME_ID;
-
 	private Map<Long, Role[]> _defaultRolesMap = new HashMap<Long, Role[]>();
-
 	private Map<Long, Group> _groupsMap = new HashMap<Long, Group>();
-
 	private Map<Long, Role> _guestRolesMap = new HashMap<Long, Role>();
-
 	private Set<Long> _guestUsersSet = new HashSet<Long>();
-
 	private Map<Long, Role> _ownerRolesMap = new HashMap<Long, Role>();
-
 	private Set<String> _rolesPermissions = new HashSet<String>();
 
 }

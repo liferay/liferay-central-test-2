@@ -46,7 +46,7 @@ public class PermissionView extends Table {
 		return Long.parseLong(values[values.length - 5]);
 	}
 
-	public static String getName(String[] values) {
+	public static String getNameId(String[] values) {
 		return values[values.length - 2];
 	}
 
@@ -62,7 +62,7 @@ public class PermissionView extends Table {
 		return Long.parseLong(values[values.length - 3]);
 	}
 
-	public static int getScope(String[] values) {
+	public static int getScopeId(String[] values) {
 		return Integer.parseInt(values[values.length - 1]);
 	}
 
