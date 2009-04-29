@@ -25,6 +25,7 @@ package com.liferay.portal.service.persistence;
 import com.liferay.portal.NoSuchSubscriptionException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
+import com.liferay.portal.kernel.cache.CacheRegistry;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
@@ -156,6 +157,13 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl
 				cacheResult(subscription);
 			}
 		}
+	}
+
+	public void clearCache() {
+		CacheRegistry.clear(SubscriptionImpl.class.getName());
+		EntityCacheUtil.clearCache(SubscriptionImpl.class.getName());
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
 	public Subscription create(long subscriptionId) {

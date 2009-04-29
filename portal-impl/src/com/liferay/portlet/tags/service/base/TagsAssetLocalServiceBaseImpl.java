@@ -40,6 +40,7 @@ import com.liferay.portal.service.persistence.GroupFinder;
 import com.liferay.portal.service.persistence.GroupPersistence;
 import com.liferay.portal.service.persistence.UserFinder;
 import com.liferay.portal.service.persistence.UserPersistence;
+import com.liferay.portal.util.PortalUtil;
 
 import com.liferay.portlet.blogs.service.BlogsEntryLocalService;
 import com.liferay.portlet.blogs.service.BlogsEntryService;
@@ -668,6 +669,15 @@ public abstract class TagsAssetLocalServiceBaseImpl
 	public void setWikiPageResourcePersistence(
 		WikiPageResourcePersistence wikiPageResourcePersistence) {
 		this.wikiPageResourcePersistence = wikiPageResourcePersistence;
+	}
+
+	protected void runSQL(String sql) throws SystemException {
+		try {
+			PortalUtil.runSQL(sql);
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
 	}
 
 	@BeanReference(name = "com.liferay.portlet.tags.service.TagsAssetLocalService.impl")

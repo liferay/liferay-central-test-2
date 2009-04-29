@@ -38,6 +38,10 @@ public class UserUtil {
 		getPersistence().cacheResult(users);
 	}
 
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
 	public static com.liferay.portal.model.User create(long userId) {
 		return getPersistence().create(userId);
 	}

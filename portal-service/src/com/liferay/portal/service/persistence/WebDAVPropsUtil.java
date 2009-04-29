@@ -39,6 +39,10 @@ public class WebDAVPropsUtil {
 		getPersistence().cacheResult(webDAVPropses);
 	}
 
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
 	public static com.liferay.portal.model.WebDAVProps create(
 		long webDavPropsId) {
 		return getPersistence().create(webDavPropsId);

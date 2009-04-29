@@ -25,6 +25,7 @@ package com.liferay.portal.service.persistence;
 import com.liferay.portal.NoSuchWebDAVPropsException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
+import com.liferay.portal.kernel.cache.CacheRegistry;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
@@ -94,6 +95,13 @@ public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl
 				cacheResult(webDAVProps);
 			}
 		}
+	}
+
+	public void clearCache() {
+		CacheRegistry.clear(WebDAVPropsImpl.class.getName());
+		EntityCacheUtil.clearCache(WebDAVPropsImpl.class.getName());
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
 	public WebDAVProps create(long webDavPropsId) {

@@ -58,6 +58,7 @@ import com.liferay.portal.service.persistence.UserFinder;
 import com.liferay.portal.service.persistence.UserGroupFinder;
 import com.liferay.portal.service.persistence.UserGroupPersistence;
 import com.liferay.portal.service.persistence.UserPersistence;
+import com.liferay.portal.util.PortalUtil;
 
 import com.liferay.portlet.announcements.model.AnnouncementsEntry;
 import com.liferay.portlet.announcements.service.AnnouncementsDeliveryLocalService;
@@ -475,6 +476,15 @@ public abstract class AnnouncementsEntryLocalServiceBaseImpl
 
 	public void setUserGroupFinder(UserGroupFinder userGroupFinder) {
 		this.userGroupFinder = userGroupFinder;
+	}
+
+	protected void runSQL(String sql) throws SystemException {
+		try {
+			PortalUtil.runSQL(sql);
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
 	}
 
 	@BeanReference(name = "com.liferay.portlet.announcements.service.AnnouncementsDeliveryLocalService.impl")

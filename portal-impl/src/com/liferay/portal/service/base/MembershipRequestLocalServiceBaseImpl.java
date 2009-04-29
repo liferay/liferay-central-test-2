@@ -161,6 +161,7 @@ import com.liferay.portal.service.persistence.UserTrackerPathPersistence;
 import com.liferay.portal.service.persistence.UserTrackerPersistence;
 import com.liferay.portal.service.persistence.WebDAVPropsPersistence;
 import com.liferay.portal.service.persistence.WebsitePersistence;
+import com.liferay.portal.util.PortalUtil;
 
 import java.util.List;
 
@@ -1348,6 +1349,15 @@ public abstract class MembershipRequestLocalServiceBaseImpl
 
 	public void setMailService(MailService mailService) {
 		this.mailService = mailService;
+	}
+
+	protected void runSQL(String sql) throws SystemException {
+		try {
+			PortalUtil.runSQL(sql);
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
 	}
 
 	@BeanReference(name = "com.liferay.portal.service.AccountLocalService.impl")

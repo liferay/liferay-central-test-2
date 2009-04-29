@@ -38,6 +38,10 @@ public class ReleaseUtil {
 		getPersistence().cacheResult(releases);
 	}
 
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
 	public static com.liferay.portal.model.Release create(long releaseId) {
 		return getPersistence().create(releaseId);
 	}

@@ -53,6 +53,7 @@ import com.liferay.portal.service.persistence.ResourcePersistence;
 import com.liferay.portal.service.persistence.SubscriptionPersistence;
 import com.liferay.portal.service.persistence.UserFinder;
 import com.liferay.portal.service.persistence.UserPersistence;
+import com.liferay.portal.util.PortalUtil;
 
 import com.liferay.portlet.messageboards.service.MBMessageLocalService;
 import com.liferay.portlet.messageboards.service.MBMessageService;
@@ -556,6 +557,15 @@ public abstract class WikiPageLocalServiceBaseImpl
 
 	public void setTagsEntryFinder(TagsEntryFinder tagsEntryFinder) {
 		this.tagsEntryFinder = tagsEntryFinder;
+	}
+
+	protected void runSQL(String sql) throws SystemException {
+		try {
+			PortalUtil.runSQL(sql);
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
 	}
 
 	@BeanReference(name = "com.liferay.portlet.wiki.service.WikiNodeLocalService.impl")

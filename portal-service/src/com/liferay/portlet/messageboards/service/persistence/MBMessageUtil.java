@@ -39,6 +39,10 @@ public class MBMessageUtil {
 		getPersistence().cacheResult(mbMessages);
 	}
 
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
 	public static com.liferay.portlet.messageboards.model.MBMessage create(
 		long messageId) {
 		return getPersistence().create(messageId);

@@ -39,6 +39,10 @@ public class MBDiscussionUtil {
 		getPersistence().cacheResult(mbDiscussions);
 	}
 
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
 	public static com.liferay.portlet.messageboards.model.MBDiscussion create(
 		long discussionId) {
 		return getPersistence().create(discussionId);

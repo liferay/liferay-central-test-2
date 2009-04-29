@@ -34,6 +34,8 @@ public interface OrganizationPersistence extends BasePersistence {
 	public void cacheResult(
 		java.util.List<com.liferay.portal.model.Organization> organizations);
 
+	public void clearCache();
+
 	public com.liferay.portal.model.Organization create(long organizationId);
 
 	public com.liferay.portal.model.Organization remove(long organizationId)

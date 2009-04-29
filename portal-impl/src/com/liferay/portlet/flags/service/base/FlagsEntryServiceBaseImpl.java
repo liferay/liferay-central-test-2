@@ -52,6 +52,7 @@ import com.liferay.portal.service.persistence.UserGroupFinder;
 import com.liferay.portal.service.persistence.UserGroupPersistence;
 import com.liferay.portal.service.persistence.UserGroupRolePersistence;
 import com.liferay.portal.service.persistence.UserPersistence;
+import com.liferay.portal.util.PortalUtil;
 
 import com.liferay.portlet.flags.service.FlagsEntryService;
 import com.liferay.portlet.tags.service.TagsAssetLocalService;
@@ -328,6 +329,15 @@ public abstract class FlagsEntryServiceBaseImpl extends PrincipalBean
 
 	public void setTagsAssetFinder(TagsAssetFinder tagsAssetFinder) {
 		this.tagsAssetFinder = tagsAssetFinder;
+	}
+
+	protected void runSQL(String sql) throws SystemException {
+		try {
+			PortalUtil.runSQL(sql);
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
 	}
 
 	@BeanReference(name = "com.liferay.portlet.flags.service.FlagsEntryService.impl")

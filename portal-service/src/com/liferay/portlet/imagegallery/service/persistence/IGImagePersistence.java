@@ -37,6 +37,8 @@ public interface IGImagePersistence extends BasePersistence {
 	public void cacheResult(
 		java.util.List<com.liferay.portlet.imagegallery.model.IGImage> igImages);
 
+	public void clearCache();
+
 	public com.liferay.portlet.imagegallery.model.IGImage create(long imageId);
 
 	public com.liferay.portlet.imagegallery.model.IGImage remove(long imageId)

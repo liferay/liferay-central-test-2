@@ -37,6 +37,8 @@ public interface JournalContentSearchPersistence extends BasePersistence {
 	public void cacheResult(
 		java.util.List<com.liferay.portlet.journal.model.JournalContentSearch> journalContentSearchs);
 
+	public void clearCache();
+
 	public com.liferay.portlet.journal.model.JournalContentSearch create(
 		long contentSearchId);
 

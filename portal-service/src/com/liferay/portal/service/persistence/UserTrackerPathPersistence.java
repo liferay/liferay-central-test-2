@@ -35,6 +35,8 @@ public interface UserTrackerPathPersistence extends BasePersistence {
 	public void cacheResult(
 		java.util.List<com.liferay.portal.model.UserTrackerPath> userTrackerPaths);
 
+	public void clearCache();
+
 	public com.liferay.portal.model.UserTrackerPath create(
 		long userTrackerPathId);
 

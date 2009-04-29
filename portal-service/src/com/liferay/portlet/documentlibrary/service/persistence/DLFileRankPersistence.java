@@ -37,6 +37,8 @@ public interface DLFileRankPersistence extends BasePersistence {
 	public void cacheResult(
 		java.util.List<com.liferay.portlet.documentlibrary.model.DLFileRank> dlFileRanks);
 
+	public void clearCache();
+
 	public com.liferay.portlet.documentlibrary.model.DLFileRank create(
 		long fileRankId);
 

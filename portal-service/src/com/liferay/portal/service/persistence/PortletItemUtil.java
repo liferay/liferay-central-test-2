@@ -39,6 +39,10 @@ public class PortletItemUtil {
 		getPersistence().cacheResult(portletItems);
 	}
 
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
 	public static com.liferay.portal.model.PortletItem create(
 		long portletItemId) {
 		return getPersistence().create(portletItemId);

@@ -37,6 +37,8 @@ public interface SocialActivityPersistence extends BasePersistence {
 	public void cacheResult(
 		java.util.List<com.liferay.portlet.social.model.SocialActivity> socialActivities);
 
+	public void clearCache();
+
 	public com.liferay.portlet.social.model.SocialActivity create(
 		long activityId);
 

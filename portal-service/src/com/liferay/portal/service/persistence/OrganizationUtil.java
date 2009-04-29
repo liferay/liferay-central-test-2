@@ -39,6 +39,10 @@ public class OrganizationUtil {
 		getPersistence().cacheResult(organizations);
 	}
 
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
 	public static com.liferay.portal.model.Organization create(
 		long organizationId) {
 		return getPersistence().create(organizationId);

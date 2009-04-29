@@ -38,6 +38,10 @@ public class GroupUtil {
 		getPersistence().cacheResult(groups);
 	}
 
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
 	public static com.liferay.portal.model.Group create(long groupId) {
 		return getPersistence().create(groupId);
 	}

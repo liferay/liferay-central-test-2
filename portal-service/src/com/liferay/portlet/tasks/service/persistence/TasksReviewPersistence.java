@@ -37,6 +37,8 @@ public interface TasksReviewPersistence extends BasePersistence {
 	public void cacheResult(
 		java.util.List<com.liferay.portlet.tasks.model.TasksReview> tasksReviews);
 
+	public void clearCache();
+
 	public com.liferay.portlet.tasks.model.TasksReview create(long reviewId);
 
 	public com.liferay.portlet.tasks.model.TasksReview remove(long reviewId)

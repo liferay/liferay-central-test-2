@@ -39,6 +39,10 @@ public class ShoppingItemUtil {
 		getPersistence().cacheResult(shoppingItems);
 	}
 
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
 	public static com.liferay.portlet.shopping.model.ShoppingItem create(
 		long itemId) {
 		return getPersistence().create(itemId);

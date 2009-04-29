@@ -25,12 +25,14 @@ package com.liferay.portlet.announcements.service.base;
 import com.liferay.counter.service.CounterLocalService;
 import com.liferay.counter.service.CounterService;
 
+import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.service.UserLocalService;
 import com.liferay.portal.service.UserService;
 import com.liferay.portal.service.base.PrincipalBean;
 import com.liferay.portal.service.persistence.UserFinder;
 import com.liferay.portal.service.persistence.UserPersistence;
+import com.liferay.portal.util.PortalUtil;
 
 import com.liferay.portlet.announcements.service.AnnouncementsDeliveryLocalService;
 import com.liferay.portlet.announcements.service.AnnouncementsDeliveryService;
@@ -187,6 +189,15 @@ public abstract class AnnouncementsDeliveryServiceBaseImpl extends PrincipalBean
 
 	public void setUserFinder(UserFinder userFinder) {
 		this.userFinder = userFinder;
+	}
+
+	protected void runSQL(String sql) throws SystemException {
+		try {
+			PortalUtil.runSQL(sql);
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
 	}
 
 	@BeanReference(name = "com.liferay.portlet.announcements.service.AnnouncementsDeliveryLocalService.impl")

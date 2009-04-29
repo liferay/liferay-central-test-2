@@ -25,6 +25,7 @@ package com.liferay.portal.service.base;
 import com.liferay.counter.service.CounterLocalService;
 import com.liferay.counter.service.CounterService;
 
+import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountService;
@@ -155,6 +156,7 @@ import com.liferay.portal.service.persistence.UserTrackerPathPersistence;
 import com.liferay.portal.service.persistence.UserTrackerPersistence;
 import com.liferay.portal.service.persistence.WebDAVPropsPersistence;
 import com.liferay.portal.service.persistence.WebsitePersistence;
+import com.liferay.portal.util.PortalUtil;
 
 /**
  * <a href="RoleServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
@@ -1271,6 +1273,15 @@ public abstract class RoleServiceBaseImpl extends PrincipalBean
 
 	public void setCounterService(CounterService counterService) {
 		this.counterService = counterService;
+	}
+
+	protected void runSQL(String sql) throws SystemException {
+		try {
+			PortalUtil.runSQL(sql);
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
 	}
 
 	@BeanReference(name = "com.liferay.portal.service.AccountLocalService.impl")

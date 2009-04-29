@@ -37,6 +37,8 @@ public interface TagsPropertyPersistence extends BasePersistence {
 	public void cacheResult(
 		java.util.List<com.liferay.portlet.tags.model.TagsProperty> tagsProperties);
 
+	public void clearCache();
+
 	public com.liferay.portlet.tags.model.TagsProperty create(long propertyId);
 
 	public com.liferay.portlet.tags.model.TagsProperty remove(long propertyId)

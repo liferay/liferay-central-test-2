@@ -34,6 +34,8 @@ public interface UserGroupPersistence extends BasePersistence {
 	public void cacheResult(
 		java.util.List<com.liferay.portal.model.UserGroup> userGroups);
 
+	public void clearCache();
+
 	public com.liferay.portal.model.UserGroup create(long userGroupId);
 
 	public com.liferay.portal.model.UserGroup remove(long userGroupId)

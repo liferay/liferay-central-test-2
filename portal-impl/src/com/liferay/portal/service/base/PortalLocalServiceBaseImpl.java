@@ -157,6 +157,7 @@ import com.liferay.portal.service.persistence.UserTrackerPathPersistence;
 import com.liferay.portal.service.persistence.UserTrackerPersistence;
 import com.liferay.portal.service.persistence.WebDAVPropsPersistence;
 import com.liferay.portal.service.persistence.WebsitePersistence;
+import com.liferay.portal.util.PortalUtil;
 
 /**
  * <a href="PortalLocalServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
@@ -1280,6 +1281,15 @@ public abstract class PortalLocalServiceBaseImpl implements PortalLocalService {
 
 	public void setLockService(LockService lockService) {
 		this.lockService = lockService;
+	}
+
+	protected void runSQL(String sql) throws SystemException {
+		try {
+			PortalUtil.runSQL(sql);
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
 	}
 
 	@BeanReference(name = "com.liferay.portal.service.AccountLocalService.impl")

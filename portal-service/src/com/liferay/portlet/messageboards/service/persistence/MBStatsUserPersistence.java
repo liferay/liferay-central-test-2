@@ -37,6 +37,8 @@ public interface MBStatsUserPersistence extends BasePersistence {
 	public void cacheResult(
 		java.util.List<com.liferay.portlet.messageboards.model.MBStatsUser> mbStatsUsers);
 
+	public void clearCache();
+
 	public com.liferay.portlet.messageboards.model.MBStatsUser create(
 		long statsUserId);
 

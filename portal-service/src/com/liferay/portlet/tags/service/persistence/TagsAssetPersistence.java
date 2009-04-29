@@ -36,6 +36,8 @@ public interface TagsAssetPersistence extends BasePersistence {
 	public void cacheResult(
 		java.util.List<com.liferay.portlet.tags.model.TagsAsset> tagsAssets);
 
+	public void clearCache();
+
 	public com.liferay.portlet.tags.model.TagsAsset create(long assetId);
 
 	public com.liferay.portlet.tags.model.TagsAsset remove(long assetId)

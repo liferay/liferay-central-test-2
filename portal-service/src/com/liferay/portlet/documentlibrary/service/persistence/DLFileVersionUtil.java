@@ -39,6 +39,10 @@ public class DLFileVersionUtil {
 		getPersistence().cacheResult(dlFileVersions);
 	}
 
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
 	public static com.liferay.portlet.documentlibrary.model.DLFileVersion create(
 		long fileVersionId) {
 		return getPersistence().create(fileVersionId);

@@ -39,6 +39,10 @@ public class TagsPropertyUtil {
 		getPersistence().cacheResult(tagsProperties);
 	}
 
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
 	public static com.liferay.portlet.tags.model.TagsProperty create(
 		long propertyId) {
 		return getPersistence().create(propertyId);

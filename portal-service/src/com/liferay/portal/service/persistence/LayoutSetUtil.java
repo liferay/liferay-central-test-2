@@ -38,6 +38,10 @@ public class LayoutSetUtil {
 		getPersistence().cacheResult(layoutSets);
 	}
 
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
 	public static com.liferay.portal.model.LayoutSet create(long layoutSetId) {
 		return getPersistence().create(layoutSetId);
 	}

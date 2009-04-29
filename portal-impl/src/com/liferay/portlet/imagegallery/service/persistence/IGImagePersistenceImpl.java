@@ -24,6 +24,7 @@ package com.liferay.portlet.imagegallery.service.persistence;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
+import com.liferay.portal.kernel.cache.CacheRegistry;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
@@ -211,6 +212,13 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl
 				cacheResult(igImage);
 			}
 		}
+	}
+
+	public void clearCache() {
+		CacheRegistry.clear(IGImageImpl.class.getName());
+		EntityCacheUtil.clearCache(IGImageImpl.class.getName());
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
 	public IGImage create(long imageId) {

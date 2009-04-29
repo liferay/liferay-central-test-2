@@ -34,6 +34,8 @@ public interface CountryPersistence extends BasePersistence {
 	public void cacheResult(
 		java.util.List<com.liferay.portal.model.Country> countries);
 
+	public void clearCache();
+
 	public com.liferay.portal.model.Country create(long countryId);
 
 	public com.liferay.portal.model.Country remove(long countryId)

@@ -39,6 +39,10 @@ public class ResourcePermissionUtil {
 		getPersistence().cacheResult(resourcePermissions);
 	}
 
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
 	public static com.liferay.portal.model.ResourcePermission create(
 		long resourcePermissionId) {
 		return getPersistence().create(resourcePermissionId);

@@ -24,6 +24,7 @@ package com.liferay.portlet.ratings.service.persistence;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
+import com.liferay.portal.kernel.cache.CacheRegistry;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
@@ -97,6 +98,13 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl
 				cacheResult(ratingsStats);
 			}
 		}
+	}
+
+	public void clearCache() {
+		CacheRegistry.clear(RatingsStatsImpl.class.getName());
+		EntityCacheUtil.clearCache(RatingsStatsImpl.class.getName());
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
 	public RatingsStats create(long statsId) {

@@ -39,6 +39,10 @@ public class TasksReviewUtil {
 		getPersistence().cacheResult(tasksReviews);
 	}
 
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
 	public static com.liferay.portlet.tasks.model.TasksReview create(
 		long reviewId) {
 		return getPersistence().create(reviewId);

@@ -39,6 +39,10 @@ public class AnnouncementsFlagUtil {
 		getPersistence().cacheResult(announcementsFlags);
 	}
 
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
 	public static com.liferay.portlet.announcements.model.AnnouncementsFlag create(
 		long flagId) {
 		return getPersistence().create(flagId);

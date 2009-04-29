@@ -37,6 +37,8 @@ public interface ShoppingCartPersistence extends BasePersistence {
 	public void cacheResult(
 		java.util.List<com.liferay.portlet.shopping.model.ShoppingCart> shoppingCarts);
 
+	public void clearCache();
+
 	public com.liferay.portlet.shopping.model.ShoppingCart create(long cartId);
 
 	public com.liferay.portlet.shopping.model.ShoppingCart remove(long cartId)

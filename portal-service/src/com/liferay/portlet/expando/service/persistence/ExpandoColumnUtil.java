@@ -39,6 +39,10 @@ public class ExpandoColumnUtil {
 		getPersistence().cacheResult(expandoColumns);
 	}
 
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
 	public static com.liferay.portlet.expando.model.ExpandoColumn create(
 		long columnId) {
 		return getPersistence().create(columnId);

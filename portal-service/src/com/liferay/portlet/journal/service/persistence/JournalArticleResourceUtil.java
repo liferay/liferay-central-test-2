@@ -39,6 +39,10 @@ public class JournalArticleResourceUtil {
 		getPersistence().cacheResult(journalArticleResources);
 	}
 
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
 	public static com.liferay.portlet.journal.model.JournalArticleResource create(
 		long resourcePrimKey) {
 		return getPersistence().create(resourcePrimKey);

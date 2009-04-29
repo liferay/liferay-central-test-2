@@ -37,6 +37,8 @@ public interface ExpandoTablePersistence extends BasePersistence {
 	public void cacheResult(
 		java.util.List<com.liferay.portlet.expando.model.ExpandoTable> expandoTables);
 
+	public void clearCache();
+
 	public com.liferay.portlet.expando.model.ExpandoTable create(long tableId);
 
 	public com.liferay.portlet.expando.model.ExpandoTable remove(long tableId)

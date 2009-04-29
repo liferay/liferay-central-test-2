@@ -35,6 +35,8 @@ public interface ResourceActionPersistence extends BasePersistence {
 	public void cacheResult(
 		java.util.List<com.liferay.portal.model.ResourceAction> resourceActions);
 
+	public void clearCache();
+
 	public com.liferay.portal.model.ResourceAction create(long resourceActionId);
 
 	public com.liferay.portal.model.ResourceAction remove(long resourceActionId)

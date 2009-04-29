@@ -39,6 +39,10 @@ public class OrgGroupPermissionUtil {
 		getPersistence().cacheResult(orgGroupPermissions);
 	}
 
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
 	public static com.liferay.portal.model.OrgGroupPermission create(
 		com.liferay.portal.service.persistence.OrgGroupPermissionPK orgGroupPermissionPK) {
 		return getPersistence().create(orgGroupPermissionPK);

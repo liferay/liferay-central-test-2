@@ -38,6 +38,10 @@ public class ContactUtil {
 		getPersistence().cacheResult(contacts);
 	}
 
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
 	public static com.liferay.portal.model.Contact create(long contactId) {
 		return getPersistence().create(contactId);
 	}

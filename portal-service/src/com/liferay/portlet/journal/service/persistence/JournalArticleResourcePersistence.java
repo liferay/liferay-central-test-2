@@ -37,6 +37,8 @@ public interface JournalArticleResourcePersistence extends BasePersistence {
 	public void cacheResult(
 		java.util.List<com.liferay.portlet.journal.model.JournalArticleResource> journalArticleResources);
 
+	public void clearCache();
+
 	public com.liferay.portlet.journal.model.JournalArticleResource create(
 		long resourcePrimKey);
 

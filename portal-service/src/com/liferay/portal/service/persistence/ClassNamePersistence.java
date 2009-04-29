@@ -34,6 +34,8 @@ public interface ClassNamePersistence extends BasePersistence {
 	public void cacheResult(
 		java.util.List<com.liferay.portal.model.ClassName> classNames);
 
+	public void clearCache();
+
 	public com.liferay.portal.model.ClassName create(long classNameId);
 
 	public com.liferay.portal.model.ClassName remove(long classNameId)

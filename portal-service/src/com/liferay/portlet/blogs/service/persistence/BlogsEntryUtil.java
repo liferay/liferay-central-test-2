@@ -39,6 +39,10 @@ public class BlogsEntryUtil {
 		getPersistence().cacheResult(blogsEntries);
 	}
 
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
 	public static com.liferay.portlet.blogs.model.BlogsEntry create(
 		long entryId) {
 		return getPersistence().create(entryId);

@@ -34,6 +34,8 @@ public interface PhonePersistence extends BasePersistence {
 	public void cacheResult(
 		java.util.List<com.liferay.portal.model.Phone> phones);
 
+	public void clearCache();
+
 	public com.liferay.portal.model.Phone create(long phoneId);
 
 	public com.liferay.portal.model.Phone remove(long phoneId)

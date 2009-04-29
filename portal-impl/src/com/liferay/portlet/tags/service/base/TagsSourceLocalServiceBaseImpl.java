@@ -26,6 +26,7 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.util.PortalUtil;
 
 import com.liferay.portlet.tags.model.TagsSource;
 import com.liferay.portlet.tags.service.TagsAssetLocalService;
@@ -280,6 +281,15 @@ public abstract class TagsSourceLocalServiceBaseImpl
 	public void setTagsVocabularyPersistence(
 		TagsVocabularyPersistence tagsVocabularyPersistence) {
 		this.tagsVocabularyPersistence = tagsVocabularyPersistence;
+	}
+
+	protected void runSQL(String sql) throws SystemException {
+		try {
+			PortalUtil.runSQL(sql);
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
 	}
 
 	@BeanReference(name = "com.liferay.portlet.tags.service.TagsAssetLocalService.impl")

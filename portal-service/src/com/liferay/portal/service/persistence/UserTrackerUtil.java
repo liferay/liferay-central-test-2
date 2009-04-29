@@ -39,6 +39,10 @@ public class UserTrackerUtil {
 		getPersistence().cacheResult(userTrackers);
 	}
 
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
 	public static com.liferay.portal.model.UserTracker create(
 		long userTrackerId) {
 		return getPersistence().create(userTrackerId);

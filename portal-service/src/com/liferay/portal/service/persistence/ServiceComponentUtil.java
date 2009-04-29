@@ -39,6 +39,10 @@ public class ServiceComponentUtil {
 		getPersistence().cacheResult(serviceComponents);
 	}
 
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
 	public static com.liferay.portal.model.ServiceComponent create(
 		long serviceComponentId) {
 		return getPersistence().create(serviceComponentId);

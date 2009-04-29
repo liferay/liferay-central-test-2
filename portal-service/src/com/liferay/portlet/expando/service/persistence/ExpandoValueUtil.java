@@ -39,6 +39,10 @@ public class ExpandoValueUtil {
 		getPersistence().cacheResult(expandoValues);
 	}
 
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
 	public static com.liferay.portlet.expando.model.ExpandoValue create(
 		long valueId) {
 		return getPersistence().create(valueId);

@@ -37,6 +37,8 @@ public interface AnnouncementsFlagPersistence extends BasePersistence {
 	public void cacheResult(
 		java.util.List<com.liferay.portlet.announcements.model.AnnouncementsFlag> announcementsFlags);
 
+	public void clearCache();
+
 	public com.liferay.portlet.announcements.model.AnnouncementsFlag create(
 		long flagId);
 

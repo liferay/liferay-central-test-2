@@ -39,6 +39,10 @@ public class SCLicenseUtil {
 		getPersistence().cacheResult(scLicenses);
 	}
 
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
 	public static com.liferay.portlet.softwarecatalog.model.SCLicense create(
 		long licenseId) {
 		return getPersistence().create(licenseId);

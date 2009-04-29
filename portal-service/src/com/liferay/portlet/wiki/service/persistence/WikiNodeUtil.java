@@ -39,6 +39,10 @@ public class WikiNodeUtil {
 		getPersistence().cacheResult(wikiNodes);
 	}
 
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
 	public static com.liferay.portlet.wiki.model.WikiNode create(long nodeId) {
 		return getPersistence().create(nodeId);
 	}

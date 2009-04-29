@@ -159,6 +159,7 @@ import com.liferay.portal.service.persistence.UserTrackerPathPersistence;
 import com.liferay.portal.service.persistence.UserTrackerPersistence;
 import com.liferay.portal.service.persistence.WebDAVPropsPersistence;
 import com.liferay.portal.service.persistence.WebsitePersistence;
+import com.liferay.portal.util.PortalUtil;
 
 import com.liferay.portlet.documentlibrary.service.DLFolderLocalService;
 import com.liferay.portlet.documentlibrary.service.DLFolderService;
@@ -1485,6 +1486,15 @@ public abstract class LayoutLocalServiceBaseImpl implements LayoutLocalService {
 
 	public void setTasksProposalFinder(TasksProposalFinder tasksProposalFinder) {
 		this.tasksProposalFinder = tasksProposalFinder;
+	}
+
+	protected void runSQL(String sql) throws SystemException {
+		try {
+			PortalUtil.runSQL(sql);
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
 	}
 
 	@BeanReference(name = "com.liferay.portal.service.AccountLocalService.impl")

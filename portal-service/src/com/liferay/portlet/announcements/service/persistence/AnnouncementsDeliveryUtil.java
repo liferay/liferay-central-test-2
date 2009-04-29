@@ -39,6 +39,10 @@ public class AnnouncementsDeliveryUtil {
 		getPersistence().cacheResult(announcementsDeliveries);
 	}
 
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
 	public static com.liferay.portlet.announcements.model.AnnouncementsDelivery create(
 		long deliveryId) {
 		return getPersistence().create(deliveryId);

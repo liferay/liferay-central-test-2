@@ -34,6 +34,8 @@ public interface ListTypePersistence extends BasePersistence {
 	public void cacheResult(
 		java.util.List<com.liferay.portal.model.ListType> listTypes);
 
+	public void clearCache();
+
 	public com.liferay.portal.model.ListType create(int listTypeId);
 
 	public com.liferay.portal.model.ListType remove(int listTypeId)

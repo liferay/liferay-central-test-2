@@ -33,6 +33,7 @@ import com.liferay.portal.service.LayoutLocalService;
 import com.liferay.portal.service.LayoutService;
 import com.liferay.portal.service.persistence.LayoutFinder;
 import com.liferay.portal.service.persistence.LayoutPersistence;
+import com.liferay.portal.util.PortalUtil;
 
 import com.liferay.portlet.documentlibrary.model.DLFileRank;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalService;
@@ -297,6 +298,15 @@ public abstract class DLFileRankLocalServiceBaseImpl
 
 	public void setLayoutFinder(LayoutFinder layoutFinder) {
 		this.layoutFinder = layoutFinder;
+	}
+
+	protected void runSQL(String sql) throws SystemException {
+		try {
+			PortalUtil.runSQL(sql);
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
 	}
 
 	@BeanReference(name = "com.liferay.portlet.documentlibrary.service.DLFileEntryLocalService.impl")

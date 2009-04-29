@@ -39,6 +39,10 @@ public class MBCategoryUtil {
 		getPersistence().cacheResult(mbCategories);
 	}
 
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
 	public static com.liferay.portlet.messageboards.model.MBCategory create(
 		long categoryId) {
 		return getPersistence().create(categoryId);

@@ -35,6 +35,8 @@ public interface ServiceComponentPersistence extends BasePersistence {
 	public void cacheResult(
 		java.util.List<com.liferay.portal.model.ServiceComponent> serviceComponents);
 
+	public void clearCache();
+
 	public com.liferay.portal.model.ServiceComponent create(
 		long serviceComponentId);
 

@@ -34,6 +34,8 @@ public interface UserIdMapperPersistence extends BasePersistence {
 	public void cacheResult(
 		java.util.List<com.liferay.portal.model.UserIdMapper> userIdMappers);
 
+	public void clearCache();
+
 	public com.liferay.portal.model.UserIdMapper create(long userIdMapperId);
 
 	public com.liferay.portal.model.UserIdMapper remove(long userIdMapperId)

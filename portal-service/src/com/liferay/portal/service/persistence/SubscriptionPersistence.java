@@ -34,6 +34,8 @@ public interface SubscriptionPersistence extends BasePersistence {
 	public void cacheResult(
 		java.util.List<com.liferay.portal.model.Subscription> subscriptions);
 
+	public void clearCache();
+
 	public com.liferay.portal.model.Subscription create(long subscriptionId);
 
 	public com.liferay.portal.model.Subscription remove(long subscriptionId)

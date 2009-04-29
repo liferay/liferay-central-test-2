@@ -43,6 +43,7 @@ import com.liferay.portal.service.persistence.ResourceFinder;
 import com.liferay.portal.service.persistence.ResourcePersistence;
 import com.liferay.portal.service.persistence.UserFinder;
 import com.liferay.portal.service.persistence.UserPersistence;
+import com.liferay.portal.util.PortalUtil;
 
 import com.liferay.portlet.expando.service.ExpandoValueLocalService;
 import com.liferay.portlet.expando.service.ExpandoValueService;
@@ -341,6 +342,15 @@ public abstract class IGFolderLocalServiceBaseImpl
 
 	public void setExpandoValueFinder(ExpandoValueFinder expandoValueFinder) {
 		this.expandoValueFinder = expandoValueFinder;
+	}
+
+	protected void runSQL(String sql) throws SystemException {
+		try {
+			PortalUtil.runSQL(sql);
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
 	}
 
 	@BeanReference(name = "com.liferay.portlet.imagegallery.service.IGFolderLocalService.impl")

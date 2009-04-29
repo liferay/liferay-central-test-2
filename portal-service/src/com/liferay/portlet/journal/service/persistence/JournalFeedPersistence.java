@@ -37,6 +37,8 @@ public interface JournalFeedPersistence extends BasePersistence {
 	public void cacheResult(
 		java.util.List<com.liferay.portlet.journal.model.JournalFeed> journalFeeds);
 
+	public void clearCache();
+
 	public com.liferay.portlet.journal.model.JournalFeed create(long id);
 
 	public com.liferay.portlet.journal.model.JournalFeed remove(long id)

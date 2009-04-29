@@ -33,6 +33,7 @@ import com.liferay.portal.service.UserLocalService;
 import com.liferay.portal.service.UserService;
 import com.liferay.portal.service.persistence.UserFinder;
 import com.liferay.portal.service.persistence.UserPersistence;
+import com.liferay.portal.util.PortalUtil;
 
 import com.liferay.portlet.blogs.service.BlogsEntryLocalService;
 import com.liferay.portlet.blogs.service.BlogsEntryService;
@@ -269,6 +270,15 @@ public abstract class RatingsEntryLocalServiceBaseImpl
 	public void setBlogsStatsUserFinder(
 		BlogsStatsUserFinder blogsStatsUserFinder) {
 		this.blogsStatsUserFinder = blogsStatsUserFinder;
+	}
+
+	protected void runSQL(String sql) throws SystemException {
+		try {
+			PortalUtil.runSQL(sql);
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
 	}
 
 	@BeanReference(name = "com.liferay.portlet.ratings.service.RatingsEntryLocalService.impl")

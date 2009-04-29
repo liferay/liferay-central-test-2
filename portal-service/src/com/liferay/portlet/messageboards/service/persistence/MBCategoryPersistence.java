@@ -37,6 +37,8 @@ public interface MBCategoryPersistence extends BasePersistence {
 	public void cacheResult(
 		java.util.List<com.liferay.portlet.messageboards.model.MBCategory> mbCategories);
 
+	public void clearCache();
+
 	public com.liferay.portlet.messageboards.model.MBCategory create(
 		long categoryId);
 

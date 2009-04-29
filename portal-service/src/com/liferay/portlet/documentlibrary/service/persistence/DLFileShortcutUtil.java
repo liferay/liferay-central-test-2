@@ -39,6 +39,10 @@ public class DLFileShortcutUtil {
 		getPersistence().cacheResult(dlFileShortcuts);
 	}
 
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut create(
 		long fileShortcutId) {
 		return getPersistence().create(fileShortcutId);

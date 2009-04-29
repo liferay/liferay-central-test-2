@@ -39,6 +39,10 @@ public class MBThreadUtil {
 		getPersistence().cacheResult(mbThreads);
 	}
 
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
 	public static com.liferay.portlet.messageboards.model.MBThread create(
 		long threadId) {
 		return getPersistence().create(threadId);

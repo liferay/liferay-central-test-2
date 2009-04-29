@@ -35,6 +35,8 @@ public interface OrgGroupPermissionPersistence extends BasePersistence {
 	public void cacheResult(
 		java.util.List<com.liferay.portal.model.OrgGroupPermission> orgGroupPermissions);
 
+	public void clearCache();
+
 	public com.liferay.portal.model.OrgGroupPermission create(
 		com.liferay.portal.service.persistence.OrgGroupPermissionPK orgGroupPermissionPK);
 

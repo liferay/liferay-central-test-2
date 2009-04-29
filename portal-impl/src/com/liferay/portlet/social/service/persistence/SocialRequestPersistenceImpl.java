@@ -24,6 +24,7 @@ package com.liferay.portlet.social.service.persistence;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
+import com.liferay.portal.kernel.cache.CacheRegistry;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
@@ -301,6 +302,13 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl
 				cacheResult(socialRequest);
 			}
 		}
+	}
+
+	public void clearCache() {
+		CacheRegistry.clear(SocialRequestImpl.class.getName());
+		EntityCacheUtil.clearCache(SocialRequestImpl.class.getName());
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
 	public SocialRequest create(long requestId) {

@@ -25,6 +25,7 @@ package com.liferay.portal.service.persistence;
 import com.liferay.portal.NoSuchPortletItemException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
+import com.liferay.portal.kernel.cache.CacheRegistry;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
@@ -144,6 +145,13 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl
 				cacheResult(portletItem);
 			}
 		}
+	}
+
+	public void clearCache() {
+		CacheRegistry.clear(PortletItemImpl.class.getName());
+		EntityCacheUtil.clearCache(PortletItemImpl.class.getName());
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
 	public PortletItem create(long portletItemId) {

@@ -39,6 +39,10 @@ public class SCProductVersionUtil {
 		getPersistence().cacheResult(scProductVersions);
 	}
 
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
 	public static com.liferay.portlet.softwarecatalog.model.SCProductVersion create(
 		long productVersionId) {
 		return getPersistence().create(productVersionId);

@@ -39,6 +39,10 @@ public class SCFrameworkVersionUtil {
 		getPersistence().cacheResult(scFrameworkVersions);
 	}
 
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
 	public static com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion create(
 		long frameworkVersionId) {
 		return getPersistence().create(frameworkVersionId);

@@ -37,6 +37,8 @@ public interface MBMessagePersistence extends BasePersistence {
 	public void cacheResult(
 		java.util.List<com.liferay.portlet.messageboards.model.MBMessage> mbMessages);
 
+	public void clearCache();
+
 	public com.liferay.portlet.messageboards.model.MBMessage create(
 		long messageId);
 

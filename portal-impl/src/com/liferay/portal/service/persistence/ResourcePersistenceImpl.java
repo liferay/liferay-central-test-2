@@ -25,6 +25,7 @@ package com.liferay.portal.service.persistence;
 import com.liferay.portal.NoSuchResourceException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
+import com.liferay.portal.kernel.cache.CacheRegistry;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
@@ -107,6 +108,13 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl
 				cacheResult(resource);
 			}
 		}
+	}
+
+	public void clearCache() {
+		CacheRegistry.clear(ResourceImpl.class.getName());
+		EntityCacheUtil.clearCache(ResourceImpl.class.getName());
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
 	public Resource create(long resourceId) {

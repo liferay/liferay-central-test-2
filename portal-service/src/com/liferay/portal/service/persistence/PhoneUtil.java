@@ -38,6 +38,10 @@ public class PhoneUtil {
 		getPersistence().cacheResult(phones);
 	}
 
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
 	public static com.liferay.portal.model.Phone create(long phoneId) {
 		return getPersistence().create(phoneId);
 	}

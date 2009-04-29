@@ -35,6 +35,8 @@ public interface PortletPreferencesPersistence extends BasePersistence {
 	public void cacheResult(
 		java.util.List<com.liferay.portal.model.PortletPreferences> portletPreferenceses);
 
+	public void clearCache();
+
 	public com.liferay.portal.model.PortletPreferences create(
 		long portletPreferencesId);
 

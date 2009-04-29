@@ -39,6 +39,10 @@ public class SubscriptionUtil {
 		getPersistence().cacheResult(subscriptions);
 	}
 
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
 	public static com.liferay.portal.model.Subscription create(
 		long subscriptionId) {
 		return getPersistence().create(subscriptionId);

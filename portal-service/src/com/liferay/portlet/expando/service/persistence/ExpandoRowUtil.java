@@ -39,6 +39,10 @@ public class ExpandoRowUtil {
 		getPersistence().cacheResult(expandoRows);
 	}
 
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
 	public static com.liferay.portlet.expando.model.ExpandoRow create(
 		long rowId) {
 		return getPersistence().create(rowId);

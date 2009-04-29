@@ -37,6 +37,8 @@ public interface WikiPageResourcePersistence extends BasePersistence {
 	public void cacheResult(
 		java.util.List<com.liferay.portlet.wiki.model.WikiPageResource> wikiPageResources);
 
+	public void clearCache();
+
 	public com.liferay.portlet.wiki.model.WikiPageResource create(
 		long resourcePrimKey);
 

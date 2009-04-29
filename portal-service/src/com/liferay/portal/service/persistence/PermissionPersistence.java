@@ -34,6 +34,8 @@ public interface PermissionPersistence extends BasePersistence {
 	public void cacheResult(
 		java.util.List<com.liferay.portal.model.Permission> permissions);
 
+	public void clearCache();
+
 	public com.liferay.portal.model.Permission create(long permissionId);
 
 	public com.liferay.portal.model.Permission remove(long permissionId)

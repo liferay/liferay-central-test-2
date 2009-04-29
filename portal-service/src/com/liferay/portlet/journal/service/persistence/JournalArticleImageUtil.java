@@ -39,6 +39,10 @@ public class JournalArticleImageUtil {
 		getPersistence().cacheResult(journalArticleImages);
 	}
 
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
 	public static com.liferay.portlet.journal.model.JournalArticleImage create(
 		long articleImageId) {
 		return getPersistence().create(articleImageId);

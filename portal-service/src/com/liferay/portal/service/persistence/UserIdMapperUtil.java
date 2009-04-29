@@ -39,6 +39,10 @@ public class UserIdMapperUtil {
 		getPersistence().cacheResult(userIdMappers);
 	}
 
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
 	public static com.liferay.portal.model.UserIdMapper create(
 		long userIdMapperId) {
 		return getPersistence().create(userIdMapperId);

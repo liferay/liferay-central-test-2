@@ -39,6 +39,10 @@ public class TagsAssetUtil {
 		getPersistence().cacheResult(tagsAssets);
 	}
 
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
 	public static com.liferay.portlet.tags.model.TagsAsset create(long assetId) {
 		return getPersistence().create(assetId);
 	}

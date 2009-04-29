@@ -38,6 +38,10 @@ public class CompanyUtil {
 		getPersistence().cacheResult(companies);
 	}
 
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
 	public static com.liferay.portal.model.Company create(long companyId) {
 		return getPersistence().create(companyId);
 	}

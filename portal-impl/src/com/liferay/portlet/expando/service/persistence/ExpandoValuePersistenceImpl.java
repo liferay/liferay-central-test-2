@@ -24,6 +24,7 @@ package com.liferay.portlet.expando.service.persistence;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
+import com.liferay.portal.kernel.cache.CacheRegistry;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
@@ -219,6 +220,13 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 				cacheResult(expandoValue);
 			}
 		}
+	}
+
+	public void clearCache() {
+		CacheRegistry.clear(ExpandoValueImpl.class.getName());
+		EntityCacheUtil.clearCache(ExpandoValueImpl.class.getName());
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
 	public ExpandoValue create(long valueId) {

@@ -36,6 +36,8 @@ public interface MBBanPersistence extends BasePersistence {
 	public void cacheResult(
 		java.util.List<com.liferay.portlet.messageboards.model.MBBan> mbBans);
 
+	public void clearCache();
+
 	public com.liferay.portlet.messageboards.model.MBBan create(long banId);
 
 	public com.liferay.portlet.messageboards.model.MBBan remove(long banId)

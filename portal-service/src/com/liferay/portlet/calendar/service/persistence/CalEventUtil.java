@@ -39,6 +39,10 @@ public class CalEventUtil {
 		getPersistence().cacheResult(calEvents);
 	}
 
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
 	public static com.liferay.portlet.calendar.model.CalEvent create(
 		long eventId) {
 		return getPersistence().create(eventId);

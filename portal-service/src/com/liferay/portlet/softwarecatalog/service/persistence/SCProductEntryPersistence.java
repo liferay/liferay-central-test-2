@@ -37,6 +37,8 @@ public interface SCProductEntryPersistence extends BasePersistence {
 	public void cacheResult(
 		java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> scProductEntries);
 
+	public void clearCache();
+
 	public com.liferay.portlet.softwarecatalog.model.SCProductEntry create(
 		long productEntryId);
 

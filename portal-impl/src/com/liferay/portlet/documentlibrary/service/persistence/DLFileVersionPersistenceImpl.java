@@ -24,6 +24,7 @@ package com.liferay.portlet.documentlibrary.service.persistence;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
+import com.liferay.portal.kernel.cache.CacheRegistry;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
@@ -122,6 +123,13 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl
 				cacheResult(dlFileVersion);
 			}
 		}
+	}
+
+	public void clearCache() {
+		CacheRegistry.clear(DLFileVersionImpl.class.getName());
+		EntityCacheUtil.clearCache(DLFileVersionImpl.class.getName());
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
 	public DLFileVersion create(long fileVersionId) {

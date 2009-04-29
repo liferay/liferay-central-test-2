@@ -24,6 +24,7 @@ package com.liferay.portlet.wiki.service.persistence;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
+import com.liferay.portal.kernel.cache.CacheRegistry;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
@@ -278,6 +279,13 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 				cacheResult(wikiPage);
 			}
 		}
+	}
+
+	public void clearCache() {
+		CacheRegistry.clear(WikiPageImpl.class.getName());
+		EntityCacheUtil.clearCache(WikiPageImpl.class.getName());
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
 	public WikiPage create(long pageId) {

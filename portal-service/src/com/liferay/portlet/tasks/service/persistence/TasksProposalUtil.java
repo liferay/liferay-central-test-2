@@ -39,6 +39,10 @@ public class TasksProposalUtil {
 		getPersistence().cacheResult(tasksProposals);
 	}
 
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
 	public static com.liferay.portlet.tasks.model.TasksProposal create(
 		long proposalId) {
 		return getPersistence().create(proposalId);

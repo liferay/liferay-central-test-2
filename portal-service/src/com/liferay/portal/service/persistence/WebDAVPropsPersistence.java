@@ -34,6 +34,8 @@ public interface WebDAVPropsPersistence extends BasePersistence {
 	public void cacheResult(
 		java.util.List<com.liferay.portal.model.WebDAVProps> webDAVPropses);
 
+	public void clearCache();
+
 	public com.liferay.portal.model.WebDAVProps create(long webDavPropsId);
 
 	public com.liferay.portal.model.WebDAVProps remove(long webDavPropsId)

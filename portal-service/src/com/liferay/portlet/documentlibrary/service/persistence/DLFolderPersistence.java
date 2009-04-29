@@ -37,6 +37,8 @@ public interface DLFolderPersistence extends BasePersistence {
 	public void cacheResult(
 		java.util.List<com.liferay.portlet.documentlibrary.model.DLFolder> dlFolders);
 
+	public void clearCache();
+
 	public com.liferay.portlet.documentlibrary.model.DLFolder create(
 		long folderId);
 

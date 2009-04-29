@@ -38,6 +38,10 @@ public class ImageUtil {
 		getPersistence().cacheResult(images);
 	}
 
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
 	public static com.liferay.portal.model.Image create(long imageId) {
 		return getPersistence().create(imageId);
 	}

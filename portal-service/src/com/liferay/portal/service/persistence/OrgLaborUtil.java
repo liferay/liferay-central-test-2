@@ -38,6 +38,10 @@ public class OrgLaborUtil {
 		getPersistence().cacheResult(orgLabors);
 	}
 
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
 	public static com.liferay.portal.model.OrgLabor create(long orgLaborId) {
 		return getPersistence().create(orgLaborId);
 	}

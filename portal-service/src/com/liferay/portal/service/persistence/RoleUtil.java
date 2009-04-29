@@ -38,6 +38,10 @@ public class RoleUtil {
 		getPersistence().cacheResult(roles);
 	}
 
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
 	public static com.liferay.portal.model.Role create(long roleId) {
 		return getPersistence().create(roleId);
 	}

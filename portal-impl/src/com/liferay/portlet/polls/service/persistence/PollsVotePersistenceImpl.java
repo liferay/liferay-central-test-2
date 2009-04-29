@@ -24,6 +24,7 @@ package com.liferay.portlet.polls.service.persistence;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
+import com.liferay.portal.kernel.cache.CacheRegistry;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
@@ -126,6 +127,13 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl
 				cacheResult(pollsVote);
 			}
 		}
+	}
+
+	public void clearCache() {
+		CacheRegistry.clear(PollsVoteImpl.class.getName());
+		EntityCacheUtil.clearCache(PollsVoteImpl.class.getName());
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
 	public PollsVote create(long voteId) {

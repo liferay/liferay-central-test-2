@@ -37,6 +37,8 @@ public interface SCFrameworkVersionPersistence extends BasePersistence {
 	public void cacheResult(
 		java.util.List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion> scFrameworkVersions);
 
+	public void clearCache();
+
 	public com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion create(
 		long frameworkVersionId);
 

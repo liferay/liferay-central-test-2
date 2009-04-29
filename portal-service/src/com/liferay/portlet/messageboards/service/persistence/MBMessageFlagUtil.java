@@ -39,6 +39,10 @@ public class MBMessageFlagUtil {
 		getPersistence().cacheResult(mbMessageFlags);
 	}
 
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
 	public static com.liferay.portlet.messageboards.model.MBMessageFlag create(
 		long messageFlagId) {
 		return getPersistence().create(messageFlagId);

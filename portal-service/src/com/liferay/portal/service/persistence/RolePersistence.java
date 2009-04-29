@@ -33,6 +33,8 @@ public interface RolePersistence extends BasePersistence {
 
 	public void cacheResult(java.util.List<com.liferay.portal.model.Role> roles);
 
+	public void clearCache();
+
 	public com.liferay.portal.model.Role create(long roleId);
 
 	public com.liferay.portal.model.Role remove(long roleId)

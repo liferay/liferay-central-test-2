@@ -34,6 +34,8 @@ public interface ResourceCodePersistence extends BasePersistence {
 	public void cacheResult(
 		java.util.List<com.liferay.portal.model.ResourceCode> resourceCodes);
 
+	public void clearCache();
+
 	public com.liferay.portal.model.ResourceCode create(long codeId);
 
 	public com.liferay.portal.model.ResourceCode remove(long codeId)

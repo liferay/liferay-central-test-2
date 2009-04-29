@@ -39,6 +39,10 @@ public class ResourceCodeUtil {
 		getPersistence().cacheResult(resourceCodes);
 	}
 
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
 	public static com.liferay.portal.model.ResourceCode create(long codeId) {
 		return getPersistence().create(codeId);
 	}

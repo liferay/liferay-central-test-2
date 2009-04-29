@@ -25,6 +25,7 @@ package com.liferay.portal.service.persistence;
 import com.liferay.portal.NoSuchPasswordTrackerException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
+import com.liferay.portal.kernel.cache.CacheRegistry;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
@@ -99,6 +100,13 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl
 				cacheResult(passwordTracker);
 			}
 		}
+	}
+
+	public void clearCache() {
+		CacheRegistry.clear(PasswordTrackerImpl.class.getName());
+		EntityCacheUtil.clearCache(PasswordTrackerImpl.class.getName());
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
 	public PasswordTracker create(long passwordTrackerId) {

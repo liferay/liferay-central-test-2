@@ -27,6 +27,7 @@ import com.liferay.counter.service.CounterService;
 
 import com.liferay.mail.service.MailService;
 
+import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountService;
@@ -157,6 +158,7 @@ import com.liferay.portal.service.persistence.UserTrackerPathPersistence;
 import com.liferay.portal.service.persistence.UserTrackerPersistence;
 import com.liferay.portal.service.persistence.WebDAVPropsPersistence;
 import com.liferay.portal.service.persistence.WebsitePersistence;
+import com.liferay.portal.util.PortalUtil;
 
 import com.liferay.portlet.announcements.service.AnnouncementsDeliveryLocalService;
 import com.liferay.portlet.announcements.service.AnnouncementsDeliveryService;
@@ -1585,6 +1587,15 @@ public abstract class UserServiceBaseImpl extends PrincipalBean
 
 	public void setTagsAssetFinder(TagsAssetFinder tagsAssetFinder) {
 		this.tagsAssetFinder = tagsAssetFinder;
+	}
+
+	protected void runSQL(String sql) throws SystemException {
+		try {
+			PortalUtil.runSQL(sql);
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
 	}
 
 	@BeanReference(name = "com.liferay.portal.service.AccountLocalService.impl")

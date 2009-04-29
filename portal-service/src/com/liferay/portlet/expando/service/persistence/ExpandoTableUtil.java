@@ -39,6 +39,10 @@ public class ExpandoTableUtil {
 		getPersistence().cacheResult(expandoTables);
 	}
 
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
 	public static com.liferay.portlet.expando.model.ExpandoTable create(
 		long tableId) {
 		return getPersistence().create(tableId);

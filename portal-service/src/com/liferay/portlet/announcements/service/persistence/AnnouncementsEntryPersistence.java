@@ -37,6 +37,8 @@ public interface AnnouncementsEntryPersistence extends BasePersistence {
 	public void cacheResult(
 		java.util.List<com.liferay.portlet.announcements.model.AnnouncementsEntry> announcementsEntries);
 
+	public void clearCache();
+
 	public com.liferay.portlet.announcements.model.AnnouncementsEntry create(
 		long entryId);
 

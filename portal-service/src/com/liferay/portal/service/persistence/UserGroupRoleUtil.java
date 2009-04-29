@@ -39,6 +39,10 @@ public class UserGroupRoleUtil {
 		getPersistence().cacheResult(userGroupRoles);
 	}
 
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
 	public static com.liferay.portal.model.UserGroupRole create(
 		com.liferay.portal.service.persistence.UserGroupRolePK userGroupRolePK) {
 		return getPersistence().create(userGroupRolePK);

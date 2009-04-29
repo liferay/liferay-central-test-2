@@ -23,6 +23,7 @@
 package com.liferay.portlet.social.service.base;
 
 import com.liferay.portal.kernel.annotation.BeanReference;
+import com.liferay.portal.util.PortalUtil;
 
 import com.liferay.portlet.social.service.SocialActivityInterpreterLocalService;
 import com.liferay.portlet.social.service.SocialActivityLocalService;
@@ -121,6 +122,15 @@ public abstract class SocialRequestInterpreterLocalServiceBaseImpl
 	public void setSocialRequestInterpreterLocalService(
 		SocialRequestInterpreterLocalService socialRequestInterpreterLocalService) {
 		this.socialRequestInterpreterLocalService = socialRequestInterpreterLocalService;
+	}
+
+	protected void runSQL(String sql) throws SystemException {
+		try {
+			PortalUtil.runSQL(sql);
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
 	}
 
 	@BeanReference(name = "com.liferay.portlet.social.service.SocialActivityLocalService.impl")

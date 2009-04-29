@@ -38,6 +38,10 @@ public class RegionUtil {
 		getPersistence().cacheResult(regions);
 	}
 
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
 	public static com.liferay.portal.model.Region create(long regionId) {
 		return getPersistence().create(regionId);
 	}

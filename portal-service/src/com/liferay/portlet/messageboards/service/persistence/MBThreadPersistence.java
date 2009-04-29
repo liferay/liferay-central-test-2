@@ -37,6 +37,8 @@ public interface MBThreadPersistence extends BasePersistence {
 	public void cacheResult(
 		java.util.List<com.liferay.portlet.messageboards.model.MBThread> mbThreads);
 
+	public void clearCache();
+
 	public com.liferay.portlet.messageboards.model.MBThread create(
 		long threadId);
 

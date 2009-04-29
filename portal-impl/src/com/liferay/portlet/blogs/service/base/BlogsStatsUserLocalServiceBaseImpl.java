@@ -33,6 +33,7 @@ import com.liferay.portal.service.GroupLocalService;
 import com.liferay.portal.service.GroupService;
 import com.liferay.portal.service.persistence.GroupFinder;
 import com.liferay.portal.service.persistence.GroupPersistence;
+import com.liferay.portal.util.PortalUtil;
 
 import com.liferay.portlet.blogs.model.BlogsStatsUser;
 import com.liferay.portlet.blogs.service.BlogsEntryLocalService;
@@ -220,6 +221,15 @@ public abstract class BlogsStatsUserLocalServiceBaseImpl
 
 	public void setGroupFinder(GroupFinder groupFinder) {
 		this.groupFinder = groupFinder;
+	}
+
+	protected void runSQL(String sql) throws SystemException {
+		try {
+			PortalUtil.runSQL(sql);
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
 	}
 
 	@BeanReference(name = "com.liferay.portlet.blogs.service.BlogsEntryLocalService.impl")

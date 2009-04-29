@@ -25,6 +25,7 @@ package com.liferay.portlet.bookmarks.service.base;
 import com.liferay.counter.service.CounterLocalService;
 import com.liferay.counter.service.CounterService;
 
+import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceService;
@@ -35,6 +36,7 @@ import com.liferay.portal.service.persistence.ResourceFinder;
 import com.liferay.portal.service.persistence.ResourcePersistence;
 import com.liferay.portal.service.persistence.UserFinder;
 import com.liferay.portal.service.persistence.UserPersistence;
+import com.liferay.portal.util.PortalUtil;
 
 import com.liferay.portlet.bookmarks.service.BookmarksEntryLocalService;
 import com.liferay.portlet.bookmarks.service.BookmarksEntryService;
@@ -308,6 +310,15 @@ public abstract class BookmarksEntryServiceBaseImpl extends PrincipalBean
 
 	public void setTagsEntryFinder(TagsEntryFinder tagsEntryFinder) {
 		this.tagsEntryFinder = tagsEntryFinder;
+	}
+
+	protected void runSQL(String sql) throws SystemException {
+		try {
+			PortalUtil.runSQL(sql);
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
 	}
 
 	@BeanReference(name = "com.liferay.portlet.bookmarks.service.BookmarksEntryLocalService.impl")

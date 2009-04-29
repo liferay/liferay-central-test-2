@@ -24,6 +24,7 @@ package com.liferay.portlet.bookmarks.service.persistence;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
+import com.liferay.portal.kernel.cache.CacheRegistry;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
@@ -167,6 +168,13 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl
 				cacheResult(bookmarksEntry);
 			}
 		}
+	}
+
+	public void clearCache() {
+		CacheRegistry.clear(BookmarksEntryImpl.class.getName());
+		EntityCacheUtil.clearCache(BookmarksEntryImpl.class.getName());
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
 	public BookmarksEntry create(long entryId) {

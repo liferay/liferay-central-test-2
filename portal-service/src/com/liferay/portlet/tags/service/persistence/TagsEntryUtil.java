@@ -39,6 +39,10 @@ public class TagsEntryUtil {
 		getPersistence().cacheResult(tagsEntries);
 	}
 
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
 	public static com.liferay.portlet.tags.model.TagsEntry create(long entryId) {
 		return getPersistence().create(entryId);
 	}

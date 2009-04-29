@@ -39,6 +39,10 @@ public class WikiPageUtil {
 		getPersistence().cacheResult(wikiPages);
 	}
 
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
 	public static com.liferay.portlet.wiki.model.WikiPage create(long pageId) {
 		return getPersistence().create(pageId);
 	}

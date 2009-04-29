@@ -39,6 +39,10 @@ public class ShoppingCouponUtil {
 		getPersistence().cacheResult(shoppingCoupons);
 	}
 
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
 	public static com.liferay.portlet.shopping.model.ShoppingCoupon create(
 		long couponId) {
 		return getPersistence().create(couponId);

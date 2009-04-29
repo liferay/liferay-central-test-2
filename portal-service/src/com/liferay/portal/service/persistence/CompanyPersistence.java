@@ -34,6 +34,8 @@ public interface CompanyPersistence extends BasePersistence {
 	public void cacheResult(
 		java.util.List<com.liferay.portal.model.Company> companies);
 
+	public void clearCache();
+
 	public com.liferay.portal.model.Company create(long companyId);
 
 	public com.liferay.portal.model.Company remove(long companyId)

@@ -34,6 +34,8 @@ public interface ImagePersistence extends BasePersistence {
 	public void cacheResult(
 		java.util.List<com.liferay.portal.model.Image> images);
 
+	public void clearCache();
+
 	public com.liferay.portal.model.Image create(long imageId);
 
 	public com.liferay.portal.model.Image remove(long imageId)

@@ -37,6 +37,8 @@ public interface MBMessageFlagPersistence extends BasePersistence {
 	public void cacheResult(
 		java.util.List<com.liferay.portlet.messageboards.model.MBMessageFlag> mbMessageFlags);
 
+	public void clearCache();
+
 	public com.liferay.portlet.messageboards.model.MBMessageFlag create(
 		long messageFlagId);
 

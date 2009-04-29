@@ -39,6 +39,10 @@ public class BlogsStatsUserUtil {
 		getPersistence().cacheResult(blogsStatsUsers);
 	}
 
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
 	public static com.liferay.portlet.blogs.model.BlogsStatsUser create(
 		long statsUserId) {
 		return getPersistence().create(statsUserId);

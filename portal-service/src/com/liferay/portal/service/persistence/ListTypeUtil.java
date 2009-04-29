@@ -38,6 +38,10 @@ public class ListTypeUtil {
 		getPersistence().cacheResult(listTypes);
 	}
 
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
 	public static com.liferay.portal.model.ListType create(int listTypeId) {
 		return getPersistence().create(listTypeId);
 	}

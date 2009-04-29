@@ -38,6 +38,10 @@ public class AddressUtil {
 		getPersistence().cacheResult(addresses);
 	}
 
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
 	public static com.liferay.portal.model.Address create(long addressId) {
 		return getPersistence().create(addressId);
 	}

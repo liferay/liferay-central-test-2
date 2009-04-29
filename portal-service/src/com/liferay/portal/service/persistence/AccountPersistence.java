@@ -34,6 +34,8 @@ public interface AccountPersistence extends BasePersistence {
 	public void cacheResult(
 		java.util.List<com.liferay.portal.model.Account> accounts);
 
+	public void clearCache();
+
 	public com.liferay.portal.model.Account create(long accountId);
 
 	public com.liferay.portal.model.Account remove(long accountId)

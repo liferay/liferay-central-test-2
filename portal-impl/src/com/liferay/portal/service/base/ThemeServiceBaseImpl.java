@@ -152,6 +152,7 @@ import com.liferay.portal.service.persistence.UserTrackerPathPersistence;
 import com.liferay.portal.service.persistence.UserTrackerPersistence;
 import com.liferay.portal.service.persistence.WebDAVPropsPersistence;
 import com.liferay.portal.service.persistence.WebsitePersistence;
+import com.liferay.portal.util.PortalUtil;
 
 /**
  * <a href="ThemeServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
@@ -1252,6 +1253,15 @@ public abstract class ThemeServiceBaseImpl extends PrincipalBean
 
 	public void setWebsitePersistence(WebsitePersistence websitePersistence) {
 		this.websitePersistence = websitePersistence;
+	}
+
+	protected void runSQL(String sql) throws SystemException {
+		try {
+			PortalUtil.runSQL(sql);
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
 	}
 
 	@BeanReference(name = "com.liferay.portal.service.AccountLocalService.impl")

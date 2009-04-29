@@ -34,6 +34,8 @@ public interface GroupPersistence extends BasePersistence {
 	public void cacheResult(
 		java.util.List<com.liferay.portal.model.Group> groups);
 
+	public void clearCache();
+
 	public com.liferay.portal.model.Group create(long groupId);
 
 	public com.liferay.portal.model.Group remove(long groupId)

@@ -38,6 +38,10 @@ public class ShardUtil {
 		getPersistence().cacheResult(shards);
 	}
 
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
 	public static com.liferay.portal.model.Shard create(long shardId) {
 		return getPersistence().create(shardId);
 	}

@@ -35,6 +35,8 @@ public interface MembershipRequestPersistence extends BasePersistence {
 	public void cacheResult(
 		java.util.List<com.liferay.portal.model.MembershipRequest> membershipRequests);
 
+	public void clearCache();
+
 	public com.liferay.portal.model.MembershipRequest create(
 		long membershipRequestId);
 

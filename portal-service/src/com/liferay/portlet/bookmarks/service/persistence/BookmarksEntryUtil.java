@@ -39,6 +39,10 @@ public class BookmarksEntryUtil {
 		getPersistence().cacheResult(bookmarksEntries);
 	}
 
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
 	public static com.liferay.portlet.bookmarks.model.BookmarksEntry create(
 		long entryId) {
 		return getPersistence().create(entryId);

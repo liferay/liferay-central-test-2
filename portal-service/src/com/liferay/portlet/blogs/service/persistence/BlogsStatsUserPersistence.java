@@ -37,6 +37,8 @@ public interface BlogsStatsUserPersistence extends BasePersistence {
 	public void cacheResult(
 		java.util.List<com.liferay.portlet.blogs.model.BlogsStatsUser> blogsStatsUsers);
 
+	public void clearCache();
+
 	public com.liferay.portlet.blogs.model.BlogsStatsUser create(
 		long statsUserId);
 

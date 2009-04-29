@@ -37,6 +37,8 @@ public interface RatingsEntryPersistence extends BasePersistence {
 	public void cacheResult(
 		java.util.List<com.liferay.portlet.ratings.model.RatingsEntry> ratingsEntries);
 
+	public void clearCache();
+
 	public com.liferay.portlet.ratings.model.RatingsEntry create(long entryId);
 
 	public com.liferay.portlet.ratings.model.RatingsEntry remove(long entryId)

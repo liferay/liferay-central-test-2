@@ -37,6 +37,8 @@ public interface SocialRequestPersistence extends BasePersistence {
 	public void cacheResult(
 		java.util.List<com.liferay.portlet.social.model.SocialRequest> socialRequests);
 
+	public void clearCache();
+
 	public com.liferay.portlet.social.model.SocialRequest create(long requestId);
 
 	public com.liferay.portlet.social.model.SocialRequest remove(long requestId)

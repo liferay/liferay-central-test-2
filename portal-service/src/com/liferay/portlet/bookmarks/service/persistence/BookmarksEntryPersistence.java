@@ -37,6 +37,8 @@ public interface BookmarksEntryPersistence extends BasePersistence {
 	public void cacheResult(
 		java.util.List<com.liferay.portlet.bookmarks.model.BookmarksEntry> bookmarksEntries);
 
+	public void clearCache();
+
 	public com.liferay.portlet.bookmarks.model.BookmarksEntry create(
 		long entryId);
 

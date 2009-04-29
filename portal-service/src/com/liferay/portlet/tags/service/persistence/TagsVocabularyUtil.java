@@ -39,6 +39,10 @@ public class TagsVocabularyUtil {
 		getPersistence().cacheResult(tagsVocabularies);
 	}
 
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
 	public static com.liferay.portlet.tags.model.TagsVocabulary create(
 		long vocabularyId) {
 		return getPersistence().create(vocabularyId);

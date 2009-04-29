@@ -39,6 +39,10 @@ public class SCProductEntryUtil {
 		getPersistence().cacheResult(scProductEntries);
 	}
 
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
 	public static com.liferay.portlet.softwarecatalog.model.SCProductEntry create(
 		long productEntryId) {
 		return getPersistence().create(productEntryId);

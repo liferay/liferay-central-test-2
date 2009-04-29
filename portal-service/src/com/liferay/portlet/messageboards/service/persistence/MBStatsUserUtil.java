@@ -39,6 +39,10 @@ public class MBStatsUserUtil {
 		getPersistence().cacheResult(mbStatsUsers);
 	}
 
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
 	public static com.liferay.portlet.messageboards.model.MBStatsUser create(
 		long statsUserId) {
 		return getPersistence().create(statsUserId);

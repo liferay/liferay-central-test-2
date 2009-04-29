@@ -37,6 +37,8 @@ public interface PollsQuestionPersistence extends BasePersistence {
 	public void cacheResult(
 		java.util.List<com.liferay.portlet.polls.model.PollsQuestion> pollsQuestions);
 
+	public void clearCache();
+
 	public com.liferay.portlet.polls.model.PollsQuestion create(long questionId);
 
 	public com.liferay.portlet.polls.model.PollsQuestion remove(long questionId)

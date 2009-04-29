@@ -25,8 +25,10 @@ package com.liferay.portlet.softwarecatalog.service.base;
 import com.liferay.counter.service.CounterLocalService;
 import com.liferay.counter.service.CounterService;
 
+import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.service.base.PrincipalBean;
+import com.liferay.portal.util.PortalUtil;
 
 import com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionLocalService;
 import com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionService;
@@ -190,6 +192,15 @@ public abstract class SCLicenseServiceBaseImpl extends PrincipalBean
 
 	public void setCounterService(CounterService counterService) {
 		this.counterService = counterService;
+	}
+
+	protected void runSQL(String sql) throws SystemException {
+		try {
+			PortalUtil.runSQL(sql);
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
 	}
 
 	@BeanReference(name = "com.liferay.portlet.softwarecatalog.service.SCLicenseLocalService.impl")

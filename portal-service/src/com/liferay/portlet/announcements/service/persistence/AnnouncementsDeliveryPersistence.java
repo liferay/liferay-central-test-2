@@ -37,6 +37,8 @@ public interface AnnouncementsDeliveryPersistence extends BasePersistence {
 	public void cacheResult(
 		java.util.List<com.liferay.portlet.announcements.model.AnnouncementsDelivery> announcementsDeliveries);
 
+	public void clearCache();
+
 	public com.liferay.portlet.announcements.model.AnnouncementsDelivery create(
 		long deliveryId);
 

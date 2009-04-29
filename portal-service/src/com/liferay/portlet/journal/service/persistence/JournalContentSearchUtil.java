@@ -39,6 +39,10 @@ public class JournalContentSearchUtil {
 		getPersistence().cacheResult(journalContentSearchs);
 	}
 
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
 	public static com.liferay.portlet.journal.model.JournalContentSearch create(
 		long contentSearchId) {
 		return getPersistence().create(contentSearchId);

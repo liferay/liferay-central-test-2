@@ -39,6 +39,10 @@ public class WikiPageResourceUtil {
 		getPersistence().cacheResult(wikiPageResources);
 	}
 
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
 	public static com.liferay.portlet.wiki.model.WikiPageResource create(
 		long resourcePrimKey) {
 		return getPersistence().create(resourcePrimKey);

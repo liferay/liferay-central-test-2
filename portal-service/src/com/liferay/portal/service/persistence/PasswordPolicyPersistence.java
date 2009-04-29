@@ -35,6 +35,8 @@ public interface PasswordPolicyPersistence extends BasePersistence {
 	public void cacheResult(
 		java.util.List<com.liferay.portal.model.PasswordPolicy> passwordPolicies);
 
+	public void clearCache();
+
 	public com.liferay.portal.model.PasswordPolicy create(long passwordPolicyId);
 
 	public com.liferay.portal.model.PasswordPolicy remove(long passwordPolicyId)

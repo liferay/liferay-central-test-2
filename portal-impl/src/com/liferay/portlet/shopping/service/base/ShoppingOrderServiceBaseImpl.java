@@ -27,6 +27,7 @@ import com.liferay.counter.service.CounterService;
 
 import com.liferay.mail.service.MailService;
 
+import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.service.CompanyLocalService;
 import com.liferay.portal.service.CompanyService;
@@ -36,6 +37,7 @@ import com.liferay.portal.service.base.PrincipalBean;
 import com.liferay.portal.service.persistence.CompanyPersistence;
 import com.liferay.portal.service.persistence.UserFinder;
 import com.liferay.portal.service.persistence.UserPersistence;
+import com.liferay.portal.util.PortalUtil;
 
 import com.liferay.portlet.messageboards.service.MBMessageLocalService;
 import com.liferay.portlet.messageboards.service.MBMessageService;
@@ -389,6 +391,15 @@ public abstract class ShoppingOrderServiceBaseImpl extends PrincipalBean
 
 	public void setMBMessageFinder(MBMessageFinder mbMessageFinder) {
 		this.mbMessageFinder = mbMessageFinder;
+	}
+
+	protected void runSQL(String sql) throws SystemException {
+		try {
+			PortalUtil.runSQL(sql);
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
 	}
 
 	@BeanReference(name = "com.liferay.portlet.shopping.service.ShoppingCartLocalService.impl")

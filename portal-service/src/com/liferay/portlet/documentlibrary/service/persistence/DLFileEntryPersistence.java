@@ -37,6 +37,8 @@ public interface DLFileEntryPersistence extends BasePersistence {
 	public void cacheResult(
 		java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> dlFileEntries);
 
+	public void clearCache();
+
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry create(
 		long fileEntryId);
 

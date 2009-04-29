@@ -39,6 +39,10 @@ public class AnnouncementsEntryUtil {
 		getPersistence().cacheResult(announcementsEntries);
 	}
 
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
 	public static com.liferay.portlet.announcements.model.AnnouncementsEntry create(
 		long entryId) {
 		return getPersistence().create(entryId);

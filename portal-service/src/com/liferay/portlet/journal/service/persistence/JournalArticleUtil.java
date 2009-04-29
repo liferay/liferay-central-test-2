@@ -39,6 +39,10 @@ public class JournalArticleUtil {
 		getPersistence().cacheResult(journalArticles);
 	}
 
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
 	public static com.liferay.portlet.journal.model.JournalArticle create(
 		long id) {
 		return getPersistence().create(id);

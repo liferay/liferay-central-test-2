@@ -33,6 +33,7 @@ import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceService;
 import com.liferay.portal.service.persistence.ResourceFinder;
 import com.liferay.portal.service.persistence.ResourcePersistence;
+import com.liferay.portal.util.PortalUtil;
 
 import com.liferay.portlet.expando.model.ExpandoColumn;
 import com.liferay.portlet.expando.service.ExpandoColumnLocalService;
@@ -279,6 +280,15 @@ public abstract class ExpandoColumnLocalServiceBaseImpl
 
 	public void setResourceFinder(ResourceFinder resourceFinder) {
 		this.resourceFinder = resourceFinder;
+	}
+
+	protected void runSQL(String sql) throws SystemException {
+		try {
+			PortalUtil.runSQL(sql);
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
 	}
 
 	@BeanReference(name = "com.liferay.portlet.expando.service.ExpandoColumnLocalService.impl")

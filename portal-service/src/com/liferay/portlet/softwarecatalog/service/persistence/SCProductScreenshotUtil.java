@@ -39,6 +39,10 @@ public class SCProductScreenshotUtil {
 		getPersistence().cacheResult(scProductScreenshots);
 	}
 
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
 	public static com.liferay.portlet.softwarecatalog.model.SCProductScreenshot create(
 		long productScreenshotId) {
 		return getPersistence().create(productScreenshotId);

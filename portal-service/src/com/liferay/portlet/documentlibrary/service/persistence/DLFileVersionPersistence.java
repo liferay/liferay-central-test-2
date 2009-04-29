@@ -37,6 +37,8 @@ public interface DLFileVersionPersistence extends BasePersistence {
 	public void cacheResult(
 		java.util.List<com.liferay.portlet.documentlibrary.model.DLFileVersion> dlFileVersions);
 
+	public void clearCache();
+
 	public com.liferay.portlet.documentlibrary.model.DLFileVersion create(
 		long fileVersionId);
 

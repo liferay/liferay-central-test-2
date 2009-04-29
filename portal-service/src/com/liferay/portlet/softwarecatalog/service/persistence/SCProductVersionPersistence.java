@@ -37,6 +37,8 @@ public interface SCProductVersionPersistence extends BasePersistence {
 	public void cacheResult(
 		java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductVersion> scProductVersions);
 
+	public void clearCache();
+
 	public com.liferay.portlet.softwarecatalog.model.SCProductVersion create(
 		long productVersionId);
 

@@ -34,6 +34,8 @@ public interface RegionPersistence extends BasePersistence {
 	public void cacheResult(
 		java.util.List<com.liferay.portal.model.Region> regions);
 
+	public void clearCache();
+
 	public com.liferay.portal.model.Region create(long regionId);
 
 	public com.liferay.portal.model.Region remove(long regionId)

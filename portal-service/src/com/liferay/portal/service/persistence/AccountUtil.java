@@ -38,6 +38,10 @@ public class AccountUtil {
 		getPersistence().cacheResult(accounts);
 	}
 
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
 	public static com.liferay.portal.model.Account create(long accountId) {
 		return getPersistence().create(accountId);
 	}

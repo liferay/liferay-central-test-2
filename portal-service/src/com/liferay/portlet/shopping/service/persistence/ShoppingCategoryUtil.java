@@ -39,6 +39,10 @@ public class ShoppingCategoryUtil {
 		getPersistence().cacheResult(shoppingCategories);
 	}
 
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
 	public static com.liferay.portlet.shopping.model.ShoppingCategory create(
 		long categoryId) {
 		return getPersistence().create(categoryId);

@@ -37,6 +37,8 @@ public interface ExpandoRowPersistence extends BasePersistence {
 	public void cacheResult(
 		java.util.List<com.liferay.portlet.expando.model.ExpandoRow> expandoRows);
 
+	public void clearCache();
+
 	public com.liferay.portlet.expando.model.ExpandoRow create(long rowId);
 
 	public com.liferay.portlet.expando.model.ExpandoRow remove(long rowId)

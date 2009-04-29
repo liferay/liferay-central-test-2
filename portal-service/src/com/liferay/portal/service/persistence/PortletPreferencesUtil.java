@@ -39,6 +39,10 @@ public class PortletPreferencesUtil {
 		getPersistence().cacheResult(portletPreferenceses);
 	}
 
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
 	public static com.liferay.portal.model.PortletPreferences create(
 		long portletPreferencesId) {
 		return getPersistence().create(portletPreferencesId);

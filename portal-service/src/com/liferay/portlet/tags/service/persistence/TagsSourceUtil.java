@@ -39,6 +39,10 @@ public class TagsSourceUtil {
 		getPersistence().cacheResult(tagsSources);
 	}
 
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
 	public static com.liferay.portlet.tags.model.TagsSource create(
 		long sourceId) {
 		return getPersistence().create(sourceId);

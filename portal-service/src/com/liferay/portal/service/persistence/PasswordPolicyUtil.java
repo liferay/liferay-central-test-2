@@ -39,6 +39,10 @@ public class PasswordPolicyUtil {
 		getPersistence().cacheResult(passwordPolicies);
 	}
 
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
 	public static com.liferay.portal.model.PasswordPolicy create(
 		long passwordPolicyId) {
 		return getPersistence().create(passwordPolicyId);

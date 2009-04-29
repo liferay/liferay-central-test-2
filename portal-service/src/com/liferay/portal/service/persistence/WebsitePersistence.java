@@ -34,6 +34,8 @@ public interface WebsitePersistence extends BasePersistence {
 	public void cacheResult(
 		java.util.List<com.liferay.portal.model.Website> websites);
 
+	public void clearCache();
+
 	public com.liferay.portal.model.Website create(long websiteId);
 
 	public com.liferay.portal.model.Website remove(long websiteId)

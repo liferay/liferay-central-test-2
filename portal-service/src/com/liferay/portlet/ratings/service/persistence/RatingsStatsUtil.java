@@ -39,6 +39,10 @@ public class RatingsStatsUtil {
 		getPersistence().cacheResult(ratingsStatses);
 	}
 
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
 	public static com.liferay.portlet.ratings.model.RatingsStats create(
 		long statsId) {
 		return getPersistence().create(statsId);

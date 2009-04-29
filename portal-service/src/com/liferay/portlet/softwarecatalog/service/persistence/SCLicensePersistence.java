@@ -37,6 +37,8 @@ public interface SCLicensePersistence extends BasePersistence {
 	public void cacheResult(
 		java.util.List<com.liferay.portlet.softwarecatalog.model.SCLicense> scLicenses);
 
+	public void clearCache();
+
 	public com.liferay.portlet.softwarecatalog.model.SCLicense create(
 		long licenseId);
 

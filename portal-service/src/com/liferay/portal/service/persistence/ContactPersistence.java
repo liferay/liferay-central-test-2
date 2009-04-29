@@ -34,6 +34,8 @@ public interface ContactPersistence extends BasePersistence {
 	public void cacheResult(
 		java.util.List<com.liferay.portal.model.Contact> contacts);
 
+	public void clearCache();
+
 	public com.liferay.portal.model.Contact create(long contactId);
 
 	public com.liferay.portal.model.Contact remove(long contactId)

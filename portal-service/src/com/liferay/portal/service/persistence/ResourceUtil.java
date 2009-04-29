@@ -38,6 +38,10 @@ public class ResourceUtil {
 		getPersistence().cacheResult(resources);
 	}
 
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
 	public static com.liferay.portal.model.Resource create(long resourceId) {
 		return getPersistence().create(resourceId);
 	}

@@ -39,6 +39,10 @@ public class ResourceActionUtil {
 		getPersistence().cacheResult(resourceActions);
 	}
 
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
 	public static com.liferay.portal.model.ResourceAction create(
 		long resourceActionId) {
 		return getPersistence().create(resourceActionId);

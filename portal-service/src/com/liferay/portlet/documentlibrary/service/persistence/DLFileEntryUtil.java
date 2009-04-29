@@ -39,6 +39,10 @@ public class DLFileEntryUtil {
 		getPersistence().cacheResult(dlFileEntries);
 	}
 
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry create(
 		long fileEntryId) {
 		return getPersistence().create(fileEntryId);

@@ -39,6 +39,10 @@ public class PluginSettingUtil {
 		getPersistence().cacheResult(pluginSettings);
 	}
 
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
 	public static com.liferay.portal.model.PluginSetting create(
 		long pluginSettingId) {
 		return getPersistence().create(pluginSettingId);

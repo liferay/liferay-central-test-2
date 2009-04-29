@@ -37,6 +37,8 @@ public interface IGFolderPersistence extends BasePersistence {
 	public void cacheResult(
 		java.util.List<com.liferay.portlet.imagegallery.model.IGFolder> igFolders);
 
+	public void clearCache();
+
 	public com.liferay.portlet.imagegallery.model.IGFolder create(long folderId);
 
 	public com.liferay.portlet.imagegallery.model.IGFolder remove(long folderId)

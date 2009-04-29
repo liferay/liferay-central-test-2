@@ -38,6 +38,10 @@ public class CountryUtil {
 		getPersistence().cacheResult(countries);
 	}
 
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
 	public static com.liferay.portal.model.Country create(long countryId) {
 		return getPersistence().create(countryId);
 	}

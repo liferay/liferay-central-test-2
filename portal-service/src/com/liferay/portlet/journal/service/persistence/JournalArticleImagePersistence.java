@@ -37,6 +37,8 @@ public interface JournalArticleImagePersistence extends BasePersistence {
 	public void cacheResult(
 		java.util.List<com.liferay.portlet.journal.model.JournalArticleImage> journalArticleImages);
 
+	public void clearCache();
+
 	public com.liferay.portlet.journal.model.JournalArticleImage create(
 		long articleImageId);
 

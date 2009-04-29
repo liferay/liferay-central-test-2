@@ -38,6 +38,10 @@ public class PortletUtil {
 		getPersistence().cacheResult(portlets);
 	}
 
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
 	public static com.liferay.portal.model.Portlet create(long id) {
 		return getPersistence().create(id);
 	}

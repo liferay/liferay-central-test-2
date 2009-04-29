@@ -34,6 +34,8 @@ public interface ShardPersistence extends BasePersistence {
 	public void cacheResult(
 		java.util.List<com.liferay.portal.model.Shard> shards);
 
+	public void clearCache();
+
 	public com.liferay.portal.model.Shard create(long shardId);
 
 	public com.liferay.portal.model.Shard remove(long shardId)

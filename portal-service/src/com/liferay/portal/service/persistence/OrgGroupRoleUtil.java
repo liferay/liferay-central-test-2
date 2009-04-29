@@ -39,6 +39,10 @@ public class OrgGroupRoleUtil {
 		getPersistence().cacheResult(orgGroupRoles);
 	}
 
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
 	public static com.liferay.portal.model.OrgGroupRole create(
 		com.liferay.portal.service.persistence.OrgGroupRolePK orgGroupRolePK) {
 		return getPersistence().create(orgGroupRolePK);

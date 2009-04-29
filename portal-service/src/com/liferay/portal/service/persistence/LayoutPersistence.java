@@ -34,6 +34,8 @@ public interface LayoutPersistence extends BasePersistence {
 	public void cacheResult(
 		java.util.List<com.liferay.portal.model.Layout> layouts);
 
+	public void clearCache();
+
 	public com.liferay.portal.model.Layout create(long plid);
 
 	public com.liferay.portal.model.Layout remove(long plid)

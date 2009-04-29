@@ -24,6 +24,7 @@ package com.liferay.portlet.blogs.service.persistence;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
+import com.liferay.portal.kernel.cache.CacheRegistry;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
@@ -166,6 +167,13 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 				cacheResult(blogsStatsUser);
 			}
 		}
+	}
+
+	public void clearCache() {
+		CacheRegistry.clear(BlogsStatsUserImpl.class.getName());
+		EntityCacheUtil.clearCache(BlogsStatsUserImpl.class.getName());
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
 	public BlogsStatsUser create(long statsUserId) {

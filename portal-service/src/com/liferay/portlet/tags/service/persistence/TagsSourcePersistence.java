@@ -37,6 +37,8 @@ public interface TagsSourcePersistence extends BasePersistence {
 	public void cacheResult(
 		java.util.List<com.liferay.portlet.tags.model.TagsSource> tagsSources);
 
+	public void clearCache();
+
 	public com.liferay.portlet.tags.model.TagsSource create(long sourceId);
 
 	public com.liferay.portlet.tags.model.TagsSource remove(long sourceId)

@@ -39,6 +39,10 @@ public class MBBanUtil {
 		getPersistence().cacheResult(mbBans);
 	}
 
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
 	public static com.liferay.portlet.messageboards.model.MBBan create(
 		long banId) {
 		return getPersistence().create(banId);

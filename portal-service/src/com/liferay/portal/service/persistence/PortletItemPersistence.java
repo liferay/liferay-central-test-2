@@ -34,6 +34,8 @@ public interface PortletItemPersistence extends BasePersistence {
 	public void cacheResult(
 		java.util.List<com.liferay.portal.model.PortletItem> portletItems);
 
+	public void clearCache();
+
 	public com.liferay.portal.model.PortletItem create(long portletItemId);
 
 	public com.liferay.portal.model.PortletItem remove(long portletItemId)

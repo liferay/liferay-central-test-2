@@ -39,6 +39,10 @@ public class DLFolderUtil {
 		getPersistence().cacheResult(dlFolders);
 	}
 
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
 	public static com.liferay.portlet.documentlibrary.model.DLFolder create(
 		long folderId) {
 		return getPersistence().create(folderId);

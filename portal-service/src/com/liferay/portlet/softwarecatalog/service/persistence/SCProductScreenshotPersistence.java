@@ -37,6 +37,8 @@ public interface SCProductScreenshotPersistence extends BasePersistence {
 	public void cacheResult(
 		java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductScreenshot> scProductScreenshots);
 
+	public void clearCache();
+
 	public com.liferay.portlet.softwarecatalog.model.SCProductScreenshot create(
 		long productScreenshotId);
 

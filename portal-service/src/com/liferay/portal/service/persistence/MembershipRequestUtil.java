@@ -39,6 +39,10 @@ public class MembershipRequestUtil {
 		getPersistence().cacheResult(membershipRequests);
 	}
 
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
 	public static com.liferay.portal.model.MembershipRequest create(
 		long membershipRequestId) {
 		return getPersistence().create(membershipRequestId);

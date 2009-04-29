@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.service.ImageLocalService;
 import com.liferay.portal.service.persistence.ImagePersistence;
+import com.liferay.portal.util.PortalUtil;
 
 import com.liferay.portlet.softwarecatalog.model.SCProductScreenshot;
 import com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionLocalService;
@@ -256,6 +257,15 @@ public abstract class SCProductScreenshotLocalServiceBaseImpl
 
 	public void setImagePersistence(ImagePersistence imagePersistence) {
 		this.imagePersistence = imagePersistence;
+	}
+
+	protected void runSQL(String sql) throws SystemException {
+		try {
+			PortalUtil.runSQL(sql);
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
 	}
 
 	@BeanReference(name = "com.liferay.portlet.softwarecatalog.service.SCLicenseLocalService.impl")

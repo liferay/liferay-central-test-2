@@ -39,6 +39,10 @@ public class PasswordTrackerUtil {
 		getPersistence().cacheResult(passwordTrackers);
 	}
 
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
 	public static com.liferay.portal.model.PasswordTracker create(
 		long passwordTrackerId) {
 		return getPersistence().create(passwordTrackerId);

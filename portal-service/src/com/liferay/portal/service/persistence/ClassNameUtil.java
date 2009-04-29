@@ -38,6 +38,10 @@ public class ClassNameUtil {
 		getPersistence().cacheResult(classNames);
 	}
 
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
 	public static com.liferay.portal.model.ClassName create(long classNameId) {
 		return getPersistence().create(classNameId);
 	}

@@ -37,6 +37,8 @@ public interface ShoppingItemPricePersistence extends BasePersistence {
 	public void cacheResult(
 		java.util.List<com.liferay.portlet.shopping.model.ShoppingItemPrice> shoppingItemPrices);
 
+	public void clearCache();
+
 	public com.liferay.portlet.shopping.model.ShoppingItemPrice create(
 		long itemPriceId);
 

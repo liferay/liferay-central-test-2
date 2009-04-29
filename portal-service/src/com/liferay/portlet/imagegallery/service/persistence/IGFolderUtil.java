@@ -39,6 +39,10 @@ public class IGFolderUtil {
 		getPersistence().cacheResult(igFolders);
 	}
 
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
 	public static com.liferay.portlet.imagegallery.model.IGFolder create(
 		long folderId) {
 		return getPersistence().create(folderId);

@@ -34,6 +34,8 @@ public interface OrgLaborPersistence extends BasePersistence {
 	public void cacheResult(
 		java.util.List<com.liferay.portal.model.OrgLabor> orgLabors);
 
+	public void clearCache();
+
 	public com.liferay.portal.model.OrgLabor create(long orgLaborId);
 
 	public com.liferay.portal.model.OrgLabor remove(long orgLaborId)

@@ -34,6 +34,8 @@ public interface ReleasePersistence extends BasePersistence {
 	public void cacheResult(
 		java.util.List<com.liferay.portal.model.Release> releases);
 
+	public void clearCache();
+
 	public com.liferay.portal.model.Release create(long releaseId);
 
 	public com.liferay.portal.model.Release remove(long releaseId)

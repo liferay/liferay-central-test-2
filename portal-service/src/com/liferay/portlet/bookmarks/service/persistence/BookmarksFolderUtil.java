@@ -39,6 +39,10 @@ public class BookmarksFolderUtil {
 		getPersistence().cacheResult(bookmarksFolders);
 	}
 
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
 	public static com.liferay.portlet.bookmarks.model.BookmarksFolder create(
 		long folderId) {
 		return getPersistence().create(folderId);

@@ -39,6 +39,10 @@ public class SocialRelationUtil {
 		getPersistence().cacheResult(socialRelations);
 	}
 
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
 	public static com.liferay.portlet.social.model.SocialRelation create(
 		long relationId) {
 		return getPersistence().create(relationId);

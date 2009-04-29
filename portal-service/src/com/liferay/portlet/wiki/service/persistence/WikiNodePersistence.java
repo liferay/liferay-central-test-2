@@ -36,6 +36,8 @@ public interface WikiNodePersistence extends BasePersistence {
 	public void cacheResult(
 		java.util.List<com.liferay.portlet.wiki.model.WikiNode> wikiNodes);
 
+	public void clearCache();
+
 	public com.liferay.portlet.wiki.model.WikiNode create(long nodeId);
 
 	public com.liferay.portlet.wiki.model.WikiNode remove(long nodeId)

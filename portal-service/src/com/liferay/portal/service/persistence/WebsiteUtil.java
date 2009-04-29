@@ -38,6 +38,10 @@ public class WebsiteUtil {
 		getPersistence().cacheResult(websites);
 	}
 
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
 	public static com.liferay.portal.model.Website create(long websiteId) {
 		return getPersistence().create(websiteId);
 	}

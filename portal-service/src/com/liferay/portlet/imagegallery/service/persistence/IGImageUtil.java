@@ -39,6 +39,10 @@ public class IGImageUtil {
 		getPersistence().cacheResult(igImages);
 	}
 
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
 	public static com.liferay.portlet.imagegallery.model.IGImage create(
 		long imageId) {
 		return getPersistence().create(imageId);

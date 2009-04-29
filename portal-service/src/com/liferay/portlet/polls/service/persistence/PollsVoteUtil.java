@@ -39,6 +39,10 @@ public class PollsVoteUtil {
 		getPersistence().cacheResult(pollsVotes);
 	}
 
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
 	public static com.liferay.portlet.polls.model.PollsVote create(long voteId) {
 		return getPersistence().create(voteId);
 	}

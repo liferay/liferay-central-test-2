@@ -39,6 +39,10 @@ public class EmailAddressUtil {
 		getPersistence().cacheResult(emailAddresses);
 	}
 
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
 	public static com.liferay.portal.model.EmailAddress create(
 		long emailAddressId) {
 		return getPersistence().create(emailAddressId);

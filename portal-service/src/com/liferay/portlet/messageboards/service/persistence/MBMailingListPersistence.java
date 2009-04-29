@@ -37,6 +37,8 @@ public interface MBMailingListPersistence extends BasePersistence {
 	public void cacheResult(
 		java.util.List<com.liferay.portlet.messageboards.model.MBMailingList> mbMailingLists);
 
+	public void clearCache();
+
 	public com.liferay.portlet.messageboards.model.MBMailingList create(
 		long mailingListId);
 

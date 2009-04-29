@@ -30,6 +30,7 @@ import com.liferay.documentlibrary.service.DLService;
 
 import com.liferay.lock.service.LockService;
 
+import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.service.LayoutLocalService;
 import com.liferay.portal.service.LayoutService;
@@ -46,6 +47,7 @@ import com.liferay.portal.service.persistence.ResourcePersistence;
 import com.liferay.portal.service.persistence.UserFinder;
 import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.service.persistence.WebDAVPropsPersistence;
+import com.liferay.portal.util.PortalUtil;
 
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalService;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryService;
@@ -392,6 +394,15 @@ public abstract class DLFolderServiceBaseImpl extends PrincipalBean
 
 	public void setExpandoValueFinder(ExpandoValueFinder expandoValueFinder) {
 		this.expandoValueFinder = expandoValueFinder;
+	}
+
+	protected void runSQL(String sql) throws SystemException {
+		try {
+			PortalUtil.runSQL(sql);
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
 	}
 
 	@BeanReference(name = "com.liferay.portlet.documentlibrary.service.DLFileEntryLocalService.impl")

@@ -24,6 +24,7 @@ package com.liferay.portlet.messageboards.service.persistence;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
+import com.liferay.portal.kernel.cache.CacheRegistry;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
@@ -139,6 +140,13 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl
 				cacheResult(mbBan);
 			}
 		}
+	}
+
+	public void clearCache() {
+		CacheRegistry.clear(MBBanImpl.class.getName());
+		EntityCacheUtil.clearCache(MBBanImpl.class.getName());
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
 	public MBBan create(long banId) {

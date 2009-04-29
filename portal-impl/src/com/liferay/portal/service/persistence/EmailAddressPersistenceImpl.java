@@ -25,6 +25,7 @@ package com.liferay.portal.service.persistence;
 import com.liferay.portal.NoSuchEmailAddressException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
+import com.liferay.portal.kernel.cache.CacheRegistry;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
@@ -173,6 +174,13 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 				cacheResult(emailAddress);
 			}
 		}
+	}
+
+	public void clearCache() {
+		CacheRegistry.clear(EmailAddressImpl.class.getName());
+		EntityCacheUtil.clearCache(EmailAddressImpl.class.getName());
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
 	public EmailAddress create(long emailAddressId) {

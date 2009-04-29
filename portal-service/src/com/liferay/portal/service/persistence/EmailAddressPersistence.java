@@ -34,6 +34,8 @@ public interface EmailAddressPersistence extends BasePersistence {
 	public void cacheResult(
 		java.util.List<com.liferay.portal.model.EmailAddress> emailAddresses);
 
+	public void clearCache();
+
 	public com.liferay.portal.model.EmailAddress create(long emailAddressId);
 
 	public com.liferay.portal.model.EmailAddress remove(long emailAddressId)

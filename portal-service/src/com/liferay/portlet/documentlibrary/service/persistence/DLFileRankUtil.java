@@ -39,6 +39,10 @@ public class DLFileRankUtil {
 		getPersistence().cacheResult(dlFileRanks);
 	}
 
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
 	public static com.liferay.portlet.documentlibrary.model.DLFileRank create(
 		long fileRankId) {
 		return getPersistence().create(fileRankId);

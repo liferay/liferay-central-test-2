@@ -37,6 +37,8 @@ public interface JournalArticlePersistence extends BasePersistence {
 	public void cacheResult(
 		java.util.List<com.liferay.portlet.journal.model.JournalArticle> journalArticles);
 
+	public void clearCache();
+
 	public com.liferay.portlet.journal.model.JournalArticle create(long id);
 
 	public com.liferay.portlet.journal.model.JournalArticle remove(long id)

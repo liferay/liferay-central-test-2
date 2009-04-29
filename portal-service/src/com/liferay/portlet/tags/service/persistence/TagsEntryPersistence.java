@@ -36,6 +36,8 @@ public interface TagsEntryPersistence extends BasePersistence {
 	public void cacheResult(
 		java.util.List<com.liferay.portlet.tags.model.TagsEntry> tagsEntries);
 
+	public void clearCache();
+
 	public com.liferay.portlet.tags.model.TagsEntry create(long entryId);
 
 	public com.liferay.portlet.tags.model.TagsEntry remove(long entryId)
