@@ -111,7 +111,8 @@ public class PostgreSQLUtil extends DBUtil {
 				String[] template = buildColumnTypeTokens(line);
 
 				line = StringUtil.replace(
-					"alter table @table@ alter @old-column@ type @type@ USING @old-column@::@type@;",
+					"alter table @table@ alter @old-column@ type @type@ " +
+						"using @old-column@::@type@;",
 					REWORD_TEMPLATE, template);
 			}
 			else if (line.indexOf(DROP_PRIMARY_KEY) != -1) {
