@@ -455,7 +455,7 @@ public abstract class DBUtil {
 									sqle.getMessage());
 
 								if (!message.startsWith("Duplicate key name")) {
-									_log.warn(message);
+									_log.warn(message + ": " + sql);
 								}
 
 								if (message.startsWith("Duplicate entry") ||
