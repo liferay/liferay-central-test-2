@@ -80,17 +80,12 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 
 			schedulerFactory.initialize(props);
 
-			try {
-				_scheduler = schedulerFactory.getScheduler();
-			}
-			catch (Exception e2) {
-				quartzLocalService.checkQuartzTables();
+			quartzLocalService.checkQuartzTables();
 
-				_scheduler = schedulerFactory.getScheduler();
-			}
+			_scheduler = schedulerFactory.getScheduler();
 		}
-		catch (Exception e1) {
-			_log.error("Unable to initialize engine", e1);
+		catch (Exception e) {
+			_log.error("Unable to initialize engine", e);
 		}
 	}
 
