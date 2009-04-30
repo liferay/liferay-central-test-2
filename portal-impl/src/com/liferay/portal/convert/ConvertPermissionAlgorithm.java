@@ -23,7 +23,9 @@
 package com.liferay.portal.convert;
 
 import com.liferay.counter.service.CounterLocalServiceUtil;
+import com.liferay.portal.NoSuchResourceActionException;
 import com.liferay.portal.convert.util.PermissionView;
+import com.liferay.portal.convert.util.ResourcePermissionView;
 import com.liferay.portal.kernel.cache.CacheRegistry;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
@@ -32,17 +34,25 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Tuple;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
+import com.liferay.portal.model.ResourceAction;
 import com.liferay.portal.model.ResourceCode;
 import com.liferay.portal.model.ResourceConstants;
+import com.liferay.portal.model.ResourcePermission;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.RoleConstants;
+import com.liferay.portal.model.impl.PermissionModelImpl;
+import com.liferay.portal.model.impl.ResourceCodeModelImpl;
+import com.liferay.portal.model.impl.ResourceModelImpl;
+import com.liferay.portal.model.impl.ResourcePermissionModelImpl;
 import com.liferay.portal.model.impl.RoleModelImpl;
 import com.liferay.portal.security.permission.PermissionCacheUtil;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.service.ClassNameLocalServiceUtil;
 import com.liferay.portal.service.GroupLocalServiceUtil;
+import com.liferay.portal.service.ResourceActionLocalServiceUtil;
 import com.liferay.portal.service.ResourceCodeLocalServiceUtil;
 import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
@@ -94,7 +104,7 @@ public class ConvertPermissionAlgorithm extends ConvertProcess {
 	public boolean isEnabled() {
 		boolean enabled = false;
 
-		if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM < 5) {
+		if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM < 6) {
 			enabled = true;
 		}
 
@@ -105,7 +115,17 @@ public class ConvertPermissionAlgorithm extends ConvertProcess {
 		try {
 			BatchSessionUtil.setEnabled(true);
 
-			_convert();
+			_initialize();
+
+			if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM < 5) {
+				_convertToRBAC();
+			}
+
+			_convertToBitwise();
+
+			MaintenanceUtil.appendStatus(
+				"Please set " + PropsKeys.PERMISSIONS_USER_CHECK_ALGORITHM +
+					" in your portal-ext.properties to use algorithm 6");
 		}
 		catch (Exception e) {
 			_log.fatal(e, e);
@@ -113,15 +133,94 @@ public class ConvertPermissionAlgorithm extends ConvertProcess {
 		finally {
 			CacheRegistry.clear();
 
+			PermissionCacheUtil.clearCache();
+
 			BatchSessionUtil.setEnabled(false);
 		}
 	}
 
-	private void _convert() throws Exception {
+	private void _convertToBitwise() throws Exception {
 
-		// Initialize
+		// ResourceAction and ResourcePermission
 
-		_initialize();
+		MaintenanceUtil.appendStatus(
+			"Generating ResourceAction and ResourcePermission data");
+
+		Table table = new Table(
+			ResourceCodeModelImpl.TABLE_NAME,
+			ResourceCodeModelImpl.TABLE_COLUMNS);
+
+		table.setSelectSQL(
+			"SELECT * FROM " + ResourceCodeModelImpl.TABLE_NAME +
+				" GROUP BY name");
+
+		String tempFile = table.generateTempFile();
+
+		BufferedReader resourceNameReader = new BufferedReader(
+			new FileReader(tempFile));
+
+		BufferedWriter resourcePermissionWriter = new BufferedWriter(
+			new FileWriter(tempFile + _EXT_RESOURCE_PERMISSION));
+
+		PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM = 6;
+
+		try {
+			String line = null;
+
+			while (Validator.isNotNull(line = resourceNameReader.readLine())) {
+				String[] values = StringUtil.split(line);
+				String name = values[2];
+
+				List<String> defaultActionIds =
+					ResourceActionsUtil.getResourceActions(name);
+
+				ResourceActionLocalServiceUtil.checkResourceActions(
+					name, defaultActionIds);
+
+				_convertResourcePermission(resourcePermissionWriter, name);
+			}
+
+			resourcePermissionWriter.close();
+
+			MaintenanceUtil.appendStatus("Updating ResourcePermission table");
+
+			Table resourcePermissionTable = new Table(
+				ResourcePermissionModelImpl.TABLE_NAME,
+				ResourcePermissionModelImpl.TABLE_COLUMNS);
+
+			resourcePermissionTable.populateTable(
+				tempFile + _EXT_RESOURCE_PERMISSION);
+		}
+		catch (Exception e) {
+			PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM = 5;
+
+			throw e;
+		}
+		finally {
+			resourceNameReader.close();
+			resourcePermissionWriter.close();
+
+			FileUtil.delete(tempFile);
+			FileUtil.delete(tempFile + _EXT_RESOURCE_PERMISSION);
+		}
+
+		// Cleanup
+
+		MaintenanceUtil.appendStatus("Cleanup legacy tables");
+
+		DBUtil dbUtil = DBUtil.getInstance();
+
+		dbUtil.runSQL("DELETE FROM " + ResourceCodeModelImpl.TABLE_NAME);
+		dbUtil.runSQL("DELETE FROM " + PermissionModelImpl.TABLE_NAME);
+		dbUtil.runSQL("DELETE FROM " + ResourceModelImpl.TABLE_NAME);
+		dbUtil.runSQL("DELETE FROM Roles_Permissions");
+
+		MaintenanceUtil.appendStatus(
+			"Conversion to bitwise permission complete");
+	}
+
+	private void _convertToRBAC() throws Exception {
+		_initializeRBAC();
 
 		// Groups_Permissions
 
@@ -158,8 +257,7 @@ public class ConvertPermissionAlgorithm extends ConvertProcess {
 		PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM = 5;
 
 		MaintenanceUtil.appendStatus(
-			"Please set " + PropsKeys.PERMISSIONS_USER_CHECK_ALGORITHM +
-				" in your portal-ext.properties to use algorithm 5");
+			"Conversion to RBAC permission complete");
 	}
 
 	private String _convertGuestUsers(String legacyFile) throws Exception {
@@ -256,6 +354,90 @@ public class ConvertPermissionAlgorithm extends ConvertProcess {
 		FileUtil.delete(legacyFile);
 	}
 
+	private void _convertResourcePermission(BufferedWriter writer, String name)
+		throws Exception {
+
+		ResourcePermissionView resourcePermissionView =
+			new ResourcePermissionView(name);
+
+		BufferedReader resourcePermReader = null;
+
+		String resourcePermissionFile =
+			resourcePermissionView.generateTempFile();
+
+		if (resourcePermissionFile == null) {
+			return;
+		}
+
+		MultiValueMap mvp = new MultiValueMap();
+
+		try {
+			resourcePermReader =
+				new BufferedReader(new FileReader(resourcePermissionFile));
+
+			String line = null;
+
+			while (Validator.isNotNull(line = resourcePermReader.readLine())) {
+				String[] values = StringUtil.split(line);
+
+				String actionId = ResourcePermissionView.getActionId(values);
+				long companyId = ResourcePermissionView.getCompanyId(values);
+				int scope = ResourcePermissionView.getScope(values);
+				String primKey = ResourcePermissionView.getPrimaryKey(values);
+				long roleId = ResourcePermissionView.getRoleId(values);
+
+				mvp.put(new Tuple(companyId, scope, primKey, roleId), actionId);
+			}
+		}
+		finally {
+			if (resourcePermReader != null) {
+				resourcePermReader.close();
+			}
+
+			FileUtil.delete(resourcePermissionFile);
+		}
+
+		for (Tuple key : (Set<Tuple>)mvp.keySet()) {
+			long resourcePermissionId = CounterLocalServiceUtil.increment(
+				ResourcePermission.class.getName());
+
+			long companyId = (Long)key.getObject(0);
+			int scope = (Integer)key.getObject(1);
+			String primKey = (String)key.getObject(2);
+			long roleId = (Long)key.getObject(3);
+
+			String[] actionIdArray =
+				(String[])mvp.getCollection(key).toArray(new String[0]);
+
+			long actionIds = 0;
+
+			for (String actionId : actionIdArray) {
+				try {
+					ResourceAction resourceAction =
+						ResourceActionLocalServiceUtil.getResourceAction(
+							name, actionId);
+
+					actionIds |= resourceAction.getBitwiseValue();
+				}
+				catch (NoSuchResourceActionException nsrae) {
+					if (_log.isWarnEnabled()) {
+						String msg = nsrae.getMessage();
+
+						_log.warn("Could not find resource action " + msg);
+					}
+				}
+			}
+
+			writer.append(resourcePermissionId + StringPool.COMMA);
+			writer.append(companyId + StringPool.COMMA);
+			writer.append(name + StringPool.COMMA);
+			writer.append(scope + StringPool.COMMA);
+			writer.append(primKey + StringPool.COMMA);
+			writer.append(roleId + StringPool.COMMA);
+			writer.append(actionIds + StringPool.COMMA + StringPool.NEW_LINE);
+		}
+	}
+
 	private void _convertRoles(
 			String legacyFile, int type, String newName, Object[][] newColumns)
 		throws Exception {
@@ -278,7 +460,7 @@ public class ConvertPermissionAlgorithm extends ConvertProcess {
 
 			String line = null;
 
-			while ((line = legacyFileReader.readLine()) != null) {
+			while (Validator.isNotNull(line = legacyFileReader.readLine())) {
 				String[] values = StringUtil.split(line);
 
 				long resourceId = PermissionView.getResourceId(values);
@@ -323,24 +505,12 @@ public class ConvertPermissionAlgorithm extends ConvertProcess {
 					List<String> defaultActions = null;
 
 					if (type == RoleConstants.TYPE_REGULAR) {
-						if (name.contains(StringPool.PERIOD)) {
-							defaultActions = ResourceActionsUtil.
-								getModelResourceActions(name);
-						}
-						else {
-							defaultActions = ResourceActionsUtil.
-								getPortletResourceActions(name);
-						}
+						defaultActions =
+							ResourceActionsUtil.getResourceActions(name);
 					}
 					else {
-						if (name.contains(StringPool.PERIOD)) {
-							defaultActions = ResourceActionsUtil.
-								getModelResourceCommunityDefaultActions(name);
-						}
-						else {
-							defaultActions = ResourceActionsUtil.
-								getPortletResourceCommunityDefaultActions(name);
-						}
+						defaultActions =
+							ResourceActionsUtil.getResourceCommunityDefaultActions(name);
 					}
 
 					// Resolve owner and system roles
@@ -489,6 +659,23 @@ public class ConvertPermissionAlgorithm extends ConvertProcess {
 
 	private void _initialize() throws Exception {
 
+		// Resource actions for unknown portlets
+
+		List<ResourceCode> resourceCodes =
+			ResourceCodeLocalServiceUtil.getResourceCodes(
+				QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+
+		for (ResourceCode resourceCode : resourceCodes) {
+			String name = resourceCode.getName();
+
+			if (!name.contains(StringPool.PERIOD)) {
+				ResourceActionsUtil.getPortletResourceActions(name);
+			}
+		}
+	}
+
+	private void _initializeRBAC() throws Exception {
+
 		// System roles and default users
 
 		long[] companyIds = PortalInstances.getCompanyIds();
@@ -554,23 +741,11 @@ public class ConvertPermissionAlgorithm extends ConvertProcess {
 		for (Group group : groups) {
 			_groupsMap.put(group.getGroupId(), group);
 		}
-
-		// Resource actions for unknown portlets
-
-		List<ResourceCode> resourceCodes =
-			ResourceCodeLocalServiceUtil.getResourceCodes(
-				QueryUtil.ALL_POS, QueryUtil.ALL_POS);
-
-		for (ResourceCode resourceCode : resourceCodes) {
-			String name = resourceCode.getName();
-
-			if (!name.contains(StringPool.PERIOD)) {
-				ResourceActionsUtil.getPortletResourceActions(name);
-			}
-		}
 	}
 
 	private static final String _EXT_OTHER_ROLES = ".others_roles";
+
+	private static final String _EXT_RESOURCE_PERMISSION = ".resource_permission";
 
 	private static final String _EXT_ROLE = ".role";
 

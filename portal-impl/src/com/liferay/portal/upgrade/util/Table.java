@@ -371,8 +371,8 @@ public class Table {
 				}
 			}
 
-			if (_log.isInfoEnabled()) {
-				_log.info(
+			if (_log.isDebugEnabled()) {
+				_log.debug(
 					_tableName + " table backed up to file " + tempFileName);
 			}
 		}
@@ -413,8 +413,8 @@ public class Table {
 			boolean useBatch = con.getMetaData().supportsBatchUpdates();
 
 			if (!useBatch) {
-				if (_log.isInfoEnabled()) {
-					_log.info("Database does not support batch updates");
+				if (_log.isDebugEnabled()) {
+					_log.debug("Database does not support batch updates");
 				}
 			}
 
@@ -472,8 +472,8 @@ public class Table {
 			br.close();
 		}
 
-		if (_log.isInfoEnabled()) {
-			_log.info(getTableName() + " table populated with data");
+		if (_log.isDebugEnabled()) {
+			_log.debug(getTableName() + " table populated with data");
 		}
 	}
 
