@@ -79,22 +79,6 @@ public class Member_DismissAnnouncementTest extends BaseTestCase {
 			}
 
 			try {
-				if (!selenium.isElementPresent("link=Show")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
 				if (selenium.isElementPresent("link=Hide")) {
 					break;
 				}
@@ -106,22 +90,6 @@ public class Member_DismissAnnouncementTest extends BaseTestCase {
 		}
 
 		selenium.click("link=Hide");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (!selenium.isElementPresent("link=Hide")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
