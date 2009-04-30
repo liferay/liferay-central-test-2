@@ -93,7 +93,7 @@ long userId = user2.getUserId();
 
 		<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="deleteUserURL">
 			<portlet:param name="struts_action" value="/enterprise_admin/edit_user" />
-			<portlet:param name="<%= Constants.CMD %>" value="<%= user.isActive() ? Constants.DEACTIVATE : Constants.DELETE %>" />
+			<portlet:param name="<%= Constants.CMD %>" value="<%= user2.isActive() ? Constants.DEACTIVATE : Constants.DELETE %>" />
 			<portlet:param name="redirect" value="<%= redirect %>" />
 			<portlet:param name="deleteUserIds" value="<%= String.valueOf(userId) %>" />
 		</portlet:actionURL>
