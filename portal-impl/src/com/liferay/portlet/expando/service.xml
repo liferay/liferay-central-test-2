@@ -170,7 +170,7 @@
 			<finder-column name="columnId" />
 			<finder-column name="classPK" />
 		</finder>
-		<finder name="T_C_D" return-type="Collection">
+		<finder name="T_C_D" return-type="Collection" db-index="false">
 			<finder-column name="tableId" />
 			<finder-column name="columnId" />
 			<finder-column name="data" />

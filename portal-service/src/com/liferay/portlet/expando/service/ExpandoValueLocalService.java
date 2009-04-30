@@ -101,6 +101,10 @@ public interface ExpandoValueLocalService {
 		boolean merge) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.expando.model.ExpandoValue addValue(
+		long classNameId, long tableId, long columnId, long classPK,
+		java.lang.String data) throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.expando.model.ExpandoValue addValue(
 		java.lang.String className, java.lang.String tableName,
 		java.lang.String columnName, long classPK, boolean data)
 		throws com.liferay.portal.PortalException,
@@ -174,6 +178,12 @@ public interface ExpandoValueLocalService {
 
 	public com.liferay.portlet.expando.model.ExpandoValue addValue(
 		java.lang.String className, java.lang.String tableName,
+		java.lang.String columnName, long classPK, java.lang.Object data)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.expando.model.ExpandoValue addValue(
+		java.lang.String className, java.lang.String tableName,
 		java.lang.String columnName, long classPK, short data)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
@@ -195,16 +205,6 @@ public interface ExpandoValueLocalService {
 		java.lang.String columnName, long classPK, java.lang.String[] data)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
-
-	public com.liferay.portlet.expando.model.ExpandoValue addValue(
-		java.lang.String className, java.lang.String tableName,
-		java.lang.String columnName, long classPK, java.lang.Object data)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
-	public com.liferay.portlet.expando.model.ExpandoValue addValue(
-		long classNameId, long tableId, long columnId, long classPK,
-		java.lang.String data) throws com.liferay.portal.SystemException;
 
 	public void addValues(long classNameId, long tableId,
 		java.util.List<com.liferay.portlet.expando.model.ExpandoColumn> columns,
@@ -228,20 +228,20 @@ public interface ExpandoValueLocalService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public void deleteValue(java.lang.String className,
-		java.lang.String tableName, java.lang.String columnName, long classPK)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
 	public void deleteValue(long classNameId, java.lang.String tableName,
 		java.lang.String columnName, long classPK)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public void deleteValues(java.lang.String className, long classPK)
-		throws com.liferay.portal.SystemException;
+	public void deleteValue(java.lang.String className,
+		java.lang.String tableName, java.lang.String columnName, long classPK)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void deleteValues(long classNameId, long classPK)
+		throws com.liferay.portal.SystemException;
+
+	public void deleteValues(java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -251,25 +251,25 @@ public interface ExpandoValueLocalService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.expando.model.ExpandoValue> getColumnValues(
-		java.lang.String className, java.lang.String tableName,
-		java.lang.String columnName, int start, int end)
-		throws com.liferay.portal.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.liferay.portlet.expando.model.ExpandoValue> getColumnValues(
 		long classNameId, java.lang.String tableName,
 		java.lang.String columnName, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.expando.model.ExpandoValue> getColumnValues(
-		java.lang.String className, java.lang.String tableName,
+		long classNameId, java.lang.String tableName,
 		java.lang.String columnName, java.lang.String data, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.expando.model.ExpandoValue> getColumnValues(
-		long classNameId, java.lang.String tableName,
+		java.lang.String className, java.lang.String tableName,
+		java.lang.String columnName, int start, int end)
+		throws com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.liferay.portlet.expando.model.ExpandoValue> getColumnValues(
+		java.lang.String className, java.lang.String tableName,
 		java.lang.String columnName, java.lang.String data, int start, int end)
 		throws com.liferay.portal.SystemException;
 
@@ -278,12 +278,17 @@ public interface ExpandoValueLocalService {
 		throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getColumnValuesCount(java.lang.String className,
+	public int getColumnValuesCount(long classNameId,
 		java.lang.String tableName, java.lang.String columnName)
 		throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getColumnValuesCount(long classNameId,
+		java.lang.String tableName, java.lang.String columnName,
+		java.lang.String data) throws com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getColumnValuesCount(java.lang.String className,
 		java.lang.String tableName, java.lang.String columnName)
 		throws com.liferay.portal.SystemException;
 
@@ -293,9 +298,10 @@ public interface ExpandoValueLocalService {
 		java.lang.String data) throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getColumnValuesCount(long classNameId,
-		java.lang.String tableName, java.lang.String columnName,
-		java.lang.String data) throws com.liferay.portal.SystemException;
+	public java.io.Serializable getData(java.lang.String className,
+		java.lang.String tableName, java.lang.String columnName, long classPK)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public boolean getData(java.lang.String className,
@@ -408,10 +414,9 @@ public interface ExpandoValueLocalService {
 			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.io.Serializable getData(java.lang.String className,
-		java.lang.String tableName, java.lang.String columnName, long classPK)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+	public java.util.List<com.liferay.portlet.expando.model.ExpandoValue> getDefaultTableColumnValues(
+		long classNameId, java.lang.String columnName, int start, int end)
+		throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.expando.model.ExpandoValue> getDefaultTableColumnValues(
@@ -419,16 +424,11 @@ public interface ExpandoValueLocalService {
 		int end) throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.liferay.portlet.expando.model.ExpandoValue> getDefaultTableColumnValues(
-		long classNameId, java.lang.String columnName, int start, int end)
-		throws com.liferay.portal.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getDefaultTableColumnValuesCount(java.lang.String className,
+	public int getDefaultTableColumnValuesCount(long classNameId,
 		java.lang.String columnName) throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getDefaultTableColumnValuesCount(long classNameId,
+	public int getDefaultTableColumnValuesCount(java.lang.String className,
 		java.lang.String columnName) throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -442,26 +442,26 @@ public interface ExpandoValueLocalService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.expando.model.ExpandoValue> getRowValues(
-		java.lang.String className, java.lang.String tableName, long classPK,
-		int start, int end) throws com.liferay.portal.SystemException;
+		long classNameId, java.lang.String tableName, long classPK, int start,
+		int end) throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.expando.model.ExpandoValue> getRowValues(
-		long classNameId, java.lang.String tableName, long classPK, int start,
-		int end) throws com.liferay.portal.SystemException;
+		java.lang.String className, java.lang.String tableName, long classPK,
+		int start, int end) throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getRowValuesCount(long rowId)
 		throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getRowValuesCount(long classNameId, java.lang.String tableName,
+		long classPK) throws com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getRowValuesCount(java.lang.String className,
 		java.lang.String tableName, long classPK)
 		throws com.liferay.portal.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getRowValuesCount(long classNameId, java.lang.String tableName,
-		long classPK) throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.expando.model.ExpandoValue getValue(long valueId)
@@ -476,18 +476,18 @@ public interface ExpandoValueLocalService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.expando.model.ExpandoValue getValue(
-		java.lang.String className, java.lang.String tableName,
-		java.lang.String columnName, long classPK)
-		throws com.liferay.portal.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public com.liferay.portlet.expando.model.ExpandoValue getValue(
 		long tableId, long columnId, long classPK)
 		throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.expando.model.ExpandoValue getValue(
 		long classNameId, java.lang.String tableName,
+		java.lang.String columnName, long classPK)
+		throws com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portlet.expando.model.ExpandoValue getValue(
+		java.lang.String className, java.lang.String tableName,
 		java.lang.String columnName, long classPK)
 		throws com.liferay.portal.SystemException;
 }
