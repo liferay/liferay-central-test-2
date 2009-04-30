@@ -119,9 +119,9 @@ String curSection = mainSections[0];
 							long logoId = organization.getLogoId();
 							%>
 
-							<img alt="<%= HtmlUtil.escape(organization.getName()) %>" class="avatar" src="<%= themeDisplay.getPathImage() %>/organization_logo?img_id=<%= logoId %>&t=<%= ImageServletTokenUtil.getToken(logoId) %>" />
+							<img alt="<%= organization.getName() %>" class="avatar" src="<%= themeDisplay.getPathImage() %>/organization_logo?img_id=<%= logoId %>&t=<%= ImageServletTokenUtil.getToken(logoId) %>" />
 
-							<span><%= HtmlUtil.escape(organization.getName()) %></span>
+							<span><%= organization.getName() %></span>
 						</c:if>
 					</p>
 				</div>
