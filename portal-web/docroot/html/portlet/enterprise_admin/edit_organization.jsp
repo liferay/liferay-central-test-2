@@ -32,6 +32,8 @@ String backURL = ParamUtil.getString(request, "backURL", redirect);
 
 Organization organization = (Organization)request.getAttribute(WebKeys.ORGANIZATION);
 
+organization = organization.toEscapedModel();
+
 long organizationId = BeanParamUtil.getLong(organization, request, "organizationId");
 
 String[] mainSections = PropsValues.ORGANIZATIONS_FORM_ADD_MAIN;
