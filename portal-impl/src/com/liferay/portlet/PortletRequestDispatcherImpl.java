@@ -180,6 +180,7 @@ public class PortletRequestDispatcherImpl implements PortletRequestDispatcher {
 					for (int i = 0; i < queryParamsArray.length; i++) {
 						String[] nameValuePair = StringUtil.split(
 							queryParamsArray[i], StringPool.EQUAL);
+
 						String name = nameValuePair[0];
 						String value = StringPool.BLANK;
 
