@@ -34,7 +34,7 @@ public class PortalSecurityManager extends SecurityManager {
 
 	public void checkPermission(Permission permission) {
 		if (permission.getName().equals(_PERMISSION_EXIT_VM)) {
-			Thread.currentThread().dumpStack();
+			Thread.dumpStack();
 		}
 	}
 

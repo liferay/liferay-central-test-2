@@ -27,7 +27,6 @@ import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.kernel.webcache.WebCacheException;
 import com.liferay.portal.kernel.webcache.WebCacheItem;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
@@ -54,7 +53,7 @@ public class AmazonRankingsWebCacheItem implements WebCacheItem {
 		_isbn = isbn;
 	}
 
-	public Object convert(String key) throws WebCacheException {
+	public Object convert(String key) {
 		String isbn = _isbn;
 
 		AmazonRankings amazonRankings = null;
