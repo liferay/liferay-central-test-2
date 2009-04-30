@@ -181,7 +181,11 @@ public class PortletRequestDispatcherImpl implements PortletRequestDispatcher {
 						String[] nameValuePair = StringUtil.split(
 							queryParamsArray[i], StringPool.EQUAL);
 						String name = nameValuePair[0];
-						String value = nameValuePair[1];
+						String value = StringPool.BLANK;
+
+						if (nameValuePair.length == 2) {
+							value = nameValuePair[1];
+						}
 
 						String[] values = queryParams.get(name);
 
