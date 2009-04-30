@@ -32,8 +32,6 @@ String backURL = ParamUtil.getString(request, "backURL", redirect);
 
 Organization organization = (Organization)request.getAttribute(WebKeys.ORGANIZATION);
 
-organization = organization.toEscapedModel();
-
 long organizationId = BeanParamUtil.getLong(organization, request, "organizationId");
 
 String[] mainSections = PropsValues.ORGANIZATIONS_FORM_ADD_MAIN;
@@ -121,9 +119,9 @@ String curSection = mainSections[0];
 							long logoId = organization.getLogoId();
 							%>
 
-							<img alt="<%= organization.getName() %>" class="avatar" src="<%= themeDisplay.getPathImage() %>/organization_logo?img_id=<%= logoId %>&t=<%= ImageServletTokenUtil.getToken(logoId) %>" />
+							<img alt="<%= HtmlUtil.escape(organization.getName()) %>" class="avatar" src="<%= themeDisplay.getPathImage() %>/organization_logo?img_id=<%= logoId %>&t=<%= ImageServletTokenUtil.getToken(logoId) %>" />
 
-							<span><%= organization.getName() %></span>
+							<span><%= HtmlUtil.escape(organization.getName()) %></span>
 						</c:if>
 					</p>
 				</div>
