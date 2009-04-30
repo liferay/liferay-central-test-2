@@ -38,22 +38,6 @@ import java.util.List;
  */
 public class ResourcePermissionView extends Table {
 
-	public ResourcePermissionView(String name) {
-		super("ResourcePermissionView");
-
-		List<Object[]> columns = new ArrayList<Object[]>();
-
-		columns.add(new Object[] {"companyId", Types.BIGINT});
-		columns.add(new Object[] {"scope", Types.INTEGER});
-		columns.add(new Object[] {"primKey", Types.VARCHAR});
-		columns.add(new Object[] {"roleId", Types.BIGINT});
-		columns.add(new Object[] {"actionId", Types.VARCHAR});
-
-		setColumns(columns.toArray(new Object[0][]));
-
-		_name = name;
-	}
-
 	public static String getActionId(String[] values) {
 		return values[4];
 	}
@@ -74,11 +58,27 @@ public class ResourcePermissionView extends Table {
 		return Integer.parseInt(values[1]);
 	}
 
+	public ResourcePermissionView(String name) {
+		super("ResourcePermissionView");
+
+		List<Object[]> columns = new ArrayList<Object[]>();
+
+		columns.add(new Object[] {"companyId", Types.BIGINT});
+		columns.add(new Object[] {"scope", Types.INTEGER});
+		columns.add(new Object[] {"primKey", Types.VARCHAR});
+		columns.add(new Object[] {"roleId", Types.BIGINT});
+		columns.add(new Object[] {"actionId", Types.VARCHAR});
+
+		setColumns(columns.toArray(new Object[0][]));
+
+		_name = name;
+	}
+
 	public String getSelectSQL() throws Exception {
 		return _SELECT_SQL + StringPool.QUOTE + _name + StringPool.QUOTE;
 	}
 
-	private String _name = "";
+	private String _name = StringPool.BLANK;
 
 	private static final String _SELECT_SQL =
 		"SELECT Permission_.companyId, ResourceCode.scope, " +

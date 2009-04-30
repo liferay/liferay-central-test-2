@@ -169,6 +169,7 @@ public class ConvertPermissionAlgorithm extends ConvertProcess {
 
 			while (Validator.isNotNull(line = resourceNameReader.readLine())) {
 				String[] values = StringUtil.split(line);
+
 				String name = values[2];
 
 				List<String> defaultActionIds =
@@ -198,15 +199,16 @@ public class ConvertPermissionAlgorithm extends ConvertProcess {
 		}
 		finally {
 			resourceNameReader.close();
+
 			resourcePermissionWriter.close();
 
 			FileUtil.delete(tempFile);
 			FileUtil.delete(tempFile + _EXT_RESOURCE_PERMISSION);
 		}
 
-		// Cleanup
+		// Clean up
 
-		MaintenanceUtil.appendStatus("Cleanup legacy tables");
+		MaintenanceUtil.appendStatus("Cleaning up legacy tables");
 
 		DBUtil dbUtil = DBUtil.getInstance();
 
@@ -215,8 +217,7 @@ public class ConvertPermissionAlgorithm extends ConvertProcess {
 		dbUtil.runSQL("DELETE FROM " + ResourceModelImpl.TABLE_NAME);
 		dbUtil.runSQL("DELETE FROM Roles_Permissions");
 
-		MaintenanceUtil.appendStatus(
-			"Conversion to bitwise permission complete");
+		MaintenanceUtil.appendStatus("Converted to bitwise permission");
 	}
 
 	private void _convertToRBAC() throws Exception {
@@ -250,14 +251,13 @@ public class ConvertPermissionAlgorithm extends ConvertProcess {
 				{"userId", Types.BIGINT}, {"roleId", Types.BIGINT}
 			});
 
-		// Cleanup
+		// Clean up
 
 		PermissionCacheUtil.clearCache();
 
 		PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM = 5;
 
-		MaintenanceUtil.appendStatus(
-			"Conversion to RBAC permission complete");
+		MaintenanceUtil.appendStatus("Converted to RBAC permission");
 	}
 
 	private String _convertGuestUsers(String legacyFile) throws Exception {
@@ -510,7 +510,8 @@ public class ConvertPermissionAlgorithm extends ConvertProcess {
 					}
 					else {
 						defaultActions =
-							ResourceActionsUtil.getResourceCommunityDefaultActions(name);
+							ResourceActionsUtil.
+								getResourceCommunityDefaultActions(name);
 					}
 
 					// Resolve owner and system roles
@@ -650,7 +651,7 @@ public class ConvertPermissionAlgorithm extends ConvertProcess {
 
 		othersRolesTable.populateTable(legacyFile + _EXT_OTHER_ROLES);
 
-		// Cleanup
+		// Clean up
 
 		FileUtil.delete(legacyFile + _EXT_ROLE);
 		FileUtil.delete(legacyFile + _EXT_ROLES_PERMIMISSIONS);
@@ -745,7 +746,8 @@ public class ConvertPermissionAlgorithm extends ConvertProcess {
 
 	private static final String _EXT_OTHER_ROLES = ".others_roles";
 
-	private static final String _EXT_RESOURCE_PERMISSION = ".resource_permission";
+	private static final String _EXT_RESOURCE_PERMISSION =
+		".resource_permission";
 
 	private static final String _EXT_ROLE = ".role";
 

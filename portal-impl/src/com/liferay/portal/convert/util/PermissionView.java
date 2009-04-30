@@ -66,10 +66,6 @@ public class PermissionView extends Table {
 		return Integer.parseInt(values[values.length - 1]);
 	}
 
-	public String getSelectSQL() throws Exception {
-		return StringUtil.replace(_SELECT_SQL, "_OLD_TABLE_", getTableName());
-	}
-
 	public PermissionView(String tableName, String[] primKeys) {
 		super(tableName);
 
@@ -87,6 +83,10 @@ public class PermissionView extends Table {
 		columns.add(new Object[] {"scope", Types.INTEGER});
 
 		setColumns(columns.toArray(new Object[0][]));
+	}
+
+	public String getSelectSQL() throws Exception {
+		return StringUtil.replace(_SELECT_SQL, "_OLD_TABLE_", getTableName());
 	}
 
 	private static final String _SELECT_SQL =
