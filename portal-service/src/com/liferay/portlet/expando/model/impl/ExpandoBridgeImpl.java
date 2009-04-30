@@ -226,7 +226,16 @@ public class ExpandoBridgeImpl implements ExpandoBridge {
 	}
 
 	public boolean hasAttribute(String name) {
-		if (getAttribute(name) != null) {
+		ExpandoColumn column = null;
+
+		try {
+			column = ExpandoColumnLocalServiceUtil.getDefaultTableColumn(
+				_className, name);
+		}
+		catch (Exception e) {
+		}
+
+		if (column != null) {
 			return true;
 		}
 		else {
