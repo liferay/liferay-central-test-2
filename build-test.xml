@@ -89,7 +89,7 @@ tunnel.servlet.hosts.allowed=]]></echo>
 		<antcall target="prepare-mysql-5.0" />
 
 		<ant antfile="build-dist.xml" target="build-dist-tomcat-5.5" />
-	</antcall>
+	</target>
 
 	<target name="rebuild-database">
 		<if>
