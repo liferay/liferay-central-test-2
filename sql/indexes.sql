@@ -454,7 +454,6 @@ create index IX_32292ED1 on SocialRequest (receiverUserId);
 create index IX_D9380CB7 on SocialRequest (receiverUserId, status);
 create index IX_80F7A9C2 on SocialRequest (userId);
 create unique index IX_36A90CA7 on SocialRequest (userId, classNameId, classPK, type_, receiverUserId);
-create unique index IX_F3BFB48D on SocialRequest (userId, classNameId, classPK, type_, receiverUserId, status);
 create index IX_CC86A444 on SocialRequest (userId, classNameId, classPK, type_, status);
 create index IX_AB5906A8 on SocialRequest (userId, status);
 create index IX_49D5872C on SocialRequest (uuid_);

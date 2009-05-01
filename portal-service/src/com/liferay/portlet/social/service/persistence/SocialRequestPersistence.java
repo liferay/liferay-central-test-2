@@ -355,22 +355,6 @@ public interface SocialRequestPersistence extends BasePersistence {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.social.NoSuchRequestException;
 
-	public com.liferay.portlet.social.model.SocialRequest findByU_C_C_T_R_S(
-		long userId, long classNameId, long classPK, int type,
-		long receiverUserId, int status)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.social.NoSuchRequestException;
-
-	public com.liferay.portlet.social.model.SocialRequest fetchByU_C_C_T_R_S(
-		long userId, long classNameId, long classPK, int type,
-		long receiverUserId, int status)
-		throws com.liferay.portal.SystemException;
-
-	public com.liferay.portlet.social.model.SocialRequest fetchByU_C_C_T_R_S(
-		long userId, long classNameId, long classPK, int type,
-		long receiverUserId, int status, boolean retrieveFromCache)
-		throws com.liferay.portal.SystemException;
-
 	public java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException;
@@ -423,11 +407,6 @@ public interface SocialRequestPersistence extends BasePersistence {
 		long receiverUserId, int status)
 		throws com.liferay.portal.SystemException;
 
-	public void removeByU_C_C_T_R_S(long userId, long classNameId,
-		long classPK, int type, long receiverUserId, int status)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.social.NoSuchRequestException;
-
 	public void removeAll() throws com.liferay.portal.SystemException;
 
 	public int countByUuid(java.lang.String uuid)
@@ -460,10 +439,6 @@ public interface SocialRequestPersistence extends BasePersistence {
 
 	public int countByC_C_T_R_S(long classNameId, long classPK, int type,
 		long receiverUserId, int status)
-		throws com.liferay.portal.SystemException;
-
-	public int countByU_C_C_T_R_S(long userId, long classNameId, long classPK,
-		int type, long receiverUserId, int status)
 		throws com.liferay.portal.SystemException;
 
 	public int countAll() throws com.liferay.portal.SystemException;

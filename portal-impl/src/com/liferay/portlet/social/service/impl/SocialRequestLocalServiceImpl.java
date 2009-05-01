@@ -183,10 +183,10 @@ public class SocialRequestLocalServiceImpl
 		long classNameId = PortalUtil.getClassNameId(className);
 
 		SocialRequest socialRequest =
-			socialRequestPersistence.fetchByU_C_C_T_R_S(
-				userId, classNameId, classPK, type, receiverUserId, status);
+			socialRequestPersistence.fetchByU_C_C_T_R(
+				userId, classNameId, classPK, type, receiverUserId);
 
-		if (socialRequest == null) {
+		if ((socialRequest == null) || (socialRequest.getStatus() != status)) {
 			return false;
 		}
 		else {

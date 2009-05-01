@@ -521,34 +521,6 @@ public class SocialRequestUtil {
 			classPK, type, receiverUserId, status, obc);
 	}
 
-	public static com.liferay.portlet.social.model.SocialRequest findByU_C_C_T_R_S(
-		long userId, long classNameId, long classPK, int type,
-		long receiverUserId, int status)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.social.NoSuchRequestException {
-		return getPersistence()
-				   .findByU_C_C_T_R_S(userId, classNameId, classPK, type,
-			receiverUserId, status);
-	}
-
-	public static com.liferay.portlet.social.model.SocialRequest fetchByU_C_C_T_R_S(
-		long userId, long classNameId, long classPK, int type,
-		long receiverUserId, int status)
-		throws com.liferay.portal.SystemException {
-		return getPersistence()
-				   .fetchByU_C_C_T_R_S(userId, classNameId, classPK, type,
-			receiverUserId, status);
-	}
-
-	public static com.liferay.portlet.social.model.SocialRequest fetchByU_C_C_T_R_S(
-		long userId, long classNameId, long classPK, int type,
-		long receiverUserId, int status, boolean retrieveFromCache)
-		throws com.liferay.portal.SystemException {
-		return getPersistence()
-				   .fetchByU_C_C_T_R_S(userId, classNameId, classPK, type,
-			receiverUserId, status, retrieveFromCache);
-	}
-
 	public static java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
@@ -637,15 +609,6 @@ public class SocialRequestUtil {
 			status);
 	}
 
-	public static void removeByU_C_C_T_R_S(long userId, long classNameId,
-		long classPK, int type, long receiverUserId, int status)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.social.NoSuchRequestException {
-		getPersistence()
-			.removeByU_C_C_T_R_S(userId, classNameId, classPK, type,
-			receiverUserId, status);
-	}
-
 	public static void removeAll() throws com.liferay.portal.SystemException {
 		getPersistence().removeAll();
 	}
@@ -705,14 +668,6 @@ public class SocialRequestUtil {
 		throws com.liferay.portal.SystemException {
 		return getPersistence()
 				   .countByC_C_T_R_S(classNameId, classPK, type,
-			receiverUserId, status);
-	}
-
-	public static int countByU_C_C_T_R_S(long userId, long classNameId,
-		long classPK, int type, long receiverUserId, int status)
-		throws com.liferay.portal.SystemException {
-		return getPersistence()
-				   .countByU_C_C_T_R_S(userId, classNameId, classPK, type,
 			receiverUserId, status);
 	}
 

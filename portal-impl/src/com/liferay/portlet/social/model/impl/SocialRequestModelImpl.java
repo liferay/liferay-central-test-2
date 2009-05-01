@@ -343,16 +343,6 @@ public class SocialRequestModelImpl extends BaseModelImpl<SocialRequest> {
 
 	public void setStatus(int status) {
 		_status = status;
-
-		if (!_setOriginalStatus) {
-			_setOriginalStatus = true;
-
-			_originalStatus = status;
-		}
-	}
-
-	public int getOriginalStatus() {
-		return _originalStatus;
 	}
 
 	public SocialRequest toEscapedModel() {
@@ -591,7 +581,5 @@ public class SocialRequestModelImpl extends BaseModelImpl<SocialRequest> {
 	private long _originalReceiverUserId;
 	private boolean _setOriginalReceiverUserId;
 	private int _status;
-	private int _originalStatus;
-	private boolean _setOriginalStatus;
 	private transient ExpandoBridge _expandoBridge;
 }

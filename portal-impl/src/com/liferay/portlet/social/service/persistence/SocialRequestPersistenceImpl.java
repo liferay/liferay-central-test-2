@@ -240,22 +240,6 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl
 				Integer.class.getName(), Long.class.getName(),
 				Integer.class.getName()
 			});
-	public static final FinderPath FINDER_PATH_FETCH_BY_U_C_C_T_R_S = new FinderPath(SocialRequestModelImpl.ENTITY_CACHE_ENABLED,
-			SocialRequestModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_ENTITY, "fetchByU_C_C_T_R_S",
-			new String[] {
-				Long.class.getName(), Long.class.getName(), Long.class.getName(),
-				Integer.class.getName(), Long.class.getName(),
-				Integer.class.getName()
-			});
-	public static final FinderPath FINDER_PATH_COUNT_BY_U_C_C_T_R_S = new FinderPath(SocialRequestModelImpl.ENTITY_CACHE_ENABLED,
-			SocialRequestModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "countByU_C_C_T_R_S",
-			new String[] {
-				Long.class.getName(), Long.class.getName(), Long.class.getName(),
-				Integer.class.getName(), Long.class.getName(),
-				Integer.class.getName()
-			});
 	public static final FinderPath FINDER_PATH_FIND_ALL = new FinderPath(SocialRequestModelImpl.ENTITY_CACHE_ENABLED,
 			SocialRequestModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "findAll", new String[0]);
@@ -280,16 +264,6 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl
 				new Long(socialRequest.getClassPK()),
 				new Integer(socialRequest.getType()),
 				new Long(socialRequest.getReceiverUserId())
-			}, socialRequest);
-
-		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U_C_C_T_R_S,
-			new Object[] {
-				new Long(socialRequest.getUserId()),
-				new Long(socialRequest.getClassNameId()),
-				new Long(socialRequest.getClassPK()),
-				new Integer(socialRequest.getType()),
-				new Long(socialRequest.getReceiverUserId()),
-				new Integer(socialRequest.getStatus())
 			}, socialRequest);
 	}
 
@@ -417,16 +391,6 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl
 				new Long(socialRequestModelImpl.getOriginalClassPK()),
 				new Integer(socialRequestModelImpl.getOriginalType()),
 				new Long(socialRequestModelImpl.getOriginalReceiverUserId())
-			});
-
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_U_C_C_T_R_S,
-			new Object[] {
-				new Long(socialRequestModelImpl.getOriginalUserId()),
-				new Long(socialRequestModelImpl.getOriginalClassNameId()),
-				new Long(socialRequestModelImpl.getOriginalClassPK()),
-				new Integer(socialRequestModelImpl.getOriginalType()),
-				new Long(socialRequestModelImpl.getOriginalReceiverUserId()),
-				new Integer(socialRequestModelImpl.getOriginalStatus())
 			});
 
 		EntityCacheUtil.removeResult(SocialRequestModelImpl.ENTITY_CACHE_ENABLED,
@@ -574,42 +538,6 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl
 					new Long(socialRequest.getClassPK()),
 					new Integer(socialRequest.getType()),
 					new Long(socialRequest.getReceiverUserId())
-				}, socialRequest);
-		}
-
-		if (!isNew &&
-				((socialRequest.getUserId() != socialRequestModelImpl.getOriginalUserId()) ||
-				(socialRequest.getClassNameId() != socialRequestModelImpl.getOriginalClassNameId()) ||
-				(socialRequest.getClassPK() != socialRequestModelImpl.getOriginalClassPK()) ||
-				(socialRequest.getType() != socialRequestModelImpl.getOriginalType()) ||
-				(socialRequest.getReceiverUserId() != socialRequestModelImpl.getOriginalReceiverUserId()) ||
-				(socialRequest.getStatus() != socialRequestModelImpl.getOriginalStatus()))) {
-			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_U_C_C_T_R_S,
-				new Object[] {
-					new Long(socialRequestModelImpl.getOriginalUserId()),
-					new Long(socialRequestModelImpl.getOriginalClassNameId()),
-					new Long(socialRequestModelImpl.getOriginalClassPK()),
-					new Integer(socialRequestModelImpl.getOriginalType()),
-					new Long(socialRequestModelImpl.getOriginalReceiverUserId()),
-					new Integer(socialRequestModelImpl.getOriginalStatus())
-				});
-		}
-
-		if (isNew ||
-				((socialRequest.getUserId() != socialRequestModelImpl.getOriginalUserId()) ||
-				(socialRequest.getClassNameId() != socialRequestModelImpl.getOriginalClassNameId()) ||
-				(socialRequest.getClassPK() != socialRequestModelImpl.getOriginalClassPK()) ||
-				(socialRequest.getType() != socialRequestModelImpl.getOriginalType()) ||
-				(socialRequest.getReceiverUserId() != socialRequestModelImpl.getOriginalReceiverUserId()) ||
-				(socialRequest.getStatus() != socialRequestModelImpl.getOriginalStatus()))) {
-			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U_C_C_T_R_S,
-				new Object[] {
-					new Long(socialRequest.getUserId()),
-					new Long(socialRequest.getClassNameId()),
-					new Long(socialRequest.getClassPK()),
-					new Integer(socialRequest.getType()),
-					new Long(socialRequest.getReceiverUserId()),
-					new Integer(socialRequest.getStatus())
 				}, socialRequest);
 		}
 
@@ -3029,173 +2957,6 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public SocialRequest findByU_C_C_T_R_S(long userId, long classNameId,
-		long classPK, int type, long receiverUserId, int status)
-		throws NoSuchRequestException, SystemException {
-		SocialRequest socialRequest = fetchByU_C_C_T_R_S(userId, classNameId,
-				classPK, type, receiverUserId, status);
-
-		if (socialRequest == null) {
-			StringBuilder msg = new StringBuilder();
-
-			msg.append("No SocialRequest exists with the key {");
-
-			msg.append("userId=" + userId);
-
-			msg.append(", ");
-			msg.append("classNameId=" + classNameId);
-
-			msg.append(", ");
-			msg.append("classPK=" + classPK);
-
-			msg.append(", ");
-			msg.append("type=" + type);
-
-			msg.append(", ");
-			msg.append("receiverUserId=" + receiverUserId);
-
-			msg.append(", ");
-			msg.append("status=" + status);
-
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-			if (_log.isWarnEnabled()) {
-				_log.warn(msg.toString());
-			}
-
-			throw new NoSuchRequestException(msg.toString());
-		}
-
-		return socialRequest;
-	}
-
-	public SocialRequest fetchByU_C_C_T_R_S(long userId, long classNameId,
-		long classPK, int type, long receiverUserId, int status)
-		throws SystemException {
-		return fetchByU_C_C_T_R_S(userId, classNameId, classPK, type,
-			receiverUserId, status, true);
-	}
-
-	public SocialRequest fetchByU_C_C_T_R_S(long userId, long classNameId,
-		long classPK, int type, long receiverUserId, int status,
-		boolean retrieveFromCache) throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(userId), new Long(classNameId), new Long(classPK),
-				new Integer(type), new Long(receiverUserId), new Integer(status)
-			};
-
-		Object result = null;
-
-		if (retrieveFromCache) {
-			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_U_C_C_T_R_S,
-					finderArgs, this);
-		}
-
-		if (result == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBuilder query = new StringBuilder();
-
-				query.append(
-					"FROM com.liferay.portlet.social.model.SocialRequest WHERE ");
-
-				query.append("userId = ?");
-
-				query.append(" AND ");
-
-				query.append("classNameId = ?");
-
-				query.append(" AND ");
-
-				query.append("classPK = ?");
-
-				query.append(" AND ");
-
-				query.append("type_ = ?");
-
-				query.append(" AND ");
-
-				query.append("receiverUserId = ?");
-
-				query.append(" AND ");
-
-				query.append("status = ?");
-
-				query.append(" ");
-
-				query.append("ORDER BY ");
-
-				query.append("requestId DESC");
-
-				Query q = session.createQuery(query.toString());
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(userId);
-
-				qPos.add(classNameId);
-
-				qPos.add(classPK);
-
-				qPos.add(type);
-
-				qPos.add(receiverUserId);
-
-				qPos.add(status);
-
-				List<SocialRequest> list = q.list();
-
-				result = list;
-
-				SocialRequest socialRequest = null;
-
-				if (list.isEmpty()) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U_C_C_T_R_S,
-						finderArgs, list);
-				}
-				else {
-					socialRequest = list.get(0);
-
-					cacheResult(socialRequest);
-
-					if ((socialRequest.getUserId() != userId) ||
-							(socialRequest.getClassNameId() != classNameId) ||
-							(socialRequest.getClassPK() != classPK) ||
-							(socialRequest.getType() != type) ||
-							(socialRequest.getReceiverUserId() != receiverUserId) ||
-							(socialRequest.getStatus() != status)) {
-						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U_C_C_T_R_S,
-							finderArgs, list);
-					}
-				}
-
-				return socialRequest;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (result == null) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U_C_C_T_R_S,
-						finderArgs, new ArrayList<SocialRequest>());
-				}
-
-				closeSession(session);
-			}
-		}
-		else {
-			if (result instanceof List) {
-				return null;
-			}
-			else {
-				return (SocialRequest)result;
-			}
-		}
-	}
-
 	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		Session session = null;
@@ -3376,15 +3137,6 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl
 				classPK, type, receiverUserId, status)) {
 			remove(socialRequest);
 		}
-	}
-
-	public void removeByU_C_C_T_R_S(long userId, long classNameId,
-		long classPK, int type, long receiverUserId, int status)
-		throws NoSuchRequestException, SystemException {
-		SocialRequest socialRequest = findByU_C_C_T_R_S(userId, classNameId,
-				classPK, type, receiverUserId, status);
-
-		remove(socialRequest);
 	}
 
 	public void removeAll() throws SystemException {
@@ -3985,88 +3737,6 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl
 				}
 
 				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_C_C_T_R_S,
-					finderArgs, count);
-
-				closeSession(session);
-			}
-		}
-
-		return count.intValue();
-	}
-
-	public int countByU_C_C_T_R_S(long userId, long classNameId, long classPK,
-		int type, long receiverUserId, int status) throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(userId), new Long(classNameId), new Long(classPK),
-				new Integer(type), new Long(receiverUserId), new Integer(status)
-			};
-
-		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_U_C_C_T_R_S,
-				finderArgs, this);
-
-		if (count == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBuilder query = new StringBuilder();
-
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.social.model.SocialRequest WHERE ");
-
-				query.append("userId = ?");
-
-				query.append(" AND ");
-
-				query.append("classNameId = ?");
-
-				query.append(" AND ");
-
-				query.append("classPK = ?");
-
-				query.append(" AND ");
-
-				query.append("type_ = ?");
-
-				query.append(" AND ");
-
-				query.append("receiverUserId = ?");
-
-				query.append(" AND ");
-
-				query.append("status = ?");
-
-				query.append(" ");
-
-				Query q = session.createQuery(query.toString());
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(userId);
-
-				qPos.add(classNameId);
-
-				qPos.add(classPK);
-
-				qPos.add(type);
-
-				qPos.add(receiverUserId);
-
-				qPos.add(status);
-
-				count = (Long)q.uniqueResult();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (count == null) {
-					count = Long.valueOf(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_U_C_C_T_R_S,
 					finderArgs, count);
 
 				closeSession(session);
