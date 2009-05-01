@@ -536,7 +536,7 @@
 
 					if ((inNested || !instance._eventProcessed(event)) && instance._hasMoved(portlet) && !event.stopProcessing) {
 						var position = Layout._findIndex(portlet, Dom.getFirstChild(target));
-						var currentColumnId = Liferay.Util.getColumnId(id);
+						var currentColumnId = Liferay.Util.getColumnId(portlet.parentNode.id);
 						var portletId = Liferay.Util.getPortletId(portlet.id);
 
 						var viewport = Liferay.Util.viewport.scroll();
