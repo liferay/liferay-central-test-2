@@ -133,7 +133,9 @@ public class UpgradePortletPermissions extends UpgradeProcess {
 			sb.append("Permission_.resourceId = ? and ResourceCode.name = ? ");
 			sb.append("and ResourceCode.scope = ? ");
 
-			ps = con.prepareStatement(sb.toString());
+			String sql = sb.toString();
+
+			ps = con.prepareStatement(sql);
 
 			ps.setString(1, actionId);
 			ps.setLong(2, resourceId);
@@ -216,7 +218,9 @@ public class UpgradePortletPermissions extends UpgradeProcess {
 
 			sb.append(") and ResourceCode.name = ? and ResourceCode.scope = ?");
 
-			ps = con.prepareStatement(sb.toString());
+			String sql = sb.toString();
+
+			ps = con.prepareStatement(sql);
 
 			ps.setString(1, portletName);
 			ps.setInt(2, ResourceConstants.SCOPE_INDIVIDUAL);
