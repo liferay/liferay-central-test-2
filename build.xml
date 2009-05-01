@@ -298,6 +298,20 @@
 			<fileset dir="lib/global" />
 		</copy>
 
+		<if>
+			<not>
+				<equals arg1="${jdbc.drivers.optional.dir}" arg2="$${jdbc.drivers.optional.dir}" />
+			</not>
+			<then>
+				<copy todir="${app.server.lib.global.dir}">
+					<fileset
+						dir="${jdbc.drivers.optional.dir}"
+						includes="*.jar"
+					/>
+				</copy>
+			</then>
+		</if>
+
 		<copy todir="${app.server.lib.portal.dir}">
 			<fileset dir="lib/portal" />
 		</copy>
