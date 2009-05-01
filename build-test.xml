@@ -3,6 +3,16 @@
 <project name="portal-test" basedir="." default="test" xmlns:antelope="antlib:ise.antelope.tasks">
 	<import file="build.xml" />
 
+	<property file="${project.dir}/test.${user.name}.properties" />
+	<property file="${project.dir}/test.${env.COMPUTERNAME}.properties" />
+	<property file="${project.dir}/test.properties" />
+
+	<propertycopy name="db.host" from="db.${db.type}.host" silent="true" />
+	<propertycopy name="db.driver" from="db.${db.type}.driver" silent="true" />
+	<propertycopy name="db.url" from="db.${db.type}.url" silent="true" />
+	<propertycopy name="db.username" from="db.${db.type}.username" silent="true" />
+	<propertycopy name="db.password" from="db.${db.type}.password" silent="true" />
+
 	<target name="deploy-simple-server-plugins">
 		<property name="liferay.home" value="${simple.server.dir}/.." />
 
@@ -27,8 +37,8 @@ plugins.includes=${plugins.includes}</echo>
 		<mkdir dir="${lp.plugins.dir}/dist" />
 	</target>
 
-	<target name="prepare">
-		<antcall target="prepare-portal-ext-properties" />
+	<target name="prepare-common">
+		<antcall target="prepare-portal-ext-properties" inheritAll="false" />
 
 		<exec executable="cmd.exe">
 			<arg line="/c svn revert portal-web/docroot/WEB-INF/web.xml" />
@@ -44,13 +54,25 @@ plugins.includes=${plugins.includes}</echo>
 		<antcall target="start" />
 	</target>
 
+	<target name="prepare-mysql-5.0">
+		<echo file="test.${user.name}.properties">db.type=mysql-5.0</echo>
+
+		<antcall target="prepare-common" />
+	</target>
+
+	<target name="prepare-oracle-10">
+		<echo file="test.${user.name}.properties">db.type=oracle-10</echo>
+
+		<antcall target="prepare-common" />
+	</target>
+
 	<target name="prepare-portal-ext-properties">
 		<echo file="portal-impl/src/portal-ext.properties"><![CDATA[jdbc.default.jndi.name=
 
-jdbc.default.driverClassName=com.mysql.jdbc.Driver
-jdbc.default.url=jdbc:mysql://${vm.jdbc.mysql.host}/lportal?useUnicode=true&characterEncoding=UTF-8&useFastDateParsing=false
-jdbc.default.username=
-jdbc.default.password=
+jdbc.default.driverClassName=${db.driver}
+jdbc.default.url=${db.url}
+jdbc.default.username=${db.username}
+jdbc.default.password=${db.password}
 
 captcha.max.challenges=0
 
@@ -61,6 +83,71 @@ mail.session.jndi.name=
 axis.servlet.hosts.allowed=
 
 tunnel.servlet.hosts.allowed=]]></echo>
+	</target>
+
+	<target name="prepare-tomcat-5.5-mysql-5.0">
+		<antcall target="prepare-mysql-5.0" />
+
+		<ant antfile="build-dist.xml" target="build-dist-tomcat-5.5" />
+	</antcall>
+
+	<target name="rebuild-database">
+		<if>
+			<equals arg1="${skip.rebuild-database}" arg2="$${skip.rebuild-database}" />
+			<then>
+				<if>
+					<equals arg1="${db.type}" arg2="mysql-5.0" />
+					<then>
+						<antcall target="rebuild-database-mysql-5.0" />
+					</then>
+					<elseif>
+						<equals arg1="${db.type}" arg2="oracle-10" />
+						<then>
+							<antcall target="rebuild-database-oracle-10" />
+						</then>
+					</elseif>
+				</if>
+			</then>
+		</if>
+	</target>
+
+	<target name="rebuild-database-mysql-5.0">
+		<ant dir="sql" target="rebuild-mysql" inheritAll="false" />
+	</target>
+
+	<target name="rebuild-database-oracle-10">
+		<if>
+			<or>
+				<equals arg1="${sql.dir}" arg2="$${sql.dir}" />
+				<equals arg1="${sql.file}" arg2="$${sql.file}" />
+			</or>
+			<then>
+				<property name="sql.dir" value="sql\create\" />
+				<property name="sql.file" value="create-oracle.sql" />
+			</then>
+		</if>
+
+		<tstamp>
+			<format property="tstamp.value" pattern="yyyyMMddkkmmssSSS" />
+		</tstamp>
+
+		<property name="temp.dir" value="temp\${db.oracle-10.username}\${tstamp.value}" />
+
+		<exec executable="${plink.executable}">
+			<arg line="-pw ${vm.password} ${vm.username}@${db.oracle-10.host} cmd.exe /c mkdir C:\${temp.dir}" />
+		</exec>
+
+		<exec executable="${pscp.executable}">
+			<arg line="-pw ${vm.password} ${sql.dir}${sql.file} ${vm.username}@${db.oracle-10.host}:\${temp.dir}" />
+		</exec>
+
+		<exec executable="${plink.executable}">
+			<arg line="-pw ${vm.password} ${vm.username}@${db.oracle-10.host} sqlplus system/password @C:\${temp.dir}\${sql.file} ${db.oracle-10.username} ${db.oracle-10.password}" />
+		</exec>
+
+		<exec executable="${plink.executable}">
+			<arg line="-pw ${vm.password} ${vm.username}@${db.oracle-10.host} cmd.exe /c rmdir /q /s C:\${temp.dir}" />
+		</exec>
 	</target>
 
 	<target name="revert-test-properties">
@@ -147,7 +234,7 @@ tunnel.servlet.hosts.allowed=]]></echo>
 	</target>
 
 	<target name="run-simple-server">
-		<ant dir="sql" target="rebuild-mysql" inheritAll="false" />
+		<antcall target="rebuild-database" inheritAll="false" />
 
 		<delete includeemptydirs="true" failonerror="false">
 			<fileset
@@ -214,7 +301,7 @@ tunnel.servlet.hosts.allowed=]]></echo>
 	</target>
 
 	<target name="run-weblogic-10.3">
-		<ant dir="sql" target="rebuild-mysql" inheritAll="false" />
+		<antcall target="rebuild-database" inheritAll="false" />
 
 		<parallel>
 			<exec executable="${plink.executable}">
@@ -236,7 +323,7 @@ tunnel.servlet.hosts.allowed=]]></echo>
 	</target>
 
 	<target name="run-websphere-6.0">
-		<ant dir="sql" target="rebuild-mysql" inheritAll="false" />
+		<antcall target="rebuild-database" inheritAll="false" />
 
 		<exec executable="${plink.executable}">
 			<arg line="-pw ${vm.password} ${vm.username}@${vm.host} cmd.exe /c C:\Progra~1\IBM\WebSphere\AppServer\profiles\AppSrv01\bin\startServer.bat server1" />
@@ -259,8 +346,10 @@ tunnel.servlet.hosts.allowed=]]></echo>
 		<antelope:post to="http://localhost:14444/selenium-server/driver/?cmd=shutDown" wantresponse="true" />
 	</target>
 
-	<target name="test" depends="prepare">
-		<ant dir="sql" target="rebuild-mysql" inheritAll="false" />
+	<target name="test">
+		<antcall target="prepare-mysql-5.0" />
+
+		<antcall target="rebuild-database" inheritAll="false" />
 
 		<antcall target="revert-test-properties" />
 
@@ -281,7 +370,88 @@ tunnel.servlet.hosts.allowed=]]></echo>
 		<ant dir="util-java" target="test" inheritAll="false" />
 	</target>
 
-	<target name="test-jboss-tomcat-5.0" depends="prepare">
+	<target name="test-database">
+
+		<!--
+		Manually run "prepare-tomcat-5.5-mysql-5.0" before running any
+		test-database-* tasks.
+		-->
+
+		<antcall target="test-database-oracle-10" />
+	</target>
+
+	<target name="test-database-oracle-10">
+		<antcall target="test-database-oracle-10-latest" />
+		<antcall target="test-database-oracle-10-5.1.0" />
+		<antcall target="test-database-oracle-10-5.1.1" />
+		<antcall target="test-database-oracle-10-5.1.2" />
+	</target>
+
+	<target name="test-database-oracle-10-5.1.0">
+		<antcall target="test-database-oracle-10-common">
+			<param name="sql.version" value="5.1.0" />
+		</antcall>
+	</target>
+
+	<target name="test-database-oracle-10-5.1.1">
+		<antcall target="test-database-oracle-10-common">
+			<param name="sql.version" value="5.1.1" />
+		</antcall>
+	</target>
+
+	<target name="test-database-oracle-10-5.1.2">
+		<antcall target="test-database-oracle-10-common">
+			<param name="sql.version" value="5.1.2" />
+		</antcall>
+	</target>
+
+	<target name="test-database-oracle-10-common">
+		<echo file="test.${user.name}.properties">db.type=oracle-10</echo>
+
+		<antcall target="prepare-portal-ext-properties" inheritAll="false" />
+
+		<ant dir="portal-impl" target="deploy-properties" inheritAll="false" />
+
+		<if>
+			<not>
+				<equals arg1="${sql.version}" arg2="$${sql.version}" />
+			</not>
+			<then>
+				<property name="sql.dir" value="sql\legacy\${sql.version}\create\" />
+				<property name="sql.file" value="create-oracle.sql" />
+			</then>
+		</if>
+
+		<antcall target="rebuild-database" inheritAll="false">
+			<param name="sql.dir" value="${sql.dir}" />
+			<param name="sql.file" value="${sql.file}" />
+		</antcall>
+
+		<antcall target="start-selenium" />
+
+		<antcall target="run-tomcat-5.5">
+			<param name="skip.rebuild-database" value="true" />
+			<param name="test.class" value="SmokeTestSuite" />
+		</antcall>
+
+		<antcall target="stop-selenium" />
+	</target>
+
+	<target name="test-database-oracle-10-latest">
+		<echo file="create-${db.oracle-10.username}.sql"><![CDATA[drop user &1 cascade;
+create user &1 identified by &2;
+grant connect,resource to &1;
+exit;]]></echo>
+
+		<antcall target="test-database-oracle-10-common">
+			<param name="sql.dir" value="" />
+			<param name="sql.file" value="create-${db.oracle-10.username}.sql" />
+		</antcall>
+
+		<delete file="create-${db.oracle-10.username}.sql" />
+	</target>
+
+	<target name="test-jboss-tomcat-5.0-common">
 		<ant antfile="build-dist.xml" target="build-dist-jboss-tomcat-5.0" />
 
 		<antcall target="revert-test-properties" />
@@ -293,6 +463,18 @@ tunnel.servlet.hosts.allowed=]]></echo>
 		</antcall>
 
 		<antcall target="stop-selenium" />
+	</target>
+
+	<target name="test-jboss-tomcat-5.0-mysql-5.0">
+		<antcall target="prepare-mysql-5.0" />
+
+		<antcall target="test-jboss-tomcat-5.0-common" />
+	</target>
+
+	<target name="test-jboss-tomcat-5.0-oracle-10">
+		<antcall target="prepare-oracle-10" />
+
+		<antcall target="test-jboss-tomcat-5.0-common" />
 	</target>
 
 	<target name="test-tck">
@@ -335,7 +517,7 @@ work.dir=${basedir.unix}/tools/tck/work</echo>
 			/>
 		</copy>
 
-		<ant dir="sql" target="rebuild-mysql" inheritAll="false" />
+		<antcall target="rebuild-database" inheritAll="false" />
 
 		<parallel>
 			<exec dir="${app.server.tomcat.bin.dir}" executable="catalina${file.suffix.bat}" resolveexecutable="true">
@@ -372,8 +554,8 @@ work.dir=${basedir.unix}/tools/tck/work</echo>
 		</java>
 	</target>
 
-	<target name="test-themes" depends="prepare">
-		<ant antfile="build-dist.xml" target="build-dist-tomcat-5.5" />
+	<target name="test-themes">
+		<antcall target="prepare-tomcat-5.5-mysql-5.0" />
 
 		<exec dir="${lp.plugins.dir}" executable="cmd.exe">
 			<arg line="/c svn update" />
@@ -391,7 +573,7 @@ work.dir=${basedir.unix}/tools/tck/work</echo>
 		<antcall target="stop-selenium" />
 	</target>
 
-	<target name="test-tomcat-5.5" depends="prepare">
+	<target name="test-tomcat-5.5-common">
 		<ant antfile="build-dist.xml" target="build-dist-tomcat-5.5" />
 
 		<antcall target="revert-test-properties" />
@@ -427,7 +609,19 @@ work.dir=${basedir.unix}/tools/tck/work</echo>
 		<antcall target="stop-selenium" />
 	</target>
 
-	<target name="test-weblogic-10.3" depends="prepare">
+	<target name="test-tomcat-5.5-mysql-5.0">
+		<antcall target="prepare-mysql-5.0" />
+
+		<antcall target="test-tomcat-5.5-common" />
+	</target>
+
+	<target name="test-tomcat-5.5-oracle-10">
+		<antcall target="prepare-oracle-10" />
+
+		<antcall target="test-tomcat-5.5-common" />
+	</target>
+
+	<target name="test-weblogic-10.3-common">
 		<antcall target="prepare-vm-server">
 			<param name="vm.vmdk.suffix" value="weblogic-10.3" />
 		</antcall>
@@ -528,7 +722,19 @@ work.dir=${basedir.unix}/tools/tck/work</echo>
 		</exec>
 	</target>
 
-	<target name="test-websphere-6.1" depends="prepare">
+	<target name="test-weblogic-10.3-mysql-5.0">
+		<antcall target="prepare-mysql-5.0" />
+
+		<antcall target="test-weblogic-10.3-common" />
+	</target>
+
+	<target name="test-weblogic-10.3-oracle-10">
+		<antcall target="prepare-oracle-10" />
+
+		<antcall target="test-weblogic-10.3-common" />
+	</target>
+
+	<target name="test-websphere-6.1-common">
 		<antcall target="prepare-vm-server">
 			<param name="vm.vmdk.suffix" value="websphere-6.1.0.21" />
 		</antcall>
@@ -619,5 +825,17 @@ print AdminControl.invoke(applicationManager, 'startApplication', 'liferay-tunne
 		<exec dir="${vm.drive}/${vm.host}" executable="${vmware-cmd.executable}">
 			<arg line="${vm.drive}\${vm.host}\${vm.host}.vmx stop hard" />
 		</exec>
+	</target>
+
+	<target name="test-websphere-6.1-mysql-5.0">
+		<antcall target="prepare-mysql-5.0" />
+
+		<antcall target="test-websphere-6.1-common" />
+	</target>
+
+	<target name="test-websphere-6.1-oracle-10">
+		<antcall target="prepare-oracle-10" />
+
+		<antcall target="test-websphere-6.1-common" />
 	</target>
 </project>
