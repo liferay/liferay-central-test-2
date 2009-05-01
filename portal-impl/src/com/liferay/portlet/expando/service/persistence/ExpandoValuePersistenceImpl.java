@@ -184,18 +184,6 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 			ExpandoValueModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"countByC_C",
 			new String[] { Long.class.getName(), Long.class.getName() });
-	public static final FinderPath FINDER_PATH_FETCH_BY_T_C_R = new FinderPath(ExpandoValueModelImpl.ENTITY_CACHE_ENABLED,
-			ExpandoValueModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_ENTITY, "fetchByT_C_R",
-			new String[] {
-				Long.class.getName(), Long.class.getName(), Long.class.getName()
-			});
-	public static final FinderPath FINDER_PATH_COUNT_BY_T_C_R = new FinderPath(ExpandoValueModelImpl.ENTITY_CACHE_ENABLED,
-			ExpandoValueModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"countByT_C_R",
-			new String[] {
-				Long.class.getName(), Long.class.getName(), Long.class.getName()
-			});
 	public static final FinderPath FINDER_PATH_FETCH_BY_T_C_C = new FinderPath(ExpandoValueModelImpl.ENTITY_CACHE_ENABLED,
 			ExpandoValueModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_ENTITY, "fetchByT_C_C",
@@ -245,13 +233,6 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_R,
 			new Object[] {
-				new Long(expandoValue.getColumnId()),
-				new Long(expandoValue.getRowId())
-			}, expandoValue);
-
-		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_T_C_R,
-			new Object[] {
-				new Long(expandoValue.getTableId()),
 				new Long(expandoValue.getColumnId()),
 				new Long(expandoValue.getRowId())
 			}, expandoValue);
@@ -376,13 +357,6 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 				new Long(expandoValueModelImpl.getOriginalRowId())
 			});
 
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_T_C_R,
-			new Object[] {
-				new Long(expandoValueModelImpl.getOriginalTableId()),
-				new Long(expandoValueModelImpl.getOriginalColumnId()),
-				new Long(expandoValueModelImpl.getOriginalRowId())
-			});
-
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_T_C_C,
 			new Object[] {
 				new Long(expandoValueModelImpl.getOriginalTableId()),
@@ -492,30 +466,6 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 				(expandoValue.getRowId() != expandoValueModelImpl.getOriginalRowId()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_R,
 				new Object[] {
-					new Long(expandoValue.getColumnId()),
-					new Long(expandoValue.getRowId())
-				}, expandoValue);
-		}
-
-		if (!isNew &&
-				((expandoValue.getTableId() != expandoValueModelImpl.getOriginalTableId()) ||
-				(expandoValue.getColumnId() != expandoValueModelImpl.getOriginalColumnId()) ||
-				(expandoValue.getRowId() != expandoValueModelImpl.getOriginalRowId()))) {
-			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_T_C_R,
-				new Object[] {
-					new Long(expandoValueModelImpl.getOriginalTableId()),
-					new Long(expandoValueModelImpl.getOriginalColumnId()),
-					new Long(expandoValueModelImpl.getOriginalRowId())
-				});
-		}
-
-		if (isNew ||
-				((expandoValue.getTableId() != expandoValueModelImpl.getOriginalTableId()) ||
-				(expandoValue.getColumnId() != expandoValueModelImpl.getOriginalColumnId()) ||
-				(expandoValue.getRowId() != expandoValueModelImpl.getOriginalRowId()))) {
-			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_T_C_R,
-				new Object[] {
-					new Long(expandoValue.getTableId()),
 					new Long(expandoValue.getColumnId()),
 					new Long(expandoValue.getRowId())
 				}, expandoValue);
@@ -2424,139 +2374,6 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public ExpandoValue findByT_C_R(long tableId, long columnId, long rowId)
-		throws NoSuchValueException, SystemException {
-		ExpandoValue expandoValue = fetchByT_C_R(tableId, columnId, rowId);
-
-		if (expandoValue == null) {
-			StringBuilder msg = new StringBuilder();
-
-			msg.append("No ExpandoValue exists with the key {");
-
-			msg.append("tableId=" + tableId);
-
-			msg.append(", ");
-			msg.append("columnId=" + columnId);
-
-			msg.append(", ");
-			msg.append("rowId=" + rowId);
-
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-			if (_log.isWarnEnabled()) {
-				_log.warn(msg.toString());
-			}
-
-			throw new NoSuchValueException(msg.toString());
-		}
-
-		return expandoValue;
-	}
-
-	public ExpandoValue fetchByT_C_R(long tableId, long columnId, long rowId)
-		throws SystemException {
-		return fetchByT_C_R(tableId, columnId, rowId, true);
-	}
-
-	public ExpandoValue fetchByT_C_R(long tableId, long columnId, long rowId,
-		boolean retrieveFromCache) throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(tableId), new Long(columnId), new Long(rowId)
-			};
-
-		Object result = null;
-
-		if (retrieveFromCache) {
-			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_T_C_R,
-					finderArgs, this);
-		}
-
-		if (result == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBuilder query = new StringBuilder();
-
-				query.append(
-					"FROM com.liferay.portlet.expando.model.ExpandoValue WHERE ");
-
-				query.append("tableId = ?");
-
-				query.append(" AND ");
-
-				query.append("columnId = ?");
-
-				query.append(" AND ");
-
-				query.append("rowId_ = ?");
-
-				query.append(" ");
-
-				query.append("ORDER BY ");
-
-				query.append("tableId ASC, ");
-				query.append("rowId_ ASC, ");
-				query.append("columnId ASC");
-
-				Query q = session.createQuery(query.toString());
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(tableId);
-
-				qPos.add(columnId);
-
-				qPos.add(rowId);
-
-				List<ExpandoValue> list = q.list();
-
-				result = list;
-
-				ExpandoValue expandoValue = null;
-
-				if (list.isEmpty()) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_T_C_R,
-						finderArgs, list);
-				}
-				else {
-					expandoValue = list.get(0);
-
-					cacheResult(expandoValue);
-
-					if ((expandoValue.getTableId() != tableId) ||
-							(expandoValue.getColumnId() != columnId) ||
-							(expandoValue.getRowId() != rowId)) {
-						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_T_C_R,
-							finderArgs, list);
-					}
-				}
-
-				return expandoValue;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (result == null) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_T_C_R,
-						finderArgs, new ArrayList<ExpandoValue>());
-				}
-
-				closeSession(session);
-			}
-		}
-		else {
-			if (result instanceof List) {
-				return null;
-			}
-			else {
-				return (ExpandoValue)result;
-			}
-		}
-	}
-
 	public ExpandoValue findByT_C_C(long tableId, long columnId, long classPK)
 		throws NoSuchValueException, SystemException {
 		ExpandoValue expandoValue = fetchByT_C_C(tableId, columnId, classPK);
@@ -3165,13 +2982,6 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public void removeByT_C_R(long tableId, long columnId, long rowId)
-		throws NoSuchValueException, SystemException {
-		ExpandoValue expandoValue = findByT_C_R(tableId, columnId, rowId);
-
-		remove(expandoValue);
-	}
-
 	public void removeByT_C_C(long tableId, long columnId, long classPK)
 		throws NoSuchValueException, SystemException {
 		ExpandoValue expandoValue = findByT_C_C(tableId, columnId, classPK);
@@ -3603,69 +3413,6 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 
 				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_C_C, finderArgs,
 					count);
-
-				closeSession(session);
-			}
-		}
-
-		return count.intValue();
-	}
-
-	public int countByT_C_R(long tableId, long columnId, long rowId)
-		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(tableId), new Long(columnId), new Long(rowId)
-			};
-
-		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_T_C_R,
-				finderArgs, this);
-
-		if (count == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBuilder query = new StringBuilder();
-
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.expando.model.ExpandoValue WHERE ");
-
-				query.append("tableId = ?");
-
-				query.append(" AND ");
-
-				query.append("columnId = ?");
-
-				query.append(" AND ");
-
-				query.append("rowId_ = ?");
-
-				query.append(" ");
-
-				Query q = session.createQuery(query.toString());
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(tableId);
-
-				qPos.add(columnId);
-
-				qPos.add(rowId);
-
-				count = (Long)q.uniqueResult();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (count == null) {
-					count = Long.valueOf(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_T_C_R,
-					finderArgs, count);
 
 				closeSession(session);
 			}

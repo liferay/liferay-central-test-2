@@ -419,26 +419,6 @@ public class ExpandoValueUtil {
 				   .findByC_C_PrevAndNext(valueId, classNameId, classPK, obc);
 	}
 
-	public static com.liferay.portlet.expando.model.ExpandoValue findByT_C_R(
-		long tableId, long columnId, long rowId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.expando.NoSuchValueException {
-		return getPersistence().findByT_C_R(tableId, columnId, rowId);
-	}
-
-	public static com.liferay.portlet.expando.model.ExpandoValue fetchByT_C_R(
-		long tableId, long columnId, long rowId)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().fetchByT_C_R(tableId, columnId, rowId);
-	}
-
-	public static com.liferay.portlet.expando.model.ExpandoValue fetchByT_C_R(
-		long tableId, long columnId, long rowId, boolean retrieveFromCache)
-		throws com.liferay.portal.SystemException {
-		return getPersistence()
-				   .fetchByT_C_R(tableId, columnId, rowId, retrieveFromCache);
-	}
-
 	public static com.liferay.portlet.expando.model.ExpandoValue findByT_C_C(
 		long tableId, long columnId, long classPK)
 		throws com.liferay.portal.SystemException,
@@ -574,12 +554,6 @@ public class ExpandoValueUtil {
 		getPersistence().removeByC_C(classNameId, classPK);
 	}
 
-	public static void removeByT_C_R(long tableId, long columnId, long rowId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.expando.NoSuchValueException {
-		getPersistence().removeByT_C_R(tableId, columnId, rowId);
-	}
-
 	public static void removeByT_C_C(long tableId, long columnId, long classPK)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.expando.NoSuchValueException {
@@ -633,11 +607,6 @@ public class ExpandoValueUtil {
 	public static int countByC_C(long classNameId, long classPK)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByC_C(classNameId, classPK);
-	}
-
-	public static int countByT_C_R(long tableId, long columnId, long rowId)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().countByT_C_R(tableId, columnId, rowId);
 	}
 
 	public static int countByT_C_C(long tableId, long columnId, long classPK)

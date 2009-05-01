@@ -74,8 +74,8 @@ public class ExpandoValueLocalServiceImpl
 			expandoRowPersistence.update(row, false);
 		}
 
-		ExpandoValue value = expandoValuePersistence.fetchByT_C_R(
-			tableId, columnId, row.getRowId());
+		ExpandoValue value = expandoValuePersistence.fetchByC_R(
+			columnId, row.getRowId());
 
 		if (value == null) {
 			long valueId = counterLocalService.increment();
@@ -554,8 +554,8 @@ public class ExpandoValueLocalServiceImpl
 
 		for (ExpandoColumn column : columns) {
 			if (data.containsKey(column.getName())) {
-				ExpandoValue value = expandoValuePersistence.fetchByT_C_R(
-					tableId, column.getColumnId(), row.getRowId());
+				ExpandoValue value = expandoValuePersistence.fetchByC_R(
+					column.getColumnId(), row.getRowId());
 
 				if (value == null) {
 					long valueId = counterLocalService.increment();

@@ -302,19 +302,6 @@ public interface ExpandoValuePersistence extends BasePersistence {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.expando.NoSuchValueException;
 
-	public com.liferay.portlet.expando.model.ExpandoValue findByT_C_R(
-		long tableId, long columnId, long rowId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.expando.NoSuchValueException;
-
-	public com.liferay.portlet.expando.model.ExpandoValue fetchByT_C_R(
-		long tableId, long columnId, long rowId)
-		throws com.liferay.portal.SystemException;
-
-	public com.liferay.portlet.expando.model.ExpandoValue fetchByT_C_R(
-		long tableId, long columnId, long rowId, boolean retrieveFromCache)
-		throws com.liferay.portal.SystemException;
-
 	public com.liferay.portlet.expando.model.ExpandoValue findByT_C_C(
 		long tableId, long columnId, long classPK)
 		throws com.liferay.portal.SystemException,
@@ -402,10 +389,6 @@ public interface ExpandoValuePersistence extends BasePersistence {
 	public void removeByC_C(long classNameId, long classPK)
 		throws com.liferay.portal.SystemException;
 
-	public void removeByT_C_R(long tableId, long columnId, long rowId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.expando.NoSuchValueException;
-
 	public void removeByT_C_C(long tableId, long columnId, long classPK)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.expando.NoSuchValueException;
@@ -437,9 +420,6 @@ public interface ExpandoValuePersistence extends BasePersistence {
 		throws com.liferay.portal.SystemException;
 
 	public int countByC_C(long classNameId, long classPK)
-		throws com.liferay.portal.SystemException;
-
-	public int countByT_C_R(long tableId, long columnId, long rowId)
 		throws com.liferay.portal.SystemException;
 
 	public int countByT_C_C(long tableId, long columnId, long classPK)

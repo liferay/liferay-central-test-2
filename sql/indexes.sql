@@ -120,7 +120,6 @@ create index IX_F0566A77 on ExpandoValue (tableId);
 create index IX_1BD3F4C on ExpandoValue (tableId, classPK);
 create index IX_CA9AFB7C on ExpandoValue (tableId, columnId);
 create unique index IX_D27B03E7 on ExpandoValue (tableId, columnId, classPK);
-create unique index IX_B5984EDA on ExpandoValue (tableId, columnId, rowId_);
 create index IX_B71E92D5 on ExpandoValue (tableId, rowId_);
 
 create unique index IX_D0D5E397 on Group_ (companyId, classNameId, classPK);

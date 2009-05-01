@@ -160,11 +160,6 @@
 			<finder-column name="classNameId" />
 			<finder-column name="classPK" />
 		</finder>
-		<finder name="T_C_R" return-type="ExpandoValue" unique="true">
-			<finder-column name="tableId" />
-			<finder-column name="columnId" />
-			<finder-column name="rowId" />
-		</finder>
 		<finder name="T_C_C" return-type="ExpandoValue" unique="true">
 			<finder-column name="tableId" />
 			<finder-column name="columnId" />
