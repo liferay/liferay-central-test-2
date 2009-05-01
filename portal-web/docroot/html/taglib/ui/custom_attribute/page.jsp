@@ -68,13 +68,18 @@ ExpandoBridge expandoBridge = new ExpandoBridgeImpl(className, classPK);
 	%>
 
 	<c:if test="<%= !propertyHidden && ExpandoColumnPermission.contains(permissionChecker, className, ExpandoTableConstants.DEFAULT_TABLE_NAME, name, ActionKeys.VIEW) %>">
+
+		<%
+		String escapedName = HtmlUtil.escape(name);
+		%>
+
 		<c:if test="<%= label %>">
-			<label for="<%= randomNamespace %><%= name %>"><%= localizedName %></label>
+			<label for="<%= randomNamespace %><%= escapedName %>"><%= HtmlUtil.escape(localizedName) %></label>
 		</c:if>
 
 		<c:choose>
 			<c:when test="<%= editable && ExpandoColumnPermission.contains(permissionChecker, className, ExpandoTableConstants.DEFAULT_TABLE_NAME, name, ActionKeys.UPDATE) %>">
-				<input type="hidden" name="<portlet:namespace />ExpandoAttributeName(<%= name %>)" value="<%= name %>" />
+				<input type="hidden" name="<portlet:namespace />ExpandoAttributeName(<%= escapedName %>)" value="<%= escapedName %>" />
 
 				<c:choose>
 					<c:when test="<%= type == ExpandoColumnConstants.BOOLEAN %>">
@@ -87,7 +92,7 @@ ExpandoBridge expandoBridge = new ExpandoBridgeImpl(className, classPK);
 						}
 						%>
 
-						<select id="<%= randomNamespace %><%= name %>" name="<portlet:namespace />ExpandoAttribute(<%= name %>)">
+						<select id="<%= randomNamespace %><%= escapedName %>" name="<portlet:namespace />ExpandoAttribute(<%= escapedName %>)">
 							<option <%= curValue ? "selected" : "" %> value="1"><liferay-ui:message key="true" /></option>
 							<option <%= !curValue ? "selected" : "" %> value="0"><liferay-ui:message key="false" /></option>
 						</select>
@@ -95,7 +100,7 @@ ExpandoBridge expandoBridge = new ExpandoBridgeImpl(className, classPK);
 					<c:when test="<%= type == ExpandoColumnConstants.BOOLEAN_ARRAY %>">
 					</c:when>
 					<c:when test="<%= type == ExpandoColumnConstants.DATE %>">
-						<span id="<%= randomNamespace %><%= name %>">
+						<span id="<%= randomNamespace %><%= escapedName %>">
 
 							<%
 							Calendar valueDate = CalendarFactoryUtil.getCalendar(timeZone, locale);
@@ -140,7 +145,7 @@ ExpandoBridge expandoBridge = new ExpandoBridgeImpl(className, classPK);
 					<c:when test="<%= type == ExpandoColumnConstants.DOUBLE_ARRAY %>">
 						<c:choose>
 							<c:when test="<%= propertySelection %>">
-								<select name="<portlet:namespace />ExpandoAttribute(<%= name %>)">
+								<select name="<portlet:namespace />ExpandoAttribute(<%= escapedName %>)">
 
 									<%
 									double[] curValue = (double[])value;
@@ -164,14 +169,14 @@ ExpandoBridge expandoBridge = new ExpandoBridgeImpl(className, classPK);
 								}
 								%>
 
-								<textarea class="lfr-textarea" id="<%= randomNamespace %><%= name %>" name="<portlet:namespace />ExpandoAttribute(<%= name %>)"><%= StringUtil.merge((double[])value, StringPool.NEW_LINE) %></textarea>
+								<textarea class="lfr-textarea" id="<%= randomNamespace %><%= escapedName %>" name="<portlet:namespace />ExpandoAttribute(<%= escapedName %>)"><%= StringUtil.merge((double[])value, StringPool.NEW_LINE) %></textarea>
 							</c:otherwise>
 						</c:choose>
 					</c:when>
 					<c:when test="<%= type == ExpandoColumnConstants.FLOAT_ARRAY %>">
 						<c:choose>
 							<c:when test="<%= propertySelection %>">
-								<select name="<portlet:namespace />ExpandoAttribute(<%= name %>)">
+								<select name="<portlet:namespace />ExpandoAttribute(<%= escapedName %>)">
 
 									<%
 									float[] curValue = (float[])value;
@@ -195,14 +200,14 @@ ExpandoBridge expandoBridge = new ExpandoBridgeImpl(className, classPK);
 								}
 								%>
 
-								<textarea class="lfr-textarea" id="<%= randomNamespace %><%= name %>" name="<portlet:namespace />ExpandoAttribute(<%= name %>)"><%= StringUtil.merge((float[])value, StringPool.NEW_LINE) %></textarea>
+								<textarea class="lfr-textarea" id="<%= randomNamespace %><%= escapedName %>" name="<portlet:namespace />ExpandoAttribute(<%= escapedName %>)"><%= StringUtil.merge((float[])value, StringPool.NEW_LINE) %></textarea>
 							</c:otherwise>
 						</c:choose>
 					</c:when>
 					<c:when test="<%= type == ExpandoColumnConstants.INTEGER_ARRAY %>">
 						<c:choose>
 							<c:when test="<%= propertySelection %>">
-								<select name="<portlet:namespace />ExpandoAttribute(<%= name %>)">
+								<select name="<portlet:namespace />ExpandoAttribute(<%= escapedName %>)">
 
 									<%
 									int[] curValue = (int[])value;
@@ -226,14 +231,14 @@ ExpandoBridge expandoBridge = new ExpandoBridgeImpl(className, classPK);
 								}
 								%>
 
-								<textarea class="lfr-textarea" id="<%= randomNamespace %><%= name %>" name="<portlet:namespace />ExpandoAttribute(<%= name %>)"><%= StringUtil.merge((int[])value, StringPool.NEW_LINE) %></textarea>
+								<textarea class="lfr-textarea" id="<%= randomNamespace %><%= escapedName %>" name="<portlet:namespace />ExpandoAttribute(<%= escapedName %>)"><%= StringUtil.merge((int[])value, StringPool.NEW_LINE) %></textarea>
 							</c:otherwise>
 						</c:choose>
 					</c:when>
 					<c:when test="<%= type == ExpandoColumnConstants.LONG_ARRAY %>">
 						<c:choose>
 							<c:when test="<%= propertySelection %>">
-								<select name="<portlet:namespace />ExpandoAttribute(<%= name %>)">
+								<select name="<portlet:namespace />ExpandoAttribute(<%= escapedName %>)">
 
 									<%
 									long[] curValue = (long[])value;
@@ -257,14 +262,14 @@ ExpandoBridge expandoBridge = new ExpandoBridgeImpl(className, classPK);
 								}
 								%>
 
-								<textarea class="lfr-textarea" id="<%= randomNamespace %><%= name %>" name="<portlet:namespace />ExpandoAttribute(<%= name %>)"><%= StringUtil.merge((long[])value, StringPool.NEW_LINE) %></textarea>
+								<textarea class="lfr-textarea" id="<%= randomNamespace %><%= escapedName %>" name="<portlet:namespace />ExpandoAttribute(<%= escapedName %>)"><%= StringUtil.merge((long[])value, StringPool.NEW_LINE) %></textarea>
 							</c:otherwise>
 						</c:choose>
 					</c:when>
 					<c:when test="<%= type == ExpandoColumnConstants.SHORT_ARRAY %>">
 						<c:choose>
 							<c:when test="<%= propertySelection %>">
-								<select name="<portlet:namespace />ExpandoAttribute(<%= name %>)">
+								<select name="<portlet:namespace />ExpandoAttribute(<%= escapedName %>)">
 
 									<%
 									short[] curValue = (short[])value;
@@ -288,14 +293,14 @@ ExpandoBridge expandoBridge = new ExpandoBridgeImpl(className, classPK);
 								}
 								%>
 
-								<textarea class="lfr-textarea" id="<%= randomNamespace %><%= name %>" name="<portlet:namespace />ExpandoAttribute(<%= name %>)"><%= StringUtil.merge((short[])value, StringPool.NEW_LINE) %></textarea>
+								<textarea class="lfr-textarea" id="<%= randomNamespace %><%= escapedName %>" name="<portlet:namespace />ExpandoAttribute(<%= escapedName %>)"><%= StringUtil.merge((short[])value, StringPool.NEW_LINE) %></textarea>
 							</c:otherwise>
 						</c:choose>
 					</c:when>
 					<c:when test="<%= type == ExpandoColumnConstants.STRING_ARRAY %>">
 						<c:choose>
 							<c:when test="<%= propertySelection %>">
-								<select name="<portlet:namespace />ExpandoAttribute(<%= name %>)">
+								<select name="<portlet:namespace />ExpandoAttribute(<%= escapedName %>)">
 
 									<%
 									String[] curValue = (String[])value;
@@ -309,7 +314,7 @@ ExpandoBridge expandoBridge = new ExpandoBridgeImpl(className, classPK);
 									for (String curDefaultValue : (String[])defaultValue) {
 									%>
 
-										<option <%= (curValue != null) && (curValue.length > 0) && (curDefaultValue.equals(curValue[0])) ? "selected" : "" %> value="<%= curDefaultValue %>"><%= LanguageUtil.get(pageContext, curDefaultValue) %></option>
+										<option <%= (curValue != null) && (curValue.length > 0) && (curDefaultValue.equals(curValue[0])) ? "selected" : "" %> value="<%= HtmlUtil.escape(curDefaultValue) %>"><%= HtmlUtil.escape(LanguageUtil.get(pageContext, curDefaultValue)) %></option>
 
 									<%
 									}
@@ -325,7 +330,7 @@ ExpandoBridge expandoBridge = new ExpandoBridgeImpl(className, classPK);
 								}
 								%>
 
-								<textarea class="lfr-textarea" id="<%= randomNamespace %><%= name %>" name="<portlet:namespace />ExpandoAttribute(<%= name %>)"><%= StringUtil.merge((String[])value, StringPool.NEW_LINE) %></textarea>
+								<textarea class="lfr-textarea" id="<%= randomNamespace %><%= escapedName %>" name="<portlet:namespace />ExpandoAttribute(<%= escapedName %>)"><%= HtmlUtil.escape(StringUtil.merge((String[])value, StringPool.NEW_LINE)) %></textarea>
 							</c:otherwise>
 						</c:choose>
 					</c:when>
@@ -345,7 +350,7 @@ ExpandoBridge expandoBridge = new ExpandoBridgeImpl(className, classPK);
 
 						<c:choose>
 							<c:when test="<%= propertyHeight > 0 %>">
-								<textarea class="lfr-input-text" id="<%= randomNamespace %><%= name %>" name="<portlet:namespace />ExpandoAttribute(<%= name %>)"
+								<textarea class="lfr-input-text" id="<%= randomNamespace %><%= escapedName %>" name="<portlet:namespace />ExpandoAttribute(<%= escapedName %>)"
 									style="
 										<c:if test="<%= propertyHeight > 0 %>">
 											height: <%= propertyHeight %>px;
@@ -354,15 +359,15 @@ ExpandoBridge expandoBridge = new ExpandoBridgeImpl(className, classPK);
 										<c:if test="<%= propertyWidth > 0 %>">
 											width: <%= propertyWidth %>px;
 										</c:if>"
-								><%= value %></textarea>
+								><%= HtmlUtil.escape(String.valueOf(value)) %></textarea>
 							</c:when>
 							<c:otherwise>
-								<input class="lfr-input-text" id="<%= randomNamespace %><%= name %>" name="<portlet:namespace />ExpandoAttribute(<%= name %>)"
+								<input class="lfr-input-text" id="<%= randomNamespace %><%= escapedName %>" name="<portlet:namespace />ExpandoAttribute(<%= escapedName %>)"
 									style="
 										<c:if test="<%= propertyWidth > 0 %>">
 											width: <%= propertyWidth %>px;
 										</c:if>"
-									type="<%= propertySecret ? "password" : "text" %>" value="<%= value %>"
+									type="<%= propertySecret ? "password" : "text" %>" value="<%= HtmlUtil.escape(String.valueOf(value)) %>"
 								/>
 							</c:otherwise>
 						</c:choose>
@@ -432,7 +437,7 @@ ExpandoBridge expandoBridge = new ExpandoBridgeImpl(className, classPK);
 				}
 				%>
 
-				<span id="<%= randomNamespace %><%= name %>"><%= sb.toString() %></span>
+				<span id="<%= randomNamespace %><%= escapedName %>"><%= HtmlUtil.escape(sb.toString()) %></span>
 			</c:otherwise>
 		</c:choose>
 	</c:if>

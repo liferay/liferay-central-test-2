@@ -111,7 +111,7 @@ List<String> attributeNames = Collections.list(expandoBridge.getAttributeNames()
 				localizedName = TextFormatter.format(name, TextFormatter.J);
 			}
 
-			buffer.append(localizedName);
+			buffer.append(HtmlUtil.escape(localizedName));
 			%>
 
 		</liferay-ui:search-container-column-text>
@@ -119,7 +119,7 @@ List<String> attributeNames = Collections.list(expandoBridge.getAttributeNames()
 		<liferay-ui:search-container-column-text
 			href="<%= rowURL %>"
 			name="key"
-			value="<%= name %>"
+			value="<%= HtmlUtil.escape(name) %>"
 		/>
 
 		<liferay-ui:search-container-column-text
@@ -186,10 +186,10 @@ List<String> attributeNames = Collections.list(expandoBridge.getAttributeNames()
 				buffer.append(StringUtil.merge((short[])expandoBridge.getAttributeDefault(name), StringPool.COMMA_AND_SPACE));
 			}
 			else if (type == ExpandoColumnConstants.STRING_ARRAY) {
-				buffer.append(StringUtil.merge((String[])expandoBridge.getAttributeDefault(name), StringPool.COMMA_AND_SPACE));
+				buffer.append(HtmlUtil.escape(StringUtil.merge((String[])expandoBridge.getAttributeDefault(name), StringPool.COMMA_AND_SPACE)));
 			}
 			else {
-				buffer.append((String)expandoBridge.getAttributeDefault(name));
+				buffer.append(HtmlUtil.escape((String)expandoBridge.getAttributeDefault(name)));
 			}
 			%>
 

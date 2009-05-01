@@ -100,7 +100,7 @@ int propertyWidth = GetterUtil.getInteger(properties.get(ExpandoColumnConstants.
 			}
 			%>
 
-			<%= localizedName %>
+			<%= HtmlUtil.escape(localizedName) %>
 		</td>
 	</tr>
 	<tr>
@@ -117,9 +117,9 @@ int propertyWidth = GetterUtil.getInteger(properties.get(ExpandoColumnConstants.
 	<td>
 		<c:choose>
 			<c:when test="<%= column != null %>">
-				<input name="<portlet:namespace />name" type="hidden" value="<%= column.getName() %>" />
+				<input name="<portlet:namespace />name" type="hidden" value="<%= HtmlUtil.escape(column.getName()) %>" />
 
-				<%= column.getName() %>
+				<%= HtmlUtil.escape(column.getName()) %>
 			</c:when>
 			<c:otherwise>
 				<liferay-ui:input-field model="<%= ExpandoColumn.class %>" bean="<%= column %>" field="name" />
@@ -259,10 +259,10 @@ int propertyWidth = GetterUtil.getInteger(properties.get(ExpandoColumnConstants.
 					<textarea class="lfr-textarea" name="<portlet:namespace />defaultValue"><%= StringUtil.merge((short[])defaultValue, StringPool.NEW_LINE) %></textarea>
 				</c:when>
 				<c:when test="<%= type == ExpandoColumnConstants.STRING_ARRAY %>">
-					<textarea class="lfr-textarea" name="<portlet:namespace />defaultValue"><%= StringUtil.merge((String[])defaultValue, StringPool.NEW_LINE) %></textarea>
+					<textarea class="lfr-textarea" name="<portlet:namespace />defaultValue"><%= HtmlUtil.escape(StringUtil.merge((String[])defaultValue, StringPool.NEW_LINE)) %></textarea>
 				</c:when>
 				<c:otherwise>
-					<input class="lfr-input-text" name="<portlet:namespace />defaultValue" type="text" value="<%= String.valueOf(defaultValue) %>" />
+					<input class="lfr-input-text" name="<portlet:namespace />defaultValue" type="text" value="<%= HtmlUtil.escape(String.valueOf(defaultValue)) %>" />
 				</c:otherwise>
 			</c:choose>
 		</td>
