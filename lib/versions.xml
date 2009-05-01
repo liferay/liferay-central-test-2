@@ -1899,6 +1899,34 @@
 		</comments>
 	</library>
 	<library>
+		<file-name>portal/liferay-rhino.jar</file-name>
+		<version>1.6 R7</version>
+		<project-name>Rhino</project-name>
+		<project-url>http://www.mozilla.org/rhino</project-url>
+		<licenses>
+			<license>
+				<license-name>MPL 1.1</license-name>
+			</license>
+		</licenses>
+		<comments>
+			See LPS-3169
+		</comments>
+	</library>
+	<library>
+		<file-name>portal/liferay-yuicompressor.jar</file-name>
+		<version>2.4.2</version>
+		<project-name>YUI Compressor</project-name>
+		<project-url>http://developer.yahoo.com/yui/compressor</project-url>
+		<licenses>
+			<license>
+				<license-name>BSD Style License</license-name>
+			</license>
+		</licenses>
+		<comments>
+			See LPS-3169
+		</comments>
+	</library>
+	<library>
 		<file-name>portal/log4j.jar</file-name>
 		<version>1.2.15</version>
 		<project-name>Log4j</project-name>
@@ -2148,20 +2176,6 @@
 				<license-name>Public Domain</license-name>
 			</license>
 		</licenses>
-	</library>
-	<library>
-		<file-name>portal/rhino.jar</file-name>
-		<version>1.6 R7</version>
-		<project-name>Rhino</project-name>
-		<project-url>http://www.mozilla.org/rhino</project-url>
-		<licenses>
-			<license>
-				<license-name>MPL 1.1</license-name>
-			</license>
-		</licenses>
-		<comments>
-			This is a modified version from YUI Compressor.
-		</comments>
 	</library>
 	<library>
 		<file-name>portal/ridl.jar</file-name>
@@ -2535,17 +2549,6 @@
 			<license>
 				<license-name>BSD Style License</license-name>
 				<copyright-notice>Copyright (c) 2003-2006, Joe Walnes. Copyright (c) 2006-2007, XStream Committers. All rights reserved.</copyright-notice>
-			</license>
-		</licenses>
-	</library>
-	<library>
-		<file-name>portal/yuicompressor.jar</file-name>
-		<version>2.4.2</version>
-		<project-name>YUI Compressor</project-name>
-		<project-url>http://developer.yahoo.com/yui/compressor</project-url>
-		<licenses>
-			<license>
-				<license-name>BSD Style License</license-name>
 			</license>
 		</licenses>
 	</library>

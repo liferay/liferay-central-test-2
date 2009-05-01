@@ -22,6 +22,9 @@
 
 package com.liferay.util.bridges.javascript;
 
+import com.liferay.mozilla.javascript.Context;
+import com.liferay.mozilla.javascript.Scriptable;
+import com.liferay.mozilla.javascript.ScriptableObject;
 import com.liferay.util.bridges.bsf.BaseBSFPortlet;
 
 import java.io.IOException;
@@ -39,10 +42,6 @@ import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
-
-import org.mozilla.javascript.Context;
-import org.mozilla.javascript.Scriptable;
-import org.mozilla.javascript.ScriptableObject;
 
 /**
  * <a href="JavaScriptPortlet.java.html"><b><i>View Source</i></b></a>

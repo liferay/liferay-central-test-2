@@ -22,18 +22,16 @@
 
 package com.liferay.portal.util;
 
+import com.liferay.mozilla.javascript.ErrorReporter;
+import com.liferay.mozilla.javascript.EvaluatorException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-
-import com.yahoo.platform.yui.compressor.CssCompressor;
-import com.yahoo.platform.yui.compressor.JavaScriptCompressor;
+import com.liferay.yahoo.platform.yui.compressor.CssCompressor;
+import com.liferay.yahoo.platform.yui.compressor.JavaScriptCompressor;
 
 import java.io.BufferedReader;
 import java.io.StringReader;
 import java.io.StringWriter;
-
-import org.mozilla.javascript.ErrorReporter;
-import org.mozilla.javascript.EvaluatorException;
 
 /**
  * <a href="MinifierUtil.java.html"><b><i>View Source</i></b></a>
