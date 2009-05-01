@@ -191,7 +191,7 @@ List<Group> myPlaces = user.getMyPlaces(max);
 						<a href="javascript: ;">
 							<c:choose>
 								<c:when test="<%= organizationCommunity %>">
-									<%= organization.getName() %>
+									<%= HtmlUtil.escape(organization.getName()) %>
 								</c:when>
 								<c:when test="<%= userCommunity %>">
 									<liferay-ui:message key="my-community" />

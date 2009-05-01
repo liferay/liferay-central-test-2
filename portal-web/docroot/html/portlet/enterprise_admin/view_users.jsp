@@ -97,19 +97,19 @@ if (Validator.isNotNull(viewUsersRedirect)) {
 	<c:if test="<%= organization != null %>">
 		<input name="<portlet:namespace /><%= UserDisplayTerms.ORGANIZATION_ID %>" type="hidden" value="<%= organization.getOrganizationId() %>" />
 
-		<h3><%= LanguageUtil.format(pageContext, "users-of-x", organization.getName()) %></h3>
+		<h3><%= LanguageUtil.format(pageContext, "users-of-x", HtmlUtil.escape(organization.getName())) %></h3>
 	</c:if>
 
 	<c:if test="<%= role != null %>">
 		<input name="<portlet:namespace /><%= UserDisplayTerms.ROLE_ID %>" type="hidden" value="<%= role.getRoleId() %>" />
 
-		<h3><%= LanguageUtil.format(pageContext, "users-with-role-x", role.getTitle(locale)) %></h3>
+		<h3><%= LanguageUtil.format(pageContext, "users-with-role-x", HtmlUtil.escape(role.getTitle(locale))) %></h3>
 	</c:if>
 
 	<c:if test="<%= userGroup != null %>">
 		<input name="<portlet:namespace /><%= UserDisplayTerms.USER_GROUP_ID %>" type="hidden" value="<%= userGroup.getUserGroupId() %>" />
 
-		<h3><%= LanguageUtil.format(pageContext, "users-of-x", userGroup.getName()) %></h3>
+		<h3><%= LanguageUtil.format(pageContext, "users-of-x", HtmlUtil.escape(userGroup.getName())) %></h3>
 	</c:if>
 
 	<liferay-ui:search-form

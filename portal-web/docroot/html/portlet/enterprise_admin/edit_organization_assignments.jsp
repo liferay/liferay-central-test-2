@@ -61,7 +61,7 @@ portletURL.setParameter("organizationId", String.valueOf(organization.getOrganiz
 <input name="<portlet:namespace />assignmentsRedirect" type="hidden" value="" />
 <input name="<portlet:namespace />organizationId" type="hidden" value="<%= organization.getOrganizationId() %>" />
 
-<liferay-ui:message key="edit-assignments-for-organization" />: <%= organization.getName() %>
+<liferay-ui:message key="edit-assignments-for-organization" />: <%= HtmlUtil.escape(organization.getName()) %>
 
 <br /><br />
 

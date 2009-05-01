@@ -47,7 +47,7 @@ if (displayTerms.getParentOrganizationId() > 0) {
 <c:if test="<%= organization != null %>">
 	<input name="<portlet:namespace /><%= UserDisplayTerms.ORGANIZATION_ID %>" type="hidden" value="<%= organization.getOrganizationId() %>" />
 
-	<h3><%= LanguageUtil.format(pageContext, "suborganizations-of-x", organization.getName()) %></h3>
+	<h3><%= LanguageUtil.format(pageContext, "suborganizations-of-x", HtmlUtil.escape(organization.getName())) %></h3>
 </c:if>
 
 <liferay-ui:search-toggle
