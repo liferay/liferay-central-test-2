@@ -169,7 +169,7 @@ create index IX_8DBF1387 on JournalArticle (groupId, articleId, approved);
 create unique index IX_85C52EEC on JournalArticle (groupId, articleId, version);
 create index IX_2E207659 on JournalArticle (groupId, structureId);
 create index IX_8DEAE14E on JournalArticle (groupId, templateId);
-create unique index IX_22882D02 on JournalArticle (groupId, urlTitle);
+create index IX_22882D02 on JournalArticle (groupId, urlTitle);
 create index IX_76186981 on JournalArticle (resourcePrimKey, approved);
 create index IX_EF9B7028 on JournalArticle (smallImageId);
 create index IX_F029602F on JournalArticle (uuid_);

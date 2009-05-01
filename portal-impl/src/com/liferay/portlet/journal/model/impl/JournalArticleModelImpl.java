@@ -369,14 +369,6 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle> {
 
 	public void setUrlTitle(String urlTitle) {
 		_urlTitle = urlTitle;
-
-		if (_originalUrlTitle == null) {
-			_originalUrlTitle = urlTitle;
-		}
-	}
-
-	public String getOriginalUrlTitle() {
-		return GetterUtil.getString(_originalUrlTitle);
 	}
 
 	public String getDescription() {
@@ -902,7 +894,6 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle> {
 	private boolean _setOriginalVersion;
 	private String _title;
 	private String _urlTitle;
-	private String _originalUrlTitle;
 	private String _description;
 	private String _content;
 	private String _type;

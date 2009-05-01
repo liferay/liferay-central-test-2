@@ -83,7 +83,7 @@
 			<finder-column name="groupId" />
 			<finder-column name="templateId" />
 		</finder>
-		<finder name="G_UT" return-type="BlogsEntry" unique="true">
+		<finder name="G_UT" return-type="Collection">
 			<finder-column name="groupId" />
 			<finder-column name="urlTitle" />
 		</finder>

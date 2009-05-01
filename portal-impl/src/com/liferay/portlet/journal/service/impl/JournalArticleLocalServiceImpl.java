@@ -265,7 +265,7 @@ public class JournalArticleLocalServiceImpl
 		article.setArticleId(articleId);
 		article.setVersion(version);
 		article.setTitle(title);
-		article.setUrlTitle(getUniqueUrlTitle(id, groupId, title));
+		article.setUrlTitle(getUniqueUrlTitle(id, groupId, articleId, title));
 		article.setDescription(description);
 		article.setContent(content);
 		article.setType(type);
@@ -289,6 +289,8 @@ public class JournalArticleLocalServiceImpl
 		article.setSmallImageURL(smallImageURL);
 
 		journalArticlePersistence.update(article, false);
+
+		updateUrlTitles(groupId, articleId, article.getUrlTitle());
 
 		// Resources
 
@@ -891,10 +893,14 @@ public class JournalArticleLocalServiceImpl
 	public JournalArticle getArticleByUrlTitle(long groupId, String urlTitle)
 		throws PortalException, SystemException {
 
-		JournalArticle article = journalArticlePersistence.findByG_UT(
-			groupId, urlTitle);
+		List<JournalArticle> articles = journalArticlePersistence.findByG_UT(
+			groupId, urlTitle, 0, 1);
 
-		return getArticle(groupId, article.getArticleId());
+		if (articles.size() == 0) {
+			throw new NoSuchArticleException();
+		}
+
+		return articles.get(0);
 	}
 
 	public String getArticleContent(
@@ -1784,7 +1790,8 @@ public class JournalArticleLocalServiceImpl
 
 		article.setModifiedDate(now);
 		article.setTitle(title);
-		article.setUrlTitle(getUniqueUrlTitle(article.getId(), groupId, title));
+		article.setUrlTitle(
+			getUniqueUrlTitle(article.getId(), groupId, articleId, title));
 		article.setDescription(description);
 		article.setContent(content);
 		article.setType(type);
@@ -1812,6 +1819,8 @@ public class JournalArticleLocalServiceImpl
 		article.setSmallImageURL(smallImageURL);
 
 		journalArticlePersistence.update(article, false);
+
+		updateUrlTitles(groupId, articleId, article.getUrlTitle());
 
 		// Expando
 
@@ -2315,18 +2324,23 @@ public class JournalArticleLocalServiceImpl
 	}
 
 	protected String getUniqueUrlTitle(
-			long id, long groupId, String title)
-		throws SystemException {
+			long id, long groupId, String articleId, String title)
+		throws PortalException, SystemException {
 
 		String urlTitle = getUrlTitle(id, title);
 
 		String newUrlTitle = urlTitle;
 
 		for (int i = 1;; i++) {
-			JournalArticle article  = journalArticlePersistence.fetchByG_UT(
-				groupId, newUrlTitle);
+			JournalArticle article = null;
 
-			if ((article == null) || (article.getId() == id)) {
+			try {
+				article = getArticleByUrlTitle(groupId, newUrlTitle);
+			}
+			catch (NoSuchArticleException nsae) {
+			}
+
+			if ((article == null) || article.getArticleId().equals(articleId)) {
 				break;
 			}
 			else {
@@ -2533,6 +2547,22 @@ public class JournalArticleLocalServiceImpl
 		MailMessage message = new MailMessage(from, to, subject, body, true);
 
 		mailService.sendEmail(message);
+	}
+
+	protected void updateUrlTitles(
+			long groupId, String articleId, String urlTitle)
+		throws SystemException {
+
+		List<JournalArticle> articles = journalArticlePersistence.findByG_A(
+			groupId, articleId);
+
+		for (JournalArticle article : articles) {
+			if (!article.getUrlTitle().equals(urlTitle)) {
+				article.setUrlTitle(urlTitle);
+
+				journalArticlePersistence.update(article, false);
+			}
+		}
 	}
 
 	protected void validate(String articleId) throws PortalException {

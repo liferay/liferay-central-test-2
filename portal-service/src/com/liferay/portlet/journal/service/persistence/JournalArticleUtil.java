@@ -466,23 +466,48 @@ public class JournalArticleUtil {
 				   .findByG_T_PrevAndNext(id, groupId, templateId, obc);
 	}
 
-	public static com.liferay.portlet.journal.model.JournalArticle findByG_UT(
+	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByG_UT(
 		long groupId, java.lang.String urlTitle)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.journal.NoSuchArticleException {
+		throws com.liferay.portal.SystemException {
 		return getPersistence().findByG_UT(groupId, urlTitle);
 	}
 
-	public static com.liferay.portlet.journal.model.JournalArticle fetchByG_UT(
-		long groupId, java.lang.String urlTitle)
+	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByG_UT(
+		long groupId, java.lang.String urlTitle, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().fetchByG_UT(groupId, urlTitle);
+		return getPersistence().findByG_UT(groupId, urlTitle, start, end);
 	}
 
-	public static com.liferay.portlet.journal.model.JournalArticle fetchByG_UT(
-		long groupId, java.lang.String urlTitle, boolean retrieveFromCache)
+	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByG_UT(
+		long groupId, java.lang.String urlTitle, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().fetchByG_UT(groupId, urlTitle, retrieveFromCache);
+		return getPersistence().findByG_UT(groupId, urlTitle, start, end, obc);
+	}
+
+	public static com.liferay.portlet.journal.model.JournalArticle findByG_UT_First(
+		long groupId, java.lang.String urlTitle,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.journal.NoSuchArticleException {
+		return getPersistence().findByG_UT_First(groupId, urlTitle, obc);
+	}
+
+	public static com.liferay.portlet.journal.model.JournalArticle findByG_UT_Last(
+		long groupId, java.lang.String urlTitle,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.journal.NoSuchArticleException {
+		return getPersistence().findByG_UT_Last(groupId, urlTitle, obc);
+	}
+
+	public static com.liferay.portlet.journal.model.JournalArticle[] findByG_UT_PrevAndNext(
+		long id, long groupId, java.lang.String urlTitle,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.journal.NoSuchArticleException {
+		return getPersistence()
+				   .findByG_UT_PrevAndNext(id, groupId, urlTitle, obc);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalArticle findByG_A_V(
@@ -629,8 +654,7 @@ public class JournalArticleUtil {
 	}
 
 	public static void removeByG_UT(long groupId, java.lang.String urlTitle)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.journal.NoSuchArticleException {
+		throws com.liferay.portal.SystemException {
 		getPersistence().removeByG_UT(groupId, urlTitle);
 	}
 
