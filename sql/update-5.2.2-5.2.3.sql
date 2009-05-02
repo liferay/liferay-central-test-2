@@ -40,7 +40,7 @@ alter table MBMessage add classNameId LONG;
 alter table MBMessage add classPK LONG;
 alter table MBMessage add priority DOUBLE;
 
-delete from MBMessageFlag;
+delete from MBMessageFlag where flag = 1;
 
 COMMIT_TRANSACTION;
 
