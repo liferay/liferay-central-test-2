@@ -136,7 +136,7 @@ renderTreeURL.setParameter("portletURL", portletURL.toString());
 <div class="lfr-tree" id="<portlet:namespace /><%= HtmlUtil.escape(treeId) %>Output">
 	<ul class="lfr-component">
 		<li class="root-container">
-			<a class="community" href="<%= portletURL.toString() %>&<portlet:namespace />selPlid=<%= LayoutConstants.DEFAULT_PARENT_LAYOUT_ID %>"><img height="20" src="<%= themeDisplay.getPathThemeImages() %>/trees/root.png" width="19" /><span><%= rootNodeName %></span></a>
+			<a class="community" href="<%= portletURL.toString() %>&<portlet:namespace />selPlid=<%= LayoutConstants.DEFAULT_PARENT_LAYOUT_ID %>"><img height="20" src="<%= themeDisplay.getPathThemeImages() %>/trees/root.png" width="19" /><span><%= HtmlUtil.escape(rootNodeName) %></span></a>
 
 			<%
 			_buildLayoutsTreeHTML(groupId, privateLayout, LayoutConstants.DEFAULT_PARENT_LAYOUT_ID, 1, openNodes, selectableTree, selectedNodes, portletURL.toString(), themeDisplay, false, pageContext, request);

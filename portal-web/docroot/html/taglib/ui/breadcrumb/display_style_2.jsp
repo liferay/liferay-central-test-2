@@ -47,7 +47,7 @@ private void _buildBreadcrumb(Layout selLayout, String selLayoutParam, PortletUR
 		}
 
 		breadCrumbSB.append("<div class=\"font-xx-large\" style=\"font-weight: bold;\">");
-		breadCrumbSB.append(selLayout.getName(themeDisplay.getLocale()));
+		breadCrumbSB.append(HtmlUtil.escape(selLayout.getName(themeDisplay.getLocale())));
 		breadCrumbSB.append("</div>");
 		breadCrumbSB.append("<br />");
 	}
@@ -57,7 +57,7 @@ private void _buildBreadcrumb(Layout selLayout, String selLayoutParam, PortletUR
 		breadCrumbSB.append("\" ");
 		breadCrumbSB.append(target);
 		breadCrumbSB.append(">");
-		breadCrumbSB.append(selLayout.getName(themeDisplay.getLocale()));
+		breadCrumbSB.append(HtmlUtil.escape(selLayout.getName(themeDisplay.getLocale())));
 		breadCrumbSB.append("</a>");
 	}
 

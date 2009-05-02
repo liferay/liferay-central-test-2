@@ -97,7 +97,7 @@ boolean nodeOpen = false;
 
 				<a href="<%= portletURL + StringPool.AMPERSAND + portletDisplay.getNamespace() + "selPlid=" + treeLayout.getPlid() %>">
 					<img src="<%= themeDisplay.getPathThemeImages() + "/trees/page.png" %>"  />
-					<span><%= treeLayout.getName(themeDisplay.getLocale()) %></span>
+					<span><%= HtmlUtil.escape(treeLayout.getName(themeDisplay.getLocale())) %></span>
 				</a>
 
 				<%

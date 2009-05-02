@@ -181,7 +181,7 @@ if (!StringUtil.contains(tabs4Names, tabs4)) {
 					Layout selLayoutChild = (Layout)selLayoutChildren.get(i);
 				%>
 
-					<option value="<%= selLayoutChild.getLayoutId() %>"><%= selLayoutChild.getName(locale) %></option>
+					<option value="<%= selLayoutChild.getLayoutId() %>"><%= HtmlUtil.escape(selLayoutChild.getName(locale)) %></option>
 
 				<%
 				}

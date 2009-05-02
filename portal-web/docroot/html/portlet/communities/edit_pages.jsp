@@ -438,7 +438,7 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 		<div>
 			<c:choose>
 				<c:when test="<%= liveGroup.isOrganization() %>">
-					<liferay-ui:message key='<%= "edit-pages-for-" + (organization.isRoot() ? "organization" : "location" ) %>' />: <%= organization.getName() %>
+					<liferay-ui:message key='<%= "edit-pages-for-" + (organization.isRoot() ? "organization" : "location" ) %>' />: <%= HtmlUtil.escape(organization.getName()) %>
 				</c:when>
 				<c:when test="<%= liveGroup.isUser() %>">
 					<liferay-ui:message key="edit-pages-for-user" />: <%= user2.getFullName() %>

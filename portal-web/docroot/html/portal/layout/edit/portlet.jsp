@@ -68,7 +68,7 @@
 				if (copiableLayout != null) {
 			%>
 
-					<option value="<%= copiableLayout.getLayoutId() %>"><%= name %></option>
+					<option value="<%= copiableLayout.getLayoutId() %>"><%= HtmlUtil.escape(name) %></option>
 
 			<%
 				}

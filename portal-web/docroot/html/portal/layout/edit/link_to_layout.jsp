@@ -75,7 +75,7 @@
 				if (linkableLayout != null) {
 			%>
 
-					<option <%= (linkToLayoutId == linkableLayout.getLayoutId()) ? "selected" : "" %> value="<%= linkableLayout.getLayoutId() %>"><%= name %></option>
+					<option <%= (linkToLayoutId == linkableLayout.getLayoutId()) ? "selected" : "" %> value="<%= linkableLayout.getLayoutId() %>"><%= HtmlUtil.escape(name) %></option>
 
 			<%
 				}
