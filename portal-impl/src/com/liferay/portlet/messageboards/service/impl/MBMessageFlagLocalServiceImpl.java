@@ -44,6 +44,9 @@ import java.util.List;
 public class MBMessageFlagLocalServiceImpl
 	extends MBMessageFlagLocalServiceBaseImpl {
 
+	/**
+	 * @deprecated
+	 */
 	public void addReadFlags(long userId, List<MBMessage> messages)
 		throws PortalException, SystemException {
 
@@ -181,6 +184,9 @@ public class MBMessageFlagLocalServiceImpl
 		}
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public boolean hasReadFlag(long userId, long messageId)
 		throws PortalException, SystemException {
 

@@ -40,6 +40,10 @@ alter table MBMessage add classNameId LONG;
 alter table MBMessage add classPK LONG;
 alter table MBMessage add priority DOUBLE;
 
+delete from MBMessageFlag;
+
+COMMIT_TRANSACTION;
+
 alter table MBMessageFlag add threadId LONG;
 
 alter table MBThread add groupId LONG;

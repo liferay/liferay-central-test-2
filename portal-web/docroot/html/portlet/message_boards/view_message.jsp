@@ -345,7 +345,7 @@ String threadView = messageDisplay.getThreadView();
 </c:if>
 
 <%
-MBMessageFlagLocalServiceUtil.addReadFlags(themeDisplay.getUserId(), messages);
+//MBMessageFlagLocalServiceUtil.addReadFlags(themeDisplay.getUserId(), messages);
 
 message = messageDisplay.getMessage();
 
