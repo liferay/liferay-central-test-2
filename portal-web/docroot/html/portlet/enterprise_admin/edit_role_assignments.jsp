@@ -80,7 +80,7 @@ request.setAttribute("edit_role_assignments.jsp-portletURL", portletURL);
 <input name="<portlet:namespace />assignmentsRedirect" type="hidden" value="" />
 <input name="<portlet:namespace />roleId" type="hidden" value="<%= role.getRoleId() %>" />
 
-<liferay-ui:message key="edit-assignments-for-role" />: <%= role.getTitle(locale) %>
+<liferay-ui:message key="edit-assignments-for-role" />: <%= HtmlUtil.escape(role.getTitle(locale)) %>
 
 <br /><br />
 

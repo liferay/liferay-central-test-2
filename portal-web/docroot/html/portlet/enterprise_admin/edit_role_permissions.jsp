@@ -99,7 +99,7 @@ String breadcrumbs = "<a href=\"" + breadcrumbsURL.toString() + "\">" + Language
 breadcrumbsURL.setParameter("struts_action", "/enterprise_admin/edit_role_permissions");
 breadcrumbsURL.setParameter(Constants.CMD, Constants.VIEW);
 
-breadcrumbs += "<a href=\"" + breadcrumbsURL.toString() + "\">" + role.getTitle(locale) + "</a>";
+breadcrumbs += "<a href=\"" + breadcrumbsURL.toString() + "\">" + HtmlUtil.escape(role.getTitle(locale)) + "</a>";
 
 breadcrumbsURL.setParameter(Constants.CMD, Constants.EDIT);
 

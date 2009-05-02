@@ -73,6 +73,8 @@ headerNames.add(StringPool.BLANK);
 	for (int i = 0; i < results.size(); i++) {
 		Role role = (Role)results.get(i);
 
+		role = role.toEscapedModel();
+
 		ResultRow row = new ResultRow(role, role.getRoleId(), i);
 
 		PortletURL rowURL = renderResponse.createRenderURL();

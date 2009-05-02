@@ -69,13 +69,13 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 		<div class="ctrl-holder">
 			<label><%= LanguageUtil.get(pageContext, PortalUtil.isSystemRole(role.getName()) ? "name" : "old-name") %></label>
 
-			<%= role.getName() %>
+			<%= HtmlUtil.escape(role.getName()) %>
 		</div>
 	</c:if>
 
 	<c:choose>
 		<c:when test="<%= (role != null) && PortalUtil.isSystemRole(role.getName()) %>">
-			<input type="hidden" name="name" value="<%= role.getName() %>" />
+			<input type="hidden" name="name" value="<%= HtmlUtil.escape(role.getName()) %>" />
 		</c:when>
 		<c:otherwise>
 			<div class="ctrl-holder">
@@ -90,7 +90,7 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 		<div class="ctrl-holder">
 			<label><liferay-ui:message key="title" /></label>
 
-			<input id="<portlet:namespace />title_<%= defaultLanguageId %>" name="<portlet:namespace />title_<%= defaultLanguageId %>" size="30" type="text" value="<%= role.getTitle(defaultLocale) %>" />
+			<input id="<portlet:namespace />title_<%= defaultLanguageId %>" name="<portlet:namespace />title_<%= defaultLanguageId %>" size="30" type="text" value="<%= HtmlUtil.escape(role.getTitle(defaultLocale)) %>" />
 
 			<img class="default-language" src="<%= themeDisplay.getPathThemeImages() %>/language/<%= defaultLanguageId %>.png" />
 
@@ -162,7 +162,7 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 									<div class="ctrl-holder col">
 										<label><liferay-ui:message key="title" /></label>
 
-										<input class="language-value" name="<portlet:namespace />title_" type="text" value="<%= role.getTitle(languageId, false) %>" />
+										<input class="language-value" name="<portlet:namespace />title_" type="text" value="<%= HtmlUtil.escape(role.getTitle(languageId, false)) %>" />
 									</div>
 								</div>
 							</div>
