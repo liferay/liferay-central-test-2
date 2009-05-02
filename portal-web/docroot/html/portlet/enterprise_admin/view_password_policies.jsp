@@ -95,11 +95,11 @@ headerNames.add(StringPool.BLANK);
 
 		// Name
 
-		row.addText(passwordPolicy.getName(), rowURL);
+		row.addText(HtmlUtil.escape(passwordPolicy.getName()), rowURL);
 
 		// Description
 
-		row.addText(passwordPolicy.getDescription(), rowURL);
+		row.addText(HtmlUtil.escape(passwordPolicy.getDescription()), rowURL);
 
 		// Action
 

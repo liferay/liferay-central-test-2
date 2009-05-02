@@ -72,7 +72,7 @@ portletURL.setParameter("passwordPolicyId", String.valueOf(passwordPolicy.getPas
 <input name="<portlet:namespace />assignmentsRedirect" type="hidden" value="" />
 <input name="<portlet:namespace />passwordPolicyId" type="hidden" value="<%= String.valueOf(passwordPolicy.getPasswordPolicyId()) %>" />
 
-<liferay-ui:message key="edit-assignments-for-password-policy" />: <%= passwordPolicy.getName() %>
+<liferay-ui:message key="edit-assignments-for-password-policy" />: <%= HtmlUtil.escape(passwordPolicy.getName()) %>
 
 <br /><br />
 
