@@ -24,6 +24,7 @@ package com.liferay.portal.model.impl;
 
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.Release;
 import com.liferay.portal.model.ReleaseSoap;
 
@@ -78,9 +79,12 @@ public class ReleaseModelImpl extends BaseModelImpl<Release> {
 			{ "buildDate", new Integer(Types.TIMESTAMP) },
 			
 
-			{ "verified", new Integer(Types.BOOLEAN) }
+			{ "verified", new Integer(Types.BOOLEAN) },
+			
+
+			{ "testString", new Integer(Types.VARCHAR) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table Release_ (releaseId LONG not null primary key,createDate DATE null,modifiedDate DATE null,buildNumber INTEGER,buildDate DATE null,verified BOOLEAN)";
+	public static final String TABLE_SQL_CREATE = "create table Release_ (releaseId LONG not null primary key,createDate DATE null,modifiedDate DATE null,buildNumber INTEGER,buildDate DATE null,verified BOOLEAN,testString VARCHAR(1024) null)";
 	public static final String TABLE_SQL_DROP = "drop table Release_";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -101,6 +105,7 @@ public class ReleaseModelImpl extends BaseModelImpl<Release> {
 		model.setBuildNumber(soapModel.getBuildNumber());
 		model.setBuildDate(soapModel.getBuildDate());
 		model.setVerified(soapModel.getVerified());
+		model.setTestString(soapModel.getTestString());
 
 		return model;
 	}
@@ -185,6 +190,14 @@ public class ReleaseModelImpl extends BaseModelImpl<Release> {
 		_verified = verified;
 	}
 
+	public String getTestString() {
+		return GetterUtil.getString(_testString);
+	}
+
+	public void setTestString(String testString) {
+		_testString = testString;
+	}
+
 	public Release toEscapedModel() {
 		if (isEscapedModel()) {
 			return (Release)this;
@@ -201,6 +214,7 @@ public class ReleaseModelImpl extends BaseModelImpl<Release> {
 			model.setBuildNumber(getBuildNumber());
 			model.setBuildDate(getBuildDate());
 			model.setVerified(getVerified());
+			model.setTestString(HtmlUtil.escape(getTestString()));
 
 			model = (Release)Proxy.newProxyInstance(Release.class.getClassLoader(),
 					new Class[] { Release.class },
@@ -228,6 +242,7 @@ public class ReleaseModelImpl extends BaseModelImpl<Release> {
 		clone.setBuildNumber(getBuildNumber());
 		clone.setBuildDate(getBuildDate());
 		clone.setVerified(getVerified());
+		clone.setTestString(getTestString());
 
 		return clone;
 	}
@@ -289,6 +304,8 @@ public class ReleaseModelImpl extends BaseModelImpl<Release> {
 		sb.append(getBuildDate());
 		sb.append(", verified=");
 		sb.append(getVerified());
+		sb.append(", testString=");
+		sb.append(getTestString());
 		sb.append("}");
 
 		return sb.toString();
@@ -325,6 +342,10 @@ public class ReleaseModelImpl extends BaseModelImpl<Release> {
 			"<column><column-name>verified</column-name><column-value><![CDATA[");
 		sb.append("getVerified()");
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>testString</column-name><column-value><![CDATA[");
+		sb.append("getTestString()");
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -337,5 +358,6 @@ public class ReleaseModelImpl extends BaseModelImpl<Release> {
 	private int _buildNumber;
 	private Date _buildDate;
 	private boolean _verified;
+	private String _testString;
 	private transient ExpandoBridge _expandoBridge;
 }

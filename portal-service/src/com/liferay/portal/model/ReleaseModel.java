@@ -75,5 +75,9 @@ public interface ReleaseModel extends BaseModel<Release> {
 
 	public void setVerified(boolean verified);
 
+	public String getTestString();
+
+	public void setTestString(String testString);
+
 	public Release toEscapedModel();
 }

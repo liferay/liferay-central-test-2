@@ -56,6 +56,7 @@ public class ReleaseSoap implements Serializable {
 		soapModel.setBuildNumber(model.getBuildNumber());
 		soapModel.setBuildDate(model.getBuildDate());
 		soapModel.setVerified(model.getVerified());
+		soapModel.setTestString(model.getTestString());
 
 		return soapModel;
 	}
@@ -133,10 +134,19 @@ public class ReleaseSoap implements Serializable {
 		_verified = verified;
 	}
 
+	public String getTestString() {
+		return _testString;
+	}
+
+	public void setTestString(String testString) {
+		_testString = testString;
+	}
+
 	private long _releaseId;
 	private Date _createDate;
 	private Date _modifiedDate;
 	private int _buildNumber;
 	private Date _buildDate;
 	private boolean _verified;
+	private String _testString;
 }

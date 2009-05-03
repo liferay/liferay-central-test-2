@@ -60,6 +60,10 @@ public abstract class UpgradeProcess {
 		return DBUtil.getInstance().isSupportsAlterColumnType();
 	}
 
+	public boolean isSupportsStringCaseSensitiveQuery() {
+		return DBUtil.getInstance().isSupportsStringCaseSensitiveQuery();
+	}
+
 	public boolean isSupportsUpdateWithInnerJoin() {
 		return DBUtil.getInstance().isSupportsUpdateWithInnerJoin();
 	}

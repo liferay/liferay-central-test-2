@@ -279,6 +279,10 @@ public abstract class DBUtil {
 		return _SUPPORTS_ALTER_COLUMN_TYPE;
 	}
 
+	public boolean isSupportsStringCaseSensitiveQuery() {
+		return _supportsStringCaseSensitiveQuery;
+	}
+
 	public boolean isSupportsUpdateWithInnerJoin() {
 		return _SUPPORTS_UPDATE_WITH_INNER_JOIN;
 	}
@@ -472,6 +476,21 @@ public abstract class DBUtil {
 		}
 
 		br.close();
+	}
+
+	public void setSupportsStringCaseSensitiveQuery(
+		boolean supportsStringCaseSensitiveQuery) {
+
+		if (_log.isInfoEnabled()) {
+			if (supportsStringCaseSensitiveQuery) {
+				_log.info("Database supports case sensitive queries");
+			}
+			else {
+				_log.info("Database does not support case sensitive queries");
+			}
+		}
+
+		_supportsStringCaseSensitiveQuery = supportsStringCaseSensitiveQuery;
 	}
 
 	protected DBUtil(String type) {
@@ -831,5 +850,6 @@ public abstract class DBUtil {
 	private static DBUtil _dbUtil;
 
 	private String _type;
+	private boolean _supportsStringCaseSensitiveQuery;
 
 }

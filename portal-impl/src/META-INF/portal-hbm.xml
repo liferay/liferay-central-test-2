@@ -425,6 +425,7 @@
 		<property name="buildNumber" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 		<property name="buildDate" type="org.hibernate.type.TimestampType" />
 		<property name="verified" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="testString" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 	<class name="com.liferay.portal.model.impl.ResourceImpl" table="Resource_">
 		<cache usage="read-write" />

@@ -76,6 +76,7 @@ public class ReleasePersistenceTest extends BasePersistenceTestCase {
 		newRelease.setBuildNumber(nextInt());
 		newRelease.setBuildDate(nextDate());
 		newRelease.setVerified(randomBoolean());
+		newRelease.setTestString(randomString());
 
 		_persistence.update(newRelease, false);
 
@@ -91,6 +92,7 @@ public class ReleasePersistenceTest extends BasePersistenceTestCase {
 		assertEquals(Time.getShortTimestamp(existingRelease.getBuildDate()),
 			Time.getShortTimestamp(newRelease.getBuildDate()));
 		assertEquals(existingRelease.getVerified(), newRelease.getVerified());
+		assertEquals(existingRelease.getTestString(), newRelease.getTestString());
 	}
 
 	public void testFindByPrimaryKeyExisting() throws Exception {
@@ -139,6 +141,7 @@ public class ReleasePersistenceTest extends BasePersistenceTestCase {
 		release.setBuildNumber(nextInt());
 		release.setBuildDate(nextDate());
 		release.setVerified(randomBoolean());
+		release.setTestString(randomString());
 
 		_persistence.update(release, false);
 

@@ -951,7 +951,8 @@ create table Release_ (
 	modifiedDate DATE null,
 	buildNumber INTEGER,
 	buildDate DATE null,
-	verified BOOLEAN
+	verified BOOLEAN,
+	testString VARCHAR(1024) null
 );
 
 create table Resource_ (

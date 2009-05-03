@@ -58,6 +58,7 @@ public class ReleaseLocalServiceImpl extends ReleaseLocalServiceBaseImpl {
 
 		release.setCreateDate(now);
 		release.setModifiedDate(now);
+		release.setTestString(ReleaseImpl.TEST_STRING);
 
 		releasePersistence.update(release, false);
 
@@ -112,6 +113,8 @@ public class ReleaseLocalServiceImpl extends ReleaseLocalServiceBaseImpl {
 					_log.debug("Build number " + buildNumber);
 				}
 
+				testSupportsStringCaseSensitiveQuery();
+
 				return buildNumber;
 			}
 		}
@@ -134,6 +137,8 @@ public class ReleaseLocalServiceImpl extends ReleaseLocalServiceBaseImpl {
 			}
 
 			releaseLocalService.createTablesAndPopulate();
+
+			testSupportsStringCaseSensitiveQuery();
 
 			return getRelease().getBuildNumber();
 		}
@@ -167,8 +172,84 @@ public class ReleaseLocalServiceImpl extends ReleaseLocalServiceBaseImpl {
 		return release;
 	}
 
+	protected void testSupportsStringCaseSensitiveQuery()
+		throws SystemException {
+
+		DBUtil dbUtil = DBUtil.getInstance();
+
+		int count = testSupportsStringCaseSensitiveQuery(
+			ReleaseImpl.TEST_STRING);
+
+		if (count == 0) {
+			try {
+				dbUtil.runSQL(
+					"alter table Release_ add testString VARCHAR(1024) null");
+
+				dbUtil.runSQL(
+					"update Release_ set testString = '" +
+						ReleaseImpl.TEST_STRING + "'");
+			}
+			catch (Exception e) {
+				throw new SystemException(e);
+			}
+
+			count = testSupportsStringCaseSensitiveQuery(
+				ReleaseImpl.TEST_STRING);
+		}
+
+		if (count == 0) {
+			throw new SystemException(
+				"Release_ table was not initialized properly");
+		}
+
+		count = testSupportsStringCaseSensitiveQuery(
+			ReleaseImpl.TEST_STRING.toUpperCase());
+
+		if (count == 0) {
+			dbUtil.setSupportsStringCaseSensitiveQuery(true);
+		}
+		else {
+			dbUtil.setSupportsStringCaseSensitiveQuery(false);
+		}
+	}
+
+	protected int testSupportsStringCaseSensitiveQuery(String testString) {
+		int count = 0;
+
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = DataAccess.getConnection();
+
+			ps = con.prepareStatement(_TEST_DATABASE_STRING_CASE_SENSITIVITY);
+
+			ps.setString(1, testString);
+
+			rs = ps.executeQuery();
+
+			if (rs.next()) {
+				count = rs.getInt(1);
+			}
+		}
+		catch (Exception e) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(e.getMessage());
+			}
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
+		}
+
+		return count;
+	}
+
 	private static final String _GET_BUILD_NUMBER =
 		"select buildNumber from Release_";
+
+	private static final String _TEST_DATABASE_STRING_CASE_SENSITIVITY =
+		"select count(*) from Release_ where testString = ?";
 
 	private static Log _log =
 		LogFactoryUtil.getLog(ReleaseLocalServiceImpl.class);
