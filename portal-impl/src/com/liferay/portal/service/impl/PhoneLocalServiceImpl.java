@@ -26,6 +26,9 @@ import com.liferay.portal.PhoneNumberException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.Account;
+import com.liferay.portal.model.Contact;
+import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.Phone;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.ListTypeImpl;
@@ -154,7 +157,12 @@ public class PhoneLocalServiceImpl extends PhoneLocalServiceBaseImpl {
 			classPK = phone.getClassPK();
 		}
 
-		listTypeService.validate(typeId, classNameId, ListTypeImpl.PHONE);
+		if ((classNameId == PortalUtil.getClassNameId(Account.class)) ||
+			(classNameId == PortalUtil.getClassNameId(Contact.class)) ||
+			(classNameId == PortalUtil.getClassNameId(Organization.class))) {
+
+			listTypeService.validate(typeId, classNameId, ListTypeImpl.PHONE);
+		}
 
 		validate(phoneId, companyId, classNameId, classPK, primary);
 	}
