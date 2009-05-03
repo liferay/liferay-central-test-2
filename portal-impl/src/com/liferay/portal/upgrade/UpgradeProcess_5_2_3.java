@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.upgrade.v5_2_3.UpgradeBookmarks;
 import com.liferay.portal.upgrade.v5_2_3.UpgradeCalendar;
 import com.liferay.portal.upgrade.v5_2_3.UpgradeDocumentLibrary;
+import com.liferay.portal.upgrade.v5_2_3.UpgradeDuplicates;
 import com.liferay.portal.upgrade.v5_2_3.UpgradeGroup;
 import com.liferay.portal.upgrade.v5_2_3.UpgradeImageGallery;
 import com.liferay.portal.upgrade.v5_2_3.UpgradeMessageBoards;
@@ -69,6 +70,7 @@ public class UpgradeProcess_5_2_3 extends UpgradeProcess {
 		upgrade(UpgradeTags.class);
 		upgrade(UpgradeUser.class);
 		upgrade(UpgradeWiki.class);
+		upgrade(UpgradeDuplicates.class);
 		upgrade(DropIndexes.class);
 	}
 

@@ -28,8 +28,12 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InstancePool;
+import com.liferay.portal.kernel.util.PropertiesUtil;
+import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.service.persistence.BatchSessionUtil;
 import com.liferay.portal.tools.sql.DBUtil;
+import com.liferay.portal.tools.sql.Index;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.util.PropsKeys;
@@ -37,10 +41,19 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.verify.VerifyException;
 import com.liferay.portal.verify.VerifyProcess;
 
+import java.io.BufferedReader;
+import java.io.StringReader;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
+
+import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Properties;
+import java.util.Set;
 
 /**
  * <a href="StartupHelper.java.html"><b><i>View Source</i></b></a>
@@ -69,15 +82,17 @@ public class StartupHelper {
 	}
 
 	public void updateIndexes() {
+		Set<String> existingIndexNames = new HashSet<String>();
+
 		try {
-			dropIndexes();
+			dropIndexes(existingIndexNames);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
 		}
 
 		try {
-			addIndexes();
+			addIndexes(existingIndexNames);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -174,28 +189,168 @@ public class StartupHelper {
 		return _verified;
 	}
 
-	protected void addIndexes() throws Exception {
+	protected void addIndexes(Set<String> existingIndexNames) throws Exception {
 		if (_log.isInfoEnabled()) {
 			_log.info("Adding indexes");
 		}
 
-		DBUtil.getInstance().runSQLTemplate("indexes.sql", false);
+		DBUtil dbUtil = DBUtil.getInstance();
+
+		BufferedReader bufferedReader = new BufferedReader(new StringReader(
+			readIndexesSQL()));
+
+		String sql = null;
+
+		while ((sql = bufferedReader.readLine()) != null) {
+			if (Validator.isNull(sql)) {
+				continue;
+			}
+
+			int y = sql.indexOf(" on ");
+			int x = sql.lastIndexOf(" ", y - 1);
+
+			String indexName = sql.substring(x + 1, y);
+
+			if (existingIndexNames.contains(indexName)) {
+				continue;
+			}
+
+			if (_dropIndexes) {
+				if (_log.isInfoEnabled()) {
+					_log.info(sql);
+				}
+			}
+
+			try {
+				dbUtil.runSQL(sql);
+			}
+			catch (Exception e) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(e.getMessage());
+				}
+			}
+		}
 	}
 
-	protected void dropIndexes() throws Exception {
+	protected void dropIndexes(Set<String> existingIndexNames)
+		throws Exception {
+
 		if (!_dropIndexes) {
 			return;
 		}
 
+		List<Index> indexes = null;
+
 		DBUtil dbUtil = DBUtil.getInstance();
 
-		if (dbUtil.getType().equals(DBUtil.TYPE_MYSQL)) {
-			dropMySQLIndexes();
+		String type = dbUtil.getType();
+
+		if (type.equals(DBUtil.TYPE_DB2)) {
+			indexes = getDB2Indexes();
+		}
+		else if (type.equals(DBUtil.TYPE_MYSQL)) {
+			indexes = getMySQLIndexes();
+		}
+		else if (type.equals(DBUtil.TYPE_ORACLE)) {
+			indexes = getOracleIndexes();
+		}
+		else if (type.equals(DBUtil.TYPE_POSTGRESQL)) {
+			indexes = getPostgreSQLIndexes();
+		}
+		else if (type.equals(DBUtil.TYPE_SQLSERVER)) {
+			indexes = getSQLServerIndexes();
+		}
+		else if (type.equals(DBUtil.TYPE_SYBASE)) {
+			indexes = getSybaseIndexes();
+		}
+
+		if ((indexes == null) || indexes.isEmpty()) {
+			return;
+		}
+
+		if (_log.isInfoEnabled()) {
+			_log.info("Dropping stale indexes");
+		}
+
+		Thread currentThread = Thread.currentThread();
+
+		ClassLoader classLoader = currentThread.getContextClassLoader();
+
+		String indexPropertiesString = StringUtil.read(
+			classLoader,
+			"com/liferay/portal/tools/sql/dependencies/indexes.properties");
+
+		Properties indexProperties = PropertiesUtil.load(indexPropertiesString);
+
+		Enumeration<String> indexPropertiesEnu =
+			(Enumeration<String>)indexProperties.propertyNames();
+
+		while (indexPropertiesEnu.hasMoreElements()) {
+			String key = indexPropertiesEnu.nextElement();
+
+			String value = indexProperties.getProperty(key);
+
+			indexProperties.setProperty(key.toLowerCase(), value);
+		}
+
+		String indexesSQLString = readIndexesSQL().toLowerCase();
+
+		String portalTablesSQLString = StringUtil.read(
+			classLoader,
+			"com/liferay/portal/tools/sql/dependencies/portal-tables.sql");
+
+		portalTablesSQLString = portalTablesSQLString.toLowerCase();
+
+		for (Index index : indexes) {
+			String indexName = index.getIndexName();
+			String indexNameLowerCase = indexName.toLowerCase();
+			String tableName = index.getTableName();
+			String tableNameLowerCase = tableName.toLowerCase();
+			boolean unique = index.isUnique();
+
+			existingIndexNames.add(indexName);
+
+			if (indexProperties.containsKey(indexNameLowerCase)) {
+				if (unique &&
+					indexesSQLString.contains(
+						"create unique index " + indexNameLowerCase + " ")) {
+
+					continue;
+				}
+
+				if (!unique &&
+					indexesSQLString.contains(
+						"create index " + indexNameLowerCase + " ")) {
+
+					continue;
+				}
+			}
+			else {
+				if (!portalTablesSQLString.contains(
+						"create table " + tableNameLowerCase + " (")) {
+
+					continue;
+				}
+			}
+
+			existingIndexNames.remove(indexName);
+
+			String sql = "drop index " + indexName + " on " + tableName;
+
+			if (_log.isInfoEnabled()) {
+				_log.info(sql);
+			}
+
+			dbUtil.runSQL(sql);
 		}
 	}
 
-	protected void dropMySQLIndexes() throws Exception {
-		_log.info("Dropping MySQL indexes");
+	protected List<Index> getDB2Indexes() throws Exception {
+		return null;
+	}
+
+	protected List<Index> getMySQLIndexes() throws Exception {
+		List<Index> indexes = new ArrayList<Index>();
 
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -204,37 +359,58 @@ public class StartupHelper {
 		try {
 			con = DataAccess.getConnection();
 
-			ps = con.prepareStatement(
-				"select distinct(index_name), table_name from " +
-					"information_schema.statistics where index_schema = " +
-						"database() and (index_name like 'LIFERAY_%' or " +
-							"index_name like 'IX_%')");
+			StringBuilder sb = new StringBuilder();
+
+			sb.append("select distinct(index_name), table_name, non_unique ");
+			sb.append("from information_schema.statistics where ");
+			sb.append("index_schema = database() and (index_name like ");
+			sb.append("'LIFERAY_%' or index_name like 'IX_%')");
+
+			String sql = sb.toString();
+
+			ps = con.prepareStatement(sql);
 
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
 				String indexName = rs.getString("index_name");
 				String tableName = rs.getString("table_name");
+				boolean unique = !rs.getBoolean("non_unique");
 
-				ps = con.prepareStatement(
-					"drop index " + indexName + " on " + tableName);
-
-				try{
-					ps.executeUpdate();
-				}
-				catch (SQLException sqle) {
-					if (_log.isWarnEnabled()) {
-						_log.warn(sqle.getMessage());
-					}
-				}
-				finally {
-					ps.close();
-				}
+				indexes.add(new Index(indexName, tableName, unique));
 			}
 		}
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
 		}
+
+		return indexes;
+	}
+
+	protected List<Index> getOracleIndexes() throws Exception {
+		return null;
+	}
+
+	protected List<Index> getPostgreSQLIndexes() throws Exception {
+		return null;
+	}
+
+	protected List<Index> getSQLServerIndexes() throws Exception {
+		return null;
+	}
+
+	protected List<Index> getSybaseIndexes() throws Exception {
+		return null;
+	}
+
+	protected String readIndexesSQL() throws Exception {
+		Thread currentThread = Thread.currentThread();
+
+		ClassLoader classLoader = currentThread.getContextClassLoader();
+
+		return StringUtil.read(
+			classLoader,
+			"com/liferay/portal/tools/sql/dependencies/indexes.sql");
 	}
 
 	protected void verifyProcess(String className) throws VerifyException {
