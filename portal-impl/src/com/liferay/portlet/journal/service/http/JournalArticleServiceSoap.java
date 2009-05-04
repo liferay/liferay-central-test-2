@@ -255,12 +255,13 @@ public class JournalArticleServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.journal.model.JournalArticleSoap updateContent(
+	public static com.liferay.portlet.journal.model.JournalArticleSoap updateArticle(
 		long groupId, java.lang.String articleId, double version,
-		java.lang.String content) throws RemoteException {
+		boolean incrementVersion, java.lang.String content)
+		throws RemoteException {
 		try {
-			com.liferay.portlet.journal.model.JournalArticle returnValue = JournalArticleServiceUtil.updateContent(groupId,
-					articleId, version, content);
+			com.liferay.portlet.journal.model.JournalArticle returnValue = JournalArticleServiceUtil.updateArticle(groupId,
+					articleId, version, incrementVersion, content);
 
 			return com.liferay.portlet.journal.model.JournalArticleSoap.toSoapModel(returnValue);
 		}
@@ -273,11 +274,10 @@ public class JournalArticleServiceSoap {
 
 	public static com.liferay.portlet.journal.model.JournalArticleSoap updateContent(
 		long groupId, java.lang.String articleId, double version,
-		boolean incrementVersion, java.lang.String content)
-		throws RemoteException {
+		java.lang.String content) throws RemoteException {
 		try {
 			com.liferay.portlet.journal.model.JournalArticle returnValue = JournalArticleServiceUtil.updateContent(groupId,
-					articleId, version, incrementVersion, content);
+					articleId, version, content);
 
 			return com.liferay.portlet.journal.model.JournalArticleSoap.toSoapModel(returnValue);
 		}

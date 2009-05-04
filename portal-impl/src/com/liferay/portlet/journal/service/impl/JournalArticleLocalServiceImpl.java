@@ -37,11 +37,13 @@ import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.servlet.ImageServletTokenUtil;
+import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
+import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.MathUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
@@ -56,9 +58,9 @@ import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.kernel.xml.XPath;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Image;
+import com.liferay.portal.model.PortletPreferencesIds;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
-import com.liferay.portal.model.PortletPreferencesIds;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextUtil;
 import com.liferay.portal.servlet.filters.cache.CacheUtil;
@@ -97,13 +99,14 @@ import com.liferay.portlet.journal.util.Indexer;
 import com.liferay.portlet.journal.util.JournalUtil;
 import com.liferay.portlet.journal.util.comparator.ArticleVersionComparator;
 import com.liferay.portlet.journalcontent.util.JournalContentUtil;
-import com.liferay.portlet.tags.model.TagsEntryConstants;
 import com.liferay.portlet.tags.model.TagsEntry;
+import com.liferay.portlet.tags.model.TagsEntryConstants;
 import com.liferay.util.LocalizationUtil;
 
 import java.io.File;
 import java.io.IOException;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -1699,6 +1702,123 @@ public class JournalArticleLocalServiceImpl
 
 	public JournalArticle updateArticle(
 			long userId, long groupId, String articleId, double version,
+			boolean incrementVersion, String content)
+		throws PortalException, SystemException {
+
+		User user = userPersistence.findByPrimaryKey(userId);
+
+		JournalArticle article = journalArticlePersistence.findByG_A_V(
+			groupId, articleId, version);
+
+		Date displayDate = article.getDisplayDate();
+
+		int displayDateMonth = 0;
+		int displayDateDay = 0;
+		int displayDateYear = 0;
+		int displayDateHour = 0;
+		int displayDateMinute = 0;
+
+		if (displayDate != null) {
+			Calendar displayCal = CalendarFactoryUtil.getCalendar(
+				user.getTimeZone());
+
+			displayCal.setTime(displayDate);
+
+			displayDateMonth = displayCal.get(Calendar.MONTH);
+			displayDateDay = displayCal.get(Calendar.DATE);
+			displayDateYear = displayCal.get(Calendar.YEAR);
+			displayDateHour = displayCal.get(Calendar.HOUR);
+			displayDateMinute = displayCal.get(Calendar.MINUTE);
+
+			if (displayCal.get(Calendar.AM_PM) == Calendar.PM) {
+				displayDateHour += 12;
+			}
+		}
+
+		Date expirationDate = article.getExpirationDate();
+
+		int expirationDateMonth = 0;
+		int expirationDateDay = 0;
+		int expirationDateYear = 0;
+		int expirationDateHour = 0;
+		int expirationDateMinute = 0;
+		boolean neverExpire = true;
+
+		if (expirationDate != null) {
+			Calendar expirationCal = CalendarFactoryUtil.getCalendar(
+				user.getTimeZone());
+
+			expirationCal.setTime(expirationDate);
+
+			expirationDateMonth = expirationCal.get(Calendar.MONTH);
+			expirationDateDay = expirationCal.get(Calendar.DATE);
+			expirationDateYear = expirationCal.get(Calendar.YEAR);
+			expirationDateHour = expirationCal.get(Calendar.HOUR);
+			expirationDateMinute = expirationCal.get(Calendar.MINUTE);
+			neverExpire = false;
+
+			if (expirationCal.get(Calendar.AM_PM) == Calendar.PM) {
+				expirationDateHour += 12;
+			}
+		}
+
+		Date reviewDate = article.getReviewDate();
+
+		int reviewDateMonth = 0;
+		int reviewDateDay = 0;
+		int reviewDateYear = 0;
+		int reviewDateHour = 0;
+		int reviewDateMinute = 0;
+		boolean neverReview = true;
+
+		if (reviewDate != null) {
+			Calendar reviewCal = CalendarFactoryUtil.getCalendar(
+				user.getTimeZone());
+
+			reviewCal.setTime(reviewDate);
+
+			reviewDateMonth = reviewCal.get(Calendar.MONTH);
+			reviewDateDay = reviewCal.get(Calendar.DATE);
+			reviewDateYear = reviewCal.get(Calendar.YEAR);
+			reviewDateHour = reviewCal.get(Calendar.HOUR);
+			reviewDateMinute = reviewCal.get(Calendar.MINUTE);
+			neverReview = false;
+
+			if (reviewCal.get(Calendar.AM_PM) == Calendar.PM) {
+				reviewDateHour += 12;
+			}
+		}
+
+		PortletPreferencesIds portletPreferencesIds = new PortletPreferencesIds(
+			article.getCompanyId(), PortletKeys.PREFS_OWNER_ID_DEFAULT,
+			PortletKeys.PREFS_OWNER_TYPE_LAYOUT, PortletKeys.PREFS_PLID_SHARED,
+			PortletKeys.JOURNAL);
+
+		String[] tagsCategories = getTagsEntries(article);
+		String[] tagsEntries = getTagsCategories(article);
+
+		ServiceContext serviceContext = new ServiceContext();
+
+		serviceContext.setPortletPreferencesIds(portletPreferencesIds);
+		serviceContext.setTagsCategories(tagsCategories);
+		serviceContext.setTagsEntries(tagsEntries);
+
+		return updateArticle(
+			userId, groupId, articleId, version, incrementVersion,
+			article.getTitle(), article.getDescription(), content,
+			article.getType(), article.getStructureId(),
+			article.getTemplateId(), displayDateMonth, displayDateDay,
+			displayDateYear, displayDateHour, displayDateMinute,
+			expirationDateMonth, expirationDateDay, expirationDateYear,
+			expirationDateHour, expirationDateMinute, neverExpire,
+			reviewDateMonth, reviewDateDay, reviewDateYear, reviewDateHour,
+			reviewDateMinute, neverReview, article.getIndexable(),
+			article.isSmallImage(), article.getSmallImageURL(), null, null,
+			null, serviceContext);
+	}
+
+	public JournalArticle updateArticle(
+			long userId, long groupId, String articleId, double version,
 			boolean incrementVersion, String title, String description,
 			String content, String type, String structureId, String templateId,
 			int displayDateMonth, int displayDateDay, int displayDateYear,
@@ -1861,78 +1981,6 @@ public class JournalArticleLocalServiceImpl
 		reIndex(article);
 
 		return article;
-	}
-
-	public JournalArticle updateContent(
-			long groupId, String articleId, double version,
-			boolean incrementVersion, String content)
-		throws PortalException, SystemException {
-
-		JournalArticle oldArticle = journalArticlePersistence.findByG_A_V(
-			groupId, articleId, version);
-
-		Date displayDate = oldArticle.getDisplayDate();
-
-		Date expirationDate = oldArticle.getExpirationDate();
-		boolean neverExpire = true;
-		int expirationDateMonth = 0;
-		int expirationDateDay = 0;
-		int expirationDateYear = 0;
-		int expirationDateHour = 0;
-		int expirationDateMinute = 0;
-
-		if (expirationDate != null) {
-			neverExpire = false;
-			expirationDateMonth = expirationDate.getMonth();
-			expirationDateDay = expirationDate.getDay();
-			expirationDateYear = expirationDate.getYear();
-			expirationDateHour = expirationDate.getHours();
-			expirationDateMinute = expirationDate.getMinutes();
-		}
-
-		Date reviewDate = oldArticle.getReviewDate();
-		boolean neverReview = true;
-		int reviewDateMonth = 0;
-		int reviewDateDay = 0;
-		int reviewDateYear = 0;
-		int reviewDateHour = 0;
-		int reviewDateMinute = 0;
-
-		if (reviewDate != null) {
-			neverReview = false;
-			reviewDateMonth = reviewDate.getMonth();
-			reviewDateDay = reviewDate.getDay();
-			reviewDateYear = reviewDate.getYear();
-			reviewDateHour = reviewDate.getHours();
-			reviewDateMinute = reviewDate.getMinutes();
-		}
-
-		ServiceContext serviceContext = new ServiceContext();
-
-		serviceContext.setTagsEntries(getTagsEntries(oldArticle));
-		serviceContext.setTagsCategories(getTagsCategories(oldArticle));
-
-		PortletPreferencesIds portletPreferencesIds = new PortletPreferencesIds(
-			oldArticle.getCompanyId(), PortletKeys.PREFS_OWNER_ID_DEFAULT,
-			PortletKeys.PREFS_OWNER_TYPE_LAYOUT, PortletKeys.PREFS_PLID_SHARED,
-			PortletKeys.JOURNAL );
-
-		serviceContext.setPortletPreferencesIds(portletPreferencesIds);
-
-		return updateArticle(
-			oldArticle.getUserId(), groupId, articleId, version,
-			incrementVersion, oldArticle.getTitle(), oldArticle.getDescription(),
-			content, oldArticle.getType(), oldArticle.getStructureId(),
-			oldArticle.getTemplateId(),
-			displayDate.getMonth(), displayDate.getDay(), displayDate.getYear(),
-			displayDate.getHours(), displayDate.getMinutes(), expirationDateMonth,
-			expirationDateDay, expirationDateYear,
-			expirationDateHour, expirationDateMinute, neverExpire,
-			reviewDateMonth, reviewDateDay,
-			reviewDateYear, reviewDateHour, reviewDateMinute,
-			neverReview, oldArticle.getIndexable(), true,
-			oldArticle.getSmallImageURL(), null, null,
-			null, serviceContext);
 	}
 
 	public JournalArticle updateContent(
@@ -2400,33 +2448,20 @@ public class JournalArticleLocalServiceImpl
 	protected String[] getTagsCategories(JournalArticle article)
 		throws SystemException {
 
-		List<TagsEntry> entries = tagsEntryLocalService.getEntries(
+		List<TagsEntry> tagsEntries = tagsEntryLocalService.getEntries(
 			JournalArticle.class.getName(), article.getPrimaryKey(), false);
 
-		String[] tagsCategories = new String[entries.size()];
-
-		for (int i = 0; i < entries.size(); i++) {
-			tagsCategories [i] = entries.get(i).getName();
-		}
-
-		return tagsCategories;
+		return StringUtil.split(ListUtil.toString(tagsEntries, "name"));
 	}
 
 	protected String[] getTagsEntries(JournalArticle article)
 		throws SystemException {
 
-		List<TagsEntry> entries = tagsEntryLocalService.getEntries(
+		List<TagsEntry> tagsEntries = tagsEntryLocalService.getEntries(
 			JournalArticle.class.getName(), article.getPrimaryKey(), true);
 
-		String[] tagsEntries = new String[entries.size()];
-
-		for (int i = 0; i < entries.size(); i++) {
-			tagsEntries [i] = entries.get(i).getName();
-		}
-
-		return tagsEntries;
+		return StringUtil.split(ListUtil.toString(tagsEntries, "name"));
 	}
-
 
 	protected String getUniqueUrlTitle(
 			long id, long groupId, String articleId, String title)

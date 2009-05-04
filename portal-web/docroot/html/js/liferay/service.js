@@ -546,6 +546,7 @@ Liferay.Service.registerClass(
 		deleteArticle: true,
 		expireArticle: true,
 		removeArticleLocale: true,
+		updateArticle: true,
 		updateContent: true
 	}
 );

@@ -235,6 +235,19 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 
 	public JournalArticle updateArticle(
 			long groupId, String articleId, double version,
+			boolean incrementVersion, String content)
+		throws PortalException, SystemException {
+
+		JournalArticlePermission.check(
+			getPermissionChecker(), groupId, articleId, ActionKeys.UPDATE);
+
+		return journalArticleLocalService.updateArticle(
+			getUserId(), groupId, articleId, version, incrementVersion,
+			content);
+	}
+
+	public JournalArticle updateArticle(
+			long groupId, String articleId, double version,
 			boolean incrementVersion, String title, String description,
 			String content, String type, String structureId, String templateId,
 			int displayDateMonth, int displayDateDay, int displayDateYear,
@@ -272,18 +285,6 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 
 		return journalArticleLocalService.updateContent(
 			groupId, articleId, version, content);
-	}
-
-	public JournalArticle updateContent(
-			long groupId, String articleId, double version,
-			boolean incrementVersion, String content)
-		throws PortalException, SystemException {
-
-		JournalArticlePermission.check(
-			getPermissionChecker(), groupId, articleId, ActionKeys.UPDATE);
-
-		return journalArticleLocalService.updateContent(
-			groupId, articleId, version, incrementVersion, content);
 	}
 
 }

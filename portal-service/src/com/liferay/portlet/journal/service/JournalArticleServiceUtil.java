@@ -201,6 +201,16 @@ public class JournalArticleServiceUtil {
 
 	public static com.liferay.portlet.journal.model.JournalArticle updateArticle(
 		long groupId, java.lang.String articleId, double version,
+		boolean incrementVersion, java.lang.String content)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService()
+				   .updateArticle(groupId, articleId, version,
+			incrementVersion, content);
+	}
+
+	public static com.liferay.portlet.journal.model.JournalArticle updateArticle(
+		long groupId, java.lang.String articleId, double version,
 		boolean incrementVersion, java.lang.String title,
 		java.lang.String description, java.lang.String content,
 		java.lang.String type, java.lang.String structureId,
@@ -234,16 +244,6 @@ public class JournalArticleServiceUtil {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService().updateContent(groupId, articleId, version, content);
-	}
-
-	public static com.liferay.portlet.journal.model.JournalArticle updateContent(
-		long groupId, java.lang.String articleId, double version,
-		boolean incrementVersion, java.lang.String content)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return getService()
-				   .updateContent(groupId, articleId, version,
-			incrementVersion, content);
 	}
 
 	public static JournalArticleService getService() {
