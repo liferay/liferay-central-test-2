@@ -22,9 +22,6 @@
 
 package com.liferay.portal.kernel.bi.reporting;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * <a href="ReportFormat.java.html"><b><i>View Source</i></b></a>
  *
