@@ -606,6 +606,12 @@ public interface JournalArticleLocalService {
 
 	public com.liferay.portlet.journal.model.JournalArticle updateContent(
 		long groupId, java.lang.String articleId, double version,
+		boolean incrementVersion, java.lang.String content)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.journal.model.JournalArticle updateContent(
+		long groupId, java.lang.String articleId, double version,
 		java.lang.String content)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;

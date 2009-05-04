@@ -58,6 +58,7 @@ import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
+import com.liferay.portal.model.PortletPreferencesIds;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextUtil;
 import com.liferay.portal.servlet.filters.cache.CacheUtil;
@@ -97,6 +98,7 @@ import com.liferay.portlet.journal.util.JournalUtil;
 import com.liferay.portlet.journal.util.comparator.ArticleVersionComparator;
 import com.liferay.portlet.journalcontent.util.JournalContentUtil;
 import com.liferay.portlet.tags.model.TagsEntryConstants;
+import com.liferay.portlet.tags.model.TagsEntry;
 import com.liferay.util.LocalizationUtil;
 
 import java.io.File;
@@ -1862,6 +1864,78 @@ public class JournalArticleLocalServiceImpl
 	}
 
 	public JournalArticle updateContent(
+			long groupId, String articleId, double version,
+			boolean incrementVersion, String content)
+		throws PortalException, SystemException {
+
+		JournalArticle oldArticle = journalArticlePersistence.findByG_A_V(
+			groupId, articleId, version);
+
+		Date displayDate = oldArticle.getDisplayDate();
+
+		Date expirationDate = oldArticle.getExpirationDate();
+		boolean neverExpire = true;
+		int expirationDateMonth = 0;
+		int expirationDateDay = 0;
+		int expirationDateYear = 0;
+		int expirationDateHour = 0;
+		int expirationDateMinute = 0;
+
+		if (expirationDate != null) {
+			neverExpire = false;
+			expirationDateMonth = expirationDate.getMonth();
+			expirationDateDay = expirationDate.getDay();
+			expirationDateYear = expirationDate.getYear();
+			expirationDateHour = expirationDate.getHours();
+			expirationDateMinute = expirationDate.getMinutes();
+		}
+
+		Date reviewDate = oldArticle.getReviewDate();
+		boolean neverReview = true;
+		int reviewDateMonth = 0;
+		int reviewDateDay = 0;
+		int reviewDateYear = 0;
+		int reviewDateHour = 0;
+		int reviewDateMinute = 0;
+
+		if (reviewDate != null) {
+			neverReview = false;
+			reviewDateMonth = reviewDate.getMonth();
+			reviewDateDay = reviewDate.getDay();
+			reviewDateYear = reviewDate.getYear();
+			reviewDateHour = reviewDate.getHours();
+			reviewDateMinute = reviewDate.getMinutes();
+		}
+
+		ServiceContext serviceContext = new ServiceContext();
+
+		serviceContext.setTagsEntries(getTagsEntries(oldArticle));
+		serviceContext.setTagsCategories(getTagsCategories(oldArticle));
+
+		PortletPreferencesIds portletPreferencesIds = new PortletPreferencesIds(
+			oldArticle.getCompanyId(), PortletKeys.PREFS_OWNER_ID_DEFAULT,
+			PortletKeys.PREFS_OWNER_TYPE_LAYOUT, PortletKeys.PREFS_PLID_SHARED,
+			PortletKeys.JOURNAL );
+
+		serviceContext.setPortletPreferencesIds(portletPreferencesIds);
+
+		return updateArticle(
+			oldArticle.getUserId(), groupId, articleId, version,
+			incrementVersion, oldArticle.getTitle(), oldArticle.getDescription(),
+			content, oldArticle.getType(), oldArticle.getStructureId(),
+			oldArticle.getTemplateId(),
+			displayDate.getMonth(), displayDate.getDay(), displayDate.getYear(),
+			displayDate.getHours(), displayDate.getMinutes(), expirationDateMonth,
+			expirationDateDay, expirationDateYear,
+			expirationDateHour, expirationDateMinute, neverExpire,
+			reviewDateMonth, reviewDateDay,
+			reviewDateYear, reviewDateHour, reviewDateMinute,
+			neverReview, oldArticle.getIndexable(), true,
+			oldArticle.getSmallImageURL(), null, null,
+			null, serviceContext);
+	}
+
+	public JournalArticle updateContent(
 			long groupId, String articleId, double version, String content)
 		throws PortalException, SystemException {
 
@@ -2322,6 +2396,37 @@ public class JournalArticleLocalServiceImpl
 
 		return dateInterval;
 	}
+
+	protected String[] getTagsCategories(JournalArticle article)
+		throws SystemException {
+
+		List<TagsEntry> entries = tagsEntryLocalService.getEntries(
+			JournalArticle.class.getName(), article.getPrimaryKey(), false);
+
+		String[] tagsCategories = new String[entries.size()];
+
+		for (int i = 0; i < entries.size(); i++) {
+			tagsCategories [i] = entries.get(i).getName();
+		}
+
+		return tagsCategories;
+	}
+
+	protected String[] getTagsEntries(JournalArticle article)
+		throws SystemException {
+
+		List<TagsEntry> entries = tagsEntryLocalService.getEntries(
+			JournalArticle.class.getName(), article.getPrimaryKey(), true);
+
+		String[] tagsEntries = new String[entries.size()];
+
+		for (int i = 0; i < entries.size(); i++) {
+			tagsEntries [i] = entries.get(i).getName();
+		}
+
+		return tagsEntries;
+	}
+
 
 	protected String getUniqueUrlTitle(
 			long id, long groupId, String articleId, String title)
