@@ -203,10 +203,10 @@ renderPortletURL.setParameter("resourcePrimKey", resourcePrimKey);
 
 		// Actions
 
-		List currentIndividualActions = null;
-		List currentGroupActions = null;
-		List currentGroupTemplateActions = null;
-		List currentCompanyActions = null;
+		List<String> currentIndividualActions = null;
+		List<String> currentGroupActions = null;
+		List<String> currentGroupTemplateActions = null;
+		List<String> currentCompanyActions = null;
 
 		if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
 			currentIndividualActions = ResourcePermissionLocalServiceUtil.getAvailableResourcePermissionActionIds(resource.getCompanyId(), resource.getName(), resource.getScope(), resource.getPrimKey(), role.getRoleId(), actions);
@@ -215,20 +215,20 @@ renderPortletURL.setParameter("resourcePrimKey", resourcePrimKey);
 			currentCompanyActions = ResourcePermissionLocalServiceUtil.getAvailableResourcePermissionActionIds(resource.getCompanyId(), resource.getName(), ResourceConstants.SCOPE_COMPANY, String.valueOf(resource.getCompanyId()), role.getRoleId(), actions);
 		}
 		else {
-			List permissions = PermissionLocalServiceUtil.getRolePermissions(role.getRoleId(), resource.getResourceId());
+			List<Permission> permissions = PermissionLocalServiceUtil.getRolePermissions(role.getRoleId(), resource.getResourceId());
 
 			currentIndividualActions = ResourceActionsUtil.getActions(permissions);
 
-			Resource resourceGroup = ResourceLocalServiceUtil.getResource(resource.getCompanyId(), resource.getName(), ResourceConstants.SCOPE_GROUP, String.valueOf(groupId));
+			Resource groupResource = ResourceLocalServiceUtil.getResource(resource.getCompanyId(), resource.getName(), ResourceConstants.SCOPE_GROUP, String.valueOf(groupId));
 
-			permissions = PermissionLocalServiceUtil.getRolePermissions(role.getRoleId(), resourceGroup.getResourceId());
+			permissions = PermissionLocalServiceUtil.getRolePermissions(role.getRoleId(), groupResource.getResourceId());
 
 			currentGroupActions = ResourceActionsUtil.getActions(permissions);
 
 			try {
-				Resource resourceGroupTemplate = ResourceLocalServiceUtil.getResource(resource.getCompanyId(), resource.getName(), ResourceConstants.SCOPE_GROUP_TEMPLATE, "0");
+				Resource groupTemplateResource = ResourceLocalServiceUtil.getResource(resource.getCompanyId(), resource.getName(), ResourceConstants.SCOPE_GROUP_TEMPLATE, "0");
 
-				permissions = PermissionLocalServiceUtil.getRolePermissions(role.getRoleId(), resourceGroupTemplate.getResourceId());
+				permissions = PermissionLocalServiceUtil.getRolePermissions(role.getRoleId(), groupTemplateResource.getResourceId());
 
 				currentGroupTemplateActions = ResourceActionsUtil.getActions(permissions);
 			}
@@ -236,21 +236,21 @@ renderPortletURL.setParameter("resourcePrimKey", resourcePrimKey);
 				currentGroupTemplateActions = new ArrayList();
 			}
 
-			Resource resourceCompany = ResourceLocalServiceUtil.getResource(resource.getCompanyId(), resource.getName(), ResourceConstants.SCOPE_COMPANY, String.valueOf(resource.getCompanyId()));
+			Resource companyResource = ResourceLocalServiceUtil.getResource(resource.getCompanyId(), resource.getName(), ResourceConstants.SCOPE_COMPANY, String.valueOf(resource.getCompanyId()));
 
-			permissions = PermissionLocalServiceUtil.getRolePermissions(role.getRoleId(), resourceCompany.getResourceId());
+			permissions = PermissionLocalServiceUtil.getRolePermissions(role.getRoleId(), companyResource.getResourceId());
 
 			currentCompanyActions = ResourceActionsUtil.getActions(permissions);
 		}
 
-		List currentActions = new ArrayList();
+		List<String> currentActions = new ArrayList<String>();
 
 		currentActions.addAll(currentIndividualActions);
 		currentActions.addAll(currentGroupActions);
 		currentActions.addAll(currentGroupTemplateActions);
 		currentActions.addAll(currentCompanyActions);
 
-		List guestUnsupportedActions = ResourceActionsUtil.getResourceGuestUnsupportedActions(portletResource, modelResource);
+		List<String> guestUnsupportedActions = ResourceActionsUtil.getResourceGuestUnsupportedActions(portletResource, modelResource);
 
 		for (String action : actions) {
 			boolean checked = false;
@@ -283,23 +283,31 @@ renderPortletURL.setParameter("resourcePrimKey", resourcePrimKey);
 				sb.append("checked ");
 			}
 
+			if (Validator.isNotNull(preselectedMsg)) {
+				sb.append("class=\"lfr-checkbox-preselected\" ");
+			}
+
 			if (disabled) {
 				sb.append("disabled ");
 			}
 
-			if (Validator.isNull(preselectedMsg)) {
-				sb.append("name=\"");
-				sb.append(role.getRoleId() + "_ACTION_" + action);
-				sb.append("\" ");
+			sb.append("name=\"");
+			sb.append(role.getRoleId());
+
+			if (Validator.isNotNull(preselectedMsg)) {
+				sb.append("_PRESELECTED_");
 			}
 			else {
-				sb.append("name=\"");
-				sb.append(role.getRoleId() + "_PRESELECTED_" + action);
-				sb.append("\" ");
+				sb.append("_ACTION_");
+			}
 
-				sb.append(" class=\"lfr-checkbox-preselected\" onclick=\"return false;\" onmouseover=\"Liferay.Portal.ToolTip.show(event, this, '");
-				sb.append(UnicodeLanguageUtil.format(pageContext, preselectedMsg, new Object[]{role.getTitle(locale), ResourceActionsUtil.getAction(pageContext, action), LanguageUtil.get(pageContext, ResourceActionsUtil.MODEL_RESOURCE_NAME_PREFIX + resource.getName()), group.getDescriptiveName()}));
-				sb.append("');  return false;\"");
+			sb.append(action);
+			sb.append("\" ");
+
+			if (Validator.isNotNull(preselectedMsg)) {
+				sb.append("onclick=\"return false;\" onmouseover=\"Liferay.Portal.ToolTip.show(event, this, '");
+				sb.append(UnicodeLanguageUtil.format(pageContext, preselectedMsg, new Object[] {role.getTitle(locale), ResourceActionsUtil.getAction(pageContext, action), LanguageUtil.get(pageContext, ResourceActionsUtil.MODEL_RESOURCE_NAME_PREFIX + resource.getName()), group.getDescriptiveName()}));
+				sb.append("'); return false;\" ");
 			}
 
 			sb.append("type=\"checkbox\" />");
