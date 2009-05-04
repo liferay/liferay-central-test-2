@@ -184,13 +184,22 @@ public class ReleaseLocalServiceImpl extends ReleaseLocalServiceBaseImpl {
 			try {
 				dbUtil.runSQL(
 					"alter table Release_ add testString VARCHAR(1024) null");
+			}
+			catch (Exception e) {
+				if (_log.isDebugEnabled()) {
+					_log.debug(e.getMessage());
+				}
+			}
 
+			try {
 				dbUtil.runSQL(
 					"update Release_ set testString = '" +
 						ReleaseImpl.TEST_STRING + "'");
 			}
 			catch (Exception e) {
-				throw new SystemException(e);
+				if (_log.isDebugEnabled()) {
+					_log.debug(e.getMessage());
+				}
 			}
 
 			count = testSupportsStringCaseSensitiveQuery(
