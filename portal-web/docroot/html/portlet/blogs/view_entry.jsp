@@ -53,11 +53,6 @@ TagsUtil.addLayoutTagsEntries(request, TagsEntryLocalServiceUtil.getEntries(Blog
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
 <input name="<portlet:namespace />entryId" type="hidden" value="<%= String.valueOf(entryId) %>" />
 
-<liferay-ui:tabs
-	names="entry"
-	backURL="<%= redirect %>"
-/>
-
 <%@ include file="/html/portlet/blogs/view_entry_content.jspf" %>
 
 </form>

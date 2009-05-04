@@ -42,6 +42,16 @@
 				<portlet:param name="urlTitle" value="<%= entry.getUrlTitle() %>" />
 			</portlet:renderURL>
 
+			<c:if test='<%= strutsAction.equals("/blogs/view_entry") %>'>
+				<portlet:renderURL var="blogsURL">
+					<portlet:param name="struts_action" value="/blogs/view" />
+				</portlet:renderURL>
+
+				<div class="entry-breadcrumb">
+					<a href="<%= blogsURL %>"><liferay-ui:message key="blogs" /></a> &raquo;
+				</div>
+			</c:if>
+
 			<div class="entry-title">
 				<c:choose>
 					<c:when test='<%= strutsAction.equals("/blogs/view_entry") %>'>
