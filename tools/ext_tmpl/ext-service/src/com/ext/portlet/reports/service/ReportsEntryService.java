@@ -30,7 +30,7 @@ import com.liferay.portal.kernel.annotation.Transactional;
  * @see com.ext.portlet.reports.service.ReportsEntryServiceUtil
  *
  */
-@Transactional(isolation = Isolation.READ_COMMITTED, rollbackFor =  {
+@Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
     PortalException.class, SystemException.class}
 )
 public interface ReportsEntryService {

@@ -127,12 +127,7 @@ public class ReportsEntryModelImpl extends BaseModelImpl<ReportsEntry> {
     }
 
     public void setEntryId(String entryId) {
-        if (((entryId == null) && (_entryId != null)) ||
-                ((entryId != null) && (_entryId == null)) ||
-                ((entryId != null) && (_entryId != null) &&
-                !entryId.equals(_entryId))) {
-            _entryId = entryId;
-        }
+        _entryId = entryId;
     }
 
     public String getCompanyId() {
@@ -140,12 +135,7 @@ public class ReportsEntryModelImpl extends BaseModelImpl<ReportsEntry> {
     }
 
     public void setCompanyId(String companyId) {
-        if (((companyId == null) && (_companyId != null)) ||
-                ((companyId != null) && (_companyId == null)) ||
-                ((companyId != null) && (_companyId != null) &&
-                !companyId.equals(_companyId))) {
-            _companyId = companyId;
-        }
+        _companyId = companyId;
     }
 
     public String getUserId() {
@@ -153,12 +143,7 @@ public class ReportsEntryModelImpl extends BaseModelImpl<ReportsEntry> {
     }
 
     public void setUserId(String userId) {
-        if (((userId == null) && (_userId != null)) ||
-                ((userId != null) && (_userId == null)) ||
-                ((userId != null) && (_userId != null) &&
-                !userId.equals(_userId))) {
-            _userId = userId;
-        }
+        _userId = userId;
     }
 
     public String getUserName() {
@@ -166,12 +151,7 @@ public class ReportsEntryModelImpl extends BaseModelImpl<ReportsEntry> {
     }
 
     public void setUserName(String userName) {
-        if (((userName == null) && (_userName != null)) ||
-                ((userName != null) && (_userName == null)) ||
-                ((userName != null) && (_userName != null) &&
-                !userName.equals(_userName))) {
-            _userName = userName;
-        }
+        _userName = userName;
     }
 
     public Date getCreateDate() {
@@ -179,12 +159,7 @@ public class ReportsEntryModelImpl extends BaseModelImpl<ReportsEntry> {
     }
 
     public void setCreateDate(Date createDate) {
-        if (((createDate == null) && (_createDate != null)) ||
-                ((createDate != null) && (_createDate == null)) ||
-                ((createDate != null) && (_createDate != null) &&
-                !createDate.equals(_createDate))) {
-            _createDate = createDate;
-        }
+        _createDate = createDate;
     }
 
     public Date getModifiedDate() {
@@ -192,12 +167,7 @@ public class ReportsEntryModelImpl extends BaseModelImpl<ReportsEntry> {
     }
 
     public void setModifiedDate(Date modifiedDate) {
-        if (((modifiedDate == null) && (_modifiedDate != null)) ||
-                ((modifiedDate != null) && (_modifiedDate == null)) ||
-                ((modifiedDate != null) && (_modifiedDate != null) &&
-                !modifiedDate.equals(_modifiedDate))) {
-            _modifiedDate = modifiedDate;
-        }
+        _modifiedDate = modifiedDate;
     }
 
     public String getName() {
@@ -205,11 +175,7 @@ public class ReportsEntryModelImpl extends BaseModelImpl<ReportsEntry> {
     }
 
     public void setName(String name) {
-        if (((name == null) && (_name != null)) ||
-                ((name != null) && (_name == null)) ||
-                ((name != null) && (_name != null) && !name.equals(_name))) {
-            _name = name;
-        }
+        _name = name;
     }
 
     public ReportsEntry toEscapedModel() {
@@ -288,5 +254,68 @@ public class ReportsEntryModelImpl extends BaseModelImpl<ReportsEntry> {
 
     public int hashCode() {
         return getPrimaryKey().hashCode();
+    }
+
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("{entryId=");
+        sb.append(getEntryId());
+        sb.append(", companyId=");
+        sb.append(getCompanyId());
+        sb.append(", userId=");
+        sb.append(getUserId());
+        sb.append(", userName=");
+        sb.append(getUserName());
+        sb.append(", createDate=");
+        sb.append(getCreateDate());
+        sb.append(", modifiedDate=");
+        sb.append(getModifiedDate());
+        sb.append(", name=");
+        sb.append(getName());
+        sb.append("}");
+
+        return sb.toString();
+    }
+
+    public String toXmlString() {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("<model><model-name>");
+        sb.append("com.ext.portlet.reports.model.ReportsEntry");
+        sb.append("</model-name>");
+
+        sb.append(
+            "<column><column-name>entryId</column-name><column-value><![CDATA[");
+        sb.append("getEntryId()");
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>companyId</column-name><column-value><![CDATA[");
+        sb.append("getCompanyId()");
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>userId</column-name><column-value><![CDATA[");
+        sb.append("getUserId()");
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>userName</column-name><column-value><![CDATA[");
+        sb.append("getUserName()");
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>createDate</column-name><column-value><![CDATA[");
+        sb.append("getCreateDate()");
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>modifiedDate</column-name><column-value><![CDATA[");
+        sb.append("getModifiedDate()");
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>name</column-name><column-value><![CDATA[");
+        sb.append("getName()");
+        sb.append("]]></column-value></column>");
+
+        sb.append("</model>");
+
+        return sb.toString();
     }
 }

@@ -6,9 +6,6 @@
 	<bean id="com.ext.portlet.reports.service.ReportsEntryService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService">
 		<property name="target" ref="com.ext.portlet.reports.service.ReportsEntryService.impl" />
 	</bean>
-	<bean id="com.ext.portlet.reports.service.ReportsEntryServiceFactory" class="com.ext.portlet.reports.service.ReportsEntryServiceFactory">
-		<property name="service" ref="com.ext.portlet.reports.service.ReportsEntryService.impl" />
-	</bean>
 	<bean id="com.ext.portlet.reports.service.ReportsEntryServiceUtil" class="com.ext.portlet.reports.service.ReportsEntryServiceUtil">
 		<property name="service" ref="com.ext.portlet.reports.service.ReportsEntryService.impl" />
 	</bean>

@@ -10,6 +10,8 @@ public interface ReportsEntryPersistence extends BasePersistence {
     public void cacheResult(
         java.util.List<com.ext.portlet.reports.model.ReportsEntry> reportsEntries);
 
+    public void clearCache();
+
     public com.ext.portlet.reports.model.ReportsEntry create(
         java.lang.String entryId);
 

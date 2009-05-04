@@ -7,6 +7,7 @@ import com.ext.portlet.reports.model.impl.ReportsEntryModelImpl;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
+import com.liferay.portal.kernel.cache.CacheRegistry;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
@@ -89,6 +90,13 @@ public class ReportsEntryPersistenceImpl extends BasePersistenceImpl
                 cacheResult(reportsEntry);
             }
         }
+    }
+
+    public void clearCache() {
+        CacheRegistry.clear(ReportsEntryImpl.class.getName());
+        EntityCacheUtil.clearCache(ReportsEntryImpl.class.getName());
+        FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
+        FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
     }
 
     public ReportsEntry create(String entryId) {

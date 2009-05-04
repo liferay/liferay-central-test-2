@@ -13,6 +13,10 @@ public class ReportsEntryUtil {
         getPersistence().cacheResult(reportsEntries);
     }
 
+    public static void clearCache() {
+        getPersistence().clearCache();
+    }
+
     public static com.ext.portlet.reports.model.ReportsEntry create(
         java.lang.String entryId) {
         return getPersistence().create(entryId);
