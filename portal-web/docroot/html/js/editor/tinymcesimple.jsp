@@ -41,7 +41,7 @@ String onChangeMethod = ParamUtil.getString(request, "onChangeMethod");
 		tinyMCE.init({
 			mode : "textareas",
 			theme : "advanced",
-			extended_valid_elements : "a[name|href|target|title|onclick],img[class|src|border=0|alt|title|hspace|vspace|width|height|align|onmouseover|onmouseout|name],hr[class|width|size|noshade],font[face|size|color|style],span[class|align|style]",
+			extended_valid_elements : "a[name|href|target|title|onclick],img[class|src|border=0|alt|title|hspace|vspace|width|height|align|onmouseover|onmouseout|name|usemap],hr[class|width|size|noshade],font[face|size|color|style],span[class|align|style]",
 			file_browser_callback : "fileBrowserCallback",
 			init_instance_callback : "initInstanceCallback",
 			onchange_callback : "onChangeCallback",
