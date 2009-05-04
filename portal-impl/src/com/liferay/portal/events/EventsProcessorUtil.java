@@ -29,26 +29,48 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * <a href="EventsProcessor.java.html"><b><i>View Source</i></b></a>
+ * <a href="EventsProcessorUtil.java.html"><b><i>View Source</i></b></a>
  *
- * @author Michael Young
+ * @author Brian Wing Shun Chan
  *
  */
-public interface EventsProcessor {
+public class EventsProcessorUtil {
 
-	public void process(
-			String key, String[] classes, String[] ids,
-			HttpServletRequest request, HttpServletResponse response,
-			HttpSession session)
-		throws ActionException;
+	public static void process(String key, String[] classes)
+		throws ActionException {
 
-	public void processEvent(
-			Object event, String[] ids, HttpServletRequest request,
-			HttpServletResponse response, HttpSession session)
-		throws ActionException;
+		_instance.process(key, classes, null, null, null, null);
+	}
 
-	public void registerEvent(String key, Object event);
+	public static void process(String key, String[] classes, String[] ids)
+		throws ActionException {
 
-	public void unregisterEvent(String key, Object event);
+		_instance.process(key, classes, ids, null, null, null);
+	}
+
+	public static void process(
+			String key, String[] classes, HttpSession session)
+		throws ActionException {
+
+		_instance.process(key, classes, null, null, null, session);
+	}
+
+	public static void process(
+			String key, String[] classes, HttpServletRequest request,
+			HttpServletResponse response)
+		throws ActionException {
+
+		_instance.process(key, classes, null, request, response, null);
+	}
+
+	public static void registerEvent(String key, Object event) {
+		_instance.registerEvent(key, event);
+	}
+
+	public static void unregisterEvent(String key, Object event) {
+		_instance.unregisterEvent(key, event);
+	}
+
+	private static EventsProcessor _instance = new EventsProcessorImpl();
 
 }

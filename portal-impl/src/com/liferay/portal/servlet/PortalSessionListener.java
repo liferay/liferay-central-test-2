@@ -22,7 +22,7 @@
 
 package com.liferay.portal.servlet;
 
-import com.liferay.portal.events.EventsProcessor;
+import com.liferay.portal.events.EventsProcessorUtil;
 import com.liferay.portal.kernel.events.ActionException;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
@@ -63,7 +63,7 @@ public class PortalSessionListener implements HttpSessionListener {
 		// Process session created events
 
 		try {
-			EventsProcessor.process(
+			EventsProcessorUtil.process(
 				PropsKeys.SERVLET_SESSION_CREATE_EVENTS,
 				PropsValues.SERVLET_SESSION_CREATE_EVENTS, session);
 		}
@@ -126,7 +126,7 @@ public class PortalSessionListener implements HttpSessionListener {
 		// Process session destroyed events
 
 		try {
-			EventsProcessor.process(
+			EventsProcessorUtil.process(
 				PropsKeys.SERVLET_SESSION_DESTROY_EVENTS,
 				PropsValues.SERVLET_SESSION_DESTROY_EVENTS, session);
 		}
