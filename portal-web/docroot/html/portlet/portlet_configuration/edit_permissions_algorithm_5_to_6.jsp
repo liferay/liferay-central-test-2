@@ -167,6 +167,21 @@ renderPortletURL.setParameter("resourcePrimKey", resourcePrimKey);
 
 	allRoles.remove(administrator);
 
+	if (group.isCommunity()) {
+		Role communityAdministrator = RoleLocalServiceUtil.getRole(company.getCompanyId(), RoleConstants.COMMUNITY_ADMINISTRATOR);
+		Role communityOwner = RoleLocalServiceUtil.getRole(company.getCompanyId(), RoleConstants.COMMUNITY_OWNER);
+
+		allRoles.remove(communityAdministrator);
+		allRoles.remove(communityOwner);
+	}
+	else if (group.isOrganization()) {
+		Role organizationAdministrator = RoleLocalServiceUtil.getRole(company.getCompanyId(), RoleConstants.ORGANIZATION_ADMINISTRATOR);
+		Role organizationOwner = RoleLocalServiceUtil.getRole(company.getCompanyId(), RoleConstants.ORGANIZATION_OWNER);
+
+		allRoles.remove(organizationAdministrator);
+		allRoles.remove(organizationOwner);
+	}
+
 	searchContainer.setTotal(allRoles.size());
 
 	List<Role> results = ListUtil.subList(allRoles, searchContainer.getStart(), searchContainer.getEnd());
@@ -188,35 +203,106 @@ renderPortletURL.setParameter("resourcePrimKey", resourcePrimKey);
 
 		// Actions
 
-		List currentActions = null;
+		List currentIndividualActions = null;
+		List currentGroupActions = null;
+		List currentGroupTemplateActions = null;
+		List currentCompanyActions = null;
 
 		if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
-			currentActions = ResourcePermissionLocalServiceUtil.getAvailableResourcePermissionActionIds(resource.getCompanyId(), resource.getName(), resource.getScope(), resource.getPrimKey(), role.getRoleId(), actions);
+			currentIndividualActions = ResourcePermissionLocalServiceUtil.getAvailableResourcePermissionActionIds(resource.getCompanyId(), resource.getName(), resource.getScope(), resource.getPrimKey(), role.getRoleId(), actions);
+			currentGroupActions = ResourcePermissionLocalServiceUtil.getAvailableResourcePermissionActionIds(resource.getCompanyId(), resource.getName(), ResourceConstants.SCOPE_GROUP, String.valueOf(groupId), role.getRoleId(), actions);
+			currentGroupTemplateActions = ResourcePermissionLocalServiceUtil.getAvailableResourcePermissionActionIds(resource.getCompanyId(), resource.getName(), ResourceConstants.SCOPE_GROUP_TEMPLATE, "0", role.getRoleId(), actions);
+			currentCompanyActions = ResourcePermissionLocalServiceUtil.getAvailableResourcePermissionActionIds(resource.getCompanyId(), resource.getName(), ResourceConstants.SCOPE_COMPANY, String.valueOf(resource.getCompanyId()), role.getRoleId(), actions);
 		}
 		else {
 			List permissions = PermissionLocalServiceUtil.getRolePermissions(role.getRoleId(), resource.getResourceId());
 
-			currentActions = ResourceActionsUtil.getActions(permissions);
+			currentIndividualActions = ResourceActionsUtil.getActions(permissions);
+
+			Resource resourceGroup = ResourceLocalServiceUtil.getResource(resource.getCompanyId(), resource.getName(), ResourceConstants.SCOPE_GROUP, String.valueOf(groupId));
+
+			permissions = PermissionLocalServiceUtil.getRolePermissions(role.getRoleId(), resourceGroup.getResourceId());
+
+			currentGroupActions = ResourceActionsUtil.getActions(permissions);
+
+			try {
+				Resource resourceGroupTemplate = ResourceLocalServiceUtil.getResource(resource.getCompanyId(), resource.getName(), ResourceConstants.SCOPE_GROUP_TEMPLATE, "0");
+
+				permissions = PermissionLocalServiceUtil.getRolePermissions(role.getRoleId(), resourceGroupTemplate.getResourceId());
+
+				currentGroupTemplateActions = ResourceActionsUtil.getActions(permissions);
+			}
+			catch (NoSuchResourceException nsre) {
+				currentGroupTemplateActions = new ArrayList();
+			}
+
+			Resource resourceCompany = ResourceLocalServiceUtil.getResource(resource.getCompanyId(), resource.getName(), ResourceConstants.SCOPE_COMPANY, String.valueOf(resource.getCompanyId()));
+
+			permissions = PermissionLocalServiceUtil.getRolePermissions(role.getRoleId(), resourceCompany.getResourceId());
+
+			currentCompanyActions = ResourceActionsUtil.getActions(permissions);
 		}
+
+		List currentActions = new ArrayList();
+
+		currentActions.addAll(currentIndividualActions);
+		currentActions.addAll(currentGroupActions);
+		currentActions.addAll(currentGroupTemplateActions);
+		currentActions.addAll(currentCompanyActions);
 
 		List guestUnsupportedActions = ResourceActionsUtil.getResourceGuestUnsupportedActions(portletResource, modelResource);
 
 		for (String action : actions) {
+			boolean checked = false;
+			boolean disabled = false;
+			String preselectedMsg = StringPool.BLANK;
+
+			if (currentIndividualActions.contains(action)) {
+				checked = true;
+			}
+
+			if (currentGroupActions.contains(action) || currentGroupTemplateActions.contains(action)) {
+				checked = true;
+				preselectedMsg = "x-is-allowed-to-do-action-x-in-all-items-of-type-x-in-x";
+			}
+
+			if (currentCompanyActions.contains(action)) {
+				checked = true;
+				preselectedMsg = "x-is-allowed-to-do-action-x-in-all-items-of-type-x-in-this-portal-instance";
+			}
+
+			if (role.getName().equals(RoleConstants.GUEST) && guestUnsupportedActions.contains(action)) {
+				disabled = true;
+			}
+
 			StringBuilder sb = new StringBuilder();
 
 			sb.append("<input ");
 
-			if (currentActions.contains(action)) {
+			if (checked) {
 				sb.append("checked ");
 			}
 
-			if (role.getName().equals(RoleConstants.GUEST) && guestUnsupportedActions.contains(action)) {
+			if (disabled) {
 				sb.append("disabled ");
 			}
 
-			sb.append("name=\"");
-			sb.append(role.getRoleId() + "_ACTION_" + action);
-			sb.append("\" type=\"checkbox\" />");
+			if (Validator.isNull(preselectedMsg)) {
+				sb.append("name=\"");
+				sb.append(role.getRoleId() + "_ACTION_" + action);
+				sb.append("\" ");
+			}
+			else {
+				sb.append("name=\"");
+				sb.append(role.getRoleId() + "_PRESELECTED_" + action);
+				sb.append("\" ");
+
+				sb.append(" class=\"lfr-checkbox-preselected\" onclick=\"return false;\" onmouseover=\"Liferay.Portal.ToolTip.show(event, this, '");
+				sb.append(UnicodeLanguageUtil.format(pageContext, preselectedMsg, new Object[]{role.getTitle(locale), ResourceActionsUtil.getAction(pageContext, action), LanguageUtil.get(pageContext, ResourceActionsUtil.MODEL_RESOURCE_NAME_PREFIX + resource.getName()), group.getDescriptiveName()}));
+				sb.append("');  return false;\"");
+			}
+
+			sb.append("type=\"checkbox\" />");
 
 			row.addText(sb.toString());
 		}

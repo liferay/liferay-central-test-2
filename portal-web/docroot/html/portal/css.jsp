@@ -1229,6 +1229,15 @@ li.toggle-expand a {
 	display: none;
 }
 
+.lfr-checkbox-preselected {
+	opacity: 0.5;
+}
+
+.ie .lfr-checkbox-preselected {
+	filter: alpha(opacity=50);
+	zoom: 1;
+}
+
 .lfr-configurator-visibility {
 	opacity: 0.5;
 }
