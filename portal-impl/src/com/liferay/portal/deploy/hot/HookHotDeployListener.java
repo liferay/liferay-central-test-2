@@ -117,16 +117,7 @@ public class HookHotDeployListener
 			return true;
 		}
 		else {
-			if (portalProperties.containsKey(key)) {
-				return true;
-			}
-			else {
-				if (_log.isWarnEnabled()) {
-					_log.warn("Property " + key + " is not overridable");
-				}
-
-				return false;
-			}
+			return portalProperties.containsKey(key);
 		}
 	}
 
