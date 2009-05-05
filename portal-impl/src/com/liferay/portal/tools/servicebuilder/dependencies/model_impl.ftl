@@ -481,7 +481,7 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> {
 
 		<#list entity.regularColList as column>
 			sb.append("<column><column-name>${column.name}</column-name><column-value><![CDATA[");
-			sb.append("get${column.methodName}()");
+			sb.append(get${column.methodName}());
 			sb.append("]]></column-value></column>");
 		</#list>
 
