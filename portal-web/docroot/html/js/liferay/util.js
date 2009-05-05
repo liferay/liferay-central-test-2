@@ -355,7 +355,7 @@ Liferay.Util = {
 		}
 	},
 
-	disableMatchedKeys: function(input, matcher, allowedKeyCodes) {
+	disableMatchedKeys: function(input, pattern, allowedKeyCodes) {
 		input = jQuery(input);
 
 		var blockChars = function(event) {
@@ -371,7 +371,8 @@ Liferay.Util = {
 			}
 
 			var typed = String.fromCharCode(charCode || keyCode);
-			var regex = new RegExp(matcher);
+			var regex = new RegExp(pattern);
+
 			return !(regex.test(typed));
 		};
 
