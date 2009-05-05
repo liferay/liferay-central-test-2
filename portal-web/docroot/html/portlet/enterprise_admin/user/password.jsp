@@ -79,7 +79,7 @@ boolean passwordReset = BeanParamUtil.getBoolean(selUser, request, "passwordRese
 	<div class="ctrl-holder">
 		<label for="<portlet:namespace />password1"><liferay-ui:message key="password" /></label>
 
-		<input name="<portlet:namespace />password1" size="30" type="password" value="" />
+		<input autocomplete="off" name="<portlet:namespace />password1" size="30" type="password" value="" />
 	</div>
 
 	<div class="ctrl-holder">
