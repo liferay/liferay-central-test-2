@@ -48,6 +48,12 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 	<liferay-util:param name="backURL" value="<%= backURL %>" />
 </liferay-util:include>
 
+<c:if test="<%= role != null %>">
+	<liferay-util:include page="/html/portlet/enterprise_admin/edit_role_tabs.jsp">
+		<liferay-util:param name="tabs1" value="edit" />
+	</liferay-util:include>
+</c:if>
+
 <script type="text/javascript">
 	function <portlet:namespace />saveRole() {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= role == null ? Constants.ADD : Constants.UPDATE %>";

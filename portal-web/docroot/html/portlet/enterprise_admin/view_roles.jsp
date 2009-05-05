@@ -77,13 +77,17 @@ headerNames.add(StringPool.BLANK);
 
 		ResultRow row = new ResultRow(role, role.getRoleId(), i);
 
-		PortletURL rowURL = renderResponse.createRenderURL();
+		PortletURL rowURL = null;
 
-		rowURL.setWindowState(WindowState.MAXIMIZED);
+		if (RolePermissionUtil.contains(permissionChecker, role.getRoleId(), ActionKeys.UPDATE)) {
+			rowURL = renderResponse.createRenderURL();
 
-		rowURL.setParameter("struts_action", "/enterprise_admin/edit_role");
-		rowURL.setParameter("redirect", searchContainer.getIteratorURL().toString());
-		rowURL.setParameter("roleId", String.valueOf(role.getRoleId()));
+			rowURL.setWindowState(WindowState.MAXIMIZED);
+
+			rowURL.setParameter("struts_action", "/enterprise_admin/edit_role");
+			rowURL.setParameter("redirect", searchContainer.getIteratorURL().toString());
+			rowURL.setParameter("roleId", String.valueOf(role.getRoleId()));
+		}
 
 		// Name
 

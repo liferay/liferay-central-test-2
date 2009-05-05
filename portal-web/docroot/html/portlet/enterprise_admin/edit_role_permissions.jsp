@@ -33,6 +33,7 @@ String tabs2 = ParamUtil.getString(request, "tabs2", "current");
 String cur = ParamUtil.getString(request, "cur");
 
 String redirect = ParamUtil.getString(request, "redirect");
+String backURL = ParamUtil.getString(request, "backURL", redirect);
 
 Role role = (Role)request.getAttribute(WebKeys.ROLE);
 
@@ -83,35 +84,6 @@ else if (role.getType() == RoleConstants.TYPE_REGULAR) {
 else if ((role.getType() == RoleConstants.TYPE_COMMUNITY) || (role.getType() == RoleConstants.TYPE_ORGANIZATION)) {
 	totalSteps = 2;
 }
-
-// Breadcrumbs
-
-PortletURL breadcrumbsURL = renderResponse.createRenderURL();
-
-breadcrumbsURL.setWindowState(WindowState.MAXIMIZED);
-
-breadcrumbsURL.setParameter("struts_action", "/enterprise_admin/view");
-breadcrumbsURL.setParameter("tabs1", tabs1);
-breadcrumbsURL.setParameter("roleId", String.valueOf(role.getRoleId()));
-
-String breadcrumbs = "<a href=\"" + breadcrumbsURL.toString() + "\">" + LanguageUtil.get(pageContext, "roles") + "</a> &raquo; ";
-
-breadcrumbsURL.setParameter("struts_action", "/enterprise_admin/edit_role_permissions");
-breadcrumbsURL.setParameter(Constants.CMD, Constants.VIEW);
-
-breadcrumbs += "<a href=\"" + breadcrumbsURL.toString() + "\">" + HtmlUtil.escape(role.getTitle(locale)) + "</a>";
-
-breadcrumbsURL.setParameter(Constants.CMD, Constants.EDIT);
-
-if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(portletResource)) {
-	breadcrumbsURL.setParameter("portletResource", portletResource);
-
-	breadcrumbs += " &raquo; <a href=\"" + breadcrumbsURL.toString() + "\">" + portletResourceLabel + "</a>";
-}
-
-request.setAttribute("edit_role_permissions.jsp-role", role);
-
-request.setAttribute("edit_role_permissions.jsp-portletResource", portletResource);
 %>
 
 <script type="text/javascript">
@@ -196,6 +168,15 @@ request.setAttribute("edit_role_permissions.jsp-portletResource", portletResourc
 	}
 </script>
 
+<liferay-util:include page="/html/portlet/enterprise_admin/role/toolbar.jsp">
+	<liferay-util:param name="toolbarItem" value='<%= (role == null) ? "add" : "view-all" %>' />
+	<liferay-util:param name="backURL" value="<%= backURL %>" />
+</liferay-util:include>
+
+<liferay-util:include page="/html/portlet/enterprise_admin/edit_role_tabs.jsp">
+	<liferay-util:param name="tabs1" value="define-permissions" />
+</liferay-util:include>
+
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_role_permissions" /></portlet:actionURL>" id="<portlet:namespace />fm" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
 <input name="<portlet:namespace />tabs2" type="hidden" value="<%= HtmlUtil.escape(tabs2) %>" />
@@ -210,10 +191,6 @@ request.setAttribute("edit_role_permissions.jsp-portletResource", portletResourc
 		<%
 		portletURL.setParameter(Constants.CMD, Constants.VIEW);
 		%>
-
-		<div class="breadcrumbs">
-			<%= breadcrumbs %>
-		</div>
 
 		<liferay-ui:success key="permissionDeleted" message="the-permission-was-deleted" />
 		<liferay-ui:success key="permissionsUpdated" message="the-role-permissions-were-updated" />
@@ -385,7 +362,7 @@ request.setAttribute("edit_role_permissions.jsp-portletResource", portletResourc
 			row.addText(actionLabel);
 
 			if (hasCompanyScope) {
-				row.addText(LanguageUtil.get(pageContext, "enterprise"));
+				row.addText(LanguageUtil.get(pageContext, "portal"));
 				row.addText(StringPool.BLANK);
 			}
 			else if (hasGroupTemplateScope) {
@@ -444,10 +421,6 @@ request.setAttribute("edit_role_permissions.jsp-portletResource", portletResourc
 		</div>
 
 		<br />
-
-		<div class="breadcrumbs">
-			<%= breadcrumbs %>
-		</div>
 
 		<c:if test="<%= (role.getType() == RoleConstants.TYPE_COMMUNITY) || (role.getType() == RoleConstants.TYPE_ORGANIZATION) %>">
 			<table class="lfr-table">
@@ -532,8 +505,6 @@ request.setAttribute("edit_role_permissions.jsp-portletResource", portletResourc
 			<%
 			}
 			%>
-
-			<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 		</c:if>
 
 		<br />
@@ -649,10 +620,6 @@ request.setAttribute("edit_role_permissions.jsp-portletResource", portletResourc
 		</div>
 
 		<br />
-
-		<div class="breadcrumbs">
-			<%= breadcrumbs %>
-		</div>
 
 		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 	</c:otherwise>

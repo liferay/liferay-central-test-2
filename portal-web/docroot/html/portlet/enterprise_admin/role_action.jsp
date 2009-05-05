@@ -84,7 +84,7 @@ if (name.equals(RoleConstants.GUEST) || name.equals(RoleConstants.OWNER) || name
 		<liferay-ui:icon image="assign" message="assign-members" url="<%= assignMembersURL %>" />
 	</c:if>
 
-	<c:if test="<%= !unassignableRole && (role.getType() == RoleConstants.TYPE_REGULAR) %>">
+	<c:if test="<%= !unassignableRole && (role.getType() == RoleConstants.TYPE_REGULAR) && RolePermissionUtil.contains(permissionChecker, role.getRoleId(), ActionKeys.VIEW) %>">
 		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="viewUsersURL">
 			<portlet:param name="struts_action" value="/enterprise_admin/view" />
 			<portlet:param name="tabs1" value="users" />

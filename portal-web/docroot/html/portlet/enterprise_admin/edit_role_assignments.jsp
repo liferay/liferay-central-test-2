@@ -72,6 +72,15 @@ request.setAttribute("edit_role_assignments.jsp-portletURL", portletURL);
 	}
 </script>
 
+<liferay-util:include page="/html/portlet/enterprise_admin/role/toolbar.jsp">
+	<liferay-util:param name="toolbarItem" value='<%= (role == null) ? "add" : "view-all" %>' />
+	<liferay-util:param name="backURL" value="<%= redirect %>" />
+</liferay-util:include>
+
+<liferay-util:include page="/html/portlet/enterprise_admin/edit_role_tabs.jsp">
+	<liferay-util:param name="tabs1" value="assign-members" />
+</liferay-util:include>
+
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_role_assignments" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
 <input name="<portlet:namespace />tabs1" type="hidden" value="<%= HtmlUtil.escape(tabs1) %>" />
@@ -80,15 +89,10 @@ request.setAttribute("edit_role_assignments.jsp-portletURL", portletURL);
 <input name="<portlet:namespace />assignmentsRedirect" type="hidden" value="" />
 <input name="<portlet:namespace />roleId" type="hidden" value="<%= role.getRoleId() %>" />
 
-<liferay-ui:message key="edit-assignments-for-role" />: <%= HtmlUtil.escape(role.getTitle(locale)) %>
-
-<br /><br />
-
 <liferay-ui:tabs
 	names="users,communities,organizations,user-groups"
 	param="tabs2"
 	url="<%= portletURL.toString() %>"
-	backURL="<%= redirect %>"
 />
 
 <c:choose>

@@ -113,7 +113,7 @@ for (int i = 0; i < curActions.size(); i++) {
 
 					<select <%= disabled ? "disabled" : "" %> name="<portlet:namespace />scope<%= target %>" onchange="<portlet:namespace/>toggleGroupDiv('<%= target %>');">
 						<option value=""></option>
-							<option <%= hasCompanyScope ? "selected" : "" %> value="<%= ResourceConstants.SCOPE_COMPANY %>"><liferay-ui:message key="enterprise" /></option>
+							<option <%= hasCompanyScope ? "selected" : "" %> value="<%= ResourceConstants.SCOPE_COMPANY %>"><liferay-ui:message key="portal" /></option>
 
 							<c:if test="<%= !portletResource.equals(PortletKeys.ENTERPRISE_ADMIN) && !portletResource.equals(PortletKeys.PORTAL) %>">
 								<option <%= (hasGroupScope) ? "selected" : "" %> value="<%= ResourceConstants.SCOPE_GROUP %>"><liferay-ui:message key="communities" /></option>
