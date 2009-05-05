@@ -35,6 +35,8 @@ int altShipping = cart.getAltShipping();
 String altShippingName = shoppingPrefs.getAlternativeShippingName(altShipping);
 
 ShoppingOrder order = (ShoppingOrder)request.getAttribute(WebKeys.SHOPPING_ORDER);
+
+order = order.toEscapedModel();
 %>
 
 <script type="text/javascript">

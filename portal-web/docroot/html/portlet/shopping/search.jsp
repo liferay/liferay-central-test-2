@@ -99,6 +99,8 @@ List resultRows = searchContainer.getResultRows();
 for (int i = 0; i < results.size(); i++) {
 	ShoppingItem item = (ShoppingItem)results.get(i);
 
+	item = item.toEscapedModel();
+
 	ResultRow row = new ResultRow(item, item.getItemId(), i);
 
 	PortletURL rowURL = renderResponse.createRenderURL();

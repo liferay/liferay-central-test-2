@@ -175,6 +175,9 @@ for (int i = 0; itr.hasNext(); i++) {
 	Integer count = (Integer)entry.getValue();
 
 	ShoppingItem item = cartItem.getItem();
+
+	item = item.toEscapedModel();
+
 	String[] fieldsArray = cartItem.getFieldsArray();
 
 	ShoppingItemField[] itemFields = (ShoppingItemField[])ShoppingItemFieldLocalServiceUtil.getItemFields(item.getItemId()).toArray(new ShoppingItemField[0]);
