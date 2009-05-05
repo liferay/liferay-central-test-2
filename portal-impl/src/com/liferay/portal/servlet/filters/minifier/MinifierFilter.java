@@ -22,10 +22,12 @@
 
 package com.liferay.portal.servlet.filters.minifier;
 
+import com.liferay.portal.kernel.configuration.Filter;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.BrowserSniffer;
 import com.liferay.portal.kernel.servlet.ServletContextUtil;
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -36,6 +38,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.servlet.filters.BasePortalFilter;
 import com.liferay.portal.util.MinifierUtil;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.util.SystemProperties;
 import com.liferay.util.servlet.ServletResponseUtil;
 import com.liferay.util.servlet.filters.CacheResponse;
@@ -153,15 +156,17 @@ public class MinifierFilter extends BasePortalFilter {
 		String minifierType = ParamUtil.getString(request, "minifierType");
 		String minifierBundleId = ParamUtil.getString(
 			request, "minifierBundleId");
-		String minifierBundleDir = ParamUtil.getString(
-			request, "minifierBundleDir");
 
 		if (Validator.isNull(minifierType) ||
 			Validator.isNull(minifierBundleId) ||
-			Validator.isNull(minifierBundleDir)) {
+			!ArrayUtil.contains(
+				PropsValues.JAVASCRIPT_BUNDLE_IDS, minifierBundleId)) {
 
 			return null;
 		}
+
+		String minifierBundleDir = PropsUtil.get(
+			"javascript.bundle.dir", new Filter(minifierBundleId));
 
 		String bundleDirRealPath = ServletContextUtil.getRealPath(
 			_servletContext, minifierBundleDir);

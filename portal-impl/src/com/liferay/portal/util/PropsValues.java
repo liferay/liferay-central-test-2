@@ -553,6 +553,9 @@ public class PropsValues {
 	public static final String[] JAVASCRIPT_BAREBONE_FILES =
 		PropsUtil.getArray(PropsKeys.JAVASCRIPT_BAREBONE_FILES);
 
+	public static final String[] JAVASCRIPT_BUNDLE_IDS = PropsUtil.getArray(
+		PropsKeys.JAVASCRIPT_BUNDLE_IDS);
+
 	public static final String[] JAVASCRIPT_EVERYTHING_FILES =
 		PropsUtil.getArray(PropsKeys.JAVASCRIPT_EVERYTHING_FILES);
 
