@@ -48,7 +48,7 @@ PasswordPolicy passwordPolicy = (PasswordPolicy)row.getObject();
 	<c:if test="<%= PasswordPolicyPermissionUtil.contains(permissionChecker, passwordPolicy.getPasswordPolicyId(), ActionKeys.PERMISSIONS) %>">
 		<liferay-security:permissionsURL
 			modelResource="<%= PasswordPolicy.class.getName() %>"
-			modelResourceDescription="<%= passwordPolicy.getName() %>"
+			modelResourceDescription="<%= HtmlUtil.escape(passwordPolicy.getName()) %>"
 			resourcePrimKey="<%= String.valueOf(passwordPolicy.getPasswordPolicyId()) %>"
 			var="permissionsURL"
 		/>
