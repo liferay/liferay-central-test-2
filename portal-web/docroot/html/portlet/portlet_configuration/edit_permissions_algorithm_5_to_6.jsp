@@ -219,11 +219,16 @@ renderPortletURL.setParameter("resourcePrimKey", resourcePrimKey);
 
 			currentIndividualActions = ResourceActionsUtil.getActions(permissions);
 
-			Resource groupResource = ResourceLocalServiceUtil.getResource(resource.getCompanyId(), resource.getName(), ResourceConstants.SCOPE_GROUP, String.valueOf(groupId));
+			try {
+				Resource groupResource = ResourceLocalServiceUtil.getResource(resource.getCompanyId(), resource.getName(), ResourceConstants.SCOPE_GROUP, String.valueOf(groupId));
 
-			permissions = PermissionLocalServiceUtil.getRolePermissions(role.getRoleId(), groupResource.getResourceId());
+				permissions = PermissionLocalServiceUtil.getRolePermissions(role.getRoleId(), groupResource.getResourceId());
 
-			currentGroupActions = ResourceActionsUtil.getActions(permissions);
+				currentGroupActions = ResourceActionsUtil.getActions(permissions);
+			}
+			catch (NoSuchResourceException nsre) {
+				currentGroupActions = new ArrayList();
+			}
 
 			try {
 				Resource groupTemplateResource = ResourceLocalServiceUtil.getResource(resource.getCompanyId(), resource.getName(), ResourceConstants.SCOPE_GROUP_TEMPLATE, "0");
