@@ -24,7 +24,7 @@ package com.liferay.portal.servlet;
 
 import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.deploy.hot.PluginPackageHotDeployListener;
-import com.liferay.portal.events.EventsProcessor;
+import com.liferay.portal.events.EventsProcessorUtil;
 import com.liferay.portal.events.StartupAction;
 import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
@@ -483,7 +483,7 @@ public class MainServlet extends ActionServlet {
 		}
 
 		try {
-			EventsProcessor.process(
+			EventsProcessorUtil.process(
 				PropsKeys.GLOBAL_STARTUP_EVENTS,
 				PropsValues.GLOBAL_STARTUP_EVENTS);
 		}
@@ -737,7 +737,7 @@ public class MainServlet extends ActionServlet {
 
 				// Pre login events
 
-				EventsProcessor.process(
+				EventsProcessorUtil.process(
 					PropsKeys.LOGIN_EVENTS_PRE, PropsValues.LOGIN_EVENTS_PRE,
 					request, response);
 
@@ -760,7 +760,7 @@ public class MainServlet extends ActionServlet {
 
 				// Post login events
 
-				EventsProcessor.process(
+				EventsProcessorUtil.process(
 					PropsKeys.LOGIN_EVENTS_POST, PropsValues.LOGIN_EVENTS_POST,
 					request, response);
 			}
@@ -772,7 +772,7 @@ public class MainServlet extends ActionServlet {
 		// Pre service events
 
 		try {
-			EventsProcessor.process(
+			EventsProcessorUtil.process(
 				PropsKeys.SERVLET_SERVICE_EVENTS_PRE,
 				PropsValues.SERVLET_SERVICE_EVENTS_PRE, request, response);
 		}
@@ -824,7 +824,7 @@ public class MainServlet extends ActionServlet {
 			// Post service events
 
 			try {
-				EventsProcessor.process(
+				EventsProcessorUtil.process(
 					PropsKeys.SERVLET_SERVICE_EVENTS_POST,
 					PropsValues.SERVLET_SERVICE_EVENTS_POST, request, response);
 			}
@@ -928,7 +928,7 @@ public class MainServlet extends ActionServlet {
 		}
 
 		try {
-			EventsProcessor.process(
+			EventsProcessorUtil.process(
 				PropsKeys.GLOBAL_SHUTDOWN_EVENTS,
 				PropsValues.GLOBAL_SHUTDOWN_EVENTS);
 		}
@@ -968,7 +968,7 @@ public class MainServlet extends ActionServlet {
 		}
 
 		try {
-			EventsProcessor.process(
+			EventsProcessorUtil.process(
 				PropsKeys.APPLICATION_SHUTDOWN_EVENTS,
 				PropsValues.APPLICATION_SHUTDOWN_EVENTS,
 				new String[] {String.valueOf(companyId)});

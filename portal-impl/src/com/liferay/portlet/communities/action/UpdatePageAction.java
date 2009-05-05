@@ -22,7 +22,7 @@
 
 package com.liferay.portlet.communities.action;
 
-import com.liferay.portal.events.EventsProcessor;
+import com.liferay.portal.events.EventsProcessorUtil;
 import com.liferay.portal.kernel.configuration.Filter;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
@@ -166,7 +166,7 @@ public class UpdatePageAction extends JSONAction {
 				PropsKeys.LAYOUT_CONFIGURATION_ACTION_UPDATE,
 				new Filter(layout.getType())));
 
-		EventsProcessor.process(
+		EventsProcessorUtil.process(
 			PropsKeys.LAYOUT_CONFIGURATION_ACTION_UPDATE, eventClasses, request,
 			response);
 
