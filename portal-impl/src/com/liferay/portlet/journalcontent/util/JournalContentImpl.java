@@ -177,15 +177,15 @@ public class JournalContentImpl implements JournalContent {
 		JournalArticleDisplay articleDisplay =
 			(JournalArticleDisplay)MultiVMPoolUtil.get(cache, key);
 
-		boolean isLifecycleRender = isLifecycleRender(themeDisplay, xmlRequest);
+		boolean lifecycleRender = isLifecycleRender(themeDisplay, xmlRequest);
 
-		if ((articleDisplay == null) || (!isLifecycleRender)) {
+		if ((articleDisplay == null) || !lifecycleRender) {
 			articleDisplay = getArticleDisplay(
 				groupId, articleId, templateId, viewMode, languageId, page,
 				xmlRequest, themeDisplay);
 
 			if ((articleDisplay != null) && (articleDisplay.isCacheable()) &&
-				(isLifecycleRender)) {
+				(lifecycleRender)) {
 
 				MultiVMPoolUtil.put(cache, key, articleDisplay);
 			}
@@ -276,7 +276,7 @@ public class JournalContentImpl implements JournalContent {
 	protected boolean isLifecycleRender(
 		ThemeDisplay themeDisplay, String xmlRequest) {
 
-		if ((themeDisplay != null)) {
+		if (themeDisplay != null) {
 			return themeDisplay.isLifecycleRender();
 		}
 		else if (Validator.isNotNull(xmlRequest)) {
@@ -284,11 +284,13 @@ public class JournalContentImpl implements JournalContent {
 
 			return matcher.find();
 		}
-
-		return false;
+		else {
+			return false;
+		}
 	}
 
 	protected static PortalCache cache = MultiVMPoolUtil.getCache(CACHE_NAME);
+
 	protected static Pattern lifecycleRenderPhasePatern = Pattern.compile(
 		"<lifecycle>\\s*RENDER_PHASE\\s*</lifecycle>");
 
