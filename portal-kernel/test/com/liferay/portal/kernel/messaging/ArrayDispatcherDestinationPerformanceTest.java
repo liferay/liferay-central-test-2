@@ -7,6 +7,7 @@ package com.liferay.portal.kernel.messaging;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -110,6 +111,7 @@ public class ArrayDispatcherDestinationPerformanceTest {
     }
 }
 
+
 /**
  * A test implemention for ArrayDispatcherDestination. The dispatch method will
  * take constant time(from constructor parameter).
@@ -120,12 +122,12 @@ class TestArrayDispatcherDestination extends ArrayDispatcherDestination {
     public TestArrayDispatcherDestination() {
         super("TestArrayDispatcherDestination");
     }
-
-    protected void dispatch(MessageListener[] listeners, Message message) {
+    
+    protected void dispatch(Set<MessageListener> listenerSet, Message message) {
         //Do nothing
     }
+    
 }
-
 class FakeMessageListener implements MessageListener {
 
     public void receive(Message message) {

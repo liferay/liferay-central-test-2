@@ -22,6 +22,7 @@
 
 package com.liferay.portal.kernel.messaging;
 
+import java.util.Set;
 import java.util.concurrent.ThreadPoolExecutor;
 
 /**
@@ -42,14 +43,14 @@ public class SerialDestination extends ArrayDispatcherDestination {
 	}
 
 	protected void dispatch(
-		final MessageListener[] listeners, final Message message) {
+		final Set<MessageListener> listenerSet, final Message message) {
 
 		ThreadPoolExecutor threadPoolExecutor = getThreadPoolExecutor();
 
 		Runnable runnable = new Runnable() {
 
 			public void run() {
-				for (MessageListener listener : listeners) {
+				for (MessageListener listener : listenerSet) {
 					listener.receive(message);
 				}
 			}

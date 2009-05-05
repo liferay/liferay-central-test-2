@@ -79,16 +79,14 @@ public abstract class BaseDestination implements Destination {
 		return statistics;
 	}
 
-	public int getListenerCount() {
-		return _listenerCount;
-	}
+	public abstract int getListenerCount();
 
 	public String getName() {
 		return _name;
 	}
 
 	public boolean isRegistered() {
-		if (_listenerCount > 0) {
+		if (getListenerCount() > 0) {
 			return true;
 		}
 		else {
@@ -141,10 +139,6 @@ public abstract class BaseDestination implements Destination {
 		return _workersMaxSize;
 	}
 
-	protected void setListenerCount(int listenerCount) {
-		_listenerCount = listenerCount;
-	}
-
 	private static final int _WORKERS_CORE_SIZE = 2;
 
 	private static final int _WORKERS_MAX_SIZE = 5;
@@ -155,6 +149,5 @@ public abstract class BaseDestination implements Destination {
 	private ThreadPoolExecutor _threadPoolExecutor;
 	private int _workersCoreSize;
 	private int _workersMaxSize;
-	private int _listenerCount;
 
 }

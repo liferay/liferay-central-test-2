@@ -24,12 +24,9 @@ package com.liferay.portal.kernel.messaging;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.ListUtil;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
+import java.util.concurrent.ConcurrentSkipListSet;
 import java.util.concurrent.ThreadPoolExecutor;
 
 /**
@@ -51,22 +48,14 @@ public abstract class ArrayDispatcherDestination extends BaseDestination {
 		super(name, workersCoreSize, workersMaxSize);
 	}
 
-	public synchronized void register(MessageListener listener) {
+	public void register(MessageListener listener) {
 		listener = new InvokerMessageListener(listener);
 
-		Set<MessageListener> listeners = new HashSet<MessageListener>(
-			Arrays.asList(_listeners));
-
-		listeners.add(listener);
-
-		_listeners = listeners.toArray(
-			new MessageListener[listeners.size()]);
-
-		setListenerCount(listeners.size());
+		_listenerSet.add(listener);
 	}
 
 	public void send(Message message) {
-		if (_listeners.length == 0) {
+		if (_listenerSet.isEmpty()) {
 			if (_log.isDebugEnabled()) {
 				_log.debug("No listeners for destination " + getName());
 			}
@@ -82,32 +71,26 @@ public abstract class ArrayDispatcherDestination extends BaseDestination {
 					"receive more messages");
 		}
 
-		dispatch(_listeners, message);
+		dispatch(_listenerSet, message);
 	}
 
-	public synchronized boolean unregister(MessageListener listener) {
+	public boolean unregister(MessageListener listener) {
 		listener = new InvokerMessageListener(listener);
 
-		List<MessageListener> listeners = ListUtil.fromArray(_listeners);
-
-		boolean value = listeners.remove(listener);
-
-		if (value) {
-			_listeners = listeners.toArray(
-				new MessageListener[listeners.size()]);
-
-			setListenerCount(listeners.size());
-		}
-
-		return value;
+		return _listenerSet.remove(listener);
 	}
 
+    public int getListenerCount() {
+        return _listenerSet.size();
+    }
+
 	protected abstract void dispatch(
-		MessageListener[] listeners, Message message);
+		Set<MessageListener> listenerSet, Message message);
 
 	private static Log _log =
 		LogFactoryUtil.getLog(ArrayDispatcherDestination.class);
 
-	private MessageListener[] _listeners = new MessageListener[0];
+	private Set<MessageListener> _listenerSet =
+        new ConcurrentSkipListSet<MessageListener>();
 
 }
