@@ -168,16 +168,14 @@ else if ((role.getType() == RoleConstants.TYPE_COMMUNITY) || (role.getType() == 
 	}
 </script>
 
-<c:if test="<%= !portletName.equals(PortletKeys.ADMIN_SERVER) %>">
-	<liferay-util:include page="/html/portlet/enterprise_admin/role/toolbar.jsp">
-		<liferay-util:param name="toolbarItem" value='<%= (role == null) ? "add" : "view-all" %>' />
-		<liferay-util:param name="backURL" value="<%= backURL %>" />
-	</liferay-util:include>
+<liferay-util:include page="/html/portlet/enterprise_admin/role/toolbar.jsp">
+	<liferay-util:param name="toolbarItem" value='<%= (role == null) ? "add" : "view-all" %>' />
+	<liferay-util:param name="backURL" value="<%= backURL %>" />
+</liferay-util:include>
 
-	<liferay-util:include page="/html/portlet/enterprise_admin/edit_role_tabs.jsp">
-		<liferay-util:param name="tabs1" value="define-permissions" />
-	</liferay-util:include>
-</c:if>
+<liferay-util:include page="/html/portlet/enterprise_admin/edit_role_tabs.jsp">
+	<liferay-util:param name="tabs1" value="define-permissions" />
+</liferay-util:include>
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_role_permissions" /></portlet:actionURL>" id="<portlet:namespace />fm" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
@@ -626,11 +624,5 @@ else if ((role.getType() == RoleConstants.TYPE_COMMUNITY) || (role.getType() == 
 		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 	</c:otherwise>
 </c:choose>
-
-<c:if test="<%= portletName.equals(PortletKeys.ADMIN_SERVER) %>">
-	<br />
-
-	<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(backURL) %>';" />
-</c:if>
 
 </form>

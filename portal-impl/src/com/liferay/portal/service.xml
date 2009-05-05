@@ -1351,9 +1351,6 @@
 		<finder name="CompanyId" return-type="Collection">
 			<finder-column name="companyId" />
 		</finder>
-		<finder name="Subtype" return-type="Subtype">
-			<finder-column name="subtype" />
-		</finder>
 		<finder name="C_N" return-type="Role" unique="true">
 			<finder-column name="companyId" />
 			<finder-column name="name" />
@@ -1413,11 +1410,11 @@
 		<column name="shardId" type="long" primary="true" />
 
 		<!-- Other fields -->
-
+		
 		<column name="classNameId" type="long" />
 		<column name="classPK" type="long" />
 		<column name="name" type="String" />
-
+		
 		<!-- Finder methods -->
 
 		<finder name="Name" return-type="Shard">

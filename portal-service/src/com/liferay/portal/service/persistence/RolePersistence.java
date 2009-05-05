@@ -108,17 +108,6 @@ public interface RolePersistence extends BasePersistence {
 		throws com.liferay.portal.NoSuchRoleException,
 			com.liferay.portal.SystemException;
 
-	public com.liferay.portal.model.Role findBySubtype(java.lang.String subtype)
-		throws com.liferay.portal.NoSuchRoleException,
-			com.liferay.portal.SystemException;
-
-	public com.liferay.portal.model.Role fetchBySubtype(
-		java.lang.String subtype) throws com.liferay.portal.SystemException;
-
-	public com.liferay.portal.model.Role fetchBySubtype(
-		java.lang.String subtype, boolean retrieveFromCache)
-		throws com.liferay.portal.SystemException;
-
 	public com.liferay.portal.model.Role findByC_N(long companyId,
 		java.lang.String name)
 		throws com.liferay.portal.NoSuchRoleException,
@@ -195,10 +184,6 @@ public interface RolePersistence extends BasePersistence {
 	public void removeByCompanyId(long companyId)
 		throws com.liferay.portal.SystemException;
 
-	public void removeBySubtype(java.lang.String subtype)
-		throws com.liferay.portal.NoSuchRoleException,
-			com.liferay.portal.SystemException;
-
 	public void removeByC_N(long companyId, java.lang.String name)
 		throws com.liferay.portal.NoSuchRoleException,
 			com.liferay.portal.SystemException;
@@ -213,9 +198,6 @@ public interface RolePersistence extends BasePersistence {
 	public void removeAll() throws com.liferay.portal.SystemException;
 
 	public int countByCompanyId(long companyId)
-		throws com.liferay.portal.SystemException;
-
-	public int countBySubtype(java.lang.String subtype)
 		throws com.liferay.portal.SystemException;
 
 	public int countByC_N(long companyId, java.lang.String name)

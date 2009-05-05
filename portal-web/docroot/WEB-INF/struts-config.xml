@@ -141,33 +141,7 @@
 		<!-- Admin Server -->
 
 		<action path="/admin_server/edit_server" type="com.liferay.portlet.admin.action.EditServerAction">
-			<forward name="portlet.admin.edit_permissions" path="portlet.admin.edit_permissions" />
 			<forward name="portlet.admin.error" path="portlet.admin.error" />
-		</action>
-
-		<action path="/admin_server/edit_community" type="com.liferay.portlet.communities.action.EditGroupAction">
-			<forward name="portlet.communities.edit_community" path="portlet.communities.edit_community" />
-			<forward name="portlet.communities.error" path="portlet.communities.error" />
-		</action>
-
-		<action path="/admin_server/edit_organization" type="com.liferay.portlet.enterpriseadmin.action.EditOrganizationAction">
-			<forward name="portlet.enterprise_admin.edit_organization" path="portlet.directory.view_organization" />
-			<forward name="portlet.enterprise_admin.error" path="portlet.directory.error" />
-		</action>
-
-		<action path="/admin_server/edit_permissions" type="com.liferay.portal.convert.action.EditPermissionsAction">
-			<forward name="portlet.admin.edit_permissions" path="portlet.admin.edit_permissions" />
-			<forward name="portlet.admin.error" path="portlet.admin.error" />
-		</action>
-
-		<action path="/admin_server/edit_role_permissions" type="com.liferay.portlet.enterpriseadmin.action.EditRolePermissionsAction">
-			<forward name="portlet.enterprise_admin.edit_role_permissions" path="portlet.enterprise_admin.edit_role_permissions" />
-			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
-		</action>
-
-		<action path="/admin_server/edit_user" type="com.liferay.portlet.enterpriseadmin.action.EditUserAction">
-			<forward name="portlet.enterprise_admin.edit_user" path="portlet.directory.view_user" />
-			<forward name="portlet.enterprise_admin.error" path="portlet.directory.error" />
 		</action>
 
 		<action path="/admin_server/view" forward="portlet.admin.view" />

@@ -140,14 +140,6 @@ public interface ResourcePermissionLocalService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public void mergePermissions(long fromRoleId, long toRoleId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
-	public void reassignPermissions(long resourcePermissionId, long toRoleId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
 	public void removeResourcePermission(long companyId, java.lang.String name,
 		int scope, java.lang.String primKey, long roleId,
 		java.lang.String actionId)

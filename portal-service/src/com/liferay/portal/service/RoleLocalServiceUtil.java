@@ -177,11 +177,6 @@ public class RoleLocalServiceUtil {
 		return getService().getRoles(type, subtype);
 	}
 
-	public static int getRolesCount(java.lang.String subtype)
-		throws com.liferay.portal.SystemException {
-		return getService().getRolesCount(subtype);
-	}
-
 	public static java.util.List<com.liferay.portal.model.Role> getUserGroupRoles(
 		long userId, long groupId) throws com.liferay.portal.SystemException {
 		return getService().getUserGroupRoles(userId, groupId);
