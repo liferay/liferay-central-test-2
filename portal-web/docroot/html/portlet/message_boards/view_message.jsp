@@ -291,7 +291,7 @@ String threadView = messageDisplay.getThreadView();
 
 		messages.addAll(treeWalker.getMessages());
 
-		messages = ListUtil.sort(messages, new MessageCreateDateComparator(true, false));
+		messages = ListUtil.sort(messages, new MessageCreateDateComparator(true));
 	}
 
 	TagsUtil.addLayoutTagsEntries(request, TagsEntryLocalServiceUtil.getEntries(MBMessage.class.getName(), thread.getRootMessageId(), true));

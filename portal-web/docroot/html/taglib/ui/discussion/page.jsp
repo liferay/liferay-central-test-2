@@ -223,7 +223,7 @@ DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
 			SearchContainer searchContainer = null;
 
 			if (messages != null) {
-				messages = ListUtil.sort(messages, new MessageCreateDateComparator(true, false));
+				messages = ListUtil.sort(messages, new MessageCreateDateComparator(true));
 
 				messages = ListUtil.copy(messages);
 
