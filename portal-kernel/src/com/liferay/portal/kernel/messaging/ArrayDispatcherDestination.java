@@ -25,8 +25,8 @@ package com.liferay.portal.kernel.messaging;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
+import com.liferay.portal.kernel.util.ConcurrentHashSet;
 import java.util.Set;
-import java.util.concurrent.ConcurrentSkipListSet;
 import java.util.concurrent.ThreadPoolExecutor;
 
 /**
@@ -91,6 +91,6 @@ public abstract class ArrayDispatcherDestination extends BaseDestination {
 		LogFactoryUtil.getLog(ArrayDispatcherDestination.class);
 
 	private Set<MessageListener> _listenerSet =
-        new ConcurrentSkipListSet<MessageListener>();
+        new ConcurrentHashSet<MessageListener>();
 
 }
