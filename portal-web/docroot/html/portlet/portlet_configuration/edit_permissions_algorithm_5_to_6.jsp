@@ -210,19 +210,20 @@ definePermissionsURL.setParameter(Constants.CMD, Constants.VIEW);
 		role = role.toEscapedModel();
 
 		String name = role.getName();
-		String href = null;
+
+		String definePermissionsHREF = null;
 
 		if (!name.equals(RoleConstants.ADMINISTRATOR) && !name.equals(RoleConstants.COMMUNITY_ADMINISTRATOR) && !name.equals(RoleConstants.COMMUNITY_OWNER) && !name.equals(RoleConstants.ORGANIZATION_ADMINISTRATOR) && !name.equals(RoleConstants.ORGANIZATION_OWNER) && !name.equals(RoleConstants.OWNER) && RolePermissionUtil.contains(permissionChecker, role.getRoleId(), ActionKeys.DEFINE_PERMISSIONS)) {
 			definePermissionsURL.setParameter("roleId", String.valueOf(role.getRoleId()));
 
-			href = definePermissionsURL.toString();
+			definePermissionsHREF = definePermissionsURL.toString();
 		}
 
 		ResultRow row = new ResultRow(role, role.getRoleId(), i);
 
 		// Name
 
-		row.addText(role.getTitle(locale), href);
+		row.addText(role.getTitle(locale), definePermissionsHREF);
 
 		// Actions
 
@@ -299,7 +300,7 @@ definePermissionsURL.setParameter(Constants.CMD, Constants.VIEW);
 				preselectedMsg = "x-is-allowed-to-do-action-x-in-all-items-of-type-x-in-this-portal-instance";
 			}
 
-			if (role.getName().equals(RoleConstants.GUEST) && guestUnsupportedActions.contains(action)) {
+			if (name.equals(RoleConstants.GUEST) && guestUnsupportedActions.contains(action)) {
 				disabled = true;
 			}
 
