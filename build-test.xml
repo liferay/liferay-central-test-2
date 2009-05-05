@@ -634,6 +634,20 @@ work.dir=${basedir.unix}/tools/tck/work</echo>
 			<mapper type="flatten" />
 		</unzip>
 
+		<if>
+			<not>
+				<equals arg1="${jdbc.drivers.optional.dir}" arg2="$${jdbc.drivers.optional.dir}" />
+			</not>
+			<then>
+				<copy todir="${tstamp.value}">
+					<fileset
+						dir="${jdbc.drivers.optional.dir}"
+						includes="*.jar"
+					/>
+				</copy>
+			</then>
+		</if>
+
 		<exec executable="${pscp.executable}">
 			<arg line="-pw ${vm.password} lib\development\mysql.jar ${tstamp.value}\*.jar ${vm.username}@${vm.host}:/bea/user_projects/domains/base_domain/lib" />
 		</exec>
@@ -746,6 +760,20 @@ work.dir=${basedir.unix}/tools/tck/work</echo>
 		<unzip src="dist/liferay-portal-dependencies-${lp.version}.zip" dest="${tstamp.value}">
 			<mapper type="flatten" />
 		</unzip>
+
+		<if>
+			<not>
+				<equals arg1="${jdbc.drivers.optional.dir}" arg2="$${jdbc.drivers.optional.dir}" />
+			</not>
+			<then>
+				<copy todir="${tstamp.value}">
+					<fileset
+						dir="${jdbc.drivers.optional.dir}"
+						includes="*.jar"
+					/>
+				</copy>
+			</then>
+		</if>
 
 		<exec executable="${pscp.executable}">
 			<arg line="-pw ${vm.password} lib\development\mysql.jar ${tstamp.value}\*.jar ${vm.username}@${vm.host}:/Progra~1/IBM/WebSphere/AppServer/lib/ext" />
