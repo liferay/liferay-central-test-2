@@ -3138,6 +3138,7 @@ selecting-a-new-structure-will-change-the-available-templates-and-available-feed
 selecting-a-template-will-change-the-structure,-available-input-fields,-and-available-templates=テンプレートを変更すると構成、利用可能な入力フィールドとテンプレートが変更されますか？処理を続けますか？
 selecting-a-template-will-change-the-structure,-available-templates,-and-available-feed-item-content=テンプレートを変更すると構成、利用可能な入力フィールドとテンプレートが変更されます。処理を続けますか？
 selection-list=セレクトボックス
+selection-method=選択方法
 selection-of-decimal-values=少数値を選択
 selection-of-integer-values=整数値を選択
 selection-of-text-values=文字列値を選択

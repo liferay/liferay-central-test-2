@@ -3138,6 +3138,7 @@ selecting-a-new-structure-will-change-the-available-templates-and-available-feed
 selecting-a-template-will-change-the-structure,-available-input-fields,-and-available-templates=La selezione di un modello cambierà la struttura, i campi disponibili dell'input e i modelli disponibili. Vuoi continuare?
 selecting-a-template-will-change-the-structure,-available-templates,-and-available-feed-item-content=La selezione del modello cambierà la struttura, i modelli disponibili ed il contenuto dei feed RSS. Vuoi continuare?
 selection-list=Elenco delle Selezioni
+selection-method=Metodo di selezione
 selection-of-decimal-values=Selezione dei valori decimali
 selection-of-integer-values=Selezione dei valori di numero intero
 selection-of-text-values=Selezione dei valori del testo

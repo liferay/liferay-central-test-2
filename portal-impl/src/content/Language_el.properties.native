@@ -3138,6 +3138,7 @@ selecting-a-new-structure-will-change-the-available-templates-and-available-feed
 selecting-a-template-will-change-the-structure,-available-input-fields,-and-available-templates=Η επιλογή ενός προτύπου θα αλλάξει τη δομή, τους διαθέσιμους τομείς εισαγωγής, και τα διαθέσιμα πρότυπα; Θέλετε να προχωρήσετε;
 selecting-a-template-will-change-the-structure,-available-templates,-and-available-feed-item-content=Η επιλογή ενός προτύπου θα αλλάξει τη δομή, τα διαθέσιμα πρότυπα, και το διαθέσιμο περιεχόμενο στοιχείων τροφών. Θέλετε να προχωρήσετε;
 selection-list=Κατάλογος επιλογής
+selection-method=Μέθοδος επιλογής
 selection-of-decimal-values=Επιλογή των δεκαδικών τιμών
 selection-of-integer-values=Επιλογή των τιμών ακέραιων αριθμών
 selection-of-text-values=Επιλογή των τιμών κειμένων

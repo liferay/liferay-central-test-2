@@ -3138,6 +3138,7 @@ selecting-a-new-structure-will-change-the-available-templates-and-available-feed
 selecting-a-template-will-change-the-structure,-available-input-fields,-and-available-templates=Het selecteren van een sjabloon zal de structuur, de beschikbare velden en de beschikbare sjablonen veranderen? wilt u doorgaan?
 selecting-a-template-will-change-the-structure,-available-templates,-and-available-feed-item-content=Het selecteren van een sjabloon zal de structuur, de beschikbare sjablonen, en de beschikbare velden veranderen. wilt u doorgaan?
 selection-list=Selectielijst
+selection-method=De Methode van de selectie
 selection-of-decimal-values=Selectie van decimale waarden
 selection-of-integer-values=Selectie van integere waarden
 selection-of-text-values=Selectie van de tekstuele waarden

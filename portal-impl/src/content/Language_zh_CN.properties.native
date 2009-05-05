@@ -3138,6 +3138,7 @@ selecting-a-new-structure-will-change-the-available-templates-and-available-feed
 selecting-a-template-will-change-the-structure,-available-input-fields,-and-available-templates=选择模板将更改结构、可用的输入字段和可用的模板？ 要继续吗？
 selecting-a-template-will-change-the-structure,-available-templates,-and-available-feed-item-content=选择模板将更改结构、可用的模板和可用的 Feed 项目内容。要继续吗？
 selection-list=选择列表
+selection-method=选择方法
 selection-of-decimal-values=十进制值选择
 selection-of-integer-values=整型值选择
 selection-of-text-values=文本值选择

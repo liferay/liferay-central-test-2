@@ -3138,6 +3138,7 @@ selecting-a-new-structure-will-change-the-available-templates-and-available-feed
 selecting-a-template-will-change-the-structure,-available-input-fields,-and-available-templates=Durch das Auswählen einer neuen Vorlage werden die Struktur und verfügbare Eingabefelder geändert. Wollen Sie fortfahren?
 selecting-a-template-will-change-the-structure,-available-templates,-and-available-feed-item-content=Durch das Auswählen einer Vorlage ändert sich die Struktur, die verfügbare Vorlage und der verfügbare Feed. Wollen Sie fortfahren?
 selection-list=Auswahlliste
+selection-method=Vorwähler-Methode
 selection-of-decimal-values=Auswahl von dezimalen Werte
 selection-of-integer-values=Auswahl von Zahl-Werte (Integer)
 selection-of-text-values=Auswahl von Text-Werte
