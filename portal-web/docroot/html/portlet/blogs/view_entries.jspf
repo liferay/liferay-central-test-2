@@ -37,7 +37,7 @@ showSearch = showSearch && (results.size() > 0);
 		</c:if>
 
 		<c:if test="<%= showAddEntryButton %>">
-			<input type="button" value="<liferay-ui:message key="add-blog-entry" />" onClick="location.href = '<portlet:renderURL><portlet:param name="struts_action" value="/blogs/edit_entry" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';" />
+			<input id="<portlet:namespace />addEntryButton" type="button" value="<liferay-ui:message key="add-blog-entry" />" onClick="location.href = '<portlet:renderURL><portlet:param name="struts_action" value="/blogs/edit_entry" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';" />
 		</c:if>
 
 		<c:if test="<%= showPermissionsButton %>">
