@@ -3,18 +3,14 @@
 	var Event = Expanse.Event;
 	var DDM = Expanse.DragDrop;
 
-	var _counter = 0;
-
-	var num = function(value) {
-		return parseInt(value, 10) || 0;
-	};
+	var counter = 0;
 
 	Expanse.Sortable = new Expanse.Class(
 		{
 			initialize: function(options) {
 				var instance = this;
 
-				_counter += 1;
+				counter += 1;
 
 				instance.options = options;
 
@@ -22,7 +18,7 @@
 				instance._items = options.items;
 				instance._placeHolder = options.placeHolder;
 				instance._handle = jQuery(options.handle);
-				instance._group = options.group || 'sortGroup' + _counter;
+				instance._group = options.group || 'sortGroup' + counter;
 
 				if (typeof options.items == 'string') {
 					instance._items = instance._containers.find(options.items);
@@ -54,7 +50,7 @@
 				options.constraint = constraint;
 
 				var config = {
-					dragElId: 'sortProxy' + _counter
+					dragElId: 'sortProxy' + counter
 				};
 
 				if (jQuery.isFunction(options.helper)) {
@@ -145,11 +141,11 @@
 
 				instance._super.apply(instance, arguments);
 
-				var _defaults = {
+				var defaults = {
 					forcePlaceholderSize: true
 				};
 
-				instance.options = Expanse.extend({}, _defaults, options);
+				instance.options = Expanse.extend({}, defaults, options);
 
 				instance.goingUp = false;
 				var el = instance.getEl();
@@ -166,27 +162,31 @@
 					TEXTAREA: 'TEXTAREA'
 				};
 
-				var placeholderOpt = instance.options.placeholder;
+				var placeholderOption = instance.options.placeholder;
 
-				if (placeholderOpt) {
-					instance.placeholder = jQuery(placeholderOpt);
+				if (placeholderOption) {
+					instance.placeholder = jQuery(placeholderOption);
 
-					instance.on('b4StartDragEvent', function(e) {
-						if (instance.options.placeholder) {
-							var srcEl = jQuery(instance.getEl());
+					instance.on('b4StartDragEvent',
+						function(event) {
+							if (instance.options.placeholder) {
+								var srcEl = jQuery(instance.getEl());
 
-							instance.originalElWidth = srcEl.width();
-							instance.originalElHeight = srcEl.height();
+								instance.originalElWidth = srcEl.width();
+								instance.originalElHeight = srcEl.height();
 
-							instance._updatePlaceholder();
+								instance._updatePlaceholder();
+							}
 						}
-					});
+					);
 
-					instance.on('endDragEvent', function(e) {
-						if (instance.options.placeholder) {
-							instance._removePlaceholder();
+					instance.on('endDragEvent',
+						function(event) {
+							if (instance.options.placeholder) {
+								instance._removePlaceholder();
+							}
 						}
-					});
+					);
 				}
 
 				instance._updateProxy();
@@ -284,13 +284,28 @@
 				Dom.setStyle(original, 'visibility', 'hidden');
 			},
 
-			_insert: function(srcEl, destEl, checkContains) {
-				// no action if the item moved is the parent of the item checked
-				if (checkContains && Expanse.Dom.contains(srcEl, destEl)) {
-					return;
+			_createPlaceHolder: function() {
+				var instance = this;
+
+				var srcEl = jQuery(instance.getEl());
+				var placeholderOption = instance.options.placeholder;
+				var placeholder = null;
+
+				if(placeholderOption && (typeof placeholderOption == 'string')) {
+					var className = placeholderOption;
+
+					placeholder = jQuery(document.createElement(srcEl[0].nodeName));
+					placeholder.addClass(className);
 				}
-				destEl.parentNode.insertBefore(srcEl, this.goingUp ? destEl : destEl.nextSibling);
-            	DDM.refreshCache();
+
+				return placeholder;
+			},
+
+			_insert: function(srcEl, destEl, checkContains) {
+				if (!checkContains || !Expanse.Dom.contains(srcEl, destEl)) {
+					destEl.parentNode.insertBefore(srcEl, this.goingUp ? destEl : destEl.nextSibling);
+	            	DDM.refreshCache();
+				}
 			},
 
 			_isDroppable: function(target) {
@@ -319,24 +334,9 @@
 				return proxy;
 			},
 
-			_createPlaceHolder: function() {
-				var instance = this;
-				var srcEl = jQuery(instance.getEl());
-				var placeholderOpt = instance.options.placeholder;
-				var placeholder = null;
-
-				if(placeholderOpt && (placeholderOpt.constructor == String)) {
-					var className = placeholderOpt;
-
-					placeholder = jQuery(document.createElement(srcEl[0].nodeName));
-					placeholder.addClass(className);
-				}
-
-				return placeholder;
-			},
-
 			_updatePlaceholder: function(cancelResize) {
 				var instance = this;
+
 				var srcEl = jQuery(instance.getEl());
 				var placeholderEl = instance.placeholderEl;
 
@@ -346,10 +346,8 @@
 				}
 
 				if (!cancelResize && instance.options.forcePlaceholderSize) {
-					//var width = srcEl.width();
 					var height = srcEl.height();
 
-					//placeholderEl.width(width);
 					placeholderEl.height(height);
 				}
 
@@ -359,11 +357,11 @@
 
 			_removePlaceholder: function() {
 				var instance = this;
+
 				var srcEl = jQuery(instance.getEl());
 				var placeholderEl = instance.placeholderEl;
 
 				if (placeholderEl && placeholderEl.length) {
-					var instance = this;
 					var placeholderEl = instance.placeholderEl[0];
 
 					srcEl.show();
@@ -383,47 +381,48 @@
 			initialize: function(el, group, options) {
 				var instance = this;
 
-				var _defaults = {
+				var defaults = {
 					dropOn: 'ul',
 					centerFrame: true
 				};
 
-				instance.options = Expanse.extend({}, _defaults, options);
+				instance.options = Expanse.extend({}, defaults, options);
 
 				instance._super.apply(instance, [el, group, instance.options]);
 
-				var handleOpt = instance.options.handle;
+				var handleOption = instance.options.handle;
 
-				if (handleOpt) {
-					var handleEl = jQuery(el).find(handleOpt)[0];
+				if (handleOption) {
+					var handleEl = jQuery(el).find(handleOption)[0];
 
 					if (handleEl) {
-						instance.setHandleElId( Expanse.Dom.generateId(handleEl) );
+						var handleId = Expanse.Dom.generateId(handleEl);
+
+						instance.setHandleElId(handleId);
 					}
 				}
 			},
 
-			onDragDrop: function() {
-				/* no useless action outsite the onDrop elements */
-			},
+			onDragDrop: Expanse.emptyFunction,
 
-			onDragOver: function(e, id) {
+			onDragOver: function(event, id) {
 				var instance = this;
+
 		        var srcEl = this.getEl();
 		        var destEl = Dom.get(id);
 
-				var dropConditionOpt = this.options.dropCondition;
+				var dropConditionOption = this.options.dropCondition;
 
 				if (instance._sortOn(destEl)) {
 					var container = jQuery(destEl).find('> ' + instance.options.dropOn).get(0);
 
 					if (container) {
-						if (jQuery.isFunction(dropConditionOpt) && (dropConditionOpt.apply(destEl, [e, id]) == false)) {
-							instance._super(e, id);
+						if (jQuery.isFunction(dropConditionOption) && (dropConditionOption.apply(destEl, [event, id]) == false)) {
+							instance._super(event, id);
+
 							return false;
 						}
 
-						// checking if srcEl is already appended on container and vice-versa
 						if (!Expanse.Dom.contains(container, srcEl) &&
 							!Expanse.Dom.contains(srcEl, container)) {
 
@@ -435,13 +434,14 @@
 						}
 					}
 					else {
-						instance._super(e, id);
+						instance._super(event, id);
 					}
 				}
 		    },
 
-			onDragOut: function(e, id) {
+			onDragOut: function(event, id) {
 				var instance = this;
+
 				var destEl = Dom.get(id);
 
 				if (instance._sortOn(destEl)) {
@@ -458,13 +458,14 @@
 
 			_sortOn: function(destEl) {
 				var instance = this;
-				var srcEl = this.getEl();
-				var sortOnOpt = this.options.sortOn;
 
-				if (sortOnOpt) {
-					var sortContainer = jQuery(sortOnOpt);
+				var srcEl = this.getEl();
+				var sortOnOption = this.options.sortOn;
+
+				if (sortOnOption) {
+					var sortContainer = jQuery(sortOnOption);
+
 					if (sortContainer.length && (Expanse.Dom.contains(sortContainer[0], destEl) == false)) {
-						
 						return false;
 					}
 				}
