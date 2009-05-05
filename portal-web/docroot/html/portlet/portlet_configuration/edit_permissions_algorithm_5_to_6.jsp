@@ -113,6 +113,20 @@ renderPortletURL.setParameter("portletResource", portletResource);
 renderPortletURL.setParameter("modelResource", modelResource);
 renderPortletURL.setParameter("modelResourceDescription", modelResourceDescription);
 renderPortletURL.setParameter("resourcePrimKey", resourcePrimKey);
+
+Group controlPanelGroup = GroupLocalServiceUtil.getGroup(company.getCompanyId(), GroupConstants.CONTROL_PANEL);
+
+long controlPanelPlid = LayoutLocalServiceUtil.getDefaultPlid(controlPanelGroup.getGroupId(), true);
+
+PortletURLImpl definePermissionsURL = new PortletURLImpl(request, PortletKeys.ENTERPRISE_ADMIN_ROLES, controlPanelPlid, PortletRequest.RENDER_PHASE);
+
+definePermissionsURL.setWindowState(WindowState.MAXIMIZED);
+definePermissionsURL.setPortletMode(PortletMode.VIEW);
+
+definePermissionsURL.setRefererPlid(plid);
+
+definePermissionsURL.setParameter("struts_action", "/enterprise_admin_roles/edit_role_permissions");
+definePermissionsURL.setParameter(Constants.CMD, Constants.VIEW);
 %>
 
 <div class="edit-permissions">
@@ -195,11 +209,20 @@ renderPortletURL.setParameter("resourcePrimKey", resourcePrimKey);
 
 		role = role.toEscapedModel();
 
+		String name = role.getName();
+		String href = null;
+
+		if (!name.equals(RoleConstants.ADMINISTRATOR) && !name.equals(RoleConstants.COMMUNITY_ADMINISTRATOR) && !name.equals(RoleConstants.COMMUNITY_OWNER) && !name.equals(RoleConstants.ORGANIZATION_ADMINISTRATOR) && !name.equals(RoleConstants.ORGANIZATION_OWNER) && !name.equals(RoleConstants.OWNER) && RolePermissionUtil.contains(permissionChecker, role.getRoleId(), ActionKeys.DEFINE_PERMISSIONS)) {
+			definePermissionsURL.setParameter("roleId", String.valueOf(role.getRoleId()));
+
+			href = definePermissionsURL.toString();
+		}
+
 		ResultRow row = new ResultRow(role, role.getRoleId(), i);
 
 		// Name
 
-		row.addText(role.getTitle(locale));
+		row.addText(role.getTitle(locale), href);
 
 		// Actions
 
