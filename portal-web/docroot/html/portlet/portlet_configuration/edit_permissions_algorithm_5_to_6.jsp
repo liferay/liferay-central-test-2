@@ -250,7 +250,7 @@ definePermissionsURL.setParameter(Constants.CMD, Constants.VIEW);
 				currentGroupActions = ResourceActionsUtil.getActions(permissions);
 			}
 			catch (NoSuchResourceException nsre) {
-				currentGroupActions = new ArrayList();
+				currentGroupActions = new ArrayList<String>();
 			}
 
 			try {
