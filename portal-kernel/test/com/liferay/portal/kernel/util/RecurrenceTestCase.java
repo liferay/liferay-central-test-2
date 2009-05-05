@@ -24,11 +24,10 @@ package com.liferay.portal.kernel.util;
 
 import com.liferay.portal.kernel.cal.Duration;
 import com.liferay.portal.kernel.cal.Recurrence;
+import com.liferay.portal.kernel.test.TestCase;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-
-import junit.framework.TestCase;
 
 /**
  * <a href="RecurrenceTestCase.java.html"><b><i>View Source</i></b></a>

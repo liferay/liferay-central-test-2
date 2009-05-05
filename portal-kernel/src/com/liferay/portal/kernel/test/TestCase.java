@@ -20,46 +20,28 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.util;
-
-import com.liferay.portal.kernel.test.TestCase;
+package com.liferay.portal.kernel.test;
 
 /**
- * <a href="StringUtilTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="TestCase.java.html"><b><i>View Source</i></b></a>
  *
- * @author Alexander Chow
+ * @author Brian Wing Shun Chan
  *
  */
-public class StringUtilTest extends TestCase {
+public class TestCase extends junit.framework.TestCase {
 
-	public void testReplaceChar() throws Exception {
-		String original = "127.0.0.1";
-		String expected = "127_0_0_1";
+	protected void assertEquals(double expected, double actual)
+		throws Exception {
 
-		String actual = StringUtil.replace(original, '.', '_');
-
-		assertEquals(expected, actual);
+		assertEquals(expected, actual, 0);
 	}
 
-	public void testReplaceString() throws Exception {
-		String original = "Hello World HELLO WORLD Hello World";
-		String expected = "Aloha World HELLO WORLD Aloha World";
+	protected void assertLessThan(double expected, double actual)
+		throws Exception {
 
-		String actual = StringUtil.replace(original, "Hello", "Aloha");
-
-		assertEquals(expected, actual);
-	}
-
-	public void testReplaceStringArray() throws Exception {
-		String original = "Hello World HELLO WORLD Hello World";
-		String expected = "Aloha World ALOHA WORLD Aloha World";
-
-		String actual = StringUtil.replace(
-			original,
-			new String[] {"Hello", "HELLO"},
-			new String[] {"Aloha", "ALOHA"});
-
-		assertEquals(expected, actual);
+		if (actual > expected) {
+			fail(actual + " is not less than " + expected);
+		}
 	}
 
 }

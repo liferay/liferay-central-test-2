@@ -22,7 +22,7 @@
 
 package com.liferay.util;
 
-import junit.framework.TestCase;
+import com.liferay.portal.kernel.test.TestCase;
 
 /**
  * <a href="VersionTest.java.html"><b><i>View Source</i></b></a>

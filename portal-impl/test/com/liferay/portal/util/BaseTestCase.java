@@ -23,13 +23,12 @@
 package com.liferay.portal.util;
 
 import com.liferay.counter.service.CounterLocalServiceUtil;
+import com.liferay.portal.kernel.test.TestCase;
 import com.liferay.portal.util.InitUtil;
 import com.liferay.util.PwdGenerator;
 
 import java.util.Date;
 import java.util.Random;
-
-import junit.framework.TestCase;
 
 /**
  * <a href="BaseTestCase.java.html"><b><i>View Source</i></b></a>
@@ -46,12 +45,6 @@ public class BaseTestCase extends TestCase {
 		}
 
 		InitUtil.initWithSpring();
-	}
-
-	protected void assertEquals(double expected, double actual)
-		throws Exception {
-
-		assertEquals(expected, actual, 0);
 	}
 
 	protected Date nextDate() throws Exception {

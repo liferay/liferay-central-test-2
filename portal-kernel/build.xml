@@ -10,6 +10,7 @@
 		<mkdir dir="classes" />
 
 		<path id="web-lib.classpath">
+			<fileset dir="${project.dir}/lib/development" includes="junit.jar" />
 		</path>
 
 		<javac

@@ -23,12 +23,11 @@
 package com.liferay.portal.kernel.messaging.jmx;
 
 import com.liferay.portal.kernel.messaging.MessageBus;
+import com.liferay.portal.kernel.test.TestCase;
 
 import java.lang.management.ManagementFactory;
 
 import javax.management.MBeanServer;
-
-import junit.framework.TestCase;
 
 import org.jmock.integration.junit4.JUnit4Mockery;
 

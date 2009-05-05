@@ -22,7 +22,7 @@
 
 package com.liferay.portal.kernel.util;
 
-import junit.framework.TestCase;
+import com.liferay.portal.kernel.test.TestCase;
 
 /**
  * <a href="UnicodePropertiesTest.java.html"><b><i>View Source</i></b></a>
