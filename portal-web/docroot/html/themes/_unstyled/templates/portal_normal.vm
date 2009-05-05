@@ -50,8 +50,8 @@ $theme.include($top_messages_include)
 	<div id="footer"></div>
 </div>
 
-$theme.include($bottom_include)
-
 </body>
+
+$theme.include($bottom_include)
 
 </html>
