@@ -22,7 +22,7 @@
 
 package com.liferay.portal.action;
 
-import com.liferay.portal.events.EventsProcessorUtil;
+import com.liferay.portal.events.EventsProcessor;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.struts.ActionConstants;
@@ -57,7 +57,7 @@ public class LogoutAction extends Action {
 		try {
 			HttpSession session = request.getSession();
 
-			EventsProcessorUtil.process(
+			EventsProcessor.process(
 				PropsKeys.LOGOUT_EVENTS_PRE, PropsValues.LOGOUT_EVENTS_PRE,
 				request, response);
 
@@ -102,7 +102,7 @@ public class LogoutAction extends Action {
 			catch (Exception e) {
 			}
 
-			EventsProcessorUtil.process(
+			EventsProcessor.process(
 				PropsKeys.LOGOUT_EVENTS_POST, PropsValues.LOGOUT_EVENTS_POST,
 				request, response);
 

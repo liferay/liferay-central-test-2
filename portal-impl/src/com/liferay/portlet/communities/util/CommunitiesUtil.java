@@ -22,7 +22,7 @@
 
 package com.liferay.portlet.communities.util;
 
-import com.liferay.portal.events.EventsProcessorUtil;
+import com.liferay.portal.events.EventsProcessor;
 import com.liferay.portal.kernel.configuration.Filter;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -131,7 +131,7 @@ public class CommunitiesUtil {
 					PropsKeys.LAYOUT_CONFIGURATION_ACTION_DELETE,
 					new Filter(layout.getType())));
 
-			EventsProcessorUtil.process(
+			EventsProcessor.process(
 				PropsKeys.LAYOUT_CONFIGURATION_ACTION_DELETE, eventClasses,
 				request, response);
 		}

@@ -22,7 +22,7 @@
 
 package com.liferay.portal.deploy.hot;
 
-import com.liferay.portal.events.EventsProcessorUtil;
+import com.liferay.portal.events.EventsProcessor;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.configuration.Configuration;
 import com.liferay.portal.kernel.configuration.ConfigurationFactoryUtil;
@@ -594,7 +594,7 @@ public class HookHotDeployListener
 
 			action = new ActionWrapper(action, portletClassLoader);
 
-			EventsProcessorUtil.registerEvent(eventName, action);
+			EventsProcessor.registerEvent(eventName, action);
 
 			return action;
 		}
@@ -607,7 +607,7 @@ public class HookHotDeployListener
 			sessionAction = new SessionActionWrapper(
 				sessionAction, portletClassLoader);
 
-			EventsProcessorUtil.registerEvent(eventName, sessionAction);
+			EventsProcessor.registerEvent(eventName, sessionAction);
 
 			return sessionAction;
 		}
@@ -981,7 +981,7 @@ public class HookHotDeployListener
 				List<Object> events = entry.getValue();
 
 				for (Object event : events) {
-					EventsProcessorUtil.unregisterEvent(eventName, event);
+					EventsProcessor.unregisterEvent(eventName, event);
 				}
 			}
 		}

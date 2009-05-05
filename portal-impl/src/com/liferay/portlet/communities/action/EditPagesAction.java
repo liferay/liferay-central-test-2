@@ -32,7 +32,7 @@ import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.RemoteExportException;
 import com.liferay.portal.RequiredLayoutException;
-import com.liferay.portal.events.EventsProcessorUtil;
+import com.liferay.portal.events.EventsProcessor;
 import com.liferay.portal.kernel.configuration.Filter;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
@@ -601,7 +601,7 @@ public class EditPagesAction extends PortletAction {
 					PropsKeys.LAYOUT_CONFIGURATION_ACTION_UPDATE,
 					new Filter(type)));
 
-			EventsProcessorUtil.process(
+			EventsProcessor.process(
 				PropsKeys.LAYOUT_CONFIGURATION_ACTION_UPDATE, eventClasses,
 				uploadRequest, response);
 		}

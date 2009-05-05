@@ -23,7 +23,7 @@
 package com.liferay.portal.util;
 
 import com.liferay.portal.NoSuchCompanyException;
-import com.liferay.portal.events.EventsProcessorUtil;
+import com.liferay.portal.events.EventsProcessor;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
@@ -388,7 +388,7 @@ public class PortalInstances {
 		}
 
 		try {
-			EventsProcessorUtil.process(
+			EventsProcessor.process(
 				PropsKeys.APPLICATION_STARTUP_EVENTS,
 				PropsValues.APPLICATION_STARTUP_EVENTS,
 				new String[] {String.valueOf(companyId)});
