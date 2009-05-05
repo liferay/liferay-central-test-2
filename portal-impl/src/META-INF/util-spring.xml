@@ -278,11 +278,6 @@
 			<bean class="com.liferay.portal.util.PortalImpl" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.util.ServiceUtil" class="com.liferay.portal.util.ServiceUtil">
-		<property name="service">
-			<bean class="com.liferay.portal.util.ServiceImpl" />
-		</property>
-	</bean>
 	<bean id="com.liferay.portal.kernel.uuid.PortalUUID" class="com.liferay.portal.uuid.PortalUUIDImpl" />
 	<bean id="com.liferay.portal.kernel.uuid.PortalUUIDUtil" class="com.liferay.portal.kernel.uuid.PortalUUIDUtil">
 		<property name="portalUUID" ref="com.liferay.portal.kernel.uuid.PortalUUID" />
