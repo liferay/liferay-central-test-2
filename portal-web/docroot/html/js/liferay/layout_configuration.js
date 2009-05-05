@@ -108,7 +108,6 @@
 						header: Liferay.Language.get('add-application'),
 						on: {
 							close: function() {
-								console.log('closeEvent', this, arguments);
 								instance.menu = null;
 								body.removeClass('lfr-has-sidebar');
 							}
