@@ -505,6 +505,7 @@ else if ((role.getType() == RoleConstants.TYPE_COMMUNITY) || (role.getType() == 
 			<%
 			}
 			%>
+
 		</c:if>
 
 		<br />

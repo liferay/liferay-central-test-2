@@ -25,13 +25,15 @@
 <%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
 <%
-Role role = (Role)request.getAttribute(WebKeys.ROLE);
+String cmd = ParamUtil.getString(request, Constants.CMD);
 
 tabs1 = ParamUtil.getString(request, "tabs1");
+
 String redirect = ParamUtil.getString(request, "redirect");
 String backURL = ParamUtil.getString(request, "backURL", redirect);
 
-String cmd = ParamUtil.getString(request, Constants.CMD);
+Role role = (Role)request.getAttribute(WebKeys.ROLE);
+
 String portletResource = ParamUtil.getString(request, "portletResource");
 
 String portletResourceLabel = null;
@@ -53,7 +55,7 @@ editRoleURL.setParameter("redirect", backURL);
 editRoleURL.setParameter(Constants.CMD, Constants.VIEW);
 editRoleURL.setParameter("roleId", String.valueOf(role.getRoleId()));
 
-// Supported clients
+// Define permissions
 
 PortletURL definePermissionsURL = renderResponse.createRenderURL();
 
@@ -64,7 +66,7 @@ definePermissionsURL.setParameter("redirect", backURL);
 definePermissionsURL.setParameter(Constants.CMD, Constants.VIEW);
 definePermissionsURL.setParameter("roleId", String.valueOf(role.getRoleId()));
 
-// Assign Members
+// Assign members
 
 PortletURL assignMembersURL = renderResponse.createRenderURL();
 
@@ -76,10 +78,10 @@ assignMembersURL.setParameter("roleId", String.valueOf(role.getRoleId()));
 
 int pos = 0;
 
-String tabNames = StringPool.BLANK;
+String tabs1Names = StringPool.BLANK;
 
 if (RolePermissionUtil.contains(permissionChecker, role.getRoleId(), ActionKeys.UPDATE)) {
-	tabNames += ",edit";
+	tabs1Names += ",edit";
 
 	request.setAttribute("liferay-ui:tabs:url" + pos++, editRoleURL.toString());
 }
@@ -87,7 +89,7 @@ if (RolePermissionUtil.contains(permissionChecker, role.getRoleId(), ActionKeys.
 String name = role.getName();
 
 if (!name.equals(RoleConstants.ADMINISTRATOR) && !name.equals(RoleConstants.COMMUNITY_ADMINISTRATOR) && !name.equals(RoleConstants.COMMUNITY_OWNER) && !name.equals(RoleConstants.ORGANIZATION_ADMINISTRATOR) && !name.equals(RoleConstants.ORGANIZATION_OWNER) && !name.equals(RoleConstants.OWNER) && RolePermissionUtil.contains(permissionChecker, role.getRoleId(), ActionKeys.DEFINE_PERMISSIONS)) {
-	tabNames += ",define-permissions";
+	tabs1Names += ",define-permissions";
 
 	request.setAttribute("liferay-ui:tabs:url" + pos++, definePermissionsURL.toString());
 }
@@ -99,13 +101,13 @@ if (name.equals(RoleConstants.GUEST) || name.equals(RoleConstants.OWNER) || name
 }
 
 if (!unassignableRole && (role.getType() == RoleConstants.TYPE_REGULAR) && RolePermissionUtil.contains(permissionChecker, role.getRoleId(), ActionKeys.ASSIGN_MEMBERS)) {
-	tabNames += ",assign-members";
+	tabs1Names += ",assign-members";
 
 	request.setAttribute("liferay-ui:tabs:url" + pos++, assignMembersURL.toString());
 }
 
-if (tabNames.startsWith(",")) {
-	tabNames = tabNames.substring(1);
+if (tabs1Names.startsWith(",")) {
+	tabs1Names = tabs1Names.substring(1);
 }
 
 // Breadcrumbs
@@ -148,4 +150,4 @@ request.setAttribute("edit_role_permissions.jsp-portletResource", portletResourc
 	<%= breadcrumbs %>
 </div>
 
-<liferay-ui:tabs names="<%= tabNames %>" />
+<liferay-ui:tabs names="<%= tabs1Names %>" />
