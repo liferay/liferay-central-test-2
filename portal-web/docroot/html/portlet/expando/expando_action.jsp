@@ -50,7 +50,7 @@ String modelResource = (String)row.getParameter("modelResource");
 	<c:if test="<%= ExpandoColumnPermission.contains(permissionChecker, expandoColumn, ActionKeys.PERMISSIONS) %>">
 		<liferay-security:permissionsURL
 			modelResource="<%= ExpandoColumn.class.getName() %>"
-			modelResourceDescription="<%= expandoColumn.getName() %>"
+			modelResourceDescription="<%= HtmlUtil.escape(expandoColumn.getName()) %>"
 			resourcePrimKey="<%= String.valueOf(expandoColumn.getColumnId()) %>"
 			var="permissionsURL"
 		/>
