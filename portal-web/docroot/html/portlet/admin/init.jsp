@@ -32,12 +32,15 @@
 <%@ page import="com.liferay.portal.dao.shard.ManualShardSelector" %>
 <%@ page import="com.liferay.portal.kernel.plugin.PluginPackage" %>
 <%@ page import="com.liferay.portal.kernel.util.InstancePool" %>
+<%@ page import="com.liferay.portal.security.permission.ResourceActionsUtil" %>
 <%@ page import="com.liferay.portal.servlet.PortalSessionContext" %>
+<%@ page import="com.liferay.portal.util.ServiceUtil" %>
 
 <%@ page import="java.awt.BasicStroke" %>
 <%@ page import="java.awt.Color" %>
 <%@ page import="java.awt.Font" %>
 
+<%@ page import="org.apache.commons.collections.map.MultiValueMap" %>
 <%@ page import="org.apache.log4j.Level" %>
 <%@ page import="org.apache.log4j.Logger" %>
 <%@ page import="org.apache.log4j.LogManager" %>

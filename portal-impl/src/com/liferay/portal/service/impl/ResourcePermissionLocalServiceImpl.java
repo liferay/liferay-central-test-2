@@ -29,8 +29,12 @@ import com.liferay.portal.model.ResourceAction;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.ResourcePermission;
 import com.liferay.portal.model.ResourcePermissionConstants;
+import com.liferay.portal.model.Role;
+import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.security.permission.PermissionCacheUtil;
+import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.service.base.ResourcePermissionLocalServiceBaseImpl;
+import com.liferay.portal.util.PortalUtil;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -176,6 +180,75 @@ public class ResourcePermissionLocalServiceImpl
 		}
 
 		return false;
+	}
+
+	public void mergePermissions(long fromRoleId, long toRoleId)
+		throws PortalException, SystemException {
+
+		Role fromRole = rolePersistence.findByPrimaryKey(fromRoleId);
+		Role toRole = rolePersistence.findByPrimaryKey(toRoleId);
+
+		if (fromRole.getType() != toRole.getType()) {
+			throw new PortalException("Role types are mismatched");
+		}
+		else if (PortalUtil.isSystemRole(toRole.getName())) {
+			throw new PortalException("Cannot move permissions to system role");
+		}
+		else if (PortalUtil.isSystemRole(fromRole.getName())) {
+			throw new PortalException(
+				"Cannot move permissions from system role");
+		}
+
+		List<ResourcePermission> resourcePermissions =
+			getRoleResourcePermissions(fromRoleId);
+
+		for (ResourcePermission resourcePermission : resourcePermissions) {
+			resourcePermission.setRoleId(toRoleId);
+
+			resourcePermissionPersistence.update(resourcePermission, false);
+		}
+
+		roleLocalService.deleteRole(fromRoleId);
+
+		PermissionCacheUtil.clearCache();
+	}
+
+	public void reassignPermissions(long resourcePermissionId, long toRoleId)
+		throws PortalException, SystemException {
+
+		Role toRole = roleLocalService.getRole(toRoleId);
+		ResourcePermission resourcePermission =
+			getResourcePermission(resourcePermissionId);
+		long fromRoleId = resourcePermission.getRoleId();
+
+		long companyId = resourcePermission.getCompanyId();
+		String name = resourcePermission.getName();
+		int scope = resourcePermission.getScope();
+		String primKey = resourcePermission.getPrimKey();
+
+		// Set new actions with new role
+
+		String[] actionIds;
+
+		if (toRole.getType() == RoleConstants.TYPE_REGULAR) {
+			actionIds = ResourceActionsUtil.
+				getModelResourceActions(name).toArray(new String[0]);
+		}
+		else {
+			actionIds = ResourceActionsUtil.
+				getModelResourceCommunityDefaultActions(name).toArray(new String[0]);
+		}
+
+		setResourcePermissions(
+			companyId, name, scope, primKey, toRoleId, actionIds);
+
+		// Clean up
+
+		resourcePermissionPersistence.remove(resourcePermissionId);
+
+		if (getRoleResourcePermissions(fromRoleId).isEmpty()) {
+			roleLocalService.deleteRole(fromRoleId);
+		}
 	}
 
 	public void removeResourcePermission(

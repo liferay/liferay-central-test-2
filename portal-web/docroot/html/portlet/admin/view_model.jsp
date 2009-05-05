@@ -22,26 +22,35 @@
  */
 %>
 
-<%@ include file="/html/portlet/directory/init.jsp" %>
+<%@ include file="/html/portlet/admin/init.jsp" %>
 
 <%
-PortletURL tabs1URL = renderResponse.createRenderURL();
+ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
-tabs1URL.setWindowState(WindowState.MAXIMIZED);
+Object[] objArray = (Object[])row.getObject();
 
-tabs1URL.setParameter("struts_action", "/directory/view");
+ResourcePermission resourcePermission = (ResourcePermission)objArray[0];
 
-String tabs1Names = ParamUtil.getString(request, "tabs1Names", "users,organizations,user-groups");
+String modelString = "";
+String resourceTitle = resourcePermission.getName();
 
-String tabs1Values = tabs1Names;
+try {
+	BaseModel model = ServiceUtil.getModel(resourcePermission);
 
-String redirect = ParamUtil.getString(request, "redirect");
-String backURL = ParamUtil.getString(request, "backURL", redirect);
+	modelString = ServiceUtil.toHtml(model);
+
+	String[] parts = StringUtil.split(resourcePermission.getName(), ".");
+	resourceTitle = parts[parts.length - 1] + ", " + resourcePermission.getPrimKey();
+}
+catch (Exception e) {
+	modelString = e.toString();
+}
 %>
 
-<liferay-ui:tabs
-	names="<%= tabs1Names %>"
-	tabsValues="<%= tabs1Values %>"
-	url="<%= tabs1URL.toString() %>"
-	backURL="<%= backURL %>"
-/>
+<div style="vertical-align: top; overflow: auto; ">
+	<liferay-ui:panel-container id='<%= "_resource_" + resourcePermission.getResourcePermissionId() %>' cssClass="model-details">
+		<liferay-ui:panel id='<%= "_resource_panel_" + resourcePermission.getResourcePermissionId() %>' title="<%= resourceTitle %>" defaultState="closed">
+			<div style="width: 350px; height: 100px; "><%= modelString %></div>
+		</liferay-ui:panel>
+	</liferay-ui:panel-container>
+</div>
