@@ -25,6 +25,7 @@ package com.liferay.portal.upgrade.v5_0_0;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
+import com.liferay.portal.tools.sql.DBUtil;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 
@@ -53,7 +54,12 @@ public class UpgradeLayout extends UpgradeProcess {
 		StringBuilder sb = new StringBuilder();
 
 		sb.append("update Layout set typeSettings = replace(replace(replace(");
-		sb.append("typeSettings, 'meta-description=', 'meta-description_");
+		if (DBUtil.getInstance().getType() == DBUtil.TYPE_SQLSERVER) {
+			sb.append("CAST(typeSettings AS NVARCHAR(Max)), 'meta-description=', 'meta-description_");
+		}
+		else {
+			sb.append("typeSettings, 'meta-description=', 'meta-description_");
+		}
 		sb.append(languageId);
 		sb.append("='), 'meta-keywords=', 'meta-keywords_");
 		sb.append(languageId);
