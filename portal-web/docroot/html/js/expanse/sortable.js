@@ -5,6 +5,10 @@
 
 	var _counter = 0;
 
+	var num = function(value) {
+		return parseInt(value, 10) || 0;
+	};
+
 	Expanse.Sortable = new Expanse.Class(
 		{
 			initialize: function(options) {
@@ -141,6 +145,12 @@
 
 				instance._super.apply(instance, arguments);
 
+				var _defaults = {
+					forcePlaceholderSize: true
+				};
+
+				instance.options = Expanse.extend({}, _defaults, options);
+
 				instance.goingUp = false;
 				var el = instance.getEl();
 
@@ -156,7 +166,28 @@
 					TEXTAREA: 'TEXTAREA'
 				};
 
-				instance.options = options;
+				var placeholderOpt = instance.options.placeholder;
+
+				if (placeholderOpt) {
+					instance.placeholder = jQuery(placeholderOpt);
+
+					instance.on('b4StartDragEvent', function(e) {
+						if (instance.options.placeholder) {
+							var srcEl = jQuery(instance.getEl());
+
+							instance.originalElWidth = srcEl.width();
+							instance.originalElHeight = srcEl.height();
+
+							instance._updatePlaceholder();
+						}
+					});
+
+					instance.on('endDragEvent', function(e) {
+						if (instance.options.placeholder) {
+							instance._removePlaceholder();
+						}
+					});
+				}
 
 				instance._updateProxy();
 			},
@@ -232,13 +263,11 @@
 				if (!instance._isDroppable(targetInstance)) {
 					var destClass = (target.className || '').toLowerCase();
 
-					var parent = target.parentNode;
+					instance._insert(portlet, target, true);
+				}
 
-					if (instance.goingUp) {
-						parent.insertBefore(portlet, target)
-					} else {
-						parent.insertBefore(portlet, target.nextSibling);
-			        }
+				if (instance.options.placeholder) {
+					instance._updatePlaceholder();
 				}
 
 		        DDM.refreshCache();
@@ -253,6 +282,15 @@
 				var original = instance.getEl();
 
 				Dom.setStyle(original, 'visibility', 'hidden');
+			},
+
+			_insert: function(srcEl, destEl, checkContains) {
+				// no action if the item moved is the parent of the item checked
+				if (checkContains && Expanse.Dom.contains(srcEl, destEl)) {
+					return;
+				}
+				destEl.parentNode.insertBefore(srcEl, this.goingUp ? destEl : destEl.nextSibling);
+            	DDM.refreshCache();
 			},
 
 			_isDroppable: function(target) {
@@ -279,9 +317,160 @@
 				}
 
 				return proxy;
+			},
+
+			_createPlaceHolder: function() {
+				var instance = this;
+				var srcEl = jQuery(instance.getEl());
+				var placeholderOpt = instance.options.placeholder;
+				var placeholder = null;
+
+				if(placeholderOpt && (placeholderOpt.constructor == String)) {
+					var className = placeholderOpt;
+
+					placeholder = jQuery(document.createElement(srcEl[0].nodeName));
+					placeholder.addClass(className);
+				}
+
+				return placeholder;
+			},
+
+			_updatePlaceholder: function(cancelResize) {
+				var instance = this;
+				var srcEl = jQuery(instance.getEl());
+				var placeholderEl = instance.placeholderEl;
+
+				if (!placeholderEl) {
+					instance.placeholderEl = instance._createPlaceHolder();
+					placeholderEl = instance.placeholderEl;
+				}
+
+				if (!cancelResize && instance.options.forcePlaceholderSize) {
+					//var width = srcEl.width();
+					var height = srcEl.height();
+
+					//placeholderEl.width(width);
+					placeholderEl.height(height);
+				}
+
+				srcEl.hide();
+				instance._insert(placeholderEl[0], srcEl[0]);
+			},
+
+			_removePlaceholder: function() {
+				var instance = this;
+				var srcEl = jQuery(instance.getEl());
+				var placeholderEl = instance.placeholderEl;
+
+				if (placeholderEl && placeholderEl.length) {
+					var instance = this;
+					var placeholderEl = instance.placeholderEl[0];
+
+					srcEl.show();
+
+					if (placeholderEl.parentNode) {
+						placeholderEl.parentNode.removeChild(placeholderEl);
+					}
+				}
 			}
 		}
 	);
 
 	Expanse.SortableTarget = Expanse.Droppable;
+
+	Expanse.NestedList = Expanse.SortableItem.extend(
+		{
+			initialize: function(el, group, options) {
+				var instance = this;
+
+				var _defaults = {
+					dropOn: 'ul',
+					centerFrame: true
+				};
+
+				instance.options = Expanse.extend({}, _defaults, options);
+
+				instance._super.apply(instance, [el, group, instance.options]);
+
+				var handleOpt = instance.options.handle;
+
+				if (handleOpt) {
+					var handleEl = jQuery(el).find(handleOpt)[0];
+
+					if (handleEl) {
+						instance.setHandleElId( Expanse.Dom.generateId(handleEl) );
+					}
+				}
+			},
+
+			onDragDrop: function() {
+				/* no useless action outsite the onDrop elements */
+			},
+
+			onDragOver: function(e, id) {
+				var instance = this;
+		        var srcEl = this.getEl();
+		        var destEl = Dom.get(id);
+
+				var dropConditionOpt = this.options.dropCondition;
+
+				if (instance._sortOn(destEl)) {
+					var container = jQuery(destEl).find('> ' + instance.options.dropOn).get(0);
+
+					if (container) {
+						if (jQuery.isFunction(dropConditionOpt) && (dropConditionOpt.apply(destEl, [e, id]) == false)) {
+							instance._super(e, id);
+							return false;
+						}
+
+						// checking if srcEl is already appended on container and vice-versa
+						if (!Expanse.Dom.contains(container, srcEl) &&
+							!Expanse.Dom.contains(srcEl, container)) {
+
+							container.appendChild(srcEl);
+
+							if (instance.options.placeholder) {
+								instance._updatePlaceholder(true);
+							}
+						}
+					}
+					else {
+						instance._super(e, id);
+					}
+				}
+		    },
+
+			onDragOut: function(e, id) {
+				var instance = this;
+				var destEl = Dom.get(id);
+
+				if (instance._sortOn(destEl)) {
+			        var srcEl = this.getEl();
+			        var destEl = Dom.get(id);
+
+		            instance._insert(srcEl, destEl);
+
+					if (instance.options.placeholder) {
+						instance._updatePlaceholder(true);
+					}
+				}
+			},
+
+			_sortOn: function(destEl) {
+				var instance = this;
+				var srcEl = this.getEl();
+				var sortOnOpt = this.options.sortOn;
+
+				if (sortOnOpt) {
+					var sortContainer = jQuery(sortOnOpt);
+					if (sortContainer.length && (Expanse.Dom.contains(sortContainer[0], destEl) == false)) {
+						
+						return false;
+					}
+				}
+
+				return true;
+			}
+		}
+	);
 })();
