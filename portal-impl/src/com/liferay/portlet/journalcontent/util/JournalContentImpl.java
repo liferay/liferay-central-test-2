@@ -36,6 +36,9 @@ import com.liferay.portlet.journal.model.JournalArticleDisplay;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 import com.liferay.portlet.journal.service.permission.JournalArticlePermission;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import org.apache.commons.lang.time.StopWatch;
 
 /**
@@ -174,13 +177,15 @@ public class JournalContentImpl implements JournalContent {
 		JournalArticleDisplay articleDisplay =
 			(JournalArticleDisplay)MultiVMPoolUtil.get(cache, key);
 
-		if ((articleDisplay == null) || (!themeDisplay.isLifecycleRender())) {
+		boolean isLifecycleRender = isLifecycleRender(themeDisplay, xmlRequest);
+
+		if ((articleDisplay == null) || (!isLifecycleRender)) {
 			articleDisplay = getArticleDisplay(
 				groupId, articleId, templateId, viewMode, languageId, page,
 				xmlRequest, themeDisplay);
 
 			if ((articleDisplay != null) && (articleDisplay.isCacheable()) &&
-				(themeDisplay.isLifecycleRender())) {
+				(isLifecycleRender)) {
 
 				MultiVMPoolUtil.put(cache, key, articleDisplay);
 			}
@@ -268,7 +273,24 @@ public class JournalContentImpl implements JournalContent {
 		}
 	}
 
+	protected boolean isLifecycleRender(
+		ThemeDisplay themeDisplay, String xmlRequest) {
+
+		if ((themeDisplay != null)) {
+			return themeDisplay.isLifecycleRender();
+		}
+		else if (Validator.isNotNull(xmlRequest)) {
+			Matcher matcher = lifecycleRenderPhasePatern.matcher(xmlRequest);
+
+			return matcher.find();
+		}
+
+		return false;
+	}
+
 	protected static PortalCache cache = MultiVMPoolUtil.getCache(CACHE_NAME);
+	protected static Pattern lifecycleRenderPhasePatern = Pattern.compile(
+		"<lifecycle>\\s*RENDER_PHASE\\s*</lifecycle>");
 
 	private static Log _log = LogFactoryUtil.getLog(JournalContentUtil.class);
 
