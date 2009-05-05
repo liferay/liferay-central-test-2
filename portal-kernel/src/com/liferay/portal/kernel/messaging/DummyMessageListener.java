@@ -20,29 +20,17 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.service.persistence;
-
-import com.liferay.portal.util.BaseTestCase;
-import com.liferay.portal.util.PropsValues;
+package com.liferay.portal.kernel.messaging;
 
 /**
- * <a href="BasePersistenceTestCase.java.html"><b><i>View Source</i></b></a>
+ * <a href="DummyMessageListener.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class BasePersistenceTestCase extends BaseTestCase {
+public class DummyMessageListener implements MessageListener {
 
-	protected void setUp() throws Exception {
-		super.setUp();
-
-		PropsValues.SPRING_HIBERNATE_SESSION_DELEGATED = false;
-	}
-
-	protected void tearDown() throws Exception {
-		super.tearDown();
-
-		PropsValues.SPRING_HIBERNATE_SESSION_DELEGATED = true;
+	public void receive(Message message) {
 	}
 
 }

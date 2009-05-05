@@ -20,29 +20,52 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.service.persistence;
+package com.liferay.portal.kernel.messaging;
 
-import com.liferay.portal.util.BaseTestCase;
-import com.liferay.portal.util.PropsValues;
+import java.util.Random;
+import java.util.concurrent.Callable;
 
 /**
- * <a href="BasePersistenceTestCase.java.html"><b><i>View Source</i></b></a>
+ * <a href="DestinationRegistrationTask.java.html"><b><i>View Source</i></b>
+ * </a>
  *
+ * @author Shuyang Zhou
  * @author Brian Wing Shun Chan
  *
  */
-public class BasePersistenceTestCase extends BaseTestCase {
+public class DestinationRegistrationTask implements Callable<Object> {
 
-	protected void setUp() throws Exception {
-		super.setUp();
+	public DestinationRegistrationTask(
+		Destination destination, MessageListener[] listeners,
+		int taskIterationCount, boolean register) {
 
-		PropsValues.SPRING_HIBERNATE_SESSION_DELEGATED = false;
+		_destination = destination;
+		_listeners = listeners;
+		_taskIterationCount = taskIterationCount;
+		_register = register;
 	}
 
-	protected void tearDown() throws Exception {
-		super.tearDown();
+	public Object call() {
+		Random random = new Random();
 
-		PropsValues.SPRING_HIBERNATE_SESSION_DELEGATED = true;
+		for (int i = 0; i < _taskIterationCount; i++) {
+			MessageListener listener =
+				_listeners[random.nextInt(_listeners.length)];
+
+			if (_register) {
+				_destination.register(listener);
+			}
+			else {
+				_destination.unregister(listener);
+			}
+		}
+
+		return null;
 	}
+
+	private Destination _destination;
+	private MessageListener[] _listeners;
+	private boolean _register;
+	private int _taskIterationCount;
 
 }

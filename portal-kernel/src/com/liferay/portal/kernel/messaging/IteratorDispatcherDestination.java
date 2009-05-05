@@ -79,15 +79,12 @@ public abstract class IteratorDispatcherDestination extends BaseDestination {
 	public boolean unregister(MessageListener listener) {
 		listener = new InvokerMessageListener(listener);
 
-		boolean value = _listeners.remove(listener);
-
-		return value;
+		return _listeners.remove(listener);
 	}
 
-    public int getListenerCount() {
-        return _listeners.size();
-    }
-
+	public int getListenerCount() {
+		return _listeners.size();
+	}
 
 	protected abstract void dispatch(
 		Iterator<MessageListener> listenersItr, Message message);

@@ -24,8 +24,8 @@ package com.liferay.portal.kernel.messaging;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-
 import com.liferay.portal.kernel.util.ConcurrentHashSet;
+
 import java.util.Set;
 import java.util.concurrent.ThreadPoolExecutor;
 
@@ -48,14 +48,18 @@ public abstract class ArrayDispatcherDestination extends BaseDestination {
 		super(name, workersCoreSize, workersMaxSize);
 	}
 
+	public int getListenerCount() {
+		return _listeners.size();
+	}
+
 	public void register(MessageListener listener) {
 		listener = new InvokerMessageListener(listener);
 
-		_listenerSet.add(listener);
+		_listeners.add(listener);
 	}
 
 	public void send(Message message) {
-		if (_listenerSet.isEmpty()) {
+		if (_listeners.isEmpty()) {
 			if (_log.isDebugEnabled()) {
 				_log.debug("No listeners for destination " + getName());
 			}
@@ -71,26 +75,22 @@ public abstract class ArrayDispatcherDestination extends BaseDestination {
 					"receive more messages");
 		}
 
-		dispatch(_listenerSet, message);
+		dispatch(_listeners, message);
 	}
 
 	public boolean unregister(MessageListener listener) {
 		listener = new InvokerMessageListener(listener);
 
-		return _listenerSet.remove(listener);
+		return _listeners.remove(listener);
 	}
 
-    public int getListenerCount() {
-        return _listenerSet.size();
-    }
-
 	protected abstract void dispatch(
-		Set<MessageListener> listenerSet, Message message);
+		Set<MessageListener> listeners, Message message);
 
 	private static Log _log =
 		LogFactoryUtil.getLog(ArrayDispatcherDestination.class);
 
-	private Set<MessageListener> _listenerSet =
-        new ConcurrentHashSet<MessageListener>();
+	private Set<MessageListener> _listeners =
+		new ConcurrentHashSet<MessageListener>();
 
 }

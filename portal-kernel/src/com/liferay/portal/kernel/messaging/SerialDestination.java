@@ -43,14 +43,14 @@ public class SerialDestination extends ArrayDispatcherDestination {
 	}
 
 	protected void dispatch(
-		final Set<MessageListener> listenerSet, final Message message) {
+		final Set<MessageListener> listeners, final Message message) {
 
 		ThreadPoolExecutor threadPoolExecutor = getThreadPoolExecutor();
 
 		Runnable runnable = new Runnable() {
 
 			public void run() {
-				for (MessageListener listener : listenerSet) {
+				for (MessageListener listener : listeners) {
 					listener.receive(message);
 				}
 			}

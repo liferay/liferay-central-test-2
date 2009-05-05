@@ -49,11 +49,11 @@ public class ParallelDestination extends ArrayDispatcherDestination {
 	}
 
 	protected void dispatch(
-		Set<MessageListener> listenerSet, final Message message) {
+		Set<MessageListener> listeners, final Message message) {
 
 		ThreadPoolExecutor threadPoolExecutor = getThreadPoolExecutor();
 
-		for (final MessageListener listener : listenerSet) {
+		for (final MessageListener listener : listeners) {
 			Runnable runnable = new Runnable() {
 
 				public void run() {

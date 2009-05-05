@@ -20,29 +20,32 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.service.persistence;
+package com.liferay.portal.kernel.messaging;
 
-import com.liferay.portal.util.BaseTestCase;
-import com.liferay.portal.util.PropsValues;
+import java.util.Iterator;
 
 /**
- * <a href="BasePersistenceTestCase.java.html"><b><i>View Source</i></b></a>
+ * <a href="DummyIteratorDispatcherDestination.java.html"><b><i>View Source</i>
+ * </b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class BasePersistenceTestCase extends BaseTestCase {
+public class DummyIteratorDispatcherDestination
+	extends IteratorDispatcherDestination {
 
-	protected void setUp() throws Exception {
-		super.setUp();
-
-		PropsValues.SPRING_HIBERNATE_SESSION_DELEGATED = false;
+	public DummyIteratorDispatcherDestination(String name) {
+		super(name);
 	}
 
-	protected void tearDown() throws Exception {
-		super.tearDown();
+	public DummyIteratorDispatcherDestination(
+		String name, int workersCoreSize, int workersMaxSize) {
 
-		PropsValues.SPRING_HIBERNATE_SESSION_DELEGATED = true;
+		super(name, workersCoreSize, workersMaxSize);
+	}
+
+	protected void dispatch(
+		Iterator<MessageListener> listenersItr, Message message) {
 	}
 
 }
