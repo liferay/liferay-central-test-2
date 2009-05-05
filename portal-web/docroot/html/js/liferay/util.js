@@ -355,6 +355,30 @@ Liferay.Util = {
 		}
 	},
 
+	disableMatchedKeys: function(input, matcher, allowedKeyCodes) {
+		input = jQuery(input);
+
+		var blockChars = function(event) {
+			var charCode = event.charCode;
+			var keyCode = event.keyCode;
+
+			if (event.shiftKey) {
+				return false;
+			}
+
+			if (allowedKeyCodes && jQuery.inArray(keyCode, allowedKeyCodes) != -1) {
+				return true;
+			}
+
+			var typed = String.fromCharCode(charCode || keyCode);
+			var regex = new RegExp(matcher);
+			return !(regex.test(typed));
+		};
+
+		input.unbind('.disableMatchedKeys');
+		input.bind('keypress.disableMatchedKeys', blockChars);
+	},
+
 	disableTextareaTabs: function(textarea) {
 		var instance = this;
 
