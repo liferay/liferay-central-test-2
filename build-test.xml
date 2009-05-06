@@ -654,7 +654,7 @@ work.dir=${basedir.unix}/tools/tck/work</echo>
 
 		<delete dir="${tstamp.value}" />
 
-		<exec executable="${plink.executable}">
+		<!--<exec executable="${plink.executable}">
 			<arg line="-pw ${vm.password} ${vm.username}@${vm.host} cmd.exe /c mkdir C:\bea\jdk160_05\jre\lib\endorsed" />
 		</exec>
 
@@ -668,7 +668,7 @@ work.dir=${basedir.unix}/tools/tck/work</echo>
 
 		<exec executable="${pscp.executable}">
 			<arg line="-pw ${vm.password} lib\portal\rhino.jar lib\portal\serializer.jar lib\portal\xalan.jar ${vm.username}@${vm.host}:/bea/jrockit_160_05/jre/lib/endorsed" />
-		</exec>
+		</exec>-->
 
 		<exec executable="${pscp.executable}">
 			<arg line="-pw ${vm.password} ${vm.username}@${vm.host}:/bea/user_projects/domains/base_domain/bin/setDomainEnv.cmd setDomainEnv.cmd" />

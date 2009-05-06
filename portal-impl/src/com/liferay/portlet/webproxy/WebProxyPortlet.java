@@ -22,7 +22,11 @@
 
 package com.liferay.portlet.webproxy;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.StringServletResponse;
+import com.liferay.portal.kernel.util.ContentTypes;
+import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -30,6 +34,7 @@ import com.liferay.portal.struts.StrutsUtil;
 import com.liferay.portlet.RenderResponseImpl;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.portlet.PortletException;
 import javax.portlet.PortletPreferences;
@@ -47,9 +52,35 @@ import org.portletbridge.portlet.PortletBridgePortlet;
  */
 public class WebProxyPortlet extends PortletBridgePortlet {
 
+	public void init() {
+		try {
+			super.init();
+
+			_enabled = true;
+		}
+		catch (Exception e) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(e.getMessage());
+			}
+		}
+
+		if (!_enabled && ServerDetector.isWebLogic() && _log.isInfoEnabled()) {
+			_log.info(
+				"WebProxyPortlet will not be enabled unless Liferay's " +
+					"serializer.jar and xalan.jar files are copied to the " +
+						"JDK's endorsed directory");
+		}
+	}
+
 	public void doView(
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
+
+		if (!_enabled) {
+			printError(renderResponse);
+
+			return;
+		}
 
 		PortletPreferences preferences = renderRequest.getPreferences();
 
@@ -78,5 +109,24 @@ public class WebProxyPortlet extends PortletBridgePortlet {
 			stringResponse.setString(output);
 		}
 	}
+
+	protected void printError(RenderResponse renderResponse)
+		throws IOException {
+
+		renderResponse.setContentType(ContentTypes.TEXT_HTML_UTF8);
+
+		PrintWriter writer = renderResponse.getWriter();
+
+		writer.print(
+			"WebProxyPortlet will not be enabled unless Liferay's " +
+				"serializer.jar and xalan.jar files are copied to the " +
+					"JDK's endorsed directory");
+
+		writer.close();
+	}
+
+	private static Log _log = LogFactoryUtil.getLog(WebProxyPortlet.class);
+
+	private boolean _enabled;
 
 }
