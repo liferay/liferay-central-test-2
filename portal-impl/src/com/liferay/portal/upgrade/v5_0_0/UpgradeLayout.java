@@ -22,11 +22,17 @@
 
 package com.liferay.portal.upgrade.v5_0_0;
 
+import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 /**
  * <a href="UpgradeLayout.java.html"><b><i>View Source</i></b></a>
@@ -50,18 +56,65 @@ public class UpgradeLayout extends UpgradeProcess {
 	protected void doUpgrade() throws Exception {
 		String languageId = LocaleUtil.toLanguageId(LocaleUtil.getDefault());
 
-		StringBuilder sb = new StringBuilder();
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
 
-		sb.append("update Layout set typeSettings = replace(replace(replace(");
-		sb.append("typeSettings, 'meta-description=', 'meta-description_");
-		sb.append(languageId);
-		sb.append("='), 'meta-keywords=', 'meta-keywords_");
-		sb.append(languageId);
-		sb.append("='), 'meta-robots=', 'meta-robots_");
-		sb.append(languageId);
-		sb.append("=') where typeSettings like '%meta-description=%'");
+		try {
+			con = DataAccess.getConnection();
 
-		runSQL(sb.toString());
+			ps = con.prepareStatement(
+				"select plid, typeSettings from Layout where typeSettings " +
+					"like '%meta-description=%'");
+
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				long plid = rs.getLong("plid");
+				String typeSettings = rs.getString("typeSettings");
+
+				typeSettings = StringUtil.replace(
+					typeSettings,
+					new String[] {
+						"meta-description=",
+						"meta-keywords=",
+						"meta-robots="
+					},
+					new String[] {
+						"meta-description_" + languageId + "=",
+						"meta-keywords_" + languageId + "=",
+						"meta-robots_" + languageId + "="
+					});
+
+				updateTypeSettings(plid, typeSettings);
+			}
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
+		}
+	}
+
+	protected void updateTypeSettings(long plid, String typeSettings)
+		throws Exception {
+
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = DataAccess.getConnection();
+
+			ps = con.prepareStatement(
+				"update Layout set typeSettings = ? where plid = ?");
+
+			ps.setString(1, typeSettings);
+			ps.setLong(2, plid);
+
+			ps.executeUpdate();
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
+		}
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(UpgradeLayout.class);
