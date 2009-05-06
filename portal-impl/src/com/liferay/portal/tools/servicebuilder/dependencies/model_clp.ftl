@@ -310,6 +310,44 @@ public class ${entity.name}Clp extends BaseModelImpl<${entity.name}> implements 
 		</#if>
 	}
 
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		<#list entity.regularColList as column>
+			<#if column_index == 0>
+				sb.append("{${column.name}=");
+				sb.append(get${column.methodName}());
+			<#elseif column_has_next>
+				sb.append(", ${column.name}=");
+				sb.append(get${column.methodName}());
+			<#else>
+				sb.append(", ${column.name}=");
+				sb.append(get${column.methodName}());
+				sb.append("}");
+			</#if>
+		</#list>
+
+		return sb.toString();
+	}
+
+	public String toXmlString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<model><model-name>");
+		sb.append("${packagePath}.model.${entity.name}");
+		sb.append("</model-name>");
+
+		<#list entity.regularColList as column>
+			sb.append("<column><column-name>${column.name}</column-name><column-value><![CDATA[");
+			sb.append(get${column.methodName}());
+			sb.append("]]></column-value></column>");
+		</#list>
+
+		sb.append("</model>");
+
+		return sb.toString();
+	}
+
 	<#list entity.regularColList as column>
 		private ${column.type} _${column.name};
 	</#list>
