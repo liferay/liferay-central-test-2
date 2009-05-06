@@ -561,11 +561,11 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 			messagePKs, flag.getMessageId(), flag.getMessageId());
 
 		try {
-			List<MBMessage> messages = new ArrayList<MBMessage>();
+			MBMessage message = MBMessageUtil.findByPrimaryKey(messageId);
 
-			messages.add(MBMessageUtil.findByPrimaryKey(messageId));
+			MBThread thread = message.getThread();
 
-			MBMessageFlagLocalServiceUtil.addReadFlags(userId, messages);
+			MBMessageFlagLocalServiceUtil.addReadFlags(userId, thread);
 		}
 		catch (NoSuchMessageException nsme) {
 			_log.error(
