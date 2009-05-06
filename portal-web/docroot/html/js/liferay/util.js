@@ -706,7 +706,7 @@ Liferay.Util = {
 						);
 					}
 
-					return cruft + escapeHTML(value);
+					return cruft + instance.escapeHTML(value);
 				},
 				{
 					cssclass: 'text',
