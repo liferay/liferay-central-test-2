@@ -33,23 +33,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class CC_PortalRolesTest extends BaseTestCase {
 	public void testCC_PortalRoles() throws Exception {
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent(
-							"//input[@value='Add Portal Permissions']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
+		selenium.click(RuntimeVariables.replace("link=Define Permissions"));
+		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Add Portal Permissions']"));
 		selenium.waitForPageToLoad("30000");
@@ -80,7 +65,7 @@ public class CC_PortalRolesTest extends BaseTestCase {
 		selenium.select("_128_scopecom.liferay.portal.model.GroupMANAGE_ARCHIVED_SETUPS",
 			RuntimeVariables.replace("label="));
 		selenium.select("_128_scopecom.liferay.portal.model.GroupMANAGE_LAYOUTS",
-			RuntimeVariables.replace("label=Enterprise"));
+			RuntimeVariables.replace("label=Portal"));
 		selenium.select("_128_scopecom.liferay.portal.model.GroupMANAGE_STAGING",
 			RuntimeVariables.replace("label="));
 		selenium.select("_128_scopecom.liferay.portal.model.GroupPERMISSIONS",

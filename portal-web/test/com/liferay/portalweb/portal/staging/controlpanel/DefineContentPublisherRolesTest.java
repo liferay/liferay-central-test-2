@@ -71,7 +71,7 @@ public class DefineContentPublisherRolesTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("//body/div[2]/ul/li[3]/a"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent("link=Content Publisher"));
+		assertTrue(selenium.isTextPresent("Content Publisher"));
 		assertTrue(selenium.isElementPresent(
 				"//input[@value='Add Portal Permissions']"));
 		assertTrue(selenium.isElementPresent(

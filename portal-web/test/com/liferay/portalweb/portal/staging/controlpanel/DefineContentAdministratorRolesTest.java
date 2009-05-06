@@ -71,7 +71,7 @@ public class DefineContentAdministratorRolesTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("//body/div[2]/ul/li[3]/a"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent("link=Content Administrator"));
+		assertTrue(selenium.isTextPresent("Content Administrator"));
 		assertTrue(selenium.isElementPresent(
 				"//input[@value='Add Portal Permissions']"));
 		assertTrue(selenium.isElementPresent(

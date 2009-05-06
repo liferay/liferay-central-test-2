@@ -33,6 +33,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class Member_BlogsRolesTest extends BaseTestCase {
 	public void testMember_BlogsRoles() throws Exception {
+		selenium.click(RuntimeVariables.replace("link=Define Permissions"));
+		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Add Portlet Permissions']"));
 		selenium.waitForPageToLoad("30000");
@@ -41,11 +43,11 @@ public class Member_BlogsRolesTest extends BaseTestCase {
 		selenium.select("_128_scope33CONFIGURATION",
 			RuntimeVariables.replace("label="));
 		selenium.select("_128_scope33VIEW",
-			RuntimeVariables.replace("label=Enterprise"));
+			RuntimeVariables.replace("label=Portal"));
 		selenium.select("_128_scopecom.liferay.portlet.blogsADD_ENTRY",
 			RuntimeVariables.replace("label="));
 		selenium.select("_128_scopecom.liferay.portlet.blogs.model.BlogsEntryADD_DISCUSSION",
-			RuntimeVariables.replace("label=Enterprise"));
+			RuntimeVariables.replace("label=Portal"));
 		selenium.select("_128_scopecom.liferay.portlet.blogs.model.BlogsEntryDELETE",
 			RuntimeVariables.replace("label="));
 		selenium.select("_128_scopecom.liferay.portlet.blogs.model.BlogsEntryDELETE_DISCUSSION",
@@ -57,7 +59,7 @@ public class Member_BlogsRolesTest extends BaseTestCase {
 		selenium.select("_128_scopecom.liferay.portlet.blogs.model.BlogsEntryUPDATE_DISCUSSION",
 			RuntimeVariables.replace("label="));
 		selenium.select("_128_scopecom.liferay.portlet.blogs.model.BlogsEntryVIEW",
-			RuntimeVariables.replace("label=Enterprise"));
+			RuntimeVariables.replace("label=Portal"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("The role permissions were updated."));

@@ -33,6 +33,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class CA_MessageBoardsRolesTest extends BaseTestCase {
 	public void testCA_MessageBoardsRoles() throws Exception {
+		selenium.click(RuntimeVariables.replace("link=Define Permissions"));
+		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Add Portlet Permissions']"));
 		selenium.waitForPageToLoad("30000");
@@ -41,45 +43,45 @@ public class CA_MessageBoardsRolesTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace("//tr[12]/td/a"));
 		selenium.waitForPageToLoad("30000");
 		selenium.select("_128_scopecom.liferay.portlet.messageboardsADD_CATEGORY",
-			RuntimeVariables.replace("label=Enterprise"));
+			RuntimeVariables.replace("label=Portal"));
 		selenium.select("_128_scopecom.liferay.portlet.messageboardsBAN_USER",
-			RuntimeVariables.replace("label=Enterprise"));
+			RuntimeVariables.replace("label=Portal"));
 		selenium.select("_128_scope19CONFIGURATION",
-			RuntimeVariables.replace("label=Enterprise"));
+			RuntimeVariables.replace("label=Portal"));
 		selenium.select("_128_scope19VIEW",
-			RuntimeVariables.replace("label=Enterprise"));
+			RuntimeVariables.replace("label=Portal"));
 		selenium.select("_128_scopecom.liferay.portlet.messageboards.model.MBCategoryADD_FILE",
-			RuntimeVariables.replace("label=Enterprise"));
+			RuntimeVariables.replace("label=Portal"));
 		selenium.select("_128_scopecom.liferay.portlet.messageboards.model.MBCategoryADD_MESSAGE",
-			RuntimeVariables.replace("label=Enterprise"));
+			RuntimeVariables.replace("label=Portal"));
 		selenium.select("_128_scopecom.liferay.portlet.messageboards.model.MBCategoryADD_SUBCATEGORY",
-			RuntimeVariables.replace("label=Enterprise"));
+			RuntimeVariables.replace("label=Portal"));
 		selenium.select("_128_scopecom.liferay.portlet.messageboards.model.MBCategoryDELETE",
-			RuntimeVariables.replace("label=Enterprise"));
+			RuntimeVariables.replace("label=Portal"));
 		selenium.select("_128_scopecom.liferay.portlet.messageboards.model.MBCategoryMOVE_THREAD",
-			RuntimeVariables.replace("label=Enterprise"));
+			RuntimeVariables.replace("label=Portal"));
 		selenium.select("_128_scopecom.liferay.portlet.messageboards.model.MBCategoryPERMISSIONS",
-			RuntimeVariables.replace("label=Enterprise"));
+			RuntimeVariables.replace("label=Portal"));
 		selenium.select("_128_scopecom.liferay.portlet.messageboards.model.MBCategoryREPLY_TO_MESSAGE",
-			RuntimeVariables.replace("label=Enterprise"));
+			RuntimeVariables.replace("label=Portal"));
 		selenium.select("_128_scopecom.liferay.portlet.messageboards.model.MBCategorySUBSCRIBE",
-			RuntimeVariables.replace("label=Enterprise"));
+			RuntimeVariables.replace("label=Portal"));
 		selenium.select("_128_scopecom.liferay.portlet.messageboards.model.MBCategoryUPDATE",
-			RuntimeVariables.replace("label=Enterprise"));
+			RuntimeVariables.replace("label=Portal"));
 		selenium.select("_128_scopecom.liferay.portlet.messageboards.model.MBCategoryUPDATE_THREAD_PRIORITY",
-			RuntimeVariables.replace("label=Enterprise"));
+			RuntimeVariables.replace("label=Portal"));
 		selenium.select("_128_scopecom.liferay.portlet.messageboards.model.MBCategoryVIEW",
-			RuntimeVariables.replace("label=Enterprise"));
+			RuntimeVariables.replace("label=Portal"));
 		selenium.select("_128_scopecom.liferay.portlet.messageboards.model.MBMessageDELETE",
-			RuntimeVariables.replace("label=Enterprise"));
+			RuntimeVariables.replace("label=Portal"));
 		selenium.select("_128_scopecom.liferay.portlet.messageboards.model.MBMessagePERMISSIONS",
-			RuntimeVariables.replace("label=Enterprise"));
+			RuntimeVariables.replace("label=Portal"));
 		selenium.select("_128_scopecom.liferay.portlet.messageboards.model.MBMessageSUBSCRIBE",
-			RuntimeVariables.replace("label=Enterprise"));
+			RuntimeVariables.replace("label=Portal"));
 		selenium.select("_128_scopecom.liferay.portlet.messageboards.model.MBMessageUPDATE",
-			RuntimeVariables.replace("label=Enterprise"));
+			RuntimeVariables.replace("label=Portal"));
 		selenium.select("_128_scopecom.liferay.portlet.messageboards.model.MBMessageVIEW",
-			RuntimeVariables.replace("label=Enterprise"));
+			RuntimeVariables.replace("label=Portal"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("The role permissions were updated."));

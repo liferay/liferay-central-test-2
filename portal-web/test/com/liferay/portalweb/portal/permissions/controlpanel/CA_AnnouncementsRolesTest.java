@@ -33,23 +33,25 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class CA_AnnouncementsRolesTest extends BaseTestCase {
 	public void testCA_AnnouncementsRoles() throws Exception {
+		selenium.click(RuntimeVariables.replace("link=Define Permissions"));
+		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Add Portlet Permissions']"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("//tr[7]/td/a"));
 		selenium.waitForPageToLoad("30000");
 		selenium.select("_128_scope84ADD_ENTRY",
-			RuntimeVariables.replace("label=Enterprise"));
+			RuntimeVariables.replace("label=Portal"));
 		selenium.select("_128_scope84CONFIGURATION",
-			RuntimeVariables.replace("label=Enterprise"));
+			RuntimeVariables.replace("label=Portal"));
 		selenium.select("_128_scope84VIEW",
-			RuntimeVariables.replace("label=Enterprise"));
+			RuntimeVariables.replace("label=Portal"));
 		selenium.select("_128_scopecom.liferay.portlet.announcements.model.AnnouncementsEntryDELETE",
-			RuntimeVariables.replace("label=Enterprise"));
+			RuntimeVariables.replace("label=Portal"));
 		selenium.select("_128_scopecom.liferay.portlet.announcements.model.AnnouncementsEntryUPDATE",
-			RuntimeVariables.replace("label=Enterprise"));
+			RuntimeVariables.replace("label=Portal"));
 		selenium.select("_128_scopecom.liferay.portlet.announcements.model.AnnouncementsEntryVIEW",
-			RuntimeVariables.replace("label=Enterprise"));
+			RuntimeVariables.replace("label=Portal"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("The role permissions were updated."));

@@ -33,6 +33,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class Member_DocumentLibraryRolesTest extends BaseTestCase {
 	public void testMember_DocumentLibraryRoles() throws Exception {
+		selenium.click(RuntimeVariables.replace("link=Define Permissions"));
+		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Add Portlet Permissions']"));
 		selenium.waitForPageToLoad("30000");
@@ -41,11 +43,11 @@ public class Member_DocumentLibraryRolesTest extends BaseTestCase {
 		selenium.select("_128_scope20CONFIGURATION",
 			RuntimeVariables.replace("label="));
 		selenium.select("_128_scope20VIEW",
-			RuntimeVariables.replace("label=Enterprise"));
+			RuntimeVariables.replace("label=Portal"));
 		selenium.select("_128_scopecom.liferay.portlet.documentlibraryADD_FOLDER",
 			RuntimeVariables.replace("label="));
 		selenium.select("_128_scopecom.liferay.portlet.documentlibrary.model.DLFileEntryADD_DISCUSSION",
-			RuntimeVariables.replace("label=Enterprise"));
+			RuntimeVariables.replace("label=Portal"));
 		selenium.select("_128_scopecom.liferay.portlet.documentlibrary.model.DLFileEntryDELETE",
 			RuntimeVariables.replace("label="));
 		selenium.select("_128_scopecom.liferay.portlet.documentlibrary.model.DLFileEntryDELETE_DISCUSSION",
@@ -57,11 +59,11 @@ public class Member_DocumentLibraryRolesTest extends BaseTestCase {
 		selenium.select("_128_scopecom.liferay.portlet.documentlibrary.model.DLFileEntryUPDATE_DISCUSSION",
 			RuntimeVariables.replace("label="));
 		selenium.select("_128_scopecom.liferay.portlet.documentlibrary.model.DLFileEntryVIEW",
-			RuntimeVariables.replace("label=Enterprise"));
+			RuntimeVariables.replace("label=Portal"));
 		selenium.select("_128_scopecom.liferay.portlet.documentlibrary.model.DLFolderADD_DOCUMENT",
-			RuntimeVariables.replace("label=Enterprise"));
+			RuntimeVariables.replace("label=Portal"));
 		selenium.select("_128_scopecom.liferay.portlet.documentlibrary.model.DLFolderADD_SHORTCUT",
-			RuntimeVariables.replace("label=Enterprise"));
+			RuntimeVariables.replace("label=Portal"));
 		selenium.select("_128_scopecom.liferay.portlet.documentlibrary.model.DLFolderADD_SUBFOLDER",
 			RuntimeVariables.replace("label="));
 		selenium.select("_128_scopecom.liferay.portlet.documentlibrary.model.DLFolderDELETE",
@@ -71,9 +73,9 @@ public class Member_DocumentLibraryRolesTest extends BaseTestCase {
 		selenium.select("_128_scopecom.liferay.portlet.documentlibrary.model.DLFolderUPDATE",
 			RuntimeVariables.replace("label="));
 		selenium.select("_128_scopecom.liferay.portlet.documentlibrary.model.DLFolderVIEW",
-			RuntimeVariables.replace("label=Enterprise"));
+			RuntimeVariables.replace("label=Portal"));
 		selenium.select("_128_scopecom.liferay.portlet.documentlibrary.model.DLFileShortcutADD_DISCUSSION",
-			RuntimeVariables.replace("label=Enterprise"));
+			RuntimeVariables.replace("label=Portal"));
 		selenium.select("_128_scopecom.liferay.portlet.documentlibrary.model.DLFileShortcutDELETE",
 			RuntimeVariables.replace("label="));
 		selenium.select("_128_scopecom.liferay.portlet.documentlibrary.model.DLFileShortcutDELETE_DISCUSSION",
@@ -85,7 +87,7 @@ public class Member_DocumentLibraryRolesTest extends BaseTestCase {
 		selenium.select("_128_scopecom.liferay.portlet.documentlibrary.model.DLFileShortcutUPDATE_DISCUSSION",
 			RuntimeVariables.replace("label="));
 		selenium.select("_128_scopecom.liferay.portlet.documentlibrary.model.DLFileShortcutVIEW",
-			RuntimeVariables.replace("label=Enterprise"));
+			RuntimeVariables.replace("label=Portal"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("The role permissions were updated."));

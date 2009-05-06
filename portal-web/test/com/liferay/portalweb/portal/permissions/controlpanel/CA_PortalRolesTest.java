@@ -33,6 +33,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class CA_PortalRolesTest extends BaseTestCase {
 	public void testCA_PortalRoles() throws Exception {
+		selenium.click(RuntimeVariables.replace("link=Define Permissions"));
+		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Add Portal Permissions']"));
 		selenium.waitForPageToLoad("30000");
@@ -59,11 +61,11 @@ public class CA_PortalRolesTest extends BaseTestCase {
 		selenium.select("_128_scopecom.liferay.portal.model.GroupDELETE",
 			RuntimeVariables.replace("label="));
 		selenium.select("_128_scopecom.liferay.portal.model.GroupMANAGE_ANNOUNCEMENTS",
-			RuntimeVariables.replace("label=Enterprise"));
+			RuntimeVariables.replace("label=Portal"));
 		selenium.select("_128_scopecom.liferay.portal.model.GroupMANAGE_ARCHIVED_SETUPS",
 			RuntimeVariables.replace("label="));
 		selenium.select("_128_scopecom.liferay.portal.model.GroupMANAGE_LAYOUTS",
-			RuntimeVariables.replace("label=Enterprise"));
+			RuntimeVariables.replace("label=Portal"));
 		selenium.select("_128_scopecom.liferay.portal.model.GroupMANAGE_STAGING",
 			RuntimeVariables.replace("label="));
 		selenium.select("_128_scopecom.liferay.portal.model.GroupPERMISSIONS",
@@ -81,7 +83,7 @@ public class CA_PortalRolesTest extends BaseTestCase {
 		selenium.select("_128_scopecom.liferay.portal.model.OrganizationDELETE",
 			RuntimeVariables.replace("label="));
 		selenium.select("_128_scopecom.liferay.portal.model.OrganizationMANAGE_ANNOUNCEMENTS",
-			RuntimeVariables.replace("label=Enterprise"));
+			RuntimeVariables.replace("label=Portal"));
 		selenium.select("_128_scopecom.liferay.portal.model.OrganizationMANAGE_ARCHIVED_SETUPS",
 			RuntimeVariables.replace("label="));
 		selenium.select("_128_scopecom.liferay.portal.model.OrganizationMANAGE_LAYOUTS",
@@ -117,7 +119,7 @@ public class CA_PortalRolesTest extends BaseTestCase {
 		selenium.select("_128_scopecom.liferay.portal.model.RoleDELETE",
 			RuntimeVariables.replace("label="));
 		selenium.select("_128_scopecom.liferay.portal.model.RoleMANAGE_ANNOUNCEMENTS",
-			RuntimeVariables.replace("label=Enterprise"));
+			RuntimeVariables.replace("label=Portal"));
 		selenium.select("_128_scopecom.liferay.portal.model.RolePERMISSIONS",
 			RuntimeVariables.replace("label="));
 		selenium.select("_128_scopecom.liferay.portal.model.RoleUPDATE",
@@ -147,7 +149,7 @@ public class CA_PortalRolesTest extends BaseTestCase {
 		selenium.select("_128_scopecom.liferay.portal.model.UserGroupDELETE",
 			RuntimeVariables.replace("label="));
 		selenium.select("_128_scopecom.liferay.portal.model.UserGroupMANAGE_ANNOUNCEMENTS",
-			RuntimeVariables.replace("label=Enterprise"));
+			RuntimeVariables.replace("label=Portal"));
 		selenium.select("_128_scopecom.liferay.portal.model.UserGroupPERMISSIONS",
 			RuntimeVariables.replace("label="));
 		selenium.select("_128_scopecom.liferay.portal.model.UserGroupMANAGE_LAYOUTS",

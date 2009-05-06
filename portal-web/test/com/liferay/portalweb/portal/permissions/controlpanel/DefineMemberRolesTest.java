@@ -59,6 +59,6 @@ public class DefineMemberRolesTest extends BaseTestCase {
 				"//input[@value='Add Portlet Permissions']"));
 		assertTrue(selenium.isElementPresent(
 				"//input[@value='Add Portal Permissions']"));
-		assertTrue(selenium.isElementPresent("link=Member"));
+		assertTrue(selenium.isTextPresent("Member"));
 	}
 }

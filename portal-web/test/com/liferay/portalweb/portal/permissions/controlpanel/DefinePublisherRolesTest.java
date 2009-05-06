@@ -59,6 +59,6 @@ public class DefinePublisherRolesTest extends BaseTestCase {
 				"//input[@value='Add Portlet Permissions']"));
 		assertTrue(selenium.isElementPresent(
 				"//input[@value='Add Portal Permissions']"));
-		assertTrue(selenium.isElementPresent("link=Publisher"));
+		assertTrue(selenium.isTextPresent("Publisher"));
 	}
 }

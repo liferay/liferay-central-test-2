@@ -59,6 +59,6 @@ public class DefineWriterRolesTest extends BaseTestCase {
 				"//input[@value='Add Portlet Permissions']"));
 		assertTrue(selenium.isElementPresent(
 				"//input[@value='Add Portal Permissions']"));
-		assertTrue(selenium.isElementPresent("link=Writer"));
+		assertTrue(selenium.isTextPresent("Writer"));
 	}
 }

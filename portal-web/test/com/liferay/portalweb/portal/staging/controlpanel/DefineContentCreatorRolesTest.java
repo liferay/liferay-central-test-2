@@ -71,7 +71,7 @@ public class DefineContentCreatorRolesTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("//body/div[2]/ul/li[3]/a"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent("link=Content Creator"));
+		assertTrue(selenium.isTextPresent("Content Creator"));
 		assertTrue(selenium.isElementPresent(
 				"//input[@value='Add Portal Permissions']"));
 		assertTrue(selenium.isElementPresent(
