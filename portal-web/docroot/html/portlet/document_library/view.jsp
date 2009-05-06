@@ -316,8 +316,10 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 				}
 			}
 
-			PortalUtil.setPageSubtitle(folder.getName(), request);
-			PortalUtil.setPageDescription(folder.getDescription(), request);
+			if (portletName.equals(PortletKeys.DOCUMENT_LIBRARY)) {
+				PortalUtil.setPageSubtitle(folder.getName(), request);
+				PortalUtil.setPageDescription(folder.getDescription(), request);
+			}
 		}
 		%>
 
