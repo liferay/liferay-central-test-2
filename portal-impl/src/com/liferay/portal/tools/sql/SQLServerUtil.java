@@ -58,6 +58,10 @@ public class SQLServerUtil extends DBUtil {
 		return template;
 	}
 
+	public boolean isSupportsAlterColumnType() {
+		return _SUPPORTS_ALTER_COLUMN_TYPE;
+	}
+
 	public boolean isSupportsUpdateWithInnerJoin() {
 		return _SUPPORTS_UPDATE_WITH_INNER_JOIN;
 	}
@@ -144,6 +148,8 @@ public class SQLServerUtil extends DBUtil {
 		" varchar(2000)", " text", " varchar",
 		"  identity(1,1)", "go"
 	};
+
+	private static boolean _SUPPORTS_ALTER_COLUMN_TYPE;
 
 	private static boolean _SUPPORTS_UPDATE_WITH_INNER_JOIN = true;
 
