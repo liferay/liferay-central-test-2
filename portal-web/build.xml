@@ -314,7 +314,7 @@
 		<war
 			basedir="docroot"
 			destfile="${war.file}.war"
-			excludes="WEB-INF/web.xml,html/js/editor/fckeditor/_samples/**"
+			excludes="WEB-INF/web.xml,html/js/editor/_fckeditor/**,html/js/editor/fckeditor/_samples/**"
 			webxml="docroot/WEB-INF/web.xml"
 		/>
 	</target>

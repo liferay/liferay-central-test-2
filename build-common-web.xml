@@ -113,7 +113,7 @@
 						<available file="docroot" type="dir" />
 						<then>
 							<copy todir="${war.file.dest}" preservelastmodified="true">
-								<fileset dir="docroot" />
+								<fileset dir="docroot" excludes="/html/js/editor/_fckeditor/**" />
 							</copy>
 						</then>
 					</elseif>

@@ -189,7 +189,7 @@ ECJ was automatically installed. Please rerun your task.
 			<available file="tmp" type="dir" />
 			<then>
 				<copy todir="${war.file.dest}">
-					<fileset dir="tmp" />
+					<fileset dir="tmp" excludes="/html/js/editor/_fckeditor/**" />
 				</copy>
 			</then>
 			<elseif>
