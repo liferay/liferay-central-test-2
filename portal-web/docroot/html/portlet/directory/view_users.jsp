@@ -79,7 +79,7 @@ if (Validator.isNotNull(viewUsersRedirect)) {
 	<c:if test="<%= userGroup != null %>">
 		<input name="<portlet:namespace /><%= UserDisplayTerms.USER_GROUP_ID %>" type="hidden" value="<%= userGroup.getUserGroupId() %>" />
 
-		<h3><%= LanguageUtil.format(pageContext, "users-of-x", organization.getName()) %></h3>
+		<h3><%= LanguageUtil.format(pageContext, "users-of-x", userGroup.getName()) %></h3>
 	</c:if>
 
 	<liferay-ui:search-form
