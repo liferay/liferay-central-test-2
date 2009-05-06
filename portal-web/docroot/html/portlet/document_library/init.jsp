@@ -125,7 +125,7 @@ String allFileEntryColumns = defaultFileEntryColumns;
 String[] fileEntryColumns = StringUtil.split(PrefsParamUtil.getString(preferences, request, "fileEntryColumns", defaultFileEntryColumns));
 
 if (!portletId.equals(PortletKeys.DOCUMENT_LIBRARY)) {
-	folderColumns = ArrayUtil.remove(fileEntryColumns, "action");
+	fileEntryColumns = ArrayUtil.remove(fileEntryColumns, "action");
 }
 
 boolean enableCommentRatings = GetterUtil.getBoolean(preferences.getValue("enable-comment-ratings", null), true);
