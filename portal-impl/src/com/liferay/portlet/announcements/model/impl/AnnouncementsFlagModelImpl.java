@@ -329,23 +329,23 @@ public class AnnouncementsFlagModelImpl extends BaseModelImpl<AnnouncementsFlag>
 
 		sb.append(
 			"<column><column-name>flagId</column-name><column-value><![CDATA[");
-		sb.append("getFlagId()");
+		sb.append(getFlagId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>userId</column-name><column-value><![CDATA[");
-		sb.append("getUserId()");
+		sb.append(getUserId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>createDate</column-name><column-value><![CDATA[");
-		sb.append("getCreateDate()");
+		sb.append(getCreateDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>entryId</column-name><column-value><![CDATA[");
-		sb.append("getEntryId()");
+		sb.append(getEntryId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>value</column-name><column-value><![CDATA[");
-		sb.append("getValue()");
+		sb.append(getValue());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");

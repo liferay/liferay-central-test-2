@@ -376,39 +376,39 @@ public class BlogsStatsUserModelImpl extends BaseModelImpl<BlogsStatsUser> {
 
 		sb.append(
 			"<column><column-name>statsUserId</column-name><column-value><![CDATA[");
-		sb.append("getStatsUserId()");
+		sb.append(getStatsUserId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>groupId</column-name><column-value><![CDATA[");
-		sb.append("getGroupId()");
+		sb.append(getGroupId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>companyId</column-name><column-value><![CDATA[");
-		sb.append("getCompanyId()");
+		sb.append(getCompanyId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>userId</column-name><column-value><![CDATA[");
-		sb.append("getUserId()");
+		sb.append(getUserId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>entryCount</column-name><column-value><![CDATA[");
-		sb.append("getEntryCount()");
+		sb.append(getEntryCount());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>lastPostDate</column-name><column-value><![CDATA[");
-		sb.append("getLastPostDate()");
+		sb.append(getLastPostDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>ratingsTotalEntries</column-name><column-value><![CDATA[");
-		sb.append("getRatingsTotalEntries()");
+		sb.append(getRatingsTotalEntries());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>ratingsTotalScore</column-name><column-value><![CDATA[");
-		sb.append("getRatingsTotalScore()");
+		sb.append(getRatingsTotalScore());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>ratingsAverageScore</column-name><column-value><![CDATA[");
-		sb.append("getRatingsAverageScore()");
+		sb.append(getRatingsAverageScore());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");

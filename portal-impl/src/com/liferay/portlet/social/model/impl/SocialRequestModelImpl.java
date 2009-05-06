@@ -499,55 +499,55 @@ public class SocialRequestModelImpl extends BaseModelImpl<SocialRequest> {
 
 		sb.append(
 			"<column><column-name>uuid</column-name><column-value><![CDATA[");
-		sb.append("getUuid()");
+		sb.append(getUuid());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>requestId</column-name><column-value><![CDATA[");
-		sb.append("getRequestId()");
+		sb.append(getRequestId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>groupId</column-name><column-value><![CDATA[");
-		sb.append("getGroupId()");
+		sb.append(getGroupId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>companyId</column-name><column-value><![CDATA[");
-		sb.append("getCompanyId()");
+		sb.append(getCompanyId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>userId</column-name><column-value><![CDATA[");
-		sb.append("getUserId()");
+		sb.append(getUserId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>createDate</column-name><column-value><![CDATA[");
-		sb.append("getCreateDate()");
+		sb.append(getCreateDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>modifiedDate</column-name><column-value><![CDATA[");
-		sb.append("getModifiedDate()");
+		sb.append(getModifiedDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>classNameId</column-name><column-value><![CDATA[");
-		sb.append("getClassNameId()");
+		sb.append(getClassNameId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>classPK</column-name><column-value><![CDATA[");
-		sb.append("getClassPK()");
+		sb.append(getClassPK());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>type</column-name><column-value><![CDATA[");
-		sb.append("getType()");
+		sb.append(getType());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>extraData</column-name><column-value><![CDATA[");
-		sb.append("getExtraData()");
+		sb.append(getExtraData());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>receiverUserId</column-name><column-value><![CDATA[");
-		sb.append("getReceiverUserId()");
+		sb.append(getReceiverUserId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>status</column-name><column-value><![CDATA[");
-		sb.append("getStatus()");
+		sb.append(getStatus());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");

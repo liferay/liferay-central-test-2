@@ -684,107 +684,107 @@ public class PasswordPolicyModelImpl extends BaseModelImpl<PasswordPolicy> {
 
 		sb.append(
 			"<column><column-name>passwordPolicyId</column-name><column-value><![CDATA[");
-		sb.append("getPasswordPolicyId()");
+		sb.append(getPasswordPolicyId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>companyId</column-name><column-value><![CDATA[");
-		sb.append("getCompanyId()");
+		sb.append(getCompanyId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>userId</column-name><column-value><![CDATA[");
-		sb.append("getUserId()");
+		sb.append(getUserId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>userName</column-name><column-value><![CDATA[");
-		sb.append("getUserName()");
+		sb.append(getUserName());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>createDate</column-name><column-value><![CDATA[");
-		sb.append("getCreateDate()");
+		sb.append(getCreateDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>modifiedDate</column-name><column-value><![CDATA[");
-		sb.append("getModifiedDate()");
+		sb.append(getModifiedDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>defaultPolicy</column-name><column-value><![CDATA[");
-		sb.append("getDefaultPolicy()");
+		sb.append(getDefaultPolicy());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>name</column-name><column-value><![CDATA[");
-		sb.append("getName()");
+		sb.append(getName());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>description</column-name><column-value><![CDATA[");
-		sb.append("getDescription()");
+		sb.append(getDescription());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>changeable</column-name><column-value><![CDATA[");
-		sb.append("getChangeable()");
+		sb.append(getChangeable());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>changeRequired</column-name><column-value><![CDATA[");
-		sb.append("getChangeRequired()");
+		sb.append(getChangeRequired());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>minAge</column-name><column-value><![CDATA[");
-		sb.append("getMinAge()");
+		sb.append(getMinAge());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>checkSyntax</column-name><column-value><![CDATA[");
-		sb.append("getCheckSyntax()");
+		sb.append(getCheckSyntax());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>allowDictionaryWords</column-name><column-value><![CDATA[");
-		sb.append("getAllowDictionaryWords()");
+		sb.append(getAllowDictionaryWords());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>minLength</column-name><column-value><![CDATA[");
-		sb.append("getMinLength()");
+		sb.append(getMinLength());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>history</column-name><column-value><![CDATA[");
-		sb.append("getHistory()");
+		sb.append(getHistory());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>historyCount</column-name><column-value><![CDATA[");
-		sb.append("getHistoryCount()");
+		sb.append(getHistoryCount());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>expireable</column-name><column-value><![CDATA[");
-		sb.append("getExpireable()");
+		sb.append(getExpireable());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>maxAge</column-name><column-value><![CDATA[");
-		sb.append("getMaxAge()");
+		sb.append(getMaxAge());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>warningTime</column-name><column-value><![CDATA[");
-		sb.append("getWarningTime()");
+		sb.append(getWarningTime());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>graceLimit</column-name><column-value><![CDATA[");
-		sb.append("getGraceLimit()");
+		sb.append(getGraceLimit());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>lockout</column-name><column-value><![CDATA[");
-		sb.append("getLockout()");
+		sb.append(getLockout());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>maxFailure</column-name><column-value><![CDATA[");
-		sb.append("getMaxFailure()");
+		sb.append(getMaxFailure());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>lockoutDuration</column-name><column-value><![CDATA[");
-		sb.append("getLockoutDuration()");
+		sb.append(getLockoutDuration());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>requireUnlock</column-name><column-value><![CDATA[");
-		sb.append("getRequireUnlock()");
+		sb.append(getRequireUnlock());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>resetFailureCount</column-name><column-value><![CDATA[");
-		sb.append("getResetFailureCount()");
+		sb.append(getResetFailureCount());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");

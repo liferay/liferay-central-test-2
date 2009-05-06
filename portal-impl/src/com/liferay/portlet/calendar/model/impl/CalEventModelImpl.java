@@ -593,91 +593,91 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent> {
 
 		sb.append(
 			"<column><column-name>uuid</column-name><column-value><![CDATA[");
-		sb.append("getUuid()");
+		sb.append(getUuid());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>eventId</column-name><column-value><![CDATA[");
-		sb.append("getEventId()");
+		sb.append(getEventId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>groupId</column-name><column-value><![CDATA[");
-		sb.append("getGroupId()");
+		sb.append(getGroupId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>companyId</column-name><column-value><![CDATA[");
-		sb.append("getCompanyId()");
+		sb.append(getCompanyId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>userId</column-name><column-value><![CDATA[");
-		sb.append("getUserId()");
+		sb.append(getUserId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>userName</column-name><column-value><![CDATA[");
-		sb.append("getUserName()");
+		sb.append(getUserName());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>createDate</column-name><column-value><![CDATA[");
-		sb.append("getCreateDate()");
+		sb.append(getCreateDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>modifiedDate</column-name><column-value><![CDATA[");
-		sb.append("getModifiedDate()");
+		sb.append(getModifiedDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>title</column-name><column-value><![CDATA[");
-		sb.append("getTitle()");
+		sb.append(getTitle());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>description</column-name><column-value><![CDATA[");
-		sb.append("getDescription()");
+		sb.append(getDescription());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>startDate</column-name><column-value><![CDATA[");
-		sb.append("getStartDate()");
+		sb.append(getStartDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>endDate</column-name><column-value><![CDATA[");
-		sb.append("getEndDate()");
+		sb.append(getEndDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>durationHour</column-name><column-value><![CDATA[");
-		sb.append("getDurationHour()");
+		sb.append(getDurationHour());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>durationMinute</column-name><column-value><![CDATA[");
-		sb.append("getDurationMinute()");
+		sb.append(getDurationMinute());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>allDay</column-name><column-value><![CDATA[");
-		sb.append("getAllDay()");
+		sb.append(getAllDay());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>timeZoneSensitive</column-name><column-value><![CDATA[");
-		sb.append("getTimeZoneSensitive()");
+		sb.append(getTimeZoneSensitive());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>type</column-name><column-value><![CDATA[");
-		sb.append("getType()");
+		sb.append(getType());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>repeating</column-name><column-value><![CDATA[");
-		sb.append("getRepeating()");
+		sb.append(getRepeating());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>recurrence</column-name><column-value><![CDATA[");
-		sb.append("getRecurrence()");
+		sb.append(getRecurrence());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>remindBy</column-name><column-value><![CDATA[");
-		sb.append("getRemindBy()");
+		sb.append(getRemindBy());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>firstReminder</column-name><column-value><![CDATA[");
-		sb.append("getFirstReminder()");
+		sb.append(getFirstReminder());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>secondReminder</column-name><column-value><![CDATA[");
-		sb.append("getSecondReminder()");
+		sb.append(getSecondReminder());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");

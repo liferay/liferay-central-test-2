@@ -447,55 +447,55 @@ public class LayoutSetModelImpl extends BaseModelImpl<LayoutSet> {
 
 		sb.append(
 			"<column><column-name>layoutSetId</column-name><column-value><![CDATA[");
-		sb.append("getLayoutSetId()");
+		sb.append(getLayoutSetId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>groupId</column-name><column-value><![CDATA[");
-		sb.append("getGroupId()");
+		sb.append(getGroupId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>companyId</column-name><column-value><![CDATA[");
-		sb.append("getCompanyId()");
+		sb.append(getCompanyId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>privateLayout</column-name><column-value><![CDATA[");
-		sb.append("getPrivateLayout()");
+		sb.append(getPrivateLayout());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>logo</column-name><column-value><![CDATA[");
-		sb.append("getLogo()");
+		sb.append(getLogo());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>logoId</column-name><column-value><![CDATA[");
-		sb.append("getLogoId()");
+		sb.append(getLogoId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>themeId</column-name><column-value><![CDATA[");
-		sb.append("getThemeId()");
+		sb.append(getThemeId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>colorSchemeId</column-name><column-value><![CDATA[");
-		sb.append("getColorSchemeId()");
+		sb.append(getColorSchemeId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>wapThemeId</column-name><column-value><![CDATA[");
-		sb.append("getWapThemeId()");
+		sb.append(getWapThemeId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>wapColorSchemeId</column-name><column-value><![CDATA[");
-		sb.append("getWapColorSchemeId()");
+		sb.append(getWapColorSchemeId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>css</column-name><column-value><![CDATA[");
-		sb.append("getCss()");
+		sb.append(getCss());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>pageCount</column-name><column-value><![CDATA[");
-		sb.append("getPageCount()");
+		sb.append(getPageCount());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>virtualHost</column-name><column-value><![CDATA[");
-		sb.append("getVirtualHost()");
+		sb.append(getVirtualHost());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");

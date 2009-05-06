@@ -536,75 +536,75 @@ public class JournalTemplateModelImpl extends BaseModelImpl<JournalTemplate> {
 
 		sb.append(
 			"<column><column-name>uuid</column-name><column-value><![CDATA[");
-		sb.append("getUuid()");
+		sb.append(getUuid());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>id</column-name><column-value><![CDATA[");
-		sb.append("getId()");
+		sb.append(getId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>groupId</column-name><column-value><![CDATA[");
-		sb.append("getGroupId()");
+		sb.append(getGroupId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>companyId</column-name><column-value><![CDATA[");
-		sb.append("getCompanyId()");
+		sb.append(getCompanyId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>userId</column-name><column-value><![CDATA[");
-		sb.append("getUserId()");
+		sb.append(getUserId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>userName</column-name><column-value><![CDATA[");
-		sb.append("getUserName()");
+		sb.append(getUserName());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>createDate</column-name><column-value><![CDATA[");
-		sb.append("getCreateDate()");
+		sb.append(getCreateDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>modifiedDate</column-name><column-value><![CDATA[");
-		sb.append("getModifiedDate()");
+		sb.append(getModifiedDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>templateId</column-name><column-value><![CDATA[");
-		sb.append("getTemplateId()");
+		sb.append(getTemplateId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>structureId</column-name><column-value><![CDATA[");
-		sb.append("getStructureId()");
+		sb.append(getStructureId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>name</column-name><column-value><![CDATA[");
-		sb.append("getName()");
+		sb.append(getName());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>description</column-name><column-value><![CDATA[");
-		sb.append("getDescription()");
+		sb.append(getDescription());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>xsl</column-name><column-value><![CDATA[");
-		sb.append("getXsl()");
+		sb.append(getXsl());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>langType</column-name><column-value><![CDATA[");
-		sb.append("getLangType()");
+		sb.append(getLangType());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>cacheable</column-name><column-value><![CDATA[");
-		sb.append("getCacheable()");
+		sb.append(getCacheable());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>smallImage</column-name><column-value><![CDATA[");
-		sb.append("getSmallImage()");
+		sb.append(getSmallImage());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>smallImageId</column-name><column-value><![CDATA[");
-		sb.append("getSmallImageId()");
+		sb.append(getSmallImageId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>smallImageURL</column-name><column-value><![CDATA[");
-		sb.append("getSmallImageURL()");
+		sb.append(getSmallImageURL());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");

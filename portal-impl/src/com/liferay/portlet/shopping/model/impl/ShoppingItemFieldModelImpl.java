@@ -298,23 +298,23 @@ public class ShoppingItemFieldModelImpl extends BaseModelImpl<ShoppingItemField>
 
 		sb.append(
 			"<column><column-name>itemFieldId</column-name><column-value><![CDATA[");
-		sb.append("getItemFieldId()");
+		sb.append(getItemFieldId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>itemId</column-name><column-value><![CDATA[");
-		sb.append("getItemId()");
+		sb.append(getItemId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>name</column-name><column-value><![CDATA[");
-		sb.append("getName()");
+		sb.append(getName());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>values</column-name><column-value><![CDATA[");
-		sb.append("getValues()");
+		sb.append(getValues());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>description</column-name><column-value><![CDATA[");
-		sb.append("getDescription()");
+		sb.append(getDescription());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");

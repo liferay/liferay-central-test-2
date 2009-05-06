@@ -288,19 +288,19 @@ public class PermissionModelImpl extends BaseModelImpl<Permission> {
 
 		sb.append(
 			"<column><column-name>permissionId</column-name><column-value><![CDATA[");
-		sb.append("getPermissionId()");
+		sb.append(getPermissionId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>companyId</column-name><column-value><![CDATA[");
-		sb.append("getCompanyId()");
+		sb.append(getCompanyId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>actionId</column-name><column-value><![CDATA[");
-		sb.append("getActionId()");
+		sb.append(getActionId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>resourceId</column-name><column-value><![CDATA[");
-		sb.append("getResourceId()");
+		sb.append(getResourceId());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");

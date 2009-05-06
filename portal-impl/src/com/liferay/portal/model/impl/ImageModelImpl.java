@@ -321,31 +321,31 @@ public class ImageModelImpl extends BaseModelImpl<Image> {
 
 		sb.append(
 			"<column><column-name>imageId</column-name><column-value><![CDATA[");
-		sb.append("getImageId()");
+		sb.append(getImageId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>modifiedDate</column-name><column-value><![CDATA[");
-		sb.append("getModifiedDate()");
+		sb.append(getModifiedDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>text</column-name><column-value><![CDATA[");
-		sb.append("getText()");
+		sb.append(getText());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>type</column-name><column-value><![CDATA[");
-		sb.append("getType()");
+		sb.append(getType());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>height</column-name><column-value><![CDATA[");
-		sb.append("getHeight()");
+		sb.append(getHeight());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>width</column-name><column-value><![CDATA[");
-		sb.append("getWidth()");
+		sb.append(getWidth());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>size</column-name><column-value><![CDATA[");
-		sb.append("getSize()");
+		sb.append(getSize());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");

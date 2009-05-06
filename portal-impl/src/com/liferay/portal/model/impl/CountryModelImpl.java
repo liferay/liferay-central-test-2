@@ -341,31 +341,31 @@ public class CountryModelImpl extends BaseModelImpl<Country> {
 
 		sb.append(
 			"<column><column-name>countryId</column-name><column-value><![CDATA[");
-		sb.append("getCountryId()");
+		sb.append(getCountryId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>name</column-name><column-value><![CDATA[");
-		sb.append("getName()");
+		sb.append(getName());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>a2</column-name><column-value><![CDATA[");
-		sb.append("getA2()");
+		sb.append(getA2());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>a3</column-name><column-value><![CDATA[");
-		sb.append("getA3()");
+		sb.append(getA3());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>number</column-name><column-value><![CDATA[");
-		sb.append("getNumber()");
+		sb.append(getNumber());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>idd</column-name><column-value><![CDATA[");
-		sb.append("getIdd()");
+		sb.append(getIdd());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>active</column-name><column-value><![CDATA[");
-		sb.append("getActive()");
+		sb.append(getActive());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");

@@ -399,47 +399,47 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut> {
 
 		sb.append(
 			"<column><column-name>uuid</column-name><column-value><![CDATA[");
-		sb.append("getUuid()");
+		sb.append(getUuid());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>fileShortcutId</column-name><column-value><![CDATA[");
-		sb.append("getFileShortcutId()");
+		sb.append(getFileShortcutId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>groupId</column-name><column-value><![CDATA[");
-		sb.append("getGroupId()");
+		sb.append(getGroupId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>companyId</column-name><column-value><![CDATA[");
-		sb.append("getCompanyId()");
+		sb.append(getCompanyId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>userId</column-name><column-value><![CDATA[");
-		sb.append("getUserId()");
+		sb.append(getUserId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>userName</column-name><column-value><![CDATA[");
-		sb.append("getUserName()");
+		sb.append(getUserName());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>createDate</column-name><column-value><![CDATA[");
-		sb.append("getCreateDate()");
+		sb.append(getCreateDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>modifiedDate</column-name><column-value><![CDATA[");
-		sb.append("getModifiedDate()");
+		sb.append(getModifiedDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>folderId</column-name><column-value><![CDATA[");
-		sb.append("getFolderId()");
+		sb.append(getFolderId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>toFolderId</column-name><column-value><![CDATA[");
-		sb.append("getToFolderId()");
+		sb.append(getToFolderId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>toName</column-name><column-value><![CDATA[");
-		sb.append("getToName()");
+		sb.append(getToName());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");

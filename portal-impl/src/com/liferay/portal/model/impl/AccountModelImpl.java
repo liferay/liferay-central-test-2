@@ -460,67 +460,67 @@ public class AccountModelImpl extends BaseModelImpl<Account> {
 
 		sb.append(
 			"<column><column-name>accountId</column-name><column-value><![CDATA[");
-		sb.append("getAccountId()");
+		sb.append(getAccountId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>companyId</column-name><column-value><![CDATA[");
-		sb.append("getCompanyId()");
+		sb.append(getCompanyId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>userId</column-name><column-value><![CDATA[");
-		sb.append("getUserId()");
+		sb.append(getUserId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>userName</column-name><column-value><![CDATA[");
-		sb.append("getUserName()");
+		sb.append(getUserName());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>createDate</column-name><column-value><![CDATA[");
-		sb.append("getCreateDate()");
+		sb.append(getCreateDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>modifiedDate</column-name><column-value><![CDATA[");
-		sb.append("getModifiedDate()");
+		sb.append(getModifiedDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>parentAccountId</column-name><column-value><![CDATA[");
-		sb.append("getParentAccountId()");
+		sb.append(getParentAccountId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>name</column-name><column-value><![CDATA[");
-		sb.append("getName()");
+		sb.append(getName());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>legalName</column-name><column-value><![CDATA[");
-		sb.append("getLegalName()");
+		sb.append(getLegalName());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>legalId</column-name><column-value><![CDATA[");
-		sb.append("getLegalId()");
+		sb.append(getLegalId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>legalType</column-name><column-value><![CDATA[");
-		sb.append("getLegalType()");
+		sb.append(getLegalType());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>sicCode</column-name><column-value><![CDATA[");
-		sb.append("getSicCode()");
+		sb.append(getSicCode());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>tickerSymbol</column-name><column-value><![CDATA[");
-		sb.append("getTickerSymbol()");
+		sb.append(getTickerSymbol());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>industry</column-name><column-value><![CDATA[");
-		sb.append("getIndustry()");
+		sb.append(getIndustry());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>type</column-name><column-value><![CDATA[");
-		sb.append("getType()");
+		sb.append(getType());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>size</column-name><column-value><![CDATA[");
-		sb.append("getSize()");
+		sb.append(getSize());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");

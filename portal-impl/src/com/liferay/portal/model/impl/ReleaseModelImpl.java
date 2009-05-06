@@ -320,31 +320,31 @@ public class ReleaseModelImpl extends BaseModelImpl<Release> {
 
 		sb.append(
 			"<column><column-name>releaseId</column-name><column-value><![CDATA[");
-		sb.append("getReleaseId()");
+		sb.append(getReleaseId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>createDate</column-name><column-value><![CDATA[");
-		sb.append("getCreateDate()");
+		sb.append(getCreateDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>modifiedDate</column-name><column-value><![CDATA[");
-		sb.append("getModifiedDate()");
+		sb.append(getModifiedDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>buildNumber</column-name><column-value><![CDATA[");
-		sb.append("getBuildNumber()");
+		sb.append(getBuildNumber());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>buildDate</column-name><column-value><![CDATA[");
-		sb.append("getBuildDate()");
+		sb.append(getBuildDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>verified</column-name><column-value><![CDATA[");
-		sb.append("getVerified()");
+		sb.append(getVerified());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>testString</column-name><column-value><![CDATA[");
-		sb.append("getTestString()");
+		sb.append(getTestString());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");

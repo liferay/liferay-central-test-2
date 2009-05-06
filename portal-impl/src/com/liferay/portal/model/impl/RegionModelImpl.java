@@ -284,23 +284,23 @@ public class RegionModelImpl extends BaseModelImpl<Region> {
 
 		sb.append(
 			"<column><column-name>regionId</column-name><column-value><![CDATA[");
-		sb.append("getRegionId()");
+		sb.append(getRegionId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>countryId</column-name><column-value><![CDATA[");
-		sb.append("getCountryId()");
+		sb.append(getCountryId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>regionCode</column-name><column-value><![CDATA[");
-		sb.append("getRegionCode()");
+		sb.append(getRegionCode());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>name</column-name><column-value><![CDATA[");
-		sb.append("getName()");
+		sb.append(getName());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>active</column-name><column-value><![CDATA[");
-		sb.append("getActive()");
+		sb.append(getActive());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");

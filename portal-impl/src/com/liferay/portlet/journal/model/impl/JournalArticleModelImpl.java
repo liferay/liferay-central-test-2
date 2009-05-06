@@ -751,123 +751,123 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle> {
 
 		sb.append(
 			"<column><column-name>uuid</column-name><column-value><![CDATA[");
-		sb.append("getUuid()");
+		sb.append(getUuid());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>id</column-name><column-value><![CDATA[");
-		sb.append("getId()");
+		sb.append(getId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>resourcePrimKey</column-name><column-value><![CDATA[");
-		sb.append("getResourcePrimKey()");
+		sb.append(getResourcePrimKey());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>groupId</column-name><column-value><![CDATA[");
-		sb.append("getGroupId()");
+		sb.append(getGroupId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>companyId</column-name><column-value><![CDATA[");
-		sb.append("getCompanyId()");
+		sb.append(getCompanyId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>userId</column-name><column-value><![CDATA[");
-		sb.append("getUserId()");
+		sb.append(getUserId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>userName</column-name><column-value><![CDATA[");
-		sb.append("getUserName()");
+		sb.append(getUserName());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>createDate</column-name><column-value><![CDATA[");
-		sb.append("getCreateDate()");
+		sb.append(getCreateDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>modifiedDate</column-name><column-value><![CDATA[");
-		sb.append("getModifiedDate()");
+		sb.append(getModifiedDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>articleId</column-name><column-value><![CDATA[");
-		sb.append("getArticleId()");
+		sb.append(getArticleId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>version</column-name><column-value><![CDATA[");
-		sb.append("getVersion()");
+		sb.append(getVersion());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>title</column-name><column-value><![CDATA[");
-		sb.append("getTitle()");
+		sb.append(getTitle());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>urlTitle</column-name><column-value><![CDATA[");
-		sb.append("getUrlTitle()");
+		sb.append(getUrlTitle());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>description</column-name><column-value><![CDATA[");
-		sb.append("getDescription()");
+		sb.append(getDescription());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>content</column-name><column-value><![CDATA[");
-		sb.append("getContent()");
+		sb.append(getContent());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>type</column-name><column-value><![CDATA[");
-		sb.append("getType()");
+		sb.append(getType());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>structureId</column-name><column-value><![CDATA[");
-		sb.append("getStructureId()");
+		sb.append(getStructureId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>templateId</column-name><column-value><![CDATA[");
-		sb.append("getTemplateId()");
+		sb.append(getTemplateId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>displayDate</column-name><column-value><![CDATA[");
-		sb.append("getDisplayDate()");
+		sb.append(getDisplayDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>approved</column-name><column-value><![CDATA[");
-		sb.append("getApproved()");
+		sb.append(getApproved());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>approvedByUserId</column-name><column-value><![CDATA[");
-		sb.append("getApprovedByUserId()");
+		sb.append(getApprovedByUserId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>approvedByUserName</column-name><column-value><![CDATA[");
-		sb.append("getApprovedByUserName()");
+		sb.append(getApprovedByUserName());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>approvedDate</column-name><column-value><![CDATA[");
-		sb.append("getApprovedDate()");
+		sb.append(getApprovedDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>expired</column-name><column-value><![CDATA[");
-		sb.append("getExpired()");
+		sb.append(getExpired());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>expirationDate</column-name><column-value><![CDATA[");
-		sb.append("getExpirationDate()");
+		sb.append(getExpirationDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>reviewDate</column-name><column-value><![CDATA[");
-		sb.append("getReviewDate()");
+		sb.append(getReviewDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>indexable</column-name><column-value><![CDATA[");
-		sb.append("getIndexable()");
+		sb.append(getIndexable());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>smallImage</column-name><column-value><![CDATA[");
-		sb.append("getSmallImage()");
+		sb.append(getSmallImage());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>smallImageId</column-name><column-value><![CDATA[");
-		sb.append("getSmallImageId()");
+		sb.append(getSmallImageId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>smallImageURL</column-name><column-value><![CDATA[");
-		sb.append("getSmallImageURL()");
+		sb.append(getSmallImageURL());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");

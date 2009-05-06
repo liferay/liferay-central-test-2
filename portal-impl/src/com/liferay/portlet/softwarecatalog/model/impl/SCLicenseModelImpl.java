@@ -314,27 +314,27 @@ public class SCLicenseModelImpl extends BaseModelImpl<SCLicense> {
 
 		sb.append(
 			"<column><column-name>licenseId</column-name><column-value><![CDATA[");
-		sb.append("getLicenseId()");
+		sb.append(getLicenseId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>name</column-name><column-value><![CDATA[");
-		sb.append("getName()");
+		sb.append(getName());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>url</column-name><column-value><![CDATA[");
-		sb.append("getUrl()");
+		sb.append(getUrl());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>openSource</column-name><column-value><![CDATA[");
-		sb.append("getOpenSource()");
+		sb.append(getOpenSource());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>active</column-name><column-value><![CDATA[");
-		sb.append("getActive()");
+		sb.append(getActive());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>recommended</column-name><column-value><![CDATA[");
-		sb.append("getRecommended()");
+		sb.append(getRecommended());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");

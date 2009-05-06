@@ -312,23 +312,23 @@ public class MBStatsUserModelImpl extends BaseModelImpl<MBStatsUser> {
 
 		sb.append(
 			"<column><column-name>statsUserId</column-name><column-value><![CDATA[");
-		sb.append("getStatsUserId()");
+		sb.append(getStatsUserId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>groupId</column-name><column-value><![CDATA[");
-		sb.append("getGroupId()");
+		sb.append(getGroupId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>userId</column-name><column-value><![CDATA[");
-		sb.append("getUserId()");
+		sb.append(getUserId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>messageCount</column-name><column-value><![CDATA[");
-		sb.append("getMessageCount()");
+		sb.append(getMessageCount());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>lastPostDate</column-name><column-value><![CDATA[");
-		sb.append("getLastPostDate()");
+		sb.append(getLastPostDate());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");

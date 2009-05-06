@@ -253,11 +253,11 @@ public class ClassNameModelImpl extends BaseModelImpl<ClassName> {
 
 		sb.append(
 			"<column><column-name>classNameId</column-name><column-value><![CDATA[");
-		sb.append("getClassNameId()");
+		sb.append(getClassNameId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>value</column-name><column-value><![CDATA[");
-		sb.append("getValue()");
+		sb.append(getValue());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");

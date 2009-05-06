@@ -304,19 +304,19 @@ public class ShardModelImpl extends BaseModelImpl<Shard> {
 
 		sb.append(
 			"<column><column-name>shardId</column-name><column-value><![CDATA[");
-		sb.append("getShardId()");
+		sb.append(getShardId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>classNameId</column-name><column-value><![CDATA[");
-		sb.append("getClassNameId()");
+		sb.append(getClassNameId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>classPK</column-name><column-value><![CDATA[");
-		sb.append("getClassPK()");
+		sb.append(getClassPK());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>name</column-name><column-value><![CDATA[");
-		sb.append("getName()");
+		sb.append(getName());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");

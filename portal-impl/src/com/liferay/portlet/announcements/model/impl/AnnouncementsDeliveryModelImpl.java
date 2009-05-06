@@ -349,31 +349,31 @@ public class AnnouncementsDeliveryModelImpl extends BaseModelImpl<AnnouncementsD
 
 		sb.append(
 			"<column><column-name>deliveryId</column-name><column-value><![CDATA[");
-		sb.append("getDeliveryId()");
+		sb.append(getDeliveryId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>companyId</column-name><column-value><![CDATA[");
-		sb.append("getCompanyId()");
+		sb.append(getCompanyId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>userId</column-name><column-value><![CDATA[");
-		sb.append("getUserId()");
+		sb.append(getUserId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>type</column-name><column-value><![CDATA[");
-		sb.append("getType()");
+		sb.append(getType());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>email</column-name><column-value><![CDATA[");
-		sb.append("getEmail()");
+		sb.append(getEmail());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>sms</column-name><column-value><![CDATA[");
-		sb.append("getSms()");
+		sb.append(getSms());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>website</column-name><column-value><![CDATA[");
-		sb.append("getWebsite()");
+		sb.append(getWebsite());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");

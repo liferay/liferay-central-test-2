@@ -319,23 +319,23 @@ public class ServiceComponentModelImpl extends BaseModelImpl<ServiceComponent> {
 
 		sb.append(
 			"<column><column-name>serviceComponentId</column-name><column-value><![CDATA[");
-		sb.append("getServiceComponentId()");
+		sb.append(getServiceComponentId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>buildNamespace</column-name><column-value><![CDATA[");
-		sb.append("getBuildNamespace()");
+		sb.append(getBuildNamespace());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>buildNumber</column-name><column-value><![CDATA[");
-		sb.append("getBuildNumber()");
+		sb.append(getBuildNumber());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>buildDate</column-name><column-value><![CDATA[");
-		sb.append("getBuildDate()");
+		sb.append(getBuildDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>data</column-name><column-value><![CDATA[");
-		sb.append("getData()");
+		sb.append(getData());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");

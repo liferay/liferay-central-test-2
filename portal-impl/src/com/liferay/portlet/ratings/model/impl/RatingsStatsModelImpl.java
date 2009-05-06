@@ -329,27 +329,27 @@ public class RatingsStatsModelImpl extends BaseModelImpl<RatingsStats> {
 
 		sb.append(
 			"<column><column-name>statsId</column-name><column-value><![CDATA[");
-		sb.append("getStatsId()");
+		sb.append(getStatsId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>classNameId</column-name><column-value><![CDATA[");
-		sb.append("getClassNameId()");
+		sb.append(getClassNameId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>classPK</column-name><column-value><![CDATA[");
-		sb.append("getClassPK()");
+		sb.append(getClassPK());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>totalEntries</column-name><column-value><![CDATA[");
-		sb.append("getTotalEntries()");
+		sb.append(getTotalEntries());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>totalScore</column-name><column-value><![CDATA[");
-		sb.append("getTotalScore()");
+		sb.append(getTotalScore());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>averageScore</column-name><column-value><![CDATA[");
-		sb.append("getAverageScore()");
+		sb.append(getAverageScore());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");

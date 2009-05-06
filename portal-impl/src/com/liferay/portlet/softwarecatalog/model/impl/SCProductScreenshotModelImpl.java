@@ -377,31 +377,31 @@ public class SCProductScreenshotModelImpl extends BaseModelImpl<SCProductScreens
 
 		sb.append(
 			"<column><column-name>productScreenshotId</column-name><column-value><![CDATA[");
-		sb.append("getProductScreenshotId()");
+		sb.append(getProductScreenshotId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>companyId</column-name><column-value><![CDATA[");
-		sb.append("getCompanyId()");
+		sb.append(getCompanyId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>groupId</column-name><column-value><![CDATA[");
-		sb.append("getGroupId()");
+		sb.append(getGroupId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>productEntryId</column-name><column-value><![CDATA[");
-		sb.append("getProductEntryId()");
+		sb.append(getProductEntryId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>thumbnailId</column-name><column-value><![CDATA[");
-		sb.append("getThumbnailId()");
+		sb.append(getThumbnailId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>fullImageId</column-name><column-value><![CDATA[");
-		sb.append("getFullImageId()");
+		sb.append(getFullImageId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>priority</column-name><column-value><![CDATA[");
-		sb.append("getPriority()");
+		sb.append(getPriority());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");

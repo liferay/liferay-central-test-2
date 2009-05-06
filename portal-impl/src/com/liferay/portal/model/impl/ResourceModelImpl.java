@@ -269,15 +269,15 @@ public class ResourceModelImpl extends BaseModelImpl<Resource> {
 
 		sb.append(
 			"<column><column-name>resourceId</column-name><column-value><![CDATA[");
-		sb.append("getResourceId()");
+		sb.append(getResourceId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>codeId</column-name><column-value><![CDATA[");
-		sb.append("getCodeId()");
+		sb.append(getCodeId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>primKey</column-name><column-value><![CDATA[");
-		sb.append("getPrimKey()");
+		sb.append(getPrimKey());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");

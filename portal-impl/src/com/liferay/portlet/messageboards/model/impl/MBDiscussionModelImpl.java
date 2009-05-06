@@ -307,19 +307,19 @@ public class MBDiscussionModelImpl extends BaseModelImpl<MBDiscussion> {
 
 		sb.append(
 			"<column><column-name>discussionId</column-name><column-value><![CDATA[");
-		sb.append("getDiscussionId()");
+		sb.append(getDiscussionId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>classNameId</column-name><column-value><![CDATA[");
-		sb.append("getClassNameId()");
+		sb.append(getClassNameId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>classPK</column-name><column-value><![CDATA[");
-		sb.append("getClassPK()");
+		sb.append(getClassPK());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>threadId</column-name><column-value><![CDATA[");
-		sb.append("getThreadId()");
+		sb.append(getThreadId());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");

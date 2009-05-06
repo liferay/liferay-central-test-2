@@ -238,15 +238,15 @@ public class ListTypeModelImpl extends BaseModelImpl<ListType> {
 
 		sb.append(
 			"<column><column-name>listTypeId</column-name><column-value><![CDATA[");
-		sb.append("getListTypeId()");
+		sb.append(getListTypeId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>name</column-name><column-value><![CDATA[");
-		sb.append("getName()");
+		sb.append(getName());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>type</column-name><column-value><![CDATA[");
-		sb.append("getType()");
+		sb.append(getType());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");

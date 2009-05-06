@@ -272,15 +272,15 @@ public class JournalArticleResourceModelImpl extends BaseModelImpl<JournalArticl
 
 		sb.append(
 			"<column><column-name>resourcePrimKey</column-name><column-value><![CDATA[");
-		sb.append("getResourcePrimKey()");
+		sb.append(getResourcePrimKey());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>groupId</column-name><column-value><![CDATA[");
-		sb.append("getGroupId()");
+		sb.append(getGroupId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>articleId</column-name><column-value><![CDATA[");
-		sb.append("getArticleId()");
+		sb.append(getArticleId());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");

@@ -392,43 +392,43 @@ public class ShoppingItemPriceModelImpl extends BaseModelImpl<ShoppingItemPrice>
 
 		sb.append(
 			"<column><column-name>itemPriceId</column-name><column-value><![CDATA[");
-		sb.append("getItemPriceId()");
+		sb.append(getItemPriceId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>itemId</column-name><column-value><![CDATA[");
-		sb.append("getItemId()");
+		sb.append(getItemId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>minQuantity</column-name><column-value><![CDATA[");
-		sb.append("getMinQuantity()");
+		sb.append(getMinQuantity());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>maxQuantity</column-name><column-value><![CDATA[");
-		sb.append("getMaxQuantity()");
+		sb.append(getMaxQuantity());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>price</column-name><column-value><![CDATA[");
-		sb.append("getPrice()");
+		sb.append(getPrice());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>discount</column-name><column-value><![CDATA[");
-		sb.append("getDiscount()");
+		sb.append(getDiscount());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>taxable</column-name><column-value><![CDATA[");
-		sb.append("getTaxable()");
+		sb.append(getTaxable());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>shipping</column-name><column-value><![CDATA[");
-		sb.append("getShipping()");
+		sb.append(getShipping());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>useShippingFormula</column-name><column-value><![CDATA[");
-		sb.append("getUseShippingFormula()");
+		sb.append(getUseShippingFormula());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>status</column-name><column-value><![CDATA[");
-		sb.append("getStatus()");
+		sb.append(getStatus());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");

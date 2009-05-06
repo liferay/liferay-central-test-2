@@ -347,31 +347,31 @@ public class SocialRelationModelImpl extends BaseModelImpl<SocialRelation> {
 
 		sb.append(
 			"<column><column-name>uuid</column-name><column-value><![CDATA[");
-		sb.append("getUuid()");
+		sb.append(getUuid());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>relationId</column-name><column-value><![CDATA[");
-		sb.append("getRelationId()");
+		sb.append(getRelationId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>companyId</column-name><column-value><![CDATA[");
-		sb.append("getCompanyId()");
+		sb.append(getCompanyId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>createDate</column-name><column-value><![CDATA[");
-		sb.append("getCreateDate()");
+		sb.append(getCreateDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>userId1</column-name><column-value><![CDATA[");
-		sb.append("getUserId1()");
+		sb.append(getUserId1());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>userId2</column-name><column-value><![CDATA[");
-		sb.append("getUserId2()");
+		sb.append(getUserId2());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>type</column-name><column-value><![CDATA[");
-		sb.append("getType()");
+		sb.append(getType());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");

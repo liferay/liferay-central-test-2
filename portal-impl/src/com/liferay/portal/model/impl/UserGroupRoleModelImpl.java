@@ -233,15 +233,15 @@ public class UserGroupRoleModelImpl extends BaseModelImpl<UserGroupRole> {
 
 		sb.append(
 			"<column><column-name>userId</column-name><column-value><![CDATA[");
-		sb.append("getUserId()");
+		sb.append(getUserId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>groupId</column-name><column-value><![CDATA[");
-		sb.append("getGroupId()");
+		sb.append(getGroupId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>roleId</column-name><column-value><![CDATA[");
-		sb.append("getRoleId()");
+		sb.append(getRoleId());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");

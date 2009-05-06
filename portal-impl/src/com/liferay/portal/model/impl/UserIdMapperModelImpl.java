@@ -309,23 +309,23 @@ public class UserIdMapperModelImpl extends BaseModelImpl<UserIdMapper> {
 
 		sb.append(
 			"<column><column-name>userIdMapperId</column-name><column-value><![CDATA[");
-		sb.append("getUserIdMapperId()");
+		sb.append(getUserIdMapperId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>userId</column-name><column-value><![CDATA[");
-		sb.append("getUserId()");
+		sb.append(getUserId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>type</column-name><column-value><![CDATA[");
-		sb.append("getType()");
+		sb.append(getType());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>description</column-name><column-value><![CDATA[");
-		sb.append("getDescription()");
+		sb.append(getDescription());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>externalUserId</column-name><column-value><![CDATA[");
-		sb.append("getExternalUserId()");
+		sb.append(getExternalUserId());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");

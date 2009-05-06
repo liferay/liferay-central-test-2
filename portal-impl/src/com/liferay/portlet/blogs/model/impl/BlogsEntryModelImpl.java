@@ -480,63 +480,63 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry> {
 
 		sb.append(
 			"<column><column-name>uuid</column-name><column-value><![CDATA[");
-		sb.append("getUuid()");
+		sb.append(getUuid());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>entryId</column-name><column-value><![CDATA[");
-		sb.append("getEntryId()");
+		sb.append(getEntryId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>groupId</column-name><column-value><![CDATA[");
-		sb.append("getGroupId()");
+		sb.append(getGroupId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>companyId</column-name><column-value><![CDATA[");
-		sb.append("getCompanyId()");
+		sb.append(getCompanyId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>userId</column-name><column-value><![CDATA[");
-		sb.append("getUserId()");
+		sb.append(getUserId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>userName</column-name><column-value><![CDATA[");
-		sb.append("getUserName()");
+		sb.append(getUserName());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>createDate</column-name><column-value><![CDATA[");
-		sb.append("getCreateDate()");
+		sb.append(getCreateDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>modifiedDate</column-name><column-value><![CDATA[");
-		sb.append("getModifiedDate()");
+		sb.append(getModifiedDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>title</column-name><column-value><![CDATA[");
-		sb.append("getTitle()");
+		sb.append(getTitle());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>urlTitle</column-name><column-value><![CDATA[");
-		sb.append("getUrlTitle()");
+		sb.append(getUrlTitle());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>content</column-name><column-value><![CDATA[");
-		sb.append("getContent()");
+		sb.append(getContent());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>displayDate</column-name><column-value><![CDATA[");
-		sb.append("getDisplayDate()");
+		sb.append(getDisplayDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>draft</column-name><column-value><![CDATA[");
-		sb.append("getDraft()");
+		sb.append(getDraft());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>allowTrackbacks</column-name><column-value><![CDATA[");
-		sb.append("getAllowTrackbacks()");
+		sb.append(getAllowTrackbacks());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>trackbacks</column-name><column-value><![CDATA[");
-		sb.append("getTrackbacks()");
+		sb.append(getTrackbacks());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");

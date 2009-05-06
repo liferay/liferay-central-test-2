@@ -489,67 +489,67 @@ public class SCProductEntryModelImpl extends BaseModelImpl<SCProductEntry> {
 
 		sb.append(
 			"<column><column-name>productEntryId</column-name><column-value><![CDATA[");
-		sb.append("getProductEntryId()");
+		sb.append(getProductEntryId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>groupId</column-name><column-value><![CDATA[");
-		sb.append("getGroupId()");
+		sb.append(getGroupId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>companyId</column-name><column-value><![CDATA[");
-		sb.append("getCompanyId()");
+		sb.append(getCompanyId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>userId</column-name><column-value><![CDATA[");
-		sb.append("getUserId()");
+		sb.append(getUserId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>userName</column-name><column-value><![CDATA[");
-		sb.append("getUserName()");
+		sb.append(getUserName());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>createDate</column-name><column-value><![CDATA[");
-		sb.append("getCreateDate()");
+		sb.append(getCreateDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>modifiedDate</column-name><column-value><![CDATA[");
-		sb.append("getModifiedDate()");
+		sb.append(getModifiedDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>name</column-name><column-value><![CDATA[");
-		sb.append("getName()");
+		sb.append(getName());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>type</column-name><column-value><![CDATA[");
-		sb.append("getType()");
+		sb.append(getType());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>tags</column-name><column-value><![CDATA[");
-		sb.append("getTags()");
+		sb.append(getTags());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>shortDescription</column-name><column-value><![CDATA[");
-		sb.append("getShortDescription()");
+		sb.append(getShortDescription());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>longDescription</column-name><column-value><![CDATA[");
-		sb.append("getLongDescription()");
+		sb.append(getLongDescription());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>pageURL</column-name><column-value><![CDATA[");
-		sb.append("getPageURL()");
+		sb.append(getPageURL());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>author</column-name><column-value><![CDATA[");
-		sb.append("getAuthor()");
+		sb.append(getAuthor());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>repoGroupId</column-name><column-value><![CDATA[");
-		sb.append("getRepoGroupId()");
+		sb.append(getRepoGroupId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>repoArtifactId</column-name><column-value><![CDATA[");
-		sb.append("getRepoArtifactId()");
+		sb.append(getRepoArtifactId());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");

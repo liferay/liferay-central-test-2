@@ -370,43 +370,43 @@ public class ShoppingOrderItemModelImpl extends BaseModelImpl<ShoppingOrderItem>
 
 		sb.append(
 			"<column><column-name>orderItemId</column-name><column-value><![CDATA[");
-		sb.append("getOrderItemId()");
+		sb.append(getOrderItemId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>orderId</column-name><column-value><![CDATA[");
-		sb.append("getOrderId()");
+		sb.append(getOrderId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>itemId</column-name><column-value><![CDATA[");
-		sb.append("getItemId()");
+		sb.append(getItemId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>sku</column-name><column-value><![CDATA[");
-		sb.append("getSku()");
+		sb.append(getSku());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>name</column-name><column-value><![CDATA[");
-		sb.append("getName()");
+		sb.append(getName());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>description</column-name><column-value><![CDATA[");
-		sb.append("getDescription()");
+		sb.append(getDescription());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>properties</column-name><column-value><![CDATA[");
-		sb.append("getProperties()");
+		sb.append(getProperties());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>price</column-name><column-value><![CDATA[");
-		sb.append("getPrice()");
+		sb.append(getPrice());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>quantity</column-name><column-value><![CDATA[");
-		sb.append("getQuantity()");
+		sb.append(getQuantity());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>shippedDate</column-name><column-value><![CDATA[");
-		sb.append("getShippedDate()");
+		sb.append(getShippedDate());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");

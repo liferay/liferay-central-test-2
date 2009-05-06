@@ -414,51 +414,51 @@ public class SCProductVersionModelImpl extends BaseModelImpl<SCProductVersion> {
 
 		sb.append(
 			"<column><column-name>productVersionId</column-name><column-value><![CDATA[");
-		sb.append("getProductVersionId()");
+		sb.append(getProductVersionId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>companyId</column-name><column-value><![CDATA[");
-		sb.append("getCompanyId()");
+		sb.append(getCompanyId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>userId</column-name><column-value><![CDATA[");
-		sb.append("getUserId()");
+		sb.append(getUserId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>userName</column-name><column-value><![CDATA[");
-		sb.append("getUserName()");
+		sb.append(getUserName());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>createDate</column-name><column-value><![CDATA[");
-		sb.append("getCreateDate()");
+		sb.append(getCreateDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>modifiedDate</column-name><column-value><![CDATA[");
-		sb.append("getModifiedDate()");
+		sb.append(getModifiedDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>productEntryId</column-name><column-value><![CDATA[");
-		sb.append("getProductEntryId()");
+		sb.append(getProductEntryId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>version</column-name><column-value><![CDATA[");
-		sb.append("getVersion()");
+		sb.append(getVersion());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>changeLog</column-name><column-value><![CDATA[");
-		sb.append("getChangeLog()");
+		sb.append(getChangeLog());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>downloadPageURL</column-name><column-value><![CDATA[");
-		sb.append("getDownloadPageURL()");
+		sb.append(getDownloadPageURL());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>directDownloadURL</column-name><column-value><![CDATA[");
-		sb.append("getDirectDownloadURL()");
+		sb.append(getDirectDownloadURL());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>repoStoreArtifact</column-name><column-value><![CDATA[");
-		sb.append("getRepoStoreArtifact()");
+		sb.append(getRepoStoreArtifact());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");

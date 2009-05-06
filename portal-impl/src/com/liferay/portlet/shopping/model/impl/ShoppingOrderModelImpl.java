@@ -1061,207 +1061,207 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder> {
 
 		sb.append(
 			"<column><column-name>orderId</column-name><column-value><![CDATA[");
-		sb.append("getOrderId()");
+		sb.append(getOrderId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>groupId</column-name><column-value><![CDATA[");
-		sb.append("getGroupId()");
+		sb.append(getGroupId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>companyId</column-name><column-value><![CDATA[");
-		sb.append("getCompanyId()");
+		sb.append(getCompanyId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>userId</column-name><column-value><![CDATA[");
-		sb.append("getUserId()");
+		sb.append(getUserId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>userName</column-name><column-value><![CDATA[");
-		sb.append("getUserName()");
+		sb.append(getUserName());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>createDate</column-name><column-value><![CDATA[");
-		sb.append("getCreateDate()");
+		sb.append(getCreateDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>modifiedDate</column-name><column-value><![CDATA[");
-		sb.append("getModifiedDate()");
+		sb.append(getModifiedDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>number</column-name><column-value><![CDATA[");
-		sb.append("getNumber()");
+		sb.append(getNumber());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>tax</column-name><column-value><![CDATA[");
-		sb.append("getTax()");
+		sb.append(getTax());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>shipping</column-name><column-value><![CDATA[");
-		sb.append("getShipping()");
+		sb.append(getShipping());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>altShipping</column-name><column-value><![CDATA[");
-		sb.append("getAltShipping()");
+		sb.append(getAltShipping());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>requiresShipping</column-name><column-value><![CDATA[");
-		sb.append("getRequiresShipping()");
+		sb.append(getRequiresShipping());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>insure</column-name><column-value><![CDATA[");
-		sb.append("getInsure()");
+		sb.append(getInsure());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>insurance</column-name><column-value><![CDATA[");
-		sb.append("getInsurance()");
+		sb.append(getInsurance());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>couponCodes</column-name><column-value><![CDATA[");
-		sb.append("getCouponCodes()");
+		sb.append(getCouponCodes());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>couponDiscount</column-name><column-value><![CDATA[");
-		sb.append("getCouponDiscount()");
+		sb.append(getCouponDiscount());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>billingFirstName</column-name><column-value><![CDATA[");
-		sb.append("getBillingFirstName()");
+		sb.append(getBillingFirstName());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>billingLastName</column-name><column-value><![CDATA[");
-		sb.append("getBillingLastName()");
+		sb.append(getBillingLastName());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>billingEmailAddress</column-name><column-value><![CDATA[");
-		sb.append("getBillingEmailAddress()");
+		sb.append(getBillingEmailAddress());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>billingCompany</column-name><column-value><![CDATA[");
-		sb.append("getBillingCompany()");
+		sb.append(getBillingCompany());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>billingStreet</column-name><column-value><![CDATA[");
-		sb.append("getBillingStreet()");
+		sb.append(getBillingStreet());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>billingCity</column-name><column-value><![CDATA[");
-		sb.append("getBillingCity()");
+		sb.append(getBillingCity());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>billingState</column-name><column-value><![CDATA[");
-		sb.append("getBillingState()");
+		sb.append(getBillingState());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>billingZip</column-name><column-value><![CDATA[");
-		sb.append("getBillingZip()");
+		sb.append(getBillingZip());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>billingCountry</column-name><column-value><![CDATA[");
-		sb.append("getBillingCountry()");
+		sb.append(getBillingCountry());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>billingPhone</column-name><column-value><![CDATA[");
-		sb.append("getBillingPhone()");
+		sb.append(getBillingPhone());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>shipToBilling</column-name><column-value><![CDATA[");
-		sb.append("getShipToBilling()");
+		sb.append(getShipToBilling());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>shippingFirstName</column-name><column-value><![CDATA[");
-		sb.append("getShippingFirstName()");
+		sb.append(getShippingFirstName());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>shippingLastName</column-name><column-value><![CDATA[");
-		sb.append("getShippingLastName()");
+		sb.append(getShippingLastName());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>shippingEmailAddress</column-name><column-value><![CDATA[");
-		sb.append("getShippingEmailAddress()");
+		sb.append(getShippingEmailAddress());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>shippingCompany</column-name><column-value><![CDATA[");
-		sb.append("getShippingCompany()");
+		sb.append(getShippingCompany());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>shippingStreet</column-name><column-value><![CDATA[");
-		sb.append("getShippingStreet()");
+		sb.append(getShippingStreet());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>shippingCity</column-name><column-value><![CDATA[");
-		sb.append("getShippingCity()");
+		sb.append(getShippingCity());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>shippingState</column-name><column-value><![CDATA[");
-		sb.append("getShippingState()");
+		sb.append(getShippingState());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>shippingZip</column-name><column-value><![CDATA[");
-		sb.append("getShippingZip()");
+		sb.append(getShippingZip());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>shippingCountry</column-name><column-value><![CDATA[");
-		sb.append("getShippingCountry()");
+		sb.append(getShippingCountry());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>shippingPhone</column-name><column-value><![CDATA[");
-		sb.append("getShippingPhone()");
+		sb.append(getShippingPhone());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>ccName</column-name><column-value><![CDATA[");
-		sb.append("getCcName()");
+		sb.append(getCcName());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>ccType</column-name><column-value><![CDATA[");
-		sb.append("getCcType()");
+		sb.append(getCcType());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>ccNumber</column-name><column-value><![CDATA[");
-		sb.append("getCcNumber()");
+		sb.append(getCcNumber());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>ccExpMonth</column-name><column-value><![CDATA[");
-		sb.append("getCcExpMonth()");
+		sb.append(getCcExpMonth());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>ccExpYear</column-name><column-value><![CDATA[");
-		sb.append("getCcExpYear()");
+		sb.append(getCcExpYear());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>ccVerNumber</column-name><column-value><![CDATA[");
-		sb.append("getCcVerNumber()");
+		sb.append(getCcVerNumber());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>comments</column-name><column-value><![CDATA[");
-		sb.append("getComments()");
+		sb.append(getComments());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>ppTxnId</column-name><column-value><![CDATA[");
-		sb.append("getPpTxnId()");
+		sb.append(getPpTxnId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>ppPaymentStatus</column-name><column-value><![CDATA[");
-		sb.append("getPpPaymentStatus()");
+		sb.append(getPpPaymentStatus());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>ppPaymentGross</column-name><column-value><![CDATA[");
-		sb.append("getPpPaymentGross()");
+		sb.append(getPpPaymentGross());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>ppReceiverEmail</column-name><column-value><![CDATA[");
-		sb.append("getPpReceiverEmail()");
+		sb.append(getPpReceiverEmail());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>ppPayerEmail</column-name><column-value><![CDATA[");
-		sb.append("getPpPayerEmail()");
+		sb.append(getPpPayerEmail());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>sendOrderEmail</column-name><column-value><![CDATA[");
-		sb.append("getSendOrderEmail()");
+		sb.append(getSendOrderEmail());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>sendShippingEmail</column-name><column-value><![CDATA[");
-		sb.append("getSendShippingEmail()");
+		sb.append(getSendShippingEmail());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");

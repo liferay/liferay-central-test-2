@@ -393,47 +393,47 @@ public class EmailAddressModelImpl extends BaseModelImpl<EmailAddress> {
 
 		sb.append(
 			"<column><column-name>emailAddressId</column-name><column-value><![CDATA[");
-		sb.append("getEmailAddressId()");
+		sb.append(getEmailAddressId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>companyId</column-name><column-value><![CDATA[");
-		sb.append("getCompanyId()");
+		sb.append(getCompanyId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>userId</column-name><column-value><![CDATA[");
-		sb.append("getUserId()");
+		sb.append(getUserId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>userName</column-name><column-value><![CDATA[");
-		sb.append("getUserName()");
+		sb.append(getUserName());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>createDate</column-name><column-value><![CDATA[");
-		sb.append("getCreateDate()");
+		sb.append(getCreateDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>modifiedDate</column-name><column-value><![CDATA[");
-		sb.append("getModifiedDate()");
+		sb.append(getModifiedDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>classNameId</column-name><column-value><![CDATA[");
-		sb.append("getClassNameId()");
+		sb.append(getClassNameId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>classPK</column-name><column-value><![CDATA[");
-		sb.append("getClassPK()");
+		sb.append(getClassPK());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>address</column-name><column-value><![CDATA[");
-		sb.append("getAddress()");
+		sb.append(getAddress());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>typeId</column-name><column-value><![CDATA[");
-		sb.append("getTypeId()");
+		sb.append(getTypeId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>primary</column-name><column-value><![CDATA[");
-		sb.append("getPrimary()");
+		sb.append(getPrimary());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");

@@ -365,39 +365,39 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread> {
 
 		sb.append(
 			"<column><column-name>threadId</column-name><column-value><![CDATA[");
-		sb.append("getThreadId()");
+		sb.append(getThreadId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>groupId</column-name><column-value><![CDATA[");
-		sb.append("getGroupId()");
+		sb.append(getGroupId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>categoryId</column-name><column-value><![CDATA[");
-		sb.append("getCategoryId()");
+		sb.append(getCategoryId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>rootMessageId</column-name><column-value><![CDATA[");
-		sb.append("getRootMessageId()");
+		sb.append(getRootMessageId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>messageCount</column-name><column-value><![CDATA[");
-		sb.append("getMessageCount()");
+		sb.append(getMessageCount());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>viewCount</column-name><column-value><![CDATA[");
-		sb.append("getViewCount()");
+		sb.append(getViewCount());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>lastPostByUserId</column-name><column-value><![CDATA[");
-		sb.append("getLastPostByUserId()");
+		sb.append(getLastPostByUserId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>lastPostDate</column-name><column-value><![CDATA[");
-		sb.append("getLastPostDate()");
+		sb.append(getLastPostDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>priority</column-name><column-value><![CDATA[");
-		sb.append("getPriority()");
+		sb.append(getPriority());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");

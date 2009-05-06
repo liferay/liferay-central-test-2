@@ -287,19 +287,19 @@ public class PasswordTrackerModelImpl extends BaseModelImpl<PasswordTracker> {
 
 		sb.append(
 			"<column><column-name>passwordTrackerId</column-name><column-value><![CDATA[");
-		sb.append("getPasswordTrackerId()");
+		sb.append(getPasswordTrackerId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>userId</column-name><column-value><![CDATA[");
-		sb.append("getUserId()");
+		sb.append(getUserId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>createDate</column-name><column-value><![CDATA[");
-		sb.append("getCreateDate()");
+		sb.append(getCreateDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>password</column-name><column-value><![CDATA[");
-		sb.append("getPassword()");
+		sb.append(getPassword());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");

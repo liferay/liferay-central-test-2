@@ -313,23 +313,23 @@ public class MBMessageFlagModelImpl extends BaseModelImpl<MBMessageFlag> {
 
 		sb.append(
 			"<column><column-name>messageFlagId</column-name><column-value><![CDATA[");
-		sb.append("getMessageFlagId()");
+		sb.append(getMessageFlagId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>userId</column-name><column-value><![CDATA[");
-		sb.append("getUserId()");
+		sb.append(getUserId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>threadId</column-name><column-value><![CDATA[");
-		sb.append("getThreadId()");
+		sb.append(getThreadId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>messageId</column-name><column-value><![CDATA[");
-		sb.append("getMessageId()");
+		sb.append(getMessageId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>flag</column-name><column-value><![CDATA[");
-		sb.append("getFlag()");
+		sb.append(getFlag());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");

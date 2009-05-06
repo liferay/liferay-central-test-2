@@ -362,31 +362,31 @@ public class ResourcePermissionModelImpl extends BaseModelImpl<ResourcePermissio
 
 		sb.append(
 			"<column><column-name>resourcePermissionId</column-name><column-value><![CDATA[");
-		sb.append("getResourcePermissionId()");
+		sb.append(getResourcePermissionId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>companyId</column-name><column-value><![CDATA[");
-		sb.append("getCompanyId()");
+		sb.append(getCompanyId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>name</column-name><column-value><![CDATA[");
-		sb.append("getName()");
+		sb.append(getName());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>scope</column-name><column-value><![CDATA[");
-		sb.append("getScope()");
+		sb.append(getScope());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>primKey</column-name><column-value><![CDATA[");
-		sb.append("getPrimKey()");
+		sb.append(getPrimKey());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>roleId</column-name><column-value><![CDATA[");
-		sb.append("getRoleId()");
+		sb.append(getRoleId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>actionIds</column-name><column-value><![CDATA[");
-		sb.append("getActionIds()");
+		sb.append(getActionIds());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");

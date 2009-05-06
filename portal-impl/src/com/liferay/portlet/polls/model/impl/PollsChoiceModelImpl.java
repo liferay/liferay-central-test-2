@@ -314,23 +314,23 @@ public class PollsChoiceModelImpl extends BaseModelImpl<PollsChoice> {
 
 		sb.append(
 			"<column><column-name>uuid</column-name><column-value><![CDATA[");
-		sb.append("getUuid()");
+		sb.append(getUuid());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>choiceId</column-name><column-value><![CDATA[");
-		sb.append("getChoiceId()");
+		sb.append(getChoiceId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>questionId</column-name><column-value><![CDATA[");
-		sb.append("getQuestionId()");
+		sb.append(getQuestionId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>name</column-name><column-value><![CDATA[");
-		sb.append("getName()");
+		sb.append(getName());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>description</column-name><column-value><![CDATA[");
-		sb.append("getDescription()");
+		sb.append(getDescription());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");

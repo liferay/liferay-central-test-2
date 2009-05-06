@@ -269,19 +269,19 @@ public class UserTrackerPathModelImpl extends BaseModelImpl<UserTrackerPath> {
 
 		sb.append(
 			"<column><column-name>userTrackerPathId</column-name><column-value><![CDATA[");
-		sb.append("getUserTrackerPathId()");
+		sb.append(getUserTrackerPathId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>userTrackerId</column-name><column-value><![CDATA[");
-		sb.append("getUserTrackerId()");
+		sb.append(getUserTrackerId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>path</column-name><column-value><![CDATA[");
-		sb.append("getPath()");
+		sb.append(getPath());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>pathDate</column-name><column-value><![CDATA[");
-		sb.append("getPathDate()");
+		sb.append(getPathDate());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");

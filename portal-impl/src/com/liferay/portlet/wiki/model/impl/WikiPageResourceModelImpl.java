@@ -271,15 +271,15 @@ public class WikiPageResourceModelImpl extends BaseModelImpl<WikiPageResource> {
 
 		sb.append(
 			"<column><column-name>resourcePrimKey</column-name><column-value><![CDATA[");
-		sb.append("getResourcePrimKey()");
+		sb.append(getResourcePrimKey());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>nodeId</column-name><column-value><![CDATA[");
-		sb.append("getNodeId()");
+		sb.append(getNodeId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>title</column-name><column-value><![CDATA[");
-		sb.append("getTitle()");
+		sb.append(getTitle());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");

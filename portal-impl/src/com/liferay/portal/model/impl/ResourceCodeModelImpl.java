@@ -295,19 +295,19 @@ public class ResourceCodeModelImpl extends BaseModelImpl<ResourceCode> {
 
 		sb.append(
 			"<column><column-name>codeId</column-name><column-value><![CDATA[");
-		sb.append("getCodeId()");
+		sb.append(getCodeId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>companyId</column-name><column-value><![CDATA[");
-		sb.append("getCompanyId()");
+		sb.append(getCompanyId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>name</column-name><column-value><![CDATA[");
-		sb.append("getName()");
+		sb.append(getName());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>scope</column-name><column-value><![CDATA[");
-		sb.append("getScope()");
+		sb.append(getScope());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");

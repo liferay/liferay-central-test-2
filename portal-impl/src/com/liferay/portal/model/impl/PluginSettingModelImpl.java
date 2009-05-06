@@ -329,27 +329,27 @@ public class PluginSettingModelImpl extends BaseModelImpl<PluginSetting> {
 
 		sb.append(
 			"<column><column-name>pluginSettingId</column-name><column-value><![CDATA[");
-		sb.append("getPluginSettingId()");
+		sb.append(getPluginSettingId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>companyId</column-name><column-value><![CDATA[");
-		sb.append("getCompanyId()");
+		sb.append(getCompanyId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>pluginId</column-name><column-value><![CDATA[");
-		sb.append("getPluginId()");
+		sb.append(getPluginId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>pluginType</column-name><column-value><![CDATA[");
-		sb.append("getPluginType()");
+		sb.append(getPluginType());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>roles</column-name><column-value><![CDATA[");
-		sb.append("getRoles()");
+		sb.append(getRoles());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>active</column-name><column-value><![CDATA[");
-		sb.append("getActive()");
+		sb.append(getActive());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");

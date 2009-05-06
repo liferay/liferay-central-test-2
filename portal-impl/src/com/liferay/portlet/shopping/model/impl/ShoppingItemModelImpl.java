@@ -823,135 +823,135 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem> {
 
 		sb.append(
 			"<column><column-name>itemId</column-name><column-value><![CDATA[");
-		sb.append("getItemId()");
+		sb.append(getItemId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>companyId</column-name><column-value><![CDATA[");
-		sb.append("getCompanyId()");
+		sb.append(getCompanyId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>userId</column-name><column-value><![CDATA[");
-		sb.append("getUserId()");
+		sb.append(getUserId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>userName</column-name><column-value><![CDATA[");
-		sb.append("getUserName()");
+		sb.append(getUserName());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>createDate</column-name><column-value><![CDATA[");
-		sb.append("getCreateDate()");
+		sb.append(getCreateDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>modifiedDate</column-name><column-value><![CDATA[");
-		sb.append("getModifiedDate()");
+		sb.append(getModifiedDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>categoryId</column-name><column-value><![CDATA[");
-		sb.append("getCategoryId()");
+		sb.append(getCategoryId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>sku</column-name><column-value><![CDATA[");
-		sb.append("getSku()");
+		sb.append(getSku());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>name</column-name><column-value><![CDATA[");
-		sb.append("getName()");
+		sb.append(getName());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>description</column-name><column-value><![CDATA[");
-		sb.append("getDescription()");
+		sb.append(getDescription());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>properties</column-name><column-value><![CDATA[");
-		sb.append("getProperties()");
+		sb.append(getProperties());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>fields</column-name><column-value><![CDATA[");
-		sb.append("getFields()");
+		sb.append(getFields());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>fieldsQuantities</column-name><column-value><![CDATA[");
-		sb.append("getFieldsQuantities()");
+		sb.append(getFieldsQuantities());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>minQuantity</column-name><column-value><![CDATA[");
-		sb.append("getMinQuantity()");
+		sb.append(getMinQuantity());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>maxQuantity</column-name><column-value><![CDATA[");
-		sb.append("getMaxQuantity()");
+		sb.append(getMaxQuantity());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>price</column-name><column-value><![CDATA[");
-		sb.append("getPrice()");
+		sb.append(getPrice());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>discount</column-name><column-value><![CDATA[");
-		sb.append("getDiscount()");
+		sb.append(getDiscount());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>taxable</column-name><column-value><![CDATA[");
-		sb.append("getTaxable()");
+		sb.append(getTaxable());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>shipping</column-name><column-value><![CDATA[");
-		sb.append("getShipping()");
+		sb.append(getShipping());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>useShippingFormula</column-name><column-value><![CDATA[");
-		sb.append("getUseShippingFormula()");
+		sb.append(getUseShippingFormula());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>requiresShipping</column-name><column-value><![CDATA[");
-		sb.append("getRequiresShipping()");
+		sb.append(getRequiresShipping());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>stockQuantity</column-name><column-value><![CDATA[");
-		sb.append("getStockQuantity()");
+		sb.append(getStockQuantity());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>featured</column-name><column-value><![CDATA[");
-		sb.append("getFeatured()");
+		sb.append(getFeatured());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>sale</column-name><column-value><![CDATA[");
-		sb.append("getSale()");
+		sb.append(getSale());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>smallImage</column-name><column-value><![CDATA[");
-		sb.append("getSmallImage()");
+		sb.append(getSmallImage());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>smallImageId</column-name><column-value><![CDATA[");
-		sb.append("getSmallImageId()");
+		sb.append(getSmallImageId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>smallImageURL</column-name><column-value><![CDATA[");
-		sb.append("getSmallImageURL()");
+		sb.append(getSmallImageURL());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>mediumImage</column-name><column-value><![CDATA[");
-		sb.append("getMediumImage()");
+		sb.append(getMediumImage());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>mediumImageId</column-name><column-value><![CDATA[");
-		sb.append("getMediumImageId()");
+		sb.append(getMediumImageId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>mediumImageURL</column-name><column-value><![CDATA[");
-		sb.append("getMediumImageURL()");
+		sb.append(getMediumImageURL());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>largeImage</column-name><column-value><![CDATA[");
-		sb.append("getLargeImage()");
+		sb.append(getLargeImage());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>largeImageId</column-name><column-value><![CDATA[");
-		sb.append("getLargeImageId()");
+		sb.append(getLargeImageId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>largeImageURL</column-name><column-value><![CDATA[");
-		sb.append("getLargeImageURL()");
+		sb.append(getLargeImageURL());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");

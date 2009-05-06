@@ -542,75 +542,75 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage> {
 
 		sb.append(
 			"<column><column-name>uuid</column-name><column-value><![CDATA[");
-		sb.append("getUuid()");
+		sb.append(getUuid());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>messageId</column-name><column-value><![CDATA[");
-		sb.append("getMessageId()");
+		sb.append(getMessageId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>groupId</column-name><column-value><![CDATA[");
-		sb.append("getGroupId()");
+		sb.append(getGroupId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>companyId</column-name><column-value><![CDATA[");
-		sb.append("getCompanyId()");
+		sb.append(getCompanyId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>userId</column-name><column-value><![CDATA[");
-		sb.append("getUserId()");
+		sb.append(getUserId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>userName</column-name><column-value><![CDATA[");
-		sb.append("getUserName()");
+		sb.append(getUserName());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>createDate</column-name><column-value><![CDATA[");
-		sb.append("getCreateDate()");
+		sb.append(getCreateDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>modifiedDate</column-name><column-value><![CDATA[");
-		sb.append("getModifiedDate()");
+		sb.append(getModifiedDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>classNameId</column-name><column-value><![CDATA[");
-		sb.append("getClassNameId()");
+		sb.append(getClassNameId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>classPK</column-name><column-value><![CDATA[");
-		sb.append("getClassPK()");
+		sb.append(getClassPK());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>categoryId</column-name><column-value><![CDATA[");
-		sb.append("getCategoryId()");
+		sb.append(getCategoryId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>threadId</column-name><column-value><![CDATA[");
-		sb.append("getThreadId()");
+		sb.append(getThreadId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>parentMessageId</column-name><column-value><![CDATA[");
-		sb.append("getParentMessageId()");
+		sb.append(getParentMessageId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>subject</column-name><column-value><![CDATA[");
-		sb.append("getSubject()");
+		sb.append(getSubject());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>body</column-name><column-value><![CDATA[");
-		sb.append("getBody()");
+		sb.append(getBody());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>attachments</column-name><column-value><![CDATA[");
-		sb.append("getAttachments()");
+		sb.append(getAttachments());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>anonymous</column-name><column-value><![CDATA[");
-		sb.append("getAnonymous()");
+		sb.append(getAnonymous());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>priority</column-name><column-value><![CDATA[");
-		sb.append("getPriority()");
+		sb.append(getPriority());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");

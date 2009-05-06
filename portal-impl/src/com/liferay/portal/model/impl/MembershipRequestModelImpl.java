@@ -367,43 +367,43 @@ public class MembershipRequestModelImpl extends BaseModelImpl<MembershipRequest>
 
 		sb.append(
 			"<column><column-name>membershipRequestId</column-name><column-value><![CDATA[");
-		sb.append("getMembershipRequestId()");
+		sb.append(getMembershipRequestId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>companyId</column-name><column-value><![CDATA[");
-		sb.append("getCompanyId()");
+		sb.append(getCompanyId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>userId</column-name><column-value><![CDATA[");
-		sb.append("getUserId()");
+		sb.append(getUserId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>createDate</column-name><column-value><![CDATA[");
-		sb.append("getCreateDate()");
+		sb.append(getCreateDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>groupId</column-name><column-value><![CDATA[");
-		sb.append("getGroupId()");
+		sb.append(getGroupId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>comments</column-name><column-value><![CDATA[");
-		sb.append("getComments()");
+		sb.append(getComments());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>replyComments</column-name><column-value><![CDATA[");
-		sb.append("getReplyComments()");
+		sb.append(getReplyComments());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>replyDate</column-name><column-value><![CDATA[");
-		sb.append("getReplyDate()");
+		sb.append(getReplyDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>replierUserId</column-name><column-value><![CDATA[");
-		sb.append("getReplierUserId()");
+		sb.append(getReplierUserId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>statusId</column-name><column-value><![CDATA[");
-		sb.append("getStatusId()");
+		sb.append(getStatusId());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");

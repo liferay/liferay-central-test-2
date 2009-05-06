@@ -610,95 +610,95 @@ public class TagsAssetModelImpl extends BaseModelImpl<TagsAsset> {
 
 		sb.append(
 			"<column><column-name>assetId</column-name><column-value><![CDATA[");
-		sb.append("getAssetId()");
+		sb.append(getAssetId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>groupId</column-name><column-value><![CDATA[");
-		sb.append("getGroupId()");
+		sb.append(getGroupId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>companyId</column-name><column-value><![CDATA[");
-		sb.append("getCompanyId()");
+		sb.append(getCompanyId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>userId</column-name><column-value><![CDATA[");
-		sb.append("getUserId()");
+		sb.append(getUserId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>userName</column-name><column-value><![CDATA[");
-		sb.append("getUserName()");
+		sb.append(getUserName());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>createDate</column-name><column-value><![CDATA[");
-		sb.append("getCreateDate()");
+		sb.append(getCreateDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>modifiedDate</column-name><column-value><![CDATA[");
-		sb.append("getModifiedDate()");
+		sb.append(getModifiedDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>classNameId</column-name><column-value><![CDATA[");
-		sb.append("getClassNameId()");
+		sb.append(getClassNameId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>classPK</column-name><column-value><![CDATA[");
-		sb.append("getClassPK()");
+		sb.append(getClassPK());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>visible</column-name><column-value><![CDATA[");
-		sb.append("getVisible()");
+		sb.append(getVisible());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>startDate</column-name><column-value><![CDATA[");
-		sb.append("getStartDate()");
+		sb.append(getStartDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>endDate</column-name><column-value><![CDATA[");
-		sb.append("getEndDate()");
+		sb.append(getEndDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>publishDate</column-name><column-value><![CDATA[");
-		sb.append("getPublishDate()");
+		sb.append(getPublishDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>expirationDate</column-name><column-value><![CDATA[");
-		sb.append("getExpirationDate()");
+		sb.append(getExpirationDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>mimeType</column-name><column-value><![CDATA[");
-		sb.append("getMimeType()");
+		sb.append(getMimeType());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>title</column-name><column-value><![CDATA[");
-		sb.append("getTitle()");
+		sb.append(getTitle());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>description</column-name><column-value><![CDATA[");
-		sb.append("getDescription()");
+		sb.append(getDescription());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>summary</column-name><column-value><![CDATA[");
-		sb.append("getSummary()");
+		sb.append(getSummary());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>url</column-name><column-value><![CDATA[");
-		sb.append("getUrl()");
+		sb.append(getUrl());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>height</column-name><column-value><![CDATA[");
-		sb.append("getHeight()");
+		sb.append(getHeight());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>width</column-name><column-value><![CDATA[");
-		sb.append("getWidth()");
+		sb.append(getWidth());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>priority</column-name><column-value><![CDATA[");
-		sb.append("getPriority()");
+		sb.append(getPriority());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>viewCount</column-name><column-value><![CDATA[");
-		sb.append("getViewCount()");
+		sb.append(getViewCount());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");

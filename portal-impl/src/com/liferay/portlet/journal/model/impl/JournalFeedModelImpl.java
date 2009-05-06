@@ -598,95 +598,95 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed> {
 
 		sb.append(
 			"<column><column-name>uuid</column-name><column-value><![CDATA[");
-		sb.append("getUuid()");
+		sb.append(getUuid());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>id</column-name><column-value><![CDATA[");
-		sb.append("getId()");
+		sb.append(getId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>groupId</column-name><column-value><![CDATA[");
-		sb.append("getGroupId()");
+		sb.append(getGroupId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>companyId</column-name><column-value><![CDATA[");
-		sb.append("getCompanyId()");
+		sb.append(getCompanyId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>userId</column-name><column-value><![CDATA[");
-		sb.append("getUserId()");
+		sb.append(getUserId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>userName</column-name><column-value><![CDATA[");
-		sb.append("getUserName()");
+		sb.append(getUserName());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>createDate</column-name><column-value><![CDATA[");
-		sb.append("getCreateDate()");
+		sb.append(getCreateDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>modifiedDate</column-name><column-value><![CDATA[");
-		sb.append("getModifiedDate()");
+		sb.append(getModifiedDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>feedId</column-name><column-value><![CDATA[");
-		sb.append("getFeedId()");
+		sb.append(getFeedId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>name</column-name><column-value><![CDATA[");
-		sb.append("getName()");
+		sb.append(getName());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>description</column-name><column-value><![CDATA[");
-		sb.append("getDescription()");
+		sb.append(getDescription());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>type</column-name><column-value><![CDATA[");
-		sb.append("getType()");
+		sb.append(getType());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>structureId</column-name><column-value><![CDATA[");
-		sb.append("getStructureId()");
+		sb.append(getStructureId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>templateId</column-name><column-value><![CDATA[");
-		sb.append("getTemplateId()");
+		sb.append(getTemplateId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>rendererTemplateId</column-name><column-value><![CDATA[");
-		sb.append("getRendererTemplateId()");
+		sb.append(getRendererTemplateId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>delta</column-name><column-value><![CDATA[");
-		sb.append("getDelta()");
+		sb.append(getDelta());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>orderByCol</column-name><column-value><![CDATA[");
-		sb.append("getOrderByCol()");
+		sb.append(getOrderByCol());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>orderByType</column-name><column-value><![CDATA[");
-		sb.append("getOrderByType()");
+		sb.append(getOrderByType());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>targetLayoutFriendlyUrl</column-name><column-value><![CDATA[");
-		sb.append("getTargetLayoutFriendlyUrl()");
+		sb.append(getTargetLayoutFriendlyUrl());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>targetPortletId</column-name><column-value><![CDATA[");
-		sb.append("getTargetPortletId()");
+		sb.append(getTargetPortletId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>contentField</column-name><column-value><![CDATA[");
-		sb.append("getContentField()");
+		sb.append(getContentField());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>feedType</column-name><column-value><![CDATA[");
-		sb.append("getFeedType()");
+		sb.append(getFeedType());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>feedVersion</column-name><column-value><![CDATA[");
-		sb.append("getFeedVersion()");
+		sb.append(getFeedVersion());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");

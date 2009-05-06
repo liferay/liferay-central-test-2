@@ -385,39 +385,39 @@ public class CompanyModelImpl extends BaseModelImpl<Company> {
 
 		sb.append(
 			"<column><column-name>companyId</column-name><column-value><![CDATA[");
-		sb.append("getCompanyId()");
+		sb.append(getCompanyId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>accountId</column-name><column-value><![CDATA[");
-		sb.append("getAccountId()");
+		sb.append(getAccountId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>webId</column-name><column-value><![CDATA[");
-		sb.append("getWebId()");
+		sb.append(getWebId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>key</column-name><column-value><![CDATA[");
-		sb.append("getKey()");
+		sb.append(getKey());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>virtualHost</column-name><column-value><![CDATA[");
-		sb.append("getVirtualHost()");
+		sb.append(getVirtualHost());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>mx</column-name><column-value><![CDATA[");
-		sb.append("getMx()");
+		sb.append(getMx());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>homeURL</column-name><column-value><![CDATA[");
-		sb.append("getHomeURL()");
+		sb.append(getHomeURL());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>logoId</column-name><column-value><![CDATA[");
-		sb.append("getLogoId()");
+		sb.append(getLogoId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>system</column-name><column-value><![CDATA[");
-		sb.append("getSystem()");
+		sb.append(getSystem());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");

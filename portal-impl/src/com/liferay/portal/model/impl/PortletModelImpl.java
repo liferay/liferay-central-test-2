@@ -305,23 +305,23 @@ public class PortletModelImpl extends BaseModelImpl<Portlet> {
 
 		sb.append(
 			"<column><column-name>id</column-name><column-value><![CDATA[");
-		sb.append("getId()");
+		sb.append(getId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>companyId</column-name><column-value><![CDATA[");
-		sb.append("getCompanyId()");
+		sb.append(getCompanyId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>portletId</column-name><column-value><![CDATA[");
-		sb.append("getPortletId()");
+		sb.append(getPortletId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>roles</column-name><column-value><![CDATA[");
-		sb.append("getRoles()");
+		sb.append(getRoles());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>active</column-name><column-value><![CDATA[");
-		sb.append("getActive()");
+		sb.append(getActive());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");

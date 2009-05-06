@@ -338,27 +338,27 @@ public class PortletPreferencesModelImpl extends BaseModelImpl<PortletPreference
 
 		sb.append(
 			"<column><column-name>portletPreferencesId</column-name><column-value><![CDATA[");
-		sb.append("getPortletPreferencesId()");
+		sb.append(getPortletPreferencesId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>ownerId</column-name><column-value><![CDATA[");
-		sb.append("getOwnerId()");
+		sb.append(getOwnerId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>ownerType</column-name><column-value><![CDATA[");
-		sb.append("getOwnerType()");
+		sb.append(getOwnerType());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>plid</column-name><column-value><![CDATA[");
-		sb.append("getPlid()");
+		sb.append(getPlid());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>portletId</column-name><column-value><![CDATA[");
-		sb.append("getPortletId()");
+		sb.append(getPortletId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>preferences</column-name><column-value><![CDATA[");
-		sb.append("getPreferences()");
+		sb.append(getPreferences());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");

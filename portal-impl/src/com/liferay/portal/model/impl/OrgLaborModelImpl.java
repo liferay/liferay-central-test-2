@@ -494,71 +494,71 @@ public class OrgLaborModelImpl extends BaseModelImpl<OrgLabor> {
 
 		sb.append(
 			"<column><column-name>orgLaborId</column-name><column-value><![CDATA[");
-		sb.append("getOrgLaborId()");
+		sb.append(getOrgLaborId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>organizationId</column-name><column-value><![CDATA[");
-		sb.append("getOrganizationId()");
+		sb.append(getOrganizationId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>typeId</column-name><column-value><![CDATA[");
-		sb.append("getTypeId()");
+		sb.append(getTypeId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>sunOpen</column-name><column-value><![CDATA[");
-		sb.append("getSunOpen()");
+		sb.append(getSunOpen());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>sunClose</column-name><column-value><![CDATA[");
-		sb.append("getSunClose()");
+		sb.append(getSunClose());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>monOpen</column-name><column-value><![CDATA[");
-		sb.append("getMonOpen()");
+		sb.append(getMonOpen());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>monClose</column-name><column-value><![CDATA[");
-		sb.append("getMonClose()");
+		sb.append(getMonClose());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>tueOpen</column-name><column-value><![CDATA[");
-		sb.append("getTueOpen()");
+		sb.append(getTueOpen());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>tueClose</column-name><column-value><![CDATA[");
-		sb.append("getTueClose()");
+		sb.append(getTueClose());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>wedOpen</column-name><column-value><![CDATA[");
-		sb.append("getWedOpen()");
+		sb.append(getWedOpen());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>wedClose</column-name><column-value><![CDATA[");
-		sb.append("getWedClose()");
+		sb.append(getWedClose());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>thuOpen</column-name><column-value><![CDATA[");
-		sb.append("getThuOpen()");
+		sb.append(getThuOpen());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>thuClose</column-name><column-value><![CDATA[");
-		sb.append("getThuClose()");
+		sb.append(getThuClose());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>friOpen</column-name><column-value><![CDATA[");
-		sb.append("getFriOpen()");
+		sb.append(getFriOpen());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>friClose</column-name><column-value><![CDATA[");
-		sb.append("getFriClose()");
+		sb.append(getFriClose());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>satOpen</column-name><column-value><![CDATA[");
-		sb.append("getSatOpen()");
+		sb.append(getSatOpen());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>satClose</column-name><column-value><![CDATA[");
-		sb.append("getSatClose()");
+		sb.append(getSatClose());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");

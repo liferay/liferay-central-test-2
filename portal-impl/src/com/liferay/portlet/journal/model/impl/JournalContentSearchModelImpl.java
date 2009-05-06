@@ -368,31 +368,31 @@ public class JournalContentSearchModelImpl extends BaseModelImpl<JournalContentS
 
 		sb.append(
 			"<column><column-name>contentSearchId</column-name><column-value><![CDATA[");
-		sb.append("getContentSearchId()");
+		sb.append(getContentSearchId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>groupId</column-name><column-value><![CDATA[");
-		sb.append("getGroupId()");
+		sb.append(getGroupId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>companyId</column-name><column-value><![CDATA[");
-		sb.append("getCompanyId()");
+		sb.append(getCompanyId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>privateLayout</column-name><column-value><![CDATA[");
-		sb.append("getPrivateLayout()");
+		sb.append(getPrivateLayout());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>layoutId</column-name><column-value><![CDATA[");
-		sb.append("getLayoutId()");
+		sb.append(getLayoutId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>portletId</column-name><column-value><![CDATA[");
-		sb.append("getPortletId()");
+		sb.append(getPortletId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>articleId</column-name><column-value><![CDATA[");
-		sb.append("getArticleId()");
+		sb.append(getArticleId());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");

@@ -233,15 +233,15 @@ public class OrgGroupRoleModelImpl extends BaseModelImpl<OrgGroupRole> {
 
 		sb.append(
 			"<column><column-name>organizationId</column-name><column-value><![CDATA[");
-		sb.append("getOrganizationId()");
+		sb.append(getOrganizationId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>groupId</column-name><column-value><![CDATA[");
-		sb.append("getGroupId()");
+		sb.append(getGroupId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>roleId</column-name><column-value><![CDATA[");
-		sb.append("getRoleId()");
+		sb.append(getRoleId());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");

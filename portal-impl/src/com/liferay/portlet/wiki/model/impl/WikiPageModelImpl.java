@@ -590,79 +590,79 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage> {
 
 		sb.append(
 			"<column><column-name>uuid</column-name><column-value><![CDATA[");
-		sb.append("getUuid()");
+		sb.append(getUuid());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>pageId</column-name><column-value><![CDATA[");
-		sb.append("getPageId()");
+		sb.append(getPageId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>resourcePrimKey</column-name><column-value><![CDATA[");
-		sb.append("getResourcePrimKey()");
+		sb.append(getResourcePrimKey());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>groupId</column-name><column-value><![CDATA[");
-		sb.append("getGroupId()");
+		sb.append(getGroupId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>companyId</column-name><column-value><![CDATA[");
-		sb.append("getCompanyId()");
+		sb.append(getCompanyId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>userId</column-name><column-value><![CDATA[");
-		sb.append("getUserId()");
+		sb.append(getUserId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>userName</column-name><column-value><![CDATA[");
-		sb.append("getUserName()");
+		sb.append(getUserName());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>createDate</column-name><column-value><![CDATA[");
-		sb.append("getCreateDate()");
+		sb.append(getCreateDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>modifiedDate</column-name><column-value><![CDATA[");
-		sb.append("getModifiedDate()");
+		sb.append(getModifiedDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>nodeId</column-name><column-value><![CDATA[");
-		sb.append("getNodeId()");
+		sb.append(getNodeId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>title</column-name><column-value><![CDATA[");
-		sb.append("getTitle()");
+		sb.append(getTitle());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>version</column-name><column-value><![CDATA[");
-		sb.append("getVersion()");
+		sb.append(getVersion());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>minorEdit</column-name><column-value><![CDATA[");
-		sb.append("getMinorEdit()");
+		sb.append(getMinorEdit());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>content</column-name><column-value><![CDATA[");
-		sb.append("getContent()");
+		sb.append(getContent());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>summary</column-name><column-value><![CDATA[");
-		sb.append("getSummary()");
+		sb.append(getSummary());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>format</column-name><column-value><![CDATA[");
-		sb.append("getFormat()");
+		sb.append(getFormat());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>head</column-name><column-value><![CDATA[");
-		sb.append("getHead()");
+		sb.append(getHead());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>parentTitle</column-name><column-value><![CDATA[");
-		sb.append("getParentTitle()");
+		sb.append(getParentTitle());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>redirectTitle</column-name><column-value><![CDATA[");
-		sb.append("getRedirectTitle()");
+		sb.append(getRedirectTitle());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");

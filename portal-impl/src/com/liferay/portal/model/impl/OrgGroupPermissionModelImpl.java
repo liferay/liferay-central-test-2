@@ -234,15 +234,15 @@ public class OrgGroupPermissionModelImpl extends BaseModelImpl<OrgGroupPermissio
 
 		sb.append(
 			"<column><column-name>organizationId</column-name><column-value><![CDATA[");
-		sb.append("getOrganizationId()");
+		sb.append(getOrganizationId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>groupId</column-name><column-value><![CDATA[");
-		sb.append("getGroupId()");
+		sb.append(getGroupId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>permissionId</column-name><column-value><![CDATA[");
-		sb.append("getPermissionId()");
+		sb.append(getPermissionId());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");

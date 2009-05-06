@@ -295,19 +295,19 @@ public class ResourceActionModelImpl extends BaseModelImpl<ResourceAction> {
 
 		sb.append(
 			"<column><column-name>resourceActionId</column-name><column-value><![CDATA[");
-		sb.append("getResourceActionId()");
+		sb.append(getResourceActionId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>name</column-name><column-value><![CDATA[");
-		sb.append("getName()");
+		sb.append(getName());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>actionId</column-name><column-value><![CDATA[");
-		sb.append("getActionId()");
+		sb.append(getActionId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>bitwiseValue</column-name><column-value><![CDATA[");
-		sb.append("getBitwiseValue()");
+		sb.append(getBitwiseValue());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");

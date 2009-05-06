@@ -332,35 +332,35 @@ public class UserTrackerModelImpl extends BaseModelImpl<UserTracker> {
 
 		sb.append(
 			"<column><column-name>userTrackerId</column-name><column-value><![CDATA[");
-		sb.append("getUserTrackerId()");
+		sb.append(getUserTrackerId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>companyId</column-name><column-value><![CDATA[");
-		sb.append("getCompanyId()");
+		sb.append(getCompanyId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>userId</column-name><column-value><![CDATA[");
-		sb.append("getUserId()");
+		sb.append(getUserId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>modifiedDate</column-name><column-value><![CDATA[");
-		sb.append("getModifiedDate()");
+		sb.append(getModifiedDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>sessionId</column-name><column-value><![CDATA[");
-		sb.append("getSessionId()");
+		sb.append(getSessionId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>remoteAddr</column-name><column-value><![CDATA[");
-		sb.append("getRemoteAddr()");
+		sb.append(getRemoteAddr());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>remoteHost</column-name><column-value><![CDATA[");
-		sb.append("getRemoteHost()");
+		sb.append(getRemoteHost());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>userAgent</column-name><column-value><![CDATA[");
-		sb.append("getUserAgent()");
+		sb.append(getUserAgent());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");

@@ -268,19 +268,19 @@ public class TagsSourceModelImpl extends BaseModelImpl<TagsSource> {
 
 		sb.append(
 			"<column><column-name>sourceId</column-name><column-value><![CDATA[");
-		sb.append("getSourceId()");
+		sb.append(getSourceId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>parentSourceId</column-name><column-value><![CDATA[");
-		sb.append("getParentSourceId()");
+		sb.append(getParentSourceId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>name</column-name><column-value><![CDATA[");
-		sb.append("getName()");
+		sb.append(getName());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>acronym</column-name><column-value><![CDATA[");
-		sb.append("getAcronym()");
+		sb.append(getAcronym());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");

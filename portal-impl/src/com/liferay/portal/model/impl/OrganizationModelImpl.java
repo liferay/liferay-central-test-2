@@ -427,51 +427,51 @@ public class OrganizationModelImpl extends BaseModelImpl<Organization> {
 
 		sb.append(
 			"<column><column-name>organizationId</column-name><column-value><![CDATA[");
-		sb.append("getOrganizationId()");
+		sb.append(getOrganizationId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>companyId</column-name><column-value><![CDATA[");
-		sb.append("getCompanyId()");
+		sb.append(getCompanyId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>parentOrganizationId</column-name><column-value><![CDATA[");
-		sb.append("getParentOrganizationId()");
+		sb.append(getParentOrganizationId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>leftOrganizationId</column-name><column-value><![CDATA[");
-		sb.append("getLeftOrganizationId()");
+		sb.append(getLeftOrganizationId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>rightOrganizationId</column-name><column-value><![CDATA[");
-		sb.append("getRightOrganizationId()");
+		sb.append(getRightOrganizationId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>name</column-name><column-value><![CDATA[");
-		sb.append("getName()");
+		sb.append(getName());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>type</column-name><column-value><![CDATA[");
-		sb.append("getType()");
+		sb.append(getType());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>recursable</column-name><column-value><![CDATA[");
-		sb.append("getRecursable()");
+		sb.append(getRecursable());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>regionId</column-name><column-value><![CDATA[");
-		sb.append("getRegionId()");
+		sb.append(getRegionId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>countryId</column-name><column-value><![CDATA[");
-		sb.append("getCountryId()");
+		sb.append(getCountryId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>statusId</column-name><column-value><![CDATA[");
-		sb.append("getStatusId()");
+		sb.append(getStatusId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>comments</column-name><column-value><![CDATA[");
-		sb.append("getComments()");
+		sb.append(getComments());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
