@@ -49,24 +49,33 @@ import org.apache.commons.logging.LogFactory;
  * A ModelListener that listens for creation of communities and attempts to
  * prepopulate the community pages from a template community.
  * <p/>
- * The template community should be a private community and have the appropriate
- * layouts and portlets in its "Private Pages".  This will prevent users from
- * navigating to and using this community.
+ * The template community should be a private community to avoid unauthorized
+ * access.  The templated pages are stored in the community's staging area
+ * again to avoid users accidentally coming to this community.
  * <p/>
  * You may create a separate template for private, open, and protected
- * community. You may also create a default template for all three.  The
- * template community names are:
+ * communities.  You may also create a default template that will apply if
+ * the open, private, and restricted templates are not defined.  The template
+ * community names must be:
  * <UL>
- * 	<LI>OPEN_TEMPLATE</LI>
- * 	<LI>PRIVATE_TEMPLATE</LI>
- * 	<LI>RESTRICTED_TEMPLATE>/LI>
- * 	<LI>DEFAULT_TEMPLATE</LI>
+ *	<LI>OPEN_TEMPLATE<LI>
+ * 	<LI>PRIVATE_TEMPLATE<LI>
+ * 	<LI>RESTRICTED_TEMPLATE<LI>
+ * 	<LI>DEFAULT_TEMPLATE<LI>
  * </UL>
  * <p/>
- * A newly created community will have its layouts preconfigured via: 1) If
- * community is public, the template pages will be imported as the community's
- * public pages 2) If community is private or protected, the template pages will
- * be imported as the community's private pages
+ *  A newly created community will have its layouts preconfigured via:
+ * <UL>
+ * 	<LI>If community is public, templates pages from OPEN_TEMPLATE
+ * 		will be used</LI>
+ * 	<LI>If community is restricted, template pages from RESTRICTED_TEMPLATE
+ * 		 will be used</LI>
+ * 	<LI>If community is private, template pages from PRIVATE_TEMPLATE will
+ * 		 be used</LI>
+ * 	<LI>If any of the above templates are not found, the DEFAULT_TEMPLATE will
+ * 		 be used.</LI>
+ * 	<LI>If there are no templates, then nothing is done.</LI>
+ * <UL>
  *
  * @author Michael C. Han
  */
