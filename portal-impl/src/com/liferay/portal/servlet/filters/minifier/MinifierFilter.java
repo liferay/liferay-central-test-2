@@ -37,6 +37,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.servlet.filters.BasePortalFilter;
 import com.liferay.portal.util.MinifierUtil;
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.util.SystemProperties;
@@ -166,7 +167,7 @@ public class MinifierFilter extends BasePortalFilter {
 		}
 
 		String minifierBundleDir = PropsUtil.get(
-			"javascript.bundle.dir", new Filter(minifierBundleId));
+			PropsKeys.JAVASCRIPT_BUNDLE_DIR, new Filter(minifierBundleId));
 
 		String bundleDirRealPath = ServletContextUtil.getRealPath(
 			_servletContext, minifierBundleDir);
