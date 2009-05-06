@@ -181,8 +181,7 @@ public class UpgradePortletPermissions extends UpgradeProcess {
 		}
 		else {
 			runSQL(
-				"DELETE FROM Permission_ WHERE permissionId = " +
-					permissionId);
+				"delete from Permission_ where permissionId = " + permissionId);
 		}
 	}
 

@@ -84,28 +84,25 @@ public class UpgradeOrganization extends UpgradeProcess {
 		updateLocationResources();
 	}
 
-	protected void updateCodeId(long companyId, int scope)
-		throws Exception {
-
+	protected void updateCodeId(long companyId, int scope) throws Exception {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 
 		try {
-			long oldCodeId = 0;
-			long newCodeId = 0;
-
 			con = DataAccess.getConnection();
 
 			ps = con.prepareStatement(
-				"SELECT codeId FROM ResourceCode " +
-					"WHERE companyId = ? AND name = ? AND scope = ?");
+				"select codeId from ResourceCode where companyId = ? and " +
+					"name = ? and scope = ?");
 
 			ps.setLong(1, companyId);
 			ps.setString(2, "com.liferay.portal.model.Location");
 			ps.setInt(3, scope);
 
 			rs = ps.executeQuery();
+
+			long oldCodeId = 0;
 
 			if (rs.next()) {
 				oldCodeId = rs.getLong("codeId");
@@ -115,19 +112,28 @@ public class UpgradeOrganization extends UpgradeProcess {
 
 			rs = ps.executeQuery();
 
+			long newCodeId = 0;
+
 			if (rs.next()) {
 				newCodeId = rs.getLong("codeId");
 			}
 
+			ps.close();
+
 			ps = con.prepareStatement(
-				"UPDATE Resource_ SET codeId = ? WHERE codeId = ?");
+				"update Resource_ set codeId = ? where codeId = ?");
 
 			ps.setLong(1, oldCodeId);
 			ps.setLong(2, newCodeId);
 
 			ps.executeUpdate();
 
-			runSQL("DELETE FROM ResourceCode WHERE codeId = " + oldCodeId);
+			ps.close();
+
+			ps = con.prepareStatement(
+				"delete from ResourceCode where codeId = " + oldCodeId);
+
+			ps.executeUpdate();
 		}
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
@@ -142,7 +148,7 @@ public class UpgradeOrganization extends UpgradeProcess {
 		try {
 			con = DataAccess.getConnection();
 
-			ps = con.prepareStatement("SELECT companyId FROM Company");
+			ps = con.prepareStatement(_GET_COMPANY_IDS);
 
 			rs = ps.executeQuery();
 
@@ -158,6 +164,9 @@ public class UpgradeOrganization extends UpgradeProcess {
 			DataAccess.cleanUp(con, ps, rs);
 		}
 	}
+
+	private static final String _GET_COMPANY_IDS =
+		"select companyId from Company";
 
 	private static Log _log = LogFactoryUtil.getLog(UpgradeOrganization.class);
 
