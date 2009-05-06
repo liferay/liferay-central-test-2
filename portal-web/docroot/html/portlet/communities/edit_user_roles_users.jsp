@@ -48,7 +48,7 @@ String breadcrumbs = (String)request.getAttribute("edit_user_roles.jsp-breadcrum
 
 	<%= LanguageUtil.get(pageContext, "assign-" + (group.isOrganization() ? "organization" : "community") + "-roles-to-users") %>
 
-	<i>Current</i> signifies current users associated with the <i><%= role.getTitle(locale) %></i> role. <i>Available</i> signifies all users associated with the <i><%= groupName %></i> <%= (group.isOrganization()) ? "organization" : "community" %>.
+	<i>Current</i> signifies current users associated with the <i><%= role.getTitle(locale) %></i> role. <i>Available</i> signifies all users associated with the <i><%= HtmlUtil.escape(groupName) %></i> <%= (group.isOrganization()) ? "organization" : "community" %>.
 </div>
 
 <br />

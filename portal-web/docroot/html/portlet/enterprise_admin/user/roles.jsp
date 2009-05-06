@@ -192,7 +192,7 @@ userGroupRoles.addAll(organizationRoles);
 
 				<liferay-ui:search-container-column-text
 					name="organization"
-					value="<%= userGroupRole.getGroup().getDescriptiveName() %>"
+					value="<%= HtmlUtil.escape(userGroupRole.getGroup().getDescriptiveName()) %>"
 				/>
 
 				<c:if test="<%= !portletName.equals(PortletKeys.MY_ACCOUNT) %>">
@@ -250,7 +250,7 @@ userGroupRoles.addAll(organizationRoles);
 
 				<liferay-ui:search-container-column-text
 					name="community"
-					value="<%= userGroupRole.getGroup().getDescriptiveName() %>"
+					value="<%= HtmlUtil.escape(userGroupRole.getGroup().getDescriptiveName()) %>"
 				/>
 
 				<c:if test="<%= !portletName.equals(PortletKeys.MY_ACCOUNT) %>">

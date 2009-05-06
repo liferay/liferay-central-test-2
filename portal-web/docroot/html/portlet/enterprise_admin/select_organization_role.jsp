@@ -133,7 +133,7 @@ if (step == 1) {
 						}
 					}
 
-					buffer.append(parentOrganizationName);
+					buffer.append(HtmlUtil.escape(parentOrganizationName));
 					%>
 				</liferay-ui:search-container-column-text>
 
@@ -177,7 +177,7 @@ if (step == 1) {
 
 		portletURL.setParameter("step", "1");
 
-		String breadcrumbs = "<a href=\"" + portletURL.toString() + "\">" + LanguageUtil.get(pageContext, "organizations") + "</a> &raquo; " + organization.getName();
+		String breadcrumbs = "<a href=\"" + portletURL.toString() + "\">" + LanguageUtil.get(pageContext, "organizations") + "</a> &raquo; " + HtmlUtil.escape(organization.getName());
 		%>
 
 		<div class="breadcrumbs">
@@ -240,7 +240,7 @@ if (step == 1) {
 				sb.append("', '");
 				sb.append("organizationRoles");
 				sb.append("', '");
-				sb.append(organization.getGroup().getDescriptiveName());
+				sb.append(UnicodeFormatter.toString(organization.getGroup().getDescriptiveName()));
 				sb.append("', '");
 				sb.append(organization.getGroup().getGroupId());
 				sb.append("');");

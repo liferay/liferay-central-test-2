@@ -143,7 +143,7 @@ portletURL.setParameter("typeSelection", JournalArticle.class.getName());
 							}
 						%>
 
-							<option <%= displayTerms.getGroupId() == group.getGroupId() ? "selected" : "" %> value="<%= group.getGroupId() %>"><%= groupName %></option>
+							<option <%= displayTerms.getGroupId() == group.getGroupId() ? "selected" : "" %> value="<%= group.getGroupId() %>"><%= HtmlUtil.escape(groupName) %></option>
 
 						<%
 						}

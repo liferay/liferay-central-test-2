@@ -99,7 +99,7 @@ int organizationIdsPos = ParamUtil.getInteger(request, "organizationIdsPos");
 						try {
 							Organization parentOrganization = OrganizationLocalServiceUtil.getOrganization(organization.getParentOrganizationId());
 
-							buffer.append(parentOrganization.getName());
+							buffer.append(HtmlUtil.escape(parentOrganization.getName()));
 						}
 						catch (Exception e) {
 						}

@@ -73,7 +73,7 @@ if (Validator.isNotNull(viewUsersRedirect)) {
 	<c:if test="<%= organization != null %>">
 		<input name="<portlet:namespace /><%= UserDisplayTerms.ORGANIZATION_ID %>" type="hidden" value="<%= organization.getOrganizationId() %>" />
 
-		<h3><%= LanguageUtil.format(pageContext, "users-of-x", organization.getName()) %></h3>
+		<h3><%= HtmlUtil.escape(LanguageUtil.format(pageContext, "users-of-x", organization.getName())) %></h3>
 	</c:if>
 
 	<c:if test="<%= userGroup != null %>">
@@ -127,7 +127,7 @@ if (Validator.isNotNull(viewUsersRedirect)) {
 		<c:if test="<%= organization != null %>">
 			<input name="<portlet:namespace /><%= UserDisplayTerms.ORGANIZATION_ID %>" type="hidden" value="<%= organization.getOrganizationId() %>" />
 
-			<liferay-ui:message key="filter-by-organization" />: <%= organization.getName() %><br />
+			<liferay-ui:message key="filter-by-organization" />: <%= HtmlUtil.escape(organization.getName()) %><br />
 		</c:if>
 
 		<c:if test="<%= userGroup != null %>">

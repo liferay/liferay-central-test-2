@@ -118,7 +118,7 @@ List<Layout> scopeLayouts = new ArrayList<Layout>();
 								%>
 
 								<h2>
-									<liferay-ui:message key="content-for" /> <a href="javascript: ;" class="lfr-group-selector"><%= curGroup.isUser() ? LanguageUtil.get(pageContext, "my-community") : curGroup.getDescriptiveName() %></a>
+									<liferay-ui:message key="content-for" /> <a href="javascript: ;" class="lfr-group-selector"><%= curGroup.isUser() ? LanguageUtil.get(pageContext, "my-community") : HtmlUtil.escape(curGroup.getDescriptiveName()) %></a>
 
 									<c:if test="<%= !scopeLayouts.isEmpty() %>">
 										<span class="nobr lfr-title-scope-selector">
@@ -175,7 +175,7 @@ List<Layout> scopeLayouts = new ArrayList<Layout>();
 													</c:if>
 
 													<li>
-														<a href="<%= HttpUtil.setParameter(PortalUtil.getCurrentURL(request), "doAsGroupId", organization.getGroup().getGroupId()) %>"><%= organization.getName() %></a>
+														<a href="<%= HttpUtil.setParameter(PortalUtil.getCurrentURL(request), "doAsGroupId", organization.getGroup().getGroupId()) %>"><%= HtmlUtil.escape(organization.getName()) %></a>
 													</li>
 
 												<%
@@ -274,7 +274,7 @@ List<Layout> scopeLayouts = new ArrayList<Layout>();
 
 						<div>
 							<span class="nobr">
-								<a class="portlet-icon-back" href="<%= backURL %>"><%= LanguageUtil.format(pageContext, "back-to-x", refererGroupDescriptiveName) %></a>
+								<a class="portlet-icon-back" href="<%= backURL %>"><%= LanguageUtil.format(pageContext, "back-to-x", HtmlUtil.escape(refererGroupDescriptiveName)) %></a>
 							</span>
 						</div>
 

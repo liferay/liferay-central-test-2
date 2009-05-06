@@ -125,7 +125,7 @@ if (displayTerms.getParentOrganizationId() > 0) {
 
 	<br />
 
-	<liferay-ui:message key="filter-by-organization" />: <%= organization.getName() %><br />
+	<liferay-ui:message key="filter-by-organization" />: <%= HtmlUtil.escape(organization.getName()) %><br />
 </c:if>
 
 <script type="text/javascript">

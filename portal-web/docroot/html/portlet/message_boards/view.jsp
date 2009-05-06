@@ -249,7 +249,7 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 
 					<liferay-security:permissionsURL
 						modelResource="<%= modelResource %>"
-						modelResourceDescription="<%= modelResourceDescription %>"
+						modelResourceDescription="<%= HtmlUtil.escape(modelResourceDescription) %>"
 						resourcePrimKey="<%= resourcePrimKey %>"
 						var="permissionsURL"
 					/>

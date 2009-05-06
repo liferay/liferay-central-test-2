@@ -79,7 +79,7 @@ if (organizationId > 0) {
 		<liferay-ui:message key="organization" />
 	</td>
 	<td>
-		<span id="<portlet:namespace />organizationName"><%= organizationName %></span>
+		<span id="<portlet:namespace />organizationName"><%= HtmlUtil.escape(organizationName) %></span>
 
 		<input type="button" value="<liferay-ui:message key="select" />" onClick="var organizationWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/portlet_configuration/select_organization" /><portlet:param name="tabs1" value="organizations" /></portlet:renderURL>', 'organization', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=680'); void(''); organizationWindow.focus();" />
 

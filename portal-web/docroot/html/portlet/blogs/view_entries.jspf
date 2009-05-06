@@ -43,7 +43,7 @@ showSearch = showSearch && (results.size() > 0);
 		<c:if test="<%= showPermissionsButton %>">
 			<liferay-security:permissionsURL
 				modelResource="com.liferay.portlet.blogs"
-				modelResourceDescription="<%= themeDisplay.getScopeGroupName() %>"
+				modelResourceDescription="<%= HtmlUtil.escape(themeDisplay.getScopeGroupName()) %>"
 				resourcePrimKey="<%= String.valueOf(scopeGroupId) %>"
 				var="permissionsURL"
 			/>

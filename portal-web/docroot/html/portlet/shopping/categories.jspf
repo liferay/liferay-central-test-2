@@ -155,7 +155,7 @@ boolean showSearch = (results.size() > 0);
 
 			<liferay-security:permissionsURL
 				modelResource="<%= modelResource %>"
-				modelResourceDescription="<%= modelResourceDescription %>"
+				modelResourceDescription="<%= HtmlUtil.escape(modelResourceDescription) %>"
 				resourcePrimKey="<%= resourcePrimKey %>"
 				var="permissionsURL"
 			/>

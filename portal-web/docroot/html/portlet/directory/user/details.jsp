@@ -94,7 +94,7 @@ for (int i = 1; i<organizations.size(); i++) {
 				</c:choose>
 			</dt>
 			<dd>
-				<%= organizationsHTML %>
+				<%= HtmlUtil.escape(organizationsHTML) %>
 			</dd>
 		</c:if>
 	</dl>

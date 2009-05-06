@@ -126,7 +126,7 @@ portletURL.setParameter("struts_action", "/enterprise_admin/select_organization"
 				}
 			}
 
-			buffer.append(parentOrganizationName);
+			buffer.append(HtmlUtil.escape(parentOrganizationName));
 			%>
 
 		</liferay-ui:search-container-column-text>

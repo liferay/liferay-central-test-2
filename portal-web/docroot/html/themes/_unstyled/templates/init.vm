@@ -184,7 +184,7 @@
 	#set ($page_javascript_2 = $typeSettingsProperties.getProperty("javascript-2"))
 	#set ($page_javascript_3 = $typeSettingsProperties.getProperty("javascript-3"))
 
-	#set ($community_name = $page_group.getDescriptiveName())
+	#set ($community_name = $htmlUtil.escape($page_group.getDescriptiveName()))
 
 	#if	($page_group.getName() == "Guest")
 		#set ($css_class = $css_class + " guest-community")

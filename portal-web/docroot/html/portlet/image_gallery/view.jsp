@@ -229,7 +229,7 @@ tabs1Names += ",recent-images";
 
 					<liferay-security:permissionsURL
 						modelResource="<%= modelResource %>"
-						modelResourceDescription="<%= modelResourceDescription %>"
+						modelResourceDescription="<%= HtmlUtil.escape(modelResourceDescription) %>"
 						resourcePrimKey="<%= resourcePrimKey %>"
 						var="permissionsURL"
 					/>

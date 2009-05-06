@@ -58,4 +58,4 @@ else {
 }
 %>
 
-<span class="entry-scope"><%= scopeName %></span>
+<span class="entry-scope"><%= HtmlUtil.escape(scopeName) %></span>

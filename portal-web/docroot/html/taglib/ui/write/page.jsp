@@ -96,7 +96,7 @@ String property = (String)request.getAttribute("liferay-ui:write:property");
 				List<Organization> organizations = user2.getOrganizations();
 				%>
 
-				<%= ListUtil.toString(organizations, "name", StringPool.COMMA_AND_SPACE) %>
+				<%= HtmlUtil.escape(ListUtil.toString(organizations, "name", StringPool.COMMA_AND_SPACE)) %>
 			</c:when>
 		</c:choose>
 	</c:when>

@@ -89,7 +89,7 @@ if (Validator.isNotNull(structureId)) {
 				}
 			%>
 
-				<option <%= groupId == group.getGroupId() ? "selected" : "" %> value="<%= group.getGroupId() %>"><%= groupName %></option>
+				<option <%= groupId == group.getGroupId() ? "selected" : "" %> value="<%= group.getGroupId() %>"><%= HtmlUtil.escape(groupName) %></option>
 
 			<%
 			}

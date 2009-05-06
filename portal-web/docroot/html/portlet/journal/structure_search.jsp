@@ -82,7 +82,7 @@ if (portletName.equals(PortletKeys.JOURNAL)) {
 		<c:if test="<%= showPermissionsButton %>">
 			<liferay-security:permissionsURL
 				modelResource="com.liferay.portlet.journal"
-				modelResourceDescription="<%= themeDisplay.getScopeGroupName() %>"
+				modelResourceDescription="<%= HtmlUtil.escape(themeDisplay.getScopeGroupName()) %>"
 				resourcePrimKey="<%= String.valueOf(scopeGroupId) %>"
 				var="permissionsURL"
 			/>

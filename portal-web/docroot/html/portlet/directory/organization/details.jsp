@@ -30,10 +30,10 @@ Organization organization =  (Organization)request.getAttribute(WebKeys.ORGANIZA
 long logoId = organization.getLogoId();
 %>
 
-<h2><%= organization.getName() %></h2>
+<h2><%= HtmlUtil.escape(organization.getName()) %></h2>
 
 <div class="details">
-	<img alt="<%= organization.getName() %>" class="avatar" src="<%= themeDisplay.getPathImage() %>/organization_logo?img_id=<%= logoId %>&t=<%= ImageServletTokenUtil.getToken(logoId) %>" />
+	<img alt="<%= HtmlUtil.escape(organization.getName()) %>" class="avatar" src="<%= themeDisplay.getPathImage() %>/organization_logo?img_id=<%= logoId %>&t=<%= ImageServletTokenUtil.getToken(logoId) %>" />
 
 	<dl class="property-list">
 		<dt>
@@ -75,7 +75,7 @@ long logoId = organization.getLogoId();
 				<liferay-ui:message key="parent-organization" />
 			</dt>
 			<dd>
-				<%=  organization.getParentOrganization().getName() %>
+				<%= HtmlUtil.escape(organization.getParentOrganization().getName()) %>
 			</dd>
 		</c:if>
 	</dl>

@@ -104,7 +104,7 @@ if (!StringUtil.contains(tabs4Names, tabs4)) {
 		<br /><br />
 
 		<div>
-			<input name="<portlet:namespace />exportFileName" size="50" type="text" value="<%= StringUtil.replace(rootNodeName, " ", "_") %>-<%= Time.getShortTimestamp() %>.lar">
+			<input name="<portlet:namespace />exportFileName" size="50" type="text" value="<%= HtmlUtil.escape(StringUtil.replace(rootNodeName, " ", "_")) %>-<%= Time.getShortTimestamp() %>.lar">
 		</div>
 
 		<br />

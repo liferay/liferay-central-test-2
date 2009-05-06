@@ -118,7 +118,7 @@ boolean showPermissionsButton = GroupPermissionUtil.contains(permissionChecker, 
 		<c:if test="<%= showPermissionsButton %>">
 			<liferay-security:permissionsURL
 				modelResource="com.liferay.portlet.polls"
-				modelResourceDescription="<%= themeDisplay.getScopeGroupName() %>"
+				modelResourceDescription="<%= HtmlUtil.escape(themeDisplay.getScopeGroupName()) %>"
 				resourcePrimKey="<%= String.valueOf(scopeGroupId) %>"
 				var="permissionsURL"
 			/>

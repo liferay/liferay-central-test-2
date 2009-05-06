@@ -198,7 +198,7 @@ portletURL.setParameter("passwordPolicyId", String.valueOf(passwordPolicy.getPas
 						try {
 							Organization parentOrganization = OrganizationLocalServiceUtil.getOrganization(organization.getParentOrganizationId());
 
-							buffer.append(parentOrganization.getName());
+							buffer.append(HtmlUtil.escape(parentOrganization.getName()));
 						}
 						catch (Exception e) {
 						}

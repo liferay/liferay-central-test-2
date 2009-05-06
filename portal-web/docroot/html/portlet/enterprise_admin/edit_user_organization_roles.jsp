@@ -74,7 +74,7 @@ for (int i = 0; i < userOrganizations.size(); i++) {
 
 		// Organization
 
-		row.addText(organization.getName());
+		row.addText(HtmlUtil.escape(organization.getName()));
 
 		// Action
 

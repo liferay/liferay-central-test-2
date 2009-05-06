@@ -444,7 +444,7 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 					<liferay-ui:message key="edit-pages-for-user" />: <%= user2.getFullName() %>
 				</c:when>
 				<c:when test="<%= liveGroup.isUserGroup() %>">
-					<liferay-ui:message key="edit-pages-for-user-group" />: <%= group.getDescriptiveName() %>
+					<liferay-ui:message key="edit-pages-for-user-group" />: <%= HtmlUtil.escape(group.getDescriptiveName()) %>
 				</c:when>
 			</c:choose>
 		</div>

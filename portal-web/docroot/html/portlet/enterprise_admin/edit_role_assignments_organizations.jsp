@@ -89,7 +89,7 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_role_assignments.
 				try {
 					Organization parentOrganization = OrganizationLocalServiceUtil.getOrganization(organization.getParentOrganizationId());
 
-					buffer.append(parentOrganization.getName());
+					buffer.append(HtmlUtil.escape(parentOrganization.getName()));
 				}
 				catch (Exception e) {
 				}

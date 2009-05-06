@@ -137,7 +137,7 @@ if (step == 1) {
 
 		portletURL.setParameter("step", "1");
 
-		String breadcrumbs = "<a href=\"" + portletURL.toString() + "\">" + LanguageUtil.get(pageContext, "communities") + "</a> &raquo; " + group.getDescriptiveName();
+		String breadcrumbs = "<a href=\"" + portletURL.toString() + "\">" + LanguageUtil.get(pageContext, "communities") + "</a> &raquo; " + HtmlUtil.escape(group.getDescriptiveName());
 		%>
 
 		<div class="breadcrumbs">
@@ -199,7 +199,7 @@ if (step == 1) {
 				sb.append("', '");
 				sb.append("communityRoles");
 				sb.append("', '");
-				sb.append(group.getDescriptiveName());
+				sb.append(UnicodeFormatter.toString(group.getDescriptiveName()));
 				sb.append("', '");
 				sb.append(group.getGroupId());
 				sb.append("');");

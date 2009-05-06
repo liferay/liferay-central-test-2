@@ -123,7 +123,7 @@ int priority = BeanParamUtil.getInteger(entry, request, "priority");
 						Organization organization = OrganizationLocalServiceUtil.getOrganization(entry.getClassPK());
 						%>
 
-						<liferay-ui:message key="organization" /> &raquo; <%= organization.getName() %>
+						<liferay-ui:message key="organization" /> &raquo; <%= HtmlUtil.escape(organization.getName()) %>
 					</c:when>
 					<c:when test="<%= className.equals(Role.class.getName()) %>">
 
@@ -208,7 +208,7 @@ int priority = BeanParamUtil.getInteger(entry, request, "priority");
 								if (OrganizationPermissionUtil.contains(permissionChecker, organization.getOrganizationId(), ActionKeys.MANAGE_ANNOUNCEMENTS)) {
 							%>
 
-									<option <%= (classPK == organization.getOrganizationId()) ? "selected" : "" %> value="<%= PortalUtil.getClassNameId(Organization.class) %><%= StringPool.COMMA %><%= organization.getOrganizationId() %>"><%= organization.getName() %></option>
+									<option <%= (classPK == organization.getOrganizationId()) ? "selected" : "" %> value="<%= PortalUtil.getClassNameId(Organization.class) %><%= StringPool.COMMA %><%= organization.getOrganizationId() %>"><%= HtmlUtil.escape(organization.getName()) %></option>
 
 							<%
 								}
