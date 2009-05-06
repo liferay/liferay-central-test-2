@@ -180,7 +180,9 @@ public class UpgradePortletPermissions extends UpgradeProcess {
 			PermissionLocalServiceUtil.updatePermission(permission);
 		}
 		else {
-			PermissionLocalServiceUtil.deletePermission(permissionId);
+			runSQL(
+				"DELETE FROM Permission_ WHERE permissionId = " +
+					permissionId);
 		}
 	}
 

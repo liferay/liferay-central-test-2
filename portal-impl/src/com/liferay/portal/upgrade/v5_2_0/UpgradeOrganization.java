@@ -26,12 +26,8 @@ import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
-import com.liferay.portal.model.Company;
-import com.liferay.portal.model.ResourceCode;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.impl.OrganizationImpl;
-import com.liferay.portal.service.CompanyLocalServiceUtil;
-import com.liferay.portal.service.ResourceCodeLocalServiceUtil;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
@@ -44,8 +40,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Types;
-
-import java.util.List;
 
 /**
  * <a href="UpgradeOrganization.java.html"><b><i>View Source</i></b></a>
@@ -90,8 +84,7 @@ public class UpgradeOrganization extends UpgradeProcess {
 		updateLocationResources();
 	}
 
-	protected void updateCodeId(
-			ResourceCode oldResourceCode, ResourceCode newResourceCode)
+	protected void updateCodeId(long companyId, int scope)
 		throws Exception {
 
 		Connection con = null;
@@ -99,43 +92,70 @@ public class UpgradeOrganization extends UpgradeProcess {
 		ResultSet rs = null;
 
 		try {
+			long oldCodeId = 0;
+			long newCodeId = 0;
+
 			con = DataAccess.getConnection();
 
 			ps = con.prepareStatement(
-				"update Resource_ set codeId = ? where codeId = ?");
+				"SELECT codeId FROM ResourceCode " +
+					"WHERE companyId = ? AND name = ? AND scope = ?");
 
-			ps.setLong(1, newResourceCode.getCodeId());
-			ps.setLong(2, oldResourceCode.getCodeId());
+			ps.setLong(1, companyId);
+			ps.setString(2, "com.liferay.portal.model.Location");
+			ps.setInt(3, scope);
+
+			rs = ps.executeQuery();
+
+			if (rs.next()) {
+				oldCodeId = rs.getLong("codeId");
+			}
+
+			ps.setString(2, "com.liferay.portal.model.Organization");
+
+			rs = ps.executeQuery();
+
+			if (rs.next()) {
+				newCodeId = rs.getLong("codeId");
+			}
+
+			ps = con.prepareStatement(
+				"UPDATE Resource_ SET codeId = ? WHERE codeId = ?");
+
+			ps.setLong(1, oldCodeId);
+			ps.setLong(2, newCodeId);
 
 			ps.executeUpdate();
+
+			runSQL("DELETE FROM ResourceCode WHERE codeId = " + oldCodeId);
 		}
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
 		}
-
-		ResourceCodeLocalServiceUtil.deleteResourceCode(oldResourceCode);
 	}
 
 	protected void updateLocationResources() throws Exception {
-		List<Company> companies = CompanyLocalServiceUtil.getCompanies(true);
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
 
-		for (Company company : companies) {
-			for (int scope : ResourceConstants.SCOPES) {
-				ResourceCode oldResourceCode =
-					ResourceCodeLocalServiceUtil.getResourceCode(
-						company.getCompanyId(),
-						"com.liferay.portal.model.Location", scope);
+		try {
+			con = DataAccess.getConnection();
 
-				ResourceCode newResourceCode =
-					ResourceCodeLocalServiceUtil.getResourceCode(
-						company.getCompanyId(),
-						"com.liferay.portal.model.Organization", scope);
+			ps = con.prepareStatement("SELECT companyId FROM Company");
 
-				updateCodeId(oldResourceCode, newResourceCode);
+			rs = ps.executeQuery();
 
-				ResourceCodeLocalServiceUtil.deleteResourceCode(
-					oldResourceCode);
+			while (rs.next()) {
+				long companyId = rs.getLong("companyId");
+
+				for (int scope : ResourceConstants.SCOPES) {
+					updateCodeId(companyId, scope);
+				}
 			}
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
 		}
 	}
 
