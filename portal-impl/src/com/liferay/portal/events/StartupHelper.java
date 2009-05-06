@@ -335,7 +335,11 @@ public class StartupHelper {
 
 			existingIndexNames.remove(indexName);
 
-			String sql = "drop index " + indexName + " on " + tableName;
+			String sql = "drop index " + indexName;
+
+			if (type.equals(DBUtil.TYPE_MYSQL)) {
+				sql += " on " + tableName;
+			}
 
 			if (_log.isInfoEnabled()) {
 				_log.info(sql);
@@ -388,7 +392,46 @@ public class StartupHelper {
 	}
 
 	protected List<Index> getOracleIndexes() throws Exception {
-		return null;
+		List<Index> indexes = new ArrayList<Index>();
+
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = DataAccess.getConnection();
+
+			StringBuilder sb = new StringBuilder();
+
+			sb.append("select index_name, table_name, uniqueness from ");
+			sb.append("user_indexes where index_name like 'LIFERAY_%' or ");
+			sb.append("index_name like 'IX_%'");
+
+			String sql = sb.toString();
+
+			ps = con.prepareStatement(sql);
+
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				String indexName = rs.getString("index_name");
+				String tableName = rs.getString("table_name");
+				String uniqueness = rs.getString("uniqueness");
+
+				boolean unique = true;
+
+				if (uniqueness.equalsIgnoreCase("NONUNIQUE")) {
+					unique = false;
+				}
+
+				indexes.add(new Index(indexName, tableName, unique));
+			}
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
+		}
+
+		return indexes;
 	}
 
 	protected List<Index> getPostgreSQLIndexes() throws Exception {
@@ -446,11 +489,11 @@ public class StartupHelper {
 	}
 
 	private static final String _DELETE_TEMP_IMAGES_1 =
-		"DELETE FROM Image WHERE imageId IN (SELECT articleImageId FROM " +
-			"JournalArticleImage WHERE tempImage = TRUE)";
+		"delete from Image where imageId IN (SELECT articleImageId FROM " +
+			"JournalArticleImage where tempImage = TRUE)";
 
 	private static final String _DELETE_TEMP_IMAGES_2 =
-		"DELETE FROM JournalArticleImage where tempImage = TRUE";
+		"delete from JournalArticleImage where tempImage = TRUE";
 
 	private static Log _log = LogFactoryUtil.getLog(StartupHelper.class);
 
