@@ -95,9 +95,7 @@ public class EditCommentTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
-		assertEquals("This is a edited test comment.",
-			selenium.getText("//tr[5]/td[2]/div[1]"));
-		assertFalse(selenium.isElementPresent(
-				"link=This is a second test comment."));
+		assertTrue(selenium.isTextPresent("This is a edited test comment."));
+		assertFalse(selenium.isTextPresent("This is a second test comment."));
 	}
 }

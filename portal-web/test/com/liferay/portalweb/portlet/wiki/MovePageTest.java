@@ -85,7 +85,7 @@ public class MovePageTest extends BaseTestCase {
 		assertTrue(selenium.isElementPresent("link=First"));
 		selenium.click(RuntimeVariables.replace("link=First"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//img[@alt='Details']"));
+		selenium.click(RuntimeVariables.replace("link=Details"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Move"));
 		selenium.waitForPageToLoad("30000");

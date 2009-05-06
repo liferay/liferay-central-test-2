@@ -77,7 +77,7 @@ public class AddChildPageTest extends BaseTestCase {
 		selenium.type("_36_title", RuntimeVariables.replace("Test Child Page"));
 		selenium.type("_36_content",
 			RuntimeVariables.replace(
-				"==Test Child Page==\n\n//this is Search Test Child Page Article Content//\n\n**bold**\n\n[[http://www.liferay.com|Link to website]]\n\n*this is a list item\n**this is a sub list item"));
+				"==Test Child Page==\n\n//This is Search Test Child Page Article Content//\n\n**bold**\n\n[[http://www.liferay.com|Link to website]]\n\n*this is a list item\n**this is a sub list item"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(

@@ -91,7 +91,7 @@ public class MoveChangeParentTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"link=Test Change Parent Child Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//img[@alt='Details']"));
+		selenium.click(RuntimeVariables.replace("link=Details"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Move"));
 		selenium.waitForPageToLoad("30000");
@@ -103,7 +103,7 @@ public class MoveChangeParentTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
-		assertEquals("Test Child Page", selenium.getText("//div[3]/a[2]"));
+		assertTrue(selenium.isElementPresent("link=Test Child Page"));
 		assertTrue(selenium.isTextPresent("Test Change Parent Child Page"));
 		assertFalse(selenium.isTextPresent("Test Second Child Page"));
 		selenium.click(RuntimeVariables.replace("link=Wiki Test Page"));

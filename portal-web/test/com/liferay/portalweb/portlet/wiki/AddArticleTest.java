@@ -82,6 +82,6 @@ public class AddArticleTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
-		assertEquals("Test Wiki Article", selenium.getText("//div[3]/div/h2"));
+		assertTrue(selenium.isTextPresent("Test Wiki Article"));
 	}
 }

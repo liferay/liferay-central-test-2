@@ -77,12 +77,11 @@ public class AddSecondArticleTest extends BaseTestCase {
 
 		selenium.type("_36_content",
 			RuntimeVariables.replace(
-				"&lt;&lt;TableOfContents&gt;&gt;\n\n== This is a second test article ==\n\n====Yes this is a second test article ===="));
+				"<<TableOfContents>>\n\n== This is a second test article ==\n\n====Yes this is a second test article ===="));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
-		assertEquals("This is a second test article",
-			selenium.getText("//div[3]/div/h2"));
+		assertTrue(selenium.isTextPresent("This is a second test article"));
 	}
 }

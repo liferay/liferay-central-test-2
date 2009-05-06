@@ -72,10 +72,10 @@ public class SearchContentTest extends BaseTestCase {
 
 		selenium.typeKeys("_36_keywords",
 			RuntimeVariables.replace(
-				"\"this is Search Test Child Page Article Content\""));
+				"\"This is Search Test Child Page Article Content\""));
 		selenium.type("_36_keywords",
 			RuntimeVariables.replace(
-				"\"this is Search Test Child Page Article Content\""));
+				"\"This is Search Test Child Page Article Content\""));
 		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Showing 1 result."));
@@ -83,6 +83,6 @@ public class SearchContentTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace("link=Test Child Page"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
-				"this is Search Test Child Page Article Content"));
+				"This is Search Test Child Page Article Content"));
 	}
 }
