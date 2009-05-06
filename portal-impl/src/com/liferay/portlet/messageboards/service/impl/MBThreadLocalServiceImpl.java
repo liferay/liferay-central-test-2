@@ -34,12 +34,10 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.ResourceConstants;
-import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBThread;
-import com.liferay.portlet.messageboards.model.impl.MBMessageFlagImpl;
 import com.liferay.portlet.messageboards.model.impl.MBThreadImpl;
 import com.liferay.portlet.messageboards.service.base.MBThreadLocalServiceBaseImpl;
 import com.liferay.portlet.messageboards.util.Indexer;
@@ -281,27 +279,6 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 
 	public int getThreadsCount(long categoryId) throws SystemException {
 		return mbThreadPersistence.countByCategoryId(categoryId);
-	}
-
-	public boolean hasReadThread(
-			long userId, long threadId, int threadMessageCount)
-		throws PortalException, SystemException {
-
-		User user = userPersistence.findByPrimaryKey(userId);
-
-		if (user.isDefaultUser()) {
-			return true;
-		}
-
-		int readThreadMessageCount = mbMessageFlagPersistence.countByU_T_F(
-			userId, threadId, MBMessageFlagImpl.READ_FLAG);
-
-		if (readThreadMessageCount != threadMessageCount) {
-			return false;
-		}
-		else {
-			return true;
-		}
 	}
 
 	public MBThread moveThread(long categoryId, long threadId)

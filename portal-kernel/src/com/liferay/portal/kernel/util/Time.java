@@ -54,6 +54,7 @@ public class Time {
 
 	public static Date getDate(Calendar cal) {
 		Calendar adjustedCal = CalendarFactoryUtil.getCalendar();
+
 		adjustedCal.set(Calendar.YEAR, cal.get(Calendar.YEAR));
 		adjustedCal.set(Calendar.MONTH, cal.get(Calendar.MONTH));
 		adjustedCal.set(Calendar.DATE, cal.get(Calendar.DATE));
@@ -73,6 +74,7 @@ public class Time {
 
 	public static Date getDate(Date date, TimeZone tz) {
 		Calendar cal = CalendarFactoryUtil.getCalendar(tz);
+
 		cal.setTime(date);
 
 		return getDate(cal);

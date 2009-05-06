@@ -1079,6 +1079,7 @@
 			<generator class="assigned" />
 		</id>
 		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
 		<property name="threadId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="messageId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="flag" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />

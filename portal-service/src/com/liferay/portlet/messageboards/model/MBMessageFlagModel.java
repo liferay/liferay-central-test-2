@@ -24,6 +24,8 @@ package com.liferay.portlet.messageboards.model;
 
 import com.liferay.portal.model.BaseModel;
 
+import java.util.Date;
+
 /**
  * <a href="MBMessageFlagModel.java.html"><b><i>View Source</i></b></a>
  *
@@ -56,6 +58,10 @@ public interface MBMessageFlagModel extends BaseModel<MBMessageFlag> {
 	public long getUserId();
 
 	public void setUserId(long userId);
+
+	public Date getModifiedDate();
+
+	public void setModifiedDate(Date modifiedDate);
 
 	public long getThreadId();
 

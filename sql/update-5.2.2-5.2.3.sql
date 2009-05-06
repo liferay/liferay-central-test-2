@@ -44,6 +44,7 @@ delete from MBMessageFlag where flag = 1;
 
 COMMIT_TRANSACTION;
 
+alter table MBMessageFlag add modifiedDate DATE null;
 alter table MBMessageFlag add threadId LONG;
 
 alter table MBThread add groupId LONG;

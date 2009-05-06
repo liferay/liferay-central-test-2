@@ -23,6 +23,7 @@
 package com.liferay.portlet.messageboards.service.persistence;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.messageboards.NoSuchMessageFlagException;
@@ -72,6 +73,7 @@ public class MBMessageFlagPersistenceTest extends BasePersistenceTestCase {
 		MBMessageFlag newMBMessageFlag = _persistence.create(pk);
 
 		newMBMessageFlag.setUserId(nextLong());
+		newMBMessageFlag.setModifiedDate(nextDate());
 		newMBMessageFlag.setThreadId(nextLong());
 		newMBMessageFlag.setMessageId(nextLong());
 		newMBMessageFlag.setFlag(nextInt());
@@ -84,6 +86,9 @@ public class MBMessageFlagPersistenceTest extends BasePersistenceTestCase {
 			newMBMessageFlag.getMessageFlagId());
 		assertEquals(existingMBMessageFlag.getUserId(),
 			newMBMessageFlag.getUserId());
+		assertEquals(Time.getShortTimestamp(
+				existingMBMessageFlag.getModifiedDate()),
+			Time.getShortTimestamp(newMBMessageFlag.getModifiedDate()));
 		assertEquals(existingMBMessageFlag.getThreadId(),
 			newMBMessageFlag.getThreadId());
 		assertEquals(existingMBMessageFlag.getMessageId(),
@@ -133,6 +138,7 @@ public class MBMessageFlagPersistenceTest extends BasePersistenceTestCase {
 		MBMessageFlag mbMessageFlag = _persistence.create(pk);
 
 		mbMessageFlag.setUserId(nextLong());
+		mbMessageFlag.setModifiedDate(nextDate());
 		mbMessageFlag.setThreadId(nextLong());
 		mbMessageFlag.setMessageId(nextLong());
 		mbMessageFlag.setFlag(nextInt());

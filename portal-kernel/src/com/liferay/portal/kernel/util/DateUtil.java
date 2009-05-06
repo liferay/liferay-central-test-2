@@ -71,6 +71,42 @@ public class DateUtil {
 		}
 	}
 
+	public static boolean equals(Date date1, Date date2) {
+		if (compareTo(date1, date2) == 0) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public static boolean equals(
+		Date date1, Date date2, boolean ignoreMilliseconds) {
+
+		if (!ignoreMilliseconds) {
+			return equals(date1, date2);
+		}
+
+		long time1 = 0;
+
+		if (date1 != null) {
+			time1 = date1.getTime() / Time.SECOND;
+		}
+
+		long time2 = 0;
+
+		if (date2 != null) {
+			time2 = date2.getTime() / Time.SECOND;
+		}
+
+		if (time1 == time2) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 	public static String getCurrentDate(String pattern, Locale locale) {
 		return getDate(new Date(), pattern, locale);
 	}

@@ -25,6 +25,7 @@ package com.liferay.portlet.messageboards.model;
 import java.io.Serializable;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -51,6 +52,7 @@ public class MBMessageFlagSoap implements Serializable {
 
 		soapModel.setMessageFlagId(model.getMessageFlagId());
 		soapModel.setUserId(model.getUserId());
+		soapModel.setModifiedDate(model.getModifiedDate());
 		soapModel.setThreadId(model.getThreadId());
 		soapModel.setMessageId(model.getMessageId());
 		soapModel.setFlag(model.getFlag());
@@ -95,6 +97,14 @@ public class MBMessageFlagSoap implements Serializable {
 		_userId = userId;
 	}
 
+	public Date getModifiedDate() {
+		return _modifiedDate;
+	}
+
+	public void setModifiedDate(Date modifiedDate) {
+		_modifiedDate = modifiedDate;
+	}
+
 	public long getThreadId() {
 		return _threadId;
 	}
@@ -121,6 +131,7 @@ public class MBMessageFlagSoap implements Serializable {
 
 	private long _messageFlagId;
 	private long _userId;
+	private Date _modifiedDate;
 	private long _threadId;
 	private long _messageId;
 	private int _flag;

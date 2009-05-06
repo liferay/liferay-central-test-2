@@ -280,6 +280,7 @@
 		<!-- Audit fields -->
 
 		<column name="userId" type="long" />
+		<column name="modifiedDate" type="Date" />
 
 		<!-- Other fields -->
 

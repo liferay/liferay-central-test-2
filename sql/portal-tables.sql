@@ -694,6 +694,7 @@ create table MBMessage (
 create table MBMessageFlag (
 	messageFlagId LONG not null primary key,
 	userId LONG,
+	modifiedDate DATE null,
 	threadId LONG,
 	messageId LONG,
 	flag INTEGER

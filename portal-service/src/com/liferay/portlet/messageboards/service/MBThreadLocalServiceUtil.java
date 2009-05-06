@@ -205,13 +205,6 @@ public class MBThreadLocalServiceUtil {
 		return getService().getThreadsCount(categoryId);
 	}
 
-	public static boolean hasReadThread(long userId, long threadId,
-		int threadMessageCount)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return getService().hasReadThread(userId, threadId, threadMessageCount);
-	}
-
 	public static com.liferay.portlet.messageboards.model.MBThread moveThread(
 		long categoryId, long threadId)
 		throws com.liferay.portal.PortalException,

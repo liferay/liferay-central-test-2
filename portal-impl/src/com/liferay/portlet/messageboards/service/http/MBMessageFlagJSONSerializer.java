@@ -25,9 +25,11 @@ package com.liferay.portlet.messageboards.service.http;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.util.StringPool;
 
 import com.liferay.portlet.messageboards.model.MBMessageFlag;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -55,6 +57,16 @@ public class MBMessageFlagJSONSerializer {
 
 		jsonObj.put("messageFlagId", model.getMessageFlagId());
 		jsonObj.put("userId", model.getUserId());
+
+		Date modifiedDate = model.getModifiedDate();
+
+		String modifiedDateJSON = StringPool.BLANK;
+
+		if (modifiedDate != null) {
+			modifiedDateJSON = String.valueOf(modifiedDate.getTime());
+		}
+
+		jsonObj.put("modifiedDate", modifiedDateJSON);
 		jsonObj.put("threadId", model.getThreadId());
 		jsonObj.put("messageId", model.getMessageId());
 		jsonObj.put("flag", model.getFlag());

@@ -110,10 +110,10 @@ public class MBMessageFlagLocalServiceUtil {
 	}
 
 	public static void addReadFlags(long userId,
-		java.util.List<com.liferay.portlet.messageboards.model.MBMessage> messages)
+		com.liferay.portlet.messageboards.model.MBThread thread)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		getService().addReadFlags(userId, messages);
+		getService().addReadFlags(userId, thread);
 	}
 
 	public static void addQuestionFlag(long messageId)
@@ -152,10 +152,11 @@ public class MBMessageFlagLocalServiceUtil {
 		return getService().hasQuestionFlag(messageId);
 	}
 
-	public static boolean hasReadFlag(long userId, long messageId)
+	public static boolean hasReadFlag(long userId,
+		com.liferay.portlet.messageboards.model.MBThread thread)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return getService().hasReadFlag(userId, messageId);
+		return getService().hasReadFlag(userId, thread);
 	}
 
 	public static MBMessageFlagLocalService getService() {

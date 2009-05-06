@@ -26,12 +26,15 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.model.User;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBMessageFlag;
+import com.liferay.portlet.messageboards.model.MBThread;
 import com.liferay.portlet.messageboards.model.impl.MBMessageFlagImpl;
 import com.liferay.portlet.messageboards.service.base.MBMessageFlagLocalServiceBaseImpl;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -44,10 +47,7 @@ import java.util.List;
 public class MBMessageFlagLocalServiceImpl
 	extends MBMessageFlagLocalServiceBaseImpl {
 
-	/**
-	 * @deprecated
-	 */
-	public void addReadFlags(long userId, List<MBMessage> messages)
+	public void addReadFlags(long userId, MBThread thread)
 		throws PortalException, SystemException {
 
 		User user = userPersistence.findByPrimaryKey(userId);
@@ -56,44 +56,52 @@ public class MBMessageFlagLocalServiceImpl
 			return;
 		}
 
-		for (MBMessage message : messages) {
-			long messageId = message.getMessageId();
-			int flag = MBMessageFlagImpl.READ_FLAG;
+		long messageId = thread.getRootMessageId();
+		int flag = MBMessageFlagImpl.READ_FLAG;
 
-			MBMessageFlag messageFlag = mbMessageFlagPersistence.fetchByU_M_F(
-				userId, messageId, flag);
+		MBMessageFlag messageFlag = mbMessageFlagPersistence.fetchByU_M_F(
+			userId, messageId, flag);
 
-			if (messageFlag == null) {
-				long messageFlagId = counterLocalService.increment();
+		if (messageFlag == null) {
+			long messageFlagId = counterLocalService.increment();
 
-				messageFlag = mbMessageFlagPersistence.create(messageFlagId);
+			messageFlag = mbMessageFlagPersistence.create(messageFlagId);
 
-				messageFlag.setUserId(userId);
-				messageFlag.setThreadId(message.getThreadId());
-				messageFlag.setMessageId(messageId);
-				messageFlag.setFlag(flag);
+			messageFlag.setUserId(userId);
+			messageFlag.setModifiedDate(thread.getLastPostDate());
+			messageFlag.setThreadId(thread.getThreadId());
+			messageFlag.setMessageId(messageId);
+			messageFlag.setFlag(flag);
 
+			mbMessageFlagPersistence.update(messageFlag, false);
+
+			try {
 				mbMessageFlagPersistence.update(messageFlag, false);
-
-				try {
-					mbMessageFlagPersistence.update(messageFlag, false);
+			}
+			catch (SystemException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(
+						"Add failed, fetch {userId=" + userId +
+							", messageId=" + messageId + ",flag=" + flag +
+								"}");
 				}
-				catch (SystemException se) {
-					if (_log.isWarnEnabled()) {
-						_log.warn(
-							"Add failed, fetch {userId=" + userId +
-								", messageId=" + messageId + ",flag=" + flag +
-									"}");
-					}
 
-					messageFlag = mbMessageFlagPersistence.fetchByU_M_F(
-						userId, messageId, flag, false);
+				messageFlag = mbMessageFlagPersistence.fetchByU_M_F(
+					userId, messageId, flag, false);
 
-					if (messageFlag == null) {
-						throw se;
-					}
+				if (messageFlag == null) {
+					throw se;
 				}
 			}
+		}
+
+		if (!DateUtil.equals(
+				messageFlag.getModifiedDate(), thread.getLastPostDate(),
+				true)) {
+
+			messageFlag.setModifiedDate(thread.getLastPostDate());
+
+			mbMessageFlagPersistence.update(messageFlag, false);
 		}
 	}
 
@@ -123,6 +131,7 @@ public class MBMessageFlagLocalServiceImpl
 				messageFlagId);
 
 			questionMessageFlag.setUserId(message.getUserId());
+			questionMessageFlag.setModifiedDate(new Date());
 			questionMessageFlag.setThreadId(message.getThreadId());
 			questionMessageFlag.setMessageId(message.getMessageId());
 			questionMessageFlag.setFlag(MBMessageFlagImpl.QUESTION_FLAG);
@@ -184,10 +193,7 @@ public class MBMessageFlagLocalServiceImpl
 		}
 	}
 
-	/**
-	 * @deprecated
-	 */
-	public boolean hasReadFlag(long userId, long messageId)
+	public boolean hasReadFlag(long userId, MBThread thread)
 		throws PortalException, SystemException {
 
 		User user = userPersistence.findByPrimaryKey(userId);
@@ -197,9 +203,13 @@ public class MBMessageFlagLocalServiceImpl
 		}
 
 		MBMessageFlag messageFlag = mbMessageFlagPersistence.fetchByU_M_F(
-			userId, messageId, MBMessageFlagImpl.READ_FLAG);
+			userId, thread.getRootMessageId(), MBMessageFlagImpl.READ_FLAG);
 
-		if (messageFlag != null) {
+		if ((messageFlag != null) &&
+			(DateUtil.equals(
+				messageFlag.getModifiedDate(), thread.getLastPostDate(),
+				true))) {
+
 			return true;
 		}
 		else {

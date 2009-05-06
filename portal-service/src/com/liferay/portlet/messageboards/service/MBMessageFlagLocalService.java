@@ -101,7 +101,7 @@ public interface MBMessageFlagLocalService {
 		boolean merge) throws com.liferay.portal.SystemException;
 
 	public void addReadFlags(long userId,
-		java.util.List<com.liferay.portlet.messageboards.model.MBMessage> messages)
+		com.liferay.portlet.messageboards.model.MBThread thread)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
@@ -130,7 +130,8 @@ public interface MBMessageFlagLocalService {
 		throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public boolean hasReadFlag(long userId, long messageId)
+	public boolean hasReadFlag(long userId,
+		com.liferay.portlet.messageboards.model.MBThread thread)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 }
