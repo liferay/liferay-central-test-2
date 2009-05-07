@@ -25,6 +25,7 @@ package com.liferay.portlet.portletconfiguration.action;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.ConfigurationAction;
+import com.liferay.portal.kernel.portlet.ResourceServingConfigurationAction;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -48,6 +49,8 @@ import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
+import javax.portlet.ResourceRequest;
+import javax.portlet.ResourceResponse;
 
 import javax.servlet.ServletContext;
 
@@ -78,6 +81,8 @@ public class EditConfigurationAction extends PortletAction {
 				actionRequest, PrincipalException.class.getName());
 
 			setForward(actionRequest, "portlet.portlet_configuration.error");
+
+			return;
 		}
 
 		ConfigurationAction configurationAction = getConfigurationAction(
@@ -132,8 +137,36 @@ public class EditConfigurationAction extends PortletAction {
 			renderRequest, "portlet.portlet_configuration.edit_configuration"));
 	}
 
+	public void serveResource(
+			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
+			ResourceRequest resourceRequest, ResourceResponse resourceResponse)
+		throws Exception {
+
+		Portlet portlet = null;
+
+		try {
+			portlet = getPortlet(resourceRequest);
+		}
+		catch (PrincipalException pe) {
+			return;
+		}
+
+		ResourceServingConfigurationAction resourceServingConfigurationAction =
+			(ResourceServingConfigurationAction)getConfigurationAction(
+				portlet);
+
+		if (resourceServingConfigurationAction != null) {
+			resourceServingConfigurationAction.serveResource(
+				portletConfig, resourceRequest, resourceResponse);
+		}
+	}
+
 	protected ConfigurationAction getConfigurationAction(Portlet portlet)
 		throws Exception {
+
+		if (portlet == null) {
+			return null;
+		}
 
 		ConfigurationAction configurationAction =
 			portlet.getConfigurationActionInstance();
