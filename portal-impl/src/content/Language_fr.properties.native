@@ -1400,6 +1400,7 @@ enable-comment-ratings=Permettre les évaluations de commentaire
 enable-comments=Autoriser les commentaires
 enable-flags=Permettez les drapeaux
 enable-message-ratings=Permettre les évaluations de message
+enable-page-ratings=Permettez les estimations de page
 enable-print=Permettez la copie
 enable-ratings=Autoriser les notations
 enable-rss-subscription=Permettre l'abonnement de RSS

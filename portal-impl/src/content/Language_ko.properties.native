@@ -1400,6 +1400,7 @@ enable-comment-ratings=코멘트 등급을 가능하게 하십시오
 enable-comments=코멘트를 가능하게 하십시요
 enable-flags=깃발을 가능하게 하십시오
 enable-message-ratings=메시지 등급을 가능하게 하십시오
+enable-page-ratings=페이지 등급을 가능하게 하십시오
 enable-print=인쇄를 가능하게 하십시오
 enable-ratings=등급을 가능하게 하십시요
 enable-rss-subscription=RSS 기부금을 가능하게 하십시오

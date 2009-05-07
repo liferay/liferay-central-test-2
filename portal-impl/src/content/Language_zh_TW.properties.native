@@ -1400,6 +1400,7 @@ enable-comment-ratings=使能評論規定值
 enable-comments=使能評論
 enable-flags=使能旗子
 enable-message-ratings=使能消息規定值
+enable-page-ratings=使能頁規定值
 enable-print=使能印刷品
 enable-ratings=使能規定值
 enable-rss-subscription=使能RSS訂閱

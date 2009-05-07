@@ -1400,6 +1400,7 @@ enable-comment-ratings=启用评论评级
 enable-comments=启用评论
 enable-flags=使能旗子
 enable-message-ratings=启用消息评级
+enable-page-ratings=使能页规定值
 enable-print=启用打印
 enable-ratings=启用评级
 enable-rss-subscription=启用 RSS 订阅
