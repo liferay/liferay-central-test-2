@@ -34,11 +34,11 @@ boolean companySecurityStrangersVerify = ParamUtil.getBoolean(request, "settings
 
 boolean casAuthEnabled = ParamUtil.getBoolean(request, "settings(" + PropsKeys.CAS_AUTH_ENABLED +")", PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.CAS_AUTH_ENABLED, PropsValues.CAS_AUTH_ENABLED));
 boolean casImportFromLdap = ParamUtil.getBoolean(request, "settings(" + PropsKeys.CAS_IMPORT_FROM_LDAP +")", PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.CAS_IMPORT_FROM_LDAP, PropsValues.CAS_IMPORT_FROM_LDAP));
-String casLoginUrl = ParamUtil.getString(request, "settings(" + PropsKeys.CAS_LOGIN_URL +")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.CAS_LOGIN_URL, PropsKeys.CAS_LOGIN_URL));
-String casLogoutUrl = ParamUtil.getString(request, "settings(" + PropsKeys.CAS_LOGOUT_URL +")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.CAS_LOGOUT_URL, PropsKeys.CAS_LOGOUT_URL));
-String casServerName = ParamUtil.getString(request, "settings(" + PropsKeys.CAS_SERVER_NAME +")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.CAS_SERVER_NAME, PropsKeys.CAS_SERVER_NAME));
-String casServiceUrl = ParamUtil.getString(request, "settings(" + PropsKeys.CAS_SERVICE_URL +")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.CAS_SERVICE_URL, PropsKeys.CAS_SERVICE_URL));
-String casValidateUrl = ParamUtil.getString(request, "settings(" + PropsKeys.CAS_VALIDATE_URL +")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.CAS_VALIDATE_URL, PropsKeys.CAS_VALIDATE_URL));
+String casLoginUrl = ParamUtil.getString(request, "settings(" + PropsKeys.CAS_LOGIN_URL +")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.CAS_LOGIN_URL, PropsValues.CAS_LOGIN_URL));
+String casLogoutUrl = ParamUtil.getString(request, "settings(" + PropsKeys.CAS_LOGOUT_URL +")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.CAS_LOGOUT_URL, PropsValues.CAS_LOGOUT_URL));
+String casServerName = ParamUtil.getString(request, "settings(" + PropsKeys.CAS_SERVER_NAME +")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.CAS_SERVER_NAME, PropsValues.CAS_SERVER_NAME));
+String casServiceUrl = ParamUtil.getString(request, "settings(" + PropsKeys.CAS_SERVICE_URL +")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.CAS_SERVICE_URL, PropsValues.CAS_SERVICE_URL));
+String casValidateUrl = ParamUtil.getString(request, "settings(" + PropsKeys.CAS_VALIDATE_URL +")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.CAS_VALIDATE_URL, PropsValues.CAS_VALIDATE_URL));
 
 boolean ntlmAuthEnabled = ParamUtil.getBoolean(request, "settings(" + PropsKeys.NTLM_AUTH_ENABLED +")", PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.NTLM_AUTH_ENABLED, PropsValues.NTLM_AUTH_ENABLED));
 String ntlmDomainController = ParamUtil.getString(request, "settings(" + PropsKeys.NTLM_DOMAIN_CONTROLLER +")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.NTLM_DOMAIN_CONTROLLER, PropsValues.NTLM_DOMAIN_CONTROLLER));
