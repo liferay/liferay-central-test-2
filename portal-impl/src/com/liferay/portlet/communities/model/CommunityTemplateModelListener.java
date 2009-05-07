@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.communities.model;
 
-import com.liferay.portal.ModelListenerException;
 import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
@@ -84,9 +83,7 @@ public class CommunityTemplateModelListener
 		_templateParameters = getTemplateParameters();
 	}
 
-	public void onAfterCreate(LayoutSet layoutSet)
-		throws ModelListenerException {
-
+	public void onAfterCreate(LayoutSet layoutSet) {
 		try {
 			Group group = GroupLocalServiceUtil.getGroup(
 				layoutSet.getGroupId());
