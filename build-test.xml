@@ -92,10 +92,10 @@ axis.servlet.hosts.allowed=
 tunnel.servlet.hosts.allowed=]]></echo>
 	</target>
 
-	<target name="prepare-tomcat-5.5-mysql-5.0">
+	<target name="prepare-tomcat-6.0-mysql-5.0">
 		<antcall target="prepare-mysql-5.0" />
 
-		<ant antfile="build-dist.xml" target="build-dist-tomcat-5.5" />
+		<ant antfile="build-dist.xml" target="build-dist-tomcat-6.0" />
 	</target>
 
 	<target name="rebuild-database">
@@ -219,7 +219,7 @@ tunnel.servlet.hosts.allowed=]]></echo>
 	</target>
 
 	<target name="prepare-vm-server">
-		<ant antfile="build-dist.xml" target="build-dist-tomcat-5.5" />
+		<ant antfile="build-dist.xml" target="build-dist-tomcat-6.0" />
 
 		<delete dir="dist" />
 		<mkdir dir="dist" />
@@ -323,7 +323,19 @@ tunnel.servlet.hosts.allowed=]]></echo>
 					<http url="http://localhost:8080" />
 				</waitfor>
 
-				<sleep seconds="30" />
+				<if>
+					<or>
+						<not>
+							<equals arg1="${portlet.plugins.includes}" arg2="$${portlet.plugins.includes}" />
+						</not>
+						<not>
+							<equals arg1="${theme.plugins.includes}" arg2="$${theme.plugins.includes}" />
+						</not>
+					</or>
+					<then>
+						<sleep seconds="30" />
+					</then>
+				</if>
 
 				<antcall target="run-selenium-test" />
 
@@ -334,7 +346,7 @@ tunnel.servlet.hosts.allowed=]]></echo>
 		</parallel>
 	</target>
 
-	<target name="run-tomcat-5.5">
+	<target name="run-tomcat-6.0">
 		<antcall target="run-simple-server">
 			<param name="simple.server.dir" value="${app.server.tomcat.dir}" />
 			<param name="simple.server.bin.dir" value="${app.server.tomcat.bin.dir}" />
@@ -383,7 +395,7 @@ tunnel.servlet.hosts.allowed=]]></echo>
 	<target name="test-database">
 
 		<!--
-		Manually run "prepare-tomcat-5.5-mysql-5.0" before running any
+		Manually run "prepare-tomcat-6.0-mysql-5.0" before running any
 		test-database-* tasks.
 		-->
 
@@ -405,7 +417,7 @@ tck.url=true</echo>
 		<antcall target="clean" />
 		<antcall target="start" />
 
-		<ant antfile="build-dist.xml" target="build-dist-tomcat-5.5" />
+		<ant antfile="build-dist.xml" target="build-dist-tomcat-6.0" />
 
 		<delete dir="tools/tck" />
 
@@ -469,7 +481,7 @@ work.dir=${basedir.unix}/tools/tck/work</echo>
 	</target>
 
 	<target name="test-themes">
-		<antcall target="prepare-tomcat-5.5-mysql-5.0" />
+		<antcall target="prepare-tomcat-6.0-mysql-5.0" />
 
 		<exec dir="${lp.plugins.dir}" executable="cmd.exe">
 			<arg line="/c svn update" />
@@ -479,7 +491,7 @@ work.dir=${basedir.unix}/tools/tck/work</echo>
 
 		<antcall target="start-selenium" />
 
-		<antcall target="run-tomcat-5.5">
+		<antcall target="run-tomcat-6.0">
 			<param name="test.class" value="ThemesTestSuite" />
 			<param name="theme.plugins.includes" value="08-gulona-theme,liferay-jedi-theme" />
 		</antcall>

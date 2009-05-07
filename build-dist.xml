@@ -508,7 +508,15 @@ app.server.jboss-tomcat.lib.global.dir=$${app.server.jboss-tomcat.instance.dir}/
 
 		<unzip src="${app.server.parent.dir}/tomcat-5.5.27.zip" dest="${app.server.parent.dir}" />
 
-		<echo file="app.server.${user.name}.properties">app.server.type=tomcat</echo>
+		<echo file="app.server.${user.name}.properties">app.server.type=tomcat
+
+app.server.tomcat.version=5.5
+app.server.tomcat.dir=${app.server.parent.dir}/tomcat-5.5.27
+app.server.tomcat.classes.global.dir=$${app.server.tomcat.dir}/common/classes
+app.server.tomcat.lib.endorsed.dir=$${app.server.tomcat.dir}/common/endorsed
+app.server.tomcat.lib.global.dir=$${app.server.tomcat.dir}/common/lib/ext
+app.server.tomcat.lib.support.dir=$${app.server.tomcat.dir}/server/lib
+app.server.tomcat.zip.name=liferay-portal-tomcat-5.5-$${downloads.version}.zip</echo>
 
 		<delete dir="${project.dir}/portal-web/classes" />
 
@@ -528,16 +536,7 @@ app.server.jboss-tomcat.lib.global.dir=$${app.server.jboss-tomcat.instance.dir}/
 
 		<unzip src="${app.server.parent.dir}/tomcat-6.0.18.zip" dest="${app.server.parent.dir}" />
 
-		<echo file="app.server.${user.name}.properties">app.server.type=tomcat
-
-app.server.tomcat.version=6.0
-app.server.tomcat.dir=${app.server.parent.dir}/tomcat-6.0.18
-app.server.tomcat.classes.global.dir=$${app.server.tomcat.dir}/lib
-app.server.tomcat.lib.endorsed.dir=$${app.server.tomcat.dir}/lib/ext
-app.server.tomcat.lib.global.dir=$${app.server.tomcat.dir}/lib/ext
-app.server.tomcat.lib.support.dir=$${app.server.tomcat.dir}/lib/ext
-app.server.tomcat.support.dir=$${app.server.tomcat.dir}/lib/ext
-app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version}.zip</echo>
+		<echo file="app.server.${user.name}.properties">app.server.type=tomcat</echo>
 
 		<delete dir="${project.dir}/portal-web/classes" />
 
