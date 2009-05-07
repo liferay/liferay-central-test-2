@@ -61,10 +61,10 @@ TagsUtil.addLayoutTagsEntries(request, TagsEntryLocalServiceUtil.getEntries(Blog
 	<c:choose>
 		<c:when test="<%= previousEntry != null %>">
 			<c:choose>
-				<c:when test='<%= portletName.equals(PortletKeys.BLOGS) %>'>
+				<c:when test="<%= portletName.equals(PortletKeys.BLOGS) %>">
 					<a class="previous" href="<portlet:renderURL><portlet:param name="struts_action" value="/blogs/view_entry" /><portlet:param name="entryId" value="<%= String.valueOf(previousEntry.getEntryId()) %>" /></portlet:renderURL>">
 				</c:when>
-				<c:when test='<%= portletName.equals(PortletKeys.BLOGS_AGGREGATOR) %>'>
+				<c:when test="<%= portletName.equals(PortletKeys.BLOGS_AGGREGATOR) %>">
 					<a class="previous" href="<portlet:renderURL><portlet:param name="struts_action" value="/blogs_aggregator/view_entry" /><portlet:param name="entryId" value="<%= String.valueOf(previousEntry.getEntryId()) %>" /></portlet:renderURL>">
 				</c:when>
 			</c:choose>
@@ -88,10 +88,10 @@ TagsUtil.addLayoutTagsEntries(request, TagsEntryLocalServiceUtil.getEntries(Blog
 	<c:choose>
 		<c:when test="<%= nextEntry != null %>">
 			<c:choose>
-				<c:when test='<%= portletName.equals(PortletKeys.BLOGS) %>'>
+				<c:when test="<%= portletName.equals(PortletKeys.BLOGS) %>">
 					<a class="next" href="<portlet:renderURL><portlet:param name="struts_action" value="/blogs/view_entry" /><portlet:param name="entryId" value="<%= String.valueOf(nextEntry.getEntryId()) %>" /></portlet:renderURL>">
 				</c:when>
-				<c:when test='<%= portletName.equals(PortletKeys.BLOGS_AGGREGATOR) %>'>
+				<c:when test="<%= portletName.equals(PortletKeys.BLOGS_AGGREGATOR) %>">
 					<a class="next" href="<portlet:renderURL><portlet:param name="struts_action" value="/blogs_aggregator/view_entry" /><portlet:param name="entryId" value="<%= String.valueOf(nextEntry.getEntryId()) %>" /></portlet:renderURL>">
 				</c:when>
 			</c:choose>
