@@ -58,12 +58,14 @@ public class SQLServerUtil extends DBUtil {
 		return template;
 	}
 
-	public boolean isSupportsAlterColumnType() {
-		return _SUPPORTS_ALTER_COLUMN_TYPE;
-	}
+	public boolean isSupportsAlterColumnName() {
 
-	public boolean isSupportsUpdateWithInnerJoin() {
-		return _SUPPORTS_UPDATE_WITH_INNER_JOIN;
+		// We actually have a way of getting SQL Server to alter column names.
+		// The problem is that it will break in scenarios where the column has
+		// an index. To make things simpler, we disallow altering of column
+		// names for SQL Server.
+
+		return _SUPPORTS_ALTER_COLUMN_NAME;
 	}
 
 	protected SQLServerUtil() {
@@ -149,9 +151,7 @@ public class SQLServerUtil extends DBUtil {
 		"  identity(1,1)", "go"
 	};
 
-	private static boolean _SUPPORTS_ALTER_COLUMN_TYPE;
-
-	private static boolean _SUPPORTS_UPDATE_WITH_INNER_JOIN = true;
+	private static boolean _SUPPORTS_ALTER_COLUMN_NAME;
 
 	private static SQLServerUtil _instance = new SQLServerUtil();
 
