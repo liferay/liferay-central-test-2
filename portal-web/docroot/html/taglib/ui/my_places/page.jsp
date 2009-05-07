@@ -139,6 +139,8 @@ List<Group> myPlaces = user.getMyPlaces(max);
 
 			boolean showPublicPlace = true;
 
+			boolean hasPowerUserRole = RoleLocalServiceUtil.hasUserRole(user.getUserId(), user.getCompanyId(), RoleConstants.POWER_USER, true);
+
 			if (publicLayoutsPageCount == 0) {
 				if (organizationCommunity) {
 					showPublicPlace = PropsValues.MY_PLACES_SHOW_ORGANIZATION_PUBLIC_SITES_WITH_NO_LAYOUTS;
@@ -149,7 +151,7 @@ List<Group> myPlaces = user.getMyPlaces(max);
 				else if (userCommunity) {
 					showPublicPlace = PropsValues.MY_PLACES_SHOW_USER_PUBLIC_SITES_WITH_NO_LAYOUTS;
 
-					if (!PropsValues.LAYOUT_USER_PUBLIC_LAYOUTS_MODIFIABLE) {
+					if (!PropsValues.LAYOUT_USER_PUBLIC_LAYOUTS_MODIFIABLE || (PropsValues.LAYOUT_USER_PUBLIC_LAYOUTS_POWER_USER_REQUIRED && !hasPowerUserRole)) {
 						showPublicPlace = false;
 					}
 				}
@@ -167,7 +169,7 @@ List<Group> myPlaces = user.getMyPlaces(max);
 				else if (userCommunity) {
 					showPrivatePlace = PropsValues.MY_PLACES_SHOW_USER_PRIVATE_SITES_WITH_NO_LAYOUTS;
 
-					if (!PropsValues.LAYOUT_USER_PRIVATE_LAYOUTS_MODIFIABLE) {
+					if (!PropsValues.LAYOUT_USER_PRIVATE_LAYOUTS_MODIFIABLE || (PropsValues.LAYOUT_USER_PRIVATE_LAYOUTS_POWER_USER_REQUIRED && !hasPowerUserRole)) {
 						showPrivatePlace = false;
 					}
 				}

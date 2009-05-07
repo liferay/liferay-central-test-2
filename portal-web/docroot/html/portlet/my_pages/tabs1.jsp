@@ -24,7 +24,14 @@
 
 <%@ include file="/html/portlet/my_account/init.jsp" %>
 
-<c:if test="<%= PropsValues.LAYOUT_USER_PRIVATE_LAYOUTS_MODIFIABLE || PropsValues.LAYOUT_USER_PUBLIC_LAYOUTS_MODIFIABLE %>">
+<%
+boolean hasPowerUserRole = RoleLocalServiceUtil.hasUserRole(user.getUserId(), user.getCompanyId(), RoleConstants.POWER_USER, true);
+
+boolean privateLayoutsModifiable = PropsValues.LAYOUT_USER_PRIVATE_LAYOUTS_MODIFIABLE && (!PropsValues.LAYOUT_USER_PRIVATE_LAYOUTS_POWER_USER_REQUIRED || hasPowerUserRole);
+boolean publicLayoutsModifiable = PropsValues.LAYOUT_USER_PUBLIC_LAYOUTS_MODIFIABLE && (!PropsValues.LAYOUT_USER_PUBLIC_LAYOUTS_POWER_USER_REQUIRED || hasPowerUserRole);
+%>
+
+<c:if test="<%= privateLayoutsModifiable || publicLayoutsModifiable %>">
 
 	<%
 	String backURL = ParamUtil.getString(request, "backURL");
@@ -47,7 +54,7 @@
 	</portlet:renderURL>
 
 	<c:choose>
-		<c:when test="<%= PropsValues.LAYOUT_USER_PRIVATE_LAYOUTS_MODIFIABLE && PropsValues.LAYOUT_USER_PUBLIC_LAYOUTS_MODIFIABLE %>">
+		<c:when test="<%= privateLayoutsModifiable && publicLayoutsModifiable %>">
 			<liferay-ui:tabs
 				names="public-pages,private-pages"
 				param="tabs1"
@@ -55,14 +62,14 @@
 				url1="<%= privatePagesURL %>"
 			/>
 		</c:when>
-		<c:when test="<%= PropsValues.LAYOUT_USER_PUBLIC_LAYOUTS_MODIFIABLE %>">
+		<c:when test="<%= publicLayoutsModifiable %>">
 			<liferay-ui:tabs
 				names="public-pages"
 				param="tabs1"
 				url0="<%= publicPagesURL %>"
 			/>
 		</c:when>
-		<c:when test="<%= PropsValues.LAYOUT_USER_PRIVATE_LAYOUTS_MODIFIABLE %>">
+		<c:when test="<%= privateLayoutsModifiable %>">
 			<liferay-ui:tabs
 				names="private-pages"
 				param="tabs1"

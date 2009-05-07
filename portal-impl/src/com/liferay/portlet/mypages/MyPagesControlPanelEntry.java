@@ -23,7 +23,9 @@
 package com.liferay.portlet.mypages;
 
 import com.liferay.portal.model.Portlet;
+import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.security.permission.PermissionChecker;
+import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.BaseControlPanelEntry;
 
@@ -39,14 +41,25 @@ public class MyPagesControlPanelEntry extends BaseControlPanelEntry {
 			PermissionChecker permissionChecker, Portlet portlet)
 		throws Exception {
 
-		if (PropsValues.LAYOUT_USER_PRIVATE_LAYOUTS_MODIFIABLE ||
-			PropsValues.LAYOUT_USER_PUBLIC_LAYOUTS_MODIFIABLE) {
+		boolean hasPowerUserRole = RoleLocalServiceUtil.hasUserRole(
+			permissionChecker.getUserId(), permissionChecker.getCompanyId(),
+			RoleConstants.POWER_USER, true);
+
+		if (PropsValues.LAYOUT_USER_PRIVATE_LAYOUTS_MODIFIABLE &&
+			(!PropsValues.LAYOUT_USER_PRIVATE_LAYOUTS_POWER_USER_REQUIRED ||
+			hasPowerUserRole)) {
 
 			return true;
 		}
-		else {
-			return false;
+
+		if (PropsValues.LAYOUT_USER_PUBLIC_LAYOUTS_MODIFIABLE &&
+			(!PropsValues.LAYOUT_USER_PUBLIC_LAYOUTS_POWER_USER_REQUIRED ||
+			hasPowerUserRole)) {
+
+			return true;
 		}
+
+		return false;
 	}
 
 }
