@@ -33,6 +33,7 @@ import com.liferay.portlet.BaseControlPanelEntry;
  * <a href="MyPagesControlPanelEntry.java.html"><b><i>View Source</i></b></a>
  *
  * @author Jorge Ferrer
+ * @author Amos Fong
  *
  */
 public class MyPagesControlPanelEntry extends BaseControlPanelEntry {
@@ -47,14 +48,14 @@ public class MyPagesControlPanelEntry extends BaseControlPanelEntry {
 
 		if (PropsValues.LAYOUT_USER_PRIVATE_LAYOUTS_MODIFIABLE &&
 			(!PropsValues.LAYOUT_USER_PRIVATE_LAYOUTS_POWER_USER_REQUIRED ||
-			hasPowerUserRole)) {
+			 hasPowerUserRole)) {
 
 			return true;
 		}
 
 		if (PropsValues.LAYOUT_USER_PUBLIC_LAYOUTS_MODIFIABLE &&
 			(!PropsValues.LAYOUT_USER_PUBLIC_LAYOUTS_POWER_USER_REQUIRED ||
-			hasPowerUserRole)) {
+			 hasPowerUserRole)) {
 
 			return true;
 		}

@@ -46,6 +46,7 @@ import org.apache.struts.action.ActionMapping;
  * <a href="ViewAction.java.html"><b><i>View Source</i></b></a>
  *
  * @author Jorge Ferrer
+ * @author Amos Fong
  *
  */
 public class ViewAction extends PortletAction {
@@ -81,7 +82,7 @@ public class ViewAction extends PortletAction {
 
 		if (!PropsValues.LAYOUT_USER_PUBLIC_LAYOUTS_MODIFIABLE ||
 			(PropsValues.LAYOUT_USER_PUBLIC_LAYOUTS_POWER_USER_REQUIRED &&
-			!hasPowerUserRole)) {
+			 !hasPowerUserRole)) {
 
 			tabs1 = "private-pages";
 		}
