@@ -431,8 +431,8 @@ file.
 	<target name="test-database">
 		<antcall target="prepare-tomcat-6.0-mysql-5.0" />
 
-		<ant antfile="build-test-oracle.xml" target="test-database-oracle-10" inheritAll="false" />
-		<ant antfile="build-test-sql-server.xml" target="test-database-sql-server-2005" inheritAll="false" />
+		<ant antfile="build-test-database-oracle.xml" target="test-database-oracle-10" inheritAll="false" />
+		<ant antfile="build-test-database-sql-server.xml" target="test-database-sql-server-2005" inheritAll="false" />
 	</target>
 
 	<target name="test-tck">
