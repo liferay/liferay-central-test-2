@@ -101,6 +101,8 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			ActionRequest actionRequest, PortletPreferences preferences)
 		throws Exception {
 
+		boolean enablePageRatings = ParamUtil.getBoolean(
+			actionRequest, "enablePageRatings");
 		boolean enableComments = ParamUtil.getBoolean(
 			actionRequest, "enableComments");
 		boolean enableCommentRatings = ParamUtil.getBoolean(
@@ -113,6 +115,8 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			SessionErrors.add(actionRequest, "visibleNodesCount");
 		}
 		else {
+			preferences.setValue(
+				"enable-page-ratings", String.valueOf(enablePageRatings));
 			preferences.setValue(
 				"enable-comments", String.valueOf(enableComments));
 			preferences.setValue(

@@ -1428,6 +1428,10 @@ public class PropsValues {
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.WIKI_PAGE_COMMENTS_ENABLED));
 
+	public static final boolean WIKI_PAGE_RATINGS_ENABLED =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsKeys.WIKI_PAGE_RATINGS_ENABLED));
+
 	public static final String WIKI_PAGE_TITLES_REGEXP = PropsUtil.get(
 		PropsKeys.WIKI_PAGE_TITLES_REGEXP);
 

@@ -1380,6 +1380,8 @@ public interface PropsKeys {
 
 	public static final String WIKI_PAGE_COMMENTS_ENABLED  = "wiki.page.comments.enabled";
 
+	public static final String WIKI_PAGE_RATINGS_ENABLED  = "wiki.page.ratings.enabled";
+
 	public static final String WIKI_PAGE_TITLES_REGEXP = "wiki.page.titles.regexp";
 
 	public static final String WIKI_PAGE_TITLES_REMOVE_REGEXP = "wiki.page.titles.remove.regexp";
