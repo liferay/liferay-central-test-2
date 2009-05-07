@@ -260,4 +260,10 @@ public interface OrganizationLocalService {
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
+
+	public void updateTagsAsset(long userId,
+		com.liferay.portal.model.Organization organization,
+		java.lang.String[] tagsCategories, java.lang.String[] tagsEntries)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 }

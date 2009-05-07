@@ -335,6 +335,15 @@ public class OrganizationLocalServiceUtil {
 			statusId, comments, serviceContext);
 	}
 
+	public static void updateTagsAsset(long userId,
+		com.liferay.portal.model.Organization organization,
+		java.lang.String[] tagsCategories, java.lang.String[] tagsEntries)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		getService()
+			.updateTagsAsset(userId, organization, tagsCategories, tagsEntries);
+	}
+
 	public static OrganizationLocalService getService() {
 		if (_service == null) {
 			throw new RuntimeException("OrganizationLocalService is not set");
