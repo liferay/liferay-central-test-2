@@ -47,8 +47,6 @@ pageDisplayStyle = RSSUtil.DISPLAY_STYLE_FULL_CONTENT;
 TagsAssetLocalServiceUtil.incrementViewCounter(BlogsEntry.class.getName(), entry.getEntryId());
 
 TagsUtil.addLayoutTagsEntries(request, TagsEntryLocalServiceUtil.getEntries(BlogsEntry.class.getName(), entry.getEntryId(), true));
-
-String curStrutsAction = ParamUtil.getString(request, "struts_action");
 %>
 
 <form action="<portlet:actionURL><portlet:param name="struts_action" value="/blogs/edit_entry" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm1" onSubmit="<portlet:namespace />saveEntry(); return false;">
@@ -62,14 +60,7 @@ String curStrutsAction = ParamUtil.getString(request, "struts_action");
 <div class="entry-navigation">
 	<c:choose>
 		<c:when test="<%= previousEntry != null %>">
-			<c:choose>
-				<c:when test='<%= curStrutsAction.equals("/blogs/view_entry") %>'>
-					<a class="previous" href="<portlet:renderURL><portlet:param name="struts_action" value="/blogs/view_entry" /><portlet:param name="entryId" value="<%= String.valueOf(previousEntry.getEntryId()) %>" /></portlet:renderURL>">
-				</c:when>
-				<c:when test='<%= curStrutsAction.equals("/blogs_aggregator/view_entry") %>'>
-					<a class="previous" href="<portlet:renderURL><portlet:param name="struts_action" value="/blogs_aggregator/view_entry" /><portlet:param name="entryId" value="<%= String.valueOf(previousEntry.getEntryId()) %>" /></portlet:renderURL>">
-				</c:when>
-			</c:choose>
+			<a class="previous" href="<portlet:renderURL><portlet:param name="struts_action" value="/blogs/view_entry" /><portlet:param name="entryId" value="<%= String.valueOf(previousEntry.getEntryId()) %>" /></portlet:renderURL>">
 		</c:when>
 		<c:otherwise>
 			<span class="previous">
@@ -89,14 +80,7 @@ String curStrutsAction = ParamUtil.getString(request, "struts_action");
 
 	<c:choose>
 		<c:when test="<%= nextEntry != null %>">
-			<c:choose>
-				<c:when test='<%= curStrutsAction.equals("/blogs/view_entry") %>'>
-					<a class="next" href="<portlet:renderURL><portlet:param name="struts_action" value="/blogs/view_entry" /><portlet:param name="entryId" value="<%= String.valueOf(nextEntry.getEntryId()) %>" /></portlet:renderURL>">
-				</c:when>
-				<c:when test='<%= curStrutsAction.equals("/blogs_aggregator/view_entry") %>'>
-					<a class="next" href="<portlet:renderURL><portlet:param name="struts_action" value="/blogs_aggregator/view_entry" /><portlet:param name="entryId" value="<%= String.valueOf(nextEntry.getEntryId()) %>" /></portlet:renderURL>">
-				</c:when>
-			</c:choose>
+			<a class="next" href="<portlet:renderURL><portlet:param name="struts_action" value="/blogs/view_entry" /><portlet:param name="entryId" value="<%= String.valueOf(nextEntry.getEntryId()) %>" /></portlet:renderURL>">
 		</c:when>
 		<c:otherwise>
 			<span class="next">
