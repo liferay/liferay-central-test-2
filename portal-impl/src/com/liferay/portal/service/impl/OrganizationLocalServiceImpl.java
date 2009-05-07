@@ -144,6 +144,14 @@ public class OrganizationLocalServiceImpl
 
 		expandoBridge.setAttributes(serviceContext);
 
+		// Tags
+
+		if (serviceContext != null) {
+			updateTagsAsset(
+				userId, organization, serviceContext.getTagsCategories(),
+				serviceContext.getTagsEntries());
+		}
+
 		return organization;
 	}
 
@@ -261,6 +269,11 @@ public class OrganizationLocalServiceImpl
 			organization.getCompanyId(), name,
 			ResourceConstants.SCOPE_INDIVIDUAL,
 			organization.getOrganizationId());
+
+		// Tags
+
+		tagsAssetLocalService.deleteAsset(
+			Organization.class.getName(), organization.getOrganizationId());
 
 		// Organization
 
@@ -619,7 +632,28 @@ public class OrganizationLocalServiceImpl
 
 		expandoBridge.setAttributes(serviceContext);
 
+		// Tags
+
+		if (serviceContext != null) {
+			updateTagsAsset(
+				serviceContext.getUserId(), organization,
+				serviceContext.getTagsCategories(),
+				serviceContext.getTagsEntries());
+		}
+
 		return organization;
+	}
+
+	public void updateTagsAsset(
+			long userId, Organization organization, String[] tagsCategories,
+			String[] tagsEntries)
+		throws PortalException, SystemException {
+
+		tagsAssetLocalService.updateAsset(
+			userId, 0, Organization.class.getName(),
+			organization.getOrganizationId(), tagsCategories, tagsEntries, true,
+			null, null, null, null, null, organization.getName(),
+			StringPool.BLANK, null, null, 0, 0, null, false);
 	}
 
 	protected void addSuborganizations(

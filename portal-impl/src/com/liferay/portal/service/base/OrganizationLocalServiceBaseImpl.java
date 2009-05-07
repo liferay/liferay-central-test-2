@@ -161,6 +161,11 @@ import com.liferay.portal.service.persistence.WebDAVPropsPersistence;
 import com.liferay.portal.service.persistence.WebsitePersistence;
 import com.liferay.portal.util.PortalUtil;
 
+import com.liferay.portlet.tags.service.TagsAssetLocalService;
+import com.liferay.portlet.tags.service.TagsAssetService;
+import com.liferay.portlet.tags.service.persistence.TagsAssetFinder;
+import com.liferay.portlet.tags.service.persistence.TagsAssetPersistence;
+
 import java.util.List;
 
 /**
@@ -1340,6 +1345,40 @@ public abstract class OrganizationLocalServiceBaseImpl
 		this.counterService = counterService;
 	}
 
+	public TagsAssetLocalService getTagsAssetLocalService() {
+		return tagsAssetLocalService;
+	}
+
+	public void setTagsAssetLocalService(
+		TagsAssetLocalService tagsAssetLocalService) {
+		this.tagsAssetLocalService = tagsAssetLocalService;
+	}
+
+	public TagsAssetService getTagsAssetService() {
+		return tagsAssetService;
+	}
+
+	public void setTagsAssetService(TagsAssetService tagsAssetService) {
+		this.tagsAssetService = tagsAssetService;
+	}
+
+	public TagsAssetPersistence getTagsAssetPersistence() {
+		return tagsAssetPersistence;
+	}
+
+	public void setTagsAssetPersistence(
+		TagsAssetPersistence tagsAssetPersistence) {
+		this.tagsAssetPersistence = tagsAssetPersistence;
+	}
+
+	public TagsAssetFinder getTagsAssetFinder() {
+		return tagsAssetFinder;
+	}
+
+	public void setTagsAssetFinder(TagsAssetFinder tagsAssetFinder) {
+		this.tagsAssetFinder = tagsAssetFinder;
+	}
+
 	protected void runSQL(String sql) throws SystemException {
 		try {
 			PortalUtil.runSQL(sql);
@@ -1611,4 +1650,12 @@ public abstract class OrganizationLocalServiceBaseImpl
 	protected CounterLocalService counterLocalService;
 	@BeanReference(name = "com.liferay.counter.service.CounterService.impl")
 	protected CounterService counterService;
+	@BeanReference(name = "com.liferay.portlet.tags.service.TagsAssetLocalService.impl")
+	protected TagsAssetLocalService tagsAssetLocalService;
+	@BeanReference(name = "com.liferay.portlet.tags.service.TagsAssetService.impl")
+	protected TagsAssetService tagsAssetService;
+	@BeanReference(name = "com.liferay.portlet.tags.service.persistence.TagsAssetPersistence.impl")
+	protected TagsAssetPersistence tagsAssetPersistence;
+	@BeanReference(name = "com.liferay.portlet.tags.service.persistence.TagsAssetFinder.impl")
+	protected TagsAssetFinder tagsAssetFinder;
 }

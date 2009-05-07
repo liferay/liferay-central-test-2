@@ -687,6 +687,7 @@
 		<!-- References -->
 
 		<reference package-path="com.liferay.counter" entity="Counter" />
+		<reference package-path="com.liferay.portlet.tags" entity="TagsAsset" />
 	</entity>
 	<entity name="OrgGroupPermission" local-service="false" remote-service="false">
 
