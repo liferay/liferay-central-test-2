@@ -26,14 +26,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * <a href="AutoLoginWrapper.java.html"><b><i>View Source</i></b></a>
+ * <a href="InvokerAutoLogin.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class AutoLoginWrapper implements AutoLogin {
+public class InvokerAutoLogin implements AutoLogin {
 
-	public AutoLoginWrapper(AutoLogin autoLogin, ClassLoader classLoader) {
+	public InvokerAutoLogin(AutoLogin autoLogin, ClassLoader classLoader) {
 		_autoLogin = autoLogin;
 		_classLoader = classLoader;
 	}

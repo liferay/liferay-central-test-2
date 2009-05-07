@@ -39,7 +39,7 @@ import com.liferay.portal.kernel.portlet.PortletBagPool;
 import com.liferay.portal.kernel.portlet.PortletLayoutListener;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
-import com.liferay.portal.kernel.search.IndexerWrapper;
+import com.liferay.portal.kernel.search.InvokerIndexer;
 import com.liferay.portal.kernel.search.OpenSearch;
 import com.liferay.portal.kernel.servlet.PortletServlet;
 import com.liferay.portal.kernel.servlet.ServletContextProvider;
@@ -51,8 +51,8 @@ import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.lar.InvokerPortletDataHandler;
 import com.liferay.portal.lar.PortletDataHandler;
-import com.liferay.portal.lar.PortletDataHandlerWrapper;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletApp;
 import com.liferay.portal.model.PortletCategory;
@@ -458,7 +458,7 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 			indexerInstance = (Indexer)portletClassLoader.loadClass(
 				portlet.getIndexerClass()).newInstance();
 
-			indexerInstance = new IndexerWrapper(
+			indexerInstance = new InvokerIndexer(
 				indexerInstance, portletClassLoader);
 
 			for (String className : indexerInstance.getClassNames()) {
@@ -506,7 +506,7 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 				(PortletDataHandler)portletClassLoader.loadClass(
 					portlet.getPortletDataHandlerClass()).newInstance();
 
-			portletDataHandlerInstance = new PortletDataHandlerWrapper(
+			portletDataHandlerInstance = new InvokerPortletDataHandler(
 				portletDataHandlerInstance, portletClassLoader);
 		}
 

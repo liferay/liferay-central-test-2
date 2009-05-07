@@ -20,29 +20,29 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.lar;
+package com.liferay.portal.model;
 
-import javax.portlet.PortletPreferences;
+import com.liferay.portal.ModelListenerException;
 
 /**
- * <a href="PortletDataHandlerWrapper.java.html"><b><i>View Source</i></b></a>
+ * <a href="InvokerModelListener.java.html"><b><i>View Source</i></b></a>
  *
- * @author Bruno Farache
+ * @author Brian Wing Shun Chan
  *
  */
-public class PortletDataHandlerWrapper implements PortletDataHandler {
+public class InvokerModelListener<T> implements ModelListener<T> {
 
-	public PortletDataHandlerWrapper(
-		PortletDataHandler portletDataHandler, ClassLoader classLoader) {
+	public InvokerModelListener(
+		ModelListener<T> modelListener, ClassLoader classLoader) {
 
-		_portletDataHandler = portletDataHandler;
+		_modelListener = modelListener;
 		_classLoader = classLoader;
 	}
 
-	public PortletPreferences deleteData(
-			PortletDataContext context, String portletId,
-			PortletPreferences preferences)
-		throws PortletDataException {
+	public void onAfterAddAssociation(
+			Object classPK, String associationClassName,
+			Object associationClassPK)
+		throws ModelListenerException {
 
 		Thread currentThread = Thread.currentThread();
 
@@ -51,18 +51,48 @@ public class PortletDataHandlerWrapper implements PortletDataHandler {
 		try {
 			currentThread.setContextClassLoader(_classLoader);
 
-			return _portletDataHandler.deleteData(
-				context, portletId, preferences);
+			_modelListener.onAfterAddAssociation(
+				classPK, associationClassName, associationClassPK);
 		}
 		finally {
 			currentThread.setContextClassLoader(contextClassLoader);
 		}
 	}
 
-	public String exportData(
-			PortletDataContext context, String portletId,
-			PortletPreferences preferences)
-		throws PortletDataException {
+	public void onAfterCreate(T model) throws ModelListenerException {
+		Thread currentThread = Thread.currentThread();
+
+		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
+
+		try {
+			currentThread.setContextClassLoader(_classLoader);
+
+			_modelListener.onAfterCreate(model);
+		}
+		finally {
+			currentThread.setContextClassLoader(contextClassLoader);
+		}
+	}
+
+	public void onAfterRemove(T model) throws ModelListenerException {
+		Thread currentThread = Thread.currentThread();
+
+		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
+
+		try {
+			currentThread.setContextClassLoader(_classLoader);
+
+			_modelListener.onAfterRemove(model);
+		}
+		finally {
+			currentThread.setContextClassLoader(contextClassLoader);
+		}
+	}
+
+	public void onAfterRemoveAssociation(
+			Object classPK, String associationClassName,
+			Object associationClassPK)
+		throws ModelListenerException {
 
 		Thread currentThread = Thread.currentThread();
 
@@ -71,16 +101,33 @@ public class PortletDataHandlerWrapper implements PortletDataHandler {
 		try {
 			currentThread.setContextClassLoader(_classLoader);
 
-			return _portletDataHandler.exportData(
-				context, portletId, preferences);
+			_modelListener.onAfterRemoveAssociation(
+				classPK, associationClassName, associationClassPK);
 		}
 		finally {
 			currentThread.setContextClassLoader(contextClassLoader);
 		}
 	}
 
-	public PortletDataHandlerControl[] getExportControls()
-		throws PortletDataException {
+	public void onAfterUpdate(T model) throws ModelListenerException {
+		Thread currentThread = Thread.currentThread();
+
+		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
+
+		try {
+			currentThread.setContextClassLoader(_classLoader);
+
+			_modelListener.onAfterUpdate(model);
+		}
+		finally {
+			currentThread.setContextClassLoader(contextClassLoader);
+		}
+	}
+
+	public void onBeforeAddAssociation(
+			Object classPK, String associationClassName,
+			Object associationClassPK)
+		throws ModelListenerException {
 
 		Thread currentThread = Thread.currentThread();
 
@@ -89,15 +136,48 @@ public class PortletDataHandlerWrapper implements PortletDataHandler {
 		try {
 			currentThread.setContextClassLoader(_classLoader);
 
-			return _portletDataHandler.getExportControls();
+			_modelListener.onBeforeAddAssociation(
+				classPK, associationClassName, associationClassPK);
 		}
 		finally {
 			currentThread.setContextClassLoader(contextClassLoader);
 		}
 	}
 
-	public PortletDataHandlerControl[] getImportControls()
-		throws PortletDataException {
+	public void onBeforeCreate(T model) throws ModelListenerException {
+		Thread currentThread = Thread.currentThread();
+
+		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
+
+		try {
+			currentThread.setContextClassLoader(_classLoader);
+
+			_modelListener.onBeforeCreate(model);
+		}
+		finally {
+			currentThread.setContextClassLoader(contextClassLoader);
+		}
+	}
+
+	public void onBeforeRemove(T model) throws ModelListenerException {
+		Thread currentThread = Thread.currentThread();
+
+		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
+
+		try {
+			currentThread.setContextClassLoader(_classLoader);
+
+			_modelListener.onBeforeRemove(model);
+		}
+		finally {
+			currentThread.setContextClassLoader(contextClassLoader);
+		}
+	}
+
+	public void onBeforeRemoveAssociation(
+			Object classPK, String associationClassName,
+			Object associationClassPK)
+		throws ModelListenerException {
 
 		Thread currentThread = Thread.currentThread();
 
@@ -106,18 +186,15 @@ public class PortletDataHandlerWrapper implements PortletDataHandler {
 		try {
 			currentThread.setContextClassLoader(_classLoader);
 
-			return _portletDataHandler.getImportControls();
+			_modelListener.onBeforeRemoveAssociation(
+				classPK, associationClassName, associationClassPK);
 		}
 		finally {
 			currentThread.setContextClassLoader(contextClassLoader);
 		}
 	}
 
-	public PortletPreferences importData(
-			PortletDataContext context, String portletId,
-			PortletPreferences preferences, String data)
-		throws PortletDataException {
-
+	public void onBeforeUpdate(T model) throws ModelListenerException {
 		Thread currentThread = Thread.currentThread();
 
 		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
@@ -125,45 +202,14 @@ public class PortletDataHandlerWrapper implements PortletDataHandler {
 		try {
 			currentThread.setContextClassLoader(_classLoader);
 
-			return _portletDataHandler.importData(
-				context, portletId, preferences, data);
+			_modelListener.onBeforeUpdate(model);
 		}
 		finally {
 			currentThread.setContextClassLoader(contextClassLoader);
 		}
 	}
 
-	public boolean isAlwaysExportable() {
-		Thread currentThread = Thread.currentThread();
-
-		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
-
-		try {
-			currentThread.setContextClassLoader(_classLoader);
-
-			return _portletDataHandler.isAlwaysExportable();
-		}
-		finally {
-			currentThread.setContextClassLoader(contextClassLoader);
-		}
-	}
-
-	public boolean isPublishToLiveByDefault() {
-		Thread currentThread = Thread.currentThread();
-
-		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
-
-		try {
-			currentThread.setContextClassLoader(_classLoader);
-
-			return _portletDataHandler.isPublishToLiveByDefault();
-		}
-		finally {
-			currentThread.setContextClassLoader(contextClassLoader);
-		}
-	}
-
-	private PortletDataHandler _portletDataHandler;
+	private ModelListener<T> _modelListener;
 	private ClassLoader _classLoader;
 
 }

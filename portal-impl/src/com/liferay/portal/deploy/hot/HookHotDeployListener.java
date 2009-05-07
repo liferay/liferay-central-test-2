@@ -29,11 +29,11 @@ import com.liferay.portal.kernel.configuration.ConfigurationFactoryUtil;
 import com.liferay.portal.kernel.deploy.hot.HotDeployEvent;
 import com.liferay.portal.kernel.deploy.hot.HotDeployException;
 import com.liferay.portal.kernel.events.Action;
-import com.liferay.portal.kernel.events.ActionWrapper;
+import com.liferay.portal.kernel.events.InvokerAction;
+import com.liferay.portal.kernel.events.InvokerSessionAction;
+import com.liferay.portal.kernel.events.InvokerSimpleAction;
 import com.liferay.portal.kernel.events.SessionAction;
-import com.liferay.portal.kernel.events.SessionActionWrapper;
 import com.liferay.portal.kernel.events.SimpleAction;
-import com.liferay.portal.kernel.events.SimpleActionWrapper;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -49,11 +49,11 @@ import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.model.BaseModel;
+import com.liferay.portal.model.InvokerModelListener;
 import com.liferay.portal.model.ModelListener;
-import com.liferay.portal.model.ModelListenerWrapper;
 import com.liferay.portal.security.auth.AutoLogin;
-import com.liferay.portal.security.auth.AutoLoginWrapper;
 import com.liferay.portal.security.auth.CompanyThreadLocal;
+import com.liferay.portal.security.auth.InvokerAutoLogin;
 import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portal.servlet.filters.autologin.AutoLoginFilter;
 import com.liferay.portal.servlet.filters.cache.CacheUtil;
@@ -525,7 +525,7 @@ public class HookHotDeployListener
 				autoLoginClass).newInstance();
 
 			if (autoLogin != null) {
-				autoLogin = new AutoLoginWrapper(autoLogin, portletClassLoader);
+				autoLogin = new InvokerAutoLogin(autoLogin, portletClassLoader);
 
 				autoLoginsContainer.registerAutoLogin(autoLogin);
 			}
@@ -565,11 +565,11 @@ public class HookHotDeployListener
 		throws Exception {
 
 		if (eventName.equals(APPLICATION_STARTUP_EVENTS)) {
-			SimpleAction simpleAction = 
+			SimpleAction simpleAction =
 				(SimpleAction)portletClassLoader.loadClass(
 					eventClass).newInstance();
 
-			simpleAction = new SimpleActionWrapper(
+			simpleAction = new InvokerSimpleAction(
 				simpleAction, portletClassLoader);
 
 			long companyId = CompanyThreadLocal.getCompanyId();
@@ -591,7 +591,7 @@ public class HookHotDeployListener
 			Action action = (Action)portletClassLoader.loadClass(
 				eventClass).newInstance();
 
-			action = new ActionWrapper(action, portletClassLoader);
+			action = new InvokerAction(action, portletClassLoader);
 
 			EventsProcessorUtil.registerEvent(eventName, action);
 
@@ -603,7 +603,7 @@ public class HookHotDeployListener
 				(SessionAction)portletClassLoader.loadClass(
 					eventClass).newInstance();
 
-			sessionAction = new SessionActionWrapper(
+			sessionAction = new InvokerSessionAction(
 				sessionAction, portletClassLoader);
 
 			EventsProcessorUtil.registerEvent(eventName, sessionAction);
@@ -661,7 +661,7 @@ public class HookHotDeployListener
 			(ModelListener<BaseModel<?>>)portletClassLoader.loadClass(
 				modelListenerClass).newInstance();
 
-		modelListener = new ModelListenerWrapper<BaseModel<?>>(
+		modelListener = new InvokerModelListener<BaseModel<?>>(
 			modelListener, portletClassLoader);
 
 		BasePersistence persistence = getPersistence(modelName);
