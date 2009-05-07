@@ -103,7 +103,7 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_community_assignm
 
 					Role role = RoleLocalServiceUtil.getRole(userGroupRole.getRoleId());
 
-					buffer.append(role.getTitle(locale));
+					buffer.append(HtmlUtil.escape(role.getTitle(locale)));
 
 					if (itr.hasNext()) {
 						buffer.append(StringPool.COMMA_AND_SPACE);

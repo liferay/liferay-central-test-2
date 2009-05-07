@@ -82,6 +82,8 @@ RoleSearch searchContainer = new RoleSearch(renderRequest, portletURL);
 	for (int i = 0; i < results.size(); i++) {
 		Role curRole = (Role)results.get(i);
 
+		curRole = curRole.toEscapedModel();
+
 		ResultRow row = new ResultRow(curRole, curRole.getRoleId(), i);
 
 		PortletURL rowURL = renderResponse.createRenderURL();

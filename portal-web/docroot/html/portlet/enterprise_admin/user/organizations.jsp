@@ -101,7 +101,7 @@ List<Organization> organizations = (List<Organization>)request.getAttribute("use
 
 					Role role = RoleLocalServiceUtil.getRole(userGroupRole.getRoleId());
 
-					buffer.append(role.getTitle(locale));
+					buffer.append(HtmlUtil.escape(role.getTitle(locale)));
 
 					if (itr.hasNext()) {
 						buffer.append(StringPool.COMMA_AND_SPACE);

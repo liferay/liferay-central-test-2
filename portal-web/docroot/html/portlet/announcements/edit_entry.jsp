@@ -131,7 +131,7 @@ int priority = BeanParamUtil.getInteger(entry, request, "priority");
 						Role role = RoleLocalServiceUtil.getRole(entry.getClassPK());
 						%>
 
-						<liferay-ui:message key="role" /> &raquo; <%= role.getTitle(locale) %>
+						<liferay-ui:message key="role" /> &raquo; <%= HtmlUtil.escape(role.getTitle(locale)) %>
 					</c:when>
 					<c:when test="<%= className.equals(User.class.getName()) %>">
 
@@ -230,7 +230,7 @@ int priority = BeanParamUtil.getInteger(entry, request, "priority");
 								if (RolePermissionUtil.contains(permissionChecker, role.getRoleId(), ActionKeys.MANAGE_ANNOUNCEMENTS)) {
 							%>
 
-									<option <%= (classPK == role.getRoleId()) ? "selected" : "" %> value="<%= PortalUtil.getClassNameId(Role.class) %><%= StringPool.COMMA %><%= role.getRoleId() %>"><%= role.getTitle(locale) %></option>
+									<option <%= (classPK == role.getRoleId()) ? "selected" : "" %> value="<%= PortalUtil.getClassNameId(Role.class) %><%= StringPool.COMMA %><%= role.getRoleId() %>"><%= HtmlUtil.escape(role.getTitle(locale)) %></option>
 
 							<%
 								}

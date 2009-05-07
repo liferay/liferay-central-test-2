@@ -77,7 +77,7 @@ breadcrumbs += "<a href=\"" + breadcrumbsURL.toString() + "\">" + HtmlUtil.escap
 if (role != null) {
 	breadcrumbsURL.setParameter("roleId", String.valueOf(roleId));
 
-	breadcrumbs += " &raquo; <a href=\"" + breadcrumbsURL.toString() + "\">" + role.getTitle(locale) + "</a>";
+	breadcrumbs += " &raquo; <a href=\"" + breadcrumbsURL.toString() + "\">" + HtmlUtil.escape(role.getTitle(locale)) + "</a>";
 }
 
 request.setAttribute("edit_user_roles.jsp-tabs1", tabs1);

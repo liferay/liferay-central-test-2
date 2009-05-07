@@ -211,7 +211,7 @@ if (step == 1) {
 				<liferay-ui:search-container-column-text
 					href="<%= rowHREF %>"
 					name="title"
-					value="<%= role.getTitle(locale) %>"
+					value="<%= HtmlUtil.escape(role.getTitle(locale)) %>"
 				/>
 			</liferay-ui:search-container-row>
 
