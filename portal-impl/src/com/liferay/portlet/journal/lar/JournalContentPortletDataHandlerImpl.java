@@ -395,7 +395,7 @@ public class JournalContentPortletDataHandlerImpl
 
 				JournalContentSearchLocalServiceUtil.updateContentSearch(
 					context.getGroupId(), layout.isPrivateLayout(),
-					layout.getLayoutId(), StringPool.BLANK, articleId, true);
+					layout.getLayoutId(), portletId, articleId, true);
 			}
 
 			return preferences;
