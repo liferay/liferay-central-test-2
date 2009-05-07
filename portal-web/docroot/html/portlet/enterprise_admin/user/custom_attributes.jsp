@@ -30,7 +30,7 @@ User selUser = (User)request.getAttribute("user.selUser");
 
 <h3><liferay-ui:message key="custom-attributes" /></h3>
 
-<fieldset class="block-labels">
+<fieldset class="exp-block-labels">
 	<liferay-ui:custom-attribute-list
 		className="com.liferay.portal.model.User"
 		classPK="<%= (selUser != null) ? selUser.getUserId() : 0 %>"

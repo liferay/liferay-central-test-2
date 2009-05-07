@@ -330,14 +330,14 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 
 <liferay-ui:error key="ldapAuthentication" message="failed-to-bind-to-the-ldap-server-with-given-values" />
 
-<fieldset class="block-labels">
-	<div class="ctrl-holder">
+<fieldset class="exp-block-labels">
+	<div class="exp-ctrl-holder">
 		<label class="inline-label" for="<portlet:namespace />settings(<%= PropsKeys.LDAP_AUTH_ENABLED %>)"><liferay-ui:message key="enabled" /></label>
 
 		<liferay-ui:input-checkbox param='<%= "settings(" + PropsKeys.LDAP_AUTH_ENABLED +")" %>' defaultValue="<%= ldapAuthEnabled %>" />
 	</div>
 
-	<div class="ctrl-holder">
+	<div class="exp-ctrl-holder">
 		<label class="inline-label" for="<portlet:namespace />settings(<%= PropsKeys.LDAP_AUTH_REQUIRED %>)"><liferay-ui:message key="required" /></label>
 
 		<liferay-ui:input-checkbox param='<%= "settings(" + PropsKeys.LDAP_AUTH_REQUIRED + ")" %>' defaultValue="<%= ldapAuthRequired %>" />
@@ -346,8 +346,8 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 
 <h3><liferay-ui:message key="default-values" /></h3>
 
-<fieldset class="block-labels">
-	<div class="ctrl-holder">
+<fieldset class="exp-block-labels">
+	<div class="exp-ctrl-holder">
 		<input name="<portlet:namespace />defaultLdap" type="radio" value="apache"> Apache Directory Server <br />
 		<input name="<portlet:namespace />defaultLdap" type="radio" value="fedora"> Fedora Directory Server <br />
 		<input name="<portlet:namespace />defaultLdap" type="radio" value="microsoft"> Microsoft Active Directory Server <br />
@@ -356,15 +356,15 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 		<input name="<portlet:namespace />defaultLdap" type="radio" value="other"> <liferay-ui:message key="other-directory-server" />
 	</div>
 
-	<div class="button-holder">
+	<div class="exp-button-holder">
 		<input type="button" value="<liferay-ui:message key="reset-values" />" onClick="<portlet:namespace />updateDefaultLdap();" />
 	</div>
 </fieldset>
 
 <h3><liferay-ui:message key="connection" /></h3>
 
-<fieldset class="block-labels">
-	<div class="ctrl-holder">
+<fieldset class="exp-block-labels">
+	<div class="exp-ctrl-holder">
 		<label for="<portlet:namespace />settings(<%= PropsKeys.LDAP_BASE_PROVIDER_URL %>)"><liferay-ui:message key="base-provider-url" /></label>
 
 		<input class="lfr-input-text" name="<portlet:namespace />settings(<%= PropsKeys.LDAP_BASE_PROVIDER_URL %>)" type="text" value="<%= HtmlUtil.escape(ldapBaseProviderUrl) %>" />
@@ -372,7 +372,7 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 		<liferay-ui:icon-help message="the-ldap-url-format-is" />
 	</div>
 
-	<div class="ctrl-holder">
+	<div class="exp-ctrl-holder">
 		<label for="<portlet:namespace />settings(<%= PropsKeys.LDAP_BASE_DN %>)"><liferay-ui:message key="base-dn" /></label>
 
 		<input class="lfr-input-text" name="<portlet:namespace />settings(<%= PropsKeys.LDAP_BASE_DN %>)" type="text" value="<%= HtmlUtil.escape(ldapBaseDN) %>" />
@@ -380,27 +380,27 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 		<liferay-ui:icon-help message="the-ldap-url-format-is" />
 	</div>
 
-	<div class="ctrl-holder">
+	<div class="exp-ctrl-holder">
 		<label for="<portlet:namespace />settings(<%= PropsKeys.LDAP_SECURITY_PRINCIPAL %>)"><liferay-ui:message key="principal" /></label>
 
 		<input class="lfr-input-text" name="<portlet:namespace />settings(<%= PropsKeys.LDAP_SECURITY_PRINCIPAL %>)" type="text" value="<%= HtmlUtil.escape(ldapSecurityPrincipal) %>" />
 	</div>
 
-	<div class="ctrl-holder">
+	<div class="exp-ctrl-holder">
 		<label for="<portlet:namespace />settings(<%= PropsKeys.LDAP_SECURITY_CREDENTIALS %>)"><liferay-ui:message key="credentials" /></label>
 
 		<input class="lfr-input-text" name="<portlet:namespace />settings(<%= PropsKeys.LDAP_SECURITY_CREDENTIALS %>)" type="password" value="<%= HtmlUtil.escape(ldapSecurityCredentials) %>" />
 	</div>
 
-	<div class="button-holder">
+	<div class="exp-button-holder">
 		<input type="button" value="<liferay-ui:message key="test-ldap-connection" />" onClick="<portlet:namespace/>testSettings('ldapConnection');" />
 	</div>
 </fieldset>
 
 <h3><liferay-ui:message key="users" /></h3>
 
-<fieldset class="block-labels">
-	<div class="ctrl-holder">
+<fieldset class="exp-block-labels">
+	<div class="exp-ctrl-holder">
 		<label for="<portlet:namespace />settings(<%= PropsKeys.LDAP_AUTH_SEARCH_FILTER %>)"><liferay-ui:message key="authentication-search-filter" /></label>
 
 		<input class="lfr-input-text" name="<portlet:namespace />settings(<%= PropsKeys.LDAP_AUTH_SEARCH_FILTER %>)" type="text" value="<%= HtmlUtil.escape(ldapAuthSearchFilter) %>" />
@@ -408,7 +408,7 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 		<liferay-ui:icon-help message="enter-the-search-filter-that-will-be-used-to-test-the-validity-of-a-user" />
 	</div>
 
-	<div class="ctrl-holder">
+	<div class="exp-ctrl-holder">
 		<label for="<portlet:namespace />settings(<%= PropsKeys.LDAP_IMPORT_USER_SEARCH_FILTER %>)"><liferay-ui:message key="import-search-filter" /></label>
 
 		<input class="lfr-input-text" name="<portlet:namespace />settings(<%= PropsKeys.LDAP_IMPORT_USER_SEARCH_FILTER %>)" type="text" value="<%= HtmlUtil.escape(ldapImportUserSearchFilter) %>" />
@@ -416,49 +416,49 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 
 	<h4><liferay-ui:message key="user-mapping" /></h4>
 
-	<div class="ctrl-holder">
+	<div class="exp-ctrl-holder">
 		<label for="<portlet:namespace />userMappingScreenName"><liferay-ui:message key="screen-name" /></label>
 
 		<input class="lfr-input-text" name="<portlet:namespace />userMappingScreenName" type="text" value="<%= userMappingScreenName %>" />
 	</div>
 
-	<div class="ctrl-holder">
+	<div class="exp-ctrl-holder">
 		<label for="<portlet:namespace />userMappingPassword"><liferay-ui:message key="password" /></label>
 
 		<input class="lfr-input-text" name="<portlet:namespace />userMappingPassword" type="text" value="<%= userMappingPassword %>" />
 	</div>
 
-	<div class="ctrl-holder">
+	<div class="exp-ctrl-holder">
 		<label for="<portlet:namespace />userMappingEmailAddress"><liferay-ui:message key="email-address" /></label>
 
 		<input class="lfr-input-text" name="<portlet:namespace />userMappingEmailAddress" type="text" value="<%= userMappingEmailAddress %>" />
 	</div>
 
-	<div class="ctrl-holder">
+	<div class="exp-ctrl-holder">
 		<label for="<portlet:namespace />userMappingFullName"><liferay-ui:message key="full-name" /></label>
 
 		<input class="lfr-input-text" name="<portlet:namespace />userMappingFullName" type="text" value="<%= userMappingFullName %>" />
 	</div>
 
-	<div class="ctrl-holder">
+	<div class="exp-ctrl-holder">
 		<label for="<portlet:namespace />userMappingFirstName"><liferay-ui:message key="first-name" /></label>
 
 		<input class="lfr-input-text" name="<portlet:namespace />userMappingFirstName" type="text" value="<%= userMappingFirstName %>" />
 	</div>
 
-	<div class="ctrl-holder">
+	<div class="exp-ctrl-holder">
 		<label for="<portlet:namespace />userMappingLastName"><liferay-ui:message key="last-name" /></label>
 
 		<input class="lfr-input-text" name="<portlet:namespace />userMappingLastName" type="text" value="<%= userMappingLastName %>" />
 	</div>
 
-	<div class="ctrl-holder">
+	<div class="exp-ctrl-holder">
 		<label for="<portlet:namespace />userMappingJobTitle"><liferay-ui:message key="job-title" /></label>
 
 		<input class="lfr-input-text" name="<portlet:namespace />userMappingJobTitle" type="text" value="<%= userMappingJobTitle %>" />
 	</div>
 
-	<div class="ctrl-holder">
+	<div class="exp-ctrl-holder">
 		<label for="<portlet:namespace />userMappingGroup"><liferay-ui:message key="group" /></label>
 
 		<input class="lfr-input-text" name="<portlet:namespace />userMappingGroup" type="text" value="<%= userMappingGroup %>" />
@@ -466,15 +466,15 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 
 	<input name="<portlet:namespace />settings(<%= PropsKeys.LDAP_USER_MAPPINGS %>)" type="hidden" value="" />
 
-	<div class="button-holder">
+	<div class="exp-button-holder">
 		<input type="button" value="<liferay-ui:message key="test-ldap-users" />" onClick="<portlet:namespace />testSettings('ldapUsers');" />
 	</div>
 </fieldset>
 
 <h3><liferay-ui:message key="groups" /></h3>
 
-<fieldset class="block-labels">
-	<div class="ctrl-holder">
+<fieldset class="exp-block-labels">
+	<div class="exp-ctrl-holder">
 		<label for="<portlet:namespace />settings(<%= PropsKeys.LDAP_IMPORT_GROUP_SEARCH_FILTER %>)"><liferay-ui:message key="import-search-filter" /></label>
 
 		<input class="lfr-input-text" name="<portlet:namespace />settings(<%= PropsKeys.LDAP_IMPORT_GROUP_SEARCH_FILTER %>)" type="text" value="<%= HtmlUtil.escape(ldapImportGroupSearchFilter) %>" />
@@ -482,19 +482,19 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 
 	<h4><liferay-ui:message key="group-mapping" /></h4>
 
-	<div class="ctrl-holder">
+	<div class="exp-ctrl-holder">
 		<label for="<portlet:namespace />groupMappingGroupName"><liferay-ui:message key="group-name" /></label>
 
 		<input class="lfr-input-text" name="<portlet:namespace />groupMappingGroupName" type="text" value="<%= groupMappingGroupName %>" />
 	</div>
 
-	<div class="ctrl-holder">
+	<div class="exp-ctrl-holder">
 		<label for="<portlet:namespace />groupMappingDescription"><liferay-ui:message key="description" /></label>
 
 		<input class="lfr-input-text" name="<portlet:namespace />groupMappingDescription" type="text" value="<%= groupMappingDescription %>" />
 	</div>
 
-	<div class="ctrl-holder">
+	<div class="exp-ctrl-holder">
 		<label for="<portlet:namespace />groupMappingUser"><liferay-ui:message key="user" /></label>
 
 		<input class="lfr-input-text" name="<portlet:namespace />groupMappingUser" type="text" value="<%= groupMappingUser %>" />
@@ -502,28 +502,28 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 
 	<input name="<portlet:namespace />settings(<%= PropsKeys.LDAP_GROUP_MAPPINGS %>)" type="hidden" value="" />
 
-	<div class="button-holder">
+	<div class="exp-button-holder">
 		<input type="button" value="<liferay-ui:message key="test-ldap-groups" />" onClick="<portlet:namespace />testSettings('ldapGroups');" />
 	</div>
 </fieldset>
 
 <h3><liferay-ui:message key="import-export" /></h3>
 
-<fieldset class="block-labels">
-	<div class="ctrl-holder">
+<fieldset class="exp-block-labels">
+	<div class="exp-ctrl-holder">
 		<label class="inline-label" for="<portlet:namespace />settings(<%= PropsKeys.LDAP_IMPORT_ENABLED %>)"><liferay-ui:message key="import-enabled" /></label>
 
 		<liferay-ui:input-checkbox param='<%= "settings(" + PropsKeys.LDAP_IMPORT_ENABLED + ")" %>' id='<%= renderResponse.getNamespace() + "ldapImportEnabled" %>' defaultValue="<%= ldapImportEnabled %>" />
 	</div>
 
 	<div id="<portlet:namespace />importEnabledSettings">
-		<div class="ctrl-holder">
+		<div class="exp-ctrl-holder">
 			<label class="inline-label" for="<portlet:namespace />settings(<%= PropsKeys.LDAP_IMPORT_ON_STARTUP %>)"><liferay-ui:message key="import-on-startup-enabled" /></label>
 
 			<liferay-ui:input-checkbox param='<%= "settings(" + PropsKeys.LDAP_IMPORT_ON_STARTUP + ")" %>' defaultValue="<%= ldapImportOnStartup %>" />
 		</div>
 
-		<div class="ctrl-holder">
+		<div class="exp-ctrl-holder">
 			<label class="inline-label" for="<portlet:namespace />settings(<%= PropsKeys.LDAP_IMPORT_INTERVAL %>)"><liferay-ui:message key="import-interval" /></label>
 
 			<select name="<portlet:namespace />settings(<%= PropsKeys.LDAP_IMPORT_INTERVAL %>)">
@@ -538,26 +538,26 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 		</div>
 	</div>
 
-	<div class="ctrl-holder">
+	<div class="exp-ctrl-holder">
 		<label class="inline-label" for="<portlet:namespace />settings(<%= PropsKeys.LDAP_EXPORT_ENABLED %>)"><liferay-ui:message key="export-enabled" /></label>
 
 		<liferay-ui:input-checkbox param='<%= "settings(" + PropsKeys.LDAP_EXPORT_ENABLED + ")" %>' id='<%= renderResponse.getNamespace() + "ldapExportEnabled" %>' defaultValue="<%= ldapExportEnabled %>" />
 	</div>
 
 	<div id="<portlet:namespace />exportEnabledSettings">
-		<div class="ctrl-holder">
+		<div class="exp-ctrl-holder">
 			<label for="<portlet:namespace />settings(<%= PropsKeys.LDAP_USERS_DN %>)"><liferay-ui:message key="users-dn" /></label>
 
 			<input class="lfr-input-text" name="<portlet:namespace />settings(<%= PropsKeys.LDAP_USERS_DN %>)" type="text" value="<%= HtmlUtil.escape(ldapUsersDN) %>" />
 		</div>
 
-		<div class="ctrl-holder">
+		<div class="exp-ctrl-holder">
 			<label for="<portlet:namespace />settings(<%= PropsKeys.LDAP_USER_DEFAULT_OBJECT_CLASSES %>)"><liferay-ui:message key="user-default-object-classes" /></label>
 
 			<input class="lfr-input-text" name="<portlet:namespace />settings(<%= PropsKeys.LDAP_USER_DEFAULT_OBJECT_CLASSES %>)" type="text" value="<%= HtmlUtil.escape(ldapUserDefaultObjectClasses) %>" />
 		</div>
 
-		<div class="ctrl-holder">
+		<div class="exp-ctrl-holder">
 			<label for="<portlet:namespace />settings(<%= PropsKeys.LDAP_GROUPS_DN %>)"><liferay-ui:message key="groups-dn" /></label>
 
 			<input class="lfr-input-text" name="<portlet:namespace />settings(<%= PropsKeys.LDAP_GROUPS_DN %>)" type="text" value="<%= HtmlUtil.escape(ldapGroupsDN) %>" />
@@ -567,8 +567,8 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 
 <h3><liferay-ui:message key="password-policy" /></h3>
 
-<fieldset class="block-labels">
-	<div class="ctrl-holder">
+<fieldset class="exp-block-labels">
+	<div class="exp-ctrl-holder">
 		<label class="inline-label" for="<portlet:namespace />settings(<%= PropsKeys.LDAP_PASSWORD_POLICY_ENABLED %>)"><liferay-ui:message key="use-ldap-password-policy" /></label>
 
 		<liferay-ui:input-checkbox param='<%= "settings(" + PropsKeys.LDAP_PASSWORD_POLICY_ENABLED + ")" %>' defaultValue="<%= ldapPasswordPolicyEnabled %>" />

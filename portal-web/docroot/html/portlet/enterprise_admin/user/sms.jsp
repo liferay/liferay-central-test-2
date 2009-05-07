@@ -36,8 +36,8 @@ Contact selContact = (Contact)request.getAttribute("user.selContact");
 	<c:when test="<%= selContact != null %>">
 		<liferay-ui:error exception="<%= UserSmsException.class %>" message="please-enter-a-sms-id-that-is-a-valid-email-address" />
 
-		<fieldset class="block-labels">
-			<div class="ctrl-holder">
+		<fieldset class="exp-block-labels">
+			<div class="exp-ctrl-holder">
 				<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= selContact %>" field="smsSn" />
 			</div>
 		</fieldset>

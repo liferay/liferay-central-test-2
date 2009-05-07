@@ -39,10 +39,10 @@
 	</span>
 </c:if>
 
-<fieldset class="block-labels">
+<fieldset class="exp-block-labels">
 	<legend><liferay-ui:message key="password-reminder" /></legend>
 
-	<div class="ctrl-holder">
+	<div class="exp-ctrl-holder">
 		<label for="reminderQueryQuestion"><liferay-ui:message key="question" /></label>
 
 		<select id="reminderQueryQuestion" name="reminderQueryQuestion">
@@ -69,7 +69,7 @@
 		</c:if>
 	</div>
 
-	<div class="ctrl-holder">
+	<div class="exp-ctrl-holder">
 		<label for="reminderQueryAnswer"><liferay-ui:message key="answer" /></label>
 
 		<input id="reminderQueryAnswer" name="reminderQueryAnswer" size="50" type="text" value="<%= user.getReminderQueryAnswer() %>" />

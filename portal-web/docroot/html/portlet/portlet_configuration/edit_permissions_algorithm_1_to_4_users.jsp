@@ -187,7 +187,7 @@ int userIdsPos = ParamUtil.getInteger(request, "userIdsPos");
 
 			<br />
 
-			<div class="button-holder">
+			<div class="exp-button-holder">
 				<input class="previous" <%= userIdsPos > 0 ? "" : "disabled" %> type="button" value="<liferay-ui:message key="previous" />" onClick="<portlet:namespace />saveUserPermissions(<%= userIdsPos - 1 %>, '<%= userIdsArray[userIdsPos] %>');">
 
 				<input class="next" <%= userIdsPos + 1 < userIdsArray.length ? "" : "disabled" %> type="button" value="<liferay-ui:message key="next" />" onClick="<portlet:namespace />saveUserPermissions(<%= userIdsPos + 1 %>, '<%= userIdsArray[userIdsPos] %>');">

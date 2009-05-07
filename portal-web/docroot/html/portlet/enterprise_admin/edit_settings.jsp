@@ -82,7 +82,7 @@ String curSection = configurationSections[0];
 
 				<%@ include file="/html/portlet/enterprise_admin/categories_navigation.jspf" %>
 
-				<div class="button-holder">
+				<div class="exp-button-holder">
 					<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveCompany();" />
 
 					<%

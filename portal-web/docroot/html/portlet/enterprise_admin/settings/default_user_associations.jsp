@@ -32,20 +32,20 @@ String adminDefaultUserGroupNames = ParamUtil.getString(request, "settings(" + P
 
 <h3><liferay-ui:message key="default-user-associations" /></h3>
 
-<fieldset class="block-labels">
-	<div class="ctrl-holder">
+<fieldset class="exp-block-labels">
+	<div class="exp-ctrl-holder">
 		<label for="<portlet:namespace />settings(<%= PropsKeys.ADMIN_DEFAULT_GROUP_NAMES %>)"><liferay-ui:message key="communities" /> <liferay-ui:icon-help message="enter-the-default-community-names-per-line-that-are-associated-with-newly-created-users" /></label>
 
 		<textarea class="lfr-textarea" name="<portlet:namespace />settings(<%= PropsKeys.ADMIN_DEFAULT_GROUP_NAMES %>)"><%= HtmlUtil.escape(adminDefaultGroupNames) %></textarea>
 	</div>
 
-	<div class="ctrl-holder">
+	<div class="exp-ctrl-holder">
 		<label for="<portlet:namespace />settings(<%= PropsKeys.ADMIN_DEFAULT_ROLE_NAMES %>)"><liferay-ui:message key="roles" /> <liferay-ui:icon-help message="enter-the-default-role-names-per-line-that-are-associated-with-newly-created-users" /></label>
 
 		<textarea class="lfr-textarea" name="<portlet:namespace />settings(<%= PropsKeys.ADMIN_DEFAULT_ROLE_NAMES %>)"><%= HtmlUtil.escape(adminDefaultRoleNames) %></textarea>
 	</div>
 
-	<div class="ctrl-holder">
+	<div class="exp-ctrl-holder">
 		<label for="<portlet:namespace />settings(<%= PropsKeys.ADMIN_DEFAULT_USER_GROUP_NAMES %>)"><liferay-ui:message key="user-groups" /> <liferay-ui:icon-help message="enter-the-default-user-group-names-per-line-that-are-associated-with-newly-created-users" /></label>
 
 		<textarea class="lfr-textarea" name="<portlet:namespace />settings(<%= PropsKeys.ADMIN_DEFAULT_USER_GROUP_NAMES %>)"><%= HtmlUtil.escape(adminDefaultUserGroupNames) %></textarea>

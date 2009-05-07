@@ -31,14 +31,14 @@ String adminReservedEmailAddresses = ParamUtil.getString(request, "settings(" + 
 
 <h3><liferay-ui:message key="reserved-credentials" /></h3>
 
-<fieldset class="block-labels">
-	<div class="ctrl-holder">
+<fieldset class="exp-block-labels">
+	<div class="exp-ctrl-holder">
 		<label for="<portlet:namespace />settings(<%= PropsKeys.ADMIN_RESERVED_SCREEN_NAMES %>)"><liferay-ui:message key="screen-names" /> <liferay-ui:icon-help message="enter-one-screen-name-per-line-to-reserve-the-screen-name" /></label>
 
 		<textarea class="lfr-textarea" name="<portlet:namespace />settings(<%= PropsKeys.ADMIN_RESERVED_SCREEN_NAMES %>)"><%= HtmlUtil.escape(adminReservedScreenNames) %></textarea>
 	</div>
 
-	<div class="ctrl-holder">
+	<div class="exp-ctrl-holder">
 		<label for="<portlet:namespace />settings(<%= PropsKeys.ADMIN_RESERVED_EMAIL_ADDRESSES %>)"><liferay-ui:message key="email-addresses" /> <liferay-ui:icon-help message="enter-one-screen-name-per-line-to-reserve-the-screen-name" /></label>
 
 		<textarea class="lfr-textarea" name="<portlet:namespace />settings(<%= PropsKeys.ADMIN_RESERVED_EMAIL_ADDRESSES %>)"><%= HtmlUtil.escape(adminReservedEmailAddresses) %></textarea>

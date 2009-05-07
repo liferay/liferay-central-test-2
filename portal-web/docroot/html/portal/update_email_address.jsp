@@ -57,16 +57,16 @@ String emailAddress2 = ParamUtil.getString(request, "emailAddress2");
 	</c:otherwise>
 </c:choose>
 
-<fieldset class="block-labels">
+<fieldset class="exp-block-labels">
 	<legend><liferay-ui:message key="email-address" /></legend>
 
-	<div class="ctrl-holder">
+	<div class="exp-ctrl-holder">
 		<label for="emailAddress1"><liferay-ui:message key="email-address" /></label>
 
 		<input class="lfr-input-text" name="emailAddress1" type="text" value="<%= emailAddress1 %>" />
 	</div>
 
-	<div class="ctrl-holder">
+	<div class="exp-ctrl-holder">
 		<label for="emailAddress2"><liferay-ui:message key="enter-again" /></label>
 
 		<input class="lfr-input-text" name="emailAddress2" type="text" value="<%= emailAddress2 %>" />

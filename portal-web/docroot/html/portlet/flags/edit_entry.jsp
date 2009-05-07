@@ -33,13 +33,13 @@ long reportedUserId = ParamUtil.getLong(request, "reportedUserId");
 %>
 
 <style type="text/css">
-	.portlet-flags .uni-form fieldset {
+	.portlet-flags .exp-form fieldset {
 		border: none;
 		padding: 0;
 		width: 100%;
 	}
 
-	.portlet-flags .uni-form .block-labels label {
+	.portlet-flags .exp-form .exp-block-labels label {
 		font-weight: bold;
 	}
 </style>
@@ -90,13 +90,13 @@ long reportedUserId = ParamUtil.getLong(request, "reportedUserId");
 </script>
 
 <div class="portlet-flags" id="<portlet:namespace />flagsPopup">
-	<form class="uni-form" method="post" name="<portlet:namespace />flagsForm">
+	<form class="exp-form" method="post" name="<portlet:namespace />flagsForm">
 		<p>
 			<%= LanguageUtil.format(pageContext, "you-are-about-to-report-a-violation-of-our-x-terms-of-use.-all-reports-are-strictly-confidential", themeDisplay.getPathMain() + "/portal/terms_of_use") %>
 		</p>
 
-		<fieldset class="block-labels">
-			<div class="ctrl-holder">
+		<fieldset class="exp-block-labels">
+			<div class="exp-ctrl-holder">
 				<label for="<portlet:namespace />reason"><liferay-ui:message key="reason-for-the-report" /></label>
 
 				<select name="<portlet:namespace />reason" id="<portlet:namespace />reason">
@@ -116,21 +116,21 @@ long reportedUserId = ParamUtil.getLong(request, "reportedUserId");
 				</select>
 			</div>
 
-			<div class="ctrl-holder" id="<portlet:namespace />otherReasonDiv">
+			<div class="exp-ctrl-holder" id="<portlet:namespace />otherReasonDiv">
 				<label for="<portlet:namespace />otherReason"><liferay-ui:message key="other-reason" /></label>
 
 				<input id="<portlet:namespace />otherReason" name="<portlet:namespace />otherReason" type="text" value="" />
 			</div>
 
 			<c:if test="<%= !themeDisplay.isSignedIn() %>">
-				<div class="ctrl-holder">
+				<div class="exp-ctrl-holder">
 					<label for="<portlet:namespace />reporterEmailAddress"><liferay-ui:message key="email-address" /></label>
 
 					<input id="<portlet:namespace />reporterEmailAddress" name="<portlet:namespace />reporterEmailAddress" type="text" value="" />
 				</div>
 			</c:if>
 
-			<div class="button-holder">
+			<div class="exp-button-holder">
 				<input type="button" value="<liferay-ui:message key="send" />" onclick="<portlet:namespace />flag(); return false;" />
 			</div>
 		</fieldset>

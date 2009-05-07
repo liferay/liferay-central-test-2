@@ -231,7 +231,7 @@
 	text-align: left;
 }
 
-.portlet-tags-admin .panel-content .ctrl-holder {
+.portlet-tags-admin .panel-content .exp-ctrl-holder {
 	margin-bottom: 10px;
 }
 
@@ -240,19 +240,19 @@
 	font-weight: bold;
 }
 
-.portlet-tags-admin .panel-content .ctrl-holder input, .portlet-tags-admin .panel-content .ctrl-holder select {
+.portlet-tags-admin .panel-content .exp-ctrl-holder input, .portlet-tags-admin .panel-content .exp-ctrl-holder select {
 	min-width: 200px;
 }
 
-.ie6 .portlet-tags-admin .panel-content .ctrl-holder, .ie6 .portlet-tags-admin .panel-content .ctrl-holder {
+.ie6 .portlet-tags-admin .panel-content .exp-ctrl-holder, .ie6 .portlet-tags-admin .panel-content .exp-ctrl-holder {
 	width: 200px;
 }
 
-.ie6 .portlet-tags-admin .panel-content .ctrl-holder input, .ie6 .portlet-tags-admin .panel-content .ctrl-holder select {
+.ie6 .portlet-tags-admin .panel-content .exp-ctrl-holder input, .ie6 .portlet-tags-admin .panel-content .exp-ctrl-holder select {
 	width: 200px;
 }
 
-.portlet-tags-admin .panel-content .button-holder {
+.portlet-tags-admin .panel-content .exp-button-holder {
 	margin-top: 5px;
 }
 

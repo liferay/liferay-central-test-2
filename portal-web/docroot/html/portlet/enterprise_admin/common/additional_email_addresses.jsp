@@ -75,7 +75,7 @@ else {
 <liferay-ui:error exception="<%= EmailAddressException.class %>" message="please-enter-a-valid-email-address" />
 <liferay-ui:error key="<%= NoSuchListTypeException.class.getName() + className + ListTypeImpl.EMAIL_ADDRESS %>" message="please-select-a-type" />
 
-<fieldset class="block-labels">
+<fieldset class="exp-block-labels">
 
 	<%
 	for (int i = 0; i < emailAddressesIndexes.length; i++) {
@@ -97,7 +97,7 @@ else {
 				fieldParam = "emailAddressAddress" + emailAddressesIndex;
 				%>
 
-				<div class="ctrl-holder">
+				<div class="exp-ctrl-holder">
 					<label for="<portlet:namespace /><%= fieldParam %>"><liferay-ui:message key="email-address" /></label>
 
 					<liferay-ui:input-field model="<%= EmailAddress.class %>" bean="<%= emailAddress %>" field="address" fieldParam="<%= fieldParam %>" />
@@ -107,7 +107,7 @@ else {
 				fieldParam = "emailAddressTypeId" + emailAddressesIndex;
 				%>
 
-				<div class="ctrl-holder">
+				<div class="exp-ctrl-holder">
 					<label for="<portlet:namespace /><%= fieldParam %>"><liferay-ui:message key="type" /></label>
 
 					<select id="<portlet:namespace /><%= fieldParam %>" name="<portlet:namespace /><%= fieldParam %>">
@@ -131,7 +131,7 @@ else {
 				fieldParam = "emailAddressPrimary" + emailAddressesIndex;
 				%>
 
-				<div class="ctrl-holder primary-ctrl">
+				<div class="exp-ctrl-holder primary-ctrl">
 					<label class="inline-label" for="<portlet:namespace /><%= fieldParam %>">
 						<liferay-ui:message key="primary" />
 

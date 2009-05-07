@@ -74,7 +74,7 @@
 						<span class="knob"></span>
 					</div>
 					<div class="panel-content">
-						<div class="ctrl-holder">
+						<div class="exp-ctrl-holder">
 							<label class="vocabulary-label" for="vocabulary-entry-name">
 								<liferay-ui:message key="name" />
 							</label>
@@ -82,7 +82,7 @@
 							<input class="vocabulary-entry-name" name="vocabulary-entry-name" type="text" value="" />
 						</div>
 
-						<div class="ctrl-holder">
+						<div class="exp-ctrl-holder">
 							<label for="vocabulary-select-list">
 								<liferay-ui:message key="to-vocabulary" />
 							</label>
@@ -96,7 +96,7 @@
 							/>
 						</div>
 
-						<div class="button-holder">
+						<div class="exp-button-holder">
 							<input class="entry-save-button" type="button" value="<liferay-ui:message key="save" />" />
 
 							<input class="close-panel" type="button" value="<liferay-ui:message key="close" />" />
@@ -109,7 +109,7 @@
 						<span class="knob"></span>
 					</div>
 					<div class="panel-content">
-						<div class="ctrl-holder">
+						<div class="exp-ctrl-holder">
 							<label for="vocabulary-name">
 								<liferay-ui:message key="add-tag-set" />
 							</label>
@@ -123,7 +123,7 @@
 							/>
 						</div>
 
-						<div class="button-holder">
+						<div class="exp-button-holder">
 							<input class="vocabulary-save-button" type="button" value="<liferay-ui:message key="save" />" />
 
 							<input class="close-panel" type="button" value="<liferay-ui:message key="close" />" />

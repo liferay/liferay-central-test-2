@@ -24,7 +24,7 @@
 
 <%@ include file="/html/portlet/css_init.jsp" %>
 
-.portlet-enterprise-admin .uni-form .block-labels textarea {
+.portlet-enterprise-admin .exp-form .exp-block-labels textarea {
 	width: 90%;
 }
 
@@ -82,7 +82,7 @@
 	border:none;
 	width: 100px;
 }
-.portlet-enterprise-admin .ctrl-holder.action-ctrl, .portlet-enterprise-admin .ctrl-holder.mailing-ctrl, .portlet-enterprise-admin .ctrl-holder.primary-ctrl {
+.portlet-enterprise-admin .exp-ctrl-holder.action-ctrl, .portlet-enterprise-admin .exp-ctrl-holder.mailing-ctrl, .portlet-enterprise-admin .exp-ctrl-holder.primary-ctrl {
 	margin: 1.8em 0;
 }
 
@@ -208,7 +208,7 @@
 	width: 35px;
 }
 
-.portlet-enterprise-admin .form-navigation .button-holder {
+.portlet-enterprise-admin .form-navigation .exp-button-holder {
 	margin-top: 20px;
 }
 
@@ -228,7 +228,7 @@
 	padding-top: 0;
 }
 
-.portlet-enterprise-admin .lfr-form-row .ctrl-holder {
+.portlet-enterprise-admin .lfr-form-row .exp-ctrl-holder {
 	clear: none;
 	float: left;
 }
@@ -269,43 +269,43 @@
 	padding: 2px;
 }
 
-.portlet-enterprise-admin .uni-form .block-labels label, .portlet-enterprise-admin .uni-form .block-labels .label {
+.portlet-enterprise-admin .exp-form .exp-block-labels label, .portlet-enterprise-admin .exp-form .exp-block-labels .label {
 	font-weight: bold;
 }
 
-.portlet-enterprise-admin .uni-form .block-labels label input {
+.portlet-enterprise-admin .exp-form .exp-block-labels label input {
 	vertical-align: middle;
 }
 
-.portlet-enterprise-admin .uni-form .block-labels .ctrl-holder {
+.portlet-enterprise-admin .exp-form .exp-block-labels .exp-ctrl-holder {
 	margin-bottom: 10px;
 }
 
-.portlet-enterprise-admin .uni-form .block-labels .ctrl-holder.mailing-ctrl {
+.portlet-enterprise-admin .exp-form .exp-block-labels .exp-ctrl-holder.mailing-ctrl {
 	clear: both;
 }
 
-.portlet-enterprise-admin .uni-form fieldset {
+.portlet-enterprise-admin .exp-form fieldset {
 	border: none;
 	padding: 0;
 	width: 100%;
 }
 
-.portlet-enterprise-admin .uni-form fieldset.col {
+.portlet-enterprise-admin .exp-form fieldset.exp-form-column {
 	margin-right: 10px;
 	width: auto;
 }
 
-.portlet-enterprise-admin #addresses .ctrl-holder {
+.portlet-enterprise-admin #addresses .exp-ctrl-holder {
 	float: none;
 	width: auto;
 }
 
-.ie6 .portlet-enterprise-admin .uni-form fieldset.col {
+.ie6 .portlet-enterprise-admin .exp-form fieldset.exp-form-column {
 	width: 33%;
 }
 
-.portlet-enterprise-admin .uni-form .row-container {
+.portlet-enterprise-admin .exp-form .row-container {
 }
 
 .portlet-enterprise-admin .user-table, .portlet-enterprise-admin .organization-table {
@@ -318,7 +318,7 @@
 	top: 9px;
 }
 
-.lfr-floating-container .ctrl-holder input, .lfr-floating-container .ctrl-holder img {
+.lfr-floating-container .exp-ctrl-holder input, .lfr-floating-container .exp-ctrl-holder img {
 	vertical-align: top;
 }
 

@@ -28,8 +28,8 @@
 User selUser = (User)request.getAttribute("user.selUser");
 %>
 
-<fieldset class="block-labels">
-	<div class="ctrl-holder">
+<fieldset class="exp-block-labels">
+	<div class="exp-ctrl-holder">
 		<label for="<portlet:namespace />tagsEntries"><liferay-ui:message key="tags" /></label>
 
 		<%

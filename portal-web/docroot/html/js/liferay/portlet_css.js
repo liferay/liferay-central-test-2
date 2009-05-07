@@ -436,7 +436,7 @@ Liferay.PortletCSS = {
 		var portlet = instance._curPortlet;
 
 		var customCSS = jQuery('#lfr-custom-css');
-		var customCSSContainer = customCSS.parents('.ctrl-holder');
+		var customCSSContainer = customCSS.parents('.exp-ctrl-holder');
 		var customPortletNoteHTML = '<p class="portlet-msg-info form-hint"></p>';
 		var customPortletNote = jQuery('#lfr-portlet-info');
 		var refreshText = '';
@@ -541,7 +541,7 @@ Liferay.PortletCSS = {
 			addIdLink = jQuery('<a href="javascript:;" id="lfr-add-id">' + Liferay.Language.get('add-a-css-rule-for-just-this-portlet') + '</a>');
 			addClassLink = jQuery('<a href="javascript:;" id="lfr-add-class">' + Liferay.Language.get('add-a-css-rule-for-all-portlets-like-this-one') + '</a>');
 
-			var updateOnTypeHolder = jQuery('<div class="ctrl-holder"></div>');
+			var updateOnTypeHolder = jQuery('<div class="exp-ctrl-holder"></div>');
 			var updateOnTypeLabel = jQuery('<label>' + Liferay.Language.get('update-my-styles-as-i-type') + ' </label>');
 
 			updateOnType = jQuery('<input id="lfr-update-on-type" type="checkbox" />');
@@ -916,7 +916,7 @@ Liferay.PortletCSS = {
 
 		var handleForms = function() {
 			var checkBox = jQuery(this);
-			var otherHolders = checkBox.parents('fieldset:first').find('.ctrl-holder:gt(1)');
+			var otherHolders = checkBox.parents('fieldset:first').find('.exp-ctrl-holder:gt(1)');
 			var otherForms = otherHolders.find('input, select');
 			var colorPickerImages = otherHolders.find('.lfr-colorpicker-img');
 

@@ -32,8 +32,8 @@ User selUser = (User)request.getAttribute("user.selUser");
 
 <c:choose>
 	<c:when test="<%= selUser != null %>">
-		<fieldset class="block-labels">
-			<div class="ctrl-holder">
+		<fieldset class="exp-block-labels">
+			<div class="exp-ctrl-holder">
 				<liferay-ui:input-field model="<%= User.class %>" bean="<%= selUser %>" field="comments" />
 			</div>
 		</fieldset>

@@ -24,17 +24,17 @@
 
 <%@ include file="/html/portlet/css_init.jsp" %>
 
-.portlet-login .uni-form fieldset {
+.portlet-login .exp-form fieldset {
 	border-width: 0;
 	margin-bottom: 0;
 	padding: 0;
 }
 
-.portlet-login .uni-form .col {
+.portlet-login .exp-form .exp-form-column {
 	width: auto;
 }
 
-.portlet-login .uni-form .button-holder {
+.portlet-login .exp-form .exp-button-holder {
 	margin-bottom: 10px;
 }
 
@@ -44,7 +44,7 @@
 	padding: 10px;
 }
 
-.portlet-login .uni-form .col {
+.portlet-login .exp-form .exp-form-column {
 	margin-bottom: 10px;
 	margin-right: 10px;
 }

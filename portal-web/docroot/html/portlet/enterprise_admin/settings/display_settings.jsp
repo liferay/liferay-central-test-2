@@ -68,8 +68,8 @@ boolean deleteLogo = ParamUtil.getBoolean(request, "deleteLogo");
 
 <h3><liferay-ui:message key="display-settings" /></h3>
 
-<fieldset class="block-labels col">
-	<div class="ctrl-holder">
+<fieldset class="exp-block-labels exp-form-column">
+	<div class="exp-ctrl-holder">
 		<label for="<portlet:namespace />languageId"><liferay-ui:message key="language" /></label>
 
 		<select name="<portlet:namespace />languageId">
@@ -91,7 +91,7 @@ boolean deleteLogo = ParamUtil.getBoolean(request, "deleteLogo");
 		</select>
 	</div>
 
-	<div class="ctrl-holder">
+	<div class="exp-ctrl-holder">
 		<label for="<portlet:namespace />timeZoneId"><liferay-ui:message key="time-zone" /></label>
 
 		<liferay-ui:input-time-zone name="timeZoneId" value="<%= timeZoneId %>" />
@@ -100,8 +100,8 @@ boolean deleteLogo = ParamUtil.getBoolean(request, "deleteLogo");
 
 <h3><liferay-ui:message key="logo" /></h3>
 
-<fieldset class="block-labels col">
-	<div class="ctrl-holder">
+<fieldset class="exp-block-labels exp-form-column">
+	<div class="exp-ctrl-holder">
 		<label class="inline-label" for="<portlet:namespace />settings(<%= PropsKeys.COMPANY_SECURITY_COMMUNITY_LOGO %>)"><liferay-ui:message key="allow-community-administrators-to-use-their-own-logo" /></label>
 
 		<liferay-ui:input-checkbox param='<%= "settings(" + PropsKeys.COMPANY_SECURITY_COMMUNITY_LOGO + ")" %>' defaultValue="<%= companySecurityCommunityLogo %>" />

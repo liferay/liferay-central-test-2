@@ -43,11 +43,11 @@
 	float: left;
 }
 
-.portlet-configuration .edit-permissions .assign-permissions .button-holder {
+.portlet-configuration .edit-permissions .assign-permissions .exp-button-holder {
 	position: relative;
 }
 
-.portlet-configuration .edit-permissions .assign-permissions .button-holder .finished {
+.portlet-configuration .edit-permissions .assign-permissions .exp-button-holder .finished {
 	position: absolute;
 	right: 0;
 }

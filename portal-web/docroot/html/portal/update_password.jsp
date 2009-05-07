@@ -78,16 +78,16 @@ PasswordPolicy passwordPolicy = user.getPasswordPolicy();
 	</span>
 </c:if>
 
-<fieldset class="block-labels">
+<fieldset class="exp-block-labels">
 	<legend><liferay-ui:message key="new-password" /></legend>
 
-	<div class="ctrl-holder">
+	<div class="exp-ctrl-holder">
 		<label for="password1"><liferay-ui:message key="password" /></label>
 
 		<input class="lfr-input-text" name="password1" type="password" />
 	</div>
 
-	<div class="ctrl-holder">
+	<div class="exp-ctrl-holder">
 		<label for="password2"><liferay-ui:message key="enter-again" /></label>
 
 		<input class="lfr-input-text" name="password2" type="password" />

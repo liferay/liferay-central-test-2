@@ -32,14 +32,14 @@ Contact selContact = (Contact)request.getAttribute("user.selContact");
 
 <c:choose>
 	<c:when test="<%= selContact != null %>">
-		<fieldset class="block-labels">
-			<div class="ctrl-holder">
+		<fieldset class="exp-block-labels">
+			<div class="exp-ctrl-holder">
 				<label for="<portlet:namespace />aimSn"><liferay-ui:message key="aim" /></label>
 
 				<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= selContact %>" field="aimSn" />
 			</div>
 
-			<div class="ctrl-holder">
+			<div class="exp-ctrl-holder">
 				<label for="<portlet:namespace />icqSn"><liferay-ui:message key="icq" /></label>
 
 				<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= selContact %>" field="icqSn" />
@@ -49,19 +49,19 @@ Contact selContact = (Contact)request.getAttribute("user.selContact");
 				</c:if>
 			</div>
 
-			<div class="ctrl-holder">
+			<div class="exp-ctrl-holder">
 				<label for="<portlet:namespace />jabberSn">	<liferay-ui:message key="jabber" /></label>
 
 				<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= selContact %>" field="jabberSn" />
 			</div>
 
-			<div class="ctrl-holder">
+			<div class="exp-ctrl-holder">
 				<label for="<portlet:namespace />msnSn"><liferay-ui:message key="msn" /></label>
 
 				<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= selContact %>" field="msnSn" />
 			</div>
 
-			<div class="ctrl-holder">
+			<div class="exp-ctrl-holder">
 				<label for="<portlet:namespace />skypeSn"><liferay-ui:message key="skype" /></label>
 
 				<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= selContact %>" field="skypeSn" />
@@ -71,7 +71,7 @@ Contact selContact = (Contact)request.getAttribute("user.selContact");
 				</c:if>
 			</div>
 
-			<div class="ctrl-holder">
+			<div class="exp-ctrl-holder">
 				<label for="<portlet:namespace />ymSn"><liferay-ui:message key="ym" /></label>
 
 				<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= selContact %>" field="ymSn" />

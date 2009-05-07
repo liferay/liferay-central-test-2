@@ -51,7 +51,7 @@
 		}
 		%>
 
-		<form action="<portlet:actionURL secure="<%= PropsValues.COMPANY_SECURITY_AUTH_REQUIRES_HTTPS || request.isSecure() %>"><portlet:param name="saveLastPath" value="0" /><portlet:param name="struts_action" value="/login/login" /></portlet:actionURL>" class="uni-form" method="post" name="<portlet:namespace />fm">
+		<form action="<portlet:actionURL secure="<%= PropsValues.COMPANY_SECURITY_AUTH_REQUIRES_HTTPS || request.isSecure() %>"><portlet:param name="saveLastPath" value="0" /><portlet:param name="struts_action" value="/login/login" /></portlet:actionURL>" class="exp-form" method="post" name="<portlet:namespace />fm">
 		<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escape(redirect) %>" />
 		<input id="<portlet:namespace />rememberMe" name="<portlet:namespace />rememberMe" type="hidden" value="<%= rememberMe %>" />
 
@@ -83,8 +83,8 @@
 		<liferay-ui:error exception="<%= UserPasswordException.class %>" message="please-enter-a-valid-password" />
 		<liferay-ui:error exception="<%= UserScreenNameException.class %>" message="please-enter-a-valid-screen-name" />
 
-		<fieldset class="block-labels">
-			<div class="ctrl-holder">
+		<fieldset class="exp-block-labels">
+			<div class="exp-ctrl-holder">
 
 				<%
 				String loginLabel = null;
@@ -105,7 +105,7 @@
 				<input name="<portlet:namespace />login" type="text" value="<%= HtmlUtil.escape(login) %>" />
 			</div>
 
-			<div class="ctrl-holder">
+			<div class="exp-ctrl-holder">
 				<label for="<portlet:namespace />password"><liferay-ui:message key="password" /></label>
 
 				<input id="<portlet:namespace />password" name="<portlet:namespace />password" type="password" value="<%= password %>" />
@@ -114,14 +114,14 @@
 			</div>
 
 			<c:if test="<%= company.isAutoLogin() && !PropsValues.SESSION_DISABLED %>">
-				<div class="ctrl-holder inline-label">
+				<div class="exp-ctrl-holder inline-label">
 					<label for="<portlet:namespace />rememberMeCheckbox"><liferay-ui:message key="remember-me" /></label>
 
 					<input <%= rememberMe ? "checked" : "" %> id="<portlet:namespace />rememberMeCheckbox" type="checkbox" />
 				</div>
 			</c:if>
 
-			<div class="button-holder">
+			<div class="exp-button-holder">
 				<input type="submit" value="<liferay-ui:message key="sign-in" />" />
 			</div>
 		</fieldset>

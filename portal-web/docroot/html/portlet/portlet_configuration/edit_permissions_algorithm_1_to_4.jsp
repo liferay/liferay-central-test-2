@@ -382,7 +382,7 @@ request.setAttribute("edit_permissions_algorithm_1_to_4.jsp-portletURL", portlet
 
 				<br />
 
-				<div class="button-holder">
+				<div class="exp-button-holder">
 					<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveGroupPermissions();" />
 				</div>
 			</div>
@@ -444,7 +444,7 @@ request.setAttribute("edit_permissions_algorithm_1_to_4.jsp-portletURL", portlet
 
 				<br />
 
-				<div class="button-holder">
+				<div class="exp-button-holder">
 					<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveGuestPermissions();" />
 				</div>
 			</div>

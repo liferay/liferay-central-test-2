@@ -32,7 +32,7 @@ if (Validator.isNull(authType)) {
 }
 %>
 
-<form action="<portlet:actionURL><portlet:param name="saveLastPath" value="0" /><portlet:param name="struts_action" value="/login/forgot_password" /></portlet:actionURL>" class="uni-form" method="post" name="<portlet:namespace />fm">
+<form action="<portlet:actionURL><portlet:param name="saveLastPath" value="0" /><portlet:param name="struts_action" value="/login/forgot_password" /></portlet:actionURL>" class="exp-form" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace />redirect" type="hidden" value="<portlet:renderURL />" />
 
 <liferay-ui:error exception="<%= CaptchaTextException.class %>" message="text-verification-failed" />
@@ -42,7 +42,7 @@ if (Validator.isNull(authType)) {
 <liferay-ui:error exception="<%= UserEmailAddressException.class %>" message="please-enter-a-valid-email-address" />
 <liferay-ui:error exception="<%= UserReminderQueryException.class %>" message="your-answer-does-not-match-what-is-in-our-database" />
 
-<fieldset class="block-labels">
+<fieldset class="exp-block-labels">
 	<c:choose>
 		<c:when test="<%= user2 == null %>">
 
@@ -68,7 +68,7 @@ if (Validator.isNull(authType)) {
 
 			<input name="<portlet:namespace />step" type="hidden" value="1" />
 
-			<div class="ctrl-holder">
+			<div class="exp-ctrl-holder">
 				<label for="<portlet:namespace /><%= loginParameter %>"><liferay-ui:message key="<%= loginLabel %>" /></label>
 
 				<input name="<portlet:namespace /><%= loginParameter %>" size="30" type="text" value="<%= HtmlUtil.escape(loginValue) %>" />
@@ -82,7 +82,7 @@ if (Validator.isNull(authType)) {
 				<liferay-ui:captcha url="<%= captchaURL %>" />
 			</c:if>
 
-			<div class="button-holder">
+			<div class="exp-button-holder">
 				<input type="submit" value="<liferay-ui:message key='<%= PropsValues.USERS_REMINDER_QUERIES_ENABLED ? "next" : "send-new-password" %>' />" />
 			</div>
 
@@ -95,13 +95,13 @@ if (Validator.isNull(authType)) {
 				<%= LanguageUtil.format(pageContext, "a-new-password-will-be-sent-to-x-if-you-can-correctly-answer-the-following-question", user2.getEmailAddress()) %>
 			</div>
 
-			<div class="ctrl-holder">
+			<div class="exp-ctrl-holder">
 				<label for="<portlet:namespace />answer"><liferay-ui:message key="<%= user2.getReminderQueryQuestion() %>" /></label>
 
 				<input name="<portlet:namespace />answer" type="text" />
 			</div>
 
-			<div class="button-holder">
+			<div class="exp-button-holder">
 				<input type="submit" value="<liferay-ui:message key="send-new-password" />" />
 			</div>
 		</c:when>

@@ -36,17 +36,17 @@
 		</script>
 	</c:when>
 	<c:otherwise>
-		<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_company_logo" /></portlet:actionURL>" class="uni-form" enctype="multipart/form-data" method="post" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
+		<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_company_logo" /></portlet:actionURL>" class="exp-form" enctype="multipart/form-data" method="post" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
 
 		<liferay-ui:error exception="<%= UploadException.class %>" message="an-unexpected-error-occurred-while-uploading-your-file" />
 
-		<div class="ctrl-holder">
+		<div class="exp-ctrl-holder">
 			<input name="<portlet:namespace />fileName" size="50" type="file" />
 		</div>
 
 		<br />
 
-		<div class="button-holder">
+		<div class="exp-button-holder">
 			<input type="submit" value="<liferay-ui:message key="save" />" />
 
 			<input type="button" value="<liferay-ui:message key="cancel" />" onClick="window.close();" />
