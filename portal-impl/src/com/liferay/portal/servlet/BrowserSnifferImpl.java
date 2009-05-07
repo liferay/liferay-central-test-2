@@ -367,25 +367,18 @@ public class BrowserSnifferImpl implements BrowserSniffer {
 
 	private static Pattern _firefoxPattern = Pattern.compile(
 		"(firefox|minefield|granparadiso|bonecho|firebird|phoenix|camino)");
-
 	private static Pattern _majorVersionPattern = Pattern.compile(
 		"(\\d+[.]\\d+)");
-
 	private static Pattern _revisionPattern = Pattern.compile(
 		".+(?:rv|it|ra|ie)[\\/: ]([\\d.]+)");
-
 	private static Pattern _versionChromePattern = Pattern.compile(
 		"(?:chrome)[\\/]([\\d.]+)");
-
 	private static Pattern _versionFirefoxPattern = Pattern.compile(
 		"(?:firefox|minefield)[\\/]([\\d.]+)");
-
 	private static Pattern _versionPattern = Pattern.compile(
 		"(?:version)[\\/]([\\d.]+)");
-
 	private static Pattern _webKitPattern = Pattern.compile(
 		"(khtml|applewebkit)");
-
 	private static Pattern _windowsPattern = Pattern.compile(
 		"(windows|win32|16bit)");
 
