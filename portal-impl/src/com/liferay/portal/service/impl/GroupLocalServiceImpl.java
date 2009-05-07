@@ -397,7 +397,9 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 		// Tags
 
-		tagsAssetLocalService.deleteAsset(Group.class.getName(), groupId);
+		if (group.isCommunity()) {
+			tagsAssetLocalService.deleteAsset(Group.class.getName(), groupId);
+		}
 
 		// Wiki
 
@@ -746,7 +748,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 		// Tags
 
-		if (serviceContext != null) {
+		if ((serviceContext != null) && group.isCommunity()) {
 			updateTagsAsset(
 				group.getCreatorUserId(), group,
 				serviceContext.getTagsCategories(),
