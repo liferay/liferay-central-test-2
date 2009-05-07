@@ -100,27 +100,63 @@ tunnel.servlet.hosts.allowed=]]></echo>
 
 	<target name="rebuild-database">
 		<if>
-			<equals arg1="${skip.rebuild-database}" arg2="$${skip.rebuild-database}" />
+			<equals arg1="${sql.legacy.zip}" arg2="$${sql.legacy.zip}" />
 			<then>
-				<if>
-					<equals arg1="${db.type}" arg2="mysql-5.0" />
-					<then>
-						<antcall target="rebuild-database-mysql-5.0" />
-					</then>
-					<elseif>
-						<equals arg1="${db.type}" arg2="oracle-10" />
-						<then>
-							<antcall target="rebuild-database-oracle-10" />
-						</then>
-					</elseif>
-					<elseif>
-						<equals arg1="${db.type}" arg2="sql-server-2005" />
-						<then>
-							<antcall target="rebuild-database-sql-server-2005" />
-						</then>
-					</elseif>
-				</if>
+				<fail>
+.
+
+Please set "sql.legacy.zip" in test.properties to point to the legacy SQL ZIP
+file.
+				</fail>
 			</then>
+			<else>
+				<if>
+					<or>
+						<not>
+							<available file="sql/legacy" />
+						</not>
+						<not>
+							<uptodate
+								srcfile="${sql.legacy.zip}"
+								targetfile="sql/legacy"
+							/>
+						</not>
+					</or>
+					<then>
+						<delete dir="sql/legacy" failonerror="false" />
+
+						<unzip src="${sql.legacy.zip}" dest="sql" />
+
+						<touch>
+							<fileset dir="sql/legacy" />
+						</touch>
+					</then>
+				</if>
+
+				<if>
+					<equals arg1="${skip.rebuild-database}" arg2="$${skip.rebuild-database}" />
+					<then>
+						<if>
+							<equals arg1="${db.type}" arg2="mysql-5.0" />
+							<then>
+								<antcall target="rebuild-database-mysql-5.0" />
+							</then>
+							<elseif>
+								<equals arg1="${db.type}" arg2="oracle-10" />
+								<then>
+									<antcall target="rebuild-database-oracle-10" />
+								</then>
+							</elseif>
+							<elseif>
+								<equals arg1="${db.type}" arg2="sql-server-2005" />
+								<then>
+									<antcall target="rebuild-database-sql-server-2005" />
+								</then>
+							</elseif>
+						</if>
+					</then>
+				</if>
+			</else>
 		</if>
 	</target>
 
@@ -393,11 +429,7 @@ tunnel.servlet.hosts.allowed=]]></echo>
 	</target>
 
 	<target name="test-database">
-
-		<!--
-		Manually run "prepare-tomcat-6.0-mysql-5.0" before running any
-		test-database-* tasks.
-		-->
+		<antcall target="prepare-tomcat-6.0-mysql-5.0" />
 
 		<ant antfile="build-test-oracle.xml" target="test-database-oracle-10" inheritAll="false" />
 		<ant antfile="build-test-sql-server.xml" target="test-database-sql-server-2005" inheritAll="false" />
