@@ -31,6 +31,7 @@ import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.base.GroupServiceBaseImpl;
 import com.liferay.portal.service.permission.GroupPermissionUtil;
 import com.liferay.portal.service.permission.PortalPermissionUtil;
@@ -50,19 +51,20 @@ public class GroupServiceImpl extends GroupServiceBaseImpl {
 
 	public Group addGroup(
 			String name, String description, int type, String friendlyURL,
-			boolean active)
+			boolean active, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		PortalPermissionUtil.check(
 			getPermissionChecker(), ActionKeys.ADD_COMMUNITY);
 
 		return groupLocalService.addGroup(
-			getUserId(), null, 0, name, description, type, friendlyURL, active);
+			getUserId(), null, 0, name, description, type, friendlyURL, active,
+			serviceContext);
 	}
 
 	public Group addGroup(
 			long liveGroupId, String name, String description, int type,
-			String friendlyURL, boolean active)
+			String friendlyURL, boolean active, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		GroupPermissionUtil.check(
@@ -70,7 +72,7 @@ public class GroupServiceImpl extends GroupServiceBaseImpl {
 
 		return groupLocalService.addGroup(
 			getUserId(), null, 0, liveGroupId, name, description, type,
-			friendlyURL, active);
+			friendlyURL, active, serviceContext);
 	}
 
 	public void addRoleGroups(long roleId, long[] groupIds)
@@ -214,14 +216,15 @@ public class GroupServiceImpl extends GroupServiceBaseImpl {
 
 	public Group updateGroup(
 			long groupId, String name, String description, int type,
-			String friendlyURL, boolean active)
+			String friendlyURL, boolean active, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		GroupPermissionUtil.check(
 			getPermissionChecker(), groupId, ActionKeys.UPDATE);
 
 		return groupLocalService.updateGroup(
-			groupId, name, description, type, friendlyURL, active);
+			groupId, name, description, type, friendlyURL, active,
+			serviceContext);
 	}
 
 	public Group updateGroup(long groupId, String typeSettings)

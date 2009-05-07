@@ -694,7 +694,7 @@ public class StagingUtil {
 				liveGroup.getDescriptiveName() + " (Staging)",
 				liveGroup.getDescription(),
 				GroupConstants.TYPE_COMMUNITY_PRIVATE, null,
-				liveGroup.isActive());
+				liveGroup.isActive(), null);
 
 			if (liveGroup.hasPrivateLayouts()) {
 				Map<String, String[]> parameterMap = getStagingParameters();

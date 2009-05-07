@@ -34,6 +34,8 @@ import com.liferay.portal.liveusers.LiveUsers;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.GroupServiceUtil;
+import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
@@ -156,12 +158,15 @@ public class EditGroupAction extends PortletAction {
 		String friendlyURL = ParamUtil.getString(actionRequest, "friendlyURL");
 		boolean active = ParamUtil.getBoolean(actionRequest, "active");
 
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(
+			Group.class.getName(), actionRequest);
+
 		if (groupId <= 0) {
 
 			// Add group
 
 			Group group = GroupServiceUtil.addGroup(
-				name, description, type, friendlyURL, active);
+				name, description, type, friendlyURL, active, serviceContext);
 
 			LiveUsers.joinGroup(
 				themeDisplay.getCompanyId(), group.getGroupId(), userId);
@@ -171,7 +176,8 @@ public class EditGroupAction extends PortletAction {
 			// Update group
 
 			GroupServiceUtil.updateGroup(
-				groupId, name, description, type, friendlyURL, active);
+				groupId, name, description, type, friendlyURL, active,
+				serviceContext);
 		}
 	}
 

@@ -117,7 +117,7 @@ public class OrganizationLocalServiceImpl
 
 		Group group = groupLocalService.addGroup(
 			userId, Organization.class.getName(), organizationId, null, null, 0,
-			null, true);
+			null, true, null);
 
 		if (PropsValues.ORGANIZATIONS_ASSIGNMENT_AUTO) {
 

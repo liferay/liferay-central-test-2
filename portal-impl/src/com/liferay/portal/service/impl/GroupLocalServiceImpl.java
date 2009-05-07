@@ -61,6 +61,7 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.security.permission.PermissionCacheUtil;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.base.GroupLocalServiceBaseImpl;
 import com.liferay.portal.util.FriendlyURLNormalizer;
 import com.liferay.portal.util.PortalUtil;
@@ -96,18 +97,19 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 	public Group addGroup(
 			long userId, String className, long classPK, String name,
-			String description, int type, String friendlyURL, boolean active)
+			String description, int type, String friendlyURL, boolean active,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		return addGroup(
 			userId, className, classPK, GroupConstants.DEFAULT_LIVE_GROUP_ID,
-			name, description, type, friendlyURL, active);
+			name, description, type, friendlyURL, active, serviceContext);
 	}
 
 	public Group addGroup(
 			long userId, String className, long classPK, long liveGroupId,
 			String name, String description, int type, String friendlyURL,
-			boolean active)
+			boolean active, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Group
@@ -188,6 +190,14 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 			userLocalService.addGroupUsers(
 				group.getGroupId(), new long[] {userId});
+
+			// Tags
+
+			if (serviceContext != null) {
+				updateTagsAsset(
+					userId, group, serviceContext.getTagsCategories(),
+					serviceContext.getTagsEntries());
+			}
 		}
 		else if (className.equals(Organization.class.getName()) &&
 				 !user.isDefaultUser()) {
@@ -264,7 +274,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 				group = groupLocalService.addGroup(
 					defaultUserId, null, 0, name, null, type, friendlyURL,
-					true);
+					true, null);
 			}
 
 			if (group.getName().equals(GroupConstants.CONTROL_PANEL)) {
@@ -384,6 +394,10 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 		scFrameworkVersionLocalService.deleteFrameworkVersions(groupId);
 		scProductEntryLocalService.deleteProductEntries(groupId);
+
+		// Tags
+
+		tagsAssetLocalService.deleteAsset(Group.class.getName(), groupId);
 
 		// Wiki
 
@@ -693,7 +707,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 	public Group updateGroup(
 			long groupId, String name, String description, int type,
-			String friendlyURL, boolean active)
+			String friendlyURL, boolean active, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		Group group = groupPersistence.findByPrimaryKey(groupId);
@@ -730,6 +744,15 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 		groupPersistence.update(group, false);
 
+		// Tags
+
+		if (serviceContext != null) {
+			updateTagsAsset(
+				group.getCreatorUserId(), group,
+				serviceContext.getTagsCategories(),
+				serviceContext.getTagsEntries());
+		}
+
 		return group;
 	}
 
@@ -743,6 +766,18 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		groupPersistence.update(group, false);
 
 		return group;
+	}
+
+	public void updateTagsAsset(
+			long userId, Group group, String[] tagsCategories,
+			String[] tagsEntries)
+		throws PortalException, SystemException {
+
+		tagsAssetLocalService.updateAsset(
+			userId, group.getGroupId(), Group.class.getName(),
+			group.getGroupId(), tagsCategories, tagsEntries, true, null, null,
+			null, null, null, group.getDescriptiveName(),
+			group.getDescription(), null, null, 0, 0, null, false);
 	}
 
 	public Group updateWorkflow(

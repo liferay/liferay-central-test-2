@@ -105,6 +105,18 @@ String friendlyURL = BeanParamUtil.getString(group, request, "friendlyURL");
 		<liferay-ui:input-field model="<%= Group.class %>" bean="<%= group %>" field="active" defaultValue="<%= Boolean.TRUE %>" />
 	</td>
 </tr>
+<tr>
+	<td class="lfr-label">
+		<liferay-ui:message key="tags" />
+	</td>
+	<td>
+		<liferay-ui:tags-selector
+			className="<%= Group.class.getName() %>"
+			classPK="<%= groupId %>"
+			hiddenInput="tagsEntries"
+		/>
+	</td>
+</tr>
 </table>
 
 <br />

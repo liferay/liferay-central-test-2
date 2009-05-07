@@ -396,6 +396,7 @@
 		<reference package-path="com.liferay.portlet.softwarecatalog" entity="SCFrameworkVersion" />
 		<reference package-path="com.liferay.portlet.softwarecatalog" entity="SCProductEntry" />
 		<reference package-path="com.liferay.portlet.tasks" entity="TasksProposal" />
+		<reference package-path="com.liferay.portlet.tags" entity="TagsAsset" />
 		<reference package-path="com.liferay.portlet.wiki" entity="WikiNode" />
 	</entity>
 	<entity name="Image" local-service="true" remote-service="false">

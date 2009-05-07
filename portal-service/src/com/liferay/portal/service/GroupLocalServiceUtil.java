@@ -109,23 +109,24 @@ public class GroupLocalServiceUtil {
 	public static com.liferay.portal.model.Group addGroup(long userId,
 		java.lang.String className, long classPK, java.lang.String name,
 		java.lang.String description, int type, java.lang.String friendlyURL,
-		boolean active)
+		boolean active, com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
 				   .addGroup(userId, className, classPK, name, description,
-			type, friendlyURL, active);
+			type, friendlyURL, active, serviceContext);
 	}
 
 	public static com.liferay.portal.model.Group addGroup(long userId,
 		java.lang.String className, long classPK, long liveGroupId,
 		java.lang.String name, java.lang.String description, int type,
-		java.lang.String friendlyURL, boolean active)
+		java.lang.String friendlyURL, boolean active,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
 				   .addGroup(userId, className, classPK, liveGroupId, name,
-			description, type, friendlyURL, active);
+			description, type, friendlyURL, active, serviceContext);
 	}
 
 	public static void addRoleGroups(long roleId, long[] groupIds)
@@ -303,12 +304,13 @@ public class GroupLocalServiceUtil {
 
 	public static com.liferay.portal.model.Group updateGroup(long groupId,
 		java.lang.String name, java.lang.String description, int type,
-		java.lang.String friendlyURL, boolean active)
+		java.lang.String friendlyURL, boolean active,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
 				   .updateGroup(groupId, name, description, type, friendlyURL,
-			active);
+			active, serviceContext);
 	}
 
 	public static com.liferay.portal.model.Group updateGroup(long groupId,
@@ -316,6 +318,14 @@ public class GroupLocalServiceUtil {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService().updateGroup(groupId, typeSettings);
+	}
+
+	public static void updateTagsAsset(long userId,
+		com.liferay.portal.model.Group group,
+		java.lang.String[] tagsCategories, java.lang.String[] tagsEntries)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		getService().updateTagsAsset(userId, group, tagsCategories, tagsEntries);
 	}
 
 	public static com.liferay.portal.model.Group updateWorkflow(long groupId,
