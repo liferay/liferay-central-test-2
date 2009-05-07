@@ -50,7 +50,7 @@
 		</ul>
 	</div>
 
-	<script>
+	<script type="text/javascript">
 		jQuery(
 			function () {
 				var socialBookmarks = jQuery('#<%= randomNamespace %>socialBookmarks');
