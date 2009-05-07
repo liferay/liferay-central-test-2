@@ -60,7 +60,14 @@ TagsUtil.addLayoutTagsEntries(request, TagsEntryLocalServiceUtil.getEntries(Blog
 <div class="entry-navigation">
 	<c:choose>
 		<c:when test="<%= previousEntry != null %>">
-			<a class="previous" href="<portlet:renderURL><portlet:param name="struts_action" value="/blogs/view_entry" /><portlet:param name="entryId" value="<%= String.valueOf(previousEntry.getEntryId()) %>" /></portlet:renderURL>">
+			<c:choose>
+				<c:when test='<%= portletName.equals(PortletKeys.BLOGS) %>'>
+					<a class="previous" href="<portlet:renderURL><portlet:param name="struts_action" value="/blogs/view_entry" /><portlet:param name="entryId" value="<%= String.valueOf(previousEntry.getEntryId()) %>" /></portlet:renderURL>">
+				</c:when>
+				<c:when test='<%= portletName.equals(PortletKeys.BLOGS_AGGREGATOR) %>'>
+					<a class="previous" href="<portlet:renderURL><portlet:param name="struts_action" value="/blogs_aggregator/view_entry" /><portlet:param name="entryId" value="<%= String.valueOf(previousEntry.getEntryId()) %>" /></portlet:renderURL>">
+				</c:when>
+			</c:choose>
 		</c:when>
 		<c:otherwise>
 			<span class="previous">
@@ -80,7 +87,14 @@ TagsUtil.addLayoutTagsEntries(request, TagsEntryLocalServiceUtil.getEntries(Blog
 
 	<c:choose>
 		<c:when test="<%= nextEntry != null %>">
-			<a class="next" href="<portlet:renderURL><portlet:param name="struts_action" value="/blogs/view_entry" /><portlet:param name="entryId" value="<%= String.valueOf(nextEntry.getEntryId()) %>" /></portlet:renderURL>">
+			<c:choose>
+				<c:when test='<%= portletName.equals(PortletKeys.BLOGS) %>'>
+					<a class="next" href="<portlet:renderURL><portlet:param name="struts_action" value="/blogs/view_entry" /><portlet:param name="entryId" value="<%= String.valueOf(nextEntry.getEntryId()) %>" /></portlet:renderURL>">
+				</c:when>
+				<c:when test='<%= portletName.equals(PortletKeys.BLOGS_AGGREGATOR) %>'>
+					<a class="next" href="<portlet:renderURL><portlet:param name="struts_action" value="/blogs_aggregator/view_entry" /><portlet:param name="entryId" value="<%= String.valueOf(nextEntry.getEntryId()) %>" /></portlet:renderURL>">
+				</c:when>
+			</c:choose>
 		</c:when>
 		<c:otherwise>
 			<span class="next">
