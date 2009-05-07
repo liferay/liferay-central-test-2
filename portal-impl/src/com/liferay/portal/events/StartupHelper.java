@@ -337,7 +337,9 @@ public class StartupHelper {
 
 			String sql = "drop index " + indexName;
 
-			if (type.equals(DBUtil.TYPE_MYSQL)) {
+			if (type.equals(DBUtil.TYPE_MYSQL) ||
+				type.equals(DBUtil.TYPE_SQLSERVER)) {
+
 				sql += " on " + tableName;
 			}
 
@@ -439,7 +441,43 @@ public class StartupHelper {
 	}
 
 	protected List<Index> getSQLServerIndexes() throws Exception {
-		return null;
+		List<Index> indexes = new ArrayList<Index>();
+
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = DataAccess.getConnection();
+
+			StringBuilder sb = new StringBuilder();
+
+			sb.append("select sys.tables.name as table_name, ");
+			sb.append("sys.indexes.name as index_name, is_unique from ");
+			sb.append("sys.indexes inner join sys.tables on ");
+			sb.append("sys.tables.object_id = sys.indexes.object_id where ");
+			sb.append("sys.indexes.name like 'LIFERAY_%' or sys.indexes.name ");
+			sb.append("like 'IX_%'");
+
+			String sql = sb.toString();
+
+			ps = con.prepareStatement(sql);
+
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				String indexName = rs.getString("index_name");
+				String tableName = rs.getString("table_name");
+				boolean unique = !rs.getBoolean("is_unique");
+
+				indexes.add(new Index(indexName, tableName, unique));
+			}
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
+		}
+
+		return indexes;
 	}
 
 	protected List<Index> getSybaseIndexes() throws Exception {

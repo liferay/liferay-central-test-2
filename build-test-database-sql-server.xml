@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+
+<project name="portal-test-database-sql-server" basedir="." default="test" xmlns:antelope="antlib:ise.antelope.tasks">
+	<import file="build-test.xml" />
+
+	<target name="test-database-sql-server-2005">
+		<antcall target="test-database-sql-server-2005-latest" />
+		<antcall target="test-database-sql-server-2005-5.1.0" />
+		<antcall target="test-database-sql-server-2005-5.1.1" />
+		<antcall target="test-database-sql-server-2005-5.1.2" />
+	</target>
+
+	<target name="test-database-sql-server-2005-5.1.0">
+		<antcall target="test-database-sql-server-2005-common">
+			<param name="sql.version" value="5.1.0" />
+		</antcall>
+	</target>
+
+	<target name="test-database-sql-server-2005-5.1.1">
+		<antcall target="test-database-sql-server-2005-common">
+			<param name="sql.version" value="5.1.1" />
+		</antcall>
+	</target>
+
+	<target name="test-database-sql-server-2005-5.1.2">
+		<antcall target="test-database-sql-server-2005-common">
+			<param name="sql.version" value="5.1.2" />
+		</antcall>
+	</target>
+
+	<target name="test-database-sql-server-2005-common">
+		<echo file="test.${user.name}.properties">db.type=sql-server-2005</echo>
+
+		<antcall target="prepare-portal-ext-properties" inheritAll="false" />
+
+		<ant dir="portal-impl" target="deploy-properties" inheritAll="false" />
+
+		<if>
+			<not>
+				<equals arg1="${sql.version}" arg2="$${sql.version}" />
+			</not>
+			<then>
+				<property name="sql.dir" value="sql\legacy\${sql.version}\create\" />
+				<property name="sql.file" value="create-sql-server.sql" />
+			</then>
+		</if>
+
+		<antcall target="rebuild-database" inheritAll="false">
+			<param name="sql.dir" value="${sql.dir}" />
+			<param name="sql.file" value="${sql.file}" />
+		</antcall>
+
+		<antcall target="start-selenium" />
+
+		<antcall target="run-tomcat-5.5">
+			<param name="skip.rebuild-database" value="true" />
+			<param name="test.class" value="SmokeTestSuite" />
+		</antcall>
+
+		<antcall target="stop-selenium" />
+	</target>
+
+	<target name="test-database-sql-server-2005-latest">
+		<echo file="create-${db.sql-server-2005.schema}.sql"><![CDATA[drop database lportal;
+create database lportal;]]></echo>
+
+		<antcall target="test-database-sql-server-2005-common">
+			<param name="sql.dir" value="" />
+			<param name="sql.file" value="create-${db.sql-server-2005.schema}.sql" />
+		</antcall>
+	</target>
+</project>

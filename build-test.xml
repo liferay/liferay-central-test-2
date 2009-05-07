@@ -9,6 +9,7 @@
 
 	<propertycopy name="db.host" from="db.${db.type}.host" silent="true" />
 	<propertycopy name="db.driver" from="db.${db.type}.driver" silent="true" />
+	<propertycopy name="db.schema" from="db.${db.type}.schema" silent="true" />
 	<propertycopy name="db.url" from="db.${db.type}.url" silent="true" />
 	<propertycopy name="db.username" from="db.${db.type}.username" silent="true" />
 	<propertycopy name="db.password" from="db.${db.type}.password" silent="true" />
@@ -66,6 +67,12 @@ plugins.includes=${plugins.includes}</echo>
 		<antcall target="prepare-common" />
 	</target>
 
+	<target name="prepare-sql-server-2005">
+		<echo file="test.${user.name}.properties">db.type=sql-server-2005</echo>
+
+		<antcall target="prepare-common" />
+	</target>
+
 	<target name="prepare-portal-ext-properties">
 		<echo file="portal-impl/src/portal-ext.properties"><![CDATA[jdbc.default.jndi.name=
 
@@ -104,6 +111,12 @@ tunnel.servlet.hosts.allowed=]]></echo>
 						<equals arg1="${db.type}" arg2="oracle-10" />
 						<then>
 							<antcall target="rebuild-database-oracle-10" />
+						</then>
+					</elseif>
+					<elseif>
+						<equals arg1="${db.type}" arg2="sql-server-2005" />
+						<then>
+							<antcall target="rebuild-database-sql-server-2005" />
 						</then>
 					</elseif>
 				</if>
@@ -148,6 +161,51 @@ tunnel.servlet.hosts.allowed=]]></echo>
 		<exec executable="${plink.executable}">
 			<arg line="-pw ${vm.password} ${vm.username}@${db.oracle-10.host} cmd.exe /c rmdir /q /s C:\${temp.dir}" />
 		</exec>
+	</target>
+
+	<target name="rebuild-database-sql-server-2005">
+		<if>
+			<or>
+				<equals arg1="${sql.dir}" arg2="$${sql.dir}" />
+				<equals arg1="${sql.file}" arg2="$${sql.file}" />
+			</or>
+			<then>
+				<property name="sql.dir" value="sql\create\" />
+				<property name="sql.file" value="create-sql-server.sql" />
+			</then>
+		</if>
+
+		<tstamp>
+			<format property="tstamp.value" pattern="yyyyMMddkkmmssSSS" />
+		</tstamp>
+
+		<property name="temp.dir" value="temp\${db.sql-server-2005.schema}\${tstamp.value}\" />
+
+		<copy file="${sql.dir}${sql.file}" tofile="${sql.file}" />
+
+		<replace file="${sql.file}">
+			<replacefilter token="drop database lportal;" value="drop database ${db.sql-server-2005.schema};"/>
+			<replacefilter token="create database lportal;" value="create database ${db.sql-server-2005.schema};"/>
+			<replacefilter token="use lportal;" value="use ${db.sql-server-2005.schema};"/>
+		</replace>
+
+		<exec executable="${plink.executable}">
+			<arg line="-pw ${vm.password} ${vm.username}@${db.sql-server-2005.host} cmd.exe /c mkdir C:\${temp.dir}" />
+		</exec>
+
+		<exec executable="${pscp.executable}">
+			<arg line="-pw ${vm.password} ${sql.file} ${vm.username}@${db.sql-server-2005.host}:\${temp.dir}" />
+		</exec>
+
+		<exec executable="${plink.executable}">
+			<arg line="-pw ${vm.password} ${vm.username}@${db.sql-server-2005.host} osql -n -U ${db.sql-server-2005.username} -P ${db.sql-server-2005.password} -i C:\${temp.dir}\${sql.file}" />
+		</exec>
+
+		<exec executable="${plink.executable}">
+			<arg line="-pw ${vm.password} ${vm.username}@${db.sql-server-2005.host} cmd.exe /c rmdir /q /s C:\${temp.dir}" />
+		</exec>
+
+		<delete file="${sql.file}" />
 	</target>
 
 	<target name="revert-test-properties">
@@ -200,18 +258,6 @@ tunnel.servlet.hosts.allowed=]]></echo>
 		</exec>
 
 		<ant antfile="build-dist.xml" target="zip-portal-dependencies" />
-	</target>
-
-	<target name="run-jboss-tomcat-5.0">
-		<antcall target="run-simple-server">
-			<param name="simple.server.dir" value="${app.server.parent.dir}/jboss-tomcat-5.0.0" />
-			<param name="simple.server.bin.dir" value="${app.server.parent.dir}/jboss-tomcat-5.0.0/bin" />
-			<param name="simple.server.deploy.dir" value="${app.server.parent.dir}/jboss-tomcat-5.0.0/server/default/deploy" />
-			<param name="simple.server.portal.dir" value="${app.server.parent.dir}/jboss-tomcat-5.0.0/server/default/deploy/ROOT.war" />
-			<param name="simple.server.start.executable" value="run${file.suffix.bat}" />
-			<param name="simple.server.stop.executable" value="shutdown${file.suffix.bat}" />
-			<param name="simple.server.stop.executable.arg.line" value="-S" />
-		</antcall>
 	</target>
 
 	<target name="run-selenium-test">
@@ -300,42 +346,6 @@ tunnel.servlet.hosts.allowed=]]></echo>
 		</antcall>
 	</target>
 
-	<target name="run-weblogic-10.3">
-		<antcall target="rebuild-database" inheritAll="false" />
-
-		<parallel>
-			<exec executable="${plink.executable}">
-				<arg line="-pw ${vm.password} ${vm.username}@${vm.host} cmd.exe /c C:\bea\user_projects\domains\base_domain\bin\startWebLogic.cmd" />
-			</exec>
-
-			<sequential>
-				<waitfor>
-					<http url="http://${vm.host}:7001/console" />
-				</waitfor>
-
-				<antcall target="run-selenium-test" />
-
-				<exec executable="${plink.executable}">
-					<arg line="-pw ${vm.password} ${vm.username}@${vm.host} cmd.exe /c C:\bea\user_projects\domains\base_domain\bin\stopWebLogic.cmd" />
-				</exec>
-			</sequential>
-		</parallel>
-	</target>
-
-	<target name="run-websphere-6.0">
-		<antcall target="rebuild-database" inheritAll="false" />
-
-		<exec executable="${plink.executable}">
-			<arg line="-pw ${vm.password} ${vm.username}@${vm.host} cmd.exe /c C:\Progra~1\IBM\WebSphere\AppServer\profiles\AppSrv01\bin\startServer.bat server1" />
-		</exec>
-
-		<antcall target="run-selenium-test" />
-
-		<exec executable="${plink.executable}">
-			<arg line="-pw ${vm.password} ${vm.username}@${vm.host} cmd.exe /c C:\Progra~1\IBM\WebSphere\AppServer\profiles\AppSrv01\bin\stopServer.bat server1" />
-		</exec>
-	</target>
-
 	<target name="start-selenium">
 		<java jar="lib/development/selenium-server.jar" fork="true" spawn="true">
 			<arg line="-port 14444 -singleWindow" />
@@ -377,104 +387,8 @@ tunnel.servlet.hosts.allowed=]]></echo>
 		test-database-* tasks.
 		-->
 
-		<antcall target="test-database-oracle-10" />
-	</target>
-
-	<target name="test-database-oracle-10">
-		<antcall target="test-database-oracle-10-latest" />
-		<antcall target="test-database-oracle-10-5.1.0" />
-		<antcall target="test-database-oracle-10-5.1.1" />
-		<antcall target="test-database-oracle-10-5.1.2" />
-	</target>
-
-	<target name="test-database-oracle-10-5.1.0">
-		<antcall target="test-database-oracle-10-common">
-			<param name="sql.version" value="5.1.0" />
-		</antcall>
-	</target>
-
-	<target name="test-database-oracle-10-5.1.1">
-		<antcall target="test-database-oracle-10-common">
-			<param name="sql.version" value="5.1.1" />
-		</antcall>
-	</target>
-
-	<target name="test-database-oracle-10-5.1.2">
-		<antcall target="test-database-oracle-10-common">
-			<param name="sql.version" value="5.1.2" />
-		</antcall>
-	</target>
-
-	<target name="test-database-oracle-10-common">
-		<echo file="test.${user.name}.properties">db.type=oracle-10</echo>
-
-		<antcall target="prepare-portal-ext-properties" inheritAll="false" />
-
-		<ant dir="portal-impl" target="deploy-properties" inheritAll="false" />
-
-		<if>
-			<not>
-				<equals arg1="${sql.version}" arg2="$${sql.version}" />
-			</not>
-			<then>
-				<property name="sql.dir" value="sql\legacy\${sql.version}\create\" />
-				<property name="sql.file" value="create-oracle.sql" />
-			</then>
-		</if>
-
-		<antcall target="rebuild-database" inheritAll="false">
-			<param name="sql.dir" value="${sql.dir}" />
-			<param name="sql.file" value="${sql.file}" />
-		</antcall>
-
-		<antcall target="start-selenium" />
-
-		<antcall target="run-tomcat-5.5">
-			<param name="skip.rebuild-database" value="true" />
-			<param name="test.class" value="SmokeTestSuite" />
-		</antcall>
-
-		<antcall target="stop-selenium" />
-	</target>
-
-	<target name="test-database-oracle-10-latest">
-		<echo file="create-${db.oracle-10.username}.sql"><![CDATA[drop user &1 cascade;
-create user &1 identified by &2;
-grant connect,resource to &1;
-exit;]]></echo>
-
-		<antcall target="test-database-oracle-10-common">
-			<param name="sql.dir" value="" />
-			<param name="sql.file" value="create-${db.oracle-10.username}.sql" />
-		</antcall>
-
-		<delete file="create-${db.oracle-10.username}.sql" />
-	</target>
-
-	<target name="test-jboss-tomcat-5.0-common">
-		<ant antfile="build-dist.xml" target="build-dist-jboss-tomcat-5.0" />
-
-		<antcall target="revert-test-properties" />
-
-		<antcall target="start-selenium" />
-
-		<antcall target="run-jboss-tomcat-5.0">
-			<param name="test.class" value="PortalWebTestSuite" />
-		</antcall>
-
-		<antcall target="stop-selenium" />
-	</target>
-
-	<target name="test-jboss-tomcat-5.0-mysql-5.0">
-		<antcall target="prepare-mysql-5.0" />
-
-		<antcall target="test-jboss-tomcat-5.0-common" />
-	</target>
-
-	<target name="test-jboss-tomcat-5.0-oracle-10">
-		<antcall target="prepare-oracle-10" />
-
-		<antcall target="test-jboss-tomcat-5.0-common" />
+		<ant antfile="build-test-oracle.xml" target="test-database-oracle-10" inheritAll="false" />
+		<ant antfile="build-test-sql-server.xml" target="test-database-sql-server-2005" inheritAll="false" />
 	</target>
 
 	<target name="test-tck">
@@ -571,299 +485,5 @@ work.dir=${basedir.unix}/tools/tck/work</echo>
 		</antcall>
 
 		<antcall target="stop-selenium" />
-	</target>
-
-	<target name="test-tomcat-5.5-common">
-		<ant antfile="build-dist.xml" target="build-dist-tomcat-5.5" />
-
-		<antcall target="revert-test-properties" />
-
-		<antcall target="start-selenium" />
-
-		<antcall target="run-tomcat-5.5">
-			<param name="test.class" value="PortalWebTestSuite" />
-		</antcall>
-
-		<antcall target="run-tomcat-5.5">
-			<param name="test.class" value="ControlPanelTestSuite" />
-		</antcall>
-
-		<antcall target="run-tomcat-5.5">
-			<param name="test.class" value="PermissionsTestSuite" />
-		</antcall>
-
-		<antcall target="run-tomcat-5.5">
-			<param name="test.class" value="Plugins1TestSuite" />
-			<param name="portlet.plugins.includes" value="alfresco-content-portlet,analog-clock-portlet,chat-portlet,flash-portlet,google-adsense-portlet,google-gadget-portlet,google-maps-portlet,google-search-portlet,ip-geocoder-portlet,mail-portlet,release-tools-portlet,ruby-console-portlet,sample-dao-portlet,sample-groovy-portlet,sample-hibernate-portlet,sample-icefaces-ipc-ajax-push-portlet,sample-icefaces-jsf-1.1-myfaces-jsp-portlet,sample-icefaces-jsf-1.1-sun-facelets-portlet,sample-icefaces-jsf-1.1-sun-jsp-portlet,sample-icefaces-jsf-1.2-sun-facelets-portlet,sample-javascript-portlet,sample-jsf-1.1-myfaces-facelets-portlet,sample-jsf-1.1-myfaces-jsp-portlet,sample-jsf-1.1-sun-facelets-portlet,sample-jsf-1.1-sun-jsp-portlet,sample-jsf-1.2-sun-facelets-portlet,sample-jsf-1.2-sun-jsp-portlet,sample-json-portlet,sample-jsp-portlet,sample-lar-portlet,sample-laszlo-portlet" />
-		</antcall>
-
-		<antcall target="run-tomcat-5.5">
-			<param name="test.class" value="Plugins2TestSuite" />
-			<param name="portlet.plugins.includes" value="sample-localized-portlet,sample-orbeon-forms-portlet,sample-permissions-portlet,sample-php-portlet,sample-portal-client-portlet,sample-portal-service-portlet,sample-python-portlet,sample-ruby-portlet,sample-search-container-portlet,sample-service-builder-portlet,sample-sign-in-portlet,sample-spring-portlet,sample-struts-liferay-portlet,sample-struts-portlet,sample-tapestry-portlet,sample-test-dependency-able-portlet,sample-test-dependency-baker-portlet,sample-test-dependency-charlie-portlet,sample-test-dependency-dog-portlet,sample-test-dependency-easy-portlet,sample-test-dependency-fox-portlet,sample-test-hook-portlet,sample-test-portlet,sample-ui-taglibs-portlet,sample-wap-portlet,stocks-portlet,sun-bookmark-portlet,sun-elluminate-portlet,sun-flickr-portlet,sun-iframe-portlet,sun-mashup-portlet,sun-notepad-portlet,sun-photoshow-ajax-portlet,sun-privacy-guard-portlet,sun-rss-portlet,sun-showtime-portlet,sun-tour-ipc-portlet,sun-video-portlet,sun-weather-portlet,twitter-portlet,weather-portlet,web-form-portlet,westminster-catechism-portlet,widget-consumer-portlet,wiki-navigation-portlet,wol-portlet" />
-		</antcall>
-
-		<antcall target="run-tomcat-5.5">
-			<param name="test.class" value="StagingTestSuite" />
-		</antcall>
-
-		<antcall target="stop-selenium" />
-	</target>
-
-	<target name="test-tomcat-5.5-mysql-5.0">
-		<antcall target="prepare-mysql-5.0" />
-
-		<antcall target="test-tomcat-5.5-common" />
-	</target>
-
-	<target name="test-tomcat-5.5-oracle-10">
-		<antcall target="prepare-oracle-10" />
-
-		<antcall target="test-tomcat-5.5-common" />
-	</target>
-
-	<target name="test-weblogic-10.3-common">
-		<antcall target="prepare-vm-server">
-			<param name="vm.vmdk.suffix" value="weblogic-10.3" />
-		</antcall>
-
-		<tstamp>
-			<format property="tstamp.value" pattern="yyyyMMddkkmmssSSS" />
-		</tstamp>
-
-		<unzip src="dist/liferay-portal-dependencies-${lp.version}.zip" dest="${tstamp.value}">
-			<mapper type="flatten" />
-		</unzip>
-
-		<if>
-			<not>
-				<equals arg1="${jdbc.drivers.optional.dir}" arg2="$${jdbc.drivers.optional.dir}" />
-			</not>
-			<then>
-				<copy todir="${tstamp.value}">
-					<fileset
-						dir="${jdbc.drivers.optional.dir}"
-						includes="*.jar"
-					/>
-				</copy>
-			</then>
-		</if>
-
-		<exec executable="${pscp.executable}">
-			<arg line="-pw ${vm.password} lib\development\mysql.jar ${tstamp.value}\*.jar ${vm.username}@${vm.host}:/bea/user_projects/domains/base_domain/lib" />
-		</exec>
-
-		<delete dir="${tstamp.value}" />
-
-		<!--<exec executable="${plink.executable}">
-			<arg line="-pw ${vm.password} ${vm.username}@${vm.host} cmd.exe /c mkdir C:\bea\jdk160_05\jre\lib\endorsed" />
-		</exec>
-
-		<exec executable="${pscp.executable}">
-			<arg line="-pw ${vm.password} lib\portal\rhino.jar lib\portal\serializer.jar lib\portal\xalan.jar ${vm.username}@${vm.host}:/bea/jdk160_05/jre/lib/endorsed" />
-		</exec>
-
-		<exec executable="${plink.executable}">
-			<arg line="-pw ${vm.password} ${vm.username}@${vm.host} cmd.exe /c mkdir C:\bea\jrockit_160_05\jre\lib\endorsed" />
-		</exec>
-
-		<exec executable="${pscp.executable}">
-			<arg line="-pw ${vm.password} lib\portal\rhino.jar lib\portal\serializer.jar lib\portal\xalan.jar ${vm.username}@${vm.host}:/bea/jrockit_160_05/jre/lib/endorsed" />
-		</exec>-->
-
-		<exec executable="${pscp.executable}">
-			<arg line="-pw ${vm.password} ${vm.username}@${vm.host}:/bea/user_projects/domains/base_domain/bin/setDomainEnv.cmd setDomainEnv.cmd" />
-		</exec>
-
-		<replace file="setDomainEnv.cmd">
-			<replacefilter token="set MEM_ARGS=-Xms256m -Xmx512m" value="set MEM_ARGS=-Xms256m -Xmx1024m" />
-			<replacefilter token="set MEM_MAX_PERM_SIZE=-XX:MaxPermSize=128m" value="set MEM_MAX_PERM_SIZE=-XX:MaxPermSize=256m" />
-		</replace>
-
-		<exec executable="${pscp.executable}">
-			<arg line="-pw ${vm.password} setDomainEnv.cmd ${vm.username}@${vm.host}:/bea/user_projects/domains/base_domain/bin/setDomainEnv.cmd" />
-		</exec>
-
-		<delete file="setDomainEnv.cmd" />
-
-		<parallel>
-			<exec executable="${plink.executable}">
-				<arg line="-pw ${vm.password} ${vm.username}@${vm.host} cmd.exe /c C:\bea\user_projects\domains\base_domain\bin\startWebLogic.cmd" />
-			</exec>
-
-			<sequential>
-				<waitfor>
-					<http url="http://${vm.host}:7001/console" />
-				</waitfor>
-
-				<exec executable="${plink.executable}">
-					<arg line="-pw ${vm.password} ${vm.username}@${vm.host} C:\bea\jdk160_05\bin\java.exe -cp C:\bea\wlserver_10.3\server\lib\weblogic.jar -Xmx256m weblogic.Deployer -adminurl t3://localhost:7001 -user system -password password -deploy -upload C:\liferay-portal-${lp.version}.war" />
-				</exec>
-
-				<exec executable="${plink.executable}">
-					<arg line="-pw ${vm.password} ${vm.username}@${vm.host} C:\bea\jdk160_05\bin\java.exe -cp C:\bea\wlserver_10.3\server\lib\weblogic.jar -Xmx256m weblogic.Deployer -adminurl t3://localhost:7001 -user system -password password -deploy -upload C:\tunnel-web.war" />
-				</exec>
-
-				<exec executable="${plink.executable}">
-					<arg line="-pw ${vm.password} ${vm.username}@${vm.host} cmd.exe /c C:\bea\user_projects\domains\base_domain\bin\stopWebLogic.cmd" />
-				</exec>
-			</sequential>
-		</parallel>
-
-		<antcall target="revert-test-properties" />
-
-		<replace
-			file="portal-impl/test/test-portal-impl.properties"
-			token="localhost:8080"
-			value="${vm.host}:7001"
-		/>
-
-		<replace
-			file="portal-web/test/test-portal-web.properties"
-			token="localhost:8080"
-			value="${vm.host}:7001"
-		/>
-
-		<antcall target="start-selenium" />
-
-		<antcall target="run-weblogic-10.3">
-			<param name="test.class" value="PortalWebTestSuite" />
-		</antcall>
-
-		<antcall target="stop-selenium" />
-
-		<exec dir="${vm.drive}/${vm.host}" executable="${vmware-cmd.executable}">
-			<arg line="${vm.drive}\${vm.host}\${vm.host}.vmx stop hard" />
-		</exec>
-	</target>
-
-	<target name="test-weblogic-10.3-mysql-5.0">
-		<antcall target="prepare-mysql-5.0" />
-
-		<antcall target="test-weblogic-10.3-common" />
-	</target>
-
-	<target name="test-weblogic-10.3-oracle-10">
-		<antcall target="prepare-oracle-10" />
-
-		<antcall target="test-weblogic-10.3-common" />
-	</target>
-
-	<target name="test-websphere-6.1-common">
-		<antcall target="prepare-vm-server">
-			<param name="vm.vmdk.suffix" value="websphere-6.1.0.21" />
-		</antcall>
-
-		<tstamp>
-			<format property="tstamp.value" pattern="yyyyMMddkkmmssSSS" />
-		</tstamp>
-
-		<unzip src="dist/liferay-portal-dependencies-${lp.version}.zip" dest="${tstamp.value}">
-			<mapper type="flatten" />
-		</unzip>
-
-		<if>
-			<not>
-				<equals arg1="${jdbc.drivers.optional.dir}" arg2="$${jdbc.drivers.optional.dir}" />
-			</not>
-			<then>
-				<copy todir="${tstamp.value}">
-					<fileset
-						dir="${jdbc.drivers.optional.dir}"
-						includes="*.jar"
-					/>
-				</copy>
-			</then>
-		</if>
-
-		<exec executable="${pscp.executable}">
-			<arg line="-pw ${vm.password} lib\development\mysql.jar ${tstamp.value}\*.jar ${vm.username}@${vm.host}:/Progra~1/IBM/WebSphere/AppServer/lib/ext" />
-		</exec>
-
-		<delete dir="${tstamp.value}" />
-
-		<exec executable="${plink.executable}">
-			<arg line="-pw ${vm.password} ${vm.username}@${vm.host} cmd.exe /c move C:\Progra~1\IBM\WebSphere\AppServer\lib\ext\portlet.jar C:\Progra~1\IBM\WebSphere\AppServer\java\jre\lib\ext" />
-		</exec>
-
-		<exec executable="${plink.executable}">
-			<arg line="-pw ${vm.password} ${vm.username}@${vm.host} cmd.exe /c C:\Progra~1\IBM\WebSphere\AppServer\profiles\AppSrv01\bin\startServer.bat server1" />
-		</exec>
-
-		<echo file="wsadmin.py">print AdminApp.list()
-
-print AdminApp.uninstall('DefaultApplication')
-
-print AdminConfig.save()
-
-print AdminApp.install('C:/liferay-portal-${lp.version}.war', '[-appname liferay-portal -contextroot /]')
-
-print AdminConfig.save()
-
-print AdminApp.list()
-
-print AdminApp.install('C:/tunnel-web.war', '[-appname liferay-tunnel-web -contextroot /tunnel-web]')
-
-print AdminConfig.save()
-
-print AdminApp.list()
-
-applicationManager = AdminControl.queryNames('type=ApplicationManager,process=server1,*')
-
-print applicationManager
-
-print AdminControl.invoke(applicationManager, 'startApplication', 'liferay-portal')
-print AdminControl.invoke(applicationManager, 'startApplication', 'liferay-tunnel-web')</echo>
-
-		<exec executable="${pscp.executable}">
-			<arg line="-pw ${vm.password} wsadmin.py ${vm.username}@${vm.host}:/" />
-		</exec>
-
-		<delete file="wsadmin.py" />
-
-		<exec executable="${plink.executable}">
-			<arg line="-pw ${vm.password} ${vm.username}@${vm.host} cmd.exe /c C:\Progra~1\IBM\WebSphere\AppServer\bin\wsadmin.bat -f C:\wsadmin.py" />
-		</exec>
-
-		<exec executable="${plink.executable}">
-			<arg line="-pw ${vm.password} ${vm.username}@${vm.host} cmd.exe /c C:\Progra~1\IBM\WebSphere\AppServer\profiles\AppSrv01\bin\stopServer.bat server1" />
-		</exec>
-
-		<antcall target="revert-test-properties" />
-
-		<replace
-			file="portal-impl/test/test-portal-impl.properties"
-			token="localhost:8080"
-			value="${vm.host}:9080"
-		/>
-
-		<replace
-			file="portal-web/test/test-portal-web.properties"
-			token="localhost:8080"
-			value="${vm.host}:9080"
-		/>
-
-		<antcall target="start-selenium" />
-
-		<antcall target="run-websphere-6.0">
-			<param name="test.class" value="PortalWebTestSuite" />
-		</antcall>
-
-		<antcall target="stop-selenium" />
-
-		<exec dir="${vm.drive}/${vm.host}" executable="${vmware-cmd.executable}">
-			<arg line="${vm.drive}\${vm.host}\${vm.host}.vmx stop hard" />
-		</exec>
-	</target>
-
-	<target name="test-websphere-6.1-mysql-5.0">
-		<antcall target="prepare-mysql-5.0" />
-
-		<antcall target="test-websphere-6.1-common" />
-	</target>
-
-	<target name="test-websphere-6.1-oracle-10">
-		<antcall target="prepare-oracle-10" />
-
-		<antcall target="test-websphere-6.1-common" />
 	</target>
 </project>

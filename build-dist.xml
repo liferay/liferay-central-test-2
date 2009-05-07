@@ -244,7 +244,7 @@
 			/>
 			<zipfileset
 				dir="lib/development"
-				includes="hsql.jar,mysql.jar,postgresql.jar"
+				includes="hsql.jar,jtds.jar,mysql.jar,postgresql.jar"
 			/>
 			<zipfileset
 				dir="lib/global"
