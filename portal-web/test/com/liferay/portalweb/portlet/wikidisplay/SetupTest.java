@@ -239,6 +239,67 @@ public class SetupTest extends BaseTestCase {
 				selenium.click(RuntimeVariables.replace(
 						"//input[@value='Save']"));
 				selenium.waitForPageToLoad("30000");
+				selenium.click(RuntimeVariables.replace(
+						"link=WD Setup Test Page"));
+				selenium.waitForPageToLoad("30000");
+				selenium.click(RuntimeVariables.replace(
+						"//img[@alt='Manage Wikis']"));
+				selenium.waitForPageToLoad("30000");
+				selenium.click(RuntimeVariables.replace(
+						"//input[@value='Add Wiki']"));
+				selenium.waitForPageToLoad("30000");
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isElementPresent("_36_name")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
+				selenium.type("_36_name",
+					RuntimeVariables.replace("Second Wiki Test"));
+				selenium.type("_36_description",
+					RuntimeVariables.replace("This is a second wiki test!"));
+				selenium.click(RuntimeVariables.replace(
+						"//input[@value='Save']"));
+				selenium.waitForPageToLoad("30000");
+				selenium.click(RuntimeVariables.replace("link=Second Wiki Test"));
+				selenium.waitForPageToLoad("30000");
+				selenium.click(RuntimeVariables.replace(
+						"link=This page is empty. Edit it to add some text."));
+				selenium.waitForPageToLoad("30000");
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isElementPresent("_36_content")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
+				selenium.type("_36_content",
+					RuntimeVariables.replace(
+						"==WD Setup Second Wiki Test Article==\n\n*This is a WD wiki test article!"));
+				selenium.click(RuntimeVariables.replace(
+						"//input[@value='Save']"));
+				selenium.waitForPageToLoad("30000");
 
 			case 100:
 				label = -1;

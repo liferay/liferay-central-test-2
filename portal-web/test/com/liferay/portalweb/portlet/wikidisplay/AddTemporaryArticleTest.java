@@ -26,13 +26,13 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="EditConfigurationsTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddTemporaryArticleTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class EditConfigurationsTest extends BaseTestCase {
-	public void testEditConfigurations() throws Exception {
+public class AddTemporaryArticleTest extends BaseTestCase {
+	public void testAddTemporaryArticle() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -51,7 +51,7 @@ public class EditConfigurationsTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Wiki Display Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//img[@alt='Configuration']"));
+		selenium.click(RuntimeVariables.replace("link=Add Child Page"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -60,7 +60,7 @@ public class EditConfigurationsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_86_nodeId")) {
+				if (selenium.isElementPresent("//td[2]/input")) {
 					break;
 				}
 			}
@@ -70,45 +70,19 @@ public class EditConfigurationsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.select("_86_nodeId",
-			RuntimeVariables.replace("label=Second Wiki Test"));
+		selenium.typeKeys("//td[2]/input",
+			RuntimeVariables.replace("Delete Me!"));
+		selenium.type("//td[2]/input", RuntimeVariables.replace("Delete Me!"));
+		selenium.type("//textarea",
+			RuntimeVariables.replace(
+				"== Delete Me! ==\n\n=== Reasons Why to Delete Me ===\n\n#This is a test.\n#I don't like Star Wars.\n#I put my left sock on before my right sock."));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
-				"You have successfully updated the setup."));
-		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
+				"Your request processed successfully."));
+		assertTrue(selenium.isElementPresent("link=Delete Me!"));
+		selenium.click(RuntimeVariables.replace("link=Delete Me!"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("WD Setup Second Wiki Test Article"));
-		assertTrue(selenium.isTextPresent("This is a WD wiki test article!"));
-		assertFalse(selenium.isTextPresent("WD Setup Wiki Test Article"));
-		selenium.click(RuntimeVariables.replace("//img[@alt='Configuration']"));
-		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_86_nodeId")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.select("_86_nodeId", RuntimeVariables.replace("label=Main"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"You have successfully updated the setup."));
-		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("WD Setup Wiki Test Article"));
-		assertTrue(selenium.isTextPresent("This is a WD wiki test article!"));
-		assertFalse(selenium.isTextPresent("WD Setup Second Wiki Test Article"));
+		assertTrue(selenium.isTextPresent("Reasons Why to Delete Me"));
 	}
 }

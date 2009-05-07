@@ -148,6 +148,66 @@
 	<td>//input[@value='Save']</td>
 	<td></td>
 </tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=WD Setup Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Manage Wikis']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Add Wiki']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>_36_name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_36_name</td>
+	<td>Second Wiki Test</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_36_description</td>
+	<td>This is a second wiki test!</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Save']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Second Wiki Test</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=This page is empty. Edit it to add some text.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>_36_content</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_36_content</td>
+	<td>==WD Setup Second Wiki Test Article==<br /><br />*This is a WD wiki test article!</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Save']</td>
+	<td></td>
+</tr>
 
 </tbody></table>
 </body>

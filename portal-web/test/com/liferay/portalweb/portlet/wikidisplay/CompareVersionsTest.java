@@ -26,13 +26,13 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="EditConfigurationsTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="CompareVersionsTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class EditConfigurationsTest extends BaseTestCase {
-	public void testEditConfigurations() throws Exception {
+public class CompareVersionsTest extends BaseTestCase {
+	public void testCompareVersions() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -51,7 +51,9 @@ public class EditConfigurationsTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Wiki Display Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//img[@alt='Configuration']"));
+		selenium.click(RuntimeVariables.replace("link=Details"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("link=History"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -60,7 +62,7 @@ public class EditConfigurationsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_86_nodeId")) {
+				if (selenium.isElementPresent("//td[1]/input")) {
 					break;
 				}
 			}
@@ -70,19 +72,8 @@ public class EditConfigurationsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.select("_86_nodeId",
-			RuntimeVariables.replace("label=Second Wiki Test"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"You have successfully updated the setup."));
-		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("WD Setup Second Wiki Test Article"));
-		assertTrue(selenium.isTextPresent("This is a WD wiki test article!"));
-		assertFalse(selenium.isTextPresent("WD Setup Wiki Test Article"));
-		selenium.click(RuntimeVariables.replace("//img[@alt='Configuration']"));
-		selenium.waitForPageToLoad("30000");
+		selenium.click("//td[1]/input");
+		assertTrue(selenium.isChecked("//td[1]/input"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -90,7 +81,7 @@ public class EditConfigurationsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_86_nodeId")) {
+				if (selenium.isElementPresent("//tr[6]/td[1]/input")) {
 					break;
 				}
 			}
@@ -100,15 +91,18 @@ public class EditConfigurationsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.select("_86_nodeId", RuntimeVariables.replace("label=Main"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.click("//tr[6]/td[1]/input");
+		assertTrue(selenium.isChecked("//tr[6]/td[1]/input"));
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Compare Versions']"));
 		selenium.waitForPageToLoad("30000");
+		assertEquals("FrontPage 1.3",
+			selenium.getText("//div[2]/div/div/table/tbody/tr[1]/td[2]"));
+		assertEquals("FrontPage 1.0",
+			selenium.getText("//div[2]/div/div/table/tbody/tr[1]/td[1]"));
+		assertTrue(selenium.isTextPresent("==WD Setup Wiki Test Article=="));
+		assertTrue(selenium.isTextPresent("*This is a WD wiki test article!"));
 		assertTrue(selenium.isTextPresent(
-				"You have successfully updated the setup."));
-		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("WD Setup Wiki Test Article"));
-		assertTrue(selenium.isTextPresent("This is a WD wiki test article!"));
-		assertFalse(selenium.isTextPresent("WD Setup Second Wiki Test Article"));
+				"Oh NOES! I've made a minor change. Please revert this!"));
 	}
 }

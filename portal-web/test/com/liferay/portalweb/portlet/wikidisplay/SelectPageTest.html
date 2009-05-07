@@ -1,12 +1,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>EditConfigurationsTest</title>
+<title>SelectPageTest</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">EditConfigurationsTest</td></tr>
+<tr><td rowspan="1" colspan="3">SelectPageTest</td></tr>
 </thead><tbody>
 <tr>
 	<td>waitForElementPresent</td>
@@ -20,18 +20,13 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//img[@alt='Configuration']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>_86_nodeId</td>
+	<td>link=Configuration</td>
 	<td></td>
 </tr>
 <tr>
 	<td>select</td>
-	<td>_86_nodeId</td>
-	<td>label=Second Wiki Test</td>
+	<td>_86_title</td>
+	<td>label=Link Me 1</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -49,34 +44,29 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
-	<td>WD Setup Second Wiki Test Article</td>
+	<td>assertElementPresent</td>
+	<td>Link=Link Me 2</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
-	<td>This is a WD wiki test article!</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextNotPresent</td>
-	<td>WD Setup Wiki Test Article</td>
+	<td>assertElementNotPresent</td>
+	<td>Link=Link Me 1</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//img[@alt='Configuration']</td>
+	<td>link=Wiki Display Test Page</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>_86_nodeId</td>
+	<td>clickAndWait</td>
+	<td>link=Configuration</td>
 	<td></td>
 </tr>
 <tr>
 	<td>select</td>
-	<td>_86_nodeId</td>
-	<td>label=Main</td>
+	<td>_86_title</td>
+	<td>label=Link Me 2</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -94,18 +84,38 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
-	<td>WD Setup Wiki Test Article</td>
+	<td>assertElementPresent</td>
+	<td>Link=Link Me 1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>Link=Link Me 2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Configuration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>_86_title</td>
+	<td>label=FrontPage</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Save']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>This is a WD wiki test article!</td>
+	<td>You have successfully updated the setup.</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextNotPresent</td>
-	<td>WD Setup Second Wiki Test Article</td>
+	<td>clickAndWait</td>
+	<td>link=Return to Full Page</td>
 	<td></td>
 </tr>
 

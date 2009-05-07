@@ -26,13 +26,13 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="EditConfigurationsTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddOrphanedArticlesTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class EditConfigurationsTest extends BaseTestCase {
-	public void testEditConfigurations() throws Exception {
+public class AddOrphanedArticlesTest extends BaseTestCase {
+	public void testAddOrphanedArticles() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -51,7 +51,7 @@ public class EditConfigurationsTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Wiki Display Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//img[@alt='Configuration']"));
+		selenium.click(RuntimeVariables.replace("link=Add Child Page"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -60,7 +60,7 @@ public class EditConfigurationsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_86_nodeId")) {
+				if (selenium.isElementPresent("//td[2]/input")) {
 					break;
 				}
 			}
@@ -70,18 +70,17 @@ public class EditConfigurationsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.select("_86_nodeId",
-			RuntimeVariables.replace("label=Second Wiki Test"));
+		selenium.typeKeys("//td[2]/input", RuntimeVariables.replace("Link Me 1"));
+		selenium.type("//td[2]/input", RuntimeVariables.replace("Link Me 1"));
+		selenium.type("//textarea",
+			RuntimeVariables.replace(
+				"Hi Administrator! Hope you are well! Please link me to another page!\n\n-testing"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
-				"You have successfully updated the setup."));
-		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("WD Setup Second Wiki Test Article"));
-		assertTrue(selenium.isTextPresent("This is a WD wiki test article!"));
-		assertFalse(selenium.isTextPresent("WD Setup Wiki Test Article"));
-		selenium.click(RuntimeVariables.replace("//img[@alt='Configuration']"));
+				"Your request processed successfully."));
+		assertTrue(selenium.isElementPresent("link=Link Me 1"));
+		selenium.click(RuntimeVariables.replace("link=Add Child Page"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -90,7 +89,7 @@ public class EditConfigurationsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_86_nodeId")) {
+				if (selenium.isElementPresent("//td[2]/input")) {
 					break;
 				}
 			}
@@ -100,15 +99,15 @@ public class EditConfigurationsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.select("_86_nodeId", RuntimeVariables.replace("label=Main"));
+		selenium.typeKeys("//td[2]/input", RuntimeVariables.replace("Link Me 2"));
+		selenium.type("//td[2]/input", RuntimeVariables.replace("Link Me 2"));
+		selenium.type("//textarea",
+			RuntimeVariables.replace(
+				"Hi Administrator!\n\nI made another mistake! Oh me. Please link this article to another!\n\n-rj"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
-				"You have successfully updated the setup."));
-		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("WD Setup Wiki Test Article"));
-		assertTrue(selenium.isTextPresent("This is a WD wiki test article!"));
-		assertFalse(selenium.isTextPresent("WD Setup Second Wiki Test Article"));
+				"Your request processed successfully."));
+		assertTrue(selenium.isElementPresent("link=Link Me 2"));
 	}
 }

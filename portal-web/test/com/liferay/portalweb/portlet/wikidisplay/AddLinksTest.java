@@ -26,13 +26,13 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="EditConfigurationsTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddLinksTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class EditConfigurationsTest extends BaseTestCase {
-	public void testEditConfigurations() throws Exception {
+public class AddLinksTest extends BaseTestCase {
+	public void testAddLinks() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -51,7 +51,7 @@ public class EditConfigurationsTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Wiki Display Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//img[@alt='Configuration']"));
+		selenium.click(RuntimeVariables.replace("//img[@alt='Edit']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -60,7 +60,7 @@ public class EditConfigurationsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_86_nodeId")) {
+				if (selenium.isElementPresent("//textarea")) {
 					break;
 				}
 			}
@@ -70,18 +70,16 @@ public class EditConfigurationsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.select("_86_nodeId",
-			RuntimeVariables.replace("label=Second Wiki Test"));
+		selenium.type("//textarea",
+			RuntimeVariables.replace(
+				"<<TableOfContents>>\n\n== WD Setup Edited Wiki Test Article ==\n\n====Yes this is a second test article ====\n\nI love Liferay! This Wiki has been EDITED!\n\n[[Link Me 1]]\n[[Link Me 2]]"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
-				"You have successfully updated the setup."));
-		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
+				"Your request processed successfully."));
+		selenium.click(RuntimeVariables.replace("link=Link Me 1"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("WD Setup Second Wiki Test Article"));
-		assertTrue(selenium.isTextPresent("This is a WD wiki test article!"));
-		assertFalse(selenium.isTextPresent("WD Setup Wiki Test Article"));
-		selenium.click(RuntimeVariables.replace("//img[@alt='Configuration']"));
+		selenium.click(RuntimeVariables.replace("//img[@alt='Edit']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -90,7 +88,7 @@ public class EditConfigurationsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_86_nodeId")) {
+				if (selenium.isElementPresent("//textarea")) {
 					break;
 				}
 			}
@@ -100,15 +98,40 @@ public class EditConfigurationsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.select("_86_nodeId", RuntimeVariables.replace("label=Main"));
+		selenium.type("//textarea",
+			RuntimeVariables.replace(
+				"Hi Administrator! Hope you are well! Please link me to another page!\n\n-testing\n\n[[FrontPage]]\n\n[[Link Me 2]]"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
-				"You have successfully updated the setup."));
-		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
+				"Your request processed successfully."));
+		selenium.click(RuntimeVariables.replace("link=Link Me 2"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("WD Setup Wiki Test Article"));
-		assertTrue(selenium.isTextPresent("This is a WD wiki test article!"));
-		assertFalse(selenium.isTextPresent("WD Setup Second Wiki Test Article"));
+		selenium.click(RuntimeVariables.replace("//img[@alt='Edit']"));
+		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//textarea")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.type("//textarea",
+			RuntimeVariables.replace(
+				"Hi Administrator!\n\nI made another mistake! Oh me. Please link this article to another!\n\n-rj\n\n[[FrontPage]]\n\n[[Link Me 1]]"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
 	}
 }

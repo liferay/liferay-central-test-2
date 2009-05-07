@@ -26,13 +26,13 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="EditConfigurationsTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="VerifyPageFormatTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class EditConfigurationsTest extends BaseTestCase {
-	public void testEditConfigurations() throws Exception {
+public class VerifyPageFormatTest extends BaseTestCase {
+	public void testVerifyPageFormat() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -51,8 +51,11 @@ public class EditConfigurationsTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Wiki Display Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//img[@alt='Configuration']"));
+		selenium.click(RuntimeVariables.replace("link=Add Child Page"));
 		selenium.waitForPageToLoad("30000");
+		selenium.select("//select", "label=HTML");
+		selenium.waitForPageToLoad("30000");
+		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -60,7 +63,7 @@ public class EditConfigurationsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_86_nodeId")) {
+				if (selenium.isElementPresent("//td[2]/input")) {
 					break;
 				}
 			}
@@ -70,45 +73,27 @@ public class EditConfigurationsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.select("_86_nodeId",
-			RuntimeVariables.replace("label=Second Wiki Test"));
+		selenium.type("//td[2]/input",
+			RuntimeVariables.replace("This is Test Page Format"));
+		selenium.click(
+			"//td[@id='xToolbar']/table[8]/tbody/tr/td[2]/div/table/tbody/tr/td[1]/img");
+		selenium.typeKeys("//td[@id='xEditingArea']/textarea",
+			RuntimeVariables.replace(
+				"<a href=http://www.lifera.com>Welcome to LIFERA</a>"));
+		selenium.type("//td[@id='xEditingArea']/textarea",
+			RuntimeVariables.replace(
+				"<a href=http://www.liferay.com>Welcome to LIFERAY</a>"));
+		selenium.selectFrame("relative=top");
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
-				"You have successfully updated the setup."));
-		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
+				"Your request processed successfully."));
+		assertTrue(selenium.isElementPresent("link=This is Test Page Format"));
+		selenium.click(RuntimeVariables.replace("link=This is Test Page Format"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("WD Setup Second Wiki Test Article"));
-		assertTrue(selenium.isTextPresent("This is a WD wiki test article!"));
-		assertFalse(selenium.isTextPresent("WD Setup Wiki Test Article"));
-		selenium.click(RuntimeVariables.replace("//img[@alt='Configuration']"));
+		assertTrue(selenium.isElementPresent("link=Welcome to LIFERAY"));
+		selenium.click(RuntimeVariables.replace("link=Details"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_86_nodeId")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.select("_86_nodeId", RuntimeVariables.replace("label=Main"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"You have successfully updated the setup."));
-		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("WD Setup Wiki Test Article"));
-		assertTrue(selenium.isTextPresent("This is a WD wiki test article!"));
-		assertFalse(selenium.isTextPresent("WD Setup Second Wiki Test Article"));
+		assertEquals("HTML", selenium.getText("//tr[2]/td"));
 	}
 }

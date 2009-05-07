@@ -1,0 +1,54 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>AddNullCommentTest</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">AddNullCommentTest</td></tr>
+</thead><tbody>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Wiki Display Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Wiki Display Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Add Comment</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//textarea</td>
+	<td></td>
+</tr>
+<tr>
+	<td>typeKeys</td>
+	<td>//textarea</td>
+	<td>          </td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//textarea</td>
+	<td>          </td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//tr[3]/td/input[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>You have entered invalid data. Please try again.</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>
