@@ -30,7 +30,6 @@ import com.liferay.portal.kernel.deploy.hot.HotDeployEvent;
 import com.liferay.portal.kernel.deploy.hot.HotDeployException;
 import com.liferay.portal.kernel.events.Action;
 import com.liferay.portal.kernel.events.ActionWrapper;
-import com.liferay.portal.kernel.events.InvokerSimpleAction;
 import com.liferay.portal.kernel.events.SessionAction;
 import com.liferay.portal.kernel.events.SessionActionWrapper;
 import com.liferay.portal.kernel.events.SimpleAction;
@@ -566,9 +565,9 @@ public class HookHotDeployListener
 		throws Exception {
 
 		if (eventName.equals(APPLICATION_STARTUP_EVENTS)) {
-			SimpleAction simpleAction = new InvokerSimpleAction(
+			SimpleAction simpleAction = 
 				(SimpleAction)portletClassLoader.loadClass(
-					eventClass).newInstance());
+					eventClass).newInstance();
 
 			simpleAction = new SimpleActionWrapper(
 				simpleAction, portletClassLoader);
