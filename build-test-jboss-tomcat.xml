@@ -40,4 +40,10 @@
 
 		<antcall target="test-jboss-tomcat-5.0-common" />
 	</target>
+
+	<target name="test-jboss-tomcat-5.0-sql-server-2005">
+		<antcall target="prepare-sql-server-2005" />
+
+		<antcall target="test-jboss-tomcat-5.0-common" />
+	</target>
 </project>
