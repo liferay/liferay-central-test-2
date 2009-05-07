@@ -755,6 +755,7 @@ public class SourceFormatter {
 				"**\\service\\http\\*ServiceHttp.java",
 				"**\\service\\http\\*ServiceJSON.java",
 				"**\\service\\http\\*ServiceSoap.java",
+				"**\\service\\messaging\\*ClpMessageListener.java",
 				"**\\service\\persistence\\*Finder.java",
 				"**\\service\\persistence\\*Persistence.java",
 				"**\\service\\persistence\\*PersistenceImpl.java",
