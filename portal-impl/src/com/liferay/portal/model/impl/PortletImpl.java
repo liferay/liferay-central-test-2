@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.job.Scheduler;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.plugin.PluginPackage;
+import com.liferay.portal.kernel.poller.PollerProcessor;
 import com.liferay.portal.kernel.pop.MessageListener;
 import com.liferay.portal.kernel.portlet.ConfigurationAction;
 import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
@@ -130,7 +131,8 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		String openSearchClass, String schedulerClass, String portletURLClass,
 		String friendlyURLMapperClass, String urlEncoderClass,
 		String portletDataHandlerClass, String portletLayoutListenerClass,
-		String popMessageListenerClass, String socialActivityInterpreterClass,
+		String pollerProcessorClass, String popMessageListenerClass,
+		String socialActivityInterpreterClass,
 		String socialRequestInterpreterClass, String webDAVStorageToken,
 		String webDAVStorageClass, String controlPanelEntryCategory,
 		double controlPanelEntryWeight, String controlPanelClass,
@@ -181,6 +183,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		_urlEncoderClass = urlEncoderClass;
 		_portletDataHandlerClass = portletDataHandlerClass;
 		_portletLayoutListenerClass = portletLayoutListenerClass;
+		_pollerProcessorClass = pollerProcessorClass;
 		_popMessageListenerClass = popMessageListenerClass;
 		_socialActivityInterpreterClass = socialActivityInterpreterClass;
 		_socialRequestInterpreterClass = socialRequestInterpreterClass;
@@ -792,6 +795,44 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 
 		return (PortletLayoutListener)InstancePool.get(
 			getPortletLayoutListenerClass());
+	}
+
+	/**
+	 * Gets the name of the poller processor class of the portlet.
+	 *
+	 * @return		the name of the poller processor class of the portlet
+	 */
+	public String getPollerProcessorClass() {
+		return _pollerProcessorClass;
+	}
+
+	/**
+	 * Sets the name of the poller processor class of the portlet.
+	 *
+	 * @param		pollerProcessorClass the name of the poller processor
+	 *				class of the portlet
+	 */
+	public void setPollerProcessorClass(String pollerProcessorClass) {
+		_pollerProcessorClass = pollerProcessorClass;
+	}
+
+	/**
+	 * Gets the poller processor instance of the portlet.
+	 *
+	 * @return		the poller processor instance of the portlet
+	 */
+	public PollerProcessor getPollerProcessorInstance() {
+		if (Validator.isNull(getPollerProcessorClass())) {
+			return null;
+		}
+
+		if (_portletApp.isWARFile()) {
+			PortletBag portletBag = PortletBagPool.get(getRootPortletId());
+
+			return portletBag.getPollerProcessorInstance();
+		}
+
+		return (PollerProcessor)InstancePool.get(getPollerProcessorClass());
 	}
 
 	/**
@@ -2808,7 +2849,8 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 			getOpenSearchClass(), getSchedulerClass(), getPortletURLClass(),
 			getFriendlyURLMapperClass(), getURLEncoderClass(),
 			getPortletDataHandlerClass(), getPortletLayoutListenerClass(),
-			getPopMessageListenerClass(), getSocialActivityInterpreterClass(),
+			getPollerProcessorClass(), getPopMessageListenerClass(),
+			getSocialActivityInterpreterClass(),
 			getSocialRequestInterpreterClass(), getWebDAVStorageToken(),
 			getWebDAVStorageClass(), getControlPanelEntryCategory(),
 			getControlPanelEntryWeight(), getControlPanelEntryClass(),
@@ -2958,6 +3000,11 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * The name of the portlet data layout listener class of the portlet.
 	 */
 	private String _portletLayoutListenerClass;
+
+ 	/**
+	 * The name of the poller processor class of the portlet.
+	 */
+	private String _pollerProcessorClass;
 
  	/**
 	 * The name of the POP message listener class of the portlet.

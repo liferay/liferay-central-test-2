@@ -23,6 +23,7 @@
 package com.liferay.portlet;
 
 import com.liferay.portal.kernel.job.Scheduler;
+import com.liferay.portal.kernel.poller.PollerProcessor;
 import com.liferay.portal.kernel.pop.MessageListener;
 import com.liferay.portal.kernel.portlet.ConfigurationAction;
 import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
@@ -64,6 +65,7 @@ public class PortletBagImpl implements PortletBag {
 		URLEncoder urlEncoderInstance,
 		PortletDataHandler portletDataHandlerInstance,
 		PortletLayoutListener portletLayoutListenerInstance,
+		PollerProcessor pollerProcessorInstance,
 		MessageListener popMessageListenerInstance,
 		SocialActivityInterpreter socialActivityInterpreterInstance,
 		SocialRequestInterpreter socialRequestInterpreterInstance,
@@ -83,6 +85,7 @@ public class PortletBagImpl implements PortletBag {
 		_urlEncoderInstance = urlEncoderInstance;
 		_portletDataHandlerInstance = portletDataHandlerInstance;
 		_portletLayoutListenerInstance = portletLayoutListenerInstance;
+		_pollerProcessorInstance = pollerProcessorInstance;
 		_popMessageListenerInstance = popMessageListenerInstance;
 		_socialActivityInterpreterInstance = socialActivityInterpreterInstance;
 		_socialRequestInterpreterInstance = socialRequestInterpreterInstance;
@@ -140,6 +143,10 @@ public class PortletBagImpl implements PortletBag {
 		return _portletLayoutListenerInstance;
 	}
 
+	public PollerProcessor getPollerProcessorInstance() {
+		return _pollerProcessorInstance;
+	}
+
 	public MessageListener getPopMessageListenerInstance() {
 		return _popMessageListenerInstance;
 	}
@@ -191,6 +198,7 @@ public class PortletBagImpl implements PortletBag {
 	private URLEncoder _urlEncoderInstance;
 	private PortletDataHandler _portletDataHandlerInstance;
 	private PortletLayoutListener _portletLayoutListenerInstance;
+	private PollerProcessor _pollerProcessorInstance;
 	private MessageListener _popMessageListenerInstance;
 	private SocialActivityInterpreter _socialActivityInterpreterInstance;
 	private SocialRequestInterpreter _socialRequestInterpreterInstance;

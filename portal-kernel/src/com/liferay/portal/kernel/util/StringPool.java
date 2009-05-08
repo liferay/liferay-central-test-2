@@ -66,7 +66,11 @@ public class StringPool {
 
 	public static final String DOUBLE_CLOSE_BRACKET = "]]";
 
+	public static final String DOUBLE_CLOSE_CURLY_BRACE = "}}";
+
 	public static final String DOUBLE_OPEN_BRACKET = "[[";
+
+	public static final String DOUBLE_OPEN_CURLY_BRACE = "{{";
 
 	public static final String DOUBLE_SLASH = "//";
 

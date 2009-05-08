@@ -876,6 +876,10 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			_log.error("Indexing " + userId, se);
 		}
 
+		// Browser tracker
+
+		browserTrackerLocalService.deleteUserBrowserTracker(userId);
+
 		// Group
 
 		Group group = user.getGroup();

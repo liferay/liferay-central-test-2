@@ -31,6 +31,7 @@ import com.liferay.portal.kernel.job.Scheduler;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.poller.PollerProcessor;
 import com.liferay.portal.kernel.pop.MessageListener;
 import com.liferay.portal.kernel.portlet.ConfigurationAction;
 import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
@@ -58,6 +59,7 @@ import com.liferay.portal.model.PortletApp;
 import com.liferay.portal.model.PortletCategory;
 import com.liferay.portal.model.PortletFilter;
 import com.liferay.portal.model.PortletURLListener;
+import com.liferay.portal.poller.PollerProcessorUtil;
 import com.liferay.portal.pop.POPServerUtil;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
@@ -170,6 +172,8 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 		if (scheduler != null) {
 			scheduler.unschedule();
 		}
+
+		PollerProcessorUtil.deletePollerProcessor(portlet.getPortletId());
 
 		POPServerUtil.deleteListener(portlet.getPopMessageListenerInstance());
 
@@ -518,6 +522,17 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 					portlet.getPortletLayoutListenerClass()).newInstance();
 		}
 
+		PollerProcessor pollerProcessorInstance = null;
+
+		if (Validator.isNotNull(portlet.getPollerProcessorClass())) {
+			pollerProcessorInstance =
+				(PollerProcessor)portletClassLoader.loadClass(
+					portlet.getPollerProcessorClass()).newInstance();
+
+			PollerProcessorUtil.addPollerProcessor(
+				portlet.getPortletId(), pollerProcessorInstance);
+		}
+
 		MessageListener popMessageListenerInstance = null;
 
 		if (Validator.isNotNull(portlet.getPopMessageListenerClass())) {
@@ -624,10 +639,10 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 			configurationActionInstance, indexerInstance, openSearchInstance,
 			schedulerInstance, friendlyURLMapperInstance, urlEncoderInstance,
 			portletDataHandlerInstance, portletLayoutListenerInstance,
-			popMessageListenerInstance, socialActivityInterpreterInstance,
-			socialRequestInterpreterInstance, webDAVStorageInstance,
-			controlPanelEntryInstance, preferencesValidatorInstance,
-			resourceBundles);
+			pollerProcessorInstance, popMessageListenerInstance,
+			socialActivityInterpreterInstance, socialRequestInterpreterInstance,
+			webDAVStorageInstance, controlPanelEntryInstance,
+			preferencesValidatorInstance, resourceBundles);
 
 		PortletBagPool.put(portlet.getPortletId(), portletBag);
 

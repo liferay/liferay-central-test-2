@@ -1,5 +1,11 @@
 alter table BookmarksEntry add groupId LONG;
 
+create table BrowserTracker (
+	browserTrackerId LONG not null primary key,
+	userId LONG,
+	browserKey LONG
+);
+
 update CalEvent set remindBy = '0' where remindBy = 'none';
 update CalEvent set remindBy = '1' where remindBy = 'email';
 update CalEvent set remindBy = '2' where remindBy = 'sms';

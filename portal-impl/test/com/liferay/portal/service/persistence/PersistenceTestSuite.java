@@ -104,6 +104,7 @@ public class PersistenceTestSuite extends TestSuite {
 
 		testSuite.addTestSuite(AccountPersistenceTest.class);
 		testSuite.addTestSuite(AddressPersistenceTest.class);
+		testSuite.addTestSuite(BrowserTrackerPersistenceTest.class);
 		testSuite.addTestSuite(ClassNamePersistenceTest.class);
 		testSuite.addTestSuite(CompanyPersistenceTest.class);
 		testSuite.addTestSuite(ContactPersistenceTest.class);

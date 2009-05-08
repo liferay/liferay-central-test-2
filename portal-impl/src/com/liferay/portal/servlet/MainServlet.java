@@ -34,6 +34,7 @@ import com.liferay.portal.kernel.job.Scheduler;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.plugin.PluginPackage;
+import com.liferay.portal.kernel.poller.PollerProcessor;
 import com.liferay.portal.kernel.pop.MessageListener;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
@@ -62,6 +63,7 @@ import com.liferay.portal.model.PortletApp;
 import com.liferay.portal.model.PortletFilter;
 import com.liferay.portal.model.PortletURLListener;
 import com.liferay.portal.model.User;
+import com.liferay.portal.poller.PollerProcessorUtil;
 import com.liferay.portal.pop.POPServerUtil;
 import com.liferay.portal.security.auth.CompanyThreadLocal;
 import com.liferay.portal.security.auth.PrincipalException;
@@ -338,6 +340,33 @@ public class MainServlet extends ActionServlet {
 
 					scheduler.schedule();
 				}
+			}
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+
+		// Poller processor
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Poller processor");
+		}
+
+		try {
+			Iterator<Portlet> itr = portlets.iterator();
+
+			while (itr.hasNext()) {
+				Portlet portlet = itr.next();
+
+				PollerProcessor pollerProcessor =
+					portlet.getPollerProcessorInstance();
+
+				if (!portlet.isActive() || (pollerProcessor == null)) {
+					continue;
+				}
+
+				PollerProcessorUtil.addPollerProcessor(
+					portlet.getPortletId(), pollerProcessor);
 			}
 		}
 		catch (Exception e) {

@@ -23,6 +23,7 @@
 package com.liferay.portal.kernel.portlet;
 
 import com.liferay.portal.kernel.job.Scheduler;
+import com.liferay.portal.kernel.poller.PollerProcessor;
 import com.liferay.portal.kernel.pop.MessageListener;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.OpenSearch;
@@ -65,6 +66,8 @@ public interface PortletBag {
 	public URLEncoder getURLEncoderInstance();
 
 	public PortletLayoutListener getPortletLayoutListenerInstance();
+
+	public PollerProcessor getPollerProcessorInstance();
 
 	public MessageListener getPopMessageListenerInstance();
 

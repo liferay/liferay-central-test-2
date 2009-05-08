@@ -99,6 +99,30 @@
 
 		<reference package-path="com.liferay.counter" entity="Counter" />
 	</entity>
+	<entity name="BrowserTracker" local-service="true" remote-service="false">
+
+		<!-- PK fields -->
+
+		<column name="browserTrackerId" type="long" primary="true" />
+
+		<!-- Audit fields -->
+
+		<column name="userId" type="long" />
+
+		<!-- Other fields -->
+
+		<column name="browserKey" type="long" />
+
+		<!-- Finder methods -->
+
+		<finder name="UserId" return-type="BrowserTracker" unique="true">
+			<finder-column name="userId" />
+		</finder>
+
+		<!-- References -->
+
+		<reference package-path="com.liferay.counter" entity="Counter" />
+	</entity>
 	<entity name="ClassName" local-service="true" remote-service="true">
 
 		<!-- PK fields -->
