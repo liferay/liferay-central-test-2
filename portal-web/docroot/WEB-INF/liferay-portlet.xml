@@ -989,6 +989,7 @@
 		<icon>/html/icons/blogs_aggregator.png</icon>
 		<struts-path>blogs_aggregator</struts-path>
 		<configuration-action-class>com.liferay.portlet.blogsaggregator.action.ConfigurationActionImpl</configuration-action-class>
+		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
 		<scopeable>true</scopeable>
