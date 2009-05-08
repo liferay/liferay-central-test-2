@@ -44,7 +44,7 @@
 	%>
 
 	<c:if test="<%= Validator.isNotNull(metaRobots) %>">
-		<meta name="robots" content="<%= metaRobots %>" lang="<%= metaRobotsLanguageId %>" />
+		<meta name="robots" content="<%= HtmlUtil.escape(metaRobots) %>" lang="<%= metaRobotsLanguageId %>" />
 	</c:if>
 
 	<%
@@ -74,7 +74,7 @@
 	%>
 
 	<c:if test="<%= Validator.isNotNull(metaDescription) %>">
-		<meta name="description" content="<%= metaDescription %>" lang="<%= metaDescriptionLanguageId %>" />
+		<meta name="description" content="<%= HtmlUtil.escape(metaDescription) %>" lang="<%= metaDescriptionLanguageId %>" />
 	</c:if>
 
 	<%
@@ -104,6 +104,6 @@
 	%>
 
 	<c:if test="<%= Validator.isNotNull(metaKeywords) %>">
-		<meta name="keywords" content="<%= metaKeywords %>" lang="<%= metaKeywordsLanguageId %>" />
+		<meta name="keywords" content="<%= HtmlUtil.escape(metaKeywords) %>" lang="<%= metaKeywordsLanguageId %>" />
 	</c:if>
 </c:if>

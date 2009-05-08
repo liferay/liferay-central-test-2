@@ -232,6 +232,8 @@
 	#set ($the_title = $languageUtil.get($company_id, $locale, $tilesTitle))
 #end
 
+#set ($the_title = $htmlUtil.escape($the_title))
+
 #if ($layouts)
 	#set ($pages = $layouts)
 #end
