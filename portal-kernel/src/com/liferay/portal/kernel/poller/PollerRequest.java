@@ -22,6 +22,7 @@
 
 package com.liferay.portal.kernel.poller;
 
+import java.util.Date;
 import java.util.Map;
 
 /**
@@ -41,6 +42,10 @@ public class PollerRequest {
 		_parameterMap = parameterMap;
 	}
 
+	public long getBrowserKey() {
+		return _pollerHeader.getBrowserKey();
+	}
+
 	public Map<String, String> getParameterMap() {
 		return _parameterMap;
 	}
@@ -51,6 +56,14 @@ public class PollerRequest {
 
 	public String getPortletId() {
 		return _portletId;
+	}
+
+	public Date getTimestamp() {
+		return _pollerHeader.getTimestamp();
+	}
+
+	public long getUserId() {
+		return _pollerHeader.getUserId();
 	}
 
 	private Map<String, String> _parameterMap;

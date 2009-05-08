@@ -22,7 +22,8 @@
 
 package com.liferay.portal.kernel.poller;
 
-import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -44,10 +45,12 @@ public class PollerResponse {
 		_parameterMap.put(name, value);
 	}
 
-	public void toString(StringBuilder sb) {
-		sb.append(",{\"portletId\":\"");
-		sb.append(_portletId);
-		sb.append("\",\"data\":{");
+	public JSONObject toJSONObject() {
+		JSONObject pollerResponseJSON = JSONFactoryUtil.createJSONObject();
+
+		pollerResponseJSON.put("portletId", _portletId);
+
+		JSONObject dataJSON = JSONFactoryUtil.createJSONObject();
 
 		Iterator<Map.Entry<String, String>> itr =
 			_parameterMap.entrySet().iterator();
@@ -58,20 +61,12 @@ public class PollerResponse {
 			String name = entry.getKey();
 			String value = entry.getValue();
 
-			sb.append(StringPool.QUOTE);
-			sb.append(name);
-			sb.append("\":\"");
-			sb.append(value);
-
-			if (itr.hasNext()) {
-				sb.append("\",");
-			}
-			else {
-				sb.append(StringPool.QUOTE);
-			}
+			dataJSON.put(name, value);
 		}
 
-		sb.append(StringPool.DOUBLE_CLOSE_CURLY_BRACE);
+		pollerResponseJSON.put("data", dataJSON);
+
+		return pollerResponseJSON;
 	}
 
 	private Map<String, String> _parameterMap = new HashMap<String, String>();

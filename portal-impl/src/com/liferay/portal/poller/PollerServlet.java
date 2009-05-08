@@ -23,7 +23,9 @@
 package com.liferay.portal.poller;
 
 import com.liferay.portal.NoSuchLayoutException;
+import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.poller.PollerHeader;
@@ -107,7 +109,7 @@ public class PollerServlet extends HttpServlet {
 				StringPool.DOUBLE_CLOSE_CURLY_BRACE
 			});
 
-		StringBuilder sb = new StringBuilder();
+		JSONArray pollerResponseEntriesJSON = JSONFactoryUtil.createJSONArray();
 
 		Map<String, Object>[] pollerRequestEntries =
 			(Map<String, Object>[])JSONFactoryUtil.deserialize(pollerRequest);
@@ -153,13 +155,14 @@ public class PollerServlet extends HttpServlet {
 					}
 				}
 
-				sb.append("[{\"userId\":");
-				sb.append(userId);
-				sb.append(",\"timestamp\":");
-				sb.append(timestamp);
-				sb.append(",\"suspendPolling\":");
-				sb.append(suspendPolling);
-				sb.append("\"}");
+				JSONObject pollerResponseEntryJSON =
+					JSONFactoryUtil.createJSONObject();
+
+				pollerResponseEntryJSON.put("userId", userId);
+				pollerResponseEntryJSON.put("timestamp", timestamp);
+				pollerResponseEntryJSON.put("suspendPolling", suspendPolling);
+
+				pollerResponseEntriesJSON.put(pollerResponseEntryJSON);
 			}
 			else {
 				String portletId = (String)pollerRequestEntry.get(
@@ -167,18 +170,23 @@ public class PollerServlet extends HttpServlet {
 				Map<String, String> parameterMap =
 					(Map<String, String>)pollerRequestEntry.get("data");
 
+				JSONObject pollerResponseEntryJSON = null;
+
 				try {
-					process(pollerHeader, portletId, parameterMap, sb);
+					pollerResponseEntryJSON = process(
+						pollerHeader, portletId, parameterMap);
 				}
 				catch (Exception e) {
 					_log.error(e, e);
 				}
+
+				if (pollerResponseEntryJSON != null) {
+					pollerResponseEntriesJSON.put(pollerResponseEntryJSON);
+				}
 			}
 		}
 
-		sb.append(StringPool.CLOSE_BRACKET);
-
-		return sb.toString();
+		return pollerResponseEntriesJSON.toString();
 	}
 
 	protected long getUserId(long companyId, String userIdString) {
@@ -199,9 +207,9 @@ public class PollerServlet extends HttpServlet {
 		return userId;
 	}
 
-	protected void process(
+	protected JSONObject process(
 			PollerHeader pollerHeader, String portletId, Map<String,
-			String> parameterMap, StringBuilder sb)
+			String> parameterMap)
 		throws Exception {
 
 		PollerProcessor pollerProcessor =
@@ -210,7 +218,7 @@ public class PollerServlet extends HttpServlet {
 		if (pollerProcessor == null) {
 			_log.error("Poller processor not found for portlet " + portletId);
 
-			return;
+			return null;
 		}
 
 		PollerRequest pollerRequest = new PollerRequest(
@@ -219,7 +227,7 @@ public class PollerServlet extends HttpServlet {
 
 		pollerProcessor.process(pollerRequest, pollerResponse);
 
-		pollerResponse.toString(sb);
+		return pollerResponse.toJSONObject();
 	}
 
 	private static final String _OPEN_HASH_MAP_WRAPPER =
