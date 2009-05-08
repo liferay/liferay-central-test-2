@@ -103,7 +103,6 @@ import com.liferay.portal.upload.UploadServletRequestImpl;
 import com.liferay.portal.util.comparator.PortletControlPanelWeightComparator;
 import com.liferay.portlet.ActionRequestImpl;
 import com.liferay.portlet.ActionResponseImpl;
-import com.liferay.portlet.ControlPanelEntry;
 import com.liferay.portlet.PortletConfigFactory;
 import com.liferay.portlet.PortletConfigImpl;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
@@ -684,16 +683,6 @@ public class PortalImpl implements Portal {
 		}
 
 		return new ArrayList<Portlet>(portletsSet);
-	}
-
-	public List<Portlet> getControlPanelPortletsFiltered(
-			PermissionChecker permissionChecker, Group group, String category)
-		throws Exception {
-
-		List<Portlet> portlets = PortalUtil.getControlPanelPortlets(
-			group.getCompanyId(), category);
-
-		return filterPortlets(permissionChecker, group, category, portlets);
 	}
 
 	public String getCurrentCompleteURL(HttpServletRequest request) {
@@ -3248,48 +3237,6 @@ public class PortalImpl implements Portal {
 		}
 	}
 
-	protected List<Portlet> filterPortlets(
-			PermissionChecker permissionChecker, Group group, String category,
-			List<Portlet> portlets)
-		throws Exception {
-
-		List<Portlet> filteredPortlets = new ArrayList<Portlet>();
-
-		boolean contentCategory = category.equals(PortletCategoryKeys.CONTENT);
-
-		if (contentCategory && group.isLayout()) {
-			for (Portlet portlet : portlets) {
-				if (portlet.isScopeable()) {
-					filteredPortlets.add(portlet);
-				}
-			}
-		}
-		else {
-			filteredPortlets.addAll(portlets);
-		}
-
-		if (permissionChecker.isCompanyAdmin()) {
-			return filteredPortlets;
-		}
-
-		if (category.equals(PortletCategoryKeys.CONTENT) &&
-			permissionChecker.isCommunityAdmin(group.getGroupId())) {
-			return filteredPortlets;
-		}
-
-		Iterator<Portlet> itr = filteredPortlets.iterator();
-
-		while (itr.hasNext()) {
-			Portlet portlet = itr.next();
-
-			if (!isShowPortlet(permissionChecker, portlet)) {
-				itr.remove();
-			}
-		}
-
-		return filteredPortlets;
-	}
-
 	protected long getDoAsUserId(
 			HttpServletRequest request, String doAsUserIdString,
 			boolean alwaysAllowDoAsUser)
@@ -3370,21 +3317,6 @@ public class PortalImpl implements Portal {
 
 			return 0;
 		}
-	}
-
-	protected boolean isShowPortlet(
-			PermissionChecker permissionChecker, Portlet portlet)
-		throws Exception {
-
-		ControlPanelEntry controlPanelEntry =
-			portlet.getControlPanelEntryInstance();
-
-		if ((controlPanelEntry != null) &&
-			controlPanelEntry.isVisible(permissionChecker, portlet)) {
-			return true;
-		}
-
-		return false;
 	}
 
 	private long _getPlidFromPortletId(
