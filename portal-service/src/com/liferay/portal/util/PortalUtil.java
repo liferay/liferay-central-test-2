@@ -27,10 +27,12 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.upload.UploadServletRequest;
 import com.liferay.portal.model.Company;
+import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.User;
+import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 
@@ -202,6 +204,14 @@ public class PortalUtil {
 		throws SystemException {
 
 		return getPortal().getControlPanelPortlets(companyId, category);
+	}
+
+	public static List<Portlet> getControlPanelPortletsFiltered(
+			PermissionChecker permissionChecker, Group group, String category)
+		throws Exception {
+
+		return getPortal().getControlPanelPortletsFiltered(
+			permissionChecker, group, category);
 	}
 
 	public static String getCurrentCompleteURL(HttpServletRequest request) {

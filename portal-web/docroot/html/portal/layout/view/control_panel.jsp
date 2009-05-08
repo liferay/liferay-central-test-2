@@ -57,6 +57,12 @@ if (ppid.equals(PortletKeys.PLUGIN_INSTALLER)) {
 String category = PortalUtil.getControlPanelCategory(themeDisplay.getCompanyId(), ppid);
 
 List<Layout> scopeLayouts = new ArrayList<Layout>();
+
+boolean denyAccess = false;
+
+if (Validator.isNotNull(ppid)) {
+	denyAccess = !hasPortlet(permissionChecker, themeDisplay.getScopeGroup(), category, ppid);
+}
 %>
 
 <c:if test="<%= !themeDisplay.isStateExclusive() && !themeDisplay.isStatePopUp() %>">
@@ -311,7 +317,7 @@ List<Layout> scopeLayouts = new ArrayList<Layout>();
 </c:if>
 
 <%
-if (themeDisplay.isStateExclusive() || themeDisplay.isStatePopUp() || layoutTypePortlet.hasStateMax()) {
+if (!denyAccess && (themeDisplay.isStateExclusive() || themeDisplay.isStatePopUp() || layoutTypePortlet.hasStateMax())) {
 	String velocityTemplateId = null;
 
 	String content = null;
@@ -341,13 +347,19 @@ if (themeDisplay.isStateExclusive() || themeDisplay.isStatePopUp() || layoutType
 }
 else {
 	String description = StringPool.BLANK;
+	String className = "portlet-msg-info";
+
+	if (denyAccess) {
+		description = LanguageUtil.get(pageContext, "you-do-not-have-enough-permissions-to-access-this-application");
+		className = "portlet-msg-error";
+	}
 
 	if (Validator.isNull(description)) {
 		description = LanguageUtil.get(pageContext, "please-select-a-tool-from-the-left-menu");
 	}
 %>
 
-	<div class="portlet-msg-info">
+	<div class="<%= className %>">
 		<%= description %>
 	</div>
 
@@ -363,3 +375,17 @@ else {
 </c:if>
 
 <%@ include file="/html/portal/layout/view/common.jspf" %>
+
+<%!
+public static final boolean hasPortlet(PermissionChecker permissionChecker, Group group, String category, String ppid) throws Exception {
+	List<Portlet> portlets = PortalUtil.getControlPanelPortletsFiltered(permissionChecker, group, category);
+
+	for (Portlet portlet : portlets) {
+		if (portlet.getPortletId().equals(ppid)) {
+			return true;
+		}
+	}
+
+	return false;
+}
+%>
