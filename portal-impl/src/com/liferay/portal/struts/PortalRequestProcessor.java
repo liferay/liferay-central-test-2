@@ -24,7 +24,6 @@ package com.liferay.portal.struts;
 
 import com.liferay.portal.LayoutPermissionException;
 import com.liferay.portal.PortletActiveException;
-import com.liferay.portal.RequiredLayoutException;
 import com.liferay.portal.RequiredRoleException;
 import com.liferay.portal.UserActiveException;
 import com.liferay.portal.kernel.log.Log;
@@ -74,7 +73,6 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map.Entry;
 import java.util.Map;
 import java.util.Set;
@@ -663,7 +661,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 
 		// Authenticated users must have at least one personalized page
 
-		if (user != null) {
+		/*if (user != null) {
 			List<Layout> layouts = themeDisplay.getLayouts();
 
 			if ((layouts == null) || (layouts.size() == 0)) {
@@ -672,7 +670,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 
 				return _PATH_PORTAL_ERROR;
 			}
-		}
+		}*/
 
 		// Users must sign in
 
