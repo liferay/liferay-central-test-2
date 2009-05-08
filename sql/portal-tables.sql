@@ -76,6 +76,43 @@ create table AnnouncementsFlag (
 	value INTEGER
 );
 
+create table AssetCategory (
+	categoryId LONG not null primary key,
+	groupId LONG,
+	companyId LONG,
+	userId LONG,
+	userName VARCHAR(75) null,
+	createDate DATE null,
+	modifiedDate DATE null,
+	parentCategoryId LONG,
+	name VARCHAR(75) null,
+	vocabularyId LONG
+);
+
+create table AssetCategoryProperty (
+	propertyId LONG not null primary key,
+	companyId LONG,
+	userId LONG,
+	userName VARCHAR(75) null,
+	createDate DATE null,
+	modifiedDate DATE null,
+	categoryId LONG,
+	key_ VARCHAR(75) null,
+	value VARCHAR(75) null
+);
+
+create table AssetCategoryVocabulary (
+	vocabularyId LONG not null primary key,
+	groupId LONG,
+	companyId LONG,
+	userId LONG,
+	userName VARCHAR(75) null,
+	createDate DATE null,
+	modifiedDate DATE null,
+	name VARCHAR(75) null,
+	description VARCHAR(75) null
+);
+
 create table BlogsEntry (
 	uuid_ VARCHAR(75) null,
 	entryId LONG not null primary key,
@@ -1352,6 +1389,18 @@ create table TagsAsset (
 	width INTEGER,
 	priority DOUBLE,
 	viewCount INTEGER
+);
+
+create table TagsAssets_AssetCategory (
+	assetId LONG not null,
+	categoryId LONG not null,
+	primary key (assetId, categoryId)
+);
+
+create table TagsAssets_CategoriesEntries (
+	assetId LONG not null,
+	entryId LONG not null,
+	primary key (assetId, entryId)
 );
 
 create table TagsAssets_TagsEntries (

@@ -86,6 +86,10 @@ public interface PropsKeys {
 
 	public static final String APPLICATION_STARTUP_EVENTS = "application.startup.events";
 
+	public static final String ASSET_CATEGORIES_PROPERTIES_DEFAULT = "asset.categories.properties.default";
+
+	public static final String ASSET_CATEGORIES_VOCABULARY_DEFAULT = "asset.categories.vocabulary.default";
+
 	public static final String ASSET_PUBLISHER_DISPLAY_STYLES = "asset.publisher.display.styles";
 
 	public static final String AUTH_FAILURE = "auth.failure";

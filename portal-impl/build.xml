@@ -544,6 +544,12 @@ ${exception.message}
 		</antcall>
 	</target>
 
+	<target name="build-service-portlet-asset">
+		<antcall target="build-service">
+			<param name="service.file" value="src/com/liferay/portlet/asset/service.xml" />
+		</antcall>
+	</target>
+
 	<target name="build-service-portlet-documentlibrary">
 		<antcall target="build-service">
 			<param name="service.file" value="src/com/liferay/portlet/documentlibrary/service.xml" />
@@ -639,6 +645,7 @@ ${exception.message}
 		<antcall target="build-service-portlet-blogs" />
 		<antcall target="build-service-portlet-bookmarks" />
 		<antcall target="build-service-portlet-calendar" />
+		<antcall target="build-service-portlet-asset" />
 		<antcall target="build-service-portlet-documentlibrary" />
 		<antcall target="build-service-portlet-expando" />
 		<antcall target="build-service-portlet-flags" />

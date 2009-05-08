@@ -875,3 +875,82 @@ Liferay.Service.registerClass(
 		updatePage: true
 	}
 );
+
+Liferay.Service.register("Liferay.Service.Categories", "com.liferay.portlet.categories.service");
+
+Liferay.Service.registerClass(
+	Liferay.Service.Categories, "CategoriesEntry",
+	{
+		addEntry: true,
+		deleteEntry: true,
+		getEntries: true,
+		getEntry: true,
+		getGroupVocabularyEntries: true,
+		getRootVocabularyEntries: true,
+		search: true,
+		updateEntry: true
+	}
+);
+
+Liferay.Service.registerClass(
+	Liferay.Service.Categories, "CategoriesProperty",
+	{
+		addProperty: true,
+		deleteProperty: true,
+		getProperties: true,
+		getPropertyValues: true,
+		updateProperty: true
+	}
+);
+
+Liferay.Service.registerClass(
+	Liferay.Service.Categories, "CategoriesVocabulary",
+	{
+		addVocabulary: true,
+		deleteVocabulary: true,
+		getCompanyVocabularies: true,
+		getGroupVocabularies: true,
+		getVocabulary: true,
+		updateVocabulary: true
+	}
+);
+
+Liferay.Service.register("Liferay.Service.Asset", "com.liferay.portlet.asset.service");
+
+Liferay.Service.registerClass(
+	Liferay.Service.Asset, "AssetCategory",
+	{
+		addCategory: true,
+		deleteCategory: true,
+		getCategories: true,
+		getCategory: true,
+		getGroupVocabularyCategories: true,
+		getVocabularyCategories: true,
+		getVocabularyRootCategories: true,
+		search: true,
+		updateCategory: true
+	}
+);
+
+Liferay.Service.registerClass(
+	Liferay.Service.Asset, "AssetCategoryProperty",
+	{
+		addProperty: true,
+		deleteProperty: true,
+		getProperties: true,
+		getPropertyValues: true,
+		updateProperty: true
+	}
+);
+
+Liferay.Service.registerClass(
+	Liferay.Service.Asset, "AssetCategoryVocabulary",
+	{
+		addVocabulary: true,
+		deleteVocabulary: true,
+		getCompanyVocabularies: true,
+		getGroupVocabularies: true,
+		getVocabulary: true,
+		updateVocabulary: true
+	}
+);

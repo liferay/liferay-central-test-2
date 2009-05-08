@@ -1,0 +1,105 @@
+<?xml version="1.0"?>
+
+<custom-sql>
+	<sql id="com.liferay.portlet.asset.service.persistence.AssetCategoryFinder.countByG_C_N">
+		<![CDATA[
+			SELECT
+				COUNT(*) AS COUNT_VALUE
+			FROM
+				AssetCategory
+			INNER JOIN
+				TagsAssets_TagsEntries ON
+					(TagsAssets_AssetCategories.categoryId = AssetCategory.categoryId) AND
+					(TagsAssets_AssetCategories.assetId IN (
+						SELECT
+							assetId
+						FROM
+							TagsAsset
+						WHERE
+							(TagsAsset.groupId = ?) AND
+							(TagsAsset.classNameId = ?)
+					))
+			WHERE
+				(AssetCategory.name LIKE ? OR ? IS NULL)
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.asset.service.persistence.AssetCategoryFinder.countByG_N_P">
+		<![CDATA[
+			SELECT
+				COUNT(*) AS COUNT_VALUE
+			FROM
+				AssetCategory
+			[$JOIN$]
+			WHERE
+				(AssetCategory.groupId = ?) AND
+				(AssetCategory.name LIKE ? OR ? IS NULL)
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.asset.service.persistence.AssetCategoryFinder.findByAssetId">
+		<![CDATA[
+			SELECT
+				{AssetCategory.*}
+			FROM
+				AssetCategory
+			INNER JOIN
+				TagsAssets_AssetCategories ON
+					(TagsAssets_AssetCategories.categoryId = AssetCategory.categoryId) AND
+					(TagsAssets_AssetCategories.assetId = ?)
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.asset.service.persistence.AssetCategoryFinder.findByG_N">
+		<![CDATA[
+			SELECT
+				{AssetCategory.*}
+			FROM
+				AssetCategory
+			WHERE
+				(AssetCategory.groupId = ?) AND
+				(lower(AssetCategory.name) = ?)
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.asset.service.persistence.AssetCategoryFinder.findByG_N_P">
+		<![CDATA[
+			SELECT
+				{AssetCategory.*}
+			FROM
+				AssetCategory
+			[$JOIN$]
+			WHERE
+				(AssetCategory.groupId = ?) AND
+				(AssetCategory.name LIKE ? OR ? IS NULL)
+			ORDER BY
+				AssetCategory.name ASC
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.asset.service.persistence.AssetCategoryPropertyFinder.countByG_K">
+		<![CDATA[
+			SELECT
+				COUNT(DISTINCT CategoriesProperty.value) AS COUNT_VALUE
+			FROM
+				CategoriesProperty
+			INNER JOIN
+				AssetCategory ON
+					(AssetCategory.categoryId = CategoriesProperty.categoryId)
+			WHERE
+				(AssetCategory.groupId = ?) AND
+				(CategoriesProperty.key_ = ?)
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.asset.service.persistence.AssetCategoryPropertyFinder.findByG_K">
+		<![CDATA[
+			SELECT
+				DISTINCT CategoriesProperty.value AS propertyValue
+			FROM
+				CategoriesProperty
+			INNER JOIN
+				AssetCategory ON
+					(AssetCategory.categoryId = AssetCategoryProperty.categoryId)
+			WHERE
+				(AssetCategory.groupId = ?) AND
+				(AssetCategoryProperty.key_ = ?)
+			ORDER BY
+				AssetCategoryProperty.value ASC
+		]]>
+	</sql>
+</custom-sql>

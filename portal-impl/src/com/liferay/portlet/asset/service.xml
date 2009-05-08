@@ -1,0 +1,169 @@
+<?xml version="1.0"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 5.2.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_5_2_0.dtd">
+
+<service-builder package-path="com.liferay.portlet.asset">
+	<namespace>Asset</namespace>
+	<entity name="AssetCategory" local-service="true" remote-service="true">
+
+		<!-- PK fields -->
+
+		<column name="categoryId" type="long" primary="true" />
+
+		<!-- Group instance -->
+
+		<column name="groupId" type="long" />
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long" />
+		<column name="userId" type="long" />
+		<column name="userName" type="String" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+
+		<!-- Other fields -->
+
+		<column name="parentCategoryId" type="long" />
+		<column name="name" type="String" />
+		<column name="vocabularyId" type="long" />
+
+		<!-- Relationships -->
+
+		<column name="assets" type="Collection" entity="com.liferay.portlet.tags.TagsAsset" mapping-table="TagsAssets_AssetCategory" />
+
+		<!-- Order -->
+
+		<order by="asc">
+			<order-column name="name" />
+		</order>
+
+		<!-- Finder methods -->
+
+		<finder name="VocabularyId" return-type="Collection">
+			<finder-column name="vocabularyId" />
+		</finder>
+		<finder name="ParentCategoryId" return-type="Collection">
+			<finder-column name="parentCategoryId" />
+		</finder>
+		<finder name="P_N" return-type="Collection">
+			<finder-column name="parentCategoryId" />
+			<finder-column name="name" />
+		</finder>
+		<finder name="V_P" return-type="Collection">
+			<finder-column name="vocabularyId" />
+			<finder-column name="parentCategoryId" />
+		</finder>
+
+		<!-- References -->
+
+		<reference package-path="com.liferay.counter" entity="Counter" />
+		<reference package-path="com.liferay.portal" entity="Resource" />
+		<reference package-path="com.liferay.portal" entity="User" />
+		<reference package-path="com.liferay.portlet.tags" entity="TagsAsset" />
+	</entity>
+	<entity name="AssetCategoryProperty" local-service="true" remote-service="true">
+
+		<!-- PK fields -->
+
+		<column name="propertyId" type="long" primary="true" />
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long" />
+		<column name="userId" type="long" />
+		<column name="userName" type="String" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+
+		<!-- Other fields -->
+
+		<column name="categoryId" type="long" />
+		<column name="key" type="String" />
+		<column name="value" type="String" />
+
+		<!-- Order -->
+
+		<order by="asc">
+			<order-column name="key" />
+		</order>
+
+		<!-- Finder methods -->
+
+		<finder name="CompanyId" return-type="Collection">
+			<finder-column name="companyId" />
+		</finder>
+		<finder name="CategoryId" return-type="Collection">
+			<finder-column name="categoryId" />
+		</finder>
+		<finder name="C_K" return-type="Collection">
+			<finder-column name="companyId" />
+			<finder-column name="key" />
+		</finder>
+		<finder name="CA_K" return-type="AssetProperty" unique="true">
+			<finder-column name="categoryId" />
+			<finder-column name="key" />
+		</finder>
+
+		<!-- References -->
+
+		<reference package-path="com.liferay.counter" entity="Counter" />
+		<reference package-path="com.liferay.portal" entity="User" />
+	</entity>
+	<entity name="AssetCategoryVocabulary" local-service="true" remote-service="true">
+
+		<!-- PK fields -->
+
+		<column name="vocabularyId" type="long" primary="true" />
+
+		<!-- Group instance -->
+
+		<column name="groupId" type="long" />
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long" />
+		<column name="userId" type="long" />
+		<column name="userName" type="String" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+
+		<!-- Other fields -->
+
+		<column name="name" type="String" />
+		<column name="description" type="String" />
+
+		<!-- Order -->
+
+		<order by="asc">
+			<order-column name="name" />
+		</order>
+
+		<!-- Finder methods -->
+
+		<finder name="G_N" return-type="AssetVocabulary" unique="true">
+			<finder-column name="groupId" />
+			<finder-column name="name" />
+		</finder>
+		<finder name="GroupId" return-type="Collection">
+			<finder-column name="groupId" />
+		</finder>
+		<finder name="CompanyId" return-type="Collection">
+			<finder-column name="companyId" />
+		</finder>
+
+		<!-- References -->
+
+		<reference package-path="com.liferay.counter" entity="Counter" />
+		<reference package-path="com.liferay.portal" entity="Group" />
+		<reference package-path="com.liferay.portal" entity="Resource" />
+		<reference package-path="com.liferay.portal" entity="User" />
+	</entity>
+	<exceptions>
+		<exception>DuplicateCategory</exception>
+		<exception>DuplicateVocabulary</exception>
+		<exception>PropertyKey</exception>
+		<exception>PropertyValue</exception>
+		<exception>AssetCategory</exception>
+		<exception>VocabularyName</exception>
+	</exceptions>
+</service-builder>

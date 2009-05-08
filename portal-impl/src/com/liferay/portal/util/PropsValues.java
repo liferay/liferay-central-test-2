@@ -86,6 +86,12 @@ public class PropsValues {
 	public static final String[] APPLICATION_STARTUP_EVENTS =
 		PropsUtil.getArray(PropsKeys.APPLICATION_STARTUP_EVENTS);
 
+	public static final String[] ASSET_CATEGORIES_PROPERTIES_DEFAULT =
+		PropsUtil.getArray(PropsKeys.ASSET_CATEGORIES_PROPERTIES_DEFAULT);
+
+	public static final String ASSET_CATEGORIES_VOCABULARY_DEFAULT =
+		PropsUtil.get(PropsKeys.ASSET_CATEGORIES_VOCABULARY_DEFAULT);
+
 	public static final String[] ASSET_PUBLISHER_DISPLAY_STYLES =
 		PropsUtil.getArray(PropsKeys.ASSET_PUBLISHER_DISPLAY_STYLES);
 

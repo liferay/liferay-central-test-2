@@ -217,4 +217,62 @@ public interface TagsAssetPersistence extends BasePersistence {
 	public void setTagsEntries(long pk,
 		java.util.List<com.liferay.portlet.tags.model.TagsEntry> tagsEntries)
 		throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> getAssetCategories(
+		long pk) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> getAssetCategories(
+		long pk, int start, int end) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> getAssetCategories(
+		long pk, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
+	public int getAssetCategoriesSize(long pk)
+		throws com.liferay.portal.SystemException;
+
+	public boolean containsAssetCategory(long pk, long assetCategoryPK)
+		throws com.liferay.portal.SystemException;
+
+	public boolean containsAssetCategories(long pk)
+		throws com.liferay.portal.SystemException;
+
+	public void addAssetCategory(long pk, long assetCategoryPK)
+		throws com.liferay.portal.SystemException;
+
+	public void addAssetCategory(long pk,
+		com.liferay.portlet.asset.model.AssetCategory assetCategory)
+		throws com.liferay.portal.SystemException;
+
+	public void addAssetCategories(long pk, long[] assetCategoryPKs)
+		throws com.liferay.portal.SystemException;
+
+	public void addAssetCategories(long pk,
+		java.util.List<com.liferay.portlet.asset.model.AssetCategory> assetCategories)
+		throws com.liferay.portal.SystemException;
+
+	public void clearAssetCategories(long pk)
+		throws com.liferay.portal.SystemException;
+
+	public void removeAssetCategory(long pk, long assetCategoryPK)
+		throws com.liferay.portal.SystemException;
+
+	public void removeAssetCategory(long pk,
+		com.liferay.portlet.asset.model.AssetCategory assetCategory)
+		throws com.liferay.portal.SystemException;
+
+	public void removeAssetCategories(long pk, long[] assetCategoryPKs)
+		throws com.liferay.portal.SystemException;
+
+	public void removeAssetCategories(long pk,
+		java.util.List<com.liferay.portlet.asset.model.AssetCategory> assetCategories)
+		throws com.liferay.portal.SystemException;
+
+	public void setAssetCategories(long pk, long[] assetCategoryPKs)
+		throws com.liferay.portal.SystemException;
+
+	public void setAssetCategories(long pk,
+		java.util.List<com.liferay.portlet.asset.model.AssetCategory> assetCategories)
+		throws com.liferay.portal.SystemException;
 }
