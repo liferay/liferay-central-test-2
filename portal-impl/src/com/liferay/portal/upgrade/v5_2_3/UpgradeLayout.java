@@ -20,13 +20,14 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.upgrade.v5_0_0;
+package com.liferay.portal.upgrade.v5_2_3;
 
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
-import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.UnicodeProperties;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 
@@ -73,20 +74,54 @@ public class UpgradeLayout extends UpgradeProcess {
 				long plid = rs.getLong("plid");
 				String typeSettings = rs.getString("typeSettings");
 
-				typeSettings = StringUtil.replace(
-					typeSettings,
-					new String[] {
-						"meta-description=",
-						"meta-keywords=",
-						"meta-robots="
-					},
-					new String[] {
-						"meta-description_" + languageId + "=",
-						"meta-keywords_" + languageId + "=",
-						"meta-robots_" + languageId + "="
-					});
+				UnicodeProperties typeSettingsProperties =
+					new UnicodeProperties();
 
-				updateTypeSettings(plid, typeSettings);
+				typeSettingsProperties.load(typeSettings);
+
+				String oldMetaDescription = typeSettingsProperties.getProperty(
+					"meta-description");
+				String newMetaDescription = typeSettingsProperties.getProperty(
+					"meta-description_" + languageId);
+
+				if (Validator.isNotNull(oldMetaDescription) &&
+					Validator.isNull(newMetaDescription)) {
+
+					typeSettingsProperties.setProperty(
+						"meta-description_" + languageId, oldMetaDescription);
+				}
+
+				typeSettingsProperties.remove("meta-description");
+
+				String oldMetaKeywords = typeSettingsProperties.getProperty(
+					"meta-keywords");
+				String newMetaKeywords = typeSettingsProperties.getProperty(
+					"meta-keywords_" + languageId);
+
+				if (Validator.isNotNull(oldMetaKeywords) &&
+					Validator.isNull(newMetaKeywords)) {
+
+					typeSettingsProperties.setProperty(
+						"meta-keywords_" + languageId, oldMetaKeywords);
+				}
+
+				typeSettingsProperties.remove("meta-keywords");
+
+				String oldMetaRobots = typeSettingsProperties.getProperty(
+					"meta-robots");
+				String newMetaRobots = typeSettingsProperties.getProperty(
+					"meta-robots_" + languageId);
+
+				if (Validator.isNotNull(oldMetaRobots) &&
+					Validator.isNull(newMetaRobots)) {
+
+					typeSettingsProperties.setProperty(
+						"meta-robots_" + languageId, oldMetaRobots);
+				}
+
+				typeSettingsProperties.remove("meta-robots");
+
+				updateTypeSettings(plid, typeSettingsProperties.toString());
 			}
 		}
 		finally {
