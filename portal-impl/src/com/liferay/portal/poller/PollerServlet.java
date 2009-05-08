@@ -48,6 +48,7 @@ import com.liferay.util.servlet.ServletResponseUtil;
 
 import java.io.IOException;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -121,15 +122,15 @@ public class PollerServlet extends HttpServlet {
 
 			if (i == 0) {
 				long companyId = GetterUtil.getLong(
-					(String)pollerRequestEntry.get("companyId"));
+					String.valueOf(pollerRequestEntry.get("companyId")));
 				String userIdString = GetterUtil.getString(
-					(String)pollerRequestEntry.get("userId"));
+					String.valueOf(pollerRequestEntry.get("userId")));
 				long timestamp = GetterUtil.getLong(
-					(String)pollerRequestEntry.get("timestamp"));
+					String.valueOf(pollerRequestEntry.get("timestamp")));
 				long browserKey = GetterUtil.getLong(
-					(String)pollerRequestEntry.get("browserKey"));
+					String.valueOf(pollerRequestEntry.get("browserKey")));
 				boolean startPolling = GetterUtil.getBoolean(
-					(String)pollerRequestEntry.get("startPolling"));
+					String.valueOf(pollerRequestEntry.get("startPolling")));
 
 				long userId = getUserId(companyId, userIdString);
 
@@ -167,14 +168,24 @@ public class PollerServlet extends HttpServlet {
 			else {
 				String portletId = (String)pollerRequestEntry.get(
 					"portletId");
-				Map<String, String> parameterMap =
-					(Map<String, String>)pollerRequestEntry.get("data");
+				Map<String, Object> oldParameterMap =
+					(Map<String, Object>)pollerRequestEntry.get("data");
+
+				Map<String, String> newParameterMap =
+					new HashMap<String, String>();
+
+				for (Map.Entry<String, Object> entry :
+						oldParameterMap.entrySet()) {
+
+					newParameterMap.put(
+						entry.getKey(), String.valueOf(entry.getValue()));
+				}
 
 				JSONObject pollerResponseEntryJSON = null;
 
 				try {
 					pollerResponseEntryJSON = process(
-						pollerHeader, portletId, parameterMap);
+						pollerHeader, portletId, newParameterMap);
 				}
 				catch (Exception e) {
 					_log.error(e, e);
