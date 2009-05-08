@@ -231,6 +231,10 @@ public class ServerDetector {
 		return sd._resin.booleanValue();
 	}
 
+	public static boolean isSupportsComet() {
+		return false;
+	}
+
 	public static boolean isTomcat() {
 		ServerDetector sd = _instance;
 
