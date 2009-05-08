@@ -181,6 +181,7 @@
 <%@ page import="com.liferay.portlet.UserAttributes" %>
 <%@ page import="com.liferay.portlet.portletconfiguration.util.PortletConfigurationUtil" %>
 <%@ page import="com.liferay.util.CreditCard" %>
+<%@ page import="com.liferay.util.Encryptor" %>
 <%@ page import="com.liferay.util.JS" %>
 <%@ page import="com.liferay.util.LocalizationUtil" %>
 <%@ page import="com.liferay.util.PKParser" %>
