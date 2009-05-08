@@ -3997,6 +3997,8 @@ public class GroupPersistenceImpl extends BasePersistenceImpl
 	protected com.liferay.portal.service.persistence.AccountPersistence accountPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.AddressPersistence.impl")
 	protected com.liferay.portal.service.persistence.AddressPersistence addressPersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.BrowserTrackerPersistence.impl")
+	protected com.liferay.portal.service.persistence.BrowserTrackerPersistence browserTrackerPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.ClassNamePersistence.impl")
 	protected com.liferay.portal.service.persistence.ClassNamePersistence classNamePersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.CompanyPersistence.impl")

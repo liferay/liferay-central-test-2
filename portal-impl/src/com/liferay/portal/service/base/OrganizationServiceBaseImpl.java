@@ -31,6 +31,7 @@ import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountService;
 import com.liferay.portal.service.AddressLocalService;
 import com.liferay.portal.service.AddressService;
+import com.liferay.portal.service.BrowserTrackerLocalService;
 import com.liferay.portal.service.ClassNameLocalService;
 import com.liferay.portal.service.ClassNameService;
 import com.liferay.portal.service.CompanyLocalService;
@@ -102,6 +103,7 @@ import com.liferay.portal.service.WebsiteLocalService;
 import com.liferay.portal.service.WebsiteService;
 import com.liferay.portal.service.persistence.AccountPersistence;
 import com.liferay.portal.service.persistence.AddressPersistence;
+import com.liferay.portal.service.persistence.BrowserTrackerPersistence;
 import com.liferay.portal.service.persistence.ClassNamePersistence;
 import com.liferay.portal.service.persistence.CompanyPersistence;
 import com.liferay.portal.service.persistence.ContactPersistence;
@@ -217,6 +219,24 @@ public abstract class OrganizationServiceBaseImpl extends PrincipalBean
 
 	public void setAddressPersistence(AddressPersistence addressPersistence) {
 		this.addressPersistence = addressPersistence;
+	}
+
+	public BrowserTrackerLocalService getBrowserTrackerLocalService() {
+		return browserTrackerLocalService;
+	}
+
+	public void setBrowserTrackerLocalService(
+		BrowserTrackerLocalService browserTrackerLocalService) {
+		this.browserTrackerLocalService = browserTrackerLocalService;
+	}
+
+	public BrowserTrackerPersistence getBrowserTrackerPersistence() {
+		return browserTrackerPersistence;
+	}
+
+	public void setBrowserTrackerPersistence(
+		BrowserTrackerPersistence browserTrackerPersistence) {
+		this.browserTrackerPersistence = browserTrackerPersistence;
 	}
 
 	public ClassNameLocalService getClassNameLocalService() {
@@ -1335,6 +1355,10 @@ public abstract class OrganizationServiceBaseImpl extends PrincipalBean
 	protected AddressService addressService;
 	@BeanReference(name = "com.liferay.portal.service.persistence.AddressPersistence.impl")
 	protected AddressPersistence addressPersistence;
+	@BeanReference(name = "com.liferay.portal.service.BrowserTrackerLocalService.impl")
+	protected BrowserTrackerLocalService browserTrackerLocalService;
+	@BeanReference(name = "com.liferay.portal.service.persistence.BrowserTrackerPersistence.impl")
+	protected BrowserTrackerPersistence browserTrackerPersistence;
 	@BeanReference(name = "com.liferay.portal.service.ClassNameLocalService.impl")
 	protected ClassNameLocalService classNameLocalService;
 	@BeanReference(name = "com.liferay.portal.service.ClassNameService.impl")

@@ -37,6 +37,17 @@
 	<bean id="com.liferay.portal.service.persistence.AddressUtil" class="com.liferay.portal.service.persistence.AddressUtil">
 		<property name="persistence" ref="com.liferay.portal.service.persistence.AddressPersistence.impl" />
 	</bean>
+	<bean id="com.liferay.portal.service.BrowserTrackerLocalService.impl" class="com.liferay.portal.service.impl.BrowserTrackerLocalServiceImpl" />
+	<bean id="com.liferay.portal.service.BrowserTrackerLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService">
+		<property name="target" ref="com.liferay.portal.service.BrowserTrackerLocalService.impl" />
+	</bean>
+	<bean id="com.liferay.portal.service.BrowserTrackerLocalServiceUtil" class="com.liferay.portal.service.BrowserTrackerLocalServiceUtil">
+		<property name="service" ref="com.liferay.portal.service.BrowserTrackerLocalService.impl" />
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.BrowserTrackerPersistence.impl" class="com.liferay.portal.service.persistence.BrowserTrackerPersistenceImpl" parent="basePersistence" />
+	<bean id="com.liferay.portal.service.persistence.BrowserTrackerUtil" class="com.liferay.portal.service.persistence.BrowserTrackerUtil">
+		<property name="persistence" ref="com.liferay.portal.service.persistence.BrowserTrackerPersistence.impl" />
+	</bean>
 	<bean id="com.liferay.portal.service.ClassNameLocalService.impl" class="com.liferay.portal.service.impl.ClassNameLocalServiceImpl" />
 	<bean id="com.liferay.portal.service.ClassNameLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService">
 		<property name="target" ref="com.liferay.portal.service.ClassNameLocalService.impl" />

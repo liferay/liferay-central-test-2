@@ -44,6 +44,8 @@ create index IX_967799C0 on BookmarksFolder (groupId, parentFolderId);
 create index IX_451E7AE3 on BookmarksFolder (uuid_);
 create unique index IX_DC2F8927 on BookmarksFolder (uuid_, groupId);
 
+create unique index IX_E7B95510 on BrowserTracker (userId);
+
 create index IX_D6FD9496 on CalEvent (companyId);
 create index IX_12EE4898 on CalEvent (groupId);
 create index IX_4FDDD2BF on CalEvent (groupId, repeating);

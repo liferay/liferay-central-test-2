@@ -153,6 +153,12 @@ public interface Portlet extends PortletModel {
 
 	public com.liferay.portal.kernel.portlet.PortletLayoutListener getPortletLayoutListenerInstance();
 
+	public java.lang.String getPollerProcessorClass();
+
+	public void setPollerProcessorClass(java.lang.String pollerProcessorClass);
+
+	public com.liferay.portal.kernel.poller.PollerProcessor getPollerProcessorInstance();
+
 	public java.lang.String getPopMessageListenerClass();
 
 	public void setPopMessageListenerClass(

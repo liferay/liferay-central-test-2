@@ -135,6 +135,12 @@ create table BookmarksFolder (
 	description STRING null
 );
 
+create table BrowserTracker (
+	browserTrackerId LONG not null primary key,
+	userId LONG,
+	browserKey LONG
+);
+
 create table CalEvent (
 	uuid_ VARCHAR(75) null,
 	eventId LONG not null primary key,

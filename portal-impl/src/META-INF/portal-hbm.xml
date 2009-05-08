@@ -46,6 +46,14 @@
 		<property name="mailing" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 		<property name="primary" column="primary_" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 	</class>
+	<class name="com.liferay.portal.model.impl.BrowserTrackerImpl" table="BrowserTracker">
+		<cache usage="read-write" />
+		<id name="browserTrackerId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="browserKey" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+	</class>
 	<class name="com.liferay.portal.model.impl.ClassNameImpl" table="ClassName_">
 		<cache usage="read-write" />
 		<id name="classNameId" type="long">
