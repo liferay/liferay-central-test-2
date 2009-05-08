@@ -226,6 +226,11 @@ public class OrganizationLocalServiceImpl
 			throw new RequiredOrganizationException();
 		}
 
+		// Tags
+
+		tagsAssetLocalService.deleteAsset(
+			Organization.class.getName(), organization.getOrganizationId());
+
 		// Addresses
 
 		addressLocalService.deleteAddresses(
@@ -269,11 +274,6 @@ public class OrganizationLocalServiceImpl
 			organization.getCompanyId(), name,
 			ResourceConstants.SCOPE_INDIVIDUAL,
 			organization.getOrganizationId());
-
-		// Tags
-
-		tagsAssetLocalService.deleteAsset(
-			Organization.class.getName(), organization.getOrganizationId());
 
 		// Organization
 
