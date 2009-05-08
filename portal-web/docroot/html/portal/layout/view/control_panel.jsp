@@ -259,8 +259,35 @@ List<Layout> scopeLayouts = new ArrayList<Layout>();
 							backURL = PortalUtil.getLayoutURL(refererLayout, themeDisplay);
 						}
 						else {
-							refererGroupDescriptiveName = GroupConstants.GUEST;
-							backURL = themeDisplay.getURLHome();
+							List<Group> myPlaces = user.getMyPlaces(1);
+
+							if (myPlaces.isEmpty()) {
+								refererGroupDescriptiveName = GroupConstants.GUEST;
+								backURL = themeDisplay.getURLHome();
+							}
+							else {
+								Group myPlace = myPlaces.get(0);
+
+								refererGroupDescriptiveName = myPlace.getDescriptiveName();
+
+								PortletURL portletURL = new PortletURLImpl(request, PortletKeys.MY_PLACES, plid, PortletRequest.ACTION_PHASE);
+
+								portletURL.setWindowState(WindowState.NORMAL);
+								portletURL.setPortletMode(PortletMode.VIEW);
+
+								portletURL.setParameter("struts_action", "/my_places/view");
+
+								portletURL.setParameter("groupId", String.valueOf(myPlace.getGroupId()));
+
+								if (myPlace.getPublicLayoutsPageCount() > 0) {
+									portletURL.setParameter("privateLayout", "0");
+								}
+								else {
+									portletURL.setParameter("privateLayout", "1");
+								}
+
+								backURL = portletURL.toString();
+							}
 
 							if (Validator.isNotNull(themeDisplay.getDoAsUserId())) {
 								backURL = HttpUtil.addParameter(backURL, "doAsUserId", themeDisplay.getDoAsUserId());
