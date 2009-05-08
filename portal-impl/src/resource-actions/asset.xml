@@ -27,7 +27,7 @@
 		<guest-defaults />
 		<guest-unsupported>
 			<action-key>ADD_CATEGORY</action-key>
-			<action-key>ADD_VOCABULARY</action-key>
+			<action-key>ADD_CATEGORY_VOCABULARY</action-key>
 		</guest-unsupported>
 	</model-resource>
 	<model-resource>

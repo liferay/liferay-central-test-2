@@ -40,10 +40,10 @@ public interface AssetCategoryPropertyPersistence extends BasePersistence {
 	public void clearCache();
 
 	public com.liferay.portlet.asset.model.AssetCategoryProperty create(
-		long propertyId);
+		long categoryPropertyId);
 
 	public com.liferay.portlet.asset.model.AssetCategoryProperty remove(
-		long propertyId)
+		long categoryPropertyId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.asset.NoSuchCategoryPropertyException;
 
@@ -80,12 +80,12 @@ public interface AssetCategoryPropertyPersistence extends BasePersistence {
 		boolean merge) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.asset.model.AssetCategoryProperty findByPrimaryKey(
-		long propertyId)
+		long categoryPropertyId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.asset.NoSuchCategoryPropertyException;
 
 	public com.liferay.portlet.asset.model.AssetCategoryProperty fetchByPrimaryKey(
-		long propertyId) throws com.liferay.portal.SystemException;
+		long categoryPropertyId) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.asset.model.AssetCategoryProperty> findByCompanyId(
 		long companyId) throws com.liferay.portal.SystemException;
@@ -110,7 +110,7 @@ public interface AssetCategoryPropertyPersistence extends BasePersistence {
 			com.liferay.portlet.asset.NoSuchCategoryPropertyException;
 
 	public com.liferay.portlet.asset.model.AssetCategoryProperty[] findByCompanyId_PrevAndNext(
-		long propertyId, long companyId,
+		long categoryPropertyId, long companyId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.asset.NoSuchCategoryPropertyException;
@@ -138,7 +138,7 @@ public interface AssetCategoryPropertyPersistence extends BasePersistence {
 			com.liferay.portlet.asset.NoSuchCategoryPropertyException;
 
 	public com.liferay.portlet.asset.model.AssetCategoryProperty[] findByCategoryId_PrevAndNext(
-		long propertyId, long categoryId,
+		long categoryPropertyId, long categoryId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.asset.NoSuchCategoryPropertyException;
@@ -169,7 +169,7 @@ public interface AssetCategoryPropertyPersistence extends BasePersistence {
 			com.liferay.portlet.asset.NoSuchCategoryPropertyException;
 
 	public com.liferay.portlet.asset.model.AssetCategoryProperty[] findByC_K_PrevAndNext(
-		long propertyId, long companyId, java.lang.String key,
+		long categoryPropertyId, long companyId, java.lang.String key,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.asset.NoSuchCategoryPropertyException;

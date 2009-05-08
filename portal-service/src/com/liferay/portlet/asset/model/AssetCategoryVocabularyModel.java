@@ -51,9 +51,9 @@ public interface AssetCategoryVocabularyModel extends BaseModel<AssetCategoryVoc
 
 	public void setPrimaryKey(long pk);
 
-	public long getVocabularyId();
+	public long getCategoryVocabularyId();
 
-	public void setVocabularyId(long vocabularyId);
+	public void setCategoryVocabularyId(long categoryVocabularyId);
 
 	public long getGroupId();
 

@@ -66,13 +66,14 @@ public abstract class AssetCategoryPropertyLocalServiceBaseImpl
 			false);
 	}
 
-	public AssetCategoryProperty createAssetCategoryProperty(long propertyId) {
-		return assetCategoryPropertyPersistence.create(propertyId);
+	public AssetCategoryProperty createAssetCategoryProperty(
+		long categoryPropertyId) {
+		return assetCategoryPropertyPersistence.create(categoryPropertyId);
 	}
 
-	public void deleteAssetCategoryProperty(long propertyId)
+	public void deleteAssetCategoryProperty(long categoryPropertyId)
 		throws PortalException, SystemException {
-		assetCategoryPropertyPersistence.remove(propertyId);
+		assetCategoryPropertyPersistence.remove(categoryPropertyId);
 	}
 
 	public void deleteAssetCategoryProperty(
@@ -91,9 +92,9 @@ public abstract class AssetCategoryPropertyLocalServiceBaseImpl
 			start, end);
 	}
 
-	public AssetCategoryProperty getAssetCategoryProperty(long propertyId)
-		throws PortalException, SystemException {
-		return assetCategoryPropertyPersistence.findByPrimaryKey(propertyId);
+	public AssetCategoryProperty getAssetCategoryProperty(
+		long categoryPropertyId) throws PortalException, SystemException {
+		return assetCategoryPropertyPersistence.findByPrimaryKey(categoryPropertyId);
 	}
 
 	public List<AssetCategoryProperty> getAssetCategoryProperties(int start,

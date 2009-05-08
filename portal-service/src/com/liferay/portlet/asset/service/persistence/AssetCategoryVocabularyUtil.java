@@ -44,15 +44,15 @@ public class AssetCategoryVocabularyUtil {
 	}
 
 	public static com.liferay.portlet.asset.model.AssetCategoryVocabulary create(
-		long vocabularyId) {
-		return getPersistence().create(vocabularyId);
+		long categoryVocabularyId) {
+		return getPersistence().create(categoryVocabularyId);
 	}
 
 	public static com.liferay.portlet.asset.model.AssetCategoryVocabulary remove(
-		long vocabularyId)
+		long categoryVocabularyId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.asset.NoSuchCategoryVocabularyException {
-		return getPersistence().remove(vocabularyId);
+		return getPersistence().remove(categoryVocabularyId);
 	}
 
 	public static com.liferay.portlet.asset.model.AssetCategoryVocabulary remove(
@@ -96,34 +96,15 @@ public class AssetCategoryVocabularyUtil {
 	}
 
 	public static com.liferay.portlet.asset.model.AssetCategoryVocabulary findByPrimaryKey(
-		long vocabularyId)
+		long categoryVocabularyId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.asset.NoSuchCategoryVocabularyException {
-		return getPersistence().findByPrimaryKey(vocabularyId);
+		return getPersistence().findByPrimaryKey(categoryVocabularyId);
 	}
 
 	public static com.liferay.portlet.asset.model.AssetCategoryVocabulary fetchByPrimaryKey(
-		long vocabularyId) throws com.liferay.portal.SystemException {
-		return getPersistence().fetchByPrimaryKey(vocabularyId);
-	}
-
-	public static com.liferay.portlet.asset.model.AssetCategoryVocabulary findByG_N(
-		long groupId, java.lang.String name)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.asset.NoSuchCategoryVocabularyException {
-		return getPersistence().findByG_N(groupId, name);
-	}
-
-	public static com.liferay.portlet.asset.model.AssetCategoryVocabulary fetchByG_N(
-		long groupId, java.lang.String name)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().fetchByG_N(groupId, name);
-	}
-
-	public static com.liferay.portlet.asset.model.AssetCategoryVocabulary fetchByG_N(
-		long groupId, java.lang.String name, boolean retrieveFromCache)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().fetchByG_N(groupId, name, retrieveFromCache);
+		long categoryVocabularyId) throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByPrimaryKey(categoryVocabularyId);
 	}
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetCategoryVocabulary> findByGroupId(
@@ -159,12 +140,12 @@ public class AssetCategoryVocabularyUtil {
 	}
 
 	public static com.liferay.portlet.asset.model.AssetCategoryVocabulary[] findByGroupId_PrevAndNext(
-		long vocabularyId, long groupId,
+		long categoryVocabularyId, long groupId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.asset.NoSuchCategoryVocabularyException {
 		return getPersistence()
-				   .findByGroupId_PrevAndNext(vocabularyId, groupId, obc);
+				   .findByGroupId_PrevAndNext(categoryVocabularyId, groupId, obc);
 	}
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetCategoryVocabulary> findByCompanyId(
@@ -200,12 +181,32 @@ public class AssetCategoryVocabularyUtil {
 	}
 
 	public static com.liferay.portlet.asset.model.AssetCategoryVocabulary[] findByCompanyId_PrevAndNext(
-		long vocabularyId, long companyId,
+		long categoryVocabularyId, long companyId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.asset.NoSuchCategoryVocabularyException {
 		return getPersistence()
-				   .findByCompanyId_PrevAndNext(vocabularyId, companyId, obc);
+				   .findByCompanyId_PrevAndNext(categoryVocabularyId,
+			companyId, obc);
+	}
+
+	public static com.liferay.portlet.asset.model.AssetCategoryVocabulary findByG_N(
+		long groupId, java.lang.String name)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.asset.NoSuchCategoryVocabularyException {
+		return getPersistence().findByG_N(groupId, name);
+	}
+
+	public static com.liferay.portlet.asset.model.AssetCategoryVocabulary fetchByG_N(
+		long groupId, java.lang.String name)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByG_N(groupId, name);
+	}
+
+	public static com.liferay.portlet.asset.model.AssetCategoryVocabulary fetchByG_N(
+		long groupId, java.lang.String name, boolean retrieveFromCache)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByG_N(groupId, name, retrieveFromCache);
 	}
 
 	public static java.util.List<Object> findWithDynamicQuery(
@@ -236,12 +237,6 @@ public class AssetCategoryVocabularyUtil {
 		return getPersistence().findAll(start, end, obc);
 	}
 
-	public static void removeByG_N(long groupId, java.lang.String name)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.asset.NoSuchCategoryVocabularyException {
-		getPersistence().removeByG_N(groupId, name);
-	}
-
 	public static void removeByGroupId(long groupId)
 		throws com.liferay.portal.SystemException {
 		getPersistence().removeByGroupId(groupId);
@@ -252,13 +247,14 @@ public class AssetCategoryVocabularyUtil {
 		getPersistence().removeByCompanyId(companyId);
 	}
 
-	public static void removeAll() throws com.liferay.portal.SystemException {
-		getPersistence().removeAll();
+	public static void removeByG_N(long groupId, java.lang.String name)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.asset.NoSuchCategoryVocabularyException {
+		getPersistence().removeByG_N(groupId, name);
 	}
 
-	public static int countByG_N(long groupId, java.lang.String name)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().countByG_N(groupId, name);
+	public static void removeAll() throws com.liferay.portal.SystemException {
+		getPersistence().removeAll();
 	}
 
 	public static int countByGroupId(long groupId)
@@ -269,6 +265,11 @@ public class AssetCategoryVocabularyUtil {
 	public static int countByCompanyId(long companyId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByCompanyId(companyId);
+	}
+
+	public static int countByG_N(long groupId, java.lang.String name)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByG_N(groupId, name);
 	}
 
 	public static int countAll() throws com.liferay.portal.SystemException {

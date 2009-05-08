@@ -107,8 +107,7 @@ public class AssetCategoryFinderImpl
 		}
 	}
 
-	public int countByG_N_P(
-			long groupId, String name, String[] properties)
+	public int countByG_N_P(long groupId, String name, String[] properties)
 		throws SystemException {
 
 		Session session = null;
@@ -278,13 +277,13 @@ public class AssetCategoryFinderImpl
 		else {
 			StringBuilder sb = new StringBuilder();
 
-			sb.append(" INNER JOIN CategoriesProperty ON ");
-			sb.append(" (CategoriesProperty.entryId = ");
+			sb.append(" INNER JOIN AssetCategoryProperty ON ");
+			sb.append(" (AssetCategoryProperty.entryId = ");
 			sb.append(" AssetCategory.entryId) AND ");
 
 			for (int i = 0; i < properties.length; i++) {
-				sb.append("(CategoriesProperty.key_ = ? AND ");
-				sb.append("CategoriesProperty.value = ?) ");
+				sb.append("(AssetCategoryProperty.key_ = ? AND ");
+				sb.append("AssetCategoryProperty.value = ?) ");
 
 				if ((i + 1) < properties.length) {
 					sb.append(" AND ");

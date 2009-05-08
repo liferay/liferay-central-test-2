@@ -25,27 +25,27 @@ package com.liferay.portlet.asset;
 import com.liferay.portal.PortalException;
 
 /**
- * <a href="DuplicateVocabularyException.java.html"><b><i>View Source</i></b>
+ * <a href="CategoryPropertyValueException.java.html"><b><i>View Source</i></b>
  * </a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class DuplicateVocabularyException extends PortalException {
+public class CategoryPropertyValueException extends PortalException {
 
-	public DuplicateVocabularyException() {
+	public CategoryPropertyValueException() {
 		super();
 	}
 
-	public DuplicateVocabularyException(String msg) {
+	public CategoryPropertyValueException(String msg) {
 		super(msg);
 	}
 
-	public DuplicateVocabularyException(String msg, Throwable cause) {
+	public CategoryPropertyValueException(String msg, Throwable cause) {
 		super(msg, cause);
 	}
 
-	public DuplicateVocabularyException(Throwable cause) {
+	public CategoryPropertyValueException(Throwable cause) {
 		super(cause);
 	}
 

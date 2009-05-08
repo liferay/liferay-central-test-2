@@ -205,7 +205,7 @@ public class TagsAssetPersistenceImpl extends BasePersistenceImpl
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("TagsAssets_AssetCategory");
+			FinderCacheUtil.clearCache("TagsAssets_AssetCategories");
 		}
 
 		Session session = null;
@@ -1330,8 +1330,8 @@ public class TagsAssetPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public static final FinderPath FINDER_PATH_GET_ASSETCATEGORIES = new FinderPath(com.liferay.portlet.asset.model.impl.AssetCategoryModelImpl.ENTITY_CACHE_ENABLED,
-			TagsAssetModelImpl.FINDER_CACHE_ENABLED_TAGSASSETS_ASSETCATEGORY,
-			"TagsAssets_AssetCategory", "getAssetCategories",
+			TagsAssetModelImpl.FINDER_CACHE_ENABLED_TAGSASSETS_ASSETCATEGORIES,
+			"TagsAssets_AssetCategories", "getAssetCategories",
 			new String[] {
 				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
@@ -1404,8 +1404,8 @@ public class TagsAssetPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public static final FinderPath FINDER_PATH_GET_ASSETCATEGORIES_SIZE = new FinderPath(com.liferay.portlet.asset.model.impl.AssetCategoryModelImpl.ENTITY_CACHE_ENABLED,
-			TagsAssetModelImpl.FINDER_CACHE_ENABLED_TAGSASSETS_ASSETCATEGORY,
-			"TagsAssets_AssetCategory", "getAssetCategoriesSize",
+			TagsAssetModelImpl.FINDER_CACHE_ENABLED_TAGSASSETS_ASSETCATEGORIES,
+			"TagsAssets_AssetCategories", "getAssetCategoriesSize",
 			new String[] { Long.class.getName() });
 
 	public int getAssetCategoriesSize(long pk) throws SystemException {
@@ -1449,8 +1449,8 @@ public class TagsAssetPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public static final FinderPath FINDER_PATH_CONTAINS_ASSETCATEGORY = new FinderPath(com.liferay.portlet.asset.model.impl.AssetCategoryModelImpl.ENTITY_CACHE_ENABLED,
-			TagsAssetModelImpl.FINDER_CACHE_ENABLED_TAGSASSETS_ASSETCATEGORY,
-			"TagsAssets_AssetCategory", "containsAssetCategory",
+			TagsAssetModelImpl.FINDER_CACHE_ENABLED_TAGSASSETS_ASSETCATEGORIES,
+			"TagsAssets_AssetCategories", "containsAssetCategory",
 			new String[] { Long.class.getName(), Long.class.getName() });
 
 	public boolean containsAssetCategory(long pk, long assetCategoryPK)
@@ -1503,7 +1503,7 @@ public class TagsAssetPersistenceImpl extends BasePersistenceImpl
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("TagsAssets_AssetCategory");
+			FinderCacheUtil.clearCache("TagsAssets_AssetCategories");
 		}
 	}
 
@@ -1517,7 +1517,7 @@ public class TagsAssetPersistenceImpl extends BasePersistenceImpl
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("TagsAssets_AssetCategory");
+			FinderCacheUtil.clearCache("TagsAssets_AssetCategories");
 		}
 	}
 
@@ -1532,7 +1532,7 @@ public class TagsAssetPersistenceImpl extends BasePersistenceImpl
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("TagsAssets_AssetCategory");
+			FinderCacheUtil.clearCache("TagsAssets_AssetCategories");
 		}
 	}
 
@@ -1548,7 +1548,7 @@ public class TagsAssetPersistenceImpl extends BasePersistenceImpl
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("TagsAssets_AssetCategory");
+			FinderCacheUtil.clearCache("TagsAssets_AssetCategories");
 		}
 	}
 
@@ -1560,7 +1560,7 @@ public class TagsAssetPersistenceImpl extends BasePersistenceImpl
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("TagsAssets_AssetCategory");
+			FinderCacheUtil.clearCache("TagsAssets_AssetCategories");
 		}
 	}
 
@@ -1573,7 +1573,7 @@ public class TagsAssetPersistenceImpl extends BasePersistenceImpl
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("TagsAssets_AssetCategory");
+			FinderCacheUtil.clearCache("TagsAssets_AssetCategories");
 		}
 	}
 
@@ -1587,7 +1587,7 @@ public class TagsAssetPersistenceImpl extends BasePersistenceImpl
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("TagsAssets_AssetCategory");
+			FinderCacheUtil.clearCache("TagsAssets_AssetCategories");
 		}
 	}
 
@@ -1602,7 +1602,7 @@ public class TagsAssetPersistenceImpl extends BasePersistenceImpl
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("TagsAssets_AssetCategory");
+			FinderCacheUtil.clearCache("TagsAssets_AssetCategories");
 		}
 	}
 
@@ -1618,7 +1618,7 @@ public class TagsAssetPersistenceImpl extends BasePersistenceImpl
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("TagsAssets_AssetCategory");
+			FinderCacheUtil.clearCache("TagsAssets_AssetCategories");
 		}
 	}
 
@@ -1635,7 +1635,7 @@ public class TagsAssetPersistenceImpl extends BasePersistenceImpl
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("TagsAssets_AssetCategory");
+			FinderCacheUtil.clearCache("TagsAssets_AssetCategories");
 		}
 	}
 
@@ -1653,7 +1653,7 @@ public class TagsAssetPersistenceImpl extends BasePersistenceImpl
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("TagsAssets_AssetCategory");
+			FinderCacheUtil.clearCache("TagsAssets_AssetCategories");
 		}
 	}
 
@@ -1707,12 +1707,12 @@ public class TagsAssetPersistenceImpl extends BasePersistenceImpl
 	protected com.liferay.portal.service.persistence.GroupPersistence groupPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence.impl")
 	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
+	@BeanReference(name = "com.liferay.portlet.asset.service.persistence.AssetCategoryPersistence.impl")
+	protected com.liferay.portlet.asset.service.persistence.AssetCategoryPersistence assetCategoryPersistence;
 	@BeanReference(name = "com.liferay.portlet.blogs.service.persistence.BlogsEntryPersistence.impl")
 	protected com.liferay.portlet.blogs.service.persistence.BlogsEntryPersistence blogsEntryPersistence;
 	@BeanReference(name = "com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryPersistence.impl")
 	protected com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryPersistence bookmarksEntryPersistence;
-	@BeanReference(name = "com.liferay.portlet.asset.service.persistence.AssetCategoryPersistence.impl")
-	protected com.liferay.portlet.asset.service.persistence.AssetCategoryPersistence assetCategoryPersistence;
 	@BeanReference(name = "com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPersistence.impl")
 	protected com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPersistence dlFileEntryPersistence;
 	@BeanReference(name = "com.liferay.portlet.journal.service.persistence.JournalArticlePersistence.impl")
@@ -1937,7 +1937,7 @@ public class TagsAssetPersistenceImpl extends BasePersistenceImpl
 	protected class AddAssetCategory {
 		protected AddAssetCategory(TagsAssetPersistenceImpl persistenceImpl) {
 			_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(),
-					"INSERT INTO TagsAssets_AssetCategory (assetId, categoryId) VALUES (?, ?)",
+					"INSERT INTO TagsAssets_AssetCategories (assetId, categoryId) VALUES (?, ?)",
 					new int[] { Types.BIGINT, Types.BIGINT });
 			_persistenceImpl = persistenceImpl;
 		}
@@ -1984,7 +1984,7 @@ public class TagsAssetPersistenceImpl extends BasePersistenceImpl
 	protected class ClearAssetCategories {
 		protected ClearAssetCategories(TagsAssetPersistenceImpl persistenceImpl) {
 			_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(),
-					"DELETE FROM TagsAssets_AssetCategory WHERE assetId = ?",
+					"DELETE FROM TagsAssets_AssetCategories WHERE assetId = ?",
 					new int[] { Types.BIGINT });
 		}
 
@@ -2035,7 +2035,7 @@ public class TagsAssetPersistenceImpl extends BasePersistenceImpl
 	protected class RemoveAssetCategory {
 		protected RemoveAssetCategory(TagsAssetPersistenceImpl persistenceImpl) {
 			_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(),
-					"DELETE FROM TagsAssets_AssetCategory WHERE assetId = ? AND categoryId = ?",
+					"DELETE FROM TagsAssets_AssetCategories WHERE assetId = ? AND categoryId = ?",
 					new int[] { Types.BIGINT, Types.BIGINT });
 			_persistenceImpl = persistenceImpl;
 		}
@@ -2082,8 +2082,8 @@ public class TagsAssetPersistenceImpl extends BasePersistenceImpl
 	private static final String _SQL_GETTAGSENTRIES = "SELECT {TagsEntry.*} FROM TagsEntry INNER JOIN TagsAssets_TagsEntries ON (TagsAssets_TagsEntries.entryId = TagsEntry.entryId) WHERE (TagsAssets_TagsEntries.assetId = ?)";
 	private static final String _SQL_GETTAGSENTRIESSIZE = "SELECT COUNT(*) AS COUNT_VALUE FROM TagsAssets_TagsEntries WHERE assetId = ?";
 	private static final String _SQL_CONTAINSTAGSENTRY = "SELECT COUNT(*) AS COUNT_VALUE FROM TagsAssets_TagsEntries WHERE assetId = ? AND entryId = ?";
-	private static final String _SQL_GETASSETCATEGORIES = "SELECT {AssetCategory.*} FROM AssetCategory INNER JOIN TagsAssets_AssetCategory ON (TagsAssets_AssetCategory.categoryId = AssetCategory.categoryId) WHERE (TagsAssets_AssetCategory.assetId = ?)";
-	private static final String _SQL_GETASSETCATEGORIESSIZE = "SELECT COUNT(*) AS COUNT_VALUE FROM TagsAssets_AssetCategory WHERE assetId = ?";
-	private static final String _SQL_CONTAINSASSETCATEGORY = "SELECT COUNT(*) AS COUNT_VALUE FROM TagsAssets_AssetCategory WHERE assetId = ? AND categoryId = ?";
+	private static final String _SQL_GETASSETCATEGORIES = "SELECT {AssetCategory.*} FROM AssetCategory INNER JOIN TagsAssets_AssetCategories ON (TagsAssets_AssetCategories.categoryId = AssetCategory.categoryId) WHERE (TagsAssets_AssetCategories.assetId = ?)";
+	private static final String _SQL_GETASSETCATEGORIESSIZE = "SELECT COUNT(*) AS COUNT_VALUE FROM TagsAssets_AssetCategories WHERE assetId = ?";
+	private static final String _SQL_CONTAINSASSETCATEGORY = "SELECT COUNT(*) AS COUNT_VALUE FROM TagsAssets_AssetCategories WHERE assetId = ? AND categoryId = ?";
 	private static Log _log = LogFactoryUtil.getLog(TagsAssetPersistenceImpl.class);
 }

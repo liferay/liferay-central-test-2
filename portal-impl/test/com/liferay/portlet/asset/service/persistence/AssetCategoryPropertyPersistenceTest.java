@@ -86,8 +86,8 @@ public class AssetCategoryPropertyPersistenceTest
 
 		AssetCategoryProperty existingAssetCategoryProperty = _persistence.findByPrimaryKey(newAssetCategoryProperty.getPrimaryKey());
 
-		assertEquals(existingAssetCategoryProperty.getPropertyId(),
-			newAssetCategoryProperty.getPropertyId());
+		assertEquals(existingAssetCategoryProperty.getCategoryPropertyId(),
+			newAssetCategoryProperty.getCategoryPropertyId());
 		assertEquals(existingAssetCategoryProperty.getCompanyId(),
 			newAssetCategoryProperty.getCompanyId());
 		assertEquals(existingAssetCategoryProperty.getUserId(),

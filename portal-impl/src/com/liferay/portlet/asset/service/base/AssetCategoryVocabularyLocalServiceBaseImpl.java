@@ -76,13 +76,13 @@ public abstract class AssetCategoryVocabularyLocalServiceBaseImpl
 	}
 
 	public AssetCategoryVocabulary createAssetCategoryVocabulary(
-		long vocabularyId) {
-		return assetCategoryVocabularyPersistence.create(vocabularyId);
+		long categoryVocabularyId) {
+		return assetCategoryVocabularyPersistence.create(categoryVocabularyId);
 	}
 
-	public void deleteAssetCategoryVocabulary(long vocabularyId)
+	public void deleteAssetCategoryVocabulary(long categoryVocabularyId)
 		throws PortalException, SystemException {
-		assetCategoryVocabularyPersistence.remove(vocabularyId);
+		assetCategoryVocabularyPersistence.remove(categoryVocabularyId);
 	}
 
 	public void deleteAssetCategoryVocabulary(
@@ -102,9 +102,9 @@ public abstract class AssetCategoryVocabularyLocalServiceBaseImpl
 			start, end);
 	}
 
-	public AssetCategoryVocabulary getAssetCategoryVocabulary(long vocabularyId)
-		throws PortalException, SystemException {
-		return assetCategoryVocabularyPersistence.findByPrimaryKey(vocabularyId);
+	public AssetCategoryVocabulary getAssetCategoryVocabulary(
+		long categoryVocabularyId) throws PortalException, SystemException {
+		return assetCategoryVocabularyPersistence.findByPrimaryKey(categoryVocabularyId);
 	}
 
 	public List<AssetCategoryVocabulary> getAssetCategoryVocabularies(

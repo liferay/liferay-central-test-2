@@ -25,7 +25,6 @@ package com.liferay.portlet.asset.service;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.Isolation;
-import com.liferay.portal.kernel.annotation.Propagation;
 import com.liferay.portal.kernel.annotation.Transactional;
 
 /**
@@ -55,55 +54,4 @@ import com.liferay.portal.kernel.annotation.Transactional;
 @Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
 	PortalException.class, SystemException.class})
 public interface AssetCategoryService {
-	public com.liferay.portlet.asset.model.AssetCategory addCategory(
-		long vocabularyId, long parentCategoryId, java.lang.String name,
-		java.lang.String[] properties,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
-	public void deleteCategory(long categoryId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> getCategories(
-		java.lang.String className, long classPK)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public com.liferay.portlet.asset.model.AssetCategory getCategory(
-		long categoryId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> getGroupVocabularyCategories(
-		long parentCategoryId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> getVocabularyCategories(
-		long vocabularyId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> getVocabularyRootCategories(
-		long vocabularyId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public com.liferay.portal.kernel.json.JSONArray search(long groupId,
-		java.lang.String name, java.lang.String[] properties, int start, int end)
-		throws com.liferay.portal.SystemException;
-
-	public com.liferay.portlet.asset.model.AssetCategory updateCategory(
-		long categoryId, long vocabularyId, long parentCategoryId,
-		java.lang.String name, java.lang.String[] properties)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
 }

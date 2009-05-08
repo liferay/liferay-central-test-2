@@ -18,8 +18,8 @@ create unique index IX_4539A99C on AnnouncementsFlag (userId, entryId, value);
 
 create index IX_7BB1826B on AssetCategory (parentCategoryId);
 create index IX_9DDD15EA on AssetCategory (parentCategoryId, name);
+create index IX_B185E980 on AssetCategory (parentCategoryId, vocabularyId);
 create index IX_287B1F89 on AssetCategory (vocabularyId);
-create index IX_923C4A80 on AssetCategory (vocabularyId, parentCategoryId);
 
 create index IX_99DA856 on AssetCategoryProperty (categoryId);
 create unique index IX_DBD111AA on AssetCategoryProperty (categoryId, key_);
@@ -483,8 +483,8 @@ create index IX_E8F34171 on Subscription (userId, classNameId);
 create unique index IX_1AB6D6D2 on TagsAsset (classNameId, classPK);
 create index IX_AB3D8BCB on TagsAsset (companyId);
 
-create index IX_4DF5C8AA on TagsAssets_AssetCategory (assetId);
-create index IX_88CB387E on TagsAssets_AssetCategory (categoryId);
+create index IX_F1E3180C on TagsAssets_AssetCategories (assetId);
+create index IX_E5D415DC on TagsAssets_AssetCategories (categoryId);
 
 create index IX_B22F3A1 on TagsAssets_TagsEntries (assetId);
 create index IX_A02A8023 on TagsAssets_TagsEntries (entryId);

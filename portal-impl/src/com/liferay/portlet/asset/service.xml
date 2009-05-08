@@ -29,7 +29,7 @@
 
 		<!-- Relationships -->
 
-		<column name="assets" type="Collection" entity="com.liferay.portlet.tags.TagsAsset" mapping-table="TagsAssets_AssetCategory" />
+		<column name="assets" type="Collection" entity="com.liferay.portlet.tags.TagsAsset" mapping-table="TagsAssets_AssetCategories" />
 
 		<!-- Order -->
 
@@ -39,19 +39,19 @@
 
 		<!-- Finder methods -->
 
-		<finder name="VocabularyId" return-type="Collection">
-			<finder-column name="vocabularyId" />
-		</finder>
 		<finder name="ParentCategoryId" return-type="Collection">
 			<finder-column name="parentCategoryId" />
+		</finder>
+		<finder name="VocabularyId" return-type="Collection">
+			<finder-column name="vocabularyId" />
 		</finder>
 		<finder name="P_N" return-type="Collection">
 			<finder-column name="parentCategoryId" />
 			<finder-column name="name" />
 		</finder>
-		<finder name="V_P" return-type="Collection">
-			<finder-column name="vocabularyId" />
+		<finder name="P_V" return-type="Collection">
 			<finder-column name="parentCategoryId" />
+			<finder-column name="vocabularyId" />
 		</finder>
 
 		<!-- References -->
@@ -65,7 +65,7 @@
 
 		<!-- PK fields -->
 
-		<column name="propertyId" type="long" primary="true" />
+		<column name="categoryPropertyId" type="long" primary="true" />
 
 		<!-- Audit fields -->
 
@@ -99,7 +99,7 @@
 			<finder-column name="companyId" />
 			<finder-column name="key" />
 		</finder>
-		<finder name="CA_K" return-type="AssetProperty" unique="true">
+		<finder name="CA_K" return-type="AssetCategoryProperty" unique="true">
 			<finder-column name="categoryId" />
 			<finder-column name="key" />
 		</finder>
@@ -113,7 +113,7 @@
 
 		<!-- PK fields -->
 
-		<column name="vocabularyId" type="long" primary="true" />
+		<column name="categoryVocabularyId" type="long" primary="true" />
 
 		<!-- Group instance -->
 
@@ -140,15 +140,15 @@
 
 		<!-- Finder methods -->
 
-		<finder name="G_N" return-type="AssetVocabulary" unique="true">
-			<finder-column name="groupId" />
-			<finder-column name="name" />
-		</finder>
 		<finder name="GroupId" return-type="Collection">
 			<finder-column name="groupId" />
 		</finder>
 		<finder name="CompanyId" return-type="Collection">
 			<finder-column name="companyId" />
+		</finder>
+		<finder name="G_N" return-type="AssetCategoryVocabulary" unique="true">
+			<finder-column name="groupId" />
+			<finder-column name="name" />
 		</finder>
 
 		<!-- References -->
@@ -159,11 +159,11 @@
 		<reference package-path="com.liferay.portal" entity="User" />
 	</entity>
 	<exceptions>
-		<exception>DuplicateCategory</exception>
-		<exception>DuplicateVocabulary</exception>
-		<exception>PropertyKey</exception>
-		<exception>PropertyValue</exception>
 		<exception>AssetCategory</exception>
-		<exception>VocabularyName</exception>
+		<exception>DuplicateCategory</exception>
+		<exception>DuplicateCategoryVocabulary</exception>
+		<exception>CategoryPropertyKey</exception>
+		<exception>CategoryPropertyValue</exception>
+		<exception>CategoryVocabularyName</exception>
 	</exceptions>
 </service-builder>

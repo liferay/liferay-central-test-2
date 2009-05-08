@@ -25,7 +25,6 @@ package com.liferay.portlet.asset.service;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.Isolation;
-import com.liferay.portal.kernel.annotation.Propagation;
 import com.liferay.portal.kernel.annotation.Transactional;
 
 /**
@@ -55,26 +54,4 @@ import com.liferay.portal.kernel.annotation.Transactional;
 @Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
 	PortalException.class, SystemException.class})
 public interface AssetCategoryPropertyService {
-	public com.liferay.portlet.asset.model.AssetCategoryProperty addProperty(
-		long entryId, java.lang.String key, java.lang.String value)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
-	public void deleteProperty(long propertyId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.liferay.portlet.asset.model.AssetCategoryProperty> getProperties(
-		long entryId) throws com.liferay.portal.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.liferay.portlet.asset.model.AssetCategoryProperty> getPropertyValues(
-		long companyId, java.lang.String key)
-		throws com.liferay.portal.SystemException;
-
-	public com.liferay.portlet.asset.model.AssetCategoryProperty updateProperty(
-		long propertyId, java.lang.String key, java.lang.String value)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
 }

@@ -117,7 +117,7 @@ public class AssetCategoryPropertyFinderImpl
 			qPos.add(groupId);
 			qPos.add(key);
 
-			List<AssetCategoryProperty> properties =
+			List<AssetCategoryProperty> categoryProperties =
 				new ArrayList<AssetCategoryProperty>();
 
 			Iterator<String> itr = (Iterator<String>)QueryUtil.iterate(
@@ -126,16 +126,16 @@ public class AssetCategoryPropertyFinderImpl
 			while (itr.hasNext()) {
 				String value = itr.next();
 
-				AssetCategoryProperty property =
+				AssetCategoryProperty categoryProperty =
 					new AssetCategoryPropertyImpl();
 
-				property.setKey(key);
-				property.setValue(value);
+				categoryProperty.setKey(key);
+				categoryProperty.setValue(value);
 
-				properties.add(property);
+				categoryProperties.add(categoryProperty);
 			}
 
-			return properties;
+			return categoryProperties;
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

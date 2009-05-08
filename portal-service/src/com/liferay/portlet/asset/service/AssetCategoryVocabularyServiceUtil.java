@@ -45,48 +45,6 @@ package com.liferay.portlet.asset.service;
  *
  */
 public class AssetCategoryVocabularyServiceUtil {
-	public static com.liferay.portlet.asset.model.AssetCategoryVocabulary addVocabulary(
-		java.lang.String name,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return getService().addVocabulary(name, serviceContext);
-	}
-
-	public static void deleteVocabulary(long vocabularyId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		getService().deleteVocabulary(vocabularyId);
-	}
-
-	public static java.util.List<com.liferay.portlet.asset.model.AssetCategoryVocabulary> getCompanyVocabularies(
-		long companyId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return getService().getCompanyVocabularies(companyId);
-	}
-
-	public static java.util.List<com.liferay.portlet.asset.model.AssetCategoryVocabulary> getGroupVocabularies(
-		long groupId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return getService().getGroupVocabularies(groupId);
-	}
-
-	public static com.liferay.portlet.asset.model.AssetCategoryVocabulary getVocabulary(
-		long vocabularyId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return getService().getVocabulary(vocabularyId);
-	}
-
-	public static com.liferay.portlet.asset.model.AssetCategoryVocabulary updateVocabulary(
-		long vocabularyId, java.lang.String name)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return getService().updateVocabulary(vocabularyId, name);
-	}
-
 	public static AssetCategoryVocabularyService getService() {
 		if (_service == null) {
 			throw new RuntimeException(

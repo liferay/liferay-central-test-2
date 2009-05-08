@@ -40,52 +40,54 @@ import com.liferay.portlet.asset.service.AssetCategoryVocabularyLocalServiceUtil
 public class AssetCategoryVocabularyPermission {
 
 	public static void check(
-			PermissionChecker permissionChecker, long vocabularyId,
+			PermissionChecker permissionChecker, long categoryVocabularyId,
 			String actionId)
 		throws PortalException, SystemException {
 
-		if (!contains(permissionChecker, vocabularyId, actionId)) {
+		if (!contains(permissionChecker, categoryVocabularyId, actionId)) {
 			throw new PrincipalException();
 		}
 	}
 
 	public static void check(
 			PermissionChecker permissionChecker,
-			AssetCategoryVocabulary vocabulary, String actionId)
+			AssetCategoryVocabulary categoryVocabulary, String actionId)
 		throws PortalException {
 
-		if (!contains(permissionChecker, vocabulary, actionId)) {
+		if (!contains(permissionChecker, categoryVocabulary, actionId)) {
 			throw new PrincipalException();
 		}
 	}
 
 	public static boolean contains(
-			PermissionChecker permissionChecker, long vocabularyId,
+			PermissionChecker permissionChecker, long categoryVocabularyId,
 			String actionId)
 		throws PortalException, SystemException {
 
-		AssetCategoryVocabulary vocabulary =
-			AssetCategoryVocabularyLocalServiceUtil.getVocabulary(vocabularyId);
+		AssetCategoryVocabulary categoryVocabulary =
+			AssetCategoryVocabularyLocalServiceUtil.getCategoryVocabulary(
+				categoryVocabularyId);
 
-		return contains(permissionChecker, vocabulary, actionId);
+		return contains(permissionChecker, categoryVocabulary, actionId);
 	}
 
 	public static boolean contains(
-		PermissionChecker permissionChecker, AssetCategoryVocabulary vocabulary,
-		String actionId) {
+		PermissionChecker permissionChecker,
+		AssetCategoryVocabulary categoryVocabulary, String actionId) {
 
 		if (permissionChecker.hasOwnerPermission(
-				vocabulary.getCompanyId(),
+				categoryVocabulary.getCompanyId(),
 				AssetCategoryVocabulary.class.getName(),
-				vocabulary.getVocabularyId(), vocabulary.getUserId(),
-				actionId)) {
+				categoryVocabulary.getCategoryVocabularyId(),
+				categoryVocabulary.getUserId(), actionId)) {
 
 			return true;
 		}
 
 		return permissionChecker.hasPermission(
-			vocabulary.getGroupId(), AssetCategoryVocabulary.class.getName(),
-			vocabulary.getVocabularyId(), actionId);
+			categoryVocabulary.getGroupId(),
+			AssetCategoryVocabulary.class.getName(),
+			categoryVocabulary.getCategoryVocabularyId(), actionId);
 	}
 
 }

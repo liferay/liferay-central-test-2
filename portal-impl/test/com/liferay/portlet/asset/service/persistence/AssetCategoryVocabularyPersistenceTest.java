@@ -86,8 +86,8 @@ public class AssetCategoryVocabularyPersistenceTest
 
 		AssetCategoryVocabulary existingAssetCategoryVocabulary = _persistence.findByPrimaryKey(newAssetCategoryVocabulary.getPrimaryKey());
 
-		assertEquals(existingAssetCategoryVocabulary.getVocabularyId(),
-			newAssetCategoryVocabulary.getVocabularyId());
+		assertEquals(existingAssetCategoryVocabulary.getCategoryVocabularyId(),
+			newAssetCategoryVocabulary.getCategoryVocabularyId());
 		assertEquals(existingAssetCategoryVocabulary.getGroupId(),
 			newAssetCategoryVocabulary.getGroupId());
 		assertEquals(existingAssetCategoryVocabulary.getCompanyId(),

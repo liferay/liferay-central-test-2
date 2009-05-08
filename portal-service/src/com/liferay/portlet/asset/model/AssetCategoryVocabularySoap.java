@@ -51,7 +51,7 @@ public class AssetCategoryVocabularySoap implements Serializable {
 		AssetCategoryVocabulary model) {
 		AssetCategoryVocabularySoap soapModel = new AssetCategoryVocabularySoap();
 
-		soapModel.setVocabularyId(model.getVocabularyId());
+		soapModel.setCategoryVocabularyId(model.getCategoryVocabularyId());
 		soapModel.setGroupId(model.getGroupId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserId(model.getUserId());
@@ -79,19 +79,19 @@ public class AssetCategoryVocabularySoap implements Serializable {
 	}
 
 	public long getPrimaryKey() {
-		return _vocabularyId;
+		return _categoryVocabularyId;
 	}
 
 	public void setPrimaryKey(long pk) {
-		setVocabularyId(pk);
+		setCategoryVocabularyId(pk);
 	}
 
-	public long getVocabularyId() {
-		return _vocabularyId;
+	public long getCategoryVocabularyId() {
+		return _categoryVocabularyId;
 	}
 
-	public void setVocabularyId(long vocabularyId) {
-		_vocabularyId = vocabularyId;
+	public void setCategoryVocabularyId(long categoryVocabularyId) {
+		_categoryVocabularyId = categoryVocabularyId;
 	}
 
 	public long getGroupId() {
@@ -158,7 +158,7 @@ public class AssetCategoryVocabularySoap implements Serializable {
 		_description = description;
 	}
 
-	private long _vocabularyId;
+	private long _categoryVocabularyId;
 	private long _groupId;
 	private long _companyId;
 	private long _userId;

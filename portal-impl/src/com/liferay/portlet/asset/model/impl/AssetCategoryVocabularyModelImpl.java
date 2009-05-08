@@ -65,7 +65,7 @@ import java.util.List;
 public class AssetCategoryVocabularyModelImpl extends BaseModelImpl<AssetCategoryVocabulary> {
 	public static final String TABLE_NAME = "AssetCategoryVocabulary";
 	public static final Object[][] TABLE_COLUMNS = {
-			{ "vocabularyId", new Integer(Types.BIGINT) },
+			{ "categoryVocabularyId", new Integer(Types.BIGINT) },
 			
 
 			{ "groupId", new Integer(Types.BIGINT) },
@@ -91,7 +91,7 @@ public class AssetCategoryVocabularyModelImpl extends BaseModelImpl<AssetCategor
 
 			{ "description", new Integer(Types.VARCHAR) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table AssetCategoryVocabulary (vocabularyId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name VARCHAR(75) null,description VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table AssetCategoryVocabulary (categoryVocabularyId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name VARCHAR(75) null,description VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table AssetCategoryVocabulary";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -107,7 +107,7 @@ public class AssetCategoryVocabularyModelImpl extends BaseModelImpl<AssetCategor
 		AssetCategoryVocabularySoap soapModel) {
 		AssetCategoryVocabulary model = new AssetCategoryVocabularyImpl();
 
-		model.setVocabularyId(soapModel.getVocabularyId());
+		model.setCategoryVocabularyId(soapModel.getCategoryVocabularyId());
 		model.setGroupId(soapModel.getGroupId());
 		model.setCompanyId(soapModel.getCompanyId());
 		model.setUserId(soapModel.getUserId());
@@ -138,23 +138,23 @@ public class AssetCategoryVocabularyModelImpl extends BaseModelImpl<AssetCategor
 	}
 
 	public long getPrimaryKey() {
-		return _vocabularyId;
+		return _categoryVocabularyId;
 	}
 
 	public void setPrimaryKey(long pk) {
-		setVocabularyId(pk);
+		setCategoryVocabularyId(pk);
 	}
 
 	public Serializable getPrimaryKeyObj() {
-		return new Long(_vocabularyId);
+		return new Long(_categoryVocabularyId);
 	}
 
-	public long getVocabularyId() {
-		return _vocabularyId;
+	public long getCategoryVocabularyId() {
+		return _categoryVocabularyId;
 	}
 
-	public void setVocabularyId(long vocabularyId) {
-		_vocabularyId = vocabularyId;
+	public void setCategoryVocabularyId(long categoryVocabularyId) {
+		_categoryVocabularyId = categoryVocabularyId;
 	}
 
 	public long getGroupId() {
@@ -249,7 +249,7 @@ public class AssetCategoryVocabularyModelImpl extends BaseModelImpl<AssetCategor
 			model.setNew(isNew());
 			model.setEscapedModel(true);
 
-			model.setVocabularyId(getVocabularyId());
+			model.setCategoryVocabularyId(getCategoryVocabularyId());
 			model.setGroupId(getGroupId());
 			model.setCompanyId(getCompanyId());
 			model.setUserId(getUserId());
@@ -279,7 +279,7 @@ public class AssetCategoryVocabularyModelImpl extends BaseModelImpl<AssetCategor
 	public Object clone() {
 		AssetCategoryVocabularyImpl clone = new AssetCategoryVocabularyImpl();
 
-		clone.setVocabularyId(getVocabularyId());
+		clone.setCategoryVocabularyId(getCategoryVocabularyId());
 		clone.setGroupId(getGroupId());
 		clone.setCompanyId(getCompanyId());
 		clone.setUserId(getUserId());
@@ -335,8 +335,8 @@ public class AssetCategoryVocabularyModelImpl extends BaseModelImpl<AssetCategor
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 
-		sb.append("{vocabularyId=");
-		sb.append(getVocabularyId());
+		sb.append("{categoryVocabularyId=");
+		sb.append(getCategoryVocabularyId());
 		sb.append(", groupId=");
 		sb.append(getGroupId());
 		sb.append(", companyId=");
@@ -366,40 +366,40 @@ public class AssetCategoryVocabularyModelImpl extends BaseModelImpl<AssetCategor
 		sb.append("</model-name>");
 
 		sb.append(
-			"<column><column-name>vocabularyId</column-name><column-value><![CDATA[");
-		sb.append("getVocabularyId()");
+			"<column><column-name>categoryVocabularyId</column-name><column-value><![CDATA[");
+		sb.append(getCategoryVocabularyId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>groupId</column-name><column-value><![CDATA[");
-		sb.append("getGroupId()");
+		sb.append(getGroupId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>companyId</column-name><column-value><![CDATA[");
-		sb.append("getCompanyId()");
+		sb.append(getCompanyId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>userId</column-name><column-value><![CDATA[");
-		sb.append("getUserId()");
+		sb.append(getUserId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>userName</column-name><column-value><![CDATA[");
-		sb.append("getUserName()");
+		sb.append(getUserName());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>createDate</column-name><column-value><![CDATA[");
-		sb.append("getCreateDate()");
+		sb.append(getCreateDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>modifiedDate</column-name><column-value><![CDATA[");
-		sb.append("getModifiedDate()");
+		sb.append(getModifiedDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>name</column-name><column-value><![CDATA[");
-		sb.append("getName()");
+		sb.append(getName());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>description</column-name><column-value><![CDATA[");
-		sb.append("getDescription()");
+		sb.append(getDescription());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
@@ -407,7 +407,7 @@ public class AssetCategoryVocabularyModelImpl extends BaseModelImpl<AssetCategor
 		return sb.toString();
 	}
 
-	private long _vocabularyId;
+	private long _categoryVocabularyId;
 	private long _groupId;
 	private long _originalGroupId;
 	private boolean _setOriginalGroupId;

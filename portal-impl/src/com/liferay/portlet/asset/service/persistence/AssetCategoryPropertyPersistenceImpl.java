@@ -160,16 +160,16 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
-	public AssetCategoryProperty create(long propertyId) {
+	public AssetCategoryProperty create(long categoryPropertyId) {
 		AssetCategoryProperty assetCategoryProperty = new AssetCategoryPropertyImpl();
 
 		assetCategoryProperty.setNew(true);
-		assetCategoryProperty.setPrimaryKey(propertyId);
+		assetCategoryProperty.setPrimaryKey(categoryPropertyId);
 
 		return assetCategoryProperty;
 	}
 
-	public AssetCategoryProperty remove(long propertyId)
+	public AssetCategoryProperty remove(long categoryPropertyId)
 		throws NoSuchCategoryPropertyException, SystemException {
 		Session session = null;
 
@@ -177,18 +177,18 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl
 			session = openSession();
 
 			AssetCategoryProperty assetCategoryProperty = (AssetCategoryProperty)session.get(AssetCategoryPropertyImpl.class,
-					new Long(propertyId));
+					new Long(categoryPropertyId));
 
 			if (assetCategoryProperty == null) {
 				if (_log.isWarnEnabled()) {
 					_log.warn(
 						"No AssetCategoryProperty exists with the primary key " +
-						propertyId);
+						categoryPropertyId);
 				}
 
 				throw new NoSuchCategoryPropertyException(
 					"No AssetCategoryProperty exists with the primary key " +
-					propertyId);
+					categoryPropertyId);
 			}
 
 			return remove(assetCategoryProperty);
@@ -375,29 +375,29 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl
 		return assetCategoryProperty;
 	}
 
-	public AssetCategoryProperty findByPrimaryKey(long propertyId)
+	public AssetCategoryProperty findByPrimaryKey(long categoryPropertyId)
 		throws NoSuchCategoryPropertyException, SystemException {
-		AssetCategoryProperty assetCategoryProperty = fetchByPrimaryKey(propertyId);
+		AssetCategoryProperty assetCategoryProperty = fetchByPrimaryKey(categoryPropertyId);
 
 		if (assetCategoryProperty == null) {
 			if (_log.isWarnEnabled()) {
 				_log.warn(
 					"No AssetCategoryProperty exists with the primary key " +
-					propertyId);
+					categoryPropertyId);
 			}
 
 			throw new NoSuchCategoryPropertyException(
 				"No AssetCategoryProperty exists with the primary key " +
-				propertyId);
+				categoryPropertyId);
 		}
 
 		return assetCategoryProperty;
 	}
 
-	public AssetCategoryProperty fetchByPrimaryKey(long propertyId)
+	public AssetCategoryProperty fetchByPrimaryKey(long categoryPropertyId)
 		throws SystemException {
 		AssetCategoryProperty assetCategoryProperty = (AssetCategoryProperty)EntityCacheUtil.getResult(AssetCategoryPropertyModelImpl.ENTITY_CACHE_ENABLED,
-				AssetCategoryPropertyImpl.class, propertyId, this);
+				AssetCategoryPropertyImpl.class, categoryPropertyId, this);
 
 		if (assetCategoryProperty == null) {
 			Session session = null;
@@ -406,7 +406,7 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl
 				session = openSession();
 
 				assetCategoryProperty = (AssetCategoryProperty)session.get(AssetCategoryPropertyImpl.class,
-						new Long(propertyId));
+						new Long(categoryPropertyId));
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -594,9 +594,9 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public AssetCategoryProperty[] findByCompanyId_PrevAndNext(
-		long propertyId, long companyId, OrderByComparator obc)
+		long categoryPropertyId, long companyId, OrderByComparator obc)
 		throws NoSuchCategoryPropertyException, SystemException {
-		AssetCategoryProperty assetCategoryProperty = findByPrimaryKey(propertyId);
+		AssetCategoryProperty assetCategoryProperty = findByPrimaryKey(categoryPropertyId);
 
 		int count = countByCompanyId(companyId);
 
@@ -822,9 +822,9 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public AssetCategoryProperty[] findByCategoryId_PrevAndNext(
-		long propertyId, long categoryId, OrderByComparator obc)
+		long categoryPropertyId, long categoryId, OrderByComparator obc)
 		throws NoSuchCategoryPropertyException, SystemException {
-		AssetCategoryProperty assetCategoryProperty = findByPrimaryKey(propertyId);
+		AssetCategoryProperty assetCategoryProperty = findByPrimaryKey(categoryPropertyId);
 
 		int count = countByCategoryId(categoryId);
 
@@ -1082,10 +1082,11 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public AssetCategoryProperty[] findByC_K_PrevAndNext(long propertyId,
-		long companyId, String key, OrderByComparator obc)
+	public AssetCategoryProperty[] findByC_K_PrevAndNext(
+		long categoryPropertyId, long companyId, String key,
+		OrderByComparator obc)
 		throws NoSuchCategoryPropertyException, SystemException {
-		AssetCategoryProperty assetCategoryProperty = findByPrimaryKey(propertyId);
+		AssetCategoryProperty assetCategoryProperty = findByPrimaryKey(categoryPropertyId);
 
 		int count = countByC_K(companyId, key);
 

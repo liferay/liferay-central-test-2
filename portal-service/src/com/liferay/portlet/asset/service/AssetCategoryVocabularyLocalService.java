@@ -60,9 +60,9 @@ public interface AssetCategoryVocabularyLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.asset.model.AssetCategoryVocabulary createAssetCategoryVocabulary(
-		long vocabularyId);
+		long categoryVocabularyId);
 
-	public void deleteAssetCategoryVocabulary(long vocabularyId)
+	public void deleteAssetCategoryVocabulary(long categoryVocabularyId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
@@ -80,7 +80,7 @@ public interface AssetCategoryVocabularyLocalService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.asset.model.AssetCategoryVocabulary getAssetCategoryVocabulary(
-		long vocabularyId)
+		long categoryVocabularyId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
@@ -100,58 +100,9 @@ public interface AssetCategoryVocabularyLocalService {
 		com.liferay.portlet.asset.model.AssetCategoryVocabulary assetCategoryVocabulary,
 		boolean merge) throws com.liferay.portal.SystemException;
 
-	public com.liferay.portlet.asset.model.AssetCategoryVocabulary addVocabulary(
-		long userId, java.lang.String name,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
-	public void addVocabularyResources(
-		com.liferay.portlet.asset.model.AssetCategoryVocabulary vocabulary,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
-	public void addVocabularyResources(
-		com.liferay.portlet.asset.model.AssetCategoryVocabulary vocabulary,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
-	public void deleteVocabulary(long vocabularyId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
-	public void deleteVocabulary(
-		com.liferay.portlet.asset.model.AssetCategoryVocabulary vocabulary)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.liferay.portlet.asset.model.AssetCategoryVocabulary> getCompanyVocabularies(
-		long companyId) throws com.liferay.portal.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.liferay.portlet.asset.model.AssetCategoryVocabulary> getGroupVocabularies(
-		long groupId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public com.liferay.portlet.asset.model.AssetCategoryVocabulary getGroupVocabulary(
-		long groupId, java.lang.String name)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public com.liferay.portlet.asset.model.AssetCategoryVocabulary getVocabulary(
-		long vocabularyId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
-	public com.liferay.portlet.asset.model.AssetCategoryVocabulary updateVocabulary(
-		long vocabularyId, java.lang.String name)
+	public com.liferay.portlet.asset.model.AssetCategoryVocabulary getCategoryVocabulary(
+		long categoryVocabularyId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 }

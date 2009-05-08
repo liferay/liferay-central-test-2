@@ -85,34 +85,6 @@ public interface AssetCategoryPersistence extends BasePersistence {
 	public com.liferay.portlet.asset.model.AssetCategory fetchByPrimaryKey(
 		long categoryId) throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> findByVocabularyId(
-		long vocabularyId) throws com.liferay.portal.SystemException;
-
-	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> findByVocabularyId(
-		long vocabularyId, int start, int end)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> findByVocabularyId(
-		long vocabularyId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException;
-
-	public com.liferay.portlet.asset.model.AssetCategory findByVocabularyId_First(
-		long vocabularyId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.asset.NoSuchCategoryException;
-
-	public com.liferay.portlet.asset.model.AssetCategory findByVocabularyId_Last(
-		long vocabularyId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.asset.NoSuchCategoryException;
-
-	public com.liferay.portlet.asset.model.AssetCategory[] findByVocabularyId_PrevAndNext(
-		long categoryId, long vocabularyId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.asset.NoSuchCategoryException;
-
 	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> findByParentCategoryId(
 		long parentCategoryId) throws com.liferay.portal.SystemException;
 
@@ -139,6 +111,34 @@ public interface AssetCategoryPersistence extends BasePersistence {
 
 	public com.liferay.portlet.asset.model.AssetCategory[] findByParentCategoryId_PrevAndNext(
 		long categoryId, long parentCategoryId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.asset.NoSuchCategoryException;
+
+	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> findByVocabularyId(
+		long vocabularyId) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> findByVocabularyId(
+		long vocabularyId, int start, int end)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> findByVocabularyId(
+		long vocabularyId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.asset.model.AssetCategory findByVocabularyId_First(
+		long vocabularyId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.asset.NoSuchCategoryException;
+
+	public com.liferay.portlet.asset.model.AssetCategory findByVocabularyId_Last(
+		long vocabularyId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.asset.NoSuchCategoryException;
+
+	public com.liferay.portlet.asset.model.AssetCategory[] findByVocabularyId_PrevAndNext(
+		long categoryId, long vocabularyId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.asset.NoSuchCategoryException;
@@ -174,33 +174,33 @@ public interface AssetCategoryPersistence extends BasePersistence {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.asset.NoSuchCategoryException;
 
-	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> findByV_P(
-		long vocabularyId, long parentCategoryId)
+	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> findByP_V(
+		long parentCategoryId, long vocabularyId)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> findByV_P(
-		long vocabularyId, long parentCategoryId, int start, int end)
+	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> findByP_V(
+		long parentCategoryId, long vocabularyId, int start, int end)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> findByV_P(
-		long vocabularyId, long parentCategoryId, int start, int end,
+	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> findByP_V(
+		long parentCategoryId, long vocabularyId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
-	public com.liferay.portlet.asset.model.AssetCategory findByV_P_First(
-		long vocabularyId, long parentCategoryId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.asset.NoSuchCategoryException;
-
-	public com.liferay.portlet.asset.model.AssetCategory findByV_P_Last(
-		long vocabularyId, long parentCategoryId,
+	public com.liferay.portlet.asset.model.AssetCategory findByP_V_First(
+		long parentCategoryId, long vocabularyId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.asset.NoSuchCategoryException;
 
-	public com.liferay.portlet.asset.model.AssetCategory[] findByV_P_PrevAndNext(
-		long categoryId, long vocabularyId, long parentCategoryId,
+	public com.liferay.portlet.asset.model.AssetCategory findByP_V_Last(
+		long parentCategoryId, long vocabularyId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.asset.NoSuchCategoryException;
+
+	public com.liferay.portlet.asset.model.AssetCategory[] findByP_V_PrevAndNext(
+		long categoryId, long parentCategoryId, long vocabularyId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.asset.NoSuchCategoryException;
@@ -223,30 +223,30 @@ public interface AssetCategoryPersistence extends BasePersistence {
 		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
-	public void removeByVocabularyId(long vocabularyId)
+	public void removeByParentCategoryId(long parentCategoryId)
 		throws com.liferay.portal.SystemException;
 
-	public void removeByParentCategoryId(long parentCategoryId)
+	public void removeByVocabularyId(long vocabularyId)
 		throws com.liferay.portal.SystemException;
 
 	public void removeByP_N(long parentCategoryId, java.lang.String name)
 		throws com.liferay.portal.SystemException;
 
-	public void removeByV_P(long vocabularyId, long parentCategoryId)
+	public void removeByP_V(long parentCategoryId, long vocabularyId)
 		throws com.liferay.portal.SystemException;
 
 	public void removeAll() throws com.liferay.portal.SystemException;
 
-	public int countByVocabularyId(long vocabularyId)
+	public int countByParentCategoryId(long parentCategoryId)
 		throws com.liferay.portal.SystemException;
 
-	public int countByParentCategoryId(long parentCategoryId)
+	public int countByVocabularyId(long vocabularyId)
 		throws com.liferay.portal.SystemException;
 
 	public int countByP_N(long parentCategoryId, java.lang.String name)
 		throws com.liferay.portal.SystemException;
 
-	public int countByV_P(long vocabularyId, long parentCategoryId)
+	public int countByP_V(long parentCategoryId, long vocabularyId)
 		throws com.liferay.portal.SystemException;
 
 	public int countAll() throws com.liferay.portal.SystemException;

@@ -30,8 +30,9 @@ import com.liferay.portlet.asset.model.AssetCategory;
  * @author Brian Wing Shun Chan
  *
  */
-public class AssetCategoryImpl extends AssetCategoryModelImpl
-	implements AssetCategory {
+public class AssetCategoryImpl
+	extends AssetCategoryModelImpl implements AssetCategory {
+
 	public AssetCategoryImpl() {
 	}
 

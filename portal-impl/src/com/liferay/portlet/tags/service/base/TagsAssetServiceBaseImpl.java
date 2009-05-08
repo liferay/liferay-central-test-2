@@ -369,6 +369,41 @@ public abstract class TagsAssetServiceBaseImpl extends PrincipalBean
 		this.userFinder = userFinder;
 	}
 
+	public AssetCategoryLocalService getAssetCategoryLocalService() {
+		return assetCategoryLocalService;
+	}
+
+	public void setAssetCategoryLocalService(
+		AssetCategoryLocalService assetCategoryLocalService) {
+		this.assetCategoryLocalService = assetCategoryLocalService;
+	}
+
+	public AssetCategoryService getAssetCategoryService() {
+		return assetCategoryService;
+	}
+
+	public void setAssetCategoryService(
+		AssetCategoryService assetCategoryService) {
+		this.assetCategoryService = assetCategoryService;
+	}
+
+	public AssetCategoryPersistence getAssetCategoryPersistence() {
+		return assetCategoryPersistence;
+	}
+
+	public void setAssetCategoryPersistence(
+		AssetCategoryPersistence assetCategoryPersistence) {
+		this.assetCategoryPersistence = assetCategoryPersistence;
+	}
+
+	public AssetCategoryFinder getAssetCategoryFinder() {
+		return assetCategoryFinder;
+	}
+
+	public void setAssetCategoryFinder(AssetCategoryFinder assetCategoryFinder) {
+		this.assetCategoryFinder = assetCategoryFinder;
+	}
+
 	public BlogsEntryLocalService getBlogsEntryLocalService() {
 		return blogsEntryLocalService;
 	}
@@ -437,41 +472,6 @@ public abstract class TagsAssetServiceBaseImpl extends PrincipalBean
 	public void setBookmarksEntryFinder(
 		BookmarksEntryFinder bookmarksEntryFinder) {
 		this.bookmarksEntryFinder = bookmarksEntryFinder;
-	}
-
-	public AssetCategoryLocalService getAssetCategoryLocalService() {
-		return assetCategoryLocalService;
-	}
-
-	public void setAssetCategoryLocalService(
-		AssetCategoryLocalService assetCategoryLocalService) {
-		this.assetCategoryLocalService = assetCategoryLocalService;
-	}
-
-	public AssetCategoryService getAssetCategoryService() {
-		return assetCategoryService;
-	}
-
-	public void setAssetCategoryService(
-		AssetCategoryService assetCategoryService) {
-		this.assetCategoryService = assetCategoryService;
-	}
-
-	public AssetCategoryPersistence getAssetCategoryPersistence() {
-		return assetCategoryPersistence;
-	}
-
-	public void setAssetCategoryPersistence(
-		AssetCategoryPersistence assetCategoryPersistence) {
-		this.assetCategoryPersistence = assetCategoryPersistence;
-	}
-
-	public AssetCategoryFinder getAssetCategoryFinder() {
-		return assetCategoryFinder;
-	}
-
-	public void setAssetCategoryFinder(AssetCategoryFinder assetCategoryFinder) {
-		this.assetCategoryFinder = assetCategoryFinder;
 	}
 
 	public DLFileEntryLocalService getDLFileEntryLocalService() {
@@ -720,6 +720,14 @@ public abstract class TagsAssetServiceBaseImpl extends PrincipalBean
 	protected UserPersistence userPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.UserFinder.impl")
 	protected UserFinder userFinder;
+	@BeanReference(name = "com.liferay.portlet.asset.service.AssetCategoryLocalService.impl")
+	protected AssetCategoryLocalService assetCategoryLocalService;
+	@BeanReference(name = "com.liferay.portlet.asset.service.AssetCategoryService.impl")
+	protected AssetCategoryService assetCategoryService;
+	@BeanReference(name = "com.liferay.portlet.asset.service.persistence.AssetCategoryPersistence.impl")
+	protected AssetCategoryPersistence assetCategoryPersistence;
+	@BeanReference(name = "com.liferay.portlet.asset.service.persistence.AssetCategoryFinder.impl")
+	protected AssetCategoryFinder assetCategoryFinder;
 	@BeanReference(name = "com.liferay.portlet.blogs.service.BlogsEntryLocalService.impl")
 	protected BlogsEntryLocalService blogsEntryLocalService;
 	@BeanReference(name = "com.liferay.portlet.blogs.service.BlogsEntryService.impl")
@@ -736,14 +744,6 @@ public abstract class TagsAssetServiceBaseImpl extends PrincipalBean
 	protected BookmarksEntryPersistence bookmarksEntryPersistence;
 	@BeanReference(name = "com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryFinder.impl")
 	protected BookmarksEntryFinder bookmarksEntryFinder;
-	@BeanReference(name = "com.liferay.portlet.asset.service.AssetCategoryLocalService.impl")
-	protected AssetCategoryLocalService assetCategoryLocalService;
-	@BeanReference(name = "com.liferay.portlet.asset.service.AssetCategoryService.impl")
-	protected AssetCategoryService assetCategoryService;
-	@BeanReference(name = "com.liferay.portlet.asset.service.persistence.AssetCategoryPersistence.impl")
-	protected AssetCategoryPersistence assetCategoryPersistence;
-	@BeanReference(name = "com.liferay.portlet.asset.service.persistence.AssetCategoryFinder.impl")
-	protected AssetCategoryFinder assetCategoryFinder;
 	@BeanReference(name = "com.liferay.portlet.documentlibrary.service.DLFileEntryLocalService.impl")
 	protected DLFileEntryLocalService dlFileEntryLocalService;
 	@BeanReference(name = "com.liferay.portlet.documentlibrary.service.DLFileEntryService.impl")

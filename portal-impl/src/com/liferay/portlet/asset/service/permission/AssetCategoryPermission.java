@@ -27,7 +27,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portlet.asset.model.AssetCategory;
-import com.liferay.portlet.asset.model.AssetConstants;
+import com.liferay.portlet.asset.model.AssetCategoryConstants;
 import com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil;
 
 /**
@@ -73,7 +73,7 @@ public class AssetCategoryPermission {
 			String actionId)
 		throws PortalException, SystemException {
 
-		if (categoryId == AssetConstants.DEFAULT_PARENT_CATEGORY_ID) {
+		if (categoryId == AssetCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) {
 			return AssetPermission.contains(
 				permissionChecker, groupId, actionId);
 		}
@@ -87,7 +87,7 @@ public class AssetCategoryPermission {
 			String actionId)
 		throws PortalException, SystemException {
 
-		AssetCategory category = AssetCategoryLocalServiceUtil.getAssetCategory(
+		AssetCategory category = AssetCategoryLocalServiceUtil.getCategory(
 			categoryId);
 
 		return contains(permissionChecker, category, actionId);

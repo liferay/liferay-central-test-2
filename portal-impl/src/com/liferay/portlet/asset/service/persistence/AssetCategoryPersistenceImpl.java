@@ -72,23 +72,6 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl
 	public static final String FINDER_CLASS_NAME_ENTITY = AssetCategoryImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";
-	public static final FinderPath FINDER_PATH_FIND_BY_VOCABULARYID = new FinderPath(AssetCategoryModelImpl.ENTITY_CACHE_ENABLED,
-			AssetCategoryModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "findByVocabularyId",
-			new String[] { Long.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_VOCABULARYID = new FinderPath(AssetCategoryModelImpl.ENTITY_CACHE_ENABLED,
-			AssetCategoryModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "findByVocabularyId",
-			new String[] {
-				Long.class.getName(),
-				
-			"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			});
-	public static final FinderPath FINDER_PATH_COUNT_BY_VOCABULARYID = new FinderPath(AssetCategoryModelImpl.ENTITY_CACHE_ENABLED,
-			AssetCategoryModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "countByVocabularyId",
-			new String[] { Long.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_BY_PARENTCATEGORYID = new FinderPath(AssetCategoryModelImpl.ENTITY_CACHE_ENABLED,
 			AssetCategoryModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "findByParentCategoryId",
@@ -105,6 +88,23 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl
 	public static final FinderPath FINDER_PATH_COUNT_BY_PARENTCATEGORYID = new FinderPath(AssetCategoryModelImpl.ENTITY_CACHE_ENABLED,
 			AssetCategoryModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "countByParentCategoryId",
+			new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_VOCABULARYID = new FinderPath(AssetCategoryModelImpl.ENTITY_CACHE_ENABLED,
+			AssetCategoryModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByVocabularyId",
+			new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_VOCABULARYID = new FinderPath(AssetCategoryModelImpl.ENTITY_CACHE_ENABLED,
+			AssetCategoryModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByVocabularyId",
+			new String[] {
+				Long.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_VOCABULARYID = new FinderPath(AssetCategoryModelImpl.ENTITY_CACHE_ENABLED,
+			AssetCategoryModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countByVocabularyId",
 			new String[] { Long.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_BY_P_N = new FinderPath(AssetCategoryModelImpl.ENTITY_CACHE_ENABLED,
 			AssetCategoryModelImpl.FINDER_CACHE_ENABLED,
@@ -123,22 +123,22 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl
 			AssetCategoryModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "countByP_N",
 			new String[] { Long.class.getName(), String.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_V_P = new FinderPath(AssetCategoryModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_FIND_BY_P_V = new FinderPath(AssetCategoryModelImpl.ENTITY_CACHE_ENABLED,
 			AssetCategoryModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "findByV_P",
+			FINDER_CLASS_NAME_LIST, "findByP_V",
 			new String[] { Long.class.getName(), Long.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_V_P = new FinderPath(AssetCategoryModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_P_V = new FinderPath(AssetCategoryModelImpl.ENTITY_CACHE_ENABLED,
 			AssetCategoryModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "findByV_P",
+			FINDER_CLASS_NAME_LIST, "findByP_V",
 			new String[] {
 				Long.class.getName(), Long.class.getName(),
 				
 			"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			});
-	public static final FinderPath FINDER_PATH_COUNT_BY_V_P = new FinderPath(AssetCategoryModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_COUNT_BY_P_V = new FinderPath(AssetCategoryModelImpl.ENTITY_CACHE_ENABLED,
 			AssetCategoryModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "countByV_P",
+			FINDER_CLASS_NAME_LIST, "countByP_V",
 			new String[] { Long.class.getName(), Long.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_ALL = new FinderPath(AssetCategoryModelImpl.ENTITY_CACHE_ENABLED,
 			AssetCategoryModelImpl.FINDER_CACHE_ENABLED,
@@ -238,7 +238,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("TagsAssets_AssetCategory");
+			FinderCacheUtil.clearCache("TagsAssets_AssetCategories");
 		}
 
 		Session session = null;
@@ -399,231 +399,6 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return assetCategory;
-	}
-
-	public List<AssetCategory> findByVocabularyId(long vocabularyId)
-		throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(vocabularyId) };
-
-		List<AssetCategory> list = (List<AssetCategory>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_VOCABULARYID,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBuilder query = new StringBuilder();
-
-				query.append(
-					"FROM com.liferay.portlet.asset.model.AssetCategory WHERE ");
-
-				query.append("vocabularyId = ?");
-
-				query.append(" ");
-
-				query.append("ORDER BY ");
-
-				query.append("name ASC");
-
-				Query q = session.createQuery(query.toString());
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(vocabularyId);
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<AssetCategory>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_VOCABULARYID,
-					finderArgs, list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
-	}
-
-	public List<AssetCategory> findByVocabularyId(long vocabularyId, int start,
-		int end) throws SystemException {
-		return findByVocabularyId(vocabularyId, start, end, null);
-	}
-
-	public List<AssetCategory> findByVocabularyId(long vocabularyId, int start,
-		int end, OrderByComparator obc) throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(vocabularyId),
-				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
-			};
-
-		List<AssetCategory> list = (List<AssetCategory>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_VOCABULARYID,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBuilder query = new StringBuilder();
-
-				query.append(
-					"FROM com.liferay.portlet.asset.model.AssetCategory WHERE ");
-
-				query.append("vocabularyId = ?");
-
-				query.append(" ");
-
-				if (obc != null) {
-					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
-				}
-
-				else {
-					query.append("ORDER BY ");
-
-					query.append("name ASC");
-				}
-
-				Query q = session.createQuery(query.toString());
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(vocabularyId);
-
-				list = (List<AssetCategory>)QueryUtil.list(q, getDialect(),
-						start, end);
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<AssetCategory>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_VOCABULARYID,
-					finderArgs, list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
-	}
-
-	public AssetCategory findByVocabularyId_First(long vocabularyId,
-		OrderByComparator obc) throws NoSuchCategoryException, SystemException {
-		List<AssetCategory> list = findByVocabularyId(vocabularyId, 0, 1, obc);
-
-		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
-			msg.append("No AssetCategory exists with the key {");
-
-			msg.append("vocabularyId=" + vocabularyId);
-
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-			throw new NoSuchCategoryException(msg.toString());
-		}
-		else {
-			return list.get(0);
-		}
-	}
-
-	public AssetCategory findByVocabularyId_Last(long vocabularyId,
-		OrderByComparator obc) throws NoSuchCategoryException, SystemException {
-		int count = countByVocabularyId(vocabularyId);
-
-		List<AssetCategory> list = findByVocabularyId(vocabularyId, count - 1,
-				count, obc);
-
-		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
-			msg.append("No AssetCategory exists with the key {");
-
-			msg.append("vocabularyId=" + vocabularyId);
-
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-			throw new NoSuchCategoryException(msg.toString());
-		}
-		else {
-			return list.get(0);
-		}
-	}
-
-	public AssetCategory[] findByVocabularyId_PrevAndNext(long categoryId,
-		long vocabularyId, OrderByComparator obc)
-		throws NoSuchCategoryException, SystemException {
-		AssetCategory assetCategory = findByPrimaryKey(categoryId);
-
-		int count = countByVocabularyId(vocabularyId);
-
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringBuilder query = new StringBuilder();
-
-			query.append(
-				"FROM com.liferay.portlet.asset.model.AssetCategory WHERE ");
-
-			query.append("vocabularyId = ?");
-
-			query.append(" ");
-
-			if (obc != null) {
-				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
-			}
-
-			else {
-				query.append("ORDER BY ");
-
-				query.append("name ASC");
-			}
-
-			Query q = session.createQuery(query.toString());
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(vocabularyId);
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					assetCategory);
-
-			AssetCategory[] array = new AssetCategoryImpl[3];
-
-			array[0] = (AssetCategory)objArray[0];
-			array[1] = (AssetCategory)objArray[1];
-			array[2] = (AssetCategory)objArray[2];
-
-			return array;
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
 	}
 
 	public List<AssetCategory> findByParentCategoryId(long parentCategoryId)
@@ -832,6 +607,231 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			qPos.add(parentCategoryId);
+
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
+					assetCategory);
+
+			AssetCategory[] array = new AssetCategoryImpl[3];
+
+			array[0] = (AssetCategory)objArray[0];
+			array[1] = (AssetCategory)objArray[1];
+			array[2] = (AssetCategory)objArray[2];
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public List<AssetCategory> findByVocabularyId(long vocabularyId)
+		throws SystemException {
+		Object[] finderArgs = new Object[] { new Long(vocabularyId) };
+
+		List<AssetCategory> list = (List<AssetCategory>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_VOCABULARYID,
+				finderArgs, this);
+
+		if (list == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append(
+					"FROM com.liferay.portlet.asset.model.AssetCategory WHERE ");
+
+				query.append("vocabularyId = ?");
+
+				query.append(" ");
+
+				query.append("ORDER BY ");
+
+				query.append("name ASC");
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(vocabularyId);
+
+				list = q.list();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<AssetCategory>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_VOCABULARYID,
+					finderArgs, list);
+
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	public List<AssetCategory> findByVocabularyId(long vocabularyId, int start,
+		int end) throws SystemException {
+		return findByVocabularyId(vocabularyId, start, end, null);
+	}
+
+	public List<AssetCategory> findByVocabularyId(long vocabularyId, int start,
+		int end, OrderByComparator obc) throws SystemException {
+		Object[] finderArgs = new Object[] {
+				new Long(vocabularyId),
+				
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+			};
+
+		List<AssetCategory> list = (List<AssetCategory>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_VOCABULARYID,
+				finderArgs, this);
+
+		if (list == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append(
+					"FROM com.liferay.portlet.asset.model.AssetCategory WHERE ");
+
+				query.append("vocabularyId = ?");
+
+				query.append(" ");
+
+				if (obc != null) {
+					query.append("ORDER BY ");
+					query.append(obc.getOrderBy());
+				}
+
+				else {
+					query.append("ORDER BY ");
+
+					query.append("name ASC");
+				}
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(vocabularyId);
+
+				list = (List<AssetCategory>)QueryUtil.list(q, getDialect(),
+						start, end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<AssetCategory>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_VOCABULARYID,
+					finderArgs, list);
+
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	public AssetCategory findByVocabularyId_First(long vocabularyId,
+		OrderByComparator obc) throws NoSuchCategoryException, SystemException {
+		List<AssetCategory> list = findByVocabularyId(vocabularyId, 0, 1, obc);
+
+		if (list.isEmpty()) {
+			StringBuilder msg = new StringBuilder();
+
+			msg.append("No AssetCategory exists with the key {");
+
+			msg.append("vocabularyId=" + vocabularyId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchCategoryException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public AssetCategory findByVocabularyId_Last(long vocabularyId,
+		OrderByComparator obc) throws NoSuchCategoryException, SystemException {
+		int count = countByVocabularyId(vocabularyId);
+
+		List<AssetCategory> list = findByVocabularyId(vocabularyId, count - 1,
+				count, obc);
+
+		if (list.isEmpty()) {
+			StringBuilder msg = new StringBuilder();
+
+			msg.append("No AssetCategory exists with the key {");
+
+			msg.append("vocabularyId=" + vocabularyId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchCategoryException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public AssetCategory[] findByVocabularyId_PrevAndNext(long categoryId,
+		long vocabularyId, OrderByComparator obc)
+		throws NoSuchCategoryException, SystemException {
+		AssetCategory assetCategory = findByPrimaryKey(categoryId);
+
+		int count = countByVocabularyId(vocabularyId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuilder query = new StringBuilder();
+
+			query.append(
+				"FROM com.liferay.portlet.asset.model.AssetCategory WHERE ");
+
+			query.append("vocabularyId = ?");
+
+			query.append(" ");
+
+			if (obc != null) {
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
+			}
+
+			else {
+				query.append("ORDER BY ");
+
+				query.append("name ASC");
+			}
+
+			Query q = session.createQuery(query.toString());
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(vocabularyId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					assetCategory);
@@ -1124,13 +1124,13 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public List<AssetCategory> findByV_P(long vocabularyId,
-		long parentCategoryId) throws SystemException {
+	public List<AssetCategory> findByP_V(long parentCategoryId,
+		long vocabularyId) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(vocabularyId), new Long(parentCategoryId)
+				new Long(parentCategoryId), new Long(vocabularyId)
 			};
 
-		List<AssetCategory> list = (List<AssetCategory>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_V_P,
+		List<AssetCategory> list = (List<AssetCategory>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_P_V,
 				finderArgs, this);
 
 		if (list == null) {
@@ -1144,11 +1144,11 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl
 				query.append(
 					"FROM com.liferay.portlet.asset.model.AssetCategory WHERE ");
 
-				query.append("vocabularyId = ?");
+				query.append("parentCategoryId = ?");
 
 				query.append(" AND ");
 
-				query.append("parentCategoryId = ?");
+				query.append("vocabularyId = ?");
 
 				query.append(" ");
 
@@ -1160,9 +1160,9 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(vocabularyId);
-
 				qPos.add(parentCategoryId);
+
+				qPos.add(vocabularyId);
 
 				list = q.list();
 			}
@@ -1176,7 +1176,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_V_P, finderArgs,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_P_V, finderArgs,
 					list);
 
 				closeSession(session);
@@ -1186,21 +1186,21 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl
 		return list;
 	}
 
-	public List<AssetCategory> findByV_P(long vocabularyId,
-		long parentCategoryId, int start, int end) throws SystemException {
-		return findByV_P(vocabularyId, parentCategoryId, start, end, null);
+	public List<AssetCategory> findByP_V(long parentCategoryId,
+		long vocabularyId, int start, int end) throws SystemException {
+		return findByP_V(parentCategoryId, vocabularyId, start, end, null);
 	}
 
-	public List<AssetCategory> findByV_P(long vocabularyId,
-		long parentCategoryId, int start, int end, OrderByComparator obc)
+	public List<AssetCategory> findByP_V(long parentCategoryId,
+		long vocabularyId, int start, int end, OrderByComparator obc)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(vocabularyId), new Long(parentCategoryId),
+				new Long(parentCategoryId), new Long(vocabularyId),
 				
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		List<AssetCategory> list = (List<AssetCategory>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_V_P,
+		List<AssetCategory> list = (List<AssetCategory>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_P_V,
 				finderArgs, this);
 
 		if (list == null) {
@@ -1214,11 +1214,11 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl
 				query.append(
 					"FROM com.liferay.portlet.asset.model.AssetCategory WHERE ");
 
-				query.append("vocabularyId = ?");
+				query.append("parentCategoryId = ?");
 
 				query.append(" AND ");
 
-				query.append("parentCategoryId = ?");
+				query.append("vocabularyId = ?");
 
 				query.append(" ");
 
@@ -1237,9 +1237,9 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(vocabularyId);
-
 				qPos.add(parentCategoryId);
+
+				qPos.add(vocabularyId);
 
 				list = (List<AssetCategory>)QueryUtil.list(q, getDialect(),
 						start, end);
@@ -1254,7 +1254,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_V_P,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_P_V,
 					finderArgs, list);
 
 				closeSession(session);
@@ -1264,10 +1264,10 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl
 		return list;
 	}
 
-	public AssetCategory findByV_P_First(long vocabularyId,
-		long parentCategoryId, OrderByComparator obc)
+	public AssetCategory findByP_V_First(long parentCategoryId,
+		long vocabularyId, OrderByComparator obc)
 		throws NoSuchCategoryException, SystemException {
-		List<AssetCategory> list = findByV_P(vocabularyId, parentCategoryId, 0,
+		List<AssetCategory> list = findByP_V(parentCategoryId, vocabularyId, 0,
 				1, obc);
 
 		if (list.isEmpty()) {
@@ -1275,10 +1275,10 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl
 
 			msg.append("No AssetCategory exists with the key {");
 
-			msg.append("vocabularyId=" + vocabularyId);
+			msg.append("parentCategoryId=" + parentCategoryId);
 
 			msg.append(", ");
-			msg.append("parentCategoryId=" + parentCategoryId);
+			msg.append("vocabularyId=" + vocabularyId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -1289,12 +1289,12 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public AssetCategory findByV_P_Last(long vocabularyId,
-		long parentCategoryId, OrderByComparator obc)
+	public AssetCategory findByP_V_Last(long parentCategoryId,
+		long vocabularyId, OrderByComparator obc)
 		throws NoSuchCategoryException, SystemException {
-		int count = countByV_P(vocabularyId, parentCategoryId);
+		int count = countByP_V(parentCategoryId, vocabularyId);
 
-		List<AssetCategory> list = findByV_P(vocabularyId, parentCategoryId,
+		List<AssetCategory> list = findByP_V(parentCategoryId, vocabularyId,
 				count - 1, count, obc);
 
 		if (list.isEmpty()) {
@@ -1302,10 +1302,10 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl
 
 			msg.append("No AssetCategory exists with the key {");
 
-			msg.append("vocabularyId=" + vocabularyId);
+			msg.append("parentCategoryId=" + parentCategoryId);
 
 			msg.append(", ");
-			msg.append("parentCategoryId=" + parentCategoryId);
+			msg.append("vocabularyId=" + vocabularyId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -1316,12 +1316,12 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public AssetCategory[] findByV_P_PrevAndNext(long categoryId,
-		long vocabularyId, long parentCategoryId, OrderByComparator obc)
+	public AssetCategory[] findByP_V_PrevAndNext(long categoryId,
+		long parentCategoryId, long vocabularyId, OrderByComparator obc)
 		throws NoSuchCategoryException, SystemException {
 		AssetCategory assetCategory = findByPrimaryKey(categoryId);
 
-		int count = countByV_P(vocabularyId, parentCategoryId);
+		int count = countByP_V(parentCategoryId, vocabularyId);
 
 		Session session = null;
 
@@ -1333,11 +1333,11 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl
 			query.append(
 				"FROM com.liferay.portlet.asset.model.AssetCategory WHERE ");
 
-			query.append("vocabularyId = ?");
+			query.append("parentCategoryId = ?");
 
 			query.append(" AND ");
 
-			query.append("parentCategoryId = ?");
+			query.append("vocabularyId = ?");
 
 			query.append(" ");
 
@@ -1356,9 +1356,9 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
-			qPos.add(vocabularyId);
-
 			qPos.add(parentCategoryId);
+
+			qPos.add(vocabularyId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					assetCategory);
@@ -1491,17 +1491,17 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl
 		return list;
 	}
 
-	public void removeByVocabularyId(long vocabularyId)
-		throws SystemException {
-		for (AssetCategory assetCategory : findByVocabularyId(vocabularyId)) {
-			remove(assetCategory);
-		}
-	}
-
 	public void removeByParentCategoryId(long parentCategoryId)
 		throws SystemException {
 		for (AssetCategory assetCategory : findByParentCategoryId(
 				parentCategoryId)) {
+			remove(assetCategory);
+		}
+	}
+
+	public void removeByVocabularyId(long vocabularyId)
+		throws SystemException {
+		for (AssetCategory assetCategory : findByVocabularyId(vocabularyId)) {
 			remove(assetCategory);
 		}
 	}
@@ -1513,10 +1513,10 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public void removeByV_P(long vocabularyId, long parentCategoryId)
+	public void removeByP_V(long parentCategoryId, long vocabularyId)
 		throws SystemException {
-		for (AssetCategory assetCategory : findByV_P(vocabularyId,
-				parentCategoryId)) {
+		for (AssetCategory assetCategory : findByP_V(parentCategoryId,
+				vocabularyId)) {
 			remove(assetCategory);
 		}
 	}
@@ -1525,54 +1525,6 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl
 		for (AssetCategory assetCategory : findAll()) {
 			remove(assetCategory);
 		}
-	}
-
-	public int countByVocabularyId(long vocabularyId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(vocabularyId) };
-
-		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_VOCABULARYID,
-				finderArgs, this);
-
-		if (count == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBuilder query = new StringBuilder();
-
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.asset.model.AssetCategory WHERE ");
-
-				query.append("vocabularyId = ?");
-
-				query.append(" ");
-
-				Query q = session.createQuery(query.toString());
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(vocabularyId);
-
-				count = (Long)q.uniqueResult();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (count == null) {
-					count = Long.valueOf(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_VOCABULARYID,
-					finderArgs, count);
-
-				closeSession(session);
-			}
-		}
-
-		return count.intValue();
 	}
 
 	public int countByParentCategoryId(long parentCategoryId)
@@ -1615,6 +1567,54 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl
 				}
 
 				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_PARENTCATEGORYID,
+					finderArgs, count);
+
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	public int countByVocabularyId(long vocabularyId) throws SystemException {
+		Object[] finderArgs = new Object[] { new Long(vocabularyId) };
+
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_VOCABULARYID,
+				finderArgs, this);
+
+		if (count == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append("SELECT COUNT(*) ");
+				query.append(
+					"FROM com.liferay.portlet.asset.model.AssetCategory WHERE ");
+
+				query.append("vocabularyId = ?");
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(vocabularyId);
+
+				count = (Long)q.uniqueResult();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_VOCABULARYID,
 					finderArgs, count);
 
 				closeSession(session);
@@ -1686,13 +1686,13 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl
 		return count.intValue();
 	}
 
-	public int countByV_P(long vocabularyId, long parentCategoryId)
+	public int countByP_V(long parentCategoryId, long vocabularyId)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(vocabularyId), new Long(parentCategoryId)
+				new Long(parentCategoryId), new Long(vocabularyId)
 			};
 
-		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_V_P,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_P_V,
 				finderArgs, this);
 
 		if (count == null) {
@@ -1707,11 +1707,11 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl
 				query.append(
 					"FROM com.liferay.portlet.asset.model.AssetCategory WHERE ");
 
-				query.append("vocabularyId = ?");
+				query.append("parentCategoryId = ?");
 
 				query.append(" AND ");
 
-				query.append("parentCategoryId = ?");
+				query.append("vocabularyId = ?");
 
 				query.append(" ");
 
@@ -1719,9 +1719,9 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(vocabularyId);
-
 				qPos.add(parentCategoryId);
+
+				qPos.add(vocabularyId);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -1733,7 +1733,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl
 					count = Long.valueOf(0);
 				}
 
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_V_P, finderArgs,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_P_V, finderArgs,
 					count);
 
 				closeSession(session);
@@ -1789,8 +1789,8 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public static final FinderPath FINDER_PATH_GET_TAGSASSETS = new FinderPath(com.liferay.portlet.tags.model.impl.TagsAssetModelImpl.ENTITY_CACHE_ENABLED,
-			AssetCategoryModelImpl.FINDER_CACHE_ENABLED_TAGSASSETS_ASSETCATEGORY,
-			"TagsAssets_AssetCategory", "getTagsAssets",
+			AssetCategoryModelImpl.FINDER_CACHE_ENABLED_TAGSASSETS_ASSETCATEGORIES,
+			"TagsAssets_AssetCategories", "getTagsAssets",
 			new String[] {
 				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
@@ -1857,8 +1857,8 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public static final FinderPath FINDER_PATH_GET_TAGSASSETS_SIZE = new FinderPath(com.liferay.portlet.tags.model.impl.TagsAssetModelImpl.ENTITY_CACHE_ENABLED,
-			AssetCategoryModelImpl.FINDER_CACHE_ENABLED_TAGSASSETS_ASSETCATEGORY,
-			"TagsAssets_AssetCategory", "getTagsAssetsSize",
+			AssetCategoryModelImpl.FINDER_CACHE_ENABLED_TAGSASSETS_ASSETCATEGORIES,
+			"TagsAssets_AssetCategories", "getTagsAssetsSize",
 			new String[] { Long.class.getName() });
 
 	public int getTagsAssetsSize(long pk) throws SystemException {
@@ -1902,8 +1902,8 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public static final FinderPath FINDER_PATH_CONTAINS_TAGSASSET = new FinderPath(com.liferay.portlet.tags.model.impl.TagsAssetModelImpl.ENTITY_CACHE_ENABLED,
-			AssetCategoryModelImpl.FINDER_CACHE_ENABLED_TAGSASSETS_ASSETCATEGORY,
-			"TagsAssets_AssetCategory", "containsTagsAsset",
+			AssetCategoryModelImpl.FINDER_CACHE_ENABLED_TAGSASSETS_ASSETCATEGORIES,
+			"TagsAssets_AssetCategories", "containsTagsAsset",
 			new String[] { Long.class.getName(), Long.class.getName() });
 
 	public boolean containsTagsAsset(long pk, long tagsAssetPK)
@@ -1952,7 +1952,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("TagsAssets_AssetCategory");
+			FinderCacheUtil.clearCache("TagsAssets_AssetCategories");
 		}
 	}
 
@@ -1966,7 +1966,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("TagsAssets_AssetCategory");
+			FinderCacheUtil.clearCache("TagsAssets_AssetCategories");
 		}
 	}
 
@@ -1981,7 +1981,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("TagsAssets_AssetCategory");
+			FinderCacheUtil.clearCache("TagsAssets_AssetCategories");
 		}
 	}
 
@@ -1997,7 +1997,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("TagsAssets_AssetCategory");
+			FinderCacheUtil.clearCache("TagsAssets_AssetCategories");
 		}
 	}
 
@@ -2009,7 +2009,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("TagsAssets_AssetCategory");
+			FinderCacheUtil.clearCache("TagsAssets_AssetCategories");
 		}
 	}
 
@@ -2022,7 +2022,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("TagsAssets_AssetCategory");
+			FinderCacheUtil.clearCache("TagsAssets_AssetCategories");
 		}
 	}
 
@@ -2036,7 +2036,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("TagsAssets_AssetCategory");
+			FinderCacheUtil.clearCache("TagsAssets_AssetCategories");
 		}
 	}
 
@@ -2051,7 +2051,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("TagsAssets_AssetCategory");
+			FinderCacheUtil.clearCache("TagsAssets_AssetCategories");
 		}
 	}
 
@@ -2067,7 +2067,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("TagsAssets_AssetCategory");
+			FinderCacheUtil.clearCache("TagsAssets_AssetCategories");
 		}
 	}
 
@@ -2084,7 +2084,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("TagsAssets_AssetCategory");
+			FinderCacheUtil.clearCache("TagsAssets_AssetCategories");
 		}
 	}
 
@@ -2102,7 +2102,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("TagsAssets_AssetCategory");
+			FinderCacheUtil.clearCache("TagsAssets_AssetCategories");
 		}
 	}
 
@@ -2183,7 +2183,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl
 	protected class AddTagsAsset {
 		protected AddTagsAsset(AssetCategoryPersistenceImpl persistenceImpl) {
 			_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(),
-					"INSERT INTO TagsAssets_AssetCategory (categoryId, assetId) VALUES (?, ?)",
+					"INSERT INTO TagsAssets_AssetCategories (categoryId, assetId) VALUES (?, ?)",
 					new int[] { Types.BIGINT, Types.BIGINT });
 			_persistenceImpl = persistenceImpl;
 		}
@@ -2229,7 +2229,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl
 	protected class ClearTagsAssets {
 		protected ClearTagsAssets(AssetCategoryPersistenceImpl persistenceImpl) {
 			_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(),
-					"DELETE FROM TagsAssets_AssetCategory WHERE categoryId = ?",
+					"DELETE FROM TagsAssets_AssetCategories WHERE categoryId = ?",
 					new int[] { Types.BIGINT });
 		}
 
@@ -2280,7 +2280,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl
 	protected class RemoveTagsAsset {
 		protected RemoveTagsAsset(AssetCategoryPersistenceImpl persistenceImpl) {
 			_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(),
-					"DELETE FROM TagsAssets_AssetCategory WHERE categoryId = ? AND assetId = ?",
+					"DELETE FROM TagsAssets_AssetCategories WHERE categoryId = ? AND assetId = ?",
 					new int[] { Types.BIGINT, Types.BIGINT });
 			_persistenceImpl = persistenceImpl;
 		}
@@ -2323,8 +2323,8 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl
 		private AssetCategoryPersistenceImpl _persistenceImpl;
 	}
 
-	private static final String _SQL_GETTAGSASSETS = "SELECT {TagsAsset.*} FROM TagsAsset INNER JOIN TagsAssets_AssetCategory ON (TagsAssets_AssetCategory.assetId = TagsAsset.assetId) WHERE (TagsAssets_AssetCategory.categoryId = ?)";
-	private static final String _SQL_GETTAGSASSETSSIZE = "SELECT COUNT(*) AS COUNT_VALUE FROM TagsAssets_AssetCategory WHERE categoryId = ?";
-	private static final String _SQL_CONTAINSTAGSASSET = "SELECT COUNT(*) AS COUNT_VALUE FROM TagsAssets_AssetCategory WHERE categoryId = ? AND assetId = ?";
+	private static final String _SQL_GETTAGSASSETS = "SELECT {TagsAsset.*} FROM TagsAsset INNER JOIN TagsAssets_AssetCategories ON (TagsAssets_AssetCategories.assetId = TagsAsset.assetId) WHERE (TagsAssets_AssetCategories.categoryId = ?)";
+	private static final String _SQL_GETTAGSASSETSSIZE = "SELECT COUNT(*) AS COUNT_VALUE FROM TagsAssets_AssetCategories WHERE categoryId = ?";
+	private static final String _SQL_CONTAINSTAGSASSET = "SELECT COUNT(*) AS COUNT_VALUE FROM TagsAssets_AssetCategories WHERE categoryId = ? AND assetId = ?";
 	private static Log _log = LogFactoryUtil.getLog(AssetCategoryPersistenceImpl.class);
 }

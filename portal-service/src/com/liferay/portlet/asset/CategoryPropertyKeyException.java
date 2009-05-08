@@ -25,26 +25,27 @@ package com.liferay.portlet.asset;
 import com.liferay.portal.PortalException;
 
 /**
- * <a href="PropertyValueException.java.html"><b><i>View Source</i></b></a>
+ * <a href="CategoryPropertyKeyException.java.html"><b><i>View Source</i></b>
+ * </a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class PropertyValueException extends PortalException {
+public class CategoryPropertyKeyException extends PortalException {
 
-	public PropertyValueException() {
+	public CategoryPropertyKeyException() {
 		super();
 	}
 
-	public PropertyValueException(String msg) {
+	public CategoryPropertyKeyException(String msg) {
 		super(msg);
 	}
 
-	public PropertyValueException(String msg, Throwable cause) {
+	public CategoryPropertyKeyException(String msg, Throwable cause) {
 		super(msg, cause);
 	}
 
-	public PropertyValueException(Throwable cause) {
+	public CategoryPropertyKeyException(Throwable cause) {
 		super(cause);
 	}
 

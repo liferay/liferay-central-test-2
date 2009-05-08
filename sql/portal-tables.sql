@@ -90,7 +90,7 @@ create table AssetCategory (
 );
 
 create table AssetCategoryProperty (
-	propertyId LONG not null primary key,
+	categoryPropertyId LONG not null primary key,
 	companyId LONG,
 	userId LONG,
 	userName VARCHAR(75) null,
@@ -102,7 +102,7 @@ create table AssetCategoryProperty (
 );
 
 create table AssetCategoryVocabulary (
-	vocabularyId LONG not null primary key,
+	categoryVocabularyId LONG not null primary key,
 	groupId LONG,
 	companyId LONG,
 	userId LONG,
@@ -1389,6 +1389,12 @@ create table TagsAsset (
 	width INTEGER,
 	priority DOUBLE,
 	viewCount INTEGER
+);
+
+create table TagsAssets_AssetCategories (
+	assetId LONG not null,
+	categoryId LONG not null,
+	primary key (assetId, categoryId)
 );
 
 create table TagsAssets_AssetCategory (

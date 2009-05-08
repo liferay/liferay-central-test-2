@@ -22,12 +22,6 @@
 
 package com.liferay.portlet.asset.service.http;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-
-import com.liferay.portlet.asset.service.AssetCategoryPropertyServiceUtil;
-
-import java.rmi.RemoteException;
 
 /**
  * <a href="AssetCategoryPropertyServiceSoap.java.html"><b><i>View Source</i></b></a>
@@ -81,80 +75,4 @@ import java.rmi.RemoteException;
  *
  */
 public class AssetCategoryPropertyServiceSoap {
-	public static com.liferay.portlet.asset.model.AssetCategoryPropertySoap addProperty(
-		long entryId, java.lang.String key, java.lang.String value)
-		throws RemoteException {
-		try {
-			com.liferay.portlet.asset.model.AssetCategoryProperty returnValue = AssetCategoryPropertyServiceUtil.addProperty(entryId,
-					key, value);
-
-			return com.liferay.portlet.asset.model.AssetCategoryPropertySoap.toSoapModel(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static void deleteProperty(long propertyId)
-		throws RemoteException {
-		try {
-			AssetCategoryPropertyServiceUtil.deleteProperty(propertyId);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static com.liferay.portlet.asset.model.AssetCategoryPropertySoap[] getProperties(
-		long entryId) throws RemoteException {
-		try {
-			java.util.List<com.liferay.portlet.asset.model.AssetCategoryProperty> returnValue =
-				AssetCategoryPropertyServiceUtil.getProperties(entryId);
-
-			return com.liferay.portlet.asset.model.AssetCategoryPropertySoap.toSoapModels(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static com.liferay.portlet.asset.model.AssetCategoryPropertySoap[] getPropertyValues(
-		long companyId, java.lang.String key) throws RemoteException {
-		try {
-			java.util.List<com.liferay.portlet.asset.model.AssetCategoryProperty> returnValue =
-				AssetCategoryPropertyServiceUtil.getPropertyValues(companyId,
-					key);
-
-			return com.liferay.portlet.asset.model.AssetCategoryPropertySoap.toSoapModels(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static com.liferay.portlet.asset.model.AssetCategoryPropertySoap updateProperty(
-		long propertyId, java.lang.String key, java.lang.String value)
-		throws RemoteException {
-		try {
-			com.liferay.portlet.asset.model.AssetCategoryProperty returnValue = AssetCategoryPropertyServiceUtil.updateProperty(propertyId,
-					key, value);
-
-			return com.liferay.portlet.asset.model.AssetCategoryPropertySoap.toSoapModel(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	private static Log _log = LogFactoryUtil.getLog(AssetCategoryPropertyServiceSoap.class);
 }

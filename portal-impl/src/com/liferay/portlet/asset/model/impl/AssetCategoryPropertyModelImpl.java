@@ -65,7 +65,7 @@ import java.util.List;
 public class AssetCategoryPropertyModelImpl extends BaseModelImpl<AssetCategoryProperty> {
 	public static final String TABLE_NAME = "AssetCategoryProperty";
 	public static final Object[][] TABLE_COLUMNS = {
-			{ "propertyId", new Integer(Types.BIGINT) },
+			{ "categoryPropertyId", new Integer(Types.BIGINT) },
 			
 
 			{ "companyId", new Integer(Types.BIGINT) },
@@ -91,7 +91,7 @@ public class AssetCategoryPropertyModelImpl extends BaseModelImpl<AssetCategoryP
 
 			{ "value", new Integer(Types.VARCHAR) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table AssetCategoryProperty (propertyId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,categoryId LONG,key_ VARCHAR(75) null,value VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table AssetCategoryProperty (categoryPropertyId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,categoryId LONG,key_ VARCHAR(75) null,value VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table AssetCategoryProperty";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -107,7 +107,7 @@ public class AssetCategoryPropertyModelImpl extends BaseModelImpl<AssetCategoryP
 		AssetCategoryPropertySoap soapModel) {
 		AssetCategoryProperty model = new AssetCategoryPropertyImpl();
 
-		model.setPropertyId(soapModel.getPropertyId());
+		model.setCategoryPropertyId(soapModel.getCategoryPropertyId());
 		model.setCompanyId(soapModel.getCompanyId());
 		model.setUserId(soapModel.getUserId());
 		model.setUserName(soapModel.getUserName());
@@ -138,23 +138,23 @@ public class AssetCategoryPropertyModelImpl extends BaseModelImpl<AssetCategoryP
 	}
 
 	public long getPrimaryKey() {
-		return _propertyId;
+		return _categoryPropertyId;
 	}
 
 	public void setPrimaryKey(long pk) {
-		setPropertyId(pk);
+		setCategoryPropertyId(pk);
 	}
 
 	public Serializable getPrimaryKeyObj() {
-		return new Long(_propertyId);
+		return new Long(_categoryPropertyId);
 	}
 
-	public long getPropertyId() {
-		return _propertyId;
+	public long getCategoryPropertyId() {
+		return _categoryPropertyId;
 	}
 
-	public void setPropertyId(long propertyId) {
-		_propertyId = propertyId;
+	public void setCategoryPropertyId(long categoryPropertyId) {
+		_categoryPropertyId = categoryPropertyId;
 	}
 
 	public long getCompanyId() {
@@ -249,7 +249,7 @@ public class AssetCategoryPropertyModelImpl extends BaseModelImpl<AssetCategoryP
 			model.setNew(isNew());
 			model.setEscapedModel(true);
 
-			model.setPropertyId(getPropertyId());
+			model.setCategoryPropertyId(getCategoryPropertyId());
 			model.setCompanyId(getCompanyId());
 			model.setUserId(getUserId());
 			model.setUserName(HtmlUtil.escape(getUserName()));
@@ -279,7 +279,7 @@ public class AssetCategoryPropertyModelImpl extends BaseModelImpl<AssetCategoryP
 	public Object clone() {
 		AssetCategoryPropertyImpl clone = new AssetCategoryPropertyImpl();
 
-		clone.setPropertyId(getPropertyId());
+		clone.setCategoryPropertyId(getCategoryPropertyId());
 		clone.setCompanyId(getCompanyId());
 		clone.setUserId(getUserId());
 		clone.setUserName(getUserName());
@@ -335,8 +335,8 @@ public class AssetCategoryPropertyModelImpl extends BaseModelImpl<AssetCategoryP
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 
-		sb.append("{propertyId=");
-		sb.append(getPropertyId());
+		sb.append("{categoryPropertyId=");
+		sb.append(getCategoryPropertyId());
 		sb.append(", companyId=");
 		sb.append(getCompanyId());
 		sb.append(", userId=");
@@ -366,40 +366,40 @@ public class AssetCategoryPropertyModelImpl extends BaseModelImpl<AssetCategoryP
 		sb.append("</model-name>");
 
 		sb.append(
-			"<column><column-name>propertyId</column-name><column-value><![CDATA[");
-		sb.append("getPropertyId()");
+			"<column><column-name>categoryPropertyId</column-name><column-value><![CDATA[");
+		sb.append(getCategoryPropertyId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>companyId</column-name><column-value><![CDATA[");
-		sb.append("getCompanyId()");
+		sb.append(getCompanyId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>userId</column-name><column-value><![CDATA[");
-		sb.append("getUserId()");
+		sb.append(getUserId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>userName</column-name><column-value><![CDATA[");
-		sb.append("getUserName()");
+		sb.append(getUserName());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>createDate</column-name><column-value><![CDATA[");
-		sb.append("getCreateDate()");
+		sb.append(getCreateDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>modifiedDate</column-name><column-value><![CDATA[");
-		sb.append("getModifiedDate()");
+		sb.append(getModifiedDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>categoryId</column-name><column-value><![CDATA[");
-		sb.append("getCategoryId()");
+		sb.append(getCategoryId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>key</column-name><column-value><![CDATA[");
-		sb.append("getKey()");
+		sb.append(getKey());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>value</column-name><column-value><![CDATA[");
-		sb.append("getValue()");
+		sb.append(getValue());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
@@ -407,7 +407,7 @@ public class AssetCategoryPropertyModelImpl extends BaseModelImpl<AssetCategoryP
 		return sb.toString();
 	}
 
-	private long _propertyId;
+	private long _categoryPropertyId;
 	private long _companyId;
 	private long _userId;
 	private String _userName;

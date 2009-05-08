@@ -51,9 +51,9 @@ public interface AssetCategoryPropertyModel extends BaseModel<AssetCategoryPrope
 
 	public void setPrimaryKey(long pk);
 
-	public long getPropertyId();
+	public long getCategoryPropertyId();
 
-	public void setPropertyId(long propertyId);
+	public void setCategoryPropertyId(long categoryPropertyId);
 
 	public long getCompanyId();
 

@@ -52,14 +52,14 @@ public class AssetCategoryPropertyLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.asset.model.AssetCategoryProperty createAssetCategoryProperty(
-		long propertyId) {
-		return getService().createAssetCategoryProperty(propertyId);
+		long categoryPropertyId) {
+		return getService().createAssetCategoryProperty(categoryPropertyId);
 	}
 
-	public static void deleteAssetCategoryProperty(long propertyId)
+	public static void deleteAssetCategoryProperty(long categoryPropertyId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		getService().deleteAssetCategoryProperty(propertyId);
+		getService().deleteAssetCategoryProperty(categoryPropertyId);
 	}
 
 	public static void deleteAssetCategoryProperty(
@@ -81,10 +81,10 @@ public class AssetCategoryPropertyLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.asset.model.AssetCategoryProperty getAssetCategoryProperty(
-		long propertyId)
+		long categoryPropertyId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return getService().getAssetCategoryProperty(propertyId);
+		return getService().getAssetCategoryProperty(categoryPropertyId);
 	}
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetCategoryProperty> getAssetCategoryProperties(
@@ -108,68 +108,6 @@ public class AssetCategoryPropertyLocalServiceUtil {
 		boolean merge) throws com.liferay.portal.SystemException {
 		return getService()
 				   .updateAssetCategoryProperty(assetCategoryProperty, merge);
-	}
-
-	public static com.liferay.portlet.asset.model.AssetCategoryProperty addProperty(
-		long userId, long categoryId, java.lang.String key,
-		java.lang.String value)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return getService().addProperty(userId, categoryId, key, value);
-	}
-
-	public static void deleteProperties(long entryId)
-		throws com.liferay.portal.SystemException {
-		getService().deleteProperties(entryId);
-	}
-
-	public static void deleteProperty(long propertyId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		getService().deleteProperty(propertyId);
-	}
-
-	public static void deleteProperty(
-		com.liferay.portlet.asset.model.AssetCategoryProperty property)
-		throws com.liferay.portal.SystemException {
-		getService().deleteProperty(property);
-	}
-
-	public static java.util.List<com.liferay.portlet.asset.model.AssetCategoryProperty> getProperties()
-		throws com.liferay.portal.SystemException {
-		return getService().getProperties();
-	}
-
-	public static java.util.List<com.liferay.portlet.asset.model.AssetCategoryProperty> getProperties(
-		long entryId) throws com.liferay.portal.SystemException {
-		return getService().getProperties(entryId);
-	}
-
-	public static com.liferay.portlet.asset.model.AssetCategoryProperty getProperty(
-		long propertyId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return getService().getProperty(propertyId);
-	}
-
-	public static com.liferay.portlet.asset.model.AssetCategoryProperty getProperty(
-		long categoryId, java.lang.String key)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return getService().getProperty(categoryId, key);
-	}
-
-	public static java.util.List<com.liferay.portlet.asset.model.AssetCategoryProperty> getPropertyValues(
-		long groupId, java.lang.String key)
-		throws com.liferay.portal.SystemException {
-		return getService().getPropertyValues(groupId, key);
-	}
-
-	public static com.liferay.portlet.asset.model.AssetCategoryProperty updateProperty(
-		long propertyId, java.lang.String key, java.lang.String value)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return getService().updateProperty(propertyId, key, value);
 	}
 
 	public static AssetCategoryPropertyLocalService getService() {
