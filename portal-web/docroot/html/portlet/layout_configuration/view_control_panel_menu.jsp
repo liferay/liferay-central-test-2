@@ -131,7 +131,7 @@ public static final List<Portlet> filterPortlets(PermissionChecker permissionChe
 	while (itr.hasNext()) {
 		Portlet portlet = itr.next();
 
-		if (!(contentCategory && portlet.hasAddPortletPermission(permissionChecker.getUserId())) && !isShowPortlet(permissionChecker, portlet)) {
+		if (!isShowPortlet(permissionChecker, portlet)) {
 			itr.remove();
 		}
 	}
