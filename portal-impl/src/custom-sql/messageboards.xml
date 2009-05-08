@@ -42,9 +42,6 @@
 			WHERE
 				(groupId = ?) AND
 				(userId = ?)
-			ORDER BY
-				priority DESC,
-				modifiedDate DESC
 		]]>
 	</sql>
 	<sql id="com.liferay.portlet.messageboards.service.persistence.MBMessageFinder.countByG_U_A">
@@ -57,9 +54,6 @@
 				(groupId = ?) AND
 				(userId = ?) AND
 				(anonymous = ?)
-			ORDER BY
-				priority DESC,
-				modifiedDate DESC
 		]]>
 	</sql>
 	<sql id="com.liferay.portlet.messageboards.service.persistence.MBMessageFinder.findByNoAssets">
@@ -84,13 +78,18 @@
 			SELECT
 				DISTINCT threadId
 			FROM
-				MBMessage
-			WHERE
-				(groupId = ?) AND
-				(userId = ?)
-			ORDER BY
-				priority DESC,
-				modifiedDate DESC
+				(
+					SELECT
+						threadId, priority, modifiedDate 
+					FROM
+						MBMessage
+					WHERE
+						(groupId = ?) AND
+						(userId = ?)
+					ORDER BY
+						priority DESC,
+						modifiedDate DESC
+				)
 		]]>
 	</sql>
 	<sql id="com.liferay.portlet.messageboards.service.persistence.MBMessageFinder.findByG_U_A">
@@ -98,14 +97,19 @@
 			SELECT
 				DISTINCT threadId
 			FROM
-				MBMessage
-			WHERE
-				(groupId = ?) AND
-				(userId = ?) AND
-				(anonymous = ?)
-			ORDER BY
-				priority DESC,
-				modifiedDate DESC
+				(
+					SELECT
+						threadId, priority, modifiedDate 
+					FROM
+						MBMessage
+					WHERE
+						(groupId = ?) AND
+						(userId = ?) AND
+						(anonymous = ?)
+					ORDER BY
+						priority DESC,
+						modifiedDate DESC
+				)
 		]]>
 	</sql>
 	<sql id="com.liferay.portlet.messageboards.service.persistence.MBThreadFinder.countByS_G_U">
