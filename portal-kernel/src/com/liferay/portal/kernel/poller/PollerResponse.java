@@ -22,6 +22,7 @@
 
 package com.liferay.portal.kernel.poller;
 
+import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 
@@ -41,6 +42,14 @@ public class PollerResponse {
 		_portletId = portletId;
 	}
 
+	public void setParameter(String name, JSONArray value) {
+		_parameterMap.put(name, value);
+	}
+
+	public void setParameter(String name, JSONObject value) {
+		_parameterMap.put(name, value);
+	}
+
 	public void setParameter(String name, String value) {
 		_parameterMap.put(name, value);
 	}
@@ -52,16 +61,24 @@ public class PollerResponse {
 
 		JSONObject dataJSON = JSONFactoryUtil.createJSONObject();
 
-		Iterator<Map.Entry<String, String>> itr =
+		Iterator<Map.Entry<String, Object>> itr =
 			_parameterMap.entrySet().iterator();
 
 		while (itr.hasNext()) {
-			Map.Entry<String, String> entry = itr.next();
+			Map.Entry<String, Object> entry = itr.next();
 
 			String name = entry.getKey();
-			String value = entry.getValue();
+			Object value = entry.getValue();
 
-			dataJSON.put(name, value);
+			if (value instanceof JSONArray) {
+				dataJSON.put(name, (JSONArray)value);
+			}
+			else if (value instanceof JSONObject) {
+				dataJSON.put(name, (JSONObject)value);
+			}
+			else {
+				dataJSON.put(name, String.valueOf(value));
+			}
 		}
 
 		pollerResponseJSON.put("data", dataJSON);
@@ -69,7 +86,7 @@ public class PollerResponse {
 		return pollerResponseJSON;
 	}
 
-	private Map<String, String> _parameterMap = new HashMap<String, String>();
+	private Map<String, Object> _parameterMap = new HashMap<String, Object>();
 	private String _portletId;
 
 }
