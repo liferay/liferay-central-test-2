@@ -112,13 +112,13 @@ public class PollerServlet extends HttpServlet {
 
 		JSONArray pollerResponseEntriesJSON = JSONFactoryUtil.createJSONArray();
 
+		PollerHeader pollerHeader = null;
+
 		Map<String, Object>[] pollerRequestEntries =
 			(Map<String, Object>[])JSONFactoryUtil.deserialize(pollerRequest);
 
 		for (int i = 0; i < pollerRequestEntries.length; i++) {
 			Map<String, Object> pollerRequestEntry = pollerRequestEntries[i];
-
-			PollerHeader pollerHeader = null;
 
 			if (i == 0) {
 				long companyId = GetterUtil.getLong(
