@@ -33,6 +33,7 @@ import com.liferay.portal.kernel.cal.Recurrence;
 import com.liferay.portal.kernel.cal.RecurrenceSerializer;
 import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Http;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.MapUtil;
@@ -220,7 +221,7 @@ public class StagingUtil {
 			while (itr1.hasNext()) {
 				Entry<Long, Boolean> entry = itr1.next();
 
-				long plid = Long.valueOf(entry.getKey());
+				long plid = GetterUtil.getLong(String.valueOf(entry.getKey()));
 				boolean includeChildren = entry.getValue();
 
 				Layout layout = LayoutLocalServiceUtil.getLayout(plid);
@@ -479,7 +480,7 @@ public class StagingUtil {
 		while (itr1.hasNext()) {
 			Entry<Long, Boolean> entry = itr1.next();
 
-			long plid = Long.valueOf(entry.getKey());
+			long plid = GetterUtil.getLong(String.valueOf(entry.getKey()));
 			boolean includeChildren = entry.getValue();
 
 			Layout layout = LayoutLocalServiceUtil.getLayout(plid);
