@@ -412,6 +412,15 @@ long javaScriptLastModified = ServletContextUtil.getLastModified(application, "/
 					if (Liferay.Util) {
 						Liferay.Util.toggleControls();
 					}
+
+					if (Liferay.Poller) {
+						Liferay.Poller.init(
+							{
+								encryptedUserId: '<%= Encryptor.encrypt(company.getKeyObj(), String.valueOf(themeDisplay.getUserId())) %>',
+								supportsComet: <%= ServerDetector.isSupportsComet() %>
+							}
+						);
+					}
 				</c:if>
 			}
 		);
