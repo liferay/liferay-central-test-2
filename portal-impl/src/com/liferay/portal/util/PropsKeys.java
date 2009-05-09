@@ -824,8 +824,6 @@ public interface PropsKeys {
 
 	public static final String MAIL_SESSION_MAIL_TRANSPORT_PROTOCOL = "mail.session.mail.transport.protocol";
 
-	public static final String MESSAGE_BOARDS_ALLOW_ANONYMOUS_POSTING = "message.boards.anonymous.posting.enabled";
-
 	public static final String MESSAGE_BOARDS_ANONYMOUS_POSTING_ENABLED = "message.boards.anonymous.posting.enabled";
 
 	public static final String MESSAGE_BOARDS_EMAIL_FROM_ADDRESS = "message.boards.email.from.address";

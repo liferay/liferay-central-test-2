@@ -39,7 +39,7 @@ import com.liferay.portlet.messageboards.MailingListInUserNameException;
 import com.liferay.portlet.messageboards.MailingListOutEmailAddressException;
 import com.liferay.portlet.messageboards.MailingListOutServerNameException;
 import com.liferay.portlet.messageboards.MailingListOutUserNameException;
-import com.liferay.portlet.messageboards.messaging.MailingListRequest;
+import com.liferay.portlet.messageboards.messaging.mailinglist.MailingListRequest;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBMailingList;
 import com.liferay.portlet.messageboards.service.base.MBMailingListLocalServiceBaseImpl;

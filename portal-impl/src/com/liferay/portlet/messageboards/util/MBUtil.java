@@ -57,7 +57,6 @@ import com.liferay.util.LocalizationUtil;
 import com.liferay.util.mail.JavaMailUtil;
 
 import java.io.InputStream;
-
 import java.util.Calendar;
 import java.util.Date;
 
@@ -66,12 +65,10 @@ import javax.mail.Message;
 import javax.mail.Part;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
-
 import javax.portlet.PortletPreferences;
 import javax.portlet.PortletURL;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
-
 import javax.servlet.jsp.PageContext;
 
 /**
@@ -444,7 +441,7 @@ public class MBUtil {
 		return sb.toString();
 	}
 
-	public static String getMailingListAddress(
+	public static String getReplyToAddress(
 		long categoryId, long messageId, String mx,
 		String defaultMailingListAddress) {
 
