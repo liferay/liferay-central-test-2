@@ -437,7 +437,46 @@ public class StartupHelper {
 	}
 
 	protected List<Index> getPostgreSQLIndexes() throws Exception {
-		return null;
+		List<Index> indexes = new ArrayList<Index>();
+
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = DataAccess.getConnection();
+
+			StringBuilder sb = new StringBuilder();
+
+			sb.append("select indexname, tablename, indexdef from pg_indexes ");
+			sb.append("where indexname like 'liferay_%' or indexname like ");
+			sb.append("'ix_%'");
+
+			String sql = sb.toString();
+
+			ps = con.prepareStatement(sql);
+
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				String indexName = rs.getString("indexname");
+				String tableName = rs.getString("tablename");
+				String indexSQL = rs.getString("indexdef").toLowerCase().trim();
+
+				boolean unique = true;
+
+				if (indexSQL.startsWith("create index ")) {
+					unique = false;
+				}
+
+				indexes.add(new Index(indexName, tableName, unique));
+			}
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
+		}
+
+		return indexes;
 	}
 
 	protected List<Index> getSQLServerIndexes() throws Exception {
