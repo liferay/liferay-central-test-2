@@ -32,14 +32,21 @@ import java.util.Date;
  */
 public class PollerHeader {
 
-	public PollerHeader(long userId, long timestamp, long browserKey) {
+	public PollerHeader(
+		long userId, long timestamp, long browserKey, String[] portletIds) {
+
 		_userId = userId;
 		_timestamp = new Date(timestamp);
 		_browserKey = browserKey;
+		_portletIds = portletIds;
 	}
 
 	public long getBrowserKey() {
 		return _browserKey;
+	}
+
+	public String[] getPortletIds() {
+		return _portletIds;
 	}
 
 	public Date getTimestamp() {
@@ -53,5 +60,6 @@ public class PollerHeader {
 	private long _browserKey;
 	private Date _timestamp;
 	private long _userId;
+	private String[] _portletIds;
 
 }

@@ -58,6 +58,10 @@ public class PollerRequest {
 		return _portletId;
 	}
 
+	public String[] getPortletIds() {
+		return _pollerHeader.getPortletIds();
+	}
+
 	public Date getTimestamp() {
 		return _pollerHeader.getTimestamp();
 	}

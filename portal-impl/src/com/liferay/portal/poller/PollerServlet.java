@@ -49,7 +49,9 @@ import com.liferay.util.servlet.ServletResponseUtil;
 import java.io.IOException;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -114,6 +116,8 @@ public class PollerServlet extends HttpServlet {
 
 		PollerHeader pollerHeader = null;
 
+		Set<String> portletIdsWithEntries = new HashSet<String>();
+
 		Map<String, Object>[] pollerRequestEntries =
 			(Map<String, Object>[])JSONFactoryUtil.deserialize(pollerRequest);
 
@@ -131,6 +135,8 @@ public class PollerServlet extends HttpServlet {
 					String.valueOf(pollerRequestEntry.get("browserKey")));
 				boolean startPolling = GetterUtil.getBoolean(
 					String.valueOf(pollerRequestEntry.get("startPolling")));
+				String[] portletIds = StringUtil.split(
+					String.valueOf(pollerRequestEntry.get("portletIds")));
 
 				long userId = getUserId(companyId, userIdString);
 
@@ -138,7 +144,8 @@ public class PollerServlet extends HttpServlet {
 					return null;
 				}
 
-				pollerHeader = new PollerHeader(userId, timestamp, browserKey);
+				pollerHeader = new PollerHeader(
+					userId, timestamp, browserKey, portletIds);
 
 				boolean suspendPolling = false;
 
@@ -192,8 +199,30 @@ public class PollerServlet extends HttpServlet {
 				}
 
 				if (pollerResponseEntryJSON != null) {
+					portletIdsWithEntries.add(portletId);
+
 					pollerResponseEntriesJSON.put(pollerResponseEntryJSON);
 				}
+			}
+		}
+
+		for (String portletId : pollerHeader.getPortletIds()) {
+			if (portletIdsWithEntries.contains(portletId)) {
+				continue;
+			}
+
+			JSONObject pollerResponseEntryJSON = null;
+
+			try {
+				pollerResponseEntryJSON = process(
+					pollerHeader, portletId, new HashMap<String, String>());
+			}
+			catch (Exception e) {
+				_log.error(e, e);
+			}
+
+			if (pollerResponseEntryJSON != null) {
+				pollerResponseEntriesJSON.put(pollerResponseEntryJSON);
 			}
 		}
 
