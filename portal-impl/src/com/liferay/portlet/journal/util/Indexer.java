@@ -83,7 +83,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		ExpandoBridge expandoBridge) {
 
 		if ((content != null) &&
-			((content.indexOf("<dynamic-content>") != -1) ||
+			((content.indexOf("<dynamic-content") != -1) ||
 			 (content.indexOf("<static-content") != -1))) {
 
 			content = _getIndexableContent(content);
@@ -225,12 +225,12 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 			if (elType.equals("text") || elType.equals("text_box") ||
 				elType.equals("text_area")) {
 
-				Element dynamicContent = el.element("dynamic-content");
+				for (Element dynamicContent : el.elements("dynamic-content")) {
+					String text = dynamicContent.getText();
 
-				String text = dynamicContent.getText();
-
-				sb.append(text);
-				sb.append(StringPool.SPACE);
+					sb.append(text);
+					sb.append(StringPool.SPACE);
+				}
 			}
 			else if (el.getName().equals("static-content")) {
 				String text = el.getText();
