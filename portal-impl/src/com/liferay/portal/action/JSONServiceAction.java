@@ -292,6 +292,24 @@ public class JSONServiceAction extends JSONAction {
 		else if (parameterTypeName.equals("[Ljava.lang.String;")) {
 			return StringUtil.split(value);
 		}
+		else if (parameterTypeName.equals("[Z")) {
+			return ParamUtil.getBooleanValues(request, parameter);
+		}
+		else if (parameterTypeName.equals("[S")) {
+			return ParamUtil.getShortValues(request, parameter);
+		}
+		else if (parameterTypeName.equals("[I")) {
+			return ParamUtil.getIntegerValues(request, parameter);
+		}
+		else if (parameterTypeName.equals("[J")) {
+			return ParamUtil.getLongValues(request, parameter);
+		}
+		else if (parameterTypeName.equals("[F")) {
+			return ParamUtil.getFloatValues(request, parameter);
+		}
+		else if (parameterTypeName.equals("[D")) {
+			return ParamUtil.getDoubleValues(request, parameter);
+		}
 		else {
 			_log.error(
 				"Unsupported parameter type for class " + classObj +
