@@ -191,17 +191,18 @@ public class PortalUtil {
 	}
 
 	public static String getControlPanelCategory(
-			long companyId, String portletId)
-		throws SystemException {
+			String portletId, ThemeDisplay themeDisplay)
+		throws Exception {
 
-		return getPortal().getControlPanelCategory(companyId, portletId);
+		return getPortal().getControlPanelCategory(portletId, themeDisplay);
 	}
 
 	public static List<Portlet> getControlPanelPortlets(
-			long companyId, String category)
-		throws SystemException {
+			String category, ThemeDisplay themeDisplay)
+		throws Exception {
 
-		return getPortal().getControlPanelPortlets(companyId, category);
+		return getPortal().getControlPanelPortlets(
+			category, themeDisplay);
 	}
 
 	public static String getCurrentCompleteURL(HttpServletRequest request) {

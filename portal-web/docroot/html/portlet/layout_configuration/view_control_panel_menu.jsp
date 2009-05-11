@@ -58,9 +58,7 @@
 
 			String cssClass = "lfr-component panel-page-category";
 
-			List<Portlet> portlets = PortalUtil.getControlPanelPortlets(themeDisplay.getCompanyId(), category);
-
-			portlets = filterPortlets(permissionChecker, themeDisplay.getScopeGroup(), category, portlets);
+			List<Portlet> portlets = PortalUtil.getControlPanelPortlets(category, themeDisplay);
 
 			if (portlets.size() > 0) {
 				String title = null;
@@ -100,52 +98,3 @@
 
 	</liferay-ui:panel-container>
 </div>
-
-<%!
-public static final List<Portlet> filterPortlets(PermissionChecker permissionChecker, Group group, String category, List<Portlet> portlets) throws Exception {
-	List<Portlet> filteredPortlets = new ArrayList<Portlet>();
-
-	boolean contentCategory = category.equals(PortletCategoryKeys.CONTENT);
-
-	if (contentCategory && group.isLayout()) {
-		for (Portlet portlet : portlets) {
-			if (portlet.isScopeable()) {
-				filteredPortlets.add(portlet);
-			}
-		}
-	}
-	else {
-		filteredPortlets.addAll(portlets);
-	}
-
-	if (permissionChecker.isCompanyAdmin()) {
-		return filteredPortlets;
-	}
-
-	if (category.equals(PortletCategoryKeys.CONTENT) && permissionChecker.isCommunityAdmin(group.getGroupId())) {
-		return filteredPortlets;
-	}
-
-	Iterator<Portlet> itr = filteredPortlets.iterator();
-
-	while (itr.hasNext()) {
-		Portlet portlet = itr.next();
-
-		if (!isShowPortlet(permissionChecker, portlet)) {
-			itr.remove();
-		}
-	}
-
-	return filteredPortlets;
-}
-
-public static boolean isShowPortlet(PermissionChecker permissionChecker, Portlet portlet) throws Exception {
-	ControlPanelEntry controlPanelEntry = portlet.getControlPanelEntryInstance();
-
-	if ((controlPanelEntry != null) && controlPanelEntry.isVisible(permissionChecker, portlet)) {
-		return true;
-	}
-
-	return false;
-}
-%>

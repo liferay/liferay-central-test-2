@@ -103,6 +103,7 @@ import com.liferay.portal.upload.UploadServletRequestImpl;
 import com.liferay.portal.util.comparator.PortletControlPanelWeightComparator;
 import com.liferay.portlet.ActionRequestImpl;
 import com.liferay.portlet.ActionResponseImpl;
+import com.liferay.portlet.ControlPanelEntry;
 import com.liferay.portlet.PortletConfigFactory;
 import com.liferay.portlet.PortletConfigImpl;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
@@ -649,12 +650,13 @@ public class PortalImpl implements Portal {
 		return _computerName;
 	}
 
-	public String getControlPanelCategory(long companyId, String portletId)
-		throws SystemException {
+	public String getControlPanelCategory(
+			String portletId, ThemeDisplay themeDisplay)
+		throws Exception {
 
 		for (String category : PortletCategoryKeys.ALL) {
 			List<Portlet> portlets = getControlPanelPortlets(
-				companyId, category);
+				category, themeDisplay);
 
 			for (Portlet portlet : portlets) {
 				if (portlet.getPortletId().equals(portletId)) {
@@ -667,14 +669,14 @@ public class PortalImpl implements Portal {
 	}
 
 	public List<Portlet> getControlPanelPortlets(
-			long companyId, String category)
-		throws SystemException {
+			String category, ThemeDisplay themeDisplay)
+		throws Exception {
 
 		Set<Portlet> portletsSet = new TreeSet<Portlet>(
 			new PortletControlPanelWeightComparator());
 
 		List<Portlet> portletsList = PortletLocalServiceUtil.getPortlets(
-			companyId);
+			themeDisplay.getCompanyId());
 
 		for (Portlet portlet : portletsList) {
 			if (category.equals(portlet.getControlPanelEntryCategory())) {
@@ -682,7 +684,7 @@ public class PortalImpl implements Portal {
 			}
 		}
 
-		return new ArrayList<Portlet>(portletsSet);
+		return filterPortlets(category, portletsSet, themeDisplay);
 	}
 
 	public String getCurrentCompleteURL(HttpServletRequest request) {
@@ -3237,6 +3239,51 @@ public class PortalImpl implements Portal {
 		}
 	}
 
+	protected List<Portlet> filterPortlets(
+			String category, Set<Portlet> portlets, ThemeDisplay themeDisplay)
+		throws Exception {
+
+		PermissionChecker permissionChecker =
+			themeDisplay.getPermissionChecker();
+		Group group = themeDisplay.getScopeGroup();
+
+		List<Portlet> filteredPortlets = new ArrayList<Portlet>();
+
+		boolean contentCategory = category.equals(PortletCategoryKeys.CONTENT);
+
+		if (contentCategory && group.isLayout()) {
+			for (Portlet portlet : portlets) {
+				if (portlet.isScopeable()) {
+					filteredPortlets.add(portlet);
+				}
+			}
+		}
+		else {
+			filteredPortlets.addAll(portlets);
+		}
+
+		if (permissionChecker.isCompanyAdmin()) {
+			return filteredPortlets;
+		}
+
+		if (category.equals(PortletCategoryKeys.CONTENT) &&
+			permissionChecker.isCommunityAdmin(group.getGroupId())) {
+			return filteredPortlets;
+		}
+
+		Iterator<Portlet> itr = filteredPortlets.iterator();
+
+		while (itr.hasNext()) {
+			Portlet portlet = itr.next();
+
+			if (!isShowPortlet(permissionChecker, portlet)) {
+				itr.remove();
+			}
+		}
+
+		return filteredPortlets;
+	}
+
 	protected long getDoAsUserId(
 			HttpServletRequest request, String doAsUserIdString,
 			boolean alwaysAllowDoAsUser)
@@ -3317,6 +3364,21 @@ public class PortalImpl implements Portal {
 
 			return 0;
 		}
+	}
+
+	protected boolean isShowPortlet(
+			PermissionChecker permissionChecker, Portlet portlet)
+		throws Exception {
+
+		ControlPanelEntry controlPanelEntry =
+			portlet.getControlPanelEntryInstance();
+
+		if ((controlPanelEntry != null) &&
+			controlPanelEntry.isVisible(permissionChecker, portlet)) {
+			return true;
+		}
+
+		return false;
 	}
 
 	private long _getPlidFromPortletId(

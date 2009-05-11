@@ -158,12 +158,13 @@ public interface Portal {
 
 	public String getComputerName();
 
-	public String getControlPanelCategory(long companyId, String portletId)
-		throws SystemException;
+	public String getControlPanelCategory(
+			String portletId, ThemeDisplay themeDisplay)
+		throws Exception;
 
 	public List<Portlet> getControlPanelPortlets(
-			long companyId, String category)
-		throws SystemException;
+			String category, ThemeDisplay themeDisplay)
+		throws Exception;
 
 	public String getCurrentCompleteURL(HttpServletRequest request);
 
