@@ -22,13 +22,15 @@
 
 package com.liferay.portal.kernel.util;
 
+import java.io.Serializable;
+
 /**
  * <a href="Tuple.java.html"><b><i>View Source</i></b></a>
  *
  * @author Alexander Chow
  *
  */
-public class Tuple {
+public class Tuple implements Serializable {
 
 	public Tuple(Object obj0, Object obj1) {
 		_array = new Object[] {obj0, obj1};
@@ -86,5 +88,7 @@ public class Tuple {
 	}
 
 	private Object[] _array;
+
+	private static final long serialVersionUID = 1900262009147134086L;
 
 }
