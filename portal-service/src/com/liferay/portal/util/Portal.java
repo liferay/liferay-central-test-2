@@ -160,11 +160,11 @@ public interface Portal {
 
 	public String getControlPanelCategory(
 			String portletId, ThemeDisplay themeDisplay)
-		throws Exception;
+		throws SystemException;
 
 	public List<Portlet> getControlPanelPortlets(
 			String category, ThemeDisplay themeDisplay)
-		throws Exception;
+		throws SystemException;
 
 	public String getCurrentCompleteURL(HttpServletRequest request);
 

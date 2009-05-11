@@ -61,7 +61,7 @@ List<Layout> scopeLayouts = new ArrayList<Layout>();
 boolean denyAccess = false;
 
 if (Validator.isNotNull(ppid)) {
-	denyAccess = !hasPortlet(themeDisplay, category, ppid);
+	denyAccess = !_hasPortlet(ppid, category, themeDisplay);
 }
 %>
 
@@ -347,10 +347,12 @@ if (!denyAccess && (themeDisplay.isStateExclusive() || themeDisplay.isStatePopUp
 }
 else {
 	String description = StringPool.BLANK;
+
 	String className = "portlet-msg-info";
 
 	if (denyAccess) {
 		description = LanguageUtil.get(pageContext, "you-do-not-have-enough-permissions-to-access-this-application");
+
 		className = "portlet-msg-error";
 	}
 
@@ -377,11 +379,11 @@ else {
 <%@ include file="/html/portal/layout/view/common.jspf" %>
 
 <%!
-public static final boolean hasPortlet(ThemeDisplay themeDisplay, String category, String ppid) throws Exception {
+private static boolean _hasPortlet(String portletId, String category, ThemeDisplay themeDisplay) throws Exception {
 	List<Portlet> portlets = PortalUtil.getControlPanelPortlets(category, themeDisplay);
 
 	for (Portlet portlet : portlets) {
-		if (portlet.getPortletId().equals(ppid)) {
+		if (portlet.getPortletId().equals(portletId)) {
 			return true;
 		}
 	}

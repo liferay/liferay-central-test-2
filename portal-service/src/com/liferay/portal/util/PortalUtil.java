@@ -192,14 +192,14 @@ public class PortalUtil {
 
 	public static String getControlPanelCategory(
 			String portletId, ThemeDisplay themeDisplay)
-		throws Exception {
+		throws SystemException {
 
 		return getPortal().getControlPanelCategory(portletId, themeDisplay);
 	}
 
 	public static List<Portlet> getControlPanelPortlets(
 			String category, ThemeDisplay themeDisplay)
-		throws Exception {
+		throws SystemException {
 
 		return getPortal().getControlPanelPortlets(
 			category, themeDisplay);

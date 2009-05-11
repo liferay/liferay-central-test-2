@@ -652,7 +652,7 @@ public class PortalImpl implements Portal {
 
 	public String getControlPanelCategory(
 			String portletId, ThemeDisplay themeDisplay)
-		throws Exception {
+		throws SystemException {
 
 		for (String category : PortletCategoryKeys.ALL) {
 			List<Portlet> portlets = getControlPanelPortlets(
@@ -670,7 +670,7 @@ public class PortalImpl implements Portal {
 
 	public List<Portlet> getControlPanelPortlets(
 			String category, ThemeDisplay themeDisplay)
-		throws Exception {
+		throws SystemException {
 
 		Set<Portlet> portletsSet = new TreeSet<Portlet>(
 			new PortletControlPanelWeightComparator());
@@ -684,7 +684,7 @@ public class PortalImpl implements Portal {
 			}
 		}
 
-		return filterPortlets(category, portletsSet, themeDisplay);
+		return filterControlPanelPortlets(portletsSet, category, themeDisplay);
 	}
 
 	public String getCurrentCompleteURL(HttpServletRequest request) {
@@ -3239,12 +3239,12 @@ public class PortalImpl implements Portal {
 		}
 	}
 
-	protected List<Portlet> filterPortlets(
-			String category, Set<Portlet> portlets, ThemeDisplay themeDisplay)
-		throws Exception {
+	protected List<Portlet> filterControlPanelPortlets(
+		Set<Portlet> portlets, String category, ThemeDisplay themeDisplay) {
 
 		PermissionChecker permissionChecker =
 			themeDisplay.getPermissionChecker();
+
 		Group group = themeDisplay.getScopeGroup();
 
 		List<Portlet> filteredPortlets = new ArrayList<Portlet>();
@@ -3268,6 +3268,7 @@ public class PortalImpl implements Portal {
 
 		if (category.equals(PortletCategoryKeys.CONTENT) &&
 			permissionChecker.isCommunityAdmin(group.getGroupId())) {
+
 			return filteredPortlets;
 		}
 
@@ -3276,7 +3277,20 @@ public class PortalImpl implements Portal {
 		while (itr.hasNext()) {
 			Portlet portlet = itr.next();
 
-			if (!isShowPortlet(permissionChecker, portlet)) {
+			ControlPanelEntry controlPanelEntry =
+				portlet.getControlPanelEntryInstance();
+
+			try {
+				if ((controlPanelEntry == null) ||
+					(!controlPanelEntry.isVisible(
+						permissionChecker, portlet))) {
+
+					itr.remove();
+				}
+			}
+			catch (Exception e) {
+				_log.error(e, e);
+
 				itr.remove();
 			}
 		}
@@ -3364,21 +3378,6 @@ public class PortalImpl implements Portal {
 
 			return 0;
 		}
-	}
-
-	protected boolean isShowPortlet(
-			PermissionChecker permissionChecker, Portlet portlet)
-		throws Exception {
-
-		ControlPanelEntry controlPanelEntry =
-			portlet.getControlPanelEntryInstance();
-
-		if ((controlPanelEntry != null) &&
-			controlPanelEntry.isVisible(permissionChecker, portlet)) {
-			return true;
-		}
-
-		return false;
 	}
 
 	private long _getPlidFromPortletId(
