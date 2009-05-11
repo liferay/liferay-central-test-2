@@ -784,7 +784,7 @@ if ((layout.getType().equals(LayoutConstants.TYPE_PANEL) || layout.getType().equ
 	%>
 
 	<div id="p_p_id<%= HtmlUtil.escape(renderResponseImpl.getNamespace()) %>" class="<%= cssClasses %>" <%= freeformStyles %>>
-		<a name="p_<%= HtmlUtil.escape(portletId) %>"></a>
+		<a id="p_<%= HtmlUtil.escape(portletId) %>"></a>
 </c:if>
 
 <c:choose>

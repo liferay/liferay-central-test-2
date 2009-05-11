@@ -193,7 +193,7 @@ Liferay.Tree = new Expanse.Class(
 					}
 
 					if (instance.nolinks) {
-						instance.treeHTML.push('<a name="' + node.id + '">');
+						instance.treeHTML.push('<a id="' + node.id + '">');
 						instance.treeHTML.push(instance._pageImage);
 						instance.treeHTML.push('<span>' + node.name + '</span>');
 						instance.treeHTML.push('</a>');
@@ -263,7 +263,7 @@ Liferay.Tree = new Expanse.Class(
 					mainLi += '<li class="root-container">';
 
 					if (instance.nolinks) {
-						mainLi += '<a name="' + node.id + '">';
+						mainLi += '<a id="' + node.id + '">';
 					}
 					else {
 						mainLi += '<a href="' + node.href + '">';
