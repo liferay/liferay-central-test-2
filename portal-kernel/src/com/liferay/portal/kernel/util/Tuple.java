@@ -89,6 +89,4 @@ public class Tuple implements Serializable {
 
 	private Object[] _array;
 
-	private static final long serialVersionUID = 1900262009147134086L;
-
 }
