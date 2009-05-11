@@ -423,6 +423,41 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 								xsd += <portlet:namespace />createSubelement(i);
 							}
 							else if (cmd == "remove") {
+								var nextElDepth = document.getElementById("<portlet:namespace />structure_el" + (i + 1) + "_depth");
+
+								if (nextElDepth != null) {
+									var nextElDepthValue = nextElDepth.value;
+
+									while (elDepthValue < nextElDepthValue) {
+										i = i + 1;
+
+										nextElDepth = document.getElementById("<portlet:namespace />structure_el" + (i + 1) + "_depth");
+
+										if (nextElDepth == null) {
+											for (var j = 0; j < elDepthValue; j++) {
+												xsd += "</dynamic-element>";
+											}
+
+											break;
+										}
+
+										nextElDepthValue = nextElDepth.value;
+									}
+
+									if (elDepthValue > nextElDepthValue) {
+										var depthDiff = elDepthValue - nextElDepthValue;
+
+										for (var j = 0; j < depthDiff; j++) {
+											xsd += "</dynamic-element>";
+										}
+									}
+								}
+								else {
+									for (var j = 0; j < elDepthValue; j++) {
+										xsd += "</dynamic-element>";
+									}
+								}
+
 								continue;
 							}
 						}
