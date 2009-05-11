@@ -43,9 +43,11 @@ public class SerializableUtil {
 
 		try {
 			ois = new ObjectInputStream(new ByteArrayInputStream(bytes));
+
 			Object obj = ois.readObject();
 
 			ois.close();
+
 			ois = null;
 
 			return obj;
@@ -64,9 +66,11 @@ public class SerializableUtil {
 			ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
 			oos = new ObjectOutputStream(baos);
+
 			oos.writeObject(obj);
 
 			oos.close();
+
 			oos = null;
 
 			return baos.toByteArray();
