@@ -33,22 +33,9 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class CA_AssertActionsTest extends BaseTestCase {
 	public void testCA_AssertActions() throws Exception {
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Configuration")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
+		selenium.click(RuntimeVariables.replace("link=Blogs Permissions Page"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isElementPresent("link=Configuration"));
 		assertTrue(selenium.isElementPresent("//input[@value='Add Blog Entry']"));
 		assertTrue(selenium.isElementPresent("link=Edit"));
 		assertTrue(selenium.isElementPresent("link=Permissions"));
@@ -56,9 +43,7 @@ public class CA_AssertActionsTest extends BaseTestCase {
 		assertTrue(selenium.isElementPresent("link=Subscribe to this blog."));
 		selenium.click(RuntimeVariables.replace("link=Test Entry 1"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent("//td[4]/span/a[2]"));
-		assertTrue(selenium.isElementPresent("//td[5]/span/a[2]"));
-		selenium.click(RuntimeVariables.replace("_33_tabs1TabsBack"));
-		selenium.waitForPageToLoad("30000");
+		assertEquals("Edit", selenium.getText("//td[4]/span/a[2]"));
+		assertEquals("Delete", selenium.getText("//td[5]/span/a[2]"));
 	}
 }

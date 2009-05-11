@@ -52,11 +52,8 @@ public class Guest_ViewEntryTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace("link=Blogs Permissions Page"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=Test Entry 1"));
-		assertTrue(selenium.isTextPresent("By CA Liferay"));
 		selenium.click(RuntimeVariables.replace("link=Test Entry 1"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Test Entry 1"));
-		selenium.click(RuntimeVariables.replace("_33_tabs1TabsBack"));
-		selenium.waitForPageToLoad("30000");
 	}
 }

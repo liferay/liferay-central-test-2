@@ -49,6 +49,8 @@ public class Member_AssertActionsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.click(RuntimeVariables.replace("link=Blogs Permissions Page"));
+		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=Test Entry 1"));
 		assertTrue(selenium.isElementPresent("//span[2]/a"));
 		assertTrue(selenium.isElementPresent("link=Subscribe to this blog."));
@@ -64,8 +66,6 @@ public class Member_AssertActionsTest extends BaseTestCase {
 				"//input[@value='Add Blog Entry']"));
 		assertFalse(selenium.isElementPresent("link=Permissions"));
 		assertFalse(selenium.isElementPresent("link=Edit"));
-		assertTrue(selenium.isElementPresent("link=Post Reply"));
-		selenium.click(RuntimeVariables.replace("_33_tabs1TabsBack"));
-		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isElementPresent("link=Add Comment"));
 	}
 }

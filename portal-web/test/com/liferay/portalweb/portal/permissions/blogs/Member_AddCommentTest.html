@@ -1,9 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head profile="http://selenium-ide.openqa.org/profiles/test-case">
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="selenium.base" href="" />
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Member_AddCommentTest</title>
 </head>
 <body>
@@ -13,62 +10,52 @@
 </thead><tbody>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//input[@value='Search']</td>
+	<td>link=Blogs Permissions Page</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
-	<td>link=Test Entry 1</td>
+	<td>clickAndWait</td>
+	<td>link=Blogs Permissions Page</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Test Entry 1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertElementPresent</td>
-	<td>link=Post Reply</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>link=Post Reply</td>
+	<td>link=Add Comment</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>_33_postReplyBody1</td>
+	<td>_33_postReplyBody0</td>
 	<td></td>
 </tr>
 <tr>
 	<td>typeKeys</td>
-	<td>_33_postReplyBody1</td>
+	<td>_33_postReplyBody0</td>
 	<td>Member Comment Test</td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>_33_postReplyBody1</td>
+	<td>_33_postReplyBody0</td>
 	<td>Member Comment Test</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>_33_postReplyButton1</td>
+	<td>//input[@value='Reply']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Test Comment</td>
+	<td>Your request processed successfully.</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
 	<td>Member Comment Test</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>_33_tabs1TabsBack</td>
 	<td></td>
 </tr>
 

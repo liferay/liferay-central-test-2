@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portal.permissions.blogs;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="CA_AddPortletTest.java.html"><b><i>View Source</i></b></a>
@@ -38,7 +39,7 @@ public class CA_AddPortletTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Add Application")) {
+				if (selenium.isElementPresent("link=Blogs Permissions Page")) {
 					break;
 				}
 			}
@@ -48,6 +49,8 @@ public class CA_AddPortletTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.click(RuntimeVariables.replace("link=Blogs Permissions Page"));
+		selenium.waitForPageToLoad("30000");
 		selenium.click("link=Add Application");
 
 		for (int second = 0;; second++) {

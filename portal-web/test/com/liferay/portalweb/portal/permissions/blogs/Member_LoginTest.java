@@ -33,13 +33,16 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class Member_LoginTest extends BaseTestCase {
 	public void testMember_Login() throws Exception {
+		selenium.click(RuntimeVariables.replace("link=Welcome"));
+		selenium.waitForPageToLoad("30000");
+		selenium.typeKeys("_58_login",
+			RuntimeVariables.replace("member@lifera.com"));
 		selenium.type("_58_login",
 			RuntimeVariables.replace("member@liferay.com"));
+		selenium.typeKeys("_58_password", RuntimeVariables.replace("test"));
 		selenium.type("_58_password", RuntimeVariables.replace("test"));
+		selenium.click("_58_rememberMeCheckbox");
 		selenium.click(RuntimeVariables.replace("//input[@value='Sign In']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Blogs Permissions Page"));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent("link=Test Entry 1"));
 	}
 }

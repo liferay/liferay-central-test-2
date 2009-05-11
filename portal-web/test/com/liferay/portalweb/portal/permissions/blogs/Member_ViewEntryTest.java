@@ -49,11 +49,11 @@ public class Member_ViewEntryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.click(RuntimeVariables.replace("link=Blogs Permissions Page"));
+		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=Test Entry 1"));
 		selenium.click(RuntimeVariables.replace("link=Test Entry 1"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Test Entry 1"));
-		selenium.click(RuntimeVariables.replace("_33_tabs1TabsBack"));
-		selenium.waitForPageToLoad("30000");
 	}
 }

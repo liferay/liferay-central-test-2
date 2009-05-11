@@ -33,16 +33,13 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class CA_AddCommentTest extends BaseTestCase {
 	public void testCA_AddComment() throws Exception {
-		selenium.click(RuntimeVariables.replace("link=0 Comments"));
-		selenium.waitForPageToLoad("30000");
-
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Add Comment")) {
+				if (selenium.isElementPresent("link=Blogs Permissions Page")) {
 					break;
 				}
 			}
@@ -52,6 +49,10 @@ public class CA_AddCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.click(RuntimeVariables.replace("link=Blogs Permissions Page"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("link=0 Comments"));
+		selenium.waitForPageToLoad("30000");
 		selenium.click("link=Add Comment");
 
 		for (int second = 0;; second++) {
@@ -76,24 +77,8 @@ public class CA_AddCommentTest extends BaseTestCase {
 			RuntimeVariables.replace("Test Comment 1"));
 		selenium.click(RuntimeVariables.replace("_33_postReplyButton0"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Test Comment 1")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click(RuntimeVariables.replace("_33_tabs1TabsBack"));
-		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
+		assertTrue(selenium.isTextPresent("Test Comment 1"));
 	}
 }

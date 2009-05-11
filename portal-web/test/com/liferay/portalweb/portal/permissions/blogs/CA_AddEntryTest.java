@@ -39,8 +39,7 @@ public class CA_AddEntryTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent(
-							"//input[@value='Add Blog Entry']")) {
+				if (selenium.isElementPresent("link=Blogs Permissions Page")) {
 					break;
 				}
 			}
@@ -50,24 +49,12 @@ public class CA_AddEntryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//input[@value='Add Blog Entry']");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_33_title")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
+		selenium.click(RuntimeVariables.replace("link=Blogs Permissions Page"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Add Blog Entry']"));
+		selenium.waitForPageToLoad("30000");
+		selenium.typeKeys("_33_title", RuntimeVariables.replace("Test Entr 1"));
 		selenium.type("_33_title", RuntimeVariables.replace("Test Entry 1"));
 		Thread.sleep(5000);
 
@@ -122,43 +109,13 @@ public class CA_AddEntryTest extends BaseTestCase {
 		selenium.selectFrame("//iframe[@id=\"_33_editor\"]");
 		selenium.selectFrame("//iframe[@id=\"FCKeditor1___Frame\"]");
 		selenium.selectFrame("//iframe");
+		selenium.typeKeys("//body", RuntimeVariables.replace("Test Entr 1"));
 		selenium.type("//body", RuntimeVariables.replace("Test Entry 1"));
 		selenium.selectFrame("relative=top");
-		Thread.sleep(5000);
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_33_saveButton")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.click(RuntimeVariables.replace("_33_saveButton"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=0 Comments")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
+		assertTrue(selenium.isElementPresent("link=Test Entry 1"));
 	}
 }
