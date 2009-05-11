@@ -643,7 +643,7 @@
 	</library>
 	<library>
 		<file-name>development/postgresql.jar</file-name>
-		<version>8.2-506 JDBC 3</version>
+		<version>8.3-604 JDBC 3</version>
 		<project-name>PostgreSQL JDBC Driver</project-name>
 		<project-url>http://jdbc.postgresql.org</project-url>
 		<licenses>

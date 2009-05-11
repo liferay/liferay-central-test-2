@@ -156,6 +156,12 @@
 		<antcall target="test-weblogic-10.3-common" />
 	</target>
 
+	<target name="test-weblogic-10.3-postgresql-8.3">
+		<antcall target="prepare-postgresql-8.3" />
+
+		<antcall target="test-weblogic-10.3-common" />
+	</target>
+
 	<target name="test-weblogic-10.3-sql-server-2005">
 		<antcall target="prepare-sql-server-2005" />
 

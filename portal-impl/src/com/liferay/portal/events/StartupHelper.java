@@ -302,7 +302,7 @@ public class StartupHelper {
 		portalTablesSQLString = portalTablesSQLString.toLowerCase();
 
 		for (Index index : indexes) {
-			String indexName = index.getIndexName();
+			String indexName = index.getIndexName().toUpperCase();
 			String indexNameLowerCase = indexName.toLowerCase();
 			String tableName = index.getTableName();
 			String tableNameLowerCase = tableName.toLowerCase();
