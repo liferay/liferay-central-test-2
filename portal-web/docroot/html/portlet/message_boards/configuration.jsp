@@ -195,6 +195,14 @@ String emailMessageUpdatedSignature = ParamUtil.getString(request, "emailMessage
 		</tr>
 		<tr>
 			<td>
+				<b>[$MAILING_LIST_ADDRESS$]</b>
+			</td>
+			<td>
+				<liferay-ui:message key="the-email-address-of-the-mailing-list" />
+			</td>
+		</tr>
+		<tr>
+			<td>
 				<b>[$MESSAGE_USER_ADDRESS$]</b>
 			</td>
 			<td>
@@ -345,6 +353,14 @@ String emailMessageUpdatedSignature = ParamUtil.getString(request, "emailMessage
 			</td>
 			<td>
 				<%= emailFromName %>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<b>[$MAILING_LIST_ADDRESS$]</b>
+			</td>
+			<td>
+				<liferay-ui:message key="the-email-address-of-the-mailing-list" />
 			</td>
 		</tr>
 		<tr>

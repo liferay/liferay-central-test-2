@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.messageboards.messaging.mailinglist;
+package com.liferay.portlet.messageboards.messaging;
 
 /**
  * <a href="MailingListRequest.java.html"><b><i>View Source</i></b></a>
@@ -100,21 +100,6 @@ public class MailingListRequest {
 
 	public void setUserId(long id) {
 		_userId = id;
-	}
-
-
-	public String toString() {
-		return "MailingListRequest{" +
-			   "_categoryId=" + _categoryId +
-			   ", _companyId=" + _companyId +
-			   ", _inPassword='" + _inPassword + '\'' +
-			   ", _inProtocol='" + _inProtocol + '\'' +
-			   ", _inServerName='" + _inServerName + '\'' +
-			   ", _inServerPort=" + _inServerPort +
-			   ", _inUserName='" + _inUserName + '\'' +
-			   ", _inUseSSL=" + _inUseSSL +
-			   ", _userId=" + _userId +
-			   '}';
 	}
 
 	private long _categoryId;

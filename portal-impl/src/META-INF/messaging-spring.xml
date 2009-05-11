@@ -88,25 +88,8 @@
 	<bean id="messageListener.layouts_remote_publisher" class="com.liferay.portlet.communities.messaging.LayoutsRemotePublisherMessageListener" />
 	<bean id="messageListener.live_users" class="com.liferay.portal.liveusers.messaging.LiveUsersMessageListener" />
 	<bean id="messageListener.mail" class="com.liferay.mail.messaging.MailMessageListener" />
-	<bean id="messageListener.message_boards.notify.subscription" class="com.liferay.portlet.messageboards.messaging.notification.MBMailingListNotificationMessageListener">
-		<constructor-arg index="0" type="com.liferay.portlet.messageboards.service.MBMailingListLocalService" ref="com.liferay.portlet.messageboards.service.MBMailingListLocalService.impl"/>
-		<constructor-arg index="1" type="com.liferay.portal.kernel.messaging.sender.MessageSender" ref="com.liferay.portal.kernel.messaging.sender.MessageSender"/>
-	</bean>
-	<bean id="messageListener.message_boards.notify.mailing_list" class="com.liferay.portlet.messageboards.messaging.notification.MBSubscriptionNotificationMessageListener">
-		<constructor-arg index="0" type="com.liferay.portal.kernel.messaging.sender.MessageSender" ref="com.liferay.portal.kernel.messaging.sender.MessageSender"/>
-		<constructor-arg index="1" type="com.liferay.portal.service.SubscriptionLocalService" ref="com.liferay.portal.service.SubscriptionLocalService.impl"/>
-		<constructor-arg index="2" type="com.liferay.portal.service.UserLocalService" ref="com.liferay.portal.service.UserLocalService.impl"/>
-	</bean>
-	<bean id="messageListener.message_boards_mailing_list" class="com.liferay.portlet.messageboards.messaging.mailinglist.MLPollingMessageListener">
-	    <constructor-arg index="0" type="com.liferay.portlet.messageboards.messaging.mailinglist.MailingListMessageProcessor">
-			<bean class="com.liferay.portlet.messageboards.messaging.mailinglist.MailingListMessageProcessorImpl">
-				<constructor-arg index="0" type="com.liferay.portal.service.CompanyLocalService" ref="com.liferay.portal.service.CompanyLocalService.impl"/>
-				<constructor-arg index="1" type="com.liferay.portlet.messageboards.service.MBMessageLocalService" ref="com.liferay.portlet.messageboards.service.MBMessageLocalService.impl"/>
-				<constructor-arg index="2" type="com.liferay.portlet.messageboards.service.MBMessageService" ref="com.liferay.portlet.messageboards.service.MBMessageService.impl"/>
-				<constructor-arg index="3" type="com.liferay.portal.service.UserLocalService" ref="com.liferay.portal.service.UserLocalService.impl"/>
-			</bean>
-	    </constructor-arg>
-	</bean>
+	<bean id="messageListener.message_boards" class="com.liferay.portlet.messageboards.messaging.MBMessageListener" />
+	<bean id="messageListener.message_boards_mailing_list" class="com.liferay.portlet.messageboards.messaging.MailingListMessageListener" />
 	<bean id="messageListener.scheduler" class="com.liferay.portal.scheduler.messaging.SchedulerMessageListener">
 		<constructor-arg index="0" type="com.liferay.portal.kernel.messaging.sender.MessageSender" ref="com.liferay.portal.kernel.messaging.sender.MessageSender" />
 		<constructor-arg index="1" type="com.liferay.portal.kernel.scheduler.SchedulerEngine" ref="com.liferay.portal.kernel.scheduler.SchedulerEngine" />
@@ -186,8 +169,7 @@
 				</entry>
 				<entry key="liferay/message_boards">
 					<list value-type="com.liferay.portal.kernel.messaging.MessageListener">
-						<ref bean="messageListener.message_boards.notify.subscription" />
-						<ref bean="messageListener.message_boards.notify.mailing_list" />
+						<ref bean="messageListener.message_boards" />
 					</list>
 				</entry>
 				<entry key="liferay/message_boards_mailing_list">

@@ -86,6 +86,7 @@ import com.liferay.portlet.messageboards.util.comparator.ThreadLastPostDateCompa
 import com.liferay.portlet.social.model.SocialActivity;
 
 import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Date;
@@ -95,6 +96,7 @@ import java.util.List;
 import java.util.Set;
 
 import javax.mail.internet.InternetAddress;
+
 import javax.portlet.PortletPreferences;
 
 import org.apache.commons.lang.time.StopWatch;
@@ -1417,9 +1419,11 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		categoryIds.add(category.getCategoryId());
 		categoryIds.addAll(category.getAncestorCategoryIds());
 
-		String messageURL = portalURL + layoutURL +
-				Portal.FRIENDLY_URL_SEPARATOR + "message_boards/message/" +
-				message.getMessageId();
+		String messageURL = StringPool.BLANK;
+
+		messageURL =
+			portalURL + layoutURL + Portal.FRIENDLY_URL_SEPARATOR +
+				"message_boards/message/" + message.getMessageId();
 
 		String portletName = PortalUtil.getPortletTitle(
 			PortletKeys.MESSAGE_BOARDS, user);
@@ -1427,14 +1431,15 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		String fromName = MBUtil.getEmailFromName(preferences);
 		String fromAddress = MBUtil.getEmailFromAddress(preferences);
 
-		String replyToAddress = StringPool.BLANK;
+		String mailingListAddress = StringPool.BLANK;
 
 		if (PropsValues.POP_SERVER_NOTIFICATIONS_ENABLED) {
-			replyToAddress = MBUtil.getReplyToAddress(
+			mailingListAddress = MBUtil.getMailingListAddress(
 				message.getCategoryId(), message.getMessageId(),
 				company.getMx(), fromAddress);
 		}
 
+		String replyToAddress = mailingListAddress;
 		String mailId = MBUtil.getMailId(
 			company.getMx(), message.getCategoryId(), message.getMessageId());
 
@@ -1445,6 +1450,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				"[$COMPANY_MX$]",
 				"[$COMPANY_NAME$]",
 				"[$COMMUNITY_NAME$]",
+				"[$MAILING_LIST_ADDRESS$]",
 				"[$MESSAGE_USER_ADDRESS$]",
 				"[$MESSAGE_USER_NAME$]",
 				"[$PORTLET_NAME$]"
@@ -1454,6 +1460,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				company.getMx(),
 				company.getName(),
 				group.getName(),
+				mailingListAddress,
 				emailAddress,
 				fullName,
 				portletName
@@ -1466,6 +1473,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				"[$COMPANY_MX$]",
 				"[$COMPANY_NAME$]",
 				"[$COMMUNITY_NAME$]",
+				"[$MAILING_LIST_ADDRESS$]",
 				"[$MESSAGE_USER_ADDRESS$]",
 				"[$MESSAGE_USER_NAME$]",
 				"[$PORTLET_NAME$]"
@@ -1475,6 +1483,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				company.getMx(),
 				company.getName(),
 				group.getName(),
+				mailingListAddress,
 				emailAddress,
 				fullName,
 				portletName
@@ -1529,7 +1538,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				group.getName(),
 				fromAddress,
 				fromName,
-				replyToAddress,
+				mailingListAddress,
 				message.getBody(),
 				String.valueOf(message.getMessageId()),
 				message.getSubject(),
@@ -1567,7 +1576,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				group.getName(),
 				fromAddress,
 				fromName,
-				replyToAddress,
+				mailingListAddress,
 				message.getBody(),
 				String.valueOf(message.getMessageId()),
 				message.getSubject(),
@@ -1598,6 +1607,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			new com.liferay.portal.kernel.messaging.Message();
 
 		messagingObj.put("companyId", message.getCompanyId());
+		messagingObj.put("userId", message.getUserId());
 		messagingObj.put("categoryIds", StringUtil.merge(categoryIds));
 		messagingObj.put("threadId", message.getThreadId());
 		messagingObj.put("fromName", fromName);
@@ -1608,7 +1618,6 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		messagingObj.put("mailId", mailId);
 		messagingObj.put("inReplyTo", inReplyTo);
 		messagingObj.put("htmlFormat", htmlFormat);
-		//set if the message originated from a mailing list
 		messagingObj.put(
 			"sourceMailingList", MailingListThreadLocal.isSourceMailingList());
 
