@@ -25,6 +25,7 @@ package com.liferay.portlet.documentlibrary.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.documentlibrary.NoSuchFileRankException;
 import com.liferay.portlet.documentlibrary.model.DLFileRank;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
@@ -71,6 +72,10 @@ public class DLFileRankLocalServiceImpl extends DLFileRankLocalServiceBaseImpl {
 			long groupId, long companyId, long userId, long folderId,
 			String name)
 		throws PortalException, SystemException {
+
+		if (!PropsValues.DL_FILE_RANK_ENABLED) {
+			return null;
+		}
 
 		try {
 			dlFileRankPersistence.removeByC_U_F_N(

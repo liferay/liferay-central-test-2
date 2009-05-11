@@ -463,6 +463,9 @@ public class PropsValues {
 	public static final int DL_FILE_MAX_SIZE = GetterUtil.getInteger(
 		PropsUtil.get(PropsKeys.DL_FILE_MAX_SIZE));
 
+	public static final boolean DL_FILE_RANK_ENABLED = GetterUtil.getBoolean(
+		PropsUtil.get(PropsKeys.DL_FILE_RANK_ENABLED));
+
 	public static final String DL_HOOK_IMPL =
 		PropsUtil.get(PropsKeys.DL_HOOK_IMPL);
 

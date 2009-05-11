@@ -376,6 +376,8 @@ public interface PropsKeys {
 
 	public static final String DL_FILE_MAX_SIZE = "dl.file.max.size";
 
+	public static final String DL_FILE_RANK_ENABLED = "dl.file.rank.enabled";
+
 	public static final String DL_HOOK_FILE_SYSTEM_ROOT_DIR = "dl.hook.file.system.root.dir";
 
 	public static final String DL_HOOK_IMPL = "dl.hook.impl";
