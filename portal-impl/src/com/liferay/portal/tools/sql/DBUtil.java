@@ -293,15 +293,31 @@ public abstract class DBUtil {
 		runSQL(new String[] {sql});
 	}
 
+	public void runSQL(Connection con, String sql)
+		throws IOException, NamingException, SQLException {
+
+		runSQL(con, new String[] {sql});
+	}
+
 	public void runSQL(String[] sqls)
 		throws IOException, NamingException, SQLException {
 
-		Connection con = null;
+		Connection con = DataAccess.getConnection();
+
+		try {
+			runSQL(con, sqls);
+		}
+		finally {
+			DataAccess.cleanUp(con);
+		}
+	}
+
+	public void runSQL(Connection con, String[] sqls)
+		throws IOException, NamingException, SQLException {
+
 		Statement stmt = null;
 
 		try {
-			con = DataAccess.getConnection();
-
 			stmt = con.createStatement();
 
 			for (int i = 0; i < sqls.length; i++) {
@@ -330,7 +346,7 @@ public abstract class DBUtil {
 			}
 		}
 		finally {
-			DataAccess.cleanUp(con, stmt);
+			DataAccess.cleanUp(stmt);
 		}
 	}
 
