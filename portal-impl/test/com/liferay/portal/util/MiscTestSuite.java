@@ -39,6 +39,7 @@ public class MiscTestSuite extends TestSuite {
 		TestSuite testSuite = new TestSuite();
 
 		testSuite.addTestSuite(ImageProcessorImplTest.class);
+		testSuite.addTestSuite(MultiValueMapTest.class);
 
 		return testSuite;
 	}
