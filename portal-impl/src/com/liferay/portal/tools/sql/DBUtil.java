@@ -315,10 +315,10 @@ public abstract class DBUtil {
 	public void runSQL(Connection con, String[] sqls)
 		throws IOException, NamingException, SQLException {
 
-		Statement stmt = null;
+		Statement s = null;
 
 		try {
-			stmt = con.createStatement();
+			s = con.createStatement();
 
 			for (int i = 0; i < sqls.length; i++) {
 				String sql = buildSQL(sqls[i]);
@@ -338,7 +338,7 @@ public abstract class DBUtil {
 				}
 
 				try {
-					stmt.executeUpdate(sql);
+					s.executeUpdate(sql);
 				}
 				catch (SQLException sqle) {
 					throw sqle;
@@ -346,7 +346,7 @@ public abstract class DBUtil {
 			}
 		}
 		finally {
-			DataAccess.cleanUp(stmt);
+			DataAccess.cleanUp(s);
 		}
 	}
 
