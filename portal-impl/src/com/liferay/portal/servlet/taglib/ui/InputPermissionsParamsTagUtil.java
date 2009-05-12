@@ -64,6 +64,7 @@ public class InputPermissionsParamsTagUtil {
 				WebKeys.THEME_DISPLAY);
 
 			Layout layout = themeDisplay.getLayout();
+
 			Group group = themeDisplay.getScopeGroup();
 			Group layoutGroup = layout.getGroup();
 
