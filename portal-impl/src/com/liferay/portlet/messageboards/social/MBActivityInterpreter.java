@@ -86,16 +86,6 @@ public class MBActivityInterpreter extends BaseSocialActivityInterpreter {
 
 		String titlePattern = null;
 
-		StringBuilder sb = new StringBuilder();
-
-		sb.append("<a href=\"");
-		sb.append(link);
-		sb.append("\">\"");
-		sb.append(cleanContent(message.getSubject()));
-		sb.append("\"</a>");
-
-		String messageSubject = sb.toString();
-
 		if (activityType == MBActivityKeys.ADD_MESSAGE) {
 			titlePattern = "activity-message-boards-add-message";
 		}
@@ -106,6 +96,16 @@ public class MBActivityInterpreter extends BaseSocialActivityInterpreter {
 		if (Validator.isNotNull(groupName)) {
 			titlePattern += "-in";
 		}
+
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<a href=\"");
+		sb.append(link);
+		sb.append("\">\"");
+		sb.append(cleanContent(message.getSubject()));
+		sb.append("\"</a>");
+
+		String messageSubject = sb.toString();
 
 		Object[] titleArguments = new Object[] {
 			groupName, creatorUserName, receiverUserName, messageSubject

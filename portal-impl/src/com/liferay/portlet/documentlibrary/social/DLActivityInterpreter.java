@@ -84,16 +84,6 @@ public class DLActivityInterpreter extends BaseSocialActivityInterpreter {
 
 		String titlePattern = null;
 
-		StringBuilder sb = new StringBuilder();
-
-		sb.append("<a href=\"");
-		sb.append(link);
-		sb.append("\">\"");
-		sb.append(cleanContent(fileEntry.getTitle()));
-		sb.append("\"</a>");
-
-		String fileTitle = sb.toString();
-
 		if (activityType == DLActivityKeys.ADD_FILE_ENTRY) {
 			titlePattern = "activity-document-library-add-file";
 		}
@@ -104,6 +94,16 @@ public class DLActivityInterpreter extends BaseSocialActivityInterpreter {
 		if (Validator.isNotNull(groupName)) {
 			titlePattern += "-in";
 		}
+
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<a href=\"");
+		sb.append(link);
+		sb.append("\">\"");
+		sb.append(cleanContent(fileEntry.getTitle()));
+		sb.append("\"</a>");
+
+		String fileTitle = sb.toString();
 
 		Object[] titleArguments = new Object[] {
 			groupName, creatorUserName, fileTitle

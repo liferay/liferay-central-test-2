@@ -85,16 +85,6 @@ public class WikiActivityInterpreter extends BaseSocialActivityInterpreter {
 
 		String titlePattern = null;
 
-		StringBuilder sb = new StringBuilder();
-
-		sb.append("<a href=\"");
-		sb.append(link);
-		sb.append("\">\"");
-		sb.append(cleanContent(pageResource.getTitle()));
-		sb.append("\"</a>");
-
-		String pageTitle = sb.toString();
-
 		if (activityType == WikiActivityKeys.ADD_PAGE) {
 			titlePattern = "activity-wiki-add-page";
 		}
@@ -105,6 +95,16 @@ public class WikiActivityInterpreter extends BaseSocialActivityInterpreter {
 		if (Validator.isNotNull(groupName)) {
 			titlePattern += "-in";
 		}
+
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<a href=\"");
+		sb.append(link);
+		sb.append("\">\"");
+		sb.append(cleanContent(pageResource.getTitle()));
+		sb.append("\"</a>");
+
+		String pageTitle = sb.toString();
 
 		Object[] titleArguments = new Object[] {
 			groupName, creatorUserName, pageTitle

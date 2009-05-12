@@ -94,16 +94,6 @@ public class BlogsActivityInterpreter extends BaseSocialActivityInterpreter {
 
 		String titlePattern = null;
 
-		StringBuilder sb = new StringBuilder();
-
-		sb.append("<a href=\"");
-		sb.append(link);
-		sb.append("\">\"");
-		sb.append(cleanContent(entry.getTitle()));
-		sb.append("\"</a>");
-
-		String entryTitle = sb.toString();
-
 		if (activityType == BlogsActivityKeys.ADD_COMMENT) {
 			titlePattern = "activity-blogs-add-comment";
 
@@ -118,6 +108,16 @@ public class BlogsActivityInterpreter extends BaseSocialActivityInterpreter {
 				titlePattern += "-in";
 			}
 		}
+
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<a href=\"");
+		sb.append(link);
+		sb.append("\">\"");
+		sb.append(cleanContent(entry.getTitle()));
+		sb.append("\"</a>");
+
+		String entryTitle = sb.toString();
 
 		Object[] titleArguments = new Object[] {
 			groupName, creatorUserName, receiverUserName, entryTitle

@@ -83,16 +83,6 @@ public class CalendarActivityInterpreter extends BaseSocialActivityInterpreter {
 
 		String titlePattern = null;
 
-		StringBuilder sb = new StringBuilder();
-
-		sb.append("<a href=\"");
-		sb.append(link);
-		sb.append("\">\"");
-		sb.append(cleanContent(event.getTitle()));
-		sb.append("\"</a>");
-
-		String eventTitle = sb.toString();
-
 		if (activityType == CalendarActivityKeys.ADD_EVENT) {
 			titlePattern = "activity-calendar-add-event";
 		}
@@ -103,6 +93,16 @@ public class CalendarActivityInterpreter extends BaseSocialActivityInterpreter {
 		if (Validator.isNotNull(groupName)) {
 			titlePattern += "-in";
 		}
+
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<a href=\"");
+		sb.append(link);
+		sb.append("\">\"");
+		sb.append(cleanContent(event.getTitle()));
+		sb.append("\"</a>");
+
+		String eventTitle = sb.toString();
 
 		Object[] titleArguments = new Object[] {
 			groupName, creatorUserName, eventTitle
