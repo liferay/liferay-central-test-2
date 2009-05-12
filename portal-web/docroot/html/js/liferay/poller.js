@@ -44,12 +44,14 @@
 		if (Liferay.Util.isArray(response)) {
 			var meta = response.shift();
 
-			var portletId;
 			var chunk;
+
+			var portletId;
 			var portlet;
 
 			for (var i = 0, length = response.length; i < length; i++) {
 				chunk = response[i];
+
 				portletId = chunk.portletId;
 				portlet = _portlets[portletId];
 
