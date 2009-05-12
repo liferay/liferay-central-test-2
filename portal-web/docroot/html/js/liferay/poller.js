@@ -45,16 +45,16 @@
 			var meta = response.shift();
 
 			var portletId;
-			var entry;
+			var chunk;
 			var portlet;
 
 			for (var i = 0, length = response.length; i < length; i++) {
-				entry = response[i];
-				portletId = entry.portletId;
+				chunk = response[i];
+				portletId = chunk.portletId;
 				portlet = _portlets[portletId];
 
 				if (portlet) {
-					portlet.listener.call(portlet.scope || Poller, entry.data);
+					portlet.listener.call(portlet.scope || Poller, chunk.data);
 				}
 			}
 
@@ -107,7 +107,7 @@
 			if (!_enabled) {
 				_enabled = true;
 
-				_createRequestTimer();
+				_send();
 			}
 
 			_portlets[key] = {
@@ -154,13 +154,17 @@
 			_url = url;
 		},
 
-		submitRequest: function(key, data) {
-			_requestData.push(
-				{
-					portletId: key,
-					data: data
-				}
-			);
+		submitRequest: function(key, data, chunkId) {
+			var requestData = {
+				portletId: key,
+				data: data
+			};
+
+			if (chunkId) {
+				requestData.chunkId = chunkId;
+			}
+
+			_requestData.push(requestData);
 		},
 
 		suspend: function() {
