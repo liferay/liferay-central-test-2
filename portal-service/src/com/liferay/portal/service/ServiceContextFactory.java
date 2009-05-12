@@ -103,6 +103,7 @@ public class ServiceContextFactory {
 			}
 			else if ((guestPermissions == null) ||
 					 (guestPermissions.length == 0)) {
+
 				guestPermissions = new String[] {ActionKeys.VIEW};
 			}
 		}
