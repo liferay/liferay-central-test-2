@@ -80,24 +80,7 @@ public class InputPermissionsParamsTagUtil {
 				ResourceActionsUtil.getModelResourceGuestUnsupportedActions(
 					modelName);
 
-			boolean inputPermissionsPublic = false;
-
-			if (layoutGroup.getName().equals(GroupConstants.CONTROL_PANEL)) {
-				if (!group.hasPrivateLayouts()) {
-					inputPermissionsPublic = true;
-				}
-			}
-			else if (layout.isPublicLayout()) {
-				inputPermissionsPublic = true;
-			}
-
 			StringBuilder sb = new StringBuilder();
-
-			if (inputPermissionsPublic) {
-				sb.append(StringPool.AMPERSAND);
-				sb.append(renderResponse.getNamespace());
-				sb.append("inputPermissionsPublic=1");
-			}
 
 			for (int i = 0; i < supportedActions.size(); i++) {
 				String action = supportedActions.get(i);
@@ -127,6 +110,23 @@ public class InputPermissionsParamsTagUtil {
 					sb.append("guestPermissions=");
 					sb.append(action);
 				}
+			}
+
+			boolean inputPermissionsPublic = false;
+
+			if (layoutGroup.getName().equals(GroupConstants.CONTROL_PANEL)) {
+				if (!group.hasPrivateLayouts()) {
+					inputPermissionsPublic = true;
+				}
+			}
+			else if (layout.isPublicLayout()) {
+				inputPermissionsPublic = true;
+			}
+
+			if (inputPermissionsPublic) {
+				sb.append(StringPool.AMPERSAND);
+				sb.append(renderResponse.getNamespace());
+				sb.append("inputPermissionsPublic=1");
 			}
 
 			pageContext.getOut().print(sb.toString());
