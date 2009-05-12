@@ -69,20 +69,20 @@ public class ForgotPasswordAction extends PortletAction {
 			User user = getUser(actionRequest);
 
 			if (PropsValues.USERS_REMINDER_QUERIES_ENABLED &&
-				Validator.isNotNull(user.getReminderQueryQuestion()) &&
-				Validator.isNotNull(user.getReminderQueryAnswer())) {
+				(PropsValues.CAPTCHA_CHECK_PORTAL_SEND_PASSWORD ||
+				 (Validator.isNotNull(user.getReminderQueryQuestion()) &&
+				  Validator.isNotNull(user.getReminderQueryAnswer())))) {
+
+				actionRequest.setAttribute(
+					ForgotPasswordAction.class.getName(), user);
 
 				int step = ParamUtil.getInteger(actionRequest, "step");
 
-				if (step == 1) {
+				if (step == 2) {
 					if (PropsValues.CAPTCHA_CHECK_PORTAL_SEND_PASSWORD) {
 						CaptchaUtil.check(actionRequest);
 					}
 
-					actionRequest.setAttribute(
-						ForgotPasswordAction.class.getName(), user);
-				}
-				else {
 					sendPassword(actionRequest, actionResponse);
 				}
 			}
@@ -146,6 +146,9 @@ public class ForgotPasswordAction extends PortletAction {
 		}
 		else if (userId > 0) {
 			user = UserLocalServiceUtil.getUserById(userId);
+		}
+		else {
+			throw new NoSuchUserException();
 		}
 
 		return user;

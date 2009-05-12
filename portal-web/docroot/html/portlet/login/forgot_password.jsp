@@ -74,7 +74,7 @@ if (Validator.isNull(authType)) {
 				<input name="<portlet:namespace /><%= loginParameter %>" size="30" type="text" value="<%= HtmlUtil.escape(loginValue) %>" />
 			</div>
 
-			<c:if test="<%= PropsValues.CAPTCHA_CHECK_PORTAL_SEND_PASSWORD %>">
+			<c:if test="<%= PropsValues.CAPTCHA_CHECK_PORTAL_SEND_PASSWORD && !PropsValues.USERS_REMINDER_QUERIES_ENABLED %>">
 				<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>" var="captchaURL">
 					<portlet:param name="struts_action" value="/login/captcha" />
 				</portlet:actionURL>
@@ -91,15 +91,25 @@ if (Validator.isNull(authType)) {
 			<input name="<portlet:namespace />step" type="hidden" value="2" />
 			<input name="<portlet:namespace />emailAddress" type="hidden" value="<%= user2.getEmailAddress() %>" />
 
-			<div class="portlet-msg-info">
-				<%= LanguageUtil.format(pageContext, "a-new-password-will-be-sent-to-x-if-you-can-correctly-answer-the-following-question", user2.getEmailAddress()) %>
-			</div>
+			<c:if test="<%= Validator.isNotNull(user2.getReminderQueryQuestion()) && Validator.isNotNull(user2.getReminderQueryAnswer()) %>">
+				<div class="portlet-msg-info">
+					<%= LanguageUtil.format(pageContext, "a-new-password-will-be-sent-to-x-if-you-can-correctly-answer-the-following-question", user2.getEmailAddress()) %>
+				</div>
 
-			<div class="exp-ctrl-holder">
-				<label for="<portlet:namespace />answer"><liferay-ui:message key="<%= user2.getReminderQueryQuestion() %>" /></label>
+				<div class="exp-ctrl-holder">
+					<label for="<portlet:namespace />answer"><liferay-ui:message key="<%= user2.getReminderQueryQuestion() %>" /></label>
 
-				<input name="<portlet:namespace />answer" type="text" />
-			</div>
+					<input name="<portlet:namespace />answer" type="text" />
+				</div>
+			</c:if>
+
+			<c:if test="<%= PropsValues.CAPTCHA_CHECK_PORTAL_SEND_PASSWORD %>">
+				<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>" var="captchaURL">
+					<portlet:param name="struts_action" value="/login/captcha" />
+				</portlet:actionURL>
+
+				<liferay-ui:captcha url="<%= captchaURL %>" />
+			</c:if>
 
 			<div class="exp-button-holder">
 				<input type="submit" value="<liferay-ui:message key="send-new-password" />" />
