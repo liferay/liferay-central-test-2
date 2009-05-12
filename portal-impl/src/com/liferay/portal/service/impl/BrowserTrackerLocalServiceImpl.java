@@ -91,9 +91,7 @@ public class BrowserTrackerLocalServiceImpl
 		}
 		catch (SystemException se) {
 			if (_log.isWarnEnabled()) {
-				_log.warn(
-					"Add failed, fetch {userId=" + userId + ", browserKey=" +
-						browserKey + "}");
+				_log.warn("Add failed, fetch {userId=" + userId + "}");
 			}
 
 			browserTracker = browserTrackerPersistence.fetchByUserId(userId);
