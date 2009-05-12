@@ -24,10 +24,8 @@ package com.liferay.portlet.documentlibrary.social;
 
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.Group;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
-import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
@@ -64,6 +62,12 @@ public class DLActivityInterpreter extends BaseSocialActivityInterpreter {
 			return null;
 		}
 
+		String groupName = StringPool.BLANK;
+
+		if (activity.getGroupId() != themeDisplay.getScopeGroupId()) {
+			groupName = getGroupName(activity.getGroupId(), themeDisplay);
+		}
+
 		String creatorUserName = getUserName(
 			activity.getUserId(), themeDisplay);
 
@@ -78,15 +82,17 @@ public class DLActivityInterpreter extends BaseSocialActivityInterpreter {
 
 		// Title
 
-		String groupName = StringPool.BLANK;
-
-		if (activity.getGroupId() != themeDisplay.getScopeGroupId()) {
-			Group group = GroupLocalServiceUtil.getGroup(activity.getGroupId());
-
-			groupName = group.getDescriptiveName();
-		}
-
 		String titlePattern = null;
+
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<a href=\"");
+		sb.append(link);
+		sb.append("\">\"");
+		sb.append(cleanContent(fileEntry.getTitle()));
+		sb.append("\"</a>");
+
+		String fileTitle = sb.toString();
 
 		if (activityType == DLActivityKeys.ADD_FILE_ENTRY) {
 			titlePattern = "activity-document-library-add-file";
@@ -99,22 +105,15 @@ public class DLActivityInterpreter extends BaseSocialActivityInterpreter {
 			titlePattern += "-in";
 		}
 
-		Object[] titleArguments = new Object[] {creatorUserName, groupName};
+		Object[] titleArguments = new Object[] {
+			groupName, creatorUserName, fileTitle
+		};
 
 		String title = themeDisplay.translate(titlePattern, titleArguments);
 
 		// Body
 
-		StringBuilder sb = new StringBuilder();
-
-		sb.append("<a href=\"");
-		sb.append(link);
-		sb.append("\">");
-		sb.append(cleanContent(fileEntry.getTitle()));
-		sb.append("</a><br />");
-		sb.append(cleanContent(fileEntry.getDescription()));
-
-		String body = sb.toString();
+		String body = StringPool.BLANK;
 
 		return new SocialActivityFeedEntry(link, title, body);
 	}

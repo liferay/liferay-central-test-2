@@ -24,15 +24,12 @@ package com.liferay.portlet.messageboards.social;
 
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.Group;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
-import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.permission.MBMessagePermission;
-import com.liferay.portlet.messageboards.util.BBCodeUtil;
 import com.liferay.portlet.social.model.BaseSocialActivityInterpreter;
 import com.liferay.portlet.social.model.SocialActivity;
 import com.liferay.portlet.social.model.SocialActivityFeedEntry;
@@ -62,6 +59,12 @@ public class MBActivityInterpreter extends BaseSocialActivityInterpreter {
 			return null;
 		}
 
+		String groupName = StringPool.BLANK;
+
+		if (activity.getGroupId() != themeDisplay.getScopeGroupId()) {
+			groupName = getGroupName(activity.getGroupId(), themeDisplay);
+		}
+
 		String creatorUserName = getUserName(
 			activity.getUserId(), themeDisplay);
 		String receiverUserName = getUserName(
@@ -77,56 +80,42 @@ public class MBActivityInterpreter extends BaseSocialActivityInterpreter {
 		String link =
 			themeDisplay.getURLPortal() + themeDisplay.getPathMain() +
 				"/message_boards/find_message?messageId=" +
-					activity.getClassPK();
+					message.getMessageId();
 
 		// Title
 
-		String groupName = StringPool.BLANK;
-
-		if (activity.getGroupId() != themeDisplay.getScopeGroupId()) {
-			Group group = GroupLocalServiceUtil.getGroup(activity.getGroupId());
-
-			groupName = group.getDescriptiveName();
-		}
-
 		String titlePattern = null;
-		Object[] titleArguments = null;
-
-		if (activityType == MBActivityKeys.ADD_MESSAGE) {
-			titlePattern = "activity-message-boards-add-message";
-
-			if (Validator.isNotNull(groupName)) {
-				titlePattern += "-in";
-			}
-
-			titleArguments = new Object[] {creatorUserName, groupName};
-		}
-		else if (activityType == MBActivityKeys.REPLY_MESSAGE) {
-			titlePattern = "activity-message-boards-reply-message";
-
-			if (Validator.isNotNull(groupName)) {
-				titlePattern += "-in";
-			}
-
-			titleArguments = new Object[] {
-				creatorUserName, receiverUserName, groupName
-			};
-		}
-
-		String title = themeDisplay.translate(titlePattern, titleArguments);
-
-		// Body
 
 		StringBuilder sb = new StringBuilder();
 
 		sb.append("<a href=\"");
 		sb.append(link);
-		sb.append("\">");
+		sb.append("\">\"");
 		sb.append(cleanContent(message.getSubject()));
-		sb.append("</a><br />");
-		sb.append(cleanContent(BBCodeUtil.getHTML(message)));
+		sb.append("\"</a>");
 
-		String body = sb.toString();
+		String messageSubject = sb.toString();
+
+		if (activityType == MBActivityKeys.ADD_MESSAGE) {
+			titlePattern = "activity-message-boards-add-message";
+		}
+		else if (activityType == MBActivityKeys.REPLY_MESSAGE) {
+			titlePattern = "activity-message-boards-reply-message";
+		}
+
+		if (Validator.isNotNull(groupName)) {
+			titlePattern += "-in";
+		}
+
+		Object[] titleArguments = new Object[] {
+			groupName, creatorUserName, receiverUserName, messageSubject
+		};
+
+		String title = themeDisplay.translate(titlePattern, titleArguments);
+
+		// Body
+
+		String body = StringPool.BLANK;
 
 		return new SocialActivityFeedEntry(link, title, body);
 	}

@@ -24,10 +24,8 @@ package com.liferay.portlet.calendar.social;
 
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.Group;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
-import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.calendar.model.CalEvent;
 import com.liferay.portlet.calendar.service.CalEventLocalServiceUtil;
@@ -61,6 +59,12 @@ public class CalendarActivityInterpreter extends BaseSocialActivityInterpreter {
 			return null;
 		}
 
+		String groupName = StringPool.BLANK;
+
+		if (activity.getGroupId() != themeDisplay.getScopeGroupId()) {
+			groupName = getGroupName(activity.getGroupId(), themeDisplay);
+		}
+
 		String creatorUserName = getUserName(
 			activity.getUserId(), themeDisplay);
 
@@ -77,15 +81,17 @@ public class CalendarActivityInterpreter extends BaseSocialActivityInterpreter {
 
 		// Title
 
-		String groupName = StringPool.BLANK;
-
-		if (activity.getGroupId() != themeDisplay.getScopeGroupId()) {
-			Group group = GroupLocalServiceUtil.getGroup(activity.getGroupId());
-
-			groupName = group.getDescriptiveName();
-		}
-
 		String titlePattern = null;
+
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<a href=\"");
+		sb.append(link);
+		sb.append("\">\"");
+		sb.append(cleanContent(event.getTitle()));
+		sb.append("\"</a>");
+
+		String eventTitle = sb.toString();
 
 		if (activityType == CalendarActivityKeys.ADD_EVENT) {
 			titlePattern = "activity-calendar-add-event";
@@ -98,22 +104,15 @@ public class CalendarActivityInterpreter extends BaseSocialActivityInterpreter {
 			titlePattern += "-in";
 		}
 
-		Object[] titleArguments = new Object[] {creatorUserName, groupName};
+		Object[] titleArguments = new Object[] {
+			groupName, creatorUserName, eventTitle
+		};
 
 		String title = themeDisplay.translate(titlePattern, titleArguments);
 
 		// Body
 
-		StringBuilder sb = new StringBuilder();
-
-		sb.append("<a href=\"");
-		sb.append(link);
-		sb.append("\">");
-		sb.append(cleanContent(event.getTitle()));
-		sb.append("</a><br />");
-		sb.append(cleanContent(event.getDescription()));
-
-		String body = sb.toString();
+		String body = StringPool.BLANK;
 
 		return new SocialActivityFeedEntry(link, title, body);
 	}

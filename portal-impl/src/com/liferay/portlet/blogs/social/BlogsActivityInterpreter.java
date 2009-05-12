@@ -26,21 +26,15 @@ import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.Group;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
-import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil;
 import com.liferay.portlet.blogs.service.permission.BlogsEntryPermission;
-import com.liferay.portlet.messageboards.NoSuchMessageException;
-import com.liferay.portlet.messageboards.model.MBMessage;
-import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
 import com.liferay.portlet.social.model.BaseSocialActivityInterpreter;
 import com.liferay.portlet.social.model.SocialActivity;
 import com.liferay.portlet.social.model.SocialActivityFeedEntry;
-import com.liferay.portlet.social.service.SocialActivityLocalServiceUtil;
 
 /**
  * <a href="BlogsActivityInterpreter.java.html"><b><i>View Source</i></b></a>
@@ -65,6 +59,12 @@ public class BlogsActivityInterpreter extends BaseSocialActivityInterpreter {
 				permissionChecker, activity.getClassPK(), ActionKeys.VIEW)) {
 
 			return null;
+		}
+
+		String groupName = StringPool.BLANK;
+
+		if (activity.getGroupId() != themeDisplay.getScopeGroupId()) {
+			groupName = getGroupName(activity.getGroupId(), themeDisplay);
 		}
 
 		String creatorUserName = getUserName(
@@ -92,16 +92,17 @@ public class BlogsActivityInterpreter extends BaseSocialActivityInterpreter {
 
 		// Title
 
-		String groupName = StringPool.BLANK;
-
-		if (activity.getGroupId() != themeDisplay.getScopeGroupId()) {
-			Group group = GroupLocalServiceUtil.getGroup(activity.getGroupId());
-
-			groupName = group.getDescriptiveName();
-		}
-
 		String titlePattern = null;
-		Object[] titleArguments = null;
+
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<a href=\"");
+		sb.append(link);
+		sb.append("\">\"");
+		sb.append(cleanContent(entry.getTitle()));
+		sb.append("\"</a>");
+
+		String entryTitle = sb.toString();
 
 		if (activityType == BlogsActivityKeys.ADD_COMMENT) {
 			titlePattern = "activity-blogs-add-comment";
@@ -109,10 +110,6 @@ public class BlogsActivityInterpreter extends BaseSocialActivityInterpreter {
 			if (Validator.isNotNull(groupName)) {
 				titlePattern += "-in";
 			}
-
-			titleArguments = new Object[] {
-				creatorUserName, receiverUserName, groupName
-			};
 		}
 		else if (activityType == BlogsActivityKeys.ADD_ENTRY) {
 			titlePattern = "activity-blogs-add-entry";
@@ -120,47 +117,17 @@ public class BlogsActivityInterpreter extends BaseSocialActivityInterpreter {
 			if (Validator.isNotNull(groupName)) {
 				titlePattern += "-in";
 			}
-
-			titleArguments = new Object[] {creatorUserName, groupName};
 		}
+
+		Object[] titleArguments = new Object[] {
+			groupName, creatorUserName, receiverUserName, entryTitle
+		};
 
 		String title = themeDisplay.translate(titlePattern, titleArguments);
 
 		// Body
 
-		StringBuilder sb = new StringBuilder();
-
-		sb.append("<a href=\"");
-		sb.append(link);
-		sb.append("\">");
-
-		if (activityType == BlogsActivityKeys.ADD_COMMENT) {
-			long messageId = extraData.getInt("messageId");
-
-			try {
-				MBMessage message = MBMessageLocalServiceUtil.getMessage(
-					messageId);
-
-				sb.append(cleanContent(message.getBody()));
-			}
-			catch (NoSuchMessageException nsme) {
-				SocialActivityLocalServiceUtil.deleteActivity(
-					activity.getActivityId());
-
-				return null;
-			}
-		}
-		else if (activityType == BlogsActivityKeys.ADD_ENTRY) {
-			sb.append(entry.getTitle());
-		}
-
-		sb.append("</a><br />");
-
-		if (activityType == BlogsActivityKeys.ADD_ENTRY) {
-			sb.append(cleanContent(entry.getContent()));
-		}
-
-		String body = sb.toString();
+		String body = StringPool.BLANK;
 
 		return new SocialActivityFeedEntry(link, title, body);
 	}

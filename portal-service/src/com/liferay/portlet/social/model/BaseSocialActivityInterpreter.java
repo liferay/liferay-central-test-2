@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.User;
+import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 
@@ -44,6 +45,38 @@ public abstract class BaseSocialActivityInterpreter
 
 	public String cleanContent(String content) {
 		return StringUtil.shorten(HtmlUtil.extractText(content), 200);
+	}
+
+	public String getGroupName(long groupId, ThemeDisplay themeDisplay) {
+		try {
+			if (groupId <= 0) {
+				return StringPool.BLANK;
+			}
+
+			Group group = GroupLocalServiceUtil.getGroup(groupId);
+
+			String groupName = group.getDescriptiveName();
+
+			if ((group.getGroupId() == themeDisplay.getScopeGroupId()) ||
+				!group.hasPublicLayouts()) {
+
+				return groupName;
+			}
+
+			String groupDisplayURL =
+				themeDisplay.getPortalURL() + themeDisplay.getPathMain() +
+					"/my_places/view?groupId=" +  group.getGroupId() +
+						"&privateLayout=0";
+
+			groupName =
+				"<a class=\"group\" href=\"" + groupDisplayURL + "\">" +
+					groupName + "</a>";
+
+			return groupName;
+		}
+		catch (Exception e) {
+			return StringPool.BLANK;
+		}
 	}
 
 	public String getUserName(long userId, ThemeDisplay themeDisplay) {
@@ -69,7 +102,8 @@ public abstract class BaseSocialActivityInterpreter
 			String userDisplayURL = user.getDisplayURL(themeDisplay);
 
 			userName =
-				"<a href=\"" + userDisplayURL + "\">" + userName + "</a>";
+				"<a class=\"user\" href=\"" + userDisplayURL + "\">" +
+					userName + "</a>";
 
 			return userName;
 		}

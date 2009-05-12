@@ -178,14 +178,18 @@ DateFormat timeFormatDate = DateFormats.getTime(locale, timeZone);
 						<liferay-portlet:icon-portlet portlet="<%= portlet %>" />
 					</td>
 					<td>
-						<%= activityFeedEntry.getTitle() %>
-
-						<%= timeFormatDate.format(activity.getCreateDate()) %>
+						<div class="activity-title">
+							<%= activityFeedEntry.getTitle() %>
+						</div>
 					</td>
 				<tr>
 					<td></td>
 					<td>
-						<%= activityFeedEntry.getBody() %>
+						<div class="activity-body">
+							<span class="time"><%= timeFormatDate.format(activity.getCreateDate()) %></span>
+
+							<%= activityFeedEntry.getBody() %>
+						</div>
 					</td>
 				</tr>
 				</table>
