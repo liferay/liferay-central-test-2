@@ -95,6 +95,10 @@ public class FinderCacheUtil {
 		getFinderCache().removeResult(finderPath, args);
 	}
 
+	public static void setLocalCacheEnabled(boolean localCacheEnabled) {
+		getFinderCache().setLocalCacheEnabled(localCacheEnabled);
+	}
+
 	public void setFinderCache(FinderCache finderCache) {
 		_finderCache = finderCache;
 	}

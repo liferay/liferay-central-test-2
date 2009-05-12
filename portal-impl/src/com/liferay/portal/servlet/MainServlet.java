@@ -26,8 +26,6 @@ import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.deploy.hot.PluginPackageHotDeployListener;
 import com.liferay.portal.events.EventsProcessorUtil;
 import com.liferay.portal.events.StartupAction;
-import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
-import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.deploy.hot.HotDeployUtil;
 import com.liferay.portal.kernel.events.ActionException;
 import com.liferay.portal.kernel.job.Scheduler;
@@ -68,7 +66,6 @@ import com.liferay.portal.pop.POPServerUtil;
 import com.liferay.portal.security.auth.CompanyThreadLocal;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.auth.PrincipalThreadLocal;
-import com.liferay.portal.security.permission.PermissionCacheUtil;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.service.GroupLocalServiceUtil;
@@ -871,15 +868,6 @@ public class MainServlet extends ActionServlet {
 			// Clear the principal associated with this thread
 
 			PrincipalThreadLocal.setName(null);
-
-			// Clear the entity and finder local cache
-
-			EntityCacheUtil.clearLocalCache();
-			FinderCacheUtil.clearLocalCache();
-
-			// Clear permission local cache
-
-			PermissionCacheUtil.clearLocalCache();
 		}
 	}
 

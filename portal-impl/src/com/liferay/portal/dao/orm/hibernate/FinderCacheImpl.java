@@ -79,7 +79,7 @@ public class FinderCacheImpl implements CacheRegistryItem, FinderCache {
 	}
 
 	public void clearLocalCache() {
-		if (_localCacheEnabled) {
+		if (_localCacheEnabled.get().booleanValue()) {
 			Map<String, Object> localCache = _localCache.get();
 
 			localCache.clear();
@@ -105,7 +105,7 @@ public class FinderCacheImpl implements CacheRegistryItem, FinderCache {
 
 		String localCacheKey = null;
 
-		if (_localCacheEnabled) {
+		if (_localCacheEnabled.get().booleanValue()) {
 			localCache = _localCache.get();
 
 			localCacheKey = _encodeLocalCacheKey(
@@ -125,7 +125,7 @@ public class FinderCacheImpl implements CacheRegistryItem, FinderCache {
 			primaryKey = _multiVMPool.get(portalCache, cacheKey);
 
 			if (primaryKey != null) {
-				if (_localCacheEnabled) {
+				if (_localCacheEnabled.get().booleanValue()) {
 					localCache.put(localCacheKey, primaryKey);
 				}
 			}
@@ -153,7 +153,7 @@ public class FinderCacheImpl implements CacheRegistryItem, FinderCache {
 
 		Object primaryKey = _resultToPrimaryKey(result);
 
-		if (_localCacheEnabled) {
+		if (_localCacheEnabled.get().booleanValue()) {
 			Map<String, Object> localCache = _localCache.get();
 
 			String localCacheKey = _encodeLocalCacheKey(
@@ -178,7 +178,7 @@ public class FinderCacheImpl implements CacheRegistryItem, FinderCache {
 			return;
 		}
 
-		if (_localCacheEnabled) {
+		if (_localCacheEnabled.get().booleanValue()) {
 			Map<String, Object> localCache = _localCache.get();
 
 			String localCacheKey = _encodeLocalCacheKey(
@@ -194,6 +194,12 @@ public class FinderCacheImpl implements CacheRegistryItem, FinderCache {
 			finderPath.getMethodName(), finderPath.getParams(), args);
 
 		_multiVMPool.remove(portalCache, cacheKey);
+	}
+
+	public void setLocalCacheEnabled(boolean localCacheEnabled) {
+		if (_localCacheAvailable) {
+			_localCacheEnabled.set(Boolean.valueOf(localCacheEnabled));
+		}
 	}
 
 	public void setMultiVMPool(MultiVMPool multiVMPool) {
@@ -337,13 +343,15 @@ public class FinderCacheImpl implements CacheRegistryItem, FinderCache {
 	private static final String _PARAMS_SEPARATOR = "_P_";
 
 	private static ThreadLocal<Map> _localCache;
-	private static boolean _localCacheEnabled;
+	private static boolean _localCacheAvailable;
+	private static ThreadLocal<Boolean> _localCacheEnabled =
+		new InitialThreadLocal<Boolean>(Boolean.FALSE);
 
 	static {
 		if (PropsValues.VALUE_OBJECT_FINDER_THREAD_LOCAL_CACHE_MAX_SIZE > 0) {
 			_localCache = new InitialThreadLocal<Map>(new LRUMap(
 				PropsValues.VALUE_OBJECT_FINDER_THREAD_LOCAL_CACHE_MAX_SIZE));
-			_localCacheEnabled = true;
+			_localCacheAvailable = true;
 		}
 	}
 

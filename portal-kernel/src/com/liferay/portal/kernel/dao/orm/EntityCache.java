@@ -56,4 +56,6 @@ public interface EntityCache {
 		boolean entityCacheEnabled, Class<?> classObj,
 		Serializable primaryKeyObj);
 
+	public void setLocalCacheEnabled(boolean localCacheEnabled);
+
 }

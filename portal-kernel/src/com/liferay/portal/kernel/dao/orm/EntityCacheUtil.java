@@ -84,6 +84,10 @@ public class EntityCacheUtil {
 			entityCacheEnabled, classObj, primaryKeyObj);
 	}
 
+	public static void setLocalCacheEnabled(boolean localCacheEnabled) {
+		getEntityCache().setLocalCacheEnabled(localCacheEnabled);
+	}
+
 	public void setEntityCache(EntityCache finderCache) {
 		_finderCache = finderCache;
 	}

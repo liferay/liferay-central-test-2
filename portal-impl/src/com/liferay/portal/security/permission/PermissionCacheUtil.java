@@ -50,7 +50,7 @@ public class PermissionCacheUtil {
 	}
 
 	public static void clearLocalCache() {
-		if (_localCacheEnabled) {
+		if (_localCacheEnabled.get().booleanValue()) {
 			Map<String, Object> localCache = _localCache.get();
 
 			localCache.clear();
@@ -62,7 +62,7 @@ public class PermissionCacheUtil {
 
 		String key = _encodeKey(userId, groupId);
 
-		if (_localCacheEnabled) {
+		if (_localCacheEnabled.get().booleanValue()) {
 			Map<String, Object> localCache = _localCache.get();
 
 			bag = (PermissionCheckerBag)localCache.get(key);
@@ -83,7 +83,7 @@ public class PermissionCacheUtil {
 
 		String key = _encodeKey(userId, groupId, name, primKey, actionId);
 
-		if (_localCacheEnabled) {
+		if (_localCacheEnabled.get().booleanValue()) {
 			Map<String, Object> localCache = _localCache.get();
 
 			value = (Boolean)localCache.get(key);
@@ -102,7 +102,7 @@ public class PermissionCacheUtil {
 		if (bag != null) {
 			String key = _encodeKey(userId, groupId);
 
-			if (_localCacheEnabled) {
+			if (_localCacheEnabled.get().booleanValue()) {
 				Map<String, Object> localCache = _localCache.get();
 
 				localCache.put(key, bag);
@@ -121,7 +121,7 @@ public class PermissionCacheUtil {
 		if (value != null) {
 			String key = _encodeKey(userId, groupId, name, primKey, actionId);
 
-			if (_localCacheEnabled) {
+			if (_localCacheEnabled.get().booleanValue()) {
 				Map<String, Object> localCache = _localCache.get();
 
 				localCache.put(key, value);
@@ -131,6 +131,12 @@ public class PermissionCacheUtil {
 		}
 
 		return value;
+	}
+
+	public static void setLocalCacheEnabled(boolean localCacheEnabled) {
+		if (_localCacheAvailable) {
+			_localCacheEnabled.set(Boolean.valueOf(localCacheEnabled));
+		}
 	}
 
 	private static String _encodeKey(long userId, long groupId) {
@@ -170,13 +176,15 @@ public class PermissionCacheUtil {
 		CACHE_NAME, true);
 
 	private static ThreadLocal<Map> _localCache;
-	private static boolean _localCacheEnabled;
+	private static boolean _localCacheAvailable;
+	private static ThreadLocal<Boolean> _localCacheEnabled =
+		new InitialThreadLocal<Boolean>(Boolean.FALSE);
 
 	static {
 		if (PropsValues.PERMISSIONS_THREAD_LOCAL_CACHE_MAX_SIZE > 0) {
 			_localCache = new InitialThreadLocal<Map>(new LRUMap(
 				PropsValues.PERMISSIONS_THREAD_LOCAL_CACHE_MAX_SIZE));
-			_localCacheEnabled = true;
+			_localCacheAvailable = true;
 		}
 	}
 

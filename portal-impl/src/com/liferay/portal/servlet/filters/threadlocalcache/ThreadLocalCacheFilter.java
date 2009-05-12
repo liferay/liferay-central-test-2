@@ -20,31 +20,46 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.dao.orm;
+package com.liferay.portal.servlet.filters.threadlocalcache;
+
+import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
+import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
+import com.liferay.portal.security.permission.PermissionCacheUtil;
+import com.liferay.portal.servlet.filters.BasePortalFilter;
+
+import java.io.IOException;
+
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
- * <a href="FinderCache.java.html"><b><i>View Source</i></b></a>
+ * <a href="ThreadLocalCacheFilter.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public interface FinderCache {
+public class ThreadLocalCacheFilter extends BasePortalFilter {
 
-	public void clearCache();
+	protected void processFilter(
+			HttpServletRequest request, HttpServletResponse response,
+			FilterChain filterChain)
+		throws IOException, ServletException {
 
-	public void clearCache(String className);
+		try {
+			EntityCacheUtil.setLocalCacheEnabled(true);
+			FinderCacheUtil.setLocalCacheEnabled(true);
+			PermissionCacheUtil.setLocalCacheEnabled(true);
 
-	public void clearLocalCache();
-
-	public Object getResult(
-		FinderPath finderPath, Object[] args, SessionFactory sessionFactory);
-
-	public void invalidate();
-
-	public void putResult(FinderPath finderPath, Object[] args, Object result);
-
-	public void removeResult(FinderPath finderPath, Object[] args);
-
-	public void setLocalCacheEnabled(boolean localCacheEnabled);
+			processFilter(
+				ThreadLocalCacheFilter.class, request, response, filterChain);
+		}
+		finally {
+			EntityCacheUtil.clearLocalCache();
+			FinderCacheUtil.clearLocalCache();
+			PermissionCacheUtil.clearLocalCache();
+		}
+	}
 
 }
