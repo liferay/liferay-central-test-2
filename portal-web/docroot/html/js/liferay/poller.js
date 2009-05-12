@@ -56,7 +56,7 @@
 				portlet = _portlets[portletId];
 
 				if (portlet) {
-					portlet.listener.call(portlet.scope || Poller, chunk.data);
+					portlet.listener.call(portlet.scope || Poller, chunk.data, chunk.chunkId);
 				}
 			}
 
