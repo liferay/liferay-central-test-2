@@ -142,6 +142,8 @@ public interface Portal {
 	public String getCommunityLoginURL(ThemeDisplay themeDisplay)
 		throws PortalException, SystemException;
 
+	public String[] getCommunityPermissions(PortletRequest portletRequest);
+
 	public Company getCompany(HttpServletRequest request)
 		throws PortalException, SystemException;
 
@@ -202,6 +204,8 @@ public interface Portal {
 
 	public String getGoogleGadgetURL(
 		Portlet portlet, ThemeDisplay themeDisplay);
+
+	public String[] getGuestPermissions(PortletRequest portletRequest);
 
 	public String getHomeURL(HttpServletRequest request)
 		throws PortalException, SystemException;

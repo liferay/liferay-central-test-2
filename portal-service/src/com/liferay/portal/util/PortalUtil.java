@@ -158,6 +158,12 @@ public class PortalUtil {
 		return getPortal().getCommunityLoginURL(themeDisplay);
 	}
 
+	public static String[] getCommunityPermissions(
+		PortletRequest portletRequest) {
+
+		return getPortal().getCommunityPermissions(portletRequest);
+	}
+
 	public static Company getCompany(HttpServletRequest request)
 		throws PortalException, SystemException {
 
@@ -273,6 +279,10 @@ public class PortalUtil {
 		Portlet portlet, ThemeDisplay themeDisplay) {
 
 		return getPortal().getGoogleGadgetURL(portlet, themeDisplay);
+	}
+
+	public static String[] getGuestPermissions(PortletRequest portletRequest) {
+		return getPortal().getGuestPermissions(portletRequest);
 	}
 
 	public static String getHomeURL(HttpServletRequest request)

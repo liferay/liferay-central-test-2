@@ -595,6 +595,10 @@ public class PortalImpl implements Portal {
 		return null;
 	}
 
+	public String[] getCommunityPermissions(PortletRequest portletRequest) {
+		return portletRequest.getParameterValues("communityPermissions");
+	}
+
 	public Company getCompany(HttpServletRequest request)
 		throws PortalException, SystemException {
 
@@ -873,6 +877,29 @@ public class PortalImpl implements Portal {
 
 		return _getServletURL(
 			portlet, PropsValues.GOOGLE_GADGET_SERVLET_MAPPING, themeDisplay);
+	}
+
+	public String[] getGuestPermissions(PortletRequest portletRequest) {
+		String[] guestPermissions = portletRequest.getParameterValues(
+			"guestPermissions");
+
+		boolean inputPermissionsPublic = ParamUtil.getBoolean(
+			portletRequest, "inputPermissionsPublic");
+		boolean inputPermissionsShowConfigure = ParamUtil.getBoolean(
+			portletRequest, "inputPermissionsShowConfigure");
+
+		if (!inputPermissionsShowConfigure) {
+			if (!inputPermissionsPublic) {
+				guestPermissions = new String[0];
+			}
+			else if ((guestPermissions == null) ||
+					 (guestPermissions.length == 0)) {
+
+				guestPermissions = new String[] {ActionKeys.VIEW};
+			}
+		}
+
+		return guestPermissions;
 	}
 
 	public String getHomeURL(HttpServletRequest request)
