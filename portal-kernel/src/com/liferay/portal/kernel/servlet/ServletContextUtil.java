@@ -63,7 +63,7 @@ public class ServletContextUtil {
 
 		Set<String> classNames = new HashSet<String>();
 
-		_getClassNames(servletContext, "/WEB-INF/classes", classNames);
+		_getClassNames(servletContext, "/WEB-INF/classes/", classNames);
 		_getClassNames(servletContext, "/WEB-INF/lib", classNames);
 
 		return classNames;
