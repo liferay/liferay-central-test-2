@@ -76,40 +76,34 @@
 	<sql id="com.liferay.portlet.messageboards.service.persistence.MBMessageFinder.findByG_U">
 		<![CDATA[
 			SELECT
-				DISTINCT threadId
+				threadId
 			FROM
-				(
-					SELECT
-						threadId, priority, modifiedDate 
-					FROM
-						MBMessage
-					WHERE
-						(groupId = ?) AND
-						(userId = ?)
-					ORDER BY
-						priority DESC,
-						modifiedDate DESC
-				)
+				MBMessage
+			WHERE
+				(groupId = ?) AND
+				(userId = ?)
+			GROUP BY
+				threadId
+			ORDER BY
+				MAX(priority) DESC,
+				MAX(modifiedDate) DESC
 		]]>
 	</sql>
 	<sql id="com.liferay.portlet.messageboards.service.persistence.MBMessageFinder.findByG_U_A">
 		<![CDATA[
 			SELECT
-				DISTINCT threadId
+				threadId
 			FROM
-				(
-					SELECT
-						threadId, priority, modifiedDate 
-					FROM
-						MBMessage
-					WHERE
-						(groupId = ?) AND
-						(userId = ?) AND
-						(anonymous = ?)
-					ORDER BY
-						priority DESC,
-						modifiedDate DESC
-				)
+				MBMessage
+			WHERE
+				(groupId = ?) AND
+				(userId = ?) AND
+				(anonymous = ?)
+			GROUP BY
+				threadId
+			ORDER BY
+				MAX(priority) DESC,
+				MAX(modifiedDate) DESC
 		]]>
 	</sql>
 	<sql id="com.liferay.portlet.messageboards.service.persistence.MBThreadFinder.countByS_G_U">
