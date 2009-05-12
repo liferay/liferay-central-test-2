@@ -35,15 +35,20 @@ public class PollerRequest {
 
 	public PollerRequest(
 		PollerHeader pollerHeader, String portletId,
-		Map<String, String> parameterMap) {
+		Map<String, String> parameterMap, String chunkId) {
 
 		_pollerHeader = pollerHeader;
 		_portletId = portletId;
 		_parameterMap = parameterMap;
+		_chunkId = chunkId;
 	}
 
 	public long getBrowserKey() {
 		return _pollerHeader.getBrowserKey();
+	}
+
+	public String getChunkId() {
+		return _chunkId;
 	}
 
 	public Map<String, String> getParameterMap() {
@@ -70,6 +75,7 @@ public class PollerRequest {
 		return _pollerHeader.getUserId();
 	}
 
+	private String _chunkId;
 	private Map<String, String> _parameterMap;
 	private PollerHeader _pollerHeader;
 	private String _portletId;

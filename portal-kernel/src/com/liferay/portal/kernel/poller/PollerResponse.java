@@ -25,6 +25,7 @@ package com.liferay.portal.kernel.poller;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.util.Validator;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -38,8 +39,9 @@ import java.util.Map;
  */
 public class PollerResponse {
 
-	public PollerResponse(String portletId) {
+	public PollerResponse(String portletId, String chunkId) {
 		_portletId = portletId;
+		_chunkId = chunkId;
 	}
 
 	public void setParameter(String name, JSONArray value) {
@@ -58,6 +60,10 @@ public class PollerResponse {
 		JSONObject pollerResponseJSON = JSONFactoryUtil.createJSONObject();
 
 		pollerResponseJSON.put("portletId", _portletId);
+
+		if (Validator.isNotNull(_chunkId)) {
+			pollerResponseJSON.put("chunkId", _chunkId);
+		}
 
 		JSONObject dataJSON = JSONFactoryUtil.createJSONObject();
 
@@ -86,6 +92,7 @@ public class PollerResponse {
 		return pollerResponseJSON;
 	}
 
+	private String _chunkId;
 	private Map<String, Object> _parameterMap = new HashMap<String, Object>();
 	private String _portletId;
 
