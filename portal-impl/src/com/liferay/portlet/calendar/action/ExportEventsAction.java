@@ -53,6 +53,7 @@ import org.apache.struts.action.ActionMapping;
  *
  * @author Michael Young
  * @author Bruno Farache
+ * @author Brian Wing Shun Chan
  *
  */
 public class ExportEventsAction extends PortletAction {
@@ -100,6 +101,12 @@ public class ExportEventsAction extends PortletAction {
 			ServletResponseUtil.cleanUp(is);
 		}
 	}
+
+	protected boolean isCheckMethodOnProcessAction() {
+		return _CHECK_METHOD_ON_PROCESS_ACTION;
+	}
+
+	private static final boolean _CHECK_METHOD_ON_PROCESS_ACTION = false;
 
 	private static Log _log = LogFactoryUtil.getLog(ExportEventsAction.class);
 
