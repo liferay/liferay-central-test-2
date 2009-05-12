@@ -1311,7 +1311,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 							</#list>
 
 							) {
-								FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_${finder.name?upper_case}, finderArgs, list);
+								FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_${finder.name?upper_case}, finderArgs, ${entity.varName});
 							}
 						}
 
