@@ -408,6 +408,13 @@
 					/>
 				</copy>
 
+				<delete failonerror="false">
+					<fileset
+						dir="${app.server.lib.portal.dir}"
+						includes="ccpp.jar"
+					/>
+				</delete>
+
 				<copy todir="${app.server.lib.global.dir}">
 					<fileset
 						dir="lib/development"
