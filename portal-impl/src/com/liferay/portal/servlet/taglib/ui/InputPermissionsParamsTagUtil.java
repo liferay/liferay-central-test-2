@@ -74,7 +74,19 @@ public class InputPermissionsParamsTagUtil {
 				ResourceActionsUtil.getModelResourceGuestUnsupportedActions(
 					modelName);
 
+			boolean inputPermissionsPublic = false;
+
+			if (layout.isPublicLayout()) {
+				inputPermissionsPublic = true;
+			}
+
 			StringBuilder sb = new StringBuilder();
+
+			if (inputPermissionsPublic) {
+				sb.append(StringPool.AMPERSAND);
+				sb.append(renderResponse.getNamespace());
+				sb.append("inputPermissionsPublic=1");
+			}
 
 			for (int i = 0; i < supportedActions.size(); i++) {
 				String action = supportedActions.get(i);

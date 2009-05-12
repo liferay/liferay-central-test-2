@@ -54,6 +54,12 @@ String modelName = (String)request.getAttribute("liferay-ui:input-permissions:mo
 
 		boolean inputPermissionsShowConfigure = ParamUtil.getBoolean(request, "inputPermissionsShowConfigure");
 		boolean inputPermissionsShowMore = ParamUtil.getBoolean(request, "inputPermissionsShowMore");
+
+		boolean inputPermissionsPublicChecked = false;
+
+		if (layout.isPublicLayout()) {
+			inputPermissionsPublicChecked = true;
+		}
 		%>
 
 		<table class="lfr-table" id="<%= randomNamespace %>inputPermissionsTable" style="display: <%= inputPermissionsShowConfigure ? "" : "none" %>;">
@@ -85,7 +91,7 @@ String modelName = (String)request.getAttribute("liferay-ui:input-permissions:mo
 			String action = (String)supportedActions.get(i);
 
 			boolean communityChecked = communityDefaultActions.contains(action);
-			boolean guestChecked = guestDefaultActions.contains(action);
+			boolean guestChecked = inputPermissionsPublicChecked && guestDefaultActions.contains(action);
 			boolean guestDisabled = guestUnsupportedActions.contains(action);
 
 			if (submitted) {
@@ -130,7 +136,9 @@ String modelName = (String)request.getAttribute("liferay-ui:input-permissions:mo
 		<input id="<%= randomNamespace %>inputPermissionsShowMore" name="<%= namespace %>inputPermissionsShowMore" type="hidden" value="<%= inputPermissionsShowMore %>" />
 
 		<div id="<%= randomNamespace %>inputPermissionsConfigureLink" style="display: <%= inputPermissionsShowConfigure ? "none" : "" %>;">
-		<a href="javascript: <%= randomNamespace %>inputPermissionsConfigure();"><liferay-ui:message key="configure" /> &raquo;</a>
+			<input name="<%= namespace %>inputPermissionsPublic" type="checkbox" <%= inputPermissionsPublicChecked ? "checked" : "" %>" /> <liferay-ui:message key="public" />
+
+			&nbsp; <a href="javascript: <%= randomNamespace %>inputPermissionsConfigure();"><liferay-ui:message key="configure" /> &raquo;</a>
 		</div>
 
 		<div id="<%= randomNamespace %>inputPermissionsMoreLink" style="display: <%= !inputPermissionsShowConfigure || inputPermissionsShowMore ? "none" : "" %>;">

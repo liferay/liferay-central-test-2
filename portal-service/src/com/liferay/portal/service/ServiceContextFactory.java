@@ -27,6 +27,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.PortletPreferencesIds;
+import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
@@ -89,6 +90,22 @@ public class ServiceContextFactory {
 			"communityPermissions");
 		String[] guestPermissions = portletRequest.getParameterValues(
 			"guestPermissions");
+
+		boolean inputPermissionsPublic = ParamUtil.getBoolean(
+			portletRequest, "inputPermissionsPublic");
+		boolean inputPermissionsShowConfigure = ParamUtil.getBoolean(
+			portletRequest, "inputPermissionsShowConfigure");
+
+		if (!inputPermissionsShowConfigure) {
+			if (!inputPermissionsPublic) {
+				guestPermissions = new String[0];
+				addGuestPermissions = false;
+			}
+			else if ((guestPermissions == null) ||
+					 (guestPermissions.length == 0)) {
+				guestPermissions = new String[] {ActionKeys.VIEW};
+			}
+		}
 
 		serviceContext.setAddCommunityPermissions(addCommunityPermissions);
 		serviceContext.setAddGuestPermissions(addGuestPermissions);
