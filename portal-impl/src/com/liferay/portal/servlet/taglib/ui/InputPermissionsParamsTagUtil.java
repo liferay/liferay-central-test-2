@@ -25,8 +25,10 @@ package com.liferay.portal.servlet.taglib.ui;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Group;
+import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
 
 import java.util.List;
@@ -58,9 +60,12 @@ public class InputPermissionsParamsTagUtil {
 				(RenderResponse)request.getAttribute(
 					JavaConstants.JAVAX_PORTLET_RESPONSE);
 
-			Layout layout = (Layout)request.getAttribute(WebKeys.LAYOUT);
+			ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+				WebKeys.THEME_DISPLAY);
 
-			Group group = layout.getGroup();
+			Layout layout = themeDisplay.getLayout();
+			Group group = themeDisplay.getScopeGroup();
+			Group layoutGroup = layout.getGroup();
 
 			List<String> supportedActions =
 				ResourceActionsUtil.getModelResourceActions(modelName);
@@ -76,7 +81,12 @@ public class InputPermissionsParamsTagUtil {
 
 			boolean inputPermissionsPublic = false;
 
-			if (layout.isPublicLayout()) {
+			if (layoutGroup.getName().equals(GroupConstants.CONTROL_PANEL)) {
+				if (!group.hasPrivateLayouts()) {
+					inputPermissionsPublic = true;
+				}
+			}
+			else if (layout.isPublicLayout()) {
 				inputPermissionsPublic = true;
 			}
 

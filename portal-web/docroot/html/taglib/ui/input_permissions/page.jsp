@@ -40,7 +40,8 @@ String modelName = (String)request.getAttribute("liferay-ui:input-permissions:mo
 	<c:when test="<%= modelName != null %>">
 
 		<%
-		Group group = layout.getGroup();
+		Group group = themeDisplay.getScopeGroup();
+		Group layoutGroup = layout.getGroup();
 
 		List communityPermissions = ListUtil.fromArray(request.getParameterValues("communityPermissions"));
 		List guestPermissions = ListUtil.fromArray(request.getParameterValues("guestPermissions"));
@@ -57,7 +58,12 @@ String modelName = (String)request.getAttribute("liferay-ui:input-permissions:mo
 
 		boolean inputPermissionsPublicChecked = false;
 
-		if (layout.isPublicLayout()) {
+		if (layoutGroup.getName().equals(GroupConstants.CONTROL_PANEL)) {
+			if (!group.hasPrivateLayouts()) {
+				inputPermissionsPublicChecked = true;
+			}
+		}
+		else if (layout.isPublicLayout()) {
 			inputPermissionsPublicChecked = true;
 		}
 		%>
