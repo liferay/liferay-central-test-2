@@ -595,6 +595,10 @@ public class PortalImpl implements Portal {
 		return null;
 	}
 
+	public String[] getCommunityPermissions(HttpServletRequest request) {
+		return request.getParameterValues("communityPermissions");
+	}
+
 	public String[] getCommunityPermissions(PortletRequest portletRequest) {
 		return portletRequest.getParameterValues("communityPermissions");
 	}
@@ -877,6 +881,29 @@ public class PortalImpl implements Portal {
 
 		return _getServletURL(
 			portlet, PropsValues.GOOGLE_GADGET_SERVLET_MAPPING, themeDisplay);
+	}
+
+	public String[] getGuestPermissions(HttpServletRequest request) {
+		String[] guestPermissions = request.getParameterValues(
+			"guestPermissions");
+
+		boolean inputPermissionsPublic = ParamUtil.getBoolean(
+			request, "inputPermissionsPublic");
+		boolean inputPermissionsShowConfigure = ParamUtil.getBoolean(
+			request, "inputPermissionsShowConfigure");
+
+		if (!inputPermissionsShowConfigure) {
+			if (!inputPermissionsPublic) {
+				guestPermissions = new String[0];
+			}
+			else if ((guestPermissions == null) ||
+					 (guestPermissions.length == 0)) {
+
+				guestPermissions = new String[] {ActionKeys.VIEW};
+			}
+		}
+
+		return guestPermissions;
 	}
 
 	public String[] getGuestPermissions(PortletRequest portletRequest) {

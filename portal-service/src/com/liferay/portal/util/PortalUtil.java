@@ -158,6 +158,10 @@ public class PortalUtil {
 		return getPortal().getCommunityLoginURL(themeDisplay);
 	}
 
+	public static String[] getCommunityPermissions(HttpServletRequest request) {
+		return getPortal().getCommunityPermissions(request);
+	}
+
 	public static String[] getCommunityPermissions(
 		PortletRequest portletRequest) {
 
@@ -279,6 +283,10 @@ public class PortalUtil {
 		Portlet portlet, ThemeDisplay themeDisplay) {
 
 		return getPortal().getGoogleGadgetURL(portlet, themeDisplay);
+	}
+
+	public static String[] getGuestPermissions(HttpServletRequest request) {
+		return getPortal().getGuestPermissions(request);
 	}
 
 	public static String[] getGuestPermissions(PortletRequest portletRequest) {
