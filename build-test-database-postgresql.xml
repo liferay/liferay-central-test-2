@@ -50,14 +50,16 @@
 			<param name="sql.file" value="${sql.file}" />
 		</antcall>
 
-		<!--<antcall target="start-selenium" />
+		<antcall target="start-selenium" />
 
 		<antcall target="run-tomcat-6.0">
 			<param name="skip.rebuild-database" value="true" />
 			<param name="test.class" value="SmokeTestSuite" />
 		</antcall>
 
-		<antcall target="stop-selenium" />-->
+		<antcall target="stop-selenium" />
+
+		<delete file="test.${user.name}.properties" />
 	</target>
 
 	<target name="test-database-postgresql-8.3-latest">

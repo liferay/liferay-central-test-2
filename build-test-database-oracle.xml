@@ -58,6 +58,8 @@
 		</antcall>
 
 		<antcall target="stop-selenium" />
+
+		<delete file="test.${user.name}.properties" />
 	</target>
 
 	<target name="test-database-oracle-10-latest">
