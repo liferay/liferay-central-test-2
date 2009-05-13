@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.messageboards.action;
+package com.liferay.portlet.documentlibrary.action;
 
 import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -31,8 +31,8 @@ import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.PortletURLImpl;
-import com.liferay.portlet.messageboards.model.MBCategory;
-import com.liferay.portlet.messageboards.service.MBCategoryLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.model.DLFileEntry;
+import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 
 import javax.portlet.PortletMode;
 import javax.portlet.PortletRequest;
@@ -48,12 +48,12 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 /**
- * <a href="FindCategoryAction.java.html"><b><i>View Source</i></b></a>
+ * <a href="FindFileEntryAction.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
+ * @author Ryan Park
  *
  */
-public class FindCategoryAction extends Action {
+public class FindFileEntryAction extends Action {
 
 	public ActionForward execute(
 			ActionMapping mapping, ActionForm form, HttpServletRequest request,
@@ -62,20 +62,26 @@ public class FindCategoryAction extends Action {
 
 		try {
 			long plid = ParamUtil.getLong(request, "p_l_id");
-			long categoryId = ParamUtil.getLong(request, "categoryId");
+			long fileEntryId = ParamUtil.getLong(request, "fileEntryId");
 
-			plid = getPlid(plid, categoryId);
+			plid = getPlid(plid, fileEntryId);
 
 			PortletURL portletURL = new PortletURLImpl(
-				request, PortletKeys.MESSAGE_BOARDS, plid,
+				request, PortletKeys.DOCUMENT_LIBRARY, plid,
 				PortletRequest.RENDER_PHASE);
 
 			portletURL.setWindowState(WindowState.NORMAL);
 			portletURL.setPortletMode(PortletMode.VIEW);
 
 			portletURL.setParameter(
-				"struts_action", "/message_boards/view");
-			portletURL.setParameter("categoryId", String.valueOf(categoryId));
+				"struts_action", "/document_library/view_file_entry");
+
+			DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(
+				fileEntryId);
+
+			portletURL.setParameter(
+				"folderId", String.valueOf(fileEntry.getFolderId()));
+			portletURL.setParameter("name", fileEntry.getName());
 
 			response.sendRedirect(portletURL.toString());
 
@@ -88,7 +94,7 @@ public class FindCategoryAction extends Action {
 		}
 	}
 
-	protected long getPlid(long plid, long categoryId) throws Exception {
+	protected long getPlid(long plid, long fileEntryId) throws Exception {
 		if (plid != LayoutConstants.DEFAULT_PLID) {
 			try {
 				Layout layout = LayoutLocalServiceUtil.getLayout(plid);
@@ -97,7 +103,7 @@ public class FindCategoryAction extends Action {
 					(LayoutTypePortlet)layout.getLayoutType();
 
 				if (layoutTypePortlet.hasPortletId(
-						PortletKeys.MESSAGE_BOARDS)) {
+						PortletKeys.DOCUMENT_LIBRARY)) {
 
 					return plid;
 				}
@@ -106,18 +112,18 @@ public class FindCategoryAction extends Action {
 			}
 		}
 
-		MBCategory category = MBCategoryLocalServiceUtil.getCategory(
-			categoryId);
+		DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(
+			fileEntryId);
 
 		plid = PortalUtil.getPlidFromPortletId(
-			category.getGroupId(), PortletKeys.MESSAGE_BOARDS);
+			fileEntry.getGroupId(), PortletKeys.DOCUMENT_LIBRARY);
 
 		if (plid != LayoutConstants.DEFAULT_PLID) {
 			return plid;
 		}
 		else {
 			throw new NoSuchLayoutException(
-				"No page was found with the Message Boards portlet.");
+				"No page was found with the Document Library portlet.");
 		}
 	}
 
