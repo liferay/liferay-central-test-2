@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.MethodInvoker;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -351,6 +352,149 @@ public class JSONServiceAction extends JSONAction {
 		}
 		else if (parameterTypeName.equals("[S")) {
 			return ParamUtil.getShortValues(request, parameter);
+		}
+		else if (parameterTypeName.equals("[[Ljava.lang.String")) {
+			String[] values = request.getParameterValues(parameter);
+			
+			if (values != null && values.length > 0) {
+				String[] values0 = StringUtil.split(values[0]);
+				
+				String[][] stringValues = new String[values.length][values0.length];
+				
+				for (int i = 0; i < values.length; i++) {
+					stringValues[i] = StringUtil.split(values[i]);
+				}
+				return stringValues;
+			}
+			else {
+				return new String[0][0];
+			}
+		}
+		else if (parameterTypeName.equals("[[Z")) {
+			String[] values = request.getParameterValues(parameter);
+			
+			if (values != null && values.length > 0) {
+				String[] values0 = StringUtil.split(values[0]);
+				
+				boolean[][] booleanValues = new boolean[values.length][values0.length];
+				
+				for (int i = 0; i < values.length; i++) {
+					String[] strValues = StringUtil.split(values[i]);
+					
+					for (int j = 0; j < strValues.length; j++) {
+						booleanValues[i][j] = GetterUtil.getBoolean(strValues[j]);
+					}
+				}
+				return booleanValues;
+			}
+			else {
+				return new boolean[0][0];
+			}
+		}
+		else if (parameterTypeName.equals("[[D")) {
+			String[] values = request.getParameterValues(parameter);
+			
+			if (values != null && values.length > 0) {
+				String[] values0 = StringUtil.split(values[0]);
+				
+				double[][] doubleValues = new double[values.length][values0.length];
+				
+				for (int i = 0; i < values.length; i++) {
+					String[] strValues = StringUtil.split(values[i]);
+					
+					for (int j = 0; j < strValues.length; j++) {
+						doubleValues[i][j] = GetterUtil.getDouble(strValues[j]);
+					}
+				}
+				return doubleValues;
+			}
+			else {
+				return new double[0][0];
+			}
+		}
+		else if (parameterTypeName.equals("[[F")) {
+			String[] values = request.getParameterValues(parameter);
+			
+			if (values != null && values.length > 0) {
+				String[] values0 = StringUtil.split(values[0]);
+				
+				float[][] floatValues = new float[values.length][values0.length];
+				
+				for (int i = 0; i < values.length; i++) {
+					String[] strValues = StringUtil.split(values[i]);
+					
+					for (int j = 0; j < strValues.length; j++) {
+						floatValues[i][j] = GetterUtil.getFloat(strValues[j]);
+					}
+				}
+				return floatValues;
+			}
+			else {
+				return new float[0][0];
+			}
+		}
+		else if (parameterTypeName.equals("[[I")) {
+			String[] values = request.getParameterValues(parameter);
+			
+			if (values != null && values.length > 0) {
+				String[] values0 = StringUtil.split(values[0]);
+				
+				int[][] intValues = new int[values.length][values0.length];
+				
+				for (int i = 0; i < values.length; i++) {
+					String[] strValues = StringUtil.split(values[i]);
+					
+					for (int j = 0; j < strValues.length; j++) {
+						intValues[i][j] = GetterUtil.getInteger(strValues[j]);
+					}
+				}
+				return intValues;
+			}
+			else {
+				return new int[0][0];
+			}
+		}
+		else if (parameterTypeName.equals("[[J")) {
+			String[] values = request.getParameterValues(parameter);
+			
+			if (values != null && values.length > 0) {
+				String[] values0 = StringUtil.split(values[0]);
+				
+				long[][] longValues = new long[values.length][values0.length];
+				
+				for (int i = 0; i < values.length; i++) {
+					String[] strValues = StringUtil.split(values[i]);
+					
+					for (int j = 0; j < strValues.length; j++) {
+						longValues[i][j] = GetterUtil.getLong(strValues[j]);
+					}
+				}
+				return longValues;
+			}
+			else {
+				return new long[0][0];
+			}
+		}
+		else if (parameterTypeName.equals("[[S")) {
+			String[] values = request.getParameterValues(parameter);
+			
+			if (values != null && values.length > 0) {
+				String[] values0 = StringUtil.split(values[0]);
+				
+				short[][] shortValues = new short[values.length][values0.length];
+				
+				for (int i = 0; i < values.length; i++) {
+					String[] strValues = StringUtil.split(values[i]);
+					
+					for (int j = 0; j < strValues.length; j++) {
+						shortValues[i][j] = GetterUtil.getShort(strValues[j]);
+					}
+				}
+				return shortValues;
+			}
+			else {
+				return new short[0][0];
+			}
 		}
 		else {
 			_log.error(
