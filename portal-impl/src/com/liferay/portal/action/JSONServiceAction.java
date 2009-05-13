@@ -148,112 +148,7 @@ public class JSONServiceAction extends JSONAction {
 				Object returnObj = method.invoke(classObj, args);
 
 				if (returnObj != null) {
-					if (returnObj instanceof BaseModel) {
-						String serlializerClassName = getSerializerClassName(
-							returnObj);
-
-						MethodWrapper methodWrapper = new MethodWrapper(
-							serlializerClassName, "toJSONObject", returnObj);
-
-						JSONObject jsonObj = (JSONObject)MethodInvoker.invoke(
-							methodWrapper, false);
-
-						return jsonObj.toString();
-					}
-					else if (returnObj instanceof BaseModel[]) {
-						JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
-						
-						BaseModel[] returnArray = (BaseModel[])returnObj;
-						
-						if (returnArray.length > 0) {
-							BaseModel returnItem0 = returnArray[0];
-							
-							String serializerClassName =
-								getSerializerClassName(returnItem0);
-							
-							MethodWrapper methodWrapper = new MethodWrapper(
-								serializerClassName, "toJSONArray", returnObj);
-							
-							jsonArray = (JSONArray)MethodInvoker.invoke(
-								methodWrapper, false);
-						}
-						
-						return jsonArray.toString();
-					}
-					else if (returnObj instanceof BaseModel[][]) {
-						JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
-						
-						BaseModel[][] returnArray = (BaseModel[][])returnObj;
-						
-						if (returnArray.length > 0 && returnArray[0].length > 0) {
-							BaseModel returnItem0 = returnArray[0][0];
-							
-							String serializerClassName =
-								getSerializerClassName(returnItem0);
-							
-							MethodWrapper methodWrapper = new MethodWrapper(
-								serializerClassName, "toJSONArray", returnObj);
-							
-							jsonArray = (JSONArray)MethodInvoker.invoke(
-								methodWrapper, false);
-						}
-						
-						return jsonArray.toString();
-					}
-					else if (returnObj instanceof List) {
-						JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
-
-						List<Object> returnList = (List<Object>)returnObj;
-
-						if (!returnList.isEmpty()) {
-							Object returnItem0 = returnList.get(0);
-
-							String serlializerClassName =
-								getSerializerClassName(returnItem0);
-
-							MethodWrapper methodWrapper = new MethodWrapper(
-								serlializerClassName, "toJSONArray", returnObj);
-
-							jsonArray = (JSONArray)MethodInvoker.invoke(
-								methodWrapper, false);
-						}
-
-						return jsonArray.toString();
-					}
-					else if (returnObj instanceof JSONArray) {
-						JSONArray jsonArray = (JSONArray)returnObj;
-
-						return jsonArray.toString();
-					}
-					else if (returnObj instanceof JSONObject) {
-						JSONObject jsonObj = (JSONObject)returnObj;
-
-						return jsonObj.toString();
-					}
-					else if (returnObj instanceof Boolean ||
-							 returnObj instanceof Double ||
-							 returnObj instanceof Integer ||
-							 returnObj instanceof Long ||
-							 returnObj instanceof Short ||
-							 returnObj instanceof String) {
-
-						JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
-
-						jsonObj.put("returnValue", returnObj.toString());
-
-						return jsonObj.toString();
-					}
-					else {
-						String returnValue = getReturnValue(returnObj);
-
-						if (returnValue == null) {
-							_log.error(
-								"Unsupported return type for class " +
-									classObj + " and method " + methodName);
-						}
-
-						return returnValue;
-					}
+					return getReturnValue(returnObj);
 				}
 				else {
 					JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
@@ -262,10 +157,10 @@ public class JSONServiceAction extends JSONAction {
 				}
 			}
 			catch (Exception e) {
+				_log.error(e, e);
+
 				JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
 
-				_log.error(e);
-				
 				if (e instanceof InvocationTargetException) {
 					jsonObj.put("exception", e.getCause().toString());
 				}
@@ -332,9 +227,6 @@ public class JSONServiceAction extends JSONAction {
 		else if (parameterTypeName.equals(String.class.getName())) {
 			return value;
 		}
-		else if (parameterTypeName.equals("[Ljava.lang.String;")) {
-			return StringUtil.split(value);
-		}
 		else if (parameterTypeName.equals("[Z")) {
 			return ParamUtil.getBooleanValues(request, parameter);
 		}
@@ -353,39 +245,27 @@ public class JSONServiceAction extends JSONAction {
 		else if (parameterTypeName.equals("[S")) {
 			return ParamUtil.getShortValues(request, parameter);
 		}
-		else if (parameterTypeName.equals("[[Ljava.lang.String")) {
-			String[] values = request.getParameterValues(parameter);
-			
-			if (values != null && values.length > 0) {
-				String[] values0 = StringUtil.split(values[0]);
-				
-				String[][] stringValues = new String[values.length][values0.length];
-				
-				for (int i = 0; i < values.length; i++) {
-					stringValues[i] = StringUtil.split(values[i]);
-				}
-				return stringValues;
-			}
-			else {
-				return new String[0][0];
-			}
+		else if (parameterTypeName.equals("[Ljava.lang.String;")) {
+			return StringUtil.split(value);
 		}
 		else if (parameterTypeName.equals("[[Z")) {
 			String[] values = request.getParameterValues(parameter);
-			
-			if (values != null && values.length > 0) {
+
+			if ((values != null) && (values.length > 0)) {
 				String[] values0 = StringUtil.split(values[0]);
-				
-				boolean[][] booleanValues = new boolean[values.length][values0.length];
-				
+
+				boolean[][] doubleArray =
+					new boolean[values.length][values0.length];
+
 				for (int i = 0; i < values.length; i++) {
-					String[] strValues = StringUtil.split(values[i]);
-					
-					for (int j = 0; j < strValues.length; j++) {
-						booleanValues[i][j] = GetterUtil.getBoolean(strValues[j]);
+					String[] curValues = StringUtil.split(values[i]);
+
+					for (int j = 0; j < curValues.length; j++) {
+						doubleArray[i][j] = GetterUtil.getBoolean(curValues[j]);
 					}
 				}
-				return booleanValues;
+
+				return doubleArray;
 			}
 			else {
 				return new boolean[0][0];
@@ -393,20 +273,22 @@ public class JSONServiceAction extends JSONAction {
 		}
 		else if (parameterTypeName.equals("[[D")) {
 			String[] values = request.getParameterValues(parameter);
-			
-			if (values != null && values.length > 0) {
+
+			if ((values != null) && (values.length > 0)) {
 				String[] values0 = StringUtil.split(values[0]);
-				
-				double[][] doubleValues = new double[values.length][values0.length];
-				
+
+				double[][] doubleArray =
+					new double[values.length][values0.length];
+
 				for (int i = 0; i < values.length; i++) {
-					String[] strValues = StringUtil.split(values[i]);
-					
-					for (int j = 0; j < strValues.length; j++) {
-						doubleValues[i][j] = GetterUtil.getDouble(strValues[j]);
+					String[] curValues = StringUtil.split(values[i]);
+
+					for (int j = 0; j < curValues.length; j++) {
+						doubleArray[i][j] = GetterUtil.getDouble(curValues[j]);
 					}
 				}
-				return doubleValues;
+
+				return doubleArray;
 			}
 			else {
 				return new double[0][0];
@@ -414,20 +296,22 @@ public class JSONServiceAction extends JSONAction {
 		}
 		else if (parameterTypeName.equals("[[F")) {
 			String[] values = request.getParameterValues(parameter);
-			
-			if (values != null && values.length > 0) {
+
+			if ((values != null) && (values.length > 0)) {
 				String[] values0 = StringUtil.split(values[0]);
-				
-				float[][] floatValues = new float[values.length][values0.length];
-				
+
+				float[][] doubleArray =
+					new float[values.length][values0.length];
+
 				for (int i = 0; i < values.length; i++) {
-					String[] strValues = StringUtil.split(values[i]);
-					
-					for (int j = 0; j < strValues.length; j++) {
-						floatValues[i][j] = GetterUtil.getFloat(strValues[j]);
+					String[] curValues = StringUtil.split(values[i]);
+
+					for (int j = 0; j < curValues.length; j++) {
+						doubleArray[i][j] = GetterUtil.getFloat(curValues[j]);
 					}
 				}
-				return floatValues;
+
+				return doubleArray;
 			}
 			else {
 				return new float[0][0];
@@ -435,20 +319,22 @@ public class JSONServiceAction extends JSONAction {
 		}
 		else if (parameterTypeName.equals("[[I")) {
 			String[] values = request.getParameterValues(parameter);
-			
-			if (values != null && values.length > 0) {
+
+			if ((values != null) && (values.length > 0)) {
 				String[] values0 = StringUtil.split(values[0]);
-				
-				int[][] intValues = new int[values.length][values0.length];
-				
+
+				int[][] doubleArray =
+					new int[values.length][values0.length];
+
 				for (int i = 0; i < values.length; i++) {
-					String[] strValues = StringUtil.split(values[i]);
-					
-					for (int j = 0; j < strValues.length; j++) {
-						intValues[i][j] = GetterUtil.getInteger(strValues[j]);
+					String[] curValues = StringUtil.split(values[i]);
+
+					for (int j = 0; j < curValues.length; j++) {
+						doubleArray[i][j] = GetterUtil.getInteger(curValues[j]);
 					}
 				}
-				return intValues;
+
+				return doubleArray;
 			}
 			else {
 				return new int[0][0];
@@ -456,20 +342,22 @@ public class JSONServiceAction extends JSONAction {
 		}
 		else if (parameterTypeName.equals("[[J")) {
 			String[] values = request.getParameterValues(parameter);
-			
-			if (values != null && values.length > 0) {
+
+			if ((values != null) && (values.length > 0)) {
 				String[] values0 = StringUtil.split(values[0]);
-				
-				long[][] longValues = new long[values.length][values0.length];
-				
+
+				long[][] doubleArray =
+					new long[values.length][values0.length];
+
 				for (int i = 0; i < values.length; i++) {
-					String[] strValues = StringUtil.split(values[i]);
-					
-					for (int j = 0; j < strValues.length; j++) {
-						longValues[i][j] = GetterUtil.getLong(strValues[j]);
+					String[] curValues = StringUtil.split(values[i]);
+
+					for (int j = 0; j < curValues.length; j++) {
+						doubleArray[i][j] = GetterUtil.getLong(curValues[j]);
 					}
 				}
-				return longValues;
+
+				return doubleArray;
 			}
 			else {
 				return new long[0][0];
@@ -477,23 +365,44 @@ public class JSONServiceAction extends JSONAction {
 		}
 		else if (parameterTypeName.equals("[[S")) {
 			String[] values = request.getParameterValues(parameter);
-			
-			if (values != null && values.length > 0) {
+
+			if ((values != null) && (values.length > 0)) {
 				String[] values0 = StringUtil.split(values[0]);
-				
-				short[][] shortValues = new short[values.length][values0.length];
-				
+
+				short[][] doubleArray =
+					new short[values.length][values0.length];
+
 				for (int i = 0; i < values.length; i++) {
-					String[] strValues = StringUtil.split(values[i]);
-					
-					for (int j = 0; j < strValues.length; j++) {
-						shortValues[i][j] = GetterUtil.getShort(strValues[j]);
+					String[] curValues = StringUtil.split(values[i]);
+
+					for (int j = 0; j < curValues.length; j++) {
+						doubleArray[i][j] = GetterUtil.getShort(curValues[j]);
 					}
 				}
-				return shortValues;
+
+				return doubleArray;
 			}
 			else {
 				return new short[0][0];
+			}
+		}
+		else if (parameterTypeName.equals("[[Ljava.lang.String")) {
+			String[] values = request.getParameterValues(parameter);
+
+			if ((values != null) && (values.length > 0)) {
+				String[] values0 = StringUtil.split(values[0]);
+
+				String[][] doubleArray =
+					new String[values.length][values0.length];
+
+				for (int i = 0; i < values.length; i++) {
+					doubleArray[i] = StringUtil.split(values[i]);
+				}
+
+				return doubleArray;
+			}
+			else {
+				return new String[0][0];
 			}
 		}
 		else {
@@ -590,7 +499,100 @@ public class JSONServiceAction extends JSONAction {
 	}
 
 	protected String getReturnValue(Object returnObj) throws Exception {
-		if (returnObj instanceof TagsAssetDisplay) {
+		if ((returnObj instanceof Boolean) || (returnObj instanceof Double) ||
+			(returnObj instanceof Integer) || (returnObj instanceof Long) ||
+			(returnObj instanceof Short) || (returnObj instanceof String)) {
+
+			JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
+
+			jsonObj.put("returnValue", returnObj.toString());
+
+			return jsonObj.toString();
+		}
+		else if (returnObj instanceof BaseModel) {
+			String serlializerClassName = getSerializerClassName(returnObj);
+
+			MethodWrapper methodWrapper = new MethodWrapper(
+				serlializerClassName, "toJSONObject", returnObj);
+
+			JSONObject jsonObj = (JSONObject)MethodInvoker.invoke(
+				methodWrapper, false);
+
+			return jsonObj.toString();
+		}
+		else if (returnObj instanceof BaseModel[]) {
+			JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
+
+			BaseModel[] returnArray = (BaseModel[])returnObj;
+
+			if (returnArray.length > 0) {
+				BaseModel returnItem0 = returnArray[0];
+
+				String serializerClassName = getSerializerClassName(
+					returnItem0);
+
+				MethodWrapper methodWrapper = new MethodWrapper(
+					serializerClassName, "toJSONArray", returnObj);
+
+				jsonArray = (JSONArray)MethodInvoker.invoke(
+					methodWrapper, false);
+			}
+
+			return jsonArray.toString();
+		}
+		else if (returnObj instanceof BaseModel[][]) {
+			JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
+
+			BaseModel[][] returnArray = (BaseModel[][])returnObj;
+
+			if ((returnArray.length > 0) &&
+				(returnArray[0].length > 0)) {
+
+				BaseModel returnItem0 = returnArray[0][0];
+
+				String serializerClassName = getSerializerClassName(
+					returnItem0);
+
+				MethodWrapper methodWrapper = new MethodWrapper(
+					serializerClassName, "toJSONArray", returnObj);
+
+				jsonArray = (JSONArray)MethodInvoker.invoke(
+					methodWrapper, false);
+			}
+
+			return jsonArray.toString();
+		}
+		else if (returnObj instanceof List) {
+			JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
+
+			List<Object> returnList = (List<Object>)returnObj;
+
+			if (!returnList.isEmpty()) {
+				Object returnItem0 = returnList.get(0);
+
+				String serlializerClassName = getSerializerClassName(
+					returnItem0);
+
+				MethodWrapper methodWrapper = new MethodWrapper(
+					serlializerClassName, "toJSONArray", returnObj);
+
+				jsonArray = (JSONArray)MethodInvoker.invoke(
+					methodWrapper, false);
+			}
+
+			return jsonArray.toString();
+		}
+		else if (returnObj instanceof JSONArray) {
+			JSONArray jsonArray = (JSONArray)returnObj;
+
+			return jsonArray.toString();
+		}
+		else if (returnObj instanceof JSONObject) {
+			JSONObject jsonObj = (JSONObject)returnObj;
+
+			return jsonObj.toString();
+		}
+		else if (returnObj instanceof TagsAssetDisplay) {
 			return getReturnValue((TagsAssetDisplay)returnObj);
 		}
 		else if (returnObj instanceof TagsAssetDisplay[]) {
