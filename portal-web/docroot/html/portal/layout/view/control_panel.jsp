@@ -61,7 +61,9 @@ List<Layout> scopeLayouts = new ArrayList<Layout>();
 boolean denyAccess = false;
 
 if (Validator.isNotNull(ppid)) {
-	denyAccess = !_hasPortlet(ppid, category, themeDisplay);
+	Portlet portlet = PortletLocalServiceUtil.getPortletById(ppid);
+
+	denyAccess = (!portlet.isSystem() && !_hasPortlet(ppid, category, themeDisplay));
 }
 %>
 
