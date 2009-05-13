@@ -798,7 +798,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl
 							!calEvent.getUuid().equals(uuid) ||
 							(calEvent.getGroupId() != groupId)) {
 						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
-							finderArgs, list);
+							finderArgs, calEvent);
 					}
 				}
 

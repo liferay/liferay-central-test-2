@@ -888,7 +888,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl
 					if ((shoppingCart.getGroupId() != groupId) ||
 							(shoppingCart.getUserId() != userId)) {
 						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_U,
-							finderArgs, list);
+							finderArgs, shoppingCart);
 					}
 				}
 

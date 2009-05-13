@@ -1364,7 +1364,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl
 							!journalArticleImage.getLanguageId()
 													.equals(languageId)) {
 						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_A_V_E_E_L,
-							finderArgs, list);
+							finderArgs, journalArticleImage);
 					}
 				}
 

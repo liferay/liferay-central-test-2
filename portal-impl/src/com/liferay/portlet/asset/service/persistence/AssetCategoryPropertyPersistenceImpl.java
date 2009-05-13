@@ -1253,7 +1253,7 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl
 							(assetCategoryProperty.getKey() == null) ||
 							!assetCategoryProperty.getKey().equals(key)) {
 						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_CA_K,
-							finderArgs, list);
+							finderArgs, assetCategoryProperty);
 					}
 				}
 

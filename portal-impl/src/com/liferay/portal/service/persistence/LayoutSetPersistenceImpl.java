@@ -682,7 +682,7 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl
 					if ((layoutSet.getVirtualHost() == null) ||
 							!layoutSet.getVirtualHost().equals(virtualHost)) {
 						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_VIRTUALHOST,
-							finderArgs, list);
+							finderArgs, layoutSet);
 					}
 				}
 
@@ -798,7 +798,7 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl
 					if ((layoutSet.getGroupId() != groupId) ||
 							(layoutSet.getPrivateLayout() != privateLayout)) {
 						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_P,
-							finderArgs, list);
+							finderArgs, layoutSet);
 					}
 				}
 

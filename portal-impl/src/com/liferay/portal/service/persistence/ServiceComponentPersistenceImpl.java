@@ -735,7 +735,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl
 												 .equals(buildNamespace) ||
 							(serviceComponent.getBuildNumber() != buildNumber)) {
 						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_BNS_BNU,
-							finderArgs, list);
+							finderArgs, serviceComponent);
 					}
 				}
 

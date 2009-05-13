@@ -782,7 +782,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl
 							!wikiNode.getUuid().equals(uuid) ||
 							(wikiNode.getGroupId() != groupId)) {
 						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
-							finderArgs, list);
+							finderArgs, wikiNode);
 					}
 				}
 
@@ -1350,7 +1350,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl
 							(wikiNode.getName() == null) ||
 							!wikiNode.getName().equals(name)) {
 						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_N,
-							finderArgs, list);
+							finderArgs, wikiNode);
 					}
 				}
 

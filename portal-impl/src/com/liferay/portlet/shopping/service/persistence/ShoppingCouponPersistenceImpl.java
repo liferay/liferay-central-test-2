@@ -677,7 +677,7 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl
 					if ((shoppingCoupon.getCode() == null) ||
 							!shoppingCoupon.getCode().equals(code)) {
 						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_CODE,
-							finderArgs, list);
+							finderArgs, shoppingCoupon);
 					}
 				}
 

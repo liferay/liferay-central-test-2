@@ -693,7 +693,7 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl
 							(announcementsDelivery.getType() == null) ||
 							!announcementsDelivery.getType().equals(type)) {
 						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U_T,
-							finderArgs, list);
+							finderArgs, announcementsDelivery);
 					}
 				}
 

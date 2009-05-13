@@ -420,7 +420,7 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl
 					if ((className.getValue() == null) ||
 							!className.getValue().equals(value)) {
 						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_VALUE,
-							finderArgs, list);
+							finderArgs, className);
 					}
 				}
 

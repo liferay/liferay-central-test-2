@@ -718,7 +718,7 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl
 							(ratingsEntry.getClassNameId() != classNameId) ||
 							(ratingsEntry.getClassPK() != classPK)) {
 						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U_C_C,
-							finderArgs, list);
+							finderArgs, ratingsEntry);
 					}
 				}
 

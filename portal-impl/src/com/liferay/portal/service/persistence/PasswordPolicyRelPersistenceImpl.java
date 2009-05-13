@@ -500,7 +500,7 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl
 					if ((passwordPolicyRel.getClassNameId() != classNameId) ||
 							(passwordPolicyRel.getClassPK() != classPK)) {
 						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_C,
-							finderArgs, list);
+							finderArgs, passwordPolicyRel);
 					}
 				}
 
@@ -631,7 +631,7 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl
 							(passwordPolicyRel.getClassNameId() != classNameId) ||
 							(passwordPolicyRel.getClassPK() != classPK)) {
 						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_P_C_C,
-							finderArgs, list);
+							finderArgs, passwordPolicyRel);
 					}
 				}
 

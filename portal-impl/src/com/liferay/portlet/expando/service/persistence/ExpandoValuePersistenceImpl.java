@@ -2089,7 +2089,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 					if ((expandoValue.getColumnId() != columnId) ||
 							(expandoValue.getRowId() != rowId)) {
 						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_R,
-							finderArgs, list);
+							finderArgs, expandoValue);
 					}
 				}
 
@@ -2479,7 +2479,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 							(expandoValue.getColumnId() != columnId) ||
 							(expandoValue.getClassPK() != classPK)) {
 						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_T_C_C,
-							finderArgs, list);
+							finderArgs, expandoValue);
 					}
 				}
 

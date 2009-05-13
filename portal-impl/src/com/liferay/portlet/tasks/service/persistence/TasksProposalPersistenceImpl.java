@@ -979,7 +979,7 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl
 							(tasksProposal.getClassPK() == null) ||
 							!tasksProposal.getClassPK().equals(classPK)) {
 						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_C,
-							finderArgs, list);
+							finderArgs, tasksProposal);
 					}
 				}
 

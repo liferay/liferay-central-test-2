@@ -933,7 +933,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl
 							!socialRequest.getUuid().equals(uuid) ||
 							(socialRequest.getGroupId() != groupId)) {
 						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
-							finderArgs, list);
+							finderArgs, socialRequest);
 					}
 				}
 
@@ -2264,7 +2264,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl
 							(socialRequest.getType() != type) ||
 							(socialRequest.getReceiverUserId() != receiverUserId)) {
 						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U_C_C_T_R,
-							finderArgs, list);
+							finderArgs, socialRequest);
 					}
 				}
 

@@ -689,7 +689,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl
 
 					if ((mbDiscussion.getThreadId() != threadId)) {
 						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_THREADID,
-							finderArgs, list);
+							finderArgs, mbDiscussion);
 					}
 				}
 
@@ -806,7 +806,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl
 					if ((mbDiscussion.getClassNameId() != classNameId) ||
 							(mbDiscussion.getClassPK() != classPK)) {
 						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_C,
-							finderArgs, list);
+							finderArgs, mbDiscussion);
 					}
 				}
 

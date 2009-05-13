@@ -1315,7 +1315,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl
 
 					if ((socialActivity.getMirrorActivityId() != mirrorActivityId)) {
 						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_MIRRORACTIVITYID,
-							finderArgs, list);
+							finderArgs, socialActivity);
 					}
 				}
 
@@ -2488,7 +2488,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl
 							(socialActivity.getType() != type) ||
 							(socialActivity.getReceiverUserId() != receiverUserId)) {
 						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_U_CD_C_C_T_R,
-							finderArgs, list);
+							finderArgs, socialActivity);
 					}
 				}
 

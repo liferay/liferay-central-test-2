@@ -450,7 +450,7 @@ public class ShardPersistenceImpl extends BasePersistenceImpl
 					if ((shard.getName() == null) ||
 							!shard.getName().equals(name)) {
 						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_NAME,
-							finderArgs, list);
+							finderArgs, shard);
 					}
 				}
 
@@ -566,7 +566,7 @@ public class ShardPersistenceImpl extends BasePersistenceImpl
 					if ((shard.getClassNameId() != classNameId) ||
 							(shard.getClassPK() != classPK)) {
 						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_C,
-							finderArgs, list);
+							finderArgs, shard);
 					}
 				}
 

@@ -750,7 +750,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl
 							!pollsQuestion.getUuid().equals(uuid) ||
 							(pollsQuestion.getGroupId() != groupId)) {
 						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
-							finderArgs, list);
+							finderArgs, pollsQuestion);
 					}
 				}
 

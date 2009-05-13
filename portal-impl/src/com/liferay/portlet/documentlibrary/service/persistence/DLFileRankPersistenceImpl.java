@@ -1292,7 +1292,7 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl
 							(dlFileRank.getName() == null) ||
 							!dlFileRank.getName().equals(name)) {
 						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_U_F_N,
-							finderArgs, list);
+							finderArgs, dlFileRank);
 					}
 				}
 

@@ -922,7 +922,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 							!wikiPage.getUuid().equals(uuid) ||
 							(wikiPage.getGroupId() != groupId)) {
 						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
-							finderArgs, list);
+							finderArgs, wikiPage);
 					}
 				}
 
@@ -2619,7 +2619,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 							!wikiPage.getTitle().equals(title) ||
 							(wikiPage.getVersion() != version)) {
 						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_N_T_V,
-							finderArgs, list);
+							finderArgs, wikiPage);
 					}
 				}
 

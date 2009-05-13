@@ -840,7 +840,7 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 							!dlFolder.getUuid().equals(uuid) ||
 							(dlFolder.getGroupId() != groupId)) {
 						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
-							finderArgs, list);
+							finderArgs, dlFolder);
 					}
 				}
 
@@ -1959,7 +1959,7 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 							(dlFolder.getName() == null) ||
 							!dlFolder.getName().equals(name)) {
 						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_P_N,
-							finderArgs, list);
+							finderArgs, dlFolder);
 					}
 				}
 

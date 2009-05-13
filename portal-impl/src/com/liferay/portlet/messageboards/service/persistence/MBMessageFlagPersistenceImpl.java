@@ -1945,7 +1945,7 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl
 							(mbMessageFlag.getMessageId() != messageId) ||
 							(mbMessageFlag.getFlag() != flag)) {
 						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U_M_F,
-							finderArgs, list);
+							finderArgs, mbMessageFlag);
 					}
 				}
 

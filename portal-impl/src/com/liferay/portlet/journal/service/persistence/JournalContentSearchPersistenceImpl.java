@@ -2033,7 +2033,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl
 							!journalContentSearch.getArticleId()
 													 .equals(articleId)) {
 						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_P_L_P_A,
-							finderArgs, list);
+							finderArgs, journalContentSearch);
 					}
 				}
 

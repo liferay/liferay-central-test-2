@@ -443,7 +443,7 @@ public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl
 					if ((webDAVProps.getClassNameId() != classNameId) ||
 							(webDAVProps.getClassPK() != classPK)) {
 						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_C,
-							finderArgs, list);
+							finderArgs, webDAVProps);
 					}
 				}
 

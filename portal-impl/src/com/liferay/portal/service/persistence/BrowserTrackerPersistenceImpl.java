@@ -425,7 +425,7 @@ public class BrowserTrackerPersistenceImpl extends BasePersistenceImpl
 
 					if ((browserTracker.getUserId() != userId)) {
 						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_USERID,
-							finderArgs, list);
+							finderArgs, browserTracker);
 					}
 				}
 

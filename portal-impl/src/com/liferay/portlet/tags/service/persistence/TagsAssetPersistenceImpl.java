@@ -693,7 +693,7 @@ public class TagsAssetPersistenceImpl extends BasePersistenceImpl
 					if ((tagsAsset.getClassNameId() != classNameId) ||
 							(tagsAsset.getClassPK() != classPK)) {
 						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_C,
-							finderArgs, list);
+							finderArgs, tagsAsset);
 					}
 				}
 

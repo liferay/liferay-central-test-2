@@ -773,7 +773,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl
 							(role.getName() == null) ||
 							!role.getName().equals(name)) {
 						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_N,
-							finderArgs, list);
+							finderArgs, role);
 					}
 				}
 
@@ -1168,7 +1168,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl
 							(role.getClassNameId() != classNameId) ||
 							(role.getClassPK() != classPK)) {
 						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_C_C,
-							finderArgs, list);
+							finderArgs, role);
 					}
 				}
 

@@ -784,7 +784,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl
 
 					if ((shoppingItem.getSmallImageId() != smallImageId)) {
 						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_SMALLIMAGEID,
-							finderArgs, list);
+							finderArgs, shoppingItem);
 					}
 				}
 
@@ -893,7 +893,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl
 
 					if ((shoppingItem.getMediumImageId() != mediumImageId)) {
 						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_MEDIUMIMAGEID,
-							finderArgs, list);
+							finderArgs, shoppingItem);
 					}
 				}
 
@@ -1002,7 +1002,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl
 
 					if ((shoppingItem.getLargeImageId() != largeImageId)) {
 						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_LARGEIMAGEID,
-							finderArgs, list);
+							finderArgs, shoppingItem);
 					}
 				}
 
@@ -1129,7 +1129,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl
 							(shoppingItem.getSku() == null) ||
 							!shoppingItem.getSku().equals(sku)) {
 						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_S,
-							finderArgs, list);
+							finderArgs, shoppingItem);
 					}
 				}
 

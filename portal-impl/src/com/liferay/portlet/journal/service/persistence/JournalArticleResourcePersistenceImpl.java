@@ -701,7 +701,7 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl
 							!journalArticleResource.getArticleId()
 													   .equals(articleId)) {
 						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_A,
-							finderArgs, list);
+							finderArgs, journalArticleResource);
 					}
 				}
 

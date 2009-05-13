@@ -1445,7 +1445,7 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl
 							!resourcePermission.getPrimKey().equals(primKey) ||
 							(resourcePermission.getRoleId() != roleId)) {
 						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_N_S_P_R,
-							finderArgs, list);
+							finderArgs, resourcePermission);
 					}
 				}
 

@@ -784,7 +784,7 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl
 							!journalFeed.getUuid().equals(uuid) ||
 							(journalFeed.getGroupId() != groupId)) {
 						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
-							finderArgs, list);
+							finderArgs, journalFeed);
 					}
 				}
 
@@ -1134,7 +1134,7 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl
 							(journalFeed.getFeedId() == null) ||
 							!journalFeed.getFeedId().equals(feedId)) {
 						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_F,
-							finderArgs, list);
+							finderArgs, journalFeed);
 					}
 				}
 

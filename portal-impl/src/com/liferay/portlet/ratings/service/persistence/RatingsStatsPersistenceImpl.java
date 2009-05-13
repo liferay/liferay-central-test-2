@@ -446,7 +446,7 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl
 					if ((ratingsStats.getClassNameId() != classNameId) ||
 							(ratingsStats.getClassPK() != classPK)) {
 						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_C,
-							finderArgs, list);
+							finderArgs, ratingsStats);
 					}
 				}
 

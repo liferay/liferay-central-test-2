@@ -943,7 +943,7 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl
 					if ((mbStatsUser.getGroupId() != groupId) ||
 							(mbStatsUser.getUserId() != userId)) {
 						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_U,
-							finderArgs, list);
+							finderArgs, mbStatsUser);
 					}
 				}
 

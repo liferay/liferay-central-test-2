@@ -1257,7 +1257,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl
 							(organization.getName() == null) ||
 							!organization.getName().equals(name)) {
 						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_N,
-							finderArgs, list);
+							finderArgs, organization);
 					}
 				}
 

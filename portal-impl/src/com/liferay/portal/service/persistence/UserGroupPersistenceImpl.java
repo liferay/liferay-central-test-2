@@ -970,7 +970,7 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl
 							(userGroup.getName() == null) ||
 							!userGroup.getName().equals(name)) {
 						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_N,
-							finderArgs, list);
+							finderArgs, userGroup);
 					}
 				}
 

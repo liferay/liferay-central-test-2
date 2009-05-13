@@ -710,7 +710,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 							!permission.getActionId().equals(actionId) ||
 							(permission.getResourceId() != resourceId)) {
 						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_A_R,
-							finderArgs, list);
+							finderArgs, permission);
 					}
 				}
 

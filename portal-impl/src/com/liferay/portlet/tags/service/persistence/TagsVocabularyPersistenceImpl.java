@@ -500,7 +500,7 @@ public class TagsVocabularyPersistenceImpl extends BasePersistenceImpl
 							(tagsVocabulary.getName() == null) ||
 							!tagsVocabulary.getName().equals(name)) {
 						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_N,
-							finderArgs, list);
+							finderArgs, tagsVocabulary);
 					}
 				}
 

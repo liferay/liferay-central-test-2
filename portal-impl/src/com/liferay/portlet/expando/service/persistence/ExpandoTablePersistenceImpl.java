@@ -736,7 +736,7 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl
 							(expandoTable.getName() == null) ||
 							!expandoTable.getName().equals(name)) {
 						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_C_N,
-							finderArgs, list);
+							finderArgs, expandoTable);
 					}
 				}
 

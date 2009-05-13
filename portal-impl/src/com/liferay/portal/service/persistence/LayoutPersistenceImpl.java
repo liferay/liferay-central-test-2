@@ -1079,7 +1079,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 
 					if ((layout.getDlFolderId() != dlFolderId)) {
 						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_DLFOLDERID,
-							finderArgs, list);
+							finderArgs, layout);
 					}
 				}
 
@@ -1188,7 +1188,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 
 					if ((layout.getIconImageId() != iconImageId)) {
 						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_ICONIMAGEID,
-							finderArgs, list);
+							finderArgs, layout);
 					}
 				}
 
@@ -1569,7 +1569,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 							(layout.getPrivateLayout() != privateLayout) ||
 							(layout.getLayoutId() != layoutId)) {
 						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_P_L,
-							finderArgs, list);
+							finderArgs, layout);
 					}
 				}
 
@@ -1991,7 +1991,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 							(layout.getFriendlyURL() == null) ||
 							!layout.getFriendlyURL().equals(friendlyURL)) {
 						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_P_F,
-							finderArgs, list);
+							finderArgs, layout);
 					}
 				}
 

@@ -1149,7 +1149,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 
 					if ((user.getContactId() != contactId)) {
 						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_CONTACTID,
-							finderArgs, list);
+							finderArgs, user);
 					}
 				}
 
@@ -1484,7 +1484,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 					if ((user.getOpenId() == null) ||
 							!user.getOpenId().equals(openId)) {
 						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_OPENID,
-							finderArgs, list);
+							finderArgs, user);
 					}
 				}
 
@@ -1587,7 +1587,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 
 					if ((user.getPortraitId() != portraitId)) {
 						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_PORTRAITID,
-							finderArgs, list);
+							finderArgs, user);
 					}
 				}
 
@@ -1701,7 +1701,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 					if ((user.getCompanyId() != companyId) ||
 							(user.getUserId() != userId)) {
 						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_U,
-							finderArgs, list);
+							finderArgs, user);
 					}
 				}
 
@@ -1817,7 +1817,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 					if ((user.getCompanyId() != companyId) ||
 							(user.getDefaultUser() != defaultUser)) {
 						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_DU,
-							finderArgs, list);
+							finderArgs, user);
 					}
 				}
 
@@ -1939,7 +1939,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 							(user.getScreenName() == null) ||
 							!user.getScreenName().equals(screenName)) {
 						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_SN,
-							finderArgs, list);
+							finderArgs, user);
 					}
 				}
 
@@ -2061,7 +2061,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 							(user.getEmailAddress() == null) ||
 							!user.getEmailAddress().equals(emailAddress)) {
 						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_EA,
-							finderArgs, list);
+							finderArgs, user);
 					}
 				}
 

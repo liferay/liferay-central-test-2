@@ -947,7 +947,7 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl
 							!resourceCode.getName().equals(name) ||
 							(resourceCode.getScope() != scope)) {
 						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_N_S,
-							finderArgs, list);
+							finderArgs, resourceCode);
 					}
 				}
 

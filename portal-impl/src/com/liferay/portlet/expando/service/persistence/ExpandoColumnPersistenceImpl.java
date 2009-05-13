@@ -705,7 +705,7 @@ public class ExpandoColumnPersistenceImpl extends BasePersistenceImpl
 							(expandoColumn.getName() == null) ||
 							!expandoColumn.getName().equals(name)) {
 						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_T_N,
-							finderArgs, list);
+							finderArgs, expandoColumn);
 					}
 				}
 

@@ -1261,7 +1261,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 							!scProductEntry.getRepoArtifactId()
 											   .equals(repoArtifactId)) {
 						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_RG_RA,
-							finderArgs, list);
+							finderArgs, scProductEntry);
 					}
 				}
 

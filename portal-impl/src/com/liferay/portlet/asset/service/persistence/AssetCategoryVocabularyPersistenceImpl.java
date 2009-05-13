@@ -965,7 +965,7 @@ public class AssetCategoryVocabularyPersistenceImpl extends BasePersistenceImpl
 							(assetCategoryVocabulary.getName() == null) ||
 							!assetCategoryVocabulary.getName().equals(name)) {
 						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_N,
-							finderArgs, list);
+							finderArgs, assetCategoryVocabulary);
 					}
 				}
 

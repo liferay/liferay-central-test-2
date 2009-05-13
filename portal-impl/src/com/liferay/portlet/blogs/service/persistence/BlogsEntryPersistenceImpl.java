@@ -888,7 +888,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 							!blogsEntry.getUuid().equals(uuid) ||
 							(blogsEntry.getGroupId() != groupId)) {
 						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
-							finderArgs, list);
+							finderArgs, blogsEntry);
 					}
 				}
 
@@ -1710,7 +1710,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 							(blogsEntry.getUrlTitle() == null) ||
 							!blogsEntry.getUrlTitle().equals(urlTitle)) {
 						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_UT,
-							finderArgs, list);
+							finderArgs, blogsEntry);
 					}
 				}
 

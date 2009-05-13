@@ -464,7 +464,7 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl
 							(wikiPageResource.getTitle() == null) ||
 							!wikiPageResource.getTitle().equals(title)) {
 						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_N_T,
-							finderArgs, list);
+							finderArgs, wikiPageResource);
 					}
 				}
 

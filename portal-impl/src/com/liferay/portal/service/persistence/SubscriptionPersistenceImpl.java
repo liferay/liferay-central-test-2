@@ -1246,7 +1246,7 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl
 							(subscription.getClassNameId() != classNameId) ||
 							(subscription.getClassPK() != classPK)) {
 						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_U_C_C,
-							finderArgs, list);
+							finderArgs, subscription);
 					}
 				}
 

@@ -661,7 +661,7 @@ public class ExpandoRowPersistenceImpl extends BasePersistenceImpl
 					if ((expandoRow.getTableId() != tableId) ||
 							(expandoRow.getClassPK() != classPK)) {
 						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_T_C,
-							finderArgs, list);
+							finderArgs, expandoRow);
 					}
 				}
 

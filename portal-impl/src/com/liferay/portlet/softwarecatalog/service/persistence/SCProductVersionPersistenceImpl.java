@@ -711,7 +711,7 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl
 							!scProductVersion.getDirectDownloadURL()
 												 .equals(directDownloadURL)) {
 						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_DIRECTDOWNLOADURL,
-							finderArgs, list);
+							finderArgs, scProductVersion);
 					}
 				}
 

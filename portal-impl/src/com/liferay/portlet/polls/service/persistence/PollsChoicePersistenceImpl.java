@@ -978,7 +978,7 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl
 							(pollsChoice.getName() == null) ||
 							!pollsChoice.getName().equals(name)) {
 						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_Q_N,
-							finderArgs, list);
+							finderArgs, pollsChoice);
 					}
 				}
 

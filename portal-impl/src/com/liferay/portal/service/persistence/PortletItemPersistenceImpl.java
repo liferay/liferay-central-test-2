@@ -1075,7 +1075,7 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl
 							!portletItem.getPortletId().equals(portletId) ||
 							(portletItem.getClassNameId() != classNameId)) {
 						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_N_P_C,
-							finderArgs, list);
+							finderArgs, portletItem);
 					}
 				}
 

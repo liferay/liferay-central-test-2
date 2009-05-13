@@ -730,7 +730,7 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl
 							(pluginSetting.getPluginType() == null) ||
 							!pluginSetting.getPluginType().equals(pluginType)) {
 						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_I_T,
-							finderArgs, list);
+							finderArgs, pluginSetting);
 					}
 				}
 

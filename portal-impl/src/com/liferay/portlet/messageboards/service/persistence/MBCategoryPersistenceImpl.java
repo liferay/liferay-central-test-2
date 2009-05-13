@@ -773,7 +773,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl
 							!mbCategory.getUuid().equals(uuid) ||
 							(mbCategory.getGroupId() != groupId)) {
 						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
-							finderArgs, list);
+							finderArgs, mbCategory);
 					}
 				}
 

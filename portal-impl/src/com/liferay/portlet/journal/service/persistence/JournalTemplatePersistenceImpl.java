@@ -862,7 +862,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl
 							!journalTemplate.getUuid().equals(uuid) ||
 							(journalTemplate.getGroupId() != groupId)) {
 						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
-							finderArgs, list);
+							finderArgs, journalTemplate);
 					}
 				}
 
@@ -1441,7 +1441,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl
 
 					if ((journalTemplate.getSmallImageId() != smallImageId)) {
 						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_SMALLIMAGEID,
-							finderArgs, list);
+							finderArgs, journalTemplate);
 					}
 				}
 
@@ -1568,7 +1568,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl
 							(journalTemplate.getTemplateId() == null) ||
 							!journalTemplate.getTemplateId().equals(templateId)) {
 						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_T,
-							finderArgs, list);
+							finderArgs, journalTemplate);
 					}
 				}
 

@@ -764,7 +764,7 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl
 							!mbMailingList.getUuid().equals(uuid) ||
 							(mbMailingList.getGroupId() != groupId)) {
 						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
-							finderArgs, list);
+							finderArgs, mbMailingList);
 					}
 				}
 
@@ -869,7 +869,7 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl
 
 					if ((mbMailingList.getCategoryId() != categoryId)) {
 						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_CATEGORYID,
-							finderArgs, list);
+							finderArgs, mbMailingList);
 					}
 				}
 

@@ -992,7 +992,7 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 					if ((tasksReview.getUserId() != userId) ||
 							(tasksReview.getProposalId() != proposalId)) {
 						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U_P,
-							finderArgs, list);
+							finderArgs, tasksReview);
 					}
 				}
 

@@ -1231,7 +1231,7 @@ public class TagsPropertyPersistenceImpl extends BasePersistenceImpl
 							(tagsProperty.getKey() == null) ||
 							!tagsProperty.getKey().equals(key)) {
 						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_E_K,
-							finderArgs, list);
+							finderArgs, tagsProperty);
 					}
 				}
 
