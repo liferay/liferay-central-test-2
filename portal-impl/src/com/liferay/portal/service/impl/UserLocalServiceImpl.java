@@ -2257,15 +2257,15 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		screenName = getScreenName(screenName);
 		emailAddress = emailAddress.trim().toLowerCase();
 		openId = openId.trim();
-		aimSn.trim().toLowerCase();
-		facebookSn.trim().toLowerCase();
-		icqSn.trim().toLowerCase();
-		jabberSn.trim().toLowerCase();
-		msnSn.trim().toLowerCase();
-		mySpaceSn.trim().toLowerCase();
-		skypeSn.trim().toLowerCase();
-		twitterSn.trim().toLowerCase();
-		ymSn.trim().toLowerCase();
+		aimSn = aimSn.trim().toLowerCase();
+		facebookSn = facebookSn.trim().toLowerCase();
+		icqSn = icqSn.trim().toLowerCase();
+		jabberSn = jabberSn.trim().toLowerCase();
+		msnSn = msnSn.trim().toLowerCase();
+		mySpaceSn = mySpaceSn.trim().toLowerCase();
+		skypeSn = skypeSn.trim().toLowerCase();
+		twitterSn = twitterSn.trim().toLowerCase();
+		ymSn = ymSn.trim().toLowerCase();
 		Date now = new Date();
 
 		validate(userId, screenName, emailAddress, firstName, lastName, smsSn);
