@@ -54,16 +54,6 @@ public class ${entity.name}JSONSerializer {
 		return jsonObj;
 	}
 
-	public static JSONArray toJSONArray(List<${packagePath}.model.${entity.name}> models) {
-		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
-
-		for (${entity.name} model : models) {
-			jsonArray.put(toJSONObject(model));
-		}
-
-		return jsonArray;
-	}
-
 	public static JSONArray toJSONArray(${packagePath}.model.${entity.name}[] models) {
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
@@ -79,6 +69,16 @@ public class ${entity.name}JSONSerializer {
 
 		for (${entity.name}[] model : models) {
 			jsonArray.put(toJSONArray(model));
+		}
+
+		return jsonArray;
+	}
+
+	public static JSONArray toJSONArray(List<${packagePath}.model.${entity.name}> models) {
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
+
+		for (${entity.name} model : models) {
+			jsonArray.put(toJSONObject(model));
 		}
 
 		return jsonArray;

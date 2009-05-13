@@ -40,16 +40,6 @@ public class ${entity.name}Soap implements Serializable {
 		return soapModel;
 	}
 
-	public static ${entity.name}Soap[] toSoapModels(List<${entity.name}> models) {
-		List<${entity.name}Soap> soapModels = new ArrayList<${entity.name}Soap>(models.size());
-
-		for (${entity.name} model : models) {
-			soapModels.add(toSoapModel(model));
-		}
-
-		return soapModels.toArray(new ${entity.name}Soap[soapModels.size()]);
-	}
-
 	public static ${entity.name}Soap[] toSoapModels(${entity.name}[] models) {
 		${entity.name}Soap[] soapModels = new ${entity.name}Soap[models.length];
 
@@ -62,7 +52,7 @@ public class ${entity.name}Soap implements Serializable {
 
 	public static ${entity.name}Soap[][] toSoapModels(${entity.name}[][] models) {
 		${entity.name}Soap[][] soapModels = null;
-		
+
 		if (models.length > 0) {
 			soapModels = new ${entity.name}Soap[models.length][models[0].length];
 		}
@@ -75,6 +65,16 @@ public class ${entity.name}Soap implements Serializable {
 		}
 
 		return soapModels;
+	}
+
+	public static ${entity.name}Soap[] toSoapModels(List<${entity.name}> models) {
+		List<${entity.name}Soap> soapModels = new ArrayList<${entity.name}Soap>(models.size());
+
+		for (${entity.name} model : models) {
+			soapModels.add(toSoapModel(model));
+		}
+
+		return soapModels.toArray(new ${entity.name}Soap[soapModels.size()]);
 	}
 
 	public ${entity.name}Soap() {
