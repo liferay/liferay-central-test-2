@@ -31,7 +31,10 @@ import com.liferay.portal.kernel.cal.DayAndPosition;
 import com.liferay.portal.kernel.cal.Duration;
 import com.liferay.portal.kernel.cal.Recurrence;
 import com.liferay.portal.kernel.cal.RecurrenceSerializer;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.messaging.DestinationNames;
+import com.liferay.portal.kernel.messaging.MessageBusUtil;
+import com.liferay.portal.kernel.messaging.ServiceRequestStatus;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Http;
@@ -64,9 +67,10 @@ import com.liferay.portal.service.http.LayoutServiceHttp;
 import com.liferay.portal.service.permission.GroupPermissionUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.communities.messaging.LayoutsLocalPublisherRequest;
+import com.liferay.portlet.communities.messaging.LayoutsRemotePublisherRequest;
 
 import java.io.ByteArrayInputStream;
-
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -74,8 +78,8 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map.Entry;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.TimeZone;
 
 import javax.portlet.ActionRequest;
@@ -991,15 +995,40 @@ public class StagingUtil {
 				startCal.getTime(), schedulerEndDate, description);
 		}
 		else {
-			if (scope.equals("all-pages")) {
-				publishLayouts(
-					sourceGroupId, targetGroupId, privateLayout, parameterMap,
-					startDate, endDate);
+			ThemeDisplay themeDisplay =
+				(ThemeDisplay)actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
+
+			ServiceRequestStatus requestStatus = new ServiceRequestStatus();
+			requestStatus.startTimer();
+			String command =
+				LayoutsLocalPublisherRequest.COMMAND_SELECTED_PAGES;
+			try {
+				if (scope.equals("all-pages")) {
+					command = LayoutsLocalPublisherRequest.COMMAND_ALL_PAGES;
+					publishLayouts(
+						sourceGroupId, targetGroupId, privateLayout, parameterMap,
+						startDate, endDate);
+				}
+				else {
+					publishLayouts(
+						sourceGroupId, targetGroupId, privateLayout, layoutIdMap,
+						parameterMap, startDate, endDate);
+				}
 			}
-			else {
-				publishLayouts(
-					sourceGroupId, targetGroupId, privateLayout, layoutIdMap,
-					parameterMap, startDate, endDate);
+			catch (Exception e) {
+				requestStatus.setError(e);
+				throw e;
+			}
+			finally {
+				requestStatus.stopTimer();
+				LayoutsLocalPublisherRequest publisherRequest =
+					new LayoutsLocalPublisherRequest(
+						command, themeDisplay.getUserId(), sourceGroupId,
+						targetGroupId, privateLayout, layoutIdMap, parameterMap,
+						startDate, endDate);
+				requestStatus.setOriginalServiceRequest(publisherRequest);
+				MessageBusUtil.sendMessage(
+					DestinationNames.SERVICE_REQUEST_STATUS, requestStatus);
 			}
 		}
 	}
@@ -1106,11 +1135,34 @@ public class StagingUtil {
 				schedulerEndDate, description);
 		}
 		else {
-			copyRemoteLayouts(
-				groupId, privateLayout, layoutIdMap, parameterMap,
-				remoteAddress, remotePort, secureConnection, remoteGroupId,
-				remotePrivateLayout, getStagingParameters(actionRequest),
-				startDate, endDate);
+			ThemeDisplay themeDisplay =
+				(ThemeDisplay)actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
+
+			ServiceRequestStatus requestStatus = new ServiceRequestStatus();
+			requestStatus.startTimer();
+			try {
+				copyRemoteLayouts(
+					groupId, privateLayout, layoutIdMap, parameterMap,
+					remoteAddress, remotePort, secureConnection, remoteGroupId,
+					remotePrivateLayout, getStagingParameters(actionRequest),
+					startDate, endDate);
+			}
+			catch (Exception e) {
+				requestStatus.setError(e);
+				throw e;
+			}
+			finally {
+				requestStatus.stopTimer();
+				LayoutsRemotePublisherRequest publisherRequest =
+					new LayoutsRemotePublisherRequest(
+						themeDisplay.getUserId(), groupId, privateLayout,
+						layoutIdMap, parameterMap, remoteAddress,
+						remotePort, secureConnection,
+						remoteGroupId, remotePrivateLayout, startDate, endDate);
+				requestStatus.setOriginalServiceRequest(publisherRequest);
+				MessageBusUtil.sendMessage(
+					DestinationNames.SERVICE_REQUEST_STATUS, requestStatus);
+			}
 		}
 	}
 

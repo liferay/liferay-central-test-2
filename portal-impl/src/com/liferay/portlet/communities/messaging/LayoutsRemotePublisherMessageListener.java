@@ -23,10 +23,11 @@
 package com.liferay.portlet.communities.messaging;
 
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.messaging.BaseServiceRequestMessageListener;
 import com.liferay.portal.kernel.messaging.Message;
-import com.liferay.portal.kernel.messaging.MessageListener;
+import com.liferay.portal.kernel.messaging.ServiceRequestStatus;
+import com.liferay.portal.kernel.messaging.sender.MessageSender;
+import com.liferay.portal.kernel.messaging.sender.SingleDestinationMessageSender;
 import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.model.User;
@@ -45,23 +46,26 @@ import java.util.Map;
  * </i></b></a>
  *
  * @author Bruno Farache
- *
  */
-public class LayoutsRemotePublisherMessageListener implements MessageListener {
+public class LayoutsRemotePublisherMessageListener
+	extends BaseServiceRequestMessageListener {
 
-	public void receive(Message message) {
-		try {
-			doReceive(message);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
+	public LayoutsRemotePublisherMessageListener(
+		SingleDestinationMessageSender messageSender,
+		MessageSender responseSender) {
+
+		super(messageSender, responseSender);
 	}
 
-	protected void doReceive(Message message) throws Exception {
+
+	protected void doReceive(
+			Message requestMessage, ServiceRequestStatus serviceRequestStatus)
+		throws Exception {
+
 		LayoutsRemotePublisherRequest publisherRequest =
-			(LayoutsRemotePublisherRequest)JSONFactoryUtil.deserialize(
-				(String)message.getPayload());
+			(LayoutsRemotePublisherRequest) JSONFactoryUtil.deserialize(
+				(String) requestMessage.getPayload());
+		serviceRequestStatus.setOriginalServiceRequest(publisherRequest);
 
 		long userId = publisherRequest.getUserId();
 		long sourceGroupId = publisherRequest.getSourceGroupId();
@@ -106,8 +110,4 @@ public class LayoutsRemotePublisherMessageListener implements MessageListener {
 			remoteAddress, remotePort, secureConnection, remoteGroupId,
 			remotePrivateLayout, parameterMap, startDate, endDate);
 	}
-
-	private static Log _log =
-		LogFactoryUtil.getLog(LayoutsRemotePublisherMessageListener.class);
-
 }

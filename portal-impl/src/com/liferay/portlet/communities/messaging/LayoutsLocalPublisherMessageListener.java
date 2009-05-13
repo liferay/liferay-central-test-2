@@ -23,10 +23,11 @@
 package com.liferay.portlet.communities.messaging;
 
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.messaging.BaseServiceRequestMessageListener;
 import com.liferay.portal.kernel.messaging.Message;
-import com.liferay.portal.kernel.messaging.MessageListener;
+import com.liferay.portal.kernel.messaging.ServiceRequestStatus;
+import com.liferay.portal.kernel.messaging.sender.MessageSender;
+import com.liferay.portal.kernel.messaging.sender.SingleDestinationMessageSender;
 import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.model.User;
@@ -47,24 +48,26 @@ import java.util.Map;
  * @author Bruno Farache
  *
  */
-public class LayoutsLocalPublisherMessageListener implements MessageListener {
+public class LayoutsLocalPublisherMessageListener
+	extends BaseServiceRequestMessageListener {
 
-	public void receive(Message message) {
-		try {
-			doReceive(message);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
+	public LayoutsLocalPublisherMessageListener(
+		SingleDestinationMessageSender messageSender,
+		MessageSender responseSender) {
+
+		super(messageSender, responseSender);
 	}
 
-	protected void doReceive(Message message) throws Exception {
+	protected void doReceive(
+			Message requestMessage, ServiceRequestStatus serviceRequestStatus)
+		throws Exception {
+		
 		LayoutsLocalPublisherRequest publisherRequest =
 			(LayoutsLocalPublisherRequest)JSONFactoryUtil.deserialize(
-				(String)message.getPayload());
+				(String)requestMessage.getPayload());
+		serviceRequestStatus.setOriginalServiceRequest(publisherRequest);
 
 		String command = publisherRequest.getCommand();
-
 		long userId = publisherRequest.getUserId();
 		long sourceGroupId = publisherRequest.getSourceGroupId();
 		long targetGroupId = publisherRequest.getTargetGroupId();
@@ -114,8 +117,4 @@ public class LayoutsLocalPublisherMessageListener implements MessageListener {
 				parameterMap, startDate, endDate);
 		}
 	}
-
-	private static Log _log =
-		LogFactoryUtil.getLog(LayoutsLocalPublisherMessageListener.class);
-
 }
