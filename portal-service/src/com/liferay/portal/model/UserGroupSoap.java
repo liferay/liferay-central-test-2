@@ -58,6 +58,33 @@ public class UserGroupSoap implements Serializable {
 		return soapModel;
 	}
 
+	public static UserGroupSoap[] toSoapModels(UserGroup[] models) {
+		UserGroupSoap[] soapModels = new UserGroupSoap[models.length];
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModel(models[i]);
+		}
+
+		return soapModels;
+	}
+
+	public static UserGroupSoap[][] toSoapModels(UserGroup[][] models) {
+		UserGroupSoap[][] soapModels = null;
+
+		if (models.length > 0) {
+			soapModels = new UserGroupSoap[models.length][models[0].length];
+		}
+		else {
+			soapModels = new UserGroupSoap[0][0];
+		}
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModels(models[i]);
+		}
+
+		return soapModels;
+	}
+
 	public static UserGroupSoap[] toSoapModels(List<UserGroup> models) {
 		List<UserGroupSoap> soapModels = new ArrayList<UserGroupSoap>(models.size());
 

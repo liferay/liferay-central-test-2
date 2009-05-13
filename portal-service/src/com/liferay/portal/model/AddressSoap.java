@@ -72,6 +72,33 @@ public class AddressSoap implements Serializable {
 		return soapModel;
 	}
 
+	public static AddressSoap[] toSoapModels(Address[] models) {
+		AddressSoap[] soapModels = new AddressSoap[models.length];
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModel(models[i]);
+		}
+
+		return soapModels;
+	}
+
+	public static AddressSoap[][] toSoapModels(Address[][] models) {
+		AddressSoap[][] soapModels = null;
+
+		if (models.length > 0) {
+			soapModels = new AddressSoap[models.length][models[0].length];
+		}
+		else {
+			soapModels = new AddressSoap[0][0];
+		}
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModels(models[i]);
+		}
+
+		return soapModels;
+	}
+
 	public static AddressSoap[] toSoapModels(List<Address> models) {
 		List<AddressSoap> soapModels = new ArrayList<AddressSoap>(models.size());
 

@@ -57,6 +57,33 @@ public class ExpandoRowSoap implements Serializable {
 		return soapModel;
 	}
 
+	public static ExpandoRowSoap[] toSoapModels(ExpandoRow[] models) {
+		ExpandoRowSoap[] soapModels = new ExpandoRowSoap[models.length];
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModel(models[i]);
+		}
+
+		return soapModels;
+	}
+
+	public static ExpandoRowSoap[][] toSoapModels(ExpandoRow[][] models) {
+		ExpandoRowSoap[][] soapModels = null;
+
+		if (models.length > 0) {
+			soapModels = new ExpandoRowSoap[models.length][models[0].length];
+		}
+		else {
+			soapModels = new ExpandoRowSoap[0][0];
+		}
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModels(models[i]);
+		}
+
+		return soapModels;
+	}
+
 	public static ExpandoRowSoap[] toSoapModels(List<ExpandoRow> models) {
 		List<ExpandoRowSoap> soapModels = new ArrayList<ExpandoRowSoap>(models.size());
 

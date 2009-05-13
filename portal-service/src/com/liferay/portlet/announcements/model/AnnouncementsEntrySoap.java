@@ -72,6 +72,35 @@ public class AnnouncementsEntrySoap implements Serializable {
 	}
 
 	public static AnnouncementsEntrySoap[] toSoapModels(
+		AnnouncementsEntry[] models) {
+		AnnouncementsEntrySoap[] soapModels = new AnnouncementsEntrySoap[models.length];
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModel(models[i]);
+		}
+
+		return soapModels;
+	}
+
+	public static AnnouncementsEntrySoap[][] toSoapModels(
+		AnnouncementsEntry[][] models) {
+		AnnouncementsEntrySoap[][] soapModels = null;
+
+		if (models.length > 0) {
+			soapModels = new AnnouncementsEntrySoap[models.length][models[0].length];
+		}
+		else {
+			soapModels = new AnnouncementsEntrySoap[0][0];
+		}
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModels(models[i]);
+		}
+
+		return soapModels;
+	}
+
+	public static AnnouncementsEntrySoap[] toSoapModels(
 		List<AnnouncementsEntry> models) {
 		List<AnnouncementsEntrySoap> soapModels = new ArrayList<AnnouncementsEntrySoap>(models.size());
 

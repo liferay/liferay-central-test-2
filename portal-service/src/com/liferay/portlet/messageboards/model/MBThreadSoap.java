@@ -63,6 +63,33 @@ public class MBThreadSoap implements Serializable {
 		return soapModel;
 	}
 
+	public static MBThreadSoap[] toSoapModels(MBThread[] models) {
+		MBThreadSoap[] soapModels = new MBThreadSoap[models.length];
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModel(models[i]);
+		}
+
+		return soapModels;
+	}
+
+	public static MBThreadSoap[][] toSoapModels(MBThread[][] models) {
+		MBThreadSoap[][] soapModels = null;
+
+		if (models.length > 0) {
+			soapModels = new MBThreadSoap[models.length][models[0].length];
+		}
+		else {
+			soapModels = new MBThreadSoap[0][0];
+		}
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModels(models[i]);
+		}
+
+		return soapModels;
+	}
+
 	public static MBThreadSoap[] toSoapModels(List<MBThread> models) {
 		List<MBThreadSoap> soapModels = new ArrayList<MBThreadSoap>(models.size());
 

@@ -61,6 +61,35 @@ public class ResourcePermissionSoap implements Serializable {
 	}
 
 	public static ResourcePermissionSoap[] toSoapModels(
+		ResourcePermission[] models) {
+		ResourcePermissionSoap[] soapModels = new ResourcePermissionSoap[models.length];
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModel(models[i]);
+		}
+
+		return soapModels;
+	}
+
+	public static ResourcePermissionSoap[][] toSoapModels(
+		ResourcePermission[][] models) {
+		ResourcePermissionSoap[][] soapModels = null;
+
+		if (models.length > 0) {
+			soapModels = new ResourcePermissionSoap[models.length][models[0].length];
+		}
+		else {
+			soapModels = new ResourcePermissionSoap[0][0];
+		}
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModels(models[i]);
+		}
+
+		return soapModels;
+	}
+
+	public static ResourcePermissionSoap[] toSoapModels(
 		List<ResourcePermission> models) {
 		List<ResourcePermissionSoap> soapModels = new ArrayList<ResourcePermissionSoap>(models.size());
 

@@ -77,6 +77,33 @@ public class JournalFeedSoap implements Serializable {
 		return soapModel;
 	}
 
+	public static JournalFeedSoap[] toSoapModels(JournalFeed[] models) {
+		JournalFeedSoap[] soapModels = new JournalFeedSoap[models.length];
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModel(models[i]);
+		}
+
+		return soapModels;
+	}
+
+	public static JournalFeedSoap[][] toSoapModels(JournalFeed[][] models) {
+		JournalFeedSoap[][] soapModels = null;
+
+		if (models.length > 0) {
+			soapModels = new JournalFeedSoap[models.length][models[0].length];
+		}
+		else {
+			soapModels = new JournalFeedSoap[0][0];
+		}
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModels(models[i]);
+		}
+
+		return soapModels;
+	}
+
 	public static JournalFeedSoap[] toSoapModels(List<JournalFeed> models) {
 		List<JournalFeedSoap> soapModels = new ArrayList<JournalFeedSoap>(models.size());
 

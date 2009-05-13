@@ -75,6 +75,33 @@ public class LayoutSoap implements Serializable {
 		return soapModel;
 	}
 
+	public static LayoutSoap[] toSoapModels(Layout[] models) {
+		LayoutSoap[] soapModels = new LayoutSoap[models.length];
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModel(models[i]);
+		}
+
+		return soapModels;
+	}
+
+	public static LayoutSoap[][] toSoapModels(Layout[][] models) {
+		LayoutSoap[][] soapModels = null;
+
+		if (models.length > 0) {
+			soapModels = new LayoutSoap[models.length][models[0].length];
+		}
+		else {
+			soapModels = new LayoutSoap[0][0];
+		}
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModels(models[i]);
+		}
+
+		return soapModels;
+	}
+
 	public static LayoutSoap[] toSoapModels(List<Layout> models) {
 		List<LayoutSoap> soapModels = new ArrayList<LayoutSoap>(models.size());
 

@@ -60,6 +60,33 @@ public class CountrySoap implements Serializable {
 		return soapModel;
 	}
 
+	public static CountrySoap[] toSoapModels(Country[] models) {
+		CountrySoap[] soapModels = new CountrySoap[models.length];
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModel(models[i]);
+		}
+
+		return soapModels;
+	}
+
+	public static CountrySoap[][] toSoapModels(Country[][] models) {
+		CountrySoap[][] soapModels = null;
+
+		if (models.length > 0) {
+			soapModels = new CountrySoap[models.length][models[0].length];
+		}
+		else {
+			soapModels = new CountrySoap[0][0];
+		}
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModels(models[i]);
+		}
+
+		return soapModels;
+	}
+
 	public static CountrySoap[] toSoapModels(List<Country> models) {
 		List<CountrySoap> soapModels = new ArrayList<CountrySoap>(models.size());
 

@@ -88,6 +88,27 @@ public class PhoneJSONSerializer {
 		return jsonObj;
 	}
 
+	public static JSONArray toJSONArray(com.liferay.portal.model.Phone[] models) {
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
+
+		for (Phone model : models) {
+			jsonArray.put(toJSONObject(model));
+		}
+
+		return jsonArray;
+	}
+
+	public static JSONArray toJSONArray(
+		com.liferay.portal.model.Phone[][] models) {
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
+
+		for (Phone[] model : models) {
+			jsonArray.put(toJSONArray(model));
+		}
+
+		return jsonArray;
+	}
+
 	public static JSONArray toJSONArray(
 		List<com.liferay.portal.model.Phone> models) {
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();

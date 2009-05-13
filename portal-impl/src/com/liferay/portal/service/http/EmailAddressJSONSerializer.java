@@ -88,6 +88,28 @@ public class EmailAddressJSONSerializer {
 	}
 
 	public static JSONArray toJSONArray(
+		com.liferay.portal.model.EmailAddress[] models) {
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
+
+		for (EmailAddress model : models) {
+			jsonArray.put(toJSONObject(model));
+		}
+
+		return jsonArray;
+	}
+
+	public static JSONArray toJSONArray(
+		com.liferay.portal.model.EmailAddress[][] models) {
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
+
+		for (EmailAddress[] model : models) {
+			jsonArray.put(toJSONArray(model));
+		}
+
+		return jsonArray;
+	}
+
+	public static JSONArray toJSONArray(
 		List<com.liferay.portal.model.EmailAddress> models) {
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 

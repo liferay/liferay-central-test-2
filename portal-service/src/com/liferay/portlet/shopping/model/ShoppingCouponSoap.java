@@ -72,6 +72,33 @@ public class ShoppingCouponSoap implements Serializable {
 		return soapModel;
 	}
 
+	public static ShoppingCouponSoap[] toSoapModels(ShoppingCoupon[] models) {
+		ShoppingCouponSoap[] soapModels = new ShoppingCouponSoap[models.length];
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModel(models[i]);
+		}
+
+		return soapModels;
+	}
+
+	public static ShoppingCouponSoap[][] toSoapModels(ShoppingCoupon[][] models) {
+		ShoppingCouponSoap[][] soapModels = null;
+
+		if (models.length > 0) {
+			soapModels = new ShoppingCouponSoap[models.length][models[0].length];
+		}
+		else {
+			soapModels = new ShoppingCouponSoap[0][0];
+		}
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModels(models[i]);
+		}
+
+		return soapModels;
+	}
+
 	public static ShoppingCouponSoap[] toSoapModels(List<ShoppingCoupon> models) {
 		List<ShoppingCouponSoap> soapModels = new ArrayList<ShoppingCouponSoap>(models.size());
 

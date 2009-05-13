@@ -57,6 +57,33 @@ public class ShardSoap implements Serializable {
 		return soapModel;
 	}
 
+	public static ShardSoap[] toSoapModels(Shard[] models) {
+		ShardSoap[] soapModels = new ShardSoap[models.length];
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModel(models[i]);
+		}
+
+		return soapModels;
+	}
+
+	public static ShardSoap[][] toSoapModels(Shard[][] models) {
+		ShardSoap[][] soapModels = null;
+
+		if (models.length > 0) {
+			soapModels = new ShardSoap[models.length][models[0].length];
+		}
+		else {
+			soapModels = new ShardSoap[0][0];
+		}
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModels(models[i]);
+		}
+
+		return soapModels;
+	}
+
 	public static ShardSoap[] toSoapModels(List<Shard> models) {
 		List<ShardSoap> soapModels = new ArrayList<ShardSoap>(models.size());
 

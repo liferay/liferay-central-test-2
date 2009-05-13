@@ -87,6 +87,28 @@ public class MembershipRequestJSONSerializer {
 	}
 
 	public static JSONArray toJSONArray(
+		com.liferay.portal.model.MembershipRequest[] models) {
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
+
+		for (MembershipRequest model : models) {
+			jsonArray.put(toJSONObject(model));
+		}
+
+		return jsonArray;
+	}
+
+	public static JSONArray toJSONArray(
+		com.liferay.portal.model.MembershipRequest[][] models) {
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
+
+		for (MembershipRequest[] model : models) {
+			jsonArray.put(toJSONArray(model));
+		}
+
+		return jsonArray;
+	}
+
+	public static JSONArray toJSONArray(
 		List<com.liferay.portal.model.MembershipRequest> models) {
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 

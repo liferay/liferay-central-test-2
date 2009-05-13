@@ -59,6 +59,35 @@ public class OrgGroupPermissionSoap implements Serializable {
 	}
 
 	public static OrgGroupPermissionSoap[] toSoapModels(
+		OrgGroupPermission[] models) {
+		OrgGroupPermissionSoap[] soapModels = new OrgGroupPermissionSoap[models.length];
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModel(models[i]);
+		}
+
+		return soapModels;
+	}
+
+	public static OrgGroupPermissionSoap[][] toSoapModels(
+		OrgGroupPermission[][] models) {
+		OrgGroupPermissionSoap[][] soapModels = null;
+
+		if (models.length > 0) {
+			soapModels = new OrgGroupPermissionSoap[models.length][models[0].length];
+		}
+		else {
+			soapModels = new OrgGroupPermissionSoap[0][0];
+		}
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModels(models[i]);
+		}
+
+		return soapModels;
+	}
+
+	public static OrgGroupPermissionSoap[] toSoapModels(
 		List<OrgGroupPermission> models) {
 		List<OrgGroupPermissionSoap> soapModels = new ArrayList<OrgGroupPermissionSoap>(models.size());
 

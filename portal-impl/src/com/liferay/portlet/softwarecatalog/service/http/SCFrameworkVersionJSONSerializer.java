@@ -89,6 +89,28 @@ public class SCFrameworkVersionJSONSerializer {
 	}
 
 	public static JSONArray toJSONArray(
+		com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion[] models) {
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
+
+		for (SCFrameworkVersion model : models) {
+			jsonArray.put(toJSONObject(model));
+		}
+
+		return jsonArray;
+	}
+
+	public static JSONArray toJSONArray(
+		com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion[][] models) {
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
+
+		for (SCFrameworkVersion[] model : models) {
+			jsonArray.put(toJSONArray(model));
+		}
+
+		return jsonArray;
+	}
+
+	public static JSONArray toJSONArray(
 		List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion> models) {
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 

@@ -105,6 +105,33 @@ public class ShoppingOrderSoap implements Serializable {
 		return soapModel;
 	}
 
+	public static ShoppingOrderSoap[] toSoapModels(ShoppingOrder[] models) {
+		ShoppingOrderSoap[] soapModels = new ShoppingOrderSoap[models.length];
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModel(models[i]);
+		}
+
+		return soapModels;
+	}
+
+	public static ShoppingOrderSoap[][] toSoapModels(ShoppingOrder[][] models) {
+		ShoppingOrderSoap[][] soapModels = null;
+
+		if (models.length > 0) {
+			soapModels = new ShoppingOrderSoap[models.length][models[0].length];
+		}
+		else {
+			soapModels = new ShoppingOrderSoap[0][0];
+		}
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModels(models[i]);
+		}
+
+		return soapModels;
+	}
+
 	public static ShoppingOrderSoap[] toSoapModels(List<ShoppingOrder> models) {
 		List<ShoppingOrderSoap> soapModels = new ArrayList<ShoppingOrderSoap>(models.size());
 

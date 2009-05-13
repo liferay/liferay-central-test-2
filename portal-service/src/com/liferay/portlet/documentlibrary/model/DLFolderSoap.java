@@ -66,6 +66,33 @@ public class DLFolderSoap implements Serializable {
 		return soapModel;
 	}
 
+	public static DLFolderSoap[] toSoapModels(DLFolder[] models) {
+		DLFolderSoap[] soapModels = new DLFolderSoap[models.length];
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModel(models[i]);
+		}
+
+		return soapModels;
+	}
+
+	public static DLFolderSoap[][] toSoapModels(DLFolder[][] models) {
+		DLFolderSoap[][] soapModels = null;
+
+		if (models.length > 0) {
+			soapModels = new DLFolderSoap[models.length][models[0].length];
+		}
+		else {
+			soapModels = new DLFolderSoap[0][0];
+		}
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModels(models[i]);
+		}
+
+		return soapModels;
+	}
+
 	public static DLFolderSoap[] toSoapModels(List<DLFolder> models) {
 		List<DLFolderSoap> soapModels = new ArrayList<DLFolderSoap>(models.size());
 

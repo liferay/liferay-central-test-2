@@ -67,6 +67,33 @@ public class TasksReviewSoap implements Serializable {
 		return soapModel;
 	}
 
+	public static TasksReviewSoap[] toSoapModels(TasksReview[] models) {
+		TasksReviewSoap[] soapModels = new TasksReviewSoap[models.length];
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModel(models[i]);
+		}
+
+		return soapModels;
+	}
+
+	public static TasksReviewSoap[][] toSoapModels(TasksReview[][] models) {
+		TasksReviewSoap[][] soapModels = null;
+
+		if (models.length > 0) {
+			soapModels = new TasksReviewSoap[models.length][models[0].length];
+		}
+		else {
+			soapModels = new TasksReviewSoap[0][0];
+		}
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModels(models[i]);
+		}
+
+		return soapModels;
+	}
+
 	public static TasksReviewSoap[] toSoapModels(List<TasksReview> models) {
 		List<TasksReviewSoap> soapModels = new ArrayList<TasksReviewSoap>(models.size());
 

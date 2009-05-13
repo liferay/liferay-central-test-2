@@ -66,6 +66,28 @@ public class ExpandoValueJSONSerializer {
 	}
 
 	public static JSONArray toJSONArray(
+		com.liferay.portlet.expando.model.ExpandoValue[] models) {
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
+
+		for (ExpandoValue model : models) {
+			jsonArray.put(toJSONObject(model));
+		}
+
+		return jsonArray;
+	}
+
+	public static JSONArray toJSONArray(
+		com.liferay.portlet.expando.model.ExpandoValue[][] models) {
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
+
+		for (ExpandoValue[] model : models) {
+			jsonArray.put(toJSONArray(model));
+		}
+
+		return jsonArray;
+	}
+
+	public static JSONArray toJSONArray(
 		List<com.liferay.portlet.expando.model.ExpandoValue> models) {
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 

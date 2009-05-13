@@ -72,6 +72,33 @@ public class MBMessageSoap implements Serializable {
 		return soapModel;
 	}
 
+	public static MBMessageSoap[] toSoapModels(MBMessage[] models) {
+		MBMessageSoap[] soapModels = new MBMessageSoap[models.length];
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModel(models[i]);
+		}
+
+		return soapModels;
+	}
+
+	public static MBMessageSoap[][] toSoapModels(MBMessage[][] models) {
+		MBMessageSoap[][] soapModels = null;
+
+		if (models.length > 0) {
+			soapModels = new MBMessageSoap[models.length][models[0].length];
+		}
+		else {
+			soapModels = new MBMessageSoap[0][0];
+		}
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModels(models[i]);
+		}
+
+		return soapModels;
+	}
+
 	public static MBMessageSoap[] toSoapModels(List<MBMessage> models) {
 		List<MBMessageSoap> soapModels = new ArrayList<MBMessageSoap>(models.size());
 

@@ -66,6 +66,33 @@ public class PhoneSoap implements Serializable {
 		return soapModel;
 	}
 
+	public static PhoneSoap[] toSoapModels(Phone[] models) {
+		PhoneSoap[] soapModels = new PhoneSoap[models.length];
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModel(models[i]);
+		}
+
+		return soapModels;
+	}
+
+	public static PhoneSoap[][] toSoapModels(Phone[][] models) {
+		PhoneSoap[][] soapModels = null;
+
+		if (models.length > 0) {
+			soapModels = new PhoneSoap[models.length][models[0].length];
+		}
+		else {
+			soapModels = new PhoneSoap[0][0];
+		}
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModels(models[i]);
+		}
+
+		return soapModels;
+	}
+
 	public static PhoneSoap[] toSoapModels(List<Phone> models) {
 		List<PhoneSoap> soapModels = new ArrayList<PhoneSoap>(models.size());
 

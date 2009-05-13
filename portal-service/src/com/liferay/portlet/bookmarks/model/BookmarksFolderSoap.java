@@ -64,6 +64,34 @@ public class BookmarksFolderSoap implements Serializable {
 		return soapModel;
 	}
 
+	public static BookmarksFolderSoap[] toSoapModels(BookmarksFolder[] models) {
+		BookmarksFolderSoap[] soapModels = new BookmarksFolderSoap[models.length];
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModel(models[i]);
+		}
+
+		return soapModels;
+	}
+
+	public static BookmarksFolderSoap[][] toSoapModels(
+		BookmarksFolder[][] models) {
+		BookmarksFolderSoap[][] soapModels = null;
+
+		if (models.length > 0) {
+			soapModels = new BookmarksFolderSoap[models.length][models[0].length];
+		}
+		else {
+			soapModels = new BookmarksFolderSoap[0][0];
+		}
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModels(models[i]);
+		}
+
+		return soapModels;
+	}
+
 	public static BookmarksFolderSoap[] toSoapModels(
 		List<BookmarksFolder> models) {
 		List<BookmarksFolderSoap> soapModels = new ArrayList<BookmarksFolderSoap>(models.size());

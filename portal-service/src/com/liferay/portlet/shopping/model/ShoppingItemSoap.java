@@ -87,6 +87,33 @@ public class ShoppingItemSoap implements Serializable {
 		return soapModel;
 	}
 
+	public static ShoppingItemSoap[] toSoapModels(ShoppingItem[] models) {
+		ShoppingItemSoap[] soapModels = new ShoppingItemSoap[models.length];
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModel(models[i]);
+		}
+
+		return soapModels;
+	}
+
+	public static ShoppingItemSoap[][] toSoapModels(ShoppingItem[][] models) {
+		ShoppingItemSoap[][] soapModels = null;
+
+		if (models.length > 0) {
+			soapModels = new ShoppingItemSoap[models.length][models[0].length];
+		}
+		else {
+			soapModels = new ShoppingItemSoap[0][0];
+		}
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModels(models[i]);
+		}
+
+		return soapModels;
+	}
+
 	public static ShoppingItemSoap[] toSoapModels(List<ShoppingItem> models) {
 		List<ShoppingItemSoap> soapModels = new ArrayList<ShoppingItemSoap>(models.size());
 

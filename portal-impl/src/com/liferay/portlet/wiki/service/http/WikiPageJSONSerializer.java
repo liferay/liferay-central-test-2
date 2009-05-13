@@ -97,6 +97,28 @@ public class WikiPageJSONSerializer {
 	}
 
 	public static JSONArray toJSONArray(
+		com.liferay.portlet.wiki.model.WikiPage[] models) {
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
+
+		for (WikiPage model : models) {
+			jsonArray.put(toJSONObject(model));
+		}
+
+		return jsonArray;
+	}
+
+	public static JSONArray toJSONArray(
+		com.liferay.portlet.wiki.model.WikiPage[][] models) {
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
+
+		for (WikiPage[] model : models) {
+			jsonArray.put(toJSONArray(model));
+		}
+
+		return jsonArray;
+	}
+
+	public static JSONArray toJSONArray(
 		List<com.liferay.portlet.wiki.model.WikiPage> models) {
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 

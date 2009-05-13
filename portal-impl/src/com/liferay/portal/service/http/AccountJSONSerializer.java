@@ -93,6 +93,28 @@ public class AccountJSONSerializer {
 	}
 
 	public static JSONArray toJSONArray(
+		com.liferay.portal.model.Account[] models) {
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
+
+		for (Account model : models) {
+			jsonArray.put(toJSONObject(model));
+		}
+
+		return jsonArray;
+	}
+
+	public static JSONArray toJSONArray(
+		com.liferay.portal.model.Account[][] models) {
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
+
+		for (Account[] model : models) {
+			jsonArray.put(toJSONArray(model));
+		}
+
+		return jsonArray;
+	}
+
+	public static JSONArray toJSONArray(
 		List<com.liferay.portal.model.Account> models) {
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 

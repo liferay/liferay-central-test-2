@@ -64,6 +64,33 @@ public class DLFileVersionSoap implements Serializable {
 		return soapModel;
 	}
 
+	public static DLFileVersionSoap[] toSoapModels(DLFileVersion[] models) {
+		DLFileVersionSoap[] soapModels = new DLFileVersionSoap[models.length];
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModel(models[i]);
+		}
+
+		return soapModels;
+	}
+
+	public static DLFileVersionSoap[][] toSoapModels(DLFileVersion[][] models) {
+		DLFileVersionSoap[][] soapModels = null;
+
+		if (models.length > 0) {
+			soapModels = new DLFileVersionSoap[models.length][models[0].length];
+		}
+		else {
+			soapModels = new DLFileVersionSoap[0][0];
+		}
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModels(models[i]);
+		}
+
+		return soapModels;
+	}
+
 	public static DLFileVersionSoap[] toSoapModels(List<DLFileVersion> models) {
 		List<DLFileVersionSoap> soapModels = new ArrayList<DLFileVersionSoap>(models.size());
 

@@ -64,6 +64,33 @@ public class PortletItemSoap implements Serializable {
 		return soapModel;
 	}
 
+	public static PortletItemSoap[] toSoapModels(PortletItem[] models) {
+		PortletItemSoap[] soapModels = new PortletItemSoap[models.length];
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModel(models[i]);
+		}
+
+		return soapModels;
+	}
+
+	public static PortletItemSoap[][] toSoapModels(PortletItem[][] models) {
+		PortletItemSoap[][] soapModels = null;
+
+		if (models.length > 0) {
+			soapModels = new PortletItemSoap[models.length][models[0].length];
+		}
+		else {
+			soapModels = new PortletItemSoap[0][0];
+		}
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModels(models[i]);
+		}
+
+		return soapModels;
+	}
+
 	public static PortletItemSoap[] toSoapModels(List<PortletItem> models) {
 		List<PortletItemSoap> soapModels = new ArrayList<PortletItemSoap>(models.size());
 

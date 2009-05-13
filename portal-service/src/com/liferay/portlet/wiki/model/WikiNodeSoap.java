@@ -65,6 +65,33 @@ public class WikiNodeSoap implements Serializable {
 		return soapModel;
 	}
 
+	public static WikiNodeSoap[] toSoapModels(WikiNode[] models) {
+		WikiNodeSoap[] soapModels = new WikiNodeSoap[models.length];
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModel(models[i]);
+		}
+
+		return soapModels;
+	}
+
+	public static WikiNodeSoap[][] toSoapModels(WikiNode[][] models) {
+		WikiNodeSoap[][] soapModels = null;
+
+		if (models.length > 0) {
+			soapModels = new WikiNodeSoap[models.length][models[0].length];
+		}
+		else {
+			soapModels = new WikiNodeSoap[0][0];
+		}
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModels(models[i]);
+		}
+
+		return soapModels;
+	}
+
 	public static WikiNodeSoap[] toSoapModels(List<WikiNode> models) {
 		List<WikiNodeSoap> soapModels = new ArrayList<WikiNodeSoap>(models.size());
 

@@ -64,6 +64,33 @@ public class TagsVocabularySoap implements Serializable {
 		return soapModel;
 	}
 
+	public static TagsVocabularySoap[] toSoapModels(TagsVocabulary[] models) {
+		TagsVocabularySoap[] soapModels = new TagsVocabularySoap[models.length];
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModel(models[i]);
+		}
+
+		return soapModels;
+	}
+
+	public static TagsVocabularySoap[][] toSoapModels(TagsVocabulary[][] models) {
+		TagsVocabularySoap[][] soapModels = null;
+
+		if (models.length > 0) {
+			soapModels = new TagsVocabularySoap[models.length][models[0].length];
+		}
+		else {
+			soapModels = new TagsVocabularySoap[0][0];
+		}
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModels(models[i]);
+		}
+
+		return soapModels;
+	}
+
 	public static TagsVocabularySoap[] toSoapModels(List<TagsVocabulary> models) {
 		List<TagsVocabularySoap> soapModels = new ArrayList<TagsVocabularySoap>(models.size());
 

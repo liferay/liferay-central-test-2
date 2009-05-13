@@ -62,6 +62,33 @@ public class CompanySoap implements Serializable {
 		return soapModel;
 	}
 
+	public static CompanySoap[] toSoapModels(Company[] models) {
+		CompanySoap[] soapModels = new CompanySoap[models.length];
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModel(models[i]);
+		}
+
+		return soapModels;
+	}
+
+	public static CompanySoap[][] toSoapModels(Company[][] models) {
+		CompanySoap[][] soapModels = null;
+
+		if (models.length > 0) {
+			soapModels = new CompanySoap[models.length][models[0].length];
+		}
+		else {
+			soapModels = new CompanySoap[0][0];
+		}
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModels(models[i]);
+		}
+
+		return soapModels;
+	}
+
 	public static CompanySoap[] toSoapModels(List<Company> models) {
 		List<CompanySoap> soapModels = new ArrayList<CompanySoap>(models.size());
 

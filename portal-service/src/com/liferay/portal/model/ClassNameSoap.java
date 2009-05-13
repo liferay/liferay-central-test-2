@@ -55,6 +55,33 @@ public class ClassNameSoap implements Serializable {
 		return soapModel;
 	}
 
+	public static ClassNameSoap[] toSoapModels(ClassName[] models) {
+		ClassNameSoap[] soapModels = new ClassNameSoap[models.length];
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModel(models[i]);
+		}
+
+		return soapModels;
+	}
+
+	public static ClassNameSoap[][] toSoapModels(ClassName[][] models) {
+		ClassNameSoap[][] soapModels = null;
+
+		if (models.length > 0) {
+			soapModels = new ClassNameSoap[models.length][models[0].length];
+		}
+		else {
+			soapModels = new ClassNameSoap[0][0];
+		}
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModels(models[i]);
+		}
+
+		return soapModels;
+	}
+
 	public static ClassNameSoap[] toSoapModels(List<ClassName> models) {
 		List<ClassNameSoap> soapModels = new ArrayList<ClassNameSoap>(models.size());
 

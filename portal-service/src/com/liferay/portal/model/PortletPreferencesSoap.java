@@ -60,6 +60,35 @@ public class PortletPreferencesSoap implements Serializable {
 	}
 
 	public static PortletPreferencesSoap[] toSoapModels(
+		PortletPreferences[] models) {
+		PortletPreferencesSoap[] soapModels = new PortletPreferencesSoap[models.length];
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModel(models[i]);
+		}
+
+		return soapModels;
+	}
+
+	public static PortletPreferencesSoap[][] toSoapModels(
+		PortletPreferences[][] models) {
+		PortletPreferencesSoap[][] soapModels = null;
+
+		if (models.length > 0) {
+			soapModels = new PortletPreferencesSoap[models.length][models[0].length];
+		}
+		else {
+			soapModels = new PortletPreferencesSoap[0][0];
+		}
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModels(models[i]);
+		}
+
+		return soapModels;
+	}
+
+	public static PortletPreferencesSoap[] toSoapModels(
 		List<PortletPreferences> models) {
 		List<PortletPreferencesSoap> soapModels = new ArrayList<PortletPreferencesSoap>(models.size());
 

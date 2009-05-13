@@ -62,6 +62,35 @@ public class JournalArticleImageSoap implements Serializable {
 	}
 
 	public static JournalArticleImageSoap[] toSoapModels(
+		JournalArticleImage[] models) {
+		JournalArticleImageSoap[] soapModels = new JournalArticleImageSoap[models.length];
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModel(models[i]);
+		}
+
+		return soapModels;
+	}
+
+	public static JournalArticleImageSoap[][] toSoapModels(
+		JournalArticleImage[][] models) {
+		JournalArticleImageSoap[][] soapModels = null;
+
+		if (models.length > 0) {
+			soapModels = new JournalArticleImageSoap[models.length][models[0].length];
+		}
+		else {
+			soapModels = new JournalArticleImageSoap[0][0];
+		}
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModels(models[i]);
+		}
+
+		return soapModels;
+	}
+
+	public static JournalArticleImageSoap[] toSoapModels(
 		List<JournalArticleImage> models) {
 		List<JournalArticleImageSoap> soapModels = new ArrayList<JournalArticleImageSoap>(models.size());
 

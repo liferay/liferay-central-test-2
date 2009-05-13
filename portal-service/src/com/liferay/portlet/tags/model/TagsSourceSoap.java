@@ -57,6 +57,33 @@ public class TagsSourceSoap implements Serializable {
 		return soapModel;
 	}
 
+	public static TagsSourceSoap[] toSoapModels(TagsSource[] models) {
+		TagsSourceSoap[] soapModels = new TagsSourceSoap[models.length];
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModel(models[i]);
+		}
+
+		return soapModels;
+	}
+
+	public static TagsSourceSoap[][] toSoapModels(TagsSource[][] models) {
+		TagsSourceSoap[][] soapModels = null;
+
+		if (models.length > 0) {
+			soapModels = new TagsSourceSoap[models.length][models[0].length];
+		}
+		else {
+			soapModels = new TagsSourceSoap[0][0];
+		}
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModels(models[i]);
+		}
+
+		return soapModels;
+	}
+
 	public static TagsSourceSoap[] toSoapModels(List<TagsSource> models) {
 		List<TagsSourceSoap> soapModels = new ArrayList<TagsSourceSoap>(models.size());
 

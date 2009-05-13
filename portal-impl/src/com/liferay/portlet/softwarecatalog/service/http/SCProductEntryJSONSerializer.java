@@ -94,6 +94,28 @@ public class SCProductEntryJSONSerializer {
 	}
 
 	public static JSONArray toJSONArray(
+		com.liferay.portlet.softwarecatalog.model.SCProductEntry[] models) {
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
+
+		for (SCProductEntry model : models) {
+			jsonArray.put(toJSONObject(model));
+		}
+
+		return jsonArray;
+	}
+
+	public static JSONArray toJSONArray(
+		com.liferay.portlet.softwarecatalog.model.SCProductEntry[][] models) {
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
+
+		for (SCProductEntry[] model : models) {
+			jsonArray.put(toJSONArray(model));
+		}
+
+		return jsonArray;
+	}
+
+	public static JSONArray toJSONArray(
 		List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> models) {
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 

@@ -61,6 +61,33 @@ public class WebDAVPropsSoap implements Serializable {
 		return soapModel;
 	}
 
+	public static WebDAVPropsSoap[] toSoapModels(WebDAVProps[] models) {
+		WebDAVPropsSoap[] soapModels = new WebDAVPropsSoap[models.length];
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModel(models[i]);
+		}
+
+		return soapModels;
+	}
+
+	public static WebDAVPropsSoap[][] toSoapModels(WebDAVProps[][] models) {
+		WebDAVPropsSoap[][] soapModels = null;
+
+		if (models.length > 0) {
+			soapModels = new WebDAVPropsSoap[models.length][models[0].length];
+		}
+		else {
+			soapModels = new WebDAVPropsSoap[0][0];
+		}
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModels(models[i]);
+		}
+
+		return soapModels;
+	}
+
 	public static WebDAVPropsSoap[] toSoapModels(List<WebDAVProps> models) {
 		List<WebDAVPropsSoap> soapModels = new ArrayList<WebDAVPropsSoap>(models.size());
 

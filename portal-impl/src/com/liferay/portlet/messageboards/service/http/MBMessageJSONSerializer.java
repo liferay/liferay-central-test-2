@@ -96,6 +96,28 @@ public class MBMessageJSONSerializer {
 	}
 
 	public static JSONArray toJSONArray(
+		com.liferay.portlet.messageboards.model.MBMessage[] models) {
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
+
+		for (MBMessage model : models) {
+			jsonArray.put(toJSONObject(model));
+		}
+
+		return jsonArray;
+	}
+
+	public static JSONArray toJSONArray(
+		com.liferay.portlet.messageboards.model.MBMessage[][] models) {
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
+
+		for (MBMessage[] model : models) {
+			jsonArray.put(toJSONArray(model));
+		}
+
+		return jsonArray;
+	}
+
+	public static JSONArray toJSONArray(
 		List<com.liferay.portlet.messageboards.model.MBMessage> models) {
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 

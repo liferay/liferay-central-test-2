@@ -70,6 +70,33 @@ public class OrgLaborSoap implements Serializable {
 		return soapModel;
 	}
 
+	public static OrgLaborSoap[] toSoapModels(OrgLabor[] models) {
+		OrgLaborSoap[] soapModels = new OrgLaborSoap[models.length];
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModel(models[i]);
+		}
+
+		return soapModels;
+	}
+
+	public static OrgLaborSoap[][] toSoapModels(OrgLabor[][] models) {
+		OrgLaborSoap[][] soapModels = null;
+
+		if (models.length > 0) {
+			soapModels = new OrgLaborSoap[models.length][models[0].length];
+		}
+		else {
+			soapModels = new OrgLaborSoap[0][0];
+		}
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModels(models[i]);
+		}
+
+		return soapModels;
+	}
+
 	public static OrgLaborSoap[] toSoapModels(List<OrgLabor> models) {
 		List<OrgLaborSoap> soapModels = new ArrayList<OrgLaborSoap>(models.size());
 

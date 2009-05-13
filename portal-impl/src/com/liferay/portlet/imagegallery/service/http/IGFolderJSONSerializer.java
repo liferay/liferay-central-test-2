@@ -88,6 +88,28 @@ public class IGFolderJSONSerializer {
 	}
 
 	public static JSONArray toJSONArray(
+		com.liferay.portlet.imagegallery.model.IGFolder[] models) {
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
+
+		for (IGFolder model : models) {
+			jsonArray.put(toJSONObject(model));
+		}
+
+		return jsonArray;
+	}
+
+	public static JSONArray toJSONArray(
+		com.liferay.portlet.imagegallery.model.IGFolder[][] models) {
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
+
+		for (IGFolder[] model : models) {
+			jsonArray.put(toJSONArray(model));
+		}
+
+		return jsonArray;
+	}
+
+	public static JSONArray toJSONArray(
 		List<com.liferay.portlet.imagegallery.model.IGFolder> models) {
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 

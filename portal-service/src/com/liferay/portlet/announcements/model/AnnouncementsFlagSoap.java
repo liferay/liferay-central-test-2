@@ -60,6 +60,35 @@ public class AnnouncementsFlagSoap implements Serializable {
 	}
 
 	public static AnnouncementsFlagSoap[] toSoapModels(
+		AnnouncementsFlag[] models) {
+		AnnouncementsFlagSoap[] soapModels = new AnnouncementsFlagSoap[models.length];
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModel(models[i]);
+		}
+
+		return soapModels;
+	}
+
+	public static AnnouncementsFlagSoap[][] toSoapModels(
+		AnnouncementsFlag[][] models) {
+		AnnouncementsFlagSoap[][] soapModels = null;
+
+		if (models.length > 0) {
+			soapModels = new AnnouncementsFlagSoap[models.length][models[0].length];
+		}
+		else {
+			soapModels = new AnnouncementsFlagSoap[0][0];
+		}
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModels(models[i]);
+		}
+
+		return soapModels;
+	}
+
+	public static AnnouncementsFlagSoap[] toSoapModels(
 		List<AnnouncementsFlag> models) {
 		List<AnnouncementsFlagSoap> soapModels = new ArrayList<AnnouncementsFlagSoap>(models.size());
 

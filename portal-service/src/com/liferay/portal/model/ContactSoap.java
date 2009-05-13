@@ -84,6 +84,33 @@ public class ContactSoap implements Serializable {
 		return soapModel;
 	}
 
+	public static ContactSoap[] toSoapModels(Contact[] models) {
+		ContactSoap[] soapModels = new ContactSoap[models.length];
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModel(models[i]);
+		}
+
+		return soapModels;
+	}
+
+	public static ContactSoap[][] toSoapModels(Contact[][] models) {
+		ContactSoap[][] soapModels = null;
+
+		if (models.length > 0) {
+			soapModels = new ContactSoap[models.length][models[0].length];
+		}
+		else {
+			soapModels = new ContactSoap[0][0];
+		}
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModels(models[i]);
+		}
+
+		return soapModels;
+	}
+
 	public static ContactSoap[] toSoapModels(List<Contact> models) {
 		List<ContactSoap> soapModels = new ArrayList<ContactSoap>(models.size());
 

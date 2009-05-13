@@ -64,6 +64,33 @@ public class TagsEntrySoap implements Serializable {
 		return soapModel;
 	}
 
+	public static TagsEntrySoap[] toSoapModels(TagsEntry[] models) {
+		TagsEntrySoap[] soapModels = new TagsEntrySoap[models.length];
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModel(models[i]);
+		}
+
+		return soapModels;
+	}
+
+	public static TagsEntrySoap[][] toSoapModels(TagsEntry[][] models) {
+		TagsEntrySoap[][] soapModels = null;
+
+		if (models.length > 0) {
+			soapModels = new TagsEntrySoap[models.length][models[0].length];
+		}
+		else {
+			soapModels = new TagsEntrySoap[0][0];
+		}
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModels(models[i]);
+		}
+
+		return soapModels;
+	}
+
 	public static TagsEntrySoap[] toSoapModels(List<TagsEntry> models) {
 		List<TagsEntrySoap> soapModels = new ArrayList<TagsEntrySoap>(models.size());
 

@@ -79,6 +79,33 @@ public class MBMailingListSoap implements Serializable {
 		return soapModel;
 	}
 
+	public static MBMailingListSoap[] toSoapModels(MBMailingList[] models) {
+		MBMailingListSoap[] soapModels = new MBMailingListSoap[models.length];
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModel(models[i]);
+		}
+
+		return soapModels;
+	}
+
+	public static MBMailingListSoap[][] toSoapModels(MBMailingList[][] models) {
+		MBMailingListSoap[][] soapModels = null;
+
+		if (models.length > 0) {
+			soapModels = new MBMailingListSoap[models.length][models[0].length];
+		}
+		else {
+			soapModels = new MBMailingListSoap[0][0];
+		}
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModels(models[i]);
+		}
+
+		return soapModels;
+	}
+
 	public static MBMailingListSoap[] toSoapModels(List<MBMailingList> models) {
 		List<MBMailingListSoap> soapModels = new ArrayList<MBMailingListSoap>(models.size());
 

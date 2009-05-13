@@ -62,6 +62,33 @@ public class MBBanSoap implements Serializable {
 		return soapModel;
 	}
 
+	public static MBBanSoap[] toSoapModels(MBBan[] models) {
+		MBBanSoap[] soapModels = new MBBanSoap[models.length];
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModel(models[i]);
+		}
+
+		return soapModels;
+	}
+
+	public static MBBanSoap[][] toSoapModels(MBBan[][] models) {
+		MBBanSoap[][] soapModels = null;
+
+		if (models.length > 0) {
+			soapModels = new MBBanSoap[models.length][models[0].length];
+		}
+		else {
+			soapModels = new MBBanSoap[0][0];
+		}
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModels(models[i]);
+		}
+
+		return soapModels;
+	}
+
 	public static MBBanSoap[] toSoapModels(List<MBBan> models) {
 		List<MBBanSoap> soapModels = new ArrayList<MBBanSoap>(models.size());
 

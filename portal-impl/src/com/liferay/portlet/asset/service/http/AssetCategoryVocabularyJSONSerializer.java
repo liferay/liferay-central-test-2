@@ -87,6 +87,28 @@ public class AssetCategoryVocabularyJSONSerializer {
 	}
 
 	public static JSONArray toJSONArray(
+		com.liferay.portlet.asset.model.AssetCategoryVocabulary[] models) {
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
+
+		for (AssetCategoryVocabulary model : models) {
+			jsonArray.put(toJSONObject(model));
+		}
+
+		return jsonArray;
+	}
+
+	public static JSONArray toJSONArray(
+		com.liferay.portlet.asset.model.AssetCategoryVocabulary[][] models) {
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
+
+		for (AssetCategoryVocabulary[] model : models) {
+			jsonArray.put(toJSONArray(model));
+		}
+
+		return jsonArray;
+	}
+
+	public static JSONArray toJSONArray(
 		List<com.liferay.portlet.asset.model.AssetCategoryVocabulary> models) {
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 

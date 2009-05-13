@@ -137,6 +137,28 @@ public class TagsAssetJSONSerializer {
 	}
 
 	public static JSONArray toJSONArray(
+		com.liferay.portlet.tags.model.TagsAsset[] models) {
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
+
+		for (TagsAsset model : models) {
+			jsonArray.put(toJSONObject(model));
+		}
+
+		return jsonArray;
+	}
+
+	public static JSONArray toJSONArray(
+		com.liferay.portlet.tags.model.TagsAsset[][] models) {
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
+
+		for (TagsAsset[] model : models) {
+			jsonArray.put(toJSONArray(model));
+		}
+
+		return jsonArray;
+	}
+
+	public static JSONArray toJSONArray(
 		List<com.liferay.portlet.tags.model.TagsAsset> models) {
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 

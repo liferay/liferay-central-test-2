@@ -64,6 +64,33 @@ public class AssetCategorySoap implements Serializable {
 		return soapModel;
 	}
 
+	public static AssetCategorySoap[] toSoapModels(AssetCategory[] models) {
+		AssetCategorySoap[] soapModels = new AssetCategorySoap[models.length];
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModel(models[i]);
+		}
+
+		return soapModels;
+	}
+
+	public static AssetCategorySoap[][] toSoapModels(AssetCategory[][] models) {
+		AssetCategorySoap[][] soapModels = null;
+
+		if (models.length > 0) {
+			soapModels = new AssetCategorySoap[models.length][models[0].length];
+		}
+		else {
+			soapModels = new AssetCategorySoap[0][0];
+		}
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModels(models[i]);
+		}
+
+		return soapModels;
+	}
+
 	public static AssetCategorySoap[] toSoapModels(List<AssetCategory> models) {
 		List<AssetCategorySoap> soapModels = new ArrayList<AssetCategorySoap>(models.size());
 

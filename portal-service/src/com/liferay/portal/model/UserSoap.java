@@ -90,6 +90,33 @@ public class UserSoap implements Serializable {
 		return soapModel;
 	}
 
+	public static UserSoap[] toSoapModels(User[] models) {
+		UserSoap[] soapModels = new UserSoap[models.length];
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModel(models[i]);
+		}
+
+		return soapModels;
+	}
+
+	public static UserSoap[][] toSoapModels(User[][] models) {
+		UserSoap[][] soapModels = null;
+
+		if (models.length > 0) {
+			soapModels = new UserSoap[models.length][models[0].length];
+		}
+		else {
+			soapModels = new UserSoap[0][0];
+		}
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModels(models[i]);
+		}
+
+		return soapModels;
+	}
+
 	public static UserSoap[] toSoapModels(List<User> models) {
 		List<UserSoap> soapModels = new ArrayList<UserSoap>(models.size());
 

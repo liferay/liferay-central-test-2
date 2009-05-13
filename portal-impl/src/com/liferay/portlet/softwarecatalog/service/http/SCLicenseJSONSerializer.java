@@ -64,6 +64,28 @@ public class SCLicenseJSONSerializer {
 	}
 
 	public static JSONArray toJSONArray(
+		com.liferay.portlet.softwarecatalog.model.SCLicense[] models) {
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
+
+		for (SCLicense model : models) {
+			jsonArray.put(toJSONObject(model));
+		}
+
+		return jsonArray;
+	}
+
+	public static JSONArray toJSONArray(
+		com.liferay.portlet.softwarecatalog.model.SCLicense[][] models) {
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
+
+		for (SCLicense[] model : models) {
+			jsonArray.put(toJSONArray(model));
+		}
+
+		return jsonArray;
+	}
+
+	public static JSONArray toJSONArray(
 		List<com.liferay.portlet.softwarecatalog.model.SCLicense> models) {
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 

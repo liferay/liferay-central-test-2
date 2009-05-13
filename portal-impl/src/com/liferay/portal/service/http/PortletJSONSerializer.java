@@ -62,6 +62,28 @@ public class PortletJSONSerializer {
 	}
 
 	public static JSONArray toJSONArray(
+		com.liferay.portal.model.Portlet[] models) {
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
+
+		for (Portlet model : models) {
+			jsonArray.put(toJSONObject(model));
+		}
+
+		return jsonArray;
+	}
+
+	public static JSONArray toJSONArray(
+		com.liferay.portal.model.Portlet[][] models) {
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
+
+		for (Portlet[] model : models) {
+			jsonArray.put(toJSONArray(model));
+		}
+
+		return jsonArray;
+	}
+
+	public static JSONArray toJSONArray(
 		List<com.liferay.portal.model.Portlet> models) {
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 

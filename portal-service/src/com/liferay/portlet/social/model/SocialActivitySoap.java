@@ -65,6 +65,33 @@ public class SocialActivitySoap implements Serializable {
 		return soapModel;
 	}
 
+	public static SocialActivitySoap[] toSoapModels(SocialActivity[] models) {
+		SocialActivitySoap[] soapModels = new SocialActivitySoap[models.length];
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModel(models[i]);
+		}
+
+		return soapModels;
+	}
+
+	public static SocialActivitySoap[][] toSoapModels(SocialActivity[][] models) {
+		SocialActivitySoap[][] soapModels = null;
+
+		if (models.length > 0) {
+			soapModels = new SocialActivitySoap[models.length][models[0].length];
+		}
+		else {
+			soapModels = new SocialActivitySoap[0][0];
+		}
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModels(models[i]);
+		}
+
+		return soapModels;
+	}
+
 	public static SocialActivitySoap[] toSoapModels(List<SocialActivity> models) {
 		List<SocialActivitySoap> soapModels = new ArrayList<SocialActivitySoap>(models.size());
 

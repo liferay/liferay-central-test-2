@@ -59,6 +59,35 @@ public class ShoppingItemFieldSoap implements Serializable {
 	}
 
 	public static ShoppingItemFieldSoap[] toSoapModels(
+		ShoppingItemField[] models) {
+		ShoppingItemFieldSoap[] soapModels = new ShoppingItemFieldSoap[models.length];
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModel(models[i]);
+		}
+
+		return soapModels;
+	}
+
+	public static ShoppingItemFieldSoap[][] toSoapModels(
+		ShoppingItemField[][] models) {
+		ShoppingItemFieldSoap[][] soapModels = null;
+
+		if (models.length > 0) {
+			soapModels = new ShoppingItemFieldSoap[models.length][models[0].length];
+		}
+		else {
+			soapModels = new ShoppingItemFieldSoap[0][0];
+		}
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModels(models[i]);
+		}
+
+		return soapModels;
+	}
+
+	public static ShoppingItemFieldSoap[] toSoapModels(
 		List<ShoppingItemField> models) {
 		List<ShoppingItemFieldSoap> soapModels = new ArrayList<ShoppingItemFieldSoap>(models.size());
 

@@ -57,6 +57,33 @@ public class ResourceActionSoap implements Serializable {
 		return soapModel;
 	}
 
+	public static ResourceActionSoap[] toSoapModels(ResourceAction[] models) {
+		ResourceActionSoap[] soapModels = new ResourceActionSoap[models.length];
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModel(models[i]);
+		}
+
+		return soapModels;
+	}
+
+	public static ResourceActionSoap[][] toSoapModels(ResourceAction[][] models) {
+		ResourceActionSoap[][] soapModels = null;
+
+		if (models.length > 0) {
+			soapModels = new ResourceActionSoap[models.length][models[0].length];
+		}
+		else {
+			soapModels = new ResourceActionSoap[0][0];
+		}
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModels(models[i]);
+		}
+
+		return soapModels;
+	}
+
 	public static ResourceActionSoap[] toSoapModels(List<ResourceAction> models) {
 		List<ResourceActionSoap> soapModels = new ArrayList<ResourceActionSoap>(models.size());
 

@@ -59,6 +59,33 @@ public class PluginSettingSoap implements Serializable {
 		return soapModel;
 	}
 
+	public static PluginSettingSoap[] toSoapModels(PluginSetting[] models) {
+		PluginSettingSoap[] soapModels = new PluginSettingSoap[models.length];
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModel(models[i]);
+		}
+
+		return soapModels;
+	}
+
+	public static PluginSettingSoap[][] toSoapModels(PluginSetting[][] models) {
+		PluginSettingSoap[][] soapModels = null;
+
+		if (models.length > 0) {
+			soapModels = new PluginSettingSoap[models.length][models[0].length];
+		}
+		else {
+			soapModels = new PluginSettingSoap[0][0];
+		}
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModels(models[i]);
+		}
+
+		return soapModels;
+	}
+
 	public static PluginSettingSoap[] toSoapModels(List<PluginSetting> models) {
 		List<PluginSettingSoap> soapModels = new ArrayList<PluginSettingSoap>(models.size());
 

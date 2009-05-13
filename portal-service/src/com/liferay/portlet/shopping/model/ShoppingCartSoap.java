@@ -65,6 +65,33 @@ public class ShoppingCartSoap implements Serializable {
 		return soapModel;
 	}
 
+	public static ShoppingCartSoap[] toSoapModels(ShoppingCart[] models) {
+		ShoppingCartSoap[] soapModels = new ShoppingCartSoap[models.length];
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModel(models[i]);
+		}
+
+		return soapModels;
+	}
+
+	public static ShoppingCartSoap[][] toSoapModels(ShoppingCart[][] models) {
+		ShoppingCartSoap[][] soapModels = null;
+
+		if (models.length > 0) {
+			soapModels = new ShoppingCartSoap[models.length][models[0].length];
+		}
+		else {
+			soapModels = new ShoppingCartSoap[0][0];
+		}
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModels(models[i]);
+		}
+
+		return soapModels;
+	}
+
 	public static ShoppingCartSoap[] toSoapModels(List<ShoppingCart> models) {
 		List<ShoppingCartSoap> soapModels = new ArrayList<ShoppingCartSoap>(models.size());
 

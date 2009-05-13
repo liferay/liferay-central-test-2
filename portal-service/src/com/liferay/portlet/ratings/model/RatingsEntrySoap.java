@@ -63,6 +63,33 @@ public class RatingsEntrySoap implements Serializable {
 		return soapModel;
 	}
 
+	public static RatingsEntrySoap[] toSoapModels(RatingsEntry[] models) {
+		RatingsEntrySoap[] soapModels = new RatingsEntrySoap[models.length];
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModel(models[i]);
+		}
+
+		return soapModels;
+	}
+
+	public static RatingsEntrySoap[][] toSoapModels(RatingsEntry[][] models) {
+		RatingsEntrySoap[][] soapModels = null;
+
+		if (models.length > 0) {
+			soapModels = new RatingsEntrySoap[models.length][models[0].length];
+		}
+		else {
+			soapModels = new RatingsEntrySoap[0][0];
+		}
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModels(models[i]);
+		}
+
+		return soapModels;
+	}
+
 	public static RatingsEntrySoap[] toSoapModels(List<RatingsEntry> models) {
 		List<RatingsEntrySoap> soapModels = new ArrayList<RatingsEntrySoap>(models.size());
 

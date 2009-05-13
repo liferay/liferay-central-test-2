@@ -70,6 +70,33 @@ public class AccountSoap implements Serializable {
 		return soapModel;
 	}
 
+	public static AccountSoap[] toSoapModels(Account[] models) {
+		AccountSoap[] soapModels = new AccountSoap[models.length];
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModel(models[i]);
+		}
+
+		return soapModels;
+	}
+
+	public static AccountSoap[][] toSoapModels(Account[][] models) {
+		AccountSoap[][] soapModels = null;
+
+		if (models.length > 0) {
+			soapModels = new AccountSoap[models.length][models[0].length];
+		}
+		else {
+			soapModels = new AccountSoap[0][0];
+		}
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModels(models[i]);
+		}
+
+		return soapModels;
+	}
+
 	public static AccountSoap[] toSoapModels(List<Account> models) {
 		List<AccountSoap> soapModels = new ArrayList<AccountSoap>(models.size());
 

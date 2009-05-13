@@ -116,6 +116,28 @@ public class ContactJSONSerializer {
 	}
 
 	public static JSONArray toJSONArray(
+		com.liferay.portal.model.Contact[] models) {
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
+
+		for (Contact model : models) {
+			jsonArray.put(toJSONObject(model));
+		}
+
+		return jsonArray;
+	}
+
+	public static JSONArray toJSONArray(
+		com.liferay.portal.model.Contact[][] models) {
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
+
+		for (Contact[] model : models) {
+			jsonArray.put(toJSONArray(model));
+		}
+
+		return jsonArray;
+	}
+
+	public static JSONArray toJSONArray(
 		List<com.liferay.portal.model.Contact> models) {
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 

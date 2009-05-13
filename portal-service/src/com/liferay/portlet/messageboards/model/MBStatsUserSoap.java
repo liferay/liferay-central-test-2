@@ -59,6 +59,33 @@ public class MBStatsUserSoap implements Serializable {
 		return soapModel;
 	}
 
+	public static MBStatsUserSoap[] toSoapModels(MBStatsUser[] models) {
+		MBStatsUserSoap[] soapModels = new MBStatsUserSoap[models.length];
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModel(models[i]);
+		}
+
+		return soapModels;
+	}
+
+	public static MBStatsUserSoap[][] toSoapModels(MBStatsUser[][] models) {
+		MBStatsUserSoap[][] soapModels = null;
+
+		if (models.length > 0) {
+			soapModels = new MBStatsUserSoap[models.length][models[0].length];
+		}
+		else {
+			soapModels = new MBStatsUserSoap[0][0];
+		}
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModels(models[i]);
+		}
+
+		return soapModels;
+	}
+
 	public static MBStatsUserSoap[] toSoapModels(List<MBStatsUser> models) {
 		List<MBStatsUserSoap> soapModels = new ArrayList<MBStatsUserSoap>(models.size());
 

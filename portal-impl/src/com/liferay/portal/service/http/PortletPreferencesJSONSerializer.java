@@ -63,6 +63,28 @@ public class PortletPreferencesJSONSerializer {
 	}
 
 	public static JSONArray toJSONArray(
+		com.liferay.portal.model.PortletPreferences[] models) {
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
+
+		for (PortletPreferences model : models) {
+			jsonArray.put(toJSONObject(model));
+		}
+
+		return jsonArray;
+	}
+
+	public static JSONArray toJSONArray(
+		com.liferay.portal.model.PortletPreferences[][] models) {
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
+
+		for (PortletPreferences[] model : models) {
+			jsonArray.put(toJSONArray(model));
+		}
+
+		return jsonArray;
+	}
+
+	public static JSONArray toJSONArray(
 		List<com.liferay.portal.model.PortletPreferences> models) {
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 

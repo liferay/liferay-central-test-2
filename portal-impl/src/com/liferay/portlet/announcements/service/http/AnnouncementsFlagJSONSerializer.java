@@ -74,6 +74,28 @@ public class AnnouncementsFlagJSONSerializer {
 	}
 
 	public static JSONArray toJSONArray(
+		com.liferay.portlet.announcements.model.AnnouncementsFlag[] models) {
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
+
+		for (AnnouncementsFlag model : models) {
+			jsonArray.put(toJSONObject(model));
+		}
+
+		return jsonArray;
+	}
+
+	public static JSONArray toJSONArray(
+		com.liferay.portlet.announcements.model.AnnouncementsFlag[][] models) {
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
+
+		for (AnnouncementsFlag[] model : models) {
+			jsonArray.put(toJSONArray(model));
+		}
+
+		return jsonArray;
+	}
+
+	public static JSONArray toJSONArray(
 		List<com.liferay.portlet.announcements.model.AnnouncementsFlag> models) {
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 

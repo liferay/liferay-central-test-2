@@ -63,6 +63,33 @@ public class SubscriptionSoap implements Serializable {
 		return soapModel;
 	}
 
+	public static SubscriptionSoap[] toSoapModels(Subscription[] models) {
+		SubscriptionSoap[] soapModels = new SubscriptionSoap[models.length];
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModel(models[i]);
+		}
+
+		return soapModels;
+	}
+
+	public static SubscriptionSoap[][] toSoapModels(Subscription[][] models) {
+		SubscriptionSoap[][] soapModels = null;
+
+		if (models.length > 0) {
+			soapModels = new SubscriptionSoap[models.length][models[0].length];
+		}
+		else {
+			soapModels = new SubscriptionSoap[0][0];
+		}
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModels(models[i]);
+		}
+
+		return soapModels;
+	}
+
 	public static SubscriptionSoap[] toSoapModels(List<Subscription> models) {
 		List<SubscriptionSoap> soapModels = new ArrayList<SubscriptionSoap>(models.size());
 

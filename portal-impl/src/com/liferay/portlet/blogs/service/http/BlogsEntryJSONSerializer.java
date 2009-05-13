@@ -102,6 +102,28 @@ public class BlogsEntryJSONSerializer {
 	}
 
 	public static JSONArray toJSONArray(
+		com.liferay.portlet.blogs.model.BlogsEntry[] models) {
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
+
+		for (BlogsEntry model : models) {
+			jsonArray.put(toJSONObject(model));
+		}
+
+		return jsonArray;
+	}
+
+	public static JSONArray toJSONArray(
+		com.liferay.portlet.blogs.model.BlogsEntry[][] models) {
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
+
+		for (BlogsEntry[] model : models) {
+			jsonArray.put(toJSONArray(model));
+		}
+
+		return jsonArray;
+	}
+
+	public static JSONArray toJSONArray(
 		List<com.liferay.portlet.blogs.model.BlogsEntry> models) {
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 

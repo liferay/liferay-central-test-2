@@ -88,6 +88,28 @@ public class TagsVocabularyJSONSerializer {
 	}
 
 	public static JSONArray toJSONArray(
+		com.liferay.portlet.tags.model.TagsVocabulary[] models) {
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
+
+		for (TagsVocabulary model : models) {
+			jsonArray.put(toJSONObject(model));
+		}
+
+		return jsonArray;
+	}
+
+	public static JSONArray toJSONArray(
+		com.liferay.portlet.tags.model.TagsVocabulary[][] models) {
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
+
+		for (TagsVocabulary[] model : models) {
+			jsonArray.put(toJSONArray(model));
+		}
+
+		return jsonArray;
+	}
+
+	public static JSONArray toJSONArray(
 		List<com.liferay.portlet.tags.model.TagsVocabulary> models) {
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 

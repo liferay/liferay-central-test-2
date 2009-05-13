@@ -61,6 +61,33 @@ public class DLFileRankSoap implements Serializable {
 		return soapModel;
 	}
 
+	public static DLFileRankSoap[] toSoapModels(DLFileRank[] models) {
+		DLFileRankSoap[] soapModels = new DLFileRankSoap[models.length];
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModel(models[i]);
+		}
+
+		return soapModels;
+	}
+
+	public static DLFileRankSoap[][] toSoapModels(DLFileRank[][] models) {
+		DLFileRankSoap[][] soapModels = null;
+
+		if (models.length > 0) {
+			soapModels = new DLFileRankSoap[models.length][models[0].length];
+		}
+		else {
+			soapModels = new DLFileRankSoap[0][0];
+		}
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModels(models[i]);
+		}
+
+		return soapModels;
+	}
+
 	public static DLFileRankSoap[] toSoapModels(List<DLFileRank> models) {
 		List<DLFileRankSoap> soapModels = new ArrayList<DLFileRankSoap>(models.size());
 

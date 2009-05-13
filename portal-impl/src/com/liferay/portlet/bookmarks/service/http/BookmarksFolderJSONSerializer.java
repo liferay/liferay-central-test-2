@@ -88,6 +88,28 @@ public class BookmarksFolderJSONSerializer {
 	}
 
 	public static JSONArray toJSONArray(
+		com.liferay.portlet.bookmarks.model.BookmarksFolder[] models) {
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
+
+		for (BookmarksFolder model : models) {
+			jsonArray.put(toJSONObject(model));
+		}
+
+		return jsonArray;
+	}
+
+	public static JSONArray toJSONArray(
+		com.liferay.portlet.bookmarks.model.BookmarksFolder[][] models) {
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
+
+		for (BookmarksFolder[] model : models) {
+			jsonArray.put(toJSONArray(model));
+		}
+
+		return jsonArray;
+	}
+
+	public static JSONArray toJSONArray(
 		List<com.liferay.portlet.bookmarks.model.BookmarksFolder> models) {
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 

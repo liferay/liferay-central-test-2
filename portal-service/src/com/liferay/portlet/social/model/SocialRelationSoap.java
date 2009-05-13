@@ -61,6 +61,33 @@ public class SocialRelationSoap implements Serializable {
 		return soapModel;
 	}
 
+	public static SocialRelationSoap[] toSoapModels(SocialRelation[] models) {
+		SocialRelationSoap[] soapModels = new SocialRelationSoap[models.length];
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModel(models[i]);
+		}
+
+		return soapModels;
+	}
+
+	public static SocialRelationSoap[][] toSoapModels(SocialRelation[][] models) {
+		SocialRelationSoap[][] soapModels = null;
+
+		if (models.length > 0) {
+			soapModels = new SocialRelationSoap[models.length][models[0].length];
+		}
+		else {
+			soapModels = new SocialRelationSoap[0][0];
+		}
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModels(models[i]);
+		}
+
+		return soapModels;
+	}
+
 	public static SocialRelationSoap[] toSoapModels(List<SocialRelation> models) {
 		List<SocialRelationSoap> soapModels = new ArrayList<SocialRelationSoap>(models.size());
 

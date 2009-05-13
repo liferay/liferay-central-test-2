@@ -56,6 +56,33 @@ public class BrowserTrackerSoap implements Serializable {
 		return soapModel;
 	}
 
+	public static BrowserTrackerSoap[] toSoapModels(BrowserTracker[] models) {
+		BrowserTrackerSoap[] soapModels = new BrowserTrackerSoap[models.length];
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModel(models[i]);
+		}
+
+		return soapModels;
+	}
+
+	public static BrowserTrackerSoap[][] toSoapModels(BrowserTracker[][] models) {
+		BrowserTrackerSoap[][] soapModels = null;
+
+		if (models.length > 0) {
+			soapModels = new BrowserTrackerSoap[models.length][models[0].length];
+		}
+		else {
+			soapModels = new BrowserTrackerSoap[0][0];
+		}
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModels(models[i]);
+		}
+
+		return soapModels;
+	}
+
 	public static BrowserTrackerSoap[] toSoapModels(List<BrowserTracker> models) {
 		List<BrowserTrackerSoap> soapModels = new ArrayList<BrowserTrackerSoap>(models.size());
 

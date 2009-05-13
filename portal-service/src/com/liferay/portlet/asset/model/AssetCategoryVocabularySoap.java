@@ -65,6 +65,35 @@ public class AssetCategoryVocabularySoap implements Serializable {
 	}
 
 	public static AssetCategoryVocabularySoap[] toSoapModels(
+		AssetCategoryVocabulary[] models) {
+		AssetCategoryVocabularySoap[] soapModels = new AssetCategoryVocabularySoap[models.length];
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModel(models[i]);
+		}
+
+		return soapModels;
+	}
+
+	public static AssetCategoryVocabularySoap[][] toSoapModels(
+		AssetCategoryVocabulary[][] models) {
+		AssetCategoryVocabularySoap[][] soapModels = null;
+
+		if (models.length > 0) {
+			soapModels = new AssetCategoryVocabularySoap[models.length][models[0].length];
+		}
+		else {
+			soapModels = new AssetCategoryVocabularySoap[0][0];
+		}
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModels(models[i]);
+		}
+
+		return soapModels;
+	}
+
+	public static AssetCategoryVocabularySoap[] toSoapModels(
 		List<AssetCategoryVocabulary> models) {
 		List<AssetCategoryVocabularySoap> soapModels = new ArrayList<AssetCategoryVocabularySoap>(models.size());
 

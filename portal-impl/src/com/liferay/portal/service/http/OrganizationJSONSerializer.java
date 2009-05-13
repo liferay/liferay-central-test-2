@@ -69,6 +69,28 @@ public class OrganizationJSONSerializer {
 	}
 
 	public static JSONArray toJSONArray(
+		com.liferay.portal.model.Organization[] models) {
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
+
+		for (Organization model : models) {
+			jsonArray.put(toJSONObject(model));
+		}
+
+		return jsonArray;
+	}
+
+	public static JSONArray toJSONArray(
+		com.liferay.portal.model.Organization[][] models) {
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
+
+		for (Organization[] model : models) {
+			jsonArray.put(toJSONArray(model));
+		}
+
+		return jsonArray;
+	}
+
+	public static JSONArray toJSONArray(
 		List<com.liferay.portal.model.Organization> models) {
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 

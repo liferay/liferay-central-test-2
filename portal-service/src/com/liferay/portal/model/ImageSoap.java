@@ -61,6 +61,33 @@ public class ImageSoap implements Serializable {
 		return soapModel;
 	}
 
+	public static ImageSoap[] toSoapModels(Image[] models) {
+		ImageSoap[] soapModels = new ImageSoap[models.length];
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModel(models[i]);
+		}
+
+		return soapModels;
+	}
+
+	public static ImageSoap[][] toSoapModels(Image[][] models) {
+		ImageSoap[][] soapModels = null;
+
+		if (models.length > 0) {
+			soapModels = new ImageSoap[models.length][models[0].length];
+		}
+		else {
+			soapModels = new ImageSoap[0][0];
+		}
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModels(models[i]);
+		}
+
+		return soapModels;
+	}
+
 	public static ImageSoap[] toSoapModels(List<Image> models) {
 		List<ImageSoap> soapModels = new ArrayList<ImageSoap>(models.size());
 

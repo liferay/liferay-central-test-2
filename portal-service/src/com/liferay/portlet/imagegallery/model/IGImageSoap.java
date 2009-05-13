@@ -68,6 +68,33 @@ public class IGImageSoap implements Serializable {
 		return soapModel;
 	}
 
+	public static IGImageSoap[] toSoapModels(IGImage[] models) {
+		IGImageSoap[] soapModels = new IGImageSoap[models.length];
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModel(models[i]);
+		}
+
+		return soapModels;
+	}
+
+	public static IGImageSoap[][] toSoapModels(IGImage[][] models) {
+		IGImageSoap[][] soapModels = null;
+
+		if (models.length > 0) {
+			soapModels = new IGImageSoap[models.length][models[0].length];
+		}
+		else {
+			soapModels = new IGImageSoap[0][0];
+		}
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModels(models[i]);
+		}
+
+		return soapModels;
+	}
+
 	public static IGImageSoap[] toSoapModels(List<IGImage> models) {
 		List<IGImageSoap> soapModels = new ArrayList<IGImageSoap>(models.size());
 

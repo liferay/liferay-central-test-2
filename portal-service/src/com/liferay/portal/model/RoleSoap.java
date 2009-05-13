@@ -62,6 +62,33 @@ public class RoleSoap implements Serializable {
 		return soapModel;
 	}
 
+	public static RoleSoap[] toSoapModels(Role[] models) {
+		RoleSoap[] soapModels = new RoleSoap[models.length];
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModel(models[i]);
+		}
+
+		return soapModels;
+	}
+
+	public static RoleSoap[][] toSoapModels(Role[][] models) {
+		RoleSoap[][] soapModels = null;
+
+		if (models.length > 0) {
+			soapModels = new RoleSoap[models.length][models[0].length];
+		}
+		else {
+			soapModels = new RoleSoap[0][0];
+		}
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModels(models[i]);
+		}
+
+		return soapModels;
+	}
+
 	public static RoleSoap[] toSoapModels(List<Role> models) {
 		List<RoleSoap> soapModels = new ArrayList<RoleSoap>(models.size());
 

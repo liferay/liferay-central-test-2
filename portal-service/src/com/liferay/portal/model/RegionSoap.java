@@ -58,6 +58,33 @@ public class RegionSoap implements Serializable {
 		return soapModel;
 	}
 
+	public static RegionSoap[] toSoapModels(Region[] models) {
+		RegionSoap[] soapModels = new RegionSoap[models.length];
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModel(models[i]);
+		}
+
+		return soapModels;
+	}
+
+	public static RegionSoap[][] toSoapModels(Region[][] models) {
+		RegionSoap[][] soapModels = null;
+
+		if (models.length > 0) {
+			soapModels = new RegionSoap[models.length][models[0].length];
+		}
+		else {
+			soapModels = new RegionSoap[0][0];
+		}
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModels(models[i]);
+		}
+
+		return soapModels;
+	}
+
 	public static RegionSoap[] toSoapModels(List<Region> models) {
 		List<RegionSoap> soapModels = new ArrayList<RegionSoap>(models.size());
 

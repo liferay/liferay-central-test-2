@@ -114,6 +114,28 @@ public class ShoppingCouponJSONSerializer {
 	}
 
 	public static JSONArray toJSONArray(
+		com.liferay.portlet.shopping.model.ShoppingCoupon[] models) {
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
+
+		for (ShoppingCoupon model : models) {
+			jsonArray.put(toJSONObject(model));
+		}
+
+		return jsonArray;
+	}
+
+	public static JSONArray toJSONArray(
+		com.liferay.portlet.shopping.model.ShoppingCoupon[][] models) {
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
+
+		for (ShoppingCoupon[] model : models) {
+			jsonArray.put(toJSONArray(model));
+		}
+
+		return jsonArray;
+	}
+
+	public static JSONArray toJSONArray(
 		List<com.liferay.portlet.shopping.model.ShoppingCoupon> models) {
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 

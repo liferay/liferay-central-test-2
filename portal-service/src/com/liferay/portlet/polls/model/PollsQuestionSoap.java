@@ -66,6 +66,33 @@ public class PollsQuestionSoap implements Serializable {
 		return soapModel;
 	}
 
+	public static PollsQuestionSoap[] toSoapModels(PollsQuestion[] models) {
+		PollsQuestionSoap[] soapModels = new PollsQuestionSoap[models.length];
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModel(models[i]);
+		}
+
+		return soapModels;
+	}
+
+	public static PollsQuestionSoap[][] toSoapModels(PollsQuestion[][] models) {
+		PollsQuestionSoap[][] soapModels = null;
+
+		if (models.length > 0) {
+			soapModels = new PollsQuestionSoap[models.length][models[0].length];
+		}
+		else {
+			soapModels = new PollsQuestionSoap[0][0];
+		}
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModels(models[i]);
+		}
+
+		return soapModels;
+	}
+
 	public static PollsQuestionSoap[] toSoapModels(List<PollsQuestion> models) {
 		List<PollsQuestionSoap> soapModels = new ArrayList<PollsQuestionSoap>(models.size());
 

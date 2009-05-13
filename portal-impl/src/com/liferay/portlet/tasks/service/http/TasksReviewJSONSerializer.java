@@ -91,6 +91,28 @@ public class TasksReviewJSONSerializer {
 	}
 
 	public static JSONArray toJSONArray(
+		com.liferay.portlet.tasks.model.TasksReview[] models) {
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
+
+		for (TasksReview model : models) {
+			jsonArray.put(toJSONObject(model));
+		}
+
+		return jsonArray;
+	}
+
+	public static JSONArray toJSONArray(
+		com.liferay.portlet.tasks.model.TasksReview[][] models) {
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
+
+		for (TasksReview[] model : models) {
+			jsonArray.put(toJSONArray(model));
+		}
+
+		return jsonArray;
+	}
+
+	public static JSONArray toJSONArray(
 		List<com.liferay.portlet.tasks.model.TasksReview> models) {
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 

@@ -65,6 +65,33 @@ public class WebsiteSoap implements Serializable {
 		return soapModel;
 	}
 
+	public static WebsiteSoap[] toSoapModels(Website[] models) {
+		WebsiteSoap[] soapModels = new WebsiteSoap[models.length];
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModel(models[i]);
+		}
+
+		return soapModels;
+	}
+
+	public static WebsiteSoap[][] toSoapModels(Website[][] models) {
+		WebsiteSoap[][] soapModels = null;
+
+		if (models.length > 0) {
+			soapModels = new WebsiteSoap[models.length][models[0].length];
+		}
+		else {
+			soapModels = new WebsiteSoap[0][0];
+		}
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModels(models[i]);
+		}
+
+		return soapModels;
+	}
+
 	public static WebsiteSoap[] toSoapModels(List<Website> models) {
 		List<WebsiteSoap> soapModels = new ArrayList<WebsiteSoap>(models.size());
 
