@@ -55,10 +55,8 @@ public class ReportRequestMessageListener implements MessageListener {
 		ReportResultContainer reportResultContainer =
 			_reportResultContainer.clone(request.getReportName());
 
-		Message replyMessage = new Message();
-
-		replyMessage.setDestination(message.getResponseDestination());
-		replyMessage.setResponseId(message.getResponseId());
+		Message replyMessage =
+			MessageBusUtil.createResponseMessage(message);
 
 		try {
 			_reportEngine.execute(request, reportResultContainer);
@@ -72,7 +70,7 @@ public class ReportRequestMessageListener implements MessageListener {
 			replyMessage.setPayload(reportResultContainer);
 
 			MessageBusUtil.sendMessage(
-				message.getResponseDestination(), replyMessage);
+				replyMessage.getDestination(), replyMessage);
 		}
 	}
 

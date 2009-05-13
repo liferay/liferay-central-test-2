@@ -24,9 +24,11 @@ package com.liferay.portal.kernel.messaging.sender;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageBus;
 import com.liferay.portal.kernel.messaging.MessageBusException;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.uuid.PortalUUID;
 
 /**
@@ -60,14 +62,18 @@ public class DefaultSynchronousMessageSender
 
 		String responseDestination = message.getResponseDestination();
 
-		if (!_messageBus.hasDestination(responseDestination)) {
+		//if no response destination previously created, go ahead and create
+		//a temporary destination
+		if (Validator.isNull(responseDestination) ||
+			!_messageBus.hasDestination(responseDestination)) {
 			if (_log.isDebugEnabled()) {
 				_log.debug(
 					"Response destination " + responseDestination +
 						" is not configured");
 			}
 
-			return null;
+			message.setResponseDestination(
+				DestinationNames.SERVICE_SYNCHRONOUS_RESPONSE);
 		}
 
 		String responseId = _portalUUID.generate();

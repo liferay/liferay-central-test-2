@@ -80,6 +80,12 @@ public interface DestinationNames {
 
 	public static final String SEARCH_WRITER = "liferay/search_writer";
 
+	public static final String SERVICE_REQUEST_STATUS =
+		"liferay/service_request/status";
+
+	public static final String SERVICE_SYNCHRONOUS_RESPONSE=
+		"liferay/synchronous_service/response";
+
 	public static final String WIKI = "liferay/wiki";
 
 }

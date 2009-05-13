@@ -25,6 +25,7 @@ package com.liferay.portal.search.lucene.messaging;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.messaging.Message;
+import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.messaging.MessageListener;
 import com.liferay.portal.kernel.messaging.sender.MessageSender;
 import com.liferay.portal.kernel.search.Hits;
@@ -64,9 +65,10 @@ public class LuceneReaderMessageListener implements MessageListener {
 			searchRequest.getSorts(), searchRequest.getStart(),
 			searchRequest.getEnd());
 
-		message.setPayload(hits);
+		Message responseMessage =
+			MessageBusUtil.createResponseMessage(message, hits);
 
-		_messageSender.send(message.getResponseDestination(), message);
+		_messageSender.send(responseMessage.getDestination(), message);
 	}
 
 	protected void doReceive(Message message) throws Exception {

@@ -22,6 +22,9 @@
 
 package com.liferay.portal.kernel.messaging;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+
 /**
  * <a href="DummyMessageListener.java.html"><b><i>View Source</i></b></a>
  *
@@ -31,6 +34,12 @@ package com.liferay.portal.kernel.messaging;
 public class DummyMessageListener implements MessageListener {
 
 	public void receive(Message message) {
+		if (_log.isInfoEnabled()) {
+		    _log.info("Received: " + message);
+		}		
 	}
+
+	private static final Log _log =
+		LogFactoryUtil.getLog(DummyMessageListener.class);
 
 }

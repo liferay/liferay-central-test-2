@@ -25,6 +25,7 @@ package com.liferay.portal.scheduler.messaging;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.messaging.Message;
+import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.messaging.MessageListener;
 import com.liferay.portal.kernel.messaging.sender.MessageSender;
 import com.liferay.portal.kernel.scheduler.SchedulerEngine;
@@ -92,10 +93,10 @@ public class SchedulerMessageListener implements MessageListener {
 
 		List<SchedulerRequest> schedulerRequests =
 			_schedulerEngine.getScheduledJobs(schedulerRequest.getGroupName());
+		Message responseMessage =
+			MessageBusUtil.createResponseMessage(message, schedulerRequests);
 
-		message.setPayload(schedulerRequests);
-
-		_messageSender.send(message.getResponseDestination(), message);
+		_messageSender.send(responseMessage.getDestination(), responseMessage);
 	}
 
 	private static Log _log =

@@ -23,10 +23,8 @@
 package com.liferay.portal.kernel.messaging;
 
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -138,11 +136,6 @@ public class Message implements Serializable {
 
 	public void setDestination(String destination) {
 		_destination = destination;
-
-		if (Validator.isNull(_responseDestination)) {
-			_responseDestination =
-				_destination + _DEFAULT_RESPONSE_DESTINATION_SUFFIX;
-		}
 	}
 
 	public void setPayload(Object payload) {

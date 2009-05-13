@@ -45,6 +45,24 @@ public class MessageBusUtil {
 		return _instance._messageSender;
 	}
 
+	public static Message createResponseMessage(Message requestMessage) {
+
+		Message response = new Message();
+		response.setDestination(requestMessage.getResponseDestination());
+		response.setResponseId(requestMessage.getResponseId());
+
+		return response;
+	}
+
+	public static Message createResponseMessage(
+		Message requestMessage, Object payload) {
+
+		Message response = createResponseMessage(requestMessage);
+		response.setPayload(payload);
+
+		return response;
+	}
+
 	public static boolean hasMessageListener(String destination) {
 		return _instance._hasMessageListener(destination);
 	}
@@ -74,6 +92,16 @@ public class MessageBusUtil {
 		_instance._sendMessage(destination, payload);
 	}
 
+	/**
+	 * Send a message to the intended destination and wait for a response from
+	 * recipient of the message.  The reply will be received in the destination
+	 * specified in the responseDestination of the message
+	 *
+	 * @param destination to send to
+	 * @param message to send.
+	 * @return
+	 * @throws MessageBusException
+	 */
 	public static Object sendSynchronousMessage(
 			String destination, Message message)
 		throws MessageBusException {
@@ -81,13 +109,54 @@ public class MessageBusUtil {
 		return _instance._sendSynchronousMessage(destination, message);
 	}
 
+	/**
+	 * Send a message to the intended destination and wait for a response from
+	 * recipient of the message.  The reply will be sent to an default response
+	 * queue.  For high frequency transactions, you should use a dedicated
+	 * response queue.
+	 *
+	 * @param destination to send to
+	 * @param payload to send
+	 * @return
+	 * @throws MessageBusException
+	 */
 	public static Object sendSynchronousMessage(
-			String destination, Object payload)
+		String destination, Object payload)
 		throws MessageBusException {
 
-		return _instance._sendSynchronousMessage(destination, payload);
+		return _instance._sendSynchronousMessage(destination, payload, null);
 	}
 
+	/**
+	 * Send a message to the intended destination and wait for a response from
+	 * recipient of the message.  The reply will be sent to the specified
+	 * response destination
+	 *
+	 * @param destination to send to
+	 * @param payload to send
+	 * @param responseDestination on which to wait for the response
+	 * @return
+	 * @throws MessageBusException
+	 */
+	public static Object sendSynchronousMessage(
+		String destination, Object payload, String responseDestination)
+		throws MessageBusException {
+
+		return _instance._sendSynchronousMessage(
+			destination, payload, responseDestination);
+	}
+
+	/**
+	 * Send a message to the intended destination and wait for a response from
+	 * recipient of the message.  The reply will be sent to the destination
+	 * specified in the Message's responseDestination
+	 *
+	 * @param destination to send to
+	 * @param message to send
+	 * @param timeout for the transaction
+	 * @return
+	 * @throws MessageBusException
+	 */
 	public static Object sendSynchronousMessage(
 			String destination, Message message, long timeout)
 		throws MessageBusException {
@@ -96,12 +165,45 @@ public class MessageBusUtil {
 			destination, message, timeout);
 	}
 
+	/**
+	 * Send a message to the intended destination and wait for a response from
+	 * recipient of the message.  The reply will be sent to an default response
+	 * queue.  For high frequency transactions, you should use a dedicated
+	 * response queue.
+	 *
+	 * @param destination to send to
+	 * @param payload to send
+	 * @param timeout to wait before terminating the transaction with an error
+	 * @return
+	 * @throws MessageBusException
+	 */
 	public static Object sendSynchronousMessage(
 			String destination, Object payload, long timeout)
 		throws MessageBusException {
 
 		return _instance._sendSynchronousMessage(
-			destination, payload, timeout);
+			destination, payload, null, timeout);
+	}
+
+	/**
+	 * Send a message to the intended destination and wait for a response from
+	 * recipient of the message.  The reply will be sent to the specified
+	 * response destination
+	 *
+	 * @param destination to send to
+	 * @param payload to send
+	 * @param responseDestination on which to wait for the response
+	 * @param timeout to wait before killing the request and reporting an error
+	 * @return
+	 * @throws MessageBusException
+	 */
+	public static Object sendSynchronousMessage(
+			String destination, Object payload,
+			String responseDestination, long timeout)
+		throws MessageBusException {
+
+		return _instance._sendSynchronousMessage(
+			destination, payload, responseDestination, timeout);
 	}
 
 	public static boolean unregisterMessageListener(
@@ -158,10 +260,12 @@ public class MessageBusUtil {
 		return _synchronousMessageSender.sendMessage(destination, message);
 	}
 
-	private Object _sendSynchronousMessage(String destination, Object payload)
+	private Object _sendSynchronousMessage(
+		String destination, Object payload, String responseDestination)
 		throws MessageBusException {
 
 		Message message = new Message();
+		message.setResponseDestination(responseDestination);
 
 		message.setPayload(payload);
 
@@ -177,11 +281,13 @@ public class MessageBusUtil {
 	}
 
 	private Object _sendSynchronousMessage(
-			String destination, Object payload, long timeout)
+			String destination, Object payload,
+			String responseDestination, long timeout)
 		throws MessageBusException {
 
 		Message message = new Message();
 
+		message.setResponseDestination(responseDestination);
 		message.setPayload(payload);
 
 		return _sendSynchronousMessage(destination, message, timeout);

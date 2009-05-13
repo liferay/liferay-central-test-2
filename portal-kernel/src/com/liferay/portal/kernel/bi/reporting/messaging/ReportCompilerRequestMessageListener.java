@@ -64,10 +64,13 @@ public class ReportCompilerRequestMessageListener implements MessageListener {
 			reportResultContainer.setReportGenerationException(rge);
 		}
 		finally {
-			message.setPayload(reportResultContainer);
+			Message responseMessage =
+				MessageBusUtil.createResponseMessage(message, reportResultContainer);
+
+			responseMessage.setPayload(reportResultContainer);
 
 			MessageBusUtil.sendMessage(
-				message.getResponseDestination(), message);
+				responseMessage.getDestination(), responseMessage);
 		}
 	}
 
