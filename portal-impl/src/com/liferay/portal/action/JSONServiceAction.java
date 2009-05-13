@@ -159,6 +159,46 @@ public class JSONServiceAction extends JSONAction {
 
 						return jsonObj.toString();
 					}
+					else if (returnObj instanceof BaseModel[]) {
+						JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
+						
+						BaseModel[] returnArray = (BaseModel[])returnObj;
+						
+						if (returnArray.length > 0) {
+							BaseModel returnItem0 = returnArray[0];
+							
+							String serializerClassName =
+								getSerializerClassName(returnItem0);
+							
+							MethodWrapper methodWrapper = new MethodWrapper(
+								serializerClassName, "toJSONArray", returnObj);
+							
+							jsonArray = (JSONArray)MethodInvoker.invoke(
+								methodWrapper, false);
+						}
+						
+						return jsonArray.toString();
+					}
+					else if (returnObj instanceof BaseModel[][]) {
+						JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
+						
+						BaseModel[][] returnArray = (BaseModel[][])returnObj;
+						
+						if (returnArray.length > 0 && returnArray[0].length > 0) {
+							BaseModel returnItem0 = returnArray[0][0];
+							
+							String serializerClassName =
+								getSerializerClassName(returnItem0);
+							
+							MethodWrapper methodWrapper = new MethodWrapper(
+								serializerClassName, "toJSONArray", returnObj);
+							
+							jsonArray = (JSONArray)MethodInvoker.invoke(
+								methodWrapper, false);
+						}
+						
+						return jsonArray.toString();
+					}
 					else if (returnObj instanceof List) {
 						JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
@@ -223,6 +263,8 @@ public class JSONServiceAction extends JSONAction {
 			catch (Exception e) {
 				JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
 
+				_log.error(e);
+				
 				if (e instanceof InvocationTargetException) {
 					jsonObj.put("exception", e.getCause().toString());
 				}

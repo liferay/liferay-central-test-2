@@ -50,6 +50,33 @@ public class ${entity.name}Soap implements Serializable {
 		return soapModels.toArray(new ${entity.name}Soap[soapModels.size()]);
 	}
 
+	public static ${entity.name}Soap[] toSoapModels(${entity.name}[] models) {
+		${entity.name}Soap[] soapModels = new ${entity.name}Soap[models.length];
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModel(models[i]);
+		}
+
+		return soapModels;
+	}
+
+	public static ${entity.name}Soap[][] toSoapModels(${entity.name}[][] models) {
+		${entity.name}Soap[][] soapModels = null;
+		
+		if (models.length > 0) {
+			soapModels = new ${entity.name}Soap[models.length][models[0].length];
+		}
+		else {
+			soapModels = new ${entity.name}Soap[0][0];
+		}
+
+		for (int i = 0; i < models.length; i++) {
+			soapModels[i] = toSoapModels(models[i]);
+		}
+
+		return soapModels;
+	}
+
 	public ${entity.name}Soap() {
 	}
 

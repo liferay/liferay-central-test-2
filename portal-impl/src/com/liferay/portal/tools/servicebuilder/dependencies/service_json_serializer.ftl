@@ -64,4 +64,24 @@ public class ${entity.name}JSONSerializer {
 		return jsonArray;
 	}
 
+	public static JSONArray toJSONArray(${packagePath}.model.${entity.name}[] models) {
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
+
+		for (${entity.name} model : models) {
+			jsonArray.put(toJSONObject(model));
+		}
+
+		return jsonArray;
+	}
+
+	public static JSONArray toJSONArray(${packagePath}.model.${entity.name}[][] models) {
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
+
+		for (${entity.name}[] model : models) {
+			jsonArray.put(toJSONArray(model));
+		}
+
+		return jsonArray;
+	}
+
 }

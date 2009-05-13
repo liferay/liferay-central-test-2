@@ -157,8 +157,10 @@ public class ${entity.name}ServiceSoap {
 					);
 
 					<#if returnValueName != "void">
-						<#if returnValueName == extendedModelName>
+						<#if returnValueName == extendedModelName && returnValueDimension == "">
 							return ${soapModelName}.toSoapModel(returnValue);
+						<#elseif returnValueName == extendedModelName && returnValueDimension != "">
+							return ${soapModelName}.toSoapModels(returnValue);
 						<#elseif entity.hasColumns() && returnValueName == "java.util.List">
 							return ${soapModelName}.toSoapModels(returnValue);
 						<#else>
