@@ -655,21 +655,23 @@ public class GroupFinderImpl
 		else if (key.equals("types")) {
 			List<Integer> types = (List<Integer>)value;
 
-			StringBuilder sb = new StringBuilder();
+			if (!types.isEmpty()) {
+				StringBuilder sb = new StringBuilder();
 
-			sb.append("WHERE (");
+				sb.append("WHERE (");
 
-			for (int i = 0; i < types.size(); i++) {
-				sb.append("(Group_.type_ = ?) ");
+				for (int i = 0; i < types.size(); i++) {
+					sb.append("(Group_.type_ = ?) ");
 
-				if ((i + 1) < types.size()) {
-					sb.append("OR ");
+					if ((i + 1) < types.size()) {
+						sb.append("OR ");
+					}
 				}
+
+				sb.append(")");
+
+				join = sb.toString();
 			}
-
-			sb.append(")");
-
-			join = sb.toString();
 		}
 		else if (key.equals("userGroupRole")) {
 			join = CustomSQLUtil.get(JOIN_BY_USER_GROUP_ROLE);

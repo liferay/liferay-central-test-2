@@ -855,25 +855,27 @@ public class OrganizationFinderImpl
 		else if (key.equals("organizations")) {
 			Long[] organizationIds = (Long[])value;
 
-			StringBuilder sb = new StringBuilder();
+			if (organizationIds.length > 0) {
+				StringBuilder sb = new StringBuilder();
 
-			sb.append("WHERE (");
+				sb.append("WHERE (");
 
-			for (int i = 0; i < organizationIds.length; i++) {
-				sb.append("(Organization_.organizationId = ?) ");
+				for (int i = 0; i < organizationIds.length; i++) {
+					sb.append("(Organization_.organizationId = ?) ");
 
-				if ((i + 1) < organizationIds.length) {
-					sb.append("OR ");
+					if ((i + 1) < organizationIds.length) {
+						sb.append("OR ");
+					}
 				}
+
+				if (organizationIds.length == 0) {
+					sb.append("(Organization_.organizationId = -1) ");
+				}
+
+				sb.append(")");
+
+				join = sb.toString();
 			}
-
-			if (organizationIds.length == 0) {
-				sb.append("(Organization_.organizationId = -1) ");
-			}
-
-			sb.append(")");
-
-			join = sb.toString();
 		}
 		else if (key.equals("organizationsGroups")) {
 			join = CustomSQLUtil.get(JOIN_BY_ORGANIZATIONS_GROUPS);
@@ -887,22 +889,24 @@ public class OrganizationFinderImpl
 		else if (key.equals("organizationsTree")) {
 			Long[][] leftAndRightOrganizationIds = (Long[][])value;
 
-			StringBuilder sb = new StringBuilder();
+			if (leftAndRightOrganizationIds.length > 0) {
+				StringBuilder sb = new StringBuilder();
 
-			sb.append("WHERE (");
+				sb.append("WHERE (");
 
-			for (int i = 0; i < leftAndRightOrganizationIds.length; i++) {
-				sb.append(
-					"(Organization_.leftOrganizationId BETWEEN ? AND ?) ");
+				for (int i = 0; i < leftAndRightOrganizationIds.length; i++) {
+					sb.append(
+						"(Organization_.leftOrganizationId BETWEEN ? AND ?) ");
 
-				if ((i + 1) < leftAndRightOrganizationIds.length) {
-					sb.append("OR ");
+					if ((i + 1) < leftAndRightOrganizationIds.length) {
+						sb.append("OR ");
+					}
 				}
+
+				sb.append(")");
+
+				join = sb.toString();
 			}
-
-			sb.append(")");
-
-			join = sb.toString();
 		}
 		else if (key.equals("organizationsUsers")) {
 			join = CustomSQLUtil.get(JOIN_BY_ORGANIZATIONS_USERS);
