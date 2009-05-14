@@ -37,15 +37,15 @@ import java.util.regex.Pattern;
  */
 public class Validator {
 
-	public static boolean equals(String s1, String s2) {
-		if ((s1 == null) && (s2 == null)) {
+	public static boolean equals(Object obj1, Object obj2) {
+		if ((obj1 == null) && (obj2 == null)) {
 			return true;
 		}
-		else if ((s1 == null) || (s2 == null)) {
+		else if ((obj1 == null) || (obj2 == null)) {
 			return false;
 		}
 		else {
-			return s1.equals(s2);
+			return obj1.equals(obj2);
 		}
 	}
 
