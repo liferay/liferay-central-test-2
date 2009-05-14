@@ -26,6 +26,8 @@ import com.liferay.portal.OldServiceComponentException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.cache.CacheRegistry;
+import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
+import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
@@ -203,6 +205,9 @@ public class ServiceComponentLocalServiceImpl
 		}
 
 		CacheRegistry.clear();
+
+		EntityCacheUtil.clearCache();
+		FinderCacheUtil.clearCache();
 	}
 
 	protected List<String> getModels(ClassLoader classLoader)
