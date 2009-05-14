@@ -287,21 +287,17 @@ public abstract class DBUtil {
 		return _SUPPORTS_UPDATE_WITH_INNER_JOIN;
 	}
 
-	public void runSQL(String sql)
-		throws IOException, NamingException, SQLException {
-
+	public void runSQL(String sql) throws IOException, SQLException {
 		runSQL(new String[] {sql});
 	}
 
 	public void runSQL(Connection con, String sql)
-		throws IOException, NamingException, SQLException {
+		throws IOException, SQLException {
 
 		runSQL(con, new String[] {sql});
 	}
 
-	public void runSQL(String[] sqls)
-		throws IOException, NamingException, SQLException {
-
+	public void runSQL(String[] sqls) throws IOException, SQLException {
 		Connection con = DataAccess.getConnection();
 
 		try {
@@ -313,7 +309,7 @@ public abstract class DBUtil {
 	}
 
 	public void runSQL(Connection con, String[] sqls)
-		throws IOException, NamingException, SQLException {
+		throws IOException, SQLException {
 
 		Statement s = null;
 

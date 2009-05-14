@@ -68,15 +68,11 @@ public abstract class UpgradeProcess {
 		return DBUtil.getInstance().isSupportsUpdateWithInnerJoin();
 	}
 
-	public void runSQL(String template)
-		throws IOException, NamingException, SQLException {
-
+	public void runSQL(String template) throws IOException, SQLException {
 		DBUtil.getInstance().runSQL(template);
 	}
 
-	public void runSQL(String[] templates)
-		throws IOException, NamingException, SQLException {
-
+	public void runSQL(String[] templates) throws IOException, SQLException {
 		DBUtil.getInstance().runSQL(templates);
 	}
 

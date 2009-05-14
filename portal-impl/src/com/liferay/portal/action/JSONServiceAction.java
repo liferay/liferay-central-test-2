@@ -523,10 +523,10 @@ public class JSONServiceAction extends JSONAction {
 		else if (returnObj instanceof BaseModel[]) {
 			JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
-			BaseModel[] returnArray = (BaseModel[])returnObj;
+			BaseModel<?>[] returnArray = (BaseModel[])returnObj;
 
 			if (returnArray.length > 0) {
-				BaseModel returnItem0 = returnArray[0];
+				BaseModel<?> returnItem0 = returnArray[0];
 
 				String serializerClassName = getSerializerClassName(
 					returnItem0);
@@ -543,12 +543,12 @@ public class JSONServiceAction extends JSONAction {
 		else if (returnObj instanceof BaseModel[][]) {
 			JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
-			BaseModel[][] returnArray = (BaseModel[][])returnObj;
+			BaseModel<?>[][] returnArray = (BaseModel[][])returnObj;
 
 			if ((returnArray.length > 0) &&
 				(returnArray[0].length > 0)) {
 
-				BaseModel returnItem0 = returnArray[0][0];
+				BaseModel<?> returnItem0 = returnArray[0][0];
 
 				String serializerClassName = getSerializerClassName(
 					returnItem0);

@@ -39,8 +39,6 @@ import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.naming.NamingException;
-
 /**
  * <a href="DB2Util.java.html"><b><i>View Source</i></b></a>
  *
@@ -72,9 +70,7 @@ public class DB2Util extends DBUtil {
 		return _SUPPORTS_ALTER_COLUMN_TYPE;
 	}
 
-	public void runSQL(String template)
-		throws IOException, NamingException, SQLException {
-
+	public void runSQL(String template) throws IOException, SQLException {
 		if (template.startsWith(ALTER_COLUMN_NAME) ||
 			template.startsWith(ALTER_COLUMN_TYPE)) {
 
@@ -93,9 +89,7 @@ public class DB2Util extends DBUtil {
 		}
 	}
 
-	public void runSQL(String[] templates)
-		throws IOException, NamingException, SQLException {
-
+	public void runSQL(String[] templates) throws IOException, SQLException {
 		super.runSQL(templates);
 
 		_reorgTables(templates);
