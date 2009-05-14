@@ -415,8 +415,9 @@ public class SeleneseToJavaBuilder {
 				sb.append(param2);
 				sb.append("\"), \"\");");
 			}
-			else if (param1.equals("click") || param1.equals("mouseDown") ||
-					 param1.equals("mouseUp") || param1.equals("open") ||
+			else if (param1.equals("check") || param1.equals("click") ||
+					 param1.equals("mouseDown") || param1.equals("mouseUp") ||
+					 param1.equals("open") || param1.equals("uncheck") ||
 					 param1.equals("selectFrame") ||
 					 param1.equals("selectWindow")) {
 
@@ -436,6 +437,14 @@ public class SeleneseToJavaBuilder {
 				sb.append("selenium.");
 				sb.append(param1);
 				sb.append("();");
+			}
+			else if (param1.equals("dragAndDropToObject")) {
+				sb.append("selenium.");
+				sb.append("dragAndDropToObject(\"");
+				sb.append(param2);
+				sb.append("\", \"");
+				sb.append(param3);
+				sb.append("\");");
 			}
 			else if (param1.equals("gotoIf")) {
 				String conditional = StringUtil.replace(
