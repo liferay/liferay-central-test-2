@@ -335,6 +335,10 @@ public class HttpImpl implements Http {
 		return parameterMapFromString(queryString);
 	}
 
+	public String getProtocol(ActionRequest actionRequest) {
+		return getProtocol(actionRequest.isSecure());
+	}
+
 	public String getProtocol(boolean secure) {
 		if (!secure) {
 			return Http.HTTP;
@@ -342,6 +346,14 @@ public class HttpImpl implements Http {
 		else {
 			return Http.HTTPS;
 		}
+	}
+
+	public String getProtocol(HttpServletRequest request) {
+		return getProtocol(request.isSecure());
+	}
+
+	public String getProtocol(RenderRequest renderRequest) {
+		return getProtocol(renderRequest.isSecure());
 	}
 
 	public String getProtocol(String url) {
@@ -353,18 +365,6 @@ public class HttpImpl implements Http {
 		else {
 			return Http.HTTP;
 		}
-	}
-
-	public String getProtocol(HttpServletRequest request) {
-		return getProtocol(request.isSecure());
-	}
-
-	public String getProtocol(ActionRequest actionRequest) {
-		return getProtocol(actionRequest.isSecure());
-	}
-
-	public String getProtocol(RenderRequest renderRequest) {
-		return getProtocol(renderRequest.isSecure());
 	}
 
 	public String getQueryString(String url) {
@@ -503,6 +503,10 @@ public class HttpImpl implements Http {
 		return sb.toString();
 	}
 
+	public String protocolize(String url, ActionRequest actionRequest) {
+		return protocolize(url, actionRequest.isSecure());
+	}
+
 	public String protocolize(String url, boolean secure) {
 		if (secure) {
 			if (url.startsWith(Http.HTTP_WITH_SLASH)) {
@@ -522,10 +526,6 @@ public class HttpImpl implements Http {
 
 	public String protocolize(String url, HttpServletRequest request) {
 		return protocolize(url, request.isSecure());
-	}
-
-	public String protocolize(String url, ActionRequest actionRequest) {
-		return protocolize(url, actionRequest.isSecure());
 	}
 
 	public String protocolize(String url, RenderRequest renderRequest) {
@@ -652,12 +652,12 @@ public class HttpImpl implements Http {
 		submit(location, null);
 	}
 
-	public void submit(String location, Cookie[] cookies) throws IOException {
-		submit(location, cookies, false);
-	}
-
 	public void submit(String location, boolean post) throws IOException {
 		submit(location, null, post);
+	}
+
+	public void submit(String location, Cookie[] cookies) throws IOException {
+		submit(location, cookies, false);
 	}
 
 	public void submit(String location, Cookie[] cookies, boolean post)
@@ -685,16 +685,16 @@ public class HttpImpl implements Http {
 		return URLtoByteArray(location, null);
 	}
 
-	public byte[] URLtoByteArray(String location, Cookie[] cookies)
-		throws IOException {
-
-		return URLtoByteArray(location, cookies, false);
-	}
-
 	public byte[] URLtoByteArray(String location, boolean post)
 		throws IOException {
 
 		return URLtoByteArray(location, null, post);
+	}
+
+	public byte[] URLtoByteArray(String location, Cookie[] cookies)
+		throws IOException {
+
+		return URLtoByteArray(location, cookies, false);
 	}
 
 	public byte[] URLtoByteArray(
@@ -723,16 +723,16 @@ public class HttpImpl implements Http {
 		return URLtoString(location, null);
 	}
 
-	public String URLtoString(String location, Cookie[] cookies)
-		throws IOException {
-
-		return URLtoString(location, cookies, false);
-	}
-
 	public String URLtoString(String location, boolean post)
 		throws IOException {
 
 		return URLtoString(location, null, post);
+	}
+
+	public String URLtoString(String location, Cookie[] cookies)
+		throws IOException {
+
+		return URLtoString(location, cookies, false);
 	}
 
 	public String URLtoString(String location, Cookie[] cookies, boolean post)
@@ -843,7 +843,6 @@ public class HttpImpl implements Http {
 			state.setProxyCredentials(scope, proxyCredentials);
 		}
 	}
-
 	protected byte[] URLtoByteArray(
 			String location, Cookie[] cookies, Http.Body body,
 			Map<String, String> parts, boolean post)
@@ -967,6 +966,8 @@ public class HttpImpl implements Http {
 		}
 	}
 
+	private static Log _log = LogFactoryUtil.getLog(HttpImpl.class);
+
 	private static final int _MAX_CONNECTIONS_PER_HOST = GetterUtil.getInteger(
 		PropsUtil.get(HttpImpl.class.getName() + ".max.connections.per.host"),
 		2);
@@ -975,23 +976,14 @@ public class HttpImpl implements Http {
 		PropsUtil.get(HttpImpl.class.getName() + ".max.total.connections"),
 		20);
 
-	private static final String _PROXY_HOST = GetterUtil.getString(
-		SystemProperties.get("http.proxyHost"));
-
-	private static final int _PROXY_PORT = GetterUtil.getInteger(
-		SystemProperties.get("http.proxyPort"));
-
 	private static final String _NON_PROXY_HOSTS =
 		SystemProperties.get("http.nonProxyHosts");
 
 	private static final String _PROXY_AUTH_TYPE = GetterUtil.getString(
 		PropsUtil.get(HttpImpl.class.getName() + ".proxy.auth.type"));
 
-	private static final String _PROXY_USERNAME = GetterUtil.getString(
-		PropsUtil.get(HttpImpl.class.getName() + ".proxy.username"));
-
-	private static final String _PROXY_PASSWORD = GetterUtil.getString(
-		PropsUtil.get(HttpImpl.class.getName() + ".proxy.password"));
+	private static final String _PROXY_HOST = GetterUtil.getString(
+		SystemProperties.get("http.proxyHost"));
 
 	private static final String _PROXY_NTLM_DOMAIN = GetterUtil.getString(
 		PropsUtil.get(HttpImpl.class.getName() + ".proxy.ntlm.domain"));
@@ -999,14 +991,21 @@ public class HttpImpl implements Http {
 	private static final String _PROXY_NTLM_HOST = GetterUtil.getString(
 		PropsUtil.get(HttpImpl.class.getName() + ".proxy.ntlm.host"));
 
+	private static final String _PROXY_PASSWORD = GetterUtil.getString(
+		PropsUtil.get(HttpImpl.class.getName() + ".proxy.password"));
+
+	private static final int _PROXY_PORT = GetterUtil.getInteger(
+		SystemProperties.get("http.proxyPort"));
+
+	private static final String _PROXY_USERNAME = GetterUtil.getString(
+		PropsUtil.get(HttpImpl.class.getName() + ".proxy.username"));
+
 	private static final int _TIMEOUT = GetterUtil.getInteger(
 		PropsUtil.get(HttpImpl.class.getName() + ".timeout"), 5000);
 
-	private static Log _log = LogFactoryUtil.getLog(HttpImpl.class);
-
 	private HttpClient _client = new HttpClient();
+	private Pattern _nonProxyHostsPattern;
 	private HttpClient _proxyClient = new HttpClient();
 	private Credentials _proxyCredentials;
-	private Pattern _nonProxyHostsPattern;
 
 }

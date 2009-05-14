@@ -44,15 +44,15 @@ public interface Http {
 
 	public static final String HTTP = "http";
 
-	public static final String HTTPS = "https";
+	public static final int HTTP_PORT = 80;
 
 	public static final String HTTP_WITH_SLASH = "http://";
 
-	public static final String HTTPS_WITH_SLASH = "https://";
-
-	public static final int HTTP_PORT = 80;
+	public static final String HTTPS = "https";
 
 	public static final int HTTPS_PORT = 443;
+
+	public static final String HTTPS_WITH_SLASH = "https://";
 
 	public static final String PROTOCOL_DELIMITER = "://";
 
@@ -86,15 +86,15 @@ public interface Http {
 
 	public Map<String, String[]> getParameterMap(String queryString);
 
-	public String getProtocol(boolean secure);
+	public String getProtocol(ActionRequest actionRequest);
 
-	public String getProtocol(String url);
+	public String getProtocol(boolean secure);
 
 	public String getProtocol(HttpServletRequest request);
 
-	public String getProtocol(ActionRequest actionRequest);
-
 	public String getProtocol(RenderRequest renderRequest);
+
+	public String getProtocol(String url);
 
 	public String getQueryString(String url);
 
@@ -115,11 +115,11 @@ public interface Http {
 	public String parameterMapToString(
 		Map<String, String[]> parameterMap, boolean addQuestion);
 
+	public String protocolize(String url, ActionRequest actionRequest);
+
 	public String protocolize(String url, boolean secure);
 
 	public String protocolize(String url, HttpServletRequest request);
-
-	public String protocolize(String url, ActionRequest actionRequest);
 
 	public String protocolize(String url, RenderRequest renderRequest);
 
@@ -143,9 +143,9 @@ public interface Http {
 
 	public void submit(String location) throws IOException;
 
-	public void submit(String location, Cookie[] cookies) throws IOException;
-
 	public void submit(String location, boolean post) throws IOException;
+
+	public void submit(String location, Cookie[] cookies) throws IOException;
 
 	public void submit(String location, Cookie[] cookies, boolean post)
 		throws IOException;
@@ -161,10 +161,10 @@ public interface Http {
 
 	public byte[] URLtoByteArray(String location) throws IOException;
 
-	public byte[] URLtoByteArray(String location, Cookie[] cookies)
+	public byte[] URLtoByteArray(String location, boolean post)
 		throws IOException;
 
-	public byte[] URLtoByteArray(String location, boolean post)
+	public byte[] URLtoByteArray(String location, Cookie[] cookies)
 		throws IOException;
 
 	public byte[] URLtoByteArray(
@@ -182,10 +182,10 @@ public interface Http {
 
 	public String URLtoString(String location) throws IOException;
 
+	public String URLtoString(String location, boolean post) throws IOException;
+
 	public String URLtoString(String location, Cookie[] cookies)
 		throws IOException;
-
-	public String URLtoString(String location, boolean post) throws IOException;
 
 	public String URLtoString(
 			String location, Cookie[] cookies, boolean post)

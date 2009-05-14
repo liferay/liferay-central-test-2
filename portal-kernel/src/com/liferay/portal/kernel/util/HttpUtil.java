@@ -108,24 +108,24 @@ public class HttpUtil {
 		return getHttp().getParameterMap(queryString);
 	}
 
-	public static String getProtocol(boolean secure) {
-		return getHttp().getProtocol(secure);
+	public static String getProtocol(ActionRequest actionRequest) {
+		return getHttp().getProtocol(actionRequest);
 	}
 
-	public static String getProtocol(String url) {
-		return getHttp().getProtocol(url);
+	public static String getProtocol(boolean secure) {
+		return getHttp().getProtocol(secure);
 	}
 
 	public static String getProtocol(HttpServletRequest request) {
 		return getHttp().getProtocol(request);
 	}
 
-	public static String getProtocol(ActionRequest actionRequest) {
-		return getHttp().getProtocol(actionRequest);
-	}
-
 	public static String getProtocol(RenderRequest renderRequest) {
 		return getHttp().getProtocol(renderRequest);
+	}
+
+	public static String getProtocol(String url) {
+		return getHttp().getProtocol(url);
 	}
 
 	public static String getQueryString(String url) {
@@ -170,16 +170,16 @@ public class HttpUtil {
 		return getHttp().parameterMapToString(parameterMap, addQuestion);
 	}
 
+	public static String protocolize(String url, ActionRequest actionRequest) {
+		return getHttp().protocolize(url, actionRequest);
+	}
+
 	public static String protocolize(String url, boolean secure) {
 		return getHttp().protocolize(url, secure);
 	}
 
 	public static String protocolize(String url, HttpServletRequest request) {
 		return getHttp().protocolize(url, request);
-	}
-
-	public static String protocolize(String url, ActionRequest actionRequest) {
-		return getHttp().protocolize(url, actionRequest);
 	}
 
 	public static String protocolize(String url, RenderRequest renderRequest) {
@@ -226,16 +226,16 @@ public class HttpUtil {
 		getHttp().submit(location);
 	}
 
-	public static void submit(String location, Cookie[] cookies)
-		throws IOException {
-
-		getHttp().submit(location, cookies);
-	}
-
 	public static void submit(String location, boolean post)
 		throws IOException {
 
 		getHttp().submit(location, post);
+	}
+
+	public static void submit(String location, Cookie[] cookies)
+		throws IOException {
+
+		getHttp().submit(location, cookies);
 	}
 
 	public static void submit(String location, Cookie[] cookies, boolean post)
@@ -263,16 +263,16 @@ public class HttpUtil {
 		return getHttp().URLtoByteArray(location);
 	}
 
-	public static byte[] URLtoByteArray(String location, Cookie[] cookies)
-		throws IOException {
-
-		return getHttp().URLtoByteArray(location, cookies);
-	}
-
 	public static byte[] URLtoByteArray(String location, boolean post)
 		throws IOException {
 
 		return getHttp().URLtoByteArray(location, post);
+	}
+
+	public static byte[] URLtoByteArray(String location, Cookie[] cookies)
+		throws IOException {
+
+		return getHttp().URLtoByteArray(location, cookies);
 	}
 
 	public static byte[] URLtoByteArray(
@@ -301,16 +301,16 @@ public class HttpUtil {
 		return getHttp().URLtoString(location);
 	}
 
-	public static String URLtoString(String location, Cookie[] cookies)
-		throws IOException {
-
-		 return getHttp().URLtoString(location, cookies);
-	}
-
 	public static String URLtoString(String location, boolean post)
 		throws IOException {
 
 		return getHttp().URLtoString(location, post);
+	}
+
+	public static String URLtoString(String location, Cookie[] cookies)
+		throws IOException {
+
+		 return getHttp().URLtoString(location, cookies);
 	}
 
 	public static String URLtoString(
