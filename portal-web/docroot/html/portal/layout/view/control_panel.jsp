@@ -63,7 +63,11 @@ boolean denyAccess = false;
 if (Validator.isNotNull(ppid)) {
 	Portlet portlet = PortletLocalServiceUtil.getPortletById(ppid);
 
-	denyAccess = (!portlet.isSystem() && !_hasPortlet(ppid, category, themeDisplay));
+	if ((portlet == null) ||
+		(!portlet.isSystem() && !_hasPortlet(ppid, category, themeDisplay)){
+
+		denyAccess = true;
+	}
 }
 %>
 
