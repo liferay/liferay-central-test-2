@@ -892,8 +892,6 @@ public class HttpImpl implements Http {
 		}
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(HttpImpl.class);
-
 	private static final int _MAX_CONNECTIONS_PER_HOST = GetterUtil.getInteger(
 		PropsUtil.get(HttpImpl.class.getName() + ".max.connections.per.host"),
 		2);
@@ -928,6 +926,8 @@ public class HttpImpl implements Http {
 
 	private static final int _TIMEOUT = GetterUtil.getInteger(
 		PropsUtil.get(HttpImpl.class.getName() + ".timeout"), 5000);
+
+	private static Log _log = LogFactoryUtil.getLog(HttpImpl.class);
 
 	private HttpClient _client = new HttpClient();
 	private Pattern _nonProxyHostsPattern;
