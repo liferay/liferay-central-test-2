@@ -141,68 +141,33 @@ public interface Http {
 
 	public String setParameter(String url, String name, String value);
 
-	public void submit(String location) throws IOException;
-
-	public void submit(String location, boolean post) throws IOException;
-
-	public void submit(String location, Cookie[] cookies) throws IOException;
-
-	public void submit(String location, Cookie[] cookies, boolean post)
-		throws IOException;
-
-	public void submit(
-			String location, Cookie[] cookies, Http.Body body, boolean post)
-		throws IOException;
-
-	public void submit(
-			String location, Cookie[] cookies, Map<String, String> parts,
-			boolean post)
-		throws IOException;
-
 	public byte[] URLtoByteArray(String location) throws IOException;
 
 	public byte[] URLtoByteArray(String location, boolean post)
 		throws IOException;
 
-	public byte[] URLtoByteArray(String location, Cookie[] cookies)
-		throws IOException;
-
 	public byte[] URLtoByteArray(
-			String location, Cookie[] cookies, boolean post)
-		throws IOException;
-
-	public byte[] URLtoByteArray(
-			String location, Cookie[] cookies, Http.Body body, boolean post)
-		throws IOException;
-
-	public byte[] URLtoByteArray(
-			String location, Cookie[] cookies, Map<String, String> parts,
+			String location, Cookie[] cookies, Http.Auth auth, Http.Body body,
 			boolean post)
+		throws IOException;
+
+	public byte[] URLtoByteArray(
+			String location, Cookie[] cookies, Http.Auth auth,
+			Map<String, String> parts, boolean post)
 		throws IOException;
 
 	public String URLtoString(String location) throws IOException;
 
 	public String URLtoString(String location, boolean post) throws IOException;
 
-	public String URLtoString(String location, Cookie[] cookies)
-		throws IOException;
-
 	public String URLtoString(
-			String location, Cookie[] cookies, boolean post)
-		throws IOException;
-
-	public String URLtoString(
-			String location, Cookie[] cookies, Http.Body body, boolean post)
-		throws IOException;
-
-	public String URLtoString(
-			String location, Cookie[] cookies, Map<String, String> parts,
+			String location, Cookie[] cookies, Http.Auth auth, Http.Body body,
 			boolean post)
 		throws IOException;
 
 	public String URLtoString(
-			String location, String host, int port, String realm,
-			String username, String password)
+			String location, Cookie[] cookies, Http.Auth auth,
+			Map<String, String> parts, boolean post)
 		throws IOException;
 
 	/**
@@ -218,12 +183,57 @@ public interface Http {
 	 */
 	public String URLtoString(URL url) throws IOException;
 
+	public class Auth {
+
+		public Auth(
+			String host, int port, String realm, String username,
+			String password) {
+
+			_host = host;
+			_port = port;
+			_realm = realm;
+			_username = username;
+			_password = password;
+		}
+
+		public String getHost() {
+			return _host;
+		}
+
+		public String getPassword() {
+			return _password;
+		}
+
+		public int getPort() {
+			return _port;
+		}
+
+		public String getRealm() {
+			return _realm;
+		}
+
+		public String getUsername() {
+			return _username;
+		}
+
+		private String _host;
+		private String _password;
+		private int _port;
+		private String _realm;
+		private String _username;
+
+	}
+
 	public class Body {
 
 		public Body(String content, String contentType, String charset) {
 			_content = content;
 			_contentType = contentType;
 			_charset = charset;
+		}
+
+		public String getCharset() {
+			return _charset;
 		}
 
 		public String getContent() {
@@ -234,13 +244,9 @@ public interface Http {
 			return _contentType;
 		}
 
-		public String getCharset() {
-			return _charset;
-		}
-
+		private String _charset;
 		private String _content;
 		private String _contentType;
-		private String _charset;
 
 	}
 

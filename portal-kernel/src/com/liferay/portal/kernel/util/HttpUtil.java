@@ -222,43 +222,6 @@ public class HttpUtil {
 		return getHttp().setParameter(url, name, value);
 	}
 
-	public static void submit(String location) throws IOException {
-		getHttp().submit(location);
-	}
-
-	public static void submit(String location, boolean post)
-		throws IOException {
-
-		getHttp().submit(location, post);
-	}
-
-	public static void submit(String location, Cookie[] cookies)
-		throws IOException {
-
-		getHttp().submit(location, cookies);
-	}
-
-	public static void submit(String location, Cookie[] cookies, boolean post)
-		throws IOException {
-
-		getHttp().submit(location, cookies, post);
-	}
-
-	public static void submit(
-			String location, Cookie[] cookies, Http.Body body, boolean post)
-		throws IOException {
-
-		getHttp().submit(location, cookies, body, post);
-	}
-
-	public static void submit(
-			String location, Cookie[] cookies, Map<String, String> parts,
-			boolean post)
-		throws IOException {
-
-		getHttp().submit(location, cookies, parts, post);
-	}
-
 	public static byte[] URLtoByteArray(String location) throws IOException {
 		return getHttp().URLtoByteArray(location);
 	}
@@ -269,32 +232,20 @@ public class HttpUtil {
 		return getHttp().URLtoByteArray(location, post);
 	}
 
-	public static byte[] URLtoByteArray(String location, Cookie[] cookies)
-		throws IOException {
-
-		return getHttp().URLtoByteArray(location, cookies);
-	}
-
 	public static byte[] URLtoByteArray(
-			String location, Cookie[] cookies, boolean post)
-		throws IOException {
-
-		return getHttp().URLtoByteArray(location, cookies, post);
-	}
-
-	public static byte[] URLtoByteArray(
-			String location, Cookie[] cookies, Http.Body body, boolean post)
-		throws IOException {
-
-		return getHttp().URLtoByteArray(location, cookies, body, post);
-	}
-
-	public static byte[] URLtoByteArray(
-			String location, Cookie[] cookies, Map<String, String> parts,
+			String location, Cookie[] cookies, Http.Auth auth, Http.Body body,
 			boolean post)
 		throws IOException {
 
-		return getHttp().URLtoByteArray(location, cookies, parts, post);
+		return getHttp().URLtoByteArray(location, cookies, auth, body, post);
+	}
+
+	public static byte[] URLtoByteArray(
+			String location, Cookie[] cookies, Http.Auth auth,
+			Map<String, String> parts, boolean post)
+		throws IOException {
+
+		return getHttp().URLtoByteArray(location, cookies, auth, parts, post);
 	}
 
 	public static String URLtoString(String location) throws IOException {
@@ -307,41 +258,20 @@ public class HttpUtil {
 		return getHttp().URLtoString(location, post);
 	}
 
-	public static String URLtoString(String location, Cookie[] cookies)
-		throws IOException {
-
-		 return getHttp().URLtoString(location, cookies);
-	}
-
 	public static String URLtoString(
-			String location, Cookie[] cookies, boolean post)
-		throws IOException {
-
-		return getHttp().URLtoString(location, cookies, post);
-	}
-
-	public static String URLtoString(
-			String location, Cookie[] cookies, Http.Body body, boolean post)
-		throws IOException {
-
-		return getHttp().URLtoString(location, cookies, body, post);
-	}
-
-	public static String URLtoString(
-			String location, Cookie[] cookies, Map<String, String> parts,
+			String location, Cookie[] cookies, Http.Auth auth, Http.Body body,
 			boolean post)
 		throws IOException {
 
-		return getHttp().URLtoString(location, cookies, parts, post);
+		return getHttp().URLtoString(location, cookies, auth, body, post);
 	}
 
 	public static String URLtoString(
-			String location, String host, int port, String realm,
-			String username, String password)
+			String location, Cookie[] cookies, Http.Auth auth,
+			Map<String, String> parts, boolean post)
 		throws IOException {
 
-		return getHttp().URLtoString(
-			location, host, port, realm, username, password);
+		return getHttp().URLtoString(location, cookies, auth, parts, post);
 	}
 
 	/**

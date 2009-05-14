@@ -648,143 +648,56 @@ public class HttpImpl implements Http {
 		return addParameter(url, name, value);
 	}
 
-	public void submit(String location) throws IOException {
-		submit(location, null);
-	}
-
-	public void submit(String location, boolean post) throws IOException {
-		submit(location, null, post);
-	}
-
-	public void submit(String location, Cookie[] cookies) throws IOException {
-		submit(location, cookies, false);
-	}
-
-	public void submit(String location, Cookie[] cookies, boolean post)
-		throws IOException {
-
-		URLtoByteArray(location, cookies, post);
-	}
-
-	public void submit(
-			String location, Cookie[] cookies, Http.Body body, boolean post)
-		throws IOException {
-
-		URLtoByteArray(location, cookies, body, post);
-	}
-
-	public void submit(
-			String location, Cookie[] cookies, Map<String, String> parts,
-			boolean post)
-		throws IOException {
-
-		URLtoByteArray(location, cookies, parts, post);
-	}
-
 	public byte[] URLtoByteArray(String location) throws IOException {
-		return URLtoByteArray(location, null);
+		return URLtoByteArray(location, null, null, null, null, false);
 	}
 
 	public byte[] URLtoByteArray(String location, boolean post)
 		throws IOException {
 
-		return URLtoByteArray(location, null, post);
-	}
-
-	public byte[] URLtoByteArray(String location, Cookie[] cookies)
-		throws IOException {
-
-		return URLtoByteArray(location, cookies, false);
+		return URLtoByteArray(location, null, null, null, null, post);
 	}
 
 	public byte[] URLtoByteArray(
-			String location, Cookie[] cookies, boolean post)
-		throws IOException {
-
-		return URLtoByteArray(location, cookies, null, null, post);
-	}
-
-	public byte[] URLtoByteArray(
-			String location, Cookie[] cookies, Http.Body body, boolean post)
-		throws IOException {
-
-		return URLtoByteArray(location, cookies, body, null, post);
-	}
-
-	public byte[] URLtoByteArray(
-			String location, Cookie[] cookies, Map<String, String> parts,
+			String location, Cookie[] cookies, Http.Auth auth, Http.Body body,
 			boolean post)
 		throws IOException {
 
-		return URLtoByteArray(location, cookies, null, parts, post);
+		return URLtoByteArray(location, cookies, auth, body, null, post);
+	}
+
+	public byte[] URLtoByteArray(
+			String location, Cookie[] cookies, Http.Auth auth,
+			Map<String, String> parts, boolean post)
+		throws IOException {
+
+		return URLtoByteArray(location, cookies, auth, null, parts, post);
 	}
 
 	public String URLtoString(String location) throws IOException {
-		return URLtoString(location, null);
+		return new String(URLtoByteArray(location));
 	}
 
 	public String URLtoString(String location, boolean post)
 		throws IOException {
 
-		return URLtoString(location, null, post);
-	}
-
-	public String URLtoString(String location, Cookie[] cookies)
-		throws IOException {
-
-		return URLtoString(location, cookies, false);
-	}
-
-	public String URLtoString(String location, Cookie[] cookies, boolean post)
-		throws IOException {
-
-		return new String(URLtoByteArray(location, cookies, post));
+		return new String(URLtoByteArray(location, post));
 	}
 
 	public String URLtoString(
-			String location, Cookie[] cookies, Http.Body body, boolean post)
-		throws IOException {
-
-		return new String(URLtoByteArray(location, cookies, body, post));
-	}
-
-	public String URLtoString(
-			String location, Cookie[] cookies, Map<String, String> parts,
+			String location, Cookie[] cookies, Http.Auth auth, Http.Body body,
 			boolean post)
 		throws IOException {
 
-		return new String(URLtoByteArray(location, cookies, parts, post));
+		return new String(URLtoByteArray(location, cookies, auth, body, post));
 	}
 
 	public String URLtoString(
-			String location, String host, int port, String realm,
-			String username, String password)
+			String location, Cookie[] cookies, Http.Auth auth,
+			Map<String, String> parts, boolean post)
 		throws IOException {
 
-		HostConfiguration hostConfig = getHostConfig(location);
-
-		HttpClient client = getClient(hostConfig);
-
-		GetMethod getMethod = new GetMethod(location);
-
-		getMethod.setDoAuthentication(true);
-
-		HttpState state = new HttpState();
-
-		state.setCredentials(
-			new AuthScope(host, port, realm),
-			new UsernamePasswordCredentials(username, password));
-
-		proxifyState(state, hostConfig);
-
-		try {
-			client.executeMethod(hostConfig, getMethod, state);
-
-			return getMethod.getResponseBodyAsString();
-		}
-		finally {
-			getMethod.releaseConnection();
-		}
+		return new String(URLtoByteArray(location, cookies, auth, parts, post));
 	}
 
 	/**
@@ -843,8 +756,9 @@ public class HttpImpl implements Http {
 			state.setProxyCredentials(scope, proxyCredentials);
 		}
 	}
+
 	protected byte[] URLtoByteArray(
-			String location, Cookie[] cookies, Http.Body body,
+			String location, Cookie[] cookies, Http.Auth auth, Http.Body body,
 			Map<String, String> parts, boolean post)
 		throws IOException {
 
@@ -934,14 +848,26 @@ public class HttpImpl implements Http {
 					CookiePolicy.BROWSER_COMPATIBILITY);
 			}
 
+			if (auth != null) {
+				method.setDoAuthentication(true);
+
+				state.setCredentials(
+					new AuthScope(
+						auth.getHost(), auth.getPort(), auth.getRealm()),
+					new UsernamePasswordCredentials(
+						auth.getUsername(), auth.getPassword()));
+			}
+
 			proxifyState(state, hostConfig);
 
 			client.executeMethod(hostConfig, method, state);
 
 			Header locationHeader = method.getResponseHeader("location");
 
-			if (locationHeader != null) {
-				return URLtoByteArray(locationHeader.getValue(), cookies, post);
+			if ((locationHeader != null) && !locationHeader.equals(location)) {
+				return URLtoByteArray(
+					locationHeader.getValue(), cookies, auth, body, parts,
+					post);
 			}
 
 			InputStream is = method.getResponseBodyAsStream();

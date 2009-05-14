@@ -107,7 +107,7 @@ public abstract class JBIRequestURL {
 	}
 
 	public String getContent() throws IOException {
-		return HttpUtil.URLtoString(getURL(), null, _params, true);
+		return HttpUtil.URLtoString(getURL(), null, null, _params, true);
 	}
 
 	protected abstract String getURL();

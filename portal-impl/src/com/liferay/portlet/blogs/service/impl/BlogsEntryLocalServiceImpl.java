@@ -801,7 +801,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			_log.debug("Pinging trackback " + trackback);
 		}
 
-		String xml = HttpUtil.URLtoString(trackback, null, parts, true);
+		String xml = HttpUtil.URLtoString(trackback, null, null, parts, true);
 
 		if (_log.isDebugEnabled()) {
 			_log.debug(xml);
