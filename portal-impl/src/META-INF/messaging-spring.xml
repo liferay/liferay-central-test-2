@@ -54,6 +54,12 @@
 	<bean id="destination.message_boards_mailing_list" class="com.liferay.portal.kernel.messaging.ParallelDestination">
 		<constructor-arg index="0" type="java.lang.String" value="liferay/message_boards_mailing_list" />
 	</bean>
+	<bean id="destination.message_bus_default_response" class="com.liferay.portal.kernel.messaging.ParallelDestination">
+		<constructor-arg index="0" type="java.lang.String" value="liferay/message_bus/default_response" />
+	</bean>
+	<bean id="destination.message_bus_message_status" class="com.liferay.portal.kernel.messaging.ParallelDestination">
+		<constructor-arg index="0" type="java.lang.String" value="liferay/message_bus/message_status" />
+	</bean>
 	<bean id="destination.scheduler" class="com.liferay.portal.kernel.messaging.ParallelDestination">
 		<constructor-arg index="0" type="java.lang.String" value="liferay/scheduler" />
 	</bean>
@@ -69,20 +75,15 @@
 	<bean id="destination.search_writer" class="com.liferay.portal.kernel.messaging.SerialDestination">
 		<constructor-arg index="0" type="java.lang.String" value="liferay/search_writer" />
 	</bean>
-	<bean id="destination.service_request.status" class="com.liferay.portal.kernel.messaging.ParallelDestination">
-		<constructor-arg index="0" type="java.lang.String" value="liferay/service_request/status" />
-	</bean>
-	<bean id="destination.synchronous_service.response" class="com.liferay.portal.kernel.messaging.ParallelDestination">
-		<constructor-arg index="0" type="java.lang.String" value="liferay/synchronous_service/response" />
-	</bean>
 	<bean id="destination.wiki" class="com.liferay.portal.kernel.messaging.ParallelDestination">
 		<constructor-arg index="0" type="java.lang.String" value="liferay/wiki" />
 	</bean>
 
-	<!-- Message Senders for specific destinations -->
-	<bean id="message.sender.service_request_status" class="com.liferay.portal.kernel.messaging.sender.DefaultSingleDestinationMessageSender">
-		<constructor-arg index="0" type="java.lang.String" value="liferay/service_request/status"/>
-		<constructor-arg index="1" type="com.liferay.portal.kernel.messaging.sender.MessageSender" ref="com.liferay.portal.kernel.messaging.sender.MessageSender"/>			
+	<!-- Senders -->
+
+	<bean id="messageSender.service_request_status" class="com.liferay.portal.kernel.messaging.sender.DefaultSingleDestinationMessageSender">
+		<constructor-arg index="0" type="java.lang.String" value="liferay/message_bus/message_status" />
+		<constructor-arg index="1" type="com.liferay.portal.kernel.messaging.sender.MessageSender" ref="com.liferay.portal.kernel.messaging.sender.MessageSender" />
 	</bean>
 
 	<!-- Listeners -->
@@ -97,11 +98,11 @@
 		</constructor-arg>
 	</bean>
 	<bean id="messageListener.layouts_local_publisher" class="com.liferay.portlet.communities.messaging.LayoutsLocalPublisherMessageListener">
-		<constructor-arg index="0" type="com.liferay.portal.kernel.messaging.sender.SingleDestinationMessageSender" ref="message.sender.service_request_status"/>
+		<constructor-arg index="0" type="com.liferay.portal.kernel.messaging.sender.SingleDestinationMessageSender" ref="messageSender.service_request_status" />
 		<constructor-arg index="1" type="com.liferay.portal.kernel.messaging.sender.MessageSender" ref="com.liferay.portal.kernel.messaging.sender.MessageSender" />
 	</bean>
 	<bean id="messageListener.layouts_remote_publisher" class="com.liferay.portlet.communities.messaging.LayoutsRemotePublisherMessageListener">
-		<constructor-arg index="0" type="com.liferay.portal.kernel.messaging.sender.SingleDestinationMessageSender" ref="message.sender.service_request_status"/>
+		<constructor-arg index="0" type="com.liferay.portal.kernel.messaging.sender.SingleDestinationMessageSender" ref="messageSender.service_request_status" />
 		<constructor-arg index="1" type="com.liferay.portal.kernel.messaging.sender.MessageSender" ref="com.liferay.portal.kernel.messaging.sender.MessageSender" />
 	</bean>
 	<bean id="messageListener.live_users" class="com.liferay.portal.liveusers.messaging.LiveUsersMessageListener" />
@@ -147,13 +148,13 @@
 				<ref bean="destination.mail" />
 				<ref bean="destination.message_boards" />
 				<ref bean="destination.message_boards_mailing_list" />
+				<ref bean="destination.message_bus_default_response" />
+				<ref bean="destination.message_bus_message_status" />
 				<ref bean="destination.scheduler" />
 				<ref bean="destination.scheduler.response" />
 				<ref bean="destination.search_reader" />
 				<ref bean="destination.search_reader.response" />
 				<ref bean="destination.search_writer" />
-				<ref bean="destination.service_request.status" />
-				<ref bean="destination.synchronous_service.response" />
 				<ref bean="destination.wiki" />
 			</list>
 		</property>
