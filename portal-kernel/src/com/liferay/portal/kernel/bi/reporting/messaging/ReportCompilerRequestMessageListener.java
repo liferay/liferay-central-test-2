@@ -64,8 +64,8 @@ public class ReportCompilerRequestMessageListener implements MessageListener {
 			reportResultContainer.setReportGenerationException(rge);
 		}
 		finally {
-			Message responseMessage =
-				MessageBusUtil.createResponseMessage(message, reportResultContainer);
+			Message responseMessage = MessageBusUtil.createResponseMessage(
+				message, reportResultContainer);
 
 			responseMessage.setPayload(reportResultContainer);
 

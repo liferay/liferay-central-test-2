@@ -23,9 +23,9 @@
 package com.liferay.portlet.communities.messaging;
 
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
-import com.liferay.portal.kernel.messaging.BaseServiceRequestMessageListener;
+import com.liferay.portal.kernel.messaging.BaseMessageListener;
 import com.liferay.portal.kernel.messaging.Message;
-import com.liferay.portal.kernel.messaging.ServiceRequestStatus;
+import com.liferay.portal.kernel.messaging.MessageStatus;
 import com.liferay.portal.kernel.messaging.sender.MessageSender;
 import com.liferay.portal.kernel.messaging.sender.SingleDestinationMessageSender;
 import com.liferay.portal.kernel.util.MapUtil;
@@ -46,26 +46,25 @@ import java.util.Map;
  * </i></b></a>
  *
  * @author Bruno Farache
+ *
  */
-public class LayoutsRemotePublisherMessageListener
-	extends BaseServiceRequestMessageListener {
+public class LayoutsRemotePublisherMessageListener extends BaseMessageListener {
 
 	public LayoutsRemotePublisherMessageListener(
-		SingleDestinationMessageSender messageSender,
+		SingleDestinationMessageSender statusSender,
 		MessageSender responseSender) {
 
-		super(messageSender, responseSender);
+		super(statusSender, responseSender);
 	}
 
-
-	protected void doReceive(
-			Message requestMessage, ServiceRequestStatus serviceRequestStatus)
+	protected void doReceive(Message message, MessageStatus messageStatus)
 		throws Exception {
 
 		LayoutsRemotePublisherRequest publisherRequest =
-			(LayoutsRemotePublisherRequest) JSONFactoryUtil.deserialize(
-				(String) requestMessage.getPayload());
-		serviceRequestStatus.setOriginalServiceRequest(publisherRequest);
+			(LayoutsRemotePublisherRequest)JSONFactoryUtil.deserialize(
+				(String)message.getPayload());
+
+		messageStatus.setPayload(publisherRequest);
 
 		long userId = publisherRequest.getUserId();
 		long sourceGroupId = publisherRequest.getSourceGroupId();
@@ -110,4 +109,5 @@ public class LayoutsRemotePublisherMessageListener
 			remoteAddress, remotePort, secureConnection, remoteGroupId,
 			remotePrivateLayout, parameterMap, startDate, endDate);
 	}
+
 }

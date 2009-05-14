@@ -156,9 +156,9 @@ public class DefaultMessageBus implements MessageBus {
 
 	private static Log _log = LogFactoryUtil.getLog(DefaultMessageBus.class);
 
-	private Map<String, Destination> _destinations =
-		new HashMap<String, Destination>();
 	private List<DestinationEventListener> _destinationEventListeners =
 		new ArrayList<DestinationEventListener>();
+	private Map<String, Destination> _destinations =
+		new HashMap<String, Destination>();
 
 }

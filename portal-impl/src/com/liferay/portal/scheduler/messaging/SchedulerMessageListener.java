@@ -93,8 +93,9 @@ public class SchedulerMessageListener implements MessageListener {
 
 		List<SchedulerRequest> schedulerRequests =
 			_schedulerEngine.getScheduledJobs(schedulerRequest.getGroupName());
-		Message responseMessage =
-			MessageBusUtil.createResponseMessage(message, schedulerRequests);
+
+		Message responseMessage = MessageBusUtil.createResponseMessage(
+			message, schedulerRequests);
 
 		_messageSender.send(responseMessage.getDestination(), responseMessage);
 	}

@@ -62,10 +62,12 @@ public class DefaultSynchronousMessageSender
 
 		String responseDestination = message.getResponseDestination();
 
-		//if no response destination previously created, go ahead and create
-		//a temporary destination
+		// Create a temporary destination if no response destination is
+		// configured
+
 		if (Validator.isNull(responseDestination) ||
 			!_messageBus.hasDestination(responseDestination)) {
+
 			if (_log.isDebugEnabled()) {
 				_log.debug(
 					"Response destination " + responseDestination +
@@ -73,7 +75,7 @@ public class DefaultSynchronousMessageSender
 			}
 
 			message.setResponseDestination(
-				DestinationNames.SERVICE_SYNCHRONOUS_RESPONSE);
+				DestinationNames.MESSAGE_BUS_DEFAULT_RESPONSE);
 		}
 
 		String responseId = _portalUUID.generate();

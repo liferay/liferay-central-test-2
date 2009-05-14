@@ -62,6 +62,12 @@ public interface DestinationNames {
 	public static final String MESSAGE_BOARDS_MAILING_LIST =
 		"liferay/message_boards_mailing_list";
 
+	public static final String MESSAGE_BUS_DEFAULT_RESPONSE=
+		"liferay/message_bus/default_response";
+
+	public static final String MESSAGE_BUS_MESSAGE_STATUS =
+		"liferay/message_bus/message_status";
+
 	public static final String RUON = "liferay/ruon";
 
 	public static final String RUON_RESPONSE = "liferay/ruon/response";
@@ -79,12 +85,6 @@ public interface DestinationNames {
 		"liferay/search_reader/response";
 
 	public static final String SEARCH_WRITER = "liferay/search_writer";
-
-	public static final String SERVICE_REQUEST_STATUS =
-		"liferay/service_request/status";
-
-	public static final String SERVICE_SYNCHRONOUS_RESPONSE=
-		"liferay/synchronous_service/response";
 
 	public static final String WIKI = "liferay/wiki";
 

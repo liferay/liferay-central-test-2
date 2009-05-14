@@ -46,8 +46,6 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.TimeZone;
 
-import javax.naming.NamingException;
-
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletMode;
@@ -901,9 +899,7 @@ public class PortalUtil {
 			columnId, columnPos, columnCount, path);
 	}
 
-	public static void runSQL(String sql)
-		throws IOException, NamingException, SQLException {
-
+	public static void runSQL(String sql) throws IOException, SQLException {
 		getPortal().runSQL(sql);
 	}
 

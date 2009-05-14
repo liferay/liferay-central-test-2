@@ -35,4 +35,6 @@ public interface SingleDestinationMessageSender {
 
 	public void send(Message message);
 
+	public void send(Object payload);
+
 }

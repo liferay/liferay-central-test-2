@@ -158,8 +158,6 @@ import java.util.TimeZone;
 import java.util.TreeSet;
 import java.util.concurrent.ConcurrentHashMap;
 
-import javax.naming.NamingException;
-
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
@@ -2913,9 +2911,7 @@ public class PortalImpl implements Portal {
 		}
 	}
 
-	public void runSQL(String sql)
-		throws IOException, NamingException, SQLException {
-
+	public void runSQL(String sql) throws IOException, SQLException {
 		DBUtil.getInstance().runSQL(sql);
 	}
 

@@ -25,6 +25,7 @@ package com.liferay.portal.kernel.messaging;
 import com.liferay.portal.kernel.util.GetterUtil;
 
 import java.io.Serializable;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -168,13 +169,10 @@ public class Message implements Serializable {
 		return sb.toString();
 	}
 
-	private static final String _DEFAULT_RESPONSE_DESTINATION_SUFFIX =
-		"/response";
-
 	private String _destination;
+	private Object _payload;
 	private String _responseDestination;
 	private String _responseId;
-	private Object _payload;
 	private Map<String, Object> _values;
 
 }

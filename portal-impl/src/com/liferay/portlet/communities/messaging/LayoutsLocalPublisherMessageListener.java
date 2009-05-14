@@ -23,9 +23,9 @@
 package com.liferay.portlet.communities.messaging;
 
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
-import com.liferay.portal.kernel.messaging.BaseServiceRequestMessageListener;
+import com.liferay.portal.kernel.messaging.BaseMessageListener;
 import com.liferay.portal.kernel.messaging.Message;
-import com.liferay.portal.kernel.messaging.ServiceRequestStatus;
+import com.liferay.portal.kernel.messaging.MessageStatus;
 import com.liferay.portal.kernel.messaging.sender.MessageSender;
 import com.liferay.portal.kernel.messaging.sender.SingleDestinationMessageSender;
 import com.liferay.portal.kernel.util.MapUtil;
@@ -48,24 +48,23 @@ import java.util.Map;
  * @author Bruno Farache
  *
  */
-public class LayoutsLocalPublisherMessageListener
-	extends BaseServiceRequestMessageListener {
+public class LayoutsLocalPublisherMessageListener extends BaseMessageListener {
 
 	public LayoutsLocalPublisherMessageListener(
-		SingleDestinationMessageSender messageSender,
+		SingleDestinationMessageSender statusSender,
 		MessageSender responseSender) {
 
-		super(messageSender, responseSender);
+		super(statusSender, responseSender);
 	}
 
-	protected void doReceive(
-			Message requestMessage, ServiceRequestStatus serviceRequestStatus)
+	protected void doReceive(Message message, MessageStatus messageStatus)
 		throws Exception {
-		
+
 		LayoutsLocalPublisherRequest publisherRequest =
 			(LayoutsLocalPublisherRequest)JSONFactoryUtil.deserialize(
-				(String)requestMessage.getPayload());
-		serviceRequestStatus.setOriginalServiceRequest(publisherRequest);
+				(String)message.getPayload());
+
+		messageStatus.setPayload(publisherRequest);
 
 		String command = publisherRequest.getCommand();
 		long userId = publisherRequest.getUserId();
@@ -117,4 +116,5 @@ public class LayoutsLocalPublisherMessageListener
 				parameterMap, startDate, endDate);
 		}
 	}
+
 }

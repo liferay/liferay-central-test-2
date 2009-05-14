@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -27,71 +27,77 @@ import com.liferay.portal.kernel.util.StackTraceUtil;
 import java.io.Serializable;
 
 /**
- * <a href="ServiceResponse.java.html"><b><i>View Source</i></b></a>
+ * <a href="MessageStatus.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael C. Han
+ *
  */
-public class ServiceRequestStatus implements Serializable {
-
-	public Object getOriginalServiceRequest() {
-		return _originalServiceRequest;
-	}
+public class MessageStatus implements Serializable {
 
 	public long getDuration() {
 		return _endTime - _startTime;
 	}
 
-	public String getErrorMessage() {
-		return _errorMessage;
+	public String getExceptionMessage() {
+		return _exceptionMessage;
 	}
 
-	public String getErrorStack() {
-		return _errorStack;
+	public String getExceptionStackTrace() {
+		return _exceptionStackTrace;
 	}
 
-	public String getRequestType() {
-		return _requestType;
+	public Object getPayload() {
+		return _payload;
 	}
 
-	public boolean isError() {
-		return (_errorStack != null);
+	public boolean hasException() {
+		if (_exceptionStackTrace != null) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public void setException(Exception e) {
+		_exceptionMessage = e.getMessage();
+		_exceptionStackTrace = StackTraceUtil.getStackTrace(e);
+	}
+
+	public void setPayload(Object payload) {
+		_payload = payload;
 	}
 
 	public void startTimer() {
 		_startTime = System.currentTimeMillis();
 	}
 
-	public void setError(Throwable t) {
-		_errorMessage = t.getMessage();
-		_errorStack = StackTraceUtil.getStackTrace(t);
-	}
-
-	public void setOriginalServiceRequest(Object originalServiceRequest) {
-		_originalServiceRequest = originalServiceRequest;
-		_requestType = _originalServiceRequest.getClass().getName();
-	}
-
 	public void stopTimer() {
 		_endTime = System.currentTimeMillis();
 	}
 
-	@Override
 	public String toString() {
-		return "ServiceRequestStatus{" +
-			   ", _requestType='" + _requestType + '\'' +
-			   ", _originalServiceRequest=" + _originalServiceRequest +
-			   ", _startTime=" + _startTime +
-			   "_endTime=" + _endTime +
-			   "duration=" + getDuration() +
-			   ", _errorMessage='" + _errorMessage + '\'' +
-			   ", _errorStack='" + _errorStack + '\'' +
-			   '}';
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("{startTime=");
+		sb.append(_startTime);
+		sb.append(", endTime=");
+		sb.append(_endTime);
+		sb.append(", payload=");
+		sb.append(_payload);
+		sb.append(", errorMessage=");
+		sb.append(_exceptionMessage);
+		sb.append(", errorStackTrace=");
+		sb.append(_exceptionStackTrace);
+		sb.append("}");
+
+		return sb.toString();
 	}
 
 	private long _endTime;
-	private String _errorMessage;
-	private String _errorStack;
-	private Object _originalServiceRequest;
-	private String _requestType;
+	private String _exceptionMessage;
+	private String _exceptionStackTrace;
+	private Object _payload;
 	private long _startTime;
+
 }

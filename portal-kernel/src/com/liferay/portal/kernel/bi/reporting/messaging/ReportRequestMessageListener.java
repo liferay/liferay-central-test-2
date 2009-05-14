@@ -55,8 +55,7 @@ public class ReportRequestMessageListener implements MessageListener {
 		ReportResultContainer reportResultContainer =
 			_reportResultContainer.clone(request.getReportName());
 
-		Message replyMessage =
-			MessageBusUtil.createResponseMessage(message);
+		Message responseMessage = MessageBusUtil.createResponseMessage(message);
 
 		try {
 			_reportEngine.execute(request, reportResultContainer);
@@ -67,10 +66,10 @@ public class ReportRequestMessageListener implements MessageListener {
 			reportResultContainer.setReportGenerationException(rge);
 		}
 		finally {
-			replyMessage.setPayload(reportResultContainer);
+			responseMessage.setPayload(reportResultContainer);
 
 			MessageBusUtil.sendMessage(
-				replyMessage.getDestination(), replyMessage);
+				responseMessage.getDestination(), responseMessage);
 		}
 	}
 

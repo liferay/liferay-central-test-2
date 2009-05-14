@@ -24,22 +24,57 @@ package com.liferay.portal.kernel.messaging;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.messaging.sender.MessageSender;
+import com.liferay.portal.kernel.messaging.sender.SingleDestinationMessageSender;
 
 /**
- * <a href="DummyMessageListener.java.html"><b><i>View Source</i></b></a>
+ * <a href="BaseMessageListener.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
+ * @author Michael C. Han
  *
  */
-public class DummyMessageListener implements MessageListener {
+public abstract class BaseMessageListener implements MessageListener {
+
+	public BaseMessageListener(
+		SingleDestinationMessageSender statusSender,
+		MessageSender responseSender) {
+
+		_statusSender = statusSender;
+		_responseSender = responseSender;
+	}
 
 	public void receive(Message message) {
-		if (_log.isInfoEnabled()) {
-			_log.info("Received " + message);
+		MessageStatus messageStatus = new MessageStatus();
+
+		messageStatus.startTimer();
+
+		try {
+			doReceive(message, messageStatus);
+		}
+		catch (Exception e) {
+			_log.error(
+				"Unable to process request " + message.getDestination(), e);
+
+			messageStatus.setException(e);
+		}
+		finally {
+			messageStatus.stopTimer();
+
+			_statusSender.send(messageStatus);
 		}
 	}
 
-	private static final Log _log =
-		LogFactoryUtil.getLog(DummyMessageListener.class);
+	protected abstract void doReceive(
+			Message message, MessageStatus messageStatus)
+		throws Exception;
+
+	protected MessageSender getResponseSender() {
+		return _responseSender;
+	}
+
+	private static Log _log = LogFactoryUtil.getLog(BaseMessageListener.class);
+
+	private MessageSender _responseSender;
+	private SingleDestinationMessageSender _statusSender;
 
 }

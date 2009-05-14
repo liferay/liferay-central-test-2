@@ -65,10 +65,10 @@ public class LuceneReaderMessageListener implements MessageListener {
 			searchRequest.getSorts(), searchRequest.getStart(),
 			searchRequest.getEnd());
 
-		Message responseMessage =
-			MessageBusUtil.createResponseMessage(message, hits);
+		Message responseMessage = MessageBusUtil.createResponseMessage(
+			message, hits);
 
-		_messageSender.send(responseMessage.getDestination(), message);
+		_messageSender.send(responseMessage.getDestination(), responseMessage);
 	}
 
 	protected void doReceive(Message message) throws Exception {

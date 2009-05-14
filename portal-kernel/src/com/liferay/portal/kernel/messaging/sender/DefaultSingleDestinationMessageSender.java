@@ -45,6 +45,14 @@ public class DefaultSingleDestinationMessageSender
 		_messageSender.send(_destination, message);
 	}
 
+	public void send(Object payload) {
+		Message message = new Message();
+
+		message.setPayload(payload);
+
+		send(message);
+	}
+
 	private String _destination;
 	private MessageSender _messageSender;
 

@@ -31,10 +31,9 @@ import com.liferay.portal.kernel.cal.DayAndPosition;
 import com.liferay.portal.kernel.cal.Duration;
 import com.liferay.portal.kernel.cal.Recurrence;
 import com.liferay.portal.kernel.cal.RecurrenceSerializer;
-import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
-import com.liferay.portal.kernel.messaging.ServiceRequestStatus;
+import com.liferay.portal.kernel.messaging.MessageStatus;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Http;
@@ -71,6 +70,7 @@ import com.liferay.portlet.communities.messaging.LayoutsLocalPublisherRequest;
 import com.liferay.portlet.communities.messaging.LayoutsRemotePublisherRequest;
 
 import java.io.ByteArrayInputStream;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -78,8 +78,8 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Map;
 import java.util.TimeZone;
 
 import javax.portlet.ActionRequest;
@@ -918,6 +918,9 @@ public class StagingUtil {
 			Map<String, String[]> parameterMap, boolean schedule)
 		throws Exception {
 
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
+
 		String tabs1 = ParamUtil.getString(actionRequest, "tabs1");
 
 		boolean privateLayout = true;
@@ -995,40 +998,45 @@ public class StagingUtil {
 				startCal.getTime(), schedulerEndDate, description);
 		}
 		else {
-			ThemeDisplay themeDisplay =
-				(ThemeDisplay)actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
+			MessageStatus messageStatus = new MessageStatus();
 
-			ServiceRequestStatus requestStatus = new ServiceRequestStatus();
-			requestStatus.startTimer();
+			messageStatus.startTimer();
+
 			String command =
 				LayoutsLocalPublisherRequest.COMMAND_SELECTED_PAGES;
+
 			try {
 				if (scope.equals("all-pages")) {
 					command = LayoutsLocalPublisherRequest.COMMAND_ALL_PAGES;
+
 					publishLayouts(
-						sourceGroupId, targetGroupId, privateLayout, parameterMap,
-						startDate, endDate);
+						sourceGroupId, targetGroupId, privateLayout,
+						parameterMap, startDate, endDate);
 				}
 				else {
 					publishLayouts(
-						sourceGroupId, targetGroupId, privateLayout, layoutIdMap,
-						parameterMap, startDate, endDate);
+						sourceGroupId, targetGroupId, privateLayout,
+						layoutIdMap, parameterMap, startDate, endDate);
 				}
 			}
 			catch (Exception e) {
-				requestStatus.setError(e);
+				messageStatus.setException(e);
+
 				throw e;
 			}
 			finally {
-				requestStatus.stopTimer();
+				messageStatus.stopTimer();
+
 				LayoutsLocalPublisherRequest publisherRequest =
 					new LayoutsLocalPublisherRequest(
 						command, themeDisplay.getUserId(), sourceGroupId,
 						targetGroupId, privateLayout, layoutIdMap, parameterMap,
 						startDate, endDate);
-				requestStatus.setOriginalServiceRequest(publisherRequest);
+
+				messageStatus.setPayload(publisherRequest);
+
 				MessageBusUtil.sendMessage(
-					DestinationNames.SERVICE_REQUEST_STATUS, requestStatus);
+					DestinationNames.MESSAGE_BUS_MESSAGE_STATUS, messageStatus);
 			}
 		}
 	}
@@ -1036,6 +1044,9 @@ public class StagingUtil {
 	private static void _publishToRemote(
 			ActionRequest actionRequest, boolean schedule)
 		throws Exception {
+
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
 
 		String tabs1 = ParamUtil.getString(actionRequest, "tabs1");
 
@@ -1135,11 +1146,10 @@ public class StagingUtil {
 				schedulerEndDate, description);
 		}
 		else {
-			ThemeDisplay themeDisplay =
-				(ThemeDisplay)actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
+			MessageStatus messageStatus = new MessageStatus();
 
-			ServiceRequestStatus requestStatus = new ServiceRequestStatus();
-			requestStatus.startTimer();
+			messageStatus.startTimer();
+
 			try {
 				copyRemoteLayouts(
 					groupId, privateLayout, layoutIdMap, parameterMap,
@@ -1148,20 +1158,24 @@ public class StagingUtil {
 					startDate, endDate);
 			}
 			catch (Exception e) {
-				requestStatus.setError(e);
+				messageStatus.setException(e);
+
 				throw e;
 			}
 			finally {
-				requestStatus.stopTimer();
+				messageStatus.stopTimer();
+
 				LayoutsRemotePublisherRequest publisherRequest =
 					new LayoutsRemotePublisherRequest(
 						themeDisplay.getUserId(), groupId, privateLayout,
-						layoutIdMap, parameterMap, remoteAddress,
-						remotePort, secureConnection,
-						remoteGroupId, remotePrivateLayout, startDate, endDate);
-				requestStatus.setOriginalServiceRequest(publisherRequest);
+						layoutIdMap, parameterMap, remoteAddress, remotePort,
+						secureConnection, remoteGroupId, remotePrivateLayout,
+						startDate, endDate);
+
+				messageStatus.setPayload(publisherRequest);
+
 				MessageBusUtil.sendMessage(
-					DestinationNames.SERVICE_REQUEST_STATUS, requestStatus);
+					DestinationNames.MESSAGE_BUS_MESSAGE_STATUS, messageStatus);
 			}
 		}
 	}
