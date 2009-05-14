@@ -47,6 +47,9 @@ public class BasePersistenceImpl implements BasePersistence, SessionFactory {
 
 	public static final String COUNT_COLUMN_NAME = "COUNT_VALUE";
 
+	public void clearCache() {
+	}
+
 	public void closeSession(Session session) {
 		_sessionFactory.closeSession(session);
 	}
