@@ -454,7 +454,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 							<#if finderCol.isPrimitiveType()>
 								${entity.varName}.get${finderCol.methodName}() != ${entity.varName}ModelImpl.getOriginal${finderCol.methodName}()
 							<#else>
-								!${entity.varName}.get${finderCol.methodName}().equals(${entity.varName}ModelImpl.getOriginal${finderCol.methodName}())
+								!Validator.equals(${entity.varName}.get${finderCol.methodName}(), ${entity.varName}ModelImpl.getOriginal${finderCol.methodName}())
 							</#if>
 
 							<#if finderCol_has_next>
