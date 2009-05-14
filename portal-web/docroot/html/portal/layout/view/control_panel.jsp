@@ -64,7 +64,7 @@ if (Validator.isNotNull(ppid)) {
 	Portlet portlet = PortletLocalServiceUtil.getPortletById(ppid);
 
 	if ((portlet == null) ||
-		(!portlet.isSystem() && !_hasPortlet(ppid, category, themeDisplay)){
+		(!portlet.isSystem() && !_hasPortlet(ppid, category, themeDisplay))) {
 
 		denyAccess = true;
 	}
