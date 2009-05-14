@@ -39,6 +39,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.service.persistence.BatchSessionUtil;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
@@ -297,8 +298,8 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl
 
 		if (!isNew &&
 				((wikiPageResource.getNodeId() != wikiPageResourceModelImpl.getOriginalNodeId()) ||
-				!wikiPageResource.getTitle()
-									 .equals(wikiPageResourceModelImpl.getOriginalTitle()))) {
+				!Validator.equals(wikiPageResource.getTitle(),
+					wikiPageResourceModelImpl.getOriginalTitle()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_N_T,
 				new Object[] {
 					new Long(wikiPageResourceModelImpl.getOriginalNodeId()),

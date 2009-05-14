@@ -454,8 +454,8 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 			BlogsEntryImpl.class, blogsEntry.getPrimaryKey(), blogsEntry);
 
 		if (!isNew &&
-				(!blogsEntry.getUuid()
-								.equals(blogsEntryModelImpl.getOriginalUuid()) ||
+				(!Validator.equals(blogsEntry.getUuid(),
+					blogsEntryModelImpl.getOriginalUuid()) ||
 				(blogsEntry.getGroupId() != blogsEntryModelImpl.getOriginalGroupId()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 				new Object[] {
@@ -476,8 +476,8 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 
 		if (!isNew &&
 				((blogsEntry.getGroupId() != blogsEntryModelImpl.getOriginalGroupId()) ||
-				!blogsEntry.getUrlTitle()
-							   .equals(blogsEntryModelImpl.getOriginalUrlTitle()))) {
+				!Validator.equals(blogsEntry.getUrlTitle(),
+					blogsEntryModelImpl.getOriginalUrlTitle()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_UT,
 				new Object[] {
 					new Long(blogsEntryModelImpl.getOriginalGroupId()),

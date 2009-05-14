@@ -40,6 +40,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.model.ResourceAction;
 import com.liferay.portal.model.impl.ResourceActionImpl;
@@ -306,10 +307,10 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl
 			resourceAction);
 
 		if (!isNew &&
-				(!resourceAction.getName()
-									.equals(resourceActionModelImpl.getOriginalName()) ||
-				!resourceAction.getActionId()
-								   .equals(resourceActionModelImpl.getOriginalActionId()))) {
+				(!Validator.equals(resourceAction.getName(),
+					resourceActionModelImpl.getOriginalName()) ||
+				!Validator.equals(resourceAction.getActionId(),
+					resourceActionModelImpl.getOriginalActionId()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_N_A,
 				new Object[] {
 					resourceActionModelImpl.getOriginalName(),

@@ -47,6 +47,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.impl.RoleImpl;
@@ -372,7 +373,8 @@ public class RolePersistenceImpl extends BasePersistenceImpl
 
 		if (!isNew &&
 				((role.getCompanyId() != roleModelImpl.getOriginalCompanyId()) ||
-				!role.getName().equals(roleModelImpl.getOriginalName()))) {
+				!Validator.equals(role.getName(),
+					roleModelImpl.getOriginalName()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_N,
 				new Object[] {
 					new Long(roleModelImpl.getOriginalCompanyId()),

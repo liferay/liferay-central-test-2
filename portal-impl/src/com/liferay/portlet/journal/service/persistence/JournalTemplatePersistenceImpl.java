@@ -411,8 +411,8 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl
 			journalTemplate);
 
 		if (!isNew &&
-				(!journalTemplate.getUuid()
-									 .equals(journalTemplateModelImpl.getOriginalUuid()) ||
+				(!Validator.equals(journalTemplate.getUuid(),
+					journalTemplateModelImpl.getOriginalUuid()) ||
 				(journalTemplate.getGroupId() != journalTemplateModelImpl.getOriginalGroupId()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 				new Object[] {
@@ -449,8 +449,8 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl
 
 		if (!isNew &&
 				((journalTemplate.getGroupId() != journalTemplateModelImpl.getOriginalGroupId()) ||
-				!journalTemplate.getTemplateId()
-									.equals(journalTemplateModelImpl.getOriginalTemplateId()))) {
+				!Validator.equals(journalTemplate.getTemplateId(),
+					journalTemplateModelImpl.getOriginalTemplateId()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_T,
 				new Object[] {
 					new Long(journalTemplateModelImpl.getOriginalGroupId()),

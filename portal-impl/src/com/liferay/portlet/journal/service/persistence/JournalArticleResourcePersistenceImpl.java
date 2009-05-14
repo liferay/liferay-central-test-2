@@ -39,6 +39,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.service.persistence.BatchSessionUtil;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
@@ -320,8 +321,8 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl
 
 		if (!isNew &&
 				((journalArticleResource.getGroupId() != journalArticleResourceModelImpl.getOriginalGroupId()) ||
-				!journalArticleResource.getArticleId()
-										   .equals(journalArticleResourceModelImpl.getOriginalArticleId()))) {
+				!Validator.equals(journalArticleResource.getArticleId(),
+					journalArticleResourceModelImpl.getOriginalArticleId()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_A,
 				new Object[] {
 					new Long(journalArticleResourceModelImpl.getOriginalGroupId()),

@@ -47,6 +47,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.model.impl.UserGroupImpl;
@@ -334,7 +335,8 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl
 
 		if (!isNew &&
 				((userGroup.getCompanyId() != userGroupModelImpl.getOriginalCompanyId()) ||
-				!userGroup.getName().equals(userGroupModelImpl.getOriginalName()))) {
+				!Validator.equals(userGroup.getName(),
+					userGroupModelImpl.getOriginalName()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_N,
 				new Object[] {
 					new Long(userGroupModelImpl.getOriginalCompanyId()),

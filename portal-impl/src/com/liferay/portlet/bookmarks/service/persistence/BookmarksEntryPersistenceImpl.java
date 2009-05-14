@@ -370,8 +370,8 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl
 			bookmarksEntry);
 
 		if (!isNew &&
-				(!bookmarksEntry.getUuid()
-									.equals(bookmarksEntryModelImpl.getOriginalUuid()) ||
+				(!Validator.equals(bookmarksEntry.getUuid(),
+					bookmarksEntryModelImpl.getOriginalUuid()) ||
 				(bookmarksEntry.getGroupId() != bookmarksEntryModelImpl.getOriginalGroupId()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 				new Object[] {

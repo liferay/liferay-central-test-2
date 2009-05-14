@@ -354,8 +354,8 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl
 			mbMailingList);
 
 		if (!isNew &&
-				(!mbMailingList.getUuid()
-								   .equals(mbMailingListModelImpl.getOriginalUuid()) ||
+				(!Validator.equals(mbMailingList.getUuid(),
+					mbMailingListModelImpl.getOriginalUuid()) ||
 				(mbMailingList.getGroupId() != mbMailingListModelImpl.getOriginalGroupId()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 				new Object[] {

@@ -416,8 +416,8 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl
 			DLFileEntryImpl.class, dlFileEntry.getPrimaryKey(), dlFileEntry);
 
 		if (!isNew &&
-				(!dlFileEntry.getUuid()
-								 .equals(dlFileEntryModelImpl.getOriginalUuid()) ||
+				(!Validator.equals(dlFileEntry.getUuid(),
+					dlFileEntryModelImpl.getOriginalUuid()) ||
 				(dlFileEntry.getGroupId() != dlFileEntryModelImpl.getOriginalGroupId()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 				new Object[] {
@@ -438,8 +438,8 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl
 
 		if (!isNew &&
 				((dlFileEntry.getFolderId() != dlFileEntryModelImpl.getOriginalFolderId()) ||
-				!dlFileEntry.getName()
-								.equals(dlFileEntryModelImpl.getOriginalName()))) {
+				!Validator.equals(dlFileEntry.getName(),
+					dlFileEntryModelImpl.getOriginalName()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_F_N,
 				new Object[] {
 					new Long(dlFileEntryModelImpl.getOriginalFolderId()),

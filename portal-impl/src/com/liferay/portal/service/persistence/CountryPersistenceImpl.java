@@ -40,6 +40,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Country;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.model.impl.CountryImpl;
@@ -313,7 +314,8 @@ public class CountryPersistenceImpl extends BasePersistenceImpl
 			CountryImpl.class, country.getPrimaryKey(), country);
 
 		if (!isNew &&
-				(!country.getName().equals(countryModelImpl.getOriginalName()))) {
+				(!Validator.equals(country.getName(),
+					countryModelImpl.getOriginalName()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_NAME,
 				new Object[] { countryModelImpl.getOriginalName() });
 		}
@@ -325,7 +327,8 @@ public class CountryPersistenceImpl extends BasePersistenceImpl
 		}
 
 		if (!isNew &&
-				(!country.getA2().equals(countryModelImpl.getOriginalA2()))) {
+				(!Validator.equals(country.getA2(),
+					countryModelImpl.getOriginalA2()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_A2,
 				new Object[] { countryModelImpl.getOriginalA2() });
 		}
@@ -337,7 +340,8 @@ public class CountryPersistenceImpl extends BasePersistenceImpl
 		}
 
 		if (!isNew &&
-				(!country.getA3().equals(countryModelImpl.getOriginalA3()))) {
+				(!Validator.equals(country.getA3(),
+					countryModelImpl.getOriginalA3()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_A3,
 				new Object[] { countryModelImpl.getOriginalA3() });
 		}

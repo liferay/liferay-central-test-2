@@ -333,8 +333,8 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl
 
 		if (!isNew &&
 				((pollsChoice.getQuestionId() != pollsChoiceModelImpl.getOriginalQuestionId()) ||
-				!pollsChoice.getName()
-								.equals(pollsChoiceModelImpl.getOriginalName()))) {
+				!Validator.equals(pollsChoice.getName(),
+					pollsChoiceModelImpl.getOriginalName()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_Q_N,
 				new Object[] {
 					new Long(pollsChoiceModelImpl.getOriginalQuestionId()),

@@ -39,6 +39,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.service.persistence.BatchSessionUtil;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
@@ -340,8 +341,8 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl
 			shoppingOrder);
 
 		if (!isNew &&
-				(!shoppingOrder.getNumber()
-								   .equals(shoppingOrderModelImpl.getOriginalNumber()))) {
+				(!Validator.equals(shoppingOrder.getNumber(),
+					shoppingOrderModelImpl.getOriginalNumber()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_NUMBER,
 				new Object[] { shoppingOrderModelImpl.getOriginalNumber() });
 		}
@@ -354,8 +355,8 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl
 		}
 
 		if (!isNew &&
-				(!shoppingOrder.getPpTxnId()
-								   .equals(shoppingOrderModelImpl.getOriginalPpTxnId()))) {
+				(!Validator.equals(shoppingOrder.getPpTxnId(),
+					shoppingOrderModelImpl.getOriginalPpTxnId()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_PPTXNID,
 				new Object[] { shoppingOrderModelImpl.getOriginalPpTxnId() });
 		}

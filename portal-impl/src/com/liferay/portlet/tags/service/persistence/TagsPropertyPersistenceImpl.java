@@ -39,6 +39,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.service.persistence.BatchSessionUtil;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
@@ -340,8 +341,8 @@ public class TagsPropertyPersistenceImpl extends BasePersistenceImpl
 
 		if (!isNew &&
 				((tagsProperty.getEntryId() != tagsPropertyModelImpl.getOriginalEntryId()) ||
-				!tagsProperty.getKey()
-								 .equals(tagsPropertyModelImpl.getOriginalKey()))) {
+				!Validator.equals(tagsProperty.getKey(),
+					tagsPropertyModelImpl.getOriginalKey()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_E_K,
 				new Object[] {
 					new Long(tagsPropertyModelImpl.getOriginalEntryId()),

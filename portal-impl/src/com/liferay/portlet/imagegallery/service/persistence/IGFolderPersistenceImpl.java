@@ -387,7 +387,8 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl
 			IGFolderImpl.class, igFolder.getPrimaryKey(), igFolder);
 
 		if (!isNew &&
-				(!igFolder.getUuid().equals(igFolderModelImpl.getOriginalUuid()) ||
+				(!Validator.equals(igFolder.getUuid(),
+					igFolderModelImpl.getOriginalUuid()) ||
 				(igFolder.getGroupId() != igFolderModelImpl.getOriginalGroupId()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 				new Object[] {
@@ -407,7 +408,8 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl
 		if (!isNew &&
 				((igFolder.getGroupId() != igFolderModelImpl.getOriginalGroupId()) ||
 				(igFolder.getParentFolderId() != igFolderModelImpl.getOriginalParentFolderId()) ||
-				!igFolder.getName().equals(igFolderModelImpl.getOriginalName()))) {
+				!Validator.equals(igFolder.getName(),
+					igFolderModelImpl.getOriginalName()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_P_N,
 				new Object[] {
 					new Long(igFolderModelImpl.getOriginalGroupId()),

@@ -351,8 +351,8 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl
 			JournalFeedImpl.class, journalFeed.getPrimaryKey(), journalFeed);
 
 		if (!isNew &&
-				(!journalFeed.getUuid()
-								 .equals(journalFeedModelImpl.getOriginalUuid()) ||
+				(!Validator.equals(journalFeed.getUuid(),
+					journalFeedModelImpl.getOriginalUuid()) ||
 				(journalFeed.getGroupId() != journalFeedModelImpl.getOriginalGroupId()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 				new Object[] {
@@ -373,8 +373,8 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl
 
 		if (!isNew &&
 				((journalFeed.getGroupId() != journalFeedModelImpl.getOriginalGroupId()) ||
-				!journalFeed.getFeedId()
-								.equals(journalFeedModelImpl.getOriginalFeedId()))) {
+				!Validator.equals(journalFeed.getFeedId(),
+					journalFeedModelImpl.getOriginalFeedId()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_F,
 				new Object[] {
 					new Long(journalFeedModelImpl.getOriginalGroupId()),

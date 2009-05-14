@@ -373,8 +373,8 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl
 			bookmarksFolder);
 
 		if (!isNew &&
-				(!bookmarksFolder.getUuid()
-									 .equals(bookmarksFolderModelImpl.getOriginalUuid()) ||
+				(!Validator.equals(bookmarksFolder.getUuid(),
+					bookmarksFolderModelImpl.getOriginalUuid()) ||
 				(bookmarksFolder.getGroupId() != bookmarksFolderModelImpl.getOriginalGroupId()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 				new Object[] {

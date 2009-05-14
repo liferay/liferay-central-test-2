@@ -40,6 +40,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.model.ServiceComponent;
 import com.liferay.portal.model.impl.ServiceComponentImpl;
@@ -309,8 +310,8 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl
 			serviceComponent);
 
 		if (!isNew &&
-				(!serviceComponent.getBuildNamespace()
-									  .equals(serviceComponentModelImpl.getOriginalBuildNamespace()) ||
+				(!Validator.equals(serviceComponent.getBuildNamespace(),
+					serviceComponentModelImpl.getOriginalBuildNamespace()) ||
 				(serviceComponent.getBuildNumber() != serviceComponentModelImpl.getOriginalBuildNumber()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_BNS_BNU,
 				new Object[] {

@@ -39,6 +39,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.service.persistence.BatchSessionUtil;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
@@ -318,8 +319,8 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl
 		if (!isNew &&
 				((expandoTable.getCompanyId() != expandoTableModelImpl.getOriginalCompanyId()) ||
 				(expandoTable.getClassNameId() != expandoTableModelImpl.getOriginalClassNameId()) ||
-				!expandoTable.getName()
-								 .equals(expandoTableModelImpl.getOriginalName()))) {
+				!Validator.equals(expandoTable.getName(),
+					expandoTableModelImpl.getOriginalName()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_C_N,
 				new Object[] {
 					new Long(expandoTableModelImpl.getOriginalCompanyId()),

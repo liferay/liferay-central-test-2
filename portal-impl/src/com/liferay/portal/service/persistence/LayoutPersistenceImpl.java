@@ -40,6 +40,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.model.impl.LayoutImpl;
@@ -487,8 +488,8 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 		if (!isNew &&
 				((layout.getGroupId() != layoutModelImpl.getOriginalGroupId()) ||
 				(layout.getPrivateLayout() != layoutModelImpl.getOriginalPrivateLayout()) ||
-				!layout.getFriendlyURL()
-						   .equals(layoutModelImpl.getOriginalFriendlyURL()))) {
+				!Validator.equals(layout.getFriendlyURL(),
+					layoutModelImpl.getOriginalFriendlyURL()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_P_F,
 				new Object[] {
 					new Long(layoutModelImpl.getOriginalGroupId()),

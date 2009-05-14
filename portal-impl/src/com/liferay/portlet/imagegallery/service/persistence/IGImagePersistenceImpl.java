@@ -422,7 +422,8 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl
 			IGImageImpl.class, igImage.getPrimaryKey(), igImage);
 
 		if (!isNew &&
-				(!igImage.getUuid().equals(igImageModelImpl.getOriginalUuid()) ||
+				(!Validator.equals(igImage.getUuid(),
+					igImageModelImpl.getOriginalUuid()) ||
 				(igImage.getGroupId() != igImageModelImpl.getOriginalGroupId()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 				new Object[] {

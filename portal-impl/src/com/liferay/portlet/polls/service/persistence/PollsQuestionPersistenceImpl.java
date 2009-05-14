@@ -337,8 +337,8 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl
 			pollsQuestion);
 
 		if (!isNew &&
-				(!pollsQuestion.getUuid()
-								   .equals(pollsQuestionModelImpl.getOriginalUuid()) ||
+				(!Validator.equals(pollsQuestion.getUuid(),
+					pollsQuestionModelImpl.getOriginalUuid()) ||
 				(pollsQuestion.getGroupId() != pollsQuestionModelImpl.getOriginalGroupId()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 				new Object[] {

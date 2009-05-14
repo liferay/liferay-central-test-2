@@ -40,6 +40,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.model.impl.CompanyImpl;
@@ -325,7 +326,8 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl
 			CompanyImpl.class, company.getPrimaryKey(), company);
 
 		if (!isNew &&
-				(!company.getWebId().equals(companyModelImpl.getOriginalWebId()))) {
+				(!Validator.equals(company.getWebId(),
+					companyModelImpl.getOriginalWebId()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_WEBID,
 				new Object[] { companyModelImpl.getOriginalWebId() });
 		}
@@ -337,8 +339,8 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl
 		}
 
 		if (!isNew &&
-				(!company.getVirtualHost()
-							 .equals(companyModelImpl.getOriginalVirtualHost()))) {
+				(!Validator.equals(company.getVirtualHost(),
+					companyModelImpl.getOriginalVirtualHost()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_VIRTUALHOST,
 				new Object[] { companyModelImpl.getOriginalVirtualHost() });
 		}
@@ -351,7 +353,8 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl
 		}
 
 		if (!isNew &&
-				(!company.getMx().equals(companyModelImpl.getOriginalMx()))) {
+				(!Validator.equals(company.getMx(),
+					companyModelImpl.getOriginalMx()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_MX,
 				new Object[] { companyModelImpl.getOriginalMx() });
 		}

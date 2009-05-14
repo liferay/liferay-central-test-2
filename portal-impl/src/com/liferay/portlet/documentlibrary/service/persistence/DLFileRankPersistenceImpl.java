@@ -39,6 +39,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.service.persistence.BatchSessionUtil;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
@@ -350,8 +351,8 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl
 				((dlFileRank.getCompanyId() != dlFileRankModelImpl.getOriginalCompanyId()) ||
 				(dlFileRank.getUserId() != dlFileRankModelImpl.getOriginalUserId()) ||
 				(dlFileRank.getFolderId() != dlFileRankModelImpl.getOriginalFolderId()) ||
-				!dlFileRank.getName()
-							   .equals(dlFileRankModelImpl.getOriginalName()))) {
+				!Validator.equals(dlFileRank.getName(),
+					dlFileRankModelImpl.getOriginalName()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_U_F_N,
 				new Object[] {
 					new Long(dlFileRankModelImpl.getOriginalCompanyId()),

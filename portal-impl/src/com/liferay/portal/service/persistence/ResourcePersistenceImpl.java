@@ -40,6 +40,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.impl.ResourceImpl;
@@ -297,8 +298,8 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl
 
 		if (!isNew &&
 				((resource.getCodeId() != resourceModelImpl.getOriginalCodeId()) ||
-				!resource.getPrimKey()
-							 .equals(resourceModelImpl.getOriginalPrimKey()))) {
+				!Validator.equals(resource.getPrimKey(),
+					resourceModelImpl.getOriginalPrimKey()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_P,
 				new Object[] {
 					new Long(resourceModelImpl.getOriginalCodeId()),

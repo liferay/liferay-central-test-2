@@ -40,6 +40,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.model.Shard;
 import com.liferay.portal.model.impl.ShardImpl;
@@ -290,7 +291,8 @@ public class ShardPersistenceImpl extends BasePersistenceImpl
 			ShardImpl.class, shard.getPrimaryKey(), shard);
 
 		if (!isNew &&
-				(!shard.getName().equals(shardModelImpl.getOriginalName()))) {
+				(!Validator.equals(shard.getName(),
+					shardModelImpl.getOriginalName()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_NAME,
 				new Object[] { shardModelImpl.getOriginalName() });
 		}

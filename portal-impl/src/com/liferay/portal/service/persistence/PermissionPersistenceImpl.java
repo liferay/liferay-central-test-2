@@ -47,6 +47,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.model.Permission;
 import com.liferay.portal.model.impl.PermissionImpl;
@@ -338,8 +339,8 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 			PermissionImpl.class, permission.getPrimaryKey(), permission);
 
 		if (!isNew &&
-				(!permission.getActionId()
-								.equals(permissionModelImpl.getOriginalActionId()) ||
+				(!Validator.equals(permission.getActionId(),
+					permissionModelImpl.getOriginalActionId()) ||
 				(permission.getResourceId() != permissionModelImpl.getOriginalResourceId()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_A_R,
 				new Object[] {

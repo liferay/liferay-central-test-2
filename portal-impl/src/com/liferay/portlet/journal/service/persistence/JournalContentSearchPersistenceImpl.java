@@ -39,6 +39,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.service.persistence.BatchSessionUtil;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
@@ -423,10 +424,10 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl
 				((journalContentSearch.getGroupId() != journalContentSearchModelImpl.getOriginalGroupId()) ||
 				(journalContentSearch.getPrivateLayout() != journalContentSearchModelImpl.getOriginalPrivateLayout()) ||
 				(journalContentSearch.getLayoutId() != journalContentSearchModelImpl.getOriginalLayoutId()) ||
-				!journalContentSearch.getPortletId()
-										 .equals(journalContentSearchModelImpl.getOriginalPortletId()) ||
-				!journalContentSearch.getArticleId()
-										 .equals(journalContentSearchModelImpl.getOriginalArticleId()))) {
+				!Validator.equals(journalContentSearch.getPortletId(),
+					journalContentSearchModelImpl.getOriginalPortletId()) ||
+				!Validator.equals(journalContentSearch.getArticleId(),
+					journalContentSearchModelImpl.getOriginalArticleId()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_P_L_P_A,
 				new Object[] {
 					new Long(journalContentSearchModelImpl.getOriginalGroupId()),

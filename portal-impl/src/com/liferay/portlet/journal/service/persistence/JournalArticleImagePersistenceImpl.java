@@ -39,6 +39,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.service.persistence.BatchSessionUtil;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
@@ -377,15 +378,15 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl
 
 		if (!isNew &&
 				((journalArticleImage.getGroupId() != journalArticleImageModelImpl.getOriginalGroupId()) ||
-				!journalArticleImage.getArticleId()
-										.equals(journalArticleImageModelImpl.getOriginalArticleId()) ||
+				!Validator.equals(journalArticleImage.getArticleId(),
+					journalArticleImageModelImpl.getOriginalArticleId()) ||
 				(journalArticleImage.getVersion() != journalArticleImageModelImpl.getOriginalVersion()) ||
-				!journalArticleImage.getElInstanceId()
-										.equals(journalArticleImageModelImpl.getOriginalElInstanceId()) ||
-				!journalArticleImage.getElName()
-										.equals(journalArticleImageModelImpl.getOriginalElName()) ||
-				!journalArticleImage.getLanguageId()
-										.equals(journalArticleImageModelImpl.getOriginalLanguageId()))) {
+				!Validator.equals(journalArticleImage.getElInstanceId(),
+					journalArticleImageModelImpl.getOriginalElInstanceId()) ||
+				!Validator.equals(journalArticleImage.getElName(),
+					journalArticleImageModelImpl.getOriginalElName()) ||
+				!Validator.equals(journalArticleImage.getLanguageId(),
+					journalArticleImageModelImpl.getOriginalLanguageId()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_A_V_E_E_L,
 				new Object[] {
 					new Long(journalArticleImageModelImpl.getOriginalGroupId()),

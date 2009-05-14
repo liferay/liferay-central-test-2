@@ -40,6 +40,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.model.PluginSetting;
 import com.liferay.portal.model.impl.PluginSettingImpl;
@@ -320,10 +321,10 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl
 
 		if (!isNew &&
 				((pluginSetting.getCompanyId() != pluginSettingModelImpl.getOriginalCompanyId()) ||
-				!pluginSetting.getPluginId()
-								  .equals(pluginSettingModelImpl.getOriginalPluginId()) ||
-				!pluginSetting.getPluginType()
-								  .equals(pluginSettingModelImpl.getOriginalPluginType()))) {
+				!Validator.equals(pluginSetting.getPluginId(),
+					pluginSettingModelImpl.getOriginalPluginId()) ||
+				!Validator.equals(pluginSetting.getPluginType(),
+					pluginSettingModelImpl.getOriginalPluginType()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_I_T,
 				new Object[] {
 					new Long(pluginSettingModelImpl.getOriginalCompanyId()),

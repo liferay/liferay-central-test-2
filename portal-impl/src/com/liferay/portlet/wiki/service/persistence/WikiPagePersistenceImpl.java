@@ -485,7 +485,8 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 			WikiPageImpl.class, wikiPage.getPrimaryKey(), wikiPage);
 
 		if (!isNew &&
-				(!wikiPage.getUuid().equals(wikiPageModelImpl.getOriginalUuid()) ||
+				(!Validator.equals(wikiPage.getUuid(),
+					wikiPageModelImpl.getOriginalUuid()) ||
 				(wikiPage.getGroupId() != wikiPageModelImpl.getOriginalGroupId()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 				new Object[] {
@@ -504,7 +505,8 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 
 		if (!isNew &&
 				((wikiPage.getNodeId() != wikiPageModelImpl.getOriginalNodeId()) ||
-				!wikiPage.getTitle().equals(wikiPageModelImpl.getOriginalTitle()) ||
+				!Validator.equals(wikiPage.getTitle(),
+					wikiPageModelImpl.getOriginalTitle()) ||
 				(wikiPage.getVersion() != wikiPageModelImpl.getOriginalVersion()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_N_T_V,
 				new Object[] {

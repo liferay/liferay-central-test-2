@@ -40,6 +40,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ClassName;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.model.impl.ClassNameImpl;
@@ -275,8 +276,8 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl
 			ClassNameImpl.class, className.getPrimaryKey(), className);
 
 		if (!isNew &&
-				(!className.getValue()
-							   .equals(classNameModelImpl.getOriginalValue()))) {
+				(!Validator.equals(className.getValue(),
+					classNameModelImpl.getOriginalValue()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_VALUE,
 				new Object[] { classNameModelImpl.getOriginalValue() });
 		}

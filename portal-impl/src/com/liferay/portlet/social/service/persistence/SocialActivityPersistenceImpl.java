@@ -40,6 +40,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.service.persistence.BatchSessionUtil;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
@@ -471,8 +472,8 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl
 		if (!isNew &&
 				((socialActivity.getGroupId() != socialActivityModelImpl.getOriginalGroupId()) ||
 				(socialActivity.getUserId() != socialActivityModelImpl.getOriginalUserId()) ||
-				!socialActivity.getCreateDate()
-								   .equals(socialActivityModelImpl.getOriginalCreateDate()) ||
+				!Validator.equals(socialActivity.getCreateDate(),
+					socialActivityModelImpl.getOriginalCreateDate()) ||
 				(socialActivity.getClassNameId() != socialActivityModelImpl.getOriginalClassNameId()) ||
 				(socialActivity.getClassPK() != socialActivityModelImpl.getOriginalClassPK()) ||
 				(socialActivity.getType() != socialActivityModelImpl.getOriginalType()) ||

@@ -40,6 +40,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.model.ResourcePermission;
 import com.liferay.portal.model.impl.ResourcePermissionImpl;
@@ -376,11 +377,11 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl
 
 		if (!isNew &&
 				((resourcePermission.getCompanyId() != resourcePermissionModelImpl.getOriginalCompanyId()) ||
-				!resourcePermission.getName()
-									   .equals(resourcePermissionModelImpl.getOriginalName()) ||
+				!Validator.equals(resourcePermission.getName(),
+					resourcePermissionModelImpl.getOriginalName()) ||
 				(resourcePermission.getScope() != resourcePermissionModelImpl.getOriginalScope()) ||
-				!resourcePermission.getPrimKey()
-									   .equals(resourcePermissionModelImpl.getOriginalPrimKey()) ||
+				!Validator.equals(resourcePermission.getPrimKey(),
+					resourcePermissionModelImpl.getOriginalPrimKey()) ||
 				(resourcePermission.getRoleId() != resourcePermissionModelImpl.getOriginalRoleId()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_N_S_P_R,
 				new Object[] {

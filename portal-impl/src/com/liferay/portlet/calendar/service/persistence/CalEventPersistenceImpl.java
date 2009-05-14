@@ -389,7 +389,8 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl
 			CalEventImpl.class, calEvent.getPrimaryKey(), calEvent);
 
 		if (!isNew &&
-				(!calEvent.getUuid().equals(calEventModelImpl.getOriginalUuid()) ||
+				(!Validator.equals(calEvent.getUuid(),
+					calEventModelImpl.getOriginalUuid()) ||
 				(calEvent.getGroupId() != calEventModelImpl.getOriginalGroupId()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 				new Object[] {

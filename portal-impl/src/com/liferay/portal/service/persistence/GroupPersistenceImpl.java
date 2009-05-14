@@ -47,6 +47,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.model.impl.GroupImpl;
@@ -483,7 +484,8 @@ public class GroupPersistenceImpl extends BasePersistenceImpl
 
 		if (!isNew &&
 				((group.getCompanyId() != groupModelImpl.getOriginalCompanyId()) ||
-				!group.getName().equals(groupModelImpl.getOriginalName()))) {
+				!Validator.equals(group.getName(),
+					groupModelImpl.getOriginalName()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_N,
 				new Object[] {
 					new Long(groupModelImpl.getOriginalCompanyId()),
@@ -502,8 +504,8 @@ public class GroupPersistenceImpl extends BasePersistenceImpl
 
 		if (!isNew &&
 				((group.getCompanyId() != groupModelImpl.getOriginalCompanyId()) ||
-				!group.getFriendlyURL()
-						  .equals(groupModelImpl.getOriginalFriendlyURL()))) {
+				!Validator.equals(group.getFriendlyURL(),
+					groupModelImpl.getOriginalFriendlyURL()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_F,
 				new Object[] {
 					new Long(groupModelImpl.getOriginalCompanyId()),
@@ -551,7 +553,8 @@ public class GroupPersistenceImpl extends BasePersistenceImpl
 		if (!isNew &&
 				((group.getCompanyId() != groupModelImpl.getOriginalCompanyId()) ||
 				(group.getLiveGroupId() != groupModelImpl.getOriginalLiveGroupId()) ||
-				!group.getName().equals(groupModelImpl.getOriginalName()))) {
+				!Validator.equals(group.getName(),
+					groupModelImpl.getOriginalName()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_L_N,
 				new Object[] {
 					new Long(groupModelImpl.getOriginalCompanyId()),
@@ -578,7 +581,8 @@ public class GroupPersistenceImpl extends BasePersistenceImpl
 				((group.getCompanyId() != groupModelImpl.getOriginalCompanyId()) ||
 				(group.getClassNameId() != groupModelImpl.getOriginalClassNameId()) ||
 				(group.getLiveGroupId() != groupModelImpl.getOriginalLiveGroupId()) ||
-				!group.getName().equals(groupModelImpl.getOriginalName()))) {
+				!Validator.equals(group.getName(),
+					groupModelImpl.getOriginalName()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_C_L_N,
 				new Object[] {
 					new Long(groupModelImpl.getOriginalCompanyId()),

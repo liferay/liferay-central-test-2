@@ -40,6 +40,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.model.PortletItem;
 import com.liferay.portal.model.impl.PortletItemImpl;
@@ -342,10 +343,10 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl
 
 		if (!isNew &&
 				((portletItem.getGroupId() != portletItemModelImpl.getOriginalGroupId()) ||
-				!portletItem.getName()
-								.equals(portletItemModelImpl.getOriginalName()) ||
-				!portletItem.getPortletId()
-								.equals(portletItemModelImpl.getOriginalPortletId()) ||
+				!Validator.equals(portletItem.getName(),
+					portletItemModelImpl.getOriginalName()) ||
+				!Validator.equals(portletItem.getPortletId(),
+					portletItemModelImpl.getOriginalPortletId()) ||
 				(portletItem.getClassNameId() != portletItemModelImpl.getOriginalClassNameId()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_N_P_C,
 				new Object[] {

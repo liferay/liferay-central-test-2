@@ -39,6 +39,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.service.persistence.BatchSessionUtil;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
@@ -311,8 +312,8 @@ public class ExpandoColumnPersistenceImpl extends BasePersistenceImpl
 
 		if (!isNew &&
 				((expandoColumn.getTableId() != expandoColumnModelImpl.getOriginalTableId()) ||
-				!expandoColumn.getName()
-								  .equals(expandoColumnModelImpl.getOriginalName()))) {
+				!Validator.equals(expandoColumn.getName(),
+					expandoColumnModelImpl.getOriginalName()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_T_N,
 				new Object[] {
 					new Long(expandoColumnModelImpl.getOriginalTableId()),

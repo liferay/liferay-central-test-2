@@ -404,7 +404,8 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 			DLFolderImpl.class, dlFolder.getPrimaryKey(), dlFolder);
 
 		if (!isNew &&
-				(!dlFolder.getUuid().equals(dlFolderModelImpl.getOriginalUuid()) ||
+				(!Validator.equals(dlFolder.getUuid(),
+					dlFolderModelImpl.getOriginalUuid()) ||
 				(dlFolder.getGroupId() != dlFolderModelImpl.getOriginalGroupId()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 				new Object[] {
@@ -424,7 +425,8 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 		if (!isNew &&
 				((dlFolder.getGroupId() != dlFolderModelImpl.getOriginalGroupId()) ||
 				(dlFolder.getParentFolderId() != dlFolderModelImpl.getOriginalParentFolderId()) ||
-				!dlFolder.getName().equals(dlFolderModelImpl.getOriginalName()))) {
+				!Validator.equals(dlFolder.getName(),
+					dlFolderModelImpl.getOriginalName()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_P_N,
 				new Object[] {
 					new Long(dlFolderModelImpl.getOriginalGroupId()),

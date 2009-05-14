@@ -395,8 +395,8 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 			journalStructure);
 
 		if (!isNew &&
-				(!journalStructure.getUuid()
-									  .equals(journalStructureModelImpl.getOriginalUuid()) ||
+				(!Validator.equals(journalStructure.getUuid(),
+					journalStructureModelImpl.getOriginalUuid()) ||
 				(journalStructure.getGroupId() != journalStructureModelImpl.getOriginalGroupId()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 				new Object[] {
@@ -418,8 +418,8 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 
 		if (!isNew &&
 				((journalStructure.getGroupId() != journalStructureModelImpl.getOriginalGroupId()) ||
-				!journalStructure.getStructureId()
-									 .equals(journalStructureModelImpl.getOriginalStructureId()))) {
+				!Validator.equals(journalStructure.getStructureId(),
+					journalStructureModelImpl.getOriginalStructureId()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_S,
 				new Object[] {
 					new Long(journalStructureModelImpl.getOriginalGroupId()),

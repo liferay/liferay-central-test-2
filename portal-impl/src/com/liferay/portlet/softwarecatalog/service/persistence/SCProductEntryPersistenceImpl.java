@@ -46,6 +46,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.service.persistence.BatchSessionUtil;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
@@ -364,10 +365,10 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 			scProductEntry);
 
 		if (!isNew &&
-				(!scProductEntry.getRepoGroupId()
-									.equals(scProductEntryModelImpl.getOriginalRepoGroupId()) ||
-				!scProductEntry.getRepoArtifactId()
-								   .equals(scProductEntryModelImpl.getOriginalRepoArtifactId()))) {
+				(!Validator.equals(scProductEntry.getRepoGroupId(),
+					scProductEntryModelImpl.getOriginalRepoGroupId()) ||
+				!Validator.equals(scProductEntry.getRepoArtifactId(),
+					scProductEntryModelImpl.getOriginalRepoArtifactId()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_RG_RA,
 				new Object[] {
 					scProductEntryModelImpl.getOriginalRepoGroupId(),

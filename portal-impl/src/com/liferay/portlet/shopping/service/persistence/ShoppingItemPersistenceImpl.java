@@ -44,6 +44,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.service.persistence.BatchSessionUtil;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
@@ -407,8 +408,8 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl
 
 		if (!isNew &&
 				((shoppingItem.getCompanyId() != shoppingItemModelImpl.getOriginalCompanyId()) ||
-				!shoppingItem.getSku()
-								 .equals(shoppingItemModelImpl.getOriginalSku()))) {
+				!Validator.equals(shoppingItem.getSku(),
+					shoppingItemModelImpl.getOriginalSku()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_S,
 				new Object[] {
 					new Long(shoppingItemModelImpl.getOriginalCompanyId()),

@@ -40,6 +40,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.model.PasswordPolicy;
 import com.liferay.portal.model.impl.PasswordPolicyImpl;
@@ -335,8 +336,8 @@ public class PasswordPolicyPersistenceImpl extends BasePersistenceImpl
 
 		if (!isNew &&
 				((passwordPolicy.getCompanyId() != passwordPolicyModelImpl.getOriginalCompanyId()) ||
-				!passwordPolicy.getName()
-								   .equals(passwordPolicyModelImpl.getOriginalName()))) {
+				!Validator.equals(passwordPolicy.getName(),
+					passwordPolicyModelImpl.getOriginalName()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_N,
 				new Object[] {
 					new Long(passwordPolicyModelImpl.getOriginalCompanyId()),

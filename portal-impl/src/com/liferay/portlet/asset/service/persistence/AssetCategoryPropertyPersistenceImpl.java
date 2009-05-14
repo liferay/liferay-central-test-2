@@ -39,6 +39,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.service.persistence.BatchSessionUtil;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
@@ -350,8 +351,8 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl
 
 		if (!isNew &&
 				((assetCategoryProperty.getCategoryId() != assetCategoryPropertyModelImpl.getOriginalCategoryId()) ||
-				!assetCategoryProperty.getKey()
-										  .equals(assetCategoryPropertyModelImpl.getOriginalKey()))) {
+				!Validator.equals(assetCategoryProperty.getKey(),
+					assetCategoryPropertyModelImpl.getOriginalKey()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_CA_K,
 				new Object[] {
 					new Long(assetCategoryPropertyModelImpl.getOriginalCategoryId()),

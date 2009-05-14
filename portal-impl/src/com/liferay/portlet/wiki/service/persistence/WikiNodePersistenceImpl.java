@@ -359,7 +359,8 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl
 			WikiNodeImpl.class, wikiNode.getPrimaryKey(), wikiNode);
 
 		if (!isNew &&
-				(!wikiNode.getUuid().equals(wikiNodeModelImpl.getOriginalUuid()) ||
+				(!Validator.equals(wikiNode.getUuid(),
+					wikiNodeModelImpl.getOriginalUuid()) ||
 				(wikiNode.getGroupId() != wikiNodeModelImpl.getOriginalGroupId()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 				new Object[] {
@@ -378,7 +379,8 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl
 
 		if (!isNew &&
 				((wikiNode.getGroupId() != wikiNodeModelImpl.getOriginalGroupId()) ||
-				!wikiNode.getName().equals(wikiNodeModelImpl.getOriginalName()))) {
+				!Validator.equals(wikiNode.getName(),
+					wikiNodeModelImpl.getOriginalName()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_N,
 				new Object[] {
 					new Long(wikiNodeModelImpl.getOriginalGroupId()),
