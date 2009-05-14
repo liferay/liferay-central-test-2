@@ -171,24 +171,19 @@ public class EditRolePermissionsAction extends PortletAction {
 	}
 
 	protected void updateAction_1to5(
-			ActionRequest actionRequest, Role role, long groupId,
-			String selResource, String actionId)
+			Role role, long groupId, String selResource, String actionId,
+			boolean selected, int scope, String[] groupIds)
 		throws Exception {
 
 		long roleId = role.getRoleId();
 
-		int scope = ParamUtil.getInteger(
-			actionRequest, "scope" + selResource + actionId);
-
-		if (scope == ResourceConstants.SCOPE_COMPANY) {
-			PermissionServiceUtil.setRolePermission(
-				roleId, groupId, selResource, scope,
-				String.valueOf(role.getCompanyId()), actionId);
-		}
-		else if (scope == ResourceConstants.SCOPE_GROUP) {
-			if ((role.getType() == RoleConstants.TYPE_COMMUNITY) ||
-				(role.getType() == RoleConstants.TYPE_ORGANIZATION)) {
-
+		if (selected) {
+			if (scope == ResourceConstants.SCOPE_COMPANY) {
+				PermissionServiceUtil.setRolePermission(
+					roleId, groupId, selResource, scope,
+					String.valueOf(role.getCompanyId()), actionId);
+			}
+			else if (scope == ResourceConstants.SCOPE_GROUP_TEMPLATE) {
 				PermissionServiceUtil.setRolePermission(
 					roleId, groupId, selResource,
 					ResourceConstants.SCOPE_GROUP_TEMPLATE,
@@ -196,19 +191,6 @@ public class EditRolePermissionsAction extends PortletAction {
 					actionId);
 			}
 			else {
-				String[] groupIds = StringUtil.split(
-					ParamUtil.getString(
-						actionRequest, "groupIds" + selResource + actionId));
-
-				if (groupIds.length == 0) {
-					SessionErrors.add(
-						actionRequest, "missingGroupIdsForAction");
-
-					return;
-				}
-
-				groupIds = ArrayUtil.distinct(groupIds);
-
 				PermissionServiceUtil.unsetRolePermissions(
 					roleId, groupId, selResource, ResourceConstants.SCOPE_GROUP,
 					actionId);
@@ -239,45 +221,27 @@ public class EditRolePermissionsAction extends PortletAction {
 	}
 
 	protected void updateAction_6(
-			ActionRequest actionRequest, Role role, long groupId,
-			String selResource, String actionId)
+			Role role, long groupId, String selResource, String actionId,
+			boolean selected, int scope, String[] groupIds)
 		throws Exception {
 
 		long companyId = role.getCompanyId();
 		long roleId = role.getRoleId();
 
-		int scope = ParamUtil.getInteger(
-			actionRequest, "scope" + selResource + actionId);
-
-		if (scope == ResourceConstants.SCOPE_COMPANY) {
-			ResourcePermissionServiceUtil.addResourcePermission(
-				groupId, companyId, selResource, scope,
-				String.valueOf(role.getCompanyId()), roleId, actionId);
-		}
-		else if (scope == ResourceConstants.SCOPE_GROUP) {
-			if ((role.getType() == RoleConstants.TYPE_COMMUNITY) ||
-				(role.getType() == RoleConstants.TYPE_ORGANIZATION)) {
-
+		if (selected) {
+			if (scope == ResourceConstants.SCOPE_COMPANY) {
+				ResourcePermissionServiceUtil.addResourcePermission(
+					groupId, companyId, selResource, scope,
+					String.valueOf(role.getCompanyId()), roleId, actionId);
+			}
+			else if (scope == ResourceConstants.SCOPE_GROUP_TEMPLATE) {
 				ResourcePermissionServiceUtil.addResourcePermission(
 					groupId, companyId, selResource,
 					ResourceConstants.SCOPE_GROUP_TEMPLATE,
 					String.valueOf(GroupConstants.DEFAULT_PARENT_GROUP_ID),
 					roleId, actionId);
 			}
-			else {
-				String[] groupIds = StringUtil.split(
-					ParamUtil.getString(
-						actionRequest, "groupIds" + selResource + actionId));
-
-				if (groupIds.length == 0) {
-					SessionErrors.add(
-						actionRequest, "missingGroupIdsForAction");
-
-					return;
-				}
-
-				groupIds = ArrayUtil.distinct(groupIds);
-
+			else if (scope == ResourceConstants.SCOPE_GROUP) {
 				ResourcePermissionServiceUtil.removeResourcePermissions(
 					groupId, companyId, selResource,
 					ResourceConstants.SCOPE_GROUP, roleId, actionId);
@@ -333,6 +297,8 @@ public class EditRolePermissionsAction extends PortletAction {
 			actionRequest, "portletResource");
 		String[] modelResources = StringUtil.split(
 			ParamUtil.getString(actionRequest, "modelResources"));
+		String[] selectedTargets = StringUtil.split(
+			ParamUtil.getString(actionRequest, "selectedTargets"));
 
 		Map<String, List<String>> resourceActionsMap =
 			new HashMap<String, List<String>>();
@@ -361,15 +327,40 @@ public class EditRolePermissionsAction extends PortletAction {
 					themeDisplay.getCompanyId(), themeDisplay.getLocale()));
 
 			for (String actionId : actions) {
+				String target = selResource + actionId;
+
+				boolean selected = ArrayUtil.contains(selectedTargets, target);
+
+				String[] groupIds = StringUtil.split(
+					ParamUtil.getString(
+						actionRequest, "groupIds" + target));
+
+				groupIds = ArrayUtil.distinct(groupIds);
+
+				int scope;
+
+				if ((role.getType() == RoleConstants.TYPE_COMMUNITY) ||
+					(role.getType() == RoleConstants.TYPE_ORGANIZATION)) {
+					 scope = ResourceConstants.SCOPE_GROUP_TEMPLATE;
+				}
+				else {
+					if (groupIds.length > 0) {
+						scope = ResourceConstants.SCOPE_GROUP;
+					}
+					else {
+						scope = ResourceConstants.SCOPE_COMPANY;
+					}
+				}
+
 				if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
 					updateAction_6(
-						actionRequest, role, themeDisplay.getScopeGroupId(),
-						selResource, actionId);
+						role, themeDisplay.getScopeGroupId(), selResource,
+						actionId, selected, scope, groupIds);
 				}
 				else {
 					updateAction_1to5(
-						actionRequest, role, themeDisplay.getScopeGroupId(),
-						selResource, actionId);
+						role, themeDisplay.getScopeGroupId(), selResource,
+						actionId, selected, scope, groupIds);
 				}
 			}
 		}

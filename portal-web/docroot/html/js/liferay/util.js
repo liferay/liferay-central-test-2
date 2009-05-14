@@ -215,6 +215,14 @@ Liferay.Util = {
 		}
 	},
 
+	contains: function(array, obj) {
+	  for (var i = 0; i < array.length; i++) {
+		if (array[i] == obj) {
+			return true;
+		}
+	  }
+	},
+
 	createFlyouts: function(options) {
 		var instance = this;
 

@@ -45,8 +45,7 @@
 	<model-resource>
 		<model-name>com.liferay.portal.model.Group</model-name>
 		<portlet-ref>
-			<portlet-name>29</portlet-name>
-			<portlet-name>90</portlet-name>
+			<portlet-name>134</portlet-name>
 		</portlet-ref>
 		<supports>
 			<action-key>APPROVE_PROPOSAL</action-key>
@@ -80,9 +79,7 @@
 	<model-resource>
 		<model-name>com.liferay.portal.model.Organization</model-name>
 		<portlet-ref>
-			<portlet-name>11</portlet-name>
-			<portlet-name>79</portlet-name>
-			<portlet-name>90</portlet-name>
+			<portlet-name>126</portlet-name>
 		</portlet-ref>
 		<supports>
 			<action-key>APPROVE_PROPOSAL</action-key>
@@ -122,8 +119,7 @@
 	<model-resource>
 		<model-name>com.liferay.portal.model.PasswordPolicy</model-name>
 		<portlet-ref>
-			<portlet-name>79</portlet-name>
-			<portlet-name>90</portlet-name>
+			<portlet-name>129</portlet-name>
 		</portlet-ref>
 		<supports>
 			<action-key>ASSIGN_MEMBERS</action-key>
@@ -145,8 +141,7 @@
 	<model-resource>
 		<model-name>com.liferay.portal.model.Role</model-name>
 		<portlet-ref>
-			<portlet-name>79</portlet-name>
-			<portlet-name>90</portlet-name>
+			<portlet-name>128</portlet-name>
 		</portlet-ref>
 		<supports>
 			<action-key>ASSIGN_MEMBERS</action-key>
@@ -172,9 +167,7 @@
 	<model-resource>
 		<model-name>com.liferay.portal.model.User</model-name>
 		<portlet-ref>
-			<portlet-name>11</portlet-name>
-			<portlet-name>79</portlet-name>
-			<portlet-name>90</portlet-name>
+			<portlet-name>125</portlet-name>
 		</portlet-ref>
 		<supports>
 			<action-key>DELETE</action-key>
@@ -196,9 +189,7 @@
 	<model-resource>
 		<model-name>com.liferay.portal.model.UserGroup</model-name>
 		<portlet-ref>
-			<portlet-name>11</portlet-name>
-			<portlet-name>79</portlet-name>
-			<portlet-name>90</portlet-name>
+			<portlet-name>127</portlet-name>
 		</portlet-ref>
 		<supports>
 			<action-key>ASSIGN_MEMBERS</action-key>

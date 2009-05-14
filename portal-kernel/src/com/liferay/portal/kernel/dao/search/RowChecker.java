@@ -112,8 +112,8 @@ public class RowChecker {
 			sb.append(_allRowsId);
 			sb.append("\" type=\"checkbox\" ");
 			sb.append("onClick=\"Liferay.Util.checkAll(");
-			sb.append(_formName);
-			sb.append(", '");
+			sb.append("jQuery(this).parents('table.taglib-search-iterator'), ");
+			sb.append("'");
 			sb.append(_rowId);
 			sb.append("', this");
 			sb.append(");\">");
@@ -139,8 +139,8 @@ public class RowChecker {
 
 		if (Validator.isNotNull(_allRowsId)) {
 			sb.append("onClick=\"Liferay.Util.checkAllBox(");
-			sb.append(_formName);
-			sb.append(", '");
+			sb.append("jQuery(this).parents('table.taglib-search-iterator'), ");
+			sb.append("'");
 			sb.append(_rowId);
 			sb.append("', ");
 			sb.append(_allRowsId);

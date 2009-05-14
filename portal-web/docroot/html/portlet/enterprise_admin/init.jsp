@@ -100,6 +100,7 @@
 <%@ page import="com.liferay.portlet.enterpriseadmin.search.PasswordPolicyDisplayTerms" %>
 <%@ page import="com.liferay.portlet.enterpriseadmin.search.PasswordPolicySearch" %>
 <%@ page import="com.liferay.portlet.enterpriseadmin.search.PasswordPolicySearchTerms" %>
+<%@ page import="com.liferay.portlet.enterpriseadmin.search.ResourceActionRowChecker" %>
 <%@ page import="com.liferay.portlet.enterpriseadmin.search.RoleDisplayTerms" %>
 <%@ page import="com.liferay.portlet.enterpriseadmin.search.RoleSearch" %>
 <%@ page import="com.liferay.portlet.enterpriseadmin.search.RoleSearchTerms" %>

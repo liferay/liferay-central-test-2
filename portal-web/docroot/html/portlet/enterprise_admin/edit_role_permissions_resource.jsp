@@ -38,26 +38,34 @@ List curActions = ResourceActionsUtil.getResourceActions(curPortletResource, cur
 curActions = ListUtil.sort(curActions, new ActionComparator(company.getCompanyId(), locale));
 
 List guestUnsupportedActions = ResourceActionsUtil.getResourceGuestUnsupportedActions(curPortletResource, curModelResource);
-%>
 
-<table class="lfr-table">
-<tr>
-	<th>
-		<liferay-ui:message key="action" />
-	</th>
-	<th>
-		<c:choose>
-			<c:when test="<%= role.getType() == RoleConstants.TYPE_REGULAR %>">
-				<liferay-ui:message key="scope" />
-			</c:when>
-		</c:choose>
-	</th>
-	<th></th>
-</tr>
+List<String> headerNames = new ArrayList<String>();
 
-<%
+headerNames.add("action");
+
+if (role.getType() == RoleConstants.TYPE_REGULAR) {
+	headerNames.add("scope");
+	headerNames.add(StringPool.BLANK);
+}
+
+SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, renderResponse.createRenderURL(), headerNames, "there-are-no-actions-available-for-selection");
+
+searchContainer.setRowChecker(new ResourceActionRowChecker(renderResponse));
+
+int total = curActions.size();
+
+searchContainer.setTotal(total);
+
+searchContainer.setResults(curActions);
+
+List resultRows = searchContainer.getResultRows();
+
 for (int i = 0; i < curActions.size(); i++) {
 	String actionId = (String)curActions.get(i);
+
+	if (role.getName().equals(RoleConstants.GUEST) && guestUnsupportedActions.contains(actionId)) {
+		continue;
+	}
 
 	String curResource = null;
 
@@ -70,155 +78,71 @@ for (int i = 0; i < curActions.size(); i++) {
 
 	String target = curResource + actionId;
 
-	int scopeParam = ParamUtil.getInteger(renderRequest, "scope" + target);
+	List groups = Collections.EMPTY_LIST;
+	String groupIds = ParamUtil.getString(request, "groupIds" + target, null);
+	long[] groupIdsArray = StringUtil.split(groupIds, 0L);
 
-	boolean hasCompanyScope = false;
-	boolean hasGroupTemplateScope = false;
-	boolean hasGroupScope = false;
+	List groupNames = new ArrayList();
 
-	if (scopeParam > 0) {
-		hasCompanyScope = (scopeParam == ResourceConstants.SCOPE_COMPANY);
-		hasGroupTemplateScope = (scopeParam == ResourceConstants.SCOPE_GROUP_TEMPLATE);
-		hasGroupScope = (scopeParam == ResourceConstants.SCOPE_GROUP);
-	}
-	else {
-		if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
-			hasCompanyScope = (role.getType() == RoleConstants.TYPE_REGULAR) && ResourcePermissionLocalServiceUtil.hasScopeResourcePermission(company.getCompanyId(), curResource, ResourceConstants.SCOPE_COMPANY, role.getRoleId(), actionId);
-			hasGroupTemplateScope = ((role.getType() == RoleConstants.TYPE_COMMUNITY) || (role.getType() == RoleConstants.TYPE_ORGANIZATION)) && ResourcePermissionLocalServiceUtil.hasScopeResourcePermission(company.getCompanyId(), curResource, ResourceConstants.SCOPE_GROUP_TEMPLATE, role.getRoleId(), actionId);
-			hasGroupScope = (role.getType() == RoleConstants.TYPE_REGULAR) && ResourcePermissionLocalServiceUtil.hasScopeResourcePermission(company.getCompanyId(), curResource, ResourceConstants.SCOPE_GROUP, role.getRoleId(), actionId);
+	int scope;
+
+	if (role.getType() == RoleConstants.TYPE_REGULAR) {
+		LinkedHashMap groupParams = new LinkedHashMap();
+
+		List rolePermissions = new ArrayList();
+
+		rolePermissions.add(curResource);
+		rolePermissions.add(new Integer(ResourceConstants.SCOPE_GROUP));
+		rolePermissions.add(actionId);
+		rolePermissions.add(new Long(role.getRoleId()));
+
+		groupParams.put("rolePermissions", rolePermissions);
+
+		groups = GroupLocalServiceUtil.search(company.getCompanyId(), null, null, groupParams, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+
+		groupIdsArray = new long[groups.size()];
+
+		for (int j = 0; j < groups.size(); j++) {
+			Group group = (Group)groups.get(j);
+
+			groupIdsArray[j] = group.getGroupId();
+
+			groupNames.add(group.getName());
+		}
+
+		if (groups.isEmpty()) {
+			scope = ResourceConstants.SCOPE_COMPANY;
 		}
 		else {
-			hasCompanyScope = (role.getType() == RoleConstants.TYPE_REGULAR) && PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), curResource, ResourceConstants.SCOPE_COMPANY, actionId);
-			hasGroupTemplateScope = ((role.getType() == RoleConstants.TYPE_COMMUNITY) || (role.getType() == RoleConstants.TYPE_ORGANIZATION)) && PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), curResource, ResourceConstants.SCOPE_GROUP_TEMPLATE, actionId);
-			hasGroupScope = (role.getType() == RoleConstants.TYPE_REGULAR) && PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), curResource, ResourceConstants.SCOPE_GROUP, actionId);
+			scope = ResourceConstants.SCOPE_GROUP;
 		}
 	}
-%>
+	else {
+		scope = ResourceConstants.SCOPE_GROUP_TEMPLATE;
+	}
 
-	<tr>
-		<td>
-			<%= ResourceActionsUtil.getAction(pageContext, actionId) %>
-		</td>
-		<td>
-			<c:choose>
-				<c:when test="<%= role.getType() == RoleConstants.TYPE_REGULAR %>">
+	boolean supportsFilterByGroup = false;
 
-					<%
-					boolean disabled = false;
+	if (role.getType() == RoleConstants.TYPE_REGULAR) {
+		if (!ResourceActionsUtil.isPortalModelResource(curResource) && !portletResource.equals(PortletKeys.PORTAL)) {
+			supportsFilterByGroup = true;
+		}
+	}
 
-					if (role.getName().equals(RoleConstants.GUEST) && guestUnsupportedActions.contains(actionId)) {
-						disabled = true;
-					}
-					%>
+	ResultRow row = new ResultRow(new Object[] {role, actionId, curResource, target, scope, supportsFilterByGroup, groups, groupIdsArray, groupNames}, target, i);
 
-					<select <%= disabled ? "disabled" : "" %> name="<portlet:namespace />scope<%= target %>" onchange="<portlet:namespace/>toggleGroupDiv('<%= target %>');">
-						<option value=""></option>
-							<option <%= hasCompanyScope ? "selected" : "" %> value="<%= ResourceConstants.SCOPE_COMPANY %>"><liferay-ui:message key="portal" /></option>
+	row.addText(ResourceActionsUtil.getAction(pageContext, actionId));
 
-							<c:if test="<%= !portletResource.equals(PortletKeys.ENTERPRISE_ADMIN) && !portletResource.equals(PortletKeys.PORTAL) %>">
-								<option <%= (hasGroupScope) ? "selected" : "" %> value="<%= ResourceConstants.SCOPE_GROUP %>"><liferay-ui:message key="communities" /></option>
-							</c:if>
-					</select>
-				</c:when>
-				<c:when test="<%= (role.getType() == RoleConstants.TYPE_COMMUNITY) || (role.getType() == RoleConstants.TYPE_ORGANIZATION) %>">
+	if (role.getType() == RoleConstants.TYPE_REGULAR) {
+		row.addJSP("/html/portlet/enterprise_admin/edit_role_permissions_resource_scope.jsp");
+		row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/enterprise_admin/edit_role_permissions_resource_action.jsp");
+	}
 
-					<%
-					String taglibScopeOnClick = "document.getElementById('" + renderResponse.getNamespace() + "scope" + target + "').value = (this.checked ? '" + ResourceConstants.SCOPE_GROUP + "' : '');";
-
-					boolean disabled = portletResource.equals(PortletKeys.ENTERPRISE_ADMIN) || portletResource.equals(PortletKeys.PORTAL);
-
-					if ((role.getType() == RoleConstants.TYPE_ORGANIZATION) && Validator.isNotNull(curModelResource) && curModelResource.equals(Organization.class.getName())) {
-						disabled = false;
-					}
-					%>
-
-					<liferay-ui:input-checkbox
-						param='<%= "scope" + target %>'
-						defaultValue="<%= hasGroupTemplateScope %>"
-						onClick="<%= taglibScopeOnClick %>"
-						disabled="<%= disabled %>"
-					/>
-
-					<c:if test="<%= hasGroupTemplateScope %>">
-						<script type="text/javascript">
-							document.getElementById("<%= renderResponse.getNamespace() %>scope<%= target %>").value =	"<%= ResourceConstants.SCOPE_GROUP %>";
-						</script>
-					</c:if>
-				</c:when>
-			</c:choose>
-		</td>
-		<td>
-
-			<%
-			StringBuilder groupsHTML = new StringBuilder();
-
-			String groupIds = ParamUtil.getString(request, "groupIds" + target, null);
-			long[] groupIdsArray = StringUtil.split(groupIds, 0L);
-
-			List groupNames = new ArrayList();
-			%>
-
-			<c:if test="<%= hasGroupScope %>">
-
-				<%
-				LinkedHashMap groupParams = new LinkedHashMap();
-
-				List rolePermissions = new ArrayList();
-
-				rolePermissions.add(curResource);
-				rolePermissions.add(new Integer(ResourceConstants.SCOPE_GROUP));
-				rolePermissions.add(actionId);
-				rolePermissions.add(new Long(role.getRoleId()));
-
-				groupParams.put("rolePermissions", rolePermissions);
-
-				List groups = GroupLocalServiceUtil.search(company.getCompanyId(), null, null, groupParams, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
-
-				groupIdsArray = new long[groups.size()];
-
-				for (int j = 0; j < groups.size(); j++) {
-					Group group = (Group)groups.get(j);
-
-					groupIdsArray[j] = group.getGroupId();
-
-					groupNames.add(group.getName());
-
-					groupsHTML.append("<span>");
-					groupsHTML.append(group.getName());
-
-					groupsHTML.append("&nbsp;[<a href=\"javascript: ");
-					groupsHTML.append(renderResponse.getNamespace());
-					groupsHTML.append("removeGroup(");
-					groupsHTML.append(j);
-					groupsHTML.append(", '");
-					groupsHTML.append(target);
-					groupsHTML.append("');\">x</a>]");
-
-					groupsHTML.append("</span>");
-
-					if ((j + 1) != groups.size()) {
-						groupsHTML.append(",&nbsp;");
-					}
-				}
-				%>
-
-			</c:if>
-
-			<input name="<portlet:namespace />groupIds<%= target %>" type="hidden" value="<%= StringUtil.merge(groupIdsArray) %>" />
-			<input name="<portlet:namespace />groupNames<%= target %>" type="hidden" value='<%= StringUtil.merge(groupNames, "@@") %>' />
-
-			<div id="<portlet:namespace />groupDiv<%= target %>" <%= hasGroupScope ? "" : "style=\"display: none\"" %>>
-				<span id="<portlet:namespace />groupHTML<%= target %>">
-					<%= groupsHTML.toString() %>
-				</span>
-
-				<input type="button" value="<liferay-ui:message key="select" />" onclick="var groupWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/select_community" /><portlet:param name="target" value="<%= target %>" /></portlet:renderURL>', 'community', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=680'); void(''); groupWindow.focus();" />
-			</div>
-		</td>
-	</tr>
+	resultRows.add(row);
+	%>
 
 <%
 }
 %>
 
-</table>
+<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" paginate="<%= false %>" />

@@ -596,6 +596,35 @@ li.exp-autocomplete-highlight strong {
 .exp-autocomplete-loading, .exp-autocomplete-loading.focus {
 }
 
+/* ---------- Scopes ---------- */
+
+.ui-scopes {
+}
+
+.ui-scopes:after {
+}
+
+.ie .ui-scopes {
+}
+
+.ui-scopes.empty {
+}
+
+.ui-scopes .ui-scope {
+}
+
+.ui-scopes .ui-scope:hover {
+}
+
+.ui-scopes .ui-scope-delete {
+}
+
+.ui-scopes .ui-scope-delete span {
+}
+
+.ui-scopes .ui-scope-delete:hover span {
+}
+
 /* ---------- Tags ---------- */
 
 .ui-tags {

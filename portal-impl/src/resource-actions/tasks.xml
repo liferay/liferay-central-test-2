@@ -4,9 +4,7 @@
 	<model-resource>
 		<model-name>com.liferay.portlet.tasks.model.TasksProposal</model-name>
 		<portlet-ref>
-			<portlet-name>29</portlet-name>
-			<portlet-name>90</portlet-name>
-			<portlet-name>122</portlet-name>
+			<portlet-name>134</portlet-name>
 		</portlet-ref>
 		<supports>
 			<action-key>ADD_DISCUSSION</action-key>
