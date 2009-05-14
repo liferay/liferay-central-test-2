@@ -29,7 +29,7 @@ String emailAddress1 = ParamUtil.getString(request, "emailAddress1");
 String emailAddress2 = ParamUtil.getString(request, "emailAddress2");
 %>
 
-<form action="<%= themeDisplay.getPathMain() %>/portal/update_email_address" class="uni-form" method="post" name="fm" onSubmit="submitForm(document.fm); return false;">
+<form action="<%= themeDisplay.getPathMain() %>/portal/update_email_address" class="exp-form" method="post" name="fm" onSubmit="submitForm(document.fm); return false;">
 <input name="doAsUserId" type="hidden" value="<%= HtmlUtil.escape(themeDisplay.getDoAsUserId()) %>" />
 <input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
 <input name="<%= WebKeys.REFERER %>" type="hidden" value="<%= themeDisplay.getPathMain() %>?doAsUserId=<%= themeDisplay.getDoAsUserId() %>" />

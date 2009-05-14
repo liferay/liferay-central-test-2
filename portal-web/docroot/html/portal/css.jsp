@@ -437,7 +437,7 @@
 	padding-left: 20px;
 }
 
-.uni-form .lfr-form-row fieldset {
+.exp-form .lfr-form-row fieldset {
 	border: none;
 	margin: 0;
 	padding: 0;
@@ -687,7 +687,7 @@
 	display: none;
 }
 
-#portlet-set-properties .uni-form {
+#portlet-set-properties .exp-form {
 	clear: both;
 }
 
@@ -703,12 +703,12 @@
 	font-size: 1.1em;
 }
 
-#portlet-set-properties .uni-form .text-input {
+#portlet-set-properties .exp-form .text-input {
 	margin-right: 5px;
 	width: 80px;
 }
 
-#portlet-set-properties .uni-form fieldset.col {
+#portlet-set-properties .exp-form fieldset.col {
 	width: 29%;
 }
 
@@ -740,7 +740,7 @@
 	width: 25%;
 }
 
-#portlet-set-properties .uni-form #custom-css {
+#portlet-set-properties .exp-form #custom-css {
 	height: 300px;
 	width: 400px;
 }
@@ -758,7 +758,7 @@
 	margin-top: 10px;
 }
 
-#portlet-set-properties .uni-form {
+#portlet-set-properties .exp-form {
 	clear: both;
 }
 
@@ -1262,11 +1262,11 @@ li.toggle-expand a {
 	width: <%= ModelHintsConstants.TEXTAREA_DISPLAY_WIDTH %>px;
 }
 
-fieldset, .uni-form fieldset {
+fieldset, .exp-form fieldset {
 	margin-bottom: 2em;
 }
 
-fieldset:last-child, .uni-form fieldset:last-child {
+fieldset:last-child, .exp-form fieldset:last-child {
 	margin-bottom: 0;
 }
 
