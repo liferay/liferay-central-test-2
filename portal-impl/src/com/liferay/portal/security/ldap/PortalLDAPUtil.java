@@ -535,7 +535,7 @@ public class PortalLDAPUtil {
 	}
 
 	public static void importFromLDAP() throws Exception {
-		List<Company> companies = CompanyLocalServiceUtil.getCompanies(true);
+		List<Company> companies = CompanyLocalServiceUtil.getCompanies(false);
 
 		for (Company company : companies) {
 			importFromLDAP(company.getCompanyId());

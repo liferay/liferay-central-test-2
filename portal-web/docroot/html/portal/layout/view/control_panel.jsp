@@ -228,7 +228,7 @@ if (Validator.isNotNull(ppid)) {
 								<h2>
 									<liferay-ui:message key="portal" />
 
-									<c:if test="<%= CompanyLocalServiceUtil.getCompaniesCount() > 1 %>">
+									<c:if test="<%= CompanyLocalServiceUtil.getCompaniesCount(false) > 1 %>">
 										<%= company.getName() %>
 									</c:if>
 								</h2>

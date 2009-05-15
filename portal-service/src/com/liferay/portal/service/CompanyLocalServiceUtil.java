@@ -144,6 +144,11 @@ public class CompanyLocalServiceUtil {
 		return getService().getCompanies(system);
 	}
 
+	public static int getCompaniesCount(boolean system)
+		throws com.liferay.portal.SystemException {
+		return getService().getCompaniesCount(system);
+	}
+
 	public static com.liferay.portal.model.Company getCompanyById(
 		long companyId)
 		throws com.liferay.portal.PortalException,

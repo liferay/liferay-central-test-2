@@ -390,6 +390,10 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 		return companyPersistence.findBySystem(system);
 	}
 
+	public int getCompaniesCount(boolean system) throws SystemException {
+		return companyPersistence.countBySystem(system);
+	}
+
 	public Company getCompanyById(long companyId)
 		throws PortalException, SystemException {
 
