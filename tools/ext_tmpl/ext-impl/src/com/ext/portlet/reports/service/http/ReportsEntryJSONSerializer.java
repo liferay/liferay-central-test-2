@@ -64,6 +64,28 @@ public class ReportsEntryJSONSerializer {
     }
 
     public static JSONArray toJSONArray(
+        com.ext.portlet.reports.model.ReportsEntry[] models) {
+        JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
+
+        for (ReportsEntry model : models) {
+            jsonArray.put(toJSONObject(model));
+        }
+
+        return jsonArray;
+    }
+
+    public static JSONArray toJSONArray(
+        com.ext.portlet.reports.model.ReportsEntry[][] models) {
+        JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
+
+        for (ReportsEntry[] model : models) {
+            jsonArray.put(toJSONArray(model));
+        }
+
+        return jsonArray;
+    }
+
+    public static JSONArray toJSONArray(
         List<com.ext.portlet.reports.model.ReportsEntry> models) {
         JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 

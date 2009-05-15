@@ -51,6 +51,32 @@ public class ReportsEntrySoap implements Serializable {
         return soapModel;
     }
 
+    public static ReportsEntrySoap[] toSoapModels(ReportsEntry[] models) {
+        ReportsEntrySoap[] soapModels = new ReportsEntrySoap[models.length];
+
+        for (int i = 0; i < models.length; i++) {
+            soapModels[i] = toSoapModel(models[i]);
+        }
+
+        return soapModels;
+    }
+
+    public static ReportsEntrySoap[][] toSoapModels(ReportsEntry[][] models) {
+        ReportsEntrySoap[][] soapModels = null;
+
+        if (models.length > 0) {
+            soapModels = new ReportsEntrySoap[models.length][models[0].length];
+        } else {
+            soapModels = new ReportsEntrySoap[0][0];
+        }
+
+        for (int i = 0; i < models.length; i++) {
+            soapModels[i] = toSoapModels(models[i]);
+        }
+
+        return soapModels;
+    }
+
     public static ReportsEntrySoap[] toSoapModels(List<ReportsEntry> models) {
         List<ReportsEntrySoap> soapModels = new ArrayList<ReportsEntrySoap>(models.size());
 
