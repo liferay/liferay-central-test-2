@@ -131,19 +131,22 @@ portletURL.setParameter("typeSelection", JournalArticle.class.getName());
 						<%
 						List<Group> myPlaces = user.getMyPlaces();
 
-						for (int i = 0; i < myPlaces.size(); i++) {
-							Group group = myPlaces.get(i);
-
-							group = group.toEscapedModel();
-
-							String groupName = group.getDescriptiveName();
-
-							if (group.isUser()) {
-								groupName = LanguageUtil.get(pageContext, "my-community");
+						for (Group myPlace : myPlaces) {
+							if (myPlace.hasStagingGroup()) {
+								myPlace = myPlace.getStagingGroup();
 							}
 						%>
 
-							<option <%= displayTerms.getGroupId() == group.getGroupId() ? "selected" : "" %> value="<%= group.getGroupId() %>"><%= HtmlUtil.escape(groupName) %></option>
+							<option <%= displayTerms.getGroupId() == myPlace.getGroupId() ? "selected" : "" %> value="<%= myPlace.getGroupId() %>">
+								<c:choose>
+									<c:when test="<%= myPlace.isUser() %>">
+										<liferay-ui:message key="my-community" />
+									</c:when>
+									<c:otherwise>
+										<%= HtmlUtil.escape(myPlace.getDescriptiveName()) %>
+									</c:otherwise>
+								</c:choose>
+							</option>
 
 						<%
 						}

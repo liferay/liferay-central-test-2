@@ -123,6 +123,9 @@ ArticleDisplayTerms displayTerms = (ArticleDisplayTerms)searchContainer.getDispl
 
 						<%
 						for (Group myPlace : myPlaces) {
+							if (myPlace.hasStagingGroup()) {
+								myPlace = myPlace.getStagingGroup();
+							}
 						%>
 
 							<option <%= displayTerms.getGroupId() == myPlace.getGroupId() ? "selected" : "" %> value="<%= myPlace.getGroupId() %>">
