@@ -116,7 +116,7 @@
 		<td valign="top">
 			<div class="thread-top float-container">
 				<div class="subject">
-					<b><%= HtmlUtil.escape(message.getSubject()) %></b><br />
+					<a href="#<portlet:namespace />message_<%= message.getMessageId() %>" title="<liferay-ui:message key="permanent-link-to-this-item" />"><b><%= HtmlUtil.escape(message.getSubject()) %></b></a><br />
 
 					<div class="tags">
 						<liferay-ui:tags-summary

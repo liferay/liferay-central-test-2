@@ -2462,6 +2462,7 @@ pending-requests=待决请求
 pending=待决的
 percentage=百分比
 performance=演出
+permanent-link-to-this-item=这个项目的永久链接
 permission-exclusive-to-members-of-current-location-and-community=独占权限将当前地点与社区排除在外？
 permissions-assigned-to-organizations-user-groups-roles-and-communities=分配给组织、用户组、角色和社区的权限
 permissions-assigned-to-roles=指定给角色的权限
