@@ -108,7 +108,8 @@ Liferay.Notice = new Expanse.Class({
 			var closeButton = notice.find('.popup-alert-close');
 			closeButton.click(
 				function() {
-					notice.slideUp('normal',
+					notice.slideUp(
+						'normal',
 						function() {
 							notice.remove();
 							instance._body.removeClass('has-alerts');

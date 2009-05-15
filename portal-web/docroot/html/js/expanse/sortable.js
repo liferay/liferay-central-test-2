@@ -167,7 +167,8 @@
 				if (placeholderOption) {
 					instance.placeholder = jQuery(placeholderOption);
 
-					instance.on('b4StartDragEvent',
+					instance.on(
+						'b4StartDragEvent',
 						function(event) {
 							if (instance.options.placeholder) {
 								var srcEl = jQuery(instance.getEl());
@@ -180,7 +181,8 @@
 						}
 					);
 
-					instance.on('endDragEvent',
+					instance.on(
+						'endDragEvent',
 						function(event) {
 							if (instance.options.placeholder) {
 								instance._removePlaceholder();

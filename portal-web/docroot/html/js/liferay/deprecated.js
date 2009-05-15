@@ -85,7 +85,8 @@ window.Class = Expanse.Class;
 		Dom.addClass(dialog.innerElement, options.className || 'generic-dialog');
 
 		if (options.stack === false) {
-			dialog.subscribe('focus',
+			dialog.subscribe(
+				'focus',
 				function(event) {
 					this.cfg.resetProperty('zindex');
 				}

@@ -255,7 +255,8 @@
 
 			var delta = (jPortlet.height() || 0) - (resizeBox.height() || 0);
 
-			resize.on('resize',
+			resize.on(
+				'resize',
 				function(data) {
 					var rBoxHeight = parseInt(resizeBox[0].style.height, 10);
 

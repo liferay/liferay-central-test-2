@@ -749,7 +749,8 @@ Liferay.Tree = new Expanse.Class(
 				}
 			);
 
-			Liferay.trigger('tree',
+			Liferay.trigger(
+				'tree',
 				{
 					droppedItem: item,
 					dropTarget: obj

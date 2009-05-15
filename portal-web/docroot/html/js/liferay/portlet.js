@@ -392,7 +392,8 @@ Liferay.Portlet = {
 };
 
 jQuery.fn.last = function(fn) {
-	Liferay.bind('allPortletsReady',
+	Liferay.bind(
+		'allPortletsReady',
 		function(event) {
 			fn();
 		}
@@ -402,7 +403,8 @@ jQuery.fn.last = function(fn) {
 // Backwards compatability
 
 Liferay.Portlet.ready = function(fn) {
-	Liferay.bind('portletReady',
+	Liferay.bind(
+		'portletReady',
 		function(event, data) {
 			fn(data.portletId, data.portlet);
 		}

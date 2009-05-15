@@ -326,7 +326,8 @@ Liferay.Navigation = new Expanse.Class(
 
 							instance._saveSortables(el);
 
-							Liferay.trigger('navigation',
+							Liferay.trigger(
+								'navigation',
 								{
 									item: el,
 									type: 'sort'
@@ -357,7 +358,8 @@ Liferay.Navigation = new Expanse.Class(
 					{
 						data: data,
 						success: function() {
-							Liferay.trigger('navigation',
+							Liferay.trigger(
+								'navigation',
 								{
 									item: tab,
 									type: 'delete'
@@ -467,7 +469,8 @@ Liferay.Navigation = new Expanse.Class(
 
 						instance._deleteButton(newNavItem);
 
-						Liferay.trigger('navigation',
+						Liferay.trigger(
+							'navigation',
 							{
 								item: newNavItem,
 								type: 'add'

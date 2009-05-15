@@ -325,7 +325,8 @@ Liferay.Upload = new Expanse.Class(
 
 			var completeUploads = instance._fileList.find('.upload-complete');
 
-			completeUploads.fadeOut('slow',
+			completeUploads.fadeOut(
+				'slow',
 				function() {
 					jQuery(this).remove();
 				}
