@@ -51,7 +51,7 @@ public class EditCommentTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Page Comments Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Edit");
+		selenium.click("//td[4]/span/a[2]");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -70,14 +70,13 @@ public class EditCommentTest extends BaseTestCase {
 		}
 
 		selenium.typeKeys("_107_editBody1",
-			RuntimeVariables.replace("This is a edited test page comment"));
+			RuntimeVariables.replace("This is a edited test page comment!"));
 		selenium.type("_107_editBody1",
 			RuntimeVariables.replace("This is a edited test page comment!"));
 		selenium.click(RuntimeVariables.replace("_107_updateReplyButton1"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
-		assertEquals("This is a edited test page comment!",
-			selenium.getText("//td[2]/div[1]"));
+		assertTrue(selenium.isTextPresent("This is a edited test page comment!"));
 	}
 }

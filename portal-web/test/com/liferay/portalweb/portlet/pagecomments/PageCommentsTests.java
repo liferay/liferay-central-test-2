@@ -40,26 +40,16 @@ public class PageCommentsTests extends BaseTests {
 
 		testSuite.addTestSuite(AddPageTest.class);
 		testSuite.addTestSuite(AddPortletTest.class);
-		testSuite.addTestSuite(EditPortletNameTest.class);
 		testSuite.addTestSuite(AddCommentTest.class);
 		testSuite.addTestSuite(AddNullCommentTest.class);
-		testSuite.addTestSuite(AddSpaceCommentTest.class);
-		testSuite.addTestSuite(AddCancelCommentTest.class);
-		testSuite.addTestSuite(AddNullCommentCancelTest.class);
 		testSuite.addTestSuite(AddSecondCommentTest.class);
-		testSuite.addTestSuite(EditCommentSpaceTest.class);
-		testSuite.addTestSuite(EditCommentTest.class);
 		testSuite.addTestSuite(AddReplyCommentTest.class);
+		testSuite.addTestSuite(EditCommentTest.class);
 		testSuite.addTestSuite(AssertRatingsTest.class);
-		testSuite.addTestSuite(AddSpaceReplyCommentTest.class);
-		testSuite.addTestSuite(EditReplyCommentTest.class);
-		testSuite.addTestSuite(EditReplyCommentSpaceTest.class);
-		testSuite.addTestSuite(DeleteEditedReplyCommentTest.class);
 		testSuite.addTestSuite(DeleteCommentTest.class);
-		testSuite.addTestSuite(ImportLARTest.class);
-		testSuite.addTestSuite(AssertImportLARTest.class);
 		testSuite.addTestSuite(TearDownTest.class);
 
 		return testSuite;
 	}
+
 }
