@@ -58,6 +58,10 @@ public class DefaultSynchronousMessageSender
 	public Object sendMessage(String destination, Message message, long timeout)
 		throws MessageBusException {
 
+		if (!_messageBus.hasDestination(destination)) {
+			return null;
+		}
+
 		message.setDestination(destination);
 
 		String responseDestination = message.getResponseDestination();
