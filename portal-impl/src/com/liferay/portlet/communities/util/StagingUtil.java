@@ -31,6 +31,7 @@ import com.liferay.portal.kernel.cal.DayAndPosition;
 import com.liferay.portal.kernel.cal.Duration;
 import com.liferay.portal.kernel.cal.Recurrence;
 import com.liferay.portal.kernel.cal.RecurrenceSerializer;
+import com.liferay.portal.kernel.io.FileCacheOutputStream;
 import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.messaging.MessageStatus;
@@ -68,8 +69,6 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.communities.messaging.LayoutsLocalPublisherRequest;
 import com.liferay.portlet.communities.messaging.LayoutsRemotePublisherRequest;
-
-import java.io.ByteArrayInputStream;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -126,31 +125,26 @@ public class StagingUtil {
 			targetLayout.getLayoutId());
 
 		copyPortlet(
-			actionRequest, sourceLayout.getPlid(), targetLayout.getPlid(),
+			actionRequest, liveGroup.getGroupId(), stagingGroup.getGroupId(),
+			sourceLayout.getPlid(), targetLayout.getPlid(),
 			portlet.getPortletId());
 	}
 
 	public static void copyPortlet(
-			ActionRequest actionRequest, long sourcePlid, long targetPlid,
-			String portletId)
+			ActionRequest actionRequest, long sourceGroupId, long targetGroupId,
+			long sourcePlid, long targetPlid, String portletId)
 		throws Exception {
 
 		Map<String, String[]> parameterMap = getStagingParameters(
 			actionRequest);
 
-		Layout sourceLayout = LayoutLocalServiceUtil.getLayout(sourcePlid);
-
-		byte[] bytes = LayoutLocalServiceUtil.exportPortletInfo(
-			sourcePlid, sourceLayout.getGroupId(), portletId, parameterMap,
-			null, null);
-
-		Layout targetLayout = LayoutLocalServiceUtil.getLayout(targetPlid);
-
-		ByteArrayInputStream bais = new ByteArrayInputStream(bytes);
+		FileCacheOutputStream fileCacheOutputStream =
+			LayoutLocalServiceUtil.exportPortletInfoAsStream(
+				sourcePlid, sourceGroupId, portletId, parameterMap, null, null);
 
 		LayoutServiceUtil.importPortletInfo(
-			targetPlid, targetLayout.getGroupId(), portletId, parameterMap,
-			bais);
+			targetPlid, targetGroupId, portletId, parameterMap,
+			fileCacheOutputStream.getFileInputStream());
 	}
 
 	public static void copyRemoteLayouts(
@@ -452,18 +446,67 @@ public class StagingUtil {
 		return parameterMap;
 	}
 
+	public static void publishLayout(
+			long plid, long liveGroupId, boolean includeChildren)
+		throws Exception {
+
+		Map<String, String[]> parameterMap = getStagingParameters();
+
+		parameterMap.put(
+			PortletDataHandlerKeys.DELETE_MISSING_LAYOUTS,
+			new String[] {Boolean.FALSE.toString()});
+
+		Layout layout = LayoutLocalServiceUtil.getLayout(plid);
+
+		List<Layout> layouts = new ArrayList<Layout>();
+
+		layouts.add(layout);
+
+		layouts.addAll(getMissingParents(layout, liveGroupId));
+
+		if (includeChildren) {
+			layouts.addAll(layout.getAllChildren());
+		}
+
+		Iterator<Layout> itr = layouts.iterator();
+
+		long[] layoutIds = new long[layouts.size()];
+
+		for (int i = 0; itr.hasNext(); i++) {
+			Layout curLayout = itr.next();
+
+			layoutIds[i] = curLayout.getLayoutId();
+		}
+
+		publishLayouts(
+			layout.getGroupId(), liveGroupId, layout.isPrivateLayout(),
+			layoutIds, parameterMap, null, null);
+	}
+
 	public static void publishLayouts(
 			long sourceGroupId, long targetGroupId, boolean privateLayout,
 			Map<String, String[]> parameterMap, Date startDate, Date endDate)
 		throws Exception {
 
-		byte[] bytes = LayoutServiceUtil.exportLayouts(
-			sourceGroupId, privateLayout, parameterMap, startDate, endDate);
+		publishLayouts(
+			sourceGroupId, targetGroupId, privateLayout, (long[])null,
+			parameterMap, startDate, endDate);
+	}
 
-		ByteArrayInputStream bais = new ByteArrayInputStream(bytes);
+	public static void publishLayouts(
+			long sourceGroupId, long targetGroupId, boolean privateLayout,
+			long[] layoutIds, Map<String, String[]> parameterMap,
+			Date startDate, Date endDate)
+		throws Exception {
+
+		FileCacheOutputStream fileCacheOutputStream =
+			LayoutLocalServiceUtil.exportLayoutsAsStream(
+				sourceGroupId, privateLayout, layoutIds, parameterMap,
+				startDate, endDate);
 
 		LayoutServiceUtil.importLayouts(
-			targetGroupId, privateLayout, parameterMap, bais);
+			targetGroupId, privateLayout, parameterMap,
+			fileCacheOutputStream.getFileInputStream());
 	}
 
 	public static void publishLayouts(
@@ -525,14 +568,9 @@ public class StagingUtil {
 			layoutIds[i] = curLayout.getLayoutId();
 		}
 
-		byte[] bytes = LayoutServiceUtil.exportLayouts(
-			sourceGroupId, privateLayout, layoutIds, parameterMap, startDate,
-			endDate);
-
-		ByteArrayInputStream bais = new ByteArrayInputStream(bytes);
-
-		LayoutServiceUtil.importLayouts(
-			targetGroupId, privateLayout, parameterMap, bais);
+		publishLayouts(
+			sourceGroupId, targetGroupId, privateLayout, layoutIds,
+			parameterMap, startDate, endDate);
 	}
 
 	public static void publishToLive(ActionRequest actionRequest)
@@ -568,7 +606,8 @@ public class StagingUtil {
 			sourceLayout.getLayoutId());
 
 		copyPortlet(
-			actionRequest, sourceLayout.getPlid(), targetLayout.getPlid(),
+			actionRequest, stagingGroup.getGroupId(), liveGroup.getGroupId(),
+			sourceLayout.getPlid(), targetLayout.getPlid(),
 			portlet.getPortletId());
 	}
 
