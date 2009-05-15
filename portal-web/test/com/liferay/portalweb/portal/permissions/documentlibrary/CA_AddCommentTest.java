@@ -53,10 +53,10 @@ public class CA_AddCommentTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"link=Document Library Permissions Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Admin Permissions 1"));
+		selenium.click(RuntimeVariables.replace("link=Permissions Test Folder"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace(
-				"link=Admin Permissions Subfolder 1"));
+				"link=Permissions Test Subfolder"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click("//strong/span");
 

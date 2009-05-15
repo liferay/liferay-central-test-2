@@ -33,11 +33,28 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class Guest_AssertCannotMoveDocumentsTest extends BaseTestCase {
 	public void testGuest_AssertCannotMoveDocuments() throws Exception {
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent(
+							"link=Document Library Permissions Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click(RuntimeVariables.replace(
 				"link=Document Library Permissions Test Page"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace(
-				"link=Admin Permissions Subfolder 2"));
+				"link=Permissions Test Subfolder"));
 		selenium.waitForPageToLoad("30000");
 		assertFalse(selenium.isElementPresent("link=Edit"));
 		assertFalse(selenium.isElementPresent("//strong/span"));
@@ -45,7 +62,7 @@ public class Guest_AssertCannotMoveDocumentsTest extends BaseTestCase {
 				"link=Document Library Permissions Test Page"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace(
-				"link=Admin Permissions Subfolder 1"));
+				"link=Permissions2 Test2 Subfolder2"));
 		selenium.waitForPageToLoad("30000");
 		assertFalse(selenium.isElementPresent("link=Edit"));
 		assertFalse(selenium.isElementPresent("//strong/span"));

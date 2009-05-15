@@ -56,28 +56,29 @@ public class CA_AddMoveFoldersTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace("//input[@value='Add Folder']"));
 		selenium.waitForPageToLoad("30000");
 		selenium.typeKeys("_20_name",
-			RuntimeVariables.replace("Admin Permissions 2"));
+			RuntimeVariables.replace("Permissions2 Test2 Folder2"));
 		selenium.type("_20_name",
-			RuntimeVariables.replace("Admin Permissions 2"));
+			RuntimeVariables.replace("Permissions2 Test2 Folder2"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
-		assertTrue(selenium.isElementPresent("link=Admin Permissions 2"));
-		selenium.click(RuntimeVariables.replace("link=Admin Permissions 2"));
+		assertTrue(selenium.isElementPresent("link=Permissions2 Test2 Folder2"));
+		selenium.click(RuntimeVariables.replace(
+				"link=Permissions2 Test2 Folder2"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Add Subfolder']"));
 		selenium.waitForPageToLoad("30000");
 		selenium.typeKeys("_20_name",
-			RuntimeVariables.replace("Admin Permissions Subfolder 2"));
+			RuntimeVariables.replace("Permissions2 Test2 Subfolder2"));
 		selenium.type("_20_name",
-			RuntimeVariables.replace("Admin Permissions Subfolder 2"));
+			RuntimeVariables.replace("Permissions2 Test2 Subfolder2"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
 		assertTrue(selenium.isElementPresent(
-				"link=Admin Permissions Subfolder 2"));
+				"link=Permissions2 Test2 Subfolder2"));
 	}
 }

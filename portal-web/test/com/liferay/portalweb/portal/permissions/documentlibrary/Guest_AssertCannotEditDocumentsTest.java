@@ -53,9 +53,11 @@ public class Guest_AssertCannotEditDocumentsTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"link=Document Library Permissions Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//tr[4]/td[1]/a[2]/b"));
+		selenium.click(RuntimeVariables.replace(
+				"link=Permissions2 Test2 Folder2"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//b"));
+		selenium.click(RuntimeVariables.replace(
+				"link=Permissions2 Test2 Subfolder2"));
 		selenium.waitForPageToLoad("30000");
 		assertFalse(selenium.isElementPresent("link=Edit"));
 		assertFalse(selenium.isElementPresent("//strong/span"));

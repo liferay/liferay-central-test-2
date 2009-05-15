@@ -60,9 +60,6 @@ public class CA_SearchPortletTest extends BaseTestCase {
 				"//input[@value='Search Folders']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent(
-				"link=Admin Permissions Upload Edited 1"));
-		selenium.click(RuntimeVariables.replace(
-				"link=Document Library Permissions Test Page"));
-		selenium.waitForPageToLoad("30000");
+				"link=Admin Permissions Edited Test Document"));
 	}
 }

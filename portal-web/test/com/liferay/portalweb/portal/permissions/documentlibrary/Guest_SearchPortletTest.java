@@ -53,15 +53,14 @@ public class Guest_SearchPortletTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"link=Document Library Permissions Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_20_keywords1",
-			RuntimeVariables.replace("Permissions"));
-		selenium.type("_20_keywords1", RuntimeVariables.replace("Permissions"));
+		selenium.typeKeys("_20_keywords1", RuntimeVariables.replace("Member"));
+		selenium.type("_20_keywords1", RuntimeVariables.replace("Member"));
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Search Folders']"));
 		selenium.waitForPageToLoad("30000");
-		assertFalse(selenium.isElementPresent(
-				"link=Member Permissions Upload Edited"));
 		assertTrue(selenium.isElementPresent(
-				"link=Admin Permissions Upload Edited 1"));
+				"link=Member Permissions Edited Test Document"));
+		assertFalse(selenium.isElementPresent(
+				"link=Admin Permissions Edited Test Document"));
 	}
 }

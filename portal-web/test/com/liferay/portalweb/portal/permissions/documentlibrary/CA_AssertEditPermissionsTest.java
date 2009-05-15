@@ -86,10 +86,10 @@ public class CA_AssertEditPermissionsTest extends BaseTestCase {
 				"link=Document Library Permissions Test Page"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace(
-				"link=Admin Permissions Edited 1"));
+				"link=Permissions Edited Test Folder"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace(
-				"link=Admin Permissions Subfolder 1"));
+				"link=Permissions Test Subfolder"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click("//strong/span");
 
@@ -113,6 +113,6 @@ public class CA_AssertEditPermissionsTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("//input[@value='Submit']"));
 		assertTrue(selenium.isTextPresent(
-				"Edit Permissions for Document Library Document: Admin Permissions Upload Edited 1.txt"));
+				"Edit Permissions for Document Library Document: Admin Permissions Edited Test Document.txt"));
 	}
 }

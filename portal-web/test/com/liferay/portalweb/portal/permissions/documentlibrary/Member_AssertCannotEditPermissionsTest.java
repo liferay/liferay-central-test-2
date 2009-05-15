@@ -44,11 +44,11 @@ public class Member_AssertCannotEditPermissionsTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				assertFalse(selenium.isElementPresent("link=Permissions"));
 				selenium.click(RuntimeVariables.replace(
-						"link=Admin Permissions Edited 1"));
+						"link=Permissions Edited Test Folder"));
 				selenium.waitForPageToLoad("30000");
 				assertFalse(selenium.isElementPresent("link=Permissions"));
 				selenium.click(RuntimeVariables.replace(
-						"link=Admin Permissions Subfolder 1"));
+						"link=Permissions Test Subfolder"));
 				selenium.waitForPageToLoad("30000");
 				selenium.click(RuntimeVariables.replace("link=View"));
 				selenium.waitForPageToLoad("30000");
@@ -57,7 +57,7 @@ public class Member_AssertCannotEditPermissionsTest extends BaseTestCase {
 						"link=Document Library Permissions Test Page"));
 				selenium.waitForPageToLoad("30000");
 				selenium.click(RuntimeVariables.replace(
-						"link=Admin Permissions Subfolder 2"));
+						"link=Permissions2 Test2 Subfolder2"));
 				selenium.waitForPageToLoad("30000");
 
 				boolean MemberDLActionBar = selenium.isElementPresent(
@@ -76,10 +76,6 @@ public class Member_AssertCannotEditPermissionsTest extends BaseTestCase {
 						"You do not have the required permissions."));
 
 			case 2:
-				selenium.click(RuntimeVariables.replace(
-						"link=Document Library Permissions Test Page"));
-				selenium.waitForPageToLoad("30000");
-
 			case 100:
 				label = -1;
 			}

@@ -74,13 +74,14 @@ public class CA_EditFolderTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace("//div[4]/ul/li[1]/a"));
 		selenium.waitForPageToLoad("30000");
 		selenium.typeKeys("_20_name",
-			RuntimeVariables.replace("Admin Permissions Edited 1"));
+			RuntimeVariables.replace("Permissions Edited Test Folder"));
 		selenium.type("_20_name",
-			RuntimeVariables.replace("Admin Permissions Edited 1"));
+			RuntimeVariables.replace("Permissions Edited Test Folder"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
-		assertTrue(selenium.isElementPresent("link=Admin Permissions Edited 1"));
+		assertTrue(selenium.isElementPresent(
+				"link=Permissions Edited Test Folder"));
 	}
 }

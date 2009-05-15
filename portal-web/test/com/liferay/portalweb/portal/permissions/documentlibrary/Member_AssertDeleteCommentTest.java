@@ -54,7 +54,7 @@ public class Member_AssertDeleteCommentTest extends BaseTestCase {
 				"link=Document Library Permissions Test Page"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace(
-				"link=Admin Permissions Subfolder 2"));
+				"link=Permissions2 Test2 Subfolder2"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click("//strong/span");
 
@@ -64,7 +64,7 @@ public class Member_AssertDeleteCommentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//li[1]/a/img")) {
+				if (selenium.isElementPresent("link=View")) {
 					break;
 				}
 			}
@@ -74,7 +74,7 @@ public class Member_AssertDeleteCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//li[1]/a/img"));
+		selenium.click(RuntimeVariables.replace("link=View"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Comments"));
 		selenium.waitForPageToLoad("30000");

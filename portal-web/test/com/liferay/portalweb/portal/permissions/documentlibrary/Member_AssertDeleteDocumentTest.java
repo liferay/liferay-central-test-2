@@ -54,10 +54,10 @@ public class Member_AssertDeleteDocumentTest extends BaseTestCase {
 				"link=Document Library Permissions Test Page"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace(
-				"link=Admin Permissions Subfolder 2"));
+				"link=Permissions2 Test2 Subfolder2"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent(
-				"link=Member Permissions Upload Edited.txt"));
+				"link=Member Permissions Edited Test Document.txt"));
 		assertTrue(selenium.isElementPresent("link=Delete"));
 	}
 }

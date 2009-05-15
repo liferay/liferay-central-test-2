@@ -54,10 +54,10 @@ public class CA_EditDocumentTest extends BaseTestCase {
 				"link=Document Library Permissions Test Page"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace(
-				"link=Admin Permissions Edited 1"));
+				"link=Permissions Edited Test Folder"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace(
-				"link=Admin Permissions Subfolder 1"));
+				"link=Permissions Test Subfolder"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click("//strong/span");
 
@@ -80,15 +80,15 @@ public class CA_EditDocumentTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace("link=Edit"));
 		selenium.waitForPageToLoad("30000");
 		selenium.typeKeys("_20_title",
-			RuntimeVariables.replace("Admin Permissions Upload Edited 1"));
+			RuntimeVariables.replace("Admin Permissions Edited Test Document"));
 		selenium.type("_20_title",
-			RuntimeVariables.replace("Admin Permissions Upload Edited 1"));
+			RuntimeVariables.replace("Admin Permissions Edited Test Document"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		Thread.sleep(5000);
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
 		assertTrue(selenium.isElementPresent(
-				"link=Admin Permissions Upload Edited 1.txt"));
+				"link=Admin Permissions Edited Test Document.txt"));
 	}
 }

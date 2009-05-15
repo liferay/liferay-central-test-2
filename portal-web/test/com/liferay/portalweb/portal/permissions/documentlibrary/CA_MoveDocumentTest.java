@@ -54,10 +54,10 @@ public class CA_MoveDocumentTest extends BaseTestCase {
 				"link=Document Library Permissions Test Page"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace(
-				"link=Admin Permissions Edited 1"));
+				"link=Permissions Edited Test Folder"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace(
-				"link=Admin Permissions Subfolder 1"));
+				"link=Permissions Test Subfolder"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click("//strong/span");
 
@@ -101,7 +101,8 @@ public class CA_MoveDocumentTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Folders"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Admin Permissions 2"));
+		selenium.click(RuntimeVariables.replace(
+				"link=Permissions2 Test2 Folder2"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click("//input[@value='Choose']");
 		selenium.selectWindow("null");
@@ -113,10 +114,10 @@ public class CA_MoveDocumentTest extends BaseTestCase {
 				"link=Document Library Permissions Test Page"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace(
-				"link=Admin Permissions Subfolder 2"));
+				"link=Permissions2 Test2 Subfolder2"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent(
-				"link=Admin Permissions Upload Edited 1.txt"));
+				"link=Admin Permissions Edited Test Document.txt"));
 		selenium.click("//strong/span");
 
 		for (int second = 0;; second++) {
@@ -160,7 +161,7 @@ public class CA_MoveDocumentTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace("link=Folders"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace(
-				"link=Admin Permissions Edited 1"));
+				"link=Permissions Edited Test Folder"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click("//input[@value='Choose']");
 		selenium.selectWindow("null");
@@ -172,9 +173,9 @@ public class CA_MoveDocumentTest extends BaseTestCase {
 				"link=Document Library Permissions Test Page"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace(
-				"link=Admin Permissions Subfolder 1"));
+				"link=Permissions Test Subfolder"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent(
-				"link=Admin Permissions Upload Edited 1.txt"));
+				"link=Admin Permissions Edited Test Document.txt"));
 	}
 }

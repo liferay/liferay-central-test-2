@@ -53,7 +53,8 @@ public class Member_EditDocumentTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"link=Document Library Permissions Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//tr[4]/td[1]/a[2]/b"));
+		selenium.click(RuntimeVariables.replace(
+				"link=Permissions2 Test2 Folder2"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click("//td[5]/ul/li/strong/span");
 
@@ -76,15 +77,15 @@ public class Member_EditDocumentTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace("link=Edit"));
 		selenium.waitForPageToLoad("30000");
 		selenium.typeKeys("_20_title",
-			RuntimeVariables.replace("Member Permissions Upload Edited"));
+			RuntimeVariables.replace("Member Permissions Edited Test Document"));
 		selenium.type("_20_title",
-			RuntimeVariables.replace("Member Permissions Upload Edited"));
+			RuntimeVariables.replace("Member Permissions Edited Test Document"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		Thread.sleep(5000);
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
 		assertTrue(selenium.isElementPresent(
-				"link=Member Permissions Upload Edited.txt"));
+				"link=Member Permissions Edited Test Document.txt"));
 	}
 }

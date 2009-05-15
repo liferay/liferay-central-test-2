@@ -56,13 +56,13 @@ public class CA_AddFolderTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace("//input[@value='Add Folder']"));
 		selenium.waitForPageToLoad("30000");
 		selenium.typeKeys("_20_name",
-			RuntimeVariables.replace("Admin Permissions 1"));
+			RuntimeVariables.replace("Permissions Test Folder"));
 		selenium.type("_20_name",
-			RuntimeVariables.replace("Admin Permissions 1"));
+			RuntimeVariables.replace("Permissions Test Folder"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
-		assertTrue(selenium.isElementPresent("link=Admin Permissions 1"));
+		assertTrue(selenium.isElementPresent("link=Permissions Test Folder"));
 	}
 }

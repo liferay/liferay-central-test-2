@@ -55,7 +55,7 @@ public class Guest_AssertCannotDeleteDocumentsTest extends BaseTestCase {
 				"link=Document Library Permissions Test Page"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace(
-				"link=Admin Permissions Subfolder 2"));
+				"link=Permissions Test Subfolder"));
 		selenium.waitForPageToLoad("30000");
 		assertFalse(selenium.isElementPresent("link=Delete"));
 		assertFalse(selenium.isElementPresent("//strong/span"));
@@ -63,7 +63,7 @@ public class Guest_AssertCannotDeleteDocumentsTest extends BaseTestCase {
 				"link=Document Library Permissions Test Page"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace(
-				"link=Admin Permissions Subfolder 1"));
+				"link=Permissions2 Test2 Subfolder2"));
 		selenium.waitForPageToLoad("30000");
 		assertFalse(selenium.isElementPresent("link=Delete"));
 		assertFalse(selenium.isElementPresent("//strong/span"));

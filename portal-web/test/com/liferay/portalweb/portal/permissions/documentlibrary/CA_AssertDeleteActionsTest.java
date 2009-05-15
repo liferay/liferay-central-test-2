@@ -38,7 +38,7 @@ public class CA_AssertDeleteActionsTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=Delete"));
 		selenium.click(RuntimeVariables.replace(
-				"link=Admin Permissions Subfolder 1"));
+				"link=Permissions Test Subfolder"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=Delete"));
 		selenium.click(RuntimeVariables.replace("link=My Documents"));

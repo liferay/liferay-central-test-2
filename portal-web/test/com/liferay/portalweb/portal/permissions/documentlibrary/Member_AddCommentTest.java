@@ -54,7 +54,7 @@ public class Member_AddCommentTest extends BaseTestCase {
 				"link=Document Library Permissions Test Page"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace(
-				"link=Admin Permissions Subfolder 2"));
+				"link=Permissions2 Test2 Subfolder2"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click("//strong/span");
 
@@ -107,7 +107,7 @@ public class Member_AddCommentTest extends BaseTestCase {
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
 		assertTrue(selenium.isElementPresent(
-				"link=Member Permissions Upload Edited.txt"));
+				"link=Member Permissions Edited Test Document.txt"));
 		assertTrue(selenium.isTextPresent(
 				"Hi! I am a member typing a comment on my uploaded document. Hopefully it works! Or else I'll be sad. I don't want to be sad."));
 	}

@@ -53,20 +53,19 @@ public class CA_AddSubfolderTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"link=Document Library Permissions Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Admin Permissions 1"));
+		selenium.click(RuntimeVariables.replace("link=Permissions Test Folder"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Add Subfolder']"));
 		selenium.waitForPageToLoad("30000");
 		selenium.typeKeys("_20_name",
-			RuntimeVariables.replace("Admin Permissions Subfolder 1"));
+			RuntimeVariables.replace("Permissions Test Subfolder"));
 		selenium.type("_20_name",
-			RuntimeVariables.replace("Admin Permissions Subfolder 1"));
+			RuntimeVariables.replace("Permissions Test Subfolder"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
-		assertTrue(selenium.isElementPresent(
-				"link=Admin Permissions Subfolder 1"));
+		assertTrue(selenium.isElementPresent("link=Permissions Test Subfolder"));
 	}
 }

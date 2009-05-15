@@ -56,7 +56,8 @@ public class Member_AssertCannotEditFoldersTest extends BaseTestCase {
 		assertFalse(selenium.isElementPresent("//td[4]/ul/li/strong/span"));
 		assertFalse(selenium.isElementPresent("//tr[4]/td[4]/ul/li/strong/span"));
 		assertFalse(selenium.isElementPresent("link=Edit"));
-		selenium.click(RuntimeVariables.replace("link=Admin Permissions 2"));
+		selenium.click(RuntimeVariables.replace(
+				"link=Permissions2 Test2 Folder2"));
 		selenium.waitForPageToLoad("30000");
 		assertFalse(selenium.isElementPresent("//strong/span"));
 		assertFalse(selenium.isElementPresent("link=Edit"));
@@ -64,12 +65,12 @@ public class Member_AssertCannotEditFoldersTest extends BaseTestCase {
 				"link=Document Library Permissions Test Page"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace(
-				"link=Admin Permissions Edited 1"));
+				"link=Permissions Edited Test Folder"));
 		selenium.waitForPageToLoad("30000");
 		assertFalse(selenium.isElementPresent("//strong/span"));
 		assertFalse(selenium.isElementPresent("link=Edit"));
 		selenium.click(RuntimeVariables.replace(
-				"link=Admin Permissions Subfolder 1"));
+				"link=Permissions Test Subfolder"));
 		selenium.waitForPageToLoad("30000");
 		assertFalse(selenium.isElementPresent("//strong/span"));
 		assertFalse(selenium.isElementPresent("link=Edit"));

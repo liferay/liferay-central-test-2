@@ -53,19 +53,21 @@ public class Guest_AssertViewFoldersTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"link=Document Library Permissions Test Page"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent("link=Admin Permissions 2"));
-		assertTrue(selenium.isElementPresent("link=Admin Permissions Edited 1"));
 		assertTrue(selenium.isElementPresent(
-				"link=Admin Permissions Subfolder 2"));
+				"link=Permissions Edited Test Folder"));
+		assertTrue(selenium.isElementPresent("link=Permissions Test Subfolder"));
+		assertTrue(selenium.isElementPresent("link=Permissions2 Test2 Folder2"));
 		assertTrue(selenium.isElementPresent(
-				"link=Admin Permissions Subfolder 1"));
-		selenium.click(RuntimeVariables.replace("//tr[4]/td[1]/a[2]/b"));
+				"link=Permissions2 Test2 Subfolder2"));
+		selenium.click(RuntimeVariables.replace(
+				"link=Permissions2 Test2 Folder2"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent(
-				"link=Admin Permissions Subfolder 1"));
-		selenium.click(RuntimeVariables.replace("//b"));
+				"link=Permissions2 Test2 Subfolder2"));
+		selenium.click(RuntimeVariables.replace(
+				"link=Permissions2 Test2 Subfolder2"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent(
-				"link=Admin Permissions Upload Edited 1.txt"));
+				"link=Member Permissions Edited Test Document.txt"));
 	}
 }

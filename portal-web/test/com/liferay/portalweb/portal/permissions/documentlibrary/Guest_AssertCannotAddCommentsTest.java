@@ -53,8 +53,7 @@ public class Guest_AssertCannotAddCommentsTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"link=Document Library Permissions Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"link=Admin Permissions Subfolder 1"));
+		selenium.click(RuntimeVariables.replace("link=Recent Documents"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=View"));
 		selenium.waitForPageToLoad("30000");

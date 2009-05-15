@@ -53,7 +53,7 @@ public class CA_EditPermissionsTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"link=Document Library Permissions Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//tr[4]/td[4]/ul/li/strong/span");
+		selenium.click("//td[4]/ul/li/strong/span");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -73,8 +73,7 @@ public class CA_EditPermissionsTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("//div[4]/ul/li[2]/a"));
 		selenium.waitForPageToLoad("30000");
-		assertFalse(selenium.isChecked("13_ACTION_VIEW"));
-		selenium.click("13_ACTION_VIEW");
+		selenium.uncheck("13_ACTION_VIEW");
 		selenium.click(RuntimeVariables.replace("//input[@value='Submit']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
@@ -82,7 +81,8 @@ public class CA_EditPermissionsTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"link=Document Library Permissions Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//tr[4]/td[1]/a[2]/b"));
+		selenium.click(RuntimeVariables.replace(
+				"link=Permissions Edited Test Folder"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click("//strong/span");
 
@@ -104,8 +104,7 @@ public class CA_EditPermissionsTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Permissions"));
 		selenium.waitForPageToLoad("30000");
-		assertFalse(selenium.isChecked("13_ACTION_VIEW"));
-		selenium.click("13_ACTION_VIEW");
+		selenium.uncheck("13_ACTION_VIEW");
 		selenium.click(RuntimeVariables.replace("//input[@value='Submit']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
@@ -114,7 +113,10 @@ public class CA_EditPermissionsTest extends BaseTestCase {
 				"link=Document Library Permissions Test Page"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace(
-				"link=Admin Permissions Subfolder 1"));
+				"link=Permissions Edited Test Folder"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace(
+				"link=Permissions Test Subfolder"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click("//strong/span");
 
@@ -136,8 +138,7 @@ public class CA_EditPermissionsTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Permissions"));
 		selenium.waitForPageToLoad("30000");
-		assertFalse(selenium.isChecked("13_ACTION_VIEW"));
-		selenium.click("13_ACTION_VIEW");
+		selenium.uncheck("13_ACTION_VIEW");
 		selenium.click(RuntimeVariables.replace("//input[@value='Submit']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(

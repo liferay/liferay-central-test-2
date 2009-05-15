@@ -53,7 +53,8 @@ public class Member_AddDocumentTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"link=Document Library Permissions Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//tr[4]/td[1]/a[2]/b"));
+		selenium.click(RuntimeVariables.replace(
+				"link=Permissions2 Test2 Folder2"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Add Document']"));
@@ -97,14 +98,16 @@ public class Member_AddDocumentTest extends BaseTestCase {
 		selenium.type("_20_file",
 			RuntimeVariables.replace(
 				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portal\\permissions\\documentlibrary\\Member_TestDocument.txt"));
+		selenium.typeKeys("_20_title",
+			RuntimeVariables.replace("Member Permissions Test Document"));
 		selenium.type("_20_title",
-			RuntimeVariables.replace("Member Permissions Upload 1"));
+			RuntimeVariables.replace("Member Permissions Test Document"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		Thread.sleep(5000);
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
 		assertTrue(selenium.isElementPresent(
-				"link=Member Permissions Upload 1.txt"));
+				"link=Member Permissions Test Document.txt"));
 	}
 }

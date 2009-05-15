@@ -53,10 +53,10 @@ public class CA_AddDocumentTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"link=Document Library Permissions Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Admin Permissions 1"));
+		selenium.click(RuntimeVariables.replace("link=Permissions Test Folder"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace(
-				"link=Admin Permissions Subfolder 1"));
+				"link=Permissions Test Subfolder"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Add Document']"));
@@ -100,14 +100,16 @@ public class CA_AddDocumentTest extends BaseTestCase {
 		selenium.type("_20_file",
 			RuntimeVariables.replace(
 				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portal\\permissions\\documentlibrary\\CA_TestDocument.txt"));
+		selenium.typeKeys("_20_title",
+			RuntimeVariables.replace("Admin Permissions Test Document"));
 		selenium.type("_20_title",
-			RuntimeVariables.replace("Admin Permissions Upload 1"));
+			RuntimeVariables.replace("Admin Permissions Test Document"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		Thread.sleep(5000);
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
 		assertTrue(selenium.isElementPresent(
-				"link=Admin Permissions Upload 1.txt"));
+				"link=Admin Permissions Test Document.txt"));
 	}
 }
