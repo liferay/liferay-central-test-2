@@ -4,9 +4,15 @@
 	var _supportsComet = false;
 	var _encryptedUserId = null;
 
+	var _delays = [1, 2, 3, 4, 5, 7, 10];
+	var _delayIndex = 0;
+	var _delayAccessCount = 0;
+
 	var _getEncryptedUserId = function() {
 		return _encryptedUserId;
 	};
+
+	var _maxDelay = _delays.length - 1;
 
 	var _metaData = {
 		startPolling: true,
@@ -17,7 +23,7 @@
 	var _portlets = {};
 	var _registeredPortlets = [];
 	var _requestData = [_metaData];
-	var _requestDelay = 5000;
+	var _requestDelay = _delays[0];
 	var _suspended = false;
 	var _timerId = null;
 	var _url = '/poller';
@@ -63,6 +69,11 @@
 
 				if (portlet) {
 					portlet.listener.call(portlet.scope || Poller, chunk.data, chunk.chunkId);
+
+					if (chunk.data && chunk.data.pollerHintHighConnectivity) {
+						_requestDelay = _delays[0];
+						_delayIndex = 0;
+					}
 				}
 			}
 
@@ -129,7 +140,17 @@
 		},
 
 		getDelay: function() {
-			return _requestDelay;
+			if (_delayIndex <= _maxDelay) {
+				_requestDelay = _delays[_delayIndex];
+				_delayAccessCount++;
+
+				if (_delayAccessCount == 3) {
+					_delayIndex++;
+					_delayAccessCount = 0;
+				}
+			}
+
+			return _requestDelay * 1000;
 		},
 
 		getUrl: _getUrl,
@@ -147,7 +168,7 @@
 		},
 
 		setDelay: function(delay) {
-			_requestDelay = delay;
+			_requestDelay = delay / 1000;
 		},
 
 		setEncryptedUserId: function(encryptedUserId) {
