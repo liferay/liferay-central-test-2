@@ -39,6 +39,9 @@ import java.util.Map;
  */
 public class PollerResponse {
 
+	public static final String POLLER_HINT_HIGH_CONNECTIVITY =
+		"pollerHintHighConnectivity";
+
 	public PollerResponse(String portletId, String chunkId) {
 		_portletId = portletId;
 		_chunkId = chunkId;
