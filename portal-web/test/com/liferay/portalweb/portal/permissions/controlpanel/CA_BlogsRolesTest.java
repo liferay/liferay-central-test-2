@@ -35,31 +35,23 @@ public class CA_BlogsRolesTest extends BaseTestCase {
 	public void testCA_BlogsRoles() throws Exception {
 		selenium.click(RuntimeVariables.replace("link=Define Permissions"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Add Portlet Permissions']"));
+		selenium.select("add-content-permission", "label=Blogs");
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//tr[10]/td/a"));
-		selenium.waitForPageToLoad("30000");
-		selenium.select("_128_scopecom.liferay.portlet.blogsADD_ENTRY",
-			RuntimeVariables.replace("label=Portal"));
-		selenium.select("_128_scope33CONFIGURATION",
-			RuntimeVariables.replace("label=Portal"));
-		selenium.select("_128_scope33VIEW",
-			RuntimeVariables.replace("label=Portal"));
-		selenium.select("_128_scopecom.liferay.portlet.blogs.model.BlogsEntryADD_DISCUSSION",
-			RuntimeVariables.replace("label=Portal"));
-		selenium.select("_128_scopecom.liferay.portlet.blogs.model.BlogsEntryDELETE",
-			RuntimeVariables.replace("label=Portal"));
-		selenium.select("_128_scopecom.liferay.portlet.blogs.model.BlogsEntryDELETE_DISCUSSION",
-			RuntimeVariables.replace("label=Portal"));
-		selenium.select("_128_scopecom.liferay.portlet.blogs.model.BlogsEntryPERMISSIONS",
-			RuntimeVariables.replace("label=Portal"));
-		selenium.select("_128_scopecom.liferay.portlet.blogs.model.BlogsEntryUPDATE",
-			RuntimeVariables.replace("label=Portal"));
-		selenium.select("_128_scopecom.liferay.portlet.blogs.model.BlogsEntryUPDATE_DISCUSSION",
-			RuntimeVariables.replace("label=Portal"));
-		selenium.select("_128_scopecom.liferay.portlet.blogs.model.BlogsEntryVIEW",
-			RuntimeVariables.replace("label=Portal"));
+		selenium.check("_128_rowIds");
+		selenium.check(
+			"//input[@name='_128_rowIds' and @value='com.liferay.portlet.blogs.model.BlogsEntryADD_DISCUSSION']");
+		selenium.check(
+			"//input[@name='_128_rowIds' and @value='com.liferay.portlet.blogs.model.BlogsEntryDELETE']");
+		selenium.check(
+			"//input[@name='_128_rowIds' and @value='com.liferay.portlet.blogs.model.BlogsEntryDELETE_DISCUSSION']");
+		selenium.check(
+			"//input[@name='_128_rowIds' and @value='com.liferay.portlet.blogs.model.BlogsEntryPERMISSIONS']");
+		selenium.check(
+			"//input[@name='_128_rowIds' and @value='com.liferay.portlet.blogs.model.BlogsEntryUPDATE']");
+		selenium.check(
+			"//input[@name='_128_rowIds' and @value='com.liferay.portlet.blogs.model.BlogsEntryUPDATE_DISCUSSION']");
+		selenium.check(
+			"//input[@name='_128_rowIds' and @value='com.liferay.portlet.blogs.model.BlogsEntryVIEW']");
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("The role permissions were updated."));

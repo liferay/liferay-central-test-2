@@ -35,59 +35,51 @@ public class Member_DocumentLibraryRolesTest extends BaseTestCase {
 	public void testMember_DocumentLibraryRoles() throws Exception {
 		selenium.click(RuntimeVariables.replace("link=Define Permissions"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Add Portlet Permissions']"));
+		selenium.select("add-content-permission", "label=Document Library");
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//tr[20]/td/a"));
-		selenium.waitForPageToLoad("30000");
-		selenium.select("_128_scope20CONFIGURATION",
-			RuntimeVariables.replace("label="));
-		selenium.select("_128_scope20VIEW",
-			RuntimeVariables.replace("label=Portal"));
-		selenium.select("_128_scopecom.liferay.portlet.documentlibraryADD_FOLDER",
-			RuntimeVariables.replace("label="));
-		selenium.select("_128_scopecom.liferay.portlet.documentlibrary.model.DLFileEntryADD_DISCUSSION",
-			RuntimeVariables.replace("label=Portal"));
-		selenium.select("_128_scopecom.liferay.portlet.documentlibrary.model.DLFileEntryDELETE",
-			RuntimeVariables.replace("label="));
-		selenium.select("_128_scopecom.liferay.portlet.documentlibrary.model.DLFileEntryDELETE_DISCUSSION",
-			RuntimeVariables.replace("label="));
-		selenium.select("_128_scopecom.liferay.portlet.documentlibrary.model.DLFileEntryPERMISSIONS",
-			RuntimeVariables.replace("label="));
-		selenium.select("_128_scopecom.liferay.portlet.documentlibrary.model.DLFileEntryUPDATE",
-			RuntimeVariables.replace("label="));
-		selenium.select("_128_scopecom.liferay.portlet.documentlibrary.model.DLFileEntryUPDATE_DISCUSSION",
-			RuntimeVariables.replace("label="));
-		selenium.select("_128_scopecom.liferay.portlet.documentlibrary.model.DLFileEntryVIEW",
-			RuntimeVariables.replace("label=Portal"));
-		selenium.select("_128_scopecom.liferay.portlet.documentlibrary.model.DLFolderADD_DOCUMENT",
-			RuntimeVariables.replace("label=Portal"));
-		selenium.select("_128_scopecom.liferay.portlet.documentlibrary.model.DLFolderADD_SHORTCUT",
-			RuntimeVariables.replace("label=Portal"));
-		selenium.select("_128_scopecom.liferay.portlet.documentlibrary.model.DLFolderADD_SUBFOLDER",
-			RuntimeVariables.replace("label="));
-		selenium.select("_128_scopecom.liferay.portlet.documentlibrary.model.DLFolderDELETE",
-			RuntimeVariables.replace("label="));
-		selenium.select("_128_scopecom.liferay.portlet.documentlibrary.model.DLFolderPERMISSIONS",
-			RuntimeVariables.replace("label="));
-		selenium.select("_128_scopecom.liferay.portlet.documentlibrary.model.DLFolderUPDATE",
-			RuntimeVariables.replace("label="));
-		selenium.select("_128_scopecom.liferay.portlet.documentlibrary.model.DLFolderVIEW",
-			RuntimeVariables.replace("label=Portal"));
-		selenium.select("_128_scopecom.liferay.portlet.documentlibrary.model.DLFileShortcutADD_DISCUSSION",
-			RuntimeVariables.replace("label=Portal"));
-		selenium.select("_128_scopecom.liferay.portlet.documentlibrary.model.DLFileShortcutDELETE",
-			RuntimeVariables.replace("label="));
-		selenium.select("_128_scopecom.liferay.portlet.documentlibrary.model.DLFileShortcutDELETE_DISCUSSION",
-			RuntimeVariables.replace("label="));
-		selenium.select("_128_scopecom.liferay.portlet.documentlibrary.model.DLFileShortcutPERMISSIONS",
-			RuntimeVariables.replace("label="));
-		selenium.select("_128_scopecom.liferay.portlet.documentlibrary.model.DLFileShortcutUPDATE",
-			RuntimeVariables.replace("label="));
-		selenium.select("_128_scopecom.liferay.portlet.documentlibrary.model.DLFileShortcutUPDATE_DISCUSSION",
-			RuntimeVariables.replace("label="));
-		selenium.select("_128_scopecom.liferay.portlet.documentlibrary.model.DLFileShortcutVIEW",
-			RuntimeVariables.replace("label=Portal"));
+		selenium.uncheck("_128_rowIds");
+		selenium.check(
+			"//input[@name='_128_rowIds' and @value='com.liferay.portlet.documentlibrary.model.DLFileEntryADD_DISCUSSION']");
+		selenium.uncheck(
+			"//input[@name='_128_rowIds' and @value='com.liferay.portlet.documentlibrary.model.DLFileEntryDELETE']");
+		selenium.uncheck(
+			"//input[@name='_128_rowIds' and @value='com.liferay.portlet.documentlibrary.model.DLFileEntryDELETE_DISCUSSION']");
+		selenium.uncheck(
+			"//input[@name='_128_rowIds' and @value='com.liferay.portlet.documentlibrary.model.DLFileEntryPERMISSIONS']");
+		selenium.uncheck(
+			"//input[@name='_128_rowIds' and @value='com.liferay.portlet.documentlibrary.model.DLFileEntryUPDATE']");
+		selenium.uncheck(
+			"//input[@name='_128_rowIds' and @value='com.liferay.portlet.documentlibrary.model.DLFileEntryUPDATE_DISCUSSION']");
+		selenium.check(
+			"//input[@name='_128_rowIds' and @value='com.liferay.portlet.documentlibrary.model.DLFileEntryVIEW']");
+		selenium.check(
+			"//input[@name='_128_rowIds' and @value='com.liferay.portlet.documentlibrary.model.DLFolderADD_DOCUMENT']");
+		selenium.uncheck(
+			"//input[@name='_128_rowIds' and @value='com.liferay.portlet.documentlibrary.model.DLFolderADD_SHORTCUT']");
+		selenium.uncheck(
+			"//input[@name='_128_rowIds' and @value='com.liferay.portlet.documentlibrary.model.DLFolderADD_SUBFOLDER']");
+		selenium.uncheck(
+			"//input[@name='_128_rowIds' and @value='com.liferay.portlet.documentlibrary.model.DLFolderDELETE']");
+		selenium.uncheck(
+			"//input[@name='_128_rowIds' and @value='com.liferay.portlet.documentlibrary.model.DLFolderPERMISSIONS']");
+		selenium.uncheck(
+			"//input[@name='_128_rowIds' and @value='com.liferay.portlet.documentlibrary.model.DLFolderUPDATE']");
+		selenium.check(
+			"//input[@name='_128_rowIds' and @value='com.liferay.portlet.documentlibrary.model.DLFolderVIEW']");
+		selenium.check(
+			"//input[@name='_128_rowIds' and @value='com.liferay.portlet.documentlibrary.model.DLFileShortcutADD_DISCUSSION']");
+		selenium.uncheck(
+			"//input[@name='_128_rowIds' and @value='com.liferay.portlet.documentlibrary.model.DLFileShortcutDELETE']");
+		selenium.uncheck(
+			"//input[@name='_128_rowIds' and @value='com.liferay.portlet.documentlibrary.model.DLFileShortcutDELETE_DISCUSSION']");
+		selenium.uncheck(
+			"//input[@name='_128_rowIds' and @value='com.liferay.portlet.documentlibrary.model.DLFileShortcutPERMISSIONS']");
+		selenium.uncheck(
+			"//input[@name='_128_rowIds' and @value='com.liferay.portlet.documentlibrary.model.DLFileShortcutUPDATE']");
+		selenium.uncheck(
+			"//input[@name='_128_rowIds' and @value='com.liferay.portlet.documentlibrary.model.DLFileShortcutUPDATE_DISCUSSION']");
+		selenium.check(
+			"//input[@name='_128_rowIds' and @value='com.liferay.portlet.documentlibrary.model.DLFileShortcutVIEW']");
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("The role permissions were updated."));

@@ -14,309 +14,249 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>//input[@value='Add Portal Permissions']</td>
+	<td>selectAndWait</td>
+	<td>add-portal-permission</td>
+	<td>label=Communities</td>
+</tr>
+<tr>
+	<td>uncheck</td>
+	<td>_128_rowIds</td>
 	<td></td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>_128_scope90ADD_COMMUNITY</td>
-	<td>label=</td>
+	<td>uncheck</td>
+	<td>//input[@name='_128_rowIds' and @value='com.liferay.portal.model.GroupASSIGN_MEMBERS']</td>
+	<td></td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>_128_scope90ADD_LICENSE</td>
-	<td>label=</td>
+	<td>uncheck</td>
+	<td>//input[@name='_128_rowIds' and @value='com.liferay.portal.model.GroupASSIGN_REVIEWER']</td>
+	<td></td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>_128_scope90ADD_ORGANIZATION</td>
-	<td>label=</td>
+	<td>uncheck</td>
+	<td>//input[@name='_128_rowIds' and @value='com.liferay.portal.model.GroupDELETE']</td>
+	<td></td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>_128_scope90ADD_PASSWORD_POLICY</td>
-	<td>label=</td>
+	<td>check</td>
+	<td>//input[@name='_128_rowIds' and @value='com.liferay.portal.model.GroupMANAGE_ANNOUNCEMENTS']</td>
+	<td></td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>_128_scope90ADD_ROLE</td>
-	<td>label=</td>
+	<td>uncheck</td>
+	<td>//input[@name='_128_rowIds' and @value='com.liferay.portal.model.GroupMANAGE_ARCHIVED_SETUPS']</td>
+	<td></td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>_128_scope90ADD_USER</td>
-	<td>label=</td>
+	<td>check</td>
+	<td>//input[@name='_128_rowIds' and @value='com.liferay.portal.model.GroupMANAGE_LAYOUTS']</td>
+	<td></td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>_128_scope90ADD_USER_GROUP</td>
-	<td>label=</td>
+	<td>uncheck</td>
+	<td>//input[@name='_128_rowIds' and @value='com.liferay.portal.model.GroupMANAGE_STAGING']</td>
+	<td></td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>_128_scopecom.liferay.portal.model.GroupAPPROVE_PROPOSAL</td>
-	<td>label=</td>
+	<td>uncheck</td>
+	<td>//input[@name='_128_rowIds' and @value='com.liferay.portal.model.GroupPERMISSIONS']</td>
+	<td></td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>_128_scopecom.liferay.portal.model.GroupASSIGN_MEMBERS</td>
-	<td>label=</td>
+	<td>uncheck</td>
+	<td>//input[@name='_128_rowIds' and @value='com.liferay.portal.model.GroupPUBLISH_STAGING']</td>
+	<td></td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>_128_scopecom.liferay.portal.model.GroupASSIGN_REVIEWER</td>
-	<td>label=</td>
+	<td>uncheck</td>
+	<td>//input[@name='_128_rowIds' and @value='com.liferay.portal.model.GroupUPDATE']</td>
+	<td></td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>_128_scopecom.liferay.portal.model.GroupDELETE</td>
-	<td>label=</td>
+	<td>clickAndWait</td>
+	<td>//input[@value='Save']</td>
+	<td></td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>_128_scopecom.liferay.portal.model.GroupMANAGE_ANNOUNCEMENTS</td>
-	<td>label=Portal</td>
+	<td>assertTextPresent</td>
+	<td>The role permissions were updated.</td>
+	<td></td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>_128_scopecom.liferay.portal.model.GroupMANAGE_ARCHIVED_SETUPS</td>
-	<td>label=</td>
+	<td>selectAndWait</td>
+	<td>add-portal-permission</td>
+	<td>label=Organizations</td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>_128_scopecom.liferay.portal.model.GroupMANAGE_LAYOUTS</td>
-	<td>label=Portal</td>
+	<td>uncheck</td>
+	<td>_128_rowIds</td>
+	<td></td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>_128_scopecom.liferay.portal.model.GroupMANAGE_STAGING</td>
-	<td>label=</td>
+	<td>uncheck</td>
+	<td>//input[@name='_128_rowIds' and @value='com.liferay.portal.model.OrganizationASSIGN_MEMBERS']</td>
+	<td></td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>_128_scopecom.liferay.portal.model.GroupPERMISSIONS</td>
-	<td>label=</td>
+	<td>uncheck</td>
+	<td>//input[@name='_128_rowIds' and @value='com.liferay.portal.model.OrganizationASSIGN_REVIEWER']</td>
+	<td></td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>_128_scopecom.liferay.portal.model.GroupPUBLISH_STAGING</td>
-	<td>label=</td>
+	<td>uncheck</td>
+	<td>//input[@name='_128_rowIds' and @value='com.liferay.portal.model.OrganizationDELETE']</td>
+	<td></td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>_128_scopecom.liferay.portal.model.GroupUPDATE</td>
-	<td>label=</td>
+	<td>check</td>
+	<td>//input[@name='_128_rowIds' and @value='com.liferay.portal.model.OrganizationMANAGE_ANNOUNCEMENTS']</td>
+	<td></td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>_128_scopecom.liferay.portal.model.OrganizationAPPROVE_PROPOSAL</td>
-	<td>label=</td>
+	<td>uncheck</td>
+	<td>//input[@name='_128_rowIds' and @value='com.liferay.portal.model.OrganizationMANAGE_ARCHIVED_SETUPS']</td>
+	<td></td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>_128_scopecom.liferay.portal.model.OrganizationASSIGN_MEMBERS</td>
-	<td>label=</td>
+	<td>uncheck</td>
+	<td>//input[@name='_128_rowIds' and @value='com.liferay.portal.model.OrganizationMANAGE_LAYOUTS']</td>
+	<td></td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>_128_scopecom.liferay.portal.model.OrganizationASSIGN_REVIEWER</td>
-	<td>label=</td>
+	<td>uncheck</td>
+	<td>//input[@name='_128_rowIds' and @value='com.liferay.portal.model.OrganizationMANAGE_STAGING']</td>
+	<td></td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>_128_scopecom.liferay.portal.model.OrganizationDELETE</td>
-	<td>label=</td>
+	<td>uncheck</td>
+	<td>//input[@name='_128_rowIds' and @value='com.liferay.portal.model.OrganizationMANAGE_SUBORGANIZATIONS']</td>
+	<td></td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>_128_scopecom.liferay.portal.model.OrganizationMANAGE_ANNOUNCEMENTS</td>
-	<td>label=Portal</td>
+	<td>uncheck</td>
+	<td>//input[@name='_128_rowIds' and @value='com.liferay.portal.model.OrganizationMANAGE_USERS']</td>
+	<td></td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>_128_scopecom.liferay.portal.model.OrganizationMANAGE_ARCHIVED_SETUPS</td>
-	<td>label=</td>
+	<td>uncheck</td>
+	<td>//input[@name='_128_rowIds' and @value='com.liferay.portal.model.OrganizationPERMISSIONS']</td>
+	<td></td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>_128_scopecom.liferay.portal.model.OrganizationMANAGE_LAYOUTS</td>
-	<td>label=</td>
+	<td>uncheck</td>
+	<td>//input[@name='_128_rowIds' and @value='com.liferay.portal.model.OrganizationPUBLISH_STAGING']</td>
+	<td></td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>_128_scopecom.liferay.portal.model.OrganizationMANAGE_STAGING</td>
-	<td>label=</td>
+	<td>uncheck</td>
+	<td>//input[@name='_128_rowIds' and @value='com.liferay.portal.model.OrganizationUPDATE']</td>
+	<td></td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>_128_scopecom.liferay.portal.model.OrganizationMANAGE_SUBORGANIZATIONS</td>
-	<td>label=</td>
+	<td>uncheck</td>
+	<td>//input[@name='_128_rowIds' and @value='com.liferay.portal.model.OrganizationVIEW']</td>
+	<td></td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>_128_scopecom.liferay.portal.model.OrganizationMANAGE_USERS</td>
-	<td>label=</td>
+	<td>clickAndWait</td>
+	<td>//input[@value='Save']</td>
+	<td></td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>_128_scopecom.liferay.portal.model.OrganizationPERMISSIONS</td>
-	<td>label=</td>
+	<td>assertTextPresent</td>
+	<td>The role permissions were updated.</td>
+	<td></td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>_128_scopecom.liferay.portal.model.OrganizationPUBLISH_STAGING</td>
-	<td>label=</td>
+	<td>selectAndWait</td>
+	<td>add-portal-permission</td>
+	<td>label=Roles</td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>_128_scopecom.liferay.portal.model.OrganizationUPDATE</td>
-	<td>label=</td>
+	<td>uncheck</td>
+	<td>_128_rowIds</td>
+	<td></td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>_128_scopecom.liferay.portal.model.OrganizationVIEW</td>
-	<td>label=</td>
+	<td>uncheck</td>
+	<td>//input[@name='_128_rowIds' and @value='com.liferay.portal.model.RoleDEFINE_PERMISSIONS']</td>
+	<td></td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>_128_scopecom.liferay.portal.model.PasswordPolicyASSIGN_MEMBERS</td>
-	<td>label=</td>
+	<td>uncheck</td>
+	<td>//input[@name='_128_rowIds' and @value='com.liferay.portal.model.RoleDELETE']</td>
+	<td></td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>_128_scopecom.liferay.portal.model.PasswordPolicyDELETE</td>
-	<td>label=</td>
+	<td>check</td>
+	<td>//input[@name='_128_rowIds' and @value='com.liferay.portal.model.RoleMANAGE_ANNOUNCEMENTS']</td>
+	<td></td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>_128_scopecom.liferay.portal.model.PasswordPolicyPERMISSIONS</td>
-	<td>label=</td>
+	<td>uncheck</td>
+	<td>//input[@name='_128_rowIds' and @value='com.liferay.portal.model.RolePERMISSIONS']</td>
+	<td></td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>_128_scopecom.liferay.portal.model.PasswordPolicyUPDATE</td>
-	<td>label=</td>
+	<td>uncheck</td>
+	<td>//input[@name='_128_rowIds' and @value='com.liferay.portal.model.RoleUPDATE']</td>
+	<td></td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>_128_scopecom.liferay.portal.model.PasswordPolicyVIEW</td>
-	<td>label=</td>
+	<td>uncheck</td>
+	<td>//input[@name='_128_rowIds' and @value='com.liferay.portal.model.RoleVIEW']</td>
+	<td></td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>_128_scopecom.liferay.portal.model.RoleASSIGN_MEMBERS</td>
-	<td>label=</td>
+	<td>clickAndWait</td>
+	<td>//input[@value='Save']</td>
+	<td></td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>_128_scopecom.liferay.portal.model.RoleDEFINE_PERMISSIONS</td>
-	<td>label=</td>
+	<td>assertTextPresent</td>
+	<td>The role permissions were updated.</td>
+	<td></td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>_128_scopecom.liferay.portal.model.RoleDELETE</td>
-	<td>label=</td>
+	<td>selectAndWait</td>
+	<td>add-portal-permission</td>
+	<td>label=User Groups</td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>_128_scopecom.liferay.portal.model.RoleMANAGE_ANNOUNCEMENTS</td>
-	<td>label=Portal</td>
+	<td>uncheck</td>
+	<td>_128_rowIds</td>
+	<td></td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>_128_scopecom.liferay.portal.model.RolePERMISSIONS</td>
-	<td>label=</td>
+	<td>uncheck</td>
+	<td>//input[@name='_128_rowIds' and @value='com.liferay.portal.model.UserGroupDELETE']</td>
+	<td></td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>_128_scopecom.liferay.portal.model.RoleUPDATE</td>
-	<td>label=</td>
+	<td>check</td>
+	<td>//input[@name='_128_rowIds' and @value='com.liferay.portal.model.UserGroupMANAGE_ANNOUNCEMENTS']</td>
+	<td></td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>_128_scopecom.liferay.portal.model.RoleVIEW</td>
-	<td>label=</td>
+	<td>uncheck</td>
+	<td>//input[@name='_128_rowIds' and @value='com.liferay.portal.model.UserGroupPERMISSIONS']</td>
+	<td></td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>_128_scopecom.liferay.portlet.tasks.model.TasksProposalADD_DISCUSSION</td>
-	<td>label=</td>
+	<td>uncheck</td>
+	<td>//input[@name='_128_rowIds' and @value='com.liferay.portal.model.UserGroupMANAGE_LAYOUTS']</td>
+	<td></td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>_128_scopecom.liferay.portlet.tasks.model.TasksProposalDELETE</td>
-	<td>label=</td>
+	<td>uncheck</td>
+	<td>//input[@name='_128_rowIds' and @value='com.liferay.portal.model.UserGroupUPDATE']</td>
+	<td></td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>_128_scopecom.liferay.portlet.tasks.model.TasksProposalUPDATE</td>
-	<td>label=</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>_128_scopecom.liferay.portlet.tasks.model.TasksProposalVIEW</td>
-	<td>label=</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>_128_scopecom.liferay.portal.model.UserDELETE</td>
-	<td>label=</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>_128_scopecom.liferay.portal.model.UserIMPERSONATE</td>
-	<td>label=</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>_128_scopecom.liferay.portal.model.UserPERMISSIONS</td>
-	<td>label=</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>_128_scopecom.liferay.portal.model.UserUPDATE</td>
-	<td>label=</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>_128_scopecom.liferay.portal.model.UserVIEW</td>
-	<td>label=</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>_128_scopecom.liferay.portal.model.UserGroupASSIGN_MEMBERS</td>
-	<td>label=</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>_128_scopecom.liferay.portal.model.UserGroupDELETE</td>
-	<td>label=</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>_128_scopecom.liferay.portal.model.UserGroupMANAGE_ANNOUNCEMENTS</td>
-	<td>label=Portal</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>_128_scopecom.liferay.portal.model.UserGroupPERMISSIONS</td>
-	<td>label=</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>_128_scopecom.liferay.portal.model.UserGroupMANAGE_LAYOUTS</td>
-	<td>label=</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>_128_scopecom.liferay.portal.model.UserGroupUPDATE</td>
-	<td>label=</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>_128_scopecom.liferay.portal.model.UserGroupVIEW</td>
-	<td>label=</td>
+	<td>uncheck</td>
+	<td>//input[@name='_128_rowIds' and @value='com.liferay.portal.model.UserGroupVIEW']</td>
+	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>

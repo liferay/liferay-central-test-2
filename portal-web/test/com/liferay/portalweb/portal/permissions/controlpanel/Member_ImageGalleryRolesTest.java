@@ -35,39 +35,29 @@ public class Member_ImageGalleryRolesTest extends BaseTestCase {
 	public void testMember_ImageGalleryRoles() throws Exception {
 		selenium.click(RuntimeVariables.replace("link=Define Permissions"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Add Portlet Permissions']"));
+		selenium.select("add-content-permission", "label=Image Gallery");
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Next"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//tr[8]/td/a"));
-		selenium.waitForPageToLoad("30000");
-		selenium.select("_128_scope31CONFIGURATION",
-			RuntimeVariables.replace("label="));
-		selenium.select("_128_scope31VIEW",
-			RuntimeVariables.replace("label=Portal"));
-		selenium.select("_128_scopecom.liferay.portlet.imagegalleryADD_FOLDER",
-			RuntimeVariables.replace("label="));
-		selenium.select("_128_scopecom.liferay.portlet.imagegallery.model.IGFolderADD_IMAGE",
-			RuntimeVariables.replace("label=Portal"));
-		selenium.select("_128_scopecom.liferay.portlet.imagegallery.model.IGFolderADD_SUBFOLDER",
-			RuntimeVariables.replace("label="));
-		selenium.select("_128_scopecom.liferay.portlet.imagegallery.model.IGFolderDELETE",
-			RuntimeVariables.replace("label="));
-		selenium.select("_128_scopecom.liferay.portlet.imagegallery.model.IGFolderPERMISSIONS",
-			RuntimeVariables.replace("label="));
-		selenium.select("_128_scopecom.liferay.portlet.imagegallery.model.IGFolderUPDATE",
-			RuntimeVariables.replace("label="));
-		selenium.select("_128_scopecom.liferay.portlet.imagegallery.model.IGFolderVIEW",
-			RuntimeVariables.replace("label=Portal"));
-		selenium.select("_128_scopecom.liferay.portlet.imagegallery.model.IGImageDELETE",
-			RuntimeVariables.replace("label="));
-		selenium.select("_128_scopecom.liferay.portlet.imagegallery.model.IGImagePERMISSIONS",
-			RuntimeVariables.replace("label="));
-		selenium.select("_128_scopecom.liferay.portlet.imagegallery.model.IGImageUPDATE",
-			RuntimeVariables.replace("label="));
-		selenium.select("_128_scopecom.liferay.portlet.imagegallery.model.IGImageVIEW",
-			RuntimeVariables.replace("label=Portal"));
+		selenium.uncheck("_128_rowIds");
+		selenium.check(
+			"//input[@name='_128_rowIds' and @value='com.liferay.portlet.imagegallery.model.IGFolderADD_IMAGE']");
+		selenium.uncheck(
+			"//input[@name='_128_rowIds' and @value='com.liferay.portlet.imagegallery.model.IGFolderADD_SUBFOLDER']");
+		selenium.uncheck(
+			"//input[@name='_128_rowIds' and @value='com.liferay.portlet.imagegallery.model.IGFolderDELETE']");
+		selenium.uncheck(
+			"//input[@name='_128_rowIds' and @value='com.liferay.portlet.imagegallery.model.IGFolderPERMISSIONS']");
+		selenium.uncheck(
+			"//input[@name='_128_rowIds' and @value='com.liferay.portlet.imagegallery.model.IGFolderUPDATE']");
+		selenium.check(
+			"//input[@name='_128_rowIds' and @value='com.liferay.portlet.imagegallery.model.IGFolderVIEW']");
+		selenium.uncheck(
+			"//input[@name='_128_rowIds' and @value='com.liferay.portlet.imagegallery.model.IGImageDELETE']");
+		selenium.uncheck(
+			"//input[@name='_128_rowIds' and @value='com.liferay.portlet.imagegallery.model.IGImagePERMISSIONS']");
+		selenium.uncheck(
+			"//input[@name='_128_rowIds' and @value='com.liferay.portlet.imagegallery.model.IGImageUPDATE']");
+		selenium.check(
+			"//input[@name='_128_rowIds' and @value='com.liferay.portlet.imagegallery.model.IGImageVIEW']");
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("The role permissions were updated."));

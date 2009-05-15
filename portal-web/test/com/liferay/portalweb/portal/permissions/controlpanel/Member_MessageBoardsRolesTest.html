@@ -14,119 +14,99 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>//input[@value='Add Portlet Permissions']</td>
+	<td>selectAndWait</td>
+	<td>add-content-permission</td>
+	<td>label=Message Boards</td>
+</tr>
+<tr>
+	<td>uncheck</td>
+	<td>_128_rowIds</td>
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>link=Next</td>
+	<td>uncheck</td>
+	<td>//input[@name='_128_rowIds' and @value='com.liferay.portlet.messageboardsBAN_USER']</td>
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>//tr[12]/td/a</td>
+	<td>check</td>
+	<td>//input[@name='_128_rowIds' and @value='com.liferay.portlet.messageboards.model.MBCategoryADD_FILE']</td>
 	<td></td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>_128_scope19CONFIGURATION</td>
-	<td>label=</td>
+	<td>check</td>
+	<td>//input[@name='_128_rowIds' and @value='com.liferay.portlet.messageboards.model.MBCategoryADD_MESSAGE']</td>
+	<td></td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>_128_scope19VIEW</td>
-	<td>label=Portal</td>
+	<td>uncheck</td>
+	<td>//input[@name='_128_rowIds' and @value='com.liferay.portlet.messageboards.model.MBCategoryADD_SUBCATEGORY']</td>
+	<td></td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>_128_scopecom.liferay.portlet.messageboardsADD_CATEGORY</td>
-	<td>label=</td>
+	<td>uncheck</td>
+	<td>//input[@name='_128_rowIds' and @value='com.liferay.portlet.messageboards.model.MBCategoryDELETE']</td>
+	<td></td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>_128_scopecom.liferay.portlet.messageboardsBAN_USER</td>
-	<td>label=</td>
+	<td>uncheck</td>
+	<td>//input[@name='_128_rowIds' and @value='com.liferay.portlet.messageboards.model.MBCategoryMOVE_THREAD']</td>
+	<td></td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>_128_scopecom.liferay.portlet.messageboards.model.MBCategoryADD_FILE</td>
-	<td>label=Portal</td>
+	<td>uncheck</td>
+	<td>//input[@name='_128_rowIds' and @value='com.liferay.portlet.messageboards.model.MBCategoryPERMISSIONS']</td>
+	<td></td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>_128_scopecom.liferay.portlet.messageboards.model.MBCategoryADD_MESSAGE</td>
-	<td>label=Portal</td>
+	<td>check</td>
+	<td>//input[@name='_128_rowIds' and @value='com.liferay.portlet.messageboards.model.MBCategoryREPLY_TO_MESSAGE']</td>
+	<td></td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>_128_scopecom.liferay.portlet.messageboards.model.MBCategoryADD_SUBCATEGORY</td>
-	<td>label=</td>
+	<td>check</td>
+	<td>//input[@name='_128_rowIds' and @value='com.liferay.portlet.messageboards.model.MBCategorySUBSCRIBE']</td>
+	<td></td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>_128_scopecom.liferay.portlet.messageboards.model.MBCategoryDELETE</td>
-	<td>label=</td>
+	<td>uncheck</td>
+	<td>//input[@name='_128_rowIds' and @value='com.liferay.portlet.messageboards.model.MBCategoryUPDATE']</td>
+	<td></td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>_128_scopecom.liferay.portlet.messageboards.model.MBCategoryMOVE_THREAD</td>
-	<td>label=</td>
+	<td>uncheck</td>
+	<td>//input[@name='_128_rowIds' and @value='com.liferay.portlet.messageboards.model.MBCategoryUPDATE_THREAD_PRIORITY']</td>
+	<td></td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>_128_scopecom.liferay.portlet.messageboards.model.MBCategoryPERMISSIONS</td>
-	<td>label=</td>
+	<td>check</td>
+	<td>//input[@name='_128_rowIds' and @value='com.liferay.portlet.messageboards.model.MBCategoryVIEW']</td>
+	<td></td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>_128_scopecom.liferay.portlet.messageboards.model.MBCategoryREPLY_TO_MESSAGE</td>
-	<td>label=Portal</td>
+	<td>uncheck</td>
+	<td>//input[@name='_128_rowIds' and @value='com.liferay.portlet.messageboards.model.MBMessageDELETE']</td>
+	<td></td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>_128_scopecom.liferay.portlet.messageboards.model.MBCategorySUBSCRIBE</td>
-	<td>label=Portal</td>
+	<td>uncheck</td>
+	<td>//input[@name='_128_rowIds' and @value='com.liferay.portlet.messageboards.model.MBMessagePERMISSIONS']</td>
+	<td></td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>_128_scopecom.liferay.portlet.messageboards.model.MBCategoryUPDATE</td>
-	<td>label=</td>
+	<td>check</td>
+	<td>//input[@name='_128_rowIds' and @value='com.liferay.portlet.messageboards.model.MBMessageSUBSCRIBE']</td>
+	<td></td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>_128_scopecom.liferay.portlet.messageboards.model.MBCategoryUPDATE_THREAD_PRIORITY</td>
-	<td>label=</td>
+	<td>uncheck</td>
+	<td>//input[@name='_128_rowIds' and @value='com.liferay.portlet.messageboards.model.MBMessageUPDATE']</td>
+	<td></td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>_128_scopecom.liferay.portlet.messageboards.model.MBCategoryVIEW</td>
-	<td>label=Portal</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>_128_scopecom.liferay.portlet.messageboards.model.MBMessageDELETE</td>
-	<td>label=</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>_128_scopecom.liferay.portlet.messageboards.model.MBMessagePERMISSIONS</td>
-	<td>label=</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>_128_scopecom.liferay.portlet.messageboards.model.MBMessageSUBSCRIBE</td>
-	<td>label=Portal</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>_128_scopecom.liferay.portlet.messageboards.model.MBMessageUPDATE</td>
-	<td>label=</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>_128_scopecom.liferay.portlet.messageboards.model.MBMessageVIEW</td>
-	<td>label=Portal</td>
+	<td>check</td>
+	<td>//input[@name='_128_rowIds' and @value='com.liferay.portlet.messageboards.model.MBMessageVIEW']</td>
+	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>

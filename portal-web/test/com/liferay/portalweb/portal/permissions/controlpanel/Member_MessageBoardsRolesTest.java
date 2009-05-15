@@ -35,53 +35,43 @@ public class Member_MessageBoardsRolesTest extends BaseTestCase {
 	public void testMember_MessageBoardsRoles() throws Exception {
 		selenium.click(RuntimeVariables.replace("link=Define Permissions"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Add Portlet Permissions']"));
+		selenium.select("add-content-permission", "label=Message Boards");
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Next"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//tr[12]/td/a"));
-		selenium.waitForPageToLoad("30000");
-		selenium.select("_128_scope19CONFIGURATION",
-			RuntimeVariables.replace("label="));
-		selenium.select("_128_scope19VIEW",
-			RuntimeVariables.replace("label=Portal"));
-		selenium.select("_128_scopecom.liferay.portlet.messageboardsADD_CATEGORY",
-			RuntimeVariables.replace("label="));
-		selenium.select("_128_scopecom.liferay.portlet.messageboardsBAN_USER",
-			RuntimeVariables.replace("label="));
-		selenium.select("_128_scopecom.liferay.portlet.messageboards.model.MBCategoryADD_FILE",
-			RuntimeVariables.replace("label=Portal"));
-		selenium.select("_128_scopecom.liferay.portlet.messageboards.model.MBCategoryADD_MESSAGE",
-			RuntimeVariables.replace("label=Portal"));
-		selenium.select("_128_scopecom.liferay.portlet.messageboards.model.MBCategoryADD_SUBCATEGORY",
-			RuntimeVariables.replace("label="));
-		selenium.select("_128_scopecom.liferay.portlet.messageboards.model.MBCategoryDELETE",
-			RuntimeVariables.replace("label="));
-		selenium.select("_128_scopecom.liferay.portlet.messageboards.model.MBCategoryMOVE_THREAD",
-			RuntimeVariables.replace("label="));
-		selenium.select("_128_scopecom.liferay.portlet.messageboards.model.MBCategoryPERMISSIONS",
-			RuntimeVariables.replace("label="));
-		selenium.select("_128_scopecom.liferay.portlet.messageboards.model.MBCategoryREPLY_TO_MESSAGE",
-			RuntimeVariables.replace("label=Portal"));
-		selenium.select("_128_scopecom.liferay.portlet.messageboards.model.MBCategorySUBSCRIBE",
-			RuntimeVariables.replace("label=Portal"));
-		selenium.select("_128_scopecom.liferay.portlet.messageboards.model.MBCategoryUPDATE",
-			RuntimeVariables.replace("label="));
-		selenium.select("_128_scopecom.liferay.portlet.messageboards.model.MBCategoryUPDATE_THREAD_PRIORITY",
-			RuntimeVariables.replace("label="));
-		selenium.select("_128_scopecom.liferay.portlet.messageboards.model.MBCategoryVIEW",
-			RuntimeVariables.replace("label=Portal"));
-		selenium.select("_128_scopecom.liferay.portlet.messageboards.model.MBMessageDELETE",
-			RuntimeVariables.replace("label="));
-		selenium.select("_128_scopecom.liferay.portlet.messageboards.model.MBMessagePERMISSIONS",
-			RuntimeVariables.replace("label="));
-		selenium.select("_128_scopecom.liferay.portlet.messageboards.model.MBMessageSUBSCRIBE",
-			RuntimeVariables.replace("label=Portal"));
-		selenium.select("_128_scopecom.liferay.portlet.messageboards.model.MBMessageUPDATE",
-			RuntimeVariables.replace("label="));
-		selenium.select("_128_scopecom.liferay.portlet.messageboards.model.MBMessageVIEW",
-			RuntimeVariables.replace("label=Portal"));
+		selenium.uncheck("_128_rowIds");
+		selenium.uncheck(
+			"//input[@name='_128_rowIds' and @value='com.liferay.portlet.messageboardsBAN_USER']");
+		selenium.check(
+			"//input[@name='_128_rowIds' and @value='com.liferay.portlet.messageboards.model.MBCategoryADD_FILE']");
+		selenium.check(
+			"//input[@name='_128_rowIds' and @value='com.liferay.portlet.messageboards.model.MBCategoryADD_MESSAGE']");
+		selenium.uncheck(
+			"//input[@name='_128_rowIds' and @value='com.liferay.portlet.messageboards.model.MBCategoryADD_SUBCATEGORY']");
+		selenium.uncheck(
+			"//input[@name='_128_rowIds' and @value='com.liferay.portlet.messageboards.model.MBCategoryDELETE']");
+		selenium.uncheck(
+			"//input[@name='_128_rowIds' and @value='com.liferay.portlet.messageboards.model.MBCategoryMOVE_THREAD']");
+		selenium.uncheck(
+			"//input[@name='_128_rowIds' and @value='com.liferay.portlet.messageboards.model.MBCategoryPERMISSIONS']");
+		selenium.check(
+			"//input[@name='_128_rowIds' and @value='com.liferay.portlet.messageboards.model.MBCategoryREPLY_TO_MESSAGE']");
+		selenium.check(
+			"//input[@name='_128_rowIds' and @value='com.liferay.portlet.messageboards.model.MBCategorySUBSCRIBE']");
+		selenium.uncheck(
+			"//input[@name='_128_rowIds' and @value='com.liferay.portlet.messageboards.model.MBCategoryUPDATE']");
+		selenium.uncheck(
+			"//input[@name='_128_rowIds' and @value='com.liferay.portlet.messageboards.model.MBCategoryUPDATE_THREAD_PRIORITY']");
+		selenium.check(
+			"//input[@name='_128_rowIds' and @value='com.liferay.portlet.messageboards.model.MBCategoryVIEW']");
+		selenium.uncheck(
+			"//input[@name='_128_rowIds' and @value='com.liferay.portlet.messageboards.model.MBMessageDELETE']");
+		selenium.uncheck(
+			"//input[@name='_128_rowIds' and @value='com.liferay.portlet.messageboards.model.MBMessagePERMISSIONS']");
+		selenium.check(
+			"//input[@name='_128_rowIds' and @value='com.liferay.portlet.messageboards.model.MBMessageSUBSCRIBE']");
+		selenium.uncheck(
+			"//input[@name='_128_rowIds' and @value='com.liferay.portlet.messageboards.model.MBMessageUPDATE']");
+		selenium.check(
+			"//input[@name='_128_rowIds' and @value='com.liferay.portlet.messageboards.model.MBMessageVIEW']");
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("The role permissions were updated."));
