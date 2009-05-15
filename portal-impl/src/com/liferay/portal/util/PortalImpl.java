@@ -1175,6 +1175,17 @@ public class PortalImpl implements Portal {
 		if (Validator.isNotNull(queryString)) {
 			layoutActualURL = layoutActualURL + queryString;
 		}
+		else if (params.isEmpty()) {
+			UnicodeProperties properties = layout.getTypeSettingsProperties();
+
+			if (properties.containsKey("query-string") && 
+			    (layoutActualURL.indexOf("?") != -1)) {
+
+				layoutActualURL =
+					layoutActualURL + "&" +
+						properties.getProperty("query-string");
+			}
+		}
 
 		return layoutActualURL;
 	}
@@ -2349,8 +2360,8 @@ public class PortalImpl implements Portal {
 				(DynamicServletRequest)
 				actionRequestImpl.getHttpServletRequest();
 
-			 HttpServletRequestWrapper requestWrapper =
-				 (HttpServletRequestWrapper)dynamicRequest.getRequest();
+			HttpServletRequestWrapper requestWrapper =
+				(HttpServletRequestWrapper)dynamicRequest.getRequest();
 
 			UploadServletRequest uploadRequest = getUploadServletRequest(
 				requestWrapper);

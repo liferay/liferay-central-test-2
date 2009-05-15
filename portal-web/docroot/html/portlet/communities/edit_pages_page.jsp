@@ -241,6 +241,23 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 					<%= LanguageUtil.format(pageContext, "for-example-x", "<i>/news</i>") %>
 				</td>
 			</tr>
+			<tr>
+				<td>
+					<liferay-ui:message key="query-string" />
+				</td>
+				<td colspan="3">
+					<%
+					String queryString = (String) selLayout.getTypeSettingsProperties().getProperty("query-string");
+
+					if (queryString == null) {
+						queryString = StringPool.BLANK;
+					}
+					%>
+					<input name="TypeSettingsProperties(query-string)" size="30" type="text" value="<%= HtmlUtil.escape(queryString) %>" />
+
+					<liferay-ui:icon-help message="query-string-help" />
+				</td>
+			</tr>
 		</c:if>
 
 		<tr>
