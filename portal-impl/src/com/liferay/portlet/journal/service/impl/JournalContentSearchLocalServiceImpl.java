@@ -194,11 +194,8 @@ public class JournalContentSearchLocalServiceImpl
 		throws PortalException, SystemException {
 
 		if (purge) {
-			try {
-				journalContentSearchPersistence.removeByG_P_L_P(
-					groupId, privateLayout, layoutId, portletId);
-			} catch (SystemException se) {
-			}
+			journalContentSearchPersistence.removeByG_P_L_P(
+				groupId, privateLayout, layoutId, portletId);
 		}
 
 		Group group = groupPersistence.findByPrimaryKey(groupId);
