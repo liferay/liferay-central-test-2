@@ -22,6 +22,12 @@
 	var _timerId = null;
 	var _url = '/poller';
 
+	var _closeCurlyBrace = '}';
+	var _escapedCloseCurlyBrace = '[$CLOSE_CURLY_BRACE$]';
+
+	var _openCurlyBrace = '{';
+	var _escapedOpenCurlyBrace = '[$OPEN_CURLY_BRACE$]';
+
 	var _cancelRequestTimer = function() {
 		clearTimeout(_timerId);
 
@@ -157,6 +163,17 @@
 		},
 
 		submitRequest: function(key, data, chunkId) {
+			for (var i in data) {
+				var content = data[i];
+
+				if (content.replace) {
+					content = content.replace(_openCurlyBrace, _escapedOpenCurlyBrace);
+					content = content.replace(_closeCurlyBrace, _escapedCloseCurlyBrace);
+
+					data[i] = content;
+				}
+			}
+
 			var requestData = {
 				portletId: key,
 				data: data
