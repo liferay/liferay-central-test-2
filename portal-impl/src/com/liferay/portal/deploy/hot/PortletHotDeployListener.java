@@ -31,6 +31,7 @@ import com.liferay.portal.kernel.job.Scheduler;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.poller.InvokerPollerProcessor;
 import com.liferay.portal.kernel.poller.PollerProcessor;
 import com.liferay.portal.kernel.pop.MessageListener;
 import com.liferay.portal.kernel.portlet.ConfigurationAction;
@@ -528,6 +529,9 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 			pollerProcessorInstance =
 				(PollerProcessor)portletClassLoader.loadClass(
 					portlet.getPollerProcessorClass()).newInstance();
+
+			pollerProcessorInstance = new InvokerPollerProcessor(
+				pollerProcessorInstance, portletClassLoader);
 
 			PollerProcessorUtil.addPollerProcessor(
 				portlet.getPortletId(), pollerProcessorInstance);
