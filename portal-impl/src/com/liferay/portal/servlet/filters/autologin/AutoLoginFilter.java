@@ -236,7 +236,11 @@ public class AutoLoginFilter extends BasePortalFilter {
 						_log.warn(e, e);
 					}
 
-					_log.error(e.getMessage());
+					String currentURL = PortalUtil.getCurrentURL(request);
+
+					_log.error(
+						"Current URL " + currentURL + " generates exception: " +
+							e.getMessage());
 				}
 			}
 		}
