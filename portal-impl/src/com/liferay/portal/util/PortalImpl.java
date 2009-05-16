@@ -1176,14 +1176,16 @@ public class PortalImpl implements Portal {
 			layoutActualURL = layoutActualURL + queryString;
 		}
 		else if (params.isEmpty()) {
-			UnicodeProperties properties = layout.getTypeSettingsProperties();
+			UnicodeProperties typeSettingsProperties =
+				layout.getLayoutType().getTypeSettingsProperties();
 
-			if (properties.containsKey("query-string") && 
-			    (layoutActualURL.indexOf("?") != -1)) {
+			queryString = typeSettingsProperties.getProperty("query-string");
+
+			if (Validator.isNotNull(queryString) &&
+				!layoutActualURL.contains(StringPool.QUESTION)) {
 
 				layoutActualURL =
-					layoutActualURL + "&" +
-						properties.getProperty("query-string");
+					layoutActualURL + StringPool.QUESTION + queryString;
 			}
 		}
 
