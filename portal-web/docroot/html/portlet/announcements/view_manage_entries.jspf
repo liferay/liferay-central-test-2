@@ -51,105 +51,17 @@ if ((classNameId == 0) && (classPK == 0) && !permissionChecker.isOmniadmin()) {
 
 <table class="lfr-table">
 <tr>
-	<td>
+	<td class="lf-label">
 		<liferay-ui:message key="distribution-scope" />
 	</td>
 	<td>
-		<select name="<portlet:namespace />distributionScope" onChange="<portlet:namespace />selectDistributionScope(this.value);">
-			<option value=""></option>
 
-			<c:if test="<%= permissionChecker.isOmniadmin() %>">
-				<option <%= ((classNameId == 0) && (classPK == 0)) ? "selected" : "" %> value="0,0"><liferay-ui:message key="general" /></option>
-			</c:if>
+		<%
+		boolean submitOnChange = true;
+		%>
 
-			<%
-			List<Group> groups = GroupLocalServiceUtil.getUserGroups(user.getUserId());
-			%>
+		<%@ include file="/html/portlet/announcements/entry_select_scope.jspf" %>
 
-			<c:if test="<%= groups.size() > 0 %>">
-				<optgroup label="<liferay-ui:message key="communities" />">
-
-					<%
-					for (Group group : groups) {
-						if (group.isCommunity() && GroupPermissionUtil.contains(permissionChecker, group.getGroupId(), ActionKeys.MANAGE_ANNOUNCEMENTS)) {
-					%>
-
-							<option <%= (classPK == group.getGroupId()) ? "selected" : "" %> value="<%= PortalUtil.getClassNameId(Group.class) %><%= StringPool.COMMA %><%= group.getGroupId() %>"><%= group.getName() %></option>
-
-					<%
-						}
-					}
-					%>
-
-				</optgroup>
-			</c:if>
-
-			<%
-			List<Organization> organizations = OrganizationLocalServiceUtil.getUserOrganizations(user.getUserId());
-			%>
-
-			<c:if test="<%= organizations.size() > 0 %>">
-				<optgroup label="<liferay-ui:message key="organizations" />">
-
-					<%
-					for (Organization organization : organizations) {
-						if (OrganizationPermissionUtil.contains(permissionChecker, organization.getOrganizationId(), ActionKeys.MANAGE_ANNOUNCEMENTS)) {
-					%>
-
-							<option <%= (classPK == organization.getOrganizationId()) ? "selected" : "" %> value="<%= PortalUtil.getClassNameId(Organization.class) %><%= StringPool.COMMA %><%= organization.getOrganizationId() %>"><%= HtmlUtil.escape(organization.getName()) %></option>
-
-					<%
-						}
-					}
-					%>
-
-				</optgroup>
-			</c:if>
-
-			<%
-			List<Role> roles = RoleLocalServiceUtil.getRoles(themeDisplay.getCompanyId());
-			%>
-
-			<c:if test="<%= roles.size() > 0 %>">
-				<optgroup label="<liferay-ui:message key="roles" />">
-
-					<%
-					for (Role role : roles) {
-						if (RolePermissionUtil.contains(permissionChecker, role.getRoleId(), ActionKeys.MANAGE_ANNOUNCEMENTS)) {
-					%>
-
-							<option <%= (classPK == role.getRoleId()) ? "selected" : "" %> value="<%= PortalUtil.getClassNameId(Role.class) %><%= StringPool.COMMA %><%= role.getRoleId() %>"><%= HtmlUtil.escape(role.getTitle(locale)) %></option>
-
-					<%
-						}
-					}
-					%>
-
-				</optgroup>
-			</c:if>
-
-			<%
-			List<UserGroup> userGroups = UserGroupLocalServiceUtil.getUserGroups(themeDisplay.getCompanyId());
-			%>
-
-			<c:if test="<%= userGroups.size() > 0 %>">
-				<optgroup label="<liferay-ui:message key="user-groups" />">
-
-					<%
-					for (UserGroup userGroup : userGroups) {
-						if (UserGroupPermissionUtil.contains(permissionChecker, userGroup.getUserGroupId(), ActionKeys.MANAGE_ANNOUNCEMENTS)) {
-					%>
-
-							<option <%= (classPK == userGroup.getUserGroupId()) ? "selected" : "" %> value="<%= PortalUtil.getClassNameId(UserGroup.class) %><%= StringPool.COMMA %><%= userGroup.getUserGroupId() %>"><%= userGroup.getName() %></option>
-
-					<%
-						}
-					}
-					%>
-
-				</optgroup>
-			</c:if>
-		</select>
 	</td>
 </tr>
 </table>
@@ -159,8 +71,6 @@ if ((classNameId == 0) && (classPK == 0) && !permissionChecker.isOmniadmin()) {
 <input type="button" value='<liferay-ui:message key="add-entry" />' onClick="location.href = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/announcements/edit_entry" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="distributionScope" value="<%= distributionScope %>" /></portlet:renderURL>'" />
 
 <c:if test="<%= Validator.isNotNull(distributionScope) %>">
-	<br /><br />
-
 	<div class="separator"><!-- --></div>
 
 	<%

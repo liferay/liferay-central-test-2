@@ -88,7 +88,7 @@ int priority = BeanParamUtil.getInteger(entry, request, "priority");
 
 <table class="lfr-table">
 <tr>
-	<td>
+	<td class="lfr-label">
 		<liferay-ui:message key="distribution-scope" />
 	</td>
 	<td>
@@ -96,60 +96,11 @@ int priority = BeanParamUtil.getInteger(entry, request, "priority");
 			<c:when test="<%= entry != null %>">
 
 				<%
-				long classNameId = BeanParamUtil.getLong(entry, request, "classNameId");
-
-				String className = StringPool.BLANK;
-
-				if (classNameId > 0) {
-					className = PortalUtil.getClassName(classNameId);
-				}
+				boolean showScopeName = true;
 				%>
 
-				<c:choose>
-					<c:when test="<%= Validator.isNull(className) %>">
-						<liferay-ui:message key="general" />
-					</c:when>
-					<c:when test="<%= className.equals(Group.class.getName()) %>">
+				<%@ include file="/html/portlet/announcements/entry_scope.jspf" %>
 
-						<%
-						Group group = GroupLocalServiceUtil.getGroup(entry.getClassPK());
-						%>
-
-						<liferay-ui:message key="community" /> &raquo; <%= group.getName() %>
-					</c:when>
-					<c:when test="<%= className.equals(Organization.class.getName()) %>">
-
-						<%
-						Organization organization = OrganizationLocalServiceUtil.getOrganization(entry.getClassPK());
-						%>
-
-						<liferay-ui:message key="organization" /> &raquo; <%= HtmlUtil.escape(organization.getName()) %>
-					</c:when>
-					<c:when test="<%= className.equals(Role.class.getName()) %>">
-
-						<%
-						Role role = RoleLocalServiceUtil.getRole(entry.getClassPK());
-						%>
-
-						<liferay-ui:message key="role" /> &raquo; <%= HtmlUtil.escape(role.getTitle(locale)) %>
-					</c:when>
-					<c:when test="<%= className.equals(User.class.getName()) %>">
-
-						<%
-						User user2 = UserLocalServiceUtil.getUserById(entry.getClassPK());
-						%>
-
-						<liferay-ui:message key="personal" /> &raquo; <%= user2.getFullName() %>
-					</c:when>
-					<c:when test="<%= className.equals(UserGroup.class.getName()) %>">
-
-						<%
-						UserGroup userGroup = UserGroupLocalServiceUtil.getUserGroup(entry.getClassPK());
-						%>
-
-						<liferay-ui:message key="user-group" /> &raquo;	<%= userGroup.getName() %>
-					</c:when>
-				</c:choose>
 			</c:when>
 			<c:otherwise>
 
@@ -165,103 +116,12 @@ int priority = BeanParamUtil.getInteger(entry, request, "priority");
 					classNameId = GetterUtil.getLong(distributionScopeArray[0]);
 					classPK = GetterUtil.getLong(distributionScopeArray[1]);
 				}
+
+				boolean submitOnChange = false;
 				%>
 
-				<select name="<portlet:namespace />distributionScope">
-					<option value=""></option>
+				<%@ include file="/html/portlet/announcements/entry_select_scope.jspf" %>
 
-					<c:if test="<%= permissionChecker.isOmniadmin() %>">
-						<option <%= ((classNameId == 0) && (classPK == 0)) ? "selected" : "" %> value="0,0"><liferay-ui:message key="general" /></option>
-					</c:if>
-
-					<%
-					List<Group> groups = GroupLocalServiceUtil.getUserGroups(user.getUserId());
-					%>
-
-					<c:if test="<%= groups.size() > 0 %>">
-						<optgroup label="<liferay-ui:message key="communities" />">
-
-							<%
-							for (Group group : groups) {
-								if (group.isCommunity() && GroupPermissionUtil.contains(permissionChecker, group.getGroupId(), ActionKeys.MANAGE_ANNOUNCEMENTS)) {
-							%>
-
-									<option <%= (classPK == group.getGroupId()) ? "selected" : "" %> value="<%= PortalUtil.getClassNameId(Group.class) %><%= StringPool.COMMA %><%= group.getGroupId() %>"><%= group.getName() %></option>
-
-							<%
-								}
-							}
-							%>
-
-						</optgroup>
-					</c:if>
-
-					<%
-					List<Organization> organizations = OrganizationLocalServiceUtil.getUserOrganizations(user.getUserId());
-					%>
-
-					<c:if test="<%= organizations.size() > 0 %>">
-						<optgroup label="<liferay-ui:message key="organizations" />">
-
-							<%
-							for (Organization organization : organizations) {
-								if (OrganizationPermissionUtil.contains(permissionChecker, organization.getOrganizationId(), ActionKeys.MANAGE_ANNOUNCEMENTS)) {
-							%>
-
-									<option <%= (classPK == organization.getOrganizationId()) ? "selected" : "" %> value="<%= PortalUtil.getClassNameId(Organization.class) %><%= StringPool.COMMA %><%= organization.getOrganizationId() %>"><%= HtmlUtil.escape(organization.getName()) %></option>
-
-							<%
-								}
-							}
-							%>
-
-						</optgroup>
-					</c:if>
-
-					<%
-					List<Role> roles = RoleLocalServiceUtil.getRoles(themeDisplay.getCompanyId());
-					%>
-
-					<c:if test="<%= roles.size() > 0 %>">
-						<optgroup label="<liferay-ui:message key="roles" />">
-
-							<%
-							for (Role role : roles) {
-								if (RolePermissionUtil.contains(permissionChecker, role.getRoleId(), ActionKeys.MANAGE_ANNOUNCEMENTS)) {
-							%>
-
-									<option <%= (classPK == role.getRoleId()) ? "selected" : "" %> value="<%= PortalUtil.getClassNameId(Role.class) %><%= StringPool.COMMA %><%= role.getRoleId() %>"><%= HtmlUtil.escape(role.getTitle(locale)) %></option>
-
-							<%
-								}
-							}
-							%>
-
-						</optgroup>
-					</c:if>
-
-					<%
-					List<UserGroup> userGroups = UserGroupLocalServiceUtil.getUserGroups(themeDisplay.getCompanyId());
-					%>
-
-					<c:if test="<%= userGroups.size() > 0 %>">
-						<optgroup label="<liferay-ui:message key="user-groups" />">
-
-							<%
-							for (UserGroup userGroup : userGroups) {
-								if (UserGroupPermissionUtil.contains(permissionChecker, userGroup.getUserGroupId(), ActionKeys.MANAGE_ANNOUNCEMENTS)) {
-							%>
-
-									<option <%= (classPK == userGroup.getUserGroupId()) ? "selected" : "" %> value="<%= PortalUtil.getClassNameId(UserGroup.class) %><%= StringPool.COMMA %><%= userGroup.getUserGroupId() %>"><%= userGroup.getName() %></option>
-
-							<%
-								}
-							}
-							%>
-
-						</optgroup>
-					</c:if>
-				</select>
 			</c:otherwise>
 		</c:choose>
 	</td>
@@ -272,7 +132,7 @@ int priority = BeanParamUtil.getInteger(entry, request, "priority");
 	</td>
 </tr>
 <tr>
-	<td>
+	<td class="lfr-label">
 		<liferay-ui:message key="title" />
 	</td>
 	<td>
@@ -280,7 +140,7 @@ int priority = BeanParamUtil.getInteger(entry, request, "priority");
 	</td>
 </tr>
 <tr>
-	<td>
+	<td class="lfr-label">
 		<liferay-ui:message key="url" />
 	</td>
 	<td>
@@ -293,7 +153,7 @@ int priority = BeanParamUtil.getInteger(entry, request, "priority");
 	</td>
 </tr>
 <tr>
-	<td>
+	<td class="lfr-label">
 		<liferay-ui:message key="content" />
 	</td>
 	<td>
@@ -306,7 +166,7 @@ int priority = BeanParamUtil.getInteger(entry, request, "priority");
 	</td>
 </tr>
 <tr>
-	<td>
+	<td class="lfr-label">
 		<liferay-ui:message key="type" />
 	</td>
 	<td>
@@ -326,7 +186,7 @@ int priority = BeanParamUtil.getInteger(entry, request, "priority");
 	</td>
 </tr>
 <tr>
-	<td>
+	<td class="lfr-label">
 		<liferay-ui:message key="priority" />
 	</td>
 	<td>
@@ -342,7 +202,7 @@ int priority = BeanParamUtil.getInteger(entry, request, "priority");
 	</td>
 </tr>
 <tr>
-	<td>
+	<td class="lfr-label">
 		<liferay-ui:message key="display-date" />
 	</td>
 	<td>
@@ -350,7 +210,7 @@ int priority = BeanParamUtil.getInteger(entry, request, "priority");
 	</td>
 </tr>
 <tr>
-	<td>
+	<td class="lfr-label">
 		<liferay-ui:message key="expiration-date" />
 	</td>
 	<td>

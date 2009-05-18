@@ -59,6 +59,10 @@ if (entry.getPriority() > 0) {
 		</c:if>
 	</h3>
 
+	<%
+	boolean showScopeName = false;
+	%>
+
 	<p class="entry-content entry-type-<%= entry.getType() %>">
 		<%@ include file="/html/portlet/announcements/entry_scope.jspf" %>
 

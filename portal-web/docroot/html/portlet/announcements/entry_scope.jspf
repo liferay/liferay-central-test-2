@@ -23,39 +23,62 @@
 %>
 
 <%
-String scopeName = StringPool.BLANK;
-
 String entryClassName = entry.getClassName();
 long entryClassPK = entry.getClassPK();
+
+String scopeName = StringPool.BLANK;
+String scopeClassName = StringPool.BLANK;
 
 if (entryClassName.equals(Group.class.getName())) {
 	Group group = GroupLocalServiceUtil.getGroup(entryClassPK);
 
 	scopeName = group.getDescriptiveName();
+	scopeClassName = "community";
 }
 else if (entryClassName.equals(Organization.class.getName())) {
 	Organization organization = OrganizationLocalServiceUtil.getOrganization(entryClassPK);
 
 	scopeName = organization.getName();
+	scopeClassName = "organization";
 }
 else if (entryClassName.equals(Role.class.getName())) {
 	Role role = RoleLocalServiceUtil.getRole(entryClassPK);
 
 	scopeName = role.getTitle(locale);
+	scopeClassName = "role";
 }
 else if (entryClassName.equals(User.class.getName())) {
 	User curUser = UserLocalServiceUtil.getUser(entryClassPK);
 
 	scopeName = curUser.getFullName();
+	scopeClassName = "personal";
 }
 else if (entryClassName.equals(UserGroup.class.getName())) {
 	UserGroup userGroup = UserGroupLocalServiceUtil.getUserGroup(entryClassPK);
 
 	scopeName = userGroup.getName();
+	scopeClassName = "user-group";
 }
 else {
 	scopeName = LanguageUtil.get(locale, "general");
+	scopeClassName = scopeName;
 }
+
+scopeName = HtmlUtil.escape(scopeName);
 %>
 
-<span class="entry-scope"><%= HtmlUtil.escape(scopeName) %></span>
+<c:choose>
+	<c:when test="<%= showScopeName %>">
+		<c:choose>
+			<c:when test="<%= scopeName.equals(scopeClassName) %>">
+				<%= HtmlUtil.escape(scopeName) %>
+			</c:when>
+			<c:otherwise>
+				<liferay-ui:message key="<%= scopeClassName %>" /> &raquo; <%= HtmlUtil.escape(scopeName) %>
+			</c:otherwise>
+		</c:choose>
+	</c:when>
+	<c:otherwise>
+		<span class="entry-scope"><%= scopeName %></span>
+	</c:otherwise>
+</c:choose>
