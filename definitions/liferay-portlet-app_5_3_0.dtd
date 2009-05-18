@@ -3,8 +3,8 @@ This is the DTD for the Portlet Application parameters that are specific to
 Liferay Portal.
 
 <!DOCTYPE liferay-portlet-app PUBLIC
-	"-//Liferay//DTD Portlet Application 5.2.0//EN"
-	"http://www.liferay.com/dtd/liferay-portlet-app_5_2_0.dtd">
+	"-//Liferay//DTD Portlet Application 5.3.0//EN"
+	"http://www.liferay.com/dtd/liferay-portlet-app_5_3_0.dtd">
 -->
 
 <!--
@@ -82,7 +82,7 @@ users to configure the portlet at runtime.
 
 See:
 
-http://docs.liferay.com/portal/5.2/javadocs/portal-impl/com/liferay/portlet/messageboards/action/ConfigurationActionImpl.html
+http://docs.liferay.com/portal/5.3/javadocs/portal-impl/com/liferay/portlet/messageboards/action/ConfigurationActionImpl.html
 -->
 <!ELEMENT configuration-action-class (#PCDATA)>
 
@@ -93,8 +93,8 @@ search index for the portlet.
 
 See:
 
-http://docs.liferay.com/portal/5.2/javadocs/portal-impl/com/liferay/portlet/messageboards/util/Indexer.html
-http://docs.liferay.com/portal/5.2/javadocs/portal-kernel/com/liferay/portal/kernel/search/Indexer.html
+http://docs.liferay.com/portal/5.3/javadocs/portal-impl/com/liferay/portlet/messageboards/util/Indexer.html
+http://docs.liferay.com/portal/5.3/javadocs/portal-kernel/com/liferay/portal/kernel/search/Indexer.html
 http://lucene.apache.org
 -->
 <!ELEMENT indexer-class (#PCDATA)>
@@ -106,8 +106,8 @@ in the OpenSearch 1.1 standard.
 
 See:
 
-http://docs.liferay.com/portal/5.2/javadocs/portal-impl/com/liferay/portlet/alfrescocontent/util/OpenSearch.html
-http://docs.liferay.com/portal/5.2/javadocs/portal-kernel/com/liferay/portal/kernel/search/OpenSearch.html
+http://docs.liferay.com/portal/5.3/javadocs/portal-impl/com/liferay/portlet/alfrescocontent/util/OpenSearch.html
+http://docs.liferay.com/portal/5.3/javadocs/portal-kernel/com/liferay/portal/kernel/search/OpenSearch.html
 http://www.opensearch.org
 -->
 <!ELEMENT open-search-class (#PCDATA)>
@@ -119,8 +119,8 @@ portlet.
 
 See:
 
-http://docs.liferay.com/portal/5.2/javadocs/portal-impl/com/liferay/portlet/calendar/job/CalendarScheduler.html
-http://docs.liferay.com/portal/5.2/javadocs/portal-kernel/com/liferay/portal/kernel/job/Scheduler.html
+http://docs.liferay.com/portal/5.3/javadocs/portal-impl/com/liferay/portlet/calendar/job/CalendarScheduler.html
+http://docs.liferay.com/portal/5.3/javadocs/portal-kernel/com/liferay/portal/kernel/job/Scheduler.html
 http://www.opensymphony.com/quartz
 -->
 <!ELEMENT scheduler-class (#PCDATA)>
@@ -132,7 +132,7 @@ default portlet URL implementation.
 
 See:
 
-http://docs.liferay.com/portal/5.2/javadocs/portal-impl/com/liferay/portal/struts/StrutsActionPortletURL.html
+http://docs.liferay.com/portal/5.3/javadocs/portal-impl/com/liferay/portal/struts/StrutsActionPortletURL.html
 -->
 <!ELEMENT portlet-url-class (#PCDATA)>
 
@@ -144,8 +144,8 @@ example of its uses.
 
 See:
 
-http://docs.liferay.com/portal/5.2/javadocs/portal-impl/com/liferay/portlet/messageboards/MBFriendlyURLMapper.html
-http://docs.liferay.com/portal/5.2/javadocs/portal-kernel/com/liferay/portal/kernel/portlet/FriendlyURLMapper.html
+http://docs.liferay.com/portal/5.3/javadocs/portal-impl/com/liferay/portlet/messageboards/MBFriendlyURLMapper.html
+http://docs.liferay.com/portal/5.3/javadocs/portal-kernel/com/liferay/portal/kernel/portlet/FriendlyURLMapper.html
 -->
 <!ELEMENT friendly-url-mapper-class (#PCDATA)>
 
@@ -164,8 +164,8 @@ tasks are run.
 
 See:
 
-http://docs.liferay.com/portal/5.2/javadocs/portal-impl/com/liferay/portlet/journal/lar/PortletDataHandlerImpl.html
-http://docs.liferay.com/portal/5.2/javadocs/portal-kernel/com/liferay/portal/kernel/lar/PortletDataHandler.html
+http://docs.liferay.com/portal/5.3/javadocs/portal-impl/com/liferay/portlet/journal/lar/PortletDataHandlerImpl.html
+http://docs.liferay.com/portal/5.3/javadocs/portal-kernel/com/liferay/portal/kernel/lar/PortletDataHandler.html
 -->
 <!ELEMENT portlet-data-handler-class (#PCDATA)>
 
@@ -176,8 +176,8 @@ is added, moved, or removed from a layout.
 
 See:
 
-http://docs.liferay.com/portal/5.2/javadocs/portal-impl/com/liferay/portlet/journalcontent/JournalContentPortletLayoutListener.html
-http://docs.liferay.com/portal/5.2/javadocs/portal-kernel/com/liferay/portal/kernel/portlet/PortletLayoutListener.html
+http://docs.liferay.com/portal/5.3/javadocs/portal-impl/com/liferay/portlet/journalcontent/JournalContentPortletLayoutListener.html
+http://docs.liferay.com/portal/5.3/javadocs/portal-kernel/com/liferay/portal/kernel/portlet/PortletLayoutListener.html
 -->
 <!ELEMENT portlet-layout-listener-class (#PCDATA)>
 
@@ -189,7 +189,7 @@ notified of data changes. See the Chat portlet for a real world implementation.
 
 See:
 
-http://docs.liferay.com/portal/5.2/javadocs/portal-kernel/com/liferay/portal/kernel/poller/PollerProcessor.html
+http://docs.liferay.com/portal/5.3/javadocs/portal-kernel/com/liferay/portal/kernel/poller/PollerProcessor.html
 -->
 <!ELEMENT poller-processor-class (#PCDATA)>
 
@@ -200,8 +200,8 @@ emails.
 
 See:
 
-http://docs.liferay.com/portal/5.2/javadocs/portal-impl/com/liferay/portlet/messageboards/pop/MessageListenerImpl.html
-http://docs.liferay.com/portal/5.2/javadocs/portal-kernel/com/liferay/portal/kernel/pop/MessageListener.html
+http://docs.liferay.com/portal/5.3/javadocs/portal-impl/com/liferay/portlet/messageboards/pop/MessageListenerImpl.html
+http://docs.liferay.com/portal/5.3/javadocs/portal-kernel/com/liferay/portal/kernel/pop/MessageListener.html
 -->
 <!ELEMENT pop-message-listener-class (#PCDATA)>
 
@@ -213,8 +213,8 @@ human being.
 
 See:
 
-http://docs.liferay.com/portal/5.2/javadocs/portal-impl/com/liferay/portlet/messageboards/social/MBActivityInterpreter.html
-http://docs.liferay.com/portal/5.2/javadocs/portal-service/com/liferay/portlet/social/model/SocialActivityInterpreter.html
+http://docs.liferay.com/portal/5.3/javadocs/portal-impl/com/liferay/portlet/messageboards/social/MBActivityInterpreter.html
+http://docs.liferay.com/portal/5.3/javadocs/portal-service/com/liferay/portlet/social/model/SocialActivityInterpreter.html
 -->
 <!ELEMENT social-activity-interpreter-class (#PCDATA)>
 
@@ -226,7 +226,7 @@ human being.
 
 See:
 
-http://docs.liferay.com/portal/5.2/javadocs/portal-service/com/liferay/portlet/social/model/SocialRequestInterpreter.html
+http://docs.liferay.com/portal/5.3/javadocs/portal-service/com/liferay/portlet/social/model/SocialRequestInterpreter.html
 -->
 <!ELEMENT social-request-interpreter-class (#PCDATA)>
 
@@ -236,7 +236,7 @@ this portlet.
 
 See:
 
-http://docs.liferay.com/portal/5.2/javadocs/portal-impl/com/liferay/portlet/documentlibrary/webdav/DLWebDAVStorageImpl.html
+http://docs.liferay.com/portal/5.3/javadocs/portal-impl/com/liferay/portlet/documentlibrary/webdav/DLWebDAVStorageImpl.html
 -->
 <!ELEMENT webdav-storage-token (#PCDATA)>
 
@@ -247,7 +247,7 @@ WebDAV protocol.
 
 See:
 
-http://docs.liferay.com/portal/5.2/javadocs/portal-impl/com/liferay/portlet/documentlibrary/webdav/DLWebDAVStorageImpl.html
+http://docs.liferay.com/portal/5.3/javadocs/portal-impl/com/liferay/portlet/documentlibrary/webdav/DLWebDAVStorageImpl.html
 -->
 <!ELEMENT webdav-storage-class (#PCDATA)>
 
@@ -272,7 +272,7 @@ com.liferay.portlet.ControlPanelEntry and is called by the Control Panel.
 
 See:
 
-http://docs.liferay.com/portal/5.2/javadocs/portal-service/com/liferay/portlet/ControlPanelEntry.html
+http://docs.liferay.com/portal/5.3/javadocs/portal-service/com/liferay/portlet/ControlPanelEntry.html
 -->
 <!ELEMENT control-panel-entry-class (#PCDATA)>
 
