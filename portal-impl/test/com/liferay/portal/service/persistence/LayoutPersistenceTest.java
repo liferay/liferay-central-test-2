@@ -90,6 +90,7 @@ public class LayoutPersistenceTest extends BasePersistenceTestCase {
 		newLayout.setWapColorSchemeId(randomString());
 		newLayout.setCss(randomString());
 		newLayout.setPriority(nextInt());
+		newLayout.setLayoutPrototypeId(nextLong());
 		newLayout.setDlFolderId(nextLong());
 
 		_persistence.update(newLayout, false);
@@ -122,6 +123,8 @@ public class LayoutPersistenceTest extends BasePersistenceTestCase {
 			newLayout.getWapColorSchemeId());
 		assertEquals(existingLayout.getCss(), newLayout.getCss());
 		assertEquals(existingLayout.getPriority(), newLayout.getPriority());
+		assertEquals(existingLayout.getLayoutPrototypeId(),
+			newLayout.getLayoutPrototypeId());
 		assertEquals(existingLayout.getDlFolderId(), newLayout.getDlFolderId());
 	}
 
@@ -186,6 +189,7 @@ public class LayoutPersistenceTest extends BasePersistenceTestCase {
 		layout.setWapColorSchemeId(randomString());
 		layout.setCss(randomString());
 		layout.setPriority(nextInt());
+		layout.setLayoutPrototypeId(nextLong());
 		layout.setDlFolderId(nextLong());
 
 		_persistence.update(layout, false);

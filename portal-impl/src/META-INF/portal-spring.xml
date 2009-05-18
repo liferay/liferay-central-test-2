@@ -186,6 +186,24 @@
 	<bean id="com.liferay.portal.service.persistence.LayoutFinderUtil" class="com.liferay.portal.service.persistence.LayoutFinderUtil">
 		<property name="finder" ref="com.liferay.portal.service.persistence.LayoutFinder.impl" />
 	</bean>
+	<bean id="com.liferay.portal.service.LayoutPrototypeLocalService.impl" class="com.liferay.portal.service.impl.LayoutPrototypeLocalServiceImpl" />
+	<bean id="com.liferay.portal.service.LayoutPrototypeLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService">
+		<property name="target" ref="com.liferay.portal.service.LayoutPrototypeLocalService.impl" />
+	</bean>
+	<bean id="com.liferay.portal.service.LayoutPrototypeLocalServiceUtil" class="com.liferay.portal.service.LayoutPrototypeLocalServiceUtil">
+		<property name="service" ref="com.liferay.portal.service.LayoutPrototypeLocalService.impl" />
+	</bean>
+	<bean id="com.liferay.portal.service.LayoutPrototypeService.impl" class="com.liferay.portal.service.impl.LayoutPrototypeServiceImpl" />
+	<bean id="com.liferay.portal.service.LayoutPrototypeService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService">
+		<property name="target" ref="com.liferay.portal.service.LayoutPrototypeService.impl" />
+	</bean>
+	<bean id="com.liferay.portal.service.LayoutPrototypeServiceUtil" class="com.liferay.portal.service.LayoutPrototypeServiceUtil">
+		<property name="service" ref="com.liferay.portal.service.LayoutPrototypeService.impl" />
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.LayoutPrototypePersistence.impl" class="com.liferay.portal.service.persistence.LayoutPrototypePersistenceImpl" parent="basePersistence" />
+	<bean id="com.liferay.portal.service.persistence.LayoutPrototypeUtil" class="com.liferay.portal.service.persistence.LayoutPrototypeUtil">
+		<property name="persistence" ref="com.liferay.portal.service.persistence.LayoutPrototypePersistence.impl" />
+	</bean>
 	<bean id="com.liferay.portal.service.LayoutSetLocalService.impl" class="com.liferay.portal.service.impl.LayoutSetLocalServiceImpl" />
 	<bean id="com.liferay.portal.service.LayoutSetLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService">
 		<property name="target" ref="com.liferay.portal.service.LayoutSetLocalService.impl" />
@@ -203,6 +221,24 @@
 	<bean id="com.liferay.portal.service.persistence.LayoutSetPersistence.impl" class="com.liferay.portal.service.persistence.LayoutSetPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portal.service.persistence.LayoutSetUtil" class="com.liferay.portal.service.persistence.LayoutSetUtil">
 		<property name="persistence" ref="com.liferay.portal.service.persistence.LayoutSetPersistence.impl" />
+	</bean>
+	<bean id="com.liferay.portal.service.LayoutSetPrototypeLocalService.impl" class="com.liferay.portal.service.impl.LayoutSetPrototypeLocalServiceImpl" />
+	<bean id="com.liferay.portal.service.LayoutSetPrototypeLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService">
+		<property name="target" ref="com.liferay.portal.service.LayoutSetPrototypeLocalService.impl" />
+	</bean>
+	<bean id="com.liferay.portal.service.LayoutSetPrototypeLocalServiceUtil" class="com.liferay.portal.service.LayoutSetPrototypeLocalServiceUtil">
+		<property name="service" ref="com.liferay.portal.service.LayoutSetPrototypeLocalService.impl" />
+	</bean>
+	<bean id="com.liferay.portal.service.LayoutSetPrototypeService.impl" class="com.liferay.portal.service.impl.LayoutSetPrototypeServiceImpl" />
+	<bean id="com.liferay.portal.service.LayoutSetPrototypeService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService">
+		<property name="target" ref="com.liferay.portal.service.LayoutSetPrototypeService.impl" />
+	</bean>
+	<bean id="com.liferay.portal.service.LayoutSetPrototypeServiceUtil" class="com.liferay.portal.service.LayoutSetPrototypeServiceUtil">
+		<property name="service" ref="com.liferay.portal.service.LayoutSetPrototypeService.impl" />
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.LayoutSetPrototypePersistence.impl" class="com.liferay.portal.service.persistence.LayoutSetPrototypePersistenceImpl" parent="basePersistence" />
+	<bean id="com.liferay.portal.service.persistence.LayoutSetPrototypeUtil" class="com.liferay.portal.service.persistence.LayoutSetPrototypeUtil">
+		<property name="persistence" ref="com.liferay.portal.service.persistence.LayoutSetPrototypePersistence.impl" />
 	</bean>
 	<bean id="com.liferay.portal.service.LayoutTemplateLocalService.impl" class="com.liferay.portal.service.impl.LayoutTemplateLocalServiceImpl" />
 	<bean id="com.liferay.portal.service.LayoutTemplateLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService">

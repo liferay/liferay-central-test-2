@@ -625,7 +625,18 @@ create table Layout (
 	wapColorSchemeId VARCHAR(75) null,
 	css STRING null,
 	priority INTEGER,
+	layoutPrototypeId LONG,
 	dlFolderId LONG
+);
+
+create table LayoutPrototype (
+	layoutPrototypeId LONG not null primary key,
+	companyId LONG,
+	name VARCHAR(75) null,
+	title VARCHAR(75) null,
+	description VARCHAR(75) null,
+	settings_ STRING null,
+	active_ BOOLEAN
 );
 
 create table LayoutSet (
@@ -641,7 +652,18 @@ create table LayoutSet (
 	wapColorSchemeId VARCHAR(75) null,
 	css STRING null,
 	pageCount INTEGER,
-	virtualHost VARCHAR(75) null
+	virtualHost VARCHAR(75) null,
+	layoutSetPrototypeId LONG
+);
+
+create table LayoutSetPrototype (
+	layoutSetPrototypeId LONG not null primary key,
+	companyId LONG,
+	name VARCHAR(75) null,
+	title VARCHAR(75) null,
+	description VARCHAR(75) null,
+	settings_ STRING null,
+	active_ BOOLEAN
 );
 
 create table ListType (

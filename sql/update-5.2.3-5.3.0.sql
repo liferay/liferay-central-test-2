@@ -34,3 +34,27 @@ create table AssetCategoryVocabulary (
 	name VARCHAR(75) null,
 	description VARCHAR(75) null
 );
+
+alter table Layout add layoutPrototypeId LONG;
+
+create table LayoutPrototype (
+	layoutPrototypeId LONG not null primary key,
+	companyId LONG,
+	name VARCHAR(75) null,
+	title VARCHAR(75) null,
+	description VARCHAR(75) null,
+	settings_ STRING null,
+	active_ BOOLEAN
+);
+
+alter table LayoutSet add layoutSetPrototypeId LONG;
+
+create table LayoutSetPrototype (
+	layoutSetPrototypeId LONG not null primary key,
+	companyId LONG,
+	name VARCHAR(75) null,
+	title VARCHAR(75) null,
+	description VARCHAR(75) null,
+	settings_ STRING null,
+	active_ BOOLEAN
+);

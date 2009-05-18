@@ -99,9 +99,12 @@ public class LayoutSetModelImpl extends BaseModelImpl<LayoutSet> {
 			{ "pageCount", new Integer(Types.INTEGER) },
 			
 
-			{ "virtualHost", new Integer(Types.VARCHAR) }
+			{ "virtualHost", new Integer(Types.VARCHAR) },
+			
+
+			{ "layoutSetPrototypeId", new Integer(Types.BIGINT) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table LayoutSet (layoutSetId LONG not null primary key,groupId LONG,companyId LONG,privateLayout BOOLEAN,logo BOOLEAN,logoId LONG,themeId VARCHAR(75) null,colorSchemeId VARCHAR(75) null,wapThemeId VARCHAR(75) null,wapColorSchemeId VARCHAR(75) null,css STRING null,pageCount INTEGER,virtualHost VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table LayoutSet (layoutSetId LONG not null primary key,groupId LONG,companyId LONG,privateLayout BOOLEAN,logo BOOLEAN,logoId LONG,themeId VARCHAR(75) null,colorSchemeId VARCHAR(75) null,wapThemeId VARCHAR(75) null,wapColorSchemeId VARCHAR(75) null,css STRING null,pageCount INTEGER,virtualHost VARCHAR(75) null,layoutSetPrototypeId LONG)";
 	public static final String TABLE_SQL_DROP = "drop table LayoutSet";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -129,6 +132,7 @@ public class LayoutSetModelImpl extends BaseModelImpl<LayoutSet> {
 		model.setCss(soapModel.getCss());
 		model.setPageCount(soapModel.getPageCount());
 		model.setVirtualHost(soapModel.getVirtualHost());
+		model.setLayoutSetPrototypeId(soapModel.getLayoutSetPrototypeId());
 
 		return model;
 	}
@@ -301,6 +305,14 @@ public class LayoutSetModelImpl extends BaseModelImpl<LayoutSet> {
 		return GetterUtil.getString(_originalVirtualHost);
 	}
 
+	public long getLayoutSetPrototypeId() {
+		return _layoutSetPrototypeId;
+	}
+
+	public void setLayoutSetPrototypeId(long layoutSetPrototypeId) {
+		_layoutSetPrototypeId = layoutSetPrototypeId;
+	}
+
 	public LayoutSet toEscapedModel() {
 		if (isEscapedModel()) {
 			return (LayoutSet)this;
@@ -324,6 +336,7 @@ public class LayoutSetModelImpl extends BaseModelImpl<LayoutSet> {
 			model.setCss(HtmlUtil.escape(getCss()));
 			model.setPageCount(getPageCount());
 			model.setVirtualHost(HtmlUtil.escape(getVirtualHost()));
+			model.setLayoutSetPrototypeId(getLayoutSetPrototypeId());
 
 			model = (LayoutSet)Proxy.newProxyInstance(LayoutSet.class.getClassLoader(),
 					new Class[] { LayoutSet.class },
@@ -358,6 +371,7 @@ public class LayoutSetModelImpl extends BaseModelImpl<LayoutSet> {
 		clone.setCss(getCss());
 		clone.setPageCount(getPageCount());
 		clone.setVirtualHost(getVirtualHost());
+		clone.setLayoutSetPrototypeId(getLayoutSetPrototypeId());
 
 		return clone;
 	}
@@ -433,6 +447,8 @@ public class LayoutSetModelImpl extends BaseModelImpl<LayoutSet> {
 		sb.append(getPageCount());
 		sb.append(", virtualHost=");
 		sb.append(getVirtualHost());
+		sb.append(", layoutSetPrototypeId=");
+		sb.append(getLayoutSetPrototypeId());
 		sb.append("}");
 
 		return sb.toString();
@@ -497,6 +513,10 @@ public class LayoutSetModelImpl extends BaseModelImpl<LayoutSet> {
 			"<column><column-name>virtualHost</column-name><column-value><![CDATA[");
 		sb.append(getVirtualHost());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>layoutSetPrototypeId</column-name><column-value><![CDATA[");
+		sb.append(getLayoutSetPrototypeId());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -521,5 +541,6 @@ public class LayoutSetModelImpl extends BaseModelImpl<LayoutSet> {
 	private int _pageCount;
 	private String _virtualHost;
 	private String _originalVirtualHost;
+	private long _layoutSetPrototypeId;
 	private transient ExpandoBridge _expandoBridge;
 }

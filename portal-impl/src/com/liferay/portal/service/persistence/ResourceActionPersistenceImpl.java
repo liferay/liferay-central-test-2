@@ -1099,8 +1099,12 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl
 	protected com.liferay.portal.service.persistence.ImagePersistence imagePersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.LayoutPersistence.impl")
 	protected com.liferay.portal.service.persistence.LayoutPersistence layoutPersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.LayoutPrototypePersistence.impl")
+	protected com.liferay.portal.service.persistence.LayoutPrototypePersistence layoutPrototypePersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.LayoutSetPersistence.impl")
 	protected com.liferay.portal.service.persistence.LayoutSetPersistence layoutSetPersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.LayoutSetPrototypePersistence.impl")
+	protected com.liferay.portal.service.persistence.LayoutSetPrototypePersistence layoutSetPrototypePersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.ListTypePersistence.impl")
 	protected com.liferay.portal.service.persistence.ListTypePersistence listTypePersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.MembershipRequestPersistence.impl")

@@ -224,7 +224,19 @@
 			<hint-collection name="TEXTAREA" />
 		</field>
 		<field name="priority" type="int" />
+		<field name="layoutPrototypeId" type="long" />
 		<field name="dlFolderId" type="long" />
+	</model>
+	<model name="com.liferay.portal.model.LayoutPrototype">
+		<field name="layoutPrototypeId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="name" type="String" />
+		<field name="title" type="String" />
+		<field name="description" type="String" />
+		<field name="settings" type="String">
+			<hint-collection name="TEXTAREA" />
+		</field>
+		<field name="active" type="boolean" />
 	</model>
 	<model name="com.liferay.portal.model.LayoutSet">
 		<field name="layoutSetId" type="long" />
@@ -242,6 +254,18 @@
 		</field>
 		<field name="pageCount" type="int" />
 		<field name="virtualHost" type="String" />
+		<field name="layoutSetPrototypeId" type="long" />
+	</model>
+	<model name="com.liferay.portal.model.LayoutSetPrototype">
+		<field name="layoutSetPrototypeId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="name" type="String" />
+		<field name="title" type="String" />
+		<field name="description" type="String" />
+		<field name="settings" type="String">
+			<hint-collection name="TEXTAREA" />
+		</field>
+		<field name="active" type="boolean" />
 	</model>
 	<model name="com.liferay.portal.model.ListType">
 		<field name="listTypeId" type="int" />

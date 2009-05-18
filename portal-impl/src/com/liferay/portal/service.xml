@@ -487,6 +487,7 @@
 		<column name="wapColorSchemeId" type="String" />
 		<column name="css" type="String" />
 		<column name="priority" type="int" />
+		<column name="layoutPrototypeId" type="long" />
 		<column name="dlFolderId" type="long" />
 
 		<!-- Order -->
@@ -544,6 +545,38 @@
 		<reference package-path="com.liferay.portlet.ratings" entity="RatingsStats" />
 		<reference package-path="com.liferay.portlet.tasks" entity="TasksProposal" />
 	</entity>
+	<entity name="LayoutPrototype" local-service="true" remote-service="true">
+
+		<!-- PK fields -->
+
+		<column name="layoutPrototypeId" type="long" primary="true" />
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long" />
+
+		<!-- Other fields -->
+
+		<column name="name" type="String" />
+		<column name="title" type="String" />
+		<column name="description" type="String" />
+		<column name="settings" type="String" />
+		<column name="active" type="boolean" />
+
+		<!-- Finder methods -->
+
+		<finder name="CompanyId" return-type="Collection">
+			<finder-column name="companyId" />
+		</finder>
+		<finder name="C_A" return-type="Collection">
+			<finder-column name="companyId" />
+			<finder-column name="active" />
+		</finder>
+
+		<!-- References -->
+
+		<reference package-path="com.liferay.counter" entity="Counter" />
+	</entity>
 	<entity name="LayoutSet" local-service="true" remote-service="true">
 
 		<!-- PK fields -->
@@ -570,6 +603,7 @@
 		<column name="css" type="String" />
 		<column name="pageCount" type="int" />
 		<column name="virtualHost" type="String" />
+		<column name="layoutSetPrototypeId" type="long" />
 
 		<!-- Finder methods -->
 
@@ -582,6 +616,38 @@
 		<finder name="G_P" return-type="LayoutSet" unique="true">
 			<finder-column name="groupId" />
 			<finder-column name="privateLayout" />
+		</finder>
+
+		<!-- References -->
+
+		<reference package-path="com.liferay.counter" entity="Counter" />
+	</entity>
+	<entity name="LayoutSetPrototype" local-service="true" remote-service="true">
+
+		<!-- PK fields -->
+
+		<column name="layoutSetPrototypeId" type="long" primary="true" />
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long" />
+
+		<!-- Other fields -->
+
+		<column name="name" type="String" />
+		<column name="title" type="String" />
+		<column name="description" type="String" />
+		<column name="settings" type="String" />
+		<column name="active" type="boolean" />
+
+		<!-- Finder methods -->
+
+		<finder name="CompanyId" return-type="Collection">
+			<finder-column name="companyId" />
+		</finder>
+		<finder name="C_A" return-type="Collection">
+			<finder-column name="companyId" />
+			<finder-column name="active" />
 		</finder>
 
 		<!-- References -->
@@ -1436,11 +1502,11 @@
 		<column name="shardId" type="long" primary="true" />
 
 		<!-- Other fields -->
-		
+
 		<column name="classNameId" type="long" />
 		<column name="classPK" type="long" />
 		<column name="name" type="String" />
-		
+
 		<!-- Finder methods -->
 
 		<finder name="Name" return-type="Shard">

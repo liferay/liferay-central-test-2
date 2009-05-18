@@ -82,6 +82,7 @@ public class LayoutSetPersistenceTest extends BasePersistenceTestCase {
 		newLayoutSet.setCss(randomString());
 		newLayoutSet.setPageCount(nextInt());
 		newLayoutSet.setVirtualHost(randomString());
+		newLayoutSet.setLayoutSetPrototypeId(nextLong());
 
 		_persistence.update(newLayoutSet, false);
 
@@ -108,6 +109,8 @@ public class LayoutSetPersistenceTest extends BasePersistenceTestCase {
 			newLayoutSet.getPageCount());
 		assertEquals(existingLayoutSet.getVirtualHost(),
 			newLayoutSet.getVirtualHost());
+		assertEquals(existingLayoutSet.getLayoutSetPrototypeId(),
+			newLayoutSet.getLayoutSetPrototypeId());
 	}
 
 	public void testFindByPrimaryKeyExisting() throws Exception {
@@ -163,6 +166,7 @@ public class LayoutSetPersistenceTest extends BasePersistenceTestCase {
 		layoutSet.setCss(randomString());
 		layoutSet.setPageCount(nextInt());
 		layoutSet.setVirtualHost(randomString());
+		layoutSet.setLayoutSetPrototypeId(nextLong());
 
 		_persistence.update(layoutSet, false);
 

@@ -48,8 +48,12 @@ import com.liferay.portal.service.GroupLocalService;
 import com.liferay.portal.service.GroupService;
 import com.liferay.portal.service.ImageLocalService;
 import com.liferay.portal.service.LayoutLocalService;
+import com.liferay.portal.service.LayoutPrototypeLocalService;
+import com.liferay.portal.service.LayoutPrototypeService;
 import com.liferay.portal.service.LayoutService;
 import com.liferay.portal.service.LayoutSetLocalService;
+import com.liferay.portal.service.LayoutSetPrototypeLocalService;
+import com.liferay.portal.service.LayoutSetPrototypeService;
 import com.liferay.portal.service.LayoutSetService;
 import com.liferay.portal.service.LayoutTemplateLocalService;
 import com.liferay.portal.service.ListTypeService;
@@ -117,7 +121,9 @@ import com.liferay.portal.service.persistence.GroupPersistence;
 import com.liferay.portal.service.persistence.ImagePersistence;
 import com.liferay.portal.service.persistence.LayoutFinder;
 import com.liferay.portal.service.persistence.LayoutPersistence;
+import com.liferay.portal.service.persistence.LayoutPrototypePersistence;
 import com.liferay.portal.service.persistence.LayoutSetPersistence;
+import com.liferay.portal.service.persistence.LayoutSetPrototypePersistence;
 import com.liferay.portal.service.persistence.ListTypePersistence;
 import com.liferay.portal.service.persistence.MembershipRequestPersistence;
 import com.liferay.portal.service.persistence.OrgGroupPermissionFinder;
@@ -495,6 +501,33 @@ public abstract class ResourceActionLocalServiceBaseImpl
 		this.layoutFinder = layoutFinder;
 	}
 
+	public LayoutPrototypeLocalService getLayoutPrototypeLocalService() {
+		return layoutPrototypeLocalService;
+	}
+
+	public void setLayoutPrototypeLocalService(
+		LayoutPrototypeLocalService layoutPrototypeLocalService) {
+		this.layoutPrototypeLocalService = layoutPrototypeLocalService;
+	}
+
+	public LayoutPrototypeService getLayoutPrototypeService() {
+		return layoutPrototypeService;
+	}
+
+	public void setLayoutPrototypeService(
+		LayoutPrototypeService layoutPrototypeService) {
+		this.layoutPrototypeService = layoutPrototypeService;
+	}
+
+	public LayoutPrototypePersistence getLayoutPrototypePersistence() {
+		return layoutPrototypePersistence;
+	}
+
+	public void setLayoutPrototypePersistence(
+		LayoutPrototypePersistence layoutPrototypePersistence) {
+		this.layoutPrototypePersistence = layoutPrototypePersistence;
+	}
+
 	public LayoutSetLocalService getLayoutSetLocalService() {
 		return layoutSetLocalService;
 	}
@@ -519,6 +552,33 @@ public abstract class ResourceActionLocalServiceBaseImpl
 	public void setLayoutSetPersistence(
 		LayoutSetPersistence layoutSetPersistence) {
 		this.layoutSetPersistence = layoutSetPersistence;
+	}
+
+	public LayoutSetPrototypeLocalService getLayoutSetPrototypeLocalService() {
+		return layoutSetPrototypeLocalService;
+	}
+
+	public void setLayoutSetPrototypeLocalService(
+		LayoutSetPrototypeLocalService layoutSetPrototypeLocalService) {
+		this.layoutSetPrototypeLocalService = layoutSetPrototypeLocalService;
+	}
+
+	public LayoutSetPrototypeService getLayoutSetPrototypeService() {
+		return layoutSetPrototypeService;
+	}
+
+	public void setLayoutSetPrototypeService(
+		LayoutSetPrototypeService layoutSetPrototypeService) {
+		this.layoutSetPrototypeService = layoutSetPrototypeService;
+	}
+
+	public LayoutSetPrototypePersistence getLayoutSetPrototypePersistence() {
+		return layoutSetPrototypePersistence;
+	}
+
+	public void setLayoutSetPrototypePersistence(
+		LayoutSetPrototypePersistence layoutSetPrototypePersistence) {
+		this.layoutSetPrototypePersistence = layoutSetPrototypePersistence;
 	}
 
 	public LayoutTemplateLocalService getLayoutTemplateLocalService() {
@@ -1433,12 +1493,24 @@ public abstract class ResourceActionLocalServiceBaseImpl
 	protected LayoutPersistence layoutPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.LayoutFinder.impl")
 	protected LayoutFinder layoutFinder;
+	@BeanReference(name = "com.liferay.portal.service.LayoutPrototypeLocalService.impl")
+	protected LayoutPrototypeLocalService layoutPrototypeLocalService;
+	@BeanReference(name = "com.liferay.portal.service.LayoutPrototypeService.impl")
+	protected LayoutPrototypeService layoutPrototypeService;
+	@BeanReference(name = "com.liferay.portal.service.persistence.LayoutPrototypePersistence.impl")
+	protected LayoutPrototypePersistence layoutPrototypePersistence;
 	@BeanReference(name = "com.liferay.portal.service.LayoutSetLocalService.impl")
 	protected LayoutSetLocalService layoutSetLocalService;
 	@BeanReference(name = "com.liferay.portal.service.LayoutSetService.impl")
 	protected LayoutSetService layoutSetService;
 	@BeanReference(name = "com.liferay.portal.service.persistence.LayoutSetPersistence.impl")
 	protected LayoutSetPersistence layoutSetPersistence;
+	@BeanReference(name = "com.liferay.portal.service.LayoutSetPrototypeLocalService.impl")
+	protected LayoutSetPrototypeLocalService layoutSetPrototypeLocalService;
+	@BeanReference(name = "com.liferay.portal.service.LayoutSetPrototypeService.impl")
+	protected LayoutSetPrototypeService layoutSetPrototypeService;
+	@BeanReference(name = "com.liferay.portal.service.persistence.LayoutSetPrototypePersistence.impl")
+	protected LayoutSetPrototypePersistence layoutSetPrototypePersistence;
 	@BeanReference(name = "com.liferay.portal.service.LayoutTemplateLocalService.impl")
 	protected LayoutTemplateLocalService layoutTemplateLocalService;
 	@BeanReference(name = "com.liferay.portal.service.ListTypeService.impl")

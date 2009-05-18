@@ -236,9 +236,15 @@ create index IX_6DE88B06 on Layout (groupId, privateLayout, parentLayoutId);
 create index IX_1A1B61D2 on Layout (groupId, privateLayout, type_);
 create index IX_23922F7D on Layout (iconImageId);
 
+create index IX_30616AAA on LayoutPrototype (companyId);
+create index IX_557A639F on LayoutPrototype (companyId, active_);
+
 create index IX_A40B8BEC on LayoutSet (groupId);
 create unique index IX_48550691 on LayoutSet (groupId, privateLayout);
 create index IX_5ABC2905 on LayoutSet (virtualHost);
+
+create index IX_55F63D98 on LayoutSetPrototype (companyId);
+create index IX_9178FC71 on LayoutSetPrototype (companyId, active_);
 
 create index IX_2932DD37 on ListType (type_);
 

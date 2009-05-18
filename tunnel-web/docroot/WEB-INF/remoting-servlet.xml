@@ -109,6 +109,18 @@
 		<property name="service" ref="com.liferay.portal.service.LayoutService.impl" />
 		<property name="serviceInterface" value="com.liferay.portal.service.LayoutService" />
 	</bean>
+	<bean name="/com_liferay_portal_service_spring_LayoutPrototypeService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.LayoutPrototypeService.impl" />
+		<property name="serviceInterface" value="com.liferay.portal.service.LayoutPrototypeService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_LayoutPrototypeService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.LayoutPrototypeService.impl" />
+		<property name="serviceInterface" value="com.liferay.portal.service.LayoutPrototypeService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_LayoutPrototypeService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.LayoutPrototypeService.impl" />
+		<property name="serviceInterface" value="com.liferay.portal.service.LayoutPrototypeService" />
+	</bean>
 	<bean name="/com_liferay_portal_service_spring_LayoutSetService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
 		<property name="service" ref="com.liferay.portal.service.LayoutSetService.impl" />
 		<property name="serviceInterface" value="com.liferay.portal.service.LayoutSetService" />
@@ -120,6 +132,18 @@
 	<bean name="/com_liferay_portal_service_spring_LayoutSetService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
 		<property name="service" ref="com.liferay.portal.service.LayoutSetService.impl" />
 		<property name="serviceInterface" value="com.liferay.portal.service.LayoutSetService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_LayoutSetPrototypeService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.LayoutSetPrototypeService.impl" />
+		<property name="serviceInterface" value="com.liferay.portal.service.LayoutSetPrototypeService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_LayoutSetPrototypeService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.LayoutSetPrototypeService.impl" />
+		<property name="serviceInterface" value="com.liferay.portal.service.LayoutSetPrototypeService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_LayoutSetPrototypeService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.LayoutSetPrototypeService.impl" />
+		<property name="serviceInterface" value="com.liferay.portal.service.LayoutSetPrototypeService" />
 	</bean>
 	<bean name="/com_liferay_portal_service_spring_ListTypeService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
 		<property name="service" ref="com.liferay.portal.service.ListTypeService.impl" />

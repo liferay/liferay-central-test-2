@@ -70,6 +70,7 @@ public class LayoutSoap implements Serializable {
 		soapModel.setWapColorSchemeId(model.getWapColorSchemeId());
 		soapModel.setCss(model.getCss());
 		soapModel.setPriority(model.getPriority());
+		soapModel.setLayoutPrototypeId(model.getLayoutPrototypeId());
 		soapModel.setDlFolderId(model.getDlFolderId());
 
 		return soapModel;
@@ -303,6 +304,14 @@ public class LayoutSoap implements Serializable {
 		_priority = priority;
 	}
 
+	public long getLayoutPrototypeId() {
+		return _layoutPrototypeId;
+	}
+
+	public void setLayoutPrototypeId(long layoutPrototypeId) {
+		_layoutPrototypeId = layoutPrototypeId;
+	}
+
 	public long getDlFolderId() {
 		return _dlFolderId;
 	}
@@ -332,5 +341,6 @@ public class LayoutSoap implements Serializable {
 	private String _wapColorSchemeId;
 	private String _css;
 	private int _priority;
+	private long _layoutPrototypeId;
 	private long _dlFolderId;
 }

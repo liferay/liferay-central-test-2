@@ -116,7 +116,9 @@ public class PersistenceTestSuite extends TestSuite {
 		testSuite.addTestSuite(GroupPersistenceTest.class);
 		testSuite.addTestSuite(ImagePersistenceTest.class);
 		testSuite.addTestSuite(LayoutPersistenceTest.class);
+		testSuite.addTestSuite(LayoutPrototypePersistenceTest.class);
 		testSuite.addTestSuite(LayoutSetPersistenceTest.class);
+		testSuite.addTestSuite(LayoutSetPrototypePersistenceTest.class);
 		testSuite.addTestSuite(ListTypePersistenceTest.class);
 		testSuite.addTestSuite(MembershipRequestPersistenceTest.class);
 		testSuite.addTestSuite(OrganizationPersistenceTest.class);
