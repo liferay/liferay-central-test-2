@@ -51,7 +51,7 @@ if ((classNameId == 0) && (classPK == 0) && !permissionChecker.isOmniadmin()) {
 
 <table class="lfr-table">
 <tr>
-	<td class="lf-label">
+	<td class="lfr-label">
 		<liferay-ui:message key="distribution-scope" />
 	</td>
 	<td>
