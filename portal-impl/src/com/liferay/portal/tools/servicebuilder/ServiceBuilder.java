@@ -3249,7 +3249,7 @@ public class ServiceBuilder {
 				_createSQLTables(sqlFile, createTableSQL, entity, true);
 
 				File updateSQLFile = new File(
-					_sqlDir + "/update-5.2.2-5.2.3.sql");
+					_sqlDir + "/update-5.2.3-5.3.0.sql");
 
 				if (updateSQLFile.exists()) {
 					_createSQLTables(
