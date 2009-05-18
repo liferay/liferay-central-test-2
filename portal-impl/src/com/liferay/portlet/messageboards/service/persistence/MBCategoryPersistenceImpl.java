@@ -369,8 +369,8 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl
 		}
 
 		if (isNew ||
-				(!mbCategory.getUuid()
-								.equals(mbCategoryModelImpl.getOriginalUuid()) ||
+				(!Validator.equals(mbCategory.getUuid(),
+					mbCategoryModelImpl.getOriginalUuid()) ||
 				(mbCategory.getGroupId() != mbCategoryModelImpl.getOriginalGroupId()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
 				new Object[] {

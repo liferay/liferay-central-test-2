@@ -324,8 +324,8 @@ public class ExpandoColumnPersistenceImpl extends BasePersistenceImpl
 
 		if (isNew ||
 				((expandoColumn.getTableId() != expandoColumnModelImpl.getOriginalTableId()) ||
-				!expandoColumn.getName()
-								  .equals(expandoColumnModelImpl.getOriginalName()))) {
+				!Validator.equals(expandoColumn.getName(),
+					expandoColumnModelImpl.getOriginalName()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_T_N,
 				new Object[] {
 					new Long(expandoColumn.getTableId()),

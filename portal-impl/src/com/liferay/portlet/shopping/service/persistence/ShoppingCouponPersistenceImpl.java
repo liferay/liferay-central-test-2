@@ -311,8 +311,8 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl
 		}
 
 		if (isNew ||
-				(!shoppingCoupon.getCode()
-									.equals(shoppingCouponModelImpl.getOriginalCode()))) {
+				(!Validator.equals(shoppingCoupon.getCode(),
+					shoppingCouponModelImpl.getOriginalCode()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_CODE,
 				new Object[] { shoppingCoupon.getCode() }, shoppingCoupon);
 		}

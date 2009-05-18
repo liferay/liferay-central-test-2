@@ -342,8 +342,8 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl
 
 		if (isNew ||
 				((resourceCode.getCompanyId() != resourceCodeModelImpl.getOriginalCompanyId()) ||
-				!resourceCode.getName()
-								 .equals(resourceCodeModelImpl.getOriginalName()) ||
+				!Validator.equals(resourceCode.getName(),
+					resourceCodeModelImpl.getOriginalName()) ||
 				(resourceCode.getScope() != resourceCodeModelImpl.getOriginalScope()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_N_S,
 				new Object[] {

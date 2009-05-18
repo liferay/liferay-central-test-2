@@ -420,8 +420,8 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl
 
 		if (isNew ||
 				((shoppingItem.getCompanyId() != shoppingItemModelImpl.getOriginalCompanyId()) ||
-				!shoppingItem.getSku()
-								 .equals(shoppingItemModelImpl.getOriginalSku()))) {
+				!Validator.equals(shoppingItem.getSku(),
+					shoppingItemModelImpl.getOriginalSku()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_S,
 				new Object[] {
 					new Long(shoppingItem.getCompanyId()),

@@ -341,8 +341,8 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl
 
 		if (isNew ||
 				((userIdMapper.getUserId() != userIdMapperModelImpl.getOriginalUserId()) ||
-				!userIdMapper.getType()
-								 .equals(userIdMapperModelImpl.getOriginalType()))) {
+				!Validator.equals(userIdMapper.getType(),
+					userIdMapperModelImpl.getOriginalType()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U_T,
 				new Object[] {
 					new Long(userIdMapper.getUserId()),
@@ -365,10 +365,10 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl
 		}
 
 		if (isNew ||
-				(!userIdMapper.getType()
-								  .equals(userIdMapperModelImpl.getOriginalType()) ||
-				!userIdMapper.getExternalUserId()
-								 .equals(userIdMapperModelImpl.getOriginalExternalUserId()))) {
+				(!Validator.equals(userIdMapper.getType(),
+					userIdMapperModelImpl.getOriginalType()) ||
+				!Validator.equals(userIdMapper.getExternalUserId(),
+					userIdMapperModelImpl.getOriginalExternalUserId()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_T_E,
 				new Object[] {
 					userIdMapper.getType(),

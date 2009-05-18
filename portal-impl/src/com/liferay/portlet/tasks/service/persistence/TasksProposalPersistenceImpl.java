@@ -342,8 +342,8 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl
 
 		if (isNew ||
 				((tasksProposal.getClassNameId() != tasksProposalModelImpl.getOriginalClassNameId()) ||
-				!tasksProposal.getClassPK()
-								  .equals(tasksProposalModelImpl.getOriginalClassPK()))) {
+				!Validator.equals(tasksProposal.getClassPK(),
+					tasksProposalModelImpl.getOriginalClassPK()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_C,
 				new Object[] {
 					new Long(tasksProposal.getClassNameId()),

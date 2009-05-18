@@ -382,8 +382,8 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl
 				((portletPreferences.getOwnerId() != portletPreferencesModelImpl.getOriginalOwnerId()) ||
 				(portletPreferences.getOwnerType() != portletPreferencesModelImpl.getOriginalOwnerType()) ||
 				(portletPreferences.getPlid() != portletPreferencesModelImpl.getOriginalPlid()) ||
-				!portletPreferences.getPortletId()
-									   .equals(portletPreferencesModelImpl.getOriginalPortletId()))) {
+				!Validator.equals(portletPreferences.getPortletId(),
+					portletPreferencesModelImpl.getOriginalPortletId()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_O_O_P_P,
 				new Object[] {
 					new Long(portletPreferences.getOwnerId()),

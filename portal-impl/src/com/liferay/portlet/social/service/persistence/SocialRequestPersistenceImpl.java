@@ -499,8 +499,8 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl
 		}
 
 		if (isNew ||
-				(!socialRequest.getUuid()
-								   .equals(socialRequestModelImpl.getOriginalUuid()) ||
+				(!Validator.equals(socialRequest.getUuid(),
+					socialRequestModelImpl.getOriginalUuid()) ||
 				(socialRequest.getGroupId() != socialRequestModelImpl.getOriginalGroupId()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
 				new Object[] {

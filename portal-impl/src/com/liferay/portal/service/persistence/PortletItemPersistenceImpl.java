@@ -361,10 +361,10 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl
 
 		if (isNew ||
 				((portletItem.getGroupId() != portletItemModelImpl.getOriginalGroupId()) ||
-				!portletItem.getName()
-								.equals(portletItemModelImpl.getOriginalName()) ||
-				!portletItem.getPortletId()
-								.equals(portletItemModelImpl.getOriginalPortletId()) ||
+				!Validator.equals(portletItem.getName(),
+					portletItemModelImpl.getOriginalName()) ||
+				!Validator.equals(portletItem.getPortletId(),
+					portletItemModelImpl.getOriginalPortletId()) ||
 				(portletItem.getClassNameId() != portletItemModelImpl.getOriginalClassNameId()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_N_P_C,
 				new Object[] {

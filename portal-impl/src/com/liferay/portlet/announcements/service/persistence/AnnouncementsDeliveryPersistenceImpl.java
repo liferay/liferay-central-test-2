@@ -329,8 +329,8 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl
 
 		if (isNew ||
 				((announcementsDelivery.getUserId() != announcementsDeliveryModelImpl.getOriginalUserId()) ||
-				!announcementsDelivery.getType()
-										  .equals(announcementsDeliveryModelImpl.getOriginalType()))) {
+				!Validator.equals(announcementsDelivery.getType(),
+					announcementsDeliveryModelImpl.getOriginalType()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U_T,
 				new Object[] {
 					new Long(announcementsDelivery.getUserId()),

@@ -298,7 +298,8 @@ public class ShardPersistenceImpl extends BasePersistenceImpl
 		}
 
 		if (isNew ||
-				(!shard.getName().equals(shardModelImpl.getOriginalName()))) {
+				(!Validator.equals(shard.getName(),
+					shardModelImpl.getOriginalName()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_NAME,
 				new Object[] { shard.getName() }, shard);
 		}

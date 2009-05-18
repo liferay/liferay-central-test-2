@@ -494,8 +494,8 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl
 		if (isNew ||
 				((socialActivity.getGroupId() != socialActivityModelImpl.getOriginalGroupId()) ||
 				(socialActivity.getUserId() != socialActivityModelImpl.getOriginalUserId()) ||
-				!socialActivity.getCreateDate()
-								   .equals(socialActivityModelImpl.getOriginalCreateDate()) ||
+				!Validator.equals(socialActivity.getCreateDate(),
+					socialActivityModelImpl.getOriginalCreateDate()) ||
 				(socialActivity.getClassNameId() != socialActivityModelImpl.getOriginalClassNameId()) ||
 				(socialActivity.getClassPK() != socialActivityModelImpl.getOriginalClassPK()) ||
 				(socialActivity.getType() != socialActivityModelImpl.getOriginalType()) ||

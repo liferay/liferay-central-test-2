@@ -465,8 +465,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl
 		}
 
 		if (isNew ||
-				(!mbMessage.getUuid()
-							   .equals(mbMessageModelImpl.getOriginalUuid()) ||
+				(!Validator.equals(mbMessage.getUuid(),
+					mbMessageModelImpl.getOriginalUuid()) ||
 				(mbMessage.getGroupId() != mbMessageModelImpl.getOriginalGroupId()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
 				new Object[] {

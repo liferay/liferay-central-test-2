@@ -312,8 +312,8 @@ public class PortletPersistenceImpl extends BasePersistenceImpl
 
 		if (isNew ||
 				((portlet.getCompanyId() != portletModelImpl.getOriginalCompanyId()) ||
-				!portlet.getPortletId()
-							.equals(portletModelImpl.getOriginalPortletId()))) {
+				!Validator.equals(portlet.getPortletId(),
+					portletModelImpl.getOriginalPortletId()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_P,
 				new Object[] {
 					new Long(portlet.getCompanyId()),

@@ -333,8 +333,8 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl
 		if (isNew ||
 				((expandoTable.getCompanyId() != expandoTableModelImpl.getOriginalCompanyId()) ||
 				(expandoTable.getClassNameId() != expandoTableModelImpl.getOriginalClassNameId()) ||
-				!expandoTable.getName()
-								 .equals(expandoTableModelImpl.getOriginalName()))) {
+				!Validator.equals(expandoTable.getName(),
+					expandoTableModelImpl.getOriginalName()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_C_N,
 				new Object[] {
 					new Long(expandoTable.getCompanyId()),

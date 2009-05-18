@@ -320,10 +320,10 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl
 		}
 
 		if (isNew ||
-				(!resourceAction.getName()
-									.equals(resourceActionModelImpl.getOriginalName()) ||
-				!resourceAction.getActionId()
-								   .equals(resourceActionModelImpl.getOriginalActionId()))) {
+				(!Validator.equals(resourceAction.getName(),
+					resourceActionModelImpl.getOriginalName()) ||
+				!Validator.equals(resourceAction.getActionId(),
+					resourceActionModelImpl.getOriginalActionId()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_N_A,
 				new Object[] {
 					resourceAction.getName(),

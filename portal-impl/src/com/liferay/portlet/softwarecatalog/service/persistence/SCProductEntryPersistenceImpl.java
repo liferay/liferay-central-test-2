@@ -378,10 +378,10 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 		}
 
 		if (isNew ||
-				(!scProductEntry.getRepoGroupId()
-									.equals(scProductEntryModelImpl.getOriginalRepoGroupId()) ||
-				!scProductEntry.getRepoArtifactId()
-								   .equals(scProductEntryModelImpl.getOriginalRepoArtifactId()))) {
+				(!Validator.equals(scProductEntry.getRepoGroupId(),
+					scProductEntryModelImpl.getOriginalRepoGroupId()) ||
+				!Validator.equals(scProductEntry.getRepoArtifactId(),
+					scProductEntryModelImpl.getOriginalRepoArtifactId()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_RG_RA,
 				new Object[] {
 					scProductEntry.getRepoGroupId(),

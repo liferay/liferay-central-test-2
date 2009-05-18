@@ -333,8 +333,8 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl
 
 		if (isNew ||
 				((journalArticleResource.getGroupId() != journalArticleResourceModelImpl.getOriginalGroupId()) ||
-				!journalArticleResource.getArticleId()
-										   .equals(journalArticleResourceModelImpl.getOriginalArticleId()))) {
+				!Validator.equals(journalArticleResource.getArticleId(),
+					journalArticleResourceModelImpl.getOriginalArticleId()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_A,
 				new Object[] {
 					new Long(journalArticleResource.getGroupId()),

@@ -397,11 +397,11 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl
 
 		if (isNew ||
 				((resourcePermission.getCompanyId() != resourcePermissionModelImpl.getOriginalCompanyId()) ||
-				!resourcePermission.getName()
-									   .equals(resourcePermissionModelImpl.getOriginalName()) ||
+				!Validator.equals(resourcePermission.getName(),
+					resourcePermissionModelImpl.getOriginalName()) ||
 				(resourcePermission.getScope() != resourcePermissionModelImpl.getOriginalScope()) ||
-				!resourcePermission.getPrimKey()
-									   .equals(resourcePermissionModelImpl.getOriginalPrimKey()) ||
+				!Validator.equals(resourcePermission.getPrimKey(),
+					resourcePermissionModelImpl.getOriginalPrimKey()) ||
 				(resourcePermission.getRoleId() != resourcePermissionModelImpl.getOriginalRoleId()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_N_S_P_R,
 				new Object[] {

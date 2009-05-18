@@ -337,10 +337,10 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl
 
 		if (isNew ||
 				((pluginSetting.getCompanyId() != pluginSettingModelImpl.getOriginalCompanyId()) ||
-				!pluginSetting.getPluginId()
-								  .equals(pluginSettingModelImpl.getOriginalPluginId()) ||
-				!pluginSetting.getPluginType()
-								  .equals(pluginSettingModelImpl.getOriginalPluginType()))) {
+				!Validator.equals(pluginSetting.getPluginId(),
+					pluginSettingModelImpl.getOriginalPluginId()) ||
+				!Validator.equals(pluginSetting.getPluginType(),
+					pluginSettingModelImpl.getOriginalPluginType()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_I_T,
 				new Object[] {
 					new Long(pluginSetting.getCompanyId()),

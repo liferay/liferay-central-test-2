@@ -334,8 +334,8 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl
 
 		if (isNew ||
 				((dlFileVersion.getFolderId() != dlFileVersionModelImpl.getOriginalFolderId()) ||
-				!dlFileVersion.getName()
-								  .equals(dlFileVersionModelImpl.getOriginalName()) ||
+				!Validator.equals(dlFileVersion.getName(),
+					dlFileVersionModelImpl.getOriginalName()) ||
 				(dlFileVersion.getVersion() != dlFileVersionModelImpl.getOriginalVersion()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_F_N_V,
 				new Object[] {

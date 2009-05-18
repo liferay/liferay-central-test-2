@@ -310,8 +310,8 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl
 
 		if (isNew ||
 				((wikiPageResource.getNodeId() != wikiPageResourceModelImpl.getOriginalNodeId()) ||
-				!wikiPageResource.getTitle()
-									 .equals(wikiPageResourceModelImpl.getOriginalTitle()))) {
+				!Validator.equals(wikiPageResource.getTitle(),
+					wikiPageResourceModelImpl.getOriginalTitle()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_N_T,
 				new Object[] {
 					new Long(wikiPageResource.getNodeId()),

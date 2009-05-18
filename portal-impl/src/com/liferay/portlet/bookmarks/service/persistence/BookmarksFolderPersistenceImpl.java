@@ -384,8 +384,8 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl
 		}
 
 		if (isNew ||
-				(!bookmarksFolder.getUuid()
-									 .equals(bookmarksFolderModelImpl.getOriginalUuid()) ||
+				(!Validator.equals(bookmarksFolder.getUuid(),
+					bookmarksFolderModelImpl.getOriginalUuid()) ||
 				(bookmarksFolder.getGroupId() != bookmarksFolderModelImpl.getOriginalGroupId()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
 				new Object[] {

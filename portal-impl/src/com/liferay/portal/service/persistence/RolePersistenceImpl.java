@@ -385,7 +385,8 @@ public class RolePersistenceImpl extends BasePersistenceImpl
 
 		if (isNew ||
 				((role.getCompanyId() != roleModelImpl.getOriginalCompanyId()) ||
-				!role.getName().equals(roleModelImpl.getOriginalName()))) {
+				!Validator.equals(role.getName(),
+					roleModelImpl.getOriginalName()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_N,
 				new Object[] { new Long(role.getCompanyId()), role.getName() },
 				role);

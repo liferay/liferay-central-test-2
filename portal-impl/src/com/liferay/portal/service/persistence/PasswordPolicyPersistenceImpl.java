@@ -348,8 +348,8 @@ public class PasswordPolicyPersistenceImpl extends BasePersistenceImpl
 
 		if (isNew ||
 				((passwordPolicy.getCompanyId() != passwordPolicyModelImpl.getOriginalCompanyId()) ||
-				!passwordPolicy.getName()
-								   .equals(passwordPolicyModelImpl.getOriginalName()))) {
+				!Validator.equals(passwordPolicy.getName(),
+					passwordPolicyModelImpl.getOriginalName()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_N,
 				new Object[] {
 					new Long(passwordPolicy.getCompanyId()),

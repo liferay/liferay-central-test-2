@@ -318,8 +318,8 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl
 		}
 
 		if (isNew ||
-				(!layoutSet.getVirtualHost()
-							   .equals(layoutSetModelImpl.getOriginalVirtualHost()))) {
+				(!Validator.equals(layoutSet.getVirtualHost(),
+					layoutSetModelImpl.getOriginalVirtualHost()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_VIRTUALHOST,
 				new Object[] { layoutSet.getVirtualHost() }, layoutSet);
 		}

@@ -348,8 +348,8 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl
 		}
 
 		if (isNew ||
-				(!shoppingOrder.getNumber()
-								   .equals(shoppingOrderModelImpl.getOriginalNumber()))) {
+				(!Validator.equals(shoppingOrder.getNumber(),
+					shoppingOrderModelImpl.getOriginalNumber()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_NUMBER,
 				new Object[] { shoppingOrder.getNumber() }, shoppingOrder);
 		}
@@ -362,8 +362,8 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl
 		}
 
 		if (isNew ||
-				(!shoppingOrder.getPpTxnId()
-								   .equals(shoppingOrderModelImpl.getOriginalPpTxnId()))) {
+				(!Validator.equals(shoppingOrder.getPpTxnId(),
+					shoppingOrderModelImpl.getOriginalPpTxnId()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_PPTXNID,
 				new Object[] { shoppingOrder.getPpTxnId() }, shoppingOrder);
 		}

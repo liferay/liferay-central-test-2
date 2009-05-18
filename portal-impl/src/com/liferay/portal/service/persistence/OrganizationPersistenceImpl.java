@@ -392,8 +392,8 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl
 
 		if (isNew ||
 				((organization.getCompanyId() != organizationModelImpl.getOriginalCompanyId()) ||
-				!organization.getName()
-								 .equals(organizationModelImpl.getOriginalName()))) {
+				!Validator.equals(organization.getName(),
+					organizationModelImpl.getOriginalName()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_N,
 				new Object[] {
 					new Long(organization.getCompanyId()),

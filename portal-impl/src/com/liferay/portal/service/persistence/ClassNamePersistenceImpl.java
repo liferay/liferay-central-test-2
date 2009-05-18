@@ -283,8 +283,8 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl
 		}
 
 		if (isNew ||
-				(!className.getValue()
-							   .equals(classNameModelImpl.getOriginalValue()))) {
+				(!Validator.equals(className.getValue(),
+					classNameModelImpl.getOriginalValue()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_VALUE,
 				new Object[] { className.getValue() }, className);
 		}

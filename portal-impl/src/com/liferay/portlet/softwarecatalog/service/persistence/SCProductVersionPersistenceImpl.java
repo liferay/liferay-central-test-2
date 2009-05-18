@@ -337,8 +337,8 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl
 		}
 
 		if (isNew ||
-				(!scProductVersion.getDirectDownloadURL()
-									  .equals(scProductVersionModelImpl.getOriginalDirectDownloadURL()))) {
+				(!Validator.equals(scProductVersion.getDirectDownloadURL(),
+					scProductVersionModelImpl.getOriginalDirectDownloadURL()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_DIRECTDOWNLOADURL,
 				new Object[] { scProductVersion.getDirectDownloadURL() },
 				scProductVersion);

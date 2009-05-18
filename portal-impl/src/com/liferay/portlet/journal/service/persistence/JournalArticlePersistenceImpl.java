@@ -520,8 +520,8 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 		}
 
 		if (isNew ||
-				(!journalArticle.getUuid()
-									.equals(journalArticleModelImpl.getOriginalUuid()) ||
+				(!Validator.equals(journalArticle.getUuid(),
+					journalArticleModelImpl.getOriginalUuid()) ||
 				(journalArticle.getGroupId() != journalArticleModelImpl.getOriginalGroupId()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
 				new Object[] {
@@ -546,8 +546,8 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 
 		if (isNew ||
 				((journalArticle.getGroupId() != journalArticleModelImpl.getOriginalGroupId()) ||
-				!journalArticle.getArticleId()
-								   .equals(journalArticleModelImpl.getOriginalArticleId()) ||
+				!Validator.equals(journalArticle.getArticleId(),
+					journalArticleModelImpl.getOriginalArticleId()) ||
 				(journalArticle.getVersion() != journalArticleModelImpl.getOriginalVersion()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_A_V,
 				new Object[] {

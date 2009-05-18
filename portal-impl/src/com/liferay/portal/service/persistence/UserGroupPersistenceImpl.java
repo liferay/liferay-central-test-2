@@ -347,7 +347,8 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl
 
 		if (isNew ||
 				((userGroup.getCompanyId() != userGroupModelImpl.getOriginalCompanyId()) ||
-				!userGroup.getName().equals(userGroupModelImpl.getOriginalName()))) {
+				!Validator.equals(userGroup.getName(),
+					userGroupModelImpl.getOriginalName()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_N,
 				new Object[] {
 					new Long(userGroup.getCompanyId()),

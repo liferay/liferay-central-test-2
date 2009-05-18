@@ -350,8 +350,8 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 		}
 
 		if (isNew ||
-				(!permission.getActionId()
-								.equals(permissionModelImpl.getOriginalActionId()) ||
+				(!Validator.equals(permission.getActionId(),
+					permissionModelImpl.getOriginalActionId()) ||
 				(permission.getResourceId() != permissionModelImpl.getOriginalResourceId()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_A_R,
 				new Object[] {

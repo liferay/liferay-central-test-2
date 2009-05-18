@@ -367,8 +367,8 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl
 				((dlFileRank.getCompanyId() != dlFileRankModelImpl.getOriginalCompanyId()) ||
 				(dlFileRank.getUserId() != dlFileRankModelImpl.getOriginalUserId()) ||
 				(dlFileRank.getFolderId() != dlFileRankModelImpl.getOriginalFolderId()) ||
-				!dlFileRank.getName()
-							   .equals(dlFileRankModelImpl.getOriginalName()))) {
+				!Validator.equals(dlFileRank.getName(),
+					dlFileRankModelImpl.getOriginalName()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_U_F_N,
 				new Object[] {
 					new Long(dlFileRank.getCompanyId()),

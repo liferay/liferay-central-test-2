@@ -350,8 +350,8 @@ public class AssetCategoryVocabularyPersistenceImpl extends BasePersistenceImpl
 
 		if (isNew ||
 				((assetCategoryVocabulary.getGroupId() != assetCategoryVocabularyModelImpl.getOriginalGroupId()) ||
-				!assetCategoryVocabulary.getName()
-											.equals(assetCategoryVocabularyModelImpl.getOriginalName()))) {
+				!Validator.equals(assetCategoryVocabulary.getName(),
+					assetCategoryVocabularyModelImpl.getOriginalName()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_N,
 				new Object[] {
 					new Long(assetCategoryVocabulary.getGroupId()),

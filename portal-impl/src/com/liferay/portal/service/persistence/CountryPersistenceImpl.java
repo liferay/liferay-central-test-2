@@ -321,7 +321,8 @@ public class CountryPersistenceImpl extends BasePersistenceImpl
 		}
 
 		if (isNew ||
-				(!country.getName().equals(countryModelImpl.getOriginalName()))) {
+				(!Validator.equals(country.getName(),
+					countryModelImpl.getOriginalName()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_NAME,
 				new Object[] { country.getName() }, country);
 		}
@@ -334,7 +335,8 @@ public class CountryPersistenceImpl extends BasePersistenceImpl
 		}
 
 		if (isNew ||
-				(!country.getA2().equals(countryModelImpl.getOriginalA2()))) {
+				(!Validator.equals(country.getA2(),
+					countryModelImpl.getOriginalA2()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_A2,
 				new Object[] { country.getA2() }, country);
 		}
@@ -347,7 +349,8 @@ public class CountryPersistenceImpl extends BasePersistenceImpl
 		}
 
 		if (isNew ||
-				(!country.getA3().equals(countryModelImpl.getOriginalA3()))) {
+				(!Validator.equals(country.getA3(),
+					countryModelImpl.getOriginalA3()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_A3,
 				new Object[] { country.getA3() }, country);
 		}

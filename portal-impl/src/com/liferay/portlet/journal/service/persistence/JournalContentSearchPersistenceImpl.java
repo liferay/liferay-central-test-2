@@ -445,10 +445,10 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl
 				((journalContentSearch.getGroupId() != journalContentSearchModelImpl.getOriginalGroupId()) ||
 				(journalContentSearch.getPrivateLayout() != journalContentSearchModelImpl.getOriginalPrivateLayout()) ||
 				(journalContentSearch.getLayoutId() != journalContentSearchModelImpl.getOriginalLayoutId()) ||
-				!journalContentSearch.getPortletId()
-										 .equals(journalContentSearchModelImpl.getOriginalPortletId()) ||
-				!journalContentSearch.getArticleId()
-										 .equals(journalContentSearchModelImpl.getOriginalArticleId()))) {
+				!Validator.equals(journalContentSearch.getPortletId(),
+					journalContentSearchModelImpl.getOriginalPortletId()) ||
+				!Validator.equals(journalContentSearch.getArticleId(),
+					journalContentSearchModelImpl.getOriginalArticleId()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_P_L_P_A,
 				new Object[] {
 					new Long(journalContentSearch.getGroupId()),

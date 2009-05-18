@@ -353,8 +353,8 @@ public class TagsPropertyPersistenceImpl extends BasePersistenceImpl
 
 		if (isNew ||
 				((tagsProperty.getEntryId() != tagsPropertyModelImpl.getOriginalEntryId()) ||
-				!tagsProperty.getKey()
-								 .equals(tagsPropertyModelImpl.getOriginalKey()))) {
+				!Validator.equals(tagsProperty.getKey(),
+					tagsPropertyModelImpl.getOriginalKey()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_E_K,
 				new Object[] {
 					new Long(tagsProperty.getEntryId()),

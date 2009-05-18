@@ -365,8 +365,8 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 		}
 
 		if (isNew ||
-				(!dlFileShortcut.getUuid()
-									.equals(dlFileShortcutModelImpl.getOriginalUuid()) ||
+				(!Validator.equals(dlFileShortcut.getUuid(),
+					dlFileShortcutModelImpl.getOriginalUuid()) ||
 				(dlFileShortcut.getGroupId() != dlFileShortcutModelImpl.getOriginalGroupId()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
 				new Object[] {

@@ -321,8 +321,8 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl
 		}
 
 		if (isNew ||
-				(!serviceComponent.getBuildNamespace()
-									  .equals(serviceComponentModelImpl.getOriginalBuildNamespace()) ||
+				(!Validator.equals(serviceComponent.getBuildNamespace(),
+					serviceComponentModelImpl.getOriginalBuildNamespace()) ||
 				(serviceComponent.getBuildNumber() != serviceComponentModelImpl.getOriginalBuildNumber()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_BNS_BNU,
 				new Object[] {

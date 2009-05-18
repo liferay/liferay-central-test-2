@@ -333,7 +333,8 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl
 		}
 
 		if (isNew ||
-				(!company.getWebId().equals(companyModelImpl.getOriginalWebId()))) {
+				(!Validator.equals(company.getWebId(),
+					companyModelImpl.getOriginalWebId()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_WEBID,
 				new Object[] { company.getWebId() }, company);
 		}
@@ -346,8 +347,8 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl
 		}
 
 		if (isNew ||
-				(!company.getVirtualHost()
-							 .equals(companyModelImpl.getOriginalVirtualHost()))) {
+				(!Validator.equals(company.getVirtualHost(),
+					companyModelImpl.getOriginalVirtualHost()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_VIRTUALHOST,
 				new Object[] { company.getVirtualHost() }, company);
 		}
@@ -360,7 +361,8 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl
 		}
 
 		if (isNew ||
-				(!company.getMx().equals(companyModelImpl.getOriginalMx()))) {
+				(!Validator.equals(company.getMx(),
+					companyModelImpl.getOriginalMx()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_MX,
 				new Object[] { company.getMx() }, company);
 		}

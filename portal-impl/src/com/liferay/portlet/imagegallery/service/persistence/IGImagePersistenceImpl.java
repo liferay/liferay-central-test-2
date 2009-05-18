@@ -433,7 +433,8 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl
 		}
 
 		if (isNew ||
-				(!igImage.getUuid().equals(igImageModelImpl.getOriginalUuid()) ||
+				(!Validator.equals(igImage.getUuid(),
+					igImageModelImpl.getOriginalUuid()) ||
 				(igImage.getGroupId() != igImageModelImpl.getOriginalGroupId()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
 				new Object[] { igImage.getUuid(), new Long(igImage.getGroupId()) },

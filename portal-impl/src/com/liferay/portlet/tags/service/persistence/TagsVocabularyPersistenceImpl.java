@@ -342,8 +342,8 @@ public class TagsVocabularyPersistenceImpl extends BasePersistenceImpl
 
 		if (isNew ||
 				((tagsVocabulary.getGroupId() != tagsVocabularyModelImpl.getOriginalGroupId()) ||
-				!tagsVocabulary.getName()
-								   .equals(tagsVocabularyModelImpl.getOriginalName()))) {
+				!Validator.equals(tagsVocabulary.getName(),
+					tagsVocabularyModelImpl.getOriginalName()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_N,
 				new Object[] {
 					new Long(tagsVocabulary.getGroupId()),

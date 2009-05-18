@@ -363,8 +363,8 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl
 
 		if (isNew ||
 				((assetCategoryProperty.getCategoryId() != assetCategoryPropertyModelImpl.getOriginalCategoryId()) ||
-				!assetCategoryProperty.getKey()
-										  .equals(assetCategoryPropertyModelImpl.getOriginalKey()))) {
+				!Validator.equals(assetCategoryProperty.getKey(),
+					assetCategoryPropertyModelImpl.getOriginalKey()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_CA_K,
 				new Object[] {
 					new Long(assetCategoryProperty.getCategoryId()),

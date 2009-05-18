@@ -310,8 +310,8 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl
 
 		if (isNew ||
 				((resource.getCodeId() != resourceModelImpl.getOriginalCodeId()) ||
-				!resource.getPrimKey()
-							 .equals(resourceModelImpl.getOriginalPrimKey()))) {
+				!Validator.equals(resource.getPrimKey(),
+					resourceModelImpl.getOriginalPrimKey()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_P,
 				new Object[] {
 					new Long(resource.getCodeId()),

@@ -502,8 +502,8 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 		if (isNew ||
 				((layout.getGroupId() != layoutModelImpl.getOriginalGroupId()) ||
 				(layout.getPrivateLayout() != layoutModelImpl.getOriginalPrivateLayout()) ||
-				!layout.getFriendlyURL()
-						   .equals(layoutModelImpl.getOriginalFriendlyURL()))) {
+				!Validator.equals(layout.getFriendlyURL(),
+					layoutModelImpl.getOriginalFriendlyURL()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_P_F,
 				new Object[] {
 					new Long(layout.getGroupId()),
