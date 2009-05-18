@@ -95,15 +95,7 @@ public class DLActivityInterpreter extends BaseSocialActivityInterpreter {
 			titlePattern += "-in";
 		}
 
-		StringBuilder sb = new StringBuilder();
-
-		sb.append("<a href=\"");
-		sb.append(link);
-		sb.append("\">\"");
-		sb.append(cleanContent(fileEntry.getTitle()));
-		sb.append("\"</a>");
-
-		String fileTitle = sb.toString();
+		String fileTitle = wrapLink(link, cleanContent(fileEntry.getTitle()));
 
 		Object[] titleArguments = new Object[] {
 			groupName, creatorUserName, fileTitle
@@ -113,7 +105,24 @@ public class DLActivityInterpreter extends BaseSocialActivityInterpreter {
 
 		// Body
 
-		String body = StringPool.BLANK;
+		StringBuilder sb = new StringBuilder();
+
+		String fileEntryLink =
+			themeDisplay.getURLPortal() + themeDisplay.getPathMain() +
+				"/document_library/find_file_entry?fileEntryId=" +
+					fileEntry.getFileEntryId();
+
+		sb.append(wrapLink(fileEntryLink, "view-document", themeDisplay));
+		sb.append(StringPool.SPACE);
+
+		String folderLink =
+			themeDisplay.getURLPortal() + themeDisplay.getPathMain() +
+				"/document_library/find_folder?folderId=" +
+					fileEntry.getFolderId();
+
+		sb.append(wrapLink(folderLink, "go-to-folder", themeDisplay));
+
+		String body = sb.toString();
 
 		return new SocialActivityFeedEntry(link, title, body);
 	}

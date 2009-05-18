@@ -38,6 +38,7 @@ import com.liferay.portlet.social.model.SocialActivityFeedEntry;
  * <a href="MBActivityInterpreter.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Ryan Park
  *
  */
 public class MBActivityInterpreter extends BaseSocialActivityInterpreter {
@@ -97,15 +98,8 @@ public class MBActivityInterpreter extends BaseSocialActivityInterpreter {
 			titlePattern += "-in";
 		}
 
-		StringBuilder sb = new StringBuilder();
-
-		sb.append("<a href=\"");
-		sb.append(link);
-		sb.append("\">\"");
-		sb.append(cleanContent(message.getSubject()));
-		sb.append("\"</a>");
-
-		String messageSubject = sb.toString();
+		String messageSubject = wrapLink(
+			link, cleanContent(message.getSubject()));
 
 		Object[] titleArguments = new Object[] {
 			groupName, creatorUserName, receiverUserName, messageSubject
@@ -115,7 +109,12 @@ public class MBActivityInterpreter extends BaseSocialActivityInterpreter {
 
 		// Body
 
-		String body = StringPool.BLANK;
+		String categoryLink =
+			themeDisplay.getURLPortal() + themeDisplay.getPathMain() +
+				"/message_boards/find_category?categoryId=" +
+					message.getCategoryId();
+
+		String body = wrapLink(categoryLink, "go-to-category", themeDisplay);
 
 		return new SocialActivityFeedEntry(link, title, body);
 	}

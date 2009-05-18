@@ -39,6 +39,7 @@ import com.liferay.portlet.wiki.service.permission.WikiPagePermission;
  * <a href="WikiActivityInterpreter.java.html"><b><i>View Source</i></b></a>
  *
  * @author Samuel Kong
+ * @author Ryan Park
  *
  */
 public class WikiActivityInterpreter extends BaseSocialActivityInterpreter {
@@ -98,13 +99,8 @@ public class WikiActivityInterpreter extends BaseSocialActivityInterpreter {
 
 		StringBuilder sb = new StringBuilder();
 
-		sb.append("<a href=\"");
-		sb.append(link);
-		sb.append("\">\"");
-		sb.append(cleanContent(pageResource.getTitle()));
-		sb.append("\"</a>");
-
-		String pageTitle = sb.toString();
+		String pageTitle = wrapLink(
+			link, cleanContent(pageResource.getTitle()));
 
 		Object[] titleArguments = new Object[] {
 			groupName, creatorUserName, pageTitle

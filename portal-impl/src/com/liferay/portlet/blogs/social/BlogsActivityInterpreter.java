@@ -40,6 +40,7 @@ import com.liferay.portlet.social.model.SocialActivityFeedEntry;
  * <a href="BlogsActivityInterpreter.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Ryan Park
  *
  */
 public class BlogsActivityInterpreter extends BaseSocialActivityInterpreter {
@@ -96,28 +97,16 @@ public class BlogsActivityInterpreter extends BaseSocialActivityInterpreter {
 
 		if (activityType == BlogsActivityKeys.ADD_COMMENT) {
 			titlePattern = "activity-blogs-add-comment";
-
-			if (Validator.isNotNull(groupName)) {
-				titlePattern += "-in";
-			}
 		}
 		else if (activityType == BlogsActivityKeys.ADD_ENTRY) {
 			titlePattern = "activity-blogs-add-entry";
-
-			if (Validator.isNotNull(groupName)) {
-				titlePattern += "-in";
-			}
 		}
 
-		StringBuilder sb = new StringBuilder();
+		if (Validator.isNotNull(groupName)) {
+			titlePattern += "-in";
+		}
 
-		sb.append("<a href=\"");
-		sb.append(link);
-		sb.append("\">\"");
-		sb.append(cleanContent(entry.getTitle()));
-		sb.append("\"</a>");
-
-		String entryTitle = sb.toString();
+		String entryTitle = wrapLink(link, cleanContent(entry.getTitle()));
 
 		Object[] titleArguments = new Object[] {
 			groupName, creatorUserName, receiverUserName, entryTitle

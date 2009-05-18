@@ -38,16 +38,34 @@ import com.liferay.portal.theme.ThemeDisplay;
  * </a>
  *
  * @author Brian Wing Shun Chan
+ * @author Ryan Park
  *
  */
 public abstract class BaseSocialActivityInterpreter
 	implements SocialActivityInterpreter {
 
-	public String cleanContent(String content) {
+	public SocialActivityFeedEntry interpret(
+		SocialActivity activity, ThemeDisplay themeDisplay) {
+
+		try {
+			return doInterpret(activity, themeDisplay);
+		}
+		catch (Exception e) {
+			_log.error("Unable to interpret activity", e);
+		}
+
+		return null;
+	}
+
+	protected String cleanContent(String content) {
 		return StringUtil.shorten(HtmlUtil.extractText(content), 200);
 	}
 
-	public String getGroupName(long groupId, ThemeDisplay themeDisplay) {
+	protected abstract SocialActivityFeedEntry doInterpret(
+			SocialActivity activity, ThemeDisplay themeDisplay)
+		throws Exception;
+
+	protected String getGroupName(long groupId, ThemeDisplay themeDisplay) {
 		try {
 			if (groupId <= 0) {
 				return StringPool.BLANK;
@@ -79,7 +97,7 @@ public abstract class BaseSocialActivityInterpreter
 		}
 	}
 
-	public String getUserName(long userId, ThemeDisplay themeDisplay) {
+	protected String getUserName(long userId, ThemeDisplay themeDisplay) {
 		try {
 			if (userId <= 0) {
 				return StringPool.BLANK;
@@ -112,22 +130,23 @@ public abstract class BaseSocialActivityInterpreter
 		}
 	}
 
-	public SocialActivityFeedEntry interpret(
-		SocialActivity activity, ThemeDisplay themeDisplay) {
+	protected String wrapLink(String link, String text) {
+		StringBuilder sb = new StringBuilder();
 
-		try {
-			return doInterpret(activity, themeDisplay);
-		}
-		catch (Exception e) {
-			_log.error("Unable to interpret activity", e);
-		}
+		sb.append("<a href=\"");
+		sb.append(link);
+		sb.append("\">");
+		sb.append(text);
+		sb.append("</a>");
 
-		return null;
+		return sb.toString();
 	}
 
-	protected abstract SocialActivityFeedEntry doInterpret(
-			SocialActivity activity, ThemeDisplay themeDisplay)
-		throws Exception;
+	protected String wrapLink(
+		String link, String key, ThemeDisplay themeDisplay) {
+
+		return wrapLink(link, themeDisplay.translate(key));
+	}
 
 	private static Log _log =
 		LogFactoryUtil.getLog(BaseSocialActivityInterpreter.class);

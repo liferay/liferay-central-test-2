@@ -38,6 +38,7 @@ import com.liferay.portlet.social.model.SocialActivityFeedEntry;
  * <a href="CalendarActivityInterpreter.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Ryan Park
  *
  */
 public class CalendarActivityInterpreter extends BaseSocialActivityInterpreter {
@@ -94,15 +95,7 @@ public class CalendarActivityInterpreter extends BaseSocialActivityInterpreter {
 			titlePattern += "-in";
 		}
 
-		StringBuilder sb = new StringBuilder();
-
-		sb.append("<a href=\"");
-		sb.append(link);
-		sb.append("\">\"");
-		sb.append(cleanContent(event.getTitle()));
-		sb.append("\"</a>");
-
-		String eventTitle = sb.toString();
+		String eventTitle = wrapLink(link, cleanContent(event.getTitle()));
 
 		Object[] titleArguments = new Object[] {
 			groupName, creatorUserName, eventTitle
