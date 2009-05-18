@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.util.DiffResult;
 import com.liferay.portal.kernel.util.DiffUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -333,7 +334,7 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 							StringPool.CLOSE_PARENTHESIS;
 			}
 
-			String link = entryURL;
+			String link = entryURL + HttpUtil.encodeURL(page.getTitle());
 
 			SyndEntry syndEntry = new SyndEntryImpl();
 
