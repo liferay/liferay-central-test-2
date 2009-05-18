@@ -31,11 +31,10 @@ package com.liferay.portal.kernel.poller;
 public class PollerHeader {
 
 	public PollerHeader(
-		long userId, long timestamp, long browserKey, String[] portletIds,
+		long userId, long browserKey, String[] portletIds,
 		boolean initialRequest, boolean startPolling) {
 
 		_userId = userId;
-		_timestamp = timestamp;
 		_browserKey = browserKey;
 		_portletIds = portletIds;
 		_initialRequest = initialRequest;
@@ -70,7 +69,7 @@ public class PollerHeader {
 	private boolean _initialRequest;
 	private String[] _portletIds;
 	private boolean _startPolling;
-	private long _timestamp;
+	private long _timestamp = System.currentTimeMillis();
 	private long _userId;
 
 }

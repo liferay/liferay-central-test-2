@@ -142,8 +142,6 @@ public class PollerServlet extends HttpServlet {
 
 			pollerResponseChunkJSON.put("userId", pollerHeader.getUserId());
 			pollerResponseChunkJSON.put(
-				"timestamp", pollerHeader.getTimestamp());
-			pollerResponseChunkJSON.put(
 				"initialRequest", pollerHeader.isInitialRequest());
 			pollerResponseChunkJSON.put("suspendPolling", suspendPolling);
 
@@ -221,8 +219,6 @@ public class PollerServlet extends HttpServlet {
 			String.valueOf(pollerRequestChunk.get("companyId")));
 		String userIdString = GetterUtil.getString(
 			String.valueOf(pollerRequestChunk.get("userId")));
-		long timestamp = GetterUtil.getLong(
-			String.valueOf(pollerRequestChunk.get("timestamp")));
 		long browserKey = GetterUtil.getLong(
 			String.valueOf(pollerRequestChunk.get("browserKey")));
 		String[] portletIds = StringUtil.split(
@@ -239,8 +235,7 @@ public class PollerServlet extends HttpServlet {
 		}
 
 		return new PollerHeader(
-			userId, timestamp, browserKey, portletIds, initialRequest,
-			startPolling);
+			userId, browserKey, portletIds, initialRequest, startPolling);
 	}
 
 	protected String getPollerRequest(HttpServletRequest request)
