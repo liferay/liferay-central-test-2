@@ -30,10 +30,11 @@ if (allowEmptyResults && (entryIds.length == 0) && (notEntryIds.length == 0)) {
 	entryIds = new long[] {-1};
 }
 
+int total = 0;
 Date now = new Date();
 
 if (!groupByClass) {
-	int total = TagsAssetLocalServiceUtil.getAssetsCount(scopeGroupId, classNameIds, entryIds, notEntryIds, andOperator, excludeZeroViewCount, now, now);
+	total = TagsAssetLocalServiceUtil.getAssetsCount(scopeGroupId, classNameIds, entryIds, notEntryIds, andOperator, excludeZeroViewCount, now, now);
 
 	searchContainer.setTotal(total);
 
@@ -42,26 +43,13 @@ if (!groupByClass) {
 	searchContainer.setResults(results);
 
 	request.setAttribute("view.jsp-results", results);
-
-	if (results.size() <= 0) {
-		if (!showPortletWithNoResults) {
-			renderRequest.setAttribute(WebKeys.PORTLET_CONFIGURATOR_VISIBILITY, Boolean.TRUE);
-		}
-	%>
-
-		<liferay-ui:message key="there-are-no-results" />
-
-	<%
-	}
-	%>
+%>
 
 	<%@ include file="/html/portlet/asset_publisher/view_dynamic_list_asset.jspf" %>
 
 <%
 }
 else {
-	int total = 0;
-
 	for (int groupAssetIndex = 0; groupAssetIndex < _ASSET_TYPES.length; groupAssetIndex++) {
 		long[] groupClassNameIds = {PortalUtil.getClassNameId(_ASSET_TYPES[groupAssetIndex])};
 
@@ -87,10 +75,17 @@ else {
 <%
 		}
 	}
+}
 
-	if (total == 0) {
+if (total == 0) {
+	if (!showPortletWithNoResults) {
 		renderRequest.setAttribute(WebKeys.PORTLET_CONFIGURATOR_VISIBILITY, Boolean.TRUE);
 	}
+%>
+
+	<liferay-ui:message key="there-are-no-results" />
+
+<%
 }
 %>
 
