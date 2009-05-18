@@ -22,7 +22,6 @@
 
 package com.liferay.portal.kernel.poller;
 
-import java.util.Date;
 import java.util.Map;
 
 /**
@@ -67,12 +66,20 @@ public class PollerRequest {
 		return _pollerHeader.getPortletIds();
 	}
 
-	public Date getTimestamp() {
+	public long getTimestamp() {
 		return _pollerHeader.getTimestamp();
 	}
 
 	public long getUserId() {
 		return _pollerHeader.getUserId();
+	}
+
+	public boolean isInitialRequest() {
+		return _pollerHeader.isInitialRequest();
+	}
+
+	public boolean isStartPolling() {
+		return _pollerHeader.isStartPolling();
 	}
 
 	private String _chunkId;

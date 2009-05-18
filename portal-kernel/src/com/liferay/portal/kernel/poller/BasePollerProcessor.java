@@ -32,9 +32,33 @@ import com.liferay.portal.kernel.util.GetterUtil;
  */
 public abstract class BasePollerProcessor implements PollerProcessor {
 
-	public abstract void process(
+	public void receive(
 			PollerRequest pollerRequest, PollerResponse pollerResponse)
-		throws PollerException;
+		throws PollerException {
+
+		try {
+			doReceive(pollerRequest, pollerResponse);
+		}
+		catch (Exception e) {
+			throw new PollerException(e);
+		}
+	}
+
+	public void send(PollerRequest pollerRequest) throws PollerException {
+		try {
+			doSend(pollerRequest);
+		}
+		catch (Exception e) {
+			throw new PollerException(e);
+		}
+	}
+
+	protected abstract void doReceive(
+			PollerRequest pollerRequest, PollerResponse pollerResponse)
+		throws Exception;
+
+	protected abstract void doSend(PollerRequest pollerRequest)
+		throws Exception;
 
 	protected double getDouble(
 		PollerRequest pollerRequest, String name) {

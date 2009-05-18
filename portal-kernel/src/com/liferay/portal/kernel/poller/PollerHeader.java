@@ -22,8 +22,6 @@
 
 package com.liferay.portal.kernel.poller;
 
-import java.util.Date;
-
 /**
  * <a href="PollerHeader.java.html"><b><i>View Source</i></b></a>
  *
@@ -33,12 +31,15 @@ import java.util.Date;
 public class PollerHeader {
 
 	public PollerHeader(
-		long userId, long timestamp, long browserKey, String[] portletIds) {
+		long userId, long timestamp, long browserKey, String[] portletIds,
+		boolean initialRequest, boolean startPolling) {
 
 		_userId = userId;
-		_timestamp = new Date(timestamp);
+		_timestamp = timestamp;
 		_browserKey = browserKey;
 		_portletIds = portletIds;
+		_initialRequest = initialRequest;
+		_startPolling = startPolling;
 	}
 
 	public long getBrowserKey() {
@@ -49,7 +50,7 @@ public class PollerHeader {
 		return _portletIds;
 	}
 
-	public Date getTimestamp() {
+	public long getTimestamp() {
 		return _timestamp;
 	}
 
@@ -57,9 +58,19 @@ public class PollerHeader {
 		return _userId;
 	}
 
+	public boolean isInitialRequest() {
+		return _initialRequest;
+	}
+
+	public boolean isStartPolling() {
+		return _startPolling;
+	}
+
 	private long _browserKey;
-	private Date _timestamp;
-	private long _userId;
+	private boolean _initialRequest;
 	private String[] _portletIds;
+	private boolean _startPolling;
+	private long _timestamp;
+	private long _userId;
 
 }

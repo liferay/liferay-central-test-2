@@ -95,13 +95,164 @@ public class PollerServlet extends HttpServlet {
 	}
 
 	protected String getContent(HttpServletRequest request) throws Exception {
+		String pollerRequest = getPollerRequest(request);
+
+		if (Validator.isNull(pollerRequest)) {
+			return null;
+		}
+
+		Map<String, Object>[] pollerRequestChunks =
+			(Map<String, Object>[])JSONFactoryUtil.deserialize(pollerRequest);
+
+		PollerHeader pollerHeader = getPollerHeader(pollerRequestChunks);
+
+		if (pollerHeader == null) {
+			return null;
+		}
+
+		boolean doReceive = isDoReceive(request);
+
+		JSONArray pollerResponseChunksJSON = null;
+		Set<String> portletIdsWithChunks = null;
+
+		if (doReceive) {
+			pollerResponseChunksJSON = JSONFactoryUtil.createJSONArray();
+			portletIdsWithChunks = new HashSet<String>();
+
+			boolean suspendPolling = false;
+
+			if (pollerHeader.isStartPolling()) {
+				BrowserTrackerLocalServiceUtil.updateBrowserTracker(
+					pollerHeader.getUserId(), pollerHeader.getBrowserKey());
+			}
+			else {
+				BrowserTracker browserTracker =
+					BrowserTrackerLocalServiceUtil.getBrowserTracker(
+						pollerHeader.getUserId(), pollerHeader.getBrowserKey());
+
+				if (browserTracker.getBrowserKey() !=
+						pollerHeader.getBrowserKey()) {
+
+					suspendPolling = true;
+				}
+			}
+
+			JSONObject pollerResponseChunkJSON =
+				JSONFactoryUtil.createJSONObject();
+
+			pollerResponseChunkJSON.put("userId", pollerHeader.getUserId());
+			pollerResponseChunkJSON.put(
+				"timestamp", pollerHeader.getTimestamp());
+			pollerResponseChunkJSON.put(
+				"initialRequest", pollerHeader.isInitialRequest());
+			pollerResponseChunkJSON.put("suspendPolling", suspendPolling);
+
+			pollerResponseChunksJSON.put(pollerResponseChunkJSON);
+		}
+
+		for (int i = 1; i < pollerRequestChunks.length; i++) {
+			Map<String, Object> pollerRequestChunk = pollerRequestChunks[i];
+
+			String portletId = (String)pollerRequestChunk.get("portletId");
+			Map<String, String> parameterMap = getData(pollerRequestChunk);
+			String chunkId = (String)pollerRequestChunk.get("chunkId");
+
+			try {
+				process(
+					doReceive, pollerResponseChunksJSON, portletIdsWithChunks,
+					pollerHeader, portletId, parameterMap, chunkId);
+			}
+			catch (Exception e) {
+				_log.error(e, e);
+			}
+		}
+
+		if (!doReceive) {
+			return StringPool.BLANK;
+		}
+
+		for (String portletId : pollerHeader.getPortletIds()) {
+			if (portletIdsWithChunks.contains(portletId)) {
+				continue;
+			}
+
+			try {
+				process(
+					doReceive, pollerResponseChunksJSON, portletIdsWithChunks,
+					pollerHeader, portletId, new HashMap<String, String>(),
+					null);
+			}
+			catch (Exception e) {
+				_log.error(e, e);
+			}
+		}
+
+		return pollerResponseChunksJSON.toString();
+	}
+
+	protected Map<String, String> getData(
+			Map<String, Object> pollerRequestChunk)
+		throws Exception {
+
+		Map<String, Object> oldParameterMap =
+			(Map<String, Object>)pollerRequestChunk.get("data");
+
+		Map<String, String> newParameterMap = new HashMap<String, String>();
+
+		for (Map.Entry<String, Object> entry : oldParameterMap.entrySet()) {
+			newParameterMap.put(
+				entry.getKey(), String.valueOf(entry.getValue()));
+		}
+
+		return newParameterMap;
+	}
+
+	protected PollerHeader getPollerHeader(
+			Map<String, Object>[] pollerRequestChunks)
+		throws Exception {
+
+		if (pollerRequestChunks.length < 1) {
+			return null;
+		}
+
+		Map<String, Object> pollerRequestChunk = pollerRequestChunks[0];
+
+		long companyId = GetterUtil.getLong(
+			String.valueOf(pollerRequestChunk.get("companyId")));
+		String userIdString = GetterUtil.getString(
+			String.valueOf(pollerRequestChunk.get("userId")));
+		long timestamp = GetterUtil.getLong(
+			String.valueOf(pollerRequestChunk.get("timestamp")));
+		long browserKey = GetterUtil.getLong(
+			String.valueOf(pollerRequestChunk.get("browserKey")));
+		String[] portletIds = StringUtil.split(
+			String.valueOf(pollerRequestChunk.get("portletIds")));
+		boolean initialRequest = GetterUtil.getBoolean(
+			String.valueOf(pollerRequestChunk.get("initialRequest")));
+		boolean startPolling = GetterUtil.getBoolean(
+			String.valueOf(pollerRequestChunk.get("startPolling")));
+
+		long userId = getUserId(companyId, userIdString);
+
+		if (userId == 0) {
+			return null;
+		}
+
+		return new PollerHeader(
+			userId, timestamp, browserKey, portletIds, initialRequest,
+			startPolling);
+	}
+
+	protected String getPollerRequest(HttpServletRequest request)
+		throws Exception {
+
 		String pollerRequest = ParamUtil.getString(request, "pollerRequest");
 
 		if (Validator.isNull(pollerRequest)) {
 			return null;
 		}
 
-		pollerRequest = StringUtil.replace(
+		return StringUtil.replace(
 			pollerRequest,
 			new String[] {
 				StringPool.OPEN_CURLY_BRACE,
@@ -115,123 +266,6 @@ public class PollerServlet extends HttpServlet {
 				StringPool.OPEN_CURLY_BRACE,
 				StringPool.CLOSE_CURLY_BRACE
 			});
-
-		JSONArray pollerResponseChunksJSON = JSONFactoryUtil.createJSONArray();
-
-		PollerHeader pollerHeader = null;
-
-		Set<String> portletIdsWithChunks = new HashSet<String>();
-
-		Map<String, Object>[] pollerRequestChunks =
-			(Map<String, Object>[])JSONFactoryUtil.deserialize(pollerRequest);
-
-		for (int i = 0; i < pollerRequestChunks.length; i++) {
-			Map<String, Object> pollerRequestChunk = pollerRequestChunks[i];
-
-			if (i == 0) {
-				long companyId = GetterUtil.getLong(
-					String.valueOf(pollerRequestChunk.get("companyId")));
-				String userIdString = GetterUtil.getString(
-					String.valueOf(pollerRequestChunk.get("userId")));
-				long timestamp = GetterUtil.getLong(
-					String.valueOf(pollerRequestChunk.get("timestamp")));
-				long browserKey = GetterUtil.getLong(
-					String.valueOf(pollerRequestChunk.get("browserKey")));
-				boolean startPolling = GetterUtil.getBoolean(
-					String.valueOf(pollerRequestChunk.get("startPolling")));
-				String[] portletIds = StringUtil.split(
-					String.valueOf(pollerRequestChunk.get("portletIds")));
-
-				long userId = getUserId(companyId, userIdString);
-
-				if (userId == 0) {
-					return null;
-				}
-
-				pollerHeader = new PollerHeader(
-					userId, timestamp, browserKey, portletIds);
-
-				boolean suspendPolling = false;
-
-				if (startPolling) {
-					BrowserTrackerLocalServiceUtil.updateBrowserTracker(
-						userId, browserKey);
-				}
-				else {
-					BrowserTracker browserTracker =
-						BrowserTrackerLocalServiceUtil.getBrowserTracker(
-							userId, browserKey);
-
-					if (browserTracker.getBrowserKey() != browserKey) {
-						suspendPolling = true;
-					}
-				}
-
-				JSONObject pollerResponseChunkJSON =
-					JSONFactoryUtil.createJSONObject();
-
-				pollerResponseChunkJSON.put("userId", userId);
-				pollerResponseChunkJSON.put("timestamp", timestamp);
-				pollerResponseChunkJSON.put("suspendPolling", suspendPolling);
-
-				pollerResponseChunksJSON.put(pollerResponseChunkJSON);
-			}
-			else {
-				String portletId = (String)pollerRequestChunk.get("portletId");
-				Map<String, Object> oldParameterMap =
-					(Map<String, Object>)pollerRequestChunk.get("data");
-				String chunkId = (String)pollerRequestChunk.get("chunkId");
-
-				Map<String, String> newParameterMap =
-					new HashMap<String, String>();
-
-				for (Map.Entry<String, Object> entry :
-						oldParameterMap.entrySet()) {
-
-					newParameterMap.put(
-						entry.getKey(), String.valueOf(entry.getValue()));
-				}
-
-				JSONObject pollerResponseChunkJSON = null;
-
-				try {
-					pollerResponseChunkJSON = process(
-						pollerHeader, portletId, newParameterMap, chunkId);
-				}
-				catch (Exception e) {
-					_log.error(e, e);
-				}
-
-				if (pollerResponseChunkJSON != null) {
-					portletIdsWithChunks.add(portletId);
-
-					pollerResponseChunksJSON.put(pollerResponseChunkJSON);
-				}
-			}
-		}
-
-		for (String portletId : pollerHeader.getPortletIds()) {
-			if (portletIdsWithChunks.contains(portletId)) {
-				continue;
-			}
-
-			JSONObject pollerResponseChunkJSON = null;
-
-			try {
-				pollerResponseChunkJSON = process(
-					pollerHeader, portletId, new HashMap<String, String>(),
-					null);
-			}
-			catch (Exception e) {
-				_log.error(e, e);
-			}
-
-			if (pollerResponseChunkJSON != null) {
-				pollerResponseChunksJSON.put(pollerResponseChunkJSON);
-			}
-		}
-
-		return pollerResponseChunksJSON.toString();
 	}
 
 	protected long getUserId(long companyId, String userIdString) {
@@ -252,9 +286,23 @@ public class PollerServlet extends HttpServlet {
 		return userId;
 	}
 
-	protected JSONObject process(
-			PollerHeader pollerHeader, String portletId,
-			Map<String, String> parameterMap, String chunkId)
+	protected boolean isDoReceive(HttpServletRequest request)
+		throws Exception {
+
+		String path = GetterUtil.getString(request.getPathInfo());
+
+		if (path.endsWith("/receive")) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	protected void process(
+			boolean doReceive, JSONArray pollerResponseChunksJSON,
+			Set<String> portletIdsWithChunks, PollerHeader pollerHeader,
+			String portletId, Map<String, String> parameterMap, String chunkId)
 		throws Exception {
 
 		PollerProcessor pollerProcessor =
@@ -263,16 +311,24 @@ public class PollerServlet extends HttpServlet {
 		if (pollerProcessor == null) {
 			_log.error("Poller processor not found for portlet " + portletId);
 
-			return null;
+			return;
 		}
 
 		PollerRequest pollerRequest = new PollerRequest(
 			pollerHeader, portletId, parameterMap, chunkId);
-		PollerResponse pollerResponse = new PollerResponse(portletId, chunkId);
 
-		pollerProcessor.process(pollerRequest, pollerResponse);
+		if (doReceive) {
+			PollerResponse pollerResponse = new PollerResponse(
+				portletId, chunkId);
 
-		return pollerResponse.toJSONObject();
+			pollerProcessor.receive(pollerRequest, pollerResponse);
+
+			pollerResponseChunksJSON.put(pollerResponse.toJSONObject());
+			portletIdsWithChunks.add(portletId);
+		}
+		else {
+			pollerProcessor.send(pollerRequest);
+		}
 	}
 
 	private static final String _ESCAPED_CLOSE_CURLY_BRACE =

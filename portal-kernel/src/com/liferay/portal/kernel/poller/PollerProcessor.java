@@ -30,8 +30,10 @@ package com.liferay.portal.kernel.poller;
  */
 public interface PollerProcessor {
 
-	public void process(
+	public void receive(
 			PollerRequest pollerRequest, PollerResponse pollerResponse)
 		throws PollerException;
+
+	public void send(PollerRequest pollerRequest) throws PollerException;
 
 }

@@ -37,7 +37,7 @@ public class InvokerPollerProcessor implements PollerProcessor {
 		_classLoader = classLoader;
 	}
 
-	public void process(
+	public void receive(
 			PollerRequest pollerRequest, PollerResponse pollerResponse)
 		throws PollerException {
 
@@ -48,7 +48,22 @@ public class InvokerPollerProcessor implements PollerProcessor {
 		currentThread.setContextClassLoader(_classLoader);
 
 		try {
-			_pollerProcessor.process(pollerRequest, pollerResponse);
+			_pollerProcessor.receive(pollerRequest, pollerResponse);
+		}
+		finally {
+			currentThread.setContextClassLoader(contextClassLoader);
+		}
+	}
+
+	public void send(PollerRequest pollerRequest) throws PollerException {
+		Thread currentThread = Thread.currentThread();
+
+		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
+
+		currentThread.setContextClassLoader(_classLoader);
+
+		try {
+			_pollerProcessor.send(pollerRequest);
 		}
 		finally {
 			currentThread.setContextClassLoader(contextClassLoader);
