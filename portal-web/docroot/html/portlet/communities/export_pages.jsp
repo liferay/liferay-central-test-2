@@ -230,7 +230,9 @@ if (!localPublishing) {
 	exportPagesTabsNames += ",remote-options";
 }
 
-exportPagesTabsNames += ",scheduler";
+if (proposalId <= 0) {
+	exportPagesTabsNames += ",scheduler";
+}
 
 String actionKey = "copy";
 
@@ -284,9 +286,11 @@ if (selGroup.isStagingGroup() || popupId.equals("publish-to-remote")) {
 		</liferay-ui:section>
 	</c:if>
 
-	<liferay-ui:section>
-		<%@ include file="/html/portlet/communities/export_pages_scheduler.jspf" %>
-	</liferay-ui:section>
+	<c:if test="<%= proposalId <= 0 %>">
+		<liferay-ui:section>
+			<%@ include file="/html/portlet/communities/export_pages_scheduler.jspf" %>
+		</liferay-ui:section>
+	</c:if>
 </liferay-ui:tabs>
 
 </form>
