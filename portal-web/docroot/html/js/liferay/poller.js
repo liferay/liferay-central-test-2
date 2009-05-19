@@ -12,21 +12,28 @@
 		return _encryptedUserId;
 	};
 
+	var _locked = false;
+
 	var _maxDelay = _delays.length - 1;
 
 	var _metaData = {
 		startPolling: true,
 		browserKey: _browserKey,
-		companyId: themeDisplay.getCompanyId()
+		companyId: themeDisplay.getCompanyId(),
+		initialRequest: true
 	};
 
 	var _portlets = {};
 	var _registeredPortlets = [];
 	var _requestData = [_metaData];
 	var _requestDelay = _delays[0];
+	var _sendQueue = [];
 	var _suspended = false;
 	var _timerId = null;
+
 	var _url = '/poller';
+	var _receiveChannel = _url + '/receive';
+	var _sendChannel = _url + '/send';
 
 	var _closeCurlyBrace = '}';
 	var _escapedCloseCurlyBrace = '[$CLOSE_CURLY_BRACE$]';
@@ -44,18 +51,26 @@
 		_cancelRequestTimer();
 
 		if (_enabled) {
-			_timerId = setTimeout(_send, Poller.getDelay());
+			if (Poller.isSupportsComet()) {
+				_receive();
+			}
+			else {
+				_timerId = setTimeout(_receive, Poller.getDelay());
+			}
 		}
 	};
 
-	var _getUrl = function() {
-		return _url;
+	var _getReceiveUrl = function() {
+		return _receiveChannel;
+	};
+
+	var _getSendUrl = function() {
+		return _sendChannel;
 	};
 
 	var _processResponse = function(response) {
 		if (Liferay.Util.isArray(response)) {
 			var meta = response.shift();
-
 			var chunk;
 
 			var portletId;
@@ -68,6 +83,10 @@
 				portlet = _portlets[portletId];
 
 				if (portlet) {
+					if (meta.initialRequest) {
+						chunk.data.initialRequest = true;
+					}
+
 					portlet.listener.call(portlet.scope || Poller, chunk.data, chunk.chunkId);
 
 					if (chunk.data && chunk.data.pollerHintHighConnectivity) {
@@ -81,32 +100,72 @@
 				delete _metaData.startPolling;
 			}
 
+			if ('initialRequest' in _metaData) {
+				_send();
+
+				delete _metaData.initialRequest;
+			}
+
 			if (!meta.suspendPolling) {
 				_createRequestTimer();
 			}
 		}
 	};
 
-	var _send = function() {
+	var _receive = function() {
 		if (!_suspended) {
 			_metaData.userId = _getEncryptedUserId();
 			_metaData.timestamp = (new Date()).getTime();
 			_metaData.portletIds = _registeredPortlets.join(',');
 
-			var requestStr = jQuery.toJSON(_requestData);
-
-			_requestData = [_metaData];
+			var requestStr = jQuery.toJSON([_metaData]);
 
 			jQuery.ajax(
 				{
+					url: _getReceiveUrl(),
 					cache: false,
-					type: 'POST',
-					url: _getUrl(),
 					data: {
 						pollerRequest: requestStr
 					},
 					dataType: 'json',
-					success: _processResponse
+					success: _processResponse,
+					type: 'POST'
+				}
+			);
+		}
+	};
+
+	var _releaseLock = function() {
+		_locked = false;
+	};
+
+	var _sendComplete = function() {
+		_releaseLock();
+		_send();
+	};
+
+	var _send = function() {
+		if (_enabled && !_locked && _sendQueue.length && !_suspended) {
+			_locked = true;
+
+			var data = _sendQueue.shift();
+
+			_metaData.userId = _getEncryptedUserId();
+			_metaData.timestamp = (new Date()).getTime();
+			_metaData.portletIds = _registeredPortlets.join(',');
+
+			var requestStr = jQuery.toJSON([_metaData].concat(data));
+
+			jQuery.ajax(
+				{
+					url: _getSendUrl(),
+					cache: false,
+					complete: _sendComplete,
+					data: {
+						pollerRequest: requestStr
+					},
+					dataType: 'json',
+					type: 'POST'
 				}
 			);
 		}
@@ -123,12 +182,6 @@
 		url: _url,
 
 		addListener: function(key, listener, scope) {
-			if (!_enabled) {
-				_enabled = true;
-
-				_send();
-			}
-
 			_portlets[key] = {
 				listener: listener,
 				scope: scope
@@ -136,6 +189,12 @@
 
 			if (jQuery.inArray(key, _registeredPortlets) == -1) {
 				_registeredPortlets.push(key);
+			}
+
+			if (!_enabled) {
+				_enabled = true;
+
+				_receive();
 			}
 		},
 
@@ -153,7 +212,8 @@
 			return _requestDelay * 1000;
 		},
 
-		getUrl: _getUrl,
+		getReceiveUrl: _getReceiveUrl,
+		getSendUrl: _getSendUrl,
 
 		isSupportsComet: function() {
 			return _supportsComet;
@@ -204,7 +264,9 @@
 				requestData.chunkId = chunkId;
 			}
 
-			_requestData.push(requestData);
+			_sendQueue.push(requestData);
+
+			_send();
 		},
 
 		suspend: function() {
