@@ -38,30 +38,30 @@ List groupNames = (List)objArray[8];
 %>
 
 <input name="<portlet:namespace />groupIds<%= target %>" type="hidden" value="<%= StringUtil.merge(groupIdsArray) %>" />
-<input name="<portlet:namespace />groupNames<%= target %>" type="hidden" value='<%= StringUtil.merge(groupNames, "@@") %>' />
+<input name="<portlet:namespace />groupNames<%= target %>" type="hidden" value="<%= StringUtil.merge(groupNames, "@@") %>" />
 
 <div id="<portlet:namespace />groupDiv<%= target %>">
 	<span class="ui-scopes" id="<portlet:namespace />groupHTML<%= target %>">
 
 		<%
-		StringBuilder sb = new StringBuilder();
-
 		if (supportsFilterByGroup && (groups.size() > 0)) {
-			for (int j = 0; j < groups.size(); j++) {
-				Group group = (Group)groups.get(j);
+			for (int i = 0; j < groups.size(); i++) {
+				Group group = (Group)groups.get(i);
 		%>
 
-				<span class="ui-scope"><%=group.getName() %><a class="ui-scope-delete" href="javascript:<portlet:namespace />removeGroup(<%= j %>, '<%= target %>');"><span>x</span></a></span>
+				<span class="ui-scope"><%= group.getName() %><a class="ui-scope-delete" href="javascript:<portlet:namespace />removeGroup(<%= i %>, '<%= target %>');"><span>x</span></a></span>
 
 		<%
 			}
 		}
 		else if (role.getType() == RoleConstants.TYPE_REGULAR) {
-			sb.append(LanguageUtil.get(pageContext, "portal"));
-		}
 		%>
 
-	<%= sb.toString() %>
+			<%= LanguageUtil.get(pageContext, "portal") %>
+
+		<%
+		}
+		%>
 
 	</span>
 </div>

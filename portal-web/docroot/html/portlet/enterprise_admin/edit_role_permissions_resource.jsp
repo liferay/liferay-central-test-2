@@ -56,12 +56,14 @@ int total = curActions.size();
 
 searchContainer.setTotal(total);
 
-searchContainer.setResults(curActions);
+List results = curActions;
+
+searchContainer.setResults(results);
 
 List resultRows = searchContainer.getResultRows();
 
-for (int i = 0; i < curActions.size(); i++) {
-	String actionId = (String)curActions.get(i);
+for (int i = 0; i < results.size(); i++) {
+	String actionId = (String)results.get(i);
 
 	if (role.getName().equals(RoleConstants.GUEST) && guestUnsupportedActions.contains(actionId)) {
 		continue;
@@ -77,19 +79,21 @@ for (int i = 0; i < curActions.size(); i++) {
 	}
 
 	String target = curResource + actionId;
-
-	List groups = Collections.EMPTY_LIST;
+	int scope = ResourceConstants.SCOPE_COMPANY;
+	boolean supportsFilterByGroup = false;
+	List<Group> groups = Collections.EMPTY_LIST;
 	String groupIds = ParamUtil.getString(request, "groupIds" + target, null);
 	long[] groupIdsArray = StringUtil.split(groupIds, 0L);
-
-	List groupNames = new ArrayList();
-
-	int scope;
+	List<String> groupNames = new ArrayList<String>();
 
 	if (role.getType() == RoleConstants.TYPE_REGULAR) {
-		LinkedHashMap groupParams = new LinkedHashMap();
+		if (!ResourceActionsUtil.isPortalModelResource(curResource) && !portletResource.equals(PortletKeys.PORTAL)) {
+			supportsFilterByGroup = true;
+		}
 
-		List rolePermissions = new ArrayList();
+		LinkedHashMap<String, Object> groupParams = new LinkedHashMap<String, Object>();
+
+		List<Object> rolePermissions = new ArrayList<Object>();
 
 		rolePermissions.add(curResource);
 		rolePermissions.add(new Integer(ResourceConstants.SCOPE_GROUP));
@@ -110,23 +114,12 @@ for (int i = 0; i < curActions.size(); i++) {
 			groupNames.add(group.getName());
 		}
 
-		if (groups.isEmpty()) {
-			scope = ResourceConstants.SCOPE_COMPANY;
-		}
-		else {
+		if (!groups.isEmpty()) {
 			scope = ResourceConstants.SCOPE_GROUP;
 		}
 	}
 	else {
 		scope = ResourceConstants.SCOPE_GROUP_TEMPLATE;
-	}
-
-	boolean supportsFilterByGroup = false;
-
-	if (role.getType() == RoleConstants.TYPE_REGULAR) {
-		if (!ResourceActionsUtil.isPortalModelResource(curResource) && !portletResource.equals(PortletKeys.PORTAL)) {
-			supportsFilterByGroup = true;
-		}
 	}
 
 	ResultRow row = new ResultRow(new Object[] {role, actionId, curResource, target, scope, supportsFilterByGroup, groups, groupIdsArray, groupNames}, target, i);
@@ -135,13 +128,11 @@ for (int i = 0; i < curActions.size(); i++) {
 
 	if (role.getType() == RoleConstants.TYPE_REGULAR) {
 		row.addJSP("/html/portlet/enterprise_admin/edit_role_permissions_resource_scope.jsp");
+
 		row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/enterprise_admin/edit_role_permissions_resource_action.jsp");
 	}
 
 	resultRows.add(row);
-	%>
-
-<%
 }
 %>
 

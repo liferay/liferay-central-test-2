@@ -297,8 +297,6 @@ public class EditRolePermissionsAction extends PortletAction {
 			actionRequest, "portletResource");
 		String[] modelResources = StringUtil.split(
 			ParamUtil.getString(actionRequest, "modelResources"));
-		String[] selectedTargets = StringUtil.split(
-			ParamUtil.getString(actionRequest, "selectedTargets"));
 
 		Map<String, List<String>> resourceActionsMap =
 			new HashMap<String, List<String>>();
@@ -314,6 +312,9 @@ public class EditRolePermissionsAction extends PortletAction {
 				modelResource,
 				ResourceActionsUtil.getResourceActions(null, modelResource));
 		}
+
+		String[] selectedTargets = StringUtil.split(
+			ParamUtil.getString(actionRequest, "selectedTargets"));
 
 		for (Map.Entry<String, List<String>> entry :
 				resourceActionsMap.entrySet()) {
@@ -332,23 +333,20 @@ public class EditRolePermissionsAction extends PortletAction {
 				boolean selected = ArrayUtil.contains(selectedTargets, target);
 
 				String[] groupIds = StringUtil.split(
-					ParamUtil.getString(
-						actionRequest, "groupIds" + target));
+					ParamUtil.getString(actionRequest, "groupIds" + target));
 
 				groupIds = ArrayUtil.distinct(groupIds);
 
-				int scope;
+				int scope = ResourceConstants.SCOPE_COMPANY;
 
 				if ((role.getType() == RoleConstants.TYPE_COMMUNITY) ||
 					(role.getType() == RoleConstants.TYPE_ORGANIZATION)) {
-					 scope = ResourceConstants.SCOPE_GROUP_TEMPLATE;
+
+					scope = ResourceConstants.SCOPE_GROUP_TEMPLATE;
 				}
 				else {
 					if (groupIds.length > 0) {
 						scope = ResourceConstants.SCOPE_GROUP;
-					}
-					else {
-						scope = ResourceConstants.SCOPE_COMPANY;
 					}
 				}
 

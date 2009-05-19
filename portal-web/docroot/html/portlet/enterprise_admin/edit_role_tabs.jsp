@@ -132,7 +132,7 @@ if (Validator.isNotNull(tabs1) && tabs1.equals("define-permissions")) {
 	breadcrumbs += " &raquo; <a href=\"" + definePermissionsURL.toString() + "\">" + LanguageUtil.get(pageContext, "define-permissions") + "</a>";
 }
 else if (Validator.isNotNull(tabs1) && tabs1.equals("assign-members")) {
-	breadcrumbs += " &raquo; <a href=\"" + assignMembersURL.toString() + "\">" + LanguageUtil.get(pageContext, "define-permissions") + "</a>";
+	breadcrumbs += " &raquo; <a href=\"" + assignMembersURL.toString() + "\">" + LanguageUtil.get(pageContext, "assign-members") + "</a>";
 }
 
 if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(portletResource)) {

@@ -40,12 +40,13 @@ Boolean supportsFilterByGroup = (Boolean)objArray[5];
 	</portlet:renderURL>
 
 	<%
-	StringBuilder sb = new StringBuilder();
-
-	sb.append("javascript:var groupWindow = window.open('");
-	sb.append(selectCommunityURL.toString());
-	sb.append("', 'community', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=680'); void(''); groupWindow.focus();");
+	String limitScopeURL = "javascript:var groupWindow = window.open('" + selectCommunityURL + "', 'community', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=680'); void(''); groupWindow.focus();";
 	%>
 
-	&nbsp; <liferay-ui:icon image="add" label="true" message="limit-scope" url="<%= sb.toString() %>" />
+	<liferay-ui:icon
+		image="add"
+		message="limit-scope"
+		url="<%= limitScopeURL %>"
+		label="<%= true %>"
+	/>
 </c:if>

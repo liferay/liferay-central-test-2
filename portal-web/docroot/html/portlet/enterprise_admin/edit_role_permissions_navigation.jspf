@@ -29,183 +29,186 @@ portlets = ListUtil.sort(portlets, new PortletTitleComparator(application, local
 %>
 
 <form action="#" class="exp-form" name="<portlet:namespace />resourceSelection">
-	<c:choose>
-		<c:when test="<%= role.getType() == RoleConstants.TYPE_COMMUNITY %>">
-			<fieldset class="exp-block-labels exp-form-column">
-				<div class="exp-ctrl-holder">
-					<label for="add-administration-permission"><liferay-ui:message key="add-administration-permission" /></label>
 
-					<select id="add-administration-permission" onchange="<portlet:namespace />addPermissions(this)">
-						<option value=""></option>
+<c:choose>
+	<c:when test="<%= role.getType() == RoleConstants.TYPE_COMMUNITY %>">
+		<fieldset class="exp-block-labels exp-form-column">
+			<div class="exp-ctrl-holder">
+				<label for="add-administration-permission"><liferay-ui:message key="add-administration-permission" /></label>
 
-						<%
-						editPermissionsURL.setParameter("showModelResources", "1");
-						editPermissionsURL.setParameter("portletResource", PortletKeys.ENTERPRISE_ADMIN_COMMUNITIES);
-						%>
+				<select id="add-administration-permission" onchange="<portlet:namespace />addPermissions(this);">
+					<option value=""></option>
 
-						<option <%= _isCurrent(editPermissionsURL.toString(), portletResource, showModelResources)? "selected" : "" %> value="<%= editPermissionsURL.toString() %>"><liferay-ui:message key="community-administration" /></option>
-					</select>
-				</div>
-			</fieldset>
-		</c:when>
-		<c:when test="<%= role.getType() == RoleConstants.TYPE_ORGANIZATION %>">
-			<fieldset class="exp-block-labels exp-form-column">
-				<div class="exp-ctrl-holder">
-					<label for="add-administration-permission"><liferay-ui:message key="add-administration-permission" /></label>
-
-					<select id="add-administration-permission" onchange="<portlet:namespace />addPermissions(this)">
-						<option value=""></option>
-
-						<%
-						editPermissionsURL.setParameter("showModelResources", "1");
-						editPermissionsURL.setParameter("portletResource", PortletKeys.ENTERPRISE_ADMIN_ORGANIZATIONS);
-						%>
-
-						<option <%= _isCurrent(editPermissionsURL.toString(), portletResource, showModelResources)? "selected" : "" %> value="<%= editPermissionsURL.toString() %>"><liferay-ui:message key="organization-administration" /></option>
-					</select>
-				</div>
-			</fieldset>
-		</c:when>
-		<c:otherwise>
-			<fieldset class="exp-block-labels exp-form-column">
-				<div class="exp-ctrl-holder">
-					<label for="add-portal-permission"><liferay-ui:message key="add-portal-permission" /></label>
-
-					<select id="add-portal-permission" onchange="<portlet:namespace />addPermissions(this)">
-						<option value=""></option>
-
-						<%
-						if (role.getType() == RoleConstants.TYPE_REGULAR) {
-							editPermissionsURL.setParameter("portletResource", PortletKeys.PORTAL);
-							editPermissionsURL.setParameter("showModelResources", "0");
-						%>
-
-							<option <%= _isCurrent(editPermissionsURL.toString(), portletResource, showModelResources)? "selected" : "" %> value="<%= editPermissionsURL.toString() %>"><liferay-ui:message key="general" /></option>
-
-						<%
-						}
-
-						for (Portlet portlet : portlets) {
-							if (Validator.isNull(portlet.getPortletId()) || !_isPortalPortlet(portlet.getPortletId())) {
-								continue;
-							}
-
-							List<String> curModelResources = ResourceActionsUtil.getPortletModelResources(portlet.getPortletId());
-
-							if (!portlet.getPortletId().equals(PortletKeys.PORTAL) && curModelResources.isEmpty()) {
-								continue;
-							}
-
-							if ((role.getType() == RoleConstants.TYPE_COMMUNITY) && !_isCommunityPortlet(portlet.getPortletId())) {
-								continue;
-							}
-
-							if ((role.getType() == RoleConstants.TYPE_ORGANIZATION) && !_isOrganizationPortlet(portlet.getPortletId())) {
-								continue;
-							}
-
-							editPermissionsURL.setParameter("portletResource", portlet.getPortletId());
-							editPermissionsURL.setParameter("showModelResources", "1");
-						%>
-
-							<option <%= _isCurrent(editPermissionsURL.toString(), portletResource, showModelResources)? "selected" : "" %> value="<%= editPermissionsURL.toString() %>"><%= PortalUtil.getPortletTitle(portlet, application, locale) %></option>
-
-						<%
-						}
-						%>
-
-					</select>
-				</div>
-			</fieldset>
-		</c:otherwise>
-	</c:choose>
-
-	<fieldset class="exp-block-labels exp-form-column">
-		<div class="exp-ctrl-holder">
-			<label for="add-content-permission"><liferay-ui:message key="add-content-permission" /></label>
-
-			<select id="add-content-permission" onchange="<portlet:namespace />addPermissions(this)">
-				<option value=""></option>
-
-				<%
-				for (Portlet portlet : portlets) {
-					if (Validator.isNull(portlet.getPortletId()) || _isPortalPortlet(portlet.getPortletId())) {
-						continue;
-					}
-
-					List<String> curModelResources = ResourceActionsUtil.getPortletModelResources(portlet.getPortletId());
-
-					if (curModelResources.isEmpty()) {
-						continue;
-					}
-
-					editPermissionsURL.setParameter("portletResource", portlet.getPortletId());
+					<%
+					editPermissionsURL.setParameter("portletResource", PortletKeys.ENTERPRISE_ADMIN_COMMUNITIES);
 					editPermissionsURL.setParameter("showModelResources", "1");
-				%>
+					%>
 
-					<option <%= _isCurrent(editPermissionsURL.toString(), portletResource, showModelResources)? "selected" : "" %> value="<%= editPermissionsURL.toString() %>"><%= PortalUtil.getPortletTitle(portlet, application, locale) %></option>
+					<option <%= _isCurrent(editPermissionsURL.toString(), portletResource, showModelResources)? "selected" : "" %> value="<%= editPermissionsURL.toString() %>"><liferay-ui:message key="community-administration" /></option>
+				</select>
+			</div>
+		</fieldset>
+	</c:when>
+	<c:when test="<%= role.getType() == RoleConstants.TYPE_ORGANIZATION %>">
+		<fieldset class="exp-block-labels exp-form-column">
+			<div class="exp-ctrl-holder">
+				<label for="add-administration-permission"><liferay-ui:message key="add-administration-permission" /></label>
 
-				<%
-				}
-				%>
+				<select id="add-administration-permission" onchange="<portlet:namespace />addPermissions(this);">
+					<option value=""></option>
 
-			</select>
-		</div>
-	</fieldset>
+					<%
+					editPermissionsURL.setParameter("portletResource", PortletKeys.ENTERPRISE_ADMIN_ORGANIZATIONS);
+					editPermissionsURL.setParameter("showModelResources", "1");
+					%>
 
-	<%
-	PortletCategory portletCategory = (PortletCategory)WebAppPool.get(String.valueOf(company.getCompanyId()), WebKeys.PORTLET_CATEGORY);
+					<option <%= _isCurrent(editPermissionsURL.toString(), portletResource, showModelResources)? "selected" : "" %> value="<%= editPermissionsURL.toString() %>"><liferay-ui:message key="organization-administration" /></option>
+				</select>
+			</div>
+		</fieldset>
+	</c:when>
+	<c:otherwise>
+		<fieldset class="exp-block-labels exp-form-column">
+			<div class="exp-ctrl-holder">
+				<label for="add-portal-permission"><liferay-ui:message key="add-portal-permission" /></label>
 
-	Set<String> hiddenPortletIds = portletCategory.getCategory("category.hidden").getPortletIds();
-	%>
-	<fieldset class="exp-block-labels exp-form-column">
-		<div class="exp-ctrl-holder">
-			<label for="add-application-permission"><liferay-ui:message key="add-application-permission" /></label>
+				<select id="add-portal-permission" onchange="<portlet:namespace />addPermissions(this);">
+					<option value=""></option>
 
-			<select id="add-application-permission" onchange="<portlet:namespace />addPermissions(this)">
-				<option value=""></option>
+					<%
+					if (role.getType() == RoleConstants.TYPE_REGULAR) {
+						editPermissionsURL.setParameter("portletResource", PortletKeys.PORTAL);
+						editPermissionsURL.setParameter("showModelResources", "0");
+					%>
 
-				<%
-				for (Portlet portlet : portlets) {
-					if (Validator.isNull(portlet.getPortletId()) || hiddenPortletIds.contains(portlet.getPortletId())) {
-						continue;
+						<option <%= _isCurrent(editPermissionsURL.toString(), portletResource, showModelResources)? "selected" : "" %> value="<%= editPermissionsURL.toString() %>"><liferay-ui:message key="general" /></option>
+
+					<%
 					}
 
-					editPermissionsURL.setParameter("portletResource", portlet.getPortletId());
-					editPermissionsURL.setParameter("showModelResources", "0");
-				%>
+					for (Portlet portlet : portlets) {
+						if (Validator.isNull(portlet.getPortletId()) || !_isPortalPortlet(portlet.getPortletId())) {
+							continue;
+						}
 
-					<option <%= _isCurrent(editPermissionsURL.toString(), portletResource, showModelResources)? "selected" : "" %> value="<%= editPermissionsURL.toString() %>"><%= PortalUtil.getPortletTitle(portlet, application, locale) %></option>
+						List<String> curModelResources = ResourceActionsUtil.getPortletModelResources(portlet.getPortletId());
 
-				<%
+						if (!portlet.getPortletId().equals(PortletKeys.PORTAL) && curModelResources.isEmpty()) {
+							continue;
+						}
+
+						if ((role.getType() == RoleConstants.TYPE_COMMUNITY) && !_isCommunityPortlet(portlet.getPortletId())) {
+							continue;
+						}
+
+						if ((role.getType() == RoleConstants.TYPE_ORGANIZATION) && !_isOrganizationPortlet(portlet.getPortletId())) {
+							continue;
+						}
+
+						editPermissionsURL.setParameter("portletResource", portlet.getPortletId());
+						editPermissionsURL.setParameter("showModelResources", "1");
+					%>
+
+						<option <%= _isCurrent(editPermissionsURL.toString(), portletResource, showModelResources)? "selected" : "" %> value="<%= editPermissionsURL.toString() %>"><%= PortalUtil.getPortletTitle(portlet, application, locale) %></option>
+
+					<%
+					}
+					%>
+
+				</select>
+			</div>
+		</fieldset>
+	</c:otherwise>
+</c:choose>
+
+<fieldset class="exp-block-labels exp-form-column">
+	<div class="exp-ctrl-holder">
+		<label for="add-content-permission"><liferay-ui:message key="add-content-permission" /></label>
+
+		<select id="add-content-permission" onchange="<portlet:namespace />addPermissions(this);">
+			<option value=""></option>
+
+			<%
+			for (Portlet portlet : portlets) {
+				if (Validator.isNull(portlet.getPortletId()) || _isPortalPortlet(portlet.getPortletId())) {
+					continue;
 				}
-				%>
 
-			</select>
-		</div>
-	</fieldset>
+				List<String> curModelResources = ResourceActionsUtil.getPortletModelResources(portlet.getPortletId());
+
+				if (curModelResources.isEmpty()) {
+					continue;
+				}
+
+				editPermissionsURL.setParameter("portletResource", portlet.getPortletId());
+				editPermissionsURL.setParameter("showModelResources", "1");
+			%>
+
+				<option <%= _isCurrent(editPermissionsURL.toString(), portletResource, showModelResources)? "selected" : "" %> value="<%= editPermissionsURL.toString() %>"><%= PortalUtil.getPortletTitle(portlet, application, locale) %></option>
+
+			<%
+			}
+			%>
+
+		</select>
+	</div>
+</fieldset>
+
+<%
+PortletCategory portletCategory = (PortletCategory)WebAppPool.get(String.valueOf(company.getCompanyId()), WebKeys.PORTLET_CATEGORY);
+
+Set<String> hiddenPortletIds = portletCategory.getCategory("category.hidden").getPortletIds();
+%>
+
+<fieldset class="exp-block-labels exp-form-column">
+	<div class="exp-ctrl-holder">
+		<label for="add-application-permission"><liferay-ui:message key="add-application-permission" /></label>
+
+		<select id="add-application-permission" onchange="<portlet:namespace />addPermissions(this);">
+			<option value=""></option>
+
+			<%
+			for (Portlet portlet : portlets) {
+				if (Validator.isNull(portlet.getPortletId()) || hiddenPortletIds.contains(portlet.getPortletId())) {
+					continue;
+				}
+
+				editPermissionsURL.setParameter("portletResource", portlet.getPortletId());
+				editPermissionsURL.setParameter("showModelResources", "0");
+			%>
+
+				<option <%= _isCurrent(editPermissionsURL.toString(), portletResource, showModelResources)? "selected" : "" %> value="<%= editPermissionsURL.toString() %>"><%= PortalUtil.getPortletTitle(portlet, application, locale) %></option>
+
+			<%
+			}
+			%>
+
+		</select>
+	</div>
+</fieldset>
+
 </form>
 
 <%!
-String[] _COMMUNITY_PORTLETS = new String[] {
-		PortletKeys.ENTERPRISE_ADMIN_COMMUNITIES,
+private static final String[] _COMMUNITY_PORTLETS = {
+	PortletKeys.ENTERPRISE_ADMIN_COMMUNITIES,
 };
 
-String[] _ORGANIZATION_PORTLETS = new String[] {
-		PortletKeys.ENTERPRISE_ADMIN_ORGANIZATIONS,
+private static final String[] _ORGANIZATION_PORTLETS = {
+	PortletKeys.ENTERPRISE_ADMIN_ORGANIZATIONS,
 };
 
-String[] _PORTAL_PORTLETS = new String[] {
-		PortletKeys.ENTERPRISE_ADMIN,
-		PortletKeys.ENTERPRISE_ADMIN_COMMUNITIES,
-		PortletKeys.ENTERPRISE_ADMIN_MONITORING,
-		PortletKeys.ENTERPRISE_ADMIN_ORGANIZATIONS,
-		PortletKeys.ENTERPRISE_ADMIN_PASSWORD_POLICIES,
-		PortletKeys.ENTERPRISE_ADMIN_PLUGINS,
-		PortletKeys.ENTERPRISE_ADMIN_ROLES,
-		PortletKeys.ENTERPRISE_ADMIN_SETTINGS,
-		PortletKeys.ENTERPRISE_ADMIN_USER_GROUPS,
-		PortletKeys.ENTERPRISE_ADMIN_USERS
+private static final String[] _PORTAL_PORTLETS = {
+	PortletKeys.ENTERPRISE_ADMIN,
+	PortletKeys.ENTERPRISE_ADMIN_COMMUNITIES,
+	PortletKeys.ENTERPRISE_ADMIN_MONITORING,
+	PortletKeys.ENTERPRISE_ADMIN_ORGANIZATIONS,
+	PortletKeys.ENTERPRISE_ADMIN_PASSWORD_POLICIES,
+	PortletKeys.ENTERPRISE_ADMIN_PLUGINS,
+	PortletKeys.ENTERPRISE_ADMIN_ROLES,
+	PortletKeys.ENTERPRISE_ADMIN_SETTINGS,
+	PortletKeys.ENTERPRISE_ADMIN_USER_GROUPS,
+	PortletKeys.ENTERPRISE_ADMIN_USERS
 };
 
 private boolean _isCommunityPortlet(String portletId) {
@@ -217,10 +220,15 @@ private boolean _isCurrent(String url, String portletResource, boolean showModel
 		return false;
 	}
 
-	String showModelResourcesStr = showModelResources? "1" : "0";
+	String showModelResourcesString = "0";
+
+	if (showModelResources) {
+		showModelResourcesString = "1";
+	}
 
 	if ((url.indexOf("portletResource=" + portletResource) != -1) &&
-		(url.indexOf("showModelResources=" + showModelResourcesStr) != -1)) {
+		(url.indexOf("showModelResources=" + showModelResourcesString) != -1)) {
+
 		return true;
 	}
 	else {
@@ -235,5 +243,4 @@ private boolean _isOrganizationPortlet(String portletId) {
 private boolean _isPortalPortlet(String portletId) {
 	return ArrayUtil.contains(_PORTAL_PORTLETS, portletId);
 }
-
 %>

@@ -35,7 +35,6 @@ String backURL = ParamUtil.getString(request, "backURL", redirect);
 
 Role role = (Role)request.getAttribute(WebKeys.ROLE);
 
-boolean showModelResources = ParamUtil.getBoolean(request, "showModelResources", true);
 String portletResource = ParamUtil.getString(request, "portletResource");
 
 String portletResourceLabel = null;
@@ -57,6 +56,8 @@ if (Validator.isNotNull(portletResource)) {
 	modelResources = ResourceActionsUtil.getPortletModelResources(portletResource);
 }
 
+boolean showModelResources = ParamUtil.getBoolean(request, "showModelResources", true);
+
 PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setWindowState(WindowState.MAXIMIZED);
@@ -67,14 +68,14 @@ portletURL.setParameter("tabs2", tabs2);
 portletURL.setParameter("roleId", String.valueOf(role.getRoleId()));
 portletURL.setParameter("portletResource", portletResource);
 
-PortletURL permissionsSummaryURL = renderResponse.createRenderURL();
+PortletURL viewPermissionsURL = renderResponse.createRenderURL();
 
-permissionsSummaryURL.setWindowState(WindowState.MAXIMIZED);
+viewPermissionsURL.setWindowState(WindowState.MAXIMIZED);
 
-permissionsSummaryURL.setParameter("struts_action", "/enterprise_admin/edit_role_permissions");
-permissionsSummaryURL.setParameter(Constants.CMD, Constants.VIEW);
-permissionsSummaryURL.setParameter("tabs1", "roles");
-permissionsSummaryURL.setParameter("roleId", String.valueOf(role.getRoleId()));
+viewPermissionsURL.setParameter("struts_action", "/enterprise_admin/edit_role_permissions");
+viewPermissionsURL.setParameter(Constants.CMD, Constants.VIEW);
+viewPermissionsURL.setParameter("tabs1", "roles");
+viewPermissionsURL.setParameter("roleId", String.valueOf(role.getRoleId()));
 
 PortletURL editPermissionsURL = renderResponse.createRenderURL();
 
@@ -83,19 +84,19 @@ editPermissionsURL.setWindowState(WindowState.MAXIMIZED);
 editPermissionsURL.setParameter("struts_action", "/enterprise_admin/edit_role_permissions");
 editPermissionsURL.setParameter(Constants.CMD, Constants.EDIT);
 editPermissionsURL.setParameter("tabs1", "roles");
+editPermissionsURL.setParameter("redirect", viewPermissionsURL.toString());
 editPermissionsURL.setParameter("roleId", String.valueOf(role.getRoleId()));
-editPermissionsURL.setParameter("redirect", permissionsSummaryURL.toString());
 %>
 
 <script type="text/javascript">
 	function <portlet:namespace />addPermissions(field) {
-		var addPermissionsURL = field.value;
+		var permissionsURL = field.value;
 
-		if (addPermissionsURL == '') {
-			addPermissionsURL = '<%= permissionsSummaryURL %>';
+		if (permissionsURL == '') {
+			permissionsURL = '<%= viewPermissionsURL %>';
 		}
 
-		location.href = addPermissionsURL;
+		location.href = permissionsURL;
 	}
 
 	function <portlet:namespace />removeGroup(pos, target) {
@@ -123,7 +124,7 @@ editPermissionsURL.setParameter("redirect", permissionsSummaryURL.toString());
 			selectedGroupNames = selectedGroupNamesField.split("@@");
 		}
 
-		if (!Liferay.Util.contains(selectedGroupIds, groupId)) {
+		if (jQuery.inArray(selectedGroupIds, groupId) == -1) {
 			selectedGroupIds.push(groupId);
 			selectedGroupNames.push(name);
 		}
@@ -179,9 +180,7 @@ editPermissionsURL.setParameter("redirect", permissionsSummaryURL.toString());
 
 <c:choose>
 	<c:when test="<%= cmd.equals(Constants.VIEW) %>">
-
 		<liferay-util:include page="/html/portlet/enterprise_admin/edit_role_permissions_summary.jsp" />
-
 	</c:when>
 	<c:otherwise>
 		<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_role_permissions" /></portlet:actionURL>" id="<portlet:namespace />fm" method="post" name="<portlet:namespace />fm">
@@ -198,7 +197,7 @@ editPermissionsURL.setParameter("redirect", permissionsSummaryURL.toString());
 				<h3><%= portletResourceLabel %></h3>
 
 				<%
-					request.setAttribute("edit_role_permissions.jsp-curPortletResource", portletResource);
+				request.setAttribute("edit_role_permissions.jsp-curPortletResource", portletResource);
 				%>
 
 				<liferay-util:include page="/html/portlet/enterprise_admin/edit_role_permissions_resource.jsp" />
@@ -227,6 +226,7 @@ editPermissionsURL.setParameter("redirect", permissionsSummaryURL.toString());
 				<%
 				}
 				%>
+
 			</c:when>
 		</c:choose>
 

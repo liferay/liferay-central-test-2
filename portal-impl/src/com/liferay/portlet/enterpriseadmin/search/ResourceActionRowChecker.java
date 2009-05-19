@@ -43,33 +43,33 @@ public class ResourceActionRowChecker extends RowChecker {
 	}
 
 	public boolean isChecked(Object obj) {
-		Object[] objArray = (Object[]) obj;
+		try {
+			return doIsChecked(obj);
+		}
+		catch (Exception e) {
+			return false;
+		}
+	}
+
+	protected boolean doIsChecked(Object obj) throws Exception {
+		Object[] objArray = (Object[])obj;
 
 		Role role = (Role)objArray[0];
 		String actionId = (String)objArray[1];
 		String resourceName = (String)objArray[2];
 		Integer scope = (Integer)objArray[4];
 
-		boolean selected = false;
-
-		try {
-			if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
-				selected =
-					ResourcePermissionLocalServiceUtil.
-						hasScopeResourcePermission(
-							role.getCompanyId(), resourceName, scope,
-							role.getRoleId(), actionId);
-			}
-			else {
-				selected = PermissionLocalServiceUtil.hasRolePermission(
-					role.getRoleId(), role.getCompanyId(), resourceName, scope,
+		if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
+			return
+				ResourcePermissionLocalServiceUtil.hasScopeResourcePermission(
+					role.getCompanyId(), resourceName, scope, role.getRoleId(),
 					actionId);
-			}
 		}
-		catch (Exception e) {
+		else {
+			return PermissionLocalServiceUtil.hasRolePermission(
+				role.getRoleId(), role.getCompanyId(), resourceName, scope,
+				actionId);
 		}
-
-		return selected;
 	}
 
 }
