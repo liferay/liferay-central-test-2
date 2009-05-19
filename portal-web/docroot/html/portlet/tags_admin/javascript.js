@@ -698,7 +698,9 @@
 							if (exception.indexOf('DuplicateEntryException') > -1) {
 								errorKey = 'that-tag-already-exists';
 							}
-							else if (exception.indexOf('EntryNameException') > -1) {
+							else if (exception.indexOf('EntryNameException') > -1 ||
+								exception.indexOf('TagsEntryException') > -1) {
+
 								errorKey = 'one-of-your-fields-contains-invalid-characters';
 							}
 							else if (exception.indexOf('NoSuchVocabularyException') > -1) {
