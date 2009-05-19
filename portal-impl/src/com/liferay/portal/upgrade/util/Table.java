@@ -138,7 +138,7 @@ public class Table {
 		try {
 			value = getValue(rs, name, type);
 		}
-		catch (SQLException se) {
+		catch (SQLException sqle) {
 			if (name.equals("uuid_")) {
 				sb.append(PortalUUIDUtil.generate());
 			}
