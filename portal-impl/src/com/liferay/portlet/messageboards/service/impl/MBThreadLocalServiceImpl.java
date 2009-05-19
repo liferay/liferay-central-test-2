@@ -551,6 +551,6 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 	}
 
 	private static Log _log =
-		 LogFactoryUtil.getLog(MBThreadLocalServiceImpl.class);
+		LogFactoryUtil.getLog(MBThreadLocalServiceImpl.class);
 
 }
