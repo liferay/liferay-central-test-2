@@ -158,6 +158,10 @@ public class TrackbackAction extends PortletAction {
 		sendSuccess(actionResponse);
 	}
 
+	protected boolean isCheckMethodOnProcessAction() {
+		return _CHECK_METHOD_ON_PROCESS_ACTION;
+	}
+
 	protected boolean isCommentsEnabled(ActionRequest actionRequest)
 		throws Exception {
 
@@ -211,6 +215,8 @@ public class TrackbackAction extends PortletAction {
 	protected void sendSuccess(ActionResponse actionResponse) throws Exception {
 		sendResponse(actionResponse, null, true);
 	}
+
+	private static final boolean _CHECK_METHOD_ON_PROCESS_ACTION = false;
 
 	private static Log _log = LogFactoryUtil.getLog(TrackbackAction.class);
 
