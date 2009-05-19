@@ -32,7 +32,7 @@
 
 				instance.options = options;
 
-				var dataSource = instance.createDateSource();
+				var dataSource = instance.createDataSource();
 
 				instance._super(options.input, resultContainer, dataSource, options);
 
@@ -46,7 +46,7 @@
 				input.addClass('exp-autocomplete-input');
 			},
 
-			createDateSource: function() {
+			createDataSource: function() {
 				var instance = this;
 
 				var options = instance.options;
