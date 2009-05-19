@@ -103,6 +103,8 @@ public interface PortletDataContext extends Serializable {
 
 	public Map<String, List<MBMessage>> getComments();
 
+	public ClassLoader getClassLoader();
+
 	public long getCompanyId();
 
 	public String getDataStrategy();
@@ -196,6 +198,8 @@ public interface PortletDataContext extends Serializable {
 	public boolean isWithinDateRange(Date modifiedDate);
 
 	public void putNotUniquePerLayout(String dataKey);
+
+	public void setClassLoader(ClassLoader classLoader);
 
 	public void setGroupId(long groupId);
 

@@ -28,6 +28,7 @@ import javax.portlet.PortletPreferences;
  * <a href="InvokerPortletDataHandler.java.html"><b><i>View Source</i></b></a>
  *
  * @author Bruno Farache
+ * @author Raymond Augé
  *
  */
 public class InvokerPortletDataHandler implements PortletDataHandler {
@@ -46,16 +47,19 @@ public class InvokerPortletDataHandler implements PortletDataHandler {
 
 		Thread currentThread = Thread.currentThread();
 
-		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
+		ClassLoader threadClassLoader = currentThread.getContextClassLoader();
+		ClassLoader contextClassLoader = context.getClassLoader();
 
 		try {
 			currentThread.setContextClassLoader(_classLoader);
+			context.setClassLoader(_classLoader);
 
 			return _portletDataHandler.deleteData(
 				context, portletId, preferences);
 		}
 		finally {
-			currentThread.setContextClassLoader(contextClassLoader);
+			currentThread.setContextClassLoader(threadClassLoader);
+			context.setClassLoader(contextClassLoader);
 		}
 	}
 
@@ -66,16 +70,19 @@ public class InvokerPortletDataHandler implements PortletDataHandler {
 
 		Thread currentThread = Thread.currentThread();
 
-		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
+		ClassLoader threadClassLoader = currentThread.getContextClassLoader();
+		ClassLoader contextClassLoader = context.getClassLoader();
 
 		try {
 			currentThread.setContextClassLoader(_classLoader);
+			context.setClassLoader(_classLoader);
 
 			return _portletDataHandler.exportData(
 				context, portletId, preferences);
 		}
 		finally {
-			currentThread.setContextClassLoader(contextClassLoader);
+			currentThread.setContextClassLoader(threadClassLoader);
+			context.setClassLoader(contextClassLoader);
 		}
 	}
 
@@ -120,16 +127,19 @@ public class InvokerPortletDataHandler implements PortletDataHandler {
 
 		Thread currentThread = Thread.currentThread();
 
-		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
+		ClassLoader threadClassLoader = currentThread.getContextClassLoader();
+		ClassLoader contextClassLoader = context.getClassLoader();
 
 		try {
 			currentThread.setContextClassLoader(_classLoader);
+			context.setClassLoader(_classLoader);
 
 			return _portletDataHandler.importData(
 				context, portletId, preferences, data);
 		}
 		finally {
-			currentThread.setContextClassLoader(contextClassLoader);
+			currentThread.setContextClassLoader(threadClassLoader);
+			context.setClassLoader(contextClassLoader);
 		}
 	}
 

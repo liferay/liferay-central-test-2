@@ -340,6 +340,10 @@ public class PortletDataContextImpl implements PortletDataContext {
 			defaultValue);
 	}
 
+	public ClassLoader getClassLoader() {
+		return _xStream.getClassLoader();
+	}
+
 	public Map<String, List<MBMessage>> getComments() {
 		return _commentsMap;
 	}
@@ -625,6 +629,10 @@ public class PortletDataContextImpl implements PortletDataContext {
 
 	public void putNotUniquePerLayout(String dataKey) {
 		_notUniquePerLayout.add(dataKey);
+	}
+
+	public void setClassLoader(ClassLoader classLoader) {
+		_xStream.setClassLoader(classLoader);
 	}
 
 	public void setGroupId(long groupId) {
