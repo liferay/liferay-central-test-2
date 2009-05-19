@@ -30,16 +30,19 @@
 			<mapper type="flatten" />
 		</unzip>
 
+		<copy todir="${tstamp.value}">
+			<fileset
+				dir="lib/development"
+				includes="hsql.jar,jtds.jar,mysql.jar,postgresql.jar"
+			/>
+		</copy>
+
 		<if>
 			<not>
 				<equals arg1="${jdbc.drivers.optional.dir}" arg2="$${jdbc.drivers.optional.dir}" />
 			</not>
 			<then>
 				<copy todir="${tstamp.value}">
-					<fileset
-						dir="lib/development"
-						includes="hsql.jar,jtds.jar,mysql.jar,postgresql.jar"
-					/>
 					<fileset
 						dir="${jdbc.drivers.optional.dir}"
 						includes="*.jar"
@@ -118,7 +121,7 @@ print AdminControl.invoke(applicationManager, 'startApplication', 'liferay-tunne
 		<antcall target="start-selenium" />
 
 		<antcall target="run-websphere-6.1">
-			<param name="test.class" value="PortalWebTestSuite" />
+			<param name="test.class" value="SmokeTestSuite" />
 		</antcall>
 
 		<antcall target="stop-selenium" />
