@@ -64,8 +64,8 @@ public class ExportEventsAction extends PortletAction {
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		InputStream is = null;
 		File file = null;
+		InputStream is = null;
 
 		try {
 			ThemeDisplay themeDisplay =

@@ -205,7 +205,7 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 	}
 
 	public boolean delete(File file) {
-		if (file.exists()) {
+		if ((file != null) && file.exists()) {
 			return file.delete();
 		}
 		else {
