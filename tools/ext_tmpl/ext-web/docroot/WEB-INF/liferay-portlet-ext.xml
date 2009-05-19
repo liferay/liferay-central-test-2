@@ -503,6 +503,11 @@
 		<struts-path>ratings</struts-path>
 		<include>true</include>
 	</portlet>
+	<portlet>
+		<portlet-name>145</portlet-name>
+		<struts-path>dockbar</struts-path>
+		<include>true</include>
+	</portlet>
 	-->
 
 	<role-mapper>

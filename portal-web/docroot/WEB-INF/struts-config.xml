@@ -315,6 +315,10 @@
 
 		<action path="/directory/view" forward="portlet.directory.view" />
 
+		<!-- Dockbar -->
+
+		<action path="/dockbar/view" forward="portlet.dockbar.view" />
+
 		<!-- Document Library -->
 
 		<action path="/document_library/compare_versions" type="com.liferay.portlet.documentlibrary.action.CompareVersionsAction">
@@ -393,10 +397,6 @@
 			<forward name="portlet.document_library.error" path="portlet.document_library.error" />
 			<forward name="portlet.document_library.view" path="portlet.document_library.view" />
 		</action>
-
-		<!-- Dockbar -->
-
-		<action path="/dockbar/view" forward="portlet.dockbar.view" />
 
 		<!-- Enterprise Admin -->
 

@@ -271,6 +271,7 @@ List<Group> myPlaces = user.getMyPlaces(max);
 					</ul>
 				</li>
 			</c:if>
+
 		<%
 		}
 		%>

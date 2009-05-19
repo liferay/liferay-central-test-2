@@ -25,24 +25,6 @@
 <%@ include file="/html/portlet/dockbar/init.jsp" %>
 
 <%
-User selUser = themeDisplay.getUser();
-
-String userImage = themeDisplay.getPathImage() + "/user_";
-
-long portraitId = selUser.getPortraitId();
-
-if (selUser.isFemale()) {
-	userImage += "female";
-}
-else {
-	userImage += "male";
-}
-
-userImage += "_portrait?img_id=" + portraitId + "&amp;t=" + ImageServletTokenUtil.getToken(portraitId);
-userImage = HtmlUtil.escape(userImage);
-
-List<User> userList = UserLocalServiceUtil.getUsers(0, 10);
-
 Group group = null;
 
 if (layout != null) {
@@ -56,18 +38,17 @@ if (layout != null) {
 			<a href="javascript: ;"><img src="<%= themeDisplay.getPathThemeImages() %>/spacer.png" /></a>
 		</li>
 		<li class="user-avatar">
-			<a href="<%= HtmlUtil.escape(themeDisplay.getURLMyAccount().toString()) %>"><img alt="<%= selUser.getFullName() %>" src="<%= userImage %>" /></a> <a href="<%= HtmlUtil.escape(themeDisplay.getURLMyAccount().toString()) %>"><%= selUser.getFullName() %></a>
+			<a href="<%= HtmlUtil.escape(themeDisplay.getURLMyAccount().toString()) %>"><img alt="<%= user.getFullName() %>" src="<%= themeDisplay.getPathImage() %>/user_<%= user.isFemale() ? "female" : "male" %>_portrait?img_id=<%= user.getPortraitId() %>&t=<%= ImageServletTokenUtil.getToken(user.getPortraitId()) %>" /></a> <a href="<%= HtmlUtil.escape(themeDisplay.getURLMyAccount().toString()) %>"><%= user.getFullName() %></a>
+
 			<c:if test="<%= themeDisplay.isShowSignOutIcon() %>">
 				<span class="sign-out">(<a href="<%= themeDisplay.getURLSignOut() %>"><liferay-ui:message key="sign-out" /></a>)</span>
 			</c:if>
 		</li>
-
 		<li class="exp-toolbar-separator">
 			<span></span>
 		</li>
 
-		<c:if test="<%= (layout != null) && (!group.hasStagingGroup() || group.isStagingGroup()) && LayoutPermissionUtil.contains(permissionChecker, layout, ActionKeys.UPDATE) %>">
-
+		<c:if test="<%= (group != null) && (!group.hasStagingGroup() || group.isStagingGroup()) && LayoutPermissionUtil.contains(permissionChecker, layout, ActionKeys.UPDATE) %>">
 			<li class="add-content has-submenu" id="<portlet:namespace />addContent">
 				<a class="menu-button" href="javascript: ;">
 					<span>
@@ -93,6 +74,7 @@ if (layout != null) {
 							</li>
 							<li class="last common-items">
 								<h4><liferay-ui:message key="common-items" /></h4>
+
 								<ul>
 									<li class="first">
 										<a href="javascript: ;" class="app-shortcut" rel="56">
@@ -159,7 +141,7 @@ if (layout != null) {
 			</li>
 		</c:if>
 
-		<c:if test="<%= selUser.hasMyPlaces() %>">
+		<c:if test="<%= user.hasMyPlaces() %>">
 			<li class="my-places has-submenu" id="<portlet:namespace />myPlaces">
 				<a class="menu-button" href="javascript: ;">
 					<span>
@@ -196,8 +178,9 @@ if (layout != null) {
 
 	<div class="dockbar-messages" id="<portlet:namespace />dockbarMessages">
 		<div class="exp-header"></div>
-		<div class="exp-body">
-		</div>
+
+		<div class="exp-body"></div>
+
 		<div class="exp-footer"></div>
 	</div>
 </div>
