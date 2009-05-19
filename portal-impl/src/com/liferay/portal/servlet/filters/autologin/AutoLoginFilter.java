@@ -33,7 +33,6 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.AutoLogin;
-import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.pwd.PwdEncryptor;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.servlet.filters.BasePortalFilter;
@@ -239,9 +238,7 @@ public class AutoLoginFilter extends BasePortalFilter {
 
 					String currentURL = PortalUtil.getCurrentURL(request);
 
-					if (currentURL.contains(_PATH_CHAT_LATEST) &&
-						e instanceof PrincipalException) {
-
+					if (currentURL.endsWith(_PATH_CHAT_LATEST)) {
 						if (_log.isWarnEnabled()) {
 							_log.warn(
 								"Current URL " + currentURL +
