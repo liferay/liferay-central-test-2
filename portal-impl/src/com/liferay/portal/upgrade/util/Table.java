@@ -36,6 +36,7 @@ import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.upgrade.StagnantRowException;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.util.PropsUtil;
@@ -50,6 +51,7 @@ import java.sql.Clob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.sql.Types;
 
@@ -64,6 +66,7 @@ import org.hibernate.usertype.UserType;
  *
  * @author Alexander Chow
  * @author Brian Wing Shun Chan
+ * @author Raymond Augé
  *
  */
 public class Table {
@@ -130,7 +133,24 @@ public class Table {
 			boolean last)
 		throws Exception {
 
-		Object value = getValue(rs, name, type);
+		Object value = null;
+
+		try {
+			value = getValue(rs, name, type);
+		}
+		catch (SQLException se) {
+			if (name.equals("uuid_")) {
+				sb.append(PortalUUIDUtil.generate());
+			}
+
+			sb.append(StringPool.COMMA);
+
+			if (last) {
+				sb.append(StringPool.NEW_LINE);
+			}
+
+			return;
+		}
 
 		appendColumn(sb, value, last);
 	}
