@@ -47,6 +47,7 @@ import com.liferay.portlet.journal.model.impl.JournalArticleImpl;
 import com.liferay.portlet.journal.model.impl.JournalFeedImpl;
 import com.liferay.portlet.journal.model.impl.JournalStructureImpl;
 import com.liferay.portlet.journal.model.impl.JournalTemplateImpl;
+import com.liferay.portlet.messageboards.NoSuchDiscussionException;
 import com.liferay.portlet.messageboards.model.MBDiscussion;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBThread;
@@ -543,8 +544,14 @@ public class PortletDataContextImpl implements PortletDataContext {
 			return;
 		}
 
-		MBDiscussion discussion = MBDiscussionLocalServiceUtil.getDiscussion(
-			classObj.getName(), newClassPK);
+		MBDiscussion discussion = null;
+
+		try {
+			discussion = MBDiscussionLocalServiceUtil.getDiscussion(
+				classObj.getName(), newClassPK);
+		}
+		catch (NoSuchDiscussionException nsde) {
+		}
 
 		for (MBMessage message : messages) {
 			long userId = getUserId(message.getUserUuid());
