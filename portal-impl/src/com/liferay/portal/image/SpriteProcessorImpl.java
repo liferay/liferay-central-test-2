@@ -45,6 +45,7 @@ import java.awt.image.RenderedImage;
 import java.awt.image.SampleModel;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
@@ -60,7 +61,6 @@ import javax.media.jai.LookupTableJAI;
 import javax.media.jai.PlanarImage;
 import javax.media.jai.RasterFactory;
 import javax.media.jai.TiledImage;
-import javax.media.jai.operator.FileLoadDescriptor;
 import javax.media.jai.operator.LookupDescriptor;
 import javax.media.jai.operator.MosaicDescriptor;
 import javax.media.jai.operator.TranslateDescriptor;
@@ -143,9 +143,10 @@ public class SpriteProcessorImpl implements SpriteProcessor {
 				continue;
 			}
 
+			FileInputStream fis = new FileInputStream(file);
+
 			try {
-				RenderedImage renderedImage = FileLoadDescriptor.create(
-					file.toString(), null, null, null);
+				RenderedImage renderedImage = ImageIO.read(fis);
 
 				int height = renderedImage.getHeight();
 				int width = renderedImage.getWidth();
@@ -180,6 +181,9 @@ public class SpriteProcessorImpl implements SpriteProcessor {
 				if (_log.isDebugEnabled()) {
 					_log.debug(e, e);
 				}
+			}
+			finally {
+				fis.close();
 			}
 		}
 
@@ -218,8 +222,14 @@ public class SpriteProcessorImpl implements SpriteProcessor {
 				dir.toString() + StringPool.SLASH +
 					StringUtil.replace(spriteFileName, ".png", ".gif"));
 
-			ImageProcessorUtil.encodeGIF(
-				renderedImage, new FileOutputStream(spriteFile));
+			FileOutputStream fos = new FileOutputStream(spriteFile);
+
+			try {
+				ImageProcessorUtil.encodeGIF(renderedImage, fos);
+			}
+			finally {
+				fos.close();
+			}
 
 			if (lastModified > 0) {
 				spriteFile.setLastModified(lastModified);
@@ -380,7 +390,7 @@ public class SpriteProcessorImpl implements SpriteProcessor {
 		int offset = 0;
 
 		for (int h = 0; h < height; h++) {
-			 for (int w = 0; w < width; w++) {
+			for (int w = 0; w < width; w++) {
 				offset = (h * width * numOfBands) + (w * numOfBands);
 
 				System.out.print("[" + w + ", " + h + "] = ");
