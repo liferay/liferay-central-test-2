@@ -129,10 +129,6 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 		long groupId = counterLocalService.increment();
 
-		friendlyURL = getFriendlyURL(
-			user.getCompanyId(), groupId, classNameId, classPK, friendlyName,
-			friendlyURL);
-
 		long groupClassNameId = PortalUtil.getClassNameId(Group.class);
 
 		if ((classNameId <= 0) || className.equals(Group.class.getName())) {
@@ -144,6 +140,10 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		else {
 			name = String.valueOf(classPK);
 		}
+
+		friendlyURL = getFriendlyURL(
+			user.getCompanyId(), groupId, classNameId, classPK, friendlyName,
+			friendlyURL);
 
 		validateFriendlyURL(
 			user.getCompanyId(), groupId, classNameId, classPK, friendlyURL);
