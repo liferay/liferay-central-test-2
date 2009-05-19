@@ -640,11 +640,14 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 	public void importICal4j(long userId, long groupId, File file)
 		throws PortalException, SystemException {
 
+		FileReader fr = null;
+
 		try {
 			CalendarBuilder builder = new CalendarBuilder();
 
-			net.fortuna.ical4j.model.Calendar calendar = builder.build(
-				new FileReader(file));
+			fr = new FileReader(file);
+
+			net.fortuna.ical4j.model.Calendar calendar = builder.build(fr);
 
 			Iterator<VEvent> itr = calendar.getComponents(
 				Component.VEVENT).iterator();
@@ -660,6 +663,14 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		}
 		catch (ParserException pe) {
 			throw new SystemException(pe.getMessage());
+		}
+		finally {
+			try {
+				fr.close();
+			}
+			catch (IOException ioe) {
+				_log.error(ioe);
+			}
 		}
 	}
 

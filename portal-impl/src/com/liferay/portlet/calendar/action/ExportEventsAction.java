@@ -25,6 +25,7 @@ package com.liferay.portlet.calendar.action;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
+import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.struts.PortletAction;
@@ -64,6 +65,7 @@ public class ExportEventsAction extends PortletAction {
 		throws Exception {
 
 		InputStream is = null;
+		File file = null;
 
 		try {
 			ThemeDisplay themeDisplay =
@@ -73,8 +75,6 @@ public class ExportEventsAction extends PortletAction {
 
 			String exportFileName = ParamUtil.getString(
 				actionRequest, "exportFileName");
-
-			File file = null;
 
 			if (eventId > 0) {
 				file = CalEventServiceUtil.exportEvent(eventId);
@@ -99,6 +99,8 @@ public class ExportEventsAction extends PortletAction {
 		}
 		finally {
 			ServletResponseUtil.cleanUp(is);
+
+			FileUtil.delete(file);
 		}
 	}
 
