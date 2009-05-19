@@ -1185,7 +1185,7 @@ public class PortalImpl implements Portal {
 				!layoutActualURL.contains(StringPool.QUESTION)) {
 
 				layoutActualURL =
-					layoutActualURL + StringPool.QUESTION + queryString;
+					layoutActualURL + StringPool.AMPERSAND + queryString;
 			}
 		}
 
