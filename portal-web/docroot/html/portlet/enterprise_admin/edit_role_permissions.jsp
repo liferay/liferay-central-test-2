@@ -153,7 +153,7 @@ editPermissionsURL.setParameter("roleId", String.valueOf(role.getRoleId()));
 			var id = selectedGroupIds[i];
 			var name = selectedGroupNames[i];
 
-			groupsHTML += '<span class="ui-scope">' + name + '<a class="ui-scope-delete" href="javascript: <portlet:namespace />removeGroup(' + i + ', \'' + target + '\' );"><span>x</span></a></span>';
+			groupsHTML += '<span class="permission-scope">' + name + '<a class="permission-scope-delete" href="javascript: <portlet:namespace />removeGroup(' + i + ', \'' + target + '\' );"><span>x</span></a></span>';
 		}
 
 		if (groupsHTML == '') {

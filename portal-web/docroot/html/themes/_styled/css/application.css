@@ -1114,65 +1114,6 @@ li.exp-autocomplete-highlight strong {
 	background-repeat: no-repeat;
 }
 
-/* ---------- Scopes ---------- */
-
-.ui-scopes {
-	display: block;
-}
-
-.ui-scopes:after {
-	clear: both;
-	content: ".";
-	display: block;
-	height: 0;
-	visibility: hidden;
-}
-
-.ie .ui-scopes {
-	height: 1%;
-}
-
-.ui-scopes.empty {
-	display: none;
-}
-
-.ui-scopes .ui-scope {
-	background: #DFF4FF;
-	border: 1px solid #A7CEDF;
-	float: left;
-	margin-right: 3px;
-	padding: 3px 20px 3px 6px;
-	padding-right: 20px;
-	position: relative;
-}
-
-.ui-scopes .ui-scope:hover {
-	border-color: #AEB8BC;
-}
-
-.ui-scopes .ui-scope-delete {
-	display: block;
-	padding: 6px;
-	position: absolute;
-	right: 0;
-	top: 3px;
-}
-
-.ui-scopes .ui-scope-delete span {
-	background: url(../images/application/close_small.png) no-repeat 0 0;
-	cursor: pointer;
-	display: block;
-	font-size: 0;
-	height: 7px;
-	text-indent: -9999em;
-	width: 7px;
-}
-
-.ui-scopes .ui-scope-delete:hover span {
-	background-position: 0 100%;
-}
-
-
 /* ---------- Tags ---------- */
 
 .ui-tags {

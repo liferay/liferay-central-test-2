@@ -318,6 +318,62 @@
 	top: 9px;
 }
 
+.portlet-enterprise-admin .permission-scopes {
+	display: block;
+}
+
+.portlet-enterprise-admin .permission-scopes:after {
+	clear: both;
+	content: ".";
+	display: block;
+	height: 0;
+	visibility: hidden;
+}
+
+.ie .portlet-enterprise-admin .permission-scopes {
+	height: 1%;
+}
+
+.portlet-enterprise-admin .permission-scopes.empty {
+	display: none;
+}
+
+.portlet-enterprise-admin .permission-scopes .permission-scope {
+	background: #DFF4FF;
+	border: 1px solid #A7CEDF;
+	float: left;
+	margin-right: 3px;
+	padding: 3px 20px 3px 6px;
+	padding-right: 20px;
+	position: relative;
+}
+
+.portlet-enterprise-admin .permission-scopes .permission-scope:hover {
+	border-color: #AEB8BC;
+}
+
+.portlet-enterprise-admin .permission-scopes .permission-scope-delete {
+	display: block;
+	padding: 6px;
+	position: absolute;
+	right: 0;
+	top: 3px;
+}
+
+.portlet-enterprise-admin .permission-scopes .permission-scope-delete span {
+	background: url(<%= themeImagesPath %>/application/close_small.png) no-repeat 0 0;
+	cursor: pointer;
+	display: block;
+	font-size: 0;
+	height: 7px;
+	text-indent: -9999em;
+	width: 7px;
+}
+
+.portlet-enterprise-admin .permission-scopes .permission-scope-delete:hover span {
+	background-position: 0 100%;
+}
+
 .lfr-floating-container .exp-ctrl-holder input, .lfr-floating-container .exp-ctrl-holder img {
 	vertical-align: top;
 }

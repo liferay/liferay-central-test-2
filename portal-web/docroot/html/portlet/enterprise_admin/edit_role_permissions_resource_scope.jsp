@@ -41,15 +41,15 @@ List groupNames = (List)objArray[8];
 <input name="<portlet:namespace />groupNames<%= target %>" type="hidden" value="<%= StringUtil.merge(groupNames, "@@") %>" />
 
 <div id="<portlet:namespace />groupDiv<%= target %>">
-	<span class="ui-scopes" id="<portlet:namespace />groupHTML<%= target %>">
+	<span class="permission-scopes" id="<portlet:namespace />groupHTML<%= target %>">
 
 		<%
 		if (supportsFilterByGroup && (groups.size() > 0)) {
-			for (int i = 0; j < groups.size(); i++) {
+			for (int i = 0; i < groups.size(); i++) {
 				Group group = (Group)groups.get(i);
 		%>
 
-				<span class="ui-scope"><%= group.getName() %><a class="ui-scope-delete" href="javascript:<portlet:namespace />removeGroup(<%= i %>, '<%= target %>');"><span>x</span></a></span>
+				<span class="permission-scope"><%= group.getName() %><a class="permission-scope-delete" href="javascript:<portlet:namespace />removeGroup(<%= i %>, '<%= target %>');"><span>x</span></a></span>
 
 		<%
 			}
