@@ -12,7 +12,9 @@
 
 <body class="$css_class">
 
-$theme.include($top_messages_include)
+#if($is_signed_in)
+	#dockbar()
+#end
 
 <div id="wrapper">
 	<div id="banner">
@@ -24,7 +26,9 @@ $theme.include($top_messages_include)
 			</span>
 		</h1>
 
-		#parse ("$full_templates_path/dock.vm")
+		#if(!$is_signed_in)
+			<a class="sign-in" href="$sign_in_url" id="liferaySignInLink">$sign_in_text</a>
+		#end
 
 		#if ($update_available_url)
 			<div class="popup-alert-notice">

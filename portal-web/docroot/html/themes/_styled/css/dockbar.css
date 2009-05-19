@@ -1,0 +1,328 @@
+.dockbar {
+	background: #f1f8ff;
+	border-bottom: 1px solid #9fccff;
+	font-size: 13px;
+	padding: 5px;
+	z-index: 300;
+}
+
+.dockbar .user-avatar .sign-out {
+	font-size: 0.8em;
+}
+
+.dockbar ul {
+	margin: 0;
+	overflow: hidden;
+	padding: 0;
+}
+
+.dockbar li li {
+	margin-left: 0;
+}
+
+html > .lfr-dockbar-pinned {
+	padding-top: 3.45em;
+}
+
+.lfr-dockbar-pinned .dockbar {
+	left: 0;
+	position: fixed;
+	top: 0;
+	width: 100%;
+}
+
+.dockbar .pin-dockbar {
+	margin-left: 0;
+}
+
+.ie6 .dockbar .pin-dockbar {
+	display: none;
+}
+
+.pin-dockbar img {
+	background: url(../images/dockbar/pin.png) no-repeat 0 0;
+	height: 27px;
+	vertical-align: middle;
+	width: 27px;
+}
+
+.lfr-dockbar-pinned .pin-dockbar img {
+	background-image: url(../images/dockbar/unpin.png);
+}
+
+.dockbar .user-avatar img {
+	vertical-align: middle;
+	width: 25px;
+}
+
+.dockbar .menu-container {
+	background: #fff;
+	position: absolute;
+	visibility: hidden;
+	width: auto;
+}
+
+.exp-toolbar li {
+	display: inline-block;
+	margin: 0;
+	margin-left: 10px;
+	padding: 0;
+}
+
+.ie6 .exp-toolbar li, .ie7 .exp-toolbar li {
+	display: inline;
+}
+
+.exp-toolbar .has-submenu.selected {
+	background-color: #fff;
+}
+
+.exp-toolbar-separator {
+	background: url(../images/dockbar/separator.png) no-repeat 100% 50%;
+	border-width: 0;
+	cursor: default;
+	font-size: 1px;
+	height:16px;
+	margin:0 2px;
+	overflow:hidden;
+	vertical-align: middle;
+	width:4px;
+}
+
+.exp-underlay {
+	background: #eee url(../images/common/message_panel_shadow.png) repeat-x 0 0;
+	border-width: 0 1px 1px;
+	margin-top: 6px;
+	padding-top: 20px;
+}
+
+.exp-underlay .exp-header {
+	background: none;
+	color: #333;
+	cursor: default;
+	margin-bottom: 10px;
+	margin-right: 20px;
+	margin-top: -13px;
+	padding: 0;
+}
+
+.exp-underlay .container-close {
+	right: 5px;
+	top: 5px;
+}
+
+.exp-underlay .exp-body {
+	padding: 0;
+}
+
+.exp-underlay .portal-add-content {
+	background-color: transparent;
+	font-size: 11px;
+}
+
+.exp-underlay .lfr-portlet-item {
+	border-width: 0;
+}
+
+.add-application .exp-underlay {
+	padding: 10px;
+}
+
+.manage-layouts .exp-underlay {
+	margin-left: 50px;
+}
+
+.dockbar .menu-container {
+	background: #fff url(../images/forms/button.png) repeat-x scroll 0 100%;
+	border: 1px solid;
+	border-color: #DEDEDE #BFBFBF #BFBFBF #DEDEDE;
+}
+
+.dockbar .menu-container h4 {
+	font-size: 1em;
+	font-weight: bold;
+	margin: 5px 5px 0;
+}
+
+.dockbar .menu-container ul {
+	min-width: 150px;
+}
+
+.dockbar .menu-container li {
+	border-bottom: 1px solid #DEDEDE;
+	display: block;
+	margin: 0;
+	padding: 2px;
+}
+
+.dockbar .menu-container li.last {
+	border-bottom-width: 0;
+}
+
+.dockbar .menu-container li ul {
+	display: block;
+	min-width: 0;
+	padding: 5px;
+}
+
+.dockbar .menu-container li a {
+	display: block;
+	padding: 2px 5px;
+	text-decoration: none;
+}
+
+.dockbar .menu-container li a:hover {
+	background: #828F95;
+	color: #fff;
+}
+
+.dockbar .my-places-container {
+	max-width: 350px;
+}
+
+.ie6 .dockbar .my-places-container {
+	width: 350px;
+}
+
+.my-places-container ul, .my-places-container li {
+	display: block;
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+.dockbar .my-places-container h3 {
+	float: left;
+	font-size: 1em;
+	margin-right: 20px;
+	margin: 0;
+	padding: 0;
+}
+
+.dockbar .my-places-container h3 a {
+	color: #000;
+	text-decoration: none;
+}
+
+.dockbar .my-places-container li {
+	overflow: hidden;
+	padding: 2px 5px;
+}
+
+.dockbar .my-places-container li.current-community {
+	background: #A8D6ED url(../images/arrows/01_right.png) no-repeat scroll 2px 30%;
+	padding-left: 20px;
+}
+
+.dockbar .my-places-container li:hover {
+	background: #eee;
+}
+
+.dockbar .my-places-container .page-count {
+	display: none;
+}
+
+.dockbar .my-places-container li ul {
+	background: transparent;
+	border-width: 0;
+	float: right;
+	padding: 0;
+	width: auto;
+}
+
+.dockbar .my-places-container li li {
+	border-bottom-width: 0;
+	display: inline-block;
+	float: none;
+	overflow: hidden;
+	padding: 0;
+}
+
+.ie6 .dockbar .my-places-container li li, .ie7 .dockbar .my-places-container li li {
+	display: inline;
+}
+
+.dockbar .my-places-container li ul a {
+	display: inline;
+	margin: 0;
+}
+
+.dockbar .my-places-container li li a.add-page {
+	display: none;
+	float: none;
+}
+
+.dockbar .my-places-container li li.public {
+	margin-left: 20px;
+}
+
+.dockbar .my-places-container .search-field {
+	font-size: 1.1em;
+	margin-bottom: 5px;
+	width: 98%;
+}
+
+.dockbar .toggle-controls a {
+	background: url(../images/dockbar/checked.png) no-repeat 0 50%;
+	padding-left: 20px;
+}
+
+.controls-hidden .toggle-controls a {
+	background-image: url(../images/dockbar/unchecked.png);
+}
+
+.dockbar .control-panel {
+	background: url(../images/dockbar/control_panel.png) no-repeat 0 50%;
+	padding-left: 20px;
+}
+
+.dockbar .has-submenu .menu-button {
+	background: url(../images/arrows/05_down.png) no-repeat 100% 90%;
+	padding-right: 13px;
+	text-decoration: none;
+}
+
+.dockbar .has-submenu .menu-button span {
+	background: url() no-repeat 0 50%;
+	padding-left: 20px;
+}
+
+.dockbar .add-content .menu-button span {
+	background-image: url(../images/dockbar/add.png);
+}
+
+.dockbar .manage-content .menu-button span {
+	background-image: url(../images/dockbar/settings.png);
+}
+
+.dockbar .my-places .menu-button span {
+	background-image: url(../images/dockbar/places.png);
+}
+
+.dockbar .staging-options .menu-button span {
+	background-image: url(../images/dockbar/staging.png);
+}
+
+.dockbar-messages-container {
+	left: 50%;
+	margin-left: -150px;
+}
+
+.dockbar-messages {
+	display: none;
+	width: 300px;
+}
+
+.showing-messages .dockbar-messages {
+	display: block;
+}
+
+.multiple-messages .dockbar-message {
+	border-top: 1px solid #ccc;
+	padding: 5px 0;
+}
+
+.multiple-messages .first {
+	border-top-width: 0;
+	padding-top: 0;
+}

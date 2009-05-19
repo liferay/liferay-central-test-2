@@ -31,6 +31,15 @@
 			}
 		},
 
+		refresh: function() {
+			var instance = this;
+
+			if (instance._ajaxConfig) {
+				instance.setBody('<div class="loading-animation" />');
+				instance._loadBody();
+			}
+		},
+
 		_loadBody: function() {
 			var instance = this;
 
@@ -99,9 +108,9 @@
 	Expanse.extend(
 		Widget.Module,
 		{
-		    CSS_BODY: 'exp-body',
-		    CSS_FOOTER: 'exp-footer',
-		    CSS_HEADER: 'exp-header',
+			CSS_BODY: 'exp-body',
+			CSS_FOOTER: 'exp-footer',
+			CSS_HEADER: 'exp-header',
 			CSS_MODULE: 'exp-module'
 		}
 	);
@@ -144,6 +153,22 @@
 	);
 
 	var IE_SYNC = (Liferay.Browser.isIe() && Liferay.Browser.getMajorVersion() < 7);
+
+	/**
+	* Popup is a subclass of Panel that behaves similarly, except that it has a richer
+	* set of options. It automatically renders itself into the page (though this is configurable),
+	* automatically registers itself with Expanse.Popup.Manager, and allows itself to be automatically
+	* destroyed when it is closed.
+	* 
+	* Example:
+	* <br /><a href="panel_example.html">Using the Expanse.Popup class</a>.
+	* 
+	* @namespace Expanse
+	* @class Popup
+	* @extends Expanse.Panel
+	* @constructor
+	* @param {Object} options The options that configure the instance of the Popup
+	*/
 
 	Expanse.Popup = Expanse.Panel.extend(
 		{
@@ -241,6 +266,14 @@
 				return instance;
 			},
 
+			/**
+			* Closes the current popup. If it has been configured to be destroyed when
+			* it's closed, then the destroy method will be called, otherwise it
+			* will just be hidden.
+			* 
+			* @method closePopup
+			*/
+
 			closePopup: function() {
 				var instance = this;
 
@@ -332,11 +365,29 @@
 		}
 	);
 
+	/**
+	* The OverlayManager that keeps track of the Popups added to the page
+	* 
+	* @property Expanse.Popup.Manager
+	* @static
+	* @final
+	* @type Object
+	*/
+
 	Expanse.Popup.Manager = new Expanse.OverlayManager();
 
 	Expanse.extend(
 		Expanse.Popup,
 		{
+
+			/**
+			* Closes any instance of a popup
+			* 
+			* @method Expanse.Popup.close
+			* @static
+			* @param {HTMLElement} el The representing the Popup
+			*/
+
 			close: function(el) {
 				var instance = this;
 
@@ -359,6 +410,16 @@
 					}
 				}
 			},
+
+			/**
+			* Updates the body of any Popup with the
+			* result of an ajax request.
+			* 
+			* @method Expanse.Popup.update
+			* @static
+			* @param {String} id The id of the popup
+			* @param {String} url The url to load via ajax
+			*/
 
 			update: function(id, url) {
 				var instance = this;

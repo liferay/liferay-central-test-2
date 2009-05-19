@@ -394,6 +394,10 @@
 			<forward name="portlet.document_library.view" path="portlet.document_library.view" />
 		</action>
 
+		<!-- Dockbar -->
+
+		<action path="/dockbar/view" forward="portlet.dockbar.view" />
+
 		<!-- Enterprise Admin -->
 
 		<action path="/enterprise_admin/edit_company" type="com.liferay.portlet.enterpriseadmin.action.EditCompanyAction">

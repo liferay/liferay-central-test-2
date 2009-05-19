@@ -41,11 +41,11 @@
 					el = Expanse.get(el)[0];
 				}
 
-				if (el.jquery && el.length) {
+				if (el && el.jquery && el.length) {
 					el = el[0];
 				}
 
-				if (el.tagName) {
+				if (el && el.tagName) {
 					element = el;
 				}
 			}

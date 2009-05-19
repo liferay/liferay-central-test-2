@@ -1,0 +1,203 @@
+<%
+/**
+ * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+%>
+
+<%@ include file="/html/portlet/dockbar/init.jsp" %>
+
+<%
+User selUser = themeDisplay.getUser();
+
+String userImage = themeDisplay.getPathImage() + "/user_";
+
+long portraitId = selUser.getPortraitId();
+
+if (selUser.isFemale()) {
+	userImage += "female";
+}
+else {
+	userImage += "male";
+}
+
+userImage += "_portrait?img_id=" + portraitId + "&amp;t=" + ImageServletTokenUtil.getToken(portraitId);
+userImage = HtmlUtil.escape(userImage);
+
+List<User> userList = UserLocalServiceUtil.getUsers(0, 10);
+
+Group group = null;
+
+if (layout != null) {
+	group = layout.getGroup();
+}
+%>
+
+<div class="dockbar" id="dockbar" rel="<portlet:namespace />">
+	<ul class="exp-toolbar">
+		<li class="pin-dockbar">
+			<a href="javascript: ;"><img src="<%= themeDisplay.getPathThemeImages() %>/spacer.png" /></a>
+		</li>
+		<li class="user-avatar">
+			<a href="<%= HtmlUtil.escape(themeDisplay.getURLMyAccount().toString()) %>"><img alt="<%= selUser.getFullName() %>" src="<%= userImage %>" /></a> <a href="<%= HtmlUtil.escape(themeDisplay.getURLMyAccount().toString()) %>"><%= selUser.getFullName() %></a>
+			<c:if test="<%= themeDisplay.isShowSignOutIcon() %>">
+				<span class="sign-out">(<a href="<%= themeDisplay.getURLSignOut() %>"><liferay-ui:message key="sign-out" /></a>)</span>
+			</c:if>
+		</li>
+
+		<li class="exp-toolbar-separator">
+			<span></span>
+		</li>
+
+		<c:if test="<%= (layout != null) && (!group.hasStagingGroup() || group.isStagingGroup()) && LayoutPermissionUtil.contains(permissionChecker, layout, ActionKeys.UPDATE) %>">
+
+			<li class="add-content has-submenu" id="<portlet:namespace />addContent">
+				<a class="menu-button" href="javascript: ;">
+					<span>
+						<liferay-ui:message key="add" />
+					</span>
+				</a>
+
+				<div class="add-content-container menu-container" id="<portlet:namespace />addContentContainer">
+					<ul>
+						<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, scopeGroupId, ActionKeys.MANAGE_LAYOUTS) %>">
+							<li class="first add-page">
+								<a href="javascript: ;" id="addPage">
+									<liferay-ui:message key="page" />
+								</a>
+							</li>
+						</c:if>
+
+						<c:if test="<%= !themeDisplay.isStateMaximized() %>">
+							<li class="add-application">
+								<a href="javascript: ;" id="<portlet:namespace />addApplication">
+									<liferay-ui:message key="application" />
+								</a>
+							</li>
+							<li class="last common-items">
+								<h4><liferay-ui:message key="common-items" /></h4>
+								<ul>
+									<li class="first">
+										<a href="javascript: ;" class="app-shortcut" rel="56">
+											<%= PortalUtil.getPortletTitle("56", themeDisplay.getCompanyId(), locale) %>
+										</a>
+									</li>
+									<li>
+										<a href="javascript: ;" class="app-shortcut" rel="73">
+											<%= PortalUtil.getPortletTitle("73", themeDisplay.getCompanyId(), locale) %>
+										</a>
+									</li>
+									<li>
+										<a href="javascript: ;" class="app-shortcut" rel="71">
+											<%= PortalUtil.getPortletTitle("71", themeDisplay.getCompanyId(), locale) %>
+										</a>
+									</li>
+									<li class="last">
+										<a href="javascript: ;" class="app-shortcut" rel="85">
+											<%= PortalUtil.getPortletTitle("85", themeDisplay.getCompanyId(), locale) %>
+										</a>
+									</li>
+								</ul>
+							</li>
+						</c:if>
+					</ul>
+				</div>
+			</li>
+		</c:if>
+
+		<li class="manage-content has-submenu" id="<portlet:namespace />manageContent">
+			<a class="menu-button" href="javascript: ;">
+				<span>
+					<liferay-ui:message key="settings" />
+				</span>
+			</a>
+
+			<div class="manage-content-container menu-container" id="<portlet:namespace />manageContentContainer">
+				<ul>
+					<li class="first">
+						<a href="<%= HtmlUtil.escape(themeDisplay.getURLPageSettings().toString()) %>">
+							<liferay-ui:message key="manage-pages" />
+						</a>
+					</li>
+					<li class="last">
+						<a href="javascript: ;" id="pageTemplate">
+							<liferay-ui:message key="layout" />
+						</a>
+					</li>
+				</ul>
+			</div>
+		</li>
+
+		<c:if test="<%= themeDisplay.isShowStagingIcon() %>">
+			<li class="staging-options has-submenu" id="<portlet:namespace />staging">
+				<a class="menu-button" href="javascript: ;">
+					<span>
+						<liferay-ui:message key="staging" />
+					</span>
+				</a>
+
+				<div class="staging-container menu-container" id="<portlet:namespace />stagingContainer">
+					<liferay-ui:staging />
+				</div>
+			</li>
+		</c:if>
+
+		<c:if test="<%= selUser.hasMyPlaces() %>">
+			<li class="my-places has-submenu" id="<portlet:namespace />myPlaces">
+				<a class="menu-button" href="javascript: ;">
+					<span>
+						<liferay-ui:message key="go-to" />
+					</span>
+				</a>
+
+				<div class="my-places-container menu-container" id="<portlet:namespace />myPlacesContainer">
+					<liferay-ui:my-places />
+				</div>
+			</li>
+		</c:if>
+
+		<li class="exp-toolbar-separator">
+			<span></span>
+		</li>
+
+		<c:if test="<%= themeDisplay.isShowControlPanelIcon() %>">
+			<li class="control-panel" id="<portlet:namespace />controlPanel">
+				<a href="<%= themeDisplay.getURLControlPanel() %>">
+					<liferay-ui:message key="control-panel" />
+				</a>
+			</li>
+		</c:if>
+
+		<c:if test="<%= themeDisplay.isSignedIn() %>">
+			<li class="toggle-controls" id="<portlet:namespace />toggleControls">
+				<a href="javascript: ;">
+					<liferay-ui:message key="toggle-edit-controls" />
+				</a>
+			</li>
+		</c:if>
+	</ul>
+
+	<div class="dockbar-messages" id="<portlet:namespace />dockbarMessages">
+		<div class="exp-header"></div>
+		<div class="exp-body">
+		</div>
+		<div class="exp-footer"></div>
+	</div>
+</div>

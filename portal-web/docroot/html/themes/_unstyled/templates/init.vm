@@ -13,15 +13,22 @@
 
 	#if ($page_group.isStagingGroup())
 		#set ($css_class = $css_class + " staging")
+	#elseif ($theme_display.isShowStagingIcon() && $page_group.hasStagingGroup())
+		#set ($css_class = $css_class + " live-view")
 	#end
 #end
 
 #set ($liferay_toggle_controls = $sessionClicks.get($request, "liferay_toggle_controls", "visible"))
+#set ($liferay_dockbar_pinned = $sessionClicks.get($request, "liferay_dockbar_pinned", ""))
 
 #if ($liferay_toggle_controls == "visible")
 	#set ($css_class = $css_class + " controls-visible")
 #else
 	#set ($css_class = $css_class + " controls-hidden")
+#end
+
+#if($liferay_dockbar_pinned == "true")
+	#set ($css_class = $css_class + " lfr-dockbar-pinned")
 #end
 
 #if ($layoutTypePortlet.hasStateMax())

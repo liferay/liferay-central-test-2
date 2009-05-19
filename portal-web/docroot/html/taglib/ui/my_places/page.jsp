@@ -190,7 +190,7 @@ List<Group> myPlaces = user.getMyPlaces(max);
 
 				<li class="<%= selectedCommunity ? "current-community" : "" %>">
 					<h3>
-						<a href="javascript: ;">
+						<span>
 							<c:choose>
 								<c:when test="<%= organizationCommunity %>">
 									<%= HtmlUtil.escape(organization.getName()) %>
@@ -202,7 +202,7 @@ List<Group> myPlaces = user.getMyPlaces(max);
 									<%= myPlace.getName() %>
 								</c:otherwise>
 							</c:choose>
-						</a>
+						</span>
 					</h3>
 
 					<ul>
@@ -230,7 +230,7 @@ List<Group> myPlaces = user.getMyPlaces(max);
 									onclick="Liferay.Util.forcePost(this); return false;"
 								</c:if>
 
-								><liferay-ui:message key="public-pages" /> <span class="page-count">(<%= publicLayoutsPageCount %>)</span></a>
+								><liferay-ui:message key="public" /> <span class="page-count">(<%= publicLayoutsPageCount %>)</span></a>
 
 								<c:if test="<%= publicAddPageHREF != null %>">
 									<a class="add-page" href="<%= HtmlUtil.escape(publicAddPageHREF) %>" onclick="Liferay.Util.forcePost(this); return false;"><liferay-ui:message key="manage-pages" /></a>
@@ -261,7 +261,7 @@ List<Group> myPlaces = user.getMyPlaces(max);
 									onclick="Liferay.Util.forcePost(this); return false;"
 								</c:if>
 
-								><liferay-ui:message key="private-pages" /> <span class="page-count">(<%= privateLayoutsPageCount %>)</span></a>
+								><liferay-ui:message key="private" /> <span class="page-count">(<%= privateLayoutsPageCount %>)</span></a>
 
 								<c:if test="<%= privateAddPageHREF != null %>">
 									<a class="add-page" href="<%= HtmlUtil.escape(privateAddPageHREF) %>" onclick="Liferay.Util.forcePost(this); return false;"><liferay-ui:message key="manage-pages" /></a>
@@ -271,7 +271,6 @@ List<Group> myPlaces = user.getMyPlaces(max);
 					</ul>
 				</li>
 			</c:if>
-
 		<%
 		}
 		%>

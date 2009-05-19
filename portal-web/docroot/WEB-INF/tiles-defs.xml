@@ -273,6 +273,10 @@
 		<put name="portlet_content" value="/portlet/directory/view.jsp" />
 	</definition>
 
+	<!-- Dockbar -->
+
+	<definition name="portlet.dockbar.view" path="/portlet/dockbar/view.jsp" />
+
 	<!-- Document Library -->
 
 	<definition name="portlet.document_library" extends="portlet" />

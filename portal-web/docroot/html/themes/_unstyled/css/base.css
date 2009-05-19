@@ -26,9 +26,6 @@ q:before, q:after {
 abbr, acronym {
 }
 
-body {
-}
-
 html {
 }
 
@@ -41,10 +38,7 @@ body.portal-popup {
 body.portal-iframe {
 }
 
-table {
-}
-
-abbr, acronym {
+body.html-editor {
 }
 
 blockquote, ul, ol, dl {
@@ -124,7 +118,10 @@ code, pre {
 
 /* ---------- Staging area ---------- */
 
-body.staging {
+body.staging, body.live-view {
+}
+
+body.live-view {
 }
 
 .portal-iframe.staging {
@@ -150,6 +147,9 @@ body.staging {
 }
 
 .current-community {
+}
+
+#banner .sign-in {
 }
 
 /* ---------- Alerts and popups ---------- */

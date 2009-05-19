@@ -56,6 +56,12 @@ Liferay.Navigation = new Expanse.Class(
 
 			var pageParents = jQuery(document);
 
+			addBlock.click(
+				function(event) {
+					return false;
+				}
+			);
+
 			var pageBlur = function(internalEvent) {
 				var currentEl = jQuery(internalEvent.target);
 				var liParent = currentEl.parents('ul:eq(0)');
@@ -70,14 +76,16 @@ Liferay.Navigation = new Expanse.Class(
 			cancelPage.click(
 				function(event) {
 					instance._cancelAddingPage(event, addBlock);
-					pageParents.unbind('click.liferay', pageBlur);
+
+					Expanse.getDocument().unbind('click.liferay', pageBlur);
 				}
 			);
 
 			savePage.click(
 				function(event) {
 					instance._savePage(event, this);
-					pageParents.unbind('click.liferay', pageBlur);
+
+					Expanse.getDocument().unbind('click.liferay', pageBlur);
 				}
 			);
 
@@ -92,14 +100,23 @@ Liferay.Navigation = new Expanse.Class(
 					else {
 						return;
 					}
-
-					pageParents.unbind('click.liferay', pageBlur);
 				}
 			);
 		},
 
+		_stopEditing: function(previousName) {
+			var instance = this;
+
+			instance._navBlock.find('.enter-page').remove();
+
+			if (previousName) {
+				previousName.show();
+			}
+		},
+
 		_cancelAddingPage: function(event, obj) {
 			var instance = this;
+
 			obj.remove();
 		},
 
@@ -154,24 +171,35 @@ Liferay.Navigation = new Expanse.Class(
 
 				instance._enterPage =
 					'<div class="enter-page">' +
-					'<input class="lfr-auto-focus" type="text" name="new_page" value="" class="text" />' +
+					'<input class="lfr-auto-focus text" type="text" name="new_page" value="" class="text" />' +
 					'<a class="cancel-page" href="javascript: ;"></a>' +
 					'<a class="save-page" href="javascript: ;">' + Liferay.Language.get('save') + '</a>' +
 					'</div>';
 
 				if (instance._hasPermission) {
-					navList.after(
-						'<div id="add-page">' +
-						'<a href="javascript:;">' +
-						'<span>' + Liferay.Language.get('add-page') + '</span>' +
-						'</a>' +
-						'</div>');
+					var addPageButton = jQuery('#addPage');
 
-					var addPage = navList.parent().find('#add-page a');
+					if (!addPageButton.length) {
+						navList.after(
+							'<div id="add-page">' +
+							'<a href="javascript:;">' +
+							'<span>' + Liferay.Language.get('add-page') + '</span>' +
+							'</a>' +
+							'</div>');
 
-					addPage.click(
+						addPageButton = navList.parent().find('#add-page a');
+					}
+
+					addPageButton.click(
 						function(event) {
+							if (!event.shiftKey) {
+								Liferay.Dockbar.MenuManager.hideAll();
+								Liferay.Dockbar.UnderlayManager.hideAll();
+							}
+
 							instance._addPage(event, this);
+
+							return false;
 						}
 					);
 				}
@@ -342,7 +370,7 @@ Liferay.Navigation = new Expanse.Class(
 		_removePage: function(obj) {
 			var instance = this;
 
-			var tab = jQuery(obj).parents('li');
+			var tab = jQuery(obj).parents('li:first');
 			var tabText = tab.find('a span').html();
 
 			if (confirm(Liferay.Language.get('are-you-sure-you-want-to-delete-this-page'))) {

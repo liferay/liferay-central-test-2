@@ -166,8 +166,12 @@ code, pre {
 
 /* ---------- Staging area ---------- */
 
-body.staging {
+body.staging, body.live-view {
 	border: 10px solid #F00;
+}
+
+body.live-view {
+	border-color: #FC0;
 }
 
 .portal-iframe.staging {
@@ -197,6 +201,15 @@ body.staging {
 
 .current-community {
 	display: none;
+}
+
+#banner .sign-in {
+	background: url(../images/common/key.png) no-repeat 3px 50%;
+	color: #fff;
+	float: right;
+	margin-right: 5%;
+	margin-top: 35px;
+	padding: 5px 5px 5px 25px;
 }
 
 /* ---------- Alerts and popups ---------- */

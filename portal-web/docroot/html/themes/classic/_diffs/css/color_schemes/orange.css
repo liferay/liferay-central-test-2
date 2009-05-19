@@ -198,47 +198,6 @@
 	background-image: url(../../images/color_schemes/orange/navigation/bullet_selected.png) ;
 }
 
-/* ---------- Dock with Javascript ---------- */
-
-.js .orange .interactive-mode {
-	background-color: #090602;
-	background-image: url(../../images/color_schemes/orange/dock/center_bg.png);
-}
-
-.js .orange .interactive-mode h2 {
-	background-image: url(../../images/color_schemes/orange/dock/right_bg.png);
-}
-
-.js .orange .interactive-mode h2 span {
-	background-image: url(../../images/color_schemes/orange/dock/left_bg.png);
-	border-right-color: #4d4033;
-}
-
-.js .orange .interactive-mode li a:hover, .js .orange .interactive-mode .my-places li.current a:hover {
-	background-color: #958782;
-}
-
-.js .orange .interactive-mode .my-places li.current-community {
-	background-color: #ddd6d3;
-}
-
-.js .orange .interactive-mode .my-places li.current a {
-	background-color: #ffe8df;
-}
-
-.js .orange #navigation .enter-page {
-	background-color: #29211e;
-}
-
-.js .orange #add-page {
-	background-color: #090602;
-	border-color: #493830;
-}
-
-.js .orange .lfr-flyout.has-children {
-	background-image: url(../../images/color_schemes/orange/arrows/04_left.png);
-}
-
 /* This CSS sets the default styles for portlets. */
 
 /* ---------- Portlet wrapper and icons ---------- */
