@@ -22,15 +22,114 @@
 
 package com.liferay.portlet.asset.service.impl;
 
+import com.liferay.portal.PortalException;
+import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.ListUtil;
+import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.security.permission.PermissionChecker;
+import com.liferay.portal.service.ServiceContext;
+import com.liferay.portlet.asset.model.AssetCategoryVocabulary;
 import com.liferay.portlet.asset.service.base.AssetCategoryVocabularyServiceBaseImpl;
+import com.liferay.portlet.asset.service.permission.AssetCategoryVocabularyPermission;
+import com.liferay.portlet.asset.service.permission.AssetPermission;
+
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * <a href="AssetCategoryVocabularyServiceImpl.java.html"><b><i>View Source</i>
  * </b></a>
  *
- * @author Brian Wing Shun Chan
+ * @author Alvaro del Castillo
+ * @author Eduardo Lundgren
+ * @author Jorge Ferrer
  *
  */
 public class AssetCategoryVocabularyServiceImpl
 	extends AssetCategoryVocabularyServiceBaseImpl {
+
+	public AssetCategoryVocabulary addCategoryVocabulary(
+			String name, ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		AssetPermission.check(
+			getPermissionChecker(), serviceContext.getScopeGroupId(),
+			ActionKeys.ADD_VOCABULARY);
+
+		return assetCategoryVocabularyLocalService.addCategoryVocabulary(
+			getUserId(), name, serviceContext);
+	}
+
+	public void deleteCategoryVocabulary(long categoryVocabularyId)
+		throws PortalException, SystemException {
+
+		AssetCategoryVocabularyPermission.check(
+			getPermissionChecker(), categoryVocabularyId, ActionKeys.DELETE);
+
+		assetCategoryVocabularyLocalService.deleteCategoryVocabulary(
+			categoryVocabularyId);
+	}
+
+	public List<AssetCategoryVocabulary> getCompanyCategoryVocabularies(
+			long companyId)
+		throws PortalException, SystemException {
+
+		return getCategoryVocabularies(
+			assetCategoryVocabularyLocalService.getCompanyVocabularies(
+				companyId));
+	}
+
+	public List<AssetCategoryVocabulary> getGroupCategoryVocabularies(
+			long groupId)
+		throws PortalException, SystemException {
+
+		return getCategoryVocabularies(
+			assetCategoryVocabularyLocalService.getGroupCategoryVocabularies(
+				groupId));
+	}
+
+	public AssetCategoryVocabulary getVocabulary(long categoryVocabularyId)
+		throws PortalException, SystemException {
+
+		AssetCategoryVocabularyPermission.check(
+			getPermissionChecker(), categoryVocabularyId, ActionKeys.VIEW);
+
+		return assetCategoryVocabularyLocalService.getCategoryVocabulary(
+			categoryVocabularyId);
+	}
+
+	public AssetCategoryVocabulary updateCategoryVocabulary(
+			long categoryVocabularyId, String name)
+		throws PortalException, SystemException {
+
+		AssetCategoryVocabularyPermission.check(
+			getPermissionChecker(), categoryVocabularyId, ActionKeys.UPDATE);
+
+		return assetCategoryVocabularyLocalService.updateCategoryVocabulary(
+			categoryVocabularyId, name);
+	}
+
+	protected List<AssetCategoryVocabulary> getCategoryVocabularies(
+			List<AssetCategoryVocabulary> vocabularies)
+		throws PortalException {
+
+		PermissionChecker permissionChecker = getPermissionChecker();
+
+		vocabularies = ListUtil.copy(vocabularies);
+
+		Iterator<AssetCategoryVocabulary> itr = vocabularies.iterator();
+
+		while (itr.hasNext()) {
+			AssetCategoryVocabulary vocabulary = itr.next();
+
+			if (!AssetCategoryVocabularyPermission.contains(
+					permissionChecker, vocabulary, ActionKeys.VIEW)) {
+
+				itr.remove();
+			}
+		}
+
+		return vocabularies;
+	}
+
 }

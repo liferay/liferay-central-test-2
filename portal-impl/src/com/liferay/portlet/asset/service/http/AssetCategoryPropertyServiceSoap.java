@@ -22,6 +22,12 @@
 
 package com.liferay.portlet.asset.service.http;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+
+import com.liferay.portlet.asset.service.AssetCategoryPropertyServiceUtil;
+
+import java.rmi.RemoteException;
 
 /**
  * <a href="AssetCategoryPropertyServiceSoap.java.html"><b><i>View Source</i></b></a>
@@ -75,4 +81,80 @@ package com.liferay.portlet.asset.service.http;
  *
  */
 public class AssetCategoryPropertyServiceSoap {
+	public static com.liferay.portlet.asset.model.AssetCategoryPropertySoap addCategoryProperty(
+		long entryId, java.lang.String key, java.lang.String value)
+		throws RemoteException {
+		try {
+			com.liferay.portlet.asset.model.AssetCategoryProperty returnValue = AssetCategoryPropertyServiceUtil.addCategoryProperty(entryId,
+					key, value);
+
+			return com.liferay.portlet.asset.model.AssetCategoryPropertySoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void deleteCategoryProperty(long propertyId)
+		throws RemoteException {
+		try {
+			AssetCategoryPropertyServiceUtil.deleteCategoryProperty(propertyId);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portlet.asset.model.AssetCategoryPropertySoap[] getCategoryProperties(
+		long entryId) throws RemoteException {
+		try {
+			java.util.List<com.liferay.portlet.asset.model.AssetCategoryProperty> returnValue =
+				AssetCategoryPropertyServiceUtil.getCategoryProperties(entryId);
+
+			return com.liferay.portlet.asset.model.AssetCategoryPropertySoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portlet.asset.model.AssetCategoryPropertySoap[] getCategoryPropertyValues(
+		long companyId, java.lang.String key) throws RemoteException {
+		try {
+			java.util.List<com.liferay.portlet.asset.model.AssetCategoryProperty> returnValue =
+				AssetCategoryPropertyServiceUtil.getCategoryPropertyValues(companyId,
+					key);
+
+			return com.liferay.portlet.asset.model.AssetCategoryPropertySoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portlet.asset.model.AssetCategoryPropertySoap updateCategoryProperty(
+		long propertyId, java.lang.String key, java.lang.String value)
+		throws RemoteException {
+		try {
+			com.liferay.portlet.asset.model.AssetCategoryProperty returnValue = AssetCategoryPropertyServiceUtil.updateCategoryProperty(propertyId,
+					key, value);
+
+			return com.liferay.portlet.asset.model.AssetCategoryPropertySoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	private static Log _log = LogFactoryUtil.getLog(AssetCategoryPropertyServiceSoap.class);
 }

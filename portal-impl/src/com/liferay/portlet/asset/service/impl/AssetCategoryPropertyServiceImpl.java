@@ -22,15 +22,58 @@
 
 package com.liferay.portlet.asset.service.impl;
 
+import com.liferay.portal.PortalException;
+import com.liferay.portal.SystemException;
+import com.liferay.portlet.asset.model.AssetCategoryProperty;
 import com.liferay.portlet.asset.service.base.AssetCategoryPropertyServiceBaseImpl;
+
+import java.util.List;
 
 /**
  * <a href="AssetCategoryPropertyServiceImpl.java.html"><b><i>View Source</i>
  * </b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Jorge Ferrer
  *
  */
 public class AssetCategoryPropertyServiceImpl
 	extends AssetCategoryPropertyServiceBaseImpl {
+
+	public AssetCategoryProperty addCategoryProperty(
+			long entryId, String key, String value)
+		throws PortalException, SystemException {
+
+		return assetCategoryPropertyLocalService.addCategoryProperty(
+			getUserId(), entryId, key, value);
+	}
+
+	public void deleteCategoryProperty(long propertyId)
+		throws PortalException, SystemException {
+
+		assetCategoryPropertyLocalService.deleteCategoryProperty(propertyId);
+	}
+
+	public List<AssetCategoryProperty> getCategoryProperties(long entryId)
+		throws SystemException {
+
+		return assetCategoryPropertyLocalService.getCategoryProperties(entryId);
+	}
+
+	public List<AssetCategoryProperty> getCategoryPropertyValues(
+			long companyId, String key)
+		throws SystemException {
+
+		return assetCategoryPropertyLocalService.getCategoryPropertyValues(
+			companyId, key);
+	}
+
+	public AssetCategoryProperty updateCategoryProperty(
+			long propertyId, String key, String value)
+		throws PortalException, SystemException {
+
+		return assetCategoryPropertyLocalService.updateCategoryProperty(
+			propertyId, key, value);
+	}
+
 }

@@ -110,6 +110,68 @@ public class AssetCategoryPropertyLocalServiceUtil {
 				   .updateAssetCategoryProperty(assetCategoryProperty, merge);
 	}
 
+	public static com.liferay.portlet.asset.model.AssetCategoryProperty addCategoryProperty(
+		long userId, long categoryId, java.lang.String key,
+		java.lang.String value)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService().addCategoryProperty(userId, categoryId, key, value);
+	}
+
+	public static void deleteCategoryProperties(long entryId)
+		throws com.liferay.portal.SystemException {
+		getService().deleteCategoryProperties(entryId);
+	}
+
+	public static void deleteCategoryProperty(long propertyId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		getService().deleteCategoryProperty(propertyId);
+	}
+
+	public static void deleteCategoryProperty(
+		com.liferay.portlet.asset.model.AssetCategoryProperty property)
+		throws com.liferay.portal.SystemException {
+		getService().deleteCategoryProperty(property);
+	}
+
+	public static java.util.List<com.liferay.portlet.asset.model.AssetCategoryProperty> getCategoryProperties()
+		throws com.liferay.portal.SystemException {
+		return getService().getCategoryProperties();
+	}
+
+	public static java.util.List<com.liferay.portlet.asset.model.AssetCategoryProperty> getCategoryProperties(
+		long entryId) throws com.liferay.portal.SystemException {
+		return getService().getCategoryProperties(entryId);
+	}
+
+	public static com.liferay.portlet.asset.model.AssetCategoryProperty getCategoryProperty(
+		long propertyId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService().getCategoryProperty(propertyId);
+	}
+
+	public static com.liferay.portlet.asset.model.AssetCategoryProperty getCategoryProperty(
+		long categoryId, java.lang.String key)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService().getCategoryProperty(categoryId, key);
+	}
+
+	public static java.util.List<com.liferay.portlet.asset.model.AssetCategoryProperty> getCategoryPropertyValues(
+		long groupId, java.lang.String key)
+		throws com.liferay.portal.SystemException {
+		return getService().getCategoryPropertyValues(groupId, key);
+	}
+
+	public static com.liferay.portlet.asset.model.AssetCategoryProperty updateCategoryProperty(
+		long propertyId, java.lang.String key, java.lang.String value)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService().updateCategoryProperty(propertyId, key, value);
+	}
+
 	public static AssetCategoryPropertyLocalService getService() {
 		if (_service == null) {
 			throw new RuntimeException(

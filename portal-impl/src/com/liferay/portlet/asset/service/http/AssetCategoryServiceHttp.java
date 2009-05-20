@@ -22,6 +22,16 @@
 
 package com.liferay.portlet.asset.service.http;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.IntegerWrapper;
+import com.liferay.portal.kernel.util.LongWrapper;
+import com.liferay.portal.kernel.util.MethodWrapper;
+import com.liferay.portal.kernel.util.NullWrapper;
+import com.liferay.portal.security.auth.HttpPrincipal;
+import com.liferay.portal.service.http.TunnelUtil;
+
+import com.liferay.portlet.asset.service.AssetCategoryServiceUtil;
 
 /**
  * <a href="AssetCategoryServiceHttp.java.html"><b><i>View Source</i></b></a>
@@ -63,4 +73,394 @@ package com.liferay.portlet.asset.service.http;
  *
  */
 public class AssetCategoryServiceHttp {
+	public static com.liferay.portlet.asset.model.AssetCategory addCategory(
+		HttpPrincipal httpPrincipal, long categoryVocabularyId,
+		long parentCategoryId, java.lang.String name,
+		java.lang.String[] properties,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		try {
+			Object paramObj0 = new LongWrapper(categoryVocabularyId);
+
+			Object paramObj1 = new LongWrapper(parentCategoryId);
+
+			Object paramObj2 = name;
+
+			if (name == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj3 = properties;
+
+			if (properties == null) {
+				paramObj3 = new NullWrapper("[Ljava.lang.String;");
+			}
+
+			Object paramObj4 = serviceContext;
+
+			if (serviceContext == null) {
+				paramObj4 = new NullWrapper(
+						"com.liferay.portal.service.ServiceContext");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(AssetCategoryServiceUtil.class.getName(),
+					"addCategory",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
+					});
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (com.liferay.portlet.asset.model.AssetCategory)returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static void deleteCategory(HttpPrincipal httpPrincipal,
+		long categoryId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		try {
+			Object paramObj0 = new LongWrapper(categoryId);
+
+			MethodWrapper methodWrapper = new MethodWrapper(AssetCategoryServiceUtil.class.getName(),
+					"deleteCategory", new Object[] { paramObj0 });
+
+			try {
+				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static java.util.List<com.liferay.portlet.asset.model.AssetCategory> getCategories(
+		HttpPrincipal httpPrincipal, java.lang.String className, long classPK)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		try {
+			Object paramObj0 = className;
+
+			if (className == null) {
+				paramObj0 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj1 = new LongWrapper(classPK);
+
+			MethodWrapper methodWrapper = new MethodWrapper(AssetCategoryServiceUtil.class.getName(),
+					"getCategories", new Object[] { paramObj0, paramObj1 });
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (java.util.List<com.liferay.portlet.asset.model.AssetCategory>)returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static com.liferay.portlet.asset.model.AssetCategory getCategory(
+		HttpPrincipal httpPrincipal, long categoryId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		try {
+			Object paramObj0 = new LongWrapper(categoryId);
+
+			MethodWrapper methodWrapper = new MethodWrapper(AssetCategoryServiceUtil.class.getName(),
+					"getCategory", new Object[] { paramObj0 });
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (com.liferay.portlet.asset.model.AssetCategory)returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static java.util.List<com.liferay.portlet.asset.model.AssetCategory> getGroupVocabularyCategories(
+		HttpPrincipal httpPrincipal, long parentCategoryId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		try {
+			Object paramObj0 = new LongWrapper(parentCategoryId);
+
+			MethodWrapper methodWrapper = new MethodWrapper(AssetCategoryServiceUtil.class.getName(),
+					"getGroupVocabularyCategories", new Object[] { paramObj0 });
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (java.util.List<com.liferay.portlet.asset.model.AssetCategory>)returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static java.util.List<com.liferay.portlet.asset.model.AssetCategory> getVocabularyCategories(
+		HttpPrincipal httpPrincipal, long categoryVocabularyId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		try {
+			Object paramObj0 = new LongWrapper(categoryVocabularyId);
+
+			MethodWrapper methodWrapper = new MethodWrapper(AssetCategoryServiceUtil.class.getName(),
+					"getVocabularyCategories", new Object[] { paramObj0 });
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (java.util.List<com.liferay.portlet.asset.model.AssetCategory>)returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static java.util.List<com.liferay.portlet.asset.model.AssetCategory> getVocabularyRootCategories(
+		HttpPrincipal httpPrincipal, long categoryVocabularyId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		try {
+			Object paramObj0 = new LongWrapper(categoryVocabularyId);
+
+			MethodWrapper methodWrapper = new MethodWrapper(AssetCategoryServiceUtil.class.getName(),
+					"getVocabularyRootCategories", new Object[] { paramObj0 });
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (java.util.List<com.liferay.portlet.asset.model.AssetCategory>)returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static com.liferay.portal.kernel.json.JSONArray search(
+		HttpPrincipal httpPrincipal, long groupId, java.lang.String name,
+		java.lang.String[] properties, int start, int end)
+		throws com.liferay.portal.SystemException {
+		try {
+			Object paramObj0 = new LongWrapper(groupId);
+
+			Object paramObj1 = name;
+
+			if (name == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj2 = properties;
+
+			if (properties == null) {
+				paramObj2 = new NullWrapper("[Ljava.lang.String;");
+			}
+
+			Object paramObj3 = new IntegerWrapper(start);
+
+			Object paramObj4 = new IntegerWrapper(end);
+
+			MethodWrapper methodWrapper = new MethodWrapper(AssetCategoryServiceUtil.class.getName(),
+					"search",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
+					});
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (com.liferay.portal.kernel.json.JSONArray)returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static com.liferay.portlet.asset.model.AssetCategory updateCategory(
+		HttpPrincipal httpPrincipal, long categoryId,
+		long categoryVocabularyId, long parentCategoryId,
+		java.lang.String name, java.lang.String[] properties)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		try {
+			Object paramObj0 = new LongWrapper(categoryId);
+
+			Object paramObj1 = new LongWrapper(categoryVocabularyId);
+
+			Object paramObj2 = new LongWrapper(parentCategoryId);
+
+			Object paramObj3 = name;
+
+			if (name == null) {
+				paramObj3 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj4 = properties;
+
+			if (properties == null) {
+				paramObj4 = new NullWrapper("[Ljava.lang.String;");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(AssetCategoryServiceUtil.class.getName(),
+					"updateCategory",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
+					});
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (com.liferay.portlet.asset.model.AssetCategory)returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	private static Log _log = LogFactoryUtil.getLog(AssetCategoryServiceHttp.class);
 }

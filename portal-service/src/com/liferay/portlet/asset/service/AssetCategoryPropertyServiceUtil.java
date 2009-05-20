@@ -45,6 +45,37 @@ package com.liferay.portlet.asset.service;
  *
  */
 public class AssetCategoryPropertyServiceUtil {
+	public static com.liferay.portlet.asset.model.AssetCategoryProperty addCategoryProperty(
+		long entryId, java.lang.String key, java.lang.String value)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService().addCategoryProperty(entryId, key, value);
+	}
+
+	public static void deleteCategoryProperty(long propertyId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		getService().deleteCategoryProperty(propertyId);
+	}
+
+	public static java.util.List<com.liferay.portlet.asset.model.AssetCategoryProperty> getCategoryProperties(
+		long entryId) throws com.liferay.portal.SystemException {
+		return getService().getCategoryProperties(entryId);
+	}
+
+	public static java.util.List<com.liferay.portlet.asset.model.AssetCategoryProperty> getCategoryPropertyValues(
+		long companyId, java.lang.String key)
+		throws com.liferay.portal.SystemException {
+		return getService().getCategoryPropertyValues(companyId, key);
+	}
+
+	public static com.liferay.portlet.asset.model.AssetCategoryProperty updateCategoryProperty(
+		long propertyId, java.lang.String key, java.lang.String value)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService().updateCategoryProperty(propertyId, key, value);
+	}
+
 	public static AssetCategoryPropertyService getService() {
 		if (_service == null) {
 			throw new RuntimeException(

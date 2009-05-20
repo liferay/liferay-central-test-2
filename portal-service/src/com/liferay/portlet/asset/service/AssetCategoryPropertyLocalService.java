@@ -99,4 +99,51 @@ public interface AssetCategoryPropertyLocalService {
 	public com.liferay.portlet.asset.model.AssetCategoryProperty updateAssetCategoryProperty(
 		com.liferay.portlet.asset.model.AssetCategoryProperty assetCategoryProperty,
 		boolean merge) throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.asset.model.AssetCategoryProperty addCategoryProperty(
+		long userId, long categoryId, java.lang.String key,
+		java.lang.String value)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	public void deleteCategoryProperties(long entryId)
+		throws com.liferay.portal.SystemException;
+
+	public void deleteCategoryProperty(long propertyId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	public void deleteCategoryProperty(
+		com.liferay.portlet.asset.model.AssetCategoryProperty property)
+		throws com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.liferay.portlet.asset.model.AssetCategoryProperty> getCategoryProperties()
+		throws com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.liferay.portlet.asset.model.AssetCategoryProperty> getCategoryProperties(
+		long entryId) throws com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portlet.asset.model.AssetCategoryProperty getCategoryProperty(
+		long propertyId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portlet.asset.model.AssetCategoryProperty getCategoryProperty(
+		long categoryId, java.lang.String key)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.liferay.portlet.asset.model.AssetCategoryProperty> getCategoryPropertyValues(
+		long groupId, java.lang.String key)
+		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.asset.model.AssetCategoryProperty updateCategoryProperty(
+		long propertyId, java.lang.String key, java.lang.String value)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 }

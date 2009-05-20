@@ -100,9 +100,93 @@ public interface AssetCategoryLocalService {
 		com.liferay.portlet.asset.model.AssetCategory assetCategory,
 		boolean merge) throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.asset.model.AssetCategory addCategory(
+		long userId, long vocabularyId, long parentCategoryId,
+		java.lang.String name, java.lang.String[] properties,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	public void addCategoryResources(
+		com.liferay.portlet.asset.model.AssetCategory category,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	public void addCategoryResources(
+		com.liferay.portlet.asset.model.AssetCategory category,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	public void deleteCategory(long categoryId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	public void deleteCategory(
+		com.liferay.portlet.asset.model.AssetCategory category)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	public void deleteVocabularyCategories(long vocabularyId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> getAssetCategories(
+		long assetId) throws com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> getCategories()
+		throws com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> getCategories(
+		java.lang.String className, long classPK)
+		throws com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> getCategories(
+		long classNameId, long classPK)
+		throws com.liferay.portal.SystemException;
+
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.asset.model.AssetCategory getCategory(
 		long categoryId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> getChildCategories(
+		long parentCategoryId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> getVocabularyCategories(
+		long vocabularyId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> getVocabularyRootCategories(
+		long vocabularyId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	public void mergeCategories(long fromCategoryId, long toCategoryId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portal.kernel.json.JSONArray search(long groupId,
+		java.lang.String name, java.lang.String[] properties, int start, int end)
+		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.asset.model.AssetCategory updateCategory(
+		long userId, long categoryId, long vocabularyId, long parentCategoryId,
+		java.lang.String name, java.lang.String[] properties)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 }

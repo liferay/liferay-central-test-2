@@ -100,9 +100,58 @@ public interface AssetCategoryVocabularyLocalService {
 		com.liferay.portlet.asset.model.AssetCategoryVocabulary assetCategoryVocabulary,
 		boolean merge) throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.asset.model.AssetCategoryVocabulary addCategoryVocabulary(
+		long userId, java.lang.String name,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	public void addCategoryVocabularyResources(
+		com.liferay.portlet.asset.model.AssetCategoryVocabulary vocabulary,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	public void addCategoryVocabularyResources(
+		com.liferay.portlet.asset.model.AssetCategoryVocabulary vocabulary,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	public void deleteCategoryVocabulary(long vocabularyId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	public void deleteCategoryVocabulary(
+		com.liferay.portlet.asset.model.AssetCategoryVocabulary vocabulary)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.liferay.portlet.asset.model.AssetCategoryVocabulary> getCompanyVocabularies(
+		long companyId) throws com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.liferay.portlet.asset.model.AssetCategoryVocabulary> getGroupCategoryVocabularies(
+		long groupId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portlet.asset.model.AssetCategoryVocabulary getGroupCategoryVocabulary(
+		long groupId, java.lang.String name)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.asset.model.AssetCategoryVocabulary getCategoryVocabulary(
-		long categoryVocabularyId)
+		long vocabularyId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.asset.model.AssetCategoryVocabulary updateCategoryVocabulary(
+		long vocabularyId, java.lang.String name)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 }

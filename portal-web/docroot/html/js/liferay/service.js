@@ -382,6 +382,44 @@ Liferay.Service.registerClass(
 
 Liferay.Service.register("Liferay.Service.Asset", "com.liferay.portlet.asset.service");
 
+Liferay.Service.registerClass(
+	Liferay.Service.Asset, "AssetCategory",
+	{
+		addCategory: true,
+		deleteCategory: true,
+		getCategories: true,
+		getCategory: true,
+		getGroupVocabularyCategories: true,
+		getVocabularyCategories: true,
+		getVocabularyRootCategories: true,
+		search: true,
+		updateCategory: true
+	}
+);
+
+Liferay.Service.registerClass(
+	Liferay.Service.Asset, "AssetCategoryProperty",
+	{
+		addCategoryProperty: true,
+		deleteCategoryProperty: true,
+		getCategoryProperties: true,
+		getCategoryPropertyValues: true,
+		updateCategoryProperty: true
+	}
+);
+
+Liferay.Service.registerClass(
+	Liferay.Service.Asset, "AssetCategoryVocabulary",
+	{
+		addCategoryVocabulary: true,
+		deleteCategoryVocabulary: true,
+		getCompanyCategoryVocabularies: true,
+		getGroupCategoryVocabularies: true,
+		getVocabulary: true,
+		updateCategoryVocabulary: true
+	}
+);
+
 Liferay.Service.register("Liferay.Service.Blogs", "com.liferay.portlet.blogs.service");
 
 Liferay.Service.registerClass(

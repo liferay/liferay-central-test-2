@@ -25,6 +25,7 @@ package com.liferay.portlet.asset.service;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.Isolation;
+import com.liferay.portal.kernel.annotation.Propagation;
 import com.liferay.portal.kernel.annotation.Transactional;
 
 /**
@@ -54,4 +55,36 @@ import com.liferay.portal.kernel.annotation.Transactional;
 @Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
 	PortalException.class, SystemException.class})
 public interface AssetCategoryVocabularyService {
+	public com.liferay.portlet.asset.model.AssetCategoryVocabulary addCategoryVocabulary(
+		java.lang.String name,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	public void deleteCategoryVocabulary(long categoryVocabularyId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.liferay.portlet.asset.model.AssetCategoryVocabulary> getCompanyCategoryVocabularies(
+		long companyId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.liferay.portlet.asset.model.AssetCategoryVocabulary> getGroupCategoryVocabularies(
+		long groupId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portlet.asset.model.AssetCategoryVocabulary getVocabulary(
+		long categoryVocabularyId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.asset.model.AssetCategoryVocabulary updateCategoryVocabulary(
+		long categoryVocabularyId, java.lang.String name)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 }
