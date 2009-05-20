@@ -698,8 +698,8 @@
 							if (exception.indexOf('DuplicateEntryException') > -1) {
 								errorKey = 'that-tag-already-exists';
 							}
-							else if (exception.indexOf('EntryNameException') > -1 ||
-								exception.indexOf('TagsEntryException') > -1) {
+							else if ((exception.indexOf('EntryNameException') > -1) ||
+									 (exception.indexOf('TagsEntryException') > -1)) {
 
 								errorKey = 'one-of-your-fields-contains-invalid-characters';
 							}
@@ -709,6 +709,7 @@
 							else if (exception.indexOf('auth.PrincipalException') > -1) {
 								errorKey = 'you-do-not-have-permission-to-access-the-requested-resource';
 							}
+
 							if (errorKey) {
 								instance._sendMessage('error', errorKey);
 							}
