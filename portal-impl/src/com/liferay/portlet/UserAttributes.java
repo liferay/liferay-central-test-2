@@ -336,7 +336,7 @@ public class UserAttributes {
 			return StringPool.BLANK;
 		}
 		else if (name.equals(USER_JOBTITLE)) {
-			return StringPool.BLANK;
+			return _user.getJobTitle();
 		}
 		else if (name.equals(USER_NAME_PREFIX)) {
 			return StringPool.BLANK;
