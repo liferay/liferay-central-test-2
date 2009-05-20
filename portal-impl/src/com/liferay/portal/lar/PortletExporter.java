@@ -687,8 +687,13 @@ public class PortletExporter {
 			String resourcePrimKey = PortletPermissionUtil.getPrimaryKey(
 				layout.getPlid(), portletId);
 
-			if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM >= 5) {
+			if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 5) {
 				exportPortletPermissions_5(
+					layoutCache, companyId, groupId, resourceName,
+					resourcePrimKey, permissionsEl);
+			}
+			else if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
+				exportPortletPermissions_6(
 					layoutCache, companyId, groupId, resourceName,
 					resourcePrimKey, permissionsEl);
 			}

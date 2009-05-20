@@ -518,8 +518,13 @@ public class LayoutImporter {
 				String resourceName = Layout.class.getName();
 				String resourcePrimKey = String.valueOf(layout.getPlid());
 
-				if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM >= 5) {
+				if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 5) {
 					importLayoutPermissions_5(
+						layoutCache, companyId, groupId, userId, resourceName,
+						resourcePrimKey, permissionsEl);
+				}
+				else if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
+					importLayoutPermissions_6(
 						layoutCache, companyId, groupId, userId, resourceName,
 						resourcePrimKey, permissionsEl);
 				}

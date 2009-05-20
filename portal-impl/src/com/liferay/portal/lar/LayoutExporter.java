@@ -316,13 +316,13 @@ public class LayoutExporter {
 				String resourceName = Layout.class.getName();
 				String resourcePrimKey = String.valueOf(layout.getPlid());
 
-				if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
-					exportLayoutPermissions_6(
+				if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 5) {
+					exportLayoutPermissions_5(
 						layoutCache, companyId, groupId, resourceName,
 						resourcePrimKey, permissionsEl);
 				}
-				else if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 5) {
-					exportLayoutPermissions_5(
+				else if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
+					exportLayoutPermissions_6(
 						layoutCache, companyId, groupId, resourceName,
 						resourcePrimKey, permissionsEl);
 				}
