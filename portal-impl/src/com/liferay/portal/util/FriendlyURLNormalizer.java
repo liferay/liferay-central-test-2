@@ -90,8 +90,7 @@ public class FriendlyURLNormalizer {
 	}
 
 	private static final char[] _REPLACE_CHARS = new char[] {
-		' ', ',', '\\', '\'', '\"', '(', ')', '{', '}', '?', '#', '@', '+',
-		'~', ';', '$'
+		' ', ',', '\\', '\'', '\"', '(', ')', '{', '}'
 	};
 
 }
