@@ -63,6 +63,7 @@ import com.liferay.portal.service.PermissionLocalServiceUtil;
 import com.liferay.portal.service.PortletItemLocalServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.service.PortletPreferencesLocalServiceUtil;
+import com.liferay.portal.service.ResourcePermissionLocalServiceUtil;
 import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.permission.PortletPermissionUtil;
@@ -504,6 +505,51 @@ public class PortletExporter {
 		}
 	}
 
+	protected void exportPermissions_6(
+			LayoutCache layoutCache, long companyId, long groupId,
+			String resourceName, String resourcePrimKey, Element permissionsEl,
+			boolean portletActions)
+		throws PortalException, SystemException {
+
+		List<Role> roles = layoutCache.getGroupRoles_5(groupId, resourceName);
+
+		for (Role role : roles) {
+			if (role.getName().equals(RoleConstants.ADMINISTRATOR)) {
+				continue;
+			}
+
+			Element roleEl = permissionsEl.addElement("role");
+
+			roleEl.addAttribute("name", role.getName());
+			roleEl.addAttribute("description", role.getDescription());
+			roleEl.addAttribute("type", String.valueOf(role.getType()));
+
+			List<String> actionIds = null;
+
+			if (portletActions) {
+				actionIds = ResourceActionsUtil.getPortletResourceActions(
+					resourceName);
+			}
+			else {
+				actionIds = ResourceActionsUtil.getModelResourceActions(
+					resourceName);
+			}
+
+			List<String> actions =
+				ResourcePermissionLocalServiceUtil.
+					getAvailableResourcePermissionActionIds(
+						companyId, resourceName,
+						ResourceConstants.SCOPE_INDIVIDUAL, resourcePrimKey,
+						role.getRoleId(), actionIds);
+
+			for (String action : actions) {
+				Element actionKeyEl = roleEl.addElement("action-key");
+
+				actionKeyEl.addText(action);
+			}
+		}
+	}
+
 	protected void exportPortlet(
 			PortletDataContext context, LayoutCache layoutCache,
 			String portletId, Layout layout, Element parentEl,
@@ -641,7 +687,7 @@ public class PortletExporter {
 			String resourcePrimKey = PortletPermissionUtil.getPrimaryKey(
 				layout.getPlid(), portletId);
 
-			if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 5) {
+			if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM >= 5) {
 				exportPortletPermissions_5(
 					layoutCache, companyId, groupId, resourceName,
 					resourcePrimKey, permissionsEl);
@@ -798,6 +844,18 @@ public class PortletExporter {
 		exportPermissions_5(
 			layoutCache, groupId, resourceName, resource.getResourceId(),
 			permissionsEl);
+	}
+
+	protected void exportPortletPermissions_6(
+			LayoutCache layoutCache, long companyId, long groupId,
+			String resourceName, String resourcePrimKey, Element permissionsEl)
+		throws PortalException, SystemException {
+
+		boolean portletActions = true;
+
+		exportPermissions_6(
+			layoutCache, companyId, groupId, resourceName, resourcePrimKey,
+			permissionsEl, portletActions);
 	}
 
 	protected void exportPortletPreference(

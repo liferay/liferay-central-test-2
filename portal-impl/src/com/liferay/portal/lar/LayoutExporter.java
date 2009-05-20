@@ -316,7 +316,12 @@ public class LayoutExporter {
 				String resourceName = Layout.class.getName();
 				String resourcePrimKey = String.valueOf(layout.getPlid());
 
-				if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 5) {
+				if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
+					exportLayoutPermissions_6(
+						layoutCache, companyId, groupId, resourceName,
+						resourcePrimKey, permissionsEl);
+				}
+				else if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 5) {
 					exportLayoutPermissions_5(
 						layoutCache, companyId, groupId, resourceName,
 						resourcePrimKey, permissionsEl);
@@ -419,7 +424,7 @@ public class LayoutExporter {
 			}
 		}
 
-		if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM != 5) {
+		if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM < 5) {
 			Element rolesEl = root.addElement("roles");
 
 			// Layout roles
@@ -605,6 +610,18 @@ public class LayoutExporter {
 		_portletExporter.exportPermissions_5(
 			layoutCache, groupId, resourceName, resource.getResourceId(),
 			permissionsEl);
+	}
+
+	protected void exportLayoutPermissions_6(
+			LayoutCache layoutCache, long companyId, long groupId,
+			String resourceName, String resourcePrimKey, Element permissionsEl)
+		throws PortalException, SystemException {
+
+		boolean portletActions = false;
+
+		_portletExporter.exportPermissions_6(
+			layoutCache, companyId, groupId, resourceName, resourcePrimKey,
+			permissionsEl, portletActions);
 	}
 
 	protected void exportLayoutRoles(

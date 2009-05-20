@@ -71,6 +71,7 @@ import com.liferay.portal.service.LayoutSetLocalServiceUtil;
 import com.liferay.portal.service.LayoutTemplateLocalServiceUtil;
 import com.liferay.portal.service.PermissionLocalServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
+import com.liferay.portal.service.ResourcePermissionLocalServiceUtil;
 import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.permission.PortletPermissionUtil;
@@ -517,7 +518,7 @@ public class LayoutImporter {
 				String resourceName = Layout.class.getName();
 				String resourcePrimKey = String.valueOf(layout.getPlid());
 
-				if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 5) {
+				if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM >= 5) {
 					importLayoutPermissions_5(
 						layoutCache, companyId, groupId, userId, resourceName,
 						resourcePrimKey, permissionsEl);
@@ -627,7 +628,19 @@ public class LayoutImporter {
 			Element permissionsEl = portletEl.element("permissions");
 
 			if (importPermissions && (permissionsEl != null)) {
-				if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 5) {
+				if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
+					String resourceName = PortletConstants.getRootPortletId(
+						portletId);
+
+					String resourcePrimKey =
+						PortletPermissionUtil.getPrimaryKey(
+							layout.getPlid(), portletId);
+
+					importPortletPermissions_6(
+						layoutCache, companyId, groupId, userId, resourceName,
+						resourcePrimKey, permissionsEl);
+				}
+				else if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 5) {
 					String resourceName = PortletConstants.getRootPortletId(
 						portletId);
 
@@ -653,7 +666,7 @@ public class LayoutImporter {
 				portletEl, importPortletSetup, importPortletArchivedSetups,
 				importPortletUserPreferences, false);
 
-			if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM != 5) {
+			if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM < 5) {
 
 				// Portlet roles
 
@@ -669,7 +682,7 @@ public class LayoutImporter {
 			}
 		}
 
-		if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM != 5) {
+		if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM < 5) {
 			Element rolesEl = root.element("roles");
 
 			// Layout roles
@@ -1023,6 +1036,18 @@ public class LayoutImporter {
 			permissionsEl);
 	}
 
+	protected void importLayoutPermissions_6(
+			LayoutCache layoutCache, long companyId, long groupId, long userId,
+			String resourceName, String resourcePrimKey, Element permissionsEl)
+		throws PortalException, SystemException {
+
+		boolean portletActions = false;
+
+		importPermissions_6(
+			layoutCache, companyId, groupId, userId, resourceName,
+			resourcePrimKey, permissionsEl, portletActions);
+	}
+
 	protected void importLayoutRoles(
 			LayoutCache layoutCache, long companyId, long groupId,
 			Element rolesEl)
@@ -1070,6 +1095,36 @@ public class LayoutImporter {
 			PermissionLocalServiceUtil.setRolePermissions(
 				role.getRoleId(), actions.toArray(new String[actions.size()]),
 				resourceId);
+		}
+	}
+
+	protected void importPermissions_6(
+			LayoutCache layoutCache, long companyId, long groupId, long userId,
+			String resourceName, String resourcePrimKey, Element permissionsEl,
+			boolean portletActions)
+		throws PortalException, SystemException {
+
+		List<Element> roleEls = permissionsEl.elements("role");
+
+		for (Element roleEl : roleEls) {
+			String name = roleEl.attributeValue("name");
+
+			Role role = layoutCache.getRole(companyId, name);
+
+			if (role == null) {
+				String description = roleEl.attributeValue("description");
+				int type = Integer.valueOf(roleEl.attributeValue("type"));
+
+				role = RoleLocalServiceUtil.addRole(
+					userId, companyId, name, description, type);
+			}
+
+			List<String> actions = getActions(roleEl);
+
+			ResourcePermissionLocalServiceUtil.setResourcePermissions(
+				companyId, resourceName, ResourceConstants.SCOPE_INDIVIDUAL,
+				resourcePrimKey, role.getRoleId(),
+				actions.toArray(new String[actions.size()]));
 		}
 	}
 
@@ -1144,6 +1199,18 @@ public class LayoutImporter {
 		importPermissions_5(
 			layoutCache, companyId, userId, resource.getResourceId(),
 			permissionsEl);
+	}
+
+	protected void importPortletPermissions_6(
+			LayoutCache layoutCache, long companyId, long groupId, long userId,
+			String resourceName, String resourcePrimKey, Element permissionsEl)
+		throws PortalException, SystemException {
+
+		boolean portletActions = true;
+
+		importPermissions_6(
+			layoutCache, companyId, groupId, userId, resourceName,
+			resourcePrimKey, permissionsEl, portletActions);
 	}
 
 	protected void importPortletRoles(
