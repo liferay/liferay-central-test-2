@@ -24,6 +24,7 @@ package com.liferay.portal.kernel.bi.reporting;
 
 import java.io.InputStream;
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * <a href="ContextClassloaderReportDesignRetriever.java.html"><b><i>View Source
@@ -37,6 +38,10 @@ public class ContextClassloaderReportDesignRetriever
 
 	public ContextClassloaderReportDesignRetriever(String reportName) {
 		_reportName = reportName;
+	}
+
+	public Date getModifiedDate() {
+		return new Date();
 	}
 
 	public String getReportName() {

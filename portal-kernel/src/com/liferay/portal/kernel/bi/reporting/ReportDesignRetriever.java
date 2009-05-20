@@ -23,6 +23,7 @@
 package com.liferay.portal.kernel.bi.reporting;
 
 import java.io.InputStream;
+import java.util.Date;
 
 /**
  * <a href="ReportDesignRetriever.java.html"><b><i>View Source</i></b></a>
@@ -31,6 +32,8 @@ import java.io.InputStream;
  *
  */
 public interface ReportDesignRetriever {
+
+	public Date getModifiedDate();
 
 	public String getReportName();
 
