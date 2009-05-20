@@ -26,13 +26,13 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="AddUserTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddUserSocialNetworkTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class AddUserTest extends BaseTestCase {
-	public void testAddUser() throws Exception {
+public class AddUserSocialNetworkTest extends BaseTestCase {
+	public void testAddUserSocialNetwork() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -51,24 +51,39 @@ public class AddUserTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Users"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Add"));
+		selenium.typeKeys("_125_keywords", RuntimeVariables.replace("selen01"));
+		selenium.type("_125_keywords", RuntimeVariables.replace("selen01"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.select("_125_prefixId", RuntimeVariables.replace("label=Mr."));
-		selenium.typeKeys("_125_screenName",
-			RuntimeVariables.replace("selenium01"));
-		selenium.type("_125_screenName", RuntimeVariables.replace("selenium01"));
-		selenium.type("_125_emailAddress",
-			RuntimeVariables.replace("test01@selenium.com"));
-		selenium.type("_125_firstName", RuntimeVariables.replace("selen01"));
-		selenium.type("_125_middleName", RuntimeVariables.replace("lenn"));
-		selenium.type("_125_lastName", RuntimeVariables.replace("nium01"));
-		selenium.select("_125_suffixId", RuntimeVariables.replace("label=PhD."));
-		selenium.select("_125_birthdayMonth",
-			RuntimeVariables.replace("label=April"));
-		selenium.select("_125_birthdayDay", RuntimeVariables.replace("label=10"));
-		selenium.select("_125_birthdayYear",
-			RuntimeVariables.replace("label=1986"));
-		selenium.select("_125_male", RuntimeVariables.replace("label=Male"));
+		selenium.click(RuntimeVariables.replace("link=selen01"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click("socialNetworkLink");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("_125_facebookSn")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.typeKeys("_125_facebookSn",
+			RuntimeVariables.replace("Selenium01"));
+		selenium.type("_125_facebookSn", RuntimeVariables.replace("Selenium01"));
+		selenium.typeKeys("_125_mySpaceSn",
+			RuntimeVariables.replace("Selenium01"));
+		selenium.type("_125_mySpaceSn", RuntimeVariables.replace("Selenium01"));
+		selenium.typeKeys("_125_twitterSn",
+			RuntimeVariables.replace("Selenium01"));
+		selenium.type("_125_twitterSn", RuntimeVariables.replace("Selenium01"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(

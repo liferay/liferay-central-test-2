@@ -40,6 +40,22 @@ public class PortalTests extends BaseTests {
 
 		testSuite.addTestSuite(ControlPanelTest.class);
 		testSuite.addTestSuite(AddUserTest.class);
+		testSuite.addTestSuite(AddUserPasswordTest.class);
+		testSuite.addTestSuite(AddUserAddressTest.class);
+		testSuite.addTestSuite(AddUserAddress2Test.class);
+		testSuite.addTestSuite(AddUserPhoneNumberTest.class);
+		testSuite.addTestSuite(AddUserPhoneNumber2Test.class);
+		testSuite.addTestSuite(AddUserEmailAddressTest.class);
+		testSuite.addTestSuite(AddUserEmailAddress2Test.class);
+		testSuite.addTestSuite(AddUserWebsiteTest.class);
+		testSuite.addTestSuite(AddUserWebsite2Test.class);
+		testSuite.addTestSuite(AddUserInstantMessengerTest.class);
+		testSuite.addTestSuite(AddUserSocialNetworkTest.class);
+		testSuite.addTestSuite(AddUserSMSTest.class);
+		testSuite.addTestSuite(AddUserOpenIDTest.class);
+		testSuite.addTestSuite(AddUserAnnouncementsTest.class);
+		testSuite.addTestSuite(AddUserDisplaySettingsTest.class);
+		testSuite.addTestSuite(AddUserCommentsTest.class);
 		testSuite.addTestSuite(AddUser2Test.class);
 		testSuite.addTestSuite(AddAnonymousNameUserSNTest.class);
 		testSuite.addTestSuite(AddCyrusUserSNTest.class);

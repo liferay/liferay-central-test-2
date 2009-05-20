@@ -26,13 +26,13 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="AddUserTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddUserEmailAddress2Test.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class AddUserTest extends BaseTestCase {
-	public void testAddUser() throws Exception {
+public class AddUserEmailAddress2Test extends BaseTestCase {
+	public void testAddUserEmailAddress2() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -51,24 +51,59 @@ public class AddUserTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Users"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Add"));
+		selenium.typeKeys("_125_keywords", RuntimeVariables.replace("selen01"));
+		selenium.type("_125_keywords", RuntimeVariables.replace("selen01"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.select("_125_prefixId", RuntimeVariables.replace("label=Mr."));
-		selenium.typeKeys("_125_screenName",
-			RuntimeVariables.replace("selenium01"));
-		selenium.type("_125_screenName", RuntimeVariables.replace("selenium01"));
-		selenium.type("_125_emailAddress",
-			RuntimeVariables.replace("test01@selenium.com"));
-		selenium.type("_125_firstName", RuntimeVariables.replace("selen01"));
-		selenium.type("_125_middleName", RuntimeVariables.replace("lenn"));
-		selenium.type("_125_lastName", RuntimeVariables.replace("nium01"));
-		selenium.select("_125_suffixId", RuntimeVariables.replace("label=PhD."));
-		selenium.select("_125_birthdayMonth",
-			RuntimeVariables.replace("label=April"));
-		selenium.select("_125_birthdayDay", RuntimeVariables.replace("label=10"));
-		selenium.select("_125_birthdayYear",
-			RuntimeVariables.replace("label=1986"));
-		selenium.select("_125_male", RuntimeVariables.replace("label=Male"));
+		selenium.click(RuntimeVariables.replace("link=selen01"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click("additionalEmailAddressesLink");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent(
+							"//div[@id='additionalEmailAddresses']/fieldset/div[2]/div[1]/span/a[1]")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(
+			"//div[@id='additionalEmailAddresses']/fieldset/div[2]/div[1]/span/a[1]");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("_125_emailAddressAddress2")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.typeKeys("_125_emailAddressAddress2",
+			RuntimeVariables.replace("testuser01@selenium.com"));
+		selenium.type("_125_emailAddressAddress2",
+			RuntimeVariables.replace("testuser01@selenium.com"));
+		selenium.select("_125_emailAddressTypeId2",
+			RuntimeVariables.replace("label=E-mail 2"));
+		selenium.click("_125_additionalEmailAddressPrimary2");
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(

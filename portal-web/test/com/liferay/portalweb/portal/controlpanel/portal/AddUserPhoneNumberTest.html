@@ -1,0 +1,94 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>AddUserPhoneNumberTest</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">AddUserPhoneNumberTest</td></tr>
+</thead><tbody>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Users</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Users</td>
+	<td></td>
+</tr>
+<tr>
+	<td>typeKeys</td>
+	<td>_125_keywords</td>
+	<td>selen01</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_125_keywords</td>
+	<td>selen01</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Search']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=selen01</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>phoneNumbersLink</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>_125_phoneNumber0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>typeKeys</td>
+	<td>_125_phoneNumber0</td>
+	<td>123-123-1234</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_125_phoneNumber0</td>
+	<td>123-123-1234</td>
+</tr>
+<tr>
+	<td>typeKeys</td>
+	<td>_125_phoneExtension0</td>
+	<td>123</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_125_phoneExtension0</td>
+	<td>123</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>_125_phoneTypeId0</td>
+	<td>label=Business</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>_125_phonePrimary0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Save']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Your request processed successfully.</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>
