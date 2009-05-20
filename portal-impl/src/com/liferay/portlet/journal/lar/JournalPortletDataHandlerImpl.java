@@ -1691,8 +1691,6 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 	private static final boolean _ALWAYS_EXPORTABLE = true;
 
-	private static final boolean _PUBLISH_TO_LIVE_BY_DEFAULT = true;
-
 	private static final String _NAMESPACE = "journal";
 
 	private static final PortletDataHandlerBoolean _embeddedAssets =
