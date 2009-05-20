@@ -155,7 +155,7 @@ if (displayTerms.getParentOrganizationId() > 0) {
 						selectData: function(callback, selectKey) {
 							Liferay.Service.Portal.Region.getRegions(
 								{
-									countryId: selectKey,
+									countryId: Number(selectKey),
 									active: true
 								},
 								callback
