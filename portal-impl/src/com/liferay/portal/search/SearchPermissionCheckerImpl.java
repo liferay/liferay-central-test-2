@@ -72,19 +72,17 @@ public class SearchPermissionCheckerImpl implements SearchPermissionChecker {
 			String className = doc.get(Field.ENTRY_CLASS_NAME);
 			String classPK = doc.get(Field.ENTRY_CLASS_PK);
 
-			if ((PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) &&
-				(Validator.isNotNull(className)) &&
-				(Validator.isNotNull(classPK))) {
+			if (Validator.isNotNull(className) &&
+				Validator.isNotNull(classPK)) {
 
-				doAddPermissionFields_6(
-					companyId, groupId, className, classPK, doc);
-			}
-			else if ((PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 5) &&
-				(Validator.isNotNull(className)) &&
-				(Validator.isNotNull(classPK))) {
-
-				doAddPermissionFields_5(
-					companyId, groupId, className, classPK, doc);
+				if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 5) {
+					doAddPermissionFields_5(
+						companyId, groupId, className, classPK, doc);
+				}
+				else if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
+					doAddPermissionFields_6(
+						companyId, groupId, className, classPK, doc);
+				}
 			}
 		}
 		catch (NoSuchResourceException nsre) {
@@ -99,12 +97,12 @@ public class SearchPermissionCheckerImpl implements SearchPermissionChecker {
 		Query query) {
 
 		try {
-			if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
-				return doGetPermissionQuery_6(
+			if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 5) {
+				return doGetPermissionQuery_5(
 					companyId, groupId, userId, className, query);
 			}
-			else if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 5) {
-				return doGetPermissionQuery_5(
+			else if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
+				return doGetPermissionQuery_6(
 					companyId, groupId, userId, className, query);
 			}
 		}
@@ -294,7 +292,9 @@ public class SearchPermissionCheckerImpl implements SearchPermissionChecker {
 		return fullQuery;
 	}
 
-	protected void doUpdatePermissionFields_5(long resourceId) throws Exception {
+	protected void doUpdatePermissionFields_5(long resourceId)
+		throws Exception {
+
 		Resource resource = ResourceLocalServiceUtil.getResource(resourceId);
 
 		Indexer indexer = IndexerRegistryUtil.getIndexer(resource.getName());
@@ -308,8 +308,8 @@ public class SearchPermissionCheckerImpl implements SearchPermissionChecker {
 	protected void doUpdatePermissionFields_6(
 			String resourceName, String resourceClassPK)
 		throws Exception {
-		Indexer indexer = IndexerRegistryUtil.getIndexer(
-				resourceName);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(resourceName);
 
 		if (indexer != null) {
 			indexer.reIndex(resourceName, GetterUtil.getLong(resourceClassPK));
