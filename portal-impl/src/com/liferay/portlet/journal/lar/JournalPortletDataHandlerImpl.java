@@ -50,6 +50,7 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.persistence.ImageUtil;
 import com.liferay.portal.util.PortletKeys;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.documentlibrary.lar.DLPortletDataHandlerImpl;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileRank;
@@ -1517,7 +1518,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 	}
 
 	public boolean isPublishToLiveByDefault() {
-		return _PUBLISH_TO_LIVE_BY_DEFAULT;
+		return PropsValues.JOURNAL_PUBLISH_TO_LIVE_BY_DEFAULT;
 	}
 
 	protected static String getArticlePath(

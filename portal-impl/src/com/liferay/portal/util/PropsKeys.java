@@ -574,6 +574,8 @@ public interface PropsKeys {
 
 	public static final String JOURNAL_LAR_CREATION_STRATEGY = "journal.lar.creation.strategy";
 
+	public static final String JOURNAL_PUBLISH_TO_LIVE_BY_DEFAULT = "journal.publish.to.live.by.default";
+
 	public static final String JOURNAL_STRUCTURE_FORCE_AUTOGENERATE_ID = "journal.structure.force.autogenerate.id";
 
 	public static final String JOURNAL_SYNC_CONTENT_SEARCH_ON_STARTUP = "journal.sync.content.search.on.startup";
@@ -860,7 +862,7 @@ public interface PropsKeys {
 
 	public static final String MESSAGE_BOARDS_THREAD_VIEWS = "message.boards.thread.views";
 
-    public static final String MESSAGE_BOARDS_THREAD_VIEWS_DEFAULT = "message.boards.thread.views.default";
+	public static final String MESSAGE_BOARDS_THREAD_VIEWS_DEFAULT = "message.boards.thread.views.default";
 
 	public static final String MIME_TYPES = "mime.types";
 
