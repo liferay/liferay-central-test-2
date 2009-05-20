@@ -64,8 +64,9 @@ Expanse.Observable = new Expanse.Class(
 
 			if (instance._eventsSuspended == false) {
 				var customEvent = instance._getEventObject(event);
+				var args = Array.prototype.slice.call(arguments, 1);
 
-				customEvent.fire.apply(customEvent, [].concat(data));
+				customEvent.fire.apply(customEvent, args);
 			}
 		},
 
@@ -132,7 +133,7 @@ Expanse.Observable = new Expanse.Class(
 			instance._createEventObj();
 
 			if (!instance._events[event]) {
-				instance._events[event] = new Expanse.CustomEvent(event, instance);
+				instance._events[event] = new Expanse.CustomEvent(event, instance, true);
 			}
 
 			return instance._events[event];

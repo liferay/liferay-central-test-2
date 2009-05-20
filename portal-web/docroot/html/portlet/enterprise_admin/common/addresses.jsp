@@ -282,6 +282,8 @@ else {
 			addresses.bind(
 				'addRow',
 				function(event, data) {
+					data = data[0];
+
 					var row = data.row;
 					var originalRow = data.originalRow;
 					var idSeed = data.idSeed;
