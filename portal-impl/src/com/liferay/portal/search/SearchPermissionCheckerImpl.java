@@ -49,6 +49,7 @@ import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.PermissionLocalServiceUtil;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
+import com.liferay.portal.service.ResourcePermissionLocalServiceUtil;
 import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.util.PropsValues;
 
@@ -60,6 +61,7 @@ import java.util.List;
  *
  * @author Allen Chiang
  * @author Bruno Farache
+ * @author Raymond Augé
  *
  */
 public class SearchPermissionCheckerImpl implements SearchPermissionChecker {
@@ -70,11 +72,18 @@ public class SearchPermissionCheckerImpl implements SearchPermissionChecker {
 			String className = doc.get(Field.ENTRY_CLASS_NAME);
 			String classPK = doc.get(Field.ENTRY_CLASS_PK);
 
-			if ((PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 5) &&
+			if ((PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) &&
 				(Validator.isNotNull(className)) &&
 				(Validator.isNotNull(classPK))) {
 
-				doAddPermissionFields(
+				doAddPermissionFields_6(
+					companyId, groupId, className, classPK, doc);
+			}
+			else if ((PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 5) &&
+				(Validator.isNotNull(className)) &&
+				(Validator.isNotNull(classPK))) {
+
+				doAddPermissionFields_5(
 					companyId, groupId, className, classPK, doc);
 			}
 		}
@@ -86,12 +95,16 @@ public class SearchPermissionCheckerImpl implements SearchPermissionChecker {
 	}
 
 	public Query getPermissionQuery(
-			long companyId, long groupId, long userId, String className,
-			Query query) {
+		long companyId, long groupId, long userId, String className,
+		Query query) {
 
 		try {
-			if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 5) {
-				return doGetPermissionQuery(
+			if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
+				return doGetPermissionQuery_6(
+					companyId, groupId, userId, className, query);
+			}
+			else if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 5) {
+				return doGetPermissionQuery_5(
 					companyId, groupId, userId, className, query);
 			}
 		}
@@ -105,7 +118,7 @@ public class SearchPermissionCheckerImpl implements SearchPermissionChecker {
 	public void updatePermissionFields(long resourceId) {
 		try {
 			if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 5) {
-				doUpdatePermissionFields(resourceId);
+				doUpdatePermissionFields_5(resourceId);
 			}
 		}
 		catch (Exception e) {
@@ -113,7 +126,20 @@ public class SearchPermissionCheckerImpl implements SearchPermissionChecker {
 		}
 	}
 
-	protected void doAddPermissionFields(
+	public void updatePermissionFields(
+		String resourceName, String resourceClassPK) {
+
+		try {
+			if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
+				doUpdatePermissionFields_6(resourceName, resourceClassPK);
+			}
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+	}
+
+	protected void doAddPermissionFields_5(
 			long companyId, long groupId, String className, String classPK,
 			Document doc)
 		throws Exception {
@@ -140,7 +166,33 @@ public class SearchPermissionCheckerImpl implements SearchPermissionChecker {
 			Field.ROLE_ID, roleIds.toArray(new Long[roleIds.size()]));
 	}
 
-	protected Query doGetPermissionQuery(
+	protected void doAddPermissionFields_6(
+			long companyId, long groupId, String className, String classPK,
+			Document doc)
+		throws Exception {
+
+		Group group = GroupLocalServiceUtil.getGroup(groupId);
+
+		List<Role> roles = ResourceActionsUtil.getRoles(group, className);
+
+		List<Long> roleIds = new ArrayList<Long>();
+
+		for (Role role : roles) {
+			long roleId = role.getRoleId();
+
+			if (ResourcePermissionLocalServiceUtil.hasResourcePermission(
+					companyId, className, ResourceConstants.SCOPE_INDIVIDUAL,
+					classPK, roleId, ActionKeys.VIEW)) {
+
+				roleIds.add(roleId);
+			}
+		}
+
+		doc.addKeyword(
+			Field.ROLE_ID, roleIds.toArray(new Long[roleIds.size()]));
+	}
+
+	protected Query doGetPermissionQuery_5(
 			long companyId, long groupId, long userId, String className,
 			Query query)
 		throws Exception {
@@ -201,7 +253,48 @@ public class SearchPermissionCheckerImpl implements SearchPermissionChecker {
 		return fullQuery;
 	}
 
-	protected void doUpdatePermissionFields(long resourceId) throws Exception {
+	protected Query doGetPermissionQuery_6(
+			long companyId, long groupId, long userId, String className,
+			Query query)
+		throws Exception {
+
+		BooleanQuery fullQuery = BooleanQueryFactoryUtil.create();
+
+		BooleanQuery permissionQuery = BooleanQueryFactoryUtil.create();
+
+		List<Role> roles = RoleLocalServiceUtil.getUserRoles(userId);
+
+		roles = ListUtil.copy(roles);
+
+		roles.addAll(RoleLocalServiceUtil.getUserGroupRoles(userId, groupId));
+
+		for (Role role : roles) {
+			if (role.getName().equals(RoleConstants.ADMINISTRATOR)) {
+				return query;
+			}
+
+			long roleId = role.getRoleId();
+
+			if (ResourcePermissionLocalServiceUtil.hasResourcePermission(
+					companyId, className, ResourceConstants.SCOPE_COMPANY,
+					String.valueOf(companyId), roleId, ActionKeys.VIEW) ||
+				ResourcePermissionLocalServiceUtil.hasResourcePermission(
+					companyId, className, ResourceConstants.SCOPE_GROUP,
+					String.valueOf(groupId), roleId, ActionKeys.VIEW)) {
+
+				return query;
+			}
+
+			permissionQuery.addTerm(Field.ROLE_ID, roleId);
+		}
+
+		fullQuery.add(query, BooleanClauseOccur.MUST);
+		fullQuery.add(permissionQuery, BooleanClauseOccur.MUST);
+
+		return fullQuery;
+	}
+
+	protected void doUpdatePermissionFields_5(long resourceId) throws Exception {
 		Resource resource = ResourceLocalServiceUtil.getResource(resourceId);
 
 		Indexer indexer = IndexerRegistryUtil.getIndexer(resource.getName());
@@ -209,6 +302,17 @@ public class SearchPermissionCheckerImpl implements SearchPermissionChecker {
 		if (indexer != null) {
 			indexer.reIndex(
 				resource.getName(), GetterUtil.getLong(resource.getPrimKey()));
+		}
+	}
+
+	protected void doUpdatePermissionFields_6(
+			String resourceName, String resourceClassPK)
+		throws Exception {
+		Indexer indexer = IndexerRegistryUtil.getIndexer(
+				resourceName);
+
+		if (indexer != null) {
+			indexer.reIndex(resourceName, GetterUtil.getLong(resourceClassPK));
 		}
 	}
 

@@ -26,6 +26,7 @@ package com.liferay.portal.kernel.search;
  * <a href="SearchEngineUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Bruno Farache
+ * @author Raymond Augé
  *
  */
 public class SearchEngineUtil {
@@ -176,6 +177,14 @@ public class SearchEngineUtil {
 		}
 
 		_searchPermissionChecker.updatePermissionFields(resourceId);
+	}
+
+	public static void updatePermissionFields(String name, String primKey) {
+		if (isIndexReadOnly()) {
+			return;
+		}
+
+		_searchPermissionChecker.updatePermissionFields(name, primKey);
 	}
 
 	public void setDefaultSearchEngineName(String defaultSearchEngineName) {

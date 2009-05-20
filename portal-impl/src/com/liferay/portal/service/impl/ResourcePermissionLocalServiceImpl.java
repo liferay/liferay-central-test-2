@@ -25,6 +25,7 @@ package com.liferay.portal.service.impl;
 import com.liferay.portal.NoSuchResourcePermissionException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.model.ResourceAction;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.ResourcePermission;
@@ -41,6 +42,7 @@ import java.util.List;
  * </b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Raymond Augé
  *
  */
 public class ResourcePermissionLocalServiceImpl
@@ -271,6 +273,8 @@ public class ResourcePermissionLocalServiceImpl
 		resourcePermissionPersistence.update(resourcePermission, false);
 
 		PermissionCacheUtil.clearCache();
+
+		SearchEngineUtil.updatePermissionFields(name, primKey);
 	}
 
 }

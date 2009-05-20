@@ -27,6 +27,7 @@ package com.liferay.portal.kernel.search;
  *
  * @author Allen Chiang
  * @author Bruno Farache
+ * @author Raymond Augé
  *
  */
 public interface SearchPermissionChecker {
@@ -38,5 +39,7 @@ public interface SearchPermissionChecker {
 		Query query);
 
 	public void updatePermissionFields(long resourceId);
+
+	public void updatePermissionFields(String name, String primKey);
 
 }
