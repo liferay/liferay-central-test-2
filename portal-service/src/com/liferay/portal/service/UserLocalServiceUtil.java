@@ -370,6 +370,12 @@ public class UserLocalServiceUtil {
 		return getService().getRoleUsers(roleId);
 	}
 
+	public static java.util.List<com.liferay.portal.model.User> getRoleUsers(
+		long roleId, int start, int end)
+		throws com.liferay.portal.SystemException {
+		return getService().getRoleUsers(roleId, start, end);
+	}
+
 	public static int getRoleUsersCount(long roleId)
 		throws com.liferay.portal.SystemException {
 		return getService().getRoleUsersCount(roleId);

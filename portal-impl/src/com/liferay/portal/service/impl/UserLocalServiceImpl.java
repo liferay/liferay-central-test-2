@@ -1126,6 +1126,12 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		return rolePersistence.getUsers(roleId);
 	}
 
+	public List<User> getRoleUsers(long roleId, int start, int end)
+		throws SystemException {
+
+		return rolePersistence.getUsers(roleId, start, end);
+	}
+
 	public int getRoleUsersCount(long roleId) throws SystemException {
 		return rolePersistence.getUsersSize(roleId);
 	}

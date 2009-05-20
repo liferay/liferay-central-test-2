@@ -279,6 +279,11 @@ public interface UserLocalService {
 		long roleId) throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.liferay.portal.model.User> getRoleUsers(
+		long roleId, int start, int end)
+		throws com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getRoleUsersCount(long roleId)
 		throws com.liferay.portal.SystemException;
 
