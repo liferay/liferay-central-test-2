@@ -104,28 +104,34 @@ if (layout != null) {
 			</li>
 		</c:if>
 
-		<li class="manage-content has-submenu" id="<portlet:namespace />manageContent">
-			<a class="menu-button" href="javascript: ;">
-				<span>
-					<liferay-ui:message key="settings" />
-				</span>
-			</a>
+		<c:if test="<%= themeDisplay.isShowPageSettingsIcon() || themeDisplay.isShowLayoutTemplatesIcon()%>">
+			<li class="manage-content has-submenu" id="<portlet:namespace />manageContent">
+				<a class="menu-button" href="javascript: ;">
+					<span>
+						<liferay-ui:message key="settings" />
+					</span>
+				</a>
 
-			<div class="manage-content-container menu-container" id="<portlet:namespace />manageContentContainer">
-				<ul>
-					<li class="first">
-						<a href="<%= HtmlUtil.escape(themeDisplay.getURLPageSettings().toString()) %>">
-							<liferay-ui:message key="manage-pages" />
-						</a>
-					</li>
-					<li class="last">
-						<a href="javascript: ;" id="pageTemplate">
-							<liferay-ui:message key="layout" />
-						</a>
-					</li>
-				</ul>
-			</div>
-		</li>
+				<div class="manage-content-container menu-container" id="<portlet:namespace />manageContentContainer">
+					<ul>
+						<c:if test="<%= themeDisplay.isShowPageSettingsIcon() %>">
+							<li class="first">
+								<a href="<%= HtmlUtil.escape(themeDisplay.getURLPageSettings().toString()) %>">
+									<liferay-ui:message key="manage-pages" />
+								</a>
+							</li>
+						</c:if>
+						<c:if test="<%= themeDisplay.isShowLayoutTemplatesIcon() %>">
+							<li class="last">
+								<a href="javascript: ;" id="pageTemplate">
+									<liferay-ui:message key="layout" />
+								</a>
+							</li>
+						</c:if>
+					</ul>
+				</div>
+			</li>
+		</c:if>
 
 		<c:if test="<%= themeDisplay.isShowStagingIcon() %>">
 			<li class="staging-options has-submenu" id="<portlet:namespace />staging">
