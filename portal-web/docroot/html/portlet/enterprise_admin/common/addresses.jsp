@@ -232,14 +232,14 @@ else {
 								selectId: "countryId",
 								selectDesc: "name",
 								selectVal: "<%= address.getCountryId() %>",
-								selectData: Liferay.EnterpriseAdmin.Addresses.getCountries
+								selectData: Liferay.Address.getCountries
 							},
 							{
 								select: "<portlet:namespace />addressRegionId<%= addressesIndex %>",
 								selectId: "regionId",
 								selectDesc: "name",
 								selectVal: "<%= address.getRegionId() %>",
-								selectData: Liferay.EnterpriseAdmin.Addresses.getRegions
+								selectData: Liferay.Address.getRegions
 							}
 						]
 					);
@@ -284,14 +284,14 @@ else {
 								selectId: "countryId",
 								selectDesc: "name",
 								selectVal: '',
-								selectData: Liferay.EnterpriseAdmin.Addresses.getCountries
+								selectData: Liferay.Address.getCountries
 							},
 							{
 								select: "<portlet:namespace />addressRegionId" + idSeed,
 								selectId: "regionId",
 								selectDesc: "name",
 								selectVal: '',
-								selectData: Liferay.EnterpriseAdmin.Addresses.getRegions
+								selectData: Liferay.Address.getRegions
 							}
 						]
 					);

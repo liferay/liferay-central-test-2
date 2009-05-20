@@ -134,29 +134,14 @@ if (displayTerms.getParentOrganizationId() > 0) {
 						selectId: 'countryId',
 						selectDesc: 'name',
 						selectVal: '<%= displayTerms.getCountryId() %>',
-						selectData: function(callback) {
-							Liferay.Service.Portal.Country.getCountries(
-								{
-									active: true
-								},
-								callback
-							);
-						}
+						selectData: Liferay.Address.getCountries
 					},
 					{
 						select: '<portlet:namespace /><%= displayTerms.REGION_ID %>',
 						selectId: 'regionId',
 						selectDesc: 'name',
 						selectVal: '<%= displayTerms.getRegionId() %>',
-						selectData: function(callback, selectKey) {
-							Liferay.Service.Portal.Region.getRegions(
-								{
-									countryId: Number(selectKey),
-									active: true
-								},
-								callback
-							);
-						}
+						selectData: Liferay.Address.getRegions
 					}
 				]
 			);

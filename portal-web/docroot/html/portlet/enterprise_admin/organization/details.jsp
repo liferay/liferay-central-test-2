@@ -368,29 +368,14 @@ if (parentOrganization != null) {
 						selectId: "countryId",
 						selectDesc: "name",
 						selectVal: "<%= countryId %>",
-						selectData: function(callback) {
-							Liferay.Service.Portal.Country.getCountries(
-								{
-									active: true
-								},
-								callback
-							);
-						}
+						selectData: Liferay.Address.getCountries
 					},
 					{
 						select: "<portlet:namespace />regionId",
 						selectId: "regionId",
 						selectDesc: "name",
 						selectVal: "<%= regionId %>",
-						selectData: function(callback, selectKey) {
-							Liferay.Service.Portal.Region.getRegions(
-								{
-									countryId: Number(selectKey),
-									active: true
-								},
-								callback
-							);
-						}
+						selectData: Liferay.Address.getRegions
 					}
 				]
 			);
