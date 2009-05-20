@@ -108,3 +108,24 @@ Liferay.EnterpriseAdmin.FormNavigator = new Expanse.Class(
 		}
 	}
 );
+
+Liferay.EnterpriseAdmin.Addresses = {
+	getCountries: function(callback) {
+		Liferay.Service.Portal.Country.getCountries(
+			{
+				active: true
+			},
+			callback
+		);
+	},
+
+	getRegions: function(callback, selectKey) {
+		Liferay.Service.Portal.Region.getRegions(
+			{
+				countryId: Number(selectKey),
+				active: true
+			},
+			callback
+		);
+	}
+};

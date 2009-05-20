@@ -232,29 +232,14 @@ else {
 								selectId: "countryId",
 								selectDesc: "name",
 								selectVal: "<%= address.getCountryId() %>",
-								selectData: function(callback) {
-									Liferay.Service.Portal.Country.getCountries(
-										{
-											active: true
-										},
-										callback
-									);
-								}
+								selectData: Liferay.EnterpriseAdmin.Addresses.getCountries
 							},
 							{
 								select: "<portlet:namespace />addressRegionId<%= addressesIndex %>",
 								selectId: "regionId",
 								selectDesc: "name",
 								selectVal: "<%= address.getRegionId() %>",
-								selectData: function(callback, selectKey) {
-									Liferay.Service.Portal.Region.getRegions(
-										{
-											countryId: Number(selectKey),
-											active: true
-										},
-										callback
-									);
-								}
+								selectData: Liferay.EnterpriseAdmin.Addresses.getRegions
 							}
 						]
 					);
@@ -299,29 +284,14 @@ else {
 								selectId: "countryId",
 								selectDesc: "name",
 								selectVal: '',
-								selectData: function(callback) {
-									Liferay.Service.Portal.Country.getCountries(
-										{
-											active: true
-										},
-										callback
-									);
-								}
+								selectData: Liferay.EnterpriseAdmin.Addresses.getCountries
 							},
 							{
 								select: "<portlet:namespace />addressRegionId" + idSeed,
 								selectId: "regionId",
 								selectDesc: "name",
 								selectVal: '',
-								selectData: function(callback, selectKey) {
-									Liferay.Service.Portal.Region.getRegions(
-										{
-											countryId: Number(selectKey),
-											active: true
-										},
-										callback
-									);
-								}
+								selectData: Liferay.EnterpriseAdmin.Addresses.getRegions
 							}
 						]
 					);
