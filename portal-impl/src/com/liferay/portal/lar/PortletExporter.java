@@ -716,7 +716,6 @@ public class PortletExporter {
 		sb.append(context.getPortletPath(portletId));
 		sb.append(StringPool.SLASH);
 		sb.append(layout.getPlid());
-
 		sb.append("/portlet.xml");
 
 		String path = sb.toString();
@@ -724,8 +723,7 @@ public class PortletExporter {
 		Element el = parentEl.addElement("portlet");
 
 		el.addAttribute("portlet-id", portletId);
-		el.addAttribute(
-			"layout-id", String.valueOf(layout.getLayoutId()));
+		el.addAttribute("layout-id", String.valueOf(layout.getLayoutId()));
 		el.addAttribute("path", path);
 
 		if (context.isPathNotProcessed(path)) {
