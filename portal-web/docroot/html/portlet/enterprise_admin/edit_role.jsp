@@ -112,15 +112,17 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 					languageIds.add(LanguageUtil.getLanguageId(locales[i]));
 				}
 			}
-
-			if (languageIds.isEmpty()) {
-				languageIds.add(StringPool.BLANK);
-			}
 			%>
 
 			<a class="lfr-floating-trigger" href="javascript: ;" id="<portlet:namespace />languageSelectorTrigger">
 				<liferay-ui:message key="other-languages" /> (<%= languageIds.size() %>)
 			</a>
+
+			<%
+			if (languageIds.isEmpty()) {
+				languageIds.add(StringPool.BLANK);
+			}
+			%>
 
 			<div class="lfr-floating-container" id="<portlet:namespace />languageSelector">
 				<div class="lfr-panel">
@@ -168,7 +170,7 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 									<div class="exp-ctrl-holder exp-form-column">
 										<label><liferay-ui:message key="title" /></label>
 
-										<input class="language-value" name="<portlet:namespace />title_" type="text" value="<%= HtmlUtil.escape(role.getTitle(languageId, false)) %>" />
+										<input class="language-value" name="<portlet:namespace />title_<%= languageId %>" type="text" value="<%= HtmlUtil.escape(role.getTitle(languageId, false)) %>" />
 									</div>
 								</div>
 							</div>
