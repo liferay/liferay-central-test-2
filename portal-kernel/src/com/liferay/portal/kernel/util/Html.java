@@ -28,11 +28,22 @@ package com.liferay.portal.kernel.util;
  * @author Brian Wing Shun Chan
  * @author Clarence Shen
  * @author Harry Mark
+ * @author Samuel Kong
  *
  */
 public interface Html {
 
 	public String escape(String text);
+
+	public String escape(String text, int mode);
+
+	public String escapeAttribute(String attribute);
+
+	public String escapeCSS(String css);
+
+	public String escapeJS(String js);
+
+	public String escapeURL(String url);
 
 	public String extractText(String html);
 

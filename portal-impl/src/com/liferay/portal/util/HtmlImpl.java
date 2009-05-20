@@ -25,6 +25,7 @@ package com.liferay.portal.util;
 import au.id.jericho.lib.html.Source;
 
 import com.liferay.portal.kernel.util.Html;
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 
@@ -34,9 +35,20 @@ import com.liferay.portal.kernel.util.StringUtil;
  * @author Brian Wing Shun Chan
  * @author Clarence Shen
  * @author Harry Mark
+ * @author Samuel Kong
  *
  */
 public class HtmlImpl implements Html {
+
+	public static final int ESCAPE_MODE_ATTRIBUTE = 1;
+
+	public static final int ESCAPE_MODE_CSS = 2;
+
+	public static final int ESCAPE_MODE_JS = 3;
+
+	public static final int ESCAPE_MODE_TEXT = 4;
+
+	public static final int ESCAPE_MODE_URL = 5;
 
 	public String escape(String text) {
 		if (text == null) {
@@ -86,6 +98,67 @@ public class HtmlImpl implements Html {
 		}
 
 		return sb.toString();
+	}
+
+	public String escape(String text, int type) {
+		if (text == null){
+			return null;
+		}
+
+		String prefix = StringPool.BLANK;
+		String postfix = StringPool.BLANK;
+
+		if (type == ESCAPE_MODE_ATTRIBUTE) {
+			prefix = "&#x";
+			postfix = StringPool.SEMICOLON;
+		}
+		else if (type == ESCAPE_MODE_CSS) {
+			prefix = StringPool.BACK_SLASH;
+		}
+		else if (type == ESCAPE_MODE_JS) {
+			prefix = "\\x";
+		}
+		else if (type == ESCAPE_MODE_URL) {
+			// prefix = StringPool.PERCENT;
+
+			return HttpUtil.encodeURL(text, true);
+		}
+		else {
+			return escape(text);
+		}
+
+		StringBuilder sb = new StringBuilder();
+
+		for (int i = 0; i < text.length(); i++) {
+			char c = text.charAt(i);
+
+			if (Character.isLetterOrDigit(c)) {
+				sb.append(c);
+			}
+			else {
+				sb.append(prefix);
+				sb.append(Integer.toHexString(c));
+				sb.append(postfix);
+			}
+		}
+
+		return sb.toString();
+	}
+
+	public String escapeAttribute(String attribute) {
+		return escape(attribute, ESCAPE_MODE_ATTRIBUTE);
+	}
+
+	public String escapeCSS(String css) {
+		return escape(css, ESCAPE_MODE_CSS);
+	}
+
+	public String escapeJS(String js) {
+		return escape(js, ESCAPE_MODE_JS);
+	}
+
+	public String escapeURL(String url) {
+		return escape(url, ESCAPE_MODE_URL);
 	}
 
 	public String extractText(String html) {

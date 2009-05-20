@@ -28,12 +28,33 @@ package com.liferay.portal.kernel.util;
  * @author Brian Wing Shun Chan
  * @author Clarence Shen
  * @author Harry Mark
+ * @author Samuel Kong
  *
  */
 public class HtmlUtil {
 
 	public static String escape(String html) {
 		return getHtml().escape(html);
+	}
+
+	public static String escape(String html, int mode) {
+		return getHtml().escape(html, mode);
+	}
+
+	public static String escapeAttribute(String attribute) {
+		return getHtml().escapeAttribute(attribute);
+	}
+
+	public static String escapeCSS(String css){
+		return getHtml().escapeCSS(css);
+	}
+
+	public static String escapeJS(String js) {
+		return getHtml().escapeJS(js);
+	}
+
+	public static String escapeURL(String url) {
+		return getHtml().escapeURL(url);
 	}
 
 	public static String extractText(String html) {
