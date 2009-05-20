@@ -714,28 +714,31 @@ public class PortletExporter {
 		StringBuilder sb = new StringBuilder();
 
 		sb.append(context.getPortletPath(portletId));
-
-		if (portlet.isPreferencesUniquePerLayout()) {
-			sb.append(StringPool.SLASH);
-			sb.append(layout.getPlid());
-		}
+		sb.append(StringPool.SLASH);
+		sb.append(layout.getPlid());
 
 		sb.append("/portlet.xml");
+
+		String path = sb.toString();
 
 		Element el = parentEl.addElement("portlet");
 
 		el.addAttribute("portlet-id", portletId);
 		el.addAttribute(
 			"layout-id", String.valueOf(layout.getLayoutId()));
-		el.addAttribute("path", sb.toString());
+		el.addAttribute("path", path);
 
-		try {
-			context.addZipEntry(sb.toString(), doc.formattedString());
-		}
-		catch (IOException ioe) {
-			if (_log.isWarnEnabled()) {
-				_log.warn(ioe.getMessage());
+		if (context.isPathNotProcessed(path)) {
+			try {
+				context.addZipEntry(path, doc.formattedString());
 			}
+			catch (IOException ioe) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(ioe.getMessage());
+				}
+			}
+
+			context.addPrimaryKey(String.class, path);
 		}
 	}
 
