@@ -1162,7 +1162,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		params.put("socialRelation", new Long[] {userId});
 
 		return search(
-			user.getCompanyId(), null, null, params, start, end, obc);
+			user.getCompanyId(), null, true, params, start, end, obc);
 	}
 
 	public List<User> getSocialUsers(
@@ -1176,7 +1176,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		params.put("socialRelationType", new Long[] {userId, new Long(type)});
 
-		return search(user.getCompanyId(), null, null, params, start, end, obc);
+		return search(user.getCompanyId(), null, true, params, start, end, obc);
 	}
 
 	public List<User> getSocialUsers(
@@ -1192,7 +1192,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		params.put("socialMutualRelation", new Long[] {userId1, userId2});
 
 		return search(
-			user1.getCompanyId(), null, null, params, start, end, obc);
+			user1.getCompanyId(), null, true, params, start, end, obc);
 	}
 
 	public List<User> getSocialUsers(
@@ -1210,7 +1210,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			new Long[] {userId1, new Long(type), userId2, new Long(type)});
 
 		return search(
-			user1.getCompanyId(), null, null, params, start, end, obc);
+			user1.getCompanyId(), null, true, params, start, end, obc);
 	}
 
 	public int getSocialUsersCount(long userId)
@@ -1223,7 +1223,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		params.put("socialRelation", new Long[] {userId});
 
-		return searchCount(user.getCompanyId(), null, null, params);
+		return searchCount(user.getCompanyId(), null, true, params);
 	}
 
 	public int getSocialUsersCount(long userId, int type)
@@ -1236,7 +1236,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		params.put("socialRelationType", new Long[] {userId, new Long(type)});
 
-		return searchCount(user.getCompanyId(), null, null, params);
+		return searchCount(user.getCompanyId(), null, true, params);
 	}
 
 	public int getSocialUsersCount(long userId1, long userId2)
@@ -1249,7 +1249,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		params.put("socialMutualRelation", new Long[] {userId1, userId2});
 
-		return searchCount(user1.getCompanyId(), null, null, params);
+		return searchCount(user1.getCompanyId(), null, true, params);
 	}
 
 	public int getSocialUsersCount(long userId1, long userId2, int type)
@@ -1264,7 +1264,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			"socialMutualRelationType",
 			new Long[] {userId1, new Long(type), userId2, new Long(type)});
 
-		return searchCount(user1.getCompanyId(), null, null, params);
+		return searchCount(user1.getCompanyId(), null, true, params);
 	}
 
 	public List<User> getUserGroupUsers(long userGroupId)
