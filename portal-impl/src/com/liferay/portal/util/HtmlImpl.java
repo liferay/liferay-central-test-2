@@ -119,8 +119,6 @@ public class HtmlImpl implements Html {
 			prefix = "\\x";
 		}
 		else if (type == ESCAPE_MODE_URL) {
-			// prefix = StringPool.PERCENT;
-
 			return HttpUtil.encodeURL(text, true);
 		}
 		else {
