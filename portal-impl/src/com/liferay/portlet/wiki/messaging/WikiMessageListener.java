@@ -71,6 +71,7 @@ public class WikiMessageListener implements MessageListener {
 		String body = message.getString("body");
 		String replyToAddress = message.getString("replyToAddress");
 		String mailId = message.getString("mailId");
+		boolean htmlFormat = message.getBoolean("htmlFormat");
 
 		Set<Long> sent = new HashSet<Long>();
 
@@ -89,7 +90,7 @@ public class WikiMessageListener implements MessageListener {
 
 		sendEmail(
 			userId, fromName, fromAddress, subject, body, subscriptions, sent,
-			replyToAddress, mailId);
+			replyToAddress, mailId, htmlFormat);
 
 		// Nodes
 
@@ -98,7 +99,7 @@ public class WikiMessageListener implements MessageListener {
 
 		sendEmail(
 			userId, fromName, fromAddress, subject, body, subscriptions, sent,
-			replyToAddress, mailId);
+			replyToAddress, mailId, htmlFormat);
 
 		if (_log.isInfoEnabled()) {
 			_log.info("Finished sending notifications");
@@ -108,7 +109,7 @@ public class WikiMessageListener implements MessageListener {
 	protected void sendEmail(
 			long userId, String fromName, String fromAddress, String subject,
 			String body, List<Subscription> subscriptions, Set<Long> sent,
-			String replyToAddress, String mailId)
+			String replyToAddress, String mailId, boolean htmlFormat)
 		throws Exception {
 
 		for (Subscription subscription : subscriptions) {
@@ -189,7 +190,7 @@ public class WikiMessageListener implements MessageListener {
 					replyToAddress, replyToAddress);
 
 				MailMessage message = new MailMessage(
-					from, to, curSubject, curBody, false);
+					from, to, curSubject, curBody, htmlFormat);
 
 				message.setReplyTo(new InternetAddress[] {replyTo});
 				message.setMessageId(mailId);

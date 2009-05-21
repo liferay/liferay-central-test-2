@@ -330,6 +330,7 @@ for (int i = 0; i < results.size(); i++) {
 	<input name="<portlet:namespace />title" type="hidden" value="<%= wikiPage.getTitle() %>" />
 	<input name="<portlet:namespace />sourceVersion" type="hidden" value="<%= latestWikiPage.getVersion() %>" />
 	<input name="<portlet:namespace />targetVersion" type="hidden" value="<%= wikiPage.getVersion() %>" />
+	<input name="<portlet:namespace />type" type="hidden" value="html" />
 
 	<input type="submit" value="<liferay-ui:message key="compare-versions" />" />
 

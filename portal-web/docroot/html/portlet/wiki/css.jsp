@@ -135,6 +135,65 @@
 	padding-right: 11px;
 }
 
+.portlet-wiki .history-navigation .central-info a.change-mode {
+	font-weight: bold;
+}
+
+.portlet-wiki .history-navigation .central-info span.change-mode {
+	color: #999;
+	font-weight: bold;
+}
+
+.portlet-wiki .history-navigation .central-info {
+	float: left;
+	padding-left: 10px;
+	padding-right: 10px;
+	text-align: center;
+	width: 66%;
+}
+
+.portlet-wiki .history-navigation .central-title {
+	font-weight: bold;
+	padding-right: 20px;
+}
+
+.portlet-wiki .history-navigation .central-username {
+	font-weight: bold;
+}
+
+.portlet-wiki .history-navigation .next {
+	background-image: url(<%= themeImagesPath %>/arrows/paging_next.png);
+	background-position: 100% 0;
+	float: right;
+	padding-right: 15px;
+}
+
+.portlet-wiki .history-navigation .previous {
+	background-image: url(<%= themeImagesPath %>/arrows/paging_previous.png);
+	float: left;
+	padding-left: 15px;
+}
+
+.portlet-wiki .history-navigation a, .portlet-wiki .history-navigation span {
+	background: url() no-repeat;
+}
+
+.portlet-wiki .history-navigation span.next {
+	background-position: 100% 100%;
+}
+
+.portlet-wiki .history-navigation span.previous {
+	background-position: 0 100%;
+}
+
+.portlet-wiki .history-navigation {
+	background: #EEE;
+	border-top: 1px solid #CCC;
+	margin: 15px 0 20px;
+	overflow: hidden;
+	padding: 5px;
+}
+
 .portlet-wiki .node-current {
 	text-decoration: none;
 	font-weight: bold;

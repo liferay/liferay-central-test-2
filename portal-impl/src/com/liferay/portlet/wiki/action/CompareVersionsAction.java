@@ -26,9 +26,10 @@ import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.DiffResult;
 import com.liferay.portal.kernel.util.DiffUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.struts.PortletAction;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.wiki.NoSuchPageException;
 import com.liferay.portlet.wiki.model.WikiPage;
@@ -40,6 +41,7 @@ import java.io.StringReader;
 import java.util.List;
 
 import javax.portlet.PortletConfig;
+import javax.portlet.PortletURL;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
@@ -51,6 +53,7 @@ import org.apache.struts.action.ActionMapping;
  * <a href="CompareVersionsAction.java.html"><b><i>View Source</i></b></a>
  *
  * @author Bruno Farache
+ * @author Julio Camarero
  *
  */
 public class CompareVersionsAction extends PortletAction {
@@ -64,7 +67,7 @@ public class CompareVersionsAction extends PortletAction {
 			ActionUtil.getNode(renderRequest);
 			ActionUtil.getPage(renderRequest);
 
-			compareVersions(renderRequest);
+			compareVersions(renderRequest, renderResponse);
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchPageException) {
@@ -81,8 +84,12 @@ public class CompareVersionsAction extends PortletAction {
 		return mapping.findForward("portlet.wiki.compare_versions");
 	}
 
-	protected void compareVersions(RenderRequest renderRequest)
+	protected void compareVersions(
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
+
+		ThemeDisplay themeDisplay =
+				(ThemeDisplay)renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
 
 		long nodeId = ParamUtil.getLong(renderRequest, "nodeId");
 
@@ -99,29 +106,58 @@ public class CompareVersionsAction extends PortletAction {
 		WikiPage targetPage = WikiPageServiceUtil.getPage(
 			nodeId, title, targetVersion);
 
-		String sourceContent = sourcePage.getContent();
-		String targetContent = targetPage.getContent();
+		if (type.equals("html")){
+			PortletURL viewPageURL = renderResponse.createRenderURL();
 
-		sourceContent = WikiUtil.processContent(sourceContent);
-		targetContent = WikiUtil.processContent(targetContent);
+			viewPageURL.setParameter("struts_action", "/wiki/view");
+			viewPageURL.setParameter(
+				"nodeName", sourcePage.getNode().getName());
 
-		if (type.equals("escape")) {
-			sourceContent = HtmlUtil.escape(sourceContent);
-			targetContent = HtmlUtil.escape(targetContent);
+			PortletURL editPageURL = renderResponse.createRenderURL();
+
+			editPageURL.setParameter("struts_action", "/wiki/edit_page");
+			editPageURL.setParameter("nodeId", String.valueOf(nodeId));
+			editPageURL.setParameter("title", title);
+
+			String attachmentURLPrefix =
+				themeDisplay.getPathMain() + "/wiki/get_page_attachment?" +
+					"p_l_id=" + themeDisplay.getPlid() + "&nodeId=" + nodeId +
+					"&title=" + HttpUtil.encodeURL(title) + "&fileName=";
+
+			String htmlDiffResult = WikiUtil.diffHtml(
+				sourcePage, targetPage, viewPageURL, editPageURL,
+				attachmentURLPrefix);
+
+			renderRequest.setAttribute(
+				WebKeys.DIFF_HTML_RESULTS, htmlDiffResult);
 		}
-		else if (type.equals("strip")) {
-			sourceContent = HtmlUtil.extractText(sourceContent);
-			targetContent = HtmlUtil.extractText(targetContent);
+		else{
+			String sourceContent = sourcePage.getContent();
+			String targetContent = targetPage.getContent();
+
+			sourceContent = WikiUtil.processContent(sourceContent);
+			targetContent = WikiUtil.processContent(targetContent);
+
+			if (type.equals("escape")) {
+				sourceContent = HtmlUtil.escape(sourceContent);
+				targetContent = HtmlUtil.escape(targetContent);
+			}
+			else if (type.equals("strip")) {
+				sourceContent = HtmlUtil.extractText(sourceContent);
+				targetContent = HtmlUtil.extractText(targetContent);
+			}
+
+			List<DiffResult>[] diffResults = DiffUtil.diff(
+				new StringReader(sourceContent),
+				new StringReader(targetContent));
+
+			renderRequest.setAttribute(WebKeys.DIFF_RESULTS, diffResults);
 		}
 
-		List<DiffResult>[] diffResults = DiffUtil.diff(
-			new StringReader(sourceContent), new StringReader(targetContent));
-
-		renderRequest.setAttribute(
-			WebKeys.SOURCE_NAME, title + StringPool.SPACE + sourceVersion);
-		renderRequest.setAttribute(
-			WebKeys.TARGET_NAME, title + StringPool.SPACE + targetVersion);
-		renderRequest.setAttribute(WebKeys.DIFF_RESULTS, diffResults);
+		renderRequest.setAttribute(WebKeys.WIKI_NODE_ID, nodeId);
+		renderRequest.setAttribute(WebKeys.TITLE, title);
+		renderRequest.setAttribute(WebKeys.SOURCE_VERSION, sourceVersion);
+		renderRequest.setAttribute(WebKeys.TARGET_VERSION, targetVersion);
 	}
 
 }

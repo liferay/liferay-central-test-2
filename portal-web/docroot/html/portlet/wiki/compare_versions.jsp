@@ -26,10 +26,7 @@
 
 <%
 String backURL = ParamUtil.getString(request, "backURL");
-
-String sourceName = (String)renderRequest.getAttribute(WebKeys.SOURCE_NAME);
-String targetName = (String)renderRequest.getAttribute(WebKeys.TARGET_NAME);
-List[] diffResults = (List[])renderRequest.getAttribute(WebKeys.DIFF_RESULTS);
+String type = ParamUtil.getString(request, "type");
 %>
 
 <liferay-util:include page="/html/portlet/wiki/top_links.jsp" />
@@ -38,8 +35,32 @@ List[] diffResults = (List[])renderRequest.getAttribute(WebKeys.DIFF_RESULTS);
 	<liferay-util:param name="tabs1" value="history" />
 </liferay-util:include>
 
-<liferay-ui:diff
-	sourceName="<%= sourceName %>"
-	targetName="<%= targetName %>"
-	diffResults="<%= diffResults %>"
-/>
+<liferay-util:include page="/html/portlet/wiki/history_navigation.jsp">
+	<liferay-util:param name="mode" value="<%= type %>" />
+</liferay-util:include>
+
+<c:choose>
+	<c:when test='<%= Validator.equals ("html", type) %>'>
+
+		<%
+		String diffHtmlResults = (String)renderRequest.getAttribute(WebKeys.DIFF_HTML_RESULTS);
+		%>
+
+		<liferay-ui:diff-html diffHtmlResults="<%= diffHtmlResults %>" />
+	</c:when>
+	<c:otherwise>
+
+		<%
+		double sourceVersion = (Double)renderRequest.getAttribute(WebKeys.SOURCE_VERSION);
+		double targetVersion = (Double)renderRequest.getAttribute(WebKeys.TARGET_VERSION);
+		String title = (String)renderRequest.getAttribute(WebKeys.TITLE);
+		List[] diffResults = (List[])renderRequest.getAttribute(WebKeys.DIFF_RESULTS);
+		%>
+
+		<liferay-ui:diff
+			sourceName="<%= title + StringPool.SPACE + sourceVersion %>"
+			targetName="<%= title + StringPool.SPACE + targetVersion %>"
+			diffResults="<%= diffResults %>"
+		/>
+	</c:otherwise>
+</c:choose>

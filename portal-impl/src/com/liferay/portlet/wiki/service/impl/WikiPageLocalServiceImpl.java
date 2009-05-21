@@ -96,6 +96,7 @@ import java.util.regex.Pattern;
 
 import javax.portlet.PortletPreferences;
 import javax.portlet.PortletURL;
+import javax.portlet.WindowState;
 
 /**
  * <a href="WikiPageLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -104,6 +105,7 @@ import javax.portlet.PortletURL;
  * @author Jorge Ferrer
  * @author Raymond Augé
  * @author Bruno Farache
+ * @author Julio Camarero
  *
  */
 public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
@@ -1094,6 +1096,18 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		}
 	}
 
+	protected WikiPage getPreviousVersionPage(WikiPage page)
+		throws PortalException, SystemException {
+
+		double previousVersion = MathUtil.format(page.getVersion() - 0.1, 1, 1);
+
+		if (previousVersion < 1) {
+			return null;
+		}
+		
+		return getPage(page.getNodeId(), page.getTitle(), previousVersion);
+	}
+
 	protected boolean isLinkedTo(WikiPage page, String targetTitle)
 		throws PortalException {
 
@@ -1155,17 +1169,8 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		User user = userPersistence.findByPrimaryKey(page.getUserId());
 
-		String pageURL = StringPool.BLANK;
-
 		String portalURL = serviceContext.getPortalURL();
 		String layoutURL = serviceContext.getLayoutURL();
-
-		if (Validator.isNotNull(layoutURL) && Validator.isNotNull(portalURL)) {
-			pageURL =
-				portalURL + layoutURL + Portal.FRIENDLY_URL_SEPARATOR +
-					"wiki/" + node.getNodeId() + StringPool.SLASH +
-						HttpUtil.encodeURL(page.getTitle());
-		}
 
 		String portletName = PortalUtil.getPortletTitle(
 			PortletKeys.WIKI, user);
@@ -1176,6 +1181,67 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		String replyToAddress = fromAddress;
 		String mailId = WikiUtil.getMailId(
 			company.getMx(), page.getNodeId(), page.getPageId());
+
+		WikiPage previousVersionPage = getPreviousVersionPage(page);
+
+		String attachmentURLPrefix =
+			portalURL + serviceContext.getPathMain() +
+				"/wiki/get_page_attachment?" + "p_l_id=" +
+					serviceContext.getPlid() + "&nodeId=" + page.getNodeId() +
+						"&title=" + HttpUtil.encodeURL(page.getTitle()) +
+							"&fileName=";
+
+		String pageDiffs = StringPool.BLANK;
+
+		try {
+			pageDiffs = WikiUtil.diffHtml (
+				previousVersionPage, page, null, null, attachmentURLPrefix);
+		}
+		catch(Exception e) {
+		}
+
+		String pageContent;
+
+		if (Validator.equals(page.getFormat(), "creole")) {
+				pageContent = WikiUtil.convert(
+					page, null, null,attachmentURLPrefix);
+		}
+		else {
+			pageContent = page.getContent();
+			pageContent = WikiUtil.processContent(pageContent);
+		}
+
+		String pageURL = StringPool.BLANK;
+		String diffsURL = StringPool.BLANK;
+
+		if (Validator.isNotNull(layoutURL) && Validator.isNotNull(portalURL)) {
+			pageURL =
+				portalURL + layoutURL + Portal.FRIENDLY_URL_SEPARATOR +
+					"wiki/" + node.getNodeId() + StringPool.SLASH +
+						HttpUtil.encodeURL(page.getTitle());
+
+			if (previousVersionPage != null) {
+				StringBuilder sb = new StringBuilder();
+
+				sb.append(portalURL);
+				sb.append(layoutURL);
+				sb.append("?p_p_id=");
+				sb.append(PortletKeys.WIKI);
+				sb.append("&p_p_state=");
+				sb.append(WindowState.MAXIMIZED);
+				sb.append("&struts_action=/wiki/compare_versions");
+				sb.append("&type=html&nodeId=");
+				sb.append(node.getNodeId());
+				sb.append("&title=");
+				sb.append(HttpUtil.encodeURL(page.getTitle()));
+				sb.append("&sourceVersion=");
+				sb.append(previousVersionPage.getVersion());
+				sb.append("&targetVersion=");
+				sb.append(page.getVersion());
+
+				diffsURL = sb.toString();
+			}
+		}
 
 		fromName = StringUtil.replace(
 			fromName,
@@ -1237,7 +1303,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		}
 
 		if (Validator.isNotNull(signature)) {
-			body +=  "\n--\n" + signature;
+			body +=  "\n" + signature;
 		}
 
 		subjectPrefix = StringUtil.replace(
@@ -1266,7 +1332,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 				fromAddress,
 				fromName,
 				node.getName(),
-				page.getContent(),
+				pageContent,
 				String.valueOf(page.getPageId()),
 				page.getTitle(),
 				user.getEmailAddress(),
@@ -1286,9 +1352,13 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 				"[$FROM_NAME$]",
 				"[$NODE_NAME$]",
 				"[$PAGE_CONTENT$]",
+				"[$PAGE_DATE_UPDATE$]",
+				"[$PAGE_DIFFS$]",
 				"[$PAGE_ID$]",
+				"[$PAGE_SUMMARY$]",
 				"[$PAGE_TITLE$]",
 				"[$PAGE_URL$]",
+				"[$DIFFS_URL$]",
 				"[$PAGE_USER_ADDRESS$]",
 				"[$PAGE_USER_NAME$]",
 				"[$PORTAL_URL$]",
@@ -1302,10 +1372,14 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 				fromAddress,
 				fromName,
 				node.getName(),
-				page.getContent(),
+				pageContent,
+				String.valueOf(page.getModifiedDate()),
+				replaceStyles(pageDiffs),
 				String.valueOf(page.getPageId()),
+				page.getSummary(),
 				page.getTitle(),
 				pageURL,
+				diffsURL,
 				user.getEmailAddress(),
 				user.getFullName(),
 				company.getVirtualHost(),
@@ -1315,7 +1389,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		String subject = page.getTitle();
 
 		if (subject.indexOf(subjectPrefix) == -1) {
-			subject = subjectPrefix + subject;
+			subject = subjectPrefix + StringPool.SPACE + subject;
 		}
 
 		Message message = new Message();
@@ -1330,8 +1404,32 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		message.put("body", body);
 		message.put("replyToAddress", replyToAddress);
 		message.put("mailId", mailId);
+		message.put("htmlFormat", Boolean.TRUE);
 
 		MessageBusUtil.sendMessage(DestinationNames.WIKI, message);
+	}
+
+	protected String replaceStyles (String html) {
+		return StringUtil.replace(
+			html,
+			new String[] {
+				"class=\"diff-html-added\"",
+				"class=\"diff-html-removed\"",
+				"class=\"diff-html-changed\"",
+				"changeType=\"diff-added-image\"",
+				"changeType=\"diff-removed-image\"",
+				"changeType=\"diff-changed-image\""
+			},
+			new String[] {
+				"style=\"background-color: #CFC;\"",
+				"style=\"background-color: #FDC6C6;" +
+					"text-decoration: line-through;\"",
+				"style=\"border-bottom: 2px dotted blue;\"",
+				"style=\"border: 10px solid #CFC;\"",
+				"style=\"border: 10px solid #FDC6C6;\"",
+				"style=\"border: 10px solid blue;\""
+			}
+		);
 	}
 
 	protected void validate(long nodeId, String content, String format)

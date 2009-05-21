@@ -128,7 +128,7 @@
 	<library>
 		<file-name>development/ecj.jar</file-name>
 		<version>3.4.1</version>
-		<project-name>Eclpse JDT Core Batch Compiler</project-name>
+		<project-name>Eclipse JDT Core Batch Compiler</project-name>
 		<project-url>http://www.eclipse.org/jdt/core/index.php</project-url>
 		<licenses>
 			<license>
@@ -1306,6 +1306,17 @@
 		</licenses>
 	</library>
 	<library>
+		<file-name>portal/daisydiff.jar</file-name>
+		<version>1.0</version>
+		<project-name>DaisyDiff</project-name>
+		<project-url>http://code.google.com/p/daisydiff/</project-url>
+		<licenses>
+			<license>
+				<license-name>Apache License 2.0</license-name>
+			</license>
+		</licenses>
+	</library>
+	<library>
 		<file-name>portal/displaytag.jar</file-name>
 		<version>1.1</version>
 		<project-name>Display Tag Library</project-name>
@@ -1336,6 +1347,17 @@
 			<license>
 				<license-name>Apache License 2.0</license-name>
 				<copyright-notice>Copyright (c) 2004-2005 Germinus XXI</copyright-notice>
+			</license>
+		</licenses>
+	</library>
+	<library>
+		<file-name>portal/eclipse-core-runtime.jar</file-name>
+		<version>20070801</version>
+		<project-name>Eclipse Core Runtime</project-name>
+		<project-url>http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.core.runtime/</project-url>
+		<licenses>
+			<license>
+				<license-name>Eclipse Public License v1.0</license-name>
 			</license>
 		</licenses>
 	</library>

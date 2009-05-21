@@ -248,6 +248,11 @@
 			<bean class="com.liferay.portal.util.DiffImpl" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.kernel.util.DiffHtmlUtil" class="com.liferay.portal.kernel.util.DiffHtmlUtil">
+		<property name="diffHtml">
+			<bean class="com.liferay.portal.util.DiffHtmlImpl" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.kernel.util.DigesterUtil" class="com.liferay.portal.kernel.util.DigesterUtil">
 		<property name="digester">
 			<bean class="com.liferay.portal.util.DigesterImpl" />

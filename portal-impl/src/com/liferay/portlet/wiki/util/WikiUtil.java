@@ -27,6 +27,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.configuration.Filter;
 import com.liferay.portal.kernel.portlet.LiferayPortletURL;
 import com.liferay.portal.kernel.util.ArrayUtil;
+import com.liferay.portal.kernel.util.DiffHtmlUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.InstancePool;
@@ -52,6 +53,7 @@ import com.liferay.portlet.wiki.service.permission.WikiNodePermission;
 import com.liferay.portlet.wiki.util.comparator.VisibleNodesComparator;
 
 import java.io.IOException;
+import java.io.StringReader;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -83,6 +85,28 @@ public class WikiUtil {
 
 		return _instance._convert(
 			page, viewPageURL, editPageURL, attachmentURLPrefix);
+	}
+
+	public static String diffHtml (
+		WikiPage sourcePage, WikiPage targetPage, PortletURL viewPageURL,
+		PortletURL editPageURL, String attachmentURLPrefix)
+		throws Exception {
+
+		String sourceContent = StringPool.BLANK;
+		String targetContent = StringPool.BLANK;
+
+		if (sourcePage != null) {
+			sourceContent = WikiUtil.convert(
+				sourcePage, viewPageURL, editPageURL,attachmentURLPrefix);
+		}
+
+		if (targetPage != null) {
+			targetContent = WikiUtil.convert(
+				targetPage, viewPageURL, editPageURL, attachmentURLPrefix);
+		}
+
+		return DiffHtmlUtil.diff(
+			new StringReader(sourceContent),new StringReader(targetContent));
 	}
 
 	public static String getEditPage(String format) {
@@ -325,23 +349,31 @@ public class WikiUtil {
 
 		String content = engine.convert(page, editPageURL);
 
-		liferayEditPageURL.setParameter("title", "__REPLACEMENT__", false);
+		String editPageURLString = StringPool.BLANK;
 
-		String editPageURLString = editPageURL.toString();
+		if (editPageURL != null) {
+			liferayEditPageURL.setParameter("title", "__REPLACEMENT__", false);
 
-		editPageURLString = StringUtil.replace(
-			editPageURLString, "__REPLACEMENT__", "$1");
+			editPageURLString = editPageURL.toString();
+
+			editPageURLString = StringUtil.replace(
+				editPageURLString, "__REPLACEMENT__", "$1");
+		}
 
 		Matcher matcher = _editPageURLPattern.matcher(content);
 
 		content = matcher.replaceAll(editPageURLString);
 
-		liferayViewPageURL.setParameter("title", "__REPLACEMENT__", false);
+		String viewPageURLString = StringPool.BLANK;
 
-		String viewPageURLString = viewPageURL.toString();
+		if (viewPageURL != null) {
+			liferayViewPageURL.setParameter("title", "__REPLACEMENT__", false);
 
-		viewPageURLString = StringUtil.replace(
-			viewPageURLString, "__REPLACEMENT__", "$1");
+			viewPageURLString = viewPageURL.toString();
+
+			viewPageURLString = StringUtil.replace(
+				viewPageURLString, "__REPLACEMENT__", "$1");
+		}
 
 		matcher = _viewPageURLPattern.matcher(content);
 

@@ -71,6 +71,8 @@ public class WebKeys implements com.liferay.portal.kernel.util.WebKeys {
 
 	public static final String CURRENT_URL = "CURRENT_URL";
 
+	public static final String DIFF_HTML_RESULTS = "DIFF_HTML_RESULTS";
+
 	public static final String DIFF_RESULTS = "DIFF_RESULTS";
 
 	public static final String DOCUMENT_LIBRARY_FILE_ENTRY = "DOCUMENT_LIBRARY_FILE_ENTRY";
@@ -317,6 +319,8 @@ public class WebKeys implements com.liferay.portal.kernel.util.WebKeys {
 
 	public static final String SOURCE_NAME = "SOURCE_NAME";
 
+	public static final String SOURCE_VERSION = "SOURCE_VERSION";
+
 	public static final String STALE_SESSION = "STALE_SESSION";
 
 	public static final String STRING_SERVLET_RESPONSE = "STRING_SERVLET_RESPONSE";
@@ -333,11 +337,15 @@ public class WebKeys implements com.liferay.portal.kernel.util.WebKeys {
 
 	public static final String TARGET_NAME = "TARGET_NAME";
 
+	public static final String TARGET_VERSION = "TARGET_VERSION";
+
 	public static final String TASK_LIST = "TASK_LIST";
 
 	public static final String TASKS_PROPOSAL = "TASKS_PROPOSAL";
 
 	public static final String THEME = "THEME";
+
+	public static final String TITLE = "TITLE";
 
 	public static final String TRANSLATOR_TRANSLATION = "TRANSLATOR_TRANSLATION";
 
@@ -378,6 +386,8 @@ public class WebKeys implements com.liferay.portal.kernel.util.WebKeys {
 	public static final String WIDGET = "WIDGET";
 
 	public static final String WIKI_NODE = "WIKI_NODE";
+
+	public static final String WIKI_NODE_ID = "WIKI_NODE_ID";
 
 	public static final String WIKI_PAGE = "WIKI_PAGE";
 
