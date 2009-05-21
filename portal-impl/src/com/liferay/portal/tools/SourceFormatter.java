@@ -493,7 +493,30 @@ public class SourceFormatter {
 			sb.append(line);
 			sb.append("\n");
 
-			line = StringUtil.replace(line, "\t", "    ");
+			StringBuilder sb2 = new StringBuilder();
+
+			int numSpacesPerTab = 4;
+
+			for (char c : line.toCharArray()) {
+				if (c == '\t') {
+					for (int i = 0; i < numSpacesPerTab; i++) {
+						sb2.append(CharPool.SPACE);
+					}
+
+					numSpacesPerTab = 4;
+				}
+				else {
+					sb2.append(c);
+
+					numSpacesPerTab--;
+
+					if (numSpacesPerTab <= 0) {
+						numSpacesPerTab = 4;
+					}
+				}
+			}
+
+			line = sb2.toString();
 
 			String excluded = _exclusions.getProperty(
 				StringUtil.replace(fileName, "\\", "/") + StringPool.AT +
@@ -504,7 +527,7 @@ public class SourceFormatter {
 					StringUtil.replace(fileName, "\\", "/"));
 			}
 
-			if ((excluded == null) && ((line.length() - 1) > 79) &&
+			if ((excluded == null) && (line.length() > 80) &&
 				(!line.startsWith("import "))) {
 
 				if (line.contains(
