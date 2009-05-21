@@ -1182,7 +1182,7 @@ public class PortalImpl implements Portal {
 			queryString = typeSettingsProperties.getProperty("query-string");
 
 			if (Validator.isNotNull(queryString) &&
-				!layoutActualURL.contains(StringPool.QUESTION)) {
+				layoutActualURL.contains(StringPool.QUESTION)) {
 
 				layoutActualURL =
 					layoutActualURL + StringPool.AMPERSAND + queryString;
