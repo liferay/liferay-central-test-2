@@ -25,6 +25,7 @@ package com.liferay.portal.kernel.bi.reporting.servlet;
 import com.liferay.portal.kernel.bi.reporting.ReportDesignRetriever;
 
 import java.io.InputStream;
+
 import java.util.Date;
 
 import javax.servlet.ServletContext;
@@ -49,12 +50,12 @@ public class ServletContextReportDesignRetriever
 		_postfix = postfix;
 	}
 
-	public String getReportName() {
-		return _reportName;
-	}
-
 	public Date getModifiedDate() {
 		return new Date();
+	}
+
+	public String getReportName() {
+		return _reportName;
 	}
 
 	public InputStream retrieve() {

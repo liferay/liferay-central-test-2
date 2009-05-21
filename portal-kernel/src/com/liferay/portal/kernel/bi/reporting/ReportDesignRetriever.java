@@ -23,6 +23,7 @@
 package com.liferay.portal.kernel.bi.reporting;
 
 import java.io.InputStream;
+
 import java.util.Date;
 
 /**

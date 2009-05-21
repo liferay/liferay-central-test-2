@@ -24,6 +24,7 @@ package com.liferay.portal.kernel.bi.reporting;
 
 import java.io.InputStream;
 import java.io.Serializable;
+
 import java.util.Date;
 
 /**

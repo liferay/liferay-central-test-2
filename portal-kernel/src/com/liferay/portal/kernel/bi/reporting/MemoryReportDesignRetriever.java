@@ -24,19 +24,21 @@ package com.liferay.portal.kernel.bi.reporting;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+
 import java.util.Date;
 
 /**
- * <a href="MemoryReportDesignRetriever.java.html"><b><i>View
- * Source</i></b></a>
+ * <a href="MemoryReportDesignRetriever.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael C. Han
+ *
  */
 public class MemoryReportDesignRetriever implements ReportDesignRetriever {
 
 	public MemoryReportDesignRetriever(
-		String name, Date modifiedDate, byte[] bytes) {
-		_reportName = name;
+		String reportName, Date modifiedDate, byte[] bytes) {
+
+		_reportName = reportName;
 		_modifiedDate = modifiedDate;
 		_bytes = bytes;
 	}
