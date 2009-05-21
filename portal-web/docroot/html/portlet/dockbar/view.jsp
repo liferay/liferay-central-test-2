@@ -104,7 +104,7 @@ if (layout != null) {
 			</li>
 		</c:if>
 
-		<c:if test="<%= themeDisplay.isShowPageSettingsIcon() || themeDisplay.isShowLayoutTemplatesIcon()%>">
+		<c:if test="<%= themeDisplay.isShowPageSettingsIcon() || themeDisplay.isShowLayoutTemplatesIcon() %>">
 			<li class="manage-content has-submenu" id="<portlet:namespace />manageContent">
 				<a class="menu-button" href="javascript: ;">
 					<span>
@@ -121,6 +121,7 @@ if (layout != null) {
 								</a>
 							</li>
 						</c:if>
+
 						<c:if test="<%= themeDisplay.isShowLayoutTemplatesIcon() %>">
 							<li class="last">
 								<a href="javascript: ;" id="pageTemplate">
