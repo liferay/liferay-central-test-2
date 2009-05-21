@@ -78,7 +78,7 @@ public class AuthenticatingHttpInvokerRequestExecutor
 	protected void prepareConnection(HttpURLConnection con, int contentLength)
 		throws IOException {
 
-		prepareConnection(con, contentLength);
+		super.prepareConnection(con, contentLength);
 
 		if (getUserId() > 0) {
 			String password = GetterUtil.getString(getPassword());
