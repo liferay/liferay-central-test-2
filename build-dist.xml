@@ -930,7 +930,7 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-5.5-$${downloads.version}.zip</
 
 		<antcall target="zip-executable">
 			<param name="zip.executable.file" value="liferay-portal-tomcat-5.5" />
-			<param name="zip.executable.dir" value="${app.server.tomcat.dir}" />
+			<param name="zip.executable.dir" value="${app.server.parent.dir}/tomcat-5.5.27" />
 		</antcall>
 	</target>
 
@@ -939,7 +939,7 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-5.5-$${downloads.version}.zip</
 
 		<antcall target="zip-executable">
 			<param name="zip.executable.file" value="liferay-portal-tomcat-6.0" />
-			<param name="zip.executable.dir" value="${app.server.parent.dir}/tomcat-6.0.18" />
+			<param name="zip.executable.dir" value="${app.server.tomcat.dir}" />
 		</antcall>
 	</target>
 
