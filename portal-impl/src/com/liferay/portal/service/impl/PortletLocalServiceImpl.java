@@ -66,7 +66,7 @@ import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletInstanceFactoryUtil;
 import com.liferay.portlet.PortletPreferencesSerializer;
 import com.liferay.portlet.PortletQNameUtil;
-import com.liferay.util.bridges.jsp.JSPPortlet;
+import com.liferay.util.bridges.mvc.MVCPortlet;
 
 import java.io.File;
 
@@ -263,7 +263,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 				portlet.setPortletName(portletId);
 				portlet.setDisplayName(portletId);
-				portlet.setPortletClass(JSPPortlet.class.getName());
+				portlet.setPortletClass(MVCPortlet.class.getName());
 
 				Map<String, String> initParams = portlet.getInitParams();
 

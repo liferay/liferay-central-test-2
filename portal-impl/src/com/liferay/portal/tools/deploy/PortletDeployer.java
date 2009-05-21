@@ -25,6 +25,7 @@ package com.liferay.portal.tools.deploy;
 import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.ServerDetector;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
@@ -38,6 +39,7 @@ import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.xml.DocumentImpl;
 import com.liferay.util.TextFormatter;
+import com.liferay.util.bridges.mvc.MVCPortlet;
 import com.liferay.util.xml.XMLMerger;
 import com.liferay.util.xml.descriptor.FacesXMLDescriptor;
 
@@ -144,6 +146,8 @@ public class PortletDeployer extends BaseDeployer {
 		File portletXML = new File(
 			srcFile + "/WEB-INF/" + Portal.PORTLET_XML_FILE_NAME_STANDARD);
 		File webXML = new File(srcFile + "/WEB-INF/web.xml");
+
+		updatePortletXML(portletXML);
 
 		sb.append(getServletContent(portletXML, webXML));
 
@@ -552,6 +556,16 @@ public class PortletDeployer extends BaseDeployer {
 
 			portletXML.renameTo(portletCustomXML);
 		}
+	}
+
+	protected void updatePortletXML(File portletXML) throws Exception {
+		String content = FileUtil.read(portletXML);
+
+		content = StringUtil.replace(
+			content, "com.liferay.util.bridges.jsp.JSPPortlet",
+			MVCPortlet.class.getName());
+
+		FileUtil.write(portletXML, content);
 	}
 
 	private boolean _myFacesPortlet;

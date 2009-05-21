@@ -41,7 +41,7 @@
 	<portlet>
 		<portlet-name>6</portlet-name>
 		<display-name>Reverend Fun</display-name>
-		<portlet-class>com.liferay.util.bridges.jsp.JSPPortlet</portlet-class>
+		<portlet-class>com.liferay.util.bridges.mvc.MVCPortlet</portlet-class>
 		<init-param>
 			<name>view-jsp</name>
 			<value>/html/portlet/reverend_fun/view.jsp</value>
@@ -61,7 +61,7 @@
 	<portlet>
 		<portlet-name>7</portlet-name>
 		<display-name>Bible Gateway</display-name>
-		<portlet-class>com.liferay.util.bridges.jsp.JSPPortlet</portlet-class>
+		<portlet-class>com.liferay.util.bridges.mvc.MVCPortlet</portlet-class>
 		<init-param>
 			<name>view-jsp</name>
 			<value>/html/portlet/bible_gateway/view.jsp</value>
@@ -320,7 +320,7 @@
 	<portlet>
 		<portlet-name>23</portlet-name>
 		<display-name>Dictionary</display-name>
-		<portlet-class>com.liferay.util.bridges.jsp.JSPPortlet</portlet-class>
+		<portlet-class>com.liferay.util.bridges.mvc.MVCPortlet</portlet-class>
 		<init-param>
 			<name>view-jsp</name>
 			<value>/html/portlet/dictionary/view.jsp</value>
@@ -400,7 +400,7 @@
 	<portlet>
 		<portlet-name>27</portlet-name>
 		<display-name>Unit Converter</display-name>
-		<portlet-class>com.liferay.util.bridges.jsp.JSPPortlet</portlet-class>
+		<portlet-class>com.liferay.util.bridges.mvc.MVCPortlet</portlet-class>
 		<init-param>
 			<name>view-jsp</name>
 			<value>/html/portlet/unit_converter/view.jsp</value>
@@ -878,7 +878,7 @@
 	<portlet>
 		<portlet-name>61</portlet-name>
 		<display-name>Loan Calculator</display-name>
-		<portlet-class>com.liferay.util.bridges.jsp.JSPPortlet</portlet-class>
+		<portlet-class>com.liferay.util.bridges.mvc.MVCPortlet</portlet-class>
 		<init-param>
 			<name>view-jsp</name>
 			<value>/html/portlet/loan_calculator/view.jsp</value>
@@ -1080,7 +1080,7 @@
 	<portlet>
 		<portlet-name>70</portlet-name>
 		<display-name>Password Generator</display-name>
-		<portlet-class>com.liferay.util.bridges.jsp.JSPPortlet</portlet-class>
+		<portlet-class>com.liferay.util.bridges.mvc.MVCPortlet</portlet-class>
 		<init-param>
 			<name>view-jsp</name>
 			<value>/html/portlet/password_generator/view.jsp</value>
@@ -1595,7 +1595,7 @@
 	<portlet>
 		<portlet-name>114</portlet-name>
 		<display-name>Recent Bloggers</display-name>
-		<portlet-class>com.liferay.util.bridges.jsp.JSPPortlet</portlet-class>
+		<portlet-class>com.liferay.util.bridges.mvc.MVCPortlet</portlet-class>
 		<init-param>
 			<name>view-jsp</name>
 			<value>/html/portlet/recent_bloggers/view.jsp</value>

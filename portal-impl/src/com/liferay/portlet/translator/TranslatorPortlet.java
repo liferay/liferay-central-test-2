@@ -27,7 +27,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.translator.model.Translation;
 import com.liferay.portlet.translator.util.TranslatorUtil;
-import com.liferay.util.bridges.jsp.JSPPortlet;
+import com.liferay.util.bridges.mvc.MVCPortlet;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -39,7 +39,7 @@ import javax.portlet.PortletException;
  * @author Brian Wing Shun Chan
  *
  */
-public class TranslatorPortlet extends JSPPortlet {
+public class TranslatorPortlet extends MVCPortlet {
 
 	public void processAction(
 			ActionRequest actionRequest, ActionResponse actionResponse)

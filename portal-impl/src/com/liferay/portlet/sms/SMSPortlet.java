@@ -32,7 +32,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.util.bridges.jsp.JSPPortlet;
+import com.liferay.util.bridges.mvc.MVCPortlet;
 
 import javax.mail.internet.InternetAddress;
 
@@ -46,7 +46,7 @@ import javax.portlet.PortletException;
  * @author Brian Wing Shun Chan
  *
  */
-public class SMSPortlet extends JSPPortlet {
+public class SMSPortlet extends MVCPortlet {
 
 	public void processAction(
 			ActionRequest actionRequest, ActionResponse actionResponse)
