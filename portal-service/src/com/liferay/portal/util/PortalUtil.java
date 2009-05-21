@@ -582,7 +582,7 @@ public class PortalUtil {
 	public static String getPortletTitle(
 		Portlet portlet, long companyId, String languageId) {
 
-		return getPortletTitle(portlet, companyId, languageId);
+		return getPortal().getPortletTitle(portlet, companyId, languageId);
 	}
 
 	public static String getPortletTitle(
