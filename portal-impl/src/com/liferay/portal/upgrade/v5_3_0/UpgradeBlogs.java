@@ -22,7 +22,6 @@
 
 package com.liferay.portal.upgrade.v5_3_0;
 
-
 /**
  * <a href="UpgradeBlogs.java.html"><b><i>View Source</i></b></a>
  *
