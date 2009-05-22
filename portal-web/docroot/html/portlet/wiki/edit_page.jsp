@@ -403,7 +403,7 @@ if (Validator.isNull(redirect)) {
 			<liferay-ui:message key="summary" />
 		</td>
 		<td>
-			<liferay-ui:input-field model="<%= WikiPage.class %>" bean="<%= wikiPage %>" field="summary" />
+			<liferay-ui:input-field model="<%= WikiPage.class %>" field="summary" />
 		</td>
 	</tr>
 	<tr>
@@ -413,7 +413,7 @@ if (Validator.isNull(redirect)) {
 	</tr>
 	<tr>
 		<td colspan="2">
-			<liferay-ui:input-field model="<%= WikiPage.class %>" bean="<%= wikiPage %>" field="minorEdit" />
+			<liferay-ui:input-field model="<%= WikiPage.class %>" field="minorEdit" />
 
 			<liferay-ui:message key="this-is-a-minor-edit" />
 		</td>
