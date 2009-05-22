@@ -180,16 +180,14 @@ public class PwdEncryptor {
 
 				// Generate random salt
 
-				Random randomGenerator = new Random();
+				Random random = new Random();
 
 				int numSaltChars = saltChars.length;
 
 				StringBuilder sb = new StringBuilder();
 
-				int x =
-					randomGenerator.nextInt(Integer.MAX_VALUE) % numSaltChars;
-				int y =
-					randomGenerator.nextInt(Integer.MAX_VALUE) % numSaltChars;
+				int x = random.nextInt(Integer.MAX_VALUE) % numSaltChars;
+				int y = random.nextInt(Integer.MAX_VALUE) % numSaltChars;
 
 				sb.append(saltChars[x]);
 				sb.append(saltChars[y]);
