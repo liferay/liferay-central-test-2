@@ -104,7 +104,6 @@ import com.liferay.portal.security.pwd.PwdToolkitUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.base.PrincipalBean;
 import com.liferay.portal.service.base.UserLocalServiceBaseImpl;
-import com.liferay.portal.util.FriendlyURLNormalizer;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsKeys;
@@ -2517,9 +2516,6 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 				parameterMap);
 		}
 		else if (authType.equals(CompanyConstants.AUTH_TYPE_SN)) {
-			login = StringUtil.replace(
-				login, StringPool.SPACE, StringPool.DASH);
-
 			authResult = AuthPipeline.authenticateByScreenName(
 				authPipelinePre, companyId, login, password, headerMap,
 				parameterMap);
@@ -2964,7 +2960,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	}
 
 	protected String getScreenName(String screenName) {
-		return FriendlyURLNormalizer.normalize(screenName);
+		return StringUtil.lowerCase(StringUtil.trim(screenName));
 	}
 
 	protected long[] getUserIds(List<User> users) {
