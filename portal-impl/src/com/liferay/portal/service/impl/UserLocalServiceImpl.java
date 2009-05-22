@@ -127,6 +127,7 @@ import java.security.NoSuchAlgorithmException;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
@@ -461,7 +462,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		// User groups
 
-		List<UserGroup> userGroups = new ArrayList<UserGroup>();
+		Set<UserGroup> userGroups = new HashSet<UserGroup>();
 
 		String[] defaultUserGroupNames = PrefsPropsUtil.getStringArray(
 			companyId, PropsKeys.ADMIN_DEFAULT_USER_GROUP_NAMES,
@@ -481,7 +482,24 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			}
 		}
 
-		userPersistence.setUserGroups(userId, userGroups);
+		if (userGroupIds != null) {
+			for (int i = 0; i < userGroupIds.length; i++) {
+				try{
+					UserGroup userGroup = userGroupPersistence.findByPrimaryKey(
+						userGroupIds[i]);
+
+					userGroups.add(userGroup);
+
+					copyUserGroupLayouts(
+						userGroup.getUserGroupId(), new long[] {userId});
+				}
+				catch (NoSuchUserGroupException nsuge) {
+				}
+			}
+		}
+
+		userPersistence.setUserGroups(
+			userId, ListUtil.fromCollection(userGroups));
 
 		// Email
 
