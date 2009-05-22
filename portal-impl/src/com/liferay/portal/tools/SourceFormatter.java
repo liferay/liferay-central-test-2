@@ -493,30 +493,30 @@ public class SourceFormatter {
 			sb.append(line);
 			sb.append("\n");
 
-			StringBuilder sb2 = new StringBuilder();
+			StringBuilder lineSB = new StringBuilder();
 
-			int numSpacesPerTab = 4;
+			int spacesPerTab = 4;
 
 			for (char c : line.toCharArray()) {
-				if (c == '\t') {
-					for (int i = 0; i < numSpacesPerTab; i++) {
-						sb2.append(CharPool.SPACE);
+				if (c == CharPool.TAB) {
+					for (int i = 0; i < spacesPerTab; i++) {
+						lineSB.append(CharPool.SPACE);
 					}
 
-					numSpacesPerTab = 4;
+					spacesPerTab = 4;
 				}
 				else {
-					sb2.append(c);
+					lineSB.append(c);
 
-					numSpacesPerTab--;
+					spacesPerTab--;
 
-					if (numSpacesPerTab <= 0) {
-						numSpacesPerTab = 4;
+					if (spacesPerTab <= 0) {
+						spacesPerTab = 4;
 					}
 				}
 			}
 
-			line = sb2.toString();
+			line = lineSB.toString();
 
 			String excluded = _exclusions.getProperty(
 				StringUtil.replace(fileName, "\\", "/") + StringPool.AT +
