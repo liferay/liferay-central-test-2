@@ -1006,6 +1006,7 @@ company-profile=Профиль компании
 company=Компания
 compare-versions=Сравнить версии
 compare=Сравнить
+comparing-versions-x-and-x=Comparing Versions {0} and {1}
 completed=Завершено
 compose-email=Написать Email
 compose=Написать

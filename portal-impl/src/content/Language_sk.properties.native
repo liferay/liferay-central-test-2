@@ -930,6 +930,7 @@ company-profile=Profil spoločnosti
 company=Spoločnosť
 compare-versions=Porovnať verzie
 compare=Porovnať
+comparing-versions-x-and-x=Comparing Versions {0} and {1}
 completed=Hotovo
 compose-email=Napísať e-mail
 compose=Vytvoriť

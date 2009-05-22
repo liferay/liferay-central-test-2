@@ -1019,6 +1019,7 @@ company-profile=Företagsuppgifter
 company=Företag
 compare-versions=Jämför versioner
 compare=Jämför
+comparing-versions-x-and-x=Comparing Versions {0} and {1}
 completed=Avsluta
 compose-email=Nytt meddelande
 compose=Skapa

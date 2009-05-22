@@ -1012,6 +1012,7 @@ company-profile=Profil firmy
 company=Firma
 compare-versions=Porównaj wersje
 compare=Porównaj
+comparing-versions-x-and-x=Comparing Versions {0} and {1}
 completed=Zakończono
 compose-email=Utwórz wiadomość
 compose=Utwórz

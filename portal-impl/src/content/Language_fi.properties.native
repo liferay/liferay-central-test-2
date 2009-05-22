@@ -1016,6 +1016,7 @@ company-profile=Yrityksen profiili
 company=Yritys
 compare-versions=Vertaa versioita
 compare=Vertaa
+comparing-versions-x-and-x=Comparing Versions {0} and {1}
 completed=Valmis
 compose-email=Kirjoita sähköposti
 compose=Kirjoita

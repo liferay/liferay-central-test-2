@@ -952,6 +952,7 @@ company-profile=Konpainiaren profila
 company=Konpainia
 compare-versions=Konparatu bertsioak 
 compare=Konparatu
+comparing-versions-x-and-x=Comparing Versions {0} and {1}
 completed=Amaituta
 compose-email=Osatu e-maila
 compose=Osatu
