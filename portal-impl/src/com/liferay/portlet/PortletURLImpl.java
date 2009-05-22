@@ -603,7 +603,7 @@ public class PortletURLImpl
 			toString = URLHelper.escapeURL(toString);
 		}
 
-		writer.write(toString());
+		writer.write(toString);
 	}
 
 	protected String generateToString() {
