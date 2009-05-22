@@ -648,7 +648,7 @@ public class LayoutExporter {
 	}
 
 	protected FileCacheOutputStream exportTheme(LayoutSet layoutSet)
-		throws IOException {
+		throws IOException, SystemException {
 
 		Theme theme = layoutSet.getTheme();
 

@@ -503,7 +503,7 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 		}
 	}
 
-	public Theme getTheme() {
+	public Theme getTheme() throws SystemException {
 		if (isInheritLookAndFeel()) {
 			return getLayoutSet().getTheme();
 		}
@@ -513,7 +513,7 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 		}
 	}
 
-	public ColorScheme getColorScheme() {
+	public ColorScheme getColorScheme() throws SystemException {
 		if (isInheritLookAndFeel()) {
 			return getLayoutSet().getColorScheme();
 		}
@@ -535,7 +535,7 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 		}
 	}
 
-	public Theme getWapTheme() {
+	public Theme getWapTheme() throws SystemException {
 		if (isInheritWapLookAndFeel()) {
 			return getLayoutSet().getWapTheme();
 		}
@@ -545,7 +545,7 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 		}
 	}
 
-	public ColorScheme getWapColorScheme() {
+	public ColorScheme getWapColorScheme() throws SystemException {
 		if (isInheritLookAndFeel()) {
 			return getLayoutSet().getWapColorScheme();
 		}
