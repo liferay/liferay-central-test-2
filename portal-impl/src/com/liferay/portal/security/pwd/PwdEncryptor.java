@@ -186,8 +186,10 @@ public class PwdEncryptor {
 
 				StringBuilder sb = new StringBuilder();
 
-				int x = Math.abs(randomGenerator.nextInt()) % numSaltChars;
-				int y = Math.abs(randomGenerator.nextInt()) % numSaltChars;
+				int x =
+					randomGenerator.nextInt(Integer.MAX_VALUE) % numSaltChars;
+				int y =
+					randomGenerator.nextInt(Integer.MAX_VALUE) % numSaltChars;
 
 				sb.append(saltChars[x]);
 				sb.append(saltChars[y]);
