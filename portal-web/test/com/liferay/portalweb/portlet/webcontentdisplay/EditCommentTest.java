@@ -96,7 +96,6 @@ public class EditCommentTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
-		assertTrue(selenium.isElementPresent(
-				"link=This is an edited WCD comment!"));
+		assertTrue(selenium.isTextPresent("This is an edited WCD comment!"));
 	}
 }

@@ -96,6 +96,6 @@ public class AddCommentTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
-		assertTrue(selenium.isElementPresent("link=This is a test WCD comment!"));
+		assertTrue(selenium.isTextPresent("This is a test WCD comment!"));
 	}
 }

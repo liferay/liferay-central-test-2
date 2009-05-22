@@ -56,10 +56,15 @@ public class ConfigureSettingsTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace("link=Configuration"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click("_86_showAvailableLocalesCheckbox");
+		Thread.sleep(500);
 		selenium.click("_86_enablePrintCheckbox");
+		Thread.sleep(500);
 		selenium.click("_86_enableRatingsCheckbox");
+		Thread.sleep(500);
 		selenium.click("_86_enableCommentsCheckbox");
+		Thread.sleep(500);
 		selenium.click("_86_enableCommentRatingsCheckbox");
+		Thread.sleep(500);
 		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("This is a WCD Setup Test Entry!"));
