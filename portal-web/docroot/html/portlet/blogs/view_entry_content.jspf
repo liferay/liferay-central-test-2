@@ -64,12 +64,7 @@
 			</div>
 
 			<div class="entry-date">
-
-				<%
-				DateFormat entryDisplayDateFormat = DateFormats.getDateTime(locale, timeZone);
-				%>
-
-				<%= entryDisplayDateFormat.format(entry.getDisplayDate()) %>
+				<%= dateFormatDateTime.format(entry.getDisplayDate()) %>
 			</div>
 		</div>
 
