@@ -291,6 +291,14 @@ String emailPageUpdatedSignature = ParamUtil.getString(request, "emailPageUpdate
 		</tr>
 		<tr>
 			<td>
+				<b>[$DIFFS_URL$]</b>
+			</td>
+			<td>
+				<liferay-ui:message key="the-url-of-the-page-comparing-this-page-content-with-the-previous-version" />
+			</td>
+		</tr>
+		<tr>
+			<td>
 				<b>[$FROM_ADDRESS$]</b>
 			</td>
 			<td>
@@ -323,6 +331,14 @@ String emailPageUpdatedSignature = ParamUtil.getString(request, "emailPageUpdate
 		</tr>
 		<tr>
 			<td>
+				<b>[$PAGE_DATE_UPDATE$]</b>
+			</td>
+			<td>
+				<liferay-ui:message key="the-date-of-the-modifications" />
+			</td>
+		</tr>
+		<tr>
+			<td>
 				<b>[$PAGE_DIFFS$]</b>
 			</td>
 			<td>
@@ -339,6 +355,14 @@ String emailPageUpdatedSignature = ParamUtil.getString(request, "emailPageUpdate
 		</tr>
 		<tr>
 			<td>
+				<b>[$PAGE_SUMMARY$]</b>
+			</td>
+			<td>
+				<liferay-ui:message key="the-summary-of-the-page-or-the-modifications" />
+			</td>
+		</tr>
+		<tr>
+			<td>
 				<b>[$PAGE_TITLE$]</b>
 			</td>
 			<td>
@@ -347,26 +371,10 @@ String emailPageUpdatedSignature = ParamUtil.getString(request, "emailPageUpdate
 		</tr>
 		<tr>
 			<td>
-				<b>[$$PAGE_SUMARY$]</b>
-			</td>
-			<td>
-				<liferay-ui:message key="the-summary-of-the-page-or-the-modifications" />
-			</td>
-		</tr>
-		<tr>
-			<td>
 				<b>[$PAGE_URL$]</b>
 			</td>
 			<td>
 				<liferay-ui:message key="the-page-url" />
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<b>[$DIFFS_URL$]</b>
-			</td>
-			<td>
-				<liferay-ui:message key="the-url-of-the-page-comparing-this-page-content-with-the-previous-version" />
 			</td>
 		</tr>
 		<tr>
@@ -383,14 +391,6 @@ String emailPageUpdatedSignature = ParamUtil.getString(request, "emailPageUpdate
 			</td>
 			<td>
 				<liferay-ui:message key="the-user-who-added-the-page" />
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<b>[$$PAGE_DATE_UPDATE$]</b>
-			</td>
-			<td>
-				<liferay-ui:message key="the-date-of-the-modifications" />
 			</td>
 		</tr>
 		<tr>

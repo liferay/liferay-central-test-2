@@ -39,7 +39,7 @@ public class DiffHtmlTag extends IncludeTag {
 			(HttpServletRequest)pageContext.getRequest();
 
 		request.setAttribute(
-			"liferay-ui:diff:diffHtmlResults", _diffHtmlResults);
+			"liferay-ui:diff-html:diffHtmlResults", _diffHtmlResults);
 
 		return EVAL_BODY_BUFFERED;
 	}

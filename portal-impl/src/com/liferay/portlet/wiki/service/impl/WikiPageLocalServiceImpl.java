@@ -1172,39 +1172,28 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		String portalURL = serviceContext.getPortalURL();
 		String layoutURL = serviceContext.getLayoutURL();
 
-		String portletName = PortalUtil.getPortletTitle(
-			PortletKeys.WIKI, user);
-
-		String fromName = WikiUtil.getEmailFromName(preferences);
-		String fromAddress = WikiUtil.getEmailFromAddress(preferences);
-
-		String replyToAddress = fromAddress;
-		String mailId = WikiUtil.getMailId(
-			company.getMx(), page.getNodeId(), page.getPageId());
-
 		WikiPage previousVersionPage = getPreviousVersionPage(page);
 
 		String attachmentURLPrefix =
 			portalURL + serviceContext.getPathMain() +
-				"/wiki/get_page_attachment?" + "p_l_id=" +
-					serviceContext.getPlid() + "&nodeId=" + page.getNodeId() +
-						"&title=" + HttpUtil.encodeURL(page.getTitle()) +
-							"&fileName=";
+				"/wiki/get_page_attachment?p_l_id=" + serviceContext.getPlid() +
+					"&nodeId=" + page.getNodeId() + "&title=" +
+						HttpUtil.encodeURL(page.getTitle()) + "&fileName=";
 
 		String pageDiffs = StringPool.BLANK;
 
 		try {
-			pageDiffs = WikiUtil.diffHtml (
+			pageDiffs = WikiUtil.diffHtml(
 				previousVersionPage, page, null, null, attachmentURLPrefix);
 		}
-		catch(Exception e) {
+		catch (Exception e) {
 		}
 
-		String pageContent;
+		String pageContent = null;
 
 		if (Validator.equals(page.getFormat(), "creole")) {
-				pageContent = WikiUtil.convert(
-					page, null, null,attachmentURLPrefix);
+			pageContent = WikiUtil.convert(
+				page, null, null, attachmentURLPrefix);
 		}
 		else {
 			pageContent = page.getContent();
@@ -1229,8 +1218,9 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 				sb.append(PortletKeys.WIKI);
 				sb.append("&p_p_state=");
 				sb.append(WindowState.MAXIMIZED);
-				sb.append("&struts_action=/wiki/compare_versions");
-				sb.append("&type=html&nodeId=");
+				sb.append("&struts_action=");
+				sb.append(HttpUtil.encodeURL("/wiki/compare_versions"));
+				sb.append("&nodeId=");
 				sb.append(node.getNodeId());
 				sb.append("&title=");
 				sb.append(HttpUtil.encodeURL(page.getTitle()));
@@ -1238,10 +1228,20 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 				sb.append(previousVersionPage.getVersion());
 				sb.append("&targetVersion=");
 				sb.append(page.getVersion());
+				sb.append("&type=html");
 
 				diffsURL = sb.toString();
 			}
 		}
+
+		String portletName = PortalUtil.getPortletTitle(PortletKeys.WIKI, user);
+
+		String fromName = WikiUtil.getEmailFromName(preferences);
+		String fromAddress = WikiUtil.getEmailFromAddress(preferences);
+
+		String replyToAddress = fromAddress;
+		String mailId = WikiUtil.getMailId(
+			company.getMx(), page.getNodeId(), page.getPageId());
 
 		fromName = StringUtil.replace(
 			fromName,
@@ -1348,6 +1348,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 				"[$COMPANY_MX$]",
 				"[$COMPANY_NAME$]",
 				"[$COMMUNITY_NAME$]",
+				"[$DIFFS_URL$]",
 				"[$FROM_ADDRESS$]",
 				"[$FROM_NAME$]",
 				"[$NODE_NAME$]",
@@ -1358,7 +1359,6 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 				"[$PAGE_SUMMARY$]",
 				"[$PAGE_TITLE$]",
 				"[$PAGE_URL$]",
-				"[$DIFFS_URL$]",
 				"[$PAGE_USER_ADDRESS$]",
 				"[$PAGE_USER_NAME$]",
 				"[$PORTAL_URL$]",
@@ -1369,6 +1369,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 				company.getMx(),
 				company.getName(),
 				group.getName(),
+				diffsURL,
 				fromAddress,
 				fromName,
 				node.getName(),
@@ -1379,7 +1380,6 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 				page.getSummary(),
 				page.getTitle(),
 				pageURL,
-				diffsURL,
 				user.getEmailAddress(),
 				user.getFullName(),
 				company.getVirtualHost(),
@@ -1409,7 +1409,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		MessageBusUtil.sendMessage(DestinationNames.WIKI, message);
 	}
 
-	protected String replaceStyles (String html) {
+	protected String replaceStyles(String html) {
 		return StringUtil.replace(
 			html,
 			new String[] {
@@ -1422,8 +1422,8 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			},
 			new String[] {
 				"style=\"background-color: #CFC;\"",
-				"style=\"background-color: #FDC6C6;" +
-					"text-decoration: line-through;\"",
+				"style=\"background-color: #FDC6C6; text-decoration: " +
+						"line-through;\"",
 				"style=\"border-bottom: 2px dotted blue;\"",
 				"style=\"border: 10px solid #CFC;\"",
 				"style=\"border: 10px solid #FDC6C6;\"",

@@ -35,7 +35,7 @@
 	String title = ParamUtil.getString(request, "title");
 
 	if (Validator.isNull(nodeId) || nodeId.equals("0")) {
-		WikiNode node = (WikiNode)renderRequest.getAttribute(WebKeys.WIKI_NODE);
+		WikiNode node = (WikiNode)request.getAttribute(WebKeys.WIKI_NODE);
 
 		if (node != null) {
 			nodeId = String.valueOf(node.getNodeId());

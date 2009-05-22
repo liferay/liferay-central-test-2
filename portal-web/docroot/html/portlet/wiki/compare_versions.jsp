@@ -26,6 +26,7 @@
 
 <%
 String backURL = ParamUtil.getString(request, "backURL");
+
 String type = ParamUtil.getString(request, "type");
 %>
 
@@ -40,10 +41,10 @@ String type = ParamUtil.getString(request, "type");
 </liferay-util:include>
 
 <c:choose>
-	<c:when test='<%= Validator.equals ("html", type) %>'>
+	<c:when test='<%= type.equals("html") %>'>
 
 		<%
-		String diffHtmlResults = (String)renderRequest.getAttribute(WebKeys.DIFF_HTML_RESULTS);
+		String diffHtmlResults = (String)request.getAttribute(WebKeys.DIFF_HTML_RESULTS);
 		%>
 
 		<liferay-ui:diff-html diffHtmlResults="<%= diffHtmlResults %>" />
@@ -51,10 +52,10 @@ String type = ParamUtil.getString(request, "type");
 	<c:otherwise>
 
 		<%
-		double sourceVersion = (Double)renderRequest.getAttribute(WebKeys.SOURCE_VERSION);
-		double targetVersion = (Double)renderRequest.getAttribute(WebKeys.TARGET_VERSION);
-		String title = (String)renderRequest.getAttribute(WebKeys.TITLE);
-		List[] diffResults = (List[])renderRequest.getAttribute(WebKeys.DIFF_RESULTS);
+		String title = (String)request.getAttribute(WebKeys.TITLE);
+		double sourceVersion = (Double)request.getAttribute(WebKeys.SOURCE_VERSION);
+		double targetVersion = (Double)request.getAttribute(WebKeys.TARGET_VERSION);
+		List[] diffResults = (List[])request.getAttribute(WebKeys.DIFF_RESULTS);
 		%>
 
 		<liferay-ui:diff

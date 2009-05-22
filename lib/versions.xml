@@ -132,7 +132,7 @@
 		<project-url>http://www.eclipse.org/jdt/core/index.php</project-url>
 		<licenses>
 			<license>
-				<license-name>Eclipse Public License Version 1.0</license-name>
+				<license-name>Eclipse Public License 1.0</license-name>
 			</license>
 		</licenses>
 	</library>
@@ -903,7 +903,7 @@
 		<project-url>http://www.aspectj.org</project-url>
 		<licenses>
 			<license>
-				<license-name>Eclipse Public License Version 1.0</license-name>
+				<license-name>Eclipse Public License 1.0</license-name>
 			</license>
 		</licenses>
 	</library>
@@ -914,7 +914,7 @@
 		<project-url>http://www.aspectj.org</project-url>
 		<licenses>
 			<license>
-				<license-name>Eclipse Public License Version 1.0</license-name>
+				<license-name>Eclipse Public License 1.0</license-name>
 			</license>
 		</licenses>
 	</library>
@@ -1357,7 +1357,7 @@
 		<project-url>http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.core.runtime/</project-url>
 		<licenses>
 			<license>
-				<license-name>Eclipse Public License v1.0</license-name>
+				<license-name>Eclipse Public License 1.0</license-name>
 			</license>
 		</licenses>
 	</library>

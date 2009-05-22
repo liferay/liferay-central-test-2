@@ -25,42 +25,52 @@
 <%@ include file="/html/taglib/init.jsp" %>
 
 <%
-String diffHtmlResults = (String)request.getAttribute("liferay-ui:diff:diffHtmlResults");
+String diffHtmlResults = (String)request.getAttribute("liferay-ui:diff-html:diffHtmlResults");
 %>
 
-<script>
-function updateOverlays(){
-	var images = document.getElementsByTagName("img");
+<script type="text/javascript">
+	function updateOverlays() {
+		var images = document.getElementsByTagName("img");
 
-	for (var i = 0; i < images.length; i++) {
-		var image = images [i];
+		for (var i = 0; i < images.length; i++) {
+			var image = images[i];
 
-		if (image.getAttribute('changeType') == "diff-removed-image" || image.getAttribute('changeType') == "diff-added-image") {
-			var filter;
-			var existingDivs = image.parentNode.getElementsByTagName('div');
+			var imageChangeType = image.getAttribute('changeType');
 
-			if (existingDivs.length > 0 && existingDivs[0].className == image.getAttribute("changeType")) {
-				filter = existingDivs[0];
-			}
-			else {
-				filter = document.createElement("div");
-				filter.className= image.getAttribute("changeType");
-			}
+			if ((imageChangeType == 'diff-removed-image') ||
+				(imageChangeType == 'diff-added-image')) {
 
-			filter.style.width = image.offsetWidth - 4 + "px";
-			filter.style.height = image.offsetHeight - 4 + "px";
+				var filter = null;
+				var existingDivs = image.parentNode.getElementsByTagName('div');
 
-			if (image.y && image.x) { // this check is needed for IE
-				filter.style.top = image.y + "px";
-				filter.style.left = image.x - 1 + "px";
-			}
+				if ((existingDivs.length > 0) &&
+					(existingDivs[0].className == imageChangeType)) {
 
-			if (existingDivs.length == 0 ){
-				image.parentNode.insertBefore(filter, image);
+					filter = existingDivs[0];
+				}
+				else {
+					filter = document.createElement("div");
+
+					filter.className= image.getAttribute("changeType");
+				}
+
+				filter.style.height = image.offsetHeight - 4 + "px";
+				filter.style.width = image.offsetWidth - 4 + "px";
+
+				if (image.y && image.x) {
+
+					// Workaround for IE
+
+					filter.style.top = image.y + "px";
+					filter.style.left = image.x - 1 + "px";
+				}
+
+				if (existingDivs.length == 0) {
+					image.parentNode.insertBefore(filter, image);
+				}
 			}
 		}
 	}
-}
 </script>
 
 <div class="taglib-diff-html">

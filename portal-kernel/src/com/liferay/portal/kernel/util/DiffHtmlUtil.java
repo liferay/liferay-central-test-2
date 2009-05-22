@@ -28,14 +28,12 @@ import java.io.Reader;
  * <a href="DiffHtmlUtil.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * This class can compare two different versions of html code. This class
- * detects changes to an entire html page such as removal or addition of
- * characters or images.
+ * This class can compare two different versions of HTML code. It detects
+ * changes to an entire HTML page such as removal or addition of characters or
+ * images.
  * </p>
  *
  * @author Julio Camarero
- *
- * @see DiffHtmlUtil
  *
  */
 public class DiffHtmlUtil {

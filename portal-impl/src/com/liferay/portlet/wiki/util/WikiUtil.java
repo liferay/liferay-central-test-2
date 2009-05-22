@@ -88,8 +88,8 @@ public class WikiUtil {
 	}
 
 	public static String diffHtml (
-		WikiPage sourcePage, WikiPage targetPage, PortletURL viewPageURL,
-		PortletURL editPageURL, String attachmentURLPrefix)
+			WikiPage sourcePage, WikiPage targetPage, PortletURL viewPageURL,
+			PortletURL editPageURL, String attachmentURLPrefix)
 		throws Exception {
 
 		String sourceContent = StringPool.BLANK;

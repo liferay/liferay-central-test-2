@@ -1354,7 +1354,7 @@ fieldset:last-child, .exp-form fieldset:last-child {
 	vertical-align: middle;
 }
 
-/* ---------- Taglib diff html ---------- */
+/* ---------- Taglib diff HTML ---------- */
 
 .taglib-diff-html div.diff-removed-image {
 	background-color: #FDC6C6;

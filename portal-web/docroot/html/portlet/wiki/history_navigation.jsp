@@ -25,61 +25,75 @@
 <%@ include file="/html/portlet/wiki/init.jsp" %>
 
 <%
-double sourceVersion = (Double)renderRequest.getAttribute(WebKeys.SOURCE_VERSION);
-double targetVersion = (Double)renderRequest.getAttribute(WebKeys.TARGET_VERSION);
-long nodeId = (Long)renderRequest.getAttribute(WebKeys.WIKI_NODE_ID);
-String title = (String)renderRequest.getAttribute(WebKeys.TITLE);
+long nodeId = (Long)request.getAttribute(WebKeys.WIKI_NODE_ID);
+String title = (String)request.getAttribute(WebKeys.TITLE);
+double sourceVersion = (Double)request.getAttribute(WebKeys.SOURCE_VERSION);
+double targetVersion = (Double)request.getAttribute(WebKeys.TARGET_VERSION);
 
-List<WikiPage> wikiPages = WikiPageLocalServiceUtil.getPages(nodeId, title, QueryUtil.ALL_POS, QueryUtil.ALL_POS, new PageVersionComparator());
-List<WikiPage> intermediates = new ArrayList<WikiPage>();
 double previousVersion = 0;
 double nextVersion = 0;
 
-for (WikiPage wikiPage: wikiPages) {
-	if ((wikiPage.getVersion() < sourceVersion) && (wikiPage.getVersion() > previousVersion)) {
+List<WikiPage> allPages = WikiPageLocalServiceUtil.getPages(nodeId, title, QueryUtil.ALL_POS, QueryUtil.ALL_POS, new PageVersionComparator());
+List<WikiPage> intermediatePages = new ArrayList<WikiPage>();
+
+for (WikiPage wikiPage : allPages) {
+	if ((wikiPage.getVersion() < sourceVersion) &&
+		(wikiPage.getVersion() > previousVersion)) {
+
 		previousVersion = wikiPage.getVersion();
 	}
 
-	if ((wikiPage.getVersion() > targetVersion) && ((wikiPage.getVersion() < nextVersion) || nextVersion == 0)) {
+	if ((wikiPage.getVersion() > targetVersion) &&
+		((wikiPage.getVersion() < nextVersion) ||
+		 (nextVersion == 0))) {
+
 		nextVersion = wikiPage.getVersion();
 	}
 
-	if ((wikiPage.getVersion() > sourceVersion) && (wikiPage.getVersion() <= targetVersion)){
-		intermediates.add(wikiPage);
+	if ((wikiPage.getVersion() > sourceVersion) &&
+		(wikiPage.getVersion() <= targetVersion)){
+
+		intermediatePages.add(wikiPage);
 	}
 }
 
-String sourceVersionString = (previousVersion != 0) ? String.valueOf(sourceVersion) : String.valueOf(sourceVersion) + " (" + LanguageUtil.get(pageContext, "first-version") +")";
-String targetVersionString = (nextVersion != 0) ? String.valueOf(targetVersion) : String.valueOf(targetVersion) + " (" + LanguageUtil.get(pageContext, "last-version") +")";
+String sourceVersionString = (previousVersion != 0) ? String.valueOf(sourceVersion) : String.valueOf(sourceVersion) + " (" + LanguageUtil.get(pageContext, "first-version") + ")";
+String targetVersionString = (nextVersion != 0) ? String.valueOf(targetVersion) : String.valueOf(targetVersion) + " (" + LanguageUtil.get(pageContext, "last-version") + ")";
 
-boolean htmlMode = Validator.equals ("html", ParamUtil.getString(request, "type"));
+String type = ParamUtil.getString(request, "type", "text");
+
+boolean htmlMode = false;
+
+if (type.equals("html")) {
+	htmlMode = true;
+}
 %>
 
 <portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="changeMode">
 	<portlet:param name="struts_action" value="/wiki/compare_versions" />
-	<portlet:param name="type" value='<%= htmlMode ? "text" : "html" %>' />
 	<portlet:param name="nodeId" value="<%= String.valueOf(nodeId) %>" />
 	<portlet:param name="title" value="<%= title %>" />
 	<portlet:param name="sourceVersion" value="<%= String.valueOf(sourceVersion) %>" />
 	<portlet:param name="targetVersion" value="<%= String.valueOf(targetVersion) %>" />
+	<portlet:param name="type" value='<%= htmlMode ? "text" : "html" %>' />
 </portlet:renderURL>
 
 <portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="previousChange">
 	<portlet:param name="struts_action" value="/wiki/compare_versions" />
-	<portlet:param name="type" value='<%= htmlMode ? "html" : "text" %>' />
 	<portlet:param name="nodeId" value="<%= String.valueOf(nodeId) %>" />
 	<portlet:param name="title" value="<%= title %>" />
 	<portlet:param name="sourceVersion" value="<%= String.valueOf(previousVersion) %>" />
 	<portlet:param name="targetVersion" value="<%= String.valueOf(sourceVersion) %>" />
+	<portlet:param name="type" value="<%= type %>" />
 </portlet:renderURL>
 
 <portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="nextChange">
 	<portlet:param name="struts_action" value="/wiki/compare_versions" />
-	<portlet:param name="type" value='<%= htmlMode ? "html" : "text" %>' />
 	<portlet:param name="nodeId" value="<%= String.valueOf(nodeId) %>" />
 	<portlet:param name="title" value="<%= title %>" />
 	<portlet:param name="sourceVersion" value="<%= String.valueOf(targetVersion) %>" />
 	<portlet:param name="targetVersion" value="<%= String.valueOf(nextVersion) %>" />
+	<portlet:param name="type" value="<%= type %>" />
 </portlet:renderURL>
 
 <div class="history-navigation">
@@ -104,62 +118,67 @@ boolean htmlMode = Validator.equals ("html", ParamUtil.getString(request, "type"
 	</c:choose>
 
 	<div class="central-info">
-		<liferay-ui:icon cssClass="central-title" image="pages" label="true" message='<%= LanguageUtil.format(pageContext, "comparing-versions-x-and-x", new Object[]{sourceVersionString, targetVersionString}) %>' />
+		<liferay-ui:icon
+			image="pages"
+			message='<%= LanguageUtil.format(pageContext, "comparing-versions-x-and-x", new Object[] {sourceVersionString, targetVersionString}) %>'
+			label="<%= true %>"
+			cssClass="central-title"
+		/>
 
-			<c:choose>
-				<c:when test="<%= !htmlMode %>">
-					<a class="change-mode" href="<%= changeMode %>">
-				</c:when>
-				<c:otherwise>
-					<span class="change-mode">
-				</c:otherwise>
-			</c:choose>
+		<c:choose>
+			<c:when test="<%= !htmlMode %>">
+				<a class="change-mode" href="<%= changeMode %>">
+			</c:when>
+			<c:otherwise>
+				<span class="change-mode">
+			</c:otherwise>
+		</c:choose>
 
-			<liferay-ui:message key="html-mode" />
+		<liferay-ui:message key="html-mode" />
 
-			<c:choose>
-				<c:when test="<%= !htmlMode %>">
-					</a>
-				</c:when>
-				<c:otherwise>
-					</span>
-				</c:otherwise>
-			</c:choose>
+		<c:choose>
+			<c:when test="<%= !htmlMode %>">
+				</a>
+			</c:when>
+			<c:otherwise>
+				</span>
+			</c:otherwise>
+		</c:choose>
 
-			<%= StringPool.PIPE %>
+		<%= StringPool.PIPE %>
 
-			<c:choose>
-				<c:when test="<%= htmlMode %>">
-					<a class="change-mode" href="<%= changeMode %>">
-				</c:when>
-				<c:otherwise>
-					<span class="change-mode">
-				</c:otherwise>
-			</c:choose>
+		<c:choose>
+			<c:when test="<%= htmlMode %>">
+				<a class="change-mode" href="<%= changeMode %>">
+			</c:when>
+			<c:otherwise>
+				<span class="change-mode">
+			</c:otherwise>
+		</c:choose>
 
-			<liferay-ui:message key="text-mode" />
+		<liferay-ui:message key="text-mode" />
 
-			<c:choose>
-				<c:when test="<%= htmlMode %>">
-					</a>
-				</c:when>
-				<c:otherwise>
-					</span>
-				</c:otherwise>
-			</c:choose>
+		<c:choose>
+			<c:when test="<%= htmlMode %>">
+				</a>
+			</c:when>
+			<c:otherwise>
+				</span>
+			</c:otherwise>
+		</c:choose>
 
 		<div class="central-author">
 			<c:choose>
-				<c:when test="<%= intermediates.size() > 1%>">
+				<c:when test="<%= intermediatePages.size() > 1%>">
 
 					<%
 					StringBuilder sb = new StringBuilder();
 
-					for (WikiPage wikipage: intermediates) {
-						sb.append(wikipage.getUserName());
+					for (WikiPage wikiPage: intermediatePages) {
+						sb.append(wikiPage.getUserName());
 						sb.append(StringPool.SPACE);
 						sb.append(StringPool.OPEN_PARENTHESIS);
-						sb.append(wikipage.getVersion());
+						sb.append(wikiPage.getVersion());
 						sb.append(StringPool.CLOSE_PARENTHESIS);
 						sb.append(StringPool.COMMA);
 						sb.append(StringPool.SPACE);
@@ -168,15 +187,26 @@ boolean htmlMode = Validator.equals ("html", ParamUtil.getString(request, "type"
 					sb.deleteCharAt(sb.lastIndexOf(StringPool.COMMA));
 					%>
 
-					<liferay-ui:icon image="user_icon" toolTip="authors" label="true" message="<%= sb.toString() %>"></liferay-ui:icon>
+					<liferay-ui:icon
+						image="user_icon"
+						message="<%= sb.toString() %>"
+						label="<%= true %>"
+						toolTip="authors"
+					/>
 				</c:when>
 				<c:otherwise>
 
 					<%
-					WikiPage wikiPage = intermediates.get(0);
+					WikiPage wikiPage = intermediatePages.get(0);
 					%>
 
-					<liferay-ui:icon cssClass="central-username" image="user_icon" toolTip="author" label="true" message="<%= wikiPage.getUserName() %>"></liferay-ui:icon>
+					<liferay-ui:icon
+						message="<%= wikiPage.getUserName() %>"
+						image="user_icon"
+						label="<%= true %>"
+						toolTip="author"
+						cssClass="central-username"
+					/>
 
 					<c:if test="<%= Validator.isNotNull(wikiPage.getSummary()) %>">
 						<%= StringPool.COLON + StringPool.SPACE + wikiPage.getSummary() %>
@@ -188,7 +218,6 @@ boolean htmlMode = Validator.equals ("html", ParamUtil.getString(request, "type"
 				</c:otherwise>
 			</c:choose>
 		</div>
-
 	</div>
 
 	<c:choose>

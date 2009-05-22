@@ -29,8 +29,6 @@ import java.io.Reader;
  *
  * @author Julio Camarero
  *
- * @see DiffHtmlUtil
- *
  */
 public interface DiffHtml {
 

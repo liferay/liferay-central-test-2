@@ -24,6 +24,7 @@ package com.liferay.portal.util;
 
 import com.liferay.portal.kernel.util.DiffHtml;
 import com.liferay.portal.kernel.util.LocaleUtil;
+import com.liferay.portal.kernel.util.StringPool;
 
 import java.io.Reader;
 import java.io.StringWriter;
@@ -50,9 +51,9 @@ import org.xml.sax.helpers.AttributesImpl;
  * <a href="DiffHtmlImpl.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * This class can compare two different versions of html code. This class
- * detects changes to an entire html page such as removal or addition of
- * characters or images.
+ * This class can compare two different versions of HTML code. It detects
+ * changes to an entire HTML page such as removal or addition of characters or
+ * images.
  * </p>
  *
  * @author Julio Camarero
@@ -66,66 +67,71 @@ public class DiffHtmlImpl implements DiffHtml {
 	 * @param		source the <code>Reader</code> of the source text, this can
 	 *				be for example, an instance of FileReader or StringReader
 	 * @param		target the <code>Reader</code> of the target text
-	 * @return		an string containing the html code of the source text
-	 *				showing the differences regarding the target text
+	 * @return		a string containing the HTML code of the source text
+	 *				showing the differences with the target text
 	 */
 	public String diff(Reader source, Reader target) throws Exception {
-
 		InputSource oldSource = new InputSource(source);
 		InputSource newSource = new InputSource(target);
 
-		String prefix = "diff";
+		StringWriter stringWriter = new StringWriter();
+
+		SAXTransformerFactory saxTransformerFactory =
+			(SAXTransformerFactory)TransformerFactory.newInstance();
+
+		TransformerHandler tranformHandler =
+			saxTransformerFactory.newTransformerHandler();
+
+		tranformHandler.setResult(new StreamResult(stringWriter));
+
+		XslFilter xslFilter = new XslFilter();
+
+		ContentHandler contentHandler = xslFilter.xsl(
+			tranformHandler,
+			"com/liferay/portal/util/dependencies/diff_html.xsl");
+
+		HtmlCleaner htmlCleaner = new HtmlCleaner();
+
+		DomTreeBuilder oldDomTreeBuilder = new DomTreeBuilder();
+
+		htmlCleaner.cleanAndParse(oldSource, oldDomTreeBuilder);
+
 		Locale locale = LocaleUtil.getDefault();
 
-		StringWriter writer = new StringWriter();
+		TextNodeComparator leftTextNodeComparator = new TextNodeComparator(
+			oldDomTreeBuilder, locale);
 
-		SAXTransformerFactory tf =
-			(SAXTransformerFactory) TransformerFactory.newInstance();
+		DomTreeBuilder newDomTreeBuilder = new DomTreeBuilder();
 
-		TransformerHandler handler = tf.newTransformerHandler();
+		htmlCleaner.cleanAndParse(newSource, newDomTreeBuilder);
 
-		handler.setResult(new StreamResult(writer));
+		TextNodeComparator rightTextNodeComparator = new TextNodeComparator(
+			newDomTreeBuilder, locale);
 
-		XslFilter filter = new XslFilter();
+		contentHandler.startDocument();
+		contentHandler.startElement(
+			StringPool.BLANK, _DIFF_REPORT, _DIFF_REPORT, new AttributesImpl());
+		contentHandler.startElement(
+			StringPool.BLANK, _DIFF, _DIFF, new AttributesImpl());
 
-		ContentHandler postProcess = filter.xsl(
-			handler, "com/liferay/portal/util/dependencies/diff_html.xsl");
+		HtmlSaxDiffOutput htmlSaxDiffOutput = new HtmlSaxDiffOutput(
+			contentHandler, _DIFF);
 
-		HtmlCleaner cleaner = new HtmlCleaner();
+		HTMLDiffer htmlDiffer = new HTMLDiffer(htmlSaxDiffOutput);
 
-		DomTreeBuilder oldHandler = new DomTreeBuilder();
+		htmlDiffer.diff(leftTextNodeComparator, rightTextNodeComparator);
 
-		cleaner.cleanAndParse(oldSource, oldHandler);
+		contentHandler.endElement(StringPool.BLANK, _DIFF, _DIFF);
+		contentHandler.endElement(StringPool.BLANK, _DIFF_REPORT, _DIFF_REPORT);
+		contentHandler.endDocument();
 
-		TextNodeComparator leftComparator = new TextNodeComparator(
-			oldHandler, locale);
+		stringWriter.flush();
 
-		DomTreeBuilder newHandler = new DomTreeBuilder();
-
-		cleaner.cleanAndParse(newSource, newHandler);
-
-		TextNodeComparator rightComparator = new TextNodeComparator(
-			newHandler, locale);
-
-		postProcess.startDocument();
-		postProcess.startElement(
-			"", "diffreport", "diffreport",new AttributesImpl());
-
-		postProcess.startElement(
-			"", "diff", "diff", new AttributesImpl());
-		HtmlSaxDiffOutput output = new HtmlSaxDiffOutput(
-			postProcess, prefix);
-
-		HTMLDiffer differ = new HTMLDiffer(output);
-
-		differ.diff(leftComparator, rightComparator);
-
-		postProcess.endElement("", "diff", "diff");
-		postProcess.endElement("", "diffreport", "diffreport");
-		postProcess.endDocument();
-
-		writer.flush();
-		return writer.toString();
+		return stringWriter.toString();
 	}
+
+	private static final String _DIFF = "diff";
+
+	private static final String _DIFF_REPORT = "diffreport";
 
 }

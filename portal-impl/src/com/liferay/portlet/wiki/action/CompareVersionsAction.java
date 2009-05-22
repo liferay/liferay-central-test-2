@@ -32,6 +32,7 @@ import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.wiki.NoSuchPageException;
+import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.portlet.wiki.service.WikiPageServiceUtil;
 import com.liferay.portlet.wiki.util.WikiUtil;
@@ -88,8 +89,8 @@ public class CompareVersionsAction extends PortletAction {
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
 
-		ThemeDisplay themeDisplay =
-				(ThemeDisplay)renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
+		ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		long nodeId = ParamUtil.getLong(renderRequest, "nodeId");
 
@@ -107,11 +108,12 @@ public class CompareVersionsAction extends PortletAction {
 			nodeId, title, targetVersion);
 
 		if (type.equals("html")){
+			WikiNode sourceNode = sourcePage.getNode();
+
 			PortletURL viewPageURL = renderResponse.createRenderURL();
 
 			viewPageURL.setParameter("struts_action", "/wiki/view");
-			viewPageURL.setParameter(
-				"nodeName", sourcePage.getNode().getName());
+			viewPageURL.setParameter("nodeName", sourceNode.getName());
 
 			PortletURL editPageURL = renderResponse.createRenderURL();
 
@@ -122,7 +124,7 @@ public class CompareVersionsAction extends PortletAction {
 			String attachmentURLPrefix =
 				themeDisplay.getPathMain() + "/wiki/get_page_attachment?" +
 					"p_l_id=" + themeDisplay.getPlid() + "&nodeId=" + nodeId +
-					"&title=" + HttpUtil.encodeURL(title) + "&fileName=";
+						"&title=" + HttpUtil.encodeURL(title) + "&fileName=";
 
 			String htmlDiffResult = WikiUtil.diffHtml(
 				sourcePage, targetPage, viewPageURL, editPageURL,
@@ -131,7 +133,7 @@ public class CompareVersionsAction extends PortletAction {
 			renderRequest.setAttribute(
 				WebKeys.DIFF_HTML_RESULTS, htmlDiffResult);
 		}
-		else{
+		else {
 			String sourceContent = sourcePage.getContent();
 			String targetContent = targetPage.getContent();
 
