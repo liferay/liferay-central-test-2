@@ -26,6 +26,7 @@
 
 <%
 String defaultLandingPagePath = ParamUtil.getString(request, "settings(" + PropsKeys.DEFAULT_LANDING_PAGE_PATH +")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.DEFAULT_LANDING_PAGE_PATH, PropsValues.DEFAULT_LANDING_PAGE_PATH));
+String defaultLogoutPagePath = ParamUtil.getString(request, "settings(" + PropsKeys.DEFAULT_LOGOUT_PAGE_PATH +")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.DEFAULT_LOGOUT_PAGE_PATH, PropsValues.DEFAULT_LOGOUT_PAGE_PATH));
 %>
 
 <liferay-ui:error-marker key="errorSection" value="general" />
@@ -75,6 +76,12 @@ String defaultLandingPagePath = ParamUtil.getString(request, "settings(" + Props
 		<label for="<portlet:namespace />settings(<%= PropsKeys.DEFAULT_LANDING_PAGE_PATH %>)"><liferay-ui:message key="default-landing-page" /><liferay-ui:icon-help message="default-landing-page-help" /></label>
 
 		<input name="<portlet:namespace />settings(<%= PropsKeys.DEFAULT_LANDING_PAGE_PATH %>)" type="text" value="<%= defaultLandingPagePath %>" />
+	</div>
+
+	<div class="exp-ctrl-holder">
+		<label for="<portlet:namespace />settings(<%= PropsKeys.DEFAULT_LOGOUT_PAGE_PATH %>)"><liferay-ui:message key="default-logout-page" /><liferay-ui:icon-help message="default-logout-page-help" /></label>
+
+		<input name="<portlet:namespace />settings(<%= PropsKeys.DEFAULT_LOGOUT_PAGE_PATH %>)" type="text" value="<%= defaultLogoutPagePath %>" />
 	</div>
 </fieldset>
 

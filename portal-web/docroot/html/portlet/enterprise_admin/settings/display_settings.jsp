@@ -26,17 +26,20 @@
 
 <%
 User user2 = company.getDefaultUser();
+
 Locale[] locales = LanguageUtil.getAvailableLocales();
-String[] LanguageIds = LocaleUtil.toLanguageIds(locales);
+String[] languageIds = LocaleUtil.toLanguageIds(locales);
 
 String timeZoneId = ParamUtil.getString(request, "timeZoneId", user2.getTimeZoneId());
 String languageId = ParamUtil.getString(request, "languageId", user2.getLanguageId());
-String availableLocales = ParamUtil.getString(request, "settings(" + PropsKeys.LOCALES + ")", StringUtil.merge(LanguageIds));
+String availableLocales = ParamUtil.getString(request, "settings(" + PropsKeys.LOCALES + ")", StringUtil.merge(languageIds));
+
 boolean companySecurityCommunityLogo = ParamUtil.getBoolean(request, "settings(" + PropsKeys.COMPANY_SECURITY_COMMUNITY_LOGO + ")", company.isCommunityLogo());
 boolean deleteLogo = ParamUtil.getBoolean(request, "deleteLogo");
+
 String defaultRegularThemeId = ParamUtil.getString(request, "settings(" + PropsKeys.DEFAULT_REGULAR_THEME_ID + ")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.DEFAULT_REGULAR_THEME_ID, PropsValues.DEFAULT_REGULAR_THEME_ID));
 String defaultWapThemeId = ParamUtil.getString(request, "settings(" + PropsKeys.DEFAULT_WAP_THEME_ID + ")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.DEFAULT_WAP_THEME_ID, PropsValues.DEFAULT_WAP_THEME_ID));
-String controlPanelLayoutRegularThemeId = ParamUtil.getString(request, "settings(" + PropsKeys.CONTROL_PANEL_LAYOUT_REGULAR_THEME_ID + ")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.CONTROL_PANEL_LAYOUT_REGULAR_THEME_ID, PropsValues.CONTROL_PANEL_LAYOUT_REGULAR_THEME_ID));
+String defaultControlPanelThemeId = ParamUtil.getString(request, "settings(" + PropsKeys.CONTROL_PANEL_LAYOUT_REGULAR_THEME_ID + ")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.CONTROL_PANEL_LAYOUT_REGULAR_THEME_ID, PropsValues.CONTROL_PANEL_LAYOUT_REGULAR_THEME_ID));
 %>
 
 <script type="text/javascript">
@@ -150,7 +153,6 @@ String controlPanelLayoutRegularThemeId = ParamUtil.getString(request, "settings
 <h3><liferay-ui:message key="look-and-feel" /></h3>
 
 <fieldset class="exp-block-labels exp-form-column">
-
 	<div class="exp-ctrl-holder">
 		<label for="<portlet:namespace />settings(<%= PropsKeys.DEFAULT_REGULAR_THEME_ID %>)"><liferay-ui:message key="default-regular-theme" /></label>
 
@@ -158,6 +160,7 @@ String controlPanelLayoutRegularThemeId = ParamUtil.getString(request, "settings
 
 			<%
 			List<Theme> themes = ThemeLocalServiceUtil.getThemes(company.getCompanyId(), 0, user.getUserId(), false);
+
 			boolean deployed = false;
 
 			for (Theme curTheme: themes) {
@@ -179,44 +182,7 @@ String controlPanelLayoutRegularThemeId = ParamUtil.getString(request, "settings
 			<%
 			}
 			%>
-		</select>
-	</div>
 
-	<div class="exp-ctrl-holder">
-		<label for="<portlet:namespace />settings(<%= PropsKeys.CONTROL_PANEL_LAYOUT_REGULAR_THEME_ID %>)"><liferay-ui:message key="default-control-panel-theme" /></label>
-
-		<select name="<portlet:namespace />settings(<%= PropsKeys.CONTROL_PANEL_LAYOUT_REGULAR_THEME_ID %>)">
-
-			<%
-
-			Theme controlPanelTheme = ThemeLocalServiceUtil.getTheme(company.getCompanyId(), "controlpanel", false);
-
-			if (controlPanelTheme != null) {
-				themes.add(controlPanelTheme);
-			}
-
-			deployed = false;
-
-			for (Theme curTheme: themes) {
-				if (Validator.equals(controlPanelLayoutRegularThemeId, curTheme.getThemeId())) {
-					deployed = true;
-				}
-
-			%>
-
-				<option <%= (Validator.equals(controlPanelLayoutRegularThemeId, curTheme.getThemeId())) ? "selected" : "" %> value="<%= curTheme.getThemeId() %>"><%= curTheme.getName() %></option>
-
-			<%
-			}
-
-			if (!deployed) {
-			%>
-
-				<option selected value="<%= controlPanelLayoutRegularThemeId %>"><%= controlPanelLayoutRegularThemeId + "(" + LanguageUtil.get(pageContext, "undeployed") + ")" %></option>
-
-			<%
-			}
-			%>
 		</select>
 	</div>
 
@@ -249,6 +215,46 @@ String controlPanelLayoutRegularThemeId = ParamUtil.getString(request, "settings
 			<%
 			}
 			%>
+
+		</select>
+	</div>
+
+	<div class="exp-ctrl-holder">
+		<label for="<portlet:namespace />settings(<%= PropsKeys.CONTROL_PANEL_LAYOUT_REGULAR_THEME_ID %>)"><liferay-ui:message key="default-control-panel-theme" /></label>
+
+		<select name="<portlet:namespace />settings(<%= PropsKeys.CONTROL_PANEL_LAYOUT_REGULAR_THEME_ID %>)">
+
+			<%
+
+			Theme controlPanelTheme = ThemeLocalServiceUtil.getTheme(company.getCompanyId(), "controlpanel", false);
+
+			if (controlPanelTheme != null) {
+				themes.add(controlPanelTheme);
+			}
+
+			deployed = false;
+
+			for (Theme curTheme: themes) {
+				if (Validator.equals(defaultControlPanelThemeId, curTheme.getThemeId())) {
+					deployed = true;
+				}
+
+			%>
+
+				<option <%= (Validator.equals(defaultControlPanelThemeId, curTheme.getThemeId())) ? "selected" : "" %> value="<%= curTheme.getThemeId() %>"><%= curTheme.getName() %></option>
+
+			<%
+			}
+
+			if (!deployed) {
+			%>
+
+				<option selected value="<%= defaultControlPanelThemeId %>"><%= defaultControlPanelThemeId + "(" + LanguageUtil.get(pageContext, "undeployed") + ")" %></option>
+
+			<%
+			}
+			%>
+
 		</select>
 	</div>
 </fieldset>

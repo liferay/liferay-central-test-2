@@ -625,7 +625,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 		// Authenticated users should agree to Terms of Use
 
 		if ((user != null) && !user.isAgreedToTermsOfUse()) {
-			boolean termsOfUseRequired;
+			boolean termsOfUseRequired = false;
 
 			try {
 				termsOfUseRequired = PrefsPropsUtil.getBoolean(

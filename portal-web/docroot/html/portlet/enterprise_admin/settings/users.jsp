@@ -32,6 +32,7 @@ boolean fieldEnableBirthday = ParamUtil.getBoolean(request, "settings(" + PropsK
 
 String adminReservedScreenNames = ParamUtil.getString(request, "settings(" + PropsKeys.ADMIN_RESERVED_SCREEN_NAMES +")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.ADMIN_RESERVED_SCREEN_NAMES));
 String adminReservedEmailAddresses = ParamUtil.getString(request, "settings(" + PropsKeys.ADMIN_RESERVED_EMAIL_ADDRESSES +")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.ADMIN_RESERVED_EMAIL_ADDRESSES));
+
 String adminDefaultGroupNames = ParamUtil.getString(request, "settings(" + PropsKeys.ADMIN_DEFAULT_GROUP_NAMES + ")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.ADMIN_DEFAULT_GROUP_NAMES));
 String adminDefaultRoleNames = ParamUtil.getString(request, "settings(" + PropsKeys.ADMIN_DEFAULT_ROLE_NAMES + ")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.ADMIN_DEFAULT_ROLE_NAMES));
 String adminDefaultUserGroupNames = ParamUtil.getString(request, "settings(" + PropsKeys.ADMIN_DEFAULT_USER_GROUP_NAMES + ")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.ADMIN_DEFAULT_USER_GROUP_NAMES));
@@ -70,7 +71,6 @@ String adminDefaultUserGroupNames = ParamUtil.getString(request, "settings(" + P
 			</div>
 		</fieldset>
 	</liferay-ui:section>
-
 	<liferay-ui:section>
 		<fieldset class="exp-block-labels">
 			<div class="exp-ctrl-holder">
@@ -86,7 +86,6 @@ String adminDefaultUserGroupNames = ParamUtil.getString(request, "settings(" + P
 			</div>
 		</fieldset>
 	</liferay-ui:section>
-
 	<liferay-ui:section>
 		<fieldset class="exp-block-labels">
 			<div class="exp-ctrl-holder">

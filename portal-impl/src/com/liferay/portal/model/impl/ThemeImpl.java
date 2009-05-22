@@ -33,7 +33,6 @@ import com.liferay.portal.model.ColorScheme;
 import com.liferay.portal.model.Plugin;
 import com.liferay.portal.model.SpriteImage;
 import com.liferay.portal.model.Theme;
-import com.liferay.portal.security.auth.CompanyThreadLocal;
 import com.liferay.portal.theme.ThemeCompanyId;
 import com.liferay.portal.theme.ThemeCompanyLimit;
 import com.liferay.portal.theme.ThemeGroupLimit;
@@ -57,32 +56,35 @@ import java.util.Properties;
  */
 public class ThemeImpl extends PluginBaseImpl implements Theme {
 
+	/**
+	 * @deprecated
+	 */
 	public static String getDefaultRegularThemeId() {
-		long companyId = CompanyThreadLocal.getCompanyId();
-		String defaultRegularThemeId;
+		return PortalUtil.getJsSafePortletId(
+			PropsValues.DEFAULT_REGULAR_THEME_ID);
+	}
 
-		try {
-			defaultRegularThemeId = PrefsPropsUtil.getString(
-				companyId, PropsKeys.DEFAULT_REGULAR_THEME_ID);
-		}
-		catch (SystemException se) {
-			defaultRegularThemeId = PropsValues.DEFAULT_REGULAR_THEME_ID;
-		}
+	public static String getDefaultRegularThemeId(long companyId)
+		throws SystemException {
+
+		String defaultRegularThemeId = PrefsPropsUtil.getString(
+			companyId, PropsKeys.DEFAULT_REGULAR_THEME_ID);
 
 		return PortalUtil.getJsSafePortletId(defaultRegularThemeId);
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public static String getDefaultWapThemeId() {
-		long companyId = CompanyThreadLocal.getCompanyId();
-		String defaultWapThemeId;
+		return PortalUtil.getJsSafePortletId(PropsValues.DEFAULT_WAP_THEME_ID);
+	}
 
-		try {
-			defaultWapThemeId = PrefsPropsUtil.getString(
-				companyId, PropsKeys.DEFAULT_WAP_THEME_ID);
-		}
-		catch (SystemException se) {
-			defaultWapThemeId = PropsValues.DEFAULT_WAP_THEME_ID;
-		}
+	public static String getDefaultWapThemeId(long companyId)
+		throws SystemException {
+
+		String defaultWapThemeId = PrefsPropsUtil.getString(
+			companyId, PropsKeys.DEFAULT_WAP_THEME_ID);
 
 		return PortalUtil.getJsSafePortletId(defaultWapThemeId);
 	}

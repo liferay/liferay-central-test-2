@@ -47,13 +47,15 @@ package com.liferay.portal.service;
 public class ThemeLocalServiceUtil {
 	public static com.liferay.portal.model.ColorScheme getColorScheme(
 		long companyId, java.lang.String themeId,
-		java.lang.String colorSchemeId, boolean wapTheme) {
+		java.lang.String colorSchemeId, boolean wapTheme)
+		throws com.liferay.portal.SystemException {
 		return getService()
 				   .getColorScheme(companyId, themeId, colorSchemeId, wapTheme);
 	}
 
 	public static com.liferay.portal.model.Theme getTheme(long companyId,
-		java.lang.String themeId, boolean wapTheme) {
+		java.lang.String themeId, boolean wapTheme)
+		throws com.liferay.portal.SystemException {
 		return getService().getTheme(companyId, themeId, wapTheme);
 	}
 

@@ -35,6 +35,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.security.auth.CompanyThreadLocal;
 import com.liferay.portal.service.PortletLocalServiceUtil;
@@ -517,8 +518,8 @@ public class LanguageImpl implements Language {
 		return _localesSet.contains(locale);
 	}
 
-	public void resetAvailableLocales() {
-		 _removeInstance();
+	public void resetAvailableLocales(long companyId) {
+		 _resetAvailableLocales(companyId);
 	}
 
 	public void updateCookie(
@@ -551,13 +552,13 @@ public class LanguageImpl implements Language {
 	}
 
 	private LanguageImpl() {
-		this(0);
+		this(CompanyConstants.SYSTEM);
 	}
 
 	private LanguageImpl(long companyId) {
-		String[] localesArray;
+		String[] localesArray = PropsValues.LOCALES;
 
-		if (companyId > 0) {
+		if (companyId != CompanyConstants.SYSTEM) {
 			try {
 				localesArray = PrefsPropsUtil.getStringArray(
 					companyId, PropsKeys.LOCALES, StringPool.COMMA,
@@ -566,9 +567,6 @@ public class LanguageImpl implements Language {
 			catch (SystemException se) {
 				localesArray = PropsValues.LOCALES;
 			}
-		}
-		else {
-			localesArray = PropsValues.LOCALES;
 		}
 
 		_locales = new Locale[localesArray.length];
@@ -641,9 +639,7 @@ public class LanguageImpl implements Language {
 		return value;
 	}
 
-	private static void _removeInstance() {
-		long companyId = CompanyThreadLocal.getCompanyId();
-
+	private void _resetAvailableLocales(long companyId) {
 		_instances.remove(companyId);
 	}
 

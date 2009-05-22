@@ -71,10 +71,12 @@ public class LayoutSetLocalServiceImpl extends LayoutSetLocalServiceBaseImpl {
 		layoutSet.setGroupId(groupId);
 		layoutSet.setCompanyId(group.getCompanyId());
 		layoutSet.setPrivateLayout(privateLayout);
-		layoutSet.setThemeId(ThemeImpl.getDefaultRegularThemeId());
+		layoutSet.setThemeId(
+			ThemeImpl.getDefaultRegularThemeId(group.getCompanyId()));
 		layoutSet.setColorSchemeId(
 			ColorSchemeImpl.getDefaultRegularColorSchemeId());
-		layoutSet.setWapThemeId(ThemeImpl.getDefaultWapThemeId());
+		layoutSet.setWapThemeId(
+			ThemeImpl.getDefaultWapThemeId(group.getCompanyId()));
 		layoutSet.setWapColorSchemeId(
 			ColorSchemeImpl.getDefaultWapColorSchemeId());
 		layoutSet.setCss(StringPool.BLANK);

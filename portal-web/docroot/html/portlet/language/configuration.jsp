@@ -36,7 +36,7 @@
 		<input name="<portlet:namespace />languageIds" type="hidden" value="" />
 
 		<%
-		Set availableLanguageIds = SetUtil.fromArray(defaultLanguageIds);
+		Set availableLanguageIdsSet = SetUtil.fromArray(availableLanguageIds);
 
 		// Left list
 
@@ -54,7 +54,7 @@
 
 		Arrays.sort(languageIds);
 
-		Iterator itr = availableLanguageIds.iterator();
+		Iterator itr = availableLanguageIdsSet.iterator();
 
 		while (itr.hasNext()) {
 			String languageId = (String)itr.next();

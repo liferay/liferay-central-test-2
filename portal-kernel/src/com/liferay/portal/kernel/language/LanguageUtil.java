@@ -214,8 +214,8 @@ public class LanguageUtil {
 		return getLanguage().isAvailableLocale(locale);
 	}
 
-	public static void resetAvailableLocales() {
-		getLanguage().resetAvailableLocales();
+	public static void resetAvailableLocales(long companyId) {
+		getLanguage().resetAvailableLocales(companyId);
 	}
 
 	public static void updateCookie(

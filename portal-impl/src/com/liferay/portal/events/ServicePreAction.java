@@ -1271,7 +1271,6 @@ public class ServicePreAction extends Action {
 
 			String themeId = PrefsPropsUtil.getString(
 				companyId, PropsKeys.CONTROL_PANEL_LAYOUT_REGULAR_THEME_ID);
-
 			String colorSchemeId =
 				ColorSchemeImpl.getDefaultRegularColorSchemeId();
 
@@ -1295,11 +1294,11 @@ public class ServicePreAction extends Action {
 			String colorSchemeId = null;
 
 			if (wapTheme) {
-				themeId = ThemeImpl.getDefaultWapThemeId();
+				themeId = ThemeImpl.getDefaultWapThemeId(companyId);
 				colorSchemeId = ColorSchemeImpl.getDefaultWapColorSchemeId();
 			}
 			else {
-				themeId = ThemeImpl.getDefaultRegularThemeId();
+				themeId = ThemeImpl.getDefaultRegularThemeId(companyId);
 				colorSchemeId =
 					ColorSchemeImpl.getDefaultRegularColorSchemeId();
 			}

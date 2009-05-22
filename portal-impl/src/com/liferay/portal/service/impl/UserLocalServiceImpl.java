@@ -268,6 +268,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		if (PrefsPropsUtil.getBoolean(
 				companyId, PropsKeys.USERS_SCREEN_NAME_ALWAYS_AUTOGENERATE)) {
+
 			autoScreenName = true;
 		}
 

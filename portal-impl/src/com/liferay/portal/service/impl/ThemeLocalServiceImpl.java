@@ -77,8 +77,9 @@ import javax.servlet.ServletContext;
 public class ThemeLocalServiceImpl extends ThemeLocalServiceBaseImpl {
 
 	public ColorScheme getColorScheme(
-		long companyId, String themeId, String colorSchemeId,
-		boolean wapTheme) {
+			long companyId, String themeId, String colorSchemeId,
+			boolean wapTheme)
+		throws SystemException {
 
 		colorSchemeId = GetterUtil.getString(colorSchemeId);
 
@@ -119,7 +120,9 @@ public class ThemeLocalServiceImpl extends ThemeLocalServiceBaseImpl {
 		return colorScheme;
 	}
 
-	public Theme getTheme(long companyId, String themeId, boolean wapTheme) {
+	public Theme getTheme(long companyId, String themeId, boolean wapTheme)
+		throws SystemException {
+
 		themeId = GetterUtil.getString(themeId);
 
 		Theme theme = _getThemes(companyId).get(themeId);
@@ -132,10 +135,10 @@ public class ThemeLocalServiceImpl extends ThemeLocalServiceBaseImpl {
 			}
 
 			if (wapTheme) {
-				themeId = ThemeImpl.getDefaultWapThemeId();
+				themeId = ThemeImpl.getDefaultWapThemeId(companyId);
 			}
 			else {
-				themeId = ThemeImpl.getDefaultRegularThemeId();
+				themeId = ThemeImpl.getDefaultRegularThemeId(companyId);
 			}
 
 			theme = _themes.get(themeId);
