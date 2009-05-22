@@ -36,7 +36,7 @@
 		<input name="<portlet:namespace />languageIds" type="hidden" value="" />
 
 		<%
-		Set availableLanguageIds = SetUtil.fromArray(PropsValues.LOCALES);
+		Set availableLanguageIds = SetUtil.fromArray(defaultLanguageIds);
 
 		// Left list
 

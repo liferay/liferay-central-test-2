@@ -214,6 +214,10 @@ public class LanguageUtil {
 		return getLanguage().isAvailableLocale(locale);
 	}
 
+	public static void resetAvailableLocales() {
+		getLanguage().resetAvailableLocales();
+	}
+
 	public static void updateCookie(
 		HttpServletRequest request, HttpServletResponse response,
 		Locale locale) {

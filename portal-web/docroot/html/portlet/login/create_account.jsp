@@ -107,7 +107,7 @@ boolean male = BeanParamUtil.getBoolean(contact2, request, "male", true);
 		<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= contact2 %>" field="lastName" />
 	</div>
 
-	<c:if test="<%= !PropsValues.USERS_SCREEN_NAME_ALWAYS_AUTOGENERATE %>">
+	<c:if test="<%= !PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.USERS_SCREEN_NAME_ALWAYS_AUTOGENERATE) %>">
 		<div class="exp-ctrl-holder">
 			<label for=""><liferay-ui:message key="screen-name" /></label>
 
@@ -138,7 +138,7 @@ boolean male = BeanParamUtil.getBoolean(contact2, request, "male", true);
 	</c:if>
 
 	<c:choose>
-		<c:when test="<%= PropsValues.FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_CONTACT_BIRTHDAY %>">
+		<c:when test="<%= PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_CONTACT_BIRTHDAY) %>">
 			<div class="exp-ctrl-holder">
 				<label for=""><liferay-ui:message key="birthday" /></label>
 
@@ -152,7 +152,7 @@ boolean male = BeanParamUtil.getBoolean(contact2, request, "male", true);
 		</c:otherwise>
 	</c:choose>
 
-	<c:if test="<%= PropsValues.FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_CONTACT_MALE %>">
+	<c:if test="<%= PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_CONTACT_MALE) %>">
 		<div class="exp-ctrl-holder">
 			<label for="<portlet:namespace />male"><liferay-ui:message key="gender" /></label>
 

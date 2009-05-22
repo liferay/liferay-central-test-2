@@ -615,10 +615,22 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			}
 
 			preferences.store();
+
+			// Locales
+
+			String oldLocales = preferences.getValue(
+				PropsKeys.LOCALES, StringPool.BLANK);
+			String newLocales = properties.getProperty(PropsKeys.LOCALES);
+
+			if (!Validator.equals(oldLocales, newLocales)) {
+				LanguageUtil.resetAvailableLocales();
+			}
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
 		}
+
+
 	}
 
 	public void updateSecurity(

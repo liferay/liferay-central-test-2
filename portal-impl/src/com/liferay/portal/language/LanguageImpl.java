@@ -22,6 +22,7 @@
 
 package com.liferay.portal.language;
 
+import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.language.Language;
 import com.liferay.portal.kernel.language.LanguageWrapper;
 import com.liferay.portal.kernel.log.Log;
@@ -41,6 +42,8 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.CookieKeys;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
+import com.liferay.portal.util.PrefsPropsUtil;
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebAppPool;
 import com.liferay.portal.util.WebKeys;
@@ -514,6 +517,10 @@ public class LanguageImpl implements Language {
 		return _localesSet.contains(locale);
 	}
 
+	public void resetAvailableLocales() {
+		 _removeInstance();
+	}
+
 	public void updateCookie(
 		HttpServletRequest request, HttpServletResponse response,
 		Locale locale) {
@@ -535,7 +542,7 @@ public class LanguageImpl implements Language {
 		LanguageImpl instance = _instances.get(companyId);
 
 		if (instance == null) {
-			instance = new LanguageImpl();
+			instance = new LanguageImpl(companyId);
 
 			_instances.put(companyId, instance);
 		}
@@ -544,7 +551,25 @@ public class LanguageImpl implements Language {
 	}
 
 	private LanguageImpl() {
-		String[] localesArray = PropsValues.LOCALES;
+		this(0);
+	}
+
+	private LanguageImpl(long companyId) {
+		String[] localesArray;
+
+		if (companyId > 0) {
+			try {
+				localesArray = PrefsPropsUtil.getStringArray(
+					companyId, PropsKeys.LOCALES, StringPool.COMMA,
+					PropsValues.LOCALES);
+			}
+			catch (SystemException se) {
+				localesArray = PropsValues.LOCALES;
+			}
+		}
+		else {
+			localesArray = PropsValues.LOCALES;
+		}
 
 		_locales = new Locale[localesArray.length];
 		_localesSet = new HashSet<Locale>(localesArray.length);
@@ -614,6 +639,12 @@ public class LanguageImpl implements Language {
 		}
 
 		return value;
+	}
+
+	private static void _removeInstance() {
+		long companyId = CompanyThreadLocal.getCompanyId();
+
+		_instances.remove(companyId);
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(LanguageImpl.class);

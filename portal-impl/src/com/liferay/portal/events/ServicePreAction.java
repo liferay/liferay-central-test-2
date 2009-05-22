@@ -89,6 +89,7 @@ import com.liferay.portal.util.LayoutClone;
 import com.liferay.portal.util.LayoutCloneFactory;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
+import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
@@ -1268,7 +1269,9 @@ public class ServicePreAction extends Action {
 		if ((layout != null) &&
 			group.getName().equals(GroupConstants.CONTROL_PANEL)) {
 
-			String themeId = PropsValues.CONTROL_PANEL_LAYOUT_REGULAR_THEME_ID;
+			String themeId = PrefsPropsUtil.getString(
+				companyId, PropsKeys.CONTROL_PANEL_LAYOUT_REGULAR_THEME_ID);
+
 			String colorSchemeId =
 				ColorSchemeImpl.getDefaultRegularColorSchemeId();
 
@@ -1617,7 +1620,8 @@ public class ServicePreAction extends Action {
 		}
 
 		if ((!user.isActive()) ||
-			(PropsValues.TERMS_OF_USE_REQUIRED &&
+			(PrefsPropsUtil.getBoolean(
+				companyId, PropsKeys.TERMS_OF_USE_REQUIRED) &&
 			 !user.isAgreedToTermsOfUse())) {
 
 			themeDisplay.setShowAddContentIcon(false);

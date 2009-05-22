@@ -24,6 +24,10 @@
 
 <%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
+<%
+String defaultLandingPagePath = ParamUtil.getString(request, "settings(" + PropsKeys.DEFAULT_LANDING_PAGE_PATH +")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.DEFAULT_LANDING_PAGE_PATH, PropsValues.DEFAULT_LANDING_PAGE_PATH));
+%>
+
 <liferay-ui:error-marker key="errorSection" value="general" />
 
 <h3><liferay-ui:message key="main-configuration" /></h3>
@@ -37,10 +41,12 @@
 		<liferay-ui:input-field model="<%= Account.class %>" bean="<%= account %>" field="name" />
 	</div>
 
-	<div class="exp-ctrl-holder">
-		<label for="<portlet:namespace />homeURL"><liferay-ui:message key="home-url" /></label>
+	<liferay-ui:error exception="<%= CompanyMxException.class %>" message="please-enter-a-valid-mail-domain" />
 
-		<liferay-ui:input-field model="<%= Company.class %>" bean="<%= company %>" field="homeURL" />
+	<div class="exp-ctrl-holder">
+		<label for="<portlet:namespace />mailDomain"><liferay-ui:message key="mail-domain" /></label>
+
+		<liferay-ui:input-field model="<%= Company.class %>" bean="<%= company %>" field="mx" disabled="<%= !PropsValues.MAIL_MX_UPDATE %>" />
 	</div>
 </fieldset>
 
@@ -52,13 +58,23 @@
 
 		<liferay-ui:input-field model="<%= Company.class %>" bean="<%= company %>" field="virtualHost" />
 	</div>
+</fieldset>
 
-	<liferay-ui:error exception="<%= CompanyMxException.class %>" message="please-enter-a-valid-mail-domain" />
+<h3><liferay-ui:message key="navigation" /></h3>
 
+<fieldset class="exp-block-labels exp-form-column">
 	<div class="exp-ctrl-holder">
-		<label for="<portlet:namespace />mailDomain"><liferay-ui:message key="mail-domain" /></label>
+		<label for="<portlet:namespace />homeURL"><liferay-ui:message key="home-url" /><liferay-ui:icon-help message="home-url-help" /></label>
 
-		<liferay-ui:input-field model="<%= Company.class %>" bean="<%= company %>" field="mx" disabled="<%= !PropsValues.MAIL_MX_UPDATE %>" />
+		<liferay-ui:input-field model="<%= Company.class %>" bean="<%= company %>" field="homeURL" />
+	</div>
+</fieldset>
+
+<fieldset class="exp-block-labels exp-form-column">
+	<div class="exp-ctrl-holder">
+		<label for="<portlet:namespace />settings(<%= PropsKeys.DEFAULT_LANDING_PAGE_PATH %>)"><liferay-ui:message key="default-landing-page" /><liferay-ui:icon-help message="default-landing-page-help" /></label>
+
+		<input name="<portlet:namespace />settings(<%= PropsKeys.DEFAULT_LANDING_PAGE_PATH %>)" type="text" value="<%= defaultLandingPagePath %>" />
 	</div>
 </fieldset>
 

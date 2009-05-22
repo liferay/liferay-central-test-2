@@ -26,11 +26,17 @@
 
 <%
 User user2 = company.getDefaultUser();
+Locale[] locales = LanguageUtil.getAvailableLocales();
+String[] LanguageIds = LocaleUtil.toLanguageIds(locales);
 
 String timeZoneId = ParamUtil.getString(request, "timeZoneId", user2.getTimeZoneId());
 String languageId = ParamUtil.getString(request, "languageId", user2.getLanguageId());
+String availableLocales = ParamUtil.getString(request, "settings(" + PropsKeys.LOCALES + ")", StringUtil.merge(LanguageIds));
 boolean companySecurityCommunityLogo = ParamUtil.getBoolean(request, "settings(" + PropsKeys.COMPANY_SECURITY_COMMUNITY_LOGO + ")", company.isCommunityLogo());
 boolean deleteLogo = ParamUtil.getBoolean(request, "deleteLogo");
+String defaultRegularThemeId = ParamUtil.getString(request, "settings(" + PropsKeys.DEFAULT_REGULAR_THEME_ID + ")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.DEFAULT_REGULAR_THEME_ID, PropsValues.DEFAULT_REGULAR_THEME_ID));
+String defaultWapThemeId = ParamUtil.getString(request, "settings(" + PropsKeys.DEFAULT_WAP_THEME_ID + ")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.DEFAULT_WAP_THEME_ID, PropsValues.DEFAULT_WAP_THEME_ID));
+String controlPanelLayoutRegularThemeId = ParamUtil.getString(request, "settings(" + PropsKeys.CONTROL_PANEL_LAYOUT_REGULAR_THEME_ID + ")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.CONTROL_PANEL_LAYOUT_REGULAR_THEME_ID, PropsValues.CONTROL_PANEL_LAYOUT_REGULAR_THEME_ID));
 %>
 
 <script type="text/javascript">
@@ -66,18 +72,16 @@ boolean deleteLogo = ParamUtil.getBoolean(request, "deleteLogo");
 	);
 </script>
 
-<h3><liferay-ui:message key="display-settings" /></h3>
+<h3><liferay-ui:message key="language-and-time-zone" /></h3>
 
 <fieldset class="exp-block-labels exp-form-column">
 	<div class="exp-ctrl-holder">
-		<label for="<portlet:namespace />languageId"><liferay-ui:message key="language" /></label>
+		<label for="<portlet:namespace />languageId"><liferay-ui:message key="default-language" /></label>
 
 		<select name="<portlet:namespace />languageId">
 
 			<%
 			Locale locale2 = LocaleUtil.fromLanguageId(languageId);
-
-			Locale[] locales = LanguageUtil.getAvailableLocales();
 
 			for (int i = 0; i < locales.length; i++) {
 			%>
@@ -89,6 +93,12 @@ boolean deleteLogo = ParamUtil.getBoolean(request, "deleteLogo");
 			%>
 
 		</select>
+	</div>
+
+	<div class="exp-ctrl-holder">
+		<label for="<portlet:namespace />settings(<%= PropsKeys.LOCALES %>)"><liferay-ui:message key="available-languages" /></label>
+
+		<input class="lfr-input-text" name="<portlet:namespace />settings(<%= PropsKeys.LOCALES %>)" type="text" value="<%= availableLocales %>" />
 	</div>
 
 	<div class="exp-ctrl-holder">
@@ -134,5 +144,111 @@ boolean deleteLogo = ParamUtil.getBoolean(request, "deleteLogo");
 
 			<input id="<portlet:namespace />deleteLogo" name="<portlet:namespace />deleteLogo" type="hidden" value="<%= deleteLogo %>" />
 		</c:if>
+	</div>
+</fieldset>
+
+<h3><liferay-ui:message key="look-and-feel" /></h3>
+
+<fieldset class="exp-block-labels exp-form-column">
+
+	<div class="exp-ctrl-holder">
+		<label for="<portlet:namespace />settings(<%= PropsKeys.DEFAULT_REGULAR_THEME_ID %>)"><liferay-ui:message key="default-regular-theme" /></label>
+
+		<select name="<portlet:namespace />settings(<%= PropsKeys.DEFAULT_REGULAR_THEME_ID %>)">
+
+			<%
+			List<Theme> themes = ThemeLocalServiceUtil.getThemes(company.getCompanyId(), 0, user.getUserId(), false);
+			boolean deployed = false;
+
+			for (Theme curTheme: themes) {
+				if (Validator.equals(defaultRegularThemeId, curTheme.getThemeId())) {
+					deployed = true;
+				}
+			%>
+
+				<option <%= (Validator.equals(defaultRegularThemeId, curTheme.getThemeId())) ? "selected" : "" %> value="<%= curTheme.getThemeId() %>"><%= curTheme.getName() %></option>
+
+			<%
+			}
+
+			if (!deployed) {
+			%>
+
+				<option selected value="<%= defaultRegularThemeId %>"><%= defaultRegularThemeId + "(" + LanguageUtil.get(pageContext, "undeployed") + ")" %></option>
+
+			<%
+			}
+			%>
+		</select>
+	</div>
+
+	<div class="exp-ctrl-holder">
+		<label for="<portlet:namespace />settings(<%= PropsKeys.CONTROL_PANEL_LAYOUT_REGULAR_THEME_ID %>)"><liferay-ui:message key="default-control-panel-theme" /></label>
+
+		<select name="<portlet:namespace />settings(<%= PropsKeys.CONTROL_PANEL_LAYOUT_REGULAR_THEME_ID %>)">
+
+			<%
+
+			Theme controlPanelTheme = ThemeLocalServiceUtil.getTheme(company.getCompanyId(), "controlpanel", false);
+
+			if (controlPanelTheme != null) {
+				themes.add(controlPanelTheme);
+			}
+
+			deployed = false;
+
+			for (Theme curTheme: themes) {
+				if (Validator.equals(controlPanelLayoutRegularThemeId, curTheme.getThemeId())) {
+					deployed = true;
+				}
+
+			%>
+
+				<option <%= (Validator.equals(controlPanelLayoutRegularThemeId, curTheme.getThemeId())) ? "selected" : "" %> value="<%= curTheme.getThemeId() %>"><%= curTheme.getName() %></option>
+
+			<%
+			}
+
+			if (!deployed) {
+			%>
+
+				<option selected value="<%= controlPanelLayoutRegularThemeId %>"><%= controlPanelLayoutRegularThemeId + "(" + LanguageUtil.get(pageContext, "undeployed") + ")" %></option>
+
+			<%
+			}
+			%>
+		</select>
+	</div>
+
+	<div class="exp-ctrl-holder">
+		<label for="<portlet:namespace />settings(<%= PropsKeys.DEFAULT_REGULAR_THEME_ID %>)"><liferay-ui:message key="default-mobile-theme" /></label>
+
+		<select name="<portlet:namespace />settings(<%= PropsKeys.DEFAULT_REGULAR_THEME_ID %>)">
+
+			<%
+			themes = ThemeLocalServiceUtil.getThemes(company.getCompanyId(), 0, user.getUserId(), true);
+			deployed = false;
+
+			for (Theme curTheme: themes) {
+				if (Validator.equals(defaultWapThemeId, curTheme.getThemeId())) {
+					deployed = true;
+				}
+
+			%>
+
+				<option <%= (Validator.equals(defaultWapThemeId, curTheme.getThemeId())) ? "selected" : "" %> value="<%= curTheme.getThemeId() %>"><%= curTheme.getName() %></option>
+
+			<%
+			}
+
+			if (!deployed) {
+			%>
+
+				<option selected value="<%= defaultWapThemeId %>"><%= defaultWapThemeId + "(" + LanguageUtil.get(pageContext, "undeployed") + ")" %></option>
+
+			<%
+			}
+			%>
+		</select>
 	</div>
 </fieldset>

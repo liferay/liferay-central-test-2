@@ -25,6 +25,7 @@ package com.liferay.portal.struts;
 import com.liferay.portal.LayoutPermissionException;
 import com.liferay.portal.PortletActiveException;
 import com.liferay.portal.RequiredRoleException;
+import com.liferay.portal.SystemException;
 import com.liferay.portal.UserActiveException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -54,6 +55,7 @@ import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.service.persistence.UserTrackerPathUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
@@ -623,7 +625,17 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 		// Authenticated users should agree to Terms of Use
 
 		if ((user != null) && !user.isAgreedToTermsOfUse()) {
-			if (PropsValues.TERMS_OF_USE_REQUIRED) {
+			boolean termsOfUseRequired;
+
+			try {
+				termsOfUseRequired = PrefsPropsUtil.getBoolean(
+					user.getCompanyId(), PropsKeys.TERMS_OF_USE_REQUIRED);
+			}
+			catch (SystemException se) {
+				termsOfUseRequired = PropsValues.TERMS_OF_USE_REQUIRED;
+			}
+
+			if (termsOfUseRequired) {
 				return _PATH_PORTAL_TERMS_OF_USE;
 			}
 		}

@@ -108,12 +108,12 @@ boolean deletePortrait = ParamUtil.getBoolean(request, "deletePortrait");
 	<liferay-ui:error exception="<%= ReservedUserScreenNameException.class %>" message="the-screen-name-you-requested-is-reserved" />
 	<liferay-ui:error exception="<%= UserScreenNameException.class %>" message="please-enter-a-valid-screen-name" />
 
-	<c:if test="<%= !PropsValues.USERS_SCREEN_NAME_ALWAYS_AUTOGENERATE || (selUser != null) %>">
+	<c:if test="<%= !PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.USERS_SCREEN_NAME_ALWAYS_AUTOGENERATE) || (selUser != null) %>">
 		<div class="exp-ctrl-holder">
 			<label for="<portlet:namespace />screenName"><liferay-ui:message key="screen-name" /></label>
 
 			<c:choose>
-				<c:when test="<%= PropsValues.USERS_SCREEN_NAME_ALWAYS_AUTOGENERATE %>">
+				<c:when test="<%= PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.USERS_SCREEN_NAME_ALWAYS_AUTOGENERATE) %>">
 					<%= selUser.getScreenName() %>
 
 					<input name="<portlet:namespace />screenName" type="hidden" value="<%= selUser.getScreenName() %>" />
@@ -228,7 +228,7 @@ boolean deletePortrait = ParamUtil.getBoolean(request, "deletePortrait");
 
 	<div class="exp-ctrl-holder">
 		<c:choose>
-			<c:when test="<%= PropsValues.FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_CONTACT_BIRTHDAY %>">
+			<c:when test="<%= PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_CONTACT_BIRTHDAY) %>">
 				<label for="<portlet:namespace />birthday"><liferay-ui:message key="birthday" /></label>
 
 				<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= selContact %>" field="birthday" defaultValue="<%= birthday %>" />
@@ -241,7 +241,7 @@ boolean deletePortrait = ParamUtil.getBoolean(request, "deletePortrait");
 		</c:choose>
 	</div>
 
-	<c:if test="<%= PropsValues.FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_CONTACT_MALE %>">
+	<c:if test="<%= PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_CONTACT_MALE) %>">
 		<div class="exp-ctrl-holder">
 			<label for="<portlet:namespace />male"><liferay-ui:message key="gender" /></label>
 

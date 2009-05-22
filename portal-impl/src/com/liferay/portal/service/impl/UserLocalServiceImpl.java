@@ -266,7 +266,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		openId = openId.trim();
 		Date now = new Date();
 
-		if (PropsValues.USERS_SCREEN_NAME_ALWAYS_AUTOGENERATE) {
+		if (PrefsPropsUtil.getBoolean(
+				companyId, PropsKeys.USERS_SCREEN_NAME_ALWAYS_AUTOGENERATE)) {
 			autoScreenName = true;
 		}
 

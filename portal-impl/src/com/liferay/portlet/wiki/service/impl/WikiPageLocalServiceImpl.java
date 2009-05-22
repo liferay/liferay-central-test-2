@@ -1104,7 +1104,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		if (previousVersion < 1) {
 			return null;
 		}
-		
+
 		return getPage(page.getNodeId(), page.getTitle(), previousVersion);
 	}
 
