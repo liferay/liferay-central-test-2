@@ -141,17 +141,17 @@ public class AssetCategoryLocalServiceUtil {
 			guestPermissions);
 	}
 
-	public static void deleteCategory(long categoryId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		getService().deleteCategory(categoryId);
-	}
-
 	public static void deleteCategory(
 		com.liferay.portlet.asset.model.AssetCategory category)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		getService().deleteCategory(category);
+	}
+
+	public static void deleteCategory(long categoryId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		getService().deleteCategory(categoryId);
 	}
 
 	public static void deleteVocabularyCategories(long vocabularyId)
@@ -171,15 +171,15 @@ public class AssetCategoryLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetCategory> getCategories(
-		java.lang.String className, long classPK)
-		throws com.liferay.portal.SystemException {
-		return getService().getCategories(className, classPK);
-	}
-
-	public static java.util.List<com.liferay.portlet.asset.model.AssetCategory> getCategories(
 		long classNameId, long classPK)
 		throws com.liferay.portal.SystemException {
 		return getService().getCategories(classNameId, classPK);
+	}
+
+	public static java.util.List<com.liferay.portlet.asset.model.AssetCategory> getCategories(
+		java.lang.String className, long classPK)
+		throws com.liferay.portal.SystemException {
+		return getService().getCategories(className, classPK);
 	}
 
 	public static com.liferay.portlet.asset.model.AssetCategory getCategory(
@@ -190,23 +190,17 @@ public class AssetCategoryLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetCategory> getChildCategories(
-		long parentCategoryId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		long parentCategoryId) throws com.liferay.portal.SystemException {
 		return getService().getChildCategories(parentCategoryId);
 	}
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetCategory> getVocabularyCategories(
-		long vocabularyId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		long vocabularyId) throws com.liferay.portal.SystemException {
 		return getService().getVocabularyCategories(vocabularyId);
 	}
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetCategory> getVocabularyRootCategories(
-		long vocabularyId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		long vocabularyId) throws com.liferay.portal.SystemException {
 		return getService().getVocabularyRootCategories(vocabularyId);
 	}
 

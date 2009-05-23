@@ -123,16 +123,16 @@ public class AssetCategoryPropertyLocalServiceUtil {
 		getService().deleteCategoryProperties(entryId);
 	}
 
-	public static void deleteCategoryProperty(long categoryPropertyId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		getService().deleteCategoryProperty(categoryPropertyId);
-	}
-
 	public static void deleteCategoryProperty(
 		com.liferay.portlet.asset.model.AssetCategoryProperty categoryProperty)
 		throws com.liferay.portal.SystemException {
 		getService().deleteCategoryProperty(categoryProperty);
+	}
+
+	public static void deleteCategoryProperty(long categoryPropertyId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		getService().deleteCategoryProperty(categoryPropertyId);
 	}
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetCategoryProperty> getCategoryProperties()

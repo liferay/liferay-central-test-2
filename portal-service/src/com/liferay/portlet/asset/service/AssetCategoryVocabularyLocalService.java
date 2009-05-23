@@ -119,12 +119,18 @@ public interface AssetCategoryVocabularyLocalService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	public void deleteCategoryVocabulary(
+		com.liferay.portlet.asset.model.AssetCategoryVocabulary categoryVocabulary)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
 	public void deleteCategoryVocabulary(long categoryVocabularyId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public void deleteCategoryVocabulary(
-		com.liferay.portlet.asset.model.AssetCategoryVocabulary categoryVocabulary)
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portlet.asset.model.AssetCategoryVocabulary getCategoryVocabulary(
+		long categoryVocabularyId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
@@ -141,12 +147,6 @@ public interface AssetCategoryVocabularyLocalService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.asset.model.AssetCategoryVocabulary getGroupCategoryVocabulary(
 		long groupId, java.lang.String name)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public com.liferay.portlet.asset.model.AssetCategoryVocabulary getCategoryVocabulary(
-		long categoryVocabularyId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 

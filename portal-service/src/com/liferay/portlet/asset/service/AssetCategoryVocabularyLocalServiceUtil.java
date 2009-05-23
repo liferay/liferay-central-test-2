@@ -140,17 +140,24 @@ public class AssetCategoryVocabularyLocalServiceUtil {
 			communityPermissions, guestPermissions);
 	}
 
+	public static void deleteCategoryVocabulary(
+		com.liferay.portlet.asset.model.AssetCategoryVocabulary categoryVocabulary)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		getService().deleteCategoryVocabulary(categoryVocabulary);
+	}
+
 	public static void deleteCategoryVocabulary(long categoryVocabularyId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		getService().deleteCategoryVocabulary(categoryVocabularyId);
 	}
 
-	public static void deleteCategoryVocabulary(
-		com.liferay.portlet.asset.model.AssetCategoryVocabulary categoryVocabulary)
+	public static com.liferay.portlet.asset.model.AssetCategoryVocabulary getCategoryVocabulary(
+		long categoryVocabularyId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		getService().deleteCategoryVocabulary(categoryVocabulary);
+		return getService().getCategoryVocabulary(categoryVocabularyId);
 	}
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetCategoryVocabulary> getCompanyCategoryVocabularies(
@@ -170,13 +177,6 @@ public class AssetCategoryVocabularyLocalServiceUtil {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService().getGroupCategoryVocabulary(groupId, name);
-	}
-
-	public static com.liferay.portlet.asset.model.AssetCategoryVocabulary getCategoryVocabulary(
-		long categoryVocabularyId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return getService().getCategoryVocabulary(categoryVocabularyId);
 	}
 
 	public static com.liferay.portlet.asset.model.AssetCategoryVocabulary updateCategoryVocabulary(
