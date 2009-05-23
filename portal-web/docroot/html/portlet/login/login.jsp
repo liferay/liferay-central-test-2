@@ -76,12 +76,12 @@
 
 		<liferay-ui:error exception="<%= AuthException.class %>" message="authentication-failed" />
 		<liferay-ui:error exception="<%= CookieNotSupportedException.class %>" message="authentication-failed-please-enable-browser-cookies" />
-		<liferay-ui:error exception="<%= NoSuchUserException.class %>" message="please-enter-a-valid-login" />
+		<liferay-ui:error exception="<%= NoSuchUserException.class %>" message="authentication-failed" />
 		<liferay-ui:error exception="<%= PasswordExpiredException.class %>" message="your-password-has-expired" />
-		<liferay-ui:error exception="<%= UserEmailAddressException.class %>" message="please-enter-a-valid-login" />
+		<liferay-ui:error exception="<%= UserEmailAddressException.class %>" message="authentication-failed" />
 		<liferay-ui:error exception="<%= UserLockoutException.class %>" message="this-account-has-been-locked" />
-		<liferay-ui:error exception="<%= UserPasswordException.class %>" message="please-enter-a-valid-password" />
-		<liferay-ui:error exception="<%= UserScreenNameException.class %>" message="please-enter-a-valid-screen-name" />
+		<liferay-ui:error exception="<%= UserPasswordException.class %>" message="authentication-failed" />
+		<liferay-ui:error exception="<%= UserScreenNameException.class %>" message="authentication-failed" />
 
 		<fieldset class="exp-block-labels">
 			<div class="exp-ctrl-holder">
