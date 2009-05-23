@@ -56,12 +56,6 @@ Liferay.Navigation = new Expanse.Class(
 
 			var pageParents = jQuery(document);
 
-			addBlock.click(
-				function(event) {
-					return false;
-				}
-			);
-
 			var pageBlur = function(internalEvent) {
 				var currentEl = jQuery(internalEvent.target);
 				var liParent = currentEl.parents('ul:eq(0)');
