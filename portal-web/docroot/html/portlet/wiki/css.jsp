@@ -73,7 +73,7 @@
 }
 
 .portlet-wiki h1.page-title {
-	border-bottom: 1px solid #AAAAAA;
+	border-bottom: 1px solid #aaa;
 	margin: 0px;
 	margin-bottom: 0.5em;
 	padding-bottom: 5px;
@@ -187,8 +187,8 @@
 }
 
 .portlet-wiki .history-navigation {
-	background: #EEE;
-	border-top: 1px solid #CCC;
+	background: #eee;
+	border-top: 1px solid #ccc;
 	margin: 15px 0 20px;
 	overflow: hidden;
 	padding: 5px;
@@ -248,11 +248,11 @@
 }
 
 .portlet-wiki .page-old-version a {
-	color: #ff9933;
+	color: #f93;
 }
 
 .portlet-wiki .page-old-version {
-	color: #ff9933;
+	color: #f93;
 	line-height: 1.2em;
 	margin: -1em 0pt 1.4em 0em;
 	width: auto;

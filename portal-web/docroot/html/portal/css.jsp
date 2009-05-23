@@ -1357,36 +1357,36 @@ fieldset:last-child, .exp-form fieldset:last-child {
 /* ---------- Taglib diff HTML ---------- */
 
 .taglib-diff-html div.diff-removed-image {
-	background-color: #FDC6C6;
-	background-image: url(<%= themeImagesPath %>/diff/diffmin.gif);
+	background: #fdc6c6 url(<%= themeImagesPath %>/diff/minus.png);
 }
 
 .taglib-diff-html div.diff-added-image {
-	background-color: #CFC;
-	background-image: url(<%= themeImagesPath %>/diff/diffplus.gif);
-	background-repeat: no-repeat;
+	background: #cfc url(<%= themeImagesPath %>/diff/plus.png) no-repeat;
 }
 
 .taglib-diff-html div.diff-removed-image, div.diff-added-image {
-	filter: alpha(opacity=55);
 	height: 300px;
-	margin-bottom: 2px;
-	margin-left: 2px;
-	margin-right: 2px;
-	margin-top: 2px;
-	-moz-opacity: 0.55;
-	opacity : 0.55;
+	margin: 2px;
+	opacity: 0.55;
 	position: absolute;
 	width: 200px;
 }
 
+.gecko .taglib-diff-html div.diff-removed-image, .gecko div.diff-added-image {
+	-moz-opacity: 0.55;
+}
+
+.ie .taglib-diff-html div.diff-removed-image, .ie div.diff-added-image {
+	filter: alpha(opacity=55);
+}
+
 .taglib-diff-html span.diff-html-added img {
-	border: 2px solid #CFC;
+	border: 2px solid #cfc;
 }
 
 .taglib-diff-html span.diff-html-added {
-	background-color: #CFC;
-	font-size: 100%;
+	background-color: #cfc;
+	font-size: 1em;
 }
 
 .taglib-diff-html span.diff-html-changed img {
@@ -1394,16 +1394,16 @@ fieldset:last-child, .exp-form fieldset:last-child {
 }
 
 .taglib-diff-html span.diff-html-changed {
-	background: url(<%= themeImagesPath %>/diff/diffunderline.gif) bottom repeat-x;
+	background: url(<%= themeImagesPath %>/diff/underline.png) bottom repeat-x;
 }
 
 .taglib-diff-html span.diff-html-removed img {
-	border: 2px solid #FDC6C6;
+	border: 2px solid #fdc6c6;
 }
 
 .taglib-diff-html span.diff-html-removed {
-	background-color: #FDC6C6;
-	font-size: 100%;
+	background-color: #fdc6c6;
+	font-size: 1em;
 	text-decoration: line-through;
 }
 
