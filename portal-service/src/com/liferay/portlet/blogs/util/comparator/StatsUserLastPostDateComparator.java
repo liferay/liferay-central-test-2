@@ -39,6 +39,8 @@ public class StatsUserLastPostDateComparator extends OrderByComparator {
 
 	public static String ORDER_BY_DESC = "lastPostDate DESC";
 
+	public static String[] ORDER_BY_FIELDS = {"lastPostDate"};
+
 	public StatsUserLastPostDateComparator() {
 		this(false);
 	}
@@ -69,6 +71,14 @@ public class StatsUserLastPostDateComparator extends OrderByComparator {
 		else {
 			return ORDER_BY_DESC;
 		}
+	}
+
+	public String[] getOrderByFields() {
+		return ORDER_BY_FIELDS;
+	}
+
+	public boolean isAscending() {
+		return _asc;
 	}
 
 	private boolean _asc;

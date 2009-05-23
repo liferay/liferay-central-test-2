@@ -37,6 +37,8 @@ public class PageVersionComparator extends OrderByComparator {
 
 	public static String ORDER_BY_DESC = "version DESC";
 
+	public static String[] ORDER_BY_FIELDS = {"version"};
+	
 	public PageVersionComparator() {
 		this(false);
 	}
@@ -73,6 +75,14 @@ public class PageVersionComparator extends OrderByComparator {
 		else {
 			return ORDER_BY_DESC;
 		}
+	}
+
+	public String[] getOrderByFields() {
+		return ORDER_BY_FIELDS;
+	}
+
+	public boolean isAscending() {
+		return _asc;
 	}
 
 	private boolean _asc;

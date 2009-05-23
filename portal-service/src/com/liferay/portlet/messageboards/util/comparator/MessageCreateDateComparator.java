@@ -38,6 +38,8 @@ public class MessageCreateDateComparator extends OrderByComparator {
 
 	public static String ORDER_BY_DESC = "createDate DESC";
 
+	public static String[] ORDER_BY_FIELDS = {"createDate"};
+
 	public MessageCreateDateComparator(boolean asc) {
 		_asc = asc;
 	}
@@ -64,6 +66,14 @@ public class MessageCreateDateComparator extends OrderByComparator {
 		else {
 			return ORDER_BY_DESC;
 		}
+	}
+
+	public String[] getOrderByFields() {
+		return ORDER_BY_FIELDS;
+	}
+
+	public boolean isAscending() {
+		return _asc;
 	}
 
 	private boolean _asc;

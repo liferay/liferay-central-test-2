@@ -37,6 +37,8 @@ public class EntryNameComparator extends OrderByComparator {
 
 	public static String ORDER_BY_DESC = "name DESC";
 
+	public static String[] ORDER_BY_FIELDS = {"name"};
+
 	public EntryNameComparator() {
 		this(false);
 	}
@@ -67,6 +69,14 @@ public class EntryNameComparator extends OrderByComparator {
 		else {
 			return ORDER_BY_DESC;
 		}
+	}
+
+	public String[] getOrderByFields() {
+		return ORDER_BY_FIELDS;
+	}
+
+	public boolean isAscending() {
+		return _asc;
 	}
 
 	private boolean _asc;

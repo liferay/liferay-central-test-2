@@ -37,6 +37,8 @@ public class UserEmailAddressComparator extends OrderByComparator {
 
 	public static String ORDER_BY_DESC = "User_.emailAddress DESC";
 
+	public static String[] ORDER_BY_FIELDS = {"emailAddress"};
+
 	public UserEmailAddressComparator() {
 		this(false);
 	}
@@ -66,6 +68,14 @@ public class UserEmailAddressComparator extends OrderByComparator {
 		else {
 			return ORDER_BY_DESC;
 		}
+	}
+
+	public String[] getOrderByFields() {
+		return ORDER_BY_FIELDS;
+	}
+
+	public boolean isAscending() {
+		return _asc;
 	}
 
 	private boolean _asc;

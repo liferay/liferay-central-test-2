@@ -632,26 +632,47 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 
 						StringBuilder query = new StringBuilder();
 
-						query.append("FROM ${packagePath}.model.${entity.name} WHERE ");
+						query.append("SELECT ${entity.alias} FROM ${entity.name} ${entity.alias} WHERE ");
 
 						<#list finderColsList as finderCol>
 							<#if !finderCol.isPrimitiveType()>
 								if (${finderCol.name} == null) {
 									<#if finderCol.comparator == "=">
-										query.append("${finderCol.DBName} IS NULL");
+										<#if entity.hasCompoundPK() && finderCol.isPrimary()>
+											query.append("${entity.alias}.id.${finderCol.name} IS NULL");
+										<#else>
+											query.append("${entity.alias}.${finderCol.name} IS NULL");
+										</#if>
 									<#elseif finderCol.comparator == "<>" || finderCol.comparator = "!=">
-										query.append("${finderCol.DBName} IS NOT NULL");
+										<#if entity.hasCompoundPK() && finderCol.isPrimary()>
+											query.append("${entity.alias}.id.${finderCol.name} IS NOT NULL");
+										<#else>
+											query.append("${entity.alias}.${finderCol.name} IS NOT NULL");
+										</#if>
+
 									<#else>
-										query.append("${finderCol.DBName} ${finderCol.comparator} null");
+                                        <#if entity.hasCompoundPK() && finderCol.isPrimary()>
+                                            query.append("${entity.alias}.id.${finderCol.name} ${finderCol.comparator} null");
+                                        <#else>
+                                            query.append("${entity.alias}.${finderCol.name} ${finderCol.comparator} null");
+                                        </#if>
 									</#if>
 								}
 								else {
 							</#if>
 
 							<#if finderCol.type == "String" && !finderCol.isCaseSensitive()>
-								query.append("lower(${finderCol.DBName}) ${finderCol.comparator} ?");
+								<#if entity.hasCompoundPK() && finderCol.isPrimary()>
+									query.append("${entity.alias}.id.lower(${finderCol.name}) ${finderCol.comparator} ?");
+								<#else>
+									query.append("${entity.alias}.lower(${finderCol.name}) ${finderCol.comparator} ?");
+								</#if>
 							<#else>
-								query.append("${finderCol.DBName} ${finderCol.comparator} ?");
+								<#if entity.hasCompoundPK() && finderCol.isPrimary()>
+									query.append("${entity.alias}.id.${finderCol.name} ${finderCol.comparator} ?");
+								<#else>
+									query.append("${entity.alias}.${finderCol.name} ${finderCol.comparator} ?");
+								</#if>
 							</#if>
 
 							<#if !finderCol.isPrimitiveType()>
@@ -673,7 +694,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 							<#assign orderList = entity.getOrder().getColumns()>
 
 							<#list orderList as order>
-								query.append("${order.DBName} <#if order.isOrderByAscending()>ASC<#else>DESC</#if><#if order_has_next>, </#if>");
+								query.append("${entity.alias}.${order.name} <#if order.isOrderByAscending()>ASC<#else>DESC</#if><#if order_has_next>, </#if>");
 							</#list>
 						</#if>
 
@@ -781,26 +802,46 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 
 						StringBuilder query = new StringBuilder();
 
-						query.append("FROM ${packagePath}.model.${entity.name} WHERE ");
+						query.append("SELECT ${entity.alias} FROM ${entity.name} ${entity.alias} WHERE ");
 
 						<#list finderColsList as finderCol>
 							<#if !finderCol.isPrimitiveType()>
 								if (${finderCol.name} == null) {
 									<#if finderCol.comparator == "=">
-										query.append("${finderCol.DBName} IS NULL");
+                                        <#if entity.hasCompoundPK() && finderCol.isPrimary()>
+                                            query.append("${entity.alias}.id.${finderCol.name} IS NULL");
+                                        <#else>
+                                            query.append("${entity.alias}.${finderCol.name} IS NULL");
+                                        </#if>
 									<#elseif finderCol.comparator == "<>" || finderCol.comparator = "!=">
-										query.append("${finderCol.DBName} IS NOT NULL");
+                                        <#if entity.hasCompoundPK() && finderCol.isPrimary()>
+                                            query.append("${entity.alias}.id.${finderCol.name} IS NOT NULL");
+                                        <#else>
+                                            query.append("${entity.alias}.${finderCol.name} IS NOT NULL");
+                                        </#if>
 									<#else>
-										query.append("${finderCol.DBName} ${finderCol.comparator} null");
+                                        <#if entity.hasCompoundPK() && finderCol.isPrimary()>
+                                            query.append("${entity.alias}.id.${finderCol.name} ${finderCol.comparator} null");
+                                        <#else>
+                                            query.append("${entity.alias}.${finderCol.name} ${finderCol.comparator} null");
+                                        </#if>
 									</#if>
 								}
 								else {
 							</#if>
 
 							<#if finderCol.type == "String" && !finderCol.isCaseSensitive()>
-								query.append("lower(${finderCol.DBName}) ${finderCol.comparator} ?");
+								<#if entity.hasCompoundPK() && finderCol.isPrimary()>
+									query.append("${entity.alias}.id.lower(${finderCol.name}) ${finderCol.comparator} ?");
+								<#else>
+									query.append("${entity.alias}.lower(${finderCol.name}) ${finderCol.comparator} ?");
+								</#if>
 							<#else>
-								query.append("${finderCol.DBName} ${finderCol.comparator} ?");
+								<#if entity.hasCompoundPK() && finderCol.isPrimary()>
+									query.append("${entity.alias}.id.${finderCol.name} ${finderCol.comparator} ?");
+								<#else>
+									query.append("${entity.alias}.${finderCol.name} ${finderCol.comparator} ?");
+								</#if>
 							</#if>
 
 							<#if !finderCol.isPrimitiveType()>
@@ -818,7 +859,23 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 
 						if (obc != null) {
 							query.append("ORDER BY ");
-							query.append(obc.getOrderBy());
+							
+							String order = obc.isAscending() ? " ASC" : " DESC";
+
+							boolean first = true;
+
+							for(String field: obc.getOrderByFields()) {
+
+								if(!first) {
+									query.append(", ");
+								}
+
+								query.append("${entity.alias}.")
+									 .append(field)
+									 .append(order);
+
+								first = false;
+							}
 						}
 
 						<#if entity.getOrder()??>
@@ -828,7 +885,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 								<#assign orderList = entity.getOrder().getColumns()>
 
 								<#list orderList as order>
-									query.append("${order.DBName} <#if order.isOrderByAscending()>ASC<#else>DESC</#if><#if order_has_next>, </#if>");
+									query.append("${entity.alias}.${order.name} <#if order.isOrderByAscending()>ASC<#else>DESC</#if><#if order_has_next>, </#if>");
 								</#list>
 							}
 						</#if>
@@ -996,26 +1053,46 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 
 					StringBuilder query = new StringBuilder();
 
-					query.append("FROM ${packagePath}.model.${entity.name} WHERE ");
+					query.append("SELECT ${entity.alias} FROM ${entity.name} ${entity.alias} WHERE ");
 
 					<#list finderColsList as finderCol>
 						<#if !finderCol.isPrimitiveType()>
 							if (${finderCol.name} == null) {
 								<#if finderCol.comparator == "=">
-									query.append("${finderCol.DBName} IS NULL");
+									<#if entity.hasCompoundPK() && finderCol.isPrimary()>
+										query.append("${entity.alias}.id.${finderCol.name} IS NULL");
+									<#else>
+										query.append("${entity.alias}.${finderCol.name} IS NULL");
+									</#if>
 								<#elseif finderCol.comparator == "<>" || finderCol.comparator = "!=">
-									query.append("${finderCol.DBName} IS NOT NULL");
+									<#if entity.hasCompoundPK() && finderCol.isPrimary()>
+										query.append("${entity.alias}.id.${finderCol.name} IS NOT NULL");
+									<#else>
+										query.append("${entity.alias}.${finderCol.name} IS NOT NULL");
+									</#if>
 								<#else>
-									query.append("${finderCol.DBName} ${finderCol.comparator} null");
+									<#if entity.hasCompoundPK() && finderCol.isPrimary()>
+										query.append("${entity.alias}.id.${finderCol.name} ${finderCol.comparator} null");
+									<#else>
+										query.append("${entity.alias}.${finderCol.name} ${finderCol.comparator} null");
+									</#if>
 								</#if>
 							}
 							else {
 						</#if>
 
 						<#if finderCol.type == "String" && !finderCol.isCaseSensitive()>
-							query.append("lower(${finderCol.DBName}) ${finderCol.comparator} ?");
+							<#if entity.hasCompoundPK() && finderCol.isPrimary()>
+								query.append("${entity.alias}.id.lower(${finderCol.name}) ${finderCol.comparator} ?");
+							<#else>
+								query.append("${entity.alias}.lower(${finderCol.name}) ${finderCol.comparator} ?");
+							</#if>
 						<#else>
-							query.append("${finderCol.DBName} ${finderCol.comparator} ?");
+							<#if entity.hasCompoundPK() && finderCol.isPrimary()>
+								query.append("${entity.alias}.id.${finderCol.name} ${finderCol.comparator} ?");
+							<#else>
+								query.append("${entity.alias}.${finderCol.name} ${finderCol.comparator} ?");
+							</#if>
 						</#if>
 
 						<#if !finderCol.isPrimitiveType()>
@@ -1033,7 +1110,23 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 
 					if (obc != null) {
 						query.append("ORDER BY ");
-						query.append(obc.getOrderBy());
+
+						String order = obc.isAscending() ? " ASC" : " DESC";
+
+						boolean first = true;
+
+						for(String field: obc.getOrderByFields()) {
+
+							if(!first) {
+								query.append(", ");
+							}
+
+							query.append("${entity.alias}.")
+								 .append(field)
+								 .append(order);
+
+							first = false;
+						}
 					}
 
 					<#if entity.getOrder()??>
@@ -1043,7 +1136,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 							<#assign orderList = entity.getOrder().getColumns()>
 
 							<#list orderList as order>
-								query.append("${order.DBName} <#if order.isOrderByAscending()>ASC<#else>DESC</#if><#if order_has_next>, </#if>");
+								query.append("${entity.alias}.${order.name} <#if order.isOrderByAscending()>ASC<#else>DESC</#if><#if order_has_next>, </#if>");
 							</#list>
 						}
 					</#if>
@@ -1208,26 +1301,47 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 
 						StringBuilder query = new StringBuilder();
 
-						query.append("FROM ${packagePath}.model.${entity.name} WHERE ");
+						query.append("SELECT ${entity.alias} FROM ${entity.name} ${entity.alias} WHERE ");
 
 						<#list finderColsList as finderCol>
 							<#if !finderCol.isPrimitiveType()>
 								if (${finderCol.name} == null) {
 									<#if finderCol.comparator == "=">
-										query.append("${finderCol.DBName} IS NULL");
+                                        <#if entity.hasCompoundPK() && finderCol.isPrimary()>
+                                            query.append("${entity.alias}.id.${finderCol.name} IS NULL");
+                                        <#else>
+                                            query.append("${entity.alias}.${finderCol.name} IS NULL");
+                                        </#if>
+
 									<#elseif finderCol.comparator == "<>" || finderCol.comparator = "!=">
-										query.append("${finderCol.DBName} IS NOT NULL");
+                                        <#if entity.hasCompoundPK() && finderCol.isPrimary()>
+                                            query.append("${entity.alias}.id.${finderCol.name} IS NOT NULL");
+                                        <#else>
+                                            query.append("${entity.alias}.${finderCol.name} IS NOT NULL");
+                                        </#if>
 									<#else>
-										query.append("${finderCol.DBName} ${finderCol.comparator} null");
+                                        <#if entity.hasCompoundPK() && finderCol.isPrimary()>
+                                            query.append("${entity.alias}.id.${finderCol.name} ${finderCol.comparator} null");
+                                        <#else>
+                                            query.append("${entity.alias}.${finderCol.name} ${finderCol.comparator} null");
+                                        </#if>
 									</#if>
 								}
 								else {
 							</#if>
 
 							<#if finderCol.type == "String" && !finderCol.isCaseSensitive()>
-								query.append("lower(${finderCol.DBName}) ${finderCol.comparator} ?");
+								<#if entity.hasCompoundPK() && finderCol.isPrimary()>
+									query.append("${entity.alias}.id.lower(${finderCol.name}) ${finderCol.comparator} ?");
+								<#else>
+									query.append("${entity.alias}.lower(${finderCol.name}) ${finderCol.comparator} ?");
+								</#if>
 							<#else>
-								query.append("${finderCol.DBName} ${finderCol.comparator} ?");
+								<#if entity.hasCompoundPK() && finderCol.isPrimary()>
+									query.append("${entity.alias}.id.${finderCol.name} ${finderCol.comparator} ?");
+								<#else>
+									query.append("${entity.alias}.${finderCol.name} ${finderCol.comparator} ?");
+								</#if>
 							</#if>
 
 							<#if !finderCol.isPrimitiveType()>
@@ -1249,7 +1363,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 							<#assign orderList = entity.getOrder().getColumns()>
 
 							<#list orderList as order>
-								query.append("${order.DBName} <#if order.isOrderByAscending()>ASC<#else>DESC</#if><#if order_has_next>, </#if>");
+								query.append("${entity.alias}.${order.name} <#if order.isOrderByAscending()>ASC<#else>DESC</#if><#if order_has_next>, </#if>");
 							</#list>
 						</#if>
 
@@ -1399,11 +1513,27 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM ${packagePath}.model.${entity.name} ");
+				query.append("SELECT ${entity.alias} FROM ${entity.name} ${entity.alias} ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String order = obc.isAscending() ? " ASC" : " DESC";
+
+					boolean first = true;
+
+					for(String field: obc.getOrderByFields()) {
+
+						if(!first) {
+							query.append(", ");
+						}
+
+						query.append("${entity.alias}.")
+							 .append(field)
+							 .append(order);
+
+						first = false;
+					}
 				}
 
 				<#if entity.getOrder()??>
@@ -1413,7 +1543,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 						<#assign orderList = entity.getOrder().getColumns()>
 
 						<#list orderList as order>
-							query.append("${order.DBName} <#if order.isOrderByAscending()>ASC<#else>DESC</#if><#if order_has_next>, </#if>");
+							query.append("${entity.alias}.${order.name} <#if order.isOrderByAscending()>ASC<#else>DESC</#if><#if order_has_next>, </#if>");
 						</#list>
 					}
 				</#if>
@@ -1554,27 +1684,47 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 
 					StringBuilder query = new StringBuilder();
 
-					query.append("SELECT COUNT(*) ");
-					query.append("FROM ${packagePath}.model.${entity.name} WHERE ");
+					query.append("SELECT COUNT(${entity.alias}) ");
+					query.append("FROM ${entity.name} ${entity.alias} WHERE ");
 
 					<#list finderColsList as finderCol>
 						<#if !finderCol.isPrimitiveType()>
 							if (${finderCol.name} == null) {
 								<#if finderCol.comparator == "=">
-									query.append("${finderCol.DBName} IS NULL");
+									<#if entity.hasCompoundPK() && finderCol.isPrimary()>
+										query.append("${entity.alias}.id.${finderCol.name} IS NULL");
+									<#else>
+										query.append("${entity.alias}.${finderCol.name} IS NULL");
+									</#if>
 								<#elseif finderCol.comparator == "<>" || finderCol.comparator = "!=">
-									query.append("${finderCol.DBName} IS NOT NULL");
+									<#if entity.hasCompoundPK() && finderCol.isPrimary()>
+										query.append("${entity.alias}.id.${finderCol.name} IS NOT NULL");
+									<#else>
+										query.append("${entity.alias}.${finderCol.name} IS NOT NULL");
+									</#if>
 								<#else>
-									query.append("${finderCol.DBName} ${finderCol.comparator} null");
+									<#if entity.hasCompoundPK() && finderCol.isPrimary()>
+										query.append("${entity.alias}.id.${finderCol.name} ${finderCol.comparator} null");
+									<#else>
+										query.append("${entity.alias}.${finderCol.name} ${finderCol.comparator} null");
+									</#if>
 								</#if>
 							}
 							else {
 						</#if>
 
 						<#if finderCol.type == "String" && !finderCol.isCaseSensitive()>
-							query.append("lower(${finderCol.DBName}) ${finderCol.comparator} ?");
+							<#if entity.hasCompoundPK() && finderCol.isPrimary()>
+								query.append("${entity.alias}.id.lower(${finderCol.name}) ${finderCol.comparator} ?");
+							<#else>
+								query.append("${entity.alias}.lower(${finderCol.name}) ${finderCol.comparator} ?");
+							</#if>
 						<#else>
-							query.append("${finderCol.DBName} ${finderCol.comparator} ?");
+							<#if entity.hasCompoundPK() && finderCol.isPrimary()>
+								query.append("${entity.alias}.id.${finderCol.name} ${finderCol.comparator} ?");
+							<#else>
+								query.append("${entity.alias}.${finderCol.name} ${finderCol.comparator} ?");
+							</#if>
 						</#if>
 
 						<#if !finderCol.isPrimitiveType()>
@@ -1649,7 +1799,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 			try {
 				session = openSession();
 
-				Query q = session.createQuery("SELECT COUNT(*) FROM ${packagePath}.model.${entity.name}");
+				Query q = session.createQuery("SELECT COUNT(${entity.alias}) FROM ${entity.name} ${entity.alias}");
 
 				count = (Long)q.uniqueResult();
 			}

@@ -37,6 +37,8 @@ public class ProductEntryTypeComparator extends OrderByComparator {
 
 	public static String ORDER_BY_DESC = "type_ DESC";
 
+	public static String[] ORDER_BY_FIELDS = {"type"};
+
 	public ProductEntryTypeComparator() {
 		this(false);
 	}
@@ -67,6 +69,14 @@ public class ProductEntryTypeComparator extends OrderByComparator {
 		else {
 			return ORDER_BY_DESC;
 		}
+	}
+
+	public String[] getOrderByFields() {
+		return ORDER_BY_FIELDS;
+	}
+
+	public boolean isAscending() {
+		return _asc;
 	}
 
 	private boolean _asc;

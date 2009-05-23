@@ -37,6 +37,8 @@ public class ArticleIDComparator extends OrderByComparator {
 
 	public static String ORDER_BY_DESC = "articleId DESC";
 
+	public static String[] ORDER_BY_FIELDS = {"articleId"};
+
 	public ArticleIDComparator() {
 		this(false);
 	}
@@ -67,6 +69,14 @@ public class ArticleIDComparator extends OrderByComparator {
 		else {
 			return ORDER_BY_DESC;
 		}
+	}
+
+	public String[] getOrderByFields() {
+		return ORDER_BY_FIELDS;
+	}
+
+	public boolean isAscending() {
+		return _asc;
 	}
 
 	private boolean _asc;

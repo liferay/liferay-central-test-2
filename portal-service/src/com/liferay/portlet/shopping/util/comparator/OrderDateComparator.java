@@ -38,6 +38,8 @@ public class OrderDateComparator extends OrderByComparator {
 
 	public static String ORDER_BY_DESC = "createDate DESC";
 
+	public static String[] ORDER_BY_FIELDS = {"createDate"};
+
 	public OrderDateComparator() {
 		this(false);
 	}
@@ -68,6 +70,14 @@ public class OrderDateComparator extends OrderByComparator {
 		else {
 			return ORDER_BY_DESC;
 		}
+	}
+
+	public String[] getOrderByFields() {
+		return ORDER_BY_FIELDS;
+	}
+
+	public boolean isAscending() {
+		return _asc;
 	}
 
 	private boolean _asc;

@@ -37,6 +37,8 @@ public class ImageDescriptionComparator extends OrderByComparator {
 
 	public static String ORDER_BY_DESC = "description DESC";
 
+	public static String[] ORDER_BY_FIELDS = {"description"};
+
 	public ImageDescriptionComparator() {
 		this(false);
 	}
@@ -68,6 +70,14 @@ public class ImageDescriptionComparator extends OrderByComparator {
 		else {
 			return ORDER_BY_DESC;
 		}
+	}
+
+	public String[] getOrderByFields() {
+		return ORDER_BY_FIELDS;
+	}
+
+	public boolean isAscending() {
+		return _asc;
 	}
 
 	private boolean _asc;

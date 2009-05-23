@@ -193,6 +193,7 @@ public class ServiceBuilder {
 				"\n" +
 				"You can also customize the generated code by overriding the default templates with these optional properties:\n" +
 				"\n" +
+				"\t-Dservice.tpl.bad_alias_names=" + _TPL_ROOT + "bad_alias_names.txt\n"+
 				"\t-Dservice.tpl.bad_column_names=" + _TPL_ROOT + "bad_column_names.txt\n"+
 				"\t-Dservice.tpl.bad_json_types=" + _TPL_ROOT + "bad_json_types.txt\n"+
 				"\t-Dservice.tpl.bad_table_names=" + _TPL_ROOT + "bad_table_names.txt\n"+
@@ -419,6 +420,8 @@ public class ServiceBuilder {
 		boolean autoNamespaceTables, String beanLocatorUtil, String propsUtil,
 		String pluginName, String testDir, boolean build) {
 
+		_tplBadAliasNames = _getTplProperty(
+			"bad_alias_names", _tplBadAliasNames);
 		_tplBadColumnNames = _getTplProperty(
 			"bad_column_names", _tplBadColumnNames);
 		_tplBadJsonTypes = _getTplProperty("bad_json_types", _tplBadJsonTypes);
@@ -477,6 +480,8 @@ public class ServiceBuilder {
 		try {
 			_badTableNames = SetUtil.fromString(StringUtil.read(
 				getClass().getClassLoader(), _tplBadTableNames));
+			_badAliasNames = SetUtil.fromString(StringUtil.read(
+				getClass().getClassLoader(), _tplBadAliasNames));
 			_badColumnNames = SetUtil.fromString(StringUtil.read(
 				getClass().getClassLoader(), _tplBadColumnNames));
 			_badJsonTypes = SetUtil.fromString(StringUtil.read(
@@ -899,10 +904,15 @@ public class ServiceBuilder {
 					txRequiredList.add(txRequired);
 				}
 
+				String alias = TextFormatter.format(ejbName, TextFormatter.I);
+				if (_badAliasNames.contains(alias.toUpperCase())) {
+					alias += StringPool.UNDERLINE;
+				}
+
 				_ejbList.add(
 					new Entity(
 						_packagePath, _portletName, _portletShortName, ejbName,
-						table, uuid, localService, remoteService,
+						alias, table, uuid, localService, remoteService,
 						persistenceClass, finderClass, dataSource,
 						sessionFactory, txManager, cacheEnabled, pkList,
 						regularColList, collectionList, columnList, order,
@@ -1869,6 +1879,13 @@ public class ServiceBuilder {
 
 		String content = _processTemplate(_tplHbmXml, context);
 
+		int lastImportStart = content.lastIndexOf("<import class=");
+		int lastImportEnd = content.indexOf("/>", lastImportStart) + 3;
+
+		String imports = content.substring(0, lastImportEnd);
+
+		content = content.substring(lastImportEnd + 1);
+
 		File xmlFile = new File(_hbmFileName);
 
 		if (!xmlFile.exists()) {
@@ -1884,6 +1901,32 @@ public class ServiceBuilder {
 
 		String oldContent = FileUtil.read(xmlFile);
 		String newContent = _fixHbmXml(oldContent);
+
+		int firstImport = newContent.indexOf(
+			"<import class=\"" + _packagePath + ".model.");
+		int lastImport = newContent.lastIndexOf(
+			"<import class=\"" + _packagePath + ".model.");
+
+		if (firstImport == -1) {
+			int x = newContent.indexOf("<class");
+
+			if(x != -1) {
+				newContent =
+					newContent.substring(0, x) + imports +
+						newContent.substring(x);
+			}
+			else {
+				content = imports + content;
+			}
+		}
+		else {
+			firstImport = newContent.indexOf("<import", firstImport) - 1;
+			lastImport = newContent.indexOf("/>", lastImport) + 3;
+
+			newContent =
+				newContent.substring(0, firstImport) + imports +
+				newContent.substring(lastImport);
+		}
 
 		int firstClass = newContent.indexOf(
 			"<class name=\"" + _packagePath + ".model.impl.");
@@ -3826,6 +3869,7 @@ public class ServiceBuilder {
 	private static final String _TPL_ROOT =
 		"com/liferay/portal/tools/servicebuilder/dependencies/";
 
+	private String _tplBadAliasNames =  _TPL_ROOT + "bad_alias_names.txt";
 	private String _tplBadColumnNames = _TPL_ROOT + "bad_column_names.txt";
 	private String _tplBadJsonTypes = _TPL_ROOT + "bad_json_types.txt";
 	private String _tplBadTableNames = _TPL_ROOT + "bad_table_names.txt";
@@ -3873,6 +3917,7 @@ public class ServiceBuilder {
 		_TPL_ROOT + "spring_infrastructure_xml.ftl";
 	private String _tplSpringXml = _TPL_ROOT + "spring_xml.ftl";
 	private Set<String> _badTableNames;
+	private Set<String> _badAliasNames;
 	private Set<String> _badColumnNames;
 	private Set<String> _badJsonTypes;
 	private String _hbmFileName;

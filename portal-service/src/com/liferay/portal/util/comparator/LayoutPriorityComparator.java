@@ -35,6 +35,8 @@ public class LayoutPriorityComparator extends OrderByComparator {
 
 	public static String ORDER_BY_ASC = "priority ASC";
 
+	public static String[] ORDER_BY_FIELDS = {"priority"};
+
 	public LayoutPriorityComparator(Layout layout, boolean lessThan) {
 		_layout = layout;
 		_lessThan = lessThan;
@@ -79,6 +81,14 @@ public class LayoutPriorityComparator extends OrderByComparator {
 		return ORDER_BY_ASC;
 	}
 
+	public String[] getOrderByFields() {
+		return ORDER_BY_FIELDS;
+	}
+
+	public boolean isAscending() {
+		return true;
+	}
+	
 	private Layout _layout;
 	private boolean _lessThan;
 

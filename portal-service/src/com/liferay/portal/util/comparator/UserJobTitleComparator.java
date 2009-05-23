@@ -41,6 +41,9 @@ public class UserJobTitleComparator extends OrderByComparator {
 		"User_.jobTitle DESC, User_.lastName DESC, User_.firstName DESC, " +
 			"User_.middleName DESC";
 
+	public static String[] ORDER_BY_FIELDS = 
+		{"jobTitle", "lastName", "firstName", "middleName"};
+
 	public UserJobTitleComparator() {
 		this(false);
 	}
@@ -82,6 +85,14 @@ public class UserJobTitleComparator extends OrderByComparator {
 		else {
 			return ORDER_BY_DESC;
 		}
+	}
+
+	public String[] getOrderByFields() {
+		return ORDER_BY_FIELDS;
+	}
+
+	public boolean isAscending() {
+		return _asc;
 	}
 
 	private boolean _asc;

@@ -38,6 +38,8 @@ public class EntryModifiedDateComparator extends OrderByComparator {
 
 	public static String ORDER_BY_DESC = "modifiedDate DESC";
 
+	public static String[] ORDER_BY_FIELDS = {"modifiedDate"};
+
 	public EntryModifiedDateComparator() {
 		this(false);
 	}
@@ -68,6 +70,14 @@ public class EntryModifiedDateComparator extends OrderByComparator {
 		else {
 			return ORDER_BY_DESC;
 		}
+	}
+
+	public String[] getOrderByFields() {
+		return ORDER_BY_FIELDS;
+	}
+
+	public boolean isAscending() {
+		return _asc;
 	}
 
 	private boolean _asc;

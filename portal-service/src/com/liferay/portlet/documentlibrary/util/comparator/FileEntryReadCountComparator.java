@@ -38,6 +38,8 @@ public class FileEntryReadCountComparator extends OrderByComparator {
 
 	public static String ORDER_BY_DESC = "readCount DESC";
 
+	public static String[] ORDER_BY_FIELDS = {"readCount"};
+
 	public FileEntryReadCountComparator() {
 		this(false);
 	}
@@ -74,6 +76,14 @@ public class FileEntryReadCountComparator extends OrderByComparator {
 		else {
 			return ORDER_BY_DESC;
 		}
+	}
+
+	public String[] getOrderByFields() {
+		return ORDER_BY_FIELDS;
+	}
+
+	public boolean isAscending() {
+		return _asc;
 	}
 
 	private boolean _asc;

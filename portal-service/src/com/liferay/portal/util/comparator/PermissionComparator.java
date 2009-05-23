@@ -35,6 +35,8 @@ public class PermissionComparator extends OrderByComparator {
 
 	public static String ORDER_BY_DESC = "permissionId DESC";
 
+	public static String[] ORDER_BY_FIELDS = {"permissionId"};
+
 	public int compare(Object obj1, Object obj2) {
 		Permission perm1 = (Permission)obj1;
 		Permission perm2 = (Permission)obj2;
@@ -55,6 +57,14 @@ public class PermissionComparator extends OrderByComparator {
 
 	public String getOrderBy() {
 		return ORDER_BY_DESC;
+	}
+
+	public String[] getOrderByFields() {
+		return ORDER_BY_FIELDS;
+	}
+
+	public boolean isAscending() {
+		return false;
 	}
 
 }

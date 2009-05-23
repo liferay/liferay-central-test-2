@@ -39,6 +39,8 @@ public class ArticleReviewDateComparator extends OrderByComparator {
 
 	public static String ORDER_BY_DESC = "reviewDate DESC, version DESC";
 
+	public static String[] ORDER_BY_FIELDS = {"reviewDate", "version"};
+
 	public ArticleReviewDateComparator() {
 		this(false);
 	}
@@ -78,6 +80,14 @@ public class ArticleReviewDateComparator extends OrderByComparator {
 		else {
 			return ORDER_BY_DESC;
 		}
+	}
+
+	public String[] getOrderByFields() {
+		return ORDER_BY_FIELDS;
+	}
+
+	public boolean isAscending() {
+		return _asc;
 	}
 
 	private boolean _asc;

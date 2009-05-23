@@ -37,6 +37,8 @@ public class ItemNameComparator extends OrderByComparator {
 
 	public static String ORDER_BY_DESC = "categoryId DESC, name DESC";
 
+	public static String[] ORDER_BY_FIELDS = {"categoryId", "name"};
+
 	public ItemNameComparator() {
 		this(false);
 	}
@@ -74,6 +76,14 @@ public class ItemNameComparator extends OrderByComparator {
 		else {
 			return ORDER_BY_DESC;
 		}
+	}
+
+	public String[] getOrderByFields() {
+		return ORDER_BY_FIELDS;
+	}
+
+	public boolean isAscending() {
+		return _asc;
 	}
 
 	private boolean _asc;

@@ -73,13 +73,14 @@ public class Entity {
 
 	public Entity(String name) {
 		this(
-			null, null, null, name, null, false, false, true, null, null, null,
-			null, null, true, null, null, null, null, null, null, null, null);
+			null, null, null, name, null, null, false, false, true, null, null,
+			null, null, null, true, null, null, null, null, null, null, null,
+			null);
 	}
 
 	public Entity(
 		String packagePath, String portletName, String portletShortName,
-		String name, String table, boolean uuid, boolean localService,
+		String name, String alias, String table, boolean uuid, boolean localService,
 		boolean remoteService, String persistenceClass, String finderClass,
 		String dataSource, String sessionFactory, String txManager,
 		boolean cacheEnabled, List<EntityColumn> pkList,
@@ -88,6 +89,7 @@ public class Entity {
 		List<EntityFinder> finderList, List<Entity> referenceList,
 		List<String> txRequiredList) {
 
+		_alias = alias;
 		_packagePath = packagePath;
 		_portletName = portletName;
 		_portletShortName = portletShortName;
@@ -124,6 +126,10 @@ public class Entity {
 		else {
 			return false;
 		}
+	}
+
+	public String getAlias() {
+		return _alias;
 	}
 
 	public List<EntityFinder> getCollectionFinderList() {
@@ -423,6 +429,7 @@ public class Entity {
 		_portalReference = portalReference;
 	}
 
+	private String _alias;
 	private boolean _cacheEnabled;
 	private List<EntityColumn> _collectionList;
 	private List<EntityColumn> _columnList;

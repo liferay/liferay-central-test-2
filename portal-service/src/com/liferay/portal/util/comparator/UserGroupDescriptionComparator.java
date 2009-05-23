@@ -40,6 +40,8 @@ public class UserGroupDescriptionComparator extends OrderByComparator {
 	public static String ORDER_BY_DESC =
 		"UserGroup.description DESC, UserGroup.name DESC";
 
+	public static String[] ORDER_BY_FIELDS = {"description", "name"};
+
 	public UserGroupDescriptionComparator() {
 		this(false);
 	}
@@ -74,6 +76,14 @@ public class UserGroupDescriptionComparator extends OrderByComparator {
 		else {
 			return ORDER_BY_DESC;
 		}
+	}
+
+	public String[] getOrderByFields() {
+		return ORDER_BY_FIELDS;
+	}
+
+	public boolean isAscending() {
+		return _asc;
 	}
 
 	private boolean _asc;

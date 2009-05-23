@@ -39,6 +39,9 @@ public class UserFirstNameComparator extends OrderByComparator {
 	public static String ORDER_BY_DESC =
 		"User_.firstName DESC, User_.middleName DESC, User_.lastName DESC";
 
+	public static String[] ORDER_BY_FIELDS = 
+		{"firstName", "middleName", "lastName"};
+
 	public UserFirstNameComparator() {
 		this(false);
 	}
@@ -76,6 +79,14 @@ public class UserFirstNameComparator extends OrderByComparator {
 		else {
 			return ORDER_BY_DESC;
 		}
+	}
+
+	public String[] getOrderByFields() {
+		return ORDER_BY_FIELDS;
+	}
+
+	public boolean isAscending() {
+		return _asc;
 	}
 
 	private boolean _asc;

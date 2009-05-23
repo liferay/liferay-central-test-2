@@ -37,6 +37,8 @@ public class ReviewUserNameComparator extends OrderByComparator {
 
 	public static String ORDER_BY_DESC = "stage, userName DESC";
 
+	public static String[] ORDER_BY_FIELDS = {"stage", "userName"};
+
 	public ReviewUserNameComparator() {
 		this(false);
 	}
@@ -77,6 +79,14 @@ public class ReviewUserNameComparator extends OrderByComparator {
 		else {
 			return ORDER_BY_DESC;
 		}
+	}
+
+	public String[] getOrderByFields() {
+		return ORDER_BY_FIELDS;
+	}
+
+	public boolean isAscending() {
+		return _asc;
 	}
 
 	private boolean _asc;
