@@ -22,8 +22,6 @@
 
 package com.liferay.portlet.blogs.social;
 
-import com.liferay.portal.kernel.json.JSONFactoryUtil;
-import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.permission.ActionKeys;
@@ -74,13 +72,6 @@ public class BlogsActivityInterpreter extends BaseSocialActivityInterpreter {
 			activity.getReceiverUserId(), themeDisplay);
 
 		int activityType = activity.getType();
-
-		JSONObject extraData = null;
-
-		if (Validator.isNotNull(activity.getExtraData())) {
-			extraData = JSONFactoryUtil.createJSONObject(
-				activity.getExtraData());
-		}
 
 		// Link
 
