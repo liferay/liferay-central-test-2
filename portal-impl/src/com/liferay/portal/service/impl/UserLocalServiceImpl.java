@@ -468,7 +468,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			companyId, PropsKeys.ADMIN_DEFAULT_USER_GROUP_NAMES,
 			StringPool.NEW_LINE, PropsValues.ADMIN_DEFAULT_USER_GROUP_NAMES);
 
-		for (String defaultUserGroupName :defaultUserGroupNames) {
+		for (String defaultUserGroupName : defaultUserGroupNames) {
 			try {
 				UserGroup userGroup = userGroupPersistence.findByC_N(
 					companyId, defaultUserGroupName);
