@@ -468,10 +468,10 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			companyId, PropsKeys.ADMIN_DEFAULT_USER_GROUP_NAMES,
 			StringPool.NEW_LINE, PropsValues.ADMIN_DEFAULT_USER_GROUP_NAMES);
 
-		for (int i = 0; i < defaultUserGroupNames.length; i++) {
+		for (String defaultUserGroupName :defaultUserGroupNames) {
 			try {
 				UserGroup userGroup = userGroupPersistence.findByC_N(
-					companyId, defaultUserGroupNames[i]);
+					companyId, defaultUserGroupName);
 
 				userGroups.add(userGroup);
 
@@ -483,15 +483,14 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		}
 
 		if (userGroupIds != null) {
-			for (int i = 0; i < userGroupIds.length; i++) {
+			for (long userGroupId : userGroupIds) {
 				try{
 					UserGroup userGroup = userGroupPersistence.findByPrimaryKey(
-						userGroupIds[i]);
+						userGroupId);
 
 					userGroups.add(userGroup);
 
-					copyUserGroupLayouts(
-						userGroup.getUserGroupId(), new long[] {userId});
+					copyUserGroupLayouts(userGroupId, new long[] {userId});
 				}
 				catch (NoSuchUserGroupException nsuge) {
 				}
