@@ -56,8 +56,8 @@ import com.liferay.portal.kernel.annotation.Transactional;
 	PortalException.class, SystemException.class})
 public interface AssetCategoryService {
 	public com.liferay.portlet.asset.model.AssetCategory addCategory(
-		long categoryVocabularyId, long parentCategoryId,
-		java.lang.String name, java.lang.String[] properties,
+		long parentCategoryId, java.lang.String name, long vocabularyId,
+		java.lang.String[] properties,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
@@ -79,20 +79,20 @@ public interface AssetCategoryService {
 			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> getGroupVocabularyCategories(
+	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> getChildCategories(
 		long parentCategoryId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> getVocabularyCategories(
-		long categoryVocabularyId)
+		long vocabularyId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> getVocabularyRootCategories(
-		long categoryVocabularyId)
+		long vocabularyId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
@@ -102,8 +102,8 @@ public interface AssetCategoryService {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.asset.model.AssetCategory updateCategory(
-		long categoryId, long categoryVocabularyId, long parentCategoryId,
-		java.lang.String name, java.lang.String[] properties)
+		long categoryId, long parentCategoryId, java.lang.String name,
+		long vocabularyId, java.lang.String[] properties)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 }

@@ -123,16 +123,16 @@ public class AssetCategoryPropertyLocalServiceUtil {
 		getService().deleteCategoryProperties(entryId);
 	}
 
-	public static void deleteCategoryProperty(long propertyId)
+	public static void deleteCategoryProperty(long categoryPropertyId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		getService().deleteCategoryProperty(propertyId);
+		getService().deleteCategoryProperty(categoryPropertyId);
 	}
 
 	public static void deleteCategoryProperty(
-		com.liferay.portlet.asset.model.AssetCategoryProperty property)
+		com.liferay.portlet.asset.model.AssetCategoryProperty categoryProperty)
 		throws com.liferay.portal.SystemException {
-		getService().deleteCategoryProperty(property);
+		getService().deleteCategoryProperty(categoryProperty);
 	}
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetCategoryProperty> getCategoryProperties()
@@ -146,10 +146,10 @@ public class AssetCategoryPropertyLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.asset.model.AssetCategoryProperty getCategoryProperty(
-		long propertyId)
+		long categoryPropertyId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return getService().getCategoryProperty(propertyId);
+		return getService().getCategoryProperty(categoryPropertyId);
 	}
 
 	public static com.liferay.portlet.asset.model.AssetCategoryProperty getCategoryProperty(
@@ -166,10 +166,11 @@ public class AssetCategoryPropertyLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.asset.model.AssetCategoryProperty updateCategoryProperty(
-		long propertyId, java.lang.String key, java.lang.String value)
+		long categoryPropertyId, java.lang.String key, java.lang.String value)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return getService().updateCategoryProperty(propertyId, key, value);
+		return getService()
+				   .updateCategoryProperty(categoryPropertyId, key, value);
 	}
 
 	public static AssetCategoryPropertyLocalService getService() {

@@ -75,7 +75,7 @@ public class AssetCategoryVocabularyServiceImpl
 		throws PortalException, SystemException {
 
 		return getCategoryVocabularies(
-			assetCategoryVocabularyLocalService.getCompanyVocabularies(
+			assetCategoryVocabularyLocalService.getCompanyCategoryVocabularies(
 				companyId));
 	}
 
@@ -110,26 +110,26 @@ public class AssetCategoryVocabularyServiceImpl
 	}
 
 	protected List<AssetCategoryVocabulary> getCategoryVocabularies(
-			List<AssetCategoryVocabulary> vocabularies)
+			List<AssetCategoryVocabulary> categoryVocabularies)
 		throws PortalException {
 
 		PermissionChecker permissionChecker = getPermissionChecker();
 
-		vocabularies = ListUtil.copy(vocabularies);
+		categoryVocabularies = ListUtil.copy(categoryVocabularies);
 
-		Iterator<AssetCategoryVocabulary> itr = vocabularies.iterator();
+		Iterator<AssetCategoryVocabulary> itr = categoryVocabularies.iterator();
 
 		while (itr.hasNext()) {
-			AssetCategoryVocabulary vocabulary = itr.next();
+			AssetCategoryVocabulary categoryVocabulary = itr.next();
 
 			if (!AssetCategoryVocabularyPermission.contains(
-					permissionChecker, vocabulary, ActionKeys.VIEW)) {
+					permissionChecker, categoryVocabulary, ActionKeys.VIEW)) {
 
 				itr.remove();
 			}
 		}
 
-		return vocabularies;
+		return categoryVocabularies;
 	}
 
 }

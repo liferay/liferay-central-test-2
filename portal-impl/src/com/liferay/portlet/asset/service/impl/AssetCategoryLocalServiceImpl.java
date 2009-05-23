@@ -62,7 +62,7 @@ public class AssetCategoryLocalServiceImpl
 	extends AssetCategoryLocalServiceBaseImpl {
 
 	public AssetCategory addCategory(
-			long userId, long vocabularyId, long parentCategoryId, String name,
+			long userId, long parentCategoryId, String name, long vocabularyId,
 			String[] properties, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
@@ -70,16 +70,21 @@ public class AssetCategoryLocalServiceImpl
 
 		User user = userPersistence.findByPrimaryKey(userId);
 		long groupId = serviceContext.getScopeGroupId();
+		name = name.trim();
 
 		if (properties == null) {
 			properties = new String[0];
 		}
 
-		name = name.trim();
-
-		validate(parentCategoryId, 0, name);
-
 		Date now = new Date();
+
+		validate(0, parentCategoryId, name);
+
+		if (parentCategoryId > 0) {
+			assetCategoryPersistence.findByPrimaryKey(parentCategoryId);
+		}
+
+		assetCategoryVocabularyPersistence.findByPrimaryKey(vocabularyId);
 
 		long categoryId = counterLocalService.increment();
 
@@ -91,17 +96,9 @@ public class AssetCategoryLocalServiceImpl
 		category.setUserName(user.getFullName());
 		category.setCreateDate(now);
 		category.setModifiedDate(now);
-		category.setName(name);
-
-		assetCategoryVocabularyPersistence.findByPrimaryKey(vocabularyId);
-
-		category.setVocabularyId(vocabularyId);
-
-		if (parentCategoryId > 0) {
-			assetCategoryPersistence.findByPrimaryKey(parentCategoryId);
-		}
-
 		category.setParentCategoryId(parentCategoryId);
+		category.setName(name);
+		category.setVocabularyId(vocabularyId);
 
 		assetCategoryPersistence.update(category, false);
 
@@ -170,15 +167,6 @@ public class AssetCategoryLocalServiceImpl
 			category.getCategoryId(), communityPermissions, guestPermissions);
 	}
 
-	public void deleteCategory(long categoryId)
-		throws PortalException, SystemException {
-
-		AssetCategory category = assetCategoryPersistence.findByPrimaryKey(
-			categoryId);
-
-		deleteCategory(category);
-	}
-
 	public void deleteCategory(AssetCategory category)
 		throws PortalException, SystemException {
 
@@ -196,6 +184,15 @@ public class AssetCategoryLocalServiceImpl
 		// Category
 
 		assetCategoryPersistence.remove(category);
+	}
+
+	public void deleteCategory(long categoryId)
+		throws PortalException, SystemException {
+
+		AssetCategory category = assetCategoryPersistence.findByPrimaryKey(
+			categoryId);
+
+		deleteCategory(category);
 	}
 
 	public void deleteVocabularyCategories(long vocabularyId)
@@ -216,16 +213,7 @@ public class AssetCategoryLocalServiceImpl
 	}
 
 	public List<AssetCategory> getCategories() throws SystemException {
-
 		return assetCategoryPersistence.findAll();
-	}
-
-	public List<AssetCategory> getCategories(String className, long classPK)
-		throws SystemException {
-
-		long classNameId = PortalUtil.getClassNameId(className);
-
-		return getCategories(classNameId, classPK);
 	}
 
 	public List<AssetCategory> getCategories(long classNameId, long classPK)
@@ -241,6 +229,14 @@ public class AssetCategoryLocalServiceImpl
 		}
 	}
 
+	public List<AssetCategory> getCategories(String className, long classPK)
+		throws SystemException {
+
+		long classNameId = PortalUtil.getClassNameId(className);
+
+		return getCategories(classNameId, classPK);
+	}
+
 	public AssetCategory getCategory(long categoryId)
 		throws PortalException, SystemException {
 
@@ -248,20 +244,20 @@ public class AssetCategoryLocalServiceImpl
 	}
 
 	public List<AssetCategory> getChildCategories(long parentCategoryId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return assetCategoryPersistence.findByParentCategoryId(
 			parentCategoryId);
 	}
 
 	public List<AssetCategory> getVocabularyCategories(long vocabularyId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return assetCategoryPersistence.findByVocabularyId(vocabularyId);
 	}
 
 	public List<AssetCategory> getVocabularyRootCategories(long vocabularyId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return assetCategoryPersistence.findByP_V(
 			AssetCategoryConstants.DEFAULT_PARENT_CATEGORY_ID, vocabularyId);
@@ -304,27 +300,29 @@ public class AssetCategoryLocalServiceImpl
 	}
 
 	public AssetCategory updateCategory(
-			long userId, long categoryId, long vocabularyId,
-			long parentCategoryId, String name, String[] properties)
+			long userId, long categoryId, long parentCategoryId, String name,
+			long vocabularyId, String[] properties)
 		throws PortalException, SystemException {
 
 		// Category
+
+		name = name.trim();
+
+		validate(categoryId, parentCategoryId, name);
+
+		if (parentCategoryId > 0) {
+			assetCategoryPersistence.findByPrimaryKey(parentCategoryId);
+		}
+
+		assetCategoryVocabularyPersistence.findByPrimaryKey(vocabularyId);
 
 		AssetCategory category = assetCategoryPersistence.findByPrimaryKey(
 			categoryId);
 
 		category.setModifiedDate(new Date());
-
-		assetCategoryVocabularyPersistence.findByPrimaryKey(vocabularyId);
-
-		category.setVocabularyId(vocabularyId);
-
-		name = name.trim();
-
-		validate(parentCategoryId, categoryId, name);
-
-		category.setName(name);
 		category.setParentCategoryId(parentCategoryId);
+		category.setName(name);
+		category.setVocabularyId(vocabularyId);
 
 		assetCategoryPersistence.update(category, false);
 
@@ -391,8 +389,9 @@ public class AssetCategoryLocalServiceImpl
 		return StringUtil.split(ListUtil.toString(categories, "name"));
 	}
 
-	protected void validate(long parentCategoryId, long categoryId, String name)
+	protected void validate(long categoryId, long parentCategoryId, String name)
 		throws PortalException, SystemException {
+
 		List<AssetCategory> categories = assetCategoryPersistence.findByP_N(
 			parentCategoryId, name);
 

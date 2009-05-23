@@ -29,9 +29,9 @@ import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PropsValues;
+import com.liferay.portlet.asset.DuplicateCategoryVocabularyException;
 import com.liferay.portlet.asset.model.AssetCategoryVocabulary;
 import com.liferay.portlet.asset.service.base.AssetCategoryVocabularyLocalServiceBaseImpl;
-import com.liferay.portlet.tags.DuplicateVocabularyException;
 
 import java.util.Date;
 import java.util.List;
@@ -60,24 +60,25 @@ public class AssetCategoryVocabularyLocalServiceImpl
 		Date now = new Date();
 
 		if (hasCategoryVocabulary(groupId, name)) {
-			throw new DuplicateVocabularyException(
-				"A vocabulary with the name " + name + " already exists");
+			throw new DuplicateCategoryVocabularyException(
+				"A category vocabulary with the name " + name +
+					" already exists");
 		}
 
-		long vocabularyId = counterLocalService.increment();
+		long categoryVocabularyId = counterLocalService.increment();
 
-		AssetCategoryVocabulary vocabulary =
-			assetCategoryVocabularyPersistence.create(vocabularyId);
+		AssetCategoryVocabulary categoryVocabulary =
+			assetCategoryVocabularyPersistence.create(categoryVocabularyId);
 
-		vocabulary.setGroupId(groupId);
-		vocabulary.setCompanyId(user.getCompanyId());
-		vocabulary.setUserId(user.getUserId());
-		vocabulary.setUserName(user.getFullName());
-		vocabulary.setCreateDate(now);
-		vocabulary.setModifiedDate(now);
-		vocabulary.setName(name);
+		categoryVocabulary.setGroupId(groupId);
+		categoryVocabulary.setCompanyId(user.getCompanyId());
+		categoryVocabulary.setUserId(user.getUserId());
+		categoryVocabulary.setUserName(user.getFullName());
+		categoryVocabulary.setCreateDate(now);
+		categoryVocabulary.setModifiedDate(now);
+		categoryVocabulary.setName(name);
 
-		assetCategoryVocabularyPersistence.update(vocabulary, false);
+		assetCategoryVocabularyPersistence.update(categoryVocabulary, false);
 
 		// Resources
 
@@ -85,71 +86,84 @@ public class AssetCategoryVocabularyLocalServiceImpl
 			serviceContext.getAddGuestPermissions()) {
 
 			addCategoryVocabularyResources(
-				vocabulary, serviceContext.getAddCommunityPermissions(),
+				categoryVocabulary, serviceContext.getAddCommunityPermissions(),
 				serviceContext.getAddGuestPermissions());
 		}
 		else {
 			addCategoryVocabularyResources(
-				vocabulary, serviceContext.getCommunityPermissions(),
+				categoryVocabulary, serviceContext.getCommunityPermissions(),
 				serviceContext.getGuestPermissions());
 		}
 
-		return vocabulary;
-
+		return categoryVocabulary;
 	}
 
 	public void addCategoryVocabularyResources(
-			AssetCategoryVocabulary vocabulary, boolean addCommunityPermissions,
-			boolean addGuestPermissions)
+			AssetCategoryVocabulary categoryVocabulary,
+			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		resourceLocalService.addResources(
-			vocabulary.getCompanyId(), vocabulary.getGroupId(),
-			vocabulary.getUserId(), AssetCategoryVocabulary.class.getName(),
-			vocabulary.getCategoryVocabularyId(), false,
+			categoryVocabulary.getCompanyId(), categoryVocabulary.getGroupId(),
+			categoryVocabulary.getUserId(),
+			AssetCategoryVocabulary.class.getName(),
+			categoryVocabulary.getCategoryVocabularyId(), false,
 			addCommunityPermissions, addGuestPermissions);
 	}
 
 	public void addCategoryVocabularyResources(
-			AssetCategoryVocabulary vocabulary, String[] communityPermissions,
-			String[] guestPermissions)
+			AssetCategoryVocabulary categoryVocabulary,
+			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		resourceLocalService.addModelResources(
-			vocabulary.getCompanyId(), vocabulary.getGroupId(),
-			vocabulary.getUserId(), AssetCategoryVocabulary.class.getName(),
-			vocabulary.getCategoryVocabularyId(), communityPermissions,
+			categoryVocabulary.getCompanyId(), categoryVocabulary.getGroupId(),
+			categoryVocabulary.getUserId(),
+			AssetCategoryVocabulary.class.getName(),
+			categoryVocabulary.getCategoryVocabularyId(), communityPermissions,
 			guestPermissions);
 	}
 
-	public void deleteCategoryVocabulary(long vocabularyId)
-		throws PortalException, SystemException {
-
-		AssetCategoryVocabulary vocabulary =
-			assetCategoryVocabularyPersistence.findByPrimaryKey(vocabularyId);
-
-		deleteCategoryVocabulary(vocabulary);
-	}
-
-	public void deleteCategoryVocabulary(AssetCategoryVocabulary vocabulary)
+	public void deleteCategoryVocabulary(
+			AssetCategoryVocabulary categoryVocabulary)
 		throws PortalException, SystemException {
 
 		// Entries
 
 		assetCategoryLocalService.deleteVocabularyCategories(
-			vocabulary.getCategoryVocabularyId());
+			categoryVocabulary.getCategoryVocabularyId());
 
 		// Resources
 
 		resourceLocalService.deleteResource(
-			vocabulary.getCompanyId(), AssetCategoryVocabulary.class.getName(),
+			categoryVocabulary.getCompanyId(),
+			AssetCategoryVocabulary.class.getName(),
 			ResourceConstants.SCOPE_INDIVIDUAL,
-			vocabulary.getCategoryVocabularyId());
+			categoryVocabulary.getCategoryVocabularyId());
 
-		assetCategoryVocabularyPersistence.remove(vocabulary);
+		assetCategoryVocabularyPersistence.remove(categoryVocabulary);
 	}
 
-	public List<AssetCategoryVocabulary> getCompanyVocabularies(long companyId)
+	public void deleteCategoryVocabulary(long categoryVocabularyId)
+		throws PortalException, SystemException {
+
+		AssetCategoryVocabulary categoryVocabulary =
+			assetCategoryVocabularyPersistence.findByPrimaryKey(
+				categoryVocabularyId);
+
+		deleteCategoryVocabulary(categoryVocabulary);
+	}
+
+	public AssetCategoryVocabulary getCategoryVocabulary(
+			long categoryVocabularyId)
+		throws PortalException, SystemException {
+
+		return assetCategoryVocabularyPersistence.findByPrimaryKey(
+			categoryVocabularyId);
+	}
+
+	public List<AssetCategoryVocabulary> getCompanyCategoryVocabularies(
+			long companyId)
 		throws SystemException {
 
 		return assetCategoryVocabularyPersistence.findByCompanyId(companyId);
@@ -159,11 +173,12 @@ public class AssetCategoryVocabularyLocalServiceImpl
 			long groupId)
 		throws PortalException, SystemException {
 
-		List<AssetCategoryVocabulary> vocabularies =
+		List<AssetCategoryVocabulary> categoryVocabularies =
 			assetCategoryVocabularyPersistence.findByGroupId(groupId);
 
-		if (vocabularies.isEmpty()) {
+		if (categoryVocabularies.isEmpty()) {
 			Group group = groupLocalService.getGroup(groupId);
+
 			ServiceContext serviceContext = new ServiceContext();
 
 			serviceContext.setScopeGroupId(groupId);
@@ -174,7 +189,7 @@ public class AssetCategoryVocabularyLocalServiceImpl
 				serviceContext);
 		}
 
-		return vocabularies;
+		return categoryVocabularies;
 	}
 
 	public AssetCategoryVocabulary getGroupCategoryVocabulary(
@@ -184,34 +199,28 @@ public class AssetCategoryVocabularyLocalServiceImpl
 		return assetCategoryVocabularyPersistence.findByG_N(groupId, name);
 	}
 
-	public AssetCategoryVocabulary getCategoryVocabulary(long vocabularyId)
-		throws PortalException, SystemException {
-
-		return assetCategoryVocabularyPersistence.findByPrimaryKey(
-			vocabularyId);
-	}
-
 	public AssetCategoryVocabulary updateCategoryVocabulary(
-			long vocabularyId, String name)
+			long categoryVocabularyId, String name)
 		throws PortalException, SystemException {
 
 		name = name.trim();
 
-		AssetCategoryVocabulary vocabulary =
-			assetCategoryVocabularyPersistence.findByPrimaryKey(vocabularyId);
+		AssetCategoryVocabulary categoryVocabulary =
+			assetCategoryVocabularyPersistence.findByPrimaryKey(
+				categoryVocabularyId);
 
-		if (!vocabulary.getName().equals(name) &&
-			hasCategoryVocabulary(vocabulary.getGroupId(), name)) {
+		if (!categoryVocabulary.getName().equals(name) &&
+			hasCategoryVocabulary(categoryVocabulary.getGroupId(), name)) {
 
-			throw new DuplicateVocabularyException(name);
+			throw new DuplicateCategoryVocabularyException(name);
 		}
 
-		vocabulary.setModifiedDate(new Date());
-		vocabulary.setName(name);
+		categoryVocabulary.setModifiedDate(new Date());
+		categoryVocabulary.setName(name);
 
-		assetCategoryVocabularyPersistence.update(vocabulary, false);
+		assetCategoryVocabularyPersistence.update(categoryVocabulary, false);
 
-		return vocabulary;
+		return categoryVocabulary;
 	}
 
 	protected boolean hasCategoryVocabulary(long groupId, String name)

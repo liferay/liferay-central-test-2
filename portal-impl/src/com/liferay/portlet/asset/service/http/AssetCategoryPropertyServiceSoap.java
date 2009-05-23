@@ -97,10 +97,10 @@ public class AssetCategoryPropertyServiceSoap {
 		}
 	}
 
-	public static void deleteCategoryProperty(long propertyId)
+	public static void deleteCategoryProperty(long categoryPropertyId)
 		throws RemoteException {
 		try {
-			AssetCategoryPropertyServiceUtil.deleteCategoryProperty(propertyId);
+			AssetCategoryPropertyServiceUtil.deleteCategoryProperty(categoryPropertyId);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -141,10 +141,10 @@ public class AssetCategoryPropertyServiceSoap {
 	}
 
 	public static com.liferay.portlet.asset.model.AssetCategoryPropertySoap updateCategoryProperty(
-		long propertyId, java.lang.String key, java.lang.String value)
+		long categoryPropertyId, java.lang.String key, java.lang.String value)
 		throws RemoteException {
 		try {
-			com.liferay.portlet.asset.model.AssetCategoryProperty returnValue = AssetCategoryPropertyServiceUtil.updateCategoryProperty(propertyId,
+			com.liferay.portlet.asset.model.AssetCategoryProperty returnValue = AssetCategoryPropertyServiceUtil.updateCategoryProperty(categoryPropertyId,
 					key, value);
 
 			return com.liferay.portlet.asset.model.AssetCategoryPropertySoap.toSoapModel(returnValue);

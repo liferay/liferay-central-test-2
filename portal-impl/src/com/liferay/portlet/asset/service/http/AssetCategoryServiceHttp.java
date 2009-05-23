@@ -74,22 +74,22 @@ import com.liferay.portlet.asset.service.AssetCategoryServiceUtil;
  */
 public class AssetCategoryServiceHttp {
 	public static com.liferay.portlet.asset.model.AssetCategory addCategory(
-		HttpPrincipal httpPrincipal, long categoryVocabularyId,
-		long parentCategoryId, java.lang.String name,
+		HttpPrincipal httpPrincipal, long parentCategoryId,
+		java.lang.String name, long vocabularyId,
 		java.lang.String[] properties,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(categoryVocabularyId);
+			Object paramObj0 = new LongWrapper(parentCategoryId);
 
-			Object paramObj1 = new LongWrapper(parentCategoryId);
-
-			Object paramObj2 = name;
+			Object paramObj1 = name;
 
 			if (name == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
+				paramObj1 = new NullWrapper("java.lang.String");
 			}
+
+			Object paramObj2 = new LongWrapper(vocabularyId);
 
 			Object paramObj3 = properties;
 
@@ -246,7 +246,7 @@ public class AssetCategoryServiceHttp {
 		}
 	}
 
-	public static java.util.List<com.liferay.portlet.asset.model.AssetCategory> getGroupVocabularyCategories(
+	public static java.util.List<com.liferay.portlet.asset.model.AssetCategory> getChildCategories(
 		HttpPrincipal httpPrincipal, long parentCategoryId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
@@ -254,7 +254,7 @@ public class AssetCategoryServiceHttp {
 			Object paramObj0 = new LongWrapper(parentCategoryId);
 
 			MethodWrapper methodWrapper = new MethodWrapper(AssetCategoryServiceUtil.class.getName(),
-					"getGroupVocabularyCategories", new Object[] { paramObj0 });
+					"getChildCategories", new Object[] { paramObj0 });
 
 			Object returnObj = null;
 
@@ -283,11 +283,11 @@ public class AssetCategoryServiceHttp {
 	}
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetCategory> getVocabularyCategories(
-		HttpPrincipal httpPrincipal, long categoryVocabularyId)
+		HttpPrincipal httpPrincipal, long vocabularyId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(categoryVocabularyId);
+			Object paramObj0 = new LongWrapper(vocabularyId);
 
 			MethodWrapper methodWrapper = new MethodWrapper(AssetCategoryServiceUtil.class.getName(),
 					"getVocabularyCategories", new Object[] { paramObj0 });
@@ -319,11 +319,11 @@ public class AssetCategoryServiceHttp {
 	}
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetCategory> getVocabularyRootCategories(
-		HttpPrincipal httpPrincipal, long categoryVocabularyId)
+		HttpPrincipal httpPrincipal, long vocabularyId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(categoryVocabularyId);
+			Object paramObj0 = new LongWrapper(vocabularyId);
 
 			MethodWrapper methodWrapper = new MethodWrapper(AssetCategoryServiceUtil.class.getName(),
 					"getVocabularyRootCategories", new Object[] { paramObj0 });
@@ -406,23 +406,22 @@ public class AssetCategoryServiceHttp {
 	}
 
 	public static com.liferay.portlet.asset.model.AssetCategory updateCategory(
-		HttpPrincipal httpPrincipal, long categoryId,
-		long categoryVocabularyId, long parentCategoryId,
-		java.lang.String name, java.lang.String[] properties)
+		HttpPrincipal httpPrincipal, long categoryId, long parentCategoryId,
+		java.lang.String name, long vocabularyId, java.lang.String[] properties)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(categoryId);
 
-			Object paramObj1 = new LongWrapper(categoryVocabularyId);
+			Object paramObj1 = new LongWrapper(parentCategoryId);
 
-			Object paramObj2 = new LongWrapper(parentCategoryId);
-
-			Object paramObj3 = name;
+			Object paramObj2 = name;
 
 			if (name == null) {
-				paramObj3 = new NullWrapper("java.lang.String");
+				paramObj2 = new NullWrapper("java.lang.String");
 			}
+
+			Object paramObj3 = new LongWrapper(vocabularyId);
 
 			Object paramObj4 = properties;
 

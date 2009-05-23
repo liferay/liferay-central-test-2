@@ -101,8 +101,8 @@ public interface AssetCategoryLocalService {
 		boolean merge) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.asset.model.AssetCategory addCategory(
-		long userId, long vocabularyId, long parentCategoryId,
-		java.lang.String name, java.lang.String[] properties,
+		long userId, long parentCategoryId, java.lang.String name,
+		long vocabularyId, java.lang.String[] properties,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
@@ -185,8 +185,8 @@ public interface AssetCategoryLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.asset.model.AssetCategory updateCategory(
-		long userId, long categoryId, long vocabularyId, long parentCategoryId,
-		java.lang.String name, java.lang.String[] properties)
+		long userId, long categoryId, long parentCategoryId,
+		java.lang.String name, long vocabularyId, java.lang.String[] properties)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 }

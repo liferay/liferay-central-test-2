@@ -60,7 +60,7 @@ public interface AssetCategoryPropertyService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public void deleteCategoryProperty(long propertyId)
+	public void deleteCategoryProperty(long categoryPropertyId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
@@ -74,7 +74,7 @@ public interface AssetCategoryPropertyService {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.asset.model.AssetCategoryProperty updateCategoryProperty(
-		long propertyId, java.lang.String key, java.lang.String value)
+		long categoryPropertyId, java.lang.String key, java.lang.String value)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 }

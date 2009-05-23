@@ -54,47 +54,48 @@ public class AssetCategoryPropertyLocalServiceImpl
 
 		validate(key, value);
 
-		long propertyId = counterLocalService.increment();
+		long categoryPropertyId = counterLocalService.increment();
 
-		AssetCategoryProperty property =
-			assetCategoryPropertyPersistence.create(propertyId);
+		AssetCategoryProperty categoryProperty =
+			assetCategoryPropertyPersistence.create(categoryPropertyId);
 
-		property.setCompanyId(user.getCompanyId());
-		property.setUserId(user.getUserId());
-		property.setUserName(user.getFullName());
-		property.setCreateDate(now);
-		property.setModifiedDate(now);
-		property.setCategoryId(categoryId);
-		property.setKey(key);
-		property.setValue(value);
+		categoryProperty.setCompanyId(user.getCompanyId());
+		categoryProperty.setUserId(user.getUserId());
+		categoryProperty.setUserName(user.getFullName());
+		categoryProperty.setCreateDate(now);
+		categoryProperty.setModifiedDate(now);
+		categoryProperty.setCategoryId(categoryId);
+		categoryProperty.setKey(key);
+		categoryProperty.setValue(value);
 
-		assetCategoryPropertyPersistence.update(property, false);
+		assetCategoryPropertyPersistence.update(categoryProperty, false);
 
-		return property;
+		return categoryProperty;
 	}
 
 	public void deleteCategoryProperties(long entryId) throws SystemException {
-		List<AssetCategoryProperty> properties =
+		List<AssetCategoryProperty> categoryProperties =
 			assetCategoryPropertyPersistence.findByCategoryId(entryId);
 
-		for (AssetCategoryProperty property : properties) {
-			deleteCategoryProperty(property);
+		for (AssetCategoryProperty categoryProperty : categoryProperties) {
+			deleteCategoryProperty(categoryProperty);
 		}
 	}
 
-	public void deleteCategoryProperty(long propertyId)
-		throws PortalException, SystemException {
-
-		AssetCategoryProperty property =
-			assetCategoryPropertyPersistence.findByPrimaryKey(propertyId);
-
-		deleteCategoryProperty(property);
-	}
-
-	public void deleteCategoryProperty(AssetCategoryProperty property)
+	public void deleteCategoryProperty(AssetCategoryProperty categoryProperty)
 		throws SystemException {
 
-		assetCategoryPropertyPersistence.remove(property);
+		assetCategoryPropertyPersistence.remove(categoryProperty);
+	}
+
+	public void deleteCategoryProperty(long categoryPropertyId)
+		throws PortalException, SystemException {
+
+		AssetCategoryProperty categoryProperty =
+			assetCategoryPropertyPersistence.findByPrimaryKey(
+				categoryPropertyId);
+
+		deleteCategoryProperty(categoryProperty);
 	}
 
 	public List<AssetCategoryProperty> getCategoryProperties()
@@ -109,10 +110,11 @@ public class AssetCategoryPropertyLocalServiceImpl
 		return assetCategoryPropertyPersistence.findByCategoryId(entryId);
 	}
 
-	public AssetCategoryProperty getCategoryProperty(long propertyId)
+	public AssetCategoryProperty getCategoryProperty(long categoryPropertyId)
 		throws PortalException, SystemException {
 
-		return assetCategoryPropertyPersistence.findByPrimaryKey(propertyId);
+		return assetCategoryPropertyPersistence.findByPrimaryKey(
+			categoryPropertyId);
 	}
 
 	public AssetCategoryProperty getCategoryProperty(
@@ -130,21 +132,22 @@ public class AssetCategoryPropertyLocalServiceImpl
 	}
 
 	public AssetCategoryProperty updateCategoryProperty(
-			long propertyId, String key, String value)
+			long categoryPropertyId, String key, String value)
 		throws PortalException, SystemException {
 
 		validate(key, value);
 
-		AssetCategoryProperty property =
-			assetCategoryPropertyPersistence.findByPrimaryKey(propertyId);
+		AssetCategoryProperty categoryProperty =
+			assetCategoryPropertyPersistence.findByPrimaryKey(
+				categoryPropertyId);
 
-		property.setModifiedDate(new Date());
-		property.setKey(key);
-		property.setValue(value);
+		categoryProperty.setModifiedDate(new Date());
+		categoryProperty.setKey(key);
+		categoryProperty.setValue(value);
 
-		assetCategoryPropertyPersistence.update(property, false);
+		assetCategoryPropertyPersistence.update(categoryProperty, false);
 
-		return property;
+		return categoryProperty;
 	}
 
 	protected void validate(String key, String value) throws PortalException {

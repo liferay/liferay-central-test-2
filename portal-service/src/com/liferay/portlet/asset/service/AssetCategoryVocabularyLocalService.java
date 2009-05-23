@@ -107,29 +107,29 @@ public interface AssetCategoryVocabularyLocalService {
 			com.liferay.portal.SystemException;
 
 	public void addCategoryVocabularyResources(
-		com.liferay.portlet.asset.model.AssetCategoryVocabulary vocabulary,
+		com.liferay.portlet.asset.model.AssetCategoryVocabulary categoryVocabulary,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	public void addCategoryVocabularyResources(
-		com.liferay.portlet.asset.model.AssetCategoryVocabulary vocabulary,
+		com.liferay.portlet.asset.model.AssetCategoryVocabulary categoryVocabulary,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public void deleteCategoryVocabulary(long vocabularyId)
+	public void deleteCategoryVocabulary(long categoryVocabularyId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	public void deleteCategoryVocabulary(
-		com.liferay.portlet.asset.model.AssetCategoryVocabulary vocabulary)
+		com.liferay.portlet.asset.model.AssetCategoryVocabulary categoryVocabulary)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.liferay.portlet.asset.model.AssetCategoryVocabulary> getCompanyVocabularies(
+	public java.util.List<com.liferay.portlet.asset.model.AssetCategoryVocabulary> getCompanyCategoryVocabularies(
 		long companyId) throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -146,12 +146,12 @@ public interface AssetCategoryVocabularyLocalService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.asset.model.AssetCategoryVocabulary getCategoryVocabulary(
-		long vocabularyId)
+		long categoryVocabularyId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.asset.model.AssetCategoryVocabulary updateCategoryVocabulary(
-		long vocabularyId, java.lang.String name)
+		long categoryVocabularyId, java.lang.String name)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 }

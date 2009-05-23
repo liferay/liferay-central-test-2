@@ -123,11 +123,11 @@ public class AssetCategoryPropertyServiceHttp {
 	}
 
 	public static void deleteCategoryProperty(HttpPrincipal httpPrincipal,
-		long propertyId)
+		long categoryPropertyId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(propertyId);
+			Object paramObj0 = new LongWrapper(categoryPropertyId);
 
 			MethodWrapper methodWrapper = new MethodWrapper(AssetCategoryPropertyServiceUtil.class.getName(),
 					"deleteCategoryProperty", new Object[] { paramObj0 });
@@ -224,12 +224,12 @@ public class AssetCategoryPropertyServiceHttp {
 	}
 
 	public static com.liferay.portlet.asset.model.AssetCategoryProperty updateCategoryProperty(
-		HttpPrincipal httpPrincipal, long propertyId, java.lang.String key,
-		java.lang.String value)
+		HttpPrincipal httpPrincipal, long categoryPropertyId,
+		java.lang.String key, java.lang.String value)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(propertyId);
+			Object paramObj0 = new LongWrapper(categoryPropertyId);
 
 			Object paramObj1 = key;
 

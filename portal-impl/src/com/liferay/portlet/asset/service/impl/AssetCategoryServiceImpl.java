@@ -49,7 +49,7 @@ import java.util.List;
 public class AssetCategoryServiceImpl extends AssetCategoryServiceBaseImpl {
 
 	public AssetCategory addCategory(
-			long categoryVocabularyId, long parentCategoryId, String name,
+			long parentCategoryId, String name, long vocabularyId,
 			String[] properties, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
@@ -58,8 +58,8 @@ public class AssetCategoryServiceImpl extends AssetCategoryServiceBaseImpl {
 			parentCategoryId, ActionKeys.ADD_CATEGORY);
 
 		return assetCategoryLocalService.addCategory(
-			getUserId(), categoryVocabularyId, parentCategoryId, name,
-			properties, serviceContext);
+			getUserId(), parentCategoryId, name, vocabularyId, properties,
+			serviceContext);
 	}
 
 	public void deleteCategory(long categoryId)
@@ -74,8 +74,8 @@ public class AssetCategoryServiceImpl extends AssetCategoryServiceBaseImpl {
 	public List<AssetCategory> getCategories(String className, long classPK)
 		throws PortalException, SystemException {
 
-		return getCategories(assetCategoryLocalService.getCategories(
-			className, classPK));
+		return getCategories(
+			assetCategoryLocalService.getCategories(className, classPK));
 	}
 
 	public AssetCategory getCategory(long categoryId)
@@ -87,30 +87,26 @@ public class AssetCategoryServiceImpl extends AssetCategoryServiceBaseImpl {
 		return assetCategoryLocalService.getCategory(categoryId);
 	}
 
-	public List<AssetCategory> getGroupVocabularyCategories(
-			long parentCategoryId)
+	public List<AssetCategory> getChildCategories(long parentCategoryId)
 		throws PortalException, SystemException {
 
 		return getCategories(
 			assetCategoryLocalService.getChildCategories(parentCategoryId));
 	}
 
-	public List<AssetCategory> getVocabularyCategories(
-			long categoryVocabularyId)
+	public List<AssetCategory> getVocabularyCategories(long vocabularyId)
 		throws PortalException, SystemException {
 
 		return getCategories(
-			assetCategoryLocalService.getVocabularyCategories(
-				categoryVocabularyId));
+			assetCategoryLocalService.getVocabularyCategories(vocabularyId));
 	}
 
-	public List<AssetCategory> getVocabularyRootCategories(
-			long categoryVocabularyId)
+	public List<AssetCategory> getVocabularyRootCategories(long vocabularyId)
 		throws PortalException, SystemException {
 
 		return getCategories(
 			assetCategoryLocalService.getVocabularyRootCategories(
-				categoryVocabularyId));
+				vocabularyId));
 	}
 
 	public JSONArray search(
@@ -122,16 +118,16 @@ public class AssetCategoryServiceImpl extends AssetCategoryServiceBaseImpl {
 	}
 
 	public AssetCategory updateCategory(
-			long categoryId, long categoryVocabularyId, long parentCategoryId,
-			String name, String[] properties)
+			long categoryId, long parentCategoryId, String name,
+			long vocabularyId, String[] properties)
 		throws PortalException, SystemException {
 
 		AssetCategoryPermission.check(
 			getPermissionChecker(), categoryId, ActionKeys.UPDATE);
 
 		return assetCategoryLocalService.updateCategory(
-			getUserId(), categoryId, categoryVocabularyId, parentCategoryId,
-			name, properties);
+			getUserId(), categoryId, parentCategoryId, name, vocabularyId,
+			properties);
 	}
 
 	protected List<AssetCategory> getCategories(List<AssetCategory> categories)

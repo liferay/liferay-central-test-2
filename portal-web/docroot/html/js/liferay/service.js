@@ -389,7 +389,7 @@ Liferay.Service.registerClass(
 		deleteCategory: true,
 		getCategories: true,
 		getCategory: true,
-		getGroupVocabularyCategories: true,
+		getChildCategories: true,
 		getVocabularyCategories: true,
 		getVocabularyRootCategories: true,
 		search: true,
