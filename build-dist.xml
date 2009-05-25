@@ -833,6 +833,7 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-5.5-$${downloads.version}.zip</
 		<zip
 			basedir="${app.server.portal.dir}"
 			destfile="dist/liferay-portal-${lp.version}.war"
+			excludes="html/js/editor/_fckeditor/**,html/js/editor/fckeditor/_samples/**"
 		/>
 
 		<tstamp>
