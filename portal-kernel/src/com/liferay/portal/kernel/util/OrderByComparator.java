@@ -34,15 +34,49 @@ import java.util.Comparator;
  */
 public abstract class OrderByComparator implements Comparator, Serializable {
 
+	public abstract int compare(Object obj1, Object obj2);
+
 	public String getOrderBy() {
 		return null;
 	}
 
-	public abstract int compare(Object obj1, Object obj2);
+	public String[] getOrderByFields() {
+		String orderBy = getOrderBy();
 
-	public abstract String[] getOrderByFields();
+		if (orderBy == null) {
+			return null;
+		}
 
-	public abstract boolean isAscending();
+		String[] parts = StringUtil.split(orderBy);
+
+		String[] fields = new String[parts.length];
+
+		for (int i = 0; i < parts.length; i++) {
+			String part = parts[i];
+
+			int x = part.indexOf(StringPool.PERIOD);
+			int y = part.indexOf(StringPool.SPACE, x);
+
+			if (y == -1) {
+				y = part.length();
+			}
+
+			fields[i] = part.substring(x + 1, y);
+		}
+
+		return fields;
+	}
+
+	public boolean isAscending() {
+		String orderBy = getOrderBy();
+
+		if ((orderBy == null) || orderBy.toUpperCase().endsWith(" DESC")) {
+			return false;
+		}
+		else {
+			return true;
+		}
+	}
 
 	public String toString() {
 		return getOrderBy();

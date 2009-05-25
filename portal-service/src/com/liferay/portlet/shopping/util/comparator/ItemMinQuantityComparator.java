@@ -39,8 +39,9 @@ public class ItemMinQuantityComparator extends OrderByComparator {
 	public static String ORDER_BY_DESC =
 		"categoryId DESC, minQuantity DESC, name DESC";
 
-	public static String[] ORDER_BY_FIELDS = 
-		{"categoryId", "minQuantity", "name"};
+	public static String[] ORDER_BY_FIELDS = {
+		"categoryId", "minQuantity", "name"
+	};
 
 	public ItemMinQuantityComparator() {
 		this(false);

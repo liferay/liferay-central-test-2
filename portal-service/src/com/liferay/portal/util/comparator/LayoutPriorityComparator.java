@@ -88,7 +88,7 @@ public class LayoutPriorityComparator extends OrderByComparator {
 	public boolean isAscending() {
 		return true;
 	}
-	
+
 	private Layout _layout;
 	private boolean _lessThan;
 

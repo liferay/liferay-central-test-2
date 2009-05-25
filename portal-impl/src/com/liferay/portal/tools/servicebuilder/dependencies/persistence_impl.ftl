@@ -649,7 +649,6 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 										<#else>
 											query.append("${entity.alias}.${finderCol.name} IS NOT NULL");
 										</#if>
-
 									<#else>
                                         <#if entity.hasCompoundPK() && finderCol.isPrimary()>
                                             query.append("${entity.alias}.id.${finderCol.name} ${finderCol.comparator} null");
@@ -859,22 +858,23 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 
 						if (obc != null) {
 							query.append("ORDER BY ");
-							
-							String order = obc.isAscending() ? " ASC" : " DESC";
 
-							boolean first = true;
+							String[] orderByFields = obc.getOrderByFields();
 
-							for(String field: obc.getOrderByFields()) {
+							for (int i = 0; i < orderByFields.length; i++) {
+								query.append("${entity.alias}.");
+								query.append(orderByFields[i]);
 
-								if(!first) {
-									query.append(", ");
+								if (obc.isAscending()) {
+									query.append(" ASC");
+								}
+								else {
+									query.append(" DESC");
 								}
 
-								query.append("${entity.alias}.")
-									 .append(field)
-									 .append(order);
-
-								first = false;
+								if ((i + 1) < orderByFields.length) {
+									query.append(", ");
+								}
 							}
 						}
 
@@ -1111,21 +1111,22 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 					if (obc != null) {
 						query.append("ORDER BY ");
 
-						String order = obc.isAscending() ? " ASC" : " DESC";
+						String[] orderByFields = obc.getOrderByFields();
 
-						boolean first = true;
+						for (int i = 0; i < orderByFields.length; i++) {
+							query.append("${entity.alias}.");
+							query.append(orderByFields[i]);
 
-						for(String field: obc.getOrderByFields()) {
-
-							if(!first) {
-								query.append(", ");
+							if (obc.isAscending()) {
+								query.append(" ASC");
+							}
+							else {
+								query.append(" DESC");
 							}
 
-							query.append("${entity.alias}.")
-								 .append(field)
-								 .append(order);
-
-							first = false;
+							if ((i + 1) < orderByFields.length) {
+								query.append(", ");
+							}
 						}
 					}
 
@@ -1518,21 +1519,22 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 				if (obc != null) {
 					query.append("ORDER BY ");
 
-					String order = obc.isAscending() ? " ASC" : " DESC";
+					String[] orderByFields = obc.getOrderByFields();
 
-					boolean first = true;
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("${entity.alias}.");
+						query.append(orderByFields[i]);
 
-					for(String field: obc.getOrderByFields()) {
-
-						if(!first) {
-							query.append(", ");
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
 						}
 
-						query.append("${entity.alias}.")
-							 .append(field)
-							 .append(order);
-
-						first = false;
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
 					}
 				}
 

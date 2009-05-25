@@ -1,6 +1,7 @@
 <#list entities as entity>
-	<import class="${packagePath}.model.${entity.name}"/>
+	<import class="${packagePath}.model.${entity.name}" />
 </#list>
+
 <#list entities as entity>
 	<#if entity.hasColumns()>
 		<class name="${packagePath}.model.impl.${entity.name}Impl" table="${entity.table}">

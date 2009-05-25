@@ -88,7 +88,7 @@ public class GroupTypeComparator extends OrderByComparator {
 	public boolean isAscending() {
 		return _asc;
 	}
-	
+
 	private boolean _asc;
 
 }

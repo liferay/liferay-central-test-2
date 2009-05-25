@@ -905,14 +905,15 @@ public class ServiceBuilder {
 				}
 
 				String alias = TextFormatter.format(ejbName, TextFormatter.I);
-				if (_badAliasNames.contains(alias.toUpperCase())) {
+
+				if (_badAliasNames.contains(alias.toLowerCase())) {
 					alias += StringPool.UNDERLINE;
 				}
 
 				_ejbList.add(
 					new Entity(
 						_packagePath, _portletName, _portletShortName, ejbName,
-						alias, table, uuid, localService, remoteService,
+						table, alias, uuid, localService, remoteService,
 						persistenceClass, finderClass, dataSource,
 						sessionFactory, txManager, cacheEnabled, pkList,
 						regularColList, collectionList, columnList, order,
@@ -1910,7 +1911,7 @@ public class ServiceBuilder {
 		if (firstImport == -1) {
 			int x = newContent.indexOf("<class");
 
-			if(x != -1) {
+			if (x != -1) {
 				newContent =
 					newContent.substring(0, x) + imports +
 						newContent.substring(x);
@@ -1925,7 +1926,7 @@ public class ServiceBuilder {
 
 			newContent =
 				newContent.substring(0, firstImport) + imports +
-				newContent.substring(lastImport);
+					newContent.substring(lastImport);
 		}
 
 		int firstClass = newContent.indexOf(
@@ -1939,7 +1940,7 @@ public class ServiceBuilder {
 			if (x != -1) {
 				newContent =
 					newContent.substring(0, x) + content +
-					newContent.substring(x, newContent.length());
+						newContent.substring(x, newContent.length());
 			}
 		}
 		else {

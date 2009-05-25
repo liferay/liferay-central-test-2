@@ -80,21 +80,21 @@ public class Entity {
 
 	public Entity(
 		String packagePath, String portletName, String portletShortName,
-		String name, String alias, String table, boolean uuid, boolean localService,
-		boolean remoteService, String persistenceClass, String finderClass,
-		String dataSource, String sessionFactory, String txManager,
-		boolean cacheEnabled, List<EntityColumn> pkList,
+		String name, String table, String alias, boolean uuid,
+		boolean localService, boolean remoteService, String persistenceClass,
+		String finderClass, String dataSource, String sessionFactory,
+		String txManager, boolean cacheEnabled, List<EntityColumn> pkList,
 		List<EntityColumn> regularColList, List<EntityColumn> collectionList,
 		List<EntityColumn> columnList, EntityOrder order,
 		List<EntityFinder> finderList, List<Entity> referenceList,
 		List<String> txRequiredList) {
 
-		_alias = alias;
 		_packagePath = packagePath;
 		_portletName = portletName;
 		_portletShortName = portletShortName;
 		_name = name;
 		_table = table;
+		_alias = alias;
 		_uuid = uuid;
 		_localService = localService;
 		_remoteService = remoteService;
