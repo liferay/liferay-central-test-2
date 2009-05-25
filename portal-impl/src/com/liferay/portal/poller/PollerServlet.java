@@ -197,6 +197,10 @@ public class PollerServlet extends HttpServlet {
 
 		Map<String, String> newParameterMap = new HashMap<String, String>();
 
+		if (oldParameterMap == null) {
+			return newParameterMap;
+		}
+
 		for (Map.Entry<String, Object> entry : oldParameterMap.entrySet()) {
 			newParameterMap.put(
 				entry.getKey(), String.valueOf(entry.getValue()));
