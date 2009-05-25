@@ -365,6 +365,9 @@ public class BaseDeployer {
 		if (appServerType.startsWith(ServerDetector.GERONIMO_ID)) {
 			copyDependencyXml("geronimo-web.xml", srcFile + "/WEB-INF");
 		}
+		else if (appServerType.equals(ServerDetector.WEBLOGIC_ID)) {
+			copyDependencyXml("weblogic.xml", srcFile + "/WEB-INF");
+		}
 
 		copyDependencyXml("web.xml", srcFile + "/WEB-INF");
 	}
