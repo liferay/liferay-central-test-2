@@ -50,13 +50,16 @@ public class PortletAutoDeployListener extends BaseAutoDeployListener {
 
 		AutoDeployer deployer = null;
 
-		if (isMatchingFile(file, "index.php")) {
-			deployer = getPhpDeployer();
-		}
-		else if (isMatchingFile(
-					file, "WEB-INF/" + Portal.PORTLET_XML_FILE_NAME_STANDARD)) {
+		if (isMatchingFile(
+				file, "WEB-INF/" + Portal.PORTLET_XML_FILE_NAME_STANDARD)) {
 
 			deployer = _deployer;
+		}
+		else if (isMatchingFile(file, "index_mvc.jsp")) {
+			deployer = getMvcDeployer();
+		}
+		else if (isMatchingFile(file, "index.php")) {
+			deployer = getPhpDeployer();
 		}
 		else if (!isHookPlugin(file) &&
 				 !isMatchingFile(
@@ -90,6 +93,14 @@ public class PortletAutoDeployListener extends BaseAutoDeployListener {
 		}
 	}
 
+	protected AutoDeployer getMvcDeployer() throws AutoDeployException {
+		if (_mvcDeployer == null) {
+			_mvcDeployer = new MVCPortletAutoDeployer();
+		}
+
+		return _mvcDeployer;
+	}
+
 	protected AutoDeployer getPhpDeployer() throws AutoDeployException {
 		if (_phpDeployer == null) {
 			_phpDeployer = new PHPPortletAutoDeployer();
@@ -110,6 +121,7 @@ public class PortletAutoDeployListener extends BaseAutoDeployListener {
 		LogFactoryUtil.getLog(PortletAutoDeployListener.class);
 
 	private AutoDeployer _deployer;
+	private MVCPortletAutoDeployer _mvcDeployer;
 	private PHPPortletAutoDeployer _phpDeployer;
 	private WAIAutoDeployer _waiDeployer;
 
