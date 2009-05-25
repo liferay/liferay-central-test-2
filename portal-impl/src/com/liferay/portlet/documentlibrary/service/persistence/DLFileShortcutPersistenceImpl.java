@@ -441,13 +441,13 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.documentlibrary.model.DLFileShortcut WHERE ");
+					"SELECT dlFileShortcut FROM DLFileShortcut dlFileShortcut WHERE ");
 
 				if (uuid == null) {
-					query.append("uuid_ IS NULL");
+					query.append("dlFileShortcut.uuid IS NULL");
 				}
 				else {
-					query.append("uuid_ = ?");
+					query.append("dlFileShortcut.uuid = ?");
 				}
 
 				query.append(" ");
@@ -507,20 +507,37 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.documentlibrary.model.DLFileShortcut WHERE ");
+					"SELECT dlFileShortcut FROM DLFileShortcut dlFileShortcut WHERE ");
 
 				if (uuid == null) {
-					query.append("uuid_ IS NULL");
+					query.append("dlFileShortcut.uuid IS NULL");
 				}
 				else {
-					query.append("uuid_ = ?");
+					query.append("dlFileShortcut.uuid = ?");
 				}
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("dlFileShortcut.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -611,20 +628,37 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 			StringBuilder query = new StringBuilder();
 
 			query.append(
-				"FROM com.liferay.portlet.documentlibrary.model.DLFileShortcut WHERE ");
+				"SELECT dlFileShortcut FROM DLFileShortcut dlFileShortcut WHERE ");
 
 			if (uuid == null) {
-				query.append("uuid_ IS NULL");
+				query.append("dlFileShortcut.uuid IS NULL");
 			}
 			else {
-				query.append("uuid_ = ?");
+				query.append("dlFileShortcut.uuid = ?");
 			}
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("dlFileShortcut.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -705,18 +739,18 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.documentlibrary.model.DLFileShortcut WHERE ");
+					"SELECT dlFileShortcut FROM DLFileShortcut dlFileShortcut WHERE ");
 
 				if (uuid == null) {
-					query.append("uuid_ IS NULL");
+					query.append("dlFileShortcut.uuid IS NULL");
 				}
 				else {
-					query.append("uuid_ = ?");
+					query.append("dlFileShortcut.uuid = ?");
 				}
 
 				query.append(" AND ");
 
-				query.append("groupId = ?");
+				query.append("dlFileShortcut.groupId = ?");
 
 				query.append(" ");
 
@@ -793,9 +827,9 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.documentlibrary.model.DLFileShortcut WHERE ");
+					"SELECT dlFileShortcut FROM DLFileShortcut dlFileShortcut WHERE ");
 
-				query.append("folderId = ?");
+				query.append("dlFileShortcut.folderId = ?");
 
 				query.append(" ");
 
@@ -852,15 +886,32 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.documentlibrary.model.DLFileShortcut WHERE ");
+					"SELECT dlFileShortcut FROM DLFileShortcut dlFileShortcut WHERE ");
 
-				query.append("folderId = ?");
+				query.append("dlFileShortcut.folderId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("dlFileShortcut.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -952,15 +1003,32 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 			StringBuilder query = new StringBuilder();
 
 			query.append(
-				"FROM com.liferay.portlet.documentlibrary.model.DLFileShortcut WHERE ");
+				"SELECT dlFileShortcut FROM DLFileShortcut dlFileShortcut WHERE ");
 
-			query.append("folderId = ?");
+			query.append("dlFileShortcut.folderId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("dlFileShortcut.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -1004,17 +1072,17 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.documentlibrary.model.DLFileShortcut WHERE ");
+					"SELECT dlFileShortcut FROM DLFileShortcut dlFileShortcut WHERE ");
 
-				query.append("toFolderId = ?");
+				query.append("dlFileShortcut.toFolderId = ?");
 
 				query.append(" AND ");
 
 				if (toName == null) {
-					query.append("toName IS NULL");
+					query.append("dlFileShortcut.toName IS NULL");
 				}
 				else {
-					query.append("toName = ?");
+					query.append("dlFileShortcut.toName = ?");
 				}
 
 				query.append(" ");
@@ -1078,24 +1146,41 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.documentlibrary.model.DLFileShortcut WHERE ");
+					"SELECT dlFileShortcut FROM DLFileShortcut dlFileShortcut WHERE ");
 
-				query.append("toFolderId = ?");
+				query.append("dlFileShortcut.toFolderId = ?");
 
 				query.append(" AND ");
 
 				if (toName == null) {
-					query.append("toName IS NULL");
+					query.append("dlFileShortcut.toName IS NULL");
 				}
 				else {
-					query.append("toName = ?");
+					query.append("dlFileShortcut.toName = ?");
 				}
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("dlFileShortcut.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1197,24 +1282,41 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 			StringBuilder query = new StringBuilder();
 
 			query.append(
-				"FROM com.liferay.portlet.documentlibrary.model.DLFileShortcut WHERE ");
+				"SELECT dlFileShortcut FROM DLFileShortcut dlFileShortcut WHERE ");
 
-			query.append("toFolderId = ?");
+			query.append("dlFileShortcut.toFolderId = ?");
 
 			query.append(" AND ");
 
 			if (toName == null) {
-				query.append("toName IS NULL");
+				query.append("dlFileShortcut.toName IS NULL");
 			}
 			else {
-				query.append("toName = ?");
+				query.append("dlFileShortcut.toName = ?");
 			}
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("dlFileShortcut.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -1313,11 +1415,28 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.documentlibrary.model.DLFileShortcut ");
+					"SELECT dlFileShortcut FROM DLFileShortcut dlFileShortcut ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("dlFileShortcut.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1398,15 +1517,14 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.documentlibrary.model.DLFileShortcut WHERE ");
+				query.append("SELECT COUNT(dlFileShortcut) ");
+				query.append("FROM DLFileShortcut dlFileShortcut WHERE ");
 
 				if (uuid == null) {
-					query.append("uuid_ IS NULL");
+					query.append("dlFileShortcut.uuid IS NULL");
 				}
 				else {
-					query.append("uuid_ = ?");
+					query.append("dlFileShortcut.uuid = ?");
 				}
 
 				query.append(" ");
@@ -1454,20 +1572,19 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.documentlibrary.model.DLFileShortcut WHERE ");
+				query.append("SELECT COUNT(dlFileShortcut) ");
+				query.append("FROM DLFileShortcut dlFileShortcut WHERE ");
 
 				if (uuid == null) {
-					query.append("uuid_ IS NULL");
+					query.append("dlFileShortcut.uuid IS NULL");
 				}
 				else {
-					query.append("uuid_ = ?");
+					query.append("dlFileShortcut.uuid = ?");
 				}
 
 				query.append(" AND ");
 
-				query.append("groupId = ?");
+				query.append("dlFileShortcut.groupId = ?");
 
 				query.append(" ");
 
@@ -1515,11 +1632,10 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.documentlibrary.model.DLFileShortcut WHERE ");
+				query.append("SELECT COUNT(dlFileShortcut) ");
+				query.append("FROM DLFileShortcut dlFileShortcut WHERE ");
 
-				query.append("folderId = ?");
+				query.append("dlFileShortcut.folderId = ?");
 
 				query.append(" ");
 
@@ -1564,19 +1680,18 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.documentlibrary.model.DLFileShortcut WHERE ");
+				query.append("SELECT COUNT(dlFileShortcut) ");
+				query.append("FROM DLFileShortcut dlFileShortcut WHERE ");
 
-				query.append("toFolderId = ?");
+				query.append("dlFileShortcut.toFolderId = ?");
 
 				query.append(" AND ");
 
 				if (toName == null) {
-					query.append("toName IS NULL");
+					query.append("dlFileShortcut.toName IS NULL");
 				}
 				else {
-					query.append("toName = ?");
+					query.append("dlFileShortcut.toName = ?");
 				}
 
 				query.append(" ");
@@ -1624,7 +1739,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 				session = openSession();
 
 				Query q = session.createQuery(
-						"SELECT COUNT(*) FROM com.liferay.portlet.documentlibrary.model.DLFileShortcut");
+						"SELECT COUNT(dlFileShortcut) FROM DLFileShortcut dlFileShortcut");
 
 				count = (Long)q.uniqueResult();
 			}

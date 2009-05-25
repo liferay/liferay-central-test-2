@@ -372,11 +372,28 @@ public class TagsSourcePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portlet.tags.model.TagsSource ");
+				query.append("SELECT tagsSource FROM TagsSource tagsSource ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("tagsSource.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -430,7 +447,7 @@ public class TagsSourcePersistenceImpl extends BasePersistenceImpl
 				session = openSession();
 
 				Query q = session.createQuery(
-						"SELECT COUNT(*) FROM com.liferay.portlet.tags.model.TagsSource");
+						"SELECT COUNT(tagsSource) FROM TagsSource tagsSource");
 
 				count = (Long)q.uniqueResult();
 			}

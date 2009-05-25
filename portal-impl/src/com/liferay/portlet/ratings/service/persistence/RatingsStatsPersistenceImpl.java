@@ -410,13 +410,13 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.ratings.model.RatingsStats WHERE ");
+					"SELECT ratingsStats FROM RatingsStats ratingsStats WHERE ");
 
-				query.append("classNameId = ?");
+				query.append("ratingsStats.classNameId = ?");
 
 				query.append(" AND ");
 
-				query.append("classPK = ?");
+				query.append("ratingsStats.classPK = ?");
 
 				query.append(" ");
 
@@ -541,11 +541,28 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.ratings.model.RatingsStats ");
+					"SELECT ratingsStats FROM RatingsStats ratingsStats ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("ratingsStats.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -610,15 +627,14 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.ratings.model.RatingsStats WHERE ");
+				query.append("SELECT COUNT(ratingsStats) ");
+				query.append("FROM RatingsStats ratingsStats WHERE ");
 
-				query.append("classNameId = ?");
+				query.append("ratingsStats.classNameId = ?");
 
 				query.append(" AND ");
 
-				query.append("classPK = ?");
+				query.append("ratingsStats.classPK = ?");
 
 				query.append(" ");
 
@@ -663,7 +679,7 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl
 				session = openSession();
 
 				Query q = session.createQuery(
-						"SELECT COUNT(*) FROM com.liferay.portlet.ratings.model.RatingsStats");
+						"SELECT COUNT(ratingsStats) FROM RatingsStats ratingsStats");
 
 				count = (Long)q.uniqueResult();
 			}

@@ -369,9 +369,10 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.UserTracker WHERE ");
+				query.append(
+					"SELECT userTracker FROM UserTracker userTracker WHERE ");
 
-				query.append("companyId = ?");
+				query.append("userTracker.companyId = ?");
 
 				query.append(" ");
 
@@ -427,15 +428,33 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.UserTracker WHERE ");
+				query.append(
+					"SELECT userTracker FROM UserTracker userTracker WHERE ");
 
-				query.append("companyId = ?");
+				query.append("userTracker.companyId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("userTracker.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -526,15 +545,33 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl
 
 			StringBuilder query = new StringBuilder();
 
-			query.append("FROM com.liferay.portal.model.UserTracker WHERE ");
+			query.append(
+				"SELECT userTracker FROM UserTracker userTracker WHERE ");
 
-			query.append("companyId = ?");
+			query.append("userTracker.companyId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("userTracker.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -577,9 +614,10 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.UserTracker WHERE ");
+				query.append(
+					"SELECT userTracker FROM UserTracker userTracker WHERE ");
 
-				query.append("userId = ?");
+				query.append("userTracker.userId = ?");
 
 				query.append(" ");
 
@@ -635,15 +673,33 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.UserTracker WHERE ");
+				query.append(
+					"SELECT userTracker FROM UserTracker userTracker WHERE ");
 
-				query.append("userId = ?");
+				query.append("userTracker.userId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("userTracker.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -731,15 +787,33 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl
 
 			StringBuilder query = new StringBuilder();
 
-			query.append("FROM com.liferay.portal.model.UserTracker WHERE ");
+			query.append(
+				"SELECT userTracker FROM UserTracker userTracker WHERE ");
 
-			query.append("userId = ?");
+			query.append("userTracker.userId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("userTracker.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -782,13 +856,14 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.UserTracker WHERE ");
+				query.append(
+					"SELECT userTracker FROM UserTracker userTracker WHERE ");
 
 				if (sessionId == null) {
-					query.append("sessionId IS NULL");
+					query.append("userTracker.sessionId IS NULL");
 				}
 				else {
-					query.append("sessionId = ?");
+					query.append("userTracker.sessionId = ?");
 				}
 
 				query.append(" ");
@@ -847,20 +922,38 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.UserTracker WHERE ");
+				query.append(
+					"SELECT userTracker FROM UserTracker userTracker WHERE ");
 
 				if (sessionId == null) {
-					query.append("sessionId IS NULL");
+					query.append("userTracker.sessionId IS NULL");
 				}
 				else {
-					query.append("sessionId = ?");
+					query.append("userTracker.sessionId = ?");
 				}
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("userTracker.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -953,20 +1046,38 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl
 
 			StringBuilder query = new StringBuilder();
 
-			query.append("FROM com.liferay.portal.model.UserTracker WHERE ");
+			query.append(
+				"SELECT userTracker FROM UserTracker userTracker WHERE ");
 
 			if (sessionId == null) {
-				query.append("sessionId IS NULL");
+				query.append("userTracker.sessionId IS NULL");
 			}
 			else {
-				query.append("sessionId = ?");
+				query.append("userTracker.sessionId = ?");
 			}
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("userTracker.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -1062,11 +1173,28 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.UserTracker ");
+				query.append("SELECT userTracker FROM UserTracker userTracker ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("userTracker.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1139,10 +1267,10 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append("FROM com.liferay.portal.model.UserTracker WHERE ");
+				query.append("SELECT COUNT(userTracker) ");
+				query.append("FROM UserTracker userTracker WHERE ");
 
-				query.append("companyId = ?");
+				query.append("userTracker.companyId = ?");
 
 				query.append(" ");
 
@@ -1186,10 +1314,10 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append("FROM com.liferay.portal.model.UserTracker WHERE ");
+				query.append("SELECT COUNT(userTracker) ");
+				query.append("FROM UserTracker userTracker WHERE ");
 
-				query.append("userId = ?");
+				query.append("userTracker.userId = ?");
 
 				query.append(" ");
 
@@ -1233,14 +1361,14 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append("FROM com.liferay.portal.model.UserTracker WHERE ");
+				query.append("SELECT COUNT(userTracker) ");
+				query.append("FROM UserTracker userTracker WHERE ");
 
 				if (sessionId == null) {
-					query.append("sessionId IS NULL");
+					query.append("userTracker.sessionId IS NULL");
 				}
 				else {
-					query.append("sessionId = ?");
+					query.append("userTracker.sessionId = ?");
 				}
 
 				query.append(" ");
@@ -1286,7 +1414,7 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl
 				session = openSession();
 
 				Query q = session.createQuery(
-						"SELECT COUNT(*) FROM com.liferay.portal.model.UserTracker");
+						"SELECT COUNT(userTracker) FROM UserTracker userTracker");
 
 				count = (Long)q.uniqueResult();
 			}

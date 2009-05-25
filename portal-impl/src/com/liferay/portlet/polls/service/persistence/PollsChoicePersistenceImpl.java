@@ -419,21 +419,21 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.polls.model.PollsChoice WHERE ");
+					"SELECT pollsChoice FROM PollsChoice pollsChoice WHERE ");
 
 				if (uuid == null) {
-					query.append("uuid_ IS NULL");
+					query.append("pollsChoice.uuid IS NULL");
 				}
 				else {
-					query.append("uuid_ = ?");
+					query.append("pollsChoice.uuid = ?");
 				}
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("questionId ASC, ");
-				query.append("name ASC");
+				query.append("pollsChoice.questionId ASC, ");
+				query.append("pollsChoice.name ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -490,27 +490,44 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.polls.model.PollsChoice WHERE ");
+					"SELECT pollsChoice FROM PollsChoice pollsChoice WHERE ");
 
 				if (uuid == null) {
-					query.append("uuid_ IS NULL");
+					query.append("pollsChoice.uuid IS NULL");
 				}
 				else {
-					query.append("uuid_ = ?");
+					query.append("pollsChoice.uuid = ?");
 				}
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("pollsChoice.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("questionId ASC, ");
-					query.append("name ASC");
+					query.append("pollsChoice.questionId ASC, ");
+					query.append("pollsChoice.name ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -600,27 +617,44 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl
 			StringBuilder query = new StringBuilder();
 
 			query.append(
-				"FROM com.liferay.portlet.polls.model.PollsChoice WHERE ");
+				"SELECT pollsChoice FROM PollsChoice pollsChoice WHERE ");
 
 			if (uuid == null) {
-				query.append("uuid_ IS NULL");
+				query.append("pollsChoice.uuid IS NULL");
 			}
 			else {
-				query.append("uuid_ = ?");
+				query.append("pollsChoice.uuid = ?");
 			}
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("pollsChoice.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("questionId ASC, ");
-				query.append("name ASC");
+				query.append("pollsChoice.questionId ASC, ");
+				query.append("pollsChoice.name ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -666,16 +700,16 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.polls.model.PollsChoice WHERE ");
+					"SELECT pollsChoice FROM PollsChoice pollsChoice WHERE ");
 
-				query.append("questionId = ?");
+				query.append("pollsChoice.questionId = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("questionId ASC, ");
-				query.append("name ASC");
+				query.append("pollsChoice.questionId ASC, ");
+				query.append("pollsChoice.name ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -730,22 +764,39 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.polls.model.PollsChoice WHERE ");
+					"SELECT pollsChoice FROM PollsChoice pollsChoice WHERE ");
 
-				query.append("questionId = ?");
+				query.append("pollsChoice.questionId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("pollsChoice.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("questionId ASC, ");
-					query.append("name ASC");
+					query.append("pollsChoice.questionId ASC, ");
+					query.append("pollsChoice.name ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -835,22 +886,39 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl
 			StringBuilder query = new StringBuilder();
 
 			query.append(
-				"FROM com.liferay.portlet.polls.model.PollsChoice WHERE ");
+				"SELECT pollsChoice FROM PollsChoice pollsChoice WHERE ");
 
-			query.append("questionId = ?");
+			query.append("pollsChoice.questionId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("pollsChoice.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("questionId ASC, ");
-				query.append("name ASC");
+				query.append("pollsChoice.questionId ASC, ");
+				query.append("pollsChoice.name ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -929,25 +997,25 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.polls.model.PollsChoice WHERE ");
+					"SELECT pollsChoice FROM PollsChoice pollsChoice WHERE ");
 
-				query.append("questionId = ?");
+				query.append("pollsChoice.questionId = ?");
 
 				query.append(" AND ");
 
 				if (name == null) {
-					query.append("name IS NULL");
+					query.append("pollsChoice.name IS NULL");
 				}
 				else {
-					query.append("name = ?");
+					query.append("pollsChoice.name = ?");
 				}
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("questionId ASC, ");
-				query.append("name ASC");
+				query.append("pollsChoice.questionId ASC, ");
+				query.append("pollsChoice.name ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1072,19 +1140,35 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.polls.model.PollsChoice ");
+				query.append("SELECT pollsChoice FROM PollsChoice pollsChoice ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("pollsChoice.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("questionId ASC, ");
-					query.append("name ASC");
+					query.append("pollsChoice.questionId ASC, ");
+					query.append("pollsChoice.name ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1158,15 +1242,14 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.polls.model.PollsChoice WHERE ");
+				query.append("SELECT COUNT(pollsChoice) ");
+				query.append("FROM PollsChoice pollsChoice WHERE ");
 
 				if (uuid == null) {
-					query.append("uuid_ IS NULL");
+					query.append("pollsChoice.uuid IS NULL");
 				}
 				else {
-					query.append("uuid_ = ?");
+					query.append("pollsChoice.uuid = ?");
 				}
 
 				query.append(" ");
@@ -1213,11 +1296,10 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.polls.model.PollsChoice WHERE ");
+				query.append("SELECT COUNT(pollsChoice) ");
+				query.append("FROM PollsChoice pollsChoice WHERE ");
 
-				query.append("questionId = ?");
+				query.append("pollsChoice.questionId = ?");
 
 				query.append(" ");
 
@@ -1262,19 +1344,18 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.polls.model.PollsChoice WHERE ");
+				query.append("SELECT COUNT(pollsChoice) ");
+				query.append("FROM PollsChoice pollsChoice WHERE ");
 
-				query.append("questionId = ?");
+				query.append("pollsChoice.questionId = ?");
 
 				query.append(" AND ");
 
 				if (name == null) {
-					query.append("name IS NULL");
+					query.append("pollsChoice.name IS NULL");
 				}
 				else {
-					query.append("name = ?");
+					query.append("pollsChoice.name = ?");
 				}
 
 				query.append(" ");
@@ -1322,7 +1403,7 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl
 				session = openSession();
 
 				Query q = session.createQuery(
-						"SELECT COUNT(*) FROM com.liferay.portlet.polls.model.PollsChoice");
+						"SELECT COUNT(pollsChoice) FROM PollsChoice pollsChoice");
 
 				count = (Long)q.uniqueResult();
 			}

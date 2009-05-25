@@ -481,9 +481,9 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portal.model.ResourcePermission WHERE ");
+					"SELECT resourcePermission FROM ResourcePermission resourcePermission WHERE ");
 
-				query.append("roleId = ?");
+				query.append("resourcePermission.roleId = ?");
 
 				query.append(" ");
 
@@ -540,15 +540,32 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portal.model.ResourcePermission WHERE ");
+					"SELECT resourcePermission FROM ResourcePermission resourcePermission WHERE ");
 
-				query.append("roleId = ?");
+				query.append("resourcePermission.roleId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("resourcePermission.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -640,15 +657,32 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl
 			StringBuilder query = new StringBuilder();
 
 			query.append(
-				"FROM com.liferay.portal.model.ResourcePermission WHERE ");
+				"SELECT resourcePermission FROM ResourcePermission resourcePermission WHERE ");
 
-			query.append("roleId = ?");
+			query.append("resourcePermission.roleId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("resourcePermission.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -696,22 +730,22 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portal.model.ResourcePermission WHERE ");
+					"SELECT resourcePermission FROM ResourcePermission resourcePermission WHERE ");
 
-				query.append("companyId = ?");
+				query.append("resourcePermission.companyId = ?");
 
 				query.append(" AND ");
 
 				if (name == null) {
-					query.append("name IS NULL");
+					query.append("resourcePermission.name IS NULL");
 				}
 				else {
-					query.append("name = ?");
+					query.append("resourcePermission.name = ?");
 				}
 
 				query.append(" AND ");
 
-				query.append("scope = ?");
+				query.append("resourcePermission.scope = ?");
 
 				query.append(" ");
 
@@ -777,28 +811,45 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portal.model.ResourcePermission WHERE ");
+					"SELECT resourcePermission FROM ResourcePermission resourcePermission WHERE ");
 
-				query.append("companyId = ?");
+				query.append("resourcePermission.companyId = ?");
 
 				query.append(" AND ");
 
 				if (name == null) {
-					query.append("name IS NULL");
+					query.append("resourcePermission.name IS NULL");
 				}
 				else {
-					query.append("name = ?");
+					query.append("resourcePermission.name = ?");
 				}
 
 				query.append(" AND ");
 
-				query.append("scope = ?");
+				query.append("resourcePermission.scope = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("resourcePermission.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -910,28 +961,45 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl
 			StringBuilder query = new StringBuilder();
 
 			query.append(
-				"FROM com.liferay.portal.model.ResourcePermission WHERE ");
+				"SELECT resourcePermission FROM ResourcePermission resourcePermission WHERE ");
 
-			query.append("companyId = ?");
+			query.append("resourcePermission.companyId = ?");
 
 			query.append(" AND ");
 
 			if (name == null) {
-				query.append("name IS NULL");
+				query.append("resourcePermission.name IS NULL");
 			}
 			else {
-				query.append("name = ?");
+				query.append("resourcePermission.name = ?");
 			}
 
 			query.append(" AND ");
 
-			query.append("scope = ?");
+			query.append("resourcePermission.scope = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("resourcePermission.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -987,30 +1055,30 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portal.model.ResourcePermission WHERE ");
+					"SELECT resourcePermission FROM ResourcePermission resourcePermission WHERE ");
 
-				query.append("companyId = ?");
+				query.append("resourcePermission.companyId = ?");
 
 				query.append(" AND ");
 
 				if (name == null) {
-					query.append("name IS NULL");
+					query.append("resourcePermission.name IS NULL");
 				}
 				else {
-					query.append("name = ?");
+					query.append("resourcePermission.name = ?");
 				}
 
 				query.append(" AND ");
 
-				query.append("scope = ?");
+				query.append("resourcePermission.scope = ?");
 
 				query.append(" AND ");
 
 				if (primKey == null) {
-					query.append("primKey IS NULL");
+					query.append("resourcePermission.primKey IS NULL");
 				}
 				else {
-					query.append("primKey = ?");
+					query.append("resourcePermission.primKey = ?");
 				}
 
 				query.append(" ");
@@ -1084,37 +1152,54 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portal.model.ResourcePermission WHERE ");
+					"SELECT resourcePermission FROM ResourcePermission resourcePermission WHERE ");
 
-				query.append("companyId = ?");
+				query.append("resourcePermission.companyId = ?");
 
 				query.append(" AND ");
 
 				if (name == null) {
-					query.append("name IS NULL");
+					query.append("resourcePermission.name IS NULL");
 				}
 				else {
-					query.append("name = ?");
+					query.append("resourcePermission.name = ?");
 				}
 
 				query.append(" AND ");
 
-				query.append("scope = ?");
+				query.append("resourcePermission.scope = ?");
 
 				query.append(" AND ");
 
 				if (primKey == null) {
-					query.append("primKey IS NULL");
+					query.append("resourcePermission.primKey IS NULL");
 				}
 				else {
-					query.append("primKey = ?");
+					query.append("resourcePermission.primKey = ?");
 				}
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("resourcePermission.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1236,37 +1321,54 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl
 			StringBuilder query = new StringBuilder();
 
 			query.append(
-				"FROM com.liferay.portal.model.ResourcePermission WHERE ");
+				"SELECT resourcePermission FROM ResourcePermission resourcePermission WHERE ");
 
-			query.append("companyId = ?");
+			query.append("resourcePermission.companyId = ?");
 
 			query.append(" AND ");
 
 			if (name == null) {
-				query.append("name IS NULL");
+				query.append("resourcePermission.name IS NULL");
 			}
 			else {
-				query.append("name = ?");
+				query.append("resourcePermission.name = ?");
 			}
 
 			query.append(" AND ");
 
-			query.append("scope = ?");
+			query.append("resourcePermission.scope = ?");
 
 			query.append(" AND ");
 
 			if (primKey == null) {
-				query.append("primKey IS NULL");
+				query.append("resourcePermission.primKey IS NULL");
 			}
 			else {
-				query.append("primKey = ?");
+				query.append("resourcePermission.primKey = ?");
 			}
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("resourcePermission.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -1373,35 +1475,35 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portal.model.ResourcePermission WHERE ");
+					"SELECT resourcePermission FROM ResourcePermission resourcePermission WHERE ");
 
-				query.append("companyId = ?");
+				query.append("resourcePermission.companyId = ?");
 
 				query.append(" AND ");
 
 				if (name == null) {
-					query.append("name IS NULL");
+					query.append("resourcePermission.name IS NULL");
 				}
 				else {
-					query.append("name = ?");
+					query.append("resourcePermission.name = ?");
 				}
 
 				query.append(" AND ");
 
-				query.append("scope = ?");
+				query.append("resourcePermission.scope = ?");
 
 				query.append(" AND ");
 
 				if (primKey == null) {
-					query.append("primKey IS NULL");
+					query.append("resourcePermission.primKey IS NULL");
 				}
 				else {
-					query.append("primKey = ?");
+					query.append("resourcePermission.primKey = ?");
 				}
 
 				query.append(" AND ");
 
-				query.append("roleId = ?");
+				query.append("resourcePermission.roleId = ?");
 
 				query.append(" ");
 
@@ -1541,11 +1643,28 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portal.model.ResourcePermission ");
+					"SELECT resourcePermission FROM ResourcePermission resourcePermission ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("resourcePermission.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1631,11 +1750,11 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
+				query.append("SELECT COUNT(resourcePermission) ");
 				query.append(
-					"FROM com.liferay.portal.model.ResourcePermission WHERE ");
+					"FROM ResourcePermission resourcePermission WHERE ");
 
-				query.append("roleId = ?");
+				query.append("resourcePermission.roleId = ?");
 
 				query.append(" ");
 
@@ -1684,24 +1803,24 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
+				query.append("SELECT COUNT(resourcePermission) ");
 				query.append(
-					"FROM com.liferay.portal.model.ResourcePermission WHERE ");
+					"FROM ResourcePermission resourcePermission WHERE ");
 
-				query.append("companyId = ?");
+				query.append("resourcePermission.companyId = ?");
 
 				query.append(" AND ");
 
 				if (name == null) {
-					query.append("name IS NULL");
+					query.append("resourcePermission.name IS NULL");
 				}
 				else {
-					query.append("name = ?");
+					query.append("resourcePermission.name = ?");
 				}
 
 				query.append(" AND ");
 
-				query.append("scope = ?");
+				query.append("resourcePermission.scope = ?");
 
 				query.append(" ");
 
@@ -1758,32 +1877,32 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
+				query.append("SELECT COUNT(resourcePermission) ");
 				query.append(
-					"FROM com.liferay.portal.model.ResourcePermission WHERE ");
+					"FROM ResourcePermission resourcePermission WHERE ");
 
-				query.append("companyId = ?");
+				query.append("resourcePermission.companyId = ?");
 
 				query.append(" AND ");
 
 				if (name == null) {
-					query.append("name IS NULL");
+					query.append("resourcePermission.name IS NULL");
 				}
 				else {
-					query.append("name = ?");
+					query.append("resourcePermission.name = ?");
 				}
 
 				query.append(" AND ");
 
-				query.append("scope = ?");
+				query.append("resourcePermission.scope = ?");
 
 				query.append(" AND ");
 
 				if (primKey == null) {
-					query.append("primKey IS NULL");
+					query.append("resourcePermission.primKey IS NULL");
 				}
 				else {
-					query.append("primKey = ?");
+					query.append("resourcePermission.primKey = ?");
 				}
 
 				query.append(" ");
@@ -1845,37 +1964,37 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
+				query.append("SELECT COUNT(resourcePermission) ");
 				query.append(
-					"FROM com.liferay.portal.model.ResourcePermission WHERE ");
+					"FROM ResourcePermission resourcePermission WHERE ");
 
-				query.append("companyId = ?");
+				query.append("resourcePermission.companyId = ?");
 
 				query.append(" AND ");
 
 				if (name == null) {
-					query.append("name IS NULL");
+					query.append("resourcePermission.name IS NULL");
 				}
 				else {
-					query.append("name = ?");
+					query.append("resourcePermission.name = ?");
 				}
 
 				query.append(" AND ");
 
-				query.append("scope = ?");
+				query.append("resourcePermission.scope = ?");
 
 				query.append(" AND ");
 
 				if (primKey == null) {
-					query.append("primKey IS NULL");
+					query.append("resourcePermission.primKey IS NULL");
 				}
 				else {
-					query.append("primKey = ?");
+					query.append("resourcePermission.primKey = ?");
 				}
 
 				query.append(" AND ");
 
-				query.append("roleId = ?");
+				query.append("resourcePermission.roleId = ?");
 
 				query.append(" ");
 
@@ -1930,7 +2049,7 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl
 				session = openSession();
 
 				Query q = session.createQuery(
-						"SELECT COUNT(*) FROM com.liferay.portal.model.ResourcePermission");
+						"SELECT COUNT(resourcePermission) FROM ResourcePermission resourcePermission");
 
 				count = (Long)q.uniqueResult();
 			}

@@ -467,15 +467,15 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.tasks.model.TasksReview WHERE ");
+					"SELECT tasksReview FROM TasksReview tasksReview WHERE ");
 
-				query.append("userId = ?");
+				query.append("tasksReview.userId = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("createDate ASC");
+				query.append("tasksReview.createDate ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -530,21 +530,38 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.tasks.model.TasksReview WHERE ");
+					"SELECT tasksReview FROM TasksReview tasksReview WHERE ");
 
-				query.append("userId = ?");
+				query.append("tasksReview.userId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("tasksReview.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("createDate ASC");
+					query.append("tasksReview.createDate ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -632,21 +649,38 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 			StringBuilder query = new StringBuilder();
 
 			query.append(
-				"FROM com.liferay.portlet.tasks.model.TasksReview WHERE ");
+				"SELECT tasksReview FROM TasksReview tasksReview WHERE ");
 
-			query.append("userId = ?");
+			query.append("tasksReview.userId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("tasksReview.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("createDate ASC");
+				query.append("tasksReview.createDate ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -690,15 +724,15 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.tasks.model.TasksReview WHERE ");
+					"SELECT tasksReview FROM TasksReview tasksReview WHERE ");
 
-				query.append("proposalId = ?");
+				query.append("tasksReview.proposalId = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("createDate ASC");
+				query.append("tasksReview.createDate ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -753,21 +787,38 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.tasks.model.TasksReview WHERE ");
+					"SELECT tasksReview FROM TasksReview tasksReview WHERE ");
 
-				query.append("proposalId = ?");
+				query.append("tasksReview.proposalId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("tasksReview.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("createDate ASC");
+					query.append("tasksReview.createDate ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -857,21 +908,38 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 			StringBuilder query = new StringBuilder();
 
 			query.append(
-				"FROM com.liferay.portlet.tasks.model.TasksReview WHERE ");
+				"SELECT tasksReview FROM TasksReview tasksReview WHERE ");
 
-			query.append("proposalId = ?");
+			query.append("tasksReview.proposalId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("tasksReview.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("createDate ASC");
+				query.append("tasksReview.createDate ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -952,19 +1020,19 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.tasks.model.TasksReview WHERE ");
+					"SELECT tasksReview FROM TasksReview tasksReview WHERE ");
 
-				query.append("userId = ?");
+				query.append("tasksReview.userId = ?");
 
 				query.append(" AND ");
 
-				query.append("proposalId = ?");
+				query.append("tasksReview.proposalId = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("createDate ASC");
+				query.append("tasksReview.createDate ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1038,19 +1106,19 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.tasks.model.TasksReview WHERE ");
+					"SELECT tasksReview FROM TasksReview tasksReview WHERE ");
 
-				query.append("proposalId = ?");
+				query.append("tasksReview.proposalId = ?");
 
 				query.append(" AND ");
 
-				query.append("stage = ?");
+				query.append("tasksReview.stage = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("createDate ASC");
+				query.append("tasksReview.createDate ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1107,25 +1175,42 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.tasks.model.TasksReview WHERE ");
+					"SELECT tasksReview FROM TasksReview tasksReview WHERE ");
 
-				query.append("proposalId = ?");
+				query.append("tasksReview.proposalId = ?");
 
 				query.append(" AND ");
 
-				query.append("stage = ?");
+				query.append("tasksReview.stage = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("tasksReview.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("createDate ASC");
+					query.append("tasksReview.createDate ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1223,25 +1308,42 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 			StringBuilder query = new StringBuilder();
 
 			query.append(
-				"FROM com.liferay.portlet.tasks.model.TasksReview WHERE ");
+				"SELECT tasksReview FROM TasksReview tasksReview WHERE ");
 
-			query.append("proposalId = ?");
+			query.append("tasksReview.proposalId = ?");
 
 			query.append(" AND ");
 
-			query.append("stage = ?");
+			query.append("tasksReview.stage = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("tasksReview.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("createDate ASC");
+				query.append("tasksReview.createDate ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -1290,23 +1392,23 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.tasks.model.TasksReview WHERE ");
+					"SELECT tasksReview FROM TasksReview tasksReview WHERE ");
 
-				query.append("proposalId = ?");
-
-				query.append(" AND ");
-
-				query.append("stage = ?");
+				query.append("tasksReview.proposalId = ?");
 
 				query.append(" AND ");
 
-				query.append("completed = ?");
+				query.append("tasksReview.stage = ?");
+
+				query.append(" AND ");
+
+				query.append("tasksReview.completed = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("createDate ASC");
+				query.append("tasksReview.createDate ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1367,29 +1469,46 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.tasks.model.TasksReview WHERE ");
+					"SELECT tasksReview FROM TasksReview tasksReview WHERE ");
 
-				query.append("proposalId = ?");
-
-				query.append(" AND ");
-
-				query.append("stage = ?");
+				query.append("tasksReview.proposalId = ?");
 
 				query.append(" AND ");
 
-				query.append("completed = ?");
+				query.append("tasksReview.stage = ?");
+
+				query.append(" AND ");
+
+				query.append("tasksReview.completed = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("tasksReview.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("createDate ASC");
+					query.append("tasksReview.createDate ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1498,29 +1617,46 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 			StringBuilder query = new StringBuilder();
 
 			query.append(
-				"FROM com.liferay.portlet.tasks.model.TasksReview WHERE ");
+				"SELECT tasksReview FROM TasksReview tasksReview WHERE ");
 
-			query.append("proposalId = ?");
-
-			query.append(" AND ");
-
-			query.append("stage = ?");
+			query.append("tasksReview.proposalId = ?");
 
 			query.append(" AND ");
 
-			query.append("completed = ?");
+			query.append("tasksReview.stage = ?");
+
+			query.append(" AND ");
+
+			query.append("tasksReview.completed = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("tasksReview.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("createDate ASC");
+				query.append("tasksReview.createDate ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -1571,27 +1707,27 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.tasks.model.TasksReview WHERE ");
+					"SELECT tasksReview FROM TasksReview tasksReview WHERE ");
 
-				query.append("proposalId = ?");
-
-				query.append(" AND ");
-
-				query.append("stage = ?");
+				query.append("tasksReview.proposalId = ?");
 
 				query.append(" AND ");
 
-				query.append("completed = ?");
+				query.append("tasksReview.stage = ?");
 
 				query.append(" AND ");
 
-				query.append("rejected = ?");
+				query.append("tasksReview.completed = ?");
+
+				query.append(" AND ");
+
+				query.append("tasksReview.rejected = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("createDate ASC");
+				query.append("tasksReview.createDate ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1656,33 +1792,50 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.tasks.model.TasksReview WHERE ");
+					"SELECT tasksReview FROM TasksReview tasksReview WHERE ");
 
-				query.append("proposalId = ?");
-
-				query.append(" AND ");
-
-				query.append("stage = ?");
+				query.append("tasksReview.proposalId = ?");
 
 				query.append(" AND ");
 
-				query.append("completed = ?");
+				query.append("tasksReview.stage = ?");
 
 				query.append(" AND ");
 
-				query.append("rejected = ?");
+				query.append("tasksReview.completed = ?");
+
+				query.append(" AND ");
+
+				query.append("tasksReview.rejected = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("tasksReview.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("createDate ASC");
+					query.append("tasksReview.createDate ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1799,33 +1952,50 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 			StringBuilder query = new StringBuilder();
 
 			query.append(
-				"FROM com.liferay.portlet.tasks.model.TasksReview WHERE ");
+				"SELECT tasksReview FROM TasksReview tasksReview WHERE ");
 
-			query.append("proposalId = ?");
-
-			query.append(" AND ");
-
-			query.append("stage = ?");
+			query.append("tasksReview.proposalId = ?");
 
 			query.append(" AND ");
 
-			query.append("completed = ?");
+			query.append("tasksReview.stage = ?");
 
 			query.append(" AND ");
 
-			query.append("rejected = ?");
+			query.append("tasksReview.completed = ?");
+
+			query.append(" AND ");
+
+			query.append("tasksReview.rejected = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("tasksReview.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("createDate ASC");
+				query.append("tasksReview.createDate ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -1925,18 +2095,34 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.tasks.model.TasksReview ");
+				query.append("SELECT tasksReview FROM TasksReview tasksReview ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("tasksReview.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("createDate ASC");
+					query.append("tasksReview.createDate ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -2032,11 +2218,10 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.tasks.model.TasksReview WHERE ");
+				query.append("SELECT COUNT(tasksReview) ");
+				query.append("FROM TasksReview tasksReview WHERE ");
 
-				query.append("userId = ?");
+				query.append("tasksReview.userId = ?");
 
 				query.append(" ");
 
@@ -2080,11 +2265,10 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.tasks.model.TasksReview WHERE ");
+				query.append("SELECT COUNT(tasksReview) ");
+				query.append("FROM TasksReview tasksReview WHERE ");
 
-				query.append("proposalId = ?");
+				query.append("tasksReview.proposalId = ?");
 
 				query.append(" ");
 
@@ -2131,15 +2315,14 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.tasks.model.TasksReview WHERE ");
+				query.append("SELECT COUNT(tasksReview) ");
+				query.append("FROM TasksReview tasksReview WHERE ");
 
-				query.append("userId = ?");
+				query.append("tasksReview.userId = ?");
 
 				query.append(" AND ");
 
-				query.append("proposalId = ?");
+				query.append("tasksReview.proposalId = ?");
 
 				query.append(" ");
 
@@ -2187,15 +2370,14 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.tasks.model.TasksReview WHERE ");
+				query.append("SELECT COUNT(tasksReview) ");
+				query.append("FROM TasksReview tasksReview WHERE ");
 
-				query.append("proposalId = ?");
+				query.append("tasksReview.proposalId = ?");
 
 				query.append(" AND ");
 
-				query.append("stage = ?");
+				query.append("tasksReview.stage = ?");
 
 				query.append(" ");
 
@@ -2245,19 +2427,18 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.tasks.model.TasksReview WHERE ");
+				query.append("SELECT COUNT(tasksReview) ");
+				query.append("FROM TasksReview tasksReview WHERE ");
 
-				query.append("proposalId = ?");
-
-				query.append(" AND ");
-
-				query.append("stage = ?");
+				query.append("tasksReview.proposalId = ?");
 
 				query.append(" AND ");
 
-				query.append("completed = ?");
+				query.append("tasksReview.stage = ?");
+
+				query.append(" AND ");
+
+				query.append("tasksReview.completed = ?");
 
 				query.append(" ");
 
@@ -2309,23 +2490,22 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.tasks.model.TasksReview WHERE ");
+				query.append("SELECT COUNT(tasksReview) ");
+				query.append("FROM TasksReview tasksReview WHERE ");
 
-				query.append("proposalId = ?");
-
-				query.append(" AND ");
-
-				query.append("stage = ?");
+				query.append("tasksReview.proposalId = ?");
 
 				query.append(" AND ");
 
-				query.append("completed = ?");
+				query.append("tasksReview.stage = ?");
 
 				query.append(" AND ");
 
-				query.append("rejected = ?");
+				query.append("tasksReview.completed = ?");
+
+				query.append(" AND ");
+
+				query.append("tasksReview.rejected = ?");
 
 				query.append(" ");
 
@@ -2374,7 +2554,7 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 				session = openSession();
 
 				Query q = session.createQuery(
-						"SELECT COUNT(*) FROM com.liferay.portlet.tasks.model.TasksReview");
+						"SELECT COUNT(tasksReview) FROM TasksReview tasksReview");
 
 				count = (Long)q.uniqueResult();
 			}

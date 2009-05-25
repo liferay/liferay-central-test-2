@@ -402,10 +402,9 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.messageboards.model.MBBan WHERE ");
+				query.append("SELECT mbBan FROM MBBan mbBan WHERE ");
 
-				query.append("groupId = ?");
+				query.append("mbBan.groupId = ?");
 
 				query.append(" ");
 
@@ -461,16 +460,32 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.messageboards.model.MBBan WHERE ");
+				query.append("SELECT mbBan FROM MBBan mbBan WHERE ");
 
-				query.append("groupId = ?");
+				query.append("mbBan.groupId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("mbBan.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -556,16 +571,32 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl
 
 			StringBuilder query = new StringBuilder();
 
-			query.append(
-				"FROM com.liferay.portlet.messageboards.model.MBBan WHERE ");
+			query.append("SELECT mbBan FROM MBBan mbBan WHERE ");
 
-			query.append("groupId = ?");
+			query.append("mbBan.groupId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("mbBan.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -606,10 +637,9 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.messageboards.model.MBBan WHERE ");
+				query.append("SELECT mbBan FROM MBBan mbBan WHERE ");
 
-				query.append("userId = ?");
+				query.append("mbBan.userId = ?");
 
 				query.append(" ");
 
@@ -665,16 +695,32 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.messageboards.model.MBBan WHERE ");
+				query.append("SELECT mbBan FROM MBBan mbBan WHERE ");
 
-				query.append("userId = ?");
+				query.append("mbBan.userId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("mbBan.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -760,16 +806,32 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl
 
 			StringBuilder query = new StringBuilder();
 
-			query.append(
-				"FROM com.liferay.portlet.messageboards.model.MBBan WHERE ");
+			query.append("SELECT mbBan FROM MBBan mbBan WHERE ");
 
-			query.append("userId = ?");
+			query.append("mbBan.userId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("mbBan.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -811,10 +873,9 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.messageboards.model.MBBan WHERE ");
+				query.append("SELECT mbBan FROM MBBan mbBan WHERE ");
 
-				query.append("banUserId = ?");
+				query.append("mbBan.banUserId = ?");
 
 				query.append(" ");
 
@@ -870,16 +931,32 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.messageboards.model.MBBan WHERE ");
+				query.append("SELECT mbBan FROM MBBan mbBan WHERE ");
 
-				query.append("banUserId = ?");
+				query.append("mbBan.banUserId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("mbBan.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -965,16 +1042,32 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl
 
 			StringBuilder query = new StringBuilder();
 
-			query.append(
-				"FROM com.liferay.portlet.messageboards.model.MBBan WHERE ");
+			query.append("SELECT mbBan FROM MBBan mbBan WHERE ");
 
-			query.append("banUserId = ?");
+			query.append("mbBan.banUserId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("mbBan.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -1053,14 +1146,13 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.messageboards.model.MBBan WHERE ");
+				query.append("SELECT mbBan FROM MBBan mbBan WHERE ");
 
-				query.append("groupId = ?");
+				query.append("mbBan.groupId = ?");
 
 				query.append(" AND ");
 
-				query.append("banUserId = ?");
+				query.append("mbBan.banUserId = ?");
 
 				query.append(" ");
 
@@ -1183,12 +1275,28 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.messageboards.model.MBBan ");
+				query.append("SELECT mbBan FROM MBBan mbBan ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("mbBan.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1268,11 +1376,10 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.messageboards.model.MBBan WHERE ");
+				query.append("SELECT COUNT(mbBan) ");
+				query.append("FROM MBBan mbBan WHERE ");
 
-				query.append("groupId = ?");
+				query.append("mbBan.groupId = ?");
 
 				query.append(" ");
 
@@ -1316,11 +1423,10 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.messageboards.model.MBBan WHERE ");
+				query.append("SELECT COUNT(mbBan) ");
+				query.append("FROM MBBan mbBan WHERE ");
 
-				query.append("userId = ?");
+				query.append("mbBan.userId = ?");
 
 				query.append(" ");
 
@@ -1364,11 +1470,10 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.messageboards.model.MBBan WHERE ");
+				query.append("SELECT COUNT(mbBan) ");
+				query.append("FROM MBBan mbBan WHERE ");
 
-				query.append("banUserId = ?");
+				query.append("mbBan.banUserId = ?");
 
 				query.append(" ");
 
@@ -1415,15 +1520,14 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.messageboards.model.MBBan WHERE ");
+				query.append("SELECT COUNT(mbBan) ");
+				query.append("FROM MBBan mbBan WHERE ");
 
-				query.append("groupId = ?");
+				query.append("mbBan.groupId = ?");
 
 				query.append(" AND ");
 
-				query.append("banUserId = ?");
+				query.append("mbBan.banUserId = ?");
 
 				query.append(" ");
 
@@ -1468,7 +1572,7 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl
 				session = openSession();
 
 				Query q = session.createQuery(
-						"SELECT COUNT(*) FROM com.liferay.portlet.messageboards.model.MBBan");
+						"SELECT COUNT(mbBan) FROM MBBan mbBan");
 
 				count = (Long)q.uniqueResult();
 			}

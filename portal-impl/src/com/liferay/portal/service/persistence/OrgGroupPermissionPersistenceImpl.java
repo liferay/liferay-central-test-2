@@ -366,9 +366,9 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portal.model.OrgGroupPermission WHERE ");
+					"SELECT orgGroupPermission FROM OrgGroupPermission orgGroupPermission WHERE ");
 
-				query.append("groupId = ?");
+				query.append("orgGroupPermission.id.groupId = ?");
 
 				query.append(" ");
 
@@ -425,15 +425,32 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portal.model.OrgGroupPermission WHERE ");
+					"SELECT orgGroupPermission FROM OrgGroupPermission orgGroupPermission WHERE ");
 
-				query.append("groupId = ?");
+				query.append("orgGroupPermission.id.groupId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("orgGroupPermission.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -526,15 +543,32 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl
 			StringBuilder query = new StringBuilder();
 
 			query.append(
-				"FROM com.liferay.portal.model.OrgGroupPermission WHERE ");
+				"SELECT orgGroupPermission FROM OrgGroupPermission orgGroupPermission WHERE ");
 
-			query.append("groupId = ?");
+			query.append("orgGroupPermission.id.groupId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("orgGroupPermission.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -578,9 +612,9 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portal.model.OrgGroupPermission WHERE ");
+					"SELECT orgGroupPermission FROM OrgGroupPermission orgGroupPermission WHERE ");
 
-				query.append("permissionId = ?");
+				query.append("orgGroupPermission.id.permissionId = ?");
 
 				query.append(" ");
 
@@ -637,15 +671,32 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portal.model.OrgGroupPermission WHERE ");
+					"SELECT orgGroupPermission FROM OrgGroupPermission orgGroupPermission WHERE ");
 
-				query.append("permissionId = ?");
+				query.append("orgGroupPermission.id.permissionId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("orgGroupPermission.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -739,15 +790,32 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl
 			StringBuilder query = new StringBuilder();
 
 			query.append(
-				"FROM com.liferay.portal.model.OrgGroupPermission WHERE ");
+				"SELECT orgGroupPermission FROM OrgGroupPermission orgGroupPermission WHERE ");
 
-			query.append("permissionId = ?");
+			query.append("orgGroupPermission.id.permissionId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("orgGroupPermission.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -842,11 +910,28 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portal.model.OrgGroupPermission ");
+					"SELECT orgGroupPermission FROM OrgGroupPermission orgGroupPermission ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("orgGroupPermission.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -915,11 +1000,11 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
+				query.append("SELECT COUNT(orgGroupPermission) ");
 				query.append(
-					"FROM com.liferay.portal.model.OrgGroupPermission WHERE ");
+					"FROM OrgGroupPermission orgGroupPermission WHERE ");
 
-				query.append("groupId = ?");
+				query.append("orgGroupPermission.id.groupId = ?");
 
 				query.append(" ");
 
@@ -963,11 +1048,11 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
+				query.append("SELECT COUNT(orgGroupPermission) ");
 				query.append(
-					"FROM com.liferay.portal.model.OrgGroupPermission WHERE ");
+					"FROM OrgGroupPermission orgGroupPermission WHERE ");
 
-				query.append("permissionId = ?");
+				query.append("orgGroupPermission.id.permissionId = ?");
 
 				query.append(" ");
 
@@ -1010,7 +1095,7 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl
 				session = openSession();
 
 				Query q = session.createQuery(
-						"SELECT COUNT(*) FROM com.liferay.portal.model.OrgGroupPermission");
+						"SELECT COUNT(orgGroupPermission) FROM OrgGroupPermission orgGroupPermission");
 
 				count = (Long)q.uniqueResult();
 			}

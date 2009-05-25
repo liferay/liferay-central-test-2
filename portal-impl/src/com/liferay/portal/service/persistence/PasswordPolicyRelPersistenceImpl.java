@@ -464,13 +464,13 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portal.model.PasswordPolicyRel WHERE ");
+					"SELECT passwordPolicyRel FROM PasswordPolicyRel passwordPolicyRel WHERE ");
 
-				query.append("classNameId = ?");
+				query.append("passwordPolicyRel.classNameId = ?");
 
 				query.append(" AND ");
 
-				query.append("classPK = ?");
+				query.append("passwordPolicyRel.classPK = ?");
 
 				query.append(" ");
 
@@ -588,17 +588,17 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portal.model.PasswordPolicyRel WHERE ");
+					"SELECT passwordPolicyRel FROM PasswordPolicyRel passwordPolicyRel WHERE ");
 
-				query.append("passwordPolicyId = ?");
-
-				query.append(" AND ");
-
-				query.append("classNameId = ?");
+				query.append("passwordPolicyRel.passwordPolicyId = ?");
 
 				query.append(" AND ");
 
-				query.append("classPK = ?");
+				query.append("passwordPolicyRel.classNameId = ?");
+
+				query.append(" AND ");
+
+				query.append("passwordPolicyRel.classPK = ?");
 
 				query.append(" ");
 
@@ -725,11 +725,29 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.PasswordPolicyRel ");
+				query.append(
+					"SELECT passwordPolicyRel FROM PasswordPolicyRel passwordPolicyRel ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("passwordPolicyRel.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -802,15 +820,14 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portal.model.PasswordPolicyRel WHERE ");
+				query.append("SELECT COUNT(passwordPolicyRel) ");
+				query.append("FROM PasswordPolicyRel passwordPolicyRel WHERE ");
 
-				query.append("classNameId = ?");
+				query.append("passwordPolicyRel.classNameId = ?");
 
 				query.append(" AND ");
 
-				query.append("classPK = ?");
+				query.append("passwordPolicyRel.classPK = ?");
 
 				query.append(" ");
 
@@ -860,19 +877,18 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portal.model.PasswordPolicyRel WHERE ");
+				query.append("SELECT COUNT(passwordPolicyRel) ");
+				query.append("FROM PasswordPolicyRel passwordPolicyRel WHERE ");
 
-				query.append("passwordPolicyId = ?");
-
-				query.append(" AND ");
-
-				query.append("classNameId = ?");
+				query.append("passwordPolicyRel.passwordPolicyId = ?");
 
 				query.append(" AND ");
 
-				query.append("classPK = ?");
+				query.append("passwordPolicyRel.classNameId = ?");
+
+				query.append(" AND ");
+
+				query.append("passwordPolicyRel.classPK = ?");
 
 				query.append(" ");
 
@@ -919,7 +935,7 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl
 				session = openSession();
 
 				Query q = session.createQuery(
-						"SELECT COUNT(*) FROM com.liferay.portal.model.PasswordPolicyRel");
+						"SELECT COUNT(passwordPolicyRel) FROM PasswordPolicyRel passwordPolicyRel");
 
 				count = (Long)q.uniqueResult();
 			}

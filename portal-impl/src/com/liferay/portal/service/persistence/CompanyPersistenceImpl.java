@@ -473,13 +473,13 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.Company WHERE ");
+				query.append("SELECT company FROM Company company WHERE ");
 
 				if (webId == null) {
-					query.append("webId IS NULL");
+					query.append("company.webId IS NULL");
 				}
 				else {
-					query.append("webId = ?");
+					query.append("company.webId = ?");
 				}
 
 				query.append(" ");
@@ -585,13 +585,13 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.Company WHERE ");
+				query.append("SELECT company FROM Company company WHERE ");
 
 				if (virtualHost == null) {
-					query.append("virtualHost IS NULL");
+					query.append("company.virtualHost IS NULL");
 				}
 				else {
-					query.append("virtualHost = ?");
+					query.append("company.virtualHost = ?");
 				}
 
 				query.append(" ");
@@ -696,13 +696,13 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.Company WHERE ");
+				query.append("SELECT company FROM Company company WHERE ");
 
 				if (mx == null) {
-					query.append("mx IS NULL");
+					query.append("company.mx IS NULL");
 				}
 				else {
-					query.append("mx = ?");
+					query.append("company.mx = ?");
 				}
 
 				query.append(" ");
@@ -807,9 +807,9 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.Company WHERE ");
+				query.append("SELECT company FROM Company company WHERE ");
 
-				query.append("logoId = ?");
+				query.append("company.logoId = ?");
 
 				query.append(" ");
 
@@ -878,9 +878,9 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.Company WHERE ");
+				query.append("SELECT company FROM Company company WHERE ");
 
-				query.append("system = ?");
+				query.append("company.system = ?");
 
 				query.append(" ");
 
@@ -936,15 +936,32 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.Company WHERE ");
+				query.append("SELECT company FROM Company company WHERE ");
 
-				query.append("system = ?");
+				query.append("company.system = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("company.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1030,15 +1047,32 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl
 
 			StringBuilder query = new StringBuilder();
 
-			query.append("FROM com.liferay.portal.model.Company WHERE ");
+			query.append("SELECT company FROM Company company WHERE ");
 
-			query.append("system = ?");
+			query.append("company.system = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("company.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -1130,11 +1164,28 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.Company ");
+				query.append("SELECT company FROM Company company ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("company.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1223,14 +1274,14 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append("FROM com.liferay.portal.model.Company WHERE ");
+				query.append("SELECT COUNT(company) ");
+				query.append("FROM Company company WHERE ");
 
 				if (webId == null) {
-					query.append("webId IS NULL");
+					query.append("company.webId IS NULL");
 				}
 				else {
-					query.append("webId = ?");
+					query.append("company.webId = ?");
 				}
 
 				query.append(" ");
@@ -1277,14 +1328,14 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append("FROM com.liferay.portal.model.Company WHERE ");
+				query.append("SELECT COUNT(company) ");
+				query.append("FROM Company company WHERE ");
 
 				if (virtualHost == null) {
-					query.append("virtualHost IS NULL");
+					query.append("company.virtualHost IS NULL");
 				}
 				else {
-					query.append("virtualHost = ?");
+					query.append("company.virtualHost = ?");
 				}
 
 				query.append(" ");
@@ -1331,14 +1382,14 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append("FROM com.liferay.portal.model.Company WHERE ");
+				query.append("SELECT COUNT(company) ");
+				query.append("FROM Company company WHERE ");
 
 				if (mx == null) {
-					query.append("mx IS NULL");
+					query.append("company.mx IS NULL");
 				}
 				else {
-					query.append("mx = ?");
+					query.append("company.mx = ?");
 				}
 
 				query.append(" ");
@@ -1385,10 +1436,10 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append("FROM com.liferay.portal.model.Company WHERE ");
+				query.append("SELECT COUNT(company) ");
+				query.append("FROM Company company WHERE ");
 
-				query.append("logoId = ?");
+				query.append("company.logoId = ?");
 
 				query.append(" ");
 
@@ -1432,10 +1483,10 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append("FROM com.liferay.portal.model.Company WHERE ");
+				query.append("SELECT COUNT(company) ");
+				query.append("FROM Company company WHERE ");
 
-				query.append("system = ?");
+				query.append("company.system = ?");
 
 				query.append(" ");
 
@@ -1478,7 +1529,7 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl
 				session = openSession();
 
 				Query q = session.createQuery(
-						"SELECT COUNT(*) FROM com.liferay.portal.model.Company");
+						"SELECT COUNT(company) FROM Company company");
 
 				count = (Long)q.uniqueResult();
 			}

@@ -496,22 +496,21 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.imagegallery.model.IGFolder WHERE ");
+				query.append("SELECT igFolder FROM IGFolder igFolder WHERE ");
 
 				if (uuid == null) {
-					query.append("uuid_ IS NULL");
+					query.append("igFolder.uuid IS NULL");
 				}
 				else {
-					query.append("uuid_ = ?");
+					query.append("igFolder.uuid = ?");
 				}
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("folderId ASC, ");
-				query.append("name ASC");
+				query.append("igFolder.folderId ASC, ");
+				query.append("igFolder.name ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -567,28 +566,44 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.imagegallery.model.IGFolder WHERE ");
+				query.append("SELECT igFolder FROM IGFolder igFolder WHERE ");
 
 				if (uuid == null) {
-					query.append("uuid_ IS NULL");
+					query.append("igFolder.uuid IS NULL");
 				}
 				else {
-					query.append("uuid_ = ?");
+					query.append("igFolder.uuid = ?");
 				}
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("igFolder.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("folderId ASC, ");
-					query.append("name ASC");
+					query.append("igFolder.folderId ASC, ");
+					query.append("igFolder.name ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -677,28 +692,44 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl
 
 			StringBuilder query = new StringBuilder();
 
-			query.append(
-				"FROM com.liferay.portlet.imagegallery.model.IGFolder WHERE ");
+			query.append("SELECT igFolder FROM IGFolder igFolder WHERE ");
 
 			if (uuid == null) {
-				query.append("uuid_ IS NULL");
+				query.append("igFolder.uuid IS NULL");
 			}
 			else {
-				query.append("uuid_ = ?");
+				query.append("igFolder.uuid = ?");
 			}
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("igFolder.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("folderId ASC, ");
-				query.append("name ASC");
+				query.append("igFolder.folderId ASC, ");
+				query.append("igFolder.name ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -777,26 +808,25 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.imagegallery.model.IGFolder WHERE ");
+				query.append("SELECT igFolder FROM IGFolder igFolder WHERE ");
 
 				if (uuid == null) {
-					query.append("uuid_ IS NULL");
+					query.append("igFolder.uuid IS NULL");
 				}
 				else {
-					query.append("uuid_ = ?");
+					query.append("igFolder.uuid = ?");
 				}
 
 				query.append(" AND ");
 
-				query.append("groupId = ?");
+				query.append("igFolder.groupId = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("folderId ASC, ");
-				query.append("name ASC");
+				query.append("igFolder.folderId ASC, ");
+				query.append("igFolder.name ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -869,17 +899,16 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.imagegallery.model.IGFolder WHERE ");
+				query.append("SELECT igFolder FROM IGFolder igFolder WHERE ");
 
-				query.append("groupId = ?");
+				query.append("igFolder.groupId = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("folderId ASC, ");
-				query.append("name ASC");
+				query.append("igFolder.folderId ASC, ");
+				query.append("igFolder.name ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -933,23 +962,39 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.imagegallery.model.IGFolder WHERE ");
+				query.append("SELECT igFolder FROM IGFolder igFolder WHERE ");
 
-				query.append("groupId = ?");
+				query.append("igFolder.groupId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("igFolder.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("folderId ASC, ");
-					query.append("name ASC");
+					query.append("igFolder.folderId ASC, ");
+					query.append("igFolder.name ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1036,23 +1081,39 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl
 
 			StringBuilder query = new StringBuilder();
 
-			query.append(
-				"FROM com.liferay.portlet.imagegallery.model.IGFolder WHERE ");
+			query.append("SELECT igFolder FROM IGFolder igFolder WHERE ");
 
-			query.append("groupId = ?");
+			query.append("igFolder.groupId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("igFolder.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("folderId ASC, ");
-				query.append("name ASC");
+				query.append("igFolder.folderId ASC, ");
+				query.append("igFolder.name ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -1094,17 +1155,16 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.imagegallery.model.IGFolder WHERE ");
+				query.append("SELECT igFolder FROM IGFolder igFolder WHERE ");
 
-				query.append("companyId = ?");
+				query.append("igFolder.companyId = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("folderId ASC, ");
-				query.append("name ASC");
+				query.append("igFolder.folderId ASC, ");
+				query.append("igFolder.name ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1158,23 +1218,39 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.imagegallery.model.IGFolder WHERE ");
+				query.append("SELECT igFolder FROM IGFolder igFolder WHERE ");
 
-				query.append("companyId = ?");
+				query.append("igFolder.companyId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("igFolder.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("folderId ASC, ");
-					query.append("name ASC");
+					query.append("igFolder.folderId ASC, ");
+					query.append("igFolder.name ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1262,23 +1338,39 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl
 
 			StringBuilder query = new StringBuilder();
 
-			query.append(
-				"FROM com.liferay.portlet.imagegallery.model.IGFolder WHERE ");
+			query.append("SELECT igFolder FROM IGFolder igFolder WHERE ");
 
-			query.append("companyId = ?");
+			query.append("igFolder.companyId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("igFolder.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("folderId ASC, ");
-				query.append("name ASC");
+				query.append("igFolder.folderId ASC, ");
+				query.append("igFolder.name ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -1322,21 +1414,20 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.imagegallery.model.IGFolder WHERE ");
+				query.append("SELECT igFolder FROM IGFolder igFolder WHERE ");
 
-				query.append("groupId = ?");
+				query.append("igFolder.groupId = ?");
 
 				query.append(" AND ");
 
-				query.append("parentFolderId = ?");
+				query.append("igFolder.parentFolderId = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("folderId ASC, ");
-				query.append("name ASC");
+				query.append("igFolder.folderId ASC, ");
+				query.append("igFolder.name ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1392,27 +1483,43 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.imagegallery.model.IGFolder WHERE ");
+				query.append("SELECT igFolder FROM IGFolder igFolder WHERE ");
 
-				query.append("groupId = ?");
+				query.append("igFolder.groupId = ?");
 
 				query.append(" AND ");
 
-				query.append("parentFolderId = ?");
+				query.append("igFolder.parentFolderId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("igFolder.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("folderId ASC, ");
-					query.append("name ASC");
+					query.append("igFolder.folderId ASC, ");
+					query.append("igFolder.name ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1509,27 +1616,43 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl
 
 			StringBuilder query = new StringBuilder();
 
-			query.append(
-				"FROM com.liferay.portlet.imagegallery.model.IGFolder WHERE ");
+			query.append("SELECT igFolder FROM IGFolder igFolder WHERE ");
 
-			query.append("groupId = ?");
+			query.append("igFolder.groupId = ?");
 
 			query.append(" AND ");
 
-			query.append("parentFolderId = ?");
+			query.append("igFolder.parentFolderId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("igFolder.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("folderId ASC, ");
-				query.append("name ASC");
+				query.append("igFolder.folderId ASC, ");
+				query.append("igFolder.name ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -1615,30 +1738,29 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.imagegallery.model.IGFolder WHERE ");
+				query.append("SELECT igFolder FROM IGFolder igFolder WHERE ");
 
-				query.append("groupId = ?");
+				query.append("igFolder.groupId = ?");
 
 				query.append(" AND ");
 
-				query.append("parentFolderId = ?");
+				query.append("igFolder.parentFolderId = ?");
 
 				query.append(" AND ");
 
 				if (name == null) {
-					query.append("name IS NULL");
+					query.append("igFolder.name IS NULL");
 				}
 				else {
-					query.append("name = ?");
+					query.append("igFolder.name = ?");
 				}
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("folderId ASC, ");
-				query.append("name ASC");
+				query.append("igFolder.folderId ASC, ");
+				query.append("igFolder.name ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1765,19 +1887,35 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.imagegallery.model.IGFolder ");
+				query.append("SELECT igFolder FROM IGFolder igFolder ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("igFolder.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("folderId ASC, ");
-					query.append("name ASC");
+					query.append("igFolder.folderId ASC, ");
+					query.append("igFolder.name ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1871,15 +2009,14 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.imagegallery.model.IGFolder WHERE ");
+				query.append("SELECT COUNT(igFolder) ");
+				query.append("FROM IGFolder igFolder WHERE ");
 
 				if (uuid == null) {
-					query.append("uuid_ IS NULL");
+					query.append("igFolder.uuid IS NULL");
 				}
 				else {
-					query.append("uuid_ = ?");
+					query.append("igFolder.uuid = ?");
 				}
 
 				query.append(" ");
@@ -1927,20 +2064,19 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.imagegallery.model.IGFolder WHERE ");
+				query.append("SELECT COUNT(igFolder) ");
+				query.append("FROM IGFolder igFolder WHERE ");
 
 				if (uuid == null) {
-					query.append("uuid_ IS NULL");
+					query.append("igFolder.uuid IS NULL");
 				}
 				else {
-					query.append("uuid_ = ?");
+					query.append("igFolder.uuid = ?");
 				}
 
 				query.append(" AND ");
 
-				query.append("groupId = ?");
+				query.append("igFolder.groupId = ?");
 
 				query.append(" ");
 
@@ -1988,11 +2124,10 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.imagegallery.model.IGFolder WHERE ");
+				query.append("SELECT COUNT(igFolder) ");
+				query.append("FROM IGFolder igFolder WHERE ");
 
-				query.append("groupId = ?");
+				query.append("igFolder.groupId = ?");
 
 				query.append(" ");
 
@@ -2036,11 +2171,10 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.imagegallery.model.IGFolder WHERE ");
+				query.append("SELECT COUNT(igFolder) ");
+				query.append("FROM IGFolder igFolder WHERE ");
 
-				query.append("companyId = ?");
+				query.append("igFolder.companyId = ?");
 
 				query.append(" ");
 
@@ -2087,15 +2221,14 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.imagegallery.model.IGFolder WHERE ");
+				query.append("SELECT COUNT(igFolder) ");
+				query.append("FROM IGFolder igFolder WHERE ");
 
-				query.append("groupId = ?");
+				query.append("igFolder.groupId = ?");
 
 				query.append(" AND ");
 
-				query.append("parentFolderId = ?");
+				query.append("igFolder.parentFolderId = ?");
 
 				query.append(" ");
 
@@ -2146,23 +2279,22 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.imagegallery.model.IGFolder WHERE ");
+				query.append("SELECT COUNT(igFolder) ");
+				query.append("FROM IGFolder igFolder WHERE ");
 
-				query.append("groupId = ?");
+				query.append("igFolder.groupId = ?");
 
 				query.append(" AND ");
 
-				query.append("parentFolderId = ?");
+				query.append("igFolder.parentFolderId = ?");
 
 				query.append(" AND ");
 
 				if (name == null) {
-					query.append("name IS NULL");
+					query.append("igFolder.name IS NULL");
 				}
 				else {
-					query.append("name = ?");
+					query.append("igFolder.name = ?");
 				}
 
 				query.append(" ");
@@ -2212,7 +2344,7 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl
 				session = openSession();
 
 				Query q = session.createQuery(
-						"SELECT COUNT(*) FROM com.liferay.portlet.imagegallery.model.IGFolder");
+						"SELECT COUNT(igFolder) FROM IGFolder igFolder");
 
 				count = (Long)q.uniqueResult();
 			}

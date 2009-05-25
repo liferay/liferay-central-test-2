@@ -364,15 +364,15 @@ public class RegionPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.Region WHERE ");
+				query.append("SELECT region FROM Region region WHERE ");
 
-				query.append("countryId = ?");
+				query.append("region.countryId = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("name ASC");
+				query.append("region.name ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -426,21 +426,38 @@ public class RegionPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.Region WHERE ");
+				query.append("SELECT region FROM Region region WHERE ");
 
-				query.append("countryId = ?");
+				query.append("region.countryId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("region.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("name ASC");
+					query.append("region.name ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -526,21 +543,38 @@ public class RegionPersistenceImpl extends BasePersistenceImpl
 
 			StringBuilder query = new StringBuilder();
 
-			query.append("FROM com.liferay.portal.model.Region WHERE ");
+			query.append("SELECT region FROM Region region WHERE ");
 
-			query.append("countryId = ?");
+			query.append("region.countryId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("region.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("name ASC");
+				query.append("region.name ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -581,15 +615,15 @@ public class RegionPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.Region WHERE ");
+				query.append("SELECT region FROM Region region WHERE ");
 
-				query.append("active_ = ?");
+				query.append("region.active = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("name ASC");
+				query.append("region.name ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -643,21 +677,38 @@ public class RegionPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.Region WHERE ");
+				query.append("SELECT region FROM Region region WHERE ");
 
-				query.append("active_ = ?");
+				query.append("region.active = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("region.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("name ASC");
+					query.append("region.name ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -743,21 +794,38 @@ public class RegionPersistenceImpl extends BasePersistenceImpl
 
 			StringBuilder query = new StringBuilder();
 
-			query.append("FROM com.liferay.portal.model.Region WHERE ");
+			query.append("SELECT region FROM Region region WHERE ");
 
-			query.append("active_ = ?");
+			query.append("region.active = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("region.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("name ASC");
+				query.append("region.name ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -801,19 +869,19 @@ public class RegionPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.Region WHERE ");
+				query.append("SELECT region FROM Region region WHERE ");
 
-				query.append("countryId = ?");
+				query.append("region.countryId = ?");
 
 				query.append(" AND ");
 
-				query.append("active_ = ?");
+				query.append("region.active = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("name ASC");
+				query.append("region.name ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -869,25 +937,42 @@ public class RegionPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.Region WHERE ");
+				query.append("SELECT region FROM Region region WHERE ");
 
-				query.append("countryId = ?");
+				query.append("region.countryId = ?");
 
 				query.append(" AND ");
 
-				query.append("active_ = ?");
+				query.append("region.active = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("region.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("name ASC");
+					query.append("region.name ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -982,25 +1067,42 @@ public class RegionPersistenceImpl extends BasePersistenceImpl
 
 			StringBuilder query = new StringBuilder();
 
-			query.append("FROM com.liferay.portal.model.Region WHERE ");
+			query.append("SELECT region FROM Region region WHERE ");
 
-			query.append("countryId = ?");
+			query.append("region.countryId = ?");
 
 			query.append(" AND ");
 
-			query.append("active_ = ?");
+			query.append("region.active = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("region.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("name ASC");
+				query.append("region.name ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -1094,17 +1196,34 @@ public class RegionPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.Region ");
+				query.append("SELECT region FROM Region region ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("region.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("name ASC");
+					query.append("region.name ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1178,10 +1297,10 @@ public class RegionPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append("FROM com.liferay.portal.model.Region WHERE ");
+				query.append("SELECT COUNT(region) ");
+				query.append("FROM Region region WHERE ");
 
-				query.append("countryId = ?");
+				query.append("region.countryId = ?");
 
 				query.append(" ");
 
@@ -1225,10 +1344,10 @@ public class RegionPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append("FROM com.liferay.portal.model.Region WHERE ");
+				query.append("SELECT COUNT(region) ");
+				query.append("FROM Region region WHERE ");
 
-				query.append("active_ = ?");
+				query.append("region.active = ?");
 
 				query.append(" ");
 
@@ -1275,14 +1394,14 @@ public class RegionPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append("FROM com.liferay.portal.model.Region WHERE ");
+				query.append("SELECT COUNT(region) ");
+				query.append("FROM Region region WHERE ");
 
-				query.append("countryId = ?");
+				query.append("region.countryId = ?");
 
 				query.append(" AND ");
 
-				query.append("active_ = ?");
+				query.append("region.active = ?");
 
 				query.append(" ");
 
@@ -1327,7 +1446,7 @@ public class RegionPersistenceImpl extends BasePersistenceImpl
 				session = openSession();
 
 				Query q = session.createQuery(
-						"SELECT COUNT(*) FROM com.liferay.portal.model.Region");
+						"SELECT COUNT(region) FROM Region region");
 
 				count = (Long)q.uniqueResult();
 			}

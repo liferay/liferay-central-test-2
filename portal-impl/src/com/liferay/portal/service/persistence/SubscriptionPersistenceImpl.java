@@ -444,9 +444,9 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portal.model.Subscription WHERE ");
+					"SELECT subscription FROM Subscription subscription WHERE ");
 
-				query.append("userId = ?");
+				query.append("subscription.userId = ?");
 
 				query.append(" ");
 
@@ -503,15 +503,32 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portal.model.Subscription WHERE ");
+					"SELECT subscription FROM Subscription subscription WHERE ");
 
-				query.append("userId = ?");
+				query.append("subscription.userId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("subscription.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -599,15 +616,33 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl
 
 			StringBuilder query = new StringBuilder();
 
-			query.append("FROM com.liferay.portal.model.Subscription WHERE ");
+			query.append(
+				"SELECT subscription FROM Subscription subscription WHERE ");
 
-			query.append("userId = ?");
+			query.append("subscription.userId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("subscription.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -653,13 +688,13 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portal.model.Subscription WHERE ");
+					"SELECT subscription FROM Subscription subscription WHERE ");
 
-				query.append("userId = ?");
+				query.append("subscription.userId = ?");
 
 				query.append(" AND ");
 
-				query.append("classNameId = ?");
+				query.append("subscription.classNameId = ?");
 
 				query.append(" ");
 
@@ -718,19 +753,36 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portal.model.Subscription WHERE ");
+					"SELECT subscription FROM Subscription subscription WHERE ");
 
-				query.append("userId = ?");
+				query.append("subscription.userId = ?");
 
 				query.append(" AND ");
 
-				query.append("classNameId = ?");
+				query.append("subscription.classNameId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("subscription.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -829,19 +881,37 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl
 
 			StringBuilder query = new StringBuilder();
 
-			query.append("FROM com.liferay.portal.model.Subscription WHERE ");
+			query.append(
+				"SELECT subscription FROM Subscription subscription WHERE ");
 
-			query.append("userId = ?");
+			query.append("subscription.userId = ?");
 
 			query.append(" AND ");
 
-			query.append("classNameId = ?");
+			query.append("subscription.classNameId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("subscription.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -889,17 +959,17 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portal.model.Subscription WHERE ");
+					"SELECT subscription FROM Subscription subscription WHERE ");
 
-				query.append("companyId = ?");
-
-				query.append(" AND ");
-
-				query.append("classNameId = ?");
+				query.append("subscription.companyId = ?");
 
 				query.append(" AND ");
 
-				query.append("classPK = ?");
+				query.append("subscription.classNameId = ?");
+
+				query.append(" AND ");
+
+				query.append("subscription.classPK = ?");
 
 				query.append(" ");
 
@@ -961,23 +1031,40 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portal.model.Subscription WHERE ");
+					"SELECT subscription FROM Subscription subscription WHERE ");
 
-				query.append("companyId = ?");
-
-				query.append(" AND ");
-
-				query.append("classNameId = ?");
+				query.append("subscription.companyId = ?");
 
 				query.append(" AND ");
 
-				query.append("classPK = ?");
+				query.append("subscription.classNameId = ?");
+
+				query.append(" AND ");
+
+				query.append("subscription.classPK = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("subscription.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1085,23 +1172,41 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl
 
 			StringBuilder query = new StringBuilder();
 
-			query.append("FROM com.liferay.portal.model.Subscription WHERE ");
+			query.append(
+				"SELECT subscription FROM Subscription subscription WHERE ");
 
-			query.append("companyId = ?");
-
-			query.append(" AND ");
-
-			query.append("classNameId = ?");
+			query.append("subscription.companyId = ?");
 
 			query.append(" AND ");
 
-			query.append("classPK = ?");
+			query.append("subscription.classNameId = ?");
+
+			query.append(" AND ");
+
+			query.append("subscription.classPK = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("subscription.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -1196,21 +1301,21 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portal.model.Subscription WHERE ");
+					"SELECT subscription FROM Subscription subscription WHERE ");
 
-				query.append("companyId = ?");
-
-				query.append(" AND ");
-
-				query.append("userId = ?");
+				query.append("subscription.companyId = ?");
 
 				query.append(" AND ");
 
-				query.append("classNameId = ?");
+				query.append("subscription.userId = ?");
 
 				query.append(" AND ");
 
-				query.append("classPK = ?");
+				query.append("subscription.classNameId = ?");
+
+				query.append(" AND ");
+
+				query.append("subscription.classPK = ?");
 
 				query.append(" ");
 
@@ -1340,11 +1445,29 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.Subscription ");
+				query.append(
+					"SELECT subscription FROM Subscription subscription ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("subscription.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1428,11 +1551,10 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portal.model.Subscription WHERE ");
+				query.append("SELECT COUNT(subscription) ");
+				query.append("FROM Subscription subscription WHERE ");
 
-				query.append("userId = ?");
+				query.append("subscription.userId = ?");
 
 				query.append(" ");
 
@@ -1479,15 +1601,14 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portal.model.Subscription WHERE ");
+				query.append("SELECT COUNT(subscription) ");
+				query.append("FROM Subscription subscription WHERE ");
 
-				query.append("userId = ?");
+				query.append("subscription.userId = ?");
 
 				query.append(" AND ");
 
-				query.append("classNameId = ?");
+				query.append("subscription.classNameId = ?");
 
 				query.append(" ");
 
@@ -1536,19 +1657,18 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portal.model.Subscription WHERE ");
+				query.append("SELECT COUNT(subscription) ");
+				query.append("FROM Subscription subscription WHERE ");
 
-				query.append("companyId = ?");
-
-				query.append(" AND ");
-
-				query.append("classNameId = ?");
+				query.append("subscription.companyId = ?");
 
 				query.append(" AND ");
 
-				query.append("classPK = ?");
+				query.append("subscription.classNameId = ?");
+
+				query.append(" AND ");
+
+				query.append("subscription.classPK = ?");
 
 				query.append(" ");
 
@@ -1600,23 +1720,22 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portal.model.Subscription WHERE ");
+				query.append("SELECT COUNT(subscription) ");
+				query.append("FROM Subscription subscription WHERE ");
 
-				query.append("companyId = ?");
-
-				query.append(" AND ");
-
-				query.append("userId = ?");
+				query.append("subscription.companyId = ?");
 
 				query.append(" AND ");
 
-				query.append("classNameId = ?");
+				query.append("subscription.userId = ?");
 
 				query.append(" AND ");
 
-				query.append("classPK = ?");
+				query.append("subscription.classNameId = ?");
+
+				query.append(" AND ");
+
+				query.append("subscription.classPK = ?");
 
 				query.append(" ");
 
@@ -1665,7 +1784,7 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl
 				session = openSession();
 
 				Query q = session.createQuery(
-						"SELECT COUNT(*) FROM com.liferay.portal.model.Subscription");
+						"SELECT COUNT(subscription) FROM Subscription subscription");
 
 				count = (Long)q.uniqueResult();
 			}

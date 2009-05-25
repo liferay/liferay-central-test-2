@@ -409,9 +409,9 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.LayoutSet WHERE ");
+				query.append("SELECT layoutSet FROM LayoutSet layoutSet WHERE ");
 
-				query.append("groupId = ?");
+				query.append("layoutSet.groupId = ?");
 
 				query.append(" ");
 
@@ -467,15 +467,32 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.LayoutSet WHERE ");
+				query.append("SELECT layoutSet FROM LayoutSet layoutSet WHERE ");
 
-				query.append("groupId = ?");
+				query.append("layoutSet.groupId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("layoutSet.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -563,15 +580,32 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl
 
 			StringBuilder query = new StringBuilder();
 
-			query.append("FROM com.liferay.portal.model.LayoutSet WHERE ");
+			query.append("SELECT layoutSet FROM LayoutSet layoutSet WHERE ");
 
-			query.append("groupId = ?");
+			query.append("layoutSet.groupId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("layoutSet.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -646,13 +680,13 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.LayoutSet WHERE ");
+				query.append("SELECT layoutSet FROM LayoutSet layoutSet WHERE ");
 
 				if (virtualHost == null) {
-					query.append("virtualHost IS NULL");
+					query.append("layoutSet.virtualHost IS NULL");
 				}
 				else {
-					query.append("virtualHost = ?");
+					query.append("layoutSet.virtualHost = ?");
 				}
 
 				query.append(" ");
@@ -763,13 +797,13 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.LayoutSet WHERE ");
+				query.append("SELECT layoutSet FROM LayoutSet layoutSet WHERE ");
 
-				query.append("groupId = ?");
+				query.append("layoutSet.groupId = ?");
 
 				query.append(" AND ");
 
-				query.append("privateLayout = ?");
+				query.append("layoutSet.privateLayout = ?");
 
 				query.append(" ");
 
@@ -893,11 +927,28 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.LayoutSet ");
+				query.append("SELECT layoutSet FROM LayoutSet layoutSet ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("layoutSet.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -972,10 +1023,10 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append("FROM com.liferay.portal.model.LayoutSet WHERE ");
+				query.append("SELECT COUNT(layoutSet) ");
+				query.append("FROM LayoutSet layoutSet WHERE ");
 
-				query.append("groupId = ?");
+				query.append("layoutSet.groupId = ?");
 
 				query.append(" ");
 
@@ -1019,14 +1070,14 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append("FROM com.liferay.portal.model.LayoutSet WHERE ");
+				query.append("SELECT COUNT(layoutSet) ");
+				query.append("FROM LayoutSet layoutSet WHERE ");
 
 				if (virtualHost == null) {
-					query.append("virtualHost IS NULL");
+					query.append("layoutSet.virtualHost IS NULL");
 				}
 				else {
-					query.append("virtualHost = ?");
+					query.append("layoutSet.virtualHost = ?");
 				}
 
 				query.append(" ");
@@ -1076,14 +1127,14 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append("FROM com.liferay.portal.model.LayoutSet WHERE ");
+				query.append("SELECT COUNT(layoutSet) ");
+				query.append("FROM LayoutSet layoutSet WHERE ");
 
-				query.append("groupId = ?");
+				query.append("layoutSet.groupId = ?");
 
 				query.append(" AND ");
 
-				query.append("privateLayout = ?");
+				query.append("layoutSet.privateLayout = ?");
 
 				query.append(" ");
 
@@ -1128,7 +1179,7 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl
 				session = openSession();
 
 				Query q = session.createQuery(
-						"SELECT COUNT(*) FROM com.liferay.portal.model.LayoutSet");
+						"SELECT COUNT(layoutSet) FROM LayoutSet layoutSet");
 
 				count = (Long)q.uniqueResult();
 			}

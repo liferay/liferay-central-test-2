@@ -367,16 +367,16 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.shopping.model.ShoppingCategory WHERE ");
+					"SELECT shoppingCategory FROM ShoppingCategory shoppingCategory WHERE ");
 
-				query.append("groupId = ?");
+				query.append("shoppingCategory.groupId = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("parentCategoryId ASC, ");
-				query.append("name ASC");
+				query.append("shoppingCategory.parentCategoryId ASC, ");
+				query.append("shoppingCategory.name ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -431,22 +431,39 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.shopping.model.ShoppingCategory WHERE ");
+					"SELECT shoppingCategory FROM ShoppingCategory shoppingCategory WHERE ");
 
-				query.append("groupId = ?");
+				query.append("shoppingCategory.groupId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("shoppingCategory.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("parentCategoryId ASC, ");
-					query.append("name ASC");
+					query.append("shoppingCategory.parentCategoryId ASC, ");
+					query.append("shoppingCategory.name ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -536,22 +553,39 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistenceImpl
 			StringBuilder query = new StringBuilder();
 
 			query.append(
-				"FROM com.liferay.portlet.shopping.model.ShoppingCategory WHERE ");
+				"SELECT shoppingCategory FROM ShoppingCategory shoppingCategory WHERE ");
 
-			query.append("groupId = ?");
+			query.append("shoppingCategory.groupId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("shoppingCategory.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("parentCategoryId ASC, ");
-				query.append("name ASC");
+				query.append("shoppingCategory.parentCategoryId ASC, ");
+				query.append("shoppingCategory.name ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -597,20 +631,20 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.shopping.model.ShoppingCategory WHERE ");
+					"SELECT shoppingCategory FROM ShoppingCategory shoppingCategory WHERE ");
 
-				query.append("groupId = ?");
+				query.append("shoppingCategory.groupId = ?");
 
 				query.append(" AND ");
 
-				query.append("parentCategoryId = ?");
+				query.append("shoppingCategory.parentCategoryId = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("parentCategoryId ASC, ");
-				query.append("name ASC");
+				query.append("shoppingCategory.parentCategoryId ASC, ");
+				query.append("shoppingCategory.name ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -668,26 +702,43 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.shopping.model.ShoppingCategory WHERE ");
+					"SELECT shoppingCategory FROM ShoppingCategory shoppingCategory WHERE ");
 
-				query.append("groupId = ?");
+				query.append("shoppingCategory.groupId = ?");
 
 				query.append(" AND ");
 
-				query.append("parentCategoryId = ?");
+				query.append("shoppingCategory.parentCategoryId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("shoppingCategory.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("parentCategoryId ASC, ");
-					query.append("name ASC");
+					query.append("shoppingCategory.parentCategoryId ASC, ");
+					query.append("shoppingCategory.name ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -787,26 +838,43 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistenceImpl
 			StringBuilder query = new StringBuilder();
 
 			query.append(
-				"FROM com.liferay.portlet.shopping.model.ShoppingCategory WHERE ");
+				"SELECT shoppingCategory FROM ShoppingCategory shoppingCategory WHERE ");
 
-			query.append("groupId = ?");
+			query.append("shoppingCategory.groupId = ?");
 
 			query.append(" AND ");
 
-			query.append("parentCategoryId = ?");
+			query.append("shoppingCategory.parentCategoryId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("shoppingCategory.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("parentCategoryId ASC, ");
-				query.append("name ASC");
+				query.append("shoppingCategory.parentCategoryId ASC, ");
+				query.append("shoppingCategory.name ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -903,18 +971,35 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.shopping.model.ShoppingCategory ");
+					"SELECT shoppingCategory FROM ShoppingCategory shoppingCategory ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("shoppingCategory.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("parentCategoryId ASC, ");
-					query.append("name ASC");
+					query.append("shoppingCategory.parentCategoryId ASC, ");
+					query.append("shoppingCategory.name ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -983,11 +1068,10 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.shopping.model.ShoppingCategory WHERE ");
+				query.append("SELECT COUNT(shoppingCategory) ");
+				query.append("FROM ShoppingCategory shoppingCategory WHERE ");
 
-				query.append("groupId = ?");
+				query.append("shoppingCategory.groupId = ?");
 
 				query.append(" ");
 
@@ -1034,15 +1118,14 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.shopping.model.ShoppingCategory WHERE ");
+				query.append("SELECT COUNT(shoppingCategory) ");
+				query.append("FROM ShoppingCategory shoppingCategory WHERE ");
 
-				query.append("groupId = ?");
+				query.append("shoppingCategory.groupId = ?");
 
 				query.append(" AND ");
 
-				query.append("parentCategoryId = ?");
+				query.append("shoppingCategory.parentCategoryId = ?");
 
 				query.append(" ");
 
@@ -1087,7 +1170,7 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistenceImpl
 				session = openSession();
 
 				Query q = session.createQuery(
-						"SELECT COUNT(*) FROM com.liferay.portlet.shopping.model.ShoppingCategory");
+						"SELECT COUNT(shoppingCategory) FROM ShoppingCategory shoppingCategory");
 
 				count = (Long)q.uniqueResult();
 			}

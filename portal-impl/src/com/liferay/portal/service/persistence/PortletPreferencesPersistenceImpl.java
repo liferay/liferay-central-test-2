@@ -460,9 +460,9 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portal.model.PortletPreferences WHERE ");
+					"SELECT portletPreferences FROM PortletPreferences portletPreferences WHERE ");
 
-				query.append("plid = ?");
+				query.append("portletPreferences.plid = ?");
 
 				query.append(" ");
 
@@ -519,15 +519,32 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portal.model.PortletPreferences WHERE ");
+					"SELECT portletPreferences FROM PortletPreferences portletPreferences WHERE ");
 
-				query.append("plid = ?");
+				query.append("portletPreferences.plid = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("portletPreferences.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -616,15 +633,32 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl
 			StringBuilder query = new StringBuilder();
 
 			query.append(
-				"FROM com.liferay.portal.model.PortletPreferences WHERE ");
+				"SELECT portletPreferences FROM PortletPreferences portletPreferences WHERE ");
 
-			query.append("plid = ?");
+			query.append("portletPreferences.plid = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("portletPreferences.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -668,17 +702,17 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portal.model.PortletPreferences WHERE ");
+					"SELECT portletPreferences FROM PortletPreferences portletPreferences WHERE ");
 
-				query.append("plid = ?");
+				query.append("portletPreferences.plid = ?");
 
 				query.append(" AND ");
 
 				if (portletId == null) {
-					query.append("portletId IS NULL");
+					query.append("portletPreferences.portletId IS NULL");
 				}
 				else {
-					query.append("portletId = ?");
+					query.append("portletPreferences.portletId = ?");
 				}
 
 				query.append(" ");
@@ -742,24 +776,41 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portal.model.PortletPreferences WHERE ");
+					"SELECT portletPreferences FROM PortletPreferences portletPreferences WHERE ");
 
-				query.append("plid = ?");
+				query.append("portletPreferences.plid = ?");
 
 				query.append(" AND ");
 
 				if (portletId == null) {
-					query.append("portletId IS NULL");
+					query.append("portletPreferences.portletId IS NULL");
 				}
 				else {
-					query.append("portletId = ?");
+					query.append("portletPreferences.portletId = ?");
 				}
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("portletPreferences.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -862,24 +913,41 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl
 			StringBuilder query = new StringBuilder();
 
 			query.append(
-				"FROM com.liferay.portal.model.PortletPreferences WHERE ");
+				"SELECT portletPreferences FROM PortletPreferences portletPreferences WHERE ");
 
-			query.append("plid = ?");
+			query.append("portletPreferences.plid = ?");
 
 			query.append(" AND ");
 
 			if (portletId == null) {
-				query.append("portletId IS NULL");
+				query.append("portletPreferences.portletId IS NULL");
 			}
 			else {
-				query.append("portletId = ?");
+				query.append("portletPreferences.portletId = ?");
 			}
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("portletPreferences.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -929,17 +997,17 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portal.model.PortletPreferences WHERE ");
+					"SELECT portletPreferences FROM PortletPreferences portletPreferences WHERE ");
 
-				query.append("ownerId = ?");
-
-				query.append(" AND ");
-
-				query.append("ownerType = ?");
+				query.append("portletPreferences.ownerId = ?");
 
 				query.append(" AND ");
 
-				query.append("plid = ?");
+				query.append("portletPreferences.ownerType = ?");
+
+				query.append(" AND ");
+
+				query.append("portletPreferences.plid = ?");
 
 				query.append(" ");
 
@@ -1001,23 +1069,40 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portal.model.PortletPreferences WHERE ");
+					"SELECT portletPreferences FROM PortletPreferences portletPreferences WHERE ");
 
-				query.append("ownerId = ?");
-
-				query.append(" AND ");
-
-				query.append("ownerType = ?");
+				query.append("portletPreferences.ownerId = ?");
 
 				query.append(" AND ");
 
-				query.append("plid = ?");
+				query.append("portletPreferences.ownerType = ?");
+
+				query.append(" AND ");
+
+				query.append("portletPreferences.plid = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("portletPreferences.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1127,23 +1212,40 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl
 			StringBuilder query = new StringBuilder();
 
 			query.append(
-				"FROM com.liferay.portal.model.PortletPreferences WHERE ");
+				"SELECT portletPreferences FROM PortletPreferences portletPreferences WHERE ");
 
-			query.append("ownerId = ?");
-
-			query.append(" AND ");
-
-			query.append("ownerType = ?");
+			query.append("portletPreferences.ownerId = ?");
 
 			query.append(" AND ");
 
-			query.append("plid = ?");
+			query.append("portletPreferences.ownerType = ?");
+
+			query.append(" AND ");
+
+			query.append("portletPreferences.plid = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("portletPreferences.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -1239,25 +1341,25 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portal.model.PortletPreferences WHERE ");
+					"SELECT portletPreferences FROM PortletPreferences portletPreferences WHERE ");
 
-				query.append("ownerId = ?");
-
-				query.append(" AND ");
-
-				query.append("ownerType = ?");
+				query.append("portletPreferences.ownerId = ?");
 
 				query.append(" AND ");
 
-				query.append("plid = ?");
+				query.append("portletPreferences.ownerType = ?");
+
+				query.append(" AND ");
+
+				query.append("portletPreferences.plid = ?");
 
 				query.append(" AND ");
 
 				if (portletId == null) {
-					query.append("portletId IS NULL");
+					query.append("portletPreferences.portletId IS NULL");
 				}
 				else {
-					query.append("portletId = ?");
+					query.append("portletPreferences.portletId = ?");
 				}
 
 				query.append(" ");
@@ -1392,11 +1494,28 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portal.model.PortletPreferences ");
+					"SELECT portletPreferences FROM PortletPreferences portletPreferences ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("portletPreferences.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1481,11 +1600,11 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
+				query.append("SELECT COUNT(portletPreferences) ");
 				query.append(
-					"FROM com.liferay.portal.model.PortletPreferences WHERE ");
+					"FROM PortletPreferences portletPreferences WHERE ");
 
-				query.append("plid = ?");
+				query.append("portletPreferences.plid = ?");
 
 				query.append(" ");
 
@@ -1530,19 +1649,19 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
+				query.append("SELECT COUNT(portletPreferences) ");
 				query.append(
-					"FROM com.liferay.portal.model.PortletPreferences WHERE ");
+					"FROM PortletPreferences portletPreferences WHERE ");
 
-				query.append("plid = ?");
+				query.append("portletPreferences.plid = ?");
 
 				query.append(" AND ");
 
 				if (portletId == null) {
-					query.append("portletId IS NULL");
+					query.append("portletPreferences.portletId IS NULL");
 				}
 				else {
-					query.append("portletId = ?");
+					query.append("portletPreferences.portletId = ?");
 				}
 
 				query.append(" ");
@@ -1594,19 +1713,19 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
+				query.append("SELECT COUNT(portletPreferences) ");
 				query.append(
-					"FROM com.liferay.portal.model.PortletPreferences WHERE ");
+					"FROM PortletPreferences portletPreferences WHERE ");
 
-				query.append("ownerId = ?");
-
-				query.append(" AND ");
-
-				query.append("ownerType = ?");
+				query.append("portletPreferences.ownerId = ?");
 
 				query.append(" AND ");
 
-				query.append("plid = ?");
+				query.append("portletPreferences.ownerType = ?");
+
+				query.append(" AND ");
+
+				query.append("portletPreferences.plid = ?");
 
 				query.append(" ");
 
@@ -1659,27 +1778,27 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
+				query.append("SELECT COUNT(portletPreferences) ");
 				query.append(
-					"FROM com.liferay.portal.model.PortletPreferences WHERE ");
+					"FROM PortletPreferences portletPreferences WHERE ");
 
-				query.append("ownerId = ?");
-
-				query.append(" AND ");
-
-				query.append("ownerType = ?");
+				query.append("portletPreferences.ownerId = ?");
 
 				query.append(" AND ");
 
-				query.append("plid = ?");
+				query.append("portletPreferences.ownerType = ?");
+
+				query.append(" AND ");
+
+				query.append("portletPreferences.plid = ?");
 
 				query.append(" AND ");
 
 				if (portletId == null) {
-					query.append("portletId IS NULL");
+					query.append("portletPreferences.portletId IS NULL");
 				}
 				else {
-					query.append("portletId = ?");
+					query.append("portletPreferences.portletId = ?");
 				}
 
 				query.append(" ");
@@ -1731,7 +1850,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl
 				session = openSession();
 
 				Query q = session.createQuery(
-						"SELECT COUNT(*) FROM com.liferay.portal.model.PortletPreferences");
+						"SELECT COUNT(portletPreferences) FROM PortletPreferences portletPreferences");
 
 				count = (Long)q.uniqueResult();
 			}

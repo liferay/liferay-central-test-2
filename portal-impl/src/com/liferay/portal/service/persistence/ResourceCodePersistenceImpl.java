@@ -418,9 +418,9 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portal.model.ResourceCode WHERE ");
+					"SELECT resourceCode FROM ResourceCode resourceCode WHERE ");
 
-				query.append("companyId = ?");
+				query.append("resourceCode.companyId = ?");
 
 				query.append(" ");
 
@@ -477,15 +477,32 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portal.model.ResourceCode WHERE ");
+					"SELECT resourceCode FROM ResourceCode resourceCode WHERE ");
 
-				query.append("companyId = ?");
+				query.append("resourceCode.companyId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("resourceCode.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -576,15 +593,33 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl
 
 			StringBuilder query = new StringBuilder();
 
-			query.append("FROM com.liferay.portal.model.ResourceCode WHERE ");
+			query.append(
+				"SELECT resourceCode FROM ResourceCode resourceCode WHERE ");
 
-			query.append("companyId = ?");
+			query.append("resourceCode.companyId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("resourceCode.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -627,13 +662,13 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portal.model.ResourceCode WHERE ");
+					"SELECT resourceCode FROM ResourceCode resourceCode WHERE ");
 
 				if (name == null) {
-					query.append("name IS NULL");
+					query.append("resourceCode.name IS NULL");
 				}
 				else {
-					query.append("name = ?");
+					query.append("resourceCode.name = ?");
 				}
 
 				query.append(" ");
@@ -693,20 +728,37 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portal.model.ResourceCode WHERE ");
+					"SELECT resourceCode FROM ResourceCode resourceCode WHERE ");
 
 				if (name == null) {
-					query.append("name IS NULL");
+					query.append("resourceCode.name IS NULL");
 				}
 				else {
-					query.append("name = ?");
+					query.append("resourceCode.name = ?");
 				}
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("resourceCode.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -796,20 +848,38 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl
 
 			StringBuilder query = new StringBuilder();
 
-			query.append("FROM com.liferay.portal.model.ResourceCode WHERE ");
+			query.append(
+				"SELECT resourceCode FROM ResourceCode resourceCode WHERE ");
 
 			if (name == null) {
-				query.append("name IS NULL");
+				query.append("resourceCode.name IS NULL");
 			}
 			else {
-				query.append("name = ?");
+				query.append("resourceCode.name = ?");
 			}
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("resourceCode.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -897,22 +967,22 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portal.model.ResourceCode WHERE ");
+					"SELECT resourceCode FROM ResourceCode resourceCode WHERE ");
 
-				query.append("companyId = ?");
+				query.append("resourceCode.companyId = ?");
 
 				query.append(" AND ");
 
 				if (name == null) {
-					query.append("name IS NULL");
+					query.append("resourceCode.name IS NULL");
 				}
 				else {
-					query.append("name = ?");
+					query.append("resourceCode.name = ?");
 				}
 
 				query.append(" AND ");
 
-				query.append("scope = ?");
+				query.append("resourceCode.scope = ?");
 
 				query.append(" ");
 
@@ -1042,11 +1112,29 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.ResourceCode ");
+				query.append(
+					"SELECT resourceCode FROM ResourceCode resourceCode ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("resourceCode.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1120,11 +1208,10 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portal.model.ResourceCode WHERE ");
+				query.append("SELECT COUNT(resourceCode) ");
+				query.append("FROM ResourceCode resourceCode WHERE ");
 
-				query.append("companyId = ?");
+				query.append("resourceCode.companyId = ?");
 
 				query.append(" ");
 
@@ -1168,15 +1255,14 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portal.model.ResourceCode WHERE ");
+				query.append("SELECT COUNT(resourceCode) ");
+				query.append("FROM ResourceCode resourceCode WHERE ");
 
 				if (name == null) {
-					query.append("name IS NULL");
+					query.append("resourceCode.name IS NULL");
 				}
 				else {
-					query.append("name = ?");
+					query.append("resourceCode.name = ?");
 				}
 
 				query.append(" ");
@@ -1228,24 +1314,23 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portal.model.ResourceCode WHERE ");
+				query.append("SELECT COUNT(resourceCode) ");
+				query.append("FROM ResourceCode resourceCode WHERE ");
 
-				query.append("companyId = ?");
+				query.append("resourceCode.companyId = ?");
 
 				query.append(" AND ");
 
 				if (name == null) {
-					query.append("name IS NULL");
+					query.append("resourceCode.name IS NULL");
 				}
 				else {
-					query.append("name = ?");
+					query.append("resourceCode.name = ?");
 				}
 
 				query.append(" AND ");
 
-				query.append("scope = ?");
+				query.append("resourceCode.scope = ?");
 
 				query.append(" ");
 
@@ -1294,7 +1379,7 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl
 				session = openSession();
 
 				Query q = session.createQuery(
-						"SELECT COUNT(*) FROM com.liferay.portal.model.ResourceCode");
+						"SELECT COUNT(resourceCode) FROM ResourceCode resourceCode");
 
 				count = (Long)q.uniqueResult();
 			}

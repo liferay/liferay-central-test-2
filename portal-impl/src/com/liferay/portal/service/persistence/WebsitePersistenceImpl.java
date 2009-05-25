@@ -410,15 +410,15 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.Website WHERE ");
+				query.append("SELECT website FROM Website website WHERE ");
 
-				query.append("companyId = ?");
+				query.append("website.companyId = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("createDate ASC");
+				query.append("website.createDate ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -472,21 +472,38 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.Website WHERE ");
+				query.append("SELECT website FROM Website website WHERE ");
 
-				query.append("companyId = ?");
+				query.append("website.companyId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("website.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("createDate ASC");
+					query.append("website.createDate ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -573,21 +590,38 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl
 
 			StringBuilder query = new StringBuilder();
 
-			query.append("FROM com.liferay.portal.model.Website WHERE ");
+			query.append("SELECT website FROM Website website WHERE ");
 
-			query.append("companyId = ?");
+			query.append("website.companyId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("website.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("createDate ASC");
+				query.append("website.createDate ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -628,15 +662,15 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.Website WHERE ");
+				query.append("SELECT website FROM Website website WHERE ");
 
-				query.append("userId = ?");
+				query.append("website.userId = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("createDate ASC");
+				query.append("website.createDate ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -690,21 +724,38 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.Website WHERE ");
+				query.append("SELECT website FROM Website website WHERE ");
 
-				query.append("userId = ?");
+				query.append("website.userId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("website.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("createDate ASC");
+					query.append("website.createDate ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -790,21 +841,38 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl
 
 			StringBuilder query = new StringBuilder();
 
-			query.append("FROM com.liferay.portal.model.Website WHERE ");
+			query.append("SELECT website FROM Website website WHERE ");
 
-			query.append("userId = ?");
+			query.append("website.userId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("website.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("createDate ASC");
+				query.append("website.createDate ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -848,19 +916,19 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.Website WHERE ");
+				query.append("SELECT website FROM Website website WHERE ");
 
-				query.append("companyId = ?");
+				query.append("website.companyId = ?");
 
 				query.append(" AND ");
 
-				query.append("classNameId = ?");
+				query.append("website.classNameId = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("createDate ASC");
+				query.append("website.createDate ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -916,25 +984,42 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.Website WHERE ");
+				query.append("SELECT website FROM Website website WHERE ");
 
-				query.append("companyId = ?");
+				query.append("website.companyId = ?");
 
 				query.append(" AND ");
 
-				query.append("classNameId = ?");
+				query.append("website.classNameId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("website.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("createDate ASC");
+					query.append("website.createDate ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1030,25 +1115,42 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl
 
 			StringBuilder query = new StringBuilder();
 
-			query.append("FROM com.liferay.portal.model.Website WHERE ");
+			query.append("SELECT website FROM Website website WHERE ");
 
-			query.append("companyId = ?");
+			query.append("website.companyId = ?");
 
 			query.append(" AND ");
 
-			query.append("classNameId = ?");
+			query.append("website.classNameId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("website.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("createDate ASC");
+				query.append("website.createDate ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -1094,23 +1196,23 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.Website WHERE ");
+				query.append("SELECT website FROM Website website WHERE ");
 
-				query.append("companyId = ?");
-
-				query.append(" AND ");
-
-				query.append("classNameId = ?");
+				query.append("website.companyId = ?");
 
 				query.append(" AND ");
 
-				query.append("classPK = ?");
+				query.append("website.classNameId = ?");
+
+				query.append(" AND ");
+
+				query.append("website.classPK = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("createDate ASC");
+				query.append("website.createDate ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1169,29 +1271,46 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.Website WHERE ");
+				query.append("SELECT website FROM Website website WHERE ");
 
-				query.append("companyId = ?");
-
-				query.append(" AND ");
-
-				query.append("classNameId = ?");
+				query.append("website.companyId = ?");
 
 				query.append(" AND ");
 
-				query.append("classPK = ?");
+				query.append("website.classNameId = ?");
+
+				query.append(" AND ");
+
+				query.append("website.classPK = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("website.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("createDate ASC");
+					query.append("website.createDate ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1298,29 +1417,46 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl
 
 			StringBuilder query = new StringBuilder();
 
-			query.append("FROM com.liferay.portal.model.Website WHERE ");
+			query.append("SELECT website FROM Website website WHERE ");
 
-			query.append("companyId = ?");
-
-			query.append(" AND ");
-
-			query.append("classNameId = ?");
+			query.append("website.companyId = ?");
 
 			query.append(" AND ");
 
-			query.append("classPK = ?");
+			query.append("website.classNameId = ?");
+
+			query.append(" AND ");
+
+			query.append("website.classPK = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("website.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("createDate ASC");
+				query.append("website.createDate ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -1369,27 +1505,27 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.Website WHERE ");
+				query.append("SELECT website FROM Website website WHERE ");
 
-				query.append("companyId = ?");
-
-				query.append(" AND ");
-
-				query.append("classNameId = ?");
+				query.append("website.companyId = ?");
 
 				query.append(" AND ");
 
-				query.append("classPK = ?");
+				query.append("website.classNameId = ?");
 
 				query.append(" AND ");
 
-				query.append("primary_ = ?");
+				query.append("website.classPK = ?");
+
+				query.append(" AND ");
+
+				query.append("website.primary = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("createDate ASC");
+				query.append("website.createDate ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1453,33 +1589,50 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.Website WHERE ");
+				query.append("SELECT website FROM Website website WHERE ");
 
-				query.append("companyId = ?");
-
-				query.append(" AND ");
-
-				query.append("classNameId = ?");
+				query.append("website.companyId = ?");
 
 				query.append(" AND ");
 
-				query.append("classPK = ?");
+				query.append("website.classNameId = ?");
 
 				query.append(" AND ");
 
-				query.append("primary_ = ?");
+				query.append("website.classPK = ?");
+
+				query.append(" AND ");
+
+				query.append("website.primary = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("website.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("createDate ASC");
+					query.append("website.createDate ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1594,33 +1747,50 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl
 
 			StringBuilder query = new StringBuilder();
 
-			query.append("FROM com.liferay.portal.model.Website WHERE ");
+			query.append("SELECT website FROM Website website WHERE ");
 
-			query.append("companyId = ?");
-
-			query.append(" AND ");
-
-			query.append("classNameId = ?");
+			query.append("website.companyId = ?");
 
 			query.append(" AND ");
 
-			query.append("classPK = ?");
+			query.append("website.classNameId = ?");
 
 			query.append(" AND ");
 
-			query.append("primary_ = ?");
+			query.append("website.classPK = ?");
+
+			query.append(" AND ");
+
+			query.append("website.primary = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("website.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("createDate ASC");
+				query.append("website.createDate ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -1718,17 +1888,34 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.Website ");
+				query.append("SELECT website FROM Website website ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("website.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("createDate ASC");
+					query.append("website.createDate ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1817,10 +2004,10 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append("FROM com.liferay.portal.model.Website WHERE ");
+				query.append("SELECT COUNT(website) ");
+				query.append("FROM Website website WHERE ");
 
-				query.append("companyId = ?");
+				query.append("website.companyId = ?");
 
 				query.append(" ");
 
@@ -1864,10 +2051,10 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append("FROM com.liferay.portal.model.Website WHERE ");
+				query.append("SELECT COUNT(website) ");
+				query.append("FROM Website website WHERE ");
 
-				query.append("userId = ?");
+				query.append("website.userId = ?");
 
 				query.append(" ");
 
@@ -1914,14 +2101,14 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append("FROM com.liferay.portal.model.Website WHERE ");
+				query.append("SELECT COUNT(website) ");
+				query.append("FROM Website website WHERE ");
 
-				query.append("companyId = ?");
+				query.append("website.companyId = ?");
 
 				query.append(" AND ");
 
-				query.append("classNameId = ?");
+				query.append("website.classNameId = ?");
 
 				query.append(" ");
 
@@ -1970,18 +2157,18 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append("FROM com.liferay.portal.model.Website WHERE ");
+				query.append("SELECT COUNT(website) ");
+				query.append("FROM Website website WHERE ");
 
-				query.append("companyId = ?");
-
-				query.append(" AND ");
-
-				query.append("classNameId = ?");
+				query.append("website.companyId = ?");
 
 				query.append(" AND ");
 
-				query.append("classPK = ?");
+				query.append("website.classNameId = ?");
+
+				query.append(" AND ");
+
+				query.append("website.classPK = ?");
 
 				query.append(" ");
 
@@ -2033,22 +2220,22 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append("FROM com.liferay.portal.model.Website WHERE ");
+				query.append("SELECT COUNT(website) ");
+				query.append("FROM Website website WHERE ");
 
-				query.append("companyId = ?");
-
-				query.append(" AND ");
-
-				query.append("classNameId = ?");
+				query.append("website.companyId = ?");
 
 				query.append(" AND ");
 
-				query.append("classPK = ?");
+				query.append("website.classNameId = ?");
 
 				query.append(" AND ");
 
-				query.append("primary_ = ?");
+				query.append("website.classPK = ?");
+
+				query.append(" AND ");
+
+				query.append("website.primary = ?");
 
 				query.append(" ");
 
@@ -2097,7 +2284,7 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl
 				session = openSession();
 
 				Query q = session.createQuery(
-						"SELECT COUNT(*) FROM com.liferay.portal.model.Website");
+						"SELECT COUNT(website) FROM Website website");
 
 				count = (Long)q.uniqueResult();
 			}

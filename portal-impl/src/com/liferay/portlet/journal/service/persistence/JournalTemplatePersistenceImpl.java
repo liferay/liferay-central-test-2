@@ -535,20 +535,20 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.journal.model.JournalTemplate WHERE ");
+					"SELECT journalTemplate FROM JournalTemplate journalTemplate WHERE ");
 
 				if (uuid == null) {
-					query.append("uuid_ IS NULL");
+					query.append("journalTemplate.uuid IS NULL");
 				}
 				else {
-					query.append("uuid_ = ?");
+					query.append("journalTemplate.uuid = ?");
 				}
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("templateId ASC");
+				query.append("journalTemplate.templateId ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -605,26 +605,43 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.journal.model.JournalTemplate WHERE ");
+					"SELECT journalTemplate FROM JournalTemplate journalTemplate WHERE ");
 
 				if (uuid == null) {
-					query.append("uuid_ IS NULL");
+					query.append("journalTemplate.uuid IS NULL");
 				}
 				else {
-					query.append("uuid_ = ?");
+					query.append("journalTemplate.uuid = ?");
 				}
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("journalTemplate.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("templateId ASC");
+					query.append("journalTemplate.templateId ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -714,26 +731,43 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl
 			StringBuilder query = new StringBuilder();
 
 			query.append(
-				"FROM com.liferay.portlet.journal.model.JournalTemplate WHERE ");
+				"SELECT journalTemplate FROM JournalTemplate journalTemplate WHERE ");
 
 			if (uuid == null) {
-				query.append("uuid_ IS NULL");
+				query.append("journalTemplate.uuid IS NULL");
 			}
 			else {
-				query.append("uuid_ = ?");
+				query.append("journalTemplate.uuid = ?");
 			}
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("journalTemplate.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("templateId ASC");
+				query.append("journalTemplate.templateId ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -814,24 +848,24 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.journal.model.JournalTemplate WHERE ");
+					"SELECT journalTemplate FROM JournalTemplate journalTemplate WHERE ");
 
 				if (uuid == null) {
-					query.append("uuid_ IS NULL");
+					query.append("journalTemplate.uuid IS NULL");
 				}
 				else {
-					query.append("uuid_ = ?");
+					query.append("journalTemplate.uuid = ?");
 				}
 
 				query.append(" AND ");
 
-				query.append("groupId = ?");
+				query.append("journalTemplate.groupId = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("templateId ASC");
+				query.append("journalTemplate.templateId ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -906,15 +940,15 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.journal.model.JournalTemplate WHERE ");
+					"SELECT journalTemplate FROM JournalTemplate journalTemplate WHERE ");
 
-				query.append("groupId = ?");
+				query.append("journalTemplate.groupId = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("templateId ASC");
+				query.append("journalTemplate.templateId ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -969,21 +1003,38 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.journal.model.JournalTemplate WHERE ");
+					"SELECT journalTemplate FROM JournalTemplate journalTemplate WHERE ");
 
-				query.append("groupId = ?");
+				query.append("journalTemplate.groupId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("journalTemplate.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("templateId ASC");
+					query.append("journalTemplate.templateId ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1072,21 +1123,38 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl
 			StringBuilder query = new StringBuilder();
 
 			query.append(
-				"FROM com.liferay.portlet.journal.model.JournalTemplate WHERE ");
+				"SELECT journalTemplate FROM JournalTemplate journalTemplate WHERE ");
 
-			query.append("groupId = ?");
+			query.append("journalTemplate.groupId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("journalTemplate.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("templateId ASC");
+				query.append("journalTemplate.templateId ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -1130,20 +1198,20 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.journal.model.JournalTemplate WHERE ");
+					"SELECT journalTemplate FROM JournalTemplate journalTemplate WHERE ");
 
 				if (templateId == null) {
-					query.append("templateId IS NULL");
+					query.append("journalTemplate.templateId IS NULL");
 				}
 				else {
-					query.append("templateId = ?");
+					query.append("journalTemplate.templateId = ?");
 				}
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("templateId ASC");
+				query.append("journalTemplate.templateId ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1200,26 +1268,43 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.journal.model.JournalTemplate WHERE ");
+					"SELECT journalTemplate FROM JournalTemplate journalTemplate WHERE ");
 
 				if (templateId == null) {
-					query.append("templateId IS NULL");
+					query.append("journalTemplate.templateId IS NULL");
 				}
 				else {
-					query.append("templateId = ?");
+					query.append("journalTemplate.templateId = ?");
 				}
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("journalTemplate.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("templateId ASC");
+					query.append("journalTemplate.templateId ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1311,26 +1396,43 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl
 			StringBuilder query = new StringBuilder();
 
 			query.append(
-				"FROM com.liferay.portlet.journal.model.JournalTemplate WHERE ");
+				"SELECT journalTemplate FROM JournalTemplate journalTemplate WHERE ");
 
 			if (templateId == null) {
-				query.append("templateId IS NULL");
+				query.append("journalTemplate.templateId IS NULL");
 			}
 			else {
-				query.append("templateId = ?");
+				query.append("journalTemplate.templateId = ?");
 			}
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("journalTemplate.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("templateId ASC");
+				query.append("journalTemplate.templateId ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -1408,15 +1510,15 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.journal.model.JournalTemplate WHERE ");
+					"SELECT journalTemplate FROM JournalTemplate journalTemplate WHERE ");
 
-				query.append("smallImageId = ?");
+				query.append("journalTemplate.smallImageId = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("templateId ASC");
+				query.append("journalTemplate.templateId ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1520,24 +1622,24 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.journal.model.JournalTemplate WHERE ");
+					"SELECT journalTemplate FROM JournalTemplate journalTemplate WHERE ");
 
-				query.append("groupId = ?");
+				query.append("journalTemplate.groupId = ?");
 
 				query.append(" AND ");
 
 				if (templateId == null) {
-					query.append("templateId IS NULL");
+					query.append("journalTemplate.templateId IS NULL");
 				}
 				else {
-					query.append("templateId = ?");
+					query.append("journalTemplate.templateId = ?");
 				}
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("templateId ASC");
+				query.append("journalTemplate.templateId ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1612,24 +1714,24 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.journal.model.JournalTemplate WHERE ");
+					"SELECT journalTemplate FROM JournalTemplate journalTemplate WHERE ");
 
-				query.append("groupId = ?");
+				query.append("journalTemplate.groupId = ?");
 
 				query.append(" AND ");
 
 				if (structureId == null) {
-					query.append("structureId IS NULL");
+					query.append("journalTemplate.structureId IS NULL");
 				}
 				else {
-					query.append("structureId = ?");
+					query.append("journalTemplate.structureId = ?");
 				}
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("templateId ASC");
+				query.append("journalTemplate.templateId ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1690,30 +1792,47 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.journal.model.JournalTemplate WHERE ");
+					"SELECT journalTemplate FROM JournalTemplate journalTemplate WHERE ");
 
-				query.append("groupId = ?");
+				query.append("journalTemplate.groupId = ?");
 
 				query.append(" AND ");
 
 				if (structureId == null) {
-					query.append("structureId IS NULL");
+					query.append("journalTemplate.structureId IS NULL");
 				}
 				else {
-					query.append("structureId = ?");
+					query.append("journalTemplate.structureId = ?");
 				}
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("journalTemplate.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("templateId ASC");
+					query.append("journalTemplate.templateId ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1813,30 +1932,47 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl
 			StringBuilder query = new StringBuilder();
 
 			query.append(
-				"FROM com.liferay.portlet.journal.model.JournalTemplate WHERE ");
+				"SELECT journalTemplate FROM JournalTemplate journalTemplate WHERE ");
 
-			query.append("groupId = ?");
+			query.append("journalTemplate.groupId = ?");
 
 			query.append(" AND ");
 
 			if (structureId == null) {
-				query.append("structureId IS NULL");
+				query.append("journalTemplate.structureId IS NULL");
 			}
 			else {
-				query.append("structureId = ?");
+				query.append("journalTemplate.structureId = ?");
 			}
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("journalTemplate.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("templateId ASC");
+				query.append("journalTemplate.templateId ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -1935,17 +2071,34 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.journal.model.JournalTemplate ");
+					"SELECT journalTemplate FROM JournalTemplate journalTemplate ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("journalTemplate.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("templateId ASC");
+					query.append("journalTemplate.templateId ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -2046,15 +2199,14 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.journal.model.JournalTemplate WHERE ");
+				query.append("SELECT COUNT(journalTemplate) ");
+				query.append("FROM JournalTemplate journalTemplate WHERE ");
 
 				if (uuid == null) {
-					query.append("uuid_ IS NULL");
+					query.append("journalTemplate.uuid IS NULL");
 				}
 				else {
-					query.append("uuid_ = ?");
+					query.append("journalTemplate.uuid = ?");
 				}
 
 				query.append(" ");
@@ -2102,20 +2254,19 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.journal.model.JournalTemplate WHERE ");
+				query.append("SELECT COUNT(journalTemplate) ");
+				query.append("FROM JournalTemplate journalTemplate WHERE ");
 
 				if (uuid == null) {
-					query.append("uuid_ IS NULL");
+					query.append("journalTemplate.uuid IS NULL");
 				}
 				else {
-					query.append("uuid_ = ?");
+					query.append("journalTemplate.uuid = ?");
 				}
 
 				query.append(" AND ");
 
-				query.append("groupId = ?");
+				query.append("journalTemplate.groupId = ?");
 
 				query.append(" ");
 
@@ -2163,11 +2314,10 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.journal.model.JournalTemplate WHERE ");
+				query.append("SELECT COUNT(journalTemplate) ");
+				query.append("FROM JournalTemplate journalTemplate WHERE ");
 
-				query.append("groupId = ?");
+				query.append("journalTemplate.groupId = ?");
 
 				query.append(" ");
 
@@ -2211,15 +2361,14 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.journal.model.JournalTemplate WHERE ");
+				query.append("SELECT COUNT(journalTemplate) ");
+				query.append("FROM JournalTemplate journalTemplate WHERE ");
 
 				if (templateId == null) {
-					query.append("templateId IS NULL");
+					query.append("journalTemplate.templateId IS NULL");
 				}
 				else {
-					query.append("templateId = ?");
+					query.append("journalTemplate.templateId = ?");
 				}
 
 				query.append(" ");
@@ -2266,11 +2415,10 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.journal.model.JournalTemplate WHERE ");
+				query.append("SELECT COUNT(journalTemplate) ");
+				query.append("FROM JournalTemplate journalTemplate WHERE ");
 
-				query.append("smallImageId = ?");
+				query.append("journalTemplate.smallImageId = ?");
 
 				query.append(" ");
 
@@ -2315,19 +2463,18 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.journal.model.JournalTemplate WHERE ");
+				query.append("SELECT COUNT(journalTemplate) ");
+				query.append("FROM JournalTemplate journalTemplate WHERE ");
 
-				query.append("groupId = ?");
+				query.append("journalTemplate.groupId = ?");
 
 				query.append(" AND ");
 
 				if (templateId == null) {
-					query.append("templateId IS NULL");
+					query.append("journalTemplate.templateId IS NULL");
 				}
 				else {
-					query.append("templateId = ?");
+					query.append("journalTemplate.templateId = ?");
 				}
 
 				query.append(" ");
@@ -2377,19 +2524,18 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.journal.model.JournalTemplate WHERE ");
+				query.append("SELECT COUNT(journalTemplate) ");
+				query.append("FROM JournalTemplate journalTemplate WHERE ");
 
-				query.append("groupId = ?");
+				query.append("journalTemplate.groupId = ?");
 
 				query.append(" AND ");
 
 				if (structureId == null) {
-					query.append("structureId IS NULL");
+					query.append("journalTemplate.structureId IS NULL");
 				}
 				else {
-					query.append("structureId = ?");
+					query.append("journalTemplate.structureId = ?");
 				}
 
 				query.append(" ");
@@ -2437,7 +2583,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl
 				session = openSession();
 
 				Query q = session.createQuery(
-						"SELECT COUNT(*) FROM com.liferay.portlet.journal.model.JournalTemplate");
+						"SELECT COUNT(journalTemplate) FROM JournalTemplate journalTemplate");
 
 				count = (Long)q.uniqueResult();
 			}

@@ -410,15 +410,15 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.softwarecatalog.model.SCProductVersion WHERE ");
+					"SELECT scProductVersion FROM SCProductVersion scProductVersion WHERE ");
 
-				query.append("productEntryId = ?");
+				query.append("scProductVersion.productEntryId = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("createDate DESC");
+				query.append("scProductVersion.createDate DESC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -473,21 +473,38 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.softwarecatalog.model.SCProductVersion WHERE ");
+					"SELECT scProductVersion FROM SCProductVersion scProductVersion WHERE ");
 
-				query.append("productEntryId = ?");
+				query.append("scProductVersion.productEntryId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("scProductVersion.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("createDate DESC");
+					query.append("scProductVersion.createDate DESC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -580,21 +597,38 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl
 			StringBuilder query = new StringBuilder();
 
 			query.append(
-				"FROM com.liferay.portlet.softwarecatalog.model.SCProductVersion WHERE ");
+				"SELECT scProductVersion FROM SCProductVersion scProductVersion WHERE ");
 
-			query.append("productEntryId = ?");
+			query.append("scProductVersion.productEntryId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("scProductVersion.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("createDate DESC");
+				query.append("scProductVersion.createDate DESC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -670,20 +704,21 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.softwarecatalog.model.SCProductVersion WHERE ");
+					"SELECT scProductVersion FROM SCProductVersion scProductVersion WHERE ");
 
 				if (directDownloadURL == null) {
-					query.append("directDownloadURL IS NULL");
+					query.append("scProductVersion.directDownloadURL IS NULL");
 				}
 				else {
-					query.append("lower(directDownloadURL) = ?");
+					query.append(
+						"scProductVersion.lower(directDownloadURL) = ?");
 				}
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("createDate DESC");
+				query.append("scProductVersion.createDate DESC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -807,17 +842,34 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.softwarecatalog.model.SCProductVersion ");
+					"SELECT scProductVersion FROM SCProductVersion scProductVersion ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("scProductVersion.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("createDate DESC");
+					query.append("scProductVersion.createDate DESC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -888,11 +940,10 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.softwarecatalog.model.SCProductVersion WHERE ");
+				query.append("SELECT COUNT(scProductVersion) ");
+				query.append("FROM SCProductVersion scProductVersion WHERE ");
 
-				query.append("productEntryId = ?");
+				query.append("scProductVersion.productEntryId = ?");
 
 				query.append(" ");
 
@@ -937,15 +988,15 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.softwarecatalog.model.SCProductVersion WHERE ");
+				query.append("SELECT COUNT(scProductVersion) ");
+				query.append("FROM SCProductVersion scProductVersion WHERE ");
 
 				if (directDownloadURL == null) {
-					query.append("directDownloadURL IS NULL");
+					query.append("scProductVersion.directDownloadURL IS NULL");
 				}
 				else {
-					query.append("lower(directDownloadURL) = ?");
+					query.append(
+						"scProductVersion.lower(directDownloadURL) = ?");
 				}
 
 				query.append(" ");
@@ -991,7 +1042,7 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl
 				session = openSession();
 
 				Query q = session.createQuery(
-						"SELECT COUNT(*) FROM com.liferay.portlet.softwarecatalog.model.SCProductVersion");
+						"SELECT COUNT(scProductVersion) FROM SCProductVersion scProductVersion");
 
 				count = (Long)q.uniqueResult();
 			}

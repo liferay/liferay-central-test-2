@@ -703,15 +703,15 @@ public class GroupPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.Group WHERE ");
+				query.append("SELECT group_ FROM Group group_ WHERE ");
 
-				query.append("liveGroupId = ?");
+				query.append("group_.liveGroupId = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("name ASC");
+				query.append("group_.name ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -814,24 +814,24 @@ public class GroupPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.Group WHERE ");
+				query.append("SELECT group_ FROM Group group_ WHERE ");
 
-				query.append("companyId = ?");
+				query.append("group_.companyId = ?");
 
 				query.append(" AND ");
 
 				if (name == null) {
-					query.append("name IS NULL");
+					query.append("group_.name IS NULL");
 				}
 				else {
-					query.append("name = ?");
+					query.append("group_.name = ?");
 				}
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("name ASC");
+				query.append("group_.name ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -940,24 +940,24 @@ public class GroupPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.Group WHERE ");
+				query.append("SELECT group_ FROM Group group_ WHERE ");
 
-				query.append("companyId = ?");
+				query.append("group_.companyId = ?");
 
 				query.append(" AND ");
 
 				if (friendlyURL == null) {
-					query.append("friendlyURL IS NULL");
+					query.append("group_.friendlyURL IS NULL");
 				}
 				else {
-					query.append("friendlyURL = ?");
+					query.append("group_.friendlyURL = ?");
 				}
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("name ASC");
+				query.append("group_.name ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1033,19 +1033,19 @@ public class GroupPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.Group WHERE ");
+				query.append("SELECT group_ FROM Group group_ WHERE ");
 
-				query.append("type_ = ?");
+				query.append("group_.type = ?");
 
 				query.append(" AND ");
 
-				query.append("active_ = ?");
+				query.append("group_.active = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("name ASC");
+				query.append("group_.name ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1101,25 +1101,42 @@ public class GroupPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.Group WHERE ");
+				query.append("SELECT group_ FROM Group group_ WHERE ");
 
-				query.append("type_ = ?");
+				query.append("group_.type = ?");
 
 				query.append(" AND ");
 
-				query.append("active_ = ?");
+				query.append("group_.active = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("group_.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("name ASC");
+					query.append("group_.name ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1214,25 +1231,42 @@ public class GroupPersistenceImpl extends BasePersistenceImpl
 
 			StringBuilder query = new StringBuilder();
 
-			query.append("FROM com.liferay.portal.model.Group WHERE ");
+			query.append("SELECT group_ FROM Group group_ WHERE ");
 
-			query.append("type_ = ?");
+			query.append("group_.type = ?");
 
 			query.append(" AND ");
 
-			query.append("active_ = ?");
+			query.append("group_.active = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("group_.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("name ASC");
+				query.append("group_.name ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -1316,23 +1350,23 @@ public class GroupPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.Group WHERE ");
+				query.append("SELECT group_ FROM Group group_ WHERE ");
 
-				query.append("companyId = ?");
-
-				query.append(" AND ");
-
-				query.append("classNameId = ?");
+				query.append("group_.companyId = ?");
 
 				query.append(" AND ");
 
-				query.append("classPK = ?");
+				query.append("group_.classNameId = ?");
+
+				query.append(" AND ");
+
+				query.append("group_.classPK = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("name ASC");
+				query.append("group_.name ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1448,28 +1482,28 @@ public class GroupPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.Group WHERE ");
+				query.append("SELECT group_ FROM Group group_ WHERE ");
 
-				query.append("companyId = ?");
+				query.append("group_.companyId = ?");
 
 				query.append(" AND ");
 
-				query.append("liveGroupId = ?");
+				query.append("group_.liveGroupId = ?");
 
 				query.append(" AND ");
 
 				if (name == null) {
-					query.append("name IS NULL");
+					query.append("group_.name IS NULL");
 				}
 				else {
-					query.append("name = ?");
+					query.append("group_.name = ?");
 				}
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("name ASC");
+				query.append("group_.name ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1594,32 +1628,32 @@ public class GroupPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.Group WHERE ");
+				query.append("SELECT group_ FROM Group group_ WHERE ");
 
-				query.append("companyId = ?");
-
-				query.append(" AND ");
-
-				query.append("classNameId = ?");
+				query.append("group_.companyId = ?");
 
 				query.append(" AND ");
 
-				query.append("liveGroupId = ?");
+				query.append("group_.classNameId = ?");
+
+				query.append(" AND ");
+
+				query.append("group_.liveGroupId = ?");
 
 				query.append(" AND ");
 
 				if (name == null) {
-					query.append("name IS NULL");
+					query.append("group_.name IS NULL");
 				}
 				else {
-					query.append("name = ?");
+					query.append("group_.name = ?");
 				}
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("name ASC");
+				query.append("group_.name ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1749,17 +1783,34 @@ public class GroupPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.Group ");
+				query.append("SELECT group_ FROM Group group_ ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("group_.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("name ASC");
+					query.append("group_.name ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1863,10 +1914,10 @@ public class GroupPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append("FROM com.liferay.portal.model.Group WHERE ");
+				query.append("SELECT COUNT(group_) ");
+				query.append("FROM Group group_ WHERE ");
 
-				query.append("liveGroupId = ?");
+				query.append("group_.liveGroupId = ?");
 
 				query.append(" ");
 
@@ -1911,18 +1962,18 @@ public class GroupPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append("FROM com.liferay.portal.model.Group WHERE ");
+				query.append("SELECT COUNT(group_) ");
+				query.append("FROM Group group_ WHERE ");
 
-				query.append("companyId = ?");
+				query.append("group_.companyId = ?");
 
 				query.append(" AND ");
 
 				if (name == null) {
-					query.append("name IS NULL");
+					query.append("group_.name IS NULL");
 				}
 				else {
-					query.append("name = ?");
+					query.append("group_.name = ?");
 				}
 
 				query.append(" ");
@@ -1972,18 +2023,18 @@ public class GroupPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append("FROM com.liferay.portal.model.Group WHERE ");
+				query.append("SELECT COUNT(group_) ");
+				query.append("FROM Group group_ WHERE ");
 
-				query.append("companyId = ?");
+				query.append("group_.companyId = ?");
 
 				query.append(" AND ");
 
 				if (friendlyURL == null) {
-					query.append("friendlyURL IS NULL");
+					query.append("group_.friendlyURL IS NULL");
 				}
 				else {
-					query.append("friendlyURL = ?");
+					query.append("group_.friendlyURL = ?");
 				}
 
 				query.append(" ");
@@ -2034,14 +2085,14 @@ public class GroupPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append("FROM com.liferay.portal.model.Group WHERE ");
+				query.append("SELECT COUNT(group_) ");
+				query.append("FROM Group group_ WHERE ");
 
-				query.append("type_ = ?");
+				query.append("group_.type = ?");
 
 				query.append(" AND ");
 
-				query.append("active_ = ?");
+				query.append("group_.active = ?");
 
 				query.append(" ");
 
@@ -2090,18 +2141,18 @@ public class GroupPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append("FROM com.liferay.portal.model.Group WHERE ");
+				query.append("SELECT COUNT(group_) ");
+				query.append("FROM Group group_ WHERE ");
 
-				query.append("companyId = ?");
-
-				query.append(" AND ");
-
-				query.append("classNameId = ?");
+				query.append("group_.companyId = ?");
 
 				query.append(" AND ");
 
-				query.append("classPK = ?");
+				query.append("group_.classNameId = ?");
+
+				query.append(" AND ");
+
+				query.append("group_.classPK = ?");
 
 				query.append(" ");
 
@@ -2154,22 +2205,22 @@ public class GroupPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append("FROM com.liferay.portal.model.Group WHERE ");
+				query.append("SELECT COUNT(group_) ");
+				query.append("FROM Group group_ WHERE ");
 
-				query.append("companyId = ?");
+				query.append("group_.companyId = ?");
 
 				query.append(" AND ");
 
-				query.append("liveGroupId = ?");
+				query.append("group_.liveGroupId = ?");
 
 				query.append(" AND ");
 
 				if (name == null) {
-					query.append("name IS NULL");
+					query.append("group_.name IS NULL");
 				}
 				else {
-					query.append("name = ?");
+					query.append("group_.name = ?");
 				}
 
 				query.append(" ");
@@ -2226,26 +2277,26 @@ public class GroupPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append("FROM com.liferay.portal.model.Group WHERE ");
+				query.append("SELECT COUNT(group_) ");
+				query.append("FROM Group group_ WHERE ");
 
-				query.append("companyId = ?");
-
-				query.append(" AND ");
-
-				query.append("classNameId = ?");
+				query.append("group_.companyId = ?");
 
 				query.append(" AND ");
 
-				query.append("liveGroupId = ?");
+				query.append("group_.classNameId = ?");
+
+				query.append(" AND ");
+
+				query.append("group_.liveGroupId = ?");
 
 				query.append(" AND ");
 
 				if (name == null) {
-					query.append("name IS NULL");
+					query.append("group_.name IS NULL");
 				}
 				else {
-					query.append("name = ?");
+					query.append("group_.name = ?");
 				}
 
 				query.append(" ");
@@ -2297,7 +2348,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl
 				session = openSession();
 
 				Query q = session.createQuery(
-						"SELECT COUNT(*) FROM com.liferay.portal.model.Group");
+						"SELECT COUNT(group_) FROM Group group_");
 
 				count = (Long)q.uniqueResult();
 			}

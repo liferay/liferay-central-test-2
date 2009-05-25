@@ -417,9 +417,9 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portal.model.PluginSetting WHERE ");
+					"SELECT pluginSetting FROM PluginSetting pluginSetting WHERE ");
 
-				query.append("companyId = ?");
+				query.append("pluginSetting.companyId = ?");
 
 				query.append(" ");
 
@@ -476,15 +476,32 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portal.model.PluginSetting WHERE ");
+					"SELECT pluginSetting FROM PluginSetting pluginSetting WHERE ");
 
-				query.append("companyId = ?");
+				query.append("pluginSetting.companyId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("pluginSetting.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -575,15 +592,33 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl
 
 			StringBuilder query = new StringBuilder();
 
-			query.append("FROM com.liferay.portal.model.PluginSetting WHERE ");
+			query.append(
+				"SELECT pluginSetting FROM PluginSetting pluginSetting WHERE ");
 
-			query.append("companyId = ?");
+			query.append("pluginSetting.companyId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("pluginSetting.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -672,26 +707,26 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portal.model.PluginSetting WHERE ");
+					"SELECT pluginSetting FROM PluginSetting pluginSetting WHERE ");
 
-				query.append("companyId = ?");
+				query.append("pluginSetting.companyId = ?");
 
 				query.append(" AND ");
 
 				if (pluginId == null) {
-					query.append("pluginId IS NULL");
+					query.append("pluginSetting.pluginId IS NULL");
 				}
 				else {
-					query.append("pluginId = ?");
+					query.append("pluginSetting.pluginId = ?");
 				}
 
 				query.append(" AND ");
 
 				if (pluginType == null) {
-					query.append("pluginType IS NULL");
+					query.append("pluginSetting.pluginType IS NULL");
 				}
 				else {
-					query.append("pluginType = ?");
+					query.append("pluginSetting.pluginType = ?");
 				}
 
 				query.append(" ");
@@ -825,11 +860,29 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.PluginSetting ");
+				query.append(
+					"SELECT pluginSetting FROM PluginSetting pluginSetting ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("pluginSetting.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -898,11 +951,10 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portal.model.PluginSetting WHERE ");
+				query.append("SELECT COUNT(pluginSetting) ");
+				query.append("FROM PluginSetting pluginSetting WHERE ");
 
-				query.append("companyId = ?");
+				query.append("pluginSetting.companyId = ?");
 
 				query.append(" ");
 
@@ -953,28 +1005,27 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portal.model.PluginSetting WHERE ");
+				query.append("SELECT COUNT(pluginSetting) ");
+				query.append("FROM PluginSetting pluginSetting WHERE ");
 
-				query.append("companyId = ?");
+				query.append("pluginSetting.companyId = ?");
 
 				query.append(" AND ");
 
 				if (pluginId == null) {
-					query.append("pluginId IS NULL");
+					query.append("pluginSetting.pluginId IS NULL");
 				}
 				else {
-					query.append("pluginId = ?");
+					query.append("pluginSetting.pluginId = ?");
 				}
 
 				query.append(" AND ");
 
 				if (pluginType == null) {
-					query.append("pluginType IS NULL");
+					query.append("pluginSetting.pluginType IS NULL");
 				}
 				else {
-					query.append("pluginType = ?");
+					query.append("pluginSetting.pluginType = ?");
 				}
 
 				query.append(" ");
@@ -1026,7 +1077,7 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl
 				session = openSession();
 
 				Query q = session.createQuery(
-						"SELECT COUNT(*) FROM com.liferay.portal.model.PluginSetting");
+						"SELECT COUNT(pluginSetting) FROM PluginSetting pluginSetting");
 
 				count = (Long)q.uniqueResult();
 			}

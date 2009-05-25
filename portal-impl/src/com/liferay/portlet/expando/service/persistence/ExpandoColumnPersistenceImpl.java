@@ -399,15 +399,15 @@ public class ExpandoColumnPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.expando.model.ExpandoColumn WHERE ");
+					"SELECT expandoColumn FROM ExpandoColumn expandoColumn WHERE ");
 
-				query.append("tableId = ?");
+				query.append("expandoColumn.tableId = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("name ASC");
+				query.append("expandoColumn.name ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -462,21 +462,38 @@ public class ExpandoColumnPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.expando.model.ExpandoColumn WHERE ");
+					"SELECT expandoColumn FROM ExpandoColumn expandoColumn WHERE ");
 
-				query.append("tableId = ?");
+				query.append("expandoColumn.tableId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("expandoColumn.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("name ASC");
+					query.append("expandoColumn.name ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -565,21 +582,38 @@ public class ExpandoColumnPersistenceImpl extends BasePersistenceImpl
 			StringBuilder query = new StringBuilder();
 
 			query.append(
-				"FROM com.liferay.portlet.expando.model.ExpandoColumn WHERE ");
+				"SELECT expandoColumn FROM ExpandoColumn expandoColumn WHERE ");
 
-			query.append("tableId = ?");
+			query.append("expandoColumn.tableId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("expandoColumn.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("name ASC");
+				query.append("expandoColumn.name ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -658,24 +692,24 @@ public class ExpandoColumnPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.expando.model.ExpandoColumn WHERE ");
+					"SELECT expandoColumn FROM ExpandoColumn expandoColumn WHERE ");
 
-				query.append("tableId = ?");
+				query.append("expandoColumn.tableId = ?");
 
 				query.append(" AND ");
 
 				if (name == null) {
-					query.append("name IS NULL");
+					query.append("expandoColumn.name IS NULL");
 				}
 				else {
-					query.append("name = ?");
+					query.append("expandoColumn.name = ?");
 				}
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("name ASC");
+				query.append("expandoColumn.name ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -801,17 +835,34 @@ public class ExpandoColumnPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.expando.model.ExpandoColumn ");
+					"SELECT expandoColumn FROM ExpandoColumn expandoColumn ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("expandoColumn.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("name ASC");
+					query.append("expandoColumn.name ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -879,11 +930,10 @@ public class ExpandoColumnPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.expando.model.ExpandoColumn WHERE ");
+				query.append("SELECT COUNT(expandoColumn) ");
+				query.append("FROM ExpandoColumn expandoColumn WHERE ");
 
-				query.append("tableId = ?");
+				query.append("expandoColumn.tableId = ?");
 
 				query.append(" ");
 
@@ -927,19 +977,18 @@ public class ExpandoColumnPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.expando.model.ExpandoColumn WHERE ");
+				query.append("SELECT COUNT(expandoColumn) ");
+				query.append("FROM ExpandoColumn expandoColumn WHERE ");
 
-				query.append("tableId = ?");
+				query.append("expandoColumn.tableId = ?");
 
 				query.append(" AND ");
 
 				if (name == null) {
-					query.append("name IS NULL");
+					query.append("expandoColumn.name IS NULL");
 				}
 				else {
-					query.append("name = ?");
+					query.append("expandoColumn.name = ?");
 				}
 
 				query.append(" ");
@@ -987,7 +1036,7 @@ public class ExpandoColumnPersistenceImpl extends BasePersistenceImpl
 				session = openSession();
 
 				Query q = session.createQuery(
-						"SELECT COUNT(*) FROM com.liferay.portlet.expando.model.ExpandoColumn");
+						"SELECT COUNT(expandoColumn) FROM ExpandoColumn expandoColumn");
 
 				count = (Long)q.uniqueResult();
 			}

@@ -365,9 +365,9 @@ public class LayoutSetPrototypePersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portal.model.LayoutSetPrototype WHERE ");
+					"SELECT layoutSetPrototype FROM LayoutSetPrototype layoutSetPrototype WHERE ");
 
-				query.append("companyId = ?");
+				query.append("layoutSetPrototype.companyId = ?");
 
 				query.append(" ");
 
@@ -424,15 +424,32 @@ public class LayoutSetPrototypePersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portal.model.LayoutSetPrototype WHERE ");
+					"SELECT layoutSetPrototype FROM LayoutSetPrototype layoutSetPrototype WHERE ");
 
-				query.append("companyId = ?");
+				query.append("layoutSetPrototype.companyId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("layoutSetPrototype.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -524,15 +541,32 @@ public class LayoutSetPrototypePersistenceImpl extends BasePersistenceImpl
 			StringBuilder query = new StringBuilder();
 
 			query.append(
-				"FROM com.liferay.portal.model.LayoutSetPrototype WHERE ");
+				"SELECT layoutSetPrototype FROM LayoutSetPrototype layoutSetPrototype WHERE ");
 
-			query.append("companyId = ?");
+			query.append("layoutSetPrototype.companyId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("layoutSetPrototype.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -578,13 +612,13 @@ public class LayoutSetPrototypePersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portal.model.LayoutSetPrototype WHERE ");
+					"SELECT layoutSetPrototype FROM LayoutSetPrototype layoutSetPrototype WHERE ");
 
-				query.append("companyId = ?");
+				query.append("layoutSetPrototype.companyId = ?");
 
 				query.append(" AND ");
 
-				query.append("active_ = ?");
+				query.append("layoutSetPrototype.active = ?");
 
 				query.append(" ");
 
@@ -643,19 +677,36 @@ public class LayoutSetPrototypePersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portal.model.LayoutSetPrototype WHERE ");
+					"SELECT layoutSetPrototype FROM LayoutSetPrototype layoutSetPrototype WHERE ");
 
-				query.append("companyId = ?");
+				query.append("layoutSetPrototype.companyId = ?");
 
 				query.append(" AND ");
 
-				query.append("active_ = ?");
+				query.append("layoutSetPrototype.active = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("layoutSetPrototype.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -756,19 +807,36 @@ public class LayoutSetPrototypePersistenceImpl extends BasePersistenceImpl
 			StringBuilder query = new StringBuilder();
 
 			query.append(
-				"FROM com.liferay.portal.model.LayoutSetPrototype WHERE ");
+				"SELECT layoutSetPrototype FROM LayoutSetPrototype layoutSetPrototype WHERE ");
 
-			query.append("companyId = ?");
+			query.append("layoutSetPrototype.companyId = ?");
 
 			query.append(" AND ");
 
-			query.append("active_ = ?");
+			query.append("layoutSetPrototype.active = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("layoutSetPrototype.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -865,11 +933,28 @@ public class LayoutSetPrototypePersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portal.model.LayoutSetPrototype ");
+					"SELECT layoutSetPrototype FROM LayoutSetPrototype layoutSetPrototype ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("layoutSetPrototype.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -937,11 +1022,11 @@ public class LayoutSetPrototypePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
+				query.append("SELECT COUNT(layoutSetPrototype) ");
 				query.append(
-					"FROM com.liferay.portal.model.LayoutSetPrototype WHERE ");
+					"FROM LayoutSetPrototype layoutSetPrototype WHERE ");
 
-				query.append("companyId = ?");
+				query.append("layoutSetPrototype.companyId = ?");
 
 				query.append(" ");
 
@@ -988,15 +1073,15 @@ public class LayoutSetPrototypePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
+				query.append("SELECT COUNT(layoutSetPrototype) ");
 				query.append(
-					"FROM com.liferay.portal.model.LayoutSetPrototype WHERE ");
+					"FROM LayoutSetPrototype layoutSetPrototype WHERE ");
 
-				query.append("companyId = ?");
+				query.append("layoutSetPrototype.companyId = ?");
 
 				query.append(" AND ");
 
-				query.append("active_ = ?");
+				query.append("layoutSetPrototype.active = ?");
 
 				query.append(" ");
 
@@ -1041,7 +1126,7 @@ public class LayoutSetPrototypePersistenceImpl extends BasePersistenceImpl
 				session = openSession();
 
 				Query q = session.createQuery(
-						"SELECT COUNT(*) FROM com.liferay.portal.model.LayoutSetPrototype");
+						"SELECT COUNT(layoutSetPrototype) FROM LayoutSetPrototype layoutSetPrototype");
 
 				count = (Long)q.uniqueResult();
 			}

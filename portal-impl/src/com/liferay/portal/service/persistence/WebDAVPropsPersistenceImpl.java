@@ -407,13 +407,14 @@ public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.WebDAVProps WHERE ");
+				query.append(
+					"SELECT webDAVProps FROM WebDAVProps webDAVProps WHERE ");
 
-				query.append("classNameId = ?");
+				query.append("webDAVProps.classNameId = ?");
 
 				query.append(" AND ");
 
-				query.append("classPK = ?");
+				query.append("webDAVProps.classPK = ?");
 
 				query.append(" ");
 
@@ -537,11 +538,28 @@ public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.WebDAVProps ");
+				query.append("SELECT webDAVProps FROM WebDAVProps webDAVProps ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("webDAVProps.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -606,14 +624,14 @@ public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append("FROM com.liferay.portal.model.WebDAVProps WHERE ");
+				query.append("SELECT COUNT(webDAVProps) ");
+				query.append("FROM WebDAVProps webDAVProps WHERE ");
 
-				query.append("classNameId = ?");
+				query.append("webDAVProps.classNameId = ?");
 
 				query.append(" AND ");
 
-				query.append("classPK = ?");
+				query.append("webDAVProps.classPK = ?");
 
 				query.append(" ");
 
@@ -658,7 +676,7 @@ public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl
 				session = openSession();
 
 				Query q = session.createQuery(
-						"SELECT COUNT(*) FROM com.liferay.portal.model.WebDAVProps");
+						"SELECT COUNT(webDAVProps) FROM WebDAVProps webDAVProps");
 
 				count = (Long)q.uniqueResult();
 			}

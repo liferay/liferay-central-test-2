@@ -402,13 +402,13 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.ratings.model.RatingsEntry WHERE ");
+					"SELECT ratingsEntry FROM RatingsEntry ratingsEntry WHERE ");
 
-				query.append("classNameId = ?");
+				query.append("ratingsEntry.classNameId = ?");
 
 				query.append(" AND ");
 
-				query.append("classPK = ?");
+				query.append("ratingsEntry.classPK = ?");
 
 				query.append(" ");
 
@@ -467,19 +467,36 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.ratings.model.RatingsEntry WHERE ");
+					"SELECT ratingsEntry FROM RatingsEntry ratingsEntry WHERE ");
 
-				query.append("classNameId = ?");
+				query.append("ratingsEntry.classNameId = ?");
 
 				query.append(" AND ");
 
-				query.append("classPK = ?");
+				query.append("ratingsEntry.classPK = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("ratingsEntry.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -577,19 +594,36 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl
 			StringBuilder query = new StringBuilder();
 
 			query.append(
-				"FROM com.liferay.portlet.ratings.model.RatingsEntry WHERE ");
+				"SELECT ratingsEntry FROM RatingsEntry ratingsEntry WHERE ");
 
-			query.append("classNameId = ?");
+			query.append("ratingsEntry.classNameId = ?");
 
 			query.append(" AND ");
 
-			query.append("classPK = ?");
+			query.append("ratingsEntry.classPK = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("ratingsEntry.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -675,17 +709,17 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.ratings.model.RatingsEntry WHERE ");
+					"SELECT ratingsEntry FROM RatingsEntry ratingsEntry WHERE ");
 
-				query.append("userId = ?");
-
-				query.append(" AND ");
-
-				query.append("classNameId = ?");
+				query.append("ratingsEntry.userId = ?");
 
 				query.append(" AND ");
 
-				query.append("classPK = ?");
+				query.append("ratingsEntry.classNameId = ?");
+
+				query.append(" AND ");
+
+				query.append("ratingsEntry.classPK = ?");
 
 				query.append(" ");
 
@@ -813,11 +847,28 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.ratings.model.RatingsEntry ");
+					"SELECT ratingsEntry FROM RatingsEntry ratingsEntry ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("ratingsEntry.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -889,15 +940,14 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.ratings.model.RatingsEntry WHERE ");
+				query.append("SELECT COUNT(ratingsEntry) ");
+				query.append("FROM RatingsEntry ratingsEntry WHERE ");
 
-				query.append("classNameId = ?");
+				query.append("ratingsEntry.classNameId = ?");
 
 				query.append(" AND ");
 
-				query.append("classPK = ?");
+				query.append("ratingsEntry.classPK = ?");
 
 				query.append(" ");
 
@@ -946,19 +996,18 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.ratings.model.RatingsEntry WHERE ");
+				query.append("SELECT COUNT(ratingsEntry) ");
+				query.append("FROM RatingsEntry ratingsEntry WHERE ");
 
-				query.append("userId = ?");
-
-				query.append(" AND ");
-
-				query.append("classNameId = ?");
+				query.append("ratingsEntry.userId = ?");
 
 				query.append(" AND ");
 
-				query.append("classPK = ?");
+				query.append("ratingsEntry.classNameId = ?");
+
+				query.append(" AND ");
+
+				query.append("ratingsEntry.classPK = ?");
 
 				query.append(" ");
 
@@ -1005,7 +1054,7 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl
 				session = openSession();
 
 				Query q = session.createQuery(
-						"SELECT COUNT(*) FROM com.liferay.portlet.ratings.model.RatingsEntry");
+						"SELECT COUNT(ratingsEntry) FROM RatingsEntry ratingsEntry");
 
 				count = (Long)q.uniqueResult();
 			}

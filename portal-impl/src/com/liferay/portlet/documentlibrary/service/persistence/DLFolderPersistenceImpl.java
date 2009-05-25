@@ -513,22 +513,21 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.documentlibrary.model.DLFolder WHERE ");
+				query.append("SELECT dlFolder FROM DLFolder dlFolder WHERE ");
 
 				if (uuid == null) {
-					query.append("uuid_ IS NULL");
+					query.append("dlFolder.uuid IS NULL");
 				}
 				else {
-					query.append("uuid_ = ?");
+					query.append("dlFolder.uuid = ?");
 				}
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("parentFolderId ASC, ");
-				query.append("name ASC");
+				query.append("dlFolder.parentFolderId ASC, ");
+				query.append("dlFolder.name ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -584,28 +583,44 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.documentlibrary.model.DLFolder WHERE ");
+				query.append("SELECT dlFolder FROM DLFolder dlFolder WHERE ");
 
 				if (uuid == null) {
-					query.append("uuid_ IS NULL");
+					query.append("dlFolder.uuid IS NULL");
 				}
 				else {
-					query.append("uuid_ = ?");
+					query.append("dlFolder.uuid = ?");
 				}
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("dlFolder.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("parentFolderId ASC, ");
-					query.append("name ASC");
+					query.append("dlFolder.parentFolderId ASC, ");
+					query.append("dlFolder.name ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -694,28 +709,44 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 
 			StringBuilder query = new StringBuilder();
 
-			query.append(
-				"FROM com.liferay.portlet.documentlibrary.model.DLFolder WHERE ");
+			query.append("SELECT dlFolder FROM DLFolder dlFolder WHERE ");
 
 			if (uuid == null) {
-				query.append("uuid_ IS NULL");
+				query.append("dlFolder.uuid IS NULL");
 			}
 			else {
-				query.append("uuid_ = ?");
+				query.append("dlFolder.uuid = ?");
 			}
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("dlFolder.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("parentFolderId ASC, ");
-				query.append("name ASC");
+				query.append("dlFolder.parentFolderId ASC, ");
+				query.append("dlFolder.name ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -794,26 +825,25 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.documentlibrary.model.DLFolder WHERE ");
+				query.append("SELECT dlFolder FROM DLFolder dlFolder WHERE ");
 
 				if (uuid == null) {
-					query.append("uuid_ IS NULL");
+					query.append("dlFolder.uuid IS NULL");
 				}
 				else {
-					query.append("uuid_ = ?");
+					query.append("dlFolder.uuid = ?");
 				}
 
 				query.append(" AND ");
 
-				query.append("groupId = ?");
+				query.append("dlFolder.groupId = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("parentFolderId ASC, ");
-				query.append("name ASC");
+				query.append("dlFolder.parentFolderId ASC, ");
+				query.append("dlFolder.name ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -886,17 +916,16 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.documentlibrary.model.DLFolder WHERE ");
+				query.append("SELECT dlFolder FROM DLFolder dlFolder WHERE ");
 
-				query.append("groupId = ?");
+				query.append("dlFolder.groupId = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("parentFolderId ASC, ");
-				query.append("name ASC");
+				query.append("dlFolder.parentFolderId ASC, ");
+				query.append("dlFolder.name ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -950,23 +979,39 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.documentlibrary.model.DLFolder WHERE ");
+				query.append("SELECT dlFolder FROM DLFolder dlFolder WHERE ");
 
-				query.append("groupId = ?");
+				query.append("dlFolder.groupId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("dlFolder.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("parentFolderId ASC, ");
-					query.append("name ASC");
+					query.append("dlFolder.parentFolderId ASC, ");
+					query.append("dlFolder.name ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1053,23 +1098,39 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 
 			StringBuilder query = new StringBuilder();
 
-			query.append(
-				"FROM com.liferay.portlet.documentlibrary.model.DLFolder WHERE ");
+			query.append("SELECT dlFolder FROM DLFolder dlFolder WHERE ");
 
-			query.append("groupId = ?");
+			query.append("dlFolder.groupId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("dlFolder.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("parentFolderId ASC, ");
-				query.append("name ASC");
+				query.append("dlFolder.parentFolderId ASC, ");
+				query.append("dlFolder.name ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -1111,17 +1172,16 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.documentlibrary.model.DLFolder WHERE ");
+				query.append("SELECT dlFolder FROM DLFolder dlFolder WHERE ");
 
-				query.append("companyId = ?");
+				query.append("dlFolder.companyId = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("parentFolderId ASC, ");
-				query.append("name ASC");
+				query.append("dlFolder.parentFolderId ASC, ");
+				query.append("dlFolder.name ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1175,23 +1235,39 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.documentlibrary.model.DLFolder WHERE ");
+				query.append("SELECT dlFolder FROM DLFolder dlFolder WHERE ");
 
-				query.append("companyId = ?");
+				query.append("dlFolder.companyId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("dlFolder.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("parentFolderId ASC, ");
-					query.append("name ASC");
+					query.append("dlFolder.parentFolderId ASC, ");
+					query.append("dlFolder.name ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1279,23 +1355,39 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 
 			StringBuilder query = new StringBuilder();
 
-			query.append(
-				"FROM com.liferay.portlet.documentlibrary.model.DLFolder WHERE ");
+			query.append("SELECT dlFolder FROM DLFolder dlFolder WHERE ");
 
-			query.append("companyId = ?");
+			query.append("dlFolder.companyId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("dlFolder.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("parentFolderId ASC, ");
-				query.append("name ASC");
+				query.append("dlFolder.parentFolderId ASC, ");
+				query.append("dlFolder.name ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -1339,21 +1431,20 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.documentlibrary.model.DLFolder WHERE ");
+				query.append("SELECT dlFolder FROM DLFolder dlFolder WHERE ");
 
-				query.append("groupId = ?");
+				query.append("dlFolder.groupId = ?");
 
 				query.append(" AND ");
 
-				query.append("parentFolderId = ?");
+				query.append("dlFolder.parentFolderId = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("parentFolderId ASC, ");
-				query.append("name ASC");
+				query.append("dlFolder.parentFolderId ASC, ");
+				query.append("dlFolder.name ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1409,27 +1500,43 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.documentlibrary.model.DLFolder WHERE ");
+				query.append("SELECT dlFolder FROM DLFolder dlFolder WHERE ");
 
-				query.append("groupId = ?");
+				query.append("dlFolder.groupId = ?");
 
 				query.append(" AND ");
 
-				query.append("parentFolderId = ?");
+				query.append("dlFolder.parentFolderId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("dlFolder.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("parentFolderId ASC, ");
-					query.append("name ASC");
+					query.append("dlFolder.parentFolderId ASC, ");
+					query.append("dlFolder.name ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1526,27 +1633,43 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 
 			StringBuilder query = new StringBuilder();
 
-			query.append(
-				"FROM com.liferay.portlet.documentlibrary.model.DLFolder WHERE ");
+			query.append("SELECT dlFolder FROM DLFolder dlFolder WHERE ");
 
-			query.append("groupId = ?");
+			query.append("dlFolder.groupId = ?");
 
 			query.append(" AND ");
 
-			query.append("parentFolderId = ?");
+			query.append("dlFolder.parentFolderId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("dlFolder.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("parentFolderId ASC, ");
-				query.append("name ASC");
+				query.append("dlFolder.parentFolderId ASC, ");
+				query.append("dlFolder.name ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -1590,26 +1713,25 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.documentlibrary.model.DLFolder WHERE ");
+				query.append("SELECT dlFolder FROM DLFolder dlFolder WHERE ");
 
-				query.append("parentFolderId = ?");
+				query.append("dlFolder.parentFolderId = ?");
 
 				query.append(" AND ");
 
 				if (name == null) {
-					query.append("name IS NULL");
+					query.append("dlFolder.name IS NULL");
 				}
 				else {
-					query.append("name = ?");
+					query.append("dlFolder.name = ?");
 				}
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("parentFolderId ASC, ");
-				query.append("name ASC");
+				query.append("dlFolder.parentFolderId ASC, ");
+				query.append("dlFolder.name ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1669,32 +1791,48 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.documentlibrary.model.DLFolder WHERE ");
+				query.append("SELECT dlFolder FROM DLFolder dlFolder WHERE ");
 
-				query.append("parentFolderId = ?");
+				query.append("dlFolder.parentFolderId = ?");
 
 				query.append(" AND ");
 
 				if (name == null) {
-					query.append("name IS NULL");
+					query.append("dlFolder.name IS NULL");
 				}
 				else {
-					query.append("name = ?");
+					query.append("dlFolder.name = ?");
 				}
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("dlFolder.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("parentFolderId ASC, ");
-					query.append("name ASC");
+					query.append("dlFolder.parentFolderId ASC, ");
+					query.append("dlFolder.name ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1793,32 +1931,48 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 
 			StringBuilder query = new StringBuilder();
 
-			query.append(
-				"FROM com.liferay.portlet.documentlibrary.model.DLFolder WHERE ");
+			query.append("SELECT dlFolder FROM DLFolder dlFolder WHERE ");
 
-			query.append("parentFolderId = ?");
+			query.append("dlFolder.parentFolderId = ?");
 
 			query.append(" AND ");
 
 			if (name == null) {
-				query.append("name IS NULL");
+				query.append("dlFolder.name IS NULL");
 			}
 			else {
-				query.append("name = ?");
+				query.append("dlFolder.name = ?");
 			}
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("dlFolder.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("parentFolderId ASC, ");
-				query.append("name ASC");
+				query.append("dlFolder.parentFolderId ASC, ");
+				query.append("dlFolder.name ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -1906,30 +2060,29 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.documentlibrary.model.DLFolder WHERE ");
+				query.append("SELECT dlFolder FROM DLFolder dlFolder WHERE ");
 
-				query.append("groupId = ?");
+				query.append("dlFolder.groupId = ?");
 
 				query.append(" AND ");
 
-				query.append("parentFolderId = ?");
+				query.append("dlFolder.parentFolderId = ?");
 
 				query.append(" AND ");
 
 				if (name == null) {
-					query.append("name IS NULL");
+					query.append("dlFolder.name IS NULL");
 				}
 				else {
-					query.append("name = ?");
+					query.append("dlFolder.name = ?");
 				}
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("parentFolderId ASC, ");
-				query.append("name ASC");
+				query.append("dlFolder.parentFolderId ASC, ");
+				query.append("dlFolder.name ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -2056,19 +2209,35 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.documentlibrary.model.DLFolder ");
+				query.append("SELECT dlFolder FROM DLFolder dlFolder ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("dlFolder.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("parentFolderId ASC, ");
-					query.append("name ASC");
+					query.append("dlFolder.parentFolderId ASC, ");
+					query.append("dlFolder.name ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -2169,15 +2338,14 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.documentlibrary.model.DLFolder WHERE ");
+				query.append("SELECT COUNT(dlFolder) ");
+				query.append("FROM DLFolder dlFolder WHERE ");
 
 				if (uuid == null) {
-					query.append("uuid_ IS NULL");
+					query.append("dlFolder.uuid IS NULL");
 				}
 				else {
-					query.append("uuid_ = ?");
+					query.append("dlFolder.uuid = ?");
 				}
 
 				query.append(" ");
@@ -2225,20 +2393,19 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.documentlibrary.model.DLFolder WHERE ");
+				query.append("SELECT COUNT(dlFolder) ");
+				query.append("FROM DLFolder dlFolder WHERE ");
 
 				if (uuid == null) {
-					query.append("uuid_ IS NULL");
+					query.append("dlFolder.uuid IS NULL");
 				}
 				else {
-					query.append("uuid_ = ?");
+					query.append("dlFolder.uuid = ?");
 				}
 
 				query.append(" AND ");
 
-				query.append("groupId = ?");
+				query.append("dlFolder.groupId = ?");
 
 				query.append(" ");
 
@@ -2286,11 +2453,10 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.documentlibrary.model.DLFolder WHERE ");
+				query.append("SELECT COUNT(dlFolder) ");
+				query.append("FROM DLFolder dlFolder WHERE ");
 
-				query.append("groupId = ?");
+				query.append("dlFolder.groupId = ?");
 
 				query.append(" ");
 
@@ -2334,11 +2500,10 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.documentlibrary.model.DLFolder WHERE ");
+				query.append("SELECT COUNT(dlFolder) ");
+				query.append("FROM DLFolder dlFolder WHERE ");
 
-				query.append("companyId = ?");
+				query.append("dlFolder.companyId = ?");
 
 				query.append(" ");
 
@@ -2385,15 +2550,14 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.documentlibrary.model.DLFolder WHERE ");
+				query.append("SELECT COUNT(dlFolder) ");
+				query.append("FROM DLFolder dlFolder WHERE ");
 
-				query.append("groupId = ?");
+				query.append("dlFolder.groupId = ?");
 
 				query.append(" AND ");
 
-				query.append("parentFolderId = ?");
+				query.append("dlFolder.parentFolderId = ?");
 
 				query.append(" ");
 
@@ -2440,19 +2604,18 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.documentlibrary.model.DLFolder WHERE ");
+				query.append("SELECT COUNT(dlFolder) ");
+				query.append("FROM DLFolder dlFolder WHERE ");
 
-				query.append("parentFolderId = ?");
+				query.append("dlFolder.parentFolderId = ?");
 
 				query.append(" AND ");
 
 				if (name == null) {
-					query.append("name IS NULL");
+					query.append("dlFolder.name IS NULL");
 				}
 				else {
-					query.append("name = ?");
+					query.append("dlFolder.name = ?");
 				}
 
 				query.append(" ");
@@ -2506,23 +2669,22 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.documentlibrary.model.DLFolder WHERE ");
+				query.append("SELECT COUNT(dlFolder) ");
+				query.append("FROM DLFolder dlFolder WHERE ");
 
-				query.append("groupId = ?");
+				query.append("dlFolder.groupId = ?");
 
 				query.append(" AND ");
 
-				query.append("parentFolderId = ?");
+				query.append("dlFolder.parentFolderId = ?");
 
 				query.append(" AND ");
 
 				if (name == null) {
-					query.append("name IS NULL");
+					query.append("dlFolder.name IS NULL");
 				}
 				else {
-					query.append("name = ?");
+					query.append("dlFolder.name = ?");
 				}
 
 				query.append(" ");
@@ -2572,7 +2734,7 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 				session = openSession();
 
 				Query q = session.createQuery(
-						"SELECT COUNT(*) FROM com.liferay.portlet.documentlibrary.model.DLFolder");
+						"SELECT COUNT(dlFolder) FROM DLFolder dlFolder");
 
 				count = (Long)q.uniqueResult();
 			}

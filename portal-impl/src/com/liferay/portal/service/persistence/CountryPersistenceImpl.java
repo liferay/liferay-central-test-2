@@ -449,20 +449,20 @@ public class CountryPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.Country WHERE ");
+				query.append("SELECT country FROM Country country WHERE ");
 
 				if (name == null) {
-					query.append("name IS NULL");
+					query.append("country.name IS NULL");
 				}
 				else {
-					query.append("name = ?");
+					query.append("country.name = ?");
 				}
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("name ASC");
+				query.append("country.name ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -564,20 +564,20 @@ public class CountryPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.Country WHERE ");
+				query.append("SELECT country FROM Country country WHERE ");
 
 				if (a2 == null) {
-					query.append("a2 IS NULL");
+					query.append("country.a2 IS NULL");
 				}
 				else {
-					query.append("a2 = ?");
+					query.append("country.a2 = ?");
 				}
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("name ASC");
+				query.append("country.name ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -679,20 +679,20 @@ public class CountryPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.Country WHERE ");
+				query.append("SELECT country FROM Country country WHERE ");
 
 				if (a3 == null) {
-					query.append("a3 IS NULL");
+					query.append("country.a3 IS NULL");
 				}
 				else {
-					query.append("a3 = ?");
+					query.append("country.a3 = ?");
 				}
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("name ASC");
+				query.append("country.name ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -762,15 +762,15 @@ public class CountryPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.Country WHERE ");
+				query.append("SELECT country FROM Country country WHERE ");
 
-				query.append("active_ = ?");
+				query.append("country.active = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("name ASC");
+				query.append("country.name ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -824,21 +824,38 @@ public class CountryPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.Country WHERE ");
+				query.append("SELECT country FROM Country country WHERE ");
 
-				query.append("active_ = ?");
+				query.append("country.active = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("country.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("name ASC");
+					query.append("country.name ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -924,21 +941,38 @@ public class CountryPersistenceImpl extends BasePersistenceImpl
 
 			StringBuilder query = new StringBuilder();
 
-			query.append("FROM com.liferay.portal.model.Country WHERE ");
+			query.append("SELECT country FROM Country country WHERE ");
 
-			query.append("active_ = ?");
+			query.append("country.active = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("country.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("name ASC");
+				query.append("country.name ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -1030,17 +1064,34 @@ public class CountryPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.Country ");
+				query.append("SELECT country FROM Country country ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("country.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("name ASC");
+					query.append("country.name ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1122,14 +1173,14 @@ public class CountryPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append("FROM com.liferay.portal.model.Country WHERE ");
+				query.append("SELECT COUNT(country) ");
+				query.append("FROM Country country WHERE ");
 
 				if (name == null) {
-					query.append("name IS NULL");
+					query.append("country.name IS NULL");
 				}
 				else {
-					query.append("name = ?");
+					query.append("country.name = ?");
 				}
 
 				query.append(" ");
@@ -1176,14 +1227,14 @@ public class CountryPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append("FROM com.liferay.portal.model.Country WHERE ");
+				query.append("SELECT COUNT(country) ");
+				query.append("FROM Country country WHERE ");
 
 				if (a2 == null) {
-					query.append("a2 IS NULL");
+					query.append("country.a2 IS NULL");
 				}
 				else {
-					query.append("a2 = ?");
+					query.append("country.a2 = ?");
 				}
 
 				query.append(" ");
@@ -1230,14 +1281,14 @@ public class CountryPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append("FROM com.liferay.portal.model.Country WHERE ");
+				query.append("SELECT COUNT(country) ");
+				query.append("FROM Country country WHERE ");
 
 				if (a3 == null) {
-					query.append("a3 IS NULL");
+					query.append("country.a3 IS NULL");
 				}
 				else {
-					query.append("a3 = ?");
+					query.append("country.a3 = ?");
 				}
 
 				query.append(" ");
@@ -1284,10 +1335,10 @@ public class CountryPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append("FROM com.liferay.portal.model.Country WHERE ");
+				query.append("SELECT COUNT(country) ");
+				query.append("FROM Country country WHERE ");
 
-				query.append("active_ = ?");
+				query.append("country.active = ?");
 
 				query.append(" ");
 
@@ -1330,7 +1381,7 @@ public class CountryPersistenceImpl extends BasePersistenceImpl
 				session = openSession();
 
 				Query q = session.createQuery(
-						"SELECT COUNT(*) FROM com.liferay.portal.model.Country");
+						"SELECT COUNT(country) FROM Country country");
 
 				count = (Long)q.uniqueResult();
 			}

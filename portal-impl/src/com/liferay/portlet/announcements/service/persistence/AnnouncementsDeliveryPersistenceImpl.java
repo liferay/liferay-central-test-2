@@ -406,9 +406,9 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.announcements.model.AnnouncementsDelivery WHERE ");
+					"SELECT announcementsDelivery FROM AnnouncementsDelivery announcementsDelivery WHERE ");
 
-				query.append("userId = ?");
+				query.append("announcementsDelivery.userId = ?");
 
 				query.append(" ");
 
@@ -465,15 +465,32 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.announcements.model.AnnouncementsDelivery WHERE ");
+					"SELECT announcementsDelivery FROM AnnouncementsDelivery announcementsDelivery WHERE ");
 
-				query.append("userId = ?");
+				query.append("announcementsDelivery.userId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("announcementsDelivery.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -563,15 +580,32 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl
 			StringBuilder query = new StringBuilder();
 
 			query.append(
-				"FROM com.liferay.portlet.announcements.model.AnnouncementsDelivery WHERE ");
+				"SELECT announcementsDelivery FROM AnnouncementsDelivery announcementsDelivery WHERE ");
 
-			query.append("userId = ?");
+			query.append("announcementsDelivery.userId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("announcementsDelivery.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -650,17 +684,17 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.announcements.model.AnnouncementsDelivery WHERE ");
+					"SELECT announcementsDelivery FROM AnnouncementsDelivery announcementsDelivery WHERE ");
 
-				query.append("userId = ?");
+				query.append("announcementsDelivery.userId = ?");
 
 				query.append(" AND ");
 
 				if (type == null) {
-					query.append("type_ IS NULL");
+					query.append("announcementsDelivery.type IS NULL");
 				}
 				else {
-					query.append("type_ = ?");
+					query.append("announcementsDelivery.type = ?");
 				}
 
 				query.append(" ");
@@ -789,11 +823,28 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.announcements.model.AnnouncementsDelivery ");
+					"SELECT announcementsDelivery FROM AnnouncementsDelivery announcementsDelivery ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("announcementsDelivery.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -861,11 +912,11 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
+				query.append("SELECT COUNT(announcementsDelivery) ");
 				query.append(
-					"FROM com.liferay.portlet.announcements.model.AnnouncementsDelivery WHERE ");
+					"FROM AnnouncementsDelivery announcementsDelivery WHERE ");
 
-				query.append("userId = ?");
+				query.append("announcementsDelivery.userId = ?");
 
 				query.append(" ");
 
@@ -909,19 +960,19 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
+				query.append("SELECT COUNT(announcementsDelivery) ");
 				query.append(
-					"FROM com.liferay.portlet.announcements.model.AnnouncementsDelivery WHERE ");
+					"FROM AnnouncementsDelivery announcementsDelivery WHERE ");
 
-				query.append("userId = ?");
+				query.append("announcementsDelivery.userId = ?");
 
 				query.append(" AND ");
 
 				if (type == null) {
-					query.append("type_ IS NULL");
+					query.append("announcementsDelivery.type IS NULL");
 				}
 				else {
-					query.append("type_ = ?");
+					query.append("announcementsDelivery.type = ?");
 				}
 
 				query.append(" ");
@@ -969,7 +1020,7 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl
 				session = openSession();
 
 				Query q = session.createQuery(
-						"SELECT COUNT(*) FROM com.liferay.portlet.announcements.model.AnnouncementsDelivery");
+						"SELECT COUNT(announcementsDelivery) FROM AnnouncementsDelivery announcementsDelivery");
 
 				count = (Long)q.uniqueResult();
 			}

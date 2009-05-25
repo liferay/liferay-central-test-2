@@ -403,9 +403,9 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.shopping.model.ShoppingCart WHERE ");
+					"SELECT shoppingCart FROM ShoppingCart shoppingCart WHERE ");
 
-				query.append("groupId = ?");
+				query.append("shoppingCart.groupId = ?");
 
 				query.append(" ");
 
@@ -462,15 +462,32 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.shopping.model.ShoppingCart WHERE ");
+					"SELECT shoppingCart FROM ShoppingCart shoppingCart WHERE ");
 
-				query.append("groupId = ?");
+				query.append("shoppingCart.groupId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("shoppingCart.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -558,15 +575,32 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl
 			StringBuilder query = new StringBuilder();
 
 			query.append(
-				"FROM com.liferay.portlet.shopping.model.ShoppingCart WHERE ");
+				"SELECT shoppingCart FROM ShoppingCart shoppingCart WHERE ");
 
-			query.append("groupId = ?");
+			query.append("shoppingCart.groupId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("shoppingCart.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -610,9 +644,9 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.shopping.model.ShoppingCart WHERE ");
+					"SELECT shoppingCart FROM ShoppingCart shoppingCart WHERE ");
 
-				query.append("userId = ?");
+				query.append("shoppingCart.userId = ?");
 
 				query.append(" ");
 
@@ -669,15 +703,32 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.shopping.model.ShoppingCart WHERE ");
+					"SELECT shoppingCart FROM ShoppingCart shoppingCart WHERE ");
 
-				query.append("userId = ?");
+				query.append("shoppingCart.userId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("shoppingCart.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -765,15 +816,32 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl
 			StringBuilder query = new StringBuilder();
 
 			query.append(
-				"FROM com.liferay.portlet.shopping.model.ShoppingCart WHERE ");
+				"SELECT shoppingCart FROM ShoppingCart shoppingCart WHERE ");
 
-			query.append("userId = ?");
+			query.append("shoppingCart.userId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("shoppingCart.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -852,13 +920,13 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.shopping.model.ShoppingCart WHERE ");
+					"SELECT shoppingCart FROM ShoppingCart shoppingCart WHERE ");
 
-				query.append("groupId = ?");
+				query.append("shoppingCart.groupId = ?");
 
 				query.append(" AND ");
 
-				query.append("userId = ?");
+				query.append("shoppingCart.userId = ?");
 
 				query.append(" ");
 
@@ -983,11 +1051,28 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.shopping.model.ShoppingCart ");
+					"SELECT shoppingCart FROM ShoppingCart shoppingCart ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("shoppingCart.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1061,11 +1146,10 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.shopping.model.ShoppingCart WHERE ");
+				query.append("SELECT COUNT(shoppingCart) ");
+				query.append("FROM ShoppingCart shoppingCart WHERE ");
 
-				query.append("groupId = ?");
+				query.append("shoppingCart.groupId = ?");
 
 				query.append(" ");
 
@@ -1109,11 +1193,10 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.shopping.model.ShoppingCart WHERE ");
+				query.append("SELECT COUNT(shoppingCart) ");
+				query.append("FROM ShoppingCart shoppingCart WHERE ");
 
-				query.append("userId = ?");
+				query.append("shoppingCart.userId = ?");
 
 				query.append(" ");
 
@@ -1157,15 +1240,14 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.shopping.model.ShoppingCart WHERE ");
+				query.append("SELECT COUNT(shoppingCart) ");
+				query.append("FROM ShoppingCart shoppingCart WHERE ");
 
-				query.append("groupId = ?");
+				query.append("shoppingCart.groupId = ?");
 
 				query.append(" AND ");
 
-				query.append("userId = ?");
+				query.append("shoppingCart.userId = ?");
 
 				query.append(" ");
 
@@ -1210,7 +1292,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl
 				session = openSession();
 
 				Query q = session.createQuery(
-						"SELECT COUNT(*) FROM com.liferay.portlet.shopping.model.ShoppingCart");
+						"SELECT COUNT(shoppingCart) FROM ShoppingCart shoppingCart");
 
 				count = (Long)q.uniqueResult();
 			}

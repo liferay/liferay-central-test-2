@@ -384,13 +384,13 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.ClassName WHERE ");
+				query.append("SELECT className FROM ClassName className WHERE ");
 
 				if (value == null) {
-					query.append("value IS NULL");
+					query.append("className.value IS NULL");
 				}
 				else {
-					query.append("value = ?");
+					query.append("className.value = ?");
 				}
 
 				query.append(" ");
@@ -515,11 +515,28 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.ClassName ");
+				query.append("SELECT className FROM ClassName className ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("className.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -581,14 +598,14 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append("FROM com.liferay.portal.model.ClassName WHERE ");
+				query.append("SELECT COUNT(className) ");
+				query.append("FROM ClassName className WHERE ");
 
 				if (value == null) {
-					query.append("value IS NULL");
+					query.append("className.value IS NULL");
 				}
 				else {
-					query.append("value = ?");
+					query.append("className.value = ?");
 				}
 
 				query.append(" ");
@@ -634,7 +651,7 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl
 				session = openSession();
 
 				Query q = session.createQuery(
-						"SELECT COUNT(*) FROM com.liferay.portal.model.ClassName");
+						"SELECT COUNT(className) FROM ClassName className");
 
 				count = (Long)q.uniqueResult();
 			}

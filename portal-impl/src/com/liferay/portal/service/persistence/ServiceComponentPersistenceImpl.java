@@ -397,21 +397,21 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portal.model.ServiceComponent WHERE ");
+					"SELECT serviceComponent FROM ServiceComponent serviceComponent WHERE ");
 
 				if (buildNamespace == null) {
-					query.append("buildNamespace IS NULL");
+					query.append("serviceComponent.buildNamespace IS NULL");
 				}
 				else {
-					query.append("buildNamespace = ?");
+					query.append("serviceComponent.buildNamespace = ?");
 				}
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("buildNamespace DESC, ");
-				query.append("buildNumber DESC");
+				query.append("serviceComponent.buildNamespace DESC, ");
+				query.append("serviceComponent.buildNumber DESC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -468,27 +468,44 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portal.model.ServiceComponent WHERE ");
+					"SELECT serviceComponent FROM ServiceComponent serviceComponent WHERE ");
 
 				if (buildNamespace == null) {
-					query.append("buildNamespace IS NULL");
+					query.append("serviceComponent.buildNamespace IS NULL");
 				}
 				else {
-					query.append("buildNamespace = ?");
+					query.append("serviceComponent.buildNamespace = ?");
 				}
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("serviceComponent.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("buildNamespace DESC, ");
-					query.append("buildNumber DESC");
+					query.append("serviceComponent.buildNamespace DESC, ");
+					query.append("serviceComponent.buildNumber DESC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -583,27 +600,44 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl
 			StringBuilder query = new StringBuilder();
 
 			query.append(
-				"FROM com.liferay.portal.model.ServiceComponent WHERE ");
+				"SELECT serviceComponent FROM ServiceComponent serviceComponent WHERE ");
 
 			if (buildNamespace == null) {
-				query.append("buildNamespace IS NULL");
+				query.append("serviceComponent.buildNamespace IS NULL");
 			}
 			else {
-				query.append("buildNamespace = ?");
+				query.append("serviceComponent.buildNamespace = ?");
 			}
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("serviceComponent.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("buildNamespace DESC, ");
-				query.append("buildNumber DESC");
+				query.append("serviceComponent.buildNamespace DESC, ");
+				query.append("serviceComponent.buildNumber DESC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -686,25 +720,25 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portal.model.ServiceComponent WHERE ");
+					"SELECT serviceComponent FROM ServiceComponent serviceComponent WHERE ");
 
 				if (buildNamespace == null) {
-					query.append("buildNamespace IS NULL");
+					query.append("serviceComponent.buildNamespace IS NULL");
 				}
 				else {
-					query.append("buildNamespace = ?");
+					query.append("serviceComponent.buildNamespace = ?");
 				}
 
 				query.append(" AND ");
 
-				query.append("buildNumber = ?");
+				query.append("serviceComponent.buildNumber = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("buildNamespace DESC, ");
-				query.append("buildNumber DESC");
+				query.append("serviceComponent.buildNamespace DESC, ");
+				query.append("serviceComponent.buildNumber DESC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -830,18 +864,36 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.ServiceComponent ");
+				query.append(
+					"SELECT serviceComponent FROM ServiceComponent serviceComponent ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("serviceComponent.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("buildNamespace DESC, ");
-					query.append("buildNumber DESC");
+					query.append("serviceComponent.buildNamespace DESC, ");
+					query.append("serviceComponent.buildNumber DESC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -913,15 +965,14 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portal.model.ServiceComponent WHERE ");
+				query.append("SELECT COUNT(serviceComponent) ");
+				query.append("FROM ServiceComponent serviceComponent WHERE ");
 
 				if (buildNamespace == null) {
-					query.append("buildNamespace IS NULL");
+					query.append("serviceComponent.buildNamespace IS NULL");
 				}
 				else {
-					query.append("buildNamespace = ?");
+					query.append("serviceComponent.buildNamespace = ?");
 				}
 
 				query.append(" ");
@@ -969,20 +1020,19 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portal.model.ServiceComponent WHERE ");
+				query.append("SELECT COUNT(serviceComponent) ");
+				query.append("FROM ServiceComponent serviceComponent WHERE ");
 
 				if (buildNamespace == null) {
-					query.append("buildNamespace IS NULL");
+					query.append("serviceComponent.buildNamespace IS NULL");
 				}
 				else {
-					query.append("buildNamespace = ?");
+					query.append("serviceComponent.buildNamespace = ?");
 				}
 
 				query.append(" AND ");
 
-				query.append("buildNumber = ?");
+				query.append("serviceComponent.buildNumber = ?");
 
 				query.append(" ");
 
@@ -1029,7 +1079,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl
 				session = openSession();
 
 				Query q = session.createQuery(
-						"SELECT COUNT(*) FROM com.liferay.portal.model.ServiceComponent");
+						"SELECT COUNT(serviceComponent) FROM ServiceComponent serviceComponent");
 
 				count = (Long)q.uniqueResult();
 			}

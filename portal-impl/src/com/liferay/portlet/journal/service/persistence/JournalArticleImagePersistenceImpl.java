@@ -494,9 +494,9 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.journal.model.JournalArticleImage WHERE ");
+					"SELECT journalArticleImage FROM JournalArticleImage journalArticleImage WHERE ");
 
-				query.append("groupId = ?");
+				query.append("journalArticleImage.groupId = ?");
 
 				query.append(" ");
 
@@ -553,15 +553,32 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.journal.model.JournalArticleImage WHERE ");
+					"SELECT journalArticleImage FROM JournalArticleImage journalArticleImage WHERE ");
 
-				query.append("groupId = ?");
+				query.append("journalArticleImage.groupId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("journalArticleImage.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -653,15 +670,32 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl
 			StringBuilder query = new StringBuilder();
 
 			query.append(
-				"FROM com.liferay.portlet.journal.model.JournalArticleImage WHERE ");
+				"SELECT journalArticleImage FROM JournalArticleImage journalArticleImage WHERE ");
 
-			query.append("groupId = ?");
+			query.append("journalArticleImage.groupId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("journalArticleImage.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -705,9 +739,9 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.journal.model.JournalArticleImage WHERE ");
+					"SELECT journalArticleImage FROM JournalArticleImage journalArticleImage WHERE ");
 
-				query.append("tempImage = ?");
+				query.append("journalArticleImage.tempImage = ?");
 
 				query.append(" ");
 
@@ -764,15 +798,32 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.journal.model.JournalArticleImage WHERE ");
+					"SELECT journalArticleImage FROM JournalArticleImage journalArticleImage WHERE ");
 
-				query.append("tempImage = ?");
+				query.append("journalArticleImage.tempImage = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("journalArticleImage.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -864,15 +915,32 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl
 			StringBuilder query = new StringBuilder();
 
 			query.append(
-				"FROM com.liferay.portlet.journal.model.JournalArticleImage WHERE ");
+				"SELECT journalArticleImage FROM JournalArticleImage journalArticleImage WHERE ");
 
-			query.append("tempImage = ?");
+			query.append("journalArticleImage.tempImage = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("journalArticleImage.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -920,22 +988,22 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.journal.model.JournalArticleImage WHERE ");
+					"SELECT journalArticleImage FROM JournalArticleImage journalArticleImage WHERE ");
 
-				query.append("groupId = ?");
+				query.append("journalArticleImage.groupId = ?");
 
 				query.append(" AND ");
 
 				if (articleId == null) {
-					query.append("articleId IS NULL");
+					query.append("journalArticleImage.articleId IS NULL");
 				}
 				else {
-					query.append("articleId = ?");
+					query.append("journalArticleImage.articleId = ?");
 				}
 
 				query.append(" AND ");
 
-				query.append("version = ?");
+				query.append("journalArticleImage.version = ?");
 
 				query.append(" ");
 
@@ -1002,28 +1070,45 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.journal.model.JournalArticleImage WHERE ");
+					"SELECT journalArticleImage FROM JournalArticleImage journalArticleImage WHERE ");
 
-				query.append("groupId = ?");
+				query.append("journalArticleImage.groupId = ?");
 
 				query.append(" AND ");
 
 				if (articleId == null) {
-					query.append("articleId IS NULL");
+					query.append("journalArticleImage.articleId IS NULL");
 				}
 				else {
-					query.append("articleId = ?");
+					query.append("journalArticleImage.articleId = ?");
 				}
 
 				query.append(" AND ");
 
-				query.append("version = ?");
+				query.append("journalArticleImage.version = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("journalArticleImage.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1134,28 +1219,45 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl
 			StringBuilder query = new StringBuilder();
 
 			query.append(
-				"FROM com.liferay.portlet.journal.model.JournalArticleImage WHERE ");
+				"SELECT journalArticleImage FROM JournalArticleImage journalArticleImage WHERE ");
 
-			query.append("groupId = ?");
+			query.append("journalArticleImage.groupId = ?");
 
 			query.append(" AND ");
 
 			if (articleId == null) {
-				query.append("articleId IS NULL");
+				query.append("journalArticleImage.articleId IS NULL");
 			}
 			else {
-				query.append("articleId = ?");
+				query.append("journalArticleImage.articleId = ?");
 			}
 
 			query.append(" AND ");
 
-			query.append("version = ?");
+			query.append("journalArticleImage.version = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("journalArticleImage.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -1267,48 +1369,48 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.journal.model.JournalArticleImage WHERE ");
+					"SELECT journalArticleImage FROM JournalArticleImage journalArticleImage WHERE ");
 
-				query.append("groupId = ?");
+				query.append("journalArticleImage.groupId = ?");
 
 				query.append(" AND ");
 
 				if (articleId == null) {
-					query.append("articleId IS NULL");
+					query.append("journalArticleImage.articleId IS NULL");
 				}
 				else {
-					query.append("articleId = ?");
+					query.append("journalArticleImage.articleId = ?");
 				}
 
 				query.append(" AND ");
 
-				query.append("version = ?");
+				query.append("journalArticleImage.version = ?");
 
 				query.append(" AND ");
 
 				if (elInstanceId == null) {
-					query.append("elInstanceId IS NULL");
+					query.append("journalArticleImage.elInstanceId IS NULL");
 				}
 				else {
-					query.append("elInstanceId = ?");
+					query.append("journalArticleImage.elInstanceId = ?");
 				}
 
 				query.append(" AND ");
 
 				if (elName == null) {
-					query.append("elName IS NULL");
+					query.append("journalArticleImage.elName IS NULL");
 				}
 				else {
-					query.append("elName = ?");
+					query.append("journalArticleImage.elName = ?");
 				}
 
 				query.append(" AND ");
 
 				if (languageId == null) {
-					query.append("languageId IS NULL");
+					query.append("journalArticleImage.languageId IS NULL");
 				}
 				else {
-					query.append("languageId = ?");
+					query.append("journalArticleImage.languageId = ?");
 				}
 
 				query.append(" ");
@@ -1460,11 +1562,28 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.journal.model.JournalArticleImage ");
+					"SELECT journalArticleImage FROM JournalArticleImage journalArticleImage ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("journalArticleImage.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1549,11 +1668,11 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
+				query.append("SELECT COUNT(journalArticleImage) ");
 				query.append(
-					"FROM com.liferay.portlet.journal.model.JournalArticleImage WHERE ");
+					"FROM JournalArticleImage journalArticleImage WHERE ");
 
-				query.append("groupId = ?");
+				query.append("journalArticleImage.groupId = ?");
 
 				query.append(" ");
 
@@ -1597,11 +1716,11 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
+				query.append("SELECT COUNT(journalArticleImage) ");
 				query.append(
-					"FROM com.liferay.portlet.journal.model.JournalArticleImage WHERE ");
+					"FROM JournalArticleImage journalArticleImage WHERE ");
 
-				query.append("tempImage = ?");
+				query.append("journalArticleImage.tempImage = ?");
 
 				query.append(" ");
 
@@ -1650,24 +1769,24 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
+				query.append("SELECT COUNT(journalArticleImage) ");
 				query.append(
-					"FROM com.liferay.portlet.journal.model.JournalArticleImage WHERE ");
+					"FROM JournalArticleImage journalArticleImage WHERE ");
 
-				query.append("groupId = ?");
+				query.append("journalArticleImage.groupId = ?");
 
 				query.append(" AND ");
 
 				if (articleId == null) {
-					query.append("articleId IS NULL");
+					query.append("journalArticleImage.articleId IS NULL");
 				}
 				else {
-					query.append("articleId = ?");
+					query.append("journalArticleImage.articleId = ?");
 				}
 
 				query.append(" AND ");
 
-				query.append("version = ?");
+				query.append("journalArticleImage.version = ?");
 
 				query.append(" ");
 
@@ -1729,50 +1848,50 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
+				query.append("SELECT COUNT(journalArticleImage) ");
 				query.append(
-					"FROM com.liferay.portlet.journal.model.JournalArticleImage WHERE ");
+					"FROM JournalArticleImage journalArticleImage WHERE ");
 
-				query.append("groupId = ?");
+				query.append("journalArticleImage.groupId = ?");
 
 				query.append(" AND ");
 
 				if (articleId == null) {
-					query.append("articleId IS NULL");
+					query.append("journalArticleImage.articleId IS NULL");
 				}
 				else {
-					query.append("articleId = ?");
+					query.append("journalArticleImage.articleId = ?");
 				}
 
 				query.append(" AND ");
 
-				query.append("version = ?");
+				query.append("journalArticleImage.version = ?");
 
 				query.append(" AND ");
 
 				if (elInstanceId == null) {
-					query.append("elInstanceId IS NULL");
+					query.append("journalArticleImage.elInstanceId IS NULL");
 				}
 				else {
-					query.append("elInstanceId = ?");
+					query.append("journalArticleImage.elInstanceId = ?");
 				}
 
 				query.append(" AND ");
 
 				if (elName == null) {
-					query.append("elName IS NULL");
+					query.append("journalArticleImage.elName IS NULL");
 				}
 				else {
-					query.append("elName = ?");
+					query.append("journalArticleImage.elName = ?");
 				}
 
 				query.append(" AND ");
 
 				if (languageId == null) {
-					query.append("languageId IS NULL");
+					query.append("journalArticleImage.languageId IS NULL");
 				}
 				else {
-					query.append("languageId = ?");
+					query.append("journalArticleImage.languageId = ?");
 				}
 
 				query.append(" ");
@@ -1834,7 +1953,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl
 				session = openSession();
 
 				Query q = session.createQuery(
-						"SELECT COUNT(*) FROM com.liferay.portlet.journal.model.JournalArticleImage");
+						"SELECT COUNT(journalArticleImage) FROM JournalArticleImage journalArticleImage");
 
 				count = (Long)q.uniqueResult();
 			}

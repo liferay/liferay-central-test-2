@@ -396,9 +396,9 @@ public class BrowserTrackerPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portal.model.BrowserTracker WHERE ");
+					"SELECT browserTracker FROM BrowserTracker browserTracker WHERE ");
 
-				query.append("userId = ?");
+				query.append("browserTracker.userId = ?");
 
 				query.append(" ");
 
@@ -519,11 +519,29 @@ public class BrowserTrackerPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.BrowserTracker ");
+				query.append(
+					"SELECT browserTracker FROM BrowserTracker browserTracker ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("browserTracker.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -585,11 +603,10 @@ public class BrowserTrackerPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portal.model.BrowserTracker WHERE ");
+				query.append("SELECT COUNT(browserTracker) ");
+				query.append("FROM BrowserTracker browserTracker WHERE ");
 
-				query.append("userId = ?");
+				query.append("browserTracker.userId = ?");
 
 				query.append(" ");
 
@@ -632,7 +649,7 @@ public class BrowserTrackerPersistenceImpl extends BasePersistenceImpl
 				session = openSession();
 
 				Query q = session.createQuery(
-						"SELECT COUNT(*) FROM com.liferay.portal.model.BrowserTracker");
+						"SELECT COUNT(browserTracker) FROM BrowserTracker browserTracker");
 
 				count = (Long)q.uniqueResult();
 			}

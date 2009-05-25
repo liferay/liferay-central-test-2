@@ -453,24 +453,24 @@ public class TagsVocabularyPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.tags.model.TagsVocabulary WHERE ");
+					"SELECT tagsVocabulary FROM TagsVocabulary tagsVocabulary WHERE ");
 
-				query.append("groupId = ?");
+				query.append("tagsVocabulary.groupId = ?");
 
 				query.append(" AND ");
 
 				if (name == null) {
-					query.append("name IS NULL");
+					query.append("tagsVocabulary.name IS NULL");
 				}
 				else {
-					query.append("name = ?");
+					query.append("tagsVocabulary.name = ?");
 				}
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("name ASC");
+				query.append("tagsVocabulary.name ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -547,19 +547,19 @@ public class TagsVocabularyPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.tags.model.TagsVocabulary WHERE ");
+					"SELECT tagsVocabulary FROM TagsVocabulary tagsVocabulary WHERE ");
 
-				query.append("groupId = ?");
+				query.append("tagsVocabulary.groupId = ?");
 
 				query.append(" AND ");
 
-				query.append("folksonomy = ?");
+				query.append("tagsVocabulary.folksonomy = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("name ASC");
+				query.append("tagsVocabulary.name ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -616,25 +616,42 @@ public class TagsVocabularyPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.tags.model.TagsVocabulary WHERE ");
+					"SELECT tagsVocabulary FROM TagsVocabulary tagsVocabulary WHERE ");
 
-				query.append("groupId = ?");
+				query.append("tagsVocabulary.groupId = ?");
 
 				query.append(" AND ");
 
-				query.append("folksonomy = ?");
+				query.append("tagsVocabulary.folksonomy = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("tagsVocabulary.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("name ASC");
+					query.append("tagsVocabulary.name ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -734,25 +751,42 @@ public class TagsVocabularyPersistenceImpl extends BasePersistenceImpl
 			StringBuilder query = new StringBuilder();
 
 			query.append(
-				"FROM com.liferay.portlet.tags.model.TagsVocabulary WHERE ");
+				"SELECT tagsVocabulary FROM TagsVocabulary tagsVocabulary WHERE ");
 
-			query.append("groupId = ?");
+			query.append("tagsVocabulary.groupId = ?");
 
 			query.append(" AND ");
 
-			query.append("folksonomy = ?");
+			query.append("tagsVocabulary.folksonomy = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("tagsVocabulary.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("name ASC");
+				query.append("tagsVocabulary.name ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -800,19 +834,19 @@ public class TagsVocabularyPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.tags.model.TagsVocabulary WHERE ");
+					"SELECT tagsVocabulary FROM TagsVocabulary tagsVocabulary WHERE ");
 
-				query.append("companyId = ?");
+				query.append("tagsVocabulary.companyId = ?");
 
 				query.append(" AND ");
 
-				query.append("folksonomy = ?");
+				query.append("tagsVocabulary.folksonomy = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("name ASC");
+				query.append("tagsVocabulary.name ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -869,25 +903,42 @@ public class TagsVocabularyPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.tags.model.TagsVocabulary WHERE ");
+					"SELECT tagsVocabulary FROM TagsVocabulary tagsVocabulary WHERE ");
 
-				query.append("companyId = ?");
+				query.append("tagsVocabulary.companyId = ?");
 
 				query.append(" AND ");
 
-				query.append("folksonomy = ?");
+				query.append("tagsVocabulary.folksonomy = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("tagsVocabulary.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("name ASC");
+					query.append("tagsVocabulary.name ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -987,25 +1038,42 @@ public class TagsVocabularyPersistenceImpl extends BasePersistenceImpl
 			StringBuilder query = new StringBuilder();
 
 			query.append(
-				"FROM com.liferay.portlet.tags.model.TagsVocabulary WHERE ");
+				"SELECT tagsVocabulary FROM TagsVocabulary tagsVocabulary WHERE ");
 
-			query.append("companyId = ?");
+			query.append("tagsVocabulary.companyId = ?");
 
 			query.append(" AND ");
 
-			query.append("folksonomy = ?");
+			query.append("tagsVocabulary.folksonomy = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("tagsVocabulary.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("name ASC");
+				query.append("tagsVocabulary.name ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -1102,17 +1170,34 @@ public class TagsVocabularyPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.tags.model.TagsVocabulary ");
+					"SELECT tagsVocabulary FROM TagsVocabulary tagsVocabulary ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("tagsVocabulary.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("name ASC");
+					query.append("tagsVocabulary.name ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1188,19 +1273,18 @@ public class TagsVocabularyPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.tags.model.TagsVocabulary WHERE ");
+				query.append("SELECT COUNT(tagsVocabulary) ");
+				query.append("FROM TagsVocabulary tagsVocabulary WHERE ");
 
-				query.append("groupId = ?");
+				query.append("tagsVocabulary.groupId = ?");
 
 				query.append(" AND ");
 
 				if (name == null) {
-					query.append("name IS NULL");
+					query.append("tagsVocabulary.name IS NULL");
 				}
 				else {
-					query.append("name = ?");
+					query.append("tagsVocabulary.name = ?");
 				}
 
 				query.append(" ");
@@ -1252,15 +1336,14 @@ public class TagsVocabularyPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.tags.model.TagsVocabulary WHERE ");
+				query.append("SELECT COUNT(tagsVocabulary) ");
+				query.append("FROM TagsVocabulary tagsVocabulary WHERE ");
 
-				query.append("groupId = ?");
+				query.append("tagsVocabulary.groupId = ?");
 
 				query.append(" AND ");
 
-				query.append("folksonomy = ?");
+				query.append("tagsVocabulary.folksonomy = ?");
 
 				query.append(" ");
 
@@ -1309,15 +1392,14 @@ public class TagsVocabularyPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.tags.model.TagsVocabulary WHERE ");
+				query.append("SELECT COUNT(tagsVocabulary) ");
+				query.append("FROM TagsVocabulary tagsVocabulary WHERE ");
 
-				query.append("companyId = ?");
+				query.append("tagsVocabulary.companyId = ?");
 
 				query.append(" AND ");
 
-				query.append("folksonomy = ?");
+				query.append("tagsVocabulary.folksonomy = ?");
 
 				query.append(" ");
 
@@ -1362,7 +1444,7 @@ public class TagsVocabularyPersistenceImpl extends BasePersistenceImpl
 				session = openSession();
 
 				Query q = session.createQuery(
-						"SELECT COUNT(*) FROM com.liferay.portlet.tags.model.TagsVocabulary");
+						"SELECT COUNT(tagsVocabulary) FROM TagsVocabulary tagsVocabulary");
 
 				count = (Long)q.uniqueResult();
 			}

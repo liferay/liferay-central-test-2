@@ -373,16 +373,15 @@ public class TagsEntryPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.tags.model.TagsEntry WHERE ");
+				query.append("SELECT tagsEntry FROM TagsEntry tagsEntry WHERE ");
 
-				query.append("vocabularyId = ?");
+				query.append("tagsEntry.vocabularyId = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("name ASC");
+				query.append("tagsEntry.name ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -436,22 +435,38 @@ public class TagsEntryPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.tags.model.TagsEntry WHERE ");
+				query.append("SELECT tagsEntry FROM TagsEntry tagsEntry WHERE ");
 
-				query.append("vocabularyId = ?");
+				query.append("tagsEntry.vocabularyId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("tagsEntry.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("name ASC");
+					query.append("tagsEntry.name ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -540,21 +555,38 @@ public class TagsEntryPersistenceImpl extends BasePersistenceImpl
 
 			StringBuilder query = new StringBuilder();
 
-			query.append("FROM com.liferay.portlet.tags.model.TagsEntry WHERE ");
+			query.append("SELECT tagsEntry FROM TagsEntry tagsEntry WHERE ");
 
-			query.append("vocabularyId = ?");
+			query.append("tagsEntry.vocabularyId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("tagsEntry.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("name ASC");
+				query.append("tagsEntry.name ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -599,20 +631,19 @@ public class TagsEntryPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.tags.model.TagsEntry WHERE ");
+				query.append("SELECT tagsEntry FROM TagsEntry tagsEntry WHERE ");
 
-				query.append("parentEntryId = ?");
+				query.append("tagsEntry.parentEntryId = ?");
 
 				query.append(" AND ");
 
-				query.append("vocabularyId = ?");
+				query.append("tagsEntry.vocabularyId = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("name ASC");
+				query.append("tagsEntry.name ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -668,26 +699,42 @@ public class TagsEntryPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.tags.model.TagsEntry WHERE ");
+				query.append("SELECT tagsEntry FROM TagsEntry tagsEntry WHERE ");
 
-				query.append("parentEntryId = ?");
+				query.append("tagsEntry.parentEntryId = ?");
 
 				query.append(" AND ");
 
-				query.append("vocabularyId = ?");
+				query.append("tagsEntry.vocabularyId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("tagsEntry.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("name ASC");
+					query.append("tagsEntry.name ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -784,25 +831,42 @@ public class TagsEntryPersistenceImpl extends BasePersistenceImpl
 
 			StringBuilder query = new StringBuilder();
 
-			query.append("FROM com.liferay.portlet.tags.model.TagsEntry WHERE ");
+			query.append("SELECT tagsEntry FROM TagsEntry tagsEntry WHERE ");
 
-			query.append("parentEntryId = ?");
+			query.append("tagsEntry.parentEntryId = ?");
 
 			query.append(" AND ");
 
-			query.append("vocabularyId = ?");
+			query.append("tagsEntry.vocabularyId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("tagsEntry.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("name ASC");
+				query.append("tagsEntry.name ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -898,17 +962,34 @@ public class TagsEntryPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portlet.tags.model.TagsEntry ");
+				query.append("SELECT tagsEntry FROM TagsEntry tagsEntry ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("tagsEntry.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("name ASC");
+					query.append("tagsEntry.name ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -977,11 +1058,10 @@ public class TagsEntryPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.tags.model.TagsEntry WHERE ");
+				query.append("SELECT COUNT(tagsEntry) ");
+				query.append("FROM TagsEntry tagsEntry WHERE ");
 
-				query.append("vocabularyId = ?");
+				query.append("tagsEntry.vocabularyId = ?");
 
 				query.append(" ");
 
@@ -1028,15 +1108,14 @@ public class TagsEntryPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.tags.model.TagsEntry WHERE ");
+				query.append("SELECT COUNT(tagsEntry) ");
+				query.append("FROM TagsEntry tagsEntry WHERE ");
 
-				query.append("parentEntryId = ?");
+				query.append("tagsEntry.parentEntryId = ?");
 
 				query.append(" AND ");
 
-				query.append("vocabularyId = ?");
+				query.append("tagsEntry.vocabularyId = ?");
 
 				query.append(" ");
 
@@ -1081,7 +1160,7 @@ public class TagsEntryPersistenceImpl extends BasePersistenceImpl
 				session = openSession();
 
 				Query q = session.createQuery(
-						"SELECT COUNT(*) FROM com.liferay.portlet.tags.model.TagsEntry");
+						"SELECT COUNT(tagsEntry) FROM TagsEntry tagsEntry");
 
 				count = (Long)q.uniqueResult();
 			}

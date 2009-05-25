@@ -456,16 +456,16 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.softwarecatalog.model.SCProductEntry WHERE ");
+					"SELECT scProductEntry FROM SCProductEntry scProductEntry WHERE ");
 
-				query.append("groupId = ?");
+				query.append("scProductEntry.groupId = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("modifiedDate DESC, ");
-				query.append("name DESC");
+				query.append("scProductEntry.modifiedDate DESC, ");
+				query.append("scProductEntry.name DESC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -520,22 +520,39 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.softwarecatalog.model.SCProductEntry WHERE ");
+					"SELECT scProductEntry FROM SCProductEntry scProductEntry WHERE ");
 
-				query.append("groupId = ?");
+				query.append("scProductEntry.groupId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("scProductEntry.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("modifiedDate DESC, ");
-					query.append("name DESC");
+					query.append("scProductEntry.modifiedDate DESC, ");
+					query.append("scProductEntry.name DESC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -625,22 +642,39 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 			StringBuilder query = new StringBuilder();
 
 			query.append(
-				"FROM com.liferay.portlet.softwarecatalog.model.SCProductEntry WHERE ");
+				"SELECT scProductEntry FROM SCProductEntry scProductEntry WHERE ");
 
-			query.append("groupId = ?");
+			query.append("scProductEntry.groupId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("scProductEntry.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("modifiedDate DESC, ");
-				query.append("name DESC");
+				query.append("scProductEntry.modifiedDate DESC, ");
+				query.append("scProductEntry.name DESC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -684,16 +718,16 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.softwarecatalog.model.SCProductEntry WHERE ");
+					"SELECT scProductEntry FROM SCProductEntry scProductEntry WHERE ");
 
-				query.append("companyId = ?");
+				query.append("scProductEntry.companyId = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("modifiedDate DESC, ");
-				query.append("name DESC");
+				query.append("scProductEntry.modifiedDate DESC, ");
+				query.append("scProductEntry.name DESC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -748,22 +782,39 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.softwarecatalog.model.SCProductEntry WHERE ");
+					"SELECT scProductEntry FROM SCProductEntry scProductEntry WHERE ");
 
-				query.append("companyId = ?");
+				query.append("scProductEntry.companyId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("scProductEntry.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("modifiedDate DESC, ");
-					query.append("name DESC");
+					query.append("scProductEntry.modifiedDate DESC, ");
+					query.append("scProductEntry.name DESC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -855,22 +906,39 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 			StringBuilder query = new StringBuilder();
 
 			query.append(
-				"FROM com.liferay.portlet.softwarecatalog.model.SCProductEntry WHERE ");
+				"SELECT scProductEntry FROM SCProductEntry scProductEntry WHERE ");
 
-			query.append("companyId = ?");
+			query.append("scProductEntry.companyId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("scProductEntry.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("modifiedDate DESC, ");
-				query.append("name DESC");
+				query.append("scProductEntry.modifiedDate DESC, ");
+				query.append("scProductEntry.name DESC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -914,20 +982,20 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.softwarecatalog.model.SCProductEntry WHERE ");
+					"SELECT scProductEntry FROM SCProductEntry scProductEntry WHERE ");
 
-				query.append("groupId = ?");
+				query.append("scProductEntry.groupId = ?");
 
 				query.append(" AND ");
 
-				query.append("userId = ?");
+				query.append("scProductEntry.userId = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("modifiedDate DESC, ");
-				query.append("name DESC");
+				query.append("scProductEntry.modifiedDate DESC, ");
+				query.append("scProductEntry.name DESC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -984,26 +1052,43 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.softwarecatalog.model.SCProductEntry WHERE ");
+					"SELECT scProductEntry FROM SCProductEntry scProductEntry WHERE ");
 
-				query.append("groupId = ?");
+				query.append("scProductEntry.groupId = ?");
 
 				query.append(" AND ");
 
-				query.append("userId = ?");
+				query.append("scProductEntry.userId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("scProductEntry.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("modifiedDate DESC, ");
-					query.append("name DESC");
+					query.append("scProductEntry.modifiedDate DESC, ");
+					query.append("scProductEntry.name DESC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1103,26 +1188,43 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 			StringBuilder query = new StringBuilder();
 
 			query.append(
-				"FROM com.liferay.portlet.softwarecatalog.model.SCProductEntry WHERE ");
+				"SELECT scProductEntry FROM SCProductEntry scProductEntry WHERE ");
 
-			query.append("groupId = ?");
+			query.append("scProductEntry.groupId = ?");
 
 			query.append(" AND ");
 
-			query.append("userId = ?");
+			query.append("scProductEntry.userId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("scProductEntry.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("modifiedDate DESC, ");
-				query.append("name DESC");
+				query.append("scProductEntry.modifiedDate DESC, ");
+				query.append("scProductEntry.name DESC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -1204,30 +1306,30 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.softwarecatalog.model.SCProductEntry WHERE ");
+					"SELECT scProductEntry FROM SCProductEntry scProductEntry WHERE ");
 
 				if (repoGroupId == null) {
-					query.append("repoGroupId IS NULL");
+					query.append("scProductEntry.repoGroupId IS NULL");
 				}
 				else {
-					query.append("lower(repoGroupId) = ?");
+					query.append("scProductEntry.lower(repoGroupId) = ?");
 				}
 
 				query.append(" AND ");
 
 				if (repoArtifactId == null) {
-					query.append("repoArtifactId IS NULL");
+					query.append("scProductEntry.repoArtifactId IS NULL");
 				}
 				else {
-					query.append("lower(repoArtifactId) = ?");
+					query.append("scProductEntry.lower(repoArtifactId) = ?");
 				}
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("modifiedDate DESC, ");
-				query.append("name DESC");
+				query.append("scProductEntry.modifiedDate DESC, ");
+				query.append("scProductEntry.name DESC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1357,18 +1459,35 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.softwarecatalog.model.SCProductEntry ");
+					"SELECT scProductEntry FROM SCProductEntry scProductEntry ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("scProductEntry.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("modifiedDate DESC, ");
-					query.append("name DESC");
+					query.append("scProductEntry.modifiedDate DESC, ");
+					query.append("scProductEntry.name DESC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1449,11 +1568,10 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.softwarecatalog.model.SCProductEntry WHERE ");
+				query.append("SELECT COUNT(scProductEntry) ");
+				query.append("FROM SCProductEntry scProductEntry WHERE ");
 
-				query.append("groupId = ?");
+				query.append("scProductEntry.groupId = ?");
 
 				query.append(" ");
 
@@ -1497,11 +1615,10 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.softwarecatalog.model.SCProductEntry WHERE ");
+				query.append("SELECT COUNT(scProductEntry) ");
+				query.append("FROM SCProductEntry scProductEntry WHERE ");
 
-				query.append("companyId = ?");
+				query.append("scProductEntry.companyId = ?");
 
 				query.append(" ");
 
@@ -1545,15 +1662,14 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.softwarecatalog.model.SCProductEntry WHERE ");
+				query.append("SELECT COUNT(scProductEntry) ");
+				query.append("FROM SCProductEntry scProductEntry WHERE ");
 
-				query.append("groupId = ?");
+				query.append("scProductEntry.groupId = ?");
 
 				query.append(" AND ");
 
-				query.append("userId = ?");
+				query.append("scProductEntry.userId = ?");
 
 				query.append(" ");
 
@@ -1600,24 +1716,23 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.softwarecatalog.model.SCProductEntry WHERE ");
+				query.append("SELECT COUNT(scProductEntry) ");
+				query.append("FROM SCProductEntry scProductEntry WHERE ");
 
 				if (repoGroupId == null) {
-					query.append("repoGroupId IS NULL");
+					query.append("scProductEntry.repoGroupId IS NULL");
 				}
 				else {
-					query.append("lower(repoGroupId) = ?");
+					query.append("scProductEntry.lower(repoGroupId) = ?");
 				}
 
 				query.append(" AND ");
 
 				if (repoArtifactId == null) {
-					query.append("repoArtifactId IS NULL");
+					query.append("scProductEntry.repoArtifactId IS NULL");
 				}
 				else {
-					query.append("lower(repoArtifactId) = ?");
+					query.append("scProductEntry.lower(repoArtifactId) = ?");
 				}
 
 				query.append(" ");
@@ -1667,7 +1782,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 				session = openSession();
 
 				Query q = session.createQuery(
-						"SELECT COUNT(*) FROM com.liferay.portlet.softwarecatalog.model.SCProductEntry");
+						"SELECT COUNT(scProductEntry) FROM SCProductEntry scProductEntry");
 
 				count = (Long)q.uniqueResult();
 			}

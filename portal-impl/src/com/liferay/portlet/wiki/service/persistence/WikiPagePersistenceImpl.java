@@ -592,23 +592,22 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.wiki.model.WikiPage WHERE ");
+				query.append("SELECT wikiPage FROM WikiPage wikiPage WHERE ");
 
 				if (uuid == null) {
-					query.append("uuid_ IS NULL");
+					query.append("wikiPage.uuid IS NULL");
 				}
 				else {
-					query.append("uuid_ = ?");
+					query.append("wikiPage.uuid = ?");
 				}
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("nodeId ASC, ");
-				query.append("title ASC, ");
-				query.append("version ASC");
+				query.append("wikiPage.nodeId ASC, ");
+				query.append("wikiPage.title ASC, ");
+				query.append("wikiPage.version ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -664,29 +663,45 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.wiki.model.WikiPage WHERE ");
+				query.append("SELECT wikiPage FROM WikiPage wikiPage WHERE ");
 
 				if (uuid == null) {
-					query.append("uuid_ IS NULL");
+					query.append("wikiPage.uuid IS NULL");
 				}
 				else {
-					query.append("uuid_ = ?");
+					query.append("wikiPage.uuid = ?");
 				}
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("wikiPage.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("nodeId ASC, ");
-					query.append("title ASC, ");
-					query.append("version ASC");
+					query.append("wikiPage.nodeId ASC, ");
+					query.append("wikiPage.title ASC, ");
+					query.append("wikiPage.version ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -775,28 +790,45 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 
 			StringBuilder query = new StringBuilder();
 
-			query.append("FROM com.liferay.portlet.wiki.model.WikiPage WHERE ");
+			query.append("SELECT wikiPage FROM WikiPage wikiPage WHERE ");
 
 			if (uuid == null) {
-				query.append("uuid_ IS NULL");
+				query.append("wikiPage.uuid IS NULL");
 			}
 			else {
-				query.append("uuid_ = ?");
+				query.append("wikiPage.uuid = ?");
 			}
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("wikiPage.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("nodeId ASC, ");
-				query.append("title ASC, ");
-				query.append("version ASC");
+				query.append("wikiPage.nodeId ASC, ");
+				query.append("wikiPage.title ASC, ");
+				query.append("wikiPage.version ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -875,27 +907,26 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.wiki.model.WikiPage WHERE ");
+				query.append("SELECT wikiPage FROM WikiPage wikiPage WHERE ");
 
 				if (uuid == null) {
-					query.append("uuid_ IS NULL");
+					query.append("wikiPage.uuid IS NULL");
 				}
 				else {
-					query.append("uuid_ = ?");
+					query.append("wikiPage.uuid = ?");
 				}
 
 				query.append(" AND ");
 
-				query.append("groupId = ?");
+				query.append("wikiPage.groupId = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("nodeId ASC, ");
-				query.append("title ASC, ");
-				query.append("version ASC");
+				query.append("wikiPage.nodeId ASC, ");
+				query.append("wikiPage.title ASC, ");
+				query.append("wikiPage.version ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -968,18 +999,17 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.wiki.model.WikiPage WHERE ");
+				query.append("SELECT wikiPage FROM WikiPage wikiPage WHERE ");
 
-				query.append("nodeId = ?");
+				query.append("wikiPage.nodeId = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("nodeId ASC, ");
-				query.append("title ASC, ");
-				query.append("version ASC");
+				query.append("wikiPage.nodeId ASC, ");
+				query.append("wikiPage.title ASC, ");
+				query.append("wikiPage.version ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1033,24 +1063,40 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.wiki.model.WikiPage WHERE ");
+				query.append("SELECT wikiPage FROM WikiPage wikiPage WHERE ");
 
-				query.append("nodeId = ?");
+				query.append("wikiPage.nodeId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("wikiPage.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("nodeId ASC, ");
-					query.append("title ASC, ");
-					query.append("version ASC");
+					query.append("wikiPage.nodeId ASC, ");
+					query.append("wikiPage.title ASC, ");
+					query.append("wikiPage.version ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1137,23 +1183,40 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 
 			StringBuilder query = new StringBuilder();
 
-			query.append("FROM com.liferay.portlet.wiki.model.WikiPage WHERE ");
+			query.append("SELECT wikiPage FROM WikiPage wikiPage WHERE ");
 
-			query.append("nodeId = ?");
+			query.append("wikiPage.nodeId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("wikiPage.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("nodeId ASC, ");
-				query.append("title ASC, ");
-				query.append("version ASC");
+				query.append("wikiPage.nodeId ASC, ");
+				query.append("wikiPage.title ASC, ");
+				query.append("wikiPage.version ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -1194,23 +1257,22 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.wiki.model.WikiPage WHERE ");
+				query.append("SELECT wikiPage FROM WikiPage wikiPage WHERE ");
 
 				if (format == null) {
-					query.append("format IS NULL");
+					query.append("wikiPage.format IS NULL");
 				}
 				else {
-					query.append("format = ?");
+					query.append("wikiPage.format = ?");
 				}
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("nodeId ASC, ");
-				query.append("title ASC, ");
-				query.append("version ASC");
+				query.append("wikiPage.nodeId ASC, ");
+				query.append("wikiPage.title ASC, ");
+				query.append("wikiPage.version ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1266,29 +1328,45 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.wiki.model.WikiPage WHERE ");
+				query.append("SELECT wikiPage FROM WikiPage wikiPage WHERE ");
 
 				if (format == null) {
-					query.append("format IS NULL");
+					query.append("wikiPage.format IS NULL");
 				}
 				else {
-					query.append("format = ?");
+					query.append("wikiPage.format = ?");
 				}
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("wikiPage.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("nodeId ASC, ");
-					query.append("title ASC, ");
-					query.append("version ASC");
+					query.append("wikiPage.nodeId ASC, ");
+					query.append("wikiPage.title ASC, ");
+					query.append("wikiPage.version ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1377,28 +1455,45 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 
 			StringBuilder query = new StringBuilder();
 
-			query.append("FROM com.liferay.portlet.wiki.model.WikiPage WHERE ");
+			query.append("SELECT wikiPage FROM WikiPage wikiPage WHERE ");
 
 			if (format == null) {
-				query.append("format IS NULL");
+				query.append("wikiPage.format IS NULL");
 			}
 			else {
-				query.append("format = ?");
+				query.append("wikiPage.format = ?");
 			}
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("wikiPage.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("nodeId ASC, ");
-				query.append("title ASC, ");
-				query.append("version ASC");
+				query.append("wikiPage.nodeId ASC, ");
+				query.append("wikiPage.title ASC, ");
+				query.append("wikiPage.version ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -1442,27 +1537,26 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.wiki.model.WikiPage WHERE ");
+				query.append("SELECT wikiPage FROM WikiPage wikiPage WHERE ");
 
-				query.append("nodeId = ?");
+				query.append("wikiPage.nodeId = ?");
 
 				query.append(" AND ");
 
 				if (title == null) {
-					query.append("title IS NULL");
+					query.append("wikiPage.title IS NULL");
 				}
 				else {
-					query.append("title = ?");
+					query.append("wikiPage.title = ?");
 				}
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("nodeId ASC, ");
-				query.append("title ASC, ");
-				query.append("version ASC");
+				query.append("wikiPage.nodeId ASC, ");
+				query.append("wikiPage.title ASC, ");
+				query.append("wikiPage.version ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1522,33 +1616,49 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.wiki.model.WikiPage WHERE ");
+				query.append("SELECT wikiPage FROM WikiPage wikiPage WHERE ");
 
-				query.append("nodeId = ?");
+				query.append("wikiPage.nodeId = ?");
 
 				query.append(" AND ");
 
 				if (title == null) {
-					query.append("title IS NULL");
+					query.append("wikiPage.title IS NULL");
 				}
 				else {
-					query.append("title = ?");
+					query.append("wikiPage.title = ?");
 				}
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("wikiPage.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("nodeId ASC, ");
-					query.append("title ASC, ");
-					query.append("version ASC");
+					query.append("wikiPage.nodeId ASC, ");
+					query.append("wikiPage.title ASC, ");
+					query.append("wikiPage.version ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1646,32 +1756,49 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 
 			StringBuilder query = new StringBuilder();
 
-			query.append("FROM com.liferay.portlet.wiki.model.WikiPage WHERE ");
+			query.append("SELECT wikiPage FROM WikiPage wikiPage WHERE ");
 
-			query.append("nodeId = ?");
+			query.append("wikiPage.nodeId = ?");
 
 			query.append(" AND ");
 
 			if (title == null) {
-				query.append("title IS NULL");
+				query.append("wikiPage.title IS NULL");
 			}
 			else {
-				query.append("title = ?");
+				query.append("wikiPage.title = ?");
 			}
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("wikiPage.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("nodeId ASC, ");
-				query.append("title ASC, ");
-				query.append("version ASC");
+				query.append("wikiPage.nodeId ASC, ");
+				query.append("wikiPage.title ASC, ");
+				query.append("wikiPage.version ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -1719,22 +1846,21 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.wiki.model.WikiPage WHERE ");
+				query.append("SELECT wikiPage FROM WikiPage wikiPage WHERE ");
 
-				query.append("nodeId = ?");
+				query.append("wikiPage.nodeId = ?");
 
 				query.append(" AND ");
 
-				query.append("head = ?");
+				query.append("wikiPage.head = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("nodeId ASC, ");
-				query.append("title ASC, ");
-				query.append("version ASC");
+				query.append("wikiPage.nodeId ASC, ");
+				query.append("wikiPage.title ASC, ");
+				query.append("wikiPage.version ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1790,28 +1916,44 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.wiki.model.WikiPage WHERE ");
+				query.append("SELECT wikiPage FROM WikiPage wikiPage WHERE ");
 
-				query.append("nodeId = ?");
+				query.append("wikiPage.nodeId = ?");
 
 				query.append(" AND ");
 
-				query.append("head = ?");
+				query.append("wikiPage.head = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("wikiPage.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("nodeId ASC, ");
-					query.append("title ASC, ");
-					query.append("version ASC");
+					query.append("wikiPage.nodeId ASC, ");
+					query.append("wikiPage.title ASC, ");
+					query.append("wikiPage.version ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1907,27 +2049,44 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 
 			StringBuilder query = new StringBuilder();
 
-			query.append("FROM com.liferay.portlet.wiki.model.WikiPage WHERE ");
+			query.append("SELECT wikiPage FROM WikiPage wikiPage WHERE ");
 
-			query.append("nodeId = ?");
+			query.append("wikiPage.nodeId = ?");
 
 			query.append(" AND ");
 
-			query.append("head = ?");
+			query.append("wikiPage.head = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("wikiPage.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("nodeId ASC, ");
-				query.append("title ASC, ");
-				query.append("version ASC");
+				query.append("wikiPage.nodeId ASC, ");
+				query.append("wikiPage.title ASC, ");
+				query.append("wikiPage.version ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -1971,27 +2130,26 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.wiki.model.WikiPage WHERE ");
+				query.append("SELECT wikiPage FROM WikiPage wikiPage WHERE ");
 
-				query.append("nodeId = ?");
+				query.append("wikiPage.nodeId = ?");
 
 				query.append(" AND ");
 
 				if (parentTitle == null) {
-					query.append("parentTitle IS NULL");
+					query.append("wikiPage.parentTitle IS NULL");
 				}
 				else {
-					query.append("parentTitle = ?");
+					query.append("wikiPage.parentTitle = ?");
 				}
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("nodeId ASC, ");
-				query.append("title ASC, ");
-				query.append("version ASC");
+				query.append("wikiPage.nodeId ASC, ");
+				query.append("wikiPage.title ASC, ");
+				query.append("wikiPage.version ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -2051,33 +2209,49 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.wiki.model.WikiPage WHERE ");
+				query.append("SELECT wikiPage FROM WikiPage wikiPage WHERE ");
 
-				query.append("nodeId = ?");
+				query.append("wikiPage.nodeId = ?");
 
 				query.append(" AND ");
 
 				if (parentTitle == null) {
-					query.append("parentTitle IS NULL");
+					query.append("wikiPage.parentTitle IS NULL");
 				}
 				else {
-					query.append("parentTitle = ?");
+					query.append("wikiPage.parentTitle = ?");
 				}
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("wikiPage.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("nodeId ASC, ");
-					query.append("title ASC, ");
-					query.append("version ASC");
+					query.append("wikiPage.nodeId ASC, ");
+					query.append("wikiPage.title ASC, ");
+					query.append("wikiPage.version ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -2176,32 +2350,49 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 
 			StringBuilder query = new StringBuilder();
 
-			query.append("FROM com.liferay.portlet.wiki.model.WikiPage WHERE ");
+			query.append("SELECT wikiPage FROM WikiPage wikiPage WHERE ");
 
-			query.append("nodeId = ?");
+			query.append("wikiPage.nodeId = ?");
 
 			query.append(" AND ");
 
 			if (parentTitle == null) {
-				query.append("parentTitle IS NULL");
+				query.append("wikiPage.parentTitle IS NULL");
 			}
 			else {
-				query.append("parentTitle = ?");
+				query.append("wikiPage.parentTitle = ?");
 			}
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("wikiPage.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("nodeId ASC, ");
-				query.append("title ASC, ");
-				query.append("version ASC");
+				query.append("wikiPage.nodeId ASC, ");
+				query.append("wikiPage.title ASC, ");
+				query.append("wikiPage.version ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -2247,27 +2438,26 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.wiki.model.WikiPage WHERE ");
+				query.append("SELECT wikiPage FROM WikiPage wikiPage WHERE ");
 
-				query.append("nodeId = ?");
+				query.append("wikiPage.nodeId = ?");
 
 				query.append(" AND ");
 
 				if (redirectTitle == null) {
-					query.append("redirectTitle IS NULL");
+					query.append("wikiPage.redirectTitle IS NULL");
 				}
 				else {
-					query.append("redirectTitle = ?");
+					query.append("wikiPage.redirectTitle = ?");
 				}
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("nodeId ASC, ");
-				query.append("title ASC, ");
-				query.append("version ASC");
+				query.append("wikiPage.nodeId ASC, ");
+				query.append("wikiPage.title ASC, ");
+				query.append("wikiPage.version ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -2327,33 +2517,49 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.wiki.model.WikiPage WHERE ");
+				query.append("SELECT wikiPage FROM WikiPage wikiPage WHERE ");
 
-				query.append("nodeId = ?");
+				query.append("wikiPage.nodeId = ?");
 
 				query.append(" AND ");
 
 				if (redirectTitle == null) {
-					query.append("redirectTitle IS NULL");
+					query.append("wikiPage.redirectTitle IS NULL");
 				}
 				else {
-					query.append("redirectTitle = ?");
+					query.append("wikiPage.redirectTitle = ?");
 				}
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("wikiPage.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("nodeId ASC, ");
-					query.append("title ASC, ");
-					query.append("version ASC");
+					query.append("wikiPage.nodeId ASC, ");
+					query.append("wikiPage.title ASC, ");
+					query.append("wikiPage.version ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -2452,32 +2658,49 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 
 			StringBuilder query = new StringBuilder();
 
-			query.append("FROM com.liferay.portlet.wiki.model.WikiPage WHERE ");
+			query.append("SELECT wikiPage FROM WikiPage wikiPage WHERE ");
 
-			query.append("nodeId = ?");
+			query.append("wikiPage.nodeId = ?");
 
 			query.append(" AND ");
 
 			if (redirectTitle == null) {
-				query.append("redirectTitle IS NULL");
+				query.append("wikiPage.redirectTitle IS NULL");
 			}
 			else {
-				query.append("redirectTitle = ?");
+				query.append("wikiPage.redirectTitle = ?");
 			}
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("wikiPage.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("nodeId ASC, ");
-				query.append("title ASC, ");
-				query.append("version ASC");
+				query.append("wikiPage.nodeId ASC, ");
+				query.append("wikiPage.title ASC, ");
+				query.append("wikiPage.version ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -2565,31 +2788,30 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.wiki.model.WikiPage WHERE ");
+				query.append("SELECT wikiPage FROM WikiPage wikiPage WHERE ");
 
-				query.append("nodeId = ?");
+				query.append("wikiPage.nodeId = ?");
 
 				query.append(" AND ");
 
 				if (title == null) {
-					query.append("title IS NULL");
+					query.append("wikiPage.title IS NULL");
 				}
 				else {
-					query.append("title = ?");
+					query.append("wikiPage.title = ?");
 				}
 
 				query.append(" AND ");
 
-				query.append("version = ?");
+				query.append("wikiPage.version = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("nodeId ASC, ");
-				query.append("title ASC, ");
-				query.append("version ASC");
+				query.append("wikiPage.nodeId ASC, ");
+				query.append("wikiPage.title ASC, ");
+				query.append("wikiPage.version ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -2670,31 +2892,30 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.wiki.model.WikiPage WHERE ");
+				query.append("SELECT wikiPage FROM WikiPage wikiPage WHERE ");
 
-				query.append("nodeId = ?");
+				query.append("wikiPage.nodeId = ?");
 
 				query.append(" AND ");
 
 				if (title == null) {
-					query.append("title IS NULL");
+					query.append("wikiPage.title IS NULL");
 				}
 				else {
-					query.append("title = ?");
+					query.append("wikiPage.title = ?");
 				}
 
 				query.append(" AND ");
 
-				query.append("head = ?");
+				query.append("wikiPage.head = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("nodeId ASC, ");
-				query.append("title ASC, ");
-				query.append("version ASC");
+				query.append("wikiPage.nodeId ASC, ");
+				query.append("wikiPage.title ASC, ");
+				query.append("wikiPage.version ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -2756,37 +2977,53 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.wiki.model.WikiPage WHERE ");
+				query.append("SELECT wikiPage FROM WikiPage wikiPage WHERE ");
 
-				query.append("nodeId = ?");
+				query.append("wikiPage.nodeId = ?");
 
 				query.append(" AND ");
 
 				if (title == null) {
-					query.append("title IS NULL");
+					query.append("wikiPage.title IS NULL");
 				}
 				else {
-					query.append("title = ?");
+					query.append("wikiPage.title = ?");
 				}
 
 				query.append(" AND ");
 
-				query.append("head = ?");
+				query.append("wikiPage.head = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("wikiPage.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("nodeId ASC, ");
-					query.append("title ASC, ");
-					query.append("version ASC");
+					query.append("wikiPage.nodeId ASC, ");
+					query.append("wikiPage.title ASC, ");
+					query.append("wikiPage.version ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -2893,36 +3130,53 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 
 			StringBuilder query = new StringBuilder();
 
-			query.append("FROM com.liferay.portlet.wiki.model.WikiPage WHERE ");
+			query.append("SELECT wikiPage FROM WikiPage wikiPage WHERE ");
 
-			query.append("nodeId = ?");
+			query.append("wikiPage.nodeId = ?");
 
 			query.append(" AND ");
 
 			if (title == null) {
-				query.append("title IS NULL");
+				query.append("wikiPage.title IS NULL");
 			}
 			else {
-				query.append("title = ?");
+				query.append("wikiPage.title = ?");
 			}
 
 			query.append(" AND ");
 
-			query.append("head = ?");
+			query.append("wikiPage.head = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("wikiPage.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("nodeId ASC, ");
-				query.append("title ASC, ");
-				query.append("version ASC");
+				query.append("wikiPage.nodeId ASC, ");
+				query.append("wikiPage.title ASC, ");
+				query.append("wikiPage.version ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -2974,31 +3228,30 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.wiki.model.WikiPage WHERE ");
+				query.append("SELECT wikiPage FROM WikiPage wikiPage WHERE ");
 
-				query.append("nodeId = ?");
+				query.append("wikiPage.nodeId = ?");
 
 				query.append(" AND ");
 
-				query.append("head = ?");
+				query.append("wikiPage.head = ?");
 
 				query.append(" AND ");
 
 				if (parentTitle == null) {
-					query.append("parentTitle IS NULL");
+					query.append("wikiPage.parentTitle IS NULL");
 				}
 				else {
-					query.append("parentTitle = ?");
+					query.append("wikiPage.parentTitle = ?");
 				}
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("nodeId ASC, ");
-				query.append("title ASC, ");
-				query.append("version ASC");
+				query.append("wikiPage.nodeId ASC, ");
+				query.append("wikiPage.title ASC, ");
+				query.append("wikiPage.version ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -3061,37 +3314,53 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.wiki.model.WikiPage WHERE ");
+				query.append("SELECT wikiPage FROM WikiPage wikiPage WHERE ");
 
-				query.append("nodeId = ?");
+				query.append("wikiPage.nodeId = ?");
 
 				query.append(" AND ");
 
-				query.append("head = ?");
+				query.append("wikiPage.head = ?");
 
 				query.append(" AND ");
 
 				if (parentTitle == null) {
-					query.append("parentTitle IS NULL");
+					query.append("wikiPage.parentTitle IS NULL");
 				}
 				else {
-					query.append("parentTitle = ?");
+					query.append("wikiPage.parentTitle = ?");
 				}
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("wikiPage.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("nodeId ASC, ");
-					query.append("title ASC, ");
-					query.append("version ASC");
+					query.append("wikiPage.nodeId ASC, ");
+					query.append("wikiPage.title ASC, ");
+					query.append("wikiPage.version ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -3200,36 +3469,53 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 
 			StringBuilder query = new StringBuilder();
 
-			query.append("FROM com.liferay.portlet.wiki.model.WikiPage WHERE ");
+			query.append("SELECT wikiPage FROM WikiPage wikiPage WHERE ");
 
-			query.append("nodeId = ?");
+			query.append("wikiPage.nodeId = ?");
 
 			query.append(" AND ");
 
-			query.append("head = ?");
+			query.append("wikiPage.head = ?");
 
 			query.append(" AND ");
 
 			if (parentTitle == null) {
-				query.append("parentTitle IS NULL");
+				query.append("wikiPage.parentTitle IS NULL");
 			}
 			else {
-				query.append("parentTitle = ?");
+				query.append("wikiPage.parentTitle = ?");
 			}
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("wikiPage.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("nodeId ASC, ");
-				query.append("title ASC, ");
-				query.append("version ASC");
+				query.append("wikiPage.nodeId ASC, ");
+				query.append("wikiPage.title ASC, ");
+				query.append("wikiPage.version ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -3327,19 +3613,36 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portlet.wiki.model.WikiPage ");
+				query.append("SELECT wikiPage FROM WikiPage wikiPage ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("wikiPage.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("nodeId ASC, ");
-					query.append("title ASC, ");
-					query.append("version ASC");
+					query.append("wikiPage.nodeId ASC, ");
+					query.append("wikiPage.title ASC, ");
+					query.append("wikiPage.version ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -3468,15 +3771,14 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.wiki.model.WikiPage WHERE ");
+				query.append("SELECT COUNT(wikiPage) ");
+				query.append("FROM WikiPage wikiPage WHERE ");
 
 				if (uuid == null) {
-					query.append("uuid_ IS NULL");
+					query.append("wikiPage.uuid IS NULL");
 				}
 				else {
-					query.append("uuid_ = ?");
+					query.append("wikiPage.uuid = ?");
 				}
 
 				query.append(" ");
@@ -3524,20 +3826,19 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.wiki.model.WikiPage WHERE ");
+				query.append("SELECT COUNT(wikiPage) ");
+				query.append("FROM WikiPage wikiPage WHERE ");
 
 				if (uuid == null) {
-					query.append("uuid_ IS NULL");
+					query.append("wikiPage.uuid IS NULL");
 				}
 				else {
-					query.append("uuid_ = ?");
+					query.append("wikiPage.uuid = ?");
 				}
 
 				query.append(" AND ");
 
-				query.append("groupId = ?");
+				query.append("wikiPage.groupId = ?");
 
 				query.append(" ");
 
@@ -3585,11 +3886,10 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.wiki.model.WikiPage WHERE ");
+				query.append("SELECT COUNT(wikiPage) ");
+				query.append("FROM WikiPage wikiPage WHERE ");
 
-				query.append("nodeId = ?");
+				query.append("wikiPage.nodeId = ?");
 
 				query.append(" ");
 
@@ -3633,15 +3933,14 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.wiki.model.WikiPage WHERE ");
+				query.append("SELECT COUNT(wikiPage) ");
+				query.append("FROM WikiPage wikiPage WHERE ");
 
 				if (format == null) {
-					query.append("format IS NULL");
+					query.append("wikiPage.format IS NULL");
 				}
 				else {
-					query.append("format = ?");
+					query.append("wikiPage.format = ?");
 				}
 
 				query.append(" ");
@@ -3688,19 +3987,18 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.wiki.model.WikiPage WHERE ");
+				query.append("SELECT COUNT(wikiPage) ");
+				query.append("FROM WikiPage wikiPage WHERE ");
 
-				query.append("nodeId = ?");
+				query.append("wikiPage.nodeId = ?");
 
 				query.append(" AND ");
 
 				if (title == null) {
-					query.append("title IS NULL");
+					query.append("wikiPage.title IS NULL");
 				}
 				else {
-					query.append("title = ?");
+					query.append("wikiPage.title = ?");
 				}
 
 				query.append(" ");
@@ -3751,15 +4049,14 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.wiki.model.WikiPage WHERE ");
+				query.append("SELECT COUNT(wikiPage) ");
+				query.append("FROM WikiPage wikiPage WHERE ");
 
-				query.append("nodeId = ?");
+				query.append("wikiPage.nodeId = ?");
 
 				query.append(" AND ");
 
-				query.append("head = ?");
+				query.append("wikiPage.head = ?");
 
 				query.append(" ");
 
@@ -3806,19 +4103,18 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.wiki.model.WikiPage WHERE ");
+				query.append("SELECT COUNT(wikiPage) ");
+				query.append("FROM WikiPage wikiPage WHERE ");
 
-				query.append("nodeId = ?");
+				query.append("wikiPage.nodeId = ?");
 
 				query.append(" AND ");
 
 				if (parentTitle == null) {
-					query.append("parentTitle IS NULL");
+					query.append("wikiPage.parentTitle IS NULL");
 				}
 				else {
-					query.append("parentTitle = ?");
+					query.append("wikiPage.parentTitle = ?");
 				}
 
 				query.append(" ");
@@ -3868,19 +4164,18 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.wiki.model.WikiPage WHERE ");
+				query.append("SELECT COUNT(wikiPage) ");
+				query.append("FROM WikiPage wikiPage WHERE ");
 
-				query.append("nodeId = ?");
+				query.append("wikiPage.nodeId = ?");
 
 				query.append(" AND ");
 
 				if (redirectTitle == null) {
-					query.append("redirectTitle IS NULL");
+					query.append("wikiPage.redirectTitle IS NULL");
 				}
 				else {
-					query.append("redirectTitle = ?");
+					query.append("wikiPage.redirectTitle = ?");
 				}
 
 				query.append(" ");
@@ -3934,24 +4229,23 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.wiki.model.WikiPage WHERE ");
+				query.append("SELECT COUNT(wikiPage) ");
+				query.append("FROM WikiPage wikiPage WHERE ");
 
-				query.append("nodeId = ?");
+				query.append("wikiPage.nodeId = ?");
 
 				query.append(" AND ");
 
 				if (title == null) {
-					query.append("title IS NULL");
+					query.append("wikiPage.title IS NULL");
 				}
 				else {
-					query.append("title = ?");
+					query.append("wikiPage.title = ?");
 				}
 
 				query.append(" AND ");
 
-				query.append("version = ?");
+				query.append("wikiPage.version = ?");
 
 				query.append(" ");
 
@@ -4006,24 +4300,23 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.wiki.model.WikiPage WHERE ");
+				query.append("SELECT COUNT(wikiPage) ");
+				query.append("FROM WikiPage wikiPage WHERE ");
 
-				query.append("nodeId = ?");
+				query.append("wikiPage.nodeId = ?");
 
 				query.append(" AND ");
 
 				if (title == null) {
-					query.append("title IS NULL");
+					query.append("wikiPage.title IS NULL");
 				}
 				else {
-					query.append("title = ?");
+					query.append("wikiPage.title = ?");
 				}
 
 				query.append(" AND ");
 
-				query.append("head = ?");
+				query.append("wikiPage.head = ?");
 
 				query.append(" ");
 
@@ -4078,23 +4371,22 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.wiki.model.WikiPage WHERE ");
+				query.append("SELECT COUNT(wikiPage) ");
+				query.append("FROM WikiPage wikiPage WHERE ");
 
-				query.append("nodeId = ?");
+				query.append("wikiPage.nodeId = ?");
 
 				query.append(" AND ");
 
-				query.append("head = ?");
+				query.append("wikiPage.head = ?");
 
 				query.append(" AND ");
 
 				if (parentTitle == null) {
-					query.append("parentTitle IS NULL");
+					query.append("wikiPage.parentTitle IS NULL");
 				}
 				else {
-					query.append("parentTitle = ?");
+					query.append("wikiPage.parentTitle = ?");
 				}
 
 				query.append(" ");
@@ -4144,7 +4436,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 				session = openSession();
 
 				Query q = session.createQuery(
-						"SELECT COUNT(*) FROM com.liferay.portlet.wiki.model.WikiPage");
+						"SELECT COUNT(wikiPage) FROM WikiPage wikiPage");
 
 				count = (Long)q.uniqueResult();
 			}

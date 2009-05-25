@@ -560,17 +560,17 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.expando.model.ExpandoValue WHERE ");
+					"SELECT expandoValue FROM ExpandoValue expandoValue WHERE ");
 
-				query.append("tableId = ?");
+				query.append("expandoValue.tableId = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("tableId ASC, ");
-				query.append("rowId_ ASC, ");
-				query.append("columnId ASC");
+				query.append("expandoValue.tableId ASC, ");
+				query.append("expandoValue.rowId ASC, ");
+				query.append("expandoValue.columnId ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -625,23 +625,40 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.expando.model.ExpandoValue WHERE ");
+					"SELECT expandoValue FROM ExpandoValue expandoValue WHERE ");
 
-				query.append("tableId = ?");
+				query.append("expandoValue.tableId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("expandoValue.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("tableId ASC, ");
-					query.append("rowId_ ASC, ");
-					query.append("columnId ASC");
+					query.append("expandoValue.tableId ASC, ");
+					query.append("expandoValue.rowId ASC, ");
+					query.append("expandoValue.columnId ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -729,23 +746,40 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 			StringBuilder query = new StringBuilder();
 
 			query.append(
-				"FROM com.liferay.portlet.expando.model.ExpandoValue WHERE ");
+				"SELECT expandoValue FROM ExpandoValue expandoValue WHERE ");
 
-			query.append("tableId = ?");
+			query.append("expandoValue.tableId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("expandoValue.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("tableId ASC, ");
-				query.append("rowId_ ASC, ");
-				query.append("columnId ASC");
+				query.append("expandoValue.tableId ASC, ");
+				query.append("expandoValue.rowId ASC, ");
+				query.append("expandoValue.columnId ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -789,17 +823,17 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.expando.model.ExpandoValue WHERE ");
+					"SELECT expandoValue FROM ExpandoValue expandoValue WHERE ");
 
-				query.append("columnId = ?");
+				query.append("expandoValue.columnId = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("tableId ASC, ");
-				query.append("rowId_ ASC, ");
-				query.append("columnId ASC");
+				query.append("expandoValue.tableId ASC, ");
+				query.append("expandoValue.rowId ASC, ");
+				query.append("expandoValue.columnId ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -854,23 +888,40 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.expando.model.ExpandoValue WHERE ");
+					"SELECT expandoValue FROM ExpandoValue expandoValue WHERE ");
 
-				query.append("columnId = ?");
+				query.append("expandoValue.columnId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("expandoValue.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("tableId ASC, ");
-					query.append("rowId_ ASC, ");
-					query.append("columnId ASC");
+					query.append("expandoValue.tableId ASC, ");
+					query.append("expandoValue.rowId ASC, ");
+					query.append("expandoValue.columnId ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -959,23 +1010,40 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 			StringBuilder query = new StringBuilder();
 
 			query.append(
-				"FROM com.liferay.portlet.expando.model.ExpandoValue WHERE ");
+				"SELECT expandoValue FROM ExpandoValue expandoValue WHERE ");
 
-			query.append("columnId = ?");
+			query.append("expandoValue.columnId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("expandoValue.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("tableId ASC, ");
-				query.append("rowId_ ASC, ");
-				query.append("columnId ASC");
+				query.append("expandoValue.tableId ASC, ");
+				query.append("expandoValue.rowId ASC, ");
+				query.append("expandoValue.columnId ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -1018,17 +1086,17 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.expando.model.ExpandoValue WHERE ");
+					"SELECT expandoValue FROM ExpandoValue expandoValue WHERE ");
 
-				query.append("rowId_ = ?");
+				query.append("expandoValue.rowId = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("tableId ASC, ");
-				query.append("rowId_ ASC, ");
-				query.append("columnId ASC");
+				query.append("expandoValue.tableId ASC, ");
+				query.append("expandoValue.rowId ASC, ");
+				query.append("expandoValue.columnId ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1083,23 +1151,40 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.expando.model.ExpandoValue WHERE ");
+					"SELECT expandoValue FROM ExpandoValue expandoValue WHERE ");
 
-				query.append("rowId_ = ?");
+				query.append("expandoValue.rowId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("expandoValue.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("tableId ASC, ");
-					query.append("rowId_ ASC, ");
-					query.append("columnId ASC");
+					query.append("expandoValue.tableId ASC, ");
+					query.append("expandoValue.rowId ASC, ");
+					query.append("expandoValue.columnId ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1187,23 +1272,40 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 			StringBuilder query = new StringBuilder();
 
 			query.append(
-				"FROM com.liferay.portlet.expando.model.ExpandoValue WHERE ");
+				"SELECT expandoValue FROM ExpandoValue expandoValue WHERE ");
 
-			query.append("rowId_ = ?");
+			query.append("expandoValue.rowId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("expandoValue.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("tableId ASC, ");
-				query.append("rowId_ ASC, ");
-				query.append("columnId ASC");
+				query.append("expandoValue.tableId ASC, ");
+				query.append("expandoValue.rowId ASC, ");
+				query.append("expandoValue.columnId ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -1247,21 +1349,21 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.expando.model.ExpandoValue WHERE ");
+					"SELECT expandoValue FROM ExpandoValue expandoValue WHERE ");
 
-				query.append("tableId = ?");
+				query.append("expandoValue.tableId = ?");
 
 				query.append(" AND ");
 
-				query.append("columnId = ?");
+				query.append("expandoValue.columnId = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("tableId ASC, ");
-				query.append("rowId_ ASC, ");
-				query.append("columnId ASC");
+				query.append("expandoValue.tableId ASC, ");
+				query.append("expandoValue.rowId ASC, ");
+				query.append("expandoValue.columnId ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1318,27 +1420,44 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.expando.model.ExpandoValue WHERE ");
+					"SELECT expandoValue FROM ExpandoValue expandoValue WHERE ");
 
-				query.append("tableId = ?");
+				query.append("expandoValue.tableId = ?");
 
 				query.append(" AND ");
 
-				query.append("columnId = ?");
+				query.append("expandoValue.columnId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("expandoValue.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("tableId ASC, ");
-					query.append("rowId_ ASC, ");
-					query.append("columnId ASC");
+					query.append("expandoValue.tableId ASC, ");
+					query.append("expandoValue.rowId ASC, ");
+					query.append("expandoValue.columnId ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1436,27 +1555,44 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 			StringBuilder query = new StringBuilder();
 
 			query.append(
-				"FROM com.liferay.portlet.expando.model.ExpandoValue WHERE ");
+				"SELECT expandoValue FROM ExpandoValue expandoValue WHERE ");
 
-			query.append("tableId = ?");
+			query.append("expandoValue.tableId = ?");
 
 			query.append(" AND ");
 
-			query.append("columnId = ?");
+			query.append("expandoValue.columnId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("expandoValue.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("tableId ASC, ");
-				query.append("rowId_ ASC, ");
-				query.append("columnId ASC");
+				query.append("expandoValue.tableId ASC, ");
+				query.append("expandoValue.rowId ASC, ");
+				query.append("expandoValue.columnId ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -1502,21 +1638,21 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.expando.model.ExpandoValue WHERE ");
+					"SELECT expandoValue FROM ExpandoValue expandoValue WHERE ");
 
-				query.append("tableId = ?");
+				query.append("expandoValue.tableId = ?");
 
 				query.append(" AND ");
 
-				query.append("classPK = ?");
+				query.append("expandoValue.classPK = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("tableId ASC, ");
-				query.append("rowId_ ASC, ");
-				query.append("columnId ASC");
+				query.append("expandoValue.tableId ASC, ");
+				query.append("expandoValue.rowId ASC, ");
+				query.append("expandoValue.columnId ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1573,27 +1709,44 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.expando.model.ExpandoValue WHERE ");
+					"SELECT expandoValue FROM ExpandoValue expandoValue WHERE ");
 
-				query.append("tableId = ?");
+				query.append("expandoValue.tableId = ?");
 
 				query.append(" AND ");
 
-				query.append("classPK = ?");
+				query.append("expandoValue.classPK = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("expandoValue.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("tableId ASC, ");
-					query.append("rowId_ ASC, ");
-					query.append("columnId ASC");
+					query.append("expandoValue.tableId ASC, ");
+					query.append("expandoValue.rowId ASC, ");
+					query.append("expandoValue.columnId ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1691,27 +1844,44 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 			StringBuilder query = new StringBuilder();
 
 			query.append(
-				"FROM com.liferay.portlet.expando.model.ExpandoValue WHERE ");
+				"SELECT expandoValue FROM ExpandoValue expandoValue WHERE ");
 
-			query.append("tableId = ?");
+			query.append("expandoValue.tableId = ?");
 
 			query.append(" AND ");
 
-			query.append("classPK = ?");
+			query.append("expandoValue.classPK = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("expandoValue.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("tableId ASC, ");
-				query.append("rowId_ ASC, ");
-				query.append("columnId ASC");
+				query.append("expandoValue.tableId ASC, ");
+				query.append("expandoValue.rowId ASC, ");
+				query.append("expandoValue.columnId ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -1757,21 +1927,21 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.expando.model.ExpandoValue WHERE ");
+					"SELECT expandoValue FROM ExpandoValue expandoValue WHERE ");
 
-				query.append("tableId = ?");
+				query.append("expandoValue.tableId = ?");
 
 				query.append(" AND ");
 
-				query.append("rowId_ = ?");
+				query.append("expandoValue.rowId = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("tableId ASC, ");
-				query.append("rowId_ ASC, ");
-				query.append("columnId ASC");
+				query.append("expandoValue.tableId ASC, ");
+				query.append("expandoValue.rowId ASC, ");
+				query.append("expandoValue.columnId ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1828,27 +1998,44 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.expando.model.ExpandoValue WHERE ");
+					"SELECT expandoValue FROM ExpandoValue expandoValue WHERE ");
 
-				query.append("tableId = ?");
+				query.append("expandoValue.tableId = ?");
 
 				query.append(" AND ");
 
-				query.append("rowId_ = ?");
+				query.append("expandoValue.rowId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("expandoValue.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("tableId ASC, ");
-					query.append("rowId_ ASC, ");
-					query.append("columnId ASC");
+					query.append("expandoValue.tableId ASC, ");
+					query.append("expandoValue.rowId ASC, ");
+					query.append("expandoValue.columnId ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1946,27 +2133,44 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 			StringBuilder query = new StringBuilder();
 
 			query.append(
-				"FROM com.liferay.portlet.expando.model.ExpandoValue WHERE ");
+				"SELECT expandoValue FROM ExpandoValue expandoValue WHERE ");
 
-			query.append("tableId = ?");
+			query.append("expandoValue.tableId = ?");
 
 			query.append(" AND ");
 
-			query.append("rowId_ = ?");
+			query.append("expandoValue.rowId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("expandoValue.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("tableId ASC, ");
-				query.append("rowId_ ASC, ");
-				query.append("columnId ASC");
+				query.append("expandoValue.tableId ASC, ");
+				query.append("expandoValue.rowId ASC, ");
+				query.append("expandoValue.columnId ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -2047,21 +2251,21 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.expando.model.ExpandoValue WHERE ");
+					"SELECT expandoValue FROM ExpandoValue expandoValue WHERE ");
 
-				query.append("columnId = ?");
+				query.append("expandoValue.columnId = ?");
 
 				query.append(" AND ");
 
-				query.append("rowId_ = ?");
+				query.append("expandoValue.rowId = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("tableId ASC, ");
-				query.append("rowId_ ASC, ");
-				query.append("columnId ASC");
+				query.append("expandoValue.tableId ASC, ");
+				query.append("expandoValue.rowId ASC, ");
+				query.append("expandoValue.columnId ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -2135,21 +2339,21 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.expando.model.ExpandoValue WHERE ");
+					"SELECT expandoValue FROM ExpandoValue expandoValue WHERE ");
 
-				query.append("classNameId = ?");
+				query.append("expandoValue.classNameId = ?");
 
 				query.append(" AND ");
 
-				query.append("classPK = ?");
+				query.append("expandoValue.classPK = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("tableId ASC, ");
-				query.append("rowId_ ASC, ");
-				query.append("columnId ASC");
+				query.append("expandoValue.tableId ASC, ");
+				query.append("expandoValue.rowId ASC, ");
+				query.append("expandoValue.columnId ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -2206,27 +2410,44 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.expando.model.ExpandoValue WHERE ");
+					"SELECT expandoValue FROM ExpandoValue expandoValue WHERE ");
 
-				query.append("classNameId = ?");
+				query.append("expandoValue.classNameId = ?");
 
 				query.append(" AND ");
 
-				query.append("classPK = ?");
+				query.append("expandoValue.classPK = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("expandoValue.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("tableId ASC, ");
-					query.append("rowId_ ASC, ");
-					query.append("columnId ASC");
+					query.append("expandoValue.tableId ASC, ");
+					query.append("expandoValue.rowId ASC, ");
+					query.append("expandoValue.columnId ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -2324,27 +2545,44 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 			StringBuilder query = new StringBuilder();
 
 			query.append(
-				"FROM com.liferay.portlet.expando.model.ExpandoValue WHERE ");
+				"SELECT expandoValue FROM ExpandoValue expandoValue WHERE ");
 
-			query.append("classNameId = ?");
+			query.append("expandoValue.classNameId = ?");
 
 			query.append(" AND ");
 
-			query.append("classPK = ?");
+			query.append("expandoValue.classPK = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("expandoValue.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("tableId ASC, ");
-				query.append("rowId_ ASC, ");
-				query.append("columnId ASC");
+				query.append("expandoValue.tableId ASC, ");
+				query.append("expandoValue.rowId ASC, ");
+				query.append("expandoValue.columnId ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -2430,25 +2668,25 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.expando.model.ExpandoValue WHERE ");
+					"SELECT expandoValue FROM ExpandoValue expandoValue WHERE ");
 
-				query.append("tableId = ?");
-
-				query.append(" AND ");
-
-				query.append("columnId = ?");
+				query.append("expandoValue.tableId = ?");
 
 				query.append(" AND ");
 
-				query.append("classPK = ?");
+				query.append("expandoValue.columnId = ?");
+
+				query.append(" AND ");
+
+				query.append("expandoValue.classPK = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("tableId ASC, ");
-				query.append("rowId_ ASC, ");
-				query.append("columnId ASC");
+				query.append("expandoValue.tableId ASC, ");
+				query.append("expandoValue.rowId ASC, ");
+				query.append("expandoValue.columnId ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -2527,30 +2765,30 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.expando.model.ExpandoValue WHERE ");
+					"SELECT expandoValue FROM ExpandoValue expandoValue WHERE ");
 
-				query.append("tableId = ?");
+				query.append("expandoValue.tableId = ?");
 
 				query.append(" AND ");
 
-				query.append("columnId = ?");
+				query.append("expandoValue.columnId = ?");
 
 				query.append(" AND ");
 
 				if (data == null) {
-					query.append("data_ IS NULL");
+					query.append("expandoValue.data IS NULL");
 				}
 				else {
-					query.append("data_ = ?");
+					query.append("expandoValue.data = ?");
 				}
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("tableId ASC, ");
-				query.append("rowId_ ASC, ");
-				query.append("columnId ASC");
+				query.append("expandoValue.tableId ASC, ");
+				query.append("expandoValue.rowId ASC, ");
+				query.append("expandoValue.columnId ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -2614,36 +2852,53 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.expando.model.ExpandoValue WHERE ");
+					"SELECT expandoValue FROM ExpandoValue expandoValue WHERE ");
 
-				query.append("tableId = ?");
+				query.append("expandoValue.tableId = ?");
 
 				query.append(" AND ");
 
-				query.append("columnId = ?");
+				query.append("expandoValue.columnId = ?");
 
 				query.append(" AND ");
 
 				if (data == null) {
-					query.append("data_ IS NULL");
+					query.append("expandoValue.data IS NULL");
 				}
 				else {
-					query.append("data_ = ?");
+					query.append("expandoValue.data = ?");
 				}
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("expandoValue.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("tableId ASC, ");
-					query.append("rowId_ ASC, ");
-					query.append("columnId ASC");
+					query.append("expandoValue.tableId ASC, ");
+					query.append("expandoValue.rowId ASC, ");
+					query.append("expandoValue.columnId ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -2753,36 +3008,53 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 			StringBuilder query = new StringBuilder();
 
 			query.append(
-				"FROM com.liferay.portlet.expando.model.ExpandoValue WHERE ");
+				"SELECT expandoValue FROM ExpandoValue expandoValue WHERE ");
 
-			query.append("tableId = ?");
+			query.append("expandoValue.tableId = ?");
 
 			query.append(" AND ");
 
-			query.append("columnId = ?");
+			query.append("expandoValue.columnId = ?");
 
 			query.append(" AND ");
 
 			if (data == null) {
-				query.append("data_ IS NULL");
+				query.append("expandoValue.data IS NULL");
 			}
 			else {
-				query.append("data_ = ?");
+				query.append("expandoValue.data = ?");
 			}
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("expandoValue.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("tableId ASC, ");
-				query.append("rowId_ ASC, ");
-				query.append("columnId ASC");
+				query.append("expandoValue.tableId ASC, ");
+				query.append("expandoValue.rowId ASC, ");
+				query.append("expandoValue.columnId ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -2883,19 +3155,36 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.expando.model.ExpandoValue ");
+					"SELECT expandoValue FROM ExpandoValue expandoValue ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("expandoValue.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("tableId ASC, ");
-					query.append("rowId_ ASC, ");
-					query.append("columnId ASC");
+					query.append("expandoValue.tableId ASC, ");
+					query.append("expandoValue.rowId ASC, ");
+					query.append("expandoValue.columnId ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -3016,11 +3305,10 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.expando.model.ExpandoValue WHERE ");
+				query.append("SELECT COUNT(expandoValue) ");
+				query.append("FROM ExpandoValue expandoValue WHERE ");
 
-				query.append("tableId = ?");
+				query.append("expandoValue.tableId = ?");
 
 				query.append(" ");
 
@@ -3064,11 +3352,10 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.expando.model.ExpandoValue WHERE ");
+				query.append("SELECT COUNT(expandoValue) ");
+				query.append("FROM ExpandoValue expandoValue WHERE ");
 
-				query.append("columnId = ?");
+				query.append("expandoValue.columnId = ?");
 
 				query.append(" ");
 
@@ -3112,11 +3399,10 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.expando.model.ExpandoValue WHERE ");
+				query.append("SELECT COUNT(expandoValue) ");
+				query.append("FROM ExpandoValue expandoValue WHERE ");
 
-				query.append("rowId_ = ?");
+				query.append("expandoValue.rowId = ?");
 
 				query.append(" ");
 
@@ -3161,15 +3447,14 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.expando.model.ExpandoValue WHERE ");
+				query.append("SELECT COUNT(expandoValue) ");
+				query.append("FROM ExpandoValue expandoValue WHERE ");
 
-				query.append("tableId = ?");
+				query.append("expandoValue.tableId = ?");
 
 				query.append(" AND ");
 
-				query.append("columnId = ?");
+				query.append("expandoValue.columnId = ?");
 
 				query.append(" ");
 
@@ -3216,15 +3501,14 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.expando.model.ExpandoValue WHERE ");
+				query.append("SELECT COUNT(expandoValue) ");
+				query.append("FROM ExpandoValue expandoValue WHERE ");
 
-				query.append("tableId = ?");
+				query.append("expandoValue.tableId = ?");
 
 				query.append(" AND ");
 
-				query.append("classPK = ?");
+				query.append("expandoValue.classPK = ?");
 
 				query.append(" ");
 
@@ -3270,15 +3554,14 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.expando.model.ExpandoValue WHERE ");
+				query.append("SELECT COUNT(expandoValue) ");
+				query.append("FROM ExpandoValue expandoValue WHERE ");
 
-				query.append("tableId = ?");
+				query.append("expandoValue.tableId = ?");
 
 				query.append(" AND ");
 
-				query.append("rowId_ = ?");
+				query.append("expandoValue.rowId = ?");
 
 				query.append(" ");
 
@@ -3324,15 +3607,14 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.expando.model.ExpandoValue WHERE ");
+				query.append("SELECT COUNT(expandoValue) ");
+				query.append("FROM ExpandoValue expandoValue WHERE ");
 
-				query.append("columnId = ?");
+				query.append("expandoValue.columnId = ?");
 
 				query.append(" AND ");
 
-				query.append("rowId_ = ?");
+				query.append("expandoValue.rowId = ?");
 
 				query.append(" ");
 
@@ -3381,15 +3663,14 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.expando.model.ExpandoValue WHERE ");
+				query.append("SELECT COUNT(expandoValue) ");
+				query.append("FROM ExpandoValue expandoValue WHERE ");
 
-				query.append("classNameId = ?");
+				query.append("expandoValue.classNameId = ?");
 
 				query.append(" AND ");
 
-				query.append("classPK = ?");
+				query.append("expandoValue.classPK = ?");
 
 				query.append(" ");
 
@@ -3438,19 +3719,18 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.expando.model.ExpandoValue WHERE ");
+				query.append("SELECT COUNT(expandoValue) ");
+				query.append("FROM ExpandoValue expandoValue WHERE ");
 
-				query.append("tableId = ?");
-
-				query.append(" AND ");
-
-				query.append("columnId = ?");
+				query.append("expandoValue.tableId = ?");
 
 				query.append(" AND ");
 
-				query.append("classPK = ?");
+				query.append("expandoValue.columnId = ?");
+
+				query.append(" AND ");
+
+				query.append("expandoValue.classPK = ?");
 
 				query.append(" ");
 
@@ -3503,23 +3783,22 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.expando.model.ExpandoValue WHERE ");
+				query.append("SELECT COUNT(expandoValue) ");
+				query.append("FROM ExpandoValue expandoValue WHERE ");
 
-				query.append("tableId = ?");
+				query.append("expandoValue.tableId = ?");
 
 				query.append(" AND ");
 
-				query.append("columnId = ?");
+				query.append("expandoValue.columnId = ?");
 
 				query.append(" AND ");
 
 				if (data == null) {
-					query.append("data_ IS NULL");
+					query.append("expandoValue.data IS NULL");
 				}
 				else {
-					query.append("data_ = ?");
+					query.append("expandoValue.data = ?");
 				}
 
 				query.append(" ");
@@ -3569,7 +3848,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 				session = openSession();
 
 				Query q = session.createQuery(
-						"SELECT COUNT(*) FROM com.liferay.portlet.expando.model.ExpandoValue");
+						"SELECT COUNT(expandoValue) FROM ExpandoValue expandoValue");
 
 				count = (Long)q.uniqueResult();
 			}

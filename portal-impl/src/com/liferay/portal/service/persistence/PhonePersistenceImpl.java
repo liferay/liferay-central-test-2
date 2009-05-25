@@ -405,15 +405,15 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.Phone WHERE ");
+				query.append("SELECT phone FROM Phone phone WHERE ");
 
-				query.append("companyId = ?");
+				query.append("phone.companyId = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("createDate ASC");
+				query.append("phone.createDate ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -467,21 +467,38 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.Phone WHERE ");
+				query.append("SELECT phone FROM Phone phone WHERE ");
 
-				query.append("companyId = ?");
+				query.append("phone.companyId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("phone.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("createDate ASC");
+					query.append("phone.createDate ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -567,21 +584,38 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 
 			StringBuilder query = new StringBuilder();
 
-			query.append("FROM com.liferay.portal.model.Phone WHERE ");
+			query.append("SELECT phone FROM Phone phone WHERE ");
 
-			query.append("companyId = ?");
+			query.append("phone.companyId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("phone.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("createDate ASC");
+				query.append("phone.createDate ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -622,15 +656,15 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.Phone WHERE ");
+				query.append("SELECT phone FROM Phone phone WHERE ");
 
-				query.append("userId = ?");
+				query.append("phone.userId = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("createDate ASC");
+				query.append("phone.createDate ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -684,21 +718,38 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.Phone WHERE ");
+				query.append("SELECT phone FROM Phone phone WHERE ");
 
-				query.append("userId = ?");
+				query.append("phone.userId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("phone.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("createDate ASC");
+					query.append("phone.createDate ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -784,21 +835,38 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 
 			StringBuilder query = new StringBuilder();
 
-			query.append("FROM com.liferay.portal.model.Phone WHERE ");
+			query.append("SELECT phone FROM Phone phone WHERE ");
 
-			query.append("userId = ?");
+			query.append("phone.userId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("phone.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("createDate ASC");
+				query.append("phone.createDate ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -842,19 +910,19 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.Phone WHERE ");
+				query.append("SELECT phone FROM Phone phone WHERE ");
 
-				query.append("companyId = ?");
+				query.append("phone.companyId = ?");
 
 				query.append(" AND ");
 
-				query.append("classNameId = ?");
+				query.append("phone.classNameId = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("createDate ASC");
+				query.append("phone.createDate ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -910,25 +978,42 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.Phone WHERE ");
+				query.append("SELECT phone FROM Phone phone WHERE ");
 
-				query.append("companyId = ?");
+				query.append("phone.companyId = ?");
 
 				query.append(" AND ");
 
-				query.append("classNameId = ?");
+				query.append("phone.classNameId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("phone.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("createDate ASC");
+					query.append("phone.createDate ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1024,25 +1109,42 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 
 			StringBuilder query = new StringBuilder();
 
-			query.append("FROM com.liferay.portal.model.Phone WHERE ");
+			query.append("SELECT phone FROM Phone phone WHERE ");
 
-			query.append("companyId = ?");
+			query.append("phone.companyId = ?");
 
 			query.append(" AND ");
 
-			query.append("classNameId = ?");
+			query.append("phone.classNameId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("phone.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("createDate ASC");
+				query.append("phone.createDate ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -1088,23 +1190,23 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.Phone WHERE ");
+				query.append("SELECT phone FROM Phone phone WHERE ");
 
-				query.append("companyId = ?");
-
-				query.append(" AND ");
-
-				query.append("classNameId = ?");
+				query.append("phone.companyId = ?");
 
 				query.append(" AND ");
 
-				query.append("classPK = ?");
+				query.append("phone.classNameId = ?");
+
+				query.append(" AND ");
+
+				query.append("phone.classPK = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("createDate ASC");
+				query.append("phone.createDate ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1163,29 +1265,46 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.Phone WHERE ");
+				query.append("SELECT phone FROM Phone phone WHERE ");
 
-				query.append("companyId = ?");
-
-				query.append(" AND ");
-
-				query.append("classNameId = ?");
+				query.append("phone.companyId = ?");
 
 				query.append(" AND ");
 
-				query.append("classPK = ?");
+				query.append("phone.classNameId = ?");
+
+				query.append(" AND ");
+
+				query.append("phone.classPK = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("phone.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("createDate ASC");
+					query.append("phone.createDate ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1292,29 +1411,46 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 
 			StringBuilder query = new StringBuilder();
 
-			query.append("FROM com.liferay.portal.model.Phone WHERE ");
+			query.append("SELECT phone FROM Phone phone WHERE ");
 
-			query.append("companyId = ?");
-
-			query.append(" AND ");
-
-			query.append("classNameId = ?");
+			query.append("phone.companyId = ?");
 
 			query.append(" AND ");
 
-			query.append("classPK = ?");
+			query.append("phone.classNameId = ?");
+
+			query.append(" AND ");
+
+			query.append("phone.classPK = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("phone.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("createDate ASC");
+				query.append("phone.createDate ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -1363,27 +1499,27 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.Phone WHERE ");
+				query.append("SELECT phone FROM Phone phone WHERE ");
 
-				query.append("companyId = ?");
-
-				query.append(" AND ");
-
-				query.append("classNameId = ?");
+				query.append("phone.companyId = ?");
 
 				query.append(" AND ");
 
-				query.append("classPK = ?");
+				query.append("phone.classNameId = ?");
 
 				query.append(" AND ");
 
-				query.append("primary_ = ?");
+				query.append("phone.classPK = ?");
+
+				query.append(" AND ");
+
+				query.append("phone.primary = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("createDate ASC");
+				query.append("phone.createDate ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1447,33 +1583,50 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.Phone WHERE ");
+				query.append("SELECT phone FROM Phone phone WHERE ");
 
-				query.append("companyId = ?");
-
-				query.append(" AND ");
-
-				query.append("classNameId = ?");
+				query.append("phone.companyId = ?");
 
 				query.append(" AND ");
 
-				query.append("classPK = ?");
+				query.append("phone.classNameId = ?");
 
 				query.append(" AND ");
 
-				query.append("primary_ = ?");
+				query.append("phone.classPK = ?");
+
+				query.append(" AND ");
+
+				query.append("phone.primary = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("phone.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("createDate ASC");
+					query.append("phone.createDate ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1588,33 +1741,50 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 
 			StringBuilder query = new StringBuilder();
 
-			query.append("FROM com.liferay.portal.model.Phone WHERE ");
+			query.append("SELECT phone FROM Phone phone WHERE ");
 
-			query.append("companyId = ?");
-
-			query.append(" AND ");
-
-			query.append("classNameId = ?");
+			query.append("phone.companyId = ?");
 
 			query.append(" AND ");
 
-			query.append("classPK = ?");
+			query.append("phone.classNameId = ?");
 
 			query.append(" AND ");
 
-			query.append("primary_ = ?");
+			query.append("phone.classPK = ?");
+
+			query.append(" AND ");
+
+			query.append("phone.primary = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("phone.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("createDate ASC");
+				query.append("phone.createDate ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -1712,17 +1882,34 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.Phone ");
+				query.append("SELECT phone FROM Phone phone ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("phone.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("createDate ASC");
+					query.append("phone.createDate ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1811,10 +1998,10 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append("FROM com.liferay.portal.model.Phone WHERE ");
+				query.append("SELECT COUNT(phone) ");
+				query.append("FROM Phone phone WHERE ");
 
-				query.append("companyId = ?");
+				query.append("phone.companyId = ?");
 
 				query.append(" ");
 
@@ -1858,10 +2045,10 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append("FROM com.liferay.portal.model.Phone WHERE ");
+				query.append("SELECT COUNT(phone) ");
+				query.append("FROM Phone phone WHERE ");
 
-				query.append("userId = ?");
+				query.append("phone.userId = ?");
 
 				query.append(" ");
 
@@ -1908,14 +2095,14 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append("FROM com.liferay.portal.model.Phone WHERE ");
+				query.append("SELECT COUNT(phone) ");
+				query.append("FROM Phone phone WHERE ");
 
-				query.append("companyId = ?");
+				query.append("phone.companyId = ?");
 
 				query.append(" AND ");
 
-				query.append("classNameId = ?");
+				query.append("phone.classNameId = ?");
 
 				query.append(" ");
 
@@ -1964,18 +2151,18 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append("FROM com.liferay.portal.model.Phone WHERE ");
+				query.append("SELECT COUNT(phone) ");
+				query.append("FROM Phone phone WHERE ");
 
-				query.append("companyId = ?");
-
-				query.append(" AND ");
-
-				query.append("classNameId = ?");
+				query.append("phone.companyId = ?");
 
 				query.append(" AND ");
 
-				query.append("classPK = ?");
+				query.append("phone.classNameId = ?");
+
+				query.append(" AND ");
+
+				query.append("phone.classPK = ?");
 
 				query.append(" ");
 
@@ -2027,22 +2214,22 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append("FROM com.liferay.portal.model.Phone WHERE ");
+				query.append("SELECT COUNT(phone) ");
+				query.append("FROM Phone phone WHERE ");
 
-				query.append("companyId = ?");
-
-				query.append(" AND ");
-
-				query.append("classNameId = ?");
+				query.append("phone.companyId = ?");
 
 				query.append(" AND ");
 
-				query.append("classPK = ?");
+				query.append("phone.classNameId = ?");
 
 				query.append(" AND ");
 
-				query.append("primary_ = ?");
+				query.append("phone.classPK = ?");
+
+				query.append(" AND ");
+
+				query.append("phone.primary = ?");
 
 				query.append(" ");
 
@@ -2091,7 +2278,7 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 				session = openSession();
 
 				Query q = session.createQuery(
-						"SELECT COUNT(*) FROM com.liferay.portal.model.Phone");
+						"SELECT COUNT(phone) FROM Phone phone");
 
 				count = (Long)q.uniqueResult();
 			}

@@ -417,9 +417,9 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.messageboards.model.MBDiscussion WHERE ");
+					"SELECT mbDiscussion FROM MBDiscussion mbDiscussion WHERE ");
 
-				query.append("classNameId = ?");
+				query.append("mbDiscussion.classNameId = ?");
 
 				query.append(" ");
 
@@ -476,15 +476,32 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.messageboards.model.MBDiscussion WHERE ");
+					"SELECT mbDiscussion FROM MBDiscussion mbDiscussion WHERE ");
 
-				query.append("classNameId = ?");
+				query.append("mbDiscussion.classNameId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("mbDiscussion.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -576,15 +593,32 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl
 			StringBuilder query = new StringBuilder();
 
 			query.append(
-				"FROM com.liferay.portlet.messageboards.model.MBDiscussion WHERE ");
+				"SELECT mbDiscussion FROM MBDiscussion mbDiscussion WHERE ");
 
-			query.append("classNameId = ?");
+			query.append("mbDiscussion.classNameId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("mbDiscussion.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -660,9 +694,9 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.messageboards.model.MBDiscussion WHERE ");
+					"SELECT mbDiscussion FROM MBDiscussion mbDiscussion WHERE ");
 
-				query.append("threadId = ?");
+				query.append("mbDiscussion.threadId = ?");
 
 				query.append(" ");
 
@@ -770,13 +804,13 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.messageboards.model.MBDiscussion WHERE ");
+					"SELECT mbDiscussion FROM MBDiscussion mbDiscussion WHERE ");
 
-				query.append("classNameId = ?");
+				query.append("mbDiscussion.classNameId = ?");
 
 				query.append(" AND ");
 
-				query.append("classPK = ?");
+				query.append("mbDiscussion.classPK = ?");
 
 				query.append(" ");
 
@@ -901,11 +935,28 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.messageboards.model.MBDiscussion ");
+					"SELECT mbDiscussion FROM MBDiscussion mbDiscussion ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("mbDiscussion.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -980,11 +1031,10 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.messageboards.model.MBDiscussion WHERE ");
+				query.append("SELECT COUNT(mbDiscussion) ");
+				query.append("FROM MBDiscussion mbDiscussion WHERE ");
 
-				query.append("classNameId = ?");
+				query.append("mbDiscussion.classNameId = ?");
 
 				query.append(" ");
 
@@ -1028,11 +1078,10 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.messageboards.model.MBDiscussion WHERE ");
+				query.append("SELECT COUNT(mbDiscussion) ");
+				query.append("FROM MBDiscussion mbDiscussion WHERE ");
 
-				query.append("threadId = ?");
+				query.append("mbDiscussion.threadId = ?");
 
 				query.append(" ");
 
@@ -1079,15 +1128,14 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.messageboards.model.MBDiscussion WHERE ");
+				query.append("SELECT COUNT(mbDiscussion) ");
+				query.append("FROM MBDiscussion mbDiscussion WHERE ");
 
-				query.append("classNameId = ?");
+				query.append("mbDiscussion.classNameId = ?");
 
 				query.append(" AND ");
 
-				query.append("classPK = ?");
+				query.append("mbDiscussion.classPK = ?");
 
 				query.append(" ");
 
@@ -1132,7 +1180,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl
 				session = openSession();
 
 				Query q = session.createQuery(
-						"SELECT COUNT(*) FROM com.liferay.portlet.messageboards.model.MBDiscussion");
+						"SELECT COUNT(mbDiscussion) FROM MBDiscussion mbDiscussion");
 
 				count = (Long)q.uniqueResult();
 			}

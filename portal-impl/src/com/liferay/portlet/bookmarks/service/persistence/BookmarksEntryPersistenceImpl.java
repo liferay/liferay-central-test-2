@@ -456,21 +456,21 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.bookmarks.model.BookmarksEntry WHERE ");
+					"SELECT bookmarksEntry FROM BookmarksEntry bookmarksEntry WHERE ");
 
 				if (uuid == null) {
-					query.append("uuid_ IS NULL");
+					query.append("bookmarksEntry.uuid IS NULL");
 				}
 				else {
-					query.append("uuid_ = ?");
+					query.append("bookmarksEntry.uuid = ?");
 				}
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("folderId ASC, ");
-				query.append("name ASC");
+				query.append("bookmarksEntry.folderId ASC, ");
+				query.append("bookmarksEntry.name ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -527,27 +527,44 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.bookmarks.model.BookmarksEntry WHERE ");
+					"SELECT bookmarksEntry FROM BookmarksEntry bookmarksEntry WHERE ");
 
 				if (uuid == null) {
-					query.append("uuid_ IS NULL");
+					query.append("bookmarksEntry.uuid IS NULL");
 				}
 				else {
-					query.append("uuid_ = ?");
+					query.append("bookmarksEntry.uuid = ?");
 				}
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("bookmarksEntry.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("folderId ASC, ");
-					query.append("name ASC");
+					query.append("bookmarksEntry.folderId ASC, ");
+					query.append("bookmarksEntry.name ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -637,27 +654,44 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl
 			StringBuilder query = new StringBuilder();
 
 			query.append(
-				"FROM com.liferay.portlet.bookmarks.model.BookmarksEntry WHERE ");
+				"SELECT bookmarksEntry FROM BookmarksEntry bookmarksEntry WHERE ");
 
 			if (uuid == null) {
-				query.append("uuid_ IS NULL");
+				query.append("bookmarksEntry.uuid IS NULL");
 			}
 			else {
-				query.append("uuid_ = ?");
+				query.append("bookmarksEntry.uuid = ?");
 			}
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("bookmarksEntry.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("folderId ASC, ");
-				query.append("name ASC");
+				query.append("bookmarksEntry.folderId ASC, ");
+				query.append("bookmarksEntry.name ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -738,25 +772,25 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.bookmarks.model.BookmarksEntry WHERE ");
+					"SELECT bookmarksEntry FROM BookmarksEntry bookmarksEntry WHERE ");
 
 				if (uuid == null) {
-					query.append("uuid_ IS NULL");
+					query.append("bookmarksEntry.uuid IS NULL");
 				}
 				else {
-					query.append("uuid_ = ?");
+					query.append("bookmarksEntry.uuid = ?");
 				}
 
 				query.append(" AND ");
 
-				query.append("groupId = ?");
+				query.append("bookmarksEntry.groupId = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("folderId ASC, ");
-				query.append("name ASC");
+				query.append("bookmarksEntry.folderId ASC, ");
+				query.append("bookmarksEntry.name ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -831,16 +865,16 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.bookmarks.model.BookmarksEntry WHERE ");
+					"SELECT bookmarksEntry FROM BookmarksEntry bookmarksEntry WHERE ");
 
-				query.append("groupId = ?");
+				query.append("bookmarksEntry.groupId = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("folderId ASC, ");
-				query.append("name ASC");
+				query.append("bookmarksEntry.folderId ASC, ");
+				query.append("bookmarksEntry.name ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -895,22 +929,39 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.bookmarks.model.BookmarksEntry WHERE ");
+					"SELECT bookmarksEntry FROM BookmarksEntry bookmarksEntry WHERE ");
 
-				query.append("groupId = ?");
+				query.append("bookmarksEntry.groupId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("bookmarksEntry.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("folderId ASC, ");
-					query.append("name ASC");
+					query.append("bookmarksEntry.folderId ASC, ");
+					query.append("bookmarksEntry.name ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -999,22 +1050,39 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl
 			StringBuilder query = new StringBuilder();
 
 			query.append(
-				"FROM com.liferay.portlet.bookmarks.model.BookmarksEntry WHERE ");
+				"SELECT bookmarksEntry FROM BookmarksEntry bookmarksEntry WHERE ");
 
-			query.append("groupId = ?");
+			query.append("bookmarksEntry.groupId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("bookmarksEntry.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("folderId ASC, ");
-				query.append("name ASC");
+				query.append("bookmarksEntry.folderId ASC, ");
+				query.append("bookmarksEntry.name ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -1058,16 +1126,16 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.bookmarks.model.BookmarksEntry WHERE ");
+					"SELECT bookmarksEntry FROM BookmarksEntry bookmarksEntry WHERE ");
 
-				query.append("folderId = ?");
+				query.append("bookmarksEntry.folderId = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("folderId ASC, ");
-				query.append("name ASC");
+				query.append("bookmarksEntry.folderId ASC, ");
+				query.append("bookmarksEntry.name ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1122,22 +1190,39 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.bookmarks.model.BookmarksEntry WHERE ");
+					"SELECT bookmarksEntry FROM BookmarksEntry bookmarksEntry WHERE ");
 
-				query.append("folderId = ?");
+				query.append("bookmarksEntry.folderId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("bookmarksEntry.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("folderId ASC, ");
-					query.append("name ASC");
+					query.append("bookmarksEntry.folderId ASC, ");
+					query.append("bookmarksEntry.name ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1227,22 +1312,39 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl
 			StringBuilder query = new StringBuilder();
 
 			query.append(
-				"FROM com.liferay.portlet.bookmarks.model.BookmarksEntry WHERE ");
+				"SELECT bookmarksEntry FROM BookmarksEntry bookmarksEntry WHERE ");
 
-			query.append("folderId = ?");
+			query.append("bookmarksEntry.folderId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("bookmarksEntry.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("folderId ASC, ");
-				query.append("name ASC");
+				query.append("bookmarksEntry.folderId ASC, ");
+				query.append("bookmarksEntry.name ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -1286,20 +1388,20 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.bookmarks.model.BookmarksEntry WHERE ");
+					"SELECT bookmarksEntry FROM BookmarksEntry bookmarksEntry WHERE ");
 
-				query.append("groupId = ?");
+				query.append("bookmarksEntry.groupId = ?");
 
 				query.append(" AND ");
 
-				query.append("userId = ?");
+				query.append("bookmarksEntry.userId = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("folderId ASC, ");
-				query.append("name ASC");
+				query.append("bookmarksEntry.folderId ASC, ");
+				query.append("bookmarksEntry.name ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1356,26 +1458,43 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.bookmarks.model.BookmarksEntry WHERE ");
+					"SELECT bookmarksEntry FROM BookmarksEntry bookmarksEntry WHERE ");
 
-				query.append("groupId = ?");
+				query.append("bookmarksEntry.groupId = ?");
 
 				query.append(" AND ");
 
-				query.append("userId = ?");
+				query.append("bookmarksEntry.userId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("bookmarksEntry.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("folderId ASC, ");
-					query.append("name ASC");
+					query.append("bookmarksEntry.folderId ASC, ");
+					query.append("bookmarksEntry.name ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1473,26 +1592,43 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl
 			StringBuilder query = new StringBuilder();
 
 			query.append(
-				"FROM com.liferay.portlet.bookmarks.model.BookmarksEntry WHERE ");
+				"SELECT bookmarksEntry FROM BookmarksEntry bookmarksEntry WHERE ");
 
-			query.append("groupId = ?");
+			query.append("bookmarksEntry.groupId = ?");
 
 			query.append(" AND ");
 
-			query.append("userId = ?");
+			query.append("bookmarksEntry.userId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("bookmarksEntry.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("folderId ASC, ");
-				query.append("name ASC");
+				query.append("bookmarksEntry.folderId ASC, ");
+				query.append("bookmarksEntry.name ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -1589,18 +1725,35 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.bookmarks.model.BookmarksEntry ");
+					"SELECT bookmarksEntry FROM BookmarksEntry bookmarksEntry ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("bookmarksEntry.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("folderId ASC, ");
-					query.append("name ASC");
+					query.append("bookmarksEntry.folderId ASC, ");
+					query.append("bookmarksEntry.name ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1687,15 +1840,14 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.bookmarks.model.BookmarksEntry WHERE ");
+				query.append("SELECT COUNT(bookmarksEntry) ");
+				query.append("FROM BookmarksEntry bookmarksEntry WHERE ");
 
 				if (uuid == null) {
-					query.append("uuid_ IS NULL");
+					query.append("bookmarksEntry.uuid IS NULL");
 				}
 				else {
-					query.append("uuid_ = ?");
+					query.append("bookmarksEntry.uuid = ?");
 				}
 
 				query.append(" ");
@@ -1743,20 +1895,19 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.bookmarks.model.BookmarksEntry WHERE ");
+				query.append("SELECT COUNT(bookmarksEntry) ");
+				query.append("FROM BookmarksEntry bookmarksEntry WHERE ");
 
 				if (uuid == null) {
-					query.append("uuid_ IS NULL");
+					query.append("bookmarksEntry.uuid IS NULL");
 				}
 				else {
-					query.append("uuid_ = ?");
+					query.append("bookmarksEntry.uuid = ?");
 				}
 
 				query.append(" AND ");
 
-				query.append("groupId = ?");
+				query.append("bookmarksEntry.groupId = ?");
 
 				query.append(" ");
 
@@ -1804,11 +1955,10 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.bookmarks.model.BookmarksEntry WHERE ");
+				query.append("SELECT COUNT(bookmarksEntry) ");
+				query.append("FROM BookmarksEntry bookmarksEntry WHERE ");
 
-				query.append("groupId = ?");
+				query.append("bookmarksEntry.groupId = ?");
 
 				query.append(" ");
 
@@ -1852,11 +2002,10 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.bookmarks.model.BookmarksEntry WHERE ");
+				query.append("SELECT COUNT(bookmarksEntry) ");
+				query.append("FROM BookmarksEntry bookmarksEntry WHERE ");
 
-				query.append("folderId = ?");
+				query.append("bookmarksEntry.folderId = ?");
 
 				query.append(" ");
 
@@ -1900,15 +2049,14 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.bookmarks.model.BookmarksEntry WHERE ");
+				query.append("SELECT COUNT(bookmarksEntry) ");
+				query.append("FROM BookmarksEntry bookmarksEntry WHERE ");
 
-				query.append("groupId = ?");
+				query.append("bookmarksEntry.groupId = ?");
 
 				query.append(" AND ");
 
-				query.append("userId = ?");
+				query.append("bookmarksEntry.userId = ?");
 
 				query.append(" ");
 
@@ -1953,7 +2101,7 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl
 				session = openSession();
 
 				Query q = session.createQuery(
-						"SELECT COUNT(*) FROM com.liferay.portlet.bookmarks.model.BookmarksEntry");
+						"SELECT COUNT(bookmarksEntry) FROM BookmarksEntry bookmarksEntry");
 
 				count = (Long)q.uniqueResult();
 			}

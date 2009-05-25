@@ -419,15 +419,15 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portal.model.EmailAddress WHERE ");
+					"SELECT emailAddress FROM EmailAddress emailAddress WHERE ");
 
-				query.append("companyId = ?");
+				query.append("emailAddress.companyId = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("createDate ASC");
+				query.append("emailAddress.createDate ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -482,21 +482,38 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portal.model.EmailAddress WHERE ");
+					"SELECT emailAddress FROM EmailAddress emailAddress WHERE ");
 
-				query.append("companyId = ?");
+				query.append("emailAddress.companyId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("emailAddress.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("createDate ASC");
+					query.append("emailAddress.createDate ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -587,21 +604,39 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 
 			StringBuilder query = new StringBuilder();
 
-			query.append("FROM com.liferay.portal.model.EmailAddress WHERE ");
+			query.append(
+				"SELECT emailAddress FROM EmailAddress emailAddress WHERE ");
 
-			query.append("companyId = ?");
+			query.append("emailAddress.companyId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("emailAddress.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("createDate ASC");
+				query.append("emailAddress.createDate ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -645,15 +680,15 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portal.model.EmailAddress WHERE ");
+					"SELECT emailAddress FROM EmailAddress emailAddress WHERE ");
 
-				query.append("userId = ?");
+				query.append("emailAddress.userId = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("createDate ASC");
+				query.append("emailAddress.createDate ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -708,21 +743,38 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portal.model.EmailAddress WHERE ");
+					"SELECT emailAddress FROM EmailAddress emailAddress WHERE ");
 
-				query.append("userId = ?");
+				query.append("emailAddress.userId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("emailAddress.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("createDate ASC");
+					query.append("emailAddress.createDate ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -810,21 +862,39 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 
 			StringBuilder query = new StringBuilder();
 
-			query.append("FROM com.liferay.portal.model.EmailAddress WHERE ");
+			query.append(
+				"SELECT emailAddress FROM EmailAddress emailAddress WHERE ");
 
-			query.append("userId = ?");
+			query.append("emailAddress.userId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("emailAddress.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("createDate ASC");
+				query.append("emailAddress.createDate ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -870,19 +940,19 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portal.model.EmailAddress WHERE ");
+					"SELECT emailAddress FROM EmailAddress emailAddress WHERE ");
 
-				query.append("companyId = ?");
+				query.append("emailAddress.companyId = ?");
 
 				query.append(" AND ");
 
-				query.append("classNameId = ?");
+				query.append("emailAddress.classNameId = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("createDate ASC");
+				query.append("emailAddress.createDate ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -939,25 +1009,42 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portal.model.EmailAddress WHERE ");
+					"SELECT emailAddress FROM EmailAddress emailAddress WHERE ");
 
-				query.append("companyId = ?");
+				query.append("emailAddress.companyId = ?");
 
 				query.append(" AND ");
 
-				query.append("classNameId = ?");
+				query.append("emailAddress.classNameId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("emailAddress.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("createDate ASC");
+					query.append("emailAddress.createDate ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1056,25 +1143,43 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 
 			StringBuilder query = new StringBuilder();
 
-			query.append("FROM com.liferay.portal.model.EmailAddress WHERE ");
+			query.append(
+				"SELECT emailAddress FROM EmailAddress emailAddress WHERE ");
 
-			query.append("companyId = ?");
+			query.append("emailAddress.companyId = ?");
 
 			query.append(" AND ");
 
-			query.append("classNameId = ?");
+			query.append("emailAddress.classNameId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("emailAddress.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("createDate ASC");
+				query.append("emailAddress.createDate ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -1122,23 +1227,23 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portal.model.EmailAddress WHERE ");
+					"SELECT emailAddress FROM EmailAddress emailAddress WHERE ");
 
-				query.append("companyId = ?");
-
-				query.append(" AND ");
-
-				query.append("classNameId = ?");
+				query.append("emailAddress.companyId = ?");
 
 				query.append(" AND ");
 
-				query.append("classPK = ?");
+				query.append("emailAddress.classNameId = ?");
+
+				query.append(" AND ");
+
+				query.append("emailAddress.classPK = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("createDate ASC");
+				query.append("emailAddress.createDate ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1198,29 +1303,46 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portal.model.EmailAddress WHERE ");
+					"SELECT emailAddress FROM EmailAddress emailAddress WHERE ");
 
-				query.append("companyId = ?");
-
-				query.append(" AND ");
-
-				query.append("classNameId = ?");
+				query.append("emailAddress.companyId = ?");
 
 				query.append(" AND ");
 
-				query.append("classPK = ?");
+				query.append("emailAddress.classNameId = ?");
+
+				query.append(" AND ");
+
+				query.append("emailAddress.classPK = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("emailAddress.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("createDate ASC");
+					query.append("emailAddress.createDate ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1328,29 +1450,47 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 
 			StringBuilder query = new StringBuilder();
 
-			query.append("FROM com.liferay.portal.model.EmailAddress WHERE ");
+			query.append(
+				"SELECT emailAddress FROM EmailAddress emailAddress WHERE ");
 
-			query.append("companyId = ?");
-
-			query.append(" AND ");
-
-			query.append("classNameId = ?");
+			query.append("emailAddress.companyId = ?");
 
 			query.append(" AND ");
 
-			query.append("classPK = ?");
+			query.append("emailAddress.classNameId = ?");
+
+			query.append(" AND ");
+
+			query.append("emailAddress.classPK = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("emailAddress.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("createDate ASC");
+				query.append("emailAddress.createDate ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -1401,27 +1541,27 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portal.model.EmailAddress WHERE ");
+					"SELECT emailAddress FROM EmailAddress emailAddress WHERE ");
 
-				query.append("companyId = ?");
-
-				query.append(" AND ");
-
-				query.append("classNameId = ?");
+				query.append("emailAddress.companyId = ?");
 
 				query.append(" AND ");
 
-				query.append("classPK = ?");
+				query.append("emailAddress.classNameId = ?");
 
 				query.append(" AND ");
 
-				query.append("primary_ = ?");
+				query.append("emailAddress.classPK = ?");
+
+				query.append(" AND ");
+
+				query.append("emailAddress.primary = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("createDate ASC");
+				query.append("emailAddress.createDate ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1486,33 +1626,50 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portal.model.EmailAddress WHERE ");
+					"SELECT emailAddress FROM EmailAddress emailAddress WHERE ");
 
-				query.append("companyId = ?");
-
-				query.append(" AND ");
-
-				query.append("classNameId = ?");
+				query.append("emailAddress.companyId = ?");
 
 				query.append(" AND ");
 
-				query.append("classPK = ?");
+				query.append("emailAddress.classNameId = ?");
 
 				query.append(" AND ");
 
-				query.append("primary_ = ?");
+				query.append("emailAddress.classPK = ?");
+
+				query.append(" AND ");
+
+				query.append("emailAddress.primary = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("emailAddress.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("createDate ASC");
+					query.append("emailAddress.createDate ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1629,33 +1786,51 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 
 			StringBuilder query = new StringBuilder();
 
-			query.append("FROM com.liferay.portal.model.EmailAddress WHERE ");
+			query.append(
+				"SELECT emailAddress FROM EmailAddress emailAddress WHERE ");
 
-			query.append("companyId = ?");
-
-			query.append(" AND ");
-
-			query.append("classNameId = ?");
+			query.append("emailAddress.companyId = ?");
 
 			query.append(" AND ");
 
-			query.append("classPK = ?");
+			query.append("emailAddress.classNameId = ?");
 
 			query.append(" AND ");
 
-			query.append("primary_ = ?");
+			query.append("emailAddress.classPK = ?");
+
+			query.append(" AND ");
+
+			query.append("emailAddress.primary = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("emailAddress.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("createDate ASC");
+				query.append("emailAddress.createDate ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -1755,17 +1930,35 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.EmailAddress ");
+				query.append(
+					"SELECT emailAddress FROM EmailAddress emailAddress ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("emailAddress.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("createDate ASC");
+					query.append("emailAddress.createDate ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1855,11 +2048,10 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portal.model.EmailAddress WHERE ");
+				query.append("SELECT COUNT(emailAddress) ");
+				query.append("FROM EmailAddress emailAddress WHERE ");
 
-				query.append("companyId = ?");
+				query.append("emailAddress.companyId = ?");
 
 				query.append(" ");
 
@@ -1903,11 +2095,10 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portal.model.EmailAddress WHERE ");
+				query.append("SELECT COUNT(emailAddress) ");
+				query.append("FROM EmailAddress emailAddress WHERE ");
 
-				query.append("userId = ?");
+				query.append("emailAddress.userId = ?");
 
 				query.append(" ");
 
@@ -1954,15 +2145,14 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portal.model.EmailAddress WHERE ");
+				query.append("SELECT COUNT(emailAddress) ");
+				query.append("FROM EmailAddress emailAddress WHERE ");
 
-				query.append("companyId = ?");
+				query.append("emailAddress.companyId = ?");
 
 				query.append(" AND ");
 
-				query.append("classNameId = ?");
+				query.append("emailAddress.classNameId = ?");
 
 				query.append(" ");
 
@@ -2011,19 +2201,18 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portal.model.EmailAddress WHERE ");
+				query.append("SELECT COUNT(emailAddress) ");
+				query.append("FROM EmailAddress emailAddress WHERE ");
 
-				query.append("companyId = ?");
-
-				query.append(" AND ");
-
-				query.append("classNameId = ?");
+				query.append("emailAddress.companyId = ?");
 
 				query.append(" AND ");
 
-				query.append("classPK = ?");
+				query.append("emailAddress.classNameId = ?");
+
+				query.append(" AND ");
+
+				query.append("emailAddress.classPK = ?");
 
 				query.append(" ");
 
@@ -2075,23 +2264,22 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portal.model.EmailAddress WHERE ");
+				query.append("SELECT COUNT(emailAddress) ");
+				query.append("FROM EmailAddress emailAddress WHERE ");
 
-				query.append("companyId = ?");
-
-				query.append(" AND ");
-
-				query.append("classNameId = ?");
+				query.append("emailAddress.companyId = ?");
 
 				query.append(" AND ");
 
-				query.append("classPK = ?");
+				query.append("emailAddress.classNameId = ?");
 
 				query.append(" AND ");
 
-				query.append("primary_ = ?");
+				query.append("emailAddress.classPK = ?");
+
+				query.append(" AND ");
+
+				query.append("emailAddress.primary = ?");
 
 				query.append(" ");
 
@@ -2140,7 +2328,7 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 				session = openSession();
 
 				Query q = session.createQuery(
-						"SELECT COUNT(*) FROM com.liferay.portal.model.EmailAddress");
+						"SELECT COUNT(emailAddress) FROM EmailAddress emailAddress");
 
 				count = (Long)q.uniqueResult();
 			}

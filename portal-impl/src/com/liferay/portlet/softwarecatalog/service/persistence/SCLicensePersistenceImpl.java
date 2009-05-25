@@ -374,16 +374,15 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.softwarecatalog.model.SCLicense WHERE ");
+				query.append("SELECT scLicense FROM SCLicense scLicense WHERE ");
 
-				query.append("active_ = ?");
+				query.append("scLicense.active = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("name ASC");
+				query.append("scLicense.name ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -437,22 +436,38 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.softwarecatalog.model.SCLicense WHERE ");
+				query.append("SELECT scLicense FROM SCLicense scLicense WHERE ");
 
-				query.append("active_ = ?");
+				query.append("scLicense.active = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("scLicense.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("name ASC");
+					query.append("scLicense.name ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -539,22 +554,38 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl
 
 			StringBuilder query = new StringBuilder();
 
-			query.append(
-				"FROM com.liferay.portlet.softwarecatalog.model.SCLicense WHERE ");
+			query.append("SELECT scLicense FROM SCLicense scLicense WHERE ");
 
-			query.append("active_ = ?");
+			query.append("scLicense.active = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("scLicense.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("name ASC");
+				query.append("scLicense.name ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -599,20 +630,19 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.softwarecatalog.model.SCLicense WHERE ");
+				query.append("SELECT scLicense FROM SCLicense scLicense WHERE ");
 
-				query.append("active_ = ?");
+				query.append("scLicense.active = ?");
 
 				query.append(" AND ");
 
-				query.append("recommended = ?");
+				query.append("scLicense.recommended = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("name ASC");
+				query.append("scLicense.name ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -668,26 +698,42 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.softwarecatalog.model.SCLicense WHERE ");
+				query.append("SELECT scLicense FROM SCLicense scLicense WHERE ");
 
-				query.append("active_ = ?");
+				query.append("scLicense.active = ?");
 
 				query.append(" AND ");
 
-				query.append("recommended = ?");
+				query.append("scLicense.recommended = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("scLicense.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("name ASC");
+					query.append("scLicense.name ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -784,26 +830,42 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl
 
 			StringBuilder query = new StringBuilder();
 
-			query.append(
-				"FROM com.liferay.portlet.softwarecatalog.model.SCLicense WHERE ");
+			query.append("SELECT scLicense FROM SCLicense scLicense WHERE ");
 
-			query.append("active_ = ?");
+			query.append("scLicense.active = ?");
 
 			query.append(" AND ");
 
-			query.append("recommended = ?");
+			query.append("scLicense.recommended = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("scLicense.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("name ASC");
+				query.append("scLicense.name ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -899,18 +961,34 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.softwarecatalog.model.SCLicense ");
+				query.append("SELECT scLicense FROM SCLicense scLicense ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("scLicense.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("name ASC");
+					query.append("scLicense.name ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -978,11 +1056,10 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.softwarecatalog.model.SCLicense WHERE ");
+				query.append("SELECT COUNT(scLicense) ");
+				query.append("FROM SCLicense scLicense WHERE ");
 
-				query.append("active_ = ?");
+				query.append("scLicense.active = ?");
 
 				query.append(" ");
 
@@ -1029,15 +1106,14 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.softwarecatalog.model.SCLicense WHERE ");
+				query.append("SELECT COUNT(scLicense) ");
+				query.append("FROM SCLicense scLicense WHERE ");
 
-				query.append("active_ = ?");
+				query.append("scLicense.active = ?");
 
 				query.append(" AND ");
 
-				query.append("recommended = ?");
+				query.append("scLicense.recommended = ?");
 
 				query.append(" ");
 
@@ -1082,7 +1158,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl
 				session = openSession();
 
 				Query q = session.createQuery(
-						"SELECT COUNT(*) FROM com.liferay.portlet.softwarecatalog.model.SCLicense");
+						"SELECT COUNT(scLicense) FROM SCLicense scLicense");
 
 				count = (Long)q.uniqueResult();
 			}

@@ -382,15 +382,15 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portal.model.MembershipRequest WHERE ");
+					"SELECT membershipRequest FROM MembershipRequest membershipRequest WHERE ");
 
-				query.append("groupId = ?");
+				query.append("membershipRequest.groupId = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("createDate DESC");
+				query.append("membershipRequest.createDate DESC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -445,21 +445,38 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portal.model.MembershipRequest WHERE ");
+					"SELECT membershipRequest FROM MembershipRequest membershipRequest WHERE ");
 
-				query.append("groupId = ?");
+				query.append("membershipRequest.groupId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("membershipRequest.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("createDate DESC");
+					query.append("membershipRequest.createDate DESC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -551,21 +568,38 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl
 			StringBuilder query = new StringBuilder();
 
 			query.append(
-				"FROM com.liferay.portal.model.MembershipRequest WHERE ");
+				"SELECT membershipRequest FROM MembershipRequest membershipRequest WHERE ");
 
-			query.append("groupId = ?");
+			query.append("membershipRequest.groupId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("membershipRequest.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("createDate DESC");
+				query.append("membershipRequest.createDate DESC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -609,15 +643,15 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portal.model.MembershipRequest WHERE ");
+					"SELECT membershipRequest FROM MembershipRequest membershipRequest WHERE ");
 
-				query.append("userId = ?");
+				query.append("membershipRequest.userId = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("createDate DESC");
+				query.append("membershipRequest.createDate DESC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -672,21 +706,38 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portal.model.MembershipRequest WHERE ");
+					"SELECT membershipRequest FROM MembershipRequest membershipRequest WHERE ");
 
-				query.append("userId = ?");
+				query.append("membershipRequest.userId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("membershipRequest.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("createDate DESC");
+					query.append("membershipRequest.createDate DESC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -778,21 +829,38 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl
 			StringBuilder query = new StringBuilder();
 
 			query.append(
-				"FROM com.liferay.portal.model.MembershipRequest WHERE ");
+				"SELECT membershipRequest FROM MembershipRequest membershipRequest WHERE ");
 
-			query.append("userId = ?");
+			query.append("membershipRequest.userId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("membershipRequest.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("createDate DESC");
+				query.append("membershipRequest.createDate DESC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -838,19 +906,19 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portal.model.MembershipRequest WHERE ");
+					"SELECT membershipRequest FROM MembershipRequest membershipRequest WHERE ");
 
-				query.append("groupId = ?");
+				query.append("membershipRequest.groupId = ?");
 
 				query.append(" AND ");
 
-				query.append("statusId = ?");
+				query.append("membershipRequest.statusId = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("createDate DESC");
+				query.append("membershipRequest.createDate DESC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -907,25 +975,42 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portal.model.MembershipRequest WHERE ");
+					"SELECT membershipRequest FROM MembershipRequest membershipRequest WHERE ");
 
-				query.append("groupId = ?");
+				query.append("membershipRequest.groupId = ?");
 
 				query.append(" AND ");
 
-				query.append("statusId = ?");
+				query.append("membershipRequest.statusId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("membershipRequest.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("createDate DESC");
+					query.append("membershipRequest.createDate DESC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1025,25 +1110,42 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl
 			StringBuilder query = new StringBuilder();
 
 			query.append(
-				"FROM com.liferay.portal.model.MembershipRequest WHERE ");
+				"SELECT membershipRequest FROM MembershipRequest membershipRequest WHERE ");
 
-			query.append("groupId = ?");
+			query.append("membershipRequest.groupId = ?");
 
 			query.append(" AND ");
 
-			query.append("statusId = ?");
+			query.append("membershipRequest.statusId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("membershipRequest.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("createDate DESC");
+				query.append("membershipRequest.createDate DESC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -1139,17 +1241,35 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.MembershipRequest ");
+				query.append(
+					"SELECT membershipRequest FROM MembershipRequest membershipRequest ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("membershipRequest.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("createDate DESC");
+					query.append("membershipRequest.createDate DESC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1223,11 +1343,10 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portal.model.MembershipRequest WHERE ");
+				query.append("SELECT COUNT(membershipRequest) ");
+				query.append("FROM MembershipRequest membershipRequest WHERE ");
 
-				query.append("groupId = ?");
+				query.append("membershipRequest.groupId = ?");
 
 				query.append(" ");
 
@@ -1271,11 +1390,10 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portal.model.MembershipRequest WHERE ");
+				query.append("SELECT COUNT(membershipRequest) ");
+				query.append("FROM MembershipRequest membershipRequest WHERE ");
 
-				query.append("userId = ?");
+				query.append("membershipRequest.userId = ?");
 
 				query.append(" ");
 
@@ -1321,15 +1439,14 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portal.model.MembershipRequest WHERE ");
+				query.append("SELECT COUNT(membershipRequest) ");
+				query.append("FROM MembershipRequest membershipRequest WHERE ");
 
-				query.append("groupId = ?");
+				query.append("membershipRequest.groupId = ?");
 
 				query.append(" AND ");
 
-				query.append("statusId = ?");
+				query.append("membershipRequest.statusId = ?");
 
 				query.append(" ");
 
@@ -1374,7 +1491,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl
 				session = openSession();
 
 				Query q = session.createQuery(
-						"SELECT COUNT(*) FROM com.liferay.portal.model.MembershipRequest");
+						"SELECT COUNT(membershipRequest) FROM MembershipRequest membershipRequest");
 
 				count = (Long)q.uniqueResult();
 			}

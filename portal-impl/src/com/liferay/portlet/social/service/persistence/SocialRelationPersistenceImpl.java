@@ -536,13 +536,13 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.social.model.SocialRelation WHERE ");
+					"SELECT socialRelation FROM SocialRelation socialRelation WHERE ");
 
 				if (uuid == null) {
-					query.append("uuid_ IS NULL");
+					query.append("socialRelation.uuid IS NULL");
 				}
 				else {
-					query.append("uuid_ = ?");
+					query.append("socialRelation.uuid = ?");
 				}
 
 				query.append(" ");
@@ -602,20 +602,37 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.social.model.SocialRelation WHERE ");
+					"SELECT socialRelation FROM SocialRelation socialRelation WHERE ");
 
 				if (uuid == null) {
-					query.append("uuid_ IS NULL");
+					query.append("socialRelation.uuid IS NULL");
 				}
 				else {
-					query.append("uuid_ = ?");
+					query.append("socialRelation.uuid = ?");
 				}
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("socialRelation.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -706,20 +723,37 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 			StringBuilder query = new StringBuilder();
 
 			query.append(
-				"FROM com.liferay.portlet.social.model.SocialRelation WHERE ");
+				"SELECT socialRelation FROM SocialRelation socialRelation WHERE ");
 
 			if (uuid == null) {
-				query.append("uuid_ IS NULL");
+				query.append("socialRelation.uuid IS NULL");
 			}
 			else {
-				query.append("uuid_ = ?");
+				query.append("socialRelation.uuid = ?");
 			}
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("socialRelation.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -765,9 +799,9 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.social.model.SocialRelation WHERE ");
+					"SELECT socialRelation FROM SocialRelation socialRelation WHERE ");
 
-				query.append("companyId = ?");
+				query.append("socialRelation.companyId = ?");
 
 				query.append(" ");
 
@@ -824,15 +858,32 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.social.model.SocialRelation WHERE ");
+					"SELECT socialRelation FROM SocialRelation socialRelation WHERE ");
 
-				query.append("companyId = ?");
+				query.append("socialRelation.companyId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("socialRelation.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -922,15 +973,32 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 			StringBuilder query = new StringBuilder();
 
 			query.append(
-				"FROM com.liferay.portlet.social.model.SocialRelation WHERE ");
+				"SELECT socialRelation FROM SocialRelation socialRelation WHERE ");
 
-			query.append("companyId = ?");
+			query.append("socialRelation.companyId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("socialRelation.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -974,9 +1042,9 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.social.model.SocialRelation WHERE ");
+					"SELECT socialRelation FROM SocialRelation socialRelation WHERE ");
 
-				query.append("userId1 = ?");
+				query.append("socialRelation.userId1 = ?");
 
 				query.append(" ");
 
@@ -1033,15 +1101,32 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.social.model.SocialRelation WHERE ");
+					"SELECT socialRelation FROM SocialRelation socialRelation WHERE ");
 
-				query.append("userId1 = ?");
+				query.append("socialRelation.userId1 = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("socialRelation.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1130,15 +1215,32 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 			StringBuilder query = new StringBuilder();
 
 			query.append(
-				"FROM com.liferay.portlet.social.model.SocialRelation WHERE ");
+				"SELECT socialRelation FROM SocialRelation socialRelation WHERE ");
 
-			query.append("userId1 = ?");
+			query.append("socialRelation.userId1 = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("socialRelation.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -1182,9 +1284,9 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.social.model.SocialRelation WHERE ");
+					"SELECT socialRelation FROM SocialRelation socialRelation WHERE ");
 
-				query.append("userId2 = ?");
+				query.append("socialRelation.userId2 = ?");
 
 				query.append(" ");
 
@@ -1241,15 +1343,32 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.social.model.SocialRelation WHERE ");
+					"SELECT socialRelation FROM SocialRelation socialRelation WHERE ");
 
-				query.append("userId2 = ?");
+				query.append("socialRelation.userId2 = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("socialRelation.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1338,15 +1457,32 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 			StringBuilder query = new StringBuilder();
 
 			query.append(
-				"FROM com.liferay.portlet.social.model.SocialRelation WHERE ");
+				"SELECT socialRelation FROM SocialRelation socialRelation WHERE ");
 
-			query.append("userId2 = ?");
+			query.append("socialRelation.userId2 = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("socialRelation.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -1389,9 +1525,9 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.social.model.SocialRelation WHERE ");
+					"SELECT socialRelation FROM SocialRelation socialRelation WHERE ");
 
-				query.append("type_ = ?");
+				query.append("socialRelation.type = ?");
 
 				query.append(" ");
 
@@ -1448,15 +1584,32 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.social.model.SocialRelation WHERE ");
+					"SELECT socialRelation FROM SocialRelation socialRelation WHERE ");
 
-				query.append("type_ = ?");
+				query.append("socialRelation.type = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("socialRelation.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1544,15 +1697,32 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 			StringBuilder query = new StringBuilder();
 
 			query.append(
-				"FROM com.liferay.portlet.social.model.SocialRelation WHERE ");
+				"SELECT socialRelation FROM SocialRelation socialRelation WHERE ");
 
-			query.append("type_ = ?");
+			query.append("socialRelation.type = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("socialRelation.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -1598,13 +1768,13 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.social.model.SocialRelation WHERE ");
+					"SELECT socialRelation FROM SocialRelation socialRelation WHERE ");
 
-				query.append("companyId = ?");
+				query.append("socialRelation.companyId = ?");
 
 				query.append(" AND ");
 
-				query.append("type_ = ?");
+				query.append("socialRelation.type = ?");
 
 				query.append(" ");
 
@@ -1663,19 +1833,36 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.social.model.SocialRelation WHERE ");
+					"SELECT socialRelation FROM SocialRelation socialRelation WHERE ");
 
-				query.append("companyId = ?");
+				query.append("socialRelation.companyId = ?");
 
 				query.append(" AND ");
 
-				query.append("type_ = ?");
+				query.append("socialRelation.type = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("socialRelation.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1773,19 +1960,36 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 			StringBuilder query = new StringBuilder();
 
 			query.append(
-				"FROM com.liferay.portlet.social.model.SocialRelation WHERE ");
+				"SELECT socialRelation FROM SocialRelation socialRelation WHERE ");
 
-			query.append("companyId = ?");
+			query.append("socialRelation.companyId = ?");
 
 			query.append(" AND ");
 
-			query.append("type_ = ?");
+			query.append("socialRelation.type = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("socialRelation.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -1831,13 +2035,13 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.social.model.SocialRelation WHERE ");
+					"SELECT socialRelation FROM SocialRelation socialRelation WHERE ");
 
-				query.append("userId1 = ?");
+				query.append("socialRelation.userId1 = ?");
 
 				query.append(" AND ");
 
-				query.append("type_ = ?");
+				query.append("socialRelation.type = ?");
 
 				query.append(" ");
 
@@ -1896,19 +2100,36 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.social.model.SocialRelation WHERE ");
+					"SELECT socialRelation FROM SocialRelation socialRelation WHERE ");
 
-				query.append("userId1 = ?");
+				query.append("socialRelation.userId1 = ?");
 
 				query.append(" AND ");
 
-				query.append("type_ = ?");
+				query.append("socialRelation.type = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("socialRelation.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -2006,19 +2227,36 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 			StringBuilder query = new StringBuilder();
 
 			query.append(
-				"FROM com.liferay.portlet.social.model.SocialRelation WHERE ");
+				"SELECT socialRelation FROM SocialRelation socialRelation WHERE ");
 
-			query.append("userId1 = ?");
+			query.append("socialRelation.userId1 = ?");
 
 			query.append(" AND ");
 
-			query.append("type_ = ?");
+			query.append("socialRelation.type = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("socialRelation.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -2064,13 +2302,13 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.social.model.SocialRelation WHERE ");
+					"SELECT socialRelation FROM SocialRelation socialRelation WHERE ");
 
-				query.append("userId2 = ?");
+				query.append("socialRelation.userId2 = ?");
 
 				query.append(" AND ");
 
-				query.append("type_ = ?");
+				query.append("socialRelation.type = ?");
 
 				query.append(" ");
 
@@ -2129,19 +2367,36 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.social.model.SocialRelation WHERE ");
+					"SELECT socialRelation FROM SocialRelation socialRelation WHERE ");
 
-				query.append("userId2 = ?");
+				query.append("socialRelation.userId2 = ?");
 
 				query.append(" AND ");
 
-				query.append("type_ = ?");
+				query.append("socialRelation.type = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("socialRelation.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -2239,19 +2494,36 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 			StringBuilder query = new StringBuilder();
 
 			query.append(
-				"FROM com.liferay.portlet.social.model.SocialRelation WHERE ");
+				"SELECT socialRelation FROM SocialRelation socialRelation WHERE ");
 
-			query.append("userId2 = ?");
+			query.append("socialRelation.userId2 = ?");
 
 			query.append(" AND ");
 
-			query.append("type_ = ?");
+			query.append("socialRelation.type = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("socialRelation.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -2337,17 +2609,17 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.social.model.SocialRelation WHERE ");
+					"SELECT socialRelation FROM SocialRelation socialRelation WHERE ");
 
-				query.append("userId1 = ?");
-
-				query.append(" AND ");
-
-				query.append("userId2 = ?");
+				query.append("socialRelation.userId1 = ?");
 
 				query.append(" AND ");
 
-				query.append("type_ = ?");
+				query.append("socialRelation.userId2 = ?");
+
+				query.append(" AND ");
+
+				query.append("socialRelation.type = ?");
 
 				query.append(" ");
 
@@ -2475,11 +2747,28 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.social.model.SocialRelation ");
+					"SELECT socialRelation FROM SocialRelation socialRelation ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("socialRelation.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -2589,15 +2878,14 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.social.model.SocialRelation WHERE ");
+				query.append("SELECT COUNT(socialRelation) ");
+				query.append("FROM SocialRelation socialRelation WHERE ");
 
 				if (uuid == null) {
-					query.append("uuid_ IS NULL");
+					query.append("socialRelation.uuid IS NULL");
 				}
 				else {
-					query.append("uuid_ = ?");
+					query.append("socialRelation.uuid = ?");
 				}
 
 				query.append(" ");
@@ -2644,11 +2932,10 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.social.model.SocialRelation WHERE ");
+				query.append("SELECT COUNT(socialRelation) ");
+				query.append("FROM SocialRelation socialRelation WHERE ");
 
-				query.append("companyId = ?");
+				query.append("socialRelation.companyId = ?");
 
 				query.append(" ");
 
@@ -2692,11 +2979,10 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.social.model.SocialRelation WHERE ");
+				query.append("SELECT COUNT(socialRelation) ");
+				query.append("FROM SocialRelation socialRelation WHERE ");
 
-				query.append("userId1 = ?");
+				query.append("socialRelation.userId1 = ?");
 
 				query.append(" ");
 
@@ -2740,11 +3026,10 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.social.model.SocialRelation WHERE ");
+				query.append("SELECT COUNT(socialRelation) ");
+				query.append("FROM SocialRelation socialRelation WHERE ");
 
-				query.append("userId2 = ?");
+				query.append("socialRelation.userId2 = ?");
 
 				query.append(" ");
 
@@ -2788,11 +3073,10 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.social.model.SocialRelation WHERE ");
+				query.append("SELECT COUNT(socialRelation) ");
+				query.append("FROM SocialRelation socialRelation WHERE ");
 
-				query.append("type_ = ?");
+				query.append("socialRelation.type = ?");
 
 				query.append(" ");
 
@@ -2838,15 +3122,14 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.social.model.SocialRelation WHERE ");
+				query.append("SELECT COUNT(socialRelation) ");
+				query.append("FROM SocialRelation socialRelation WHERE ");
 
-				query.append("companyId = ?");
+				query.append("socialRelation.companyId = ?");
 
 				query.append(" AND ");
 
-				query.append("type_ = ?");
+				query.append("socialRelation.type = ?");
 
 				query.append(" ");
 
@@ -2892,15 +3175,14 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.social.model.SocialRelation WHERE ");
+				query.append("SELECT COUNT(socialRelation) ");
+				query.append("FROM SocialRelation socialRelation WHERE ");
 
-				query.append("userId1 = ?");
+				query.append("socialRelation.userId1 = ?");
 
 				query.append(" AND ");
 
-				query.append("type_ = ?");
+				query.append("socialRelation.type = ?");
 
 				query.append(" ");
 
@@ -2946,15 +3228,14 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.social.model.SocialRelation WHERE ");
+				query.append("SELECT COUNT(socialRelation) ");
+				query.append("FROM SocialRelation socialRelation WHERE ");
 
-				query.append("userId2 = ?");
+				query.append("socialRelation.userId2 = ?");
 
 				query.append(" AND ");
 
-				query.append("type_ = ?");
+				query.append("socialRelation.type = ?");
 
 				query.append(" ");
 
@@ -3003,19 +3284,18 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.social.model.SocialRelation WHERE ");
+				query.append("SELECT COUNT(socialRelation) ");
+				query.append("FROM SocialRelation socialRelation WHERE ");
 
-				query.append("userId1 = ?");
-
-				query.append(" AND ");
-
-				query.append("userId2 = ?");
+				query.append("socialRelation.userId1 = ?");
 
 				query.append(" AND ");
 
-				query.append("type_ = ?");
+				query.append("socialRelation.userId2 = ?");
+
+				query.append(" AND ");
+
+				query.append("socialRelation.type = ?");
 
 				query.append(" ");
 
@@ -3062,7 +3342,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 				session = openSession();
 
 				Query q = session.createQuery(
-						"SELECT COUNT(*) FROM com.liferay.portlet.social.model.SocialRelation");
+						"SELECT COUNT(socialRelation) FROM SocialRelation socialRelation");
 
 				count = (Long)q.uniqueResult();
 			}

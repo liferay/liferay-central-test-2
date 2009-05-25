@@ -369,17 +369,16 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.messageboards.model.MBThread WHERE ");
+				query.append("SELECT mbThread FROM MBThread mbThread WHERE ");
 
-				query.append("groupId = ?");
+				query.append("mbThread.groupId = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("priority DESC, ");
-				query.append("lastPostDate DESC");
+				query.append("mbThread.priority DESC, ");
+				query.append("mbThread.lastPostDate DESC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -433,23 +432,39 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.messageboards.model.MBThread WHERE ");
+				query.append("SELECT mbThread FROM MBThread mbThread WHERE ");
 
-				query.append("groupId = ?");
+				query.append("mbThread.groupId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("mbThread.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("priority DESC, ");
-					query.append("lastPostDate DESC");
+					query.append("mbThread.priority DESC, ");
+					query.append("mbThread.lastPostDate DESC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -536,23 +551,39 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 
 			StringBuilder query = new StringBuilder();
 
-			query.append(
-				"FROM com.liferay.portlet.messageboards.model.MBThread WHERE ");
+			query.append("SELECT mbThread FROM MBThread mbThread WHERE ");
 
-			query.append("groupId = ?");
+			query.append("mbThread.groupId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("mbThread.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("priority DESC, ");
-				query.append("lastPostDate DESC");
+				query.append("mbThread.priority DESC, ");
+				query.append("mbThread.lastPostDate DESC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -594,17 +625,16 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.messageboards.model.MBThread WHERE ");
+				query.append("SELECT mbThread FROM MBThread mbThread WHERE ");
 
-				query.append("categoryId = ?");
+				query.append("mbThread.categoryId = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("priority DESC, ");
-				query.append("lastPostDate DESC");
+				query.append("mbThread.priority DESC, ");
+				query.append("mbThread.lastPostDate DESC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -658,23 +688,39 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.messageboards.model.MBThread WHERE ");
+				query.append("SELECT mbThread FROM MBThread mbThread WHERE ");
 
-				query.append("categoryId = ?");
+				query.append("mbThread.categoryId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("mbThread.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("priority DESC, ");
-					query.append("lastPostDate DESC");
+					query.append("mbThread.priority DESC, ");
+					query.append("mbThread.lastPostDate DESC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -762,23 +808,39 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 
 			StringBuilder query = new StringBuilder();
 
-			query.append(
-				"FROM com.liferay.portlet.messageboards.model.MBThread WHERE ");
+			query.append("SELECT mbThread FROM MBThread mbThread WHERE ");
 
-			query.append("categoryId = ?");
+			query.append("mbThread.categoryId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("mbThread.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("priority DESC, ");
-				query.append("lastPostDate DESC");
+				query.append("mbThread.priority DESC, ");
+				query.append("mbThread.lastPostDate DESC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -820,26 +882,25 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.messageboards.model.MBThread WHERE ");
+				query.append("SELECT mbThread FROM MBThread mbThread WHERE ");
 
-				query.append("categoryId = ?");
+				query.append("mbThread.categoryId = ?");
 
 				query.append(" AND ");
 
 				if (lastPostDate == null) {
-					query.append("lastPostDate IS NULL");
+					query.append("mbThread.lastPostDate IS NULL");
 				}
 				else {
-					query.append("lastPostDate = ?");
+					query.append("mbThread.lastPostDate = ?");
 				}
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("priority DESC, ");
-				query.append("lastPostDate DESC");
+				query.append("mbThread.priority DESC, ");
+				query.append("mbThread.lastPostDate DESC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -899,32 +960,48 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.messageboards.model.MBThread WHERE ");
+				query.append("SELECT mbThread FROM MBThread mbThread WHERE ");
 
-				query.append("categoryId = ?");
+				query.append("mbThread.categoryId = ?");
 
 				query.append(" AND ");
 
 				if (lastPostDate == null) {
-					query.append("lastPostDate IS NULL");
+					query.append("mbThread.lastPostDate IS NULL");
 				}
 				else {
-					query.append("lastPostDate = ?");
+					query.append("mbThread.lastPostDate = ?");
 				}
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("mbThread.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("priority DESC, ");
-					query.append("lastPostDate DESC");
+					query.append("mbThread.priority DESC, ");
+					query.append("mbThread.lastPostDate DESC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1023,32 +1100,48 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 
 			StringBuilder query = new StringBuilder();
 
-			query.append(
-				"FROM com.liferay.portlet.messageboards.model.MBThread WHERE ");
+			query.append("SELECT mbThread FROM MBThread mbThread WHERE ");
 
-			query.append("categoryId = ?");
+			query.append("mbThread.categoryId = ?");
 
 			query.append(" AND ");
 
 			if (lastPostDate == null) {
-				query.append("lastPostDate IS NULL");
+				query.append("mbThread.lastPostDate IS NULL");
 			}
 			else {
-				query.append("lastPostDate = ?");
+				query.append("mbThread.lastPostDate = ?");
 			}
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("mbThread.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("priority DESC, ");
-				query.append("lastPostDate DESC");
+				query.append("mbThread.priority DESC, ");
+				query.append("mbThread.lastPostDate DESC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -1144,19 +1237,35 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.messageboards.model.MBThread ");
+				query.append("SELECT mbThread FROM MBThread mbThread ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("mbThread.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("priority DESC, ");
-					query.append("lastPostDate DESC");
+					query.append("mbThread.priority DESC, ");
+					query.append("mbThread.lastPostDate DESC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1230,11 +1339,10 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.messageboards.model.MBThread WHERE ");
+				query.append("SELECT COUNT(mbThread) ");
+				query.append("FROM MBThread mbThread WHERE ");
 
-				query.append("groupId = ?");
+				query.append("mbThread.groupId = ?");
 
 				query.append(" ");
 
@@ -1278,11 +1386,10 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.messageboards.model.MBThread WHERE ");
+				query.append("SELECT COUNT(mbThread) ");
+				query.append("FROM MBThread mbThread WHERE ");
 
-				query.append("categoryId = ?");
+				query.append("mbThread.categoryId = ?");
 
 				query.append(" ");
 
@@ -1327,19 +1434,18 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.messageboards.model.MBThread WHERE ");
+				query.append("SELECT COUNT(mbThread) ");
+				query.append("FROM MBThread mbThread WHERE ");
 
-				query.append("categoryId = ?");
+				query.append("mbThread.categoryId = ?");
 
 				query.append(" AND ");
 
 				if (lastPostDate == null) {
-					query.append("lastPostDate IS NULL");
+					query.append("mbThread.lastPostDate IS NULL");
 				}
 				else {
-					query.append("lastPostDate = ?");
+					query.append("mbThread.lastPostDate = ?");
 				}
 
 				query.append(" ");
@@ -1387,7 +1493,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 				session = openSession();
 
 				Query q = session.createQuery(
-						"SELECT COUNT(*) FROM com.liferay.portlet.messageboards.model.MBThread");
+						"SELECT COUNT(mbThread) FROM MBThread mbThread");
 
 				count = (Long)q.uniqueResult();
 			}

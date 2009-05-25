@@ -456,13 +456,13 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.messageboards.model.MBMailingList WHERE ");
+					"SELECT mbMailingList FROM MBMailingList mbMailingList WHERE ");
 
 				if (uuid == null) {
-					query.append("uuid_ IS NULL");
+					query.append("mbMailingList.uuid IS NULL");
 				}
 				else {
-					query.append("uuid_ = ?");
+					query.append("mbMailingList.uuid = ?");
 				}
 
 				query.append(" ");
@@ -522,20 +522,37 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.messageboards.model.MBMailingList WHERE ");
+					"SELECT mbMailingList FROM MBMailingList mbMailingList WHERE ");
 
 				if (uuid == null) {
-					query.append("uuid_ IS NULL");
+					query.append("mbMailingList.uuid IS NULL");
 				}
 				else {
-					query.append("uuid_ = ?");
+					query.append("mbMailingList.uuid = ?");
 				}
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("mbMailingList.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -626,20 +643,37 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl
 			StringBuilder query = new StringBuilder();
 
 			query.append(
-				"FROM com.liferay.portlet.messageboards.model.MBMailingList WHERE ");
+				"SELECT mbMailingList FROM MBMailingList mbMailingList WHERE ");
 
 			if (uuid == null) {
-				query.append("uuid_ IS NULL");
+				query.append("mbMailingList.uuid IS NULL");
 			}
 			else {
-				query.append("uuid_ = ?");
+				query.append("mbMailingList.uuid = ?");
 			}
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("mbMailingList.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -720,18 +754,18 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.messageboards.model.MBMailingList WHERE ");
+					"SELECT mbMailingList FROM MBMailingList mbMailingList WHERE ");
 
 				if (uuid == null) {
-					query.append("uuid_ IS NULL");
+					query.append("mbMailingList.uuid IS NULL");
 				}
 				else {
-					query.append("uuid_ = ?");
+					query.append("mbMailingList.uuid = ?");
 				}
 
 				query.append(" AND ");
 
-				query.append("groupId = ?");
+				query.append("mbMailingList.groupId = ?");
 
 				query.append(" ");
 
@@ -840,9 +874,9 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.messageboards.model.MBMailingList WHERE ");
+					"SELECT mbMailingList FROM MBMailingList mbMailingList WHERE ");
 
-				query.append("categoryId = ?");
+				query.append("mbMailingList.categoryId = ?");
 
 				query.append(" ");
 
@@ -913,9 +947,9 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.messageboards.model.MBMailingList WHERE ");
+					"SELECT mbMailingList FROM MBMailingList mbMailingList WHERE ");
 
-				query.append("active_ = ?");
+				query.append("mbMailingList.active = ?");
 
 				query.append(" ");
 
@@ -972,15 +1006,32 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.messageboards.model.MBMailingList WHERE ");
+					"SELECT mbMailingList FROM MBMailingList mbMailingList WHERE ");
 
-				query.append("active_ = ?");
+				query.append("mbMailingList.active = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("mbMailingList.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1070,15 +1121,32 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl
 			StringBuilder query = new StringBuilder();
 
 			query.append(
-				"FROM com.liferay.portlet.messageboards.model.MBMailingList WHERE ");
+				"SELECT mbMailingList FROM MBMailingList mbMailingList WHERE ");
 
-			query.append("active_ = ?");
+			query.append("mbMailingList.active = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("mbMailingList.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -1173,11 +1241,28 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.messageboards.model.MBMailingList ");
+					"SELECT mbMailingList FROM MBMailingList mbMailingList ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("mbMailingList.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1258,15 +1343,14 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.messageboards.model.MBMailingList WHERE ");
+				query.append("SELECT COUNT(mbMailingList) ");
+				query.append("FROM MBMailingList mbMailingList WHERE ");
 
 				if (uuid == null) {
-					query.append("uuid_ IS NULL");
+					query.append("mbMailingList.uuid IS NULL");
 				}
 				else {
-					query.append("uuid_ = ?");
+					query.append("mbMailingList.uuid = ?");
 				}
 
 				query.append(" ");
@@ -1314,20 +1398,19 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.messageboards.model.MBMailingList WHERE ");
+				query.append("SELECT COUNT(mbMailingList) ");
+				query.append("FROM MBMailingList mbMailingList WHERE ");
 
 				if (uuid == null) {
-					query.append("uuid_ IS NULL");
+					query.append("mbMailingList.uuid IS NULL");
 				}
 				else {
-					query.append("uuid_ = ?");
+					query.append("mbMailingList.uuid = ?");
 				}
 
 				query.append(" AND ");
 
-				query.append("groupId = ?");
+				query.append("mbMailingList.groupId = ?");
 
 				query.append(" ");
 
@@ -1375,11 +1458,10 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.messageboards.model.MBMailingList WHERE ");
+				query.append("SELECT COUNT(mbMailingList) ");
+				query.append("FROM MBMailingList mbMailingList WHERE ");
 
-				query.append("categoryId = ?");
+				query.append("mbMailingList.categoryId = ?");
 
 				query.append(" ");
 
@@ -1423,11 +1505,10 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.messageboards.model.MBMailingList WHERE ");
+				query.append("SELECT COUNT(mbMailingList) ");
+				query.append("FROM MBMailingList mbMailingList WHERE ");
 
-				query.append("active_ = ?");
+				query.append("mbMailingList.active = ?");
 
 				query.append(" ");
 
@@ -1470,7 +1551,7 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl
 				session = openSession();
 
 				Query q = session.createQuery(
-						"SELECT COUNT(*) FROM com.liferay.portlet.messageboards.model.MBMailingList");
+						"SELECT COUNT(mbMailingList) FROM MBMailingList mbMailingList");
 
 				count = (Long)q.uniqueResult();
 			}

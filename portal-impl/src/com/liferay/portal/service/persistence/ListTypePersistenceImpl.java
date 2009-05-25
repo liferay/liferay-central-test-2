@@ -332,20 +332,20 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.ListType WHERE ");
+				query.append("SELECT listType FROM ListType listType WHERE ");
 
 				if (type == null) {
-					query.append("type_ IS NULL");
+					query.append("listType.type IS NULL");
 				}
 				else {
-					query.append("type_ = ?");
+					query.append("listType.type = ?");
 				}
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("name ASC");
+				query.append("listType.name ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -401,26 +401,43 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.ListType WHERE ");
+				query.append("SELECT listType FROM ListType listType WHERE ");
 
 				if (type == null) {
-					query.append("type_ IS NULL");
+					query.append("listType.type IS NULL");
 				}
 				else {
-					query.append("type_ = ?");
+					query.append("listType.type = ?");
 				}
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("listType.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("name ASC");
+					query.append("listType.name ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -509,26 +526,43 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl
 
 			StringBuilder query = new StringBuilder();
 
-			query.append("FROM com.liferay.portal.model.ListType WHERE ");
+			query.append("SELECT listType FROM ListType listType WHERE ");
 
 			if (type == null) {
-				query.append("type_ IS NULL");
+				query.append("listType.type IS NULL");
 			}
 			else {
-				query.append("type_ = ?");
+				query.append("listType.type = ?");
 			}
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("listType.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("name ASC");
+				query.append("listType.name ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -622,17 +656,34 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.ListType ");
+				query.append("SELECT listType FROM ListType listType ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("listType.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("name ASC");
+					query.append("listType.name ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -693,14 +744,14 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append("FROM com.liferay.portal.model.ListType WHERE ");
+				query.append("SELECT COUNT(listType) ");
+				query.append("FROM ListType listType WHERE ");
 
 				if (type == null) {
-					query.append("type_ IS NULL");
+					query.append("listType.type IS NULL");
 				}
 				else {
-					query.append("type_ = ?");
+					query.append("listType.type = ?");
 				}
 
 				query.append(" ");
@@ -746,7 +797,7 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl
 				session = openSession();
 
 				Query q = session.createQuery(
-						"SELECT COUNT(*) FROM com.liferay.portal.model.ListType");
+						"SELECT COUNT(listType) FROM ListType listType");
 
 				count = (Long)q.uniqueResult();
 			}

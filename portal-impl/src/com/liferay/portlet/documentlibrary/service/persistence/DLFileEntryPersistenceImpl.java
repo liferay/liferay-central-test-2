@@ -524,21 +524,21 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.documentlibrary.model.DLFileEntry WHERE ");
+					"SELECT dlFileEntry FROM DLFileEntry dlFileEntry WHERE ");
 
 				if (uuid == null) {
-					query.append("uuid_ IS NULL");
+					query.append("dlFileEntry.uuid IS NULL");
 				}
 				else {
-					query.append("uuid_ = ?");
+					query.append("dlFileEntry.uuid = ?");
 				}
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("folderId ASC, ");
-				query.append("name ASC");
+				query.append("dlFileEntry.folderId ASC, ");
+				query.append("dlFileEntry.name ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -595,27 +595,44 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.documentlibrary.model.DLFileEntry WHERE ");
+					"SELECT dlFileEntry FROM DLFileEntry dlFileEntry WHERE ");
 
 				if (uuid == null) {
-					query.append("uuid_ IS NULL");
+					query.append("dlFileEntry.uuid IS NULL");
 				}
 				else {
-					query.append("uuid_ = ?");
+					query.append("dlFileEntry.uuid = ?");
 				}
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("dlFileEntry.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("folderId ASC, ");
-					query.append("name ASC");
+					query.append("dlFileEntry.folderId ASC, ");
+					query.append("dlFileEntry.name ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -705,27 +722,44 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl
 			StringBuilder query = new StringBuilder();
 
 			query.append(
-				"FROM com.liferay.portlet.documentlibrary.model.DLFileEntry WHERE ");
+				"SELECT dlFileEntry FROM DLFileEntry dlFileEntry WHERE ");
 
 			if (uuid == null) {
-				query.append("uuid_ IS NULL");
+				query.append("dlFileEntry.uuid IS NULL");
 			}
 			else {
-				query.append("uuid_ = ?");
+				query.append("dlFileEntry.uuid = ?");
 			}
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("dlFileEntry.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("folderId ASC, ");
-				query.append("name ASC");
+				query.append("dlFileEntry.folderId ASC, ");
+				query.append("dlFileEntry.name ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -806,25 +840,25 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.documentlibrary.model.DLFileEntry WHERE ");
+					"SELECT dlFileEntry FROM DLFileEntry dlFileEntry WHERE ");
 
 				if (uuid == null) {
-					query.append("uuid_ IS NULL");
+					query.append("dlFileEntry.uuid IS NULL");
 				}
 				else {
-					query.append("uuid_ = ?");
+					query.append("dlFileEntry.uuid = ?");
 				}
 
 				query.append(" AND ");
 
-				query.append("groupId = ?");
+				query.append("dlFileEntry.groupId = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("folderId ASC, ");
-				query.append("name ASC");
+				query.append("dlFileEntry.folderId ASC, ");
+				query.append("dlFileEntry.name ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -899,16 +933,16 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.documentlibrary.model.DLFileEntry WHERE ");
+					"SELECT dlFileEntry FROM DLFileEntry dlFileEntry WHERE ");
 
-				query.append("groupId = ?");
+				query.append("dlFileEntry.groupId = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("folderId ASC, ");
-				query.append("name ASC");
+				query.append("dlFileEntry.folderId ASC, ");
+				query.append("dlFileEntry.name ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -963,22 +997,39 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.documentlibrary.model.DLFileEntry WHERE ");
+					"SELECT dlFileEntry FROM DLFileEntry dlFileEntry WHERE ");
 
-				query.append("groupId = ?");
+				query.append("dlFileEntry.groupId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("dlFileEntry.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("folderId ASC, ");
-					query.append("name ASC");
+					query.append("dlFileEntry.folderId ASC, ");
+					query.append("dlFileEntry.name ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1067,22 +1118,39 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl
 			StringBuilder query = new StringBuilder();
 
 			query.append(
-				"FROM com.liferay.portlet.documentlibrary.model.DLFileEntry WHERE ");
+				"SELECT dlFileEntry FROM DLFileEntry dlFileEntry WHERE ");
 
-			query.append("groupId = ?");
+			query.append("dlFileEntry.groupId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("dlFileEntry.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("folderId ASC, ");
-				query.append("name ASC");
+				query.append("dlFileEntry.folderId ASC, ");
+				query.append("dlFileEntry.name ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -1126,16 +1194,16 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.documentlibrary.model.DLFileEntry WHERE ");
+					"SELECT dlFileEntry FROM DLFileEntry dlFileEntry WHERE ");
 
-				query.append("companyId = ?");
+				query.append("dlFileEntry.companyId = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("folderId ASC, ");
-				query.append("name ASC");
+				query.append("dlFileEntry.folderId ASC, ");
+				query.append("dlFileEntry.name ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1190,22 +1258,39 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.documentlibrary.model.DLFileEntry WHERE ");
+					"SELECT dlFileEntry FROM DLFileEntry dlFileEntry WHERE ");
 
-				query.append("companyId = ?");
+				query.append("dlFileEntry.companyId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("dlFileEntry.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("folderId ASC, ");
-					query.append("name ASC");
+					query.append("dlFileEntry.folderId ASC, ");
+					query.append("dlFileEntry.name ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1295,22 +1380,39 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl
 			StringBuilder query = new StringBuilder();
 
 			query.append(
-				"FROM com.liferay.portlet.documentlibrary.model.DLFileEntry WHERE ");
+				"SELECT dlFileEntry FROM DLFileEntry dlFileEntry WHERE ");
 
-			query.append("companyId = ?");
+			query.append("dlFileEntry.companyId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("dlFileEntry.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("folderId ASC, ");
-				query.append("name ASC");
+				query.append("dlFileEntry.folderId ASC, ");
+				query.append("dlFileEntry.name ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -1354,16 +1456,16 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.documentlibrary.model.DLFileEntry WHERE ");
+					"SELECT dlFileEntry FROM DLFileEntry dlFileEntry WHERE ");
 
-				query.append("folderId = ?");
+				query.append("dlFileEntry.folderId = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("folderId ASC, ");
-				query.append("name ASC");
+				query.append("dlFileEntry.folderId ASC, ");
+				query.append("dlFileEntry.name ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1418,22 +1520,39 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.documentlibrary.model.DLFileEntry WHERE ");
+					"SELECT dlFileEntry FROM DLFileEntry dlFileEntry WHERE ");
 
-				query.append("folderId = ?");
+				query.append("dlFileEntry.folderId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("dlFileEntry.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("folderId ASC, ");
-					query.append("name ASC");
+					query.append("dlFileEntry.folderId ASC, ");
+					query.append("dlFileEntry.name ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1522,22 +1641,39 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl
 			StringBuilder query = new StringBuilder();
 
 			query.append(
-				"FROM com.liferay.portlet.documentlibrary.model.DLFileEntry WHERE ");
+				"SELECT dlFileEntry FROM DLFileEntry dlFileEntry WHERE ");
 
-			query.append("folderId = ?");
+			query.append("dlFileEntry.folderId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("dlFileEntry.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("folderId ASC, ");
-				query.append("name ASC");
+				query.append("dlFileEntry.folderId ASC, ");
+				query.append("dlFileEntry.name ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -1581,20 +1717,20 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.documentlibrary.model.DLFileEntry WHERE ");
+					"SELECT dlFileEntry FROM DLFileEntry dlFileEntry WHERE ");
 
-				query.append("groupId = ?");
+				query.append("dlFileEntry.groupId = ?");
 
 				query.append(" AND ");
 
-				query.append("userId = ?");
+				query.append("dlFileEntry.userId = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("folderId ASC, ");
-				query.append("name ASC");
+				query.append("dlFileEntry.folderId ASC, ");
+				query.append("dlFileEntry.name ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1651,26 +1787,43 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.documentlibrary.model.DLFileEntry WHERE ");
+					"SELECT dlFileEntry FROM DLFileEntry dlFileEntry WHERE ");
 
-				query.append("groupId = ?");
+				query.append("dlFileEntry.groupId = ?");
 
 				query.append(" AND ");
 
-				query.append("userId = ?");
+				query.append("dlFileEntry.userId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("dlFileEntry.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("folderId ASC, ");
-					query.append("name ASC");
+					query.append("dlFileEntry.folderId ASC, ");
+					query.append("dlFileEntry.name ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1768,26 +1921,43 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl
 			StringBuilder query = new StringBuilder();
 
 			query.append(
-				"FROM com.liferay.portlet.documentlibrary.model.DLFileEntry WHERE ");
+				"SELECT dlFileEntry FROM DLFileEntry dlFileEntry WHERE ");
 
-			query.append("groupId = ?");
+			query.append("dlFileEntry.groupId = ?");
 
 			query.append(" AND ");
 
-			query.append("userId = ?");
+			query.append("dlFileEntry.userId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("dlFileEntry.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("folderId ASC, ");
-				query.append("name ASC");
+				query.append("dlFileEntry.folderId ASC, ");
+				query.append("dlFileEntry.name ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -1868,25 +2038,25 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.documentlibrary.model.DLFileEntry WHERE ");
+					"SELECT dlFileEntry FROM DLFileEntry dlFileEntry WHERE ");
 
-				query.append("folderId = ?");
+				query.append("dlFileEntry.folderId = ?");
 
 				query.append(" AND ");
 
 				if (name == null) {
-					query.append("name IS NULL");
+					query.append("dlFileEntry.name IS NULL");
 				}
 				else {
-					query.append("name = ?");
+					query.append("dlFileEntry.name = ?");
 				}
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("folderId ASC, ");
-				query.append("name ASC");
+				query.append("dlFileEntry.folderId ASC, ");
+				query.append("dlFileEntry.name ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1961,25 +2131,25 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.documentlibrary.model.DLFileEntry WHERE ");
+					"SELECT dlFileEntry FROM DLFileEntry dlFileEntry WHERE ");
 
-				query.append("folderId = ?");
+				query.append("dlFileEntry.folderId = ?");
 
 				query.append(" AND ");
 
 				if (title == null) {
-					query.append("title IS NULL");
+					query.append("dlFileEntry.title IS NULL");
 				}
 				else {
-					query.append("title = ?");
+					query.append("dlFileEntry.title = ?");
 				}
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("folderId ASC, ");
-				query.append("name ASC");
+				query.append("dlFileEntry.folderId ASC, ");
+				query.append("dlFileEntry.name ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -2040,31 +2210,48 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.documentlibrary.model.DLFileEntry WHERE ");
+					"SELECT dlFileEntry FROM DLFileEntry dlFileEntry WHERE ");
 
-				query.append("folderId = ?");
+				query.append("dlFileEntry.folderId = ?");
 
 				query.append(" AND ");
 
 				if (title == null) {
-					query.append("title IS NULL");
+					query.append("dlFileEntry.title IS NULL");
 				}
 				else {
-					query.append("title = ?");
+					query.append("dlFileEntry.title = ?");
 				}
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("dlFileEntry.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("folderId ASC, ");
-					query.append("name ASC");
+					query.append("dlFileEntry.folderId ASC, ");
+					query.append("dlFileEntry.name ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -2164,31 +2351,48 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl
 			StringBuilder query = new StringBuilder();
 
 			query.append(
-				"FROM com.liferay.portlet.documentlibrary.model.DLFileEntry WHERE ");
+				"SELECT dlFileEntry FROM DLFileEntry dlFileEntry WHERE ");
 
-			query.append("folderId = ?");
+			query.append("dlFileEntry.folderId = ?");
 
 			query.append(" AND ");
 
 			if (title == null) {
-				query.append("title IS NULL");
+				query.append("dlFileEntry.title IS NULL");
 			}
 			else {
-				query.append("title = ?");
+				query.append("dlFileEntry.title = ?");
 			}
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("dlFileEntry.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("folderId ASC, ");
-				query.append("name ASC");
+				query.append("dlFileEntry.folderId ASC, ");
+				query.append("dlFileEntry.name ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -2286,19 +2490,35 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.documentlibrary.model.DLFileEntry ");
+				query.append("SELECT dlFileEntry FROM DLFileEntry dlFileEntry ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("dlFileEntry.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("folderId ASC, ");
-					query.append("name ASC");
+					query.append("dlFileEntry.folderId ASC, ");
+					query.append("dlFileEntry.name ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -2405,15 +2625,14 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.documentlibrary.model.DLFileEntry WHERE ");
+				query.append("SELECT COUNT(dlFileEntry) ");
+				query.append("FROM DLFileEntry dlFileEntry WHERE ");
 
 				if (uuid == null) {
-					query.append("uuid_ IS NULL");
+					query.append("dlFileEntry.uuid IS NULL");
 				}
 				else {
-					query.append("uuid_ = ?");
+					query.append("dlFileEntry.uuid = ?");
 				}
 
 				query.append(" ");
@@ -2461,20 +2680,19 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.documentlibrary.model.DLFileEntry WHERE ");
+				query.append("SELECT COUNT(dlFileEntry) ");
+				query.append("FROM DLFileEntry dlFileEntry WHERE ");
 
 				if (uuid == null) {
-					query.append("uuid_ IS NULL");
+					query.append("dlFileEntry.uuid IS NULL");
 				}
 				else {
-					query.append("uuid_ = ?");
+					query.append("dlFileEntry.uuid = ?");
 				}
 
 				query.append(" AND ");
 
-				query.append("groupId = ?");
+				query.append("dlFileEntry.groupId = ?");
 
 				query.append(" ");
 
@@ -2522,11 +2740,10 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.documentlibrary.model.DLFileEntry WHERE ");
+				query.append("SELECT COUNT(dlFileEntry) ");
+				query.append("FROM DLFileEntry dlFileEntry WHERE ");
 
-				query.append("groupId = ?");
+				query.append("dlFileEntry.groupId = ?");
 
 				query.append(" ");
 
@@ -2570,11 +2787,10 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.documentlibrary.model.DLFileEntry WHERE ");
+				query.append("SELECT COUNT(dlFileEntry) ");
+				query.append("FROM DLFileEntry dlFileEntry WHERE ");
 
-				query.append("companyId = ?");
+				query.append("dlFileEntry.companyId = ?");
 
 				query.append(" ");
 
@@ -2618,11 +2834,10 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.documentlibrary.model.DLFileEntry WHERE ");
+				query.append("SELECT COUNT(dlFileEntry) ");
+				query.append("FROM DLFileEntry dlFileEntry WHERE ");
 
-				query.append("folderId = ?");
+				query.append("dlFileEntry.folderId = ?");
 
 				query.append(" ");
 
@@ -2666,15 +2881,14 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.documentlibrary.model.DLFileEntry WHERE ");
+				query.append("SELECT COUNT(dlFileEntry) ");
+				query.append("FROM DLFileEntry dlFileEntry WHERE ");
 
-				query.append("groupId = ?");
+				query.append("dlFileEntry.groupId = ?");
 
 				query.append(" AND ");
 
-				query.append("userId = ?");
+				query.append("dlFileEntry.userId = ?");
 
 				query.append(" ");
 
@@ -2720,19 +2934,18 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.documentlibrary.model.DLFileEntry WHERE ");
+				query.append("SELECT COUNT(dlFileEntry) ");
+				query.append("FROM DLFileEntry dlFileEntry WHERE ");
 
-				query.append("folderId = ?");
+				query.append("dlFileEntry.folderId = ?");
 
 				query.append(" AND ");
 
 				if (name == null) {
-					query.append("name IS NULL");
+					query.append("dlFileEntry.name IS NULL");
 				}
 				else {
-					query.append("name = ?");
+					query.append("dlFileEntry.name = ?");
 				}
 
 				query.append(" ");
@@ -2782,19 +2995,18 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.documentlibrary.model.DLFileEntry WHERE ");
+				query.append("SELECT COUNT(dlFileEntry) ");
+				query.append("FROM DLFileEntry dlFileEntry WHERE ");
 
-				query.append("folderId = ?");
+				query.append("dlFileEntry.folderId = ?");
 
 				query.append(" AND ");
 
 				if (title == null) {
-					query.append("title IS NULL");
+					query.append("dlFileEntry.title IS NULL");
 				}
 				else {
-					query.append("title = ?");
+					query.append("dlFileEntry.title = ?");
 				}
 
 				query.append(" ");
@@ -2842,7 +3054,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl
 				session = openSession();
 
 				Query q = session.createQuery(
-						"SELECT COUNT(*) FROM com.liferay.portlet.documentlibrary.model.DLFileEntry");
+						"SELECT COUNT(dlFileEntry) FROM DLFileEntry dlFileEntry");
 
 				count = (Long)q.uniqueResult();
 			}

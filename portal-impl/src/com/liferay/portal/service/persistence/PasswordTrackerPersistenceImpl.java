@@ -347,16 +347,16 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portal.model.PasswordTracker WHERE ");
+					"SELECT passwordTracker FROM PasswordTracker passwordTracker WHERE ");
 
-				query.append("userId = ?");
+				query.append("passwordTracker.userId = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("userId DESC, ");
-				query.append("createDate DESC");
+				query.append("passwordTracker.userId DESC, ");
+				query.append("passwordTracker.createDate DESC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -411,22 +411,39 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portal.model.PasswordTracker WHERE ");
+					"SELECT passwordTracker FROM PasswordTracker passwordTracker WHERE ");
 
-				query.append("userId = ?");
+				query.append("passwordTracker.userId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("passwordTracker.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("userId DESC, ");
-					query.append("createDate DESC");
+					query.append("passwordTracker.userId DESC, ");
+					query.append("passwordTracker.createDate DESC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -514,22 +531,40 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl
 
 			StringBuilder query = new StringBuilder();
 
-			query.append("FROM com.liferay.portal.model.PasswordTracker WHERE ");
+			query.append(
+				"SELECT passwordTracker FROM PasswordTracker passwordTracker WHERE ");
 
-			query.append("userId = ?");
+			query.append("passwordTracker.userId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("passwordTracker.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("userId DESC, ");
-				query.append("createDate DESC");
+				query.append("passwordTracker.userId DESC, ");
+				query.append("passwordTracker.createDate DESC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -623,18 +658,36 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.PasswordTracker ");
+				query.append(
+					"SELECT passwordTracker FROM PasswordTracker passwordTracker ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("passwordTracker.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("userId DESC, ");
-					query.append("createDate DESC");
+					query.append("passwordTracker.userId DESC, ");
+					query.append("passwordTracker.createDate DESC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -695,11 +748,10 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portal.model.PasswordTracker WHERE ");
+				query.append("SELECT COUNT(passwordTracker) ");
+				query.append("FROM PasswordTracker passwordTracker WHERE ");
 
-				query.append("userId = ?");
+				query.append("passwordTracker.userId = ?");
 
 				query.append(" ");
 
@@ -742,7 +794,7 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl
 				session = openSession();
 
 				Query q = session.createQuery(
-						"SELECT COUNT(*) FROM com.liferay.portal.model.PasswordTracker");
+						"SELECT COUNT(passwordTracker) FROM PasswordTracker passwordTracker");
 
 				count = (Long)q.uniqueResult();
 			}

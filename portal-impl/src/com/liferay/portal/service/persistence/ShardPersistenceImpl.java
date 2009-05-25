@@ -416,13 +416,13 @@ public class ShardPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.Shard WHERE ");
+				query.append("SELECT shard FROM Shard shard WHERE ");
 
 				if (name == null) {
-					query.append("name IS NULL");
+					query.append("shard.name IS NULL");
 				}
 				else {
-					query.append("name = ?");
+					query.append("shard.name = ?");
 				}
 
 				query.append(" ");
@@ -533,13 +533,13 @@ public class ShardPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.Shard WHERE ");
+				query.append("SELECT shard FROM Shard shard WHERE ");
 
-				query.append("classNameId = ?");
+				query.append("shard.classNameId = ?");
 
 				query.append(" AND ");
 
-				query.append("classPK = ?");
+				query.append("shard.classPK = ?");
 
 				query.append(" ");
 
@@ -662,11 +662,28 @@ public class ShardPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.Shard ");
+				query.append("SELECT shard FROM Shard shard ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("shard.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -735,14 +752,14 @@ public class ShardPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append("FROM com.liferay.portal.model.Shard WHERE ");
+				query.append("SELECT COUNT(shard) ");
+				query.append("FROM Shard shard WHERE ");
 
 				if (name == null) {
-					query.append("name IS NULL");
+					query.append("shard.name IS NULL");
 				}
 				else {
-					query.append("name = ?");
+					query.append("shard.name = ?");
 				}
 
 				query.append(" ");
@@ -792,14 +809,14 @@ public class ShardPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append("FROM com.liferay.portal.model.Shard WHERE ");
+				query.append("SELECT COUNT(shard) ");
+				query.append("FROM Shard shard WHERE ");
 
-				query.append("classNameId = ?");
+				query.append("shard.classNameId = ?");
 
 				query.append(" AND ");
 
-				query.append("classPK = ?");
+				query.append("shard.classPK = ?");
 
 				query.append(" ");
 
@@ -844,7 +861,7 @@ public class ShardPersistenceImpl extends BasePersistenceImpl
 				session = openSession();
 
 				Query q = session.createQuery(
-						"SELECT COUNT(*) FROM com.liferay.portal.model.Shard");
+						"SELECT COUNT(shard) FROM Shard shard");
 
 				count = (Long)q.uniqueResult();
 			}

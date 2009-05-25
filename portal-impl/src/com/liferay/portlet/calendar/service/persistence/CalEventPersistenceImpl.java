@@ -469,22 +469,21 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.calendar.model.CalEvent WHERE ");
+				query.append("SELECT calEvent FROM CalEvent calEvent WHERE ");
 
 				if (uuid == null) {
-					query.append("uuid_ IS NULL");
+					query.append("calEvent.uuid IS NULL");
 				}
 				else {
-					query.append("uuid_ = ?");
+					query.append("calEvent.uuid = ?");
 				}
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("startDate ASC, ");
-				query.append("title ASC");
+				query.append("calEvent.startDate ASC, ");
+				query.append("calEvent.title ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -540,28 +539,44 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.calendar.model.CalEvent WHERE ");
+				query.append("SELECT calEvent FROM CalEvent calEvent WHERE ");
 
 				if (uuid == null) {
-					query.append("uuid_ IS NULL");
+					query.append("calEvent.uuid IS NULL");
 				}
 				else {
-					query.append("uuid_ = ?");
+					query.append("calEvent.uuid = ?");
 				}
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("calEvent.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("startDate ASC, ");
-					query.append("title ASC");
+					query.append("calEvent.startDate ASC, ");
+					query.append("calEvent.title ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -650,28 +665,44 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl
 
 			StringBuilder query = new StringBuilder();
 
-			query.append(
-				"FROM com.liferay.portlet.calendar.model.CalEvent WHERE ");
+			query.append("SELECT calEvent FROM CalEvent calEvent WHERE ");
 
 			if (uuid == null) {
-				query.append("uuid_ IS NULL");
+				query.append("calEvent.uuid IS NULL");
 			}
 			else {
-				query.append("uuid_ = ?");
+				query.append("calEvent.uuid = ?");
 			}
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("calEvent.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("startDate ASC, ");
-				query.append("title ASC");
+				query.append("calEvent.startDate ASC, ");
+				query.append("calEvent.title ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -750,26 +781,25 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.calendar.model.CalEvent WHERE ");
+				query.append("SELECT calEvent FROM CalEvent calEvent WHERE ");
 
 				if (uuid == null) {
-					query.append("uuid_ IS NULL");
+					query.append("calEvent.uuid IS NULL");
 				}
 				else {
-					query.append("uuid_ = ?");
+					query.append("calEvent.uuid = ?");
 				}
 
 				query.append(" AND ");
 
-				query.append("groupId = ?");
+				query.append("calEvent.groupId = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("startDate ASC, ");
-				query.append("title ASC");
+				query.append("calEvent.startDate ASC, ");
+				query.append("calEvent.title ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -843,17 +873,16 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.calendar.model.CalEvent WHERE ");
+				query.append("SELECT calEvent FROM CalEvent calEvent WHERE ");
 
-				query.append("companyId = ?");
+				query.append("calEvent.companyId = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("startDate ASC, ");
-				query.append("title ASC");
+				query.append("calEvent.startDate ASC, ");
+				query.append("calEvent.title ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -907,23 +936,39 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.calendar.model.CalEvent WHERE ");
+				query.append("SELECT calEvent FROM CalEvent calEvent WHERE ");
 
-				query.append("companyId = ?");
+				query.append("calEvent.companyId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("calEvent.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("startDate ASC, ");
-					query.append("title ASC");
+					query.append("calEvent.startDate ASC, ");
+					query.append("calEvent.title ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1010,23 +1055,39 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl
 
 			StringBuilder query = new StringBuilder();
 
-			query.append(
-				"FROM com.liferay.portlet.calendar.model.CalEvent WHERE ");
+			query.append("SELECT calEvent FROM CalEvent calEvent WHERE ");
 
-			query.append("companyId = ?");
+			query.append("calEvent.companyId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("calEvent.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("startDate ASC, ");
-				query.append("title ASC");
+				query.append("calEvent.startDate ASC, ");
+				query.append("calEvent.title ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -1067,17 +1128,16 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.calendar.model.CalEvent WHERE ");
+				query.append("SELECT calEvent FROM CalEvent calEvent WHERE ");
 
-				query.append("groupId = ?");
+				query.append("calEvent.groupId = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("startDate ASC, ");
-				query.append("title ASC");
+				query.append("calEvent.startDate ASC, ");
+				query.append("calEvent.title ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1131,23 +1191,39 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.calendar.model.CalEvent WHERE ");
+				query.append("SELECT calEvent FROM CalEvent calEvent WHERE ");
 
-				query.append("groupId = ?");
+				query.append("calEvent.groupId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("calEvent.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("startDate ASC, ");
-					query.append("title ASC");
+					query.append("calEvent.startDate ASC, ");
+					query.append("calEvent.title ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1234,23 +1310,39 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl
 
 			StringBuilder query = new StringBuilder();
 
-			query.append(
-				"FROM com.liferay.portlet.calendar.model.CalEvent WHERE ");
+			query.append("SELECT calEvent FROM CalEvent calEvent WHERE ");
 
-			query.append("groupId = ?");
+			query.append("calEvent.groupId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("calEvent.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("startDate ASC, ");
-				query.append("title ASC");
+				query.append("calEvent.startDate ASC, ");
+				query.append("calEvent.title ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -1292,17 +1384,16 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.calendar.model.CalEvent WHERE ");
+				query.append("SELECT calEvent FROM CalEvent calEvent WHERE ");
 
-				query.append("remindBy != ?");
+				query.append("calEvent.remindBy != ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("startDate ASC, ");
-				query.append("title ASC");
+				query.append("calEvent.startDate ASC, ");
+				query.append("calEvent.title ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1356,23 +1447,39 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.calendar.model.CalEvent WHERE ");
+				query.append("SELECT calEvent FROM CalEvent calEvent WHERE ");
 
-				query.append("remindBy != ?");
+				query.append("calEvent.remindBy != ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("calEvent.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("startDate ASC, ");
-					query.append("title ASC");
+					query.append("calEvent.startDate ASC, ");
+					query.append("calEvent.title ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1459,23 +1566,39 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl
 
 			StringBuilder query = new StringBuilder();
 
-			query.append(
-				"FROM com.liferay.portlet.calendar.model.CalEvent WHERE ");
+			query.append("SELECT calEvent FROM CalEvent calEvent WHERE ");
 
-			query.append("remindBy != ?");
+			query.append("calEvent.remindBy != ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("calEvent.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("startDate ASC, ");
-				query.append("title ASC");
+				query.append("calEvent.startDate ASC, ");
+				query.append("calEvent.title ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -1517,26 +1640,25 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.calendar.model.CalEvent WHERE ");
+				query.append("SELECT calEvent FROM CalEvent calEvent WHERE ");
 
-				query.append("groupId = ?");
+				query.append("calEvent.groupId = ?");
 
 				query.append(" AND ");
 
 				if (type == null) {
-					query.append("type_ IS NULL");
+					query.append("calEvent.type IS NULL");
 				}
 				else {
-					query.append("type_ = ?");
+					query.append("calEvent.type = ?");
 				}
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("startDate ASC, ");
-				query.append("title ASC");
+				query.append("calEvent.startDate ASC, ");
+				query.append("calEvent.title ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1596,32 +1718,48 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.calendar.model.CalEvent WHERE ");
+				query.append("SELECT calEvent FROM CalEvent calEvent WHERE ");
 
-				query.append("groupId = ?");
+				query.append("calEvent.groupId = ?");
 
 				query.append(" AND ");
 
 				if (type == null) {
-					query.append("type_ IS NULL");
+					query.append("calEvent.type IS NULL");
 				}
 				else {
-					query.append("type_ = ?");
+					query.append("calEvent.type = ?");
 				}
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("calEvent.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("startDate ASC, ");
-					query.append("title ASC");
+					query.append("calEvent.startDate ASC, ");
+					query.append("calEvent.title ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1719,32 +1857,48 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl
 
 			StringBuilder query = new StringBuilder();
 
-			query.append(
-				"FROM com.liferay.portlet.calendar.model.CalEvent WHERE ");
+			query.append("SELECT calEvent FROM CalEvent calEvent WHERE ");
 
-			query.append("groupId = ?");
+			query.append("calEvent.groupId = ?");
 
 			query.append(" AND ");
 
 			if (type == null) {
-				query.append("type_ IS NULL");
+				query.append("calEvent.type IS NULL");
 			}
 			else {
-				query.append("type_ = ?");
+				query.append("calEvent.type = ?");
 			}
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("calEvent.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("startDate ASC, ");
-				query.append("title ASC");
+				query.append("calEvent.startDate ASC, ");
+				query.append("calEvent.title ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -1792,21 +1946,20 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.calendar.model.CalEvent WHERE ");
+				query.append("SELECT calEvent FROM CalEvent calEvent WHERE ");
 
-				query.append("groupId = ?");
+				query.append("calEvent.groupId = ?");
 
 				query.append(" AND ");
 
-				query.append("repeating = ?");
+				query.append("calEvent.repeating = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("startDate ASC, ");
-				query.append("title ASC");
+				query.append("calEvent.startDate ASC, ");
+				query.append("calEvent.title ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1862,27 +2015,43 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.calendar.model.CalEvent WHERE ");
+				query.append("SELECT calEvent FROM CalEvent calEvent WHERE ");
 
-				query.append("groupId = ?");
+				query.append("calEvent.groupId = ?");
 
 				query.append(" AND ");
 
-				query.append("repeating = ?");
+				query.append("calEvent.repeating = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("calEvent.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("startDate ASC, ");
-					query.append("title ASC");
+					query.append("calEvent.startDate ASC, ");
+					query.append("calEvent.title ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1979,27 +2148,43 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl
 
 			StringBuilder query = new StringBuilder();
 
-			query.append(
-				"FROM com.liferay.portlet.calendar.model.CalEvent WHERE ");
+			query.append("SELECT calEvent FROM CalEvent calEvent WHERE ");
 
-			query.append("groupId = ?");
+			query.append("calEvent.groupId = ?");
 
 			query.append(" AND ");
 
-			query.append("repeating = ?");
+			query.append("calEvent.repeating = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("calEvent.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("startDate ASC, ");
-				query.append("title ASC");
+				query.append("calEvent.startDate ASC, ");
+				query.append("calEvent.title ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -2093,19 +2278,35 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.calendar.model.CalEvent ");
+				query.append("SELECT calEvent FROM CalEvent calEvent ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("calEvent.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("startDate ASC, ");
-					query.append("title ASC");
+					query.append("calEvent.startDate ASC, ");
+					query.append("calEvent.title ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -2205,15 +2406,14 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.calendar.model.CalEvent WHERE ");
+				query.append("SELECT COUNT(calEvent) ");
+				query.append("FROM CalEvent calEvent WHERE ");
 
 				if (uuid == null) {
-					query.append("uuid_ IS NULL");
+					query.append("calEvent.uuid IS NULL");
 				}
 				else {
-					query.append("uuid_ = ?");
+					query.append("calEvent.uuid = ?");
 				}
 
 				query.append(" ");
@@ -2261,20 +2461,19 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.calendar.model.CalEvent WHERE ");
+				query.append("SELECT COUNT(calEvent) ");
+				query.append("FROM CalEvent calEvent WHERE ");
 
 				if (uuid == null) {
-					query.append("uuid_ IS NULL");
+					query.append("calEvent.uuid IS NULL");
 				}
 				else {
-					query.append("uuid_ = ?");
+					query.append("calEvent.uuid = ?");
 				}
 
 				query.append(" AND ");
 
-				query.append("groupId = ?");
+				query.append("calEvent.groupId = ?");
 
 				query.append(" ");
 
@@ -2322,11 +2521,10 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.calendar.model.CalEvent WHERE ");
+				query.append("SELECT COUNT(calEvent) ");
+				query.append("FROM CalEvent calEvent WHERE ");
 
-				query.append("companyId = ?");
+				query.append("calEvent.companyId = ?");
 
 				query.append(" ");
 
@@ -2370,11 +2568,10 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.calendar.model.CalEvent WHERE ");
+				query.append("SELECT COUNT(calEvent) ");
+				query.append("FROM CalEvent calEvent WHERE ");
 
-				query.append("groupId = ?");
+				query.append("calEvent.groupId = ?");
 
 				query.append(" ");
 
@@ -2418,11 +2615,10 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.calendar.model.CalEvent WHERE ");
+				query.append("SELECT COUNT(calEvent) ");
+				query.append("FROM CalEvent calEvent WHERE ");
 
-				query.append("remindBy != ?");
+				query.append("calEvent.remindBy != ?");
 
 				query.append(" ");
 
@@ -2466,19 +2662,18 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.calendar.model.CalEvent WHERE ");
+				query.append("SELECT COUNT(calEvent) ");
+				query.append("FROM CalEvent calEvent WHERE ");
 
-				query.append("groupId = ?");
+				query.append("calEvent.groupId = ?");
 
 				query.append(" AND ");
 
 				if (type == null) {
-					query.append("type_ IS NULL");
+					query.append("calEvent.type IS NULL");
 				}
 				else {
-					query.append("type_ = ?");
+					query.append("calEvent.type = ?");
 				}
 
 				query.append(" ");
@@ -2530,15 +2725,14 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.calendar.model.CalEvent WHERE ");
+				query.append("SELECT COUNT(calEvent) ");
+				query.append("FROM CalEvent calEvent WHERE ");
 
-				query.append("groupId = ?");
+				query.append("calEvent.groupId = ?");
 
 				query.append(" AND ");
 
-				query.append("repeating = ?");
+				query.append("calEvent.repeating = ?");
 
 				query.append(" ");
 
@@ -2583,7 +2777,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl
 				session = openSession();
 
 				Query q = session.createQuery(
-						"SELECT COUNT(*) FROM com.liferay.portlet.calendar.model.CalEvent");
+						"SELECT COUNT(calEvent) FROM CalEvent calEvent");
 
 				count = (Long)q.uniqueResult();
 			}

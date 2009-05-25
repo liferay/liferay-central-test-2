@@ -537,22 +537,21 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
+				query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
 
 				if (uuid == null) {
-					query.append("uuid_ IS NULL");
+					query.append("mbMessage.uuid IS NULL");
 				}
 				else {
-					query.append("uuid_ = ?");
+					query.append("mbMessage.uuid = ?");
 				}
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("createDate ASC, ");
-				query.append("messageId ASC");
+				query.append("mbMessage.createDate ASC, ");
+				query.append("mbMessage.messageId ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -608,28 +607,44 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
+				query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
 
 				if (uuid == null) {
-					query.append("uuid_ IS NULL");
+					query.append("mbMessage.uuid IS NULL");
 				}
 				else {
-					query.append("uuid_ = ?");
+					query.append("mbMessage.uuid = ?");
 				}
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("mbMessage.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("createDate ASC, ");
-					query.append("messageId ASC");
+					query.append("mbMessage.createDate ASC, ");
+					query.append("mbMessage.messageId ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -718,28 +733,44 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl
 
 			StringBuilder query = new StringBuilder();
 
-			query.append(
-				"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
+			query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
 
 			if (uuid == null) {
-				query.append("uuid_ IS NULL");
+				query.append("mbMessage.uuid IS NULL");
 			}
 			else {
-				query.append("uuid_ = ?");
+				query.append("mbMessage.uuid = ?");
 			}
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("mbMessage.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("createDate ASC, ");
-				query.append("messageId ASC");
+				query.append("mbMessage.createDate ASC, ");
+				query.append("mbMessage.messageId ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -819,26 +850,25 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
+				query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
 
 				if (uuid == null) {
-					query.append("uuid_ IS NULL");
+					query.append("mbMessage.uuid IS NULL");
 				}
 				else {
-					query.append("uuid_ = ?");
+					query.append("mbMessage.uuid = ?");
 				}
 
 				query.append(" AND ");
 
-				query.append("groupId = ?");
+				query.append("mbMessage.groupId = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("createDate ASC, ");
-				query.append("messageId ASC");
+				query.append("mbMessage.createDate ASC, ");
+				query.append("mbMessage.messageId ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -912,17 +942,16 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
+				query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
 
-				query.append("companyId = ?");
+				query.append("mbMessage.companyId = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("createDate ASC, ");
-				query.append("messageId ASC");
+				query.append("mbMessage.createDate ASC, ");
+				query.append("mbMessage.messageId ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -976,23 +1005,39 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
+				query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
 
-				query.append("companyId = ?");
+				query.append("mbMessage.companyId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("mbMessage.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("createDate ASC, ");
-					query.append("messageId ASC");
+					query.append("mbMessage.createDate ASC, ");
+					query.append("mbMessage.messageId ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1080,23 +1125,39 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl
 
 			StringBuilder query = new StringBuilder();
 
-			query.append(
-				"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
+			query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
 
-			query.append("companyId = ?");
+			query.append("mbMessage.companyId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("mbMessage.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("createDate ASC, ");
-				query.append("messageId ASC");
+				query.append("mbMessage.createDate ASC, ");
+				query.append("mbMessage.messageId ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -1139,17 +1200,16 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
+				query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
 
-				query.append("groupId = ?");
+				query.append("mbMessage.groupId = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("createDate ASC, ");
-				query.append("messageId ASC");
+				query.append("mbMessage.createDate ASC, ");
+				query.append("mbMessage.messageId ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1203,23 +1263,39 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
+				query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
 
-				query.append("groupId = ?");
+				query.append("mbMessage.groupId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("mbMessage.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("createDate ASC, ");
-					query.append("messageId ASC");
+					query.append("mbMessage.createDate ASC, ");
+					query.append("mbMessage.messageId ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1306,23 +1382,39 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl
 
 			StringBuilder query = new StringBuilder();
 
-			query.append(
-				"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
+			query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
 
-			query.append("groupId = ?");
+			query.append("mbMessage.groupId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("mbMessage.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("createDate ASC, ");
-				query.append("messageId ASC");
+				query.append("mbMessage.createDate ASC, ");
+				query.append("mbMessage.messageId ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -1365,17 +1457,16 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
+				query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
 
-				query.append("categoryId = ?");
+				query.append("mbMessage.categoryId = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("createDate ASC, ");
-				query.append("messageId ASC");
+				query.append("mbMessage.createDate ASC, ");
+				query.append("mbMessage.messageId ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1429,23 +1520,39 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
+				query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
 
-				query.append("categoryId = ?");
+				query.append("mbMessage.categoryId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("mbMessage.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("createDate ASC, ");
-					query.append("messageId ASC");
+					query.append("mbMessage.createDate ASC, ");
+					query.append("mbMessage.messageId ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1534,23 +1641,39 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl
 
 			StringBuilder query = new StringBuilder();
 
-			query.append(
-				"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
+			query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
 
-			query.append("categoryId = ?");
+			query.append("mbMessage.categoryId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("mbMessage.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("createDate ASC, ");
-				query.append("messageId ASC");
+				query.append("mbMessage.createDate ASC, ");
+				query.append("mbMessage.messageId ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -1593,17 +1716,16 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
+				query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
 
-				query.append("threadId = ?");
+				query.append("mbMessage.threadId = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("createDate ASC, ");
-				query.append("messageId ASC");
+				query.append("mbMessage.createDate ASC, ");
+				query.append("mbMessage.messageId ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1657,23 +1779,39 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
+				query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
 
-				query.append("threadId = ?");
+				query.append("mbMessage.threadId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("mbMessage.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("createDate ASC, ");
-					query.append("messageId ASC");
+					query.append("mbMessage.createDate ASC, ");
+					query.append("mbMessage.messageId ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1761,23 +1899,39 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl
 
 			StringBuilder query = new StringBuilder();
 
-			query.append(
-				"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
+			query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
 
-			query.append("threadId = ?");
+			query.append("mbMessage.threadId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("mbMessage.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("createDate ASC, ");
-				query.append("messageId ASC");
+				query.append("mbMessage.createDate ASC, ");
+				query.append("mbMessage.messageId ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -1820,17 +1974,16 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
+				query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
 
-				query.append("threadId = ?");
+				query.append("mbMessage.threadId = ?");
 
 				query.append(" AND parentMessageId != 0 ");
 
 				query.append("ORDER BY ");
 
-				query.append("createDate ASC, ");
-				query.append("messageId ASC");
+				query.append("mbMessage.createDate ASC, ");
+				query.append("mbMessage.messageId ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1884,23 +2037,39 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
+				query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
 
-				query.append("threadId = ?");
+				query.append("mbMessage.threadId = ?");
 
 				query.append(" AND parentMessageId != 0 ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("mbMessage.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("createDate ASC, ");
-					query.append("messageId ASC");
+					query.append("mbMessage.createDate ASC, ");
+					query.append("mbMessage.messageId ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1989,23 +2158,39 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl
 
 			StringBuilder query = new StringBuilder();
 
-			query.append(
-				"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
+			query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
 
-			query.append("threadId = ?");
+			query.append("mbMessage.threadId = ?");
 
 			query.append(" AND parentMessageId != 0 ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("mbMessage.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("createDate ASC, ");
-				query.append("messageId ASC");
+				query.append("mbMessage.createDate ASC, ");
+				query.append("mbMessage.messageId ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -2048,21 +2233,20 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
+				query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
 
-				query.append("groupId = ?");
+				query.append("mbMessage.groupId = ?");
 
 				query.append(" AND ");
 
-				query.append("userId = ?");
+				query.append("mbMessage.userId = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("createDate ASC, ");
-				query.append("messageId ASC");
+				query.append("mbMessage.createDate ASC, ");
+				query.append("mbMessage.messageId ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -2118,27 +2302,43 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
+				query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
 
-				query.append("groupId = ?");
+				query.append("mbMessage.groupId = ?");
 
 				query.append(" AND ");
 
-				query.append("userId = ?");
+				query.append("mbMessage.userId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("mbMessage.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("createDate ASC, ");
-					query.append("messageId ASC");
+					query.append("mbMessage.createDate ASC, ");
+					query.append("mbMessage.messageId ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -2234,27 +2434,43 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl
 
 			StringBuilder query = new StringBuilder();
 
-			query.append(
-				"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
+			query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
 
-			query.append("groupId = ?");
+			query.append("mbMessage.groupId = ?");
 
 			query.append(" AND ");
 
-			query.append("userId = ?");
+			query.append("mbMessage.userId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("mbMessage.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("createDate ASC, ");
-				query.append("messageId ASC");
+				query.append("mbMessage.createDate ASC, ");
+				query.append("mbMessage.messageId ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -2301,21 +2517,20 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
+				query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
 
-				query.append("classNameId = ?");
+				query.append("mbMessage.classNameId = ?");
 
 				query.append(" AND ");
 
-				query.append("classPK = ?");
+				query.append("mbMessage.classPK = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("createDate ASC, ");
-				query.append("messageId ASC");
+				query.append("mbMessage.createDate ASC, ");
+				query.append("mbMessage.messageId ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -2371,27 +2586,43 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
+				query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
 
-				query.append("classNameId = ?");
+				query.append("mbMessage.classNameId = ?");
 
 				query.append(" AND ");
 
-				query.append("classPK = ?");
+				query.append("mbMessage.classPK = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("mbMessage.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("createDate ASC, ");
-					query.append("messageId ASC");
+					query.append("mbMessage.createDate ASC, ");
+					query.append("mbMessage.messageId ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -2488,27 +2719,43 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl
 
 			StringBuilder query = new StringBuilder();
 
-			query.append(
-				"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
+			query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
 
-			query.append("classNameId = ?");
+			query.append("mbMessage.classNameId = ?");
 
 			query.append(" AND ");
 
-			query.append("classPK = ?");
+			query.append("mbMessage.classPK = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("mbMessage.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("createDate ASC, ");
-				query.append("messageId ASC");
+				query.append("mbMessage.createDate ASC, ");
+				query.append("mbMessage.messageId ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -2555,21 +2802,20 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
+				query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
 
-				query.append("categoryId = ?");
+				query.append("mbMessage.categoryId = ?");
 
 				query.append(" AND ");
 
-				query.append("threadId = ?");
+				query.append("mbMessage.threadId = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("createDate ASC, ");
-				query.append("messageId ASC");
+				query.append("mbMessage.createDate ASC, ");
+				query.append("mbMessage.messageId ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -2625,27 +2871,43 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
+				query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
 
-				query.append("categoryId = ?");
+				query.append("mbMessage.categoryId = ?");
 
 				query.append(" AND ");
 
-				query.append("threadId = ?");
+				query.append("mbMessage.threadId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("mbMessage.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("createDate ASC, ");
-					query.append("messageId ASC");
+					query.append("mbMessage.createDate ASC, ");
+					query.append("mbMessage.messageId ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -2742,27 +3004,43 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl
 
 			StringBuilder query = new StringBuilder();
 
-			query.append(
-				"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
+			query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
 
-			query.append("categoryId = ?");
+			query.append("mbMessage.categoryId = ?");
 
 			query.append(" AND ");
 
-			query.append("threadId = ?");
+			query.append("mbMessage.threadId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("mbMessage.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("createDate ASC, ");
-				query.append("messageId ASC");
+				query.append("mbMessage.createDate ASC, ");
+				query.append("mbMessage.messageId ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -2809,21 +3087,20 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
+				query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
 
-				query.append("threadId = ?");
+				query.append("mbMessage.threadId = ?");
 
 				query.append(" AND ");
 
-				query.append("parentMessageId = ?");
+				query.append("mbMessage.parentMessageId = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("createDate ASC, ");
-				query.append("messageId ASC");
+				query.append("mbMessage.createDate ASC, ");
+				query.append("mbMessage.messageId ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -2879,27 +3156,43 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
+				query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
 
-				query.append("threadId = ?");
+				query.append("mbMessage.threadId = ?");
 
 				query.append(" AND ");
 
-				query.append("parentMessageId = ?");
+				query.append("mbMessage.parentMessageId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("mbMessage.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("createDate ASC, ");
-					query.append("messageId ASC");
+					query.append("mbMessage.createDate ASC, ");
+					query.append("mbMessage.messageId ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -2996,27 +3289,43 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl
 
 			StringBuilder query = new StringBuilder();
 
-			query.append(
-				"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
+			query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
 
-			query.append("threadId = ?");
+			query.append("mbMessage.threadId = ?");
 
 			query.append(" AND ");
 
-			query.append("parentMessageId = ?");
+			query.append("mbMessage.parentMessageId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("mbMessage.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("createDate ASC, ");
-				query.append("messageId ASC");
+				query.append("mbMessage.createDate ASC, ");
+				query.append("mbMessage.messageId ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -3112,19 +3421,35 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.messageboards.model.MBMessage ");
+				query.append("SELECT mbMessage FROM MBMessage mbMessage ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("mbMessage.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("createDate ASC, ");
-					query.append("messageId ASC");
+					query.append("mbMessage.createDate ASC, ");
+					query.append("mbMessage.messageId ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -3250,15 +3575,14 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
+				query.append("SELECT COUNT(mbMessage) ");
+				query.append("FROM MBMessage mbMessage WHERE ");
 
 				if (uuid == null) {
-					query.append("uuid_ IS NULL");
+					query.append("mbMessage.uuid IS NULL");
 				}
 				else {
-					query.append("uuid_ = ?");
+					query.append("mbMessage.uuid = ?");
 				}
 
 				query.append(" ");
@@ -3306,20 +3630,19 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
+				query.append("SELECT COUNT(mbMessage) ");
+				query.append("FROM MBMessage mbMessage WHERE ");
 
 				if (uuid == null) {
-					query.append("uuid_ IS NULL");
+					query.append("mbMessage.uuid IS NULL");
 				}
 				else {
-					query.append("uuid_ = ?");
+					query.append("mbMessage.uuid = ?");
 				}
 
 				query.append(" AND ");
 
-				query.append("groupId = ?");
+				query.append("mbMessage.groupId = ?");
 
 				query.append(" ");
 
@@ -3367,11 +3690,10 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
+				query.append("SELECT COUNT(mbMessage) ");
+				query.append("FROM MBMessage mbMessage WHERE ");
 
-				query.append("companyId = ?");
+				query.append("mbMessage.companyId = ?");
 
 				query.append(" ");
 
@@ -3415,11 +3737,10 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
+				query.append("SELECT COUNT(mbMessage) ");
+				query.append("FROM MBMessage mbMessage WHERE ");
 
-				query.append("groupId = ?");
+				query.append("mbMessage.groupId = ?");
 
 				query.append(" ");
 
@@ -3463,11 +3784,10 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
+				query.append("SELECT COUNT(mbMessage) ");
+				query.append("FROM MBMessage mbMessage WHERE ");
 
-				query.append("categoryId = ?");
+				query.append("mbMessage.categoryId = ?");
 
 				query.append(" ");
 
@@ -3511,11 +3831,10 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
+				query.append("SELECT COUNT(mbMessage) ");
+				query.append("FROM MBMessage mbMessage WHERE ");
 
-				query.append("threadId = ?");
+				query.append("mbMessage.threadId = ?");
 
 				query.append(" ");
 
@@ -3559,11 +3878,10 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
+				query.append("SELECT COUNT(mbMessage) ");
+				query.append("FROM MBMessage mbMessage WHERE ");
 
-				query.append("threadId = ?");
+				query.append("mbMessage.threadId = ?");
 
 				query.append(" AND parentMessageId != 0 ");
 
@@ -3607,15 +3925,14 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
+				query.append("SELECT COUNT(mbMessage) ");
+				query.append("FROM MBMessage mbMessage WHERE ");
 
-				query.append("groupId = ?");
+				query.append("mbMessage.groupId = ?");
 
 				query.append(" AND ");
 
-				query.append("userId = ?");
+				query.append("mbMessage.userId = ?");
 
 				query.append(" ");
 
@@ -3664,15 +3981,14 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
+				query.append("SELECT COUNT(mbMessage) ");
+				query.append("FROM MBMessage mbMessage WHERE ");
 
-				query.append("classNameId = ?");
+				query.append("mbMessage.classNameId = ?");
 
 				query.append(" AND ");
 
-				query.append("classPK = ?");
+				query.append("mbMessage.classPK = ?");
 
 				query.append(" ");
 
@@ -3721,15 +4037,14 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
+				query.append("SELECT COUNT(mbMessage) ");
+				query.append("FROM MBMessage mbMessage WHERE ");
 
-				query.append("categoryId = ?");
+				query.append("mbMessage.categoryId = ?");
 
 				query.append(" AND ");
 
-				query.append("threadId = ?");
+				query.append("mbMessage.threadId = ?");
 
 				query.append(" ");
 
@@ -3778,15 +4093,14 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
+				query.append("SELECT COUNT(mbMessage) ");
+				query.append("FROM MBMessage mbMessage WHERE ");
 
-				query.append("threadId = ?");
+				query.append("mbMessage.threadId = ?");
 
 				query.append(" AND ");
 
-				query.append("parentMessageId = ?");
+				query.append("mbMessage.parentMessageId = ?");
 
 				query.append(" ");
 
@@ -3831,7 +4145,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl
 				session = openSession();
 
 				Query q = session.createQuery(
-						"SELECT COUNT(*) FROM com.liferay.portlet.messageboards.model.MBMessage");
+						"SELECT COUNT(mbMessage) FROM MBMessage mbMessage");
 
 				count = (Long)q.uniqueResult();
 			}

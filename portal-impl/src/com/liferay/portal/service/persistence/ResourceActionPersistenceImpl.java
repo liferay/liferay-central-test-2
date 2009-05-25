@@ -398,21 +398,21 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portal.model.ResourceAction WHERE ");
+					"SELECT resourceAction FROM ResourceAction resourceAction WHERE ");
 
 				if (name == null) {
-					query.append("name IS NULL");
+					query.append("resourceAction.name IS NULL");
 				}
 				else {
-					query.append("name = ?");
+					query.append("resourceAction.name = ?");
 				}
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("name ASC, ");
-				query.append("bitwiseValue ASC");
+				query.append("resourceAction.name ASC, ");
+				query.append("resourceAction.bitwiseValue ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -469,27 +469,44 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portal.model.ResourceAction WHERE ");
+					"SELECT resourceAction FROM ResourceAction resourceAction WHERE ");
 
 				if (name == null) {
-					query.append("name IS NULL");
+					query.append("resourceAction.name IS NULL");
 				}
 				else {
-					query.append("name = ?");
+					query.append("resourceAction.name = ?");
 				}
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("resourceAction.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("name ASC, ");
-					query.append("bitwiseValue ASC");
+					query.append("resourceAction.name ASC, ");
+					query.append("resourceAction.bitwiseValue ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -579,27 +596,45 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl
 
 			StringBuilder query = new StringBuilder();
 
-			query.append("FROM com.liferay.portal.model.ResourceAction WHERE ");
+			query.append(
+				"SELECT resourceAction FROM ResourceAction resourceAction WHERE ");
 
 			if (name == null) {
-				query.append("name IS NULL");
+				query.append("resourceAction.name IS NULL");
 			}
 			else {
-				query.append("name = ?");
+				query.append("resourceAction.name = ?");
 			}
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("resourceAction.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("name ASC, ");
-				query.append("bitwiseValue ASC");
+				query.append("resourceAction.name ASC, ");
+				query.append("resourceAction.bitwiseValue ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -680,30 +715,30 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portal.model.ResourceAction WHERE ");
+					"SELECT resourceAction FROM ResourceAction resourceAction WHERE ");
 
 				if (name == null) {
-					query.append("name IS NULL");
+					query.append("resourceAction.name IS NULL");
 				}
 				else {
-					query.append("name = ?");
+					query.append("resourceAction.name = ?");
 				}
 
 				query.append(" AND ");
 
 				if (actionId == null) {
-					query.append("actionId IS NULL");
+					query.append("resourceAction.actionId IS NULL");
 				}
 				else {
-					query.append("actionId = ?");
+					query.append("resourceAction.actionId = ?");
 				}
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("name ASC, ");
-				query.append("bitwiseValue ASC");
+				query.append("resourceAction.name ASC, ");
+				query.append("resourceAction.bitwiseValue ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -831,18 +866,36 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.ResourceAction ");
+				query.append(
+					"SELECT resourceAction FROM ResourceAction resourceAction ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("resourceAction.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("name ASC, ");
-					query.append("bitwiseValue ASC");
+					query.append("resourceAction.name ASC, ");
+					query.append("resourceAction.bitwiseValue ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -910,15 +963,14 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portal.model.ResourceAction WHERE ");
+				query.append("SELECT COUNT(resourceAction) ");
+				query.append("FROM ResourceAction resourceAction WHERE ");
 
 				if (name == null) {
-					query.append("name IS NULL");
+					query.append("resourceAction.name IS NULL");
 				}
 				else {
-					query.append("name = ?");
+					query.append("resourceAction.name = ?");
 				}
 
 				query.append(" ");
@@ -966,24 +1018,23 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portal.model.ResourceAction WHERE ");
+				query.append("SELECT COUNT(resourceAction) ");
+				query.append("FROM ResourceAction resourceAction WHERE ");
 
 				if (name == null) {
-					query.append("name IS NULL");
+					query.append("resourceAction.name IS NULL");
 				}
 				else {
-					query.append("name = ?");
+					query.append("resourceAction.name = ?");
 				}
 
 				query.append(" AND ");
 
 				if (actionId == null) {
-					query.append("actionId IS NULL");
+					query.append("resourceAction.actionId IS NULL");
 				}
 				else {
-					query.append("actionId = ?");
+					query.append("resourceAction.actionId = ?");
 				}
 
 				query.append(" ");
@@ -1033,7 +1084,7 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl
 				session = openSession();
 
 				Query q = session.createQuery(
-						"SELECT COUNT(*) FROM com.liferay.portal.model.ResourceAction");
+						"SELECT COUNT(resourceAction) FROM ResourceAction resourceAction");
 
 				count = (Long)q.uniqueResult();
 			}

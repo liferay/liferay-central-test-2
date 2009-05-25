@@ -427,15 +427,15 @@ public class AssetCategoryVocabularyPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.asset.model.AssetCategoryVocabulary WHERE ");
+					"SELECT assetCategoryVocabulary FROM AssetCategoryVocabulary assetCategoryVocabulary WHERE ");
 
-				query.append("groupId = ?");
+				query.append("assetCategoryVocabulary.groupId = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("name ASC");
+				query.append("assetCategoryVocabulary.name ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -490,21 +490,38 @@ public class AssetCategoryVocabularyPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.asset.model.AssetCategoryVocabulary WHERE ");
+					"SELECT assetCategoryVocabulary FROM AssetCategoryVocabulary assetCategoryVocabulary WHERE ");
 
-				query.append("groupId = ?");
+				query.append("assetCategoryVocabulary.groupId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("assetCategoryVocabulary.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("name ASC");
+					query.append("assetCategoryVocabulary.name ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -596,21 +613,38 @@ public class AssetCategoryVocabularyPersistenceImpl extends BasePersistenceImpl
 			StringBuilder query = new StringBuilder();
 
 			query.append(
-				"FROM com.liferay.portlet.asset.model.AssetCategoryVocabulary WHERE ");
+				"SELECT assetCategoryVocabulary FROM AssetCategoryVocabulary assetCategoryVocabulary WHERE ");
 
-			query.append("groupId = ?");
+			query.append("assetCategoryVocabulary.groupId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("assetCategoryVocabulary.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("name ASC");
+				query.append("assetCategoryVocabulary.name ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -654,15 +688,15 @@ public class AssetCategoryVocabularyPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.asset.model.AssetCategoryVocabulary WHERE ");
+					"SELECT assetCategoryVocabulary FROM AssetCategoryVocabulary assetCategoryVocabulary WHERE ");
 
-				query.append("companyId = ?");
+				query.append("assetCategoryVocabulary.companyId = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("name ASC");
+				query.append("assetCategoryVocabulary.name ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -717,21 +751,38 @@ public class AssetCategoryVocabularyPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.asset.model.AssetCategoryVocabulary WHERE ");
+					"SELECT assetCategoryVocabulary FROM AssetCategoryVocabulary assetCategoryVocabulary WHERE ");
 
-				query.append("companyId = ?");
+				query.append("assetCategoryVocabulary.companyId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("assetCategoryVocabulary.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("name ASC");
+					query.append("assetCategoryVocabulary.name ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -824,21 +875,38 @@ public class AssetCategoryVocabularyPersistenceImpl extends BasePersistenceImpl
 			StringBuilder query = new StringBuilder();
 
 			query.append(
-				"FROM com.liferay.portlet.asset.model.AssetCategoryVocabulary WHERE ");
+				"SELECT assetCategoryVocabulary FROM AssetCategoryVocabulary assetCategoryVocabulary WHERE ");
 
-			query.append("companyId = ?");
+			query.append("assetCategoryVocabulary.companyId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("assetCategoryVocabulary.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("name ASC");
+				query.append("assetCategoryVocabulary.name ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -918,24 +986,24 @@ public class AssetCategoryVocabularyPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.asset.model.AssetCategoryVocabulary WHERE ");
+					"SELECT assetCategoryVocabulary FROM AssetCategoryVocabulary assetCategoryVocabulary WHERE ");
 
-				query.append("groupId = ?");
+				query.append("assetCategoryVocabulary.groupId = ?");
 
 				query.append(" AND ");
 
 				if (name == null) {
-					query.append("name IS NULL");
+					query.append("assetCategoryVocabulary.name IS NULL");
 				}
 				else {
-					query.append("name = ?");
+					query.append("assetCategoryVocabulary.name = ?");
 				}
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("name ASC");
+				query.append("assetCategoryVocabulary.name ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1061,17 +1129,34 @@ public class AssetCategoryVocabularyPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.asset.model.AssetCategoryVocabulary ");
+					"SELECT assetCategoryVocabulary FROM AssetCategoryVocabulary assetCategoryVocabulary ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("assetCategoryVocabulary.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("name ASC");
+					query.append("assetCategoryVocabulary.name ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1148,11 +1233,11 @@ public class AssetCategoryVocabularyPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
+				query.append("SELECT COUNT(assetCategoryVocabulary) ");
 				query.append(
-					"FROM com.liferay.portlet.asset.model.AssetCategoryVocabulary WHERE ");
+					"FROM AssetCategoryVocabulary assetCategoryVocabulary WHERE ");
 
-				query.append("groupId = ?");
+				query.append("assetCategoryVocabulary.groupId = ?");
 
 				query.append(" ");
 
@@ -1196,11 +1281,11 @@ public class AssetCategoryVocabularyPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
+				query.append("SELECT COUNT(assetCategoryVocabulary) ");
 				query.append(
-					"FROM com.liferay.portlet.asset.model.AssetCategoryVocabulary WHERE ");
+					"FROM AssetCategoryVocabulary assetCategoryVocabulary WHERE ");
 
-				query.append("companyId = ?");
+				query.append("assetCategoryVocabulary.companyId = ?");
 
 				query.append(" ");
 
@@ -1244,19 +1329,19 @@ public class AssetCategoryVocabularyPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
+				query.append("SELECT COUNT(assetCategoryVocabulary) ");
 				query.append(
-					"FROM com.liferay.portlet.asset.model.AssetCategoryVocabulary WHERE ");
+					"FROM AssetCategoryVocabulary assetCategoryVocabulary WHERE ");
 
-				query.append("groupId = ?");
+				query.append("assetCategoryVocabulary.groupId = ?");
 
 				query.append(" AND ");
 
 				if (name == null) {
-					query.append("name IS NULL");
+					query.append("assetCategoryVocabulary.name IS NULL");
 				}
 				else {
-					query.append("name = ?");
+					query.append("assetCategoryVocabulary.name = ?");
 				}
 
 				query.append(" ");
@@ -1304,7 +1389,7 @@ public class AssetCategoryVocabularyPersistenceImpl extends BasePersistenceImpl
 				session = openSession();
 
 				Query q = session.createQuery(
-						"SELECT COUNT(*) FROM com.liferay.portlet.asset.model.AssetCategoryVocabulary");
+						"SELECT COUNT(assetCategoryVocabulary) FROM AssetCategoryVocabulary assetCategoryVocabulary");
 
 				count = (Long)q.uniqueResult();
 			}

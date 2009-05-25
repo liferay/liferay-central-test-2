@@ -573,16 +573,16 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.Layout WHERE ");
+				query.append("SELECT layout FROM Layout layout WHERE ");
 
-				query.append("groupId = ?");
+				query.append("layout.groupId = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("parentLayoutId ASC, ");
-				query.append("priority ASC");
+				query.append("layout.parentLayoutId ASC, ");
+				query.append("layout.priority ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -636,22 +636,39 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.Layout WHERE ");
+				query.append("SELECT layout FROM Layout layout WHERE ");
 
-				query.append("groupId = ?");
+				query.append("layout.groupId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("layout.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("parentLayoutId ASC, ");
-					query.append("priority ASC");
+					query.append("layout.parentLayoutId ASC, ");
+					query.append("layout.priority ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -737,22 +754,39 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 
 			StringBuilder query = new StringBuilder();
 
-			query.append("FROM com.liferay.portal.model.Layout WHERE ");
+			query.append("SELECT layout FROM Layout layout WHERE ");
 
-			query.append("groupId = ?");
+			query.append("layout.groupId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("layout.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("parentLayoutId ASC, ");
-				query.append("priority ASC");
+				query.append("layout.parentLayoutId ASC, ");
+				query.append("layout.priority ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -794,16 +828,16 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.Layout WHERE ");
+				query.append("SELECT layout FROM Layout layout WHERE ");
 
-				query.append("companyId = ?");
+				query.append("layout.companyId = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("parentLayoutId ASC, ");
-				query.append("priority ASC");
+				query.append("layout.parentLayoutId ASC, ");
+				query.append("layout.priority ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -857,22 +891,39 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.Layout WHERE ");
+				query.append("SELECT layout FROM Layout layout WHERE ");
 
-				query.append("companyId = ?");
+				query.append("layout.companyId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("layout.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("parentLayoutId ASC, ");
-					query.append("priority ASC");
+					query.append("layout.parentLayoutId ASC, ");
+					query.append("layout.priority ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -958,22 +1009,39 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 
 			StringBuilder query = new StringBuilder();
 
-			query.append("FROM com.liferay.portal.model.Layout WHERE ");
+			query.append("SELECT layout FROM Layout layout WHERE ");
 
-			query.append("companyId = ?");
+			query.append("layout.companyId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("layout.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("parentLayoutId ASC, ");
-				query.append("priority ASC");
+				query.append("layout.parentLayoutId ASC, ");
+				query.append("layout.priority ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -1046,16 +1114,16 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.Layout WHERE ");
+				query.append("SELECT layout FROM Layout layout WHERE ");
 
-				query.append("dlFolderId = ?");
+				query.append("layout.dlFolderId = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("parentLayoutId ASC, ");
-				query.append("priority ASC");
+				query.append("layout.parentLayoutId ASC, ");
+				query.append("layout.priority ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1155,16 +1223,16 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.Layout WHERE ");
+				query.append("SELECT layout FROM Layout layout WHERE ");
 
-				query.append("iconImageId = ?");
+				query.append("layout.iconImageId = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("parentLayoutId ASC, ");
-				query.append("priority ASC");
+				query.append("layout.parentLayoutId ASC, ");
+				query.append("layout.priority ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1234,20 +1302,20 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.Layout WHERE ");
+				query.append("SELECT layout FROM Layout layout WHERE ");
 
-				query.append("groupId = ?");
+				query.append("layout.groupId = ?");
 
 				query.append(" AND ");
 
-				query.append("privateLayout = ?");
+				query.append("layout.privateLayout = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("parentLayoutId ASC, ");
-				query.append("priority ASC");
+				query.append("layout.parentLayoutId ASC, ");
+				query.append("layout.priority ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1303,26 +1371,43 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.Layout WHERE ");
+				query.append("SELECT layout FROM Layout layout WHERE ");
 
-				query.append("groupId = ?");
+				query.append("layout.groupId = ?");
 
 				query.append(" AND ");
 
-				query.append("privateLayout = ?");
+				query.append("layout.privateLayout = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("layout.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("parentLayoutId ASC, ");
-					query.append("priority ASC");
+					query.append("layout.parentLayoutId ASC, ");
+					query.append("layout.priority ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1418,26 +1503,43 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 
 			StringBuilder query = new StringBuilder();
 
-			query.append("FROM com.liferay.portal.model.Layout WHERE ");
+			query.append("SELECT layout FROM Layout layout WHERE ");
 
-			query.append("groupId = ?");
+			query.append("layout.groupId = ?");
 
 			query.append(" AND ");
 
-			query.append("privateLayout = ?");
+			query.append("layout.privateLayout = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("layout.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("parentLayoutId ASC, ");
-				query.append("priority ASC");
+				query.append("layout.parentLayoutId ASC, ");
+				query.append("layout.priority ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -1522,24 +1624,24 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.Layout WHERE ");
+				query.append("SELECT layout FROM Layout layout WHERE ");
 
-				query.append("groupId = ?");
-
-				query.append(" AND ");
-
-				query.append("privateLayout = ?");
+				query.append("layout.groupId = ?");
 
 				query.append(" AND ");
 
-				query.append("layoutId = ?");
+				query.append("layout.privateLayout = ?");
+
+				query.append(" AND ");
+
+				query.append("layout.layoutId = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("parentLayoutId ASC, ");
-				query.append("priority ASC");
+				query.append("layout.parentLayoutId ASC, ");
+				query.append("layout.priority ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1616,24 +1718,24 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.Layout WHERE ");
+				query.append("SELECT layout FROM Layout layout WHERE ");
 
-				query.append("groupId = ?");
-
-				query.append(" AND ");
-
-				query.append("privateLayout = ?");
+				query.append("layout.groupId = ?");
 
 				query.append(" AND ");
 
-				query.append("parentLayoutId = ?");
+				query.append("layout.privateLayout = ?");
+
+				query.append(" AND ");
+
+				query.append("layout.parentLayoutId = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("parentLayoutId ASC, ");
-				query.append("priority ASC");
+				query.append("layout.parentLayoutId ASC, ");
+				query.append("layout.priority ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1694,30 +1796,47 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.Layout WHERE ");
+				query.append("SELECT layout FROM Layout layout WHERE ");
 
-				query.append("groupId = ?");
-
-				query.append(" AND ");
-
-				query.append("privateLayout = ?");
+				query.append("layout.groupId = ?");
 
 				query.append(" AND ");
 
-				query.append("parentLayoutId = ?");
+				query.append("layout.privateLayout = ?");
+
+				query.append(" AND ");
+
+				query.append("layout.parentLayoutId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("layout.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("parentLayoutId ASC, ");
-					query.append("priority ASC");
+					query.append("layout.parentLayoutId ASC, ");
+					query.append("layout.priority ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1824,30 +1943,47 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 
 			StringBuilder query = new StringBuilder();
 
-			query.append("FROM com.liferay.portal.model.Layout WHERE ");
+			query.append("SELECT layout FROM Layout layout WHERE ");
 
-			query.append("groupId = ?");
-
-			query.append(" AND ");
-
-			query.append("privateLayout = ?");
+			query.append("layout.groupId = ?");
 
 			query.append(" AND ");
 
-			query.append("parentLayoutId = ?");
+			query.append("layout.privateLayout = ?");
+
+			query.append(" AND ");
+
+			query.append("layout.parentLayoutId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("layout.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("parentLayoutId ASC, ");
-				query.append("priority ASC");
+				query.append("layout.parentLayoutId ASC, ");
+				query.append("layout.priority ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -1936,29 +2072,29 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.Layout WHERE ");
+				query.append("SELECT layout FROM Layout layout WHERE ");
 
-				query.append("groupId = ?");
+				query.append("layout.groupId = ?");
 
 				query.append(" AND ");
 
-				query.append("privateLayout = ?");
+				query.append("layout.privateLayout = ?");
 
 				query.append(" AND ");
 
 				if (friendlyURL == null) {
-					query.append("friendlyURL IS NULL");
+					query.append("layout.friendlyURL IS NULL");
 				}
 				else {
-					query.append("friendlyURL = ?");
+					query.append("layout.friendlyURL = ?");
 				}
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("parentLayoutId ASC, ");
-				query.append("priority ASC");
+				query.append("layout.parentLayoutId ASC, ");
+				query.append("layout.priority ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -2039,29 +2175,29 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.Layout WHERE ");
+				query.append("SELECT layout FROM Layout layout WHERE ");
 
-				query.append("groupId = ?");
+				query.append("layout.groupId = ?");
 
 				query.append(" AND ");
 
-				query.append("privateLayout = ?");
+				query.append("layout.privateLayout = ?");
 
 				query.append(" AND ");
 
 				if (type == null) {
-					query.append("type_ IS NULL");
+					query.append("layout.type IS NULL");
 				}
 				else {
-					query.append("type_ = ?");
+					query.append("layout.type = ?");
 				}
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("parentLayoutId ASC, ");
-				query.append("priority ASC");
+				query.append("layout.parentLayoutId ASC, ");
+				query.append("layout.priority ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -2124,35 +2260,52 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.Layout WHERE ");
+				query.append("SELECT layout FROM Layout layout WHERE ");
 
-				query.append("groupId = ?");
+				query.append("layout.groupId = ?");
 
 				query.append(" AND ");
 
-				query.append("privateLayout = ?");
+				query.append("layout.privateLayout = ?");
 
 				query.append(" AND ");
 
 				if (type == null) {
-					query.append("type_ IS NULL");
+					query.append("layout.type IS NULL");
 				}
 				else {
-					query.append("type_ = ?");
+					query.append("layout.type = ?");
 				}
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("layout.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("parentLayoutId ASC, ");
-					query.append("priority ASC");
+					query.append("layout.parentLayoutId ASC, ");
+					query.append("layout.priority ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -2260,35 +2413,52 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 
 			StringBuilder query = new StringBuilder();
 
-			query.append("FROM com.liferay.portal.model.Layout WHERE ");
+			query.append("SELECT layout FROM Layout layout WHERE ");
 
-			query.append("groupId = ?");
+			query.append("layout.groupId = ?");
 
 			query.append(" AND ");
 
-			query.append("privateLayout = ?");
+			query.append("layout.privateLayout = ?");
 
 			query.append(" AND ");
 
 			if (type == null) {
-				query.append("type_ IS NULL");
+				query.append("layout.type IS NULL");
 			}
 			else {
-				query.append("type_ = ?");
+				query.append("layout.type = ?");
 			}
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("layout.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("parentLayoutId ASC, ");
-				query.append("priority ASC");
+				query.append("layout.parentLayoutId ASC, ");
+				query.append("layout.priority ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -2386,18 +2556,35 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.Layout ");
+				query.append("SELECT layout FROM Layout layout ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("layout.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("parentLayoutId ASC, ");
-					query.append("priority ASC");
+					query.append("layout.parentLayoutId ASC, ");
+					query.append("layout.priority ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -2513,10 +2700,10 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append("FROM com.liferay.portal.model.Layout WHERE ");
+				query.append("SELECT COUNT(layout) ");
+				query.append("FROM Layout layout WHERE ");
 
-				query.append("groupId = ?");
+				query.append("layout.groupId = ?");
 
 				query.append(" ");
 
@@ -2560,10 +2747,10 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append("FROM com.liferay.portal.model.Layout WHERE ");
+				query.append("SELECT COUNT(layout) ");
+				query.append("FROM Layout layout WHERE ");
 
-				query.append("companyId = ?");
+				query.append("layout.companyId = ?");
 
 				query.append(" ");
 
@@ -2607,10 +2794,10 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append("FROM com.liferay.portal.model.Layout WHERE ");
+				query.append("SELECT COUNT(layout) ");
+				query.append("FROM Layout layout WHERE ");
 
-				query.append("dlFolderId = ?");
+				query.append("layout.dlFolderId = ?");
 
 				query.append(" ");
 
@@ -2654,10 +2841,10 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append("FROM com.liferay.portal.model.Layout WHERE ");
+				query.append("SELECT COUNT(layout) ");
+				query.append("FROM Layout layout WHERE ");
 
-				query.append("iconImageId = ?");
+				query.append("layout.iconImageId = ?");
 
 				query.append(" ");
 
@@ -2704,14 +2891,14 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append("FROM com.liferay.portal.model.Layout WHERE ");
+				query.append("SELECT COUNT(layout) ");
+				query.append("FROM Layout layout WHERE ");
 
-				query.append("groupId = ?");
+				query.append("layout.groupId = ?");
 
 				query.append(" AND ");
 
-				query.append("privateLayout = ?");
+				query.append("layout.privateLayout = ?");
 
 				query.append(" ");
 
@@ -2761,18 +2948,18 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append("FROM com.liferay.portal.model.Layout WHERE ");
+				query.append("SELECT COUNT(layout) ");
+				query.append("FROM Layout layout WHERE ");
 
-				query.append("groupId = ?");
-
-				query.append(" AND ");
-
-				query.append("privateLayout = ?");
+				query.append("layout.groupId = ?");
 
 				query.append(" AND ");
 
-				query.append("layoutId = ?");
+				query.append("layout.privateLayout = ?");
+
+				query.append(" AND ");
+
+				query.append("layout.layoutId = ?");
 
 				query.append(" ");
 
@@ -2824,18 +3011,18 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append("FROM com.liferay.portal.model.Layout WHERE ");
+				query.append("SELECT COUNT(layout) ");
+				query.append("FROM Layout layout WHERE ");
 
-				query.append("groupId = ?");
-
-				query.append(" AND ");
-
-				query.append("privateLayout = ?");
+				query.append("layout.groupId = ?");
 
 				query.append(" AND ");
 
-				query.append("parentLayoutId = ?");
+				query.append("layout.privateLayout = ?");
+
+				query.append(" AND ");
+
+				query.append("layout.parentLayoutId = ?");
 
 				query.append(" ");
 
@@ -2888,22 +3075,22 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append("FROM com.liferay.portal.model.Layout WHERE ");
+				query.append("SELECT COUNT(layout) ");
+				query.append("FROM Layout layout WHERE ");
 
-				query.append("groupId = ?");
+				query.append("layout.groupId = ?");
 
 				query.append(" AND ");
 
-				query.append("privateLayout = ?");
+				query.append("layout.privateLayout = ?");
 
 				query.append(" AND ");
 
 				if (friendlyURL == null) {
-					query.append("friendlyURL IS NULL");
+					query.append("layout.friendlyURL IS NULL");
 				}
 				else {
-					query.append("friendlyURL = ?");
+					query.append("layout.friendlyURL = ?");
 				}
 
 				query.append(" ");
@@ -2959,22 +3146,22 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append("FROM com.liferay.portal.model.Layout WHERE ");
+				query.append("SELECT COUNT(layout) ");
+				query.append("FROM Layout layout WHERE ");
 
-				query.append("groupId = ?");
+				query.append("layout.groupId = ?");
 
 				query.append(" AND ");
 
-				query.append("privateLayout = ?");
+				query.append("layout.privateLayout = ?");
 
 				query.append(" AND ");
 
 				if (type == null) {
-					query.append("type_ IS NULL");
+					query.append("layout.type IS NULL");
 				}
 				else {
-					query.append("type_ = ?");
+					query.append("layout.type = ?");
 				}
 
 				query.append(" ");
@@ -3024,7 +3211,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 				session = openSession();
 
 				Query q = session.createQuery(
-						"SELECT COUNT(*) FROM com.liferay.portal.model.Layout");
+						"SELECT COUNT(layout) FROM Layout layout");
 
 				count = (Long)q.uniqueResult();
 			}

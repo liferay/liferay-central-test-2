@@ -442,21 +442,21 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.messageboards.model.MBCategory WHERE ");
+					"SELECT mbCategory FROM MBCategory mbCategory WHERE ");
 
 				if (uuid == null) {
-					query.append("uuid_ IS NULL");
+					query.append("mbCategory.uuid IS NULL");
 				}
 				else {
-					query.append("uuid_ = ?");
+					query.append("mbCategory.uuid = ?");
 				}
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("parentCategoryId ASC, ");
-				query.append("name ASC");
+				query.append("mbCategory.parentCategoryId ASC, ");
+				query.append("mbCategory.name ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -513,27 +513,44 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.messageboards.model.MBCategory WHERE ");
+					"SELECT mbCategory FROM MBCategory mbCategory WHERE ");
 
 				if (uuid == null) {
-					query.append("uuid_ IS NULL");
+					query.append("mbCategory.uuid IS NULL");
 				}
 				else {
-					query.append("uuid_ = ?");
+					query.append("mbCategory.uuid = ?");
 				}
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("mbCategory.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("parentCategoryId ASC, ");
-					query.append("name ASC");
+					query.append("mbCategory.parentCategoryId ASC, ");
+					query.append("mbCategory.name ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -622,28 +639,44 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl
 
 			StringBuilder query = new StringBuilder();
 
-			query.append(
-				"FROM com.liferay.portlet.messageboards.model.MBCategory WHERE ");
+			query.append("SELECT mbCategory FROM MBCategory mbCategory WHERE ");
 
 			if (uuid == null) {
-				query.append("uuid_ IS NULL");
+				query.append("mbCategory.uuid IS NULL");
 			}
 			else {
-				query.append("uuid_ = ?");
+				query.append("mbCategory.uuid = ?");
 			}
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("mbCategory.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("parentCategoryId ASC, ");
-				query.append("name ASC");
+				query.append("mbCategory.parentCategoryId ASC, ");
+				query.append("mbCategory.name ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -724,25 +757,25 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.messageboards.model.MBCategory WHERE ");
+					"SELECT mbCategory FROM MBCategory mbCategory WHERE ");
 
 				if (uuid == null) {
-					query.append("uuid_ IS NULL");
+					query.append("mbCategory.uuid IS NULL");
 				}
 				else {
-					query.append("uuid_ = ?");
+					query.append("mbCategory.uuid = ?");
 				}
 
 				query.append(" AND ");
 
-				query.append("groupId = ?");
+				query.append("mbCategory.groupId = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("parentCategoryId ASC, ");
-				query.append("name ASC");
+				query.append("mbCategory.parentCategoryId ASC, ");
+				query.append("mbCategory.name ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -817,16 +850,16 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.messageboards.model.MBCategory WHERE ");
+					"SELECT mbCategory FROM MBCategory mbCategory WHERE ");
 
-				query.append("groupId = ?");
+				query.append("mbCategory.groupId = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("parentCategoryId ASC, ");
-				query.append("name ASC");
+				query.append("mbCategory.parentCategoryId ASC, ");
+				query.append("mbCategory.name ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -881,22 +914,39 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.messageboards.model.MBCategory WHERE ");
+					"SELECT mbCategory FROM MBCategory mbCategory WHERE ");
 
-				query.append("groupId = ?");
+				query.append("mbCategory.groupId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("mbCategory.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("parentCategoryId ASC, ");
-					query.append("name ASC");
+					query.append("mbCategory.parentCategoryId ASC, ");
+					query.append("mbCategory.name ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -984,23 +1034,39 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl
 
 			StringBuilder query = new StringBuilder();
 
-			query.append(
-				"FROM com.liferay.portlet.messageboards.model.MBCategory WHERE ");
+			query.append("SELECT mbCategory FROM MBCategory mbCategory WHERE ");
 
-			query.append("groupId = ?");
+			query.append("mbCategory.groupId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("mbCategory.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("parentCategoryId ASC, ");
-				query.append("name ASC");
+				query.append("mbCategory.parentCategoryId ASC, ");
+				query.append("mbCategory.name ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -1044,16 +1110,16 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.messageboards.model.MBCategory WHERE ");
+					"SELECT mbCategory FROM MBCategory mbCategory WHERE ");
 
-				query.append("companyId = ?");
+				query.append("mbCategory.companyId = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("parentCategoryId ASC, ");
-				query.append("name ASC");
+				query.append("mbCategory.parentCategoryId ASC, ");
+				query.append("mbCategory.name ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1108,22 +1174,39 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.messageboards.model.MBCategory WHERE ");
+					"SELECT mbCategory FROM MBCategory mbCategory WHERE ");
 
-				query.append("companyId = ?");
+				query.append("mbCategory.companyId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("mbCategory.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("parentCategoryId ASC, ");
-					query.append("name ASC");
+					query.append("mbCategory.parentCategoryId ASC, ");
+					query.append("mbCategory.name ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1211,23 +1294,39 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl
 
 			StringBuilder query = new StringBuilder();
 
-			query.append(
-				"FROM com.liferay.portlet.messageboards.model.MBCategory WHERE ");
+			query.append("SELECT mbCategory FROM MBCategory mbCategory WHERE ");
 
-			query.append("companyId = ?");
+			query.append("mbCategory.companyId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("mbCategory.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("parentCategoryId ASC, ");
-				query.append("name ASC");
+				query.append("mbCategory.parentCategoryId ASC, ");
+				query.append("mbCategory.name ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -1273,20 +1372,20 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.messageboards.model.MBCategory WHERE ");
+					"SELECT mbCategory FROM MBCategory mbCategory WHERE ");
 
-				query.append("groupId = ?");
+				query.append("mbCategory.groupId = ?");
 
 				query.append(" AND ");
 
-				query.append("parentCategoryId = ?");
+				query.append("mbCategory.parentCategoryId = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("parentCategoryId ASC, ");
-				query.append("name ASC");
+				query.append("mbCategory.parentCategoryId ASC, ");
+				query.append("mbCategory.name ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1343,26 +1442,43 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.messageboards.model.MBCategory WHERE ");
+					"SELECT mbCategory FROM MBCategory mbCategory WHERE ");
 
-				query.append("groupId = ?");
+				query.append("mbCategory.groupId = ?");
 
 				query.append(" AND ");
 
-				query.append("parentCategoryId = ?");
+				query.append("mbCategory.parentCategoryId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("mbCategory.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("parentCategoryId ASC, ");
-					query.append("name ASC");
+					query.append("mbCategory.parentCategoryId ASC, ");
+					query.append("mbCategory.name ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1459,27 +1575,43 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl
 
 			StringBuilder query = new StringBuilder();
 
-			query.append(
-				"FROM com.liferay.portlet.messageboards.model.MBCategory WHERE ");
+			query.append("SELECT mbCategory FROM MBCategory mbCategory WHERE ");
 
-			query.append("groupId = ?");
+			query.append("mbCategory.groupId = ?");
 
 			query.append(" AND ");
 
-			query.append("parentCategoryId = ?");
+			query.append("mbCategory.parentCategoryId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("mbCategory.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("parentCategoryId ASC, ");
-				query.append("name ASC");
+				query.append("mbCategory.parentCategoryId ASC, ");
+				query.append("mbCategory.name ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -1575,19 +1707,35 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.messageboards.model.MBCategory ");
+				query.append("SELECT mbCategory FROM MBCategory mbCategory ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("mbCategory.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("parentCategoryId ASC, ");
-					query.append("name ASC");
+					query.append("mbCategory.parentCategoryId ASC, ");
+					query.append("mbCategory.name ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1674,15 +1822,14 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.messageboards.model.MBCategory WHERE ");
+				query.append("SELECT COUNT(mbCategory) ");
+				query.append("FROM MBCategory mbCategory WHERE ");
 
 				if (uuid == null) {
-					query.append("uuid_ IS NULL");
+					query.append("mbCategory.uuid IS NULL");
 				}
 				else {
-					query.append("uuid_ = ?");
+					query.append("mbCategory.uuid = ?");
 				}
 
 				query.append(" ");
@@ -1730,20 +1877,19 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.messageboards.model.MBCategory WHERE ");
+				query.append("SELECT COUNT(mbCategory) ");
+				query.append("FROM MBCategory mbCategory WHERE ");
 
 				if (uuid == null) {
-					query.append("uuid_ IS NULL");
+					query.append("mbCategory.uuid IS NULL");
 				}
 				else {
-					query.append("uuid_ = ?");
+					query.append("mbCategory.uuid = ?");
 				}
 
 				query.append(" AND ");
 
-				query.append("groupId = ?");
+				query.append("mbCategory.groupId = ?");
 
 				query.append(" ");
 
@@ -1791,11 +1937,10 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.messageboards.model.MBCategory WHERE ");
+				query.append("SELECT COUNT(mbCategory) ");
+				query.append("FROM MBCategory mbCategory WHERE ");
 
-				query.append("groupId = ?");
+				query.append("mbCategory.groupId = ?");
 
 				query.append(" ");
 
@@ -1839,11 +1984,10 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.messageboards.model.MBCategory WHERE ");
+				query.append("SELECT COUNT(mbCategory) ");
+				query.append("FROM MBCategory mbCategory WHERE ");
 
-				query.append("companyId = ?");
+				query.append("mbCategory.companyId = ?");
 
 				query.append(" ");
 
@@ -1890,15 +2034,14 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.messageboards.model.MBCategory WHERE ");
+				query.append("SELECT COUNT(mbCategory) ");
+				query.append("FROM MBCategory mbCategory WHERE ");
 
-				query.append("groupId = ?");
+				query.append("mbCategory.groupId = ?");
 
 				query.append(" AND ");
 
-				query.append("parentCategoryId = ?");
+				query.append("mbCategory.parentCategoryId = ?");
 
 				query.append(" ");
 
@@ -1943,7 +2086,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl
 				session = openSession();
 
 				Query q = session.createQuery(
-						"SELECT COUNT(*) FROM com.liferay.portlet.messageboards.model.MBCategory");
+						"SELECT COUNT(mbCategory) FROM MBCategory mbCategory");
 
 				count = (Long)q.uniqueResult();
 			}

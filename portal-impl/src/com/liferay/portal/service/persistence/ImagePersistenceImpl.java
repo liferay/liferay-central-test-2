@@ -327,15 +327,15 @@ public class ImagePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.Image WHERE ");
+				query.append("SELECT image FROM Image image WHERE ");
 
-				query.append("size_ < ?");
+				query.append("image.size < ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("imageId ASC");
+				query.append("image.imageId ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -389,21 +389,38 @@ public class ImagePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.Image WHERE ");
+				query.append("SELECT image FROM Image image WHERE ");
 
-				query.append("size_ < ?");
+				query.append("image.size < ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("image.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("imageId ASC");
+					query.append("image.imageId ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -489,21 +506,38 @@ public class ImagePersistenceImpl extends BasePersistenceImpl
 
 			StringBuilder query = new StringBuilder();
 
-			query.append("FROM com.liferay.portal.model.Image WHERE ");
+			query.append("SELECT image FROM Image image WHERE ");
 
-			query.append("size_ < ?");
+			query.append("image.size < ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("image.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("imageId ASC");
+				query.append("image.imageId ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -595,17 +629,34 @@ public class ImagePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.Image ");
+				query.append("SELECT image FROM Image image ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("image.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("imageId ASC");
+					query.append("image.imageId ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -666,10 +717,10 @@ public class ImagePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append("FROM com.liferay.portal.model.Image WHERE ");
+				query.append("SELECT COUNT(image) ");
+				query.append("FROM Image image WHERE ");
 
-				query.append("size_ < ?");
+				query.append("image.size < ?");
 
 				query.append(" ");
 
@@ -712,7 +763,7 @@ public class ImagePersistenceImpl extends BasePersistenceImpl
 				session = openSession();
 
 				Query q = session.createQuery(
-						"SELECT COUNT(*) FROM com.liferay.portal.model.Image");
+						"SELECT COUNT(image) FROM Image image");
 
 				count = (Long)q.uniqueResult();
 			}

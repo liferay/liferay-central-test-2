@@ -411,26 +411,26 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.documentlibrary.model.DLFileVersion WHERE ");
+					"SELECT dlFileVersion FROM DLFileVersion dlFileVersion WHERE ");
 
-				query.append("folderId = ?");
+				query.append("dlFileVersion.folderId = ?");
 
 				query.append(" AND ");
 
 				if (name == null) {
-					query.append("name IS NULL");
+					query.append("dlFileVersion.name IS NULL");
 				}
 				else {
-					query.append("name = ?");
+					query.append("dlFileVersion.name = ?");
 				}
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("folderId DESC, ");
-				query.append("name DESC, ");
-				query.append("version DESC");
+				query.append("dlFileVersion.folderId DESC, ");
+				query.append("dlFileVersion.name DESC, ");
+				query.append("dlFileVersion.version DESC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -491,32 +491,49 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.documentlibrary.model.DLFileVersion WHERE ");
+					"SELECT dlFileVersion FROM DLFileVersion dlFileVersion WHERE ");
 
-				query.append("folderId = ?");
+				query.append("dlFileVersion.folderId = ?");
 
 				query.append(" AND ");
 
 				if (name == null) {
-					query.append("name IS NULL");
+					query.append("dlFileVersion.name IS NULL");
 				}
 				else {
-					query.append("name = ?");
+					query.append("dlFileVersion.name = ?");
 				}
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("dlFileVersion.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("folderId DESC, ");
-					query.append("name DESC, ");
-					query.append("version DESC");
+					query.append("dlFileVersion.folderId DESC, ");
+					query.append("dlFileVersion.name DESC, ");
+					query.append("dlFileVersion.version DESC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -618,32 +635,49 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl
 			StringBuilder query = new StringBuilder();
 
 			query.append(
-				"FROM com.liferay.portlet.documentlibrary.model.DLFileVersion WHERE ");
+				"SELECT dlFileVersion FROM DLFileVersion dlFileVersion WHERE ");
 
-			query.append("folderId = ?");
+			query.append("dlFileVersion.folderId = ?");
 
 			query.append(" AND ");
 
 			if (name == null) {
-				query.append("name IS NULL");
+				query.append("dlFileVersion.name IS NULL");
 			}
 			else {
-				query.append("name = ?");
+				query.append("dlFileVersion.name = ?");
 			}
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("dlFileVersion.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("folderId DESC, ");
-				query.append("name DESC, ");
-				query.append("version DESC");
+				query.append("dlFileVersion.folderId DESC, ");
+				query.append("dlFileVersion.name DESC, ");
+				query.append("dlFileVersion.version DESC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -733,30 +767,30 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.documentlibrary.model.DLFileVersion WHERE ");
+					"SELECT dlFileVersion FROM DLFileVersion dlFileVersion WHERE ");
 
-				query.append("folderId = ?");
+				query.append("dlFileVersion.folderId = ?");
 
 				query.append(" AND ");
 
 				if (name == null) {
-					query.append("name IS NULL");
+					query.append("dlFileVersion.name IS NULL");
 				}
 				else {
-					query.append("name = ?");
+					query.append("dlFileVersion.name = ?");
 				}
 
 				query.append(" AND ");
 
-				query.append("version = ?");
+				query.append("dlFileVersion.version = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("folderId DESC, ");
-				query.append("name DESC, ");
-				query.append("version DESC");
+				query.append("dlFileVersion.folderId DESC, ");
+				query.append("dlFileVersion.name DESC, ");
+				query.append("dlFileVersion.version DESC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -885,19 +919,36 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.documentlibrary.model.DLFileVersion ");
+					"SELECT dlFileVersion FROM DLFileVersion dlFileVersion ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("dlFileVersion.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("folderId DESC, ");
-					query.append("name DESC, ");
-					query.append("version DESC");
+					query.append("dlFileVersion.folderId DESC, ");
+					query.append("dlFileVersion.name DESC, ");
+					query.append("dlFileVersion.version DESC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -966,19 +1017,18 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.documentlibrary.model.DLFileVersion WHERE ");
+				query.append("SELECT COUNT(dlFileVersion) ");
+				query.append("FROM DLFileVersion dlFileVersion WHERE ");
 
-				query.append("folderId = ?");
+				query.append("dlFileVersion.folderId = ?");
 
 				query.append(" AND ");
 
 				if (name == null) {
-					query.append("name IS NULL");
+					query.append("dlFileVersion.name IS NULL");
 				}
 				else {
-					query.append("name = ?");
+					query.append("dlFileVersion.name = ?");
 				}
 
 				query.append(" ");
@@ -1032,24 +1082,23 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.documentlibrary.model.DLFileVersion WHERE ");
+				query.append("SELECT COUNT(dlFileVersion) ");
+				query.append("FROM DLFileVersion dlFileVersion WHERE ");
 
-				query.append("folderId = ?");
+				query.append("dlFileVersion.folderId = ?");
 
 				query.append(" AND ");
 
 				if (name == null) {
-					query.append("name IS NULL");
+					query.append("dlFileVersion.name IS NULL");
 				}
 				else {
-					query.append("name = ?");
+					query.append("dlFileVersion.name = ?");
 				}
 
 				query.append(" AND ");
 
-				query.append("version = ?");
+				query.append("dlFileVersion.version = ?");
 
 				query.append(" ");
 
@@ -1098,7 +1147,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl
 				session = openSession();
 
 				Query q = session.createQuery(
-						"SELECT COUNT(*) FROM com.liferay.portlet.documentlibrary.model.DLFileVersion");
+						"SELECT COUNT(dlFileVersion) FROM DLFileVersion dlFileVersion");
 
 				count = (Long)q.uniqueResult();
 			}

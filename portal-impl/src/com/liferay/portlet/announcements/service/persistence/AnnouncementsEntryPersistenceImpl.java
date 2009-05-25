@@ -419,21 +419,21 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.announcements.model.AnnouncementsEntry WHERE ");
+					"SELECT announcementsEntry FROM AnnouncementsEntry announcementsEntry WHERE ");
 
 				if (uuid == null) {
-					query.append("uuid_ IS NULL");
+					query.append("announcementsEntry.uuid IS NULL");
 				}
 				else {
-					query.append("uuid_ = ?");
+					query.append("announcementsEntry.uuid = ?");
 				}
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("priority ASC, ");
-				query.append("modifiedDate ASC");
+				query.append("announcementsEntry.priority ASC, ");
+				query.append("announcementsEntry.modifiedDate ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -490,27 +490,44 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.announcements.model.AnnouncementsEntry WHERE ");
+					"SELECT announcementsEntry FROM AnnouncementsEntry announcementsEntry WHERE ");
 
 				if (uuid == null) {
-					query.append("uuid_ IS NULL");
+					query.append("announcementsEntry.uuid IS NULL");
 				}
 				else {
-					query.append("uuid_ = ?");
+					query.append("announcementsEntry.uuid = ?");
 				}
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("announcementsEntry.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("priority ASC, ");
-					query.append("modifiedDate ASC");
+					query.append("announcementsEntry.priority ASC, ");
+					query.append("announcementsEntry.modifiedDate ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -601,27 +618,44 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl
 			StringBuilder query = new StringBuilder();
 
 			query.append(
-				"FROM com.liferay.portlet.announcements.model.AnnouncementsEntry WHERE ");
+				"SELECT announcementsEntry FROM AnnouncementsEntry announcementsEntry WHERE ");
 
 			if (uuid == null) {
-				query.append("uuid_ IS NULL");
+				query.append("announcementsEntry.uuid IS NULL");
 			}
 			else {
-				query.append("uuid_ = ?");
+				query.append("announcementsEntry.uuid = ?");
 			}
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("announcementsEntry.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("priority ASC, ");
-				query.append("modifiedDate ASC");
+				query.append("announcementsEntry.priority ASC, ");
+				query.append("announcementsEntry.modifiedDate ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -667,16 +701,16 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.announcements.model.AnnouncementsEntry WHERE ");
+					"SELECT announcementsEntry FROM AnnouncementsEntry announcementsEntry WHERE ");
 
-				query.append("userId = ?");
+				query.append("announcementsEntry.userId = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("priority ASC, ");
-				query.append("modifiedDate ASC");
+				query.append("announcementsEntry.priority ASC, ");
+				query.append("announcementsEntry.modifiedDate ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -731,22 +765,39 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.announcements.model.AnnouncementsEntry WHERE ");
+					"SELECT announcementsEntry FROM AnnouncementsEntry announcementsEntry WHERE ");
 
-				query.append("userId = ?");
+				query.append("announcementsEntry.userId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("announcementsEntry.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("priority ASC, ");
-					query.append("modifiedDate ASC");
+					query.append("announcementsEntry.priority ASC, ");
+					query.append("announcementsEntry.modifiedDate ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -836,22 +887,39 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl
 			StringBuilder query = new StringBuilder();
 
 			query.append(
-				"FROM com.liferay.portlet.announcements.model.AnnouncementsEntry WHERE ");
+				"SELECT announcementsEntry FROM AnnouncementsEntry announcementsEntry WHERE ");
 
-			query.append("userId = ?");
+			query.append("announcementsEntry.userId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("announcementsEntry.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("priority ASC, ");
-				query.append("modifiedDate ASC");
+				query.append("announcementsEntry.priority ASC, ");
+				query.append("announcementsEntry.modifiedDate ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -897,20 +965,20 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.announcements.model.AnnouncementsEntry WHERE ");
+					"SELECT announcementsEntry FROM AnnouncementsEntry announcementsEntry WHERE ");
 
-				query.append("classNameId = ?");
+				query.append("announcementsEntry.classNameId = ?");
 
 				query.append(" AND ");
 
-				query.append("classPK = ?");
+				query.append("announcementsEntry.classPK = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("priority ASC, ");
-				query.append("modifiedDate ASC");
+				query.append("announcementsEntry.priority ASC, ");
+				query.append("announcementsEntry.modifiedDate ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -967,26 +1035,43 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.announcements.model.AnnouncementsEntry WHERE ");
+					"SELECT announcementsEntry FROM AnnouncementsEntry announcementsEntry WHERE ");
 
-				query.append("classNameId = ?");
+				query.append("announcementsEntry.classNameId = ?");
 
 				query.append(" AND ");
 
-				query.append("classPK = ?");
+				query.append("announcementsEntry.classPK = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("announcementsEntry.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("priority ASC, ");
-					query.append("modifiedDate ASC");
+					query.append("announcementsEntry.priority ASC, ");
+					query.append("announcementsEntry.modifiedDate ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1085,26 +1170,43 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl
 			StringBuilder query = new StringBuilder();
 
 			query.append(
-				"FROM com.liferay.portlet.announcements.model.AnnouncementsEntry WHERE ");
+				"SELECT announcementsEntry FROM AnnouncementsEntry announcementsEntry WHERE ");
 
-			query.append("classNameId = ?");
+			query.append("announcementsEntry.classNameId = ?");
 
 			query.append(" AND ");
 
-			query.append("classPK = ?");
+			query.append("announcementsEntry.classPK = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("announcementsEntry.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("priority ASC, ");
-				query.append("modifiedDate ASC");
+				query.append("announcementsEntry.priority ASC, ");
+				query.append("announcementsEntry.modifiedDate ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -1152,24 +1254,24 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.announcements.model.AnnouncementsEntry WHERE ");
+					"SELECT announcementsEntry FROM AnnouncementsEntry announcementsEntry WHERE ");
 
-				query.append("classNameId = ?");
-
-				query.append(" AND ");
-
-				query.append("classPK = ?");
+				query.append("announcementsEntry.classNameId = ?");
 
 				query.append(" AND ");
 
-				query.append("alert = ?");
+				query.append("announcementsEntry.classPK = ?");
+
+				query.append(" AND ");
+
+				query.append("announcementsEntry.alert = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("priority ASC, ");
-				query.append("modifiedDate ASC");
+				query.append("announcementsEntry.priority ASC, ");
+				query.append("announcementsEntry.modifiedDate ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1229,30 +1331,47 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.announcements.model.AnnouncementsEntry WHERE ");
+					"SELECT announcementsEntry FROM AnnouncementsEntry announcementsEntry WHERE ");
 
-				query.append("classNameId = ?");
-
-				query.append(" AND ");
-
-				query.append("classPK = ?");
+				query.append("announcementsEntry.classNameId = ?");
 
 				query.append(" AND ");
 
-				query.append("alert = ?");
+				query.append("announcementsEntry.classPK = ?");
+
+				query.append(" AND ");
+
+				query.append("announcementsEntry.alert = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("announcementsEntry.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("priority ASC, ");
-					query.append("modifiedDate ASC");
+					query.append("announcementsEntry.priority ASC, ");
+					query.append("announcementsEntry.modifiedDate ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1361,30 +1480,47 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl
 			StringBuilder query = new StringBuilder();
 
 			query.append(
-				"FROM com.liferay.portlet.announcements.model.AnnouncementsEntry WHERE ");
+				"SELECT announcementsEntry FROM AnnouncementsEntry announcementsEntry WHERE ");
 
-			query.append("classNameId = ?");
-
-			query.append(" AND ");
-
-			query.append("classPK = ?");
+			query.append("announcementsEntry.classNameId = ?");
 
 			query.append(" AND ");
 
-			query.append("alert = ?");
+			query.append("announcementsEntry.classPK = ?");
+
+			query.append(" AND ");
+
+			query.append("announcementsEntry.alert = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("announcementsEntry.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("priority ASC, ");
-				query.append("modifiedDate ASC");
+				query.append("announcementsEntry.priority ASC, ");
+				query.append("announcementsEntry.modifiedDate ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -1483,18 +1619,35 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.announcements.model.AnnouncementsEntry ");
+					"SELECT announcementsEntry FROM AnnouncementsEntry announcementsEntry ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("announcementsEntry.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("priority ASC, ");
-					query.append("modifiedDate ASC");
+					query.append("announcementsEntry.priority ASC, ");
+					query.append("announcementsEntry.modifiedDate ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1577,15 +1730,15 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
+				query.append("SELECT COUNT(announcementsEntry) ");
 				query.append(
-					"FROM com.liferay.portlet.announcements.model.AnnouncementsEntry WHERE ");
+					"FROM AnnouncementsEntry announcementsEntry WHERE ");
 
 				if (uuid == null) {
-					query.append("uuid_ IS NULL");
+					query.append("announcementsEntry.uuid IS NULL");
 				}
 				else {
-					query.append("uuid_ = ?");
+					query.append("announcementsEntry.uuid = ?");
 				}
 
 				query.append(" ");
@@ -1632,11 +1785,11 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
+				query.append("SELECT COUNT(announcementsEntry) ");
 				query.append(
-					"FROM com.liferay.portlet.announcements.model.AnnouncementsEntry WHERE ");
+					"FROM AnnouncementsEntry announcementsEntry WHERE ");
 
-				query.append("userId = ?");
+				query.append("announcementsEntry.userId = ?");
 
 				query.append(" ");
 
@@ -1683,15 +1836,15 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
+				query.append("SELECT COUNT(announcementsEntry) ");
 				query.append(
-					"FROM com.liferay.portlet.announcements.model.AnnouncementsEntry WHERE ");
+					"FROM AnnouncementsEntry announcementsEntry WHERE ");
 
-				query.append("classNameId = ?");
+				query.append("announcementsEntry.classNameId = ?");
 
 				query.append(" AND ");
 
-				query.append("classPK = ?");
+				query.append("announcementsEntry.classPK = ?");
 
 				query.append(" ");
 
@@ -1740,19 +1893,19 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
+				query.append("SELECT COUNT(announcementsEntry) ");
 				query.append(
-					"FROM com.liferay.portlet.announcements.model.AnnouncementsEntry WHERE ");
+					"FROM AnnouncementsEntry announcementsEntry WHERE ");
 
-				query.append("classNameId = ?");
-
-				query.append(" AND ");
-
-				query.append("classPK = ?");
+				query.append("announcementsEntry.classNameId = ?");
 
 				query.append(" AND ");
 
-				query.append("alert = ?");
+				query.append("announcementsEntry.classPK = ?");
+
+				query.append(" AND ");
+
+				query.append("announcementsEntry.alert = ?");
 
 				query.append(" ");
 
@@ -1799,7 +1952,7 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl
 				session = openSession();
 
 				Query q = session.createQuery(
-						"SELECT COUNT(*) FROM com.liferay.portlet.announcements.model.AnnouncementsEntry");
+						"SELECT COUNT(announcementsEntry) FROM AnnouncementsEntry announcementsEntry");
 
 				count = (Long)q.uniqueResult();
 			}

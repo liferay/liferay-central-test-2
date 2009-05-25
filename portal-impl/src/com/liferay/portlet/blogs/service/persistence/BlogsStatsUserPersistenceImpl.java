@@ -444,15 +444,15 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.blogs.model.BlogsStatsUser WHERE ");
+					"SELECT blogsStatsUser FROM BlogsStatsUser blogsStatsUser WHERE ");
 
-				query.append("groupId = ?");
+				query.append("blogsStatsUser.groupId = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("entryCount DESC");
+				query.append("blogsStatsUser.entryCount DESC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -507,21 +507,38 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.blogs.model.BlogsStatsUser WHERE ");
+					"SELECT blogsStatsUser FROM BlogsStatsUser blogsStatsUser WHERE ");
 
-				query.append("groupId = ?");
+				query.append("blogsStatsUser.groupId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("blogsStatsUser.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("entryCount DESC");
+					query.append("blogsStatsUser.entryCount DESC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -610,21 +627,38 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 			StringBuilder query = new StringBuilder();
 
 			query.append(
-				"FROM com.liferay.portlet.blogs.model.BlogsStatsUser WHERE ");
+				"SELECT blogsStatsUser FROM BlogsStatsUser blogsStatsUser WHERE ");
 
-			query.append("groupId = ?");
+			query.append("blogsStatsUser.groupId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("blogsStatsUser.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("entryCount DESC");
+				query.append("blogsStatsUser.entryCount DESC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -668,15 +702,15 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.blogs.model.BlogsStatsUser WHERE ");
+					"SELECT blogsStatsUser FROM BlogsStatsUser blogsStatsUser WHERE ");
 
-				query.append("userId = ?");
+				query.append("blogsStatsUser.userId = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("entryCount DESC");
+				query.append("blogsStatsUser.entryCount DESC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -731,21 +765,38 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.blogs.model.BlogsStatsUser WHERE ");
+					"SELECT blogsStatsUser FROM BlogsStatsUser blogsStatsUser WHERE ");
 
-				query.append("userId = ?");
+				query.append("blogsStatsUser.userId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("blogsStatsUser.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("entryCount DESC");
+					query.append("blogsStatsUser.entryCount DESC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -834,21 +885,38 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 			StringBuilder query = new StringBuilder();
 
 			query.append(
-				"FROM com.liferay.portlet.blogs.model.BlogsStatsUser WHERE ");
+				"SELECT blogsStatsUser FROM BlogsStatsUser blogsStatsUser WHERE ");
 
-			query.append("userId = ?");
+			query.append("blogsStatsUser.userId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("blogsStatsUser.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("entryCount DESC");
+				query.append("blogsStatsUser.entryCount DESC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -927,19 +995,19 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.blogs.model.BlogsStatsUser WHERE ");
+					"SELECT blogsStatsUser FROM BlogsStatsUser blogsStatsUser WHERE ");
 
-				query.append("groupId = ?");
+				query.append("blogsStatsUser.groupId = ?");
 
 				query.append(" AND ");
 
-				query.append("userId = ?");
+				query.append("blogsStatsUser.userId = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("entryCount DESC");
+				query.append("blogsStatsUser.entryCount DESC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1013,19 +1081,19 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.blogs.model.BlogsStatsUser WHERE ");
+					"SELECT blogsStatsUser FROM BlogsStatsUser blogsStatsUser WHERE ");
 
-				query.append("groupId = ?");
+				query.append("blogsStatsUser.groupId = ?");
 
 				query.append(" AND ");
 
-				query.append("entryCount != ?");
+				query.append("blogsStatsUser.entryCount != ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("entryCount DESC");
+				query.append("blogsStatsUser.entryCount DESC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1082,25 +1150,42 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.blogs.model.BlogsStatsUser WHERE ");
+					"SELECT blogsStatsUser FROM BlogsStatsUser blogsStatsUser WHERE ");
 
-				query.append("groupId = ?");
+				query.append("blogsStatsUser.groupId = ?");
 
 				query.append(" AND ");
 
-				query.append("entryCount != ?");
+				query.append("blogsStatsUser.entryCount != ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("blogsStatsUser.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("entryCount DESC");
+					query.append("blogsStatsUser.entryCount DESC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1198,25 +1283,42 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 			StringBuilder query = new StringBuilder();
 
 			query.append(
-				"FROM com.liferay.portlet.blogs.model.BlogsStatsUser WHERE ");
+				"SELECT blogsStatsUser FROM BlogsStatsUser blogsStatsUser WHERE ");
 
-			query.append("groupId = ?");
+			query.append("blogsStatsUser.groupId = ?");
 
 			query.append(" AND ");
 
-			query.append("entryCount != ?");
+			query.append("blogsStatsUser.entryCount != ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("blogsStatsUser.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("entryCount DESC");
+				query.append("blogsStatsUser.entryCount DESC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -1264,19 +1366,19 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.blogs.model.BlogsStatsUser WHERE ");
+					"SELECT blogsStatsUser FROM BlogsStatsUser blogsStatsUser WHERE ");
 
-				query.append("companyId = ?");
+				query.append("blogsStatsUser.companyId = ?");
 
 				query.append(" AND ");
 
-				query.append("entryCount != ?");
+				query.append("blogsStatsUser.entryCount != ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("entryCount DESC");
+				query.append("blogsStatsUser.entryCount DESC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1333,25 +1435,42 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.blogs.model.BlogsStatsUser WHERE ");
+					"SELECT blogsStatsUser FROM BlogsStatsUser blogsStatsUser WHERE ");
 
-				query.append("companyId = ?");
+				query.append("blogsStatsUser.companyId = ?");
 
 				query.append(" AND ");
 
-				query.append("entryCount != ?");
+				query.append("blogsStatsUser.entryCount != ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("blogsStatsUser.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("entryCount DESC");
+					query.append("blogsStatsUser.entryCount DESC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1449,25 +1568,42 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 			StringBuilder query = new StringBuilder();
 
 			query.append(
-				"FROM com.liferay.portlet.blogs.model.BlogsStatsUser WHERE ");
+				"SELECT blogsStatsUser FROM BlogsStatsUser blogsStatsUser WHERE ");
 
-			query.append("companyId = ?");
+			query.append("blogsStatsUser.companyId = ?");
 
 			query.append(" AND ");
 
-			query.append("entryCount != ?");
+			query.append("blogsStatsUser.entryCount != ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("blogsStatsUser.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("entryCount DESC");
+				query.append("blogsStatsUser.entryCount DESC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -1564,17 +1700,34 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.blogs.model.BlogsStatsUser ");
+					"SELECT blogsStatsUser FROM BlogsStatsUser blogsStatsUser ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("blogsStatsUser.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("entryCount DESC");
+					query.append("blogsStatsUser.entryCount DESC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1662,11 +1815,10 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.blogs.model.BlogsStatsUser WHERE ");
+				query.append("SELECT COUNT(blogsStatsUser) ");
+				query.append("FROM BlogsStatsUser blogsStatsUser WHERE ");
 
-				query.append("groupId = ?");
+				query.append("blogsStatsUser.groupId = ?");
 
 				query.append(" ");
 
@@ -1710,11 +1862,10 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.blogs.model.BlogsStatsUser WHERE ");
+				query.append("SELECT COUNT(blogsStatsUser) ");
+				query.append("FROM BlogsStatsUser blogsStatsUser WHERE ");
 
-				query.append("userId = ?");
+				query.append("blogsStatsUser.userId = ?");
 
 				query.append(" ");
 
@@ -1758,15 +1909,14 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.blogs.model.BlogsStatsUser WHERE ");
+				query.append("SELECT COUNT(blogsStatsUser) ");
+				query.append("FROM BlogsStatsUser blogsStatsUser WHERE ");
 
-				query.append("groupId = ?");
+				query.append("blogsStatsUser.groupId = ?");
 
 				query.append(" AND ");
 
-				query.append("userId = ?");
+				query.append("blogsStatsUser.userId = ?");
 
 				query.append(" ");
 
@@ -1815,15 +1965,14 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.blogs.model.BlogsStatsUser WHERE ");
+				query.append("SELECT COUNT(blogsStatsUser) ");
+				query.append("FROM BlogsStatsUser blogsStatsUser WHERE ");
 
-				query.append("groupId = ?");
+				query.append("blogsStatsUser.groupId = ?");
 
 				query.append(" AND ");
 
-				query.append("entryCount != ?");
+				query.append("blogsStatsUser.entryCount != ?");
 
 				query.append(" ");
 
@@ -1872,15 +2021,14 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.blogs.model.BlogsStatsUser WHERE ");
+				query.append("SELECT COUNT(blogsStatsUser) ");
+				query.append("FROM BlogsStatsUser blogsStatsUser WHERE ");
 
-				query.append("companyId = ?");
+				query.append("blogsStatsUser.companyId = ?");
 
 				query.append(" AND ");
 
-				query.append("entryCount != ?");
+				query.append("blogsStatsUser.entryCount != ?");
 
 				query.append(" ");
 
@@ -1925,7 +2073,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 				session = openSession();
 
 				Query q = session.createQuery(
-						"SELECT COUNT(*) FROM com.liferay.portlet.blogs.model.BlogsStatsUser");
+						"SELECT COUNT(blogsStatsUser) FROM BlogsStatsUser blogsStatsUser");
 
 				count = (Long)q.uniqueResult();
 			}

@@ -403,15 +403,15 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion WHERE ");
+					"SELECT scFrameworkVersion FROM SCFrameworkVersion scFrameworkVersion WHERE ");
 
-				query.append("groupId = ?");
+				query.append("scFrameworkVersion.groupId = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("name DESC");
+				query.append("scFrameworkVersion.name DESC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -466,21 +466,38 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion WHERE ");
+					"SELECT scFrameworkVersion FROM SCFrameworkVersion scFrameworkVersion WHERE ");
 
-				query.append("groupId = ?");
+				query.append("scFrameworkVersion.groupId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("scFrameworkVersion.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("name DESC");
+					query.append("scFrameworkVersion.name DESC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -572,21 +589,38 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 			StringBuilder query = new StringBuilder();
 
 			query.append(
-				"FROM com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion WHERE ");
+				"SELECT scFrameworkVersion FROM SCFrameworkVersion scFrameworkVersion WHERE ");
 
-			query.append("groupId = ?");
+			query.append("scFrameworkVersion.groupId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("scFrameworkVersion.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("name DESC");
+				query.append("scFrameworkVersion.name DESC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -630,15 +664,15 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion WHERE ");
+					"SELECT scFrameworkVersion FROM SCFrameworkVersion scFrameworkVersion WHERE ");
 
-				query.append("companyId = ?");
+				query.append("scFrameworkVersion.companyId = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("name DESC");
+				query.append("scFrameworkVersion.name DESC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -693,21 +727,38 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion WHERE ");
+					"SELECT scFrameworkVersion FROM SCFrameworkVersion scFrameworkVersion WHERE ");
 
-				query.append("companyId = ?");
+				query.append("scFrameworkVersion.companyId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("scFrameworkVersion.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("name DESC");
+					query.append("scFrameworkVersion.name DESC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -799,21 +850,38 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 			StringBuilder query = new StringBuilder();
 
 			query.append(
-				"FROM com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion WHERE ");
+				"SELECT scFrameworkVersion FROM SCFrameworkVersion scFrameworkVersion WHERE ");
 
-			query.append("companyId = ?");
+			query.append("scFrameworkVersion.companyId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("scFrameworkVersion.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("name DESC");
+				query.append("scFrameworkVersion.name DESC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -859,19 +927,19 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion WHERE ");
+					"SELECT scFrameworkVersion FROM SCFrameworkVersion scFrameworkVersion WHERE ");
 
-				query.append("groupId = ?");
+				query.append("scFrameworkVersion.groupId = ?");
 
 				query.append(" AND ");
 
-				query.append("active_ = ?");
+				query.append("scFrameworkVersion.active = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("name DESC");
+				query.append("scFrameworkVersion.name DESC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -928,25 +996,42 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion WHERE ");
+					"SELECT scFrameworkVersion FROM SCFrameworkVersion scFrameworkVersion WHERE ");
 
-				query.append("groupId = ?");
+				query.append("scFrameworkVersion.groupId = ?");
 
 				query.append(" AND ");
 
-				query.append("active_ = ?");
+				query.append("scFrameworkVersion.active = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("scFrameworkVersion.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("name DESC");
+					query.append("scFrameworkVersion.name DESC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1046,25 +1131,42 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 			StringBuilder query = new StringBuilder();
 
 			query.append(
-				"FROM com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion WHERE ");
+				"SELECT scFrameworkVersion FROM SCFrameworkVersion scFrameworkVersion WHERE ");
 
-			query.append("groupId = ?");
+			query.append("scFrameworkVersion.groupId = ?");
 
 			query.append(" AND ");
 
-			query.append("active_ = ?");
+			query.append("scFrameworkVersion.active = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("scFrameworkVersion.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("name DESC");
+				query.append("scFrameworkVersion.name DESC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -1161,17 +1263,34 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion ");
+					"SELECT scFrameworkVersion FROM SCFrameworkVersion scFrameworkVersion ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("scFrameworkVersion.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("name DESC");
+					query.append("scFrameworkVersion.name DESC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1245,11 +1364,11 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
+				query.append("SELECT COUNT(scFrameworkVersion) ");
 				query.append(
-					"FROM com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion WHERE ");
+					"FROM SCFrameworkVersion scFrameworkVersion WHERE ");
 
-				query.append("groupId = ?");
+				query.append("scFrameworkVersion.groupId = ?");
 
 				query.append(" ");
 
@@ -1293,11 +1412,11 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
+				query.append("SELECT COUNT(scFrameworkVersion) ");
 				query.append(
-					"FROM com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion WHERE ");
+					"FROM SCFrameworkVersion scFrameworkVersion WHERE ");
 
-				query.append("companyId = ?");
+				query.append("scFrameworkVersion.companyId = ?");
 
 				query.append(" ");
 
@@ -1344,15 +1463,15 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
+				query.append("SELECT COUNT(scFrameworkVersion) ");
 				query.append(
-					"FROM com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion WHERE ");
+					"FROM SCFrameworkVersion scFrameworkVersion WHERE ");
 
-				query.append("groupId = ?");
+				query.append("scFrameworkVersion.groupId = ?");
 
 				query.append(" AND ");
 
-				query.append("active_ = ?");
+				query.append("scFrameworkVersion.active = ?");
 
 				query.append(" ");
 
@@ -1397,7 +1516,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 				session = openSession();
 
 				Query q = session.createQuery(
-						"SELECT COUNT(*) FROM com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion");
+						"SELECT COUNT(scFrameworkVersion) FROM SCFrameworkVersion scFrameworkVersion");
 
 				count = (Long)q.uniqueResult();
 			}

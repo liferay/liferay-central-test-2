@@ -382,15 +382,15 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.shopping.model.ShoppingCoupon WHERE ");
+					"SELECT shoppingCoupon FROM ShoppingCoupon shoppingCoupon WHERE ");
 
-				query.append("groupId = ?");
+				query.append("shoppingCoupon.groupId = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("createDate ASC");
+				query.append("shoppingCoupon.createDate ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -445,21 +445,38 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.shopping.model.ShoppingCoupon WHERE ");
+					"SELECT shoppingCoupon FROM ShoppingCoupon shoppingCoupon WHERE ");
 
-				query.append("groupId = ?");
+				query.append("shoppingCoupon.groupId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("shoppingCoupon.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("createDate ASC");
+					query.append("shoppingCoupon.createDate ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -548,21 +565,38 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl
 			StringBuilder query = new StringBuilder();
 
 			query.append(
-				"FROM com.liferay.portlet.shopping.model.ShoppingCoupon WHERE ");
+				"SELECT shoppingCoupon FROM ShoppingCoupon shoppingCoupon WHERE ");
 
-			query.append("groupId = ?");
+			query.append("shoppingCoupon.groupId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("shoppingCoupon.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("createDate ASC");
+				query.append("shoppingCoupon.createDate ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -637,20 +671,20 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.shopping.model.ShoppingCoupon WHERE ");
+					"SELECT shoppingCoupon FROM ShoppingCoupon shoppingCoupon WHERE ");
 
 				if (code == null) {
-					query.append("code_ IS NULL");
+					query.append("shoppingCoupon.code IS NULL");
 				}
 				else {
-					query.append("code_ = ?");
+					query.append("shoppingCoupon.code = ?");
 				}
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("createDate ASC");
+				query.append("shoppingCoupon.createDate ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -773,17 +807,34 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.shopping.model.ShoppingCoupon ");
+					"SELECT shoppingCoupon FROM ShoppingCoupon shoppingCoupon ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("shoppingCoupon.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("createDate ASC");
+					query.append("shoppingCoupon.createDate ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -851,11 +902,10 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.shopping.model.ShoppingCoupon WHERE ");
+				query.append("SELECT COUNT(shoppingCoupon) ");
+				query.append("FROM ShoppingCoupon shoppingCoupon WHERE ");
 
-				query.append("groupId = ?");
+				query.append("shoppingCoupon.groupId = ?");
 
 				query.append(" ");
 
@@ -899,15 +949,14 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.shopping.model.ShoppingCoupon WHERE ");
+				query.append("SELECT COUNT(shoppingCoupon) ");
+				query.append("FROM ShoppingCoupon shoppingCoupon WHERE ");
 
 				if (code == null) {
-					query.append("code_ IS NULL");
+					query.append("shoppingCoupon.code IS NULL");
 				}
 				else {
-					query.append("code_ = ?");
+					query.append("shoppingCoupon.code = ?");
 				}
 
 				query.append(" ");
@@ -953,7 +1002,7 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl
 				session = openSession();
 
 				Query q = session.createQuery(
-						"SELECT COUNT(*) FROM com.liferay.portlet.shopping.model.ShoppingCoupon");
+						"SELECT COUNT(shoppingCoupon) FROM ShoppingCoupon shoppingCoupon");
 
 				count = (Long)q.uniqueResult();
 			}

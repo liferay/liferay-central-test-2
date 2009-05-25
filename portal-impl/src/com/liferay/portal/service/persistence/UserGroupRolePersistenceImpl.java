@@ -414,9 +414,9 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portal.model.UserGroupRole WHERE ");
+					"SELECT userGroupRole FROM UserGroupRole userGroupRole WHERE ");
 
-				query.append("userId = ?");
+				query.append("userGroupRole.id.userId = ?");
 
 				query.append(" ");
 
@@ -473,15 +473,32 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portal.model.UserGroupRole WHERE ");
+					"SELECT userGroupRole FROM UserGroupRole userGroupRole WHERE ");
 
-				query.append("userId = ?");
+				query.append("userGroupRole.id.userId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("userGroupRole.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -569,15 +586,33 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl
 
 			StringBuilder query = new StringBuilder();
 
-			query.append("FROM com.liferay.portal.model.UserGroupRole WHERE ");
+			query.append(
+				"SELECT userGroupRole FROM UserGroupRole userGroupRole WHERE ");
 
-			query.append("userId = ?");
+			query.append("userGroupRole.id.userId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("userGroupRole.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -621,9 +656,9 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portal.model.UserGroupRole WHERE ");
+					"SELECT userGroupRole FROM UserGroupRole userGroupRole WHERE ");
 
-				query.append("groupId = ?");
+				query.append("userGroupRole.id.groupId = ?");
 
 				query.append(" ");
 
@@ -680,15 +715,32 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portal.model.UserGroupRole WHERE ");
+					"SELECT userGroupRole FROM UserGroupRole userGroupRole WHERE ");
 
-				query.append("groupId = ?");
+				query.append("userGroupRole.id.groupId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("userGroupRole.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -776,15 +828,33 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl
 
 			StringBuilder query = new StringBuilder();
 
-			query.append("FROM com.liferay.portal.model.UserGroupRole WHERE ");
+			query.append(
+				"SELECT userGroupRole FROM UserGroupRole userGroupRole WHERE ");
 
-			query.append("groupId = ?");
+			query.append("userGroupRole.id.groupId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("userGroupRole.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -828,9 +898,9 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portal.model.UserGroupRole WHERE ");
+					"SELECT userGroupRole FROM UserGroupRole userGroupRole WHERE ");
 
-				query.append("roleId = ?");
+				query.append("userGroupRole.id.roleId = ?");
 
 				query.append(" ");
 
@@ -887,15 +957,32 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portal.model.UserGroupRole WHERE ");
+					"SELECT userGroupRole FROM UserGroupRole userGroupRole WHERE ");
 
-				query.append("roleId = ?");
+				query.append("userGroupRole.id.roleId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("userGroupRole.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -983,15 +1070,33 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl
 
 			StringBuilder query = new StringBuilder();
 
-			query.append("FROM com.liferay.portal.model.UserGroupRole WHERE ");
+			query.append(
+				"SELECT userGroupRole FROM UserGroupRole userGroupRole WHERE ");
 
-			query.append("roleId = ?");
+			query.append("userGroupRole.id.roleId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("userGroupRole.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -1035,13 +1140,13 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portal.model.UserGroupRole WHERE ");
+					"SELECT userGroupRole FROM UserGroupRole userGroupRole WHERE ");
 
-				query.append("userId = ?");
+				query.append("userGroupRole.id.userId = ?");
 
 				query.append(" AND ");
 
-				query.append("groupId = ?");
+				query.append("userGroupRole.id.groupId = ?");
 
 				query.append(" ");
 
@@ -1100,19 +1205,36 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portal.model.UserGroupRole WHERE ");
+					"SELECT userGroupRole FROM UserGroupRole userGroupRole WHERE ");
 
-				query.append("userId = ?");
+				query.append("userGroupRole.id.userId = ?");
 
 				query.append(" AND ");
 
-				query.append("groupId = ?");
+				query.append("userGroupRole.id.groupId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("userGroupRole.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1212,19 +1334,37 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl
 
 			StringBuilder query = new StringBuilder();
 
-			query.append("FROM com.liferay.portal.model.UserGroupRole WHERE ");
+			query.append(
+				"SELECT userGroupRole FROM UserGroupRole userGroupRole WHERE ");
 
-			query.append("userId = ?");
+			query.append("userGroupRole.id.userId = ?");
 
 			query.append(" AND ");
 
-			query.append("groupId = ?");
+			query.append("userGroupRole.id.groupId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("userGroupRole.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -1270,13 +1410,13 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portal.model.UserGroupRole WHERE ");
+					"SELECT userGroupRole FROM UserGroupRole userGroupRole WHERE ");
 
-				query.append("groupId = ?");
+				query.append("userGroupRole.id.groupId = ?");
 
 				query.append(" AND ");
 
-				query.append("roleId = ?");
+				query.append("userGroupRole.id.roleId = ?");
 
 				query.append(" ");
 
@@ -1335,19 +1475,36 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portal.model.UserGroupRole WHERE ");
+					"SELECT userGroupRole FROM UserGroupRole userGroupRole WHERE ");
 
-				query.append("groupId = ?");
+				query.append("userGroupRole.id.groupId = ?");
 
 				query.append(" AND ");
 
-				query.append("roleId = ?");
+				query.append("userGroupRole.id.roleId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("userGroupRole.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1447,19 +1604,37 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl
 
 			StringBuilder query = new StringBuilder();
 
-			query.append("FROM com.liferay.portal.model.UserGroupRole WHERE ");
+			query.append(
+				"SELECT userGroupRole FROM UserGroupRole userGroupRole WHERE ");
 
-			query.append("groupId = ?");
+			query.append("userGroupRole.id.groupId = ?");
 
 			query.append(" AND ");
 
-			query.append("roleId = ?");
+			query.append("userGroupRole.id.roleId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("userGroupRole.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -1555,11 +1730,29 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.UserGroupRole ");
+				query.append(
+					"SELECT userGroupRole FROM UserGroupRole userGroupRole ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("userGroupRole.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1646,11 +1839,10 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portal.model.UserGroupRole WHERE ");
+				query.append("SELECT COUNT(userGroupRole) ");
+				query.append("FROM UserGroupRole userGroupRole WHERE ");
 
-				query.append("userId = ?");
+				query.append("userGroupRole.id.userId = ?");
 
 				query.append(" ");
 
@@ -1694,11 +1886,10 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portal.model.UserGroupRole WHERE ");
+				query.append("SELECT COUNT(userGroupRole) ");
+				query.append("FROM UserGroupRole userGroupRole WHERE ");
 
-				query.append("groupId = ?");
+				query.append("userGroupRole.id.groupId = ?");
 
 				query.append(" ");
 
@@ -1742,11 +1933,10 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portal.model.UserGroupRole WHERE ");
+				query.append("SELECT COUNT(userGroupRole) ");
+				query.append("FROM UserGroupRole userGroupRole WHERE ");
 
-				query.append("roleId = ?");
+				query.append("userGroupRole.id.roleId = ?");
 
 				query.append(" ");
 
@@ -1790,15 +1980,14 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portal.model.UserGroupRole WHERE ");
+				query.append("SELECT COUNT(userGroupRole) ");
+				query.append("FROM UserGroupRole userGroupRole WHERE ");
 
-				query.append("userId = ?");
+				query.append("userGroupRole.id.userId = ?");
 
 				query.append(" AND ");
 
-				query.append("groupId = ?");
+				query.append("userGroupRole.id.groupId = ?");
 
 				query.append(" ");
 
@@ -1844,15 +2033,14 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portal.model.UserGroupRole WHERE ");
+				query.append("SELECT COUNT(userGroupRole) ");
+				query.append("FROM UserGroupRole userGroupRole WHERE ");
 
-				query.append("groupId = ?");
+				query.append("userGroupRole.id.groupId = ?");
 
 				query.append(" AND ");
 
-				query.append("roleId = ?");
+				query.append("userGroupRole.id.roleId = ?");
 
 				query.append(" ");
 
@@ -1897,7 +2085,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl
 				session = openSession();
 
 				Query q = session.createQuery(
-						"SELECT COUNT(*) FROM com.liferay.portal.model.UserGroupRole");
+						"SELECT COUNT(userGroupRole) FROM UserGroupRole userGroupRole");
 
 				count = (Long)q.uniqueResult();
 			}

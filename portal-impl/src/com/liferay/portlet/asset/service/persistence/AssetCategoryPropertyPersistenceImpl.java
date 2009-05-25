@@ -440,15 +440,15 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.asset.model.AssetCategoryProperty WHERE ");
+					"SELECT assetCategoryProperty FROM AssetCategoryProperty assetCategoryProperty WHERE ");
 
-				query.append("companyId = ?");
+				query.append("assetCategoryProperty.companyId = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("key_ ASC");
+				query.append("assetCategoryProperty.key ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -503,21 +503,38 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.asset.model.AssetCategoryProperty WHERE ");
+					"SELECT assetCategoryProperty FROM AssetCategoryProperty assetCategoryProperty WHERE ");
 
-				query.append("companyId = ?");
+				query.append("assetCategoryProperty.companyId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("assetCategoryProperty.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("key_ ASC");
+					query.append("assetCategoryProperty.key ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -609,21 +626,38 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl
 			StringBuilder query = new StringBuilder();
 
 			query.append(
-				"FROM com.liferay.portlet.asset.model.AssetCategoryProperty WHERE ");
+				"SELECT assetCategoryProperty FROM AssetCategoryProperty assetCategoryProperty WHERE ");
 
-			query.append("companyId = ?");
+			query.append("assetCategoryProperty.companyId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("assetCategoryProperty.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("key_ ASC");
+				query.append("assetCategoryProperty.key ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -667,15 +701,15 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.asset.model.AssetCategoryProperty WHERE ");
+					"SELECT assetCategoryProperty FROM AssetCategoryProperty assetCategoryProperty WHERE ");
 
-				query.append("categoryId = ?");
+				query.append("assetCategoryProperty.categoryId = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("key_ ASC");
+				query.append("assetCategoryProperty.key ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -730,21 +764,38 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.asset.model.AssetCategoryProperty WHERE ");
+					"SELECT assetCategoryProperty FROM AssetCategoryProperty assetCategoryProperty WHERE ");
 
-				query.append("categoryId = ?");
+				query.append("assetCategoryProperty.categoryId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("assetCategoryProperty.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("key_ ASC");
+					query.append("assetCategoryProperty.key ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -837,21 +888,38 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl
 			StringBuilder query = new StringBuilder();
 
 			query.append(
-				"FROM com.liferay.portlet.asset.model.AssetCategoryProperty WHERE ");
+				"SELECT assetCategoryProperty FROM AssetCategoryProperty assetCategoryProperty WHERE ");
 
-			query.append("categoryId = ?");
+			query.append("assetCategoryProperty.categoryId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("assetCategoryProperty.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("key_ ASC");
+				query.append("assetCategoryProperty.key ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -895,24 +963,24 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.asset.model.AssetCategoryProperty WHERE ");
+					"SELECT assetCategoryProperty FROM AssetCategoryProperty assetCategoryProperty WHERE ");
 
-				query.append("companyId = ?");
+				query.append("assetCategoryProperty.companyId = ?");
 
 				query.append(" AND ");
 
 				if (key == null) {
-					query.append("key_ IS NULL");
+					query.append("assetCategoryProperty.key IS NULL");
 				}
 				else {
-					query.append("key_ = ?");
+					query.append("assetCategoryProperty.key = ?");
 				}
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("key_ ASC");
+				query.append("assetCategoryProperty.key ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -973,30 +1041,47 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.asset.model.AssetCategoryProperty WHERE ");
+					"SELECT assetCategoryProperty FROM AssetCategoryProperty assetCategoryProperty WHERE ");
 
-				query.append("companyId = ?");
+				query.append("assetCategoryProperty.companyId = ?");
 
 				query.append(" AND ");
 
 				if (key == null) {
-					query.append("key_ IS NULL");
+					query.append("assetCategoryProperty.key IS NULL");
 				}
 				else {
-					query.append("key_ = ?");
+					query.append("assetCategoryProperty.key = ?");
 				}
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("assetCategoryProperty.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("key_ ASC");
+					query.append("assetCategoryProperty.key ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1099,30 +1184,47 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl
 			StringBuilder query = new StringBuilder();
 
 			query.append(
-				"FROM com.liferay.portlet.asset.model.AssetCategoryProperty WHERE ");
+				"SELECT assetCategoryProperty FROM AssetCategoryProperty assetCategoryProperty WHERE ");
 
-			query.append("companyId = ?");
+			query.append("assetCategoryProperty.companyId = ?");
 
 			query.append(" AND ");
 
 			if (key == null) {
-				query.append("key_ IS NULL");
+				query.append("assetCategoryProperty.key IS NULL");
 			}
 			else {
-				query.append("key_ = ?");
+				query.append("assetCategoryProperty.key = ?");
 			}
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("assetCategoryProperty.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("key_ ASC");
+				query.append("assetCategoryProperty.key ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -1206,24 +1308,24 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.asset.model.AssetCategoryProperty WHERE ");
+					"SELECT assetCategoryProperty FROM AssetCategoryProperty assetCategoryProperty WHERE ");
 
-				query.append("categoryId = ?");
+				query.append("assetCategoryProperty.categoryId = ?");
 
 				query.append(" AND ");
 
 				if (key == null) {
-					query.append("key_ IS NULL");
+					query.append("assetCategoryProperty.key IS NULL");
 				}
 				else {
-					query.append("key_ = ?");
+					query.append("assetCategoryProperty.key = ?");
 				}
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("key_ ASC");
+				query.append("assetCategoryProperty.key ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1349,17 +1451,34 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.asset.model.AssetCategoryProperty ");
+					"SELECT assetCategoryProperty FROM AssetCategoryProperty assetCategoryProperty ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("assetCategoryProperty.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("key_ ASC");
+					query.append("assetCategoryProperty.key ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1443,11 +1562,11 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
+				query.append("SELECT COUNT(assetCategoryProperty) ");
 				query.append(
-					"FROM com.liferay.portlet.asset.model.AssetCategoryProperty WHERE ");
+					"FROM AssetCategoryProperty assetCategoryProperty WHERE ");
 
-				query.append("companyId = ?");
+				query.append("assetCategoryProperty.companyId = ?");
 
 				query.append(" ");
 
@@ -1491,11 +1610,11 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
+				query.append("SELECT COUNT(assetCategoryProperty) ");
 				query.append(
-					"FROM com.liferay.portlet.asset.model.AssetCategoryProperty WHERE ");
+					"FROM AssetCategoryProperty assetCategoryProperty WHERE ");
 
-				query.append("categoryId = ?");
+				query.append("assetCategoryProperty.categoryId = ?");
 
 				query.append(" ");
 
@@ -1539,19 +1658,19 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
+				query.append("SELECT COUNT(assetCategoryProperty) ");
 				query.append(
-					"FROM com.liferay.portlet.asset.model.AssetCategoryProperty WHERE ");
+					"FROM AssetCategoryProperty assetCategoryProperty WHERE ");
 
-				query.append("companyId = ?");
+				query.append("assetCategoryProperty.companyId = ?");
 
 				query.append(" AND ");
 
 				if (key == null) {
-					query.append("key_ IS NULL");
+					query.append("assetCategoryProperty.key IS NULL");
 				}
 				else {
-					query.append("key_ = ?");
+					query.append("assetCategoryProperty.key = ?");
 				}
 
 				query.append(" ");
@@ -1601,19 +1720,19 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
+				query.append("SELECT COUNT(assetCategoryProperty) ");
 				query.append(
-					"FROM com.liferay.portlet.asset.model.AssetCategoryProperty WHERE ");
+					"FROM AssetCategoryProperty assetCategoryProperty WHERE ");
 
-				query.append("categoryId = ?");
+				query.append("assetCategoryProperty.categoryId = ?");
 
 				query.append(" AND ");
 
 				if (key == null) {
-					query.append("key_ IS NULL");
+					query.append("assetCategoryProperty.key IS NULL");
 				}
 				else {
-					query.append("key_ = ?");
+					query.append("assetCategoryProperty.key = ?");
 				}
 
 				query.append(" ");
@@ -1661,7 +1780,7 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl
 				session = openSession();
 
 				Query q = session.createQuery(
-						"SELECT COUNT(*) FROM com.liferay.portlet.asset.model.AssetCategoryProperty");
+						"SELECT COUNT(assetCategoryProperty) FROM AssetCategoryProperty assetCategoryProperty");
 
 				count = (Long)q.uniqueResult();
 			}

@@ -460,21 +460,20 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.wiki.model.WikiNode WHERE ");
+				query.append("SELECT wikiNode FROM WikiNode wikiNode WHERE ");
 
 				if (uuid == null) {
-					query.append("uuid_ IS NULL");
+					query.append("wikiNode.uuid IS NULL");
 				}
 				else {
-					query.append("uuid_ = ?");
+					query.append("wikiNode.uuid = ?");
 				}
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("name ASC");
+				query.append("wikiNode.name ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -530,27 +529,43 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.wiki.model.WikiNode WHERE ");
+				query.append("SELECT wikiNode FROM WikiNode wikiNode WHERE ");
 
 				if (uuid == null) {
-					query.append("uuid_ IS NULL");
+					query.append("wikiNode.uuid IS NULL");
 				}
 				else {
-					query.append("uuid_ = ?");
+					query.append("wikiNode.uuid = ?");
 				}
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("wikiNode.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("name ASC");
+					query.append("wikiNode.name ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -639,26 +654,43 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl
 
 			StringBuilder query = new StringBuilder();
 
-			query.append("FROM com.liferay.portlet.wiki.model.WikiNode WHERE ");
+			query.append("SELECT wikiNode FROM WikiNode wikiNode WHERE ");
 
 			if (uuid == null) {
-				query.append("uuid_ IS NULL");
+				query.append("wikiNode.uuid IS NULL");
 			}
 			else {
-				query.append("uuid_ = ?");
+				query.append("wikiNode.uuid = ?");
 			}
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("wikiNode.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("name ASC");
+				query.append("wikiNode.name ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -737,25 +769,24 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.wiki.model.WikiNode WHERE ");
+				query.append("SELECT wikiNode FROM WikiNode wikiNode WHERE ");
 
 				if (uuid == null) {
-					query.append("uuid_ IS NULL");
+					query.append("wikiNode.uuid IS NULL");
 				}
 				else {
-					query.append("uuid_ = ?");
+					query.append("wikiNode.uuid = ?");
 				}
 
 				query.append(" AND ");
 
-				query.append("groupId = ?");
+				query.append("wikiNode.groupId = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("name ASC");
+				query.append("wikiNode.name ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -828,16 +859,15 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.wiki.model.WikiNode WHERE ");
+				query.append("SELECT wikiNode FROM WikiNode wikiNode WHERE ");
 
-				query.append("groupId = ?");
+				query.append("wikiNode.groupId = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("name ASC");
+				query.append("wikiNode.name ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -891,22 +921,38 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.wiki.model.WikiNode WHERE ");
+				query.append("SELECT wikiNode FROM WikiNode wikiNode WHERE ");
 
-				query.append("groupId = ?");
+				query.append("wikiNode.groupId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("wikiNode.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("name ASC");
+					query.append("wikiNode.name ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -993,21 +1039,38 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl
 
 			StringBuilder query = new StringBuilder();
 
-			query.append("FROM com.liferay.portlet.wiki.model.WikiNode WHERE ");
+			query.append("SELECT wikiNode FROM WikiNode wikiNode WHERE ");
 
-			query.append("groupId = ?");
+			query.append("wikiNode.groupId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("wikiNode.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("name ASC");
+				query.append("wikiNode.name ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -1049,16 +1112,15 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.wiki.model.WikiNode WHERE ");
+				query.append("SELECT wikiNode FROM WikiNode wikiNode WHERE ");
 
-				query.append("companyId = ?");
+				query.append("wikiNode.companyId = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("name ASC");
+				query.append("wikiNode.name ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1112,22 +1174,38 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.wiki.model.WikiNode WHERE ");
+				query.append("SELECT wikiNode FROM WikiNode wikiNode WHERE ");
 
-				query.append("companyId = ?");
+				query.append("wikiNode.companyId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("wikiNode.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("name ASC");
+					query.append("wikiNode.name ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1214,21 +1292,38 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl
 
 			StringBuilder query = new StringBuilder();
 
-			query.append("FROM com.liferay.portlet.wiki.model.WikiNode WHERE ");
+			query.append("SELECT wikiNode FROM WikiNode wikiNode WHERE ");
 
-			query.append("companyId = ?");
+			query.append("wikiNode.companyId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("wikiNode.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("name ASC");
+				query.append("wikiNode.name ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -1305,25 +1400,24 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append(
-					"FROM com.liferay.portlet.wiki.model.WikiNode WHERE ");
+				query.append("SELECT wikiNode FROM WikiNode wikiNode WHERE ");
 
-				query.append("groupId = ?");
+				query.append("wikiNode.groupId = ?");
 
 				query.append(" AND ");
 
 				if (name == null) {
-					query.append("name IS NULL");
+					query.append("wikiNode.name IS NULL");
 				}
 				else {
-					query.append("name = ?");
+					query.append("wikiNode.name = ?");
 				}
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("name ASC");
+				query.append("wikiNode.name ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1447,17 +1541,34 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portlet.wiki.model.WikiNode ");
+				query.append("SELECT wikiNode FROM WikiNode wikiNode ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("wikiNode.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("name ASC");
+					query.append("wikiNode.name ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1544,15 +1655,14 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.wiki.model.WikiNode WHERE ");
+				query.append("SELECT COUNT(wikiNode) ");
+				query.append("FROM WikiNode wikiNode WHERE ");
 
 				if (uuid == null) {
-					query.append("uuid_ IS NULL");
+					query.append("wikiNode.uuid IS NULL");
 				}
 				else {
-					query.append("uuid_ = ?");
+					query.append("wikiNode.uuid = ?");
 				}
 
 				query.append(" ");
@@ -1600,20 +1710,19 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.wiki.model.WikiNode WHERE ");
+				query.append("SELECT COUNT(wikiNode) ");
+				query.append("FROM WikiNode wikiNode WHERE ");
 
 				if (uuid == null) {
-					query.append("uuid_ IS NULL");
+					query.append("wikiNode.uuid IS NULL");
 				}
 				else {
-					query.append("uuid_ = ?");
+					query.append("wikiNode.uuid = ?");
 				}
 
 				query.append(" AND ");
 
-				query.append("groupId = ?");
+				query.append("wikiNode.groupId = ?");
 
 				query.append(" ");
 
@@ -1661,11 +1770,10 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.wiki.model.WikiNode WHERE ");
+				query.append("SELECT COUNT(wikiNode) ");
+				query.append("FROM WikiNode wikiNode WHERE ");
 
-				query.append("groupId = ?");
+				query.append("wikiNode.groupId = ?");
 
 				query.append(" ");
 
@@ -1709,11 +1817,10 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.wiki.model.WikiNode WHERE ");
+				query.append("SELECT COUNT(wikiNode) ");
+				query.append("FROM WikiNode wikiNode WHERE ");
 
-				query.append("companyId = ?");
+				query.append("wikiNode.companyId = ?");
 
 				query.append(" ");
 
@@ -1757,19 +1864,18 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.wiki.model.WikiNode WHERE ");
+				query.append("SELECT COUNT(wikiNode) ");
+				query.append("FROM WikiNode wikiNode WHERE ");
 
-				query.append("groupId = ?");
+				query.append("wikiNode.groupId = ?");
 
 				query.append(" AND ");
 
 				if (name == null) {
-					query.append("name IS NULL");
+					query.append("wikiNode.name IS NULL");
 				}
 				else {
-					query.append("name = ?");
+					query.append("wikiNode.name = ?");
 				}
 
 				query.append(" ");
@@ -1817,7 +1923,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl
 				session = openSession();
 
 				Query q = session.createQuery(
-						"SELECT COUNT(*) FROM com.liferay.portlet.wiki.model.WikiNode");
+						"SELECT COUNT(wikiNode) FROM WikiNode wikiNode");
 
 				count = (Long)q.uniqueResult();
 			}

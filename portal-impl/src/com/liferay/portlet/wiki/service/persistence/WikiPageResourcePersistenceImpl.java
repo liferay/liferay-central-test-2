@@ -421,17 +421,17 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.wiki.model.WikiPageResource WHERE ");
+					"SELECT wikiPageResource FROM WikiPageResource wikiPageResource WHERE ");
 
-				query.append("nodeId = ?");
+				query.append("wikiPageResource.nodeId = ?");
 
 				query.append(" AND ");
 
 				if (title == null) {
-					query.append("title IS NULL");
+					query.append("wikiPageResource.title IS NULL");
 				}
 				else {
-					query.append("title = ?");
+					query.append("wikiPageResource.title = ?");
 				}
 
 				query.append(" ");
@@ -560,11 +560,28 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.wiki.model.WikiPageResource ");
+					"SELECT wikiPageResource FROM WikiPageResource wikiPageResource ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("wikiPageResource.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -626,19 +643,18 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.wiki.model.WikiPageResource WHERE ");
+				query.append("SELECT COUNT(wikiPageResource) ");
+				query.append("FROM WikiPageResource wikiPageResource WHERE ");
 
-				query.append("nodeId = ?");
+				query.append("wikiPageResource.nodeId = ?");
 
 				query.append(" AND ");
 
 				if (title == null) {
-					query.append("title IS NULL");
+					query.append("wikiPageResource.title IS NULL");
 				}
 				else {
-					query.append("title = ?");
+					query.append("wikiPageResource.title = ?");
 				}
 
 				query.append(" ");
@@ -686,7 +702,7 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl
 				session = openSession();
 
 				Query q = session.createQuery(
-						"SELECT COUNT(*) FROM com.liferay.portlet.wiki.model.WikiPageResource");
+						"SELECT COUNT(wikiPageResource) FROM WikiPageResource wikiPageResource");
 
 				count = (Long)q.uniqueResult();
 			}

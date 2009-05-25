@@ -561,20 +561,20 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.blogs.model.BlogsEntry WHERE ");
+					"SELECT blogsEntry FROM BlogsEntry blogsEntry WHERE ");
 
 				if (uuid == null) {
-					query.append("uuid_ IS NULL");
+					query.append("blogsEntry.uuid IS NULL");
 				}
 				else {
-					query.append("uuid_ = ?");
+					query.append("blogsEntry.uuid = ?");
 				}
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("displayDate DESC");
+				query.append("blogsEntry.displayDate DESC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -631,26 +631,43 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.blogs.model.BlogsEntry WHERE ");
+					"SELECT blogsEntry FROM BlogsEntry blogsEntry WHERE ");
 
 				if (uuid == null) {
-					query.append("uuid_ IS NULL");
+					query.append("blogsEntry.uuid IS NULL");
 				}
 				else {
-					query.append("uuid_ = ?");
+					query.append("blogsEntry.uuid = ?");
 				}
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("blogsEntry.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("displayDate DESC");
+					query.append("blogsEntry.displayDate DESC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -739,27 +756,43 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 
 			StringBuilder query = new StringBuilder();
 
-			query.append(
-				"FROM com.liferay.portlet.blogs.model.BlogsEntry WHERE ");
+			query.append("SELECT blogsEntry FROM BlogsEntry blogsEntry WHERE ");
 
 			if (uuid == null) {
-				query.append("uuid_ IS NULL");
+				query.append("blogsEntry.uuid IS NULL");
 			}
 			else {
-				query.append("uuid_ = ?");
+				query.append("blogsEntry.uuid = ?");
 			}
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("blogsEntry.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("displayDate DESC");
+				query.append("blogsEntry.displayDate DESC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -840,24 +873,24 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.blogs.model.BlogsEntry WHERE ");
+					"SELECT blogsEntry FROM BlogsEntry blogsEntry WHERE ");
 
 				if (uuid == null) {
-					query.append("uuid_ IS NULL");
+					query.append("blogsEntry.uuid IS NULL");
 				}
 				else {
-					query.append("uuid_ = ?");
+					query.append("blogsEntry.uuid = ?");
 				}
 
 				query.append(" AND ");
 
-				query.append("groupId = ?");
+				query.append("blogsEntry.groupId = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("displayDate DESC");
+				query.append("blogsEntry.displayDate DESC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -932,15 +965,15 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.blogs.model.BlogsEntry WHERE ");
+					"SELECT blogsEntry FROM BlogsEntry blogsEntry WHERE ");
 
-				query.append("groupId = ?");
+				query.append("blogsEntry.groupId = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("displayDate DESC");
+				query.append("blogsEntry.displayDate DESC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -995,21 +1028,38 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.blogs.model.BlogsEntry WHERE ");
+					"SELECT blogsEntry FROM BlogsEntry blogsEntry WHERE ");
 
-				query.append("groupId = ?");
+				query.append("blogsEntry.groupId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("blogsEntry.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("displayDate DESC");
+					query.append("blogsEntry.displayDate DESC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1096,22 +1146,38 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 
 			StringBuilder query = new StringBuilder();
 
-			query.append(
-				"FROM com.liferay.portlet.blogs.model.BlogsEntry WHERE ");
+			query.append("SELECT blogsEntry FROM BlogsEntry blogsEntry WHERE ");
 
-			query.append("groupId = ?");
+			query.append("blogsEntry.groupId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("blogsEntry.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("displayDate DESC");
+				query.append("blogsEntry.displayDate DESC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -1155,15 +1221,15 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.blogs.model.BlogsEntry WHERE ");
+					"SELECT blogsEntry FROM BlogsEntry blogsEntry WHERE ");
 
-				query.append("companyId = ?");
+				query.append("blogsEntry.companyId = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("displayDate DESC");
+				query.append("blogsEntry.displayDate DESC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1218,21 +1284,38 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.blogs.model.BlogsEntry WHERE ");
+					"SELECT blogsEntry FROM BlogsEntry blogsEntry WHERE ");
 
-				query.append("companyId = ?");
+				query.append("blogsEntry.companyId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("blogsEntry.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("displayDate DESC");
+					query.append("blogsEntry.displayDate DESC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1320,22 +1403,38 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 
 			StringBuilder query = new StringBuilder();
 
-			query.append(
-				"FROM com.liferay.portlet.blogs.model.BlogsEntry WHERE ");
+			query.append("SELECT blogsEntry FROM BlogsEntry blogsEntry WHERE ");
 
-			query.append("companyId = ?");
+			query.append("blogsEntry.companyId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("blogsEntry.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("displayDate DESC");
+				query.append("blogsEntry.displayDate DESC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -1379,19 +1478,19 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.blogs.model.BlogsEntry WHERE ");
+					"SELECT blogsEntry FROM BlogsEntry blogsEntry WHERE ");
 
-				query.append("groupId = ?");
+				query.append("blogsEntry.groupId = ?");
 
 				query.append(" AND ");
 
-				query.append("userId = ?");
+				query.append("blogsEntry.userId = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("displayDate DESC");
+				query.append("blogsEntry.displayDate DESC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1448,25 +1547,42 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.blogs.model.BlogsEntry WHERE ");
+					"SELECT blogsEntry FROM BlogsEntry blogsEntry WHERE ");
 
-				query.append("groupId = ?");
+				query.append("blogsEntry.groupId = ?");
 
 				query.append(" AND ");
 
-				query.append("userId = ?");
+				query.append("blogsEntry.userId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("blogsEntry.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("displayDate DESC");
+					query.append("blogsEntry.displayDate DESC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1562,26 +1678,42 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 
 			StringBuilder query = new StringBuilder();
 
-			query.append(
-				"FROM com.liferay.portlet.blogs.model.BlogsEntry WHERE ");
+			query.append("SELECT blogsEntry FROM BlogsEntry blogsEntry WHERE ");
 
-			query.append("groupId = ?");
+			query.append("blogsEntry.groupId = ?");
 
 			query.append(" AND ");
 
-			query.append("userId = ?");
+			query.append("blogsEntry.userId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("blogsEntry.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("displayDate DESC");
+				query.append("blogsEntry.displayDate DESC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -1662,24 +1794,24 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.blogs.model.BlogsEntry WHERE ");
+					"SELECT blogsEntry FROM BlogsEntry blogsEntry WHERE ");
 
-				query.append("groupId = ?");
+				query.append("blogsEntry.groupId = ?");
 
 				query.append(" AND ");
 
 				if (urlTitle == null) {
-					query.append("urlTitle IS NULL");
+					query.append("blogsEntry.urlTitle IS NULL");
 				}
 				else {
-					query.append("urlTitle = ?");
+					query.append("blogsEntry.urlTitle = ?");
 				}
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("displayDate DESC");
+				query.append("blogsEntry.displayDate DESC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1758,28 +1890,28 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.blogs.model.BlogsEntry WHERE ");
+					"SELECT blogsEntry FROM BlogsEntry blogsEntry WHERE ");
 
-				query.append("groupId = ?");
+				query.append("blogsEntry.groupId = ?");
 
 				query.append(" AND ");
 
 				if (displayDate == null) {
-					query.append("displayDate < null");
+					query.append("blogsEntry.displayDate < null");
 				}
 				else {
-					query.append("displayDate < ?");
+					query.append("blogsEntry.displayDate < ?");
 				}
 
 				query.append(" AND ");
 
-				query.append("draft = ?");
+				query.append("blogsEntry.draft = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("displayDate DESC");
+				query.append("blogsEntry.displayDate DESC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1843,34 +1975,51 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.blogs.model.BlogsEntry WHERE ");
+					"SELECT blogsEntry FROM BlogsEntry blogsEntry WHERE ");
 
-				query.append("groupId = ?");
+				query.append("blogsEntry.groupId = ?");
 
 				query.append(" AND ");
 
 				if (displayDate == null) {
-					query.append("displayDate < null");
+					query.append("blogsEntry.displayDate < null");
 				}
 				else {
-					query.append("displayDate < ?");
+					query.append("blogsEntry.displayDate < ?");
 				}
 
 				query.append(" AND ");
 
-				query.append("draft = ?");
+				query.append("blogsEntry.draft = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("blogsEntry.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("displayDate DESC");
+					query.append("blogsEntry.displayDate DESC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1980,35 +2129,51 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 
 			StringBuilder query = new StringBuilder();
 
-			query.append(
-				"FROM com.liferay.portlet.blogs.model.BlogsEntry WHERE ");
+			query.append("SELECT blogsEntry FROM BlogsEntry blogsEntry WHERE ");
 
-			query.append("groupId = ?");
+			query.append("blogsEntry.groupId = ?");
 
 			query.append(" AND ");
 
 			if (displayDate == null) {
-				query.append("displayDate < null");
+				query.append("blogsEntry.displayDate < null");
 			}
 			else {
-				query.append("displayDate < ?");
+				query.append("blogsEntry.displayDate < ?");
 			}
 
 			query.append(" AND ");
 
-			query.append("draft = ?");
+			query.append("blogsEntry.draft = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("blogsEntry.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("displayDate DESC");
+				query.append("blogsEntry.displayDate DESC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -2062,28 +2227,28 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.blogs.model.BlogsEntry WHERE ");
+					"SELECT blogsEntry FROM BlogsEntry blogsEntry WHERE ");
 
-				query.append("companyId = ?");
+				query.append("blogsEntry.companyId = ?");
 
 				query.append(" AND ");
 
 				if (displayDate == null) {
-					query.append("displayDate < null");
+					query.append("blogsEntry.displayDate < null");
 				}
 				else {
-					query.append("displayDate < ?");
+					query.append("blogsEntry.displayDate < ?");
 				}
 
 				query.append(" AND ");
 
-				query.append("draft = ?");
+				query.append("blogsEntry.draft = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("displayDate DESC");
+				query.append("blogsEntry.displayDate DESC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -2147,34 +2312,51 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.blogs.model.BlogsEntry WHERE ");
+					"SELECT blogsEntry FROM BlogsEntry blogsEntry WHERE ");
 
-				query.append("companyId = ?");
+				query.append("blogsEntry.companyId = ?");
 
 				query.append(" AND ");
 
 				if (displayDate == null) {
-					query.append("displayDate < null");
+					query.append("blogsEntry.displayDate < null");
 				}
 				else {
-					query.append("displayDate < ?");
+					query.append("blogsEntry.displayDate < ?");
 				}
 
 				query.append(" AND ");
 
-				query.append("draft = ?");
+				query.append("blogsEntry.draft = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("blogsEntry.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("displayDate DESC");
+					query.append("blogsEntry.displayDate DESC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -2284,35 +2466,51 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 
 			StringBuilder query = new StringBuilder();
 
-			query.append(
-				"FROM com.liferay.portlet.blogs.model.BlogsEntry WHERE ");
+			query.append("SELECT blogsEntry FROM BlogsEntry blogsEntry WHERE ");
 
-			query.append("companyId = ?");
+			query.append("blogsEntry.companyId = ?");
 
 			query.append(" AND ");
 
 			if (displayDate == null) {
-				query.append("displayDate < null");
+				query.append("blogsEntry.displayDate < null");
 			}
 			else {
-				query.append("displayDate < ?");
+				query.append("blogsEntry.displayDate < ?");
 			}
 
 			query.append(" AND ");
 
-			query.append("draft = ?");
+			query.append("blogsEntry.draft = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("blogsEntry.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("displayDate DESC");
+				query.append("blogsEntry.displayDate DESC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -2366,32 +2564,32 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.blogs.model.BlogsEntry WHERE ");
+					"SELECT blogsEntry FROM BlogsEntry blogsEntry WHERE ");
 
-				query.append("groupId = ?");
+				query.append("blogsEntry.groupId = ?");
 
 				query.append(" AND ");
 
-				query.append("userId = ?");
+				query.append("blogsEntry.userId = ?");
 
 				query.append(" AND ");
 
 				if (displayDate == null) {
-					query.append("displayDate < null");
+					query.append("blogsEntry.displayDate < null");
 				}
 				else {
-					query.append("displayDate < ?");
+					query.append("blogsEntry.displayDate < ?");
 				}
 
 				query.append(" AND ");
 
-				query.append("draft = ?");
+				query.append("blogsEntry.draft = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("displayDate DESC");
+				query.append("blogsEntry.displayDate DESC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -2459,38 +2657,55 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.blogs.model.BlogsEntry WHERE ");
+					"SELECT blogsEntry FROM BlogsEntry blogsEntry WHERE ");
 
-				query.append("groupId = ?");
+				query.append("blogsEntry.groupId = ?");
 
 				query.append(" AND ");
 
-				query.append("userId = ?");
+				query.append("blogsEntry.userId = ?");
 
 				query.append(" AND ");
 
 				if (displayDate == null) {
-					query.append("displayDate < null");
+					query.append("blogsEntry.displayDate < null");
 				}
 				else {
-					query.append("displayDate < ?");
+					query.append("blogsEntry.displayDate < ?");
 				}
 
 				query.append(" AND ");
 
-				query.append("draft = ?");
+				query.append("blogsEntry.draft = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("blogsEntry.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("displayDate DESC");
+					query.append("blogsEntry.displayDate DESC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -2608,39 +2823,55 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 
 			StringBuilder query = new StringBuilder();
 
-			query.append(
-				"FROM com.liferay.portlet.blogs.model.BlogsEntry WHERE ");
+			query.append("SELECT blogsEntry FROM BlogsEntry blogsEntry WHERE ");
 
-			query.append("groupId = ?");
+			query.append("blogsEntry.groupId = ?");
 
 			query.append(" AND ");
 
-			query.append("userId = ?");
+			query.append("blogsEntry.userId = ?");
 
 			query.append(" AND ");
 
 			if (displayDate == null) {
-				query.append("displayDate < null");
+				query.append("blogsEntry.displayDate < null");
 			}
 			else {
-				query.append("displayDate < ?");
+				query.append("blogsEntry.displayDate < ?");
 			}
 
 			query.append(" AND ");
 
-			query.append("draft = ?");
+			query.append("blogsEntry.draft = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("blogsEntry.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("displayDate DESC");
+				query.append("blogsEntry.displayDate DESC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -2742,17 +2973,34 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portlet.blogs.model.BlogsEntry ");
+				query.append("SELECT blogsEntry FROM BlogsEntry blogsEntry ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("blogsEntry.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("displayDate DESC");
+					query.append("blogsEntry.displayDate DESC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -2868,15 +3116,14 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.blogs.model.BlogsEntry WHERE ");
+				query.append("SELECT COUNT(blogsEntry) ");
+				query.append("FROM BlogsEntry blogsEntry WHERE ");
 
 				if (uuid == null) {
-					query.append("uuid_ IS NULL");
+					query.append("blogsEntry.uuid IS NULL");
 				}
 				else {
-					query.append("uuid_ = ?");
+					query.append("blogsEntry.uuid = ?");
 				}
 
 				query.append(" ");
@@ -2924,20 +3171,19 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.blogs.model.BlogsEntry WHERE ");
+				query.append("SELECT COUNT(blogsEntry) ");
+				query.append("FROM BlogsEntry blogsEntry WHERE ");
 
 				if (uuid == null) {
-					query.append("uuid_ IS NULL");
+					query.append("blogsEntry.uuid IS NULL");
 				}
 				else {
-					query.append("uuid_ = ?");
+					query.append("blogsEntry.uuid = ?");
 				}
 
 				query.append(" AND ");
 
-				query.append("groupId = ?");
+				query.append("blogsEntry.groupId = ?");
 
 				query.append(" ");
 
@@ -2985,11 +3231,10 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.blogs.model.BlogsEntry WHERE ");
+				query.append("SELECT COUNT(blogsEntry) ");
+				query.append("FROM BlogsEntry blogsEntry WHERE ");
 
-				query.append("groupId = ?");
+				query.append("blogsEntry.groupId = ?");
 
 				query.append(" ");
 
@@ -3033,11 +3278,10 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.blogs.model.BlogsEntry WHERE ");
+				query.append("SELECT COUNT(blogsEntry) ");
+				query.append("FROM BlogsEntry blogsEntry WHERE ");
 
-				query.append("companyId = ?");
+				query.append("blogsEntry.companyId = ?");
 
 				query.append(" ");
 
@@ -3081,15 +3325,14 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.blogs.model.BlogsEntry WHERE ");
+				query.append("SELECT COUNT(blogsEntry) ");
+				query.append("FROM BlogsEntry blogsEntry WHERE ");
 
-				query.append("groupId = ?");
+				query.append("blogsEntry.groupId = ?");
 
 				query.append(" AND ");
 
-				query.append("userId = ?");
+				query.append("blogsEntry.userId = ?");
 
 				query.append(" ");
 
@@ -3136,19 +3379,18 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.blogs.model.BlogsEntry WHERE ");
+				query.append("SELECT COUNT(blogsEntry) ");
+				query.append("FROM BlogsEntry blogsEntry WHERE ");
 
-				query.append("groupId = ?");
+				query.append("blogsEntry.groupId = ?");
 
 				query.append(" AND ");
 
 				if (urlTitle == null) {
-					query.append("urlTitle IS NULL");
+					query.append("blogsEntry.urlTitle IS NULL");
 				}
 				else {
-					query.append("urlTitle = ?");
+					query.append("blogsEntry.urlTitle = ?");
 				}
 
 				query.append(" ");
@@ -3202,24 +3444,23 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.blogs.model.BlogsEntry WHERE ");
+				query.append("SELECT COUNT(blogsEntry) ");
+				query.append("FROM BlogsEntry blogsEntry WHERE ");
 
-				query.append("groupId = ?");
+				query.append("blogsEntry.groupId = ?");
 
 				query.append(" AND ");
 
 				if (displayDate == null) {
-					query.append("displayDate < null");
+					query.append("blogsEntry.displayDate < null");
 				}
 				else {
-					query.append("displayDate < ?");
+					query.append("blogsEntry.displayDate < ?");
 				}
 
 				query.append(" AND ");
 
-				query.append("draft = ?");
+				query.append("blogsEntry.draft = ?");
 
 				query.append(" ");
 
@@ -3274,24 +3515,23 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.blogs.model.BlogsEntry WHERE ");
+				query.append("SELECT COUNT(blogsEntry) ");
+				query.append("FROM BlogsEntry blogsEntry WHERE ");
 
-				query.append("companyId = ?");
+				query.append("blogsEntry.companyId = ?");
 
 				query.append(" AND ");
 
 				if (displayDate == null) {
-					query.append("displayDate < null");
+					query.append("blogsEntry.displayDate < null");
 				}
 				else {
-					query.append("displayDate < ?");
+					query.append("blogsEntry.displayDate < ?");
 				}
 
 				query.append(" AND ");
 
-				query.append("draft = ?");
+				query.append("blogsEntry.draft = ?");
 
 				query.append(" ");
 
@@ -3346,28 +3586,27 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.blogs.model.BlogsEntry WHERE ");
+				query.append("SELECT COUNT(blogsEntry) ");
+				query.append("FROM BlogsEntry blogsEntry WHERE ");
 
-				query.append("groupId = ?");
+				query.append("blogsEntry.groupId = ?");
 
 				query.append(" AND ");
 
-				query.append("userId = ?");
+				query.append("blogsEntry.userId = ?");
 
 				query.append(" AND ");
 
 				if (displayDate == null) {
-					query.append("displayDate < null");
+					query.append("blogsEntry.displayDate < null");
 				}
 				else {
-					query.append("displayDate < ?");
+					query.append("blogsEntry.displayDate < ?");
 				}
 
 				query.append(" AND ");
 
-				query.append("draft = ?");
+				query.append("blogsEntry.draft = ?");
 
 				query.append(" ");
 
@@ -3418,7 +3657,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 				session = openSession();
 
 				Query q = session.createQuery(
-						"SELECT COUNT(*) FROM com.liferay.portlet.blogs.model.BlogsEntry");
+						"SELECT COUNT(blogsEntry) FROM BlogsEntry blogsEntry");
 
 				count = (Long)q.uniqueResult();
 			}

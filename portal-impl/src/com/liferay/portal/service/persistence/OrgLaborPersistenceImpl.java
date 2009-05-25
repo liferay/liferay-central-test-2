@@ -334,16 +334,16 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.OrgLabor WHERE ");
+				query.append("SELECT orgLabor FROM OrgLabor orgLabor WHERE ");
 
-				query.append("organizationId = ?");
+				query.append("orgLabor.organizationId = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("organizationId ASC, ");
-				query.append("typeId ASC");
+				query.append("orgLabor.organizationId ASC, ");
+				query.append("orgLabor.typeId ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -397,22 +397,39 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.OrgLabor WHERE ");
+				query.append("SELECT orgLabor FROM OrgLabor orgLabor WHERE ");
 
-				query.append("organizationId = ?");
+				query.append("orgLabor.organizationId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("orgLabor.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("organizationId ASC, ");
-					query.append("typeId ASC");
+					query.append("orgLabor.organizationId ASC, ");
+					query.append("orgLabor.typeId ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -501,22 +518,39 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl
 
 			StringBuilder query = new StringBuilder();
 
-			query.append("FROM com.liferay.portal.model.OrgLabor WHERE ");
+			query.append("SELECT orgLabor FROM OrgLabor orgLabor WHERE ");
 
-			query.append("organizationId = ?");
+			query.append("orgLabor.organizationId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("orgLabor.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("organizationId ASC, ");
-				query.append("typeId ASC");
+				query.append("orgLabor.organizationId ASC, ");
+				query.append("orgLabor.typeId ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -608,18 +642,35 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.OrgLabor ");
+				query.append("SELECT orgLabor FROM OrgLabor orgLabor ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("orgLabor.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("organizationId ASC, ");
-					query.append("typeId ASC");
+					query.append("orgLabor.organizationId ASC, ");
+					query.append("orgLabor.typeId ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -682,10 +733,10 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append("FROM com.liferay.portal.model.OrgLabor WHERE ");
+				query.append("SELECT COUNT(orgLabor) ");
+				query.append("FROM OrgLabor orgLabor WHERE ");
 
-				query.append("organizationId = ?");
+				query.append("orgLabor.organizationId = ?");
 
 				query.append(" ");
 
@@ -728,7 +779,7 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl
 				session = openSession();
 
 				Query q = session.createQuery(
-						"SELECT COUNT(*) FROM com.liferay.portal.model.OrgLabor");
+						"SELECT COUNT(orgLabor) FROM OrgLabor orgLabor");
 
 				count = (Long)q.uniqueResult();
 			}

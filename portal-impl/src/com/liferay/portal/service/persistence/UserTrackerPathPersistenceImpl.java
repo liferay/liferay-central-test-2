@@ -347,9 +347,9 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portal.model.UserTrackerPath WHERE ");
+					"SELECT userTrackerPath FROM UserTrackerPath userTrackerPath WHERE ");
 
-				query.append("userTrackerId = ?");
+				query.append("userTrackerPath.userTrackerId = ?");
 
 				query.append(" ");
 
@@ -406,15 +406,32 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portal.model.UserTrackerPath WHERE ");
+					"SELECT userTrackerPath FROM UserTrackerPath userTrackerPath WHERE ");
 
-				query.append("userTrackerId = ?");
+				query.append("userTrackerPath.userTrackerId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("userTrackerPath.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -506,15 +523,33 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl
 
 			StringBuilder query = new StringBuilder();
 
-			query.append("FROM com.liferay.portal.model.UserTrackerPath WHERE ");
+			query.append(
+				"SELECT userTrackerPath FROM UserTrackerPath userTrackerPath WHERE ");
 
-			query.append("userTrackerId = ?");
+			query.append("userTrackerPath.userTrackerId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("userTrackerPath.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -608,11 +643,29 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("FROM com.liferay.portal.model.UserTrackerPath ");
+				query.append(
+					"SELECT userTrackerPath FROM UserTrackerPath userTrackerPath ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("userTrackerPath.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -676,11 +729,10 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portal.model.UserTrackerPath WHERE ");
+				query.append("SELECT COUNT(userTrackerPath) ");
+				query.append("FROM UserTrackerPath userTrackerPath WHERE ");
 
-				query.append("userTrackerId = ?");
+				query.append("userTrackerPath.userTrackerId = ?");
 
 				query.append(" ");
 
@@ -723,7 +775,7 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl
 				session = openSession();
 
 				Query q = session.createQuery(
-						"SELECT COUNT(*) FROM com.liferay.portal.model.UserTrackerPath");
+						"SELECT COUNT(userTrackerPath) FROM UserTrackerPath userTrackerPath");
 
 				count = (Long)q.uniqueResult();
 			}

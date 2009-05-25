@@ -460,16 +460,16 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.softwarecatalog.model.SCProductScreenshot WHERE ");
+					"SELECT scProductScreenshot FROM SCProductScreenshot scProductScreenshot WHERE ");
 
-				query.append("productEntryId = ?");
+				query.append("scProductScreenshot.productEntryId = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("productEntryId ASC, ");
-				query.append("priority ASC");
+				query.append("scProductScreenshot.productEntryId ASC, ");
+				query.append("scProductScreenshot.priority ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -524,22 +524,39 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.softwarecatalog.model.SCProductScreenshot WHERE ");
+					"SELECT scProductScreenshot FROM SCProductScreenshot scProductScreenshot WHERE ");
 
-				query.append("productEntryId = ?");
+				query.append("scProductScreenshot.productEntryId = ?");
 
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("scProductScreenshot.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("productEntryId ASC, ");
-					query.append("priority ASC");
+					query.append("scProductScreenshot.productEntryId ASC, ");
+					query.append("scProductScreenshot.priority ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -632,22 +649,39 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl
 			StringBuilder query = new StringBuilder();
 
 			query.append(
-				"FROM com.liferay.portlet.softwarecatalog.model.SCProductScreenshot WHERE ");
+				"SELECT scProductScreenshot FROM SCProductScreenshot scProductScreenshot WHERE ");
 
-			query.append("productEntryId = ?");
+			query.append("scProductScreenshot.productEntryId = ?");
 
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("scProductScreenshot.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
 			}
 
 			else {
 				query.append("ORDER BY ");
 
-				query.append("productEntryId ASC, ");
-				query.append("priority ASC");
+				query.append("scProductScreenshot.productEntryId ASC, ");
+				query.append("scProductScreenshot.priority ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -723,16 +757,16 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.softwarecatalog.model.SCProductScreenshot WHERE ");
+					"SELECT scProductScreenshot FROM SCProductScreenshot scProductScreenshot WHERE ");
 
-				query.append("thumbnailId = ?");
+				query.append("scProductScreenshot.thumbnailId = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("productEntryId ASC, ");
-				query.append("priority ASC");
+				query.append("scProductScreenshot.productEntryId ASC, ");
+				query.append("scProductScreenshot.priority ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -833,16 +867,16 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.softwarecatalog.model.SCProductScreenshot WHERE ");
+					"SELECT scProductScreenshot FROM SCProductScreenshot scProductScreenshot WHERE ");
 
-				query.append("fullImageId = ?");
+				query.append("scProductScreenshot.fullImageId = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("productEntryId ASC, ");
-				query.append("priority ASC");
+				query.append("scProductScreenshot.productEntryId ASC, ");
+				query.append("scProductScreenshot.priority ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -949,20 +983,20 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.softwarecatalog.model.SCProductScreenshot WHERE ");
+					"SELECT scProductScreenshot FROM SCProductScreenshot scProductScreenshot WHERE ");
 
-				query.append("productEntryId = ?");
+				query.append("scProductScreenshot.productEntryId = ?");
 
 				query.append(" AND ");
 
-				query.append("priority = ?");
+				query.append("scProductScreenshot.priority = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("productEntryId ASC, ");
-				query.append("priority ASC");
+				query.append("scProductScreenshot.productEntryId ASC, ");
+				query.append("scProductScreenshot.priority ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1085,18 +1119,35 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"FROM com.liferay.portlet.softwarecatalog.model.SCProductScreenshot ");
+					"SELECT scProductScreenshot FROM SCProductScreenshot scProductScreenshot ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("scProductScreenshot.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
 				}
 
 				else {
 					query.append("ORDER BY ");
 
-					query.append("productEntryId ASC, ");
-					query.append("priority ASC");
+					query.append("scProductScreenshot.productEntryId ASC, ");
+					query.append("scProductScreenshot.priority ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1182,11 +1233,11 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
+				query.append("SELECT COUNT(scProductScreenshot) ");
 				query.append(
-					"FROM com.liferay.portlet.softwarecatalog.model.SCProductScreenshot WHERE ");
+					"FROM SCProductScreenshot scProductScreenshot WHERE ");
 
-				query.append("productEntryId = ?");
+				query.append("scProductScreenshot.productEntryId = ?");
 
 				query.append(" ");
 
@@ -1230,11 +1281,11 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
+				query.append("SELECT COUNT(scProductScreenshot) ");
 				query.append(
-					"FROM com.liferay.portlet.softwarecatalog.model.SCProductScreenshot WHERE ");
+					"FROM SCProductScreenshot scProductScreenshot WHERE ");
 
-				query.append("thumbnailId = ?");
+				query.append("scProductScreenshot.thumbnailId = ?");
 
 				query.append(" ");
 
@@ -1278,11 +1329,11 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
+				query.append("SELECT COUNT(scProductScreenshot) ");
 				query.append(
-					"FROM com.liferay.portlet.softwarecatalog.model.SCProductScreenshot WHERE ");
+					"FROM SCProductScreenshot scProductScreenshot WHERE ");
 
-				query.append("fullImageId = ?");
+				query.append("scProductScreenshot.fullImageId = ?");
 
 				query.append(" ");
 
@@ -1329,15 +1380,15 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(*) ");
+				query.append("SELECT COUNT(scProductScreenshot) ");
 				query.append(
-					"FROM com.liferay.portlet.softwarecatalog.model.SCProductScreenshot WHERE ");
+					"FROM SCProductScreenshot scProductScreenshot WHERE ");
 
-				query.append("productEntryId = ?");
+				query.append("scProductScreenshot.productEntryId = ?");
 
 				query.append(" AND ");
 
-				query.append("priority = ?");
+				query.append("scProductScreenshot.priority = ?");
 
 				query.append(" ");
 
@@ -1382,7 +1433,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl
 				session = openSession();
 
 				Query q = session.createQuery(
-						"SELECT COUNT(*) FROM com.liferay.portlet.softwarecatalog.model.SCProductScreenshot");
+						"SELECT COUNT(scProductScreenshot) FROM SCProductScreenshot scProductScreenshot");
 
 				count = (Long)q.uniqueResult();
 			}
