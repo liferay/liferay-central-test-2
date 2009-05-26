@@ -51,7 +51,7 @@ public class AddNullCommentTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Page Comments Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//span/a[2]");
+		selenium.click("link=Add Comment");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

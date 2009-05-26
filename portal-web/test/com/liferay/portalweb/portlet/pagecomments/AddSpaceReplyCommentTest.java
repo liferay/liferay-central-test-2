@@ -26,13 +26,13 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="AddSecondCommentTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddSpaceReplyCommentTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class AddSecondCommentTest extends BaseTestCase {
-	public void testAddSecondComment() throws Exception {
+public class AddSpaceReplyCommentTest extends BaseTestCase {
+	public void testAddSpaceReplyComment() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -51,7 +51,7 @@ public class AddSecondCommentTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Page Comments Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Add Comment");
+		selenium.click("link=Post Reply");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -59,7 +59,7 @@ public class AddSecondCommentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_107_postReplyBody0")) {
+				if (selenium.isElementPresent("_107_postReplyBody1")) {
 					break;
 				}
 			}
@@ -69,15 +69,12 @@ public class AddSecondCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("_107_postReplyBody0",
-			RuntimeVariables.replace("This is a test page comment 2!"));
-		selenium.type("_107_postReplyBody0",
-			RuntimeVariables.replace("This is a test page comment 2!"));
-		selenium.click(RuntimeVariables.replace("_107_postReplyButton0"));
+		selenium.typeKeys("_107_postReplyBody1",
+			RuntimeVariables.replace("This is a test Space repl comment"));
+		selenium.type("_107_postReplyBody1", RuntimeVariables.replace("   "));
+		selenium.click(RuntimeVariables.replace("_107_postReplyButton1"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
-		assertEquals("This is a test page comment 2!",
-			selenium.getText("//tr[5]/td[2]/div[1]"));
+				"You have entered invalid data. Please try again."));
 	}
 }

@@ -26,13 +26,13 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="AddSecondCommentTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddSpaceCommentTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class AddSecondCommentTest extends BaseTestCase {
-	public void testAddSecondComment() throws Exception {
+public class AddSpaceCommentTest extends BaseTestCase {
+	public void testAddSpaceComment() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -70,14 +70,11 @@ public class AddSecondCommentTest extends BaseTestCase {
 		}
 
 		selenium.typeKeys("_107_postReplyBody0",
-			RuntimeVariables.replace("This is a test page comment 2!"));
-		selenium.type("_107_postReplyBody0",
-			RuntimeVariables.replace("This is a test page comment 2!"));
+			RuntimeVariables.replace("This is a space test."));
+		selenium.type("_107_postReplyBody0", RuntimeVariables.replace("   "));
 		selenium.click(RuntimeVariables.replace("_107_postReplyButton0"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
-		assertEquals("This is a test page comment 2!",
-			selenium.getText("//tr[5]/td[2]/div[1]"));
+				"You have entered invalid data. Please try again."));
 	}
 }

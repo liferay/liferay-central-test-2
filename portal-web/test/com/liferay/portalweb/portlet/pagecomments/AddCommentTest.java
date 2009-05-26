@@ -51,7 +51,7 @@ public class AddCommentTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Page Comments Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//span/a[2]");
+		selenium.click("link=Add Comment");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -77,6 +77,7 @@ public class AddCommentTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
-		assertTrue(selenium.isTextPresent("This is a test page comment!"));
+		assertEquals("This is a test page comment!",
+			selenium.getText("//td[2]/div[1]"));
 	}
 }
