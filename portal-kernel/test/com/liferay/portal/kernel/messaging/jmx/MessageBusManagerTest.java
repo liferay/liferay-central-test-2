@@ -39,6 +39,11 @@ import org.jmock.integration.junit4.JUnit4Mockery;
  */
 public class MessageBusManagerTest extends TestCase {
 
+	public void setUp() throws Exception {
+		_mockery = new JUnit4Mockery();
+		_mBeanServer = ManagementFactory.getPlatformMBeanServer();
+	}
+
 	public void testRegisterMBean() throws Exception {
 		_mBeanServer.registerMBean(
 			new MessageBusManager(_mockery.mock(MessageBus.class)),
@@ -46,11 +51,6 @@ public class MessageBusManagerTest extends TestCase {
 
 		assertTrue(
 			_mBeanServer.isRegistered(MessageBusManager.createObjectName()));
-	}
-
-	protected void setUp() {
-		_mockery = new JUnit4Mockery();
-		_mBeanServer = ManagementFactory.getPlatformMBeanServer();
 	}
 
 	private JUnit4Mockery _mockery;

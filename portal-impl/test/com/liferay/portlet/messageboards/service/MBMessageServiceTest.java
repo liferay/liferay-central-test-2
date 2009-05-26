@@ -45,40 +45,7 @@ import java.util.List;
  */
 public class MBMessageServiceTest extends BaseServiceTestCase {
 
-	public void testAddMessagesConcurrently() throws Exception {
-		int threadCount = 5;
-
-		DoAsUserThread[] threads = new DoAsUserThread[threadCount];
-
-		for (int i = 0; i < threads.length; i++) {
-			String subject = "Test Message " + i;
-
-			threads[i] = new AddMessageThread(_userIds[i], subject);
-		}
-
-		for (DoAsUserThread thread : threads) {
-			thread.start();
-		}
-
-		for (DoAsUserThread thread : threads) {
-			thread.join();
-		}
-
-		int successCount = 0;
-
-		for (DoAsUserThread thread : threads) {
-			if (thread.isSuccess()) {
-				successCount++;
-			}
-		}
-
-		assertTrue(
-			"Only " + successCount + " out of " + threadCount +
-				" threads added messages successfully",
-			successCount == threadCount);
-	}
-
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 
 		String name = "Test Category";
@@ -119,12 +86,45 @@ public class MBMessageServiceTest extends BaseServiceTestCase {
 		_userIds = UserLocalServiceUtil.getGroupUserIds(group.getGroupId());
 	}
 
-	protected void tearDown() throws Exception {
+	public void tearDown() throws Exception {
 		if (_category != null) {
 			MBCategoryServiceUtil.deleteCategory(_category.getCategoryId());
 		}
 
 		super.tearDown();
+	}
+
+	public void testAddMessagesConcurrently() throws Exception {
+		int threadCount = 5;
+
+		DoAsUserThread[] threads = new DoAsUserThread[threadCount];
+
+		for (int i = 0; i < threads.length; i++) {
+			String subject = "Test Message " + i;
+
+			threads[i] = new AddMessageThread(_userIds[i], subject);
+		}
+
+		for (DoAsUserThread thread : threads) {
+			thread.start();
+		}
+
+		for (DoAsUserThread thread : threads) {
+			thread.join();
+		}
+
+		int successCount = 0;
+
+		for (DoAsUserThread thread : threads) {
+			if (thread.isSuccess()) {
+				successCount++;
+			}
+		}
+
+		assertTrue(
+			"Only " + successCount + " out of " + threadCount +
+				" threads added messages successfully",
+			successCount == threadCount);
 	}
 
 	private MBCategory _category;

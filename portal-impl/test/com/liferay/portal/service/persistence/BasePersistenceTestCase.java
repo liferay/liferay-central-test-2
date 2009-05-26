@@ -33,13 +33,13 @@ import com.liferay.portal.util.PropsValues;
  */
 public class BasePersistenceTestCase extends BaseTestCase {
 
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 
 		PropsValues.SPRING_HIBERNATE_SESSION_DELEGATED = false;
 	}
 
-	protected void tearDown() throws Exception {
+	public void tearDown() throws Exception {
 		super.tearDown();
 
 		PropsValues.SPRING_HIBERNATE_SESSION_DELEGATED = true;

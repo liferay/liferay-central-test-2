@@ -43,34 +43,7 @@ import java.io.File;
  */
 public class IGImageServiceTest extends BaseServiceTestCase {
 
-	public void testAddImageWithDuplicateName() throws Exception {
-		String name = "liferay.png";
-		String description = StringPool.BLANK;
-		File image = new File(getClassResource(
-			"com/liferay/portlet/imagegallery/dependencies/" + name).getPath());
-		String contentType = "png";
-
-		ServiceContext serviceContext = new ServiceContext();
-
-		serviceContext.setAddCommunityPermissions(true);
-		serviceContext.setAddGuestPermissions(true);
-
-		IGImageServiceUtil.addImage(
-			_folder.getFolderId(), name, description, image, contentType,
-			serviceContext);
-
-		try {
-			IGImageServiceUtil.addImage(
-				_folder.getFolderId(), name, description, image, contentType,
-				serviceContext);
-
-			fail("Able to add two images of the name " + name);
-		}
-		catch (DuplicateImageNameException dine) {
-		}
-	}
-
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 
 		String name = "Test Folder";
@@ -106,12 +79,39 @@ public class IGImageServiceTest extends BaseServiceTestCase {
 			serviceContext);
 	}
 
-	protected void tearDown() throws Exception {
+	public void tearDown() throws Exception {
 		if (_folder != null) {
 			IGFolderServiceUtil.deleteFolder(_folder.getFolderId());
 		}
 
 		super.tearDown();
+	}
+
+	public void testAddImageWithDuplicateName() throws Exception {
+		String name = "liferay.png";
+		String description = StringPool.BLANK;
+		File image = new File(getClassResource(
+			"com/liferay/portlet/imagegallery/dependencies/" + name).getPath());
+		String contentType = "png";
+
+		ServiceContext serviceContext = new ServiceContext();
+
+		serviceContext.setAddCommunityPermissions(true);
+		serviceContext.setAddGuestPermissions(true);
+
+		IGImageServiceUtil.addImage(
+			_folder.getFolderId(), name, description, image, contentType,
+			serviceContext);
+
+		try {
+			IGImageServiceUtil.addImage(
+				_folder.getFolderId(), name, description, image, contentType,
+				serviceContext);
+
+			fail("Able to add two images of the name " + name);
+		}
+		catch (DuplicateImageNameException dine) {
+		}
 	}
 
 	private IGFolder _folder;

@@ -42,6 +42,17 @@ import com.liferay.portal.util.TestPropsValues;
  */
 public class ResourceLocalServiceTest extends BaseServiceTestCase {
 
+	public void setUp() throws Exception {
+		super.setUp();
+
+		Group group = GroupLocalServiceUtil.getGroup(
+			TestPropsValues.COMPANY_ID, GroupConstants.GUEST);
+
+		_layout = LayoutLocalServiceUtil.getLayout(TestPropsValues.LAYOUT_PLID);
+
+		_userIds = UserLocalServiceUtil.getGroupUserIds(group.getGroupId());
+	}
+
 	public void testAddResourcesConcurrently() throws Exception {
 		int threadCount = 5;
 
@@ -71,17 +82,6 @@ public class ResourceLocalServiceTest extends BaseServiceTestCase {
 			"Only " + successCount + " out of " + threadCount +
 				" threads added resources successfully",
 			successCount == threadCount);
-	}
-
-	protected void setUp() throws Exception {
-		super.setUp();
-
-		Group group = GroupLocalServiceUtil.getGroup(
-			TestPropsValues.COMPANY_ID, GroupConstants.GUEST);
-
-		_layout = LayoutLocalServiceUtil.getLayout(TestPropsValues.LAYOUT_PLID);
-
-		_userIds = UserLocalServiceUtil.getGroupUserIds(group.getGroupId());
 	}
 
 	private Layout _layout;

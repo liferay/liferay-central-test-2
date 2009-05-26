@@ -33,6 +33,10 @@ import com.liferay.portal.util.BaseTestCase;
  */
 public class MediaWikiToCreoleTranslatorTest extends BaseTestCase {
 
+	public void setUp() throws Exception {
+		_translator = new MediaWikiToCreoleTranslator();
+	}
+
 	public void testCleanUnnecessaryHeaderEmphasis1() throws Exception {
 		String content = "== '''title''' ==";
 
@@ -399,12 +403,8 @@ public class MediaWikiToCreoleTranslatorTest extends BaseTestCase {
 		assertEquals(expected, actual);
 	}
 
-	public String _translate(String content) {
+	private String _translate(String content) {
 		return _translator.runRegexps(content);
-	}
-
-	protected void setUp() throws Exception {
-		_translator = new MediaWikiToCreoleTranslator();
 	}
 
 	private MediaWikiToCreoleTranslator _translator;

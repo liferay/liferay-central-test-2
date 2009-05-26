@@ -31,7 +31,7 @@ package com.liferay.portal.util;
  */
 public class MemoryMultiValueMapTest extends MultiValueMapTestCase {
 
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 
 		multiValueMap = new MemoryMultiValueMap<Integer, String>();

@@ -49,11 +49,7 @@ public class IteratorDispatcherDestinationTest extends TestCase {
 
 	public static int UNREGISTER_TASK_COUNT = 10;
 
-	public void testPerformance() throws Exception {
-		_executorService.invokeAll(_tasks);
-	}
-
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		_executorService = Executors.newFixedThreadPool(
 			REGISTER_TASK_COUNT + UNREGISTER_TASK_COUNT);
 
@@ -87,7 +83,7 @@ public class IteratorDispatcherDestinationTest extends TestCase {
 		_startTime = System.currentTimeMillis();
 	}
 
-	protected void tearDown() throws Exception {
+	public void tearDown() throws Exception {
 		_executorService.shutdownNow();
 		_executorService.awaitTermination(120, TimeUnit.SECONDS);
 
@@ -95,6 +91,10 @@ public class IteratorDispatcherDestinationTest extends TestCase {
 		long actualTime = System.currentTimeMillis() - _startTime;
 
 		assertLessThan(expectedTime, actualTime);
+	}
+
+	public void testPerformance() throws Exception {
+		_executorService.invokeAll(_tasks);
 	}
 
 	private Destination _destination;

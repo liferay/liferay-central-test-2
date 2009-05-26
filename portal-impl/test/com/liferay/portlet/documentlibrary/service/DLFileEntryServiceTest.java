@@ -40,6 +40,39 @@ import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
  */
 public class DLFileEntryServiceTest extends BaseServiceTestCase {
 
+	public void setUp() throws Exception {
+		super.setUp();
+
+		long groupId = PortalUtil.getScopeGroupId(TestPropsValues.LAYOUT_PLID);
+
+		String name = "Test Folder";
+		String description = "This is a test folder.";
+
+		ServiceContext serviceContext = new ServiceContext();
+
+		serviceContext.setAddCommunityPermissions(true);
+		serviceContext.setAddGuestPermissions(true);
+
+		try {
+			DLFolderServiceUtil.deleteFolder(
+				groupId, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, name);
+		}
+		catch (NoSuchFolderException nsfe) {
+		}
+
+		_folder = DLFolderServiceUtil.addFolder(
+			groupId, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
+			name, description, serviceContext);
+	}
+
+	public void tearDown() throws Exception {
+		if (_folder != null) {
+			DLFolderServiceUtil.deleteFolder(_folder.getFolderId());
+		}
+
+		super.tearDown();
+	}
+
 	public void testAddFileEntryWithDuplicateName() throws Exception {
 		String fileName = "helloworld.txt";
 		String description = StringPool.BLANK;
@@ -67,39 +100,6 @@ public class DLFileEntryServiceTest extends BaseServiceTestCase {
 		}
 		catch (DuplicateFileException dfe) {
 		}
-	}
-
-	protected void setUp() throws Exception {
-		super.setUp();
-
-		long groupId = PortalUtil.getScopeGroupId(TestPropsValues.LAYOUT_PLID);
-
-		String name = "Test Folder";
-		String description = "This is a test folder.";
-
-		ServiceContext serviceContext = new ServiceContext();
-
-		serviceContext.setAddCommunityPermissions(true);
-		serviceContext.setAddGuestPermissions(true);
-
-		try {
-			DLFolderServiceUtil.deleteFolder(
-				groupId, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, name);
-		}
-		catch (NoSuchFolderException nsfe) {
-		}
-
-		_folder = DLFolderServiceUtil.addFolder(
-			groupId, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
-			name, description, serviceContext);
-	}
-
-	protected void tearDown() throws Exception {
-		if (_folder != null) {
-			DLFolderServiceUtil.deleteFolder(_folder.getFolderId());
-		}
-
-		super.tearDown();
 	}
 
 	private DLFolder _folder;

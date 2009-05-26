@@ -42,11 +42,7 @@ import java.net.URL;
  */
 public class BaseServiceTestCase extends BaseTestCase {
 
-	protected URL getClassResource(String name) {
-		return getClass().getClassLoader().getResource(name);
-	}
-
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 
 		PortalInstances.addCompanyId(TestPropsValues.COMPANY_ID);
@@ -58,6 +54,10 @@ public class BaseServiceTestCase extends BaseTestCase {
 		_permissionChecker = PermissionCheckerFactoryUtil.create(user, true);
 
 		PermissionThreadLocal.setPermissionChecker(_permissionChecker);
+	}
+
+	protected URL getClassResource(String name) {
+		return getClass().getClassLoader().getResource(name);
 	}
 
 	private PermissionChecker _permissionChecker = null;
