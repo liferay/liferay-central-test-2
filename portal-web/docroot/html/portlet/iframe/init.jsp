@@ -24,6 +24,8 @@
 
 <%@ include file="/html/portlet/init.jsp" %>
 
+<%@ page import="com.liferay.portlet.iframe.util.IFrameUtil" %>
+
 <%
 PortletPreferences preferences = renderRequest.getPreferences();
 

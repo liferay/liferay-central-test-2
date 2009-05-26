@@ -76,8 +76,8 @@ if (Validator.isNull(userNameField)) {
 	}
 }
 
-if (Validator.isNull(userName) && Validator.isNotNull(userNameField)) {
-	userName = renderRequest.getRemoteUser();
+if (Validator.isNotNull(userNameField)) {
+	userName = IFrameUtil.getUserName(renderRequest, userName);
 }
 %>
 
@@ -100,8 +100,8 @@ if (Validator.isNull(passwordField)) {
 	}
 }
 
-if (Validator.isNull(password) && Validator.isNotNull(passwordField)) {
-	password = PortalUtil.getUserPassword(renderRequest);
+if (Validator.isNotNull(passwordField)) {
+	password = IFrameUtil.getPassword(renderRequest, password);
 }
 %>
 

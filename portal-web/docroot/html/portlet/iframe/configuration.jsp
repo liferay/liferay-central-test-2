@@ -138,7 +138,7 @@ String htmlAttributes =
 	<legend><liferay-ui:message key="authentication" /></legend>
 
 	<div class="portlet-msg-info" id="<portlet:namespace />currentLoginMsg">
-		<liferay-ui:message key="leave-the-user-name-and-password-fields-blank-to-use-your-current-login-information" />
+		<liferay-ui:message key="you-may-use-the-tokens-email-address-screen-name-userid-and-password" />
 	</div>
 
 	<table class="lfr-table">
