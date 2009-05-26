@@ -39,11 +39,11 @@ public class BaseTestCase extends SeleneseTestCase {
 		InitUtil.initWithSpring();
 	}
 
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		selenium = SeleniumUtil.getSelenium();
 	}
 
-	protected void tearDown() throws Exception {
+	public void tearDown() throws Exception {
 	}
 
 }

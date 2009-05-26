@@ -33,11 +33,11 @@ import com.liferay.portalweb.portal.util.ThemeIds;
  */
 public class IterateThemeTest extends BaseTestCase {
 
-	public void testIterate() throws Exception {
+	public void tearDown() throws Exception {
+		ThemeIds.iterate();
 	}
 
-	protected void tearDown() throws Exception {
-		ThemeIds.iterate();
+	public void testIterate() throws Exception {
 	}
 
 }

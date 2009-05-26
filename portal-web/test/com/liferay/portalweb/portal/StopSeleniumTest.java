@@ -33,11 +33,11 @@ import com.liferay.portalweb.portal.util.SeleniumUtil;
  */
 public class StopSeleniumTest extends BaseTestCase {
 
-	public void testStop() throws Exception {
+	public void tearDown() throws Exception {
+		SeleniumUtil.stopSelenium();
 	}
 
-	protected void tearDown() throws Exception {
-		SeleniumUtil.stopSelenium();
+	public void testStop() throws Exception {
 	}
 
 }
