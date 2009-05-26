@@ -3,7 +3,17 @@
 	border-bottom: 1px solid #9fccff;
 	font-size: 13px;
 	padding: 5px;
+	position: relative;
 	z-index: 300;
+}
+
+.ie7 .dockbar {
+	zoom: 1;
+}
+
+.ie6 .dockbar {
+	height: 10px;
+	position: static;
 }
 
 .dockbar .user-avatar .sign-out {
@@ -215,7 +225,7 @@ html > .lfr-dockbar-pinned {
 }
 
 .dockbar .my-places-container li:hover {
-	background: #eee;
+	background-color: #eee;
 }
 
 .dockbar .my-places-container .page-count {

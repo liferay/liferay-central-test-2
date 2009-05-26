@@ -1,6 +1,12 @@
 .dockbar {
 }
 
+.ie7 .dockbar {
+}
+
+.ie6 .dockbar {
+}
+
 .dockbar .user-avatar .sign-out {
 }
 
