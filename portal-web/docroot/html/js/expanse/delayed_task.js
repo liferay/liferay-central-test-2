@@ -18,12 +18,12 @@ Expanse.DelayedTask = new Expanse.Class(
 		initialize: function(fn, scope, args) {
 			var instance = this;
 
-			instance._id = null;
-			instance._delay = 0;
-			instance._time = 0;
-			instance._fn;
-			instance._scope = scope;
 			instance._args = args;
+			instance._delay = 0;
+			instance._fn = fn;
+			instance._id = null;
+			instance._scope = scope;
+			instance._time = 0;
 
 			instance._base = function() {
 				var now = instance._getTime();
@@ -33,7 +33,7 @@ Expanse.DelayedTask = new Expanse.Class(
 
 					instance._id = null;
 
-					fn.apply(scope, args || []);
+					instance._fn.apply(instance._scope, instance._args || []);
 				}
 			};
 		},
