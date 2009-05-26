@@ -1479,7 +1479,6 @@ ldap=LDAP
 leaderboard=Resultatliste
 leave-a-copy-of-the-forwarded-message=Lagre en kopi av videresendte meldinger
 leave-edit-preferences=Lagre de redigerte innstillingene
-leave-the-user-name-and-password-fields-blank-to-use-your-current-login-information=La brukernavn og passord feltetne være tomme for å bruke din nåværende innloggingsinformasjon
 leave-this-blank-if-the-coupon-does-not-check-for-the-item-sku=La dette feltet være blankt om kupongen ikke motsvarer varens SKU
 leave-this-blank-if-the-coupon-does-not-check-for-the-parent-categories-of-an-item=La dette feltet være blankt om kupongen ikke motsvarer varens øvrige kategorier
 leave=Forlate/la være

@@ -1056,7 +1056,6 @@ layout.types.portlet=پرتلت
 layout.types.url=URL
 layout=لايه نمايش
 leave-edit-preferences=خروج از ويرايش تنظيمات
-leave-the-user-name-and-password-fields-blank-to-use-your-current-login-information=* برای استفاده از اطلاعات فعلی حساب شما، قسمت نام و کلمه عبور را خالی بگذاريد
 leave-this-blank-if-the-coupon-does-not-check-for-the-item-sku=اگر SKU محصول برای کوپن چک نمی شود، اين قسمت را خالی بگذاريد.
 leave-this-blank-if-the-coupon-does-not-check-for-the-parent-categories-of-an-item=اگر کوپن طبقه بندی مادر را چک نمی کند، اين قسمت را خالی بگذاريد.
 left=چپ
