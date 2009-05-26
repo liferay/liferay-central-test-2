@@ -51,7 +51,11 @@
 		$theme.wrapPortlet("portlet.vm", $content_include)
 	#end
 
-	<div id="footer"></div>
+	<div id="footer">
+		<div class="powered-by">
+			Powered by <a href="http://www.liferay.com">Liferay</a>
+		</div>
+	</div>
 </div>
 
 </body>

@@ -273,3 +273,11 @@ body.lfr-has-sidebar {
 	padding-left: 270px;
 	width: auto;
 }
+
+/* ---------- Footer ---------- */
+
+#footer {
+	margin: 0 auto;
+	text-align: right;
+	width: 90%;
+}
