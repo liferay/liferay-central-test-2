@@ -93,7 +93,7 @@ public class PortletAutoDeployListener extends BaseAutoDeployListener {
 		}
 	}
 
-	protected AutoDeployer getMvcDeployer() throws AutoDeployException {
+	protected AutoDeployer getMvcDeployer() {
 		if (_mvcDeployer == null) {
 			_mvcDeployer = new MVCPortletAutoDeployer();
 		}

@@ -97,8 +97,6 @@ public class WikiActivityInterpreter extends BaseSocialActivityInterpreter {
 			titlePattern += "-in";
 		}
 
-		StringBuilder sb = new StringBuilder();
-
 		String pageTitle = wrapLink(
 			link, cleanContent(pageResource.getTitle()));
 
