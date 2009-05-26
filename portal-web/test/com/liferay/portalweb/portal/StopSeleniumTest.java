@@ -36,7 +36,7 @@ public class StopSeleniumTest extends BaseTestCase {
 	public void testStop() throws Exception {
 	}
 
-	public void tearDown() throws Exception {
+	protected void tearDown() throws Exception {
 		SeleniumUtil.stopSelenium();
 	}
 

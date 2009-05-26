@@ -36,7 +36,7 @@ public class IterateThemeTest extends BaseTestCase {
 	public void testIterate() throws Exception {
 	}
 
-	public void tearDown() throws Exception {
+	protected void tearDown() throws Exception {
 		ThemeIds.iterate();
 	}
 
