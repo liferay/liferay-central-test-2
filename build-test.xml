@@ -25,6 +25,7 @@
 		</exec>
 
 		<echo file="${lp.plugins.dir}/build.${user.name}.properties">app.server.dir=${simple.server.dir}
+app.server.lib.global.dir=${simple.server.lib.global.dir}
 app.server.portal.dir=${simple.server.portal.dir}
 
 plugins.includes=${plugins.includes}</echo>
@@ -456,6 +457,7 @@ file.
 			<param name="simple.server.dir" value="${app.server.tomcat.dir}" />
 			<param name="simple.server.bin.dir" value="${app.server.tomcat.bin.dir}" />
 			<param name="simple.server.deploy.dir" value="${app.server.tomcat.deploy.dir}" />
+			<param name="simple.server.lib.global.dir" value="${app.server.tomcat.lib.global.dir}" />
 			<param name="simple.server.portal.dir" value="${app.server.tomcat.portal.dir}" />
 			<param name="simple.server.start.executable" value="catalina${file.suffix.bat}" />
 			<param name="simple.server.start.executable.arg.line" value="run" />
