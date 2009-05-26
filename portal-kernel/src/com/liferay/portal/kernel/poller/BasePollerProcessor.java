@@ -60,6 +60,17 @@ public abstract class BasePollerProcessor implements PollerProcessor {
 	protected abstract void doSend(PollerRequest pollerRequest)
 		throws Exception;
 
+	protected boolean getBoolean(PollerRequest pollerRequest, String name) {
+		return getBoolean(pollerRequest, name, GetterUtil.DEFAULT_BOOLEAN);
+	}
+
+	protected boolean getBoolean(
+		PollerRequest pollerRequest, String name, boolean defaultValue) {
+
+		return GetterUtil.getBoolean(
+			pollerRequest.getParameterMap().get(name), defaultValue);
+	}
+
 	protected double getDouble(
 		PollerRequest pollerRequest, String name) {
 
