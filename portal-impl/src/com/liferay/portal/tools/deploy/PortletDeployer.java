@@ -559,6 +559,10 @@ public class PortletDeployer extends BaseDeployer {
 	}
 
 	protected void updatePortletXML(File portletXML) throws Exception {
+		if (!portletXML.exists()) {
+			return;
+		}
+
 		String content = FileUtil.read(portletXML);
 
 		content = StringUtil.replace(
