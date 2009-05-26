@@ -19,7 +19,7 @@ import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 public class ${entity.name}PersistenceTest extends BasePersistenceTestCase {
 
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 
 		_persistence = (${entity.name}Persistence)${beanLocatorUtilShortName}.locate(${entity.name}Persistence.class.getName() + ".impl");
