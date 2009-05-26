@@ -28,7 +28,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
 import com.liferay.portal.util.PortalUtil;
 
-import javax.portlet.RenderRequest;
+import javax.portlet.PortletRequest;
 
 /**
  * <a href="IFrameUtil.java.html"><b><i>View Source</i></b></a>
@@ -38,18 +38,28 @@ import javax.portlet.RenderRequest;
  */
 public class IFrameUtil {
 
+	public static String getPassword(
+		PortletRequest portletRequest, String password) {
+
+		if (Validator.isNull(password) || password.equals("@password@")) {
+			password = PortalUtil.getUserPassword(portletRequest);
+		}
+
+		return password;
+	}
+
 	public static String getUserName(
-			RenderRequest renderRequest, String userName)
+			PortletRequest portletRequest, String userName)
 		throws PortalException, SystemException {
 
-		User user = PortalUtil.getUser(renderRequest);
+		User user = PortalUtil.getUser(portletRequest);
 
 		if (user == null) {
 			return userName;
 		}
 
 		if (Validator.isNull(userName) || userName.equals("@user_id@")) {
-			userName = renderRequest.getRemoteUser();
+			userName = portletRequest.getRemoteUser();
 		}
 		else if (userName.equals("@email_address@")) {
 			userName = user.getEmailAddress();
@@ -59,16 +69,6 @@ public class IFrameUtil {
 		}
 
 		return userName;
-	}
-
-	public static String getPassword(
-		RenderRequest renderRequest, String password) {
-
-		if (Validator.isNull(password) || password.equals("@password@")) {
-			password = PortalUtil.getUserPassword(renderRequest);
-		}
-
-		return password;
 	}
 
 }
