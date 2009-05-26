@@ -219,6 +219,10 @@ html > .lfr-dockbar-pinned {
 	padding: 2px 5px;
 }
 
+.ie7 .dockbar .my-places-container li, .ie6 .dockbar .my-places-container li {
+	vertical-align: bottom;
+}
+
 .dockbar .my-places-container li.current-community {
 	background: #A8D6ED url(../images/arrows/01_right.png) no-repeat scroll 2px 30%;
 	padding-left: 20px;

@@ -118,6 +118,9 @@ html > .lfr-dockbar-pinned {
 .dockbar .my-places-container li {
 }
 
+.ie7 .dockbar .my-places-container li, .ie6 .dockbar .my-places-container li {
+}
+
 .dockbar .my-places-container li.current-community {
 }
 
