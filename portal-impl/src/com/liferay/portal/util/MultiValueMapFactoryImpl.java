@@ -22,27 +22,26 @@
 
 package com.liferay.portal.util;
 
-import com.liferay.portal.image.ImageProcessorImplTest;
+import com.liferay.portal.kernel.util.MultiValueMap;
+import com.liferay.portal.kernel.util.MultiValueMapFactory;
 
-import junit.framework.Test;
-import junit.framework.TestSuite;
+import java.io.Serializable;
 
 /**
- * <a href="MiscTestSuite.java.html"><b><i>View Source</i></b></a>
+ * <a href="MultiValueMapFactoryImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class MiscTestSuite extends TestSuite {
+public class MultiValueMapFactoryImpl implements MultiValueMapFactory {
 
-	public static Test suite() {
-		TestSuite testSuite = new TestSuite();
-
-		testSuite.addTestSuite(FileMultiValueMapTest.class);
-		testSuite.addTestSuite(ImageProcessorImplTest.class);
-		testSuite.addTestSuite(MemoryMultiValueMapTest.class);
-
-		return testSuite;
+	public MultiValueMap<?, ?> getMultiValueMap(int type) {
+		if (type == MultiValueMapFactory.FILE) {
+			return new FileMultiValueMap<Serializable, Serializable>();
+		}
+		else {
+			return new MemoryMultiValueMap<Serializable, Serializable>();
+		}
 	}
 
 }

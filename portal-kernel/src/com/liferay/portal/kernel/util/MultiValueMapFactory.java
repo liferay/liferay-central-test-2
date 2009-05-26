@@ -20,29 +20,20 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.util;
-
-import com.liferay.portal.image.ImageProcessorImplTest;
-
-import junit.framework.Test;
-import junit.framework.TestSuite;
+package com.liferay.portal.kernel.util;
 
 /**
- * <a href="MiscTestSuite.java.html"><b><i>View Source</i></b></a>
+ * <a href="MultiValueMapFactory.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class MiscTestSuite extends TestSuite {
+public interface MultiValueMapFactory {
 
-	public static Test suite() {
-		TestSuite testSuite = new TestSuite();
+	public static final int FILE = 1;
 
-		testSuite.addTestSuite(FileMultiValueMapTest.class);
-		testSuite.addTestSuite(ImageProcessorImplTest.class);
-		testSuite.addTestSuite(MemoryMultiValueMapTest.class);
+	public static final int MEMORY = 0;
 
-		return testSuite;
-	}
+	public MultiValueMap<?, ?> getMultiValueMap(int type);
 
 }

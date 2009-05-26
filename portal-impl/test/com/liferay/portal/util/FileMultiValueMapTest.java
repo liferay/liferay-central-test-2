@@ -22,27 +22,19 @@
 
 package com.liferay.portal.util;
 
-import com.liferay.portal.image.ImageProcessorImplTest;
-
-import junit.framework.Test;
-import junit.framework.TestSuite;
-
 /**
- * <a href="MiscTestSuite.java.html"><b><i>View Source</i></b></a>
+ * <a href="FileMultiValueMapTest.java.html"><b><i>View Source</i></b></a>
  *
+ * @author Alexander Chow
  * @author Brian Wing Shun Chan
  *
  */
-public class MiscTestSuite extends TestSuite {
+public class FileMultiValueMapTest extends MultiValueMapTestCase {
 
-	public static Test suite() {
-		TestSuite testSuite = new TestSuite();
+	protected void setUp() throws Exception {
+		super.setUp();
 
-		testSuite.addTestSuite(FileMultiValueMapTest.class);
-		testSuite.addTestSuite(ImageProcessorImplTest.class);
-		testSuite.addTestSuite(MemoryMultiValueMapTest.class);
-
-		return testSuite;
+		multiValueMap = new FileMultiValueMap<Integer, String>();
 	}
 
 }
