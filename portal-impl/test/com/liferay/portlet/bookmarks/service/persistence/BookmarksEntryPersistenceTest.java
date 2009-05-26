@@ -36,7 +36,7 @@ import com.liferay.portlet.bookmarks.model.BookmarksEntry;
  *
  */
 public class BookmarksEntryPersistenceTest extends BasePersistenceTestCase {
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 
 		_persistence = (BookmarksEntryPersistence)PortalBeanLocatorUtil.locate(BookmarksEntryPersistence.class.getName() +

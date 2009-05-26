@@ -36,7 +36,7 @@ import com.liferay.portlet.messageboards.model.MBBan;
  *
  */
 public class MBBanPersistenceTest extends BasePersistenceTestCase {
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 
 		_persistence = (MBBanPersistence)PortalBeanLocatorUtil.locate(MBBanPersistence.class.getName() +

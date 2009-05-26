@@ -35,7 +35,7 @@ import com.liferay.portlet.expando.model.ExpandoValue;
  *
  */
 public class ExpandoValuePersistenceTest extends BasePersistenceTestCase {
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 
 		_persistence = (ExpandoValuePersistence)PortalBeanLocatorUtil.locate(ExpandoValuePersistence.class.getName() +

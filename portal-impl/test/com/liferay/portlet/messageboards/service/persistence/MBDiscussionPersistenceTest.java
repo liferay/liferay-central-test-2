@@ -35,7 +35,7 @@ import com.liferay.portlet.messageboards.model.MBDiscussion;
  *
  */
 public class MBDiscussionPersistenceTest extends BasePersistenceTestCase {
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 
 		_persistence = (MBDiscussionPersistence)PortalBeanLocatorUtil.locate(MBDiscussionPersistence.class.getName() +

@@ -36,7 +36,7 @@ import com.liferay.portlet.documentlibrary.model.DLFileEntry;
  *
  */
 public class DLFileEntryPersistenceTest extends BasePersistenceTestCase {
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 
 		_persistence = (DLFileEntryPersistence)PortalBeanLocatorUtil.locate(DLFileEntryPersistence.class.getName() +

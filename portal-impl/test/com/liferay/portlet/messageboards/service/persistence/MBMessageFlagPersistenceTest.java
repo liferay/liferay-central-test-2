@@ -36,7 +36,7 @@ import com.liferay.portlet.messageboards.model.MBMessageFlag;
  *
  */
 public class MBMessageFlagPersistenceTest extends BasePersistenceTestCase {
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 
 		_persistence = (MBMessageFlagPersistence)PortalBeanLocatorUtil.locate(MBMessageFlagPersistence.class.getName() +

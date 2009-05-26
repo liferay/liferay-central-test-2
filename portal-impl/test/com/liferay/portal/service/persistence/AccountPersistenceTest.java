@@ -35,7 +35,7 @@ import com.liferay.portal.service.persistence.BasePersistenceTestCase;
  *
  */
 public class AccountPersistenceTest extends BasePersistenceTestCase {
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 
 		_persistence = (AccountPersistence)PortalBeanLocatorUtil.locate(AccountPersistence.class.getName() +

@@ -36,7 +36,7 @@ import com.liferay.portlet.tags.model.TagsProperty;
  *
  */
 public class TagsPropertyPersistenceTest extends BasePersistenceTestCase {
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 
 		_persistence = (TagsPropertyPersistence)PortalBeanLocatorUtil.locate(TagsPropertyPersistence.class.getName() +

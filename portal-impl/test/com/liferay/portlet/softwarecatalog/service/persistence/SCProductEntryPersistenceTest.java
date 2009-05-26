@@ -36,7 +36,7 @@ import com.liferay.portlet.softwarecatalog.model.SCProductEntry;
  *
  */
 public class SCProductEntryPersistenceTest extends BasePersistenceTestCase {
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 
 		_persistence = (SCProductEntryPersistence)PortalBeanLocatorUtil.locate(SCProductEntryPersistence.class.getName() +

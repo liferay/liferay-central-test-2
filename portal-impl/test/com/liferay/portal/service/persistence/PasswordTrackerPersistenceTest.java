@@ -35,7 +35,7 @@ import com.liferay.portal.service.persistence.BasePersistenceTestCase;
  *
  */
 public class PasswordTrackerPersistenceTest extends BasePersistenceTestCase {
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 
 		_persistence = (PasswordTrackerPersistence)PortalBeanLocatorUtil.locate(PasswordTrackerPersistence.class.getName() +

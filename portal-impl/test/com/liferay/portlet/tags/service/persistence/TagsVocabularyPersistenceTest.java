@@ -36,7 +36,7 @@ import com.liferay.portlet.tags.model.TagsVocabulary;
  *
  */
 public class TagsVocabularyPersistenceTest extends BasePersistenceTestCase {
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 
 		_persistence = (TagsVocabularyPersistence)PortalBeanLocatorUtil.locate(TagsVocabularyPersistence.class.getName() +

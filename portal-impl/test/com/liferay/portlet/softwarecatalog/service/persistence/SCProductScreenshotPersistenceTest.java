@@ -35,7 +35,7 @@ import com.liferay.portlet.softwarecatalog.model.SCProductScreenshot;
  *
  */
 public class SCProductScreenshotPersistenceTest extends BasePersistenceTestCase {
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 
 		_persistence = (SCProductScreenshotPersistence)PortalBeanLocatorUtil.locate(SCProductScreenshotPersistence.class.getName() +

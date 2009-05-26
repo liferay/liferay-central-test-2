@@ -36,7 +36,7 @@ import com.liferay.portlet.imagegallery.model.IGFolder;
  *
  */
 public class IGFolderPersistenceTest extends BasePersistenceTestCase {
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 
 		_persistence = (IGFolderPersistence)PortalBeanLocatorUtil.locate(IGFolderPersistence.class.getName() +

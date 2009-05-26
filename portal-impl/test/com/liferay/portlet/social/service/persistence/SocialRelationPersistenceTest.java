@@ -36,7 +36,7 @@ import com.liferay.portlet.social.model.SocialRelation;
  *
  */
 public class SocialRelationPersistenceTest extends BasePersistenceTestCase {
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 
 		_persistence = (SocialRelationPersistence)PortalBeanLocatorUtil.locate(SocialRelationPersistence.class.getName() +

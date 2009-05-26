@@ -34,7 +34,7 @@ import com.liferay.portal.service.persistence.BasePersistenceTestCase;
  *
  */
 public class ListTypePersistenceTest extends BasePersistenceTestCase {
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 
 		_persistence = (ListTypePersistence)PortalBeanLocatorUtil.locate(ListTypePersistence.class.getName() +

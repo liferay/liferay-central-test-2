@@ -36,7 +36,7 @@ import com.liferay.portlet.documentlibrary.model.DLFolder;
  *
  */
 public class DLFolderPersistenceTest extends BasePersistenceTestCase {
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 
 		_persistence = (DLFolderPersistence)PortalBeanLocatorUtil.locate(DLFolderPersistence.class.getName() +

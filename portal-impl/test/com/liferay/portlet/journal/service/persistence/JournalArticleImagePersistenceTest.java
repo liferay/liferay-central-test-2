@@ -35,7 +35,7 @@ import com.liferay.portlet.journal.model.JournalArticleImage;
  *
  */
 public class JournalArticleImagePersistenceTest extends BasePersistenceTestCase {
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 
 		_persistence = (JournalArticleImagePersistence)PortalBeanLocatorUtil.locate(JournalArticleImagePersistence.class.getName() +

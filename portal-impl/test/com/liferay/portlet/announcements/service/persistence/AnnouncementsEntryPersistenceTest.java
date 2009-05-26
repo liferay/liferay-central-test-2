@@ -36,7 +36,7 @@ import com.liferay.portlet.announcements.model.AnnouncementsEntry;
  *
  */
 public class AnnouncementsEntryPersistenceTest extends BasePersistenceTestCase {
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 
 		_persistence = (AnnouncementsEntryPersistence)PortalBeanLocatorUtil.locate(AnnouncementsEntryPersistence.class.getName() +

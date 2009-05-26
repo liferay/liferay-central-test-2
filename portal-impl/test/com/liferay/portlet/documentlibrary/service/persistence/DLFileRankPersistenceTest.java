@@ -36,7 +36,7 @@ import com.liferay.portlet.documentlibrary.model.DLFileRank;
  *
  */
 public class DLFileRankPersistenceTest extends BasePersistenceTestCase {
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 
 		_persistence = (DLFileRankPersistence)PortalBeanLocatorUtil.locate(DLFileRankPersistence.class.getName() +

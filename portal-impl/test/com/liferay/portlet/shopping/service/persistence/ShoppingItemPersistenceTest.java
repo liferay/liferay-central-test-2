@@ -36,7 +36,7 @@ import com.liferay.portlet.shopping.model.ShoppingItem;
  *
  */
 public class ShoppingItemPersistenceTest extends BasePersistenceTestCase {
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 
 		_persistence = (ShoppingItemPersistence)PortalBeanLocatorUtil.locate(ShoppingItemPersistence.class.getName() +

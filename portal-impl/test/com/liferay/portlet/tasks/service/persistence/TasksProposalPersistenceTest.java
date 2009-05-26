@@ -36,7 +36,7 @@ import com.liferay.portlet.tasks.model.TasksProposal;
  *
  */
 public class TasksProposalPersistenceTest extends BasePersistenceTestCase {
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 
 		_persistence = (TasksProposalPersistence)PortalBeanLocatorUtil.locate(TasksProposalPersistence.class.getName() +

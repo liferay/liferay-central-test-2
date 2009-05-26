@@ -36,7 +36,7 @@ import com.liferay.portlet.calendar.model.CalEvent;
  *
  */
 public class CalEventPersistenceTest extends BasePersistenceTestCase {
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 
 		_persistence = (CalEventPersistence)PortalBeanLocatorUtil.locate(CalEventPersistence.class.getName() +

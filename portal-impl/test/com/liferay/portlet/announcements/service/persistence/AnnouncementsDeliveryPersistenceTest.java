@@ -36,7 +36,7 @@ import com.liferay.portlet.announcements.model.AnnouncementsDelivery;
  */
 public class AnnouncementsDeliveryPersistenceTest
 	extends BasePersistenceTestCase {
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 
 		_persistence = (AnnouncementsDeliveryPersistence)PortalBeanLocatorUtil.locate(AnnouncementsDeliveryPersistence.class.getName() +

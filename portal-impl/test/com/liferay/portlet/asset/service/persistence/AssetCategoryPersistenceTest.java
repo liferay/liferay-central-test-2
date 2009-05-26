@@ -36,7 +36,7 @@ import com.liferay.portlet.asset.model.AssetCategory;
  *
  */
 public class AssetCategoryPersistenceTest extends BasePersistenceTestCase {
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 
 		_persistence = (AssetCategoryPersistence)PortalBeanLocatorUtil.locate(AssetCategoryPersistence.class.getName() +

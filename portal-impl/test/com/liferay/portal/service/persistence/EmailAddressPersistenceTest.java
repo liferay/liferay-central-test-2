@@ -35,7 +35,7 @@ import com.liferay.portal.service.persistence.BasePersistenceTestCase;
  *
  */
 public class EmailAddressPersistenceTest extends BasePersistenceTestCase {
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 
 		_persistence = (EmailAddressPersistence)PortalBeanLocatorUtil.locate(EmailAddressPersistence.class.getName() +

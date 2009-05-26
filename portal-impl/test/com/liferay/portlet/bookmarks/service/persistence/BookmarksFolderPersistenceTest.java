@@ -36,7 +36,7 @@ import com.liferay.portlet.bookmarks.model.BookmarksFolder;
  *
  */
 public class BookmarksFolderPersistenceTest extends BasePersistenceTestCase {
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 
 		_persistence = (BookmarksFolderPersistence)PortalBeanLocatorUtil.locate(BookmarksFolderPersistence.class.getName() +

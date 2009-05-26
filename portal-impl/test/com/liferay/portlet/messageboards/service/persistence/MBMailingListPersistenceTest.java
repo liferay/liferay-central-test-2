@@ -36,7 +36,7 @@ import com.liferay.portlet.messageboards.model.MBMailingList;
  *
  */
 public class MBMailingListPersistenceTest extends BasePersistenceTestCase {
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 
 		_persistence = (MBMailingListPersistence)PortalBeanLocatorUtil.locate(MBMailingListPersistence.class.getName() +

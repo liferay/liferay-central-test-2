@@ -35,7 +35,7 @@ import com.liferay.portlet.expando.model.ExpandoTable;
  *
  */
 public class ExpandoTablePersistenceTest extends BasePersistenceTestCase {
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 
 		_persistence = (ExpandoTablePersistence)PortalBeanLocatorUtil.locate(ExpandoTablePersistence.class.getName() +

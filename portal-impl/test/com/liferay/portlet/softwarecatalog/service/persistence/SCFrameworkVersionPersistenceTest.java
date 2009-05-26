@@ -36,7 +36,7 @@ import com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion;
  *
  */
 public class SCFrameworkVersionPersistenceTest extends BasePersistenceTestCase {
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 
 		_persistence = (SCFrameworkVersionPersistence)PortalBeanLocatorUtil.locate(SCFrameworkVersionPersistence.class.getName() +

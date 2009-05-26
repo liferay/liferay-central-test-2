@@ -36,7 +36,7 @@ import com.liferay.portlet.polls.model.PollsVote;
  *
  */
 public class PollsVotePersistenceTest extends BasePersistenceTestCase {
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 
 		_persistence = (PollsVotePersistence)PortalBeanLocatorUtil.locate(PollsVotePersistence.class.getName() +

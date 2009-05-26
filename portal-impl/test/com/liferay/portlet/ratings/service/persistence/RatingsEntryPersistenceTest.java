@@ -36,7 +36,7 @@ import com.liferay.portlet.ratings.model.RatingsEntry;
  *
  */
 public class RatingsEntryPersistenceTest extends BasePersistenceTestCase {
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 
 		_persistence = (RatingsEntryPersistence)PortalBeanLocatorUtil.locate(RatingsEntryPersistence.class.getName() +

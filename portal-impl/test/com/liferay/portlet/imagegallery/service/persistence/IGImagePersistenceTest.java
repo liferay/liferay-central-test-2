@@ -36,7 +36,7 @@ import com.liferay.portlet.imagegallery.model.IGImage;
  *
  */
 public class IGImagePersistenceTest extends BasePersistenceTestCase {
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 
 		_persistence = (IGImagePersistence)PortalBeanLocatorUtil.locate(IGImagePersistence.class.getName() +

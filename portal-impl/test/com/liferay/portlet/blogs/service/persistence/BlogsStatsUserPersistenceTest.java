@@ -36,7 +36,7 @@ import com.liferay.portlet.blogs.model.BlogsStatsUser;
  *
  */
 public class BlogsStatsUserPersistenceTest extends BasePersistenceTestCase {
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 
 		_persistence = (BlogsStatsUserPersistence)PortalBeanLocatorUtil.locate(BlogsStatsUserPersistence.class.getName() +

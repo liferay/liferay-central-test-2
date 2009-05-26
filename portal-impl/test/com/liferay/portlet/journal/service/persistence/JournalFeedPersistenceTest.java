@@ -36,7 +36,7 @@ import com.liferay.portlet.journal.model.JournalFeed;
  *
  */
 public class JournalFeedPersistenceTest extends BasePersistenceTestCase {
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 
 		_persistence = (JournalFeedPersistence)PortalBeanLocatorUtil.locate(JournalFeedPersistence.class.getName() +

@@ -36,7 +36,7 @@ import com.liferay.portlet.announcements.model.AnnouncementsFlag;
  *
  */
 public class AnnouncementsFlagPersistenceTest extends BasePersistenceTestCase {
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 
 		_persistence = (AnnouncementsFlagPersistence)PortalBeanLocatorUtil.locate(AnnouncementsFlagPersistence.class.getName() +

@@ -36,7 +36,7 @@ import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
  *
  */
 public class DLFileShortcutPersistenceTest extends BasePersistenceTestCase {
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 
 		_persistence = (DLFileShortcutPersistence)PortalBeanLocatorUtil.locate(DLFileShortcutPersistence.class.getName() +

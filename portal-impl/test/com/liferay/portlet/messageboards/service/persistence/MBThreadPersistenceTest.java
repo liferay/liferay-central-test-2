@@ -36,7 +36,7 @@ import com.liferay.portlet.messageboards.model.MBThread;
  *
  */
 public class MBThreadPersistenceTest extends BasePersistenceTestCase {
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 
 		_persistence = (MBThreadPersistence)PortalBeanLocatorUtil.locate(MBThreadPersistence.class.getName() +

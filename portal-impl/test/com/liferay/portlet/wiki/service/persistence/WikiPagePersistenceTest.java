@@ -36,7 +36,7 @@ import com.liferay.portlet.wiki.model.WikiPage;
  *
  */
 public class WikiPagePersistenceTest extends BasePersistenceTestCase {
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 
 		_persistence = (WikiPagePersistence)PortalBeanLocatorUtil.locate(WikiPagePersistence.class.getName() +

@@ -36,7 +36,7 @@ import com.liferay.portlet.wiki.model.WikiNode;
  *
  */
 public class WikiNodePersistenceTest extends BasePersistenceTestCase {
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 
 		_persistence = (WikiNodePersistence)PortalBeanLocatorUtil.locate(WikiNodePersistence.class.getName() +
