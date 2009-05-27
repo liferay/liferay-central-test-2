@@ -267,6 +267,27 @@
 			return messageId;
 		},
 
+		addUnderlay: function(options) {
+			var instance = this;
+
+			if (options.name) {
+				var name = options.name;
+
+				if (!instance[name]) {
+					delete options.name;
+
+					options.zIndex = instance.underlayZIndex++;
+
+					instance[name] = new instance.Underlay(options);
+				}
+				else if (instance[name] && instance[name] instanceof Expanse.Overlay) {
+					instance[name].show();
+				}
+
+				return instance[name];
+			}
+		},
+
 		clearMessages: function(event) {
 			var instance = this;
 
@@ -295,27 +316,6 @@
 			Dom.removeClass(instance.messages.element, 'multiple-messages');
 
 			return messageId;
-		},
-
-		addUnderlay: function(options) {
-			var instance = this;
-
-			if (options.name) {
-				var name = options.name;
-
-				if (!instance[name]) {
-					delete options.name;
-
-					options.zIndex = instance.underlayZIndex++;
-
-					instance[name] = new instance.Underlay(options);
-				}
-				else if (instance[name] && instance[name] instanceof Expanse.Overlay) {
-					instance[name].show();
-				}
-
-				return instance[name];
-			}
 		},
 
 		_createMessage: function(message, messageId) {
