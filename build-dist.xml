@@ -248,7 +248,7 @@
 			/>
 			<zipfileset
 				dir="lib/global"
-				includes="annotations.jar,container.jar,portlet.jar,portlet-container.jar,saw-api.jar"
+				includes="annotations.jar,container.jar,portlet.jar,portlet-container.jar"
 			/>
 			<zipfileset
 				dir="lib/portal"
