@@ -277,8 +277,8 @@ web.server.display.node=true</echo>
 			<arg line="${vm.drive}\${vm.host.cluster-node-1}\${vm.host.cluster-node-1}.vmx stop hard" />
 		</exec>
 
-		<exec dir="${vm.drive}/${vm.host.cluster-node-1}" executable="${vmware-cmd.executable}">
-			<arg line="${vm.drive}\${vm.host.cluster-node-1}\${vm.host.cluster-node-1}.vmx stop hard" />
+		<exec dir="${vm.drive}/${vm.host.cluster-node-2}" executable="${vmware-cmd.executable}">
+			<arg line="${vm.drive}\${vm.host.cluster-node-2}\${vm.host.cluster-node-2}.vmx stop hard" />
 		</exec>
 	</target>
 </project>
