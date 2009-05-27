@@ -68,10 +68,6 @@ public interface DestinationNames {
 	public static final String MESSAGE_BUS_MESSAGE_STATUS =
 		"liferay/message_bus/message_status";
 
-	public static final String RUON = "liferay/ruon";
-
-	public static final String RUON_RESPONSE = "liferay/ruon/response";
-
 	public static final String SAW = "liferay/saw";
 
 	public static final String SCHEDULER = "liferay/scheduler";

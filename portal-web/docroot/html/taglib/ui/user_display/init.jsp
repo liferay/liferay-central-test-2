@@ -24,9 +24,6 @@
 
 <%@ include file="/html/taglib/init.jsp" %>
 
-<%@ page import="com.liferay.client.json.ruon.model.Presence" %>
-<%@ page import="com.liferay.client.json.ruon.util.RUONUtil" %>
-
 <%
 long userId = GetterUtil.getLong((String)request.getAttribute("liferay-ui:user-display:user-id"));
 String userName = GetterUtil.getString((String)request.getAttribute("liferay-ui:user-display:user-name"));

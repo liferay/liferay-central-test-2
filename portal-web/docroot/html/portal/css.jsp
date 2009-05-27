@@ -1781,23 +1781,6 @@ fieldset:last-child, .exp-form fieldset:last-child {
 	display: block;
 }
 
-.taglib-user-display .user-details.user-online .user-name {
-}
-
-.taglib-user-display .user-details .network-list {
-	margin: 10px 0;
-}
-
-.taglib-user-display .user-details .network-list a {
-	background: url() no-repeat 0 50%;
-	display: block;
-	padding-left: 20px;
-}
-
-.taglib-user-display .user-details .network-list .chat-user {
-	background-image: url(<%= themeImagesPath %>/common/conversation.png);
-}
-
 /* ---------- Taglib webdav ---------- */
 
 .js .taglib-webdav.visible {

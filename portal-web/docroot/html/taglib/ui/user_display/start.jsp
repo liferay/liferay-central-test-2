@@ -36,28 +36,6 @@ if (userDisplay != null) {
 if (Validator.isNull(url) && (userDisplay != null)) {
 	url = userDisplay.getDisplayURL(themeDisplay);
 }
-
-List<Presence> presences = null;
-
-if (themeDisplay.isSignedIn() && (userDisplay != null) && (userId != user.getUserId())) {
-	presences = (List<Presence>)request.getAttribute(_REQUEST_ATTRIBUTE_PREFIX + userId);
-
-	if (presences == null) {
-		presences = RUONUtil.getPresences(userId, locale);
-
-		if (presences == null) {
-			presences = new ArrayList<Presence>();
-		}
-
-		request.setAttribute(_REQUEST_ATTRIBUTE_PREFIX + userId, presences);
-	}
-}
-
-boolean online = false;
-
-if ((presences != null) && (presences.size() > 0)) {
-	online = true;
-}
 %>
 
 <div class="taglib-user-display">
@@ -93,7 +71,7 @@ if ((presences != null) && (presences.size() > 0)) {
 	<c:if test="<%= displayStyle == 2 %>">
 	</c:if>
 
-	<div class="user-details <%= online ? "user-online" : "user-offline" %>">
+	<div class="user-details">
 		<c:choose>
 			<c:when test="<%= userDisplay != null %>">
 				<c:if test="<%= urlIsNotNull %>"><a class="user-name" href="<%= url %>"></c:if>
@@ -101,28 +79,8 @@ if ((presences != null) && (presences.size() > 0)) {
 				<%= userDisplay.getFullName() %>
 
 				<c:if test="<%= urlIsNotNull %>"></a></c:if>
-
-				<c:if test="<%= online %>">
-					<ul class="lfr-component network-list">
-
-						<%
-						for (Presence presence : presences) {
-						%>
-
-							<li><%= presence.getOutput() %></li>
-
-						<%
-						}
-						%>
-
-					</ul>
-				</c:if>
 			</c:when>
 			<c:otherwise>
 				<%= userName %>
 			</c:otherwise>
 		</c:choose>
-
-<%!
-private static final String _REQUEST_ATTRIBUTE_PREFIX = "taglib:ui:user_display:";
-%>
