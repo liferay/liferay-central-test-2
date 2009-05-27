@@ -130,6 +130,6 @@ public abstract class BasePermissionChecker implements PermissionChecker {
 	protected Role ownerRole;
 
 	private static Log _log =
-		 LogFactoryUtil.getLog(BasePermissionChecker.class);
+		LogFactoryUtil.getLog(BasePermissionChecker.class);
 
 }

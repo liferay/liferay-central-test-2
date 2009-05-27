@@ -94,6 +94,6 @@ public class UpgradeSoftwareCatalog extends UpgradeProcess {
 	}
 
 	private static Log _log =
-		 LogFactoryUtil.getLog(UpgradeSoftwareCatalog.class);
+		LogFactoryUtil.getLog(UpgradeSoftwareCatalog.class);
 
 }

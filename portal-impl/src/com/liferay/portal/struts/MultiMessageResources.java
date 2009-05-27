@@ -229,7 +229,7 @@ public class MultiMessageResources extends PropertyMessageResources {
 	}
 
 	private static Log _log =
-		 LogFactoryUtil.getLog(MultiMessageResources.class);
+		LogFactoryUtil.getLog(MultiMessageResources.class);
 
 	private Lock _localeReadLock;
 	private ReadWriteLock _localeReadWriteLock;

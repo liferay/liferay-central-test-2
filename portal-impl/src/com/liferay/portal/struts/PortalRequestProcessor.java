@@ -907,7 +907,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 		"/portal/update_terms_of_use";
 
 	private static Log _log =
-		 LogFactoryUtil.getLog(PortalRequestProcessor.class);
+		LogFactoryUtil.getLog(PortalRequestProcessor.class);
 
 	private Set<String> _lastPaths;
 	private Set<String> _publicPaths;

@@ -96,6 +96,6 @@ public class SocialBookmarkTagUtil {
 	}
 
 	private static Log _log =
-		 LogFactoryUtil.getLog(SocialBookmarkTagUtil.class);
+		LogFactoryUtil.getLog(SocialBookmarkTagUtil.class);
 
 }

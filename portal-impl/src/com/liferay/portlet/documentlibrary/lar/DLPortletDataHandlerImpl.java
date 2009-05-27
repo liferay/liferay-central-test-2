@@ -828,6 +828,6 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 		new PortletDataHandlerBoolean(_NAMESPACE, "tags");
 
 	private static Log _log =
-		 LogFactoryUtil.getLog(DLPortletDataHandlerImpl.class);
+		LogFactoryUtil.getLog(DLPortletDataHandlerImpl.class);
 
 }

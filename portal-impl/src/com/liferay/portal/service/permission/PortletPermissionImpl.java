@@ -221,6 +221,6 @@ public class PortletPermissionImpl implements PortletPermission {
 	}
 
 	private static Log _log =
-		 LogFactoryUtil.getLog(PortletPermissionImpl.class);
+		LogFactoryUtil.getLog(PortletPermissionImpl.class);
 
 }

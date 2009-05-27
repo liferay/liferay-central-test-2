@@ -132,6 +132,6 @@ public class LiferayPortletURLImpl extends PortletURLImpl {
 	}
 
 	private static Log _log =
-		 LogFactoryUtil.getLog(LiferayPortletURLImpl.class);
+		LogFactoryUtil.getLog(LiferayPortletURLImpl.class);
 
 }

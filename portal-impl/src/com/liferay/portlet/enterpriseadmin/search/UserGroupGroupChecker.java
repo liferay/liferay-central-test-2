@@ -60,7 +60,7 @@ public class UserGroupGroupChecker extends RowChecker {
 	}
 
 	private static Log _log =
-		 LogFactoryUtil.getLog(UserGroupGroupChecker.class);
+		LogFactoryUtil.getLog(UserGroupGroupChecker.class);
 
 	private Group _group;
 

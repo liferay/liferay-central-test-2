@@ -97,6 +97,6 @@ public class DefaultLandingPageAction extends Action {
 	}
 
 	private static Log _log =
-		 LogFactoryUtil.getLog(DefaultLandingPageAction.class);
+		LogFactoryUtil.getLog(DefaultLandingPageAction.class);
 
 }

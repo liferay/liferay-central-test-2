@@ -62,7 +62,7 @@ public class UserOrganizationChecker extends RowChecker {
 	}
 
 	private static Log _log =
-		 LogFactoryUtil.getLog(UserOrganizationChecker.class);
+		LogFactoryUtil.getLog(UserOrganizationChecker.class);
 
 	private Organization _organization;
 

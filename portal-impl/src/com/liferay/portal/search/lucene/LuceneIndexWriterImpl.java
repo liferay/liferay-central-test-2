@@ -143,6 +143,6 @@ public class LuceneIndexWriterImpl implements IndexWriter {
 	}
 
 	private static Log _log =
-		 LogFactoryUtil.getLog(LuceneIndexWriterImpl.class);
+		LogFactoryUtil.getLog(LuceneIndexWriterImpl.class);
 
 }

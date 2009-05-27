@@ -229,6 +229,6 @@ public class EditConfigurationAction extends PortletAction {
 	}
 
 	private static Log _log =
-		 LogFactoryUtil.getLog(EditConfigurationAction.class);
+		LogFactoryUtil.getLog(EditConfigurationAction.class);
 
 }

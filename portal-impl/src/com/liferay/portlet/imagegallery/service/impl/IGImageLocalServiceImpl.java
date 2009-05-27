@@ -843,6 +843,6 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 	}
 
 	private static Log _log =
-		 LogFactoryUtil.getLog(IGImageLocalServiceImpl.class);
+		LogFactoryUtil.getLog(IGImageLocalServiceImpl.class);
 
 }

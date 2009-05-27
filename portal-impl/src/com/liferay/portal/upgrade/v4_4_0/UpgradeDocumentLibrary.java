@@ -95,6 +95,6 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 	}
 
 	private static Log _log =
-		 LogFactoryUtil.getLog(UpgradeDocumentLibrary.class);
+		LogFactoryUtil.getLog(UpgradeDocumentLibrary.class);
 
 }

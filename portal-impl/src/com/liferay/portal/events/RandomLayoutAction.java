@@ -106,6 +106,6 @@ public class RandomLayoutAction extends Action {
 	}
 
 	private static Log _log =
-		 LogFactoryUtil.getLog(RandomLookAndFeelAction.class);
+		LogFactoryUtil.getLog(RandomLookAndFeelAction.class);
 
 }

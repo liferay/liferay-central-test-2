@@ -63,6 +63,6 @@ public class GarbageCollectorAction extends SessionAction {
 	}
 
 	private static Log _log =
-		 LogFactoryUtil.getLog(GarbageCollectorAction.class);
+		LogFactoryUtil.getLog(GarbageCollectorAction.class);
 
 }

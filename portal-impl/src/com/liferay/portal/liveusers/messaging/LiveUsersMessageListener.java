@@ -80,6 +80,6 @@ public class LiveUsersMessageListener implements MessageListener {
 	}
 
 	private static Log _log =
-		 LogFactoryUtil.getLog(LiveUsersMessageListener.class);
+		LogFactoryUtil.getLog(LiveUsersMessageListener.class);
 
 }

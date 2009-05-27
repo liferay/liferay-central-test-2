@@ -161,6 +161,6 @@ public class PortalSessionListener implements HttpSessionListener {
 	}
 
 	private static Log _log =
-		 LogFactoryUtil.getLog(PortalSessionListener.class);
+		LogFactoryUtil.getLog(PortalSessionListener.class);
 
 }

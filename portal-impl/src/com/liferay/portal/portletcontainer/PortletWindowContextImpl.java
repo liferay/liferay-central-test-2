@@ -549,7 +549,7 @@ public class PortletWindowContextImpl implements PortletWindowContext {
 	}
 
 	private static Log _log =
-		 LogFactoryUtil.getLog(PortletWindowContextImpl.class);
+		LogFactoryUtil.getLog(PortletWindowContextImpl.class);
 
 	private HttpServletRequest _request;
 	private Portlet _portlet;

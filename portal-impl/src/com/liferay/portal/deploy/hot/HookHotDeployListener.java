@@ -898,7 +898,7 @@ public class HookHotDeployListener
 	};
 
 	private static Log _log =
-		 LogFactoryUtil.getLog(HookHotDeployListener.class);
+		LogFactoryUtil.getLog(HookHotDeployListener.class);
 
 	private Map<String, AutoLoginsContainer> _autoLoginsContainerMap =
 		new HashMap<String, AutoLoginsContainer>();

@@ -527,6 +527,6 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 		new PortletDataHandlerBoolean(_NAMESPACE, "tags");
 
 	private static Log _log =
-		 LogFactoryUtil.getLog(IGPortletDataHandlerImpl.class);
+		LogFactoryUtil.getLog(IGPortletDataHandlerImpl.class);
 
 }

@@ -150,6 +150,6 @@ public class MBBanLocalServiceImpl extends MBBanLocalServiceBaseImpl {
 	}
 
 	private static Log _log =
-		 LogFactoryUtil.getLog(MBBanLocalServiceImpl.class);
+		LogFactoryUtil.getLog(MBBanLocalServiceImpl.class);
 
 }

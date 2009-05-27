@@ -89,6 +89,6 @@ public class PortletConfigurationUtil {
 	}
 
 	private static Log _log =
-		 LogFactoryUtil.getLog(PortletConfigurationUtil.class);
+		LogFactoryUtil.getLog(PortletConfigurationUtil.class);
 
 }

@@ -147,6 +147,6 @@ public class BasicAuthHeaderAutoLogin implements AutoLogin {
 	}
 
 	private static Log _log =
-		 LogFactoryUtil.getLog(BasicAuthHeaderAutoLogin.class);
+		LogFactoryUtil.getLog(BasicAuthHeaderAutoLogin.class);
 
 }

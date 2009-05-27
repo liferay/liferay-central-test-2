@@ -142,6 +142,6 @@ public class UpdateArticleFieldAction extends Action {
 	}
 
 	private static Log _log =
-		 LogFactoryUtil.getLog(UpdateArticleFieldAction.class);
+		LogFactoryUtil.getLog(UpdateArticleFieldAction.class);
 
 }

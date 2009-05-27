@@ -1227,7 +1227,7 @@ public class LayoutTypePortletImpl
 	}
 
 	private static Log _log =
-		 LogFactoryUtil.getLog(LayoutTypePortletImpl.class);
+		LogFactoryUtil.getLog(LayoutTypePortletImpl.class);
 
 	private boolean _enablePortletLayoutListener = true;
 

@@ -97,6 +97,6 @@ public class DefaultLogoutPageAction extends Action {
 	}
 
 	private static Log _log =
-		 LogFactoryUtil.getLog(DefaultLogoutPageAction.class);
+		LogFactoryUtil.getLog(DefaultLogoutPageAction.class);
 
 }

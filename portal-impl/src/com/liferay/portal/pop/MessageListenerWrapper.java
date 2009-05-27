@@ -94,7 +94,7 @@ public class MessageListenerWrapper implements MessageListener {
 	}
 
 	private static Log _log =
-		 LogFactoryUtil.getLog(MessageListenerWrapper.class);
+		LogFactoryUtil.getLog(MessageListenerWrapper.class);
 
 	private MessageListener _listener;
 

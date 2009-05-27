@@ -119,6 +119,6 @@ public class EditUserPortraitAction extends PortletAction {
 	}
 
 	private static Log _log =
-		 LogFactoryUtil.getLog(EditUserPortraitAction.class);
+		LogFactoryUtil.getLog(EditUserPortraitAction.class);
 
 }

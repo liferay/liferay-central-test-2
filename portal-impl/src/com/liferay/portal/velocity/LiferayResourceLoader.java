@@ -122,6 +122,6 @@ public class LiferayResourceLoader extends ResourceLoader {
 	}
 
 	private static Log _log =
-		 LogFactoryUtil.getLog(LiferayResourceLoader.class);
+		LogFactoryUtil.getLog(LiferayResourceLoader.class);
 
 }

@@ -118,6 +118,6 @@ public class DirectoryOpenSearchImpl extends BaseOpenSearchImpl {
 	}
 
 	private static Log _log =
-		 LogFactoryUtil.getLog(DirectoryOpenSearchImpl.class);
+		LogFactoryUtil.getLog(DirectoryOpenSearchImpl.class);
 
 }

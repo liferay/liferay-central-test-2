@@ -242,6 +242,6 @@ public class SoftwareCatalogServlet extends HttpServlet {
 	}
 
 	private static Log _log =
-		 LogFactoryUtil.getLog(SoftwareCatalogServlet.class);
+		LogFactoryUtil.getLog(SoftwareCatalogServlet.class);
 
 }

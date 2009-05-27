@@ -110,7 +110,7 @@ public class DataSourceFactoryBean extends AbstractFactoryBean {
 	}
 
 	private static Log _log =
-		 LogFactoryUtil.getLog(DataSourceFactoryBean.class);
+		LogFactoryUtil.getLog(DataSourceFactoryBean.class);
 
 	private String _propertyPrefix;
 

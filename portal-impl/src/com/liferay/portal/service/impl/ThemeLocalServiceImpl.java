@@ -760,7 +760,7 @@ public class ThemeLocalServiceImpl extends ThemeLocalServiceBaseImpl {
 	}
 
 	private static Log _log =
-		 LogFactoryUtil.getLog(ThemeLocalServiceImpl.class);
+		LogFactoryUtil.getLog(ThemeLocalServiceImpl.class);
 
 	private static Map<String, Theme> _themes =
 		new ConcurrentHashMap<String, Theme>();

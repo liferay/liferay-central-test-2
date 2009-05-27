@@ -182,7 +182,7 @@ public class PortletResourceBundles {
 	}
 
 	private static Log _log =
-		 LogFactoryUtil.getLog(PortletResourceBundles.class);
+		LogFactoryUtil.getLog(PortletResourceBundles.class);
 
 	private static PortletResourceBundles _instance =
 		new PortletResourceBundles();

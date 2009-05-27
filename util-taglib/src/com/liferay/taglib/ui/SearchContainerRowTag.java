@@ -301,7 +301,7 @@ public class SearchContainerRowTag extends ParamAndPropertyAncestorTagImpl {
 	}
 
 	private static Log _log =
-		 LogFactoryUtil.getLog(SearchContainerRowTag.class);
+		LogFactoryUtil.getLog(SearchContainerRowTag.class);
 
 	private boolean _bold;
 	private String _className;
