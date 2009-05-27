@@ -37,6 +37,12 @@ public class TestPropsValues {
 	public static final long COMPANY_ID = GetterUtil.getLong(
 		TestPropsUtil.get("company.id"));
 
+	public static final String CLUSTER_NODE_1 =
+		TestPropsUtil.get("cluster.node1");
+
+	public static final String CLUSTER_NODE_2 =
+		TestPropsUtil.get("cluster.node2");
+
 	public static final String PORTAL_URL = TestPropsUtil.get("portal.url");
 
 	public static final String SELENIUM_HOST =

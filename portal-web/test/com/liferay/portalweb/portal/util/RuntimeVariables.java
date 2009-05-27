@@ -24,6 +24,7 @@ package com.liferay.portalweb.portal.util;
 
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.util.ContextReplace;
 
 import java.io.File;
@@ -85,6 +86,16 @@ public class RuntimeVariables {
 		text = StringUtil.replace(
 			text, "//a[contains(@href, 'brochure_WAR_brochuretheme')]",
 			"//a[contains(@href, '" + ThemeIds.getThemeId() + "')]");
+
+		if (Validator.isNotNull(TestPropsValues.CLUSTER_NODE_1)) {
+			text = StringUtil.replace(
+				text, "[$CLUSTER_NODE_1$]", TestPropsValues.CLUSTER_NODE_1);
+		}
+
+		if (Validator.isNotNull(TestPropsValues.CLUSTER_NODE_2)) {
+			text = StringUtil.replace(
+				text, "[$CLUSTER_NODE_2$]", TestPropsValues.CLUSTER_NODE_2);
+		}
 
 		if (_contextReplace == null) {
 			return text;

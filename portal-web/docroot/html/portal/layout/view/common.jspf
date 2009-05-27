@@ -24,7 +24,7 @@
 
 <c:if test="<%= PropsValues.WEB_SERVER_DISPLAY_NODE %>">
 	<div class="portlet-msg-info">
-		<liferay-ui:message key="node" />: <%= PortalUtil.getComputerName() %>
+		<liferay-ui:message key="node" />: <%= PortalUtil.getComputerName().toLowerCase() %>
 	</div>
 </c:if>
 

@@ -54,12 +54,20 @@ public class InetAddressTask extends Task {
 					_hostNameProperty, localHost.getHostName());
 			}
 
-			if (Validator.isNotNull(_vmIdProperty)) {
+			if (Validator.isNotNull(_vmId1Property)) {
 				int id = GetterUtil.getInteger(
 					StringUtil.extractDigits(localHost.getHostName()));
 
 				getProject().setUserProperty(
-					_vmIdProperty, String.valueOf((id * 2) - 1));
+					_vmId1Property, String.valueOf((id * 2) - 1));
+			}
+
+			if (Validator.isNotNull(_vmId2Property)) {
+				int id = GetterUtil.getInteger(
+					StringUtil.extractDigits(localHost.getHostName()));
+
+				getProject().setUserProperty(
+					_vmId2Property, String.valueOf((id * 2)));
 			}
 		}
 		catch (UnknownHostException uhe) {
@@ -75,12 +83,17 @@ public class InetAddressTask extends Task {
 		_hostNameProperty = hostNameProperty;
 	}
 
-	public void setVmIdProperty(String vmIdProperty) {
-		_vmIdProperty = vmIdProperty;
+	public void setVmId1Property(String vmId1Property) {
+		_vmId1Property = vmId1Property;
+	}
+
+	public void setVmId2Property(String vmId2Property) {
+		_vmId2Property = vmId2Property;
 	}
 
 	private String _hostAddressProperty;
 	private String _hostNameProperty;
-	private String _vmIdProperty;
+	private String _vmId1Property;
+	private String _vmId2Property;
 
 }
