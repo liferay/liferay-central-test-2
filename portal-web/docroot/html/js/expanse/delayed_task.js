@@ -22,7 +22,7 @@ Expanse.DelayedTask = new Expanse.Class(
 			instance._delay = 0;
 			instance._fn = fn;
 			instance._id = null;
-			instance._scope = scope;
+			instance._scope = scope || instance;
 			instance._time = 0;
 
 			instance._base = function() {
@@ -55,7 +55,7 @@ Expanse.DelayedTask = new Expanse.Class(
 				instance.cancel();
 			}
 
-			instance._delay = delay;
+			instance._delay = delay || instance._delay;
 			instance._time = instance._getTime();
 
 			instance._fn = newFn || instance._fn;
@@ -63,7 +63,12 @@ Expanse.DelayedTask = new Expanse.Class(
 			instance._args = newArgs || instance._args;
 
 			if (!instance._id) {
-				instance._id = setInterval(instance._base, instance._delay);
+				if (instance._delay > 0) {
+					instance._id = setInterval(instance._base, instance._delay);
+				}
+				else {
+					instance._base();
+				}
 			}
 		},
 
@@ -78,6 +83,7 @@ Expanse.DelayedTask = new Expanse.Class(
 
 			if (instance._id) {
 				clearInterval(instance._id);
+
 				instance._id = null;
 			}
 		},
