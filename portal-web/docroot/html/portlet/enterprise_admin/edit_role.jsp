@@ -124,8 +124,8 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 			}
 			%>
 
-			<div class="lfr-floating-container" id="<portlet:namespace />languageSelector">
-				<div class="lfr-panel">
+			<div class="lfr-floating-container lfr-role-selector" id="<portlet:namespace />languageSelector">
+				<div class="lfr-panel exp-form">
 					<div class="lfr-panel-titlebar">
 						<h3 class="lfr-panel-title"><span><liferay-ui:message key="other-languages" /></span></h3>
 					</div>

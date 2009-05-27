@@ -212,23 +212,23 @@
 	margin-top: 20px;
 }
 
-.portlet-enterprise-admin .lfr-form-row {
+.portlet-enterprise-admin .lfr-form-row, .lfr-role-selector .lfr-form-row {
 	margin-top: 10px;
 	padding-top: 1px;
 }
 
-.ie .portlet-enterprise-admin .lfr-form-row {
+.ie .portlet-enterprise-admin .lfr-form-row, .ie .lfr-role-selector .lfr-form-row {
 	width: 100%;
 }
 
-.portlet-enterprise-admin .lfr-form-row:hover {
+.portlet-enterprise-admin .lfr-form-row:hover, .lfr-role-selector .lfr-form-row:hover {
 	background-color: #DFFCCB;
 	border-bottom: 1px solid #B2FF3A;
 	border-top: 1px solid #B2FF3A;
 	padding-top: 0;
 }
 
-.portlet-enterprise-admin .lfr-form-row .exp-ctrl-holder {
+.portlet-enterprise-admin .lfr-form-row .exp-ctrl-holder, .lfr-role-selector .lfr-form-row .exp-ctrl-holder {
 	clear: none;
 	float: left;
 }
@@ -291,7 +291,7 @@
 	width: 100%;
 }
 
-.portlet-enterprise-admin .exp-form fieldset.exp-form-column {
+.portlet-enterprise-admin .exp-form fieldset.exp-form-column, .lfr-role-selector .exp-form .exp-form-column {
 	margin-right: 10px;
 	width: auto;
 }
@@ -301,7 +301,7 @@
 	width: auto;
 }
 
-.ie6 .portlet-enterprise-admin .exp-form fieldset.exp-form-column {
+.ie6 .portlet-enterprise-admin .exp-form fieldset.exp-form-column, .ie6 .lfr-role-selector .exp-form fieldset.exp-form-column {
 	width: 33%;
 }
 
@@ -444,4 +444,8 @@
 
 .lfr-portlet-toolbar .lfr-toolbar-button.back-button a {
 	padding: 4px 14px;
+}
+
+.lfr-role-selector .exp-form label {
+	margin-right: 0.4em;
 }
