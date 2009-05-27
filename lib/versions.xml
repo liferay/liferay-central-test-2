@@ -1960,17 +1960,6 @@
 		</licenses>
 	</library>
 	<library>
-		<file-name>portal/mirage-api.jar</file-name>
-		<version>0.2 (trunk 275)</version>
-		<project-name>Mirage</project-name>
-		<project-url>http://mirage.dev.java.net</project-url>
-		<licenses>
-			<license>
-				<license-name>CDDL 1.0</license-name>
-			</license>
-		</licenses>
-	</library>
-	<library>
 		<file-name>portal/msnm.jar</file-name>
 		<version>1.2.2</version>
 		<project-name>JMSN - Open source MSN messenger clone</project-name>

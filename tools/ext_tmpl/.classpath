@@ -171,7 +171,6 @@
 	<classpathentry kind="lib" path="lib/portal/log4j.jar"/>
 	<classpathentry kind="lib" path="lib/portal/lucene.jar"/>
 	<classpathentry kind="lib" path="lib/portal/lucene-highlighter.jar"/>
-	<classpathentry kind="lib" path="lib/portal/mirage-api.jar"/>
 	<classpathentry kind="lib" path="lib/portal/msnm.jar"/>
 	<classpathentry kind="lib" path="lib/portal/nekohtml.jar"/>
 	<classpathentry kind="lib" path="lib/portal/odmg.jar"/>
@@ -192,7 +191,6 @@
 	<classpathentry kind="lib" path="lib/portal/rdffilter.jar"/>
 	<classpathentry kind="lib" path="lib/portal/ridl.jar"/>
 	<classpathentry kind="lib" path="lib/portal/rome.jar"/>
-	<classpathentry kind="lib" path="lib/portal/ruon-client.jar"/>
 	<classpathentry kind="lib" path="lib/portal/saaj-api.jar"/>
 	<classpathentry kind="lib" path="lib/portal/saaj-impl.jar"/>
 	<classpathentry kind="lib" path="lib/portal/serializer.jar"/>

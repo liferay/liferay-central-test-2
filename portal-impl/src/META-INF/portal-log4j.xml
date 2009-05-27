@@ -200,10 +200,6 @@
 		<priority value="ERROR" />
 	</category>
 
-	<category name="com.liferay.portal.mirage">
-		<priority value="ERROR" />
-	</category>
-
 	<category name="com.liferay.portal.model.Image">
 		<priority value="ERROR" />
 	</category>
