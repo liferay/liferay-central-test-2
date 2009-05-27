@@ -566,11 +566,11 @@ public class PortalLDAPUtil {
 				while (enu.hasMoreElements()) {
 					SearchResult result = enu.nextElement();
 
-					Attributes attrs = getUserAttributes(
+					Attributes attributes = getUserAttributes(
 						companyId, ctx, getNameInNamespace(companyId, result));
 
 					importLDAPUser(
-						companyId, ctx, attrs, StringPool.BLANK, true);
+						companyId, ctx, attributes, StringPool.BLANK, true);
 				}
 
 				enu.close();
@@ -584,11 +584,11 @@ public class PortalLDAPUtil {
 				while (enu.hasMoreElements()) {
 					SearchResult result = enu.nextElement();
 
-					Attributes attrs = getGroupAttributes(
+					Attributes attributes = getGroupAttributes(
 						companyId, ctx, getNameInNamespace(companyId, result),
 						true);
 
-					importLDAPGroup(companyId, ctx, attrs, true);
+					importLDAPGroup(companyId, ctx, attributes, true);
 				}
 
 				enu.close();
@@ -605,23 +605,23 @@ public class PortalLDAPUtil {
 	}
 
 	public static UserGroup importLDAPGroup(
-			long companyId, LdapContext ctx, Attributes attrs,
+			long companyId, LdapContext ctx, Attributes attributes,
 			boolean importGroupMembership)
 		throws Exception {
 
-		AttributesTransformer attrsTransformer =
+		AttributesTransformer attributesTransformer =
 			AttributesTransformerFactory.getInstance();
 
-		attrs = attrsTransformer.transformGroup(attrs);
+		attributes = attributesTransformer.transformGroup(attributes);
 
 		Properties groupMappings = getGroupMappings(companyId);
 
 		LogUtil.debug(_log, groupMappings);
 
 		String groupName = LDAPUtil.getAttributeValue(
-			attrs, groupMappings.getProperty("groupName")).toLowerCase();
+			attributes, groupMappings.getProperty("groupName")).toLowerCase();
 		String description = LDAPUtil.getAttributeValue(
-			attrs, groupMappings.getProperty("description"));
+			attributes, groupMappings.getProperty("description"));
 
 		// Get or create user group
 
@@ -660,11 +660,12 @@ public class PortalLDAPUtil {
 		// Import users and membership
 
 		if (importGroupMembership && (userGroup != null)) {
-			Attribute attr = attrs.get(groupMappings.getProperty("user"));
+			Attribute attribute = attributes.get(
+				groupMappings.getProperty("user"));
 
-			if (attr != null) {
+			if (attribute != null) {
 				_importUsersAndMembershipFromLDAPGroup(
-					companyId, ctx, userGroup.getUserGroupId(), attr);
+					companyId, ctx, userGroup.getUserGroupId(), attribute);
 			}
 		}
 
@@ -672,14 +673,14 @@ public class PortalLDAPUtil {
 	}
 
 	public static User importLDAPUser(
-			long companyId, LdapContext ctx, Attributes attrs, String password,
-			boolean importGroupMembership)
+			long companyId, LdapContext ctx, Attributes attributes,
+			String password, boolean importGroupMembership)
 		throws Exception {
 
-		AttributesTransformer attrsTransformer =
+		AttributesTransformer attributesTransformer =
 			AttributesTransformerFactory.getInstance();
 
-		attrs = attrsTransformer.transformUser(attrs);
+		attributes = attributesTransformer.transformUser(attributes);
 
 		Properties userMappings = getUserMappings(companyId);
 
@@ -699,21 +700,21 @@ public class PortalLDAPUtil {
 		boolean passwordReset = false;
 		boolean autoScreenName = false;
 		String screenName = LDAPUtil.getAttributeValue(
-			attrs, userMappings.getProperty("screenName")).toLowerCase();
+			attributes, userMappings.getProperty("screenName")).toLowerCase();
 		String emailAddress = LDAPUtil.getAttributeValue(
-			attrs, userMappings.getProperty("emailAddress"));
+			attributes, userMappings.getProperty("emailAddress"));
 		String openId = StringPool.BLANK;
 		Locale locale = defaultUser.getLocale();
 		String firstName = LDAPUtil.getAttributeValue(
-			attrs, userMappings.getProperty("firstName"));
+			attributes, userMappings.getProperty("firstName"));
 		String middleName = LDAPUtil.getAttributeValue(
-			attrs, userMappings.getProperty("middleName"));
+			attributes, userMappings.getProperty("middleName"));
 		String lastName = LDAPUtil.getAttributeValue(
-			attrs, userMappings.getProperty("lastName"));
+			attributes, userMappings.getProperty("lastName"));
 
 		if (Validator.isNull(firstName) || Validator.isNull(lastName)) {
 			String fullName = LDAPUtil.getAttributeValue(
-				attrs, userMappings.getProperty("fullName"));
+				attributes, userMappings.getProperty("fullName"));
 
 			String[] names = LDAPUtil.splitFullName(fullName);
 
@@ -729,7 +730,7 @@ public class PortalLDAPUtil {
 		int birthdayDay = 1;
 		int birthdayYear = 1970;
 		String jobTitle = LDAPUtil.getAttributeValue(
-			attrs, userMappings.getProperty("jobTitle"));
+			attributes, userMappings.getProperty("jobTitle"));
 		long[] groupIds = null;
 		long[] organizationIds = null;
 		long[] roleIds = null;
@@ -786,7 +787,7 @@ public class PortalLDAPUtil {
 			Date ldapUserModifiedDate = null;
 
 			String modifiedDate = LDAPUtil.getAttributeValue(
-				attrs, "modifyTimestamp");
+				attributes, "modifyTimestamp");
 
 			try {
 				if (Validator.isNull(modifiedDate)) {
@@ -921,11 +922,11 @@ public class PortalLDAPUtil {
 			String userMappingsGroup = userMappings.getProperty("group");
 
 			if (userMappingsGroup != null) {
-				Attribute attr = attrs.get(userMappingsGroup);
+				Attribute attribute = attributes.get(userMappingsGroup);
 
-				if (attr != null) {
+				if (attribute != null) {
 					_importGroupsAndMembershipFromLDAPUser(
-						companyId, ctx, user.getUserId(), attr);
+						companyId, ctx, user.getUserId(), attribute);
 				}
 			}
 		}
@@ -1041,7 +1042,7 @@ public class PortalLDAPUtil {
 			String[] attributeIds)
 		throws Exception {
 
-		Attributes attrs = null;
+		Attributes attributes = null;
 
 		String[] auditAttributeIds = {
 			"creatorsName", "createTimestamp", "modifiersName",
@@ -1052,13 +1053,13 @@ public class PortalLDAPUtil {
 
 			// Get complete listing of LDAP attributes (slow)
 
-			attrs = ctx.getAttributes(fullDistinguishedName);
+			attributes = ctx.getAttributes(fullDistinguishedName);
 
 			NamingEnumeration<? extends Attribute> enu = ctx.getAttributes(
 				fullDistinguishedName, auditAttributeIds).getAll();
 
 			while (enu.hasMoreElements()) {
-				attrs.put(enu.nextElement());
+				attributes.put(enu.nextElement());
 			}
 
 			enu.close();
@@ -1077,10 +1078,11 @@ public class PortalLDAPUtil {
 				auditAttributeIds, 0, allAttributeIds, attributeIds.length,
 				auditAttributeIds.length);
 
-			attrs = ctx.getAttributes(fullDistinguishedName, allAttributeIds);
+			attributes = ctx.getAttributes(
+				fullDistinguishedName, allAttributeIds);
 		}
 
-		return attrs;
+		return attributes;
 	}
 
 	private static void _importGroupsAndMembershipFromLDAPUser(
