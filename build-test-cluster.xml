@@ -145,6 +145,8 @@ comm.link.properties=UDP(bind_addr=127.0.0.1;mcast_addr=231.12.21.102;mcast_port
 
 web.server.display.node=true</echo>
 
+		<delete file="portal-impl/src/portal-ext.properties" />
+
 		<exec executable="${pscp.executable}">
 			<arg line="-pw ${vm.password} portal-impl/src/portal-ext.properties ${vm.username}@${cluster-node.host}:/liferay-portal-${lp.version}/tomcat-6.0.18/webapps/ROOT/WEB-INF/classes" />
 		</exec>
