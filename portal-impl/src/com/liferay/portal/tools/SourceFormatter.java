@@ -550,7 +550,7 @@ public class SourceFormatter {
 
 		if (longLogFactoryUtil) {
 			newContent = StringUtil.replace(
-				newContent, "private static Log _log =",
+				newContent, "private static Log _log = ",
 				"private static Log _log =\n\t\t");
 		}
 
