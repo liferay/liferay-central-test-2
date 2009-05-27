@@ -25,6 +25,8 @@ package com.liferay.portlet.social.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
+import com.liferay.portal.model.Group;
+import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.User;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.social.NoSuchActivityException;
@@ -66,6 +68,17 @@ public class SocialActivityLocalServiceImpl
 
 		User user = userPersistence.findByPrimaryKey(userId);
 		long classNameId = PortalUtil.getClassNameId(className);
+
+		if (groupId > 0) {
+			Group group = groupLocalService.getGroup(groupId);
+
+			if (group.isLayout()) {
+				Layout layout = layoutLocalService.getLayout(
+					group.getClassPK());
+
+				groupId = layout.getGroupId();
+			}
+		}
 
 		long activityId = counterLocalService.increment(
 			SocialActivity.class.getName());
