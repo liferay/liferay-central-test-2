@@ -322,19 +322,19 @@ public class ReportsEntryPersistenceImpl extends BasePersistenceImpl
                 StringBuilder query = new StringBuilder();
 
                 query.append(
-                    "FROM com.ext.portlet.reports.model.ReportsEntry WHERE ");
+                    "SELECT reportsEntry FROM ReportsEntry reportsEntry WHERE ");
 
                 if (companyId == null) {
-                    query.append("companyId IS NULL");
+                    query.append("reportsEntry.companyId IS NULL");
                 } else {
-                    query.append("companyId = ?");
+                    query.append("reportsEntry.companyId = ?");
                 }
 
                 query.append(" ");
 
                 query.append("ORDER BY ");
 
-                query.append("name ASC");
+                query.append("reportsEntry.name ASC");
 
                 Query q = session.createQuery(query.toString());
 
@@ -389,24 +389,40 @@ public class ReportsEntryPersistenceImpl extends BasePersistenceImpl
                 StringBuilder query = new StringBuilder();
 
                 query.append(
-                    "FROM com.ext.portlet.reports.model.ReportsEntry WHERE ");
+                    "SELECT reportsEntry FROM ReportsEntry reportsEntry WHERE ");
 
                 if (companyId == null) {
-                    query.append("companyId IS NULL");
+                    query.append("reportsEntry.companyId IS NULL");
                 } else {
-                    query.append("companyId = ?");
+                    query.append("reportsEntry.companyId = ?");
                 }
 
                 query.append(" ");
 
                 if (obc != null) {
                     query.append("ORDER BY ");
-                    query.append(obc.getOrderBy());
+
+                    String[] orderByFields = obc.getOrderByFields();
+
+                    for (int i = 0; i < orderByFields.length; i++) {
+                        query.append("reportsEntry.");
+                        query.append(orderByFields[i]);
+
+                        if (obc.isAscending()) {
+                            query.append(" ASC");
+                        } else {
+                            query.append(" DESC");
+                        }
+
+                        if ((i + 1) < orderByFields.length) {
+                            query.append(", ");
+                        }
+                    }
                 }
                 else {
                     query.append("ORDER BY ");
 
-                    query.append("name ASC");
+                    query.append("reportsEntry.name ASC");
                 }
 
                 Query q = session.createQuery(query.toString());
@@ -494,24 +510,40 @@ public class ReportsEntryPersistenceImpl extends BasePersistenceImpl
             StringBuilder query = new StringBuilder();
 
             query.append(
-                "FROM com.ext.portlet.reports.model.ReportsEntry WHERE ");
+                "SELECT reportsEntry FROM ReportsEntry reportsEntry WHERE ");
 
             if (companyId == null) {
-                query.append("companyId IS NULL");
+                query.append("reportsEntry.companyId IS NULL");
             } else {
-                query.append("companyId = ?");
+                query.append("reportsEntry.companyId = ?");
             }
 
             query.append(" ");
 
             if (obc != null) {
                 query.append("ORDER BY ");
-                query.append(obc.getOrderBy());
+
+                String[] orderByFields = obc.getOrderByFields();
+
+                for (int i = 0; i < orderByFields.length; i++) {
+                    query.append("reportsEntry.");
+                    query.append(orderByFields[i]);
+
+                    if (obc.isAscending()) {
+                        query.append(" ASC");
+                    } else {
+                        query.append(" DESC");
+                    }
+
+                    if ((i + 1) < orderByFields.length) {
+                        query.append(", ");
+                    }
+                }
             }
             else {
                 query.append("ORDER BY ");
 
-                query.append("name ASC");
+                query.append("reportsEntry.name ASC");
             }
 
             Query q = session.createQuery(query.toString());
@@ -555,19 +587,19 @@ public class ReportsEntryPersistenceImpl extends BasePersistenceImpl
                 StringBuilder query = new StringBuilder();
 
                 query.append(
-                    "FROM com.ext.portlet.reports.model.ReportsEntry WHERE ");
+                    "SELECT reportsEntry FROM ReportsEntry reportsEntry WHERE ");
 
                 if (userId == null) {
-                    query.append("userId IS NULL");
+                    query.append("reportsEntry.userId IS NULL");
                 } else {
-                    query.append("userId = ?");
+                    query.append("reportsEntry.userId = ?");
                 }
 
                 query.append(" ");
 
                 query.append("ORDER BY ");
 
-                query.append("name ASC");
+                query.append("reportsEntry.name ASC");
 
                 Query q = session.createQuery(query.toString());
 
@@ -622,24 +654,40 @@ public class ReportsEntryPersistenceImpl extends BasePersistenceImpl
                 StringBuilder query = new StringBuilder();
 
                 query.append(
-                    "FROM com.ext.portlet.reports.model.ReportsEntry WHERE ");
+                    "SELECT reportsEntry FROM ReportsEntry reportsEntry WHERE ");
 
                 if (userId == null) {
-                    query.append("userId IS NULL");
+                    query.append("reportsEntry.userId IS NULL");
                 } else {
-                    query.append("userId = ?");
+                    query.append("reportsEntry.userId = ?");
                 }
 
                 query.append(" ");
 
                 if (obc != null) {
                     query.append("ORDER BY ");
-                    query.append(obc.getOrderBy());
+
+                    String[] orderByFields = obc.getOrderByFields();
+
+                    for (int i = 0; i < orderByFields.length; i++) {
+                        query.append("reportsEntry.");
+                        query.append(orderByFields[i]);
+
+                        if (obc.isAscending()) {
+                            query.append(" ASC");
+                        } else {
+                            query.append(" DESC");
+                        }
+
+                        if ((i + 1) < orderByFields.length) {
+                            query.append(", ");
+                        }
+                    }
                 }
                 else {
                     query.append("ORDER BY ");
 
-                    query.append("name ASC");
+                    query.append("reportsEntry.name ASC");
                 }
 
                 Query q = session.createQuery(query.toString());
@@ -726,24 +774,40 @@ public class ReportsEntryPersistenceImpl extends BasePersistenceImpl
             StringBuilder query = new StringBuilder();
 
             query.append(
-                "FROM com.ext.portlet.reports.model.ReportsEntry WHERE ");
+                "SELECT reportsEntry FROM ReportsEntry reportsEntry WHERE ");
 
             if (userId == null) {
-                query.append("userId IS NULL");
+                query.append("reportsEntry.userId IS NULL");
             } else {
-                query.append("userId = ?");
+                query.append("reportsEntry.userId = ?");
             }
 
             query.append(" ");
 
             if (obc != null) {
                 query.append("ORDER BY ");
-                query.append(obc.getOrderBy());
+
+                String[] orderByFields = obc.getOrderByFields();
+
+                for (int i = 0; i < orderByFields.length; i++) {
+                    query.append("reportsEntry.");
+                    query.append(orderByFields[i]);
+
+                    if (obc.isAscending()) {
+                        query.append(" ASC");
+                    } else {
+                        query.append(" DESC");
+                    }
+
+                    if ((i + 1) < orderByFields.length) {
+                        query.append(", ");
+                    }
+                }
             }
             else {
                 query.append("ORDER BY ");
 
-                query.append("name ASC");
+                query.append("reportsEntry.name ASC");
             }
 
             Query q = session.createQuery(query.toString());
@@ -833,16 +897,33 @@ public class ReportsEntryPersistenceImpl extends BasePersistenceImpl
 
                 StringBuilder query = new StringBuilder();
 
-                query.append("FROM com.ext.portlet.reports.model.ReportsEntry ");
+                query.append(
+                    "SELECT reportsEntry FROM ReportsEntry reportsEntry ");
 
                 if (obc != null) {
                     query.append("ORDER BY ");
-                    query.append(obc.getOrderBy());
+
+                    String[] orderByFields = obc.getOrderByFields();
+
+                    for (int i = 0; i < orderByFields.length; i++) {
+                        query.append("reportsEntry.");
+                        query.append(orderByFields[i]);
+
+                        if (obc.isAscending()) {
+                            query.append(" ASC");
+                        } else {
+                            query.append(" DESC");
+                        }
+
+                        if ((i + 1) < orderByFields.length) {
+                            query.append(", ");
+                        }
+                    }
                 }
                 else {
                     query.append("ORDER BY ");
 
-                    query.append("name ASC");
+                    query.append("reportsEntry.name ASC");
                 }
 
                 Query q = session.createQuery(query.toString());
@@ -906,14 +987,13 @@ public class ReportsEntryPersistenceImpl extends BasePersistenceImpl
 
                 StringBuilder query = new StringBuilder();
 
-                query.append("SELECT COUNT(*) ");
-                query.append(
-                    "FROM com.ext.portlet.reports.model.ReportsEntry WHERE ");
+                query.append("SELECT COUNT(reportsEntry) ");
+                query.append("FROM ReportsEntry reportsEntry WHERE ");
 
                 if (companyId == null) {
-                    query.append("companyId IS NULL");
+                    query.append("reportsEntry.companyId IS NULL");
                 } else {
-                    query.append("companyId = ?");
+                    query.append("reportsEntry.companyId = ?");
                 }
 
                 query.append(" ");
@@ -958,14 +1038,13 @@ public class ReportsEntryPersistenceImpl extends BasePersistenceImpl
 
                 StringBuilder query = new StringBuilder();
 
-                query.append("SELECT COUNT(*) ");
-                query.append(
-                    "FROM com.ext.portlet.reports.model.ReportsEntry WHERE ");
+                query.append("SELECT COUNT(reportsEntry) ");
+                query.append("FROM ReportsEntry reportsEntry WHERE ");
 
                 if (userId == null) {
-                    query.append("userId IS NULL");
+                    query.append("reportsEntry.userId IS NULL");
                 } else {
-                    query.append("userId = ?");
+                    query.append("reportsEntry.userId = ?");
                 }
 
                 query.append(" ");
@@ -1009,7 +1088,7 @@ public class ReportsEntryPersistenceImpl extends BasePersistenceImpl
                 session = openSession();
 
                 Query q = session.createQuery(
-                        "SELECT COUNT(*) FROM com.ext.portlet.reports.model.ReportsEntry");
+                        "SELECT COUNT(reportsEntry) FROM ReportsEntry reportsEntry");
 
                 count = (Long) q.uniqueResult();
             } catch (Exception e) {
