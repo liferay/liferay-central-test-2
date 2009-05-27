@@ -22,7 +22,6 @@
 
 package com.liferay.portal.upgrade.v5_3_0;
 
-import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -38,12 +37,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 /**
- * <a href="UpgradeSocialActivity.java.html"><b><i>View Source</i></b></a>
+ * <a href="UpgradeSocial.java.html"><b><i>View Source</i></b></a>
  *
  * @author Amos Fong
  *
  */
-public class UpgradeSocialActivity extends UpgradeProcess {
+public class UpgradeSocial extends UpgradeProcess {
 
 	public void upgrade() throws UpgradeException {
 		_log.info("Upgrading");
@@ -72,7 +71,14 @@ public class UpgradeSocialActivity extends UpgradeProcess {
 			while (rs.next()) {
 				long groupId = rs.getLong("groupId");
 
-				updateGroupId(groupId);
+				try {
+					updateGroupId(groupId);
+				}
+				catch (Exception e) {
+					if (_log.isWarnEnabled()) {
+						_log.warn(e);
+					}
+				}
 			}
 		}
 		finally {
@@ -81,25 +87,20 @@ public class UpgradeSocialActivity extends UpgradeProcess {
 	}
 
 	protected void updateGroupId(long groupId) throws Exception {
-		try {
-			Group group = GroupLocalServiceUtil.getGroup(groupId);
+		Group group = GroupLocalServiceUtil.getGroup(groupId);
 
-			if (group.isLayout()) {
-				Layout layout = LayoutLocalServiceUtil.getLayout(
-					group.getClassPK());
+		if (group.isLayout()) {
+			Layout layout = LayoutLocalServiceUtil.getLayout(
+				group.getClassPK());
 
-				long newGroupId = layout.getGroupId();
+			long layoutGroupId = layout.getGroupId();
 
-				runSQL(
-					"update SocialActivity set groupId = " + newGroupId +
-						" where groupId = " + groupId);
-			}
-		}
-		catch (NoSuchGroupException nsge) {
+			runSQL(
+				"update SocialActivity set groupId = " + layoutGroupId +
+					" where groupId = " + groupId);
 		}
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(UpgradeSocialActivity.class);
+	private static Log _log = LogFactoryUtil.getLog(UpgradeSocial.class);
 
 }

@@ -27,7 +27,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.upgrade.v5_3_0.UpgradeBlogs;
 import com.liferay.portal.upgrade.v5_3_0.UpgradeSchema;
-import com.liferay.portal.upgrade.v5_3_0.UpgradeSocialActivity;
+import com.liferay.portal.upgrade.v5_3_0.UpgradeSocial;
 
 /**
  * <a href="UpgradeProcess_5_3_0.java.html"><b><i>View Source</i></b></a>
@@ -46,7 +46,7 @@ public class UpgradeProcess_5_3_0 extends UpgradeProcess {
 
 		upgrade(UpgradeSchema.class);
 		upgrade(UpgradeBlogs.class);
-		upgrade(UpgradeSocialActivity.class);
+		upgrade(UpgradeSocial.class);
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(UpgradeProcess_5_3_0.class);
