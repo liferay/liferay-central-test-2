@@ -83,7 +83,6 @@
 		<unjar src="${project.dir}/lib/portal/log4j.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/lib/portal/openid4java.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/lib/portal/rome.jar" dest="${classpath.jsp}" />
-		<unjar src="${project.dir}/lib/portal/ruon-client.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/lib/portal/struts.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/lib/portal/velocity.jar" dest="${classpath.jsp}" />
 
