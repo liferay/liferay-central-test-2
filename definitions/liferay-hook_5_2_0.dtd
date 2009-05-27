@@ -52,6 +52,8 @@ logout.events.post
 logout.events.pre
 servlet.service.events.post
 servlet.service.events.pre
+
+ldap.attrs.transformer.impl
 -->
 <!ELEMENT portal-properties (#PCDATA)>
 

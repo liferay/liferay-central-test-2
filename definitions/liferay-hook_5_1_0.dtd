@@ -53,6 +53,19 @@ passwords.passwordpolicytoolkit.generator
 passwords.passwordpolicytoolkit.static
 
 layout.static.portlets.all
+
+auto.login.hooks
+
+application.startup.events
+
+login.events.post
+login.events.pre
+logout.events.post
+logout.events.pre
+servlet.service.events.post
+servlet.service.events.pre
+
+ldap.attrs.transformer.impl
 -->
 <!ELEMENT portal-properties (#PCDATA)>
 

@@ -54,6 +54,9 @@ import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.security.auth.AutoLogin;
 import com.liferay.portal.security.auth.CompanyThreadLocal;
 import com.liferay.portal.security.auth.InvokerAutoLogin;
+import com.liferay.portal.security.ldap.AttributesTransformer;
+import com.liferay.portal.security.ldap.AttributesTransformerFactory;
+import com.liferay.portal.security.ldap.InvokerAttributesTransformer;
 import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portal.servlet.filters.autologin.AutoLoginFilter;
 import com.liferay.portal.servlet.filters.cache.CacheUtil;
@@ -162,6 +165,10 @@ public class HookHotDeployListener
 		}
 
 		resetPortalProperties(portalProperties);
+
+		if (portalProperties.contains(PropsKeys.LDAP_ATTRS_TRANSFORMER_IMPL)) {
+			AttributesTransformerFactory.setInstance(null);
+		}
 	}
 
 	protected void doInvokeDeploy(HotDeployEvent event) throws Exception {
@@ -227,7 +234,7 @@ public class HookHotDeployListener
 					// last because they may require model listeners to have
 					// been registered.
 
-					initPortalProperties(portalProperties);
+					initPortalProperties(portletClassLoader, portalProperties);
 					initAutoLogins(
 						servletContextName, portletClassLoader,
 						portalProperties);
@@ -704,7 +711,8 @@ public class HookHotDeployListener
 		}
 	}
 
-	protected void initPortalProperties(Properties portalProperties)
+	protected void initPortalProperties(
+			ClassLoader portletClassLoader, Properties portalProperties)
 		throws Exception {
 
 		PropsUtil.addProperties(portalProperties);
@@ -719,6 +727,20 @@ public class HookHotDeployListener
 		}
 
 		resetPortalProperties(portalProperties);
+
+		if (portalProperties.contains(PropsKeys.LDAP_ATTRS_TRANSFORMER_IMPL)) {
+			String attributesTransformerClass = portalProperties.getProperty(
+				PropsKeys.LDAP_ATTRS_TRANSFORMER_IMPL);
+
+			AttributesTransformer attributesTransformer =
+				(AttributesTransformer)portletClassLoader.loadClass(
+					attributesTransformerClass).newInstance();
+
+			attributesTransformer = new InvokerAttributesTransformer(
+				attributesTransformer, portletClassLoader);
+
+			AttributesTransformerFactory.setInstance(attributesTransformer);
+		}
 	}
 
 	protected void resetPortalProperties(Properties portalProperties)

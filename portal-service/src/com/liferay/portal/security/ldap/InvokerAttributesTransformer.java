@@ -25,19 +25,52 @@ package com.liferay.portal.security.ldap;
 import javax.naming.directory.Attributes;
 
 /**
- * <a href="AttributesTransformer.java.html"><b><i>View Source</i></b></a>
+ * <a href="InvokerAttributesTransformer.java.html"><b><i>View Source</i></b>
+ * </a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class AttributesTransformer {
+public class InvokerAttributesTransformer implements AttributesTransformer {
 
-	public Attributes transformGroup(Attributes attrs) {
-		return attrs;
+	public InvokerAttributesTransformer(
+		AttributesTransformer indexer, ClassLoader classLoader) {
+
+		_attributesTransformer = indexer;
+		_classLoader = classLoader;
 	}
 
-	public Attributes transformUser(Attributes attrs) {
-		return attrs;
+	public Attributes transformGroup(Attributes attributes) {
+		Thread currentThread = Thread.currentThread();
+
+		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
+
+		try {
+			currentThread.setContextClassLoader(_classLoader);
+
+			return _attributesTransformer.transformGroup(attributes);
+		}
+		finally {
+			currentThread.setContextClassLoader(contextClassLoader);
+		}
 	}
+
+	public Attributes transformUser(Attributes attributes) {
+		Thread currentThread = Thread.currentThread();
+
+		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
+
+		try {
+			currentThread.setContextClassLoader(_classLoader);
+
+			return _attributesTransformer.transformUser(attributes);
+		}
+		finally {
+			currentThread.setContextClassLoader(contextClassLoader);
+		}
+	}
+
+	private AttributesTransformer _attributesTransformer;
+	private ClassLoader _classLoader;
 
 }

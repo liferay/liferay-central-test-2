@@ -22,33 +22,23 @@
 
 package com.liferay.portal.security.ldap;
 
-import com.liferay.portal.kernel.util.InstancePool;
-import com.liferay.portal.util.PropsValues;
+import javax.naming.directory.Attributes;
 
 /**
- * <a href="AttributesTransformerFactory.java.html"><b><i>View Source</i></b>
+ * <a href="DefaultAttributesTransformer.java.html"><b><i>View Source</i></b>
  * </a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class AttributesTransformerFactory {
+public class DefaultAttributesTransformer {
 
-	public static AttributesTransformer getInstance() {
-		if (_attributesTransformer == null) {
-			_attributesTransformer = (AttributesTransformer)InstancePool.get(
-				PropsValues.LDAP_ATTRS_TRANSFORMER_IMPL);
-		}
-
-		return _attributesTransformer;
+	public Attributes transformGroup(Attributes attributes) {
+		return attributes;
 	}
 
-	public static void setInstance(
-		AttributesTransformer attributesTransformer) {
-
-		_attributesTransformer = attributesTransformer;
+	public Attributes transformUser(Attributes attributes) {
+		return attributes;
 	}
-
-	private static AttributesTransformer _attributesTransformer;
 
 }
