@@ -24,6 +24,8 @@ package com.liferay.portal.velocity;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.bean.PortletBeanLocatorUtil;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 
 /**
  * <a href="ServiceLocator.java.html"><b><i>View Source</i></b></a>
@@ -42,7 +44,16 @@ public class ServiceLocator {
 			serviceName += _VELOCITY;
 		}
 
-		return PortalBeanLocatorUtil.locate(serviceName);
+		Object obj = null;
+
+		try {
+			obj = PortalBeanLocatorUtil.locate(serviceName);
+		}
+		catch (Exception e) {
+			_log.error(e);
+		}
+
+		return obj;
 	}
 
 	public Object findService(String servletContextName, String serviceName) {
@@ -50,7 +61,17 @@ public class ServiceLocator {
 			serviceName += _VELOCITY;
 		}
 
-		return PortletBeanLocatorUtil.locate(servletContextName, serviceName);
+		Object obj = null;
+
+		try {
+			obj = PortletBeanLocatorUtil.locate(
+				servletContextName, serviceName);
+		}
+		catch (Exception e) {
+			_log.error(e);
+		}
+
+		return obj;
 	}
 
 	private ServiceLocator() {
@@ -61,5 +82,7 @@ public class ServiceLocator {
 	private static final String _VELOCITY = ".velocity";
 
 	private static ServiceLocator _instance = new ServiceLocator();
+
+	private static Log _log = LogFactoryUtil.getLog(ServiceLocator.class);
 
 }
