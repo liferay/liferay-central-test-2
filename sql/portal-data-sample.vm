@@ -20,15 +20,23 @@ insert into Account_ (accountId, companyId, userId, userName, createDate, modifi
 ## Class Names
 ##
 
+#set($companyClassNameId = $counter.get())
 #set($groupClassNameId = $counter.get())
 #set($organizationClassNameId = $counter.get())
 #set($roleClassNameId = $counter.get())
 #set($userClassNameId = $counter.get())
 
+insert into ClassName_ (classNameId, value) values ($companyClassNameId, 'com.liferay.portal.model.Company');
 insert into ClassName_ (classNameId, value) values ($groupClassNameId, 'com.liferay.portal.model.Group');
 insert into ClassName_ (classNameId, value) values ($organizationClassNameId, 'com.liferay.portal.model.Organization');
 insert into ClassName_ (classNameId, value) values ($roleClassNameId, 'com.liferay.portal.model.Role');
 insert into ClassName_ (classNameId, value) values ($userClassNameId, 'com.liferay.portal.model.User');
+
+##
+## Shard
+##
+
+insert into Shard (shardId, classNameId, classPK, name) values ($counter.get(), $companyClassNameId, $companyId, 'default');
 
 ##
 ## Roles
