@@ -1,4 +1,3 @@
-<%
 /**
  * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
  *
@@ -20,16 +19,42 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%>
 
-<%@ include file="/html/portlet/init.jsp" %>
+package com.liferay.portal.upgrade.v5_3_0;
 
-<%@ page import="com.liferay.portlet.randombibleverse.model.Bible" %>
-<%@ page import="com.liferay.portlet.randombibleverse.model.Verse" %>
-<%@ page import="com.liferay.portlet.randombibleverse.util.RBVUtil" %>
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 
-<%
-PortletPreferences preferences = renderRequest.getPreferences();
+/**
+ * <a href="UpgradePortletId.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ *
+ */
+public class UpgradePortletId
+	extends com.liferay.portal.upgrade.v4_3_5.UpgradePortletId {
 
-String language = preferences.getValue("language", StringPool.BLANK);
-%>
+	protected Log getLog() {
+		return _log;
+	}
+
+	protected String[][] getPortletIdsArray() {
+		return new String[][] {
+			new String[] {
+				"7",
+				"1_WAR_biblegatewayportlet"
+			},
+			new String[] {
+				"21",
+				"1_WAR_randombibleverseportlet"
+			},
+			new String[] {
+				"46",
+				"1_WAR_gospelforasiaportlet"
+			}
+		};
+	}
+
+	private static Log _log = LogFactoryUtil.getLog(UpgradePortletId.class);
+
+}

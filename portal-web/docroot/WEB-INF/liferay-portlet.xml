@@ -45,16 +45,6 @@
 		<css-class-wrapper>portlet-reverend-fun</css-class-wrapper>
 	</portlet>
 	<portlet>
-		<portlet-name>7</portlet-name>
-		<icon>/html/icons/bible_gateway.png</icon>
-		<struts-path>bible_gateway</struts-path>
-		<restore-current-view>false</restore-current-view>
-		<private-request-attributes>false</private-request-attributes>
-		<private-session-attributes>false</private-session-attributes>
-		<render-weight>50</render-weight>
-		<css-class-wrapper>portlet-bible-gateway</css-class-wrapper>
-	</portlet>
-	<portlet>
 		<portlet-name>8</portlet-name>
 		<icon>/html/icons/calendar.png</icon>
 		<struts-path>calendar</struts-path>
@@ -205,17 +195,6 @@
 		<footer-portal-javascript>/html/js/misc/swfupload/swfupload.js</footer-portal-javascript>
 		<css-class-wrapper>portlet-document-library</css-class-wrapper>
 		<add-default-resource>true</add-default-resource>
-	</portlet>
-	<portlet>
-		<portlet-name>21</portlet-name>
-		<icon>/html/icons/random_bible_verse.png</icon>
-		<struts-path>random_bible_verse</struts-path>
-		<preferences-owned-by-group>false</preferences-owned-by-group>
-		<restore-current-view>false</restore-current-view>
-		<private-request-attributes>false</private-request-attributes>
-		<private-session-attributes>false</private-session-attributes>
-		<render-weight>0</render-weight>
-		<css-class-wrapper>portlet-random-bible-verse</css-class-wrapper>
 	</portlet>
 	<portlet>
 		<portlet-name>23</portlet-name>
@@ -420,17 +399,6 @@
 		<css-class-wrapper>portlet-rss</css-class-wrapper>
 	</portlet>
 	<portlet>
-		<portlet-name>46</portlet-name>
-		<icon>/html/icons/default.png</icon>
-		<struts-path>iframe</struts-path>
-		<use-default-template>false</use-default-template>
-		<restore-current-view>false</restore-current-view>
-		<private-request-attributes>false</private-request-attributes>
-		<private-session-attributes>false</private-session-attributes>
-		<render-weight>50</render-weight>
-		<css-class-wrapper>portlet-gospel-for-asia</css-class-wrapper>
-	</portlet>
-	<portlet>
 		<portlet-name>47</portlet-name>
 		<icon>/html/icons/default.png</icon>
 		<struts-path>hello_world</struts-path>
@@ -476,17 +444,6 @@
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
 		<css-class-wrapper>portlet-hello-velocity</css-class-wrapper>
-	</portlet>
-	<portlet>
-		<portlet-name>51</portlet-name>
-		<icon>/html/icons/default.png</icon>
-		<struts-path>global_prayer_digest</struts-path>
-		<use-default-template>false</use-default-template>
-		<restore-current-view>false</restore-current-view>
-		<private-request-attributes>false</private-request-attributes>
-		<private-session-attributes>false</private-session-attributes>
-		<render-weight>50</render-weight>
-		<css-class-wrapper>portlet-global-prayer-digest</css-class-wrapper>
 	</portlet>
 	<portlet>
 		<portlet-name>54</portlet-name>

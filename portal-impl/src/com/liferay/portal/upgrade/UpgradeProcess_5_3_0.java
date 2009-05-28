@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.upgrade.v5_3_0.UpgradeBlogs;
+import com.liferay.portal.upgrade.v5_3_0.UpgradePortletId;
 import com.liferay.portal.upgrade.v5_3_0.UpgradeSchema;
 import com.liferay.portal.upgrade.v5_3_0.UpgradeSocial;
 
@@ -46,6 +47,7 @@ public class UpgradeProcess_5_3_0 extends UpgradeProcess {
 
 		upgrade(UpgradeSchema.class);
 		upgrade(UpgradeBlogs.class);
+		upgrade(UpgradePortletId.class);
 		upgrade(UpgradeSocial.class);
 	}
 

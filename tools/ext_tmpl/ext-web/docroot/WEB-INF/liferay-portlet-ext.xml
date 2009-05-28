@@ -39,11 +39,6 @@
 		<include>true</include>
 	</portlet>
 	<portlet>
-		<portlet-name>7</portlet-name>
-		<struts-path>bible_gateway</struts-path>
-		<include>true</include>
-	</portlet>
-	<portlet>
 		<portlet-name>8</portlet-name>
 		<struts-path>calendar</struts-path>
 		<include>true</include>
@@ -81,11 +76,6 @@
 	<portlet>
 		<portlet-name>20</portlet-name>
 		<struts-path>document_library</struts-path>
-		<include>true</include>
-	</portlet>
-	<portlet>
-		<portlet-name>21</portlet-name>
-		<struts-path>random_bible_verse</struts-path>
 		<include>true</include>
 	</portlet>
 	<portlet>
@@ -159,11 +149,6 @@
 		<include>true</include>
 	</portlet>
 	<portlet>
-		<portlet-name>46</portlet-name>
-		<struts-path>gospel_for_asia</struts-path>
-		<include>true</include>
-	</portlet>
-	<portlet>
 		<portlet-name>47</portlet-name>
 		<struts-path>hello_world</struts-path>
 		<include>true</include>
@@ -181,11 +166,6 @@
 	<portlet>
 		<portlet-name>50</portlet-name>
 		<struts-path>hello_velocity</struts-path>
-		<include>true</include>
-	</portlet>
-	<portlet>
-		<portlet-name>51</portlet-name>
-		<struts-path>global_prayer_digest</struts-path>
 		<include>true</include>
 	</portlet>
 	<portlet>

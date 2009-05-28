@@ -71,14 +71,6 @@
 		<portlet id="83" />
 		<portlet id="84" />
 	</category>
-	<category name="category.religion">
-		<category name="category.christianity">
-			<portlet id="7" />
-			<portlet id="21" />
-			<portlet id="46" />
-			<portlet id="51" />
-		</category>
-	</category>
 	<category name="category.sample">
 		<portlet id="47" />
 		<portlet id="48" />

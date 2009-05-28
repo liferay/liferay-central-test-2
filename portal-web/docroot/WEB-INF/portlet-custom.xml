@@ -59,26 +59,6 @@
 		</security-role-ref>
 	</portlet>
 	<portlet>
-		<portlet-name>7</portlet-name>
-		<display-name>Bible Gateway</display-name>
-		<portlet-class>com.liferay.util.bridges.mvc.MVCPortlet</portlet-class>
-		<init-param>
-			<name>view-jsp</name>
-			<value>/html/portlet/bible_gateway/view.jsp</value>
-		</init-param>
-		<expiration-cache>0</expiration-cache>
-		<supports>
-			<mime-type>text/html</mime-type>
-		</supports>
-		<resource-bundle>com.liferay.portlet.StrutsResourceBundle</resource-bundle>
-		<security-role-ref>
-			<role-name>power-user</role-name>
-		</security-role-ref>
-		<security-role-ref>
-			<role-name>user</role-name>
-		</security-role-ref>
-	</portlet>
-	<portlet>
 		<portlet-name>8</portlet-name>
 		<display-name>Calendar</display-name>
 		<portlet-class>com.liferay.portlet.StrutsPortlet</portlet-class>
@@ -274,42 +254,6 @@
 		<security-role-ref>
 			<role-name>guest</role-name>
 		</security-role-ref>
-		<security-role-ref>
-			<role-name>power-user</role-name>
-		</security-role-ref>
-		<security-role-ref>
-			<role-name>user</role-name>
-		</security-role-ref>
-	</portlet>
-	<portlet>
-		<portlet-name>21</portlet-name>
-		<display-name>Random Bible Verse</display-name>
-		<portlet-class>com.liferay.portlet.randombibleverse.RBVPortlet</portlet-class>
-		<init-param>
-			<name>edit-jsp</name>
-			<value>/html/portlet/random_bible_verse/edit.jsp</value>
-		</init-param>
-		<init-param>
-			<name>edit-guest-jsp</name>
-			<value>/html/portlet/random_bible_verse/edit.jsp</value>
-		</init-param>
-		<init-param>
-			<name>view-jsp</name>
-			<value>/html/portlet/random_bible_verse/view.jsp</value>
-		</init-param>
-		<expiration-cache>0</expiration-cache>
-		<supports>
-			<mime-type>text/html</mime-type>
-			<portlet-mode>edit</portlet-mode>
-			<portlet-mode>edit_guest</portlet-mode>
-		</supports>
-		<resource-bundle>com.liferay.portlet.StrutsResourceBundle</resource-bundle>
-		<portlet-preferences>
-			<preference>
-				<name>language</name>
-				<value>en</value>
-			</preference>
-		</portlet-preferences>
 		<security-role-ref>
 			<role-name>power-user</role-name>
 		</security-role-ref>
@@ -621,29 +565,6 @@
 		</security-role-ref>
 	</portlet>
 	<portlet>
-		<description xml:lang="EN">Portlet reusing com.liferay.portlet.iframe.IFramePortlet with set preferences</description>
-		<portlet-name>46</portlet-name>
-		<display-name>Gospel for Asia</display-name>
-		<portlet-class>com.liferay.portlet.iframe.IFramePortlet</portlet-class>
-		<expiration-cache>0</expiration-cache>
-		<supports>
-			<mime-type>text/html</mime-type>
-		</supports>
-		<resource-bundle>com.liferay.portlet.StrutsResourceBundle</resource-bundle>
-		<portlet-preferences>
-			<preference>
-				<name>src</name>
-				<value>http://www.gfa.org</value>
-			</preference>
-		</portlet-preferences>
-		<security-role-ref>
-			<role-name>power-user</role-name>
-		</security-role-ref>
-		<security-role-ref>
-			<role-name>user</role-name>
-		</security-role-ref>
-	</portlet>
-	<portlet>
 		<portlet-name>47</portlet-name>
 		<display-name>Hello World</display-name>
 		<portlet-class>com.liferay.portlet.helloworld.HelloWorldPortlet</portlet-class>
@@ -752,33 +673,6 @@
 		<security-role-ref>
 			<role-name>guest</role-name>
 		</security-role-ref>
-		<security-role-ref>
-			<role-name>power-user</role-name>
-		</security-role-ref>
-		<security-role-ref>
-			<role-name>user</role-name>
-		</security-role-ref>
-	</portlet>
-	<portlet>
-		<description xml:lang="EN">Portlet reusing com.liferay.portlet.iframe.IFramePortlet with an extended com.liferay.portlet.iframe.action.ViewAction</description>
-		<portlet-name>51</portlet-name>
-		<display-name>Global Prayer Digest</display-name>
-		<portlet-class>com.liferay.portlet.iframe.IFramePortlet</portlet-class>
-		<init-param>
-			<name>view-action</name>
-			<value>/global_prayer_digest/view</value>
-		</init-param>
-		<expiration-cache>0</expiration-cache>
-		<supports>
-			<mime-type>text/html</mime-type>
-		</supports>
-		<resource-bundle>com.liferay.portlet.StrutsResourceBundle</resource-bundle>
-		<portlet-preferences>
-			<preference>
-				<name>src</name>
-				<value>http://www.global-prayer-digest.org/dailydata/getdaily.asp</value>
-			</preference>
-		</portlet-preferences>
 		<security-role-ref>
 			<role-name>power-user</role-name>
 		</security-role-ref>
