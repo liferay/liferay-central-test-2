@@ -66,6 +66,9 @@ public class PortletConfigImpl implements PortletConfig {
 	public static final String RUNTIME_OPTION_ESCAPE_XML =
 		"javax.portlet.escapeXml";
 
+	public static final String RUNTIME_OPTION_PORTAL_CONTEXT =
+		"com.liferay.portal.portalContext";
+
 	public PortletConfigImpl(Portlet portlet, PortletContext portletContext) {
 		_portletApp = portlet.getPortletApp();
 		_portlet = portlet;

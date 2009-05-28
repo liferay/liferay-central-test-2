@@ -63,6 +63,7 @@ import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebAppPool;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.PortletConfigImpl;
 import com.liferay.portlet.PortletInstanceFactoryUtil;
 import com.liferay.portlet.PortletPreferencesSerializer;
 import com.liferay.portlet.PortletQNameUtil;
@@ -1346,7 +1347,8 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		while (itr1.hasNext()) {
 			Element containerRuntimeOption = itr1.next();
 
-			String name = containerRuntimeOption.elementText("name");
+			String name = GetterUtil.getString(
+				containerRuntimeOption.elementText("name"));
 
 			List<String> values = new ArrayList<String>();
 
@@ -1356,6 +1358,12 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 			portletApp.getContainerRuntimeOptions().put(
 				name, values.toArray(new String[values.size()]));
+
+			if (name.equals(PortletConfigImpl.RUNTIME_OPTION_PORTAL_CONTEXT) &&
+				!values.isEmpty() && GetterUtil.getBoolean(values.get(0))) {
+
+				portletApp.setWARFile(false);
+			}
 		}
 
 		long timestamp = ServletContextUtil.getLastModified(servletContext);

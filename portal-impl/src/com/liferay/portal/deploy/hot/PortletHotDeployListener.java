@@ -51,6 +51,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ObjectValuePair;
+import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.lar.InvokerPortletDataHandler;
@@ -68,9 +69,11 @@ import com.liferay.portal.service.ResourceActionLocalServiceUtil;
 import com.liferay.portal.service.ResourceCodeLocalServiceUtil;
 import com.liferay.portal.util.Portal;
 import com.liferay.portal.util.PortalInstances;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebAppPool;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portal.velocity.VelocityContextPool;
 import com.liferay.portal.webdav.WebDAVStorage;
 import com.liferay.portal.webdav.WebDAVUtil;
 import com.liferay.portlet.ControlPanelEntry;
@@ -426,6 +429,18 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 			ClassLoader portletClassLoader, Iterator<Portlet> portletsItr)
 		throws Exception {
 
+		String servletContextName = servletContext.getServletContextName();
+
+		PortletApp portletApp = portlet.getPortletApp();
+
+		if (!portletApp.isWARFile()) {
+			String contextPath = PortalUtil.getPathContext();
+
+			servletContext = VelocityContextPool.get(contextPath);
+
+			portletClassLoader = PortalClassLoaderUtil.getClassLoader();
+		}
+
 		Class<?> portletClass = null;
 
 		try {
@@ -651,7 +666,9 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 		PortletBagPool.put(portlet.getPortletId(), portletBag);
 
 		if (!_portletAppInitialized) {
-			initPortletApp(portlet, servletContext, portletClassLoader);
+			initPortletApp(
+				portlet, servletContextName, servletContext,
+				portletClassLoader);
 
 			_portletAppInitialized = true;
 		}
@@ -665,11 +682,9 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 	}
 
 	protected void initPortletApp(
-			Portlet portlet, ServletContext servletContext,
-			ClassLoader portletClassLoader)
+			Portlet portlet, String servletContextName,
+			ServletContext servletContext, ClassLoader portletClassLoader)
 		throws Exception {
-
-		String servletContextName = servletContext.getServletContextName();
 
 		PortletConfig portletConfig = PortletConfigFactory.create(
 			portlet, servletContext);

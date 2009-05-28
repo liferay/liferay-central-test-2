@@ -166,6 +166,10 @@ public class PortletAppImpl implements PortletApp {
 		return _warFile;
 	}
 
+	public void setWARFile(boolean warFile) {
+		_warFile = warFile;
+	}
+
 	private String _servletContextName = StringPool.BLANK;
 	private Set<String> _servletURLPatterns = new LinkedHashSet<String>();
 	private Set<String> _userAttributes = new LinkedHashSet<String>();

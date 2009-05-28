@@ -75,4 +75,6 @@ public interface PortletApp extends Serializable {
 
 	public boolean isWARFile();
 
+	public void setWARFile(boolean warFile);
+
 }
