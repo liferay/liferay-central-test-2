@@ -28,7 +28,6 @@ import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletApp;
 import com.liferay.portal.model.PortletConstants;
 import com.liferay.portal.service.PortletLocalServiceUtil;
-import com.liferay.portal.util.PropsValues;
 
 import java.util.Iterator;
 import java.util.Map;
@@ -162,20 +161,10 @@ public class PortletInstanceFactoryImpl implements PortletInstanceFactory {
 				boolean strutsBridgePortlet =
 					rootInvokerPortletInstance.isStrutsBridgePortlet();
 
-				if (PropsValues.PORTLET_CONTAINER_IMPL_SUN) {
-					instanceInvokerPortletInstance =
-						_sunInvokerPortletPrototype.create(
-							portlet, portletInstance, portletConfig,
-							portletContext, facesPortlet, strutsPortlet,
-							strutsBridgePortlet);
-				}
-				else {
-					instanceInvokerPortletInstance =
-						_internalInvokerPortletPrototype.create(
-							portlet, portletInstance, portletConfig,
-							portletContext, facesPortlet, strutsPortlet,
-							strutsBridgePortlet);
-				}
+				instanceInvokerPortletInstance =
+					_internalInvokerPortletPrototype.create(
+						portlet, portletInstance, portletConfig, portletContext,
+						facesPortlet, strutsPortlet, strutsBridgePortlet);
 
 				portletInstances.put(
 					portlet.getPortletId(), instanceInvokerPortletInstance);
@@ -205,12 +194,6 @@ public class PortletInstanceFactoryImpl implements PortletInstanceFactory {
 		_internalInvokerPortletPrototype = internalInvokerPortletPrototype;
 	}
 
-	public void setSunInvokerPortletPrototype(
-		InvokerPortlet sunInvokerPortletPrototype) {
-
-		_sunInvokerPortletPrototype = sunInvokerPortletPrototype;
-	}
-
 	protected InvokerPortlet init(Portlet portlet, PortletConfig portletConfig)
 		throws PortletException {
 
@@ -233,14 +216,8 @@ public class PortletInstanceFactoryImpl implements PortletInstanceFactory {
 
 			PortletContext portletContext = portletConfig.getPortletContext();
 
-			if (portlet.isRemote() || PropsValues.PORTLET_CONTAINER_IMPL_SUN) {
-				invokerPortlet = _sunInvokerPortletPrototype.create(
-					portlet, portletInstance, portletContext);
-			}
-			else {
-				invokerPortlet = _internalInvokerPortletPrototype.create(
-					portlet, portletInstance, portletContext);
-			}
+			invokerPortlet = _internalInvokerPortletPrototype.create(
+				portlet, portletInstance, portletContext);
 
 			invokerPortlet.init(portletConfig);
 		}
@@ -258,7 +235,6 @@ public class PortletInstanceFactoryImpl implements PortletInstanceFactory {
 	}
 
 	private InvokerPortlet _internalInvokerPortletPrototype;
-	private InvokerPortlet _sunInvokerPortletPrototype;
 	private Map<String, Map<String, InvokerPortlet>> _pool;
 
 }

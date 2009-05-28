@@ -60,9 +60,7 @@
 
 		<unjar src="${project.dir}/lib/development/activation.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/lib/development/mail.jar" dest="${classpath.jsp}" />
-		<unjar src="${project.dir}/lib/global/container.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/lib/global/portlet.jar" dest="${classpath.jsp}" />
-		<unjar src="${project.dir}/lib/global/portlet-container.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/lib/portal/ant.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/lib/portal/backport-concurrent.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/lib/portal/commons-collections.jar" dest="${classpath.jsp}" />
@@ -219,8 +217,6 @@
 				<antcall target="compile-common-lib" />
 
 				<unjar src="${project.dir}/lib/development/saxpath.jar" dest="${classpath.jsp}" />
-				<unjar src="${project.dir}/lib/global/container.jar" dest="${classpath.jsp}" />
-				<unjar src="${project.dir}/lib/global/portlet-container.jar" dest="${classpath.jsp}" />
 				<unjar src="${project.dir}/lib/portal/axis.jar" dest="${classpath.jsp}" />
 				<unjar src="${project.dir}/lib/portal/casclient.jar" dest="${classpath.jsp}" />
 				<unjar src="${project.dir}/lib/portal/commons-beanutils.jar" dest="${classpath.jsp}" />

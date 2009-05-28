@@ -248,7 +248,7 @@
 			/>
 			<zipfileset
 				dir="lib/global"
-				includes="annotations.jar,container.jar,portlet.jar,portlet-container.jar"
+				includes="annotations.jar,portlet.jar"
 			/>
 			<zipfileset
 				dir="lib/portal"
@@ -806,7 +806,7 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-5.5-$${downloads.version}.zip</
 		<copy todir="${tstamp.value}/WEB-INF/lib">
 			<fileset
 				dir="${app.server.lib.global.dir}"
-				includes="annotations.jar,container.jar,portal-kernel.jar,portal-service.jar,portlet.jar,portlet-container.jar"
+				includes="annotations.jar,portal-kernel.jar,portal-service.jar,portlet.jar"
 			/>
 		</copy>
 
@@ -868,7 +868,7 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-5.5-$${downloads.version}.zip</
 		<copy todir="${tstamp.value}/WEB-INF/lib">
 			<fileset
 				dir="${app.server.lib.global.dir}"
-				includes="annotations.jar,container.jar,portal-kernel.jar,portal-service.jar,portlet.jar,portlet-container.jar"
+				includes="annotations.jar,portal-kernel.jar,portal-service.jar,portlet.jar"
 			/>
 		</copy>
 

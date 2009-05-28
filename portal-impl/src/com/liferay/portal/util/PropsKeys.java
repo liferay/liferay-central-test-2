@@ -1010,8 +1010,6 @@ public interface PropsKeys {
 
 	public static final String PORTAL_SECURITY_MANAGER_ENABLE = "portal.security.manager.enable";
 
-	public static final String PORTLET_CONTAINER_IMPL = "portlet.container.impl";
-
 	public static final String PORTLET_CSS_ENABLED = "portlet.css.enabled";
 
 	public static final String PORTLET_EVENT_DISTRIBUTION = "portlet.event.distribution";

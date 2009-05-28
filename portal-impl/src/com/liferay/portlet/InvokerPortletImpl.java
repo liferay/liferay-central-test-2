@@ -39,8 +39,6 @@ import com.liferay.portal.model.Layout;
 import com.liferay.portal.tools.deploy.PortletDeployer;
 import com.liferay.portal.util.WebKeys;
 
-import com.sun.portal.portletcontainer.appengine.filter.FilterChainImpl;
-
 import java.io.IOException;
 
 import java.util.ArrayList;

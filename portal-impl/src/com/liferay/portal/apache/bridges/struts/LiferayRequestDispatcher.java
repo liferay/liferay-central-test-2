@@ -22,22 +22,14 @@
 
 package com.liferay.portal.apache.bridges.struts;
 
-import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletApp;
-import com.liferay.portal.portletcontainer.WindowInvokerUtil;
-import com.liferay.portal.service.PortletLocalServiceUtil;
-import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.PortletRequestImpl;
 import com.liferay.portlet.PortletResponseImpl;
 import com.liferay.portlet.PortletServletRequest;
 import com.liferay.portlet.PortletServletResponse;
-
-import com.sun.portal.portletcontainer.portlet.impl.RDRequestWrapper;
-import com.sun.portal.portletcontainer.portlet.impl.RDResponseWrapper;
 
 import java.io.IOException;
 
@@ -184,22 +176,12 @@ public class LiferayRequestDispatcher implements RequestDispatcher {
 		HttpServletRequest request = (HttpServletRequest)servletRequest;
 		boolean named = false;
 
-		if (PropsValues.PORTLET_CONTAINER_IMPL_SUN) {
-			String lifecyclePhase = (String)portletRequest.getAttribute(
-				PortletRequest.LIFECYCLE_PHASE);
+		PortletRequestImpl portletRequestImpl =
+			(PortletRequestImpl)portletRequest;
 
-			return new RDRequestWrapper(
-				null, request, portletRequest, requestURI, servletPath,
-				pathInfo, queryString, lifecyclePhase, named, include);
-		}
-		else {
-			PortletRequestImpl portletRequestImpl =
-				(PortletRequestImpl)portletRequest;
-
-			return new PortletServletRequest(
-				request, portletRequestImpl, pathInfo, queryString, requestURI,
-				servletPath, named, include);
-		}
+		return new PortletServletRequest(
+			request, portletRequestImpl, pathInfo, queryString, requestURI,
+			servletPath, named, include);
 	}
 
 	protected HttpServletResponse getPortletServletResponse(
@@ -208,56 +190,25 @@ public class LiferayRequestDispatcher implements RequestDispatcher {
 
 		HttpServletResponse response = (HttpServletResponse)servletResponse;
 
-		if (PropsValues.PORTLET_CONTAINER_IMPL_SUN) {
-			String lifecyclePhase = (String)portletRequest.getAttribute(
-				PortletRequest.LIFECYCLE_PHASE);
+		PortletResponseImpl portletResponseImpl =
+			(PortletResponseImpl)portletResponse;
 
-			return new RDResponseWrapper(
-				response, portletResponse, lifecyclePhase, include);
-		}
-		else {
-			PortletResponseImpl portletResponseImpl =
-				(PortletResponseImpl)portletResponse;
-
-			return new PortletServletResponse(
-				response, portletResponseImpl, include);
-		}
+		return new PortletServletResponse(
+			response, portletResponseImpl, include);
 	}
 
 	protected Set<String> getServletURLPatterns(
-			ServletRequest servletRequest, PortletRequest portletRequest,
-			PortletResponse portletResponse)
-		throws ServletException {
+		ServletRequest servletRequest, PortletRequest portletRequest,
+		PortletResponse portletResponse) {
 
-		if (PropsValues.PORTLET_CONTAINER_IMPL_SUN) {
-			try {
-				HttpServletRequest request = (HttpServletRequest)servletRequest;
+		PortletRequestImpl portletRequestImpl =
+			(PortletRequestImpl)portletRequest;
 
-				long companyId = PortalUtil.getCompanyId(request);
-				String portletId = WindowInvokerUtil.getPortletId(
-					portletResponse.getNamespace());
+		Portlet portlet = portletRequestImpl.getPortlet();
 
-				Portlet portlet = PortletLocalServiceUtil.getPortletById(
-					companyId, portletId);
+		PortletApp portletApp = portlet.getPortletApp();
 
-				PortletApp portletApp = portlet.getPortletApp();
-
-				return portletApp.getServletURLPatterns();
-			}
-			catch (SystemException se) {
-				throw new ServletException(se);
-			}
-		}
-		else {
-			PortletRequestImpl portletRequestImpl =
-				(PortletRequestImpl)portletRequest;
-
-			Portlet portlet = portletRequestImpl.getPortlet();
-
-			PortletApp portletApp = portlet.getPortletApp();
-
-			return portletApp.getServletURLPatterns();
-		}
+		return portletApp.getServletURLPatterns();
 	}
 
 	private RequestDispatcher _requestDispatcher;

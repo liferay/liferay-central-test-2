@@ -22,15 +22,13 @@
 
 package com.liferay.taglib.util;
 
-import com.sun.portal.portletcontainer.taglib.PropertyBaseTag;
-
 /**
  * <a href="PropertyAncestorTag.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public interface PropertyAncestorTag extends PropertyBaseTag {
+public interface PropertyAncestorTag {
 
 	public void addProperty(String name, String value);
 

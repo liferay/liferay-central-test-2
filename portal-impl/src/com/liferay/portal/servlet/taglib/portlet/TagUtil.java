@@ -43,11 +43,6 @@ package com.liferay.portal.servlet.taglib.portlet;
 
 import com.liferay.portal.kernel.portlet.LiferayPortletURL;
 import com.liferay.portal.kernel.util.JavaConstants;
-import com.liferay.portal.model.LayoutConstants;
-import com.liferay.portal.portletcontainer.LiferayPortletURLImpl;
-import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.PropsValues;
-import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletConfigImpl;
 import com.liferay.portlet.PortletResponseImpl;
 
@@ -74,26 +69,12 @@ public class TagUtil {
 			return null;
 		}
 
-		LiferayPortletURL portletURL = null;
+		PortletResponseImpl portletResponse =
+			(PortletResponseImpl)request.getAttribute(
+				JavaConstants.JAVAX_PORTLET_RESPONSE);
 
-		if (PropsValues.PORTLET_CONTAINER_IMPL_SUN &&
-			_isWARFile(portletRequest)) {
-
-			portletURL = new LiferayPortletURLImpl(
-				request, portletName, portletRequest.getWindowState(),
-				portletRequest.getPortletMode(), _getPlid(request, plid),
-				lifecycle);
-		}
-		else {
-			PortletResponseImpl portletResponse =
-				(PortletResponseImpl)request.getAttribute(
-					JavaConstants.JAVAX_PORTLET_RESPONSE);
-
-			portletURL = portletResponse.createPortletURLImpl(
-				plid, portletName, lifecycle);
-		}
-
-		return portletURL;
+		return portletResponse.createPortletURLImpl(
+			plid, portletName, lifecycle);
 	}
 
 	public static String getPortletName(HttpServletRequest request) {
@@ -104,49 +85,11 @@ public class TagUtil {
 			return null;
 		}
 
-		String portletName = null;
+		PortletConfigImpl portletConfig =
+			(PortletConfigImpl)request.getAttribute(
+				JavaConstants.JAVAX_PORTLET_CONFIG);
 
-		if (PropsValues.PORTLET_CONTAINER_IMPL_SUN &&
-			_isWARFile(portletRequest)) {
-
-			portletName = (String)portletRequest.getAttribute(
-				_PORTLET_CONTAINER_WINDOW_NAME);
-		}
-		else {
-			PortletConfigImpl portletConfig =
-				(PortletConfigImpl)request.getAttribute(
-					JavaConstants.JAVAX_PORTLET_CONFIG);
-
-			portletName = portletConfig.getPortletId();
-		}
-
-		return portletName;
+		return portletConfig.getPortletId();
 	}
-
-	private static long _getPlid(HttpServletRequest request, long plid) {
-		if (plid == LayoutConstants.DEFAULT_PLID) {
-			ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
-				WebKeys.THEME_DISPLAY);
-
-			plid = themeDisplay.getPlid();
-		}
-
-		return plid;
-	}
-
-	private static boolean _isWARFile(PortletRequest portletRequest) {
-		Object portletWindowName = portletRequest.getAttribute(
-			_PORTLET_CONTAINER_WINDOW_NAME);
-
-		if (portletWindowName == null) {
-			return false;
-		}
-		else {
-			return true;
-		}
-	}
-
-	private static final String _PORTLET_CONTAINER_WINDOW_NAME =
-		"javax.portlet.portletc.portletWindowName";
 
 }

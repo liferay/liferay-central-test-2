@@ -5,19 +5,11 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd"
 >
-	<bean id="com.liferay.portal.portletcontainer.PortletWindowContextFactoryUtil" class="com.liferay.portal.portletcontainer.PortletWindowContextFactoryUtil">
-		<property name="portletWindowContextFactory">
-			<bean class="com.liferay.portal.portletcontainer.PortletWindowContextFactoryImpl" />
-		</property>
-	</bean>
 	<bean id="com.liferay.portlet.PortletInstanceFactoryUtil" class="com.liferay.portlet.PortletInstanceFactoryUtil">
 		<property name="portletInstanceFactory">
 			<bean class="com.liferay.portlet.PortletInstanceFactoryImpl">
 				<property name="internalInvokerPortletPrototype">
 					<bean class="com.liferay.portlet.InvokerPortletImpl" />
-				</property>
-				<property name="sunInvokerPortletPrototype">
-					<bean class="com.liferay.portal.portletcontainer.WindowInvoker" />
 				</property>
 			</bean>
 		</property>

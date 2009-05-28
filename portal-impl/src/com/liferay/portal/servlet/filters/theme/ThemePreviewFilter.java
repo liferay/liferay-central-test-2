@@ -62,7 +62,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * <a href="ThemePreviewFilter.java.html"><b><i>View Source</i></b></a>
  *
- * @author Ganesh P Ram
+ * @author Ganesh Ram
  *
  */
 public class ThemePreviewFilter extends BasePortalFilter {

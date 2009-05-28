@@ -81,7 +81,6 @@ import com.liferay.portal.model.Theme;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.plugin.PluginPackageUtil;
-import com.liferay.portal.portletcontainer.HttpServletUtil;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
@@ -984,13 +983,6 @@ public class PortalImpl implements Portal {
 			return getHttpServletRequest(portletRequestWrapper.getRequest());
 		}
 
-		HttpServletRequest request = HttpServletUtil.getHttpServletRequest(
-			portletRequest);
-
-		if (request != null) {
-			return request;
-		}
-
 		throw new RuntimeException(
 			"Unable to get the HTTP servlet request from " +
 				portletRequest.getClass().getName());
@@ -1016,13 +1008,6 @@ public class PortalImpl implements Portal {
 				(PortletResponseWrapper)portletResponse;
 
 			return getHttpServletResponse(portletResponseWrapper.getResponse());
-		}
-
-		HttpServletResponse response = HttpServletUtil.getHttpServletResponse(
-			portletResponse);
-
-		if (response != null) {
-			return response;
 		}
 
 		PortletResponseImpl portletResponseImpl =
@@ -2354,45 +2339,20 @@ public class PortalImpl implements Portal {
 	public UploadPortletRequest getUploadPortletRequest(
 		ActionRequest actionRequest) {
 
-		if (actionRequest instanceof ActionRequestImpl) {
-			ActionRequestImpl actionRequestImpl =
-				(ActionRequestImpl)actionRequest;
+		ActionRequestImpl actionRequestImpl = (ActionRequestImpl)actionRequest;
 
-			DynamicServletRequest dynamicRequest =
-				(DynamicServletRequest)
-				actionRequestImpl.getHttpServletRequest();
+		DynamicServletRequest dynamicRequest =
+			(DynamicServletRequest)actionRequestImpl.getHttpServletRequest();
 
-			HttpServletRequestWrapper requestWrapper =
-				(HttpServletRequestWrapper)dynamicRequest.getRequest();
+		HttpServletRequestWrapper requestWrapper =
+			(HttpServletRequestWrapper)dynamicRequest.getRequest();
 
-			UploadServletRequest uploadRequest = getUploadServletRequest(
-				requestWrapper);
+		UploadServletRequest uploadRequest = getUploadServletRequest(
+			requestWrapper);
 
-			return new UploadPortletRequestImpl(
-				uploadRequest,
-				PortalUtil.getPortletNamespace(
-				actionRequestImpl.getPortletName()));
-		}
-		else {
-			com.sun.portal.portletcontainer.portlet.impl.ActionRequestImpl
-				actionRequestImpl =
-				(com.sun.portal.portletcontainer.portlet.impl.ActionRequestImpl)
-				actionRequest;
-
-			HttpServletRequestWrapper requestWrapper =
-				(HttpServletRequestWrapper)
-				actionRequestImpl.getHttpServletRequest();
-
-			UploadServletRequest uploadRequest = getUploadServletRequest(
-				requestWrapper);
-
-			String portletWindowName = (String)actionRequest.getAttribute(
-				"javax.portlet.portletc.portletWindowName");
-
-			return new UploadPortletRequestImpl(
-				uploadRequest,
-				PortalUtil.getPortletNamespace(portletWindowName));
-		}
+		return new UploadPortletRequestImpl(
+			uploadRequest,
+			PortalUtil.getPortletNamespace(actionRequestImpl.getPortletName()));
 	}
 
 	public UploadServletRequest getUploadServletRequest(

@@ -792,17 +792,6 @@
 		</licenses>
 	</library>
 	<library>
-		<file-name>global/container.jar</file-name>
-		<version>2.0 (trunk 845)</version>
-		<project-name>Portlet Container</project-name>
-		<project-url>http://portlet-container.dev.java.net</project-url>
-		<licenses>
-			<license>
-				<license-name>CDDL 1.0</license-name>
-			</license>
-		</licenses>
-	</library>
-	<library>
 		<file-name>global/portlet.jar</file-name>
 		<version>2.0</version>
 		<project-name>JSR 286 Portlet 2.0 Specification</project-name>
@@ -810,17 +799,6 @@
 		<licenses>
 			<license>
 				<license-name>IBM Java Portlet Specification 2.0 License</license-name>
-			</license>
-		</licenses>
-	</library>
-	<library>
-		<file-name>global/portlet-container.jar</file-name>
-		<version>2.0 (trunk 845)</version>
-		<project-name>Portlet Container</project-name>
-		<project-url>http://portlet-container.dev.java.net</project-url>
-		<licenses>
-			<license>
-				<license-name>CDDL 1.0</license-name>
 			</license>
 		</licenses>
 	</library>

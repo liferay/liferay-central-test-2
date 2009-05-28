@@ -22,8 +22,6 @@
 
 package com.liferay.portal.kernel.portlet;
 
-import com.sun.portal.container.ChannelURLType;
-
 import java.io.Serializable;
 
 import java.util.Set;
@@ -86,7 +84,5 @@ public interface LiferayPortletURL
 	public void setPlid(long plid);
 
 	public void setPortletId(String portletId);
-
-	public void setURLType(ChannelURLType urlType);
 
 }

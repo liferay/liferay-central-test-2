@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.portlet.PortletModeFactory;
 import com.liferay.portal.kernel.portlet.WindowStateFactory;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.Http;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.MapUtil;
@@ -54,9 +55,6 @@ import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.social.util.FacebookUtil;
 import com.liferay.util.Encryptor;
 import com.liferay.util.EncryptorException;
-
-import com.sun.portal.container.ChannelURLType;
-import com.sun.portal.portletcontainer.common.URLHelper;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -574,14 +572,6 @@ public class PortletURLImpl
 		_toString = null;
 	}
 
-	public void setURLType(ChannelURLType urlType) {
-		_urlType = urlType;
-
-		// Clear cache
-
-		_toString = null;
-	}
-
 	public String toString() {
 		if (_toString != null) {
 			return _toString;
@@ -600,7 +590,7 @@ public class PortletURLImpl
 		String toString = toString();
 
 		if (escapeXml && !_escapeXml) {
-			toString = URLHelper.escapeURL(toString);
+			toString = HtmlUtil.escape(toString);
 		}
 
 		writer.write(toString);
@@ -741,28 +731,6 @@ public class PortletURLImpl
 			}
 			else if (_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
 				sb.append(processValue(key, "2"));
-			}
-
-			sb.append(StringPool.AMPERSAND);
-		}
-
-		if (PropsValues.PORTLET_CONTAINER_IMPL_SUN &&
-			!isParameterIncludedInPath("p_p_url_type")) {
-
-			sb.append("p_p_url_type");
-			sb.append(StringPool.EQUAL);
-
-			if (ChannelURLType.ACTION.equals(_urlType)) {
-				sb.append(processValue(key, "1"));
-			}
-			else if (ChannelURLType.RENDER.equals(_urlType)) {
-				sb.append(processValue(key, "0"));
-			}
-			else if (ChannelURLType.RESOURCE.equals(_urlType)) {
-				sb.append(processValue(key, "2"));
-			}
-			else {
-				sb.append(processValue(key, "0"));
 			}
 
 			sb.append(StringPool.AMPERSAND);
@@ -1043,7 +1011,7 @@ public class PortletURLImpl
 		}
 
 		if (_escapeXml) {
-			result = URLHelper.escapeURL(result);
+			result = HtmlUtil.escape(result);
 		}
 
 		return result;
@@ -1109,7 +1077,6 @@ public class PortletURLImpl
 	private String _resourceID;
 	private boolean _secure;
 	private WindowState _windowState;
-	private ChannelURLType _urlType;
 	private String _toString;
 
 }

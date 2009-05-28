@@ -1082,12 +1082,6 @@ public class PropsValues {
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.PORTAL_SECURITY_MANAGER_ENABLE));
 
-	public static final String PORTLET_CONTAINER_IMPL =
-		PropsUtil.get(PropsKeys.PORTLET_CONTAINER_IMPL);
-
-	public static final boolean PORTLET_CONTAINER_IMPL_SUN =
-		PORTLET_CONTAINER_IMPL.equals("sun");
-
 	public static final boolean PORTLET_CSS_ENABLED = GetterUtil.getBoolean(
 		PropsUtil.get(PropsKeys.PORTLET_CSS_ENABLED));
 

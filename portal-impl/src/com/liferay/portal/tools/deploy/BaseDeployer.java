@@ -56,8 +56,6 @@ import com.liferay.util.ant.UpToDateTask;
 import com.liferay.util.ant.WarTask;
 import com.liferay.util.xml.XMLFormatter;
 
-import com.sun.portal.portletcontainer.warupdater.PortletWarUpdater;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -429,19 +427,6 @@ public class BaseDeployer {
 			File srcFile, File mergeDir, File deployDir, String displayName,
 			boolean overwrite, PluginPackage pluginPackage)
 		throws Exception {
-
-		if ((PropsValues.PORTLET_CONTAINER_IMPL_SUN) &&
-			(this instanceof PortletDeployer)) {
-
-			Properties properties = new Properties();
-
-			properties.setProperty(PortletWarUpdater.ADD_WEB_XML, "true");
-
-			PortletWarUpdater portletWarUpdater = new PortletWarUpdater(
-				properties);
-
-			portletWarUpdater.preparePortlet(displayName, srcFile);
-		}
 
 		rewriteFiles(srcFile);
 
