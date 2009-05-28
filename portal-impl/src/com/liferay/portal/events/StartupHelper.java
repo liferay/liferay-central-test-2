@@ -49,6 +49,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.List;
@@ -82,17 +83,12 @@ public class StartupHelper {
 	}
 
 	public void updateIndexes() {
-		Set<String> existingIndexNames = new HashSet<String>();
-
 		try {
-			dropIndexes(existingIndexNames);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
+			List<Index> indexes = getIndexes();
 
-		try {
-			addIndexes(existingIndexNames);
+			Set<String> validIndexNames = dropIndexes(indexes);
+
+			addIndexes(validIndexNames);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -189,7 +185,7 @@ public class StartupHelper {
 		return _verified;
 	}
 
-	protected void addIndexes(Set<String> existingIndexNames) throws Exception {
+	protected void addIndexes(Set<String> validIndexNames) throws Exception {
 		if (_log.isInfoEnabled()) {
 			_log.info("Adding indexes");
 		}
@@ -211,7 +207,7 @@ public class StartupHelper {
 
 			String indexName = sql.substring(x + 1, y);
 
-			if (existingIndexNames.contains(indexName)) {
+			if (validIndexNames.contains(indexName)) {
 				continue;
 			}
 
@@ -232,45 +228,30 @@ public class StartupHelper {
 		}
 	}
 
-	protected void dropIndexes(Set<String> existingIndexNames)
-		throws Exception {
+	protected Set<String> dropIndexes(List<Index> indexes) throws Exception {
+		Set<String> validIndexNames = new HashSet<String>();
 
-		if (!_dropIndexes) {
-			return;
-		}
-
-		List<Index> indexes = null;
-
-		DBUtil dbUtil = DBUtil.getInstance();
-
-		String type = dbUtil.getType();
-
-		if (type.equals(DBUtil.TYPE_DB2)) {
-			indexes = getDB2Indexes();
-		}
-		else if (type.equals(DBUtil.TYPE_MYSQL)) {
-			indexes = getMySQLIndexes();
-		}
-		else if (type.equals(DBUtil.TYPE_ORACLE)) {
-			indexes = getOracleIndexes();
-		}
-		else if (type.equals(DBUtil.TYPE_POSTGRESQL)) {
-			indexes = getPostgreSQLIndexes();
-		}
-		else if (type.equals(DBUtil.TYPE_SQLSERVER)) {
-			indexes = getSQLServerIndexes();
-		}
-		else if (type.equals(DBUtil.TYPE_SYBASE)) {
-			indexes = getSybaseIndexes();
+		if (indexes.isEmpty()) {
+			return validIndexNames;
 		}
 
-		if ((indexes == null) || indexes.isEmpty()) {
-			return;
+		if (_dropIndexes) {
+			for (Index index : indexes) {
+				String indexName = index.getIndexName().toUpperCase();
+
+				validIndexNames.add(indexName);
+			}
+
+			return validIndexNames;
 		}
 
 		if (_log.isInfoEnabled()) {
 			_log.info("Dropping stale indexes");
 		}
+
+		DBUtil dbUtil = DBUtil.getInstance();
+
+		String type = dbUtil.getType();
 
 		Thread currentThread = Thread.currentThread();
 
@@ -308,7 +289,7 @@ public class StartupHelper {
 			String tableNameLowerCase = tableName.toLowerCase();
 			boolean unique = index.isUnique();
 
-			existingIndexNames.add(indexName);
+			validIndexNames.add(indexName);
 
 			if (indexProperties.containsKey(indexNameLowerCase)) {
 				if (unique &&
@@ -333,7 +314,7 @@ public class StartupHelper {
 				}
 			}
 
-			existingIndexNames.remove(indexName);
+			validIndexNames.remove(indexName);
 
 			String sql = "drop index " + indexName;
 
@@ -349,10 +330,45 @@ public class StartupHelper {
 
 			dbUtil.runSQL(sql);
 		}
+
+		return validIndexNames;
 	}
 
 	protected List<Index> getDB2Indexes() throws Exception {
 		return null;
+	}
+
+	protected List<Index> getIndexes() throws Exception {
+		List<Index> indexes = null;
+
+		DBUtil dbUtil = DBUtil.getInstance();
+
+		String type = dbUtil.getType();
+
+		if (type.equals(DBUtil.TYPE_DB2)) {
+			indexes = getDB2Indexes();
+		}
+		else if (type.equals(DBUtil.TYPE_MYSQL)) {
+			indexes = getMySQLIndexes();
+		}
+		else if (type.equals(DBUtil.TYPE_ORACLE)) {
+			indexes = getOracleIndexes();
+		}
+		else if (type.equals(DBUtil.TYPE_POSTGRESQL)) {
+			indexes = getPostgreSQLIndexes();
+		}
+		else if (type.equals(DBUtil.TYPE_SQLSERVER)) {
+			indexes = getSQLServerIndexes();
+		}
+		else if (type.equals(DBUtil.TYPE_SYBASE)) {
+			indexes = getSybaseIndexes();
+		}
+
+		if (indexes == null) {
+			indexes = Collections.EMPTY_LIST;
+		}
+
+		return indexes;
 	}
 
 	protected List<Index> getMySQLIndexes() throws Exception {
