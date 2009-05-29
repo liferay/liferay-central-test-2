@@ -30,7 +30,6 @@
 <tr>
 	<td colspan="3">
 		<div class="category-vocabulary-toolbar">
-
 			<span id="category-vocabulary-search-bar">
 				<input id="category-vocabulary-search-input" type="text" value="" />
 
@@ -41,6 +40,7 @@
 
 				<input id="category-vocabulary-search-button" type="button" value="<liferay-ui:message key="search" />" />
 			</span>
+
 			<span class="category-vocabulary-actions">
 				<c:if test="<%= AssetPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_CATEGORY_VOCABULARY) %>">
 					<input class="add-category-vocabulary-btn" id="add-category-vocabulary-btn" name="add-category-vocabulary-btn" type="button"  value="<liferay-ui:message key="add-vocabulary" />">
@@ -60,10 +60,12 @@
 
 					<input type="button" value="<liferay-ui:message key="permissions" />" onClick="location.href = '<%= permissionsURL %>';" />
 				</c:if>
+
 				<div class="exp-overlay category-toolbar-section">
 					<div class="exp-header">
 						<span class="knob"></span>
 					</div>
+
 					<div class="panel-content">
 						<div class="ctrl-holder">
 							<label class="category-vocabulary-label" for="category-vocabulary-category-name">
@@ -99,6 +101,7 @@
 					<div class="exp-header">
 						<span class="knob"></span>
 					</div>
+
 					<div class="panel-content">
 						<div class="ctrl-holder">
 							<label for="category-vocabulary-name">
@@ -128,6 +131,7 @@
 <tr class="category-vocabulary-content">
 	<td class="category-vocabulary-list-container">
 		<div class="results-header"><liferay-ui:message key="vocabularies" /></div>
+
 		<div class="category-vocabulary-list lfr-component"></div>
 	</td>
 	<td class="category-vocabulary-categories-container">
@@ -141,6 +145,7 @@
 	</td>
 	<td class="category-vocabulary-edit-category">
 		<div class="results-header"><liferay-ui:message key="edit-category" /></div>
+
 		<div class="category-vocabulary-edit">
 			<div class="category-vocabulary-close">
 				<span>
