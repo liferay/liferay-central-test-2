@@ -47,22 +47,31 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class ETagFilter extends BasePortalFilter {
 
+	public static final String ETAG = ETagFilter.class.getName() + "ETAG";
+
 	protected void processFilter(
 			HttpServletRequest request, HttpServletResponse response,
 			FilterChain filterChain)
 		throws IOException, ServletException {
 
-		CacheResponse cacheResponse = new CacheResponse(
-			response, StringPool.UTF8);
+		CacheResponseData cacheResponseData = null;
 
-		processFilter(ETagFilter.class, request, cacheResponse, filterChain);
+		String eTag = (String)request.getAttribute(ETAG);
 
-		CacheResponseData cacheResponseData = new CacheResponseData(
-			cacheResponse.getData(), cacheResponse.getContentType(),
-			cacheResponse.getHeaders());
+		if (eTag == null) {
+			CacheResponse cacheResponse = new CacheResponse(
+				response, StringPool.UTF8);
 
-		String eTag = Integer.toHexString(
-			Arrays.hashCode(cacheResponse.getData()));
+			processFilter(
+				ETagFilter.class, request, cacheResponse, filterChain);
+
+			cacheResponseData = new CacheResponseData(
+				cacheResponse.getData(), cacheResponse.getContentType(),
+				cacheResponse.getHeaders());
+
+			eTag = Integer.toHexString(
+				Arrays.hashCode(cacheResponse.getData()));
+		}
 
 		if (Validator.isNotNull(eTag)) {
 			response.setHeader(HttpHeaders.ETAG, eTag);
@@ -76,7 +85,12 @@ public class ETagFilter extends BasePortalFilter {
 			}
 		}
 
-		CacheResponseUtil.write(response, cacheResponseData);
+		if (cacheResponseData != null) {
+			CacheResponseUtil.write(response, cacheResponseData);
+		}
+		else {
+			processFilter(ETagFilter.class, request, response, filterChain);
+		}
 	}
 
 }
