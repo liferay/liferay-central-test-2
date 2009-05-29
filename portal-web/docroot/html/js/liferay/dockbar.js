@@ -341,6 +341,8 @@
 
 				instance._super.apply(instance, arguments);
 
+				this.cfg.setProperty('width', this.element.offsetWidth + 'px');
+
 				Liferay.Dockbar.MenuManager.register(this);
 			},
 

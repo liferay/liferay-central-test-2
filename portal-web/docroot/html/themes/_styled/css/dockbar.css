@@ -182,7 +182,7 @@ html > .lfr-dockbar-pinned {
 }
 
 .dockbar .menu-container li a:hover {
-	background: #828F95;
+	background-color: #828F95;
 	color: #fff;
 }
 
@@ -201,79 +201,40 @@ html > .lfr-dockbar-pinned {
 	padding: 0;
 }
 
-.dockbar .my-places-container h3 {
-	float: left;
-	font-size: 1em;
-	margin-right: 20px;
-	margin: 0;
-	padding: 0;
-}
-
-.dockbar .my-places-container h3 a {
-	color: #000;
-	text-decoration: none;
-}
-
-.dockbar .my-places-container li {
+.dockbar .my-places-container a {
 	overflow: hidden;
-	padding: 2px 5px;
+	text-align: right;
+	white-space: nowrap;
 }
 
-.ie7 .dockbar .my-places-container li, .ie6 .dockbar .my-places-container li {
-	vertical-align: bottom;
+.ie6 .dockbar .my-places-container a {
+	zoom: 1;
 }
 
-.dockbar .my-places-container li.current-community {
+.dockbar .my-places-container .current-site a {
 	background: #A8D6ED url(../images/arrows/01_right.png) no-repeat scroll 2px 30%;
 	padding-left: 20px;
 }
 
-.dockbar .my-places-container li:hover {
-	background-color: #eee;
+.dockbar .my-places-container .site-name {
+	cursor: pointer;
+	float: left;
 }
 
-.dockbar .my-places-container .page-count {
-	display: none;
-}
-
-.dockbar .my-places-container li ul {
-	background: transparent;
-	border-width: 0;
+.dockbar .my-places-container .site-type {
+	color: #777;
 	float: right;
-	padding: 0;
-	width: auto;
+	font-size: 0.8em;
+	font-weight: normal;
+	margin-left: 10px;
 }
 
-.dockbar .my-places-container li li {
-	border-bottom-width: 0;
-	display: inline-block;
+.dockbar .my-places-container a:hover .site-type {
+	color: #fff;
+}
+
+.ie7 .dockbar .my-places-container .site-type {
 	float: none;
-	overflow: hidden;
-	padding: 0;
-}
-
-.ie6 .dockbar .my-places-container li li, .ie7 .dockbar .my-places-container li li {
-	display: inline;
-}
-
-.dockbar .my-places-container li ul a {
-	display: inline;
-	margin: 0;
-}
-
-.dockbar .my-places-container li li a.add-page {
-	display: none;
-	float: none;
-}
-
-.dockbar .my-places-container li li.public {
-	margin-left: 20px;
-}
-
-.dockbar .my-places-container .search-field {
-	font-size: 1.1em;
-	margin-bottom: 5px;
-	width: 98%;
 }
 
 .dockbar .toggle-controls a {

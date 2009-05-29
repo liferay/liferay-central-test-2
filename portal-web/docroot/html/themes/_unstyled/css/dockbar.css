@@ -109,46 +109,25 @@ html > .lfr-dockbar-pinned {
 .my-places-container ul, .my-places-container li {
 }
 
-.dockbar .my-places-container h3 {
+.dockbar .my-places-container a {
 }
 
-.dockbar .my-places-container h3 a {
+.ie6 .dockbar .my-places-container a {
 }
 
-.dockbar .my-places-container li {
+.dockbar .my-places-container .current-site a {
 }
 
-.ie7 .dockbar .my-places-container li, .ie6 .dockbar .my-places-container li {
+.dockbar .my-places-container .site-name {
 }
 
-.dockbar .my-places-container li.current-community {
+.dockbar .my-places-container .site-type {
 }
 
-.dockbar .my-places-container li:hover {
+.dockbar .my-places-container a:hover .site-type {
 }
 
-.dockbar .my-places-container .page-count {
-}
-
-.dockbar .my-places-container li ul {
-}
-
-.dockbar .my-places-container li li {
-}
-
-.ie6 .dockbar .my-places-container li li, .ie7 .dockbar .my-places-container li li {
-}
-
-.dockbar .my-places-container li ul a {
-}
-
-.dockbar .my-places-container li li a.add-page {
-}
-
-.dockbar .my-places-container li li.public {
-}
-
-.dockbar .my-places-container .search-field {
+.ie7 .dockbar .my-places-container .site-type {
 }
 
 .dockbar .toggle-controls a {
