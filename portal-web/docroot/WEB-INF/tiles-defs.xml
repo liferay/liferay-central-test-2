@@ -129,6 +129,14 @@
 		<put name="portlet_content" value="/portlet/announcements/view.jsp" />
 	</definition>
 
+	<!-- Asset Categories Admin -->
+
+	<definition name="portlet.asset_category_admin" extends="portlet" />
+
+	<definition name="portlet.asset_category_admin.view" extends="portlet.asset_category_admin">
+		<put name="portlet_content" value="/portlet/asset_category_admin/view.jsp" />
+	</definition>
+
 	<!-- Asset Publisher -->
 
 	<definition name="portlet.asset_publisher" extends="portlet" />
