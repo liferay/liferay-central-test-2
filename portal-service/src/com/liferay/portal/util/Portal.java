@@ -83,10 +83,10 @@ public interface Portal {
 
 	public static final String PATH_PORTAL_LAYOUT = "/portal/layout";
 
-	public static final String PORTLET_XML_FILE_NAME_STANDARD = "portlet.xml";
-
 	public static final String PORTLET_XML_FILE_NAME_CUSTOM =
 		"portlet-custom.xml";
+
+	public static final String PORTLET_XML_FILE_NAME_STANDARD = "portlet.xml";
 
 	public static final Date UP_TIME = new Date();
 
@@ -181,13 +181,6 @@ public interface Portal {
 
 	public String getCustomSQLFunctionIsNull();
 
-	public Date getDate(int month, int day, int year, PortalException pe)
-		throws PortalException;
-
-	public Date getDate(
-			int month, int day, int year, TimeZone timeZone, PortalException pe)
-		throws PortalException;
-
 	public Date getDate(
 			int month, int day, int year, int hour, int min, PortalException pe)
 		throws PortalException;
@@ -195,6 +188,13 @@ public interface Portal {
 	public Date getDate(
 			int month, int day, int year, int hour, int min, TimeZone timeZone,
 			PortalException pe)
+		throws PortalException;
+
+	public Date getDate(int month, int day, int year, PortalException pe)
+		throws PortalException;
+
+	public Date getDate(
+			int month, int day, int year, TimeZone timeZone, PortalException pe)
 		throws PortalException;
 
 	public long getDefaultCompanyId();
@@ -227,17 +227,6 @@ public interface Portal {
 
 	public String getJsSafePortletId(String portletId) ;
 
-	public String getLayoutEditPage(Layout layout);
-
-	public String getLayoutViewPage(Layout layout);
-
-	public String getLayoutURL(ThemeDisplay themeDisplay);
-
-	public String getLayoutURL(Layout layout, ThemeDisplay themeDisplay);
-
-	public String getLayoutURL(
-		Layout layout, ThemeDisplay themeDisplay, boolean doAsUser);
-
 	public String getLayoutActualURL(Layout layout);
 
 	public String getLayoutActualURL(Layout layout, String mainPath);
@@ -252,6 +241,8 @@ public interface Portal {
 			String friendlyURL, Map<String, String[]> params)
 		throws PortalException, SystemException;
 
+	public String getLayoutEditPage(Layout layout);
+
 	public String getLayoutFriendlyURL(
 		Layout layout, ThemeDisplay themeDisplay);
 
@@ -261,17 +252,26 @@ public interface Portal {
 
 	public String getLayoutTarget(Layout layout);
 
+	public String getLayoutURL(Layout layout, ThemeDisplay themeDisplay);
+
+	public String getLayoutURL(
+		Layout layout, ThemeDisplay themeDisplay, boolean doAsUser);
+
+	public String getLayoutURL(ThemeDisplay themeDisplay);
+
+	public String getLayoutViewPage(Layout layout);
+
 	public Locale getLocale(HttpServletRequest request);
 
 	public Locale getLocale(RenderRequest renderRequest);
 
-	public BaseModel getModel(Resource resource)
+	public BaseModel<?> getModel(Resource resource)
 		throws PortalException, SystemException;
 
-	public BaseModel getModel(ResourcePermission resourcePermission)
+	public BaseModel<?> getModel(ResourcePermission resourcePermission)
 		throws PortalException, SystemException;
 
-	public BaseModel getModel(String modelName, String primKey)
+	public BaseModel<?> getModel(String modelName, String primKey)
 		throws PortalException, SystemException;
 
 	public String getNetvibesURL(Portlet portlet, ThemeDisplay themeDisplay);
@@ -293,18 +293,16 @@ public interface Portal {
 
 	public long getPlidFromFriendlyURL(long companyId, String friendlyURL);
 
-	public long getPlidFromPortletId(long groupId, String portletId);
-
 	public long getPlidFromPortletId(
 		long groupId, boolean privateLayout, String portletId);
+
+	public long getPlidFromPortletId(long groupId, String portletId);
 
 	public String getPortalLibDir();
 
 	public int getPortalPort();
 
 	public Properties getPortalProperties();
-
-	public String getPortalURL(ThemeDisplay themeDisplay);
 
 	public String getPortalURL(HttpServletRequest request);
 
@@ -316,6 +314,8 @@ public interface Portal {
 
 	public String getPortalURL(
 		String serverName, int serverPort, boolean secure);
+
+	public String getPortalURL(ThemeDisplay themeDisplay);
 
 	public String getPortalWebDir();
 
@@ -331,12 +331,7 @@ public interface Portal {
 	/**
 	 * @deprecated Use <code>getScopeGroupId</code>.
 	 */
-	public long getPortletGroupId(long plid);
-
-	/**
-	 * @deprecated Use <code>getScopeGroupId</code>.
-	 */
-	public long getPortletGroupId(Layout layout);
+	public long getPortletGroupId(ActionRequest actionRequest);
 
 	/**
 	 * @deprecated Use <code>getScopeGroupId</code>.
@@ -346,7 +341,12 @@ public interface Portal {
 	/**
 	 * @deprecated Use <code>getScopeGroupId</code>.
 	 */
-	public long getPortletGroupId(ActionRequest actionRequest);
+	public long getPortletGroupId(Layout layout);
+
+	/**
+	 * @deprecated Use <code>getScopeGroupId</code>.
+	 */
+	public long getPortletGroupId(long plid);
 
 	/**
 	 * @deprecated Use <code>getScopeGroupId</code>.
@@ -360,23 +360,23 @@ public interface Portal {
 	public String getPortletNamespace(String portletId);
 
 	public String getPortletTitle(
-		String portletId, long companyId, String languageId);
-
-	public String getPortletTitle(
-		String portletId, long companyId, Locale locale);
-
-	public String getPortletTitle(String portletId, User user);
+		Portlet portlet, long companyId, Locale locale);
 
 	public String getPortletTitle(
 		Portlet portlet, long companyId, String languageId);
 
 	public String getPortletTitle(
-		Portlet portlet, long companyId, Locale locale);
+		Portlet portlet, ServletContext servletContext, Locale locale);
 
 	public String getPortletTitle(Portlet portlet, User user);
 
 	public String getPortletTitle(
-		Portlet portlet, ServletContext servletContext, Locale locale);
+		String portletId, long companyId, Locale locale);
+
+	public String getPortletTitle(
+		String portletId, long companyId, String languageId);
+
+	public String getPortletTitle(String portletId, User user);
 
 	public String getPortletXmlFileName() throws SystemException;
 
@@ -385,15 +385,15 @@ public interface Portal {
 	public PreferencesValidator getPreferencesValidator(
 		Portlet portlet);
 
-	public long getScopeGroupId(long plid);
+	public long getScopeGroupId(HttpServletRequest request);
+
+	public long getScopeGroupId(HttpServletRequest request, String portletId);
 
 	public long getScopeGroupId(Layout layout);
 
 	public long getScopeGroupId(Layout layout, String portletId);
 
-	public long getScopeGroupId(HttpServletRequest request);
-
-	public long getScopeGroupId(HttpServletRequest request, String portletId);
+	public long getScopeGroupId(long plid);
 
 	public long getScopeGroupId(PortletRequest portletRequest);
 
@@ -415,10 +415,10 @@ public interface Portal {
 		HttpServletRequest request, String uri);
 
 	public String getStaticResourceURL(
-		HttpServletRequest request, String uri, String queryString);
+		HttpServletRequest request, String uri, long timestamp);
 
 	public String getStaticResourceURL(
-		HttpServletRequest request, String uri, long timestamp);
+		HttpServletRequest request, String uri, String queryString);
 
 	public String getStaticResourceURL(
 		HttpServletRequest request, String uri, String queryString,
@@ -461,18 +461,18 @@ public interface Portal {
 	public String getUserName(long userId, String defaultUserName);
 
 	public String getUserName(
-		long userId, String defaultUserName, String userAttribute);
+		long userId, String defaultUserName, HttpServletRequest request);
 
 	public String getUserName(
-		long userId, String defaultUserName, HttpServletRequest request);
+		long userId, String defaultUserName, String userAttribute);
 
 	public String getUserName(
 		long userId, String defaultUserName, String userAttribute,
 		HttpServletRequest request);
 
-	public String getUserPassword(HttpSession session);
-
 	public String getUserPassword(HttpServletRequest request);
+
+	public String getUserPassword(HttpSession session);
 
 	public String getUserPassword(PortletRequest portletRequest);
 
@@ -532,24 +532,24 @@ public interface Portal {
 	public void runSQL(String sql) throws IOException, SQLException;
 
 	public void sendError(
-			Exception e, HttpServletRequest request,
-			HttpServletResponse response)
-		throws IOException, ServletException;
-
-	public void sendError(
-			int status, Exception e, HttpServletRequest request,
-			HttpServletResponse response)
-		throws IOException, ServletException;
-
-	public void sendError(
 			Exception e, ActionRequest actionRequest,
 			ActionResponse actionResponse)
 		throws IOException;
 
 	public void sendError(
+			Exception e, HttpServletRequest request,
+			HttpServletResponse response)
+		throws IOException, ServletException;
+
+	public void sendError(
 			int status, Exception e, ActionRequest actionRequest,
 			ActionResponse actionResponse)
 		throws IOException;
+
+	public void sendError(
+			int status, Exception e, HttpServletRequest request,
+			HttpServletResponse response)
+		throws IOException, ServletException;
 
 	/**
 	 * Sets the description for a page. This overrides the existing page
