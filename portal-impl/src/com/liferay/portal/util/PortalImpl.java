@@ -201,72 +201,6 @@ import org.apache.struts.Globals;
  */
 public class PortalImpl implements Portal {
 
-	private static final String _J_SECURITY_CHECK = "j_security_check";
-
-	private static final String _JSESSIONID = ";jsessionid=";
-
-	private static final String _LOCALHOST = "localhost";
-
-	private static Log _log = LogFactoryUtil.getLog(PortalImpl.class);
-
-	private static final String  _PRIVATE_GROUP_SERVLET_MAPPING =
-		PropsValues.LAYOUT_FRIENDLY_URL_PRIVATE_GROUP_SERVLET_MAPPING;
-
-	private static final String _PRIVATE_USER_SERVLET_MAPPING =
-		PropsValues.LAYOUT_FRIENDLY_URL_PRIVATE_USER_SERVLET_MAPPING;
-
-	private static final String _PUBLIC_GROUP_SERVLET_MAPPING =
-		PropsValues.LAYOUT_FRIENDLY_URL_PUBLIC_SERVLET_MAPPING;
-
-	private String[] _allSystemCommunityRoles;
-
-	private String[] _allSystemGroups;
-
-	private String[] _allSystemOrganizationRoles;
-
-	private String[] _allSystemRoles;
-
-	private String _cdnHost;
-
-	private String _computerAddress;
-
-	private String _computerName;
-
-	private String[] _customSqlClassNameIds = null;
-
-	private String[] _customSqlClassNames = null;
-
-	private String _pathContext;
-
-	private String _pathFriendlyURLPrivateGroup;
-
-	private String _pathFriendlyURLPrivateUser;
-
-	private String _pathFriendlyURLPublic;
-
-	private String _pathImage;
-
-	private String _pathMain;
-
-	private Map<String, Long> _plidToPortletIdCache =
-		new ConcurrentHashMap<String, Long>();
-
-	private String _portalLibDir;
-
-	private Integer _portalPort = new Integer(-1);
-
-	private String _portalWebDir;
-
-	private Set<String> _reservedParams;
-
-	private String[] _sortedSystemCommunityRoles;
-
-	private String[] _sortedSystemGroups;
-
-	private String[] _sortedSystemOrganizationRoles;
-
-	private String[] _sortedSystemRoles;
-
 	public PortalImpl() {
 
 		// Computer name
@@ -2928,6 +2862,7 @@ public class PortalImpl implements Portal {
 
 		sb.append(stringResponse.getString());
 	}
+
 	public void renderPortlet(
 			StringBuilder sb, ServletContext servletContext,
 			HttpServletRequest request, HttpServletResponse response,
@@ -2938,6 +2873,7 @@ public class PortalImpl implements Portal {
 			sb, servletContext, request, response, portlet, queryString, null,
 			null, null);
 	}
+
 	public void renderPortlet(
 			StringBuilder sb, ServletContext servletContext,
 			HttpServletRequest request, HttpServletResponse response,
@@ -2949,6 +2885,7 @@ public class PortalImpl implements Portal {
 			sb, servletContext, request, response, portlet, queryString,
 			columnId, columnPos, columnCount, null);
 	}
+
 	public void renderPortlet(
 			StringBuilder sb, ServletContext servletContext,
 			HttpServletRequest request, HttpServletResponse response,
@@ -3026,9 +2963,11 @@ public class PortalImpl implements Portal {
 			requestDispatcher.include(request, response);
 		}
 	}
+
 	public void runSQL(String sql) throws IOException, SQLException {
 		DBUtil.getInstance().runSQL(sql);
 	}
+
 	public void sendError(
 			Exception e, ActionRequest actionRequest,
 			ActionResponse actionResponse)
@@ -3036,6 +2975,7 @@ public class PortalImpl implements Portal {
 
 		sendError(0, e, actionRequest, actionResponse);
 	}
+
 	public void sendError(
 			Exception e, HttpServletRequest request,
 			HttpServletResponse response)
@@ -3043,6 +2983,7 @@ public class PortalImpl implements Portal {
 
 		sendError(0, e, request, response);
 	}
+
 	public void sendError(
 			int status, Exception e, ActionRequest actionRequest,
 			ActionResponse actionResponse)
@@ -3060,6 +3001,7 @@ public class PortalImpl implements Portal {
 
 		actionResponse.sendRedirect(sb.toString());
 	}
+
 	public void sendError(
 			int status, Exception e, HttpServletRequest request,
 			HttpServletResponse response)
@@ -3143,6 +3085,7 @@ public class PortalImpl implements Portal {
 			}
 		}
 	}
+
 	/**
 	 * Sets the description for a page. This overrides the existing page
 	 * description.
@@ -3155,6 +3098,7 @@ public class PortalImpl implements Portal {
 
 		request.setAttribute(WebKeys.PAGE_DESCRIPTION, description);
 	}
+
 	/**
 	 * Sets the keywords for a page. This overrides the existing page keywords.
 	 *
@@ -3166,6 +3110,7 @@ public class PortalImpl implements Portal {
 
 		addPageKeywords(keywords, request);
 	}
+
 	/**
 	 * Sets the subtitle for a page. This overrides the existing page subtitle.
 	 *
@@ -3175,6 +3120,7 @@ public class PortalImpl implements Portal {
 	public void setPageSubtitle(String subtitle, HttpServletRequest request) {
 		request.setAttribute(WebKeys.PAGE_SUBTITLE, subtitle);
 	}
+
 	/**
 	 * Sets the whole title for a page. This overrides the existing page whole
 	 * title.
@@ -3185,6 +3131,7 @@ public class PortalImpl implements Portal {
 	public void setPageTitle(String title, HttpServletRequest request) {
 		request.setAttribute(WebKeys.PAGE_TITLE, title);
 	}
+
 	/**
 	 * Sets the port obtained on the first request to the portal.
 	 *
@@ -3197,6 +3144,7 @@ public class PortalImpl implements Portal {
 			}
 		}
 	}
+
 	public void storePreferences(PortletPreferences preferences)
 		throws IOException, ValidatorException {
 
@@ -3208,6 +3156,7 @@ public class PortalImpl implements Portal {
 
 		preferencesImpl.store();
 	}
+
 	public String transformCustomSQL(String sql) {
 		if ((_customSqlClassNames == null) ||
 			(_customSqlClassNameIds == null)) {
@@ -3218,6 +3167,7 @@ public class PortalImpl implements Portal {
 		return StringUtil.replace(
 			sql, _customSqlClassNames, _customSqlClassNameIds);
 	}
+
 	public PortletMode updatePortletMode(
 		String portletId, User user, Layout layout, PortletMode portletMode,
 		HttpServletRequest request) {
@@ -3333,6 +3283,7 @@ public class PortalImpl implements Portal {
 			return portletMode;
 		}
 	}
+
 	public WindowState updateWindowState(
 		String portletId, User user, Layout layout, WindowState windowState,
 		HttpServletRequest request) {
@@ -3390,6 +3341,7 @@ public class PortalImpl implements Portal {
 			return windowState;
 		}
 	}
+
 	protected List<Portlet> filterControlPanelPortlets(
 		Set<Portlet> portlets, String category, ThemeDisplay themeDisplay) {
 
@@ -3448,6 +3400,7 @@ public class PortalImpl implements Portal {
 
 		return filteredPortlets;
 	}
+
 	protected long getDoAsUserId(
 			HttpServletRequest request, String doAsUserIdString,
 			boolean alwaysAllowDoAsUser)
@@ -3529,6 +3482,7 @@ public class PortalImpl implements Portal {
 			return 0;
 		}
 	}
+
 	private long _getPlidFromPortletId(
 		long groupId, boolean privateLayout, String portletId) {
 
@@ -3574,6 +3528,7 @@ public class PortalImpl implements Portal {
 
 		return plid;
 	}
+
 	private String _getPortletParam(HttpServletRequest request, String name) {
 		String value = null;
 
@@ -3617,6 +3572,7 @@ public class PortalImpl implements Portal {
 
 		return value;
 	}
+
 	private String _getServletURL(
 		Portlet portlet, String servletPath, ThemeDisplay themeDisplay) {
 
@@ -3693,6 +3649,7 @@ public class PortalImpl implements Portal {
 
 		return sb.toString();
 	}
+
 	private void _initCustomSQL() {
 		_customSqlClassNames = new String[] {
 			"[$CLASS_NAME_ID_COM.LIFERAY.PORTAL.MODEL.GROUP$]",
@@ -3731,5 +3688,48 @@ public class PortalImpl implements Portal {
 			dbUtil.getTemplateTrue()
 		};
 	}
+
+	private static final String _J_SECURITY_CHECK = "j_security_check";
+
+	private static final String _JSESSIONID = ";jsessionid=";
+
+	private static final String _LOCALHOST = "localhost";
+
+	private static final String  _PRIVATE_GROUP_SERVLET_MAPPING =
+		PropsValues.LAYOUT_FRIENDLY_URL_PRIVATE_GROUP_SERVLET_MAPPING;
+
+	private static final String _PRIVATE_USER_SERVLET_MAPPING =
+		PropsValues.LAYOUT_FRIENDLY_URL_PRIVATE_USER_SERVLET_MAPPING;
+
+	private static final String _PUBLIC_GROUP_SERVLET_MAPPING =
+		PropsValues.LAYOUT_FRIENDLY_URL_PUBLIC_SERVLET_MAPPING;
+
+	private static Log _log = LogFactoryUtil.getLog(PortalImpl.class);
+
+	private String[] _allSystemCommunityRoles;
+	private String[] _allSystemGroups;
+	private String[] _allSystemOrganizationRoles;
+	private String[] _allSystemRoles;
+	private String _cdnHost;
+	private String _computerAddress;
+	private String _computerName;
+	private String[] _customSqlClassNameIds = null;
+	private String[] _customSqlClassNames = null;
+	private String _pathContext;
+	private String _pathFriendlyURLPrivateGroup;
+	private String _pathFriendlyURLPrivateUser;
+	private String _pathFriendlyURLPublic;
+	private String _pathImage;
+	private String _pathMain;
+	private Map<String, Long> _plidToPortletIdCache =
+		new ConcurrentHashMap<String, Long>();
+	private String _portalLibDir;
+	private Integer _portalPort = new Integer(-1);
+	private String _portalWebDir;
+	private Set<String> _reservedParams;
+	private String[] _sortedSystemCommunityRoles;
+	private String[] _sortedSystemGroups;
+	private String[] _sortedSystemOrganizationRoles;
+	private String[] _sortedSystemRoles;
 
 }
