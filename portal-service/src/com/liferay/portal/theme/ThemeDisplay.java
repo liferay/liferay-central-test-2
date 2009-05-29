@@ -1133,7 +1133,7 @@ public class ThemeDisplay implements Serializable {
 	private Group _scopeGroup;
 	private long _scopeGroupId;
 	private boolean _signedIn;
-	private PermissionChecker _permissionChecker;
+	private transient PermissionChecker _permissionChecker;
 	private Locale _locale;
 	private String _languageId;
 	private boolean _i18n;
