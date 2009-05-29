@@ -47,12 +47,14 @@ String password = preferences.getValue("password", StringPool.BLANK);
 String passwordField = preferences.getValue("password-field", StringPool.BLANK);
 String hiddenVariables = preferences.getValue("hidden-variables", StringPool.BLANK);
 
+String alt = preferences.getValue("alt", StringPool.BLANK);
 String border = preferences.getValue("border", "0");
 String bordercolor = preferences.getValue("bordercolor", "#000000");
 String frameborder = preferences.getValue("frameborder", "0");
 String heightMaximized = preferences.getValue("height-maximized", "600");
 String heightNormal = preferences.getValue("height-normal", "300");
 String hspace = preferences.getValue("hspace", "0");
+String longdesc = preferences.getValue("longdesc", StringPool.BLANK);
 String scrolling = preferences.getValue("scrolling", "auto");
 String vspace = preferences.getValue("vspace", "0");
 String width = preferences.getValue("width", "100%");

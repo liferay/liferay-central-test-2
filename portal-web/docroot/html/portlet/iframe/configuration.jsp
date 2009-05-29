@@ -26,12 +26,14 @@
 
 <%
 String htmlAttributes =
+	"alt=" + alt + "\n" +
 	"border=" + border + "\n" +
 	"bordercolor=" + bordercolor + "\n" +
 	"frameborder=" + frameborder + "\n" +
 	"height-maximized=" + heightMaximized + "\n" +
 	"height-normal=" + heightNormal + "\n" +
 	"hspace=" + hspace + "\n" +
+	"longdesc=" + longdesc + "\n" +
 	"scrolling=" + scrolling + "\n" +
 	"vspace=" + vspace + "\n" +
 	"width=" + width + "\n";
