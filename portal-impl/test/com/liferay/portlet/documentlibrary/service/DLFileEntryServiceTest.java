@@ -24,10 +24,7 @@ package com.liferay.portlet.documentlibrary.service;
 
 import com.liferay.documentlibrary.DuplicateFileException;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.model.Group;
-import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.service.BaseServiceTestCase;
-import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.TestPropsValues;
@@ -85,14 +82,10 @@ public class DLFileEntryServiceTest extends BaseServiceTestCase {
 
 		byte[] bytes = content.getBytes();
 
-		Group group = GroupLocalServiceUtil.getGroup(
-			TestPropsValues.COMPANY_ID, GroupConstants.GUEST);
-
 		ServiceContext serviceContext = new ServiceContext();
 
 		serviceContext.setAddCommunityPermissions(true);
 		serviceContext.setAddGuestPermissions(true);
-		serviceContext.setScopeGroupId(group.getGroupId());
 
 		DLFileEntryServiceUtil.addFileEntry(
 			_folder.getFolderId(), fileName, fileName, description,
