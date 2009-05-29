@@ -178,6 +178,10 @@
 
 		<action path="/announcements/view" forward="portlet.announcements.view" />
 
+		<!-- Asset Category Admin -->
+
+		<action path="/asset_category_admin/view" forward="portlet.asset_category_admin.view" />
+
 		<!-- Asset Publisher -->
 
 		<action path="/asset_publisher/edit_article_discussion" type="com.liferay.portlet.messageboards.action.EditDiscussionAction">
