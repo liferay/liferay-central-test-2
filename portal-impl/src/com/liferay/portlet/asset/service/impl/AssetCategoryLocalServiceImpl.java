@@ -44,9 +44,7 @@ import com.liferay.util.Autocomplete;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * <a href="AssetCategoryLocalServiceImpl.java.html"><b><i>View Source</i>
@@ -328,57 +326,33 @@ public class AssetCategoryLocalServiceImpl
 
 		// Properties
 
-		Set<Long> newProperties = new HashSet<Long>();
-
 		List<AssetCategoryProperty> oldProperties =
 			assetCategoryPropertyPersistence.findByCategoryId(categoryId);
+
+		for (AssetCategoryProperty assetCategoryProperty : oldProperties) {
+			assetCategoryPropertyLocalService.deleteAssetCategoryProperty(
+				assetCategoryProperty);
+		}
 
 		for (int i = 0; i < properties.length; i++) {
 			String[] property = StringUtil.split(
 				properties[i], StringPool.COLON);
 
-			long propertyId = 0;
-
-			if (property.length > 0) {
-				propertyId = GetterUtil.getLong(property[0]);
-			}
-
 			String key = StringPool.BLANK;
 
-			if (property.length > 1) {
-				key = GetterUtil.getString(property[1]);
+			if (property.length > 0) {
+				key = GetterUtil.getString(property[0]);
 			}
 
 			String value = StringPool.BLANK;
 
-			if (property.length > 2) {
-				value = GetterUtil.getString(property[2]);
+			if (property.length > 1) {
+				value = GetterUtil.getString(property[1]);
 			}
 
-			if (propertyId == 0) {
-				if (Validator.isNotNull(key)) {
-					assetCategoryPropertyLocalService.addCategoryProperty(
-						userId, categoryId, key, value);
-				}
-			}
-			else {
-				if (Validator.isNull(key)) {
-					assetCategoryPropertyLocalService.deleteCategoryProperty(
-						propertyId);
-				}
-				else {
-					assetCategoryPropertyLocalService.updateCategoryProperty(
-						propertyId, key, value);
-
-					newProperties.add(propertyId);
-				}
-			}
-		}
-
-		for (AssetCategoryProperty property : oldProperties) {
-			if (!newProperties.contains(property.getCategoryPropertyId())) {
-				assetCategoryPropertyLocalService.deleteCategoryProperty(
-					property);
+			if (Validator.isNotNull(key)) {
+				assetCategoryPropertyLocalService.addCategoryProperty(
+					userId, categoryId, key, value);
 			}
 		}
 

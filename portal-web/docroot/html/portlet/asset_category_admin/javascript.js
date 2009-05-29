@@ -546,7 +546,7 @@
 				var baseCategoryProperty = jQuery('div.category-vocabulary-property-row:last');
 				var newCategoryProperty = baseCategoryProperty.clone();
 
-				newCategoryProperty.find('.cateogory-property-key').val(key);
+				newCategoryProperty.find('.category-property-key').val(key);
 				newCategoryProperty.find('.category-property-value').val(value);
 				newCategoryProperty.insertAfter(baseNode);
 				newCategoryProperty.show();
@@ -700,7 +700,7 @@
 						var categoryPropertyRow = jQuery(this);
 						var key = categoryPropertyRow.find('input.category-property-key').val();
 						var value = categoryPropertyRow.find('input.category-property-value').val();
-						var rowValue = ['0', ':', key, ':', value, ','].join('');
+						var rowValue = [key, ':', value, ','].join('');
 
 						buffer.push(rowValue);
 					}
