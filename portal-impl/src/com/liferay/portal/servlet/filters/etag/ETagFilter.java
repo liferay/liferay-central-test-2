@@ -58,9 +58,9 @@ public class ETagFilter extends BasePortalFilter {
 			cacheResponse.getData(), cacheResponse.getContentType(),
 			cacheResponse.getHeaders());
 
-		ETagUtil.setETag(request, response, cacheResponse.getData());
-
-		CacheResponseUtil.write(response, cacheResponseData);
+		if (!ETagUtil.processETag(request, response, cacheResponse.getData())) {
+			CacheResponseUtil.write(response, cacheResponseData);
+		}
 	}
 
 }

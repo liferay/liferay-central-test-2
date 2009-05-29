@@ -167,10 +167,10 @@ public class StripFilter extends BasePortalFilter {
 					newByteArrayPos = oldByteArray.length;
 				}
 
-				ETagUtil.setETag(request, response, newByteArray);
-
-				ServletResponseUtil.write(
-					response, newByteArray, newByteArrayPos);
+				if (!ETagUtil.processETag(request, response, newByteArray)) {
+					ServletResponseUtil.write(
+						response, newByteArray, newByteArrayPos);
+				}
 			}
 		}
 		else {

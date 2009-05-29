@@ -421,9 +421,9 @@ public class MinifierFilter extends BasePortalFilter {
 			processFilter(MinifierFilter.class, request, response, filterChain);
 		}
 		else {
-			ETagUtil.setETag(request, response, minifiedContent);
-
-			ServletResponseUtil.write(response, minifiedContent);
+			if (!ETagUtil.processETag(request, response, minifiedContent)) {
+				ServletResponseUtil.write(response, minifiedContent);
+			}
 		}
 	}
 

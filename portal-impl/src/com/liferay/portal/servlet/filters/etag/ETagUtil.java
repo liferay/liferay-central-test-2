@@ -37,21 +37,13 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class ETagUtil {
 
-	public static final String ETAG = ETagUtil.class.getName() + "ETAG";
-
-	public static void setETag(
+	public static boolean processETag(
 		HttpServletRequest request, HttpServletResponse response,
 		byte[] bytes) {
 
-		String eTag = (String)request.getAttribute(ETAG);
+		boolean continueProcessingFilter = false;
 
-		if (eTag != null) {
-			return;
-		}
-
-		eTag = Integer.toHexString(Arrays.hashCode(bytes));
-
-		request.setAttribute(ETAG, eTag);
+		String eTag = Integer.toHexString(Arrays.hashCode(bytes));
 
 		response.setHeader(HttpHeaders.ETAG, eTag);
 
@@ -59,13 +51,17 @@ public class ETagUtil {
 
 		if (eTag.equals(ifNoneMatch)) {
 			response.setStatus(HttpServletResponse.SC_NOT_MODIFIED);
+
+			continueProcessingFilter = true;
 		}
+
+		return continueProcessingFilter;
 	}
 
-	public static void setETag(
+	public static boolean processETag(
 		HttpServletRequest request, HttpServletResponse response, String s) {
 
-		setETag(request, response, s.getBytes());
+		return processETag(request, response, s.getBytes());
 	}
 
 }
