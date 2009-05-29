@@ -34,7 +34,7 @@ portletURL.setParameter("redirect", redirect);
 portletURL.setParameter("backURL", redirect);
 portletURL.setParameter("portletResource", portletResource);
 portletURL.setParameter("typeSelection", JournalArticle.class.getName());
-portletURL.setParameter("assetOrder", Integer.toString(assetOrder));
+portletURL.setParameter("assetOrder", String.valueOf(assetOrder));
 %>
 
 <liferay-ui:tabs names="web-content" backURL="<%= configurationRenderURL.toString() %>" />
