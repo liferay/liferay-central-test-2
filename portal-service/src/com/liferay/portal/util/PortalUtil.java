@@ -26,10 +26,13 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.upload.UploadServletRequest;
+import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.Portlet;
+import com.liferay.portal.model.Resource;
+import com.liferay.portal.model.ResourcePermission;
 import com.liferay.portal.model.User;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.expando.model.ExpandoBridge;
@@ -317,6 +320,10 @@ public class PortalUtil {
 		return getPortal().getHttpServletResponse(portletResponse);
 	}
 
+	public static String getJsSafePortletId(String portletId) {
+		return getPortal().getJsSafePortletId(portletId);
+	}
+
 	public static String getLayoutEditPage(Layout layout) {
 		return getPortal().getLayoutEditPage(layout);
 	}
@@ -384,16 +391,30 @@ public class PortalUtil {
 		return getPortal().getLayoutTarget(layout);
 	}
 
-	public static String getJsSafePortletId(String portletId) {
-		return getPortal().getJsSafePortletId(portletId);
-	}
-
 	public static Locale getLocale(HttpServletRequest request) {
 		return getPortal().getLocale(request);
 	}
 
 	public static Locale getLocale(RenderRequest renderRequest) {
 		return getPortal().getLocale(renderRequest);
+	}
+
+	public BaseModel getModel(Resource resource)
+		throws PortalException, SystemException {
+
+		return getPortal().getModel(resource);
+	}
+
+	public BaseModel getModel(ResourcePermission resourcePermission)
+		throws PortalException, SystemException {
+
+		return getPortal().getModel(resourcePermission);
+	}
+
+	public BaseModel getModel(String modelName, String primKey)
+		throws PortalException, SystemException {
+
+		return getPortal().getModel(modelName, primKey);
 	}
 
 	public static String getNetvibesURL(

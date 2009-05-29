@@ -62,6 +62,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.QName;
+import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.ClassName;
 import com.liferay.portal.model.ColorScheme;
 import com.liferay.portal.model.Company;
@@ -75,6 +76,9 @@ import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletApp;
 import com.liferay.portal.model.PublicRenderParameter;
+import com.liferay.portal.model.Resource;
+import com.liferay.portal.model.ResourceCode;
+import com.liferay.portal.model.ResourcePermission;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.model.Theme;
@@ -90,6 +94,7 @@ import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
+import com.liferay.portal.service.ResourceCodeLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.UserServiceUtil;
 import com.liferay.portal.service.permission.PortletPermissionUtil;
@@ -133,6 +138,8 @@ import com.liferay.util.servlet.DynamicServletRequest;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
+
+import java.lang.reflect.Method;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -1016,6 +1023,10 @@ public class PortalImpl implements Portal {
 		return portletResponseImpl.getHttpServletResponse();
 	}
 
+	public String getJsSafePortletId(String portletId) {
+		return JS.getSafeName(portletId);
+	}
+
 	public String getLayoutEditPage(Layout layout) {
 		return PropsUtil.get(
 			PropsKeys.LAYOUT_EDIT_PAGE, new Filter(layout.getType()));
@@ -1341,10 +1352,6 @@ public class PortalImpl implements Portal {
 		return target;
 	}
 
-	public String getJsSafePortletId(String portletId) {
-		return JS.getSafeName(portletId);
-	}
-
 	public Locale getLocale(HttpServletRequest request) {
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
@@ -1361,6 +1368,79 @@ public class PortalImpl implements Portal {
 
 	public Locale getLocale(RenderRequest renderRequest) {
 		return getLocale(getHttpServletRequest(renderRequest));
+	}
+
+	public BaseModel getModel(Resource resource)
+		throws PortalException, SystemException {
+
+		ResourceCode resourceCode =
+			ResourceCodeLocalServiceUtil.getResourceCode(resource.getCodeId());
+
+		String modelName = resourceCode.getName();
+		String primKey = resource.getPrimKey();
+
+		return getModel(modelName, primKey);
+	}
+
+	public BaseModel getModel(ResourcePermission resourcePermission)
+		throws PortalException, SystemException {
+
+		String modelName = resourcePermission.getName();
+		String primKey = resourcePermission.getPrimKey();
+
+		return getModel(modelName, primKey);
+	}
+
+	public BaseModel getModel(String modelName, String primKey)
+		throws PortalException, SystemException {
+
+		if (!modelName.contains(".model.")) {
+			return null;
+		}
+
+		String[] parts = StringUtil.split(modelName, StringPool.PERIOD);
+
+		if ((parts.length <= 2) || !parts[parts.length - 2].equals("model")) {
+			return null;
+		}
+
+		parts[parts.length - 2] = "service";
+
+		String serviceName =
+			StringUtil.merge(parts, StringPool.PERIOD) + "LocalServiceUtil";
+		String methodName = "get" + parts[parts.length - 1];
+
+		Method method = null;
+
+		try {
+			Class serviceUtil = Class.forName(serviceName);
+
+			if (Validator.isNumber(primKey)) {
+				method = serviceUtil.getMethod(
+					methodName, new Class[] {Long.TYPE});
+
+				return (BaseModel)method.invoke(null, new Long(primKey));
+			}
+			else {
+				method = serviceUtil.getMethod(
+					methodName, new Class[] {String.class});
+
+				return (BaseModel)method.invoke(null, primKey);
+			}
+		}
+		catch (Exception e) {
+			Throwable cause = e.getCause();
+
+			if (cause instanceof PortalException) {
+				throw (PortalException)cause;
+			}
+			else if (cause instanceof SystemException) {
+				throw (SystemException)cause;
+			}
+			else {
+				throw new SystemException(cause);
+			}
+		}
 	}
 
 	public String getNetvibesURL(

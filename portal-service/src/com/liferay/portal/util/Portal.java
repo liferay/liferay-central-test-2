@@ -26,10 +26,13 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.upload.UploadServletRequest;
+import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.Portlet;
+import com.liferay.portal.model.Resource;
+import com.liferay.portal.model.ResourcePermission;
 import com.liferay.portal.model.User;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.expando.model.ExpandoBridge;
@@ -222,6 +225,8 @@ public interface Portal {
 	public HttpServletResponse getHttpServletResponse(
 		PortletResponse portletResponse);
 
+	public String getJsSafePortletId(String portletId) ;
+
 	public String getLayoutEditPage(Layout layout);
 
 	public String getLayoutViewPage(Layout layout);
@@ -256,11 +261,18 @@ public interface Portal {
 
 	public String getLayoutTarget(Layout layout);
 
-	public String getJsSafePortletId(String portletId) ;
-
 	public Locale getLocale(HttpServletRequest request);
 
 	public Locale getLocale(RenderRequest renderRequest);
+
+	public BaseModel getModel(Resource resource)
+		throws PortalException, SystemException;
+
+	public BaseModel getModel(ResourcePermission resourcePermission)
+		throws PortalException, SystemException;
+
+	public BaseModel getModel(String modelName, String primKey)
+		throws PortalException, SystemException;
 
 	public String getNetvibesURL(Portlet portlet, ThemeDisplay themeDisplay);
 
