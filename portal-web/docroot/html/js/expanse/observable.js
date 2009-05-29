@@ -24,7 +24,7 @@ Expanse.Observable = new Expanse.Class(
 
 			var value = instance.cfg.getProperty(key);
 
-			if (value === undefined && defaultValue) {
+			if (value == undefined && defaultValue != undefined) {
 				value = defaultValue;
 			}
 
