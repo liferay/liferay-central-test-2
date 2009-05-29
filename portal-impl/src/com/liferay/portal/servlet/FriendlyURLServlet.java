@@ -57,7 +57,6 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Brian Wing Shun Chan
  * @author Jorge Ferrer
- * @author Eduardo Lundgren
  *
  */
 public class FriendlyURLServlet extends HttpServlet {
@@ -140,7 +139,7 @@ public class FriendlyURLServlet extends HttpServlet {
 			RequestDispatcher requestDispatcher =
 				servletContext.getRequestDispatcher(redirect);
 
-			if ((requestDispatcher != null) && !response.isCommitted()) {
+			if (requestDispatcher != null) {
 				requestDispatcher.forward(request, response);
 			}
 		}
