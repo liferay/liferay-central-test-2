@@ -100,7 +100,7 @@ Element contentEl = (Element)request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 
 								<c:if test="<%= Validator.isNotNull(elContent) %>">
 									<span style="margin-left: 15px;">
-										[<a href="javascript: void(0);" onClick="Liferay.Util.toggleByIdSpan(this, '<portlet:namespace />image_<%= elInstanceId + "_" + elName %>'); self.focus();"><span><liferay-ui:message key="show" /></span><span style="display: none;"><liferay-ui:message key="hide" /></span></a>]
+										[<a href="javascript:void(0);" onClick="Liferay.Util.toggleByIdSpan(this, '<portlet:namespace />image_<%= elInstanceId + "_" + elName %>'); self.focus();"><span><liferay-ui:message key="show" /></span><span style="display: none;"><liferay-ui:message key="hide" /></span></a>]
 									</span>
 								</c:if>
 							</c:if>
@@ -240,7 +240,7 @@ Element contentEl = (Element)request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 							<c:if test="<%= elRepeatable %>">
 
 								<%
-								String taglibAddURL = "javascript: " + renderResponse.getNamespace() + "editElement('add', " + count.getValue() + ");";
+								String taglibAddURL = "javascript:" + renderResponse.getNamespace() + "editElement('add', " + count.getValue() + ");";
 								%>
 
 								<liferay-ui:icon image="add" url="<%= taglibAddURL %>" />
@@ -248,7 +248,7 @@ Element contentEl = (Element)request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 								<c:if test="<%= !elRepeatablePrototype %>">
 
 									<%
-									String taglibDeleteURL = "javascript: " + renderResponse.getNamespace() + "editElement('remove', " + count.getValue() + ");";
+									String taglibDeleteURL = "javascript:" + renderResponse.getNamespace() + "editElement('remove', " + count.getValue() + ");";
 									%>
 
 									<liferay-ui:icon image="delete" url="<%= taglibDeleteURL %>" />

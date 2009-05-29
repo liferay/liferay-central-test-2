@@ -40,7 +40,7 @@ long reportedUserId = GetterUtil.getLong((String)request.getAttribute("liferay-u
 		image="../ratings/flagged_icon"
 		imageHover="../ratings/flagged_icon_hover"
 		message="<%= message %>"
-		url="javascript: ;"
+		url="javascript:;"
 		label="<%= label %>"
 		cssClass="<%= randomNamespace  %>"
 	/>

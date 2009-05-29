@@ -102,7 +102,7 @@ TagsUtil.addLayoutTagsEntries(request, TagsEntryLocalServiceUtil.getEntries(Wiki
 		</script>
 
 		<div class="popup-print">
-			<liferay-ui:icon image="print" message="print" url="javascript: print();" />
+			<liferay-ui:icon image="print" message="print" url="javascript:print();" />
 		</div>
 	</c:when>
 	<c:otherwise>
@@ -156,7 +156,7 @@ TagsUtil.addLayoutTagsEntries(request, TagsEntryLocalServiceUtil.getEntries(Wiki
 
 			<liferay-ui:icon image="history" message="details" url="<%= viewPageDetailsURL.toString() %>" method="get" label="<%= true %>" />
 
-			<liferay-ui:icon image="print" url='<%= "javascript: " + renderResponse.getNamespace() + "printPage();" %>' label="<%= true %>" />
+			<liferay-ui:icon image="print" url='<%= "javascript:" + renderResponse.getNamespace() + "printPage();" %>' label="<%= true %>" />
 		</div>
 	</c:if>
 

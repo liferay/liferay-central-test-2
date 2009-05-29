@@ -144,11 +144,11 @@ String modelName = (String)request.getAttribute("liferay-ui:input-permissions:mo
 		<div id="<%= randomNamespace %>inputPermissionsConfigureLink" style="display: <%= inputPermissionsShowConfigure ? "none" : "" %>;">
 			<input <%= inputPermissionsPublicChecked ? "checked" : "" %> name="<%= namespace %>inputPermissionsPublic" type="checkbox" /> <liferay-ui:message key="public" />
 
-			<a href="javascript: <%= randomNamespace %>inputPermissionsConfigure();" style="margin-left: 10px;"><liferay-ui:message key="configure" /> &raquo;</a>
+			<a href="javascript:<%= randomNamespace %>inputPermissionsConfigure();" style="margin-left: 10px;"><liferay-ui:message key="configure" /> &raquo;</a>
 		</div>
 
 		<div id="<%= randomNamespace %>inputPermissionsMoreLink" style="display: <%= !inputPermissionsShowConfigure || inputPermissionsShowMore ? "none" : "" %>;">
-			<a href="javascript: <%= randomNamespace %>inputPermissionsMore();"><liferay-ui:message key="more" /> &raquo;</a>
+			<a href="javascript:<%= randomNamespace %>inputPermissionsMore();"><liferay-ui:message key="more" /> &raquo;</a>
 		</div>
 
 		<script type="text/javascript">

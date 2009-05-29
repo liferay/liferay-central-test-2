@@ -83,7 +83,7 @@ PluginPackage selPluginPackage = selTheme.getPluginPackage();
 						%>
 
 							<li class="<%= cssClass %>">
-								<a class="theme-entry" href="javascript: <portlet:namespace />updateLookAndFeel('<%= selTheme.getThemeId() %>', '<%= curColorScheme.getColorSchemeId() %>', '');">
+								<a class="theme-entry" href="javascript:<portlet:namespace />updateLookAndFeel('<%= selTheme.getThemeId() %>', '<%= curColorScheme.getColorSchemeId() %>', '');">
 									<span class="theme-title">
 										<%= curColorScheme.getName() %>
 									</span>
@@ -139,7 +139,7 @@ PluginPackage selPluginPackage = selTheme.getPluginPackage();
 				%>
 
 						<li>
-							<a class="theme-entry" href="javascript: <portlet:namespace />updateLookAndFeel('<%= curTheme.getThemeId() %>', '');">
+							<a class="theme-entry" href="javascript:<portlet:namespace />updateLookAndFeel('<%= curTheme.getThemeId() %>', '');">
 								<span class="theme-title">
 									<%= curTheme.getName() %>
 								</span>

@@ -142,7 +142,7 @@
 
 #if ($show_toggle_controls)
 	#set ($toggle_controls_text = $languageUtil.get($company_id, $locale, "toggle-edit-controls"))
-	#set ($toggle_controls_url = "javascript: ;")
+	#set ($toggle_controls_url = "javascript:;")
 #end
 
 #if ($permissionChecker.isOmniadmin() && $portalUtil.isUpdateAvailable())

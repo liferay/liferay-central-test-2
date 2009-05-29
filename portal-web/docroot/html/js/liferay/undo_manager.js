@@ -27,7 +27,7 @@ Liferay.UndoManager = Expanse.Observable.extend(
 				undoText = undoText.replace(/\[\$SPAN\$\]/, '<span class="items-left">(0)</span>');
 
 				instance._container = jQuery(options.container);
-				instance._manager = jQuery('<div class="portlet-msg-info undo-queue queue-empty"><a class="undo-action" href="javascript: ;">' + undoText + '</a><a class="clear-undos" href="javascript: ;">' + Liferay.Language.get('clear-history') + '</a></div>');
+				instance._manager = jQuery('<div class="portlet-msg-info undo-queue queue-empty"><a class="undo-action" href="javascript:;">' + undoText + '</a><a class="clear-undos" href="javascript:;">' + Liferay.Language.get('clear-history') + '</a></div>');
 
 				instance._undoItemsLeft = instance._manager.find('.items-left');
 				instance._undoButton = instance._manager.find('.undo-action');

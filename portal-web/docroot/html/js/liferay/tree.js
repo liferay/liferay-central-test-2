@@ -231,7 +231,7 @@ Liferay.Tree = new Expanse.Class(
 			var instance = this;
 
 			var outputEl = jQuery(instance.outputId);
-			var mainLi = '<li class="toggle-expand"><a class="lfr-expand" href="javascript: ;" id="lfrExpand">' + instance._expandText + '</a> | <a class="lfr-collapse" href="javascript: ;" id="lfrCollapse">' + instance._collapseText + '</a></li>';
+			var mainLi = '<li class="toggle-expand"><a class="lfr-expand" href="javascript:;" id="lfrExpand">' + instance._expandText + '</a> | <a class="lfr-collapse" href="javascript:;" id="lfrCollapse">' + instance._collapseText + '</a></li>';
 
 			if (!instance.preRendered) {
 				var icons = instance.icons;

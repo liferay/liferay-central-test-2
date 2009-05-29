@@ -125,14 +125,14 @@ String defaultControlPanelThemeId = ParamUtil.getString(request, "settings(" + P
 		<portlet:param name="redirect" value="<%= currentURL %>" />
 	</portlet:renderURL>
 
-	<a class="change-company-logo" href="javascript: <portlet:namespace />openEditCompanyLogoWindow('<%= editCompanyLogoURL %>');">
+	<a class="change-company-logo" href="javascript:<portlet:namespace />openEditCompanyLogoWindow('<%= editCompanyLogoURL %>');">
 		<img alt="<liferay-ui:message key="logo" />" class="avatar" id="<portlet:namespace />avatar" src="<%= themeDisplay.getPathImage() %>/company_logo?img_id=<%= deleteLogo ? 0 : company.getLogoId() %>&t=<%= ImageServletTokenUtil.getToken(company.getLogoId()) %>" />
 	</a>
 
 	<div class="portrait-icons">
 
 		<%
-		String taglibEditURL = "javascript: " + renderResponse.getNamespace() + "openEditCompanyLogoWindow('" + editCompanyLogoURL +"');";
+		String taglibEditURL = "javascript:" + renderResponse.getNamespace() + "openEditCompanyLogoWindow('" + editCompanyLogoURL +"');";
 		%>
 
 		<liferay-ui:icon image="edit" message="change" url="<%= taglibEditURL %>" label="<%= true %>" />
@@ -140,7 +140,7 @@ String defaultControlPanelThemeId = ParamUtil.getString(request, "settings(" + P
 		<c:if test="<%= company.getLogoId() != 0 %>">
 
 			<%
-			String taglibDeleteURL = "javascript: " + renderResponse.getNamespace() + "deleteLogo('" + themeDisplay.getPathImage() + "/company_logo?img_id=0');";
+			String taglibDeleteURL = "javascript:" + renderResponse.getNamespace() + "deleteLogo('" + themeDisplay.getPathImage() + "/company_logo?img_id=0');";
 			%>
 
 			<liferay-ui:icon image="delete" url="<%= taglibDeleteURL %>" label="<%= true %>" cssClass="modify-link" />

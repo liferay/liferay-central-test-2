@@ -99,7 +99,7 @@ if (step == 1) {
 				<%
 				StringBuilder sb = new StringBuilder();
 
-				sb.append("javascript: ");
+				sb.append("javascript:");
 				sb.append(renderResponse.getNamespace());
 				sb.append("selectOrganization('");
 				sb.append(organization.getOrganizationId());
@@ -231,7 +231,7 @@ if (step == 1) {
 				<%
 				StringBuilder sb = new StringBuilder();
 
-				sb.append("javascript: opener.");
+				sb.append("javascript:opener.");
 				sb.append(renderResponse.getNamespace());
 				sb.append("selectRole('");
 				sb.append(role.getRoleId());

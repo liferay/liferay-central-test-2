@@ -92,7 +92,7 @@ portletURL.setParameter("typeSelection", BlogsEntry.class.getName());
 
 				StringBuilder sb = new StringBuilder();
 
-				sb.append("javascript: ");
+				sb.append("javascript:");
 				sb.append(renderResponse.getNamespace());
 				sb.append("selectAsset('");
 				sb.append(asset.getAssetId());
@@ -165,7 +165,7 @@ portletURL.setParameter("typeSelection", BlogsEntry.class.getName());
 
 			StringBuilder sb = new StringBuilder();
 
-			sb.append("javascript: ");
+			sb.append("javascript:");
 			sb.append(renderResponse.getNamespace());
 			sb.append("selectAsset('");
 			sb.append(asset.getAssetId());

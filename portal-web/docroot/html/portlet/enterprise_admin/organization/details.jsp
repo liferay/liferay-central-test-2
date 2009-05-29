@@ -104,7 +104,7 @@ if (organization != null) {
 
 		rowColumns.push(<portlet:namespace />createURL(href, name));
 		rowColumns.push(<portlet:namespace />createURL(href, Liferay.Language.get(type)));
-		rowColumns.push(<portlet:namespace />createURL('javascript: ;', '<%= UnicodeFormatter.toString(removeOrganizationIcon) %>', 'Liferay.SearchContainer.get(\'<portlet:namespace />parentOrganizationSearchContainer\').deleteRow(this, ' + organizationId + ')'));
+		rowColumns.push(<portlet:namespace />createURL('javascript:;', '<%= UnicodeFormatter.toString(removeOrganizationIcon) %>', 'Liferay.SearchContainer.get(\'<portlet:namespace />parentOrganizationSearchContainer\').deleteRow(this, ' + organizationId + ')'));
 
 		searchContainer.deleteRow(1, searchContainer.getData());
 		searchContainer.addRow(rowColumns, organizationId);
@@ -237,7 +237,7 @@ if (organization != null) {
 				<portlet:param name="publicLayoutSetId" value="<%= String.valueOf(publicLayoutSet.getLayoutSetId()) %>" />
 			</portlet:renderURL>
 
-			<a class="change-avatar" href="javascript: <portlet:namespace />openEditOrganizationLogoWindow('<%= editOrganizationLogoURL %>');">
+			<a class="change-avatar" href="javascript:<portlet:namespace />openEditOrganizationLogoWindow('<%= editOrganizationLogoURL %>');">
 
 				<%
 				long logoId = organization.getLogoId();
@@ -249,7 +249,7 @@ if (organization != null) {
 			<div class="portrait-icons">
 
 				<%
-				String taglibEditURL = "javascript: " + renderResponse.getNamespace() + "openEditOrganizationLogoWindow('" + editOrganizationLogoURL +"');";
+				String taglibEditURL = "javascript:" + renderResponse.getNamespace() + "openEditOrganizationLogoWindow('" + editOrganizationLogoURL +"');";
 				%>
 
 				<liferay-ui:icon image="edit" message="change" url="<%= taglibEditURL %>" label="<%= true %>" />
@@ -257,7 +257,7 @@ if (organization != null) {
 				<c:if test="<%= logoId != 0 %>">
 
 					<%
-					String taglibDeleteURL = "javascript: " + renderResponse.getNamespace() + "deleteLogo('" + themeDisplay.getPathImage() + "/organization_logo?img_id=0');";
+					String taglibDeleteURL = "javascript:" + renderResponse.getNamespace() + "deleteLogo('" + themeDisplay.getPathImage() + "/organization_logo?img_id=0');";
 					%>
 
 					<liferay-ui:icon image="delete" url="<%= taglibDeleteURL %>" label="<%= true %>" cssClass="modify-link" />
@@ -341,7 +341,7 @@ if (parentOrganization != null) {
 		/>
 
 		<liferay-ui:search-container-column-text>
-			<a class="modify-link" href="javascript: ;" onclick="jQuery(this).trigger('change'); Liferay.SearchContainer.get('<portlet:namespace />parentOrganizationSearchContainer').deleteRow(this, <%= curOrganization.getOrganizationId() %>);"><%= removeOrganizationIcon %></a>
+			<a class="modify-link" href="javascript:;" onclick="jQuery(this).trigger('change'); Liferay.SearchContainer.get('<portlet:namespace />parentOrganizationSearchContainer').deleteRow(this, <%= curOrganization.getOrganizationId() %>);"><%= removeOrganizationIcon %></a>
 		</liferay-ui:search-container-column-text>
 	</liferay-ui:search-container-row>
 
@@ -353,7 +353,7 @@ if (parentOrganization != null) {
 <liferay-ui:icon
 	image="add"
 	message="select"
-	url='<%= "javascript: " + renderResponse.getNamespace() + "openOrganizationSelector();" %>'
+	url='<%= "javascript:" + renderResponse.getNamespace() + "openOrganizationSelector();" %>'
 	label="<%= true %>"
 	cssClass="modify-link"
 />

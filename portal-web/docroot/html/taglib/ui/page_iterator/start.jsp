@@ -341,7 +341,7 @@ private String _getHREF(String formName, String curParam, int cur, String jsCall
 		href = url + curParam + "=" + cur + urlAnchor;
 	}
 	else {
-		href = "javascript: document." + formName + "." + curParam + ".value = '" + cur + "'; " + jsCall;
+		href = "javascript:document." + formName + "." + curParam + ".value = '" + cur + "'; " + jsCall;
 	}
 
 	return href;

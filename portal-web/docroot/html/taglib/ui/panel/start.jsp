@@ -33,7 +33,7 @@
 		</div>
 
 		<c:if test="<%= collapsible && extended %>">
-			<a class="lfr-panel-button" href="javascript: ;"></a>
+			<a class="lfr-panel-button" href="javascript:;"></a>
 		</c:if>
 	</div>
 

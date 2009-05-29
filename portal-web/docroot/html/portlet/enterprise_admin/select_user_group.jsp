@@ -81,7 +81,7 @@ portletURL.setParameter("struts_action", "/enterprise_admin/select_user_group");
 		<%
 		StringBuilder sb = new StringBuilder();
 
-		sb.append("javascript: opener.");
+		sb.append("javascript:opener.");
 		sb.append(renderResponse.getNamespace());
 		sb.append("selectUserGroup('");
 		sb.append(userGroup.getUserGroupId());

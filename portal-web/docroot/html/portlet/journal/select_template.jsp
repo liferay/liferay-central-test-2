@@ -65,7 +65,7 @@ for (int i = 0; i < results.size(); i++) {
 
 	StringBuilder sb = new StringBuilder();
 
-	sb.append("javascript: opener.");
+	sb.append("javascript:opener.");
 	sb.append(renderResponse.getNamespace());
 	sb.append("selectTemplate('");
 	sb.append(template.getStructureId());

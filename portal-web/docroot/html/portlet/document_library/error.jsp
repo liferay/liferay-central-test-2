@@ -24,7 +24,7 @@
 
 <%@ include file="/html/portlet/document_library/init.jsp" %>
 
-<liferay-ui:tabs names="error" backURL="javascript: history.go(-1);" />
+<liferay-ui:tabs names="error" backURL="javascript:history.go(-1);" />
 
 <liferay-ui:error exception="<%= DuplicateLockException.class %>">
 

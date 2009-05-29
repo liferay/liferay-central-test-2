@@ -220,7 +220,7 @@ List<Group> myPlaces = user.getMyPlaces(max);
 
 						<c:if test="<%= showPublicPlace %>">
 							<li class="public <%= selectedPlace ? "current" : "" %>">
-								<a href="<%= publicLayoutsPageCount > 0 ? HtmlUtil.escape(portletURL.toString()) : "javascript: ;" %>"
+								<a href="<%= publicLayoutsPageCount > 0 ? HtmlUtil.escape(portletURL.toString()) : "javascript:;" %>"
 
 								<c:if test="<%= userCommunity %>">
 									id="my-community-public-pages"
@@ -251,7 +251,7 @@ List<Group> myPlaces = user.getMyPlaces(max);
 
 						<c:if test="<%= showPrivatePlace %>">
 							<li class="private <%= selectedPlace ? "current" : "" %>">
-								<a href="<%= privateLayoutsPageCount > 0 ? HtmlUtil.escape(portletURL.toString()) : "javascript: ;" %>"
+								<a href="<%= privateLayoutsPageCount > 0 ? HtmlUtil.escape(portletURL.toString()) : "javascript:;" %>"
 
 								<c:if test="<%= userCommunity %>">
 									id="my-community-private-pages"

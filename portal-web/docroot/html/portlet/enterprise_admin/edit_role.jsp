@@ -114,7 +114,7 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 			}
 			%>
 
-			<a class="lfr-floating-trigger" href="javascript: ;" id="<portlet:namespace />languageSelectorTrigger">
+			<a class="lfr-floating-trigger" href="javascript:;" id="<portlet:namespace />languageSelectorTrigger">
 				<liferay-ui:message key="other-languages" /> (<%= languageIds.size() %>)
 			</a>
 

@@ -49,7 +49,7 @@ List<Organization> organizations = (List<Organization>)request.getAttribute("use
 		rowColumns.push(name);
 		rowColumns.push(Liferay.Language.get(type));
 		rowColumns.push('<%= RoleConstants.ORGANIZATION_MEMBER %>');
-		rowColumns.push(<portlet:namespace />createURL('javascript: ;', '<%= UnicodeFormatter.toString(removeOrganizationIcon) %>', 'Liferay.SearchContainer.get(\'<portlet:namespace />organizationsSearchContainer\').deleteRow(this, ' + organizationId + ')'));
+		rowColumns.push(<portlet:namespace />createURL('javascript:;', '<%= UnicodeFormatter.toString(removeOrganizationIcon) %>', 'Liferay.SearchContainer.get(\'<portlet:namespace />organizationsSearchContainer\').deleteRow(this, ' + organizationId + ')'));
 
 		searchContainer.addRow(rowColumns, organizationId);
 		searchContainer.updateDataStore();
@@ -114,7 +114,7 @@ List<Organization> organizations = (List<Organization>)request.getAttribute("use
 
 		<c:if test="<%= !portletName.equals(PortletKeys.MY_ACCOUNT) %>">
 			<liferay-ui:search-container-column-text>
-				<a class="modify-link" href="javascript: ;" onclick="jQuery(this).trigger('change'); Liferay.SearchContainer.get('<portlet:namespace />organizationsSearchContainer').deleteRow(this, <%= organization.getOrganizationId() %>);"><%= removeOrganizationIcon %></a>
+				<a class="modify-link" href="javascript:;" onclick="jQuery(this).trigger('change'); Liferay.SearchContainer.get('<portlet:namespace />organizationsSearchContainer').deleteRow(this, <%= organization.getOrganizationId() %>);"><%= removeOrganizationIcon %></a>
 			</liferay-ui:search-container-column-text>
 		</c:if>
 	</liferay-ui:search-container-row>
@@ -128,7 +128,7 @@ List<Organization> organizations = (List<Organization>)request.getAttribute("use
 	<liferay-ui:icon
 		image="add"
 		message="select"
-		url='<%= "javascript: " + renderResponse.getNamespace() + "openOrganizationSelector();" %>'
+		url='<%= "javascript:" + renderResponse.getNamespace() + "openOrganizationSelector();" %>'
 		label="<%= true %>"
 		cssClass="modify-link"
 	/>

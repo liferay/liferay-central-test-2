@@ -24,7 +24,7 @@
 
 <%@ include file="/html/portlet/image_gallery/init.jsp" %>
 
-<liferay-ui:tabs names="error" backURL="javascript: history.go(-1);" />
+<liferay-ui:tabs names="error" backURL="javascript:history.go(-1);" />
 
 <liferay-ui:error exception="<%= NoSuchFolderException.class %>" message="the-folder-could-not-be-found" />
 <liferay-ui:error exception="<%= NoSuchImageException.class %>" message="the-image-could-not-be-found" />

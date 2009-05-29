@@ -166,8 +166,8 @@ Liferay.Navigation = new Expanse.Class(
 				instance._enterPage =
 					'<div class="enter-page">' +
 					'<input class="lfr-auto-focus text" type="text" name="new_page" value="" class="text" />' +
-					'<a class="cancel-page" href="javascript: ;"></a>' +
-					'<a class="save-page" href="javascript: ;">' + Liferay.Language.get('save') + '</a>' +
+					'<a class="cancel-page" href="javascript:;"></a>' +
+					'<a class="save-page" href="javascript:;">' + Liferay.Language.get('save') + '</a>' +
 					'</div>';
 
 				if (instance._hasPermission) {

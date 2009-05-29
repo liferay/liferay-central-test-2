@@ -317,7 +317,7 @@ Liferay.TagsCategoriesSelector = new Expanse.Class(
 				function(i, curTagCategory) {
 					html += '<span class="ui-tag" id="' + instance._ns + 'CurTags' + i + '">';
 					html += curTagCategory;
-					html += '<a class="ui-tag-delete" href="javascript: ' + instance._ns + '.deleteTagCategory(' + i + ');"><span>x</span></a>';
+					html += '<a class="ui-tag-delete" href="javascript:' + instance._ns + '.deleteTagCategory(' + i + ');"><span>x</span></a>';
 					html += '</span>';
 				}
 			);

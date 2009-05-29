@@ -99,7 +99,7 @@ String defaultMessage = (String)request.getAttribute("liferay-ui:toggle:defaultM
 
 <c:choose>
 	<c:when test="<%= Validator.isNotNull(showMessage) %>">
-		<a href="javascript: <%= stateVar %>Toggle();" id="<%= id %>_message"><%= defaultMessage %></a>
+		<a href="javascript:<%= stateVar %>Toggle();" id="<%= id %>_message"><%= defaultMessage %></a>
 	</c:when>
 	<c:otherwise>
 		<img

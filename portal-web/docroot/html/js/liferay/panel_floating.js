@@ -158,7 +158,7 @@ Liferay.PanelFloating = Liferay.Panel.extend(
 
 								var pagingList = pagingContainer.find('.lfr-paging-pages');
 
-								var listItems = ['<li class="lfr-page lfr-page-previous"><a href="javascript: ;">&laquo;</a></li>'];
+								var listItems = ['<li class="lfr-page lfr-page-previous"><a href="javascript:;">&laquo;</a></li>'];
 
 								for (var i=1; i <= totalPages; i++) {
 									var cssClass = '';
@@ -167,10 +167,10 @@ Liferay.PanelFloating = Liferay.Panel.extend(
 										cssClass = 'lfr-page-current';
 									}
 
-									listItems.push('<li class="lfr-page ' + cssClass + '" data-page="' + i + '"><a href="javascript: ;">' + i + '</a></li>');
+									listItems.push('<li class="lfr-page ' + cssClass + '" data-page="' + i + '"><a href="javascript:;">' + i + '</a></li>');
 								}
 
-								listItems.push('<li class="lfr-page lfr-page-next"><a href="javascript: ;">&raquo;</a></li>');
+								listItems.push('<li class="lfr-page lfr-page-next"><a href="javascript:;">&raquo;</a></li>');
 
 								pagingList.append(listItems.join(''));
 

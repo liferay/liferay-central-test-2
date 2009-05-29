@@ -45,13 +45,13 @@ boolean last = GetterUtil.getBoolean(root.elementText("last"));
 	<c:when test="<%= (assetOrder > 0) && !last %>">
 
 		<%
-		String taglibDownURL = "javascript: " + renderResponse.getNamespace() + "moveSelectionDown('" + assetOrder + "')";
+		String taglibDownURL = "javascript:" + renderResponse.getNamespace() + "moveSelectionDown('" + assetOrder + "')";
 		%>
 
 		<liferay-ui:icon src='<%= themeDisplay.getPathThemeImages() + "/arrows/02_down.png" %>' message="down" url="<%= taglibDownURL %>" />
 
 		<%
-		String taglibUpURL = "javascript: " + renderResponse.getNamespace() + "moveSelectionUp('" + assetOrder + "')";
+		String taglibUpURL = "javascript:" + renderResponse.getNamespace() + "moveSelectionUp('" + assetOrder + "')";
 		%>
 
 		<liferay-ui:icon src='<%= themeDisplay.getPathThemeImages() + "/arrows/02_up.png" %>' message="up" url="<%= taglibUpURL %>" />
@@ -59,7 +59,7 @@ boolean last = GetterUtil.getBoolean(root.elementText("last"));
 	<c:when test="<%= assetOrder == 0 %>">
 
 		<%
-		String taglibDownURL = "javascript: " + renderResponse.getNamespace() + "moveSelectionDown('" + assetOrder + "')";
+		String taglibDownURL = "javascript:" + renderResponse.getNamespace() + "moveSelectionDown('" + assetOrder + "')";
 		%>
 
 		<liferay-ui:icon src='<%= themeDisplay.getPathThemeImages() + "/arrows/02_down.png" %>' message="down" url="<%= taglibDownURL %>" />
@@ -67,7 +67,7 @@ boolean last = GetterUtil.getBoolean(root.elementText("last"));
 	<c:when test="<%= last %>">
 
 		<%
-		String taglibUpURL = "javascript: " + renderResponse.getNamespace() + "moveSelectionUp('" + assetOrder + "')";
+		String taglibUpURL = "javascript:" + renderResponse.getNamespace() + "moveSelectionUp('" + assetOrder + "')";
 		%>
 
 		<liferay-ui:icon src='<%= themeDisplay.getPathThemeImages() + "/arrows/02_up.png" %>' message="up" url="<%= taglibUpURL %>" />

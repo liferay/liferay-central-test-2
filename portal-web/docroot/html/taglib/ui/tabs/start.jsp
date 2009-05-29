@@ -132,7 +132,7 @@ String onClick = GetterUtil.getString((String)request.getAttribute("liferay-ui:t
 					}
 				}
 				else {
-					curURL = "javascript: ";
+					curURL = "javascript:";
 
 					if (Validator.isNotNull(formName)) {
 						curURL += "document." + namespace + formName + "." + namespace + param + ".value = '" + names[i] + "';";

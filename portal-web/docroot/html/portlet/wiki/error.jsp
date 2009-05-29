@@ -24,7 +24,7 @@
 
 <%@ include file="/html/portlet/wiki/init.jsp" %>
 
-<liferay-ui:tabs names="error" backURL="javascript: history.go(-1);" />
+<liferay-ui:tabs names="error" backURL="javascript:history.go(-1);" />
 
 <liferay-ui:error exception="<%= NoSuchNodeException.class %>" message="the-wiki-could-not-be-found" />
 

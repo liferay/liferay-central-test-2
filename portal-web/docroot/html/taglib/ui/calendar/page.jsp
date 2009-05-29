@@ -182,7 +182,7 @@ int weekNumber = 1;
 		%>
 
 			<td class="<%= className %>">
-				<a href="javascript: <%= namespace %>updateCalendar(<%= selMonth %>, <%= i %>, <%= selYear %>);"><span><%= i %></span></a>
+				<a href="javascript:<%= namespace %>updateCalendar(<%= selMonth %>, <%= i %>, <%= selYear %>);"><span><%= i %></span></a>
 			</td>
 
 		<%

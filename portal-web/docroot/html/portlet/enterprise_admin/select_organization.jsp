@@ -86,7 +86,7 @@ portletURL.setParameter("struts_action", "/enterprise_admin/select_organization"
 		<%
 		StringBuilder sb = new StringBuilder();
 
-		sb.append("javascript: opener.");
+		sb.append("javascript:opener.");
 		sb.append(renderResponse.getNamespace());
 		sb.append("selectOrganization('");
 		sb.append(organization.getOrganizationId());

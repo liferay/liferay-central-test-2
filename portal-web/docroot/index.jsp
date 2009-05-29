@@ -62,7 +62,7 @@ response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
 	<meta content="1; url=<%= redirect %>" http-equiv="refresh" />
 </head>
 
-<body onload="javascript: location.replace('<%= redirect %>')">
+<body onload="javascript:location.replace('<%= redirect %>')">
 
 </body>
 

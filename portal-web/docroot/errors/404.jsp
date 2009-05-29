@@ -61,7 +61,7 @@ response.setStatus(HttpServletResponse.SC_NOT_FOUND);
 	<meta content="1; url=<%= redirect %>" http-equiv="refresh" />
 </head>
 
-<body onload="javascript: location.replace('<%= redirect %>')">
+<body onload="javascript:location.replace('<%= redirect %>')">
 
 <!--
 The numbers below are used to fill up space so that this works properly in IE.

@@ -35,7 +35,7 @@ if (layout != null) {
 <div class="dockbar" id="dockbar" rel="<portlet:namespace />">
 	<ul class="exp-toolbar">
 		<li class="pin-dockbar">
-			<a href="javascript: ;"><img src="<%= themeDisplay.getPathThemeImages() %>/spacer.png" /></a>
+			<a href="javascript:;"><img src="<%= themeDisplay.getPathThemeImages() %>/spacer.png" /></a>
 		</li>
 		<li class="user-avatar">
 			<a href="<%= HtmlUtil.escape(themeDisplay.getURLMyAccount().toString()) %>"><img alt="<%= user.getFullName() %>" src="<%= themeDisplay.getPathImage() %>/user_<%= user.isFemale() ? "female" : "male" %>_portrait?img_id=<%= user.getPortraitId() %>&t=<%= ImageServletTokenUtil.getToken(user.getPortraitId()) %>" /></a> <a href="<%= HtmlUtil.escape(themeDisplay.getURLMyAccount().toString()) %>"><%= user.getFullName() %></a>
@@ -50,7 +50,7 @@ if (layout != null) {
 
 		<c:if test="<%= (group != null) && (!group.hasStagingGroup() || group.isStagingGroup()) && LayoutPermissionUtil.contains(permissionChecker, layout, ActionKeys.UPDATE) %>">
 			<li class="add-content has-submenu" id="<portlet:namespace />addContent">
-				<a class="menu-button" href="javascript: ;">
+				<a class="menu-button" href="javascript:;">
 					<span>
 						<liferay-ui:message key="add" />
 					</span>
@@ -60,7 +60,7 @@ if (layout != null) {
 					<ul>
 						<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, scopeGroupId, ActionKeys.MANAGE_LAYOUTS) %>">
 							<li class="first add-page">
-								<a href="javascript: ;" id="addPage">
+								<a href="javascript:;" id="addPage">
 									<liferay-ui:message key="page" />
 								</a>
 							</li>
@@ -68,7 +68,7 @@ if (layout != null) {
 
 						<c:if test="<%= !themeDisplay.isStateMaximized() %>">
 							<li class="add-application">
-								<a href="javascript: ;" id="<portlet:namespace />addApplication">
+								<a href="javascript:;" id="<portlet:namespace />addApplication">
 									<liferay-ui:message key="application" />
 								</a>
 							</li>
@@ -77,22 +77,22 @@ if (layout != null) {
 
 								<ul>
 									<li class="first">
-										<a href="javascript: ;" class="app-shortcut" rel="56">
+										<a href="javascript:;" class="app-shortcut" rel="56">
 											<%= PortalUtil.getPortletTitle("56", themeDisplay.getCompanyId(), locale) %>
 										</a>
 									</li>
 									<li>
-										<a href="javascript: ;" class="app-shortcut" rel="73">
+										<a href="javascript:;" class="app-shortcut" rel="73">
 											<%= PortalUtil.getPortletTitle("73", themeDisplay.getCompanyId(), locale) %>
 										</a>
 									</li>
 									<li>
-										<a href="javascript: ;" class="app-shortcut" rel="71">
+										<a href="javascript:;" class="app-shortcut" rel="71">
 											<%= PortalUtil.getPortletTitle("71", themeDisplay.getCompanyId(), locale) %>
 										</a>
 									</li>
 									<li class="last">
-										<a href="javascript: ;" class="app-shortcut" rel="85">
+										<a href="javascript:;" class="app-shortcut" rel="85">
 											<%= PortalUtil.getPortletTitle("85", themeDisplay.getCompanyId(), locale) %>
 										</a>
 									</li>
@@ -106,7 +106,7 @@ if (layout != null) {
 
 		<c:if test="<%= themeDisplay.isShowPageSettingsIcon() || themeDisplay.isShowLayoutTemplatesIcon() %>">
 			<li class="manage-content has-submenu" id="<portlet:namespace />manageContent">
-				<a class="menu-button" href="javascript: ;">
+				<a class="menu-button" href="javascript:;">
 					<span>
 						<liferay-ui:message key="settings" />
 					</span>
@@ -124,7 +124,7 @@ if (layout != null) {
 
 						<c:if test="<%= themeDisplay.isShowLayoutTemplatesIcon() %>">
 							<li class="last">
-								<a href="javascript: ;" id="pageTemplate">
+								<a href="javascript:;" id="pageTemplate">
 									<liferay-ui:message key="layout" />
 								</a>
 							</li>
@@ -136,7 +136,7 @@ if (layout != null) {
 
 		<c:if test="<%= themeDisplay.isShowStagingIcon() %>">
 			<li class="staging-options has-submenu" id="<portlet:namespace />staging">
-				<a class="menu-button" href="javascript: ;">
+				<a class="menu-button" href="javascript:;">
 					<span>
 						<liferay-ui:message key="staging" />
 					</span>
@@ -150,7 +150,7 @@ if (layout != null) {
 
 		<c:if test="<%= user.hasMyPlaces() %>">
 			<li class="my-places has-submenu" id="<portlet:namespace />myPlaces">
-				<a class="menu-button" href="javascript: ;">
+				<a class="menu-button" href="javascript:;">
 					<span>
 						<liferay-ui:message key="go-to" />
 					</span>
@@ -176,7 +176,7 @@ if (layout != null) {
 
 		<c:if test="<%= themeDisplay.isSignedIn() %>">
 			<li class="toggle-controls" id="<portlet:namespace />toggleControls">
-				<a href="javascript: ;">
+				<a href="javascript:;">
 					<liferay-ui:message key="toggle-edit-controls" />
 				</a>
 			</li>

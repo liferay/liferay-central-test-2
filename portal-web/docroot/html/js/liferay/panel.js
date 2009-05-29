@@ -87,7 +87,7 @@ Liferay.Panel = Expanse.Observable.extend(
 						var toggler = title.find('.lfr-panel-button');
 
 						if (!toggler.length) {
-							title.append('<a class="lfr-panel-button" href="javascript: ;"></a>');
+							title.append('<a class="lfr-panel-button" href="javascript:;"></a>');
 						}
 					}
 				}

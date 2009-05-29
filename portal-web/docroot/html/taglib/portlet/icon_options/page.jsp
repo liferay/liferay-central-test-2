@@ -76,7 +76,7 @@
 			<c:if test="<%= widgetShowAddAppLink %>">
 
 				<%
-				String widgetHREF = "javascript: Liferay.PortletSharing.showWidgetInfo('" + PortalUtil.getWidgetURL(portlet, themeDisplay) + "');";
+				String widgetHREF = "javascript:Liferay.PortletSharing.showWidgetInfo('" + PortalUtil.getWidgetURL(portlet, themeDisplay) + "');";
 				%>
 
 				<liferay-ui:icon
@@ -116,7 +116,7 @@
 			<c:if test="<%= netvibesShowAddAppLinks %>">
 
 				<%
-				String netvibesHREF = "javascript: Liferay.PortletSharing.showNetvibesInfo('" + PortalUtil.getNetvibesURL(portlet, themeDisplay) + "');";
+				String netvibesHREF = "javascript:Liferay.PortletSharing.showNetvibesInfo('" + PortalUtil.getNetvibesURL(portlet, themeDisplay) + "');";
 				%>
 
 				<liferay-ui:icon
@@ -132,7 +132,7 @@
 				<liferay-ui:icon
 					image="share"
 					message="share-this-application-with-friends"
-					url="javascript: ;"
+					url="javascript:;"
 					method="get"
 					label="<%= true %>"
 				/>

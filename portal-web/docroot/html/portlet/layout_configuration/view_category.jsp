@@ -205,7 +205,7 @@ if ((categories.size() > 0) || (portlets.size() > 0)) {
 							portletId="<%= portlet.getPortletId() %>"
 							title="<%= PortalUtil.getPortletTitle(portlet, application, locale) %>"
 						>
-							<p><%= PortalUtil.getPortletTitle(portlet, application, locale) %> <a href="javascript: ;"><liferay-ui:message key="add" /></a></p>
+							<p><%= PortalUtil.getPortletTitle(portlet, application, locale) %> <a href="javascript:;"><liferay-ui:message key="add" /></a></p>
 						</div>
 					</c:when>
 					<c:otherwise>

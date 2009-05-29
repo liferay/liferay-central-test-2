@@ -188,7 +188,7 @@ if (Validator.isNotNull(structureId)) {
 			<liferay-ui:message key="select-a-structure-to-filter-the-web-content-list-by-a-structure" />
 		</c:when>
 		<c:otherwise>
-			<%= LanguageUtil.format(pageContext, "filter-web-content-list-by-structure-x", structureId) %> <a href="javascript: <portlet:namespace />removeStructure();"><liferay-ui:message key="click-to-remove-filter" /></a>
+			<%= LanguageUtil.format(pageContext, "filter-web-content-list-by-structure-x", structureId) %> <a href="javascript:<portlet:namespace />removeStructure();"><liferay-ui:message key="click-to-remove-filter" /></a>
 		</c:otherwise>
 	</c:choose>
 </div>
@@ -234,7 +234,7 @@ for (int i = 0; i < results.size(); i++) {
 
 	StringBuilder sb = new StringBuilder();
 
-	sb.append("javascript: ");
+	sb.append("javascript:");
 	sb.append(renderResponse.getNamespace());
 	sb.append("selectStructure('");
 	sb.append(structure.getStructureId());

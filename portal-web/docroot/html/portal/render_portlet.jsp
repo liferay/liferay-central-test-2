@@ -600,7 +600,7 @@ portletDisplay.setURLMin(urlMin);
 
 // URL portlet css
 
-String urlPortletCss = "javascript: ;";
+String urlPortletCss = "javascript:;";
 
 portletDisplay.setURLPortletCss(urlPortletCss.toString());
 
@@ -629,7 +629,7 @@ portletDisplay.setURLPrint(urlPrint.toString());
 
 // URL refresh
 
-String urlRefresh = "javascript: ;";
+String urlRefresh = "javascript:;";
 
 portletDisplay.setURLRefresh(urlRefresh);
 

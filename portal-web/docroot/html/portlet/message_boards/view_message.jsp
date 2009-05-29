@@ -98,13 +98,13 @@ String threadView = messageDisplay.getThreadView();
 		label="<%= true %>"
 	/>
 
-	(<a href="javascript: <portlet:namespace />deleteAnswerFlag('@MESSAGE_ID@');"><liferay-ui:message key="unmark" /></a>)
+	(<a href="javascript:<portlet:namespace />deleteAnswerFlag('@MESSAGE_ID@');"><liferay-ui:message key="unmark" /></a>)
 </div>
 
 <div id="<portlet:namespace />deleteAnswerFlagDiv" style="display: none;">
 
 	<%
-	String taglibMarkAsAnAnswerURL = "javascript: " + renderResponse.getNamespace() + "addAnswerFlag('@MESSAGE_ID@');";
+	String taglibMarkAsAnAnswerURL = "javascript:" + renderResponse.getNamespace() + "addAnswerFlag('@MESSAGE_ID@');";
 	%>
 
 	<liferay-ui:icon

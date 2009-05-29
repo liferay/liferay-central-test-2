@@ -28,7 +28,7 @@
 String url = (String)request.getAttribute("liferay-ui:icon:url");
 boolean label = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:icon:label"));
 
-if (url.startsWith("javascript: ")) {
+if (url.startsWith("javascript:")) {
 	url = url.substring(12);
 }
 
@@ -36,7 +36,7 @@ if (url.startsWith(Http.HTTP_WITH_SLASH) || url.startsWith(Http.HTTPS_WITH_SLASH
 	url = "submitForm(document.hrefFm, '" + HttpUtil.encodeURL(url) + "');";
 }
 
-url = "javascript: if (confirm('" + UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-delete-this") + "')) { " + url + " } else { self.focus(); }";
+url = "javascript:if (confirm('" + UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-delete-this") + "')) { " + url + " } else { self.focus(); }";
 %>
 
 <liferay-ui:icon image="delete" url="<%= url %>" label="<%= label %>" />

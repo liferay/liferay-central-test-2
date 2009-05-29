@@ -26,7 +26,7 @@ Liferay.AutoFields = Expanse.Observable.extend(
 			var fullContainer = jQuery('<div class="row-container"></div>');
 			var baseContainer = jQuery('<div class="lfr-form-row"></div>');
 
-			var rowControls = jQuery('<span class="row-controls"><a href="javascript: ;" class="add-row">' + Liferay.Language.get('add-row') + '</a><a href="javascript: ;" class="delete-row modify-link">' + Liferay.Language.get('delete-row') + '</a></span>');
+			var rowControls = jQuery('<span class="row-controls"><a href="javascript:;" class="add-row">' + Liferay.Language.get('add-row') + '</a><a href="javascript:;" class="delete-row modify-link">' + Liferay.Language.get('delete-row') + '</a></span>');
 
 			instance._baseContainer = fullContainer;
 			instance._idSeed = baseRows.length;

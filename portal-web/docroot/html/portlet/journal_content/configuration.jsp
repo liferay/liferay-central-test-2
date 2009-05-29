@@ -275,7 +275,7 @@ for (int i = 0; i < results.size(); i++) {
 
 	StringBuilder sb = new StringBuilder();
 
-	sb.append("javascript: ");
+	sb.append("javascript:");
 	sb.append(renderResponse.getNamespace());
 	sb.append("selectArticle('");
 	sb.append(curArticle.getArticleId());

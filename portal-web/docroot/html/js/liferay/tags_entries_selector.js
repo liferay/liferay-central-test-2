@@ -509,7 +509,7 @@ Liferay.TagsEntriesSelector = new Expanse.Class(
 				function(i, curTagEntry) {
 					html += '<span class="ui-tag" id="' + instance._ns + 'CurTags' + i + '">';
 					html += curTagEntry;
-					html += '<a class="ui-tag-delete" href="javascript: ' + instance._ns + '.deleteTagEntry(' + i + ');"><span>x</span></a>';
+					html += '<a class="ui-tag-delete" href="javascript:' + instance._ns + '.deleteTagEntry(' + i + ');"><span>x</span></a>';
 					html += '</span>';
 				}
 			);

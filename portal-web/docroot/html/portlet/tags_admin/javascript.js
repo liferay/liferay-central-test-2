@@ -421,7 +421,7 @@
 						buffer.push(this.name);
 						buffer.push('" data-entryId="');
 						buffer.push(this.entryId);
-						buffer.push('"><span><a href="javascript: ;">');
+						buffer.push('"><span><a href="javascript:;">');
 						buffer.push(this.name);
 						buffer.push('</a></span>');
 						buffer.push('</li>');
@@ -495,7 +495,7 @@
 								buffer.push(this.name);
 								buffer.push('" data-vocabularyId="');
 								buffer.push(this.vocabularyId);
-								buffer.push('"><span><a href="javascript: ;">');
+								buffer.push('"><span><a href="javascript:;">');
 								buffer.push(this.name);
 								buffer.push('</a></span>');
 								buffer.push('</li>');

@@ -53,7 +53,7 @@ if (availablePluginPackage != null) {
 		</portlet:actionURL>
 
 		<%
-		String taglibUpdateURL = "javascript: " + uploadProgressId + ".startProgress(); submitForm(document.hrefFm, '" + updateURL + "');";
+		String taglibUpdateURL = "javascript:" + uploadProgressId + ".startProgress(); submitForm(document.hrefFm, '" + updateURL + "');";
 		%>
 
 		<liferay-ui:icon
@@ -72,7 +72,7 @@ if (availablePluginPackage != null) {
 				</portlet:actionURL>
 
 				<%
-				String taglibIgnoreURL = "javascript: submitForm(document.hrefFm, '" + ignoreURL + "');";
+				String taglibIgnoreURL = "javascript:submitForm(document.hrefFm, '" + ignoreURL + "');";
 				%>
 
 				<liferay-ui:icon
@@ -90,7 +90,7 @@ if (availablePluginPackage != null) {
 				</portlet:actionURL>
 
 				<%
-				String taglibUnignoreURL = "javascript: submitForm(document.hrefFm, '" + unignoreURL + "');";
+				String taglibUnignoreURL = "javascript:submitForm(document.hrefFm, '" + unignoreURL + "');";
 				%>
 
 				<liferay-ui:icon
@@ -111,7 +111,7 @@ if (availablePluginPackage != null) {
 		</portlet:actionURL>
 
 		<%
-		String taglibUninstallURL = "javascript: submitForm(document.hrefFm, '" + uninstallURL + "');";
+		String taglibUninstallURL = "javascript:submitForm(document.hrefFm, '" + uninstallURL + "');";
 		%>
 
 		<liferay-ui:icon

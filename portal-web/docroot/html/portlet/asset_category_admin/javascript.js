@@ -329,7 +329,7 @@
 								buffer.push(this.name);
 								buffer.push('" data-categoryVocabularyId="');
 								buffer.push(this.categoryVocabularyId);
-								buffer.push('"><span><a href="javascript: ;">');
+								buffer.push('"><span><a href="javascript:;">');
 								buffer.push(this.name);
 								buffer.push('</a></span>');
 								buffer.push('</li>');

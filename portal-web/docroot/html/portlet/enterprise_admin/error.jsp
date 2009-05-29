@@ -24,7 +24,7 @@
 
 <%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
-<liferay-ui:tabs names="error" backURL="javascript: history.go(-1);" />
+<liferay-ui:tabs names="error" backURL="javascript:history.go(-1);" />
 
 <liferay-ui:error exception="<%= NoSuchOrganizationException.class %>" message="the-organization-could-not-be-found" />
 <liferay-ui:error exception="<%= NoSuchRoleException.class %>" message="the-role-could-not-be-found" />

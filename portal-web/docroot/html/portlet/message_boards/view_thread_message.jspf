@@ -134,7 +134,7 @@
 									label="<%= true %>"
 								/>
 
-								(<a href="javascript: <portlet:namespace />deleteAnswerFlag('<%= message.getMessageId() %>');"><liferay-ui:message key="unmark" /></a>)
+								(<a href="javascript:<portlet:namespace />deleteAnswerFlag('<%= message.getMessageId() %>');"><liferay-ui:message key="unmark" /></a>)
 							</div>
 						</c:when>
 					</c:choose>
@@ -180,7 +180,7 @@
 								<li id="<portlet:namespace />addAnswerFlag_<%= message.getMessageId() %>">
 
 									<%
-									String taglibMarkAsAnswerURL = "javascript: " + renderResponse.getNamespace() + "addAnswerFlag('" + message.getMessageId() + "');";
+									String taglibMarkAsAnswerURL = "javascript:" + renderResponse.getNamespace() + "addAnswerFlag('" + message.getMessageId() + "');";
 									%>
 
 									<liferay-ui:icon

@@ -31,7 +31,7 @@
 	%>
 
 	<div class="taglib-social-bookmarks" id="<%= randomNamespace %>socialBookmarks">
-		<a class="show-bookmarks" href="javascript: ;"><liferay-ui:message key="add-this-to" /><img alt="delicious" src="<%= themeDisplay.getPathThemeImages() %>/social_bookmarks/delicious.png" width="10" /> <img alt="digg" src="<%= themeDisplay.getPathThemeImages() %>/social_bookmarks/digg.png" width="10" /> <img alt="furl" src="<%= themeDisplay.getPathThemeImages() %>/social_bookmarks/furl.png" width="10" /></a>
+		<a class="show-bookmarks" href="javascript:;"><liferay-ui:message key="add-this-to" /><img alt="delicious" src="<%= themeDisplay.getPathThemeImages() %>/social_bookmarks/delicious.png" width="10" /> <img alt="digg" src="<%= themeDisplay.getPathThemeImages() %>/social_bookmarks/digg.png" width="10" /> <img alt="furl" src="<%= themeDisplay.getPathThemeImages() %>/social_bookmarks/furl.png" width="10" /></a>
 
 		<ul class="lfr-component">
 

@@ -81,7 +81,7 @@ portletURL.setParameter("struts_action", "/enterprise_admin/select_community");
 		<%
 		StringBuilder sb = new StringBuilder();
 
-		sb.append("javascript: opener.");
+		sb.append("javascript:opener.");
 		sb.append(renderResponse.getNamespace());
 		sb.append("selectGroup('");
 		sb.append(group.getGroupId());

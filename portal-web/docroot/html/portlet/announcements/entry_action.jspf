@@ -52,7 +52,7 @@
 
 		<td class="control-entry">
 			<c:if test='<%= tabs1.equals("entries") && themeDisplay.isSignedIn() %>'>
-				<a href="<%= "javascript: " + renderResponse.getNamespace() + "handleEntry(" + entry.getEntryId() + ");" %>"><liferay-ui:message key='<%= ((flagValue == AnnouncementsFlagImpl.NOT_HIDDEN) ? "mark-as-read" : "show") %>' /></a>
+				<a href="<%= "javascript:" + renderResponse.getNamespace() + "handleEntry(" + entry.getEntryId() + ");" %>"><liferay-ui:message key='<%= ((flagValue == AnnouncementsFlagImpl.NOT_HIDDEN) ? "mark-as-read" : "show") %>' /></a>
 			</c:if>
 		</td>
 	</tr>

@@ -24,7 +24,7 @@
 
 <%@ include file="/html/portlet/journal/init.jsp" %>
 
-<liferay-ui:tabs names="error" backURL="javascript: history.go(-1);" />
+<liferay-ui:tabs names="error" backURL="javascript:history.go(-1);" />
 
 <liferay-ui:error exception="<%= NoSuchArticleException.class %>" message="the-web-content-could-not-be-found" />
 <liferay-ui:error exception="<%= NoSuchStructureException.class %>" message="the-structure-could-not-be-found" />

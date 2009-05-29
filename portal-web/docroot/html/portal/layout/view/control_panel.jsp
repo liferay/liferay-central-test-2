@@ -130,11 +130,11 @@ if (Validator.isNotNull(ppid)) {
 								%>
 
 								<h2>
-									<liferay-ui:message key="content-for" /> <a href="javascript: ;" class="lfr-group-selector"><%= curGroup.isUser() ? LanguageUtil.get(pageContext, "my-community") : HtmlUtil.escape(curGroup.getDescriptiveName()) %></a>
+									<liferay-ui:message key="content-for" /> <a href="javascript:;" class="lfr-group-selector"><%= curGroup.isUser() ? LanguageUtil.get(pageContext, "my-community") : HtmlUtil.escape(curGroup.getDescriptiveName()) %></a>
 
 									<c:if test="<%= !scopeLayouts.isEmpty() %>">
 										<span class="nobr lfr-title-scope-selector">
-											<liferay-ui:message key="with-scope" /> <a href="javascript: ;" class="lfr-scope-selector"><%= (scopeLayout == null) ? curGroupLabel : scopeLayout.getName(locale) %></a>
+											<liferay-ui:message key="with-scope" /> <a href="javascript:;" class="lfr-scope-selector"><%= (scopeLayout == null) ? curGroupLabel : scopeLayout.getName(locale) %></a>
 										</span>
 									</c:if>
 								</h2>

@@ -121,7 +121,7 @@ portletURL.setParameter("assetParentId", String.valueOf(folderId));
 
 				StringBuilder sb = new StringBuilder();
 
-				sb.append("javascript: ");
+				sb.append("javascript:");
 				sb.append(renderResponse.getNamespace());
 				sb.append("selectAsset('");
 				sb.append(asset.getAssetId());
@@ -272,7 +272,7 @@ portletURL.setParameter("assetParentId", String.valueOf(folderId));
 
 				StringBuilder sb = new StringBuilder();
 
-				sb.append("javascript: ");
+				sb.append("javascript:");
 				sb.append(renderResponse.getNamespace());
 				sb.append("selectAsset('");
 				sb.append(asset.getAssetId());

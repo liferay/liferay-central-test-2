@@ -101,7 +101,7 @@ public class TreeNodeView {
 	}
 
 	private int _depth;
-	private String _href = "javascript: ;";
+	private String _href = "javascript:;";
 	private long _id;
 	private String _img = StringPool.BLANK;
 	private String _ls = StringPool.BLANK;

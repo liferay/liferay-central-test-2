@@ -231,7 +231,7 @@ if (articleDisplay != null) {
 									}
 								</script>
 
-								<liferay-ui:icon image="print" url='<%= "javascript: " + renderResponse.getNamespace() + "printPage();" %>' />
+								<liferay-ui:icon image="print" url='<%= "javascript:" + renderResponse.getNamespace() + "printPage();" %>' />
 							</c:if>
 						</c:if>
 					</div>

@@ -156,7 +156,7 @@ Liferay.Upload = new Expanse.Class(
 					'<span class="progress-bar">' +
 						'<span class="progress" id="' + fileId + 'progress"></span>' +
 					'</span>' +
-					'<a class="lfr-button cancel-button" href="javascript: ;" id="' + fileId+ 'cancelButton">' + instance._cancelFileText + '</a>' +
+					'<a class="lfr-button cancel-button" href="javascript:;" id="' + fileId+ 'cancelButton">' + instance._cancelFileText + '</a>' +
 				'</li>');
 
 			li.find('.cancel-button').click(
@@ -427,11 +427,11 @@ Liferay.Upload = new Expanse.Class(
 
 				instance._listInfo = jQuery('<div id="' + instance._listInfoId + '" class="upload-list-info"></div>');
 				instance._fileList = jQuery('<div id="' + instance._fileListId + '" class="upload-list"></div>');
-				instance._cancelButton = jQuery('<a class="lfr-button cancel-uploads" href="javascript: ;">' + instance._cancelUploadsText + '</a>');
-				instance._clearUploadsButton = jQuery('<a class="lfr-button clear-uploads" href="javascript: ;">' + instance._clearRecentUploadsText + '</a>');
+				instance._cancelButton = jQuery('<a class="lfr-button cancel-uploads" href="javascript:;">' + instance._cancelUploadsText + '</a>');
+				instance._clearUploadsButton = jQuery('<a class="lfr-button clear-uploads" href="javascript:;">' + instance._clearRecentUploadsText + '</a>');
 
-				instance._browseButton = jQuery('<a class="lfr-button browse-button" href="javascript: ;">' + instance._browseText + '</a>');
-				instance._uploadButton = jQuery('<a class="lfr-button upload-button" href="javascript: ;">' + instance._uploadFilesText + '</a>');
+				instance._browseButton = jQuery('<a class="lfr-button browse-button" href="javascript:;">' + instance._browseText + '</a>');
+				instance._uploadButton = jQuery('<a class="lfr-button upload-button" href="javascript:;">' + instance._uploadFilesText + '</a>');
 
 				instance._container.prepend([instance._uploadTarget[0], instance._listInfo[0], instance._fileList[0]]);
 				instance._uploadTarget.append([instance._browseButton[0], instance._buttonPlaceHolder[0], instance._uploadButton[0], instance._cancelButton[0]]);
@@ -478,7 +478,7 @@ Liferay.Upload = new Expanse.Class(
 				instance._cancelButton.hide();
 
 				if (instance._fallbackContainer.length) {
-					instance._useFallbackButton = jQuery('<a class="use-fallback using-new-uploader" href="javascript: ;">' + instance._useFallbackText + '</a>');
+					instance._useFallbackButton = jQuery('<a class="use-fallback using-new-uploader" href="javascript:;">' + instance._useFallbackText + '</a>');
 					instance._fallbackContainer.after(instance._useFallbackButton);
 
 					instance._useFallbackButton.click(

@@ -88,7 +88,7 @@ if (MathUtil.isEven(count.getValue())) {
 				<td>
 
 					<%
-					String taglibAddURL = "javascript: " + renderResponse.getNamespace() + "editElement('add', " + count.getValue() + ");";
+					String taglibAddURL = "javascript:" + renderResponse.getNamespace() + "editElement('add', " + count.getValue() + ");";
 					%>
 
 					<liferay-ui:icon image="../arrows/01_plus" message="add" url="<%= taglibAddURL %>" />
@@ -99,7 +99,7 @@ if (MathUtil.isEven(count.getValue())) {
 				<td>
 
 					<%
-					String taglibRemoveURL = "javascript: " + renderResponse.getNamespace() + "editElement('remove', " + count.getValue() + ");";
+					String taglibRemoveURL = "javascript:" + renderResponse.getNamespace() + "editElement('remove', " + count.getValue() + ");";
 					%>
 
 					<liferay-ui:icon image="../arrows/01_minus" message="remove" url="<%= taglibRemoveURL %>" />
@@ -108,10 +108,10 @@ if (MathUtil.isEven(count.getValue())) {
 
 			<c:if test="<%= hasSiblings.booleanValue() %>">
 				<td>
-					<liferay-ui:icon image="../arrows/01_up" message="up" url='<%= "javascript: " + renderResponse.getNamespace() + "moveElement(true, " + count.getValue() + ");" %>' />
+					<liferay-ui:icon image="../arrows/01_up" message="up" url='<%= "javascript:" + renderResponse.getNamespace() + "moveElement(true, " + count.getValue() + ");" %>' />
 				</td>
 				<td>
-					<liferay-ui:icon image="../arrows/01_down" message="down" url='<%= "javascript: " + renderResponse.getNamespace() + "moveElement(false, " + count.getValue() + ");" %>' />
+					<liferay-ui:icon image="../arrows/01_down" message="down" url='<%= "javascript:" + renderResponse.getNamespace() + "moveElement(false, " + count.getValue() + ");" %>' />
 				</td>
 			</c:if>
 		</tr>

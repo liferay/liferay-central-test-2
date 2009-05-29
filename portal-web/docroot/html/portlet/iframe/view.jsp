@@ -209,7 +209,7 @@ if (windowState.equals(WindowState.MAXIMIZED)) {
 	<c:otherwise>
 		<div>
 			<iframe alt="<%= alt %>" border="<%= border %>" bordercolor="<%= bordercolor %>" frameborder="<%= frameborder %>" height="<%= iframeHeight %>" hspace="<%= hspace %>" id="<portlet:namespace />iframe" longdesc="<%= longdesc%>" name="<portlet:namespace />iframe" onload="<portlet:namespace />monitorIframe(); <portlet:namespace />resizeIframe();" scrolling="<%= scrolling %>" src="<%= iframeSrc %>" vspace="<%= vspace %>" width="<%= width %>">
-				<%= LanguageUtil.format(pageContext, "iframe-not-supported-x", iframeSrc)%>
+				<%= LanguageUtil.format(pageContext, "iframe-not-supported-x", iframeSrc) %>
 			</iframe>
 		</div>
 	</c:otherwise>

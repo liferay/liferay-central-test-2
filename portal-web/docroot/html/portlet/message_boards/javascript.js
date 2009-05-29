@@ -287,7 +287,7 @@ if (!Liferay.Editor.bbCode) {
 							var imagePath = themeDisplay.getPathThemeImages() + '/' + this.image;
 
 							html +=
-								'<a buttonId="' + i + '" class="lfr-button ' + buttonClass + '" href="javascript: ;" title="' + buttonText + '">' +
+								'<a buttonId="' + i + '" class="lfr-button ' + buttonClass + '" href="javascript:;" title="' + buttonText + '">' +
 								'<img alt="' + buttonText + '" buttonId="' + i + '" src="' + imagePath + '" >' +
 								'</a>';
 						}

@@ -337,7 +337,7 @@ Liferay.Util = {
 			removeEvents(item);
 
 			if (nodeName == 'a') {
-				item.href = 'javascript: ;';
+				item.href = 'javascript:;';
 			}
 			else if (nodeName == 'input' || nodeName == 'select' || nodeName == 'script') {
 				item.disabled = true;

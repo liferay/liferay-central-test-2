@@ -147,7 +147,7 @@ userTracker = userTracker.toEscapedModel();
 			</td>
 			<td align="right">
 				<span style="font-size: xx-small;">
-				[<a href="javascript: void(0);" onClick="Liferay.Util.toggleByIdSpan(this, '<portlet:namespace />accessedUrls'); self.focus();"><span><liferay-ui:message key="show" /></span><span style="display: none;"><liferay-ui:message key="hide" /></span></a>]
+				[<a href="javascript:void(0);" onClick="Liferay.Util.toggleByIdSpan(this, '<portlet:namespace />accessedUrls'); self.focus();"><span><liferay-ui:message key="show" /></span><span style="display: none;"><liferay-ui:message key="hide" /></span></a>]
 				</span>
 			</td>
 		</tr>
@@ -192,7 +192,7 @@ userTracker = userTracker.toEscapedModel();
 			</td>
 			<td align="right">
 				<span style="font-size: xx-small;">
-				[<a href="javascript: void(0);" onClick="Liferay.Util.toggleByIdSpan(this, '<portlet:namespace />sessionAttributes'); self.focus();"><span><liferay-ui:message key="show" /></span><span style="display: none;"><liferay-ui:message key="hide" /></span></a>]
+				[<a href="javascript:void(0);" onClick="Liferay.Util.toggleByIdSpan(this, '<portlet:namespace />sessionAttributes'); self.focus();"><span><liferay-ui:message key="show" /></span><span style="display: none;"><liferay-ui:message key="hide" /></span></a>]
 				</span>
 			</td>
 		</tr>

@@ -70,9 +70,9 @@ List rightList = (List)request.getAttribute("liferay-ui:input-move-boxes:rightLi
 
 				<c:if test="<%= leftReorder %>">
 					<td valign="top">
-						<a href="javascript: Liferay.Util.reorder(document.<%= formName %>.<%= leftBoxName %>, 0);"><img border="0" height="16" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/02_up.png" vspace="2" width="16" /></a><br />
+						<a href="javascript:Liferay.Util.reorder(document.<%= formName %>.<%= leftBoxName %>, 0);"><img border="0" height="16" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/02_up.png" vspace="2" width="16" /></a><br />
 
-						<a href="javascript: Liferay.Util.reorder(document.<%= formName %>.<%= leftBoxName %>, 1);"><img border="0" height="16" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/02_down.png" vspace="2" width="16" /></a>
+						<a href="javascript:Liferay.Util.reorder(document.<%= formName %>.<%= leftBoxName %>, 1);"><img border="0" height="16" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/02_down.png" vspace="2" width="16" /></a>
 					</td>
 				</c:if>
 
@@ -80,11 +80,11 @@ List rightList = (List)request.getAttribute("liferay-ui:input-move-boxes:rightLi
 			</table>
 		</td>
 		<td>
-			<a href="javascript: Liferay.Util.moveItem(document.<%= formName %>.<%= leftBoxName %>, document.<%= formName %>.<%= rightBoxName %>, <%= !rightReorder %>);"><img border="0" height="16" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/02_right.png" vspace="2" width="16" onClick="self.focus();" /></a>
+			<a href="javascript:Liferay.Util.moveItem(document.<%= formName %>.<%= leftBoxName %>, document.<%= formName %>.<%= rightBoxName %>, <%= !rightReorder %>);"><img border="0" height="16" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/02_right.png" vspace="2" width="16" onClick="self.focus();" /></a>
 
 			<br /><br />
 
-			<a href="javascript: Liferay.Util.moveItem(document.<%= formName %>.<%= rightBoxName %>, document.<%= formName %>.<%= leftBoxName %>, <%= !leftReorder %>);"><img border="0" height="16" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/02_left.png" vspace="2" width="16" onClick="self.focus();" /></a>
+			<a href="javascript:Liferay.Util.moveItem(document.<%= formName %>.<%= rightBoxName %>, document.<%= formName %>.<%= leftBoxName %>, <%= !leftReorder %>);"><img border="0" height="16" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/02_left.png" vspace="2" width="16" onClick="self.focus();" /></a>
 		</td>
 		<td>
 			<b class="category-header"><%= rightTitle %></b>
@@ -110,9 +110,9 @@ List rightList = (List)request.getAttribute("liferay-ui:input-move-boxes:rightLi
 
 				<c:if test="<%= rightReorder %>">
 					<td valign="top">
-						<a href="javascript: Liferay.Util.reorder(document.<%= formName %>.<%= rightBoxName %>, 0);"><img border="0" height="16" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/02_up.png" vspace="2" width="16" /></a><br />
+						<a href="javascript:Liferay.Util.reorder(document.<%= formName %>.<%= rightBoxName %>, 0);"><img border="0" height="16" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/02_up.png" vspace="2" width="16" /></a><br />
 
-						<a href="javascript: Liferay.Util.reorder(document.<%= formName %>.<%= rightBoxName %>, 1);"><img border="0" height="16" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/02_down.png" vspace="2" width="16" /></a>
+						<a href="javascript:Liferay.Util.reorder(document.<%= formName %>.<%= rightBoxName %>, 1);"><img border="0" height="16" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/02_down.png" vspace="2" width="16" /></a>
 					</td>
 				</c:if>
 

@@ -410,20 +410,20 @@
 <c:choose>
 	<c:when test='<%= tabs4.equals("export") || tabs4.equals("export-live") %>'>
 		<div id="<portlet:namespace />exportMoreDiv">
-			<a href="javascript: <portlet:namespace />exportMore();"><liferay-ui:message key="more-options" /> &raquo;</a>
+			<a href="javascript:<portlet:namespace />exportMore();"><liferay-ui:message key="more-options" /> &raquo;</a>
 		</div>
 
 		<div id="<portlet:namespace />exportLessDiv" style="display: none;">
-			<a href="javascript: <portlet:namespace />exportLess();">&laquo; <liferay-ui:message key="less-options" /></a>
+			<a href="javascript:<portlet:namespace />exportLess();">&laquo; <liferay-ui:message key="less-options" /></a>
 		</div>
 	</c:when>
 	<c:otherwise>
 		<div id="<portlet:namespace />importMoreDiv">
-			<a href="javascript: <portlet:namespace />importMore();"><liferay-ui:message key="more-options" /> &raquo;</a>
+			<a href="javascript:<portlet:namespace />importMore();"><liferay-ui:message key="more-options" /> &raquo;</a>
 		</div>
 
 		<div id="<portlet:namespace />importLessDiv" style="display: none;">
-			<a href="javascript: <portlet:namespace />importLess();">&laquo; <liferay-ui:message key="less-options" /></a>
+			<a href="javascript:<portlet:namespace />importLess();">&laquo; <liferay-ui:message key="less-options" /></a>
 		</div>
 	</c:otherwise>
 </c:choose>

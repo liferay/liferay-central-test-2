@@ -80,7 +80,7 @@ portletURL.setParameter("struts_action", "/enterprise_admin/select_regular_role"
 		<%
 		StringBuilder sb = new StringBuilder();
 
-		sb.append("javascript: opener.");
+		sb.append("javascript:opener.");
 		sb.append(renderResponse.getNamespace());
 		sb.append("selectRole('");
 		sb.append(role.getRoleId());
