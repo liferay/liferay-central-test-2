@@ -27,6 +27,10 @@ Calendar cal = (Calendar)selCal.clone();
 
 int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
 
+if ((cal.getFirstDayOfWeek()) == Calendar.MONDAY) {
+	dayOfWeek--;	
+}
+	
 cal.add(Calendar.DATE, 1 - dayOfWeek);
 
 DateFormat dateFormatDayOfWeek = new SimpleDateFormat("EEE", locale);
