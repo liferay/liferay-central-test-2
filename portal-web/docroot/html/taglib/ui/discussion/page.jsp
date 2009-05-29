@@ -140,7 +140,7 @@ DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
 				<td>
 
 					<%
-					String taglibPostReplyURL = "javascript: " + namespace + "showForm('" + namespace + "postReplyForm" + i + "', '" + namespace + "postReplyBody" + i + "');";
+					String taglibPostReplyURL = "javascript:" + namespace + "showForm('" + namespace + "postReplyForm" + i + "', '" + namespace + "postReplyBody" + i + "');";
 					%>
 
 					<liferay-ui:icon image="reply" message="add-comment" url="<%= taglibPostReplyURL %>" label="<%= true %>" />
@@ -324,7 +324,7 @@ DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
 								<td>
 
 									<%
-									String taglibPostReplyURL = "javascript: " + namespace + "showForm('" + namespace + "postReplyForm" + i + "', '" + namespace + "postReplyBody" + i + "');";
+									String taglibPostReplyURL = "javascript:" + namespace + "showForm('" + namespace + "postReplyForm" + i + "', '" + namespace + "postReplyBody" + i + "');";
 									%>
 
 									<liferay-ui:icon image="reply" message="post-reply" url="<%= taglibPostReplyURL %>" label="<%= true %>" />
@@ -344,7 +344,7 @@ DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
 								<c:if test="<%= MBDiscussionPermission.contains(permissionChecker, company.getCompanyId(), scopeGroupId, className, classPK, userId, ActionKeys.UPDATE_DISCUSSION) %>">
 
 									<%
-									String taglibEditURL = "javascript: " + namespace + "showForm('" + namespace + "editForm" + i + "', '" + namespace + "editBody" + i + "');";
+									String taglibEditURL = "javascript:" + namespace + "showForm('" + namespace + "editForm" + i + "', '" + namespace + "editBody" + i + "');";
 									%>
 
 									<td>
@@ -355,7 +355,7 @@ DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
 								<c:if test="<%= MBDiscussionPermission.contains(permissionChecker, company.getCompanyId(), scopeGroupId, className, classPK, userId, ActionKeys.DELETE_DISCUSSION) %>">
 
 									<%
-									String taglibDeleteURL = "javascript: " + namespace + "deleteMessage(" + i + ");";
+									String taglibDeleteURL = "javascript:" + namespace + "deleteMessage(" + i + ");";
 									%>
 
 									<td>
