@@ -4202,6 +4202,7 @@ your-account-with-login-x-has-been-deleted={0}, ditt konto med inloggning {1} ha
 your-account-with-login-x-is-not-active={0}, ditt konto med inloggning {1} är inte aktivt. Var vänlig och kontakta administratören.
 your-address-book-is-empty=Din adressbok är tom.
 your-answer-does-not-match-what-is-in-our-database=Ditt svar stämmer inte med det vi har registrerat.
+your-browser-does-not-support-inline-frames-or-is-currently-configured-not-to-display-inline-frames.-content-can-be-viewed-at-actual-source-page-x=Your browser does not support inline frames or is currently configured not to display inline frames. Content can be viewed at actual source page: {0}.
 your-browser-does-not-support-this-portlet=Din webbläsare stödjer inte denna portlet.
 your-cart-has-items-that-are-out-of-stock=Din kundvagn innehåller varor som inte finns i lager. Vill du fortsätta med beställningen ändå?
 your-cart-is-empty=Din kundvagn är tom.

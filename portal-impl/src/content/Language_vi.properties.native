@@ -1693,6 +1693,7 @@ you-will-receive-an-email-shortly-with-your-order-summary-and-further-details=B�
 your-account-with-login-x-has-been-deleted={0}, tài khoản của bạn với tên truy cập  {1} đã bị xóa. Liên hệ với người quản trị để nhận được trợ giúp.
 your-account-with-login-x-is-not-active={0}, tài khoản của bạn với tên  {1} chưa hoạt động . Xin liên hệ với nhà quản trị.
 your-address-book-is-empty=Sổ địa chỉ rỗng.
+your-browser-does-not-support-inline-frames-or-is-currently-configured-not-to-display-inline-frames.-content-can-be-viewed-at-actual-source-page-x=Your browser does not support inline frames or is currently configured not to display inline frames. Content can be viewed at actual source page: {0}.
 your-browser-does-not-support-this-portlet=Trình duyệt của bạn không hỗ trợ portlet này.
 your-cart-has-items-that-are-out-of-stock=Giỏ hàng của bạn có mặt hàng đã hết. Bạn có muốn tiếp tục với đơn hàng này ?
 your-junk-mail-folder-is-taking-up-a-lot-of-space=Email quảng cáo của bạn chiếm quá nhiều khoảng trống. Bạn có muốn xóa rỗng thư mục này không?

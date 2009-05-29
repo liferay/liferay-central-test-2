@@ -2234,6 +2234,7 @@ you-will-receive-an-email-shortly-with-your-order-summary-and-further-details=ب
 your-account-with-login-x-has-been-deleted={0}, حساب شما با نام {1} حذف شده است. لطفا با مدير در تماس باشيد
 your-account-with-login-x-is-not-active={0}, حساب شما با نام {1} فعال نمی باشد. لطفا با مدير در تماس باشيد.
 your-address-book-is-empty=کتاب آدرس شما خالی است
+your-browser-does-not-support-inline-frames-or-is-currently-configured-not-to-display-inline-frames.-content-can-be-viewed-at-actual-source-page-x=Your browser does not support inline frames or is currently configured not to display inline frames. Content can be viewed at actual source page: {0}.
 your-browser-does-not-support-this-portlet=مرورگر شما توانايی نمايش اين پرتلت را ندارد
 your-cart-has-items-that-are-out-of-stock=سبد خريد شما حاوی محصولاتی است که در انبار موجود نمی باشند، می خواهيد ادامه دهيد؟
 your-cart-is-empty=سبد خريد شما خالی است

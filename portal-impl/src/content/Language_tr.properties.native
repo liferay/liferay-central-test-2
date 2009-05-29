@@ -4228,6 +4228,7 @@ your-account-with-login-x-has-been-deleted={0}, {1} hesabınız silinmiştir. L�
 your-account-with-login-x-is-not-active={0}, {1} hesabınız aktif değildir. Lütfen daha fazla bilgi için sistem yöneticisi ile irtibata geçiniz.
 your-address-book-is-empty=Ardes defteriniz boş.
 your-answer-does-not-match-what-is-in-our-database=Cevabınız veritabanımızdakiyle uyuşmuyor.
+your-browser-does-not-support-inline-frames-or-is-currently-configured-not-to-display-inline-frames.-content-can-be-viewed-at-actual-source-page-x=Your browser does not support inline frames or is currently configured not to display inline frames. Content can be viewed at actual source page: {0}.
 your-browser-does-not-support-this-portlet=Tarayıcınız bu portleti desteklemiyor.
 your-cart-has-items-that-are-out-of-stock=Alışveriş sepenizde stok dışı ürünler var. Bu siparişe devam etmek istiyor musunuz?
 your-cart-is-empty=Alışveriş sepetiniz boş.

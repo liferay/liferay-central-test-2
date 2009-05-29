@@ -4098,6 +4098,7 @@ you-will-receive-an-email-shortly-with-your-order-summary-and-further-details=В
 your-account-with-login-x-has-been-deleted={0}, ваш профиль с логином {1} удален. Пожалуста свяжитесь с администратором для получения помощи.
 your-account-with-login-x-is-not-active={0}, ваш профиль с логином {1} неактивен. Пожалуста свяжитесь с администратором для получения помощи.
 your-address-book-is-empty=Ваша адресная книга пуста.
+your-browser-does-not-support-inline-frames-or-is-currently-configured-not-to-display-inline-frames.-content-can-be-viewed-at-actual-source-page-x=Your browser does not support inline frames or is currently configured not to display inline frames. Content can be viewed at actual source page: {0}.
 your-browser-does-not-support-this-portlet=Ваш браузер не поддерживает этот портлет.
 your-cart-has-items-that-are-out-of-stock=В вашей корзине есть товары, которых нет в наличии. Вы все еще хотите продолжить заказывать?
 your-cart-is-empty=Ваша корзина пуста.

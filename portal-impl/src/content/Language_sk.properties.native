@@ -3764,6 +3764,7 @@ you-will-receive-an-email-shortly-with-your-order-summary-and-further-details=Za
 your-account-with-login-x-has-been-deleted={0}, Váš účet s prihlasovacím menom {1} bol vymazaný. Kontaktujte administrátora pre ďalšie informácie.
 your-account-with-login-x-is-not-active={0}, Váš účet s prihlasovacím menom {1} nie je aktívny. Kontaktujte administrátora pre ďalšie informácie.
 your-address-book-is-empty=Váš adresár je prázdny.
+your-browser-does-not-support-inline-frames-or-is-currently-configured-not-to-display-inline-frames.-content-can-be-viewed-at-actual-source-page-x=Your browser does not support inline frames or is currently configured not to display inline frames. Content can be viewed at actual source page: {0}.
 your-browser-does-not-support-this-portlet=Váš prehliadač nepodporuje tento portlet.
 your-cart-has-items-that-are-out-of-stock=Váš košík obsahuje položky, ktoré nie sú na sklade. Stále chcete pokračovať vo vykonaní objednávky?
 your-cart-is-empty=Váš košík je prázdny.

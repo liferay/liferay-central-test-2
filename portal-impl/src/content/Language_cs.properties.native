@@ -1705,6 +1705,7 @@ you-will-receive-an-email-shortly-with-your-order-summary-and-further-details=V 
 your-account-with-login-x-has-been-deleted={0}, Váš účet s loginem {1} byl smazán. Prosím kontaktujte administrátora pro pomoc.
 your-account-with-login-x-is-not-active={0}, Váš účet s loginem {1} je neaktivní. Prosím kontaktujte administrátora pro pomoc.
 your-address-book-is-empty=Váš adresář je prázdný.
+your-browser-does-not-support-inline-frames-or-is-currently-configured-not-to-display-inline-frames.-content-can-be-viewed-at-actual-source-page-x=Your browser does not support inline frames or is currently configured not to display inline frames. Content can be viewed at actual source page: {0}.
 your-browser-does-not-support-this-portlet=Váš browser nepodporuje funkčnost vyžadovanou tímto portletem.
 your-cart-has-items-that-are-out-of-stock=Váš košík obsahuje položku která je vyprodána. Stále chcete pokračovat?
 your-junk-mail-folder-is-taking-up-a-lot-of-space=Váš adresář se spamy překročil povolenou velikost. Chcete jej nyní vyprázdnit?
