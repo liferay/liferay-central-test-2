@@ -611,6 +611,10 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 		List<TagsProperty> oldProperties =
 			tagsPropertyPersistence.findByEntryId(entryId);
 
+		for (TagsProperty property : oldProperties) {
+			tagsPropertyLocalService.deleteProperty(property);
+		}
+
 		for (int i = 0; i < properties.length; i++) {
 			String[] property = StringUtil.split(
 				properties[i], StringPool.COLON);
@@ -649,12 +653,6 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 
 					newProperties.add(propertyId);
 				}
-			}
-		}
-
-		for (TagsProperty property : oldProperties) {
-			if (!newProperties.contains(property.getPropertyId())) {
-				tagsPropertyLocalService.deleteProperty(property);
 			}
 		}
 
