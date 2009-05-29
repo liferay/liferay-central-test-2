@@ -619,12 +619,6 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 			String[] property = StringUtil.split(
 				properties[i], StringPool.COLON);
 
-			long propertyId = 0;
-
-			if (property.length > 0) {
-				propertyId = GetterUtil.getLong(property[0]);
-			}
-
 			String key = StringPool.BLANK;
 
 			if (property.length > 1) {
@@ -637,22 +631,9 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 				value = GetterUtil.getString(property[2]);
 			}
 
-			if (propertyId == 0) {
-				if (Validator.isNotNull(key)) {
-					tagsPropertyLocalService.addProperty(
-						userId, entryId, key, value);
-				}
-			}
-			else {
-				if (Validator.isNull(key)) {
-					tagsPropertyLocalService.deleteProperty(propertyId);
-				}
-				else {
-					tagsPropertyLocalService.updateProperty(
-						propertyId, key, value);
-
-					newProperties.add(propertyId);
-				}
+			if (Validator.isNotNull(key)) {
+				tagsPropertyLocalService.addProperty(
+					userId, entryId, key, value);
 			}
 		}
 
