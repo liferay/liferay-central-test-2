@@ -1423,7 +1423,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			new String[] {
 				"style=\"background-color: #CFC;\"",
 				"style=\"background-color: #FDC6C6; text-decoration: " +
-						"line-through;\"",
+					"line-through;\"",
 				"style=\"border-bottom: 2px dotted blue;\"",
 				"style=\"border: 10px solid #CFC;\"",
 				"style=\"border: 10px solid #FDC6C6;\"",
