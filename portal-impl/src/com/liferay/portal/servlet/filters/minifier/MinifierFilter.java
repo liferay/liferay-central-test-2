@@ -36,6 +36,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.servlet.filters.BasePortalFilter;
+import com.liferay.portal.servlet.filters.etag.ETagUtil;
 import com.liferay.portal.util.MinifierUtil;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
@@ -420,6 +421,8 @@ public class MinifierFilter extends BasePortalFilter {
 			processFilter(MinifierFilter.class, request, response, filterChain);
 		}
 		else {
+			ETagUtil.setETag(request, response, minifiedContent);
+
 			ServletResponseUtil.write(response, minifiedContent);
 		}
 	}

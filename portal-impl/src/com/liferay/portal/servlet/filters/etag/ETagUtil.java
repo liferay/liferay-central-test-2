@@ -22,45 +22,50 @@
 
 package com.liferay.portal.servlet.filters.etag;
 
-import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.servlet.filters.BasePortalFilter;
-import com.liferay.util.servlet.filters.CacheResponse;
-import com.liferay.util.servlet.filters.CacheResponseData;
-import com.liferay.util.servlet.filters.CacheResponseUtil;
+import com.liferay.portal.kernel.servlet.HttpHeaders;
 
-import java.io.IOException;
+import java.util.Arrays;
 
-import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * <a href="ETagFilter.java.html"><b><i>View Source</i></b></a>
+ * <a href="ETagUtil.java.html"><b><i>View Source</i></b></a>
  *
- * @author Eduardo Lundgren
+ * @author Brian Wing Shun Chan
  *
  */
-public class ETagFilter extends BasePortalFilter {
+public class ETagUtil {
 
-	protected void processFilter(
-			HttpServletRequest request, HttpServletResponse response,
-			FilterChain filterChain)
-		throws IOException, ServletException {
+	public static final String ETAG = ETagUtil.class.getName() + "ETAG";
 
-		CacheResponse cacheResponse = new CacheResponse(
-			response, StringPool.UTF8);
+	public static void setETag(
+		HttpServletRequest request, HttpServletResponse response,
+		byte[] bytes) {
 
-		processFilter(
-			ETagFilter.class, request, cacheResponse, filterChain);
+		String eTag = (String)request.getAttribute(ETAG);
 
-		CacheResponseData cacheResponseData = new CacheResponseData(
-			cacheResponse.getData(), cacheResponse.getContentType(),
-			cacheResponse.getHeaders());
+		if (eTag != null) {
+			return;
+		}
 
-		ETagUtil.setETag(request, response, cacheResponse.getData());
+		eTag = Integer.toHexString(Arrays.hashCode(bytes));
 
-		CacheResponseUtil.write(response, cacheResponseData);
+		request.setAttribute(ETAG, eTag);
+
+		response.setHeader(HttpHeaders.ETAG, eTag);
+
+		String ifNoneMatch = request.getHeader(HttpHeaders.IF_NONE_MATCH);
+
+		if (eTag.equals(ifNoneMatch)) {
+			response.setStatus(HttpServletResponse.SC_NOT_MODIFIED);
+		}
+	}
+
+	public static void setETag(
+		HttpServletRequest request, HttpServletResponse response, String s) {
+
+		setETag(request, response, s.getBytes());
 	}
 
 }

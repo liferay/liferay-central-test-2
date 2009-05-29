@@ -34,13 +34,11 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.servlet.filters.BasePortalFilter;
-import com.liferay.portal.servlet.filters.etag.ETagFilter;
+import com.liferay.portal.servlet.filters.etag.ETagUtil;
 import com.liferay.portal.util.MinifierUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
 
 import java.io.IOException;
-
-import java.util.Arrays;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -169,10 +167,7 @@ public class StripFilter extends BasePortalFilter {
 					newByteArrayPos = oldByteArray.length;
 				}
 
-				String eTag = Integer.toHexString(
-					Arrays.hashCode(newByteArray));
-
-				request.setAttribute(ETagFilter.ETAG, eTag);
+				ETagUtil.setETag(request, response, newByteArray);
 
 				ServletResponseUtil.write(
 					response, newByteArray, newByteArrayPos);
