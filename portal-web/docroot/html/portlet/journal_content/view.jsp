@@ -136,7 +136,7 @@ if (articleDisplay != null) {
 
 		<c:if test="<%= ((showEditArticleIcon || showEditTemplateIcon || showSelectArticleIcon || showAddArticleIcon) && !staged) || (enablePrint || enableRatings || enableComments || enableConversions) %>">
 			<c:if test="<%= showIconsActions || ((articleDisplay != null) && (enableConversions || enablePrint)) %>">
-				<div class="icons-container">
+				<div class="lfr-meta-actions icons-container">
 					<div class="icon-actions">
 						<c:if test="<%= showIconsActions %>">
 							<c:if test="<%= showEditArticleIcon %>">
