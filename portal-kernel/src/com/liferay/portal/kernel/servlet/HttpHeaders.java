@@ -52,7 +52,11 @@ public interface HttpHeaders {
 
 	public static final String EXPIRES = "Expires";
 
+	public static final String ETAG = "ETag";
+
 	public static final String IF_MODIFIED_SINCE = "If-Modified-Since";
+
+	public static final String IF_NONE_MATCH = "If-None-Match";
 
 	public static final String KEEP_ALIVE = "Keep-Alive";
 

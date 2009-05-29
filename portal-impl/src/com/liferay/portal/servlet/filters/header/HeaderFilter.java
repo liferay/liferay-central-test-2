@@ -24,6 +24,7 @@ package com.liferay.portal.servlet.filters.header;
 
 import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.servlet.filters.BasePortalFilter;
@@ -37,6 +38,7 @@ import java.util.Calendar;
 import java.util.Enumeration;
 import java.util.GregorianCalendar;
 import java.util.Locale;
+import java.util.Map;
 import java.util.TimeZone;
 
 import javax.servlet.FilterChain;
@@ -51,6 +53,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Brian Wing Shun Chan
  * @author Raymond Augé
+ * @author Eduardo Lundgren
  *
  */
 public class HeaderFilter extends BasePortalFilter {
@@ -60,6 +63,21 @@ public class HeaderFilter extends BasePortalFilter {
 
 		_filterConfig = filterConfig;
 		_timeZone = TimeZone.getTimeZone(_TIME_ZONE);
+	}
+
+	protected long getLastModified(HttpServletRequest request) {
+		long lasModified = -1;
+
+		Map<String, String[]> parameterMap = HttpUtil.getParameterMap(
+			request.getQueryString());
+
+		String[] value = parameterMap.get("t");
+
+		if ((value != null) && (value.length > 0)) {
+			lasModified = GetterUtil.getLong(value[0]);
+		}
+
+		return lasModified;
 	}
 
 	protected void processFilter(
@@ -103,6 +121,22 @@ public class HeaderFilter extends BasePortalFilter {
 
 			if (addHeader) {
 				response.addHeader(name, value);
+			}
+		}
+
+		long lastModified = getLastModified(request);
+		long ifModifiedSince = request.getDateHeader(
+			HttpHeaders.IF_MODIFIED_SINCE);
+
+		if (lastModified > 0) {
+			response.setDateHeader(HttpHeaders.LAST_MODIFIED, lastModified);
+
+			if (lastModified <= ifModifiedSince) {
+				response.setDateHeader(
+					HttpHeaders.LAST_MODIFIED, ifModifiedSince);
+				response.setStatus(HttpServletResponse.SC_NOT_MODIFIED);
+
+				return;
 			}
 		}
 
