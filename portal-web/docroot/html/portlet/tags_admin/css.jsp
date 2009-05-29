@@ -40,7 +40,7 @@
 }
 
 .portlet-tags-admin .vocabulary-list-container {
-	min-width: 180px;
+	width: 200px;
 }
 
 .ie6 .portlet-tags-admin .vocabulary-entries-container {

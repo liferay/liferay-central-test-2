@@ -62,112 +62,10 @@
 					}
 				);
 
-				var changeAddLabel = function(label) {
-					label = Liferay.Language.get(label);
-					toolbar.find('.vocabulary-label').html(label);
-					toolbar.find('.add-entry-btn').val(label);
-				};
-
-				var changeToLabel = function(label) {
-					label = Liferay.Language.get(label);
-					toolbar.find('.vocabulary-parent-label').html(label);
-				};
-
-				var changeVocaularyAddLabel = function(label) {
-					label = Liferay.Language.get(label);
-					toolbar.find('.add-vocabulary-btn').val(label);
-				};
-
-				var changeVocabularyDeleteBtnLabel = function(label) {
-					label = Liferay.Language.get(label);
-					jQuery('.vocabulary-delete-list-button').val(label);
-				};
-
-				var changeSearchSelectLabels = function(label) {
-					label = Liferay.Language.get(label);
-					jQuery('#vocabulary-select-search option[value=vocabularies]').html(label);
-				};
-
-				var changeToolbarSectionLabels = function(label) {
-					label = Liferay.Language.get(label);
-					jQuery('.vocabulary-toolbar-section .panel-content label:first').html(label);
-				};
-
-				var changeVocabularyHeaderLabel = function(label) {
-					label = Liferay.Language.get(label);
-					jQuery('.vocabulary-list-container .results-header').html(label);
-				};
-
-				var changeEntryHeaderLabel = function(label) {
-					label = Liferay.Language.get(label);
-					jQuery('.vocabulary-entries-container .results-header').html(label);
-				};
-
-				var changeEditEntryHeaderLabel = function(label) {
-					label = Liferay.Language.get(label);
-					jQuery('.vocabulary-edit-entry .results-header').html(label);
-				};
-
-				var changeVocabularyPermissionButtonsLabels = function(label) {
-					label = Liferay.Language.get(label);
-					jQuery('.permissions-vocabulary-btn').val(label);
-				};
-
-				var changeEntryPermissionButtonsLabels = function(label) {
-					label = Liferay.Language.get(label);
-					jQuery('.permissions-entries-btn').val(label);
-				};
-
 				var selectButton = function(button) {
 					buttons.find('.button').removeClass('selected');
 					jQuery(button).addClass('selected');
 				};
-
-				buttons.find('.tags-sets').click(
-					function(event) {
-						instance._selectedVocabulary = 'tag';
-
-						changeAddLabel('add-tag');
-						changeEditEntryHeaderLabel('edit-tag');
-						changeEntryHeaderLabel('tags');
-						changeEntryPermissionButtonsLabels('edit-tag-permissions');
-						changeSearchSelectLabels('tag-sets');
-						changeToLabel('to-tag-set');
-						changeToolbarSectionLabels('add-tag-set');
-						changeVocabularyDeleteBtnLabel('delete-tag-set');
-						changeVocabularyHeaderLabel('tag-sets');
-						changeVocabularyPermissionButtonsLabels('edit-tag-set-permissions');
-						changeVocaularyAddLabel('add-tag-set');
-
-						selectButton(this);
-
-						instance._loadData();
-						instance._hideToolbarSections();
-					}
-				);
-
-				buttons.find('.categories').click(
-					function(event) {
-						instance._selectedVocabulary = 'category';
-
-						changeAddLabel('add-category');
-						changeEditEntryHeaderLabel('edit-category');
-						changeEntryHeaderLabel('categories');
-						changeEntryPermissionButtonsLabels('edit-category-permissions');
-						changeSearchSelectLabels('categories');
-						changeToLabel('to-vocabulary');
-						changeToolbarSectionLabels('add-vocabulary');
-						changeVocabularyDeleteBtnLabel('delete-vocabulary');
-						changeVocabularyHeaderLabel('Vocabulary');
-						changeVocabularyPermissionButtonsLabels('edit-vocabulary-permissions');
-						changeVocaularyAddLabel('add-vocabulary');
-
-						selectButton(this);
-
-						instance._loadData();
-						instance._hideToolbarSections();
-					}
-				);
 
 				toolbar.find('.add-vocabulary-btn').click(
 					function (event) {
@@ -340,72 +238,7 @@
 				return portletURL;
 			},
 
-			_displayCategoriesVocabularyEntries: function(entries, callback) {
-				var instance = this;
-
-				var buffer = [];
-				var childrenList = jQuery(instance._entryScopeClass);
-
-				var treeOptions = {
-					sortOn: 'li',
-					distance: 10,
-					dropOn: 'span.folder',
-					dropHoverClass: 'hover-folder',
-					drop: function(event, ui) {
-						ui.droppable = jQuery(this).parent();
-						instance._merge(event, ui);
-
-						var categoryTree = jQuery('#vocabulary-treeview');
-
-						setTimeout(
-							function() {
-								categoryTree.find(':not(span)').removeClass();
-								categoryTree.find('div').remove();
-								categoryTree.removeData('toggler');
-								categoryTree.treeview();
-						}, 100);
-					}
-				};
-
-				buffer.push('<div class="vocabulary-treeview-container lfr-component"><ul id="vocabulary-treeview" class="filetree">');
-				instance._buildCategoryTreeview(entries, buffer, 0);
-				buffer.push('</ul></div>');
-
-				childrenList.html(buffer.join(''));
-
-				instance._reloadSearch();
-
-				var categoryTree = jQuery('#vocabulary-treeview');
-				var	entryList = jQuery(instance._entryListClass);
-
-				entryList.click(
-					function(event) {
-						var entryId = instance._getEntryId(this);
-						var editContainer = jQuery('.vocabulary-edit');
-
-						instance._selectEntry(entryId);
-						instance._showSection(editContainer);
-
-						event.stopPropagation();
-					}
-				);
-
-				categoryTree.treeview().tree(treeOptions);
-
-				var list = jQuery(instance._vocabularyScopeClass);
-				var listLinks = jQuery('li', list);
-				var treeScope = categoryTree.data('tree').identifier;
-
-				for (var i = listLinks.length - 1; i >= 0; i--) {
-					new droppableTag(listLinks[i], 'tags');
-				}
-
-				if (callback) {
-					callback();
-				}
-			},
-
-			_displayFolksonomiesVocabularyEntries: function(entries, callback) {
+			_displayVocabularyEntriesImpl: function(entries, callback) {
 				var instance = this;
 
 				var buffer = [];
@@ -468,7 +301,7 @@
 				}
 			},
 
-			_displayList: function(folksonomy, callback) {
+			_displayList: function(callback) {
 				var instance = this;
 
 				var buffer = [];
@@ -479,7 +312,6 @@
 				buffer.push('<ul>');
 
 				instance._getVocabularies(
-					folksonomy,
 					function(vocabularies) {
 						jQuery.each(
 							vocabularies,
@@ -532,7 +364,6 @@
 							function(value, settings) {
 								var vocabularyName = value;
 								var vocabularyId = instance._selectedVocabularyId;
-								var folksonomy = (instance._selectedVocabulary == 'tag');
 								var li = jQuery(this).parents('li:first');
 
 								li.attr('data-vocabulary', value);
@@ -540,7 +371,6 @@
 								instance._updateVocabulary(
 									vocabularyId,
 									vocabularyName,
-									folksonomy,
 									function(message) {
 										var exception = message.exception;
 										if (exception) {
@@ -550,7 +380,6 @@
 										}
 										else {
 											instance._displayList(
-												folksonomy,
 												function() {
 													var vocabulary = instance._selectVocabulary(message.vocabularyId);
 
@@ -625,13 +454,7 @@
 				instance._getVocabularyEntries(
 					vocabulary,
 					function(entries) {
-						if (!instance._selectedVocabulary || instance._selectedVocabulary == 'tag') {
-							instance._displayFolksonomiesVocabularyEntries(entries, callback);
-						}
-
-						if (instance._selectedVocabulary == 'category') {
-							instance._displayCategoriesVocabularyEntries(entries, callback);
-						}
+						instance._displayVocabularyEntriesImpl(entries, callback);
 					}
 				);
 			},
@@ -739,14 +562,13 @@
 			_addVocabulary: function(vocabulary, callback) {
 				var instance = this;
 
-				var folksonomy = (instance._selectedVocabulary == 'tag');
 				var communityPermission = instance._getPermissionsEnabled('vocabulary', 'community');
 				var guestPermission = instance._getPermissionsEnabled('vocabulary', 'guest');
 
 				Liferay.Service.Tags.TagsVocabulary.addVocabulary(
 					{
 						name: vocabulary,
-						folksonomy: folksonomy,
+						folksonomy: true,
 						serviceContext: jQuery.toJSON(
 							{
 								communityPermissions: communityPermission,
@@ -762,7 +584,6 @@
 							instance._sendMessage('success', 'your-request-processed-successfully');
 
 							instance._displayList(
-								folksonomy,
 								function() {
 									var vocabulary = instance._selectVocabulary(message.vocabularyId);
 
@@ -879,7 +700,7 @@
 						var propertyRow = jQuery(this);
 						var key = propertyRow.find('input.property-key').val();
 						var value = propertyRow.find('input.property-value').val();
-						var rowValue = ['0', ':', key, ':', value, ','].join('');
+						var rowValue = [key, ':', value, ','].join('');
 
 						buffer.push(rowValue);
 					}
@@ -991,13 +812,13 @@
 				);
 			},
 
-			_getVocabularies: function(folksonomy, callback) {
+			_getVocabularies: function(callback) {
 				var instance = this;
 
 				Liferay.Service.Tags.TagsVocabulary.getGroupVocabularies(
 					{
 						groupId: themeDisplay.getScopeGroupId(),
-						folksonomy: folksonomy
+						folksonomy: true
 					},
 					callback
 				);
@@ -1063,12 +884,9 @@
 			_loadData: function() {
 				var instance = this;
 
-				var folksonomy = (instance._selectedVocabulary == 'tag');
-
 				instance._closeEditSection();
 
 				instance._displayList(
-					folksonomy,
 					function() {
 						instance._displayVocabularyEntries(
 							instance._selectedVocabularyName,
@@ -1091,7 +909,6 @@
 				var toEntryName = instance._getEntryName(droppable);
 				var vocabularyId = instance._getVocabularyId(droppable);
 				var vocabularyName = instance._getVocabularyName(droppable);
-				var folksonomy = (instance._selectedVocabulary == 'tag');
 
 				var isChangingVocabulary = !!vocabularyName;
 				var destination = isChangingVocabulary ? vocabularyName : toEntryName;
@@ -1108,7 +925,7 @@
 					}
 				);
 
-				if (!folksonomy || confirm(mergeText)) {
+				if (confirm(mergeText)) {
 					if (instance._selectedVocabulary == 'tag') {
 						if (isChangingVocabulary) {
 							var properties = instance._buildProperties();
@@ -1431,12 +1248,12 @@
 				);
 			},
 
-			_updateVocabulary: function(vocabularyId, vocabularyName, folksonomy, callback) {
+			_updateVocabulary: function(vocabularyId, vocabularyName, callback) {
 				Liferay.Service.Tags.TagsVocabulary.updateVocabulary(
 					{
 						vocabularyId: vocabularyId,
 						name: vocabularyName,
-						folksonomy: folksonomy
+						folksonomy: true
 					},
 					callback
 				);

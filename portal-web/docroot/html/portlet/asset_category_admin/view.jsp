@@ -164,7 +164,7 @@
 			<div class="category-vocabulary-properties">
 				<liferay-ui:message key="properties" />:
 
-				<liferay-ui:icon-help message="properties-are-a-way-to-add-more-detailed-information-to-a-specific-tag-or-category" />
+				<liferay-ui:icon-help message="properties-are-a-way-to-add-more-detailed-information-to-a-specific-category" />
 
 				<div class="category-vocabulary-property-row">
 					<input class="category-property-key" type="text" />
@@ -178,7 +178,7 @@
 
 				<br />
 
-				<input class="category-vocabulary-save-properties" type="button" value="<liferay-ui:message key="save" />" />
+				<input class="category-vocabulary-save-category-properties" type="button" value="<liferay-ui:message key="save" />" />
 
 				<input class="category-vocabulary-close" type="button" value="<liferay-ui:message key="close" />" />
 

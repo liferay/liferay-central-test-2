@@ -51,9 +51,7 @@ import com.liferay.util.Autocomplete;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * <a href="TagsEntryLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -606,8 +604,6 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 
 		// Properties
 
-		Set<Long> newProperties = new HashSet<Long>();
-
 		List<TagsProperty> oldProperties =
 			tagsPropertyPersistence.findByEntryId(entryId);
 
@@ -621,14 +617,14 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 
 			String key = StringPool.BLANK;
 
-			if (property.length > 1) {
-				key = GetterUtil.getString(property[1]);
+			if (property.length > 0) {
+				key = GetterUtil.getString(property[0]);
 			}
 
 			String value = StringPool.BLANK;
 
-			if (property.length > 2) {
-				value = GetterUtil.getString(property[2]);
+			if (property.length > 1) {
+				value = GetterUtil.getString(property[1]);
 			}
 
 			if (Validator.isNotNull(key)) {

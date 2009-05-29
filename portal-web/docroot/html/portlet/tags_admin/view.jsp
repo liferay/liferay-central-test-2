@@ -29,28 +29,20 @@
 <table class="vocabulary-container">
 <tr>
 	<td colspan="3">
-		<div id="vocabulary-search-bar">
-			<input id="vocabulary-search-input" type="text" value="" />
-
-			<select class="vocabulary-select-search" id="vocabulary-select-search">
-				<option value="vocabularies"><liferay-ui:message key="tag-sets" /></option>
-				<option value="entries"><liferay-ui:message key="entries" /></option>
-			</select>
-
-			<input id="vocabulary-search-button" type="button" value="<liferay-ui:message key="search" />" />
-		</div>
-	</td>
-</tr>
-<tr>
-	<td colspan="3">
 		<div class="vocabulary-toolbar">
-			<div class="vocabulary-buttons">
-				<span class="button selected tags-sets"><liferay-ui:message key="tag-sets" /></span>
 
-				<span class="button categories"><liferay-ui:message key="categories" /></span>
-			</div>
+			<span id="vocabulary-search-bar">
+				<input id="vocabulary-search-input" type="text" value="" />
 
-			<div class="vocabulary-actions">
+				<select class="vocabulary-select-search" id="vocabulary-select-search">
+					<option value="entries"><liferay-ui:message key="entries" /></option>
+					<option value="vocabularies"><liferay-ui:message key="tag-sets" /></option>
+				</select>
+
+				<input id="vocabulary-search-button" type="button" value="<liferay-ui:message key="search" />" />
+			</span>
+
+			<span class="vocabulary-actions">
 				<c:if test="<%= TagsPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_VOCABULARY) %>">
 					<input class="add-vocabulary-btn" id="add-vocabulary-btn" name="add-vocabulary-btn" type="button"  value="<liferay-ui:message key="add-tag-set" />">
 				</c:if>
@@ -130,7 +122,7 @@
 						</div>
 					</div>
 				</div>
-			</div>
+			</span>
 		</div>
 	</td>
 </tr>
@@ -168,7 +160,7 @@
 			<div class="vocabulary-properties">
 				<liferay-ui:message key="properties" />:
 
-				<liferay-ui:icon-help message="properties-are-a-way-to-add-more-detailed-information-to-a-specific-tag-or-category" />
+				<liferay-ui:icon-help message="properties-are-a-way-to-add-more-detailed-information-to-a-specific-tag" />
 
 				<div class="vocabulary-property-row">
 					<input class="property-key" type="text" />
