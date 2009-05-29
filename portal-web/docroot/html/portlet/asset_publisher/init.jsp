@@ -145,6 +145,7 @@ if (Validator.isNull(tag)) {
 }
 else {
 	entries = new String[] {tag};
+	PortalUtil.setPageKeywords(tag, request);
 }
 
 String[] notEntries = preferences.getValues("not-entries", new String[0]);
