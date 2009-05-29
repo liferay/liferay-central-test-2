@@ -27,6 +27,8 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.servlet.filters.BasePortalFilter;
 import com.liferay.util.servlet.filters.CacheResponse;
+import com.liferay.util.servlet.filters.CacheResponseData;
+import com.liferay.util.servlet.filters.CacheResponseUtil;
 
 import java.io.IOException;
 
@@ -45,7 +47,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class ETagFilter extends BasePortalFilter {
 
-	protected String getETag(
+	protected void processFilter(
 			HttpServletRequest request, HttpServletResponse response,
 			FilterChain filterChain)
 		throws IOException, ServletException {
@@ -55,15 +57,12 @@ public class ETagFilter extends BasePortalFilter {
 
 		processFilter(ETagFilter.class, request, cacheResponse, filterChain);
 
-		return Integer.toHexString(Arrays.hashCode(cacheResponse.getData()));
-	}
+		CacheResponseData cacheResponseData = new CacheResponseData(
+			cacheResponse.getData(), cacheResponse.getContentType(),
+			cacheResponse.getHeaders());
 
-	protected void processFilter(
-			HttpServletRequest request, HttpServletResponse response,
-			FilterChain filterChain)
-		throws IOException, ServletException {
-
-		String eTag = getETag(request, response, filterChain);
+		String eTag = Integer.toHexString(
+			Arrays.hashCode(cacheResponse.getData()));
 
 		if (Validator.isNotNull(eTag)) {
 			response.setHeader(HttpHeaders.ETAG, eTag);
@@ -72,8 +71,12 @@ public class ETagFilter extends BasePortalFilter {
 
 			if (eTag.equals(ifNoneMatch)) {
 				response.setStatus(HttpServletResponse.SC_NOT_MODIFIED);
+
+				return;
 			}
 		}
+
+		CacheResponseUtil.write(response, cacheResponseData);
 	}
 
 }
