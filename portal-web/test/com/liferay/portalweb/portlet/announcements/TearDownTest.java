@@ -81,7 +81,7 @@ public class TearDownTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isElementPresent("//div[3]/ul/li[2]/a")) {
+						if (selenium.isElementPresent("//div[4]/ul/li[2]/a")) {
 							break;
 						}
 					}
@@ -91,7 +91,7 @@ public class TearDownTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click(RuntimeVariables.replace("//div[3]/ul/li[2]/a"));
+				selenium.click(RuntimeVariables.replace("//div[4]/ul/li[2]/a"));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
@@ -115,7 +115,7 @@ public class TearDownTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isElementPresent("//div[3]/ul/li[2]/a")) {
+						if (selenium.isElementPresent("//div[4]/ul/li[2]/a")) {
 							break;
 						}
 					}
@@ -125,7 +125,7 @@ public class TearDownTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click(RuntimeVariables.replace("//div[3]/ul/li[2]/a"));
+				selenium.click(RuntimeVariables.replace("//div[4]/ul/li[2]/a"));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
@@ -163,7 +163,8 @@ public class TearDownTest extends BaseTestCase {
 				selenium.click(RuntimeVariables.replace(
 						"//li[2]/ul/li[3]/a/span"));
 				selenium.waitForPageToLoad("30000");
-				selenium.click(RuntimeVariables.replace("link=Page"));
+				selenium.click(RuntimeVariables.replace(
+						"//li[@id='_88_tabs3pageTabsId']/a"));
 				selenium.waitForPageToLoad("30000");
 				selenium.click(RuntimeVariables.replace(
 						"//input[@value='Delete']"));
