@@ -929,7 +929,7 @@
 					}
 				);
 
-				// Move Ccategory
+				// Move category
 
 				var categoryProperties = instance._buildCategoryProperties();
 
