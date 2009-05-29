@@ -1335,6 +1335,24 @@
 		<system>true</system>
 	</portlet>
 	<portlet>
+		<portlet-name>146</portlet-name>
+		<icon>/html/icons/default.png</icon>
+		<struts-path>layout_prototypes</struts-path>
+		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
+		<control-panel-entry-category>portal</control-panel-entry-category>
+		<control-panel-entry-weight>10.0</control-panel-entry-weight>
+		<use-default-template>false</use-default-template>
+		<restore-current-view>false</restore-current-view>
+		<scopeable>true</scopeable>
+		<private-request-attributes>false</private-request-attributes>
+		<private-session-attributes>false</private-session-attributes>
+		<render-weight>50</render-weight>
+		<ajaxable>false</ajaxable>
+		<header-portlet-css>/html/portlet/communities/css.jsp</header-portlet-css>
+		<header-portlet-css>/html/portlet/enterprise_admin/css.jsp</header-portlet-css>
+		<css-class-wrapper>portlet-enterprise-admin</css-class-wrapper>
+	</portlet>
+	<portlet>
 		<portlet-name>147</portlet-name>
 		<icon>/html/icons/default.png</icon>
 		<struts-path>asset_category_admin</struts-path>

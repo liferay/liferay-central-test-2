@@ -100,6 +100,15 @@ Liferay.Service.registerClass(
 );
 
 Liferay.Service.registerClass(
+	Liferay.Service.Portal, "LayoutPrototype",
+	{
+		deleteLayoutPrototype: true,
+		getLayoutPrototype: true,
+		search: true
+	}
+);
+
+Liferay.Service.registerClass(
 	Liferay.Service.Portal, "LayoutSet",
 	{
 		updateLookAndFeel: true,

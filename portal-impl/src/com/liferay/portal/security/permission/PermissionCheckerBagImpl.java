@@ -31,6 +31,7 @@ import com.liferay.portal.model.Role;
 import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.service.OrganizationLocalServiceUtil;
 import com.liferay.portal.service.UserGroupRoleLocalServiceUtil;
+import com.liferay.portal.service.permission.LayoutPrototypePermissionUtil;
 
 import java.util.HashMap;
 import java.util.List;
@@ -132,6 +133,16 @@ public class PermissionCheckerBagImpl implements PermissionCheckerBag {
 				return true;
 			}
 		}
+		else if (group.isLayoutPrototype()) {
+			if (LayoutPrototypePermissionUtil.contains(
+					permissionChecker, group.getClassPK(), ActionKeys.UPDATE)) {
+
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
 		else if (group.isOrganization()) {
 			long organizationId = group.getClassPK();
 
@@ -180,6 +191,16 @@ public class PermissionCheckerBagImpl implements PermissionCheckerBag {
 					RoleConstants.COMMUNITY_OWNER)) {
 
 				return true;
+			}
+		}
+		else if (group.isLayoutPrototype()) {
+			if (LayoutPrototypePermissionUtil.contains(
+					permissionChecker, group.getClassPK(), ActionKeys.UPDATE)) {
+
+				return true;
+			}
+			else {
+				return false;
 			}
 		}
 		else if (group.isOrganization()) {

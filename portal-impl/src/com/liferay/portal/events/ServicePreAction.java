@@ -79,6 +79,7 @@ import com.liferay.portal.service.ThemeLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.permission.GroupPermissionUtil;
 import com.liferay.portal.service.permission.LayoutPermissionUtil;
+import com.liferay.portal.service.permission.LayoutPrototypePermissionUtil;
 import com.liferay.portal.service.permission.OrganizationPermissionUtil;
 import com.liferay.portal.service.permission.UserPermissionUtil;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -708,6 +709,16 @@ public class ServicePreAction extends Action {
 				return true;
 			}
 		}
+		else if (group.isLayoutPrototype()) {
+			if (LayoutPrototypePermissionUtil.contains(
+					permissionChecker, group.getClassPK(), ActionKeys.VIEW)) {
+
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
 		else if (group.isOrganization()) {
 			long organizationId = group.getClassPK();
 
@@ -1126,7 +1137,7 @@ public class ServicePreAction extends Action {
 
 					layout = null;
 				}
-				else {
+				else if (!layout.getGroup().isLayoutPrototype()) {
 					layouts = LayoutLocalServiceUtil.getLayouts(
 						layout.getGroupId(), layout.isPrivateLayout(),
 						LayoutConstants.DEFAULT_PARENT_LAYOUT_ID);
@@ -1136,6 +1147,9 @@ public class ServicePreAction extends Action {
 
 						doAsGroupId = 0;
 					}
+				}
+				else {
+					layouts = new ArrayList<Layout>();
 				}
 			}
 			catch (NoSuchLayoutException nsle) {
@@ -1626,6 +1640,17 @@ public class ServicePreAction extends Action {
 			themeDisplay.setShowAddContentIcon(false);
 			themeDisplay.setShowMyAccountIcon(false);
 			themeDisplay.setShowPageSettingsIcon(false);
+		}
+
+		if (group.isLayoutPrototype()) {
+			themeDisplay.setShowControlPanelIcon(false);
+			themeDisplay.setShowHomeIcon(false);
+			themeDisplay.setShowMyAccountIcon(false);
+			themeDisplay.setShowPageSettingsIcon(true);
+			themeDisplay.setShowPortalIcon(false);
+			themeDisplay.setShowSignInIcon(false);
+			themeDisplay.setShowSignOutIcon(false);
+			themeDisplay.setShowStagingIcon(false);
 		}
 
 		themeDisplay.setURLPortal(portalURL + contextPath);

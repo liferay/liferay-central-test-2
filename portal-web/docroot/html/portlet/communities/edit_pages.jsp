@@ -491,10 +491,17 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 	<c:otherwise>
 
 		<%
-		String tabs2Names = "pages";
+		String tabs2Names = null;
 
-		if (permissionChecker.isOmniadmin() || (PropsValues.LOOK_AND_FEEL_MODIFIABLE && GroupPermissionUtil.contains(permissionChecker, liveGroupId, ActionKeys.MANAGE_LAYOUTS))) {
-			tabs2Names += ",look-and-feel";
+		if (group.isLayoutPrototype()) {
+			tabs2Names = "template";
+		}
+		else {
+			tabs2Names = "pages";
+
+			if (permissionChecker.isOmniadmin() || (PropsValues.LOOK_AND_FEEL_MODIFIABLE && GroupPermissionUtil.contains(permissionChecker, liveGroupId, ActionKeys.MANAGE_LAYOUTS))) {
+				tabs2Names += ",look-and-feel";
+			}
 		}
 
 		if (GroupPermissionUtil.contains(permissionChecker, liveGroupId, ActionKeys.MANAGE_LAYOUTS)) {

@@ -50,7 +50,9 @@ import com.liferay.portal.model.Group;
 import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutConstants;
+import com.liferay.portal.model.LayoutPrototype;
 import com.liferay.portal.model.LayoutSet;
+import com.liferay.portal.model.LayoutSetPrototype;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.Resource;
@@ -483,6 +485,25 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		long classNameId = PortalUtil.getClassNameId(Layout.class);
 
 		return groupPersistence.findByC_C_C(companyId, classNameId, plid);
+	}
+
+	public Group getLayoutPrototypeGroup(long companyId, long layoutPrototypeId)
+		throws PortalException, SystemException {
+
+		long classNameId = PortalUtil.getClassNameId(LayoutPrototype.class);
+
+		return groupPersistence.findByC_C_C(
+			companyId, classNameId, layoutPrototypeId);
+	}
+
+	public Group getLayoutSetPrototypeGroup(
+			long companyId, long layoutSetPrototypeId)
+		throws PortalException, SystemException {
+
+		long classNameId = PortalUtil.getClassNameId(LayoutSetPrototype.class);
+
+		return groupPersistence.findByC_C_C(
+			companyId, classNameId, layoutSetPrototypeId);
 	}
 
 	public List<Group> getNoLayoutsGroups(

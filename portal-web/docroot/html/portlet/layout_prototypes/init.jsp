@@ -22,36 +22,12 @@
  */
 %>
 
-<c:choose>
-	<c:when test="<%= portletDisplay.isActive() %>">
-		<c:choose>
-			<c:when test="<%= themeDisplay.isStateExclusive() %>">
-				<%@ include file="/html/common/themes/portlet_content.jspf" %>
-			</c:when>
-			<c:when test="<%= portletDisplay.isAccess() %>">
-				<div>
-					<c:if test='<%= !tilesPortletContent.endsWith("/error.jsp") %>'>
-						<%@ include file="/html/common/themes/portlet_messages.jspf" %>
-					</c:if>
+<%@ page import="com.liferay.portal.kernel.util.HtmlUtil" %>
+<%@ page import="com.liferay.portal.kernel.util.ParamUtil" %>
+<%@ page import="com.liferay.portal.model.LayoutPrototype" %>
+<%@ page import="com.liferay.portlet.enterpriseadmin.search.RoleSearch" %>
+<%@ page import="com.liferay.portal.service.LayoutPrototypeLocalServiceUtil" %>
+<%@ page import="com.liferay.portal.service.permission.LayoutPrototypePermissionUtil" %>
+<%@ page import="com.liferay.portal.service.permission.PortalPermissionUtil" %>
 
-					<c:choose>
-						<c:when test="<%= group.isLayoutPrototype() && layoutTypePortlet.hasPortletId(portletDisplay.getId()) %>">
-							<div class="portlet-msg-info">
-								<liferay-ui:message key="configure-this-application-and-place-it-where-desired-on-the-page" />
-							</div>
-						</c:when>
-						<c:otherwise>
-							<%@ include file="/html/common/themes/portlet_content.jspf" %>
-						</c:otherwise>
-					</c:choose>
-				</div>
-			</c:when>
-			<c:otherwise>
-				<liferay-util:include page="/html/portal/portlet_access_denied.jsp" />
-			</c:otherwise>
-		</c:choose>
-	</c:when>
-	<c:otherwise>
-		<liferay-util:include page="/html/portal/portlet_inactive.jsp" />
-	</c:otherwise>
-</c:choose>
+<%@ include file="/html/portlet/init.jsp" %>

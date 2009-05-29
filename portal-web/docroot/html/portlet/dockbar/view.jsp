@@ -38,7 +38,15 @@ if (layout != null) {
 			<a href="javascript:;"><img src="<%= themeDisplay.getPathThemeImages() %>/spacer.png" /></a>
 		</li>
 		<li class="user-avatar">
-			<a href="<%= HtmlUtil.escape(themeDisplay.getURLMyAccount().toString()) %>"><img alt="<%= user.getFullName() %>" src="<%= themeDisplay.getPathImage() %>/user_<%= user.isFemale() ? "female" : "male" %>_portrait?img_id=<%= user.getPortraitId() %>&t=<%= ImageServletTokenUtil.getToken(user.getPortraitId()) %>" /></a> <a href="<%= HtmlUtil.escape(themeDisplay.getURLMyAccount().toString()) %>"><%= user.getFullName() %></a>
+			<c:choose>
+				<c:when test="<%= group.isLayoutPrototype() %>">
+					<img alt="<%= user.getFullName() %>" src="<%= themeDisplay.getPathImage() %>/user_<%= user.isFemale() ? "female" : "male" %>_portrait?img_id=<%= user.getPortraitId() %>&t=<%= ImageServletTokenUtil.getToken(user.getPortraitId()) %>" /> <%= user.getFullName() %>
+				</c:when>
+				<c:otherwise>
+					<a href="<%= HtmlUtil.escape(themeDisplay.getURLMyAccount().toString()) %>"><img alt="<%= user.getFullName() %>" src="<%= themeDisplay.getPathImage() %>/user_<%= user.isFemale() ? "female" : "male" %>_portrait?img_id=<%= user.getPortraitId() %>&t=<%= ImageServletTokenUtil.getToken(user.getPortraitId()) %>" /></a> <a href="<%= HtmlUtil.escape(themeDisplay.getURLMyAccount().toString()) %>"><%= user.getFullName() %></a>
+				</c:otherwise>
+			</c:choose>
+
 
 			<c:if test="<%= themeDisplay.isShowSignOutIcon() %>">
 				<span class="sign-out">(<a href="<%= themeDisplay.getURLSignOut() %>"><liferay-ui:message key="sign-out" /></a>)</span>
@@ -58,7 +66,7 @@ if (layout != null) {
 
 				<div class="add-content-container menu-container" id="<portlet:namespace />addContentContainer">
 					<ul>
-						<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, scopeGroupId, ActionKeys.MANAGE_LAYOUTS) %>">
+						<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, scopeGroupId, ActionKeys.MANAGE_LAYOUTS) && !group.isLayoutPrototype() %>">
 							<li class="first add-page">
 								<a href="javascript:;" id="addPage">
 									<liferay-ui:message key="page" />
@@ -117,7 +125,7 @@ if (layout != null) {
 						<c:if test="<%= themeDisplay.isShowPageSettingsIcon() %>">
 							<li class="first">
 								<a href="<%= HtmlUtil.escape(themeDisplay.getURLPageSettings().toString()) %>">
-									<liferay-ui:message key="manage-pages" />
+									<liferay-ui:message key='<%= group.isLayoutPrototype()? "manage-page" : "manage-pages" %>' />
 								</a>
 							</li>
 						</c:if>
@@ -148,7 +156,7 @@ if (layout != null) {
 			</li>
 		</c:if>
 
-		<c:if test="<%= user.hasMyPlaces() %>">
+		<c:if test="<%= user.hasMyPlaces() && !group.isLayoutPrototype() %>">
 			<li class="my-places has-submenu" id="<portlet:namespace />myPlaces">
 				<a class="menu-button" href="javascript:;">
 					<span>

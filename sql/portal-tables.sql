@@ -633,8 +633,8 @@ create table LayoutPrototype (
 	layoutPrototypeId LONG not null primary key,
 	companyId LONG,
 	name VARCHAR(75) null,
-	title VARCHAR(75) null,
-	description VARCHAR(75) null,
+	title STRING null,
+	description STRING null,
 	settings_ STRING null,
 	active_ BOOLEAN
 );
@@ -660,8 +660,8 @@ create table LayoutSetPrototype (
 	layoutSetPrototypeId LONG not null primary key,
 	companyId LONG,
 	name VARCHAR(75) null,
-	title VARCHAR(75) null,
-	description VARCHAR(75) null,
+	title STRING null,
+	description STRING null,
 	settings_ STRING null,
 	active_ BOOLEAN
 );

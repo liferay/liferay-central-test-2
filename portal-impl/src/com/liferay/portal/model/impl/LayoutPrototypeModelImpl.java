@@ -83,7 +83,7 @@ public class LayoutPrototypeModelImpl extends BaseModelImpl<LayoutPrototype> {
 
 			{ "active_", new Integer(Types.BOOLEAN) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table LayoutPrototype (layoutPrototypeId LONG not null primary key,companyId LONG,name VARCHAR(75) null,title VARCHAR(75) null,description VARCHAR(75) null,settings_ STRING null,active_ BOOLEAN)";
+	public static final String TABLE_SQL_CREATE = "create table LayoutPrototype (layoutPrototypeId LONG not null primary key,companyId LONG,name VARCHAR(75) null,title STRING null,description STRING null,settings_ STRING null,active_ BOOLEAN)";
 	public static final String TABLE_SQL_DROP = "drop table LayoutPrototype";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";

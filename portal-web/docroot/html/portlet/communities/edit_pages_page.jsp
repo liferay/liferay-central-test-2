@@ -84,101 +84,110 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 <tr>
 	<td>
 		<table class="lfr-table">
-		<tr>
-			<td></td>
-			<td>
-				<liferay-ui:message key="default-language" />: <%= defaultLocale.getDisplayName(defaultLocale) %>
-			</td>
-			<td>
-				<liferay-ui:message key="localized-language" />:
 
-				<select id="<portlet:namespace />languageId" onChange="<portlet:namespace />updateLanguage();">
-					<option value="" />
+		<c:choose>
+			<c:when test="<%= !group.isLayoutPrototype() %>">
+				<tr>
+					<td></td>
+					<td>
+						<liferay-ui:message key="default-language" />: <%= defaultLocale.getDisplayName(defaultLocale) %>
+					</td>
+					<td>
+						<liferay-ui:message key="localized-language" />:
 
-					<%
-					for (int i = 0; i < locales.length; i++) {
-						if (locales[i].equals(defaultLocale)) {
-							continue;
+						<select id="<portlet:namespace />languageId" onChange="<portlet:namespace />updateLanguage();">
+							<option value="" />
+
+							<%
+							for (int i = 0; i < locales.length; i++) {
+								if (locales[i].equals(defaultLocale)) {
+									continue;
+								}
+
+								String optionStyle = StringPool.BLANK;
+
+								if (Validator.isNotNull(selLayout.getName(locales[i], false)) ||
+									Validator.isNotNull(selLayout.getTitle(locales[i], false))) {
+
+									optionStyle = "style=\"font-weight: bold;\"";
+								}
+							%>
+
+								<option <%= (currentLanguageId.equals(LocaleUtil.toLanguageId(locales[i]))) ? "selected" : "" %> <%= optionStyle %> value="<%= LocaleUtil.toLanguageId(locales[i]) %>"><%= locales[i].getDisplayName(locale) %></option>
+
+							<%
+							}
+							%>
+
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="3">
+						<br />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<liferay-ui:message key="name" />
+					</td>
+					<td>
+						<input id="<portlet:namespace />name_<%= defaultLanguageId %>" name="<portlet:namespace />name_<%= defaultLanguageId %>" size="30" type="text" value="<%= selLayout.getName(defaultLocale) %>" />
+					</td>
+					<td>
+
+						<%
+						for (int i = 0; i < locales.length; i++) {
+							if (locales[i].equals(defaultLocale)) {
+								continue;
+							}
+						%>
+
+							<input id="<portlet:namespace />name_<%= LocaleUtil.toLanguageId(locales[i]) %>" name="<portlet:namespace />name_<%= LocaleUtil.toLanguageId(locales[i]) %>" type="hidden" value="<%= selLayout.getName(locales[i], false) %>" />
+
+						<%
 						}
+						%>
 
-						String optionStyle = StringPool.BLANK;
+						<input id="<portlet:namespace />name_temp" size="30" type="text" <%= currentLocale.equals(defaultLocale) ? "style='display: none'" : "" %> onChange="<portlet:namespace />onNameChanged();" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<liferay-ui:message key="html-title" />
+					</td>
+					<td>
+						<input id="<portlet:namespace />title_<%= defaultLanguageId %>" name="<portlet:namespace />title_<%= defaultLanguageId %>" size="30" type="text" value="<%= selLayout.getTitle(defaultLocale) %>" />
+					</td>
+					<td>
 
-						if (Validator.isNotNull(selLayout.getName(locales[i], false)) ||
-							Validator.isNotNull(selLayout.getTitle(locales[i], false))) {
+						<%
+						for (int i = 0; i < locales.length; i++) {
+							if (locales[i].equals(defaultLocale)) {
+								continue;
+							}
+						%>
 
-							optionStyle = "style=\"font-weight: bold;\"";
+							<input id="<portlet:namespace />title_<%= LocaleUtil.toLanguageId(locales[i]) %>" name="<portlet:namespace />title_<%= LocaleUtil.toLanguageId(locales[i]) %>" type="hidden" value="<%= selLayout.getTitle(locales[i], false) %>" />
+
+						<%
 						}
-					%>
+						%>
 
-						<option <%= (currentLanguageId.equals(LocaleUtil.toLanguageId(locales[i]))) ? "selected" : "" %> <%= optionStyle %> value="<%= LocaleUtil.toLanguageId(locales[i]) %>"><%= locales[i].getDisplayName(locale) %></option>
+						<input id="<portlet:namespace />title_temp" size="30" type="text" <%= currentLocale.equals(defaultLocale) ? "style='display: none'" : "" %> onChange="<portlet:namespace />onTitleChanged();" />
+					</td>
+				</tr>
+				<tr>
+					<td colspan="3">
+						<br />
+					</td>
+				</tr>
+			</c:when>
+			<c:otherwise>
+				<input id="<portlet:namespace />name_<%= defaultLanguageId %>" name="<portlet:namespace />name_<%= defaultLanguageId %>" type="hidden" value="<%= selLayout.getName(defaultLocale) %>" />
+			</c:otherwise>
+		</c:choose>
 
-					<%
-					}
-					%>
-
-				</select>
-			</td>
-		</tr>
-		<tr>
-			<td colspan="3">
-				<br />
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<liferay-ui:message key="name" />
-			</td>
-			<td>
-				<input id="<portlet:namespace />name_<%= defaultLanguageId %>" name="<portlet:namespace />name_<%= defaultLanguageId %>" size="30" type="text" value="<%= selLayout.getName(defaultLocale) %>" />
-			</td>
-			<td>
-
-				<%
-				for (int i = 0; i < locales.length; i++) {
-					if (locales[i].equals(defaultLocale)) {
-						continue;
-					}
-				%>
-
-					<input id="<portlet:namespace />name_<%= LocaleUtil.toLanguageId(locales[i]) %>" name="<portlet:namespace />name_<%= LocaleUtil.toLanguageId(locales[i]) %>" type="hidden" value="<%= selLayout.getName(locales[i], false) %>" />
-
-				<%
-				}
-				%>
-
-				<input id="<portlet:namespace />name_temp" size="30" type="text" <%= currentLocale.equals(defaultLocale) ? "style='display: none'" : "" %> onChange="<portlet:namespace />onNameChanged();" />
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<liferay-ui:message key="html-title" />
-			</td>
-			<td>
-				<input id="<portlet:namespace />title_<%= defaultLanguageId %>" name="<portlet:namespace />title_<%= defaultLanguageId %>" size="30" type="text" value="<%= selLayout.getTitle(defaultLocale) %>" />
-			</td>
-			<td>
-
-				<%
-				for (int i = 0; i < locales.length; i++) {
-					if (locales[i].equals(defaultLocale)) {
-						continue;
-					}
-				%>
-
-					<input id="<portlet:namespace />title_<%= LocaleUtil.toLanguageId(locales[i]) %>" name="<portlet:namespace />title_<%= LocaleUtil.toLanguageId(locales[i]) %>" type="hidden" value="<%= selLayout.getTitle(locales[i], false) %>" />
-
-				<%
-				}
-				%>
-
-				<input id="<portlet:namespace />title_temp" size="30" type="text" <%= currentLocale.equals(defaultLocale) ? "style='display: none'" : "" %> onChange="<portlet:namespace />onTitleChanged();" />
-			</td>
-		</tr>
-		<tr>
-			<td colspan="3">
-				<br />
-			</td>
-		</tr>
 		<tr>
 			<td>
 				<liferay-ui:message key="type" />
@@ -199,68 +208,76 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 				</select>
 			</td>
 		</tr>
-		<tr>
-			<td>
-				<liferay-ui:message key="hidden" />
-			</td>
-			<td colspan="2">
-				<liferay-ui:input-checkbox param="hidden" defaultValue="<%= selLayout.isHidden() %>" />
-			</td>
-		</tr>
 
-		<c:if test="<%= PortalUtil.isLayoutFriendliable(selLayout) %>">
+		<c:if test="<%=  !group.isLayoutPrototype() %>">
 			<tr>
 				<td>
-					<liferay-ui:message key="friendly-url" />
+					<liferay-ui:message key="hidden" />
 				</td>
-				<td colspan="2" nowrap>
-
-					<%
-					StringBuilder friendlyURLBase = new StringBuilder();
-
-					friendlyURLBase.append(themeDisplay.getPortalURL());
-
-					String virtualHost = selLayout.getLayoutSet().getVirtualHost();
-
-					if (Validator.isNull(virtualHost) || (friendlyURLBase.indexOf(virtualHost) == -1)) {
-						friendlyURLBase.append(group.getPathFriendlyURL(privateLayout, themeDisplay));
-						friendlyURLBase.append(group.getFriendlyURL());
-					}
-					%>
-
-					<%= friendlyURLBase.toString() %>
-
-					<input name="<portlet:namespace />friendlyURL" size="30" type="text" value="<%= HtmlUtil.escape(friendlyURL) %>" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<br />
-				</td>
-				<td colspan="3">
-					<%= LanguageUtil.format(pageContext, "for-example-x", "<i>/news</i>") %>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<liferay-ui:message key="query-string" />
-				</td>
-				<td colspan="3">
-
-					<%
-					String queryString = selLayout.getTypeSettingsProperties().getProperty("query-string");
-
-					if (queryString == null) {
-						queryString = StringPool.BLANK;
-					}
-					%>
-
-					<input name="TypeSettingsProperties(query-string)" size="30" type="text" value="<%= HtmlUtil.escape(queryString) %>" />
-
-					<liferay-ui:icon-help message="query-string-help" />
+				<td colspan="2">
+					<liferay-ui:input-checkbox param="hidden" defaultValue="<%= selLayout.isHidden() %>" />
 				</td>
 			</tr>
 		</c:if>
+
+		<c:choose>
+			<c:when test="<%= PortalUtil.isLayoutFriendliable(selLayout)  && !group.isLayoutPrototype() %>">
+				<tr>
+					<td>
+						<liferay-ui:message key="friendly-url" />
+					</td>
+					<td colspan="2" nowrap>
+
+						<%
+						StringBuilder friendlyURLBase = new StringBuilder();
+
+						friendlyURLBase.append(themeDisplay.getPortalURL());
+
+						String virtualHost = selLayout.getLayoutSet().getVirtualHost();
+
+						if (Validator.isNull(virtualHost) || (friendlyURLBase.indexOf(virtualHost) == -1)) {
+							friendlyURLBase.append(group.getPathFriendlyURL(privateLayout, themeDisplay));
+							friendlyURLBase.append(group.getFriendlyURL());
+						}
+						%>
+
+						<%= friendlyURLBase.toString() %>
+
+						<input name="<portlet:namespace />friendlyURL" size="30" type="text" value="<%= HtmlUtil.escape(friendlyURL) %>" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<br />
+					</td>
+					<td colspan="3">
+						<%= LanguageUtil.format(pageContext, "for-example-x", "<i>/news</i>") %>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<liferay-ui:message key="query-string" />
+					</td>
+					<td colspan="3">
+
+						<%
+						String queryString = selLayout.getTypeSettingsProperties().getProperty("query-string");
+
+						if (queryString == null) {
+							queryString = StringPool.BLANK;
+						}
+						%>
+
+						<input name="TypeSettingsProperties(query-string)" size="30" type="text" value="<%= HtmlUtil.escape(queryString) %>" />
+
+						<liferay-ui:icon-help message="query-string-help" />
+					</td>
+				</tr>
+			</c:when>
+			<c:otherwise>
+				<input name="<portlet:namespace />friendlyURL" type="hidden" value="<%= HtmlUtil.escape(friendlyURL) %>" />
+			</c:otherwise>
+		</c:choose>
 
 		<tr>
 			<td colspan="3">
@@ -344,9 +361,11 @@ for (int i = 0; i < PropsValues.LAYOUT_TYPES.length; i++) {
 	var="permissionURL"
 />
 
-<input type="button" value="<liferay-ui:message key="permissions" />" onClick="location.href = '<%= permissionURL %>';" />
+<c:if test="<%= !group.isLayoutPrototype() %>">
+	<input type="button" value="<liferay-ui:message key="permissions" />" onClick="location.href = '<%= permissionURL %>';" />
 
-<input type="button" value="<liferay-ui:message key="delete" />" onClick="<portlet:namespace />deletePage();" />
+	<input type="button" value="<liferay-ui:message key="delete" />" onClick="<portlet:namespace />deletePage();" />
+</c:if>
 
 <script type="text/javascript">
 	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">

@@ -174,6 +174,21 @@ public class GroupLocalServiceUtil {
 		return getService().getLayoutGroup(companyId, plid);
 	}
 
+	public static com.liferay.portal.model.Group getLayoutPrototypeGroup(
+		long companyId, long layoutPrototypeId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService().getLayoutPrototypeGroup(companyId, layoutPrototypeId);
+	}
+
+	public static com.liferay.portal.model.Group getLayoutSetPrototypeGroup(
+		long companyId, long layoutSetPrototypeId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService()
+				   .getLayoutSetPrototypeGroup(companyId, layoutSetPrototypeId);
+	}
+
 	public static java.util.List<com.liferay.portal.model.Group> getNoLayoutsGroups(
 		java.lang.String className, boolean privateLayout, int start, int end)
 		throws com.liferay.portal.SystemException {

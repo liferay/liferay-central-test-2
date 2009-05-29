@@ -22,6 +22,11 @@
 
 package com.liferay.portal.service.http;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.service.LayoutPrototypeServiceUtil;
+
+import java.rmi.RemoteException;
 
 /**
  * <a href="LayoutPrototypeServiceSoap.java.html"><b><i>View Source</i></b></a>
@@ -75,4 +80,48 @@ package com.liferay.portal.service.http;
  *
  */
 public class LayoutPrototypeServiceSoap {
+	public static void deleteLayoutPrototype(long layoutPrototypeId)
+		throws RemoteException {
+		try {
+			LayoutPrototypeServiceUtil.deleteLayoutPrototype(layoutPrototypeId);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portal.model.LayoutPrototypeSoap getLayoutPrototype(
+		long layoutPrototypeId) throws RemoteException {
+		try {
+			com.liferay.portal.model.LayoutPrototype returnValue = LayoutPrototypeServiceUtil.getLayoutPrototype(layoutPrototypeId);
+
+			return com.liferay.portal.model.LayoutPrototypeSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portal.model.LayoutPrototypeSoap[] search(
+		long companyId, java.lang.Boolean active,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws RemoteException {
+		try {
+			java.util.List<com.liferay.portal.model.LayoutPrototype> returnValue =
+				LayoutPrototypeServiceUtil.search(companyId, active, obc);
+
+			return com.liferay.portal.model.LayoutPrototypeSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	private static Log _log = LogFactoryUtil.getLog(LayoutPrototypeServiceSoap.class);
 }

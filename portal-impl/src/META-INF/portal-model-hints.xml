@@ -231,8 +231,12 @@
 		<field name="layoutPrototypeId" type="long" />
 		<field name="companyId" type="long" />
 		<field name="name" type="String" />
-		<field name="title" type="String" />
-		<field name="description" type="String" />
+		<field name="title" type="String">
+			<hint-collection name="TEXTAREA" />
+		</field>
+		<field name="description" type="String">
+			<hint-collection name="TEXTAREA" />
+		</field>
 		<field name="settings" type="String">
 			<hint-collection name="TEXTAREA" />
 		</field>
@@ -260,8 +264,12 @@
 		<field name="layoutSetPrototypeId" type="long" />
 		<field name="companyId" type="long" />
 		<field name="name" type="String" />
-		<field name="title" type="String" />
-		<field name="description" type="String" />
+		<field name="title" type="String">
+			<hint-collection name="TEXTAREA" />
+		</field>
+		<field name="description" type="String">
+			<hint-collection name="TEXTAREA" />
+		</field>
 		<field name="settings" type="String">
 			<hint-collection name="TEXTAREA" />
 		</field>

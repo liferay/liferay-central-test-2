@@ -82,6 +82,13 @@ catch (NoSuchResourceException nsre) {
 					addDefaultResource = true;
 				}
 			}
+			else if (group.isLayoutPrototype()) {
+				long layoutPrototypeId = group.getClassPK();
+
+				if (LayoutPrototypePermissionUtil.contains(permissionChecker, layoutPrototypeId, ActionKeys.UPDATE)) {
+					addDefaultResource = true;
+				}
+			}
 			else if (group.isOrganization()) {
 				long organizationId = group.getClassPK();
 
@@ -265,6 +272,10 @@ if (!portletId.equals(PortletKeys.PORTLET_CONFIGURATION)) {
 			showPortletCssIcon = true;
 		}
 	}
+}
+
+if (group.isLayoutPrototype()) {
+	showExportImportIcon = false;
 }
 
 if (portlet.hasPortletMode(responseContentType, PortletMode.EDIT)) {

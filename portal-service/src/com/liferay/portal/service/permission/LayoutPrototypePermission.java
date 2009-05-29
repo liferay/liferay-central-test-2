@@ -1,4 +1,3 @@
-<%
 /**
  * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
  *
@@ -20,38 +19,27 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%>
 
-<c:choose>
-	<c:when test="<%= portletDisplay.isActive() %>">
-		<c:choose>
-			<c:when test="<%= themeDisplay.isStateExclusive() %>">
-				<%@ include file="/html/common/themes/portlet_content.jspf" %>
-			</c:when>
-			<c:when test="<%= portletDisplay.isAccess() %>">
-				<div>
-					<c:if test='<%= !tilesPortletContent.endsWith("/error.jsp") %>'>
-						<%@ include file="/html/common/themes/portlet_messages.jspf" %>
-					</c:if>
+package com.liferay.portal.service.permission;
 
-					<c:choose>
-						<c:when test="<%= group.isLayoutPrototype() && layoutTypePortlet.hasPortletId(portletDisplay.getId()) %>">
-							<div class="portlet-msg-info">
-								<liferay-ui:message key="configure-this-application-and-place-it-where-desired-on-the-page" />
-							</div>
-						</c:when>
-						<c:otherwise>
-							<%@ include file="/html/common/themes/portlet_content.jspf" %>
-						</c:otherwise>
-					</c:choose>
-				</div>
-			</c:when>
-			<c:otherwise>
-				<liferay-util:include page="/html/portal/portlet_access_denied.jsp" />
-			</c:otherwise>
-		</c:choose>
-	</c:when>
-	<c:otherwise>
-		<liferay-util:include page="/html/portal/portlet_inactive.jsp" />
-	</c:otherwise>
-</c:choose>
+import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.security.permission.PermissionChecker;
+
+/**
+ * <a href="LayoutPrototypePermission.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Jorge Ferrer
+ *
+ */
+public interface LayoutPrototypePermission {
+
+	public void check(
+			PermissionChecker permissionChecker, long layoutPrototypeId,
+			String actionId)
+		throws PrincipalException;
+
+	public boolean contains(
+		PermissionChecker permissionChecker, long layoutPrototypeId,
+		String actionId);
+
+}

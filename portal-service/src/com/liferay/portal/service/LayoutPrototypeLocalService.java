@@ -99,4 +99,28 @@ public interface LayoutPrototypeLocalService {
 	public com.liferay.portal.model.LayoutPrototype updateLayoutPrototype(
 		com.liferay.portal.model.LayoutPrototype layoutPrototype, boolean merge)
 		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portal.model.LayoutPrototype addLayoutPrototype(
+		long userId, long companyId, java.lang.String name,
+		java.util.Map<java.util.Locale, String> localeTitlesMap,
+		java.lang.String description, boolean active)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.liferay.portal.model.LayoutPrototype> search(
+		long companyId, java.lang.Boolean active, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int searchCount(long companyId, java.lang.Boolean active)
+		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portal.model.LayoutPrototype updateLayoutPrototype(
+		long layoutPrototypeId, java.lang.String name,
+		java.util.Map<java.util.Locale, String> localeTitlesMap,
+		java.lang.String description, boolean active)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 }

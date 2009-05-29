@@ -48,6 +48,7 @@ import com.liferay.portal.model.ColorScheme;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutConstants;
+import com.liferay.portal.model.LayoutPrototype;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.PortletPreferencesIds;
 import com.liferay.portal.model.User;
@@ -57,6 +58,7 @@ import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.GroupServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
+import com.liferay.portal.service.LayoutPrototypeServiceUtil;
 import com.liferay.portal.service.LayoutServiceUtil;
 import com.liferay.portal.service.LayoutSetServiceUtil;
 import com.liferay.portal.service.PortletPreferencesLocalServiceUtil;
@@ -64,6 +66,7 @@ import com.liferay.portal.service.ThemeLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.permission.GroupPermissionUtil;
 import com.liferay.portal.service.permission.LayoutPermissionUtil;
+import com.liferay.portal.service.permission.LayoutPrototypePermissionUtil;
 import com.liferay.portal.service.permission.OrganizationPermissionUtil;
 import com.liferay.portal.service.permission.UserPermissionUtil;
 import com.liferay.portal.struts.PortletAction;
@@ -358,6 +361,10 @@ public class EditPagesAction extends PortletAction {
 				throw new PrincipalException();
 			}
 		}
+		else if (group.isLayoutPrototype()) {
+			LayoutPrototypePermissionUtil.check(
+				permissionChecker, group.getClassPK(), ActionKeys.UPDATE);
+		}
 		else if (group.isOrganization()) {
 			long organizationId = group.getClassPK();
 
@@ -394,17 +401,18 @@ public class EditPagesAction extends PortletAction {
 	}
 
 	protected void copyPreferences(
-			ActionRequest actionRequest, Layout layout, Layout copyLayout)
+			ActionRequest actionRequest, Layout targetLayout,
+			Layout sourceLayout)
 		throws Exception {
 
-		long companyId = layout.getCompanyId();
+		long companyId = targetLayout.getCompanyId();
 
-		LayoutTypePortlet copyLayoutTypePortlet =
-			(LayoutTypePortlet)copyLayout.getLayoutType();
+		LayoutTypePortlet sourceLayoutTypePortlet =
+			(LayoutTypePortlet)sourceLayout.getLayoutType();
 
-		List<String> copyPortletIds = copyLayoutTypePortlet.getPortletIds();
+		List<String> sourcePortletIds = sourceLayoutTypePortlet.getPortletIds();
 
-		for (String copyPortletId : copyPortletIds) {
+		for (String sourcePortletId : sourcePortletIds) {
 			HttpServletRequest request = PortalUtil.getHttpServletRequest(
 				actionRequest);
 
@@ -412,42 +420,42 @@ public class EditPagesAction extends PortletAction {
 
 			PortletPreferencesIds portletPreferencesIds =
 				PortletPreferencesFactoryUtil.getPortletPreferencesIds(
-					request, layout, copyPortletId);
+					request, targetLayout, sourcePortletId);
 
 			PortletPreferencesLocalServiceUtil.getPreferences(
 				portletPreferencesIds);
 
-			PortletPreferencesIds copyPortletPreferencesIds =
+			PortletPreferencesIds sourcePortletPreferencesIds =
 				PortletPreferencesFactoryUtil.getPortletPreferencesIds(
-					request, copyLayout, copyPortletId);
+					request, sourceLayout, sourcePortletId);
 
-			PortletPreferences copyPrefs =
+			PortletPreferences sourcePrefs =
 				PortletPreferencesLocalServiceUtil.getPreferences(
-					copyPortletPreferencesIds);
+					sourcePortletPreferencesIds);
 
 			PortletPreferencesLocalServiceUtil.updatePreferences(
 				portletPreferencesIds.getOwnerId(),
 				portletPreferencesIds.getOwnerType(),
 				portletPreferencesIds.getPlid(),
-				portletPreferencesIds.getPortletId(), copyPrefs);
+				portletPreferencesIds.getPortletId(), sourcePrefs);
 
 			// Copy portlet setup
 
 			PortletPreferencesLocalServiceUtil.getPreferences(
 				companyId, PortletKeys.PREFS_OWNER_ID_DEFAULT,
-				PortletKeys.PREFS_OWNER_TYPE_LAYOUT, layout.getPlid(),
-				copyPortletId);
+				PortletKeys.PREFS_OWNER_TYPE_LAYOUT, targetLayout.getPlid(),
+				sourcePortletId);
 
-			copyPrefs =
+			sourcePrefs =
 				PortletPreferencesLocalServiceUtil.getPreferences(
 					companyId, PortletKeys.PREFS_OWNER_ID_DEFAULT,
-					PortletKeys.PREFS_OWNER_TYPE_LAYOUT, copyLayout.getPlid(),
-					copyPortletId);
+					PortletKeys.PREFS_OWNER_TYPE_LAYOUT, sourceLayout.getPlid(),
+					sourcePortletId);
 
 			PortletPreferencesLocalServiceUtil.updatePreferences(
 				PortletKeys.PREFS_OWNER_ID_DEFAULT,
-				PortletKeys.PREFS_OWNER_TYPE_LAYOUT, layout.getPlid(),
-				copyPortletId, copyPrefs);
+				PortletKeys.PREFS_OWNER_TYPE_LAYOUT, targetLayout.getPlid(),
+				sourcePortletId, sourcePrefs);
 		}
 	}
 
@@ -489,6 +497,8 @@ public class EditPagesAction extends PortletAction {
 		long parentLayoutId = ParamUtil.getLong(
 			uploadRequest, "parentLayoutId");
 		String description = ParamUtil.getString(uploadRequest, "description");
+		long layoutPrototypeId = ParamUtil.getLong(
+			uploadRequest, "layoutPrototypeId");
 		String type = ParamUtil.getString(uploadRequest, "type");
 		boolean hidden = ParamUtil.getBoolean(uploadRequest, "hidden");
 		String friendlyURL = ParamUtil.getString(uploadRequest, "friendlyURL");
@@ -527,6 +537,33 @@ public class EditPagesAction extends PortletAction {
 						LayoutConstants.TYPE_PORTLET)) {
 
 					copyPreferences(actionRequest, layout, parentLayout);
+				}
+			}
+			else if (layoutPrototypeId > 0) {
+				LayoutPrototype layoutPrototype =
+					LayoutPrototypeServiceUtil.getLayoutPrototype(
+						layoutPrototypeId);
+
+				Layout layoutPrototypeLayout = layoutPrototype.getLayout();
+
+				Layout parentLayout = LayoutLocalServiceUtil.getLayout(
+					groupId, privateLayout, parentLayoutId);
+
+				Layout layout = LayoutServiceUtil.addLayout(
+					groupId, privateLayout, parentLayoutId, localeNamesMap,
+					localeTitlesMap, description, parentLayout.getType(),
+					parentLayout.isHidden(), friendlyURL);
+
+				LayoutServiceUtil.updateLayout(
+					layout.getGroupId(), layout.isPrivateLayout(),
+					layout.getLayoutId(),
+					layoutPrototypeLayout.getTypeSettings());
+
+				if (parentLayout.getType().equals(
+						LayoutConstants.TYPE_PORTLET)) {
+
+					copyPreferences(
+						actionRequest, layout, layoutPrototypeLayout);
 				}
 			}
 			else {

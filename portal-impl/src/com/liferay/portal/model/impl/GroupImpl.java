@@ -31,12 +31,14 @@ import com.liferay.portal.model.Group;
 import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutConstants;
+import com.liferay.portal.model.LayoutPrototype;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
+import com.liferay.portal.service.LayoutPrototypeLocalServiceUtil;
 import com.liferay.portal.service.LayoutSetLocalServiceUtil;
 import com.liferay.portal.service.OrganizationLocalServiceUtil;
 import com.liferay.portal.service.UserGroupLocalServiceUtil;
@@ -66,6 +68,10 @@ public class GroupImpl extends GroupModelImpl implements Group {
 
 	public boolean isLayout() {
 		return hasClassName(Layout.class);
+	}
+
+	public boolean isLayoutPrototype() {
+		return hasClassName(LayoutPrototype.class);
 	}
 
 	public boolean isOrganization() {
@@ -155,6 +161,13 @@ public class GroupImpl extends GroupModelImpl implements Group {
 					getClassPK());
 
 				name = layout.getName(LocaleUtil.getDefault());
+			}
+			else if (isLayoutPrototype()) {
+				LayoutPrototype layoutPrototype =
+					LayoutPrototypeLocalServiceUtil.getLayoutPrototype(
+						getClassPK());
+
+				name = layoutPrototype.getTitle(LocaleUtil.getDefault());
 			}
 			else if (isOrganization()) {
 				long organizationId = getClassPK();

@@ -160,30 +160,38 @@ publishToRemoteURL.setParameter("localPublishing", "0");
 
 <table class="lfr-table" width="100%">
 <tr>
-	<td valign="top">
-		<liferay-util:include page="/html/portlet/communities/tree_js.jsp">
-			<liferay-util:param name="treeId" value="layoutsTree" />
-		</liferay-util:include>
-	</td>
+	<c:if test="<%=  !group.isLayoutPrototype() %>">
+		<td valign="top">
+			<liferay-util:include page="/html/portlet/communities/tree_js.jsp">
+				<liferay-util:param name="treeId" value="layoutsTree" />
+			</liferay-util:include>
+		</td>
+	</c:if>
 	<td valign="top" width="75%">
 
 		<%
 		PortletURL breadcrumbURL = PortletURLUtil.clone(portletURL, renderResponse);
 		%>
 
-		<c:choose>
-			<c:when test="<%= selLayout != null %>">
-				<%= LanguageUtil.get(pageContext, "edit-" + (privateLayout ? "private" : "public") + "-page") %>: <a href="<%= breadcrumbURL.toString() %>"><%= HtmlUtil.escape(rootNodeName) %></a> &raquo; <liferay-ui:breadcrumb selLayout="<%= selLayout %>" selLayoutParam="selPlid" portletURL="<%= breadcrumbURL %>" />
-			</c:when>
-			<c:otherwise>
-				<%= LanguageUtil.get(pageContext, "manage-top-" + (privateLayout ? "private" : "public") + "-pages-for") %>: <a href="<%= breadcrumbURL.toString() %>"><%= HtmlUtil.escape(rootNodeName) %></a>
-			</c:otherwise>
-		</c:choose>
+		<c:if test="<%=  !group.isLayoutPrototype() %>">
+			<c:choose>
+				<c:when test="<%= selLayout != null %>">
+					<%= LanguageUtil.get(pageContext, "edit-" + (privateLayout ? "private" : "public") + "-page") %>: <a href="<%= breadcrumbURL.toString() %>"><%= HtmlUtil.escape(rootNodeName) %></a> &raquo; <liferay-ui:breadcrumb selLayout="<%= selLayout %>" selLayoutParam="selPlid" portletURL="<%= breadcrumbURL %>" />
+				</c:when>
+				<c:otherwise>
+					<%= LanguageUtil.get(pageContext, "manage-top-" + (privateLayout ? "private" : "public") + "-pages-for") %>: <a href="<%= breadcrumbURL.toString() %>"><%= HtmlUtil.escape(rootNodeName) %></a>
+				</c:otherwise>
+			</c:choose>
 
-		<br /><br />
+			<br /><br />
+		</c:if>
 
 		<%
-		String tabs3Names = "page,children";
+		String tabs3Names = "page";
+
+		if (!group.isLayoutPrototype()) {
+			tabs3Names += ",children";
+		}
 
 		if ((selLayout != null) && (permissionChecker.isOmniadmin() || PropsValues.LOOK_AND_FEEL_MODIFIABLE)) {
 			tabs3Names += ",look-and-feel";

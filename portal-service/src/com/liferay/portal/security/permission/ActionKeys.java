@@ -70,6 +70,11 @@ public class ActionKeys {
 
 	public static final String ADD_INSTANCE = "ADD_INSTANCE";
 
+	public static final String ADD_LAYOUT_PROTOTYPE = "ADD_LAYOUT_PROTOTYPE";
+
+	public static final String ADD_LAYOUT_SET_PROTOTYPE =
+		"ADD_LAYOUT_SET_ PROTOTYPE";
+
 	public static final String ADD_LICENSE = "ADD_LICENSE";
 
 	public static final String ADD_MESSAGE = "ADD_MESSAGE";

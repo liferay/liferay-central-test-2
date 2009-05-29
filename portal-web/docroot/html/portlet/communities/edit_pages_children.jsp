@@ -95,7 +95,36 @@ if (!StringUtil.contains(tabs4Names, tabs4)) {
 				<br />
 			</td>
 		</tr>
-		<tr>
+
+		<%
+		List<LayoutPrototype> layoutPrototypes = LayoutPrototypeServiceUtil.search(company.getCompanyId(), Boolean.TRUE, null);
+		%>
+
+		<c:if test="<%= !layoutPrototypes.isEmpty() %>">
+			<tr>
+				<td>
+					<liferay-ui:message key="template" />
+				</td>
+				<td colspan="2">
+					<select id="<portlet:namespace />layoutPrototypeId" name="<portlet:namespace />layoutPrototypeId">
+						<option selected value="">(<liferay-ui:message key="none" />)</option>
+
+						<%
+						for (LayoutPrototype layoutPrototype : layoutPrototypes) {
+						%>
+
+							<option value="<%= layoutPrototype.getLayoutPrototypeId() %>"><%= layoutPrototype.getTitle(user.getLanguageId()) %></option>
+
+						<%
+						}
+						%>
+
+					</select>
+				</td>
+			</tr>
+		</c:if>
+
+		<tr class="hidden-field">
 			<td class="lfr-label">
 				<liferay-ui:message key="type" />
 			</td>
@@ -115,7 +144,7 @@ if (!StringUtil.contains(tabs4Names, tabs4)) {
 				</select>
 			</td>
 		</tr>
-		<tr>
+		<tr class="hidden-field">
 			<td class="lfr-label">
 				<liferay-ui:message key="hidden" />
 			</td>
@@ -125,7 +154,7 @@ if (!StringUtil.contains(tabs4Names, tabs4)) {
 		</tr>
 
 		<c:if test="<%= (selLayout != null) && selLayout.getType().equals(LayoutConstants.TYPE_PORTLET) %>">
-			<tr>
+			<tr class="hidden-field">
 				<td class="lfr-label">
 					<liferay-ui:message key="copy-parent" />
 				</td>
@@ -143,7 +172,34 @@ if (!StringUtil.contains(tabs4Names, tabs4)) {
 
 		<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 			<script type="text/javascript">
-				Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />name_<%= defaultLanguageId %>);
+				jQuery(
+					function() {
+						var layoutPrototypeIdSelect = jQuery('#<portlet:namespace />layoutPrototypeId');
+
+						function showHiddenFields () {
+							var hiddenFields = jQuery('.hidden-field');
+
+							hiddenFields.hide();
+
+							if (layoutPrototypeIdSelect.val() == '') {
+								hiddenFields.show();
+							}
+							else {
+								hiddenFields.hide();
+							}
+						}
+
+						showHiddenFields();
+
+						layoutPrototypeIdSelect.change(
+							function(event) {
+								showHiddenFields();
+							}
+						);
+
+						Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />name_<%= defaultLanguageId %>);
+					}
+				);
 			</script>
 		</c:if>
 	</c:when>

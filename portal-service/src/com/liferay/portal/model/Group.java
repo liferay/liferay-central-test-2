@@ -53,6 +53,8 @@ public interface Group extends GroupModel {
 
 	public boolean isLayout();
 
+	public boolean isLayoutPrototype();
+
 	public boolean isOrganization();
 
 	public boolean isUser();
