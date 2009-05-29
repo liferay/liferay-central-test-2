@@ -72,12 +72,8 @@ public class ETagFilter extends BasePortalFilter {
 
 			if (eTag.equals(ifNoneMatch)) {
 				response.setStatus(HttpServletResponse.SC_NOT_MODIFIED);
-
-				return;
 			}
 		}
-
-		processFilter(ETagFilter.class, request, response, filterChain);
 	}
 
 }
