@@ -2,16 +2,14 @@
 
 <resource-action-mapping>
 	<portlet-resource>
-		<portlet-name>145</portlet-name>
+		<portlet-name>147</portlet-name>
 		<supports>
-			<action-key>CONFIGURATION</action-key>
-			<action-key>VIEW</action-key>
+			<action-key>ACCESS_IN_CONTROL_PANEL</action-key>
 		</supports>
 		<community-defaults />
 		<guest-defaults />
 		<guest-unsupported>
-			<action-key>CONFIGURATION</action-key>
-			<action-key>VIEW</action-key>
+			<action-key>ACCESS_IN_CONTROL_PANEL</action-key>
 		</guest-unsupported>
 	</portlet-resource>
 	<model-resource>

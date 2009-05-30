@@ -3348,7 +3348,8 @@ public class PortalImpl implements Portal {
 		PermissionChecker permissionChecker =
 			themeDisplay.getPermissionChecker();
 
-		Group group = themeDisplay.getScopeGroup();
+		Group scopeGroup = themeDisplay.getScopeGroup();
+		Group group = scopeGroup;
 
 		List<Portlet> filteredPortlets = new ArrayList<Portlet>();
 
@@ -3380,10 +3381,22 @@ public class PortalImpl implements Portal {
 		while (itr.hasNext()) {
 			Portlet portlet = itr.next();
 
-			ControlPanelEntry controlPanelEntry =
-				portlet.getControlPanelEntryInstance();
-
 			try {
+				long plid = scopeGroup.getDefaultPublicPlid();
+
+				if (plid == LayoutConstants.DEFAULT_PLID) {
+					plid = scopeGroup.getDefaultPrivatePlid();
+				}
+
+				if (PortletPermissionUtil.contains(
+						permissionChecker, plid, portlet.getPortletId(),
+						ActionKeys.ACCESS_IN_CONTROL_PANEL, true)) {
+					continue;
+				}
+
+				ControlPanelEntry controlPanelEntry =
+					portlet.getControlPanelEntryInstance();
+
 				if ((controlPanelEntry == null) ||
 					(!controlPanelEntry.isVisible(
 						permissionChecker, portlet))) {

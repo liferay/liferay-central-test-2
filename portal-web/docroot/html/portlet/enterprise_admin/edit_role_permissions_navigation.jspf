@@ -169,7 +169,7 @@ Set<String> hiddenPortletIds = portletCategory.getCategory("category.hidden").ge
 
 			<%
 			for (Portlet portlet : portlets) {
-				if (Validator.isNull(portlet.getPortletId()) || hiddenPortletIds.contains(portlet.getPortletId())) {
+				if (Validator.isNull(portlet.getPortletId()) || (hiddenPortletIds.contains(portlet.getPortletId()) && Validator.isNull(portlet.getControlPanelEntryCategory()))) {
 					continue;
 				}
 

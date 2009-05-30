@@ -31,6 +31,9 @@ package com.liferay.portal.security.permission;
  */
 public class ActionKeys {
 
+	public static final String ACCESS_IN_CONTROL_PANEL =
+		"ACCESS_IN_CONTROL_PANEL";
+
 	public static final String ADD_ARTICLE = "ADD_ARTICLE";
 
 	public static final String ADD_ATTACHMENT = "ADD_ATTACHMENT";

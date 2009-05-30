@@ -6,6 +6,7 @@
 		<supports>
 			<action-key>CONFIGURATION</action-key>
 			<action-key>VIEW</action-key>
+			<action-key>ACCESS_IN_CONTROL_PANEL</action-key>
 		</supports>
 		<community-defaults />
 		<guest-defaults />

@@ -43,6 +43,138 @@
 		<guest-defaults />
 		<guest-unsupported />
 	</portlet-resource>
+	<portlet-resource>
+		<portlet-name>125</portlet-name>
+		<supports>
+			<action-key>ACCESS_IN_CONTROL_PANEL</action-key>
+		</supports>
+		<community-defaults />
+		<guest-defaults />
+		<guest-unsupported>
+			<action-key>ACCESS_IN_CONTROL_PANEL</action-key>
+		</guest-unsupported>
+	</portlet-resource>
+	<portlet-resource>
+		<portlet-name>126</portlet-name>
+		<supports>
+			<action-key>ACCESS_IN_CONTROL_PANEL</action-key>
+		</supports>
+		<community-defaults />
+		<guest-defaults />
+		<guest-unsupported>
+			<action-key>ACCESS_IN_CONTROL_PANEL</action-key>
+		</guest-unsupported>
+	</portlet-resource>
+	<portlet-resource>
+		<portlet-name>127</portlet-name>
+		<supports>
+			<action-key>ACCESS_IN_CONTROL_PANEL</action-key>
+		</supports>
+		<community-defaults />
+		<guest-defaults />
+		<guest-unsupported>
+			<action-key>ACCESS_IN_CONTROL_PANEL</action-key>
+		</guest-unsupported>
+	</portlet-resource>
+	<portlet-resource>
+		<portlet-name>128</portlet-name>
+		<supports>
+			<action-key>ACCESS_IN_CONTROL_PANEL</action-key>
+		</supports>
+		<community-defaults />
+		<guest-defaults />
+		<guest-unsupported>
+			<action-key>ACCESS_IN_CONTROL_PANEL</action-key>
+		</guest-unsupported>
+	</portlet-resource>
+	<portlet-resource>
+		<portlet-name>129</portlet-name>
+		<supports>
+			<action-key>ACCESS_IN_CONTROL_PANEL</action-key>
+		</supports>
+		<community-defaults />
+		<guest-defaults />
+		<guest-unsupported>
+			<action-key>ACCESS_IN_CONTROL_PANEL</action-key>
+		</guest-unsupported>
+	</portlet-resource>
+	<portlet-resource>
+		<portlet-name>130</portlet-name>
+		<supports>
+			<action-key>ACCESS_IN_CONTROL_PANEL</action-key>
+		</supports>
+		<community-defaults />
+		<guest-defaults />
+		<guest-unsupported>
+			<action-key>ACCESS_IN_CONTROL_PANEL</action-key>
+		</guest-unsupported>
+	</portlet-resource>
+	<portlet-resource>
+		<portlet-name>131</portlet-name>
+		<supports>
+			<action-key>ACCESS_IN_CONTROL_PANEL</action-key>
+		</supports>
+		<community-defaults />
+		<guest-defaults />
+		<guest-unsupported>
+			<action-key>ACCESS_IN_CONTROL_PANEL</action-key>
+		</guest-unsupported>
+	</portlet-resource>
+	<portlet-resource>
+		<portlet-name>132</portlet-name>
+		<supports>
+			<action-key>ACCESS_IN_CONTROL_PANEL</action-key>
+		</supports>
+		<community-defaults />
+		<guest-defaults />
+		<guest-unsupported>
+			<action-key>ACCESS_IN_CONTROL_PANEL</action-key>
+		</guest-unsupported>
+	</portlet-resource>
+	<portlet-resource>
+		<portlet-name>135</portlet-name>
+		<supports>
+			<action-key>ACCESS_IN_CONTROL_PANEL</action-key>
+		</supports>
+		<community-defaults />
+		<guest-defaults />
+		<guest-unsupported>
+			<action-key>ACCESS_IN_CONTROL_PANEL</action-key>
+		</guest-unsupported>
+	</portlet-resource>
+	<portlet-resource>
+		<portlet-name>136</portlet-name>
+		<supports>
+			<action-key>ACCESS_IN_CONTROL_PANEL</action-key>
+		</supports>
+		<community-defaults />
+		<guest-defaults />
+		<guest-unsupported>
+			<action-key>ACCESS_IN_CONTROL_PANEL</action-key>
+		</guest-unsupported>
+	</portlet-resource>
+	<portlet-resource>
+		<portlet-name>137</portlet-name>
+		<supports>
+			<action-key>ACCESS_IN_CONTROL_PANEL</action-key>
+		</supports>
+		<community-defaults />
+		<guest-defaults />
+		<guest-unsupported>
+			<action-key>ACCESS_IN_CONTROL_PANEL</action-key>
+		</guest-unsupported>
+	</portlet-resource>
+	<portlet-resource>
+		<portlet-name>146</portlet-name>
+		<supports>
+			<action-key>ACCESS_IN_CONTROL_PANEL</action-key>
+		</supports>
+		<community-defaults />
+		<guest-defaults />
+		<guest-unsupported>
+			<action-key>ACCESS_IN_CONTROL_PANEL</action-key>
+		</guest-unsupported>
+	</portlet-resource>
 	<model-resource>
 		<model-name>com.liferay.portal.model.Group</model-name>
 		<portlet-ref>
