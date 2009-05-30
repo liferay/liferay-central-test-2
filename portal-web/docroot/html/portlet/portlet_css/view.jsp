@@ -178,11 +178,11 @@
 							<liferay-ui:message key="font-style" />
 						</p>
 
-						<label class="inline-label" for="lfr-font-bold">Bold</label>
+						<label class="inline-label" for="lfr-font-bold"><liferay-ui:message key="bold" /></label>
 
 						<input type="checkbox" name="lfr-font-bold" id="lfr-font-bold" />
 
-						<label class="inline-label" for="lfr-font-italic">Italic</label>
+						<label class="inline-label" for="lfr-font-italic"><liferay-ui:message key="italic" /></label>
 
 						<input type="checkbox" name="lfr-font-italic" id="lfr-font-italic" />
 					</div>
@@ -326,10 +326,10 @@
 
 						<select id="lfr-font-align" name="lfr-font-align">
 							<option value=""></option>
-							<option value="justify">justify</option>
-							<option value="left">left</option>
-							<option value="right">right</option>
-							<option value="center">center</option>
+							<option value="justify"><liferay-ui:message key="justify" /></option>
+							<option value="left"><liferay-ui:message key="left" /></option>
+							<option value="right"><liferay-ui:message key="right" /></option>
+							<option value="center"><liferay-ui:message key="center" /></option>
 						</select>
 					</div>
 
@@ -338,10 +338,10 @@
 
 						<select id="lfr-font-decoration" name="lfr-font-decoration">
 							<option value=""></option>
-							<option value="none">none</option>
-							<option value="underline">underline</option>
-							<option value="overline">overline</option>
-							<option value="line-through">line-through</option>
+							<option value="none"><liferay-ui:message key="none" /></option>
+							<option value="underline"><liferay-ui:message key="underline" /></option>
+							<option value="overline"><liferay-ui:message key="overline" /></option>
+							<option value="line-through"><liferay-ui:message key="strikethrough" /></option>
 						</select>
 					</div>
 				</div>
@@ -737,15 +737,15 @@
 
 						<select id="lfr-border-style-top">
 							<option value=""></option>
-							<option value="dashed">dashed</option>
-							<option value="double">double</option>
-							<option value="dotted">dotted</option>
-							<option value="groove">groove</option>
-							<option value="hidden">hidden</option>
-							<option value="inset">inset</option>
-							<option value="outset">outset</option>
-							<option value="ridge">ridge</option>
-							<option value="solid">solid</option>
+							<option value="dashed"><liferay-ui:message key="dashed" /></option>
+							<option value="double"><liferay-ui:message key="double" /></option>
+							<option value="dotted"><liferay-ui:message key="dotted" /></option>
+							<option value="groove"><liferay-ui:message key="groove" /></option>
+							<option value="hidden"><liferay-ui:message key="hidden" /></option>
+							<option value="inset"><liferay-ui:message key="inset" /></option>
+							<option value="outset"><liferay-ui:message key="outset" /></option>
+							<option value="ridge"><liferay-ui:message key="ridge" /></option>
+							<option value="solid"><liferay-ui:message key="solid" /></option>
 						</select>
 					</div>
 
@@ -754,15 +754,15 @@
 
 						<select id="lfr-border-style-right">
 							<option value=""></option>
-							<option value="dashed">dashed</option>
-							<option value="double">double</option>
-							<option value="dotted">dotted</option>
-							<option value="groove">groove</option>
-							<option value="hidden">hidden</option>
-							<option value="inset">inset</option>
-							<option value="outset">outset</option>
-							<option value="ridge">ridge</option>
-							<option value="solid">solid</option>
+							<option value="dashed"><liferay-ui:message key="dashed" /></option>
+							<option value="double"><liferay-ui:message key="double" /></option>
+							<option value="dotted"><liferay-ui:message key="dotted" /></option>
+							<option value="groove"><liferay-ui:message key="groove" /></option>
+							<option value="hidden"><liferay-ui:message key="hidden" /></option>
+							<option value="inset"><liferay-ui:message key="inset" /></option>
+							<option value="outset"><liferay-ui:message key="outset" /></option>
+							<option value="ridge"><liferay-ui:message key="ridge" /></option>
+							<option value="solid"><liferay-ui:message key="solid" /></option>
 						</select>
 					</div>
 
@@ -771,15 +771,15 @@
 
 						<select id="lfr-border-style-bottom">
 							<option value=""></option>
-							<option value="dashed">dashed</option>
-							<option value="double">double</option>
-							<option value="dotted">dotted</option>
-							<option value="groove">groove</option>
-							<option value="hidden">hidden</option>
-							<option value="inset">inset</option>
-							<option value="outset">outset</option>
-							<option value="ridge">ridge</option>
-							<option value="solid">solid</option>
+							<option value="dashed"><liferay-ui:message key="dashed" /></option>
+							<option value="double"><liferay-ui:message key="double" /></option>
+							<option value="dotted"><liferay-ui:message key="dotted" /></option>
+							<option value="groove"><liferay-ui:message key="groove" /></option>
+							<option value="hidden"><liferay-ui:message key="hidden" /></option>
+							<option value="inset"><liferay-ui:message key="inset" /></option>
+							<option value="outset"><liferay-ui:message key="outset" /></option>
+							<option value="ridge"><liferay-ui:message key="ridge" /></option>
+							<option value="solid"><liferay-ui:message key="solid" /></option>
 						</select>
 					</div>
 
@@ -788,15 +788,15 @@
 
 						<select id="lfr-border-style-left">
 							<option value=""></option>
-							<option value="dashed">dashed</option>
-							<option value="double">double</option>
-							<option value="dotted">dotted</option>
-							<option value="groove">groove</option>
-							<option value="hidden">hidden</option>
-							<option value="inset">inset</option>
-							<option value="outset">outset</option>
-							<option value="ridge">ridge</option>
-							<option value="solid">solid</option>
+							<option value="dashed"><liferay-ui:message key="dashed" /></option>
+							<option value="double"><liferay-ui:message key="double" /></option>
+							<option value="dotted"><liferay-ui:message key="dotted" /></option>
+							<option value="groove"><liferay-ui:message key="groove" /></option>
+							<option value="hidden"><liferay-ui:message key="hidden" /></option>
+							<option value="inset"><liferay-ui:message key="inset" /></option>
+							<option value="outset"><liferay-ui:message key="outset" /></option>
+							<option value="ridge"><liferay-ui:message key="ridge" /></option>
+							<option value="solid"><liferay-ui:message key="solid" /></option>
 						</select>
 					</div>
 				</fieldset>
@@ -839,10 +839,10 @@
 			</fieldset>
 
 			<fieldset class="spacing exp-block-labels" id="spacing-styles">
-				<legend>Spacing</legend>
+				<legend><liferay-ui:message key="spacing" /></legend>
 
 				<fieldset class="exp-form-column" id="lfr-padding">
-					<legend>Padding</legend>
+					<legend><liferay-ui:message key="padding" /></legend>
 
 					<div class="exp-ctrl-holder">
 						<label for="lfr-use-for-all-padding">
@@ -902,7 +902,7 @@
 				</fieldset>
 
 				<fieldset class="exp-form-column" id="lfr-margin">
-					<legend>Margin</legend>
+					<legend><liferay-ui:message key="margin" /></legend>
 
 					<div class="exp-ctrl-holder">
 						<label for="lfr-use-for-all-margin">
