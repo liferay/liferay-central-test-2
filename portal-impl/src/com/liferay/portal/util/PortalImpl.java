@@ -3349,6 +3349,7 @@ public class PortalImpl implements Portal {
 			themeDisplay.getPermissionChecker();
 
 		Group scopeGroup = themeDisplay.getScopeGroup();
+
 		Group group = scopeGroup;
 
 		List<Portlet> filteredPortlets = new ArrayList<Portlet>();
@@ -3391,6 +3392,7 @@ public class PortalImpl implements Portal {
 				if (PortletPermissionUtil.contains(
 						permissionChecker, plid, portlet.getPortletId(),
 						ActionKeys.ACCESS_IN_CONTROL_PANEL, true)) {
+
 					continue;
 				}
 
