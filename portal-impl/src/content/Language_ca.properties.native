@@ -100,7 +100,6 @@ javax.portlet.title.8=Agenda
 javax.portlet.title.90=Portal
 javax.portlet.title.97=Nota ràpida
 javax.portlet.title.98=Catàleg de programari
-javax.portlet.title.99=Etiquetes i categories
 javax.portlet.title.9=Administració
 
 ##
@@ -1242,7 +1241,6 @@ documents=Documents
 domain-controller=Controlador de domini
 domain=Domini
 done=Fet
-dotted-lines=Línies de punts
 down=Avall
 download-content=Contingut descarregat
 download-file=Fitxer descarregat
@@ -2726,7 +2724,6 @@ project-must-be-associated-with-a-firm=El projecte ha d'estar associat a una emp
 project-name=Nom del projecte
 project=Projecte
 projects=Projectes
-properties-are-a-way-to-add-more-detailed-information-to-a-specific-tag-or-category=Les propietats són una forma d'afegir informació detallada a les etiquetes o categories. Hi ha un separació entre els parells clau-valor per tal de permetrer'vos associar informació detallada en cada entrada.
 properties=Propietats
 property-name=Nom de la propietat
 property=Propietat

@@ -820,7 +820,6 @@ document=مستند
 documents-require-at-least-one-read-role=تتطلب المستندات دور قراءة واحد على الأقل.
 documents-require-at-least-one-write-role=تتطلب المستندات دور كتابة واحد على الأقل.
 documents=المستندات
-dotted-lines=خطوط منقطة
 down=أسفل
 download-content=تنزيل المحتوى
 download-file=تنزيل ملف

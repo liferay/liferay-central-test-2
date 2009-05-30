@@ -93,7 +93,6 @@ javax.portlet.title.8=Egutegia
 javax.portlet.title.90=Ataria
 javax.portlet.title.97=Berehalako oharra
 javax.portlet.title.98=Software katalogoa
-javax.portlet.title.99=Etiketen administrazioa
 javax.portlet.title.9=Administrazioa
 
 ##
@@ -1162,7 +1161,6 @@ documents=Dokumentuak
 domain-controller=Domeinu kontrolatzailea
 domain=Domeinua
 done=Eginda
-dotted-lines=Puntu lerroak
 down=Behean
 download-content=Jaitsi edukia 
 download-file=Jaitsi fitxategia
@@ -2573,7 +2571,6 @@ project-must-be-associated-with-a-firm=Proiektuak enpresa batekin elkartuta egon
 project-name=Proiektuaren izena
 project=Proiektua
 projects=Proiektuak
-properties-are-a-way-to-add-more-detailed-information-to-a-specific-tag-or-category=Propietateak kategoria edo etiketa bati xehetasun gehiago emateko bide bat dira. Sarrera batekin elkartu ahal izateko, bikote moduan agertzen dira, eta bikoteko batek gako balioa dauka.
 properties=Propietateak
 property=Propietatea
 proposal-description=Proposamenaren deskribapena

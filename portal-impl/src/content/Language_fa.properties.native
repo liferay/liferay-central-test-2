@@ -685,7 +685,6 @@ document=سند
 documents-require-at-least-one-read-role=برای سند بايد حداقل يک نقش خواندن وجود داشته باشد.
 documents-require-at-least-one-write-role=اسناد بايد حداقل دارای يک نقش نويسنده باشند.
 documents=اسناد
-dotted-lines=خط چين
 down=پايين
 download-content=دانلود محتوا
 download-link=لينک دانلود

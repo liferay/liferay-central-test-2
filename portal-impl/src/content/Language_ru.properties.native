@@ -100,7 +100,6 @@ javax.portlet.title.8=Календарь
 javax.portlet.title.90=Портал
 javax.portlet.title.97=Мемо
 javax.portlet.title.98=Каталог программного обеспечения
-javax.portlet.title.99=Теги и категории
 javax.portlet.title.9=Управление
 
 ##
@@ -1231,7 +1230,6 @@ documents=Документы
 domain-controller=Контроллер домена
 domain=Домен
 done=Завершено
-dotted-lines=Точечные линии
 down=Вниз
 download-content=Скачать содержимое
 download-file=Загрузить файл
@@ -2699,7 +2697,6 @@ project-must-be-associated-with-a-firm=Проект должен быть асс
 project-name=Название проекта
 project=Проект
 projects=Проекты
-properties-are-a-way-to-add-more-detailed-information-to-a-specific-tag-or-category=Свойства - это способ добавлять больше детальной информации на указанный тег или категорию. Они разделены на пары ключ-значения, что позволяет связывать детальную информацию с записью.
 properties=Свойства
 property-name=Название свойства
 property=Свойство

@@ -101,7 +101,6 @@ javax.portlet.title.8=Kalender
 javax.portlet.title.90=Portal
 javax.portlet.title.97=Post-it-lapp
 javax.portlet.title.98=Programvarukatalog
-javax.portlet.title.99=Taggar
 javax.portlet.title.9=Administration
 
 ##
@@ -1241,7 +1240,6 @@ documents=Dokument
 domain-controller=Domänkontrollant
 domain=Domän
 done=Färdig
-dotted-lines=Prickad linje
 down=Nedåt
 download-content=Ladda ned innehåll
 download-file=Ladda ned fil
@@ -2740,7 +2738,6 @@ project-must-be-associated-with-a-firm=Projektet måste vara förknippat med ett
 project-name=Projektnamn
 project=Projekt
 projects=Projekt
-properties-are-a-way-to-add-more-detailed-information-to-a-specific-tag-or-category=Egenskaper låter dig lägga till mer detaljerad information till en tagg eller en familj. Egenskaper har ett namn och ett värde.
 properties=Egenskaper
 property-name=Egenskapsnamn
 property=Egenskap

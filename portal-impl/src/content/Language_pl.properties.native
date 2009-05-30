@@ -100,7 +100,6 @@ javax.portlet.title.8=Kalendarz
 javax.portlet.title.90=Portal
 javax.portlet.title.97=Szybkie notatki
 javax.portlet.title.98=Katalog oprogramowania
-javax.portlet.title.99=Administracja etykietami
 javax.portlet.title.9=Administracja
 
 ##
@@ -1238,7 +1237,6 @@ documents=Dokumenty
 domain-controller=Kontroler domeny
 domain=Domena
 done=Zrobione
-dotted-lines=Linie przerywane
 down=Dół
 download-content=Pobierz zawartość
 download-file=Pobierz plik
@@ -2718,7 +2716,6 @@ project-must-be-associated-with-a-firm=Projekt musi być powiązany z firmą.
 project-name=Nazwa projektu
 project=Projekt
 projects=Projekty
-properties-are-a-way-to-add-more-detailed-information-to-a-specific-tag-or-category=Właściwości są sposobem na dodanie bardziej szczegółowych informacji do konkretnej etykiety lub kategorii. Są one podzielone na pary klucz - wartość, co pozwala na przypisywanie szczegółowych informacji do wpisu.
 properties=Właściwości
 property-name=Nazwa właściwości
 property=Właściwość

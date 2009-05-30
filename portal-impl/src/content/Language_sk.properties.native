@@ -93,7 +93,6 @@ javax.portlet.title.8=Kalendár
 javax.portlet.title.90=Portál
 javax.portlet.title.97=Rýchla poznámka
 javax.portlet.title.98=Softvérový katalóg
-javax.portlet.title.99=Správa značiek
 javax.portlet.title.9=Administrácia
 
 ##
@@ -1125,7 +1124,6 @@ documents=Dokumenty
 domain-controller=Doménový ovládač
 domain=Doména
 done=Hotovo
-dotted-lines=Bodkované čiary
 down=Dole
 download-content=Stiahnuť obsah
 download-file=Stiahnuť súbor
