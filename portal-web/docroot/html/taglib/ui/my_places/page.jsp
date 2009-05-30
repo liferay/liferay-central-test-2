@@ -177,10 +177,12 @@ List<Group> myPlaces = user.getMyPlaces(max);
 		%>
 
 			<c:if test="<%= showPublicPlace || showPrivatePlace %>">
+
 				<%
-				String cssClass = "public-community";
+				portletURL.setParameter("groupId", String.valueOf(myPlace.getGroupId()));
+				portletURL.setParameter("privateLayout", Boolean.FALSE.toString());
+
 				boolean selectedCommunity = false;
-				boolean selectedPlace = false;
 
   				if (layout != null) {
 	  				if (layout.getGroupId() == myPlace.getGroupId()) {
@@ -188,12 +190,15 @@ List<Group> myPlaces = user.getMyPlaces(max);
 					}
 	  			}
 
-				portletURL.setParameter("groupId", String.valueOf(myPlace.getGroupId()));
-				portletURL.setParameter("privateLayout", Boolean.FALSE.toString());
+				boolean selectedPlace = false;
 
 				if (layout != null) {
-					selectedPlace = !layout.isPrivateLayout() && (layout.getGroupId() == myPlace.getGroupId());
+					if (!layout.isPrivateLayout() && (layout.getGroupId() == myPlace.getGroupId())) {
+						selectedPlace = true;
+					}
 				}
+
+				String cssClass = "public-community";
 
 				if (selectedCommunity) {
 					cssClass += " current-community";
@@ -229,14 +234,15 @@ List<Group> myPlaces = user.getMyPlaces(max);
 				</c:if>
 
 				<%
-				cssClass = "private-community";
-				selectedPlace = false;
-
 				portletURL.setParameter("privateLayout", Boolean.TRUE.toString());
+
+				selectedPlace = false;
 
 				if (layout != null) {
 					selectedPlace = layout.isPrivateLayout() && (layout.getGroupId() == myPlace.getGroupId());
 				}
+
+				cssClass = "private-community";
 
 				if (selectedCommunity) {
 					cssClass += " current-community";
@@ -272,6 +278,7 @@ List<Group> myPlaces = user.getMyPlaces(max);
 				</c:if>
 				</li>
 			</c:if>
+
 		<%
 		}
 		%>
