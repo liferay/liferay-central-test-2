@@ -1282,6 +1282,8 @@ public interface PropsKeys {
 
 	public static final String USERS_SCREEN_NAME_VALIDATOR = "users.screen.name.validator";
 
+	public static final String USERS_SEARCH_WITH_INDEX = "users.search.with.index";
+
 	public static final String USERS_UPDATE_LAST_LOGIN = "users.update.last.login";
 
 	public static final String VALUE_OBJECT_ENTITY_BLOCKING_CACHE = "value.object.entity.blocking.cache";
