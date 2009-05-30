@@ -63,6 +63,4 @@ public interface LayoutPrototype extends LayoutPrototypeModel {
 		boolean useDefault);
 
 	public void setTitle(java.lang.String title, java.util.Locale locale);
-
-	public void test();
 }

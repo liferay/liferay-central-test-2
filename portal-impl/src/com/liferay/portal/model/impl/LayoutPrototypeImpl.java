@@ -61,9 +61,10 @@ public class LayoutPrototypeImpl
 
 	public Layout getLayout() {
 		Layout layout = null;
-		Group group = getGroup();
 
 		try {
+			Group group = getGroup();
+
 			if ((group != null) && (group.getPrivateLayoutsPageCount() > 0)) {
 				List<Layout> layouts = LayoutLocalServiceUtil.getLayouts(
 					group.getGroupId(), true);
@@ -118,10 +119,6 @@ public class LayoutPrototypeImpl
 				LocalizationUtil.removeLocalization(
 					getTitle(), "title", localeLanguageId));
 		}
-	}
-
-	public void test() {
-
 	}
 
 }

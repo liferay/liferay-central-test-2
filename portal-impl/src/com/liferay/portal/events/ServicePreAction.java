@@ -1137,7 +1137,10 @@ public class ServicePreAction extends Action {
 
 					layout = null;
 				}
-				else if (!layout.getGroup().isLayoutPrototype()) {
+				else if (layout.getGroup().isLayoutPrototype()) {
+					layouts = new ArrayList<Layout>();
+				}
+				else {
 					layouts = LayoutLocalServiceUtil.getLayouts(
 						layout.getGroupId(), layout.isPrivateLayout(),
 						LayoutConstants.DEFAULT_PARENT_LAYOUT_ID);
@@ -1147,9 +1150,6 @@ public class ServicePreAction extends Action {
 
 						doAsGroupId = 0;
 					}
-				}
-				else {
-					layouts = new ArrayList<Layout>();
 				}
 			}
 			catch (NoSuchLayoutException nsle) {

@@ -47,7 +47,6 @@ if (layout != null) {
 				</c:otherwise>
 			</c:choose>
 
-
 			<c:if test="<%= themeDisplay.isShowSignOutIcon() %>">
 				<span class="sign-out">(<a href="<%= themeDisplay.getURLSignOut() %>"><liferay-ui:message key="sign-out" /></a>)</span>
 			</c:if>

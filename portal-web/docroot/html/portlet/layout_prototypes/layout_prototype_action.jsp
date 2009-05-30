@@ -38,13 +38,13 @@ long layoutPrototypeId = layoutPrototype.getLayoutPrototypeId();
 
 <liferay-ui:icon-menu>
 	<c:if test="<%= LayoutPrototypePermissionUtil.contains(permissionChecker, layoutPrototypeId, ActionKeys.UPDATE) %>">
-		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editLayoutPrototypeURL">
+		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL">
 			<portlet:param name="struts_action" value="/layout_prototypes/edit_layout_prototype" />
 			<portlet:param name="redirect" value="<%= redirect %>" />
 			<portlet:param name="layoutPrototypeId" value="<%= String.valueOf(layoutPrototypeId) %>" />
 		</portlet:renderURL>
 
-		<liferay-ui:icon image="edit" url="<%= editLayoutPrototypeURL %>" method="get" />
+		<liferay-ui:icon image="edit" url="<%= editURL %>" />
 	</c:if>
 
 	<c:if test="<%= LayoutPrototypePermissionUtil.contains(permissionChecker, layoutPrototypeId, ActionKeys.PERMISSIONS) %>">
@@ -52,20 +52,20 @@ long layoutPrototypeId = layoutPrototype.getLayoutPrototypeId();
 			modelResource="<%= LayoutPrototype.class.getName() %>"
 			modelResourceDescription="<%= layoutPrototype.getName() %>"
 			resourcePrimKey="<%= String.valueOf(layoutPrototypeId) %>"
-			var="permissionsLayoutPrototypeURL"
+			var="permissionsURL"
 		/>
 
-		<liferay-ui:icon image="permissions" url="<%= permissionsLayoutPrototypeURL %>"method="get" />
+		<liferay-ui:icon image="permissions" url="<%= permissionsURL %>" />
 	</c:if>
 
 	<c:if test="<%= LayoutPrototypePermissionUtil.contains(permissionChecker, layoutPrototypeId, ActionKeys.DELETE) %>">
-		<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="deleteLayoutPrototypeURL">
+		<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="deleteURL">
 			<portlet:param name="struts_action" value="/layout_prototypes/edit_layout_prototype" />
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 			<portlet:param name="redirect" value="<%= redirect %>" />
 			<portlet:param name="layoutPrototypeIds" value="<%= String.valueOf(layoutPrototypeId) %>" />
 		</portlet:actionURL>
 
-		<liferay-ui:icon-delete url="<%= deleteLayoutPrototypeURL %>" />
+		<liferay-ui:icon-delete url="<%= deleteURL %>" />
 	</c:if>
 </liferay-ui:icon-menu>

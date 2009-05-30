@@ -29,20 +29,18 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 LayoutPrototype layoutPrototype = (LayoutPrototype)request.getAttribute(WebKeys.LAYOUT_PROTOTYPE);
 
+if (layoutPrototype == null) {
+	layoutPrototype = new LayoutPrototypeImpl();
+
+	layoutPrototype.setActive(true);
+}
+
 long layoutPrototypeId = BeanParamUtil.getLong(layoutPrototype, request, "layoutPrototypeId");
 
 Locale defaultLocale = LocaleUtil.getDefault();
 String defaultLanguageId = LocaleUtil.toLanguageId(defaultLocale);
 
 Locale[] locales = LanguageUtil.getAvailableLocales();
-
-boolean isNew = false;
-
-if (layoutPrototype == null) {
-	isNew = true;
-	layoutPrototype = new LayoutPrototypeImpl();
-	layoutPrototype.setActive(true);
-}
 %>
 
 <script type="text/javascript">
@@ -53,7 +51,7 @@ if (layoutPrototype == null) {
 </script>
 
 <liferay-util:include page="/html/portlet/layout_prototypes/toolbar.jsp">
-	<liferay-util:param name="toolbarItem" value='<%= (isNew) ? "add" : "view-all" %>' />
+	<liferay-util:param name="toolbarItem" value='<%= layoutPrototype.isNew() ? "add" : "view-all" %>' />
 </liferay-util:include>
 
 <form class="exp-form" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveLayoutPrototype(); return false;">
@@ -62,7 +60,7 @@ if (layoutPrototype == null) {
 <input name="<portlet:namespace />layoutPrototypeId" type="hidden" value="<%= layoutPrototypeId %>" />
 
 <fieldset class="exp-block-labels">
-	<c:if test="<%= !isNew %>">
+	<c:if test="<%= !layoutPrototype.isNew() %>">
 		<div class="exp-ctrl-holder">
 			<label><%= LanguageUtil.get(pageContext, "old-name") %></label>
 
@@ -71,7 +69,7 @@ if (layoutPrototype == null) {
 	</c:if>
 
 	<div class="exp-ctrl-holder">
-		<label><%= LanguageUtil.get(pageContext, (!isNew ? "new-name" : "name")) %></label>
+		<label><%= LanguageUtil.get(pageContext, (!layoutPrototype.isNew() ? "new-name" : "name")) %></label>
 
 		<liferay-ui:input-field model="<%= LayoutPrototype.class %>" bean="<%= layoutPrototype %>" field="name" />
 	</div>
@@ -180,7 +178,7 @@ if (layoutPrototype == null) {
 		<liferay-ui:input-field model="<%= LayoutPrototype.class %>" bean="<%= layoutPrototype %>" field="description" />
 	</div>
 
-	<c:if test="<%= !isNew %>">
+	<c:if test="<%= !layoutPrototype.isNew() %>">
 		<div class="exp-ctrl-holder">
 			<label><liferay-ui:message key="configuration" /></label>
 
@@ -193,8 +191,6 @@ if (layoutPrototype == null) {
 			<liferay-ui:icon image="view" message="open-page-template" url="<%= viewURL %>" method="get" target="_blank" label="<%= true %>" /> (<liferay-ui:message key="new-window" />)
 		</div>
 	</c:if>
-
-
 
 	<div class="exp-button-holder">
 		<input type="submit" value="<liferay-ui:message key="save" />" />

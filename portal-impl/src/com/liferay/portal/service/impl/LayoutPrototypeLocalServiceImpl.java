@@ -27,7 +27,6 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.LayoutPrototype;
@@ -56,7 +55,7 @@ public class LayoutPrototypeLocalServiceImpl
 			boolean active)
 		throws PortalException, SystemException {
 
-		// Layout Prototype
+		// Layout prototype
 
 		long layoutPrototypeId = counterLocalService.increment();
 
@@ -83,18 +82,18 @@ public class LayoutPrototypeLocalServiceImpl
 		// Group
 
 		String friendlyURL =
-			StringPool.SLASH + "l_p_" +
-				layoutPrototype.getLayoutPrototypeId();
+			"/template-" + layoutPrototype.getLayoutPrototypeId();
 
 		Group group = groupLocalService.addGroup(
 			userId, LayoutPrototype.class.getName(),
-			layoutPrototype.getLayoutPrototypeId(), layoutPrototype.getName(),
-			null, 0, friendlyURL, true, null);
+			layoutPrototype.getLayoutPrototypeId(), name, null, 0, friendlyURL,
+			true, null);
 
 		layoutLocalService.addLayout(
 			userId, group.getGroupId(), true,
-			LayoutConstants.DEFAULT_PARENT_LAYOUT_ID, "template", null, null,
-			LayoutConstants.TYPE_PORTLET, false, "/template");
+			LayoutConstants.DEFAULT_PARENT_LAYOUT_ID,
+			String.valueOf(layoutPrototype.getLayoutPrototypeId()), null, null,
+			LayoutConstants.TYPE_PORTLET, false, "/page");
 
 		return layoutPrototype;
 	}
@@ -105,18 +104,18 @@ public class LayoutPrototypeLocalServiceImpl
 		LayoutPrototype layoutPrototype =
 			layoutPrototypePersistence.findByPrimaryKey(layoutPrototypeId);
 
+		// Group
+
+		Group group = layoutPrototype.getGroup();
+
+		groupLocalService.deleteGroup(group.getGroupId());
+
 		// Resources
 
 		resourceLocalService.deleteResource(
 			layoutPrototype.getCompanyId(), LayoutPrototype.class.getName(),
 			ResourceConstants.SCOPE_INDIVIDUAL,
 			layoutPrototype.getLayoutPrototypeId());
-
-		// Group
-
-		Group group = layoutPrototype.getGroup();
-
-		groupLocalService.deleteGroup(group.getGroupId());
 
 		// Layout Prototype
 
@@ -142,8 +141,7 @@ public class LayoutPrototypeLocalServiceImpl
 		}
 	}
 
-	public int searchCount(
-			long companyId, Boolean active)
+	public int searchCount(long companyId, Boolean active)
 		throws SystemException {
 
 		if (active != null) {

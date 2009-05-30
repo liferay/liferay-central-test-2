@@ -497,14 +497,14 @@ public class EditPagesAction extends PortletAction {
 		long parentLayoutId = ParamUtil.getLong(
 			uploadRequest, "parentLayoutId");
 		String description = ParamUtil.getString(uploadRequest, "description");
-		long layoutPrototypeId = ParamUtil.getLong(
-			uploadRequest, "layoutPrototypeId");
 		String type = ParamUtil.getString(uploadRequest, "type");
 		boolean hidden = ParamUtil.getBoolean(uploadRequest, "hidden");
 		String friendlyURL = ParamUtil.getString(uploadRequest, "friendlyURL");
 		boolean iconImage = ParamUtil.getBoolean(uploadRequest, "iconImage");
 		byte[] iconBytes = FileUtil.getBytes(
 			uploadRequest.getFile("iconFileName"));
+		long layoutPrototypeId = ParamUtil.getLong(
+			uploadRequest, "layoutPrototypeId");
 
 		boolean inheritFromParentLayoutId = ParamUtil.getBoolean(
 			uploadRequest, "inheritFromParentLayoutId");

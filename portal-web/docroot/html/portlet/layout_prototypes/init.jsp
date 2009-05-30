@@ -22,12 +22,9 @@
  */
 %>
 
-<%@ page import="com.liferay.portal.kernel.util.HtmlUtil" %>
-<%@ page import="com.liferay.portal.kernel.util.ParamUtil" %>
-<%@ page import="com.liferay.portal.model.LayoutPrototype" %>
-<%@ page import="com.liferay.portlet.enterpriseadmin.search.RoleSearch" %>
+<%@ include file="/html/portlet/init.jsp" %>
+
+<%@ page import="com.liferay.portal.NoSuchLayoutPrototypeException" %>
 <%@ page import="com.liferay.portal.service.LayoutPrototypeLocalServiceUtil" %>
 <%@ page import="com.liferay.portal.service.permission.LayoutPrototypePermissionUtil" %>
 <%@ page import="com.liferay.portal.service.permission.PortalPermissionUtil" %>
-
-<%@ include file="/html/portlet/init.jsp" %>

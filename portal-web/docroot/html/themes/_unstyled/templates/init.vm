@@ -262,9 +262,7 @@
 
 ## ---------- My places ---------- ##
 
-#if ($group.isLayoutPrototype())
-	#set ($show_my_places = $user.hasMyPlaces())
-#end
+#set ($show_my_places = $user.hasMyPlaces())
 
 #if ($show_my_places)
 	#set ($my_places_text = $languageUtil.get($company_id, $locale, "my-places"))

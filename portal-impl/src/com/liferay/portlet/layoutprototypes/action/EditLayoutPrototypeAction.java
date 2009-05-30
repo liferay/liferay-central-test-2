@@ -22,7 +22,7 @@
 
 package com.liferay.portlet.layoutprototypes.action;
 
-import com.liferay.portal.NoSuchRoleException;
+import com.liferay.portal.NoSuchLayoutPrototypeException;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -91,7 +91,7 @@ public class EditLayoutPrototypeAction extends PortletAction {
 			ActionUtil.getLayoutPrototype(renderRequest);
 		}
 		catch (Exception e) {
-			if (e instanceof NoSuchRoleException ||
+			if (e instanceof NoSuchLayoutPrototypeException ||
 				e instanceof PrincipalException) {
 
 				SessionErrors.add(renderRequest, e.getClass().getName());
@@ -125,10 +125,10 @@ public class EditLayoutPrototypeAction extends PortletAction {
 			actionRequest, "layoutPrototypeId");
 
 		String name = ParamUtil.getString(actionRequest, "name");
-		boolean active = ParamUtil.getBoolean(actionRequest, "active");
 		Map<Locale, String> localeTitlesMap =
 			LocalizationUtil.getLocalizedParameter(actionRequest, "title");
 		String description = ParamUtil.getString(actionRequest, "description");
+		boolean active = ParamUtil.getBoolean(actionRequest, "active");
 
 		if (layoutPrototypeId <= 0) {
 

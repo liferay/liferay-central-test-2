@@ -62,7 +62,7 @@ public class ActionUtil {
 			layoutPrototype = LayoutPrototypeServiceUtil.getLayoutPrototype(
 				layoutPrototypeId);
 		}
-		catch (NoSuchLayoutPrototypeException nspte) {
+		catch (NoSuchLayoutPrototypeException nslpte) {
 		}
 
 		request.setAttribute(WebKeys.LAYOUT_PROTOTYPE, layoutPrototype);

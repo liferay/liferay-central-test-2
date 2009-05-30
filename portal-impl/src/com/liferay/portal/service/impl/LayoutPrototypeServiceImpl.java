@@ -96,6 +96,7 @@ public class LayoutPrototypeServiceImpl extends LayoutPrototypeServiceBaseImpl {
 			if (LayoutPrototypePermissionUtil.contains(
 					getPermissionChecker(),
 					layoutPrototype.getLayoutPrototypeId(), ActionKeys.VIEW)) {
+
 				filteredLayoutPrototypes.add(layoutPrototype);
 			}
 		}
