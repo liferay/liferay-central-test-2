@@ -30,7 +30,6 @@
 <tr>
 	<td colspan="3">
 		<div class="vocabulary-toolbar">
-
 			<span id="vocabulary-search-bar">
 				<input id="vocabulary-search-input" type="text" value="" />
 
