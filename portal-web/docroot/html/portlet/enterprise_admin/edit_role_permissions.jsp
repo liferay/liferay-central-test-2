@@ -66,7 +66,6 @@ portletURL.setParameter("struts_action", "/enterprise_admin/edit_role_permission
 portletURL.setParameter("tabs1", tabs1);
 portletURL.setParameter("tabs2", tabs2);
 portletURL.setParameter("roleId", String.valueOf(role.getRoleId()));
-portletURL.setParameter("portletResource", portletResource);
 
 PortletURL viewPermissionsURL = renderResponse.createRenderURL();
 
@@ -190,6 +189,7 @@ editPermissionsURL.setParameter("roleId", String.valueOf(role.getRoleId()));
 		<input name="<portlet:namespace />roleId" type="hidden" value="<%= role.getRoleId() %>" />
 		<input name="<portlet:namespace />portletResource" type="hidden" value="<%= HtmlUtil.escape(portletResource) %>" />
 		<input name="<portlet:namespace />modelResources" type="hidden" value='<%= (modelResources == null) ? "" : StringUtil.merge(modelResources) %>' />
+		<input name="<portlet:namespace />showModelResources" type="hidden" value='<%= String.valueOf(showModelResources) %>' />
 		<input name="<portlet:namespace />selectedTargets" type="hidden" value="" />
 
 		<c:choose>
