@@ -51,7 +51,7 @@ String scoreString = numberFormat.format(score);
 				"<%= randomNamespace %>averageRating",
 				{
 					displayOnly: true,
-					rating: <%= scoreString.replace(StringPool.COMMA, StringPool.PERIOD) %>
+					rating: <%= MathUtil.format(score, 1, 1) %>
 				});
 		</script>
 	</c:otherwise>
