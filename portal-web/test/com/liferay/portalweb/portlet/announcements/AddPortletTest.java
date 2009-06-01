@@ -88,21 +88,6 @@ public class AddPortletTest extends BaseTestCase {
 		}
 
 		selenium.click("//div[@id='News-Announcements']/p/a");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//img[@alt='Configuration']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
+		assertTrue(selenium.isElementPresent("//img[@alt='Configuration']"));
 	}
 }
