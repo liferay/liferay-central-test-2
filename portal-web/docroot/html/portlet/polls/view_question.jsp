@@ -42,7 +42,7 @@ if (viewResults && !PollsQuestionPermission.contains(permissionChecker, question
 }
 %>
 
-<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/polls/view_question" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
+<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/polls/view_question" /></portlet:actionURL>" class="exp-form" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.ADD %>" />
 <input name="<portlet:namespace />redirect" type="hidden" value="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/polls/view_question" /><portlet:param name="questionId" value="<%= String.valueOf(question.getQuestionId()) %>" /></portlet:renderURL>" />
 <input name="<portlet:namespace />questionId" type="hidden" value="<%= question.getQuestionId() %>" />
@@ -62,7 +62,7 @@ if (viewResults && !PollsQuestionPermission.contains(permissionChecker, question
 
 <c:choose>
 	<c:when test='<%= !viewResults && !question.isExpired() && !hasVoted && PollsQuestionPermission.contains(permissionChecker, question, ActionKeys.ADD_VOTE) %>'>
-		<table class="lfr-table">
+		<div class="exp-ctrl-holder">
 
 		<%
 		Iterator itr = choices.iterator();
@@ -73,25 +73,13 @@ if (viewResults && !PollsQuestionPermission.contains(permissionChecker, question
 			choice = choice.toEscapedModel();
 		%>
 
-			<tr>
-				<td>
-					<input name="<portlet:namespace />choiceId" type="radio" value="<%= choice.getChoiceId() %>" />
-				</td>
-				<td>
-					<b><%= choice.getName() %>.</b>
-				</td>
-				<td>
-					<%= choice.getDescription() %>
-				</td>
-			</tr>
+			<label><input name="<portlet:namespace />choiceId" type="radio" value="<%= choice.getChoiceId() %>" /><strong><%= choice.getName() %>.</strong> <%= choice.getDescription() %></label> <br/>
 
 		<%
 		}
 		%>
 
-		</table>
-
-		<br />
+		</div>
 
 		<c:if test="<%= PollsQuestionPermission.contains(permissionChecker, question, ActionKeys.UPDATE) %>">
 			<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="viewResultsURL">
@@ -104,11 +92,11 @@ if (viewResults && !PollsQuestionPermission.contains(permissionChecker, question
 			<liferay-ui:icon image="view" message="view-results" url="<%= viewResultsURL %>" label="<%= true %>" />
 		</c:if>
 
-		<br /><br />
+		<div class="exp-button-holder">
+			<input type="button" value="<liferay-ui:message key="vote" />" onClick="submitForm(document.<portlet:namespace />fm);" />
 
-		<input type="button" value="<liferay-ui:message key="vote" />" onClick="submitForm(document.<portlet:namespace />fm);" />
-
-		<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
+			<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
+		</div>
 	</c:when>
 	<c:otherwise>
 		<%@ include file="/html/portlet/polls/view_question_results.jspf" %>

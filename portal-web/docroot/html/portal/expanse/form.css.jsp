@@ -104,10 +104,15 @@
 .exp-form .exp-block-labels label, .exp-form .exp-block-labels .label {
 	display: block;
 	float: none;
+	font-weight: bold;
 	line-height: 100%;
 	margin: .3em 0;
 	padding: 0;
 	width: auto;
+}
+
+.exp-block-labels label input {
+	vertical-align: middle;
 }
 
 .exp-form .exp-block-labels .label {
@@ -209,6 +214,7 @@
 }
 
 .exp-form fieldset {
+	border: none;
 	margin: 0;
 }
 

@@ -182,7 +182,7 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 	);
 </script>
 
-<form action="<portlet:actionURL><portlet:param name="struts_action" value="/blogs/edit_entry" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveEntry(false); return false;">
+<form action="<portlet:actionURL><portlet:param name="struts_action" value="/blogs/edit_entry" /></portlet:actionURL>" class="exp-form" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveEntry(false); return false;">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escape(redirect) %>" />
 <input name="<portlet:namespace />referringPortletResource" type="hidden" value="<%= HtmlUtil.escape(referringPortletResource) %>" />
@@ -198,87 +198,52 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 	<span class="last"><liferay-ui:message key='<%= ((entry == null) ? Constants.ADD : Constants.UPDATE) + "-entry" %>' /></span>
 </div>
 
-<table class="lfr-table">
+<fieldset class="exp-block-labels">
 
-<c:if test="<%= (entry == null) || entry.isDraft() %>">
-	<tr>
-		<td colspan="2">
-			<div class="save-status" id="<portlet:namespace />saveStatus"></div>
-		</td>
-	</tr>
-</c:if>
+	<c:if test="<%= (entry == null) || entry.isDraft() %>">
+		<tr>
+			<td colspan="2">
+				<div class="save-status" id="<portlet:namespace />saveStatus"></div>
+			</td>
+		</tr>
+	</c:if>
 
-<tr>
-	<td class="lfr-label">
-		<liferay-ui:message key="title" />
-	</td>
-	<td>
+	<div class="exp-ctrl-holder">
+		<label for="<portlet:namespace />title"><liferay-ui:message key="title" /></label>
+
 		<liferay-ui:input-field model="<%= BlogsEntry.class %>" bean="<%= entry %>" field="title" />
-	</td>
-</tr>
-<tr>
-	<td class="lfr-label">
-		<liferay-ui:message key="display-date" />
-	</td>
-	<td>
+	</div>
+
+	<div class="exp-ctrl-holder">
+		<label for="<portlet:namespace />displayDate"><liferay-ui:message key="display-date" /></label>
+
 		<liferay-ui:input-field model="<%= BlogsEntry.class %>" bean="<%= entry %>" field="displayDate" defaultValue="<%= displayDate %>" />
-	</td>
-</tr>
-<tr>
-	<td colspan="2">
-		<br />
-	</td>
-</tr>
-<tr>
-	<td class="lfr-label">
-		<liferay-ui:message key="content" />
-	</td>
-	<td>
+	</div>
+
+	<div class="exp-ctrl-holder">
+		<label for="<portlet:namespace />content"><liferay-ui:message key="content" /></label>
+
 		<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" />
 
 		<input name="<portlet:namespace />content" type="hidden" value="" />
-	</td>
-</tr>
+	</div>
 
-<c:if test="<%= PropsValues.BLOGS_TRACKBACK_ENABLED %>">
-	<tr>
-		<td colspan="2">
-			<br />
-		</td>
-	</tr>
-	<tr>
-		<td class="lfr-label">
-			<liferay-ui:message key="allow-incoming-trackbacks" />
-		</td>
-		<td>
-			<liferay-ui:input-checkbox param="allowTrackbacks" defaultValue="<%= allowTrackbacks %>" />
-		</td>
-	</tr>
-	<tr>
-		<td colspan="2">
-			<br />
-		</td>
-	</tr>
-	<tr>
-		<td class="lfr-label">
-			<liferay-ui:message key="trackbacks-to-send" />
-		</td>
-		<td>
-			<liferay-ui:input-field model="<%= BlogsEntry.class %>" bean="<%= entry %>" field="trackbacks" />
-		</td>
-	</tr>
+	<c:if test="<%= PropsValues.BLOGS_TRACKBACK_ENABLED %>">
+		<div class="exp-ctrl-holder">
+			<label class="inline-label" for="<portlet:namespace />allowTrackbacks"><liferay-ui:message key="allow-incoming-trackbacks" /> <liferay-ui:input-checkbox param="allowTrackbacks" defaultValue="<%= allowTrackbacks %>" /></label>
+		</div>
 
-	<c:if test="<%= (entry != null) && Validator.isNotNull(entry.getTrackbacks()) %>">
-		<tr>
-			<td colspan="2">
-				<br />
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<liferay-ui:message key="trackbacks-already-sent" />
-			</td>
-			<td>
+		<div class="exp-ctrl-holder">
+			<label for="<portlet:namespace />trackbacks">
+				<liferay-ui:input-field model="<%= BlogsEntry.class %>" bean="<%= entry %>" field="trackbacks" />
+
+				<liferay-ui:message key="trackbacks-to-send" />
+			</label>
+		</div>
+
+		<c:if test="<%= (entry != null) && Validator.isNotNull(entry.getTrackbacks()) %>">
+			<div class="exp-ctrl-holder">
+				<label><liferay-ui:message key="trackbacks-already-sent" /></label>
 
 				<%
 				for (String trackback : StringUtil.split(entry.getTrackbacks())) {
@@ -290,21 +255,12 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 				}
 				%>
 
-			</td>
-		</tr>
+			</div>
+		</c:if>
 	</c:if>
-</c:if>
 
-<tr>
-	<td colspan="2">
-		<br />
-	</td>
-</tr>
-<tr>
-	<td class="lfr-label">
-		<liferay-ui:message key="tags" />
-	</td>
-	<td>
+	<div class="exp-ctrl-holder">
+		<label><liferay-ui:message key="tags" /></label>
 
 		<%
 		long classPK = 0;
@@ -320,34 +276,24 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 			hiddenInput="tagsEntries"
 			contentCallback='<%= renderResponse.getNamespace() + "getSuggestionsContent" %>'
 		/>
-	</td>
-</tr>
+	</div>
 
-<c:if test="<%= entry == null %>">
-	<tr>
-		<td colspan="2">
-			<br />
-		</td>
-	</tr>
-	<tr>
-		<td class="lfr-label">
-			<liferay-ui:message key="permissions" />
-		</td>
-		<td>
+	<c:if test="<%= entry == null %>">
+		<div class="exp-ctrl-holder">
+			<label><liferay-ui:message key="permissions" /></label>
+
 			<liferay-ui:input-permissions
 				modelName="<%= BlogsEntry.class.getName() %>"
 			/>
-		</td>
-	</tr>
-</c:if>
+		</div>
+	</c:if>
 
-</table>
+	<div class="exp-button-holder">
+		<input id="<portlet:namespace />saveButton" type="submit" value="<liferay-ui:message key='<%= ((entry == null) || entry.isDraft()) ? "publish" : "save" %>' />" />
 
-<br />
-
-<input id="<portlet:namespace />saveButton" type="submit" value="<liferay-ui:message key='<%= ((entry == null) || entry.isDraft()) ? "publish" : "save" %>' />" />
-
-<input id="<portlet:namespace />cancelButton" type="button" value="<liferay-ui:message key="cancel" />" />
+		<input id="<portlet:namespace />cancelButton" type="button" value="<liferay-ui:message key="cancel" />" />
+	</div>
+</fieldset>
 
 </form>
 

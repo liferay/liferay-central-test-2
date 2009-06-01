@@ -24,7 +24,7 @@
 
 <%@ include file="/html/portlet/polls/init.jsp" %>
 
-<form method="post" name="<portlet:namespace />fm">
+<form class="exp-form" method="post" name="<portlet:namespace />fm">
 
 <%
 PortletURL portletURL = renderResponse.createRenderURL();
@@ -110,7 +110,7 @@ boolean showPermissionsButton = GroupPermissionUtil.contains(permissionChecker, 
 %>
 
 <c:if test="<%= showAddPollButton || showPermissionsButton %>">
-	<div>
+	<div class="exp-button-holder">
 		<c:if test="<%= showAddPollButton %>">
 			<input type="button" value="<liferay-ui:message key="add-question" />" onClick="location.href = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/polls/edit_question" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';" />
 		</c:if>

@@ -98,7 +98,7 @@ if (choiceName > 0) {
 	}
 </script>
 
-<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/polls/edit_question" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveQuestion(); return false;">
+<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/polls/edit_question" /></portlet:actionURL>" class="exp-form" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveQuestion(); return false;">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escape(redirect) %>" />
 <input name="<portlet:namespace />questionId" type="hidden" value="<%= questionId %>" />
@@ -115,154 +115,110 @@ if (choiceName > 0) {
 <liferay-ui:error exception="<%= QuestionExpirationDateException.class %>" message="please-enter-a-valid-expiration-date" />
 <liferay-ui:error exception="<%= QuestionTitleException.class %>" message="please-enter-a-valid-title" />
 
-<table class="lfr-table">
-<tr>
-	<td>
-		<liferay-ui:message key="title" />
-	</td>
-	<td>
+<fieldset class="exp-block-labels">
+
+	<div class="exp-ctrl-holder">
+		<label for="<portlet:namespace />title"><liferay-ui:message key="title" /></label>
+
 		<liferay-ui:input-field model="<%= PollsQuestion.class %>" bean="<%= question %>" field="title" />
-	</td>
-</tr>
-<tr>
-	<td>
-		<liferay-ui:message key="description" />
-	</td>
-	<td>
+	</div>
+
+	<div class="exp-ctrl-holder">
+		<label for="<portlet:namespace />description"><liferay-ui:message key="description" /></label>
+
 		<liferay-ui:input-field model="<%= PollsQuestion.class %>" bean="<%= question %>" field="description" />
-	</td>
-</tr>
-<tr>
-	<td colspan="2">
-		<br />
-	</td>
-</tr>
-<tr>
-	<td>
-		<liferay-ui:message key="expiration-date" />
-	</td>
-	<td>
-		<table class="lfr-table">
-		<tr>
-			<td>
-				<liferay-ui:input-field model="<%= PollsQuestion.class %>" bean="<%= question %>" field="expirationDate" defaultValue="<%= expirationDate %>" disabled="<%= neverExpire %>" />
-			</td>
-			<td>
+	</div>
 
-				<%
-				String taglibNeverExpireOnClick = renderResponse.getNamespace() + "disableInputDate('expirationDate', this.checked);";
-				%>
+	<div class="exp-ctrl-holder">
+		<label class="inline-label" for="<portlet:namespace />expirationDate">
+			<liferay-ui:message key="expiration-date" />
 
-				<liferay-ui:input-checkbox param="neverExpire" defaultValue="<%= neverExpire %>" onClick="<%= taglibNeverExpireOnClick %>" />
+			<liferay-ui:input-field model="<%= PollsQuestion.class %>" bean="<%= question %>" field="expirationDate" defaultValue="<%= expirationDate %>" disabled="<%= neverExpire %>" />
+		</label>
 
-				<liferay-ui:message key="never-expire" />
-			</td>
-		</tr>
-		</table>
-	</td>
-</tr>
-<tr>
-	<td colspan="2">
-		<br />
-	</td>
-</tr>
-<tr>
-	<td>
-		<liferay-ui:message key="choices" />
-	</td>
-	<td>
-		<table class="lfr-table">
-		<tr>
-			<td>
-				<table class="lfr-table">
+		<%
+		String taglibNeverExpireOnClick = renderResponse.getNamespace() + "disableInputDate('expirationDate', this.checked);";
+		%>
 
-				<%
-				for (int i = 1; i <= choicesCount; i++) {
-					char c = (char)(96 + i);
+		<label class="inline-label" for="<portlet:namespace />neverExpire">
+			<liferay-ui:input-checkbox param="neverExpire" defaultValue="<%= neverExpire %>" onClick="<%= taglibNeverExpireOnClick %>" />
 
-					String choiceDesc = null;
+			<liferay-ui:message key="never-expire" />
+		</label>
+	</div>
 
-					if (deleteChoice) {
-						if (i < choiceName) {
-							choiceDesc = ParamUtil.getString(request, EditQuestionAction.CHOICE_DESCRIPTION_PREFIX + c);
-						}
-						else {
-							choiceDesc = ParamUtil.getString(request, EditQuestionAction.CHOICE_DESCRIPTION_PREFIX + ((char)(96 + i + 1)));
-						}
-					}
-					else {
-						choiceDesc = ParamUtil.getString(request, EditQuestionAction.CHOICE_DESCRIPTION_PREFIX + c);
-					}
+	<div class="exp-ctrl-holder">
+		<label for="<portlet:namespace />choices"><liferay-ui:message key="choices" /></label>
 
-					if (Validator.isNull(choiceDesc)) {
-						if (question != null) {
-							if (i - 1 < choices.size()) {
-								PollsChoice choice = (PollsChoice)choices.get(i - 1);
+		<%
+		for (int i = 1; i <= choicesCount; i++) {
+			char c = (char)(96 + i);
 
-								choiceDesc = choice.getDescription();
-							}
-						}
-					}
-				%>
+			String choiceDesc = null;
 
-					<tr>
-						<td>
-							<%= c %>.
-						</td>
-						<td>
-							<input name="<portlet:namespace /><%= EditQuestionAction.CHOICE_NAME_PREFIX %><%= c %>" type="hidden" value="<%= c %>" />
-
-							<input class="lfr-input-text" name="<%= EditQuestionAction.CHOICE_DESCRIPTION_PREFIX + c %>" type="text" value="<%= choiceDesc %>" />
-						</td>
-
-						<c:if test="<%= ((question == null) && (i > 2)) || ((question != null) && (i > oldChoicesCount)) %>">
-							<td>
-								<input type="button" value="<liferay-ui:message key="delete" />" onClick="document.<portlet:namespace />fm.<portlet:namespace />choicesCount.value = '<%= choicesCount - 1 %>'; document.<portlet:namespace />fm.<portlet:namespace />choiceName.value = '<%= i %>'; submitForm(document.<portlet:namespace />fm);" />
-							</td>
-						</c:if>
-
-					</tr>
-
-				<%
+			if (deleteChoice) {
+				if (i < choiceName) {
+					choiceDesc = ParamUtil.getString(request, EditQuestionAction.CHOICE_DESCRIPTION_PREFIX + c);
 				}
-				%>
+				else {
+					choiceDesc = ParamUtil.getString(request, EditQuestionAction.CHOICE_DESCRIPTION_PREFIX + ((char)(96 + i + 1)));
+				}
+			}
+			else {
+				choiceDesc = ParamUtil.getString(request, EditQuestionAction.CHOICE_DESCRIPTION_PREFIX + c);
+			}
 
-				</table>
-			</td>
-			<td valign="bottom">
-				<input type="button" value="<liferay-ui:message key="add-choice" />" onClick="<portlet:namespace />addPollChoice();" />
-			</td>
-		</tr>
-		</table>
-	</td>
-</tr>
+			if (Validator.isNull(choiceDesc)) {
+				if (question != null) {
+					if (i - 1 < choices.size()) {
+						PollsChoice choice = (PollsChoice)choices.get(i - 1);
 
-<c:if test="<%= question == null %>">
-	<tr>
-		<td colspan="2">
+						choiceDesc = choice.getDescription();
+					}
+				}
+			}
+		%>
+
+			<%= c %>.
+
+			<input name="<portlet:namespace /><%= EditQuestionAction.CHOICE_NAME_PREFIX %><%= c %>" type="hidden" value="<%= c %>" />
+
+			<input class="lfr-input-text" name="<%= EditQuestionAction.CHOICE_DESCRIPTION_PREFIX + c %>" type="text" value="<%= choiceDesc %>" />
+
+			<c:if test="<%= ((question == null) && (i > 2)) || ((question != null) && (i > oldChoicesCount)) %>">
+				<input type="button" value="<liferay-ui:message key="delete" />" onClick="document.<portlet:namespace />fm.<portlet:namespace />choicesCount.value = '<%= choicesCount - 1 %>'; document.<portlet:namespace />fm.<portlet:namespace />choiceName.value = '<%= i %>'; submitForm(document.<portlet:namespace />fm);" />
+			</c:if>
+
 			<br />
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<liferay-ui:message key="permissions" />
-		</td>
-		<td>
+
+		<%
+		}
+		%>
+
+		<br />
+
+		<div class="exp-button-holder">
+			<input type="button" value="<liferay-ui:message key="add-choice" />" onClick="<portlet:namespace />addPollChoice();" />
+		</div>
+	</div>
+
+	<c:if test="<%= question == null %>">
+		<div class="exp-ctrl-holder">
+			<label for="<portlet:namespace />permissions"><liferay-ui:message key="permissions" /></label>
+
 			<liferay-ui:input-permissions
 				modelName="<%= PollsQuestion.class.getName() %>"
 			/>
-		</td>
-	</tr>
-</c:if>
+		</div>
+	</c:if>
 
-</table>
+	<div class="exp-button-holder">
+		<input type="submit" value="<liferay-ui:message key="save" />" />
 
-<br />
+		<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
+	</div>
 
-<input type="submit" value="<liferay-ui:message key="save" />" />
-
-<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
-
+</fieldset>
 </form>
 
 <c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
