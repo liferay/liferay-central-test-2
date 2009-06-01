@@ -170,7 +170,7 @@ viewURL = _checkViewURL(viewURL, currentURL, themeDisplay);
 		<li class="title-list <%= cssClassName %>">
 			<c:choose>
 				<c:when test="<%= Validator.isNotNull(viewURL) %>">
-					<a class="title-link" href="<%= viewURL %>"><%= title %></a>
+					<a href="<%= viewURL %>"><%= title %></a>
 				</c:when>
 				<c:otherwise>
 					<%= title %>
