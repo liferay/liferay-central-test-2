@@ -82,14 +82,14 @@ if (choiceName > 0) {
 	}
 
 	function <portlet:namespace />disableInputDate(date, checked) {
-		document.<portlet:namespace />fm1["<portlet:namespace />" + date + "Month"].disabled = checked;
-		document.<portlet:namespace />fm1["<portlet:namespace />" + date + "Day"].disabled = checked;
-		document.<portlet:namespace />fm1["<portlet:namespace />" + date + "Year"].disabled = checked;
-		document.<portlet:namespace />fm1["<portlet:namespace />" + date + "Hour"].disabled = checked;
-		document.<portlet:namespace />fm1["<portlet:namespace />" + date + "Minute"].disabled = checked;
-		document.<portlet:namespace />fm1["<portlet:namespace />" + date + "AmPm"].disabled = checked;
+		document.<portlet:namespace />fm["<portlet:namespace />" + date + "Month"].disabled = checked;
+		document.<portlet:namespace />fm["<portlet:namespace />" + date + "Day"].disabled = checked;
+		document.<portlet:namespace />fm["<portlet:namespace />" + date + "Year"].disabled = checked;
+		document.<portlet:namespace />fm["<portlet:namespace />" + date + "Hour"].disabled = checked;
+		document.<portlet:namespace />fm["<portlet:namespace />" + date + "Minute"].disabled = checked;
+		document.<portlet:namespace />fm["<portlet:namespace />" + date + "AmPm"].disabled = checked;
 
-		jQuery(document.<portlet:namespace />fm1["<portlet:namespace />" + date + "ImageInputIdInput"]).toggleClass('disabled');
+		jQuery(document.<portlet:namespace />fm["<portlet:namespace />" + date + "ImageInputIdInput"]).toggleClass('disabled');
 	}
 
 	function <portlet:namespace />saveQuestion() {
