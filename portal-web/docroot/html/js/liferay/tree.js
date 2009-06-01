@@ -308,7 +308,13 @@ Liferay.Tree = new Expanse.Class(
 
 			var allDraggable = false;
 
-			jQuery('#lfrExpand').click(
+			var lfrExpand = jQuery(tree).find('.lfr-expand');
+			var lfrCollapse = jQuery(tree).find('.lfr-collapse');
+
+			lfrExpand.unbind('click');
+			lfrCollapse.unbind('click');
+
+			lfrExpand.click(
 				function() {
 					tree.find('.tree-item ul:has(.tree-item)').show();
 					tree.find('.tree-item:has(.tree-item) > img').each(
@@ -332,10 +338,12 @@ Liferay.Tree = new Expanse.Class(
 							}
 						}
 					);
+
+					return false;
 				}
 			);
 
-			jQuery('#lfrCollapse').click(
+			lfrCollapse.click(
 				function() {
 					tree.find('.tree-item ul:has(.tree-item)').hide();
 					tree.find('.tree-item:has(.tree-item) > img').each(
@@ -353,6 +361,8 @@ Liferay.Tree = new Expanse.Class(
 							}
 						}
 					);
+
+					return false;
 				}
 			);
 		},
@@ -471,7 +481,7 @@ Liferay.Tree = new Expanse.Class(
 					}
 				);
 
-				jQuery('img.select-state, a', treeEl).unbind('click').click(
+				jQuery('img.select-state,.tree-item a', treeEl).unbind('click').click(
 					function(event) {
 						instance.select(this);
 						return false;

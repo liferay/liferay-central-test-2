@@ -6,7 +6,7 @@ Liferay.LayoutExporter = {
 		var obj = options.obj;
 		var publish = options.publish;
 
-		if (obj.checked) {
+		if (obj && obj.checked) {
 			jQuery(pane).hide();
 
 			if (!publish) {
@@ -121,7 +121,7 @@ Liferay.LayoutExporter = {
 		var obj = options.obj;
 		var publish = options.publish;
 
-		if (obj.checked) {
+		if (obj && obj.checked) {
 			jQuery(pane).show();
 
 			if (!publish) {
