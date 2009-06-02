@@ -153,7 +153,8 @@
 					draggable: false,
 					header: 'choose a date',
 					preventcontextoverlap: true,
-					visible: false
+					visible: false,
+					zIndex: Expanse.zIndex.DATE_PICKER
 				};
 
 				options = Expanse.extend({}, defaults, options);
