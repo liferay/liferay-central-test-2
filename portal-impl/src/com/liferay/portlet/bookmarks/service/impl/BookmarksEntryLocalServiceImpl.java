@@ -413,11 +413,13 @@ public class BookmarksEntryLocalServiceImpl
 			long userId, BookmarksEntry entry, String[] tagsEntries)
 		throws PortalException, SystemException {
 
+		long[] assetCategoryIds = null;
+
 		tagsAssetLocalService.updateAsset(
 			userId, entry.getGroupId(), BookmarksEntry.class.getName(),
-			entry.getEntryId(), null, tagsEntries, true, null, null, null, null,
-			ContentTypes.TEXT_PLAIN, entry.getName(), entry.getComments(), null,
-			entry.getUrl(), 0, 0, null, false);
+			entry.getEntryId(), assetCategoryIds, tagsEntries, true, null, null,
+			null, null, ContentTypes.TEXT_PLAIN, entry.getName(),
+			entry.getComments(), null, entry.getUrl(), 0, 0, null, false);
 	}
 
 	protected BookmarksFolder getFolder(BookmarksEntry entry, long folderId)

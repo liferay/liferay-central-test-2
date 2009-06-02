@@ -2482,8 +2482,10 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	public void updateTagsAsset(long userId, User user, String[] tagsEntries)
 		throws PortalException, SystemException {
 
+		long[] assetCategoryIds = null;
+
 		tagsAssetLocalService.updateAsset(
-			userId, 0, User.class.getName(), user.getUserId(), null,
+			userId, 0, User.class.getName(), user.getUserId(), assetCategoryIds,
 			tagsEntries, true, null, null, null, null, null, user.getFullName(),
 			null, null, null, 0, 0, null, false);
 	}

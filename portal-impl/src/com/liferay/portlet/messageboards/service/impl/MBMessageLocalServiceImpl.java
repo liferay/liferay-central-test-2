@@ -1293,11 +1293,13 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			return;
 		}
 
+		long[] assetCategoryIds = null;
+
 		tagsAssetLocalService.updateAsset(
 			userId, message.getGroupId(), MBMessage.class.getName(),
-			message.getMessageId(), null, tagsEntries, true, null, null, null,
-			null, ContentTypes.TEXT_HTML, message.getSubject(), null, null,
-			null, 0, 0, null, false);
+			message.getMessageId(), assetCategoryIds, tagsEntries, true, null,
+			null, null, null, ContentTypes.TEXT_HTML, message.getSubject(),
+			null, null, null, 0, 0, null, false);
 	}
 
 	protected void deleteDiscussionSocialActivities(
