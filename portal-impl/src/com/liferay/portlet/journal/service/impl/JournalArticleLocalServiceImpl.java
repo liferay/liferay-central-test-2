@@ -334,7 +334,7 @@ public class JournalArticleLocalServiceImpl
 		// Tags
 
 		updateTagsAsset(
-			userId, article, serviceContext.getTagsCategories(),
+			userId, article, serviceContext.getAssetCategoryIds(),
 			serviceContext.getTagsEntries());
 
 		// Email
@@ -676,14 +676,11 @@ public class JournalArticleLocalServiceImpl
 
 		// Tags
 
-		String[] tagsCategories = tagsEntryLocalService.getEntryNames(
-			JournalArticle.class.getName(), oldArticle.getResourcePrimKey(),
-			TagsEntryConstants.FOLKSONOMY_CATEGORY);
 		String[] tagsEntries = tagsEntryLocalService.getEntryNames(
 			JournalArticle.class.getName(), oldArticle.getResourcePrimKey(),
 			TagsEntryConstants.FOLKSONOMY_TAG);
 
-		updateTagsAsset(userId, newArticle, tagsCategories, tagsEntries);
+		updateTagsAsset(userId, newArticle, null, tagsEntries);
 
 		return newArticle;
 	}
@@ -1957,10 +1954,10 @@ public class JournalArticleLocalServiceImpl
 
 		// Tags
 
-		String[] tagsCategories = serviceContext.getTagsCategories();
+		long[] assetCategoryIds = serviceContext.getAssetCategoryIds();
 		String[] tagsEntries = serviceContext.getTagsEntries();
 
-		updateTagsAsset(userId, article, tagsCategories, tagsEntries);
+		updateTagsAsset(userId, article, assetCategoryIds, tagsEntries);
 
 		// Email
 
@@ -1998,7 +1995,7 @@ public class JournalArticleLocalServiceImpl
 	}
 
 	public void updateTagsAsset(
-			long userId, JournalArticle article, String[] tagsCategories,
+			long userId, JournalArticle article, long[] assetCategoryIds,
 			String[] tagsEntries)
 		throws PortalException, SystemException {
 
@@ -2028,7 +2025,7 @@ public class JournalArticleLocalServiceImpl
 
 		tagsAssetLocalService.updateAsset(
 			userId, article.getGroupId(), JournalArticle.class.getName(),
-			article.getResourcePrimKey(), tagsCategories, tagsEntries,
+			article.getResourcePrimKey(), assetCategoryIds, tagsEntries,
 			visible, null, null, displayDate, expirationDate,
 			ContentTypes.TEXT_HTML, article.getTitle(),
 			article.getDescription(), null, null, 0, 0, null, false);

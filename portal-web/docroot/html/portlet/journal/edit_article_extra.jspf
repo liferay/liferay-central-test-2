@@ -218,11 +218,9 @@ String scheduleTitle = LanguageUtil.get(pageContext, "schedule");
 
 			<liferay-ui:message key="categories" /><br />
 
-			<liferay-ui:tags-selector
+			<liferay-ui:asset-categories-selector
 				className="<%= JournalArticle.class.getName() %>"
 				classPK="<%= classPK %>"
-				folksonomy="<%= false %>"
-				hiddenInput="tagsCategories"
 			/>
 
 			<br /><br />

@@ -932,6 +932,69 @@ li.toggle-expand a {
 	padding: 0 15px;
 }
 
+/* ---------- Asset categories selector styling ---------- */
+
+.ui-dialog.lfr-asset-category-selector .ui-dialog-container .ui-dialog-content {
+	padding: 0;
+}
+
+.lfr-asset-category-container {
+	height: 260px;
+	margin-bottom: 0.5em;
+	overflow: auto;
+}
+
+.lfr-asset-category-container fieldset {
+	margin: 5px;
+}
+
+.lfr-asset-category-container legend {
+	font-weight: bold;
+	margin-left: 5px;
+}
+
+.lfr-asset-category-container label {
+	display: block;
+}
+
+.lfr-asset-category-container label input {
+	vertical-align: middle;
+}
+
+.lfr-asset-category-container .lfr-asset-category-message {
+	display: none;
+}
+
+.lfr-asset-category-search-container {
+	background-color: #D3DADD;
+	border-bottom: 1px solid #AEB8BC;
+	margin: 3px 0;
+	padding: 5px;
+}
+
+.lfr-asset-category-search-input {
+	width: 250px;
+}
+
+.lfr-asset-category-container .no-matches {
+	border-bottom: none;
+	border-left: none;
+	border-right: none;
+	color: #999;
+	margin-bottom: 0;
+	margin-left: 0;
+	margin-top: 0;
+	padding: 0;
+}
+
+.lfr-asset-category-container .no-matches legend {
+	padding-left: 0;
+}
+
+.lfr-asset-category-container .no-matches .lfr-asset-category-message {
+	display: block;
+}
+
 /* ---------- Tag selector styling ---------- */
 
 .ui-dialog.lfr-tag-selector .ui-dialog-container .ui-dialog-content {
@@ -1274,6 +1337,15 @@ fieldset:last-child, .exp-form fieldset:last-child {
 .lfr-menu-list li.last {
 	border-bottom: none;
 }
+
+/* ---------- Taglib asset categories summary ---------- */
+
+.taglib-asset-categories-summary .asset-category {
+	margin-bottom: 3px;
+	margin-right: 3px;
+	padding-right: 5px;
+}
+
 
 /* ---------- Taglib calendar ---------- */
 

@@ -179,6 +179,10 @@
 	margin: 25px 25px;
 }
 
+.portlet-asset-publisher .taglib-asset-categories-summary {
+	float: left;
+}
+
 .portlet-asset-publisher .taglib-tags-summary {
 	float: left;
 }

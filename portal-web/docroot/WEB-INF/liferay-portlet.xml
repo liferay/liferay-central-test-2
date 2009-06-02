@@ -1018,7 +1018,7 @@
 	<portlet>
 		<portlet-name>122</portlet-name>
 		<icon>/html/icons/default.png</icon>
-		<struts-path>tags_categories_navigation</struts-path>
+		<struts-path>asset_categories_navigation</struts-path>
 		<configuration-action-class>com.liferay.portlet.tagsnavigation.action.ConfigurationActionImpl</configuration-action-class>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>

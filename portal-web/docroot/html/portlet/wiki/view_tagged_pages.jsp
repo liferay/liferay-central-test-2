@@ -26,17 +26,12 @@
 
 <%
 String tag = ParamUtil.getString(renderRequest, "tag");
-boolean folksonomy = ParamUtil.getBoolean(renderRequest, "folksonomy", TagsEntryConstants.FOLKSONOMY_TAG);
 
-String title = "pages-with-category-x";
+String title = "pages-with-tag-x";
 String description = null;
 
 try {
-	TagsEntry tagsEntry = TagsEntryLocalServiceUtil.getEntry(scopeGroupId, tag, folksonomy);
-
-	if (folksonomy) {
-		title = "pages-with-tag-x";
-	}
+	TagsEntry tagsEntry = TagsEntryLocalServiceUtil.getEntry(scopeGroupId, tag, true);
 
 	TagsProperty tagsProperty = TagsPropertyLocalServiceUtil.getProperty(tagsEntry.getEntryId(), "description");
 

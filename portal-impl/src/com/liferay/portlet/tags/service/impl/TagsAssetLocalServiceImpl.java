@@ -456,10 +456,40 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 
 	public TagsAsset updateAsset(
 			long userId, long groupId, String className, long classPK,
+			long[] categoryIds, String[] entryNames, boolean visible,
+			Date startDate, Date endDate, Date publishDate, Date expirationDate,
+			String mimeType, String title, String description, String summary,
+			String url, int height, int width, Integer priority, boolean sync)
+		throws PortalException, SystemException {
+
+		return updateAsset(
+			userId, groupId, className, classPK, categoryIds, null, entryNames,
+			visible, startDate, endDate, publishDate, expirationDate, mimeType,
+			title, description, summary, url, height, width, priority, sync);
+	}
+
+	public TagsAsset updateAsset(
+			long userId, long groupId, String className, long classPK,
 			String[] categoryNames, String[] entryNames, boolean visible,
 			Date startDate, Date endDate, Date publishDate, Date expirationDate,
 			String mimeType, String title, String description, String summary,
 			String url, int height, int width, Integer priority, boolean sync)
+		throws PortalException, SystemException {
+
+		return updateAsset(
+			userId, groupId, className, classPK, null, categoryNames,
+			entryNames, visible, startDate, endDate, publishDate,
+			expirationDate, mimeType, title, description, summary, url, height,
+			width, priority, sync);
+	}
+
+	public TagsAsset updateAsset(
+			long userId, long groupId, String className, long classPK,
+			long[] categoryIds, String[] categoryNames, String[] entryNames,
+			boolean visible, Date startDate, Date endDate, Date publishDate,
+			Date expirationDate, String mimeType, String title,
+			String description, String summary, String url, int height,
+			int width, Integer priority, boolean sync)
 		throws PortalException, SystemException {
 
 		// Asset
@@ -553,19 +583,28 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 
 		// Categories
 
-		for (int i = 0; i < categoryNames.length; i++) {
-			try {
-				TagsEntry entry = tagsEntryLocalService.getEntry(
-					groupId, categoryNames[i],
-					TagsEntryConstants.FOLKSONOMY_CATEGORY);
+		if (categoryNames != null) {
+			for (int i = 0; i < categoryNames.length; i++) {
+				try {
+					TagsEntry entry = tagsEntryLocalService.getEntry(
+						groupId, categoryNames[i],
+						TagsEntryConstants.FOLKSONOMY_CATEGORY);
 
-				entries.add(entry);
-			}
-			catch (NoSuchEntryException nsee) {
+					entries.add(entry);
+				}
+				catch (NoSuchEntryException nsee) {
+				}
 			}
 		}
 
 		tagsAssetPersistence.setTagsEntries(asset.getAssetId(), entries);
+
+		// Asset categories
+
+		if (categoryIds != null) {
+			tagsAssetPersistence.setAssetCategories(
+				asset.getAssetId(), categoryIds);
+		}
 
 		// Update asset after entries so that asset listeners have access the
 		// saved entries

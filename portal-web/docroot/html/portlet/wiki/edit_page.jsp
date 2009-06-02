@@ -367,11 +367,9 @@ if (Validator.isNull(redirect)) {
 			<liferay-ui:message key="categories" />
 		</td>
 		<td>
-			<liferay-ui:tags-selector
+			<liferay-ui:asset-categories-selector
 				className="<%= WikiPage.class.getName() %>"
 				classPK="<%= classPK %>"
-				folksonomy="<%= false %>"
-				hiddenInput="tagsCategories"
 			/>
 		</td>
 	</tr>

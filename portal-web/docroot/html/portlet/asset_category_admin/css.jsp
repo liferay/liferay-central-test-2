@@ -149,7 +149,7 @@
 	width: 380px;
 }
 
-.portlet-asset-category-admin .ui-tags .nowrap {
+.portlet-asset-category-admin .ui-asset-categories .nowrap {
 	empty-cells: show;
 	overflow: hidden;
 	white-space: nowrap;

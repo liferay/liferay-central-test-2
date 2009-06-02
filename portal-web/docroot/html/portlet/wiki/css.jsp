@@ -63,6 +63,11 @@
 	margin-left: 30px;
 }
 
+.portlet-wiki .taglib-asset-categories-summary {
+	margin: -10px 0px 10px 0px;
+	color: #7d7d7d;
+}
+
 .portlet-wiki .taglib-discussion {
 	margin-top: 18px;
 }

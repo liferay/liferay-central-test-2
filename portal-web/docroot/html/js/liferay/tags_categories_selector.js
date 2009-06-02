@@ -54,7 +54,7 @@ Liferay.TagsCategoriesSelector = new Expanse.Class(
 			instance._update();
 		},
 
-		_tagCategoryIterator: function(entries, parent, buffer, counter) {
+		_assetCategoryIterator: function(entries, parent, buffer, counter) {
 			var instance = this;
 
 			jQuery.each(
@@ -88,7 +88,7 @@ Liferay.TagsCategoriesSelector = new Expanse.Class(
 					);
 
 					if (childEntries.length > 0) {
-						instance._tagCategoryIterator(childEntries, parent, buffer, counter + 1);
+						instance._assetCategoryIterator(childEntries, parent, buffer, counter + 1);
 					}
 				}
 			);
@@ -268,7 +268,7 @@ Liferay.TagsCategoriesSelector = new Expanse.Class(
 										buffer.push(tagCategorySetName);
 										buffer.push('</legend>');
 
-										instance._tagCategoryIterator(entries, tagCategorySetName, buffer, 0);
+										instance._assetCategoryIterator(entries, tagCategorySetName, buffer, 0);
 
 										buffer.push('<div class="lfr-tag-message">' + searchMessage + '</div>');
 										buffer.push('</fieldset>');

@@ -829,11 +829,11 @@ public class JournalArticleLocalServiceUtil {
 
 	public static void updateTagsAsset(long userId,
 		com.liferay.portlet.journal.model.JournalArticle article,
-		java.lang.String[] tagsCategories, java.lang.String[] tagsEntries)
+		long[] assetCategoryIds, java.lang.String[] tagsEntries)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		getService()
-			.updateTagsAsset(userId, article, tagsCategories, tagsEntries);
+			.updateTagsAsset(userId, article, assetCategoryIds, tagsEntries);
 	}
 
 	public static JournalArticleLocalService getService() {

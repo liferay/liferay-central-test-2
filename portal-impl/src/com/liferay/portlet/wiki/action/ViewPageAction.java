@@ -54,9 +54,10 @@ public class ViewPageAction extends PortletAction {
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
 
+		String categoryId = ParamUtil.getString(renderRequest, "categoryId");
 		String tag = ParamUtil.getString(renderRequest, "tag");
 
-		if (Validator.isNotNull(tag)) {
+		if (Validator.isNotNull(categoryId) || Validator.isNotNull(tag)) {
 			return ViewNodeAction.viewNode(
 				mapping, renderRequest, "portlet.wiki.view_node");
 		}

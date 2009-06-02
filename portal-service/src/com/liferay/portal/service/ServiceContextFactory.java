@@ -25,6 +25,7 @@ package com.liferay.portal.service;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.PortletPreferencesIds;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -116,6 +117,13 @@ public class ServiceContextFactory {
 		serviceContext.setTagsCategories(tagsCategories);
 
 		serviceContext.setTagsEntries(tagsEntries);
+
+		// Asset categories
+
+		long[] assetCategoryIds = StringUtil.split(
+			ParamUtil.getString(portletRequest, "assetCategoryIds"), 0L);
+
+		serviceContext.setAssetCategoyIds(assetCategoryIds);
 
 		return serviceContext;
 	}

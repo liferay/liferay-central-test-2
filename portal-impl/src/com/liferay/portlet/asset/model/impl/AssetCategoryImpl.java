@@ -22,7 +22,13 @@
 
 package com.liferay.portlet.asset.model.impl;
 
+import com.liferay.portal.PortalException;
+import com.liferay.portal.SystemException;
 import com.liferay.portlet.asset.model.AssetCategory;
+import com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <a href="AssetCategoryImpl.java.html"><b><i>View Source</i></b></a>
@@ -34,6 +40,37 @@ public class AssetCategoryImpl
 	extends AssetCategoryModelImpl implements AssetCategory {
 
 	public AssetCategoryImpl() {
+	}
+
+	public List<AssetCategory> getAncestors()
+		throws PortalException, SystemException {
+
+		List<AssetCategory> assetCategories = new ArrayList<AssetCategory>();
+
+		AssetCategory assetCategory = this;
+
+		while (true) {
+			if (!assetCategory.isRootCategory()) {
+				assetCategory = AssetCategoryLocalServiceUtil.getAssetCategory(
+					assetCategory.getParentCategoryId());
+
+				assetCategories.add(assetCategory);
+			}
+			else {
+				break;
+			}
+		}
+
+		return assetCategories;
+	}
+
+	public boolean isRootCategory() {
+		if (getParentCategoryId() == 0) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 }

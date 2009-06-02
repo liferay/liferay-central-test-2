@@ -182,6 +182,10 @@
 
 		<action path="/asset_category_admin/view" forward="portlet.asset_category_admin.view" />
 
+		<!-- Asset Categories Navigation -->
+
+		<action path="/asset_categories_navigation/view" forward="portlet.asset_categories_navigation.view" />
+
 		<!-- Asset Publisher -->
 
 		<action path="/asset_publisher/edit_article_discussion" type="com.liferay.portlet.messageboards.action.EditDiscussionAction">
@@ -1548,10 +1552,6 @@
 		<!-- Tags Admin -->
 
 		<action path="/tags_admin/view" forward="portlet.tags_admin.view" />
-
-		<!-- Tags Categories Navigation -->
-
-		<action path="/tags_categories_navigation/view" forward="portlet.tags_entries_navigation.view" />
 
 		<!-- Tags Entries Navigation -->
 

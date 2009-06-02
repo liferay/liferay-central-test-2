@@ -185,10 +185,9 @@ TagsUtil.addLayoutTagsEntries(request, TagsEntryLocalServiceUtil.getEntries(Wiki
 	</div>
 </c:if>
 
-<liferay-ui:tags-summary
+<liferay-ui:asset-categories-summary
 	className="<%= WikiPage.class.getName() %>"
 	classPK="<%= wikiPage.getResourcePrimKey() %>"
-	folksonomy="<%= false %>"
 	portletURL="<%= taggedPagesURL %>"
 />
 

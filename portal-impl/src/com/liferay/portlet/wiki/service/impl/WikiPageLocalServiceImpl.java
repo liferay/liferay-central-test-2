@@ -204,7 +204,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		// Tags
 
 		updateTagsAsset(
-			userId, page, serviceContext.getTagsCategories(),
+			userId, page, serviceContext.getAssetCategoryIds(),
 			serviceContext.getTagsEntries());
 
 		// Indexer
@@ -829,16 +829,13 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			wikiPagePersistence.update(redirectedPage, false);
 		}
 
-		// Tags
+		// Categories and tags
 
-		String[] tagsCategories = tagsEntryLocalService.getEntryNames(
-			WikiPage.class.getName(), resourcePrimKey,
-			TagsEntryConstants.FOLKSONOMY_CATEGORY);
 		String[] tagsEntries = tagsEntryLocalService.getEntryNames(
 			WikiPage.class.getName(), resourcePrimKey,
 			TagsEntryConstants.FOLKSONOMY_TAG);
 
-		updateTagsAsset(userId, page, tagsCategories, tagsEntries);
+		updateTagsAsset(userId, page, null, tagsEntries);
 
 		// Indexer
 
@@ -1028,7 +1025,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		// Tags
 
 		updateTagsAsset(
-			userId, page, serviceContext.getTagsCategories(),
+			userId, page, serviceContext.getAssetCategoryIds(),
 			serviceContext.getTagsEntries());
 
 		// Indexer
@@ -1043,15 +1040,15 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 	}
 
 	public void updateTagsAsset(
-			long userId, WikiPage page, String[] tagsCategories,
+			long userId, WikiPage page, long[] assetCategoryIds,
 			String[] tagsEntries)
 		throws PortalException, SystemException {
 
 		tagsAssetLocalService.updateAsset(
 			userId, page.getGroupId(), WikiPage.class.getName(),
-			page.getResourcePrimKey(), tagsCategories, tagsEntries, true, null,
-			null, null, null, ContentTypes.TEXT_HTML, page.getTitle(), null,
-			null, null, 0, 0, null, false);
+			page.getResourcePrimKey(), assetCategoryIds, tagsEntries, true,
+			null, null, null, null, ContentTypes.TEXT_HTML, page.getTitle(),
+			null, null, null, 0, 0, null, false);
 	}
 
 	public void validateTitle(String title) throws PortalException {

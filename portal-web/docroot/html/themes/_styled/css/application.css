@@ -51,6 +51,75 @@
 	background: #A8D6ED;
 }
 
+/* ---------- Asset Categories ---------- */
+
+.ui-asset-categories {
+	display: block;
+	padding: 5px 0 2px;
+}
+
+.ui-asset-categories:after {
+	clear: both;
+	content: ".";
+	display: block;
+	height: 0;
+	visibility: hidden;
+}
+
+.ie .ui-asset-categories {
+	height: 1%;
+}
+
+.ui-asset-categories.empty {
+	display: none;
+}
+
+.ui-asset-categories .ui-asset-category {
+	background: #DFF4FF;
+	border: 1px solid #A7CEDF;
+	float: left;
+	margin-bottom: 3px;
+	margin-right: 3px;
+	padding: 3px 20px 3px 6px;
+	padding-right: 20px;
+	position: relative;
+}
+
+.ui-asset-categories .ui-asset-category:hover {
+	border-color: #AEB8BC;
+}
+
+.ui-asset-categories .ui-asset-category-delete {
+	display: block;
+	padding: 6px;
+	position: absolute;
+	right: 0;
+	top: 3px;
+}
+
+.ui-asset-categories .ui-asset-category-delete span {
+	background: url(../images/application/close_small.png) no-repeat 0 0;
+	cursor: pointer;
+	display: block;
+	font-size: 0;
+	height: 7px;
+	text-indent: -9999em;
+	width: 7px;
+}
+
+.ui-asset-categories .ui-asset-category-delete:hover span {
+	background-position: 0 100%;
+}
+
+.ui-asset-categories-input {
+	width: 200px;
+}
+
+.tags-vocabulary-name span {
+	font-weight: bold;
+	padding-bottom: 3px;
+}
+
 /* ---------- Breadcrumbs ---------- */
 
 .breadcrumbs {

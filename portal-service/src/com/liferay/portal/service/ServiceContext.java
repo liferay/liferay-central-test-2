@@ -52,6 +52,10 @@ public class ServiceContext implements Serializable {
 		return _addGuestPermissions;
 	}
 
+	public long[] getAssetCategoryIds() {
+		return _assetCategoryIds;
+	}
+
 	public Serializable getAttribute(String name) {
 		return _attributes.get(name);
 	}
@@ -128,6 +132,10 @@ public class ServiceContext implements Serializable {
 		_addGuestPermissions = addGuestPermissions;
 	}
 
+	public void setAssetCategoyIds(long[] assetCategoryIds) {
+		_assetCategoryIds = assetCategoryIds;
+	}
+
 	public void setAttribute(String name, Serializable value) {
 		_attributes.put(name, value);
 	}
@@ -202,6 +210,7 @@ public class ServiceContext implements Serializable {
 
 	private boolean _addCommunityPermissions;
 	private boolean _addGuestPermissions;
+	private long[] _assetCategoryIds;
 	private Map<String, Serializable> _attributes;
 	private String[] _communityPermissions;
 	private long _companyId;

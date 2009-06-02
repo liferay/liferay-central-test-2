@@ -416,11 +416,11 @@ public class WikiPageLocalServiceUtil {
 	}
 
 	public static void updateTagsAsset(long userId,
-		com.liferay.portlet.wiki.model.WikiPage page,
-		java.lang.String[] tagsCategories, java.lang.String[] tagsEntries)
+		com.liferay.portlet.wiki.model.WikiPage page, long[] assetCategoryIds,
+		java.lang.String[] tagsEntries)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		getService().updateTagsAsset(userId, page, tagsCategories, tagsEntries);
+		getService().updateTagsAsset(userId, page, assetCategoryIds, tagsEntries);
 	}
 
 	public static void validateTitle(java.lang.String title)

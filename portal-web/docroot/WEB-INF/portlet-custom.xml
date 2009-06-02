@@ -506,6 +506,7 @@
 		<security-role-ref>
 			<role-name>user</role-name>
 		</security-role-ref>
+		<supported-public-render-parameter>categoryId</supported-public-render-parameter>
 		<supported-public-render-parameter>folksonomy</supported-public-render-parameter>
 		<supported-public-render-parameter>nodeId</supported-public-render-parameter>
 		<supported-public-render-parameter>tag</supported-public-render-parameter>
@@ -1316,6 +1317,7 @@
 		<security-role-ref>
 			<role-name>user</role-name>
 		</security-role-ref>
+		<supported-public-render-parameter>categoryId</supported-public-render-parameter>
 		<supported-public-render-parameter>folksonomy</supported-public-render-parameter>
 		<supported-public-render-parameter>tag</supported-public-render-parameter>
 	</portlet>
@@ -1635,11 +1637,11 @@
 	</portlet>
 	<portlet>
 		<portlet-name>122</portlet-name>
-		<display-name>Categories Navigation</display-name>
+		<display-name>Asset Categories Navigation</display-name>
 		<portlet-class>com.liferay.portlet.StrutsPortlet</portlet-class>
 		<init-param>
 			<name>view-action</name>
-			<value>/tags_categories_navigation/view</value>
+			<value>/asset_categories_navigation/view</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
@@ -1655,8 +1657,7 @@
 		<security-role-ref>
 			<role-name>user</role-name>
 		</security-role-ref>
-		<supported-public-render-parameter>folksonomy</supported-public-render-parameter>
-		<supported-public-render-parameter>tag</supported-public-render-parameter>
+		<supported-public-render-parameter>categoryId</supported-public-render-parameter>
 	</portlet>
 	<portlet>
 		<portlet-name>124</portlet-name>
@@ -2271,6 +2272,10 @@
 	<user-attribute>
 		<name>user.business-info.online.uri</name>
 	</user-attribute>
+	<public-render-parameter>
+		<identifier>categoryId</identifier>
+		<qname xmlns:x="http://www.liferay.com/public-render-parameters">x:categoryId</qname>
+	</public-render-parameter>
 	<public-render-parameter>
 		<identifier>folksonomy</identifier>
 		<qname xmlns:x="http://www.liferay.com/public-render-parameters">x:folksonomy</qname>

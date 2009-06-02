@@ -618,7 +618,7 @@ public interface JournalArticleLocalService {
 
 	public void updateTagsAsset(long userId,
 		com.liferay.portlet.journal.model.JournalArticle article,
-		java.lang.String[] tagsCategories, java.lang.String[] tagsEntries)
+		long[] assetCategoryIds, java.lang.String[] tagsEntries)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 }
