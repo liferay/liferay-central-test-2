@@ -37,22 +37,7 @@ if (layout != null) {
 		<li class="pin-dockbar">
 			<a href="javascript:;"><img src="<%= themeDisplay.getPathThemeImages() %>/spacer.png" /></a>
 		</li>
-		<li class="user-avatar">
-			<c:choose>
-				<c:when test="<%= group.isLayoutPrototype() %>">
-					<img alt="<%= user.getFullName() %>" src="<%= themeDisplay.getPathImage() %>/user_<%= user.isFemale() ? "female" : "male" %>_portrait?img_id=<%= user.getPortraitId() %>&t=<%= ImageServletTokenUtil.getToken(user.getPortraitId()) %>" /> <%= user.getFullName() %>
-				</c:when>
-				<c:otherwise>
-					<a href="<%= HtmlUtil.escape(themeDisplay.getURLMyAccount().toString()) %>"><img alt="<%= user.getFullName() %>" src="<%= themeDisplay.getPathImage() %>/user_<%= user.isFemale() ? "female" : "male" %>_portrait?img_id=<%= user.getPortraitId() %>&t=<%= ImageServletTokenUtil.getToken(user.getPortraitId()) %>" /></a> <a href="<%= HtmlUtil.escape(themeDisplay.getURLMyAccount().toString()) %>"><%= user.getFullName() %></a>
-				</c:otherwise>
-			</c:choose>
-
-			<c:if test="<%= themeDisplay.isShowSignOutIcon() %>">
-				<span class="sign-out">(<a href="<%= themeDisplay.getURLSignOut() %>"><liferay-ui:message key="sign-out" /></a>)</span>
-			</c:if>
-		</li>
-		<li class="exp-toolbar-separator">
-			<span></span>
+			<a href="javascript: ;"><img src="<%= themeDisplay.getPathThemeImages() %>/spacer.png" /></a>
 		</li>
 
 		<c:if test="<%= (group != null) && (!group.hasStagingGroup() || group.isStagingGroup()) && LayoutPermissionUtil.contains(permissionChecker, layout, ActionKeys.UPDATE) %>">
@@ -121,6 +106,14 @@ if (layout != null) {
 
 				<div class="manage-content-container menu-container" id="<portlet:namespace />manageContentContainer">
 					<ul>
+						<c:if test="<%= themeDisplay.isShowControlPanelIcon() %>">
+							<li id="<portlet:namespace />controlPanel">
+								<a href="<%= themeDisplay.getURLControlPanel() %>">
+									<liferay-ui:message key="control-panel" />
+								</a>
+							</li>
+						</c:if>
+
 						<c:if test="<%= themeDisplay.isShowPageSettingsIcon() %>">
 							<li class="first">
 								<a href="<%= HtmlUtil.escape(themeDisplay.getURLPageSettings().toString()) %>">
@@ -155,7 +148,21 @@ if (layout != null) {
 			</li>
 		</c:if>
 
-		<c:if test="<%= user.hasMyPlaces() && !group.isLayoutPrototype() %>">
+		<li class="exp-toolbar-separator">
+			<span></span>
+		</li>
+
+		<c:if test="<%= themeDisplay.isSignedIn() %>">
+			<li class="toggle-controls" id="<portlet:namespace />toggleControls">
+				<a href="javascript: ;">
+					<liferay-ui:message key="toggle-edit-controls" />
+				</a>
+			</li>
+		</c:if>
+	</ul>
+
+	<ul class="exp-toolbar user-toolbar">
+		<c:if test="<%= user.hasMyPlaces() %>">
 			<li class="my-places has-submenu" id="<portlet:namespace />myPlaces">
 				<a class="menu-button" href="javascript:;">
 					<span>
@@ -168,26 +175,18 @@ if (layout != null) {
 				</div>
 			</li>
 		</c:if>
-
+		
 		<li class="exp-toolbar-separator">
 			<span></span>
 		</li>
 
-		<c:if test="<%= themeDisplay.isShowControlPanelIcon() %>">
-			<li class="control-panel" id="<portlet:namespace />controlPanel">
-				<a href="<%= themeDisplay.getURLControlPanel() %>">
-					<liferay-ui:message key="control-panel" />
-				</a>
-			</li>
-		</c:if>
+		<li class="user-avatar">
+			<a href="<%= HtmlUtil.escape(themeDisplay.getURLMyAccount().toString()) %>"><img alt="<%= user.getFullName() %>" src="<%= themeDisplay.getPathImage() %>/user_<%= user.isFemale() ? "female" : "male" %>_portrait?img_id=<%= user.getPortraitId() %>&t=<%= ImageServletTokenUtil.getToken(user.getPortraitId()) %>" /></a> <a href="<%= HtmlUtil.escape(themeDisplay.getURLMyAccount().toString()) %>"><%= user.getFullName() %></a>
 
-		<c:if test="<%= themeDisplay.isSignedIn() %>">
-			<li class="toggle-controls" id="<portlet:namespace />toggleControls">
-				<a href="javascript:;">
-					<liferay-ui:message key="toggle-edit-controls" />
-				</a>
-			</li>
-		</c:if>
+			<c:if test="<%= themeDisplay.isShowSignOutIcon() %>">
+				<span class="sign-out">(<a href="<%= themeDisplay.getURLSignOut() %>"><liferay-ui:message key="sign-out" /></a>)</span>
+			</c:if>
+		</li>
 	</ul>
 
 	<div class="dockbar-messages" id="<portlet:namespace />dockbarMessages">
