@@ -1192,9 +1192,22 @@ public class ServicePreAction extends Action {
 			if (company.isCommunityLogo()) {
 				LayoutSet layoutSet = layout.getLayoutSet();
 
-				if (layoutSet.isLogo()) {
-					long logoId = layoutSet.getLogoId();
+				long logoId = 0;
 
+				if (layoutSet.isLogo()) {
+					logoId = layoutSet.getLogoId();
+				}
+				else {
+					LayoutSet siblingLayoutSet =
+						LayoutSetLocalServiceUtil.getLayoutSet(
+							layout.getGroupId(), !layout.isPrivateLayout());
+
+					if (siblingLayoutSet.isLogo()) {
+						logoId = siblingLayoutSet.getLogoId();
+					}
+				}
+
+				if (logoId > 0) {
 					layoutSetLogo =
 						imagePath + "/layout_set_logo?img_id=" + logoId +
 							"&t=" + ImageServletTokenUtil.getToken(logoId);
