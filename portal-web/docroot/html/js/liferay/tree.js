@@ -481,7 +481,7 @@ Liferay.Tree = new Expanse.Class(
 					}
 				);
 
-				jQuery('img.select-state,.tree-item a', treeEl).unbind('click').click(
+				jQuery('img.select-state, .tree-item a', treeEl).unbind('click').click(
 					function(event) {
 						instance.select(this);
 						return false;
