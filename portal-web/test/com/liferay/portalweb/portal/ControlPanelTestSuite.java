@@ -25,6 +25,7 @@ package com.liferay.portalweb.portal;
 import com.liferay.portalweb.portal.controlpanel.admin.AdminTests;
 import com.liferay.portalweb.portal.controlpanel.communities.CommunitiesTests;
 import com.liferay.portalweb.portal.controlpanel.portal.PortalTests;
+import com.liferay.portalweb.portal.controlpanel.virtualhosting.VirtualHostingTests;
 import com.liferay.portalweb.portal.login.LoginTests;
 
 import junit.framework.Test;
@@ -45,6 +46,7 @@ public class ControlPanelTestSuite extends BaseTests {
 		testSuite.addTest(AdminTests.suite());
 		testSuite.addTest(CommunitiesTests.suite());
 		testSuite.addTest(PortalTests.suite());
+		testSuite.addTest(VirtualHostingTests.suite());
 
 		testSuite.addTestSuite(StopSeleniumTest.class);
 
