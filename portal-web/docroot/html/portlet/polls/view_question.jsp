@@ -64,20 +64,20 @@ if (viewResults && !PollsQuestionPermission.contains(permissionChecker, question
 	<c:when test='<%= !viewResults && !question.isExpired() && !hasVoted && PollsQuestionPermission.contains(permissionChecker, question, ActionKeys.ADD_VOTE) %>'>
 		<div class="exp-ctrl-holder">
 
-		<%
-		Iterator itr = choices.iterator();
+			<%
+			Iterator itr = choices.iterator();
 
-		while (itr.hasNext()) {
-			PollsChoice choice = (PollsChoice)itr.next();
+			while (itr.hasNext()) {
+				PollsChoice choice = (PollsChoice)itr.next();
 
-			choice = choice.toEscapedModel();
-		%>
+				choice = choice.toEscapedModel();
+			%>
 
-			<label><input name="<portlet:namespace />choiceId" type="radio" value="<%= choice.getChoiceId() %>" /><strong><%= choice.getName() %>.</strong> <%= choice.getDescription() %></label> <br/>
+				<label><input name="<portlet:namespace />choiceId" type="radio" value="<%= choice.getChoiceId() %>" /><strong><%= choice.getName() %>.</strong> <%= choice.getDescription() %></label> <br />
 
-		<%
-		}
-		%>
+			<%
+			}
+			%>
 
 		</div>
 

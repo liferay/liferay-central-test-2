@@ -116,7 +116,6 @@ if (choiceName > 0) {
 <liferay-ui:error exception="<%= QuestionTitleException.class %>" message="please-enter-a-valid-title" />
 
 <fieldset class="exp-block-labels">
-
 	<div class="exp-ctrl-holder">
 		<label for="<portlet:namespace />title"><liferay-ui:message key="title" /></label>
 
@@ -217,8 +216,8 @@ if (choiceName > 0) {
 
 		<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
 	</div>
-
 </fieldset>
+
 </form>
 
 <c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">

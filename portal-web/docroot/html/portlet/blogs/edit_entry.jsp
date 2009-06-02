@@ -199,7 +199,6 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 </div>
 
 <fieldset class="exp-block-labels">
-
 	<c:if test="<%= (entry == null) || entry.isDraft() %>">
 		<div class="save-status" id="<portlet:namespace />saveStatus"></div>
 	</c:if>
