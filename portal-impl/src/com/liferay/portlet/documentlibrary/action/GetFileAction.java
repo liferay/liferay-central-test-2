@@ -35,8 +35,10 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
+import com.liferay.portlet.documentlibrary.model.DLFileVersion;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFileShortcutServiceUtil;
+import com.liferay.portlet.documentlibrary.service.DLFileVersionLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.permission.DLFileEntryPermission;
 import com.liferay.portlet.documentlibrary.util.DocumentConversionUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
@@ -215,6 +217,15 @@ public class GetFileAction extends PortletAction {
 			}
 
 			int contentLength = fileEntry.getSize();
+
+			if (version < fileEntry.getVersion()) {
+				DLFileVersion fileVersion =
+					DLFileVersionLocalServiceUtil.getFileVersion(
+						folderId, name, version);
+
+				contentLength = fileVersion.getSize();
+			}
+
 			String contentType = MimeTypesUtil.getContentType(fileName);
 
 			ServletResponseUtil.sendFile(
