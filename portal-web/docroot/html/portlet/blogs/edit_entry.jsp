@@ -201,11 +201,7 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 <fieldset class="exp-block-labels">
 
 	<c:if test="<%= (entry == null) || entry.isDraft() %>">
-		<tr>
-			<td colspan="2">
-				<div class="save-status" id="<portlet:namespace />saveStatus"></div>
-			</td>
-		</tr>
+		<div class="save-status" id="<portlet:namespace />saveStatus"></div>
 	</c:if>
 
 	<div class="exp-ctrl-holder">
@@ -234,11 +230,9 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 		</div>
 
 		<div class="exp-ctrl-holder">
-			<label for="<portlet:namespace />trackbacks">
-				<liferay-ui:input-field model="<%= BlogsEntry.class %>" bean="<%= entry %>" field="trackbacks" />
+			<label for="<portlet:namespace />trackbacks"><liferay-ui:message key="trackbacks-to-send" /></label>
 
-				<liferay-ui:message key="trackbacks-to-send" />
-			</label>
+			<liferay-ui:input-field model="<%= BlogsEntry.class %>" bean="<%= entry %>" field="trackbacks" />
 		</div>
 
 		<c:if test="<%= (entry != null) && Validator.isNotNull(entry.getTrackbacks()) %>">
