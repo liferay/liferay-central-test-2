@@ -223,7 +223,7 @@ public class TearDownTest extends BaseTestCase {
 
 					try {
 						if (selenium.isElementPresent(
-									"//div[@id='_88_layoutsTreeOutput']/ul/li[2]/ul/li[3]/a/span")) {
+									"//div[@id='_88_layoutsTreeOutput']/ul/li/ul/li[3]/a/span")) {
 							break;
 						}
 					}
@@ -234,7 +234,7 @@ public class TearDownTest extends BaseTestCase {
 				}
 
 				selenium.click(RuntimeVariables.replace(
-						"//div[@id='_88_layoutsTreeOutput']/ul/li[2]/ul/li[3]/a/span"));
+						"//div[@id='_88_layoutsTreeOutput']/ul/li/ul/li[3]/a/span"));
 				selenium.waitForPageToLoad("30000");
 
 				for (int second = 0;; second++) {
@@ -243,7 +243,8 @@ public class TearDownTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isElementPresent("link=Page")) {
+						if (selenium.isElementPresent(
+									"//li[@id='_88_tabs3pageTabsId']/a")) {
 							break;
 						}
 					}
@@ -253,7 +254,8 @@ public class TearDownTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click(RuntimeVariables.replace("link=Page"));
+				selenium.click(RuntimeVariables.replace(
+						"//li[@id='_88_tabs3pageTabsId']/a"));
 				selenium.waitForPageToLoad("30000");
 
 				for (int second = 0;; second++) {
