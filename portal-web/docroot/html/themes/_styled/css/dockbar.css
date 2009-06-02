@@ -7,13 +7,23 @@
 	z-index: 300;
 }
 
+.dockbar:after {
+	clear: both;
+	content: ".";
+	display: block;
+	height: 0;
+	visibility: hidden;
+}
+
 .ie7 .dockbar {
 	zoom: 1;
 }
 
-.ie6 .dockbar {
+.ie6 .dockbar, .ie6 .lfr-dockbar-pinned .dockbar {
 	height: 10px;
-	position: static;
+	left: 0;
+	position: relative;
+	top: 0;
 }
 
 .dockbar .user-avatar .sign-out {
@@ -37,8 +47,8 @@ html > .lfr-dockbar-pinned {
 .lfr-dockbar-pinned .dockbar {
 	left: 0;
 	position: fixed;
+	right: 0;
 	top: 0;
-	width: 100%;
 }
 
 .dockbar .pin-dockbar {
@@ -72,6 +82,14 @@ html > .lfr-dockbar-pinned {
 	width: auto;
 }
 
+.dockbar .exp-toolbar {
+	float: left;
+}
+
+.dockbar .user-toolbar {
+	float: right;
+}
+
 .exp-toolbar li {
 	display: inline-block;
 	margin: 0;
@@ -99,11 +117,17 @@ html > .lfr-dockbar-pinned {
 	width:4px;
 }
 
+.exp-underlay-container {
+	clear: both;
+	top: 100%;
+}
+
 .exp-underlay {
 	background: #eee url(../images/common/message_panel_shadow.png) repeat-x 0 0;
 	border-width: 0 1px 1px;
-	margin-top: 6px;
+	margin-top: 1px;
 	padding-top: 20px;
+	position: static;
 }
 
 .exp-underlay .exp-header {

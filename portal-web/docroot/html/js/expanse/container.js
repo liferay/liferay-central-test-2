@@ -56,6 +56,8 @@
 					if (!instance.cfg.getProperty('width')) {
 						instance.cfg.setProperty('width', 'auto');
 					}
+
+					instance.changeContentEvent.fire();
 				};
 			}
 

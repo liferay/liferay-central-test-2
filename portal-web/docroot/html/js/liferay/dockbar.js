@@ -394,6 +394,7 @@
 
 				Liferay.Dockbar.UnderlayManager.bringToTop(instance);
 
+				Dom.addClass(instance.element, 'exp-underlay-container');
 				Dom.addClass(instance.innerElement, 'exp-underlay');
 
 				if (options.className) {
