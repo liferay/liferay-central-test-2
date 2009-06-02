@@ -1425,6 +1425,10 @@
 	<bean id="com.liferay.portlet.messageboards.service.persistence.MBStatsUserUtil" class="com.liferay.portlet.messageboards.service.persistence.MBStatsUserUtil">
 		<property name="persistence" ref="com.liferay.portlet.messageboards.service.persistence.MBStatsUserPersistence.impl" />
 	</bean>
+	<bean id="com.liferay.portlet.messageboards.service.persistence.MBStatsUserFinder.impl" class="com.liferay.portlet.messageboards.service.persistence.MBStatsUserFinderImpl" parent="basePersistence" />
+	<bean id="com.liferay.portlet.messageboards.service.persistence.MBStatsUserFinderUtil" class="com.liferay.portlet.messageboards.service.persistence.MBStatsUserFinderUtil">
+		<property name="finder" ref="com.liferay.portlet.messageboards.service.persistence.MBStatsUserFinder.impl" />
+	</bean>
 	<bean id="com.liferay.portlet.messageboards.service.MBThreadLocalService.impl" class="com.liferay.portlet.messageboards.service.impl.MBThreadLocalServiceImpl" />
 	<bean id="com.liferay.portlet.messageboards.service.MBThreadLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService">
 		<property name="target" ref="com.liferay.portlet.messageboards.service.MBThreadLocalService.impl" />

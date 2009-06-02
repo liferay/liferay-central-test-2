@@ -109,6 +109,14 @@ public interface MBStatsUserLocalService {
 		throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.liferay.portlet.messageboards.model.MBStatsUser> getMBStatsByUserId(
+		long userId) throws com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getPostCountByUserId(long userId)
+		throws com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.messageboards.model.MBStatsUser getStatsUser(
 		long groupId, long userId) throws com.liferay.portal.SystemException;
 

@@ -53,6 +53,7 @@ import com.liferay.portlet.messageboards.service.persistence.MBMailingListPersis
 import com.liferay.portlet.messageboards.service.persistence.MBMessageFinder;
 import com.liferay.portlet.messageboards.service.persistence.MBMessageFlagPersistence;
 import com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence;
+import com.liferay.portlet.messageboards.service.persistence.MBStatsUserFinder;
 import com.liferay.portlet.messageboards.service.persistence.MBStatsUserPersistence;
 import com.liferay.portlet.messageboards.service.persistence.MBThreadFinder;
 import com.liferay.portlet.messageboards.service.persistence.MBThreadPersistence;
@@ -300,6 +301,14 @@ public abstract class MBStatsUserLocalServiceBaseImpl
 		this.mbStatsUserPersistence = mbStatsUserPersistence;
 	}
 
+	public MBStatsUserFinder getMBStatsUserFinder() {
+		return mbStatsUserFinder;
+	}
+
+	public void setMBStatsUserFinder(MBStatsUserFinder mbStatsUserFinder) {
+		this.mbStatsUserFinder = mbStatsUserFinder;
+	}
+
 	public MBThreadLocalService getMBThreadLocalService() {
 		return mbThreadLocalService;
 	}
@@ -398,6 +407,8 @@ public abstract class MBStatsUserLocalServiceBaseImpl
 	protected MBStatsUserLocalService mbStatsUserLocalService;
 	@BeanReference(name = "com.liferay.portlet.messageboards.service.persistence.MBStatsUserPersistence.impl")
 	protected MBStatsUserPersistence mbStatsUserPersistence;
+	@BeanReference(name = "com.liferay.portlet.messageboards.service.persistence.MBStatsUserFinder.impl")
+	protected MBStatsUserFinder mbStatsUserFinder;
 	@BeanReference(name = "com.liferay.portlet.messageboards.service.MBThreadLocalService.impl")
 	protected MBThreadLocalService mbThreadLocalService;
 	@BeanReference(name = "com.liferay.portlet.messageboards.service.MBThreadService.impl")

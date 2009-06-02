@@ -81,6 +81,17 @@ public class MBStatsUserLocalServiceImpl
 		mbStatsUserPersistence.removeByUserId(userId);
 	}
 
+    public java.util.List<com.liferay.portlet.messageboards.model.MBStatsUser> getMBStatsByUserId(
+        long userId)
+        throws com.liferay.portal.SystemException {
+        return mbStatsUserPersistence.findByUserId(userId);
+    }
+
+    public int getPostCountByUserId(long userId)
+        throws com.liferay.portal.SystemException {
+        return mbStatsUserFinder.getPostCountByUserId(userId);
+    }
+
 	public MBStatsUser getStatsUser(long groupId, long userId)
 		throws SystemException {
 
