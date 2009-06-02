@@ -35,7 +35,8 @@ import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
  *
  */
 public class MBStatsUserFinderImpl
-	extends BasePersistenceImpl implements MBStatsUserFinder{
+	extends BasePersistenceImpl implements MBStatsUserFinder {
+
     public int getPostCountByUserId(long userId)
         throws SystemException {
 
