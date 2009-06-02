@@ -61,7 +61,7 @@ public class DeleteEntryTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//div[3]/ul/li[3]/a")) {
+				if (selenium.isElementPresent("//body/div[4]/ul/li[3]/a")) {
 					break;
 				}
 			}
@@ -71,7 +71,7 @@ public class DeleteEntryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//div[3]/ul/li[3]/a"));
+		selenium.click(RuntimeVariables.replace("//body/div[4]/ul/li[3]/a"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to delete this[\\s\\S]$"));

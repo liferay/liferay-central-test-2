@@ -65,7 +65,7 @@ public class MoveEntryTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//div[3]/ul/li[1]/a")) {
+				if (selenium.isElementPresent("//body/div[4]/ul/li[1]/a")) {
 					break;
 				}
 			}
@@ -75,7 +75,7 @@ public class MoveEntryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//div[3]/ul/li[1]/a"));
+		selenium.click(RuntimeVariables.replace("//body/div[4]/ul/li[1]/a"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click("//input[@value='Select']");
 		selenium.waitForPopUp("folder", RuntimeVariables.replace("30000"));

@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.blogsaggregator;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="ViewBlogsTest.java.html"><b><i>View Source</i></b></a>
@@ -32,6 +33,25 @@ import com.liferay.portalweb.portal.BaseTestCase;
  */
 public class ViewBlogsTest extends BaseTestCase {
 	public void testViewBlogs() throws Exception {
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Blogs Aggregator Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace(
+				"link=Blogs Aggregator Test Page"));
+		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=BA Setup Test Entry"));
 		assertTrue(selenium.isTextPresent("This is a BA setup test entry!"));
 	}

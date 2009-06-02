@@ -39,6 +39,26 @@ public class DisplayStylesTest extends BaseTestCase {
 			}
 
 			try {
+				if (selenium.isElementPresent("link=Blogs Aggregator Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace(
+				"link=Blogs Aggregator Test Page"));
+		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
 				if (selenium.isElementPresent("//img[@alt='Configuration']")) {
 					break;
 				}
