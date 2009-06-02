@@ -64,8 +64,7 @@ public class LoginTest extends BaseTestCase {
 		selenium.type("reminderQueryAnswer", RuntimeVariables.replace("Test"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"document.getElementById('my-community-private-pages')"));
+		selenium.click(RuntimeVariables.replace("//li[2]/a/span[1]"));
 		selenium.waitForPageToLoad("30000");
 	}
 }
