@@ -1540,7 +1540,7 @@ create table User_ (
 	firstName VARCHAR(75) null,
 	middleName VARCHAR(75) null,
 	lastName VARCHAR(75) null,
-	jobTitle VARCHAR(75) null,
+	jobTitle VARCHAR(100) null,
 	loginDate DATE null,
 	loginIP VARCHAR(75) null,
 	lastLoginDate DATE null,

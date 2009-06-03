@@ -91,6 +91,6 @@ create table Shard (
 alter table User_ add firstName VARCHAR(75) null;
 alter table User_ add middleName VARCHAR(75) null;
 alter table User_ add lastName VARCHAR(75) null;
-alter table User_ add jobTitle VARCHAR(75) null;
+alter table User_ add jobTitle VARCHAR(100) null;
 
 alter table WikiPage add groupId LONG;
