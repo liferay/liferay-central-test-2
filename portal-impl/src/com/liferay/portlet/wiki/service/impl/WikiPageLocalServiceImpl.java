@@ -181,6 +181,12 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		wikiNodePersistence.update(node, false);
 
+		// Asset
+
+		updateAsset(
+			userId, page, serviceContext.getAssetCategoryIds(),
+			serviceContext.getTagsEntries());
+
 		// Message boards
 
 		if (PropsValues.WIKI_PAGE_COMMENTS_ENABLED) {
@@ -200,12 +206,6 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		if (!minorEdit && NotificationThreadLocal.isNotificationEnabled()) {
 			notifySubscribers(node, page, serviceContext, false);
 		}
-
-		// Tags
-
-		updateTagsAsset(
-			userId, page, serviceContext.getAssetCategoryIds(),
-			serviceContext.getTagsEntries());
 
 		// Indexer
 
@@ -829,13 +829,13 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			wikiPagePersistence.update(redirectedPage, false);
 		}
 
-		// Categories and tags
+		// Asset
 
 		String[] tagsEntries = tagsEntryLocalService.getEntryNames(
 			WikiPage.class.getName(), resourcePrimKey,
 			TagsEntryConstants.FOLKSONOMY_TAG);
 
-		updateTagsAsset(userId, page, null, tagsEntries);
+		updateAsset(userId, page, null, tagsEntries);
 
 		// Indexer
 
@@ -927,6 +927,18 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		subscriptionLocalService.deleteSubscription(
 			userId, WikiPage.class.getName(), page.getResourcePrimKey());
+	}
+
+	public void updateAsset(
+			long userId, WikiPage page, long[] assetCategoryIds,
+			String[] tagsEntries)
+		throws PortalException, SystemException {
+
+		tagsAssetLocalService.updateAsset(
+			userId, page.getGroupId(), WikiPage.class.getName(),
+			page.getResourcePrimKey(), assetCategoryIds, tagsEntries, true,
+			null, null, null, null, ContentTypes.TEXT_HTML, page.getTitle(),
+			null, null, null, 0, 0, null, false);
 	}
 
 	public WikiPage updatePage(
@@ -1024,7 +1036,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		// Tags
 
-		updateTagsAsset(
+		updateAsset(
 			userId, page, serviceContext.getAssetCategoryIds(),
 			serviceContext.getTagsEntries());
 
@@ -1037,18 +1049,6 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		clearPageCache(page);
 
 		return page;
-	}
-
-	public void updateTagsAsset(
-			long userId, WikiPage page, long[] assetCategoryIds,
-			String[] tagsEntries)
-		throws PortalException, SystemException {
-
-		tagsAssetLocalService.updateAsset(
-			userId, page.getGroupId(), WikiPage.class.getName(),
-			page.getResourcePrimKey(), assetCategoryIds, tagsEntries, true,
-			null, null, null, null, ContentTypes.TEXT_HTML, page.getTitle(),
-			null, null, null, 0, 0, null, false);
 	}
 
 	public void validateTitle(String title) throws PortalException {

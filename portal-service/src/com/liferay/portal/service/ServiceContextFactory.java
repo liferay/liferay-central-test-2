@@ -118,7 +118,7 @@ public class ServiceContextFactory {
 
 		serviceContext.setTagsEntries(tagsEntries);
 
-		// Asset categories
+		// Asset
 
 		long[] assetCategoryIds = StringUtil.split(
 			ParamUtil.getString(portletRequest, "assetCategoryIds"), 0L);

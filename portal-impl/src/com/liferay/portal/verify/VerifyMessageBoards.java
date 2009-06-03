@@ -60,8 +60,8 @@ public class VerifyMessageBoards extends VerifyProcess {
 
 		for (MBMessage message : messages) {
 			try {
-				MBMessageLocalServiceUtil.updateTagsAsset(
-					message.getUserId(), message, new String[0]);
+				MBMessageLocalServiceUtil.updateAsset(
+					message.getUserId(), message, new long[0], new String[0]);
 			}
 			catch (Exception e) {
 				if (_log.isWarnEnabled()) {

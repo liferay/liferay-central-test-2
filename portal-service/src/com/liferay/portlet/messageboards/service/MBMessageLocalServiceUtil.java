@@ -422,6 +422,14 @@ public class MBMessageLocalServiceUtil {
 		getService().unsubscribeMessage(userId, messageId);
 	}
 
+	public static void updateAsset(long userId,
+		com.liferay.portlet.messageboards.model.MBMessage message,
+		long[] assetCategoryIds, java.lang.String[] tagsEntries)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		getService().updateAsset(userId, message, assetCategoryIds, tagsEntries);
+	}
+
 	public static com.liferay.portlet.messageboards.model.MBMessage updateDiscussionMessage(
 		long userId, long messageId, java.lang.String subject,
 		java.lang.String body)
@@ -456,14 +464,6 @@ public class MBMessageLocalServiceUtil {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService().updateMessage(messageId, body);
-	}
-
-	public static void updateTagsAsset(long userId,
-		com.liferay.portlet.messageboards.model.MBMessage message,
-		java.lang.String[] tagsEntries)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		getService().updateTagsAsset(userId, message, tagsEntries);
 	}
 
 	public static MBMessageLocalService getService() {

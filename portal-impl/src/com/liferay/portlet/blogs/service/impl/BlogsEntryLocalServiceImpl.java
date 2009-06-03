@@ -166,6 +166,12 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			blogsStatsUserLocalService.updateStatsUser(groupId, userId, now);
 		}
 
+		// Asset
+
+		updateAsset(
+			userId, entry, serviceContext.getAssetCategoryIds(),
+			serviceContext.getTagsEntries());
+
 		// Message boards
 
 		if (PropsValues.BLOGS_ENTRY_COMMENTS_ENABLED) {
@@ -181,10 +187,6 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 				userId, groupId, BlogsEntry.class.getName(), entryId,
 				BlogsActivityKeys.ADD_ENTRY, StringPool.BLANK, 0);
 		}
-
-		// Tags
-
-		updateTagsAsset(userId, entry, serviceContext.getTagsEntries());
 
 		// Indexer
 
@@ -273,11 +275,6 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			_log.error("Deleting index " + entry.getEntryId(), se);
 		}
 
-		// Tags
-
-		tagsAssetLocalService.deleteAsset(
-			BlogsEntry.class.getName(), entry.getEntryId());
-
 		// Social
 
 		socialActivityLocalService.deleteActivities(
@@ -293,15 +290,20 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		mbMessageLocalService.deleteDiscussionMessages(
 			BlogsEntry.class.getName(), entry.getEntryId());
 
-		// Statistics
-
-		blogsStatsUserLocalService.updateStatsUser(
-			entry.getGroupId(), entry.getUserId());
-
 		// Expando
 
 		expandoValueLocalService.deleteValues(
 			BlogsEntry.class.getName(), entry.getEntryId());
+
+		// Asset
+
+		tagsAssetLocalService.deleteAsset(
+			BlogsEntry.class.getName(), entry.getEntryId());
+
+		// Statistics
+
+		blogsStatsUserLocalService.updateStatsUser(
+			entry.getGroupId(), entry.getUserId());
 
 		// Resources
 
@@ -603,6 +605,18 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		}
 	}
 
+	public void updateAsset(
+			long userId, BlogsEntry entry, long[] assetCategoryIds,
+			String[] tagsEntries)
+		throws PortalException, SystemException {
+	
+		tagsAssetLocalService.updateAsset(
+			userId, entry.getGroupId(), BlogsEntry.class.getName(),
+			entry.getEntryId(), assetCategoryIds, tagsEntries, !entry.isDraft(),
+			null, null, entry.getDisplayDate(), null, ContentTypes.TEXT_HTML,
+			entry.getTitle(), null, null, null, 0, 0, null, false);
+	}
+
 	public BlogsEntry updateEntry(
 			long userId, long entryId, String title, String content,
 			int displayDateMonth, int displayDateDay, int displayDateYear,
@@ -655,6 +669,12 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 				entry.getGroupId(), entry.getUserId(), displayDate);
 		}
 
+		// Asset
+
+		updateAsset(
+			userId, entry, serviceContext.getAssetCategoryIds(),
+			serviceContext.getTagsEntries());
+
 		// Expando
 
 		ExpandoBridge expandoBridge = entry.getExpandoBridge();
@@ -668,10 +688,6 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 				userId, entry.getGroupId(), BlogsEntry.class.getName(), entryId,
 				BlogsActivityKeys.ADD_ENTRY, StringPool.BLANK, 0);
 		}
-
-		// Tags
-
-		updateTagsAsset(userId, entry, serviceContext.getTagsEntries());
 
 		// Indexer
 
@@ -706,19 +722,6 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			entry.getCompanyId(), entry.getGroupId(),
 			BlogsEntry.class.getName(), entry.getEntryId(),
 			communityPermissions, guestPermissions);
-	}
-
-	public void updateTagsAsset(
-			long userId, BlogsEntry entry, String[] tagsEntries)
-		throws PortalException, SystemException {
-
-		long[] assetCategoryIds = null;
-
-		tagsAssetLocalService.updateAsset(
-			userId, entry.getGroupId(), BlogsEntry.class.getName(),
-			entry.getEntryId(), assetCategoryIds, tagsEntries, !entry.isDraft(),
-			null, null, entry.getDisplayDate(), null, ContentTypes.TEXT_HTML,
-			entry.getTitle(), null, null, null, 0, 0, null, false);
 	}
 
 	protected String getUniqueUrlTitle(

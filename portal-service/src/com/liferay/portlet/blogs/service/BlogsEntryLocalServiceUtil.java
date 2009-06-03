@@ -372,6 +372,14 @@ public class BlogsEntryLocalServiceUtil {
 			start, end);
 	}
 
+	public static void updateAsset(long userId,
+		com.liferay.portlet.blogs.model.BlogsEntry entry,
+		long[] assetCategoryIds, java.lang.String[] tagsEntries)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		getService().updateAsset(userId, entry, assetCategoryIds, tagsEntries);
+	}
+
 	public static com.liferay.portlet.blogs.model.BlogsEntry updateEntry(
 		long userId, long entryId, java.lang.String title,
 		java.lang.String content, int displayDateMonth, int displayDateDay,
@@ -395,14 +403,6 @@ public class BlogsEntryLocalServiceUtil {
 			com.liferay.portal.SystemException {
 		getService()
 			.updateEntryResources(entry, communityPermissions, guestPermissions);
-	}
-
-	public static void updateTagsAsset(long userId,
-		com.liferay.portlet.blogs.model.BlogsEntry entry,
-		java.lang.String[] tagsEntries)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		getService().updateTagsAsset(userId, entry, tagsEntries);
 	}
 
 	public static BlogsEntryLocalService getService() {

@@ -29,7 +29,6 @@ WikiNode node = (WikiNode)request.getAttribute(WebKeys.WIKI_NODE);
 WikiPage wikiPage = (WikiPage)request.getAttribute(WebKeys.WIKI_PAGE);
 
 String type = ParamUtil.getString(request, "type");
-long categoryId = ParamUtil.getLong(renderRequest, "categoryId");
 String tag = ParamUtil.getString(renderRequest, "tag");
 boolean folksonomy = ParamUtil.getBoolean(renderRequest, "folksonomy", TagsEntryConstants.FOLKSONOMY_TAG);
 

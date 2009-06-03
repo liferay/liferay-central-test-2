@@ -45,23 +45,23 @@ public class AssetCategoryImpl
 	public List<AssetCategory> getAncestors()
 		throws PortalException, SystemException {
 
-		List<AssetCategory> assetCategories = new ArrayList<AssetCategory>();
+		List<AssetCategory> categories = new ArrayList<AssetCategory>();
 
-		AssetCategory assetCategory = this;
+		AssetCategory category = this;
 
 		while (true) {
-			if (!assetCategory.isRootCategory()) {
-				assetCategory = AssetCategoryLocalServiceUtil.getAssetCategory(
-					assetCategory.getParentCategoryId());
+			if (!category.isRootCategory()) {
+				category = AssetCategoryLocalServiceUtil.getAssetCategory(
+					category.getParentCategoryId());
 
-				assetCategories.add(assetCategory);
+				categories.add(category);
 			}
 			else {
 				break;
 			}
 		}
 
-		return assetCategories;
+		return categories;
 	}
 
 	public boolean isRootCategory() {

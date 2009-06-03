@@ -60,8 +60,8 @@ public class VerifyBlogs extends VerifyProcess {
 
 		for (BlogsEntry entry : entries) {
 			try {
-				BlogsEntryLocalServiceUtil.updateTagsAsset(
-					entry.getUserId(), entry, new String[0]);
+				BlogsEntryLocalServiceUtil.updateAsset(
+					entry.getUserId(), entry, new long[0], new String[0]);
 			}
 			catch (Exception e) {
 				if (_log.isWarnEnabled()) {

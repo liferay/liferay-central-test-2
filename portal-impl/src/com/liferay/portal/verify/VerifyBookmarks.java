@@ -60,8 +60,8 @@ public class VerifyBookmarks extends VerifyProcess {
 
 		for (BookmarksEntry entry : entries) {
 			try {
-				BookmarksEntryLocalServiceUtil.updateTagsAsset(
-					entry.getUserId(), entry, new String[0]);
+				BookmarksEntryLocalServiceUtil.updateAsset(
+					entry.getUserId(), entry, new long[0], new String[0]);
 			}
 			catch (Exception e) {
 				if (_log.isWarnEnabled()) {

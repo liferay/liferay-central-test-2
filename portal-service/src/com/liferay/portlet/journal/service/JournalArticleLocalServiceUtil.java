@@ -780,6 +780,14 @@ public class JournalArticleLocalServiceUtil {
 			andOperator);
 	}
 
+	public static void updateAsset(long userId,
+		com.liferay.portlet.journal.model.JournalArticle article,
+		long[] assetCategoryIds, java.lang.String[] tagsEntries)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		getService().updateAsset(userId, article, assetCategoryIds, tagsEntries);
+	}
+
 	public static com.liferay.portlet.journal.model.JournalArticle updateArticle(
 		long userId, long groupId, java.lang.String articleId, double version,
 		boolean incrementVersion, java.lang.String content)
@@ -825,15 +833,6 @@ public class JournalArticleLocalServiceUtil {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService().updateContent(groupId, articleId, version, content);
-	}
-
-	public static void updateTagsAsset(long userId,
-		com.liferay.portlet.journal.model.JournalArticle article,
-		long[] assetCategoryIds, java.lang.String[] tagsEntries)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		getService()
-			.updateTagsAsset(userId, article, assetCategoryIds, tagsEntries);
 	}
 
 	public static JournalArticleLocalService getService() {

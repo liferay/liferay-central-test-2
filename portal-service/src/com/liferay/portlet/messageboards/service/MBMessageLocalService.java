@@ -333,6 +333,12 @@ public interface MBMessageLocalService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	public void updateAsset(long userId,
+		com.liferay.portlet.messageboards.model.MBMessage message,
+		long[] assetCategoryIds, java.lang.String[] tagsEntries)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.messageboards.model.MBMessage updateDiscussionMessage(
 		long userId, long messageId, java.lang.String subject,
 		java.lang.String body)
@@ -355,12 +361,6 @@ public interface MBMessageLocalService {
 
 	public com.liferay.portlet.messageboards.model.MBMessage updateMessage(
 		long messageId, java.lang.String body)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
-	public void updateTagsAsset(long userId,
-		com.liferay.portlet.messageboards.model.MBMessage message,
-		java.lang.String[] tagsEntries)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 }

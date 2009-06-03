@@ -717,6 +717,14 @@ public class UserLocalServiceUtil {
 		return getService().updateAgreedToTermsOfUse(userId, agreedToTermsOfUse);
 	}
 
+	public static void updateAsset(long userId,
+		com.liferay.portal.model.User user, long[] assetCategoryIds,
+		java.lang.String[] tagsEntries)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		getService().updateAsset(userId, user, assetCategoryIds, tagsEntries);
+	}
+
 	public static com.liferay.portal.model.User updateCreateDate(long userId,
 		java.util.Date createDate)
 		throws com.liferay.portal.PortalException,
@@ -883,13 +891,6 @@ public class UserLocalServiceUtil {
 			facebookSn, icqSn, jabberSn, msnSn, mySpaceSn, skypeSn, twitterSn,
 			ymSn, jobTitle, groupIds, organizationIds, roleIds, userGroupRoles,
 			userGroupIds, serviceContext);
-	}
-
-	public static void updateTagsAsset(long userId,
-		com.liferay.portal.model.User user, java.lang.String[] tagsEntries)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		getService().updateTagsAsset(userId, user, tagsEntries);
 	}
 
 	public static UserLocalService getService() {

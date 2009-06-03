@@ -120,15 +120,17 @@ public class BookmarksEntryLocalServiceImpl
 				serviceContext.getGuestPermissions());
 		}
 
+		// Asset
+
+		updateAsset(
+			userId, entry, serviceContext.getAssetCategoryIds(),
+			serviceContext.getTagsEntries());
+
 		// Expando
 
 		ExpandoBridge expandoBridge = entry.getExpandoBridge();
 
 		expandoBridge.setAttributes(serviceContext);
-
-		// Tags
-
-		updateTagsAsset(userId, entry, serviceContext.getTagsEntries());
 
 		// Indexer
 
@@ -215,14 +217,14 @@ public class BookmarksEntryLocalServiceImpl
 			_log.error("Deleting index " + entry.getEntryId(), se);
 		}
 
-		// Tags
-
-		tagsAssetLocalService.deleteAsset(
-			BookmarksEntry.class.getName(), entry.getEntryId());
-
 		// Expando
 
 		expandoValueLocalService.deleteValues(
+			BookmarksEntry.class.getName(), entry.getEntryId());
+
+		// Asset
+
+		tagsAssetLocalService.deleteAsset(
 			BookmarksEntry.class.getName(), entry.getEntryId());
 
 		// Resources
@@ -366,6 +368,18 @@ public class BookmarksEntryLocalServiceImpl
 		}
 	}
 
+	public void updateAsset(
+			long userId, BookmarksEntry entry, long[] assetCategoryIds,
+			String[] tagsEntries)
+		throws PortalException, SystemException {
+	
+		tagsAssetLocalService.updateAsset(
+			userId, entry.getGroupId(), BookmarksEntry.class.getName(),
+			entry.getEntryId(), assetCategoryIds, tagsEntries, true, null, null,
+			null, null, ContentTypes.TEXT_PLAIN, entry.getName(),
+			entry.getComments(), null, entry.getUrl(), 0, 0, null, false);
+	}
+
 	public BookmarksEntry updateEntry(
 			long userId, long entryId, long folderId, String name, String url,
 			String comments, ServiceContext serviceContext)
@@ -392,34 +406,23 @@ public class BookmarksEntryLocalServiceImpl
 
 		bookmarksEntryPersistence.update(entry, false);
 
+		// Asset
+
+		updateAsset(
+			userId, entry, serviceContext.getAssetCategoryIds(),
+			serviceContext.getTagsEntries());
+
 		// Expando
 
 		ExpandoBridge expandoBridge = entry.getExpandoBridge();
 
 		expandoBridge.setAttributes(serviceContext);
 
-		// Tags
-
-		updateTagsAsset(userId, entry, serviceContext.getTagsEntries());
-
 		// Indexer
 
 		reIndex(entry);
 
 		return entry;
-	}
-
-	public void updateTagsAsset(
-			long userId, BookmarksEntry entry, String[] tagsEntries)
-		throws PortalException, SystemException {
-
-		long[] assetCategoryIds = null;
-
-		tagsAssetLocalService.updateAsset(
-			userId, entry.getGroupId(), BookmarksEntry.class.getName(),
-			entry.getEntryId(), assetCategoryIds, tagsEntries, true, null, null,
-			null, null, ContentTypes.TEXT_PLAIN, entry.getName(),
-			entry.getComments(), null, entry.getUrl(), 0, 0, null, false);
 	}
 
 	protected BookmarksFolder getFolder(BookmarksEntry entry, long folderId)

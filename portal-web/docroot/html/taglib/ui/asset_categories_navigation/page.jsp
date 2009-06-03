@@ -78,19 +78,19 @@ PortletURL portletURL = renderResponse.createRenderURL();
 </script>
 
 <%!
-	private void _buildCategoriesNavigation(List<AssetCategory> categories, long curCategoryId, PortletURL portletURL, StringBuilder sb) throws Exception {
+private void _buildCategoriesNavigation(List<AssetCategory> categories, long curCategoryId, PortletURL portletURL, StringBuilder sb) throws Exception {
 	for (AssetCategory category : categories) {
 		long categoryId = category.getCategoryId();
-		String categoryName = category.getName();
+		String name = category.getName();
 
-		List<AssetCategory> categoriesyChildren = AssetCategoryServiceUtil.getChildCategories(category.getCategoryId());
+		List<AssetCategory> categoriesChildren = AssetCategoryServiceUtil.getChildCategories(category.getCategoryId());
 
 		sb.append("<li>");
 		sb.append("<span>");
 
 		if (categoryId == curCategoryId) {
 			sb.append("<b>");
-			sb.append(categoryName);
+			sb.append(name);
 			sb.append("</b>");
 		}
 		else {
@@ -99,16 +99,16 @@ PortletURL portletURL = renderResponse.createRenderURL();
 			sb.append("<a href=\"");
 			sb.append(portletURL.toString());
 			sb.append("\">");
-			sb.append(categoryName);
+			sb.append(name);
 			sb.append("</a>");
 		}
 
 		sb.append("</span>");
 
-		if (!categoriesyChildren.isEmpty()) {
+		if (!categoriesChildren.isEmpty()) {
 			sb.append("<ul>");
 
-			_buildCategoriesNavigation(categoriesyChildren, curCategoryId, portletURL, sb);
+			_buildCategoriesNavigation(categoriesChildren, curCategoryId, portletURL, sb);
 
 			sb.append("</ul>");
 		}

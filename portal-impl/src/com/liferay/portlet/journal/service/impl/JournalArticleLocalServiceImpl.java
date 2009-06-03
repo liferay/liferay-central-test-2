@@ -323,6 +323,12 @@ public class JournalArticleLocalServiceImpl
 		saveImages(
 			smallImage, article.getSmallImageId(), smallFile, smallBytes);
 
+		// Asset
+
+		updateAsset(
+			userId, article, serviceContext.getAssetCategoryIds(),
+			serviceContext.getTagsEntries());
+
 		// Message boards
 
 		if (PropsValues.JOURNAL_ARTICLE_COMMENTS_ENABLED) {
@@ -330,12 +336,6 @@ public class JournalArticleLocalServiceImpl
 				userId, article.getUserName(),
 				JournalArticle.class.getName(), resourcePrimKey);
 		}
-
-		// Tags
-
-		updateTagsAsset(
-			userId, article, serviceContext.getAssetCategoryIds(),
-			serviceContext.getTagsEntries());
 
 		// Email
 
@@ -674,13 +674,13 @@ public class JournalArticleLocalServiceImpl
 				newArticle.getSmallImageId(), smallBytes);
 		}
 
-		// Tags
+		// Asset
 
 		String[] tagsEntries = tagsEntryLocalService.getEntryNames(
 			JournalArticle.class.getName(), oldArticle.getResourcePrimKey(),
 			TagsEntryConstants.FOLKSONOMY_TAG);
 
-		updateTagsAsset(userId, newArticle, null, tagsEntries);
+		updateAsset(userId, newArticle, null, tagsEntries);
 
 		return newArticle;
 	}
@@ -1697,6 +1697,43 @@ public class JournalArticleLocalServiceImpl
 			approved, expired, reviewDate, andOperator);
 	}
 
+	public void updateAsset(
+			long userId, JournalArticle article, long[] assetCategoryIds,
+			String[] tagsEntries)
+		throws PortalException, SystemException {
+
+		// Get the earliest display date and latest expiration date among
+		// all article versions
+
+		Date[] dateInterval = getDateInterval(
+			article.getGroupId(), article.getArticleId(),
+			article.getDisplayDate(), article.getExpirationDate());
+
+		Date displayDate = dateInterval[0];
+		Date expirationDate = dateInterval[1];
+
+		boolean visible = article.getApproved();
+
+		if (!visible &&
+			(article.getVersion() != JournalArticleImpl.DEFAULT_VERSION)) {
+
+			int approvedArticlesCount =
+				journalArticlePersistence.countByG_A_A(
+					article.getGroupId(), article.getArticleId(), true);
+
+			if (approvedArticlesCount > 0) {
+				visible = true;
+			}
+		}
+
+		tagsAssetLocalService.updateAsset(
+			userId, article.getGroupId(), JournalArticle.class.getName(),
+			article.getResourcePrimKey(), assetCategoryIds, tagsEntries,
+			visible, null, null, displayDate, expirationDate,
+			ContentTypes.TEXT_HTML, article.getTitle(),
+			article.getDescription(), null, null, 0, 0, null, false);
+	}
+
 	public JournalArticle updateArticle(
 			long userId, long groupId, String articleId, double version,
 			boolean incrementVersion, String content)
@@ -1957,7 +1994,7 @@ public class JournalArticleLocalServiceImpl
 		long[] assetCategoryIds = serviceContext.getAssetCategoryIds();
 		String[] tagsEntries = serviceContext.getTagsEntries();
 
-		updateTagsAsset(userId, article, assetCategoryIds, tagsEntries);
+		updateAsset(userId, article, assetCategoryIds, tagsEntries);
 
 		// Email
 
@@ -1992,43 +2029,6 @@ public class JournalArticleLocalServiceImpl
 		journalArticlePersistence.update(article, false);
 
 		return article;
-	}
-
-	public void updateTagsAsset(
-			long userId, JournalArticle article, long[] assetCategoryIds,
-			String[] tagsEntries)
-		throws PortalException, SystemException {
-
-		// Get the earliest display date and latest expiration date among
-		// all article versions
-
-		Date[] dateInterval = getDateInterval(
-			article.getGroupId(), article.getArticleId(),
-			article.getDisplayDate(), article.getExpirationDate());
-
-		Date displayDate = dateInterval[0];
-		Date expirationDate = dateInterval[1];
-
-		boolean visible = article.getApproved();
-
-		if (!visible &&
-			(article.getVersion() != JournalArticleImpl.DEFAULT_VERSION)) {
-
-			int approvedArticlesCount =
-				journalArticlePersistence.countByG_A_A(
-					article.getGroupId(), article.getArticleId(), true);
-
-			if (approvedArticlesCount > 0) {
-				visible = true;
-			}
-		}
-
-		tagsAssetLocalService.updateAsset(
-			userId, article.getGroupId(), JournalArticle.class.getName(),
-			article.getResourcePrimKey(), assetCategoryIds, tagsEntries,
-			visible, null, null, displayDate, expirationDate,
-			ContentTypes.TEXT_HTML, article.getTitle(),
-			article.getDescription(), null, null, 0, 0, null, false);
 	}
 
 	protected void checkStructure(JournalArticle article)

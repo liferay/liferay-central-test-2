@@ -544,6 +544,11 @@ public interface UserLocalService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	public void updateAsset(long userId, com.liferay.portal.model.User user,
+		long[] assetCategoryIds, java.lang.String[] tagsEntries)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
 	public com.liferay.portal.model.User updateCreateDate(long userId,
 		java.util.Date createDate)
 		throws com.liferay.portal.PortalException,
@@ -653,11 +658,6 @@ public interface UserLocalService {
 		java.util.List<com.liferay.portal.model.UserGroupRole> userGroupRoles,
 		long[] userGroupIds,
 		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
-	public void updateTagsAsset(long userId,
-		com.liferay.portal.model.User user, java.lang.String[] tagsEntries)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 }

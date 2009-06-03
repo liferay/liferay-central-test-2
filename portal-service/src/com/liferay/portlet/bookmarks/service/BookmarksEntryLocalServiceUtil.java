@@ -263,6 +263,14 @@ public class BookmarksEntryLocalServiceUtil {
 		getService().reIndex(entry);
 	}
 
+	public static void updateAsset(long userId,
+		com.liferay.portlet.bookmarks.model.BookmarksEntry entry,
+		long[] assetCategoryIds, java.lang.String[] tagsEntries)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		getService().updateAsset(userId, entry, assetCategoryIds, tagsEntries);
+	}
+
 	public static com.liferay.portlet.bookmarks.model.BookmarksEntry updateEntry(
 		long userId, long entryId, long folderId, java.lang.String name,
 		java.lang.String url, java.lang.String comments,
@@ -272,14 +280,6 @@ public class BookmarksEntryLocalServiceUtil {
 		return getService()
 				   .updateEntry(userId, entryId, folderId, name, url, comments,
 			serviceContext);
-	}
-
-	public static void updateTagsAsset(long userId,
-		com.liferay.portlet.bookmarks.model.BookmarksEntry entry,
-		java.lang.String[] tagsEntries)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		getService().updateTagsAsset(userId, entry, tagsEntries);
 	}
 
 	public static BookmarksEntryLocalService getService() {

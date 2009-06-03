@@ -586,6 +586,12 @@ public interface JournalArticleLocalService {
 		java.util.Date reviewDate, boolean andOperator)
 		throws com.liferay.portal.SystemException;
 
+	public void updateAsset(long userId,
+		com.liferay.portlet.journal.model.JournalArticle article,
+		long[] assetCategoryIds, java.lang.String[] tagsEntries)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.journal.model.JournalArticle updateArticle(
 		long userId, long groupId, java.lang.String articleId, double version,
 		boolean incrementVersion, java.lang.String content)
@@ -613,12 +619,6 @@ public interface JournalArticleLocalService {
 	public com.liferay.portlet.journal.model.JournalArticle updateContent(
 		long groupId, java.lang.String articleId, double version,
 		java.lang.String content)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
-	public void updateTagsAsset(long userId,
-		com.liferay.portlet.journal.model.JournalArticle article,
-		long[] assetCategoryIds, java.lang.String[] tagsEntries)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 }

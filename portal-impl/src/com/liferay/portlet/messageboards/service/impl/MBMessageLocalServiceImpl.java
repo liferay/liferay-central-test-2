@@ -434,9 +434,11 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		logAddMessage(messageId, stopWatch, 7);
 
-		// Subscriptions
+		// Asset
 
-		notifySubscribers(category, message, serviceContext, false);
+		updateAsset(
+			userId, message, serviceContext.getAssetCategoryIds(),
+			serviceContext.getTagsEntries());
 
 		logAddMessage(messageId, stopWatch, 8);
 
@@ -460,9 +462,9 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		logAddMessage(messageId, stopWatch, 9);
 
-		// Tags
+		// Subscriptions
 
-		updateTagsAsset(userId, message, serviceContext.getTagsEntries());
+		notifySubscribers(category, message, serviceContext, false);
 
 		logAddMessage(messageId, stopWatch, 10);
 
@@ -727,11 +729,6 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			mbCategoryPersistence.update(category, false);
 		}
 
-		// Tags
-
-		tagsAssetLocalService.deleteAsset(
-			MBMessage.class.getName(), message.getMessageId());
-
 		// Social
 
 		socialActivityLocalService.deleteActivities(
@@ -740,6 +737,11 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		// Ratings
 
 		ratingsStatsLocalService.deleteStats(
+			MBMessage.class.getName(), message.getMessageId());
+
+		// Asset
+
+		tagsAssetLocalService.deleteAsset(
 			MBMessage.class.getName(), message.getMessageId());
 
 		// Statistics
@@ -1090,6 +1092,22 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			userId, MBThread.class.getName(), message.getThreadId());
 	}
 
+	public void updateAsset(
+			long userId, MBMessage message, long[] assetCategoryIds,
+			String[] tagsEntries)
+		throws PortalException, SystemException {
+	
+		if (message.isDiscussion()) {
+			return;
+		}
+	
+		tagsAssetLocalService.updateAsset(
+			userId, message.getGroupId(), MBMessage.class.getName(),
+			message.getMessageId(), assetCategoryIds, tagsEntries, true, null,
+			null, null, null, ContentTypes.TEXT_HTML, message.getSubject(),
+			null, null, null, 0, 0, null, false);
+	}
+
 	public MBMessage updateDiscussionMessage(
 			long userId, long messageId, String subject, String body)
 		throws PortalException, SystemException {
@@ -1210,13 +1228,15 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		mbCategoryPersistence.update(category, false);
 
+		// Asset
+
+		updateAsset(
+			userId, message, serviceContext.getAssetCategoryIds(),
+			serviceContext.getTagsEntries());
+
 		// Subscriptions
 
 		notifySubscribers(category, message, serviceContext, true);
-
-		// Tags
-
-		updateTagsAsset(userId, message, serviceContext.getTagsEntries());
 
 		// Indexer
 
@@ -1283,23 +1303,6 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		mbMessagePersistence.update(message, false);
 
 		return message;
-	}
-
-	public void updateTagsAsset(
-			long userId, MBMessage message, String[] tagsEntries)
-		throws PortalException, SystemException {
-
-		if (message.isDiscussion()) {
-			return;
-		}
-
-		long[] assetCategoryIds = null;
-
-		tagsAssetLocalService.updateAsset(
-			userId, message.getGroupId(), MBMessage.class.getName(),
-			message.getMessageId(), assetCategoryIds, tagsEntries, true, null,
-			null, null, null, ContentTypes.TEXT_HTML, message.getSubject(),
-			null, null, null, 0, 0, null, false);
 	}
 
 	protected void deleteDiscussionSocialActivities(

@@ -92,9 +92,7 @@ private String _buildCategoryPath(AssetCategory category) throws PortalException
 
 	for (AssetCategory curCategory : category.getAncestors()) {
 		sb.append(curCategory.getName());
-		sb.append(StringPool.SPACE);
-		sb.append("&raquo;");
-		sb.append(StringPool.SPACE);
+		sb.append(" &raquo; ");
 	}
 
 	sb.append(category.getName());
@@ -103,14 +101,14 @@ private String _buildCategoryPath(AssetCategory category) throws PortalException
 }
 
 private List<AssetCategory> _filterCategories(List<AssetCategory> categories, AssetCategoryVocabulary vocabulary) {
-	List<AssetCategory> filteredEntries = new ArrayList<AssetCategory>();
+	List<AssetCategory> filteredCategories = new ArrayList<AssetCategory>();
 
 	for (AssetCategory category : categories) {
 		if (category.getVocabularyId() == vocabulary.getCategoryVocabularyId()) {
-			filteredEntries.add(category);
+			filteredCategories.add(category);
 		}
 	}
 
-	return filteredEntries;
+	return filteredCategories;
 }
 %>

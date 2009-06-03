@@ -583,6 +583,11 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 
 		// Categories
 
+		if (categoryIds != null) {
+			tagsAssetPersistence.setAssetCategories(
+				asset.getAssetId(), categoryIds);
+		}
+
 		if (categoryNames != null) {
 			for (int i = 0; i < categoryNames.length; i++) {
 				try {
@@ -598,13 +603,6 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 		}
 
 		tagsAssetPersistence.setTagsEntries(asset.getAssetId(), entries);
-
-		// Asset categories
-
-		if (categoryIds != null) {
-			tagsAssetPersistence.setAssetCategories(
-				asset.getAssetId(), categoryIds);
-		}
 
 		// Update asset after entries so that asset listeners have access the
 		// saved entries

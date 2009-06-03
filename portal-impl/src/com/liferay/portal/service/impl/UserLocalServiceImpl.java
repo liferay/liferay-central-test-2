@@ -358,14 +358,6 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			companyId, 0, creatorUserId, User.class.getName(), user.getUserId(),
 			false, false, false);
 
-		// Expando
-
-		UserIndexer.setEnabled(false);
-
-		ExpandoBridge expandoBridge = user.getExpandoBridge();
-
-		expandoBridge.setAttributes(serviceContext);
-
 		// Mail
 
 		if (user.hasCompanyMx()) {
@@ -500,6 +492,24 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		userPersistence.setUserGroups(
 			userId, ListUtil.fromCollection(userGroups));
 
+		// Asset
+
+		if (serviceContext != null) {
+			updateAsset(
+				creatorUserId, user, serviceContext.getAssetCategoryIds(),
+				serviceContext.getTagsEntries());
+		}
+
+		// Expando
+
+		UserIndexer.setEnabled(false);
+
+		ExpandoBridge expandoBridge = user.getExpandoBridge();
+
+		expandoBridge.setAttributes(serviceContext);
+
+		UserIndexer.setEnabled(true);
+
 		// Email
 
 		if (sendEmail) {
@@ -511,17 +521,9 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			}
 		}
 
-		// Tags
-
-		if (serviceContext != null) {
-			updateTagsAsset(
-				creatorUserId, user, serviceContext.getTagsEntries());
-		}
-
 		// Indexer
 
 		try {
-			UserIndexer.setEnabled(true);
 			UserIndexer.updateUser(user);
 		}
 		catch (SearchException se) {
@@ -1866,6 +1868,17 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		return user;
 	}
 
+	public void updateAsset(
+			long userId, User user, long[] assetCategoryIds,
+			String[] tagsEntries)
+		throws PortalException, SystemException {
+	
+		tagsAssetLocalService.updateAsset(
+			userId, 0, User.class.getName(), user.getUserId(), assetCategoryIds,
+			tagsEntries, true, null, null, null, null, null, user.getFullName(),
+			null, null, null, 0, 0, null, false);
+	}
+
 	public User updateCreateDate(long userId, Date createDate)
 		throws PortalException, SystemException {
 
@@ -2338,14 +2351,6 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		userPersistence.update(user, false);
 
-		// Expando
-
-		UserIndexer.setEnabled(false);
-
-		ExpandoBridge expandoBridge = user.getExpandoBridge();
-
-		expandoBridge.setAttributes(serviceContext);
-
 		// Contact
 
 		Date birthday = PortalUtil.getDate(
@@ -2456,16 +2461,27 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		announcementsDeliveryLocalService.getUserDeliveries(user.getUserId());
 
-		// Tags
+		// Asset
 
 		if (serviceContext != null) {
-			updateTagsAsset(userId, user, serviceContext.getTagsEntries());
+			updateAsset(
+				userId, user, serviceContext.getAssetCategoryIds(),
+				serviceContext.getTagsEntries());
 		}
+
+		// Expando
+
+		UserIndexer.setEnabled(false);
+
+		ExpandoBridge expandoBridge = user.getExpandoBridge();
+
+		expandoBridge.setAttributes(serviceContext);
+
+		UserIndexer.setEnabled(true);
 
 		// Indexer
 
 		try {
-			UserIndexer.setEnabled(true);
 			UserIndexer.updateUser(user);
 		}
 		catch (SearchException se) {
@@ -2477,17 +2493,6 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		PermissionCacheUtil.clearCache();
 
 		return user;
-	}
-
-	public void updateTagsAsset(long userId, User user, String[] tagsEntries)
-		throws PortalException, SystemException {
-
-		long[] assetCategoryIds = null;
-
-		tagsAssetLocalService.updateAsset(
-			userId, 0, User.class.getName(), user.getUserId(), assetCategoryIds,
-			tagsEntries, true, null, null, null, null, null, user.getFullName(),
-			null, null, null, 0, 0, null, false);
 	}
 
 	protected int authenticate(

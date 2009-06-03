@@ -292,6 +292,12 @@ public interface BlogsEntryLocalService {
 		long groupId, long userId, long ownerUserId, java.lang.String keywords,
 		int start, int end) throws com.liferay.portal.SystemException;
 
+	public void updateAsset(long userId,
+		com.liferay.portlet.blogs.model.BlogsEntry entry,
+		long[] assetCategoryIds, java.lang.String[] tagsEntries)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.blogs.model.BlogsEntry updateEntry(long userId,
 		long entryId, java.lang.String title, java.lang.String content,
 		int displayDateMonth, int displayDateDay, int displayDateYear,
@@ -305,12 +311,6 @@ public interface BlogsEntryLocalService {
 		com.liferay.portlet.blogs.model.BlogsEntry entry,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
-	public void updateTagsAsset(long userId,
-		com.liferay.portlet.blogs.model.BlogsEntry entry,
-		java.lang.String[] tagsEntries)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 }

@@ -420,7 +420,7 @@ public class WikiPageLocalServiceUtil {
 		java.lang.String[] tagsEntries)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		getService().updateTagsAsset(userId, page, assetCategoryIds, tagsEntries);
+		getService().updateAsset(userId, page, assetCategoryIds, tagsEntries);
 	}
 
 	public static void validateTitle(java.lang.String title)
