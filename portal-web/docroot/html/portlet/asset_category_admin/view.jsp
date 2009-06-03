@@ -113,7 +113,7 @@
 
 						<div class="category-vocabulary-permissions-actions">
 							<liferay-ui:input-permissions
-								modelName="<%= AssetCategoryVocabulary.class.getName() %>"
+								modelName="<%= AssetVocabulary.class.getName() %>"
 							/>
 						</div>
 

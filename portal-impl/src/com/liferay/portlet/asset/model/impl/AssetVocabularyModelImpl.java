@@ -27,8 +27,8 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
 
-import com.liferay.portlet.asset.model.AssetCategoryVocabulary;
-import com.liferay.portlet.asset.model.AssetCategoryVocabularySoap;
+import com.liferay.portlet.asset.model.AssetVocabulary;
+import com.liferay.portlet.asset.model.AssetVocabularySoap;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
 
@@ -43,7 +43,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * <a href="AssetCategoryVocabularyModelImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="AssetVocabularyModelImpl.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be
@@ -51,21 +51,21 @@ import java.util.List;
  * </p>
  *
  * <p>
- * This class is a model that represents the <code>AssetCategoryVocabulary</code> table
+ * This class is a model that represents the <code>AssetVocabulary</code> table
  * in the database.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.asset.model.AssetCategoryVocabulary
- * @see com.liferay.portlet.asset.model.AssetCategoryVocabularyModel
- * @see com.liferay.portlet.asset.model.impl.AssetCategoryVocabularyImpl
+ * @see com.liferay.portlet.asset.model.AssetVocabulary
+ * @see com.liferay.portlet.asset.model.AssetVocabularyModel
+ * @see com.liferay.portlet.asset.model.impl.AssetVocabularyImpl
  *
  */
-public class AssetCategoryVocabularyModelImpl extends BaseModelImpl<AssetCategoryVocabulary> {
-	public static final String TABLE_NAME = "AssetCategoryVocabulary";
+public class AssetVocabularyModelImpl extends BaseModelImpl<AssetVocabulary> {
+	public static final String TABLE_NAME = "AssetVocabulary";
 	public static final Object[][] TABLE_COLUMNS = {
-			{ "categoryVocabularyId", new Integer(Types.BIGINT) },
+			{ "vocabularyId", new Integer(Types.BIGINT) },
 			
 
 			{ "groupId", new Integer(Types.BIGINT) },
@@ -91,23 +91,22 @@ public class AssetCategoryVocabularyModelImpl extends BaseModelImpl<AssetCategor
 
 			{ "description", new Integer(Types.VARCHAR) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table AssetCategoryVocabulary (categoryVocabularyId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name VARCHAR(75) null,description VARCHAR(75) null)";
-	public static final String TABLE_SQL_DROP = "drop table AssetCategoryVocabulary";
+	public static final String TABLE_SQL_CREATE = "create table AssetVocabulary (vocabularyId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name VARCHAR(75) null,description VARCHAR(75) null)";
+	public static final String TABLE_SQL_DROP = "drop table AssetVocabulary";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
 	public static final boolean ENTITY_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
-				"value.object.entity.cache.enabled.com.liferay.portlet.asset.model.AssetCategoryVocabulary"),
+				"value.object.entity.cache.enabled.com.liferay.portlet.asset.model.AssetVocabulary"),
 			true);
 	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
-				"value.object.finder.cache.enabled.com.liferay.portlet.asset.model.AssetCategoryVocabulary"),
+				"value.object.finder.cache.enabled.com.liferay.portlet.asset.model.AssetVocabulary"),
 			true);
 
-	public static AssetCategoryVocabulary toModel(
-		AssetCategoryVocabularySoap soapModel) {
-		AssetCategoryVocabulary model = new AssetCategoryVocabularyImpl();
+	public static AssetVocabulary toModel(AssetVocabularySoap soapModel) {
+		AssetVocabulary model = new AssetVocabularyImpl();
 
-		model.setCategoryVocabularyId(soapModel.getCategoryVocabularyId());
+		model.setVocabularyId(soapModel.getVocabularyId());
 		model.setGroupId(soapModel.getGroupId());
 		model.setCompanyId(soapModel.getCompanyId());
 		model.setUserId(soapModel.getUserId());
@@ -120,11 +119,11 @@ public class AssetCategoryVocabularyModelImpl extends BaseModelImpl<AssetCategor
 		return model;
 	}
 
-	public static List<AssetCategoryVocabulary> toModels(
-		AssetCategoryVocabularySoap[] soapModels) {
-		List<AssetCategoryVocabulary> models = new ArrayList<AssetCategoryVocabulary>(soapModels.length);
+	public static List<AssetVocabulary> toModels(
+		AssetVocabularySoap[] soapModels) {
+		List<AssetVocabulary> models = new ArrayList<AssetVocabulary>(soapModels.length);
 
-		for (AssetCategoryVocabularySoap soapModel : soapModels) {
+		for (AssetVocabularySoap soapModel : soapModels) {
 			models.add(toModel(soapModel));
 		}
 
@@ -132,29 +131,29 @@ public class AssetCategoryVocabularyModelImpl extends BaseModelImpl<AssetCategor
 	}
 
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(
-				"lock.expiration.time.com.liferay.portlet.asset.model.AssetCategoryVocabulary"));
+				"lock.expiration.time.com.liferay.portlet.asset.model.AssetVocabulary"));
 
-	public AssetCategoryVocabularyModelImpl() {
+	public AssetVocabularyModelImpl() {
 	}
 
 	public long getPrimaryKey() {
-		return _categoryVocabularyId;
+		return _vocabularyId;
 	}
 
 	public void setPrimaryKey(long pk) {
-		setCategoryVocabularyId(pk);
+		setVocabularyId(pk);
 	}
 
 	public Serializable getPrimaryKeyObj() {
-		return new Long(_categoryVocabularyId);
+		return new Long(_vocabularyId);
 	}
 
-	public long getCategoryVocabularyId() {
-		return _categoryVocabularyId;
+	public long getVocabularyId() {
+		return _vocabularyId;
 	}
 
-	public void setCategoryVocabularyId(long categoryVocabularyId) {
-		_categoryVocabularyId = categoryVocabularyId;
+	public void setVocabularyId(long vocabularyId) {
+		_vocabularyId = vocabularyId;
 	}
 
 	public long getGroupId() {
@@ -239,17 +238,17 @@ public class AssetCategoryVocabularyModelImpl extends BaseModelImpl<AssetCategor
 		_description = description;
 	}
 
-	public AssetCategoryVocabulary toEscapedModel() {
+	public AssetVocabulary toEscapedModel() {
 		if (isEscapedModel()) {
-			return (AssetCategoryVocabulary)this;
+			return (AssetVocabulary)this;
 		}
 		else {
-			AssetCategoryVocabulary model = new AssetCategoryVocabularyImpl();
+			AssetVocabulary model = new AssetVocabularyImpl();
 
 			model.setNew(isNew());
 			model.setEscapedModel(true);
 
-			model.setCategoryVocabularyId(getCategoryVocabularyId());
+			model.setVocabularyId(getVocabularyId());
 			model.setGroupId(getGroupId());
 			model.setCompanyId(getCompanyId());
 			model.setUserId(getUserId());
@@ -259,8 +258,8 @@ public class AssetCategoryVocabularyModelImpl extends BaseModelImpl<AssetCategor
 			model.setName(HtmlUtil.escape(getName()));
 			model.setDescription(HtmlUtil.escape(getDescription()));
 
-			model = (AssetCategoryVocabulary)Proxy.newProxyInstance(AssetCategoryVocabulary.class.getClassLoader(),
-					new Class[] { AssetCategoryVocabulary.class },
+			model = (AssetVocabulary)Proxy.newProxyInstance(AssetVocabulary.class.getClassLoader(),
+					new Class[] { AssetVocabulary.class },
 					new ReadOnlyBeanHandler(model));
 
 			return model;
@@ -269,7 +268,7 @@ public class AssetCategoryVocabularyModelImpl extends BaseModelImpl<AssetCategor
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = new ExpandoBridgeImpl(AssetCategoryVocabulary.class.getName(),
+			_expandoBridge = new ExpandoBridgeImpl(AssetVocabulary.class.getName(),
 					getPrimaryKey());
 		}
 
@@ -277,9 +276,9 @@ public class AssetCategoryVocabularyModelImpl extends BaseModelImpl<AssetCategor
 	}
 
 	public Object clone() {
-		AssetCategoryVocabularyImpl clone = new AssetCategoryVocabularyImpl();
+		AssetVocabularyImpl clone = new AssetVocabularyImpl();
 
-		clone.setCategoryVocabularyId(getCategoryVocabularyId());
+		clone.setVocabularyId(getVocabularyId());
 		clone.setGroupId(getGroupId());
 		clone.setCompanyId(getCompanyId());
 		clone.setUserId(getUserId());
@@ -292,10 +291,10 @@ public class AssetCategoryVocabularyModelImpl extends BaseModelImpl<AssetCategor
 		return clone;
 	}
 
-	public int compareTo(AssetCategoryVocabulary assetCategoryVocabulary) {
+	public int compareTo(AssetVocabulary assetVocabulary) {
 		int value = 0;
 
-		value = getName().compareTo(assetCategoryVocabulary.getName());
+		value = getName().compareTo(assetVocabulary.getName());
 
 		if (value != 0) {
 			return value;
@@ -309,16 +308,16 @@ public class AssetCategoryVocabularyModelImpl extends BaseModelImpl<AssetCategor
 			return false;
 		}
 
-		AssetCategoryVocabulary assetCategoryVocabulary = null;
+		AssetVocabulary assetVocabulary = null;
 
 		try {
-			assetCategoryVocabulary = (AssetCategoryVocabulary)obj;
+			assetVocabulary = (AssetVocabulary)obj;
 		}
 		catch (ClassCastException cce) {
 			return false;
 		}
 
-		long pk = assetCategoryVocabulary.getPrimaryKey();
+		long pk = assetVocabulary.getPrimaryKey();
 
 		if (getPrimaryKey() == pk) {
 			return true;
@@ -335,8 +334,8 @@ public class AssetCategoryVocabularyModelImpl extends BaseModelImpl<AssetCategor
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 
-		sb.append("{categoryVocabularyId=");
-		sb.append(getCategoryVocabularyId());
+		sb.append("{vocabularyId=");
+		sb.append(getVocabularyId());
 		sb.append(", groupId=");
 		sb.append(getGroupId());
 		sb.append(", companyId=");
@@ -362,12 +361,12 @@ public class AssetCategoryVocabularyModelImpl extends BaseModelImpl<AssetCategor
 		StringBuilder sb = new StringBuilder();
 
 		sb.append("<model><model-name>");
-		sb.append("com.liferay.portlet.asset.model.AssetCategoryVocabulary");
+		sb.append("com.liferay.portlet.asset.model.AssetVocabulary");
 		sb.append("</model-name>");
 
 		sb.append(
-			"<column><column-name>categoryVocabularyId</column-name><column-value><![CDATA[");
-		sb.append(getCategoryVocabularyId());
+			"<column><column-name>vocabularyId</column-name><column-value><![CDATA[");
+		sb.append(getVocabularyId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>groupId</column-name><column-value><![CDATA[");
@@ -407,7 +406,7 @@ public class AssetCategoryVocabularyModelImpl extends BaseModelImpl<AssetCategor
 		return sb.toString();
 	}
 
-	private long _categoryVocabularyId;
+	private long _vocabularyId;
 	private long _groupId;
 	private long _originalGroupId;
 	private boolean _setOriginalGroupId;

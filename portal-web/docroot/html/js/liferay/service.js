@@ -418,14 +418,14 @@ Liferay.Service.registerClass(
 );
 
 Liferay.Service.registerClass(
-	Liferay.Service.Asset, "AssetCategoryVocabulary",
+	Liferay.Service.Asset, "AssetVocabulary",
 	{
-		addCategoryVocabulary: true,
-		deleteCategoryVocabulary: true,
-		getCompanyCategoryVocabularies: true,
-		getGroupCategoryVocabularies: true,
+		addVocabulary: true,
+		deleteVocabulary: true,
+		getCompanyVocabularies: true,
+		getGroupVocabularies: true,
 		getVocabulary: true,
-		updateCategoryVocabulary: true
+		updateVocabulary: true
 	}
 );
 

@@ -109,11 +109,11 @@
 		<reference package-path="com.liferay.counter" entity="Counter" />
 		<reference package-path="com.liferay.portal" entity="User" />
 	</entity>
-	<entity name="AssetCategoryVocabulary" local-service="true" remote-service="true">
+	<entity name="AssetVocabulary" local-service="true" remote-service="true">
 
 		<!-- PK fields -->
 
-		<column name="categoryVocabularyId" type="long" primary="true" />
+		<column name="vocabularyId" type="long" primary="true" />
 
 		<!-- Group instance -->
 
@@ -146,7 +146,7 @@
 		<finder name="CompanyId" return-type="Collection">
 			<finder-column name="companyId" />
 		</finder>
-		<finder name="G_N" return-type="AssetCategoryVocabulary" unique="true">
+		<finder name="G_N" return-type="AssetVocabulary" unique="true">
 			<finder-column name="groupId" />
 			<finder-column name="name" />
 		</finder>
@@ -161,9 +161,9 @@
 	<exceptions>
 		<exception>AssetCategory</exception>
 		<exception>DuplicateCategory</exception>
-		<exception>DuplicateCategoryVocabulary</exception>
+		<exception>DuplicateVocabulary</exception>
 		<exception>CategoryPropertyKey</exception>
 		<exception>CategoryPropertyValue</exception>
-		<exception>CategoryVocabularyName</exception>
+		<exception>VocabularyName</exception>
 	</exceptions>
 </service-builder>

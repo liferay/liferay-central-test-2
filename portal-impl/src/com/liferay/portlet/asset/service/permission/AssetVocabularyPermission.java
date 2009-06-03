@@ -26,68 +26,64 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.PermissionChecker;
-import com.liferay.portlet.asset.model.AssetCategoryVocabulary;
-import com.liferay.portlet.asset.service.AssetCategoryVocabularyLocalServiceUtil;
+import com.liferay.portlet.asset.model.AssetVocabulary;
+import com.liferay.portlet.asset.service.AssetVocabularyLocalServiceUtil;
 
 /**
- * <a href="AssetCategoryVocabularyPermission.java.html"><b><i>View Source</i>
- * </b></a>
+ * <a href="AssetVocabularyPermission.java.html"><b><i>View Source</i></b></a>
  *
  * @author Eduardo Lundgren
  * @author JorgeFerrer
  *
  */
-public class AssetCategoryVocabularyPermission {
+public class AssetVocabularyPermission {
 
 	public static void check(
-			PermissionChecker permissionChecker, long categoryVocabularyId,
+			PermissionChecker permissionChecker, long vocabularyId,
 			String actionId)
 		throws PortalException, SystemException {
 
-		if (!contains(permissionChecker, categoryVocabularyId, actionId)) {
+		if (!contains(permissionChecker, vocabularyId, actionId)) {
 			throw new PrincipalException();
 		}
 	}
 
 	public static void check(
-			PermissionChecker permissionChecker,
-			AssetCategoryVocabulary categoryVocabulary, String actionId)
+			PermissionChecker permissionChecker, AssetVocabulary vocabulary,
+			String actionId)
 		throws PortalException {
 
-		if (!contains(permissionChecker, categoryVocabulary, actionId)) {
+		if (!contains(permissionChecker, vocabulary, actionId)) {
 			throw new PrincipalException();
 		}
 	}
 
 	public static boolean contains(
-			PermissionChecker permissionChecker, long categoryVocabularyId,
+			PermissionChecker permissionChecker, long vocabularyId,
 			String actionId)
 		throws PortalException, SystemException {
 
-		AssetCategoryVocabulary categoryVocabulary =
-			AssetCategoryVocabularyLocalServiceUtil.getCategoryVocabulary(
-				categoryVocabularyId);
+		AssetVocabulary vocabulary =
+			AssetVocabularyLocalServiceUtil.getVocabulary(vocabularyId);
 
-		return contains(permissionChecker, categoryVocabulary, actionId);
+		return contains(permissionChecker, vocabulary, actionId);
 	}
 
 	public static boolean contains(
-		PermissionChecker permissionChecker,
-		AssetCategoryVocabulary categoryVocabulary, String actionId) {
+		PermissionChecker permissionChecker, AssetVocabulary vocabulary,
+		String actionId) {
 
 		if (permissionChecker.hasOwnerPermission(
-				categoryVocabulary.getCompanyId(),
-				AssetCategoryVocabulary.class.getName(),
-				categoryVocabulary.getCategoryVocabularyId(),
-				categoryVocabulary.getUserId(), actionId)) {
+				vocabulary.getCompanyId(), AssetVocabulary.class.getName(),
+				vocabulary.getVocabularyId(), vocabulary.getUserId(),
+				actionId)) {
 
 			return true;
 		}
 
 		return permissionChecker.hasPermission(
-			categoryVocabulary.getGroupId(),
-			AssetCategoryVocabulary.class.getName(),
-			categoryVocabulary.getCategoryVocabularyId(), actionId);
+			vocabulary.getGroupId(), AssetVocabulary.class.getName(),
+			vocabulary.getVocabularyId(), actionId);
 	}
 
 }

@@ -25,37 +25,37 @@ package com.liferay.portlet.asset.service.persistence;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 /**
- * <a href="AssetCategoryVocabularyPersistence.java.html"><b><i>View Source</i></b></a>
+ * <a href="AssetVocabularyPersistence.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public interface AssetCategoryVocabularyPersistence extends BasePersistence {
+public interface AssetVocabularyPersistence extends BasePersistence {
 	public void cacheResult(
-		com.liferay.portlet.asset.model.AssetCategoryVocabulary assetCategoryVocabulary);
+		com.liferay.portlet.asset.model.AssetVocabulary assetVocabulary);
 
 	public void cacheResult(
-		java.util.List<com.liferay.portlet.asset.model.AssetCategoryVocabulary> assetCategoryVocabularies);
+		java.util.List<com.liferay.portlet.asset.model.AssetVocabulary> assetVocabularies);
 
 	public void clearCache();
 
-	public com.liferay.portlet.asset.model.AssetCategoryVocabulary create(
-		long categoryVocabularyId);
+	public com.liferay.portlet.asset.model.AssetVocabulary create(
+		long vocabularyId);
 
-	public com.liferay.portlet.asset.model.AssetCategoryVocabulary remove(
-		long categoryVocabularyId)
+	public com.liferay.portlet.asset.model.AssetVocabulary remove(
+		long vocabularyId)
 		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.asset.NoSuchCategoryVocabularyException;
+			com.liferay.portlet.asset.NoSuchVocabularyException;
 
-	public com.liferay.portlet.asset.model.AssetCategoryVocabulary remove(
-		com.liferay.portlet.asset.model.AssetCategoryVocabulary assetCategoryVocabulary)
+	public com.liferay.portlet.asset.model.AssetVocabulary remove(
+		com.liferay.portlet.asset.model.AssetVocabulary assetVocabulary)
 		throws com.liferay.portal.SystemException;
 
 	/**
-	 * @deprecated Use <code>update(AssetCategoryVocabulary assetCategoryVocabulary, boolean merge)</code>.
+	 * @deprecated Use <code>update(AssetVocabulary assetVocabulary, boolean merge)</code>.
 	 */
-	public com.liferay.portlet.asset.model.AssetCategoryVocabulary update(
-		com.liferay.portlet.asset.model.AssetCategoryVocabulary assetCategoryVocabulary)
+	public com.liferay.portlet.asset.model.AssetVocabulary update(
+		com.liferay.portlet.asset.model.AssetVocabulary assetVocabulary)
 		throws com.liferay.portal.SystemException;
 
 	/**
@@ -63,96 +63,96 @@ public interface AssetCategoryVocabularyPersistence extends BasePersistence {
 	 * listeners to trigger the proper events associated with adding, deleting,
 	 * or updating an entity.
 	 *
-	 * @param        assetCategoryVocabulary the entity to add, update, or merge
+	 * @param        assetVocabulary the entity to add, update, or merge
 	 * @param        merge boolean value for whether to merge the entity. The
 	 *                default value is false. Setting merge to true is more
-	 *                expensive and should only be true when assetCategoryVocabulary is
+	 *                expensive and should only be true when assetVocabulary is
 	 *                transient. See LEP-5473 for a detailed discussion of this
 	 *                method.
 	 * @return        true if the portlet can be displayed via Ajax
 	 */
-	public com.liferay.portlet.asset.model.AssetCategoryVocabulary update(
-		com.liferay.portlet.asset.model.AssetCategoryVocabulary assetCategoryVocabulary,
+	public com.liferay.portlet.asset.model.AssetVocabulary update(
+		com.liferay.portlet.asset.model.AssetVocabulary assetVocabulary,
 		boolean merge) throws com.liferay.portal.SystemException;
 
-	public com.liferay.portlet.asset.model.AssetCategoryVocabulary updateImpl(
-		com.liferay.portlet.asset.model.AssetCategoryVocabulary assetCategoryVocabulary,
+	public com.liferay.portlet.asset.model.AssetVocabulary updateImpl(
+		com.liferay.portlet.asset.model.AssetVocabulary assetVocabulary,
 		boolean merge) throws com.liferay.portal.SystemException;
 
-	public com.liferay.portlet.asset.model.AssetCategoryVocabulary findByPrimaryKey(
-		long categoryVocabularyId)
+	public com.liferay.portlet.asset.model.AssetVocabulary findByPrimaryKey(
+		long vocabularyId)
 		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.asset.NoSuchCategoryVocabularyException;
+			com.liferay.portlet.asset.NoSuchVocabularyException;
 
-	public com.liferay.portlet.asset.model.AssetCategoryVocabulary fetchByPrimaryKey(
-		long categoryVocabularyId) throws com.liferay.portal.SystemException;
+	public com.liferay.portlet.asset.model.AssetVocabulary fetchByPrimaryKey(
+		long vocabularyId) throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portlet.asset.model.AssetCategoryVocabulary> findByGroupId(
+	public java.util.List<com.liferay.portlet.asset.model.AssetVocabulary> findByGroupId(
 		long groupId) throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portlet.asset.model.AssetCategoryVocabulary> findByGroupId(
+	public java.util.List<com.liferay.portlet.asset.model.AssetVocabulary> findByGroupId(
 		long groupId, int start, int end)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portlet.asset.model.AssetCategoryVocabulary> findByGroupId(
+	public java.util.List<com.liferay.portlet.asset.model.AssetVocabulary> findByGroupId(
 		long groupId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
-	public com.liferay.portlet.asset.model.AssetCategoryVocabulary findByGroupId_First(
+	public com.liferay.portlet.asset.model.AssetVocabulary findByGroupId_First(
 		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.asset.NoSuchCategoryVocabularyException;
+			com.liferay.portlet.asset.NoSuchVocabularyException;
 
-	public com.liferay.portlet.asset.model.AssetCategoryVocabulary findByGroupId_Last(
+	public com.liferay.portlet.asset.model.AssetVocabulary findByGroupId_Last(
 		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.asset.NoSuchCategoryVocabularyException;
+			com.liferay.portlet.asset.NoSuchVocabularyException;
 
-	public com.liferay.portlet.asset.model.AssetCategoryVocabulary[] findByGroupId_PrevAndNext(
-		long categoryVocabularyId, long groupId,
+	public com.liferay.portlet.asset.model.AssetVocabulary[] findByGroupId_PrevAndNext(
+		long vocabularyId, long groupId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.asset.NoSuchCategoryVocabularyException;
+			com.liferay.portlet.asset.NoSuchVocabularyException;
 
-	public java.util.List<com.liferay.portlet.asset.model.AssetCategoryVocabulary> findByCompanyId(
+	public java.util.List<com.liferay.portlet.asset.model.AssetVocabulary> findByCompanyId(
 		long companyId) throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portlet.asset.model.AssetCategoryVocabulary> findByCompanyId(
+	public java.util.List<com.liferay.portlet.asset.model.AssetVocabulary> findByCompanyId(
 		long companyId, int start, int end)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portlet.asset.model.AssetCategoryVocabulary> findByCompanyId(
+	public java.util.List<com.liferay.portlet.asset.model.AssetVocabulary> findByCompanyId(
 		long companyId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
-	public com.liferay.portlet.asset.model.AssetCategoryVocabulary findByCompanyId_First(
+	public com.liferay.portlet.asset.model.AssetVocabulary findByCompanyId_First(
 		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.asset.NoSuchCategoryVocabularyException;
+			com.liferay.portlet.asset.NoSuchVocabularyException;
 
-	public com.liferay.portlet.asset.model.AssetCategoryVocabulary findByCompanyId_Last(
+	public com.liferay.portlet.asset.model.AssetVocabulary findByCompanyId_Last(
 		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.asset.NoSuchCategoryVocabularyException;
+			com.liferay.portlet.asset.NoSuchVocabularyException;
 
-	public com.liferay.portlet.asset.model.AssetCategoryVocabulary[] findByCompanyId_PrevAndNext(
-		long categoryVocabularyId, long companyId,
+	public com.liferay.portlet.asset.model.AssetVocabulary[] findByCompanyId_PrevAndNext(
+		long vocabularyId, long companyId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.asset.NoSuchCategoryVocabularyException;
+			com.liferay.portlet.asset.NoSuchVocabularyException;
 
-	public com.liferay.portlet.asset.model.AssetCategoryVocabulary findByG_N(
+	public com.liferay.portlet.asset.model.AssetVocabulary findByG_N(
 		long groupId, java.lang.String name)
 		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.asset.NoSuchCategoryVocabularyException;
+			com.liferay.portlet.asset.NoSuchVocabularyException;
 
-	public com.liferay.portlet.asset.model.AssetCategoryVocabulary fetchByG_N(
+	public com.liferay.portlet.asset.model.AssetVocabulary fetchByG_N(
 		long groupId, java.lang.String name)
 		throws com.liferay.portal.SystemException;
 
-	public com.liferay.portlet.asset.model.AssetCategoryVocabulary fetchByG_N(
+	public com.liferay.portlet.asset.model.AssetVocabulary fetchByG_N(
 		long groupId, java.lang.String name, boolean retrieveFromCache)
 		throws com.liferay.portal.SystemException;
 
@@ -164,13 +164,13 @@ public interface AssetCategoryVocabularyPersistence extends BasePersistence {
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portlet.asset.model.AssetCategoryVocabulary> findAll()
+	public java.util.List<com.liferay.portlet.asset.model.AssetVocabulary> findAll()
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portlet.asset.model.AssetCategoryVocabulary> findAll(
+	public java.util.List<com.liferay.portlet.asset.model.AssetVocabulary> findAll(
 		int start, int end) throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portlet.asset.model.AssetCategoryVocabulary> findAll(
+	public java.util.List<com.liferay.portlet.asset.model.AssetVocabulary> findAll(
 		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -182,7 +182,7 @@ public interface AssetCategoryVocabularyPersistence extends BasePersistence {
 
 	public void removeByG_N(long groupId, java.lang.String name)
 		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.asset.NoSuchCategoryVocabularyException;
+			com.liferay.portlet.asset.NoSuchVocabularyException;
 
 	public void removeAll() throws com.liferay.portal.SystemException;
 

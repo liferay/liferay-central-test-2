@@ -23,8 +23,8 @@ create table AssetCategoryProperty (
 	value VARCHAR(75) null
 );
 
-create table AssetCategoryVocabulary (
-	categoryVocabularyId LONG not null primary key,
+create table AssetVocabulary (
+	vocabularyId LONG not null primary key,
 	groupId LONG,
 	companyId LONG,
 	userId LONG,

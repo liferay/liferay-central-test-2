@@ -742,8 +742,8 @@
 		<field name="key" type="String" />
 		<field name="value" type="String" />
 	</model>
-	<model name="com.liferay.portlet.asset.model.AssetCategoryVocabulary">
-		<field name="categoryVocabularyId" type="long" />
+	<model name="com.liferay.portlet.asset.model.AssetVocabulary">
+		<field name="vocabularyId" type="long" />
 		<field name="groupId" type="long" />
 		<field name="companyId" type="long" />
 		<field name="userId" type="long" />

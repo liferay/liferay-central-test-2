@@ -24,7 +24,7 @@ package com.liferay.portlet.asset.service;
 
 
 /**
- * <a href="AssetCategoryVocabularyServiceUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="AssetVocabularyServiceUtil.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be
@@ -33,7 +33,7 @@ package com.liferay.portlet.asset.service;
  *
  * <p>
  * This class provides static methods for the
- * <code>com.liferay.portlet.asset.service.AssetCategoryVocabularyService</code>
+ * <code>com.liferay.portlet.asset.service.AssetVocabularyService</code>
  * bean. The static methods of this class calls the same methods of the bean
  * instance. It's convenient to be able to just write one line to call a method
  * on a bean instead of writing a lookup call and a method call.
@@ -41,64 +41,63 @@ package com.liferay.portlet.asset.service;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.asset.service.AssetCategoryVocabularyService
+ * @see com.liferay.portlet.asset.service.AssetVocabularyService
  *
  */
-public class AssetCategoryVocabularyServiceUtil {
-	public static com.liferay.portlet.asset.model.AssetCategoryVocabulary addCategoryVocabulary(
+public class AssetVocabularyServiceUtil {
+	public static com.liferay.portlet.asset.model.AssetVocabulary addVocabulary(
 		java.lang.String name,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return getService().addCategoryVocabulary(name, serviceContext);
+		return getService().addVocabulary(name, serviceContext);
 	}
 
-	public static void deleteCategoryVocabulary(long categoryVocabularyId)
+	public static void deleteVocabulary(long vocabularyId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		getService().deleteCategoryVocabulary(categoryVocabularyId);
+		getService().deleteVocabulary(vocabularyId);
 	}
 
-	public static java.util.List<com.liferay.portlet.asset.model.AssetCategoryVocabulary> getCompanyCategoryVocabularies(
+	public static java.util.List<com.liferay.portlet.asset.model.AssetVocabulary> getCompanyVocabularies(
 		long companyId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return getService().getCompanyCategoryVocabularies(companyId);
+		return getService().getCompanyVocabularies(companyId);
 	}
 
-	public static java.util.List<com.liferay.portlet.asset.model.AssetCategoryVocabulary> getGroupCategoryVocabularies(
+	public static java.util.List<com.liferay.portlet.asset.model.AssetVocabulary> getGroupVocabularies(
 		long groupId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return getService().getGroupCategoryVocabularies(groupId);
+		return getService().getGroupVocabularies(groupId);
 	}
 
-	public static com.liferay.portlet.asset.model.AssetCategoryVocabulary getVocabulary(
-		long categoryVocabularyId)
+	public static com.liferay.portlet.asset.model.AssetVocabulary getVocabulary(
+		long vocabularyId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return getService().getVocabulary(categoryVocabularyId);
+		return getService().getVocabulary(vocabularyId);
 	}
 
-	public static com.liferay.portlet.asset.model.AssetCategoryVocabulary updateCategoryVocabulary(
-		long categoryVocabularyId, java.lang.String name)
+	public static com.liferay.portlet.asset.model.AssetVocabulary updateVocabulary(
+		long vocabularyId, java.lang.String name)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return getService().updateCategoryVocabulary(categoryVocabularyId, name);
+		return getService().updateVocabulary(vocabularyId, name);
 	}
 
-	public static AssetCategoryVocabularyService getService() {
+	public static AssetVocabularyService getService() {
 		if (_service == null) {
-			throw new RuntimeException(
-				"AssetCategoryVocabularyService is not set");
+			throw new RuntimeException("AssetVocabularyService is not set");
 		}
 
 		return _service;
 	}
 
-	public void setService(AssetCategoryVocabularyService service) {
+	public void setService(AssetVocabularyService service) {
 		_service = service;
 	}
 
-	private static AssetCategoryVocabularyService _service;
+	private static AssetVocabularyService _service;
 }

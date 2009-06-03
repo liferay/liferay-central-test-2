@@ -22,9 +22,12 @@
 
 package com.liferay.portlet.asset.model;
 
+import com.liferay.portal.model.BaseModel;
+
+import java.util.Date;
 
 /**
- * <a href="AssetCategoryVocabulary.java.html"><b><i>View Source</i></b></a>
+ * <a href="AssetVocabularyModel.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be
@@ -32,21 +35,57 @@ package com.liferay.portlet.asset.model;
  * </p>
  *
  * <p>
- * This interface is a model that represents the <code>AssetCategoryVocabulary</code> table
- * in the database.
- * </p>
- *
- * <p>
- * Customize <code>com.liferay.portlet.asset.model.impl.AssetCategoryVocabularyImpl</code>
- * and rerun the ServiceBuilder to generate the new methods.
+ * This interface is a model that represents the <code>AssetVocabulary</code>
+ * table in the database.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.asset.model.AssetCategoryVocabularyModel
- * @see com.liferay.portlet.asset.model.impl.AssetCategoryVocabularyImpl
- * @see com.liferay.portlet.asset.model.impl.AssetCategoryVocabularyModelImpl
+ * @see com.liferay.portlet.asset.model.AssetVocabulary
+ * @see com.liferay.portlet.asset.model.impl.AssetVocabularyImpl
+ * @see com.liferay.portlet.asset.model.impl.AssetVocabularyModelImpl
  *
  */
-public interface AssetCategoryVocabulary extends AssetCategoryVocabularyModel {
+public interface AssetVocabularyModel extends BaseModel<AssetVocabulary> {
+	public long getPrimaryKey();
+
+	public void setPrimaryKey(long pk);
+
+	public long getVocabularyId();
+
+	public void setVocabularyId(long vocabularyId);
+
+	public long getGroupId();
+
+	public void setGroupId(long groupId);
+
+	public long getCompanyId();
+
+	public void setCompanyId(long companyId);
+
+	public long getUserId();
+
+	public void setUserId(long userId);
+
+	public String getUserName();
+
+	public void setUserName(String userName);
+
+	public Date getCreateDate();
+
+	public void setCreateDate(Date createDate);
+
+	public Date getModifiedDate();
+
+	public void setModifiedDate(Date modifiedDate);
+
+	public String getName();
+
+	public void setName(String name);
+
+	public String getDescription();
+
+	public void setDescription(String description);
+
+	public AssetVocabulary toEscapedModel();
 }

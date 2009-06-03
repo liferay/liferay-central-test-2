@@ -43,95 +43,88 @@ import com.liferay.portal.service.persistence.UserFinder;
 import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.util.PortalUtil;
 
-import com.liferay.portlet.asset.model.AssetCategoryVocabulary;
+import com.liferay.portlet.asset.model.AssetVocabulary;
 import com.liferay.portlet.asset.service.AssetCategoryLocalService;
 import com.liferay.portlet.asset.service.AssetCategoryPropertyLocalService;
 import com.liferay.portlet.asset.service.AssetCategoryPropertyService;
 import com.liferay.portlet.asset.service.AssetCategoryService;
-import com.liferay.portlet.asset.service.AssetCategoryVocabularyLocalService;
-import com.liferay.portlet.asset.service.AssetCategoryVocabularyService;
+import com.liferay.portlet.asset.service.AssetVocabularyLocalService;
+import com.liferay.portlet.asset.service.AssetVocabularyService;
 import com.liferay.portlet.asset.service.persistence.AssetCategoryFinder;
 import com.liferay.portlet.asset.service.persistence.AssetCategoryPersistence;
 import com.liferay.portlet.asset.service.persistence.AssetCategoryPropertyFinder;
 import com.liferay.portlet.asset.service.persistence.AssetCategoryPropertyPersistence;
-import com.liferay.portlet.asset.service.persistence.AssetCategoryVocabularyPersistence;
+import com.liferay.portlet.asset.service.persistence.AssetVocabularyPersistence;
 
 import java.util.List;
 
 /**
- * <a href="AssetCategoryVocabularyLocalServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="AssetVocabularyLocalServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public abstract class AssetCategoryVocabularyLocalServiceBaseImpl
-	implements AssetCategoryVocabularyLocalService {
-	public AssetCategoryVocabulary addAssetCategoryVocabulary(
-		AssetCategoryVocabulary assetCategoryVocabulary)
+public abstract class AssetVocabularyLocalServiceBaseImpl
+	implements AssetVocabularyLocalService {
+	public AssetVocabulary addAssetVocabulary(AssetVocabulary assetVocabulary)
 		throws SystemException {
-		assetCategoryVocabulary.setNew(true);
+		assetVocabulary.setNew(true);
 
-		return assetCategoryVocabularyPersistence.update(assetCategoryVocabulary,
-			false);
+		return assetVocabularyPersistence.update(assetVocabulary, false);
 	}
 
-	public AssetCategoryVocabulary createAssetCategoryVocabulary(
-		long categoryVocabularyId) {
-		return assetCategoryVocabularyPersistence.create(categoryVocabularyId);
+	public AssetVocabulary createAssetVocabulary(long vocabularyId) {
+		return assetVocabularyPersistence.create(vocabularyId);
 	}
 
-	public void deleteAssetCategoryVocabulary(long categoryVocabularyId)
+	public void deleteAssetVocabulary(long vocabularyId)
 		throws PortalException, SystemException {
-		assetCategoryVocabularyPersistence.remove(categoryVocabularyId);
+		assetVocabularyPersistence.remove(vocabularyId);
 	}
 
-	public void deleteAssetCategoryVocabulary(
-		AssetCategoryVocabulary assetCategoryVocabulary)
+	public void deleteAssetVocabulary(AssetVocabulary assetVocabulary)
 		throws SystemException {
-		assetCategoryVocabularyPersistence.remove(assetCategoryVocabulary);
+		assetVocabularyPersistence.remove(assetVocabulary);
 	}
 
 	public List<Object> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
-		return assetCategoryVocabularyPersistence.findWithDynamicQuery(dynamicQuery);
+		return assetVocabularyPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
 	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
 		int end) throws SystemException {
-		return assetCategoryVocabularyPersistence.findWithDynamicQuery(dynamicQuery,
+		return assetVocabularyPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end);
 	}
 
-	public AssetCategoryVocabulary getAssetCategoryVocabulary(
-		long categoryVocabularyId) throws PortalException, SystemException {
-		return assetCategoryVocabularyPersistence.findByPrimaryKey(categoryVocabularyId);
+	public AssetVocabulary getAssetVocabulary(long vocabularyId)
+		throws PortalException, SystemException {
+		return assetVocabularyPersistence.findByPrimaryKey(vocabularyId);
 	}
 
-	public List<AssetCategoryVocabulary> getAssetCategoryVocabularies(
-		int start, int end) throws SystemException {
-		return assetCategoryVocabularyPersistence.findAll(start, end);
-	}
-
-	public int getAssetCategoryVocabulariesCount() throws SystemException {
-		return assetCategoryVocabularyPersistence.countAll();
-	}
-
-	public AssetCategoryVocabulary updateAssetCategoryVocabulary(
-		AssetCategoryVocabulary assetCategoryVocabulary)
+	public List<AssetVocabulary> getAssetVocabularies(int start, int end)
 		throws SystemException {
-		assetCategoryVocabulary.setNew(false);
-
-		return assetCategoryVocabularyPersistence.update(assetCategoryVocabulary,
-			true);
+		return assetVocabularyPersistence.findAll(start, end);
 	}
 
-	public AssetCategoryVocabulary updateAssetCategoryVocabulary(
-		AssetCategoryVocabulary assetCategoryVocabulary, boolean merge)
-		throws SystemException {
-		assetCategoryVocabulary.setNew(false);
+	public int getAssetVocabulariesCount() throws SystemException {
+		return assetVocabularyPersistence.countAll();
+	}
 
-		return assetCategoryVocabularyPersistence.update(assetCategoryVocabulary,
-			merge);
+	public AssetVocabulary updateAssetVocabulary(
+		AssetVocabulary assetVocabulary) throws SystemException {
+		assetVocabulary.setNew(false);
+
+		return assetVocabularyPersistence.update(assetVocabulary, true);
+	}
+
+	public AssetVocabulary updateAssetVocabulary(
+		AssetVocabulary assetVocabulary, boolean merge)
+		throws SystemException {
+		assetVocabulary.setNew(false);
+
+		return assetVocabularyPersistence.update(assetVocabulary, merge);
 	}
 
 	public AssetCategoryLocalService getAssetCategoryLocalService() {
@@ -205,31 +198,31 @@ public abstract class AssetCategoryVocabularyLocalServiceBaseImpl
 		this.assetCategoryPropertyFinder = assetCategoryPropertyFinder;
 	}
 
-	public AssetCategoryVocabularyLocalService getAssetCategoryVocabularyLocalService() {
-		return assetCategoryVocabularyLocalService;
+	public AssetVocabularyLocalService getAssetVocabularyLocalService() {
+		return assetVocabularyLocalService;
 	}
 
-	public void setAssetCategoryVocabularyLocalService(
-		AssetCategoryVocabularyLocalService assetCategoryVocabularyLocalService) {
-		this.assetCategoryVocabularyLocalService = assetCategoryVocabularyLocalService;
+	public void setAssetVocabularyLocalService(
+		AssetVocabularyLocalService assetVocabularyLocalService) {
+		this.assetVocabularyLocalService = assetVocabularyLocalService;
 	}
 
-	public AssetCategoryVocabularyService getAssetCategoryVocabularyService() {
-		return assetCategoryVocabularyService;
+	public AssetVocabularyService getAssetVocabularyService() {
+		return assetVocabularyService;
 	}
 
-	public void setAssetCategoryVocabularyService(
-		AssetCategoryVocabularyService assetCategoryVocabularyService) {
-		this.assetCategoryVocabularyService = assetCategoryVocabularyService;
+	public void setAssetVocabularyService(
+		AssetVocabularyService assetVocabularyService) {
+		this.assetVocabularyService = assetVocabularyService;
 	}
 
-	public AssetCategoryVocabularyPersistence getAssetCategoryVocabularyPersistence() {
-		return assetCategoryVocabularyPersistence;
+	public AssetVocabularyPersistence getAssetVocabularyPersistence() {
+		return assetVocabularyPersistence;
 	}
 
-	public void setAssetCategoryVocabularyPersistence(
-		AssetCategoryVocabularyPersistence assetCategoryVocabularyPersistence) {
-		this.assetCategoryVocabularyPersistence = assetCategoryVocabularyPersistence;
+	public void setAssetVocabularyPersistence(
+		AssetVocabularyPersistence assetVocabularyPersistence) {
+		this.assetVocabularyPersistence = assetVocabularyPersistence;
 	}
 
 	public CounterLocalService getCounterLocalService() {
@@ -370,12 +363,12 @@ public abstract class AssetCategoryVocabularyLocalServiceBaseImpl
 	protected AssetCategoryPropertyPersistence assetCategoryPropertyPersistence;
 	@BeanReference(name = "com.liferay.portlet.asset.service.persistence.AssetCategoryPropertyFinder.impl")
 	protected AssetCategoryPropertyFinder assetCategoryPropertyFinder;
-	@BeanReference(name = "com.liferay.portlet.asset.service.AssetCategoryVocabularyLocalService.impl")
-	protected AssetCategoryVocabularyLocalService assetCategoryVocabularyLocalService;
-	@BeanReference(name = "com.liferay.portlet.asset.service.AssetCategoryVocabularyService.impl")
-	protected AssetCategoryVocabularyService assetCategoryVocabularyService;
-	@BeanReference(name = "com.liferay.portlet.asset.service.persistence.AssetCategoryVocabularyPersistence.impl")
-	protected AssetCategoryVocabularyPersistence assetCategoryVocabularyPersistence;
+	@BeanReference(name = "com.liferay.portlet.asset.service.AssetVocabularyLocalService.impl")
+	protected AssetVocabularyLocalService assetVocabularyLocalService;
+	@BeanReference(name = "com.liferay.portlet.asset.service.AssetVocabularyService.impl")
+	protected AssetVocabularyService assetVocabularyService;
+	@BeanReference(name = "com.liferay.portlet.asset.service.persistence.AssetVocabularyPersistence.impl")
+	protected AssetVocabularyPersistence assetVocabularyPersistence;
 	@BeanReference(name = "com.liferay.counter.service.CounterLocalService.impl")
 	protected CounterLocalService counterLocalService;
 	@BeanReference(name = "com.liferay.counter.service.CounterService.impl")

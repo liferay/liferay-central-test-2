@@ -82,7 +82,7 @@ public class AssetCategoryLocalServiceImpl
 			assetCategoryPersistence.findByPrimaryKey(parentCategoryId);
 		}
 
-		assetCategoryVocabularyPersistence.findByPrimaryKey(vocabularyId);
+		assetVocabularyPersistence.findByPrimaryKey(vocabularyId);
 
 		long categoryId = counterLocalService.increment();
 
@@ -312,7 +312,7 @@ public class AssetCategoryLocalServiceImpl
 			assetCategoryPersistence.findByPrimaryKey(parentCategoryId);
 		}
 
-		assetCategoryVocabularyPersistence.findByPrimaryKey(vocabularyId);
+		assetVocabularyPersistence.findByPrimaryKey(vocabularyId);
 
 		AssetCategory category = assetCategoryPersistence.findByPrimaryKey(
 			categoryId);

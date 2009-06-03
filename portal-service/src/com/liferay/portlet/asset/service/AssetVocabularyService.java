@@ -29,7 +29,7 @@ import com.liferay.portal.kernel.annotation.Propagation;
 import com.liferay.portal.kernel.annotation.Transactional;
 
 /**
- * <a href="AssetCategoryVocabularyService.java.html"><b><i>View Source</i></b></a>
+ * <a href="AssetVocabularyService.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be
@@ -38,7 +38,7 @@ import com.liferay.portal.kernel.annotation.Transactional;
  *
  * <p>
  * This interface defines the service. The default implementation is
- * <code>com.liferay.portlet.asset.service.impl.AssetCategoryVocabularyServiceImpl</code>.
+ * <code>com.liferay.portlet.asset.service.impl.AssetVocabularyServiceImpl</code>.
  * Modify methods in that class and rerun ServiceBuilder to populate this class
  * and all other generated classes.
  * </p>
@@ -49,42 +49,42 @@ import com.liferay.portal.kernel.annotation.Transactional;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.asset.service.AssetCategoryVocabularyServiceUtil
+ * @see com.liferay.portlet.asset.service.AssetVocabularyServiceUtil
  *
  */
 @Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
 	PortalException.class, SystemException.class})
-public interface AssetCategoryVocabularyService {
-	public com.liferay.portlet.asset.model.AssetCategoryVocabulary addCategoryVocabulary(
+public interface AssetVocabularyService {
+	public com.liferay.portlet.asset.model.AssetVocabulary addVocabulary(
 		java.lang.String name,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public void deleteCategoryVocabulary(long categoryVocabularyId)
+	public void deleteVocabulary(long vocabularyId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.liferay.portlet.asset.model.AssetCategoryVocabulary> getCompanyCategoryVocabularies(
+	public java.util.List<com.liferay.portlet.asset.model.AssetVocabulary> getCompanyVocabularies(
 		long companyId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.liferay.portlet.asset.model.AssetCategoryVocabulary> getGroupCategoryVocabularies(
+	public java.util.List<com.liferay.portlet.asset.model.AssetVocabulary> getGroupVocabularies(
 		long groupId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public com.liferay.portlet.asset.model.AssetCategoryVocabulary getVocabulary(
-		long categoryVocabularyId)
+	public com.liferay.portlet.asset.model.AssetVocabulary getVocabulary(
+		long vocabularyId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public com.liferay.portlet.asset.model.AssetCategoryVocabulary updateCategoryVocabulary(
-		long categoryVocabularyId, java.lang.String name)
+	public com.liferay.portlet.asset.model.AssetVocabulary updateVocabulary(
+		long vocabularyId, java.lang.String name)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 }

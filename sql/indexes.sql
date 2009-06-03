@@ -26,9 +26,9 @@ create unique index IX_DBD111AA on AssetCategoryProperty (categoryId, key_);
 create index IX_8654719F on AssetCategoryProperty (companyId);
 create index IX_52340033 on AssetCategoryProperty (companyId, key_);
 
-create index IX_7613DDAE on AssetCategoryVocabulary (companyId);
-create index IX_CB3F7B0 on AssetCategoryVocabulary (groupId);
-create unique index IX_6081C36F on AssetCategoryVocabulary (groupId, name);
+create index IX_B22D908C on AssetVocabulary (companyId);
+create index IX_B6B8CA0E on AssetVocabulary (groupId);
+create unique index IX_C0AAD74D on AssetVocabulary (groupId, name);
 
 create index IX_72EF6041 on BlogsEntry (companyId);
 create index IX_E0D90212 on BlogsEntry (companyId, displayDate, draft);

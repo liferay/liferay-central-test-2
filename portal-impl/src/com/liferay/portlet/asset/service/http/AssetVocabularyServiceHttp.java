@@ -30,10 +30,10 @@ import com.liferay.portal.kernel.util.NullWrapper;
 import com.liferay.portal.security.auth.HttpPrincipal;
 import com.liferay.portal.service.http.TunnelUtil;
 
-import com.liferay.portlet.asset.service.AssetCategoryVocabularyServiceUtil;
+import com.liferay.portlet.asset.service.AssetVocabularyServiceUtil;
 
 /**
- * <a href="AssetCategoryVocabularyServiceHttp.java.html"><b><i>View Source</i></b></a>
+ * <a href="AssetVocabularyServiceHttp.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be
@@ -42,7 +42,7 @@ import com.liferay.portlet.asset.service.AssetCategoryVocabularyServiceUtil;
  *
  * <p>
  * This class provides a HTTP utility for the
- * <code>com.liferay.portlet.asset.service.AssetCategoryVocabularyServiceUtil</code> service
+ * <code>com.liferay.portlet.asset.service.AssetVocabularyServiceUtil</code> service
  * utility. The static methods of this class calls the same methods of the
  * service utility. However, the signatures are different because it requires an
  * additional <code>com.liferay.portal.security.auth.HttpPrincipal</code>
@@ -67,12 +67,12 @@ import com.liferay.portlet.asset.service.AssetCategoryVocabularyServiceUtil;
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portal.security.auth.HttpPrincipal
- * @see com.liferay.portlet.asset.service.AssetCategoryVocabularyServiceUtil
- * @see com.liferay.portlet.asset.service.http.AssetCategoryVocabularyServiceSoap
+ * @see com.liferay.portlet.asset.service.AssetVocabularyServiceUtil
+ * @see com.liferay.portlet.asset.service.http.AssetVocabularyServiceSoap
  *
  */
-public class AssetCategoryVocabularyServiceHttp {
-	public static com.liferay.portlet.asset.model.AssetCategoryVocabulary addCategoryVocabulary(
+public class AssetVocabularyServiceHttp {
+	public static com.liferay.portlet.asset.model.AssetVocabulary addVocabulary(
 		HttpPrincipal httpPrincipal, java.lang.String name,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
@@ -91,9 +91,8 @@ public class AssetCategoryVocabularyServiceHttp {
 						"com.liferay.portal.service.ServiceContext");
 			}
 
-			MethodWrapper methodWrapper = new MethodWrapper(AssetCategoryVocabularyServiceUtil.class.getName(),
-					"addCategoryVocabulary",
-					new Object[] { paramObj0, paramObj1 });
+			MethodWrapper methodWrapper = new MethodWrapper(AssetVocabularyServiceUtil.class.getName(),
+					"addVocabulary", new Object[] { paramObj0, paramObj1 });
 
 			Object returnObj = null;
 
@@ -112,7 +111,7 @@ public class AssetCategoryVocabularyServiceHttp {
 				throw new com.liferay.portal.SystemException(e);
 			}
 
-			return (com.liferay.portlet.asset.model.AssetCategoryVocabulary)returnObj;
+			return (com.liferay.portlet.asset.model.AssetVocabulary)returnObj;
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
@@ -121,15 +120,15 @@ public class AssetCategoryVocabularyServiceHttp {
 		}
 	}
 
-	public static void deleteCategoryVocabulary(HttpPrincipal httpPrincipal,
-		long categoryVocabularyId)
+	public static void deleteVocabulary(HttpPrincipal httpPrincipal,
+		long vocabularyId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(categoryVocabularyId);
+			Object paramObj0 = new LongWrapper(vocabularyId);
 
-			MethodWrapper methodWrapper = new MethodWrapper(AssetCategoryVocabularyServiceUtil.class.getName(),
-					"deleteCategoryVocabulary", new Object[] { paramObj0 });
+			MethodWrapper methodWrapper = new MethodWrapper(AssetVocabularyServiceUtil.class.getName(),
+					"deleteVocabulary", new Object[] { paramObj0 });
 
 			try {
 				TunnelUtil.invoke(httpPrincipal, methodWrapper);
@@ -153,15 +152,15 @@ public class AssetCategoryVocabularyServiceHttp {
 		}
 	}
 
-	public static java.util.List<com.liferay.portlet.asset.model.AssetCategoryVocabulary> getCompanyCategoryVocabularies(
+	public static java.util.List<com.liferay.portlet.asset.model.AssetVocabulary> getCompanyVocabularies(
 		HttpPrincipal httpPrincipal, long companyId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(companyId);
 
-			MethodWrapper methodWrapper = new MethodWrapper(AssetCategoryVocabularyServiceUtil.class.getName(),
-					"getCompanyCategoryVocabularies", new Object[] { paramObj0 });
+			MethodWrapper methodWrapper = new MethodWrapper(AssetVocabularyServiceUtil.class.getName(),
+					"getCompanyVocabularies", new Object[] { paramObj0 });
 
 			Object returnObj = null;
 
@@ -180,7 +179,7 @@ public class AssetCategoryVocabularyServiceHttp {
 				throw new com.liferay.portal.SystemException(e);
 			}
 
-			return (java.util.List<com.liferay.portlet.asset.model.AssetCategoryVocabulary>)returnObj;
+			return (java.util.List<com.liferay.portlet.asset.model.AssetVocabulary>)returnObj;
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
@@ -189,15 +188,15 @@ public class AssetCategoryVocabularyServiceHttp {
 		}
 	}
 
-	public static java.util.List<com.liferay.portlet.asset.model.AssetCategoryVocabulary> getGroupCategoryVocabularies(
+	public static java.util.List<com.liferay.portlet.asset.model.AssetVocabulary> getGroupVocabularies(
 		HttpPrincipal httpPrincipal, long groupId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(groupId);
 
-			MethodWrapper methodWrapper = new MethodWrapper(AssetCategoryVocabularyServiceUtil.class.getName(),
-					"getGroupCategoryVocabularies", new Object[] { paramObj0 });
+			MethodWrapper methodWrapper = new MethodWrapper(AssetVocabularyServiceUtil.class.getName(),
+					"getGroupVocabularies", new Object[] { paramObj0 });
 
 			Object returnObj = null;
 
@@ -216,7 +215,7 @@ public class AssetCategoryVocabularyServiceHttp {
 				throw new com.liferay.portal.SystemException(e);
 			}
 
-			return (java.util.List<com.liferay.portlet.asset.model.AssetCategoryVocabulary>)returnObj;
+			return (java.util.List<com.liferay.portlet.asset.model.AssetVocabulary>)returnObj;
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
@@ -225,14 +224,14 @@ public class AssetCategoryVocabularyServiceHttp {
 		}
 	}
 
-	public static com.liferay.portlet.asset.model.AssetCategoryVocabulary getVocabulary(
-		HttpPrincipal httpPrincipal, long categoryVocabularyId)
+	public static com.liferay.portlet.asset.model.AssetVocabulary getVocabulary(
+		HttpPrincipal httpPrincipal, long vocabularyId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(categoryVocabularyId);
+			Object paramObj0 = new LongWrapper(vocabularyId);
 
-			MethodWrapper methodWrapper = new MethodWrapper(AssetCategoryVocabularyServiceUtil.class.getName(),
+			MethodWrapper methodWrapper = new MethodWrapper(AssetVocabularyServiceUtil.class.getName(),
 					"getVocabulary", new Object[] { paramObj0 });
 
 			Object returnObj = null;
@@ -252,7 +251,7 @@ public class AssetCategoryVocabularyServiceHttp {
 				throw new com.liferay.portal.SystemException(e);
 			}
 
-			return (com.liferay.portlet.asset.model.AssetCategoryVocabulary)returnObj;
+			return (com.liferay.portlet.asset.model.AssetVocabulary)returnObj;
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
@@ -261,13 +260,12 @@ public class AssetCategoryVocabularyServiceHttp {
 		}
 	}
 
-	public static com.liferay.portlet.asset.model.AssetCategoryVocabulary updateCategoryVocabulary(
-		HttpPrincipal httpPrincipal, long categoryVocabularyId,
-		java.lang.String name)
+	public static com.liferay.portlet.asset.model.AssetVocabulary updateVocabulary(
+		HttpPrincipal httpPrincipal, long vocabularyId, java.lang.String name)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(categoryVocabularyId);
+			Object paramObj0 = new LongWrapper(vocabularyId);
 
 			Object paramObj1 = name;
 
@@ -275,9 +273,8 @@ public class AssetCategoryVocabularyServiceHttp {
 				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
-			MethodWrapper methodWrapper = new MethodWrapper(AssetCategoryVocabularyServiceUtil.class.getName(),
-					"updateCategoryVocabulary",
-					new Object[] { paramObj0, paramObj1 });
+			MethodWrapper methodWrapper = new MethodWrapper(AssetVocabularyServiceUtil.class.getName(),
+					"updateVocabulary", new Object[] { paramObj0, paramObj1 });
 
 			Object returnObj = null;
 
@@ -296,7 +293,7 @@ public class AssetCategoryVocabularyServiceHttp {
 				throw new com.liferay.portal.SystemException(e);
 			}
 
-			return (com.liferay.portlet.asset.model.AssetCategoryVocabulary)returnObj;
+			return (com.liferay.portlet.asset.model.AssetVocabulary)returnObj;
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
@@ -305,5 +302,5 @@ public class AssetCategoryVocabularyServiceHttp {
 		}
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(AssetCategoryVocabularyServiceHttp.class);
+	private static Log _log = LogFactoryUtil.getLog(AssetVocabularyServiceHttp.class);
 }

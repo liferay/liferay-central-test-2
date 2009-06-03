@@ -20,21 +20,32 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.asset.model.impl;
+package com.liferay.portlet.asset;
 
-import com.liferay.portlet.asset.model.AssetCategoryVocabulary;
+import com.liferay.portal.PortalException;
 
 /**
- * <a href="AssetCategoryVocabularyImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="NoSuchVocabularyException.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class AssetCategoryVocabularyImpl
-	extends AssetCategoryVocabularyModelImpl
-	implements AssetCategoryVocabulary {
+public class NoSuchVocabularyException extends PortalException {
 
-	public AssetCategoryVocabularyImpl() {
+	public NoSuchVocabularyException() {
+		super();
+	}
+
+	public NoSuchVocabularyException(String msg) {
+		super(msg);
+	}
+
+	public NoSuchVocabularyException(String msg, Throwable cause) {
+		super(msg, cause);
+	}
+
+	public NoSuchVocabularyException(Throwable cause) {
+		super(cause);
 	}
 
 }

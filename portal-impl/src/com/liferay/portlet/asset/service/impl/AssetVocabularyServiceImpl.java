@@ -28,27 +28,26 @@ import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.ServiceContext;
-import com.liferay.portlet.asset.model.AssetCategoryVocabulary;
-import com.liferay.portlet.asset.service.base.AssetCategoryVocabularyServiceBaseImpl;
-import com.liferay.portlet.asset.service.permission.AssetCategoryVocabularyPermission;
+import com.liferay.portlet.asset.model.AssetVocabulary;
+import com.liferay.portlet.asset.service.base.AssetVocabularyServiceBaseImpl;
+import com.liferay.portlet.asset.service.permission.AssetVocabularyPermission;
 import com.liferay.portlet.asset.service.permission.AssetPermission;
 
 import java.util.Iterator;
 import java.util.List;
 
 /**
- * <a href="AssetCategoryVocabularyServiceImpl.java.html"><b><i>View Source</i>
- * </b></a>
+ * <a href="AssetVocabularyServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Alvaro del Castillo
  * @author Eduardo Lundgren
  * @author Jorge Ferrer
  *
  */
-public class AssetCategoryVocabularyServiceImpl
-	extends AssetCategoryVocabularyServiceBaseImpl {
+public class AssetVocabularyServiceImpl
+	extends AssetVocabularyServiceBaseImpl {
 
-	public AssetCategoryVocabulary addCategoryVocabulary(
+	public AssetVocabulary addVocabulary(
 			String name, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
@@ -56,80 +55,72 @@ public class AssetCategoryVocabularyServiceImpl
 			getPermissionChecker(), serviceContext.getScopeGroupId(),
 			ActionKeys.ADD_VOCABULARY);
 
-		return assetCategoryVocabularyLocalService.addCategoryVocabulary(
+		return assetVocabularyLocalService.addVocabulary(
 			getUserId(), name, serviceContext);
 	}
 
-	public void deleteCategoryVocabulary(long categoryVocabularyId)
+	public void deleteVocabulary(long vocabularyId)
 		throws PortalException, SystemException {
 
-		AssetCategoryVocabularyPermission.check(
-			getPermissionChecker(), categoryVocabularyId, ActionKeys.DELETE);
+		AssetVocabularyPermission.check(
+			getPermissionChecker(), vocabularyId, ActionKeys.DELETE);
 
-		assetCategoryVocabularyLocalService.deleteCategoryVocabulary(
-			categoryVocabularyId);
+		assetVocabularyLocalService.deleteVocabulary(vocabularyId);
 	}
 
-	public List<AssetCategoryVocabulary> getCompanyCategoryVocabularies(
-			long companyId)
+	public List<AssetVocabulary> getCompanyVocabularies(long companyId)
 		throws PortalException, SystemException {
 
-		return getCategoryVocabularies(
-			assetCategoryVocabularyLocalService.getCompanyCategoryVocabularies(
-				companyId));
+		return getVocabularies(
+			assetVocabularyLocalService.getCompanyVocabularies(companyId));
 	}
 
-	public List<AssetCategoryVocabulary> getGroupCategoryVocabularies(
-			long groupId)
+	public List<AssetVocabulary> getGroupVocabularies(long groupId)
 		throws PortalException, SystemException {
 
-		return getCategoryVocabularies(
-			assetCategoryVocabularyLocalService.getGroupCategoryVocabularies(
-				groupId));
+		return getVocabularies(
+			assetVocabularyLocalService.getGroupVocabularies(groupId));
 	}
 
-	public AssetCategoryVocabulary getVocabulary(long categoryVocabularyId)
+	public AssetVocabulary getVocabulary(long vocabularyId)
 		throws PortalException, SystemException {
 
-		AssetCategoryVocabularyPermission.check(
-			getPermissionChecker(), categoryVocabularyId, ActionKeys.VIEW);
+		AssetVocabularyPermission.check(
+			getPermissionChecker(), vocabularyId, ActionKeys.VIEW);
 
-		return assetCategoryVocabularyLocalService.getCategoryVocabulary(
-			categoryVocabularyId);
+		return assetVocabularyLocalService.getVocabulary(vocabularyId);
 	}
 
-	public AssetCategoryVocabulary updateCategoryVocabulary(
-			long categoryVocabularyId, String name)
+	public AssetVocabulary updateVocabulary(long vocabularyId, String name)
 		throws PortalException, SystemException {
 
-		AssetCategoryVocabularyPermission.check(
-			getPermissionChecker(), categoryVocabularyId, ActionKeys.UPDATE);
+		AssetVocabularyPermission.check(
+			getPermissionChecker(), vocabularyId, ActionKeys.UPDATE);
 
-		return assetCategoryVocabularyLocalService.updateCategoryVocabulary(
-			categoryVocabularyId, name);
+		return assetVocabularyLocalService.updateVocabulary(vocabularyId, name);
 	}
 
-	protected List<AssetCategoryVocabulary> getCategoryVocabularies(
-			List<AssetCategoryVocabulary> categoryVocabularies)
+	protected List<AssetVocabulary> getVocabularies(
+			List<AssetVocabulary> vocabularies)
 		throws PortalException {
 
 		PermissionChecker permissionChecker = getPermissionChecker();
 
-		categoryVocabularies = ListUtil.copy(categoryVocabularies);
+		vocabularies = ListUtil.copy(vocabularies);
 
-		Iterator<AssetCategoryVocabulary> itr = categoryVocabularies.iterator();
+		Iterator<AssetVocabulary> itr = vocabularies.iterator();
 
 		while (itr.hasNext()) {
-			AssetCategoryVocabulary categoryVocabulary = itr.next();
+			AssetVocabulary vocabulary = itr.next();
 
-			if (!AssetCategoryVocabularyPermission.contains(
-					permissionChecker, categoryVocabulary, ActionKeys.VIEW)) {
+			if (!AssetVocabularyPermission.contains(
+					permissionChecker, vocabulary, ActionKeys.VIEW)) {
 
 				itr.remove();
 			}
 		}
 
-		return categoryVocabularies;
+		return vocabularies;
 	}
 
 }

@@ -25,21 +25,21 @@
 <%@ include file="/html/taglib/init.jsp" %>
 
 <%@ page import="com.liferay.portlet.asset.model.AssetCategory" %>
-<%@ page import="com.liferay.portlet.asset.model.AssetCategoryVocabulary" %>
+<%@ page import="com.liferay.portlet.asset.model.AssetVocabulary" %>
 <%@ page import="com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil" %>
-<%@ page import="com.liferay.portlet.asset.service.AssetCategoryVocabularyServiceUtil" %>
+<%@ page import="com.liferay.portlet.asset.service.AssetVocabularyServiceUtil" %>
 
 <%
 String className = (String)request.getAttribute("liferay-ui:asset_categories_summary:className");
 long classPK = GetterUtil.getLong((String)request.getAttribute("liferay-ui:asset_categories_summary:classPK"));
 LiferayPortletURL portletURL = (LiferayPortletURL)request.getAttribute("liferay-ui:asset_categories_summary:portletURL");
 
-List<AssetCategoryVocabulary> vocabularies = AssetCategoryVocabularyServiceUtil.getGroupCategoryVocabularies(scopeGroupId);
+List<AssetVocabulary> vocabularies = AssetVocabularyServiceUtil.getGroupVocabularies(scopeGroupId);
 List<AssetCategory> entries = AssetCategoryLocalServiceUtil.getCategories(className, classPK);
 %>
 
 <%
-for (AssetCategoryVocabulary vocabulary : vocabularies) {
+for (AssetVocabulary vocabulary : vocabularies) {
 	String vocabularyName = vocabulary.getName();
 
 	List<AssetCategory> categories = _filterCategories(entries, vocabulary);
@@ -100,11 +100,11 @@ private String _buildCategoryPath(AssetCategory category) throws PortalException
 	return sb.toString();
 }
 
-private List<AssetCategory> _filterCategories(List<AssetCategory> categories, AssetCategoryVocabulary vocabulary) {
+private List<AssetCategory> _filterCategories(List<AssetCategory> categories, AssetVocabulary vocabulary) {
 	List<AssetCategory> filteredCategories = new ArrayList<AssetCategory>();
 
 	for (AssetCategory category : categories) {
-		if (category.getVocabularyId() == vocabulary.getCategoryVocabularyId()) {
+		if (category.getVocabularyId() == vocabulary.getVocabularyId()) {
 			filteredCategories.add(category);
 		}
 	}

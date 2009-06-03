@@ -20,33 +20,33 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.asset;
+package com.liferay.portlet.asset.model;
 
-import com.liferay.portal.PortalException;
 
 /**
- * <a href="NoSuchCategoryVocabularyException.java.html"><b><i>View Source</i>
- * </b></a>
+ * <a href="AssetVocabulary.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the <code>AssetVocabulary</code> table
+ * in the database.
+ * </p>
+ *
+ * <p>
+ * Customize <code>com.liferay.portlet.asset.model.impl.AssetVocabularyImpl</code>
+ * and rerun the ServiceBuilder to generate the new methods.
+ * </p>
  *
  * @author Brian Wing Shun Chan
  *
+ * @see com.liferay.portlet.asset.model.AssetVocabularyModel
+ * @see com.liferay.portlet.asset.model.impl.AssetVocabularyImpl
+ * @see com.liferay.portlet.asset.model.impl.AssetVocabularyModelImpl
+ *
  */
-public class NoSuchCategoryVocabularyException extends PortalException {
-
-	public NoSuchCategoryVocabularyException() {
-		super();
-	}
-
-	public NoSuchCategoryVocabularyException(String msg) {
-		super(msg);
-	}
-
-	public NoSuchCategoryVocabularyException(String msg, Throwable cause) {
-		super(msg, cause);
-	}
-
-	public NoSuchCategoryVocabularyException(Throwable cause) {
-		super(cause);
-	}
-
+public interface AssetVocabulary extends AssetVocabularyModel {
 }

@@ -445,17 +445,17 @@
 		<property name="service" ref="com.liferay.portlet.asset.service.AssetCategoryPropertyService.impl" />
 		<property name="serviceInterface" value="com.liferay.portlet.asset.service.AssetCategoryPropertyService" />
 	</bean>
-	<bean name="/com_liferay_portlet_asset_service_spring_AssetCategoryVocabularyService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
-		<property name="service" ref="com.liferay.portlet.asset.service.AssetCategoryVocabularyService.impl" />
-		<property name="serviceInterface" value="com.liferay.portlet.asset.service.AssetCategoryVocabularyService" />
+	<bean name="/com_liferay_portlet_asset_service_spring_AssetVocabularyService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portlet.asset.service.AssetVocabularyService.impl" />
+		<property name="serviceInterface" value="com.liferay.portlet.asset.service.AssetVocabularyService" />
 	</bean>
-	<bean name="/com_liferay_portlet_asset_service_spring_AssetCategoryVocabularyService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
-		<property name="service" ref="com.liferay.portlet.asset.service.AssetCategoryVocabularyService.impl" />
-		<property name="serviceInterface" value="com.liferay.portlet.asset.service.AssetCategoryVocabularyService" />
+	<bean name="/com_liferay_portlet_asset_service_spring_AssetVocabularyService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portlet.asset.service.AssetVocabularyService.impl" />
+		<property name="serviceInterface" value="com.liferay.portlet.asset.service.AssetVocabularyService" />
 	</bean>
-	<bean name="/com_liferay_portlet_asset_service_spring_AssetCategoryVocabularyService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
-		<property name="service" ref="com.liferay.portlet.asset.service.AssetCategoryVocabularyService.impl" />
-		<property name="serviceInterface" value="com.liferay.portlet.asset.service.AssetCategoryVocabularyService" />
+	<bean name="/com_liferay_portlet_asset_service_spring_AssetVocabularyService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portlet.asset.service.AssetVocabularyService.impl" />
+		<property name="serviceInterface" value="com.liferay.portlet.asset.service.AssetVocabularyService" />
 	</bean>
 	<bean name="/com_liferay_portlet_blogs_service_spring_BlogsEntryService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
 		<property name="service" ref="com.liferay.portlet.blogs.service.BlogsEntryService.impl" />

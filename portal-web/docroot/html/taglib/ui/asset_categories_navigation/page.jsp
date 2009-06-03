@@ -27,9 +27,9 @@
 <%
 long categoryId = ParamUtil.getLong(renderRequest, "categoryId");
 
-List<AssetCategoryVocabulary> vocabularies = null;
+List<AssetVocabulary> vocabularies = null;
 
-vocabularies = AssetCategoryVocabularyServiceUtil.getGroupCategoryVocabularies(scopeGroupId);
+vocabularies = AssetVocabularyServiceUtil.getGroupVocabularies(scopeGroupId);
 
 PortletURL portletURL = renderResponse.createRenderURL();
 %>
@@ -38,7 +38,7 @@ PortletURL portletURL = renderResponse.createRenderURL();
 
 	<%
 	for (int i = 0; i < vocabularies.size(); i++) {
-		AssetCategoryVocabulary vocabulary = vocabularies.get(i);
+		AssetVocabulary vocabulary = vocabularies.get(i);
 
 		String vocabularyName = vocabulary.getName();
 	%>
@@ -117,12 +117,12 @@ private void _buildCategoriesNavigation(List<AssetCategory> categories, long cur
 	}
 }
 
-private String _buildVocabularyNavigation(AssetCategoryVocabulary vocabulary, long categoryId, PortletURL portletURL) throws Exception {
+private String _buildVocabularyNavigation(AssetVocabulary vocabulary, long categoryId, PortletURL portletURL) throws Exception {
 	StringBuilder sb = new StringBuilder();
 
 	sb.append("<ul class=\"treeview\">");
 
-	List<AssetCategory> categories = AssetCategoryServiceUtil.getVocabularyRootCategories(vocabulary.getCategoryVocabularyId());
+	List<AssetCategory> categories = AssetCategoryServiceUtil.getVocabularyRootCategories(vocabulary.getVocabularyId());
 
 	_buildCategoriesNavigation(categories, categoryId, portletURL, sb);
 

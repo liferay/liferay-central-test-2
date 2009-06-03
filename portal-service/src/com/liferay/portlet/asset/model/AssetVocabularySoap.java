@@ -29,7 +29,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * <a href="AssetCategoryVocabularySoap.java.html"><b><i>View Source</i></b></a>
+ * <a href="AssetVocabularySoap.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be
@@ -38,20 +38,19 @@ import java.util.List;
  *
  * <p>
  * This class is used by
- * <code>com.liferay.portlet.asset.service.http.AssetCategoryVocabularyServiceSoap</code>.
+ * <code>com.liferay.portlet.asset.service.http.AssetVocabularyServiceSoap</code>.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.asset.service.http.AssetCategoryVocabularyServiceSoap
+ * @see com.liferay.portlet.asset.service.http.AssetVocabularyServiceSoap
  *
  */
-public class AssetCategoryVocabularySoap implements Serializable {
-	public static AssetCategoryVocabularySoap toSoapModel(
-		AssetCategoryVocabulary model) {
-		AssetCategoryVocabularySoap soapModel = new AssetCategoryVocabularySoap();
+public class AssetVocabularySoap implements Serializable {
+	public static AssetVocabularySoap toSoapModel(AssetVocabulary model) {
+		AssetVocabularySoap soapModel = new AssetVocabularySoap();
 
-		soapModel.setCategoryVocabularyId(model.getCategoryVocabularyId());
+		soapModel.setVocabularyId(model.getVocabularyId());
 		soapModel.setGroupId(model.getGroupId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserId(model.getUserId());
@@ -64,9 +63,8 @@ public class AssetCategoryVocabularySoap implements Serializable {
 		return soapModel;
 	}
 
-	public static AssetCategoryVocabularySoap[] toSoapModels(
-		AssetCategoryVocabulary[] models) {
-		AssetCategoryVocabularySoap[] soapModels = new AssetCategoryVocabularySoap[models.length];
+	public static AssetVocabularySoap[] toSoapModels(AssetVocabulary[] models) {
+		AssetVocabularySoap[] soapModels = new AssetVocabularySoap[models.length];
 
 		for (int i = 0; i < models.length; i++) {
 			soapModels[i] = toSoapModel(models[i]);
@@ -75,15 +73,15 @@ public class AssetCategoryVocabularySoap implements Serializable {
 		return soapModels;
 	}
 
-	public static AssetCategoryVocabularySoap[][] toSoapModels(
-		AssetCategoryVocabulary[][] models) {
-		AssetCategoryVocabularySoap[][] soapModels = null;
+	public static AssetVocabularySoap[][] toSoapModels(
+		AssetVocabulary[][] models) {
+		AssetVocabularySoap[][] soapModels = null;
 
 		if (models.length > 0) {
-			soapModels = new AssetCategoryVocabularySoap[models.length][models[0].length];
+			soapModels = new AssetVocabularySoap[models.length][models[0].length];
 		}
 		else {
-			soapModels = new AssetCategoryVocabularySoap[0][0];
+			soapModels = new AssetVocabularySoap[0][0];
 		}
 
 		for (int i = 0; i < models.length; i++) {
@@ -93,34 +91,34 @@ public class AssetCategoryVocabularySoap implements Serializable {
 		return soapModels;
 	}
 
-	public static AssetCategoryVocabularySoap[] toSoapModels(
-		List<AssetCategoryVocabulary> models) {
-		List<AssetCategoryVocabularySoap> soapModels = new ArrayList<AssetCategoryVocabularySoap>(models.size());
+	public static AssetVocabularySoap[] toSoapModels(
+		List<AssetVocabulary> models) {
+		List<AssetVocabularySoap> soapModels = new ArrayList<AssetVocabularySoap>(models.size());
 
-		for (AssetCategoryVocabulary model : models) {
+		for (AssetVocabulary model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 
-		return soapModels.toArray(new AssetCategoryVocabularySoap[soapModels.size()]);
+		return soapModels.toArray(new AssetVocabularySoap[soapModels.size()]);
 	}
 
-	public AssetCategoryVocabularySoap() {
+	public AssetVocabularySoap() {
 	}
 
 	public long getPrimaryKey() {
-		return _categoryVocabularyId;
+		return _vocabularyId;
 	}
 
 	public void setPrimaryKey(long pk) {
-		setCategoryVocabularyId(pk);
+		setVocabularyId(pk);
 	}
 
-	public long getCategoryVocabularyId() {
-		return _categoryVocabularyId;
+	public long getVocabularyId() {
+		return _vocabularyId;
 	}
 
-	public void setCategoryVocabularyId(long categoryVocabularyId) {
-		_categoryVocabularyId = categoryVocabularyId;
+	public void setVocabularyId(long vocabularyId) {
+		_vocabularyId = vocabularyId;
 	}
 
 	public long getGroupId() {
@@ -187,7 +185,7 @@ public class AssetCategoryVocabularySoap implements Serializable {
 		_description = description;
 	}
 
-	private long _categoryVocabularyId;
+	private long _vocabularyId;
 	private long _groupId;
 	private long _companyId;
 	private long _userId;

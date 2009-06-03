@@ -27,13 +27,13 @@ import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.util.StringPool;
 
-import com.liferay.portlet.asset.model.AssetCategoryVocabulary;
+import com.liferay.portlet.asset.model.AssetVocabulary;
 
 import java.util.Date;
 import java.util.List;
 
 /**
- * <a href="AssetCategoryVocabularyJSONSerializer.java.html"><b><i>View Source</i></b></a>
+ * <a href="AssetVocabularyJSONSerializer.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be
@@ -42,20 +42,20 @@ import java.util.List;
  *
  * <p>
  * This class is used by
- * <code>com.liferay.portlet.asset.service.http.AssetCategoryVocabularyServiceJSON</code>
+ * <code>com.liferay.portlet.asset.service.http.AssetVocabularyServiceJSON</code>
  * to translate objects.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.asset.service.http.AssetCategoryVocabularyServiceJSON
+ * @see com.liferay.portlet.asset.service.http.AssetVocabularyServiceJSON
  *
  */
-public class AssetCategoryVocabularyJSONSerializer {
-	public static JSONObject toJSONObject(AssetCategoryVocabulary model) {
+public class AssetVocabularyJSONSerializer {
+	public static JSONObject toJSONObject(AssetVocabulary model) {
 		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
 
-		jsonObj.put("categoryVocabularyId", model.getCategoryVocabularyId());
+		jsonObj.put("vocabularyId", model.getVocabularyId());
 		jsonObj.put("groupId", model.getGroupId());
 		jsonObj.put("companyId", model.getCompanyId());
 		jsonObj.put("userId", model.getUserId());
@@ -87,10 +87,10 @@ public class AssetCategoryVocabularyJSONSerializer {
 	}
 
 	public static JSONArray toJSONArray(
-		com.liferay.portlet.asset.model.AssetCategoryVocabulary[] models) {
+		com.liferay.portlet.asset.model.AssetVocabulary[] models) {
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
-		for (AssetCategoryVocabulary model : models) {
+		for (AssetVocabulary model : models) {
 			jsonArray.put(toJSONObject(model));
 		}
 
@@ -98,10 +98,10 @@ public class AssetCategoryVocabularyJSONSerializer {
 	}
 
 	public static JSONArray toJSONArray(
-		com.liferay.portlet.asset.model.AssetCategoryVocabulary[][] models) {
+		com.liferay.portlet.asset.model.AssetVocabulary[][] models) {
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
-		for (AssetCategoryVocabulary[] model : models) {
+		for (AssetVocabulary[] model : models) {
 			jsonArray.put(toJSONArray(model));
 		}
 
@@ -109,10 +109,10 @@ public class AssetCategoryVocabularyJSONSerializer {
 	}
 
 	public static JSONArray toJSONArray(
-		List<com.liferay.portlet.asset.model.AssetCategoryVocabulary> models) {
+		List<com.liferay.portlet.asset.model.AssetVocabulary> models) {
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
-		for (AssetCategoryVocabulary model : models) {
+		for (AssetVocabulary model : models) {
 			jsonArray.put(toJSONObject(model));
 		}
 

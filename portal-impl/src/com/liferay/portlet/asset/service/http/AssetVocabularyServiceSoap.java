@@ -25,12 +25,12 @@ package com.liferay.portlet.asset.service.http;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
-import com.liferay.portlet.asset.service.AssetCategoryVocabularyServiceUtil;
+import com.liferay.portlet.asset.service.AssetVocabularyServiceUtil;
 
 import java.rmi.RemoteException;
 
 /**
- * <a href="AssetCategoryVocabularyServiceSoap.java.html"><b><i>View Source</i></b></a>
+ * <a href="AssetVocabularyServiceSoap.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be
@@ -39,7 +39,7 @@ import java.rmi.RemoteException;
  *
  * <p>
  * This class provides a SOAP utility for the
- * <code>com.liferay.portlet.asset.service.AssetCategoryVocabularyServiceUtil</code> service
+ * <code>com.liferay.portlet.asset.service.AssetVocabularyServiceUtil</code> service
  * utility. The static methods of this class calls the same methods of the
  * service utility. However, the signatures are different because it is
  * difficult for SOAP to support certain types.
@@ -49,9 +49,9 @@ import java.rmi.RemoteException;
  * ServiceBuilder follows certain rules in translating the methods. For example,
  * if the method in the service utility returns a <code>java.util.List</code>,
  * that is translated to an array of
- * <code>com.liferay.portlet.asset.model.AssetCategoryVocabularySoap</code>. If the method in the
- * service utility returns a <code>com.liferay.portlet.asset.model.AssetCategoryVocabulary</code>,
- * that is translated to a <code>com.liferay.portlet.asset.model.AssetCategoryVocabularySoap</code>.
+ * <code>com.liferay.portlet.asset.model.AssetVocabularySoap</code>. If the method in the
+ * service utility returns a <code>com.liferay.portlet.asset.model.AssetVocabulary</code>,
+ * that is translated to a <code>com.liferay.portlet.asset.model.AssetVocabularySoap</code>.
  * Methods that SOAP cannot safely wire are skipped.
  * </p>
  *
@@ -75,21 +75,21 @@ import java.rmi.RemoteException;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.asset.model.AssetCategoryVocabularySoap
- * @see com.liferay.portlet.asset.service.AssetCategoryVocabularyServiceUtil
- * @see com.liferay.portlet.asset.service.http.AssetCategoryVocabularyServiceHttp
+ * @see com.liferay.portlet.asset.model.AssetVocabularySoap
+ * @see com.liferay.portlet.asset.service.AssetVocabularyServiceUtil
+ * @see com.liferay.portlet.asset.service.http.AssetVocabularyServiceHttp
  *
  */
-public class AssetCategoryVocabularyServiceSoap {
-	public static com.liferay.portlet.asset.model.AssetCategoryVocabularySoap addCategoryVocabulary(
+public class AssetVocabularyServiceSoap {
+	public static com.liferay.portlet.asset.model.AssetVocabularySoap addVocabulary(
 		java.lang.String name,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
-			com.liferay.portlet.asset.model.AssetCategoryVocabulary returnValue = AssetCategoryVocabularyServiceUtil.addCategoryVocabulary(name,
+			com.liferay.portlet.asset.model.AssetVocabulary returnValue = AssetVocabularyServiceUtil.addVocabulary(name,
 					serviceContext);
 
-			return com.liferay.portlet.asset.model.AssetCategoryVocabularySoap.toSoapModel(returnValue);
+			return com.liferay.portlet.asset.model.AssetVocabularySoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -98,10 +98,10 @@ public class AssetCategoryVocabularyServiceSoap {
 		}
 	}
 
-	public static void deleteCategoryVocabulary(long categoryVocabularyId)
+	public static void deleteVocabulary(long vocabularyId)
 		throws RemoteException {
 		try {
-			AssetCategoryVocabularyServiceUtil.deleteCategoryVocabulary(categoryVocabularyId);
+			AssetVocabularyServiceUtil.deleteVocabulary(vocabularyId);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -110,13 +110,13 @@ public class AssetCategoryVocabularyServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.asset.model.AssetCategoryVocabularySoap[] getCompanyCategoryVocabularies(
+	public static com.liferay.portlet.asset.model.AssetVocabularySoap[] getCompanyVocabularies(
 		long companyId) throws RemoteException {
 		try {
-			java.util.List<com.liferay.portlet.asset.model.AssetCategoryVocabulary> returnValue =
-				AssetCategoryVocabularyServiceUtil.getCompanyCategoryVocabularies(companyId);
+			java.util.List<com.liferay.portlet.asset.model.AssetVocabulary> returnValue =
+				AssetVocabularyServiceUtil.getCompanyVocabularies(companyId);
 
-			return com.liferay.portlet.asset.model.AssetCategoryVocabularySoap.toSoapModels(returnValue);
+			return com.liferay.portlet.asset.model.AssetVocabularySoap.toSoapModels(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -125,13 +125,13 @@ public class AssetCategoryVocabularyServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.asset.model.AssetCategoryVocabularySoap[] getGroupCategoryVocabularies(
+	public static com.liferay.portlet.asset.model.AssetVocabularySoap[] getGroupVocabularies(
 		long groupId) throws RemoteException {
 		try {
-			java.util.List<com.liferay.portlet.asset.model.AssetCategoryVocabulary> returnValue =
-				AssetCategoryVocabularyServiceUtil.getGroupCategoryVocabularies(groupId);
+			java.util.List<com.liferay.portlet.asset.model.AssetVocabulary> returnValue =
+				AssetVocabularyServiceUtil.getGroupVocabularies(groupId);
 
-			return com.liferay.portlet.asset.model.AssetCategoryVocabularySoap.toSoapModels(returnValue);
+			return com.liferay.portlet.asset.model.AssetVocabularySoap.toSoapModels(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -140,12 +140,12 @@ public class AssetCategoryVocabularyServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.asset.model.AssetCategoryVocabularySoap getVocabulary(
-		long categoryVocabularyId) throws RemoteException {
+	public static com.liferay.portlet.asset.model.AssetVocabularySoap getVocabulary(
+		long vocabularyId) throws RemoteException {
 		try {
-			com.liferay.portlet.asset.model.AssetCategoryVocabulary returnValue = AssetCategoryVocabularyServiceUtil.getVocabulary(categoryVocabularyId);
+			com.liferay.portlet.asset.model.AssetVocabulary returnValue = AssetVocabularyServiceUtil.getVocabulary(vocabularyId);
 
-			return com.liferay.portlet.asset.model.AssetCategoryVocabularySoap.toSoapModel(returnValue);
+			return com.liferay.portlet.asset.model.AssetVocabularySoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -154,14 +154,13 @@ public class AssetCategoryVocabularyServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.asset.model.AssetCategoryVocabularySoap updateCategoryVocabulary(
-		long categoryVocabularyId, java.lang.String name)
-		throws RemoteException {
+	public static com.liferay.portlet.asset.model.AssetVocabularySoap updateVocabulary(
+		long vocabularyId, java.lang.String name) throws RemoteException {
 		try {
-			com.liferay.portlet.asset.model.AssetCategoryVocabulary returnValue = AssetCategoryVocabularyServiceUtil.updateCategoryVocabulary(categoryVocabularyId,
+			com.liferay.portlet.asset.model.AssetVocabulary returnValue = AssetVocabularyServiceUtil.updateVocabulary(vocabularyId,
 					name);
 
-			return com.liferay.portlet.asset.model.AssetCategoryVocabularySoap.toSoapModel(returnValue);
+			return com.liferay.portlet.asset.model.AssetVocabularySoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -170,5 +169,5 @@ public class AssetCategoryVocabularyServiceSoap {
 		}
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(AssetCategoryVocabularyServiceSoap.class);
+	private static Log _log = LogFactoryUtil.getLog(AssetVocabularyServiceSoap.class);
 }

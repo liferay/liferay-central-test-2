@@ -27,7 +27,7 @@ import com.liferay.portlet.announcements.service.persistence.AnnouncementsEntryP
 import com.liferay.portlet.announcements.service.persistence.AnnouncementsFlagPersistenceTest;
 import com.liferay.portlet.asset.service.persistence.AssetCategoryPersistenceTest;
 import com.liferay.portlet.asset.service.persistence.AssetCategoryPropertyPersistenceTest;
-import com.liferay.portlet.asset.service.persistence.AssetCategoryVocabularyPersistenceTest;
+import com.liferay.portlet.asset.service.persistence.AssetVocabularyPersistenceTest;
 import com.liferay.portlet.blogs.service.persistence.BlogsEntryPersistenceTest;
 import com.liferay.portlet.blogs.service.persistence.BlogsStatsUserPersistenceTest;
 import com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryPersistenceTest;
@@ -159,7 +159,7 @@ public class PersistenceTestSuite extends TestSuite {
 
 		testSuite.addTestSuite(AssetCategoryPersistenceTest.class);
 		testSuite.addTestSuite(AssetCategoryPropertyPersistenceTest.class);
-		testSuite.addTestSuite(AssetCategoryVocabularyPersistenceTest.class);
+		testSuite.addTestSuite(AssetVocabularyPersistenceTest.class);
 
 		testSuite.addTestSuite(BlogsEntryPersistenceTest.class);
 		testSuite.addTestSuite(BlogsStatsUserPersistenceTest.class);

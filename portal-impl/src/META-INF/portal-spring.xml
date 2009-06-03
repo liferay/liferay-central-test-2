@@ -885,23 +885,23 @@
 	<bean id="com.liferay.portlet.asset.service.persistence.AssetCategoryPropertyFinderUtil" class="com.liferay.portlet.asset.service.persistence.AssetCategoryPropertyFinderUtil">
 		<property name="finder" ref="com.liferay.portlet.asset.service.persistence.AssetCategoryPropertyFinder.impl" />
 	</bean>
-	<bean id="com.liferay.portlet.asset.service.AssetCategoryVocabularyLocalService.impl" class="com.liferay.portlet.asset.service.impl.AssetCategoryVocabularyLocalServiceImpl" />
-	<bean id="com.liferay.portlet.asset.service.AssetCategoryVocabularyLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService">
-		<property name="target" ref="com.liferay.portlet.asset.service.AssetCategoryVocabularyLocalService.impl" />
+	<bean id="com.liferay.portlet.asset.service.AssetVocabularyLocalService.impl" class="com.liferay.portlet.asset.service.impl.AssetVocabularyLocalServiceImpl" />
+	<bean id="com.liferay.portlet.asset.service.AssetVocabularyLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService">
+		<property name="target" ref="com.liferay.portlet.asset.service.AssetVocabularyLocalService.impl" />
 	</bean>
-	<bean id="com.liferay.portlet.asset.service.AssetCategoryVocabularyLocalServiceUtil" class="com.liferay.portlet.asset.service.AssetCategoryVocabularyLocalServiceUtil">
-		<property name="service" ref="com.liferay.portlet.asset.service.AssetCategoryVocabularyLocalService.impl" />
+	<bean id="com.liferay.portlet.asset.service.AssetVocabularyLocalServiceUtil" class="com.liferay.portlet.asset.service.AssetVocabularyLocalServiceUtil">
+		<property name="service" ref="com.liferay.portlet.asset.service.AssetVocabularyLocalService.impl" />
 	</bean>
-	<bean id="com.liferay.portlet.asset.service.AssetCategoryVocabularyService.impl" class="com.liferay.portlet.asset.service.impl.AssetCategoryVocabularyServiceImpl" />
-	<bean id="com.liferay.portlet.asset.service.AssetCategoryVocabularyService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService">
-		<property name="target" ref="com.liferay.portlet.asset.service.AssetCategoryVocabularyService.impl" />
+	<bean id="com.liferay.portlet.asset.service.AssetVocabularyService.impl" class="com.liferay.portlet.asset.service.impl.AssetVocabularyServiceImpl" />
+	<bean id="com.liferay.portlet.asset.service.AssetVocabularyService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService">
+		<property name="target" ref="com.liferay.portlet.asset.service.AssetVocabularyService.impl" />
 	</bean>
-	<bean id="com.liferay.portlet.asset.service.AssetCategoryVocabularyServiceUtil" class="com.liferay.portlet.asset.service.AssetCategoryVocabularyServiceUtil">
-		<property name="service" ref="com.liferay.portlet.asset.service.AssetCategoryVocabularyService.impl" />
+	<bean id="com.liferay.portlet.asset.service.AssetVocabularyServiceUtil" class="com.liferay.portlet.asset.service.AssetVocabularyServiceUtil">
+		<property name="service" ref="com.liferay.portlet.asset.service.AssetVocabularyService.impl" />
 	</bean>
-	<bean id="com.liferay.portlet.asset.service.persistence.AssetCategoryVocabularyPersistence.impl" class="com.liferay.portlet.asset.service.persistence.AssetCategoryVocabularyPersistenceImpl" parent="basePersistence" />
-	<bean id="com.liferay.portlet.asset.service.persistence.AssetCategoryVocabularyUtil" class="com.liferay.portlet.asset.service.persistence.AssetCategoryVocabularyUtil">
-		<property name="persistence" ref="com.liferay.portlet.asset.service.persistence.AssetCategoryVocabularyPersistence.impl" />
+	<bean id="com.liferay.portlet.asset.service.persistence.AssetVocabularyPersistence.impl" class="com.liferay.portlet.asset.service.persistence.AssetVocabularyPersistenceImpl" parent="basePersistence" />
+	<bean id="com.liferay.portlet.asset.service.persistence.AssetVocabularyUtil" class="com.liferay.portlet.asset.service.persistence.AssetVocabularyUtil">
+		<property name="persistence" ref="com.liferay.portlet.asset.service.persistence.AssetVocabularyPersistence.impl" />
 	</bean>
 	<bean id="com.liferay.portlet.blogs.service.BlogsEntryLocalService.impl" class="com.liferay.portlet.blogs.service.impl.BlogsEntryLocalServiceImpl" />
 	<bean id="com.liferay.portlet.blogs.service.BlogsEntryLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService">

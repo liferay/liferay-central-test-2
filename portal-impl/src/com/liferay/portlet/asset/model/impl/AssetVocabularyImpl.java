@@ -1,4 +1,3 @@
-<%
 /**
  * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
  *
@@ -20,10 +19,21 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%>
 
-<%@ include file="/html/portlet/init.jsp" %>
+package com.liferay.portlet.asset.model.impl;
 
-<%@ page import="com.liferay.portlet.asset.model.AssetCategory" %>
-<%@ page import="com.liferay.portlet.asset.model.AssetVocabulary" %>
-<%@ page import="com.liferay.portlet.asset.service.permission.AssetPermission" %>
+import com.liferay.portlet.asset.model.AssetVocabulary;
+
+/**
+ * <a href="AssetVocabularyImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ *
+ */
+public class AssetVocabularyImpl
+	extends AssetVocabularyModelImpl implements AssetVocabulary {
+
+	public AssetVocabularyImpl() {
+	}
+
+}
