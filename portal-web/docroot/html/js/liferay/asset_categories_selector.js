@@ -241,7 +241,7 @@ Liferay.AssetCategoriesSelector = new Expanse.Class(
 
 			container.empty().html('<div class="loading-animation" />');
 
-			Liferay.Service.Asset.AssetCategoryVocabulary.getGroupCategoryVocabularies(
+			Liferay.Service.Asset.AssetVocabulary.getGroupVocabularies(
 				{
 					groupId: themeDisplay.getScopeGroupId()
 				},
@@ -258,18 +258,18 @@ Liferay.AssetCategoriesSelector = new Expanse.Class(
 						jQuery.each(
 							vocabularies,
 							function(i) {
-								var categoryVocabulary = this;
-								var categoryVocabularyName = categoryVocabulary.name;
-								var categoryVocabularyId = categoryVocabulary.categoryVocabularyId;
+								var vocabulary = this;
+								var vocabularyName = vocabulary.name;
+								var vocabularyId = vocabulary.vocabularyId;
 
 								Liferay.Service.Asset.AssetCategory.getVocabularyRootCategories(
 									{
-										assetCategoryVocabularyId: categoryVocabularyId
+										assetVocabularyId: vocabularyId
 									},
 									function(categories) {
 										buffer.push('<fieldset>');
 										buffer.push('<legend class="lfr-asset-category-set-title">');
-										buffer.push(categoryVocabularyName);
+										buffer.push(vocabularyName);
 										buffer.push('</legend><div class="treeview">');
 
 										instance._assetCategoryIterator(categories, buffer, 0);

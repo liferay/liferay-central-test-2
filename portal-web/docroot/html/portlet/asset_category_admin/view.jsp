@@ -26,24 +26,24 @@
 
 <form id="<portlet:namespace />fm">
 
-<table class="category-vocabulary-container">
+<table class="vocabulary-container">
 <tr>
 	<td colspan="3">
-		<div class="category-vocabulary-toolbar">
-			<span id="category-vocabulary-search-bar">
-				<input id="category-vocabulary-search-input" type="text" value="" />
+		<div class="vocabulary-toolbar">
+			<span id="vocabulary-search-bar">
+				<input id="vocabulary-search-input" type="text" value="" />
 
-				<select class="category-vocabulary-select-search" id="category-vocabulary-select-search">
+				<select class="vocabulary-select-search" id="vocabulary-select-search">
 					<option value="categories" selected><liferay-ui:message key="categories" /></option>
 					<option value="vocabularies"><liferay-ui:message key="vocabularies" /></option>
 				</select>
 
-				<input id="category-vocabulary-search-button" type="button" value="<liferay-ui:message key="search" />" />
+				<input id="vocabulary-search-button" type="button" value="<liferay-ui:message key="search" />" />
 			</span>
 
-			<span class="category-vocabulary-actions">
+			<span class="vocabulary-actions">
 				<c:if test="<%= AssetPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_CATEGORY_VOCABULARY) %>">
-					<input class="add-category-vocabulary-btn" id="add-category-vocabulary-btn" name="add-category-vocabulary-btn" type="button"  value="<liferay-ui:message key="add-vocabulary" />">
+					<input class="add-vocabulary-btn" id="add-vocabulary-btn" name="add-vocabulary-btn" type="button"  value="<liferay-ui:message key="add-vocabulary" />">
 				</c:if>
 
 				<c:if test="<%= AssetPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_CATEGORY) %>">
@@ -68,19 +68,19 @@
 
 					<div class="panel-content">
 						<div class="ctrl-holder">
-							<label class="category-vocabulary-label" for="category-vocabulary-category-name">
+							<label class="vocabulary-label" for="vocabulary-category-name">
 								<liferay-ui:message key="name" />
 							</label>
 
-							<input class="category-vocabulary-category-name" name="category-vocabulary-category-name" type="text" value="" />
+							<input class="vocabulary-category-name" name="vocabulary-category-name" type="text" value="" />
 						</div>
 
 						<div class="ctrl-holder">
-							<label for="category-vocabulary-select-list">
+							<label for="vocabulary-select-list">
 								<liferay-ui:message key="to-vocabulary" />
 							</label>
 
-							<select class="category-vocabulary-select-list" name="category-vocabulary-select-list"></select>
+							<select class="vocabulary-select-list" name="vocabulary-select-list"></select>
 						</div>
 
 						<div class="category-permissions-actions">
@@ -97,28 +97,28 @@
 					</div>
 				</div>
 
-				<div class="exp-overlay category-vocabulary-toolbar-section">
+				<div class="exp-overlay vocabulary-toolbar-section">
 					<div class="exp-header">
 						<span class="knob"></span>
 					</div>
 
 					<div class="panel-content">
 						<div class="ctrl-holder">
-							<label for="category-vocabulary-name">
+							<label for="vocabulary-name">
 								<liferay-ui:message key="add-vocabulary" />
 							</label>
 
-							<input class="category-vocabulary-name" name="category-vocabulary-name" type="text" value="" />
+							<input class="vocabulary-name" name="vocabulary-name" type="text" value="" />
 						</div>
 
-						<div class="category-vocabulary-permissions-actions">
+						<div class="vocabulary-permissions-actions">
 							<liferay-ui:input-permissions
 								modelName="<%= AssetVocabulary.class.getName() %>"
 							/>
 						</div>
 
 						<div class="button-holder">
-							<input class="category-vocabulary-save-button" type="button" value="<liferay-ui:message key="save" />" />
+							<input class="vocabulary-save-button" type="button" value="<liferay-ui:message key="save" />" />
 
 							<input class="close-panel" type="button" value="<liferay-ui:message key="close" />" />
 						</div>
@@ -128,32 +128,32 @@
 		</div>
 	</td>
 </tr>
-<tr class="category-vocabulary-content">
-	<td class="category-vocabulary-list-container">
+<tr class="vocabulary-content">
+	<td class="vocabulary-list-container">
 		<div class="results-header"><liferay-ui:message key="vocabularies" /></div>
 
-		<div class="category-vocabulary-list lfr-component"></div>
+		<div class="vocabulary-list lfr-component"></div>
 	</td>
-	<td class="category-vocabulary-categories-container">
+	<td class="vocabulary-categories-container">
 		<div class="results-header">
 			<liferay-ui:message key="categories" />
 		</div>
 
-		<div class="lfr-message-response" id="category-vocabulary-category-messages" style="display: none;"></div>
+		<div class="lfr-message-response" id="vocabulary-category-messages" style="display: none;"></div>
 
-		<div class="category-vocabulary-categories lfr-component"></div>
+		<div class="vocabulary-categories lfr-component"></div>
 	</td>
-	<td class="category-vocabulary-edit-category">
+	<td class="vocabulary-edit-category">
 		<div class="results-header"><liferay-ui:message key="edit-category" /></div>
 
-		<div class="category-vocabulary-edit">
-			<div class="category-vocabulary-close">
+		<div class="vocabulary-edit">
+			<div class="vocabulary-close">
 				<span>
 					<liferay-ui:icon image="close" />
 				</span>
 			</div>
 
-			<div class="category-vocabulary-label">
+			<div class="vocabulary-label">
 				<liferay-ui:message key="name" />:
 			</div>
 
@@ -161,12 +161,12 @@
 
 			<br /><br />
 
-			<div class="category-vocabulary-properties">
+			<div class="vocabulary-properties">
 				<liferay-ui:message key="properties" />:
 
 				<liferay-ui:icon-help message="properties-are-a-way-to-add-more-detailed-information-to-a-specific-category" />
 
-				<div class="category-vocabulary-property-row">
+				<div class="vocabulary-property-row">
 					<input class="category-property-key" type="text" />
 
 					<input class="category-property-value" type="text" />
@@ -178,11 +178,11 @@
 
 				<br />
 
-				<input class="category-vocabulary-save-category-properties" type="button" value="<liferay-ui:message key="save" />" />
+				<input class="vocabulary-save-category-properties" type="button" value="<liferay-ui:message key="save" />" />
 
-				<input class="category-vocabulary-close" type="button" value="<liferay-ui:message key="close" />" />
+				<input class="vocabulary-close" type="button" value="<liferay-ui:message key="close" />" />
 
-				<input class="category-vocabulary-delete-categories-button" type="button" value="<liferay-ui:message key="delete" />" />
+				<input class="vocabulary-delete-categories-button" type="button" value="<liferay-ui:message key="delete" />" />
 
 				<input class="permissions-categories-btn" type="button" value="<liferay-ui:message key="edit-category-permissions" />" />
 			</div>
@@ -191,10 +191,10 @@
 </tr>
 <tr>
 	<td colspan="3">
-		<div class="category-vocabulary-footer">
-			<input class="category-vocabulary-delete-list-button" type="button" value="<liferay-ui:message key="delete-vocabulary" />" />
+		<div class="vocabulary-footer">
+			<input class="vocabulary-delete-list-button" type="button" value="<liferay-ui:message key="delete-vocabulary" />" />
 
-			<input class="permissions-category-vocabulary-btn" type="button" value="<liferay-ui:message key="edit-vocabulary-permissions" />" />
+			<input class="permissions-vocabulary-btn" type="button" value="<liferay-ui:message key="edit-vocabulary-permissions" />" />
 		</div>
 	</td>
 </tr>

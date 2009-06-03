@@ -11,23 +11,23 @@
 				var childrenContainer = jQuery(instance._categoryScopeClass);
 
 				instance.portletId = portletId;
-				instance._container = jQuery('.category-vocabulary-container');
+				instance._container = jQuery('.vocabulary-container');
 
-				jQuery('.category-vocabulary-close').click(
+				jQuery('.vocabulary-close').click(
 					function() {
 						instance._unselectAllCategories();
 						instance._closeEditSection();
 					}
 				);
 
-				jQuery('.category-vocabulary-save-category-properties').click(
+				jQuery('.vocabulary-save-category-properties').click(
 					function() {
 						instance._saveCategoryProperties();
 					}
 				);
 
-				instance._portletMessageContainer = jQuery('<div class="lfr-message-response" id="category-vocabulary-messages" />');
-				instance._categoryMessageContainer = jQuery('<div class="lfr-message-response" id="category-vocabulary-category-messages" />');
+				instance._portletMessageContainer = jQuery('<div class="lfr-message-response" id="vocabulary-messages" />');
+				instance._categoryMessageContainer = jQuery('<div class="lfr-message-response" id="vocabulary-category-messages" />');
 
 				instance._portletMessageContainer.hide();
 				instance._categoryMessageContainer.hide();
@@ -35,14 +35,14 @@
 				instance._container.before(instance._portletMessageContainer);
 				childrenContainer.before(instance._categoryMessageContainer);
 
-				var buttons = jQuery('.category-vocabulary-buttons')
-				var toolbar = jQuery('.category-vocabulary-toolbar');
+				var buttons = jQuery('.vocabulary-buttons')
+				var toolbar = jQuery('.vocabulary-toolbar');
 
 				var categoryToolbarSection = jQuery('.category-toolbar-section');
-				var categoryVocabularyToolbarSection = jQuery('.category-vocabulary-toolbar-section');
+				var vocabularyToolbarSection = jQuery('.vocabulary-toolbar-section');
 
 				var addCategoryButton = jQuery('.add-category-btn');
-				var addCategoryVocabularyButton = jQuery('.add-category-vocabulary-btn');
+				var addVocabularyButton = jQuery('.add-vocabulary-btn');
 
 				instance._toolbarCategoryPanel = new Expanse.Overlay(
 					categoryToolbarSection[0],
@@ -53,10 +53,10 @@
 					}
 				);
 
-				instance._categoryVocabularyCategoryPanel = new Expanse.Overlay(
-					categoryVocabularyToolbarSection[0],
+				instance._vocabularyCategoryPanel = new Expanse.Overlay(
+					vocabularyToolbarSection[0],
 					{
-						context: [addCategoryVocabularyButton[0], 'tr', 'br'],
+						context: [addVocabularyButton[0], 'tr', 'br'],
 						preventcontextoverlap: true,
 						visible: false
 					}
@@ -67,9 +67,9 @@
 					jQuery(button).addClass('selected');
 				};
 
-				toolbar.find('.add-category-vocabulary-btn').click(
+				toolbar.find('.add-vocabulary-btn').click(
 					function (event) {
-						instance._showToolBarCategoryVocabularySection();
+						instance._showToolBarVocabularySection();
 					}
 				);
 
@@ -98,63 +98,63 @@
 					}
 				);
 
-				jQuery('.permissions-category-vocabulary-btn').click(
+				jQuery('.permissions-vocabulary-btn').click(
 					function() {
-						var categoryVocabularyName = instance._selectedCategoryVocabularyName;
-						var categoryVocabularyId = instance._selectedCategoryVocabularyId;
+						var vocabularyName = instance._selectedVocabularyName;
+						var vocabularyId = instance._selectedVocabularyId;
 
-						if (categoryVocabularyName && categoryVocabularyId) {
+						if (vocabularyName && vocabularyId) {
 							var portletURL = instance._createPermissionURL(
-								'com.liferay.portlet.asset.model.AssetCategoryVocabulary',
-								categoryVocabularyName,
-								categoryVocabularyId);
+								'com.liferay.portlet.asset.model.AssetVocabulary',
+								vocabularyName,
+								vocabularyId);
 
 							submitForm(document.hrefFm, portletURL.toString());
 						}
 						else {
-							instance._showToolBarCategoryVocabularySection();
+							instance._showToolBarVocabularySection();
 						}
 					}
 				);
 
-				jQuery('#category-vocabulary-search-bar').change(
+				jQuery('#vocabulary-search-bar').change(
 					function(event) {
-						jQuery('#category-vocabulary-search-input').focus();
+						jQuery('#vocabulary-search-input').focus();
 						instance._reloadSearch();
 					}
 				);
 
 				var addCategory = function() {
-					var actionScope = jQuery('.category-vocabulary-actions');
-					var categoryName = actionScope.find('.category-vocabulary-category-name').val();
-					var categoryVocabularyId = actionScope.find('.category-vocabulary-select-list option:selected').attr('value');
+					var actionScope = jQuery('.vocabulary-actions');
+					var categoryName = actionScope.find('.vocabulary-category-name').val();
+					var vocabularyId = actionScope.find('.vocabulary-select-list option:selected').attr('value');
 
 					instance._hideAllMessages();
-					instance._addCategory(categoryName, categoryVocabularyId);
+					instance._addCategory(categoryName, vocabularyId);
 				};
 
-				var addCategoryVocabulary = function() {
-					var actionScope = jQuery('.category-vocabulary-actions');
-					var inputCategoryVocabularyName = actionScope.find('.category-vocabulary-name');
-					var newCategoryVocabularyName = inputCategoryVocabularyName.val();
+				var addVocabulary = function() {
+					var actionScope = jQuery('.vocabulary-actions');
+					var inputVocabularyName = actionScope.find('.vocabulary-name');
+					var newVocabularyName = inputVocabularyName.val();
 
 					instance._hideAllMessages();
-					instance._addCategoryVocabulary(newCategoryVocabularyName);
+					instance._addVocabulary(newVocabularyName);
 				};
 
 				jQuery('input.category-save-button').click(addCategory);
-				jQuery('input.category-vocabulary-save-button').click(addCategoryVocabulary);
+				jQuery('input.vocabulary-save-button').click(addVocabulary);
 
-				jQuery('.category-vocabulary-actions input').keyup(
+				jQuery('.vocabulary-actions input').keyup(
 					function(event) {
 						if (event.keyCode == 13) {
 							var input = jQuery(this);
 
-							if (input.is('.category-vocabulary-category-name')) {
+							if (input.is('.vocabulary-category-name')) {
 								addCategory();
 							}
-							else if (input.is('.category-vocabulary-name')) {
-								addCategoryVocabulary();
+							else if (input.is('.vocabulary-name')) {
+								addVocabulary();
 							}
 
 							return false;
@@ -162,7 +162,7 @@
 					}
 				);
 
-				jQuery('input.category-vocabulary-delete-categories-button').click(
+				jQuery('input.vocabulary-delete-categories-button').click(
 					function() {
 						if (confirm(Liferay.Language.get('are-you-sure-you-want-to-delete-this-category'))) {
 							instance._deleteCategory(
@@ -173,7 +173,7 @@
 									if (!exception) {
 										instance._closeEditSection();
 										instance._hideToolbarSections();
-										instance._displayCategoryVocabularyCategories(instance._selectedCategoryVocabularyId);
+										instance._displayVocabularyCategories(instance._selectedVocabularyId);
 									}
 									else {
 										if (exception.indexOf('auth.PrincipalException') > -1) {
@@ -186,11 +186,11 @@
 					}
 				);
 
-				jQuery('input.category-vocabulary-delete-list-button').click(
+				jQuery('input.vocabulary-delete-list-button').click(
 					function() {
 						if (confirm(Liferay.Language.get('are-you-sure-you-want-to-delete-this-list'))) {
-							instance._deleteCategoryVocabulary(
-								instance._selectedCategoryVocabularyId,
+							instance._deleteVocabulary(
+								instance._selectedVocabularyId,
 								function(message) {
 									var exception = message.exception;
 									if (!exception) {
@@ -238,7 +238,7 @@
 				return portletURL;
 			},
 
-			_displayCategoryVocabularyCategoriesImpl: function(categories, callback) {
+			_displayVocabularyCategoriesImpl: function(categories, callback) {
 				var instance = this;
 
 				var buffer = [];
@@ -253,7 +253,7 @@
 						ui.droppable = jQuery(this).parent();
 						instance._merge(event, ui);
 
-						var categoryTree = jQuery('#category-vocabulary-treeview');
+						var categoryTree = jQuery('#vocabulary-treeview');
 
 						setTimeout(
 							function() {
@@ -265,7 +265,7 @@
 					}
 				};
 
-				buffer.push('<div class="category-vocabulary-treeview-container lfr-component"><ul id="category-vocabulary-treeview" class="filetree">');
+				buffer.push('<div class="vocabulary-treeview-container lfr-component"><ul id="vocabulary-treeview" class="filetree">');
 				instance._buildCategoryTreeview(categories, buffer, 0);
 				buffer.push('</ul></div>');
 
@@ -273,13 +273,13 @@
 
 				instance._reloadSearch();
 
-				var categoryTree = jQuery('#category-vocabulary-treeview');
+				var categoryTree = jQuery('#vocabulary-treeview');
 				var	categoryList = jQuery(instance._categoryListClass);
 
 				categoryList.click(
 					function(event) {
 						var categoryId = instance._getCategoryId(this);
-						var editContainer = jQuery('.category-vocabulary-edit');
+						var editContainer = jQuery('.vocabulary-edit');
 
 						instance._selectCategory(categoryId);
 						instance._showSection(editContainer);
@@ -290,7 +290,7 @@
 
 				categoryTree.treeview().tree(treeOptions);
 
-				var list = jQuery(instance._categoryVocabularyScopeClass);
+				var list = jQuery(instance._vocabularyScopeClass);
 				var listLinks = jQuery('li', list);
 				var treeScope = categoryTree.data('tree').identifier;
 
@@ -307,28 +307,28 @@
 				var instance = this;
 
 				var buffer = [];
-				var list = jQuery(instance._categoryVocabularyScopeClass);
+				var list = jQuery(instance._vocabularyScopeClass);
 
-				instance._showLoading('.category-vocabulary-categories, .category-vocabulary-list');
+				instance._showLoading('.vocabulary-categories, .vocabulary-list');
 
 				buffer.push('<ul>');
 
-				instance._getCategoryVocabularies(
-					function(categoryVocabularies) {
+				instance._getVocabularies(
+					function(vocabularies) {
 						jQuery.each(
-							categoryVocabularies,
+							vocabularies,
 							function(i) {
 								buffer.push('<li');
-								buffer.push(' class="category-vocabulary-category results-row');
+								buffer.push(' class="vocabulary-category results-row');
 
 								if (i == 0) {
 									buffer.push(' selected ');
 								}
 
-								buffer.push('" data-categoryVocabulary="');
+								buffer.push('" data-vocabulary="');
 								buffer.push(this.name);
-								buffer.push('" data-categoryVocabularyId="');
-								buffer.push(this.categoryVocabularyId);
+								buffer.push('" data-vocabularyId="');
+								buffer.push(this.vocabularyId);
 								buffer.push('"><span><a href="javascript:;">');
 								buffer.push(this.name);
 								buffer.push('</a></span>');
@@ -340,21 +340,21 @@
 
 						list.html(buffer.join(''));
 
-						var firstCategoryVocabulary = jQuery(instance._categoryVocabularyListClass + ':first');
-						var categoryVocabularyName = instance._getCategoryVocabularyName(firstCategoryVocabulary);
-						var categoryVocabularyId = instance._getCategoryVocabularyId(firstCategoryVocabulary);
+						var firstVocabulary = jQuery(instance._vocabularyListClass + ':first');
+						var vocabularyName = instance._getVocabularyName(firstVocabulary);
+						var vocabularyId = instance._getVocabularyId(firstVocabulary);
 
-						instance._selectedCategoryVocabularyName = categoryVocabularyName;
-						instance._selectedCategoryVocabularyId = categoryVocabularyId;
-						instance._feedCategoryVocabularySelect(categoryVocabularies, categoryVocabularyId);
+						instance._selectedVocabularyName = vocabularyName;
+						instance._selectedVocabularyId = vocabularyId;
+						instance._feedVocabularySelect(vocabularies, vocabularyId);
 
 						var listLinks = jQuery('li', list);
 
 						listLinks.mousedown(
 							function(event) {
-								var categoryVocabularyId = instance._getCategoryVocabularyId(this);
+								var vocabularyId = instance._getVocabularyId(this);
 
-								instance._selectCategoryVocabulary(categoryVocabularyId);
+								instance._selectVocabulary(vocabularyId);
 							}
 						);
 
@@ -365,15 +365,15 @@
 						jQuery('li span a', list).editable(
 							function(value, settings) {
 
-								var categoryVocabularyName = value;
-								var categoryVocabularyId = instance._selectedCategoryVocabularyId;
+								var vocabularyName = value;
+								var vocabularyId = instance._selectedVocabularyId;
 								var li = jQuery(this).parents('li:first');
 
-								li.attr('data-categoryVocabulary', value);
+								li.attr('data-vocabulary', value);
 
-								instance._updateCategoryVocabulary(
-									categoryVocabularyId,
-									categoryVocabularyName,
+								instance._updateVocabulary(
+									vocabularyId,
+									vocabularyName,
 									function(message) {
 										var exception = message.exception;
 										if (exception) {
@@ -384,9 +384,9 @@
 										else {
 											instance._displayList(
 												function() {
-													var categoryVocabulary = instance._selectCategoryVocabulary(message.categoryVocabularyId);
+													var vocabulary = instance._selectVocabulary(message.vocabularyId);
 
-													instance._displayCategoryVocabularyCategories(instance._selectedCategoryVocabularyId);
+													instance._displayVocabularyCategories(instance._selectedVocabularyId);
 												}
 											);
 										}
@@ -396,7 +396,7 @@
 								return value;
 							},
 							{
-								cssclass: 'category-vocabulary-edit-vocabulary',
+								cssclass: 'vocabulary-edit-vocabulary',
 								data: function(value, settings) {
 									return value;
 								},
@@ -429,7 +429,7 @@
 						}
 
 						var total = categoryProperties.length;
-						var totalRendered = jQuery('div.category-vocabulary-property-row').length;
+						var totalRendered = jQuery('div.vocabulary-property-row').length;
 
 						if (totalRendered > total) {
 							return;
@@ -438,7 +438,7 @@
 						jQuery.each(
 							categoryProperties,
 							function() {
-								var baseCategoryProperty = jQuery('div.category-vocabulary-property-row:last');
+								var baseCategoryProperty = jQuery('div.vocabulary-property-row:last');
 
 								instance._addCategoryProperty(baseCategoryProperty, this.key, this.value);
 							}
@@ -447,20 +447,20 @@
 				);
 			},
 
-			_displayCategoryVocabularyCategories: function(categoryVocabularyId, callback) {
+			_displayVocabularyCategories: function(vocabularyId, callback) {
 				var instance = this;
 
-				jQuery('#category-vocabulary-category-messages').hide();
+				jQuery('#vocabulary-category-messages').hide();
 
-				instance._getCategoryVocabularyCategories(
-					categoryVocabularyId,
+				instance._getVocabularyCategories(
+					vocabularyId,
 					function(categories) {
-						instance._displayCategoryVocabularyCategoriesImpl(categories, callback);
+						instance._displayVocabularyCategoriesImpl(categories, callback);
 					}
 				);
 			},
 
-			_addCategory: function(categoryName, categoryVocabularyId, callback) {
+			_addCategory: function(categoryName, vocabularyId, callback) {
 				var instance = this;
 				var communityPermission = instance._getPermissionsEnabled('category', 'community');
 				var guestPermission = instance._getPermissionsEnabled('category', 'guest');
@@ -477,7 +477,7 @@
 					{
 						parentCategoryId: 0,
 						name: categoryName,
-						categoryVocabularyId: categoryVocabularyId,
+						vocabularyId: vocabularyId,
 						properties: [],
 						serviceContext: jQuery.toJSON(
 							{
@@ -494,10 +494,10 @@
 						if (!exception && message.categoryId) {
 							instance._sendMessage('success', 'your-request-processed-successfully');
 
-							instance._selectCategoryVocabulary(categoryVocabularyId);
+							instance._selectVocabulary(vocabularyId);
 
-							instance._displayCategoryVocabularyCategories(
-								instance._selectedCategoryVocabularyId,
+							instance._displayVocabularyCategories(
+								instance._selectedVocabularyId,
 								function() {
 									var category = instance._selectCategory(message.categoryId);
 
@@ -505,7 +505,7 @@
 										jQuery(instance._categoryScopeClass).scrollTo(category);
 									}
 
-									instance._showSection('.category-vocabulary-edit');
+									instance._showSection('.vocabulary-edit');
 								}
 							);
 
@@ -513,7 +513,7 @@
 							instance._hideToolbarSections();
 
 							if (callback) {
-								callback(categoryName, categoryVocabularyId);
+								callback(categoryName, vocabularyId);
 							}
 						}
 						else {
@@ -526,7 +526,7 @@
 									 (exception.indexOf('AssetCategoryException') > -1)) {
 								errorKey = 'one-of-your-fields-contains-invalid-characters';
 							}
-							else if (exception.indexOf('NoSuchCategoryVocabularyException') > -1) {
+							else if (exception.indexOf('NoSuchVocabularyException') > -1) {
 								errorKey = 'that-vocabulary-does-not-exist';
 							}
 							else if (exception.indexOf('auth.PrincipalException') > -1) {
@@ -543,7 +543,7 @@
 			_addCategoryProperty: function(baseNode, key, value) {
 				var instance = this;
 
-				var baseCategoryProperty = jQuery('div.category-vocabulary-property-row:last');
+				var baseCategoryProperty = jQuery('div.vocabulary-property-row:last');
 				var newCategoryProperty = baseCategoryProperty.clone();
 
 				newCategoryProperty.find('.category-property-key').val(key);
@@ -558,15 +558,15 @@
 				instance._attachCategoryPropertyIconEvents(newCategoryProperty);
 			},
 
-			_addCategoryVocabulary: function(categoryVocabularyName, callback) {
+			_addVocabulary: function(vocabularyName, callback) {
 				var instance = this;
 
-				var communityPermission = instance._getPermissionsEnabled('category-vocabulary', 'community');
-				var guestPermission = instance._getPermissionsEnabled('category-vocabulary', 'guest');
+				var communityPermission = instance._getPermissionsEnabled('vocabulary', 'community');
+				var guestPermission = instance._getPermissionsEnabled('vocabulary', 'guest');
 
-				Liferay.Service.Asset.AssetCategoryVocabulary.addCategoryVocabulary(
+				Liferay.Service.Asset.AssetVocabulary.addVocabulary(
 					{
-						name: categoryVocabularyName,
+						name: vocabularyName,
 						serviceContext: jQuery.toJSON(
 							{
 								communityPermissions: communityPermission,
@@ -583,12 +583,12 @@
 
 							instance._displayList(
 								function() {
-									var categoryVocabulary = instance._selectCategoryVocabulary(message.categoryVocabularyId);
+									var vocabulary = instance._selectVocabulary(message.vocabularyId);
 
-									instance._displayCategoryVocabularyCategories(instance._selectedCategoryVocabularyId);
+									instance._displayVocabularyCategories(instance._selectedVocabularyId);
 
-									if (categoryVocabulary.length) {
-										jQuery(instance._categoryVocabularyScopeClass).scrollTo(categoryVocabulary);
+									if (vocabulary.length) {
+										jQuery(instance._vocabularyScopeClass).scrollTo(vocabulary);
 									}
 								}
 							);
@@ -596,19 +596,19 @@
 							instance._resetActionValues();
 
 							if (callback) {
-								callback(categoryVocabulary);
+								callback(vocabulary);
 							}
 						}
 						else {
 							var errorKey = '';
 
-							if (exception.indexOf('DuplicateCategoryVocabularyException') > -1) {
+							if (exception.indexOf('DuplicateVocabularyException') > -1) {
 								errorKey = 'that-vocabulary-already-exists';
 							}
-							else if (exception.indexOf('CategoryVocabularyNameException') > -1) {
+							else if (exception.indexOf('VocabularyNameException') > -1) {
 								errorKey = 'one-of-your-fields-contains-invalid-characters';
 							}
-							else if (exception.indexOf('NoSuchCategoryVocabularyException') > -1) {
+							else if (exception.indexOf('NoSuchVocabularyException') > -1) {
 								errorKey = 'that-parent-vocabulary-does-not-exist';
 							}
 							else if (exception.indexOf('auth.PrincipalException') > -1) {
@@ -663,7 +663,7 @@
 						var hasChild = instance._filterCategory(categories, categoryId).length;
 
 						buffer.push('<li');
-						buffer.push(' class="category-vocabulary-category-item"');
+						buffer.push(' class="vocabulary-category-item"');
 						buffer.push(' data-category="');
 						buffer.push(this.name);
 						buffer.push('" data-categoryId="');
@@ -695,7 +695,7 @@
 
 				var buffer = [];
 
-				jQuery('.category-vocabulary-property-row:visible').each(
+				jQuery('.vocabulary-property-row:visible').each(
 					function(i, o) {
 						var categoryPropertyRow = jQuery(this);
 						var key = categoryPropertyRow.find('input.category-property-key').val();
@@ -712,7 +712,7 @@
 			_closeEditSection: function() {
 				var instance = this;
 
-				instance._hideSection('.category-vocabulary-edit');
+				instance._hideSection('.vocabulary-edit');
 				jQuery(instance._layoutContainerCells).width('auto');
 			},
 
@@ -727,32 +727,32 @@
 				);
 			},
 
-			_deleteCategoryVocabulary: function(categoryVocabularyId, callback) {
+			_deleteVocabulary: function(vocabularyId, callback) {
 				var instance = this;
 
-				Liferay.Service.Asset.AssetCategoryVocabulary.deleteCategoryVocabulary(
+				Liferay.Service.Asset.AssetVocabulary.deleteVocabulary(
 					{
-						categoryVocabularyId: categoryVocabularyId
+						vocabularyId: vocabularyId
 					},
 					callback
 				);
 			},
 
-			_feedCategoryVocabularySelect: function(categoryVocabularies, defaultValue) {
+			_feedVocabularySelect: function(vocabularies, defaultValue) {
 				var instance = this;
 
-				var select = jQuery('select.category-vocabulary-select-list');
+				var select = jQuery('select.vocabulary-select-list');
 				var buffer = [];
 
 				jQuery.each(
-					categoryVocabularies,
+					vocabularies,
 					function(i) {
-						var selected = (this.categoryVocabularyId == defaultValue);
+						var selected = (this.vocabularyId == defaultValue);
 
 						buffer.push('<option');
 						buffer.push(selected ? ' selected ' : '');
 						buffer.push(' value="');
-						buffer.push(this.categoryVocabularyId);
+						buffer.push(this.vocabularyId);
 						buffer.push('">');
 						buffer.push(this.name);
 						buffer.push('</option>');
@@ -818,10 +818,10 @@
 				);
 			},
 
-			_getCategoryVocabularies: function(callback) {
+			_getVocabularies: function(callback) {
 				var instance = this;
 
-				Liferay.Service.Asset.AssetCategoryVocabulary.getGroupCategoryVocabularies(
+				Liferay.Service.Asset.AssetVocabulary.getGroupVocabularies(
 					{
 						groupId: themeDisplay.getScopeGroupId()
 					},
@@ -829,35 +829,35 @@
 				);
 			},
 
-			_getCategoryVocabulary: function(categoryVocabularyId) {
+			_getVocabulary: function(vocabularyId) {
 				var instance = this;
 
-				return jQuery('li[data-categoryVocabularyId=' + categoryVocabularyId + ']')
+				return jQuery('li[data-vocabularyId=' + vocabularyId + ']')
 			},
 
-			_getCategoryVocabularyCategories: function(categoryVocabularyId, callback) {
+			_getVocabularyCategories: function(vocabularyId, callback) {
 				var instance = this;
 
 				instance._showLoading(instance._categoryScopeClass);
 
 				Liferay.Service.Asset.AssetCategory.getVocabularyCategories(
 					{
-						categoryVocabularyId: categoryVocabularyId
+						vocabularyId: vocabularyId
 					},
 					callback
 				);
 			},
 
-			_getCategoryVocabularyId: function(exp) {
+			_getVocabularyId: function(exp) {
 				var instance = this;
 
-				return jQuery(exp).attr('data-categoryVocabularyId');
+				return jQuery(exp).attr('data-vocabularyId');
 			},
 
-			_getCategoryVocabularyName: function(exp) {
+			_getVocabularyName: function(exp) {
 				var instance = this;
 
-				return jQuery(exp).attr('data-categoryVocabulary');
+				return jQuery(exp).attr('data-vocabulary');
 			},
 
 			_hideAllMessages: function() {
@@ -875,14 +875,14 @@
 			_hideSection: function(exp) {
 				var instance = this;
 
-				jQuery(exp).parent().removeClass('category-vocabulary-editing-tag');
+				jQuery(exp).parent().removeClass('vocabulary-editing-tag');
 			},
 
 			_hideToolbarSections: function() {
 				var instance = this;
 
 				instance._toolbarCategoryPanel.hide();
-				instance._categoryVocabularyCategoryPanel.hide();
+				instance._vocabularyCategoryPanel.hide();
 			},
 
 			_loadData: function() {
@@ -892,8 +892,8 @@
 
 				instance._displayList(
 					function() {
-						instance._displayCategoryVocabularyCategories(
-							instance._selectedCategoryVocabularyId,
+						instance._displayVocabularyCategories(
+							instance._selectedVocabularyId,
 							function() {
 								var categoryId = instance._getCategoryId(instance._categoryListClass + ':first');
 							}
@@ -911,11 +911,11 @@
 				var fromCategoryName = instance._getCategoryName(draggable);
 				var toCategoryId = instance._getCategoryId(droppable);
 				var toCategoryName = instance._getCategoryName(droppable);
-				var categoryVocabularyId = instance._getCategoryVocabularyId(droppable);
-				var categoryVocabularyName = instance._getCategoryVocabularyName(droppable);
+				var vocabularyId = instance._getVocabularyId(droppable);
+				var vocabularyName = instance._getVocabularyName(droppable);
 
-				var isChangingCategoryVocabulary = !!categoryVocabularyName;
-				var destination = isChangingCategoryVocabulary ? categoryVocabularyName : toCategoryName;
+				var isChangingVocabulary = !!vocabularyName;
+				var destination = isChangingVocabulary ? vocabularyName : toCategoryName;
 
 				var tagText = {
 					SOURCE: instance._getCategoryName(draggable),
@@ -933,10 +933,10 @@
 
 				var categoryProperties = instance._buildCategoryProperties();
 
-				categoryVocabularyId = categoryVocabularyId || instance._selectedCategoryVocabularyId;
-				parentCategoryId = isChangingCategoryVocabulary ? null : toCategoryId;
+				vocabularyId = vocabularyId || instance._selectedVocabularyId;
+				parentCategoryId = isChangingVocabulary ? null : toCategoryId;
 
-				instance._updateCategory(fromCategoryId, categoryVocabularyId, parentCategoryId, fromCategoryName, categoryProperties);
+				instance._updateCategory(fromCategoryId, vocabularyId, parentCategoryId, fromCategoryName, categoryProperties);
 			},
 
 			_onDragDrop: function(event, instance) {
@@ -960,17 +960,17 @@
 			_reloadSearch: function() {
 				var	instance = this;
 				var options = {};
-				var selected = jQuery('#category-vocabulary-select-search').val();
-				var input = jQuery('#category-vocabulary-search-input');
+				var selected = jQuery('#vocabulary-select-search').val();
+				var input = jQuery('#vocabulary-search-input');
 				var categoryList = jQuery(instance._categoryListClass);
-				var categoryVocabularyList = jQuery(instance._categoryVocabularyListClass);
+				var vocabularyList = jQuery(instance._vocabularyListClass);
 
 				input.unbind('keyup');
 
 				if (/vocabularies/.test(selected)) {
 					options = {
-						list: categoryVocabularyList,
-						filter: jQuery('a', categoryVocabularyList)
+						list: vocabularyList,
+						filter: jQuery('a', vocabularyList)
 					};
 				}
 				else {
@@ -988,7 +988,7 @@
 			_removeCategoryProperty: function(categoryProperty) {
 				var instance = this;
 
-				if (jQuery('div.category-vocabulary-property-row').length > 2) {
+				if (jQuery('div.vocabulary-property-row').length > 2) {
 					categoryProperty.remove();
 				}
 			},
@@ -996,9 +996,9 @@
 			_resetActionValues: function() {
 				var instance = this;
 
-				jQuery('.category-vocabulary-actions input:text').val('');
+				jQuery('.vocabulary-actions input:text').val('');
 
-				instance._categoryVocabularyCategoryPanel.hide();
+				instance._vocabularyCategoryPanel.hide();
 			},
 
 			_saveCategoryProperties: function() {
@@ -1008,16 +1008,16 @@
 				var categoryName = jQuery('input.category-name').val() || instance._selectedCategoryName;
 				var parentCategoryId = instance._selectedParentCategoryId;
 				var categoryProperties = instance._buildCategoryProperties();
-				var categoryVocabularyId = instance._selectedCategoryVocabularyId;
+				var vocabularyId = instance._selectedVocabularyId;
 
-				instance._updateCategory(categoryId, categoryVocabularyId, parentCategoryId, categoryName, categoryProperties);
-				instance._displayCategoryVocabularyCategories(categoryVocabularyId);
+				instance._updateCategory(categoryId, vocabularyId, parentCategoryId, categoryName, categoryProperties);
+				instance._displayVocabularyCategories(vocabularyId);
 			},
 
-			_selectCurrentCategoryVocabulary: function(value) {
+			_selectCurrentVocabulary: function(value) {
 				var instance = this;
 
-				var option = jQuery('select.category-vocabulary-select-list option[value="' + value + '"]');
+				var option = jQuery('select.vocabulary-select-list option[value="' + value + '"]');
 				option.attr('selected', 'selected');
 			},
 
@@ -1040,7 +1040,7 @@
 				instance._unselectAllCategories();
 				category.addClass('selected');
 
-				var editContainer = jQuery('.category-vocabulary-edit');
+				var editContainer = jQuery('.vocabulary-edit');
 				var categoryNameField = editContainer.find('input.category-name');
 
 				categoryNameField.val(categoryName);
@@ -1051,34 +1051,34 @@
 				return category;
 			},
 
-			_selectCategoryVocabulary: function(categoryVocabularyId) {
+			_selectVocabulary: function(vocabularyId) {
 				var instance = this;
 
-				var categoryVocabulary = instance._getCategoryVocabulary(categoryVocabularyId);
-				var categoryVocabularyName = instance._getCategoryVocabularyName(categoryVocabulary);
+				var vocabulary = instance._getVocabulary(vocabularyId);
+				var vocabularyName = instance._getVocabularyName(vocabulary);
 
-				if (categoryVocabulary.is('.selected')) {
-					return categoryVocabulary;
+				if (vocabulary.is('.selected')) {
+					return vocabulary;
 				}
 
 				instance._hideAllMessages();
-				instance._selectedCategoryVocabularyName = categoryVocabularyName;
-				instance._selectedCategoryVocabularyId = categoryVocabularyId;
-				instance._selectCurrentCategoryVocabulary(categoryVocabularyId);
+				instance._selectedVocabularyName = vocabularyName;
+				instance._selectedVocabularyId = vocabularyId;
+				instance._selectCurrentVocabulary(vocabularyId);
 
-				instance._unselectAllCategoryVocabularies();
+				instance._unselectAllVocabularies();
 				instance._closeEditSection();
 
-				categoryVocabulary.addClass('selected');
-				instance._displayCategoryVocabularyCategories(instance._selectedCategoryVocabularyId);
+				vocabulary.addClass('selected');
+				instance._displayVocabularyCategories(instance._selectedVocabularyId);
 
-				return categoryVocabulary;
+				return vocabulary;
 			},
 
 			_sendMessage: function(type, key, output, noAutoHide) {
 				var instance = this;
 
-				var output = jQuery(output || '#category-vocabulary-messages');
+				var output = jQuery(output || '#vocabulary-messages');
 				var message = Liferay.Language.get(key);
 				var typeClass = 'portlet-msg-' + type;
 
@@ -1093,7 +1093,7 @@
 							output.fadeOut('slow',
 								function(event) {
 									instance._toolbarCategoryPanel.align();
-									instance._categoryVocabularyCategoryPanel.align();
+									instance._vocabularyCategoryPanel.align();
 								}
 							);
 						}, 7000);
@@ -1112,7 +1112,7 @@
 				var element = jQuery(exp);
 
 				if (!element.is(':visible')) {
-					element.parent().addClass('category-vocabulary-editing-tag');
+					element.parent().addClass('vocabulary-editing-tag');
 					element.find('input:first').focus();
 					jQuery(instance._layoutContainerCells).width('33%');
 				}
@@ -1121,18 +1121,18 @@
 			_showToolBarCategorySection: function() {
 				var instance = this;
 
-				var toolbar = jQuery('.category-vocabulary-toolbar');
+				var toolbar = jQuery('.vocabulary-toolbar');
 
 				var categoryPanel = instance._toolbarCategoryPanel;
 
-				if (!instance._selectedCategoryVocabularyName) {
+				if (!instance._selectedVocabularyName) {
 					instance._resetActionValues();
 
 					categoryPanel.hide();
 
 					instance._sendMessage('info', Liferay.Language.get('you-must-first-add-a-vocabulary'));
 
-					instance._showToolBarCategoryVocabularySection();
+					instance._showToolBarVocabularySection();
 
 					return;
 				}
@@ -1140,20 +1140,20 @@
 				categoryPanel.show();
 				categoryPanel.align();
 
-				jQuery('.category-vocabulary-category-name', categoryPanel.body).focus();
+				jQuery('.vocabulary-category-name', categoryPanel.body).focus();
 
-				instance._categoryVocabularyCategoryPanel.hide();
+				instance._vocabularyCategoryPanel.hide();
 			},
 
-			_showToolBarCategoryVocabularySection: function() {
+			_showToolBarVocabularySection: function() {
 				var instance = this;
 
-				var categoryVocabularyCategoryPanel = instance._categoryVocabularyCategoryPanel;
+				var vocabularyCategoryPanel = instance._vocabularyCategoryPanel;
 
-				categoryVocabularyCategoryPanel.show();
-				categoryVocabularyCategoryPanel.align();
+				vocabularyCategoryPanel.show();
+				vocabularyCategoryPanel.align();
 
-				jQuery('.category-vocabulary-name', categoryVocabularyCategoryPanel.body).focus();
+				jQuery('.vocabulary-name', vocabularyCategoryPanel.body).focus();
 
 				instance._toolbarCategoryPanel.hide();
 			},
@@ -1162,16 +1162,16 @@
 				var instance = this;
 
 				jQuery(instance._categoryListClass).removeClass('selected');
-				jQuery('div.category-vocabulary-property-row:gt(0)').remove();
+				jQuery('div.vocabulary-property-row:gt(0)').remove();
 			},
 
-			_unselectAllCategoryVocabularies: function() {
+			_unselectAllVocabularies: function() {
 				var instance = this;
 
-				jQuery(instance._categoryVocabularyListClass).removeClass('selected');
+				jQuery(instance._vocabularyListClass).removeClass('selected');
 			},
 
-			_updateCategory: function(categoryId, categoryVocabularyId, parentCategoryId, name, categoryProperties, callback) {
+			_updateCategory: function(categoryId, vocabularyId, parentCategoryId, name, categoryProperties, callback) {
 				var instance = this;
 
 				Liferay.Service.Asset.AssetCategory.updateCategory(
@@ -1179,7 +1179,7 @@
 						categoryId: categoryId,
 						parentCategoryId: parentCategoryId,
 						name: name,
-						categoryVocabularyId: categoryVocabularyId,
+						vocabularyId: vocabularyId,
 						properties: categoryProperties
 					},
 					function(message) {
@@ -1201,7 +1201,7 @@
 							if (exception.indexOf('DuplicateCategoryException') > -1) {
 								instance._sendMessage('error', 'there-is-another-category-with-the-same-name-and-the-same-parent');
 							}
-							else if (exception.indexOf('NoSuchCategoryVocabularyException') > -1) {
+							else if (exception.indexOf('NoSuchVocabularyException') > -1) {
 								instance._sendMessage('error', 'that-vocabulary-does-not-exist');
 							}
 							else if (exception.indexOf('NoSuchCategoryException') > -1) {
@@ -1222,31 +1222,31 @@
 				);
 			},
 
-			_updateCategoryVocabulary: function(categoryVocabularyId, categoryVocabularyName, callback) {
-				Liferay.Service.Asset.AssetCategoryVocabulary.updateCategoryVocabulary(
+			_updateVocabulary: function(vocabularyId, vocabularyName, callback) {
+				Liferay.Service.Asset.AssetVocabulary.updateVocabulary(
 					{
-						categoryVocabularyId: categoryVocabularyId,
-						name: categoryVocabularyName
+						vocabularyId: vocabularyId,
+						name: vocabularyName
 					},
 					callback
 				);
 			},
 
-			_categoryListClass: '.category-vocabulary-categories li',
-			_categoryScopeClass: '.category-vocabulary-categories',
-			_layoutContainerCells: '.portlet-categories-admin .category-vocabulary-content td',
+			_categoryListClass: '.vocabulary-categories li',
+			_categoryScopeClass: '.vocabulary-categories',
+			_layoutContainerCells: '.portlet-categories-admin .vocabulary-content td',
 			_selectedCategoryName: null,
-			_selectedCategoryVocabulary: null,
-			_selectedCategoryVocabularyId: null,
-			_selectedCategoryVocabularyName: null,
-			_categoryVocabularyListClass: '.category-vocabulary-list li',
-			_categoryVocabularyScopeClass: '.category-vocabulary-list'
+			_selectedVocabulary: null,
+			_selectedVocabularyId: null,
+			_selectedVocabularyName: null,
+			_vocabularyListClass: '.vocabulary-list li',
+			_vocabularyScopeClass: '.vocabulary-list'
 		}
 	);
 
 	var droppableTag = Expanse.Droppable;
 
-	var scrollParent = jQuery('.category-vocabulary-categories')[0];
+	var scrollParent = jQuery('.vocabulary-categories')[0];
 
 	var draggableTag = Expanse.DragProxy.extend(
 		{
