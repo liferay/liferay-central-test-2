@@ -124,16 +124,6 @@ public class MBStatsUserLocalServiceUtil {
 		getService().deleteStatsUserByUserId(userId);
 	}
 
-	public static java.util.List<com.liferay.portlet.messageboards.model.MBStatsUser> getMBStatsByUserId(
-		long userId) throws com.liferay.portal.SystemException {
-		return getService().getMBStatsByUserId(userId);
-	}
-
-	public static int getPostCountByUserId(long userId)
-		throws com.liferay.portal.SystemException {
-		return getService().getPostCountByUserId(userId);
-	}
-
 	public static com.liferay.portlet.messageboards.model.MBStatsUser getStatsUser(
 		long groupId, long userId) throws com.liferay.portal.SystemException {
 		return getService().getStatsUser(groupId, userId);
