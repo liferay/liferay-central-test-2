@@ -115,6 +115,10 @@ public class OracleUtil extends DBUtil {
 			"../sql/" + fileName + "/" + fileName + "-oracle.sql", oracle);
 	}
 
+	public boolean isSupportsAlterColumnType() {
+		return _SUPPORTS_ALTER_COLUMN_TYPE;
+	}
+
 	protected OracleUtil() {
 		super(TYPE_ORACLE);
 	}
@@ -231,6 +235,8 @@ public class OracleUtil extends DBUtil {
 		" varchar2(4000)", " clob", " varchar2",
 		"", "commit"
 	};
+
+	private static boolean _SUPPORTS_ALTER_COLUMN_TYPE;
 
 	private static OracleUtil _instance = new OracleUtil();
 

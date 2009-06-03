@@ -50,7 +50,7 @@ public class UpgradeCalendar extends UpgradeProcess {
 	}
 
 	protected void doUpgrade() throws Exception {
-		if (isSupportsAlterColumnName()) {
+		if (isSupportsAlterColumnType()) {
 			runSQL("alter_column_type CalEvent remindBy INTEGER");
 		}
 		else {
