@@ -36,6 +36,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Tuple;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.ResourceAction;
 import com.liferay.portal.model.ResourceCode;
@@ -51,6 +52,7 @@ import com.liferay.portal.model.impl.RoleModelImpl;
 import com.liferay.portal.security.permission.PermissionCacheUtil;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.service.ClassNameLocalServiceUtil;
+import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.ResourceActionLocalServiceUtil;
 import com.liferay.portal.service.ResourceCodeLocalServiceUtil;
@@ -60,7 +62,6 @@ import com.liferay.portal.service.persistence.BatchSessionUtil;
 import com.liferay.portal.tools.sql.DBUtil;
 import com.liferay.portal.upgrade.util.Table;
 import com.liferay.portal.util.MaintenanceUtil;
-import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsValues;
 
@@ -679,9 +680,11 @@ public class ConvertPermissionAlgorithm extends ConvertProcess {
 
 		// System roles and default users
 
-		long[] companyIds = PortalInstances.getCompanyIds();
+		List<Company> companies = CompanyLocalServiceUtil.getCompanies();
 
-		for (long companyId : companyIds) {
+		for (Company company : companies) {
+			long companyId = company.getCompanyId();
+
 			_defaultRolesMap.put(
 				companyId,
 				new Role[] {

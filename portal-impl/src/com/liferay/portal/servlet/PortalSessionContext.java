@@ -22,6 +22,8 @@
 
 package com.liferay.portal.servlet;
 
+import com.liferay.portal.kernel.util.Validator;
+
 import java.util.Collection;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -65,6 +67,10 @@ public class PortalSessionContext {
 	}
 
 	private HttpSession _get(String sessionId) {
+		if (Validator.isNull(sessionId)) {
+			return null;
+		}
+
 		return _sessionPool.get(sessionId);
 	}
 
