@@ -148,9 +148,9 @@ web.server.display.node=true</echo>
 		<exec executable="${pscp.executable}">
 			<arg line="-pw ${vm.password} portal-impl/src/portal-ext.properties ${vm.username}@${cluster-node.host}:/liferay-portal-${lp.version}/tomcat-6.0.18/webapps/ROOT/WEB-INF/classes" />
 		</exec>
-	</target>
-
+		
 		<delete file="portal-impl/src/portal-ext.properties" />
+	</target>
 
 	<target name="prepare-cluster-tomcat-node-1">
 		<antcall target="prepare-cluster-tomcat-node">
