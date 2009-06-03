@@ -106,7 +106,6 @@
 		<render-weight>50</render-weight>
 		<header-portlet-css>/html/portlet/directory/css.jsp</header-portlet-css>
 		<css-class-wrapper>portlet-directory</css-class-wrapper>
-		<add-default-resource>true</add-default-resource>
 	</portlet>
 	<portlet>
 		<portlet-name>15</portlet-name>
