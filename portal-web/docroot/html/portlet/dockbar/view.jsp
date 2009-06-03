@@ -37,7 +37,7 @@ if (layout != null) {
 		<li class="pin-dockbar">
 			<a href="javascript:;"><img src="<%= themeDisplay.getPathThemeImages() %>/spacer.png" /></a>
 		</li>
-			<a href="javascript: ;"><img src="<%= themeDisplay.getPathThemeImages() %>/spacer.png" /></a>
+			<a href="javascript:;"><img src="<%= themeDisplay.getPathThemeImages() %>/spacer.png" /></a>
 		</li>
 
 		<c:if test="<%= (group != null) && (!group.hasStagingGroup() || group.isStagingGroup()) && LayoutPermissionUtil.contains(permissionChecker, layout, ActionKeys.UPDATE) %>">
@@ -154,7 +154,7 @@ if (layout != null) {
 
 		<c:if test="<%= themeDisplay.isSignedIn() %>">
 			<li class="toggle-controls" id="<portlet:namespace />toggleControls">
-				<a href="javascript: ;">
+				<a href="javascript:;">
 					<liferay-ui:message key="toggle-edit-controls" />
 				</a>
 			</li>
@@ -175,7 +175,7 @@ if (layout != null) {
 				</div>
 			</li>
 		</c:if>
-		
+
 		<li class="exp-toolbar-separator">
 			<span></span>
 		</li>
