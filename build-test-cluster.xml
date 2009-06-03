@@ -227,11 +227,11 @@ web.server.display.node=true</echo>
 	</target>
 
 	<target name="test-cluster">
-		<!--<antcall target="prepare-tomcat-6.0-mysql-5.0" />
+		<antcall target="prepare-tomcat-6.0-mysql-5.0" />
 
 		<mkdir dir="dist" />
 
-		<ant antfile="build-dist.xml" target="zip-tomcat-6.0" />-->
+		<ant antfile="build-dist.xml" target="zip-tomcat-6.0" />
 
 		<antcall target="prepare-cluster-vms" />
 
@@ -275,12 +275,12 @@ web.server.display.node=true</echo>
 
 		<antcall target="stop-selenium" />
 
-		<!--<exec dir="${vm.drive}/${vm.host.cluster-node-1}" executable="${vmware-cmd.executable}">
+		<exec dir="${vm.drive}/${vm.host.cluster-node-1}" executable="${vmware-cmd.executable}">
 			<arg line="${vm.drive}\${vm.host.cluster-node-1}\${vm.host.cluster-node-1}.vmx stop hard" />
 		</exec>
 
 		<exec dir="${vm.drive}/${vm.host.cluster-node-2}" executable="${vmware-cmd.executable}">
 			<arg line="${vm.drive}\${vm.host.cluster-node-2}\${vm.host.cluster-node-2}.vmx stop hard" />
-		</exec>-->
+		</exec>
 	</target>
 </project>
