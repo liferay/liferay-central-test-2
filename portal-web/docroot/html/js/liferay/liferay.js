@@ -35,11 +35,17 @@ Liferay.Service = {
 	ajax: function(options, callback) {
 		var instance = this;
 
+		var type = "POST";
 		var serviceUrl = instance.actionUrl;
 		var tunnelEnabled = (Liferay.ServiceAuth && Liferay.ServiceAuth.header);
+		var NTLMAuthEnabled = Liferay.PropsValues.NTLM_AUTH_ENABLED;
 
 		if (tunnelEnabled) {
 			serviceUrl = instance.tunnelUrl;
+		}
+
+		if (NTLMAuthEnabled && Liferay.Browser.isIe) {
+			type = "GET";
 		}
 
 		options.serviceParameters = Liferay.Service.getParameters(options);
@@ -47,7 +53,7 @@ Liferay.Service = {
 		if (callback) {
 			jQuery.ajax(
 				{
-					type: 'POST',
+					type: type,
 					url: serviceUrl,
 					data: options,
 					cache: false,
