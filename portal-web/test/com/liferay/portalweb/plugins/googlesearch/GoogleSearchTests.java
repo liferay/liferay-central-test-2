@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.googlesearch;
+package com.liferay.portalweb.plugins.googlesearch;
 
 import com.liferay.portalweb.portal.BaseTests;
 
