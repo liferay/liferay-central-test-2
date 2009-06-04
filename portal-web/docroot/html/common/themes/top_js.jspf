@@ -178,10 +178,15 @@
 				getPortletSetupShowBordersDefault: function() {
 					return <%= GetterUtil.getString(theme.getSetting("portlet-setup-show-borders-default"), "true") %>;
 				}
+			},
+
+			PropsValues: {
+				NTLM_AUTH_ENABLED: <%= PropsValues.NTLM_AUTH_ENABLED %>
 			}
 		};
 
 		var themeDisplay = Liferay.ThemeDisplay;
+		var propsValues = Liferay.PropsValues;
 	// ]]>
 </script>
 
