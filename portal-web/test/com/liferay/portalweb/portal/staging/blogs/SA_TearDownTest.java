@@ -45,7 +45,8 @@ public class SA_TearDownTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isElementPresent("//li[4]/ul/li[1]/a[1]")) {
+						if (selenium.isElementPresent(
+									"//div[4]/ul/li[2]/a/span[1]")) {
 							break;
 						}
 					}
@@ -55,7 +56,8 @@ public class SA_TearDownTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click(RuntimeVariables.replace("//li[4]/ul/li[1]/a[1]"));
+				selenium.click(RuntimeVariables.replace(
+						"//div[4]/ul/li[2]/a/span[1]"));
 				selenium.waitForPageToLoad("30000");
 				selenium.click(RuntimeVariables.replace("link=Control Panel"));
 				selenium.waitForPageToLoad("30000");
@@ -89,7 +91,10 @@ public class SA_TearDownTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete the staging public and private pages[\\s\\S]$"));
-				selenium.click(RuntimeVariables.replace("link=Back to Guest"));
+				selenium.click(RuntimeVariables.replace(
+						"link=Back to My Community"));
+				selenium.waitForPageToLoad("30000");
+				selenium.click(RuntimeVariables.replace("link=Guest"));
 				selenium.waitForPageToLoad("30000");
 				selenium.click(RuntimeVariables.replace(
 						"link=Blogs Staging Test Page"));
@@ -117,16 +122,18 @@ public class SA_TearDownTest extends BaseTestCase {
 				selenium.click(RuntimeVariables.replace("link=Manage Pages"));
 				selenium.waitForPageToLoad("30000");
 				selenium.click(RuntimeVariables.replace(
-						"//div/ul/li[2]/ul/li[2]/a/span"));
+						"//div[@id='_88_layoutsTreeOutput']/ul/li[2]/ul/li[2]/a/span"));
 				selenium.waitForPageToLoad("30000");
-				selenium.click(RuntimeVariables.replace("link=Page"));
+				selenium.click(RuntimeVariables.replace(
+						"//li[@id='_88_tabs3pageTabsId']/a"));
 				selenium.waitForPageToLoad("30000");
 				selenium.click(RuntimeVariables.replace(
 						"//input[@value='Delete']"));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete the selected page[\\s\\S]$"));
-				selenium.click(RuntimeVariables.replace("link=Welcome"));
+				selenium.click(RuntimeVariables.replace(
+						"link=Return to Full Page"));
 				selenium.waitForPageToLoad("30000");
 
 			case 100:

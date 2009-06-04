@@ -39,7 +39,7 @@ public class ControlPanelTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//li[4]/ul/li[1]/a[1]/span")) {
+				if (selenium.isElementPresent("link=Guest")) {
 					break;
 				}
 			}
@@ -49,7 +49,7 @@ public class ControlPanelTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//li[4]/ul/li[1]/a[1]/span"));
+		selenium.click(RuntimeVariables.replace("link=Guest"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Control Panel"));
 		selenium.waitForPageToLoad("30000");

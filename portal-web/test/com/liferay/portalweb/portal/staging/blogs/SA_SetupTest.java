@@ -39,7 +39,7 @@ public class SA_SetupTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//li[4]/ul/li[1]/a[1]")) {
+				if (selenium.isElementPresent("link=Guest")) {
 					break;
 				}
 			}
@@ -49,31 +49,21 @@ public class SA_SetupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//li[4]/ul/li[1]/a[1]"));
+		selenium.click(RuntimeVariables.replace("link=Guest"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//div[@id='add-page']/a/span");
-		selenium.typeKeys("new_page",
+		selenium.click(RuntimeVariables.replace("link=Welcome"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("link=Manage Pages"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace(
+				"//div[@id='_88_layoutsTreeOutput']/ul/li[2]/a/span"));
+		selenium.waitForPageToLoad("30000");
+		selenium.typeKeys("_88_name_en_US",
 			RuntimeVariables.replace("Blogs Staging Test Page"));
-		selenium.type("new_page",
+		selenium.type("_88_name_en_US",
 			RuntimeVariables.replace("Blogs Staging Test Page"));
-		selenium.click("link=Save");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Blogs Staging Test Page")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
+		selenium.click(RuntimeVariables.replace("//input[@value='Add Page']"));
+		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Blogs Staging Test Page"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Control Panel"));

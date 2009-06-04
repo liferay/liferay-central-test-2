@@ -53,7 +53,7 @@ public class CC_AddStagedPortletTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=View Staged Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Add Application");
+		selenium.click("link=Application");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -61,7 +61,8 @@ public class CC_AddStagedPortletTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Add")) {
+				if (selenium.isElementPresent(
+							"//div[@id='Collaboration-Blogs']/p/a")) {
 					break;
 				}
 			}
@@ -71,7 +72,7 @@ public class CC_AddStagedPortletTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Add");
+		selenium.click("//div[@id='Collaboration-Blogs']/p/a");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
