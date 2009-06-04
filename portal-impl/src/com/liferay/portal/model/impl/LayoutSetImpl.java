@@ -23,15 +23,20 @@
 package com.liferay.portal.model.impl;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.model.ColorScheme;
+import com.liferay.portal.model.Group;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.Theme;
+import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.ThemeLocalServiceUtil;
 
 /**
  * <a href="LayoutSetImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Jorge Ferrer
  *
  */
 public class LayoutSetImpl extends LayoutSetModelImpl implements LayoutSet {
@@ -49,6 +54,21 @@ public class LayoutSetImpl extends LayoutSetModelImpl implements LayoutSet {
 			getCompanyId(), getTheme().getThemeId(), getColorSchemeId(), false);
 	}
 
+	public Group getGroup() {
+		Group group = null;
+
+		try {
+			group = GroupLocalServiceUtil.getGroup(getGroupId());
+		}
+		catch (Exception e) {
+			group = new GroupImpl();
+
+			_log.error(e, e);
+		}
+
+		return group;
+	}
+
 	public Theme getWapTheme() throws SystemException {
 		return ThemeLocalServiceUtil.getTheme(
 			getCompanyId(), getWapThemeId(), true);
@@ -59,5 +79,7 @@ public class LayoutSetImpl extends LayoutSetModelImpl implements LayoutSet {
 			getCompanyId(), getWapTheme().getThemeId(), getWapColorSchemeId(),
 			true);
 	}
+
+	private static Log _log = LogFactoryUtil.getLog(LayoutSetImpl.class);
 
 }

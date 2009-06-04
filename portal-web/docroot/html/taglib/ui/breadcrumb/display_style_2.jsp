@@ -27,6 +27,14 @@
 <%
 StringBuilder sb = new StringBuilder();
 
+if (showGuestGroup) {
+	_buildGuestGroupBreadcrumb(themeDisplay, sb);
+}
+
+if (showParentGroups) {
+	_buildParentGroupsBreadcrumb(selLayout.getLayoutSet(), portletURL, themeDisplay, sb);
+}
+
 _buildBreadcrumb(selLayout, selLayoutParam, portletURL, themeDisplay, true, sb);
 %>
 

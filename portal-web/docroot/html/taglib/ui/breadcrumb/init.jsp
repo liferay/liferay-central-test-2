@@ -39,4 +39,84 @@ int displayStyle = GetterUtil.getInteger((String)request.getAttribute("liferay-u
 if (displayStyle == 0) {
 	displayStyle = 1;
 }
+
+boolean showGuestGroup = PropsValues.BREADCRUMB_SHOW_GUEST_GROUP;
+boolean showParentGroups = PropsValues.BREADCRUMB_SHOW_PARENT_GROUPS;
+%>
+
+<%!
+private void _buildGuestGroupBreadcrumb(ThemeDisplay themeDisplay, StringBuilder sb) throws Exception {
+	Group group = GroupLocalServiceUtil.getGroup(themeDisplay.getCompanyId(), GroupConstants.GUEST);
+
+	LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(group.getGroupId(), false);
+
+	String layoutSetFriendlyURL = PortalUtil.getLayoutSetFriendlyURL(layoutSet, themeDisplay);
+
+	if (group.getPublicLayoutsPageCount() > 0) {
+		sb.append("<a href=\"");
+		sb.append(layoutSetFriendlyURL);
+		sb.append("\" ");
+		sb.append(">");
+
+		sb.append(HtmlUtil.escape(group.getDescriptiveName()));
+
+		sb.append("</a>");
+
+		sb.append(" &raquo; ");
+	}
+}
+private void _buildParentGroupsBreadcrumb(LayoutSet layoutSet, PortletURL portletURL, ThemeDisplay themeDisplay, StringBuilder sb) throws Exception {
+	String layoutSetFriendlyURL = PortalUtil.getLayoutSetFriendlyURL(layoutSet, themeDisplay);
+
+	Group group = layoutSet.getGroup();
+
+	if (group.isOrganization()) {
+		Organization organization = OrganizationLocalServiceUtil.getOrganization(group.getClassPK());
+		Organization parentOrganization = organization.getParentOrganization();
+
+		if (parentOrganization != null) {
+			Group parentGroup = parentOrganization.getGroup();
+
+			LayoutSet parentLayoutSet = LayoutSetLocalServiceUtil.getLayoutSet(parentGroup.getGroupId(), layoutSet.isPrivateLayout());
+
+			_buildParentGroupsBreadcrumb(parentLayoutSet, portletURL, themeDisplay, sb);
+		}
+	}
+	else if (group.isUser()) {
+		User groupUser = UserLocalServiceUtil.getUser(group.getClassPK());
+		List<Organization> organizations = groupUser.getOrganizations();
+
+		if (!organizations.isEmpty()) {
+			Organization organization = organizations.get(0);
+
+			Group parentGroup = organization.getGroup();
+
+			LayoutSet parentLayoutSet = LayoutSetLocalServiceUtil.getLayoutSet(parentGroup.getGroupId(), layoutSet.isPrivateLayout());
+
+			_buildParentGroupsBreadcrumb(parentLayoutSet, portletURL, themeDisplay, sb);
+		}
+	}
+
+	int layoutsPageCount = 0;
+
+	if (layoutSet.isPrivateLayout()) {
+		layoutsPageCount = group.getPrivateLayoutsPageCount();
+	}
+	else {
+		layoutsPageCount = group.getPublicLayoutsPageCount();
+	}
+
+	if ((layoutsPageCount > 0) && !group.getName().equals(GroupConstants.GUEST)) {
+		sb.append("<a href=\"");
+		sb.append(layoutSetFriendlyURL);
+		sb.append("\" ");
+		sb.append(">");
+
+		sb.append(HtmlUtil.escape(group.getDescriptiveName()));
+
+		sb.append("</a>");
+
+		sb.append(" &raquo; ");
+	}
+}
 %>
