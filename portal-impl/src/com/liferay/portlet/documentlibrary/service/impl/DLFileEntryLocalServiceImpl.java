@@ -884,15 +884,15 @@ public class DLFileEntryLocalServiceImpl
 
 			// Ratings
 
-			long classNameId = PortalUtil.getClassNameId(
-				DLFileEntry.class.getName());
-
-			RatingsStats stats = ratingsStatsPersistence.fetchByC_C(
-				classNameId, oldFileEntryId);
+			RatingsStats stats = ratingsStatsLocalService.getStats(
+				DLFileEntry.class.getName(), oldFileEntryId);
 
 			stats.setClassPK(newFileEntryId);
 
 			ratingsStatsPersistence.update(stats, false);
+
+			long classNameId = PortalUtil.getClassNameId(
+				DLFileEntry.class.getName());
 
 			List<RatingsEntry> entries = ratingsEntryPersistence.findByC_C(
 				classNameId, oldFileEntryId);
