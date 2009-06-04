@@ -87,8 +87,8 @@ public class PropfindMethodImpl extends BasePropMethodImpl implements Method {
 				return generateProps(props);
 			}
 
-			if (_log.isInfoEnabled()) {
-				_log.info(
+			if (_log.isDebugEnabled()) {
+				_log.debug(
 					"Request XML: \n" +
 						XMLFormatter.toString(xml, StringPool.FOUR_SPACES));
 			}

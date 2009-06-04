@@ -277,17 +277,23 @@ public abstract class BasePropMethodImpl implements Method {
 
 			String xml = doc.formattedString(StringPool.FOUR_SPACES);
 
-			if (_log.isInfoEnabled()) {
-				_log.info("Response XML\n" + xml);
+			if (_log.isDebugEnabled()) {
+				_log.debug("Response XML\n" + xml);
 			}
 
 			// Set the status prior to writing the XML
+
+			int status = WebDAVUtil.SC_MULTI_STATUS;
 
 			HttpServletResponse response =
 				webDavRequest.getHttpServletResponse();
 
 			response.setContentType(ContentTypes.TEXT_XML_UTF8);
-			response.setStatus(WebDAVUtil.SC_MULTI_STATUS);
+			response.setStatus(status);
+
+			if (_log.isInfoEnabled()) {
+				_log.info("Status code " + status);
+			}
 
 			try {
 				ServletResponseUtil.write(response, xml);
