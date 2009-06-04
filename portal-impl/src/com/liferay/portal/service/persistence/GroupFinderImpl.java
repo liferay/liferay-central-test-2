@@ -29,7 +29,6 @@ import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.SQLQuery;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.dao.orm.Type;
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -422,7 +421,7 @@ public class GroupFinderImpl
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addScalar("groupId", Type.STRING);
+			q.addScalar("groupId", Type.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -451,11 +450,11 @@ public class GroupFinderImpl
 
 			List<Group> groups = new ArrayList<Group>();
 
-			Iterator<String> itr = (Iterator<String>)QueryUtil.iterate(
+			Iterator<Long> itr = (Iterator<Long>)QueryUtil.iterate(
 				q, getDialect(), start, end);
 
 			while (itr.hasNext()) {
-				long groupId = GetterUtil.getLong(itr.next());
+				long groupId = itr.next();
 
 				Group group = GroupUtil.findByPrimaryKey(groupId);
 
