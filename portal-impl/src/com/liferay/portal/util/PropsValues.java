@@ -898,6 +898,31 @@ public class PropsValues {
 	public static final String[] MIME_TYPES_CONTENT_DISPOSITION_INLINE =
 		PropsUtil.getArray(PropsKeys.MIME_TYPES_CONTENT_DISPOSITION_INLINE);
 
+	public static boolean MONITORING_PORTAL_REQUEST_ENABLED =
+		GetterUtil.getBoolean(PropsUtil.get(
+			PropsKeys.MONITORING_PORTAL_REQUEST_ENABLED), false);
+
+	public static boolean MONITORING_PORTLET_ACTION_ENABLED =
+		GetterUtil.getBoolean(PropsUtil.get(
+			PropsKeys.MONITORING_PORTLET_ACTION_ENABLED), false);
+
+	public static boolean MONITORING_PORTLET_EVENT_ENABLED =
+		GetterUtil.getBoolean(PropsUtil.get(
+			PropsKeys.MONITORING_PORTLET_EVENT_ENABLED), false);
+
+	public static boolean MONITORING_PORTLET_RENDER_ENABLED =
+		GetterUtil.getBoolean(PropsUtil.get(
+			PropsKeys.MONITORING_PORTLET_RENDER_ENABLED), false);
+
+	public static boolean MONITORING_PORTLET_RESOURCE_ENABLED =
+		GetterUtil.getBoolean(PropsUtil.get(
+			PropsKeys.MONITORING_PORTLET_RESOURCE_ENABLED), false);
+
+	public static final boolean
+		MONITORING_DATA_SAMPLE_THREAD_LOCAL_CACHE_ENABLED =
+		GetterUtil.getBoolean(PropsUtil.get(
+			PropsKeys.MONITORING_DATA_SAMPLE_THREAD_LOCAL_CACHE_ENABLED), false);
+
 	public static final int MY_PLACES_MAX_ELEMENTS =
 		GetterUtil.getInteger(PropsUtil.get(PropsKeys.MY_PLACES_MAX_ELEMENTS));
 

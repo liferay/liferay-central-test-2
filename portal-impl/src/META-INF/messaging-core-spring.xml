@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd"
+>
+
+	<!-- Message bus -->
+
+	<bean id="com.liferay.portal.kernel.messaging.MessageBus" class="com.liferay.portal.kernel.messaging.DefaultMessageBus" destroy-method="destroy" />
+	<bean id="com.liferay.portal.kernel.messaging.sender.MessageSender" class="com.liferay.portal.kernel.messaging.sender.DefaultMessageSender">
+		<property name="messageBus" ref="com.liferay.portal.kernel.messaging.MessageBus" />
+	</bean>
+
+	<bean id="com.liferay.portal.kernel.messaging.sender.SynchronousMessageSender" class="com.liferay.portal.kernel.messaging.sender.DefaultSynchronousMessageSender">
+		<constructor-arg index="0" type="com.liferay.portal.kernel.messaging.MessageBus" ref="com.liferay.portal.kernel.messaging.MessageBus" />
+		<constructor-arg index="1" type="com.liferay.portal.kernel.uuid.PortalUUID" ref="com.liferay.portal.kernel.uuid.PortalUUID" />
+		<constructor-arg index="2" type="long" value="10000" />
+	</bean>
+
+	<!-- JMX -->
+
+	<bean id="com.liferay.portal.kernel.messaging.jmx.JMXMessageListener" class="com.liferay.portal.kernel.messaging.jmx.JMXMessageListener" init-method="init" destroy-method="destroy">
+		<property name="MBeanServer" ref="mbeanServer" />
+		<property name="messageBus" ref="com.liferay.portal.kernel.messaging.MessageBus" />
+	</bean>
+
+	<!-- core destinations -->
+	<bean id="destination.global" class="com.liferay.portal.kernel.messaging.ParallelDestination">
+		<constructor-arg index="0" type="java.lang.String" value="liferay/global" />
+	</bean>
+	<bean id="destination.message_bus_default_response" class="com.liferay.portal.kernel.messaging.ParallelDestination">
+		<constructor-arg index="0" type="java.lang.String" value="liferay/message_bus/default_response" />
+	</bean>
+	<bean id="destination.message_bus_message_status" class="com.liferay.portal.kernel.messaging.ParallelDestination">
+		<constructor-arg index="0" type="java.lang.String" value="liferay/message_bus/message_status" />
+	</bean>
+
+	<!-- core listeners -->
+	<bean id="messageListener.global" class="com.liferay.portal.kernel.messaging.BridgingMessageListener">
+		<constructor-arg index="0" type="com.liferay.portal.kernel.messaging.sender.SingleDestinationMessageSender">
+			<bean class="com.liferay.portal.kernel.messaging.sender.DefaultSingleDestinationMessageSender">
+				<constructor-arg index="0" type="java.lang.String" value="liferay/global" />
+				<constructor-arg index="1" type="com.liferay.portal.kernel.messaging.sender.MessageSender" ref="com.liferay.portal.kernel.messaging.sender.MessageSender" />
+			</bean>
+		</constructor-arg>
+	</bean>
+
+	<!-- core message senders -->
+	<bean id="messageSender.service_request_status" class="com.liferay.portal.kernel.messaging.sender.DefaultSingleDestinationMessageSender">
+		<constructor-arg index="0" type="java.lang.String" value="liferay/message_bus/message_status" />
+		<constructor-arg index="1" type="com.liferay.portal.kernel.messaging.sender.MessageSender" ref="com.liferay.portal.kernel.messaging.sender.MessageSender" />
+	</bean>
+
+	<!-- core configs -->
+	<bean id="coreMessagingConfigurator" class="com.liferay.portal.kernel.messaging.config.DefaultMessagingConfigurator" init-method="init" destroy-method="destroy">
+		<property name="destinationEventListeners">
+			<list>
+				<ref bean="com.liferay.portal.kernel.messaging.jmx.JMXMessageListener" />
+				<!--<bean class="com.liferay.portal.kernel.messaging.GlobalDestinationEventListener">
+					<constructor-arg index="0" type="com.liferay.portal.kernel.messaging.MessageListener" ref="messageListener.global" />
+					<constructor-arg index="1" type="java.util.List">
+						<list>
+							<value type="java.lang.String">liferay/global</value>
+						</list>
+					</constructor-arg>
+				</bean>-->
+			</list>
+		</property>
+		<property name="destinations">
+			<list>
+				<!--<ref bean="destination.global" />-->
+				<ref bean="destination.message_bus_default_response" />
+				<ref bean="destination.message_bus_message_status" />
+			</list>
+		</property>
+		<property name="messageBus">
+			<ref bean="com.liferay.portal.kernel.messaging.MessageBus" />
+		</property>
+	</bean>
+</beans>
