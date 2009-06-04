@@ -89,8 +89,8 @@ public class PropsValues {
 	public static final String[] ASSET_CATEGORIES_PROPERTIES_DEFAULT =
 		PropsUtil.getArray(PropsKeys.ASSET_CATEGORIES_PROPERTIES_DEFAULT);
 
-	public static final String ASSET_CATEGORIES_VOCABULARY_DEFAULT =
-		PropsUtil.get(PropsKeys.ASSET_CATEGORIES_VOCABULARY_DEFAULT);
+	public static final String ASSET_VOCABULARY_DEFAULT =
+		PropsUtil.get(PropsKeys.ASSET_VOCABULARY_DEFAULT);
 
 	public static final String[] ASSET_PUBLISHER_DISPLAY_STYLES =
 		PropsUtil.getArray(PropsKeys.ASSET_PUBLISHER_DISPLAY_STYLES);
@@ -177,6 +177,14 @@ public class PropsValues {
 	public static final int BLOGS_TRACKBACK_VERIFIER_JOB_INTERVAL =
 		GetterUtil.getInteger(PropsUtil.get(PropsKeys.
 			BLOGS_TRACKBACK_VERIFIER_JOB_INTERVAL));
+
+	public static final boolean BREADCRUMB_SHOW_GUEST_GROUP =
+		GetterUtil.getBoolean(PropsUtil.get(
+			PropsKeys.BREADCRUMB_SHOW_GUEST_GROUP));
+
+	public static final boolean BREADCRUMB_SHOW_PARENT_GROUPS =
+		GetterUtil.getBoolean(PropsUtil.get(
+			PropsKeys.BREADCRUMB_SHOW_PARENT_GROUPS));
 
 	public static final String BROWSER_LAUNCHER_URL =
 		PropsUtil.get(PropsKeys.BROWSER_LAUNCHER_URL);

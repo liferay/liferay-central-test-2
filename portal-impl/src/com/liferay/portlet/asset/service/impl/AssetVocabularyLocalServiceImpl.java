@@ -169,7 +169,7 @@ public class AssetVocabularyLocalServiceImpl
 
 			addVocabulary(
 				userLocalService.getDefaultUserId(group.getCompanyId()),
-				PropsValues.ASSET_CATEGORIES_VOCABULARY_DEFAULT,
+				PropsValues.ASSET_VOCABULARY_DEFAULT,
 				serviceContext);
 		}
 

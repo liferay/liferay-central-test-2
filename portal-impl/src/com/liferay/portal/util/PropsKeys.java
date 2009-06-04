@@ -88,7 +88,7 @@ public interface PropsKeys {
 
 	public static final String ASSET_CATEGORIES_PROPERTIES_DEFAULT = "asset.categories.properties.default";
 
-	public static final String ASSET_CATEGORIES_VOCABULARY_DEFAULT = "asset.categories.vocabulary.default";
+	public static final String ASSET_VOCABULARY_DEFAULT = "asset.vocabulary.default";
 
 	public static final String ASSET_PUBLISHER_DISPLAY_STYLES = "asset.publisher.display.styles";
 
@@ -173,6 +173,10 @@ public interface PropsKeys {
 	public static final String BLOGS_TRACKBACK_EXCERPT_LENGTH = "blogs.trackback.excerpt.length";
 
 	public static final String BLOGS_TRACKBACK_VERIFIER_JOB_INTERVAL = "blogs.trackback.verifier.job.interval";
+
+	public static final String BREADCRUMB_SHOW_GUEST_GROUP = "breadcrumb.show.guest.group";
+
+	public static final String BREADCRUMB_SHOW_PARENT_GROUPS = "breadcrumb.show.parent.groups";
 
 	public static final String BROWSER_LAUNCHER_URL = "browser.launcher.url";
 
