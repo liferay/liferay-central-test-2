@@ -11,9 +11,7 @@
 		<community-defaults>
 			<action-key>VIEW</action-key>
 		</community-defaults>
-		<guest-defaults>
-			<action-key>VIEW</action-key>
-		</guest-defaults>
+		<guest-defaults />
 		<guest-unsupported>
 			<action-key>ACCESS_IN_CONTROL_PANEL</action-key>
 			<action-key>CONFIGURATION</action-key>
