@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.dao.orm.hibernate;
+package com.liferay.portal.dao.orm.common;
 
 import com.liferay.portal.kernel.cache.CacheKVP;
 import com.liferay.portal.kernel.cache.CacheRegistry;
