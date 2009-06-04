@@ -60,7 +60,7 @@
 		</guest-unsupported>
 	</model-resource>
 	<model-resource>
-		<model-name>com.liferay.portlet.asset.model.AssetCategoryVocabulary</model-name>
+		<model-name>com.liferay.portlet.asset.model.AssetVocabulary</model-name>
 		<portlet-ref>
 			<portlet-name>145</portlet-name>
 		</portlet-ref>
