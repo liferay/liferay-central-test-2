@@ -60,7 +60,7 @@ public class AssertImportLARTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace("//b"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Edited Test Document.txt"));
-		selenium.click(RuntimeVariables.replace("//span[1]/a"));
+		selenium.click(RuntimeVariables.replace("//div[1]/span[1]/a"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("//tr[4]/td[1]/a[2]/b"));
 		selenium.waitForPageToLoad("30000");
