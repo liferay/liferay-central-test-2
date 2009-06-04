@@ -51,7 +51,7 @@ public class SetTimezoneTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Calendar Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=My Account"));
+		selenium.click(RuntimeVariables.replace("link=Joe Bloggs"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

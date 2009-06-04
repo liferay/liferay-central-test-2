@@ -59,7 +59,7 @@ public class EditEventTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//div[4]/ul/li[1]/a")) {
+				if (selenium.isElementPresent("//div[5]/ul/li[1]/a")) {
 					break;
 				}
 			}
@@ -69,7 +69,7 @@ public class EditEventTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//div[4]/ul/li[1]/a"));
+		selenium.click(RuntimeVariables.replace("//div[5]/ul/li[1]/a"));
 		selenium.waitForPageToLoad("30000");
 		selenium.typeKeys("_8_title",
 			RuntimeVariables.replace("Edited Test Event"));

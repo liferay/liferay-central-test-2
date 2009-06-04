@@ -39,7 +39,8 @@ public class AddPageTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("my-community-private-pages")) {
+				if (selenium.isElementPresent(
+							"//div[@id='_145_myPlacesContainer']/ul/li[2]/a/span[1]")) {
 					break;
 				}
 			}
@@ -49,47 +50,22 @@ public class AddPageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("my-community-private-pages"));
+		selenium.click(RuntimeVariables.replace(
+				"//div[@id='_145_myPlacesContainer']/ul/li[2]/a/span[1]"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//div[@id='add-page']/a/span");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("new_page")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.typeKeys("new_page",
+		selenium.click(RuntimeVariables.replace("link=Manage Pages"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace(
+				"//div[@id='_88_layoutsTreeOutput']/ul/li/a/span"));
+		selenium.waitForPageToLoad("30000");
+		selenium.typeKeys("_88_name_en_US",
 			RuntimeVariables.replace("Calendar Test Page"));
-		selenium.type("new_page", RuntimeVariables.replace("Calendar Test Page"));
-		selenium.click("link=Save");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Calendar Test Page")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
+		selenium.type("_88_name_en_US",
+			RuntimeVariables.replace("Calendar Test Page"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Add Page']"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
 		selenium.click(RuntimeVariables.replace("link=Calendar Test Page"));
 		selenium.waitForPageToLoad("30000");
 	}
