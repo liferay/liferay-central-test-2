@@ -58,7 +58,7 @@ private void _buildGuestGroupBreadcrumb(ThemeDisplay themeDisplay, StringBuilder
 		sb.append("\" ");
 		sb.append(">");
 
-		sb.append(HtmlUtil.escape(group.getDescriptiveName()));
+		sb.append(HtmlUtil.escape(themeDisplay.getAccount().getName()));
 
 		sb.append("</a>");
 
