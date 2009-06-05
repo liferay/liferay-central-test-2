@@ -784,7 +784,7 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 			<c:when test='<%= tabs2.equals("general") %>'>
 				<liferay-ui:message key="num-of-categories" />: <%= numberFormat.format(categoryDisplay.getAllCategoriesCount()) %><br />
 				<liferay-ui:message key="num-of-posts" />: <%= numberFormat.format(MBMessageLocalServiceUtil.getGroupMessagesCount(scopeGroupId)) %><br />
-				<liferay-ui:message key="num-of-participants" />: <%= numberFormat.format(MBStatsUserLocalServiceUtil.getStatsUsersCount(scopeGroupId)) %>
+				<liferay-ui:message key="num-of-participants" />: <%= numberFormat.format(MBStatsUserLocalServiceUtil.getStatsUsersByGroupIdCount(scopeGroupId)) %>
 			</c:when>
 			<c:when test='<%= tabs2.equals("top-posters") %>'>
 
