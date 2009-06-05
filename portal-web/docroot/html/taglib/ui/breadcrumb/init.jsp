@@ -39,39 +39,39 @@ int displayStyle = GetterUtil.getInteger((String)request.getAttribute("liferay-u
 if (displayStyle == 0) {
 	displayStyle = 1;
 }
-
-boolean showGuestGroup = PropsValues.BREADCRUMB_SHOW_GUEST_GROUP;
-boolean showParentGroups = PropsValues.BREADCRUMB_SHOW_PARENT_GROUPS;
 %>
 
 <%!
 private void _buildGuestGroupBreadcrumb(ThemeDisplay themeDisplay, StringBuilder sb) throws Exception {
+	if (!PropsValues.BREADCRUMB_SHOW_GUEST_GROUP) {
+		return;
+	}
+
 	Group group = GroupLocalServiceUtil.getGroup(themeDisplay.getCompanyId(), GroupConstants.GUEST);
 
-	LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(group.getGroupId(), false);
-
-	String layoutSetFriendlyURL = PortalUtil.getLayoutSetFriendlyURL(layoutSet, themeDisplay);
-
 	if (group.getPublicLayoutsPageCount() > 0) {
+		LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(group.getGroupId(), false);
+
+		String layoutSetFriendlyURL = PortalUtil.getLayoutSetFriendlyURL(layoutSet, themeDisplay);
+
 		sb.append("<a href=\"");
 		sb.append(layoutSetFriendlyURL);
-		sb.append("\" ");
-		sb.append(">");
-
+		sb.append("\">");
 		sb.append(HtmlUtil.escape(themeDisplay.getAccount().getName()));
-
-		sb.append("</a>");
-
-		sb.append(" &raquo; ");
+		sb.append("</a> &raquo; ");
 	}
 }
+
 private void _buildParentGroupsBreadcrumb(LayoutSet layoutSet, PortletURL portletURL, ThemeDisplay themeDisplay, StringBuilder sb) throws Exception {
-	String layoutSetFriendlyURL = PortalUtil.getLayoutSetFriendlyURL(layoutSet, themeDisplay);
+	if (!PropsValues.BREADCRUMB_SHOW_PARENT_GROUPS) {
+		return;
+	}
 
 	Group group = layoutSet.getGroup();
 
 	if (group.isOrganization()) {
 		Organization organization = OrganizationLocalServiceUtil.getOrganization(group.getClassPK());
+
 		Organization parentOrganization = organization.getParentOrganization();
 
 		if (parentOrganization != null) {
@@ -84,6 +84,7 @@ private void _buildParentGroupsBreadcrumb(LayoutSet layoutSet, PortletURL portle
 	}
 	else if (group.isUser()) {
 		User groupUser = UserLocalServiceUtil.getUser(group.getClassPK());
+
 		List<Organization> organizations = groupUser.getOrganizations();
 
 		if (!organizations.isEmpty()) {
@@ -107,16 +108,13 @@ private void _buildParentGroupsBreadcrumb(LayoutSet layoutSet, PortletURL portle
 	}
 
 	if ((layoutsPageCount > 0) && !group.getName().equals(GroupConstants.GUEST)) {
+		String layoutSetFriendlyURL = PortalUtil.getLayoutSetFriendlyURL(layoutSet, themeDisplay);
+
 		sb.append("<a href=\"");
 		sb.append(layoutSetFriendlyURL);
-		sb.append("\" ");
-		sb.append(">");
-
+		sb.append("\">");
 		sb.append(HtmlUtil.escape(group.getDescriptiveName()));
-
-		sb.append("</a>");
-
-		sb.append(" &raquo; ");
+		sb.append("</a> &raquo; ");
 	}
 }
 %>
