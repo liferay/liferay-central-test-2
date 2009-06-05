@@ -105,7 +105,7 @@ public class RatingsStatsLocalServiceImpl
 			classNameId, classPK);
 
 		if (stats == null) {
-			stats = addStats(classNameId, classPK);
+			stats = ratingsStatsLocalService.addStats(classNameId, classPK);
 		}
 
 		return stats;
