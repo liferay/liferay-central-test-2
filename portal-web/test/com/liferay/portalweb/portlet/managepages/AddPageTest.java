@@ -35,7 +35,8 @@ public class AddPageTest extends BaseTestCase {
 	public void testAddPage() throws Exception {
 		selenium.click(RuntimeVariables.replace("link=Manage Pages"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("Link=Joe Bloggs"));
+		selenium.click(RuntimeVariables.replace(
+				"//div[@id='_88_layoutsTreeOutput']/ul/li[2]/a/span"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

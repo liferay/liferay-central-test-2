@@ -32,7 +32,7 @@ import com.liferay.portalweb.portal.BaseTestCase;
  */
 public class AddPortletTest extends BaseTestCase {
 	public void testAddPortlet() throws Exception {
-		selenium.click("link=Add Application");
+		selenium.click("link=Application");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
