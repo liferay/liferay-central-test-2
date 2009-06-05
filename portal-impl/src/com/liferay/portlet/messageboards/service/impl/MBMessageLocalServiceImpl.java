@@ -1096,11 +1096,11 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			long userId, MBMessage message, long[] assetCategoryIds,
 			String[] tagsEntries)
 		throws PortalException, SystemException {
-	
+
 		if (message.isDiscussion()) {
 			return;
 		}
-	
+
 		tagsAssetLocalService.updateAsset(
 			userId, message.getGroupId(), MBMessage.class.getName(),
 			message.getMessageId(), assetCategoryIds, tagsEntries, true, null,

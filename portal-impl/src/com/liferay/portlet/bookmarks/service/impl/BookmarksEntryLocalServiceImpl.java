@@ -372,7 +372,7 @@ public class BookmarksEntryLocalServiceImpl
 			long userId, BookmarksEntry entry, long[] assetCategoryIds,
 			String[] tagsEntries)
 		throws PortalException, SystemException {
-	
+
 		tagsAssetLocalService.updateAsset(
 			userId, entry.getGroupId(), BookmarksEntry.class.getName(),
 			entry.getEntryId(), assetCategoryIds, tagsEntries, true, null, null,

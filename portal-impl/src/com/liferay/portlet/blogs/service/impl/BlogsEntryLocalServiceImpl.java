@@ -609,7 +609,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			long userId, BlogsEntry entry, long[] assetCategoryIds,
 			String[] tagsEntries)
 		throws PortalException, SystemException {
-	
+
 		tagsAssetLocalService.updateAsset(
 			userId, entry.getGroupId(), BlogsEntry.class.getName(),
 			entry.getEntryId(), assetCategoryIds, tagsEntries, !entry.isDraft(),
