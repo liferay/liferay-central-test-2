@@ -10,8 +10,12 @@
 		<community-defaults>
 			<action-key>VIEW</action-key>
 		</community-defaults>
-		<guest-defaults />
-		<guest-unsupported />
+		<guest-defaults>
+			<action-key>VIEW</action-key>
+		</guest-defaults>
+		<guest-unsupported>
+			<action-key>ADD_GROUP</action-key>
+		</guest-unsupported>
 	</portlet-resource>
 	<model-resource>
 		<model-name>com.liferay.portal.model.Layout</model-name>
