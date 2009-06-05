@@ -102,6 +102,6 @@ public class AddInvalidImageTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
-				"Image Gallery is temporarily unavailable."));
+				"You have entered invalid data. Please try again. "));
 	}
 }

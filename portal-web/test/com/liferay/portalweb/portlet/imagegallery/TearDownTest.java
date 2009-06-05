@@ -77,7 +77,7 @@ public class TearDownTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isElementPresent("//div[4]/ul/li[3]/a")) {
+						if (selenium.isElementPresent("//div[5]/ul/li[3]/a")) {
 							break;
 						}
 					}
@@ -87,7 +87,7 @@ public class TearDownTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click(RuntimeVariables.replace("//div[4]/ul/li[3]/a"));
+				selenium.click(RuntimeVariables.replace("//div[5]/ul/li[3]/a"));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
@@ -111,7 +111,7 @@ public class TearDownTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isElementPresent("//div[4]/ul/li[3]/a")) {
+						if (selenium.isElementPresent("//div[5]/ul/li[3]/a")) {
 							break;
 						}
 					}
@@ -121,7 +121,7 @@ public class TearDownTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click(RuntimeVariables.replace("//div[4]/ul/li[3]/a"));
+				selenium.click(RuntimeVariables.replace("//div[5]/ul/li[3]/a"));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
@@ -147,7 +147,7 @@ public class TearDownTest extends BaseTestCase {
 				selenium.click("//img[@alt='Remove']");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to remove this component[\\s\\S]$"));
-				selenium.click(RuntimeVariables.replace("//div[2]/ul/li[1]/a"));
+				selenium.click(RuntimeVariables.replace("link=Home"));
 				selenium.waitForPageToLoad("30000");
 				selenium.click(RuntimeVariables.replace("link=Manage Pages"));
 				selenium.waitForPageToLoad("30000");
@@ -158,7 +158,7 @@ public class TearDownTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete the selected page[\\s\\S]$"));
-				selenium.click(RuntimeVariables.replace("//div[2]/ul/li[1]/a"));
+				selenium.click(RuntimeVariables.replace("link=Home"));
 				selenium.waitForPageToLoad("30000");
 
 			case 100:
