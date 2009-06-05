@@ -23,13 +23,15 @@
 package com.liferay.portlet.messageboards.service.impl;
 
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portlet.messageboards.model.MBStatsUser;
+import com.liferay.portlet.messageboards.model.impl.MBStatsUserImpl;
 import com.liferay.portlet.messageboards.service.base.MBStatsUserLocalServiceBaseImpl;
 
 import java.util.Date;
@@ -75,40 +77,31 @@ public class MBStatsUserLocalServiceImpl
 		return statsUser;
 	}
 
-	public void deleteStatsUserByGroupId(long groupId)
+	public void deleteStatsUsersByGroupId(long groupId)
 		throws SystemException {
 
 		mbStatsUserPersistence.removeByGroupId(groupId);
 	}
 
-	public void deleteStatsUserByUserId(long userId) throws SystemException {
+	public void deleteStatsUsersByUserId(long userId) throws SystemException {
 		mbStatsUserPersistence.removeByUserId(userId);
 	}
 
-    public List<MBStatsUser> getMBStatsByUserId(long userId)
-        throws SystemException {
+	public int getMessageCountByUserId(long userId) throws SystemException {
+		DynamicQuery query = DynamicQueryFactoryUtil.forClass(
+			MBStatsUser.class, MBStatsUserImpl.TABLE_NAME,
+			PortalClassLoaderUtil.getClassLoader());
 
-        return mbStatsUserPersistence.findByUserId(userId);
-    }
+		query = query.setProjection(
+			ProjectionFactoryUtil.sum("messageCount"));
 
-    public int getPostCountByUserId(long userId)
-        throws SystemException {
+		query = query.add(PropertyFactoryUtil.forName("userId").eq(userId));
 
-        DynamicQuery query = DynamicQueryFactoryUtil.forClass(
-				MBStatsUser.class, _MB_STATS_USER_TABLE_NAME,
-				getClass().getClassLoader());
+		List<Object> results = mbStatsUserLocalService.dynamicQuery(query);
 
-        query = query.setProjection(ProjectionFactoryUtil.sum(
-				_MB_STATS_USER_MESSAGE_COUNT));
+		return (Integer)results.get(0);
+	}
 
-		query = query.add(
-				PropertyFactoryUtil.forName(_MB_STATS_USER_USER_ID).eq(userId));
-
-        List<Object> results = mbStatsUserLocalService.dynamicQuery(query);
-        
-        return (Integer)results.get(0);
-    }
-    
 	public MBStatsUser getStatsUser(long groupId, long userId)
 		throws SystemException {
 
@@ -122,13 +115,22 @@ public class MBStatsUserLocalServiceImpl
 		return statsUser;
 	}
 
-	public List<MBStatsUser> getStatsUsers(long groupId, int start, int end)
+	public List<MBStatsUser> getStatsUsersByGroupId(
+			long groupId, int start, int end)
 		throws SystemException {
 
 		return mbStatsUserPersistence.findByG_M(groupId, 0, start, end);
 	}
 
-	public int getStatsUsersCount(long groupId) throws SystemException {
+	public List<MBStatsUser> getStatsUsersByUserId(long userId)
+		throws SystemException {
+
+		return mbStatsUserPersistence.findByUserId(userId);
+	}
+
+	public int getStatsUsersByGroupIdCount(long groupId)
+		throws SystemException {
+
 		return mbStatsUserPersistence.countByG_M(groupId, 0);
 	}
 
@@ -156,10 +158,6 @@ public class MBStatsUserLocalServiceImpl
 
 		return statsUser;
 	}
-
-	private static final String _MB_STATS_USER_TABLE_NAME = "MBStatsUser";
-	private static final String _MB_STATS_USER_USER_ID = "userId";
-	private static final String _MB_STATS_USER_MESSAGE_COUNT = "messageCount";
 
 	private static Log _log =
 		LogFactoryUtil.getLog(MBStatsUserLocalServiceImpl.class);

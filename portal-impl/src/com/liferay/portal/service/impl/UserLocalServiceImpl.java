@@ -947,7 +947,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		mbBanLocalService.deleteBansByBanUserId(userId);
 		mbMessageFlagLocalService.deleteFlags(userId);
-		mbStatsUserLocalService.deleteStatsUserByUserId(userId);
+		mbStatsUserLocalService.deleteStatsUsersByUserId(userId);
 
 		// Shopping cart
 
@@ -1872,7 +1872,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			long userId, User user, long[] assetCategoryIds,
 			String[] tagsEntries)
 		throws PortalException, SystemException {
-	
+
 		tagsAssetLocalService.updateAsset(
 			userId, 0, User.class.getName(), user.getUserId(), assetCategoryIds,
 			tagsEntries, true, null, null, null, null, null, user.getFullName(),

@@ -24,8 +24,8 @@ package com.liferay.portal.dao.orm.hibernate;
 
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactory;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -91,7 +91,7 @@ public class DynamicQueryFactoryImpl implements DynamicQueryFactory {
 					_classMap.put(implClassName, clazz);
 				}
 				catch (Exception e) {
-                    _log.error("Unable find model impl class", e);
+					_log.error("Unable find model " + implClassName, e);
 				}
 			}
 		}
@@ -100,8 +100,8 @@ public class DynamicQueryFactoryImpl implements DynamicQueryFactory {
 	}
 
 	private static Log _log =
-			LogFactoryUtil.getLog(DynamicQueryFactoryImpl.class);
+		LogFactoryUtil.getLog(DynamicQueryFactoryImpl.class);
 
-    private Map<String, Class> _classMap = new HashMap<String, Class>();
+	private Map<String, Class> _classMap = new HashMap<String, Class>();
 
 }

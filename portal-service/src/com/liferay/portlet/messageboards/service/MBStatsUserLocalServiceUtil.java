@@ -114,24 +114,19 @@ public class MBStatsUserLocalServiceUtil {
 		return getService().addStatsUser(groupId, userId);
 	}
 
-	public static void deleteStatsUserByGroupId(long groupId)
+	public static void deleteStatsUsersByGroupId(long groupId)
 		throws com.liferay.portal.SystemException {
-		getService().deleteStatsUserByGroupId(groupId);
+		getService().deleteStatsUsersByGroupId(groupId);
 	}
 
-	public static void deleteStatsUserByUserId(long userId)
+	public static void deleteStatsUsersByUserId(long userId)
 		throws com.liferay.portal.SystemException {
-		getService().deleteStatsUserByUserId(userId);
+		getService().deleteStatsUsersByUserId(userId);
 	}
 
-	public static java.util.List<com.liferay.portlet.messageboards.model.MBStatsUser> getMBStatsByUserId(
-		long userId) throws com.liferay.portal.SystemException {
-		return getService().getMBStatsByUserId(userId);
-	}
-
-	public static int getPostCountByUserId(long userId)
+	public static int getMessageCountByUserId(long userId)
 		throws com.liferay.portal.SystemException {
-		return getService().getPostCountByUserId(userId);
+		return getService().getMessageCountByUserId(userId);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBStatsUser getStatsUser(
@@ -139,15 +134,20 @@ public class MBStatsUserLocalServiceUtil {
 		return getService().getStatsUser(groupId, userId);
 	}
 
-	public static java.util.List<com.liferay.portlet.messageboards.model.MBStatsUser> getStatsUsers(
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBStatsUser> getStatsUsersByGroupId(
 		long groupId, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return getService().getStatsUsers(groupId, start, end);
+		return getService().getStatsUsersByGroupId(groupId, start, end);
 	}
 
-	public static int getStatsUsersCount(long groupId)
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBStatsUser> getStatsUsersByUserId(
+		long userId) throws com.liferay.portal.SystemException {
+		return getService().getStatsUsersByUserId(userId);
+	}
+
+	public static int getStatsUsersByGroupIdCount(long groupId)
 		throws com.liferay.portal.SystemException {
-		return getService().getStatsUsersCount(groupId);
+		return getService().getStatsUsersByGroupIdCount(groupId);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBStatsUser updateStatsUser(

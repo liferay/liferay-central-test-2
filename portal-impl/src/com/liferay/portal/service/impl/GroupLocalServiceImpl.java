@@ -379,7 +379,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 		mbBanLocalService.deleteBansByGroupId(groupId);
 		mbCategoryLocalService.deleteCategories(groupId);
-		mbStatsUserLocalService.deleteStatsUserByGroupId(groupId);
+		mbStatsUserLocalService.deleteStatsUsersByGroupId(groupId);
 
 		// Polls
 

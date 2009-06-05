@@ -102,18 +102,14 @@ public interface MBStatsUserLocalService {
 	public com.liferay.portlet.messageboards.model.MBStatsUser addStatsUser(
 		long groupId, long userId) throws com.liferay.portal.SystemException;
 
-	public void deleteStatsUserByGroupId(long groupId)
+	public void deleteStatsUsersByGroupId(long groupId)
 		throws com.liferay.portal.SystemException;
 
-	public void deleteStatsUserByUserId(long userId)
+	public void deleteStatsUsersByUserId(long userId)
 		throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.liferay.portlet.messageboards.model.MBStatsUser> getMBStatsByUserId(
-		long userId) throws com.liferay.portal.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getPostCountByUserId(long userId)
+	public int getMessageCountByUserId(long userId)
 		throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -121,12 +117,16 @@ public interface MBStatsUserLocalService {
 		long groupId, long userId) throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.liferay.portlet.messageboards.model.MBStatsUser> getStatsUsers(
+	public java.util.List<com.liferay.portlet.messageboards.model.MBStatsUser> getStatsUsersByGroupId(
 		long groupId, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getStatsUsersCount(long groupId)
+	public java.util.List<com.liferay.portlet.messageboards.model.MBStatsUser> getStatsUsersByUserId(
+		long userId) throws com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getStatsUsersByGroupIdCount(long groupId)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.messageboards.model.MBStatsUser updateStatsUser(
