@@ -596,7 +596,9 @@
 		<field name="firstName" type="String" />
 		<field name="middleName" type="String" />
 		<field name="lastName" type="String" />
-		<field name="jobTitle" type="String" />
+		<field name="jobTitle" type="String">
+			<hint name="max-length">100</hint>
+		</field>
 		<field name="loginDate" type="Date" />
 		<field name="loginIP" type="String" />
 		<field name="lastLoginDate" type="Date" />
