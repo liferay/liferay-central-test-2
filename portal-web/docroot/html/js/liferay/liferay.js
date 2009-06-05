@@ -36,16 +36,17 @@ Liferay.Service = {
 		var instance = this;
 
 		var type = "POST";
+
+		if (Liferay.PropsValues.NTLM_AUTH_ENABLED && Liferay.Browser.isIe) {
+			type = "GET";
+		}
+
 		var serviceUrl = instance.actionUrl;
+
 		var tunnelEnabled = (Liferay.ServiceAuth && Liferay.ServiceAuth.header);
-		var NTLMAuthEnabled = Liferay.PropsValues.NTLM_AUTH_ENABLED;
 
 		if (tunnelEnabled) {
 			serviceUrl = instance.tunnelUrl;
-		}
-
-		if (NTLMAuthEnabled && Liferay.Browser.isIe) {
-			type = "GET";
 		}
 
 		options.serviceParameters = Liferay.Service.getParameters(options);
