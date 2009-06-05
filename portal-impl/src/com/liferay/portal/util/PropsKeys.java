@@ -88,9 +88,9 @@ public interface PropsKeys {
 
 	public static final String ASSET_CATEGORIES_PROPERTIES_DEFAULT = "asset.categories.properties.default";
 
-	public static final String ASSET_VOCABULARY_DEFAULT = "asset.vocabulary.default";
-
 	public static final String ASSET_PUBLISHER_DISPLAY_STYLES = "asset.publisher.display.styles";
+
+	public static final String ASSET_VOCABULARY_DEFAULT = "asset.vocabulary.default";
 
 	public static final String AUTH_FAILURE = "auth.failure";
 

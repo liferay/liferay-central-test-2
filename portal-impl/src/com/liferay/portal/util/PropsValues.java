@@ -89,11 +89,11 @@ public class PropsValues {
 	public static final String[] ASSET_CATEGORIES_PROPERTIES_DEFAULT =
 		PropsUtil.getArray(PropsKeys.ASSET_CATEGORIES_PROPERTIES_DEFAULT);
 
-	public static final String ASSET_VOCABULARY_DEFAULT =
-		PropsUtil.get(PropsKeys.ASSET_VOCABULARY_DEFAULT);
-
 	public static final String[] ASSET_PUBLISHER_DISPLAY_STYLES =
 		PropsUtil.getArray(PropsKeys.ASSET_PUBLISHER_DISPLAY_STYLES);
+
+	public static final String ASSET_VOCABULARY_DEFAULT =
+		PropsUtil.get(PropsKeys.ASSET_VOCABULARY_DEFAULT);
 
 	public static boolean AUTH_FORWARD_BY_LAST_PATH = GetterUtil.getBoolean(
 		PropsUtil.get(PropsKeys.AUTH_FORWARD_BY_LAST_PATH));
