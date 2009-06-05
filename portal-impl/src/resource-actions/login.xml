@@ -13,6 +13,8 @@
 		<guest-defaults>
 			<action-key>VIEW</action-key>
 		</guest-defaults>
-		<guest-unsupported />
+		<guest-unsupported>
+			<action-key>CONFIGURATION</action-key>
+		</guest-unsupported>
 	</portlet-resource>
 </resource-action-mapping>
