@@ -14,7 +14,7 @@
 			<action-key>VIEW</action-key>
 		</guest-defaults>
 		<guest-unsupported>
-			<action-key>ADD_GROUP</action-key>
+			<action-key>CONFIGURATION</action-key>
 		</guest-unsupported>
 	</portlet-resource>
 	<model-resource>
