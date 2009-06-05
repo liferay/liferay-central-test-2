@@ -24,8 +24,8 @@ package com.liferay.portlet.social.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.dao.orm.ORMException;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
+import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.User;
@@ -37,8 +37,6 @@ import com.liferay.portlet.social.util.SocialActivityThreadLocal;
 
 import java.util.Date;
 import java.util.List;
-
-import javax.management.timer.Timer;
 
 /**
  * <a href="SocialActivityLocalServiceImpl.java.html"><b><i>View Source</i></b>
@@ -57,15 +55,20 @@ public class SocialActivityLocalServiceImpl
 
 		Date createDate = new Date();
 
-		// LPS-3586
-
 		long classNameId = PortalUtil.getClassNameId(className);
 
-		while (socialActivityPersistence.fetchByG_U_CD_C_C_T_R(
-				groupId, userId, createDate, classNameId, classPK, type,
-				receiverUserId) != null) {
+		while (true) {
+			SocialActivity socialActivity =
+				socialActivityPersistence.fetchByG_U_CD_C_C_T_R(
+					groupId, userId, createDate, classNameId, classPK, type,
+					receiverUserId);
 
-			createDate = new Date(createDate.getTime() + Timer.ONE_SECOND);
+			if (socialActivity != null) {
+				createDate = new Date(createDate.getTime() + Time.SECOND);
+			}
+			else {
+				break;
+			}
 		}
 
 		return addActivity(
