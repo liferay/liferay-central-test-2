@@ -116,6 +116,9 @@ public class OracleUtil extends DBUtil {
 	}
 
 	public boolean isSupportsAlterColumnType() {
+
+		// LPS-3566
+
 		return _SUPPORTS_ALTER_COLUMN_TYPE;
 	}
 
