@@ -52,7 +52,7 @@ if (Validator.isNotNull(portletResource)) {
 	preferences = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource);
 }
 
-int pageDelta = GetterUtil.getInteger(preferences.getValue("page-delta", StringPool.BLANK));
+int pageDelta = GetterUtil.getInteger(preferences.getValue("page-delta", StringPool.BLANK), 5);
 String pageDisplayStyle = preferences.getValue("page-display-style", RSSUtil.DISPLAY_STYLE_FULL_CONTENT);
 int pageAbstractLength = PropsValues.BLOGS_PAGE_ABSTRACT_LENGTH;
 boolean enableFlags = GetterUtil.getBoolean(preferences.getValue("enable-flags", null), true);
