@@ -791,11 +791,11 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 				<%
 				SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, null, "there-are-no-top-posters");
 
-				int total = MBStatsUserLocalServiceUtil.getStatsUsersCount(scopeGroupId);
+				int total = MBStatsUserLocalServiceUtil.getStatsUsersByGroupIdCount(scopeGroupId);
 
 				searchContainer.setTotal(total);
 
-				List results = MBStatsUserLocalServiceUtil.getStatsUsers(scopeGroupId, searchContainer.getStart(), searchContainer.getEnd());
+				List results = MBStatsUserLocalServiceUtil.getStatsUsersByGroupId(scopeGroupId, searchContainer.getStart(), searchContainer.getEnd());
 
 				searchContainer.setResults(results);
 
