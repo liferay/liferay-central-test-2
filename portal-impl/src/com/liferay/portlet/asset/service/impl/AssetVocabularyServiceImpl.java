@@ -30,8 +30,8 @@ import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.asset.model.AssetVocabulary;
 import com.liferay.portlet.asset.service.base.AssetVocabularyServiceBaseImpl;
-import com.liferay.portlet.asset.service.permission.AssetVocabularyPermission;
 import com.liferay.portlet.asset.service.permission.AssetPermission;
+import com.liferay.portlet.asset.service.permission.AssetVocabularyPermission;
 
 import java.util.Iterator;
 import java.util.List;
