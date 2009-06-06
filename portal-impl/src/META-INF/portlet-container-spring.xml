@@ -5,23 +5,12 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd"
 >
-
-	<bean id="defaultInvokerPortlet" class="com.liferay.portlet.InvokerPortletImpl" />
-
-	<bean id="messageSender.monitoring" class="com.liferay.portal.kernel.messaging.sender.DefaultSingleDestinationMessageSender">
-		<constructor-arg index="0" type="java.lang.String" value="liferay/monitoring" />
-		<constructor-arg index="1" type="com.liferay.portal.kernel.messaging.sender.MessageSender" ref="com.liferay.portal.kernel.messaging.sender.MessageSender" />
-	</bean>
-
-	<bean id="instrumentedInvokerPortlet" class="com.liferay.portlet.InstrumentedInvokerPortletImpl">
-		<constructor-arg index="0" ref="defaultInvokerPortlet" type="com.liferay.portlet.InvokerPortlet"/>
-		<constructor-arg index="1" ref="messageSender.monitoring" type="com.liferay.portal.kernel.messaging.sender.SingleDestinationMessageSender"/>
-	</bean>
-
 	<bean id="com.liferay.portlet.PortletInstanceFactoryUtil" class="com.liferay.portlet.PortletInstanceFactoryUtil">
 		<property name="portletInstanceFactory">
 			<bean class="com.liferay.portlet.PortletInstanceFactoryImpl">
-				<property name="internalInvokerPortletPrototype" ref="instrumentedInvokerPortlet"/>
+				<property name="internalInvokerPortletPrototype">
+					<bean class="com.liferay.portlet.InvokerPortletImpl" />
+				</property>
 			</bean>
 		</property>
 	</bean>
