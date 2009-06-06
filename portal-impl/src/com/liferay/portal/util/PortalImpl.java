@@ -914,6 +914,10 @@ public class PortalImpl implements Portal {
 		String[] guestPermissions = portletRequest.getParameterValues(
 			"guestPermissions");
 
+		if (guestPermissions == null) {
+			return null;
+		}
+
 		boolean inputPermissionsPublic = ParamUtil.getBoolean(
 			portletRequest, "inputPermissionsPublic");
 		boolean inputPermissionsShowConfigure = ParamUtil.getBoolean(
