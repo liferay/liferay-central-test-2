@@ -35,6 +35,7 @@ import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.SystemProperties;
@@ -88,8 +89,7 @@ public class S3Hook extends BaseHook {
 	public void addFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, long fileEntryId, String properties,
-			Date modifiedDate, String[] tagsCategories, String[] tagsEntries,
-			InputStream is)
+			Date modifiedDate, ServiceContext serviceContext, InputStream is)
 		throws SystemException {
 
 		try {
@@ -103,8 +103,9 @@ public class S3Hook extends BaseHook {
 
 			Indexer.addFile(
 				companyId, portletId, groupId, repositoryId, fileName,
-				fileEntryId, properties, modifiedDate, tagsCategories,
-				tagsEntries);
+				fileEntryId, properties, modifiedDate,
+				serviceContext.getAssetCategoryIds(),
+				serviceContext.getAssetTagNames());
 		}
 		catch (S3ServiceException s3se) {
 			throw new SystemException(s3se);
@@ -322,7 +323,7 @@ public class S3Hook extends BaseHook {
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, double versionNumber, String sourceFileName,
 			long fileEntryId, String properties, Date modifiedDate,
-			String[] tagsCategories, String[] tagsEntries, InputStream is)
+			ServiceContext serviceContext, InputStream is)
 		throws SystemException {
 
 		try {
@@ -336,8 +337,9 @@ public class S3Hook extends BaseHook {
 
 			Indexer.updateFile(
 				companyId, portletId, groupId, repositoryId, fileName,
-				fileEntryId, properties, modifiedDate, tagsCategories,
-				tagsEntries);
+				fileEntryId, properties, modifiedDate,
+				serviceContext.getAssetCategoryIds(),
+				serviceContext.getAssetTagNames());
 		}
 		catch (S3ServiceException s3se) {
 			throw new SystemException(s3se);

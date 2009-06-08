@@ -43,6 +43,7 @@ import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsValues;
@@ -66,8 +67,7 @@ public class DLLocalServiceImpl implements DLLocalService {
 	public void addFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, long fileEntryId, String properties,
-			Date modifiedDate, String[] tagsCategories, String[] tagsEntries,
-			InputStream is)
+			Date modifiedDate, ServiceContext serviceContext, InputStream is)
 		throws PortalException, SystemException {
 
 		validate(fileName, is);
@@ -76,7 +76,7 @@ public class DLLocalServiceImpl implements DLLocalService {
 
 		hook.addFile(
 			companyId, portletId, groupId, repositoryId, fileName, fileEntryId,
-			properties, modifiedDate, tagsCategories, tagsEntries, is);
+			properties, modifiedDate, serviceContext, is);
 	}
 
 	public void checkRoot(long companyId) throws SystemException {
@@ -167,9 +167,9 @@ public class DLLocalServiceImpl implements DLLocalService {
 			BooleanQuery searchQuery = BooleanQueryFactoryUtil.create();
 
 			if (Validator.isNotNull(keywords)) {
+				searchQuery.addTerm(Field.ASSET_TAG_NAMES, keywords);
 				searchQuery.addTerm(Field.CONTENT, keywords);
 				searchQuery.addTerm(Field.PROPERTIES, keywords);
-				searchQuery.addTerm(Field.TAGS_ENTRIES, keywords);
 			}
 
 			BooleanQuery fullQuery = BooleanQueryFactoryUtil.create();
@@ -193,7 +193,7 @@ public class DLLocalServiceImpl implements DLLocalService {
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, double versionNumber, String sourceFileName,
 			long fileEntryId, String properties, Date modifiedDate,
-			String[] tagsCategories, String[] tagsEntries, InputStream is)
+			ServiceContext serviceContext, InputStream is)
 		throws PortalException, SystemException {
 
 		validate(fileName, sourceFileName, is);
@@ -203,7 +203,7 @@ public class DLLocalServiceImpl implements DLLocalService {
 		hook.updateFile(
 			companyId, portletId, groupId, repositoryId, fileName,
 			versionNumber, sourceFileName, fileEntryId, properties,
-			modifiedDate, tagsCategories, tagsEntries, is);
+			modifiedDate, serviceContext, is);
 	}
 
 	public void validate(String fileName, File file)

@@ -37,8 +37,8 @@ import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextUtil;
 import com.liferay.portal.struts.JSONAction;
-import com.liferay.portlet.tags.model.TagsAssetDisplay;
-import com.liferay.portlet.tags.model.TagsAssetType;
+import com.liferay.portlet.asset.model.AssetDisplay;
+import com.liferay.portlet.asset.model.AssetType;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -63,7 +63,7 @@ import org.apache.struts.action.ActionMapping;
  */
 public class JSONServiceAction extends JSONAction {
 
-	public static JSONObject toJSONObject(TagsAssetDisplay assetDisplay) {
+	public static JSONObject toJSONObject(AssetDisplay assetDisplay) {
 		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
 
 		jsonObj.put("assetId", assetDisplay.getAssetId());
@@ -90,12 +90,15 @@ public class JSONServiceAction extends JSONAction {
 		jsonObj.put("width", assetDisplay.getWidth());
 		jsonObj.put("priority", assetDisplay.getPriority());
 		jsonObj.put("viewCount", assetDisplay.getViewCount());
-		jsonObj.put("tagsEntries", assetDisplay.getTagsEntries());
+		jsonObj.put(
+			"assetCategoryIds",
+			StringUtil.merge(assetDisplay.getCategoryIds()));
+		jsonObj.put("assetTagNames", assetDisplay.getTagNames());
 
 		return jsonObj;
 	}
 
-	public static JSONObject toJSONObject(TagsAssetType assetType) {
+	public static JSONObject toJSONObject(AssetType assetType) {
 		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
 
 		jsonObj.put("classNameId", assetType.getClassNameId());
@@ -592,24 +595,24 @@ public class JSONServiceAction extends JSONAction {
 
 			return jsonObj.toString();
 		}
-		else if (returnObj instanceof TagsAssetDisplay) {
-			return getReturnValue((TagsAssetDisplay)returnObj);
+		else if (returnObj instanceof AssetDisplay) {
+			return getReturnValue((AssetDisplay)returnObj);
 		}
-		else if (returnObj instanceof TagsAssetDisplay[]) {
-			return getReturnValue((TagsAssetDisplay[])returnObj);
+		else if (returnObj instanceof AssetDisplay[]) {
+			return getReturnValue((AssetDisplay[])returnObj);
 		}
-		else if (returnObj instanceof TagsAssetType) {
-			return getReturnValue((TagsAssetType)returnObj);
+		else if (returnObj instanceof AssetType) {
+			return getReturnValue((AssetType)returnObj);
 		}
-		else if (returnObj instanceof TagsAssetType[]) {
-			return getReturnValue((TagsAssetType[])returnObj);
+		else if (returnObj instanceof AssetType[]) {
+			return getReturnValue((AssetType[])returnObj);
 		}
 		else {
 			return JSONFactoryUtil.serialize(returnObj);
 		}
 	}
 
-	protected String getReturnValue(TagsAssetDisplay assetDisplay)
+	protected String getReturnValue(AssetDisplay assetDisplay)
 		throws Exception {
 
 		JSONObject jsonObj = toJSONObject(assetDisplay);
@@ -617,13 +620,13 @@ public class JSONServiceAction extends JSONAction {
 		return jsonObj.toString();
 	}
 
-	protected String getReturnValue(TagsAssetDisplay[] assetDisplays)
+	protected String getReturnValue(AssetDisplay[] assetDisplays)
 		throws Exception {
 
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
 		for (int i = 0; i < assetDisplays.length; i++) {
-			TagsAssetDisplay assetDisplay = assetDisplays[i];
+			AssetDisplay assetDisplay = assetDisplays[i];
 
 			jsonArray.put(toJSONObject(assetDisplay));
 		}
@@ -631,7 +634,7 @@ public class JSONServiceAction extends JSONAction {
 		return jsonArray.toString();
 	}
 
-	protected String getReturnValue(TagsAssetType assetType)
+	protected String getReturnValue(AssetType assetType)
 		throws Exception {
 
 		JSONObject jsonObj = toJSONObject(assetType);
@@ -639,13 +642,13 @@ public class JSONServiceAction extends JSONAction {
 		return jsonObj.toString();
 	}
 
-	protected String getReturnValue(TagsAssetType[] assetTypes)
+	protected String getReturnValue(AssetType[] assetTypes)
 		throws Exception {
 
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
 		for (int i = 0; i < assetTypes.length; i++) {
-			TagsAssetType assetType = assetTypes[i];
+			AssetType assetType = assetTypes[i];
 
 			jsonArray.put(toJSONObject(assetType));
 		}

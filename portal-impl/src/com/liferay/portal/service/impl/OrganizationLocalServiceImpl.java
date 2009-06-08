@@ -138,19 +138,19 @@ public class OrganizationLocalServiceImpl
 
 		addOrganizationResources(userId, organization);
 
+		// Asset
+
+		if (serviceContext != null) {
+			updateAsset(
+				userId, organization, serviceContext.getAssetCategoryIds(),
+				serviceContext.getAssetTagNames());
+		}
+
 		// Expando
 
 		ExpandoBridge expandoBridge = organization.getExpandoBridge();
 
 		expandoBridge.setAttributes(serviceContext);
-
-		// Tags
-
-		if (serviceContext != null) {
-			updateTagsAsset(
-				userId, organization, serviceContext.getTagsCategories(),
-				serviceContext.getTagsEntries());
-		}
 
 		return organization;
 	}
@@ -226,9 +226,9 @@ public class OrganizationLocalServiceImpl
 			throw new RequiredOrganizationException();
 		}
 
-		// Tags
+		// Asset
 
-		tagsAssetLocalService.deleteAsset(
+		assetLocalService.deleteAsset(
 			Organization.class.getName(), organization.getOrganizationId());
 
 		// Addresses
@@ -632,27 +632,27 @@ public class OrganizationLocalServiceImpl
 
 		expandoBridge.setAttributes(serviceContext);
 
-		// Tags
+		// Asset
 
 		if (serviceContext != null) {
-			updateTagsAsset(
+			updateAsset(
 				serviceContext.getUserId(), organization,
-				serviceContext.getTagsCategories(),
-				serviceContext.getTagsEntries());
+				serviceContext.getAssetCategoryIds(),
+				serviceContext.getAssetTagNames());
 		}
 
 		return organization;
 	}
 
-	public void updateTagsAsset(
-			long userId, Organization organization, String[] tagsCategories,
-			String[] tagsEntries)
+	public void updateAsset(
+			long userId, Organization organization, long[] assetCategoryIds,
+			String[] assetTagNames)
 		throws PortalException, SystemException {
 
-		tagsAssetLocalService.updateAsset(
+		assetLocalService.updateAsset(
 			userId, 0, Organization.class.getName(),
-			organization.getOrganizationId(), tagsCategories, tagsEntries, true,
-			null, null, null, null, null, organization.getName(),
+			organization.getOrganizationId(), assetCategoryIds, assetTagNames,
+			true, null, null, null, null, null, organization.getName(),
 			StringPool.BLANK, null, null, 0, 0, null, false);
 	}
 

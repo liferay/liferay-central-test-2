@@ -65,12 +65,12 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 			long companyId, long groupId, long userId, String userName,
 			long categoryId, long threadId, long messageId, String title,
 			String content, boolean anonymous, Date modifiedDate,
-			String[] tagsEntries, ExpandoBridge expandoBridge)
+			String[] assetTagNames, ExpandoBridge expandoBridge)
 		throws SearchException {
 
 		Document doc = getMessageDocument(
 			companyId, groupId, userId, userName, categoryId, threadId,
-			messageId, title, content, anonymous, modifiedDate, tagsEntries,
+			messageId, title, content, anonymous, modifiedDate, assetTagNames,
 			expandoBridge);
 
 		SearchEngineUtil.addDocument(companyId, doc);
@@ -105,7 +105,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		long companyId, long groupId, long userId, String userName,
 		long categoryId, long threadId, long messageId, String title,
 		String content, boolean anonymous, Date modifiedDate,
-		String[] tagsEntries, ExpandoBridge expandoBridge) {
+		String[] assetTagNames, ExpandoBridge expandoBridge) {
 
 		userName = PortalUtil.getUserName(userId, userName);
 
@@ -136,7 +136,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 		doc.addText(Field.TITLE, title);
 		doc.addText(Field.CONTENT, content);
-		doc.addKeyword(Field.TAGS_ENTRIES, tagsEntries);
+		doc.addKeyword(Field.ASSET_TAG_NAMES, assetTagNames);
 
 		doc.addKeyword("categoryId", categoryId);
 		doc.addKeyword("threadId", threadId);
@@ -160,12 +160,12 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 			long companyId, long groupId, long userId, String userName,
 			long categoryId, long threadId, long messageId, String title,
 			String content, boolean anonymous, Date modifiedDate,
-			String[] tagsEntries, ExpandoBridge expandoBridge)
+			String[] assetTagNames, ExpandoBridge expandoBridge)
 		throws SearchException {
 
 		Document doc = getMessageDocument(
 			companyId, groupId, userId, userName, categoryId, threadId,
-			messageId, title, content, anonymous, modifiedDate, tagsEntries,
+			messageId, title, content, anonymous, modifiedDate, assetTagNames,
 			expandoBridge);
 
 		SearchEngineUtil.updateDocument(companyId, doc.get(Field.UID), doc);

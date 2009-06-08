@@ -100,9 +100,9 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 
 		for (MBMessage message : messages) {
 
-			// Tags
+			// Asset
 
-			tagsAssetLocalService.deleteAsset(
+			assetLocalService.deleteAsset(
 				MBMessage.class.getName(), message.getMessageId());
 
 			// Social
@@ -315,7 +315,7 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 						category.getCategoryId(), message.getThreadId(),
 						message.getMessageId(), message.getSubject(),
 						message.getBody(), message.isAnonymous(),
-						message.getModifiedDate(), message.getTagsEntries(),
+						message.getModifiedDate(), message.getAssetTagNames(),
 						message.getExpandoBridge());
 				}
 			}
@@ -385,7 +385,7 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 					category.getCategoryId(), message.getThreadId(),
 					message.getMessageId(), message.getSubject(),
 					message.getBody(), message.isAnonymous(),
-					message.getModifiedDate(), message.getTagsEntries(),
+					message.getModifiedDate(), message.getAssetTagNames(),
 					message.getExpandoBridge());
 			}
 		}
@@ -491,8 +491,7 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 			dlService.addFile(
 				companyId, portletId, groupId, repositoryId,
 				newAttachmentsDir + "/" + name, 0, StringPool.BLANK,
-				message.getModifiedDate(), new String[0], new String[0],
-				fileBytes);
+				message.getModifiedDate(), new ServiceContext(), fileBytes);
 
 			dlService.deleteFile(companyId, portletId, repositoryId, fileName);
 		}
@@ -533,7 +532,7 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 						category.getCategoryId(), message.getThreadId(),
 						message.getMessageId(), message.getSubject(),
 						message.getBody(), message.isAnonymous(),
-						message.getModifiedDate(), message.getTagsEntries(),
+						message.getModifiedDate(), message.getAssetTagNames(),
 						message.getExpandoBridge());
 				}
 			}

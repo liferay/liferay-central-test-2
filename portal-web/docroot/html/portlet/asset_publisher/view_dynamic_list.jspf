@@ -23,11 +23,11 @@
 %>
 
 <%
-long[] entryIds = TagsEntryLocalServiceUtil.getEntryIds(scopeGroupId, entries);
-long[] notEntryIds = TagsEntryLocalServiceUtil.getEntryIds(scopeGroupId, notEntries);
+long[] tagIds = AssetTagLocalServiceUtil.getTagIds(scopeGroupId, tagNames);
+long[] notTagIds = AssetTagLocalServiceUtil.getTagIds(scopeGroupId, notTagNames);
 
-if (allowEmptyResults && (entryIds.length == 0) && (notEntryIds.length == 0)) {
-	entryIds = new long[] {-1};
+if (allowEmptyResults && (tagIds.length == 0) && (notTagIds.length == 0)) {
+	tagIds = new long[] {-1};
 }
 
 int total = 0;
@@ -35,11 +35,11 @@ int total = 0;
 Date now = new Date();
 
 if (!groupByClass) {
-	total = TagsAssetLocalServiceUtil.getAssetsCount(scopeGroupId, classNameIds, entryIds, notEntryIds, andOperator, excludeZeroViewCount, now, now);
+	total = AssetLocalServiceUtil.getAssetsCount(scopeGroupId, classNameIds, tagIds, notTagIds, andOperator, excludeZeroViewCount, now, now);
 
 	searchContainer.setTotal(total);
 
-	List results = TagsAssetLocalServiceUtil.getAssets(scopeGroupId, classNameIds, entryIds, notEntryIds, andOperator, orderByColumn1, orderByColumn2, orderByType1, orderByType2, excludeZeroViewCount, now, now, searchContainer.getStart(), searchContainer.getEnd());
+	List results = AssetLocalServiceUtil.getAssets(scopeGroupId, classNameIds, tagIds, notTagIds, andOperator, orderByColumn1, orderByColumn2, orderByType1, orderByType2, excludeZeroViewCount, now, now, searchContainer.getStart(), searchContainer.getEnd());
 
 	searchContainer.setResults(results);
 
@@ -54,13 +54,13 @@ else {
 	for (int groupAssetIndex = 0; groupAssetIndex < _ASSET_TYPES.length; groupAssetIndex++) {
 		long[] groupClassNameIds = {PortalUtil.getClassNameId(_ASSET_TYPES[groupAssetIndex])};
 
-		int groupTotal = TagsAssetLocalServiceUtil.getAssetsCount(scopeGroupId, groupClassNameIds, entryIds, notEntryIds, andOperator, excludeZeroViewCount, now, now);
+		int groupTotal = AssetLocalServiceUtil.getAssetsCount(scopeGroupId, groupClassNameIds, tagIds, notTagIds, andOperator, excludeZeroViewCount, now, now);
 
 		total += groupTotal;
 
 		searchContainer.setTotal(groupTotal);
 
-		List results = TagsAssetLocalServiceUtil.getAssets(scopeGroupId, groupClassNameIds, entryIds, notEntryIds, andOperator, orderByColumn1, orderByColumn2, orderByType1, orderByType2, excludeZeroViewCount, now, now, searchContainer.getStart(), searchContainer.getEnd());
+		List results = AssetLocalServiceUtil.getAssets(scopeGroupId, groupClassNameIds, tagIds, notTagIds, andOperator, orderByColumn1, orderByColumn2, orderByType1, orderByType2, excludeZeroViewCount, now, now, searchContainer.getStart(), searchContainer.getEnd());
 
 		searchContainer.setResults(results);
 

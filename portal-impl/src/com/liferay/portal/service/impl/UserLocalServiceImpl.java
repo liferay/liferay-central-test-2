@@ -497,7 +497,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		if (serviceContext != null) {
 			updateAsset(
 				creatorUserId, user, serviceContext.getAssetCategoryIds(),
-				serviceContext.getTagsEntries());
+				serviceContext.getAssetTagNames());
 		}
 
 		// Expando
@@ -931,6 +931,10 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		announcementsDeliveryLocalService.deleteDeliveries(userId);
 
+		// Asset
+
+		assetLocalService.deleteAsset(User.class.getName(), userId);
+
 		// Blogs
 
 		blogsStatsUserLocalService.deleteStatsUserByUserId(userId);
@@ -958,10 +962,6 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		socialActivityLocalService.deleteUserActivities(userId);
 		socialRequestLocalService.deleteReceiverUserRequests(userId);
 		socialRequestLocalService.deleteUserRequests(userId);
-
-		// Tags
-
-		tagsAssetLocalService.deleteAsset(User.class.getName(), userId);
 
 		// Mail
 
@@ -1870,13 +1870,13 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 	public void updateAsset(
 			long userId, User user, long[] assetCategoryIds,
-			String[] tagsEntries)
+			String[] assetTagNames)
 		throws PortalException, SystemException {
 
-		tagsAssetLocalService.updateAsset(
+		assetLocalService.updateAsset(
 			userId, 0, User.class.getName(), user.getUserId(), assetCategoryIds,
-			tagsEntries, true, null, null, null, null, null, user.getFullName(),
-			null, null, null, 0, 0, null, false);
+			assetTagNames, true, null, null, null, null, null,
+			user.getFullName(), null, null, null, 0, 0, null, false);
 	}
 
 	public User updateCreateDate(long userId, Date createDate)
@@ -2466,7 +2466,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		if (serviceContext != null) {
 			updateAsset(
 				userId, user, serviceContext.getAssetCategoryIds(),
-				serviceContext.getTagsEntries());
+				serviceContext.getAssetTagNames());
 		}
 
 		// Expando

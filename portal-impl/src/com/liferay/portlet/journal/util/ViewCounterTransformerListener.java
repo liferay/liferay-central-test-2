@@ -78,7 +78,7 @@ public class ViewCounterTransformerListener extends TransformerListener {
 		StringBuilder sb = new StringBuilder();
 
 		sb.append("<script type=\"text/javascript\">");
-		sb.append("Liferay.Service.Tags.TagsAsset.incrementViewCounter");
+		sb.append("Liferay.Service.Asset.Asset.incrementViewCounter");
 		sb.append("({className:'");
 		sb.append("com.liferay.portlet.journal.model.JournalArticle', ");
 		sb.append("classPK:");

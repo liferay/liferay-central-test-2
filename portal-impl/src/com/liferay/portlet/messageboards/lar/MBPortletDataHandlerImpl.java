@@ -308,8 +308,7 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 			}
 
 			if (context.getBooleanParameter(_NAMESPACE, "tags")) {
-				context.addTagsEntries(
-					MBMessage.class, message.getMessageId());
+				context.addAssetTags(MBMessage.class, message.getMessageId());
 			}
 
 			if (context.getBooleanParameter(_NAMESPACE, "attachments") &&
@@ -615,10 +614,10 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 			}
 		}
 
-		String[] tagsEntries = null;
+		String[] assetTagNames = null;
 
 		if (context.getBooleanParameter(_NAMESPACE, "tags")) {
-			tagsEntries = context.getTagsEntries(
+			assetTagNames = context.getAssetTagNames(
 				MBMessage.class, message.getMessageId());
 		}
 
@@ -626,8 +625,8 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		serviceContext.setAddCommunityPermissions(true);
 		serviceContext.setAddGuestPermissions(true);
+		serviceContext.setAssetTagNames(assetTagNames);
 		serviceContext.setScopeGroupId(context.getGroupId());
-		serviceContext.setTagsEntries(tagsEntries);
 
 		if ((categoryId != MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID) &&
 			(categoryId == message.getCategoryId())) {

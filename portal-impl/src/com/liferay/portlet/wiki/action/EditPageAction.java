@@ -36,7 +36,8 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.ActionRequestImpl;
 import com.liferay.portlet.PortletURLImpl;
-import com.liferay.portlet.tags.TagsEntryException;
+import com.liferay.portlet.asset.AssetCategoryException;
+import com.liferay.portlet.asset.AssetTagException;
 import com.liferay.portlet.wiki.DuplicatePageException;
 import com.liferay.portlet.wiki.NoSuchNodeException;
 import com.liferay.portlet.wiki.NoSuchPageException;
@@ -131,7 +132,8 @@ public class EditPageAction extends PortletAction {
 
 				SessionErrors.add(actionRequest, e.getClass().getName());
 			}
-			else if (e instanceof TagsEntryException) {
+			else if (e instanceof AssetCategoryException ||
+					 e instanceof AssetTagException) {
 				SessionErrors.add(actionRequest, e.getClass().getName(), e);
 			}
 			else {

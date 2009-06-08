@@ -20,20 +20,16 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.tags.model;
+package com.liferay.portlet.asset.model;
 
 /**
- * <a href="TagsEntryConstants.java.html"><b><i>View Source</i></b></a>
+ * <a href="AssetTagConstants.java.html"><b><i>View Source</i></b></a>
  *
  * @author Jorge Ferrer
  *
  */
-public class TagsEntryConstants {
+public class AssetTagConstants {
 
-	public static final long DEFAULT_PARENT_ENTRY_ID = 0;
-
-	public static final boolean FOLKSONOMY_CATEGORY = false;
-
-	public static final boolean FOLKSONOMY_TAG = true;
+	public static final long DEFAULT_PARENT_TAG_ID = 0;
 
 }

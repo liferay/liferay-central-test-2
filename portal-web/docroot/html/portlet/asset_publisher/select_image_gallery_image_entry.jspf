@@ -161,7 +161,7 @@ for (int i = 0; i < results.size(); i++) {
 
 		ResultRow row = new ResultRow(image, image.getImageId(), i);
 
-		TagsAsset asset = TagsAssetLocalServiceUtil.getAsset(IGImage.class.getName(), image.getImageId());
+		Asset asset = AssetLocalServiceUtil.getAsset(IGImage.class.getName(), image.getImageId());
 
 		StringBuilder sb = new StringBuilder();
 

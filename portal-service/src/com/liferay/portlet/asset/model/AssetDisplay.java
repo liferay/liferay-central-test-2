@@ -20,19 +20,20 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.tags.model;
+package com.liferay.portlet.asset.model;
 
 import java.io.Serializable;
 
 import java.util.Date;
 
 /**
- * <a href="TagsAssetDisplay.java.html"><b><i>View Source</i></b></a>
+ * <a href="AssetDisplay.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Jorge Ferrer
  *
  */
-public class TagsAssetDisplay implements Serializable {
+public class AssetDisplay implements Serializable {
 
 	public long getAssetId() {
 		return _assetId;
@@ -226,12 +227,20 @@ public class TagsAssetDisplay implements Serializable {
 		_viewCount = viewCount;
 	}
 
-	public String getTagsEntries() {
-		return _tagsEntries;
+	public long[] getCategoryIds() {
+		return _categoryIds;
 	}
 
-	public void setTagsEntries(String tagsEntries) {
-		_tagsEntries = tagsEntries;
+	public void setCategoryIds(long[] categoryIds) {
+		_categoryIds = categoryIds;
+	}
+
+	public String getTagNames() {
+		return _tagNames;
+	}
+
+	public void setTagNames(String tagNames) {
+		_tagNames = tagNames;
 	}
 
 	private long _assetId;
@@ -258,6 +267,7 @@ public class TagsAssetDisplay implements Serializable {
 	private int _width;
 	private double _priority;
 	private int _viewCount;
-	private String _tagsEntries;
+	private long[] _categoryIds;
+	private String _tagNames;
 
 }

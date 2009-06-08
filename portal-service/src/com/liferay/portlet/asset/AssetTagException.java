@@ -20,53 +20,30 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.tags.model;
+package com.liferay.portlet.asset;
 
-import java.io.Serializable;
+import com.liferay.portal.PortalException;
 
 /**
- * <a href="TagsAssetType.java.html"><b><i>View Source</i></b></a>
+ * <a href="AssetTagException.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class TagsAssetType implements Serializable {
+public class AssetTagException extends PortalException {
 
-	public long getClassNameId() {
-		return _classNameId;
+	public static final int AT_LEAST_ONE_TAG = 1;
+
+	public static final int INVALID_CHARACTER = 2;
+
+	public AssetTagException(int type) {
+		_type = type;
 	}
 
-	public void setClassNameId(long classNameId) {
-		_classNameId = classNameId;
+	public int getType() {
+		return _type;
 	}
 
-	public String getClassName() {
-		return _className;
-	}
-
-	public void setClassName(String className) {
-		_className = className;
-	}
-
-	public String getPortletId() {
-		return _portletId;
-	}
-
-	public void setPortletId(String portletId) {
-		_portletId = portletId;
-	}
-
-	public String getPortletTitle() {
-		return _portletTitle;
-	}
-
-	public void setPortletTitle(String portletTitle) {
-		_portletTitle = portletTitle;
-	}
-
-	private long _classNameId;
-	private String _className;
-	private String _portletId;
-	private String _portletTitle;
+	private int _type;
 
 }

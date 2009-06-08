@@ -58,6 +58,18 @@ public interface PortletDataContext extends Serializable {
 
 	public static final String ROOT_PATH_PORTLETS = "/portlets/";
 
+	public void addAssetCategories(Class<?> classObj, long classPK)
+		throws PortalException, SystemException;
+
+	public void addAssetCategories(
+			String className, long classPK, long[] assetCategoryIds);
+
+	public void addAssetTags(Class<?> classObj, long classPK)
+		throws PortalException, SystemException;
+
+	public void addAssetTags(
+		String className, long classPK, String[] assetTagNames);
+
 	public void addComments(Class<?> classObj, long classPK)
 		throws SystemException;
 
@@ -71,18 +83,6 @@ public interface PortletDataContext extends Serializable {
 
 	public void addRatingsEntries(
 		String className, long classPK, List<RatingsEntry> ratingsEntries);
-
-	public void addTagsCategories(Class<?> classObj, long classPK)
-		throws PortalException, SystemException;
-
-	public void addTagsCategories(
-			String className, long classPK, String[] tagsCategories);
-
-	public void addTagsEntries(Class<?> classObj, long classPK)
-		throws PortalException, SystemException;
-
-	public void addTagsEntries(
-		String className, long classPK, String[] tagsEntries);
 
 	public void addZipEntry(String path, byte[] bytes) throws SystemException;
 
@@ -104,6 +104,16 @@ public interface PortletDataContext extends Serializable {
 	public ClassLoader getClassLoader();
 
 	public Map<String, List<MBMessage>> getComments();
+
+	public Map<String, long[]> getAssetCategoryIds();
+
+	public long[] getAssetCategoryIds(Class<?> classObj, long classPK);
+
+	public Map<String, String[]> getAssetTagsMap();
+
+	public String[] getAssetTagNames(Class<?> classObj, long classPK);
+
+	public String[] getAssetTagNames(String className, long classPK);
 
 	public long getCompanyId();
 
@@ -144,16 +154,6 @@ public interface PortletDataContext extends Serializable {
 	public String getSourceRootPath();
 
 	public Date getStartDate();
-
-	public Map<String, String[]> getTagsCategories();
-
-	public String[] getTagsCategories(Class<?> classObj, long classPK);
-
-	public Map<String, String[]> getTagsEntries();
-
-	public String[] getTagsEntries(Class<?> classObj, long classPK);
-
-	public String[] getTagsEntries(String className, long classPK);
 
 	public long getUserId(String userUuid) throws SystemException;
 

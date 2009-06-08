@@ -289,10 +289,10 @@ public class PortletExporter {
 
 			Element root = doc.addElement("categories");
 
-			Set<Map.Entry<String, String[]>> categoriesEntries =
-				context.getTagsCategories().entrySet();
+			Set<Map.Entry<String, long[]>> categoriesEntries =
+				context.getAssetCategoryIds().entrySet();
 
-			for (Map.Entry<String, String[]> entry : categoriesEntries) {
+			for (Map.Entry<String, long[]> entry : categoriesEntries) {
 				String[] categoryEntry = entry.getKey().split(StringPool.POUND);
 
 				Element asset = root.addElement("asset");
@@ -300,11 +300,11 @@ public class PortletExporter {
 				asset.addAttribute("class-name", categoryEntry[0]);
 				asset.addAttribute("class-pk", categoryEntry[1]);
 				asset.addAttribute(
-					"entries", StringUtil.merge(entry.getValue()));
+					"categoryIds", StringUtil.merge(entry.getValue()));
 			}
 
 			context.addZipEntry(
-				context.getRootPath() + "/categories.xml",
+				context.getRootPath() + "/asset-categories.xml",
 				doc.formattedString());
 		}
 		catch (Exception e) {
@@ -1076,9 +1076,9 @@ public class PortletExporter {
 
 			Element root = doc.addElement("tags");
 
-			Map<String, String[]> tagsEntries = context.getTagsEntries();
+			Map<String, String[]> assetTags = context.getAssetTagsMap();
 
-			for (Map.Entry<String, String[]> entry : tagsEntries.entrySet()) {
+			for (Map.Entry<String, String[]> entry : assetTags.entrySet()) {
 				String[] tagsEntry = entry.getKey().split(StringPool.POUND);
 
 				Element asset = root.addElement("asset");
@@ -1086,11 +1086,11 @@ public class PortletExporter {
 				asset.addAttribute("class-name", tagsEntry[0]);
 				asset.addAttribute("class-pk", tagsEntry[1]);
 				asset.addAttribute(
-					"entries", StringUtil.merge(entry.getValue()));
+					"tags", StringUtil.merge(entry.getValue()));
 			}
 
 			context.addZipEntry(
-				context.getRootPath() + "/tags.xml", doc.formattedString());
+				context.getRootPath() + "/asset.xml", doc.formattedString());
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

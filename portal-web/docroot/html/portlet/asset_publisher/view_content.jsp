@@ -35,7 +35,7 @@ List results = new ArrayList();
 
 int assetIndex = 0;
 
-TagsAsset asset = null;
+Asset asset = null;
 
 String className = StringPool.BLANK;
 long classPK = 0;
@@ -55,10 +55,10 @@ try {
 			classPK = article.getResourcePrimKey();
 		}
 
-		asset = TagsAssetLocalServiceUtil.getAsset(className, classPK);
+		asset = AssetLocalServiceUtil.getAsset(className, classPK);
 	}
 	else {
-		asset = TagsAssetLocalServiceUtil.getAsset(assetId);
+		asset = AssetLocalServiceUtil.getAsset(assetId);
 
 		className = PortalUtil.getClassName(asset.getClassNameId());
 		classPK = asset.getClassPK();

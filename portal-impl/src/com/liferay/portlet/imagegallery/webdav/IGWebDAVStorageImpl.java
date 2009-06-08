@@ -41,6 +41,7 @@ import com.liferay.portal.webdav.Status;
 import com.liferay.portal.webdav.WebDAVException;
 import com.liferay.portal.webdav.WebDAVRequest;
 import com.liferay.portal.webdav.WebDAVUtil;
+import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
 import com.liferay.portlet.imagegallery.DuplicateFolderNameException;
 import com.liferay.portlet.imagegallery.NoSuchFolderException;
 import com.liferay.portlet.imagegallery.NoSuchImageException;
@@ -49,7 +50,6 @@ import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.imagegallery.model.impl.IGFolderImpl;
 import com.liferay.portlet.imagegallery.service.IGFolderServiceUtil;
 import com.liferay.portlet.imagegallery.service.IGImageServiceUtil;
-import com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil;
 
 import java.io.File;
 import java.io.InputStream;
@@ -472,10 +472,10 @@ public class IGWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 				long imageId = image.getImageId();
 
 				description = image.getDescription();
-				String[] tagsEntries = TagsEntryLocalServiceUtil.getEntryNames(
+				String[] assetTagNames = AssetTagLocalServiceUtil.getTagNames(
 					IGImage.class.getName(), imageId);
 
-				serviceContext.setTagsEntries(tagsEntries);
+				serviceContext.setAssetTagNames(assetTagNames);
 
 				IGImageServiceUtil.updateImage(
 					imageId, parentFolderId, name, description, file,

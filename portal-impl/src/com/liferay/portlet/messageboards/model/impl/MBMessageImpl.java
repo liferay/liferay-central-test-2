@@ -30,13 +30,13 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBThread;
 import com.liferay.portlet.messageboards.service.MBCategoryLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBThreadLocalServiceUtil;
 import com.liferay.portlet.messageboards.util.BBCodeUtil;
-import com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil;
 
 /**
  * <a href="MBMessageImpl.java.html"><b><i>View Source</i></b></a>
@@ -150,8 +150,8 @@ public class MBMessageImpl extends MBMessageModelImpl implements MBMessage {
 		return fileNames;
 	}
 
-	public String[] getTagsEntries() throws SystemException {
-		return TagsEntryLocalServiceUtil.getEntryNames(
+	public String[] getAssetTagNames() throws SystemException {
+		return AssetTagLocalServiceUtil.getTagNames(
 			MBMessage.class.getName(), getMessageId());
 	}
 

@@ -23,64 +23,60 @@
 %>
 
 <%
-long[] entryIds = TagsEntryLocalServiceUtil.getEntryIds(scopeGroupId, entries);
-long[] notEntryIds = TagsEntryLocalServiceUtil.getEntryIds(scopeGroupId, notEntries);
+long[] tagIds = AssetTagLocalServiceUtil.getTagIds(scopeGroupId, tagNames);
+long[] notTagIds = AssetTagLocalServiceUtil.getTagIds(scopeGroupId, notTagNames);
 
-if (allowEmptyResults && (entryIds.length == 0) && (notEntryIds.length == 0)) {
-	entryIds = new long[] {-1};
+if (allowEmptyResults && (tagIds.length == 0) && (notTagIds.length == 0)) {
+	tagIds = new long[] {-1};
 }
 
 Date now = new Date();
 
-int total = TagsAssetLocalServiceUtil.getAssetsCount(scopeGroupId, classNameIds, entryIds, notEntryIds, andOperator, excludeZeroViewCount, now, now);
+int total = AssetLocalServiceUtil.getAssetsCount(scopeGroupId, classNameIds, tagIds, notTagIds, andOperator, excludeZeroViewCount, now, now);
 
 searchContainer.setTotal(total);
 
-Map<String, List<TagsAsset>> assetsByCategory = new TreeMap<String, List<TagsAsset>>();
+Map<String, List<Asset>> assetsByCategory = new TreeMap<String, List<Asset>>();
 
-List<TagsAsset> assets = TagsAssetLocalServiceUtil.getAssets(scopeGroupId, classNameIds, entryIds, notEntryIds, andOperator, orderByColumn1, orderByColumn2, orderByType1, orderByType2, excludeZeroViewCount, now, now, searchContainer.getStart(), total);
+List<Asset> assets = AssetLocalServiceUtil.getAssets(scopeGroupId, classNameIds, tagIds, notTagIds, andOperator, orderByColumn1, orderByColumn2, orderByType1, orderByType2, excludeZeroViewCount, now, now, searchContainer.getStart(), total);
 
-for (TagsAsset asset : assets) {
-	List<TagsEntry> assetEntries = TagsEntryLocalServiceUtil.getAssetEntries(asset.getAssetId(), TagsEntryConstants.FOLKSONOMY_TAG);
+for (Asset asset : assets) {
+	List<AssetTag> tags = AssetTagLocalServiceUtil.getAssetTags(asset.getAssetId());
 
-	for (TagsEntry assetEntry : assetEntries) {
-		TagsVocabulary vocabulary = assetEntry.getVocabulary();
+	for (AssetTag tag : tags) {
+		String tagLabel = null;
 
-		if (vocabulary.getName().equals(category)) {
-			String tagLabel = null;
+		try {
+			AssetTagProperty descriptionProperty = AssetTagPropertyLocalServiceUtil.getTagProperty(tag.getTagId(), themeDisplay.getLanguageId());
 
+			tagLabel = descriptionProperty.getValue();
+		}
+		catch (NoSuchTagPropertyException nstpe1) {
 			try {
-				TagsProperty descriptionProperty = TagsPropertyLocalServiceUtil.getProperty(assetEntry.getEntryId(), themeDisplay.getLanguageId());
+				AssetTagProperty descriptionProperty = AssetTagPropertyLocalServiceUtil.getTagProperty(tag.getTagId(), "en_US");
 
 				tagLabel = descriptionProperty.getValue();
 			}
-			catch (NoSuchPropertyException nspee1) {
-				try {
-					TagsProperty descriptionProperty = TagsPropertyLocalServiceUtil.getProperty(assetEntry.getEntryId(), "en_US");
-
-					tagLabel = descriptionProperty.getValue();
-				}
-				catch (NoSuchPropertyException nspee2) {
-					tagLabel = StringUtil.upperCaseFirstLetter(assetEntry.getName());
-				}
+			catch (NoSuchTagPropertyException nstpe2) {
+				tagLabel = StringUtil.upperCaseFirstLetter(tag.getName());
 			}
-
-			List assetsList = assetsByCategory.get(tagLabel);
-
-			if (assetsList == null) {
-				assetsList = new ArrayList();
-
-				assetsByCategory.put(tagLabel, assetsList);
-			}
-
-			assetsList.add(asset);
-
-			break;
 		}
+
+		List assetsList = assetsByCategory.get(tagLabel);
+
+		if (assetsList == null) {
+			assetsList = new ArrayList();
+
+			assetsByCategory.put(tagLabel, assetsList);
+		}
+
+		assetsList.add(asset);
+
+		break;
 	}
 }
 
-Iterator<Map.Entry<String, List<TagsAsset>>> itr = assetsByCategory.entrySet().iterator();
+Iterator<Map.Entry<String, List<Asset>>> itr = assetsByCategory.entrySet().iterator();
 
 if (!itr.hasNext()) {
 	if (!showPortletWithNoResults) {
@@ -94,10 +90,10 @@ if (!itr.hasNext()) {
 }
 
 while (itr.hasNext()) {
-	Map.Entry<String, List<TagsAsset>> entry = itr.next();
+	Map.Entry<String, List<Asset>> entry = itr.next();
 
 	String tagLabel = entry.getKey();
-	List<TagsAsset> results = entry.getValue();
+	List<Asset> results = entry.getValue();
 
 	request.setAttribute("view.jsp-results", results);
 %>
@@ -108,7 +104,7 @@ while (itr.hasNext()) {
 
 		<%
 		for (int assetIndex = 0; (assetIndex < results.size()) && (assetIndex < delta); assetIndex++) {
-			TagsAsset asset = results.get(assetIndex);
+			Asset asset = results.get(assetIndex);
 
 			String className = PortalUtil.getClassName(asset.getClassNameId());
 			long classPK = asset.getClassPK();

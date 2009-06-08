@@ -50,7 +50,7 @@
 					SELECT
 						classPK
 					FROM
-						TagsAsset
+						Asset
 					WHERE
 						classNameId = [$CLASS_NAME_ID_COM.LIFERAY.PORTLET.BLOGS.MODEL.BLOGSENTRY$]
 				))

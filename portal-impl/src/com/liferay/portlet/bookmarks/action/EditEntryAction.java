@@ -32,13 +32,14 @@ import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.asset.AssetCategoryException;
+import com.liferay.portlet.asset.AssetTagException;
 import com.liferay.portlet.assetpublisher.util.AssetPublisherUtil;
 import com.liferay.portlet.bookmarks.EntryURLException;
 import com.liferay.portlet.bookmarks.NoSuchEntryException;
 import com.liferay.portlet.bookmarks.NoSuchFolderException;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.bookmarks.service.BookmarksEntryServiceUtil;
-import com.liferay.portlet.tags.TagsEntryException;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -104,7 +105,8 @@ public class EditEntryAction extends PortletAction {
 
 				SessionErrors.add(actionRequest, e.getClass().getName());
 			}
-			else if (e instanceof TagsEntryException) {
+			else if (e instanceof AssetCategoryException ||
+					 e instanceof AssetTagException) {
 				SessionErrors.add(actionRequest, e.getClass().getName(), e);
 			}
 			else {

@@ -58,8 +58,8 @@ public class VerifyImageGallery extends VerifyProcess {
 
 		for (IGImage image : images) {
 			try {
-				IGImageLocalServiceUtil.updateTagsAsset(
-					image.getUserId(), image, new String[0], new String[0]);
+				IGImageLocalServiceUtil.updateAsset(
+					image.getUserId(), image, new long[0], new String[0]);
 			}
 			catch (Exception e) {
 				if (_log.isWarnEnabled()) {

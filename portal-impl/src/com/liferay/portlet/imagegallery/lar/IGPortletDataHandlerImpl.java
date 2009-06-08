@@ -89,7 +89,7 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 			imageEl.addAttribute("bin-path", getImageBinPath(context, image));
 
 			if (context.getBooleanParameter(_NAMESPACE, "tags")) {
-				context.addTagsEntries(IGImage.class, image.getImageId());
+				context.addAssetTags(IGImage.class, image.getImageId());
 			}
 
 			image.setUserUuid(image.getUserUuid());
@@ -210,10 +210,10 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 			FileUtil.write(imageFile, bytes);
 		}
 
-		String[] tagsEntries = null;
+		String[] assetTagNames = null;
 
 		if (context.getBooleanParameter(_NAMESPACE, "tags")) {
-			tagsEntries = context.getTagsEntries(
+			assetTagNames = context.getAssetTagNames(
 				IGImage.class, image.getImageId());
 		}
 
@@ -221,7 +221,7 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		serviceContext.setAddCommunityPermissions(true);
 		serviceContext.setAddGuestPermissions(true);
-		serviceContext.setTagsEntries(tagsEntries);
+		serviceContext.setAssetTagNames(assetTagNames);
 
 		if ((folderId != IGFolderImpl.DEFAULT_PARENT_FOLDER_ID) &&
 			(folderId == image.getFolderId())) {

@@ -80,11 +80,6 @@ import com.liferay.portlet.softwarecatalog.service.persistence.SCLicensePersiste
 import com.liferay.portlet.softwarecatalog.service.persistence.SCProductEntryPersistenceTest;
 import com.liferay.portlet.softwarecatalog.service.persistence.SCProductScreenshotPersistenceTest;
 import com.liferay.portlet.softwarecatalog.service.persistence.SCProductVersionPersistenceTest;
-import com.liferay.portlet.tags.service.persistence.TagsAssetPersistenceTest;
-import com.liferay.portlet.tags.service.persistence.TagsEntryPersistenceTest;
-import com.liferay.portlet.tags.service.persistence.TagsPropertyPersistenceTest;
-import com.liferay.portlet.tags.service.persistence.TagsSourcePersistenceTest;
-import com.liferay.portlet.tags.service.persistence.TagsVocabularyPersistenceTest;
 import com.liferay.portlet.tasks.service.persistence.TasksProposalPersistenceTest;
 import com.liferay.portlet.tasks.service.persistence.TasksReviewPersistenceTest;
 import com.liferay.portlet.wiki.service.persistence.WikiNodePersistenceTest;
@@ -225,12 +220,6 @@ public class PersistenceTestSuite extends TestSuite {
 		testSuite.addTestSuite(SCProductEntryPersistenceTest.class);
 		testSuite.addTestSuite(SCProductScreenshotPersistenceTest.class);
 		testSuite.addTestSuite(SCProductVersionPersistenceTest.class);
-
-		testSuite.addTestSuite(TagsAssetPersistenceTest.class);
-		testSuite.addTestSuite(TagsEntryPersistenceTest.class);
-		testSuite.addTestSuite(TagsPropertyPersistenceTest.class);
-		testSuite.addTestSuite(TagsSourcePersistenceTest.class);
-		testSuite.addTestSuite(TagsVocabularyPersistenceTest.class);
 
 		testSuite.addTestSuite(TasksProposalPersistenceTest.class);
 		testSuite.addTestSuite(TasksReviewPersistenceTest.class);

@@ -294,7 +294,7 @@ String threadView = messageDisplay.getThreadView();
 		messages = ListUtil.sort(messages, new MessageCreateDateComparator(true));
 	}
 
-	TagsUtil.addLayoutTagsEntries(request, TagsEntryLocalServiceUtil.getEntries(MBMessage.class.getName(), thread.getRootMessageId(), true));
+	AssetUtil.addLayoutTags(request, AssetTagLocalServiceUtil.getTags(MBMessage.class.getName(), thread.getRootMessageId()));
 	%>
 
 	<div class="message-scroll" id="<portlet:namespace />message_0"></div>
@@ -352,7 +352,7 @@ message = messageDisplay.getMessage();
 PortalUtil.setPageSubtitle(message.getSubject(), request);
 PortalUtil.setPageDescription(message.getSubject(), request);
 
-List<TagsEntry> tagsEntries = TagsEntryLocalServiceUtil.getEntries(MBMessage.class.getName(), message.getMessageId(), true);
+List<AssetTag> tags = AssetTagLocalServiceUtil.getTags(MBMessage.class.getName(), message.getMessageId());
 
-PortalUtil.setPageKeywords(ListUtil.toString(tagsEntries, "name"), request);
+PortalUtil.setPageKeywords(ListUtil.toString(tags, "name"), request);
 %>

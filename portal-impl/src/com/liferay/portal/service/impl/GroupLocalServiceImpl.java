@@ -193,12 +193,12 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			userLocalService.addGroupUsers(
 				group.getGroupId(), new long[] {userId});
 
-			// Tags
+			// Asset
 
 			if (serviceContext != null) {
-				updateTagsAsset(
-					userId, group, serviceContext.getTagsCategories(),
-					serviceContext.getTagsEntries());
+				updateAsset(
+					userId, group, serviceContext.getAssetCategoryIds(),
+					serviceContext.getAssetTagNames());
 			}
 		}
 		else if (className.equals(Organization.class.getName()) &&
@@ -348,6 +348,12 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 		unscheduleStaging(group);
 
+		// Asset
+
+		if (group.isCommunity()) {
+			assetLocalService.deleteAsset(Group.class.getName(), groupId);
+		}
+
 		// Blogs
 
 		blogsEntryLocalService.deleteEntries(groupId);
@@ -396,12 +402,6 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 		scFrameworkVersionLocalService.deleteFrameworkVersions(groupId);
 		scProductEntryLocalService.deleteProductEntries(groupId);
-
-		// Tags
-
-		if (group.isCommunity()) {
-			tagsAssetLocalService.deleteAsset(Group.class.getName(), groupId);
-		}
 
 		// Wiki
 
@@ -767,13 +767,13 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 		groupPersistence.update(group, false);
 
-		// Tags
+		// Asset
 
 		if ((serviceContext != null) && group.isCommunity()) {
-			updateTagsAsset(
+			updateAsset(
 				group.getCreatorUserId(), group,
-				serviceContext.getTagsCategories(),
-				serviceContext.getTagsEntries());
+				serviceContext.getAssetCategoryIds(),
+				serviceContext.getAssetTagNames());
 		}
 
 		return group;
@@ -791,15 +791,15 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		return group;
 	}
 
-	public void updateTagsAsset(
-			long userId, Group group, String[] tagsCategories,
-			String[] tagsEntries)
+	public void updateAsset(
+			long userId, Group group, long[] assetCategoryIds,
+			String[] assetTagNames)
 		throws PortalException, SystemException {
 
-		tagsAssetLocalService.updateAsset(
+		assetLocalService.updateAsset(
 			userId, group.getGroupId(), Group.class.getName(),
-			group.getGroupId(), tagsCategories, tagsEntries, true, null, null,
-			null, null, null, group.getDescriptiveName(),
+			group.getGroupId(), assetCategoryIds, assetTagNames, true, null,
+			null, null, null, null, group.getDescriptiveName(),
 			group.getDescription(), null, null, 0, 0, null, false);
 	}
 

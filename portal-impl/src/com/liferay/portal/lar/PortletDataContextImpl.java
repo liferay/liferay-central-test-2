@@ -33,6 +33,11 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.zip.ZipReader;
 import com.liferay.portal.kernel.zip.ZipWriter;
 import com.liferay.portal.service.ServiceContext;
+import com.liferay.portlet.asset.NoSuchAssetException;
+import com.liferay.portlet.asset.model.Asset;
+import com.liferay.portlet.asset.model.AssetCategory;
+import com.liferay.portlet.asset.model.AssetTag;
+import com.liferay.portlet.asset.service.AssetLocalServiceUtil;
 import com.liferay.portlet.blogs.model.impl.BlogsEntryImpl;
 import com.liferay.portlet.bookmarks.model.impl.BookmarksEntryImpl;
 import com.liferay.portlet.bookmarks.model.impl.BookmarksFolderImpl;
@@ -64,10 +69,6 @@ import com.liferay.portlet.polls.model.impl.PollsVoteImpl;
 import com.liferay.portlet.ratings.model.RatingsEntry;
 import com.liferay.portlet.ratings.model.impl.RatingsEntryImpl;
 import com.liferay.portlet.ratings.service.RatingsEntryLocalServiceUtil;
-import com.liferay.portlet.tags.NoSuchAssetException;
-import com.liferay.portlet.tags.model.TagsAsset;
-import com.liferay.portlet.tags.model.TagsEntry;
-import com.liferay.portlet.tags.service.TagsAssetLocalServiceUtil;
 import com.liferay.portlet.wiki.model.impl.WikiNodeImpl;
 import com.liferay.portlet.wiki.model.impl.WikiPageImpl;
 
@@ -143,6 +144,74 @@ public class PortletDataContextImpl implements PortletDataContext {
 		initXStream();
 	}
 
+	public void addAssetCategories(Class<?> classObj, long classPK)
+		throws PortalException, SystemException {
+
+		Asset asset = null;
+
+		try {
+			asset = AssetLocalServiceUtil.getAsset(
+				classObj.getName(), classPK);
+		}
+		catch (NoSuchAssetException nsae) {
+
+			// LEP-4979
+
+			return;
+		}
+
+		List<AssetCategory> assetCategories = asset.getCategories();
+
+		if (assetCategories.size() == 0) {
+			return;
+		}
+
+		_assetCategoriesMap.put(
+			getPrimaryKeyString(classObj, classPK),
+			StringUtil.split(ListUtil.toString(
+				assetCategories, "categoryId"), 0L));
+	}
+
+	public void addAssetCategories(
+		String className, long classPK, long[] assetCategoryIds) {
+
+		_assetCategoriesMap.put(
+			getPrimaryKeyString(className, classPK), assetCategoryIds);
+	}
+
+	public void addAssetTags(Class<?> classObj, long classPK)
+		throws PortalException, SystemException {
+
+		Asset asset = null;
+
+		try {
+			asset = AssetLocalServiceUtil.getAsset(classObj.getName(), classPK);
+		}
+		catch (NoSuchAssetException nsae) {
+
+			// LEP-4979
+
+			return;
+		}
+
+		List<AssetTag> tags = asset.getTags();
+
+		if (tags.size() == 0) {
+			return;
+		}
+
+		_assetTagsMap.put(
+			getPrimaryKeyString(classObj, classPK),
+			StringUtil.split(ListUtil.toString(tags, "name")));
+	}
+
+	public void addAssetTags(
+		String className, long classPK, String[] assetTagNames) {
+
+		_assetTagsMap.put(
+			getPrimaryKeyString(className, classPK), assetTagNames);
+	}
+
 	public void addComments(Class<?> classObj, long classPK)
 		throws SystemException {
 
@@ -210,74 +279,6 @@ public class PortletDataContextImpl implements PortletDataContext {
 			getPrimaryKeyString(className, classPK), ratingsEntries);
 	}
 
-	public void addTagsCategories(Class<?> classObj, long classPK)
-		throws PortalException, SystemException {
-
-		TagsAsset tagsAsset = null;
-
-		try {
-			tagsAsset = TagsAssetLocalServiceUtil.getAsset(
-				classObj.getName(), classPK);
-		}
-		catch (NoSuchAssetException nsae) {
-
-			// LEP-4979
-
-			return;
-		}
-
-		List<TagsEntry> tagsCategories = tagsAsset.getCategories();
-
-		if (tagsCategories.size() == 0) {
-			return;
-		}
-
-		_tagsCategoriesMap.put(
-			getPrimaryKeyString(classObj, classPK),
-			StringUtil.split(ListUtil.toString(tagsCategories, "name")));
-	}
-
-	public void addTagsCategories(
-		String className, long classPK, String[] tagsCategories) {
-
-		_tagsCategoriesMap.put(
-			getPrimaryKeyString(className, classPK), tagsCategories);
-	}
-
-	public void addTagsEntries(Class<?> classObj, long classPK)
-		throws PortalException, SystemException {
-
-		TagsAsset tagsAsset = null;
-
-		try {
-			tagsAsset = TagsAssetLocalServiceUtil.getAsset(
-				classObj.getName(), classPK);
-		}
-		catch (NoSuchAssetException nsae) {
-
-			// LEP-4979
-
-			return;
-		}
-
-		List<TagsEntry> tagsEntries = tagsAsset.getEntries();
-
-		if (tagsEntries.size() == 0) {
-			return;
-		}
-
-		_tagsEntriesMap.put(
-			getPrimaryKeyString(classObj, classPK),
-			StringUtil.split(ListUtil.toString(tagsEntries, "name")));
-	}
-
-	public void addTagsEntries(
-		String className, long classPK, String[] tagsEntries) {
-
-		_tagsEntriesMap.put(
-			getPrimaryKeyString(className, classPK), tagsEntries);
-	}
-
 	public void addZipEntry(String path, byte[] bytes) throws SystemException {
 		try {
 			getZipWriter().addEntry(path, bytes);
@@ -328,6 +329,27 @@ public class PortletDataContextImpl implements PortletDataContext {
 
 	public Object fromXML(String xml) {
 		return _xStream.fromXML(xml);
+	}
+
+	public Map<String, long[]> getAssetCategoryIds() {
+		return _assetCategoriesMap;
+	}
+
+	public long[] getAssetCategoryIds(Class<?> classObj, long classPK) {
+		return _assetCategoriesMap.get(
+			getPrimaryKeyString(classObj, classPK));
+	}
+
+	public Map<String, String[]> getAssetTagsMap() {
+		return _assetTagsMap;
+	}
+
+	public String[] getAssetTagNames(Class<?> classObj, long classPK) {
+		return _assetTagsMap.get(getPrimaryKeyString(classObj, classPK));
+	}
+
+	public String[] getAssetTagNames(String className, long classPK) {
+		return _assetTagsMap.get(getPrimaryKeyString(className, classPK));
 	}
 
 	public boolean getBooleanParameter(String namespace, String name) {
@@ -435,27 +457,6 @@ public class PortletDataContextImpl implements PortletDataContext {
 
 	public Date getStartDate() {
 		return _startDate;
-	}
-
-	public Map<String, String[]> getTagsCategories() {
-		return _tagsCategoriesMap;
-	}
-
-	public String[] getTagsCategories(Class<?> classObj, long classPK) {
-		return _tagsCategoriesMap.get(
-			getPrimaryKeyString(classObj, classPK));
-	}
-
-	public Map<String, String[]> getTagsEntries() {
-		return _tagsEntriesMap;
-	}
-
-	public String[] getTagsEntries(Class<?> classObj, long classPK) {
-		return _tagsEntriesMap.get(getPrimaryKeyString(classObj, classPK));
-	}
-
-	public String[] getTagsEntries(String className, long classPK) {
-		return _tagsEntriesMap.get(getPrimaryKeyString(className, classPK));
 	}
 
 	public long getUserId(String userUuid) throws SystemException {
@@ -771,9 +772,9 @@ public class PortletDataContextImpl implements PortletDataContext {
 	private Map<String, String[]> _parameterMap;
 	private Map<String, List<RatingsEntry>> _ratingsEntriesMap =
 		new HashMap<String, List<RatingsEntry>>();
-	private Map<String, String[]> _tagsCategoriesMap =
-		new HashMap<String, String[]>();
-	private Map<String, String[]> _tagsEntriesMap =
+	private Map<String, long[]> _assetCategoriesMap =
+		new HashMap<String, long[]>();
+	private Map<String, String[]> _assetTagsMap =
 		new HashMap<String, String[]>();
 	private Set<String> _notUniquePerLayout = new HashSet<String>();
 

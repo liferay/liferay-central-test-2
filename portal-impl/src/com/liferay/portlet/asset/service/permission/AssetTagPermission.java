@@ -20,89 +20,64 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.tags.service.permission;
+package com.liferay.portlet.asset.service.permission;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.PermissionChecker;
-import com.liferay.portlet.tags.model.TagsEntry;
-import com.liferay.portlet.tags.model.TagsEntryConstants;
-import com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil;
+import com.liferay.portlet.asset.model.AssetTag;
+import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
 
 /**
- * <a href="TagsEntryPermission.java.html"><b><i>View Source</i></b></a>
+ * <a href="AssetTagPermission.java.html"><b><i>View Source</i></b></a>
  *
  * @author Eduardo Lundgren
  *
  */
-public class TagsEntryPermission {
+public class AssetTagPermission {
 
 	public static void check(
-			PermissionChecker permissionChecker, long groupId, long entryId,
-			String actionId)
+			PermissionChecker permissionChecker, long tagId, String actionId)
 		throws PortalException, SystemException {
 
-		if (!contains(permissionChecker, groupId, entryId, actionId)) {
+		if (!contains(permissionChecker, tagId, actionId)) {
 			throw new PrincipalException();
 		}
 	}
 
 	public static void check(
-			PermissionChecker permissionChecker, long entryId, String actionId)
-		throws PortalException, SystemException {
-
-		if (!contains(permissionChecker, entryId, actionId)) {
-			throw new PrincipalException();
-		}
-	}
-
-	public static void check(
-			PermissionChecker permissionChecker, TagsEntry entry,
+			PermissionChecker permissionChecker, AssetTag assetTag,
 			String actionId)
 		throws PortalException {
 
-		if (!contains(permissionChecker, entry, actionId)) {
+		if (!contains(permissionChecker, assetTag, actionId)) {
 			throw new PrincipalException();
 		}
 	}
 
 	public static boolean contains(
-			PermissionChecker permissionChecker, long groupId, long entryId,
+			PermissionChecker permissionChecker, long tagId,
 			String actionId)
 		throws PortalException, SystemException {
 
-		if (entryId == TagsEntryConstants.DEFAULT_PARENT_ENTRY_ID) {
-			return TagsPermission.contains(
-				permissionChecker, groupId, actionId);
-		}
-		else {
-			return contains(permissionChecker, entryId, actionId);
-		}
+		AssetTag assetTag = AssetTagLocalServiceUtil.getAssetTag(tagId);
+
+		return contains(permissionChecker, assetTag, actionId);
 	}
 
 	public static boolean contains(
-			PermissionChecker permissionChecker, long entryId,
-			String actionId)
-		throws PortalException, SystemException {
-
-		TagsEntry entry = TagsEntryLocalServiceUtil.getEntry(entryId);
-
-		return contains(permissionChecker, entry, actionId);
-	}
-
-	public static boolean contains(
-		PermissionChecker permissionChecker, TagsEntry entry, String actionId) {
+		PermissionChecker permissionChecker, AssetTag assetTag, String actionId) {
 
 		if (permissionChecker.hasOwnerPermission(
-				entry.getCompanyId(), TagsEntry.class.getName(),
-				entry.getEntryId(), entry.getUserId(), actionId)) {
+				assetTag.getCompanyId(), AssetTag.class.getName(),
+				assetTag.getTagId(), assetTag.getUserId(), actionId)) {
 
 			return true;
 		}
 
 		return permissionChecker.hasPermission(
-			entry.getGroupId(), TagsEntry.class.getName(), entry.getEntryId(),
+			assetTag.getGroupId(), AssetTag.class.getName(), assetTag.getTagId(),
 			actionId);
 	}
 

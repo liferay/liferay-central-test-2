@@ -699,7 +699,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		String description = event.getDescription();
 		Date modifiedDate = event.getModifiedDate();
 
-		String[] tagsEntries = tagsEntryLocalService.getEntryNames(
+		String[] assetTagNames = assetTagLocalService.getTagNames(
 			CalEvent.class.getName(), eventId);
 
 		ExpandoBridge expandoBridge = event.getExpandoBridge();
@@ -707,7 +707,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		try {
 			Indexer.updateEvent(
 				companyId, groupId, userId, userName, eventId, title,
-				description, modifiedDate, tagsEntries, expandoBridge);
+				description, modifiedDate, assetTagNames, expandoBridge);
 		}
 		catch (SearchException se) {
 			_log.error("Reindexing " + eventId, se);
@@ -756,7 +756,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 				searchQuery.addTerm(Field.USER_NAME, keywords);
 				searchQuery.addTerm(Field.TITLE, keywords);
 				searchQuery.addTerm(Field.DESCRIPTION, keywords);
-				searchQuery.addTerm(Field.TAGS_ENTRIES, keywords);
+				searchQuery.addTerm(Field.ASSET_TAG_NAMES, keywords);
 			}
 
 			BooleanQuery fullQuery = BooleanQueryFactoryUtil.create();

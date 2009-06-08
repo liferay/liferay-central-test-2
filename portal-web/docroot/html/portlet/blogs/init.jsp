@@ -27,6 +27,11 @@
 <%@ page import="com.liferay.portal.kernel.search.Document" %>
 <%@ page import="com.liferay.portal.kernel.search.Field" %>
 <%@ page import="com.liferay.portal.kernel.search.Hits" %>
+<%@ page import="com.liferay.portlet.asset.model.Asset" %>
+<%@ page import="com.liferay.portlet.asset.model.AssetTag" %>
+<%@ page import="com.liferay.portlet.asset.service.AssetLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.asset.service.AssetTagLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.asset.util.AssetUtil" %>
 <%@ page import="com.liferay.portlet.blogs.EntryContentException" %>
 <%@ page import="com.liferay.portlet.blogs.EntryDisplayDateException" %>
 <%@ page import="com.liferay.portlet.blogs.EntryTitleException" %>
@@ -36,11 +41,6 @@
 <%@ page import="com.liferay.portlet.blogs.service.permission.BlogsEntryPermission" %>
 <%@ page import="com.liferay.portlet.blogs.service.permission.BlogsPermission" %>
 <%@ page import="com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil" %>
-<%@ page import="com.liferay.portlet.tags.model.TagsAsset" %>
-<%@ page import="com.liferay.portlet.tags.model.TagsEntry" %>
-<%@ page import="com.liferay.portlet.tags.service.TagsAssetLocalServiceUtil" %>
-<%@ page import="com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil" %>
-<%@ page import="com.liferay.portlet.tags.util.TagsUtil" %>
 <%@ page import="com.liferay.util.RSSUtil" %>
 
 <%

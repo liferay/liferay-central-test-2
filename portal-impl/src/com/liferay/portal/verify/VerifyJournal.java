@@ -29,14 +29,14 @@ import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.tools.sql.DBUtil;
+import com.liferay.portlet.asset.NoSuchAssetException;
+import com.liferay.portlet.asset.service.AssetLocalServiceUtil;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalStructure;
 import com.liferay.portlet.journal.model.JournalTemplate;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalStructureLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalTemplateLocalServiceUtil;
-import com.liferay.portlet.tags.NoSuchAssetException;
-import com.liferay.portlet.tags.service.TagsAssetLocalServiceUtil;
 
 import java.util.List;
 
@@ -232,7 +232,7 @@ public class VerifyJournal extends VerifyProcess {
 				article.getResourcePrimKey(), false, true, true);
 
 			try {
-				TagsAssetLocalServiceUtil.getAsset(
+				AssetLocalServiceUtil.getAsset(
 					JournalArticle.class.getName(),
 					article.getResourcePrimKey());
 			}

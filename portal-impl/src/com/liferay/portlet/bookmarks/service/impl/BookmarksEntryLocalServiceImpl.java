@@ -124,7 +124,7 @@ public class BookmarksEntryLocalServiceImpl
 
 		updateAsset(
 			userId, entry, serviceContext.getAssetCategoryIds(),
-			serviceContext.getTagsEntries());
+			serviceContext.getAssetTagNames());
 
 		// Expando
 
@@ -224,7 +224,7 @@ public class BookmarksEntryLocalServiceImpl
 
 		// Asset
 
-		tagsAssetLocalService.deleteAsset(
+		assetLocalService.deleteAsset(
 			BookmarksEntry.class.getName(), entry.getEntryId());
 
 		// Resources
@@ -322,7 +322,7 @@ public class BookmarksEntryLocalServiceImpl
 
 		bookmarksEntryPersistence.update(entry, false);
 
-		tagsAssetLocalService.incrementViewCounter(
+		assetLocalService.incrementViewCounter(
 			BookmarksEntry.class.getName(), entryId);
 
 		return entry;
@@ -353,7 +353,7 @@ public class BookmarksEntryLocalServiceImpl
 		String comments = entry.getComments();
 		Date modifiedDate = entry.getModifiedDate();
 
-		String[] tagsEntries = tagsEntryLocalService.getEntryNames(
+		String[] assetTagNames = assetTagLocalService.getTagNames(
 			BookmarksEntry.class.getName(), entryId);
 
 		ExpandoBridge expandoBridge = entry.getExpandoBridge();
@@ -361,7 +361,7 @@ public class BookmarksEntryLocalServiceImpl
 		try {
 			Indexer.updateEntry(
 				companyId, groupId, folderId, entryId, name, url, comments,
-				modifiedDate, tagsEntries, expandoBridge);
+				modifiedDate, assetTagNames, expandoBridge);
 		}
 		catch (SearchException se) {
 			_log.error("Reindexing " + entryId, se);
@@ -370,13 +370,13 @@ public class BookmarksEntryLocalServiceImpl
 
 	public void updateAsset(
 			long userId, BookmarksEntry entry, long[] assetCategoryIds,
-			String[] tagsEntries)
+			String[] assetTagNames)
 		throws PortalException, SystemException {
 
-		tagsAssetLocalService.updateAsset(
+		assetLocalService.updateAsset(
 			userId, entry.getGroupId(), BookmarksEntry.class.getName(),
-			entry.getEntryId(), assetCategoryIds, tagsEntries, true, null, null,
-			null, null, ContentTypes.TEXT_PLAIN, entry.getName(),
+			entry.getEntryId(), assetCategoryIds, assetTagNames, true, null,
+			null, null, null, ContentTypes.TEXT_PLAIN, entry.getName(),
 			entry.getComments(), null, entry.getUrl(), 0, 0, null, false);
 	}
 
@@ -410,7 +410,7 @@ public class BookmarksEntryLocalServiceImpl
 
 		updateAsset(
 			userId, entry, serviceContext.getAssetCategoryIds(),
-			serviceContext.getTagsEntries());
+			serviceContext.getAssetTagNames());
 
 		// Expando
 

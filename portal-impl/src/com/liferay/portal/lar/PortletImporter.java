@@ -707,7 +707,7 @@ public class PortletImporter {
 
 		try {
 			String xml = context.getZipEntryAsString(
-				context.getSourceRootPath() + "/categories.xml");
+				context.getSourceRootPath() + "/asset-categories.xml");
 
 			if (xml == null) {
 				return;
@@ -724,11 +724,12 @@ public class PortletImporter {
 					asset.attributeValue("class-name"));
 				long classPK = GetterUtil.getLong(
 					asset.attributeValue("class-pk"));
-				String entries = GetterUtil.getString(
-					asset.attributeValue("entries"));
+				String categoryIdsString = GetterUtil.getString(
+					asset.attributeValue("categoryIds"));
 
-				context.addTagsCategories(
-					className, new Long(classPK), StringUtil.split(entries));
+				context.addAssetCategories(
+					className, new Long(classPK),
+					StringUtil.split(categoryIdsString, 0L));
 			}
 		}
 		catch (Exception e) {
@@ -741,7 +742,7 @@ public class PortletImporter {
 
 		try {
 			String xml = context.getZipEntryAsString(
-				context.getSourceRootPath() + "/tags.xml");
+				context.getSourceRootPath() + "/asset.xml");
 
 			if (xml == null) {
 				return;
@@ -759,9 +760,9 @@ public class PortletImporter {
 				long classPK = GetterUtil.getLong(
 					asset.attributeValue("class-pk"));
 				String entries = GetterUtil.getString(
-					asset.attributeValue("entries"));
+					asset.attributeValue("tags"));
 
-				context.addTagsEntries(
+				context.addAssetTags(
 					className, new Long(classPK), StringUtil.split(entries));
 			}
 		}

@@ -53,5 +53,8 @@ public interface AssetCategory extends AssetCategoryModel {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	public java.lang.String getUserUuid()
+		throws com.liferay.portal.SystemException;
+
 	public boolean isRootCategory();
 }
