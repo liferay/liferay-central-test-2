@@ -40,9 +40,9 @@ public class AssetCategoryFinderUtil {
 		return getFinder().countByG_N_P(groupId, name, properties);
 	}
 
-	public static java.util.List<com.liferay.portlet.asset.model.AssetCategory> findByAssetId(
-		long assetId) throws com.liferay.portal.SystemException {
-		return getFinder().findByAssetId(assetId);
+	public static java.util.List<com.liferay.portlet.asset.model.AssetCategory> findByEntryId(
+		long entryId) throws com.liferay.portal.SystemException {
+		return getFinder().findByEntryId(entryId);
 	}
 
 	public static com.liferay.portlet.asset.model.AssetCategory findByG_N(
@@ -53,15 +53,18 @@ public class AssetCategoryFinderUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetCategory> findByG_N_P(
-		long groupId, java.lang.String name, java.lang.String[] properties)
+		long groupId, java.lang.String name,
+		java.lang.String[] categoryProperties)
 		throws com.liferay.portal.SystemException {
-		return getFinder().findByG_N_P(groupId, name, properties);
+		return getFinder().findByG_N_P(groupId, name, categoryProperties);
 	}
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetCategory> findByG_N_P(
-		long groupId, java.lang.String name, java.lang.String[] properties,
-		int start, int end) throws com.liferay.portal.SystemException {
-		return getFinder().findByG_N_P(groupId, name, properties, start, end);
+		long groupId, java.lang.String name,
+		java.lang.String[] categoryProperties, int start, int end)
+		throws com.liferay.portal.SystemException {
+		return getFinder()
+				   .findByG_N_P(groupId, name, categoryProperties, start, end);
 	}
 
 	public static AssetCategoryFinder getFinder() {

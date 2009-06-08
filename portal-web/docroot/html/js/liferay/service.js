@@ -418,6 +418,51 @@ Liferay.Service.registerClass(
 );
 
 Liferay.Service.registerClass(
+	Liferay.Service.Asset, "AssetEntry",
+	{
+		deleteEntry: true,
+		getCompanyEntries: true,
+		getCompanyEntriesCount: true,
+		getCompanyEntriesRSS: true,
+		getCompanyEntryDisplays: true,
+		getEntries: true,
+		getEntriesCount: true,
+		getEntriesRSS: true,
+		getEntry: true,
+		getEntryTypes: true,
+		incrementViewCounter: true,
+		searchEntryDisplays: true,
+		searchEntryDisplaysCount: true,
+		updateEntry: true
+	}
+);
+
+Liferay.Service.registerClass(
+	Liferay.Service.Asset, "AssetTag",
+	{
+		addTag: true,
+		deleteTag: true,
+		getGroupTags: true,
+		getTag: true,
+		getTags: true,
+		mergeTags: true,
+		search: true,
+		updateTag: true
+	}
+);
+
+Liferay.Service.registerClass(
+	Liferay.Service.Asset, "AssetTagProperty",
+	{
+		addTagProperty: true,
+		deleteTagProperty: true,
+		getTagProperties: true,
+		getTagPropertyValues: true,
+		updateTagProperty: true
+	}
+);
+
+Liferay.Service.registerClass(
 	Liferay.Service.Asset, "AssetVocabulary",
 	{
 		addVocabulary: true,

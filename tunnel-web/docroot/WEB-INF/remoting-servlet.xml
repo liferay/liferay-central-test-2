@@ -445,6 +445,42 @@
 		<property name="service" ref="com.liferay.portlet.asset.service.AssetCategoryPropertyService.impl" />
 		<property name="serviceInterface" value="com.liferay.portlet.asset.service.AssetCategoryPropertyService" />
 	</bean>
+	<bean name="/com_liferay_portlet_asset_service_spring_AssetEntryService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portlet.asset.service.AssetEntryService.impl" />
+		<property name="serviceInterface" value="com.liferay.portlet.asset.service.AssetEntryService" />
+	</bean>
+	<bean name="/com_liferay_portlet_asset_service_spring_AssetEntryService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portlet.asset.service.AssetEntryService.impl" />
+		<property name="serviceInterface" value="com.liferay.portlet.asset.service.AssetEntryService" />
+	</bean>
+	<bean name="/com_liferay_portlet_asset_service_spring_AssetEntryService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portlet.asset.service.AssetEntryService.impl" />
+		<property name="serviceInterface" value="com.liferay.portlet.asset.service.AssetEntryService" />
+	</bean>
+	<bean name="/com_liferay_portlet_asset_service_spring_AssetTagService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portlet.asset.service.AssetTagService.impl" />
+		<property name="serviceInterface" value="com.liferay.portlet.asset.service.AssetTagService" />
+	</bean>
+	<bean name="/com_liferay_portlet_asset_service_spring_AssetTagService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portlet.asset.service.AssetTagService.impl" />
+		<property name="serviceInterface" value="com.liferay.portlet.asset.service.AssetTagService" />
+	</bean>
+	<bean name="/com_liferay_portlet_asset_service_spring_AssetTagService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portlet.asset.service.AssetTagService.impl" />
+		<property name="serviceInterface" value="com.liferay.portlet.asset.service.AssetTagService" />
+	</bean>
+	<bean name="/com_liferay_portlet_asset_service_spring_AssetTagPropertyService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portlet.asset.service.AssetTagPropertyService.impl" />
+		<property name="serviceInterface" value="com.liferay.portlet.asset.service.AssetTagPropertyService" />
+	</bean>
+	<bean name="/com_liferay_portlet_asset_service_spring_AssetTagPropertyService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portlet.asset.service.AssetTagPropertyService.impl" />
+		<property name="serviceInterface" value="com.liferay.portlet.asset.service.AssetTagPropertyService" />
+	</bean>
+	<bean name="/com_liferay_portlet_asset_service_spring_AssetTagPropertyService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portlet.asset.service.AssetTagPropertyService.impl" />
+		<property name="serviceInterface" value="com.liferay.portlet.asset.service.AssetTagPropertyService" />
+	</bean>
 	<bean name="/com_liferay_portlet_asset_service_spring_AssetVocabularyService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
 		<property name="service" ref="com.liferay.portlet.asset.service.AssetVocabularyService.impl" />
 		<property name="serviceInterface" value="com.liferay.portlet.asset.service.AssetVocabularyService" />

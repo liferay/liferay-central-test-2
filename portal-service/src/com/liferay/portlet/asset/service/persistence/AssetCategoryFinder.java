@@ -36,8 +36,8 @@ public interface AssetCategoryFinder {
 		java.lang.String[] properties)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> findByAssetId(
-		long assetId) throws com.liferay.portal.SystemException;
+	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> findByEntryId(
+		long entryId) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.asset.model.AssetCategory findByG_N(
 		long groupId, java.lang.String name)
@@ -45,10 +45,12 @@ public interface AssetCategoryFinder {
 			com.liferay.portlet.asset.NoSuchCategoryException;
 
 	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> findByG_N_P(
-		long groupId, java.lang.String name, java.lang.String[] properties)
+		long groupId, java.lang.String name,
+		java.lang.String[] categoryProperties)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> findByG_N_P(
-		long groupId, java.lang.String name, java.lang.String[] properties,
-		int start, int end) throws com.liferay.portal.SystemException;
+		long groupId, java.lang.String name,
+		java.lang.String[] categoryProperties, int start, int end)
+		throws com.liferay.portal.SystemException;
 }

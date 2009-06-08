@@ -160,11 +160,6 @@ public class AssetCategoryLocalServiceUtil {
 		getService().deleteVocabularyCategories(vocabularyId);
 	}
 
-	public static java.util.List<com.liferay.portlet.asset.model.AssetCategory> getAssetCategories(
-		long assetId) throws com.liferay.portal.SystemException {
-		return getService().getAssetCategories(assetId);
-	}
-
 	public static java.util.List<com.liferay.portlet.asset.model.AssetCategory> getCategories()
 		throws com.liferay.portal.SystemException {
 		return getService().getCategories();
@@ -192,6 +187,11 @@ public class AssetCategoryLocalServiceUtil {
 	public static java.util.List<com.liferay.portlet.asset.model.AssetCategory> getChildCategories(
 		long parentCategoryId) throws com.liferay.portal.SystemException {
 		return getService().getChildCategories(parentCategoryId);
+	}
+
+	public static java.util.List<com.liferay.portlet.asset.model.AssetCategory> getEntryCategories(
+		long entryId) throws com.liferay.portal.SystemException {
+		return getService().getEntryCategories(entryId);
 	}
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetCategory> getVocabularyCategories(

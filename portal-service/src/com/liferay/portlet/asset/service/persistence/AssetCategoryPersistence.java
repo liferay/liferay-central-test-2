@@ -308,4 +308,62 @@ public interface AssetCategoryPersistence extends BasePersistence {
 	public void setTagsAssets(long pk,
 		java.util.List<com.liferay.portlet.tags.model.TagsAsset> tagsAssets)
 		throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.asset.model.AssetEntry> getAssetEntries(
+		long pk) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.asset.model.AssetEntry> getAssetEntries(
+		long pk, int start, int end) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.asset.model.AssetEntry> getAssetEntries(
+		long pk, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
+	public int getAssetEntriesSize(long pk)
+		throws com.liferay.portal.SystemException;
+
+	public boolean containsAssetEntry(long pk, long assetEntryPK)
+		throws com.liferay.portal.SystemException;
+
+	public boolean containsAssetEntries(long pk)
+		throws com.liferay.portal.SystemException;
+
+	public void addAssetEntry(long pk, long assetEntryPK)
+		throws com.liferay.portal.SystemException;
+
+	public void addAssetEntry(long pk,
+		com.liferay.portlet.asset.model.AssetEntry assetEntry)
+		throws com.liferay.portal.SystemException;
+
+	public void addAssetEntries(long pk, long[] assetEntryPKs)
+		throws com.liferay.portal.SystemException;
+
+	public void addAssetEntries(long pk,
+		java.util.List<com.liferay.portlet.asset.model.AssetEntry> assetEntries)
+		throws com.liferay.portal.SystemException;
+
+	public void clearAssetEntries(long pk)
+		throws com.liferay.portal.SystemException;
+
+	public void removeAssetEntry(long pk, long assetEntryPK)
+		throws com.liferay.portal.SystemException;
+
+	public void removeAssetEntry(long pk,
+		com.liferay.portlet.asset.model.AssetEntry assetEntry)
+		throws com.liferay.portal.SystemException;
+
+	public void removeAssetEntries(long pk, long[] assetEntryPKs)
+		throws com.liferay.portal.SystemException;
+
+	public void removeAssetEntries(long pk,
+		java.util.List<com.liferay.portlet.asset.model.AssetEntry> assetEntries)
+		throws com.liferay.portal.SystemException;
+
+	public void setAssetEntries(long pk, long[] assetEntryPKs)
+		throws com.liferay.portal.SystemException;
+
+	public void setAssetEntries(long pk,
+		java.util.List<com.liferay.portlet.asset.model.AssetEntry> assetEntries)
+		throws com.liferay.portal.SystemException;
 }
