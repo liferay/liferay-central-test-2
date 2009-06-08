@@ -52,7 +52,6 @@ portletURL.setParameter("struts_action", "/search/search");
 </script>
 
 <form action="<%= portletURL.toString() %>" method="post" name="<%= randomNamespace %><%= namespace %>fm" onSubmit="<%= randomNamespace %><%= namespace %>search(); return false;">
-
 <input name="<%= namespace %>keywords" size="30" type="text" value="<%= HtmlUtil.escape(keywords) %>" />
 
 <select name="<%= namespace %>groupId">

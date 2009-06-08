@@ -54,9 +54,8 @@ String format = ParamUtil.getString(request, "format");
 </script>
 
 <form action="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/search/search" /></portlet:renderURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />search(); return false;">
-<input name="<portlet:namespace />format" type="hidden" value="<%= HtmlUtil.escape(format) %>" />
-
 <input name="<portlet:namespace />keywords" size="30" type="text" value="<%= HtmlUtil.escape(keywords) %>" />
+<input name="<portlet:namespace />format" type="hidden" value="<%= HtmlUtil.escape(format) %>" />
 
 <input type="submit" value="<liferay-ui:message key="search" />" />
 
@@ -187,24 +186,28 @@ for (int i = 0; i < portlets.size(); i++) {
 				entryTitle = fileEntry.getTitle();
 			}
 
-			StringBuilder sb2 = new StringBuilder();
+			StringBuilder rowSB = new StringBuilder();
 
 			if (portlet.getPortletId().equals(PortletKeys.JOURNAL)) {
-				sb2.append("<a class=\"entry-title\" href=\"" + entryHref + "\" target=\"_blank\">");
+				rowSB.append("<a class=\"entry-title\" href=\"");
+				rowSB.append(entryHref);
+				rowSB.append("\" target=\"_blank\">");
 			}
 			else {
-				sb2.append("<a class=\"entry-title\" href=\"" + entryHref + "\">");
+				rowSB.append("<a class=\"entry-title\" href=\"");
+				rowSB.append(entryHref);
+				rowSB.append("\">");
 			}
 
-			sb2.append(StringUtil.highlight(entryTitle, keywords));
-			sb2.append("</a>");
+			rowSB.append(StringUtil.highlight(entryTitle, keywords));
+			rowSB.append("</a>");
 
 			if (Validator.isNotNull(summary)) {
-				sb2.append("<br />");
-				sb2.append(StringUtil.highlight(summary, keywords));
+				rowSB.append("<br />");
+				rowSB.append(StringUtil.highlight(summary, keywords));
 			}
 
-			sb2.append("<br />");
+			rowSB.append("<br />");
 
 			// Tags
 
@@ -225,21 +228,23 @@ for (int i = 0; i < portlets.size(); i++) {
 				tagURL.setParameter("format", format);
 
 				if (k == 0) {
-					sb2.append("<div class=\"entry-tags\">");
-					sb2.append("<div class=\"taglib-tags-summary\">");
+					rowSB.append("<div class=\"entry-tags\">");
+					rowSB.append("<div class=\"taglib-tags-summary\">");
 				}
 
-				sb2.append("<a class=\"tag\" href=\"" + tagURL.toString() + "\">");
-				sb2.append(StringUtil.highlight(tag, tagsKeywords));
-				sb2.append("</a>");
+				rowSB.append("<a class=\"tag\" href=\"");
+				rowSB.append(tagURL.toString());
+				rowSB.append("\">");
+				rowSB.append(StringUtil.highlight(tag, tagsKeywords));
+				rowSB.append("</a>");
 
 				if ((k + 1) == tags.length) {
-					sb2.append("</div>");
-					sb2.append("</div>");
+					rowSB.append("</div>");
+					rowSB.append("</div>");
 				}
 			}
 
-			row.addText(sb2.toString());
+			row.addText(rowSB.toString());
 
 			// Ratings
 

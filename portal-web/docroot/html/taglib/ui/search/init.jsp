@@ -25,7 +25,7 @@
 <%@ include file="/html/taglib/init.jsp" %>
 
 <%
-String randomNamespace = PwdGenerator.getPassword(PwdGenerator.KEY3, 4);
+namespace = PortalUtil.getPortletNamespace(PortletKeys.SEARCH);
 
-namespace = StringPool.UNDERLINE + PortletKeys.SEARCH + StringPool.UNDERLINE;
+String randomNamespace = PwdGenerator.getPassword(PwdGenerator.KEY3, 4);
 %>
