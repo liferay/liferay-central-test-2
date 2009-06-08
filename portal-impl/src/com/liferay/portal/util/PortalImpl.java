@@ -891,6 +891,10 @@ public class PortalImpl implements Portal {
 		String[] guestPermissions = request.getParameterValues(
 			"guestPermissions");
 
+		if (guestPermissions == null) {
+			return null;
+		}
+
 		boolean inputPermissionsPublic = ParamUtil.getBoolean(
 			request, "inputPermissionsPublic");
 		boolean inputPermissionsShowConfigure = ParamUtil.getBoolean(
