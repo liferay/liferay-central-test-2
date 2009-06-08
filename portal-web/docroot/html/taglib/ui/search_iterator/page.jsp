@@ -75,100 +75,103 @@ List<String> primaryKeys = new ArrayList<String>();
 		</c:if>
 	>
 		<table class="taglib-search-iterator">
-		<tr class="portlet-section-header results-header">
 
-		<%
-		for (int i = 0; (headerNames != null) && (i < headerNames.size()); i++) {
-			String headerName = headerNames.get(i);
+		<c:if test="<%= headerNames != null %>">
+			<tr class="portlet-section-header results-header">
 
-			String orderKey = null;
-			String orderByType = null;
-			boolean orderCurrentHeader = false;
+			<%
+			for (int i = 0; i < headerNames.size(); i++) {
+				String headerName = headerNames.get(i);
 
-			if (orderableHeaders != null) {
-				orderKey = (String)orderableHeaders.get(headerName);
+				String orderKey = null;
+				String orderByType = null;
+				boolean orderCurrentHeader = false;
 
-				if (orderKey != null) {
-					orderByType = searchContainer.getOrderByType();
+				if (orderableHeaders != null) {
+					orderKey = (String)orderableHeaders.get(headerName);
 
-					if (orderKey.equals(searchContainer.getOrderByCol())) {
-						orderCurrentHeader = true;
+					if (orderKey != null) {
+						orderByType = searchContainer.getOrderByType();
+
+						if (orderKey.equals(searchContainer.getOrderByCol())) {
+							orderCurrentHeader = true;
+						}
 					}
 				}
-			}
 
-			String cssClass = StringPool.BLANK;
+				String cssClass = StringPool.BLANK;
 
-			if (orderCurrentHeader) {
-				cssClass = "sort-column";
+				if (orderCurrentHeader) {
+					cssClass = "sort-column";
 
-				if (orderByType.equals("asc")) {
-					orderByType = "desc";
+					if (orderByType.equals("asc")) {
+						orderByType = "desc";
+					}
+					else {
+						orderByType = "asc";
+					}
+
+					cssClass += " sort-" + orderByType;
 				}
-				else {
-					orderByType = "asc";
-				}
-
-				cssClass += " sort-" + orderByType;
-			}
-		%>
-
-			<th class="col-<%= i + 1 %> <%= cssClass %>"
-
-				<%--
-
-				// Maximize the width of the second column if and only if the first
-				// column is a row checker and there is only one second column.
-
-				--%>
-
-				<c:if test="<%= (rowChecker != null) && (headerNames.size() == 2) && (i == 1) %>">
-					width="95%"
-				</c:if>
-			>
-
-				<c:if test="<%= orderKey != null %>">
-					<span class="result-column-name">
-						<a href="<%= url %>&<%= namespace %><%= searchContainer.getOrderByColParam() %>=<%= orderKey %>&<%= namespace %><%= searchContainer.getOrderByTypeParam() %>=<%= orderByType %>">
-				</c:if>
-
-					<%
-					String headerNameValue = LanguageUtil.get(pageContext, headerName);
-					%>
-
-					<c:choose>
-						<c:when test="<%= Validator.isNull(headerNameValue) %>">
-							<%= StringPool.NBSP %>
-						</c:when>
-						<c:otherwise>
-							<%= headerNameValue %>
-						</c:otherwise>
-					</c:choose>
-
-				<c:if test="<%= orderKey != null %>">
-						</a>
-					</span>
-				</c:if>
-			</th>
-
-		<%
-		}
-		%>
-
-		</tr>
-		<tr class="lfr-template portlet-section-body results-row">
-
-			<%
-			for (int i = 0; (headerNames != null) && (i < headerNames.size()); i++) {
 			%>
 
-				<td></td>
+				<th class="col-<%= i + 1 %> <%= cssClass %>"
+
+					<%--
+
+					// Maximize the width of the second column if and only if the first
+					// column is a row checker and there is only one second column.
+
+					--%>
+
+					<c:if test="<%= (rowChecker != null) && (headerNames.size() == 2) && (i == 1) %>">
+						width="95%"
+					</c:if>
+				>
+
+					<c:if test="<%= orderKey != null %>">
+						<span class="result-column-name">
+							<a href="<%= url %>&<%= namespace %><%= searchContainer.getOrderByColParam() %>=<%= orderKey %>&<%= namespace %><%= searchContainer.getOrderByTypeParam() %>=<%= orderByType %>">
+					</c:if>
+
+						<%
+						String headerNameValue = LanguageUtil.get(pageContext, headerName);
+						%>
+
+						<c:choose>
+							<c:when test="<%= Validator.isNull(headerNameValue) %>">
+								<%= StringPool.NBSP %>
+							</c:when>
+							<c:otherwise>
+								<%= headerNameValue %>
+							</c:otherwise>
+						</c:choose>
+
+					<c:if test="<%= orderKey != null %>">
+							</a>
+						</span>
+					</c:if>
+				</th>
 
 			<%
 			}
 			%>
 
-		</tr>
+			</tr>
+			<tr class="lfr-template portlet-section-body results-row">
+
+				<%
+				for (int i = 0; i < headerNames.size(); i++) {
+				%>
+
+					<td></td>
+
+				<%
+				}
+				%>
+
+			</tr>
+		</c:if>
 
 		<c:if test="<%= resultRows.isEmpty() && (emptyResultsMessage != null) %>">
 			<tr class="portlet-section-body results-row">
