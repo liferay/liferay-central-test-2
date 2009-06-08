@@ -277,6 +277,10 @@ public class StringUtil {
 			return null;
 		}
 
+		if (Validator.isNull(keywords)) {
+			return s;
+		}
+
 		// The problem with using a regexp is that it searches the text in a
 		// case insenstive manner but doens't replace the text in a case
 		// insenstive manner. So the search results actually get messed up. The
@@ -297,7 +301,7 @@ public class StringUtil {
 
 			Matcher matcher = pattern.matcher(token);
 
-			if (matcher.find() && Validator.isNotNull(keywords)) {
+			if (matcher.find()) {
 				String highlightedToken = matcher.replaceAll(
 					highlight1 + matcher.group() + highlight2);
 
