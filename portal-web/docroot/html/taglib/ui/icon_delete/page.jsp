@@ -29,7 +29,7 @@ String url = (String)request.getAttribute("liferay-ui:icon:url");
 boolean label = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:icon:label"));
 
 if (url.startsWith("javascript:")) {
-	url = url.substring(12);
+	url = url.substring(11);
 }
 
 if (url.startsWith(Http.HTTP_WITH_SLASH) || url.startsWith(Http.HTTPS_WITH_SLASH)) {
