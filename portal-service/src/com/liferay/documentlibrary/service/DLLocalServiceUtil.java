@@ -22,117 +22,136 @@
 
 package com.liferay.documentlibrary.service;
 
-import com.liferay.portal.PortalException;
-import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.search.Hits;
-
-import java.io.File;
-import java.io.InputStream;
-
-import java.util.Date;
-
 /**
  * <a href="DLLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class provides static methods for the
+ * <code>com.liferay.documentlibrary.service.DLLocalService</code>
+ * bean. The static methods of this class calls the same methods of the bean
+ * instance. It's convenient to be able to just write one line to call a method
+ * on a bean instead of writing a lookup call and a method call.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.documentlibrary.service.DLLocalService
  *
  */
 public class DLLocalServiceUtil {
-
-	public static void addFile(
-			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, long fileEntryId, String properties,
-			Date modifiedDate, String[] tagsCategories, String[] tagsEntries,
-			InputStream is)
-		throws PortalException, SystemException {
-
-		_service.addFile(
-			companyId, portletId, groupId, repositoryId, fileName, fileEntryId,
-			properties, modifiedDate, tagsCategories, tagsEntries, is);
+	public static void addFile(long companyId, java.lang.String portletId,
+		long groupId, long repositoryId, java.lang.String fileName,
+		long fileEntryId, java.lang.String properties,
+		java.util.Date modifiedDate,
+		com.liferay.portal.service.ServiceContext serviceContext,
+		java.io.InputStream is)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		getService()
+			.addFile(companyId, portletId, groupId, repositoryId, fileName,
+			fileEntryId, properties, modifiedDate, serviceContext, is);
 	}
 
-	public static void checkRoot(long companyId) throws SystemException {
-		_service.checkRoot(companyId);
+	public static void checkRoot(long companyId)
+		throws com.liferay.portal.SystemException {
+		getService().checkRoot(companyId);
 	}
 
-	public static InputStream getFileAsStream(
-			long companyId, long repositoryId, String fileName)
-		throws PortalException, SystemException {
-
-		return _service.getFileAsStream(companyId, repositoryId, fileName);
+	public static java.io.InputStream getFileAsStream(long companyId,
+		long repositoryId, java.lang.String fileName)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService().getFileAsStream(companyId, repositoryId, fileName);
 	}
 
-	public static InputStream getFileAsStream(
-			long companyId, long repositoryId, String fileName,
-			double versionNumber)
-		throws PortalException, SystemException {
-
-		return _service.getFileAsStream(
-			companyId, repositoryId, fileName, versionNumber);
+	public static java.io.InputStream getFileAsStream(long companyId,
+		long repositoryId, java.lang.String fileName, double versionNumber)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService()
+				   .getFileAsStream(companyId, repositoryId, fileName,
+			versionNumber);
 	}
 
-	public static boolean hasFile(
-			long companyId, long repositoryId, String fileName,
-			double versionNumber)
-		throws PortalException, SystemException {
-
-		return _service.hasFile(
-			companyId, repositoryId, fileName, versionNumber);
+	public static boolean hasFile(long companyId, long repositoryId,
+		java.lang.String fileName, double versionNumber)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService()
+				   .hasFile(companyId, repositoryId, fileName, versionNumber);
 	}
 
-	public static void move(String srcDir, String destDir)
-		throws SystemException {
-
-		_service.move(srcDir, destDir);
+	public static void move(java.lang.String srcDir, java.lang.String destDir)
+		throws com.liferay.portal.SystemException {
+		getService().move(srcDir, destDir);
 	}
 
-	public static Hits search(
-			long companyId, String portletId, long groupId,
-			long userId, long[] repositoryIds, String keywords, int start,
-			int end)
-		throws SystemException {
-
-		return _service.search(
-			companyId, portletId, groupId, userId, repositoryIds, keywords,
-			start, end);
+	public static com.liferay.portal.kernel.search.Hits search(long companyId,
+		java.lang.String portletId, long groupId, long userId,
+		long[] repositoryIds, java.lang.String keywords, int start, int end)
+		throws com.liferay.portal.SystemException {
+		return getService()
+				   .search(companyId, portletId, groupId, userId,
+			repositoryIds, keywords, start, end);
 	}
 
-	public static void updateFile(
-			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, double versionNumber, String sourceFileName,
-			long fileEntryId, String properties, Date modifiedDate,
-			String[] tagsCategories, String[] tagsEntries, InputStream is)
-		throws PortalException, SystemException {
-
-		_service.updateFile(
-			companyId, portletId, groupId, repositoryId, fileName,
+	public static void updateFile(long companyId, java.lang.String portletId,
+		long groupId, long repositoryId, java.lang.String fileName,
+		double versionNumber, java.lang.String sourceFileName,
+		long fileEntryId, java.lang.String properties,
+		java.util.Date modifiedDate,
+		com.liferay.portal.service.ServiceContext serviceContext,
+		java.io.InputStream is)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		getService()
+			.updateFile(companyId, portletId, groupId, repositoryId, fileName,
 			versionNumber, sourceFileName, fileEntryId, properties,
-			modifiedDate, tagsCategories, tagsEntries, is);
+			modifiedDate, serviceContext, is);
 	}
 
-	public static void validate(String fileName, File file)
-		throws PortalException, SystemException {
-
-		_service.validate(fileName, file);
+	public static void validate(java.lang.String fileName, java.io.File file)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		getService().validate(fileName, file);
 	}
 
-	public static void validate(String fileName, byte[] bytes)
-		throws PortalException, SystemException {
-
-		_service.validate(fileName, bytes);
+	public static void validate(java.lang.String fileName, byte[] bytes)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		getService().validate(fileName, bytes);
 	}
 
-	public static void validate(String fileName, InputStream is)
-		throws PortalException, SystemException {
-
-		_service.validate(fileName, is);
+	public static void validate(java.lang.String fileName,
+		java.io.InputStream is)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		getService().validate(fileName, is);
 	}
 
-	public static void validate(
-			String fileName, String sourceFileName, InputStream is)
-		throws PortalException {
+	public static void validate(java.lang.String fileName)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		getService().validate(fileName);
+	}
 
-		_service.validate(fileName, sourceFileName, is);
+	public static void validate(java.lang.String fileName,
+		java.lang.String sourceFileName, java.io.InputStream is)
+		throws com.liferay.portal.PortalException {
+		getService().validate(fileName, sourceFileName, is);
+	}
+
+	public static DLLocalService getService() {
+		if (_service == null) {
+			throw new RuntimeException("DLLocalService is not set");
+		}
+
+		return _service;
 	}
 
 	public void setService(DLLocalService service) {
@@ -140,5 +159,4 @@ public class DLLocalServiceUtil {
 	}
 
 	private static DLLocalService _service;
-
 }

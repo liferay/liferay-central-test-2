@@ -261,9 +261,9 @@ public interface OrganizationLocalService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public void updateTagsAsset(long userId,
+	public void updateAsset(long userId,
 		com.liferay.portal.model.Organization organization,
-		java.lang.String[] tagsCategories, java.lang.String[] tagsEntries)
+		long[] assetCategoryIds, java.lang.String[] assetTagNames)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 }

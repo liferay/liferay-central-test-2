@@ -335,12 +335,12 @@ public class GroupLocalServiceUtil {
 		return getService().updateGroup(groupId, typeSettings);
 	}
 
-	public static void updateTagsAsset(long userId,
-		com.liferay.portal.model.Group group,
-		java.lang.String[] tagsCategories, java.lang.String[] tagsEntries)
+	public static void updateAsset(long userId,
+		com.liferay.portal.model.Group group, long[] assetCategoryIds,
+		java.lang.String[] assetTagNames)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		getService().updateTagsAsset(userId, group, tagsCategories, tagsEntries);
+		getService().updateAsset(userId, group, assetCategoryIds, assetTagNames);
 	}
 
 	public static com.liferay.portal.model.Group updateWorkflow(long groupId,

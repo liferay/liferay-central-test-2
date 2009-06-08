@@ -22,150 +22,162 @@
 
 package com.liferay.documentlibrary.service;
 
-import com.liferay.portal.PortalException;
-import com.liferay.portal.SystemException;
-
-import java.io.File;
-
-import java.util.Date;
-
 /**
  * <a href="DLServiceUtil.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class provides static methods for the
+ * <code>com.liferay.documentlibrary.service.DLService</code>
+ * bean. The static methods of this class calls the same methods of the bean
+ * instance. It's convenient to be able to just write one line to call a method
+ * on a bean instead of writing a lookup call and a method call.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.documentlibrary.service.DLService
  *
  */
 public class DLServiceUtil {
-
-	public static void addDirectory(
-			long companyId, long repositoryId, String dirName)
-		throws PortalException, SystemException {
-
-		_service.addDirectory(companyId, repositoryId, dirName);
+	public static void addDirectory(long companyId, long repositoryId,
+		java.lang.String dirName)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		getService().addDirectory(companyId, repositoryId, dirName);
 	}
 
-	public static void addFile(
-			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, long fileEntryId, String properties,
-			Date modifiedDate, String[] tagsCategories, String[] tagsEntries,
-			File file)
-		throws PortalException, SystemException {
-
-		_service.addFile(
-			companyId, portletId, groupId, repositoryId, fileName, fileEntryId,
-			properties, modifiedDate, tagsCategories, tagsEntries, file);
+	public static void addFile(long companyId, java.lang.String portletId,
+		long groupId, long repositoryId, java.lang.String fileName,
+		long fileEntryId, java.lang.String properties,
+		java.util.Date modifiedDate,
+		com.liferay.portal.service.ServiceContext serviceContext,
+		java.io.File file)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		getService()
+			.addFile(companyId, portletId, groupId, repositoryId, fileName,
+			fileEntryId, properties, modifiedDate, serviceContext, file);
 	}
 
-	public static void addFile(
-			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, long fileEntryId, String properties,
-			Date modifiedDate, String[] tagsCategories, String[] tagsEntries,
-			byte[] bytes)
-		throws PortalException, SystemException {
-
-		_service.addFile(
-			companyId, portletId, groupId, repositoryId, fileName, fileEntryId,
-			properties, modifiedDate, tagsCategories, tagsEntries, bytes);
+	public static void addFile(long companyId, java.lang.String portletId,
+		long groupId, long repositoryId, java.lang.String fileName,
+		long fileEntryId, java.lang.String properties,
+		java.util.Date modifiedDate,
+		com.liferay.portal.service.ServiceContext serviceContext, byte[] bytes)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		getService()
+			.addFile(companyId, portletId, groupId, repositoryId, fileName,
+			fileEntryId, properties, modifiedDate, serviceContext, bytes);
 	}
 
-	public static void deleteDirectory(
-			long companyId, String portletId, long repositoryId, String dirName)
-		throws PortalException, SystemException {
-
-		DLService _service = DLServiceFactory.getService();
-
-		_service.deleteDirectory(companyId, portletId, repositoryId, dirName);
+	public static void deleteDirectory(long companyId,
+		java.lang.String portletId, long repositoryId, java.lang.String dirName)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		getService().deleteDirectory(companyId, portletId, repositoryId, dirName);
 	}
 
-	public static void deleteFile(
-			long companyId, String portletId, long repositoryId,
-			String fileName)
-		throws PortalException, SystemException {
-
-		_service.deleteFile(companyId, portletId, repositoryId, fileName);
+	public static void deleteFile(long companyId, java.lang.String portletId,
+		long repositoryId, java.lang.String fileName)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		getService().deleteFile(companyId, portletId, repositoryId, fileName);
 	}
 
-	public static void deleteFile(
-			long companyId, String portletId, long repositoryId,
-			String fileName, double versionNumber)
-		throws PortalException, SystemException {
-
-		_service.deleteFile(
-			companyId, portletId, repositoryId, fileName, versionNumber);
+	public static void deleteFile(long companyId, java.lang.String portletId,
+		long repositoryId, java.lang.String fileName, double versionNumber)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		getService()
+			.deleteFile(companyId, portletId, repositoryId, fileName,
+			versionNumber);
 	}
 
-	public static byte[] getFile(
-			long companyId, long repositoryId, String fileName)
-		throws PortalException, SystemException {
-
-		return _service.getFile(companyId, repositoryId, fileName);
+	public static byte[] getFile(long companyId, long repositoryId,
+		java.lang.String fileName)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService().getFile(companyId, repositoryId, fileName);
 	}
 
-	public static byte[] getFile(
-			long companyId, long repositoryId, String fileName,
-			double versionNumber)
-		throws PortalException, SystemException {
-
-		DLService _service = DLServiceFactory.getService();
-
-		return _service.getFile(
-			companyId, repositoryId, fileName, versionNumber);
+	public static byte[] getFile(long companyId, long repositoryId,
+		java.lang.String fileName, double versionNumber)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService()
+				   .getFile(companyId, repositoryId, fileName, versionNumber);
 	}
 
-	public static String[] getFileNames(
-			long companyId, long repositoryId, String dirName)
-		throws PortalException, SystemException {
-
-		return _service.getFileNames(companyId, repositoryId, dirName);
+	public static java.lang.String[] getFileNames(long companyId,
+		long repositoryId, java.lang.String dirName)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService().getFileNames(companyId, repositoryId, dirName);
 	}
 
-	public static long getFileSize(
-			long companyId, long repositoryId, String fileName)
-		throws PortalException, SystemException {
-
-		return _service.getFileSize(companyId, repositoryId, fileName);
+	public static long getFileSize(long companyId, long repositoryId,
+		java.lang.String fileName)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService().getFileSize(companyId, repositoryId, fileName);
 	}
 
-	public static void reIndex(String[] ids) throws SystemException {
-		_service.reIndex(ids);
+	public static void reIndex(java.lang.String[] ids)
+		throws com.liferay.portal.SystemException {
+		getService().reIndex(ids);
 	}
 
-	public static void updateFile(
-			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, double versionNumber, String sourceFileName,
-			long fileEntryId, String properties, Date modifiedDate,
-			String[] tagsCategories, String[] tagsEntries, File file)
-		throws PortalException, SystemException {
-
-		_service.updateFile(
-			companyId, portletId, groupId, repositoryId, fileName,
+	public static void updateFile(long companyId, java.lang.String portletId,
+		long groupId, long repositoryId, java.lang.String fileName,
+		double versionNumber, java.lang.String sourceFileName,
+		long fileEntryId, java.lang.String properties,
+		java.util.Date modifiedDate,
+		com.liferay.portal.service.ServiceContext serviceContext,
+		java.io.File file)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		getService()
+			.updateFile(companyId, portletId, groupId, repositoryId, fileName,
 			versionNumber, sourceFileName, fileEntryId, properties,
-			modifiedDate, tagsCategories, tagsEntries, file);
+			modifiedDate, serviceContext, file);
 	}
 
-	public static void updateFile(
-			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, double versionNumber, String sourceFileName,
-			long fileEntryId, String properties, Date modifiedDate,
-			String[] tagsCategories, String[] tagsEntries, byte[] bytes)
-		throws PortalException, SystemException {
-
-		DLService _service = DLServiceFactory.getService();
-
-		_service.updateFile(
-			companyId, portletId, groupId, repositoryId, fileName,
+	public static void updateFile(long companyId, java.lang.String portletId,
+		long groupId, long repositoryId, java.lang.String fileName,
+		double versionNumber, java.lang.String sourceFileName,
+		long fileEntryId, java.lang.String properties,
+		java.util.Date modifiedDate,
+		com.liferay.portal.service.ServiceContext serviceContext, byte[] bytes)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		getService()
+			.updateFile(companyId, portletId, groupId, repositoryId, fileName,
 			versionNumber, sourceFileName, fileEntryId, properties,
-			modifiedDate, tagsCategories, tagsEntries, bytes);
+			modifiedDate, serviceContext, bytes);
 	}
 
-	public static void updateFile(
-			long companyId, String portletId, long groupId, long repositoryId,
-			long newRepositoryId, String fileName, long fileEntryId)
-		throws PortalException, SystemException {
+	public static void updateFile(long companyId, java.lang.String portletId,
+		long groupId, long repositoryId, long newRepositoryId,
+		java.lang.String fileName, long fileEntryId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		getService()
+			.updateFile(companyId, portletId, groupId, repositoryId,
+			newRepositoryId, fileName, fileEntryId);
+	}
 
-		_service.updateFile(
-			companyId, portletId, groupId, repositoryId, newRepositoryId,
-			fileName, fileEntryId);
+	public static DLService getService() {
+		if (_service == null) {
+			throw new RuntimeException("DLService is not set");
+		}
+
+		return _service;
 	}
 
 	public void setService(DLService service) {
@@ -173,5 +185,4 @@ public class DLServiceUtil {
 	}
 
 	private static DLService _service;
-
 }

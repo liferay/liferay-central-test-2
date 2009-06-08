@@ -82,10 +82,10 @@ import java.rmi.RemoteException;
  */
 public class AssetCategoryPropertyServiceSoap {
 	public static com.liferay.portlet.asset.model.AssetCategoryPropertySoap addCategoryProperty(
-		long entryId, java.lang.String key, java.lang.String value)
+		long categoryId, java.lang.String key, java.lang.String value)
 		throws RemoteException {
 		try {
-			com.liferay.portlet.asset.model.AssetCategoryProperty returnValue = AssetCategoryPropertyServiceUtil.addCategoryProperty(entryId,
+			com.liferay.portlet.asset.model.AssetCategoryProperty returnValue = AssetCategoryPropertyServiceUtil.addCategoryProperty(categoryId,
 					key, value);
 
 			return com.liferay.portlet.asset.model.AssetCategoryPropertySoap.toSoapModel(returnValue);
@@ -110,10 +110,10 @@ public class AssetCategoryPropertyServiceSoap {
 	}
 
 	public static com.liferay.portlet.asset.model.AssetCategoryPropertySoap[] getCategoryProperties(
-		long entryId) throws RemoteException {
+		long categoryId) throws RemoteException {
 		try {
 			java.util.List<com.liferay.portlet.asset.model.AssetCategoryProperty> returnValue =
-				AssetCategoryPropertyServiceUtil.getCategoryProperties(entryId);
+				AssetCategoryPropertyServiceUtil.getCategoryProperties(categoryId);
 
 			return com.liferay.portlet.asset.model.AssetCategoryPropertySoap.toSoapModels(returnValue);
 		}

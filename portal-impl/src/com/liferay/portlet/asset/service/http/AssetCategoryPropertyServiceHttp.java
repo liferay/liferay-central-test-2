@@ -73,12 +73,12 @@ import com.liferay.portlet.asset.service.AssetCategoryPropertyServiceUtil;
  */
 public class AssetCategoryPropertyServiceHttp {
 	public static com.liferay.portlet.asset.model.AssetCategoryProperty addCategoryProperty(
-		HttpPrincipal httpPrincipal, long entryId, java.lang.String key,
+		HttpPrincipal httpPrincipal, long categoryId, java.lang.String key,
 		java.lang.String value)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(entryId);
+			Object paramObj0 = new LongWrapper(categoryId);
 
 			Object paramObj1 = key;
 
@@ -155,10 +155,10 @@ public class AssetCategoryPropertyServiceHttp {
 	}
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetCategoryProperty> getCategoryProperties(
-		HttpPrincipal httpPrincipal, long entryId)
+		HttpPrincipal httpPrincipal, long categoryId)
 		throws com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(entryId);
+			Object paramObj0 = new LongWrapper(categoryId);
 
 			MethodWrapper methodWrapper = new MethodWrapper(AssetCategoryPropertyServiceUtil.class.getName(),
 					"getCategoryProperties", new Object[] { paramObj0 });

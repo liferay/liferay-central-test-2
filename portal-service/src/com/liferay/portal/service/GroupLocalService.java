@@ -269,9 +269,8 @@ public interface GroupLocalService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public void updateTagsAsset(long userId,
-		com.liferay.portal.model.Group group,
-		java.lang.String[] tagsCategories, java.lang.String[] tagsEntries)
+	public void updateAsset(long userId, com.liferay.portal.model.Group group,
+		long[] assetCategoryIds, java.lang.String[] assetTagNames)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 

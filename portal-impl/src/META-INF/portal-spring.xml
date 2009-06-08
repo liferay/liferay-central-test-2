@@ -841,6 +841,28 @@
 	<bean id="com.liferay.portlet.announcements.service.persistence.AnnouncementsFlagUtil" class="com.liferay.portlet.announcements.service.persistence.AnnouncementsFlagUtil">
 		<property name="persistence" ref="com.liferay.portlet.announcements.service.persistence.AnnouncementsFlagPersistence.impl" />
 	</bean>
+	<bean id="com.liferay.portlet.asset.service.AssetLocalService.impl" class="com.liferay.portlet.asset.service.impl.AssetLocalServiceImpl" />
+	<bean id="com.liferay.portlet.asset.service.AssetLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService">
+		<property name="target" ref="com.liferay.portlet.asset.service.AssetLocalService.impl" />
+	</bean>
+	<bean id="com.liferay.portlet.asset.service.AssetLocalServiceUtil" class="com.liferay.portlet.asset.service.AssetLocalServiceUtil">
+		<property name="service" ref="com.liferay.portlet.asset.service.AssetLocalService.impl" />
+	</bean>
+	<bean id="com.liferay.portlet.asset.service.AssetService.impl" class="com.liferay.portlet.asset.service.impl.AssetServiceImpl" />
+	<bean id="com.liferay.portlet.asset.service.AssetService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService">
+		<property name="target" ref="com.liferay.portlet.asset.service.AssetService.impl" />
+	</bean>
+	<bean id="com.liferay.portlet.asset.service.AssetServiceUtil" class="com.liferay.portlet.asset.service.AssetServiceUtil">
+		<property name="service" ref="com.liferay.portlet.asset.service.AssetService.impl" />
+	</bean>
+	<bean id="com.liferay.portlet.asset.service.persistence.AssetPersistence.impl" class="com.liferay.portlet.asset.service.persistence.AssetPersistenceImpl" parent="basePersistence" />
+	<bean id="com.liferay.portlet.asset.service.persistence.AssetUtil" class="com.liferay.portlet.asset.service.persistence.AssetUtil">
+		<property name="persistence" ref="com.liferay.portlet.asset.service.persistence.AssetPersistence.impl" />
+	</bean>
+	<bean id="com.liferay.portlet.asset.service.persistence.AssetFinder.impl" class="com.liferay.portlet.asset.service.persistence.AssetFinderImpl" parent="basePersistence" />
+	<bean id="com.liferay.portlet.asset.service.persistence.AssetFinderUtil" class="com.liferay.portlet.asset.service.persistence.AssetFinderUtil">
+		<property name="finder" ref="com.liferay.portlet.asset.service.persistence.AssetFinder.impl" />
+	</bean>
 	<bean id="com.liferay.portlet.asset.service.AssetCategoryLocalService.impl" class="com.liferay.portlet.asset.service.impl.AssetCategoryLocalServiceImpl" />
 	<bean id="com.liferay.portlet.asset.service.AssetCategoryLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService">
 		<property name="target" ref="com.liferay.portlet.asset.service.AssetCategoryLocalService.impl" />
@@ -884,6 +906,54 @@
 	<bean id="com.liferay.portlet.asset.service.persistence.AssetCategoryPropertyFinder.impl" class="com.liferay.portlet.asset.service.persistence.AssetCategoryPropertyFinderImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.asset.service.persistence.AssetCategoryPropertyFinderUtil" class="com.liferay.portlet.asset.service.persistence.AssetCategoryPropertyFinderUtil">
 		<property name="finder" ref="com.liferay.portlet.asset.service.persistence.AssetCategoryPropertyFinder.impl" />
+	</bean>
+	<bean id="com.liferay.portlet.asset.service.AssetTagLocalService.impl" class="com.liferay.portlet.asset.service.impl.AssetTagLocalServiceImpl" />
+	<bean id="com.liferay.portlet.asset.service.AssetTagLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService">
+		<property name="target" ref="com.liferay.portlet.asset.service.AssetTagLocalService.impl" />
+	</bean>
+	<bean id="com.liferay.portlet.asset.service.AssetTagLocalServiceUtil" class="com.liferay.portlet.asset.service.AssetTagLocalServiceUtil">
+		<property name="service" ref="com.liferay.portlet.asset.service.AssetTagLocalService.impl" />
+	</bean>
+	<bean id="com.liferay.portlet.asset.service.AssetTagService.impl" class="com.liferay.portlet.asset.service.impl.AssetTagServiceImpl" />
+	<bean id="com.liferay.portlet.asset.service.AssetTagService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService">
+		<property name="target" ref="com.liferay.portlet.asset.service.AssetTagService.impl" />
+	</bean>
+	<bean id="com.liferay.portlet.asset.service.AssetTagServiceUtil" class="com.liferay.portlet.asset.service.AssetTagServiceUtil">
+		<property name="service" ref="com.liferay.portlet.asset.service.AssetTagService.impl" />
+	</bean>
+	<bean id="com.liferay.portlet.asset.service.persistence.AssetTagPersistence.impl" class="com.liferay.portlet.asset.service.persistence.AssetTagPersistenceImpl" parent="basePersistence" />
+	<bean id="com.liferay.portlet.asset.service.persistence.AssetTagUtil" class="com.liferay.portlet.asset.service.persistence.AssetTagUtil">
+		<property name="persistence" ref="com.liferay.portlet.asset.service.persistence.AssetTagPersistence.impl" />
+	</bean>
+	<bean id="com.liferay.portlet.asset.service.persistence.AssetTagFinder.impl" class="com.liferay.portlet.asset.service.persistence.AssetTagFinderImpl" parent="basePersistence" />
+	<bean id="com.liferay.portlet.asset.service.persistence.AssetTagFinderUtil" class="com.liferay.portlet.asset.service.persistence.AssetTagFinderUtil">
+		<property name="finder" ref="com.liferay.portlet.asset.service.persistence.AssetTagFinder.impl" />
+	</bean>
+	<bean id="com.liferay.portlet.asset.service.AssetTagPropertyLocalService.impl" class="com.liferay.portlet.asset.service.impl.AssetTagPropertyLocalServiceImpl" />
+	<bean id="com.liferay.portlet.asset.service.AssetTagPropertyLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService">
+		<property name="target" ref="com.liferay.portlet.asset.service.AssetTagPropertyLocalService.impl" />
+	</bean>
+	<bean id="com.liferay.portlet.asset.service.AssetTagPropertyLocalServiceUtil" class="com.liferay.portlet.asset.service.AssetTagPropertyLocalServiceUtil">
+		<property name="service" ref="com.liferay.portlet.asset.service.AssetTagPropertyLocalService.impl" />
+	</bean>
+	<bean id="com.liferay.portlet.asset.service.AssetTagPropertyService.impl" class="com.liferay.portlet.asset.service.impl.AssetTagPropertyServiceImpl" />
+	<bean id="com.liferay.portlet.asset.service.AssetTagPropertyService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService">
+		<property name="target" ref="com.liferay.portlet.asset.service.AssetTagPropertyService.impl" />
+	</bean>
+	<bean id="com.liferay.portlet.asset.service.AssetTagPropertyServiceUtil" class="com.liferay.portlet.asset.service.AssetTagPropertyServiceUtil">
+		<property name="service" ref="com.liferay.portlet.asset.service.AssetTagPropertyService.impl" />
+	</bean>
+	<bean id="com.liferay.portlet.asset.service.persistence.AssetTagPropertyPersistence.impl" class="com.liferay.portlet.asset.service.persistence.AssetTagPropertyPersistenceImpl" parent="basePersistence" />
+	<bean id="com.liferay.portlet.asset.service.persistence.AssetTagPropertyUtil" class="com.liferay.portlet.asset.service.persistence.AssetTagPropertyUtil">
+		<property name="persistence" ref="com.liferay.portlet.asset.service.persistence.AssetTagPropertyPersistence.impl" />
+	</bean>
+	<bean id="com.liferay.portlet.asset.service.persistence.AssetTagPropertyFinder.impl" class="com.liferay.portlet.asset.service.persistence.AssetTagPropertyFinderImpl" parent="basePersistence" />
+	<bean id="com.liferay.portlet.asset.service.persistence.AssetTagPropertyFinderUtil" class="com.liferay.portlet.asset.service.persistence.AssetTagPropertyFinderUtil">
+		<property name="finder" ref="com.liferay.portlet.asset.service.persistence.AssetTagPropertyFinder.impl" />
+	</bean>
+	<bean id="com.liferay.portlet.asset.service.persistence.AssetTagPropertyKeyFinder.impl" class="com.liferay.portlet.asset.service.persistence.AssetTagPropertyKeyFinderImpl" parent="basePersistence" />
+	<bean id="com.liferay.portlet.asset.service.persistence.AssetTagPropertyKeyFinderUtil" class="com.liferay.portlet.asset.service.persistence.AssetTagPropertyKeyFinderUtil">
+		<property name="finder" ref="com.liferay.portlet.asset.service.persistence.AssetTagPropertyKeyFinder.impl" />
 	</bean>
 	<bean id="com.liferay.portlet.asset.service.AssetVocabularyLocalService.impl" class="com.liferay.portlet.asset.service.impl.AssetVocabularyLocalServiceImpl" />
 	<bean id="com.liferay.portlet.asset.service.AssetVocabularyLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService">
@@ -1789,112 +1859,6 @@
 	<bean id="com.liferay.portlet.softwarecatalog.service.persistence.SCProductVersionUtil" class="com.liferay.portlet.softwarecatalog.service.persistence.SCProductVersionUtil">
 		<property name="persistence" ref="com.liferay.portlet.softwarecatalog.service.persistence.SCProductVersionPersistence.impl" />
 	</bean>
-	<bean id="com.liferay.portlet.tags.service.TagsAssetLocalService.impl" class="com.liferay.portlet.tags.service.impl.TagsAssetLocalServiceImpl" />
-	<bean id="com.liferay.portlet.tags.service.TagsAssetLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService">
-		<property name="target" ref="com.liferay.portlet.tags.service.TagsAssetLocalService.impl" />
-	</bean>
-	<bean id="com.liferay.portlet.tags.service.TagsAssetLocalServiceUtil" class="com.liferay.portlet.tags.service.TagsAssetLocalServiceUtil">
-		<property name="service" ref="com.liferay.portlet.tags.service.TagsAssetLocalService.impl" />
-	</bean>
-	<bean id="com.liferay.portlet.tags.service.TagsAssetService.impl" class="com.liferay.portlet.tags.service.impl.TagsAssetServiceImpl" />
-	<bean id="com.liferay.portlet.tags.service.TagsAssetService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService">
-		<property name="target" ref="com.liferay.portlet.tags.service.TagsAssetService.impl" />
-	</bean>
-	<bean id="com.liferay.portlet.tags.service.TagsAssetServiceUtil" class="com.liferay.portlet.tags.service.TagsAssetServiceUtil">
-		<property name="service" ref="com.liferay.portlet.tags.service.TagsAssetService.impl" />
-	</bean>
-	<bean id="com.liferay.portlet.tags.service.persistence.TagsAssetPersistence.impl" class="com.liferay.portlet.tags.service.persistence.TagsAssetPersistenceImpl" parent="basePersistence" />
-	<bean id="com.liferay.portlet.tags.service.persistence.TagsAssetUtil" class="com.liferay.portlet.tags.service.persistence.TagsAssetUtil">
-		<property name="persistence" ref="com.liferay.portlet.tags.service.persistence.TagsAssetPersistence.impl" />
-	</bean>
-	<bean id="com.liferay.portlet.tags.service.persistence.TagsAssetFinder.impl" class="com.liferay.portlet.tags.service.persistence.TagsAssetFinderImpl" parent="basePersistence" />
-	<bean id="com.liferay.portlet.tags.service.persistence.TagsAssetFinderUtil" class="com.liferay.portlet.tags.service.persistence.TagsAssetFinderUtil">
-		<property name="finder" ref="com.liferay.portlet.tags.service.persistence.TagsAssetFinder.impl" />
-	</bean>
-	<bean id="com.liferay.portlet.tags.service.TagsEntryLocalService.impl" class="com.liferay.portlet.tags.service.impl.TagsEntryLocalServiceImpl" />
-	<bean id="com.liferay.portlet.tags.service.TagsEntryLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService">
-		<property name="target" ref="com.liferay.portlet.tags.service.TagsEntryLocalService.impl" />
-	</bean>
-	<bean id="com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil" class="com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil">
-		<property name="service" ref="com.liferay.portlet.tags.service.TagsEntryLocalService.impl" />
-	</bean>
-	<bean id="com.liferay.portlet.tags.service.TagsEntryService.impl" class="com.liferay.portlet.tags.service.impl.TagsEntryServiceImpl" />
-	<bean id="com.liferay.portlet.tags.service.TagsEntryService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService">
-		<property name="target" ref="com.liferay.portlet.tags.service.TagsEntryService.impl" />
-	</bean>
-	<bean id="com.liferay.portlet.tags.service.TagsEntryServiceUtil" class="com.liferay.portlet.tags.service.TagsEntryServiceUtil">
-		<property name="service" ref="com.liferay.portlet.tags.service.TagsEntryService.impl" />
-	</bean>
-	<bean id="com.liferay.portlet.tags.service.persistence.TagsEntryPersistence.impl" class="com.liferay.portlet.tags.service.persistence.TagsEntryPersistenceImpl" parent="basePersistence" />
-	<bean id="com.liferay.portlet.tags.service.persistence.TagsEntryUtil" class="com.liferay.portlet.tags.service.persistence.TagsEntryUtil">
-		<property name="persistence" ref="com.liferay.portlet.tags.service.persistence.TagsEntryPersistence.impl" />
-	</bean>
-	<bean id="com.liferay.portlet.tags.service.persistence.TagsEntryFinder.impl" class="com.liferay.portlet.tags.service.persistence.TagsEntryFinderImpl" parent="basePersistence" />
-	<bean id="com.liferay.portlet.tags.service.persistence.TagsEntryFinderUtil" class="com.liferay.portlet.tags.service.persistence.TagsEntryFinderUtil">
-		<property name="finder" ref="com.liferay.portlet.tags.service.persistence.TagsEntryFinder.impl" />
-	</bean>
-	<bean id="com.liferay.portlet.tags.service.TagsPropertyLocalService.impl" class="com.liferay.portlet.tags.service.impl.TagsPropertyLocalServiceImpl" />
-	<bean id="com.liferay.portlet.tags.service.TagsPropertyLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService">
-		<property name="target" ref="com.liferay.portlet.tags.service.TagsPropertyLocalService.impl" />
-	</bean>
-	<bean id="com.liferay.portlet.tags.service.TagsPropertyLocalServiceUtil" class="com.liferay.portlet.tags.service.TagsPropertyLocalServiceUtil">
-		<property name="service" ref="com.liferay.portlet.tags.service.TagsPropertyLocalService.impl" />
-	</bean>
-	<bean id="com.liferay.portlet.tags.service.TagsPropertyService.impl" class="com.liferay.portlet.tags.service.impl.TagsPropertyServiceImpl" />
-	<bean id="com.liferay.portlet.tags.service.TagsPropertyService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService">
-		<property name="target" ref="com.liferay.portlet.tags.service.TagsPropertyService.impl" />
-	</bean>
-	<bean id="com.liferay.portlet.tags.service.TagsPropertyServiceUtil" class="com.liferay.portlet.tags.service.TagsPropertyServiceUtil">
-		<property name="service" ref="com.liferay.portlet.tags.service.TagsPropertyService.impl" />
-	</bean>
-	<bean id="com.liferay.portlet.tags.service.persistence.TagsPropertyPersistence.impl" class="com.liferay.portlet.tags.service.persistence.TagsPropertyPersistenceImpl" parent="basePersistence" />
-	<bean id="com.liferay.portlet.tags.service.persistence.TagsPropertyUtil" class="com.liferay.portlet.tags.service.persistence.TagsPropertyUtil">
-		<property name="persistence" ref="com.liferay.portlet.tags.service.persistence.TagsPropertyPersistence.impl" />
-	</bean>
-	<bean id="com.liferay.portlet.tags.service.persistence.TagsPropertyFinder.impl" class="com.liferay.portlet.tags.service.persistence.TagsPropertyFinderImpl" parent="basePersistence" />
-	<bean id="com.liferay.portlet.tags.service.persistence.TagsPropertyFinderUtil" class="com.liferay.portlet.tags.service.persistence.TagsPropertyFinderUtil">
-		<property name="finder" ref="com.liferay.portlet.tags.service.persistence.TagsPropertyFinder.impl" />
-	</bean>
-	<bean id="com.liferay.portlet.tags.service.persistence.TagsPropertyKeyFinder.impl" class="com.liferay.portlet.tags.service.persistence.TagsPropertyKeyFinderImpl" parent="basePersistence" />
-	<bean id="com.liferay.portlet.tags.service.persistence.TagsPropertyKeyFinderUtil" class="com.liferay.portlet.tags.service.persistence.TagsPropertyKeyFinderUtil">
-		<property name="finder" ref="com.liferay.portlet.tags.service.persistence.TagsPropertyKeyFinder.impl" />
-	</bean>
-	<bean id="com.liferay.portlet.tags.service.TagsSourceLocalService.impl" class="com.liferay.portlet.tags.service.impl.TagsSourceLocalServiceImpl" />
-	<bean id="com.liferay.portlet.tags.service.TagsSourceLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService">
-		<property name="target" ref="com.liferay.portlet.tags.service.TagsSourceLocalService.impl" />
-	</bean>
-	<bean id="com.liferay.portlet.tags.service.TagsSourceLocalServiceUtil" class="com.liferay.portlet.tags.service.TagsSourceLocalServiceUtil">
-		<property name="service" ref="com.liferay.portlet.tags.service.TagsSourceLocalService.impl" />
-	</bean>
-	<bean id="com.liferay.portlet.tags.service.TagsSourceService.impl" class="com.liferay.portlet.tags.service.impl.TagsSourceServiceImpl" />
-	<bean id="com.liferay.portlet.tags.service.TagsSourceService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService">
-		<property name="target" ref="com.liferay.portlet.tags.service.TagsSourceService.impl" />
-	</bean>
-	<bean id="com.liferay.portlet.tags.service.TagsSourceServiceUtil" class="com.liferay.portlet.tags.service.TagsSourceServiceUtil">
-		<property name="service" ref="com.liferay.portlet.tags.service.TagsSourceService.impl" />
-	</bean>
-	<bean id="com.liferay.portlet.tags.service.persistence.TagsSourcePersistence.impl" class="com.liferay.portlet.tags.service.persistence.TagsSourcePersistenceImpl" parent="basePersistence" />
-	<bean id="com.liferay.portlet.tags.service.persistence.TagsSourceUtil" class="com.liferay.portlet.tags.service.persistence.TagsSourceUtil">
-		<property name="persistence" ref="com.liferay.portlet.tags.service.persistence.TagsSourcePersistence.impl" />
-	</bean>
-	<bean id="com.liferay.portlet.tags.service.TagsVocabularyLocalService.impl" class="com.liferay.portlet.tags.service.impl.TagsVocabularyLocalServiceImpl" />
-	<bean id="com.liferay.portlet.tags.service.TagsVocabularyLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService">
-		<property name="target" ref="com.liferay.portlet.tags.service.TagsVocabularyLocalService.impl" />
-	</bean>
-	<bean id="com.liferay.portlet.tags.service.TagsVocabularyLocalServiceUtil" class="com.liferay.portlet.tags.service.TagsVocabularyLocalServiceUtil">
-		<property name="service" ref="com.liferay.portlet.tags.service.TagsVocabularyLocalService.impl" />
-	</bean>
-	<bean id="com.liferay.portlet.tags.service.TagsVocabularyService.impl" class="com.liferay.portlet.tags.service.impl.TagsVocabularyServiceImpl" />
-	<bean id="com.liferay.portlet.tags.service.TagsVocabularyService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService">
-		<property name="target" ref="com.liferay.portlet.tags.service.TagsVocabularyService.impl" />
-	</bean>
-	<bean id="com.liferay.portlet.tags.service.TagsVocabularyServiceUtil" class="com.liferay.portlet.tags.service.TagsVocabularyServiceUtil">
-		<property name="service" ref="com.liferay.portlet.tags.service.TagsVocabularyService.impl" />
-	</bean>
-	<bean id="com.liferay.portlet.tags.service.persistence.TagsVocabularyPersistence.impl" class="com.liferay.portlet.tags.service.persistence.TagsVocabularyPersistenceImpl" parent="basePersistence" />
-	<bean id="com.liferay.portlet.tags.service.persistence.TagsVocabularyUtil" class="com.liferay.portlet.tags.service.persistence.TagsVocabularyUtil">
-		<property name="persistence" ref="com.liferay.portlet.tags.service.persistence.TagsVocabularyPersistence.impl" />
-	</bean>
 	<bean id="com.liferay.portlet.tasks.service.TasksReviewLocalService.impl" class="com.liferay.portlet.tasks.service.impl.TasksReviewLocalServiceImpl" />
 	<bean id="com.liferay.portlet.tasks.service.TasksReviewLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService">
 		<property name="target" ref="com.liferay.portlet.tasks.service.TasksReviewLocalService.impl" />
@@ -1985,5 +1949,19 @@
 	<bean id="com.liferay.portlet.wiki.service.persistence.WikiPageResourcePersistence.impl" class="com.liferay.portlet.wiki.service.persistence.WikiPageResourcePersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.wiki.service.persistence.WikiPageResourceUtil" class="com.liferay.portlet.wiki.service.persistence.WikiPageResourceUtil">
 		<property name="persistence" ref="com.liferay.portlet.wiki.service.persistence.WikiPageResourcePersistence.impl" />
+	</bean>
+	<bean id="com.liferay.documentlibrary.service.DLLocalService.impl" class="com.liferay.documentlibrary.service.impl.DLLocalServiceImpl" />
+	<bean id="com.liferay.documentlibrary.service.DLLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService">
+		<property name="target" ref="com.liferay.documentlibrary.service.DLLocalService.impl" />
+	</bean>
+	<bean id="com.liferay.documentlibrary.service.DLLocalServiceUtil" class="com.liferay.documentlibrary.service.DLLocalServiceUtil">
+		<property name="service" ref="com.liferay.documentlibrary.service.DLLocalService.impl" />
+	</bean>
+	<bean id="com.liferay.documentlibrary.service.DLService.impl" class="com.liferay.documentlibrary.service.impl.DLServiceImpl" />
+	<bean id="com.liferay.documentlibrary.service.DLService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService">
+		<property name="target" ref="com.liferay.documentlibrary.service.DLService.impl" />
+	</bean>
+	<bean id="com.liferay.documentlibrary.service.DLServiceUtil" class="com.liferay.documentlibrary.service.DLServiceUtil">
+		<property name="service" ref="com.liferay.documentlibrary.service.DLService.impl" />
 	</bean>
 </beans>

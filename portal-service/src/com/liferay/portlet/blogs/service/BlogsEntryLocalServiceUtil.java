@@ -374,10 +374,10 @@ public class BlogsEntryLocalServiceUtil {
 
 	public static void updateAsset(long userId,
 		com.liferay.portlet.blogs.model.BlogsEntry entry,
-		long[] assetCategoryIds, java.lang.String[] tagsEntries)
+		long[] assetCategoryIds, java.lang.String[] assetTagNames)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		getService().updateAsset(userId, entry, assetCategoryIds, tagsEntries);
+		getService().updateAsset(userId, entry, assetCategoryIds, assetTagNames);
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsEntry updateEntry(

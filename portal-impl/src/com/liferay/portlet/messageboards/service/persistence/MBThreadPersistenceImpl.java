@@ -1557,11 +1557,11 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 	protected com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence.impl")
 	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
+	@BeanReference(name = "com.liferay.portlet.asset.service.persistence.AssetPersistence.impl")
+	protected com.liferay.portlet.asset.service.persistence.AssetPersistence assetPersistence;
 	@BeanReference(name = "com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence.impl")
 	protected com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence ratingsStatsPersistence;
 	@BeanReference(name = "com.liferay.portlet.social.service.persistence.SocialActivityPersistence.impl")
 	protected com.liferay.portlet.social.service.persistence.SocialActivityPersistence socialActivityPersistence;
-	@BeanReference(name = "com.liferay.portlet.tags.service.persistence.TagsAssetPersistence.impl")
-	protected com.liferay.portlet.tags.service.persistence.TagsAssetPersistence tagsAssetPersistence;
 	private static Log _log = LogFactoryUtil.getLog(MBThreadPersistenceImpl.class);
 }

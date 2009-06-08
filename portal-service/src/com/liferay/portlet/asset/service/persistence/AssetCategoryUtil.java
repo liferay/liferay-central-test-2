@@ -367,96 +367,96 @@ public class AssetCategoryUtil {
 		return getPersistence().countAll();
 	}
 
-	public static java.util.List<com.liferay.portlet.tags.model.TagsAsset> getTagsAssets(
+	public static java.util.List<com.liferay.portlet.asset.model.Asset> getAssets(
 		long pk) throws com.liferay.portal.SystemException {
-		return getPersistence().getTagsAssets(pk);
+		return getPersistence().getAssets(pk);
 	}
 
-	public static java.util.List<com.liferay.portlet.tags.model.TagsAsset> getTagsAssets(
+	public static java.util.List<com.liferay.portlet.asset.model.Asset> getAssets(
 		long pk, int start, int end) throws com.liferay.portal.SystemException {
-		return getPersistence().getTagsAssets(pk, start, end);
+		return getPersistence().getAssets(pk, start, end);
 	}
 
-	public static java.util.List<com.liferay.portlet.tags.model.TagsAsset> getTagsAssets(
+	public static java.util.List<com.liferay.portlet.asset.model.Asset> getAssets(
 		long pk, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().getTagsAssets(pk, start, end, obc);
+		return getPersistence().getAssets(pk, start, end, obc);
 	}
 
-	public static int getTagsAssetsSize(long pk)
+	public static int getAssetsSize(long pk)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().getTagsAssetsSize(pk);
+		return getPersistence().getAssetsSize(pk);
 	}
 
-	public static boolean containsTagsAsset(long pk, long tagsAssetPK)
+	public static boolean containsAsset(long pk, long assetPK)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().containsTagsAsset(pk, tagsAssetPK);
+		return getPersistence().containsAsset(pk, assetPK);
 	}
 
-	public static boolean containsTagsAssets(long pk)
+	public static boolean containsAssets(long pk)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().containsTagsAssets(pk);
+		return getPersistence().containsAssets(pk);
 	}
 
-	public static void addTagsAsset(long pk, long tagsAssetPK)
+	public static void addAsset(long pk, long assetPK)
 		throws com.liferay.portal.SystemException {
-		getPersistence().addTagsAsset(pk, tagsAssetPK);
+		getPersistence().addAsset(pk, assetPK);
 	}
 
-	public static void addTagsAsset(long pk,
-		com.liferay.portlet.tags.model.TagsAsset tagsAsset)
+	public static void addAsset(long pk,
+		com.liferay.portlet.asset.model.Asset asset)
 		throws com.liferay.portal.SystemException {
-		getPersistence().addTagsAsset(pk, tagsAsset);
+		getPersistence().addAsset(pk, asset);
 	}
 
-	public static void addTagsAssets(long pk, long[] tagsAssetPKs)
+	public static void addAssets(long pk, long[] assetPKs)
 		throws com.liferay.portal.SystemException {
-		getPersistence().addTagsAssets(pk, tagsAssetPKs);
+		getPersistence().addAssets(pk, assetPKs);
 	}
 
-	public static void addTagsAssets(long pk,
-		java.util.List<com.liferay.portlet.tags.model.TagsAsset> tagsAssets)
+	public static void addAssets(long pk,
+		java.util.List<com.liferay.portlet.asset.model.Asset> assets)
 		throws com.liferay.portal.SystemException {
-		getPersistence().addTagsAssets(pk, tagsAssets);
+		getPersistence().addAssets(pk, assets);
 	}
 
-	public static void clearTagsAssets(long pk)
+	public static void clearAssets(long pk)
 		throws com.liferay.portal.SystemException {
-		getPersistence().clearTagsAssets(pk);
+		getPersistence().clearAssets(pk);
 	}
 
-	public static void removeTagsAsset(long pk, long tagsAssetPK)
+	public static void removeAsset(long pk, long assetPK)
 		throws com.liferay.portal.SystemException {
-		getPersistence().removeTagsAsset(pk, tagsAssetPK);
+		getPersistence().removeAsset(pk, assetPK);
 	}
 
-	public static void removeTagsAsset(long pk,
-		com.liferay.portlet.tags.model.TagsAsset tagsAsset)
+	public static void removeAsset(long pk,
+		com.liferay.portlet.asset.model.Asset asset)
 		throws com.liferay.portal.SystemException {
-		getPersistence().removeTagsAsset(pk, tagsAsset);
+		getPersistence().removeAsset(pk, asset);
 	}
 
-	public static void removeTagsAssets(long pk, long[] tagsAssetPKs)
+	public static void removeAssets(long pk, long[] assetPKs)
 		throws com.liferay.portal.SystemException {
-		getPersistence().removeTagsAssets(pk, tagsAssetPKs);
+		getPersistence().removeAssets(pk, assetPKs);
 	}
 
-	public static void removeTagsAssets(long pk,
-		java.util.List<com.liferay.portlet.tags.model.TagsAsset> tagsAssets)
+	public static void removeAssets(long pk,
+		java.util.List<com.liferay.portlet.asset.model.Asset> assets)
 		throws com.liferay.portal.SystemException {
-		getPersistence().removeTagsAssets(pk, tagsAssets);
+		getPersistence().removeAssets(pk, assets);
 	}
 
-	public static void setTagsAssets(long pk, long[] tagsAssetPKs)
+	public static void setAssets(long pk, long[] assetPKs)
 		throws com.liferay.portal.SystemException {
-		getPersistence().setTagsAssets(pk, tagsAssetPKs);
+		getPersistence().setAssets(pk, assetPKs);
 	}
 
-	public static void setTagsAssets(long pk,
-		java.util.List<com.liferay.portlet.tags.model.TagsAsset> tagsAssets)
+	public static void setAssets(long pk,
+		java.util.List<com.liferay.portlet.asset.model.Asset> assets)
 		throws com.liferay.portal.SystemException {
-		getPersistence().setTagsAssets(pk, tagsAssets);
+		getPersistence().setAssets(pk, assets);
 	}
 
 	public static AssetCategoryPersistence getPersistence() {

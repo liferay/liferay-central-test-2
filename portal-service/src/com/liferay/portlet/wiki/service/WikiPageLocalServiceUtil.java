@@ -401,6 +401,14 @@ public class WikiPageLocalServiceUtil {
 		getService().unsubscribePage(userId, nodeId, title);
 	}
 
+	public static void updateAsset(long userId,
+		com.liferay.portlet.wiki.model.WikiPage page, long[] assetCategoryIds,
+		java.lang.String[] assetTagNames)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		getService().updateAsset(userId, page, assetCategoryIds, assetTagNames);
+	}
+
 	public static com.liferay.portlet.wiki.model.WikiPage updatePage(
 		long userId, long nodeId, java.lang.String title, double version,
 		java.lang.String content, java.lang.String summary, boolean minorEdit,
@@ -413,14 +421,6 @@ public class WikiPageLocalServiceUtil {
 				   .updatePage(userId, nodeId, title, version, content,
 			summary, minorEdit, format, parentTitle, redirectTitle,
 			serviceContext);
-	}
-
-	public static void updateTagsAsset(long userId,
-		com.liferay.portlet.wiki.model.WikiPage page, long[] assetCategoryIds,
-		java.lang.String[] tagsEntries)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		getService().updateAsset(userId, page, assetCategoryIds, tagsEntries);
 	}
 
 	public static void validateTitle(java.lang.String title)

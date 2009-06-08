@@ -721,6 +721,31 @@
 		<field name="entryId" type="long" />
 		<field name="value" type="int" />
 	</model>
+	<model name="com.liferay.portlet.asset.model.Asset">
+		<field name="assetId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="classNameId" type="long" />
+		<field name="classPK" type="long" />
+		<field name="visible" type="boolean" />
+		<field name="startDate" type="Date" />
+		<field name="endDate" type="Date" />
+		<field name="publishDate" type="Date" />
+		<field name="expirationDate" type="Date" />
+		<field name="mimeType" type="String" />
+		<field name="title" type="String" />
+		<field name="description" type="String" />
+		<field name="summary" type="String" />
+		<field name="url" type="String" />
+		<field name="height" type="int" />
+		<field name="width" type="int" />
+		<field name="priority" type="double" />
+		<field name="viewCount" type="int" />
+	</model>
 	<model name="com.liferay.portlet.asset.model.AssetCategory">
 		<field name="categoryId" type="long" />
 		<field name="groupId" type="long" />
@@ -741,6 +766,27 @@
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
 		<field name="categoryId" type="long" />
+		<field name="key" type="String" />
+		<field name="value" type="String" />
+	</model>
+	<model name="com.liferay.portlet.asset.model.AssetTag">
+		<field name="tagId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="name" type="String" />
+	</model>
+	<model name="com.liferay.portlet.asset.model.AssetTagProperty">
+		<field name="tagPropertyId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="tagId" type="long" />
 		<field name="key" type="String" />
 		<field name="value" type="String" />
 	</model>
@@ -1677,82 +1723,6 @@
 			<hint name="max-length">2000</hint>
 		</field>
 		<field name="repoStoreArtifact" type="boolean" />
-	</model>
-	<model name="com.liferay.portlet.tags.model.TagsAsset">
-		<field name="assetId" type="long" />
-		<field name="groupId" type="long" />
-		<field name="companyId" type="long" />
-		<field name="userId" type="long" />
-		<field name="userName" type="String" />
-		<field name="createDate" type="Date" />
-		<field name="modifiedDate" type="Date" />
-		<field name="classNameId" type="long" />
-		<field name="classPK" type="long" />
-		<field name="visible" type="boolean" />
-		<field name="startDate" type="Date" />
-		<field name="endDate" type="Date" />
-		<field name="publishDate" type="Date" />
-		<field name="expirationDate" type="Date" />
-		<field name="mimeType" type="String" />
-		<field name="title" type="String">
-			<hint name="max-length">255</hint>
-		</field>
-		<field name="description" type="String">
-			<hint-collection name="TEXTAREA" />
-		</field>
-		<field name="summary" type="String">
-			<hint-collection name="TEXTAREA" />
-		</field>
-		<field name="url" type="String">
-			<hint-collection name="URL" />
-		</field>
-		<field name="height" type="int" />
-		<field name="width" type="int" />
-		<field name="priority" type="double" />
-		<field name="viewCount" type="int" />
-	</model>
-	<model name="com.liferay.portlet.tags.model.TagsEntry">
-		<field name="entryId" type="long" />
-		<field name="groupId" type="long" />
-		<field name="companyId" type="long" />
-		<field name="userId" type="long" />
-		<field name="userName" type="String" />
-		<field name="createDate" type="Date" />
-		<field name="modifiedDate" type="Date" />
-		<field name="parentEntryId" type="long" />
-		<field name="name" type="String" />
-		<field name="vocabularyId" type="long" />
-	</model>
-	<model name="com.liferay.portlet.tags.model.TagsProperty">
-		<field name="propertyId" type="long" />
-		<field name="companyId" type="long" />
-		<field name="userId" type="long" />
-		<field name="userName" type="String" />
-		<field name="createDate" type="Date" />
-		<field name="modifiedDate" type="Date" />
-		<field name="entryId" type="long" />
-		<field name="key" type="String" />
-		<field name="value" type="String">
-			<hint name="max-length">255</hint>
-		</field>
-	</model>
-	<model name="com.liferay.portlet.tags.model.TagsSource">
-		<field name="sourceId" type="long" />
-		<field name="parentSourceId" type="long" />
-		<field name="name" type="String" />
-		<field name="acronym" type="String" />
-	</model>
-	<model name="com.liferay.portlet.tags.model.TagsVocabulary">
-		<field name="vocabularyId" type="long" />
-		<field name="groupId" type="long" />
-		<field name="companyId" type="long" />
-		<field name="userId" type="long" />
-		<field name="userName" type="String" />
-		<field name="createDate" type="Date" />
-		<field name="modifiedDate" type="Date" />
-		<field name="name" type="String" />
-		<field name="description" type="String" />
-		<field name="folksonomy" type="boolean" />
 	</model>
 	<model name="com.liferay.portlet.tasks.model.TasksReview">
 		<field name="reviewId" type="long" />
