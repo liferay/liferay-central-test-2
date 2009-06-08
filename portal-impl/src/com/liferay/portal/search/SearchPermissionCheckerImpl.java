@@ -51,6 +51,7 @@ import com.liferay.portal.service.PermissionLocalServiceUtil;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.ResourcePermissionLocalServiceUtil;
 import com.liferay.portal.service.RoleLocalServiceUtil;
+import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PropsValues;
 
 import java.util.ArrayList;
@@ -205,6 +206,13 @@ public class SearchPermissionCheckerImpl implements SearchPermissionChecker {
 
 		roles.addAll(RoleLocalServiceUtil.getUserGroupRoles(userId, groupId));
 
+		long defaultUserId = UserLocalServiceUtil.getDefaultUserId(companyId);
+
+		if (defaultUserId != userId) {
+			roles.add(
+				RoleLocalServiceUtil.getRole(companyId, RoleConstants.GUEST));
+		}
+
 		long companyResourceId = 0;
 
 		try {
@@ -265,6 +273,13 @@ public class SearchPermissionCheckerImpl implements SearchPermissionChecker {
 		roles = ListUtil.copy(roles);
 
 		roles.addAll(RoleLocalServiceUtil.getUserGroupRoles(userId, groupId));
+
+		long defaultUserId = UserLocalServiceUtil.getDefaultUserId(companyId);
+
+		if (defaultUserId != userId) {
+			roles.add(
+				RoleLocalServiceUtil.getRole(companyId, RoleConstants.GUEST));
+		}
 
 		for (Role role : roles) {
 			if (role.getName().equals(RoleConstants.ADMINISTRATOR)) {
