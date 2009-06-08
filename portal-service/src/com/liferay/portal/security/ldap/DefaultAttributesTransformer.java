@@ -31,7 +31,7 @@ import javax.naming.directory.Attributes;
  * @author Brian Wing Shun Chan
  *
  */
-public class DefaultAttributesTransformer {
+public class DefaultAttributesTransformer implements AttributesTransformer {
 
 	public Attributes transformGroup(Attributes attributes) {
 		return attributes;
