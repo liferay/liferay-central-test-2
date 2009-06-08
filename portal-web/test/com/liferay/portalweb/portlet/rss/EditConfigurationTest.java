@@ -35,7 +35,7 @@ public class EditConfigurationTest extends BaseTestCase {
 	public void testEditConfiguration() throws Exception {
 		selenium.click(RuntimeVariables.replace("//img[@alt='Configuration']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//a/img");
+		selenium.click("//img[@alt='Add Location']");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -43,7 +43,7 @@ public class EditConfigurationTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("document._86_fm._86_url[3]")) {
+				if (selenium.isElementPresent("document.forms[0].elements[12]")) {
 					break;
 				}
 			}
@@ -53,7 +53,7 @@ public class EditConfigurationTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.type("document._86_fm._86_url[3]",
+		selenium.type("document.forms[0].elements[12]",
 			RuntimeVariables.replace("http://sitening.com/digg/rss/"));
 		selenium.select("_86_entriesPerFeed",
 			RuntimeVariables.replace("label=4"));

@@ -53,10 +53,10 @@ public class ExpireQuestionTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Edited Test Question 2"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent("//td[1]/input"));
-		assertTrue(selenium.isElementPresent("//tr[2]/td[1]/input"));
-		assertTrue(selenium.isElementPresent("//tr[3]/td[1]/input"));
-		assertTrue(selenium.isElementPresent("//tr[4]/td[1]/input"));
+		assertTrue(selenium.isElementPresent("//label[1]/input"));
+		assertTrue(selenium.isElementPresent("//label[2]/input"));
+		assertTrue(selenium.isElementPresent("//label[3]/input"));
+		assertTrue(selenium.isElementPresent("//label[4]/input"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Cancel']"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click("//td[5]/ul/li/strong/span");
@@ -80,8 +80,6 @@ public class ExpireQuestionTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace("//body/div[2]/ul/li[1]/a"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click("_25_neverExpireCheckbox");
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
-		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

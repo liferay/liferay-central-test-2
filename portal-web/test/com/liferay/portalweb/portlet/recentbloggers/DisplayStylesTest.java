@@ -97,6 +97,6 @@ public class DisplayStylesTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=Joe Bloggs"));
-		assertFalse(selenium.isElementPresent("//img[@alt='Joe Bloggs']"));
+		assertFalse(selenium.isTextPresent("Posts: 1"));
 	}
 }

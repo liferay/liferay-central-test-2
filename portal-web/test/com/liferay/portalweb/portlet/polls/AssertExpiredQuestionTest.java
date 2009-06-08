@@ -53,10 +53,10 @@ public class AssertExpiredQuestionTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Edited Test Question 2"));
 		selenium.waitForPageToLoad("30000");
-		assertFalse(selenium.isElementPresent("//td[1]/input"));
-		assertFalse(selenium.isElementPresent("//tr[2]/td[1]/input"));
-		assertFalse(selenium.isElementPresent("//tr[3]/td[1]/input"));
-		assertFalse(selenium.isElementPresent("//tr[4]/td[1]/input"));
+		assertFalse(selenium.isElementPresent("//label[1]/input"));
+		assertFalse(selenium.isElementPresent("//label[2]/input"));
+		assertFalse(selenium.isElementPresent("//label[3]/input"));
+		assertFalse(selenium.isElementPresent("//label[4]/input"));
 		assertTrue(selenium.isTextPresent(
 				"Voting is disabled because this poll expired on 1/1/08 12:00 AM"));
 	}
