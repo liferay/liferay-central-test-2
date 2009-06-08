@@ -70,3 +70,7 @@ img, .png {
 #macro(dockbar)
 	$theme.runtime("145")
 #end
+
+#macro(breadcrumbs)
+	$theme.breadcrumb()
+#end
