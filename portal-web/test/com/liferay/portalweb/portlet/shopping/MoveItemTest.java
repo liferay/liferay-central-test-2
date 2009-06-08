@@ -71,7 +71,7 @@ public class MoveItemTest extends BaseTestCase {
 		}
 
 		selenium.click("//strong");
-		selenium.click(RuntimeVariables.replace("//div[3]/ul/li[1]/a"));
+		selenium.click(RuntimeVariables.replace("//body/div[4]/ul/li[1]/a"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -161,7 +161,7 @@ public class MoveItemTest extends BaseTestCase {
 		}
 
 		selenium.click("//strong/span");
-		selenium.click(RuntimeVariables.replace("//div[3]/ul/li[1]/a"));
+		selenium.click(RuntimeVariables.replace("//body/div[4]/ul/li[1]/a"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

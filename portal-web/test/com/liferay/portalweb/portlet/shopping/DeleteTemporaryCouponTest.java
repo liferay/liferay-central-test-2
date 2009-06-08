@@ -71,7 +71,7 @@ public class DeleteTemporaryCouponTest extends BaseTestCase {
 		}
 
 		selenium.click("//tr[4]/td[7]/ul/li/strong/span");
-		selenium.click(RuntimeVariables.replace("//div[3]/ul/li[2]/a"));
+		selenium.click(RuntimeVariables.replace("//body/div[4]/ul/li[2]/a"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to delete this[\\s\\S]$"));

@@ -147,7 +147,7 @@ public class TearDownTest extends BaseTestCase {
 		}
 
 		selenium.click("//td[4]/ul/li/strong/span");
-		selenium.click(RuntimeVariables.replace("//div[4]/ul/li[3]/a"));
+		selenium.click(RuntimeVariables.replace("//div[5]/ul/li[3]/a"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
@@ -175,11 +175,14 @@ public class TearDownTest extends BaseTestCase {
 						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 		selenium.click(RuntimeVariables.replace("//div[2]/ul/li[1]/a/span"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//li[2]/a[2]"));
+		selenium.click(RuntimeVariables.replace("link=Manage Pages"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace(
+				"//div[@id='_88_layoutsTreeOutput']/ul/li[2]/a/span"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Display Order"));
 		selenium.waitForPageToLoad("30000");
-		selenium.select("_2_layoutIdsBox",
+		selenium.select("_88_layoutIdsBox",
 			RuntimeVariables.replace("label=Shopping Test Page"));
 
 		for (int second = 0;; second++) {
@@ -189,7 +192,7 @@ public class TearDownTest extends BaseTestCase {
 
 			try {
 				if (selenium.isElementPresent(
-							"//div[@id='portlet-wrapper-2']/div[2]/div/div/form/table/tbody/tr/td[2]/table/tbody/tr/td[2]/a[3]/img")) {
+							"//div[@id='portlet-wrapper-88']/div[2]/div/div/form/table/tbody/tr/td[2]/table/tbody/tr/td[2]/a[3]/img")) {
 					break;
 				}
 			}
@@ -200,7 +203,7 @@ public class TearDownTest extends BaseTestCase {
 		}
 
 		selenium.click(
-			"//div[@id='portlet-wrapper-2']/div[2]/div/div/form/table/tbody/tr/td[2]/table/tbody/tr/td[2]/a[3]/img");
+			"//div[@id='portlet-wrapper-88']/div[2]/div/div/form/table/tbody/tr/td[2]/table/tbody/tr/td[2]/a[3]/img");
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Update Display Order']"));
 		selenium.waitForPageToLoad("30000");

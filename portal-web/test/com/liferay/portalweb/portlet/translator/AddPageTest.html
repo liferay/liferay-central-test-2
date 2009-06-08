@@ -10,42 +10,42 @@
 </thead><tbody>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//a[@id="my-community-private-pages"]</td>
+	<td>//div[@id='_145_myPlacesContainer']/ul/li[2]/a/span[1]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//a[@id="my-community-private-pages"]</td>
+	<td>//div[@id='_145_myPlacesContainer']/ul/li[2]/a/span[1]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>//div/a/span</td>
+	<td>clickAndWait</td>
+	<td>link=Manage Pages</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>new_page</td>
+	<td>clickAndWait</td>
+	<td>//div[@id='_88_layoutsTreeOutput']/ul/li/a/span</td>
 	<td></td>
 </tr>
 <tr>
 	<td>typeKeys</td>
-	<td>new_page</td>
+	<td>_88_name_en_US</td>
 	<td>Translator Test Page</td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>new_page</td>
+	<td>_88_name_en_US</td>
 	<td>Translator Test Page</td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>link=Save</td>
+	<td>clickAndWait</td>
+	<td>//input[@value='Add Page']</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>link=Translator Test Page</td>
+	<td>assertTextPresent</td>
+	<td>Your request processed successfully.</td>
 	<td></td>
 </tr>
 <tr>

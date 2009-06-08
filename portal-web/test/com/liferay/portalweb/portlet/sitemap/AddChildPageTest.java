@@ -39,7 +39,7 @@ public class AddChildPageTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//div[2]/ul/li[1]/a")) {
+				if (selenium.isElementPresent("link=Home")) {
 					break;
 				}
 			}
@@ -49,7 +49,7 @@ public class AddChildPageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//div[2]/ul/li[1]/a"));
+		selenium.click(RuntimeVariables.replace("link=Home"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Manage Pages"));
 		selenium.waitForPageToLoad("30000");

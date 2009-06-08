@@ -36,7 +36,23 @@ public class SearchTest extends BaseTestCase {
 		selenium.type("_3_keywords", RuntimeVariables.replace("Test"));
 		selenium.click(RuntimeVariables.replace("//input[@type='image']"));
 		selenium.waitForPageToLoad("30000");
-		verifyTrue(selenium.isTextPresent("Test Bookmark"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Joe Bloggs")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 	}

@@ -51,7 +51,7 @@ public class AddPortletTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Site Map Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Add Application");
+		selenium.click("link=Application");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

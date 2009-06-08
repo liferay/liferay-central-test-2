@@ -54,7 +54,7 @@ public class AddPortletToChildTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"//div[2]/div/div/ul/li[3]/ul/li/a"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Add Application");
+		selenium.click("link=Application");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
