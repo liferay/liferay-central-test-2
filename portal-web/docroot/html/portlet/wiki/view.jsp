@@ -90,9 +90,9 @@ PortletURL viewAttachmentsURL = PortletURLUtil.clone(viewPageURL, renderResponse
 
 viewAttachmentsURL.setParameter("struts_action", "/wiki/view_page_attachments");
 
-TagsAssetLocalServiceUtil.incrementViewCounter(WikiPage.class.getName(), wikiPage.getResourcePrimKey());
+AssetLocalServiceUtil.incrementViewCounter(WikiPage.class.getName(), wikiPage.getResourcePrimKey());
 
-TagsUtil.addLayoutTagsEntries(request, TagsEntryLocalServiceUtil.getEntries(WikiPage.class.getName(), wikiPage.getResourcePrimKey(), true));
+AssetUtil.addLayoutTags(request, AssetTagLocalServiceUtil.getTags(WikiPage.class.getName(), wikiPage.getResourcePrimKey()));
 %>
 
 <c:choose>
@@ -191,10 +191,9 @@ TagsUtil.addLayoutTagsEntries(request, TagsEntryLocalServiceUtil.getEntries(Wiki
 	portletURL="<%= taggedPagesURL %>"
 />
 
-<liferay-ui:tags-summary
+<liferay-ui:asset-tags-summary
 	className="<%= WikiPage.class.getName() %>"
 	classPK="<%= wikiPage.getResourcePrimKey() %>"
-	folksonomy="<%= true %>"
 	message="tags"
 	portletURL="<%= taggedPagesURL %>"
 />
@@ -243,7 +242,7 @@ TagsUtil.addLayoutTagsEntries(request, TagsEntryLocalServiceUtil.getEntries(Wiki
 		<div class="stats">
 
 			<%
-			TagsAsset asset = TagsAssetLocalServiceUtil.getAsset(WikiPage.class.getName(), wikiPage.getResourcePrimKey());
+			Asset asset = AssetLocalServiceUtil.getAsset(WikiPage.class.getName(), wikiPage.getResourcePrimKey());
 			%>
 
 			<c:choose>
@@ -318,12 +317,6 @@ if ((wikiPage != null) && !wikiPage.getTitle().equals(WikiPageImpl.FRONT_PAGE)) 
 	description = StringUtil.shorten(description, 200);
 
 	PortalUtil.setPageDescription(description, request);
-
-	List<TagsEntry> tagsEntries = new ArrayList<TagsEntry>();
-
-	tagsEntries.addAll(TagsEntryLocalServiceUtil.getEntries(WikiPage.class.getName(), wikiPage.getResourcePrimKey(), false));
-	tagsEntries.addAll(TagsEntryLocalServiceUtil.getEntries(WikiPage.class.getName(), wikiPage.getResourcePrimKey(), true));
-
-	PortalUtil.setPageKeywords(ListUtil.toString(tagsEntries, "name"), request);
+	PortalUtil.setPageKeywords(AssetUtil.getAssetKeywords(WikiPage.class.getName(), wikiPage.getResourcePrimKey()), request);
 }
 %>

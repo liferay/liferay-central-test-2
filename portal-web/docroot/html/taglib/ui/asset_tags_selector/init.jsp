@@ -22,17 +22,12 @@
  */
 %>
 
-<%@ include file="/html/taglib/ui/tags_selector/init.jsp" %>
+<%@ include file="/html/taglib/init.jsp" %>
 
-<%
-boolean folksonomy = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:tags_selector:folksonomy"));
-%>
+<%@ page import="com.liferay.portlet.asset.model.Asset" %>
+<%@ page import="com.liferay.portlet.asset.model.AssetTag" %>
+<%@ page import="com.liferay.portlet.asset.model.AssetTagConstants" %>
+<%@ page import="com.liferay.portlet.asset.service.AssetLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.asset.service.AssetTagLocalServiceUtil" %>
 
-<c:choose>
-	<c:when test="<%= folksonomy %>">
-		<liferay-util:include page="/html/taglib/ui/tags_selector/folksonomy.jsp" />
-	</c:when>
-	<c:otherwise>
-		<liferay-util:include page="/html/taglib/ui/tags_selector/other.jsp" />
-	</c:otherwise>
-</c:choose>
+<portlet:defineObjects />

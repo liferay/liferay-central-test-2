@@ -171,7 +171,7 @@ if ((message != null) && message.isAttachments()) {
 
 <liferay-ui:error exception="<%= FileSizeException.class %>" message="please-enter-a-file-with-a-valid-file-size" />
 
-<liferay-ui:tags-error />
+<liferay-ui:asset-tags-error />
 
 <%
 long breadcrumbsMessageId = parentMessageId;
@@ -392,10 +392,9 @@ if (message != null) {
 			}
 			%>
 
-			<liferay-ui:tags-selector
+			<liferay-ui:asset-tags-selector
 				className="<%= MBMessage.class.getName() %>"
 				classPK="<%= classPK %>"
-				hiddenInput="tagsEntries"
 				contentCallback='<%= renderResponse.getNamespace() + "getSuggestionsContent" %>'
 			/>
 		</td>

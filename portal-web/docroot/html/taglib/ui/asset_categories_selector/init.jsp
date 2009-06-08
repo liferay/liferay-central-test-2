@@ -24,8 +24,8 @@
 
 <%@ include file="/html/taglib/init.jsp" %>
 
-<%@ page import="com.liferay.portlet.tags.model.TagsAsset" %>
-<%@ page import="com.liferay.portlet.tags.service.TagsAssetLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.asset.model.Asset" %>
+<%@ page import="com.liferay.portlet.asset.service.AssetLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.asset.model.AssetCategory" %>
 <%@ page import="com.liferay.portlet.asset.model.AssetCategoryConstants" %>
 <%@ page import="com.liferay.portlet.asset.model.AssetVocabulary" %>

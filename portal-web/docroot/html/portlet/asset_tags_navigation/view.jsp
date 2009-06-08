@@ -22,17 +22,6 @@
  */
 %>
 
-<%@ include file="/html/taglib/init.jsp" %>
+<%@ include file="/html/portlet/asset_tags_navigation/init.jsp" %>
 
-<%
-boolean folksonomy = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:tags_summary:folksonomy"));
-%>
-
-<c:choose>
-	<c:when test="<%= folksonomy %>">
-		<liferay-util:include page="/html/taglib/ui/tags_summary/folksonomy.jsp" />
-	</c:when>
-	<c:otherwise>
-		<liferay-util:include page="/html/taglib/ui/tags_summary/other.jsp" />
-	</c:otherwise>
-</c:choose>
+<liferay-ui:asset-tags-navigation />

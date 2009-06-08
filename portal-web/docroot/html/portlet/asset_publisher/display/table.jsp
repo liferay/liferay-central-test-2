@@ -29,7 +29,7 @@ List results = (List)request.getAttribute("view.jsp-results");
 
 int assetIndex = ((Integer)request.getAttribute("view.jsp-assetIndex")).intValue();
 
-TagsAsset asset = (TagsAsset)request.getAttribute("view.jsp-asset");
+Asset asset = (Asset)request.getAttribute("view.jsp-asset");
 
 String title = (String)request.getAttribute("view.jsp-title");
 String viewURL = (String)request.getAttribute("view.jsp-viewURL");
@@ -237,7 +237,7 @@ viewURL = _checkViewURL(viewURL, currentURL, themeDisplay);
 			%>
 
 				<td>
-					<liferay-ui:tags-summary
+					<liferay-ui:asset-tags-summary
 						className="<%= asset.getClassName() %>"
 						classPK="<%= asset.getClassPK () %>"
 					/>

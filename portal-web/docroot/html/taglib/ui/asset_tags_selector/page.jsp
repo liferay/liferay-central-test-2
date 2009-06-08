@@ -22,24 +22,24 @@
  */
 %>
 
-<%@ include file="/html/taglib/ui/tags_selector/init.jsp" %>
+<%@ include file="/html/taglib/ui/asset_tags_selector/init.jsp" %>
 
 <%
 themeDisplay.setIncludeServiceJs(true);
 
 String randomNamespace = PwdGenerator.getPassword(PwdGenerator.KEY3, 4) + StringPool.UNDERLINE;
 
-String className = (String)request.getAttribute("liferay-ui:tags_selector:className");
-long classPK = GetterUtil.getLong((String)request.getAttribute("liferay-ui:tags_selector:classPK"));
-String hiddenInput = (String)request.getAttribute("liferay-ui:tags_selector:hiddenInput");
-String curTags = GetterUtil.getString((String)request.getAttribute("liferay-ui:tags_selector:curTags"));
-boolean focus = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:tags_selector:focus"));
-String contentCallback = GetterUtil.getString((String)request.getAttribute("liferay-ui:tags_selector:contentCallback"));
+String className = (String)request.getAttribute("liferay-ui:asset_tags_selector:className");
+long classPK = GetterUtil.getLong((String)request.getAttribute("liferay-ui:asset_tags_selector:classPK"));
+String hiddenInput = (String)request.getAttribute("liferay-ui:asset_tags_selector:hiddenInput");
+String curTags = GetterUtil.getString((String)request.getAttribute("liferay-ui:asset_tags_selector:curTags"));
+boolean focus = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:asset_tags_selector:focus"));
+String contentCallback = GetterUtil.getString((String)request.getAttribute("liferay-ui:asset_tags_selector:contentCallback"));
 
 boolean suggestible = Validator.isNotNull(contentCallback);
 
 if (Validator.isNotNull(className) && (classPK > 0)) {
-	List<TagsEntry> entries = TagsEntryLocalServiceUtil.getEntries(className, classPK, TagsEntryConstants.FOLKSONOMY_TAG);
+	List<AssetTag> entries = AssetTagLocalServiceUtil.getTags(className, classPK);
 
 	curTags = ListUtil.toString(entries, "name");
 }
@@ -54,7 +54,7 @@ if (curTagsParam != null) {
 <input id="<%= namespace %><%= hiddenInput %>" type="hidden" />
 
 <span class="ui-tags empty" id="<%= randomNamespace %>tagsSummary"></span>
-	<input class="ui-tags-input" id="<%= randomNamespace %>tags" size="15" type="text" />
+	<input class="ui-tags-input" id="<%= randomNamespace %>assetTagNames" size="15" type="text" />
 
 	<input disabled id="<%= randomNamespace %>addTag" type="button" value="<liferay-ui:message key="add-tags" />" />
 </span>
@@ -72,13 +72,13 @@ if (curTagsParam != null) {
 
 	jQuery(
 		function() {
-			<%= randomNamespace %> = new Liferay.TagsEntriesSelector(
+			<%= randomNamespace %> = new Liferay.AssetTagsSelector(
 				{
 					instanceVar: "<%= randomNamespace %>",
 					hiddenInput: "<%= namespace + hiddenInput %>",
-					textInput: "<%= randomNamespace %>tags",
+					textInput: "<%= randomNamespace %>assetTagNames",
 					summarySpan: "<%= randomNamespace %>tagsSummary",
-					curTagsEntries: "<%= curTags %>",
+					curTags: "<%= curTags %>",
 					focus: <%= focus %>,
 					contentCallback: function() {
 						return <%= contentCallback %>();

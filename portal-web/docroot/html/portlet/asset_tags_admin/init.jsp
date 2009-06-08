@@ -22,14 +22,7 @@
  */
 %>
 
-<%@ include file="/html/taglib/init.jsp" %>
+<%@ include file="/html/portlet/init.jsp" %>
 
-<%@ page import="com.liferay.portlet.tags.model.TagsAsset" %>
-<%@ page import="com.liferay.portlet.tags.model.TagsEntry" %>
-<%@ page import="com.liferay.portlet.tags.model.TagsEntryConstants" %>
-<%@ page import="com.liferay.portlet.tags.model.TagsVocabulary" %>
-<%@ page import="com.liferay.portlet.tags.service.TagsAssetLocalServiceUtil" %>
-<%@ page import="com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil" %>
-<%@ page import="com.liferay.portlet.tags.service.TagsVocabularyLocalServiceUtil" %>
-
-<portlet:defineObjects />
+<%@ page import="com.liferay.portlet.asset.model.AssetTag" %>
+<%@ page import="com.liferay.portlet.asset.service.permission.AssetPermission" %>

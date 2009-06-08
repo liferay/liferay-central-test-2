@@ -178,6 +178,10 @@
 
 		<action path="/announcements/view" forward="portlet.announcements.view" />
 
+		<!-- Asset -->
+
+		<action path="/asset/rss" type="com.liferay.portlet.asset.action.RSSAction" />
+
 		<!-- Asset Category Admin -->
 
 		<action path="/asset_category_admin/view" forward="portlet.asset_category_admin.view" />
@@ -209,6 +213,14 @@
 		</action>
 
 		<action path="/asset_publisher/view_content" forward="portlet.asset_publisher.view_content" />
+
+		<!-- Asset Tags Admin -->
+
+		<action path="/asset_tags_admin/view" forward="portlet.asset_tags_admin.view" />
+
+		<!-- Asset Tags Navigation -->
+
+		<action path="/asset_tags_entries_navigation/view" forward="portlet.asset_tags_entries_navigation.view" />
 
 		<!-- Blogs -->
 
@@ -1544,18 +1556,6 @@
 		<!-- Site Map -->
 
 		<action path="/site_map/view" forward="portlet.site_map.view" />
-
-		<!-- Tags -->
-
-		<action path="/tags/rss" type="com.liferay.portlet.tags.action.RSSAction" />
-
-		<!-- Tags Admin -->
-
-		<action path="/tags_admin/view" forward="portlet.tags_admin.view" />
-
-		<!-- Tags Entries Navigation -->
-
-		<action path="/tags_entries_navigation/view" forward="portlet.tags_entries_navigation.view" />
 
 		<!-- Update Manager -->
 

@@ -22,12 +22,14 @@
  */
 %>
 
-<%@ include file="/html/taglib/init.jsp" %>
+<%@ include file="/html/portlet/init.jsp" %>
 
-<%@ page import="com.liferay.portlet.tags.model.TagsEntry" %>
-<%@ page import="com.liferay.portlet.tags.model.TagsEntryConstants" %>
-<%@ page import="com.liferay.portlet.tags.model.TagsVocabulary" %>
-<%@ page import="com.liferay.portlet.tags.service.TagsEntryServiceUtil" %>
-<%@ page import="com.liferay.portlet.tags.service.TagsVocabularyServiceUtil" %>
+<%
+PortletPreferences preferences = renderRequest.getPreferences();
 
-<portlet:defineObjects />
+String portletResource = ParamUtil.getString(request, "portletResource");
+
+if (Validator.isNotNull(portletResource)) {
+	preferences = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource);
+}
+%>

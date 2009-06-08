@@ -1,4 +1,3 @@
-<%
 /**
  * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
  *
@@ -20,18 +19,26 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%>
 
-<%@ include file="/html/portlet/init.jsp" %>
+package com.liferay.taglib.ui;
 
-<%
-PortletPreferences preferences = renderRequest.getPreferences();
+import com.liferay.taglib.util.IncludeTag;
 
-String portletResource = ParamUtil.getString(request, "portletResource");
+/**
+ * <a href="AssetTagsNavigationTag.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Alvaro del Castillo
+ * @author Eduardo Lundgren
+ * @author Jorge Ferrer
+ *
+ */
+public class AssetTagsNavigationTag extends IncludeTag {
 
-if (Validator.isNotNull(portletResource)) {
-	preferences = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource);
+	protected String getDefaultPage() {
+		return _PAGE;
+	}
+
+	private static final String _PAGE =
+		"/html/taglib/ui/asset_tags_navigation/page.jsp";
+
 }
-
-boolean showCompanyCategories = GetterUtil.getBoolean(preferences.getValue("show-company-categories", null));
-%>

@@ -24,33 +24,31 @@
 
 <%@ include file="/html/taglib/init.jsp" %>
 
-<%@ page import="com.liferay.portlet.tags.model.TagsEntry" %>
-<%@ page import="com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.asset.model.AssetTag" %>
+<%@ page import="com.liferay.portlet.asset.service.AssetTagLocalServiceUtil" %>
 
 <%
-String className = (String)request.getAttribute("liferay-ui:tags_summary:className");
-long classPK = GetterUtil.getLong((String)request.getAttribute("liferay-ui:tags_summary:classPK"));
-boolean folksonomy = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:tags_summary:folksonomy"));
-String message = GetterUtil.getString((String)request.getAttribute("liferay-ui:tags_summary:message"), StringPool.BLANK);
-LiferayPortletURL portletURL = (LiferayPortletURL)request.getAttribute("liferay-ui:tags_summary:portletURL");
+String className = (String)request.getAttribute("liferay-ui:asset_tags_summary:className");
+long classPK = GetterUtil.getLong((String)request.getAttribute("liferay-ui:asset_tags_summary:classPK"));
+String message = GetterUtil.getString((String)request.getAttribute("liferay-ui:asset_tags_summary:message"), StringPool.BLANK);
+LiferayPortletURL portletURL = (LiferayPortletURL)request.getAttribute("liferay-ui:asset_tags_summary:portletURL");
 
-List<TagsEntry> entries = TagsEntryLocalServiceUtil.getEntries(className, classPK, folksonomy);
+List<AssetTag> tags = AssetTagLocalServiceUtil.getTags(className, classPK);
 %>
 
-<c:if test="<%= entries.size() > 0 %>">
-	<div class="taglib-tags-summary">
+<c:if test="<%= tags.size() > 0 %>">
+	<div class="taglib-asset-tags-summary">
 		<%= Validator.isNotNull(message) ? (LanguageUtil.get(pageContext, message) + ": ") : "" %>
 
 		<c:choose>
 			<c:when test="<%= portletURL != null %>">
 
 				<%
-				for (TagsEntry entry : entries) {
-					portletURL.setParameter("tag", entry.getName());
-					portletURL.setParameter("folksonomy", String.valueOf(folksonomy));
+				for (AssetTag tag : tags) {
+					portletURL.setParameter("tag", tag.getName());
 				%>
 
-					<a class="tag" href="<%= portletURL.toString() %>"><%= entry.getName() %></a>
+					<a class="tag" href="<%= portletURL.toString() %>"><%= tag.getName() %></a>
 
 				<%
 				}
@@ -60,7 +58,7 @@ List<TagsEntry> entries = TagsEntryLocalServiceUtil.getEntries(className, classP
 			<c:otherwise>
 
 				<%
-				for (TagsEntry entry : entries) {
+				for (AssetTag entry : tags) {
 				%>
 
 					<span class="tag">

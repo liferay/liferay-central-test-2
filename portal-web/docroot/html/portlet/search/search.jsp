@@ -199,7 +199,7 @@ for (int i = 0; i < portlets.size(); i++) {
 
 				PortletURL tagURL = PortletURLUtil.clone(portletURL, renderResponse);
 
-				tagURL.setParameter("keywords", Field.TAGS_ENTRIES + StringPool.COLON + tag);
+				tagURL.setParameter("keywords", Field.ASSET_TAG_NAMES + StringPool.COLON + tag);
 				tagURL.setParameter("format", format);
 
 				sb.append("<a href=\"");

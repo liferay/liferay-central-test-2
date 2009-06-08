@@ -1,4 +1,3 @@
-<%
 /**
  * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
  *
@@ -20,10 +19,24 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%>
 
-<%@ include file="/html/portlet/init.jsp" %>
+package com.liferay.taglib.ui;
 
-<%@ page import="com.liferay.portlet.tags.model.TagsEntry" %>
-<%@ page import="com.liferay.portlet.tags.model.TagsVocabulary" %>
-<%@ page import="com.liferay.portlet.tags.service.permission.TagsPermission" %>
+import com.liferay.taglib.util.IncludeTag;
+
+/**
+ * <a href="AssetTagsErrorTag.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ *
+ */
+public class AssetTagsErrorTag extends IncludeTag {
+
+	protected String getDefaultPage() {
+		return _PAGE;
+	}
+
+	private static final String _PAGE =
+		"/html/taglib/ui/asset_tags_error/page.jsp";
+
+}

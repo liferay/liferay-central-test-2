@@ -507,7 +507,6 @@
 			<role-name>user</role-name>
 		</security-role-ref>
 		<supported-public-render-parameter>categoryId</supported-public-render-parameter>
-		<supported-public-render-parameter>folksonomy</supported-public-render-parameter>
 		<supported-public-render-parameter>nodeId</supported-public-render-parameter>
 		<supported-public-render-parameter>tag</supported-public-render-parameter>
 		<supported-public-render-parameter>title</supported-public-render-parameter>
@@ -1260,11 +1259,11 @@
 	</portlet>
 	<portlet>
 		<portlet-name>99</portlet-name>
-		<display-name>Tags Admin</display-name>
+		<display-name>Asset Tags Admin</display-name>
 		<portlet-class>com.liferay.portlet.StrutsPortlet</portlet-class>
 		<init-param>
 			<name>view-action</name>
-			<value>/tags_admin/view</value>
+			<value>/asset_tags_admin/view</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
@@ -1318,7 +1317,6 @@
 			<role-name>user</role-name>
 		</security-role-ref>
 		<supported-public-render-parameter>categoryId</supported-public-render-parameter>
-		<supported-public-render-parameter>folksonomy</supported-public-render-parameter>
 		<supported-public-render-parameter>tag</supported-public-render-parameter>
 	</portlet>
 	<portlet>
@@ -1933,7 +1931,6 @@
 		<security-role-ref>
 			<role-name>user</role-name>
 		</security-role-ref>
-		<supported-public-render-parameter>folksonomy</supported-public-render-parameter>
 		<supported-public-render-parameter>tag</supported-public-render-parameter>
 	</portlet>
 	<portlet>
@@ -2275,10 +2272,6 @@
 	<public-render-parameter>
 		<identifier>categoryId</identifier>
 		<qname xmlns:x="http://www.liferay.com/public-render-parameters">x:categoryId</qname>
-	</public-render-parameter>
-	<public-render-parameter>
-		<identifier>folksonomy</identifier>
-		<qname xmlns:x="http://www.liferay.com/public-render-parameters">x:folksonomy</qname>
 	</public-render-parameter>
 	<public-render-parameter>
 		<identifier>tag</identifier>

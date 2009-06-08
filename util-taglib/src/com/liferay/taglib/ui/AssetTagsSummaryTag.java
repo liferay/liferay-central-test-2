@@ -29,24 +29,22 @@ import javax.portlet.PortletURL;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * <a href="TagsSummaryTag.java.html"><b><i>View Source</i></b></a>
+ * <a href="AssetTagsSummaryTag.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class TagsSummaryTag extends IncludeTag {
+public class AssetTagsSummaryTag extends IncludeTag {
 
 	public int doStartTag() {
 		HttpServletRequest request =
 			(HttpServletRequest)pageContext.getRequest();
 
-		request.setAttribute("liferay-ui:tags_summary:className", _className);
+		request.setAttribute("liferay-ui:asset_tags_summary:className", _className);
 		request.setAttribute(
-			"liferay-ui:tags_summary:classPK", String.valueOf(_classPK));
-		request.setAttribute(
-			"liferay-ui:tags_summary:folksonomy", String.valueOf(_folksonomy));
-		request.setAttribute("liferay-ui:tags_summary:message", _message);
-		request.setAttribute("liferay-ui:tags_summary:portletURL", _portletURL);
+			"liferay-ui:asset_tags_summary:classPK", String.valueOf(_classPK));
+		request.setAttribute("liferay-ui:asset_tags_summary:message", _message);
+		request.setAttribute("liferay-ui:asset_tags_summary:portletURL", _portletURL);
 
 		return EVAL_BODY_BUFFERED;
 	}
@@ -57,10 +55,6 @@ public class TagsSummaryTag extends IncludeTag {
 
 	public void setClassPK(long classPK) {
 		_classPK = classPK;
-	}
-
-	public void setFolksonomy(boolean folksonomy) {
-		_folksonomy = folksonomy;
 	}
 
 	public void setMessage(String message) {
@@ -79,11 +73,10 @@ public class TagsSummaryTag extends IncludeTag {
 		return _PAGE;
 	}
 
-	private static final String _PAGE = "/html/taglib/ui/tags_summary/page.jsp";
+	private static final String _PAGE = "/html/taglib/ui/asset_tags_summary/page.jsp";
 
 	private String _className;
 	private long _classPK;
-	private boolean _folksonomy = true;
 	private String _message;
 	private PortletURL _portletURL;
 

@@ -5,8 +5,8 @@ Liferay.AssetCategoriesSelector = new Expanse.Class(
 		 * OPTIONS
 		 *
 		 * Required
-		 * curAssetCategoryIds (string): The ids of the current categories.
-		 * curAssetCategoryNames (string): The names of the current categories.
+		 * curCategoryIds (string): The ids of the current categories.
+		 * curCategoryNames (string): The names of the current categories.
 		 * instanceVar {string}: The instance variable for this class.
 		 * hiddenInput {string}: The hidden input used to pass in the current categories.
 		 * summarySpan {string}: The summary span to show the current categories.
@@ -15,7 +15,7 @@ Liferay.AssetCategoriesSelector = new Expanse.Class(
 		initialize: function(options) {
 			var instance = this;
 
-			instance._curAssetCategoryIds = [];
+			instance._curCategoryIds = [];
 
 			instance.options = options;
 			instance._ns = instance.options.instanceVar || '';
@@ -31,32 +31,36 @@ Liferay.AssetCategoriesSelector = new Expanse.Class(
 
 			instance._setupSelectAssetCategories();
 
-			if (options.curAssetCategoryIds != '') {
-				instance._curAssetCategoryIds = options.curAssetCategoryIds.split(',');
-				instance._curAssetCategoryNames = options.curAssetCategoryNames.split(',');
+			if (options.curCategoryIds != '') {
+				instance._curCategoryIds = options.curCategoryIds.split(',');
+				instance._curCategoryNames = options.curCategoryNames.split(',');
 
 				instance._update();
 			}
+			else {
+				instance._curCategoryIds = [];
+				instance._curCategoryNames = [];
+			}
 		},
 
-		deleteAssetCategory: function(id) {
+		deleteCategory: function(id) {
 			var instance = this;
 
 			var options = instance.options;
-			var curAssetCategoryIds = instance._curAssetCategoryIds;
+			var curCategoryIds = instance._curCategoryIds;
 
-			jQuery('#' + instance._ns + 'CurAssetCategoryIds' + id).remove();
+			jQuery('#' + instance._ns + 'CurCategoryIds' + id).remove();
 
-			var value = curAssetCategoryIds.splice(id, 1);
+			var value = curCategoryIds.splice(id, 1);
 
 			if (instance._popupVisible) {
-				jQuery('input[type=checkbox][value$=' + value + ']', instance.selectAssetCategoryPopup.body).attr('checked', false);
+				jQuery('input[type=checkbox][value$=' + value + ']', instance.selectCategoryPopup.body).attr('checked', false);
 			}
 
 			instance._update();
 		},
 
-		_assetCategoryIterator: function(categories, buffer, counter) {
+		_categoryIterator: function(categories, buffer, counter) {
 			var instance = this;
 
 			buffer.push('<ul>');
@@ -67,7 +71,7 @@ Liferay.AssetCategoriesSelector = new Expanse.Class(
 					var category = this;
 					var categoryName = category.name;
 					var categoryId = category.categoryId;
-					var checked = (instance._curAssetCategoryIds.indexOf(categoryId.toString()) > -1) ? ' checked="checked" ' : '';
+					var checked = (instance._curCategoryIds.indexOf(categoryId.toString()) > -1) ? ' checked="checked" ' : '';
 
 					buffer.push('<li><label title="');
 					buffer.push(categoryName);
@@ -89,7 +93,7 @@ Liferay.AssetCategoriesSelector = new Expanse.Class(
 					);
 
 					if (childCategories.length > 0) {
-						instance._assetCategoryIterator(childCategories, buffer, counter + 1);
+						instance._categoryIterator(childCategories, buffer, counter + 1);
 					}
 
 					buffer.push('</li>');
@@ -113,34 +117,34 @@ Liferay.AssetCategoriesSelector = new Expanse.Class(
 
 			saveBtn.click(
 				function() {
-					instance._curAssetCategoryIds = instance._curAssetCategoryIds.length ? instance._curAssetCategoryIds : [];
+					instance._curCategoryIds = instance._curCategoryIds.length ? instance._curCategoryIds : [];
 
 					container.find('input[type=checkbox]').each(
 						function() {
-							var currentIndex = instance._curAssetCategoryIds.indexOf(this.value);
+							var currentIndex = instance._curCategoryIds.indexOf(this.value);
 							if (this.checked) {
 								if (currentIndex == -1) {
-									instance._curAssetCategoryIds.push(this.value);
-									instance._curAssetCategoryNames.push(jQuery(this).attr('data-title'));
+									instance._curCategoryIds.push(this.value);
+									instance._curCategoryNames.push(jQuery(this).attr('data-title'));
 								}
 							}
 							else {
 								if (currentIndex > -1) {
-									instance._curAssetCategoryIds.splice(currentIndex, 1);
-									instance._curAssetCategoryNames.splice(currentIndex, 1);
+									instance._curCategoryIds.splice(currentIndex, 1);
+									instance._curCategoryNames.splice(currentIndex, 1);
 								}
 							}
 						}
 					);
 
 					instance._update();
-					instance.selectAssetCategoryPopup.closePopup();
+					instance.selectCategoryPopup.closePopup();
 				}
 			);
 
 			mainContainer.append(searchContainer).append(container).append(saveBtn);
 
-			if (!instance.selectAssetCategoryPopup) {
+			if (!instance.selectCategoryPopup) {
 				var popup = new Expanse.Popup(
 					{
 						body: mainContainer[0],
@@ -156,7 +160,7 @@ Liferay.AssetCategoriesSelector = new Expanse.Class(
 							},
 							close: function() {
 								instance._popupVisible = false;
-								instance.selectAssetCategoryPopup = null;
+								instance.selectCategoryPopup = null;
 							}
 						},
 						resizable: false,
@@ -164,7 +168,7 @@ Liferay.AssetCategoriesSelector = new Expanse.Class(
 					}
 				);
 
-				instance.selectAssetCategoryPopup = popup;
+				instance.selectCategoryPopup = popup;
 			}
 
 			instance._popupVisible = true;
@@ -247,44 +251,43 @@ Liferay.AssetCategoriesSelector = new Expanse.Class(
 				},
 				function(vocabularies) {
 					var buffer = [];
-					if (vocabularies.length == 0) {
-						buffer.push('<fieldset class="no-matches"><legend>' + Liferay.Language.get('category-sets') + '</legend>');
-						buffer.push('<div class="lfr-asset-category-message">' + searchMessage + '</div>');
-						buffer.push('</fieldset>');
 
-						container.html(buffer.join(''));
-					}
-					else {
-						jQuery.each(
-							vocabularies,
-							function(i) {
-								var vocabulary = this;
-								var vocabularyName = vocabulary.name;
-								var vocabularyId = vocabulary.vocabularyId;
+					jQuery.each(
+						vocabularies,
+						function(i) {
+							var vocabulary = this;
+							var vocabularyName = vocabulary.name;
+							var vocabularyId = vocabulary.vocabularyId;
 
-								Liferay.Service.Asset.AssetCategory.getVocabularyRootCategories(
-									{
-										assetVocabularyId: vocabularyId
-									},
-									function(categories) {
-										buffer.push('<fieldset>');
-										buffer.push('<legend class="lfr-asset-category-set-title">');
-										buffer.push(vocabularyName);
-										buffer.push('</legend><div class="treeview">');
+							Liferay.Service.Asset.AssetCategory.getVocabularyRootCategories(
+								{
+									assetVocabularyId: vocabularyId
+								},
+								function(categories) {
+									buffer.push('<fieldset>');
+									buffer.push('<legend class="lfr-asset-category-set-title">');
+									buffer.push(vocabularyName);
+									buffer.push('</legend><div class="treeview">');
 
-										instance._assetCategoryIterator(categories, buffer, 0);
+									instance._categoryIterator(categories, buffer, 0);
 
-										buffer.push('</div><div class="lfr-asset-category-message">' + searchMessage + '</div>');
-										buffer.push('</fieldset>');
+									buffer.push('</div><div class="lfr-asset-category-message">' + searchMessage + '</div>');
+									buffer.push('</fieldset>');
 
-										container.html(buffer.join(''));
+									container.html(buffer.join(''));
 
-										instance._initializeSearch(container);
+									instance._initializeSearch(container);
+
+									if (categories.length == 0) {
+										container.addClass('no-matches');
 									}
-								);
-							}
-						);
-					}
+									else {
+										container.removeClass('no-matches');
+									}
+								}
+							);
+						}
+					);
 				}
 			);
 
@@ -302,34 +305,34 @@ Liferay.AssetCategoriesSelector = new Expanse.Class(
 			var instance = this;
 
 			var options = instance.options;
-			var curAssetCategoryIds = instance._curAssetCategoryIds;
+			var curCategoryIds = instance._curCategoryIds;
 
 			var hiddenInput = jQuery('#' + options.hiddenInput);
 
-			hiddenInput.val(curAssetCategoryIds.join(','));
+			hiddenInput.val(curCategoryIds.join(','));
 		},
 
 		_updateSummarySpan: function() {
 			var instance = this;
 
 			var options = instance.options;
-			var curAssetCategoryIds = instance._curAssetCategoryIds;
-			var curAssetCategoryNames = instance._curAssetCategoryNames;
+			var curCategoryIds = instance._curCategoryIds;
+			var curCategoryNames = instance._curCategoryNames;
 
 			var html = '';
 
-			jQuery(curAssetCategoryIds).each(
-				function(i, curAssetCategoryId) {
-					html += '<span class="ui-asset-category" id="' + instance._ns + 'CurAssetCategoryIds' + i + '">';
-					html += curAssetCategoryNames[i];
-					html += '<a class="ui-asset-category-delete" href="javascript:' + instance._ns + '.deleteAssetCategory(' + i + ');"><span>x</span></a>';
+			jQuery(curCategoryIds).each(
+				function(i, curCategoryId) {
+					html += '<span class="ui-asset-category" id="' + instance._ns + 'CurCategoryIds' + i + '">';
+					html += curCategoryNames[i];
+					html += '<a class="ui-asset-category-delete" href="javascript:' + instance._ns + '.deleteCategory(' + i + ');"><span>x</span></a>';
 					html += '</span>';
 				}
 			);
 
 			var assetCategoriesSummary = jQuery('#' + options.summarySpan);
 
-			if (curAssetCategoryIds.length) {
+			if (curCategoryIds.length) {
 				assetCategoriesSummary.removeClass('empty');
 			}
 			else {

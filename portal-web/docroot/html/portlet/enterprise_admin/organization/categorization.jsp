@@ -30,7 +30,7 @@ Organization organization = (Organization)request.getAttribute(WebKeys.ORGANIZAT
 
 <fieldset class="exp-block-labels">
 	<div class="exp-ctrl-holder">
-		<label for="<portlet:namespace />tagsEntries"><liferay-ui:message key="tags" /></label>
+		<label for="<portlet:namespace />assetTagNames"><liferay-ui:message key="tags" /></label>
 
 		<%
 		long classPK = 0;
@@ -40,10 +40,9 @@ Organization organization = (Organization)request.getAttribute(WebKeys.ORGANIZAT
 		}
 		%>
 
-		<liferay-ui:tags-selector
+		<liferay-ui:asset-tags-selector
 			className="<%= Organization.class.getName() %>"
 			classPK="<%= classPK %>"
-			hiddenInput="tagsEntries"
 		/>
 	</div>
 </fieldset>

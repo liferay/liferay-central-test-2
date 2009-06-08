@@ -28,10 +28,6 @@
 	width: 100%;
 }
 
-.portlet-asset-category-admin .vocabulary-container .results-grid {
-	padding: 0;
-}
-
 .portlet-asset-category-admin .vocabulary-container .results-header {
 	background: #F0F5F7;
 	font-weight: bold;
@@ -299,20 +295,8 @@
 	font-size: 13px;
 }
 
-.portlet-asset-category-admin .treeview .hitarea {
-	height: 1px;
-}
-
-.ie6 .portlet-asset-category-admin .treeview .hitarea {
-	background-image: none;
-}
-
 .portlet-asset-category-admin .treeview .hover {
 	cursor: pointer;
-}
-
-.portlet-asset-category-admin .treeview li, .portlet-asset-category-admin .treeview li.lastCollapsable, .portlet-asset-category-admin .treeview li.lastExpandable {
-	background-image: none;
 }
 
 .portlet-asset-category-admin .treeview .placeholder {

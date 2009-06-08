@@ -1,3 +1,4 @@
+<%
 /**
  * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
  *
@@ -19,53 +20,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+%>
 
-package com.liferay.taglib.ui;
+<%@ include file="/html/taglib/init.jsp" %>
 
-import com.liferay.taglib.util.IncludeTag;
+<%@ page import="com.liferay.portlet.asset.model.AssetTag" %>
+<%@ page import="com.liferay.portlet.asset.model.AssetTagConstants" %>
+<%@ page import="com.liferay.portlet.asset.service.AssetTagServiceUtil" %>
 
-import javax.servlet.http.HttpServletRequest;
-
-/**
- * <a href="TagsNavigationTag.java.html"><b><i>View Source</i></b></a>
- *
- * @author Alvaro del Castillo
- * @author Eduardo Lundgren
- * @author Jorge Ferrer
- *
- */
-public class TagsNavigationTag extends IncludeTag {
-
-	public int doStartTag() {
-		HttpServletRequest request =
-			(HttpServletRequest)pageContext.getRequest();
-
-		request.setAttribute(
-			"liferay-ui:tags-navigation:folksonomy",
-			String.valueOf(_folksonomy));
-		request.setAttribute(
-			"liferay-ui:tags-navigation:showCompanyCategories",
-			String.valueOf(_showCompanyCategories));
-
-		return EVAL_BODY_BUFFERED;
-	}
-
-	public void setFolksonomy(boolean folksonomy) {
-		_folksonomy = folksonomy;
-	}
-
-	public void setShowCompanyCategories(boolean showCompanyCategories) {
-		_showCompanyCategories = showCompanyCategories;
-	}
-
-	protected String getDefaultPage() {
-		return _PAGE;
-	}
-
-	private static final String _PAGE =
-		"/html/taglib/ui/tags_navigation/page.jsp";
-
-	private boolean _folksonomy;
-	private boolean _showCompanyCategories;
-
-}
+<portlet:defineObjects />

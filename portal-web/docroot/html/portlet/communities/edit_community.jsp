@@ -110,10 +110,9 @@ String friendlyURL = BeanParamUtil.getString(group, request, "friendlyURL");
 		<liferay-ui:message key="tags" />
 	</td>
 	<td>
-		<liferay-ui:tags-selector
+		<liferay-ui:asset-tags-selector
 			className="<%= Group.class.getName() %>"
 			classPK="<%= groupId %>"
-			hiddenInput="tagsEntries"
 		/>
 	</td>
 </tr>

@@ -1,27 +1,27 @@
-Liferay.TagsEntriesSelector = new Expanse.Class(
+Liferay.AssetTagsSelector = new Expanse.Class(
 	{
 
 		/**
 		 * OPTIONS
 		 *
 		 * Required
-		 * curTagsEntries (string): The current tag entries.
+		 * curTags (string): The current tags.
 		 * instanceVar {string}: The instance variable for this class.
-		 * hiddenInput {string}: The hidden input used to pass in the current tag entries.
-		 * textInput {string}: The text input for users to add tag entries.
-		 * summarySpan {string}: The summary span to show the current tag entries.
+		 * hiddenInput {string}: The hidden input used to pass in the current tags.
+		 * textInput {string}: The text input for users to add tags.
+		 * summarySpan {string}: The summary span to show the current tags.
 		 *
 		 * Optional
 		 * focus {boolean}: Whether the text input should be focused.
 		 *
 		 * Callbacks
-		 * contentCallback {function}: Called to get suggested tag entries.
+		 * contentCallback {function}: Called to get suggested tags.
 		 */
 
 		initialize: function(options) {
 			var instance = this;
 
-			instance._curTagsEntries = [];
+			instance._curTags = [];
 
 			instance.options = options;
 			instance._ns = instance.options.instanceVar || '';
@@ -38,7 +38,7 @@ Liferay.TagsEntriesSelector = new Expanse.Class(
 			var autoComplete = new Expanse.AutoComplete(
 				{
 					dataSource: {
-						source: instance._getTagsEntries,
+						source: instance._searchTags,
 						responseSchema: {
 							fields: ['text', 'value']
 						}
@@ -63,34 +63,34 @@ Liferay.TagsEntriesSelector = new Expanse.Class(
 
 			instance._popupVisible = false;
 
-			instance._setupSelectTagsEntries();
+			instance._setupSelectTags();
 			instance._setupSuggestions();
 
-			var addTagEntryButton = jQuery('#' + options.instanceVar + 'addTag');
+			var addTagButton = jQuery('#' + options.instanceVar + 'addTag');
 
-			addTagEntryButton.click(
+			addTagButton.click(
 				function() {
-						var curTagsEntries = instance._curTagsEntries;
-						var newTagsEntries = textInput.val().split(',');
+						var curTags = instance._curTags;
+						var newTags = textInput.val().split(',');
 
 						jQuery.each(
-							newTagsEntries,
+							newTags,
 							function(i, n) {
 								n = jQuery.trim(n);
 
-								if (curTagsEntries.indexOf(n) == -1) {
+								if (curTags.indexOf(n) == -1) {
 									if (n != '') {
-										curTagsEntries.push(n);
+										curTags.push(n);
 
 										if (instance._popupVisible) {
-											jQuery('input[type=checkbox][value$=' + n + ']', instance.selectTagEntryPopup.body).attr('checked', true);
+											jQuery('input[type=checkbox][value$=' + n + ']', instance.selectTagPopup.body).attr('checked', true);
 										}
 									}
 								}
 							}
 						);
 
-						curTagsEntries = curTagsEntries.sort();
+						curTags = curTags.sort();
 						textInput.val('');
 
 						instance._update();
@@ -101,7 +101,7 @@ Liferay.TagsEntriesSelector = new Expanse.Class(
 				function(event) {
 					if (event.keyCode == 13) {
 						if (!autoComplete._LFR_listShowing) {
-							addTagEntryButton.trigger('click');
+							addTagButton.trigger('click');
 						}
 
 						autoComplete._LFR_listShowing = null;
@@ -115,8 +115,8 @@ Liferay.TagsEntriesSelector = new Expanse.Class(
 				textInput.focus();
 			}
 
-			if (options.curTagsEntries != '') {
-				instance._curTagsEntries = options.curTagsEntries.split(',');
+			if (options.curTags != '') {
+				instance._curTags = options.curTags.split(',');
 
 				instance._update();
 			}
@@ -129,24 +129,24 @@ Liferay.TagsEntriesSelector = new Expanse.Class(
 					var val = jQuery.trim(textInput.val());
 
 					if (val.length) {
-						addTagEntryButton.trigger('click');
+						addTagButton.trigger('click');
 					}
 				}
 			);
 		},
 
-		deleteTagEntry: function(id) {
+		deleteTag: function(id) {
 			var instance = this;
 
 			var options = instance.options;
-			var curTagsEntries = instance._curTagsEntries;
+			var curTags = instance._curTags;
 
 			jQuery('#' + instance._ns + 'CurTags' + id).remove();
 
-			var value = curTagsEntries.splice(id, 1);
+			var value = curTags.splice(id, 1);
 
 			if (instance._popupVisible) {
-				jQuery('input[type=checkbox][value$=' + value + ']', instance.selectTagEntryPopup.body).attr('checked', false);
+				jQuery('input[type=checkbox][value$=' + value + ']', instance.selectTagPopup.body).attr('checked', false);
 			}
 
 			instance._update();
@@ -164,32 +164,32 @@ Liferay.TagsEntriesSelector = new Expanse.Class(
 
 			saveBtn.click(
 				function() {
-					instance._curTagsEntries = instance._curTagsEntries.length ? instance._curTagsEntries : [];
+					instance._curTags = instance._curTags.length ? instance._curTags : [];
 
 					container.find('input[type=checkbox]').each(
 						function() {
-							var currentIndex = instance._curTagsEntries.indexOf(this.value);
+							var currentIndex = instance._curTags.indexOf(this.value);
 							if (this.checked) {
 								if (currentIndex == -1) {
-									instance._curTagsEntries.push(this.value);
+									instance._curTags.push(this.value);
 								}
 							}
 							else {
 								if (currentIndex > -1) {
-									instance._curTagsEntries.splice(currentIndex, 1);
+									instance._curTags.splice(currentIndex, 1);
 								}
 							}
 						}
 					);
 
 					instance._update();
-					instance.selectTagEntryPopup.closePopup();
+					instance.selectTagPopup.closePopup();
 				}
 			);
 
 			mainContainer.append(searchContainer).append(container).append(saveBtn);
 
-			if (!instance.selectTagEntryPopup) {
+			if (!instance.selectTagPopup) {
 				var popup = new Expanse.Popup(
 					{
 						body: mainContainer[0],
@@ -205,7 +205,7 @@ Liferay.TagsEntriesSelector = new Expanse.Class(
 							},
 							close: function() {
 								instance._popupVisible = false;
-								instance.selectTagEntryPopup = null;
+								instance.selectTagPopup = null;
 							}
 						},
 						resizable: false,
@@ -213,7 +213,7 @@ Liferay.TagsEntriesSelector = new Expanse.Class(
 					}
 				);
 
-				instance.selectTagEntryPopup = popup;
+				instance.selectTagPopup = popup;
 			}
 
 			instance._popupVisible = true;
@@ -229,11 +229,11 @@ Liferay.TagsEntriesSelector = new Expanse.Class(
 			}
 		},
 
-		_getTagsEntries: function(term) {
+		_searchTags: function(term) {
 			var beginning = 0;
 			var end = 20;
 
-			return Liferay.Service.Tags.TagsEntry.search(
+			return Liferay.Service.Asset.AssetTag.search(
 				{
 					groupId: themeDisplay.getScopeGroupId(),
 					name: "%" + term + "%",
@@ -244,25 +244,12 @@ Liferay.TagsEntriesSelector = new Expanse.Class(
 			);
 		},
 
-		_getVocabularies: function(folksonomy, callback) {
+		_getTags: function(callback) {
 			var instance = this;
 
-			Liferay.Service.Tags.TagsVocabulary.getGroupVocabularies(
+			Liferay.Service.Asset.AssetTag.getGroupTags(
 				{
-					groupId: themeDisplay.getScopeGroupId(),
-					folksonomy: folksonomy
-				},
-				callback
-			);
-		},
-
-		_getVocabularyEntries: function(vocabulary, callback) {
-			var instance = this;
-
-			Liferay.Service.Tags.TagsEntry.getGroupVocabularyEntries(
-				{
-					groupId: themeDisplay.getScopeGroupId(),
-					name: vocabulary
+					groupId: themeDisplay.getScopeGroupId()
 				},
 				callback
 			);
@@ -285,9 +272,9 @@ Liferay.TagsEntriesSelector = new Expanse.Class(
 						function() {
 							var fieldset = jQuery(this);
 
-							var visibleEntries = fieldset.find('label:visible');
+							var visibleTags = fieldset.find('label:visible');
 
-							if (visibleEntries.length == 0) {
+							if (visibleTags.length == 0) {
 								fieldset.addClass('no-matches');
 							}
 							else {
@@ -301,7 +288,7 @@ Liferay.TagsEntriesSelector = new Expanse.Class(
 			inputSearch.liveSearch(options);
 		},
 
-		_setupSelectTagsEntries: function() {
+		_setupSelectTags: function() {
 			var instance = this;
 
 			var options = instance.options;
@@ -344,63 +331,45 @@ Liferay.TagsEntriesSelector = new Expanse.Class(
 
 			container.empty().html('<div class="loading-animation" />');
 
-			instance._getVocabularies(true,
-				function(vocabularies) {
+			instance._getTags(
+				function(tags) {
 					var buffer = [];
 
-					if (vocabularies.length == 0) {
-						buffer.push('<fieldset class="no-matches"><legend>' + Liferay.Language.get('tag-sets') + '</legend>');
-						buffer.push('<div class="lfr-tag-message">' + searchMessage + '</div>');
-						buffer.push('</fieldset>');
+					buffer.push('<fieldset>');
 
-						container.html(buffer.join(''));
+					jQuery.each(
+						tags,
+						function(i) {
+							var tag = this;
+							var tagName = tag.name;
+							var tagId = tag.tagId;
+							var checked = (instance._curTags.indexOf(tagName) > -1) ? ' checked="checked" ' : '';
+							buffer.push('<label title="');
+							buffer.push(tagName);
+							buffer.push('">');
+							buffer.push('<input type="checkbox" value="');
+							buffer.push(tagName);
+							buffer.push('" ');
+							buffer.push(checked);
+							buffer.push('> ');
+							buffer.push(tagName);
+							buffer.push('</label>');
+						}
+					);
+
+					buffer.push('<div class="lfr-tag-message">' + searchMessage + '</div>');
+					buffer.push('</fieldset>');
+
+					container.html(buffer.join(''));
+
+					if (tags.length == 0) {
+						container.addClass('no-matches');
 					}
 					else {
-						jQuery.each(
-							vocabularies,
-							function(i) {
-								var tagEntrySet = this;
-								var tagEntrySetName = tagEntrySet.name;
-
-								instance._getVocabularyEntries(
-									tagEntrySetName,
-									function(entries) {
-										buffer.push('<fieldset>');
-										buffer.push('<legend class="lfr-tag-set-title">');
-										buffer.push(tagEntrySetName);
-										buffer.push('</legend>');
-
-										jQuery.each(
-											entries,
-											function(i) {
-												var entry = this;
-												var entryName = entry.name;
-												var entryId = entry.entryId;
-												var checked = (instance._curTagsEntries.indexOf(entryName) > -1) ? ' checked="checked" ' : '';
-												buffer.push('<label title="');
-												buffer.push(entryName);
-												buffer.push('">');
-												buffer.push('<input type="checkbox" value="');
-												buffer.push(entryName);
-												buffer.push('" ');
-												buffer.push(checked);
-												buffer.push('> ');
-												buffer.push(entryName);
-												buffer.push('</label>');
-											}
-										);
-
-										buffer.push('<div class="lfr-tag-message">' + searchMessage + '</div>');
-										buffer.push('</fieldset>');
-
-										container.html(buffer.join(''));
-
-										instance._initializeSearch(container);
-									}
-								);
-							}
-						);
+						container.removeClass('no-matches');
 					}
+
+					instance._initializeSearch(container);
 				}
 			);
 
@@ -442,12 +411,12 @@ Liferay.TagsEntriesSelector = new Expanse.Class(
 
 						jQuery.each(
 							obj.ResultSet.Result,
-							function(i, tagEntry) {
-	 							var checked = (instance._curTagsEntries.indexOf(tagEntry) > -1) ? ' checked="checked" ' : '';
+							function(i, tag) {
+	 							var checked = (instance._curTags.indexOf(tag) > -1) ? ' checked="checked" ' : '';
 								var name = ns + 'input' + i;
 
 								buffer.push('<label title="');
-								buffer.push(tagEntry);
+								buffer.push(tag);
 								buffer.push('"><input');
 								buffer.push(checked);
 								buffer.push(' type="checkbox" name="');
@@ -455,9 +424,9 @@ Liferay.TagsEntriesSelector = new Expanse.Class(
 								buffer.push('" id="');
 								buffer.push(name);
 								buffer.push('" value="');
-								buffer.push(tagEntry);
+								buffer.push(tag);
 								buffer.push('" /> ');
-								buffer.push(tagEntry);
+								buffer.push(tag);
 								buffer.push('</label>');
 							}
 						);
@@ -490,40 +459,40 @@ Liferay.TagsEntriesSelector = new Expanse.Class(
 			var instance = this;
 
 			var options = instance.options;
-			var curTagsEntries = instance._curTagsEntries;
+			var curTags = instance._curTags;
 
 			var hiddenInput = jQuery('#' + options.hiddenInput);
 
-			hiddenInput.val(curTagsEntries.join(','));
+			hiddenInput.val(curTags.join(','));
 		},
 
 		_updateSummarySpan: function() {
 			var instance = this;
 
 			var options = instance.options;
-			var curTagsEntries = instance._curTagsEntries;
+			var curTags = instance._curTags;
 
 			var html = '';
 
-			jQuery(curTagsEntries).each(
-				function(i, curTagEntry) {
+			jQuery(curTags).each(
+				function(i, curTag) {
 					html += '<span class="ui-tag" id="' + instance._ns + 'CurTags' + i + '">';
-					html += curTagEntry;
-					html += '<a class="ui-tag-delete" href="javascript:' + instance._ns + '.deleteTagEntry(' + i + ');"><span>x</span></a>';
+					html += curTag;
+					html += '<a class="ui-tag-delete" href="javascript:' + instance._ns + '.deleteTag(' + i + ');"><span>x</span></a>';
 					html += '</span>';
 				}
 			);
 
-			var tagsEntriesSummary = jQuery('#' + options.summarySpan);
+			var tagsSummary = jQuery('#' + options.summarySpan);
 
-			if (curTagsEntries.length) {
-				tagsEntriesSummary.removeClass('empty');
+			if (curTags.length) {
+				tagsSummary.removeClass('empty');
 			}
 			else {
-				tagsEntriesSummary.addClass('empty');
+				tagsSummary.addClass('empty');
 			}
 
-			tagsEntriesSummary.html(html);
+			tagsSummary.html(html);
 		}
 	}
 );

@@ -157,6 +157,22 @@
 		<put name="portlet_content" value="/portlet/asset_publisher/view_content.jsp" />
 	</definition>
 
+	<!-- Asset Tags Admin -->
+
+	<definition name="portlet.asset_tags_admin" extends="portlet" />
+
+	<definition name="portlet.asset_tags_admin.view" extends="portlet.asset_tags_admin">
+		<put name="portlet_content" value="/portlet/asset_tags_admin/view.jsp" />
+	</definition>
+
+	<!-- Asset Tags Navigation -->
+
+	<definition name="portlet.asset_tags_navigation" extends="portlet" />
+
+	<definition name="portlet.asset_tags_navigation.view" extends="portlet.asset_tags_navigation">
+		<put name="portlet_content" value="/portlet/asset_tags_navigation/view.jsp" />
+	</definition>
+
 	<!-- Blogs -->
 
 	<definition name="portlet.blogs" extends="portlet" />
@@ -1138,22 +1154,6 @@
 
 	<definition name="portlet.shopping.view_item" extends="portlet.shopping">
 		<put name="portlet_content" value="/portlet/shopping/view_item.jsp" />
-	</definition>
-
-	<!-- Tags Admin -->
-
-	<definition name="portlet.tags_admin" extends="portlet" />
-
-	<definition name="portlet.tags_admin.view" extends="portlet.tags_admin">
-		<put name="portlet_content" value="/portlet/tags_admin/view.jsp" />
-	</definition>
-
-	<!-- Tags Navigation -->
-
-	<definition name="portlet.tags_entries_navigation" extends="portlet" />
-
-	<definition name="portlet.tags_entries_navigation.view" extends="portlet.tags_entries_navigation">
-		<put name="portlet_content" value="/portlet/tags_entries_navigation/view.jsp" />
 	</definition>
 
 	<!-- Update Manager -->

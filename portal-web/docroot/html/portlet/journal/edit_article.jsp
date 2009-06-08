@@ -712,7 +712,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 		<liferay-ui:error exception="<%= ArticleIdException.class %>" message="please-enter-a-valid-id" />
 		<liferay-ui:error exception="<%= ArticleTitleException.class %>" message="please-enter-a-valid-name" />
 		<liferay-ui:error exception="<%= DuplicateArticleIdException.class %>" message="please-enter-a-unique-id" />
-		<liferay-ui:tags-error />
+		<liferay-ui:asset-tags-error />
 
 		<table class="lfr-table">
 		<tr>

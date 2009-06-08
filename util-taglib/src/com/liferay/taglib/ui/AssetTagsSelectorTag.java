@@ -27,30 +27,28 @@ import com.liferay.taglib.util.IncludeTag;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * <a href="TagsSelectorTag.java.html"><b><i>View Source</i></b></a>
+ * <a href="AssetTagsSelectorTag.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  * @author Jorge Ferrer
  *
  */
-public class TagsSelectorTag extends IncludeTag {
+public class AssetTagsSelectorTag extends IncludeTag {
 
 	public int doStartTag() {
 		HttpServletRequest request =
 			(HttpServletRequest)pageContext.getRequest();
 
-		request.setAttribute("liferay-ui:tags_selector:className", _className);
+		request.setAttribute("liferay-ui:asset_tags_selector:className", _className);
 		request.setAttribute(
-			"liferay-ui:tags_selector:classPK", String.valueOf(_classPK));
+			"liferay-ui:asset_tags_selector:classPK", String.valueOf(_classPK));
 		request.setAttribute(
-			"liferay-ui:tags_selector:folksonomy", String.valueOf(_folksonomy));
+			"liferay-ui:asset_tags_selector:hiddenInput", _hiddenInput);
+		request.setAttribute("liferay-ui:asset_tags_selector:curTags", _curTags);
 		request.setAttribute(
-			"liferay-ui:tags_selector:hiddenInput", _hiddenInput);
-		request.setAttribute("liferay-ui:tags_selector:curTags", _curTags);
+			"liferay-ui:asset_tags_selector:focus", String.valueOf(_focus));
 		request.setAttribute(
-			"liferay-ui:tags_selector:focus", String.valueOf(_focus));
-		request.setAttribute(
-			"liferay-ui:tags_selector:contentCallback",
+			"liferay-ui:asset_tags_selector:contentCallback",
 			String.valueOf(_contentCallback));
 
 		return EVAL_BODY_BUFFERED;
@@ -62,10 +60,6 @@ public class TagsSelectorTag extends IncludeTag {
 
 	public void setClassPK(long classPK) {
 		_classPK = classPK;
-	}
-
-	public void setFolksonomy(boolean folksonomy) {
-		_folksonomy = folksonomy;
 	}
 
 	public void setHiddenInput(String hiddenInput) {
@@ -89,12 +83,11 @@ public class TagsSelectorTag extends IncludeTag {
 	}
 
 	private static final String _PAGE =
-		"/html/taglib/ui/tags_selector/page.jsp";
+		"/html/taglib/ui/asset_tags_selector/page.jsp";
 
 	private String _className;
 	private long _classPK;
-	private boolean _folksonomy = true;
-	private String _hiddenInput;
+	private String _hiddenInput = "assetTagNames";
 	private String _curTags;
 	private boolean _focus;
 	private String _contentCallback;

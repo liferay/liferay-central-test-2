@@ -24,19 +24,19 @@
 
 <%@ include file="/html/taglib/init.jsp" %>
 
-<%@ page import="com.liferay.portlet.tags.TagsEntryException" %>
+<%@ page import="com.liferay.portlet.asset.AssetTagException" %>
 
-<liferay-ui:error exception="<%= TagsEntryException.class %>">
+<liferay-ui:error exception="<%= AssetTagException.class %>">
 
 	<%
-	TagsEntryException tee = (TagsEntryException)errorException;
+	AssetTagException tee = (AssetTagException)errorException;
 	%>
 
 	<c:choose>
-		<c:when test="<%= tee.getType() == TagsEntryException.AT_LEAST_ONE_TAG %>">
+		<c:when test="<%= tee.getType() == AssetTagException.AT_LEAST_ONE_TAG %>">
 			<liferay-ui:message key="please-enter-at-least-one-tag" />
 		</c:when>
-		<c:when test="<%= tee.getType() == TagsEntryException.INVALID_CHARACTER %>">
+		<c:when test="<%= tee.getType() == AssetTagException.INVALID_CHARACTER %>">
 			<liferay-ui:message key="one-or-more-tags-contains-invalid-characters" />
 		</c:when>
 	</c:choose>

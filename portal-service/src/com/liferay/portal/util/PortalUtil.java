@@ -133,6 +133,14 @@ public class PortalUtil {
 		getPortal().copyRequestParameters(actionRequest, actionResponse);
 	}
 
+	public static String[] getAssetTagNames(PortletRequest portletRequest) {
+		return getPortal().getAssetTagNames(portletRequest);
+	}
+
+	public static String[] getAssetCategoryIds(PortletRequest portletRequest) {
+		return getPortal().getAssetTagNames(portletRequest);
+	}
+
 	public static String getCDNHost() {
 		return getPortal().getCDNHost();
 	}
@@ -734,14 +742,6 @@ public class PortalUtil {
 
 	public static String[] getSystemRoles() {
 		return getPortal().getSystemRoles();
-	}
-
-	public static String[] getTagsCategories(PortletRequest portletRequest) {
-		return getPortal().getTagsCategories(portletRequest);
-	}
-
-	public static String[] getTagsEntries(PortletRequest portletRequest) {
-		return getPortal().getTagsEntries(portletRequest);
 	}
 
 	public static UploadPortletRequest getUploadPortletRequest(
