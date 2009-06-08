@@ -36,7 +36,8 @@ public interface SessionFactory {
 
 	public Dialect getDialect() throws ORMException;
 
+	public Session openNewSession(Connection connection) throws ORMException;
+
 	public Session openSession() throws ORMException;
 
-	public Session openNewSession(Connection connection) throws ORMException;
 }

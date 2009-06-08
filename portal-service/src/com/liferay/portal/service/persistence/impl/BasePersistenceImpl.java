@@ -33,9 +33,10 @@ import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.service.persistence.BasePersistence;
 
+import java.sql.Connection;
+
 import java.util.List;
 
-import java.sql.Connection;
 import javax.sql.DataSource;
 
 /**

@@ -31,6 +31,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.util.PropsValues;
 
 import java.sql.Connection;
+
 import org.hibernate.engine.SessionFactoryImplementor;
 
 /**
@@ -53,6 +54,13 @@ public class SessionFactoryImpl implements SessionFactory {
 
 	public SessionFactoryImplementor getSessionFactoryImplementor() {
 		return _sessionFactoryImplementor;
+	}
+
+	public Session openNewSession(Connection connection) throws ORMException {
+		Session session = new SessionImpl(
+			_sessionFactoryImplementor.openSession(connection));
+
+		return session;
 	}
 
 	public Session openSession() throws ORMException {
@@ -79,13 +87,6 @@ public class SessionFactoryImpl implements SessionFactory {
 		}
 
 		return new SessionImpl(session);
-	}
-
-	public Session openNewSession(Connection connection) throws ORMException {
-		Session session = new SessionImpl(
-			_sessionFactoryImplementor.openSession(connection));
-
-		return session;
 	}
 
 	public void setSessionFactoryImplementor(
