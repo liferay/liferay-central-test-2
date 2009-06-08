@@ -186,7 +186,6 @@
 		};
 
 		var themeDisplay = Liferay.ThemeDisplay;
-		var propsValues = Liferay.PropsValues;
 	// ]]>
 </script>
 
