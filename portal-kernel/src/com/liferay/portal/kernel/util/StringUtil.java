@@ -39,6 +39,8 @@ import java.util.Enumeration;
 import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * <a href="StringUtil.java.html"><b><i>View Source</i></b></a>
@@ -283,17 +285,23 @@ public class StringUtil {
 		//return s.replaceAll(
 		//	"(?i)" + keywords, highlight1 + keywords + highlight2);
 
-		StringBuilder sb = new StringBuilder(StringPool.SPACE);
+		StringBuilder sb = new StringBuilder();
 
 		StringTokenizer st = new StringTokenizer(s);
+
+		Pattern pattern = Pattern.compile(
+			Pattern.quote(keywords), Pattern.CASE_INSENSITIVE);
 
 		while (st.hasMoreTokens()) {
 			String token = st.nextToken();
 
-			if (token.equalsIgnoreCase(keywords)) {
-				sb.append(highlight1);
-				sb.append(token);
-				sb.append(highlight2);
+			Matcher matcher = pattern.matcher(token);
+
+			if (matcher.find() && Validator.isNotNull(keywords)) {
+				String highlightedToken = matcher.replaceAll(
+					highlight1 + matcher.group() + highlight2);
+
+				sb.append(highlightedToken);
 			}
 			else {
 				sb.append(token);
