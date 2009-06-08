@@ -36,43 +36,59 @@ else {
 
 long groupId = ParamUtil.getLong(request, "groupId");
 
-String defaultKeywords = LanguageUtil.get(pageContext, "search") + "...";
-String unicodeDefaultKeywords = UnicodeFormatter.toString(defaultKeywords);
-
-String keywords = ParamUtil.getString(request, "keywords", defaultKeywords);
+String keywords = ParamUtil.getString(request, "keywords");
 
 String format = ParamUtil.getString(request, "format");
 %>
 
-<form action="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/search/search" /></portlet:renderURL>" method="post" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
+<script type="text/javascript">
+	function <portlet:namespace />search() {
+		var keywords = document.<portlet:namespace />fm.<portlet:namespace />keywords.value;
+
+		keywords = keywords.replace(/^\s+|\s+$/, '');
+
+		if (keywords != '') {
+			document.<portlet:namespace />fm.submit();
+		}
+	}
+</script>
+
+<form action="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/search/search" /></portlet:renderURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />search(); return false;">
 <input name="<portlet:namespace />format" type="hidden" value="<%= HtmlUtil.escape(format) %>" />
 
-<input name="<portlet:namespace />keywords" size="30" type="text" value="<%= HtmlUtil.escape(keywords) %>" onBlur="if (this.value == '') { this.value = '<%= unicodeDefaultKeywords %>'; }" onFocus="if (this.value == '<%= unicodeDefaultKeywords %>') { this.value = ''; }" />
+<input name="<portlet:namespace />keywords" size="30" type="text" value="<%= HtmlUtil.escape(keywords) %>" />
 
-<input align="absmiddle" border="0" src="<%= themeDisplay.getPathThemeImages() %>/common/search.png" title="<liferay-ui:message key="search" />" type="image" />
+<input type="submit" value="<liferay-ui:message key="search" />" />
 
-<br /><br />
+<input type="button" value="<liferay-ui:message key="add-liferay-as-a-search-provider" />" onClick='window.external.AddSearchProvider("http://localhost:8080/c/search/open_search_description.xml");' />
 
 <%
-List portlets = PortletLocalServiceUtil.getPortlets(company.getCompanyId(), false, false);
+List<Portlet> portlets = PortletLocalServiceUtil.getPortlets(company.getCompanyId(), false, false);
 
 portlets = ListUtil.sort(portlets, new PortletTitleComparator(application, locale));
 
 Iterator itr = portlets.iterator();
+
+StringBuilder sb = new StringBuilder();
 
 while (itr.hasNext()) {
 	Portlet portlet = (Portlet)itr.next();
 
 	if (Validator.isNull(portlet.getOpenSearchClass())) {
 		itr.remove();
-	}
-	else {
-		OpenSearch openSearch = portlet.getOpenSearchInstance();
 
-		if (!openSearch.isEnabled()) {
-			itr.remove();
-		}
+		continue;
 	}
+
+	OpenSearch openSearch = portlet.getOpenSearchInstance();
+
+	if (!openSearch.isEnabled()) {
+		itr.remove();
+
+		continue;
+	}
+
+	sb.append(PortalUtil.getPortletTitle(portlet, application, locale) + StringPool.COMMA_AND_SPACE);
 }
 
 if (Validator.isNotNull(primarySearch)) {
@@ -91,13 +107,15 @@ if (Validator.isNotNull(primarySearch)) {
 }
 %>
 
-<input type="button" value="<liferay-ui:message key="add-liferay-as-a-search-provider" />" onClick='window.external.AddSearchProvider("http://localhost:8080/c/search/open_search_description.xml");' />
-
-<br /><br />
-
-<table class="lfr-table" width="100%">
+<c:if test="<%= sb.length() > 0 %>">
+	<div class="search-msg">
+		<liferay-ui:message key="searched" /> <%= sb.substring(0, sb.length() - 2) %>
+	</div>
+</c:if>
 
 <%
+int totalResults = 0;
+
 for (int i = 0; i < portlets.size(); i++) {
 	Portlet portlet = (Portlet)portlets.get(i);
 
@@ -111,17 +129,17 @@ for (int i = 0; i < portlets.size(); i++) {
 	portletURL.setParameter("keywords", keywords);
 	portletURL.setParameter("format", format);
 
-	List<String> headerNames = new ArrayList<String>();
+	//List<String> headerNames = new ArrayList<String>();
 
-	headerNames.add("#");
-	headerNames.add("summary");
-	headerNames.add("tags");
+	//headerNames.add("#");
+	//headerNames.add("summary");
+	//headerNames.add("tags");
 	//headerNames.add("score");
 
-	SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM + i, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, LanguageUtil.format(pageContext, "no-results-were-found-that-matched-the-keywords-x", "<b>" + HtmlUtil.escape(keywords) + "</b>"));
+	SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM + i, 5, portletURL, null, LanguageUtil.format(pageContext, "no-results-were-found-that-matched-the-keywords-x", "<b>" + HtmlUtil.escape(keywords) + "</b>"));
 
-	if (i > 0) {
-		searchContainer.setDelta(5);
+	if (Validator.isNotNull(primarySearch) && portlet.getOpenSearchClass().equals(primarySearch)) {
+		searchContainer.setDelta(SearchContainer.DEFAULT_DELTA);
 	}
 
 	String portletTitle = PortalUtil.getPortletTitle(portlet, application, locale);
@@ -152,7 +170,7 @@ for (int i = 0; i < portlets.size(); i++) {
 
 			// Position
 
-			row.addText(searchContainer.getStart() + j + 1 + StringPool.PERIOD);
+			//row.addText(SearchEntry.DEFAULT_ALIGN, "top", searchContainer.getStart() + j + 1 + StringPool.PERIOD);
 
 			// Summary
 
@@ -169,30 +187,34 @@ for (int i = 0; i < portlets.size(); i++) {
 				entryTitle = fileEntry.getTitle();
 			}
 
-			StringBuilder sb = new StringBuilder();
-
-			sb.append("<a href=\"");
-			sb.append(entryHref);
-			sb.append("\"");
+			StringBuilder sb2 = new StringBuilder();
 
 			if (portlet.getPortletId().equals(PortletKeys.JOURNAL)) {
-				sb.append(" target=\"_blank\"");
+				sb2.append("<a class=\"entry-title\" href=\"" + entryHref + "\" target=\"_blank\">");
+			}
+			else {
+				sb2.append("<a class=\"entry-title\" href=\"" + entryHref + "\">");
 			}
 
-			sb.append(">");
-			sb.append("<span style=\"font-style: italic;\">");
-			sb.append(entryTitle);
-			sb.append("</span><br />");
-			sb.append(summary);
-			sb.append("</a>");
+			sb2.append(StringUtil.highlight(entryTitle, keywords));
+			sb2.append("</a>");
 
-			row.addText(StringUtil.highlight(sb.toString(), keywords));
+			if (Validator.isNotNull(summary)) {
+				sb2.append("<br />");
+				sb2.append(StringUtil.highlight(summary, keywords));
+			}
+
+			sb2.append("<br />");
 
 			// Tags
 
-			sb = new StringBuilder();
-
 			String[] tags = StringUtil.split(el.elementText("tags"));
+
+			String tagsKeywords = keywords;
+
+			if (StringUtil.startsWith(tagsKeywords, Field.TAGS_ENTRIES + StringPool.COLON)) {
+				tagsKeywords = StringUtil.replace(tagsKeywords, Field.TAGS_ENTRIES + StringPool.COLON, StringPool.BLANK);
+			}
 
 			for (int k = 0; k < tags.length; k++) {
 				String tag = tags[k];
@@ -202,28 +224,32 @@ for (int i = 0; i < portlets.size(); i++) {
 				tagURL.setParameter("keywords", Field.TAGS_ENTRIES + StringPool.COLON + tag);
 				tagURL.setParameter("format", format);
 
-				sb.append("<a href=\"");
-				sb.append(tagURL.toString());
-				sb.append("\">");
-				sb.append(tag);
-				sb.append("</a>");
+				if (k == 0) {
+					sb2.append("<div class=\"entry-tags\">");
+					sb2.append("<div class=\"taglib-tags-summary\">");
+				}
 
-				if ((k + 1) < tags.length) {
-					sb.append(", ");
+				sb2.append("<a class=\"tag\" href=\"" + tagURL.toString() + "\">");
+				sb2.append(StringUtil.highlight(tag, tagsKeywords));
+				sb2.append("</a>");
+
+				if ((k + 1) == tags.length) {
+					sb2.append("</div>");
+					sb2.append("</div>");
 				}
 			}
 
-			row.addText(StringUtil.highlight(sb.toString(), keywords));
+			row.addText(sb2.toString());
 
 			// Ratings
 
-			String ratings = el.elementText("ratings");
+			//String ratings = el.elementText("ratings");
 
 			//row.addText(ratings);
 
 			// Score
 
-			String score = el.elementText(OpenSearchUtil.getQName("score", OpenSearchUtil.RELEVANCE_NAMESPACE));
+			//String score = el.elementText(OpenSearchUtil.getQName("score", OpenSearchUtil.RELEVANCE_NAMESPACE));
 
 			//row.addText(score);
 
@@ -237,61 +263,41 @@ for (int i = 0; i < portlets.size(); i++) {
 	}
 %>
 
-	<c:choose>
-		<c:when test="<%= (i == 0) && (portlets.size() == 1) %>">
-			<tr>
-				<td valign="top" width="100%">
-		</c:when>
-		<c:when test="<%= (i == 0) && (portlets.size() > 1) %>">
-			<tr>
-				<td valign="top" width="70%">
-		</c:when>
-		<c:when test="<%= i == 1 %>">
-			<td valign="top" width="30%">
-		</c:when>
-	</c:choose>
+	<c:if test="<%= searchContainer.getTotal() > 0 %>">
 
-	<c:if test="<%= i > 1 %>">
-		<br />
+		<%
+		totalResults = totalResults + searchContainer.getTotal();
+		%>
+
+		<div class="section-title">
+			<%= portletTitle %> (<%= searchContainer.getTotal() %>)
+		</div>
+
+		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" paginate="<%= false %>" />
+
+		<c:choose>
+			<c:when test="<%= Validator.isNotNull(primarySearch) && portlet.getOpenSearchClass().equals(primarySearch) %>">
+				<div class="search-paginator-container">
+					<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
+				</div>
+			</c:when>
+			<c:otherwise>
+				<div class="more-results">
+					<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/search/search" /><portlet:param name="primarySearch" value="<%= portlet.getOpenSearchClass() %>" /><portlet:param name="keywords" value="<%= HtmlUtil.escape(keywords) %>" /><portlet:param name="format" value="<%= format %>" /></portlet:renderURL>"><%= LanguageUtil.format(pageContext, "more-x-results", portletTitle) %> &raquo;</a>
+				</div>
+			</c:otherwise>
+		</c:choose>
 	</c:if>
-
-	<div style="padding-bottom: 5px;">
-		<b><%= portletTitle %></b>
-	</div>
-
-	<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" paginate="<%= false %>" />
-
-	<c:choose>
-		<c:when test="<%= i == 0 %>">
-			<div class="taglib-search-iterator-page-iterator-bottom">
-				<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
-			</div>
-		</c:when>
-		<c:otherwise>
-			<div style="padding-top: 5px;">
-				<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/search/search" /><portlet:param name="primarySearch" value="<%= portlet.getOpenSearchClass() %>" /><portlet:param name="keywords" value="<%= HtmlUtil.escape(keywords) %>" /><portlet:param name="format" value="<%= format %>" /></portlet:renderURL>"><liferay-ui:message key="more" /> &raquo;</a>
-			</div>
-		</c:otherwise>
-	</c:choose>
-
-	<c:choose>
-		<c:when test="<%= (i == 0) && (portlets.size() == 1) %>">
-			</td>
-		</c:when>
-		<c:when test="<%= (i == 0) && (portlets.size() > 1) %>">
-			</td>
-		</c:when>
-		<c:when test="<%= (i + 1) == portlets.size() %>">
-				</td>
-			</tr>
-		</c:when>
-	</c:choose>
 
 <%
 }
 %>
 
-</table>
+<c:if test="<%= totalResults == 0 %>">
+	<div class="no-results">
+		<%= LanguageUtil.format(pageContext, "no-results-were-found-that-matched-the-keywords-x", "<b>" + HtmlUtil.escape(keywords) + "</b>") %>
+	</div>
+</c:if>
 
 </form>
 
@@ -300,6 +306,24 @@ for (int i = 0; i < portlets.size(); i++) {
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />keywords);
 	</script>
 </c:if>
+
+<%
+String pageSubtitle = LanguageUtil.get(pageContext, "search-results");
+String pageDescription = LanguageUtil.get(pageContext, "searched") + StringPool.SPACE + sb.substring(0, sb.length() - 2);
+String pageKeywords = LanguageUtil.get(pageContext, "search");
+
+if (Validator.isNotNull(keywords)) {
+	pageKeywords = keywords;
+
+	if (StringUtil.startsWith(pageKeywords, Field.TAGS_ENTRIES + StringPool.COLON)) {
+		pageKeywords = StringUtil.replace(pageKeywords, Field.TAGS_ENTRIES + StringPool.COLON, StringPool.BLANK);
+	}
+}
+
+PortalUtil.setPageSubtitle(pageSubtitle, request);
+PortalUtil.setPageDescription(pageDescription, request);
+PortalUtil.setPageKeywords(pageKeywords, request);
+%>
 
 <%!
 private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.html.portlet.search.search.jsp");

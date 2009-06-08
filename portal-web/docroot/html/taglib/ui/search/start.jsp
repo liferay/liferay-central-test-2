@@ -29,10 +29,7 @@ long groupId = ParamUtil.getLong(request, "groupId");
 
 Group group = layout.getGroup();
 
-String defaultKeywords = LanguageUtil.get(pageContext, "search") + "...";
-String unicodeDefaultKeywords = UnicodeFormatter.toString(defaultKeywords);
-
-String keywords = ParamUtil.getString(request, namespace + "keywords", defaultKeywords);
+String keywords = ParamUtil.getString(request, namespace + "keywords");
 
 PortletURL portletURL = new PortletURLImpl(request, PortletKeys.SEARCH, plid, PortletRequest.RENDER_PHASE);
 
@@ -42,9 +39,21 @@ portletURL.setPortletMode(PortletMode.VIEW);
 portletURL.setParameter("struts_action", "/search/search");
 %>
 
-<form action="<%= portletURL.toString() %>" method="post" name="<%= namespace %>fm" onSubmit="submitForm(this); return false;">
+<script type="text/javascript">
+	function <%= randomNamespace %><%= namespace %>search() {
+		var keywords = document.<%= randomNamespace %><%= namespace %>fm.<%= namespace %>keywords.value;
 
-<input name="<%= namespace %>keywords" size="30" type="text" value="<%= HtmlUtil.escape(keywords) %>" onBlur="if (this.value == '') { this.value = '<%= unicodeDefaultKeywords %>'; }" onFocus="if (this.value == '<%= unicodeDefaultKeywords %>') { this.value = ''; }" />
+		keywords = keywords.replace(/^\s+|\s+$/, '');
+
+		if (keywords != '') {
+			document.<%= randomNamespace %><%= namespace %>fm.submit();
+		}
+	}
+</script>
+
+<form action="<%= portletURL.toString() %>" method="post" name="<%= randomNamespace %><%= namespace %>fm" onSubmit="<%= randomNamespace %><%= namespace %>search(); return false;">
+
+<input name="<%= namespace %>keywords" size="30" type="text" value="<%= HtmlUtil.escape(keywords) %>" />
 
 <select name="<%= namespace %>groupId">
 	<option value="0" <%= (groupId == 0) ? "selected" : "" %>><liferay-ui:message key="everything" /></option>

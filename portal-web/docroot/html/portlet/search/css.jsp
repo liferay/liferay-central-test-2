@@ -22,10 +22,40 @@
  */
 %>
 
-<%@ include file="/html/taglib/init.jsp" %>
+<%@ include file="/html/portlet/css_init.jsp" %>
 
-<%
-String randomNamespace = PwdGenerator.getPassword(PwdGenerator.KEY3, 4);
+.portlet-search .entry-tags {
+	margin: 3px 0 0;
+}
 
-namespace = StringPool.UNDERLINE + PortletKeys.SEARCH + StringPool.UNDERLINE;
-%>
+.portlet-search .entry-title {
+	font-size: 1.3em;
+}
+
+.portlet-search .more-results {
+	font-size: 1.1em;
+	padding: 5px 0;
+}
+
+.portlet-search .no-results {
+	font-size: 1.3em;
+	margin: 10px 0 0;
+}
+
+.portlet-search .search-msg {
+	border-bottom: 1px solid #DEDEDE;
+	color: #777;
+	margin: 15px 0;
+	padding: 2px 5px;
+	text-align: right;
+}
+
+.portlet-search .search-paginator-container {
+	padding: 5px 0;
+}
+
+.portlet-search .section-title {
+	font-size: 1.3em;
+	font-weight: bold;
+	margin: 10px 0;
+}
