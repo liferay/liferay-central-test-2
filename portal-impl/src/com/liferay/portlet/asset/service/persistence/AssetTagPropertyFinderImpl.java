@@ -29,8 +29,8 @@ import com.liferay.portal.kernel.dao.orm.SQLQuery;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.dao.orm.Type;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
-import com.liferay.portlet.asset.model.AssetCategoryProperty;
-import com.liferay.portlet.asset.model.impl.AssetCategoryPropertyImpl;
+import com.liferay.portlet.asset.model.AssetTagProperty;
+import com.liferay.portlet.asset.model.impl.AssetTagPropertyImpl;
 import com.liferay.util.dao.orm.CustomSQLUtil;
 
 import java.util.ArrayList;
@@ -38,21 +38,19 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * <a href="AssetCategoryPropertyFinderImpl.java.html"><b><i>View Source</i></b>
- * </a>
+ * <a href="AssetTagPropertyFinderImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- * @author Jorge Ferrer
  *
  */
-public class AssetCategoryPropertyFinderImpl
-	extends BasePersistenceImpl implements AssetCategoryPropertyFinder {
+public class AssetTagPropertyFinderImpl
+	extends BasePersistenceImpl implements AssetTagPropertyFinder {
 
 	public static String COUNT_BY_G_K =
-		AssetCategoryPropertyFinder.class.getName() + ".countByG_K";
+		AssetTagPropertyFinder.class.getName() + ".countByG_K";
 
 	public static String FIND_BY_G_K =
-		AssetCategoryPropertyFinder.class.getName() + ".findByG_K";
+		AssetTagPropertyFinder.class.getName() + ".findByG_K";
 
 	public int countByG_K(long groupId, String key) throws SystemException {
 		Session session = null;
@@ -91,13 +89,13 @@ public class AssetCategoryPropertyFinderImpl
 		}
 	}
 
-	public List<AssetCategoryProperty> findByG_K(long groupId, String key)
+	public List<AssetTagProperty> findByG_K(long groupId, String key)
 		throws SystemException {
 
 		return findByG_K(groupId, key, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 	}
 
-	public List<AssetCategoryProperty> findByG_K(
+	public List<AssetTagProperty> findByG_K(
 			long groupId, String key, int start, int end)
 		throws SystemException {
 
@@ -110,15 +108,15 @@ public class AssetCategoryPropertyFinderImpl
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addScalar("categoryPropertyValue", Type.STRING);
+			q.addScalar("tagPropertyValue", Type.STRING);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			qPos.add(groupId);
 			qPos.add(key);
 
-			List<AssetCategoryProperty> categoryProperties =
-				new ArrayList<AssetCategoryProperty>();
+			List<AssetTagProperty> tagProperties =
+				new ArrayList<AssetTagProperty>();
 
 			Iterator<String> itr = (Iterator<String>)QueryUtil.iterate(
 				q, getDialect(), start, end);
@@ -126,16 +124,15 @@ public class AssetCategoryPropertyFinderImpl
 			while (itr.hasNext()) {
 				String value = itr.next();
 
-				AssetCategoryProperty categoryProperty =
-					new AssetCategoryPropertyImpl();
+				AssetTagProperty tagProperty = new AssetTagPropertyImpl();
 
-				categoryProperty.setKey(key);
-				categoryProperty.setValue(value);
+				tagProperty.setKey(key);
+				tagProperty.setValue(value);
 
-				categoryProperties.add(categoryProperty);
+				tagProperties.add(tagProperty);
 			}
 
-			return categoryProperties;
+			return tagProperties;
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

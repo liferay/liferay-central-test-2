@@ -32,39 +32,41 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
-import com.liferay.portlet.asset.NoSuchCategoryException;
-import com.liferay.portlet.asset.model.AssetCategory;
-import com.liferay.portlet.asset.model.impl.AssetCategoryImpl;
+import com.liferay.portlet.asset.NoSuchTagException;
+import com.liferay.portlet.asset.model.AssetTag;
+import com.liferay.portlet.asset.model.impl.AssetTagImpl;
 import com.liferay.util.dao.orm.CustomSQLUtil;
 
 import java.util.Iterator;
 import java.util.List;
 
 /**
- * <a href="AssetCategoryFinderImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="AssetTagFinderImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  * @author Bruno Farache
- * @author Jorge Ferrer
  *
  */
-public class AssetCategoryFinderImpl
-	extends BasePersistenceImpl implements AssetCategoryFinder {
+public class AssetTagFinderImpl
+	extends BasePersistenceImpl implements AssetTagFinder {
 
 	public static String COUNT_BY_G_C_N =
-		AssetCategoryFinder.class.getName() + ".countByG_C_N";
+		AssetTagFinder.class.getName() + ".countByG_C_N";
 
 	public static String COUNT_BY_G_N_P =
-		AssetCategoryFinder.class.getName() + ".countByG_N_P";
+		AssetTagFinder.class.getName() + ".countByG_N_P";
 
 	public static String FIND_BY_ENTRY_ID =
-		AssetCategoryFinder.class.getName() + ".findByEntryId";
+		AssetTagFinder.class.getName() + ".findByEntryId";
 
 	public static String FIND_BY_G_N =
-		AssetCategoryFinder.class.getName() + ".findByG_N";
+		AssetTagFinder.class.getName() + ".findByG_N";
+
+	public static String FIND_BY_G_C_N =
+		AssetTagFinder.class.getName() + ".findByG_C_N";
 
 	public static String FIND_BY_G_N_P =
-		AssetCategoryFinder.class.getName() + ".findByG_N_P";
+		AssetTagFinder.class.getName() + ".findByG_N_P";
 
 	public int countByG_C_N(long groupId, long classNameId, String name)
 		throws SystemException {
@@ -107,7 +109,7 @@ public class AssetCategoryFinderImpl
 		}
 	}
 
-	public int countByG_N_P(long groupId, String name, String[] properties)
+	public int countByG_N_P(long groupId, String name, String[] tagProperties)
 		throws SystemException {
 
 		Session session = null;
@@ -123,7 +125,7 @@ public class AssetCategoryFinderImpl
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
-			setJoin(qPos, properties);
+			setJoin(qPos, tagProperties);
 			qPos.add(groupId);
 			qPos.add(name);
 			qPos.add(name);
@@ -148,7 +150,7 @@ public class AssetCategoryFinderImpl
 		}
 	}
 
-	public List<AssetCategory> findByEntryId(long entryId)
+	public List<AssetTag> findByEntryId(long entryId)
 		throws SystemException {
 
 		Session session = null;
@@ -160,13 +162,13 @@ public class AssetCategoryFinderImpl
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity("AssetCategory", AssetCategoryImpl.class);
+			q.addEntity("AssetTag", AssetTagImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			qPos.add(entryId);
 
-			return (List<AssetCategory>) QueryUtil.list(
+			return (List<AssetTag>) QueryUtil.list(
 				q, getDialect(), QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 		}
 		catch (Exception e) {
@@ -177,47 +179,47 @@ public class AssetCategoryFinderImpl
 		}
 	}
 
-	public AssetCategory findByG_N(long groupId, String name)
-		throws NoSuchCategoryException, SystemException {
-
+	public AssetTag findByG_N(long groupId, String name)
+		throws NoSuchTagException, SystemException {
+	
 		name = name.trim().toLowerCase();
-
+	
 		Session session = null;
-
+	
 		try {
 			session = openSession();
-
+	
 			String sql = CustomSQLUtil.get(FIND_BY_G_N);
-
+	
 			SQLQuery q = session.createSQLQuery(sql);
-
-			q.addEntity("AssetCategory", AssetCategoryImpl.class);
-
+	
+			q.addEntity("AssetTag", AssetTagImpl.class);
+	
 			QueryPos qPos = QueryPos.getInstance(q);
-
+	
 			qPos.add(groupId);
 			qPos.add(name);
-
-			List<AssetCategory> list = q.list();
-
+	
+			List<AssetTag> list = q.list();
+	
 			if (list.size() == 0) {
 				StringBuilder sb = new StringBuilder();
-
-				sb.append("No AssetCategory exists with the key ");
+	
+				sb.append("No AssetTag exists with the key ");
 				sb.append("{groupId=");
 				sb.append(groupId);
 				sb.append(", name=");
 				sb.append(name);
 				sb.append("}");
-
-				throw new NoSuchCategoryException(sb.toString());
+	
+				throw new NoSuchTagException(sb.toString());
 			}
 			else {
 				return list.get(0);
 			}
 		}
-		catch (NoSuchCategoryException nsee) {
-			throw nsee;
+		catch (NoSuchTagException nste) {
+			throw nste;
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -227,17 +229,56 @@ public class AssetCategoryFinderImpl
 		}
 	}
 
-	public List<AssetCategory> findByG_N_P(
-			long groupId, String name, String[] categoryProperties)
+	public List<AssetTag> findByG_C_N(
+			long groupId, long classNameId, String name)
+		throws SystemException {
+
+		return findByG_C_N(
+			groupId, classNameId, name, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+	}
+
+	public List<AssetTag> findByG_C_N(
+			long groupId, long classNameId, String name, int start, int end)
+		throws SystemException {
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			String sql = CustomSQLUtil.get(FIND_BY_G_C_N);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity("AssetTag", AssetTagImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+			qPos.add(classNameId);
+			qPos.add(name);
+			qPos.add(name);
+
+			return (List<AssetTag>)QueryUtil.list(q, getDialect(), start, end);
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public List<AssetTag> findByG_N_P(
+			long groupId, String name, String[] tagProperties)
 		throws SystemException {
 
 		return findByG_N_P(
-			groupId, name, categoryProperties, QueryUtil.ALL_POS,
-			QueryUtil.ALL_POS);
+			groupId, name, tagProperties, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 	}
 
-	public List<AssetCategory> findByG_N_P(
-			long groupId, String name, String[] categoryProperties, int start,
+	public List<AssetTag> findByG_N_P(
+			long groupId, String name, String[] tagProperties, int start,
 			int end)
 		throws SystemException {
 
@@ -248,22 +289,20 @@ public class AssetCategoryFinderImpl
 
 			String sql = CustomSQLUtil.get(FIND_BY_G_N_P);
 
-			sql = StringUtil.replace(
-				sql, "[$JOIN$]", getJoin(categoryProperties));
+			sql = StringUtil.replace(sql, "[$JOIN$]", getJoin(tagProperties));
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity("AssetCategory", AssetCategoryImpl.class);
+			q.addEntity("AssetTag", AssetTagImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
-			setJoin(qPos, categoryProperties);
+			setJoin(qPos, tagProperties);
 			qPos.add(groupId);
 			qPos.add(name);
 			qPos.add(name);
 
-			return (List<AssetCategory>)QueryUtil.list(
-				q, getDialect(), start, end);
+			return (List<AssetTag>)QueryUtil.list(q, getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -273,22 +312,21 @@ public class AssetCategoryFinderImpl
 		}
 	}
 
-	protected String getJoin(String[] categoryProperties) {
-		if (categoryProperties.length == 0) {
+	protected String getJoin(String[] tagProperties) {
+		if (tagProperties.length == 0) {
 			return StringPool.BLANK;
 		}
 		else {
 			StringBuilder sb = new StringBuilder();
 
-			sb.append(" INNER JOIN AssetCategoryProperty ON ");
-			sb.append(" (AssetCategoryProperty.categoryId = ");
-			sb.append(" AssetCategory.categoryId) AND ");
+			sb.append(" INNER JOIN AssetTagProperty ON ");
+			sb.append(" (AssetTagProperty.tagId = AssetTag.tagId) AND ");
 
-			for (int i = 0; i < categoryProperties.length; i++) {
-				sb.append("(AssetCategoryProperty.key_ = ? AND ");
-				sb.append("AssetCategoryProperty.value = ?) ");
+			for (int i = 0; i < tagProperties.length; i++) {
+				sb.append("(AssetTagProperty.key_ = ? AND ");
+				sb.append("AssetTagProperty.value = ?) ");
 
-				if ((i + 1) < categoryProperties.length) {
+				if ((i + 1) < tagProperties.length) {
 					sb.append(" AND ");
 				}
 			}
@@ -297,21 +335,21 @@ public class AssetCategoryFinderImpl
 		}
 	}
 
-	protected void setJoin(QueryPos qPos, String[] categoryProperties) {
-		for (int i = 0; i < categoryProperties.length; i++) {
-			String[] categoryProperty = StringUtil.split(
-				categoryProperties[i], StringPool.COLON);
+	protected void setJoin(QueryPos qPos, String[] tagProperties) {
+		for (int i = 0; i < tagProperties.length; i++) {
+			String[] tagProperty = StringUtil.split(
+				tagProperties[i], StringPool.COLON);
 
 			String key = StringPool.BLANK;
 
-			if (categoryProperty.length > 0) {
-				key = GetterUtil.getString(categoryProperty[0]);
+			if (tagProperty.length > 0) {
+				key = GetterUtil.getString(tagProperty[0]);
 			}
 
 			String value = StringPool.BLANK;
 
-			if (categoryProperty.length > 1) {
-				value = GetterUtil.getString(categoryProperty[1]);
+			if (tagProperty.length > 1) {
+				value = GetterUtil.getString(tagProperty[1]);
 			}
 
 			qPos.add(key);

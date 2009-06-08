@@ -38,6 +38,7 @@ import com.liferay.portlet.asset.DuplicateCategoryException;
 import com.liferay.portlet.asset.model.AssetCategory;
 import com.liferay.portlet.asset.model.AssetCategoryConstants;
 import com.liferay.portlet.asset.model.AssetCategoryProperty;
+import com.liferay.portlet.asset.model.AssetEntry;
 import com.liferay.portlet.asset.service.base.AssetCategoryLocalServiceBaseImpl;
 import com.liferay.portlet.tags.model.TagsAsset;
 import com.liferay.util.Autocomplete;
@@ -204,12 +205,6 @@ public class AssetCategoryLocalServiceImpl
 		}
 	}
 
-	public List<AssetCategory> getAssetCategories(long assetId)
-		throws SystemException {
-
-		return assetCategoryFinder.findByAssetId(assetId);
-	}
-
 	public List<AssetCategory> getCategories() throws SystemException {
 		return assetCategoryPersistence.findAll();
 	}
@@ -217,13 +212,14 @@ public class AssetCategoryLocalServiceImpl
 	public List<AssetCategory> getCategories(long classNameId, long classPK)
 		throws SystemException {
 
-		TagsAsset asset = tagsAssetPersistence.fetchByC_C(classNameId, classPK);
+		AssetEntry entry = assetEntryPersistence.fetchByC_C(
+			classNameId, classPK);
 
-		if (asset == null) {
+		if (entry == null) {
 			return new ArrayList<AssetCategory>();
 		}
 		else {
-			return getAssetCategories(asset.getAssetId());
+			return getEntryCategories(entry.getEntryId());
 		}
 	}
 
@@ -246,6 +242,12 @@ public class AssetCategoryLocalServiceImpl
 
 		return assetCategoryPersistence.findByParentCategoryId(
 			parentCategoryId);
+	}
+
+	public List<AssetCategory> getEntryCategories(long entryId)
+		throws SystemException {
+
+		return assetCategoryFinder.findByEntryId(entryId);
 	}
 
 	public List<AssetCategory> getVocabularyCategories(long vocabularyId)
@@ -326,12 +328,12 @@ public class AssetCategoryLocalServiceImpl
 
 		// Properties
 
-		List<AssetCategoryProperty> oldProperties =
+		List<AssetCategoryProperty> oldCategoryProperties =
 			assetCategoryPropertyPersistence.findByCategoryId(categoryId);
 
-		for (AssetCategoryProperty assetCategoryProperty : oldProperties) {
+		for (AssetCategoryProperty categoryProperty : oldCategoryProperties) {
 			assetCategoryPropertyLocalService.deleteAssetCategoryProperty(
-				assetCategoryProperty);
+				categoryProperty);
 		}
 
 		for (int i = 0; i < properties.length; i++) {
