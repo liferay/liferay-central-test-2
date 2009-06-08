@@ -33,6 +33,22 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AssertBlogCommentsTest extends BaseTestCase {
 	public void testAssertBlogComments() throws Exception {
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Asset Publisher Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click(RuntimeVariables.replace(
 				"link=Asset Publisher Test Page"));
 		selenium.waitForPageToLoad("30000");
@@ -66,6 +82,6 @@ public class AssertBlogCommentsTest extends BaseTestCase {
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
 		assertTrue(selenium.isTextPresent(
-				"This is a comment for this Blogs asset. "));
+				"This is a comment for this Blogs asset."));
 	}
 }

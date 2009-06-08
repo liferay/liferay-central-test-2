@@ -33,6 +33,22 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AssertWebContentCommentsTest extends BaseTestCase {
 	public void testAssertWebContentComments() throws Exception {
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Asset Publisher Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click(RuntimeVariables.replace(
 				"link=Asset Publisher Test Page"));
 		selenium.waitForPageToLoad("30000");

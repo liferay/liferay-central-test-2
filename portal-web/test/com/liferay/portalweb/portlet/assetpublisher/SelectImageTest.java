@@ -116,7 +116,7 @@ public class SelectImageTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//a/img")) {
+				if (selenium.isElementPresent("//td[1]/a/img")) {
 					break;
 				}
 			}
@@ -126,9 +126,9 @@ public class SelectImageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//a/img"));
+		selenium.click(RuntimeVariables.replace("//td[1]/a/img"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent("//a/img"));
+		assertTrue(selenium.isElementPresent("link=Image Gallery Image"));
 		assertTrue(selenium.isTextPresent(
 				"You have successfully updated the setup."));
 		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));

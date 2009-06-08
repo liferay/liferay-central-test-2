@@ -46,7 +46,7 @@ public class SetupTest extends BaseTestCase {
 
 					try {
 						if (selenium.isElementPresent(
-									"//a[@id=\"my-community-private-pages\"]")) {
+									"//div[@id='_145_myPlacesContainer']/ul/li[2]/a/span[1]")) {
 							break;
 						}
 					}
@@ -57,87 +57,26 @@ public class SetupTest extends BaseTestCase {
 				}
 
 				selenium.click(RuntimeVariables.replace(
-						"//a[@id=\"my-community-private-pages\"]"));
+						"//div[@id='_145_myPlacesContainer']/ul/li[2]/a/span[1]"));
 				selenium.waitForPageToLoad("30000");
-
-				for (int second = 0;; second++) {
-					if (second >= 60) {
-						fail("timeout");
-					}
-
-					try {
-						if (selenium.isElementPresent("//div/a/span")) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
-
-					Thread.sleep(1000);
-				}
-
-				selenium.click("//div/a/span");
-
-				for (int second = 0;; second++) {
-					if (second >= 60) {
-						fail("timeout");
-					}
-
-					try {
-						if (selenium.isElementPresent("new_page")) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
-
-					Thread.sleep(1000);
-				}
-
-				selenium.typeKeys("new_page",
+				selenium.click(RuntimeVariables.replace("link=Home"));
+				selenium.waitForPageToLoad("30000");
+				selenium.click(RuntimeVariables.replace("link=Manage Pages"));
+				selenium.waitForPageToLoad("30000");
+				selenium.click(RuntimeVariables.replace(
+						"//div[@id='_88_layoutsTreeOutput']/ul/li[2]/a/span"));
+				selenium.waitForPageToLoad("30000");
+				selenium.typeKeys("_88_name_en_US",
 					RuntimeVariables.replace("AP Setup Blogs Test Page"));
-				selenium.type("new_page",
+				selenium.type("_88_name_en_US",
 					RuntimeVariables.replace("AP Setup Blogs Test Page"));
-				selenium.click("link=Save");
-
-				for (int second = 0;; second++) {
-					if (second >= 60) {
-						fail("timeout");
-					}
-
-					try {
-						if (selenium.isElementPresent(
-									"link=AP Setup Blogs Test Page")) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
-
-					Thread.sleep(1000);
-				}
-
+				selenium.click(RuntimeVariables.replace(
+						"//input[@value='Add Page']"));
+				selenium.waitForPageToLoad("30000");
 				selenium.click(RuntimeVariables.replace(
 						"link=AP Setup Blogs Test Page"));
 				selenium.waitForPageToLoad("30000");
-
-				for (int second = 0;; second++) {
-					if (second >= 60) {
-						fail("timeout");
-					}
-
-					try {
-						if (selenium.isElementPresent("link=Add Application")) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
-
-					Thread.sleep(1000);
-				}
-
-				selenium.click("link=Add Application");
+				selenium.click("link=Application");
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -274,64 +213,20 @@ public class SetupTest extends BaseTestCase {
 
 				selenium.click(RuntimeVariables.replace("_33_saveButton"));
 				selenium.waitForPageToLoad("30000");
-
-				for (int second = 0;; second++) {
-					if (second >= 60) {
-						fail("timeout");
-					}
-
-					try {
-						if (selenium.isElementPresent("//div/a/span")) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
-
-					Thread.sleep(1000);
-				}
-
-				selenium.click("//div/a/span");
-
-				for (int second = 0;; second++) {
-					if (second >= 60) {
-						fail("timeout");
-					}
-
-					try {
-						if (selenium.isElementPresent("new_page")) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
-
-					Thread.sleep(1000);
-				}
-
-				selenium.typeKeys("new_page",
+				selenium.click(RuntimeVariables.replace("link=Home"));
+				selenium.waitForPageToLoad("30000");
+				selenium.click(RuntimeVariables.replace("link=Manage Pages"));
+				selenium.waitForPageToLoad("30000");
+				selenium.click(RuntimeVariables.replace(
+						"//div[@id='_88_layoutsTreeOutput']/ul/li[2]/a/span"));
+				selenium.waitForPageToLoad("30000");
+				selenium.typeKeys("_88_name_en_US",
 					RuntimeVariables.replace("AP Setup Bookmark Test Page"));
-				selenium.type("new_page",
+				selenium.type("_88_name_en_US",
 					RuntimeVariables.replace("AP Setup Bookmark Test Page"));
-				selenium.click("link=Save");
-
-				for (int second = 0;; second++) {
-					if (second >= 60) {
-						fail("timeout");
-					}
-
-					try {
-						if (selenium.isElementPresent(
-									"link=AP Setup Bookmark Test Page")) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
-
-					Thread.sleep(1000);
-				}
-
+				selenium.click(RuntimeVariables.replace(
+						"//input[@value='Add Page']"));
+				selenium.waitForPageToLoad("30000");
 				selenium.click(RuntimeVariables.replace(
 						"link=AP Setup Bookmark Test Page"));
 				selenium.waitForPageToLoad("30000");
@@ -342,7 +237,7 @@ public class SetupTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isElementPresent("link=Add Application")) {
+						if (selenium.isElementPresent("link=Application")) {
 							break;
 						}
 					}
@@ -352,7 +247,7 @@ public class SetupTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click("link=Add Application");
+				selenium.click("link=Application");
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -417,7 +312,8 @@ public class SetupTest extends BaseTestCase {
 				selenium.click(RuntimeVariables.replace(
 						"//input[@value='Save']"));
 				selenium.waitForPageToLoad("30000");
-				selenium.click(RuntimeVariables.replace("//td[1]/a"));
+				selenium.click(RuntimeVariables.replace(
+						"link=AP Setup Test Bookmark Folder"));
 				selenium.waitForPageToLoad("30000");
 				selenium.click(RuntimeVariables.replace(
 						"//input[@value='Add Entry']"));
@@ -433,64 +329,20 @@ public class SetupTest extends BaseTestCase {
 				selenium.click(RuntimeVariables.replace(
 						"//input[@value='Save']"));
 				selenium.waitForPageToLoad("30000");
-
-				for (int second = 0;; second++) {
-					if (second >= 60) {
-						fail("timeout");
-					}
-
-					try {
-						if (selenium.isElementPresent("//div/a/span")) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
-
-					Thread.sleep(1000);
-				}
-
-				selenium.click("//div/a/span");
-
-				for (int second = 0;; second++) {
-					if (second >= 60) {
-						fail("timeout");
-					}
-
-					try {
-						if (selenium.isElementPresent("new_page")) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
-
-					Thread.sleep(1000);
-				}
-
-				selenium.typeKeys("new_page",
+				selenium.click(RuntimeVariables.replace("link=Home"));
+				selenium.waitForPageToLoad("30000");
+				selenium.click(RuntimeVariables.replace("link=Manage Pages"));
+				selenium.waitForPageToLoad("30000");
+				selenium.click(RuntimeVariables.replace(
+						"//div[@id='_88_layoutsTreeOutput']/ul/li[2]/a/span"));
+				selenium.waitForPageToLoad("30000");
+				selenium.typeKeys("_88_name_en_US",
 					RuntimeVariables.replace("AP Setup DL Test Page"));
-				selenium.type("new_page",
+				selenium.type("_88_name_en_US",
 					RuntimeVariables.replace("AP Setup DL Test Page"));
-				selenium.click("link=Save");
-
-				for (int second = 0;; second++) {
-					if (second >= 60) {
-						fail("timeout");
-					}
-
-					try {
-						if (selenium.isElementPresent(
-									"link=AP Setup DL Test Page")) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
-
-					Thread.sleep(1000);
-				}
-
+				selenium.click(RuntimeVariables.replace(
+						"//input[@value='Add Page']"));
+				selenium.waitForPageToLoad("30000");
 				selenium.click(RuntimeVariables.replace(
 						"link=AP Setup DL Test Page"));
 				selenium.waitForPageToLoad("30000");
@@ -501,7 +353,7 @@ public class SetupTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isElementPresent("link=Add Application")) {
+						if (selenium.isElementPresent("link=Application")) {
 							break;
 						}
 					}
@@ -511,7 +363,7 @@ public class SetupTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click("link=Add Application");
+				selenium.click("link=Application");
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -532,10 +384,24 @@ public class SetupTest extends BaseTestCase {
 
 				selenium.click(
 					"//div[@id='ContentManagement-DocumentLibrary']/p/a");
-				Thread.sleep(2000);
-				selenium.click(RuntimeVariables.replace(
-						"link=AP Setup DL Test Page"));
-				selenium.waitForPageToLoad("30000");
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isElementPresent(
+									"//input[@value='Add Folder']")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
 				selenium.click(RuntimeVariables.replace(
 						"//input[@value='Add Folder']"));
 				selenium.waitForPageToLoad("30000");
@@ -635,64 +501,20 @@ public class SetupTest extends BaseTestCase {
 						"//input[@value='Save']"));
 				selenium.waitForPageToLoad("30000");
 				Thread.sleep(5000);
-
-				for (int second = 0;; second++) {
-					if (second >= 60) {
-						fail("timeout");
-					}
-
-					try {
-						if (selenium.isElementPresent("//div/a/span")) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
-
-					Thread.sleep(1000);
-				}
-
-				selenium.click("//div/a/span");
-
-				for (int second = 0;; second++) {
-					if (second >= 60) {
-						fail("timeout");
-					}
-
-					try {
-						if (selenium.isElementPresent("new_page")) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
-
-					Thread.sleep(1000);
-				}
-
-				selenium.typeKeys("new_page",
+				selenium.click(RuntimeVariables.replace("link=Home"));
+				selenium.waitForPageToLoad("30000");
+				selenium.click(RuntimeVariables.replace("link=Manage Pages"));
+				selenium.waitForPageToLoad("30000");
+				selenium.click(RuntimeVariables.replace(
+						"//div[@id='_88_layoutsTreeOutput']/ul/li[2]/a/span"));
+				selenium.waitForPageToLoad("30000");
+				selenium.typeKeys("_88_name_en_US",
 					RuntimeVariables.replace("AP Setup IG Test Page"));
-				selenium.type("new_page",
+				selenium.type("_88_name_en_US",
 					RuntimeVariables.replace("AP Setup IG Test Page"));
-				selenium.click("link=Save");
-
-				for (int second = 0;; second++) {
-					if (second >= 60) {
-						fail("timeout");
-					}
-
-					try {
-						if (selenium.isElementPresent(
-									"link=AP Setup IG Test Page")) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
-
-					Thread.sleep(1000);
-				}
-
+				selenium.click(RuntimeVariables.replace(
+						"//input[@value='Add Page']"));
+				selenium.waitForPageToLoad("30000");
 				selenium.click(RuntimeVariables.replace(
 						"link=AP Setup IG Test Page"));
 				selenium.waitForPageToLoad("30000");
@@ -703,7 +525,7 @@ public class SetupTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isElementPresent("link=Add Application")) {
+						if (selenium.isElementPresent("link=Application")) {
 							break;
 						}
 					}
@@ -713,7 +535,7 @@ public class SetupTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click("link=Add Application");
+				selenium.click("link=Application");
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -734,10 +556,24 @@ public class SetupTest extends BaseTestCase {
 
 				selenium.click(
 					"//div[@id='ContentManagement-ImageGallery']/p/a");
-				Thread.sleep(2000);
-				selenium.click(RuntimeVariables.replace(
-						"link=AP Setup IG Test Page"));
-				selenium.waitForPageToLoad("30000");
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isElementPresent(
+									"//input[@value='Add Folder']")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
 				selenium.click(RuntimeVariables.replace(
 						"//input[@value='Add Folder']"));
 				selenium.waitForPageToLoad("30000");
@@ -765,7 +601,8 @@ public class SetupTest extends BaseTestCase {
 				selenium.click(RuntimeVariables.replace(
 						"//input[@value='Save']"));
 				selenium.waitForPageToLoad("30000");
-				selenium.click(RuntimeVariables.replace("//b"));
+				selenium.click(RuntimeVariables.replace(
+						"link=AP Setup IG Test Folder"));
 				selenium.waitForPageToLoad("30000");
 				selenium.click(RuntimeVariables.replace(
 						"//input[@value='Add Image']"));
@@ -947,64 +784,20 @@ public class SetupTest extends BaseTestCase {
 				selenium.click(RuntimeVariables.replace(
 						"link=Back to My Community"));
 				selenium.waitForPageToLoad("30000");
-
-				for (int second = 0;; second++) {
-					if (second >= 60) {
-						fail("timeout");
-					}
-
-					try {
-						if (selenium.isElementPresent("//div/a/span")) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
-
-					Thread.sleep(1000);
-				}
-
-				selenium.click("//div/a/span");
-
-				for (int second = 0;; second++) {
-					if (second >= 60) {
-						fail("timeout");
-					}
-
-					try {
-						if (selenium.isElementPresent("new_page")) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
-
-					Thread.sleep(1000);
-				}
-
-				selenium.typeKeys("new_page",
+				selenium.click(RuntimeVariables.replace("link=Home"));
+				selenium.waitForPageToLoad("30000");
+				selenium.click(RuntimeVariables.replace("link=Manage Pages"));
+				selenium.waitForPageToLoad("30000");
+				selenium.click(RuntimeVariables.replace(
+						"//div[@id='_88_layoutsTreeOutput']/ul/li[2]/a/span"));
+				selenium.waitForPageToLoad("30000");
+				selenium.typeKeys("_88_name_en_US",
 					RuntimeVariables.replace("AP Setup MB Test Page"));
-				selenium.type("new_page",
+				selenium.type("_88_name_en_US",
 					RuntimeVariables.replace("AP Setup MB Test Page"));
-				selenium.click("link=Save");
-
-				for (int second = 0;; second++) {
-					if (second >= 60) {
-						fail("timeout");
-					}
-
-					try {
-						if (selenium.isElementPresent(
-									"link=AP Setup MB Test Page")) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
-
-					Thread.sleep(1000);
-				}
-
+				selenium.click(RuntimeVariables.replace(
+						"//input[@value='Add Page']"));
+				selenium.waitForPageToLoad("30000");
 				selenium.click(RuntimeVariables.replace(
 						"link=AP Setup MB Test Page"));
 				selenium.waitForPageToLoad("30000");
@@ -1015,7 +808,7 @@ public class SetupTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isElementPresent("link=Add Application")) {
+						if (selenium.isElementPresent("link=Application")) {
 							break;
 						}
 					}
@@ -1025,7 +818,7 @@ public class SetupTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click("link=Add Application");
+				selenium.click("link=Application");
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -1090,7 +883,8 @@ public class SetupTest extends BaseTestCase {
 				selenium.click(RuntimeVariables.replace(
 						"//input[@value='Save']"));
 				selenium.waitForPageToLoad("30000");
-				selenium.click(RuntimeVariables.replace("//b"));
+				selenium.click(RuntimeVariables.replace(
+						"link=AP Setup MB Test Category"));
 				selenium.waitForPageToLoad("30000");
 				selenium.click(RuntimeVariables.replace(
 						"//input[@value='Post New Thread']"));
@@ -1125,64 +919,20 @@ public class SetupTest extends BaseTestCase {
 				selenium.click(RuntimeVariables.replace(
 						"//input[@value='Save']"));
 				selenium.waitForPageToLoad("30000");
-
-				for (int second = 0;; second++) {
-					if (second >= 60) {
-						fail("timeout");
-					}
-
-					try {
-						if (selenium.isElementPresent("//div/a/span")) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
-
-					Thread.sleep(1000);
-				}
-
-				selenium.click("//div/a/span");
-
-				for (int second = 0;; second++) {
-					if (second >= 60) {
-						fail("timeout");
-					}
-
-					try {
-						if (selenium.isElementPresent("new_page")) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
-
-					Thread.sleep(1000);
-				}
-
-				selenium.typeKeys("new_page",
+				selenium.click(RuntimeVariables.replace("link=Home"));
+				selenium.waitForPageToLoad("30000");
+				selenium.click(RuntimeVariables.replace("link=Manage Pages"));
+				selenium.waitForPageToLoad("30000");
+				selenium.click(RuntimeVariables.replace(
+						"//div[@id='_88_layoutsTreeOutput']/ul/li[2]/a/span"));
+				selenium.waitForPageToLoad("30000");
+				selenium.typeKeys("_88_name_en_US",
 					RuntimeVariables.replace("AP Setup Wiki Test Page"));
-				selenium.type("new_page",
+				selenium.type("_88_name_en_US",
 					RuntimeVariables.replace("AP Setup Wiki Test Page"));
-				selenium.click("link=Save");
-
-				for (int second = 0;; second++) {
-					if (second >= 60) {
-						fail("timeout");
-					}
-
-					try {
-						if (selenium.isElementPresent(
-									"link=AP Setup Wiki Test Page")) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
-
-					Thread.sleep(1000);
-				}
-
+				selenium.click(RuntimeVariables.replace(
+						"//input[@value='Add Page']"));
+				selenium.waitForPageToLoad("30000");
 				selenium.click(RuntimeVariables.replace(
 						"link=AP Setup Wiki Test Page"));
 				selenium.waitForPageToLoad("30000");
@@ -1193,7 +943,7 @@ public class SetupTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isElementPresent("link=Add Application")) {
+						if (selenium.isElementPresent("link=Application")) {
 							break;
 						}
 					}
@@ -1203,7 +953,7 @@ public class SetupTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click("link=Add Application");
+				selenium.click("link=Application");
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -1223,26 +973,6 @@ public class SetupTest extends BaseTestCase {
 				}
 
 				selenium.click("//div[@id='Wiki-Wiki']/p/a");
-
-				for (int second = 0;; second++) {
-					if (second >= 60) {
-						fail("timeout");
-					}
-
-					try {
-						if (selenium.isElementPresent("link=Configuration")) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
-
-					Thread.sleep(1000);
-				}
-
-				selenium.click(RuntimeVariables.replace(
-						"link=AP Setup Wiki Test Page"));
-				selenium.waitForPageToLoad("30000");
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
