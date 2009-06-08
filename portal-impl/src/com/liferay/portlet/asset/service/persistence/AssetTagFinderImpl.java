@@ -181,37 +181,37 @@ public class AssetTagFinderImpl
 
 	public AssetTag findByG_N(long groupId, String name)
 		throws NoSuchTagException, SystemException {
-	
+
 		name = name.trim().toLowerCase();
-	
+
 		Session session = null;
-	
+
 		try {
 			session = openSession();
-	
+
 			String sql = CustomSQLUtil.get(FIND_BY_G_N);
-	
+
 			SQLQuery q = session.createSQLQuery(sql);
-	
+
 			q.addEntity("AssetTag", AssetTagImpl.class);
-	
+
 			QueryPos qPos = QueryPos.getInstance(q);
-	
+
 			qPos.add(groupId);
 			qPos.add(name);
-	
+
 			List<AssetTag> list = q.list();
-	
+
 			if (list.size() == 0) {
 				StringBuilder sb = new StringBuilder();
-	
+
 				sb.append("No AssetTag exists with the key ");
 				sb.append("{groupId=");
 				sb.append(groupId);
 				sb.append(", name=");
 				sb.append(name);
 				sb.append("}");
-	
+
 				throw new NoSuchTagException(sb.toString());
 			}
 			else {
