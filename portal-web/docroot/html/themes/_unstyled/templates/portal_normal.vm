@@ -19,7 +19,7 @@
 <div id="wrapper">
 	<div id="banner">
 		<h1 class="logo">
-			<a class="png" href="$company_url">$company_name</a>
+			<a class="png" href="$company_url">$the_title - $company_name</a>
 
 			<span class="current-community">
 				$community_name
