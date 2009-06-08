@@ -69,6 +69,6 @@ public class Guest_AssertViewDocumentsTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=TXT"));
 		assertTrue(selenium.isElementPresent(
-				"link=Member Permissions Edited Test Document.txt"));
+				"link=Admin Permissions Edited Test Document.txt"));
 	}
 }

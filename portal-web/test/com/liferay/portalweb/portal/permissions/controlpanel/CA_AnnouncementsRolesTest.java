@@ -45,5 +45,14 @@ public class CA_AnnouncementsRolesTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("The role permissions were updated."));
+		selenium.select("add-application-permission", "label=Announcements");
+		selenium.waitForPageToLoad("30000");
+		selenium.check("_128_rowIds");
+		selenium.check(
+			"//input[@name='_128_rowIds' and @value='84CONFIGURATION']");
+		selenium.check("//input[@name='_128_rowIds' and @value='84VIEW']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent("The role permissions were updated."));
 	}
 }

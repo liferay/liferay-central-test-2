@@ -55,9 +55,9 @@ public class DefinePublisherRolesTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("//body/div[2]/ul/li[3]/a"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("add-portal-permission"));
-		assertTrue(selenium.isTextPresent("add-content-permission"));
-		assertTrue(selenium.isTextPresent("add-application-permission"));
+		assertTrue(selenium.isTextPresent("Add Portal Permission"));
+		assertTrue(selenium.isTextPresent("Add Content Permission"));
+		assertTrue(selenium.isTextPresent("Add Application Permission"));
 		assertTrue(selenium.isTextPresent("Publisher"));
 	}
 }

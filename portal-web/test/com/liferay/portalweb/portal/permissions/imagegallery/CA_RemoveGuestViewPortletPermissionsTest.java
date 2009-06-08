@@ -65,7 +65,7 @@ public class CA_RemoveGuestViewPortletPermissionsTest extends BaseTestCase {
 				selenium.click(RuntimeVariables.replace("link=Permissions"));
 				selenium.waitForPageToLoad("30000");
 
-				boolean AbleToView = selenium.isChecked("13_ACTION_VIEW");
+				boolean AbleToView = selenium.isChecked("15_ACTION_VIEW");
 
 				if (!AbleToView) {
 					label = 2;
@@ -73,7 +73,7 @@ public class CA_RemoveGuestViewPortletPermissionsTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.click("13_ACTION_VIEW");
+				selenium.click("15_ACTION_VIEW");
 
 			case 2:
 				selenium.click(RuntimeVariables.replace(

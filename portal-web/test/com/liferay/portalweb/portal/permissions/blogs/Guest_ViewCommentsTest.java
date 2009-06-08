@@ -53,7 +53,7 @@ public class Guest_ViewCommentsTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Test Entry 1"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("Test Comment 1"));
+		assertTrue(selenium.isTextPresent("Test Entry 1"));
 		assertTrue(selenium.isTextPresent("Member Comment Test"));
 	}
 }

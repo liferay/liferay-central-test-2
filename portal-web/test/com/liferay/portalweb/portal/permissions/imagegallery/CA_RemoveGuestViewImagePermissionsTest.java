@@ -90,7 +90,7 @@ public class CA_RemoveGuestViewImagePermissionsTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isElementPresent("13_ACTION_VIEW")) {
+						if (selenium.isElementPresent("15_ACTION_VIEW")) {
 							break;
 						}
 					}
@@ -100,7 +100,7 @@ public class CA_RemoveGuestViewImagePermissionsTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				boolean AbleToView = selenium.isChecked("13_ACTION_VIEW");
+				boolean AbleToView = selenium.isChecked("15_ACTION_VIEW");
 
 				if (!AbleToView) {
 					label = 2;
@@ -108,7 +108,7 @@ public class CA_RemoveGuestViewImagePermissionsTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.click("13_ACTION_VIEW");
+				selenium.click("15_ACTION_VIEW");
 
 			case 2:
 				assertTrue(selenium.isTextPresent(

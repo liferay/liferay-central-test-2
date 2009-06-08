@@ -61,7 +61,7 @@ public class CA_EditPermissionsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//div[4]/ul/li[2]/a")) {
+				if (selenium.isElementPresent("//div[5]/ul/li[2]/a")) {
 					break;
 				}
 			}
@@ -71,9 +71,9 @@ public class CA_EditPermissionsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//div[4]/ul/li[2]/a"));
+		selenium.click(RuntimeVariables.replace("//div[5]/ul/li[2]/a"));
 		selenium.waitForPageToLoad("30000");
-		selenium.uncheck("13_ACTION_VIEW");
+		selenium.check("15_ACTION_VIEW");
 		selenium.click(RuntimeVariables.replace("//input[@value='Submit']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
@@ -104,7 +104,7 @@ public class CA_EditPermissionsTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Permissions"));
 		selenium.waitForPageToLoad("30000");
-		selenium.uncheck("13_ACTION_VIEW");
+		selenium.check("15_ACTION_VIEW");
 		selenium.click(RuntimeVariables.replace("//input[@value='Submit']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
@@ -138,7 +138,7 @@ public class CA_EditPermissionsTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Permissions"));
 		selenium.waitForPageToLoad("30000");
-		selenium.uncheck("13_ACTION_VIEW");
+		selenium.check("15_ACTION_VIEW");
 		selenium.click(RuntimeVariables.replace("//input[@value='Submit']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(

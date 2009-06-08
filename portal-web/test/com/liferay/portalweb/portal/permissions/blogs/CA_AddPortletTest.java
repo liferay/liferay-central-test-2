@@ -51,7 +51,7 @@ public class CA_AddPortletTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Blogs Permissions Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Add Application");
+		selenium.click("link=Application");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

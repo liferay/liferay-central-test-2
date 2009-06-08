@@ -54,9 +54,9 @@ public class Member_AssertCannotDeleteFoldersTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"link=Document Library Permissions Test Page"));
 		selenium.waitForPageToLoad("30000");
-		assertFalse(selenium.isElementPresent("link=Delete"));
+		assertFalse(selenium.isElementPresent("//tr[4]/td[4]/ul/li/strong/span"));
 		assertFalse(selenium.isElementPresent("//td[4]/ul/li/strong/span"));
-		assertFalse(selenium.isElementPresent("//div[2]/ul/li[3]/a"));
+		assertFalse(selenium.isElementPresent("link=Delete"));
 		selenium.click(RuntimeVariables.replace(
 				"link=Permissions2 Test2 Folder2"));
 		selenium.waitForPageToLoad("30000");

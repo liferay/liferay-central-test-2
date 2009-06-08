@@ -43,7 +43,7 @@ public class CA_AssertActionsTest extends BaseTestCase {
 		assertTrue(selenium.isElementPresent("link=Subscribe to this blog."));
 		selenium.click(RuntimeVariables.replace("link=Test Entry 1"));
 		selenium.waitForPageToLoad("30000");
-		assertEquals("Edit", selenium.getText("//td[4]/span/a[2]"));
-		assertEquals("Delete", selenium.getText("//td[5]/span/a[2]"));
+		assertEquals("Edit", selenium.getText("//span/a[2]"));
+		assertEquals("Delete", selenium.getText("//td[3]/span/a[2]"));
 	}
 }

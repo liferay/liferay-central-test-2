@@ -33,63 +33,19 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class CA_AddPageTest extends BaseTestCase {
 	public void testCA_AddPage() throws Exception {
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//div/a/span")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click("//div/a/span");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("new_page")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.typeKeys("new_page",
+		selenium.click(RuntimeVariables.replace("link=Welcome"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("link=Manage Pages"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace(
+				"//div[@id='_88_layoutsTreeOutput']/ul/li[2]/a/span"));
+		selenium.waitForPageToLoad("30000");
+		selenium.typeKeys("_88_name_en_US",
 			RuntimeVariables.replace("Message Boards Permissions Page"));
-		selenium.type("new_page",
+		selenium.type("_88_name_en_US",
 			RuntimeVariables.replace("Message Boards Permissions Page"));
-		selenium.click("link=Save");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent(
-							"link=Message Boards Permissions Page")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
+		selenium.click(RuntimeVariables.replace("//input[@value='Add Page']"));
+		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace(
 				"link=Message Boards Permissions Page"));
 		selenium.waitForPageToLoad("30000");

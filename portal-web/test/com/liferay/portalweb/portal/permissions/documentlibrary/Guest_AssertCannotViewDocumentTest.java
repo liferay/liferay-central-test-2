@@ -56,7 +56,7 @@ public class Guest_AssertCannotViewDocumentTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace("link=My Documents"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace(
-				"link=Admin Permissions Edited Test Document.txt"));
+				"link=Member Permissions Edited Test Document.txt"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Forbidden"));
 		assertTrue(selenium.isTextPresent(

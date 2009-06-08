@@ -37,8 +37,8 @@ public class Member_AnnouncementsRolesTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.select("add-content-permission", "label=Announcements");
 		selenium.waitForPageToLoad("30000");
-		selenium.check("_128_rowIds");
-		selenium.check(
+		selenium.uncheck("_128_rowIds");
+		selenium.uncheck(
 			"//input[@name='_128_rowIds' and @value='com.liferay.portlet.announcements.model.AnnouncementsEntryUPDATE']");
 		selenium.check(
 			"//input[@name='_128_rowIds' and @value='com.liferay.portlet.announcements.model.AnnouncementsEntryVIEW']");

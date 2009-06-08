@@ -61,7 +61,7 @@ public class CA_EditFolderTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//div[4]/ul/li[1]/a")) {
+				if (selenium.isElementPresent("//div[5]/ul/li[1]/a")) {
 					break;
 				}
 			}
@@ -71,7 +71,7 @@ public class CA_EditFolderTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//div[4]/ul/li[1]/a"));
+		selenium.click(RuntimeVariables.replace("//div[5]/ul/li[1]/a"));
 		selenium.waitForPageToLoad("30000");
 		selenium.typeKeys("_20_name",
 			RuntimeVariables.replace("Permissions Edited Test Folder"));

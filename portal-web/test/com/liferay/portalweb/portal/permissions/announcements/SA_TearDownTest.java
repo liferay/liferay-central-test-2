@@ -225,16 +225,18 @@ public class SA_TearDownTest extends BaseTestCase {
 				selenium.click(RuntimeVariables.replace("link=Manage Pages"));
 				selenium.waitForPageToLoad("30000");
 				selenium.click(RuntimeVariables.replace(
-						"//div/ul/li[2]/ul/li[2]/a/span"));
+						"//div[@id='_88_layoutsTreeOutput']/ul/li[2]/ul/li[2]/a/span"));
 				selenium.waitForPageToLoad("30000");
-				selenium.click(RuntimeVariables.replace("link=Page"));
+				selenium.click(RuntimeVariables.replace(
+						"//li[@id='_88_tabs3pageTabsId']/a"));
 				selenium.waitForPageToLoad("30000");
 				selenium.click(RuntimeVariables.replace(
 						"//input[@value='Delete']"));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete the selected page[\\s\\S]$"));
-				selenium.click(RuntimeVariables.replace("link=Welcome"));
+				selenium.click(RuntimeVariables.replace(
+						"link=Return to Full Page"));
 				selenium.waitForPageToLoad("30000");
 				selenium.click(RuntimeVariables.replace("link=Sign Out"));
 				selenium.waitForPageToLoad("30000");

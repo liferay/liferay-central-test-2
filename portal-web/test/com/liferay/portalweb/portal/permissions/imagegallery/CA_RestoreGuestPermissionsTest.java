@@ -89,7 +89,7 @@ public class CA_RestoreGuestPermissionsTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isElementPresent("13_ACTION_VIEW")) {
+						if (selenium.isElementPresent("15_ACTION_VIEW")) {
 							break;
 						}
 					}
@@ -99,7 +99,7 @@ public class CA_RestoreGuestPermissionsTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				boolean GuestCanViewA = selenium.isChecked("13_ACTION_VIEW");
+				boolean GuestCanViewA = selenium.isChecked("15_ACTION_VIEW");
 
 				if (GuestCanViewA) {
 					label = 2;
@@ -107,7 +107,7 @@ public class CA_RestoreGuestPermissionsTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.click("13_ACTION_VIEW");
+				selenium.click("15_ACTION_VIEW");
 
 			case 2:
 				assertTrue(selenium.isTextPresent(
@@ -146,7 +146,7 @@ public class CA_RestoreGuestPermissionsTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isElementPresent("//div[4]/ul/li[2]/a")) {
+						if (selenium.isElementPresent("//div[5]/ul/li[2]/a")) {
 							break;
 						}
 					}
@@ -156,12 +156,12 @@ public class CA_RestoreGuestPermissionsTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click(RuntimeVariables.replace("//div[4]/ul/li[2]/a"));
+				selenium.click(RuntimeVariables.replace("//div[5]/ul/li[2]/a"));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.isTextPresent(
 						"Edit Permissions for Image Gallery Folder: Image Permissions Test Folder"));
 
-				boolean GuestCanViewB = selenium.isChecked("13_ACTION_VIEW");
+				boolean GuestCanViewB = selenium.isChecked("15_ACTION_VIEW");
 
 				if (GuestCanViewB) {
 					label = 3;
@@ -169,7 +169,7 @@ public class CA_RestoreGuestPermissionsTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.click("13_ACTION_VIEW");
+				selenium.click("15_ACTION_VIEW");
 
 			case 3:
 				selenium.click(RuntimeVariables.replace(
@@ -203,7 +203,7 @@ public class CA_RestoreGuestPermissionsTest extends BaseTestCase {
 				selenium.click(RuntimeVariables.replace("link=Permissions"));
 				selenium.waitForPageToLoad("30000");
 
-				boolean GuestCanViewC = selenium.isChecked("13_ACTION_VIEW");
+				boolean GuestCanViewC = selenium.isChecked("15_ACTION_VIEW");
 
 				if (GuestCanViewC) {
 					label = 4;
@@ -211,7 +211,7 @@ public class CA_RestoreGuestPermissionsTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.click("13_ACTION_VIEW");
+				selenium.click("15_ACTION_VIEW");
 
 			case 4:
 				selenium.click(RuntimeVariables.replace(

@@ -69,6 +69,7 @@ public class Guest_AssertNotSignedInTest extends BaseTestCase {
 		}
 
 		assertTrue(selenium.isElementPresent("link=Sign In"));
-		assertTrue(selenium.isTextPresent("Welcome!"));
+		assertTrue(selenium.isTextPresent(
+				"Welcome to Liferay Portal Standard Edition 5.3.0"));
 	}
 }

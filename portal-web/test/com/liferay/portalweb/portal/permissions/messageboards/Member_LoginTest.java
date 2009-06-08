@@ -33,6 +33,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class Member_LoginTest extends BaseTestCase {
 	public void testMember_Login() throws Exception {
+		selenium.click(RuntimeVariables.replace("link=Welcome"));
+		selenium.waitForPageToLoad("30000");
 		selenium.type("_58_login",
 			RuntimeVariables.replace("member@liferay.com"));
 		selenium.type("_58_password", RuntimeVariables.replace("test"));

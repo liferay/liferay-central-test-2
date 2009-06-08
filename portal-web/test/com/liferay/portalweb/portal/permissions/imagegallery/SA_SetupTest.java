@@ -51,7 +51,11 @@ public class SA_SetupTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Welcome"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//div[@id='add-page']/a/span");
+		selenium.click(RuntimeVariables.replace("link=Manage Pages"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace(
+				"//div[@id='_88_layoutsTreeOutput']/ul/li[2]/a/span"));
+		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -59,7 +63,7 @@ public class SA_SetupTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("new_page")) {
+				if (selenium.isElementPresent("_88_name_en_US")) {
 					break;
 				}
 			}
@@ -69,11 +73,12 @@ public class SA_SetupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("new_page",
+		selenium.typeKeys("_88_name_en_US",
 			RuntimeVariables.replace("Image Gallery Permissions Test Page"));
-		selenium.type("new_page",
+		selenium.type("_88_name_en_US",
 			RuntimeVariables.replace("Image Gallery Permissions Test Page"));
-		selenium.click("link=Save");
+		selenium.click(RuntimeVariables.replace("//input[@value='Add Page']"));
+		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -95,7 +100,7 @@ public class SA_SetupTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"link=Image Gallery Permissions Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Add Application");
+		selenium.click("link=Application");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

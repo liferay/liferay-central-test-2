@@ -54,7 +54,7 @@ public class Guest_AssertCannotViewFolderTest extends BaseTestCase {
 				"link=Document Library Permissions Test Page"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace(
-				"link=Permissions Edited Test Folder"));
+				"link=Permissions2 Test2 Folder2"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"You do not have the required permissions."));
@@ -62,7 +62,7 @@ public class Guest_AssertCannotViewFolderTest extends BaseTestCase {
 				"link=Document Library Permissions Test Page"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace(
-				"link=Permissions Test Subfolder"));
+				"link=Permissions2 Test2 Subfolder2"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"You do not have the required permissions."));
