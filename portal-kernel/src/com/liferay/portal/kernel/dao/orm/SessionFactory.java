@@ -22,6 +22,8 @@
 
 package com.liferay.portal.kernel.dao.orm;
 
+import java.sql.Connection;
+
 /**
  * <a href="SessionFactory.java.html"><b><i>View Source</i></b></a>
  *
@@ -36,4 +38,5 @@ public interface SessionFactory {
 
 	public Session openSession() throws ORMException;
 
+	public Session openNewSession(Connection connection) throws ORMException;
 }

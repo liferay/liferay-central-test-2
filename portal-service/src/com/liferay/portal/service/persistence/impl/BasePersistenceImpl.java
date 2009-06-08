@@ -35,6 +35,7 @@ import com.liferay.portal.service.persistence.BasePersistence;
 
 import java.util.List;
 
+import java.sql.Connection;
 import javax.sql.DataSource;
 
 /**
@@ -68,6 +69,10 @@ public class BasePersistenceImpl implements BasePersistence, SessionFactory {
 
 	public Session openSession() throws ORMException {
 		return _sessionFactory.openSession();
+	}
+
+	public Session openNewSession(Connection connection) throws ORMException {
+		return _sessionFactory.openNewSession(connection);
 	}
 
 	public void registerListener(ModelListener listener) {

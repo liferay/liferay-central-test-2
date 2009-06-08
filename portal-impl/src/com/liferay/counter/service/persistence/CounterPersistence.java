@@ -25,12 +25,12 @@ package com.liferay.counter.service.persistence;
 import com.liferay.counter.model.Counter;
 import com.liferay.counter.model.CounterRegister;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.dao.orm.hibernate.SessionImpl;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.dao.orm.LockMode;
 import com.liferay.portal.kernel.dao.orm.ObjectNotFoundException;
 import com.liferay.portal.kernel.dao.orm.Query;
 import com.liferay.portal.kernel.dao.orm.Session;
+import com.liferay.portal.kernel.dao.orm.SessionFactory;
 import com.liferay.portal.kernel.job.IntervalJob;
 import com.liferay.portal.kernel.job.JobSchedulerUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -46,8 +46,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-
-import org.hibernate.SessionFactory;
 
 /**
  * <a href="CounterPersistence.java.html"><b><i>View Source</i></b></a>
@@ -89,11 +87,12 @@ public class CounterPersistence extends BasePersistenceImpl {
 		try {
 			Connection connection = getConnection();
 
-			session = new SessionImpl(_sessionFactory.openSession(connection));
+			session = _sessionFactory.openNewSession(connection);
 
 			List<String> list = new ArrayList<String>();
 
-			Query q = session.createQuery("FROM " + Counter.class.getName());
+			Query q = session.createQuery(
+				"SELECT counter FROM Counter counter");
 
 			Iterator<Counter> itr = q.iterate();
 
@@ -139,8 +138,7 @@ public class CounterPersistence extends BasePersistenceImpl {
 				try {
 					Connection connection = getConnection();
 
-					session = new SessionImpl(
-						_sessionFactory.openSession(connection));
+					session = _sessionFactory.openNewSession(connection);
 
 					Counter counter = (Counter)session.get(
 						Counter.class, register.getName());
@@ -189,8 +187,7 @@ public class CounterPersistence extends BasePersistenceImpl {
 			try {
 				Connection connection = getConnection();
 
-				session = new SessionImpl(
-					_sessionFactory.openSession(connection));
+				session = _sessionFactory.openNewSession(connection);
 
 				Counter counter = (Counter)session.load(Counter.class, oldName);
 
@@ -232,8 +229,7 @@ public class CounterPersistence extends BasePersistenceImpl {
 			try {
 				Connection connection = getConnection();
 
-				session = new SessionImpl(
-					_sessionFactory.openSession(connection));
+				session = _sessionFactory.openNewSession(connection);
 
 				Counter counter = (Counter)session.load(Counter.class, name);
 
@@ -302,8 +298,7 @@ public class CounterPersistence extends BasePersistenceImpl {
 		try {
 			Connection connection = getConnection();
 
-			session = new SessionImpl(
-				_sessionFactory.openSession(connection));
+			session = _sessionFactory.openNewSession(connection);
 
 			Counter counter = (Counter)session.get(
 				Counter.class, name, LockMode.UPGRADE);
