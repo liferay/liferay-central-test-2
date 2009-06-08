@@ -118,9 +118,9 @@ public class AssetCategoryPropertyLocalServiceUtil {
 		return getService().addCategoryProperty(userId, categoryId, key, value);
 	}
 
-	public static void deleteCategoryProperties(long categoryId)
+	public static void deleteCategoryProperties(long entryId)
 		throws com.liferay.portal.SystemException {
-		getService().deleteCategoryProperties(categoryId);
+		getService().deleteCategoryProperties(entryId);
 	}
 
 	public static void deleteCategoryProperty(
@@ -141,8 +141,8 @@ public class AssetCategoryPropertyLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetCategoryProperty> getCategoryProperties(
-		long categoryId) throws com.liferay.portal.SystemException {
-		return getService().getCategoryProperties(categoryId);
+		long entryId) throws com.liferay.portal.SystemException {
+		return getService().getCategoryProperties(entryId);
 	}
 
 	public static com.liferay.portlet.asset.model.AssetCategoryProperty getCategoryProperty(

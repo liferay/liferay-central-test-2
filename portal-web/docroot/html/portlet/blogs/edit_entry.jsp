@@ -113,8 +113,7 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 						<portlet:namespace />displayDateMinute: document.<portlet:namespace />fm.<portlet:namespace />displayDateMinute.value,
 						<portlet:namespace />displayDateAmPm: document.<portlet:namespace />fm.<portlet:namespace />displayDateAmPm.value,
 						<portlet:namespace />draft: 1,
-						<portlet:namespace />assetTagNames: document.<portlet:namespace />fm.<portlet:namespace />assetTagNames.value,
-						<portlet:namespace />assetCategoryIds: document.<portlet:namespace />fm.<portlet:namespace />assetCategoryIds.value
+						<portlet:namespace />tagsEntries: document.<portlet:namespace />fm.<portlet:namespace />tagsEntries.value
 					},
 					dataType: 'json',
 					beforeSend: function() {
@@ -191,7 +190,7 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 <input name="<portlet:namespace />draft" type="hidden" value="0" />
 
 <liferay-ui:error exception="<%= EntryTitleException.class %>" message="please-enter-a-valid-title" />
-<liferay-ui:asset-tags-error />
+<liferay-ui:tags-error />
 
 <div class="breadcrumbs">
 	<span class="first"><a href="<portlet:renderURL />"><liferay-ui:message key="entries" /></a></span> &raquo;
@@ -264,10 +263,10 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 		}
 		%>
 
-		<liferay-ui:asset-tags-selector
+		<liferay-ui:tags-selector
 			className="<%= BlogsEntry.class.getName() %>"
 			classPK="<%= classPK %>"
-			hiddenInput="assetTagNames"
+			hiddenInput="tagsEntries"
 			contentCallback='<%= renderResponse.getNamespace() + "getSuggestionsContent" %>'
 		/>
 	</div>

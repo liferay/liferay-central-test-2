@@ -29,25 +29,6 @@
 <%@ page import="com.liferay.portal.kernel.xml.Element" %>
 <%@ page import="com.liferay.portal.kernel.xml.SAXReaderUtil" %>
 <%@ page import="com.liferay.portlet.PortalPreferences" %>
-<%@ page import="com.liferay.portlet.asset.NoSuchAssetException" %>
-<%@ page import="com.liferay.portlet.asset.NoSuchTagException" %>
-<%@ page import="com.liferay.portlet.asset.NoSuchCategoryException" %>
-<%@ page import="com.liferay.portlet.asset.NoSuchCategoryPropertyException" %>
-<%@ page import="com.liferay.portlet.asset.NoSuchTagPropertyException" %>
-<%@ page import="com.liferay.portlet.asset.model.Asset" %>
-<%@ page import="com.liferay.portlet.asset.model.AssetCategory" %>
-<%@ page import="com.liferay.portlet.asset.model.AssetType" %>
-<%@ page import="com.liferay.portlet.asset.model.AssetTag" %>
-<%@ page import="com.liferay.portlet.asset.model.AssetTagConstants" %>
-<%@ page import="com.liferay.portlet.asset.model.AssetTagProperty" %>
-<%@ page import="com.liferay.portlet.asset.model.AssetVocabulary" %>
-<%@ page import="com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil" %>
-<%@ page import="com.liferay.portlet.asset.service.AssetLocalServiceUtil" %>
-<%@ page import="com.liferay.portlet.asset.service.AssetServiceUtil" %>
-<%@ page import="com.liferay.portlet.asset.service.AssetTagLocalServiceUtil" %>
-<%@ page import="com.liferay.portlet.asset.service.AssetTagPropertyLocalServiceUtil" %>
-<%@ page import="com.liferay.portlet.asset.service.AssetVocabularyLocalServiceUtil" %>
-<%@ page import="com.liferay.portlet.asset.util.AssetUtil" %>
 <%@ page import="com.liferay.portlet.assetpublisher.util.AssetPublisherUtil" %>
 <%@ page import="com.liferay.portlet.blogs.model.BlogsEntry" %>
 <%@ page import="com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil" %>
@@ -98,6 +79,21 @@
 <%@ page import="com.liferay.portlet.messageboards.model.MBMessage" %>
 <%@ page import="com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.messageboards.service.permission.MBMessagePermission" %>
+<%@ page import="com.liferay.portlet.tags.NoSuchAssetException" %>
+<%@ page import="com.liferay.portlet.tags.NoSuchEntryException" %>
+<%@ page import="com.liferay.portlet.tags.NoSuchPropertyException" %>
+<%@ page import="com.liferay.portlet.tags.model.TagsAsset" %>
+<%@ page import="com.liferay.portlet.tags.model.TagsAssetType" %>
+<%@ page import="com.liferay.portlet.tags.model.TagsEntry" %>
+<%@ page import="com.liferay.portlet.tags.model.TagsEntryConstants" %>
+<%@ page import="com.liferay.portlet.tags.model.TagsProperty" %>
+<%@ page import="com.liferay.portlet.tags.model.TagsVocabulary" %>
+<%@ page import="com.liferay.portlet.tags.service.TagsAssetLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.tags.service.TagsAssetServiceUtil" %>
+<%@ page import="com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.tags.service.TagsPropertyLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.tags.service.TagsVocabularyLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.tags.util.TagsUtil" %>
 <%@ page import="com.liferay.portlet.wiki.model.WikiNode" %>
 <%@ page import="com.liferay.portlet.wiki.model.WikiPage" %>
 <%@ page import="com.liferay.portlet.wiki.model.WikiPageDisplay" %>
@@ -140,19 +136,20 @@ else {
 
 String category = GetterUtil.getString(preferences.getValue("category", StringPool.BLANK));
 
-String tagName = ParamUtil.getString(request, "tag");
+String tag = ParamUtil.getString(request, "tag");
 
-String[] tagNames = null;
+String[] entries = null;
 
-if (Validator.isNull(tagName)) {
-	tagNames = preferences.getValues("entries", new String[0]);
+if (Validator.isNull(tag)) {
+	entries = preferences.getValues("entries", new String[0]);
 }
 else {
-	tagNames = new String[] {tagName};
+	entries = new String[] {tag};
 
-	PortalUtil.setPageKeywords(tagName, request);
+	PortalUtil.setPageKeywords(tag, request);
 }
-String[] notTagNames = preferences.getValues("not-entries", new String[0]);
+
+String[] notEntries = preferences.getValues("not-entries", new String[0]);
 boolean mergeUrlTags = GetterUtil.getBoolean(preferences.getValue("merge-url-tags", null), true);
 boolean andOperator = GetterUtil.getBoolean(preferences.getValue("and-operator", null), false);
 
@@ -173,6 +170,7 @@ String orderByType2 = GetterUtil.getString(preferences.getValue("order-by-type-2
 boolean excludeZeroViewCount = GetterUtil.getBoolean(preferences.getValue("exclude-zero-view-count", "0"));
 int delta = GetterUtil.getInteger(preferences.getValue("delta", StringPool.BLANK), SearchContainer.DEFAULT_DELTA);
 String paginationType = GetterUtil.getString(preferences.getValue("pagination-type", "none"));
+boolean showQueryLogic = GetterUtil.getBoolean(preferences.getValue("show-query-logic", StringPool.BLANK));
 boolean showAvailableLocales = GetterUtil.getBoolean(preferences.getValue("show-available-locales", StringPool.BLANK));
 boolean enableRatings = GetterUtil.getBoolean(preferences.getValue("enable-ratings", null));
 boolean enableComments = GetterUtil.getBoolean(preferences.getValue("enable-comments", null));
@@ -184,7 +182,8 @@ String allMetadataFields = "create-date,modified-date,publish-date,expiration-da
 
 String[] metadataFields = StringUtil.split(preferences.getValue("metadata-fields", defaultMetadataFields));
 
-Arrays.sort(tagNames);
+Arrays.sort(entries);
+
 String[] manualEntries = preferences.getValues("manual-entries", new String[0]);
 
 boolean viewInContext = assetLinkBehaviour.equals("viewInPortlet");

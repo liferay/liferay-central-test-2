@@ -56,17 +56,6 @@ public class ServiceContextUtil {
 		serviceContext.setUserDisplayURL(
 			jsonObject.getString("userDisplayURL"));
 
-		// Asset
-
-		long[] assetCategoryIds = StringUtil.split(
-			jsonObject.getString("assetCategoryIds"), 0L);
-
-		String[] assetTagNames = StringUtil.split(
-			jsonObject.getString("assetTagNames"));
-
-		serviceContext.setAssetCategoyIds(assetCategoryIds);
-		serviceContext.setAssetTagNames(assetTagNames);
-
 		// Permissions
 
 		String[] communityPermissions = StringUtil.split(
@@ -80,6 +69,16 @@ public class ServiceContextUtil {
 			jsonObject.getBoolean("addGuestPermissions"));
 		serviceContext.setCommunityPermissions(communityPermissions);
 		serviceContext.setGuestPermissions(guestPermissions);
+
+		// Tags
+
+		String[] tagsCategories = StringUtil.split(
+			jsonObject.getString("tagsCategories"));
+		String[] tagsEntries = StringUtil.split(
+			jsonObject.getString("tagsEntries"));
+
+		serviceContext.setTagsCategories(tagsCategories);
+		serviceContext.setTagsEntries(tagsEntries);
 
 		return serviceContext;
 	}

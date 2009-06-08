@@ -178,7 +178,7 @@ double version = ParamUtil.getDouble(request, "version");
 		JournalArticleDisplay articleDisplay = JournalContentUtil.getDisplay(groupId, articleId, null, null, languageId, themeDisplay, articlePage, xmlRequest);
 
 		if (articleDisplay != null) {
-			AssetLocalServiceUtil.incrementViewCounter(JournalArticle.class.getName(), articleDisplay.getResourcePrimKey());
+			TagsAssetLocalServiceUtil.incrementViewCounter(JournalArticle.class.getName(), articleDisplay.getResourcePrimKey());
 		}
 		%>
 

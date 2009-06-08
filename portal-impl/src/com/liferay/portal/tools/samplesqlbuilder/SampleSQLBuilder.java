@@ -37,7 +37,6 @@ import com.liferay.portal.model.Role;
 import com.liferay.portal.model.User;
 import com.liferay.portal.tools.sql.DBUtil;
 import com.liferay.portal.util.InitUtil;
-import com.liferay.portlet.asset.model.Asset;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.model.BlogsStatsUser;
 import com.liferay.portlet.messageboards.model.MBCategory;
@@ -45,6 +44,7 @@ import com.liferay.portlet.messageboards.model.MBDiscussion;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBStatsUser;
 import com.liferay.portlet.messageboards.model.MBThread;
+import com.liferay.portlet.tags.model.TagsAsset;
 import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.util.SimpleCounter;
@@ -283,12 +283,12 @@ public class SampleSQLBuilder {
 		processTemplate(_tplSecurity, context);
 	}
 
-	public void insertAsset(Asset asset) throws Exception {
+	public void insertTagsAsset(TagsAsset tagsAsset) throws Exception {
 		Map<String, Object> context = getContext();
 
-		put(context, "asset", asset);
+		put(context, "tagsAsset", tagsAsset);
 
-		processTemplate(_tplAsset, context);
+		processTemplate(_tplTagsAsset, context);
 	}
 
 	public void insertUser(
@@ -425,7 +425,7 @@ public class SampleSQLBuilder {
 	private String _tplMBThread = _TPL_ROOT + "mb_thread.ftl";
 	private String _tplSample = _TPL_ROOT + "sample.ftl";
 	private String _tplSecurity = _TPL_ROOT + "security.ftl";
-	private String _tplAsset = _TPL_ROOT + "tags_asset.ftl";
+	private String _tplTagsAsset = _TPL_ROOT + "tags_asset.ftl";
 	private String _tplUser = _TPL_ROOT + "user.ftl";
 	private String _tplWikiNode = _TPL_ROOT + "wiki_node.ftl";
 	private String _tplWikiPage = _TPL_ROOT + "wiki_page.ftl";

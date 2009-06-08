@@ -103,5 +103,11 @@ else if (className.equals(WikiPage.class.getName())) {
 
 PortalUtil.setPageSubtitle(title, request);
 PortalUtil.setPageDescription(summary, request);
-PortalUtil.setPageKeywords(AssetUtil.getAssetKeywords(className, classPK), request);
+
+List<TagsEntry> tagsEntries = new ArrayList<TagsEntry>();
+
+tagsEntries.addAll(TagsEntryLocalServiceUtil.getEntries(className, classPK, false));
+tagsEntries.addAll(TagsEntryLocalServiceUtil.getEntries(className, classPK, true));
+
+PortalUtil.setPageKeywords(ListUtil.toString(tagsEntries, "name"), request);
 %>

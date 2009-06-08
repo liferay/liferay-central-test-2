@@ -71,14 +71,14 @@ public class AssetVocabularyServiceImpl
 	public List<AssetVocabulary> getCompanyVocabularies(long companyId)
 		throws PortalException, SystemException {
 
-		return filterVocabularies(
+		return getVocabularies(
 			assetVocabularyLocalService.getCompanyVocabularies(companyId));
 	}
 
 	public List<AssetVocabulary> getGroupVocabularies(long groupId)
 		throws PortalException, SystemException {
 
-		return filterVocabularies(
+		return getVocabularies(
 			assetVocabularyLocalService.getGroupVocabularies(groupId));
 	}
 
@@ -100,7 +100,7 @@ public class AssetVocabularyServiceImpl
 		return assetVocabularyLocalService.updateVocabulary(vocabularyId, name);
 	}
 
-	protected List<AssetVocabulary> filterVocabularies(
+	protected List<AssetVocabulary> getVocabularies(
 			List<AssetVocabulary> vocabularies)
 		throws PortalException {
 

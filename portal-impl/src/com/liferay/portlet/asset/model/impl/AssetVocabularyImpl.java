@@ -22,9 +22,6 @@
 
 package com.liferay.portlet.asset.model.impl;
 
-import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.asset.model.AssetVocabulary;
 
 /**
@@ -37,10 +34,6 @@ public class AssetVocabularyImpl
 	extends AssetVocabularyModelImpl implements AssetVocabulary {
 
 	public AssetVocabularyImpl() {
-	}
-
-	public String getUserUuid() throws SystemException {
-		return PortalUtil.getUserValue(getUserId(), "uuid", StringPool.BLANK);
 	}
 
 }

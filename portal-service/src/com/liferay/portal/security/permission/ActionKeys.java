@@ -40,6 +40,9 @@ public class ActionKeys {
 
 	public static final String ADD_CATEGORY = "ADD_CATEGORY";
 
+	public static final String ADD_CATEGORY_VOCABULARY =
+		"ADD_CATEGORY_VOCABULARY";
+
 	public static final String ADD_COMMUNITY = "ADD_COMMUNITY";
 
 	public static final String ADD_COUPON = "ADD_COUPON";
@@ -104,8 +107,6 @@ public class ActionKeys {
 	public static final String ADD_SUBCATEGORY = "ADD_SUBCATEGORY";
 
 	public static final String ADD_SUBFOLDER = "ADD_SUBFOLDER";
-
-	public static final String ADD_TAG = "ADD_TAG";
 
 	public static final String ADD_TEMPLATE = "ADD_TEMPLATE";
 

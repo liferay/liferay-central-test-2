@@ -777,7 +777,7 @@
 	<portlet>
 		<portlet-name>99</portlet-name>
 		<icon>/html/icons/default.png</icon>
-		<struts-path>asset_tags_admin</struts-path>
+		<struts-path>tags_admin</struts-path>
 		<control-panel-entry-category>content</control-panel-entry-category>
 		<control-panel-entry-weight>11.0</control-panel-entry-weight>
 		<use-default-template>false</use-default-template>
@@ -787,10 +787,10 @@
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
 		<ajaxable>false</ajaxable>
-		<header-portlet-css>/html/portlet/asset_tags_admin/css.jsp</header-portlet-css>
+		<header-portlet-css>/html/portlet/tags_admin/css.jsp</header-portlet-css>
 		<footer-portal-javascript>/html/js/liferay/service.js</footer-portal-javascript>
-		<footer-portlet-javascript>/html/portlet/asset_tags_admin/javascript.js</footer-portlet-javascript>
-		<css-class-wrapper>portlet-asset-tags-admin</css-class-wrapper>
+		<footer-portlet-javascript>/html/portlet/tags_admin/javascript.js</footer-portlet-javascript>
+		<css-class-wrapper>portlet-tags-admin</css-class-wrapper>
 	</portlet>
 	<portlet>
 		<portlet-name>100</portlet-name>
@@ -1026,7 +1026,7 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
-		<css-class-wrapper>portlet-asset-categories-navigation</css-class-wrapper>
+		<css-class-wrapper>portlet-tags-navigation</css-class-wrapper>
 	</portlet>
 	<portlet>
 		<portlet-name>124</portlet-name>
@@ -1272,7 +1272,7 @@
 	<portlet>
 		<portlet-name>141</portlet-name>
 		<icon>/html/icons/default.png</icon>
-		<struts-path>asset_tags_navigation</struts-path>
+		<struts-path>tags_entries_navigation</struts-path>
 		<configuration-action-class>com.liferay.portlet.tagsnavigation.action.ConfigurationActionImpl</configuration-action-class>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
@@ -1281,7 +1281,7 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
-		<css-class-wrapper>portlet-asset-tags-navigation</css-class-wrapper>
+		<css-class-wrapper>portlet-tags-navigation</css-class-wrapper>
 	</portlet>
 	<portlet>
 		<portlet-name>142</portlet-name>

@@ -392,26 +392,6 @@ Liferay.Service.registerClass(
 Liferay.Service.register("Liferay.Service.Asset", "com.liferay.portlet.asset.service");
 
 Liferay.Service.registerClass(
-	Liferay.Service.Asset, "Asset",
-	{
-		deleteAsset: true,
-		getAsset: true,
-		getAssets: true,
-		getAssetsCount: true,
-		getAssetsRSS: true,
-		getAssetTypes: true,
-		getCompanyAssetDisplays: true,
-		getCompanyAssets: true,
-		getCompanyAssetsCount: true,
-		getCompanyAssetsRSS: true,
-		incrementViewCounter: true,
-		searchAssetDisplays: true,
-		searchAssetDisplaysCount: true,
-		updateAsset: true
-	}
-);
-
-Liferay.Service.registerClass(
 	Liferay.Service.Asset, "AssetCategory",
 	{
 		addCategory: true,
@@ -434,31 +414,6 @@ Liferay.Service.registerClass(
 		getCategoryProperties: true,
 		getCategoryPropertyValues: true,
 		updateCategoryProperty: true
-	}
-);
-
-Liferay.Service.registerClass(
-	Liferay.Service.Asset, "AssetTag",
-	{
-		addTag: true,
-		deleteTag: true,
-		getTags: true,
-		getTag: true,
-		getGroupTags: true,
-		mergeTags: true,
-		search: true,
-		updateTag: true
-	}
-);
-
-Liferay.Service.registerClass(
-	Liferay.Service.Asset, "AssetTagProperty",
-	{
-		addProperty: true,
-		deleteProperty: true,
-		getProperties: true,
-		getPropertyValues: true,
-		updateProperty: true
 	}
 );
 
@@ -853,6 +808,66 @@ Liferay.Service.registerClass(
 		getProductVersions: true,
 		getProductVersionsCount: true,
 		updateProductVersion: true
+	}
+);
+
+Liferay.Service.register("Liferay.Service.Tags", "com.liferay.portlet.tags.service");
+
+Liferay.Service.registerClass(
+	Liferay.Service.Tags, "TagsAsset",
+	{
+		deleteAsset: true,
+		getAsset: true,
+		getAssets: true,
+		getAssetsCount: true,
+		getAssetsRSS: true,
+		getAssetTypes: true,
+		getCompanyAssetDisplays: true,
+		getCompanyAssets: true,
+		getCompanyAssetsCount: true,
+		getCompanyAssetsRSS: true,
+		incrementViewCounter: true,
+		searchAssetDisplays: true,
+		searchAssetDisplaysCount: true,
+		updateAsset: true
+	}
+);
+
+Liferay.Service.registerClass(
+	Liferay.Service.Tags, "TagsEntry",
+	{
+		addEntry: true,
+		deleteEntry: true,
+		getEntries: true,
+		getEntry: true,
+		getGroupVocabularyEntries: true,
+		getGroupVocabularyRootEntries: true,
+		mergeEntries: true,
+		search: true,
+		updateEntry: true
+	}
+);
+
+Liferay.Service.registerClass(
+	Liferay.Service.Tags, "TagsProperty",
+	{
+		addProperty: true,
+		deleteProperty: true,
+		getProperties: true,
+		getPropertyValues: true,
+		updateProperty: true
+	}
+);
+
+Liferay.Service.registerClass(
+	Liferay.Service.Tags, "TagsVocabulary",
+	{
+		addVocabulary: true,
+		deleteVocabulary: true,
+		getCompanyVocabularies: true,
+		getGroupVocabularies: true,
+		getVocabulary: true,
+		updateVocabulary: true
 	}
 );
 

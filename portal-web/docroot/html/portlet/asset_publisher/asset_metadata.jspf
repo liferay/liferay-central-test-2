@@ -68,7 +68,7 @@ for (int j = 0; j < metadataFields.length; j++) {
 	}
 
 	if (Validator.isNotNull(value)) {
-		if (previous && !(value.equals("tags") && asset.getTags().isEmpty() )) {
+		if (previous && !(value.equals("tags") && asset.getEntries().isEmpty() )) {
 %>
 
 			<span class="vertical-separator"><!-- --></span>
@@ -82,7 +82,7 @@ for (int j = 0; j < metadataFields.length; j++) {
 		<span class="metadata-entry <%= "metadata-" + metadataFields[j] %>">
 			<c:choose>
 				<c:when test='<%= value.equals("tags") %>' >
-					<liferay-ui:asset-tags-summary
+					<liferay-ui:tags-summary
 						className="<%= asset.getClassName() %>"
 						classPK="<%= asset.getClassPK () %>"
 						portletURL="<%= portletURL %>"

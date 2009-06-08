@@ -189,7 +189,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		}
 
 		if (context.getBooleanParameter(_NAMESPACE, "categories")) {
-			context.addAssetCategories(
+			context.addTagsCategories(
 				JournalArticle.class, article.getResourcePrimKey());
 		}
 
@@ -204,7 +204,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		}
 
 		if (context.getBooleanParameter(_NAMESPACE, "tags")) {
-			context.addAssetTags(
+			context.addTagsEntries(
 				JournalArticle.class, article.getResourcePrimKey());
 		}
 
@@ -741,16 +741,16 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		String articleURL = null;
 
-		long[] assetCategoryIds = null;
-		String[] assetTagNames = null;
+		String[] tagsCategories = null;
+		String[] tagsEntries = null;
 
 		if (context.getBooleanParameter(_NAMESPACE, "categories")) {
-			assetCategoryIds = context.getAssetCategoryIds(
+			tagsCategories = context.getTagsCategories(
 				JournalArticle.class, article.getResourcePrimKey());
 		}
 
 		if (context.getBooleanParameter(_NAMESPACE, "tags")) {
-			assetTagNames = context.getAssetTagNames(
+			tagsEntries = context.getTagsEntries(
 				JournalArticle.class, article.getResourcePrimKey());
 		}
 
@@ -779,8 +779,8 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		serviceContext.setAddCommunityPermissions(addCommunityPermissions);
 		serviceContext.setAddGuestPermissions(addGuestPermissions);
-		serviceContext.setAssetCategoyIds(assetCategoryIds);
-		serviceContext.setAssetTagNames(assetTagNames);
+		serviceContext.setTagsCategories(tagsCategories);
+		serviceContext.setTagsEntries(tagsEntries);
 
 		JournalArticle existingArticle = null;
 

@@ -24,124 +24,87 @@ package com.liferay.documentlibrary.service;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.annotation.Isolation;
-import com.liferay.portal.kernel.annotation.Propagation;
 import com.liferay.portal.kernel.annotation.Transactional;
+
+import java.io.File;
+
+import java.util.Date;
 
 /**
  * <a href="DLService.java.html"><b><i>View Source</i></b></a>
  *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
- * This interface defines the service. The default implementation is
- * <code>com.liferay.documentlibrary.service.impl.DLServiceImpl</code>.
- * Modify methods in that class and rerun ServiceBuilder to populate this class
- * and all other generated classes.
- * </p>
- *
- * <p>
- * This is a remote service. Methods of this service are expected to have security checks based on the propagated JAAS credentials because this service can be accessed remotely.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.documentlibrary.service.DLServiceUtil
- *
  */
-@Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
-	PortalException.class, SystemException.class})
+@Transactional(rollbackFor = {PortalException.class, SystemException.class})
 public interface DLService {
-	public void addDirectory(long companyId, long repositoryId,
-		java.lang.String dirName)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
 
-	public void addFile(long companyId, java.lang.String portletId,
-		long groupId, long repositoryId, java.lang.String fileName,
-		long fileEntryId, java.lang.String properties,
-		java.util.Date modifiedDate,
-		com.liferay.portal.service.ServiceContext serviceContext,
-		java.io.File file)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+	public void addDirectory(long companyId, long repositoryId, String dirName)
+		throws PortalException, SystemException;
 
-	public void addFile(long companyId, java.lang.String portletId,
-		long groupId, long repositoryId, java.lang.String fileName,
-		long fileEntryId, java.lang.String properties,
-		java.util.Date modifiedDate,
-		com.liferay.portal.service.ServiceContext serviceContext, byte[] bytes)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+	public void addFile(
+			long companyId, String portletId, long groupId, long repositoryId,
+			String fileName, long fileEntryId, String properties,
+			Date modifiedDate, String[] tagsCategories, String[] tagsEntries,
+			File file)
+		throws PortalException, SystemException;
 
-	public void deleteDirectory(long companyId, java.lang.String portletId,
-		long repositoryId, java.lang.String dirName)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+	public void addFile(
+			long companyId, String portletId, long groupId, long repositoryId,
+			String fileName, long fileEntryId, String properties,
+			Date modifiedDate, String[] tagsCategories, String[] tagsEntries,
+			byte[] bytes)
+		throws PortalException, SystemException;
 
-	public void deleteFile(long companyId, java.lang.String portletId,
-		long repositoryId, java.lang.String fileName)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+	public void deleteDirectory(
+			long companyId, String portletId, long repositoryId, String dirName)
+		throws PortalException, SystemException;
 
-	public void deleteFile(long companyId, java.lang.String portletId,
-		long repositoryId, java.lang.String fileName, double versionNumber)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+	public void deleteFile(
+			long companyId, String portletId, long repositoryId,
+			String fileName)
+		throws PortalException, SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public byte[] getFile(long companyId, long repositoryId,
-		java.lang.String fileName)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+	public void deleteFile(
+			long companyId, String portletId, long repositoryId,
+			String fileName, double versionNumber)
+		throws PortalException, SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public byte[] getFile(long companyId, long repositoryId,
-		java.lang.String fileName, double versionNumber)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+	public byte[] getFile(long companyId, long repositoryId, String fileName)
+		throws PortalException, SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.lang.String[] getFileNames(long companyId, long repositoryId,
-		java.lang.String dirName)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+	public byte[] getFile(
+			long companyId, long repositoryId, String fileName,
+			double versionNumber)
+		throws PortalException, SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public long getFileSize(long companyId, long repositoryId,
-		java.lang.String fileName)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+	public String[] getFileNames(
+			long companyId, long repositoryId, String dirName)
+		throws PortalException, SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public void reIndex(java.lang.String[] ids)
-		throws com.liferay.portal.SystemException;
+	public long getFileSize(
+			long companyId, long repositoryId, String fileName)
+		throws PortalException, SystemException;
 
-	public void updateFile(long companyId, java.lang.String portletId,
-		long groupId, long repositoryId, java.lang.String fileName,
-		double versionNumber, java.lang.String sourceFileName,
-		long fileEntryId, java.lang.String properties,
-		java.util.Date modifiedDate,
-		com.liferay.portal.service.ServiceContext serviceContext,
-		java.io.File file)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+	public void reIndex(String[] ids) throws SystemException;
 
-	public void updateFile(long companyId, java.lang.String portletId,
-		long groupId, long repositoryId, java.lang.String fileName,
-		double versionNumber, java.lang.String sourceFileName,
-		long fileEntryId, java.lang.String properties,
-		java.util.Date modifiedDate,
-		com.liferay.portal.service.ServiceContext serviceContext, byte[] bytes)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+	public void updateFile(
+			long companyId, String portletId, long groupId, long repositoryId,
+			String fileName, double versionNumber, String sourceFileName,
+			long fileEntryId, String properties, Date modifiedDate,
+			String[] tagsCategories, String[] tagsEntries, File file)
+		throws PortalException, SystemException;
 
-	public void updateFile(long companyId, java.lang.String portletId,
-		long groupId, long repositoryId, long newRepositoryId,
-		java.lang.String fileName, long fileEntryId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+	public void updateFile(
+			long companyId, String portletId, long groupId, long repositoryId,
+			String fileName, double versionNumber, String sourceFileName,
+			long fileEntryId, String properties, Date modifiedDate,
+			String[] tagsCategories, String[] tagsEntries, byte[] bytes)
+		throws PortalException, SystemException;
+
+	public void updateFile(
+			long companyId, String portletId, long groupId, long repositoryId,
+			long newRepositoryId, String fileName, long fileEntryId)
+		throws PortalException, SystemException;
+
 }

@@ -171,10 +171,6 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.announcements.service.AnnouncementsDeliveryLocalService;
 import com.liferay.portlet.announcements.service.AnnouncementsDeliveryService;
 import com.liferay.portlet.announcements.service.persistence.AnnouncementsDeliveryPersistence;
-import com.liferay.portlet.asset.service.AssetLocalService;
-import com.liferay.portlet.asset.service.AssetService;
-import com.liferay.portlet.asset.service.persistence.AssetFinder;
-import com.liferay.portlet.asset.service.persistence.AssetPersistence;
 import com.liferay.portlet.blogs.service.BlogsStatsUserLocalService;
 import com.liferay.portlet.blogs.service.persistence.BlogsStatsUserFinder;
 import com.liferay.portlet.blogs.service.persistence.BlogsStatsUserPersistence;
@@ -198,6 +194,10 @@ import com.liferay.portlet.social.service.SocialRequestLocalService;
 import com.liferay.portlet.social.service.persistence.SocialActivityFinder;
 import com.liferay.portlet.social.service.persistence.SocialActivityPersistence;
 import com.liferay.portlet.social.service.persistence.SocialRequestPersistence;
+import com.liferay.portlet.tags.service.TagsAssetLocalService;
+import com.liferay.portlet.tags.service.TagsAssetService;
+import com.liferay.portlet.tags.service.persistence.TagsAssetFinder;
+import com.liferay.portlet.tags.service.persistence.TagsAssetPersistence;
 
 /**
  * <a href="UserServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
@@ -1423,38 +1423,6 @@ public abstract class UserServiceBaseImpl extends PrincipalBean
 		this.announcementsDeliveryPersistence = announcementsDeliveryPersistence;
 	}
 
-	public AssetLocalService getAssetLocalService() {
-		return assetLocalService;
-	}
-
-	public void setAssetLocalService(AssetLocalService assetLocalService) {
-		this.assetLocalService = assetLocalService;
-	}
-
-	public AssetService getAssetService() {
-		return assetService;
-	}
-
-	public void setAssetService(AssetService assetService) {
-		this.assetService = assetService;
-	}
-
-	public AssetPersistence getAssetPersistence() {
-		return assetPersistence;
-	}
-
-	public void setAssetPersistence(AssetPersistence assetPersistence) {
-		this.assetPersistence = assetPersistence;
-	}
-
-	public AssetFinder getAssetFinder() {
-		return assetFinder;
-	}
-
-	public void setAssetFinder(AssetFinder assetFinder) {
-		this.assetFinder = assetFinder;
-	}
-
 	public BlogsStatsUserLocalService getBlogsStatsUserLocalService() {
 		return blogsStatsUserLocalService;
 	}
@@ -1656,6 +1624,40 @@ public abstract class UserServiceBaseImpl extends PrincipalBean
 	public void setSocialRequestPersistence(
 		SocialRequestPersistence socialRequestPersistence) {
 		this.socialRequestPersistence = socialRequestPersistence;
+	}
+
+	public TagsAssetLocalService getTagsAssetLocalService() {
+		return tagsAssetLocalService;
+	}
+
+	public void setTagsAssetLocalService(
+		TagsAssetLocalService tagsAssetLocalService) {
+		this.tagsAssetLocalService = tagsAssetLocalService;
+	}
+
+	public TagsAssetService getTagsAssetService() {
+		return tagsAssetService;
+	}
+
+	public void setTagsAssetService(TagsAssetService tagsAssetService) {
+		this.tagsAssetService = tagsAssetService;
+	}
+
+	public TagsAssetPersistence getTagsAssetPersistence() {
+		return tagsAssetPersistence;
+	}
+
+	public void setTagsAssetPersistence(
+		TagsAssetPersistence tagsAssetPersistence) {
+		this.tagsAssetPersistence = tagsAssetPersistence;
+	}
+
+	public TagsAssetFinder getTagsAssetFinder() {
+		return tagsAssetFinder;
+	}
+
+	public void setTagsAssetFinder(TagsAssetFinder tagsAssetFinder) {
+		this.tagsAssetFinder = tagsAssetFinder;
 	}
 
 	protected void runSQL(String sql) throws SystemException {
@@ -1953,14 +1955,6 @@ public abstract class UserServiceBaseImpl extends PrincipalBean
 	protected AnnouncementsDeliveryService announcementsDeliveryService;
 	@BeanReference(name = "com.liferay.portlet.announcements.service.persistence.AnnouncementsDeliveryPersistence.impl")
 	protected AnnouncementsDeliveryPersistence announcementsDeliveryPersistence;
-	@BeanReference(name = "com.liferay.portlet.asset.service.AssetLocalService.impl")
-	protected AssetLocalService assetLocalService;
-	@BeanReference(name = "com.liferay.portlet.asset.service.AssetService.impl")
-	protected AssetService assetService;
-	@BeanReference(name = "com.liferay.portlet.asset.service.persistence.AssetPersistence.impl")
-	protected AssetPersistence assetPersistence;
-	@BeanReference(name = "com.liferay.portlet.asset.service.persistence.AssetFinder.impl")
-	protected AssetFinder assetFinder;
 	@BeanReference(name = "com.liferay.portlet.blogs.service.BlogsStatsUserLocalService.impl")
 	protected BlogsStatsUserLocalService blogsStatsUserLocalService;
 	@BeanReference(name = "com.liferay.portlet.blogs.service.persistence.BlogsStatsUserPersistence.impl")
@@ -2007,4 +2001,12 @@ public abstract class UserServiceBaseImpl extends PrincipalBean
 	protected SocialRequestLocalService socialRequestLocalService;
 	@BeanReference(name = "com.liferay.portlet.social.service.persistence.SocialRequestPersistence.impl")
 	protected SocialRequestPersistence socialRequestPersistence;
+	@BeanReference(name = "com.liferay.portlet.tags.service.TagsAssetLocalService.impl")
+	protected TagsAssetLocalService tagsAssetLocalService;
+	@BeanReference(name = "com.liferay.portlet.tags.service.TagsAssetService.impl")
+	protected TagsAssetService tagsAssetService;
+	@BeanReference(name = "com.liferay.portlet.tags.service.persistence.TagsAssetPersistence.impl")
+	protected TagsAssetPersistence tagsAssetPersistence;
+	@BeanReference(name = "com.liferay.portlet.tags.service.persistence.TagsAssetFinder.impl")
+	protected TagsAssetFinder tagsAssetFinder;
 }

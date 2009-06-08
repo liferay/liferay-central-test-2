@@ -169,10 +169,10 @@ import com.liferay.portal.service.persistence.WebDAVPropsPersistence;
 import com.liferay.portal.service.persistence.WebsitePersistence;
 import com.liferay.portal.util.PortalUtil;
 
-import com.liferay.portlet.asset.service.AssetLocalService;
-import com.liferay.portlet.asset.service.AssetService;
-import com.liferay.portlet.asset.service.persistence.AssetFinder;
-import com.liferay.portlet.asset.service.persistence.AssetPersistence;
+import com.liferay.portlet.tags.service.TagsAssetLocalService;
+import com.liferay.portlet.tags.service.TagsAssetService;
+import com.liferay.portlet.tags.service.persistence.TagsAssetFinder;
+import com.liferay.portlet.tags.service.persistence.TagsAssetPersistence;
 
 import java.util.List;
 
@@ -1425,36 +1425,38 @@ public abstract class OrganizationLocalServiceBaseImpl
 		this.counterService = counterService;
 	}
 
-	public AssetLocalService getAssetLocalService() {
-		return assetLocalService;
+	public TagsAssetLocalService getTagsAssetLocalService() {
+		return tagsAssetLocalService;
 	}
 
-	public void setAssetLocalService(AssetLocalService assetLocalService) {
-		this.assetLocalService = assetLocalService;
+	public void setTagsAssetLocalService(
+		TagsAssetLocalService tagsAssetLocalService) {
+		this.tagsAssetLocalService = tagsAssetLocalService;
 	}
 
-	public AssetService getAssetService() {
-		return assetService;
+	public TagsAssetService getTagsAssetService() {
+		return tagsAssetService;
 	}
 
-	public void setAssetService(AssetService assetService) {
-		this.assetService = assetService;
+	public void setTagsAssetService(TagsAssetService tagsAssetService) {
+		this.tagsAssetService = tagsAssetService;
 	}
 
-	public AssetPersistence getAssetPersistence() {
-		return assetPersistence;
+	public TagsAssetPersistence getTagsAssetPersistence() {
+		return tagsAssetPersistence;
 	}
 
-	public void setAssetPersistence(AssetPersistence assetPersistence) {
-		this.assetPersistence = assetPersistence;
+	public void setTagsAssetPersistence(
+		TagsAssetPersistence tagsAssetPersistence) {
+		this.tagsAssetPersistence = tagsAssetPersistence;
 	}
 
-	public AssetFinder getAssetFinder() {
-		return assetFinder;
+	public TagsAssetFinder getTagsAssetFinder() {
+		return tagsAssetFinder;
 	}
 
-	public void setAssetFinder(AssetFinder assetFinder) {
-		this.assetFinder = assetFinder;
+	public void setTagsAssetFinder(TagsAssetFinder tagsAssetFinder) {
+		this.tagsAssetFinder = tagsAssetFinder;
 	}
 
 	protected void runSQL(String sql) throws SystemException {
@@ -1744,12 +1746,12 @@ public abstract class OrganizationLocalServiceBaseImpl
 	protected CounterLocalService counterLocalService;
 	@BeanReference(name = "com.liferay.counter.service.CounterService.impl")
 	protected CounterService counterService;
-	@BeanReference(name = "com.liferay.portlet.asset.service.AssetLocalService.impl")
-	protected AssetLocalService assetLocalService;
-	@BeanReference(name = "com.liferay.portlet.asset.service.AssetService.impl")
-	protected AssetService assetService;
-	@BeanReference(name = "com.liferay.portlet.asset.service.persistence.AssetPersistence.impl")
-	protected AssetPersistence assetPersistence;
-	@BeanReference(name = "com.liferay.portlet.asset.service.persistence.AssetFinder.impl")
-	protected AssetFinder assetFinder;
+	@BeanReference(name = "com.liferay.portlet.tags.service.TagsAssetLocalService.impl")
+	protected TagsAssetLocalService tagsAssetLocalService;
+	@BeanReference(name = "com.liferay.portlet.tags.service.TagsAssetService.impl")
+	protected TagsAssetService tagsAssetService;
+	@BeanReference(name = "com.liferay.portlet.tags.service.persistence.TagsAssetPersistence.impl")
+	protected TagsAssetPersistence tagsAssetPersistence;
+	@BeanReference(name = "com.liferay.portlet.tags.service.persistence.TagsAssetFinder.impl")
+	protected TagsAssetFinder tagsAssetFinder;
 }

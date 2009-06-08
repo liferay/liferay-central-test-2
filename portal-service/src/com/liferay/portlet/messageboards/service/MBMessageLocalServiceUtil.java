@@ -424,11 +424,10 @@ public class MBMessageLocalServiceUtil {
 
 	public static void updateAsset(long userId,
 		com.liferay.portlet.messageboards.model.MBMessage message,
-		long[] assetCategoryIds, java.lang.String[] assetTagNames)
+		long[] assetCategoryIds, java.lang.String[] tagsEntries)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		getService()
-			.updateAsset(userId, message, assetCategoryIds, assetTagNames);
+		getService().updateAsset(userId, message, assetCategoryIds, tagsEntries);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage updateDiscussionMessage(

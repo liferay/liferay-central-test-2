@@ -109,17 +109,21 @@ public class ServiceContextFactory {
 
 		serviceContext.setPortletPreferencesIds(portletPreferencesIds);
 
+		// Tags
+
+		String[] tagsCategories = PortalUtil.getTagsCategories(portletRequest);
+		String[] tagsEntries = PortalUtil.getTagsEntries(portletRequest);
+
+		serviceContext.setTagsCategories(tagsCategories);
+
+		serviceContext.setTagsEntries(tagsEntries);
+
 		// Asset
 
 		long[] assetCategoryIds = StringUtil.split(
 			ParamUtil.getString(portletRequest, "assetCategoryIds"), 0L);
 
 		serviceContext.setAssetCategoyIds(assetCategoryIds);
-
-		String[] assetTagNames = StringUtil.split(
-			ParamUtil.getString(portletRequest, "assetTagNames"));
-
-		serviceContext.setAssetTagNames(assetTagNames);
 
 		return serviceContext;
 	}

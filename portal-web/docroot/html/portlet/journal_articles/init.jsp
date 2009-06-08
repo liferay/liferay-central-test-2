@@ -25,7 +25,6 @@
 <%@ include file="/html/portlet/init.jsp" %>
 
 <%@ page import="com.liferay.portal.NoSuchGroupException" %>
-<%@ page import="com.liferay.portlet.asset.service.AssetLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.journal.NoSuchStructureException" %>
 <%@ page import="com.liferay.portlet.journal.action.EditArticleAction" %>
 <%@ page import="com.liferay.portlet.journal.model.JournalArticle" %>
@@ -47,6 +46,7 @@
 <%@ page import="com.liferay.portlet.layoutconfiguration.util.xml.PortletLogic" %>
 <%@ page import="com.liferay.portlet.layoutconfiguration.util.xml.RenderURLLogic" %>
 <%@ page import="com.liferay.portlet.layoutconfiguration.util.xml.RuntimeLogic" %>
+<%@ page import="com.liferay.portlet.tags.service.TagsAssetLocalServiceUtil" %>
 
 <%
 PortletPreferences preferences = renderRequest.getPreferences();

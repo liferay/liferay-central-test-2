@@ -67,7 +67,7 @@ long folderId = BeanParamUtil.getLong(entry, request, "folderId");
 <liferay-ui:error exception="<%= EntryURLException.class %>" message="please-enter-a-valid-url" />
 <liferay-ui:error exception="<%= NoSuchFolderException.class %>" message="please-enter-a-valid-folder" />
 
-<liferay-ui:asset-tags-error />
+<liferay-ui:tags-error />
 
 <c:if test="<%= folderId > 0 %>">
 	<div class="breadcrumbs">
@@ -163,9 +163,10 @@ long folderId = BeanParamUtil.getLong(entry, request, "folderId");
 		}
 		%>
 
-		<liferay-ui:asset-tags-selector
+		<liferay-ui:tags-selector
 			className="<%= BookmarksEntry.class.getName() %>"
 			classPK="<%= classPK %>"
+			hiddenInput="tagsEntries"
 		/>
 	</td>
 </tr>

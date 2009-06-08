@@ -175,7 +175,7 @@ public class BlogsPortletDataHandlerImpl extends BasePortletDataHandler {
 		}
 
 		if (context.getBooleanParameter(_NAMESPACE, "tags")) {
-			context.addAssetTags(BlogsEntry.class, entry.getEntryId());
+			context.addTagsEntries(BlogsEntry.class, entry.getEntryId());
 		}
 
 		entry.setUserUuid(entry.getUserUuid());
@@ -219,10 +219,10 @@ public class BlogsPortletDataHandlerImpl extends BasePortletDataHandler {
 		boolean allowTrackbacks = entry.isAllowTrackbacks();
 		String[] trackbacks = StringUtil.split(entry.getTrackbacks());
 
-		String[] assetTagNames = null;
+		String[] tagsEntries = null;
 
 		if (context.getBooleanParameter(_NAMESPACE, "tags")) {
-			assetTagNames = context.getAssetTagNames(
+			tagsEntries = context.getTagsEntries(
 				BlogsEntry.class, entry.getEntryId());
 		}
 
@@ -231,7 +231,7 @@ public class BlogsPortletDataHandlerImpl extends BasePortletDataHandler {
 		serviceContext.setAddCommunityPermissions(true);
 		serviceContext.setAddGuestPermissions(true);
 		serviceContext.setScopeGroupId(context.getGroupId());
-		serviceContext.setAssetTagNames(assetTagNames);
+		serviceContext.setTagsEntries(tagsEntries);
 
 		BlogsEntry existingEntry = null;
 

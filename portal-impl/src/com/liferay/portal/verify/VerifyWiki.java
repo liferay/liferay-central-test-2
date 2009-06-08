@@ -58,7 +58,7 @@ public class VerifyWiki extends VerifyProcess {
 
 		for (WikiPage page : pages) {
 			try {
-				WikiPageLocalServiceUtil.updateAsset(
+				WikiPageLocalServiceUtil.updateTagsAsset(
 					page.getUserId(), page, new long[0], new String[0]);
 			}
 			catch (Exception e) {

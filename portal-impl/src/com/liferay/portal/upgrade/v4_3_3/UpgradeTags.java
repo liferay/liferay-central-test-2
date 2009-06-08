@@ -28,8 +28,7 @@ import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
 import com.liferay.portal.upgrade.util.UpgradeTable;
-
-import java.sql.Types;
+import com.liferay.portlet.tags.model.impl.TagsAssetImpl;
 
 /**
  * <a href="UpgradeTags.java.html"><b><i>View Source</i></b></a>
@@ -55,63 +54,13 @@ public class UpgradeTags extends UpgradeProcess {
 		// TagsAsset
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
-			_TAGS_ASSET_TABLE_NAME, _TAGS_ASSET_TABLE_COLUMNS);
+			TagsAssetImpl.TABLE_NAME, TagsAssetImpl.TABLE_COLUMNS);
 
-		upgradeTable.setCreateSQL(_TAGS_ASSET_TABLE_SQL_CREATE);
+		upgradeTable.setCreateSQL(TagsAssetImpl.TABLE_SQL_CREATE);
 
 		upgradeTable.updateTable();
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(UpgradeTags.class);
-
-	private static final String _TAGS_ASSET_TABLE_NAME = "TagsAsset";
-	private static final Object[][] _TAGS_ASSET_TABLE_COLUMNS = {
-			{ "assetId", new Integer(Types.BIGINT) },
-
-			{ "groupId", new Integer(Types.BIGINT) },
-
-			{ "companyId", new Integer(Types.BIGINT) },
-
-			{ "userId", new Integer(Types.BIGINT) },
-
-			{ "userName", new Integer(Types.VARCHAR) },
-
-			{ "createDate", new Integer(Types.TIMESTAMP) },
-
-			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
-
-			{ "classNameId", new Integer(Types.BIGINT) },
-
-			{ "classPK", new Integer(Types.BIGINT) },
-
-			{ "visible", new Integer(Types.BOOLEAN) },
-
-			{ "startDate", new Integer(Types.TIMESTAMP) },
-
-			{ "endDate", new Integer(Types.TIMESTAMP) },
-
-			{ "publishDate", new Integer(Types.TIMESTAMP) },
-
-			{ "expirationDate", new Integer(Types.TIMESTAMP) },
-
-			{ "mimeType", new Integer(Types.VARCHAR) },
-
-			{ "title", new Integer(Types.VARCHAR) },
-
-			{ "description", new Integer(Types.VARCHAR) },
-
-			{ "summary", new Integer(Types.VARCHAR) },
-
-			{ "url", new Integer(Types.VARCHAR) },
-
-			{ "height", new Integer(Types.INTEGER) },
-
-			{ "width", new Integer(Types.INTEGER) },
-
-			{ "priority", new Integer(Types.DOUBLE) },
-
-			{ "viewCount", new Integer(Types.INTEGER) }
-		};
-	private static final String _TAGS_ASSET_TABLE_SQL_CREATE = "create table TagsAsset (assetId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,visible BOOLEAN,startDate DATE null,endDate DATE null,publishDate DATE null,expirationDate DATE null,mimeType VARCHAR(75) null,title VARCHAR(255) null,description STRING null,summary STRING null,url STRING null,height INTEGER,width INTEGER,priority DOUBLE,viewCount INTEGER)";
 
 }

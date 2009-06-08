@@ -545,7 +545,7 @@ public interface UserLocalService {
 			com.liferay.portal.SystemException;
 
 	public void updateAsset(long userId, com.liferay.portal.model.User user,
-		long[] assetCategoryIds, java.lang.String[] assetTagNames)
+		long[] assetCategoryIds, java.lang.String[] tagsEntries)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 

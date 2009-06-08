@@ -54,12 +54,12 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 	public static void addEvent(
 			long companyId, long groupId, long userId, String userName,
 			long eventId, String title, String description, Date displayDate,
-			String[] assetTagNames, ExpandoBridge expandoBridge)
+			String[] tagsEntries, ExpandoBridge expandoBridge)
 		throws SearchException {
 
 		Document doc = getEventDocument(
 			companyId, groupId, userId, userName, eventId, title, description,
-			displayDate, assetTagNames, expandoBridge);
+			displayDate, tagsEntries, expandoBridge);
 
 		SearchEngineUtil.addDocument(companyId, doc);
 	}
@@ -73,7 +73,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 	public static Document getEventDocument(
 		long companyId, long groupId, long userId, String userName,
 		long eventId, String title, String description, Date displayDate,
-		String[] assetTagNames, ExpandoBridge expandoBridge) {
+		String[] tagsEntries, ExpandoBridge expandoBridge) {
 
 		userName = PortalUtil.getUserName(userId, userName);
 		description = HtmlUtil.extractText(description);
@@ -92,7 +92,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 		doc.addText(Field.TITLE, title);
 		doc.addText(Field.DESCRIPTION, description);
-		doc.addKeyword(Field.ASSET_TAG_NAMES, assetTagNames);
+		doc.addKeyword(Field.TAGS_ENTRIES, tagsEntries);
 
 		doc.addKeyword(Field.ENTRY_CLASS_NAME, CalEvent.class.getName());
 		doc.addKeyword(Field.ENTRY_CLASS_PK, eventId);
@@ -113,12 +113,12 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 	public static void updateEvent(
 			long companyId, long groupId, long userId, String userName,
 			long eventId, String title, String description, Date displayDate,
-			String[] assetTagNames, ExpandoBridge expandoBridge)
+			String[] tagsEntries, ExpandoBridge expandoBridge)
 		throws SearchException {
 
 		Document doc = getEventDocument(
 			companyId, groupId, userId, userName, eventId, title, description,
-			displayDate, assetTagNames, expandoBridge);
+			displayDate, tagsEntries, expandoBridge);
 
 		SearchEngineUtil.updateDocument(companyId, doc.get(Field.UID), doc);
 	}

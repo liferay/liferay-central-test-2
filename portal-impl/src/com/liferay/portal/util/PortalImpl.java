@@ -120,7 +120,6 @@ import com.liferay.portlet.PortletURLImpl;
 import com.liferay.portlet.RenderRequestImpl;
 import com.liferay.portlet.RenderResponseImpl;
 import com.liferay.portlet.UserAttributes;
-import com.liferay.portlet.asset.util.AssetUtil;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
@@ -129,6 +128,7 @@ import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.social.util.FacebookUtil;
+import com.liferay.portlet.tags.util.TagsUtil;
 import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.util.Encryptor;
 import com.liferay.util.JS;
@@ -518,14 +518,6 @@ public class PortalImpl implements Portal {
 			// sendRedirect of javax.portlet.ActionResponse
 
 		}
-	}
-
-	public long[] getAssetCategoryIds(PortletRequest portletRequest) {
-		return AssetUtil.getCategoyIds(portletRequest);
-	}
-
-	public String[] getAssetTagNames(PortletRequest portletRequest) {
-		return AssetUtil.getTagNames(portletRequest);
 	}
 
 	public String getCDNHost() {
@@ -2422,6 +2414,14 @@ public class PortalImpl implements Portal {
 
 	public String[] getSystemRoles() {
 		return _allSystemRoles;
+	}
+
+	public String[] getTagsCategories(PortletRequest portletRequest) {
+		return TagsUtil.getTagsCategories(portletRequest);
+	}
+
+	public String[] getTagsEntries(PortletRequest portletRequest) {
+		return TagsUtil.getTagsEntries(portletRequest);
 	}
 
 	public UploadPortletRequest getUploadPortletRequest(

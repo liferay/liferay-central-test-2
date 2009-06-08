@@ -35,8 +35,6 @@ import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.ContentTypeUtil;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portlet.asset.AssetCategoryException;
-import com.liferay.portlet.asset.AssetTagException;
 import com.liferay.portlet.assetpublisher.util.AssetPublisherUtil;
 import com.liferay.portlet.imagegallery.DuplicateImageNameException;
 import com.liferay.portlet.imagegallery.ImageNameException;
@@ -45,6 +43,7 @@ import com.liferay.portlet.imagegallery.NoSuchFolderException;
 import com.liferay.portlet.imagegallery.NoSuchImageException;
 import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.imagegallery.service.IGImageServiceUtil;
+import com.liferay.portlet.tags.TagsEntryException;
 
 import java.io.File;
 
@@ -98,8 +97,7 @@ public class EditImageAction extends PortletAction {
 
 				SessionErrors.add(actionRequest, e.getClass().getName());
 			}
-			else if (e instanceof AssetCategoryException ||
-					 e instanceof AssetTagException) {
+			else if (e instanceof TagsEntryException) {
 				SessionErrors.add(actionRequest, e.getClass().getName(), e);
 			}
 			else {

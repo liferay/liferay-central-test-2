@@ -335,7 +335,7 @@ public interface MBMessageLocalService {
 
 	public void updateAsset(long userId,
 		com.liferay.portlet.messageboards.model.MBMessage message,
-		long[] assetCategoryIds, java.lang.String[] assetTagNames)
+		long[] assetCategoryIds, java.lang.String[] tagsEntries)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 

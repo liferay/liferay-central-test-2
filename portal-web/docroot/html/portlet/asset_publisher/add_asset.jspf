@@ -25,7 +25,7 @@
 <%
 List assetTypes = new ArrayList();
 
-AssetType[] allAssetTypes = AssetServiceUtil.getAssetTypes(themeDisplay.getLocale().toString());
+TagsAssetType[] allAssetTypes = TagsAssetServiceUtil.getAssetTypes(themeDisplay.getLocale().toString());
 
 for (int i = 0; i < allAssetTypes.length; i++) {
 	if ((classNameId == 0) || (classNameId == allAssetTypes[i].getClassNameId())) {
@@ -33,7 +33,7 @@ for (int i = 0; i < allAssetTypes.length; i++) {
 	}
 }
 
-PortletURL[] urls = getAddURLs(renderRequest, tagNames, assetTypes);
+PortletURL[] urls = getAddURLs(renderRequest, entries, assetTypes);
 %>
 
 <c:if test="<%= urls.length > 0 %>">
@@ -57,9 +57,9 @@ PortletURL[] urls = getAddURLs(renderRequest, tagNames, assetTypes);
 			Iterator itr = assetTypes.iterator();
 
 			while (itr.hasNext()) {
-				AssetType assetType = (AssetType)itr.next();
+				TagsAssetType assetType = (TagsAssetType)itr.next();
 
-				PortletURL url = getAddURL(renderRequest, tagNames, assetType.getClassName());
+				PortletURL url = getAddURL(renderRequest, entries, assetType.getClassName());
 
 				if (url != null) {
 			%>
@@ -78,7 +78,7 @@ PortletURL[] urls = getAddURLs(renderRequest, tagNames, assetTypes);
 </c:if>
 
 <%!
-public PortletURL getAddURL(RenderRequest req, String[] tagNames, String assetType) throws Exception {
+public PortletURL getAddURL(RenderRequest req, String[] entries, String assetType) throws Exception {
 	RenderRequestImpl renderRequestImpl = (RenderRequestImpl)req;
 
 	ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
@@ -144,22 +144,22 @@ public PortletURL getAddURL(RenderRequest req, String[] tagNames, String assetTy
 			addURL.setParameter("referringPortletResource", referringPortletResource);
 		}
 		else {
-			addURL.setParameter("assetTagNames", StringUtil.merge(tagNames));
+			addURL.setParameter("tagsEntries", StringUtil.merge(entries));
 		}
 	}
 
 	return addURL;
 }
 
-public PortletURL[] getAddURLs(RenderRequest req, String[] tagNames, List assetTypes) throws Exception {
+public PortletURL[] getAddURLs(RenderRequest req, String[] entries, List assetTypes) throws Exception {
 	List urls = new ArrayList();
 
 	Iterator itr = assetTypes.iterator();
 
 	while (itr.hasNext()) {
-		AssetType assetType = (AssetType)itr.next();
+		TagsAssetType assetType = (TagsAssetType)itr.next();
 
-		PortletURL url = getAddURL(req, tagNames, assetType.getClassName());
+		PortletURL url = getAddURL(req, entries, assetType.getClassName());
 
 		if (url != null) {
 			urls.add(url);

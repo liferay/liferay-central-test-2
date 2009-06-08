@@ -29,7 +29,7 @@ List results = (List)request.getAttribute("view.jsp-results");
 
 int assetIndex = ((Integer)request.getAttribute("view.jsp-assetIndex")).intValue();
 
-Asset asset = (Asset)request.getAttribute("view.jsp-asset");
+TagsAsset asset = (TagsAsset)request.getAttribute("view.jsp-asset");
 
 String title = (String)request.getAttribute("view.jsp-title");
 String summary = (String)request.getAttribute("view.jsp-summary");

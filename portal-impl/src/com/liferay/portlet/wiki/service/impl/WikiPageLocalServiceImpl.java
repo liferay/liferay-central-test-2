@@ -60,6 +60,7 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.expando.model.ExpandoBridge;
+import com.liferay.portlet.tags.model.TagsEntryConstants;
 import com.liferay.portlet.wiki.DuplicatePageException;
 import com.liferay.portlet.wiki.NoSuchPageException;
 import com.liferay.portlet.wiki.NoSuchPageResourceException;
@@ -184,7 +185,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		updateAsset(
 			userId, page, serviceContext.getAssetCategoryIds(),
-			serviceContext.getAssetTagNames());
+			serviceContext.getTagsEntries());
 
 		// Message boards
 
@@ -255,7 +256,8 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 				dlService.addFile(
 					companyId, portletId, groupId, repositoryId,
 					dirName + "/" + fileName, 0, StringPool.BLANK,
-					page.getModifiedDate(), new ServiceContext(), bytes);
+					page.getModifiedDate(), new String[0], new String[0],
+					bytes);
 			}
 			catch (DuplicateFileException dfe) {
 			}
@@ -322,6 +324,16 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		String format = page.getFormat();
 		String redirectTitle = page.getRedirectTitle();
 
+		String[] tagsCategories = tagsEntryLocalService.getEntryNames(
+			WikiPage.class.getName(), page.getResourcePrimKey(),
+			TagsEntryConstants.FOLKSONOMY_CATEGORY);
+		String[] tagsEntries = tagsEntryLocalService.getEntryNames(
+			WikiPage.class.getName(), page.getResourcePrimKey(),
+			TagsEntryConstants.FOLKSONOMY_TAG);
+
+		serviceContext.setTagsCategories(tagsCategories);
+		serviceContext.setTagsEntries(tagsEntries);
+
 		updatePage(
 			userId, nodeId, title, version, content, summary, minorEdit,
 			format, newParentTitle, redirectTitle, serviceContext);
@@ -371,11 +383,6 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			_log.error("Deleting index " + page.getPrimaryKey(), se);
 		}
 
-		// Asset
-
-		assetLocalService.deleteAsset(
-			WikiPage.class.getName(), page.getResourcePrimKey());
-
 		// Attachments
 
 		long companyId = page.getCompanyId();
@@ -389,6 +396,11 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		}
 		catch (NoSuchDirectoryException nsde) {
 		}
+
+		// Tags
+
+		tagsAssetLocalService.deleteAsset(
+			WikiPage.class.getName(), page.getResourcePrimKey());
 
 		// Subscriptions
 
@@ -819,7 +831,11 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		// Asset
 
-		updateAsset(userId, page, null, null);
+		String[] tagsEntries = tagsEntryLocalService.getEntryNames(
+			WikiPage.class.getName(), resourcePrimKey,
+			TagsEntryConstants.FOLKSONOMY_TAG);
+
+		updateAsset(userId, page, null, tagsEntries);
 
 		// Indexer
 
@@ -863,10 +879,10 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		String content = page.getContent();
 		Date modifiedDate = page.getModifiedDate();
 
-		long[] assetCategoryIds = assetCategoryLocalService.getCategoryIds(
-				WikiPage.class.getName(), resourcePrimKey);
-
-		String[] tagNames = assetTagLocalService.getTagNames(
+		String[] tagsCategories = tagsEntryLocalService.getEntryNames(
+			WikiPage.class.getName(), resourcePrimKey,
+			TagsEntryConstants.FOLKSONOMY_CATEGORY);
+		String[] tagsEntries = tagsEntryLocalService.getEntryNames(
 			WikiPage.class.getName(), resourcePrimKey);
 
 		ExpandoBridge expandoBridge = page.getExpandoBridge();
@@ -874,7 +890,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		try {
 			Indexer.updatePage(
 				companyId, groupId, resourcePrimKey, nodeId, title, content,
-				modifiedDate, assetCategoryIds, tagNames, expandoBridge);
+				modifiedDate, tagsCategories, tagsEntries, expandoBridge);
 		}
 		catch (SearchException se) {
 			_log.error("Reindexing " + page.getPrimaryKey(), se);
@@ -915,12 +931,12 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 	public void updateAsset(
 			long userId, WikiPage page, long[] assetCategoryIds,
-			String[] assetTagNames)
+			String[] tagsEntries)
 		throws PortalException, SystemException {
 
-		assetLocalService.updateAsset(
+		tagsAssetLocalService.updateAsset(
 			userId, page.getGroupId(), WikiPage.class.getName(),
-			page.getResourcePrimKey(), assetCategoryIds, assetTagNames, true,
+			page.getResourcePrimKey(), assetCategoryIds, tagsEntries, true,
 			null, null, null, null, ContentTypes.TEXT_HTML, page.getTitle(),
 			null, null, null, 0, 0, null, false);
 	}
@@ -1005,12 +1021,6 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		wikiNodePersistence.update(node, false);
 
-		// Asset
-
-		updateAsset(
-			userId, page, serviceContext.getAssetCategoryIds(),
-			serviceContext.getAssetTagNames());
-
 		// Social
 
 		socialActivityLocalService.addActivity(
@@ -1023,6 +1033,12 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		if (!minorEdit && NotificationThreadLocal.isNotificationEnabled()) {
 			notifySubscribers(node, page, serviceContext, true);
 		}
+
+		// Tags
+
+		updateAsset(
+			userId, page, serviceContext.getAssetCategoryIds(),
+			serviceContext.getTagsEntries());
 
 		// Indexer
 

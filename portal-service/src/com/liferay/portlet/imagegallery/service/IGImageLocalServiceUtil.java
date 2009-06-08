@@ -392,12 +392,12 @@ public class IGImageLocalServiceUtil {
 			is, contentType, serviceContext);
 	}
 
-	public static void updateAsset(long userId,
+	public static void updateTagsAsset(long userId,
 		com.liferay.portlet.imagegallery.model.IGImage image,
-		long[] assetCategoryIds, java.lang.String[] assetTagNames)
+		java.lang.String[] tagsCategories, java.lang.String[] tagsEntries)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		getService().updateAsset(userId, image, assetCategoryIds, assetTagNames);
+		getService().updateTagsAsset(userId, image, tagsCategories, tagsEntries);
 	}
 
 	public static IGImageLocalService getService() {

@@ -33,10 +33,6 @@ package com.liferay.portal.kernel.search;
  */
 public class Field {
 
-	public static final String ASSET_CATEGORY_IDS = "assetCategoryIds";
-
-	public static final String ASSET_TAG_NAMES = "assetTagNames";
-
 	public static final String COMMENTS = "comments";
 
 	public static final String COMPANY_ID = "companyId";
@@ -60,6 +56,10 @@ public class Field {
 	public static final String PROPERTIES = "properties";
 
 	public static final String ROLE_ID = "roleId";
+
+	public static final String TAGS_CATEGORIES = "tagsCategories";
+
+	public static final String TAGS_ENTRIES = "tagsEntries";
 
 	public static final String TITLE = "title";
 

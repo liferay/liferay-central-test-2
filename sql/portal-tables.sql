@@ -76,32 +76,6 @@ create table AnnouncementsFlag (
 	value INTEGER
 );
 
-create table Asset (
-	assetId LONG not null primary key,
-	groupId LONG,
-	companyId LONG,
-	userId LONG,
-	userName VARCHAR(75) null,
-	createDate DATE null,
-	modifiedDate DATE null,
-	classNameId LONG,
-	classPK LONG,
-	visible BOOLEAN,
-	startDate DATE null,
-	endDate DATE null,
-	publishDate DATE null,
-	expirationDate DATE null,
-	mimeType VARCHAR(75) null,
-	title VARCHAR(75) null,
-	description VARCHAR(75) null,
-	summary VARCHAR(75) null,
-	url VARCHAR(75) null,
-	height INTEGER,
-	width INTEGER,
-	priority DOUBLE,
-	viewCount INTEGER
-);
-
 create table AssetCategory (
 	categoryId LONG not null primary key,
 	groupId LONG,
@@ -127,29 +101,6 @@ create table AssetCategoryProperty (
 	value VARCHAR(75) null
 );
 
-create table AssetTag (
-	tagId LONG not null primary key,
-	groupId LONG,
-	companyId LONG,
-	userId LONG,
-	userName VARCHAR(75) null,
-	createDate DATE null,
-	modifiedDate DATE null,
-	name VARCHAR(75) null
-);
-
-create table AssetTagProperty (
-	tagPropertyId LONG not null primary key,
-	companyId LONG,
-	userId LONG,
-	userName VARCHAR(75) null,
-	createDate DATE null,
-	modifiedDate DATE null,
-	tagId LONG,
-	key_ VARCHAR(75) null,
-	value VARCHAR(75) null
-);
-
 create table AssetVocabulary (
 	vocabularyId LONG not null primary key,
 	groupId LONG,
@@ -160,18 +111,6 @@ create table AssetVocabulary (
 	modifiedDate DATE null,
 	name VARCHAR(75) null,
 	description VARCHAR(75) null
-);
-
-create table Assets_AssetCategories (
-	categoryId LONG not null,
-	assetId LONG not null,
-	primary key (categoryId, assetId)
-);
-
-create table Assets_AssetTags (
-	tagId LONG not null,
-	assetId LONG not null,
-	primary key (tagId, assetId)
 );
 
 create table BlogsEntry (
@@ -1446,6 +1385,101 @@ create table Subscription (
 	classNameId LONG,
 	classPK LONG,
 	frequency VARCHAR(75) null
+);
+
+create table TagsAsset (
+	assetId LONG not null primary key,
+	groupId LONG,
+	companyId LONG,
+	userId LONG,
+	userName VARCHAR(75) null,
+	createDate DATE null,
+	modifiedDate DATE null,
+	classNameId LONG,
+	classPK LONG,
+	visible BOOLEAN,
+	startDate DATE null,
+	endDate DATE null,
+	publishDate DATE null,
+	expirationDate DATE null,
+	mimeType VARCHAR(75) null,
+	title VARCHAR(255) null,
+	description STRING null,
+	summary STRING null,
+	url STRING null,
+	height INTEGER,
+	width INTEGER,
+	priority DOUBLE,
+	viewCount INTEGER
+);
+
+create table TagsAssets_AssetCategories (
+	assetId LONG not null,
+	categoryId LONG not null,
+	primary key (assetId, categoryId)
+);
+
+create table TagsAssets_AssetCategory (
+	assetId LONG not null,
+	categoryId LONG not null,
+	primary key (assetId, categoryId)
+);
+
+create table TagsAssets_CategoriesEntries (
+	assetId LONG not null,
+	entryId LONG not null,
+	primary key (assetId, entryId)
+);
+
+create table TagsAssets_TagsEntries (
+	assetId LONG not null,
+	entryId LONG not null,
+	primary key (assetId, entryId)
+);
+
+create table TagsEntry (
+	entryId LONG not null primary key,
+	groupId LONG,
+	companyId LONG,
+	userId LONG,
+	userName VARCHAR(75) null,
+	createDate DATE null,
+	modifiedDate DATE null,
+	parentEntryId LONG,
+	name VARCHAR(75) null,
+	vocabularyId LONG
+);
+
+create table TagsProperty (
+	propertyId LONG not null primary key,
+	companyId LONG,
+	userId LONG,
+	userName VARCHAR(75) null,
+	createDate DATE null,
+	modifiedDate DATE null,
+	entryId LONG,
+	key_ VARCHAR(75) null,
+	value VARCHAR(255) null
+);
+
+create table TagsSource (
+	sourceId LONG not null primary key,
+	parentSourceId LONG,
+	name VARCHAR(75) null,
+	acronym VARCHAR(75) null
+);
+
+create table TagsVocabulary (
+	vocabularyId LONG not null primary key,
+	groupId LONG,
+	companyId LONG,
+	userId LONG,
+	userName VARCHAR(75) null,
+	createDate DATE null,
+	modifiedDate DATE null,
+	name VARCHAR(75) null,
+	description VARCHAR(75) null,
+	folksonomy BOOLEAN
 );
 
 create table TasksProposal (

@@ -4744,8 +4744,6 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 	protected com.liferay.portal.service.persistence.WebsitePersistence websitePersistence;
 	@BeanReference(name = "com.liferay.portlet.announcements.service.persistence.AnnouncementsDeliveryPersistence.impl")
 	protected com.liferay.portlet.announcements.service.persistence.AnnouncementsDeliveryPersistence announcementsDeliveryPersistence;
-	@BeanReference(name = "com.liferay.portlet.asset.service.persistence.AssetPersistence.impl")
-	protected com.liferay.portlet.asset.service.persistence.AssetPersistence assetPersistence;
 	@BeanReference(name = "com.liferay.portlet.blogs.service.persistence.BlogsStatsUserPersistence.impl")
 	protected com.liferay.portlet.blogs.service.persistence.BlogsStatsUserPersistence blogsStatsUserPersistence;
 	@BeanReference(name = "com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence.impl")
@@ -4764,6 +4762,8 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 	protected com.liferay.portlet.social.service.persistence.SocialActivityPersistence socialActivityPersistence;
 	@BeanReference(name = "com.liferay.portlet.social.service.persistence.SocialRequestPersistence.impl")
 	protected com.liferay.portlet.social.service.persistence.SocialRequestPersistence socialRequestPersistence;
+	@BeanReference(name = "com.liferay.portlet.tags.service.persistence.TagsAssetPersistence.impl")
+	protected com.liferay.portlet.tags.service.persistence.TagsAssetPersistence tagsAssetPersistence;
 	protected ContainsGroup containsGroup;
 	protected AddGroup addGroup;
 	protected ClearGroups clearGroups;

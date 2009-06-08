@@ -57,14 +57,6 @@ import com.liferay.portal.service.persistence.UserFinder;
 import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.util.PortalUtil;
 
-import com.liferay.portlet.asset.service.AssetLocalService;
-import com.liferay.portlet.asset.service.AssetService;
-import com.liferay.portlet.asset.service.AssetTagLocalService;
-import com.liferay.portlet.asset.service.AssetTagService;
-import com.liferay.portlet.asset.service.persistence.AssetFinder;
-import com.liferay.portlet.asset.service.persistence.AssetPersistence;
-import com.liferay.portlet.asset.service.persistence.AssetTagFinder;
-import com.liferay.portlet.asset.service.persistence.AssetTagPersistence;
 import com.liferay.portlet.blogs.service.BlogsEntryLocalService;
 import com.liferay.portlet.blogs.service.BlogsEntryService;
 import com.liferay.portlet.blogs.service.persistence.BlogsEntryFinder;
@@ -99,6 +91,14 @@ import com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence;
 import com.liferay.portlet.social.service.SocialActivityLocalService;
 import com.liferay.portlet.social.service.persistence.SocialActivityFinder;
 import com.liferay.portlet.social.service.persistence.SocialActivityPersistence;
+import com.liferay.portlet.tags.service.TagsAssetLocalService;
+import com.liferay.portlet.tags.service.TagsAssetService;
+import com.liferay.portlet.tags.service.TagsEntryLocalService;
+import com.liferay.portlet.tags.service.TagsEntryService;
+import com.liferay.portlet.tags.service.persistence.TagsAssetFinder;
+import com.liferay.portlet.tags.service.persistence.TagsAssetPersistence;
+import com.liferay.portlet.tags.service.persistence.TagsEntryFinder;
+import com.liferay.portlet.tags.service.persistence.TagsEntryPersistence;
 
 import java.util.List;
 
@@ -590,71 +590,6 @@ public abstract class MBMessageLocalServiceBaseImpl
 		this.userFinder = userFinder;
 	}
 
-	public AssetLocalService getAssetLocalService() {
-		return assetLocalService;
-	}
-
-	public void setAssetLocalService(AssetLocalService assetLocalService) {
-		this.assetLocalService = assetLocalService;
-	}
-
-	public AssetService getAssetService() {
-		return assetService;
-	}
-
-	public void setAssetService(AssetService assetService) {
-		this.assetService = assetService;
-	}
-
-	public AssetPersistence getAssetPersistence() {
-		return assetPersistence;
-	}
-
-	public void setAssetPersistence(AssetPersistence assetPersistence) {
-		this.assetPersistence = assetPersistence;
-	}
-
-	public AssetFinder getAssetFinder() {
-		return assetFinder;
-	}
-
-	public void setAssetFinder(AssetFinder assetFinder) {
-		this.assetFinder = assetFinder;
-	}
-
-	public AssetTagLocalService getAssetTagLocalService() {
-		return assetTagLocalService;
-	}
-
-	public void setAssetTagLocalService(
-		AssetTagLocalService assetTagLocalService) {
-		this.assetTagLocalService = assetTagLocalService;
-	}
-
-	public AssetTagService getAssetTagService() {
-		return assetTagService;
-	}
-
-	public void setAssetTagService(AssetTagService assetTagService) {
-		this.assetTagService = assetTagService;
-	}
-
-	public AssetTagPersistence getAssetTagPersistence() {
-		return assetTagPersistence;
-	}
-
-	public void setAssetTagPersistence(AssetTagPersistence assetTagPersistence) {
-		this.assetTagPersistence = assetTagPersistence;
-	}
-
-	public AssetTagFinder getAssetTagFinder() {
-		return assetTagFinder;
-	}
-
-	public void setAssetTagFinder(AssetTagFinder assetTagFinder) {
-		this.assetTagFinder = assetTagFinder;
-	}
-
 	public BlogsEntryLocalService getBlogsEntryLocalService() {
 		return blogsEntryLocalService;
 	}
@@ -732,6 +667,74 @@ public abstract class MBMessageLocalServiceBaseImpl
 	public void setSocialActivityFinder(
 		SocialActivityFinder socialActivityFinder) {
 		this.socialActivityFinder = socialActivityFinder;
+	}
+
+	public TagsAssetLocalService getTagsAssetLocalService() {
+		return tagsAssetLocalService;
+	}
+
+	public void setTagsAssetLocalService(
+		TagsAssetLocalService tagsAssetLocalService) {
+		this.tagsAssetLocalService = tagsAssetLocalService;
+	}
+
+	public TagsAssetService getTagsAssetService() {
+		return tagsAssetService;
+	}
+
+	public void setTagsAssetService(TagsAssetService tagsAssetService) {
+		this.tagsAssetService = tagsAssetService;
+	}
+
+	public TagsAssetPersistence getTagsAssetPersistence() {
+		return tagsAssetPersistence;
+	}
+
+	public void setTagsAssetPersistence(
+		TagsAssetPersistence tagsAssetPersistence) {
+		this.tagsAssetPersistence = tagsAssetPersistence;
+	}
+
+	public TagsAssetFinder getTagsAssetFinder() {
+		return tagsAssetFinder;
+	}
+
+	public void setTagsAssetFinder(TagsAssetFinder tagsAssetFinder) {
+		this.tagsAssetFinder = tagsAssetFinder;
+	}
+
+	public TagsEntryLocalService getTagsEntryLocalService() {
+		return tagsEntryLocalService;
+	}
+
+	public void setTagsEntryLocalService(
+		TagsEntryLocalService tagsEntryLocalService) {
+		this.tagsEntryLocalService = tagsEntryLocalService;
+	}
+
+	public TagsEntryService getTagsEntryService() {
+		return tagsEntryService;
+	}
+
+	public void setTagsEntryService(TagsEntryService tagsEntryService) {
+		this.tagsEntryService = tagsEntryService;
+	}
+
+	public TagsEntryPersistence getTagsEntryPersistence() {
+		return tagsEntryPersistence;
+	}
+
+	public void setTagsEntryPersistence(
+		TagsEntryPersistence tagsEntryPersistence) {
+		this.tagsEntryPersistence = tagsEntryPersistence;
+	}
+
+	public TagsEntryFinder getTagsEntryFinder() {
+		return tagsEntryFinder;
+	}
+
+	public void setTagsEntryFinder(TagsEntryFinder tagsEntryFinder) {
+		this.tagsEntryFinder = tagsEntryFinder;
 	}
 
 	protected void runSQL(String sql) throws SystemException {
@@ -843,22 +846,6 @@ public abstract class MBMessageLocalServiceBaseImpl
 	protected UserPersistence userPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.UserFinder.impl")
 	protected UserFinder userFinder;
-	@BeanReference(name = "com.liferay.portlet.asset.service.AssetLocalService.impl")
-	protected AssetLocalService assetLocalService;
-	@BeanReference(name = "com.liferay.portlet.asset.service.AssetService.impl")
-	protected AssetService assetService;
-	@BeanReference(name = "com.liferay.portlet.asset.service.persistence.AssetPersistence.impl")
-	protected AssetPersistence assetPersistence;
-	@BeanReference(name = "com.liferay.portlet.asset.service.persistence.AssetFinder.impl")
-	protected AssetFinder assetFinder;
-	@BeanReference(name = "com.liferay.portlet.asset.service.AssetTagLocalService.impl")
-	protected AssetTagLocalService assetTagLocalService;
-	@BeanReference(name = "com.liferay.portlet.asset.service.AssetTagService.impl")
-	protected AssetTagService assetTagService;
-	@BeanReference(name = "com.liferay.portlet.asset.service.persistence.AssetTagPersistence.impl")
-	protected AssetTagPersistence assetTagPersistence;
-	@BeanReference(name = "com.liferay.portlet.asset.service.persistence.AssetTagFinder.impl")
-	protected AssetTagFinder assetTagFinder;
 	@BeanReference(name = "com.liferay.portlet.blogs.service.BlogsEntryLocalService.impl")
 	protected BlogsEntryLocalService blogsEntryLocalService;
 	@BeanReference(name = "com.liferay.portlet.blogs.service.BlogsEntryService.impl")
@@ -877,4 +864,20 @@ public abstract class MBMessageLocalServiceBaseImpl
 	protected SocialActivityPersistence socialActivityPersistence;
 	@BeanReference(name = "com.liferay.portlet.social.service.persistence.SocialActivityFinder.impl")
 	protected SocialActivityFinder socialActivityFinder;
+	@BeanReference(name = "com.liferay.portlet.tags.service.TagsAssetLocalService.impl")
+	protected TagsAssetLocalService tagsAssetLocalService;
+	@BeanReference(name = "com.liferay.portlet.tags.service.TagsAssetService.impl")
+	protected TagsAssetService tagsAssetService;
+	@BeanReference(name = "com.liferay.portlet.tags.service.persistence.TagsAssetPersistence.impl")
+	protected TagsAssetPersistence tagsAssetPersistence;
+	@BeanReference(name = "com.liferay.portlet.tags.service.persistence.TagsAssetFinder.impl")
+	protected TagsAssetFinder tagsAssetFinder;
+	@BeanReference(name = "com.liferay.portlet.tags.service.TagsEntryLocalService.impl")
+	protected TagsEntryLocalService tagsEntryLocalService;
+	@BeanReference(name = "com.liferay.portlet.tags.service.TagsEntryService.impl")
+	protected TagsEntryService tagsEntryService;
+	@BeanReference(name = "com.liferay.portlet.tags.service.persistence.TagsEntryPersistence.impl")
+	protected TagsEntryPersistence tagsEntryPersistence;
+	@BeanReference(name = "com.liferay.portlet.tags.service.persistence.TagsEntryFinder.impl")
+	protected TagsEntryFinder tagsEntryFinder;
 }

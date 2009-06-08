@@ -117,7 +117,7 @@ portletURL.setParameter("assetParentId", String.valueOf(folderId));
 
 				fileEntry = fileEntry.toEscapedModel();
 
-				Asset asset = AssetLocalServiceUtil.getAsset(DLFileEntry.class.getName(), fileEntry.getFileEntryId());
+				TagsAsset asset = TagsAssetLocalServiceUtil.getAsset(DLFileEntry.class.getName(), fileEntry.getFileEntryId());
 
 				StringBuilder sb = new StringBuilder();
 
@@ -268,7 +268,7 @@ portletURL.setParameter("assetParentId", String.valueOf(folderId));
 
 				ResultRow row = new ResultRow(fileEntry, fileEntry.getFileEntryId(), i);
 
-				Asset asset = AssetLocalServiceUtil.getAsset(DLFileEntry.class.getName(), fileEntry.getFileEntryId());
+				TagsAsset asset = TagsAssetLocalServiceUtil.getAsset(DLFileEntry.class.getName(), fileEntry.getFileEntryId());
 
 				StringBuilder sb = new StringBuilder();
 

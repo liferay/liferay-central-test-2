@@ -31,9 +31,9 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
-import com.liferay.portlet.asset.AssetTagException;
-import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
 import com.liferay.portlet.assetpublisher.util.AssetPublisherUtil;
+import com.liferay.portlet.tags.TagsEntryException;
+import com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -101,7 +101,7 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 			}
 		}
 		catch (Exception e) {
-			if (e instanceof AssetTagException) {
+			if (e instanceof TagsEntryException) {
 				SessionErrors.add(actionRequest, e.getClass().getName(), e);
 			}
 			else {
@@ -252,6 +252,8 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 			actionRequest, "orderByType2");
 		boolean excludeZeroViewCount = ParamUtil.getBoolean(
 			actionRequest, "excludeZeroViewCount");
+		boolean showQueryLogic = ParamUtil.getBoolean(
+			actionRequest, "showQueryLogic");
 		int delta = ParamUtil.getInteger(actionRequest, "delta");
 		String paginationType = ParamUtil.getString(
 			actionRequest, "paginationType");
@@ -288,6 +290,8 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 		preferences.setValue("order-by-type-2", orderByType2);
 		preferences.setValue(
 			"exclude-zero-view-count", String.valueOf(excludeZeroViewCount));
+		preferences.setValue(
+			"show-query-logic", String.valueOf(showQueryLogic));
 		preferences.setValue("delta", String.valueOf(delta));
 		preferences.setValue("pagination-type", paginationType);
 		preferences.setValue(
@@ -298,8 +302,8 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 			"enable-comment-ratings", String.valueOf(enableCommentRatings));
 		preferences.setValue("metadata-fields", medatadaFields);
 
-		AssetTagLocalServiceUtil.checkTags(userId, groupId, entries);
-		AssetTagLocalServiceUtil.checkTags(userId, groupId, notEntries);
+		TagsEntryLocalServiceUtil.checkEntries(userId, groupId, entries);
+		TagsEntryLocalServiceUtil.checkEntries(userId, groupId, notEntries);
 	}
 
 	protected void updateManualSettings(

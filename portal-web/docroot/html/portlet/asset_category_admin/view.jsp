@@ -42,12 +42,12 @@
 			</span>
 
 			<span class="vocabulary-actions">
-				<c:if test="<%= AssetPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_VOCABULARY) %>">
-					<input class="add-vocabulary-button" id="add-vocabulary-button" name="add-vocabulary-button" type="button"  value="<liferay-ui:message key="add-vocabulary" />">
+				<c:if test="<%= AssetPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_CATEGORY_VOCABULARY) %>">
+					<input class="add-vocabulary-btn" id="add-vocabulary-btn" name="add-vocabulary-btn" type="button"  value="<liferay-ui:message key="add-vocabulary" />">
 				</c:if>
 
 				<c:if test="<%= AssetPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_CATEGORY) %>">
-					<input class="add-category-button" id="add-category-button" name="add-category-button" type="button"  value="<liferay-ui:message key="add-category" />">
+					<input class="add-category-btn" id="add-category-btn" name="add-category-btn" type="button"  value="<liferay-ui:message key="add-category" />">
 				</c:if>
 
 				<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, scopeGroupId, ActionKeys.PERMISSIONS) %>">
@@ -61,7 +61,7 @@
 					<input type="button" value="<liferay-ui:message key="permissions" />" onClick="location.href = '<%= permissionsURL %>';" />
 				</c:if>
 
-				<div class="exp-overlay add-category-layer">
+				<div class="exp-overlay category-toolbar-section">
 					<div class="exp-header">
 						<span class="knob"></span>
 					</div>
@@ -97,7 +97,7 @@
 					</div>
 				</div>
 
-				<div class="exp-overlay add-vocabulary-layer">
+				<div class="exp-overlay vocabulary-toolbar-section">
 					<div class="exp-header">
 						<span class="knob"></span>
 					</div>
@@ -184,7 +184,7 @@
 
 				<input class="vocabulary-delete-categories-button" type="button" value="<liferay-ui:message key="delete" />" />
 
-				<input class="permissions-categories-button" type="button" value="<liferay-ui:message key="edit-category-permissions" />" />
+				<input class="permissions-categories-btn" type="button" value="<liferay-ui:message key="edit-category-permissions" />" />
 			</div>
 		</div>
 	</td>
@@ -194,7 +194,7 @@
 		<div class="vocabulary-footer">
 			<input class="vocabulary-delete-list-button" type="button" value="<liferay-ui:message key="delete-vocabulary" />" />
 
-			<input class="permissions-vocabulary-button" type="button" value="<liferay-ui:message key="edit-vocabulary-permissions" />" />
+			<input class="permissions-vocabulary-btn" type="button" value="<liferay-ui:message key="edit-vocabulary-permissions" />" />
 		</div>
 	</td>
 </tr>

@@ -122,11 +122,11 @@ public abstract class HitsOpenSearchImpl extends BaseOpenSearchImpl {
 
 				String[] tags = new String[0];
 
-				Field assetTagNamesField = result.getFields().get(
-					Field.ASSET_TAG_NAMES);
+				Field tagsEntriesField = result.getFields().get(
+					Field.TAGS_ENTRIES);
 
-				if (assetTagNamesField != null) {
-					tags = assetTagNamesField.getValues();
+				if (tagsEntriesField != null) {
+					tags = tagsEntriesField.getValues();
 				}
 
 				double ratings = 0.0;

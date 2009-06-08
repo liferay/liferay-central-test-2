@@ -46,10 +46,10 @@ package com.liferay.portlet.asset.service;
  */
 public class AssetCategoryPropertyServiceUtil {
 	public static com.liferay.portlet.asset.model.AssetCategoryProperty addCategoryProperty(
-		long categoryId, java.lang.String key, java.lang.String value)
+		long entryId, java.lang.String key, java.lang.String value)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return getService().addCategoryProperty(categoryId, key, value);
+		return getService().addCategoryProperty(entryId, key, value);
 	}
 
 	public static void deleteCategoryProperty(long categoryPropertyId)
@@ -59,8 +59,8 @@ public class AssetCategoryPropertyServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetCategoryProperty> getCategoryProperties(
-		long categoryId) throws com.liferay.portal.SystemException {
-		return getService().getCategoryProperties(categoryId);
+		long entryId) throws com.liferay.portal.SystemException {
+		return getService().getCategoryProperties(entryId);
 	}
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetCategoryProperty> getCategoryPropertyValues(

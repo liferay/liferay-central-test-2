@@ -60,7 +60,7 @@
 			</div>
 		</c:if>
 
-		<liferay-ui:asset-tags-summary
+		<liferay-ui:tags-summary
 			className="<%= BlogsEntry.class.getName() %>"
 			classPK="<%= entry.getEntryId() %>"
 		/>

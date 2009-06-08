@@ -22,7 +22,7 @@
 					SELECT
 						classPK
 					FROM
-						Asset
+						TagsAsset
 					WHERE
 						classNameId = [$CLASS_NAME_ID_COM.LIFERAY.PORTLET.DOCUMENTLIBRARY.MODEL.DLFILEENTRY$]
 				))

@@ -29,7 +29,7 @@ import com.liferay.portlet.asset.CategoryPropertyKeyException;
 import com.liferay.portlet.asset.CategoryPropertyValueException;
 import com.liferay.portlet.asset.model.AssetCategoryProperty;
 import com.liferay.portlet.asset.service.base.AssetCategoryPropertyLocalServiceBaseImpl;
-import com.liferay.portlet.asset.util.AssetUtil;
+import com.liferay.portlet.tags.util.TagsUtil;
 
 import java.util.Date;
 import java.util.List;
@@ -73,9 +73,9 @@ public class AssetCategoryPropertyLocalServiceImpl
 		return categoryProperty;
 	}
 
-	public void deleteCategoryProperties(long categoryId) throws SystemException {
+	public void deleteCategoryProperties(long entryId) throws SystemException {
 		List<AssetCategoryProperty> categoryProperties =
-			assetCategoryPropertyPersistence.findByCategoryId(categoryId);
+			assetCategoryPropertyPersistence.findByCategoryId(entryId);
 
 		for (AssetCategoryProperty categoryProperty : categoryProperties) {
 			deleteCategoryProperty(categoryProperty);
@@ -104,10 +104,10 @@ public class AssetCategoryPropertyLocalServiceImpl
 		return assetCategoryPropertyPersistence.findAll();
 	}
 
-	public List<AssetCategoryProperty> getCategoryProperties(long categoryId)
+	public List<AssetCategoryProperty> getCategoryProperties(long entryId)
 		throws SystemException {
 
-		return assetCategoryPropertyPersistence.findByCategoryId(categoryId);
+		return assetCategoryPropertyPersistence.findByCategoryId(entryId);
 	}
 
 	public AssetCategoryProperty getCategoryProperty(long categoryPropertyId)
@@ -151,11 +151,11 @@ public class AssetCategoryPropertyLocalServiceImpl
 	}
 
 	protected void validate(String key, String value) throws PortalException {
-		if (!AssetUtil.isValidWord(key)) {
+		if (!TagsUtil.isValidWord(key)) {
 			throw new CategoryPropertyKeyException();
 		}
 
-		if (!AssetUtil.isValidWord(value)) {
+		if (!TagsUtil.isValidWord(value)) {
 			throw new CategoryPropertyValueException();
 		}
 	}

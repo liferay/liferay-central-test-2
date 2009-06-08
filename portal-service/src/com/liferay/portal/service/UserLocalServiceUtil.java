@@ -719,10 +719,10 @@ public class UserLocalServiceUtil {
 
 	public static void updateAsset(long userId,
 		com.liferay.portal.model.User user, long[] assetCategoryIds,
-		java.lang.String[] assetTagNames)
+		java.lang.String[] tagsEntries)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		getService().updateAsset(userId, user, assetCategoryIds, assetTagNames);
+		getService().updateAsset(userId, user, assetCategoryIds, tagsEntries);
 	}
 
 	public static com.liferay.portal.model.User updateCreateDate(long userId,

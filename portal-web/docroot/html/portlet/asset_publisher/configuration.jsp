@@ -131,11 +131,11 @@ configurationActionURL.setParameter("portletResource", portletResource);
 							<option value=""><liferay-ui:message key="select-existing" />...</option>
 
 							<%
-							for (int i = 0; i < AssetUtil.ASSET_TYPE_CLASS_NAMES.length; i++) {
-								if (!AssetUtil.ASSET_TYPE_CLASS_NAMES[i].equals(MBMessage.class.getName()) && !AssetUtil.ASSET_TYPE_CLASS_NAMES[i].equals(WikiPage.class.getName())) {
+							for (int i = 0; i < TagsUtil.ASSET_TYPE_CLASS_NAMES.length; i++) {
+								if (!TagsUtil.ASSET_TYPE_CLASS_NAMES[i].equals(MBMessage.class.getName()) && !TagsUtil.ASSET_TYPE_CLASS_NAMES[i].equals(WikiPage.class.getName())) {
 								%>
 
-									<option value="<%= AssetUtil.ASSET_TYPE_CLASS_NAMES[i] %>"><liferay-ui:message key='<%= "model.resource." + AssetUtil.ASSET_TYPE_CLASS_NAMES[i] %>' /></option>
+									<option value="<%= TagsUtil.ASSET_TYPE_CLASS_NAMES[i] %>"><liferay-ui:message key='<%= "model.resource." + TagsUtil.ASSET_TYPE_CLASS_NAMES[i] %>' /></option>
 
 								<%
 								}
@@ -192,10 +192,10 @@ configurationActionURL.setParameter("portletResource", portletResource);
 							String assetType = root.element("asset-type").getText();
 							long assetId = GetterUtil.getLong(root.element("asset-id").getText());
 
-							Asset asset = null;
+							TagsAsset asset = null;
 
 							try {
-								asset = AssetLocalServiceUtil.getAsset(assetId);
+								asset = TagsAssetLocalServiceUtil.getAsset(assetId);
 
 								asset = asset.toEscapedModel();
 							}
@@ -283,7 +283,7 @@ configurationActionURL.setParameter("portletResource", portletResource);
 					refresh="<%= false %>"
 				>
 					<liferay-ui:section>
-						<liferay-ui:asset-tags-error />
+						<liferay-ui:tags-error />
 
 						<liferay-ui:message key="asset-type" />
 
@@ -291,7 +291,7 @@ configurationActionURL.setParameter("portletResource", portletResource);
 							<option value=""><liferay-ui:message key="all" /></option>
 
 							<%
-							AssetType[] assetTypes = AssetServiceUtil.getAssetTypes(themeDisplay.getLocale().toString());
+							TagsAssetType[] assetTypes = TagsAssetServiceUtil.getAssetTypes(themeDisplay.getLocale().toString());
 
 							for (int i = 0; i < assetTypes.length; i++) {
 							%>
@@ -306,13 +306,34 @@ configurationActionURL.setParameter("portletResource", portletResource);
 
 						<br /><br />
 
+						<liferay-ui:message key="group-by-tags-within-tags-set" />
+
+						<select name="<portlet:namespace />category">
+							<option value=""><liferay-ui:message key="none" /></option>
+
+							<%
+							List<TagsVocabulary> vocabularies = TagsVocabularyLocalServiceUtil.getGroupVocabularies(scopeGroupId, true);
+
+							for (TagsVocabulary vocabulary : vocabularies) {
+							%>
+
+								<option <%= category.equals(vocabulary.getName()) ? "selected" : "" %> value="<%= vocabulary.getName() %>"><%= vocabulary.getName() %></option>
+
+							<%
+							}
+							%>
+
+						</select>
+
+						<br /><br />
+
 						<liferay-ui:message key="displayed-content-must-contain-the-following-tags" />
 
 						<br /><br />
 
-						<liferay-ui:asset-tags-selector
+						<liferay-ui:tags-selector
 							hiddenInput="entries"
-							curTags="<%= StringUtil.merge(tagNames) %>"
+							curTags="<%= StringUtil.merge(entries) %>"
 							focus="<%= false %>"
 						/>
 
@@ -322,9 +343,9 @@ configurationActionURL.setParameter("portletResource", portletResource);
 
 						<br /><br />
 
-						<liferay-ui:asset-tags-selector
+						<liferay-ui:tags-selector
 							hiddenInput="notEntries"
-							curTags="<%= StringUtil.merge(notTagNames) %>"
+							curTags="<%= StringUtil.merge(notEntries) %>"
 							focus="<%= false %>"
 						/>
 

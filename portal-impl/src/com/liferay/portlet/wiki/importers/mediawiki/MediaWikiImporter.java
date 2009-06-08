@@ -45,11 +45,11 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PropsValues;
-import com.liferay.portlet.asset.NoSuchTagException;
-import com.liferay.portlet.asset.model.AssetTag;
-import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
-import com.liferay.portlet.asset.service.AssetTagPropertyLocalServiceUtil;
-import com.liferay.portlet.asset.util.AssetUtil;
+import com.liferay.portlet.tags.NoSuchEntryException;
+import com.liferay.portlet.tags.model.TagsEntry;
+import com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil;
+import com.liferay.portlet.tags.service.TagsPropertyLocalServiceUtil;
+import com.liferay.portlet.tags.util.TagsUtil;
 import com.liferay.portlet.wiki.ImportFilesException;
 import com.liferay.portlet.wiki.NoSuchPageException;
 import com.liferay.portlet.wiki.importers.WikiImporter;
@@ -169,8 +169,8 @@ public class MediaWikiImporter implements WikiImporter {
 
 			ServiceContext serviceContext = new ServiceContext();
 
-			serviceContext.setAssetTagNames(readAssetTagNames(
-				userId, node, content));
+			serviceContext.setTagsEntries(
+				readTagsEntries(userId, node, content));
 
 			if (Validator.isNull(redirectTitle)) {
 				content = _translator.translate(content);
@@ -280,7 +280,7 @@ public class MediaWikiImporter implements WikiImporter {
 	}
 
 	protected String normalize(String categoryName, int length) {
-		categoryName = AssetUtil.toWord(categoryName.trim());
+		categoryName = TagsUtil.toWord(categoryName.trim());
 
 		return StringUtil.shorten(categoryName, length);
 	}
@@ -514,26 +514,26 @@ public class MediaWikiImporter implements WikiImporter {
 			description = normalizeDescription(description);
 
 			try {
-				AssetTag tag = null;
+				TagsEntry tagsEntry = null;
 
 				try {
-					tag = AssetTagLocalServiceUtil.getTag(
+					tagsEntry = TagsEntryLocalServiceUtil.getEntry(
 						node.getCompanyId(), categoryName);
 				}
-				catch (NoSuchTagException nsee) {
+				catch (NoSuchEntryException nsee) {
 					ServiceContext serviceContext = new ServiceContext();
 
 					serviceContext.setAddCommunityPermissions(true);
 					serviceContext.setAddGuestPermissions(true);
 					serviceContext.setScopeGroupId(node.getGroupId());
 
-					tag = AssetTagLocalServiceUtil.addTag(
-						userId, categoryName, null, serviceContext);
+					tagsEntry = TagsEntryLocalServiceUtil.addEntry(
+						userId, null, categoryName, null, null, serviceContext);
 				}
 
 				if (Validator.isNotNull(description)) {
-					AssetTagPropertyLocalServiceUtil.addTagProperty(
-						userId, tag.getTagId(), "description",
+					TagsPropertyLocalServiceUtil.addProperty(
+						userId, tagsEntry.getEntryId(), "description",
 						description);
 				}
 			}
@@ -602,44 +602,44 @@ public class MediaWikiImporter implements WikiImporter {
 		return namespaces;
 	}
 
-	protected String[] readAssetTagNames(
+	protected String[] readTagsEntries(
 			long userId, WikiNode node, String content)
 		throws PortalException, SystemException {
 
 		Matcher matcher = _categoriesPattern.matcher(content);
 
-		List<String> assetTagNames = new ArrayList<String>();
+		List<String> tagsEntries = new ArrayList<String>();
 
 		while (matcher.find()) {
 			String categoryName = matcher.group(1);
 
 			categoryName = normalize(categoryName, 75);
 
-			AssetTag tag = null;
+			TagsEntry tagsEntry = null;
 
 			try {
-				tag = AssetTagLocalServiceUtil.getTag(
+				tagsEntry = TagsEntryLocalServiceUtil.getEntry(
 					node.getCompanyId(), categoryName);
 			}
-			catch (NoSuchTagException nsee) {
+			catch (NoSuchEntryException nsee) {
 				ServiceContext serviceContext = new ServiceContext();
 
 				serviceContext.setAddCommunityPermissions(true);
 				serviceContext.setAddGuestPermissions(true);
 				serviceContext.setScopeGroupId(node.getGroupId());
 
-				tag = AssetTagLocalServiceUtil.addTag(
-					userId, categoryName, null, serviceContext);
+				tagsEntry = TagsEntryLocalServiceUtil.addEntry(
+					userId, null, categoryName, null, null, serviceContext);
 			}
 
-			assetTagNames.add(tag.getName());
+			tagsEntries.add(tagsEntry.getName());
 		}
 
 		if (content.indexOf(_WORK_IN_PROGRESS) != -1) {
-			assetTagNames.add(_WORK_IN_PROGRESS_TAG);
+			tagsEntries.add(_WORK_IN_PROGRESS_TAG);
 		}
 
-		return assetTagNames.toArray(new String[assetTagNames.size()]);
+		return tagsEntries.toArray(new String[tagsEntries.size()]);
 	}
 
 	protected Map<String, String> readUsersFile(File usersFile)

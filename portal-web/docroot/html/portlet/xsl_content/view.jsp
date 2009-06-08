@@ -39,9 +39,9 @@ try {
 		bracketEnd = xmlURL.indexOf("]", bracketBegin);
 
 		if (bracketEnd > -1 && ((bracketEnd - bracketBegin) > 0)) {
-			String[] compilerTagNames = (String[])request.getAttribute(WebKeys.TAGS_COMPILER_ENTRIES);
+			String[] compilerEntries = (String[])request.getAttribute(WebKeys.TAGS_COMPILER_ENTRIES);
 
-			if (compilerTagNames.length > 0) {
+			if (compilerEntries.length > 0) {
 				String category = null;
 				String propertyName = null;
 
@@ -56,20 +56,20 @@ try {
 					propertyName = variablePropertyKey.substring(pos + 1);
 				}
 
-				for (String tagName : compilerTagNames) {
+				for (String compilerEntry : compilerEntries) {
 					try {
-						AssetTag tag = AssetTagLocalServiceUtil.getTag(scopeGroupId, tagName);
+						TagsEntry entry = TagsEntryLocalServiceUtil.getEntry(scopeGroupId, compilerEntry);
 
-						AssetTagProperty property = AssetTagPropertyLocalServiceUtil.getTagProperty(tag.getTagId(), "category");
+						TagsProperty property = TagsPropertyLocalServiceUtil.getProperty(entry.getEntryId(), "category");
 
 						variablePropertyValue = property.getValue();
 
 						if (category.equals(variablePropertyValue)) {
 							if (pos == -1) {
-								variablePropertyValue = tag.getName();
+								variablePropertyValue = entry.getName();
 							}
 							else {
-								property = AssetTagPropertyLocalServiceUtil.getTagProperty(tag.getTagId(), propertyName);
+								property = TagsPropertyLocalServiceUtil.getProperty(entry.getEntryId(), propertyName);
 
 								variablePropertyValue = property.getValue();
 							}
@@ -79,11 +79,11 @@ try {
 							break;
 						}
 					}
-					catch (NoSuchTagException nste) {
-						_log.warn(nste);
+					catch (NoSuchEntryException nsee) {
+						_log.warn(nsee);
 					}
-					catch (NoSuchTagPropertyException nstpe) {
-						_log.warn(nstpe);
+					catch (NoSuchPropertyException nspe) {
+						_log.warn(nspe);
 					}
 				}
 			}

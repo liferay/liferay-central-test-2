@@ -221,7 +221,8 @@ public class BookmarksPortletDataHandlerImpl extends BasePortletDataHandler {
 			entryEl.addAttribute("path", path);
 
 			if (context.getBooleanParameter(_NAMESPACE, "tags")) {
-				context.addAssetTags(BookmarksEntry.class, entry.getEntryId());
+				context.addTagsEntries(
+					BookmarksEntry.class, entry.getEntryId());
 			}
 
 			entry.setUserUuid(entry.getUserUuid());
@@ -303,10 +304,10 @@ public class BookmarksPortletDataHandlerImpl extends BasePortletDataHandler {
 		long folderId = MapUtil.getLong(
 			folderPKs, entry.getFolderId(), entry.getFolderId());
 
-		String[] assetTagNames = null;
+		String[] tagsEntries = null;
 
 		if (context.getBooleanParameter(_NAMESPACE, "tags")) {
-			assetTagNames = context.getAssetTagNames(
+			tagsEntries = context.getTagsEntries(
 				BookmarksEntry.class, entry.getEntryId());
 		}
 
@@ -314,7 +315,7 @@ public class BookmarksPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		serviceContext.setAddCommunityPermissions(true);
 		serviceContext.setAddGuestPermissions(true);
-		serviceContext.setAssetTagNames(assetTagNames);
+		serviceContext.setTagsEntries(tagsEntries);
 
 		if ((folderId != BookmarksFolderImpl.DEFAULT_PARENT_FOLDER_ID) &&
 			(folderId == entry.getFolderId())) {

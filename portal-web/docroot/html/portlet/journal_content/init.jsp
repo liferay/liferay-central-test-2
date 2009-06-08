@@ -24,7 +24,6 @@
 
 <%@ include file="/html/portlet/init.jsp" %>
 
-<%@ page import="com.liferay.portlet.asset.service.AssetLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.documentlibrary.util.DocumentConversionUtil" %>
 <%@ page import="com.liferay.portlet.journal.NoSuchArticleException" %>
 <%@ page import="com.liferay.portlet.journal.action.EditArticleAction" %>
@@ -46,6 +45,7 @@
 <%@ page import="com.liferay.portlet.layoutconfiguration.util.xml.RenderURLLogic" %>
 <%@ page import="com.liferay.portlet.layoutconfiguration.util.xml.RuntimeLogic" %>
 <%@ page import="com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.tags.service.TagsAssetLocalServiceUtil" %>
 
 <%
 PortletPreferences preferences = renderRequest.getPreferences();

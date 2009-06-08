@@ -1,6 +1,6 @@
 <%
 for (int assetIndex = 0; assetIndex < results.size(); assetIndex++) {
-	Asset asset = (Asset)results.get(assetIndex);
+	TagsAsset asset = (TagsAsset)results.get(assetIndex);
 
 	String className = PortalUtil.getClassName(asset.getClassNameId());
 	long classPK = asset.getClassPK();

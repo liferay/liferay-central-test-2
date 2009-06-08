@@ -39,7 +39,6 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
-import com.liferay.portlet.asset.util.AssetUtil;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.imagegallery.DuplicateFolderNameException;
 import com.liferay.portlet.imagegallery.FolderNameException;
@@ -48,6 +47,7 @@ import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.imagegallery.model.impl.IGFolderImpl;
 import com.liferay.portlet.imagegallery.service.base.IGFolderLocalServiceBaseImpl;
 import com.liferay.portlet.imagegallery.util.Indexer;
+import com.liferay.portlet.tags.util.TagsUtil;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -315,9 +315,9 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 			BooleanQuery searchQuery = BooleanQueryFactoryUtil.create();
 
 			if (Validator.isNotNull(keywords)) {
-				searchQuery.addTerm(Field.ASSET_TAG_NAMES, keywords);
 				searchQuery.addTerm(Field.TITLE, keywords);
 				searchQuery.addTerm(Field.DESCRIPTION, keywords);
+				searchQuery.addTerm(Field.TAGS_ENTRIES, keywords);
 			}
 
 			BooleanQuery fullQuery = BooleanQueryFactoryUtil.create();
@@ -504,7 +504,7 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 			long folderId, long groupId, long parentFolderId, String name)
 		throws PortalException, SystemException {
 
-		if (!AssetUtil.isValidWord(name)) {
+		if (!TagsUtil.isValidWord(name)) {
 			throw new FolderNameException();
 		}
 

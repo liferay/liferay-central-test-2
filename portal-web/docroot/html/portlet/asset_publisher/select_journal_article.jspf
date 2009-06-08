@@ -67,7 +67,7 @@ for (int i = 0; i < results.size(); i++) {
 
 	ResultRow row = new ResultRow(article, article.getArticleId() + EditArticleAction.VERSION_SEPARATOR + article.getVersion(), i);
 
-	Asset asset = AssetLocalServiceUtil.getAsset(JournalArticle.class.getName(), articleResourceId);
+	TagsAsset asset = TagsAssetLocalServiceUtil.getAsset(JournalArticle.class.getName(), articleResourceId);
 
 	StringBuilder sb = new StringBuilder();
 

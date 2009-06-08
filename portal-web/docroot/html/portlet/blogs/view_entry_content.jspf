@@ -146,7 +146,7 @@
 				<span class="view-count">
 
 					<%
-					Asset asset = AssetLocalServiceUtil.getAsset(BlogsEntry.class.getName(), entry.getEntryId());
+					TagsAsset asset = TagsAssetLocalServiceUtil.getAsset(BlogsEntry.class.getName(), entry.getEntryId());
 					%>
 
 					<c:choose>
@@ -190,7 +190,7 @@
 			</c:if>
 
 			<div class="entry-tags">
-				<liferay-ui:asset-tags-summary
+				<liferay-ui:tags-summary
 					className="<%= BlogsEntry.class.getName() %>"
 					classPK="<%= entry.getEntryId() %>"
 				/>

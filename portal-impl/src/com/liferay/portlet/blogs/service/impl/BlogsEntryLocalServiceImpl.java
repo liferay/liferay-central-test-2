@@ -170,7 +170,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		updateAsset(
 			userId, entry, serviceContext.getAssetCategoryIds(),
-			serviceContext.getAssetTagNames());
+			serviceContext.getTagsEntries());
 
 		// Message boards
 
@@ -290,14 +290,14 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		mbMessageLocalService.deleteDiscussionMessages(
 			BlogsEntry.class.getName(), entry.getEntryId());
 
-		// Asset
-
-		assetLocalService.deleteAsset(
-			BlogsEntry.class.getName(), entry.getEntryId());
-
 		// Expando
 
 		expandoValueLocalService.deleteValues(
+			BlogsEntry.class.getName(), entry.getEntryId());
+
+		// Asset
+
+		tagsAssetLocalService.deleteAsset(
 			BlogsEntry.class.getName(), entry.getEntryId());
 
 		// Statistics
@@ -528,7 +528,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		String content = entry.getContent();
 		Date displayDate = entry.getDisplayDate();
 
-		String[] assetTagNames = assetTagLocalService.getTagNames(
+		String[] tagsEntries = tagsEntryLocalService.getEntryNames(
 			BlogsEntry.class.getName(), entryId);
 
 		ExpandoBridge expandoBridge = entry.getExpandoBridge();
@@ -536,7 +536,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		try {
 			Indexer.updateEntry(
 				companyId, groupId, userId, userName, entryId, title, content,
-				displayDate, assetTagNames, expandoBridge);
+				displayDate, tagsEntries, expandoBridge);
 		}
 		catch (SearchException se) {
 			_log.error("Reindexing " + entryId, se);
@@ -585,7 +585,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 				searchQuery.addTerm(Field.USER_NAME, keywords);
 				searchQuery.addTerm(Field.TITLE, keywords);
 				searchQuery.addTerm(Field.CONTENT, keywords);
-				searchQuery.addTerm(Field.ASSET_TAG_NAMES, keywords);
+				searchQuery.addTerm(Field.TAGS_ENTRIES, keywords);
 			}
 
 			BooleanQuery fullQuery = BooleanQueryFactoryUtil.create();
@@ -607,15 +607,14 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 	public void updateAsset(
 			long userId, BlogsEntry entry, long[] assetCategoryIds,
-			String[] assetTagNames)
+			String[] tagsEntries)
 		throws PortalException, SystemException {
 
-		assetLocalService.updateAsset(
+		tagsAssetLocalService.updateAsset(
 			userId, entry.getGroupId(), BlogsEntry.class.getName(),
-			entry.getEntryId(), assetCategoryIds, assetTagNames,
-			!entry.isDraft(), null, null, entry.getDisplayDate(), null,
-			ContentTypes.TEXT_HTML, entry.getTitle(), null, null, null, 0, 0,
-			null, false);
+			entry.getEntryId(), assetCategoryIds, tagsEntries, !entry.isDraft(),
+			null, null, entry.getDisplayDate(), null, ContentTypes.TEXT_HTML,
+			entry.getTitle(), null, null, null, 0, 0, null, false);
 	}
 
 	public BlogsEntry updateEntry(
@@ -674,7 +673,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		updateAsset(
 			userId, entry, serviceContext.getAssetCategoryIds(),
-			serviceContext.getAssetTagNames());
+			serviceContext.getTagsEntries());
 
 		// Expando
 

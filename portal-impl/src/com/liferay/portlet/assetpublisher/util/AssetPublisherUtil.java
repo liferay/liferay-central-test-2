@@ -37,8 +37,8 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
-import com.liferay.portlet.asset.model.Asset;
-import com.liferay.portlet.asset.service.AssetLocalServiceUtil;
+import com.liferay.portlet.tags.model.TagsAsset;
+import com.liferay.portlet.tags.service.TagsAssetLocalServiceUtil;
 
 import java.io.IOException;
 
@@ -88,7 +88,7 @@ public class AssetPublisherUtil {
 			return;
 		}
 
-		Asset asset = AssetLocalServiceUtil.getAsset(
+		TagsAsset asset = TagsAssetLocalServiceUtil.getAsset(
 			className, classPK);
 
 		PortletPreferences preferences =

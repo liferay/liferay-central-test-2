@@ -31,7 +31,6 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Image;
-import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortletKeys;
 
 import java.io.ByteArrayInputStream;
@@ -107,7 +106,7 @@ public class DLHook extends BaseHook {
 
 		DLLocalServiceUtil.addFile(
 			_COMPANY_ID, _PORTLET_ID, _GROUP_ID, _REPOSITORY_ID, fileName,
-			_FILE_ENTRY_ID, _PROPERTIES, now, new ServiceContext(),
+			_FILE_ENTRY_ID, _PROPERTIES, now, _TAGS_CATEGORIES, _TAGS_ENTRIES,
 			is);
 	}
 
@@ -121,6 +120,8 @@ public class DLHook extends BaseHook {
 	private static final String _PORTLET_ID = PortletKeys.PORTAL;
 	private static final String _PROPERTIES = StringPool.BLANK;
 	private static final long _REPOSITORY_ID = 0;
+	private static final String[] _TAGS_CATEGORIES = new String[0];
+	private static final String[] _TAGS_ENTRIES = new String[0];
 	private static final double _VERSION_NUMBER = 1.0;
 
 }

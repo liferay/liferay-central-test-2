@@ -335,13 +335,13 @@ public class OrganizationLocalServiceUtil {
 			statusId, comments, serviceContext);
 	}
 
-	public static void updateAsset(long userId,
+	public static void updateTagsAsset(long userId,
 		com.liferay.portal.model.Organization organization,
-		long[] assetCategoryIds, java.lang.String[] assetTagNames)
+		java.lang.String[] tagsCategories, java.lang.String[] tagsEntries)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		getService()
-			.updateAsset(userId, organization, assetCategoryIds, assetTagNames);
+			.updateTagsAsset(userId, organization, tagsCategories, tagsEntries);
 	}
 
 	public static OrganizationLocalService getService() {

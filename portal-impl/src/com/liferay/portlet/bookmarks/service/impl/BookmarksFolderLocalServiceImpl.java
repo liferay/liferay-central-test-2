@@ -312,7 +312,7 @@ public class BookmarksFolderLocalServiceImpl
 
 			if (Validator.isNotNull(keywords)) {
 				searchQuery.addTerm(Field.TITLE, keywords);
-				searchQuery.addTerm(Field.ASSET_TAG_NAMES, keywords);
+				searchQuery.addTerm(Field.TAGS_ENTRIES, keywords);
 				searchQuery.addTerm(Field.URL, keywords);
 				searchQuery.addTerm(Field.COMMENTS, keywords);
 			}

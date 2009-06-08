@@ -100,7 +100,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 			fileEntry.setUserUuid(fileEntry.getUserUuid());
 
 			if (context.getBooleanParameter(_NAMESPACE, "categories")) {
-				context.addAssetCategories(
+				context.addTagsCategories(
 					DLFileEntry.class, fileEntry.getFileEntryId());
 			}
 
@@ -115,7 +115,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 			}
 
 			if (context.getBooleanParameter(_NAMESPACE, "tags")) {
-				context.addAssetTags(
+				context.addTagsEntries(
 					DLFileEntry.class, fileEntry.getFileEntryId());
 			}
 
@@ -196,16 +196,16 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 		long folderId = MapUtil.getLong(
 			folderPKs, fileEntry.getFolderId(), fileEntry.getFolderId());
 
-		long[] assetCategoryIds = null;
-		String[] assetTagNames = null;
+		String[] tagsCategories = null;
+		String[] tagsEntries = null;
 
 		if (context.getBooleanParameter(_NAMESPACE, "categories")) {
-			assetCategoryIds = context.getAssetCategoryIds(
+			tagsCategories = context.getTagsCategories(
 				DLFileEntry.class, fileEntry.getFileEntryId());
 		}
 
 		if (context.getBooleanParameter(_NAMESPACE, "tags")) {
-			assetTagNames = context.getAssetTagNames(
+			tagsEntries = context.getTagsEntries(
 				DLFileEntry.class, fileEntry.getFileEntryId());
 		}
 
@@ -213,9 +213,9 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		serviceContext.setAddCommunityPermissions(true);
 		serviceContext.setAddGuestPermissions(true);
-		serviceContext.setAssetCategoyIds(assetCategoryIds);
-		serviceContext.setAssetTagNames(assetTagNames);
 		serviceContext.setScopeGroupId(context.getGroupId());
+		serviceContext.setTagsCategories(tagsCategories);
+		serviceContext.setTagsEntries(tagsEntries);
 
 		byte[] bytes = context.getZipEntryAsByteArray(binPath);
 

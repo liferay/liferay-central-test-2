@@ -302,9 +302,9 @@ public interface IGImageLocalService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public void updateAsset(long userId,
+	public void updateTagsAsset(long userId,
 		com.liferay.portlet.imagegallery.model.IGImage image,
-		long[] assetCategoryIds, java.lang.String[] assetTagNames)
+		java.lang.String[] tagsCategories, java.lang.String[] tagsEntries)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 }

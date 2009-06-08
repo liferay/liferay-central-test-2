@@ -44,9 +44,9 @@ BlogsEntry nextEntry = prevAndNext[2];
 
 pageDisplayStyle = RSSUtil.DISPLAY_STYLE_FULL_CONTENT;
 
-AssetLocalServiceUtil.incrementViewCounter(BlogsEntry.class.getName(), entry.getEntryId());
+TagsAssetLocalServiceUtil.incrementViewCounter(BlogsEntry.class.getName(), entry.getEntryId());
 
-AssetUtil.addLayoutTags(request, AssetTagLocalServiceUtil.getTags(BlogsEntry.class.getName(), entry.getEntryId()));
+TagsUtil.addLayoutTagsEntries(request, TagsEntryLocalServiceUtil.getEntries(BlogsEntry.class.getName(), entry.getEntryId(), true));
 %>
 
 <form action="<portlet:actionURL><portlet:param name="struts_action" value="/blogs/edit_entry" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm1" onSubmit="<portlet:namespace />saveEntry(); return false;">
@@ -133,7 +133,7 @@ AssetUtil.addLayoutTags(request, AssetTagLocalServiceUtil.getTags(BlogsEntry.cla
 <%
 PortalUtil.setPageSubtitle(entry.getTitle(), request);
 
-List<AssetTag> tags = AssetTagLocalServiceUtil.getTags(BlogsEntry.class.getName(), entry.getEntryId());
+List<TagsEntry> tagsEntries = TagsEntryLocalServiceUtil.getEntries(BlogsEntry.class.getName(), entry.getEntryId(), true);
 
-PortalUtil.setPageKeywords(ListUtil.toString(tags, "name"), request);
+PortalUtil.setPageKeywords(ListUtil.toString(tagsEntries, "name"), request);
 %>

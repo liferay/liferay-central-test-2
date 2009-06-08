@@ -279,20 +279,20 @@ public class WordPressImporter {
 
 		boolean allowTrackbacks = pingStatusText.equalsIgnoreCase("open");
 
-		String[] assetTagNames = null;
+		String[] tagsEntries = null;
 
 		String categoryText = entryEl.elementTextTrim("category");
 
 		if (Validator.isNotNull(categoryText)) {
-			assetTagNames = new String[] {categoryText};
+			tagsEntries = new String[] {categoryText};
 		}
 
 		ServiceContext serviceContext = new ServiceContext();
 
 		serviceContext.setAddCommunityPermissions(true);
 		serviceContext.setAddGuestPermissions(true);
-		serviceContext.setAssetTagNames(assetTagNames);
 		serviceContext.setScopeGroupId(context.getGroupId());
+		serviceContext.setTagsEntries(tagsEntries);
 
 		BlogsEntry entry = null;
 

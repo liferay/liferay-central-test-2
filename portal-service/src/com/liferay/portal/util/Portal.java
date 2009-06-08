@@ -130,10 +130,6 @@ public interface Portal {
 	public void copyRequestParameters(
 		ActionRequest actionRequest, ActionResponse actionResponse);
 
-	public long[] getAssetCategoryIds(PortletRequest portletRequest);
-
-	public String[] getAssetTagNames(PortletRequest portletRequest);
-
 	public String getCDNHost();
 
 	public String getClassName(long classNameId);
@@ -437,6 +433,10 @@ public interface Portal {
 	public String[] getSystemOrganizationRoles();
 
 	public String[] getSystemRoles();
+
+	public String[] getTagsCategories(PortletRequest portletRequest);
+
+	public String[] getTagsEntries(PortletRequest portletRequest);
 
 	public UploadPortletRequest getUploadPortletRequest(
 		ActionRequest actionRequest);

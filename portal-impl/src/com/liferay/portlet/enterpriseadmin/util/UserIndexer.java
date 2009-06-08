@@ -39,9 +39,9 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.service.OrganizationLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PortletKeys;
-import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeIndexerUtil;
+import com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,7 +68,7 @@ public class UserIndexer implements Indexer {
 		long companyId, long userId, String screenName, String emailAddress,
 		String firstName, String middleName, String lastName, String jobTitle,
 		boolean active, long[] groupIds, long[] organizationIds,
-		long[] roleIds, long[] userGroupIds, String[] assetTagNames,
+		long[] roleIds, long[] userGroupIds, String[] tagsEntries,
 		ExpandoBridge expandoBridge) {
 
 		Document doc = new DocumentImpl();
@@ -96,7 +96,7 @@ public class UserIndexer implements Indexer {
 		doc.addKeyword("roleIds", roleIds);
 		doc.addKeyword("userGroupIds", userGroupIds);
 
-		doc.addKeyword(Field.ASSET_TAG_NAMES, assetTagNames);
+		doc.addKeyword(Field.TAGS_ENTRIES, tagsEntries);
 
 		ExpandoBridgeIndexerUtil.addAttributes(doc, expandoBridge);
 
@@ -127,7 +127,7 @@ public class UserIndexer implements Indexer {
 
 			Contact contact = user.getContact();
 
-			String[] assetTagNames = AssetTagLocalServiceUtil.getTagNames(
+			String[] tagsEntries = TagsEntryLocalServiceUtil.getEntryNames(
 				User.class.getName(), user.getUserId());
 
 			Document doc = getUserDocument(
@@ -136,7 +136,7 @@ public class UserIndexer implements Indexer {
 				contact.getMiddleName(), contact.getLastName(),
 				contact.getJobTitle(), user.getActive(),
 				user.getGroupIds(), user.getOrganizationIds(),
-				user.getRoleIds(), user.getUserGroupIds(), assetTagNames,
+				user.getRoleIds(), user.getUserGroupIds(), tagsEntries,
 				user.getExpandoBridge());
 
 			SearchEngineUtil.updateDocument(

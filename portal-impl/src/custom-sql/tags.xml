@@ -1,0 +1,272 @@
+<?xml version="1.0"?>
+
+<custom-sql>
+	<sql id="com.liferay.portlet.tags.service.persistence.TagsAssetClassPKFinder.findByE_C">
+		<![CDATA[
+			SELECT
+				DISTINCT TagsAsset.classPK
+			FROM
+				TagsAsset
+			INNER JOIN
+				TagsAssets_TagsEntries ON
+					(TagsAsset.assetId = TagsAssets_TagsEntries.assetId)
+			WHERE
+				(TagsAssets_TagsEntries.entryId = ?) AND
+				(TagsAsset.classNameId = ?)
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.tags.service.persistence.TagsAssetFinder.countByAndEntryIds">
+		<![CDATA[
+			SELECT
+				COUNT(DISTINCT TagsAsset.assetId) AS COUNT_VALUE
+			FROM
+				TagsAssets_TagsEntries
+			WHERE
+				entryId = ? [$DATES$] AND assetId IN (
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.tags.service.persistence.TagsAssetFinder.countByOrEntryIds">
+		<![CDATA[
+			SELECT
+				COUNT(DISTINCT TagsAsset.assetId) AS COUNT_VALUE
+			FROM
+				TagsAsset
+			INNER JOIN
+				TagsAssets_TagsEntries ON
+					(TagsAssets_TagsEntries.assetId = TagsAsset.assetId)
+			INNER JOIN
+				TagsEntry ON
+					(TagsEntry.entryId = TagsAssets_TagsEntries.entryId)
+			WHERE
+				([$ENTRY_ID$]) [$NOT_ENTRY_ID$] [$DATES$]
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.tags.service.persistence.TagsAssetFinder.findByAndEntryIds">
+		<![CDATA[
+			SELECT
+				DISTINCT TagsAssets_TagsEntries.assetId
+			FROM
+				TagsAssets_TagsEntries
+			WHERE
+				entryId = ?
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.tags.service.persistence.TagsAssetFinder.findByOrEntryIds">
+		<![CDATA[
+			SELECT
+				DISTINCT {TagsAsset.*}
+			FROM
+				TagsAsset
+			INNER JOIN
+				TagsAssets_TagsEntries ON
+					(TagsAssets_TagsEntries.assetId = TagsAsset.assetId)
+			INNER JOIN
+				TagsEntry ON
+					(TagsEntry.entryId = TagsAssets_TagsEntries.entryId)
+			WHERE
+				([$ENTRY_ID$]) [$NOT_ENTRY_ID$] [$DATES$]
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.tags.service.persistence.TagsAssetFinder.findByViewCount">
+		<![CDATA[
+			SELECT
+				DISTINCT {TagsAsset.*}
+			FROM
+				TagsAsset
+			WHERE
+				(TagsAsset.classNameId = ?) AND
+				(TagsAsset.viewCount > 0)
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.tags.service.persistence.TagsEntryFinder.countByG_C_N_F">
+		<![CDATA[
+			SELECT
+				COUNT(*) AS COUNT_VALUE
+			FROM
+				TagsEntry
+			INNER JOIN
+				TagsAssets_TagsEntries ON
+					(TagsAssets_TagsEntries.entryId = TagsEntry.entryId) AND
+					(TagsAssets_TagsEntries.assetId IN (
+						SELECT
+							assetId
+						FROM
+							TagsAsset
+						WHERE
+							(TagsAsset.groupId = ?) AND
+							(TagsAsset.classNameId = ?)
+					))
+			INNER JOIN
+				TagsVocabulary ON
+					(TagsVocabulary.vocabularyId = TagsEntry.vocabularyId)
+			WHERE
+				(TagsEntry.name LIKE ? OR ? IS NULL) AND
+				(TagsVocabulary.folksonomy = ?)
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.tags.service.persistence.TagsEntryFinder.countByG_N_F_P">
+		<![CDATA[
+			SELECT
+				COUNT(*) AS COUNT_VALUE
+			FROM
+				TagsEntry
+			[$JOIN$]
+			INNER JOIN
+				TagsVocabulary ON
+					(TagsVocabulary.vocabularyId = TagsEntry.vocabularyId)
+			WHERE
+				(TagsEntry.groupId = ?) AND
+				(TagsEntry.name LIKE ? OR ? IS NULL) AND
+				(TagsVocabulary.folksonomy = ?)
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.tags.service.persistence.TagsEntryFinder.findByFolksonomy">
+		<![CDATA[
+			SELECT
+				{TagsEntry.*}
+			FROM
+				TagsEntry
+			INNER JOIN
+				TagsVocabulary ON
+					(TagsVocabulary.vocabularyId = TagsEntry.vocabularyId)
+			WHERE
+				TagsVocabulary.folksonomy = ?
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.tags.service.persistence.TagsEntryFinder.findByA_F">
+		<![CDATA[
+			SELECT
+				{TagsEntry.*}
+			FROM
+				TagsEntry
+			INNER JOIN
+				TagsAssets_TagsEntries ON
+					(TagsAssets_TagsEntries.entryId = TagsEntry.entryId) AND
+					(TagsAssets_TagsEntries.assetId = ?)
+			INNER JOIN
+				TagsVocabulary ON
+					(TagsVocabulary.vocabularyId = TagsEntry.vocabularyId)
+			WHERE
+				TagsVocabulary.folksonomy = ?
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.tags.service.persistence.TagsEntryFinder.findByG_N_F">
+		<![CDATA[
+			SELECT
+				{TagsEntry.*}
+			FROM
+				TagsEntry
+			INNER JOIN
+				TagsVocabulary ON
+					(TagsVocabulary.vocabularyId = TagsEntry.vocabularyId)
+			WHERE
+				(TagsEntry.groupId = ?) AND
+				(lower(TagsEntry.name) = ?) AND
+				(TagsVocabulary.folksonomy = ?)
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.tags.service.persistence.TagsEntryFinder.findByG_C_N_F">
+		<![CDATA[
+			SELECT
+				{TagsEntry.*}
+			FROM
+				TagsEntry
+			INNER JOIN
+				TagsAssets_TagsEntries ON
+					(TagsAssets_TagsEntries.entryId = TagsEntry.entryId) AND
+					(TagsAssets_TagsEntries.assetId IN (
+						SELECT
+							assetId
+						FROM
+							TagsAsset
+						WHERE
+							(TagsAsset.groupId = ?) AND
+							(TagsAsset.classNameId = ?)
+					))
+			INNER JOIN
+				TagsVocabulary ON
+					(TagsVocabulary.vocabularyId = TagsEntry.vocabularyId)
+			WHERE
+				(TagsEntry.name LIKE ? OR ? IS NULL) AND
+				(TagsVocabulary.folksonomy = ?)
+			ORDER BY
+				TagsEntry.name ASC
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.tags.service.persistence.TagsEntryFinder.findByG_N_F_P">
+		<![CDATA[
+			SELECT
+				{TagsEntry.*}
+			FROM
+				TagsEntry
+			[$JOIN$]
+			INNER JOIN
+				TagsVocabulary ON
+					(TagsVocabulary.vocabularyId = TagsEntry.vocabularyId)
+			WHERE
+				(TagsEntry.groupId = ?) AND
+				(TagsEntry.name LIKE ? OR ? IS NULL) AND
+				(TagsVocabulary.folksonomy = ?)
+			ORDER BY
+				TagsEntry.name ASC
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.tags.service.persistence.TagsPropertyFinder.countByG_K">
+		<![CDATA[
+			SELECT
+				COUNT(DISTINCT TagsProperty.value) AS COUNT_VALUE
+			FROM
+				TagsProperty
+			INNER JOIN
+				TagsEntry ON
+					(TagsEntry.entryId = TagsProperty.entryId)
+			WHERE
+				(TagsEntry.groupId = ?) AND
+				(TagsProperty.key_ = ?)
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.tags.service.persistence.TagsPropertyFinder.findByG_K">
+		<![CDATA[
+			SELECT
+				DISTINCT TagsProperty.value AS propertyValue
+			FROM
+				TagsProperty
+			INNER JOIN
+				TagsEntry ON
+					(TagsEntry.entryId = TagsProperty.entryId)
+			WHERE
+				(TagsEntry.groupId = ?) AND
+				(TagsProperty.key_ = ?)
+			ORDER BY
+				TagsProperty.value ASC
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.tags.service.persistence.TagsPropertyKeyFinder.countByGroupId">
+		<![CDATA[
+			SELECT
+				COUNT(DISTINCT TagsProperty.key_) AS COUNT_VALUE
+			FROM
+				TagsProperty
+			INNER JOIN
+				TagsEntry ON
+					(TagsEntry.entryId = TagsProperty.entryId)
+			WHERE
+				(TagsEntry.groupId = ?) AND
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.tags.service.persistence.TagsPropertyKeyFinder.findByGroupId">
+		<![CDATA[
+			SELECT
+				DISTINCT TagsProperty.key_ AS propertyKey
+			FROM
+				TagsProperty
+			INNER JOIN
+				TagsEntry ON
+					(TagsEntry.entryId = TagsProperty.entryId)
+			WHERE
+				(TagsEntry.groupId = ?) AND
+			ORDER BY
+				propertyKey ASC
+		]]>
+	</sql>
+</custom-sql>

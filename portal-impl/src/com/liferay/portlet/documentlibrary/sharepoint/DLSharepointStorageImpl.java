@@ -30,7 +30,6 @@ import com.liferay.portal.sharepoint.BaseSharepointStorageImpl;
 import com.liferay.portal.sharepoint.SharepointRequest;
 import com.liferay.portal.sharepoint.SharepointUtil;
 import com.liferay.portal.sharepoint.Tree;
-import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.NoSuchFolderException;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
@@ -39,6 +38,7 @@ import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFolderServiceUtil;
+import com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil;
 
 import java.io.File;
 import java.io.InputStream;
@@ -270,10 +270,10 @@ public class DLSharepointStorageImpl extends BaseSharepointStorageImpl {
 
 			byte[] bytes = FileUtil.getBytes(is);
 
-			String[] assetTagNames = AssetTagLocalServiceUtil.getTagNames(
+			String[] tagsEntries = TagsEntryLocalServiceUtil.getEntryNames(
 				DLFileEntry.class.getName(), fileEntry.getFileEntryId());
 
-			serviceContext.setAssetTagNames(assetTagNames);
+			serviceContext.setTagsEntries(tagsEntries);
 
 			fileEntry = DLFileEntryServiceUtil.updateFileEntry(
 				folderId, newParentFolderId, name, newName, newName,
@@ -327,10 +327,10 @@ public class DLSharepointStorageImpl extends BaseSharepointStorageImpl {
 			description = fileEntry.getDescription();
 			extraSettings = fileEntry.getExtraSettings();
 
-			String[] assetTagNames = AssetTagLocalServiceUtil.getTagNames(
+			String[] tagsEntries = TagsEntryLocalServiceUtil.getEntryNames(
 				DLFileEntry.class.getName(), fileEntry.getFileEntryId());
 
-			serviceContext.setAssetTagNames(assetTagNames);
+			serviceContext.setTagsEntries(tagsEntries);
 
 			DLFileEntryServiceUtil.updateFileEntry(
 				parentFolderId, parentFolderId, name, title, title,

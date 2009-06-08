@@ -133,7 +133,7 @@ public class AssetCategoryModelImpl extends BaseModelImpl<AssetCategory> {
 		return models;
 	}
 
-	public static final boolean FINDER_CACHE_ENABLED_ASSETS_ASSETCATEGORIES = com.liferay.portlet.asset.model.impl.AssetModelImpl.FINDER_CACHE_ENABLED_ASSETS_ASSETCATEGORIES;
+	public static final boolean FINDER_CACHE_ENABLED_TAGSASSETS_ASSETCATEGORIES = com.liferay.portlet.tags.model.impl.TagsAssetModelImpl.FINDER_CACHE_ENABLED_TAGSASSETS_ASSETCATEGORIES;
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.asset.model.AssetCategory"));
 

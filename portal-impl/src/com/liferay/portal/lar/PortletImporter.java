@@ -707,42 +707,7 @@ public class PortletImporter {
 
 		try {
 			String xml = context.getZipEntryAsString(
-				context.getSourceRootPath() + "/asset-categories.xml");
-
-			if (xml == null) {
-				return;
-			}
-
-			Document doc = SAXReaderUtil.read(xml);
-
-			Element root = doc.getRootElement();
-
-			List<Element> assets = root.elements("asset");
-
-			for (Element asset : assets) {
-				String className = GetterUtil.getString(
-					asset.attributeValue("class-name"));
-				long classPK = GetterUtil.getLong(
-					asset.attributeValue("class-pk"));
-				String categoryIdsString = GetterUtil.getString(
-					asset.attributeValue("categoryIds"));
-
-				context.addAssetCategories(
-					className, new Long(classPK),
-					StringUtil.split(categoryIdsString, 0L));
-			}
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-	}
-
-	protected void readTags(PortletDataContext context, Element parentEl)
-		throws SystemException {
-
-		try {
-			String xml = context.getZipEntryAsString(
-				context.getSourceRootPath() + "/asset.xml");
+				context.getSourceRootPath() + "/categories.xml");
 
 			if (xml == null) {
 				return;
@@ -760,9 +725,43 @@ public class PortletImporter {
 				long classPK = GetterUtil.getLong(
 					asset.attributeValue("class-pk"));
 				String entries = GetterUtil.getString(
-					asset.attributeValue("tags"));
+					asset.attributeValue("entries"));
 
-				context.addAssetTags(
+				context.addTagsCategories(
+					className, new Long(classPK), StringUtil.split(entries));
+			}
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+	}
+
+	protected void readTags(PortletDataContext context, Element parentEl)
+		throws SystemException {
+
+		try {
+			String xml = context.getZipEntryAsString(
+				context.getSourceRootPath() + "/tags.xml");
+
+			if (xml == null) {
+				return;
+			}
+
+			Document doc = SAXReaderUtil.read(xml);
+
+			Element root = doc.getRootElement();
+
+			List<Element> assets = root.elements("asset");
+
+			for (Element asset : assets) {
+				String className = GetterUtil.getString(
+					asset.attributeValue("class-name"));
+				long classPK = GetterUtil.getLong(
+					asset.attributeValue("class-pk"));
+				String entries = GetterUtil.getString(
+					asset.attributeValue("entries"));
+
+				context.addTagsEntries(
 					className, new Long(classPK), StringUtil.split(entries));
 			}
 		}

@@ -62,6 +62,7 @@ import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.messageboards.model.MBDiscussion;
 import com.liferay.portlet.ratings.model.RatingsEntry;
 import com.liferay.portlet.ratings.model.RatingsStats;
+import com.liferay.portlet.tags.model.TagsEntryConstants;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
@@ -219,12 +220,6 @@ public class DLFileEntryLocalServiceImpl
 				serviceContext.getGuestPermissions());
 		}
 
-		// Asset
-
-		updateAsset(
-			userId, fileEntry, serviceContext.getAssetCategoryIds(),
-			serviceContext.getAssetTagNames());
-
 		// Expando
 
 		ExpandoBridge expandoBridge = fileEntry.getExpandoBridge();
@@ -237,7 +232,8 @@ public class DLFileEntryLocalServiceImpl
 			user.getCompanyId(), PortletKeys.DOCUMENT_LIBRARY,
 			fileEntry.getGroupId(), folderId, name, fileEntryId,
 			fileEntry.getLuceneProperties(), fileEntry.getModifiedDate(),
-			serviceContext, is);
+			serviceContext.getTagsCategories(), serviceContext.getTagsEntries(),
+			is);
 
 		// Message boards
 
@@ -252,6 +248,12 @@ public class DLFileEntryLocalServiceImpl
 		socialActivityLocalService.addActivity(
 			userId, fileEntry.getGroupId(), DLFileEntry.class.getName(),
 			fileEntryId, DLActivityKeys.ADD_FILE_ENTRY, StringPool.BLANK, 0);
+
+		// Tags
+
+		updateTagsAsset(
+			userId, fileEntry, serviceContext.getTagsCategories(),
+			serviceContext.getTagsEntries());
 
 		// Folder
 
@@ -430,9 +432,9 @@ public class DLFileEntryLocalServiceImpl
 			dlFileVersionPersistence.remove(fileVersion);
 		}
 
-		// Asset
+		// Tags
 
-		assetLocalService.deleteAsset(
+		tagsAssetLocalService.deleteAsset(
 			DLFileEntry.class.getName(), fileEntry.getFileEntryId());
 
 		// Social
@@ -516,7 +518,7 @@ public class DLFileEntryLocalServiceImpl
 
 		dlFileEntryPersistence.update(fileEntry, false);
 
-		assetLocalService.incrementViewCounter(
+		tagsAssetLocalService.incrementViewCounter(
 			DLFileEntry.class.getName(), fileEntry.getFileEntryId());
 
 		if ((version > 0) && (fileEntry.getVersion() != version)) {
@@ -681,33 +683,20 @@ public class DLFileEntryLocalServiceImpl
 		String properties = fileEntry.getLuceneProperties();
 		Date modifiedDate = fileEntry.getModifiedDate();
 
-		long[] assetCategoryIds = assetCategoryLocalService.getCategoryIds(
-			DLFileEntry.class.getName(), fileEntryId);
-		String[] assetTagNames = assetTagLocalService.getTagNames(
+		String[] tagsCategories = tagsEntryLocalService.getEntryNames(
+			DLFileEntry.class.getName(), fileEntryId,
+			TagsEntryConstants.FOLKSONOMY_CATEGORY);
+		String[] tagsEntries = tagsEntryLocalService.getEntryNames(
 			DLFileEntry.class.getName(), fileEntryId);
 
 		try {
 			Indexer.updateFile(
 				companyId, portletId, groupId, folderId, fileName, fileEntryId,
-				properties, modifiedDate, assetCategoryIds, assetTagNames);
+				properties, modifiedDate, tagsCategories, tagsEntries);
 		}
 		catch (SearchException se) {
 			_log.error("Reindexing " + fileEntryId, se);
 		}
-	}
-
-	public void updateAsset(
-			long userId, DLFileEntry fileEntry, long[] assetCategoryIds,
-			String[] assetTagNames)
-		throws PortalException, SystemException {
-
-		String mimeType = MimeTypesUtil.getContentType(fileEntry.getName());
-
-		assetLocalService.updateAsset(
-			userId, fileEntry.getGroupId(), DLFileEntry.class.getName(),
-			fileEntry.getFileEntryId(), assetCategoryIds, assetTagNames, true,
-			null, null, null, null, mimeType, fileEntry.getTitle(),
-			fileEntry.getDescription(), null, null, 0, 0, null, false);
 	}
 
 	public DLFileEntry updateFileEntry(
@@ -881,11 +870,6 @@ public class DLFileEntryLocalServiceImpl
 
 			resourcePersistence.update(resource, false);
 
-			// Asset
-
-			assetLocalService.deleteAsset(
-				DLFileEntry.class.getName(), fileEntry.getFileEntryId());
-
 			// Expando
 
 			expandoValueLocalService.deleteValues(
@@ -935,16 +919,15 @@ public class DLFileEntryLocalServiceImpl
 			socialActivityLocalService.deleteActivities(
 				DLFileEntry.class.getName(), fileEntry.getFileEntryId());
 
+			// Tags
+
+			tagsAssetLocalService.deleteAsset(
+				DLFileEntry.class.getName(), fileEntry.getFileEntryId());
+
 			folderId = newFolderId;
 			folder = newFolder;
 			fileEntry = newFileEntry;
 		}
-
-		// Asset
-
-		updateAsset(
-			userId, fileEntry, serviceContext.getAssetCategoryIds(),
-			serviceContext.getAssetTagNames());
 
 		// Expando
 
@@ -958,6 +941,12 @@ public class DLFileEntryLocalServiceImpl
 			userId, fileEntry.getGroupId(), DLFileEntry.class.getName(),
 			fileEntry.getFileEntryId(), DLActivityKeys.UPDATE_FILE_ENTRY,
 			StringPool.BLANK, 0);
+
+		// Tags
+
+		updateTagsAsset(
+			userId, fileEntry, serviceContext.getTagsCategories(),
+			serviceContext.getTagsEntries());
 
 		// File version
 
@@ -976,7 +965,8 @@ public class DLFileEntryLocalServiceImpl
 				user.getCompanyId(), PortletKeys.DOCUMENT_LIBRARY,
 				fileEntry.getGroupId(), folderId, name, newVersion, name,
 				fileEntry.getFileEntryId(), fileEntry.getLuceneProperties(),
-				fileEntry.getModifiedDate(), serviceContext, is);
+				fileEntry.getModifiedDate(), serviceContext.getTagsCategories(),
+				serviceContext.getTagsEntries(), is);
 
 			return fileEntry;
 		}
@@ -1023,7 +1013,8 @@ public class DLFileEntryLocalServiceImpl
 			user.getCompanyId(), PortletKeys.DOCUMENT_LIBRARY,
 			fileEntry.getGroupId(), folderId, name, newVersion, sourceFileName,
 			fileEntry.getFileEntryId(), fileEntry.getLuceneProperties(),
-			fileEntry.getModifiedDate(), serviceContext, is);
+			fileEntry.getModifiedDate(), serviceContext.getTagsCategories(),
+			serviceContext.getTagsEntries(), is);
 
 		// Folder
 
@@ -1032,6 +1023,20 @@ public class DLFileEntryLocalServiceImpl
 		dlFolderPersistence.update(folder, false);
 
 		return fileEntry;
+	}
+
+	public void updateTagsAsset(
+			long userId, DLFileEntry fileEntry, String[] tagsCategories,
+			String[] tagsEntries)
+		throws PortalException, SystemException {
+
+		String mimeType = MimeTypesUtil.getContentType(fileEntry.getName());
+
+		tagsAssetLocalService.updateAsset(
+			userId, fileEntry.getGroupId(), DLFileEntry.class.getName(),
+			fileEntry.getFileEntryId(), tagsCategories, tagsEntries, true, null,
+			null, null, null, mimeType, fileEntry.getTitle(),
+			fileEntry.getDescription(), null, null, 0, 0, null, false);
 	}
 
 	protected long getFolderId(long companyId, long folderId)

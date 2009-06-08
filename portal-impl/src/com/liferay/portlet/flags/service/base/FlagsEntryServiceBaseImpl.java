@@ -55,11 +55,11 @@ import com.liferay.portal.service.persistence.UserGroupRolePersistence;
 import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.util.PortalUtil;
 
-import com.liferay.portlet.asset.service.AssetLocalService;
-import com.liferay.portlet.asset.service.AssetService;
-import com.liferay.portlet.asset.service.persistence.AssetFinder;
-import com.liferay.portlet.asset.service.persistence.AssetPersistence;
 import com.liferay.portlet.flags.service.FlagsEntryService;
+import com.liferay.portlet.tags.service.TagsAssetLocalService;
+import com.liferay.portlet.tags.service.TagsAssetService;
+import com.liferay.portlet.tags.service.persistence.TagsAssetFinder;
+import com.liferay.portlet.tags.service.persistence.TagsAssetPersistence;
 
 /**
  * <a href="FlagsEntryServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
@@ -298,36 +298,38 @@ public abstract class FlagsEntryServiceBaseImpl extends PrincipalBean
 		this.userGroupRolePersistence = userGroupRolePersistence;
 	}
 
-	public AssetLocalService getAssetLocalService() {
-		return assetLocalService;
+	public TagsAssetLocalService getTagsAssetLocalService() {
+		return tagsAssetLocalService;
 	}
 
-	public void setAssetLocalService(AssetLocalService assetLocalService) {
-		this.assetLocalService = assetLocalService;
+	public void setTagsAssetLocalService(
+		TagsAssetLocalService tagsAssetLocalService) {
+		this.tagsAssetLocalService = tagsAssetLocalService;
 	}
 
-	public AssetService getAssetService() {
-		return assetService;
+	public TagsAssetService getTagsAssetService() {
+		return tagsAssetService;
 	}
 
-	public void setAssetService(AssetService assetService) {
-		this.assetService = assetService;
+	public void setTagsAssetService(TagsAssetService tagsAssetService) {
+		this.tagsAssetService = tagsAssetService;
 	}
 
-	public AssetPersistence getAssetPersistence() {
-		return assetPersistence;
+	public TagsAssetPersistence getTagsAssetPersistence() {
+		return tagsAssetPersistence;
 	}
 
-	public void setAssetPersistence(AssetPersistence assetPersistence) {
-		this.assetPersistence = assetPersistence;
+	public void setTagsAssetPersistence(
+		TagsAssetPersistence tagsAssetPersistence) {
+		this.tagsAssetPersistence = tagsAssetPersistence;
 	}
 
-	public AssetFinder getAssetFinder() {
-		return assetFinder;
+	public TagsAssetFinder getTagsAssetFinder() {
+		return tagsAssetFinder;
 	}
 
-	public void setAssetFinder(AssetFinder assetFinder) {
-		this.assetFinder = assetFinder;
+	public void setTagsAssetFinder(TagsAssetFinder tagsAssetFinder) {
+		this.tagsAssetFinder = tagsAssetFinder;
 	}
 
 	protected void runSQL(String sql) throws SystemException {
@@ -395,12 +397,12 @@ public abstract class FlagsEntryServiceBaseImpl extends PrincipalBean
 	protected UserGroupRoleService userGroupRoleService;
 	@BeanReference(name = "com.liferay.portal.service.persistence.UserGroupRolePersistence.impl")
 	protected UserGroupRolePersistence userGroupRolePersistence;
-	@BeanReference(name = "com.liferay.portlet.asset.service.AssetLocalService.impl")
-	protected AssetLocalService assetLocalService;
-	@BeanReference(name = "com.liferay.portlet.asset.service.AssetService.impl")
-	protected AssetService assetService;
-	@BeanReference(name = "com.liferay.portlet.asset.service.persistence.AssetPersistence.impl")
-	protected AssetPersistence assetPersistence;
-	@BeanReference(name = "com.liferay.portlet.asset.service.persistence.AssetFinder.impl")
-	protected AssetFinder assetFinder;
+	@BeanReference(name = "com.liferay.portlet.tags.service.TagsAssetLocalService.impl")
+	protected TagsAssetLocalService tagsAssetLocalService;
+	@BeanReference(name = "com.liferay.portlet.tags.service.TagsAssetService.impl")
+	protected TagsAssetService tagsAssetService;
+	@BeanReference(name = "com.liferay.portlet.tags.service.persistence.TagsAssetPersistence.impl")
+	protected TagsAssetPersistence tagsAssetPersistence;
+	@BeanReference(name = "com.liferay.portlet.tags.service.persistence.TagsAssetFinder.impl")
+	protected TagsAssetFinder tagsAssetFinder;
 }

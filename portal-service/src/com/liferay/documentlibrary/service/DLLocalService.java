@@ -24,103 +24,71 @@ package com.liferay.documentlibrary.service;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.annotation.Isolation;
-import com.liferay.portal.kernel.annotation.Propagation;
 import com.liferay.portal.kernel.annotation.Transactional;
+import com.liferay.portal.kernel.search.Hits;
+
+import java.io.File;
+import java.io.InputStream;
+
+import java.util.Date;
 
 /**
  * <a href="DLLocalService.java.html"><b><i>View Source</i></b></a>
  *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
- * This interface defines the service. The default implementation is
- * <code>com.liferay.documentlibrary.service.impl.DLLocalServiceImpl</code>.
- * Modify methods in that class and rerun ServiceBuilder to populate this class
- * and all other generated classes.
- * </p>
- *
- * <p>
- * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.documentlibrary.service.DLLocalServiceUtil
- *
  */
-@Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
-	PortalException.class, SystemException.class})
+@Transactional(rollbackFor = {PortalException.class, SystemException.class})
 public interface DLLocalService {
-	public void addFile(long companyId, java.lang.String portletId,
-		long groupId, long repositoryId, java.lang.String fileName,
-		long fileEntryId, java.lang.String properties,
-		java.util.Date modifiedDate,
-		com.liferay.portal.service.ServiceContext serviceContext,
-		java.io.InputStream is)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
 
-	public void checkRoot(long companyId)
-		throws com.liferay.portal.SystemException;
+	public void addFile(
+			long companyId, String portletId, long groupId, long repositoryId,
+			String fileName, long fileEntryId, String properties,
+			Date modifiedDate, String[] tagsCategories, String[] tagsEntries,
+			InputStream is)
+		throws PortalException, SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.io.InputStream getFileAsStream(long companyId,
-		long repositoryId, java.lang.String fileName)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+	public void checkRoot(long companyId) throws SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.io.InputStream getFileAsStream(long companyId,
-		long repositoryId, java.lang.String fileName, double versionNumber)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+	public InputStream getFileAsStream(
+			long companyId, long repositoryId, String fileName)
+		throws PortalException, SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public boolean hasFile(long companyId, long repositoryId,
-		java.lang.String fileName, double versionNumber)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+	public InputStream getFileAsStream(
+			long companyId, long repositoryId, String fileName,
+			double versionNumber)
+		throws PortalException, SystemException;
 
-	public void move(java.lang.String srcDir, java.lang.String destDir)
-		throws com.liferay.portal.SystemException;
+	public boolean hasFile(
+			long companyId, long repositoryId, String fileName,
+			double versionNumber)
+		throws PortalException, SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public com.liferay.portal.kernel.search.Hits search(long companyId,
-		java.lang.String portletId, long groupId, long userId,
-		long[] repositoryIds, java.lang.String keywords, int start, int end)
-		throws com.liferay.portal.SystemException;
+	public void move(String srcDir, String destDir) throws SystemException;
 
-	public void updateFile(long companyId, java.lang.String portletId,
-		long groupId, long repositoryId, java.lang.String fileName,
-		double versionNumber, java.lang.String sourceFileName,
-		long fileEntryId, java.lang.String properties,
-		java.util.Date modifiedDate,
-		com.liferay.portal.service.ServiceContext serviceContext,
-		java.io.InputStream is)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+	public Hits search(
+			long companyId, String portletId, long groupId,
+			long userId, long[] repositoryIds, String keywords, int start,
+			int end)
+		throws SystemException;
 
-	public void validate(java.lang.String fileName, java.io.File file)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+	public void updateFile(
+			long companyId, String portletId, long groupId, long repositoryId,
+			String fileName, double versionNumber, String sourceFileName,
+			long fileEntryId, String properties, Date modifiedDate,
+			String[] tagsCategories, String[] tagsEntries, InputStream is)
+		throws PortalException, SystemException;
 
-	public void validate(java.lang.String fileName, byte[] bytes)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+	public void validate(String fileName, File file)
+		throws PortalException, SystemException;
 
-	public void validate(java.lang.String fileName, java.io.InputStream is)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+	public void validate(String fileName, byte[] bytes)
+		throws PortalException, SystemException;
 
-	public void validate(java.lang.String fileName)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+	public void validate(String fileName, InputStream is)
+		throws PortalException, SystemException;
 
-	public void validate(java.lang.String fileName,
-		java.lang.String sourceFileName, java.io.InputStream is)
-		throws com.liferay.portal.PortalException;
+	public void validate(String fileName, String sourceFileName, InputStream is)
+		throws PortalException;
+
 }

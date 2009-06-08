@@ -306,18 +306,18 @@ public interface WikiPageLocalService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public void updateAsset(long userId,
-		com.liferay.portlet.wiki.model.WikiPage page, long[] assetCategoryIds,
-		java.lang.String[] assetTagNames)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
 	public com.liferay.portlet.wiki.model.WikiPage updatePage(long userId,
 		long nodeId, java.lang.String title, double version,
 		java.lang.String content, java.lang.String summary, boolean minorEdit,
 		java.lang.String format, java.lang.String parentTitle,
 		java.lang.String redirectTitle,
 		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	public void updateAsset(long userId,
+		com.liferay.portlet.wiki.model.WikiPage page, long[] assetCategoryIds,
+		java.lang.String[] tagsEntries)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 

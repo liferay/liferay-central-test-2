@@ -227,9 +227,10 @@ String scheduleTitle = LanguageUtil.get(pageContext, "schedule");
 
 			<liferay-ui:message key="tags" /><br />
 
-			<liferay-ui:asset-tags-selector
+			<liferay-ui:tags-selector
 				className="<%= JournalArticle.class.getName() %>"
 				classPK="<%= classPK %>"
+				hiddenInput="tagsEntries"
 				contentCallback='<%= renderResponse.getNamespace() + "getSuggestionsContent" %>'
 			/>
 

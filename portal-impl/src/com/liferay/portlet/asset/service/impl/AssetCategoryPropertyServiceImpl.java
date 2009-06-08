@@ -41,11 +41,11 @@ public class AssetCategoryPropertyServiceImpl
 	extends AssetCategoryPropertyServiceBaseImpl {
 
 	public AssetCategoryProperty addCategoryProperty(
-			long categoryId, String key, String value)
+			long entryId, String key, String value)
 		throws PortalException, SystemException {
 
 		return assetCategoryPropertyLocalService.addCategoryProperty(
-			getUserId(), categoryId, key, value);
+			getUserId(), entryId, key, value);
 	}
 
 	public void deleteCategoryProperty(long categoryPropertyId)
@@ -55,10 +55,10 @@ public class AssetCategoryPropertyServiceImpl
 			categoryPropertyId);
 	}
 
-	public List<AssetCategoryProperty> getCategoryProperties(long categoryId)
+	public List<AssetCategoryProperty> getCategoryProperties(long entryId)
 		throws SystemException {
 
-		return assetCategoryPropertyLocalService.getCategoryProperties(categoryId);
+		return assetCategoryPropertyLocalService.getCategoryProperties(entryId);
 	}
 
 	public List<AssetCategoryProperty> getCategoryPropertyValues(

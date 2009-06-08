@@ -294,12 +294,6 @@ public interface DLFileEntryLocalService {
 	public void reIndex(long fileEntryId)
 		throws com.liferay.portal.SystemException;
 
-	public void updateAsset(long userId,
-		com.liferay.portlet.documentlibrary.model.DLFileEntry fileEntry,
-		long[] assetCategoryIds, java.lang.String[] assetTagNames)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry updateFileEntry(
 		long userId, long folderId, long newFolderId, java.lang.String name,
 		java.lang.String sourceFileName, java.lang.String title,
@@ -323,6 +317,12 @@ public interface DLFileEntryLocalService {
 		java.lang.String description, java.lang.String extraSettings,
 		java.io.InputStream is, long size,
 		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	public void updateTagsAsset(long userId,
+		com.liferay.portlet.documentlibrary.model.DLFileEntry fileEntry,
+		java.lang.String[] tagsCategories, java.lang.String[] tagsEntries)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 }

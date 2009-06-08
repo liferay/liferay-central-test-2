@@ -40,7 +40,6 @@ import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.service.ServiceContext;
 
 import java.io.BufferedInputStream;
 import java.io.InputStream;
@@ -118,7 +117,8 @@ public class JCRHook extends BaseHook {
 	public void addFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, long fileEntryId, String properties,
-			Date modifiedDate, ServiceContext serviceContext, InputStream is)
+			Date modifiedDate, String[] tagsCategories, String[] tagsEntries,
+			InputStream is)
 		throws PortalException, SystemException {
 
 		Session session = null;
@@ -155,9 +155,8 @@ public class JCRHook extends BaseHook {
 
 				Indexer.addFile(
 					companyId, portletId, groupId, repositoryId, fileName,
-					fileEntryId, properties, modifiedDate,
-					serviceContext.getAssetCategoryIds(),
-					serviceContext.getAssetTagNames());
+					fileEntryId, properties, modifiedDate, tagsCategories,
+					tagsEntries);
 			}
 		}
 		catch (RepositoryException re) {
@@ -578,7 +577,7 @@ public class JCRHook extends BaseHook {
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, double versionNumber, String sourceFileName,
 			long fileEntryId, String properties, Date modifiedDate,
-			ServiceContext serviceContext, InputStream is)
+			String[] tagsCategories, String[] tagsEntries, InputStream is)
 		throws PortalException, SystemException {
 
 		String versionLabel = String.valueOf(versionNumber);
@@ -609,9 +608,8 @@ public class JCRHook extends BaseHook {
 
 			Indexer.updateFile(
 				companyId, portletId, groupId, repositoryId, fileName,
-				fileEntryId, properties, modifiedDate,
-				serviceContext.getAssetCategoryIds(),
-				serviceContext.getAssetTagNames());
+				fileEntryId, properties, modifiedDate, tagsCategories,
+				tagsEntries);
 		}
 		catch (PathNotFoundException pnfe) {
 			throw new NoSuchFileException(fileName);

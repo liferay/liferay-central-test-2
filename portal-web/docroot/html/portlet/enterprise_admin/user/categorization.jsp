@@ -30,7 +30,7 @@ User selUser = (User)request.getAttribute("user.selUser");
 
 <fieldset class="exp-block-labels">
 	<div class="exp-ctrl-holder">
-		<label for="<portlet:namespace />assetTagNames"><liferay-ui:message key="tags" /></label>
+		<label for="<portlet:namespace />tagsEntries"><liferay-ui:message key="tags" /></label>
 
 		<%
 		long classPK = 0;
@@ -40,9 +40,10 @@ User selUser = (User)request.getAttribute("user.selUser");
 		}
 		%>
 
-		<liferay-ui:asset-tags-selector
+		<liferay-ui:tags-selector
 			className="<%= User.class.getName() %>"
 			classPK="<%= classPK %>"
+			hiddenInput="tagsEntries"
 		/>
 	</div>
 </fieldset>

@@ -46,10 +46,10 @@ for (int assetIndex = 0; assetIndex < results.size(); assetIndex++) {
 
 	long assetId = GetterUtil.getLong(root.element("asset-id").getText());
 
-	Asset asset = null;
+	TagsAsset asset = null;
 
 	try {
-		asset = AssetLocalServiceUtil.getAsset(assetId);
+		asset = TagsAssetLocalServiceUtil.getAsset(assetId);
 	}
 	catch (NoSuchAssetException nsae) {
 		continue;

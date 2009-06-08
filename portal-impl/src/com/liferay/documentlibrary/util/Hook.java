@@ -25,7 +25,6 @@ package com.liferay.documentlibrary.util;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.search.SearchException;
-import com.liferay.portal.service.ServiceContext;
 
 import java.io.File;
 import java.io.InputStream;
@@ -48,19 +47,22 @@ public interface Hook {
 	public void addFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, long fileEntryId, String properties,
-			Date modifiedDate, ServiceContext serviceContext, byte[] bytes)
+			Date modifiedDate, String[] tagsCategories, String[] tagsEntries,
+			byte[] bytes)
 		throws PortalException, SystemException;
 
 	public void addFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, long fileEntryId, String properties,
-			Date modifiedDate, ServiceContext serviceContext, File file)
+			Date modifiedDate, String[] tagsCategories, String[] tagsEntries,
+			File file)
 		throws PortalException, SystemException;
 
 	public void addFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, long fileEntryId, String properties,
-			Date modifiedDate, ServiceContext serviceContext, InputStream is)
+			Date modifiedDate, String[] tagsCategories, String[] tagsEntries,
+			InputStream is)
 		throws PortalException, SystemException;
 
 	public void checkRoot(long companyId) throws SystemException;
@@ -117,21 +119,21 @@ public interface Hook {
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, double versionNumber, String sourceFileName,
 			long fileEntryId, String properties, Date modifiedDate,
-			ServiceContext serviceContext, byte[] bytes)
+			String[] tagsCategories, String[] tagsEntries, byte[] bytes)
 		throws PortalException, SystemException;
 
 	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, double versionNumber, String sourceFileName,
 			long fileEntryId, String properties, Date modifiedDate,
-			ServiceContext serviceContext, File file)
+			String[] tagsCategories, String[] tagsEntries, File file)
 		throws PortalException, SystemException;
 
 	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, double versionNumber, String sourceFileName,
 			long fileEntryId, String properties, Date modifiedDate,
-			ServiceContext serviceContext, InputStream is)
+			String[] tagsCategories, String[] tagsEntries, InputStream is)
 		throws PortalException, SystemException;
 
 	public void updateFile(

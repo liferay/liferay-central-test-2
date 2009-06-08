@@ -61,7 +61,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 	public static void addPage(
 			long companyId, long groupId, long resourcePrimKey, long nodeId,
 			String title, String content, Date modifiedDate,
-			long[] assetCategoryIds, String[] assetTagNames,
+			String[] tagsCategories, String[] tagsEntries,
 			ExpandoBridge expandoBridge)
 		throws SearchException {
 
@@ -73,7 +73,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 		Document doc = getPageDocument(
 			companyId, groupId, resourcePrimKey, nodeId, title, content,
-			modifiedDate, assetCategoryIds, assetTagNames, expandoBridge);
+			modifiedDate, tagsCategories, tagsEntries, expandoBridge);
 
 		SearchEngineUtil.addDocument(companyId, doc);
 	}
@@ -106,7 +106,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 	public static Document getPageDocument(
 		long companyId, long groupId, long resourcePrimKey, long nodeId,
 		String title, String content, Date modifiedDate,
-		long[] assetCategoryIds, String[] assetTagNames,
+		String[] tagsCategories, String[] tagsEntries,
 		ExpandoBridge expandoBridge) {
 
 		content = HtmlUtil.extractText(content);
@@ -123,8 +123,8 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 		doc.addText(Field.TITLE, title);
 		doc.addText(Field.CONTENT, content);
-		doc.addKeyword(Field.ASSET_CATEGORY_IDS, assetCategoryIds);
-		doc.addKeyword(Field.ASSET_TAG_NAMES, assetTagNames);
+		doc.addKeyword(Field.TAGS_CATEGORIES, tagsCategories);
+		doc.addKeyword(Field.TAGS_ENTRIES, tagsEntries);
 
 		doc.addKeyword(Field.ENTRY_CLASS_NAME, WikiPage.class.getName());
 		doc.addKeyword(Field.ENTRY_CLASS_PK, resourcePrimKey);
@@ -146,13 +146,13 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 	public static void updatePage(
 			long companyId, long groupId, long resourcePrimKey, long nodeId,
 			String title, String content, Date modifiedDate,
-			long[] assetCategoryIds, String[] assetTagNames,
+			String[] tagsCategories, String[] tagsEntries,
 			ExpandoBridge expandoBridge)
 		throws SearchException {
 
 		Document doc = getPageDocument(
 			companyId, groupId, resourcePrimKey, nodeId, title, content,
-			modifiedDate, assetCategoryIds, assetTagNames, expandoBridge);
+			modifiedDate, tagsCategories, tagsEntries, expandoBridge);
 
 		SearchEngineUtil.updateDocument(companyId, doc.get(Field.UID), doc);
 	}

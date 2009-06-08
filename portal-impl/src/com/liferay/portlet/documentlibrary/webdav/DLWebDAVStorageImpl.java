@@ -44,7 +44,6 @@ import com.liferay.portal.webdav.Status;
 import com.liferay.portal.webdav.WebDAVException;
 import com.liferay.portal.webdav.WebDAVRequest;
 import com.liferay.portal.webdav.WebDAVUtil;
-import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.DuplicateFolderNameException;
 import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.NoSuchFolderException;
@@ -54,6 +53,7 @@ import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFolderServiceUtil;
+import com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil;
 
 import java.io.File;
 import java.io.InputStream;
@@ -520,12 +520,12 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			String extraSettings = fileEntry.getExtraSettings();
 			byte[] bytes = null;
 
-			String[] assetTagNames = AssetTagLocalServiceUtil.getTagNames(
+			String[] tagsEntries = TagsEntryLocalServiceUtil.getEntryNames(
 				DLFileEntry.class.getName(), fileEntry.getFileEntryId());
 
 			ServiceContext serviceContext = new ServiceContext();
 
-			serviceContext.setAssetTagNames(assetTagNames);
+			serviceContext.setTagsEntries(tagsEntries);
 
 			int status = HttpServletResponse.SC_CREATED;
 
@@ -592,10 +592,10 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 				description = entry.getDescription();
 				extraSettings = entry.getExtraSettings();
 
-				String[] assetTagNames = AssetTagLocalServiceUtil.getTagNames(
+				String[] tagsEntries = TagsEntryLocalServiceUtil.getEntryNames(
 					DLFileEntry.class.getName(), entry.getFileEntryId());
 
-				serviceContext.setAssetTagNames(assetTagNames);
+				serviceContext.setTagsEntries(tagsEntries);
 
 				DLFileEntryServiceUtil.updateFileEntry(
 					parentFolderId, parentFolderId, name, title, title,

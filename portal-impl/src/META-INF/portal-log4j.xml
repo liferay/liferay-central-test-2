@@ -540,10 +540,6 @@
 		<priority value="ERROR" />
 	</category>
 
-	<category name="com.liferay.portlet.asset.util.AssetUtil">
-		<priority value="ERROR" />
-	</category>
-
 	<category name="com.liferay.portlet.blogs.service.impl.BlogsEntryLocalServiceImpl">
 		<priority value="INFO" />
 	</category>
@@ -614,6 +610,10 @@
 
 	<category name="com.liferay.portlet.shopping.action.PayPalNotificationAction">
 		<priority value="DEBUG" />
+	</category>
+
+	<category name="com.liferay.portlet.tags.util.TagsUtil">
+		<priority value="ERROR" />
 	</category>
 
 	<category name="com.liferay.portlet.webproxy">

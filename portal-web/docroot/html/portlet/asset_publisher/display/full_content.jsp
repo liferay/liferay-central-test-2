@@ -29,7 +29,7 @@ List results = (List)request.getAttribute("view.jsp-results");
 
 int assetIndex = ((Integer)request.getAttribute("view.jsp-assetIndex")).intValue();
 
-Asset asset = (Asset)request.getAttribute("view.jsp-asset");
+TagsAsset asset = (TagsAsset)request.getAttribute("view.jsp-asset");
 
 String title = (String)request.getAttribute("view.jsp-title");
 
@@ -48,7 +48,7 @@ request.setAttribute("view.jsp-showIconLabel", true);
 			<%
 			BlogsEntry entry = BlogsEntryLocalServiceUtil.getEntry(classPK);
 
-			AssetLocalServiceUtil.incrementViewCounter(className, entry.getEntryId());
+			TagsAssetLocalServiceUtil.incrementViewCounter(className, entry.getEntryId());
 
 			if (showContextLink) {
 				if (PortalUtil.getPlidFromPortletId(entry.getGroupId(), PortletKeys.BLOGS) == 0) {
@@ -233,7 +233,7 @@ request.setAttribute("view.jsp-showIconLabel", true);
 			<%
 			IGImage image = IGImageLocalServiceUtil.getImage(classPK);
 
-			AssetLocalServiceUtil.incrementViewCounter(className, image.getImageId());
+			TagsAssetLocalServiceUtil.incrementViewCounter(className, image.getImageId());
 
 			PortletURL viewImageURL = new PortletURLImpl(request, PortletKeys.IMAGE_GALLERY, plid, PortletRequest.RENDER_PHASE);
 
@@ -283,7 +283,7 @@ request.setAttribute("view.jsp-showIconLabel", true);
 			JournalArticleDisplay articleDisplay = JournalContentUtil.getDisplay(articleResource.getGroupId(), articleResource.getArticleId(), templateId, null, languageId, themeDisplay, articlePage, xmlRequest);
 
 			if (articleDisplay != null) {
-				AssetLocalServiceUtil.incrementViewCounter(className, articleDisplay.getResourcePrimKey());
+				TagsAssetLocalServiceUtil.incrementViewCounter(className, articleDisplay.getResourcePrimKey());
 			}
 			else {
 
@@ -397,7 +397,7 @@ request.setAttribute("view.jsp-showIconLabel", true);
 			<%
 			MBMessage message = MBMessageLocalServiceUtil.getMessage(classPK);
 
-			AssetLocalServiceUtil.incrementViewCounter(className, message.getMessageId());
+			TagsAssetLocalServiceUtil.incrementViewCounter(className, message.getMessageId());
 
 			if (showContextLink) {
 				if (PortalUtil.getPlidFromPortletId(message.getCategory().getGroupId(), PortletKeys.MESSAGE_BOARDS) == 0) {
@@ -455,7 +455,7 @@ request.setAttribute("view.jsp-showIconLabel", true);
 
 					WikiPage wikiPage = WikiPageLocalServiceUtil.getPage(pageResource.getNodeId(), pageResource.getTitle());
 
-					AssetLocalServiceUtil.incrementViewCounter(className, wikiPage.getResourcePrimKey());
+					TagsAssetLocalServiceUtil.incrementViewCounter(className, wikiPage.getResourcePrimKey());
 
 					if (showContextLink) {
 						WikiNode node = WikiNodeLocalServiceUtil.getNode(pageResource.getNodeId());

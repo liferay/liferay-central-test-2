@@ -58,8 +58,6 @@ import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.model.impl.RoleImpl;
 import com.liferay.portal.model.impl.UserImpl;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
-import com.liferay.portlet.asset.model.Asset;
-import com.liferay.portlet.asset.model.impl.AssetImpl;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.model.BlogsStatsUser;
 import com.liferay.portlet.blogs.model.impl.BlogsEntryImpl;
@@ -74,6 +72,8 @@ import com.liferay.portlet.messageboards.model.impl.MBDiscussionImpl;
 import com.liferay.portlet.messageboards.model.impl.MBMessageImpl;
 import com.liferay.portlet.messageboards.model.impl.MBStatsUserImpl;
 import com.liferay.portlet.messageboards.model.impl.MBThreadImpl;
+import com.liferay.portlet.tags.model.TagsAsset;
+import com.liferay.portlet.tags.model.impl.TagsAssetImpl;
 import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.portlet.wiki.model.impl.WikiNodeImpl;
@@ -382,12 +382,12 @@ public class DataFactory {
 		return rolesPermissions;
 	}
 
-	public Asset addAsset(
+	public TagsAsset addTagsAsset(
 			long groupId, long userId, long classNameId, long classPK,
 			String mimeType, String title)
 		throws Exception {
 
-		Asset tagsAsset = new AssetImpl();
+		TagsAsset tagsAsset = new TagsAssetImpl();
 
 		tagsAsset.setGroupId(groupId);
 		tagsAsset.setUserId(userId);

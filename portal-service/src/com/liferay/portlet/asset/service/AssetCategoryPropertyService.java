@@ -56,7 +56,7 @@ import com.liferay.portal.kernel.annotation.Transactional;
 	PortalException.class, SystemException.class})
 public interface AssetCategoryPropertyService {
 	public com.liferay.portlet.asset.model.AssetCategoryProperty addCategoryProperty(
-		long categoryId, java.lang.String key, java.lang.String value)
+		long entryId, java.lang.String key, java.lang.String value)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
@@ -66,7 +66,7 @@ public interface AssetCategoryPropertyService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.asset.model.AssetCategoryProperty> getCategoryProperties(
-		long categoryId) throws com.liferay.portal.SystemException;
+		long entryId) throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.asset.model.AssetCategoryProperty> getCategoryPropertyValues(

@@ -25,39 +25,39 @@
 <%@ include file="/html/portlet/asset_publisher/init.jsp" %>
 
 <%
-if (Validator.isNull(tagName) && mergeUrlTags) {
-	String[] compilerTagNames = (String[])request.getAttribute(WebKeys.TAGS_COMPILER_ENTRIES);
+if (mergeUrlTags) {
+	String[] compilerEntries = (String[])request.getAttribute(WebKeys.TAGS_COMPILER_ENTRIES);
 
-	Set<String> layoutTagNames = AssetUtil.getLayoutTagNames(request);
+	Set<String> layoutTagsEntries = TagsUtil.getLayoutTagsEntries(request);
 
-	if (!layoutTagNames.isEmpty()) {
-		compilerTagNames = ArrayUtil.append(compilerTagNames, layoutTagNames.toArray(new String[layoutTagNames.size()]));
+	if (!layoutTagsEntries.isEmpty()) {
+		compilerEntries = ArrayUtil.append(compilerEntries, layoutTagsEntries.toArray(new String[layoutTagsEntries.size()]));
 	}
 
 	String titleEntry = null;
 
-	if ((compilerTagNames != null) && (compilerTagNames.length > 0)) {
-		String[] newTagNames = ArrayUtil.append(tagNames, compilerTagNames);
+	if ((compilerEntries != null) && (compilerEntries.length > 0)) {
+		String[] newEntries = ArrayUtil.append(entries, compilerEntries);
 
-		tagNames = newTagNames;
+		entries = newEntries;
 
-		titleEntry = compilerTagNames[compilerTagNames.length - 1];
+		titleEntry = compilerEntries[compilerEntries.length - 1];
 	}
 
 	String portletTitle = HtmlUtil.unescape(portletDisplay.getTitle());
 
-	portletTitle = AssetUtil.substituteTagPropertyVariables(scopeGroupId, titleEntry, portletTitle);
+	portletTitle = TagsUtil.substitutePropertyVariables(scopeGroupId, titleEntry, portletTitle);
 
 	renderResponse.setTitle(portletTitle);
 }
 
-tagNames = ArrayUtil.distinct(tagNames, new StringComparator());
+entries = ArrayUtil.distinct(entries, new StringComparator());
 
-for (String curTagName : tagNames) {
+for (String entryName : entries) {
 	try {
-		AssetTag curTag = AssetTagLocalServiceUtil.getTag(scopeGroupId, curTagName);
+		TagsEntry entry = TagsEntryLocalServiceUtil.getEntry(scopeGroupId, entryName);
 
-		AssetTagProperty journalTemplateIdProperty = AssetTagPropertyLocalServiceUtil.getTagProperty(curTag.getTagId(), "journal-template-id");
+		TagsProperty journalTemplateIdProperty = TagsPropertyLocalServiceUtil.getProperty(entry.getEntryId(), "journal-template-id");
 
 		String journalTemplateId = journalTemplateIdProperty.getValue();
 
@@ -65,13 +65,13 @@ for (String curTagName : tagNames) {
 
 		break;
 	}
-	catch (NoSuchTagException nste) {
+	catch (NoSuchEntryException nsee) {
 	}
-	catch (NoSuchTagPropertyException nstpe) {
+	catch (NoSuchPropertyException nspe) {
 	}
 }
 
-if (enableTagBasedNavigation && selectionStyle.equals("manual") && (tagNames.length > 0)) {
+if (enableTagBasedNavigation && selectionStyle.equals("manual") && (entries.length > 0)) {
 	selectionStyle = "dynamic";
 }
 
@@ -81,6 +81,55 @@ String portletId = portletDisplay.getId();
 <%@ include file="/html/portlet/asset_publisher/add_asset.jspf" %>
 
 <%
+if (showQueryLogic) {
+	StringBuilder tagsText = new StringBuilder();
+
+	if (entries.length > 0) {
+		tagsText.append("( ");
+	}
+
+	for (int i = 0; i < entries.length; i++) {
+		if ((i + 1) == entries.length) {
+			tagsText.append(entries[i]);
+			tagsText.append(" )");
+		}
+		else {
+			tagsText.append(entries[i]);
+
+			if (andOperator) {
+				tagsText.append(" AND ");
+			}
+			else {
+				tagsText.append(" OR ");
+			}
+		}
+	}
+
+	if ((entries.length > 0) && (notEntries.length > 0)) {
+		tagsText.append(" AND NOT ( ");
+	}
+
+	for (int i = 0; i < notEntries.length; i++) {
+		if ((i + 1) == notEntries.length) {
+			tagsText.append(notEntries[i]);
+			tagsText.append(" )");
+		}
+		else {
+			tagsText.append(notEntries[i]);
+			tagsText.append(" OR ");
+		}
+	}
+%>
+
+	<liferay-ui:message key="tags" />:
+
+	<%= tagsText %>
+
+	<div class="separator"><!-- --></div>
+
+<%
+}
+
 // Display content
 
 PortletURL portletURL = renderResponse.createRenderURL();

@@ -15,6 +15,6 @@
 		<reference package-path="com.liferay.portal" entity="User" />
 		<reference package-path="com.liferay.portal" entity="UserGroup" />
 		<reference package-path="com.liferay.portal" entity="UserGroupRole" />
-		<reference package-path="com.liferay.portlet.asset" entity="Asset" />
+		<reference package-path="com.liferay.portlet.tags" entity="TagsAsset" />
 	</entity>
 </service-builder>

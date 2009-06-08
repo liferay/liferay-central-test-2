@@ -39,7 +39,6 @@ import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
-import com.liferay.portlet.asset.util.AssetUtil;
 import com.liferay.portlet.documentlibrary.DuplicateFolderNameException;
 import com.liferay.portlet.documentlibrary.FolderNameException;
 import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
@@ -47,6 +46,7 @@ import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.service.base.DLFolderLocalServiceBaseImpl;
 import com.liferay.portlet.expando.model.ExpandoBridge;
+import com.liferay.portlet.tags.util.TagsUtil;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -553,7 +553,7 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 			long folderId, long groupId, long parentFolderId, String name)
 		throws PortalException, SystemException {
 
-		if (!AssetUtil.isValidWord(name)) {
+		if (!TagsUtil.isValidWord(name)) {
 			throw new FolderNameException();
 		}
 

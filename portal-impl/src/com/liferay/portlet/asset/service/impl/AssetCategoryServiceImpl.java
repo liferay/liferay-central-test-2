@@ -74,7 +74,7 @@ public class AssetCategoryServiceImpl extends AssetCategoryServiceBaseImpl {
 	public List<AssetCategory> getCategories(String className, long classPK)
 		throws PortalException, SystemException {
 
-		return filterCategories(
+		return getCategories(
 			assetCategoryLocalService.getCategories(className, classPK));
 	}
 
@@ -90,21 +90,21 @@ public class AssetCategoryServiceImpl extends AssetCategoryServiceBaseImpl {
 	public List<AssetCategory> getChildCategories(long parentCategoryId)
 		throws PortalException, SystemException {
 
-		return filterCategories(
+		return getCategories(
 			assetCategoryLocalService.getChildCategories(parentCategoryId));
 	}
 
 	public List<AssetCategory> getVocabularyCategories(long vocabularyId)
 		throws PortalException, SystemException {
 
-		return filterCategories(
+		return getCategories(
 			assetCategoryLocalService.getVocabularyCategories(vocabularyId));
 	}
 
 	public List<AssetCategory> getVocabularyRootCategories(long vocabularyId)
 		throws PortalException, SystemException {
 
-		return filterCategories(
+		return getCategories(
 			assetCategoryLocalService.getVocabularyRootCategories(
 				vocabularyId));
 	}
@@ -130,8 +130,7 @@ public class AssetCategoryServiceImpl extends AssetCategoryServiceBaseImpl {
 			properties);
 	}
 
-	protected List<AssetCategory> filterCategories(
-			List<AssetCategory> categories)
+	protected List<AssetCategory> getCategories(List<AssetCategory> categories)
 		throws PortalException {
 
 		PermissionChecker permissionChecker = getPermissionChecker();

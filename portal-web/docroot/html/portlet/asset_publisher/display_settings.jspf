@@ -222,6 +222,17 @@
 	</tr>
 </c:if>
 
+<c:if test='<%= selectionStyle.equals("dynamic") %>'>
+	<tr>
+		<td>
+			<liferay-ui:message key="show-query-logic" />
+		</td>
+		<td>
+			<liferay-ui:input-checkbox param="showQueryLogic" defaultValue="<%= showQueryLogic %>" />
+		</td>
+	</tr>
+</c:if>
+
 <tr>
 	<td>
 		<liferay-ui:message key="show-metadata" />

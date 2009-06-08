@@ -92,12 +92,6 @@ public class PropsValues {
 	public static final String[] ASSET_PUBLISHER_DISPLAY_STYLES =
 		PropsUtil.getArray(PropsKeys.ASSET_PUBLISHER_DISPLAY_STYLES);
 
-	public static final String[] ASSET_TAGS_PROPERTIES_DEFAULT =
-		PropsUtil.getArray(PropsKeys.ASSET_TAGS_PROPERTIES_DEFAULT);
-
-	public static final String ASSET_VALIDATOR = PropsUtil.get(
-		PropsKeys.ASSET_VALIDATOR);
-
 	public static final String ASSET_VOCABULARY_DEFAULT =
 		PropsUtil.get(PropsKeys.ASSET_VOCABULARY_DEFAULT);
 

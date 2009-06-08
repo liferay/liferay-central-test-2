@@ -35,11 +35,11 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.asset.DuplicateCategoryException;
-import com.liferay.portlet.asset.model.Asset;
 import com.liferay.portlet.asset.model.AssetCategory;
 import com.liferay.portlet.asset.model.AssetCategoryConstants;
 import com.liferay.portlet.asset.model.AssetCategoryProperty;
 import com.liferay.portlet.asset.service.base.AssetCategoryLocalServiceBaseImpl;
+import com.liferay.portlet.tags.model.TagsAsset;
 import com.liferay.util.Autocomplete;
 
 import java.util.ArrayList;
@@ -217,7 +217,7 @@ public class AssetCategoryLocalServiceImpl
 	public List<AssetCategory> getCategories(long classNameId, long classPK)
 		throws SystemException {
 
-		Asset asset = assetPersistence.fetchByC_C(classNameId, classPK);
+		TagsAsset asset = tagsAssetPersistence.fetchByC_C(classNameId, classPK);
 
 		if (asset == null) {
 			return new ArrayList<AssetCategory>();
@@ -239,16 +239,6 @@ public class AssetCategoryLocalServiceImpl
 		throws PortalException, SystemException {
 
 		return assetCategoryPersistence.findByPrimaryKey(categoryId);
-	}
-
-	public long[] getCategoryIds(String className, long classPK)
-		throws SystemException {
-
-		List<AssetCategory> categories =
-			assetCategoryLocalService.getCategories(className, classPK);
-
-		return StringUtil.split(
-			ListUtil.toString(categories, "categoryId"), 0L);
 	}
 
 	public List<AssetCategory> getChildCategories(long parentCategoryId)
@@ -274,10 +264,10 @@ public class AssetCategoryLocalServiceImpl
 	public void mergeCategories(long fromCategoryId, long toCategoryId)
 		throws PortalException, SystemException {
 
-		List<Asset> assets = assetCategoryPersistence.getAssets(
+		List<TagsAsset> assets = assetCategoryPersistence.getTagsAssets(
 			fromCategoryId);
 
-		assetCategoryPersistence.addAssets(toCategoryId, assets);
+		assetCategoryPersistence.addTagsAssets(toCategoryId, assets);
 
 		List<AssetCategoryProperty> properties =
 			assetCategoryPropertyPersistence.findByCategoryId(fromCategoryId);

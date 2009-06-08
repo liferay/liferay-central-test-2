@@ -45,7 +45,7 @@ if (image != null) {
 	extension = StringPool.PERIOD + image.getImageType();
 }
 
-String assetTagNames = ParamUtil.getString(renderRequest, "assetTagNames");
+String tagsEntries = ParamUtil.getString(renderRequest, "tagsEntries");
 
 IGFolder folder = null;
 Image largeImage = null;
@@ -216,7 +216,7 @@ if (image != null) {
 <liferay-ui:error exception="<%= ImageSizeException.class %>" message="please-enter-a-file-with-a-valid-file-size" />
 <liferay-ui:error exception="<%= NoSuchFolderException.class %>" message="please-enter-a-valid-folder" />
 
-<liferay-ui:asset-tags-error />
+<liferay-ui:tags-error />
 
 <%
 String imageMaxSize = String.valueOf(PrefsPropsUtil.getLong(PropsKeys.IG_IMAGE_MAX_SIZE) / 1024);
@@ -306,9 +306,10 @@ String imageMaxSize = String.valueOf(PrefsPropsUtil.getLong(PropsKeys.IG_IMAGE_M
 		}
 		%>
 
-		<liferay-ui:asset-tags-selector
+		<liferay-ui:tags-selector
 			className="<%= IGImage.class.getName() %>"
 			classPK="<%= classPK %>"
+			hiddenInput="tagsEntries"
 		/>
 	</td>
 </tr>
