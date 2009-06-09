@@ -34,7 +34,7 @@ String keywords = ParamUtil.getString(request, "keywords");
 
 <form action="<%= searchURL %>" method="get" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
 <liferay-portlet:renderURLParams varImpl="searchURL" />
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escape(redirect) %>" />
+<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(redirect) %>" />
 
 <liferay-ui:tabs
 	names="search"
@@ -82,6 +82,8 @@ try {
 
 		try {
 			entry = BlogsEntryLocalServiceUtil.getEntry(entryId);
+
+			entry = entry.toEscapedModel();
 		}
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
@@ -109,7 +111,7 @@ try {
 	}
 %>
 
-	<input id="<portlet:namespace />keywords" name="<portlet:namespace />keywords" size="30" type="text" value="<%= HtmlUtil.escape(keywords) %>" />
+	<input id="<portlet:namespace />keywords" name="<portlet:namespace />keywords" size="30" type="text" value="<%= HtmlUtil.escapeAttribute(keywords) %>" />
 
 	<input type="submit" value="<liferay-ui:message key="search" />" />
 

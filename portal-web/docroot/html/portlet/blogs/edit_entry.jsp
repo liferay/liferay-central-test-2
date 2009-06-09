@@ -184,8 +184,8 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 
 <form action="<portlet:actionURL><portlet:param name="struts_action" value="/blogs/edit_entry" /></portlet:actionURL>" class="exp-form" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveEntry(false); return false;">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escape(redirect) %>" />
-<input name="<portlet:namespace />referringPortletResource" type="hidden" value="<%= HtmlUtil.escape(referringPortletResource) %>" />
+<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(redirect) %>" />
+<input name="<portlet:namespace />referringPortletResource" type="hidden" value="<%= HtmlUtil.escapeAttribute(referringPortletResource) %>" />
 <input name="<portlet:namespace />entryId" type="hidden" value="<%= entryId %>" />
 <input name="<portlet:namespace />draft" type="hidden" value="0" />
 
@@ -242,7 +242,7 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 				for (String trackback : StringUtil.split(entry.getTrackbacks())) {
 				%>
 
-					<%= trackback %><br />
+					<%= HtmlUtil.escape(trackback) %><br />
 
 				<%
 				}

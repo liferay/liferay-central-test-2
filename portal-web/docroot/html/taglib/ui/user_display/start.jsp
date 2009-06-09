@@ -58,7 +58,7 @@ if (Validator.isNull(url) && (userDisplay != null)) {
 
 		<c:if test="<%= urlIsNotNull %>"><a href="<%= url %>"></c:if>
 
-		<img alt="<%= (userDisplay != null) ? userDisplay.getFullName() : LanguageUtil.get(pageContext, "generic-portrait") %>" class="avatar" src="<%= themeDisplay.getPathImage() %>/user_<%= (userDisplay != null) && userDisplay.isFemale() ? "female" : "male" %>_portrait?img_id=<%= portraitId %>&t=<%= tokenId %>" width="65" />
+		<img alt="<%= (userDisplay != null) ? HtmlUtil.escapeAttribute(userDisplay.getFullName()) : LanguageUtil.get(pageContext, "generic-portrait") %>" class="avatar" src="<%= themeDisplay.getPathImage() %>/user_<%= (userDisplay != null) && userDisplay.isFemale() ? "female" : "male" %>_portrait?img_id=<%= portraitId %>&t=<%= tokenId %>" width="65" />
 
 		<c:if test="<%= urlIsNotNull %>"></a></c:if>
 	</div>
@@ -76,11 +76,11 @@ if (Validator.isNull(url) && (userDisplay != null)) {
 			<c:when test="<%= userDisplay != null %>">
 				<c:if test="<%= urlIsNotNull %>"><a class="user-name" href="<%= url %>"></c:if>
 
-				<%= userDisplay.getFullName() %>
+				<%= HtmlUtil.escape(userDisplay.getFullName()) %>
 
 				<c:if test="<%= urlIsNotNull %>"></a></c:if>
 			</c:when>
 			<c:otherwise>
-				<%= userName %>
+				<%= HtmlUtil.escape(userName) %>
 			</c:otherwise>
 		</c:choose>

@@ -28,4 +28,4 @@
 String url = (String)request.getAttribute("liferay-ui:input-resource:url");
 %>
 
-<input class="form-text" readonly="true" style="width: <%= ModelHintsConstants.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= url %>" onClick="Liferay.Util.selectAndCopy(this);" />
+<input class="form-text" readonly="true" style="width: <%= ModelHintsConstants.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= HtmlUtil.escapeAttribute(url) %>" onClick="Liferay.Util.selectAndCopy(this);" />

@@ -100,7 +100,7 @@ public class RenderURLParamsTagUtil {
 					sb.append("<input name=\"");
 					sb.append(key);
 					sb.append("\" type=\"hidden\" value=\"");
-					sb.append(HtmlUtil.escape(value));
+					sb.append(HtmlUtil.escapeAttribute(value));
 					sb.append("\" />");
 				}
 			}

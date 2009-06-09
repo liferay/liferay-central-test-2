@@ -56,7 +56,7 @@
 			</div>
 
 			<div class="entry-author">
-				<liferay-ui:message key="written-by" /> <a href="<%= viewAllEntriesURL %>"><%= PortalUtil.getUserName(entry.getUserId(), entry.getUserName()) %></a>, <liferay-ui:message key="on-date" /> <%= dateFormatDateTime.format(entry.getDisplayDate()) %>
+				<liferay-ui:message key="written-by" /> <a href="<%= viewAllEntriesURL %>"><%= HtmlUtil.escape(PortalUtil.getUserName(entry.getUserId(), entry.getUserName())) %></a>, <liferay-ui:message key="on-date" /> <%= dateFormatDateTime.format(entry.getDisplayDate()) %>
 			</div>
 		</c:if>
 

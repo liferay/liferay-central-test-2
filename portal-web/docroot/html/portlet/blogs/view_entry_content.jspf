@@ -55,10 +55,10 @@
 			<div class="entry-title">
 				<c:choose>
 					<c:when test='<%= strutsAction.equals("/blogs/view_entry") %>'>
-						<%= entry.getTitle() %>
+						<%= HtmlUtil.escape(entry.getTitle()) %>
 					</c:when>
 					<c:otherwise>
-						<a href="<%= viewEntryURL %>"><%= entry.getTitle() %></a>
+						<a href="<%= viewEntryURL %>"><%= HtmlUtil.escape(entry.getTitle()) %></a>
 					</c:otherwise>
 				</c:choose>
 			</div>
@@ -139,7 +139,7 @@
 
 		<div class="entry-footer">
 			<div class="entry-author">
-				<liferay-ui:message key="written-by" /> <%= PortalUtil.getUserName(entry.getUserId(), entry.getUserName()) %>
+				<liferay-ui:message key="written-by" /> <%= HtmlUtil.escape(PortalUtil.getUserName(entry.getUserId(), entry.getUserName())) %>
 			</div>
 
 			<div class="stats">
