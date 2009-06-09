@@ -37,8 +37,8 @@ import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextUtil;
 import com.liferay.portal.struts.JSONAction;
-import com.liferay.portlet.tags.model.TagsAssetDisplay;
-import com.liferay.portlet.tags.model.TagsAssetType;
+import com.liferay.portlet.asset.model.AssetEntryDisplay;
+import com.liferay.portlet.asset.model.AssetEntryType;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -63,45 +63,48 @@ import org.apache.struts.action.ActionMapping;
  */
 public class JSONServiceAction extends JSONAction {
 
-	public static JSONObject toJSONObject(TagsAssetDisplay assetDisplay) {
+	public static JSONObject toJSONObject(AssetEntryDisplay assetEntryDisplay) {
 		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
 
-		jsonObj.put("assetId", assetDisplay.getAssetId());
-		jsonObj.put("companyId", assetDisplay.getCompanyId());
-		jsonObj.put("userId", assetDisplay.getUserId());
-		jsonObj.put("userName", assetDisplay.getUserName());
-		jsonObj.put("createDate", assetDisplay.getCreateDate());
-		jsonObj.put("modifiedDate", assetDisplay.getModifiedDate());
-		jsonObj.put("classNameId", assetDisplay.getClassNameId());
-		jsonObj.put("className", assetDisplay.getClassName());
-		jsonObj.put("classPK", assetDisplay.getClassPK());
-		jsonObj.put("portletId", assetDisplay.getPortletId());
-		jsonObj.put("portletTitle", assetDisplay.getPortletTitle());
-		jsonObj.put("startDate", assetDisplay.getStartDate());
-		jsonObj.put("endDate", assetDisplay.getEndDate());
-		jsonObj.put("publishDate", assetDisplay.getPublishDate());
-		jsonObj.put("expirationDate", assetDisplay.getExpirationDate());
-		jsonObj.put("mimeType", assetDisplay.getMimeType());
-		jsonObj.put("title", assetDisplay.getTitle());
-		jsonObj.put("description", assetDisplay.getDescription());
-		jsonObj.put("summary", assetDisplay.getSummary());
-		jsonObj.put("url", assetDisplay.getUrl());
-		jsonObj.put("height", assetDisplay.getHeight());
-		jsonObj.put("width", assetDisplay.getWidth());
-		jsonObj.put("priority", assetDisplay.getPriority());
-		jsonObj.put("viewCount", assetDisplay.getViewCount());
-		jsonObj.put("tagsEntries", assetDisplay.getTagsEntries());
+		jsonObj.put("entryId", assetEntryDisplay.getEntryId());
+		jsonObj.put("companyId", assetEntryDisplay.getCompanyId());
+		jsonObj.put("userId", assetEntryDisplay.getUserId());
+		jsonObj.put("userName", assetEntryDisplay.getUserName());
+		jsonObj.put("createDate", assetEntryDisplay.getCreateDate());
+		jsonObj.put("modifiedDate", assetEntryDisplay.getModifiedDate());
+		jsonObj.put("classNameId", assetEntryDisplay.getClassNameId());
+		jsonObj.put("className", assetEntryDisplay.getClassName());
+		jsonObj.put("classPK", assetEntryDisplay.getClassPK());
+		jsonObj.put("portletId", assetEntryDisplay.getPortletId());
+		jsonObj.put("portletTitle", assetEntryDisplay.getPortletTitle());
+		jsonObj.put("startDate", assetEntryDisplay.getStartDate());
+		jsonObj.put("endDate", assetEntryDisplay.getEndDate());
+		jsonObj.put("publishDate", assetEntryDisplay.getPublishDate());
+		jsonObj.put("expirationDate", assetEntryDisplay.getExpirationDate());
+		jsonObj.put("mimeType", assetEntryDisplay.getMimeType());
+		jsonObj.put("title", assetEntryDisplay.getTitle());
+		jsonObj.put("description", assetEntryDisplay.getDescription());
+		jsonObj.put("summary", assetEntryDisplay.getSummary());
+		jsonObj.put("url", assetEntryDisplay.getUrl());
+		jsonObj.put("height", assetEntryDisplay.getHeight());
+		jsonObj.put("width", assetEntryDisplay.getWidth());
+		jsonObj.put("priority", assetEntryDisplay.getPriority());
+		jsonObj.put("viewCount", assetEntryDisplay.getViewCount());
+		jsonObj.put(
+			"assetCategoryIds",
+			StringUtil.merge(assetEntryDisplay.getCategoryIds()));
+		jsonObj.put("assetTagNames", assetEntryDisplay.getTagNames());
 
 		return jsonObj;
 	}
 
-	public static JSONObject toJSONObject(TagsAssetType assetType) {
+	public static JSONObject toJSONObject(AssetEntryType assetEntryType) {
 		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
 
-		jsonObj.put("classNameId", assetType.getClassNameId());
-		jsonObj.put("className", assetType.getClassName());
-		jsonObj.put("portletId", assetType.getPortletId());
-		jsonObj.put("portletTitle", assetType.getPortletTitle());
+		jsonObj.put("classNameId", assetEntryType.getClassNameId());
+		jsonObj.put("className", assetEntryType.getClassName());
+		jsonObj.put("portletId", assetEntryType.getPortletId());
+		jsonObj.put("portletTitle", assetEntryType.getPortletTitle());
 
 		return jsonObj;
 	}
@@ -498,6 +501,50 @@ public class JSONServiceAction extends JSONAction {
 		}
 	}
 
+	protected String getReturnValue(AssetEntryDisplay assetEntryDisplay)
+		throws Exception {
+
+		JSONObject jsonObj = toJSONObject(assetEntryDisplay);
+
+		return jsonObj.toString();
+	}
+
+	protected String getReturnValue(AssetEntryDisplay[] assetEntryDisplays)
+		throws Exception {
+
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
+
+		for (int i = 0; i < assetEntryDisplays.length; i++) {
+			AssetEntryDisplay assetEntryDisplay = assetEntryDisplays[i];
+
+			jsonArray.put(toJSONObject(assetEntryDisplay));
+		}
+
+		return jsonArray.toString();
+	}
+
+	protected String getReturnValue(AssetEntryType assetEntryType)
+		throws Exception {
+
+		JSONObject jsonObj = toJSONObject(assetEntryType);
+
+		return jsonObj.toString();
+	}
+
+	protected String getReturnValue(AssetEntryType[] assetEntryTypes)
+		throws Exception {
+
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
+
+		for (int i = 0; i < assetEntryTypes.length; i++) {
+			AssetEntryType assetEntryType = assetEntryTypes[i];
+
+			jsonArray.put(toJSONObject(assetEntryType));
+		}
+
+		return jsonArray.toString();
+	}
+
 	protected String getReturnValue(Object returnObj) throws Exception {
 		if ((returnObj instanceof Boolean) || (returnObj instanceof Double) ||
 			(returnObj instanceof Integer) || (returnObj instanceof Long) ||
@@ -592,65 +639,21 @@ public class JSONServiceAction extends JSONAction {
 
 			return jsonObj.toString();
 		}
-		else if (returnObj instanceof TagsAssetDisplay) {
-			return getReturnValue((TagsAssetDisplay)returnObj);
+		else if (returnObj instanceof AssetEntryDisplay) {
+			return getReturnValue((AssetEntryDisplay)returnObj);
 		}
-		else if (returnObj instanceof TagsAssetDisplay[]) {
-			return getReturnValue((TagsAssetDisplay[])returnObj);
+		else if (returnObj instanceof AssetEntryDisplay[]) {
+			return getReturnValue((AssetEntryDisplay[])returnObj);
 		}
-		else if (returnObj instanceof TagsAssetType) {
-			return getReturnValue((TagsAssetType)returnObj);
+		else if (returnObj instanceof AssetEntryType) {
+			return getReturnValue((AssetEntryType)returnObj);
 		}
-		else if (returnObj instanceof TagsAssetType[]) {
-			return getReturnValue((TagsAssetType[])returnObj);
+		else if (returnObj instanceof AssetEntryType[]) {
+			return getReturnValue((AssetEntryType[])returnObj);
 		}
 		else {
 			return JSONFactoryUtil.serialize(returnObj);
 		}
-	}
-
-	protected String getReturnValue(TagsAssetDisplay assetDisplay)
-		throws Exception {
-
-		JSONObject jsonObj = toJSONObject(assetDisplay);
-
-		return jsonObj.toString();
-	}
-
-	protected String getReturnValue(TagsAssetDisplay[] assetDisplays)
-		throws Exception {
-
-		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
-
-		for (int i = 0; i < assetDisplays.length; i++) {
-			TagsAssetDisplay assetDisplay = assetDisplays[i];
-
-			jsonArray.put(toJSONObject(assetDisplay));
-		}
-
-		return jsonArray.toString();
-	}
-
-	protected String getReturnValue(TagsAssetType assetType)
-		throws Exception {
-
-		JSONObject jsonObj = toJSONObject(assetType);
-
-		return jsonObj.toString();
-	}
-
-	protected String getReturnValue(TagsAssetType[] assetTypes)
-		throws Exception {
-
-		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
-
-		for (int i = 0; i < assetTypes.length; i++) {
-			TagsAssetType assetType = assetTypes[i];
-
-			jsonArray.put(toJSONObject(assetType));
-		}
-
-		return jsonArray.toString();
 	}
 
 	protected String getSerializerClassName(Object obj) {

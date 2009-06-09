@@ -555,7 +555,7 @@ public class MediaWikiImporter implements WikiImporter {
 
 		Matcher matcher = _categoriesPattern.matcher(content);
 
-		List<String> tagsEntries = new ArrayList<String>();
+		List<String> assetTagNames = new ArrayList<String>();
 
 		while (matcher.find()) {
 			String categoryName = matcher.group(1);
@@ -579,14 +579,14 @@ public class MediaWikiImporter implements WikiImporter {
 					userId, categoryName, null, serviceContext);
 			}
 
-			tagsEntries.add(assetTag.getName());
+			assetTagNames.add(assetTag.getName());
 		}
 
 		if (content.indexOf(_WORK_IN_PROGRESS) != -1) {
-			tagsEntries.add(_WORK_IN_PROGRESS_TAG);
+			assetTagNames.add(_WORK_IN_PROGRESS_TAG);
 		}
 
-		return tagsEntries.toArray(new String[tagsEntries.size()]);
+		return assetTagNames.toArray(new String[assetTagNames.size()]);
 	}
 
 	protected String readParentTitle(String content) {
