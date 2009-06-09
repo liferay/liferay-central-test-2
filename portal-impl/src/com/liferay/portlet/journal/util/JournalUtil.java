@@ -44,6 +44,7 @@ import com.liferay.portal.kernel.xml.XPath;
 import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
+import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ImageLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
@@ -1138,6 +1139,8 @@ public class JournalUtil {
 
 		Group group = layout.getGroup();
 
+		LayoutSet layoutSet = layout.getLayoutSet();		
+
 		String friendlyUrlCurrent = null;
 
 		if (layout.isPublicLayout()) {
@@ -1168,6 +1171,19 @@ public class JournalUtil {
 		tokens.put(
 			"friendly_url_public",
 			themeDisplayEl.elementText("path-friendly-url-public"));
+
+		tokens.put("layout_set_friendly_url", StringPool.BLANK);
+
+		String virtualHost = layoutSet.getVirtualHost();
+
+		if (Validator.isNull(virtualHost) ||
+			!virtualHost.equals(themeDisplayEl.elementText("server-name"))) {
+
+			tokens.put(
+				"layout_set_friendly_url",
+				friendlyUrlCurrent + group.getFriendlyURL());
+		}
+
 		tokens.put("main_path", themeDisplayEl.elementText("path-main"));
 		tokens.put("portal_ctx", themeDisplayEl.elementText("path-context"));
 		tokens.put(
@@ -1197,6 +1213,8 @@ public class JournalUtil {
 
 		Group group = layout.getGroup();
 
+		LayoutSet layoutSet = layout.getLayoutSet();
+
 		String friendlyUrlCurrent = null;
 
 		if (layout.isPublicLayout()) {
@@ -1223,6 +1241,19 @@ public class JournalUtil {
 			themeDisplay.getPathFriendlyURLPrivateUser());
 		tokens.put(
 			"friendly_url_public", themeDisplay.getPathFriendlyURLPublic());
+
+		tokens.put("layout_set_friendly_url", StringPool.BLANK);
+
+		String virtualHost = layoutSet.getVirtualHost();
+
+		if (Validator.isNull(virtualHost) ||
+			!virtualHost.equals(themeDisplay.getServerName())) {
+
+			tokens.put(
+				"layout_set_friendly_url",
+				friendlyUrlCurrent + group.getFriendlyURL());
+		}
+
 		tokens.put("main_path", themeDisplay.getPathMain());
 		tokens.put("portal_ctx", themeDisplay.getPathContext());
 		tokens.put(
