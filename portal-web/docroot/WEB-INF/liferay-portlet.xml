@@ -175,7 +175,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>20</portlet-name>
-		<icon>/html/icons/default.png</icon>
+		<icon>/html/icons/document_library.png</icon>
 		<struts-path>document_library</struts-path>
 		<configuration-action-class>com.liferay.portlet.documentlibrary.action.ConfigurationActionImpl</configuration-action-class>
 		<indexer-class>com.liferay.portlet.documentlibrary.util.Indexer</indexer-class>
@@ -353,7 +353,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>36</portlet-name>
-		<icon>/html/icons/default.png</icon>
+		<icon>/html/icons/wiki.png</icon>
 		<struts-path>wiki</struts-path>
 		<configuration-action-class>com.liferay.portlet.wiki.action.ConfigurationActionImpl</configuration-action-class>
 		<indexer-class>com.liferay.portlet.wiki.util.Indexer</indexer-class>
