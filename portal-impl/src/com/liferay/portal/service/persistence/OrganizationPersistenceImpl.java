@@ -2861,7 +2861,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl
 					}
 
 					for (ModelListener<com.liferay.portal.model.Group> listener : groupListeners) {
-						listener.onBeforeRemoveAssociation(group.getPrimaryKey(),
+						listener.onAfterRemoveAssociation(group.getPrimaryKey(),
 							Organization.class.getName(), organizationId);
 					}
 				}
@@ -3025,7 +3025,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl
 					}
 
 					for (ModelListener<com.liferay.portal.model.User> listener : userListeners) {
-						listener.onBeforeRemoveAssociation(user.getPrimaryKey(),
+						listener.onAfterRemoveAssociation(user.getPrimaryKey(),
 							Organization.class.getName(), organizationId);
 					}
 				}

@@ -2911,7 +2911,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl
 					}
 
 					for (ModelListener<com.liferay.portal.model.Group> listener : groupListeners) {
-						listener.onBeforeRemoveAssociation(group.getPrimaryKey(),
+						listener.onAfterRemoveAssociation(group.getPrimaryKey(),
 							Role.class.getName(), roleId);
 					}
 				}
@@ -3080,7 +3080,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl
 					}
 
 					for (ModelListener<com.liferay.portal.model.Permission> listener : permissionListeners) {
-						listener.onBeforeRemoveAssociation(permission.getPrimaryKey(),
+						listener.onAfterRemoveAssociation(permission.getPrimaryKey(),
 							Role.class.getName(), roleId);
 					}
 				}
@@ -3247,7 +3247,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl
 					}
 
 					for (ModelListener<com.liferay.portal.model.User> listener : userListeners) {
-						listener.onBeforeRemoveAssociation(user.getPrimaryKey(),
+						listener.onAfterRemoveAssociation(user.getPrimaryKey(),
 							Role.class.getName(), roleId);
 					}
 				}

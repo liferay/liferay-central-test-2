@@ -4225,7 +4225,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl
 	protected com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence ratingsStatsPersistence;
 	@BeanReference(name = "com.liferay.portlet.social.service.persistence.SocialActivityPersistence.impl")
 	protected com.liferay.portlet.social.service.persistence.SocialActivityPersistence socialActivityPersistence;
-	@BeanReference(name = "com.liferay.portlet.tags.service.persistence.TagsEntryPersistence.impl")
-	protected com.liferay.portlet.tags.service.persistence.TagsEntryPersistence tagsEntryPersistence;
+	@BeanReference(name = "com.liferay.portlet.asset.service.persistence.AssetTagPersistence.impl")
+	protected com.liferay.portlet.asset.service.persistence.AssetTagPersistence assetTagPersistence;
 	private static Log _log = LogFactoryUtil.getLog(MBMessagePersistenceImpl.class);
 }

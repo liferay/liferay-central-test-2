@@ -1975,7 +1975,7 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl
 					}
 
 					for (ModelListener<com.liferay.portal.model.User> listener : userListeners) {
-						listener.onBeforeRemoveAssociation(user.getPrimaryKey(),
+						listener.onAfterRemoveAssociation(user.getPrimaryKey(),
 							UserGroup.class.getName(), userGroupId);
 					}
 				}

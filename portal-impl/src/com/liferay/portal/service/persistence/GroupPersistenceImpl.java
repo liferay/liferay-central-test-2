@@ -4326,7 +4326,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl
 					}
 
 					for (ModelListener<com.liferay.portal.model.Organization> listener : organizationListeners) {
-						listener.onBeforeRemoveAssociation(organization.getPrimaryKey(),
+						listener.onAfterRemoveAssociation(organization.getPrimaryKey(),
 							Group.class.getName(), groupId);
 					}
 				}
@@ -4499,7 +4499,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl
 					}
 
 					for (ModelListener<com.liferay.portal.model.Permission> listener : permissionListeners) {
-						listener.onBeforeRemoveAssociation(permission.getPrimaryKey(),
+						listener.onAfterRemoveAssociation(permission.getPrimaryKey(),
 							Group.class.getName(), groupId);
 					}
 				}
@@ -4666,7 +4666,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl
 					}
 
 					for (ModelListener<com.liferay.portal.model.Role> listener : roleListeners) {
-						listener.onBeforeRemoveAssociation(role.getPrimaryKey(),
+						listener.onAfterRemoveAssociation(role.getPrimaryKey(),
 							Group.class.getName(), groupId);
 					}
 				}
@@ -4835,7 +4835,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl
 					}
 
 					for (ModelListener<com.liferay.portal.model.UserGroup> listener : userGroupListeners) {
-						listener.onBeforeRemoveAssociation(userGroup.getPrimaryKey(),
+						listener.onAfterRemoveAssociation(userGroup.getPrimaryKey(),
 							Group.class.getName(), groupId);
 					}
 				}
@@ -5001,7 +5001,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl
 					}
 
 					for (ModelListener<com.liferay.portal.model.User> listener : userListeners) {
-						listener.onBeforeRemoveAssociation(user.getPrimaryKey(),
+						listener.onAfterRemoveAssociation(user.getPrimaryKey(),
 							Group.class.getName(), groupId);
 					}
 				}

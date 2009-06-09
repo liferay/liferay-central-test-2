@@ -1895,7 +1895,7 @@ public class TagsAssetPersistenceImpl extends BasePersistenceImpl
 					}
 
 					for (ModelListener<com.liferay.portlet.tags.model.TagsEntry> listener : tagsEntryListeners) {
-						listener.onBeforeRemoveAssociation(tagsEntry.getPrimaryKey(),
+						listener.onAfterRemoveAssociation(tagsEntry.getPrimaryKey(),
 							TagsAsset.class.getName(), assetId);
 					}
 				}
@@ -2068,7 +2068,7 @@ public class TagsAssetPersistenceImpl extends BasePersistenceImpl
 					}
 
 					for (ModelListener<com.liferay.portlet.asset.model.AssetCategory> listener : assetCategoryListeners) {
-						listener.onBeforeRemoveAssociation(assetCategory.getPrimaryKey(),
+						listener.onAfterRemoveAssociation(assetCategory.getPrimaryKey(),
 							TagsAsset.class.getName(), assetId);
 					}
 				}

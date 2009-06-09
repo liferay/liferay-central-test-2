@@ -1681,7 +1681,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl
 					}
 
 					for (ModelListener<com.liferay.portlet.softwarecatalog.model.SCProductEntry> listener : scProductEntryListeners) {
-						listener.onBeforeRemoveAssociation(scProductEntry.getPrimaryKey(),
+						listener.onAfterRemoveAssociation(scProductEntry.getPrimaryKey(),
 							SCLicense.class.getName(), licenseId);
 					}
 				}

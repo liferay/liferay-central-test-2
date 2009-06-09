@@ -2048,7 +2048,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 					}
 
 					for (ModelListener<com.liferay.portlet.softwarecatalog.model.SCProductVersion> listener : scProductVersionListeners) {
-						listener.onBeforeRemoveAssociation(scProductVersion.getPrimaryKey(),
+						listener.onAfterRemoveAssociation(scProductVersion.getPrimaryKey(),
 							SCFrameworkVersion.class.getName(),
 							frameworkVersionId);
 					}

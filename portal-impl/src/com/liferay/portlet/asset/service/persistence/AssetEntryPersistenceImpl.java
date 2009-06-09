@@ -1899,7 +1899,7 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl
 					}
 
 					for (ModelListener<com.liferay.portlet.asset.model.AssetCategory> listener : assetCategoryListeners) {
-						listener.onBeforeRemoveAssociation(assetCategory.getPrimaryKey(),
+						listener.onAfterRemoveAssociation(assetCategory.getPrimaryKey(),
 							AssetEntry.class.getName(), entryId);
 					}
 				}
@@ -2070,7 +2070,7 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl
 					}
 
 					for (ModelListener<com.liferay.portlet.asset.model.AssetTag> listener : assetTagListeners) {
-						listener.onBeforeRemoveAssociation(assetTag.getPrimaryKey(),
+						listener.onAfterRemoveAssociation(assetTag.getPrimaryKey(),
 							AssetEntry.class.getName(), entryId);
 					}
 				}

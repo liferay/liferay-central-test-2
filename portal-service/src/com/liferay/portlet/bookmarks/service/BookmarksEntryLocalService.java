@@ -213,7 +213,7 @@ public interface BookmarksEntryLocalService {
 
 	public void updateAsset(long userId,
 		com.liferay.portlet.bookmarks.model.BookmarksEntry entry,
-		long[] assetCategoryIds, java.lang.String[] tagsEntries)
+		long[] assetCategoryIds, java.lang.String[] assetTagNames)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 

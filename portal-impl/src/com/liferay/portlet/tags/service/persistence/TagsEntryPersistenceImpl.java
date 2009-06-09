@@ -1672,7 +1672,7 @@ public class TagsEntryPersistenceImpl extends BasePersistenceImpl
 					}
 
 					for (ModelListener<com.liferay.portlet.tags.model.TagsAsset> listener : tagsAssetListeners) {
-						listener.onBeforeRemoveAssociation(tagsAsset.getPrimaryKey(),
+						listener.onAfterRemoveAssociation(tagsAsset.getPrimaryKey(),
 							TagsEntry.class.getName(), entryId);
 					}
 				}

@@ -49,8 +49,12 @@ import com.liferay.portal.util.PortalUtil;
 
 import com.liferay.portlet.asset.service.AssetEntryLocalService;
 import com.liferay.portlet.asset.service.AssetEntryService;
+import com.liferay.portlet.asset.service.AssetTagLocalService;
+import com.liferay.portlet.asset.service.AssetTagService;
 import com.liferay.portlet.asset.service.persistence.AssetEntryFinder;
 import com.liferay.portlet.asset.service.persistence.AssetEntryPersistence;
+import com.liferay.portlet.asset.service.persistence.AssetTagFinder;
+import com.liferay.portlet.asset.service.persistence.AssetTagPersistence;
 import com.liferay.portlet.calendar.service.CalEventLocalService;
 import com.liferay.portlet.calendar.service.CalEventService;
 import com.liferay.portlet.calendar.service.persistence.CalEventFinder;
@@ -61,10 +65,6 @@ import com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence;
 import com.liferay.portlet.social.service.SocialActivityLocalService;
 import com.liferay.portlet.social.service.persistence.SocialActivityFinder;
 import com.liferay.portlet.social.service.persistence.SocialActivityPersistence;
-import com.liferay.portlet.tags.service.TagsEntryLocalService;
-import com.liferay.portlet.tags.service.TagsEntryService;
-import com.liferay.portlet.tags.service.persistence.TagsEntryFinder;
-import com.liferay.portlet.tags.service.persistence.TagsEntryPersistence;
 
 /**
  * <a href="CalEventServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
@@ -258,6 +258,39 @@ public abstract class CalEventServiceBaseImpl extends PrincipalBean
 		this.assetEntryFinder = assetEntryFinder;
 	}
 
+	public AssetTagLocalService getAssetTagLocalService() {
+		return assetTagLocalService;
+	}
+
+	public void setAssetTagLocalService(
+		AssetTagLocalService assetTagLocalService) {
+		this.assetTagLocalService = assetTagLocalService;
+	}
+
+	public AssetTagService getAssetTagService() {
+		return assetTagService;
+	}
+
+	public void setAssetTagService(AssetTagService assetTagService) {
+		this.assetTagService = assetTagService;
+	}
+
+	public AssetTagPersistence getAssetTagPersistence() {
+		return assetTagPersistence;
+	}
+
+	public void setAssetTagPersistence(AssetTagPersistence assetTagPersistence) {
+		this.assetTagPersistence = assetTagPersistence;
+	}
+
+	public AssetTagFinder getAssetTagFinder() {
+		return assetTagFinder;
+	}
+
+	public void setAssetTagFinder(AssetTagFinder assetTagFinder) {
+		this.assetTagFinder = assetTagFinder;
+	}
+
 	public ExpandoValueLocalService getExpandoValueLocalService() {
 		return expandoValueLocalService;
 	}
@@ -309,40 +342,6 @@ public abstract class CalEventServiceBaseImpl extends PrincipalBean
 	public void setSocialActivityFinder(
 		SocialActivityFinder socialActivityFinder) {
 		this.socialActivityFinder = socialActivityFinder;
-	}
-
-	public TagsEntryLocalService getTagsEntryLocalService() {
-		return tagsEntryLocalService;
-	}
-
-	public void setTagsEntryLocalService(
-		TagsEntryLocalService tagsEntryLocalService) {
-		this.tagsEntryLocalService = tagsEntryLocalService;
-	}
-
-	public TagsEntryService getTagsEntryService() {
-		return tagsEntryService;
-	}
-
-	public void setTagsEntryService(TagsEntryService tagsEntryService) {
-		this.tagsEntryService = tagsEntryService;
-	}
-
-	public TagsEntryPersistence getTagsEntryPersistence() {
-		return tagsEntryPersistence;
-	}
-
-	public void setTagsEntryPersistence(
-		TagsEntryPersistence tagsEntryPersistence) {
-		this.tagsEntryPersistence = tagsEntryPersistence;
-	}
-
-	public TagsEntryFinder getTagsEntryFinder() {
-		return tagsEntryFinder;
-	}
-
-	public void setTagsEntryFinder(TagsEntryFinder tagsEntryFinder) {
-		this.tagsEntryFinder = tagsEntryFinder;
 	}
 
 	public UserLocalService getUserLocalService() {
@@ -430,6 +429,14 @@ public abstract class CalEventServiceBaseImpl extends PrincipalBean
 	protected AssetEntryPersistence assetEntryPersistence;
 	@BeanReference(name = "com.liferay.portlet.asset.service.persistence.AssetEntryFinder.impl")
 	protected AssetEntryFinder assetEntryFinder;
+	@BeanReference(name = "com.liferay.portlet.asset.service.AssetTagLocalService.impl")
+	protected AssetTagLocalService assetTagLocalService;
+	@BeanReference(name = "com.liferay.portlet.asset.service.AssetTagService.impl")
+	protected AssetTagService assetTagService;
+	@BeanReference(name = "com.liferay.portlet.asset.service.persistence.AssetTagPersistence.impl")
+	protected AssetTagPersistence assetTagPersistence;
+	@BeanReference(name = "com.liferay.portlet.asset.service.persistence.AssetTagFinder.impl")
+	protected AssetTagFinder assetTagFinder;
 	@BeanReference(name = "com.liferay.portlet.expando.service.ExpandoValueLocalService.impl")
 	protected ExpandoValueLocalService expandoValueLocalService;
 	@BeanReference(name = "com.liferay.portlet.expando.service.ExpandoValueService.impl")
@@ -442,14 +449,6 @@ public abstract class CalEventServiceBaseImpl extends PrincipalBean
 	protected SocialActivityPersistence socialActivityPersistence;
 	@BeanReference(name = "com.liferay.portlet.social.service.persistence.SocialActivityFinder.impl")
 	protected SocialActivityFinder socialActivityFinder;
-	@BeanReference(name = "com.liferay.portlet.tags.service.TagsEntryLocalService.impl")
-	protected TagsEntryLocalService tagsEntryLocalService;
-	@BeanReference(name = "com.liferay.portlet.tags.service.TagsEntryService.impl")
-	protected TagsEntryService tagsEntryService;
-	@BeanReference(name = "com.liferay.portlet.tags.service.persistence.TagsEntryPersistence.impl")
-	protected TagsEntryPersistence tagsEntryPersistence;
-	@BeanReference(name = "com.liferay.portlet.tags.service.persistence.TagsEntryFinder.impl")
-	protected TagsEntryFinder tagsEntryFinder;
 	@BeanReference(name = "com.liferay.portal.service.UserLocalService.impl")
 	protected UserLocalService userLocalService;
 	@BeanReference(name = "com.liferay.portal.service.UserService.impl")

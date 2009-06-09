@@ -1303,7 +1303,7 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl
 					}
 
 					for (ModelListener<com.liferay.portlet.asset.model.AssetEntry> listener : assetEntryListeners) {
-						listener.onBeforeRemoveAssociation(assetEntry.getPrimaryKey(),
+						listener.onAfterRemoveAssociation(assetEntry.getPrimaryKey(),
 							AssetTag.class.getName(), tagId);
 					}
 				}

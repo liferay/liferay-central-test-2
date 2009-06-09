@@ -308,7 +308,7 @@ public interface WikiPageLocalService {
 
 	public void updateAsset(long userId,
 		com.liferay.portlet.wiki.model.WikiPage page, long[] assetCategoryIds,
-		java.lang.String[] tagsEntries)
+		java.lang.String[] assetTagNames)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 

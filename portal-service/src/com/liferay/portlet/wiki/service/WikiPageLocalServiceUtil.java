@@ -403,10 +403,10 @@ public class WikiPageLocalServiceUtil {
 
 	public static void updateAsset(long userId,
 		com.liferay.portlet.wiki.model.WikiPage page, long[] assetCategoryIds,
-		java.lang.String[] tagsEntries)
+		java.lang.String[] assetTagNames)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		getService().updateAsset(userId, page, assetCategoryIds, tagsEntries);
+		getService().updateAsset(userId, page, assetCategoryIds, assetTagNames);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiPage updatePage(

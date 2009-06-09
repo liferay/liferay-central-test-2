@@ -40,8 +40,12 @@ import com.liferay.portal.util.PortalUtil;
 
 import com.liferay.portlet.asset.service.AssetEntryLocalService;
 import com.liferay.portlet.asset.service.AssetEntryService;
+import com.liferay.portlet.asset.service.AssetTagLocalService;
+import com.liferay.portlet.asset.service.AssetTagService;
 import com.liferay.portlet.asset.service.persistence.AssetEntryFinder;
 import com.liferay.portlet.asset.service.persistence.AssetEntryPersistence;
+import com.liferay.portlet.asset.service.persistence.AssetTagFinder;
+import com.liferay.portlet.asset.service.persistence.AssetTagPersistence;
 import com.liferay.portlet.bookmarks.service.BookmarksEntryLocalService;
 import com.liferay.portlet.bookmarks.service.BookmarksEntryService;
 import com.liferay.portlet.bookmarks.service.BookmarksFolderLocalService;
@@ -52,10 +56,6 @@ import com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderPersiste
 import com.liferay.portlet.expando.service.ExpandoValueLocalService;
 import com.liferay.portlet.expando.service.ExpandoValueService;
 import com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence;
-import com.liferay.portlet.tags.service.TagsEntryLocalService;
-import com.liferay.portlet.tags.service.TagsEntryService;
-import com.liferay.portlet.tags.service.persistence.TagsEntryFinder;
-import com.liferay.portlet.tags.service.persistence.TagsEntryPersistence;
 
 /**
  * <a href="BookmarksEntryServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
@@ -243,6 +243,39 @@ public abstract class BookmarksEntryServiceBaseImpl extends PrincipalBean
 		this.assetEntryFinder = assetEntryFinder;
 	}
 
+	public AssetTagLocalService getAssetTagLocalService() {
+		return assetTagLocalService;
+	}
+
+	public void setAssetTagLocalService(
+		AssetTagLocalService assetTagLocalService) {
+		this.assetTagLocalService = assetTagLocalService;
+	}
+
+	public AssetTagService getAssetTagService() {
+		return assetTagService;
+	}
+
+	public void setAssetTagService(AssetTagService assetTagService) {
+		this.assetTagService = assetTagService;
+	}
+
+	public AssetTagPersistence getAssetTagPersistence() {
+		return assetTagPersistence;
+	}
+
+	public void setAssetTagPersistence(AssetTagPersistence assetTagPersistence) {
+		this.assetTagPersistence = assetTagPersistence;
+	}
+
+	public AssetTagFinder getAssetTagFinder() {
+		return assetTagFinder;
+	}
+
+	public void setAssetTagFinder(AssetTagFinder assetTagFinder) {
+		this.assetTagFinder = assetTagFinder;
+	}
+
 	public ExpandoValueLocalService getExpandoValueLocalService() {
 		return expandoValueLocalService;
 	}
@@ -267,40 +300,6 @@ public abstract class BookmarksEntryServiceBaseImpl extends PrincipalBean
 	public void setExpandoValuePersistence(
 		ExpandoValuePersistence expandoValuePersistence) {
 		this.expandoValuePersistence = expandoValuePersistence;
-	}
-
-	public TagsEntryLocalService getTagsEntryLocalService() {
-		return tagsEntryLocalService;
-	}
-
-	public void setTagsEntryLocalService(
-		TagsEntryLocalService tagsEntryLocalService) {
-		this.tagsEntryLocalService = tagsEntryLocalService;
-	}
-
-	public TagsEntryService getTagsEntryService() {
-		return tagsEntryService;
-	}
-
-	public void setTagsEntryService(TagsEntryService tagsEntryService) {
-		this.tagsEntryService = tagsEntryService;
-	}
-
-	public TagsEntryPersistence getTagsEntryPersistence() {
-		return tagsEntryPersistence;
-	}
-
-	public void setTagsEntryPersistence(
-		TagsEntryPersistence tagsEntryPersistence) {
-		this.tagsEntryPersistence = tagsEntryPersistence;
-	}
-
-	public TagsEntryFinder getTagsEntryFinder() {
-		return tagsEntryFinder;
-	}
-
-	public void setTagsEntryFinder(TagsEntryFinder tagsEntryFinder) {
-		this.tagsEntryFinder = tagsEntryFinder;
 	}
 
 	protected void runSQL(String sql) throws SystemException {
@@ -354,18 +353,18 @@ public abstract class BookmarksEntryServiceBaseImpl extends PrincipalBean
 	protected AssetEntryPersistence assetEntryPersistence;
 	@BeanReference(name = "com.liferay.portlet.asset.service.persistence.AssetEntryFinder.impl")
 	protected AssetEntryFinder assetEntryFinder;
+	@BeanReference(name = "com.liferay.portlet.asset.service.AssetTagLocalService.impl")
+	protected AssetTagLocalService assetTagLocalService;
+	@BeanReference(name = "com.liferay.portlet.asset.service.AssetTagService.impl")
+	protected AssetTagService assetTagService;
+	@BeanReference(name = "com.liferay.portlet.asset.service.persistence.AssetTagPersistence.impl")
+	protected AssetTagPersistence assetTagPersistence;
+	@BeanReference(name = "com.liferay.portlet.asset.service.persistence.AssetTagFinder.impl")
+	protected AssetTagFinder assetTagFinder;
 	@BeanReference(name = "com.liferay.portlet.expando.service.ExpandoValueLocalService.impl")
 	protected ExpandoValueLocalService expandoValueLocalService;
 	@BeanReference(name = "com.liferay.portlet.expando.service.ExpandoValueService.impl")
 	protected ExpandoValueService expandoValueService;
 	@BeanReference(name = "com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence.impl")
 	protected ExpandoValuePersistence expandoValuePersistence;
-	@BeanReference(name = "com.liferay.portlet.tags.service.TagsEntryLocalService.impl")
-	protected TagsEntryLocalService tagsEntryLocalService;
-	@BeanReference(name = "com.liferay.portlet.tags.service.TagsEntryService.impl")
-	protected TagsEntryService tagsEntryService;
-	@BeanReference(name = "com.liferay.portlet.tags.service.persistence.TagsEntryPersistence.impl")
-	protected TagsEntryPersistence tagsEntryPersistence;
-	@BeanReference(name = "com.liferay.portlet.tags.service.persistence.TagsEntryFinder.impl")
-	protected TagsEntryFinder tagsEntryFinder;
 }
