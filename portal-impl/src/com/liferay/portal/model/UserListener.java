@@ -37,7 +37,9 @@ public class UserListener extends BaseModelListener<User> {
 
 	public void onAfterUpdate(User user) throws ModelListenerException {
 		try {
-			PortalLDAPUtil.exportToLDAP(user);
+			if (!user.isDefaultUser()) {
+				PortalLDAPUtil.exportToLDAP(user);
+			}
 		}
 		catch (Exception e) {
 			throw new ModelListenerException(e);
