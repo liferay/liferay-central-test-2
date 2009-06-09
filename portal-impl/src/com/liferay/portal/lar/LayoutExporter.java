@@ -66,11 +66,11 @@ import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.velocity.VelocityContextPool;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
-import com.liferay.portlet.tags.model.TagsEntry;
-import com.liferay.portlet.tags.model.TagsEntryConstants;
-import com.liferay.portlet.tags.model.TagsVocabulary;
-import com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil;
-import com.liferay.portlet.tags.service.TagsVocabularyLocalServiceUtil;
+import com.liferay.portlet.asset.model.AssetCategory;
+import com.liferay.portlet.asset.model.AssetCategoryConstants;
+import com.liferay.portlet.asset.model.AssetVocabulary;
+import com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil;
+import com.liferay.portlet.asset.service.AssetVocabularyLocalServiceUtil;
 
 import java.io.File;
 import java.io.IOException;
@@ -530,29 +530,29 @@ public class LayoutExporter {
 
 			Element root = doc.addElement("categories-hierarchy");
 
-			List<TagsVocabulary> tagsVocabularies =
-				TagsVocabularyLocalServiceUtil.getGroupVocabularies(
-					context.getGroupId(),
-					TagsEntryConstants.FOLKSONOMY_CATEGORY);
+			List<AssetVocabulary> assetVocabularies =
+				AssetVocabularyLocalServiceUtil.getGroupVocabularies(
+					context.getGroupId());
 
-			for (TagsVocabulary tagsVocabulary : tagsVocabularies) {
+			for (AssetVocabulary assetVocabulary : assetVocabularies) {
 				Element vocabularyEl = root.addElement("vocabulary");
 
-				String name = tagsVocabulary.getName();
+				long vocabularyId = assetVocabulary.getVocabularyId();
 
-				vocabularyEl.addAttribute("name", name);
+				vocabularyEl.addAttribute("id", String.valueOf(vocabularyId));
+				vocabularyEl.addAttribute("name", assetVocabulary.getName());
 				vocabularyEl.addAttribute(
-					"userUuid", tagsVocabulary.getUserUuid());
+					"userUuid", assetVocabulary.getUserUuid());
 
-				List<TagsEntry> tagsCategories =
-					TagsEntryLocalServiceUtil.getGroupVocabularyEntries(
-						context.getGroupId(), name);
+				List<AssetCategory> assetCategories =
+					AssetCategoryLocalServiceUtil.getVocabularyCategories(
+						assetVocabulary.getVocabularyId());
 
-				tagsCategories = ListUtil.copy(tagsCategories);
+				assetCategories = ListUtil.copy(assetCategories);
 
 				orderCategories(
-					tagsCategories, vocabularyEl,
-					TagsEntryConstants.DEFAULT_PARENT_ENTRY_ID);
+					assetCategories, vocabularyEl,
+					AssetCategoryConstants.DEFAULT_PARENT_CATEGORY_ID);
 			}
 
 			context.addZipEntry(
@@ -835,34 +835,35 @@ public class LayoutExporter {
 	}
 
 	protected void orderCategories(
-			List<TagsEntry> tagsCategories, Element parentEl,
-			long parentEntryId)
+			List<AssetCategory> assetCategories, Element parentEl,
+			long parentCategoryId)
 		throws PortalException, SystemException {
 
-		List<TagsEntry> tagsParentCategories = new ArrayList<TagsEntry>();
+		List<AssetCategory> parentCategories = new ArrayList<AssetCategory>();
 
-		Iterator<TagsEntry> itr = tagsCategories.iterator();
+		Iterator<AssetCategory> itr = assetCategories.iterator();
 
 		while (itr.hasNext()) {
-			TagsEntry tagsCategory = itr.next();
+			AssetCategory assetCategory = itr.next();
 
-			if (tagsCategory.getParentEntryId() == parentEntryId) {
+			if (assetCategory.getParentCategoryId() == parentCategoryId) {
 				Element categoryEl = parentEl.addElement("category");
 
-				categoryEl.addAttribute("name", tagsCategory.getName());
 				categoryEl.addAttribute(
-					"parentEntryName", tagsCategory.getParentName());
-				categoryEl.addAttribute("userUuid", tagsCategory.getUserUuid());
+					"parentCategoryId", String.valueOf(parentCategoryId));
+				categoryEl.addAttribute("name", assetCategory.getName());
+				categoryEl.addAttribute(
+					"userUuid", assetCategory.getUserUuid());
 
-				tagsParentCategories.add(tagsCategory);
+				parentCategories.add(assetCategory);
 
 				itr.remove();
 			}
 		}
 
-		for (TagsEntry tagsParentCategory : tagsParentCategories) {
+		for (AssetCategory parentCategory : parentCategories) {
 			orderCategories(
-				tagsCategories, parentEl, tagsParentCategory.getEntryId());
+				assetCategories, parentEl, parentCategory.getCategoryId());
 		}
 	}
 

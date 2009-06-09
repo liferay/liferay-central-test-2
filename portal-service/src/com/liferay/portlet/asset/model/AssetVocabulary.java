@@ -49,4 +49,6 @@ package com.liferay.portlet.asset.model;
  *
  */
 public interface AssetVocabulary extends AssetVocabularyModel {
+	public java.lang.String getUserUuid()
+		throws com.liferay.portal.SystemException;
 }

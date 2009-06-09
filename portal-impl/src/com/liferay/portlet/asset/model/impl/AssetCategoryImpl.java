@@ -24,6 +24,8 @@ package com.liferay.portlet.asset.model.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.asset.model.AssetCategory;
 import com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil;
 
@@ -62,6 +64,10 @@ public class AssetCategoryImpl
 		}
 
 		return categories;
+	}
+
+	public String getUserUuid() throws SystemException {
+		return PortalUtil.getUserValue(getUserId(), "uuid", StringPool.BLANK);
 	}
 
 	public boolean isRootCategory() {

@@ -82,12 +82,12 @@ import com.liferay.portal.theme.ThemeLoaderFactory;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsValues;
+import com.liferay.portlet.asset.DuplicateCategoryException;
+import com.liferay.portlet.asset.NoSuchVocabularyException;
+import com.liferay.portlet.asset.model.AssetVocabulary;
+import com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil;
+import com.liferay.portlet.asset.service.AssetVocabularyLocalServiceUtil;
 import com.liferay.portlet.journal.model.JournalArticle;
-import com.liferay.portlet.tags.DuplicateEntryException;
-import com.liferay.portlet.tags.DuplicateVocabularyException;
-import com.liferay.portlet.tags.model.TagsEntryConstants;
-import com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil;
-import com.liferay.portlet.tags.service.TagsVocabularyLocalServiceUtil;
 import com.liferay.util.LocalizationUtil;
 
 import java.io.ByteArrayInputStream;
@@ -841,30 +841,36 @@ public class LayoutImporter {
 				serviceContext.setAddGuestPermissions(true);
 				serviceContext.setScopeGroupId(context.getGroupId());
 
+				AssetVocabulary assetVocabulary = null;
+
 				try {
-					TagsVocabularyLocalServiceUtil.addVocabulary(
-						context.getUserId(userUuid), vocabularyName,
-						TagsEntryConstants.FOLKSONOMY_CATEGORY, serviceContext);
+					assetVocabulary =
+						AssetVocabularyLocalServiceUtil.getGroupVocabulary(
+							context.getScopeGroupId(), vocabularyName);
 				}
-				catch (DuplicateVocabularyException dve) {
+				catch (NoSuchVocabularyException nsve) {
+					assetVocabulary =
+						AssetVocabularyLocalServiceUtil.addVocabulary(
+							context.getUserId(userUuid), vocabularyName,
+							serviceContext);
 				}
 
 				List<Element> categories = vocabularyEl.elements("category");
 
 				for (Element category : categories) {
+					long parentCategoryId = GetterUtil.getLong(
+						category.attributeValue("parentCategoryId"));
 					String categoryName = GetterUtil.getString(
 						category.attributeValue("name"));
-					String parentEntryName = GetterUtil.getString(
-						category.attributeValue("parentEntryName"));
 					String[] properties = null;
 
 					try {
-						TagsEntryLocalServiceUtil.addEntry(
-							context.getUserId(userUuid), parentEntryName,
-							categoryName, vocabularyName, properties,
-							serviceContext);
+						AssetCategoryLocalServiceUtil.addCategory(
+							context.getUserId(userUuid), parentCategoryId,
+							categoryName, assetVocabulary.getVocabularyId(),
+							properties, serviceContext);
 					}
-					catch (DuplicateEntryException dee) {
+					catch (DuplicateCategoryException dce) {
 					}
 				}
 			}
