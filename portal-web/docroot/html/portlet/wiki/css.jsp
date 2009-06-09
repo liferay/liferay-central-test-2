@@ -77,17 +77,24 @@
 	color: #7d7d7d;
 }
 
-.portlet-wiki h1.page-title {
+.portlet-wiki h1, .portlet-wiki h2, .portlet-wiki h3 {
 	border-bottom: 1px solid #aaa;
-	margin: 0px;
 	margin-bottom: 0.5em;
 	padding-bottom: 5px;
+}
+
+.portlet-wiki h1.page-title {
+	margin: 0px;
 }
 
 .portlet-wiki h1.page-title .return-to-page {
 	background: url(<%= themeImagesPath %>/wiki/return_to_page.png) no-repeat 0 50%;
 	padding-left: 20px;
 	text-decoration: none;
+}
+
+.portlet-wiki h3 {
+	border-bottom: 1px dotted #aaa;
 }
 
 .portlet-wiki .preview {
