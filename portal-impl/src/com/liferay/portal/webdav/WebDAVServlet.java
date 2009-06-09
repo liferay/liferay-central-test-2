@@ -54,6 +54,14 @@ public class WebDAVServlet extends HttpServlet {
 
 		int status = HttpServletResponse.SC_PRECONDITION_FAILED;
 
+		if (_log.isInfoEnabled()) {
+			_log.info(request.getMethod() + " " + request.getRequestURI());
+		}
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("User agent " + request.getHeader("User-agent"));
+		}
+
 		try {
 			if (isIgnoredResource(request)) {
 				status = HttpServletResponse.SC_NOT_FOUND;
@@ -97,14 +105,6 @@ public class WebDAVServlet extends HttpServlet {
 
 			WebDAVRequest webDavRequest = new WebDAVRequestImpl(
 				storage, request, response, permissionChecker);
-
-			if (_log.isInfoEnabled()) {
-				_log.info(request.getMethod() + " " + request.getRequestURI());
-			}
-
-			if (_log.isDebugEnabled()) {
-				_log.debug("User agent " + request.getHeader("User-agent"));
-			}
 
 			status = method.process(webDavRequest);
 		}
@@ -164,7 +164,7 @@ public class WebDAVServlet extends HttpServlet {
 			request.getPathInfo(), true);
 
 		if ((pathArray == null) || (pathArray.length <= 0)) {
-			return false;
+			return true;
 		}
 
 		String resourceName = pathArray[pathArray.length - 1];
