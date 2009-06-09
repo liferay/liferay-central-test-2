@@ -70,15 +70,15 @@ public class ServiceContextUtil {
 		serviceContext.setCommunityPermissions(communityPermissions);
 		serviceContext.setGuestPermissions(guestPermissions);
 
-		// Tags
+		// Asset
 
-		String[] tagsCategories = StringUtil.split(
-			jsonObject.getString("tagsCategories"));
-		String[] tagsEntries = StringUtil.split(
-			jsonObject.getString("tagsEntries"));
+		long[] assetCategoryIds = StringUtil.split(
+			jsonObject.getString("assetCategoryIds"), 0L);
+		String[] assetTagNames = StringUtil.split(
+			jsonObject.getString("assetTagNames"));
 
-		serviceContext.setTagsCategories(tagsCategories);
-		serviceContext.setTagsEntries(tagsEntries);
+		serviceContext.setAssetCategoryIds(assetCategoryIds);
+		serviceContext.setAssetTagNames(assetTagNames);
 
 		return serviceContext;
 	}

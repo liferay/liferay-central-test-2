@@ -56,6 +56,10 @@ public class ServiceContext implements Serializable {
 		return _assetCategoryIds;
 	}
 
+	public String[] getAssetTagNames() {
+		return _assetTagNames;
+	}
+
 	public Serializable getAttribute(String name) {
 		return _attributes.get(name);
 	}
@@ -108,14 +112,6 @@ public class ServiceContext implements Serializable {
 		return _scopeGroupId;
 	}
 
-	public String[] getTagsCategories() {
-		return _tagsCategories;
-	}
-
-	public String[] getTagsEntries() {
-		return _tagsEntries;
-	}
-
 	public String getUserDisplayURL() {
 		return _userDisplayURL;
 	}
@@ -132,8 +128,12 @@ public class ServiceContext implements Serializable {
 		_addGuestPermissions = addGuestPermissions;
 	}
 
-	public void setAssetCategoyIds(long[] assetCategoryIds) {
+	public void setAssetCategoryIds(long[] assetCategoryIds) {
 		_assetCategoryIds = assetCategoryIds;
+	}
+
+	public void setAssetTagNames(String[] asssetTagNames) {
+		_assetTagNames = asssetTagNames;
 	}
 
 	public void setAttribute(String name, Serializable value) {
@@ -192,14 +192,6 @@ public class ServiceContext implements Serializable {
 		_scopeGroupId = scopeGroupId;
 	}
 
-	public void setTagsCategories(String[] tagsCategories) {
-		_tagsCategories = tagsCategories;
-	}
-
-	public void setTagsEntries(String[] tagsEntries) {
-		_tagsEntries = tagsEntries;
-	}
-
 	public void setUserDisplayURL(String userDisplayURL) {
 		_userDisplayURL = userDisplayURL;
 	}
@@ -211,6 +203,7 @@ public class ServiceContext implements Serializable {
 	private boolean _addCommunityPermissions;
 	private boolean _addGuestPermissions;
 	private long[] _assetCategoryIds;
+	private String[] _assetTagNames;
 	private Map<String, Serializable> _attributes;
 	private String[] _communityPermissions;
 	private long _companyId;
@@ -222,8 +215,6 @@ public class ServiceContext implements Serializable {
 	private String _portalURL;
 	private PortletPreferencesIds _portletPreferencesIds;
 	private long _scopeGroupId;
-	private String[] _tagsCategories;
-	private String[] _tagsEntries;
 	private String _userDisplayURL;
 	private long _plid;
 	private long _userId;

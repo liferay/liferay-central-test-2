@@ -434,10 +434,6 @@ public interface Portal {
 
 	public String[] getSystemRoles();
 
-	public String[] getTagsCategories(PortletRequest portletRequest);
-
-	public String[] getTagsEntries(PortletRequest portletRequest);
-
 	public UploadPortletRequest getUploadPortletRequest(
 		ActionRequest actionRequest);
 

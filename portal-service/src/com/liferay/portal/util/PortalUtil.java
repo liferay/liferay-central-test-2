@@ -736,14 +736,6 @@ public class PortalUtil {
 		return getPortal().getSystemRoles();
 	}
 
-	public static String[] getTagsCategories(PortletRequest portletRequest) {
-		return getPortal().getTagsCategories(portletRequest);
-	}
-
-	public static String[] getTagsEntries(PortletRequest portletRequest) {
-		return getPortal().getTagsEntries(portletRequest);
-	}
-
 	public static UploadPortletRequest getUploadPortletRequest(
 		ActionRequest actionRequest) {
 

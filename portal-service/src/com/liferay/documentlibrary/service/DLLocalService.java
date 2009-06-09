@@ -26,6 +26,7 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.Transactional;
 import com.liferay.portal.kernel.search.Hits;
+import com.liferay.portal.service.ServiceContext;
 
 import java.io.File;
 import java.io.InputStream;
@@ -44,8 +45,7 @@ public interface DLLocalService {
 	public void addFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, long fileEntryId, String properties,
-			Date modifiedDate, String[] tagsCategories, String[] tagsEntries,
-			InputStream is)
+			Date modifiedDate, ServiceContext serviceContext, InputStream is)
 		throws PortalException, SystemException;
 
 	public void checkRoot(long companyId) throws SystemException;
@@ -76,13 +76,13 @@ public interface DLLocalService {
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, double versionNumber, String sourceFileName,
 			long fileEntryId, String properties, Date modifiedDate,
-			String[] tagsCategories, String[] tagsEntries, InputStream is)
-		throws PortalException, SystemException;
-
-	public void validate(String fileName, File file)
+			ServiceContext serviceContext, InputStream is)
 		throws PortalException, SystemException;
 
 	public void validate(String fileName, byte[] bytes)
+		throws PortalException, SystemException;
+
+	public void validate(String fileName, File file)
 		throws PortalException, SystemException;
 
 	public void validate(String fileName, InputStream is)
