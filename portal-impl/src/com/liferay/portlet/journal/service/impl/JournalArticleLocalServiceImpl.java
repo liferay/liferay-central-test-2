@@ -1586,8 +1586,7 @@ public class JournalArticleLocalServiceImpl
 				searchQuery.addTerm(Field.TITLE, keywords);
 				searchQuery.addTerm(Field.CONTENT, keywords);
 				searchQuery.addTerm(Field.DESCRIPTION, keywords);
-				searchQuery.addTerm(Field.TAGS_CATEGORIES, keywords);
-				searchQuery.addTerm(Field.TAGS_ENTRIES, keywords);
+				searchQuery.addTerm(Field.ASSET_TAG_NAMES, keywords);
 				searchQuery.addTerm(Field.TYPE, keywords);
 			}
 

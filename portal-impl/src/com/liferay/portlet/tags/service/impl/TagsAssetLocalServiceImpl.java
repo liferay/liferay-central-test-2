@@ -370,7 +370,7 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 				searchQuery.addTerm(Field.CONTENT, keywords);
 				searchQuery.addTerm(Field.DESCRIPTION, keywords);
 				searchQuery.addTerm(Field.PROPERTIES, keywords);
-				searchQuery.addTerm(Field.TAGS_ENTRIES, keywords);
+				searchQuery.addTerm(Field.ASSET_TAG_NAMES, keywords);
 			}
 
 			BooleanQuery fullQuery = BooleanQueryFactoryUtil.create();
