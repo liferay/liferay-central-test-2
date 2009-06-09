@@ -1156,23 +1156,19 @@ public class JournalUtil {
 				"path-friendly-url-private-group");
 		}
 
-		String friendlyUrlLayoutSet = StringPool.BLANK;
+		String layoutSetFriendlyUrl = StringPool.BLANK;
 
 		String virtualHost = layoutSet.getVirtualHost();
 
 		if (Validator.isNull(virtualHost) ||
 			!virtualHost.equals(themeDisplayEl.elementText("server-name"))) {
 
-			friendlyUrlLayoutSet = friendlyUrlCurrent + group.getFriendlyURL();
+			layoutSetFriendlyUrl = friendlyUrlCurrent + group.getFriendlyURL();
 		}
 
 		tokens.put("cdn_host", themeDisplayEl.elementText("cdn-host"));
 		tokens.put("company_id", themeDisplayEl.elementText("company-id"));
-		tokens.put("group_friendly_url", group.getFriendlyURL());
-		tokens.put("group_id", String.valueOf(groupId));
-		tokens.put("image_path", themeDisplayEl.elementText("path-image"));
 		tokens.put("friendly_url_current", friendlyUrlCurrent);
-		tokens.put("friendly_url_layout_set", friendlyUrlLayoutSet);
 		tokens.put(
 			"friendly_url_private_group",
 			themeDisplayEl.elementText("path-friendly-url-private-group"));
@@ -1182,6 +1178,10 @@ public class JournalUtil {
 		tokens.put(
 			"friendly_url_public",
 			themeDisplayEl.elementText("path-friendly-url-public"));
+		tokens.put("group_friendly_url", group.getFriendlyURL());
+		tokens.put("group_id", String.valueOf(groupId));
+		tokens.put("image_path", themeDisplayEl.elementText("path-image"));
+		tokens.put("layout_set_friendly_url", layoutSetFriendlyUrl);
 		tokens.put("main_path", themeDisplayEl.elementText("path-main"));
 		tokens.put("portal_ctx", themeDisplayEl.elementText("path-context"));
 		tokens.put(
@@ -1225,23 +1225,19 @@ public class JournalUtil {
 			friendlyUrlCurrent = themeDisplay.getPathFriendlyURLPrivateGroup();
 		}
 
-		String friendlyUrlLayoutSet = StringPool.BLANK;
+		String layoutSetFriendlyUrl = StringPool.BLANK;
 
 		String virtualHost = layoutSet.getVirtualHost();
 
 		if (Validator.isNull(virtualHost) ||
 			!virtualHost.equals(themeDisplay.getServerName())) {
 
-			friendlyUrlLayoutSet = friendlyUrlCurrent + group.getFriendlyURL();
+			layoutSetFriendlyUrl = friendlyUrlCurrent + group.getFriendlyURL();
 		}
 
 		tokens.put("cdn_host", themeDisplay.getCDNHost());
 		tokens.put("company_id", String.valueOf(themeDisplay.getCompanyId()));
-		tokens.put("group_friendly_url", group.getFriendlyURL());
-		tokens.put("group_id", String.valueOf(groupId));
-		tokens.put("image_path", themeDisplay.getPathImage());
 		tokens.put("friendly_url_current", friendlyUrlCurrent);
-		tokens.put("friendly_url_layout_set", friendlyUrlLayoutSet);
 		tokens.put(
 			"friendly_url_private_group",
 			themeDisplay.getPathFriendlyURLPrivateGroup());
@@ -1250,6 +1246,10 @@ public class JournalUtil {
 			themeDisplay.getPathFriendlyURLPrivateUser());
 		tokens.put(
 			"friendly_url_public", themeDisplay.getPathFriendlyURLPublic());
+		tokens.put("group_friendly_url", group.getFriendlyURL());
+		tokens.put("group_id", String.valueOf(groupId));
+		tokens.put("image_path", themeDisplay.getPathImage());
+		tokens.put("layout_set_friendly_url", layoutSetFriendlyUrl);
 		tokens.put("main_path", themeDisplay.getPathMain());
 		tokens.put("portal_ctx", themeDisplay.getPathContext());
 		tokens.put(
