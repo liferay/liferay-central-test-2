@@ -650,11 +650,11 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 											query.append("${entity.alias}.${finderCol.name} IS NOT NULL");
 										</#if>
 									<#else>
-                                        <#if entity.hasCompoundPK() && finderCol.isPrimary()>
-                                            query.append("${entity.alias}.id.${finderCol.name} ${finderCol.comparator} null");
-                                        <#else>
-                                            query.append("${entity.alias}.${finderCol.name} ${finderCol.comparator} null");
-                                        </#if>
+										<#if entity.hasCompoundPK() && finderCol.isPrimary()>
+											query.append("${entity.alias}.id.${finderCol.name} ${finderCol.comparator} null");
+										<#else>
+											query.append("${entity.alias}.${finderCol.name} ${finderCol.comparator} null");
+										</#if>
 									</#if>
 								}
 								else {
@@ -807,23 +807,23 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 							<#if !finderCol.isPrimitiveType()>
 								if (${finderCol.name} == null) {
 									<#if finderCol.comparator == "=">
-                                        <#if entity.hasCompoundPK() && finderCol.isPrimary()>
-                                            query.append("${entity.alias}.id.${finderCol.name} IS NULL");
-                                        <#else>
-                                            query.append("${entity.alias}.${finderCol.name} IS NULL");
-                                        </#if>
+										<#if entity.hasCompoundPK() && finderCol.isPrimary()>
+											query.append("${entity.alias}.id.${finderCol.name} IS NULL");
+										<#else>
+											query.append("${entity.alias}.${finderCol.name} IS NULL");
+										</#if>
 									<#elseif finderCol.comparator == "<>" || finderCol.comparator = "!=">
-                                        <#if entity.hasCompoundPK() && finderCol.isPrimary()>
-                                            query.append("${entity.alias}.id.${finderCol.name} IS NOT NULL");
-                                        <#else>
-                                            query.append("${entity.alias}.${finderCol.name} IS NOT NULL");
-                                        </#if>
+										<#if entity.hasCompoundPK() && finderCol.isPrimary()>
+											query.append("${entity.alias}.id.${finderCol.name} IS NOT NULL");
+										<#else>
+											query.append("${entity.alias}.${finderCol.name} IS NOT NULL");
+										</#if>
 									<#else>
-                                        <#if entity.hasCompoundPK() && finderCol.isPrimary()>
-                                            query.append("${entity.alias}.id.${finderCol.name} ${finderCol.comparator} null");
-                                        <#else>
-                                            query.append("${entity.alias}.${finderCol.name} ${finderCol.comparator} null");
-                                        </#if>
+										<#if entity.hasCompoundPK() && finderCol.isPrimary()>
+											query.append("${entity.alias}.id.${finderCol.name} ${finderCol.comparator} null");
+										<#else>
+											query.append("${entity.alias}.${finderCol.name} ${finderCol.comparator} null");
+										</#if>
 									</#if>
 								}
 								else {
@@ -1308,24 +1308,24 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 							<#if !finderCol.isPrimitiveType()>
 								if (${finderCol.name} == null) {
 									<#if finderCol.comparator == "=">
-                                        <#if entity.hasCompoundPK() && finderCol.isPrimary()>
-                                            query.append("${entity.alias}.id.${finderCol.name} IS NULL");
-                                        <#else>
-                                            query.append("${entity.alias}.${finderCol.name} IS NULL");
-                                        </#if>
+										<#if entity.hasCompoundPK() && finderCol.isPrimary()>
+											query.append("${entity.alias}.id.${finderCol.name} IS NULL");
+										<#else>
+											query.append("${entity.alias}.${finderCol.name} IS NULL");
+										</#if>
 
 									<#elseif finderCol.comparator == "<>" || finderCol.comparator = "!=">
-                                        <#if entity.hasCompoundPK() && finderCol.isPrimary()>
-                                            query.append("${entity.alias}.id.${finderCol.name} IS NOT NULL");
-                                        <#else>
-                                            query.append("${entity.alias}.${finderCol.name} IS NOT NULL");
-                                        </#if>
+										<#if entity.hasCompoundPK() && finderCol.isPrimary()>
+											query.append("${entity.alias}.id.${finderCol.name} IS NOT NULL");
+										<#else>
+											query.append("${entity.alias}.${finderCol.name} IS NOT NULL");
+										</#if>
 									<#else>
-                                        <#if entity.hasCompoundPK() && finderCol.isPrimary()>
-                                            query.append("${entity.alias}.id.${finderCol.name} ${finderCol.comparator} null");
-                                        <#else>
-                                            query.append("${entity.alias}.${finderCol.name} ${finderCol.comparator} null");
-                                        </#if>
+										<#if entity.hasCompoundPK() && finderCol.isPrimary()>
+											query.append("${entity.alias}.id.${finderCol.name} ${finderCol.comparator} null");
+										<#else>
+											query.append("${entity.alias}.${finderCol.name} ${finderCol.comparator} null");
+										</#if>
 									</#if>
 								}
 								else {
@@ -2599,7 +2599,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 								}
 
 								for (ModelListener<${tempEntity.packagePath}.model.${tempEntity.name}> listener : ${tempEntity.varName}Listeners) {
-									listener.onBeforeRemoveAssociation(${tempEntity.varName}.getPrimaryKey(), ${entity.name}.class.getName(), ${entity.PKVarName});
+									listener.onAfterRemoveAssociation(${tempEntity.varName}.getPrimaryKey(), ${entity.name}.class.getName(), ${entity.PKVarName});
 								}
 							}
 						}
