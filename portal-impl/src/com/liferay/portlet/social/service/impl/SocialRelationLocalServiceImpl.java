@@ -30,7 +30,6 @@ import com.liferay.portlet.social.model.SocialRelation;
 import com.liferay.portlet.social.model.SocialRelationConstants;
 import com.liferay.portlet.social.service.base.SocialRelationLocalServiceBaseImpl;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -66,7 +65,7 @@ public class SocialRelationLocalServiceImpl
 			relation = socialRelationPersistence.create(relationId);
 
 			relation.setCompanyId(user1.getCompanyId());
-			relation.setCreateDate(new Date());
+			relation.setCreateDate(System.currentTimeMillis());
 			relation.setUserId1(userId1);
 			relation.setUserId2(userId2);
 			relation.setType(type);
@@ -85,7 +84,7 @@ public class SocialRelationLocalServiceImpl
 				biRelation = socialRelationPersistence.create(biRelationId);
 
 				biRelation.setCompanyId(user1.getCompanyId());
-				biRelation.setCreateDate(new Date());
+				biRelation.setCreateDate(System.currentTimeMillis());
 				biRelation.setUserId1(userId2);
 				biRelation.setUserId2(userId1);
 				biRelation.setType(type);

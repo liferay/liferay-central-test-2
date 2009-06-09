@@ -24,8 +24,6 @@ package com.liferay.portlet.social.model;
 
 import com.liferay.portal.model.BaseModel;
 
-import java.util.Date;
-
 /**
  * <a href="SocialRelationModel.java.html"><b><i>View Source</i></b></a>
  *
@@ -63,9 +61,9 @@ public interface SocialRelationModel extends BaseModel<SocialRelation> {
 
 	public void setCompanyId(long companyId);
 
-	public Date getCreateDate();
+	public long getCreateDate();
 
-	public void setCreateDate(Date createDate);
+	public void setCreateDate(long createDate);
 
 	public long getUserId1();
 

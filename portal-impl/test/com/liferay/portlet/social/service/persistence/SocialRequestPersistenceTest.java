@@ -23,7 +23,6 @@
 package com.liferay.portlet.social.service.persistence;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
-import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.social.NoSuchRequestException;
@@ -76,8 +75,8 @@ public class SocialRequestPersistenceTest extends BasePersistenceTestCase {
 		newSocialRequest.setGroupId(nextLong());
 		newSocialRequest.setCompanyId(nextLong());
 		newSocialRequest.setUserId(nextLong());
-		newSocialRequest.setCreateDate(nextDate());
-		newSocialRequest.setModifiedDate(nextDate());
+		newSocialRequest.setCreateDate(nextLong());
+		newSocialRequest.setModifiedDate(nextLong());
 		newSocialRequest.setClassNameId(nextLong());
 		newSocialRequest.setClassPK(nextLong());
 		newSocialRequest.setType(nextInt());
@@ -98,12 +97,10 @@ public class SocialRequestPersistenceTest extends BasePersistenceTestCase {
 			newSocialRequest.getCompanyId());
 		assertEquals(existingSocialRequest.getUserId(),
 			newSocialRequest.getUserId());
-		assertEquals(Time.getShortTimestamp(
-				existingSocialRequest.getCreateDate()),
-			Time.getShortTimestamp(newSocialRequest.getCreateDate()));
-		assertEquals(Time.getShortTimestamp(
-				existingSocialRequest.getModifiedDate()),
-			Time.getShortTimestamp(newSocialRequest.getModifiedDate()));
+		assertEquals(existingSocialRequest.getCreateDate(),
+			newSocialRequest.getCreateDate());
+		assertEquals(existingSocialRequest.getModifiedDate(),
+			newSocialRequest.getModifiedDate());
 		assertEquals(existingSocialRequest.getClassNameId(),
 			newSocialRequest.getClassNameId());
 		assertEquals(existingSocialRequest.getClassPK(),
@@ -162,8 +159,8 @@ public class SocialRequestPersistenceTest extends BasePersistenceTestCase {
 		socialRequest.setGroupId(nextLong());
 		socialRequest.setCompanyId(nextLong());
 		socialRequest.setUserId(nextLong());
-		socialRequest.setCreateDate(nextDate());
-		socialRequest.setModifiedDate(nextDate());
+		socialRequest.setCreateDate(nextLong());
+		socialRequest.setModifiedDate(nextLong());
 		socialRequest.setClassNameId(nextLong());
 		socialRequest.setClassPK(nextLong());
 		socialRequest.setType(nextInt());

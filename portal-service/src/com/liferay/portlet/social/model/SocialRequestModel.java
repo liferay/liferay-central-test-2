@@ -24,8 +24,6 @@ package com.liferay.portlet.social.model;
 
 import com.liferay.portal.model.BaseModel;
 
-import java.util.Date;
-
 /**
  * <a href="SocialRequestModel.java.html"><b><i>View Source</i></b></a>
  *
@@ -71,13 +69,13 @@ public interface SocialRequestModel extends BaseModel<SocialRequest> {
 
 	public void setUserId(long userId);
 
-	public Date getCreateDate();
+	public long getCreateDate();
 
-	public void setCreateDate(Date createDate);
+	public void setCreateDate(long createDate);
 
-	public Date getModifiedDate();
+	public long getModifiedDate();
 
-	public void setModifiedDate(Date modifiedDate);
+	public void setModifiedDate(long modifiedDate);
 
 	public String getClassName();
 

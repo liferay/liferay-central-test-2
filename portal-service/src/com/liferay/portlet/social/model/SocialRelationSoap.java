@@ -25,7 +25,6 @@ package com.liferay.portlet.social.model;
 import java.io.Serializable;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -133,11 +132,11 @@ public class SocialRelationSoap implements Serializable {
 		_companyId = companyId;
 	}
 
-	public Date getCreateDate() {
+	public long getCreateDate() {
 		return _createDate;
 	}
 
-	public void setCreateDate(Date createDate) {
+	public void setCreateDate(long createDate) {
 		_createDate = createDate;
 	}
 
@@ -168,7 +167,7 @@ public class SocialRelationSoap implements Serializable {
 	private String _uuid;
 	private long _relationId;
 	private long _companyId;
-	private Date _createDate;
+	private long _createDate;
 	private long _userId1;
 	private long _userId2;
 	private int _type;

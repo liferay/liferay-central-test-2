@@ -25,7 +25,6 @@ package com.liferay.portlet.social.model;
 import java.io.Serializable;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -145,11 +144,11 @@ public class SocialActivitySoap implements Serializable {
 		_userId = userId;
 	}
 
-	public Date getCreateDate() {
+	public long getCreateDate() {
 		return _createDate;
 	}
 
-	public void setCreateDate(Date createDate) {
+	public void setCreateDate(long createDate) {
 		_createDate = createDate;
 	}
 
@@ -205,7 +204,7 @@ public class SocialActivitySoap implements Serializable {
 	private long _groupId;
 	private long _companyId;
 	private long _userId;
-	private Date _createDate;
+	private long _createDate;
 	private long _mirrorActivityId;
 	private long _classNameId;
 	private long _classPK;

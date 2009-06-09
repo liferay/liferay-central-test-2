@@ -23,7 +23,6 @@
 package com.liferay.portlet.social.service.persistence;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
-import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.social.NoSuchActivityException;
@@ -75,7 +74,7 @@ public class SocialActivityPersistenceTest extends BasePersistenceTestCase {
 		newSocialActivity.setGroupId(nextLong());
 		newSocialActivity.setCompanyId(nextLong());
 		newSocialActivity.setUserId(nextLong());
-		newSocialActivity.setCreateDate(nextDate());
+		newSocialActivity.setCreateDate(nextLong());
 		newSocialActivity.setMirrorActivityId(nextLong());
 		newSocialActivity.setClassNameId(nextLong());
 		newSocialActivity.setClassPK(nextLong());
@@ -95,9 +94,8 @@ public class SocialActivityPersistenceTest extends BasePersistenceTestCase {
 			newSocialActivity.getCompanyId());
 		assertEquals(existingSocialActivity.getUserId(),
 			newSocialActivity.getUserId());
-		assertEquals(Time.getShortTimestamp(
-				existingSocialActivity.getCreateDate()),
-			Time.getShortTimestamp(newSocialActivity.getCreateDate()));
+		assertEquals(existingSocialActivity.getCreateDate(),
+			newSocialActivity.getCreateDate());
 		assertEquals(existingSocialActivity.getMirrorActivityId(),
 			newSocialActivity.getMirrorActivityId());
 		assertEquals(existingSocialActivity.getClassNameId(),
@@ -156,7 +154,7 @@ public class SocialActivityPersistenceTest extends BasePersistenceTestCase {
 		socialActivity.setGroupId(nextLong());
 		socialActivity.setCompanyId(nextLong());
 		socialActivity.setUserId(nextLong());
-		socialActivity.setCreateDate(nextDate());
+		socialActivity.setCreateDate(nextLong());
 		socialActivity.setMirrorActivityId(nextLong());
 		socialActivity.setClassNameId(nextLong());
 		socialActivity.setClassPK(nextLong());

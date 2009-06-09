@@ -34,8 +34,8 @@ public class SwapUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 		this(name, null, valueMapper);
 	}
 
-	public SwapUpgradeColumnImpl(String name, Integer oldColumnType,
-								 ValueMapper valueMapper) {
+	public SwapUpgradeColumnImpl(
+		String name, Integer oldColumnType, ValueMapper valueMapper) {
 
 		super(name, oldColumnType);
 

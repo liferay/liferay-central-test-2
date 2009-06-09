@@ -31,6 +31,13 @@ import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
+import com.liferay.portal.upgrade.util.DateUpgradeColumnImpl;
+import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
+import com.liferay.portal.upgrade.util.UpgradeColumn;
+import com.liferay.portal.upgrade.util.UpgradeTable;
+import com.liferay.portlet.social.model.impl.SocialActivityImpl;
+import com.liferay.portlet.social.model.impl.SocialRelationImpl;
+import com.liferay.portlet.social.model.impl.SocialRequestImpl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -56,6 +63,44 @@ public class UpgradeSocial extends UpgradeProcess {
 	}
 
 	protected void doUpgrade() throws Exception {
+
+		// SocialActivity
+
+		UpgradeColumn createDateColumn = new DateUpgradeColumnImpl(
+			"createDate");
+		UpgradeColumn modifiedDateColumn = new DateUpgradeColumnImpl(
+			"modifiedDate");
+
+		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
+			SocialActivityImpl.TABLE_NAME, SocialActivityImpl.TABLE_COLUMNS,
+			createDateColumn);
+
+		upgradeTable.setCreateSQL(SocialActivityImpl.TABLE_SQL_CREATE);
+
+		upgradeTable.updateTable();
+
+		// SocialRelation
+
+		upgradeTable = new DefaultUpgradeTableImpl(
+			SocialRelationImpl.TABLE_NAME, SocialRelationImpl.TABLE_COLUMNS,
+			createDateColumn);
+
+		upgradeTable.setCreateSQL(SocialRelationImpl.TABLE_SQL_CREATE);
+
+		upgradeTable.updateTable();
+
+		// SocialRequest
+
+		upgradeTable = new DefaultUpgradeTableImpl(
+			SocialRequestImpl.TABLE_NAME, SocialRequestImpl.TABLE_COLUMNS,
+			createDateColumn, modifiedDateColumn);
+
+		upgradeTable.setCreateSQL(SocialRequestImpl.TABLE_SQL_CREATE);
+
+		upgradeTable.updateTable();
+	}
+
+	protected void updateGroupId() throws Exception {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;

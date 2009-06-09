@@ -23,7 +23,6 @@
 package com.liferay.portlet.social.model.impl;
 
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
-import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -42,7 +41,6 @@ import java.lang.reflect.Proxy;
 import java.sql.Types;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -80,7 +78,7 @@ public class SocialActivityModelImpl extends BaseModelImpl<SocialActivity> {
 			{ "userId", new Integer(Types.BIGINT) },
 			
 
-			{ "createDate", new Integer(Types.TIMESTAMP) },
+			{ "createDate", new Integer(Types.BIGINT) },
 			
 
 			{ "mirrorActivityId", new Integer(Types.BIGINT) },
@@ -100,7 +98,7 @@ public class SocialActivityModelImpl extends BaseModelImpl<SocialActivity> {
 
 			{ "receiverUserId", new Integer(Types.BIGINT) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table SocialActivity (activityId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,createDate DATE null,mirrorActivityId LONG,classNameId LONG,classPK LONG,type_ INTEGER,extraData STRING null,receiverUserId LONG)";
+	public static final String TABLE_SQL_CREATE = "create table SocialActivity (activityId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,createDate LONG,mirrorActivityId LONG,classNameId LONG,classPK LONG,type_ INTEGER,extraData STRING null,receiverUserId LONG)";
 	public static final String TABLE_SQL_DROP = "drop table SocialActivity";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -210,19 +208,21 @@ public class SocialActivityModelImpl extends BaseModelImpl<SocialActivity> {
 		return _originalUserId;
 	}
 
-	public Date getCreateDate() {
+	public long getCreateDate() {
 		return _createDate;
 	}
 
-	public void setCreateDate(Date createDate) {
+	public void setCreateDate(long createDate) {
 		_createDate = createDate;
 
-		if (_originalCreateDate == null) {
+		if (!_setOriginalCreateDate) {
+			_setOriginalCreateDate = true;
+
 			_originalCreateDate = createDate;
 		}
 	}
 
-	public Date getOriginalCreateDate() {
+	public long getOriginalCreateDate() {
 		return _originalCreateDate;
 	}
 
@@ -392,8 +392,15 @@ public class SocialActivityModelImpl extends BaseModelImpl<SocialActivity> {
 	public int compareTo(SocialActivity socialActivity) {
 		int value = 0;
 
-		value = DateUtil.compareTo(getCreateDate(),
-				socialActivity.getCreateDate());
+		if (getCreateDate() < socialActivity.getCreateDate()) {
+			value = -1;
+		}
+		else if (getCreateDate() > socialActivity.getCreateDate()) {
+			value = 1;
+		}
+		else {
+			value = 0;
+		}
 
 		value = value * -1;
 
@@ -527,8 +534,9 @@ public class SocialActivityModelImpl extends BaseModelImpl<SocialActivity> {
 	private long _userId;
 	private long _originalUserId;
 	private boolean _setOriginalUserId;
-	private Date _createDate;
-	private Date _originalCreateDate;
+	private long _createDate;
+	private long _originalCreateDate;
+	private boolean _setOriginalCreateDate;
 	private long _mirrorActivityId;
 	private long _originalMirrorActivityId;
 	private boolean _setOriginalMirrorActivityId;

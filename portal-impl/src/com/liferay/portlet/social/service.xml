@@ -17,7 +17,7 @@
 
 		<column name="companyId" type="long" />
 		<column name="userId" type="long" />
-		<column name="createDate" type="Date" />
+		<column name="createDate" type="long" />
 
 		<!-- Other fields -->
 
@@ -90,7 +90,7 @@
 		<!-- Audit fields -->
 
 		<column name="companyId" type="long" />
-		<column name="createDate" type="Date" />
+		<column name="createDate" type="long" />
 
 		<!-- Other fields -->
 
@@ -149,8 +149,8 @@
 
 		<column name="companyId" type="long" />
 		<column name="userId" type="long" />
-		<column name="createDate" type="Date" />
-		<column name="modifiedDate" type="Date" />
+		<column name="createDate" type="long" />
+		<column name="modifiedDate" type="long" />
 
 		<!-- Other fields -->
 

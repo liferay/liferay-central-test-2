@@ -23,7 +23,6 @@
 package com.liferay.portlet.social.service.persistence;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
-import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.social.NoSuchRelationException;
@@ -74,7 +73,7 @@ public class SocialRelationPersistenceTest extends BasePersistenceTestCase {
 
 		newSocialRelation.setUuid(randomString());
 		newSocialRelation.setCompanyId(nextLong());
-		newSocialRelation.setCreateDate(nextDate());
+		newSocialRelation.setCreateDate(nextLong());
 		newSocialRelation.setUserId1(nextLong());
 		newSocialRelation.setUserId2(nextLong());
 		newSocialRelation.setType(nextInt());
@@ -89,9 +88,8 @@ public class SocialRelationPersistenceTest extends BasePersistenceTestCase {
 			newSocialRelation.getRelationId());
 		assertEquals(existingSocialRelation.getCompanyId(),
 			newSocialRelation.getCompanyId());
-		assertEquals(Time.getShortTimestamp(
-				existingSocialRelation.getCreateDate()),
-			Time.getShortTimestamp(newSocialRelation.getCreateDate()));
+		assertEquals(existingSocialRelation.getCreateDate(),
+			newSocialRelation.getCreateDate());
 		assertEquals(existingSocialRelation.getUserId1(),
 			newSocialRelation.getUserId1());
 		assertEquals(existingSocialRelation.getUserId2(),
@@ -143,7 +141,7 @@ public class SocialRelationPersistenceTest extends BasePersistenceTestCase {
 
 		socialRelation.setUuid(randomString());
 		socialRelation.setCompanyId(nextLong());
-		socialRelation.setCreateDate(nextDate());
+		socialRelation.setCreateDate(nextLong());
 		socialRelation.setUserId1(nextLong());
 		socialRelation.setUserId2(nextLong());
 		socialRelation.setType(nextInt());

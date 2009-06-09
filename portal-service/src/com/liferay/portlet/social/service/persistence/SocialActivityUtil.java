@@ -432,7 +432,7 @@ public class SocialActivityUtil {
 	}
 
 	public static com.liferay.portlet.social.model.SocialActivity findByG_U_CD_C_C_T_R(
-		long groupId, long userId, java.util.Date createDate, long classNameId,
+		long groupId, long userId, long createDate, long classNameId,
 		long classPK, int type, long receiverUserId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.social.NoSuchActivityException {
@@ -442,7 +442,7 @@ public class SocialActivityUtil {
 	}
 
 	public static com.liferay.portlet.social.model.SocialActivity fetchByG_U_CD_C_C_T_R(
-		long groupId, long userId, java.util.Date createDate, long classNameId,
+		long groupId, long userId, long createDate, long classNameId,
 		long classPK, int type, long receiverUserId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence()
@@ -451,7 +451,7 @@ public class SocialActivityUtil {
 	}
 
 	public static com.liferay.portlet.social.model.SocialActivity fetchByG_U_CD_C_C_T_R(
-		long groupId, long userId, java.util.Date createDate, long classNameId,
+		long groupId, long userId, long createDate, long classNameId,
 		long classPK, int type, long receiverUserId, boolean retrieveFromCache)
 		throws com.liferay.portal.SystemException {
 		return getPersistence()
@@ -529,7 +529,7 @@ public class SocialActivityUtil {
 	}
 
 	public static void removeByG_U_CD_C_C_T_R(long groupId, long userId,
-		java.util.Date createDate, long classNameId, long classPK, int type,
+		long createDate, long classNameId, long classPK, int type,
 		long receiverUserId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.social.NoSuchActivityException {
@@ -584,7 +584,7 @@ public class SocialActivityUtil {
 	}
 
 	public static int countByG_U_CD_C_C_T_R(long groupId, long userId,
-		java.util.Date createDate, long classNameId, long classPK, int type,
+		long createDate, long classNameId, long classPK, int type,
 		long receiverUserId) throws com.liferay.portal.SystemException {
 		return getPersistence()
 				   .countByG_U_CD_C_C_T_R(groupId, userId, createDate,

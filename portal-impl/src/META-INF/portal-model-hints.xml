@@ -1611,7 +1611,7 @@
 		<field name="groupId" type="long" />
 		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
-		<field name="createDate" type="Date" />
+		<field name="createDate" type="long" />
 		<field name="mirrorActivityId" type="long" />
 		<field name="classNameId" type="long" />
 		<field name="classPK" type="long" />
@@ -1625,7 +1625,7 @@
 		<field name="uuid" type="String" />
 		<field name="relationId" type="long" />
 		<field name="companyId" type="long" />
-		<field name="createDate" type="Date" />
+		<field name="createDate" type="long" />
 		<field name="userId1" type="long" />
 		<field name="userId2" type="long" />
 		<field name="type" type="int" />
@@ -1636,8 +1636,8 @@
 		<field name="groupId" type="long" />
 		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
-		<field name="createDate" type="Date" />
-		<field name="modifiedDate" type="Date" />
+		<field name="createDate" type="long" />
+		<field name="modifiedDate" type="long" />
 		<field name="classNameId" type="long" />
 		<field name="classPK" type="long" />
 		<field name="type" type="int" />

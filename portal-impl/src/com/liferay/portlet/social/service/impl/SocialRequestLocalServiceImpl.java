@@ -33,7 +33,6 @@ import com.liferay.portlet.social.model.SocialRequest;
 import com.liferay.portlet.social.model.SocialRequestConstants;
 import com.liferay.portlet.social.service.base.SocialRequestLocalServiceBaseImpl;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -54,7 +53,7 @@ public class SocialRequestLocalServiceImpl
 		User user = userPersistence.findByPrimaryKey(userId);
 		long classNameId = PortalUtil.getClassNameId(className);
 		User receiverUser = userPersistence.findByPrimaryKey(receiverUserId);
-		Date now = new Date();
+		long now = System.currentTimeMillis();
 
 		if ((userId == receiverUserId) || (user.isDefaultUser()) ||
 			(receiverUser.isDefaultUser()) ||
@@ -201,7 +200,7 @@ public class SocialRequestLocalServiceImpl
 		SocialRequest request = socialRequestPersistence.findByPrimaryKey(
 			requestId);
 
-		request.setModifiedDate(new Date());
+		request.setModifiedDate(System.currentTimeMillis());
 		request.setStatus(status);
 
 		socialRequestPersistence.update(request, false);

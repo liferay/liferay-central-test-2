@@ -22,60 +22,26 @@
 
 package com.liferay.portal.upgrade.util;
 
-import com.liferay.counter.service.CounterLocalServiceUtil;
-
 import java.sql.Types;
 
+import java.util.Date;
+
 /**
- * <a href="PKUpgradeColumnImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="DateUpgradeColumnImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- * @author Alexander Chow
  *
  */
-public class PKUpgradeColumnImpl extends BaseUpgradeColumnImpl {
+public class DateUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 
-	public PKUpgradeColumnImpl(String name, boolean trackValues) {
-		this(name, null, trackValues);
-	}
-
-	public PKUpgradeColumnImpl(
-		String name, Integer oldColumnType, boolean trackValues) {
-
-		super(name, oldColumnType);
-
-		_newColumnType = new Integer(Types.BIGINT);
-		_trackValues = trackValues;
-
-		if (_trackValues) {
-			_valueMapper = ValueMapperFactory.getValueMapper();
-		}
-	}
-
-	public Integer getNewColumnType(Integer defaultType) {
-		return _newColumnType;
+	public DateUpgradeColumnImpl(String name) {
+		super(name, new Integer(Types.TIMESTAMP));
 	}
 
 	public Object getNewValue(Object oldValue) throws Exception {
-		Long newValue = new Long(CounterLocalServiceUtil.increment());
+		Date oldDate = (Date)oldValue;
 
-		if (_trackValues) {
-			_valueMapper.mapValue(oldValue, newValue);
-		}
-
-		return newValue;
+		return oldDate.getTime();
 	}
-
-	public boolean isTrackValues() {
-		return _trackValues;
-	}
-
-	public ValueMapper getValueMapper() {
-		return _valueMapper;
-	}
-
-	private Integer _newColumnType;
-	private boolean _trackValues;
-	private ValueMapper _valueMapper;
 
 }

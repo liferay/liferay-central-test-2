@@ -39,7 +39,6 @@ import java.lang.reflect.Proxy;
 import java.sql.Types;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -74,7 +73,7 @@ public class SocialRelationModelImpl extends BaseModelImpl<SocialRelation> {
 			{ "companyId", new Integer(Types.BIGINT) },
 			
 
-			{ "createDate", new Integer(Types.TIMESTAMP) },
+			{ "createDate", new Integer(Types.BIGINT) },
 			
 
 			{ "userId1", new Integer(Types.BIGINT) },
@@ -85,7 +84,7 @@ public class SocialRelationModelImpl extends BaseModelImpl<SocialRelation> {
 
 			{ "type_", new Integer(Types.INTEGER) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table SocialRelation (uuid_ VARCHAR(75) null,relationId LONG not null primary key,companyId LONG,createDate DATE null,userId1 LONG,userId2 LONG,type_ INTEGER)";
+	public static final String TABLE_SQL_CREATE = "create table SocialRelation (uuid_ VARCHAR(75) null,relationId LONG not null primary key,companyId LONG,createDate LONG,userId1 LONG,userId2 LONG,type_ INTEGER)";
 	public static final String TABLE_SQL_DROP = "drop table SocialRelation";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -163,11 +162,11 @@ public class SocialRelationModelImpl extends BaseModelImpl<SocialRelation> {
 		_companyId = companyId;
 	}
 
-	public Date getCreateDate() {
+	public long getCreateDate() {
 		return _createDate;
 	}
 
-	public void setCreateDate(Date createDate) {
+	public void setCreateDate(long createDate) {
 		_createDate = createDate;
 	}
 
@@ -382,7 +381,7 @@ public class SocialRelationModelImpl extends BaseModelImpl<SocialRelation> {
 	private String _uuid;
 	private long _relationId;
 	private long _companyId;
-	private Date _createDate;
+	private long _createDate;
 	private long _userId1;
 	private long _originalUserId1;
 	private boolean _setOriginalUserId1;

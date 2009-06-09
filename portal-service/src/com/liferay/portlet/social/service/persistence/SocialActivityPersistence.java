@@ -304,18 +304,18 @@ public interface SocialActivityPersistence extends BasePersistence {
 			com.liferay.portlet.social.NoSuchActivityException;
 
 	public com.liferay.portlet.social.model.SocialActivity findByG_U_CD_C_C_T_R(
-		long groupId, long userId, java.util.Date createDate, long classNameId,
+		long groupId, long userId, long createDate, long classNameId,
 		long classPK, int type, long receiverUserId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.social.NoSuchActivityException;
 
 	public com.liferay.portlet.social.model.SocialActivity fetchByG_U_CD_C_C_T_R(
-		long groupId, long userId, java.util.Date createDate, long classNameId,
+		long groupId, long userId, long createDate, long classNameId,
 		long classPK, int type, long receiverUserId)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.social.model.SocialActivity fetchByG_U_CD_C_C_T_R(
-		long groupId, long userId, java.util.Date createDate, long classNameId,
+		long groupId, long userId, long createDate, long classNameId,
 		long classPK, int type, long receiverUserId, boolean retrieveFromCache)
 		throws com.liferay.portal.SystemException;
 
@@ -363,7 +363,7 @@ public interface SocialActivityPersistence extends BasePersistence {
 		long classPK) throws com.liferay.portal.SystemException;
 
 	public void removeByG_U_CD_C_C_T_R(long groupId, long userId,
-		java.util.Date createDate, long classNameId, long classPK, int type,
+		long createDate, long classNameId, long classPK, int type,
 		long receiverUserId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.social.NoSuchActivityException;
@@ -395,7 +395,7 @@ public interface SocialActivityPersistence extends BasePersistence {
 		long classPK) throws com.liferay.portal.SystemException;
 
 	public int countByG_U_CD_C_C_T_R(long groupId, long userId,
-		java.util.Date createDate, long classNameId, long classPK, int type,
+		long createDate, long classNameId, long classPK, int type,
 		long receiverUserId) throws com.liferay.portal.SystemException;
 
 	public int countAll() throws com.liferay.portal.SystemException;

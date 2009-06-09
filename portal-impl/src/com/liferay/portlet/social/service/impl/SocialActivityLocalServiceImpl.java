@@ -25,7 +25,6 @@ package com.liferay.portlet.social.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
-import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.User;
@@ -60,11 +59,11 @@ public class SocialActivityLocalServiceImpl
 		while (true) {
 			SocialActivity socialActivity =
 				socialActivityPersistence.fetchByG_U_CD_C_C_T_R(
-					groupId, userId, createDate, classNameId, classPK, type,
-					receiverUserId);
+					groupId, userId, createDate.getTime(), classNameId, classPK,
+					type, receiverUserId);
 
 			if (socialActivity != null) {
-				createDate = new Date(createDate.getTime() + Time.SECOND);
+				createDate = new Date(createDate.getTime() + 1);
 			}
 			else {
 				break;
@@ -108,7 +107,7 @@ public class SocialActivityLocalServiceImpl
 		activity.setGroupId(groupId);
 		activity.setCompanyId(user.getCompanyId());
 		activity.setUserId(user.getUserId());
-		activity.setCreateDate(createDate);
+		activity.setCreateDate(createDate.getTime());
 		activity.setMirrorActivityId(0);
 		activity.setClassNameId(classNameId);
 		activity.setClassPK(classPK);
@@ -128,7 +127,7 @@ public class SocialActivityLocalServiceImpl
 			mirrorActivity.setGroupId(groupId);
 			mirrorActivity.setCompanyId(user.getCompanyId());
 			mirrorActivity.setUserId(receiverUserId);
-			mirrorActivity.setCreateDate(createDate);
+			mirrorActivity.setCreateDate(createDate.getTime());
 			mirrorActivity.setMirrorActivityId(activityId);
 			mirrorActivity.setClassNameId(classNameId);
 			mirrorActivity.setClassPK(classPK);
@@ -161,8 +160,8 @@ public class SocialActivityLocalServiceImpl
 
 		SocialActivity socialActivity =
 			socialActivityPersistence.fetchByG_U_CD_C_C_T_R(
-				groupId, userId, createDate, classNameId, classPK, type,
-				receiverUserId);
+				groupId, userId, createDate.getTime(), classNameId, classPK,
+				type, receiverUserId);
 
 		if (socialActivity != null) {
 			return socialActivity;

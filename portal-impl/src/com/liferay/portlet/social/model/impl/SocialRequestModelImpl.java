@@ -41,7 +41,6 @@ import java.lang.reflect.Proxy;
 import java.sql.Types;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -82,10 +81,10 @@ public class SocialRequestModelImpl extends BaseModelImpl<SocialRequest> {
 			{ "userId", new Integer(Types.BIGINT) },
 			
 
-			{ "createDate", new Integer(Types.TIMESTAMP) },
+			{ "createDate", new Integer(Types.BIGINT) },
 			
 
-			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
+			{ "modifiedDate", new Integer(Types.BIGINT) },
 			
 
 			{ "classNameId", new Integer(Types.BIGINT) },
@@ -105,7 +104,7 @@ public class SocialRequestModelImpl extends BaseModelImpl<SocialRequest> {
 
 			{ "status", new Integer(Types.INTEGER) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table SocialRequest (uuid_ VARCHAR(75) null,requestId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,type_ INTEGER,extraData STRING null,receiverUserId LONG,status INTEGER)";
+	public static final String TABLE_SQL_CREATE = "create table SocialRequest (uuid_ VARCHAR(75) null,requestId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,createDate LONG,modifiedDate LONG,classNameId LONG,classPK LONG,type_ INTEGER,extraData STRING null,receiverUserId LONG,status INTEGER)";
 	public static final String TABLE_SQL_DROP = "drop table SocialRequest";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -233,19 +232,19 @@ public class SocialRequestModelImpl extends BaseModelImpl<SocialRequest> {
 		return _originalUserId;
 	}
 
-	public Date getCreateDate() {
+	public long getCreateDate() {
 		return _createDate;
 	}
 
-	public void setCreateDate(Date createDate) {
+	public void setCreateDate(long createDate) {
 		_createDate = createDate;
 	}
 
-	public Date getModifiedDate() {
+	public long getModifiedDate() {
 		return _modifiedDate;
 	}
 
-	public void setModifiedDate(Date modifiedDate) {
+	public void setModifiedDate(long modifiedDate) {
 		_modifiedDate = modifiedDate;
 	}
 
@@ -565,8 +564,8 @@ public class SocialRequestModelImpl extends BaseModelImpl<SocialRequest> {
 	private long _userId;
 	private long _originalUserId;
 	private boolean _setOriginalUserId;
-	private Date _createDate;
-	private Date _modifiedDate;
+	private long _createDate;
+	private long _modifiedDate;
 	private long _classNameId;
 	private long _originalClassNameId;
 	private boolean _setOriginalClassNameId;
