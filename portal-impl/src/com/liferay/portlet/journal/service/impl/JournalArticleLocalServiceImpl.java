@@ -98,7 +98,6 @@ import com.liferay.portlet.journal.util.Indexer;
 import com.liferay.portlet.journal.util.JournalUtil;
 import com.liferay.portlet.journal.util.comparator.ArticleVersionComparator;
 import com.liferay.portlet.journalcontent.util.JournalContentUtil;
-import com.liferay.portlet.tags.model.TagsEntryConstants;
 import com.liferay.util.LocalizationUtil;
 
 import java.io.File;
@@ -1489,10 +1488,9 @@ public class JournalArticleLocalServiceImpl
 		String type = article.getType();
 		Date displayDate = article.getDisplayDate();
 
-		String[] tagsCategories = tagsEntryLocalService.getEntryNames(
-			JournalArticle.class.getName(), resourcePrimKey,
-			TagsEntryConstants.FOLKSONOMY_CATEGORY);
-		String[] tagsEntries = tagsEntryLocalService.getEntryNames(
+		long[] assetCategoryIds = assetCategoryLocalService.getCategoryIds(
+			JournalArticle.class.getName(), resourcePrimKey);
+		String[] assetTagNames = assetTagLocalService.getTagNames(
 			JournalArticle.class.getName(), resourcePrimKey);
 
 		ExpandoBridge expandoBridge = article.getExpandoBridge();
@@ -1500,7 +1498,7 @@ public class JournalArticleLocalServiceImpl
 		try {
 			Indexer.updateArticle(
 				companyId, groupId, articleId, version, title, description,
-				content, type, displayDate, tagsCategories, tagsEntries,
+				content, type, displayDate, assetCategoryIds, assetTagNames,
 				expandoBridge);
 		}
 		catch (SearchException se) {

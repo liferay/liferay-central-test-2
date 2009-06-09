@@ -54,12 +54,12 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 	public static void addEntry(
 			long companyId, long groupId, long folderId, long entryId,
 			String name, String url, String comments, Date modifiedDate,
-			String[] tagsEntries, ExpandoBridge expandoBridge)
+			String[] assetTagNames, ExpandoBridge expandoBridge)
 		throws SearchException {
 
 		Document doc = getEntryDocument(
 			companyId, groupId, folderId, entryId, name, url, comments,
-			modifiedDate, tagsEntries, expandoBridge);
+			modifiedDate, assetTagNames, expandoBridge);
 
 		SearchEngineUtil.addDocument(companyId, doc);
 	}
@@ -72,7 +72,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 	public static Document getEntryDocument(
 		long companyId, long groupId, long folderId, long entryId, String name,
-		String url, String comments, Date modifiedDate, String[] tagsEntries,
+		String url, String comments, Date modifiedDate, String[] assetTagNames,
 		ExpandoBridge expandoBridge) {
 
 		Document doc = new DocumentImpl();
@@ -86,7 +86,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		doc.addKeyword(Field.GROUP_ID, groupId);
 
 		doc.addText(Field.TITLE, name);
-		doc.addKeyword(Field.TAGS_ENTRIES, tagsEntries);
+		doc.addKeyword(Field.ASSET_TAG_NAMES, assetTagNames);
 
 		doc.addKeyword("folderId", folderId);
 		doc.addKeyword(Field.ENTRY_CLASS_NAME, BookmarksEntry.class.getName());
@@ -110,12 +110,12 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 	public static void updateEntry(
 			long companyId, long groupId, long folderId, long entryId,
 			String name, String url, String comments, Date modifiedDate,
-			String[] tagsEntries, ExpandoBridge expandoBridge)
+			String[] assetTagNames, ExpandoBridge expandoBridge)
 		throws SearchException {
 
 		Document doc = getEntryDocument(
 			companyId, groupId, folderId, entryId, name, url, comments,
-			modifiedDate, tagsEntries, expandoBridge);
+			modifiedDate, assetTagNames, expandoBridge);
 
 		SearchEngineUtil.updateDocument(companyId, doc.get(Field.UID), doc);
 	}

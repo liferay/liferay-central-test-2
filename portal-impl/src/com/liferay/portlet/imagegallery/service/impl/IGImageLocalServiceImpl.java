@@ -55,7 +55,6 @@ import com.liferay.portlet.imagegallery.model.impl.IGImageImpl;
 import com.liferay.portlet.imagegallery.service.base.IGImageLocalServiceBaseImpl;
 import com.liferay.portlet.imagegallery.util.Indexer;
 import com.liferay.portlet.imagegallery.util.comparator.ImageModifiedDateComparator;
-import com.liferay.portlet.tags.model.TagsEntryConstants;
 
 import com.sun.media.jai.codec.ImageCodec;
 import com.sun.media.jai.codec.ImageEncoder;
@@ -505,10 +504,9 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 		String description = image.getDescription();
 		Date modifiedDate = image.getModifiedDate();
 
-		String[] tagsCategories = tagsEntryLocalService.getEntryNames(
-			IGImage.class.getName(), imageId,
-			TagsEntryConstants.FOLKSONOMY_CATEGORY);
-		String[] tagsEntries = tagsEntryLocalService.getEntryNames(
+		long[] assetCategoryIds = assetCategoryLocalService.getCategoryIds(
+			IGImage.class.getName(), imageId);
+		String[] assetTagNames = assetTagLocalService.getTagNames(
 			IGImage.class.getName(), imageId);
 
 		ExpandoBridge expandoBridge = image.getExpandoBridge();
@@ -516,7 +514,7 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 		try {
 			Indexer.updateImage(
 				companyId, groupId, folderId, imageId, name, description,
-				modifiedDate, tagsCategories, tagsEntries, expandoBridge);
+				modifiedDate, assetCategoryIds, assetTagNames, expandoBridge);
 		}
 		catch (SearchException se) {
 			_log.error("Reindexing " + imageId, se);

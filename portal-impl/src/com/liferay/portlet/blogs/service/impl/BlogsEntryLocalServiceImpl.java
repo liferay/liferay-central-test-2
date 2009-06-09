@@ -528,7 +528,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		String content = entry.getContent();
 		Date displayDate = entry.getDisplayDate();
 
-		String[] tagsEntries = tagsEntryLocalService.getEntryNames(
+		String[] assetTagNames = assetTagLocalService.getTagNames(
 			BlogsEntry.class.getName(), entryId);
 
 		ExpandoBridge expandoBridge = entry.getExpandoBridge();
@@ -536,7 +536,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		try {
 			Indexer.updateEntry(
 				companyId, groupId, userId, userName, entryId, title, content,
-				displayDate, tagsEntries, expandoBridge);
+				displayDate, assetTagNames, expandoBridge);
 		}
 		catch (SearchException se) {
 			_log.error("Reindexing " + entryId, se);

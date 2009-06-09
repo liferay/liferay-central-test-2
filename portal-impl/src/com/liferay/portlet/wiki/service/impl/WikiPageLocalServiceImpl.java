@@ -60,7 +60,6 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.expando.model.ExpandoBridge;
-import com.liferay.portlet.tags.model.TagsEntryConstants;
 import com.liferay.portlet.wiki.DuplicatePageException;
 import com.liferay.portlet.wiki.NoSuchPageException;
 import com.liferay.portlet.wiki.NoSuchPageResourceException;
@@ -864,10 +863,9 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		String content = page.getContent();
 		Date modifiedDate = page.getModifiedDate();
 
-		String[] tagsCategories = tagsEntryLocalService.getEntryNames(
-			WikiPage.class.getName(), resourcePrimKey,
-			TagsEntryConstants.FOLKSONOMY_CATEGORY);
-		String[] tagsEntries = tagsEntryLocalService.getEntryNames(
+		long[] assetCategoryIds = assetCategoryLocalService.getCategoryIds(
+			WikiPage.class.getName(), resourcePrimKey);
+		String[] assetTagNames = assetTagLocalService.getTagNames(
 			WikiPage.class.getName(), resourcePrimKey);
 
 		ExpandoBridge expandoBridge = page.getExpandoBridge();
@@ -875,7 +873,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		try {
 			Indexer.updatePage(
 				companyId, groupId, resourcePrimKey, nodeId, title, content,
-				modifiedDate, tagsCategories, tagsEntries, expandoBridge);
+				modifiedDate, assetCategoryIds, assetTagNames, expandoBridge);
 		}
 		catch (SearchException se) {
 			_log.error("Reindexing " + page.getPrimaryKey(), se);

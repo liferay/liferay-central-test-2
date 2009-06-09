@@ -1057,7 +1057,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		boolean anonymous = message.isAnonymous();
 		Date modifiedDate = message.getModifiedDate();
 
-		String[] tagsEntries = tagsEntryLocalService.getEntryNames(
+		String[] assetTagNames = assetTagLocalService.getTagNames(
 			MBMessage.class.getName(), messageId);
 
 		ExpandoBridge expandoBridge = message.getExpandoBridge();
@@ -1065,8 +1065,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		try {
 			Indexer.updateMessage(
 				companyId, groupId, userId, userName, categoryId, threadId,
-				messageId, title, content, anonymous, modifiedDate, tagsEntries,
-				expandoBridge);
+				messageId, title, content, anonymous, modifiedDate,
+				assetTagNames, expandoBridge);
 		}
 		catch (SearchException se) {
 			_log.error("Reindexing " + messageId, se);

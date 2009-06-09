@@ -353,7 +353,7 @@ public class BookmarksEntryLocalServiceImpl
 		String comments = entry.getComments();
 		Date modifiedDate = entry.getModifiedDate();
 
-		String[] tagsEntries = tagsEntryLocalService.getEntryNames(
+		String[] assetTagNames = assetTagLocalService.getTagNames(
 			BookmarksEntry.class.getName(), entryId);
 
 		ExpandoBridge expandoBridge = entry.getExpandoBridge();
@@ -361,7 +361,7 @@ public class BookmarksEntryLocalServiceImpl
 		try {
 			Indexer.updateEntry(
 				companyId, groupId, folderId, entryId, name, url, comments,
-				modifiedDate, tagsEntries, expandoBridge);
+				modifiedDate, assetTagNames, expandoBridge);
 		}
 		catch (SearchException se) {
 			_log.error("Reindexing " + entryId, se);
