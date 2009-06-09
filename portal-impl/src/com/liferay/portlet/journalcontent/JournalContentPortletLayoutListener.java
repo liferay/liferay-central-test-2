@@ -30,14 +30,11 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
-import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.journal.NoSuchContentSearchException;
 import com.liferay.portlet.journal.service.JournalContentSearchLocalServiceUtil;
 
 import javax.portlet.PortletPreferences;
-
-import org.springframework.mock.web.MockHttpServletRequest;
 
 /**
  * <a href="JournalContentPortletLayoutListener.java.html"><b><i>View Source</i>
@@ -83,15 +80,11 @@ public class JournalContentPortletLayoutListener
 	protected void deleteContentSearch(String portletId, long plid)
 		throws Exception {
 
-		MockHttpServletRequest request = new MockHttpServletRequest();
-
 		Layout layout = LayoutLocalServiceUtil.getLayout(plid);
-
-		request.setAttribute(WebKeys.LAYOUT, layout);
 
 		PortletPreferences preferences =
 			PortletPreferencesFactoryUtil.getPortletSetup(
-				request, portletId, StringPool.BLANK);
+				layout, portletId, StringPool.BLANK);
 
 		String articleId = preferences.getValue("article-id", null);
 
