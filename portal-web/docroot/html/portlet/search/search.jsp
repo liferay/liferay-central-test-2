@@ -215,8 +215,8 @@ for (int i = 0; i < portlets.size(); i++) {
 
 			String tagsKeywords = keywords;
 
-			if (StringUtil.startsWith(tagsKeywords, Field.TAGS_ENTRIES + StringPool.COLON)) {
-				tagsKeywords = StringUtil.replace(tagsKeywords, Field.TAGS_ENTRIES + StringPool.COLON, StringPool.BLANK);
+			if (StringUtil.startsWith(tagsKeywords, Field.ASSET_TAG_NAMES + StringPool.COLON)) {
+				tagsKeywords = StringUtil.replace(tagsKeywords, Field.ASSET_TAG_NAMES + StringPool.COLON, StringPool.BLANK);
 			}
 
 			for (int k = 0; k < tags.length; k++) {
@@ -224,7 +224,7 @@ for (int i = 0; i < portlets.size(); i++) {
 
 				PortletURL tagURL = PortletURLUtil.clone(portletURL, renderResponse);
 
-				tagURL.setParameter("keywords", Field.TAGS_ENTRIES + StringPool.COLON + tag);
+				tagURL.setParameter("keywords", Field.ASSET_TAG_NAMES + StringPool.COLON + tag);
 				tagURL.setParameter("format", format);
 
 				if (k == 0) {
@@ -320,8 +320,8 @@ String pageKeywords = LanguageUtil.get(pageContext, "search");
 if (Validator.isNotNull(keywords)) {
 	pageKeywords = keywords;
 
-	if (StringUtil.startsWith(pageKeywords, Field.TAGS_ENTRIES + StringPool.COLON)) {
-		pageKeywords = StringUtil.replace(pageKeywords, Field.TAGS_ENTRIES + StringPool.COLON, StringPool.BLANK);
+	if (StringUtil.startsWith(pageKeywords, Field.ASSET_TAG_NAMES + StringPool.COLON)) {
+		pageKeywords = StringUtil.replace(pageKeywords, Field.ASSET_TAG_NAMES + StringPool.COLON, StringPool.BLANK);
 	}
 }
 
