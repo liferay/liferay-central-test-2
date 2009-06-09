@@ -154,6 +154,11 @@ public class AssetTagLocalServiceUtil {
 		getService().deleteTag(tagId);
 	}
 
+	public static java.util.List<com.liferay.portlet.asset.model.AssetTag> getEntryTags(
+		long entryId) throws com.liferay.portal.SystemException {
+		return getService().getEntryTags(entryId);
+	}
+
 	public static java.util.List<com.liferay.portlet.asset.model.AssetTag> getGroupTags(
 		long groupId) throws com.liferay.portal.SystemException {
 		return getService().getGroupTags(groupId);
@@ -196,11 +201,6 @@ public class AssetTagLocalServiceUtil {
 	public static java.util.List<com.liferay.portlet.asset.model.AssetTag> getTags()
 		throws com.liferay.portal.SystemException {
 		return getService().getTags();
-	}
-
-	public static java.util.List<com.liferay.portlet.asset.model.AssetTag> getTags(
-		long entryId) throws com.liferay.portal.SystemException {
-		return getService().getTags(entryId);
 	}
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetTag> getTags(

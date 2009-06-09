@@ -356,6 +356,14 @@ public class IGImageLocalServiceUtil {
 		getService().reIndex(image);
 	}
 
+	public static void updateAsset(long userId,
+		com.liferay.portlet.imagegallery.model.IGImage image,
+		long[] assetCategoryIds, java.lang.String[] assetTagNames)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		getService().updateAsset(userId, image, assetCategoryIds, assetTagNames);
+	}
+
 	public static com.liferay.portlet.imagegallery.model.IGImage updateImage(
 		long userId, long imageId, long folderId, java.lang.String name,
 		java.lang.String description, byte[] bytes,
@@ -390,14 +398,6 @@ public class IGImageLocalServiceUtil {
 		return getService()
 				   .updateImage(userId, imageId, folderId, name, description,
 			is, contentType, serviceContext);
-	}
-
-	public static void updateTagsAsset(long userId,
-		com.liferay.portlet.imagegallery.model.IGImage image,
-		java.lang.String[] tagsCategories, java.lang.String[] tagsEntries)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		getService().updateTagsAsset(userId, image, tagsCategories, tagsEntries);
 	}
 
 	public static IGImageLocalService getService() {

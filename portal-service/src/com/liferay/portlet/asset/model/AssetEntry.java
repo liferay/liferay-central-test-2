@@ -49,4 +49,9 @@ package com.liferay.portlet.asset.model;
  *
  */
 public interface AssetEntry extends AssetEntryModel {
+	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> getCategories()
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.asset.model.AssetTag> getTags()
+		throws com.liferay.portal.SystemException;
 }

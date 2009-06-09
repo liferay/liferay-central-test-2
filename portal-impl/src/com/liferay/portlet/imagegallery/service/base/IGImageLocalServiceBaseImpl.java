@@ -41,6 +41,10 @@ import com.liferay.portal.service.persistence.UserFinder;
 import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.util.PortalUtil;
 
+import com.liferay.portlet.asset.service.AssetEntryLocalService;
+import com.liferay.portlet.asset.service.AssetEntryService;
+import com.liferay.portlet.asset.service.persistence.AssetEntryFinder;
+import com.liferay.portlet.asset.service.persistence.AssetEntryPersistence;
 import com.liferay.portlet.expando.service.ExpandoValueLocalService;
 import com.liferay.portlet.expando.service.ExpandoValueService;
 import com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence;
@@ -52,12 +56,8 @@ import com.liferay.portlet.imagegallery.service.IGImageService;
 import com.liferay.portlet.imagegallery.service.persistence.IGFolderPersistence;
 import com.liferay.portlet.imagegallery.service.persistence.IGImageFinder;
 import com.liferay.portlet.imagegallery.service.persistence.IGImagePersistence;
-import com.liferay.portlet.tags.service.TagsAssetLocalService;
-import com.liferay.portlet.tags.service.TagsAssetService;
 import com.liferay.portlet.tags.service.TagsEntryLocalService;
 import com.liferay.portlet.tags.service.TagsEntryService;
-import com.liferay.portlet.tags.service.persistence.TagsAssetFinder;
-import com.liferay.portlet.tags.service.persistence.TagsAssetPersistence;
 import com.liferay.portlet.tags.service.persistence.TagsEntryFinder;
 import com.liferay.portlet.tags.service.persistence.TagsEntryPersistence;
 
@@ -280,6 +280,40 @@ public abstract class IGImageLocalServiceBaseImpl implements IGImageLocalService
 		this.userFinder = userFinder;
 	}
 
+	public AssetEntryLocalService getAssetEntryLocalService() {
+		return assetEntryLocalService;
+	}
+
+	public void setAssetEntryLocalService(
+		AssetEntryLocalService assetEntryLocalService) {
+		this.assetEntryLocalService = assetEntryLocalService;
+	}
+
+	public AssetEntryService getAssetEntryService() {
+		return assetEntryService;
+	}
+
+	public void setAssetEntryService(AssetEntryService assetEntryService) {
+		this.assetEntryService = assetEntryService;
+	}
+
+	public AssetEntryPersistence getAssetEntryPersistence() {
+		return assetEntryPersistence;
+	}
+
+	public void setAssetEntryPersistence(
+		AssetEntryPersistence assetEntryPersistence) {
+		this.assetEntryPersistence = assetEntryPersistence;
+	}
+
+	public AssetEntryFinder getAssetEntryFinder() {
+		return assetEntryFinder;
+	}
+
+	public void setAssetEntryFinder(AssetEntryFinder assetEntryFinder) {
+		this.assetEntryFinder = assetEntryFinder;
+	}
+
 	public ExpandoValueLocalService getExpandoValueLocalService() {
 		return expandoValueLocalService;
 	}
@@ -304,40 +338,6 @@ public abstract class IGImageLocalServiceBaseImpl implements IGImageLocalService
 	public void setExpandoValuePersistence(
 		ExpandoValuePersistence expandoValuePersistence) {
 		this.expandoValuePersistence = expandoValuePersistence;
-	}
-
-	public TagsAssetLocalService getTagsAssetLocalService() {
-		return tagsAssetLocalService;
-	}
-
-	public void setTagsAssetLocalService(
-		TagsAssetLocalService tagsAssetLocalService) {
-		this.tagsAssetLocalService = tagsAssetLocalService;
-	}
-
-	public TagsAssetService getTagsAssetService() {
-		return tagsAssetService;
-	}
-
-	public void setTagsAssetService(TagsAssetService tagsAssetService) {
-		this.tagsAssetService = tagsAssetService;
-	}
-
-	public TagsAssetPersistence getTagsAssetPersistence() {
-		return tagsAssetPersistence;
-	}
-
-	public void setTagsAssetPersistence(
-		TagsAssetPersistence tagsAssetPersistence) {
-		this.tagsAssetPersistence = tagsAssetPersistence;
-	}
-
-	public TagsAssetFinder getTagsAssetFinder() {
-		return tagsAssetFinder;
-	}
-
-	public void setTagsAssetFinder(TagsAssetFinder tagsAssetFinder) {
-		this.tagsAssetFinder = tagsAssetFinder;
 	}
 
 	public TagsEntryLocalService getTagsEntryLocalService() {
@@ -421,20 +421,20 @@ public abstract class IGImageLocalServiceBaseImpl implements IGImageLocalService
 	protected UserPersistence userPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.UserFinder.impl")
 	protected UserFinder userFinder;
+	@BeanReference(name = "com.liferay.portlet.asset.service.AssetEntryLocalService.impl")
+	protected AssetEntryLocalService assetEntryLocalService;
+	@BeanReference(name = "com.liferay.portlet.asset.service.AssetEntryService.impl")
+	protected AssetEntryService assetEntryService;
+	@BeanReference(name = "com.liferay.portlet.asset.service.persistence.AssetEntryPersistence.impl")
+	protected AssetEntryPersistence assetEntryPersistence;
+	@BeanReference(name = "com.liferay.portlet.asset.service.persistence.AssetEntryFinder.impl")
+	protected AssetEntryFinder assetEntryFinder;
 	@BeanReference(name = "com.liferay.portlet.expando.service.ExpandoValueLocalService.impl")
 	protected ExpandoValueLocalService expandoValueLocalService;
 	@BeanReference(name = "com.liferay.portlet.expando.service.ExpandoValueService.impl")
 	protected ExpandoValueService expandoValueService;
 	@BeanReference(name = "com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence.impl")
 	protected ExpandoValuePersistence expandoValuePersistence;
-	@BeanReference(name = "com.liferay.portlet.tags.service.TagsAssetLocalService.impl")
-	protected TagsAssetLocalService tagsAssetLocalService;
-	@BeanReference(name = "com.liferay.portlet.tags.service.TagsAssetService.impl")
-	protected TagsAssetService tagsAssetService;
-	@BeanReference(name = "com.liferay.portlet.tags.service.persistence.TagsAssetPersistence.impl")
-	protected TagsAssetPersistence tagsAssetPersistence;
-	@BeanReference(name = "com.liferay.portlet.tags.service.persistence.TagsAssetFinder.impl")
-	protected TagsAssetFinder tagsAssetFinder;
 	@BeanReference(name = "com.liferay.portlet.tags.service.TagsEntryLocalService.impl")
 	protected TagsEntryLocalService tagsEntryLocalService;
 	@BeanReference(name = "com.liferay.portlet.tags.service.TagsEntryService.impl")

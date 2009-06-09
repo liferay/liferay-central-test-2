@@ -310,6 +310,14 @@ public class GroupLocalServiceUtil {
 		getService().unsetUserGroups(userId, groupIds);
 	}
 
+	public static void updateAsset(long userId,
+		com.liferay.portal.model.Group group, long[] assetCategoryIds,
+		java.lang.String[] assetTagNames)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		getService().updateAsset(userId, group, assetCategoryIds, assetTagNames);
+	}
+
 	public static com.liferay.portal.model.Group updateFriendlyURL(
 		long groupId, java.lang.String friendlyURL)
 		throws com.liferay.portal.PortalException,
@@ -333,14 +341,6 @@ public class GroupLocalServiceUtil {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService().updateGroup(groupId, typeSettings);
-	}
-
-	public static void updateTagsAsset(long userId,
-		com.liferay.portal.model.Group group,
-		java.lang.String[] tagsCategories, java.lang.String[] tagsEntries)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		getService().updateTagsAsset(userId, group, tagsCategories, tagsEntries);
 	}
 
 	public static com.liferay.portal.model.Group updateWorkflow(long groupId,

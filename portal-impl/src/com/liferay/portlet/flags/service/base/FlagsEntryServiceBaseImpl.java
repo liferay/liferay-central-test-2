@@ -55,11 +55,11 @@ import com.liferay.portal.service.persistence.UserGroupRolePersistence;
 import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.util.PortalUtil;
 
+import com.liferay.portlet.asset.service.AssetEntryLocalService;
+import com.liferay.portlet.asset.service.AssetEntryService;
+import com.liferay.portlet.asset.service.persistence.AssetEntryFinder;
+import com.liferay.portlet.asset.service.persistence.AssetEntryPersistence;
 import com.liferay.portlet.flags.service.FlagsEntryService;
-import com.liferay.portlet.tags.service.TagsAssetLocalService;
-import com.liferay.portlet.tags.service.TagsAssetService;
-import com.liferay.portlet.tags.service.persistence.TagsAssetFinder;
-import com.liferay.portlet.tags.service.persistence.TagsAssetPersistence;
 
 /**
  * <a href="FlagsEntryServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
@@ -298,38 +298,38 @@ public abstract class FlagsEntryServiceBaseImpl extends PrincipalBean
 		this.userGroupRolePersistence = userGroupRolePersistence;
 	}
 
-	public TagsAssetLocalService getTagsAssetLocalService() {
-		return tagsAssetLocalService;
+	public AssetEntryLocalService getAssetEntryLocalService() {
+		return assetEntryLocalService;
 	}
 
-	public void setTagsAssetLocalService(
-		TagsAssetLocalService tagsAssetLocalService) {
-		this.tagsAssetLocalService = tagsAssetLocalService;
+	public void setAssetEntryLocalService(
+		AssetEntryLocalService assetEntryLocalService) {
+		this.assetEntryLocalService = assetEntryLocalService;
 	}
 
-	public TagsAssetService getTagsAssetService() {
-		return tagsAssetService;
+	public AssetEntryService getAssetEntryService() {
+		return assetEntryService;
 	}
 
-	public void setTagsAssetService(TagsAssetService tagsAssetService) {
-		this.tagsAssetService = tagsAssetService;
+	public void setAssetEntryService(AssetEntryService assetEntryService) {
+		this.assetEntryService = assetEntryService;
 	}
 
-	public TagsAssetPersistence getTagsAssetPersistence() {
-		return tagsAssetPersistence;
+	public AssetEntryPersistence getAssetEntryPersistence() {
+		return assetEntryPersistence;
 	}
 
-	public void setTagsAssetPersistence(
-		TagsAssetPersistence tagsAssetPersistence) {
-		this.tagsAssetPersistence = tagsAssetPersistence;
+	public void setAssetEntryPersistence(
+		AssetEntryPersistence assetEntryPersistence) {
+		this.assetEntryPersistence = assetEntryPersistence;
 	}
 
-	public TagsAssetFinder getTagsAssetFinder() {
-		return tagsAssetFinder;
+	public AssetEntryFinder getAssetEntryFinder() {
+		return assetEntryFinder;
 	}
 
-	public void setTagsAssetFinder(TagsAssetFinder tagsAssetFinder) {
-		this.tagsAssetFinder = tagsAssetFinder;
+	public void setAssetEntryFinder(AssetEntryFinder assetEntryFinder) {
+		this.assetEntryFinder = assetEntryFinder;
 	}
 
 	protected void runSQL(String sql) throws SystemException {
@@ -397,12 +397,12 @@ public abstract class FlagsEntryServiceBaseImpl extends PrincipalBean
 	protected UserGroupRoleService userGroupRoleService;
 	@BeanReference(name = "com.liferay.portal.service.persistence.UserGroupRolePersistence.impl")
 	protected UserGroupRolePersistence userGroupRolePersistence;
-	@BeanReference(name = "com.liferay.portlet.tags.service.TagsAssetLocalService.impl")
-	protected TagsAssetLocalService tagsAssetLocalService;
-	@BeanReference(name = "com.liferay.portlet.tags.service.TagsAssetService.impl")
-	protected TagsAssetService tagsAssetService;
-	@BeanReference(name = "com.liferay.portlet.tags.service.persistence.TagsAssetPersistence.impl")
-	protected TagsAssetPersistence tagsAssetPersistence;
-	@BeanReference(name = "com.liferay.portlet.tags.service.persistence.TagsAssetFinder.impl")
-	protected TagsAssetFinder tagsAssetFinder;
+	@BeanReference(name = "com.liferay.portlet.asset.service.AssetEntryLocalService.impl")
+	protected AssetEntryLocalService assetEntryLocalService;
+	@BeanReference(name = "com.liferay.portlet.asset.service.AssetEntryService.impl")
+	protected AssetEntryService assetEntryService;
+	@BeanReference(name = "com.liferay.portlet.asset.service.persistence.AssetEntryPersistence.impl")
+	protected AssetEntryPersistence assetEntryPersistence;
+	@BeanReference(name = "com.liferay.portlet.asset.service.persistence.AssetEntryFinder.impl")
+	protected AssetEntryFinder assetEntryFinder;
 }

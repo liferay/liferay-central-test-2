@@ -253,17 +253,17 @@ public interface OrganizationLocalService {
 	public void unsetPasswordPolicyOrganizations(long passwordPolicyId,
 		long[] organizationIds) throws com.liferay.portal.SystemException;
 
+	public void updateAsset(long userId,
+		com.liferay.portal.model.Organization organization,
+		long[] assetCategoryIds, java.lang.String[] assetTagNames)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
 	public com.liferay.portal.model.Organization updateOrganization(
 		long companyId, long organizationId, long parentOrganizationId,
 		java.lang.String name, java.lang.String type, boolean recursable,
 		long regionId, long countryId, int statusId, java.lang.String comments,
 		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
-	public void updateTagsAsset(long userId,
-		com.liferay.portal.model.Organization organization,
-		java.lang.String[] tagsCategories, java.lang.String[] tagsEntries)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 }

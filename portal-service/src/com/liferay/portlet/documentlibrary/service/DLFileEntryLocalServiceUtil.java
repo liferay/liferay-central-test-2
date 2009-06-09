@@ -372,6 +372,15 @@ public class DLFileEntryLocalServiceUtil {
 		getService().reIndex(fileEntryId);
 	}
 
+	public static void updateAsset(long userId,
+		com.liferay.portlet.documentlibrary.model.DLFileEntry fileEntry,
+		long[] assetCategoryIds, java.lang.String[] assetTagNames)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		getService()
+			.updateAsset(userId, fileEntry, assetCategoryIds, assetTagNames);
+	}
+
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry updateFileEntry(
 		long userId, long folderId, long newFolderId, java.lang.String name,
 		java.lang.String sourceFileName, java.lang.String title,
@@ -411,15 +420,6 @@ public class DLFileEntryLocalServiceUtil {
 				   .updateFileEntry(userId, folderId, newFolderId, name,
 			sourceFileName, title, description, extraSettings, is, size,
 			serviceContext);
-	}
-
-	public static void updateTagsAsset(long userId,
-		com.liferay.portlet.documentlibrary.model.DLFileEntry fileEntry,
-		java.lang.String[] tagsCategories, java.lang.String[] tagsEntries)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		getService()
-			.updateTagsAsset(userId, fileEntry, tagsCategories, tagsEntries);
 	}
 
 	public static DLFileEntryLocalService getService() {

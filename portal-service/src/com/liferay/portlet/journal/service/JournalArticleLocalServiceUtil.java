@@ -782,10 +782,11 @@ public class JournalArticleLocalServiceUtil {
 
 	public static void updateAsset(long userId,
 		com.liferay.portlet.journal.model.JournalArticle article,
-		long[] assetCategoryIds, java.lang.String[] tagsEntries)
+		long[] assetCategoryIds, java.lang.String[] assetTagNames)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		getService().updateAsset(userId, article, assetCategoryIds, tagsEntries);
+		getService()
+			.updateAsset(userId, article, assetCategoryIds, assetTagNames);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalArticle updateArticle(

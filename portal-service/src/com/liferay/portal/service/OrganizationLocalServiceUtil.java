@@ -322,6 +322,15 @@ public class OrganizationLocalServiceUtil {
 			.unsetPasswordPolicyOrganizations(passwordPolicyId, organizationIds);
 	}
 
+	public static void updateAsset(long userId,
+		com.liferay.portal.model.Organization organization,
+		long[] assetCategoryIds, java.lang.String[] assetTagNames)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		getService()
+			.updateAsset(userId, organization, assetCategoryIds, assetTagNames);
+	}
+
 	public static com.liferay.portal.model.Organization updateOrganization(
 		long companyId, long organizationId, long parentOrganizationId,
 		java.lang.String name, java.lang.String type, boolean recursable,
@@ -333,15 +342,6 @@ public class OrganizationLocalServiceUtil {
 				   .updateOrganization(companyId, organizationId,
 			parentOrganizationId, name, type, recursable, regionId, countryId,
 			statusId, comments, serviceContext);
-	}
-
-	public static void updateTagsAsset(long userId,
-		com.liferay.portal.model.Organization organization,
-		java.lang.String[] tagsCategories, java.lang.String[] tagsEntries)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		getService()
-			.updateTagsAsset(userId, organization, tagsCategories, tagsEntries);
 	}
 
 	public static OrganizationLocalService getService() {

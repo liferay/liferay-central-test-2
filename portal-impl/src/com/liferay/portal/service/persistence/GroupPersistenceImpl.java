@@ -4145,6 +4145,8 @@ public class GroupPersistenceImpl extends BasePersistenceImpl
 	protected com.liferay.portal.service.persistence.WebDAVPropsPersistence webDAVPropsPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.WebsitePersistence.impl")
 	protected com.liferay.portal.service.persistence.WebsitePersistence websitePersistence;
+	@BeanReference(name = "com.liferay.portlet.asset.service.persistence.AssetEntryPersistence.impl")
+	protected com.liferay.portlet.asset.service.persistence.AssetEntryPersistence assetEntryPersistence;
 	@BeanReference(name = "com.liferay.portlet.blogs.service.persistence.BlogsEntryPersistence.impl")
 	protected com.liferay.portlet.blogs.service.persistence.BlogsEntryPersistence blogsEntryPersistence;
 	@BeanReference(name = "com.liferay.portlet.blogs.service.persistence.BlogsStatsUserPersistence.impl")
@@ -4185,8 +4187,6 @@ public class GroupPersistenceImpl extends BasePersistenceImpl
 	protected com.liferay.portlet.softwarecatalog.service.persistence.SCProductEntryPersistence scProductEntryPersistence;
 	@BeanReference(name = "com.liferay.portlet.tasks.service.persistence.TasksProposalPersistence.impl")
 	protected com.liferay.portlet.tasks.service.persistence.TasksProposalPersistence tasksProposalPersistence;
-	@BeanReference(name = "com.liferay.portlet.tags.service.persistence.TagsAssetPersistence.impl")
-	protected com.liferay.portlet.tags.service.persistence.TagsAssetPersistence tagsAssetPersistence;
 	@BeanReference(name = "com.liferay.portlet.wiki.service.persistence.WikiNodePersistence.impl")
 	protected com.liferay.portlet.wiki.service.persistence.WikiNodePersistence wikiNodePersistence;
 	protected ContainsOrganization containsOrganization;
