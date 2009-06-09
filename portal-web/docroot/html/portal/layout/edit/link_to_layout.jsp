@@ -60,8 +60,10 @@
 					depth = GetterUtil.getInteger(nodeValues[6]);
 				}
 
+				name = HtmlUtil.escape(name);
+
 				for (int j = 0; j < depth; j++) {
-					name = "-&nbsp;" + HtmlUtil.escape(name);
+					name = "-&nbsp;" + name;
 				}
 
 				Layout linkableLayout = null;
