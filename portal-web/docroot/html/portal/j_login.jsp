@@ -55,8 +55,8 @@ String jPassword = (String)session.getAttribute("j_password");
 		<tr>
 			<td align="center" valign="middle">
 				<form action="<%= jSecurityCheck %>" method="post" name="fm">
-				<input name="j_username" type="hidden" value="<%= jUserName %>" />
-				<input name="j_password" type="hidden" value="<%= jPassword %>" />
+				<input name="j_username" type="hidden" value="<%= HtmlUtil.escapeAttribute(jUserName) %>" />
+				<input name="j_password" type="hidden" value="<%= HtmlUtil.escapeAttribute(jPassword) %>" />
 				</form>
 
 				<font face="Verdana, Tahoma, Arial" size="3">

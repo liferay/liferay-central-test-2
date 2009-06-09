@@ -25,9 +25,9 @@
 <%@ include file="/html/portal/init.jsp" %>
 
 <form action="<%= themeDisplay.getPathMain() %>/portal/update_reminder_query" class="exp-form" method="post" name="fm" onSubmit="submitForm(document.fm); return false;">
-<input name="doAsUserId" type="hidden" value="<%= HtmlUtil.escape(themeDisplay.getDoAsUserId()) %>" />
+<input name="doAsUserId" type="hidden" value="<%= HtmlUtil.escapeAttribute(themeDisplay.getDoAsUserId()) %>" />
 <input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
-<input name="<%= WebKeys.REFERER %>" type="hidden" value="<%= themeDisplay.getPathMain() %>?doAsUserId=<%= themeDisplay.getDoAsUserId() %>" />
+<input name="<%= WebKeys.REFERER %>" type="hidden" value="<%= themeDisplay.getPathMain() %>?doAsUserId=<%= HtmlUtil.escapeAttribute(themeDisplay.getDoAsUserId()) %>" />
 
 <span class="portlet-msg-info">
 	<liferay-ui:message key="please-choose-a-reminder-query" />
@@ -72,7 +72,7 @@
 	<div class="exp-ctrl-holder">
 		<label for="reminderQueryAnswer"><liferay-ui:message key="answer" /></label>
 
-		<input id="reminderQueryAnswer" name="reminderQueryAnswer" size="50" type="text" value="<%= user.getReminderQueryAnswer() %>" />
+		<input id="reminderQueryAnswer" name="reminderQueryAnswer" size="50" type="text" value="<%= HtmlUtil.escapeAttribute(user.getReminderQueryAnswer()) %>" />
 	</div>
 </fieldset>
 

@@ -229,7 +229,7 @@ if (Validator.isNotNull(ppid)) {
 									<liferay-ui:message key="portal" />
 
 									<c:if test="<%= CompanyLocalServiceUtil.getCompaniesCount(false) > 1 %>">
-										<%= company.getName() %>
+										<%= HtmlUtil.escape(company.getName()) %>
 									</c:if>
 								</h2>
 							</c:when>
@@ -239,7 +239,7 @@ if (Validator.isNotNull(ppid)) {
 								String title = category;
 
 								if (category.equals(PortletCategoryKeys.MY)) {
-									title = user.getFullName();
+									title = HtmlUtil.escape(user.getFullName());
 								}
 
 								if (Validator.isNotNull(category)) {

@@ -29,9 +29,9 @@ PasswordPolicy passwordPolicy = user.getPasswordPolicy();
 %>
 
 <form action="<%= themeDisplay.getPathMain() %>/portal/update_password" class="exp-form" method="post" name="fm" onSubmit="submitForm(document.fm); return false;">
-<input name="doAsUserId" type="hidden" value="<%= HtmlUtil.escape(themeDisplay.getDoAsUserId()) %>" />
+<input name="doAsUserId" type="hidden" value="<%= HtmlUtil.escapeAttribute(themeDisplay.getDoAsUserId()) %>" />
 <input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
-<input name="<%= WebKeys.REFERER %>" type="hidden" value="<%= themeDisplay.getPathMain() %>?doAsUserId=<%= themeDisplay.getDoAsUserId() %>" />
+<input name="<%= WebKeys.REFERER %>" type="hidden" value="<%= themeDisplay.getPathMain() %>?doAsUserId=<%= HtmlUtil.escapeAttribute(themeDisplay.getDoAsUserId()) %>" />
 
 <span class="portlet-msg-info">
 	<liferay-ui:message key="please-set-a-new-password" />

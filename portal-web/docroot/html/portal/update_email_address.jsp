@@ -30,9 +30,9 @@ String emailAddress2 = ParamUtil.getString(request, "emailAddress2");
 %>
 
 <form action="<%= themeDisplay.getPathMain() %>/portal/update_email_address" class="exp-form" method="post" name="fm" onSubmit="submitForm(document.fm); return false;">
-<input name="doAsUserId" type="hidden" value="<%= HtmlUtil.escape(themeDisplay.getDoAsUserId()) %>" />
+<input name="doAsUserId" type="hidden" value="<%= HtmlUtil.escapeAttribute(themeDisplay.getDoAsUserId()) %>" />
 <input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
-<input name="<%= WebKeys.REFERER %>" type="hidden" value="<%= themeDisplay.getPathMain() %>?doAsUserId=<%= themeDisplay.getDoAsUserId() %>" />
+<input name="<%= WebKeys.REFERER %>" type="hidden" value="<%= themeDisplay.getPathMain() %>?doAsUserId=<%= HtmlUtil.escapeAttribute(themeDisplay.getDoAsUserId()) %>" />
 
 <c:choose>
 	<c:when test="<%= SessionErrors.contains(request, DuplicateUserEmailAddressException.class.getName()) %>">
@@ -63,13 +63,13 @@ String emailAddress2 = ParamUtil.getString(request, "emailAddress2");
 	<div class="exp-ctrl-holder">
 		<label for="emailAddress1"><liferay-ui:message key="email-address" /></label>
 
-		<input class="lfr-input-text" name="emailAddress1" type="text" value="<%= emailAddress1 %>" />
+		<input class="lfr-input-text" name="emailAddress1" type="text" value="<%= HtmlUtil.escapeAttribute(emailAddress1) %>" />
 	</div>
 
 	<div class="exp-ctrl-holder">
 		<label for="emailAddress2"><liferay-ui:message key="enter-again" /></label>
 
-		<input class="lfr-input-text" name="emailAddress2" type="text" value="<%= emailAddress2 %>" />
+		<input class="lfr-input-text" name="emailAddress2" type="text" value="<%= HtmlUtil.escapeAttribute(emailAddress2) %>" />
 	</div>
 </fieldset>
 

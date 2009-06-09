@@ -25,8 +25,8 @@
 <%@ include file="/html/portal/init.jsp" %>
 
 <form action="<%= themeDisplay.getPathMain() %>/portal/update_terms_of_use" name="fm">
-<input name="doAsUserId" type="hidden" value="<%= HtmlUtil.escape(themeDisplay.getDoAsUserId()) %>" />
-<input name="<%= WebKeys.REFERER %>" type="hidden" value="<%= themeDisplay.getPathMain() %>?doAsUserId=<%= themeDisplay.getDoAsUserId() %>" />
+<input name="doAsUserId" type="hidden" value="<%= HtmlUtil.escapeAttribute(themeDisplay.getDoAsUserId()) %>" />
+<input name="<%= WebKeys.REFERER %>" type="hidden" value="<%= themeDisplay.getPathMain() %>?doAsUserId=<%= HtmlUtil.escapeAttribute(themeDisplay.getDoAsUserId()) %>" />
 
 <c:choose>
 	<c:when test="<%= (PropsValues.TERMS_OF_USE_JOURNAL_ARTICLE_GROUP_ID > 0) && Validator.isNotNull(PropsValues.TERMS_OF_USE_JOURNAL_ARTICLE_ID) %>">

@@ -61,7 +61,7 @@
 				}
 
 				for (int j = 0; j < depth; j++) {
-					name = "-&nbsp;" + name;
+					name = "-&nbsp;" + HtmlUtil.escape(name);
 				}
 
 				Layout linkableLayout = null;
@@ -75,7 +75,7 @@
 				if (linkableLayout != null) {
 			%>
 
-					<option <%= (linkToLayoutId == linkableLayout.getLayoutId()) ? "selected" : "" %> value="<%= linkableLayout.getLayoutId() %>"><%= HtmlUtil.escape(name) %></option>
+					<option <%= (linkToLayoutId == linkableLayout.getLayoutId()) ? "selected" : "" %> value="<%= linkableLayout.getLayoutId() %>"><%= name %></option>
 
 			<%
 				}

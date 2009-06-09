@@ -54,7 +54,7 @@
 				}
 
 				for (int j = 0; j < depth; j++) {
-					name = "-&nbsp;" + name;
+					name = "-&nbsp;" + HtmlUtil.escape(name);
 				}
 
 				Layout copiableLayout = null;

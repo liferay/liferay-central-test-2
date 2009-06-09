@@ -423,7 +423,7 @@ portletDisplay.setURLPortlet(themeDisplay.getCDNHost() + portletIcon);
 
 // URL close
 
-String urlClose = themeDisplay.getPathMain() + "/portal/update_layout?p_l_id=" + plid + "&p_p_id=" + portletDisplay.getId() + "&doAsUserId=" + HtmlUtil.escape(themeDisplay.getDoAsUserId()) + "&" + Constants.CMD + "=" + Constants.DELETE + "&referer=" + HttpUtil.encodeURL(themeDisplay.getPathMain() + "/portal/layout?p_l_id=" + plid + "&doAsUserId=" + themeDisplay.getDoAsUserId()) + "&refresh=1";
+String urlClose = themeDisplay.getPathMain() + "/portal/update_layout?p_l_id=" + plid + "&p_p_id=" + portletDisplay.getId() + "&doAsUserId=" + HttpUtil.encodeURL(themeDisplay.getDoAsUserId()) + "&" + Constants.CMD + "=" + Constants.DELETE + "&referer=" + HttpUtil.encodeURL(themeDisplay.getPathMain() + "/portal/layout?p_l_id=" + plid + "&doAsUserId=" + themeDisplay.getDoAsUserId()) + "&refresh=1";
 
 portletDisplay.setURLClose(urlClose.toString());
 
@@ -605,7 +605,7 @@ portletDisplay.setURLMax(urlMax.toString());
 
 // URL min
 
-String urlMin = themeDisplay.getPathMain() + "/portal/update_layout?p_l_id=" + plid + "&p_p_id=" + portletDisplay.getId() + "&p_p_restore=" + portletDisplay.isStateMin() + "&doAsUserId=" + HtmlUtil.escape(themeDisplay.getDoAsUserId()) + "&" + Constants.CMD + "=minimize&referer=" + HttpUtil.encodeURL(themeDisplay.getPathMain() + "/portal/layout?p_l_id=" + plid + "&doAsUserId=" + themeDisplay.getDoAsUserId()) + "&refresh=1";
+String urlMin = themeDisplay.getPathMain() + "/portal/update_layout?p_l_id=" + plid + "&p_p_id=" + portletDisplay.getId() + "&p_p_restore=" + portletDisplay.isStateMin() + "&doAsUserId=" + HttpUtil.encodeURL(themeDisplay.getDoAsUserId()) + "&" + Constants.CMD + "=minimize&referer=" + HttpUtil.encodeURL(themeDisplay.getPathMain() + "/portal/layout?p_l_id=" + plid + "&doAsUserId=" + themeDisplay.getDoAsUserId()) + "&refresh=1";
 
 portletDisplay.setURLMin(urlMin);
 
@@ -791,11 +791,11 @@ if ((layout.getType().equals(LayoutConstants.TYPE_PANEL) || layout.getType().equ
 		cssClasses += " portlet-minimized";
 	}
 
-	cssClasses = "portlet-boundary portlet-boundary" + HtmlUtil.escape(PortalUtil.getPortletNamespace(rootPortletId)) + StringPool.SPACE + cssClasses + StringPool.SPACE + portlet.getCssClassWrapper();
+	cssClasses = "portlet-boundary portlet-boundary" + HtmlUtil.escapeAttribute(PortalUtil.getPortletNamespace(rootPortletId)) + StringPool.SPACE + cssClasses + StringPool.SPACE + portlet.getCssClassWrapper();
 	%>
 
-	<div id="p_p_id<%= HtmlUtil.escape(renderResponseImpl.getNamespace()) %>" class="<%= cssClasses %>" <%= freeformStyles %>>
-		<a id="p_<%= HtmlUtil.escape(portletId) %>"></a>
+	<div id="p_p_id<%= HtmlUtil.escapeAttribute(renderResponseImpl.getNamespace()) %>" class="<%= cssClasses %>" <%= freeformStyles %>>
+		<a id="p_<%= HtmlUtil.escapeAttribute(portletId) %>"></a>
 </c:if>
 
 <c:choose>
