@@ -40,7 +40,7 @@ public class SetupTest extends BaseTestCase {
 
 			try {
 				if (selenium.isElementPresent(
-							"//a[@id=\"my-community-private-pages\"]")) {
+							"//div[@id='_145_myPlacesContainer']/ul/li[2]/a/span[1]")) {
 					break;
 				}
 			}
@@ -51,7 +51,7 @@ public class SetupTest extends BaseTestCase {
 		}
 
 		selenium.click(RuntimeVariables.replace(
-				"//a[@id=\"my-community-private-pages\"]"));
+				"//div[@id='_145_myPlacesContainer']/ul/li[2]/a/span[1]"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Control Panel"));
 		selenium.waitForPageToLoad("30000");

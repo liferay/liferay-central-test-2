@@ -40,7 +40,7 @@ public class AddPageTest extends BaseTestCase {
 
 			try {
 				if (selenium.isElementPresent(
-							"//a[@id=\"my-community-private-pages\"]")) {
+							"//div[@id='_145_myPlacesContainer']/ul/li[2]/a")) {
 					break;
 				}
 			}
@@ -51,48 +51,21 @@ public class AddPageTest extends BaseTestCase {
 		}
 
 		selenium.click(RuntimeVariables.replace(
-				"//a[@id=\"my-community-private-pages\"]"));
+				"//div[@id='_145_myPlacesContainer']/ul/li[2]/a"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//div/a/span");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("new_page")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.typeKeys("new_page",
+		selenium.click(RuntimeVariables.replace("link=Home"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("link=Manage Pages"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace(
+				"//div[@id='_88_layoutsTreeOutput']/ul/li[2]/a/span"));
+		selenium.waitForPageToLoad("30000");
+		selenium.typeKeys("_88_name_en_US",
 			RuntimeVariables.replace("Web Prox Test Page"));
-		selenium.type("new_page",
+		selenium.type("_88_name_en_US",
 			RuntimeVariables.replace("Web Proxy Test Page"));
-		selenium.click("link=Save");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Web Proxy Test Page")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
+		selenium.click(RuntimeVariables.replace("//input[@value='Add Page']"));
+		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Web Proxy Test Page"));
 		selenium.waitForPageToLoad("30000");
 	}

@@ -82,7 +82,7 @@ public class SignInWithOutRememberMeTest extends BaseTestCase {
 
 			try {
 				if (selenium.isElementPresent(
-							"//a[@id=\"my-community-private-pages\"]")) {
+							"//div[@id='_145_myPlacesContainer']/ul/li[2]/a/span[1]")) {
 					break;
 				}
 			}
@@ -93,7 +93,7 @@ public class SignInWithOutRememberMeTest extends BaseTestCase {
 		}
 
 		selenium.click(RuntimeVariables.replace(
-				"//a[@id=\"my-community-private-pages\"]"));
+				"//div[@id='_145_myPlacesContainer']/ul/li[2]/a/span[1]"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

@@ -71,5 +71,7 @@ public class RevertMinorArticleChangeTest extends BaseTestCase {
 		assertTrue(selenium.isTextPresent(
 				"I love Liferay! This Wiki has been EDITED!"));
 		assertTrue(selenium.isTextPresent("Yes this is a second test article"));
+		assertFalse(selenium.isTextPresent(
+				"Oh NOES! I've made a minor change. Please revert this!"));
 	}
 }

@@ -101,7 +101,7 @@ public class TearDownTest extends BaseTestCase {
 		}
 
 		selenium.click("//td[5]/ul/li/strong/span");
-		selenium.click(RuntimeVariables.replace("//div[4]/ul/li[6]/a"));
+		selenium.click(RuntimeVariables.replace("//div[5]/ul/li[6]/a"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
@@ -123,7 +123,7 @@ public class TearDownTest extends BaseTestCase {
 		}
 
 		selenium.click("//td[5]/ul/li/strong/span");
-		selenium.click(RuntimeVariables.replace("//div[4]/ul/li[6]/a"));
+		selenium.click(RuntimeVariables.replace("//div[5]/ul/li[6]/a"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
@@ -147,7 +147,7 @@ public class TearDownTest extends BaseTestCase {
 		}
 
 		selenium.click("//td[4]/ul/li/strong/span");
-		selenium.click(RuntimeVariables.replace("//div[4]/ul/li[6]/a"));
+		selenium.click(RuntimeVariables.replace("//div[5]/ul/li[6]/a"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
@@ -169,20 +169,23 @@ public class TearDownTest extends BaseTestCase {
 		}
 
 		selenium.click("//td[4]/ul/li/strong/span");
-		selenium.click(RuntimeVariables.replace("//div[4]/ul/li[6]/a"));
+		selenium.click(RuntimeVariables.replace("//div[5]/ul/li[6]/a"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
-		selenium.click(RuntimeVariables.replace("//div[2]/ul/li[1]/a"));
+		selenium.click(RuntimeVariables.replace("link=Home"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//li[2]/a[2]"));
+		selenium.click(RuntimeVariables.replace("link=Manage Pages"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace(
+				"//div[@id='_88_layoutsTreeOutput']/ul/li[2]/a/span"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Display Order"));
 		selenium.waitForPageToLoad("30000");
-		selenium.select("_2_layoutIdsBox",
+		selenium.select("_88_layoutIdsBox",
 			RuntimeVariables.replace("label=WD Setup Test Page"));
 		selenium.click("//a[3]/img");
-		selenium.select("_2_layoutIdsBox",
+		selenium.select("_88_layoutIdsBox",
 			RuntimeVariables.replace("label=Wiki Display Test Page"));
 		selenium.click("//a[3]/img");
 		selenium.click(RuntimeVariables.replace(

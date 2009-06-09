@@ -55,7 +55,7 @@ public class RemoveRedirectTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=First"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//div/div/div[3]"));
+		selenium.click(RuntimeVariables.replace("//div[2]/div/div/div[3]"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"This page is currently redirected to Rename to Second."));

@@ -74,9 +74,9 @@ public class MinorArticleChangeTest extends BaseTestCase {
 
 		selenium.type("_36_content",
 			RuntimeVariables.replace(
-				"<<TableOfContents>>\n\n== This is a second test article ==\n\n====Yes this is a second test article ====\n\nI love Liferay! This Wiki has been EDITED!\n\nOh NOES! I've made a minor change. Please revert this!"));
+				"&lt;&lt;TableOfContents&gt;&gt;\n\n== This is a second test article ==\n\n====Yes this is a second test article ====\n\nI love Liferay! This Wiki has been EDITED!\n\nOh NOES! I've made a minor change. Please revert this!"));
 		assertTrue(selenium.isElementPresent("_36_minorEditCheckbox"));
-		assertTrue(selenium.isChecked("_36_minorEditCheckbox"));
+		selenium.check("_36_minorEditCheckbox");
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(

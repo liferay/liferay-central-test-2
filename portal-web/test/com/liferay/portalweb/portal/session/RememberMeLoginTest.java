@@ -52,8 +52,6 @@ public class RememberMeLoginTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 
 			case 2:
-				selenium.click(RuntimeVariables.replace("//li[2]/a"));
-				selenium.waitForPageToLoad("30000");
 				selenium.type("_58_login",
 					RuntimeVariables.replace("test@liferay.com"));
 				selenium.type("_58_password", RuntimeVariables.replace("test"));
@@ -87,7 +85,7 @@ public class RememberMeLoginTest extends BaseTestCase {
 
 					try {
 						if (selenium.isElementPresent(
-									"//a[@id=\"my-community-private-pages\"]")) {
+									"//div[@id='_145_myPlacesContainer']/ul/li[2]/a/span[1]")) {
 							break;
 						}
 					}
@@ -98,7 +96,7 @@ public class RememberMeLoginTest extends BaseTestCase {
 				}
 
 				selenium.click(RuntimeVariables.replace(
-						"//a[@id=\"my-community-private-pages\"]"));
+						"//div[@id='_145_myPlacesContainer']/ul/li[2]/a/span[1]"));
 				selenium.waitForPageToLoad("30000");
 
 				for (int second = 0;; second++) {

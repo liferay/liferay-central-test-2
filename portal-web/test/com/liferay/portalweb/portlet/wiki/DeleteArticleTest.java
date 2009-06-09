@@ -73,7 +73,7 @@ public class DeleteArticleTest extends BaseTestCase {
 		}
 
 		selenium.click("//td[6]/ul/li/strong/span");
-		selenium.click(RuntimeVariables.replace("//div[4]/ul/li[6]/a"));
+		selenium.click(RuntimeVariables.replace("//div[5]/ul/li[6]/a"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to delete this[\\s\\S]$"));

@@ -96,11 +96,9 @@ public class CompareVersionsTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Compare Versions']"));
 		selenium.waitForPageToLoad("30000");
-		assertEquals("FrontPage 1.3",
-			selenium.getText("//div[2]/div/div/table/tbody/tr[1]/td[2]"));
-		assertEquals("FrontPage 1.0",
-			selenium.getText("//div[2]/div/div/table/tbody/tr[1]/td[1]"));
-		assertTrue(selenium.isTextPresent("==WD Setup Wiki Test Article=="));
+		assertEquals("Comparing Versions 1.0 (First Version) and 1.3 (Last Version)",
+			selenium.getText("//div[2]/div/div/div[1]/div/span[1]"));
+		assertTrue(selenium.isTextPresent("WD Setup Wiki Test Article"));
 		assertTrue(selenium.isTextPresent("*This is a WD wiki test article!"));
 		assertTrue(selenium.isTextPresent(
 				"Oh NOES! I've made a minor change. Please revert this!"));

@@ -73,7 +73,7 @@ public class AddSymbolTitleChildPageTest extends BaseTestCase {
 		selenium.typeKeys("_36_title", RuntimeVariables.replace("Test@"));
 		selenium.type("_36_title", RuntimeVariables.replace("Test@"));
 		selenium.typeKeys("_36_content",
-			RuntimeVariables.replace("This is a Symbol Title Child Page Test!"));
+			RuntimeVariables.replace("This is a Smbol Title Child Page Test!"));
 		selenium.type("_36_content",
 			RuntimeVariables.replace("This is a Symbol Title Child Page Test!"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
@@ -107,7 +107,7 @@ public class AddSymbolTitleChildPageTest extends BaseTestCase {
 		selenium.typeKeys("_36_title", RuntimeVariables.replace("Test%"));
 		selenium.type("_36_title", RuntimeVariables.replace("Test%"));
 		selenium.typeKeys("_36_content",
-			RuntimeVariables.replace("This is a Symbol Title Child Page Test!"));
+			RuntimeVariables.replace("This is a Smbol Title Child Page Test!"));
 		selenium.type("_36_content",
 			RuntimeVariables.replace("This is a Symbol Title Child Page Test!"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
@@ -141,7 +141,7 @@ public class AddSymbolTitleChildPageTest extends BaseTestCase {
 		selenium.typeKeys("_36_title", RuntimeVariables.replace("Test&"));
 		selenium.type("_36_title", RuntimeVariables.replace("Test&"));
 		selenium.typeKeys("_36_content",
-			RuntimeVariables.replace("This is a Symbol Title Child Page Test!"));
+			RuntimeVariables.replace("This is a Smbol Title Child Page Test!"));
 		selenium.type("_36_content",
 			RuntimeVariables.replace("This is a Symbol Title Child Page Test!"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
@@ -175,7 +175,7 @@ public class AddSymbolTitleChildPageTest extends BaseTestCase {
 		selenium.typeKeys("_36_title", RuntimeVariables.replace("Test/"));
 		selenium.type("_36_title", RuntimeVariables.replace("Test/"));
 		selenium.typeKeys("_36_content",
-			RuntimeVariables.replace("This is a Symbol Title Child Page Test!"));
+			RuntimeVariables.replace("This is a Smbol Title Child Page Test!"));
 		selenium.type("_36_content",
 			RuntimeVariables.replace("This is a Symbol Title Child Page Test!"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
@@ -209,7 +209,7 @@ public class AddSymbolTitleChildPageTest extends BaseTestCase {
 		selenium.typeKeys("_36_title", RuntimeVariables.replace("Test?"));
 		selenium.type("_36_title", RuntimeVariables.replace("Test?"));
 		selenium.typeKeys("_36_content",
-			RuntimeVariables.replace("This is a Symbol Title Child Page Test!"));
+			RuntimeVariables.replace("This is a Smbol Title Child Page Test!"));
 		selenium.type("_36_content",
 			RuntimeVariables.replace("This is a Symbol Title Child Page Test!"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
