@@ -158,6 +158,8 @@ public interface PropsKeys {
 
 	public static final String AUTO_LOGIN_IGNORE_PATHS = "auto.login.ignore.paths";
 
+	public static final String BASIC_AUTH_PASSWORD_REQUIRED = "basic.auth.password.required";
+
 	public static final String BLOGS_EMAIL_COMMENTS_ADDED_BODY = "blogs.email.comments.added.body";
 
 	public static final String BLOGS_EMAIL_COMMENTS_ADDED_ENABLED = "blogs.email.comments.added.enabled";

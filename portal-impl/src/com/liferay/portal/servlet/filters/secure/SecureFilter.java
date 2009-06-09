@@ -118,7 +118,12 @@ public class SecureFilter extends BasePortalFilter {
 			credentials, StringPool.COLON);
 
 		String login = loginAndPassword[0].trim();
-		String password = loginAndPassword[1].trim();
+
+		String password = null;
+
+		if (loginAndPassword.length > 1) {
+			password = loginAndPassword[1].trim();
+		}
 
 		// Strip @uid and @sn for backwards compatibility
 

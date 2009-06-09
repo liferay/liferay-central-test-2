@@ -584,6 +584,10 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 				user = getUserById(companyId, GetterUtil.getLong(login));
 			}
 
+			if (!PropsValues.BASIC_AUTH_PASSWORD_REQUIRED) {
+				return user.getUserId();
+			}
+
 			String userPassword = user.getPassword();
 
 			if (!user.isPasswordEncrypted()) {
