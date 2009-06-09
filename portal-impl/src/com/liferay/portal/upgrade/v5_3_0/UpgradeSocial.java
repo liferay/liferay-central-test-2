@@ -47,6 +47,7 @@ import java.sql.ResultSet;
  * <a href="UpgradeSocial.java.html"><b><i>View Source</i></b></a>
  *
  * @author Amos Fong
+ * @author Brian Wing Shun Chan
  *
  */
 public class UpgradeSocial extends UpgradeProcess {
@@ -63,6 +64,7 @@ public class UpgradeSocial extends UpgradeProcess {
 	}
 
 	protected void doUpgrade() throws Exception {
+		updateGroupId();
 
 		// SocialActivity
 
