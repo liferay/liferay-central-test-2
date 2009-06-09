@@ -81,7 +81,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.apache.commons.lang.time.StopWatch;
 
@@ -289,10 +288,12 @@ public class PortletExporter {
 
 			Element root = doc.addElement("categories");
 
-			Set<Map.Entry<String, String[]>> categoriesEntries =
-				context.getTagsCategories().entrySet();
+			Map<String, long[]> assetCategoryIdsMap =
+				context.getAssetCategoryIdsMap();
 
-			for (Map.Entry<String, String[]> entry : categoriesEntries) {
+			for (Map.Entry<String, long[]> entry :
+					assetCategoryIdsMap.entrySet()) {
+
 				String[] categoryEntry = entry.getKey().split(StringPool.POUND);
 
 				Element asset = root.addElement("asset");
@@ -300,7 +301,7 @@ public class PortletExporter {
 				asset.addAttribute("class-name", categoryEntry[0]);
 				asset.addAttribute("class-pk", categoryEntry[1]);
 				asset.addAttribute(
-					"entries", StringUtil.merge(entry.getValue()));
+					"categoryIds", StringUtil.merge(entry.getValue()));
 			}
 
 			context.addZipEntry(
@@ -1076,17 +1077,19 @@ public class PortletExporter {
 
 			Element root = doc.addElement("tags");
 
-			Map<String, String[]> tagsEntries = context.getTagsEntries();
+			Map<String, String[]> assetTagNamesMap =
+				context.getAssetTagNamesMap();
 
-			for (Map.Entry<String, String[]> entry : tagsEntries.entrySet()) {
+			for (Map.Entry<String, String[]> entry :
+					assetTagNamesMap.entrySet()) {
+
 				String[] tagsEntry = entry.getKey().split(StringPool.POUND);
 
 				Element asset = root.addElement("asset");
 
 				asset.addAttribute("class-name", tagsEntry[0]);
 				asset.addAttribute("class-pk", tagsEntry[1]);
-				asset.addAttribute(
-					"entries", StringUtil.merge(entry.getValue()));
+				asset.addAttribute("tags", StringUtil.merge(entry.getValue()));
 			}
 
 			context.addZipEntry(

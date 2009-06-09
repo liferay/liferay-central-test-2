@@ -185,7 +185,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		updateAsset(
 			userId, page, serviceContext.getAssetCategoryIds(),
-			serviceContext.getTagsEntries());
+			serviceContext.getAssetTagNames());
 
 		// Message boards
 
@@ -256,8 +256,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 				dlService.addFile(
 					companyId, portletId, groupId, repositoryId,
 					dirName + "/" + fileName, 0, StringPool.BLANK,
-					page.getModifiedDate(), new String[0], new String[0],
-					bytes);
+					page.getModifiedDate(), new ServiceContext(), bytes);
 			}
 			catch (DuplicateFileException dfe) {
 			}
@@ -324,16 +323,6 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		String format = page.getFormat();
 		String redirectTitle = page.getRedirectTitle();
 
-		String[] tagsCategories = tagsEntryLocalService.getEntryNames(
-			WikiPage.class.getName(), page.getResourcePrimKey(),
-			TagsEntryConstants.FOLKSONOMY_CATEGORY);
-		String[] tagsEntries = tagsEntryLocalService.getEntryNames(
-			WikiPage.class.getName(), page.getResourcePrimKey(),
-			TagsEntryConstants.FOLKSONOMY_TAG);
-
-		serviceContext.setTagsCategories(tagsCategories);
-		serviceContext.setTagsEntries(tagsEntries);
-
 		updatePage(
 			userId, nodeId, title, version, content, summary, minorEdit,
 			format, newParentTitle, redirectTitle, serviceContext);
@@ -397,11 +386,6 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		catch (NoSuchDirectoryException nsde) {
 		}
 
-		// Tags
-
-		tagsAssetLocalService.deleteAsset(
-			WikiPage.class.getName(), page.getResourcePrimKey());
-
 		// Subscriptions
 
 		subscriptionLocalService.deleteSubscriptions(
@@ -415,6 +399,11 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		// Message boards
 
 		mbMessageLocalService.deleteDiscussionMessages(
+			WikiPage.class.getName(), page.getResourcePrimKey());
+
+		// Asset
+
+		assetEntryLocalService.deleteEntry(
 			WikiPage.class.getName(), page.getResourcePrimKey());
 
 		// Resources
@@ -831,11 +820,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		// Asset
 
-		String[] tagsEntries = tagsEntryLocalService.getEntryNames(
-			WikiPage.class.getName(), resourcePrimKey,
-			TagsEntryConstants.FOLKSONOMY_TAG);
-
-		updateAsset(userId, page, null, tagsEntries);
+		updateAsset(userId, page, null, null);
 
 		// Indexer
 
@@ -931,12 +916,12 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 	public void updateAsset(
 			long userId, WikiPage page, long[] assetCategoryIds,
-			String[] tagsEntries)
+			String[] assetTagNames)
 		throws PortalException, SystemException {
 
-		tagsAssetLocalService.updateAsset(
+		assetEntryLocalService.updateEntry(
 			userId, page.getGroupId(), WikiPage.class.getName(),
-			page.getResourcePrimKey(), assetCategoryIds, tagsEntries, true,
+			page.getResourcePrimKey(), assetCategoryIds, assetTagNames, true,
 			null, null, null, null, ContentTypes.TEXT_HTML, page.getTitle(),
 			null, null, null, 0, 0, null, false);
 	}
@@ -1021,6 +1006,12 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		wikiNodePersistence.update(node, false);
 
+		// Asset
+
+		updateAsset(
+			userId, page, serviceContext.getAssetCategoryIds(),
+			serviceContext.getAssetTagNames());
+
 		// Social
 
 		socialActivityLocalService.addActivity(
@@ -1033,12 +1024,6 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		if (!minorEdit && NotificationThreadLocal.isNotificationEnabled()) {
 			notifySubscribers(node, page, serviceContext, true);
 		}
-
-		// Tags
-
-		updateAsset(
-			userId, page, serviceContext.getAssetCategoryIds(),
-			serviceContext.getTagsEntries());
 
 		// Indexer
 

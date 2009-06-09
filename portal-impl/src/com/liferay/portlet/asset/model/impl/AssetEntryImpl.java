@@ -22,7 +22,14 @@
 
 package com.liferay.portlet.asset.model.impl;
 
+import com.liferay.portal.SystemException;
+import com.liferay.portlet.asset.model.AssetCategory;
 import com.liferay.portlet.asset.model.AssetEntry;
+import com.liferay.portlet.asset.model.AssetTag;
+import com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil;
+import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
+
+import java.util.List;
 
 /**
  * <a href="AssetEntryImpl.java.html"><b><i>View Source</i></b></a>
@@ -33,6 +40,14 @@ import com.liferay.portlet.asset.model.AssetEntry;
 public class AssetEntryImpl extends AssetEntryModelImpl implements AssetEntry {
 
 	public AssetEntryImpl() {
+	}
+
+	public List<AssetCategory> getCategories() throws SystemException {
+		return AssetCategoryLocalServiceUtil.getEntryCategories(getEntryId());
+	}
+
+	public List<AssetTag> getTags() throws SystemException {
+		return AssetTagLocalServiceUtil.getEntryTags(getEntryId());
 	}
 
 }

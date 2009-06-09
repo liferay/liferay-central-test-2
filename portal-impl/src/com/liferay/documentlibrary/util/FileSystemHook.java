@@ -37,6 +37,7 @@ import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 
@@ -80,8 +81,7 @@ public class FileSystemHook extends BaseHook {
 	public void addFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, long fileEntryId, String properties,
-			Date modifiedDate, String[] tagsCategories, String[] tagsEntries,
-			InputStream is)
+			Date modifiedDate, ServiceContext serviceContext, InputStream is)
 		throws PortalException, SystemException {
 
 		try {
@@ -96,8 +96,9 @@ public class FileSystemHook extends BaseHook {
 
 			Indexer.addFile(
 				companyId, portletId, groupId, repositoryId, fileName,
-				fileEntryId, properties, modifiedDate, tagsCategories,
-				tagsEntries);
+				fileEntryId, properties, modifiedDate,
+				serviceContext.getAssetCategoryIds(),
+				serviceContext.getAssetTagNames());
 		}
 		catch (IOException ioe) {
 			throw new SystemException();
@@ -269,33 +270,6 @@ public class FileSystemHook extends BaseHook {
 
 	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, double versionNumber, String sourceFileName,
-			long fileEntryId, String properties, Date modifiedDate,
-			String[] tagsCategories, String[] tagsEntries, InputStream is)
-		throws PortalException, SystemException {
-
-		try {
-			File fileNameVersionFile = getFileNameVersionFile(
-				companyId, repositoryId, fileName, versionNumber);
-
-			if (fileNameVersionFile.exists()) {
-				throw new DuplicateFileException();
-			}
-
-			FileUtil.write(fileNameVersionFile, is);
-
-			Indexer.updateFile(
-				companyId, portletId, groupId, repositoryId, fileName,
-				fileEntryId, properties, modifiedDate, tagsCategories,
-				tagsEntries);
-		}
-		catch (IOException ioe) {
-			throw new SystemException();
-		}
-	}
-
-	public void updateFile(
-			long companyId, String portletId, long groupId, long repositoryId,
 			long newRepositoryId, String fileName, long fileEntryId)
 		throws SystemException {
 
@@ -324,6 +298,34 @@ public class FileSystemHook extends BaseHook {
 		}
 	}
 
+	public void updateFile(
+			long companyId, String portletId, long groupId, long repositoryId,
+			String fileName, double versionNumber, String sourceFileName,
+			long fileEntryId, String properties, Date modifiedDate,
+			ServiceContext serviceContext, InputStream is)
+		throws PortalException, SystemException {
+
+		try {
+			File fileNameVersionFile = getFileNameVersionFile(
+				companyId, repositoryId, fileName, versionNumber);
+
+			if (fileNameVersionFile.exists()) {
+				throw new DuplicateFileException();
+			}
+
+			FileUtil.write(fileNameVersionFile, is);
+
+			Indexer.updateFile(
+				companyId, portletId, groupId, repositoryId, fileName,
+				fileEntryId, properties, modifiedDate,
+				serviceContext.getAssetCategoryIds(),
+				serviceContext.getAssetTagNames());
+		}
+		catch (IOException ioe) {
+			throw new SystemException();
+		}
+	}
+
 	protected File getCompanyDir(long companyId) {
 		File companyDir = new File(_rootDir + StringPool.SLASH + companyId);
 
@@ -338,19 +340,6 @@ public class FileSystemHook extends BaseHook {
 		long companyId, long repositoryId, String dirName) {
 
 		return getFileNameDir(companyId, repositoryId, dirName);
-	}
-
-	protected File getRepositoryDir(long companyId, long repositoryId) {
-		File companyDir = getCompanyDir(companyId);
-
-		File repositoryDir = new File(
-			companyDir + StringPool.SLASH + repositoryId);
-
-		if (!repositoryDir.exists()) {
-			repositoryDir.mkdirs();
-		}
-
-		return repositoryDir;
 	}
 
 	protected File getFileNameDir(
@@ -397,6 +386,19 @@ public class FileSystemHook extends BaseHook {
 		}
 
 		return headVersionNumber;
+	}
+
+	protected File getRepositoryDir(long companyId, long repositoryId) {
+		File companyDir = getCompanyDir(companyId);
+
+		File repositoryDir = new File(
+			companyDir + StringPool.SLASH + repositoryId);
+
+		if (!repositoryDir.exists()) {
+			repositoryDir.mkdirs();
+		}
+
+		return repositoryDir;
 	}
 
 	private static final String _ROOT_DIR = PropsUtil.get(

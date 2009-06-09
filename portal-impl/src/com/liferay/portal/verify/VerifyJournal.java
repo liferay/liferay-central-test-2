@@ -239,8 +239,7 @@ public class VerifyJournal extends VerifyProcess {
 			catch (NoSuchAssetException nsae) {
 				try {
 					JournalArticleLocalServiceUtil.updateAsset(
-						article.getUserId(), article, new long[0],
-						new String[0]);
+						article.getUserId(), article, null, null);
 				}
 				catch (Exception e) {
 					if (_log.isWarnEnabled()) {

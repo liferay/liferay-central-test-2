@@ -43,6 +43,7 @@ import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsValues;
@@ -66,8 +67,7 @@ public class DLLocalServiceImpl implements DLLocalService {
 	public void addFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, long fileEntryId, String properties,
-			Date modifiedDate, String[] tagsCategories, String[] tagsEntries,
-			InputStream is)
+			Date modifiedDate, ServiceContext serviceContext, InputStream is)
 		throws PortalException, SystemException {
 
 		validate(fileName, is);
@@ -76,7 +76,7 @@ public class DLLocalServiceImpl implements DLLocalService {
 
 		hook.addFile(
 			companyId, portletId, groupId, repositoryId, fileName, fileEntryId,
-			properties, modifiedDate, tagsCategories, tagsEntries, is);
+			properties, modifiedDate, serviceContext, is);
 	}
 
 	public void checkRoot(long companyId) throws SystemException {
@@ -169,7 +169,7 @@ public class DLLocalServiceImpl implements DLLocalService {
 			if (Validator.isNotNull(keywords)) {
 				searchQuery.addTerm(Field.CONTENT, keywords);
 				searchQuery.addTerm(Field.PROPERTIES, keywords);
-				searchQuery.addTerm(Field.TAGS_ENTRIES, keywords);
+				searchQuery.addTerm(Field.ASSET_TAG_NAMES, keywords);
 			}
 
 			BooleanQuery fullQuery = BooleanQueryFactoryUtil.create();
@@ -193,7 +193,7 @@ public class DLLocalServiceImpl implements DLLocalService {
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, double versionNumber, String sourceFileName,
 			long fileEntryId, String properties, Date modifiedDate,
-			String[] tagsCategories, String[] tagsEntries, InputStream is)
+			ServiceContext serviceContext, InputStream is)
 		throws PortalException, SystemException {
 
 		validate(fileName, sourceFileName, is);
@@ -203,59 +203,7 @@ public class DLLocalServiceImpl implements DLLocalService {
 		hook.updateFile(
 			companyId, portletId, groupId, repositoryId, fileName,
 			versionNumber, sourceFileName, fileEntryId, properties,
-			modifiedDate, tagsCategories, tagsEntries, is);
-	}
-
-	public void validate(String fileName, File file)
-		throws PortalException, SystemException {
-
-		validate(fileName);
-
-		if (((PropsValues.WEBDAV_LITMUS) ||
-			 (PrefsPropsUtil.getLong(PropsKeys.DL_FILE_MAX_SIZE) > 0)) &&
-			((file == null) ||
-			 (file.length() >
-				PrefsPropsUtil.getLong(PropsKeys.DL_FILE_MAX_SIZE)))) {
-
-			throw new FileSizeException(fileName);
-		}
-	}
-
-	public void validate(String fileName, byte[] bytes)
-		throws PortalException, SystemException {
-
-		validate(fileName);
-
-		if (((PropsValues.WEBDAV_LITMUS) ||
-			(PrefsPropsUtil.getLong(PropsKeys.DL_FILE_MAX_SIZE) > 0)) &&
-			((bytes == null) ||
-			(bytes.length >
-				 PrefsPropsUtil.getLong(PropsKeys.DL_FILE_MAX_SIZE)))) {
-
-			throw new FileSizeException(fileName);
-		}
-	}
-
-	public void validate(String fileName, InputStream is)
-		throws PortalException, SystemException {
-
-		validate(fileName);
-
-		// LEP-4851
-
-		try {
-			if (((PropsValues.WEBDAV_LITMUS) ||
-				(PrefsPropsUtil.getLong(PropsKeys.DL_FILE_MAX_SIZE) > 0)) &&
-				((is == null) ||
-				(is.available() >
-					 PrefsPropsUtil.getLong(PropsKeys.DL_FILE_MAX_SIZE)))) {
-
-				throw new FileSizeException(fileName);
-			}
-		}
-		catch (IOException ioe) {
-			throw new FileSizeException(ioe.getMessage());
-		}
+			modifiedDate, serviceContext, is);
 	}
 
 	public void validate(String fileName)
@@ -297,6 +245,58 @@ public class DLLocalServiceImpl implements DLLocalService {
 			if (!validFileExtension) {
 				throw new FileNameException(fileName);
 			}
+		}
+	}
+
+	public void validate(String fileName, byte[] bytes)
+		throws PortalException, SystemException {
+
+		validate(fileName);
+
+		if (((PropsValues.WEBDAV_LITMUS) ||
+			(PrefsPropsUtil.getLong(PropsKeys.DL_FILE_MAX_SIZE) > 0)) &&
+			((bytes == null) ||
+			(bytes.length >
+				 PrefsPropsUtil.getLong(PropsKeys.DL_FILE_MAX_SIZE)))) {
+
+			throw new FileSizeException(fileName);
+		}
+	}
+
+	public void validate(String fileName, File file)
+		throws PortalException, SystemException {
+
+		validate(fileName);
+
+		if (((PropsValues.WEBDAV_LITMUS) ||
+			 (PrefsPropsUtil.getLong(PropsKeys.DL_FILE_MAX_SIZE) > 0)) &&
+			((file == null) ||
+			 (file.length() >
+				PrefsPropsUtil.getLong(PropsKeys.DL_FILE_MAX_SIZE)))) {
+
+			throw new FileSizeException(fileName);
+		}
+	}
+
+	public void validate(String fileName, InputStream is)
+		throws PortalException, SystemException {
+
+		validate(fileName);
+
+		// LEP-4851
+
+		try {
+			if (((PropsValues.WEBDAV_LITMUS) ||
+				(PrefsPropsUtil.getLong(PropsKeys.DL_FILE_MAX_SIZE) > 0)) &&
+				((is == null) ||
+				(is.available() >
+					 PrefsPropsUtil.getLong(PropsKeys.DL_FILE_MAX_SIZE)))) {
+
+				throw new FileSizeException(fileName);
+			}
+		}
+		catch (IOException ioe) {
+			throw new FileSizeException(ioe.getMessage());
 		}
 	}
 

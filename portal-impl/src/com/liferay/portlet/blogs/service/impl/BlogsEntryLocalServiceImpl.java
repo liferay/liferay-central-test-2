@@ -170,7 +170,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		updateAsset(
 			userId, entry, serviceContext.getAssetCategoryIds(),
-			serviceContext.getTagsEntries());
+			serviceContext.getAssetTagNames());
 
 		// Message boards
 
@@ -297,7 +297,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		// Asset
 
-		tagsAssetLocalService.deleteAsset(
+		assetEntryLocalService.deleteEntry(
 			BlogsEntry.class.getName(), entry.getEntryId());
 
 		// Statistics
@@ -607,14 +607,15 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 	public void updateAsset(
 			long userId, BlogsEntry entry, long[] assetCategoryIds,
-			String[] tagsEntries)
+			String[] assetTagNames)
 		throws PortalException, SystemException {
 
-		tagsAssetLocalService.updateAsset(
+		assetEntryLocalService.updateEntry(
 			userId, entry.getGroupId(), BlogsEntry.class.getName(),
-			entry.getEntryId(), assetCategoryIds, tagsEntries, !entry.isDraft(),
-			null, null, entry.getDisplayDate(), null, ContentTypes.TEXT_HTML,
-			entry.getTitle(), null, null, null, 0, 0, null, false);
+			entry.getEntryId(), assetCategoryIds, assetTagNames,
+			!entry.isDraft(), null, null, entry.getDisplayDate(), null,
+			ContentTypes.TEXT_HTML, entry.getTitle(), null, null, null, 0, 0,
+			null, false);
 	}
 
 	public BlogsEntry updateEntry(
@@ -673,7 +674,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		updateAsset(
 			userId, entry, serviceContext.getAssetCategoryIds(),
-			serviceContext.getTagsEntries());
+			serviceContext.getAssetTagNames());
 
 		// Expando
 

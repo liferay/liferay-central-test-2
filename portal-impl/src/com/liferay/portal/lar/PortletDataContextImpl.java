@@ -33,6 +33,11 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.zip.ZipReader;
 import com.liferay.portal.kernel.zip.ZipWriter;
 import com.liferay.portal.service.ServiceContext;
+import com.liferay.portlet.asset.NoSuchEntryException;
+import com.liferay.portlet.asset.model.AssetCategory;
+import com.liferay.portlet.asset.model.AssetEntry;
+import com.liferay.portlet.asset.model.AssetTag;
+import com.liferay.portlet.asset.service.AssetEntryLocalServiceUtil;
 import com.liferay.portlet.blogs.model.impl.BlogsEntryImpl;
 import com.liferay.portlet.bookmarks.model.impl.BookmarksEntryImpl;
 import com.liferay.portlet.bookmarks.model.impl.BookmarksFolderImpl;
@@ -64,10 +69,6 @@ import com.liferay.portlet.polls.model.impl.PollsVoteImpl;
 import com.liferay.portlet.ratings.model.RatingsEntry;
 import com.liferay.portlet.ratings.model.impl.RatingsEntryImpl;
 import com.liferay.portlet.ratings.service.RatingsEntryLocalServiceUtil;
-import com.liferay.portlet.tags.NoSuchAssetException;
-import com.liferay.portlet.tags.model.TagsAsset;
-import com.liferay.portlet.tags.model.TagsEntry;
-import com.liferay.portlet.tags.service.TagsAssetLocalServiceUtil;
 import com.liferay.portlet.wiki.model.impl.WikiNodeImpl;
 import com.liferay.portlet.wiki.model.impl.WikiPageImpl;
 
@@ -101,26 +102,6 @@ import java.util.Set;
 public class PortletDataContextImpl implements PortletDataContext {
 
 	public PortletDataContextImpl(
-		long companyId, long groupId, Map<String, String[]> parameterMap,
-		Set<String> primaryKeys, UserIdStrategy userIdStrategy,
-		ZipReader zipReader) {
-
-		_companyId = companyId;
-		_groupId = groupId;
-		_scopeGroupId = groupId;
-		_parameterMap = parameterMap;
-		_primaryKeys = primaryKeys;
-		_dataStrategy =  MapUtil.getString(
-			parameterMap, PortletDataHandlerKeys.DATA_STRATEGY,
-			PortletDataHandlerKeys.DATA_STRATEGY_MIRROR);
-		_userIdStrategy = userIdStrategy;
-		_zipReader = zipReader;
-		_zipWriter = null;
-
-		initXStream();
-	}
-
-	public PortletDataContextImpl(
 			long companyId, long groupId, Map<String, String[]> parameterMap,
 			Set<String> primaryKeys, Date startDate, Date endDate,
 			ZipWriter zipWriter)
@@ -141,6 +122,95 @@ public class PortletDataContextImpl implements PortletDataContext {
 		_zipWriter = zipWriter;
 
 		initXStream();
+	}
+
+	public PortletDataContextImpl(
+		long companyId, long groupId, Map<String, String[]> parameterMap,
+		Set<String> primaryKeys, UserIdStrategy userIdStrategy,
+		ZipReader zipReader) {
+
+		_companyId = companyId;
+		_groupId = groupId;
+		_scopeGroupId = groupId;
+		_parameterMap = parameterMap;
+		_primaryKeys = primaryKeys;
+		_dataStrategy =  MapUtil.getString(
+			parameterMap, PortletDataHandlerKeys.DATA_STRATEGY,
+			PortletDataHandlerKeys.DATA_STRATEGY_MIRROR);
+		_userIdStrategy = userIdStrategy;
+		_zipReader = zipReader;
+		_zipWriter = null;
+
+		initXStream();
+	}
+
+	public void addAssetCategories(Class<?> classObj, long classPK)
+		throws PortalException, SystemException {
+
+		AssetEntry assetEntry = null;
+
+		try {
+			assetEntry = AssetEntryLocalServiceUtil.getEntry(
+				classObj.getName(), classPK);
+		}
+		catch (NoSuchEntryException nsee) {
+
+			// LEP-4979
+
+			return;
+		}
+
+		List<AssetCategory> assetCategories = assetEntry.getCategories();
+
+		if (assetCategories.isEmpty()) {
+			return;
+		}
+
+		_assetCategoryIdsMap.put(
+			getPrimaryKeyString(classObj, classPK),
+			StringUtil.split(
+				ListUtil.toString(assetCategories, "categoryId"), 0L));
+	}
+
+	public void addAssetCategories(
+		String className, long classPK, long[] assetCategoryIds) {
+
+		_assetCategoryIdsMap.put(
+			getPrimaryKeyString(className, classPK), assetCategoryIds);
+	}
+
+	public void addAssetTags(Class<?> classObj, long classPK)
+		throws PortalException, SystemException {
+
+		AssetEntry assetEntry = null;
+
+		try {
+			assetEntry = AssetEntryLocalServiceUtil.getEntry(
+				classObj.getName(), classPK);
+		}
+		catch (NoSuchEntryException nsee) {
+
+			// LEP-4979
+
+			return;
+		}
+
+		List<AssetTag> assetTags = assetEntry.getTags();
+
+		if (assetTags.size() == 0) {
+			return;
+		}
+
+		_assetTagNamesMap.put(
+			getPrimaryKeyString(classObj, classPK),
+			StringUtil.split(ListUtil.toString(assetTags, "name")));
+	}
+
+	public void addAssetTags(
+		String className, long classPK, String[] assetTagNames) {
+
+		_assetTagNamesMap.put(
+			getPrimaryKeyString(className, classPK), assetTagNames);
 	}
 
 	public void addComments(Class<?> classObj, long classPK)
@@ -210,74 +280,6 @@ public class PortletDataContextImpl implements PortletDataContext {
 			getPrimaryKeyString(className, classPK), ratingsEntries);
 	}
 
-	public void addTagsCategories(Class<?> classObj, long classPK)
-		throws PortalException, SystemException {
-
-		TagsAsset tagsAsset = null;
-
-		try {
-			tagsAsset = TagsAssetLocalServiceUtil.getAsset(
-				classObj.getName(), classPK);
-		}
-		catch (NoSuchAssetException nsae) {
-
-			// LEP-4979
-
-			return;
-		}
-
-		List<TagsEntry> tagsCategories = tagsAsset.getCategories();
-
-		if (tagsCategories.size() == 0) {
-			return;
-		}
-
-		_tagsCategoriesMap.put(
-			getPrimaryKeyString(classObj, classPK),
-			StringUtil.split(ListUtil.toString(tagsCategories, "name")));
-	}
-
-	public void addTagsCategories(
-		String className, long classPK, String[] tagsCategories) {
-
-		_tagsCategoriesMap.put(
-			getPrimaryKeyString(className, classPK), tagsCategories);
-	}
-
-	public void addTagsEntries(Class<?> classObj, long classPK)
-		throws PortalException, SystemException {
-
-		TagsAsset tagsAsset = null;
-
-		try {
-			tagsAsset = TagsAssetLocalServiceUtil.getAsset(
-				classObj.getName(), classPK);
-		}
-		catch (NoSuchAssetException nsae) {
-
-			// LEP-4979
-
-			return;
-		}
-
-		List<TagsEntry> tagsEntries = tagsAsset.getEntries();
-
-		if (tagsEntries.size() == 0) {
-			return;
-		}
-
-		_tagsEntriesMap.put(
-			getPrimaryKeyString(classObj, classPK),
-			StringUtil.split(ListUtil.toString(tagsEntries, "name")));
-	}
-
-	public void addTagsEntries(
-		String className, long classPK, String[] tagsEntries) {
-
-		_tagsEntriesMap.put(
-			getPrimaryKeyString(className, classPK), tagsEntries);
-	}
-
 	public void addZipEntry(String path, byte[] bytes) throws SystemException {
 		try {
 			getZipWriter().addEntry(path, bytes);
@@ -328,6 +330,27 @@ public class PortletDataContextImpl implements PortletDataContext {
 
 	public Object fromXML(String xml) {
 		return _xStream.fromXML(xml);
+	}
+
+	public long[] getAssetCategoryIds(Class<?> classObj, long classPK) {
+		return _assetCategoryIdsMap.get(
+			getPrimaryKeyString(classObj, classPK));
+	}
+
+	public Map<String, long[]> getAssetCategoryIdsMap() {
+		return _assetCategoryIdsMap;
+	}
+
+	public String[] getAssetTagNames(Class<?> classObj, long classPK) {
+		return _assetTagNamesMap.get(getPrimaryKeyString(classObj, classPK));
+	}
+
+	public String[] getAssetTagNames(String className, long classPK) {
+		return _assetTagNamesMap.get(getPrimaryKeyString(className, classPK));
+	}
+
+	public Map<String, String[]> getAssetTagNamesMap() {
+		return _assetTagNamesMap;
 	}
 
 	public boolean getBooleanParameter(String namespace, String name) {
@@ -437,27 +460,6 @@ public class PortletDataContextImpl implements PortletDataContext {
 		return _startDate;
 	}
 
-	public Map<String, String[]> getTagsCategories() {
-		return _tagsCategoriesMap;
-	}
-
-	public String[] getTagsCategories(Class<?> classObj, long classPK) {
-		return _tagsCategoriesMap.get(
-			getPrimaryKeyString(classObj, classPK));
-	}
-
-	public Map<String, String[]> getTagsEntries() {
-		return _tagsEntriesMap;
-	}
-
-	public String[] getTagsEntries(Class<?> classObj, long classPK) {
-		return _tagsEntriesMap.get(getPrimaryKeyString(classObj, classPK));
-	}
-
-	public String[] getTagsEntries(String className, long classPK) {
-		return _tagsEntriesMap.get(getPrimaryKeyString(className, classPK));
-	}
-
 	public long getUserId(String userUuid) throws SystemException {
 		return _userIdStrategy.getUserId(userUuid);
 	}
@@ -525,11 +527,9 @@ public class PortletDataContextImpl implements PortletDataContext {
 	public boolean hasNotUniquePerLayout(String dataKey) {
 		return _notUniquePerLayout.contains(dataKey);
 	}
-
 	public boolean hasPrimaryKey(Class<?> classObj, String primaryKey) {
 		return _primaryKeys.contains(getPrimaryKeyString(classObj, primaryKey));
 	}
-
 	public void importComments(
 			Class<?> classObj, long classPK, long newClassPK, long groupId)
 		throws PortalException, SystemException {
@@ -591,7 +591,6 @@ public class PortletDataContextImpl implements PortletDataContext {
 			}
 		}
 	}
-
 	public void importRatingsEntries(
 			Class<?> classObj, long classPK, long newClassPK)
 		throws PortalException, SystemException {
@@ -611,15 +610,12 @@ public class PortletDataContextImpl implements PortletDataContext {
 				ratingsEntry.getScore());
 		}
 	}
-
 	public boolean isPathNotProcessed(String path) {
 		return !addPrimaryKey(String.class, path);
 	}
-
 	public boolean isPrivateLayout() {
 		return _privateLayout;
 	}
-
 	public boolean isWithinDateRange(Date modifiedDate) {
 		if (!hasDateRange()) {
 			return true;
@@ -633,59 +629,45 @@ public class PortletDataContextImpl implements PortletDataContext {
 			return false;
 		}
 	}
-
 	public void putNotUniquePerLayout(String dataKey) {
 		_notUniquePerLayout.add(dataKey);
 	}
-
 	public void setClassLoader(ClassLoader classLoader) {
 		_xStream.setClassLoader(classLoader);
 	}
-
 	public void setGroupId(long groupId) {
 		_groupId = groupId;
 	}
-
 	public void setOldPlid(long oldPlid) {
 		_oldPlid = oldPlid;
 	}
-
 	public void setPlid(long plid) {
 		_plid = plid;
 	}
-
 	public void setPrivateLayout(boolean privateLayout) {
 		_privateLayout = privateLayout;
 	}
-
 	public void setScopeGroupId(long scopeGroupId) {
 		_scopeGroupId = scopeGroupId;
 	}
-
 	public void setScopeLayoutId(long scopeLayoutId) {
 		_scopeLayoutId = scopeLayoutId;
 	}
-
 	public void setSourceGroupId(long sourceGroupId) {
 		_sourceGroupId = sourceGroupId;
 	}
-
 	public String toXML(Object object) {
 		return _xStream.toXML(object);
 	}
-
 	protected String getPrimaryKeyString(Class<?> classObj, long classPK) {
 		return getPrimaryKeyString(classObj.getName(), String.valueOf(classPK));
 	}
-
-	protected String getPrimaryKeyString(String className, long classPK) {
-		return getPrimaryKeyString(className, String.valueOf(classPK));
-	}
-
 	protected String getPrimaryKeyString(Class<?> classObj, String primaryKey) {
 		return getPrimaryKeyString(classObj.getName(), primaryKey);
 	}
-
+	protected String getPrimaryKeyString(String className, long classPK) {
+		return getPrimaryKeyString(className, String.valueOf(classPK));
+	}
 	protected String getPrimaryKeyString(String className, String primaryKey) {
 		StringBuilder sb = new StringBuilder();
 
@@ -695,7 +677,6 @@ public class PortletDataContextImpl implements PortletDataContext {
 
 		return sb.toString();
 	}
-
 	protected void initXStream() {
 		_xStream = new XStream();
 
@@ -724,7 +705,6 @@ public class PortletDataContextImpl implements PortletDataContext {
 		_xStream.alias("WikiNode", WikiNodeImpl.class);
 		_xStream.alias("WikiPage", WikiPageImpl.class);
 	}
-
 	protected void validateDateRange(Date startDate, Date endDate)
 		throws PortletDataException {
 
@@ -748,33 +728,33 @@ public class PortletDataContextImpl implements PortletDataContext {
 		}
 	}
 
+	private Map<String, long[]> _assetCategoryIdsMap =
+		new HashMap<String, long[]>();
+	private Map<String, String[]> _assetTagNamesMap =
+		new HashMap<String, String[]>();
+	private Map<String, List<MBMessage>> _commentsMap =
+		new HashMap<String, List<MBMessage>>();
 	private long _companyId;
+	private String _dataStrategy;
+	private Date _endDate;
 	private long _groupId;
+	private Map<String, Map<?, ?>> _newPrimaryKeysMaps =
+		new HashMap<String, Map<?, ?>>();
+	private Set<String> _notUniquePerLayout = new HashSet<String>();
 	private long _oldPlid;
+	private Map<String, String[]> _parameterMap;
 	private long _plid;
+	private Set<String> _primaryKeys;
 	private boolean _privateLayout;
+	private Map<String, List<RatingsEntry>> _ratingsEntriesMap =
+		new HashMap<String, List<RatingsEntry>>();
 	private long _scopeGroupId;
 	private long _scopeLayoutId;
 	private long _sourceGroupId;
-	private Set<String> _primaryKeys;
-	private Map<String, Map<?, ?>> _newPrimaryKeysMaps =
-		new HashMap<String, Map<?, ?>>();
-	private String _dataStrategy;
-	private UserIdStrategy _userIdStrategy;
 	private Date _startDate;
-	private Date _endDate;
+	private UserIdStrategy _userIdStrategy;
+	private XStream _xStream;
 	private ZipReader _zipReader;
 	private ZipWriter _zipWriter;
-	private XStream _xStream;
-	private Map<String, List<MBMessage>> _commentsMap =
-		new HashMap<String, List<MBMessage>>();
-	private Map<String, String[]> _parameterMap;
-	private Map<String, List<RatingsEntry>> _ratingsEntriesMap =
-		new HashMap<String, List<RatingsEntry>>();
-	private Map<String, String[]> _tagsCategoriesMap =
-		new HashMap<String, String[]>();
-	private Map<String, String[]> _tagsEntriesMap =
-		new HashMap<String, String[]>();
-	private Set<String> _notUniquePerLayout = new HashSet<String>();
 
 }

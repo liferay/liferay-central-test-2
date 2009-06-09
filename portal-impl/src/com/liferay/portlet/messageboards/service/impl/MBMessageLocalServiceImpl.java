@@ -374,8 +374,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 					dlService.addFile(
 						companyId, portletId, groupId, repositoryId,
 						dirName + "/" + fileName, 0, StringPool.BLANK,
-						message.getModifiedDate(), new String[0], new String[0],
-						bytes);
+						message.getModifiedDate(), new ServiceContext(), bytes);
 				}
 				catch (DuplicateFileException dfe) {
 					if (_log.isDebugEnabled()) {
@@ -438,7 +437,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		updateAsset(
 			userId, message, serviceContext.getAssetCategoryIds(),
-			serviceContext.getTagsEntries());
+			serviceContext.getAssetTagNames());
 
 		logAddMessage(messageId, stopWatch, 8);
 
@@ -729,6 +728,11 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			mbCategoryPersistence.update(category, false);
 		}
 
+		// Asset
+
+		assetEntryLocalService.deleteEntry(
+			MBMessage.class.getName(), message.getMessageId());
+
 		// Social
 
 		socialActivityLocalService.deleteActivities(
@@ -737,11 +741,6 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		// Ratings
 
 		ratingsStatsLocalService.deleteStats(
-			MBMessage.class.getName(), message.getMessageId());
-
-		// Asset
-
-		tagsAssetLocalService.deleteAsset(
 			MBMessage.class.getName(), message.getMessageId());
 
 		// Statistics
@@ -1094,16 +1093,16 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 	public void updateAsset(
 			long userId, MBMessage message, long[] assetCategoryIds,
-			String[] tagsEntries)
+			String[] assetTagNames)
 		throws PortalException, SystemException {
 
 		if (message.isDiscussion()) {
 			return;
 		}
 
-		tagsAssetLocalService.updateAsset(
+		assetEntryLocalService.updateEntry(
 			userId, message.getGroupId(), MBMessage.class.getName(),
-			message.getMessageId(), assetCategoryIds, tagsEntries, true, null,
+			message.getMessageId(), assetCategoryIds, assetTagNames, true, null,
 			null, null, null, ContentTypes.TEXT_HTML, message.getSubject(),
 			null, null, null, 0, 0, null, false);
 	}
@@ -1189,8 +1188,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 					dlService.addFile(
 						companyId, portletId, groupId, repositoryId,
 						dirName + "/" + fileName, 0, StringPool.BLANK,
-						message.getModifiedDate(), new String[0], new String[0],
-						bytes);
+						message.getModifiedDate(), new ServiceContext(), bytes);
 				}
 				catch (DuplicateFileException dfe) {
 				}
@@ -1232,7 +1230,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		updateAsset(
 			userId, message, serviceContext.getAssetCategoryIds(),
-			serviceContext.getTagsEntries());
+			serviceContext.getAssetTagNames());
 
 		// Subscriptions
 

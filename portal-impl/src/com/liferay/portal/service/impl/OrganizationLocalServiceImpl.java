@@ -138,19 +138,19 @@ public class OrganizationLocalServiceImpl
 
 		addOrganizationResources(userId, organization);
 
+		// Asset
+
+		if (serviceContext != null) {
+			updateAsset(
+				userId, organization, serviceContext.getAssetCategoryIds(),
+				serviceContext.getAssetTagNames());
+		}
+
 		// Expando
 
 		ExpandoBridge expandoBridge = organization.getExpandoBridge();
 
 		expandoBridge.setAttributes(serviceContext);
-
-		// Tags
-
-		if (serviceContext != null) {
-			updateTagsAsset(
-				userId, organization, serviceContext.getTagsCategories(),
-				serviceContext.getTagsEntries());
-		}
 
 		return organization;
 	}
@@ -226,9 +226,9 @@ public class OrganizationLocalServiceImpl
 			throw new RequiredOrganizationException();
 		}
 
-		// Tags
+		// Asset
 
-		tagsAssetLocalService.deleteAsset(
+		assetEntryLocalService.deleteEntry(
 			Organization.class.getName(), organization.getOrganizationId());
 
 		// Addresses
@@ -595,6 +595,18 @@ public class OrganizationLocalServiceImpl
 			passwordPolicyId, Organization.class.getName(), organizationIds);
 	}
 
+	public void updateAsset(
+			long userId, Organization organization, long[] assetCategoryIds,
+			String[] assetTagNames)
+		throws PortalException, SystemException {
+
+		assetEntryLocalService.updateEntry(
+			userId, 0, Organization.class.getName(),
+			organization.getOrganizationId(), assetCategoryIds, assetTagNames,
+			true, null, null, null, null, null, organization.getName(),
+			StringPool.BLANK, null, null, 0, 0, null, false);
+	}
+
 	public Organization updateOrganization(
 			long companyId, long organizationId, long parentOrganizationId,
 			String name, String type, boolean recursable, long regionId,
@@ -626,34 +638,22 @@ public class OrganizationLocalServiceImpl
 
 		organizationPersistence.update(organization, false);
 
+		// Asset
+
+		if (serviceContext != null) {
+			updateAsset(
+				serviceContext.getUserId(), organization,
+				serviceContext.getAssetCategoryIds(),
+				serviceContext.getAssetTagNames());
+		}
+
 		// Expando
 
 		ExpandoBridge expandoBridge = organization.getExpandoBridge();
 
 		expandoBridge.setAttributes(serviceContext);
 
-		// Tags
-
-		if (serviceContext != null) {
-			updateTagsAsset(
-				serviceContext.getUserId(), organization,
-				serviceContext.getTagsCategories(),
-				serviceContext.getTagsEntries());
-		}
-
 		return organization;
-	}
-
-	public void updateTagsAsset(
-			long userId, Organization organization, String[] tagsCategories,
-			String[] tagsEntries)
-		throws PortalException, SystemException {
-
-		tagsAssetLocalService.updateAsset(
-			userId, 0, Organization.class.getName(),
-			organization.getOrganizationId(), tagsCategories, tagsEntries, true,
-			null, null, null, null, null, organization.getName(),
-			StringPool.BLANK, null, null, 0, 0, null, false);
 	}
 
 	protected void addSuborganizations(

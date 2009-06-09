@@ -124,7 +124,7 @@ public class BookmarksEntryLocalServiceImpl
 
 		updateAsset(
 			userId, entry, serviceContext.getAssetCategoryIds(),
-			serviceContext.getTagsEntries());
+			serviceContext.getAssetTagNames());
 
 		// Expando
 
@@ -224,7 +224,7 @@ public class BookmarksEntryLocalServiceImpl
 
 		// Asset
 
-		tagsAssetLocalService.deleteAsset(
+		assetEntryLocalService.deleteEntry(
 			BookmarksEntry.class.getName(), entry.getEntryId());
 
 		// Resources
@@ -322,7 +322,7 @@ public class BookmarksEntryLocalServiceImpl
 
 		bookmarksEntryPersistence.update(entry, false);
 
-		tagsAssetLocalService.incrementViewCounter(
+		assetEntryLocalService.incrementViewCounter(
 			BookmarksEntry.class.getName(), entryId);
 
 		return entry;
@@ -370,13 +370,13 @@ public class BookmarksEntryLocalServiceImpl
 
 	public void updateAsset(
 			long userId, BookmarksEntry entry, long[] assetCategoryIds,
-			String[] tagsEntries)
+			String[] assetTagNames)
 		throws PortalException, SystemException {
 
-		tagsAssetLocalService.updateAsset(
+		assetEntryLocalService.updateEntry(
 			userId, entry.getGroupId(), BookmarksEntry.class.getName(),
-			entry.getEntryId(), assetCategoryIds, tagsEntries, true, null, null,
-			null, null, ContentTypes.TEXT_PLAIN, entry.getName(),
+			entry.getEntryId(), assetCategoryIds, assetTagNames, true, null,
+			null, null, null, ContentTypes.TEXT_PLAIN, entry.getName(),
 			entry.getComments(), null, entry.getUrl(), 0, 0, null, false);
 	}
 
@@ -410,7 +410,7 @@ public class BookmarksEntryLocalServiceImpl
 
 		updateAsset(
 			userId, entry, serviceContext.getAssetCategoryIds(),
-			serviceContext.getTagsEntries());
+			serviceContext.getAssetTagNames());
 
 		// Expando
 

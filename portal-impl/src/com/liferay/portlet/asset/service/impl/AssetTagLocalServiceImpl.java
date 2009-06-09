@@ -211,6 +211,10 @@ public class AssetTagLocalServiceImpl extends AssetTagLocalServiceBaseImpl {
 		deleteTag(tag);
 	}
 
+	public List<AssetTag> getEntryTags(long entryId) throws SystemException {
+		return assetTagFinder.findByEntryId(entryId);
+	}
+
 	public List<AssetTag> getGroupTags(long groupId) throws SystemException {
 		return assetTagPersistence.findByGroupId(groupId);
 	}
@@ -263,10 +267,6 @@ public class AssetTagLocalServiceImpl extends AssetTagLocalServiceBaseImpl {
 		return getTags();
 	}
 
-	public List<AssetTag> getTags(long entryId) throws SystemException {
-		return assetTagFinder.findByEntryId(entryId);
-	}
-
 	public List<AssetTag> getTags(long classNameId, long classPK)
 		throws SystemException {
 
@@ -277,7 +277,7 @@ public class AssetTagLocalServiceImpl extends AssetTagLocalServiceBaseImpl {
 			return new ArrayList<AssetTag>();
 		}
 		else {
-			return getTags(entry.getEntryId());
+			return getEntryTags(entry.getEntryId());
 		}
 	}
 

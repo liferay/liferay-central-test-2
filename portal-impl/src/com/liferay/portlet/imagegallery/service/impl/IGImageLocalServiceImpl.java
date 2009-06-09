@@ -211,17 +211,17 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 					serviceContext.getGuestPermissions());
 			}
 
+			// Asset
+
+			updateAsset(
+				userId, image, serviceContext.getAssetCategoryIds(),
+				serviceContext.getAssetTagNames());
+
 			// Expando
 
 			ExpandoBridge expandoBridge = image.getExpandoBridge();
 
 			expandoBridge.setAttributes(serviceContext);
-
-			// Tags
-
-			updateTagsAsset(
-				userId, image, serviceContext.getTagsCategories(),
-				serviceContext.getTagsEntries());
 
 			// Indexer
 
@@ -314,14 +314,14 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 			_log.error("Deleting index " + image.getImageId(), se);
 		}
 
-		// Tags
-
-		tagsAssetLocalService.deleteAsset(
-			IGImage.class.getName(), image.getImageId());
-
 		// Expando
 
 		expandoValueLocalService.deleteValues(
+			IGImage.class.getName(), image.getImageId());
+
+		// Asset
+
+		assetEntryLocalService.deleteEntry(
 			IGImage.class.getName(), image.getImageId());
 
 		// Resources
@@ -523,6 +523,25 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 		}
 	}
 
+	public void updateAsset(
+			long userId, IGImage image, long[] assetCategoryIds,
+			String[] assetTagNames)
+		throws PortalException, SystemException {
+
+		Image largeImage = imageLocalService.getImage(image.getLargeImageId());
+
+		if (largeImage == null) {
+			return;
+		}
+
+		assetEntryLocalService.updateEntry(
+			userId, image.getGroupId(), IGImage.class.getName(),
+			image.getImageId(), assetCategoryIds, assetTagNames, true, null,
+			null, null, null, largeImage.getType(), image.getName(),
+			image.getDescription(), null, null, largeImage.getHeight(),
+			largeImage.getWidth(), null, false);
+	}
+
 	public IGImage updateImage(
 			long userId, long imageId, long folderId, String name,
 			String description, byte[] bytes, String contentType,
@@ -572,18 +591,18 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 					image.getCustom2ImageId(), bytes, contentType);
 			}
 
+			// Asset
+
+			long[] assetCategoryIds = serviceContext.getAssetCategoryIds();
+			String[] assetTagNames = serviceContext.getAssetTagNames();
+
+			updateAsset(userId, image, assetCategoryIds, assetTagNames);
+
 			// Expando
 
 			ExpandoBridge expandoBridge = image.getExpandoBridge();
 
 			expandoBridge.setAttributes(serviceContext);
-
-			// Tags
-
-			String[] tagsCategories = serviceContext.getTagsCategories();
-			String[] tagsEntries = serviceContext.getTagsEntries();
-
-			updateTagsAsset(userId, image, tagsCategories, tagsEntries);
 
 			// Indexer
 
@@ -638,25 +657,6 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 		catch (IOException ioe) {
 			throw new SystemException(ioe);
 		}
-	}
-
-	public void updateTagsAsset(
-			long userId, IGImage image, String[] tagsCategories,
-			String[] tagsEntries)
-		throws PortalException, SystemException {
-
-		Image largeImage = imageLocalService.getImage(image.getLargeImageId());
-
-		if (largeImage == null) {
-			return;
-		}
-
-		tagsAssetLocalService.updateAsset(
-			userId, image.getGroupId(), IGImage.class.getName(),
-			image.getImageId(), tagsCategories, tagsEntries, true, null, null,
-			null, null, largeImage.getType(), image.getName(),
-			image.getDescription(), null, null, largeImage.getHeight(),
-			largeImage.getWidth(), null, false);
 	}
 
 	protected IGFolder getFolder(IGImage image, long folderId)

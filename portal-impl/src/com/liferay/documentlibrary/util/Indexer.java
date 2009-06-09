@@ -35,14 +35,14 @@ import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil;
+import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
 import com.liferay.portlet.expando.util.ExpandoBridgeIndexerUtil;
-import com.liferay.portlet.tags.model.TagsEntryConstants;
-import com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -81,12 +81,12 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 	public static void addFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, long fileEntryId, String properties,
-			Date modifiedDate, String[] tagsCategories, String[] tagsEntries)
+			Date modifiedDate, long[] assetCategoryIds, String[] assetTagNames)
 		throws SearchException {
 
 		Document doc = getFileDocument(
 			companyId, portletId, groupId, repositoryId, fileName, fileEntryId,
-			properties, modifiedDate, tagsCategories, tagsEntries);
+			properties, modifiedDate, assetCategoryIds, assetTagNames);
 
 		if (doc != null) {
 			SearchEngineUtil.addDocument(companyId, doc);
@@ -148,16 +148,16 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 			String properties = sb.toString();
 
-			String[] tagsCategories = TagsEntryLocalServiceUtil.getEntryNames(
-				DLFileEntry.class.getName(), fileEntry.getFileEntryId(),
-				TagsEntryConstants.FOLKSONOMY_CATEGORY);
-			String[] tagsEntries = TagsEntryLocalServiceUtil.getEntryNames(
+			long[] assetCategoryIds =
+				AssetCategoryLocalServiceUtil.getCategoryIds(
+					DLFileEntry.class.getName(), fileEntry.getFileEntryId());
+			String[] assetTagNames = AssetTagLocalServiceUtil.getTagNames(
 				DLFileEntry.class.getName(), fileEntry.getFileEntryId());
 
 			return getFileDocument(
 				companyId, portletId, groupId, repositoryId, fileName,
 				fileEntry.getFileEntryId(), properties,
-				fileEntry.getModifiedDate(), tagsCategories, tagsEntries);
+				fileEntry.getModifiedDate(), assetCategoryIds, assetTagNames);
 		}
 		catch (PortalException pe) {
 			throw new SearchException(pe.getMessage());
@@ -170,7 +170,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 	public static Document getFileDocument(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, long fileEntryId, String properties,
-			Date modifiedDate, String[] tagsCategories, String[] tagsEntries)
+			Date modifiedDate, long[] assetCategoryIds, String[] assetTagNames)
 		throws SearchException {
 
 		if (fileEntryId <= 0) {
@@ -250,8 +250,8 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		}
 
 		doc.addText(Field.PROPERTIES, properties);
-		doc.addKeyword(Field.TAGS_CATEGORIES, tagsCategories);
-		doc.addKeyword(Field.TAGS_ENTRIES, tagsEntries);
+		doc.addKeyword(Field.ASSET_CATEGORY_IDS, assetCategoryIds);
+		doc.addKeyword(Field.ASSET_TAG_NAMES, assetTagNames);
 
 		doc.addKeyword("repositoryId", repositoryId);
 		doc.addKeyword("path", fileName);
@@ -285,12 +285,12 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 	public static void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, long fileEntryId, String properties,
-			Date modifiedDate, String[] tagsCategories, String[] tagsEntries)
+			Date modifiedDate, long[] assetCategoryIds, String[] assetTagNames)
 		throws SearchException {
 
 		Document doc = getFileDocument(
 			companyId, portletId, groupId, repositoryId, fileName, fileEntryId,
-			properties, modifiedDate, tagsCategories, tagsEntries);
+			properties, modifiedDate, assetCategoryIds, assetTagNames);
 
 		if (doc != null) {
 			SearchEngineUtil.updateDocument(companyId, doc.get(Field.UID), doc);

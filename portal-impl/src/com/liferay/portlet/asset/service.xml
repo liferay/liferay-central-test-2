@@ -29,7 +29,6 @@
 
 		<!-- Relationships -->
 
-		<column name="assets" type="Collection" entity="com.liferay.portlet.tags.TagsAsset" mapping-table="TagsAssets_AssetCategories" />
 		<column name="entries" type="Collection" entity="AssetEntry" mapping-table="AssetEntries_AssetCategories" />
 
 		<!-- Order -->
@@ -60,7 +59,6 @@
 		<reference package-path="com.liferay.counter" entity="Counter" />
 		<reference package-path="com.liferay.portal" entity="Resource" />
 		<reference package-path="com.liferay.portal" entity="User" />
-		<reference package-path="com.liferay.portlet.tags" entity="TagsAsset" />
 	</entity>
 	<entity name="AssetCategoryProperty" local-service="true" remote-service="true">
 

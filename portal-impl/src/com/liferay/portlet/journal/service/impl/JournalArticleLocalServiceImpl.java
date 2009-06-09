@@ -43,7 +43,6 @@ import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
-import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.MathUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
@@ -99,7 +98,6 @@ import com.liferay.portlet.journal.util.Indexer;
 import com.liferay.portlet.journal.util.JournalUtil;
 import com.liferay.portlet.journal.util.comparator.ArticleVersionComparator;
 import com.liferay.portlet.journalcontent.util.JournalContentUtil;
-import com.liferay.portlet.tags.model.TagsEntry;
 import com.liferay.portlet.tags.model.TagsEntryConstants;
 import com.liferay.util.LocalizationUtil;
 
@@ -327,7 +325,7 @@ public class JournalArticleLocalServiceImpl
 
 		updateAsset(
 			userId, article, serviceContext.getAssetCategoryIds(),
-			serviceContext.getTagsEntries());
+			serviceContext.getAssetTagNames());
 
 		// Message boards
 
@@ -425,16 +423,16 @@ public class JournalArticleLocalServiceImpl
 
 		journalArticlePersistence.update(article, false);
 
+		// Asset
+
+		assetEntryLocalService.updateVisible(
+			JournalArticle.class.getName(), article.getResourcePrimKey(), true);
+
 		// Expando
 
 		ExpandoBridge expandoBridge = article.getExpandoBridge();
 
 		expandoBridge.setAttributes(serviceContext);
-
-		// Tags
-
-		tagsAssetLocalService.updateVisible(
-			JournalArticle.class.getName(), article.getResourcePrimKey(), true);
 
 		// Email
 
@@ -676,11 +674,10 @@ public class JournalArticleLocalServiceImpl
 
 		// Asset
 
-		String[] tagsEntries = tagsEntryLocalService.getEntryNames(
-			JournalArticle.class.getName(), oldArticle.getResourcePrimKey(),
-			TagsEntryConstants.FOLKSONOMY_TAG);
+		String[] assetTagNames = assetTagLocalService.getTagNames(
+			JournalArticle.class.getName(), oldArticle.getResourcePrimKey());
 
-		updateAsset(userId, newArticle, null, tagsEntries);
+		updateAsset(userId, newArticle, null, assetTagNames);
 
 		return newArticle;
 	}
@@ -741,11 +738,6 @@ public class JournalArticleLocalServiceImpl
 
 		if (articlesCount == 1) {
 
-			// Tags
-
-			tagsAssetLocalService.deleteAsset(
-				JournalArticle.class.getName(), article.getResourcePrimKey());
-
 			// Ratings
 
 			ratingsStatsLocalService.deleteStats(
@@ -754,6 +746,11 @@ public class JournalArticleLocalServiceImpl
 			// Message boards
 
 			mbMessageLocalService.deleteDiscussionMessages(
+				JournalArticle.class.getName(), article.getResourcePrimKey());
+
+			// Asset
+
+			assetEntryLocalService.deleteEntry(
 				JournalArticle.class.getName(), article.getResourcePrimKey());
 
 			// Content searches
@@ -845,9 +842,9 @@ public class JournalArticleLocalServiceImpl
 
 		journalArticlePersistence.update(article, false);
 
-		// Tags
+		// Asset
 
-		tagsAssetLocalService.updateVisible(
+		assetEntryLocalService.updateVisible(
 			JournalArticle.class.getName(), article.getResourcePrimKey(),
 			false);
 
@@ -1699,7 +1696,7 @@ public class JournalArticleLocalServiceImpl
 
 	public void updateAsset(
 			long userId, JournalArticle article, long[] assetCategoryIds,
-			String[] tagsEntries)
+			String[] assetTagNames)
 		throws PortalException, SystemException {
 
 		// Get the earliest display date and latest expiration date among
@@ -1726,9 +1723,9 @@ public class JournalArticleLocalServiceImpl
 			}
 		}
 
-		tagsAssetLocalService.updateAsset(
+		assetEntryLocalService.updateEntry(
 			userId, article.getGroupId(), JournalArticle.class.getName(),
-			article.getResourcePrimKey(), assetCategoryIds, tagsEntries,
+			article.getResourcePrimKey(), assetCategoryIds, assetTagNames,
 			visible, null, null, displayDate, expirationDate,
 			ContentTypes.TEXT_HTML, article.getTitle(),
 			article.getDescription(), null, null, 0, 0, null, false);
@@ -1828,14 +1825,9 @@ public class JournalArticleLocalServiceImpl
 			PortletKeys.PREFS_OWNER_TYPE_LAYOUT, PortletKeys.PREFS_PLID_SHARED,
 			PortletKeys.JOURNAL);
 
-		String[] tagsCategories = getTagsEntries(article);
-		String[] tagsEntries = getTagsCategories(article);
-
 		ServiceContext serviceContext = new ServiceContext();
 
 		serviceContext.setPortletPreferencesIds(portletPreferencesIds);
-		serviceContext.setTagsCategories(tagsCategories);
-		serviceContext.setTagsEntries(tagsEntries);
 
 		return updateArticle(
 			userId, groupId, articleId, version, incrementVersion,
@@ -1978,6 +1970,13 @@ public class JournalArticleLocalServiceImpl
 
 		updateUrlTitles(groupId, articleId, article.getUrlTitle());
 
+		// Asset
+
+		long[] assetCategoryIds = serviceContext.getAssetCategoryIds();
+		String[] assetTagNames = serviceContext.getAssetTagNames();
+
+		updateAsset(userId, article, assetCategoryIds, assetTagNames);
+
 		// Expando
 
 		ExpandoBridge expandoBridge = article.getExpandoBridge();
@@ -1988,13 +1987,6 @@ public class JournalArticleLocalServiceImpl
 
 		saveImages(
 			smallImage, article.getSmallImageId(), smallFile, smallBytes);
-
-		// Tags
-
-		long[] assetCategoryIds = serviceContext.getAssetCategoryIds();
-		String[] tagsEntries = serviceContext.getTagsEntries();
-
-		updateAsset(userId, article, assetCategoryIds, tagsEntries);
 
 		// Email
 
@@ -2440,24 +2432,6 @@ public class JournalArticleLocalServiceImpl
 		dateInterval[1] = latestExpirationDate;
 
 		return dateInterval;
-	}
-
-	protected String[] getTagsCategories(JournalArticle article)
-		throws SystemException {
-
-		List<TagsEntry> tagsEntries = tagsEntryLocalService.getEntries(
-			JournalArticle.class.getName(), article.getPrimaryKey(), false);
-
-		return StringUtil.split(ListUtil.toString(tagsEntries, "name"));
-	}
-
-	protected String[] getTagsEntries(JournalArticle article)
-		throws SystemException {
-
-		List<TagsEntry> tagsEntries = tagsEntryLocalService.getEntries(
-			JournalArticle.class.getName(), article.getPrimaryKey(), true);
-
-		return StringUtil.split(ListUtil.toString(tagsEntries, "name"));
 	}
 
 	protected String getUniqueUrlTitle(

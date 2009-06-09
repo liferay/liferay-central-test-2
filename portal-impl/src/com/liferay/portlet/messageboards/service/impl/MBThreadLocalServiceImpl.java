@@ -100,11 +100,6 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 
 		for (MBMessage message : messages) {
 
-			// Tags
-
-			tagsAssetLocalService.deleteAsset(
-				MBMessage.class.getName(), message.getMessageId());
-
 			// Social
 
 			socialActivityLocalService.deleteActivities(
@@ -113,6 +108,11 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 			// Ratings
 
 			ratingsStatsLocalService.deleteStats(
+				MBMessage.class.getName(), message.getMessageId());
+
+			// Asset
+
+			assetEntryLocalService.deleteEntry(
 				MBMessage.class.getName(), message.getMessageId());
 
 			// Statistics
@@ -491,8 +491,7 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 			dlService.addFile(
 				companyId, portletId, groupId, repositoryId,
 				newAttachmentsDir + "/" + name, 0, StringPool.BLANK,
-				message.getModifiedDate(), new String[0], new String[0],
-				fileBytes);
+				message.getModifiedDate(), new ServiceContext(), fileBytes);
 
 			dlService.deleteFile(companyId, portletId, repositoryId, fileName);
 		}

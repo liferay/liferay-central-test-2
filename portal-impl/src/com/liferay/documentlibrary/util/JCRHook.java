@@ -40,6 +40,7 @@ import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.service.ServiceContext;
 
 import java.io.BufferedInputStream;
 import java.io.InputStream;
@@ -117,8 +118,7 @@ public class JCRHook extends BaseHook {
 	public void addFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, long fileEntryId, String properties,
-			Date modifiedDate, String[] tagsCategories, String[] tagsEntries,
-			InputStream is)
+			Date modifiedDate, ServiceContext serviceContext, InputStream is)
 		throws PortalException, SystemException {
 
 		Session session = null;
@@ -155,8 +155,9 @@ public class JCRHook extends BaseHook {
 
 				Indexer.addFile(
 					companyId, portletId, groupId, repositoryId, fileName,
-					fileEntryId, properties, modifiedDate, tagsCategories,
-					tagsEntries);
+					fileEntryId, properties, modifiedDate,
+					serviceContext.getAssetCategoryIds(),
+					serviceContext.getAssetTagNames());
 			}
 		}
 		catch (RepositoryException re) {
@@ -575,60 +576,6 @@ public class JCRHook extends BaseHook {
 
 	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, double versionNumber, String sourceFileName,
-			long fileEntryId, String properties, Date modifiedDate,
-			String[] tagsCategories, String[] tagsEntries, InputStream is)
-		throws PortalException, SystemException {
-
-		String versionLabel = String.valueOf(versionNumber);
-
-		Session session = null;
-
-		try {
-			session = JCRFactoryUtil.createSession();
-
-			Node rootNode = getRootNode(session, companyId);
-			Node repositoryNode = getFolderNode(rootNode, repositoryId);
-			Node fileNode = repositoryNode.getNode(fileName);
-			Node contentNode = fileNode.getNode(JCRConstants.JCR_CONTENT);
-
-			contentNode.checkout();
-
-			contentNode.setProperty(JCRConstants.JCR_MIME_TYPE, "text/plain");
-			contentNode.setProperty(JCRConstants.JCR_DATA, is);
-			contentNode.setProperty(
-				JCRConstants.JCR_LAST_MODIFIED, Calendar.getInstance());
-
-			session.save();
-
-			Version version = contentNode.checkin();
-
-			contentNode.getVersionHistory().addVersionLabel(
-				version.getName(), versionLabel, false);
-
-			Indexer.updateFile(
-				companyId, portletId, groupId, repositoryId, fileName,
-				fileEntryId, properties, modifiedDate, tagsCategories,
-				tagsEntries);
-		}
-		catch (PathNotFoundException pnfe) {
-			throw new NoSuchFileException(fileName);
-		}
-		catch (RepositoryException re) {
-			throw new SystemException(re);
-		}
-		catch (SearchException se) {
-			throw new SystemException(se);
-		}
-		finally {
-			if (session != null) {
-				session.logout();
-			}
-		}
-	}
-
-	public void updateFile(
-			long companyId, String portletId, long groupId, long repositoryId,
 			long newRepositoryId, String fileName, long fileEntryId)
 		throws PortalException, SystemException {
 
@@ -703,6 +650,61 @@ public class JCRHook extends BaseHook {
 				Indexer.addFile(
 					companyId, portletId, groupId, newRepositoryId, fileName);
 			}
+		}
+		catch (PathNotFoundException pnfe) {
+			throw new NoSuchFileException(fileName);
+		}
+		catch (RepositoryException re) {
+			throw new SystemException(re);
+		}
+		catch (SearchException se) {
+			throw new SystemException(se);
+		}
+		finally {
+			if (session != null) {
+				session.logout();
+			}
+		}
+	}
+
+	public void updateFile(
+			long companyId, String portletId, long groupId, long repositoryId,
+			String fileName, double versionNumber, String sourceFileName,
+			long fileEntryId, String properties, Date modifiedDate,
+			ServiceContext serviceContext, InputStream is)
+		throws PortalException, SystemException {
+
+		String versionLabel = String.valueOf(versionNumber);
+
+		Session session = null;
+
+		try {
+			session = JCRFactoryUtil.createSession();
+
+			Node rootNode = getRootNode(session, companyId);
+			Node repositoryNode = getFolderNode(rootNode, repositoryId);
+			Node fileNode = repositoryNode.getNode(fileName);
+			Node contentNode = fileNode.getNode(JCRConstants.JCR_CONTENT);
+
+			contentNode.checkout();
+
+			contentNode.setProperty(JCRConstants.JCR_MIME_TYPE, "text/plain");
+			contentNode.setProperty(JCRConstants.JCR_DATA, is);
+			contentNode.setProperty(
+				JCRConstants.JCR_LAST_MODIFIED, Calendar.getInstance());
+
+			session.save();
+
+			Version version = contentNode.checkin();
+
+			contentNode.getVersionHistory().addVersionLabel(
+				version.getName(), versionLabel, false);
+
+			Indexer.updateFile(
+				companyId, portletId, groupId, repositoryId, fileName,
+				fileEntryId, properties, modifiedDate,
+				serviceContext.getAssetCategoryIds(),
+				serviceContext.getAssetTagNames());
 		}
 		catch (PathNotFoundException pnfe) {
 			throw new NoSuchFileException(fileName);

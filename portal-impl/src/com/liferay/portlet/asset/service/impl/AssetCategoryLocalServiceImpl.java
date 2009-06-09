@@ -40,7 +40,6 @@ import com.liferay.portlet.asset.model.AssetCategoryConstants;
 import com.liferay.portlet.asset.model.AssetCategoryProperty;
 import com.liferay.portlet.asset.model.AssetEntry;
 import com.liferay.portlet.asset.service.base.AssetCategoryLocalServiceBaseImpl;
-import com.liferay.portlet.tags.model.TagsAsset;
 import com.liferay.util.Autocomplete;
 
 import java.util.ArrayList;
@@ -237,6 +236,12 @@ public class AssetCategoryLocalServiceImpl
 		return assetCategoryPersistence.findByPrimaryKey(categoryId);
 	}
 
+	public long[] getCategoryIds(String className, long classPK)
+		throws SystemException {
+
+		return getCategoryIds(getCategories(className, classPK));
+	}
+
 	public List<AssetCategory> getChildCategories(long parentCategoryId)
 		throws SystemException {
 
@@ -266,10 +271,10 @@ public class AssetCategoryLocalServiceImpl
 	public void mergeCategories(long fromCategoryId, long toCategoryId)
 		throws PortalException, SystemException {
 
-		List<TagsAsset> assets = assetCategoryPersistence.getTagsAssets(
+		List<AssetEntry> entries = assetCategoryPersistence.getAssetEntries(
 			fromCategoryId);
 
-		assetCategoryPersistence.addTagsAssets(toCategoryId, assets);
+		assetCategoryPersistence.addAssetEntries(toCategoryId, entries);
 
 		List<AssetCategoryProperty> properties =
 			assetCategoryPropertyPersistence.findByCategoryId(fromCategoryId);
@@ -361,8 +366,9 @@ public class AssetCategoryLocalServiceImpl
 		return category;
 	}
 
-	protected String[] getCategoryNames(List <AssetCategory>categories) {
-		return StringUtil.split(ListUtil.toString(categories, "name"));
+	protected long[] getCategoryIds(List <AssetCategory>categories) {
+		return StringUtil.split(
+			ListUtil.toString(categories, "categoryId"), 0L);
 	}
 
 	protected void validate(long categoryId, long parentCategoryId, String name)

@@ -28,7 +28,6 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.ListUtil;
-import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -55,8 +54,6 @@ import com.liferay.portlet.wiki.model.WikiPage;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
-import javax.portlet.PortletRequest;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -126,11 +123,6 @@ public class AssetUtil {
 		return sb.toString();
 	}
 
-	public static long[] getCategoyIds(PortletRequest portletRequest) {
-		return StringUtil.split(
-			ParamUtil.getString(portletRequest, "categoryIds"), 0L);
-	}
-
 	public static Set<String> getLayoutTagNames(HttpServletRequest request) {
 		Set<String> tagNames = (Set<String>)request.getAttribute(
 			WebKeys.ASSET_LAYOUT_TAG_NAMES);
@@ -142,11 +134,6 @@ public class AssetUtil {
 		}
 
 		return tagNames;
-	}
-
-	public static String[] getTagNames(PortletRequest portletRequest) {
-		return StringUtil.split(
-			ParamUtil.getString(portletRequest, "tagNames"));
 	}
 
 	public static boolean isValidWord(String word) {

@@ -724,11 +724,12 @@ public class PortletImporter {
 					asset.attributeValue("class-name"));
 				long classPK = GetterUtil.getLong(
 					asset.attributeValue("class-pk"));
-				String entries = GetterUtil.getString(
-					asset.attributeValue("entries"));
+				long[] assetCategoryIds = StringUtil.split(
+					GetterUtil.getString(asset.attributeValue("categoryIds")),
+					0L);
 
-				context.addTagsCategories(
-					className, new Long(classPK), StringUtil.split(entries));
+				context.addAssetCategories(
+					className, new Long(classPK), assetCategoryIds);
 			}
 		}
 		catch (Exception e) {
@@ -758,11 +759,12 @@ public class PortletImporter {
 					asset.attributeValue("class-name"));
 				long classPK = GetterUtil.getLong(
 					asset.attributeValue("class-pk"));
-				String entries = GetterUtil.getString(
-					asset.attributeValue("entries"));
+				String assetTagNames = GetterUtil.getString(
+					asset.attributeValue("tags"));
 
-				context.addTagsEntries(
-					className, new Long(classPK), StringUtil.split(entries));
+				context.addAssetTags(
+					className, new Long(classPK),
+					StringUtil.split(assetTagNames));
 			}
 		}
 		catch (Exception e) {

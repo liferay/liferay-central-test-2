@@ -61,7 +61,7 @@ public class VerifyBookmarks extends VerifyProcess {
 		for (BookmarksEntry entry : entries) {
 			try {
 				BookmarksEntryLocalServiceUtil.updateAsset(
-					entry.getUserId(), entry, new long[0], new String[0]);
+					entry.getUserId(), entry, null, null);
 			}
 			catch (Exception e) {
 				if (_log.isWarnEnabled()) {

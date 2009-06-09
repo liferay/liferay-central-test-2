@@ -249,7 +249,7 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 			page.setUserUuid(page.getUserUuid());
 
 			if (context.getBooleanParameter(_NAMESPACE, "categories")) {
-				context.addTagsCategories(
+				context.addAssetCategories(
 					WikiPage.class, page.getResourcePrimKey());
 			}
 
@@ -258,8 +258,7 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 			}
 
 			if (context.getBooleanParameter(_NAMESPACE, "tags")) {
-				context.addTagsEntries(
-					WikiPage.class, page.getResourcePrimKey());
+				context.addAssetTags(WikiPage.class, page.getResourcePrimKey());
 			}
 
 			if (context.getBooleanParameter(_NAMESPACE, "attachments") &&
@@ -363,23 +362,23 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 		long nodeId = MapUtil.getLong(
 			nodePKs, page.getNodeId(), page.getNodeId());
 
-		String[] tagsCategories = null;
-		String[] tagsEntries = null;
+		long[] assetCategoryIds = null;
+		String[] assetTagNames = null;
 
 		if (context.getBooleanParameter(_NAMESPACE, "categories")) {
-			tagsCategories = context.getTagsCategories(
+			assetCategoryIds = context.getAssetCategoryIds(
 				WikiPage.class, page.getResourcePrimKey());
 		}
 
 		if (context.getBooleanParameter(_NAMESPACE, "tags")) {
-			tagsEntries = context.getTagsEntries(
+			assetTagNames = context.getAssetTagNames(
 				WikiPage.class, page.getResourcePrimKey());
 		}
 
 		ServiceContext serviceContext = new ServiceContext();
 
-		serviceContext.setTagsCategories(tagsCategories);
-		serviceContext.setTagsEntries(tagsEntries);
+		serviceContext.setAssetCategoryIds(assetCategoryIds);
+		serviceContext.setAssetTagNames(assetTagNames);
 
 		WikiPage existingPage = null;
 

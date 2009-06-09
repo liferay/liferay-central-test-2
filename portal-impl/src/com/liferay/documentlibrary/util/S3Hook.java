@@ -35,6 +35,7 @@ import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.SystemProperties;
@@ -88,8 +89,7 @@ public class S3Hook extends BaseHook {
 	public void addFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, long fileEntryId, String properties,
-			Date modifiedDate, String[] tagsCategories, String[] tagsEntries,
-			InputStream is)
+			Date modifiedDate, ServiceContext serviceContext, InputStream is)
 		throws SystemException {
 
 		try {
@@ -103,8 +103,9 @@ public class S3Hook extends BaseHook {
 
 			Indexer.addFile(
 				companyId, portletId, groupId, repositoryId, fileName,
-				fileEntryId, properties, modifiedDate, tagsCategories,
-				tagsEntries);
+				fileEntryId, properties, modifiedDate,
+				serviceContext.getAssetCategoryIds(),
+				serviceContext.getAssetTagNames());
 		}
 		catch (S3ServiceException s3se) {
 			throw new SystemException(s3se);
@@ -320,35 +321,6 @@ public class S3Hook extends BaseHook {
 
 	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, double versionNumber, String sourceFileName,
-			long fileEntryId, String properties, Date modifiedDate,
-			String[] tagsCategories, String[] tagsEntries, InputStream is)
-		throws SystemException {
-
-		try {
-			S3Object s3Object = new S3Object(
-				_s3Bucket,
-				getKey(companyId, repositoryId, fileName, versionNumber));
-
-			s3Object.setDataInputStream(is);
-
-			_s3Service.putObject(_s3Bucket, s3Object);
-
-			Indexer.updateFile(
-				companyId, portletId, groupId, repositoryId, fileName,
-				fileEntryId, properties, modifiedDate, tagsCategories,
-				tagsEntries);
-		}
-		catch (S3ServiceException s3se) {
-			throw new SystemException(s3se);
-		}
-		catch (SearchException se) {
-			throw new SystemException(se);
-		}
-	}
-
-	public void updateFile(
-			long companyId, String portletId, long groupId, long repositoryId,
 			long newRepositoryId, String fileName, long fileEntryId)
 		throws PortalException, SystemException {
 
@@ -413,6 +385,36 @@ public class S3Hook extends BaseHook {
 		}
 		catch (S3ServiceException s3se) {
 			throw new SystemException(s3se);
+		}
+	}
+
+	public void updateFile(
+			long companyId, String portletId, long groupId, long repositoryId,
+			String fileName, double versionNumber, String sourceFileName,
+			long fileEntryId, String properties, Date modifiedDate,
+			ServiceContext serviceContext, InputStream is)
+		throws SystemException {
+
+		try {
+			S3Object s3Object = new S3Object(
+				_s3Bucket,
+				getKey(companyId, repositoryId, fileName, versionNumber));
+
+			s3Object.setDataInputStream(is);
+
+			_s3Service.putObject(_s3Bucket, s3Object);
+
+			Indexer.updateFile(
+				companyId, portletId, groupId, repositoryId, fileName,
+				fileEntryId, properties, modifiedDate,
+				serviceContext.getAssetCategoryIds(),
+				serviceContext.getAssetTagNames());
+		}
+		catch (S3ServiceException s3se) {
+			throw new SystemException(s3se);
+		}
+		catch (SearchException se) {
+			throw new SystemException(se);
 		}
 	}
 
@@ -527,11 +529,11 @@ public class S3Hook extends BaseHook {
 	private static final String _ACCESS_KEY = PropsUtil.get(
 		PropsKeys.DL_HOOK_S3_ACCESS_KEY);
 
-	private static final String _SECRET_KEY = PropsUtil.get(
-		PropsKeys.DL_HOOK_S3_SECRET_KEY);
-
 	private static final String _BUCKET_NAME = PropsUtil.get(
 		PropsKeys.DL_HOOK_S3_BUCKET_NAME);
+
+	private static final String _SECRET_KEY = PropsUtil.get(
+		PropsKeys.DL_HOOK_S3_SECRET_KEY);
 
 	private static Log _log = LogFactoryUtil.getLog(S3Hook.class);
 
