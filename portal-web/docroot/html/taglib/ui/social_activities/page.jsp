@@ -90,7 +90,7 @@ DateFormat timeFormatDate = DateFormats.getTime(locale, timeZone);
 				syndEntry.setLink(activityFeedEntry.getLink());
 			}
 
-			syndEntry.setPublishedDate(activity.getCreateDate());
+			syndEntry.setPublishedDate(new Date(activity.getCreateDate()));
 
 			SyndContent syndContent = new SyndContentImpl();
 
@@ -141,7 +141,7 @@ DateFormat timeFormatDate = DateFormats.getTime(locale, timeZone);
 
 				Portlet portlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(), activityFeedEntry.getPortletId());
 
-				int curDaysBetween = DateUtil.getDaysBetween(activity.getCreateDate(), now, timeZone);
+				int curDaysBetween = DateUtil.getDaysBetween(new Date(activity.getCreateDate()), now, timeZone);
 			%>
 
 				<c:if test="<%= curDaysBetween > daysBetween %>">
