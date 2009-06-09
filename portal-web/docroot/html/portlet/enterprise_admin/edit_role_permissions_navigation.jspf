@@ -39,7 +39,7 @@ portlets = ListUtil.sort(portlets, new PortletTitleComparator(application, local
 
 			<c:choose>
 				<c:when test="<%= role.getType() == RoleConstants.TYPE_COMMUNITY %>">
-					<optgroup label="<liferay-ui:message key="administration"/>">
+					<optgroup label="<liferay-ui:message key="administration" />">
 
 						<%
 						editPermissionsURL.setParameter("portletResource", PortletKeys.ENTERPRISE_ADMIN_COMMUNITIES);
@@ -50,7 +50,7 @@ portlets = ListUtil.sort(portlets, new PortletTitleComparator(application, local
 					</optgroup>
 				</c:when>
 				<c:when test="<%= role.getType() == RoleConstants.TYPE_ORGANIZATION %>">
-					<optgroup label="<liferay-ui:message key="administration"/>">
+					<optgroup label="<liferay-ui:message key="administration" />">
 
 						<%
 						editPermissionsURL.setParameter("portletResource", PortletKeys.ENTERPRISE_ADMIN_ORGANIZATIONS);
@@ -61,7 +61,8 @@ portlets = ListUtil.sort(portlets, new PortletTitleComparator(application, local
 					</optgroup>
 				</c:when>
 				<c:otherwise>
-					<optgroup label="<liferay-ui:message key="portal"/>">
+					<optgroup label="<liferay-ui:message key="portal" />">
+
 						<%
 						if (role.getType() == RoleConstants.TYPE_REGULAR) {
 							editPermissionsURL.setParameter("portletResource", PortletKeys.PORTAL);
@@ -106,7 +107,7 @@ portlets = ListUtil.sort(portlets, new PortletTitleComparator(application, local
 				</c:otherwise>
 			</c:choose>
 
-			<optgroup label="<liferay-ui:message key="content"/>">
+			<optgroup label="<liferay-ui:message key="content" />">
 
 				<%
 				for (Portlet portlet : portlets) {
@@ -138,7 +139,7 @@ portlets = ListUtil.sort(portlets, new PortletTitleComparator(application, local
 			Set<String> hiddenPortletIds = portletCategory.getCategory("category.hidden").getPortletIds();
 			%>
 
-			<optgroup label="<liferay-ui:message key="applications"/>">
+			<optgroup label="<liferay-ui:message key="applications" />">
 
 				<%
 				for (Portlet portlet : portlets) {
@@ -157,7 +158,6 @@ portlets = ListUtil.sort(portlets, new PortletTitleComparator(application, local
 				%>
 
 			</optgroup>
-
 		</select>
 	</div>
 </fieldset>
