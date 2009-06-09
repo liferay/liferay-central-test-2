@@ -205,7 +205,6 @@
 	<classpathentry kind="lib" path="lib/portal/slf4j-log4j12.jar"/>
 	<classpathentry kind="lib" path="lib/portal/soap.jar"/>
 	<classpathentry kind="lib" path="lib/portal/spring.jar"/>
-	<classpathentry kind="lib" path="lib/portal/spring-test.jar"/>
 	<classpathentry kind="lib" path="lib/portal/spring-webmvc.jar"/>
 	<classpathentry kind="lib" path="lib/portal/stax.jar"/>
 	<classpathentry kind="lib" path="lib/portal/struts.jar"/>

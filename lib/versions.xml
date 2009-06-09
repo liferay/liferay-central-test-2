@@ -2275,18 +2275,6 @@
 		</licenses>
 	</library>
 	<library>
-		<file-name>portal/spring-test.jar</file-name>
-		<version>2.5.6</version>
-		<project-name>Spring</project-name>
-		<project-url>http://www.springframework.org</project-url>
-		<licenses>
-			<license>
-				<license-name>Apache License 2.0</license-name>
-				<copyright-notice>Copyright (c) 2002-2007 the original author or authors.</copyright-notice>
-			</license>
-		</licenses>
-	</library>
-	<library>
 		<file-name>portal/spring-webmvc.jar</file-name>
 		<version>2.5.6</version>
 		<project-name>Spring</project-name>
