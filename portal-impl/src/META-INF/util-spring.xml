@@ -65,11 +65,6 @@
 			<bean class="com.liferay.portal.dao.jdbc.spring.MappingSqlQueryFactoryImpl" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil" class="com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil">
-		<property name="dynamicQueryFactory">
-			<bean class="com.liferay.portal.dao.orm.hibernate.DynamicQueryFactoryImpl" />
-		</property>
-	</bean>
 	<bean id="com.liferay.portal.kernel.dao.orm.EntityCacheUtil" class="com.liferay.portal.kernel.dao.orm.EntityCacheUtil">
 		<property name="entityCache">
 			<bean class="com.liferay.portal.dao.orm.common.EntityCacheImpl">
@@ -82,26 +77,6 @@
 			<bean class="com.liferay.portal.dao.orm.common.FinderCacheImpl">
 				<property name="multiVMPool" ref="com.liferay.portal.kernel.cache.MultiVMPool" />
 			</bean>
-		</property>
-	</bean>
-	<bean id="com.liferay.portal.kernel.dao.orm.OrderFactoryUtil" class="com.liferay.portal.kernel.dao.orm.OrderFactoryUtil">
-		<property name="orderFactory">
-			<bean class="com.liferay.portal.dao.orm.hibernate.OrderFactoryImpl" />
-		</property>
-	</bean>
-	<bean id="com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil" class="com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil">
-		<property name="projectionFactory">
-			<bean class="com.liferay.portal.dao.orm.hibernate.ProjectionFactoryImpl" />
-		</property>
-	</bean>
-	<bean id="com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil" class="com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil">
-		<property name="propertyFactory">
-			<bean class="com.liferay.portal.dao.orm.hibernate.PropertyFactoryImpl" />
-		</property>
-	</bean>
-	<bean id="com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil" class="com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil">
-		<property name="restrictionsFactory">
-			<bean class="com.liferay.portal.dao.orm.hibernate.RestrictionsFactoryImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.events.StartupHelperUtil" class="com.liferay.portal.events.StartupHelperUtil">
