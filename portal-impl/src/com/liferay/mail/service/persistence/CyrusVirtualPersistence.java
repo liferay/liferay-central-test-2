@@ -42,7 +42,7 @@ import java.util.List;
 public class CyrusVirtualPersistence extends BasePersistenceImpl {
 
 	public static String FIND_BY_USER_ID =
-		"FROM " + CyrusVirtual.class.getName() + " WHERE userId = ?";
+		"SELECT cyrusVirtual FROM CyrusVirtual cyrusVirtual WHERE userId = ?";
 
 	public void remove(String emailAddress)
 		throws NoSuchCyrusVirtualException, SystemException {
