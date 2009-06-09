@@ -12,11 +12,36 @@
 	Expanse.Tooltip = new Expanse.Widget(Widget.Tooltip);
 	Expanse.Panel = new Expanse.Widget(Widget.Panel);
 
+	var normalizeArguments = function(el, options) {
+		if (!options) {
+			options = {};
+
+			if (el) {
+				if (!YAHOO.lang.isString(el) && !el.tagName) {
+					options = el;
+
+					el = options.el || Dom.generateId();
+				}
+			}
+		}
+
+		return [el, options];
+	};
+
 	var baseContainerImpl = {
 		initialize: function(el, options) {
 			var instance = this;
 
-			instance._super.apply(instance, arguments);
+			var args = normalizeArguments(el, options);
+
+			el = args[0];
+			options = args[1];
+
+			if (instance._defaults) {
+				YAHOO.lang.augmentObject(options, instance._defaults);
+			}
+
+			instance._super.call(instance, el, options);
 
 			if (options.body) {
 				if (options.body.url) {
@@ -69,28 +94,21 @@
 	Expanse.Overlay = Expanse.Overlay.extend(baseContainerImpl);
 	Expanse.Dialog = Expanse.Dialog.extend(baseContainerImpl);
 	Expanse.SimpleDialog = Expanse.SimpleDialog.extend(baseContainerImpl);
+	Expanse.Tooltip = Expanse.Tooltip.extend(baseContainerImpl);
 	Expanse.Panel = Expanse.Panel.extend(baseContainerImpl);
 
 	Expanse.Overlay = Expanse.Overlay.extend(
 		{
-			initialize: function(el, options) {
-				var instance = this;
-
-				options.zIndex = options.zIndex || Expanse.zIndex.CONTAINER;
-
-				instance._super(el, options);
+			_defaults: {
+				zIndex: Expanse.zIndex.CONTAINER
 			}
 		}
 	);
 
 	Expanse.Tooltip = Expanse.Tooltip.extend(
 		{
-			initialize: function(el, options) {
-				var instance = this;
-
-				options.zIndex = options.zIndex || Expanse.zIndex.TOOLTIP;
-
-				instance._super(el, options);
+			_defaults: {
+				zIndex: Expanse.zIndex.TOOLTIP
 			}
 		}
 	);
