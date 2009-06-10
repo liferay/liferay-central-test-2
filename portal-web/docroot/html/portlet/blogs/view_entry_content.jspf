@@ -146,15 +146,15 @@
 				<span class="view-count">
 
 					<%
-					TagsAsset asset = TagsAssetLocalServiceUtil.getAsset(BlogsEntry.class.getName(), entry.getEntryId());
+					AssetEntry assetEntry = AssetEntryLocalServiceUtil.getEntry(BlogsEntry.class.getName(), entry.getEntryId());
 					%>
 
 					<c:choose>
-						<c:when test="<%= asset.getViewCount() == 1 %>">
-							<%= asset.getViewCount() %> <liferay-ui:message key="view" />,
+						<c:when test="<%= assetEntry.getViewCount() == 1 %>">
+							<%= assetEntry.getViewCount() %> <liferay-ui:message key="view" />,
 						</c:when>
-						<c:when test="<%= asset.getViewCount() > 1 %>">
-							<%= asset.getViewCount() %> <liferay-ui:message key="views" />,
+						<c:when test="<%= assetEntry.getViewCount() > 1 %>">
+							<%= assetEntry.getViewCount() %> <liferay-ui:message key="views" />,
 						</c:when>
 					</c:choose>
 				</span>
@@ -190,7 +190,7 @@
 			</c:if>
 
 			<div class="entry-tags">
-				<liferay-ui:tags-summary
+				<liferay-ui:asset-tags-summary
 					className="<%= BlogsEntry.class.getName() %>"
 					classPK="<%= entry.getEntryId() %>"
 				/>

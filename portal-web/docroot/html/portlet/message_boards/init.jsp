@@ -30,6 +30,9 @@
 <%@ page import="com.liferay.portal.kernel.search.Document" %>
 <%@ page import="com.liferay.portal.kernel.search.Field" %>
 <%@ page import="com.liferay.portal.kernel.search.Hits" %>
+<%@ page import="com.liferay.portlet.asset.model.AssetTag" %>
+<%@ page import="com.liferay.portlet.asset.service.AssetTagLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.asset.util.AssetUtil" %>
 <%@ page import="com.liferay.portlet.messageboards.BannedUserException" %>
 <%@ page import="com.liferay.portlet.messageboards.CategoryNameException" %>
 <%@ page import="com.liferay.portlet.messageboards.MailingListEmailAddressException" %>
@@ -73,9 +76,6 @@
 <%@ page import="com.liferay.portlet.messageboards.util.MBUtil" %>
 <%@ page import="com.liferay.portlet.messageboards.util.ThreadHits" %>
 <%@ page import="com.liferay.portlet.messageboards.util.comparator.MessageCreateDateComparator" %>
-<%@ page import="com.liferay.portlet.tags.model.TagsEntry" %>
-<%@ page import="com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil" %>
-<%@ page import="com.liferay.portlet.tags.util.TagsUtil" %>
 <%@ page import="com.liferay.util.RSSUtil" %>
 
 <%

@@ -1,4 +1,3 @@
-<%
 /**
  * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
  *
@@ -20,16 +19,26 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%>
 
-<%@ include file="/html/taglib/init.jsp" %>
+package com.liferay.taglib.ui;
 
-<%@ page import="com.liferay.portlet.asset.model.AssetCategory" %>
-<%@ page import="com.liferay.portlet.asset.model.AssetCategoryConstants" %>
-<%@ page import="com.liferay.portlet.asset.model.AssetEntry" %>
-<%@ page import="com.liferay.portlet.asset.service.AssetEntryLocalServiceUtil" %>
-<%@ page import="com.liferay.portlet.asset.model.AssetVocabulary" %>
-<%@ page import="com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil" %>
-<%@ page import="com.liferay.portlet.asset.service.AssetVocabularyLocalServiceUtil" %>
+import com.liferay.taglib.util.IncludeTag;
 
-<portlet:defineObjects />
+/**
+ * <a href="AssetTagsNavigationTag.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Alvaro del Castillo
+ * @author Eduardo Lundgren
+ * @author Jorge Ferrer
+ *
+ */
+public class AssetTagsNavigationTag extends IncludeTag {
+
+	protected String getDefaultPage() {
+		return _PAGE;
+	}
+
+	private static final String _PAGE =
+		"/html/taglib/ui/asset_tags_navigation/page.jsp";
+
+}

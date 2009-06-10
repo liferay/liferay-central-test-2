@@ -48,7 +48,7 @@ if (Validator.isNotNull(name)) {
 
 String titleWithExtension = BeanParamUtil.getString(fileEntry, request, "titleWithExtension");
 
-String tagsEntries = ParamUtil.getString(renderRequest, "tagsEntries");
+String assetTagNames = ParamUtil.getString(renderRequest, "assetTagNames");
 
 String[] conversions = new String[0];
 
@@ -255,6 +255,22 @@ portletURL.setParameter("name", name);
 			/>
 		</td>
 	</tr>
+	<tr>
+		<td colspan="2">
+			<br />
+		</td>
+	</tr>
+	<tr>
+		<td class="lfr-label">
+			<liferay-ui:message key="tags" />
+		</td>
+		<td>
+			<liferay-ui:asset-tags-summary
+					className="<%= DLFileEntry.class.getName() %>"
+				classPK="<%= fileEntry.getFileEntryId() %>"
+			/>
+		</td>
+	</tr>
 
 	<c:if test="<%= conversions.length > 0 %>">
 		<tr>
@@ -397,7 +413,7 @@ portletURL.setParameter("name", name);
 
 	<liferay-ui:error exception="<%= FileSizeException.class %>" message="please-enter-a-file-with-a-valid-file-size" />
 
-	<liferay-ui:tags-error />
+	<liferay-ui:asset-tags-error />
 
 	<%
 	String fileMaxSize = String.valueOf(PrefsPropsUtil.getLong(PropsKeys.DL_FILE_MAX_SIZE) / 1024);
@@ -488,10 +504,9 @@ portletURL.setParameter("name", name);
 			}
 			%>
 
-			<liferay-ui:tags-selector
+			<liferay-ui:asset-tags-selector
 				className="<%= DLFileEntry.class.getName() %>"
 				classPK="<%= classPK %>"
-				hiddenInput="tagsEntries"
 			/>
 		</td>
 	</tr>

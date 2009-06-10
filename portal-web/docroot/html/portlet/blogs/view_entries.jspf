@@ -57,7 +57,7 @@ showSearch = showSearch && (results.size() > 0);
 for (int i = 0; i < results.size(); i++) {
 	BlogsEntry entry = (BlogsEntry)results.get(i);
 
-	TagsUtil.addLayoutTagsEntries(request, TagsEntryLocalServiceUtil.getEntries(BlogsEntry.class.getName(), entry.getEntryId(), true));
+	AssetUtil.addLayoutTags(request, AssetTagLocalServiceUtil.getTags(BlogsEntry.class.getName(), entry.getEntryId()));
 %>
 
 	<%@ include file="/html/portlet/blogs/view_entry_content.jspf" %>

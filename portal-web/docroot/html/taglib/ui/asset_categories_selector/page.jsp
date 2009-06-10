@@ -31,20 +31,20 @@ String randomNamespace = PwdGenerator.getPassword(PwdGenerator.KEY3, 4) + String
 
 String className = (String)request.getAttribute("liferay-ui:asset_categories_selector:className");
 long classPK = GetterUtil.getLong((String)request.getAttribute("liferay-ui:asset_categories_selector:classPK"));
-String curAssetCategoryIds = StringPool.BLANK;
-String curAssetCategoryNames = StringPool.BLANK;
+String curCategoryIds = StringPool.BLANK;
+String curCategoryNames = StringPool.BLANK;
 
 if (Validator.isNotNull(className) && (classPK > 0)) {
 	List<AssetCategory> entries = AssetCategoryLocalServiceUtil.getCategories(className, classPK);
 
-	curAssetCategoryIds = ListUtil.toString(entries, "categoryId");
-	curAssetCategoryNames = ListUtil.toString(entries, "name");
+	curCategoryIds = ListUtil.toString(entries, "categoryId");
+	curCategoryNames = ListUtil.toString(entries, "name");
 }
 
-String curAssetCategoryIdsParam = request.getParameter("assetCategoryIds");
+String curCategoryIdsParam = request.getParameter("assetCategoryIds");
 
-if (curAssetCategoryIdsParam != null) {
-	curAssetCategoryIds = curAssetCategoryIdsParam;
+if (curCategoryIdsParam != null) {
+	curCategoryIds = curCategoryIdsParam;
 }
 %>
 
@@ -64,8 +64,8 @@ if (curAssetCategoryIdsParam != null) {
 					instanceVar: "<%= randomNamespace %>",
 					hiddenInput: "<%= namespace %>assetCategoryIds",
 					summarySpan: "<%= randomNamespace %>assetCategoriesSummary",
-					curAssetCategoryIds: "<%= curAssetCategoryIds %>",
-					curAssetCategoryNames: "<%= curAssetCategoryNames %>"
+					curCategoryIds: "<%= curCategoryIds %>",
+					curCategoryNames: "<%= curCategoryNames %>"
 				}
 			);
 		}

@@ -35,6 +35,9 @@
 <%@ page import="com.liferay.portal.kernel.search.Document" %>
 <%@ page import="com.liferay.portal.kernel.search.Hits" %>
 <%@ page import="com.liferay.portal.webdav.WebDAVUtil" %>
+<%@ page import="com.liferay.portlet.asset.model.AssetTag" %>
+<%@ page import="com.liferay.portlet.asset.service.AssetTagLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.asset.util.AssetUtil" %>
 <%@ page import="com.liferay.portlet.documentlibrary.DuplicateFolderNameException" %>
 <%@ page import="com.liferay.portlet.documentlibrary.FileShortcutPermissionException" %>
 <%@ page import="com.liferay.portlet.documentlibrary.FolderNameException" %>
@@ -58,9 +61,6 @@
 <%@ page import="com.liferay.portlet.documentlibrary.webdav.DLWebDAVStorageImpl" %>
 <%@ page import="com.liferay.portlet.enterpriseadmin.search.GroupSearch" %>
 <%@ page import="com.liferay.portlet.enterpriseadmin.search.GroupSearchTerms" %>
-<%@ page import="com.liferay.portlet.tags.model.TagsEntry" %>
-<%@ page import="com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil" %>
-<%@ page import="com.liferay.portlet.tags.util.TagsUtil" %>
 
 <%
 PortletPreferences preferences = renderRequest.getPreferences();

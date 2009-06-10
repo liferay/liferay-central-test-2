@@ -34,7 +34,7 @@ vocabularies = AssetVocabularyServiceUtil.getGroupVocabularies(scopeGroupId);
 PortletURL portletURL = renderResponse.createRenderURL();
 %>
 
-<liferay-ui:panel-container id='<%= namespace + "taglibAssetCategoriessNavigation" %>' extended="<%= Boolean.TRUE %>" persistState="<%= true %>" cssClass="taglib-asset-categories-navigation">
+<liferay-ui:panel-container id='<%= namespace + "taglibAssetCategoriesNavigation" %>' extended="<%= Boolean.TRUE %>" persistState="<%= true %>" cssClass="taglib-asset-categories-navigation">
 
 	<%
 	for (int i = 0; i < vocabularies.size(); i++) {
@@ -43,16 +43,17 @@ PortletURL portletURL = renderResponse.createRenderURL();
 		String vocabularyName = vocabulary.getName();
 	%>
 
-		<c:choose>
-			<c:when test="<%= vocabularies.size() == 1 %>">
-				<%= _buildVocabularyNavigation(vocabulary, categoryId, portletURL) %>
-			</c:when>
-			<c:otherwise>
-				<liferay-ui:panel id='<%= namespace + "taglibAssetCategoriesNavigation" + i %>' title="<%= vocabularyName %>" collapsible="<%= false %>" persistState="<%= true %>" extended="<%= true %>">
+		<liferay-ui:panel id='<%= namespace + "taglibAssetCategoriesNavigation" + i %>' title="<%= vocabularyName %>" collapsible="<%= false %>" persistState="<%= true %>" extended="<%= true %>">
+			<c:choose>
+				<c:when test="<%= vocabularies.size() == 1 %>">
 					<%= _buildVocabularyNavigation(vocabulary, categoryId, portletURL) %>
-				</liferay-ui:panel>
-			</c:otherwise>
-		</c:choose>
+				</c:when>
+				<c:otherwise>
+					<%= _buildVocabularyNavigation(vocabulary, categoryId, portletURL) %>
+				</c:otherwise>
+			</c:choose>
+		</liferay-ui:panel>
+
 	<%
 	}
 	%>
@@ -62,7 +63,7 @@ PortletURL portletURL = renderResponse.createRenderURL();
 <script type="text/javascript">
 	jQuery(document).ready(
 		function() {
-			var treeview = jQuery('#<%= namespace %>taglibAssetCategoriessNavigation .treeview');
+			var treeview = jQuery('#<%= namespace %>taglibAssetCategoriesNavigation .treeview');
 
 			if (treeview.treeview) {
 				treeview.treeview(

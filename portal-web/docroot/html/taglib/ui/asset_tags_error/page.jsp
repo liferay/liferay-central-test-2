@@ -24,12 +24,20 @@
 
 <%@ include file="/html/taglib/init.jsp" %>
 
-<%@ page import="com.liferay.portlet.asset.model.AssetCategory" %>
-<%@ page import="com.liferay.portlet.asset.model.AssetCategoryConstants" %>
-<%@ page import="com.liferay.portlet.asset.model.AssetEntry" %>
-<%@ page import="com.liferay.portlet.asset.service.AssetEntryLocalServiceUtil" %>
-<%@ page import="com.liferay.portlet.asset.model.AssetVocabulary" %>
-<%@ page import="com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil" %>
-<%@ page import="com.liferay.portlet.asset.service.AssetVocabularyLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.asset.AssetTagException" %>
 
-<portlet:defineObjects />
+<liferay-ui:error exception="<%= AssetTagException.class %>">
+
+	<%
+	AssetTagException tee = (AssetTagException)errorException;
+	%>
+
+	<c:choose>
+		<c:when test="<%= tee.getType() == AssetTagException.AT_LEAST_ONE_TAG %>">
+			<liferay-ui:message key="please-enter-at-least-one-tag" />
+		</c:when>
+		<c:when test="<%= tee.getType() == AssetTagException.INVALID_CHARACTER %>">
+			<liferay-ui:message key="one-or-more-tags-contains-invalid-characters" />
+		</c:when>
+	</c:choose>
+</liferay-ui:error>
