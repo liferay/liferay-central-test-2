@@ -67,7 +67,7 @@
 					SELECT
 						classPK
 					FROM
-						TagsAsset
+						AssetEntry
 					WHERE
 						classNameId = [$CLASS_NAME_ID_COM.LIFERAY.PORTLET.MESSAGEBOARDS.MODEL.MBMESSAGE$]
 				))
