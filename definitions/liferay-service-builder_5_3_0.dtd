@@ -164,22 +164,22 @@ For example:
 	mapping-table="Groups_Roles"
 />
 
-If you are creating a mapping table for an entity defined in another
-service.xml, you need to specify the full package path:
-
-For example:
-
-<column
-	name="orgs"
-	type="Collection"
-	entity="com.liferay.portal.Organization"
-	mapping-table="MyEntity_Orgs"
-/>
-
 The above column specifies that there will be a getter called
 pojo.getRoles() that will return a collection. It will use a mapping table
 called Groups_Roles to give a many to many relationship between groups and
 roles.
+
+If you are creating a mapping table for an entity defined in another
+service.xml, you need to specify the full package path.
+
+For example:
+
+<column
+	name="organizations"
+	type="Collection"
+	entity="com.liferay.portal.Organization"
+	mapping-table="Foo_Organizations"
+/>
 
 The id-type and id-param values are used in order to create an auto-generated, 
 auto-incrementing primary key when inserting records into a table. This can be 
