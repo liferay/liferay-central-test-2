@@ -69,8 +69,10 @@ public class EditPortletNameTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.typeKeys("value", RuntimeVariables.replace("T\u00e9st Name"));
 		selenium.type("value", RuntimeVariables.replace("T\u00e9st Name"));
-		selenium.click("//div/a/span");
+		selenium.click("link=Application");
+		Thread.sleep(500);
 		selenium.click(RuntimeVariables.replace("link=Page Comments Test Page"));
 		selenium.waitForPageToLoad("30000");
 		assertEquals("T\u00e9st Name", selenium.getText("//div[1]/span"));
@@ -94,8 +96,10 @@ public class EditPortletNameTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.typeKeys("value", RuntimeVariables.replace("Page Comments"));
 		selenium.type("value", RuntimeVariables.replace("Page Comments"));
-		selenium.click("//div/a/span");
+		selenium.click("link=Application");
+		Thread.sleep(500);
 		selenium.click(RuntimeVariables.replace("link=Page Comments Test Page"));
 		selenium.waitForPageToLoad("30000");
 		assertEquals("Page Comments", selenium.getText("//div[1]/span"));
