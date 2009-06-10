@@ -22,4 +22,37 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.kernel.scheduler.SchedulerEngine" class="com.liferay.portal.scheduler.quartz.QuartzSchedulerEngineImpl" />
+
+	<!-- Messaging -->
+
+	<bean id="destination.scheduler" class="com.liferay.portal.kernel.messaging.ParallelDestination">
+		<constructor-arg index="0" type="java.lang.String" value="liferay/scheduler" />
+	</bean>
+	<bean id="destination.scheduler.response" class="com.liferay.portal.kernel.messaging.ParallelDestination">
+		<constructor-arg index="0" type="java.lang.String" value="liferay/scheduler/response" />
+	</bean>
+	<bean id="messageListener.scheduler" class="com.liferay.portal.scheduler.messaging.SchedulerMessageListener">
+		<constructor-arg index="0" type="com.liferay.portal.kernel.messaging.sender.MessageSender" ref="com.liferay.portal.kernel.messaging.sender.MessageSender" />
+		<constructor-arg index="1" type="com.liferay.portal.kernel.scheduler.SchedulerEngine" ref="com.liferay.portal.kernel.scheduler.SchedulerEngine" />
+	</bean>
+	<bean class="com.liferay.portal.kernel.messaging.config.DefaultMessagingConfigurator" init-method="init" destroy-method="destroy">
+		<property name="destinations">
+			<list>
+				<ref bean="destination.scheduler" />
+				<ref bean="destination.scheduler.response" />
+			</list>
+		</property>
+		<property name="messageBus">
+			<ref bean="com.liferay.portal.kernel.messaging.MessageBus" />
+		</property>
+		<property name="messageListeners">
+			<map key-type="java.lang.String" value-type="java.util.List">
+				<entry key="liferay/scheduler">
+					<list value-type="com.liferay.portal.kernel.messaging.MessageListener">
+						<ref bean="messageListener.scheduler" />
+					</list>
+				</entry>
+			</map>
+		</property>
+	</bean>
 </beans>

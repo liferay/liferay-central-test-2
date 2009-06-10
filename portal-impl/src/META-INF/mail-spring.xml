@@ -20,4 +20,30 @@
 	<bean id="com.liferay.mail.service.persistence.CyrusVirtualUtil" class="com.liferay.mail.service.persistence.CyrusVirtualUtil">
 		<property name="persistence" ref="com.liferay.mail.service.persistence.CyrusVirtualPersistence" />
 	</bean>
+
+	<!-- Messaging -->
+
+	<bean id="destination.mail" class="com.liferay.portal.kernel.messaging.ParallelDestination">
+		<constructor-arg index="0" type="java.lang.String" value="liferay/mail" />
+	</bean>
+	<bean id="messageListener.mail" class="com.liferay.mail.messaging.MailMessageListener" />
+	<bean class="com.liferay.portal.kernel.messaging.config.DefaultMessagingConfigurator" init-method="init" destroy-method="destroy">
+		<property name="destinations">
+			<list>
+				<ref bean="destination.mail" />
+			</list>
+		</property>
+		<property name="messageBus">
+			<ref bean="com.liferay.portal.kernel.messaging.MessageBus" />
+		</property>
+		<property name="messageListeners">
+			<map key-type="java.lang.String" value-type="java.util.List">
+				<entry key="liferay/mail">
+					<list value-type="com.liferay.portal.kernel.messaging.MessageListener">
+						<ref bean="messageListener.mail" />
+					</list>
+				</entry>
+			</map>
+		</property>
+	</bean>
 </beans>
