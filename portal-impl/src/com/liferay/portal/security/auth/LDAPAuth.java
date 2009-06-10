@@ -137,31 +137,22 @@ public class LDAPAuth implements Authenticator {
 			_log.debug("Authenticator is enabled");
 		}
 
-		// Make exceptions for omniadmins so that if they break the LDAP
-		// configuration, they can still login to fix the problem
-
-		if (authenticateOmniadmin(
-				companyId, emailAddress, screenName, userId) == SUCCESS) {
-
-			return SUCCESS;
-		}
-
-		String baseDN = PrefsPropsUtil.getString(
-			companyId, PropsKeys.LDAP_BASE_DN);
-
 		LdapContext ctx = PortalLDAPUtil.getContext(companyId);
 
 		if (ctx == null) {
 			return authenticateRequired(
-				companyId, userId, emailAddress, FAILURE);
+				companyId, userId, emailAddress, screenName, true, FAILURE);
 		}
 
-		//  Process LDAP auth search filter
-
-		String filter = PortalLDAPUtil.getAuthSearchFilter(
-			companyId, emailAddress, screenName, String.valueOf(userId));
-
 		try {
+			String baseDN = PrefsPropsUtil.getString(
+				companyId, PropsKeys.LDAP_BASE_DN);
+
+			//  Process LDAP auth search filter
+
+			String filter = PortalLDAPUtil.getAuthSearchFilter(
+				companyId, emailAddress, screenName, String.valueOf(userId));
+
 			SearchControls cons = new SearchControls(
 				SearchControls.SUBTREE_SCOPE, 1, 0, null, false, false);
 
@@ -205,7 +196,8 @@ public class LDAPAuth implements Authenticator {
 
 				if (!ldapAuthResult.isAuthenticated()) {
 					return authenticateRequired(
-						companyId, userId, emailAddress, FAILURE);
+						companyId, userId, emailAddress, screenName, false,
+						FAILURE);
 				}
 
 				// Get user or create from LDAP
@@ -234,7 +226,7 @@ public class LDAPAuth implements Authenticator {
 				}
 
 				return authenticateRequired(
-					companyId, userId, emailAddress, DNE);
+					companyId, userId, emailAddress, screenName, true, DNE);
 			}
 
 			enu.close();
@@ -242,9 +234,10 @@ public class LDAPAuth implements Authenticator {
 		catch (Exception e) {
 			_log.error("Problem accessing LDAP server: " + e.getMessage());
 
-			if (authenticateRequired(
-					companyId, userId, emailAddress, FAILURE) == FAILURE) {
+			int authResult = authenticateRequired(
+				companyId, userId, emailAddress, screenName, true, FAILURE);
 
+			if (authResult == FAILURE) {
 				throw e;
 			}
 		}
@@ -394,8 +387,19 @@ public class LDAPAuth implements Authenticator {
 	}
 
 	protected int authenticateRequired(
-			long companyId, long userId, String emailAddress, int failureCode)
+			long companyId, long userId, String emailAddress, String screenName,
+			boolean allowOmniadmin, int failureCode)
 		throws Exception {
+
+		// Make exceptions for omniadmins so that if they break the LDAP
+		// configuration, they can still login to fix the problem
+
+		if (allowOmniadmin &&
+			(authenticateOmniadmin(
+				companyId, emailAddress, screenName, userId) == SUCCESS)) {
+
+			return SUCCESS;
+		}
 
 		if (PrefsPropsUtil.getBoolean(
 				companyId, PropsKeys.LDAP_AUTH_REQUIRED)) {
