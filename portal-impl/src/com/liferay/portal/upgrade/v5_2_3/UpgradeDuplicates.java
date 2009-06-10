@@ -125,6 +125,14 @@ public class UpgradeDuplicates extends UpgradeProcess {
 			});
 	}
 
+	protected void deleteDuplicateGroup() throws Exception {
+		deleteDuplicates(
+			"Group_", "groupId",
+			new Object[][] {
+				{"classNameId", Types.BIGINT}, {"classPK", Types.BIGINT}
+			});
+	}
+
 	protected void deleteDuplicateExpando() throws Exception {
 		DependencyManager expandoTableDependencyManager =
 			new ExpandoTableDependencyManager();
@@ -307,6 +315,14 @@ public class UpgradeDuplicates extends UpgradeProcess {
 				{"scope", Types.INTEGER}
 			},
 			resourceCodeDependencyManager);
+	}
+
+	protected void deleteDuplicateUser() throws Exception {
+		deleteDuplicates(
+			"User_", "userId",
+			new Object[][] {
+				{"companyId", Types.BIGINT}, {"screenName", Types.VARCHAR}
+			});
 	}
 
 	protected void deleteDuplicates(
@@ -560,6 +576,7 @@ public class UpgradeDuplicates extends UpgradeProcess {
 		deleteDuplicateCountry();
 		deleteDuplicateDocumentLibrary();
 		deleteDuplicateExpando();
+		deleteDuplicateGroup();
 		deleteDuplicateIG();
 		deleteDuplicateLayout();
 		deleteDuplicateMessageBoards();
@@ -571,6 +588,7 @@ public class UpgradeDuplicates extends UpgradeProcess {
 		deleteDuplicateResourceCode();
 		deleteDuplicateSocial();
 		deleteDuplicateSubscription();
+		deleteDuplicateUser();
 	}
 
 	protected Object[] getColumnValues(ResultSet rs, Object[][] columns)
