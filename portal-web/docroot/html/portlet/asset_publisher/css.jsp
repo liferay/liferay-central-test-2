@@ -183,7 +183,7 @@
 	float: left;
 }
 
-.portlet-asset-publisher .taglib-tags-summary {
+.portlet-asset-publisher .taglib-asset-tags-summary {
 	float: left;
 }
 

@@ -132,8 +132,8 @@ public class ServiceContext implements Serializable {
 		_assetCategoryIds = assetCategoryIds;
 	}
 
-	public void setAssetTagNames(String[] asssetTagNames) {
-		_assetTagNames = asssetTagNames;
+	public void setAssetTagNames(String[] assetTagNames) {
+		_assetTagNames = assetTagNames;
 	}
 
 	public void setAttribute(String name, Serializable value) {

@@ -22,39 +22,7 @@
  */
 %>
 
-<%@ include file="/html/portlet/wiki/init.jsp" %>
+<%@ include file="/html/portlet/init.jsp" %>
 
-<%
-String tagName = ParamUtil.getString(renderRequest, "tag");
-
-String title = "pages-with-tag-x";
-String description = null;
-
-try {
-	AssetTag tagsEntry = AssetTagLocalServiceUtil.getTag(scopeGroupId, tagName);
-
-	AssetTagProperty tagsProperty = AssetTagPropertyLocalServiceUtil.getTagProperty(tagsEntry.getTagId(), "description");
-
-	description = tagsProperty.getValue();
-}
-catch (NoSuchTagException nste) {
-}
-catch (NoSuchTagPropertyException nspte) {
-}
-%>
-
-<liferay-util:include page="/html/portlet/wiki/top_links.jsp" />
-
-<h1 class="page-title">
-	<%= LanguageUtil.format(pageContext, title, tagName) %>
-</h1>
-
-<c:if test="<%= Validator.isNotNull(description) %>">
-	<p class="tag-description">
-		<%= description %>
-	</p>
-</c:if>
-
-<liferay-util:include page="/html/portlet/wiki/page_iterator.jsp">
-	<liferay-util:param name="type" value="tagged_pages" />
-</liferay-util:include>
+<%@ page import="com.liferay.portlet.asset.model.AssetTag" %>
+<%@ page import="com.liferay.portlet.asset.service.permission.AssetPermission" %>

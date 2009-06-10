@@ -64,7 +64,7 @@
 }
 
 .portlet-wiki .taglib-asset-categories-summary {
-	margin: -10px 0px 10px 0px;
+	margin: 0px 0px 10px 0px;
 	color: #7d7d7d;
 }
 
@@ -72,7 +72,7 @@
 	margin-top: 18px;
 }
 
-.portlet-wiki .taglib-tags-summary {
+.portlet-wiki .taglib-asset-tags-summary {
 	margin: -10px 0px 10px 0px;
 	color: #7d7d7d;
 }

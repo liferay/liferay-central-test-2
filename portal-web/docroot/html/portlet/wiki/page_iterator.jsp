@@ -29,8 +29,7 @@ WikiNode node = (WikiNode)request.getAttribute(WebKeys.WIKI_NODE);
 WikiPage wikiPage = (WikiPage)request.getAttribute(WebKeys.WIKI_PAGE);
 
 String type = ParamUtil.getString(request, "type");
-String tag = ParamUtil.getString(renderRequest, "tag");
-boolean folksonomy = ParamUtil.getBoolean(renderRequest, "folksonomy", TagsEntryConstants.FOLKSONOMY_TAG);
+String tagName = ParamUtil.getString(renderRequest, "tag");
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
@@ -54,8 +53,7 @@ else if (type.equals("recent_changes")) {
 }
 else if (type.equals("tagged_pages")) {
 	portletURL.setParameter("struts_action", "/wiki/view_tagged_pages");
-	portletURL.setParameter("tag", tag);
-	portletURL.setParameter("folksonomy", String.valueOf(folksonomy));
+	portletURL.setParameter("tag", tagName);
 }
 
 portletURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
@@ -153,12 +151,7 @@ else if (type.equals("recent_changes")) {
 	emptyResultsMessage = "there-are-no-recent-changes";
 }
 else if (type.equals("tagged_pages")) {
-	if (folksonomy) {
-		emptyResultsMessage = "there-are-no-pages-with-this-tag";
-	}
-	else {
-		emptyResultsMessage = "there-are-no-pages-with-this-category";
-	}
+	emptyResultsMessage = "there-are-no-pages-with-this-tag";
 }
 
 SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, emptyResultsMessage);
@@ -202,17 +195,17 @@ else if (type.equals("recent_changes")) {
 }
 else if (type.equals("tagged_pages")) {
 	long classNameId = PortalUtil.getClassNameId(WikiPage.class.getName());
-	long[] entryIds = TagsEntryLocalServiceUtil.getEntryIds(scopeGroupId, new String[] {tag}, folksonomy);
-	long[] notEntryIds = new long[0];
+	long[] tagIds = AssetTagLocalServiceUtil.getTagIds(scopeGroupId, new String[] {tagName});
+	long[] notTagIds = new long[0];
 	Date now = new Date();
 
-	total = TagsAssetLocalServiceUtil.getAssetsCount(scopeGroupId, new long[] {classNameId}, entryIds, notEntryIds, false, false, now, now);
-	List<TagsAsset> assets = TagsAssetLocalServiceUtil.getAssets(scopeGroupId, new long[] {classNameId}, entryIds, notEntryIds, false, null, null, null, null, false, now, now, searchContainer.getStart(), searchContainer.getEnd());
+	total = AssetEntryLocalServiceUtil.getEntriesCount(scopeGroupId, new long[] {classNameId}, tagIds, notTagIds, false, false, now, now);
+	List<AssetEntry> assetEntries = AssetEntryLocalServiceUtil.getEntries(scopeGroupId, new long[] {classNameId}, tagIds, notTagIds, false, null, null, null, null, false, now, now, searchContainer.getStart(), searchContainer.getEnd());
 
 	results = new ArrayList();
 
-	for (TagsAsset asset : assets) {
-		WikiPageResource pageResource = WikiPageResourceLocalServiceUtil.getPageResource(asset.getClassPK());
+	for (AssetEntry assetEntry : assetEntries) {
+		WikiPageResource pageResource = WikiPageResourceLocalServiceUtil.getPageResource(assetEntry.getClassPK());
 
 		WikiPage assetPage = WikiPageLocalServiceUtil.getPage(pageResource.getNodeId(), pageResource.getTitle());
 

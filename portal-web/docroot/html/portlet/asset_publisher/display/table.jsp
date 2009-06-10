@@ -237,7 +237,7 @@ viewURL = _checkViewURL(viewURL, currentURL, themeDisplay);
 			%>
 
 				<td>
-					<liferay-ui:tags-summary
+					<liferay-ui:asset-tags-summary
 						className="<%= assetEntry.getClassName() %>"
 						classPK="<%= assetEntry.getClassPK () %>"
 					/>

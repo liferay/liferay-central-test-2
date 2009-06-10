@@ -283,7 +283,7 @@ configurationActionURL.setParameter("portletResource", portletResource);
 					refresh="<%= false %>"
 				>
 					<liferay-ui:section>
-						<liferay-ui:tags-error />
+						<liferay-ui:asset-tags-error />
 
 						<liferay-ui:message key="asset-entry-type" />
 
@@ -331,7 +331,7 @@ configurationActionURL.setParameter("portletResource", portletResource);
 
 						<br /><br />
 
-						<liferay-ui:tags-selector
+						<liferay-ui:asset-tags-selector
 							hiddenInput="assetTagNames"
 							curTags="<%= StringUtil.merge(assetTagNames) %>"
 							focus="<%= false %>"
@@ -343,7 +343,7 @@ configurationActionURL.setParameter("portletResource", portletResource);
 
 						<br /><br />
 
-						<liferay-ui:tags-selector
+						<liferay-ui:asset-tags-selector
 							hiddenInput="notAssetTagNames"
 							curTags="<%= StringUtil.merge(notAssetTagNames) %>"
 							focus="<%= false %>"
