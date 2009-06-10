@@ -497,8 +497,8 @@ public class JournalArticleLocalServiceImpl
 			try {
 				if (article.isIndexable()) {
 					Indexer.deleteArticle(
-						article.getCompanyId(), article.getArticleId(),
-							article.getGroupId());
+						article.getCompanyId(), article.getGroupId(),
+						article.getArticleId());
 				}
 			}
 			catch (SearchException se) {
@@ -703,8 +703,8 @@ public class JournalArticleLocalServiceImpl
 		try {
 			if (article.isApproved() && article.isIndexable()) {
 				Indexer.deleteArticle(
-					article.getCompanyId(), article.getArticleId(),
-						article.getGroupId());
+					article.getCompanyId(), article.getGroupId(),
+					article.getArticleId());
 			}
 		}
 		catch (SearchException se) {
@@ -854,8 +854,8 @@ public class JournalArticleLocalServiceImpl
 		try {
 			if (article.isIndexable()) {
 				Indexer.deleteArticle(
-					article.getCompanyId(), article.getArticleId(),
-						article.getGroupId());
+					article.getCompanyId(), article.getGroupId(),
+					article.getArticleId());
 			}
 		}
 		catch (SearchException se) {

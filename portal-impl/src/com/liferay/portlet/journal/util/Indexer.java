@@ -70,12 +70,12 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		SearchEngineUtil.addDocument(companyId, doc);
 	}
 
-	public static void deleteArticle(long companyId, String articleId,
-			long groupId)
+	public static void deleteArticle(
+			long companyId, long groupId, String articleId)
 		throws SearchException {
 
 		SearchEngineUtil.deleteDocument(
-			companyId, getArticleUID(articleId, groupId));
+			companyId, getArticleUID(groupId, articleId));
 	}
 
 	public static Document getArticleDocument(
@@ -103,7 +103,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 		Document doc = new DocumentImpl();
 
-		doc.addUID(PORTLET_ID, groupId + StringPool.AT + articleId);
+		doc.addUID(PORTLET_ID, groupId, articleId);
 
 		doc.addModifiedDate(displayDate);
 
@@ -127,10 +127,10 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		return doc;
 	}
 
-	public static String getArticleUID(String articleId, long groupId) {
+	public static String getArticleUID(long groupId, String articleId) {
 		Document doc = new DocumentImpl();
 
-		doc.addUID(PORTLET_ID, groupId + StringPool.AT + articleId);
+		doc.addUID(PORTLET_ID, groupId, articleId);
 
 		return doc.get(Field.UID);
 	}
