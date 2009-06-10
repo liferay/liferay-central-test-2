@@ -31,8 +31,8 @@ import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 
+import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
@@ -83,7 +83,7 @@ public class SocialBookmarkTagUtil {
 	private static String _getPostUrl(String type, String url, String title)
 		throws Exception {
 
-		Map<String, String> vars = new ConcurrentHashMap<String, String>();
+		Map<String, String> vars = new HashMap<String, String>();
 
 		vars.put("liferay:social-bookmark:url", url);
 		vars.put("liferay:social-bookmark:title", HttpUtil.encodeURL(title));
