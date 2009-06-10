@@ -28,12 +28,12 @@ import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
 import com.liferay.portal.upgrade.util.UpgradeTable;
+import com.liferay.portal.upgrade.v5_2_3.util.TagsAssetTable;
+import com.liferay.portal.upgrade.v5_2_3.util.TagsPropertyTable;
 import com.liferay.portal.upgrade.v5_2_3.util.TagsPropertyValueUpgradeColumnImpl;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
-import com.liferay.portlet.tags.model.impl.TagsAssetImpl;
-import com.liferay.portlet.tags.model.impl.TagsPropertyImpl;
 
 /**
  * <a href="UpgradeTags.java.html"><b><i>View Source</i></b></a>
@@ -64,9 +64,9 @@ public class UpgradeTags extends UpgradeProcess {
 			// TagsAsset
 
 			UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
-				TagsAssetImpl.TABLE_NAME, TagsAssetImpl.TABLE_COLUMNS);
+				TagsAssetTable.TABLE_NAME, TagsAssetTable.TABLE_COLUMNS);
 
-			upgradeTable.setCreateSQL(TagsAssetImpl.TABLE_SQL_CREATE);
+			upgradeTable.setCreateSQL(TagsAssetTable.TABLE_SQL_CREATE);
 
 			upgradeTable.updateTable();
 		}
@@ -76,10 +76,10 @@ public class UpgradeTags extends UpgradeProcess {
 		// TagsProperty
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
-			TagsPropertyImpl.TABLE_NAME, TagsPropertyImpl.TABLE_COLUMNS,
+			TagsPropertyTable.TABLE_NAME, TagsPropertyTable.TABLE_COLUMNS,
 			new TagsPropertyValueUpgradeColumnImpl("value"));
 
-		upgradeTable.setCreateSQL(TagsPropertyImpl.TABLE_SQL_CREATE);
+		upgradeTable.setCreateSQL(TagsPropertyTable.TABLE_SQL_CREATE);
 
 		upgradeTable.updateTable();
 	}

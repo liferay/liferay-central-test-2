@@ -45,13 +45,11 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PropsValues;
+import com.liferay.portlet.asset.NoSuchTagException;
 import com.liferay.portlet.asset.model.AssetTag;
 import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
-import com.liferay.portlet.tags.NoSuchEntryException;
-import com.liferay.portlet.tags.model.TagsEntry;
-import com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil;
-import com.liferay.portlet.tags.service.TagsPropertyLocalServiceUtil;
-import com.liferay.portlet.tags.util.TagsUtil;
+import com.liferay.portlet.asset.service.AssetTagPropertyLocalServiceUtil;
+import com.liferay.portlet.asset.util.AssetUtil;
 import com.liferay.portlet.wiki.ImportFilesException;
 import com.liferay.portlet.wiki.NoSuchPageException;
 import com.liferay.portlet.wiki.importers.WikiImporter;
@@ -282,7 +280,7 @@ public class MediaWikiImporter implements WikiImporter {
 	}
 
 	protected String normalize(String categoryName, int length) {
-		categoryName = TagsUtil.toWord(categoryName.trim());
+		categoryName = AssetUtil.toWord(categoryName.trim());
 
 		return StringUtil.shorten(categoryName, length);
 	}
@@ -516,26 +514,26 @@ public class MediaWikiImporter implements WikiImporter {
 			description = normalizeDescription(description);
 
 			try {
-				TagsEntry tagsEntry = null;
+				AssetTag assetTag = null;
 
 				try {
-					tagsEntry = TagsEntryLocalServiceUtil.getEntry(
+					assetTag = AssetTagLocalServiceUtil.getTag(
 						node.getCompanyId(), categoryName);
 				}
-				catch (NoSuchEntryException nsee) {
+				catch (NoSuchTagException nste) {
 					ServiceContext serviceContext = new ServiceContext();
 
 					serviceContext.setAddCommunityPermissions(true);
 					serviceContext.setAddGuestPermissions(true);
 					serviceContext.setScopeGroupId(node.getGroupId());
 
-					tagsEntry = TagsEntryLocalServiceUtil.addEntry(
-						userId, null, categoryName, null, null, serviceContext);
+					assetTag = AssetTagLocalServiceUtil.addTag(
+						userId, categoryName, null, serviceContext);
 				}
 
 				if (Validator.isNotNull(description)) {
-					TagsPropertyLocalServiceUtil.addProperty(
-						userId, tagsEntry.getEntryId(), "description",
+					AssetTagPropertyLocalServiceUtil.addTagProperty(
+						userId, assetTag.getTagId(), "description",
 						description);
 				}
 			}
@@ -568,7 +566,7 @@ public class MediaWikiImporter implements WikiImporter {
 				assetTag = AssetTagLocalServiceUtil.getTag(
 					node.getCompanyId(), categoryName);
 			}
-			catch (NoSuchEntryException nsee) {
+			catch (NoSuchTagException nste) {
 				ServiceContext serviceContext = new ServiceContext();
 
 				serviceContext.setAddCommunityPermissions(true);

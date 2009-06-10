@@ -1156,22 +1156,6 @@
 		<put name="portlet_content" value="/portlet/shopping/view_item.jsp" />
 	</definition>
 
-	<!-- Tags Admin -->
-
-	<definition name="portlet.tags_admin" extends="portlet" />
-
-	<definition name="portlet.tags_admin.view" extends="portlet.tags_admin">
-		<put name="portlet_content" value="/portlet/tags_admin/view.jsp" />
-	</definition>
-
-	<!-- Tags Navigation -->
-
-	<definition name="portlet.tags_entries_navigation" extends="portlet" />
-
-	<definition name="portlet.tags_entries_navigation.view" extends="portlet.tags_entries_navigation">
-		<put name="portlet_content" value="/portlet/tags_entries_navigation/view.jsp" />
-	</definition>
-
 	<!-- Update Manager -->
 
 	<definition name="portlet.update_manager" extends="portlet" />

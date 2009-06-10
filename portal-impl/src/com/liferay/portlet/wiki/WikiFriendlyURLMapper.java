@@ -30,7 +30,6 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PortletKeys;
-import com.liferay.portlet.tags.model.TagsEntryConstants;
 
 import java.util.Map;
 
@@ -103,9 +102,6 @@ public class WikiFriendlyURLMapper extends BaseFriendlyURLMapper {
 			}
 		}
 		else if (strutsAction.equals("/wiki/view_tagged_pages")) {
-			boolean folksonomy = GetterUtil.getBoolean(
-				portletURL.getParameter("folksonomy"));
-
 			String tag = portletURL.getParameter("tag");
 
 			StringBuilder sb = new StringBuilder();
@@ -114,16 +110,8 @@ public class WikiFriendlyURLMapper extends BaseFriendlyURLMapper {
 				sb.append(StringPool.SLASH);
 				sb.append(_MAPPING);
 				sb.append(StringPool.SLASH);
-
-				if (folksonomy) {
-					sb.append("tag");
-				}
-				else {
-					sb.append("category");
-				}
-
+				sb.append("tag");
 				sb.append(StringPool.SLASH);
-
 				sb.append(HttpUtil.encodeURL(tag));
 
 				portletURL.addParameterIncludedInPath("nodeId");
@@ -168,21 +156,14 @@ public class WikiFriendlyURLMapper extends BaseFriendlyURLMapper {
 		if (urlFragments.length >= 1) {
 			String urlFragment0 = urlFragments[0];
 
-			if (urlFragment0.equals("category") || urlFragment0.equals("tag")) {
+			if (urlFragment0.equals("tag")) {
 				if (urlFragments.length >= 2) {
 					addParam(
 						params, "struts_action", "/wiki/view_tagged_pages");
 
 					String tag = HttpUtil.decodeURL(urlFragments[1]);
 
-					boolean folksonomy = TagsEntryConstants.FOLKSONOMY_TAG;
-
-					if (urlFragment0.equals("category")) {
-						folksonomy = TagsEntryConstants.FOLKSONOMY_CATEGORY;
-					}
-
 					addParam(params, "tag", tag);
-					addParam(params, "folksonomy", folksonomy);
 				}
 			}
 			else {

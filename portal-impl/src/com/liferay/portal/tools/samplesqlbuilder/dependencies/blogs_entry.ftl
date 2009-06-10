@@ -4,6 +4,6 @@ insert into BlogsEntry values ('${portalUUIDUtil.generate()}', ${blogsEntry.entr
 
 ${sampleSQLBuilder.insertSecurity("com.liferay.portlet.blogs.model.BlogsEntry", blogsEntry.entryId)}
 
-<#assign tagsAsset = dataFactory.addTagsAsset(blogsEntry.groupId, blogsEntry.userId, dataFactory.blogsEntryClassName.classNameId, blogsEntry.entryId, "text/html", blogsEntry.title)>
+<#assign assetEntry = dataFactory.addAssetEntry(blogsEntry.groupId, blogsEntry.userId, dataFactory.blogsEntryClassName.classNameId, blogsEntry.entryId, "text/html", blogsEntry.title)>
 
-${sampleSQLBuilder.insertTagsAsset(tagsAsset)}
+${sampleSQLBuilder.insertAssetEntry(assetEntry)}

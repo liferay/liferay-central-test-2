@@ -290,7 +290,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>99</portlet-name>
-		<struts-path>tags_admin</struts-path>
+		<struts-path>asset_tags_admin</struts-path>
 		<include>true</include>
 	</portlet>
 	<portlet>
@@ -465,7 +465,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>141</portlet-name>
-		<struts-path>tags_entries_navigation</struts-path>
+		<struts-path>asset_tags_navigation</struts-path>
 		<include>true</include>
 	</portlet>
 	<portlet>

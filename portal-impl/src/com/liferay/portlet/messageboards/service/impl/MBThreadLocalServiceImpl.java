@@ -315,7 +315,7 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 						category.getCategoryId(), message.getThreadId(),
 						message.getMessageId(), message.getSubject(),
 						message.getBody(), message.isAnonymous(),
-						message.getModifiedDate(), message.getTagsEntries(),
+						message.getModifiedDate(), message.getAssetTagNames(),
 						message.getExpandoBridge());
 				}
 			}
@@ -385,7 +385,7 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 					category.getCategoryId(), message.getThreadId(),
 					message.getMessageId(), message.getSubject(),
 					message.getBody(), message.isAnonymous(),
-					message.getModifiedDate(), message.getTagsEntries(),
+					message.getModifiedDate(), message.getAssetTagNames(),
 					message.getExpandoBridge());
 			}
 		}
@@ -532,7 +532,7 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 						category.getCategoryId(), message.getThreadId(),
 						message.getMessageId(), message.getSubject(),
 						message.getBody(), message.isAnonymous(),
-						message.getModifiedDate(), message.getTagsEntries(),
+						message.getModifiedDate(), message.getAssetTagNames(),
 						message.getExpandoBridge());
 				}
 			}

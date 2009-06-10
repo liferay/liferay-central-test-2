@@ -37,6 +37,7 @@ import com.liferay.portal.model.Role;
 import com.liferay.portal.model.User;
 import com.liferay.portal.tools.sql.DBUtil;
 import com.liferay.portal.util.InitUtil;
+import com.liferay.portlet.asset.model.AssetEntry;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.model.BlogsStatsUser;
 import com.liferay.portlet.messageboards.model.MBCategory;
@@ -44,7 +45,6 @@ import com.liferay.portlet.messageboards.model.MBDiscussion;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBStatsUser;
 import com.liferay.portlet.messageboards.model.MBThread;
-import com.liferay.portlet.tags.model.TagsAsset;
 import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.util.SimpleCounter;
@@ -193,6 +193,14 @@ public class SampleSQLBuilder {
 		}
 	}
 
+	public void insertAssetEntry(AssetEntry assetEntry) throws Exception {
+		Map<String, Object> context = getContext();
+
+		put(context, "assetEntry", assetEntry);
+
+		processTemplate(_tplAssetEntry, context);
+	}
+
 	public void insertBlogsEntry(BlogsEntry blogsEntry) throws Exception {
 		Map<String, Object> context = getContext();
 
@@ -281,14 +289,6 @@ public class SampleSQLBuilder {
 		put(context, "resource", resource);
 
 		processTemplate(_tplSecurity, context);
-	}
-
-	public void insertTagsAsset(TagsAsset tagsAsset) throws Exception {
-		Map<String, Object> context = getContext();
-
-		put(context, "tagsAsset", tagsAsset);
-
-		processTemplate(_tplTagsAsset, context);
 	}
 
 	public void insertUser(
@@ -415,6 +415,7 @@ public class SampleSQLBuilder {
 	private SimpleCounter _resourceCodeCounter;
 	private SimpleCounter _resourceCounter;
 	private boolean _securityEnabled;
+	private String _tplAssetEntry = _TPL_ROOT + "asset_entry.ftl";
 	private String _tplGroup = _TPL_ROOT + "group.ftl";
 	private String _tplBlogsEntry = _TPL_ROOT + "blogs_entry.ftl";
 	private String _tplBlogsStatsUser = _TPL_ROOT + "blogs_stats_user.ftl";
@@ -425,7 +426,6 @@ public class SampleSQLBuilder {
 	private String _tplMBThread = _TPL_ROOT + "mb_thread.ftl";
 	private String _tplSample = _TPL_ROOT + "sample.ftl";
 	private String _tplSecurity = _TPL_ROOT + "security.ftl";
-	private String _tplTagsAsset = _TPL_ROOT + "tags_asset.ftl";
 	private String _tplUser = _TPL_ROOT + "user.ftl";
 	private String _tplWikiNode = _TPL_ROOT + "wiki_node.ftl";
 	private String _tplWikiPage = _TPL_ROOT + "wiki_page.ftl";

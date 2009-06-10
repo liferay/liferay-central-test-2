@@ -1557,18 +1557,6 @@
 
 		<action path="/site_map/view" forward="portlet.site_map.view" />
 
-		<!-- Tags -->
-
-		<action path="/tags/rss" type="com.liferay.portlet.tags.action.RSSAction" />
-
-		<!-- Tags Admin -->
-
-		<action path="/tags_admin/view" forward="portlet.tags_admin.view" />
-
-		<!-- Tags Entries Navigation -->
-
-		<action path="/tags_entries_navigation/view" forward="portlet.tags_entries_navigation.view" />
-
 		<!-- Update Manager -->
 
 		<action path="/update_manager/install_plugin" type="com.liferay.portlet.plugininstaller.action.InstallPluginAction">

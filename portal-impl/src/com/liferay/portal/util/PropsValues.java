@@ -1317,18 +1317,6 @@ public class PropsValues {
 	public static final String STRUTS_PORTLET_REQUEST_PROCESSOR = PropsUtil.get(
 		PropsKeys.STRUTS_PORTLET_REQUEST_PROCESSOR);
 
-	public static final String TAGS_ASSET_VALIDATOR = PropsUtil.get(
-		PropsKeys.TAGS_ASSET_VALIDATOR);
-
-	public static final boolean TAGS_COMPILER_ENABLED = GetterUtil.getBoolean(
-		PropsUtil.get(PropsKeys.TAGS_COMPILER_ENABLED));
-
-	public static final String[] TAGS_PROPERTIES_DEFAULT =
-		PropsUtil.getArray(PropsKeys.TAGS_PROPERTIES_DEFAULT);
-
-	public static final String TAGS_VOCABULARY_DEFAULT = PropsUtil.get(
-		PropsKeys.TAGS_VOCABULARY_DEFAULT);
-
 	public static final String TASKS_DEFAULT_ROLE_NAMES = PropsUtil.get(
 		PropsKeys.TASKS_DEFAULT_ROLE_NAMES);
 

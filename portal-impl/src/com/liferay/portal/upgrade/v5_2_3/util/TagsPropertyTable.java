@@ -20,47 +20,34 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.upgrade.v4_3_3;
+package com.liferay.portal.upgrade.v5_2_3.util;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.upgrade.UpgradeException;
-import com.liferay.portal.upgrade.UpgradeProcess;
-import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
-import com.liferay.portal.upgrade.util.UpgradeTable;
-import com.liferay.portal.upgrade.v4_3_3.util.TagsAssetTable;
+import java.sql.Types;
 
 /**
- * <a href="UpgradeTags.java.html"><b><i>View Source</i></b></a>
+ * <a href="TagsPropertyTable.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class UpgradeTags extends UpgradeProcess {
+public class TagsPropertyTable {
 
-	public void upgrade() throws UpgradeException {
-		_log.info("Upgrading");
+	public static final String TABLE_NAME = "TagsProperty";
 
-		try {
-			doUpgrade();
-		}
-		catch (Exception e) {
-			throw new UpgradeException(e);
-		}
-	}
+	public static final Object[][] TABLE_COLUMNS = {
+		{"propertyId", new Integer(Types.BIGINT)},
+		{"companyId", new Integer(Types.BIGINT)},
+		{"userId", new Integer(Types.BIGINT)},
+		{"userName", new Integer(Types.VARCHAR)},
+		{"createDate", new Integer(Types.TIMESTAMP)},
+		{"modifiedDate", new Integer(Types.TIMESTAMP)},
+		{"entryId", new Integer(Types.BIGINT)},
+		{"key_", new Integer(Types.VARCHAR)},
+		{"value", new Integer(Types.VARCHAR)}
+	};
 
-	protected void doUpgrade() throws Exception {
+	public static final String TABLE_SQL_CREATE = "create table TagsProperty (propertyId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,entryId LONG,key_ VARCHAR(75) null,value VARCHAR(255) null)";
 
-		// TagsAsset
-
-		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
-			TagsAssetTable.TABLE_NAME, TagsAssetTable.TABLE_COLUMNS);
-
-		upgradeTable.setCreateSQL(TagsAssetTable.TABLE_SQL_CREATE);
-
-		upgradeTable.updateTable();
-	}
-
-	private static Log _log = LogFactoryUtil.getLog(UpgradeTags.class);
+	public static final String TABLE_SQL_DROP = "drop table TagsProperty";
 
 }

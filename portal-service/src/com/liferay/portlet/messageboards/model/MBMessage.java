@@ -78,6 +78,6 @@ public interface MBMessage extends MBMessageModel {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public java.lang.String[] getTagsEntries()
+	public java.lang.String[] getAssetTagNames()
 		throws com.liferay.portal.SystemException;
 }

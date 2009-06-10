@@ -58,6 +58,8 @@ import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.model.impl.RoleImpl;
 import com.liferay.portal.model.impl.UserImpl;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
+import com.liferay.portlet.asset.model.AssetEntry;
+import com.liferay.portlet.asset.model.impl.AssetEntryImpl;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.model.BlogsStatsUser;
 import com.liferay.portlet.blogs.model.impl.BlogsEntryImpl;
@@ -72,8 +74,6 @@ import com.liferay.portlet.messageboards.model.impl.MBDiscussionImpl;
 import com.liferay.portlet.messageboards.model.impl.MBMessageImpl;
 import com.liferay.portlet.messageboards.model.impl.MBStatsUserImpl;
 import com.liferay.portlet.messageboards.model.impl.MBThreadImpl;
-import com.liferay.portlet.tags.model.TagsAsset;
-import com.liferay.portlet.tags.model.impl.TagsAssetImpl;
 import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.portlet.wiki.model.impl.WikiNodeImpl;
@@ -121,6 +121,23 @@ public class DataFactory {
 		catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	public AssetEntry addAssetEntry(
+			long groupId, long userId, long classNameId, long classPK,
+			String mimeType, String title)
+		throws Exception {
+
+		AssetEntry assetEntry = new AssetEntryImpl();
+
+		assetEntry.setGroupId(groupId);
+		assetEntry.setUserId(userId);
+		assetEntry.setClassNameId(classNameId);
+		assetEntry.setClassPK(classPK);
+		assetEntry.setMimeType(mimeType);
+		assetEntry.setTitle(title);
+
+		return assetEntry;
 	}
 
 	public BlogsEntry addBlogsEntry(
@@ -380,23 +397,6 @@ public class DataFactory {
 		}
 
 		return rolesPermissions;
-	}
-
-	public TagsAsset addTagsAsset(
-			long groupId, long userId, long classNameId, long classPK,
-			String mimeType, String title)
-		throws Exception {
-
-		TagsAsset tagsAsset = new TagsAssetImpl();
-
-		tagsAsset.setGroupId(groupId);
-		tagsAsset.setUserId(userId);
-		tagsAsset.setClassNameId(classNameId);
-		tagsAsset.setClassPK(classPK);
-		tagsAsset.setMimeType(mimeType);
-		tagsAsset.setTitle(title);
-
-		return tagsAsset;
 	}
 
 	public User addUser(boolean defaultUser, String screenName)

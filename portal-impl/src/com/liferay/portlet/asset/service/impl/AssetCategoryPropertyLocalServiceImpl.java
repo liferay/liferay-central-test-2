@@ -29,7 +29,7 @@ import com.liferay.portlet.asset.CategoryPropertyKeyException;
 import com.liferay.portlet.asset.CategoryPropertyValueException;
 import com.liferay.portlet.asset.model.AssetCategoryProperty;
 import com.liferay.portlet.asset.service.base.AssetCategoryPropertyLocalServiceBaseImpl;
-import com.liferay.portlet.tags.util.TagsUtil;
+import com.liferay.portlet.asset.util.AssetUtil;
 
 import java.util.Date;
 import java.util.List;
@@ -151,11 +151,11 @@ public class AssetCategoryPropertyLocalServiceImpl
 	}
 
 	protected void validate(String key, String value) throws PortalException {
-		if (!TagsUtil.isValidWord(key)) {
+		if (!AssetUtil.isValidWord(key)) {
 			throw new CategoryPropertyKeyException();
 		}
 
-		if (!TagsUtil.isValidWord(value)) {
+		if (!AssetUtil.isValidWord(value)) {
 			throw new CategoryPropertyValueException();
 		}
 	}

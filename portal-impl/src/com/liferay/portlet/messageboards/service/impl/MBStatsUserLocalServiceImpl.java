@@ -97,7 +97,7 @@ public class MBStatsUserLocalServiceImpl
 
 		query = query.add(PropertyFactoryUtil.forName("userId").eq(userId));
 
-		List<Object> results = mbStatsUserLocalService.dynamicQuery(query);
+		List<Object> results = dynamicQuery(query);
 
 		return (Integer)results.get(0);
 	}
