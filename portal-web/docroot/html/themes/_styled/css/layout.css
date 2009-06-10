@@ -7,7 +7,7 @@
 	width: 100%;
 }
 
-.lfr-grid .lfr-column {
+.lfr-grid .lfr-column, .columns-max .lfr-column {
 	padding: 5px;
 }
 

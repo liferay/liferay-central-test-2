@@ -30,9 +30,23 @@ StringBuilder sb = new StringBuilder();
 _buildGuestGroupBreadcrumb(themeDisplay, sb);
 _buildParentGroupsBreadcrumb(selLayout.getLayoutSet(), portletURL, themeDisplay, sb);
 _buildBreadcrumb(selLayout, selLayoutParam, portletURL, themeDisplay, true, sb);
+
+String breadCrumbString = sb.toString();
+String listToken = "<li";
+int tokenLength = listToken.length();
+
+int pos = breadCrumbString.indexOf(listToken);
+
+breadCrumbString = StringUtil.insert(breadCrumbString, " class=\"first\"", pos + tokenLength);
+
+pos = breadCrumbString.lastIndexOf(listToken);
+
+breadCrumbString = StringUtil.insert(breadCrumbString, " class=\"last\"", pos + tokenLength);
 %>
 
-<%= sb.toString() %>
+<ul class="breadcrumbs lfr-component">
+	<%= breadCrumbString %>
+</ul>
 
 <%!
 private void _buildBreadcrumb(Layout selLayout, String selLayoutParam, PortletURL portletURL, ThemeDisplay themeDisplay, boolean selectedLayout, StringBuilder sb) throws Exception {
@@ -41,6 +55,7 @@ private void _buildBreadcrumb(Layout selLayout, String selLayoutParam, PortletUR
 
 	StringBuilder breadCrumbSB = new StringBuilder();
 
+	breadCrumbSB.append("<li>");
 	breadCrumbSB.append("<a href=\"");
 	breadCrumbSB.append(layoutURL);
 	breadCrumbSB.append("\" ");
@@ -50,6 +65,7 @@ private void _buildBreadcrumb(Layout selLayout, String selLayoutParam, PortletUR
 	breadCrumbSB.append(HtmlUtil.escape(selLayout.getName(themeDisplay.getLocale())));
 
 	breadCrumbSB.append("</a>");
+	breadCrumbSB.append("</li>");
 
 	Layout layoutParent = null;
 	long layoutParentId = selLayout.getParentLayoutId();
@@ -59,7 +75,6 @@ private void _buildBreadcrumb(Layout selLayout, String selLayoutParam, PortletUR
 
 		_buildBreadcrumb(layoutParent, selLayoutParam, portletURL, themeDisplay, false, sb);
 
-		sb.append(" &raquo; ");
 		sb.append(breadCrumbSB.toString());
 	}
 	else {

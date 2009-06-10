@@ -126,11 +126,62 @@
 	margin-bottom: 1.5em;
 }
 
+.breadcrumbs li {
+	background: url(../images/arrows/05_right.png) no-repeat 100% 50%;
+	display: inline;
+	padding-right: 15px;
+	margin-right: 5px;
+}
+
 .breadcrumbs .last {
-	display: block;
-	font-size: 1.6em;
+	background-image: none;
 	font-weight: bold;
 	margin-top: 0.2em;
+}
+
+.breadcrumbs .last a {
+	color: #555;
+}
+
+/* ---------- Site breadcrumbs ---------- */
+
+.site-breadcrumbs {
+	margin: 0 auto;
+	width: 90%;
+}
+
+.site-breadcrumbs ul {
+ 	border: 1px solid #dedede;
+ 	height: 2.3em;
+	margin: 0;
+}
+
+.site-breadcrumbs li {
+	background-image: none;
+	float: left;
+	line-height: 2.3em;
+	margin-right: 0;
+	padding-left: 0.75em;
+	padding-right: 0;
+}
+
+.site-breadcrumbs li a {
+	background: url(../images/common/breadcrumbs.png) no-repeat right center;
+	display: block;
+	padding: 0 15px 0 0;
+	text-decoration:none;
+}
+
+.site-breadcrumbs .last {
+	display: inline;
+	font-size: 1em;
+	margin-top: 0;
+	padding-right: 0;
+}
+
+.site-breadcrumbs .last a {
+	background-image: none;
+	padding: 0;
 }
 
 /* ---------- Dragging/sorting indicators ---------- */

@@ -33,12 +33,73 @@
 .results-row.hover td {
 }
 
+/* ---------- Asset Categories ---------- */
+
+.ui-asset-categories {
+}
+
+.ui-asset-categories:after {
+}
+
+.ie .ui-asset-categories {
+}
+
+.ui-asset-categories.empty {
+}
+
+.ui-asset-categories .ui-asset-category {
+}
+
+.ui-asset-categories .ui-asset-category:hover {
+}
+
+.ui-asset-categories .ui-asset-category-delete {
+}
+
+.ui-asset-categories .ui-asset-category-delete span {
+}
+
+.ui-asset-categories .ui-asset-category-delete:hover span {
+}
+
+.ui-asset-categories-input {
+}
+
+.tags-vocabulary-name span {
+}
+
 /* ---------- Breadcrumbs ---------- */
 
 .breadcrumbs {
 }
 
+.breadcrumbs li {
+}
+
 .breadcrumbs .last {
+}
+
+.breadcrumbs .last a {
+}
+
+/* ---------- Site breadcrumbs ---------- */
+
+.site-breadcrumbs {
+}
+
+.site-breadcrumbs ul {
+}
+
+.site-breadcrumbs li {
+}
+
+.site-breadcrumbs li a {
+}
+
+.site-breadcrumbs .last {
+}
+
+.site-breadcrumbs .last a {
 }
 
 /* ---------- Dragging/sorting indicators ---------- */

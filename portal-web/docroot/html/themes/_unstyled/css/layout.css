@@ -5,7 +5,7 @@
 .lfr-grid {
 }
 
-.lfr-grid .lfr-column {
+.lfr-grid .lfr-column, .columns-max .lfr-column {
 }
 
 /* ---------- Column widths ---------- */

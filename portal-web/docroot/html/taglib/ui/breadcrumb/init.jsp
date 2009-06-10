@@ -54,11 +54,13 @@ private void _buildGuestGroupBreadcrumb(ThemeDisplay themeDisplay, StringBuilder
 
 		String layoutSetFriendlyURL = PortalUtil.getLayoutSetFriendlyURL(layoutSet, themeDisplay);
 
+		sb.append("<li>");
 		sb.append("<a href=\"");
 		sb.append(layoutSetFriendlyURL);
 		sb.append("\">");
 		sb.append(HtmlUtil.escape(themeDisplay.getAccount().getName()));
-		sb.append("</a> &raquo; ");
+		sb.append("</a>");
+		sb.append("</li>");
 	}
 }
 
@@ -110,11 +112,13 @@ private void _buildParentGroupsBreadcrumb(LayoutSet layoutSet, PortletURL portle
 	if ((layoutsPageCount > 0) && !group.getName().equals(GroupConstants.GUEST)) {
 		String layoutSetFriendlyURL = PortalUtil.getLayoutSetFriendlyURL(layoutSet, themeDisplay);
 
+		sb.append("<li>");
 		sb.append("<a href=\"");
 		sb.append(layoutSetFriendlyURL);
 		sb.append("\">");
 		sb.append(HtmlUtil.escape(group.getDescriptiveName()));
-		sb.append("</a> &raquo; ");
+		sb.append("</a>");
+		sb.append("</li>");
 	}
 }
 %>
