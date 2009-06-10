@@ -1,11 +1,11 @@
 <%
-for (int assetIndex = 0; assetIndex < results.size(); assetIndex++) {
-	TagsAsset asset = (TagsAsset)results.get(assetIndex);
+for (int assetEntryIndex = 0; assetEntryIndex < results.size(); assetEntryIndex++) {
+	AssetEntry assetEntry = (AssetEntry)results.get(assetEntryIndex);
 
-	String className = PortalUtil.getClassName(asset.getClassNameId());
-	long classPK = asset.getClassPK();
+	String className = PortalUtil.getClassName(assetEntry.getClassNameId());
+	long classPK = assetEntry.getClassPK();
 
-	String title = asset.getTitle();
+	String title = assetEntry.getTitle();
 	String summary = StringPool.BLANK;
 	String viewURL = StringPool.BLANK;
 	String viewURLMessage = StringPool.BLANK;
@@ -13,9 +13,9 @@ for (int assetIndex = 0; assetIndex < results.size(); assetIndex++) {
 
 	boolean show = true;
 
-	request.setAttribute("view.jsp-assetIndex", new Integer(assetIndex));
+	request.setAttribute("view.jsp-assetEntryIndex", new Integer(assetEntryIndex));
 
-	request.setAttribute("view.jsp-asset", asset);
+	request.setAttribute("view.jsp-assetEntry", assetEntry);
 
 	request.setAttribute("view.jsp-title", title);
 	request.setAttribute("view.jsp-summary", summary);

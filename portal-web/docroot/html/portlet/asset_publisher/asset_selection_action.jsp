@@ -35,31 +35,31 @@ Document assetDoc = (Document)row.getObject();
 
 Element root = assetDoc.getRootElement();
 
-int assetOrder = GetterUtil.getInteger(root.elementText("asset-order"));
+int assetEntryOrder = GetterUtil.getInteger(root.elementText("asset-order"));
 boolean last = GetterUtil.getBoolean(root.elementText("last"));
 %>
 
 <c:choose>
-	<c:when test="<%= (assetOrder == 0) && last %>">
+	<c:when test="<%= (assetEntryOrder == 0) && last %>">
 	</c:when>
-	<c:when test="<%= (assetOrder > 0) && !last %>">
+	<c:when test="<%= (assetEntryOrder > 0) && !last %>">
 
 		<%
-		String taglibDownURL = "javascript:" + renderResponse.getNamespace() + "moveSelectionDown('" + assetOrder + "')";
+		String taglibDownURL = "javascript:" + renderResponse.getNamespace() + "moveSelectionDown('" + assetEntryOrder + "')";
 		%>
 
 		<liferay-ui:icon src='<%= themeDisplay.getPathThemeImages() + "/arrows/02_down.png" %>' message="down" url="<%= taglibDownURL %>" />
 
 		<%
-		String taglibUpURL = "javascript:" + renderResponse.getNamespace() + "moveSelectionUp('" + assetOrder + "')";
+		String taglibUpURL = "javascript:" + renderResponse.getNamespace() + "moveSelectionUp('" + assetEntryOrder + "')";
 		%>
 
 		<liferay-ui:icon src='<%= themeDisplay.getPathThemeImages() + "/arrows/02_up.png" %>' message="up" url="<%= taglibUpURL %>" />
 	</c:when>
-	<c:when test="<%= assetOrder == 0 %>">
+	<c:when test="<%= assetEntryOrder == 0 %>">
 
 		<%
-		String taglibDownURL = "javascript:" + renderResponse.getNamespace() + "moveSelectionDown('" + assetOrder + "')";
+		String taglibDownURL = "javascript:" + renderResponse.getNamespace() + "moveSelectionDown('" + assetEntryOrder + "')";
 		%>
 
 		<liferay-ui:icon src='<%= themeDisplay.getPathThemeImages() + "/arrows/02_down.png" %>' message="down" url="<%= taglibDownURL %>" />
@@ -67,7 +67,7 @@ boolean last = GetterUtil.getBoolean(root.elementText("last"));
 	<c:when test="<%= last %>">
 
 		<%
-		String taglibUpURL = "javascript:" + renderResponse.getNamespace() + "moveSelectionUp('" + assetOrder + "')";
+		String taglibUpURL = "javascript:" + renderResponse.getNamespace() + "moveSelectionUp('" + assetEntryOrder + "')";
 		%>
 
 		<liferay-ui:icon src='<%= themeDisplay.getPathThemeImages() + "/arrows/02_up.png" %>' message="up" url="<%= taglibUpURL %>" />
@@ -77,7 +77,7 @@ boolean last = GetterUtil.getBoolean(root.elementText("last"));
 <liferay-portlet:actionURL portletConfiguration="true" windowState="<%= WindowState.MAXIMIZED.toString() %>" var="deleteURL">
 	<portlet:param name="<%= Constants.CMD %>" value="remove-selection" />
 	<portlet:param name="redirect" value="<%= redirect %>" />
-	<portlet:param name="assetOrder" value="<%= String.valueOf(assetOrder) %>" />
+	<portlet:param name="assetEntryOrder" value="<%= String.valueOf(assetEntryOrder) %>" />
 </liferay-portlet:actionURL>
 
 <liferay-ui:icon-delete url="<%= deleteURL %>" />

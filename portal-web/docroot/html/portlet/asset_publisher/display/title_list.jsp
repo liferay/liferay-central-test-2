@@ -27,9 +27,9 @@
 <%
 List results = (List)request.getAttribute("view.jsp-results");
 
-int assetIndex = ((Integer)request.getAttribute("view.jsp-assetIndex")).intValue();
+int assetEntryIndex = ((Integer)request.getAttribute("view.jsp-assetEntryIndex")).intValue();
 
-TagsAsset asset = (TagsAsset)request.getAttribute("view.jsp-asset");
+AssetEntry assetEntry = (AssetEntry)request.getAttribute("view.jsp-assetEntry");
 
 String title = (String)request.getAttribute("view.jsp-title");
 String viewURL = (String)request.getAttribute("view.jsp-viewURL");
@@ -45,7 +45,7 @@ request.setAttribute("view.jsp-showIconLabel", false);
 PortletURL viewFullContentURL = renderResponse.createRenderURL();
 
 viewFullContentURL.setParameter("struts_action", "/asset_publisher/view_content");
-viewFullContentURL.setParameter("assetId", String.valueOf(asset.getAssetId()));
+viewFullContentURL.setParameter("assetEntryId", String.valueOf(assetEntry.getEntryId()));
 
 if (className.equals(BlogsEntry.class.getName())) {
 	BlogsEntry entry = BlogsEntryLocalServiceUtil.getEntry(classPK);
@@ -162,7 +162,7 @@ else if (className.equals(WikiPage.class.getName())) {
 viewURL = _checkViewURL(viewURL, currentURL, themeDisplay);
 %>
 
-	<c:if test="<%= assetIndex == 0 %>">
+	<c:if test="<%= assetEntryIndex == 0 %>">
 		<ul class="title-list">
 	</c:if>
 
@@ -185,6 +185,6 @@ viewURL = _checkViewURL(viewURL, currentURL, themeDisplay);
 		</li>
 	</c:if>
 
-	<c:if test="<%= (assetIndex + 1) == results.size() %>">
+	<c:if test="<%= (assetEntryIndex + 1) == results.size() %>">
 		</ul>
 	</c:if>

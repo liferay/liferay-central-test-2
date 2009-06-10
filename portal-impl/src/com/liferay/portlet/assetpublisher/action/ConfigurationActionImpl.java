@@ -31,9 +31,9 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
+import com.liferay.portlet.asset.AssetTagException;
+import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
 import com.liferay.portlet.assetpublisher.util.AssetPublisherUtil;
-import com.liferay.portlet.tags.TagsEntryException;
-import com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -101,7 +101,7 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 			}
 		}
 		catch (Exception e) {
-			if (e instanceof TagsEntryException) {
+			if (e instanceof AssetTagException) {
 				SessionErrors.add(actionRequest, e.getClass().getName(), e);
 			}
 			else {
@@ -122,54 +122,61 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 			ActionRequest actionRequest, PortletPreferences preferences)
 		throws Exception {
 
-		int assetOrder = ParamUtil.getInteger(actionRequest, "assetOrder");
+		int assetEntryOrder = ParamUtil.getInteger(
+			actionRequest, "assetEntryOrder");
 
 		String[] manualEntries = preferences.getValues(
-			"manual-entries", new String[0]);
+			"asset-entry-xml", new String[0]);
 
-		if ((assetOrder >= (manualEntries.length - 1)) || (assetOrder < 0)) {
+		if ((assetEntryOrder >= (manualEntries.length - 1)) ||
+			(assetEntryOrder < 0)) {
+
 			return;
 		}
 
-		String temp = manualEntries[assetOrder + 1];
+		String temp = manualEntries[assetEntryOrder + 1];
 
-		manualEntries[assetOrder + 1] = manualEntries[assetOrder];
-		manualEntries[assetOrder] = temp;
+		manualEntries[assetEntryOrder + 1] = manualEntries[assetEntryOrder];
+		manualEntries[assetEntryOrder] = temp;
 
-		preferences.setValues("manual-entries", manualEntries);
+		preferences.setValues("asset-entry-xml", manualEntries);
 	}
 
 	protected void moveSelectionUp(
 			ActionRequest actionRequest, PortletPreferences preferences)
 		throws Exception {
 
-		int assetOrder = ParamUtil.getInteger(actionRequest, "assetOrder");
+		int assetEntryOrder = ParamUtil.getInteger(
+			actionRequest, "assetEntryOrder");
 
 		String[] manualEntries = preferences.getValues(
-			"manual-entries", new String[0]);
+			"asset-entry-xml", new String[0]);
 
-		if ((assetOrder >= manualEntries.length) || (assetOrder <= 0)) {
+		if ((assetEntryOrder >= manualEntries.length) ||
+			(assetEntryOrder <= 0)) {
+
 			return;
 		}
 
-		String temp = manualEntries[assetOrder - 1];
+		String temp = manualEntries[assetEntryOrder - 1];
 
-		manualEntries[assetOrder - 1] = manualEntries[assetOrder];
-		manualEntries[assetOrder] = temp;
+		manualEntries[assetEntryOrder - 1] = manualEntries[assetEntryOrder];
+		manualEntries[assetEntryOrder] = temp;
 
-		preferences.setValues("manual-entries", manualEntries);
+		preferences.setValues("asset-entry-xml", manualEntries);
 	}
 
 	protected void removeSelection(
 			ActionRequest actionRequest, PortletPreferences preferences)
 		throws Exception {
 
-		int assetOrder = ParamUtil.getInteger(actionRequest, "assetOrder");
+		int assetEntryOrder = ParamUtil.getInteger(
+			actionRequest, "assetEntryOrder");
 
 		String[] manualEntries = preferences.getValues(
-			"manual-entries", new String[0]);
+			"asset-entry-xml", new String[0]);
 
-		if (assetOrder >= manualEntries.length) {
+		if (assetEntryOrder >= manualEntries.length) {
 			return;
 		}
 
@@ -179,12 +186,12 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 		int j = 0;
 
 		for (; i < manualEntries.length; i++) {
-			if (i != assetOrder) {
+			if (i != assetEntryOrder) {
 				newEntries[j++] = manualEntries[i];
 			}
 		}
 
-		preferences.setValues("manual-entries", newEntries);
+		preferences.setValues("asset-entry-xml", newEntries);
 	}
 
 	protected void setSelectionStyle(
@@ -221,10 +228,10 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 		long userId = themeDisplay.getUserId();
 		long groupId = themeDisplay.getScopeGroupId();
 
-		String[] entries = StringUtil.split(
-			ParamUtil.getString(actionRequest, "entries"));
-		String[] notEntries = StringUtil.split(
-			ParamUtil.getString(actionRequest, "notEntries"));
+		String[] assetTagNames = StringUtil.split(
+			ParamUtil.getString(actionRequest, "assetTagNames"));
+		String[] notAssetTagNames = StringUtil.split(
+			ParamUtil.getString(actionRequest, "notAssetTagNames"));
 		boolean mergeUrlTags = ParamUtil.getBoolean(
 			actionRequest, "mergeUrlTags");
 		boolean andOperator = ParamUtil.getBoolean(
@@ -270,8 +277,8 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 
 		preferences.setValue("selection-style", "dynamic");
 
-		preferences.setValues("entries", entries);
-		preferences.setValues("not-entries", notEntries);
+		preferences.setValues("asset-tag-names", assetTagNames);
+		preferences.setValues("not-asset-tag-names", notAssetTagNames);
 		preferences.setValue("merge-url-tags", String.valueOf(mergeUrlTags));
 		preferences.setValue("and-operator", String.valueOf(andOperator));
 
@@ -302,8 +309,8 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 			"enable-comment-ratings", String.valueOf(enableCommentRatings));
 		preferences.setValue("metadata-fields", medatadaFields);
 
-		TagsEntryLocalServiceUtil.checkEntries(userId, groupId, entries);
-		TagsEntryLocalServiceUtil.checkEntries(userId, groupId, notEntries);
+		AssetTagLocalServiceUtil.checkTags(userId, groupId, assetTagNames);
+		AssetTagLocalServiceUtil.checkTags(userId, groupId, notAssetTagNames);
 	}
 
 	protected void updateManualSettings(

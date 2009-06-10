@@ -31,35 +31,35 @@ for (int j = 0; j < metadataFields.length; j++) {
 	String value = null;
 
 	if (metadataFields[j].equals("create-date")) {
-		value = dateFormatDate.format(asset.getCreateDate());
+		value = dateFormatDate.format(assetEntry.getCreateDate());
 	}
 	else if (metadataFields[j].equals("modified-date")) {
-		value = dateFormatDate.format(asset.getModifiedDate());
+		value = dateFormatDate.format(assetEntry.getModifiedDate());
 	}
 	else if (metadataFields[j].equals("publish-date")) {
-		if (asset.getPublishDate() == null) {
+		if (assetEntry.getPublishDate() == null) {
 			value = StringPool.BLANK;
 		}
 		else {
-			value = dateFormatDate.format(asset.getPublishDate());
+			value = dateFormatDate.format(assetEntry.getPublishDate());
 		}
 	}
 	else if (metadataFields[j].equals("expiration-date")) {
-		if (asset.getExpirationDate() == null) {
+		if (assetEntry.getExpirationDate() == null) {
 			value = StringPool.BLANK;
 		}
 		else {
-			value = dateFormatDate.format(asset.getExpirationDate());
+			value = dateFormatDate.format(assetEntry.getExpirationDate());
 		}
 	}
 	else if (metadataFields[j].equals("priority")) {
-		value = LanguageUtil.get(pageContext, "priority") + StringPool.COLON + StringPool.SPACE + asset.getPriority();
+		value = LanguageUtil.get(pageContext, "priority") + StringPool.COLON + StringPool.SPACE + assetEntry.getPriority();
 	}
 	else if (metadataFields[j].equals("author")) {
-		value = LanguageUtil.get(pageContext, "by") + StringPool.SPACE + asset.getUserName();
+		value = LanguageUtil.get(pageContext, "by") + StringPool.SPACE + assetEntry.getUserName();
 	}
 	else if (metadataFields[j].equals("view-count")) {
-		int viewCount = asset.getViewCount();
+		int viewCount = assetEntry.getViewCount();
 
 		value = viewCount + StringPool.SPACE + LanguageUtil.get(pageContext, (viewCount == 1) ? "view" : "views");
 	}
@@ -68,7 +68,7 @@ for (int j = 0; j < metadataFields.length; j++) {
 	}
 
 	if (Validator.isNotNull(value)) {
-		if (previous && !(value.equals("tags") && asset.getEntries().isEmpty() )) {
+		if (previous && !(value.equals("tags") && assetEntry.getTags().isEmpty())) {
 %>
 
 			<span class="vertical-separator"><!-- --></span>
@@ -83,8 +83,8 @@ for (int j = 0; j < metadataFields.length; j++) {
 			<c:choose>
 				<c:when test='<%= value.equals("tags") %>' >
 					<liferay-ui:tags-summary
-						className="<%= asset.getClassName() %>"
-						classPK="<%= asset.getClassPK () %>"
+						className="<%= assetEntry.getClassName() %>"
+						classPK="<%= assetEntry.getClassPK () %>"
 						portletURL="<%= portletURL %>"
 					/>
 				</c:when>

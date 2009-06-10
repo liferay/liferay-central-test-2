@@ -23,7 +23,7 @@
 %>
 
 <%
-int assetOrder = ParamUtil.getInteger(request, "assetOrder", -1);
+int assetEntryOrder = ParamUtil.getInteger(request, "assetEntryOrder", -1);
 
 long userId = 0;
 
@@ -88,20 +88,20 @@ portletURL.setParameter("typeSelection", BlogsEntry.class.getName());
 
 				entry = entry.toEscapedModel();
 
-				TagsAsset asset = TagsAssetLocalServiceUtil.getAsset(BlogsEntry.class.getName(), entry.getEntryId());
+				AssetEntry assetEntry = AssetEntryLocalServiceUtil.getEntry(BlogsEntry.class.getName(), entry.getEntryId());
 
 				StringBuilder sb = new StringBuilder();
 
 				sb.append("javascript:");
 				sb.append(renderResponse.getNamespace());
 				sb.append("selectAsset('");
-				sb.append(asset.getAssetId());
+				sb.append(assetEntry.getEntryId());
 				sb.append("', '");
-				sb.append(asset.getAssetId());
+				sb.append(assetEntry.getEntryId());
 				sb.append("', '");
-				sb.append(UnicodeFormatter.toString(asset.getTitle()));
+				sb.append(UnicodeFormatter.toString(assetEntry.getTitle()));
 				sb.append("', '");
-				sb.append(assetOrder);
+				sb.append(assetEntryOrder);
 				sb.append("');");
 
 				String rowHREF = sb.toString();
@@ -161,20 +161,20 @@ portletURL.setParameter("typeSelection", BlogsEntry.class.getName());
 
 			ResultRow row = new ResultRow(entry, entry.getEntryId(), i);
 
-			TagsAsset asset = TagsAssetLocalServiceUtil.getAsset(BlogsEntry.class.getName(), entry.getEntryId());
+			AssetEntry assetEntry = AssetEntryLocalServiceUtil.getEntry(BlogsEntry.class.getName(), entry.getEntryId());
 
 			StringBuilder sb = new StringBuilder();
 
 			sb.append("javascript:");
 			sb.append(renderResponse.getNamespace());
 			sb.append("selectAsset('");
-			sb.append(asset.getAssetId());
+			sb.append(assetEntry.getEntryId());
 			sb.append("', '");
-			sb.append(asset.getAssetId());
+			sb.append(assetEntry.getEntryId());
 			sb.append("', '");
-			sb.append(UnicodeFormatter.toString(asset.getTitle()));
+			sb.append(UnicodeFormatter.toString(assetEntry.getTitle()));
 			sb.append("', '");
-			sb.append(assetOrder);
+			sb.append(assetEntryOrder);
 			sb.append("');");
 
 			String rowHREF = sb.toString();

@@ -29,6 +29,20 @@
 <%@ page import="com.liferay.portal.kernel.xml.Element" %>
 <%@ page import="com.liferay.portal.kernel.xml.SAXReaderUtil" %>
 <%@ page import="com.liferay.portlet.PortalPreferences" %>
+<%@ page import="com.liferay.portlet.asset.NoSuchEntryException" %>
+<%@ page import="com.liferay.portlet.asset.NoSuchTagException" %>
+<%@ page import="com.liferay.portlet.asset.NoSuchTagPropertyException" %>
+<%@ page import="com.liferay.portlet.asset.model.AssetEntry" %>
+<%@ page import="com.liferay.portlet.asset.model.AssetEntryType" %>
+<%@ page import="com.liferay.portlet.asset.model.AssetTag" %>
+<%@ page import="com.liferay.portlet.asset.model.AssetTagProperty" %>
+<%@ page import="com.liferay.portlet.asset.model.AssetVocabulary" %>
+<%@ page import="com.liferay.portlet.asset.service.AssetEntryLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.asset.service.AssetEntryServiceUtil" %>
+<%@ page import="com.liferay.portlet.asset.service.AssetTagLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.asset.service.AssetTagPropertyLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.asset.service.AssetVocabularyLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.asset.util.AssetUtil" %>
 <%@ page import="com.liferay.portlet.assetpublisher.util.AssetPublisherUtil" %>
 <%@ page import="com.liferay.portlet.blogs.model.BlogsEntry" %>
 <%@ page import="com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil" %>
@@ -79,21 +93,6 @@
 <%@ page import="com.liferay.portlet.messageboards.model.MBMessage" %>
 <%@ page import="com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.messageboards.service.permission.MBMessagePermission" %>
-<%@ page import="com.liferay.portlet.tags.NoSuchAssetException" %>
-<%@ page import="com.liferay.portlet.tags.NoSuchEntryException" %>
-<%@ page import="com.liferay.portlet.tags.NoSuchPropertyException" %>
-<%@ page import="com.liferay.portlet.tags.model.TagsAsset" %>
-<%@ page import="com.liferay.portlet.tags.model.TagsAssetType" %>
-<%@ page import="com.liferay.portlet.tags.model.TagsEntry" %>
-<%@ page import="com.liferay.portlet.tags.model.TagsEntryConstants" %>
-<%@ page import="com.liferay.portlet.tags.model.TagsProperty" %>
-<%@ page import="com.liferay.portlet.tags.model.TagsVocabulary" %>
-<%@ page import="com.liferay.portlet.tags.service.TagsAssetLocalServiceUtil" %>
-<%@ page import="com.liferay.portlet.tags.service.TagsAssetServiceUtil" %>
-<%@ page import="com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil" %>
-<%@ page import="com.liferay.portlet.tags.service.TagsPropertyLocalServiceUtil" %>
-<%@ page import="com.liferay.portlet.tags.service.TagsVocabularyLocalServiceUtil" %>
-<%@ page import="com.liferay.portlet.tags.util.TagsUtil" %>
 <%@ page import="com.liferay.portlet.wiki.model.WikiNode" %>
 <%@ page import="com.liferay.portlet.wiki.model.WikiPage" %>
 <%@ page import="com.liferay.portlet.wiki.model.WikiPageDisplay" %>
@@ -136,20 +135,20 @@ else {
 
 String category = GetterUtil.getString(preferences.getValue("category", StringPool.BLANK));
 
-String tag = ParamUtil.getString(request, "tag");
+String assetTagName = ParamUtil.getString(request, "tag");
 
-String[] entries = null;
+String[] assetTagNames = null;
 
-if (Validator.isNull(tag)) {
-	entries = preferences.getValues("entries", new String[0]);
+if (Validator.isNull(assetTagName)) {
+	assetTagNames = preferences.getValues("asset-tag-names", new String[0]);
 }
 else {
-	entries = new String[] {tag};
+	assetTagNames = new String[] {assetTagName};
 
-	PortalUtil.setPageKeywords(tag, request);
+	PortalUtil.setPageKeywords(assetTagName, request);
 }
 
-String[] notEntries = preferences.getValues("not-entries", new String[0]);
+String[] notAssetTagNames = preferences.getValues("not-asset-tag-names", new String[0]);
 boolean mergeUrlTags = GetterUtil.getBoolean(preferences.getValue("merge-url-tags", null), true);
 boolean andOperator = GetterUtil.getBoolean(preferences.getValue("and-operator", null), false);
 
@@ -182,9 +181,9 @@ String allMetadataFields = "create-date,modified-date,publish-date,expiration-da
 
 String[] metadataFields = StringUtil.split(preferences.getValue("metadata-fields", defaultMetadataFields));
 
-Arrays.sort(entries);
+Arrays.sort(assetTagNames);
 
-String[] manualEntries = preferences.getValues("manual-entries", new String[0]);
+String[] assetEntryXmls = preferences.getValues("asset-entry-xml", new String[0]);
 
 boolean viewInContext = assetLinkBehaviour.equals("viewInPortlet");
 

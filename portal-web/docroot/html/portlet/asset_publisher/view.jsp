@@ -26,38 +26,38 @@
 
 <%
 if (mergeUrlTags) {
-	String[] compilerEntries = (String[])request.getAttribute(WebKeys.TAGS_COMPILER_ENTRIES);
+	String[] compilerTagNames = (String[])request.getAttribute(WebKeys.TAGS_COMPILER_ENTRIES);
 
-	Set<String> layoutTagsEntries = TagsUtil.getLayoutTagsEntries(request);
+	Set<String> layoutTagNames = AssetUtil.getLayoutTagNames(request);
 
-	if (!layoutTagsEntries.isEmpty()) {
-		compilerEntries = ArrayUtil.append(compilerEntries, layoutTagsEntries.toArray(new String[layoutTagsEntries.size()]));
+	if (!layoutTagNames.isEmpty()) {
+		compilerTagNames = ArrayUtil.append(compilerTagNames, layoutTagNames.toArray(new String[layoutTagNames.size()]));
 	}
 
 	String titleEntry = null;
 
-	if ((compilerEntries != null) && (compilerEntries.length > 0)) {
-		String[] newEntries = ArrayUtil.append(entries, compilerEntries);
+	if ((compilerTagNames != null) && (compilerTagNames.length > 0)) {
+		String[] newAssetTagNames = ArrayUtil.append(assetTagNames, compilerTagNames);
 
-		entries = newEntries;
+		assetTagNames = newAssetTagNames;
 
-		titleEntry = compilerEntries[compilerEntries.length - 1];
+		titleEntry = compilerTagNames[compilerTagNames.length - 1];
 	}
 
 	String portletTitle = HtmlUtil.unescape(portletDisplay.getTitle());
 
-	portletTitle = TagsUtil.substitutePropertyVariables(scopeGroupId, titleEntry, portletTitle);
+	portletTitle = AssetUtil.substituteTagPropertyVariables(scopeGroupId, titleEntry, portletTitle);
 
 	renderResponse.setTitle(portletTitle);
 }
 
-entries = ArrayUtil.distinct(entries, new StringComparator());
+assetTagNames = ArrayUtil.distinct(assetTagNames, new StringComparator());
 
-for (String entryName : entries) {
+for (String curAssetTagName : assetTagNames) {
 	try {
-		TagsEntry entry = TagsEntryLocalServiceUtil.getEntry(scopeGroupId, entryName);
+		AssetTag assetTag = AssetTagLocalServiceUtil.getTag(scopeGroupId, curAssetTagName);
 
-		TagsProperty journalTemplateIdProperty = TagsPropertyLocalServiceUtil.getProperty(entry.getEntryId(), "journal-template-id");
+		AssetTagProperty journalTemplateIdProperty = AssetTagPropertyLocalServiceUtil.getTagProperty(assetTag.getTagId(), "journal-template-id");
 
 		String journalTemplateId = journalTemplateIdProperty.getValue();
 
@@ -65,13 +65,13 @@ for (String entryName : entries) {
 
 		break;
 	}
-	catch (NoSuchEntryException nsee) {
+	catch (NoSuchTagException nste) {
 	}
-	catch (NoSuchPropertyException nspe) {
+	catch (NoSuchTagPropertyException nstpe) {
 	}
 }
 
-if (enableTagBasedNavigation && selectionStyle.equals("manual") && (entries.length > 0)) {
+if (enableTagBasedNavigation && selectionStyle.equals("manual") && (assetTagNames.length > 0)) {
 	selectionStyle = "dynamic";
 }
 
@@ -84,17 +84,17 @@ String portletId = portletDisplay.getId();
 if (showQueryLogic) {
 	StringBuilder tagsText = new StringBuilder();
 
-	if (entries.length > 0) {
+	if (assetTagNames.length > 0) {
 		tagsText.append("( ");
 	}
 
-	for (int i = 0; i < entries.length; i++) {
-		if ((i + 1) == entries.length) {
-			tagsText.append(entries[i]);
+	for (int i = 0; i < assetTagNames.length; i++) {
+		if ((i + 1) == assetTagNames.length) {
+			tagsText.append(assetTagNames[i]);
 			tagsText.append(" )");
 		}
 		else {
-			tagsText.append(entries[i]);
+			tagsText.append(assetTagNames[i]);
 
 			if (andOperator) {
 				tagsText.append(" AND ");
@@ -105,17 +105,17 @@ if (showQueryLogic) {
 		}
 	}
 
-	if ((entries.length > 0) && (notEntries.length > 0)) {
+	if ((assetTagNames.length > 0) && (notAssetTagNames.length > 0)) {
 		tagsText.append(" AND NOT ( ");
 	}
 
-	for (int i = 0; i < notEntries.length; i++) {
-		if ((i + 1) == notEntries.length) {
-			tagsText.append(notEntries[i]);
+	for (int i = 0; i < notAssetTagNames.length; i++) {
+		if ((i + 1) == notAssetTagNames.length) {
+			tagsText.append(notAssetTagNames[i]);
 			tagsText.append(" )");
 		}
 		else {
-			tagsText.append(notEntries[i]);
+			tagsText.append(notAssetTagNames[i]);
 			tagsText.append(" OR ");
 		}
 	}

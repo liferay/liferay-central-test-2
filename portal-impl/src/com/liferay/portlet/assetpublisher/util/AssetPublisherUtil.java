@@ -37,8 +37,8 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
-import com.liferay.portlet.tags.model.TagsAsset;
-import com.liferay.portlet.tags.service.TagsAssetLocalServiceUtil;
+import com.liferay.portlet.asset.model.AssetEntry;
+import com.liferay.portlet.asset.service.AssetEntryLocalServiceUtil;
 
 import java.io.IOException;
 
@@ -78,7 +78,7 @@ public class AssetPublisherUtil {
 
 	public static void addAndStoreSelection(
 			ActionRequest actionRequest, String className, long classPK,
-			int assetOrder)
+			int assetEntryOrder)
 		throws Exception {
 
 		String referringPortletResource =
@@ -88,14 +88,15 @@ public class AssetPublisherUtil {
 			return;
 		}
 
-		TagsAsset asset = TagsAssetLocalServiceUtil.getAsset(
+		AssetEntry assetEntry = AssetEntryLocalServiceUtil.getEntry(
 			className, classPK);
 
 		PortletPreferences preferences =
 			PortletPreferencesFactoryUtil.getPortletSetup(
 				actionRequest, referringPortletResource);
 
-		addSelection(className, asset.getAssetId(), assetOrder, preferences);
+		addSelection(
+			className, assetEntry.getEntryId(), assetEntryOrder, preferences);
 
 		preferences.store();
 	}
@@ -104,31 +105,34 @@ public class AssetPublisherUtil {
 			ActionRequest actionRequest, PortletPreferences preferences)
 		throws Exception {
 
-		String assetType = ParamUtil.getString(actionRequest, "assetType");
-		long assetId = ParamUtil.getLong(actionRequest, "assetId");
-		int assetOrder = ParamUtil.getInteger(actionRequest, "assetOrder");
+		String assetEntryType = ParamUtil.getString(
+			actionRequest, "assetEntryType");
+		long assetEntryId = ParamUtil.getLong(actionRequest, "assetEntryId");
+		int assetEntryOrder = ParamUtil.getInteger(
+			actionRequest, "assetEntryOrder");
 
-		addSelection(assetType, assetId, assetOrder, preferences);
+		addSelection(
+			assetEntryType, assetEntryId, assetEntryOrder, preferences);
 	}
 
 	public static void addSelection(
-			String assetType, long assetId, int assetOrder,
+			String assetEntryType, long assetEntryId, int assetEntryOrder,
 			PortletPreferences preferences)
 		throws Exception {
 
-		String[] manualEntries = preferences.getValues(
-			"manual-entries", new String[0]);
+		String[] assetEntryXmls = preferences.getValues(
+			"asset-entry-xml", new String[0]);
 
-		String assetConfig = _assetConfiguration(assetType, assetId);
+		String assetEntryXml = _getAssetEntryXml(assetEntryType, assetEntryId);
 
-		if (assetOrder > -1) {
-			manualEntries[assetOrder] = assetConfig;
+		if (assetEntryOrder > -1) {
+			assetEntryXmls[assetEntryOrder] = assetEntryXml;
 		}
 		else {
-			manualEntries = ArrayUtil.append(manualEntries, assetConfig);
+			assetEntryXmls = ArrayUtil.append(assetEntryXmls, assetEntryXml);
 		}
 
-		preferences.setValues("manual-entries", manualEntries);
+		preferences.setValues("asset-entry-xml", assetEntryXmls);
 	}
 
 	public static void addRecentFolderId(
@@ -151,52 +155,55 @@ public class AssetPublisherUtil {
 	}
 
 	public static void removeAndStoreSelection(
-			List<Long> assetIds, PortletPreferences preferences)
+			List<Long> assetEntryIds, PortletPreferences preferences)
 		throws Exception {
 
-		if (assetIds.size() == 0) {
+		if (assetEntryIds.size() == 0) {
 			return;
 		}
 
-		String[] manualEntries = preferences.getValues(
-			"manual-entries", new String[0]);
+		String[] assetEntryXmls = preferences.getValues(
+			"asset-entry-xml", new String[0]);
 
-		List<String> manualEntriesList = ListUtil.fromArray(manualEntries);
+		List<String> assetEntryXmlsList = ListUtil.fromArray(assetEntryXmls);
 
-		Iterator<String> itr = manualEntriesList.iterator();
+		Iterator<String> itr = assetEntryXmlsList.iterator();
 
 		while (itr.hasNext()) {
-			String assetEntry = itr.next();
+			String assetEntryXml = itr.next();
 
-			Document doc = SAXReaderUtil.read(assetEntry);
+			Document doc = SAXReaderUtil.read(assetEntryXml);
 
 			Element root = doc.getRootElement();
 
-			long assetId = GetterUtil.getLong(
-				root.element("asset-id").getText());
+			long assetEntryId = GetterUtil.getLong(
+				root.element("asset-entry-id").getText());
 
-			if (assetIds.contains(assetId)) {
+			if (assetEntryIds.contains(assetEntryId)) {
 				itr.remove();
 			}
 		}
 
 		preferences.setValues(
-			"manual-entries",
-			manualEntriesList.toArray(new String[manualEntriesList.size()]));
+			"asset-entry-xml",
+			assetEntryXmlsList.toArray(new String[assetEntryXmlsList.size()]));
 
 		preferences.store();
 	}
 
-	private static String _assetConfiguration(String assetType, long assetId) {
+	private static String _getAssetEntryXml(
+		String assetEntryType, long assetEntryId) {
+
 		String xml = null;
 
 		try {
 			Document doc = SAXReaderUtil.createDocument(StringPool.UTF8);
 
-			Element asset = doc.addElement("asset");
+			Element assetEntryEl = doc.addElement("asset-entry");
 
-			asset.addElement("asset-type").addText(assetType);
-			asset.addElement("asset-id").addText(String.valueOf(assetId));
+			assetEntryEl.addElement("asset-entry-type").addText(assetEntryType);
+			assetEntryEl.addElement("asset-entry-id").addText(
+				String.valueOf(assetEntryId));
 
 			xml = doc.formattedString(StringPool.BLANK);
 		}

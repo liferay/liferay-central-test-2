@@ -27,9 +27,9 @@
 <%
 List results = (List)request.getAttribute("view.jsp-results");
 
-int assetIndex = ((Integer)request.getAttribute("view.jsp-assetIndex")).intValue();
+int assetEntryIndex = ((Integer)request.getAttribute("view.jsp-assetEntryIndex")).intValue();
 
-TagsAsset asset = (TagsAsset)request.getAttribute("view.jsp-asset");
+AssetEntry assetEntry = (AssetEntry)request.getAttribute("view.jsp-assetEntry");
 
 String title = (String)request.getAttribute("view.jsp-title");
 
@@ -48,7 +48,7 @@ request.setAttribute("view.jsp-showIconLabel", true);
 			<%
 			BlogsEntry entry = BlogsEntryLocalServiceUtil.getEntry(classPK);
 
-			TagsAssetLocalServiceUtil.incrementViewCounter(className, entry.getEntryId());
+			AssetEntryLocalServiceUtil.incrementViewCounter(className, entry.getEntryId());
 
 			if (showContextLink) {
 				if (PortalUtil.getPlidFromPortletId(entry.getGroupId(), PortletKeys.BLOGS) == 0) {
@@ -233,7 +233,7 @@ request.setAttribute("view.jsp-showIconLabel", true);
 			<%
 			IGImage image = IGImageLocalServiceUtil.getImage(classPK);
 
-			TagsAssetLocalServiceUtil.incrementViewCounter(className, image.getImageId());
+			AssetEntryLocalServiceUtil.incrementViewCounter(className, image.getImageId());
 
 			PortletURL viewImageURL = new PortletURLImpl(request, PortletKeys.IMAGE_GALLERY, plid, PortletRequest.RENDER_PHASE);
 
@@ -283,7 +283,7 @@ request.setAttribute("view.jsp-showIconLabel", true);
 			JournalArticleDisplay articleDisplay = JournalContentUtil.getDisplay(articleResource.getGroupId(), articleResource.getArticleId(), templateId, null, languageId, themeDisplay, articlePage, xmlRequest);
 
 			if (articleDisplay != null) {
-				TagsAssetLocalServiceUtil.incrementViewCounter(className, articleDisplay.getResourcePrimKey());
+				AssetEntryLocalServiceUtil.incrementViewCounter(className, articleDisplay.getResourcePrimKey());
 			}
 			else {
 
@@ -397,7 +397,7 @@ request.setAttribute("view.jsp-showIconLabel", true);
 			<%
 			MBMessage message = MBMessageLocalServiceUtil.getMessage(classPK);
 
-			TagsAssetLocalServiceUtil.incrementViewCounter(className, message.getMessageId());
+			AssetEntryLocalServiceUtil.incrementViewCounter(className, message.getMessageId());
 
 			if (showContextLink) {
 				if (PortalUtil.getPlidFromPortletId(message.getCategory().getGroupId(), PortletKeys.MESSAGE_BOARDS) == 0) {
@@ -455,7 +455,7 @@ request.setAttribute("view.jsp-showIconLabel", true);
 
 					WikiPage wikiPage = WikiPageLocalServiceUtil.getPage(pageResource.getNodeId(), pageResource.getTitle());
 
-					TagsAssetLocalServiceUtil.incrementViewCounter(className, wikiPage.getResourcePrimKey());
+					AssetEntryLocalServiceUtil.incrementViewCounter(className, wikiPage.getResourcePrimKey());
 
 					if (showContextLink) {
 						WikiNode node = WikiNodeLocalServiceUtil.getNode(pageResource.getNodeId());
@@ -537,10 +537,10 @@ request.setAttribute("view.jsp-showIconLabel", true);
 </div>
 
 <c:choose>
-	<c:when test="<%= !showAssetTitle && ((assetIndex + 1) < results.size()) %>">
+	<c:when test="<%= !showAssetTitle && ((assetEntryIndex + 1) < results.size()) %>">
 		<div class="separator"><!-- --></div>
 	</c:when>
-	<c:when test="<%= (assetIndex + 1) == results.size() %>">
+	<c:when test="<%= (assetEntryIndex + 1) == results.size() %>">
 		<div class="final-separator"><!-- --></div>
 	</c:when>
 </c:choose>

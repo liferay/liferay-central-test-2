@@ -23,11 +23,11 @@
 %>
 
 <%
-long[] entryIds = TagsEntryLocalServiceUtil.getEntryIds(scopeGroupId, entries);
-long[] notEntryIds = TagsEntryLocalServiceUtil.getEntryIds(scopeGroupId, notEntries);
+long[] assetTagIds = AssetTagLocalServiceUtil.getTagIds(scopeGroupId, assetTagNames);
+long[] notAssetTagIds = AssetTagLocalServiceUtil.getTagIds(scopeGroupId, notAssetTagNames);
 
-if (allowEmptyResults && (entryIds.length == 0) && (notEntryIds.length == 0)) {
-	entryIds = new long[] {-1};
+if (allowEmptyResults && (assetTagIds.length == 0) && (notAssetTagIds.length == 0)) {
+	assetTagIds = new long[] {-1};
 }
 
 int total = 0;
@@ -35,11 +35,11 @@ int total = 0;
 Date now = new Date();
 
 if (!groupByClass) {
-	total = TagsAssetLocalServiceUtil.getAssetsCount(scopeGroupId, classNameIds, entryIds, notEntryIds, andOperator, excludeZeroViewCount, now, now);
+	total = AssetEntryLocalServiceUtil.getEntriesCount(scopeGroupId, classNameIds, assetTagIds, notAssetTagIds, andOperator, excludeZeroViewCount, now, now);
 
 	searchContainer.setTotal(total);
 
-	List results = TagsAssetLocalServiceUtil.getAssets(scopeGroupId, classNameIds, entryIds, notEntryIds, andOperator, orderByColumn1, orderByColumn2, orderByType1, orderByType2, excludeZeroViewCount, now, now, searchContainer.getStart(), searchContainer.getEnd());
+	List results = AssetEntryLocalServiceUtil.getEntries(scopeGroupId, classNameIds, assetTagIds, notAssetTagIds, andOperator, orderByColumn1, orderByColumn2, orderByType1, orderByType2, excludeZeroViewCount, now, now, searchContainer.getStart(), searchContainer.getEnd());
 
 	searchContainer.setResults(results);
 
@@ -51,16 +51,16 @@ if (!groupByClass) {
 <%
 }
 else {
-	for (int groupAssetIndex = 0; groupAssetIndex < _ASSET_TYPES.length; groupAssetIndex++) {
-		long[] groupClassNameIds = {PortalUtil.getClassNameId(_ASSET_TYPES[groupAssetIndex])};
+	for (int groupAssetEntryIndex = 0; groupAssetEntryIndex < _ASSET_ENTRY_TYPES.length; groupAssetEntryIndex++) {
+		long[] groupClassNameIds = {PortalUtil.getClassNameId(_ASSET_ENTRY_TYPES[groupAssetEntryIndex])};
 
-		int groupTotal = TagsAssetLocalServiceUtil.getAssetsCount(scopeGroupId, groupClassNameIds, entryIds, notEntryIds, andOperator, excludeZeroViewCount, now, now);
+		int groupTotal = AssetEntryLocalServiceUtil.getEntriesCount(scopeGroupId, groupClassNameIds, assetTagIds, notAssetTagIds, andOperator, excludeZeroViewCount, now, now);
 
 		total += groupTotal;
 
 		searchContainer.setTotal(groupTotal);
 
-		List results = TagsAssetLocalServiceUtil.getAssets(scopeGroupId, groupClassNameIds, entryIds, notEntryIds, andOperator, orderByColumn1, orderByColumn2, orderByType1, orderByType2, excludeZeroViewCount, now, now, searchContainer.getStart(), searchContainer.getEnd());
+		List results = AssetEntryLocalServiceUtil.getEntries(scopeGroupId, groupClassNameIds, assetTagIds, notAssetTagIds, andOperator, orderByColumn1, orderByColumn2, orderByType1, orderByType2, excludeZeroViewCount, now, now, searchContainer.getStart(), searchContainer.getEnd());
 
 		searchContainer.setResults(results);
 
@@ -69,7 +69,7 @@ else {
 		if (results.size() > 0) {
 %>
 
-			<h3><liferay-ui:message key="<%= _ASSET_TITLES[groupAssetIndex] %>" /></h3>
+			<h3><liferay-ui:message key="<%= _ASSET_ENTRY_TITLES[groupAssetEntryIndex] %>" /></h3>
 
 			<%@ include file="/html/portlet/asset_publisher/view_dynamic_list_asset.jspf" %>
 
@@ -91,7 +91,7 @@ if (total == 0) {
 %>
 
 <%!
-private static final String[] _ASSET_TYPES = {BlogsEntry.class.getName(), BookmarksEntry.class.getName(), IGImage.class.getName(), DLFileEntry.class.getName(), MBMessage.class.getName(), WikiPage.class.getName()};
+private static final String[] _ASSET_ENTRY_TYPES = {BlogsEntry.class.getName(), BookmarksEntry.class.getName(), IGImage.class.getName(), DLFileEntry.class.getName(), MBMessage.class.getName(), WikiPage.class.getName()};
 
-private static final String[] _ASSET_TITLES = {"blogs", "bookmarks", "images", "documents", "threads", "wiki-pages"};
+private static final String[] _ASSET_ENTRY_TITLES = {"blogs", "bookmarks", "images", "documents", "threads", "wiki-pages"};
 %>

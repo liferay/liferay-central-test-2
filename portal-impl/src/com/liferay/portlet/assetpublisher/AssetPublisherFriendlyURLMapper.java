@@ -58,13 +58,13 @@ public class AssetPublisherFriendlyURLMapper extends BaseFriendlyURLMapper {
 			 (!windowState.equals(LiferayWindowState.EXCLUSIVE)))) {
 
 			String portletId = portletURL.getPortletId();
-			String assetId = portletURL.getParameter("assetId");
+			String assetEntryId = portletURL.getParameter("assetEntryId");
 			String type = GetterUtil.getString(
 				portletURL.getParameter("type"), "content");
 			String urlTitle = portletURL.getParameter("urlTitle");
 
 			if (Validator.isNotNull(portletId) &&
-				Validator.isNotNull(assetId)) {
+				Validator.isNotNull(assetEntryId)) {
 
 				if (portletId.equals(_PORTLET_DEFAULT_INSTANCE)) {
 					portletId = _PORTLET_ID;
@@ -90,11 +90,11 @@ public class AssetPublisherFriendlyURLMapper extends BaseFriendlyURLMapper {
 					portletURL.addParameterIncludedInPath("urlTitle");
 				}
 				else {
-					friendlyURLPath += "id/" + assetId;
+					friendlyURLPath += "id/" + assetEntryId;
 				}
 
 				portletURL.addParameterIncludedInPath("type");
-				portletURL.addParameterIncludedInPath("assetId");
+				portletURL.addParameterIncludedInPath("assetEntryId");
 			}
 		}
 
@@ -126,11 +126,11 @@ public class AssetPublisherFriendlyURLMapper extends BaseFriendlyURLMapper {
 		if (urlFragments.length > 2) {
 			String instanceId = urlFragments[0];
 			String type = urlFragments[1];
-			String assetId = null;
+			String assetEntryId = null;
 			String urlTitle = null;
 
 			if (urlFragments.length > 3) {
-				assetId = urlFragments[3];
+				assetEntryId = urlFragments[3];
 			}
 			else {
 				urlTitle = urlFragments[2];
@@ -162,8 +162,9 @@ public class AssetPublisherFriendlyURLMapper extends BaseFriendlyURLMapper {
 				namespace + "struts_action",
 				new String[] {"/asset_publisher/view_content"});
 
-			if (Validator.isNotNull(assetId)) {
-				params.put(namespace + "assetId", new String[] {assetId});
+			if (Validator.isNotNull(assetEntryId)) {
+				params.put(
+					namespace + "assetEntryId", new String[] {assetEntryId});
 			}
 			else {
 				params.put(namespace + "type", new String[] {type});

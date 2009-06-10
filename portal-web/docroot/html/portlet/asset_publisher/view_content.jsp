@@ -27,15 +27,15 @@
 <%
 String redirect = ParamUtil.getString(request, "redirect");
 
-long assetId = ParamUtil.getLong(renderRequest, "assetId");
+long assetEntryId = ParamUtil.getLong(renderRequest, "assetEntryId");
 String type = ParamUtil.getString (renderRequest, "type");
 String urlTitle = ParamUtil.getString (renderRequest, "urlTitle");
 
 List results = new ArrayList();
 
-int assetIndex = 0;
+int assetEntryIndex = 0;
 
-TagsAsset asset = null;
+AssetEntry assetEntry = null;
 
 String className = StringPool.BLANK;
 long classPK = 0;
@@ -55,16 +55,16 @@ try {
 			classPK = article.getResourcePrimKey();
 		}
 
-		asset = TagsAssetLocalServiceUtil.getAsset(className, classPK);
+		assetEntry = AssetEntryLocalServiceUtil.getEntry(className, classPK);
 	}
 	else {
-		asset = TagsAssetLocalServiceUtil.getAsset(assetId);
+		assetEntry = AssetEntryLocalServiceUtil.getEntry(assetEntryId);
 
-		className = PortalUtil.getClassName(asset.getClassNameId());
-		classPK = asset.getClassPK();
+		className = PortalUtil.getClassName(assetEntry.getClassNameId());
+		classPK = assetEntry.getClassPK();
 	}
 
-	String title = asset.getTitle();
+	String title = assetEntry.getTitle();
 	String summary = StringPool.BLANK;
 	String viewURL = StringPool.BLANK;
 	String viewURLMessage = StringPool.BLANK;
@@ -74,9 +74,9 @@ try {
 
 	request.setAttribute("view.jsp-results", results);
 
-	request.setAttribute("view.jsp-assetIndex", new Integer(assetIndex));
+	request.setAttribute("view.jsp-assetEntryIndex", new Integer(assetEntryIndex));
 
-	request.setAttribute("view.jsp-asset", asset);
+	request.setAttribute("view.jsp-assetEntry", assetEntry);
 
 	request.setAttribute("view.jsp-title", title);
 	request.setAttribute("view.jsp-summary", summary);

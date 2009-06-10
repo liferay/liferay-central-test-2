@@ -27,9 +27,9 @@
 <%
 List results = (List)request.getAttribute("view.jsp-results");
 
-int assetIndex = ((Integer)request.getAttribute("view.jsp-assetIndex")).intValue();
+int assetEntryIndex = ((Integer)request.getAttribute("view.jsp-assetEntryIndex")).intValue();
 
-TagsAsset asset = (TagsAsset)request.getAttribute("view.jsp-asset");
+AssetEntry assetEntry = (AssetEntry)request.getAttribute("view.jsp-assetEntry");
 
 String title = (String)request.getAttribute("view.jsp-title");
 String viewURL = (String)request.getAttribute("view.jsp-viewURL");
@@ -42,7 +42,7 @@ boolean show = ((Boolean)request.getAttribute("view.jsp-show")).booleanValue();
 PortletURL viewFullContentURL = renderResponse.createRenderURL();
 
 viewFullContentURL.setParameter("struts_action", "/asset_publisher/view_content");
-viewFullContentURL.setParameter("assetId", String.valueOf(asset.getAssetId()));
+viewFullContentURL.setParameter("assetEntryId", String.valueOf(assetEntry.getEntryId()));
 
 if (className.equals(BlogsEntry.class.getName())) {
 	BlogsEntry entry = BlogsEntryLocalServiceUtil.getEntry(classPK);
@@ -155,7 +155,7 @@ else if (className.equals(WikiPage.class.getName())) {
 viewURL = _checkViewURL(viewURL, currentURL, themeDisplay);
 %>
 
-<c:if test="<%= assetIndex == 0 %>">
+<c:if test="<%= assetEntryIndex == 0 %>">
 	<table class="taglib-search-iterator">
 	<tr class="portlet-section-header results-header">
 		<th>
@@ -181,7 +181,7 @@ viewURL = _checkViewURL(viewURL, currentURL, themeDisplay);
 	<%
 	String style = "class=\"portlet-section-body results-row\" onmouseover=\"this.className = 'portlet-section-body-hover results-row hover';\" onmouseout=\"this.className = 'portlet-section-body results-row';\"";
 
-	if (assetIndex % 2 == 0) {
+	if (assetEntryIndex % 2 == 0) {
 		style = "class=\"portlet-section-alternate results-row alt\" onmouseover=\"this.className = 'portlet-section-alternate-hover results-row alt hover';\" onmouseout=\"this.className = 'portlet-section-alternate results-row alt';\"";
 	}
 	%>
@@ -203,43 +203,43 @@ viewURL = _checkViewURL(viewURL, currentURL, themeDisplay);
 			String value = null;
 
 			if (metadataFields[m].equals("create-date")) {
-				value = dateFormatDate.format(asset.getCreateDate());
+				value = dateFormatDate.format(assetEntry.getCreateDate());
 			}
 			else if (metadataFields[m].equals("modified-date")) {
-				value = dateFormatDate.format(asset.getModifiedDate());
+				value = dateFormatDate.format(assetEntry.getModifiedDate());
 			}
 			else if (metadataFields[m].equals("publish-date")) {
-				if (asset.getPublishDate() == null) {
+				if (assetEntry.getPublishDate() == null) {
 					value = StringPool.BLANK;
 				}
 				else {
-					value = dateFormatDate.format(asset.getPublishDate());
+					value = dateFormatDate.format(assetEntry.getPublishDate());
 				}
 			}
 			else if (metadataFields[m].equals("expiration-date")) {
-				if (asset.getExpirationDate() == null) {
+				if (assetEntry.getExpirationDate() == null) {
 					value = StringPool.BLANK;
 				}
 				else {
-					value = dateFormatDate.format(asset.getExpirationDate());
+					value = dateFormatDate.format(assetEntry.getExpirationDate());
 				}
 			}
 			else if (metadataFields[m].equals("priority")) {
-				value = String.valueOf(asset.getPriority());
+				value = String.valueOf(assetEntry.getPriority());
 			}
 			else if (metadataFields[m].equals("author")) {
-				value = asset.getUserName();
+				value = assetEntry.getUserName();
 			}
 			else if (metadataFields[m].equals("view-count")) {
-				value = String.valueOf(asset.getViewCount());
+				value = String.valueOf(assetEntry.getViewCount());
 			}
 			else if (metadataFields[m].equals("tags")) {
 			%>
 
 				<td>
 					<liferay-ui:tags-summary
-						className="<%= asset.getClassName() %>"
-						classPK="<%= asset.getClassPK () %>"
+						className="<%= assetEntry.getClassName() %>"
+						classPK="<%= assetEntry.getClassPK () %>"
 					/>
 				</td>
 
@@ -262,6 +262,6 @@ viewURL = _checkViewURL(viewURL, currentURL, themeDisplay);
 	</tr>
 </c:if>
 
-<c:if test="<%= (assetIndex + 1) == results.size() %>">
+<c:if test="<%= (assetEntryIndex + 1) == results.size() %>">
 	</table>
 </c:if>

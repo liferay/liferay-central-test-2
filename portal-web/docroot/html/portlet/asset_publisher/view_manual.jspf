@@ -23,13 +23,13 @@
 %>
 
 <%
-int total = manualEntries.length;
+int total = assetEntryXmls.length;
 
 searchContainer.setTotal(total);
 
-List results = ListUtil.fromArray(manualEntries);
+List results = ListUtil.fromArray(assetEntryXmls);
 
-int end = (manualEntries.length < searchContainer.getEnd()) ? manualEntries.length : searchContainer.getEnd();
+int end = (assetEntryXmls.length < searchContainer.getEnd()) ? assetEntryXmls.length : searchContainer.getEnd();
 
 results = results.subList(searchContainer.getStart(), end);
 
@@ -37,28 +37,28 @@ searchContainer.setResults(results);
 
 request.setAttribute("view.jsp-results", results);
 
-for (int assetIndex = 0; assetIndex < results.size(); assetIndex++) {
-	String assetEntry = (String)results.get(assetIndex);
+for (int assetEntryIndex = 0; assetEntryIndex < results.size(); assetEntryIndex++) {
+	String assetEntryXml = (String)results.get(assetEntryIndex);
 
-	Document assetDoc = SAXReaderUtil.read(assetEntry);
+	Document doc = SAXReaderUtil.read(assetEntryXml);
 
-	Element root = assetDoc.getRootElement();
+	Element root = doc.getRootElement();
 
-	long assetId = GetterUtil.getLong(root.element("asset-id").getText());
+	long assetEntryId = GetterUtil.getLong(root.element("asset-entry-id").getText());
 
-	TagsAsset asset = null;
+	AssetEntry assetEntry = null;
 
 	try {
-		asset = TagsAssetLocalServiceUtil.getAsset(assetId);
+		assetEntry = AssetEntryLocalServiceUtil.getEntry(assetEntryId);
 	}
-	catch (NoSuchAssetException nsae) {
+	catch (NoSuchEntryException nsee) {
 		continue;
 	}
 
-	String className = PortalUtil.getClassName(asset.getClassNameId());
-	long classPK = asset.getClassPK();
+	String className = PortalUtil.getClassName(assetEntry.getClassNameId());
+	long classPK = assetEntry.getClassPK();
 
-	String title = asset.getTitle();
+	String title = assetEntry.getTitle();
 	String summary = StringPool.BLANK;
 	String viewURL = StringPool.BLANK;
 	String viewURLMessage = StringPool.BLANK;
@@ -66,9 +66,9 @@ for (int assetIndex = 0; assetIndex < results.size(); assetIndex++) {
 
 	boolean show = true;
 
-	request.setAttribute("view.jsp-assetIndex", new Integer(assetIndex));
+	request.setAttribute("view.jsp-assetEntryIndex", new Integer(assetEntryIndex));
 
-	request.setAttribute("view.jsp-asset", asset);
+	request.setAttribute("view.jsp-assetEntry", assetEntry);
 
 	request.setAttribute("view.jsp-title", title);
 	request.setAttribute("view.jsp-summary", summary);

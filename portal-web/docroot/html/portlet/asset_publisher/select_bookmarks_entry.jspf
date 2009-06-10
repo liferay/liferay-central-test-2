@@ -23,7 +23,7 @@
 %>
 
 <%
-int assetOrder = ParamUtil.getInteger(request, "assetOrder", -1);
+int assetEntryOrder = ParamUtil.getInteger(request, "assetEntryOrder", -1);
 long folderId = ParamUtil.getLong(request, "assetParentId", BookmarksFolderImpl.DEFAULT_PARENT_FOLDER_ID);
 
 BookmarksFolder folder = null;
@@ -159,20 +159,20 @@ for (int i = 0; i < results.size(); i++) {
 
 		ResultRow row = new ResultRow(entry, entry.getEntryId(), i);
 
-		TagsAsset asset = TagsAssetLocalServiceUtil.getAsset(BookmarksEntry.class.getName(), entry.getEntryId());
+		AssetEntry assetEntry = AssetEntryLocalServiceUtil.getEntry(BookmarksEntry.class.getName(), entry.getEntryId());
 
 		StringBuilder sb = new StringBuilder();
 
 		sb.append("javascript:");
 		sb.append(renderResponse.getNamespace());
 		sb.append("selectAsset('");
-		sb.append(asset.getAssetId());
+		sb.append(assetEntry.getEntryId());
 		sb.append("', '");
-		sb.append(asset.getAssetId());
+		sb.append(assetEntry.getEntryId());
 		sb.append("', '");
-		sb.append(UnicodeFormatter.toString(asset.getTitle()));
+		sb.append(UnicodeFormatter.toString(assetEntry.getTitle()));
 		sb.append("', '");
-		sb.append(assetOrder);
+		sb.append(assetEntryOrder);
 		sb.append("');");
 
 		String rowHREF = sb.toString();

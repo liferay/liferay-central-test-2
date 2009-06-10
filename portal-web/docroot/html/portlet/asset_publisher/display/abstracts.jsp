@@ -27,9 +27,9 @@
 <%
 List results = (List)request.getAttribute("view.jsp-results");
 
-int assetIndex = ((Integer)request.getAttribute("view.jsp-assetIndex")).intValue();
+int assetEntryIndex = ((Integer)request.getAttribute("view.jsp-assetEntryIndex")).intValue();
 
-TagsAsset asset = (TagsAsset)request.getAttribute("view.jsp-asset");
+AssetEntry assetEntry = (AssetEntry)request.getAttribute("view.jsp-assetEntry");
 
 String title = (String)request.getAttribute("view.jsp-title");
 String summary = (String)request.getAttribute("view.jsp-summary");
@@ -47,7 +47,7 @@ request.setAttribute("view.jsp-showIconLabel", true);
 PortletURL viewFullContentURL = renderResponse.createRenderURL();
 
 viewFullContentURL.setParameter("struts_action", "/asset_publisher/view_content");
-viewFullContentURL.setParameter("assetId", String.valueOf(asset.getAssetId()));
+viewFullContentURL.setParameter("assetEntryId", String.valueOf(assetEntry.getEntryId()));
 
 if (className.equals(BlogsEntry.class.getName())) {
 	BlogsEntry entry = BlogsEntryLocalServiceUtil.getEntry(classPK);
@@ -274,7 +274,7 @@ viewURL = _checkViewURL(viewURL, currentURL, themeDisplay);
 		</div>
 	</div>
 
-	<c:if test="<%= (assetIndex + 1) == results.size() %>">
+	<c:if test="<%= (assetEntryIndex + 1) == results.size() %>">
 		<div class="final-separator"><!-- --></div>
 	</c:if>
 </c:if>
