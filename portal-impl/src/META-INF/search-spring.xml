@@ -50,14 +50,14 @@
 	<bean id="destination.search_writer" class="com.liferay.portal.kernel.messaging.SerialDestination">
 		<constructor-arg index="0" type="java.lang.String" value="liferay/search_writer" />
 	</bean>
-	<bean id="messageListener.lucene_reader" class="com.liferay.portal.search.lucene.messaging.LuceneReaderMessageListener">
+	<bean id="messageListener.search_reader" class="com.liferay.portal.search.lucene.messaging.LuceneReaderMessageListener">
 		<constructor-arg index="0" type="com.liferay.portal.kernel.messaging.sender.MessageSender" ref="com.liferay.portal.kernel.messaging.sender.MessageSender" />
 		<property name="searchEngine" ref="searchEngine.lucene" />
 	</bean>
-	<bean id="messageListener.lucene_writer" class="com.liferay.portal.search.lucene.messaging.LuceneWriterMessageListener">
+	<bean id="messageListener.search_writer" class="com.liferay.portal.search.lucene.messaging.LuceneWriterMessageListener">
 		<property name="searchEngine" ref="searchEngine.lucene" />
 	</bean>
-	<bean class="com.liferay.portal.kernel.messaging.config.DefaultMessagingConfigurator" init-method="init" destroy-method="destroy">
+	<bean id="messagingConfigurator.search" class="com.liferay.portal.kernel.messaging.config.DefaultMessagingConfigurator" init-method="init" destroy-method="destroy">
 		<property name="destinations">
 			<list>
 				<ref bean="destination.search_reader" />
@@ -72,12 +72,12 @@
 			<map key-type="java.lang.String" value-type="java.util.List">
 				<entry key="liferay/search_reader">
 					<list value-type="com.liferay.portal.kernel.messaging.MessageListener">
-						<ref bean="messageListener.lucene_reader" />
+						<ref bean="messageListener.search_reader" />
 					</list>
 				</entry>
 				<entry key="liferay/search_writer">
 					<list value-type="com.liferay.portal.kernel.messaging.MessageListener">
-						<ref bean="messageListener.lucene_writer" />
+						<ref bean="messageListener.search_writer" />
 					</list>
 				</entry>
 			</map>

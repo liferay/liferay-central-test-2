@@ -27,7 +27,7 @@
 		<constructor-arg index="0" type="java.lang.String" value="liferay/mail" />
 	</bean>
 	<bean id="messageListener.mail" class="com.liferay.mail.messaging.MailMessageListener" />
-	<bean class="com.liferay.portal.kernel.messaging.config.DefaultMessagingConfigurator" init-method="init" destroy-method="destroy">
+	<bean id="messagingConfigurator.mail" class="com.liferay.portal.kernel.messaging.config.DefaultMessagingConfigurator" init-method="init" destroy-method="destroy">
 		<property name="destinations">
 			<list>
 				<ref bean="destination.mail" />
