@@ -1124,23 +1124,6 @@ public class ServiceBuilder {
 		if (pos == -1) {
 			pos = _ejbList.indexOf(new Entity(name));
 
-			if (pos == -1) {
-				Iterator<Map.Entry<String, Entity>> itr =
-					_entityPool.entrySet().iterator();
-
-				Map.Entry<String, Entity> entry = null;
-
-				while (itr.hasNext()) {
-					entry = (Map.Entry<String, Entity>) itr.next();
-
-					entity = (Entity) entry.getValue();
-
-					if (name.equals(entity.getName())) {
-						return entity;
-					}
-				}
-			}
-
 			entity = _ejbList.get(pos);
 
 			_entityPool.put(name, entity);
