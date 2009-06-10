@@ -5,12 +5,11 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd"
 >
+	<bean id="com.liferay.portlet.InvokerPortletImpl" class="com.liferay.portlet.InvokerPortletImpl" />
 	<bean id="com.liferay.portlet.PortletInstanceFactoryUtil" class="com.liferay.portlet.PortletInstanceFactoryUtil">
 		<property name="portletInstanceFactory">
 			<bean class="com.liferay.portlet.PortletInstanceFactoryImpl">
-				<property name="internalInvokerPortletPrototype">
-					<bean class="com.liferay.portlet.InvokerPortletImpl" />
-				</property>
+				<property name="internalInvokerPortletPrototype" ref="com.liferay.portlet.InvokerPortletImpl" />
 			</bean>
 		</property>
 	</bean>

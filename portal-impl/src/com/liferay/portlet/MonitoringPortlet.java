@@ -45,13 +45,13 @@ import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
 
 /**
- * <a href="MonitoringPortletImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="MonitoringPortlet.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael C. Han
  * @author Karthik Sudarshan
  *
  */
-public class MonitoringPortletImpl implements InvokerPortlet {
+public class MonitoringPortlet implements InvokerPortlet {
 
 	public static boolean isMonitoringPortletActionRequest() {
 		return _monitoringPortletActionRequest;
@@ -93,7 +93,7 @@ public class MonitoringPortletImpl implements InvokerPortlet {
 		_monitoringPortletResourceRequest = monitoringPortletResourceRequest;
 	}
 
-	public MonitoringPortletImpl(
+	public MonitoringPortlet(
 		InvokerPortlet invokerPortlet,
 		SingleDestinationMessageSender singleDestinationMessageSender) {
 
@@ -111,14 +111,14 @@ public class MonitoringPortletImpl implements InvokerPortlet {
 		InvokerPortlet invokerPortlet = _invokerPortlet.create(
 			portletModel, portlet, portletContext);
 
-		MonitoringPortletImpl monitoringPortletImpl = new MonitoringPortletImpl(
+		MonitoringPortlet monitoringPortlet = new MonitoringPortlet(
 			invokerPortlet, _singleDestinationMessageSender);
 
-		monitoringPortletImpl.prepare(
+		monitoringPortlet.prepare(
 			portletModel, portlet, portletConfig, portletContext, facesPortlet,
 			strutsPortlet, strutsBridgePortlet);
 
-		return monitoringPortletImpl;
+		return monitoringPortlet;
 	}
 
 	public InvokerPortlet create(
@@ -129,12 +129,12 @@ public class MonitoringPortletImpl implements InvokerPortlet {
 		InvokerPortlet invokerPortlet = _invokerPortlet.create(
 			portletModel, portlet, portletContext);
 
-		MonitoringPortletImpl monitoringPortletImpl = new MonitoringPortletImpl(
+		MonitoringPortlet monitoringPortlet = new MonitoringPortlet(
 			invokerPortlet, _singleDestinationMessageSender);
 
-		monitoringPortletImpl.prepare(portletModel, portlet, portletContext);
+		monitoringPortlet.prepare(portletModel, portlet, portletContext);
 
-		return monitoringPortletImpl;
+		return monitoringPortlet;
 	}
 
 	public void destroy() {

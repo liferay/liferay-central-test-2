@@ -20,7 +20,6 @@
 		<property name="sessionFactory" ref="liferaySessionFactory" />
 	</bean>
 	<bean id="hibernateMBeanExporter" class="org.springframework.jmx.export.MBeanExporter">
-		<property name="server" ref="mbeanServer" />
 		<property name="beans">
 			<map>
 				<entry key="Hibernate:name=statistics">
@@ -28,6 +27,7 @@
 				</entry>
 			</map>
 		</property>
+		<property name="server" ref="mbeanServer" />
 	</bean>
 	<bean id="com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil" class="com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil">
 		<property name="dynamicQueryFactory">
