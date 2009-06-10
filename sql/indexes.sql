@@ -502,27 +502,6 @@ create unique index IX_2E1A92D4 on Subscription (companyId, userId, classNameId,
 create index IX_54243AFD on Subscription (userId);
 create index IX_E8F34171 on Subscription (userId, classNameId);
 
-create unique index IX_1AB6D6D2 on TagsAsset (classNameId, classPK);
-create index IX_AB3D8BCB on TagsAsset (companyId);
-
-create index IX_F1E3180C on TagsAssets_AssetCategories (assetId);
-create index IX_E5D415DC on TagsAssets_AssetCategories (categoryId);
-
-create index IX_B22F3A1 on TagsAssets_TagsEntries (assetId);
-create index IX_A02A8023 on TagsAssets_TagsEntries (entryId);
-
-create index IX_EE55ED49 on TagsEntry (parentEntryId, vocabularyId);
-create index IX_28E8954 on TagsEntry (vocabularyId);
-
-create index IX_C134234 on TagsProperty (companyId);
-create index IX_EB974D08 on TagsProperty (companyId, key_);
-create index IX_5200A629 on TagsProperty (entryId);
-create unique index IX_F505253D on TagsProperty (entryId, key_);
-
-create index IX_E0D51848 on TagsVocabulary (companyId, folksonomy);
-create index IX_9F26308A on TagsVocabulary (groupId, folksonomy);
-create unique index IX_F9E51044 on TagsVocabulary (groupId, name);
-
 create unique index IX_181A4A1B on TasksProposal (classNameId, classPK);
 create index IX_7FB27324 on TasksProposal (groupId);
 create index IX_6EEC675E on TasksProposal (groupId, userId);

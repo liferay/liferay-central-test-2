@@ -877,65 +877,17 @@
 		<property name="service" ref="com.liferay.portlet.softwarecatalog.service.SCProductVersionService.impl" />
 		<property name="serviceInterface" value="com.liferay.portlet.softwarecatalog.service.SCProductVersionService" />
 	</bean>
-	<bean name="/com_liferay_portlet_tags_service_spring_TagsAssetService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
-		<property name="service" ref="com.liferay.portlet.tags.service.TagsAssetService.impl" />
-		<property name="serviceInterface" value="com.liferay.portlet.tags.service.TagsAssetService" />
+	<bean name="/com_liferay_portlet_tasks_service_spring_TasksProposalService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portlet.tasks.service.TasksProposalService.impl" />
+		<property name="serviceInterface" value="com.liferay.portlet.tasks.service.TasksProposalService" />
 	</bean>
-	<bean name="/com_liferay_portlet_tags_service_spring_TagsAssetService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
-		<property name="service" ref="com.liferay.portlet.tags.service.TagsAssetService.impl" />
-		<property name="serviceInterface" value="com.liferay.portlet.tags.service.TagsAssetService" />
+	<bean name="/com_liferay_portlet_tasks_service_spring_TasksProposalService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portlet.tasks.service.TasksProposalService.impl" />
+		<property name="serviceInterface" value="com.liferay.portlet.tasks.service.TasksProposalService" />
 	</bean>
-	<bean name="/com_liferay_portlet_tags_service_spring_TagsAssetService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
-		<property name="service" ref="com.liferay.portlet.tags.service.TagsAssetService.impl" />
-		<property name="serviceInterface" value="com.liferay.portlet.tags.service.TagsAssetService" />
-	</bean>
-	<bean name="/com_liferay_portlet_tags_service_spring_TagsEntryService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
-		<property name="service" ref="com.liferay.portlet.tags.service.TagsEntryService.impl" />
-		<property name="serviceInterface" value="com.liferay.portlet.tags.service.TagsEntryService" />
-	</bean>
-	<bean name="/com_liferay_portlet_tags_service_spring_TagsEntryService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
-		<property name="service" ref="com.liferay.portlet.tags.service.TagsEntryService.impl" />
-		<property name="serviceInterface" value="com.liferay.portlet.tags.service.TagsEntryService" />
-	</bean>
-	<bean name="/com_liferay_portlet_tags_service_spring_TagsEntryService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
-		<property name="service" ref="com.liferay.portlet.tags.service.TagsEntryService.impl" />
-		<property name="serviceInterface" value="com.liferay.portlet.tags.service.TagsEntryService" />
-	</bean>
-	<bean name="/com_liferay_portlet_tags_service_spring_TagsPropertyService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
-		<property name="service" ref="com.liferay.portlet.tags.service.TagsPropertyService.impl" />
-		<property name="serviceInterface" value="com.liferay.portlet.tags.service.TagsPropertyService" />
-	</bean>
-	<bean name="/com_liferay_portlet_tags_service_spring_TagsPropertyService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
-		<property name="service" ref="com.liferay.portlet.tags.service.TagsPropertyService.impl" />
-		<property name="serviceInterface" value="com.liferay.portlet.tags.service.TagsPropertyService" />
-	</bean>
-	<bean name="/com_liferay_portlet_tags_service_spring_TagsPropertyService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
-		<property name="service" ref="com.liferay.portlet.tags.service.TagsPropertyService.impl" />
-		<property name="serviceInterface" value="com.liferay.portlet.tags.service.TagsPropertyService" />
-	</bean>
-	<bean name="/com_liferay_portlet_tags_service_spring_TagsSourceService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
-		<property name="service" ref="com.liferay.portlet.tags.service.TagsSourceService.impl" />
-		<property name="serviceInterface" value="com.liferay.portlet.tags.service.TagsSourceService" />
-	</bean>
-	<bean name="/com_liferay_portlet_tags_service_spring_TagsSourceService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
-		<property name="service" ref="com.liferay.portlet.tags.service.TagsSourceService.impl" />
-		<property name="serviceInterface" value="com.liferay.portlet.tags.service.TagsSourceService" />
-	</bean>
-	<bean name="/com_liferay_portlet_tags_service_spring_TagsSourceService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
-		<property name="service" ref="com.liferay.portlet.tags.service.TagsSourceService.impl" />
-		<property name="serviceInterface" value="com.liferay.portlet.tags.service.TagsSourceService" />
-	</bean>
-	<bean name="/com_liferay_portlet_tags_service_spring_TagsVocabularyService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
-		<property name="service" ref="com.liferay.portlet.tags.service.TagsVocabularyService.impl" />
-		<property name="serviceInterface" value="com.liferay.portlet.tags.service.TagsVocabularyService" />
-	</bean>
-	<bean name="/com_liferay_portlet_tags_service_spring_TagsVocabularyService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
-		<property name="service" ref="com.liferay.portlet.tags.service.TagsVocabularyService.impl" />
-		<property name="serviceInterface" value="com.liferay.portlet.tags.service.TagsVocabularyService" />
-	</bean>
-	<bean name="/com_liferay_portlet_tags_service_spring_TagsVocabularyService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
-		<property name="service" ref="com.liferay.portlet.tags.service.TagsVocabularyService.impl" />
-		<property name="serviceInterface" value="com.liferay.portlet.tags.service.TagsVocabularyService" />
+	<bean name="/com_liferay_portlet_tasks_service_spring_TasksProposalService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portlet.tasks.service.TasksProposalService.impl" />
+		<property name="serviceInterface" value="com.liferay.portlet.tasks.service.TasksProposalService" />
 	</bean>
 	<bean name="/com_liferay_portlet_tasks_service_spring_TasksReviewService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
 		<property name="service" ref="com.liferay.portlet.tasks.service.TasksReviewService.impl" />
@@ -948,18 +900,6 @@
 	<bean name="/com_liferay_portlet_tasks_service_spring_TasksReviewService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
 		<property name="service" ref="com.liferay.portlet.tasks.service.TasksReviewService.impl" />
 		<property name="serviceInterface" value="com.liferay.portlet.tasks.service.TasksReviewService" />
-	</bean>
-	<bean name="/com_liferay_portlet_tasks_service_spring_TasksProposalService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
-		<property name="service" ref="com.liferay.portlet.tasks.service.TasksProposalService.impl" />
-		<property name="serviceInterface" value="com.liferay.portlet.tasks.service.TasksProposalService" />
-	</bean>
-	<bean name="/com_liferay_portlet_tasks_service_spring_TasksProposalService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
-		<property name="service" ref="com.liferay.portlet.tasks.service.TasksProposalService.impl" />
-		<property name="serviceInterface" value="com.liferay.portlet.tasks.service.TasksProposalService" />
-	</bean>
-	<bean name="/com_liferay_portlet_tasks_service_spring_TasksProposalService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
-		<property name="service" ref="com.liferay.portlet.tasks.service.TasksProposalService.impl" />
-		<property name="serviceInterface" value="com.liferay.portlet.tasks.service.TasksProposalService" />
 	</bean>
 	<bean name="/com_liferay_portlet_wiki_service_spring_WikiNodeService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
 		<property name="service" ref="com.liferay.portlet.wiki.service.WikiNodeService.impl" />

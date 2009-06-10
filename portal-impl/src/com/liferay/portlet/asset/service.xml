@@ -196,6 +196,7 @@
 		<!-- Other fields -->
 
 		<column name="name" type="String" />
+		<column name="assetCount" type="int" />
 
 		<!-- Relationships -->
 
