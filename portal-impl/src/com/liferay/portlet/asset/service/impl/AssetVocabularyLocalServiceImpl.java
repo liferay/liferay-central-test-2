@@ -167,7 +167,7 @@ public class AssetVocabularyLocalServiceImpl
 
 			serviceContext.setScopeGroupId(groupId);
 
-			addVocabulary(
+			assetVocabularyLocalService.addVocabulary(
 				userLocalService.getDefaultUserId(group.getCompanyId()),
 				PropsValues.ASSET_VOCABULARY_DEFAULT, serviceContext);
 		}
