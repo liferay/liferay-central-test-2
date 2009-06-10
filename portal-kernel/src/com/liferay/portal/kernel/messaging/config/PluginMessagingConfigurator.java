@@ -39,15 +39,13 @@ public class PluginMessagingConfigurator extends AbstractMessagingConfigurator {
 	}
 
 	protected ClassLoader getOperatingClassloader() {
-		ClassLoader loader = PortletClassLoaderUtil.getClassLoader();
+		ClassLoader classLoader = PortletClassLoaderUtil.getClassLoader();
 
-		//if not using the liferay context loader, then just get
-		// the current context classloader
-		if (loader == null) {
-			loader = Thread.currentThread().getContextClassLoader();
+		if (classLoader == null) {
+			classLoader = Thread.currentThread().getContextClassLoader();
 		}
-		
-		return loader;
+
+		return classLoader;
 	}
 
 }
