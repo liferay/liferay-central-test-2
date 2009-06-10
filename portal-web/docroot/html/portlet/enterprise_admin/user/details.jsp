@@ -113,7 +113,7 @@ boolean deletePortrait = ParamUtil.getBoolean(request, "deletePortrait");
 			<label for="<portlet:namespace />screenName"><liferay-ui:message key="screen-name" /></label>
 
 			<c:choose>
-				<c:when test="<%= PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.USERS_SCREEN_NAME_ALWAYS_AUTOGENERATE) %>">
+				<c:when test="<%= PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.USERS_SCREEN_NAME_ALWAYS_AUTOGENERATE) || (PropsValues.FIELD_EDITABLE_COM_LIFERAY_PORTAL_MODEL_USER_SCREENNAME_ADMIN && !permissionChecker.isCompanyAdmin()) %>">
 					<%= selUser.getScreenName() %>
 
 					<input name="<portlet:namespace />screenName" type="hidden" value="<%= selUser.getScreenName() %>" />
@@ -132,7 +132,16 @@ boolean deletePortrait = ParamUtil.getBoolean(request, "deletePortrait");
 	<div class="exp-ctrl-holder">
 		<label for="<portlet:namespace />emailAddress"><liferay-ui:message key="email-address" /></label>
 
-		<liferay-ui:input-field model="<%= User.class %>" bean="<%= selUser %>" field="emailAddress" />
+		<c:choose>
+			<c:when test="<%= (selUser != null) && (PropsValues.FIELD_EDITABLE_COM_LIFERAY_PORTAL_MODEL_USER_EMAILADDRESS_ADMIN && !permissionChecker.isCompanyAdmin()) %>">
+				<%= selUser.getEmailAddress() %>
+
+				<input name="<portlet:namespace />emailAddress" type="hidden" value="<%= selUser.getEmailAddress() %>" />
+			</c:when>
+			<c:otherwise>
+				<liferay-ui:input-field model="<%= User.class %>" bean="<%= selUser %>" field="emailAddress" />
+			</c:otherwise>
+		</c:choose>
 	</div>
 
 	<liferay-ui:error exception="<%= ContactFirstNameException.class %>" message="please-enter-a-valid-first-name" />

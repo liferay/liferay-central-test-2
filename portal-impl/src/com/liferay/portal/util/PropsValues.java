@@ -493,6 +493,26 @@ public class PropsValues {
 	public static final String EDITOR_WYSIWYG_DEFAULT =
 		PropsUtil.get(PropsKeys.EDITOR_WYSIWYG_DEFAULT);
 
+	public static final String
+		FIELD_EDITABLE_COM_LIFERAY_PORTAL_MODEL_USER_EMAILADDRESS =
+			PropsUtil.get(PropsKeys.
+				FIELD_EDITABLE_COM_LIFERAY_PORTAL_MODEL_USER_EMAILADDRESS);
+
+	public static final boolean
+		FIELD_EDITABLE_COM_LIFERAY_PORTAL_MODEL_USER_EMAILADDRESS_ADMIN =
+			FIELD_EDITABLE_COM_LIFERAY_PORTAL_MODEL_USER_EMAILADDRESS.equals(
+				"administrator");
+
+	public static final String
+		FIELD_EDITABLE_COM_LIFERAY_PORTAL_MODEL_USER_SCREENNAME =
+			PropsUtil.get(PropsKeys.
+				FIELD_EDITABLE_COM_LIFERAY_PORTAL_MODEL_USER_SCREENNAME);
+
+	public static final boolean
+		FIELD_EDITABLE_COM_LIFERAY_PORTAL_MODEL_USER_SCREENNAME_ADMIN =
+			FIELD_EDITABLE_COM_LIFERAY_PORTAL_MODEL_USER_SCREENNAME.equals(
+				"administrator");
+
 	public static boolean
 		FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_CONTACT_BIRTHDAY =
 			GetterUtil.getBoolean(PropsUtil.get(PropsKeys.
