@@ -184,11 +184,11 @@ editPermissionsURL.setParameter("roleId", String.valueOf(role.getRoleId()));
 	<c:otherwise>
 		<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_role_permissions" /></portlet:actionURL>" id="<portlet:namespace />fm" method="post" name="<portlet:namespace />fm">
 		<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
-		<input name="<portlet:namespace />tabs2" type="hidden" value="<%= HtmlUtil.escape(tabs2) %>" />
+		<input name="<portlet:namespace />tabs2" type="hidden" value="<%= HtmlUtil.escapeAttribute(tabs2) %>" />
 		<input name="<portlet:namespace />redirect" type="hidden" value="" />
 		<input name="<portlet:namespace />roleId" type="hidden" value="<%= role.getRoleId() %>" />
-		<input name="<portlet:namespace />portletResource" type="hidden" value="<%= HtmlUtil.escape(portletResource) %>" />
-		<input name="<portlet:namespace />modelResources" type="hidden" value='<%= (modelResources == null) ? "" : StringUtil.merge(modelResources) %>' />
+		<input name="<portlet:namespace />portletResource" type="hidden" value="<%= HtmlUtil.escapeAttribute(portletResource) %>" />
+		<input name="<portlet:namespace />modelResources" type="hidden" value='<%= (modelResources == null) ? "" : HtmlUtil.escapeAttribute(StringUtil.merge(modelResources)) %>' />
 		<input name="<portlet:namespace />showModelResources" type="hidden" value='<%= String.valueOf(showModelResources) %>' />
 		<input name="<portlet:namespace />selectedTargets" type="hidden" value="" />
 

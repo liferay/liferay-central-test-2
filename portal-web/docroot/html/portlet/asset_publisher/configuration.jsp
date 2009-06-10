@@ -93,7 +93,7 @@ configurationActionURL.setParameter("portletResource", portletResource);
 
 <form action="<%= configurationActionURL.toString() %>" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
-<input name="<portlet:namespace />tabs2" type="hidden" value="<%= HtmlUtil.escape(tabs2) %>" />
+<input name="<portlet:namespace />tabs2" type="hidden" value="<%= HtmlUtil.escapeAttribute(tabs2) %>" />
 <input name="<portlet:namespace />typeSelection" type="hidden" value="" />
 <input name="<portlet:namespace />assetEntryId" type="hidden" value="" />
 <input name="<portlet:namespace />assetParentId" type="hidden" value="" />

@@ -75,7 +75,7 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 	<c:when test='<%= tabs1.equals("categories") %>'>
 		<form action="<%= searchURL %>" method="get" name="<portlet:namespace />fm1" onSubmit="submitForm(this); return false;">
 		<liferay-portlet:renderURLParams varImpl="searchURL" />
-		<input name="<portlet:namespace />redirect" type="hidden" value="<%= currentURL %>" />
+		<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(currentURL) %>" />
 		<input name="<portlet:namespace />breadcrumbsCategoryId" type="hidden" value="<%= categoryId %>" />
 		<input name="<portlet:namespace />searchCategoryIds" type="hidden" value="<%= categoryId %>" />
 

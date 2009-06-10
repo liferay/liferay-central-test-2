@@ -56,9 +56,9 @@ String newTitle = ParamUtil.get(request, "newTitle", StringPool.BLANK);
 </script>
 
 <form action="<portlet:actionURL><portlet:param name="struts_action" value="/wiki/move_page" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
-<input type="hidden" name="<portlet:namespace />redirect" value="<%= HtmlUtil.escape(redirect) %>" />
+<input type="hidden" name="<portlet:namespace />redirect" value="<%= HtmlUtil.escapeAttribute(redirect) %>" />
 <input type="hidden" name="<portlet:namespace />nodeId" value="<%= node.getNodeId() %>" />
-<input type="hidden" name="<portlet:namespace />title" value="<%= title %>" />
+<input type="hidden" name="<portlet:namespace />title" value="<%= HtmlUtil.escapeAttribute(title) %>" />
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
 
 <liferay-ui:tabs

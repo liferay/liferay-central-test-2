@@ -63,7 +63,7 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 
 <form class="exp-form" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveRole(); return false;">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escape(redirect) %>" />
+<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(redirect) %>" />
 <input name="<portlet:namespace />roleId" type="hidden" value="<%= roleId %>" />
 
 <liferay-ui:error exception="<%= DuplicateRoleException.class %>" message="please-enter-a-unique-name" />

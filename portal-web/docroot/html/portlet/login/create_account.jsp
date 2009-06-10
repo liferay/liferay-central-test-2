@@ -43,7 +43,7 @@ boolean male = BeanParamUtil.getBoolean(contact2, request, "male", true);
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="saveLastPath" value="0" /><portlet:param name="struts_action" value="/login/create_account" /></portlet:actionURL>" class="exp-form" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.ADD %>" />
-<input name="<portlet:namespace />openId" type="hidden" value="<%= HtmlUtil.escape(openId) %>" />
+<input name="<portlet:namespace />openId" type="hidden" value="<%= HtmlUtil.escapeAttribute(openId) %>" />
 
 <liferay-ui:error exception="<%= CaptchaTextException.class %>" message="text-verification-failed" />
 <liferay-ui:error exception="<%= ContactFirstNameException.class %>" message="please-enter-a-valid-first-name" />

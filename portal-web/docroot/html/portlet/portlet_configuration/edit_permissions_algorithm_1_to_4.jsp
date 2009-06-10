@@ -245,7 +245,7 @@ request.setAttribute("edit_permissions_algorithm_1_to_4.jsp-portletURL", portlet
 	<form action="<%= portletURL.toString() %>" method="post" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
 	<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
 	<input name="<portlet:namespace />permissionsRedirect" type="hidden" value="" />
-	<input name="<portlet:namespace />cur" type="hidden" value="<%= HtmlUtil.escape(cur) %>" />
+	<input name="<portlet:namespace />cur" type="hidden" value="<%= HtmlUtil.escapeAttribute(cur) %>" />
 	<input name="<portlet:namespace />resourceId" type="hidden" value="<%= resource.getResourceId() %>" />
 
 	<c:choose>

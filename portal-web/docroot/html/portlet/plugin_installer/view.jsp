@@ -117,8 +117,8 @@
 		<liferay-portlet:renderURLParams varImpl="portletURL" />
 		<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
 		<input name="<portlet:namespace /><%= Constants.PROGRESS_ID %>" type="hidden" value="<%= uploadProgressId %>" />
-		<input name="<portlet:namespace />tabs1" type="hidden" value="<%= HtmlUtil.escape(tabs1) %>" />
-		<input name="<portlet:namespace />tabs2" type="hidden" value="<%= HtmlUtil.escape(tabs2) %>" />
+		<input name="<portlet:namespace />tabs1" type="hidden" value="<%= HtmlUtil.escapeAttribute(tabs1) %>" />
+		<input name="<portlet:namespace />tabs2" type="hidden" value="<%= HtmlUtil.escapeAttribute(tabs2) %>" />
 
 		<c:if test="<%= Validator.isNull(moduleId) || Validator.isNull(repositoryURL) %>">
 			<input name="<portlet:namespace />redirect" type="hidden" value="<%= portletURLString %>" />

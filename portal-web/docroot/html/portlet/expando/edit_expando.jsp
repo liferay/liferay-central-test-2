@@ -62,9 +62,9 @@ int propertyWidth = GetterUtil.getInteger(properties.get(ExpandoColumnConstants.
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/expando/edit_expando" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveExpando(); return false;">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escape(redirect) %>" />
+<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(redirect) %>" />
 <input name="<portlet:namespace />columnId" type="hidden" value="<%= columnId %>" />
-<input name="<portlet:namespace />modelResource" type="hidden" value="<%= HtmlUtil.escape(modelResource) %>" />
+<input name="<portlet:namespace />modelResource" type="hidden" value="<%= HtmlUtil.escapeAttribute(modelResource) %>" />
 
 <div>
 	<liferay-ui:message key="edit-custom-attributes-for" />: <a href="<%= HtmlUtil.escape(redirect) %>"><%= modelResourceName %></a>

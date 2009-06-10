@@ -68,7 +68,7 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 %>
 
 <form action="<%= portletURL.toString() %>" method="post" name="<portlet:namespace />fm">
-<input name="<portlet:namespace />pagesRedirect" type="hidden" value="<%= HtmlUtil.escape(pagesRedirect) %>">
+<input name="<portlet:namespace />pagesRedirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(pagesRedirect) %>">
 <input name="<portlet:namespace />stagingGroupId" type="hidden" value="<%= stagingGroupId %>">
 
 <%@ include file="/html/portlet/portlet_configuration/export_import_options.jspf" %>

@@ -44,9 +44,9 @@ String friendlyURL = BeanParamUtil.getString(group, request, "friendlyURL");
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/communities/edit_community" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveGroup(); return false;">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escape(redirect) %>" />
+<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(redirect) %>" />
 <input name="<portlet:namespace />groupId" type="hidden" value="<%= groupId %>" />
-<input name="<portlet:namespace />friendlyURL" type="hidden" value="<%= HtmlUtil.escape(friendlyURL) %>" />
+<input name="<portlet:namespace />friendlyURL" type="hidden" value="<%= HtmlUtil.escapeAttribute(friendlyURL) %>" />
 
 <liferay-util:include page="/html/portlet/communities/toolbar.jsp">
 	<liferay-util:param name="toolbarItem" value='<%= (group == null) ? "add" : "view-all" %>' />

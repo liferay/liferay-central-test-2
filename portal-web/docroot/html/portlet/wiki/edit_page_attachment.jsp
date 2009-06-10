@@ -57,9 +57,9 @@ WikiPage wikiPage = (WikiPage)request.getAttribute(WebKeys.WIKI_PAGE);
 
 <form action="<portlet:actionURL><portlet:param name="struts_action" value="/wiki/edit_page_attachment" /></portlet:actionURL>" class="exp-form" enctype="multipart/form-data" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.ADD %>" />
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escape(redirect) %>" />
+<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(redirect) %>" />
 <input name="<portlet:namespace />nodeId" type="hidden" value="<%= String.valueOf(node.getNodeId()) %>" />
-<input name="<portlet:namespace />title" type="hidden" value="<%= wikiPage.getTitle() %>" />
+<input name="<portlet:namespace />title" type="hidden" value="<%= HtmlUtil.escapeAttribute(wikiPage.getTitle()) %>" />
 <input name="<portlet:namespace />numOfFiles" type="hidden" value="3" />
 
 <div class="lfr-dynamic-uploader">

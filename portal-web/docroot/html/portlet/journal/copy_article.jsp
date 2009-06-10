@@ -35,9 +35,9 @@ double version = ParamUtil.getDouble(request, "version");
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/copy_article" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.COPY %>" />
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escape(redirect) %>" />
+<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(redirect) %>" />
 <input name="<portlet:namespace />groupId" type="hidden" value="<%= groupId %>" />
-<input name="<portlet:namespace />oldArticleId" type="hidden" value="<%= HtmlUtil.escape(oldArticleId) %>" />
+<input name="<portlet:namespace />oldArticleId" type="hidden" value="<%= HtmlUtil.escapeAttribute(oldArticleId) %>" />
 <input name="<portlet:namespace />version" type="hidden" value="<%= version %>" />
 
 <liferay-ui:tabs

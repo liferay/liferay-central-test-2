@@ -114,7 +114,7 @@ DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
 
 		<form action="<%= formAction %>" method="post" name="<%= formName %>">
 		<input name="<%= namespace %><%= Constants.CMD %>" type="hidden" value="" />
-		<input name="<%= namespace %>redirect" type="hidden" value="<%= HtmlUtil.escape(redirect) %>" />
+		<input name="<%= namespace %>redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(redirect) %>" />
 		<input name="<%= namespace %>className" type="hidden" value="<%= className %>" />
 		<input name="<%= namespace %>classPK" type="hidden" value="<%= classPK %>" />
 		<input name="<%= namespace %>messageId" type="hidden" value="" />

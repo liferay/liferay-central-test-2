@@ -149,10 +149,10 @@ if (feed != null) {
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_feed" /></portlet:actionURL>" enctype="multipart/form-data" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveFeed(); return false;">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= feed == null ? Constants.ADD : Constants.UPDATE %>" />
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escape(redirect) %>" />
+<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(redirect) %>" />
 <input name="<portlet:namespace />groupId" type="hidden" value="<%= groupId %>" />
 <input name="<portlet:namespace />feedId" type="hidden" value="<%= feedId %>" />
-<input name="<portlet:namespace />rendererTemplateId" type="hidden" value="<%= rendererTemplateId %>" />
+<input name="<portlet:namespace />rendererTemplateId" type="hidden" value="<%= HtmlUtil.escapeAttribute(rendererTemplateId) %>" />
 
 <liferay-ui:tabs
 	names="feed"

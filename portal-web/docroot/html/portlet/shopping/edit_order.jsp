@@ -55,9 +55,9 @@ long orderId = BeanParamUtil.getLong(order, request, "orderId");
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/shopping/edit_order" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escape(currentURL) %>" />
+<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(currentURL) %>" />
 <input name="<portlet:namespace />orderId" type="hidden" value="<%= orderId %>" />
-<input name="<portlet:namespace />number" type="hidden" value="<%= order.getNumber() %>" />
+<input name="<portlet:namespace />number" type="hidden" value="<%= HtmlUtil.escapeAttribute(order.getNumber()) %>" />
 <input name="<portlet:namespace />emailType" type="hidden" value="" />
 <input name="<portlet:namespace />deleteOrderIds" type="hidden" value="<%= orderId %>" />
 

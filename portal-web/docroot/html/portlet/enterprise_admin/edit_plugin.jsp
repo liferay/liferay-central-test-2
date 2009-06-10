@@ -53,9 +53,9 @@ if (pluginType.equals(Plugin.TYPE_PORTLET)) {
 </script>
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_plugin" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />savePlugin(); return false;">
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escape(redirect) %>" />
-<input name="<portlet:namespace />pluginId" type="hidden" value="<%= HtmlUtil.escape(pluginId) %>" />
-<input name="<portlet:namespace />pluginType" type="hidden" value="<%= HtmlUtil.escape(pluginType) %>" />
+<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(redirect) %>" />
+<input name="<portlet:namespace />pluginId" type="hidden" value="<%= HtmlUtil.escapeAttribute(pluginId) %>" />
+<input name="<portlet:namespace />pluginType" type="hidden" value="<%= HtmlUtil.escapeAttribute(pluginType) %>" />
 
 <liferay-ui:tabs
 	names="plugin"

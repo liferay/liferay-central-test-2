@@ -38,8 +38,8 @@ userTracker = userTracker.toEscapedModel();
 %>
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_session" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escape(redirect) %>" />
-<input name="<portlet:namespace />sessionId" type="hidden" value="<%= HtmlUtil.escape(sessionId) %>" />
+<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(redirect) %>" />
+<input name="<portlet:namespace />sessionId" type="hidden" value="<%= HtmlUtil.escapeAttribute(sessionId) %>" />
 
 <liferay-ui:tabs
 	names="live-session"

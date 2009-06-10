@@ -318,9 +318,9 @@ for (int i = 0; i < results.size(); i++) {
 	%>
 
 	<form action="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/wiki/compare_versions" /></portlet:renderURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />compare(); return false;">
-	<input name="<portlet:namespace />backURL" type="hidden" value="<%= HtmlUtil.escape(currentURL) %>" />
+	<input name="<portlet:namespace />backURL" type="hidden" value="<%= HtmlUtil.escapeAttribute(currentURL) %>" />
 	<input name="<portlet:namespace />nodeId" type="hidden" value="<%= node.getNodeId() %>" />
-	<input name="<portlet:namespace />title" type="hidden" value="<%= wikiPage.getTitle() %>" />
+	<input name="<portlet:namespace />title" type="hidden" value="<%= HtmlUtil.escapeAttribute(wikiPage.getTitle()) %>" />
 	<input name="<portlet:namespace />sourceVersion" type="hidden" value="<%= latestWikiPage.getVersion() %>" />
 	<input name="<portlet:namespace />targetVersion" type="hidden" value="<%= wikiPage.getVersion() %>" />
 	<input name="<portlet:namespace />type" type="hidden" value="html" />

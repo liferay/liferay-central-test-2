@@ -43,8 +43,8 @@ request.setAttribute("view.jsp-portletURLString", portletURLString);
 <form action="<%= portletURLString %>" method="get" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
 <liferay-portlet:renderURLParams varImpl="portletURL" />
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
-<input name="<portlet:namespace />tabs1" type="hidden" value="<%= HtmlUtil.escape(tabs1) %>" />
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= portletURLString %>" />
+<input name="<portlet:namespace />tabs1" type="hidden" value="<%= HtmlUtil.escapeAttribute(tabs1) %>" />
+<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(portletURLString) %>" />
 
 <liferay-util:include page="/html/portlet/directory/tabs1.jsp" />
 

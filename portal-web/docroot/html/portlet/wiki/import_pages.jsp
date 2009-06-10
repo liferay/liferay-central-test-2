@@ -52,9 +52,9 @@ portletURL.setParameter("nodeId", String.valueOf(nodeId));
 <form action="<portlet:actionURL><portlet:param name="struts_action" value="/wiki/import_pages" /></portlet:actionURL>" enctype="multipart/form-data" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
 <input name="<portlet:namespace />importProgressId" type="hidden" value="<%= importProgressId %>" />
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escape(redirect) %>" />
+<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(redirect) %>" />
 <input name="<portlet:namespace />nodeId" type="hidden" value="<%= nodeId %>" />
-<input name="<portlet:namespace />importer" type="hidden" value="<%= HtmlUtil.escape(tabs2) %>" />
+<input name="<portlet:namespace />importer" type="hidden" value="<%= HtmlUtil.escapeAttribute(tabs2) %>" />
 
 <liferay-ui:tabs
 	names="import-pages"

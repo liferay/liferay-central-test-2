@@ -54,8 +54,8 @@ String format = ParamUtil.getString(request, "format");
 </script>
 
 <form action="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/search/search" /></portlet:renderURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />search(); return false;">
-<input name="<portlet:namespace />keywords" size="30" type="text" value="<%= HtmlUtil.escape(keywords) %>" />
-<input name="<portlet:namespace />format" type="hidden" value="<%= HtmlUtil.escape(format) %>" />
+<input name="<portlet:namespace />keywords" size="30" type="text" value="<%= HtmlUtil.escapeAttribute(keywords) %>" />
+<input name="<portlet:namespace />format" type="hidden" value="<%= HtmlUtil.escapeAttribute(format) %>" />
 
 <input type="submit" value="<liferay-ui:message key="search" />" />
 

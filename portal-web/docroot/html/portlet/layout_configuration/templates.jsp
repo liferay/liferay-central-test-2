@@ -30,9 +30,9 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 <c:if test="<%= themeDisplay.isSignedIn() && (layout != null) && layout.getType().equals(LayoutConstants.TYPE_PORTLET) %>">
 	<form action="<%= themeDisplay.getPathMain() %>/portal/update_layout?p_l_id=<%= plid %>" method="post" name="layoutTemplates">
-	<input name="doAsUserId" type="hidden" value="<%= HtmlUtil.escape(themeDisplay.getDoAsUserId()) %>" />
+	<input name="doAsUserId" type="hidden" value="<%= HtmlUtil.escapeAttribute(themeDisplay.getDoAsUserId()) %>" />
 	<input name="<%= Constants.CMD %>" type="hidden" value="template" />
-	<input name="<%= WebKeys.REFERER %>" type="hidden" value="<%= HtmlUtil.escape(redirect) %>" />
+	<input name="<%= WebKeys.REFERER %>" type="hidden" value="<%= HtmlUtil.escapeAttribute(redirect) %>" />
 	<input name="refresh" type="hidden" value="true" />
 
 	<table border="0" cellpadding="0" cellspacing="10" style="margin-top: 10px;" width="100%">

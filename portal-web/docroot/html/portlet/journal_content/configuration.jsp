@@ -64,8 +64,8 @@ type = ParamUtil.getString(request, "type", type);
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>" />
 <input name="<portlet:namespace />groupId" type="hidden" value="<%= groupId %>" />
-<input name="<portlet:namespace />articleId" type="hidden" value="<%= articleId %>" />
-<input name="<portlet:namespace />templateId" type="hidden" value="<%= templateId %>" />
+<input name="<portlet:namespace />articleId" type="hidden" value="<%= HtmlUtil.escapeAttribute(articleId) %>" />
+<input name="<portlet:namespace />templateId" type="hidden" value="<%= HtmlUtil.escapeAttribute(templateId) %>" />
 
 <table class="lfr-table">
 <tr>

@@ -34,9 +34,9 @@ String newTemplateId = ParamUtil.getString(request, "newTemplateId");
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/copy_template" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.COPY %>" />
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escape(redirect) %>" />
+<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(redirect) %>" />
 <input name="<portlet:namespace />groupId" type="hidden" value="<%= groupId %>" />
-<input name="<portlet:namespace />oldTemplateId" type="hidden" value="<%= HtmlUtil.escape(oldTemplateId) %>" />
+<input name="<portlet:namespace />oldTemplateId" type="hidden" value="<%= HtmlUtil.escapeAttribute(oldTemplateId) %>" />
 
 <liferay-ui:tabs
 	names="template"
