@@ -546,12 +546,10 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 			assetEntryPersistence.setAssetTags(entry.getEntryId(), tags);
 		}
 
-		// Update entry after tags so that entry listeners have access the saved
-		// categories and tags
+		// Update entry after tags so that entry listeners have access to the
+		// saved categories and tags
 
-		if ((categoryIds != null) || (tagNames != null)) {
-			assetEntryPersistence.update(entry, false);
-		}
+		assetEntryPersistence.update(entry, false);
 
 		// Synchronize
 
