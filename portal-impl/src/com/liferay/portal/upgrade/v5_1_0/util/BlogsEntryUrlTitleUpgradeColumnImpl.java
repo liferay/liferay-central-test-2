@@ -22,6 +22,7 @@
 
 package com.liferay.portal.upgrade.v5_1_0.util;
 
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.UpgradeColumn;
@@ -50,7 +51,8 @@ public class BlogsEntryUrlTitleUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 	}
 
 	public Object getNewValue(Object oldValue) throws Exception {
-		String oldUrlTitle = (String)oldValue;
+		//String oldUrlTitle = (String)oldValue;
+		String oldUrlTitle = StringPool.BLANK;
 
 		String newUrlTitle = oldUrlTitle;
 

@@ -53,8 +53,6 @@ public class UpgradeBlogs extends UpgradeProcess {
 	}
 
 	protected void doUpgrade() throws Exception {
-		runSQL("update BlogsEntry set urlTitle = ''");
-
 		UpgradeColumn entryIdColumn = new TempUpgradeColumnImpl("entryId");
 
 		UpgradeColumn titleColumn = new TempUpgradeColumnImpl("title");
