@@ -853,6 +853,7 @@ public class SourceFormatter {
 				"**\\service\\persistence\\BasePersistence.java",
 				"**\\service\\persistence\\BatchSession*.java",
 				"**\\service\\persistence\\*FinderImpl.java",
+				"**\\service\\persistence\\*Query.java",
 				"**\\service\\persistence\\impl\\BasePersistenceImpl.java",
 				"**\\portal-impl\\test\\**\\*.java",
 				"**\\portal-service\\**\\liferay\\counter\\**.java",
