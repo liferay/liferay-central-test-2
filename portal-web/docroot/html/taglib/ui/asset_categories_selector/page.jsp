@@ -29,16 +29,16 @@ themeDisplay.setIncludeServiceJs(true);
 
 String randomNamespace = PwdGenerator.getPassword(PwdGenerator.KEY3, 4) + StringPool.UNDERLINE;
 
-String className = (String)request.getAttribute("liferay-ui:asset_categories_selector:className");
-long classPK = GetterUtil.getLong((String)request.getAttribute("liferay-ui:asset_categories_selector:classPK"));
+String className = (String)request.getAttribute("liferay-ui:asset-categories-selector:className");
+long classPK = GetterUtil.getLong((String)request.getAttribute("liferay-ui:asset-categories-selector:classPK"));
 String curCategoryIds = StringPool.BLANK;
 String curCategoryNames = StringPool.BLANK;
 
 if (Validator.isNotNull(className) && (classPK > 0)) {
-	List<AssetCategory> entries = AssetCategoryLocalServiceUtil.getCategories(className, classPK);
+	List<AssetCategory> categories = AssetCategoryServiceUtil.getCategories(className, classPK);
 
-	curCategoryIds = ListUtil.toString(entries, "categoryId");
-	curCategoryNames = ListUtil.toString(entries, "name");
+	curCategoryIds = ListUtil.toString(categories, "categoryId");
+	curCategoryNames = ListUtil.toString(categories, "name");
 }
 
 String curCategoryIdsParam = request.getParameter("assetCategoryIds");

@@ -133,7 +133,7 @@ AssetUtil.addLayoutTags(request, AssetTagLocalServiceUtil.getTags(BlogsEntry.cla
 <%
 PortalUtil.setPageSubtitle(entry.getTitle(), request);
 
-List<AssetTag> tags = AssetTagLocalServiceUtil.getTags(BlogsEntry.class.getName(), entry.getEntryId());
+List<AssetTag> assetTags = AssetTagLocalServiceUtil.getTags(BlogsEntry.class.getName(), entry.getEntryId());
 
-PortalUtil.setPageKeywords(ListUtil.toString(tags, "name"), request);
+PortalUtil.setPageKeywords(ListUtil.toString(assetTags, "name"), request);
 %>

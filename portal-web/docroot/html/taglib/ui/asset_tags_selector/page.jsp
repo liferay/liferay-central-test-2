@@ -29,19 +29,19 @@ themeDisplay.setIncludeServiceJs(true);
 
 String randomNamespace = PwdGenerator.getPassword(PwdGenerator.KEY3, 4) + StringPool.UNDERLINE;
 
-String className = (String)request.getAttribute("liferay-ui:asset_tags_selector:className");
-long classPK = GetterUtil.getLong((String)request.getAttribute("liferay-ui:asset_tags_selector:classPK"));
-String hiddenInput = (String)request.getAttribute("liferay-ui:asset_tags_selector:hiddenInput");
-String curTags = GetterUtil.getString((String)request.getAttribute("liferay-ui:asset_tags_selector:curTags"));
-boolean focus = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:asset_tags_selector:focus"));
-String contentCallback = GetterUtil.getString((String)request.getAttribute("liferay-ui:asset_tags_selector:contentCallback"));
+String className = (String)request.getAttribute("liferay-ui:asset-tags-selector:className");
+long classPK = GetterUtil.getLong((String)request.getAttribute("liferay-ui:asset-tags-selector:classPK"));
+String hiddenInput = (String)request.getAttribute("liferay-ui:asset-tags-selector:hiddenInput");
+String curTags = GetterUtil.getString((String)request.getAttribute("liferay-ui:asset-tags-selector:curTags"));
+boolean focus = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:asset-tags-selector:focus"));
+String contentCallback = GetterUtil.getString((String)request.getAttribute("liferay-ui:asset-tags-selector:contentCallback"));
 
 boolean suggestible = Validator.isNotNull(contentCallback);
 
 if (Validator.isNotNull(className) && (classPK > 0)) {
-	List<AssetTag> entries = AssetTagLocalServiceUtil.getTags(className, classPK);
+	List<AssetTag> tags = AssetTagServiceUtil.getTags(className, classPK);
 
-	curTags = ListUtil.toString(entries, "name");
+	curTags = ListUtil.toString(tags, "name");
 }
 
 String curTagsParam = request.getParameter(hiddenInput);

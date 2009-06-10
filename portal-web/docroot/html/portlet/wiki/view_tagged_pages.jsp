@@ -31,15 +31,15 @@ String title = "pages-with-tag-x";
 String description = null;
 
 try {
-	AssetTag tagsEntry = AssetTagLocalServiceUtil.getTag(scopeGroupId, tagName);
+	AssetTag assetTag = AssetTagLocalServiceUtil.getTag(scopeGroupId, tagName);
 
-	AssetTagProperty tagsProperty = AssetTagPropertyLocalServiceUtil.getTagProperty(tagsEntry.getTagId(), "description");
+	AssetTagProperty assetTagProperty = AssetTagPropertyLocalServiceUtil.getTagProperty(assetTag.getTagId(), "description");
 
-	description = tagsProperty.getValue();
+	description = assetTagProperty.getValue();
 }
 catch (NoSuchTagException nste) {
 }
-catch (NoSuchTagPropertyException nspte) {
+catch (NoSuchTagPropertyException nstpe) {
 }
 %>
 

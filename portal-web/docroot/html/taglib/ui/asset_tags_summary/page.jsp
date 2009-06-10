@@ -25,18 +25,18 @@
 <%@ include file="/html/taglib/init.jsp" %>
 
 <%@ page import="com.liferay.portlet.asset.model.AssetTag" %>
-<%@ page import="com.liferay.portlet.asset.service.AssetTagLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.asset.service.AssetTagServiceUtil" %>
 
 <%
-String className = (String)request.getAttribute("liferay-ui:asset_tags_summary:className");
-long classPK = GetterUtil.getLong((String)request.getAttribute("liferay-ui:asset_tags_summary:classPK"));
-String message = GetterUtil.getString((String)request.getAttribute("liferay-ui:asset_tags_summary:message"), StringPool.BLANK);
-LiferayPortletURL portletURL = (LiferayPortletURL)request.getAttribute("liferay-ui:asset_tags_summary:portletURL");
+String className = (String)request.getAttribute("liferay-ui:asset-tags-summary:className");
+long classPK = GetterUtil.getLong((String)request.getAttribute("liferay-ui:asset-tags-summary:classPK"));
+String message = GetterUtil.getString((String)request.getAttribute("liferay-ui:asset-tags-summary:message"), StringPool.BLANK);
+LiferayPortletURL portletURL = (LiferayPortletURL)request.getAttribute("liferay-ui:asset-tags-summary:portletURL");
 
-List<AssetTag> tags = AssetTagLocalServiceUtil.getTags(className, classPK);
+List<AssetTag> tags = AssetTagServiceUtil.getTags(className, classPK);
 %>
 
-<c:if test="<%= tags.size() > 0 %>">
+<c:if test="<%= !tags.isEmpty() %>">
 	<div class="taglib-asset-tags-summary">
 		<%= Validator.isNotNull(message) ? (LanguageUtil.get(pageContext, message) + ": ") : "" %>
 

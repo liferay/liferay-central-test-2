@@ -39,16 +39,18 @@ public class AssetTagsSelectorTag extends IncludeTag {
 		HttpServletRequest request =
 			(HttpServletRequest)pageContext.getRequest();
 
-		request.setAttribute("liferay-ui:asset_tags_selector:className", _className);
 		request.setAttribute(
-			"liferay-ui:asset_tags_selector:classPK", String.valueOf(_classPK));
+			"liferay-ui:asset-tags-selector:className", _className);
 		request.setAttribute(
-			"liferay-ui:asset_tags_selector:hiddenInput", _hiddenInput);
-		request.setAttribute("liferay-ui:asset_tags_selector:curTags", _curTags);
+			"liferay-ui:asset-tags-selector:classPK", String.valueOf(_classPK));
 		request.setAttribute(
-			"liferay-ui:asset_tags_selector:focus", String.valueOf(_focus));
+			"liferay-ui:asset-tags-selector:hiddenInput", _hiddenInput);
 		request.setAttribute(
-			"liferay-ui:asset_tags_selector:contentCallback",
+			"liferay-ui:asset-tags-selector:curTags", _curTags);
+		request.setAttribute(
+			"liferay-ui:asset-tags-selector:focus", String.valueOf(_focus));
+		request.setAttribute(
+			"liferay-ui:asset-tags-selector:contentCallback",
 			String.valueOf(_contentCallback));
 
 		return EVAL_BODY_BUFFERED;

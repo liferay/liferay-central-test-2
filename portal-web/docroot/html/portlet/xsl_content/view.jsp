@@ -58,20 +58,20 @@ try {
 
 				for (String tagName : compilerTagNames) {
 					try {
-						AssetTag tag = AssetTagLocalServiceUtil.getTag(scopeGroupId, tagName);
+						AssetTag assetTag = AssetTagLocalServiceUtil.getTag(scopeGroupId, tagName);
 
-						AssetTagProperty property = AssetTagPropertyLocalServiceUtil.getTagProperty(tag.getTagId(), "category");
+						AssetTagProperty assetTagProperty = AssetTagPropertyLocalServiceUtil.getTagProperty(assetTag.getTagId(), "category");
 
-						variablePropertyValue = property.getValue();
+						variablePropertyValue = assetTagProperty.getValue();
 
 						if (category.equals(variablePropertyValue)) {
 							if (pos == -1) {
-								variablePropertyValue = tag.getName();
+								variablePropertyValue = assetTag.getName();
 							}
 							else {
-								property = AssetTagPropertyLocalServiceUtil.getTagProperty(tag.getTagId(), propertyName);
+								assetTagProperty = AssetTagPropertyLocalServiceUtil.getTagProperty(assetTag.getTagId(), propertyName);
 
-								variablePropertyValue = property.getValue();
+								variablePropertyValue = assetTagProperty.getValue();
 							}
 
 							xmlURL = StringUtil.replace(xmlURL, "[" + variablePropertyKey + "]", variablePropertyValue.toUpperCase());

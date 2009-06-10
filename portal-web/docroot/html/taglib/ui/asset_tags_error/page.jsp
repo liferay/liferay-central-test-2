@@ -29,14 +29,14 @@
 <liferay-ui:error exception="<%= AssetTagException.class %>">
 
 	<%
-	AssetTagException tee = (AssetTagException)errorException;
+	AssetTagException ate = (AssetTagException)errorException;
 	%>
 
 	<c:choose>
-		<c:when test="<%= tee.getType() == AssetTagException.AT_LEAST_ONE_TAG %>">
+		<c:when test="<%= ate.getType() == AssetTagException.AT_LEAST_ONE_TAG %>">
 			<liferay-ui:message key="please-enter-at-least-one-tag" />
 		</c:when>
-		<c:when test="<%= tee.getType() == AssetTagException.INVALID_CHARACTER %>">
+		<c:when test="<%= ate.getType() == AssetTagException.INVALID_CHARACTER %>">
 			<liferay-ui:message key="one-or-more-tags-contains-invalid-characters" />
 		</c:when>
 	</c:choose>

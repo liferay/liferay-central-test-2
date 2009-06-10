@@ -229,21 +229,6 @@ Liferay.AssetTagsSelector = new Expanse.Class(
 			}
 		},
 
-		_searchTags: function(term) {
-			var beginning = 0;
-			var end = 20;
-
-			return Liferay.Service.Asset.AssetTag.search(
-				{
-					groupId: themeDisplay.getScopeGroupId(),
-					name: "%" + term + "%",
-					properties: "",
-					begin: beginning,
-					end: end
-				}
-			);
-		},
-
 		_getTags: function(callback) {
 			var instance = this;
 
@@ -286,6 +271,21 @@ Liferay.AssetTagsSelector = new Expanse.Class(
 			};
 
 			inputSearch.liveSearch(options);
+		},
+
+		_searchTags: function(term) {
+			var beginning = 0;
+			var end = 20;
+
+			return Liferay.Service.Asset.AssetTag.search(
+				{
+					groupId: themeDisplay.getScopeGroupId(),
+					name: "%" + term + "%",
+					properties: "",
+					begin: beginning,
+					end: end
+				}
+			);
 		},
 
 		_setupSelectTags: function() {

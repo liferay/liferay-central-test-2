@@ -1274,7 +1274,6 @@
 		<portlet-name>141</portlet-name>
 		<icon>/html/icons/default.png</icon>
 		<struts-path>asset_tags_navigation</struts-path>
-		<configuration-action-class>com.liferay.portlet.tagsnavigation.action.ConfigurationActionImpl</configuration-action-class>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
 		<layout-cacheable>true</layout-cacheable>

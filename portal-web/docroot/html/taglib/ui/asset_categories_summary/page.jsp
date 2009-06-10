@@ -26,26 +26,26 @@
 
 <%@ page import="com.liferay.portlet.asset.model.AssetCategory" %>
 <%@ page import="com.liferay.portlet.asset.model.AssetVocabulary" %>
-<%@ page import="com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.asset.service.AssetCategoryServiceUtil" %>
 <%@ page import="com.liferay.portlet.asset.service.AssetVocabularyServiceUtil" %>
 
 <%
-String className = (String)request.getAttribute("liferay-ui:asset_categories_summary:className");
-long classPK = GetterUtil.getLong((String)request.getAttribute("liferay-ui:asset_categories_summary:classPK"));
-LiferayPortletURL portletURL = (LiferayPortletURL)request.getAttribute("liferay-ui:asset_categories_summary:portletURL");
+String className = (String)request.getAttribute("liferay-ui:asset-categories-summary:className");
+long classPK = GetterUtil.getLong((String)request.getAttribute("liferay-ui:asset-categories-summary:classPK"));
+LiferayPortletURL portletURL = (LiferayPortletURL)request.getAttribute("liferay-ui:asset-categories-summary:portletURL");
 
 List<AssetVocabulary> vocabularies = AssetVocabularyServiceUtil.getGroupVocabularies(scopeGroupId);
-List<AssetCategory> entries = AssetCategoryLocalServiceUtil.getCategories(className, classPK);
+List<AssetCategory> categories = AssetCategoryServiceUtil.getCategories(className, classPK);
 %>
 
 <%
 for (AssetVocabulary vocabulary : vocabularies) {
 	String vocabularyName = vocabulary.getName();
 
-	List<AssetCategory> categories = _filterCategories(entries, vocabulary);
+	List<AssetCategory> curCategories = _filterCategories(categories, vocabulary);
 %>
 
-	<c:if test="<%= categories.size() > 0 %>">
+	<c:if test="<%= curCategories.size() > 0 %>">
 		<div class="taglib-asset-categories-summary">
 			<%= vocabularyName %>:
 
@@ -53,7 +53,7 @@ for (AssetVocabulary vocabulary : vocabularies) {
 				<c:when test="<%= portletURL != null %>">
 
 					<%
-					for (AssetCategory category : categories) {
+					for (AssetCategory category : curCategories) {
 						portletURL.setParameter("categoryId", String.valueOf(category.getCategoryId()));
 					%>
 
@@ -67,7 +67,7 @@ for (AssetVocabulary vocabulary : vocabularies) {
 				<c:otherwise>
 
 					<%
-					for (AssetCategory category : categories) {
+					for (AssetCategory category : curCategories) {
 					%>
 
 						<span class="asset-category">

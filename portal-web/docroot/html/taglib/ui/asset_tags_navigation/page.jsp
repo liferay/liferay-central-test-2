@@ -44,24 +44,24 @@ private String _buildTagsNavigation(long groupId, String selectedTagName, Portle
 
 	List<AssetTag> tags = AssetTagServiceUtil.getGroupTags(groupId);
 
-	for (AssetTag entry : tags) {
-		String entryName = entry.getName();
+	for (AssetTag tag : tags) {
+		String tagName = tag.getName();
 
 		sb.append("<li>");
 		sb.append("<span>");
 
-		if (entryName.equals(selectedTagName)) {
+		if (tagName.equals(selectedTagName)) {
 			sb.append("<b>");
-			sb.append(entryName);
+			sb.append(tagName);
 			sb.append("</b>");
 		}
 		else {
-			portletURL.setParameter("tag", entry.getName());
+			portletURL.setParameter("tag", tag.getName());
 
 			sb.append("<a href=\"");
 			sb.append(portletURL.toString());
 			sb.append("\">");
-			sb.append(entryName);
+			sb.append(tagName);
 			sb.append("</a>");
 		}
 

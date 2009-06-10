@@ -42,14 +42,14 @@ public class AssetCategoriesSummaryTag extends IncludeTag {
 			(HttpServletRequest)pageContext.getRequest();
 
 		request.setAttribute(
-			"liferay-ui:asset_categories_summary:className", _className);
+			"liferay-ui:asset-categories-summary:className", _className);
 		request.setAttribute(
-			"liferay-ui:asset_categories_summary:classPK",
+			"liferay-ui:asset-categories-summary:classPK",
 			String.valueOf(_classPK));
 		request.setAttribute(
-			"liferay-ui:asset_categories_summary:message", _message);
+			"liferay-ui:asset-categories-summary:message", _message);
 		request.setAttribute(
-			"liferay-ui:asset_categories_summary:portletURL", _portletURL);
+			"liferay-ui:asset-categories-summary:portletURL", _portletURL);
 
 		return EVAL_BODY_BUFFERED;
 	}

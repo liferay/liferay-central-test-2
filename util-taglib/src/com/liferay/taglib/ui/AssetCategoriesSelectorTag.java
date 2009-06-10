@@ -40,15 +40,15 @@ public class AssetCategoriesSelectorTag extends IncludeTag {
 			(HttpServletRequest)pageContext.getRequest();
 
 		request.setAttribute(
-			"liferay-ui:asset_categories_selector:className", _className);
+			"liferay-ui:asset-categories-selector:className", _className);
 		request.setAttribute(
-			"liferay-ui:asset_categories_selector:classPK",
+			"liferay-ui:asset-categories-selector:classPK",
 			String.valueOf(_classPK));
 		request.setAttribute(
-			"liferay-ui:asset_categories_selector:focus",
+			"liferay-ui:asset-categories-selector:focus",
 			String.valueOf(_focus));
 		request.setAttribute(
-			"liferay-ui:asset_categories_selector:contentCallback",
+			"liferay-ui:asset-categories-selector:contentCallback",
 			String.valueOf(_contentCallback));
 
 		return EVAL_BODY_BUFFERED;

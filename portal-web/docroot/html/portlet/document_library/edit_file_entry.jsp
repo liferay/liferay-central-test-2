@@ -266,7 +266,7 @@ portletURL.setParameter("name", name);
 		</td>
 		<td>
 			<liferay-ui:asset-tags-summary
-					className="<%= DLFileEntry.class.getName() %>"
+				className="<%= DLFileEntry.class.getName() %>"
 				classPK="<%= fileEntry.getFileEntryId() %>"
 			/>
 		</td>

@@ -113,8 +113,8 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 						<portlet:namespace />displayDateMinute: document.<portlet:namespace />fm.<portlet:namespace />displayDateMinute.value,
 						<portlet:namespace />displayDateAmPm: document.<portlet:namespace />fm.<portlet:namespace />displayDateAmPm.value,
 						<portlet:namespace />draft: 1,
-						<portlet:namespace />assetTagNames: document.<portlet:namespace />fm.<portlet:namespace />assetTagNames.value,
-						<portlet:namespace />assetCategoryIds: document.<portlet:namespace />fm.<portlet:namespace />assetCategoryIds.value
+						<portlet:namespace />assetCategoryIds: document.<portlet:namespace />fm.<portlet:namespace />assetCategoryIds.value,
+						<portlet:namespace />assetTagNames: document.<portlet:namespace />fm.<portlet:namespace />assetTagNames.value
 					},
 					dataType: 'json',
 					beforeSend: function() {
