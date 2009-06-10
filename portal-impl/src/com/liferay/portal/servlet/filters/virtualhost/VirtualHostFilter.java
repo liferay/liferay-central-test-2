@@ -172,6 +172,10 @@ public class VirtualHostFilter extends BasePortalFilter {
 			if (friendlyURL.startsWith(languageId)) {
 				int pos = friendlyURL.indexOf(StringPool.SLASH, 1);
 
+				if (pos == -1) {
+					continue;
+				}
+				
 				i18nLanguageId = friendlyURL.substring(0, pos);
 				friendlyURL = friendlyURL.substring(pos);
 
