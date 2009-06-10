@@ -147,7 +147,8 @@ create table AssetTag (
 	userName VARCHAR(75) null,
 	createDate DATE null,
 	modifiedDate DATE null,
-	name VARCHAR(75) null
+	name VARCHAR(75) null,
+	assetCount INTEGER
 );
 
 create table AssetTagProperty (

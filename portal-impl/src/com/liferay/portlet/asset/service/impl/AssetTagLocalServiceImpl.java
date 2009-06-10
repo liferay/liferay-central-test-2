@@ -187,6 +187,18 @@ public class AssetTagLocalServiceImpl extends AssetTagLocalServiceBaseImpl {
 		}
 	}
 
+	public AssetTag decrementAssetCount(long tagId)
+		throws PortalException, SystemException {
+
+		AssetTag assetTag = assetTagPersistence.findByPrimaryKey(tagId);
+
+		assetTag.setAssetCount(assetTag.getAssetCount() - 1);
+
+		assetTagPersistence.update(assetTag, false);
+
+		return assetTag;
+	}
+
 	public void deleteTag(AssetTag tag)
 		throws PortalException, SystemException {
 
@@ -320,6 +332,18 @@ public class AssetTagLocalServiceImpl extends AssetTagLocalServiceBaseImpl {
 		catch (NoSuchTagException nste) {
 			return false;
 		}
+	}
+
+	public AssetTag incrementAssetCount(long tagId)
+		throws PortalException, SystemException {
+
+		AssetTag assetTag = assetTagPersistence.findByPrimaryKey(tagId);
+
+		assetTag.setAssetCount(assetTag.getAssetCount() + 1);
+
+		assetTagPersistence.update(assetTag, false);
+
+		return assetTag;
 	}
 
 	public void mergeTags(long fromTagId, long toTagId)

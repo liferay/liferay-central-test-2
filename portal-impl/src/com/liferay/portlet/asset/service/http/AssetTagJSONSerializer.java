@@ -81,6 +81,7 @@ public class AssetTagJSONSerializer {
 
 		jsonObj.put("modifiedDate", modifiedDateJSON);
 		jsonObj.put("name", model.getName());
+		jsonObj.put("assetCount", model.getAssetCount());
 
 		return jsonObj;
 	}

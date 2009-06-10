@@ -86,9 +86,12 @@ public class AssetTagModelImpl extends BaseModelImpl<AssetTag> {
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
 			
 
-			{ "name", new Integer(Types.VARCHAR) }
+			{ "name", new Integer(Types.VARCHAR) },
+			
+
+			{ "assetCount", new Integer(Types.INTEGER) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table AssetTag (tagId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table AssetTag (tagId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name VARCHAR(75) null,assetCount INTEGER)";
 	public static final String TABLE_SQL_DROP = "drop table AssetTag";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -111,6 +114,7 @@ public class AssetTagModelImpl extends BaseModelImpl<AssetTag> {
 		model.setCreateDate(soapModel.getCreateDate());
 		model.setModifiedDate(soapModel.getModifiedDate());
 		model.setName(soapModel.getName());
+		model.setAssetCount(soapModel.getAssetCount());
 
 		return model;
 	}
@@ -208,6 +212,14 @@ public class AssetTagModelImpl extends BaseModelImpl<AssetTag> {
 		_name = name;
 	}
 
+	public int getAssetCount() {
+		return _assetCount;
+	}
+
+	public void setAssetCount(int assetCount) {
+		_assetCount = assetCount;
+	}
+
 	public AssetTag toEscapedModel() {
 		if (isEscapedModel()) {
 			return (AssetTag)this;
@@ -226,6 +238,7 @@ public class AssetTagModelImpl extends BaseModelImpl<AssetTag> {
 			model.setCreateDate(getCreateDate());
 			model.setModifiedDate(getModifiedDate());
 			model.setName(HtmlUtil.escape(getName()));
+			model.setAssetCount(getAssetCount());
 
 			model = (AssetTag)Proxy.newProxyInstance(AssetTag.class.getClassLoader(),
 					new Class[] { AssetTag.class },
@@ -255,6 +268,7 @@ public class AssetTagModelImpl extends BaseModelImpl<AssetTag> {
 		clone.setCreateDate(getCreateDate());
 		clone.setModifiedDate(getModifiedDate());
 		clone.setName(getName());
+		clone.setAssetCount(getAssetCount());
 
 		return clone;
 	}
@@ -318,6 +332,8 @@ public class AssetTagModelImpl extends BaseModelImpl<AssetTag> {
 		sb.append(getModifiedDate());
 		sb.append(", name=");
 		sb.append(getName());
+		sb.append(", assetCount=");
+		sb.append(getAssetCount());
 		sb.append("}");
 
 		return sb.toString();
@@ -362,6 +378,10 @@ public class AssetTagModelImpl extends BaseModelImpl<AssetTag> {
 			"<column><column-name>name</column-name><column-value><![CDATA[");
 		sb.append(getName());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>assetCount</column-name><column-value><![CDATA[");
+		sb.append(getAssetCount());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -376,5 +396,6 @@ public class AssetTagModelImpl extends BaseModelImpl<AssetTag> {
 	private Date _createDate;
 	private Date _modifiedDate;
 	private String _name;
+	private int _assetCount;
 	private transient ExpandoBridge _expandoBridge;
 }

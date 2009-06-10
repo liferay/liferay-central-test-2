@@ -543,6 +543,30 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 				}
 			}
 
+			if (entry.isNew()) {
+				for (AssetTag tag : tags) {
+					assetTagLocalService.incrementAssetCount(tag.getTagId());
+				}
+			}
+			else {
+				List<AssetTag> oldTags = assetEntryPersistence.getAssetTags(
+					entry.getEntryId());
+
+				for (AssetTag oldTag : oldTags) {
+					if (!tags.contains(oldTag)) {
+						assetTagLocalService.decrementAssetCount(
+							oldTag.getTagId());
+					}
+				}
+
+				for (AssetTag tag : tags) {
+					if (!oldTags.contains(tag)) {
+						assetTagLocalService.incrementAssetCount(
+							tag.getTagId());
+					}
+				}
+			}
+
 			assetEntryPersistence.setAssetTags(entry.getEntryId(), tags);
 		}
 

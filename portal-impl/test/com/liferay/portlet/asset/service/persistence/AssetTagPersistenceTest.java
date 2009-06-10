@@ -79,6 +79,7 @@ public class AssetTagPersistenceTest extends BasePersistenceTestCase {
 		newAssetTag.setCreateDate(nextDate());
 		newAssetTag.setModifiedDate(nextDate());
 		newAssetTag.setName(randomString());
+		newAssetTag.setAssetCount(nextInt());
 
 		_persistence.update(newAssetTag, false);
 
@@ -94,6 +95,8 @@ public class AssetTagPersistenceTest extends BasePersistenceTestCase {
 		assertEquals(Time.getShortTimestamp(existingAssetTag.getModifiedDate()),
 			Time.getShortTimestamp(newAssetTag.getModifiedDate()));
 		assertEquals(existingAssetTag.getName(), newAssetTag.getName());
+		assertEquals(existingAssetTag.getAssetCount(),
+			newAssetTag.getAssetCount());
 	}
 
 	public void testFindByPrimaryKeyExisting() throws Exception {
@@ -144,6 +147,7 @@ public class AssetTagPersistenceTest extends BasePersistenceTestCase {
 		assetTag.setCreateDate(nextDate());
 		assetTag.setModifiedDate(nextDate());
 		assetTag.setName(randomString());
+		assetTag.setAssetCount(nextInt());
 
 		_persistence.update(assetTag, false);
 

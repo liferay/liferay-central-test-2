@@ -83,5 +83,9 @@ public interface AssetTagModel extends BaseModel<AssetTag> {
 
 	public void setName(String name);
 
+	public int getAssetCount();
+
+	public void setAssetCount(int assetCount);
+
 	public AssetTag toEscapedModel();
 }

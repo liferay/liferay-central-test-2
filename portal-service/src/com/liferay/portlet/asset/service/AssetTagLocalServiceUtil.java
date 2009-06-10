@@ -142,6 +142,13 @@ public class AssetTagLocalServiceUtil {
 		getService().checkTags(userId, groupId, names);
 	}
 
+	public static com.liferay.portlet.asset.model.AssetTag decrementAssetCount(
+		long tagId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService().decrementAssetCount(tagId);
+	}
+
 	public static void deleteTag(com.liferay.portlet.asset.model.AssetTag tag)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
@@ -236,6 +243,13 @@ public class AssetTagLocalServiceUtil {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService().hasTag(groupId, name);
+	}
+
+	public static com.liferay.portlet.asset.model.AssetTag incrementAssetCount(
+		long tagId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService().incrementAssetCount(tagId);
 	}
 
 	public static void mergeTags(long fromTagId, long toTagId)

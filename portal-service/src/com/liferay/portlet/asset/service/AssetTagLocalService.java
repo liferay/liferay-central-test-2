@@ -118,6 +118,11 @@ public interface AssetTagLocalService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.asset.model.AssetTag decrementAssetCount(
+		long tagId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
 	public void deleteTag(com.liferay.portlet.asset.model.AssetTag tag)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
@@ -192,6 +197,11 @@ public interface AssetTagLocalService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public boolean hasTag(long groupId, java.lang.String name)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.asset.model.AssetTag incrementAssetCount(
+		long tagId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 

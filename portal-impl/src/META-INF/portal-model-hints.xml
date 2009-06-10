@@ -786,6 +786,7 @@
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
 		<field name="name" type="String" />
+		<field name="assetCount" type="int" />
 	</model>
 	<model name="com.liferay.portlet.asset.model.AssetTagProperty">
 		<field name="tagPropertyId" type="long" />
