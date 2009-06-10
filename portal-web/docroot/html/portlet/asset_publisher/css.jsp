@@ -74,6 +74,11 @@
 	padding: 3px;
 }
 
+.portlet-asset-publisher .asset-small-image {
+	float: left;
+	padding-right: 10px;
+}
+
 .portlet-asset-publisher .asset-title .asset-actions img {
 	margin-left: 5px;
 }

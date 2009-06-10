@@ -173,7 +173,7 @@ else if (className.equals(JournalArticle.class.getName())) {
 		StringBuilder sb = new StringBuilder();
 
 		if (articleDisplay.isSmallImage()) {
-			sb.append("<div style=\"float: left; padding-right: 10px;\"><img alt=\"");
+			sb.append("<div class=\"asset-small-image\"><img alt=\"");
 			sb.append(LanguageUtil.get(pageContext, "web-content-image"));
 			sb.append("\" src=\"");
 
@@ -258,9 +258,9 @@ viewURL = _checkViewURL(viewURL, currentURL, themeDisplay);
 		</h3>
 
 		<div class="asset-content">
-			<p class="asset-summary">
+			<div class="asset-summary">
 				<%= summary %>
-			</p>
+			</div>
 
 			<c:if test="<%= Validator.isNotNull(viewURL) %>">
 				<div class="asset-more">
