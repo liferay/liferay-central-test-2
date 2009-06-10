@@ -22,11 +22,18 @@
 
 package com.liferay.portal.upgrade.v5_2_3.util;
 
+import com.liferay.portal.kernel.dao.jdbc.DataAccess;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
 /**
  * <a href="MBDiscussionDependencyManager.java.html"><b><i>View Source</i></b>
  * </a>
  *
  * @author Brian Wing Shun Chan
+ * @author Amos Fong
  *
  */
 public class MBDiscussionDependencyManager extends DependencyManager {
@@ -53,9 +60,41 @@ public class MBDiscussionDependencyManager extends DependencyManager {
 			}
 		}
 
-		deleteDuplicateData("MBMessage", "threadId", threadId);
-		deleteDuplicateData("MBMessageFlag", "threadId", threadId);
-		deleteDuplicateData("MBThread", "threadId", threadId);
+		if (isDuplicateThread(threadId)) {
+			deleteDuplicateData("MBMessage", "threadId", threadId);
+			deleteDuplicateData("MBMessageFlag", "threadId", threadId);
+			deleteDuplicateData("MBThread", "threadId", threadId);
+		}
+	}
+
+	protected boolean isDuplicateThread(long threadId) throws Exception {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = DataAccess.getConnection();
+
+			ps = con.prepareStatement(
+				"select count(*) from MBDiscussion where threadId = ?");
+
+			ps.setLong(1, threadId);
+
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				long count = rs.getLong(1);
+
+				if (count > 0) {
+					return false;
+				}
+			}
+
+			return true;
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
+		}
 	}
 
 }
