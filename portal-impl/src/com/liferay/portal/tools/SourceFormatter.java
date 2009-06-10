@@ -536,7 +536,12 @@ public class SourceFormatter {
 					longLogFactoryUtil = true;
 				}
 
-				System.out.println("> 80: " + fileName + " " + lineCount);
+				if (fileName.endsWith("Table.java") &&
+					line.contains("String TABLE_SQL_CREATE = ")) {
+				}
+				else {
+					System.out.println("> 80: " + fileName + " " + lineCount);
+				}
 			}
 		}
 
