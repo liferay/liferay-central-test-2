@@ -97,8 +97,7 @@ public class AddPortletToChildTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isTextPresent(
-							"Breadcrumb Test Page \u00bb Child Test Page")) {
+				if (selenium.isElementPresent("link=Configuration")) {
 					break;
 				}
 			}

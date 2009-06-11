@@ -80,7 +80,8 @@ public class AddContentToChildTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//img[@alt='Configuration']")) {
+				if (selenium.isElementPresent(
+							"//input[@value='Add Blog Entry']")) {
 					break;
 				}
 			}
