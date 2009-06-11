@@ -22,16 +22,57 @@
 
 package com.liferay.portal.kernel.bi.rules;
 
-import java.io.InputStream;
+import java.io.Serializable;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * <a href="RuleRetriever.java.html"><b><i>View Source</i></b></a>
+ * <a href="ExecutionRequestMessage.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael C. Han
  *
  */
-public interface RuleRetriever {
+public class ExecutionRequestMessage implements Serializable {
 
-	public InputStream getInputStream();
+	public ExecutionRequestMessage(
+		ExecutionRequestType executionRequestType, String domainName) {
+
+		_executionRequestType = executionRequestType;
+		_domainName = domainName;
+	}
+
+	public void addFact(Object fact) {
+		_facts.add(fact);
+	}
+
+	public void addFacts(List<?> facts) {
+		_facts.addAll(facts);
+	}
+
+	public String getDomainName() {
+		return _domainName;
+	}
+
+	public List<?> getFacts() {
+		return _facts;
+	}
+
+	public Query getQuery() {
+		return _query;
+	}
+
+	public ExecutionRequestType getType() {
+		return _executionRequestType;
+	}
+
+	public void setQuery(Query query) {
+		_query = query;
+	}
+
+	private String _domainName;
+	private ExecutionRequestType _executionRequestType;
+	private List<Object> _facts = new ArrayList<Object>();
+	private Query _query;
 
 }

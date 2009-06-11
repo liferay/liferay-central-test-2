@@ -22,16 +22,16 @@
 
 package com.liferay.portal.kernel.bi.rules;
 
-import java.io.InputStream;
+import java.io.Serializable;
 
 /**
- * <a href="RuleRetriever.java.html"><b><i>View Source</i></b></a>
+ * <a href="AdminRequestType.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael C. Han
  *
  */
-public interface RuleRetriever {
+public enum AdminRequestType implements Serializable {
 
-	public InputStream getInputStream();
+	ADD, REMOVE, UPDATE
 
 }

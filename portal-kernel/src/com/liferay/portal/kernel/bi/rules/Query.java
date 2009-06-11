@@ -22,16 +22,38 @@
 
 package com.liferay.portal.kernel.bi.rules;
 
-import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * <a href="RuleRetriever.java.html"><b><i>View Source</i></b></a>
+ * <a href="RuleEngineQuery.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael C. Han
  *
  */
-public interface RuleRetriever {
+public class Query {
 
-	public InputStream getInputStream();
+	public void addArgument(Object object) {
+		_arguments.add(object);
+	}
+
+	public void addArguments(List<?> object) {
+		_arguments.addAll(object);
+	}
+
+	public Object[] getArguments() {
+		return _arguments.toArray(new Object[_arguments.size()]);
+	}
+
+	public String getQueryString() {
+		return _queryString;
+	}
+
+	public void setQueryString(String queryString) {
+		_queryString = queryString;
+	}
+
+	private List<Object> _arguments = new ArrayList<Object>();
+	private String _queryString;
 
 }

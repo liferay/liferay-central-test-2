@@ -22,18 +22,30 @@
 
 package com.liferay.portal.kernel.bi.rules;
 
+import com.liferay.portal.PortalException;
+
 /**
  * <a href="RuleEngineException.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael C. Han
+ *
  */
-public class RuleEngineException extends Exception {
+public class RuleEngineException extends PortalException {
 
-	public RuleEngineException(String message) {
-		super(message);	
+	public RuleEngineException() {
+		super();
 	}
 
-	public RuleEngineException(String message, Throwable cause) {
-		super(message, cause);
+	public RuleEngineException(String msg) {
+		super(msg);
 	}
+
+	public RuleEngineException(Throwable cause) {
+		super(cause);
+	}
+
+	public RuleEngineException(String msg, Throwable cause) {
+		super(msg, cause);
+	}
+
 }

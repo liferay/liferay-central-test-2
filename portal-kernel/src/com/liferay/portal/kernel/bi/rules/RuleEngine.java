@@ -29,172 +29,53 @@ import java.util.List;
  *
  * @author Michael C. Han
  * @author Vihang Pathak
+ *
  */
 public interface RuleEngine {
-	/**
-	 * Add rules to a given domain.  If the domain exists, then 
-	 *
-	 * @param domainName
-	 * @param retriever
-	 * @throws RuleEngineException
-	 */
-	public void addRuleDomain(String domainName, RuleRetriever retriever)
+
+	public void add(String domainName, RuleRetriever ruleRtriever)
 		throws RuleEngineException;
 
-	/**
-	 * @param domainName
-	 * @return true if rule base exists with the associated domain name
-	 * @throws RuleEngineException
-	 */
-	public boolean containsRuleDomain(String domainName)
+	public boolean contains(String domainName) throws RuleEngineException;
+
+	//public void execute(Object rule, Reader reader)
+	//	throws RuleEngineException;
+
+	//public void execute(Object rule, String fileName)
+	//	throws RuleEngineException;
+
+	public void execute(RuleRetriever ruleRtriever, List<?> facts)
 		throws RuleEngineException;
 
-	/**
-	 * Execute rules specified by the RuleRetriever with the appropriate facts
-	 *
-	 * @param retriever for the rules to be executed
-	 * @param facts to insert into the rule
-	 * @throws RuleEngineException
-	 */
-	public void execute(
-		RuleRetriever retriever, List facts)
+	public List<?> execute(
+			RuleRetriever ruleRtriever, List<?> facts, String query)
 		throws RuleEngineException;
 
-
-	/**
-	 * Execute rules specified by the RuleRetriever with the appropriate facts
-	 * Upon execution, query the working memory with the supplied query.
-	 *
-	 * @param retriever for the rules to be executed
-	 * @param facts to insert into the rule
-	 * @param query to execute after running rules
-	 * @return results of the query
-	 * @throws RuleEngineException
-	 */
-	public List execute(
-		RuleRetriever retriever, List facts, String query)
+	public List<?> execute(
+			RuleRetriever ruleRtriever, List<?> facts, String query,
+			Object[] queryArguments)
 		throws RuleEngineException;
 
-	/**
-	 * Execute rules specified by the RuleRetriever with the appropriate facts
-	 * Upon execution, query the working memory with the supplied query and
-	 * arguments
-	 *
-	 * @param retriever for the rules to be executed
-	 * @param facts to insert into the rule
-	 * @param query to execute after running rules
-	 * @param queryArguments arguments for the query
-	 * @return results of the query
-	 * @throws RuleEngineException
-	 */
-	public List execute(
-		RuleRetriever retriever, List facts,
-		String query, Object[] queryArguments)
+	public void execute(String domainName, List<?> facts)
 		throws RuleEngineException;
 
-	/**
-	 * Execute a set of rules using the associated domainName
-	 *
-	 * @param domainName for the rulebase to use
-	 * @param facts to insert into the rule
-	 * @throws RuleEngineException
-	 */
-	public void execute(String domainName, List facts)
+	public List<?> execute(String domainName, List<?> facts, String query)
 		throws RuleEngineException;
 
-	/**
-	 * Execute rules specified by the RuleRetriever with the appropriate facts
-	 *
-	 * @param retriever for the rules to be executed
-	 * @param facts to insert into the rule
-	 * @return all the objects asserted into the working memory.
-	 * @throws RuleEngineException
-	 */
-	public List executeWithResults(
-		RuleRetriever retriever, List facts)
-	throws RuleEngineException;
-
-	/**
-	 * Execute a set of rules using the associated domainName
-	 *
-	 * @param domainName for the rulebase to use
-	 * @param facts to insert into the rule
-	 * @return all the objects asserted into the working memory.
-	 * @throws RuleEngineException
-	 */
-	public List executeWithResults(
-		String domainName, List facts)
+	public List<?> execute(
+			String domainName, List<?> facts, String query,
+			Object[] queryArguments)
 		throws RuleEngineException;
 
-	/**
-	 * Execute a set of rules using the associated domainName
-	 *
-	 * @param domainName for the rulebase to use
-	 * @param facts to insert into the rule
-	 * @param query to execute after completion of the execution
-	 * @return the results of the query
-	 * @throws RuleEngineException
-	 */
-	public List execute(
-		String domainName, List facts, String query)
+	public List<?> executeWithResults(RuleRetriever ruleRtriever, List<?> facts)
 		throws RuleEngineException;
 
-	/**
-	 * Execute a set of rules using the associated domainName
-	 *
-	 * @param domainName for the rulebase to use
-	 * @param facts to insert into the rule
-	 * @param query to execute after completion of the execution
-	 * @param queryArguments to pass to the query
-	 * @return the results of the query
-	 * @throws RuleEngineException
-	 */
-	public List execute(
-		String domainName, List facts,
-		String query, Object[] queryArguments)
+	public List<?> executeWithResults(String domainName, List<?> facts)
 		throws RuleEngineException;
 
-	/**
-	 * Remove the previously defined rules for a given domain
-	 *
-	 * @param domainName
-	 * @throws RuleEngineException
-	 */
-	public void removeRuleDomain(String domainName)
+	public void remove(String domainName) throws RuleEngineException;
+
+	public void update(String domainName, RuleRetriever ruleRetriever)
 		throws RuleEngineException;
-
-	/**
-	 * Updates the rules for a given rule domain
-	 *
-	 * @param domainName
-	 * @param retriever
-	 * @throws RuleEngineException
-	 */
-	public void updateRuleDomain(String domainName, RuleRetriever retriever)
-		throws RuleEngineException;
-
-	/**
-	* Executes a rule from a rule file. ruleObject are the facts required to 
-	* execute the rule
-	*
-	* @param ruleObject
-	* @param ruleFileName
-	 * TBD temporarily removed; may need to re-add, needs further
-	  * clarification w/ Sun
-	*/
-//	public void executeRule(Object ruleObject,String ruleFileName)
-//		throws RuleEngineException;
-
-	/**
-	* Executes rule from a rule file reader.ruleObject are the facts required to 
-	* execute the rule
-	*
-	* @param ruleObject
-	* @param ruleFileReader
-	* TBD temporarily removed; may need to re-add, needs further
-	 * clarification w/ Sun
-	*/
-//    public void executeRule(Object ruleObject,Reader ruleFileReader)
-//    	throws RuleEngineException;
 
 }

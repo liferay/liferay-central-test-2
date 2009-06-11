@@ -22,16 +22,39 @@
 
 package com.liferay.portal.kernel.bi.rules;
 
-import java.io.InputStream;
+import java.io.Serializable;
 
 /**
- * <a href="RuleRetriever.java.html"><b><i>View Source</i></b></a>
+ * <a href="AdminRequestMessage.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael C. Han
  *
  */
-public interface RuleRetriever {
+public class AdminRequestMessage implements Serializable {
 
-	public InputStream getInputStream();
+	public AdminRequestMessage(
+		AdminRequestType adminRequestType, String domainName,
+		RuleRetriever ruleRetriever) {
+
+		_adminRequestType = adminRequestType;
+		_domainName = domainName;
+		_ruleRetriever = ruleRetriever;
+	}
+
+	public String getDomainName() {
+		return _domainName;
+	}
+
+	public RuleRetriever getRuleRetriever() {
+		return _ruleRetriever;
+	}
+
+	public AdminRequestType getType() {
+		return _adminRequestType;
+	}
+
+	private AdminRequestType _adminRequestType;
+	private String _domainName;
+	private RuleRetriever _ruleRetriever;
 
 }

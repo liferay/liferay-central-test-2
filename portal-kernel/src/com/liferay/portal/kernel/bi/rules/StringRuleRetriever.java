@@ -27,15 +27,12 @@ import java.io.InputStream;
 
 /**
  * <a href="StringRuleRetriever.java.html"><b><i>View Source</i></b></a>
- * <p/>
- * Provides ability to retrieve rules as a String.
- * <p/>
- * WARNING: No localization support.
  *
  * @author Michael C. Han
+ *
  */
 public class StringRuleRetriever implements RuleRetriever {
-	
+
 	public StringRuleRetriever(String rules) {
 		_inputStream = new ByteArrayInputStream(rules.getBytes());
 	}
@@ -45,4 +42,5 @@ public class StringRuleRetriever implements RuleRetriever {
 	}
 
 	private InputStream _inputStream;
+
 }
