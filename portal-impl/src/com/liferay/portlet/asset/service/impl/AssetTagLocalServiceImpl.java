@@ -192,7 +192,7 @@ public class AssetTagLocalServiceImpl extends AssetTagLocalServiceBaseImpl {
 
 		AssetTag assetTag = assetTagPersistence.findByPrimaryKey(tagId);
 
-		assetTag.setAssetCount(assetTag.getAssetCount() - 1);
+		assetTag.setAssetCount(Math.max(0, assetTag.getAssetCount() - 1));
 
 		assetTagPersistence.update(assetTag, false);
 
