@@ -38,12 +38,6 @@ public interface RuleEngine {
 
 	public boolean contains(String domainName) throws RuleEngineException;
 
-	//public void execute(Object rule, Reader reader)
-	//	throws RuleEngineException;
-
-	//public void execute(Object rule, String fileName)
-	//	throws RuleEngineException;
-
 	public void execute(RuleRetriever ruleRtriever, List<?> facts)
 		throws RuleEngineException;
 
