@@ -672,44 +672,6 @@ public class HttpImpl implements Http {
 
 	}
 
-	/**
-	 * @deprecated
-	 */
-	public byte[] URLtoByteArray(
-			String location, Cookie[] cookies, Http.Auth auth, Http.Body body,
-			boolean post)
-		throws IOException {
-
-		Http.Options options = new Http.Options();
-
-		options.setAuth(auth);
-		options.setBody(body);
-		options.setCookies(cookies);
-		options.setLocation(location);
-		options.setPost(post);
-
-		return URLtoByteArray(options);
-	}
-
-	/**
-	 * @deprecated
-	 */
-	public byte[] URLtoByteArray(
-			String location, Cookie[] cookies, Http.Auth auth,
-			Map<String, String> parts, boolean post)
-		throws IOException {
-
-		Http.Options options = new Http.Options();
-
-		options.setAuth(auth);
-		options.setCookies(cookies);
-		options.setLocation(location);
-		options.setParts(parts);
-		options.setPost(post);
-
-		return URLtoByteArray(options);
-	}
-
 	public String URLtoString(Http.Options options) throws IOException {
 		return URLtoString(options);
 	}
@@ -722,44 +684,6 @@ public class HttpImpl implements Http {
 		throws IOException {
 
 		return new String(URLtoByteArray(location, post));
-	}
-
-	/**
-	 * @deprecated
-	 */
-	public String URLtoString(
-			String location, Cookie[] cookies, Http.Auth auth, Http.Body body,
-			boolean post)
-		throws IOException {
-
-		Http.Options options = new Http.Options();
-
-		options.setAuth(auth);
-		options.setBody(body);
-		options.setCookies(cookies);
-		options.setLocation(location);
-		options.setPost(post);
-
-		return new String(URLtoByteArray(options));
-	}
-
-	/**
-	 * @deprecated
-	 */
-	public String URLtoString(
-			String location, Cookie[] cookies, Http.Auth auth,
-			Map<String, String> parts, boolean post)
-		throws IOException {
-
-		Http.Options options = new Http.Options();
-
-		options.setAuth(auth);
-		options.setCookies(cookies);
-		options.setLocation(location);
-		options.setParts(parts);
-		options.setPost(post);
-
-		return new String(URLtoByteArray(options));
 	}
 
 	/**

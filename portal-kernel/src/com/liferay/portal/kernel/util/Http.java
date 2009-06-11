@@ -149,43 +149,11 @@ public interface Http {
 	public byte[] URLtoByteArray(String location, boolean post)
 		throws IOException;
 
-	/**
-	 * @deprecated
-	 */
-	public byte[] URLtoByteArray(
-			String location, Cookie[] cookies, Http.Auth auth, Http.Body body,
-			boolean post)
-		throws IOException;
-
-	/**
-	 * @deprecated
-	 */
-	public byte[] URLtoByteArray(
-			String location, Cookie[] cookies, Http.Auth auth,
-			Map<String, String> parts, boolean post)
-		throws IOException;
-
 	public String URLtoString(Http.Options options) throws IOException;
 
 	public String URLtoString(String location) throws IOException;
 
 	public String URLtoString(String location, boolean post) throws IOException;
-
-	/**
-	 * @deprecated
-	 */
-	public String URLtoString(
-			String location, Cookie[] cookies, Http.Auth auth, Http.Body body,
-			boolean post)
-		throws IOException;
-
-	/**
-	 * @deprecated
-	 */
-	public String URLtoString(
-			String location, Cookie[] cookies, Http.Auth auth,
-			Map<String, String> parts, boolean post)
-		throws IOException;
 
 	/**
 	 * This method only uses the default Commons HttpClient implementation when
