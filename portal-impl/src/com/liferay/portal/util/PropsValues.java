@@ -1317,6 +1317,9 @@ public class PropsValues {
 	public static final String STRUTS_PORTLET_REQUEST_PROCESSOR = PropsUtil.get(
 		PropsKeys.STRUTS_PORTLET_REQUEST_PROCESSOR);
 
+	public static final boolean TAGS_COMPILER_ENABLED = GetterUtil.getBoolean(
+		PropsUtil.get(PropsKeys.TAGS_COMPILER_ENABLED));
+
 	public static final String TASKS_DEFAULT_ROLE_NAMES = PropsUtil.get(
 		PropsKeys.TASKS_DEFAULT_ROLE_NAMES);
 
