@@ -733,7 +733,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl
 
 				query.append("organization.companyId = ?");
 
-				query.append(" AND parentOrganizationId != 0 ");
+				query.append(" AND organization.parentOrganizationId != 0 ");
 
 				query.append("ORDER BY ");
 
@@ -796,7 +796,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl
 
 				query.append("organization.companyId = ?");
 
-				query.append(" AND parentOrganizationId != 0 ");
+				query.append(" AND organization.parentOrganizationId != 0 ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
@@ -919,7 +919,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl
 
 			query.append("organization.companyId = ?");
 
-			query.append(" AND parentOrganizationId != 0 ");
+			query.append(" AND organization.parentOrganizationId != 0 ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
@@ -1619,7 +1619,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl
 
 				query.append("organization.companyId = ?");
 
-				query.append(" AND parentOrganizationId != 0 ");
+				query.append(" AND organization.parentOrganizationId != 0 ");
 
 				Query q = session.createQuery(query.toString());
 

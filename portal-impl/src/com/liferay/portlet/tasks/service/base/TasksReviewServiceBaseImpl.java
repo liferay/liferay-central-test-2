@@ -53,32 +53,6 @@ import com.liferay.portlet.tasks.service.persistence.TasksReviewPersistence;
  */
 public abstract class TasksReviewServiceBaseImpl extends PrincipalBean
 	implements TasksReviewService {
-	public TasksReviewLocalService getTasksReviewLocalService() {
-		return tasksReviewLocalService;
-	}
-
-	public void setTasksReviewLocalService(
-		TasksReviewLocalService tasksReviewLocalService) {
-		this.tasksReviewLocalService = tasksReviewLocalService;
-	}
-
-	public TasksReviewService getTasksReviewService() {
-		return tasksReviewService;
-	}
-
-	public void setTasksReviewService(TasksReviewService tasksReviewService) {
-		this.tasksReviewService = tasksReviewService;
-	}
-
-	public TasksReviewPersistence getTasksReviewPersistence() {
-		return tasksReviewPersistence;
-	}
-
-	public void setTasksReviewPersistence(
-		TasksReviewPersistence tasksReviewPersistence) {
-		this.tasksReviewPersistence = tasksReviewPersistence;
-	}
-
 	public TasksProposalLocalService getTasksProposalLocalService() {
 		return tasksProposalLocalService;
 	}
@@ -112,6 +86,32 @@ public abstract class TasksReviewServiceBaseImpl extends PrincipalBean
 
 	public void setTasksProposalFinder(TasksProposalFinder tasksProposalFinder) {
 		this.tasksProposalFinder = tasksProposalFinder;
+	}
+
+	public TasksReviewLocalService getTasksReviewLocalService() {
+		return tasksReviewLocalService;
+	}
+
+	public void setTasksReviewLocalService(
+		TasksReviewLocalService tasksReviewLocalService) {
+		this.tasksReviewLocalService = tasksReviewLocalService;
+	}
+
+	public TasksReviewService getTasksReviewService() {
+		return tasksReviewService;
+	}
+
+	public void setTasksReviewService(TasksReviewService tasksReviewService) {
+		this.tasksReviewService = tasksReviewService;
+	}
+
+	public TasksReviewPersistence getTasksReviewPersistence() {
+		return tasksReviewPersistence;
+	}
+
+	public void setTasksReviewPersistence(
+		TasksReviewPersistence tasksReviewPersistence) {
+		this.tasksReviewPersistence = tasksReviewPersistence;
 	}
 
 	public CounterLocalService getCounterLocalService() {
@@ -198,12 +198,6 @@ public abstract class TasksReviewServiceBaseImpl extends PrincipalBean
 		}
 	}
 
-	@BeanReference(name = "com.liferay.portlet.tasks.service.TasksReviewLocalService.impl")
-	protected TasksReviewLocalService tasksReviewLocalService;
-	@BeanReference(name = "com.liferay.portlet.tasks.service.TasksReviewService.impl")
-	protected TasksReviewService tasksReviewService;
-	@BeanReference(name = "com.liferay.portlet.tasks.service.persistence.TasksReviewPersistence.impl")
-	protected TasksReviewPersistence tasksReviewPersistence;
 	@BeanReference(name = "com.liferay.portlet.tasks.service.TasksProposalLocalService.impl")
 	protected TasksProposalLocalService tasksProposalLocalService;
 	@BeanReference(name = "com.liferay.portlet.tasks.service.TasksProposalService.impl")
@@ -212,6 +206,12 @@ public abstract class TasksReviewServiceBaseImpl extends PrincipalBean
 	protected TasksProposalPersistence tasksProposalPersistence;
 	@BeanReference(name = "com.liferay.portlet.tasks.service.persistence.TasksProposalFinder.impl")
 	protected TasksProposalFinder tasksProposalFinder;
+	@BeanReference(name = "com.liferay.portlet.tasks.service.TasksReviewLocalService.impl")
+	protected TasksReviewLocalService tasksReviewLocalService;
+	@BeanReference(name = "com.liferay.portlet.tasks.service.TasksReviewService.impl")
+	protected TasksReviewService tasksReviewService;
+	@BeanReference(name = "com.liferay.portlet.tasks.service.persistence.TasksReviewPersistence.impl")
+	protected TasksReviewPersistence tasksReviewPersistence;
 	@BeanReference(name = "com.liferay.counter.service.CounterLocalService.impl")
 	protected CounterLocalService counterLocalService;
 	@BeanReference(name = "com.liferay.counter.service.CounterService.impl")

@@ -859,20 +859,20 @@ Liferay.Service.registerClass(
 Liferay.Service.register("Liferay.Service.Tasks", "com.liferay.portlet.tasks.service");
 
 Liferay.Service.registerClass(
-	Liferay.Service.Tasks, "TasksReview",
-	{
-		approveReview: true,
-		rejectReview: true,
-		updateReviews: true
-	}
-);
-
-Liferay.Service.registerClass(
 	Liferay.Service.Tasks, "TasksProposal",
 	{
 		addProposal: true,
 		deleteProposal: true,
 		updateProposal: true
+	}
+);
+
+Liferay.Service.registerClass(
+	Liferay.Service.Tasks, "TasksReview",
+	{
+		approveReview: true,
+		rejectReview: true,
+		updateReviews: true
 	}
 );
 
