@@ -916,7 +916,7 @@ public class SourceFormatter {
 	}
 
 	private static final String[] _TAG_LIBRARIES = new String[] {
-		"c", "html", "jsp", "liferay-portlet", "liferay-security",
+		"aui", "c", "html", "jsp", "liferay-portlet", "liferay-security",
 		"liferay-theme", "liferay-ui", "liferay-util", "portlet", "struts",
 		"tiles"
 	};

@@ -186,7 +186,7 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 	<portlet:param name="struts_action" value="/blogs/edit_entry" />
 </portlet:actionURL>
 
-<aui:form action="<%= editEntryURL %>" method="post" name="fm" onSubmit="<%= renderResponse.getNamespace() + "saveEntry(false); return false;" %>">
+<aui:form action="<%= editEntryURL %>" method="post" name="fm" onSubmit='<%= renderResponse.getNamespace() + "saveEntry(false); return false;" %>'>
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(redirect) %>" />
 <input name="<portlet:namespace />referringPortletResource" type="hidden" value="<%= HtmlUtil.escapeAttribute(referringPortletResource) %>" />
@@ -249,7 +249,7 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 	</c:if>
 
 	<aui:button-row>
-		<aui:button name="saveButton" type="submit" value="<%= ((entry == null) || entry.isDraft()) ? "publish" : "save" %>" />
+		<aui:button name="saveButton" type="submit" value='<%= ((entry == null) || entry.isDraft()) ? "publish" : "save" %>' />
 		<aui:button name="cancelButton" type="button" value="cancel" />
 	</aui:button-row>
 </aui:fieldset>
