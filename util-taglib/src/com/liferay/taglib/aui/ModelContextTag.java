@@ -1,4 +1,3 @@
-<%
 /**
  * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
  *
@@ -20,45 +19,41 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%>
 
-<%@ include file="/html/common/init.jsp" %>
+package com.liferay.taglib.aui;
 
-<%
-PortletRequest portletRequest = (PortletRequest)request.getAttribute(JavaConstants.JAVAX_PORTLET_REQUEST);
+import javax.servlet.jsp.tagext.BodyTagSupport;
 
-PortletResponse portletResponse = (PortletResponse)request.getAttribute(JavaConstants.JAVAX_PORTLET_RESPONSE);
+/**
+ * <a href="ModelContextTag.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Jorge Ferrer
+ *
+ */
+public class ModelContextTag extends BodyTagSupport {
 
-String namespace = StringPool.BLANK;
-
-if (portletResponse != null) {
-	namespace = portletResponse.getNamespace();
-}
-
-String currentURL = PortalUtil.getCurrentURL(request);
-%>
-
-<%@ include file="/html/taglib/init-ext.jsp" %>
-
-<%!
-private String _buildDynamicAttributes(Map<String, Object> dynamicAttributes) {
-	if (dynamicAttributes == null) {
-		return StringPool.BLANK;
-	}
-
-	StringBuilder sb = new StringBuilder();
-
-	for (Map.Entry entry : dynamicAttributes.entrySet()) {
-		if (!entry.getKey().equals("class")) {
-			sb.append(entry.getKey());
-			sb.append(StringPool.EQUAL);
-			sb.append(StringPool.QUOTE);
-			sb.append(entry.getValue());
-			sb.append(StringPool.QUOTE);
-			sb.append(StringPool.SPACE);
+	public int doStartTag() {
+		if (_model != null) {
+			pageContext.setAttribute("aui:model-context:bean", _bean);
+			pageContext.setAttribute("aui:model-context:model", _model);
 		}
+		else {
+			pageContext.removeAttribute("aui:model-context:bean");
+			pageContext.removeAttribute("aui:model-context::model");
+		}
+
+		return SKIP_BODY;
 	}
 
-	return sb.toString();
+	public void setBean(Object bean) {
+		_bean = bean;
+	}
+
+	public void setModel(Class model) {
+		_model = model;
+	}
+
+	private Object _bean;
+	private Class _model;
+
 }
-%>

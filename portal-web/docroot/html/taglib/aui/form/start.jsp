@@ -22,43 +22,16 @@
  */
 %>
 
-<%@ include file="/html/common/init.jsp" %>
+<%@ include file="/html/taglib/init.jsp" %>
 
 <%
-PortletRequest portletRequest = (PortletRequest)request.getAttribute(JavaConstants.JAVAX_PORTLET_REQUEST);
+String cssClass = GetterUtil.getString((String)request.getAttribute("aui:form:cssClass"), StringPool.BLANK);
+boolean inlineLabels = GetterUtil.getBoolean((String)request.getAttribute("aui:form:inlineLabels"));
+String name = GetterUtil.getString((String)request.getAttribute("aui:form:name"), "fm");
 
-PortletResponse portletResponse = (PortletResponse)request.getAttribute(JavaConstants.JAVAX_PORTLET_RESPONSE);
+name = portletResponse.getNamespace() + name;
 
-String namespace = StringPool.BLANK;
-
-if (portletResponse != null) {
-	namespace = portletResponse.getNamespace();
-}
-
-String currentURL = PortalUtil.getCurrentURL(request);
+Map<String, Object> dynamicAttributes = (Map<String, Object>)request.getAttribute("aui:form:dynamicAttributes");
 %>
 
-<%@ include file="/html/taglib/init-ext.jsp" %>
-
-<%!
-private String _buildDynamicAttributes(Map<String, Object> dynamicAttributes) {
-	if (dynamicAttributes == null) {
-		return StringPool.BLANK;
-	}
-
-	StringBuilder sb = new StringBuilder();
-
-	for (Map.Entry entry : dynamicAttributes.entrySet()) {
-		if (!entry.getKey().equals("class")) {
-			sb.append(entry.getKey());
-			sb.append(StringPool.EQUAL);
-			sb.append(StringPool.QUOTE);
-			sb.append(entry.getValue());
-			sb.append(StringPool.QUOTE);
-			sb.append(StringPool.SPACE);
-		}
-	}
-
-	return sb.toString();
-}
-%>
+<form class="exp-form <%= cssClass %> <%= inlineLabels ? "inline-labels" : StringPool.BLANK %>" id="<%= name %>" name="<%= name %>" <%= _buildDynamicAttributes(dynamicAttributes) %>>

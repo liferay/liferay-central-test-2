@@ -22,43 +22,28 @@
  */
 %>
 
-<%@ include file="/html/common/init.jsp" %>
+<%@ include file="/html/taglib/init.jsp" %>
 
 <%
-PortletRequest portletRequest = (PortletRequest)request.getAttribute(JavaConstants.JAVAX_PORTLET_REQUEST);
+String name = GetterUtil.getString((String)request.getAttribute("aui:form:name"), "fm");
 
-PortletResponse portletResponse = (PortletResponse)request.getAttribute(JavaConstants.JAVAX_PORTLET_RESPONSE);
-
-String namespace = StringPool.BLANK;
-
-if (portletResponse != null) {
-	namespace = portletResponse.getNamespace();
-}
-
-String currentURL = PortalUtil.getCurrentURL(request);
+name = portletResponse.getNamespace() + name;
 %>
 
-<%@ include file="/html/taglib/init-ext.jsp" %>
+</form>
 
-<%!
-private String _buildDynamicAttributes(Map<String, Object> dynamicAttributes) {
-	if (dynamicAttributes == null) {
-		return StringPool.BLANK;
-	}
-
-	StringBuilder sb = new StringBuilder();
-
-	for (Map.Entry entry : dynamicAttributes.entrySet()) {
-		if (!entry.getKey().equals("class")) {
-			sb.append(entry.getKey());
-			sb.append(StringPool.EQUAL);
-			sb.append(StringPool.QUOTE);
-			sb.append(entry.getValue());
-			sb.append(StringPool.QUOTE);
-			sb.append(StringPool.SPACE);
+<script type="text/javascript">
+	jQuery(
+		function() {
+			jQuery('#<%= name %> :input').focus(
+				function(event) {
+					jQuery(this).parents('.exp-ctrl-holder:first').addClass('exp-row-focused');
+				}
+			).blur(
+				function(event) {
+					jQuery(this).parents('.exp-ctrl-holder:first').removeClass('exp-row-focused');
+				}
+			);
 		}
-	}
-
-	return sb.toString();
-}
-%>
+	);
+</script>

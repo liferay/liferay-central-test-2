@@ -22,43 +22,13 @@
  */
 %>
 
-<%@ include file="/html/common/init.jsp" %>
+<%@ include file="/html/taglib/init.jsp" %>
 
 <%
-PortletRequest portletRequest = (PortletRequest)request.getAttribute(JavaConstants.JAVAX_PORTLET_REQUEST);
+String cssClass = GetterUtil.getString((String)request.getAttribute("aui:fieldset:cssClass"), StringPool.BLANK);
+boolean column = GetterUtil.getBoolean((String)request.getAttribute("aui:fieldset:column"));
 
-PortletResponse portletResponse = (PortletResponse)request.getAttribute(JavaConstants.JAVAX_PORTLET_RESPONSE);
-
-String namespace = StringPool.BLANK;
-
-if (portletResponse != null) {
-	namespace = portletResponse.getNamespace();
-}
-
-String currentURL = PortalUtil.getCurrentURL(request);
+Map<String, Object> dynamicAttributes = (Map<String, Object>)request.getAttribute("aui:fieldset:dynamicAttributes");
 %>
 
-<%@ include file="/html/taglib/init-ext.jsp" %>
-
-<%!
-private String _buildDynamicAttributes(Map<String, Object> dynamicAttributes) {
-	if (dynamicAttributes == null) {
-		return StringPool.BLANK;
-	}
-
-	StringBuilder sb = new StringBuilder();
-
-	for (Map.Entry entry : dynamicAttributes.entrySet()) {
-		if (!entry.getKey().equals("class")) {
-			sb.append(entry.getKey());
-			sb.append(StringPool.EQUAL);
-			sb.append(StringPool.QUOTE);
-			sb.append(entry.getValue());
-			sb.append(StringPool.QUOTE);
-			sb.append(StringPool.SPACE);
-		}
-	}
-
-	return sb.toString();
-}
-%>
+<fieldset class="exp-block-labels <%= cssClass %> <%= column ? "exp-form-column" : StringPool.BLANK %>" <%= _buildDynamicAttributes(dynamicAttributes) %>>
