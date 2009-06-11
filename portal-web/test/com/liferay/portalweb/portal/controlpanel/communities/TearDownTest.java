@@ -41,7 +41,8 @@ public class TearDownTest extends BaseTestCase {
 				selenium.click(RuntimeVariables.replace(
 						"link=Back to My Community"));
 				selenium.waitForPageToLoad("30000");
-				selenium.click(RuntimeVariables.replace("//li[6]/ul/li[1]/a[1]"));
+				selenium.click(RuntimeVariables.replace(
+						"//div[@id='_145_myPlacesContainer']/ul/li[8]/a/span"));
 				selenium.waitForPageToLoad("30000");
 
 				boolean PagePresent = selenium.isElementPresent(
@@ -109,9 +110,10 @@ public class TearDownTest extends BaseTestCase {
 				selenium.click(RuntimeVariables.replace("link=Manage Pages"));
 				selenium.waitForPageToLoad("30000");
 				selenium.click(RuntimeVariables.replace(
-						"//div/ul/li[2]/ul/li[2]/a/span"));
+						"//div[@id='_88_layoutsTreeOutput']/ul/li[2]/ul/li[2]/a/span"));
 				selenium.waitForPageToLoad("30000");
-				selenium.click(RuntimeVariables.replace("link=Page"));
+				selenium.click(RuntimeVariables.replace(
+						"//li[@id='_88_tabs3pageTabsId']/a"));
 				selenium.waitForPageToLoad("30000");
 				selenium.click(RuntimeVariables.replace(
 						"//input[@value='Delete']"));
@@ -125,7 +127,7 @@ public class TearDownTest extends BaseTestCase {
 			case 4:
 
 				boolean MyCommunityPage = selenium.isElementPresent(
-						"my-community-private-pages");
+						"//div[4]/ul/li[2]/a/span[1]");
 
 				if (!MyCommunityPage) {
 					label = 5;
@@ -134,7 +136,7 @@ public class TearDownTest extends BaseTestCase {
 				}
 
 				selenium.click(RuntimeVariables.replace(
-						"my-community-private-pages"));
+						"//div[@id='_145_myPlacesContainer']/ul/li[2]/a/span[1]"));
 				selenium.waitForPageToLoad("30000");
 				selenium.click(RuntimeVariables.replace("link=Control Panel"));
 				selenium.waitForPageToLoad("30000");

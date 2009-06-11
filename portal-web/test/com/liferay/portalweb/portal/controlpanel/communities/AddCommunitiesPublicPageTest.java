@@ -26,20 +26,20 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="AddContentVirtualHostCommunityTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddCommunitiesPublicPageTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class AddContentVirtualHostCommunityTest extends BaseTestCase {
-	public void testAddContentVirtualHostCommunity() throws Exception {
+public class AddCommunitiesPublicPageTest extends BaseTestCase {
+	public void testAddCommunitiesPublicPage() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Control Panel")) {
+				if (selenium.isElementPresent("link=Communities")) {
 					break;
 				}
 			}
@@ -49,15 +49,13 @@ public class AddContentVirtualHostCommunityTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Control Panel"));
+		selenium.click(RuntimeVariables.replace("link=Communities"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Back to My Community"));
+		selenium.typeKeys("_134_name", RuntimeVariables.replace("Test Communit"));
+		selenium.type("_134_name", RuntimeVariables.replace("Test Community"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//li[7]/ul/li[1]/a[2]"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//div[2]/ul/li/a/span"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Add Application");
+		selenium.click("//strong/span");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -65,8 +63,7 @@ public class AddContentVirtualHostCommunityTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent(
-							"//div[@id='News-Announcements']/p/a")) {
+				if (selenium.isElementPresent("link=Manage Pages")) {
 					break;
 				}
 			}
@@ -76,39 +73,21 @@ public class AddContentVirtualHostCommunityTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//div[@id='News-Announcements']/p/a");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Configuration")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click(RuntimeVariables.replace("link=Manage Entries"));
+		selenium.click(RuntimeVariables.replace("link=Manage Pages"));
 		selenium.waitForPageToLoad("30000");
-		selenium.select("_84_distributionScope", "label=General");
+		selenium.click(RuntimeVariables.replace("link=Public Pages"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//input[@value='Add Entry']"));
+		selenium.click(RuntimeVariables.replace("link=Pages"));
 		selenium.waitForPageToLoad("30000");
-		selenium.type("_84_title", RuntimeVariables.replace("Welcome"));
-		selenium.type("_84_content",
-			RuntimeVariables.replace(
-				"Hello and welcome to the Virtual Hosting Test Community!"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.click(RuntimeVariables.replace(
+				"//div[@id='_134_layoutsTreeOutput']/ul/li[2]/a/span"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=New Page"));
+		selenium.typeKeys("_134_name_en_US",
+			RuntimeVariables.replace("Public Page"));
+		selenium.type("_134_name_en_US", RuntimeVariables.replace("Public Page"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Add Page']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
-				"Hello and welcome to the Virtual Hosting Test Community!"));
+				"Your request processed successfully."));
 	}
 }

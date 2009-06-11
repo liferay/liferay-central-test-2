@@ -51,7 +51,8 @@ public class AssertCommunityLARImportTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Back to My Community"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//li[6]/ul/li[1]/a[1]/span"));
+		selenium.click(RuntimeVariables.replace(
+				"//div[@id='_145_myPlacesContainer']/ul/li[8]/a/span"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent(
 				"link=Community LAR Import Test Page"));
@@ -70,7 +71,8 @@ public class AssertCommunityLARImportTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"link=Community LAR Import Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("my-community-private-pages"));
+		selenium.click(RuntimeVariables.replace(
+				"//div[@id='_145_myPlacesContainer']/ul/li[2]/a/span[1]"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Control Panel"));
 		selenium.waitForPageToLoad("30000");

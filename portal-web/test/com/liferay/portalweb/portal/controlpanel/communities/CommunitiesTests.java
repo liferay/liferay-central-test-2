@@ -41,6 +41,8 @@ public class CommunitiesTests extends BaseTests {
 		testSuite.addTestSuite(ControlPanelTest.class);
 		testSuite.addTestSuite(SetupTest.class);
 		testSuite.addTestSuite(AddCommunitiesTest.class);
+		testSuite.addTestSuite(AddCommunitiesPublicPageTest.class);
+		testSuite.addTestSuite(AddCommunitiesPrivatePageTest.class);
 		testSuite.addTestSuite(AssertCommunityDropDownTest.class);
 		testSuite.addTestSuite(AddAsteriskCommunityNameTest.class);
 		testSuite.addTestSuite(AddCommaCommunityNameTest.class);
@@ -60,13 +62,6 @@ public class CommunitiesTests extends BaseTests {
 		testSuite.addTestSuite(AssertNoLARCommunityContentTest.class);
 		testSuite.addTestSuite(ImportCommunityLARTest.class);
 		testSuite.addTestSuite(AssertCommunityLARImportTest.class);
-		testSuite.addTestSuite(AddVirtualHostCommunityTest.class);
-		testSuite.addTestSuite(AddContentVirtualHostCommunityTest.class);
-		testSuite.addTestSuite(AssertVirtualHostDefaultTest.class);
-		testSuite.addTestSuite(EnableVirtualHostingTest.class);
-		testSuite.addTestSuite(AssertVirtualHostingAddressTest.class);
-		testSuite.addTestSuite(DeleteVirtualHostCommunityContentTest.class);
-		testSuite.addTestSuite(DeleteVirtualHostCommunityTest.class);
 		testSuite.addTestSuite(TearDownTest.class);
 		testSuite.addTestSuite(EndControlPanelTest.class);
 

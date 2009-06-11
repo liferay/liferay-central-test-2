@@ -365,7 +365,8 @@ public class TearDownTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click("reservedCredentialsLink");
+				selenium.click("usersLink");
+				selenium.click("link=Reserved Credentials");
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {

@@ -51,8 +51,17 @@ public class AssertCommunityDropDownTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Back to My Community"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent("link=Test Community"));
-		assertTrue(selenium.isElementPresent("//li[5]/ul/li[1]/a[1]"));
-		assertTrue(selenium.isElementPresent("//li[5]/ul/li[2]/a[1]"));
+		assertEquals("Test Community",
+			selenium.getText(
+				"//div[@id='_145_myPlacesContainer']/ul/li[6]/a/span[1]"));
+		assertEquals("Public",
+			selenium.getText(
+				"//div[@id='_145_myPlacesContainer']/ul/li[6]/a/span[2]"));
+		assertEquals("Test Community",
+			selenium.getText(
+				"//div[@id='_145_myPlacesContainer']/ul/li[7]/a/span[1]"));
+		assertEquals("Private",
+			selenium.getText(
+				"//div[@id='_145_myPlacesContainer']/ul/li[7]/a/span[2]"));
 	}
 }

@@ -33,93 +33,76 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class ImportCommunityLARTest extends BaseTestCase {
 	public void testImportCommunityLAR() throws Exception {
-		int label = 1;
-
-		while (label >= 1) {
-			switch (label) {
-			case 1:
-
-				boolean MyCommunityPage = selenium.isElementPresent(
-						"my-community-private-pages");
-
-				if (!MyCommunityPage) {
-					label = 2;
-
-					continue;
-				}
-
-				selenium.click(RuntimeVariables.replace(
-						"my-community-private-pages"));
-				selenium.waitForPageToLoad("30000");
-				selenium.click(RuntimeVariables.replace("link=Control Panel"));
-				selenium.waitForPageToLoad("30000");
-
-			case 2:
-				selenium.click(RuntimeVariables.replace("link=Communities"));
-				selenium.waitForPageToLoad("30000");
-				selenium.typeKeys("_134_name",
-					RuntimeVariables.replace("LAR Communit"));
-				selenium.type("_134_name",
-					RuntimeVariables.replace("LAR Community"));
-				selenium.click(RuntimeVariables.replace(
-						"//input[@value='Search']"));
-				selenium.waitForPageToLoad("30000");
-				selenium.click("//strong/span");
-
-				for (int second = 0;; second++) {
-					if (second >= 60) {
-						fail("timeout");
-					}
-
-					try {
-						if (selenium.isElementPresent(
-									"//body/div[2]/ul/li[2]/a")) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
-
-					Thread.sleep(1000);
-				}
-
-				selenium.click(RuntimeVariables.replace(
-						"//body/div[2]/ul/li[2]/a"));
-				selenium.waitForPageToLoad("30000");
-				selenium.click(RuntimeVariables.replace("link=Export / Import"));
-				selenium.waitForPageToLoad("30000");
-				selenium.click(RuntimeVariables.replace("link=Import"));
-				selenium.waitForPageToLoad("30000");
-
-				for (int second = 0;; second++) {
-					if (second >= 60) {
-						fail("timeout");
-					}
-
-					try {
-						if (selenium.isElementPresent("_134_importFileName")) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
-
-					Thread.sleep(1000);
-				}
-
-				selenium.type("_134_importFileName",
-					RuntimeVariables.replace(
-						"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portal\\controlpanel\\communities\\Community.Selenium.portlet.lar"));
-				selenium.click("_134_PERMISSIONS");
-				selenium.click(RuntimeVariables.replace(
-						"//input[@value='Import']"));
-				selenium.waitForPageToLoad("30000");
-				assertTrue(selenium.isTextPresent(
-						"Your request processed successfully."));
-
-			case 100:
-				label = -1;
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
 			}
+
+			try {
+				if (selenium.isElementPresent("link=Communities")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
 		}
+
+		selenium.click(RuntimeVariables.replace("link=Communities"));
+		selenium.waitForPageToLoad("30000");
+		selenium.typeKeys("_134_name", RuntimeVariables.replace("LAR Communit"));
+		selenium.type("_134_name", RuntimeVariables.replace("LAR Community"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click("//strong/span");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//body/div[2]/ul/li[2]/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace("//body/div[2]/ul/li[2]/a"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("link=Export / Import"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("link=Import"));
+		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("_134_importFileName")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.type("_134_importFileName",
+			RuntimeVariables.replace(
+				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portal\\controlpanel\\communities\\Community.Selenium.portlet.lar"));
+		selenium.click("_134_PERMISSIONS");
+		selenium.click(RuntimeVariables.replace("//input[@value='Import']"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
 	}
 }

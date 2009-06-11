@@ -26,26 +26,20 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="EnableVirtualHostingTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddCommunitiesPrivatePageTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class EnableVirtualHostingTest extends BaseTestCase {
-	public void testEnableVirtualHosting() throws Exception {
-		selenium.click(RuntimeVariables.replace("link=Control Panel"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Communities"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click("//tr[6]/td[6]/ul/li/strong/span");
-
+public class AddCommunitiesPrivatePageTest extends BaseTestCase {
+	public void testAddCommunitiesPrivatePage() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("//body/div[2]/ul/li[2]/a")) {
+				if (selenium.isElementPresent("link=Communities")) {
 					break;
 				}
 			}
@@ -55,22 +49,44 @@ public class EnableVirtualHostingTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//body/div[2]/ul/li[2]/a"));
+		selenium.click(RuntimeVariables.replace("link=Communities"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//form/ul[1]/li[3]/a"));
+		selenium.typeKeys("_134_name", RuntimeVariables.replace("Test Communit"));
+		selenium.type("_134_name", RuntimeVariables.replace("Test Community"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Virtual Host"));
+		selenium.click("//strong/span");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Manage Pages")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace("link=Manage Pages"));
 		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_134_publicVirtualHost",
-			RuntimeVariables.replace("www.able.com"));
-		selenium.type("_134_publicVirtualHost",
-			RuntimeVariables.replace("www.able.com"));
-		selenium.type("_134_privateVirtualHost", RuntimeVariables.replace(""));
-		selenium.typeKeys("_134_friendlyURL",
-			RuntimeVariables.replace("/virtual-hosting-test-communit"));
-		selenium.type("_134_friendlyURL",
-			RuntimeVariables.replace("/virtual-hosting-test-community"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.click(RuntimeVariables.replace("link=Private Pages"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("link=Pages"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace(
+				"//div[@id='_134_layoutsTreeOutput']/ul/li[2]/a/span"));
+		selenium.waitForPageToLoad("30000");
+		selenium.typeKeys("_134_name_en_US",
+			RuntimeVariables.replace("Private Page"));
+		selenium.type("_134_name_en_US",
+			RuntimeVariables.replace("Private Page"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Add Page']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));

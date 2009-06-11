@@ -40,7 +40,7 @@ public class MergeOrganizationPageTest extends BaseTestCase {
 			case 1:
 
 				boolean NotInControlPanel = selenium.isElementPresent(
-						"my-community-public-pages");
+						"//div[4]/ul/li[2]/a/span[1]");
 
 				if (!NotInControlPanel) {
 					label = 2;
@@ -49,7 +49,7 @@ public class MergeOrganizationPageTest extends BaseTestCase {
 				}
 
 				selenium.click(RuntimeVariables.replace(
-						"//a[@id='my-community-public-pages']"));
+						"//div[@id='_145_myPlacesContainer']/ul/li[2]/a/span[1]"));
 				selenium.waitForPageToLoad("30000");
 				selenium.click(RuntimeVariables.replace("link=Control Panel"));
 				selenium.waitForPageToLoad("30000");

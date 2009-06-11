@@ -49,7 +49,7 @@ public class AddUserGroupTest extends BaseTestCase {
 				}
 
 				selenium.click(RuntimeVariables.replace(
-						"my-community-private-pages"));
+						"//div[@id='_145_myPlacesContainer']/ul/li[2]/a/span[1]"));
 				selenium.waitForPageToLoad("30000");
 				selenium.click(RuntimeVariables.replace("link=Control Panel"));
 				selenium.waitForPageToLoad("30000");

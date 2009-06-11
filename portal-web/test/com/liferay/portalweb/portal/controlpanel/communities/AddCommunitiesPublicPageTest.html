@@ -1,16 +1,16 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>EnableVirtualHostingTest</title>
+<title>AddCommunitiesPublicPageTest</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">EnableVirtualHostingTest</td></tr>
+<tr><td rowspan="1" colspan="3">AddCommunitiesPublicPageTest</td></tr>
 </thead><tbody>
 <tr>
-	<td>clickAndWait</td>
-	<td>link=Control Panel</td>
+	<td>waitForElementPresent</td>
+	<td>link=Communities</td>
 	<td></td>
 </tr>
 <tr>
@@ -19,58 +19,63 @@
 	<td></td>
 </tr>
 <tr>
+	<td>typeKeys</td>
+	<td>_134_name</td>
+	<td>Test Communit</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_134_name</td>
+	<td>Test Community</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Search']</td>
+	<td></td>
+</tr>
+<tr>
 	<td>click</td>
-	<td>//tr[6]/td[6]/ul/li/strong/span</td>
+	<td>//strong/span</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//body/div[2]/ul/li[2]/a</td>
+	<td>link=Manage Pages</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//body/div[2]/ul/li[2]/a</td>
+	<td>link=Manage Pages</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//form/ul[1]/li[3]/a</td>
+	<td>link=Public Pages</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Virtual Host</td>
+	<td>link=Pages</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='_134_layoutsTreeOutput']/ul/li[2]/a/span</td>
 	<td></td>
 </tr>
 <tr>
 	<td>typeKeys</td>
-	<td>_134_publicVirtualHost</td>
-	<td>www.able.com</td>
+	<td>_134_name_en_US</td>
+	<td>Public Page</td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>_134_publicVirtualHost</td>
-	<td>www.able.com</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>_134_privateVirtualHost</td>
-	<td></td>
-</tr>
-<tr>
-	<td>typeKeys</td>
-	<td>_134_friendlyURL</td>
-	<td>/virtual-hosting-test-communit</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>_134_friendlyURL</td>
-	<td>/virtual-hosting-test-community</td>
+	<td>_134_name_en_US</td>
+	<td>Public Page</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//input[@value='Save']</td>
+	<td>//input[@value='Add Page']</td>
 	<td></td>
 </tr>
 <tr>

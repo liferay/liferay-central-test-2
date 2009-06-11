@@ -39,7 +39,7 @@ public class AssertNoLARCommunityContentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Back to My Community")) {
+				if (selenium.isElementPresent("link=Communities")) {
 					break;
 				}
 			}
@@ -49,12 +49,12 @@ public class AssertNoLARCommunityContentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Back to My Community"));
+		selenium.click(RuntimeVariables.replace("link=Communities"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//li[6]/ul/li[2]/a[2]"));
+		selenium.typeKeys("_134_name", RuntimeVariables.replace("LAR Communit"));
+		selenium.type("_134_name", RuntimeVariables.replace("LAR Community"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=New Page"));
-		selenium.waitForPageToLoad("30000");
-		assertFalse(selenium.isElementPresent("//img[@alt='Configuration']"));
+		assertFalse(selenium.isElementPresent("link=New Page"));
 	}
 }

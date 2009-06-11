@@ -57,6 +57,24 @@ public class SettingsTest extends BaseTestCase {
 		selenium.type("_130_tickerSymbol", RuntimeVariables.replace("LFRY"));
 		selenium.type("_130_industry", RuntimeVariables.replace("Web Portal"));
 		selenium.type("_130_type", RuntimeVariables.replace("Open Source"));
+		selenium.click("displaySettingsLink");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("_130_timeZoneId")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.select("_130_timeZoneId",
 			RuntimeVariables.replace("label=(UTC -08:00) Pacific Standard Time"));
 		selenium.click("additionalEmailAddressesLink");
@@ -186,14 +204,15 @@ public class SettingsTest extends BaseTestCase {
 		selenium.click("link=SiteMinder");
 		assertTrue(selenium.isElementPresent(
 				"_130_settings(siteminder.auth.enabled)Checkbox"));
-		selenium.click("defaultUserAssociationsLink");
+		selenium.click("usersLink");
+		selenium.click("link=Default User Associations");
 		assertTrue(selenium.isElementPresent(
 				"_130_settings(admin.default.group.names)"));
 		assertTrue(selenium.isElementPresent(
 				"_130_settings(admin.default.role.names)"));
 		assertTrue(selenium.isElementPresent(
 				"_130_settings(admin.default.user.group.names)"));
-		selenium.click("reservedCredentialsLink");
+		selenium.click("link=Reserved Credentials");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

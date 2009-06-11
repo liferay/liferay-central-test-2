@@ -1,12 +1,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>ImportCommunityLARTest</title>
+<title>AddCommunitiesPrivatePageTest</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">ImportCommunityLARTest</td></tr>
+<tr><td rowspan="1" colspan="3">AddCommunitiesPrivatePageTest</td></tr>
 </thead><tbody>
 <tr>
 	<td>waitForElementPresent</td>
@@ -21,12 +21,12 @@
 <tr>
 	<td>typeKeys</td>
 	<td>_134_name</td>
-	<td>LAR Communit</td>
+	<td>Test Communit</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>_134_name</td>
-	<td>LAR Community</td>
+	<td>Test Community</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -40,42 +40,42 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//body/div[2]/ul/li[2]/a</td>
+	<td>link=Manage Pages</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//body/div[2]/ul/li[2]/a</td>
+	<td>link=Manage Pages</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Export / Import</td>
+	<td>link=Private Pages</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Import</td>
+	<td>link=Pages</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>_134_importFileName</td>
+	<td>clickAndWait</td>
+	<td>//div[@id='_134_layoutsTreeOutput']/ul/li[2]/a/span</td>
 	<td></td>
+</tr>
+<tr>
+	<td>typeKeys</td>
+	<td>_134_name_en_US</td>
+	<td>Private Page</td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>_134_importFileName</td>
-	<td>L:\portal\build\portal-web\test\com\liferay\portalweb\portal\controlpanel\communities\Community.Selenium.portlet.lar</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>_134_PERMISSIONS</td>
-	<td></td>
+	<td>_134_name_en_US</td>
+	<td>Private Page</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//input[@value='Import']</td>
+	<td>//input[@value='Add Page']</td>
 	<td></td>
 </tr>
 <tr>
