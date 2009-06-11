@@ -7,22 +7,25 @@
 >
 
 	<!-- Monitoring service -->
+	<bean id="portalStatistics" class="com.liferay.portal.monitoring.statistics.portal.ServerStatistics">
+		<constructor-arg index="0" ref="com.liferay.portal.service.CompanyLocalService.impl" type="com.liferay.portal.service.CompanyLocalService" />
+	</bean>
+
+	<bean id="portletStatistics" class="com.liferay.portal.monitoring.statistics.portlet.ServerStatistics">
+		<constructor-arg index="0" ref="com.liferay.portal.service.CompanyLocalService.impl" type="com.liferay.portal.service.CompanyLocalService" />
+	</bean>
 
 	<bean id="com.liferay.portal.monitoring.MonitoringService" class="com.liferay.portal.monitoring.DefaultMonitoringService">
 		<property name="dataSampleProcessors">
 			<map>
 				<entry key="com.liferay.monitoring.Portal">
 					<list>
-						<bean class="com.liferay.portal.monitoring.statistics.portal.ServerStatistics">
-							<constructor-arg index="0" ref="com.liferay.portal.service.CompanyLocalService.impl" type="com.liferay.portal.service.CompanyLocalService" />
-						</bean>
+						<ref bean="portalStatistics"/>
 					</list>
 				</entry>
 				<entry key="com.liferay.monitoring.Portlet">
 					<list>
-						<bean class="com.liferay.portal.monitoring.statistics.portlet.ServerStatistics">
-							<constructor-arg index="0" ref="com.liferay.portal.service.CompanyLocalService.impl" type="com.liferay.portal.service.CompanyLocalService" />
-						</bean>
+						<ref bean="portletStatistics"/>
 					</list>
 				</entry>
 			</map>
@@ -43,13 +46,51 @@
 	</bean>
 	<bean id="com.liferay.portal.servlet.filters.monitoring.jmx.MonitoringFilterManager" class="com.liferay.portal.servlet.filters.monitoring.jmx.MonitoringFilterManager" />
 	<bean id="com.liferay.portlet.MonitoringPortletManager" class="com.liferay.portlet.MonitoringPortletManager" />
+	<bean id="com.liferay.portal.monitoring.jmx.ActionRequestPortletContainerManager" class="com.liferay.portal.monitoring.jmx.PortletContainerContainerManager">
+		<constructor-arg index="0" ref="portletStatistics" type="com.liferay.portal.monitoring.statistics.portlet.ServerStatistics"/>
+		<constructor-arg index="1" type="com.liferay.portal.monitoring.statistics.portlet.PortletStatisticsSummaryCalculator">
+			<bean class="com.liferay.portal.monitoring.statistics.portlet.ActionRequestStatisticsCalculator">
+				<constructor-arg index="0" ref="portletStatistics" type="com.liferay.portal.monitoring.statistics.portlet.ServerStatistics"/>
+			</bean>
+		</constructor-arg>
+	</bean>
+	<bean id="com.liferay.portal.monitoring.jmx.EventRequestPortletContainerManager" class="com.liferay.portal.monitoring.jmx.PortletContainerContainerManager">
+		<constructor-arg index="0" ref="portletStatistics" type="com.liferay.portal.monitoring.statistics.portlet.ServerStatistics"/>
+		<constructor-arg index="1" type="com.liferay.portal.monitoring.statistics.portlet.PortletStatisticsSummaryCalculator">
+			<bean class="com.liferay.portal.monitoring.statistics.portlet.EventRequestStatisticsCalculator">
+				<constructor-arg index="0" ref="portletStatistics" type="com.liferay.portal.monitoring.statistics.portlet.ServerStatistics"/>
+			</bean>
+		</constructor-arg>
+	</bean>
+	<bean id="com.liferay.portal.monitoring.jmx.RenderRequestPortletContainerManager" class="com.liferay.portal.monitoring.jmx.PortletContainerContainerManager">
+		<constructor-arg index="0" ref="portletStatistics" type="com.liferay.portal.monitoring.statistics.portlet.ServerStatistics"/>
+		<constructor-arg index="1" type="com.liferay.portal.monitoring.statistics.portlet.PortletStatisticsSummaryCalculator">
+			<bean class="com.liferay.portal.monitoring.statistics.portlet.RenderRequestStatisticsCalculator">
+				<constructor-arg index="0" ref="portletStatistics" type="com.liferay.portal.monitoring.statistics.portlet.ServerStatistics"/>
+			</bean>
+		</constructor-arg>
+	</bean>
+	<bean id="com.liferay.portal.monitoring.jmx.ResourceRequestPortletContainerManager" class="com.liferay.portal.monitoring.jmx.PortletContainerContainerManager">
+		<constructor-arg index="0" ref="portletStatistics" type="com.liferay.portal.monitoring.statistics.portlet.ServerStatistics"/>
+		<constructor-arg index="1" type="com.liferay.portal.monitoring.statistics.portlet.PortletStatisticsSummaryCalculator">
+			<bean class="com.liferay.portal.monitoring.statistics.portlet.ResourceRequestStatisticsCalculator">
+				<constructor-arg index="0" ref="portletStatistics" type="com.liferay.portal.monitoring.statistics.portlet.ServerStatistics"/>
+			</bean>
+		</constructor-arg>
+	</bean>
+
 	<bean id="monitoringMBeanExporter" class="org.springframework.jmx.export.MBeanExporter">
 		<property name="beans">
 			<map>
-				<entry key="bean:name=com.liferay.portal.monitoring.DataSampleThreadLocalManager" value-ref="com.liferay.portal.monitoring.jmx.DataSampleThreadLocalManager" />
-				<entry key="bean:name=com.liferay.portal.monitoring.MonitoringServiceManager" value-ref="com.liferay.portal.monitoring.jmx.MonitoringServiceManager" />
-				<entry key="bean:name=com.liferay.portal.servlet.filters.monitoring.jmx.MonitoringFilterManager" value-ref="com.liferay.portal.servlet.filters.monitoring.jmx.MonitoringFilterManager" />
-				<entry key="bean:name=com.liferay.portlet.MonitoringPortletManager" value-ref="com.liferay.portlet.MonitoringPortletManager" />
+				<entry key="com.liferay.portal:classification=instrumentation,name=DataSampleThreadLocalManager" value-ref="com.liferay.portal.monitoring.jmx.DataSampleThreadLocalManager" />
+				<entry key="com.liferay.portal:classification=instrumentation,name=MonitoringFilterManager" value-ref="com.liferay.portal.servlet.filters.monitoring.jmx.MonitoringFilterManager" />
+				<entry key="com.liferay.portal:classification=instrumentation,name=MonitoringPortletManager" value-ref="com.liferay.portlet.MonitoringPortletManager" />
+				<entry key="com.liferay.portal:classification=monitoring_service,name=MonitoringServiceManager" value-ref="com.liferay.portal.monitoring.jmx.MonitoringServiceManager" />
+
+				<entry key="com.liferay.portal:classification=portlet,name=ActionRequestPortletContainerManager" value-ref="com.liferay.portal.monitoring.jmx.ActionRequestPortletContainerManager" />
+				<entry key="com.liferay.portal:classification=portlet,name=EventRequestPortletContainerManager" value-ref="com.liferay.portal.monitoring.jmx.EventRequestPortletContainerManager" />
+				<entry key="com.liferay.portal:classification=portlet,name=RenderRequestPortletContainerManager" value-ref="com.liferay.portal.monitoring.jmx.RenderRequestPortletContainerManager" />
+				<entry key="com.liferay.portal:classification=portlet,name=ResourceRequestPortletContainerManager" value-ref="com.liferay.portal.monitoring.jmx.ResourceRequestPortletContainerManager" />
 			</map>
 		</property>
 		<property name="server" ref="mbeanServer" />

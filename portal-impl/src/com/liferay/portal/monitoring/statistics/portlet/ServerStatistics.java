@@ -23,11 +23,16 @@
 package com.liferay.portal.monitoring.statistics.portlet;
 
 import com.liferay.portal.model.Company;
+import com.liferay.portal.monitoring.MonitoringException;
 import com.liferay.portal.monitoring.statistics.DataSampleProcessor;
 import com.liferay.portal.service.CompanyLocalService;
 
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.Set;
+import java.util.TreeMap;
 
 /**
  * <a href="ServerStatistics.java.html"><b><i>View Source</i></b></a>
@@ -41,14 +46,68 @@ public class ServerStatistics
 	public ServerStatistics(CompanyLocalService companyLocalService) {
 		_companyLocalService = companyLocalService;
 		_companyStatisticsByCompanyId =
-			new ConcurrentHashMap<Long, CompanyStatistics>();
+			new TreeMap<Long, CompanyStatistics>();
 		_companyStatisticsByWebId =
-			new ConcurrentHashMap<String, CompanyStatistics>();
+			new TreeMap<String, CompanyStatistics>();
+	}
+
+	public Set<Long> getCompanyIds() {
+		return _companyStatisticsByCompanyId.keySet();
+	}
+
+	public Set<String> getCompanyWebIds() {
+		return _companyStatisticsByWebId.keySet();
+	}
+
+	public Collection<CompanyStatistics> getPortletContainerStatistics() {
+		return Collections.unmodifiableCollection(_companyStatisticsByWebId.values());
+	}
+
+	public CompanyStatistics getPortletContainerStatistics(
+			long companyId)
+		throws MonitoringException {
+
+		CompanyStatistics statistics =
+			_companyStatisticsByCompanyId.get(companyId);
+
+		if (statistics == null) {
+			throw new MonitoringException(
+				"No statistics found for: " + companyId);
+		}
+
+		return statistics;
+	}
+
+	public CompanyStatistics getPortletContainerStatistics(
+			String webId)
+		throws MonitoringException {
+
+		CompanyStatistics statistics =
+			_companyStatisticsByWebId.get(webId);
+
+		if (statistics == null) {
+			throw new MonitoringException(
+				"No statistics found for : " + webId);
+		}
+
+		return statistics;
+	}
+
+	public Set<String> getPortletIds() {
+		Set<String> portletIds = new HashSet<String>();
+
+		for (CompanyStatistics containerStatistics :
+			_companyStatisticsByWebId.values()) {
+
+			portletIds.addAll(containerStatistics.getPortletIds());
+		}
+
+		return portletIds;
 	}
 
 	public void processDataSample(
-		PortletRequestDataSample portletRequestDataSample) {
-
+		PortletRequestDataSample portletRequestDataSample)
+		throws MonitoringException {
 		long companyId = portletRequestDataSample.getCompanyId();
 
 		CompanyStatistics companyStatistics = _companyStatisticsByCompanyId.get(
@@ -62,14 +121,14 @@ public class ServerStatistics
 			}
 			catch (Exception e) {
 				throw new IllegalStateException(
-					"Unable to get company with company id " + companyId);
+					"Unable to get company with company id " + companyId, e);
 			}
 		}
 
 		companyStatistics.processDataSample(portletRequestDataSample);
 	}
 
-	public CompanyStatistics register(String webId) {
+	public synchronized CompanyStatistics register(String webId) {
 		CompanyStatistics companyStatistics = new CompanyStatistics(
 			_companyLocalService, webId);
 
@@ -80,7 +139,7 @@ public class ServerStatistics
 		return companyStatistics;
 	}
 
-	public void unregister(String webId) {
+	public synchronized void unregister(String webId) {
 		CompanyStatistics companyStatistics = _companyStatisticsByWebId.remove(
 			webId);
 
@@ -88,6 +147,34 @@ public class ServerStatistics
 			_companyStatisticsByCompanyId.remove(
 				companyStatistics.getCompanyId());
 		}
+	}
+
+	public void reset() {
+		for (long companyId : _companyStatisticsByCompanyId.keySet()) {
+			reset(companyId);
+		}
+	}
+
+	public void reset(long companyId) {
+		CompanyStatistics companyStatistics =
+			_companyStatisticsByCompanyId.get(companyId);
+
+		if (companyStatistics == null) {
+			return;
+		}
+
+		companyStatistics.reset();
+	}
+
+	public void reset(String companyWebId) {
+		CompanyStatistics companyStatistics =
+			_companyStatisticsByWebId.get(companyWebId);
+
+		if (companyStatistics == null) {
+			return;
+		}
+
+		companyStatistics.reset();
 	}
 
 	private CompanyLocalService _companyLocalService;

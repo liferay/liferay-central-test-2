@@ -22,8 +22,11 @@
 
 package com.liferay.portal.monitoring.messaging;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageListener;
+import com.liferay.portal.monitoring.MonitoringException;
 import com.liferay.portal.monitoring.statistics.DataSample;
 import com.liferay.portal.monitoring.statistics.DataSampleProcessor;
 
@@ -42,13 +45,22 @@ public class MonitoringMessageListener implements MessageListener {
 	}
 
 	public void receive(Message message) {
-		DataSample dataSample = (DataSample)message.getPayload();
+		try {
+			DataSample dataSample = (DataSample)message.getPayload();
 
-		if (dataSample != null) {
-			_dataSampleProcessor.processDataSample(dataSample);
+			if (dataSample != null) {
+				_dataSampleProcessor.processDataSample(dataSample);
+			}
+		}
+		catch (MonitoringException e) {
+			if (_log.isErrorEnabled()) {
+			    _log.error("Unable to process", e);
+			}
 		}
 	}
 
+	private static Log _log =
+		LogFactoryUtil.getLog(MonitoringMessageListener.class);
 	private DataSampleProcessor<DataSample> _dataSampleProcessor;
 
 }

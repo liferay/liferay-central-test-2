@@ -26,45 +26,81 @@ package com.liferay.portal.monitoring.statistics;
  * <a href="RequestStatistics.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael C. Han
- *
  */
 public class RequestStatistics implements Statistics {
 
 	public RequestStatistics(String name) {
 		_name = name;
-		_successStatistics = new RollingAverageStatistics(name);
 		_errorStatistics = new CountStatistics(name);
-		_timeoutStatistics = new CountStatistics(name);
+		_timeCountStatistics = new CountStatistics(name);
+		_successStatistics = new RollingAverageStatistics(name);
 	}
 
 	public String getDescription() {
 		return _description;
 	}
 
-	public CountStatistics getErrorStatistics() {
-		return _errorStatistics;
+	public long getMaxTime() {
+		return _successStatistics.getMaxTime();
+	}
+
+	public long getMinTime() {
+		return _successStatistics.getMinTime();
 	}
 
 	public String getName() {
 		return _name;
 	}
 
-	public RollingAverageStatistics getSuccessStatistics() {
-		return _successStatistics;
+	public long getNumErrors() {
+		return _errorStatistics.getCount();
 	}
 
-	public CountStatistics getTimeoutStatistics() {
-		return _timeoutStatistics;
+	public long getNumRequests() {
+		return getNumErrors() +
+			   getNumTimeouts() +
+			   getNumSuccesses();
+	}
+
+	public long getNumTimeouts() {
+		return _timeCountStatistics.getCount();
+	}
+
+	public long getRollingAverageTime() {
+		return _successStatistics.getRollingAverageTime();
+	}
+
+	public void incrementError() {
+		_errorStatistics.incrementCount();
+	}
+
+	public void incrementSuccessDuration(long duration) {
+		_successStatistics.addDuration(duration);
+	}
+
+	public void incrementTimeout() {
+		_timeCountStatistics.incrementCount();
 	}
 
 	public void setDescription(String description) {
 		_description = description;
 	}
 
-	private String _description;
-	private CountStatistics _errorStatistics;
-	private String _name;
-	private RollingAverageStatistics _successStatistics;
-	private CountStatistics _timeoutStatistics;
+	public long getNumSuccesses() {
+		return _successStatistics.getCount();
+	}
 
+	public void reset() {
+		_errorStatistics.reset();
+
+		_timeCountStatistics.reset();
+
+		_successStatistics.reset();
+	}
+
+	private CountStatistics _errorStatistics;
+	private CountStatistics _timeCountStatistics;
+	private RollingAverageStatistics _successStatistics;
+	private String _description;
+	private String _name;
 }

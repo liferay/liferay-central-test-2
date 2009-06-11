@@ -22,6 +22,8 @@
 
 package com.liferay.portal.monitoring.statistics;
 
+import com.liferay.portal.monitoring.MonitoringException;
+
 /**
  * <a href="DataSampleProcessor.java.html"><b><i>View Source</i></b></a>
  *
@@ -30,6 +32,6 @@ package com.liferay.portal.monitoring.statistics;
  */
 public interface DataSampleProcessor<T extends DataSample> {
 
-	public void processDataSample(T dataSample);
+	public void processDataSample(T dataSample) throws MonitoringException;
 
 }

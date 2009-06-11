@@ -54,18 +54,17 @@ public class RollingAverageStatistics extends BaseStatistics {
 		else {
 			long span = 0;
 
-			if (_countStatistics.getCount() < getLowerBound()) {
+			long currentCount = _countStatistics.getCount();
+
+			// span should be at least LowerBound
+			if (currentCount < getLowerBound()) {
 				span = getLowerBound();
 			}
-			else {
-				span = _countStatistics.getCount();
-			}
-
-			if ((_countStatistics.getCount() > getUpperBound())) {
+			else if ((currentCount > getUpperBound())) {
 				span = getUpperBound();
 			}
 			else {
-				span = _countStatistics.getCount();
+				span = currentCount;
 			}
 
 			_rollingAverageTime =
@@ -73,6 +72,10 @@ public class RollingAverageStatistics extends BaseStatistics {
 		}
 
 		setLastSampleTime(System.currentTimeMillis());
+	}
+
+	public long getCount() {
+		return _countStatistics.getCount();
 	}
 
 	public long getRollingAverageTime() {

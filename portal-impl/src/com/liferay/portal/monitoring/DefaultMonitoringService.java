@@ -54,7 +54,8 @@ public class DefaultMonitoringService
 		return monitoringLevel;
 	}
 
-	public void processDataSample(DataSample dataSample) {
+	public void processDataSample(DataSample dataSample)
+		throws MonitoringException {
 		String namespace = dataSample.getNamespace();
 
 		MonitoringLevel monitoringLevel = _monitoringLevels.get(namespace);

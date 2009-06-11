@@ -23,9 +23,15 @@
 package com.liferay.portal.monitoring.statistics.portlet;
 
 import com.liferay.portal.model.Company;
+import com.liferay.portal.monitoring.MonitoringException;
 import com.liferay.portal.monitoring.statistics.DataSampleProcessor;
+import com.liferay.portal.monitoring.statistics.RequestStatistics;
 import com.liferay.portal.service.CompanyLocalService;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -56,8 +62,159 @@ public class CompanyStatistics
 		}
 	}
 
+	public Collection<RequestStatistics> getActionStatistics()
+		throws MonitoringException {
+
+		Collection<PortletStatistics> portletsStats =
+			_portletStatisticsByPortletId.values();
+
+		if (portletsStats.isEmpty()) {
+			return Collections.EMPTY_LIST;
+		}
+
+		List<RequestStatistics> actionStatistics =
+			new ArrayList<RequestStatistics>(portletsStats.size());
+
+		for (PortletStatistics portletStats : portletsStats) {
+			actionStatistics.add(portletStats.getActionStatistics());
+		}
+
+		return actionStatistics;
+	}
+
+	public RequestStatistics getActionStatistics(String portletId)
+		throws MonitoringException {
+
+		PortletStatistics portletStats =
+			_portletStatisticsByPortletId.get(portletId);
+
+		if (portletStats == null) {
+			throw new MonitoringException(
+				"No portlet found with id: " + portletId);
+		}
+
+		return portletStats.getActionStatistics();
+	}
+
 	public long getCompanyId() {
 		return _companyId;
+	}
+
+	public Collection<RequestStatistics> getEventStatistics()
+		throws MonitoringException {
+
+		Collection<PortletStatistics> portletsStats =
+			_portletStatisticsByPortletId.values();
+
+		if (portletsStats.isEmpty()) {
+			return Collections.EMPTY_LIST;
+		}
+
+		List<RequestStatistics> eventStatistics =
+			new ArrayList<RequestStatistics>(portletsStats.size());
+
+		for (PortletStatistics portletStats : portletsStats) {
+			eventStatistics.add(portletStats.getEventStatistics());
+		}
+
+		return eventStatistics;
+	}
+
+	public RequestStatistics getEventStatistics(String portletId)
+		throws MonitoringException {
+
+		PortletStatistics portletStats =
+			_portletStatisticsByPortletId.get(portletId);
+
+		if (portletStats == null) {
+			throw new MonitoringException(
+				"No portlet found with id: " + portletId);
+		}
+
+		return portletStats.getEventStatistics();
+
+	}
+
+	public long getMaxTime() {
+		return _maxTime;
+	}
+
+	public long getMinTime() {
+		return _minTime;
+	}
+
+	public Collection<String> getPortletIds() {
+		return _portletStatisticsByPortletId.keySet();
+	}
+
+	public Collection<RequestStatistics> getRenderStatistics()
+		throws MonitoringException {
+
+		Collection<PortletStatistics> portletsStats =
+			_portletStatisticsByPortletId.values();
+
+		if (portletsStats.isEmpty()) {
+			return Collections.EMPTY_LIST;
+		}
+
+		List<RequestStatistics> renderStatistics =
+			new ArrayList<RequestStatistics>(portletsStats.size());
+
+		for (PortletStatistics portletStats : portletsStats) {
+			renderStatistics.add(portletStats.getRenderStatistics());
+		}
+
+		return renderStatistics;
+	}
+
+	public RequestStatistics getRenderStatistics(String portletId)
+		throws MonitoringException {
+
+		PortletStatistics portletStats =
+			_portletStatisticsByPortletId.get(portletId);
+
+		if (portletStats == null) {
+			throw new MonitoringException(
+				"No portlet found with id: " + portletId);
+		}
+
+		return portletStats.getRenderStatistics();
+
+	}
+
+	public Collection<RequestStatistics> getResourceStatistics()
+		throws MonitoringException {
+
+		Collection<PortletStatistics> portletsStats =
+			_portletStatisticsByPortletId.values();
+
+		if (portletsStats.isEmpty()) {
+			return Collections.EMPTY_LIST;
+		}
+
+		List<RequestStatistics> resourceStatistics =
+			new ArrayList<RequestStatistics>(portletsStats.size());
+
+		for (PortletStatistics portletStats : portletsStats) {
+			resourceStatistics.add(portletStats.getResourceStatistics());
+		}
+
+		return resourceStatistics;
+	}
+	
+	public RequestStatistics getResourceStatistics(String portletId)
+		throws MonitoringException {
+
+		PortletStatistics portletStats =
+			_portletStatisticsByPortletId.get(portletId);
+
+		if (portletStats == null) {
+			throw new MonitoringException(
+				"No portlet found with id: " + portletId);
+		}
+
+		return portletStats.getResourceStatistics();
+
 	}
 
 	public String getWebId() {
@@ -65,7 +222,8 @@ public class CompanyStatistics
 	}
 
 	public void processDataSample(
-		PortletRequestDataSample portletRequestDataSample) {
+		PortletRequestDataSample portletRequestDataSample)
+		throws MonitoringException {
 
 		if (portletRequestDataSample.getCompanyId() != _companyId) {
 			return;
@@ -85,9 +243,28 @@ public class CompanyStatistics
 		}
 
 		portletStatistics.processDataSample(portletRequestDataSample);
+
+		long currentDuration = portletRequestDataSample.getDuration();
+
+		if (_maxTime < currentDuration) {
+			_maxTime = currentDuration;
+		}
+		else if (_minTime > currentDuration) {
+			_minTime = currentDuration;
+		}
+	}
+
+	public void reset() {
+		_maxTime = 0;
+		_minTime = 0;
+		for (PortletStatistics portletStatistics : _portletStatisticsByPortletId.values()) {
+			portletStatistics.reset();
+		}
 	}
 
 	private long _companyId;
+	private long _maxTime;
+	private long _minTime;
 	private Map<String, PortletStatistics> _portletStatisticsByPortletId;
 	private String _webId;
 

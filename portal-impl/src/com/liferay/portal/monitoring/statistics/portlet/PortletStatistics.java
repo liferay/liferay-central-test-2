@@ -22,6 +22,7 @@
 
 package com.liferay.portal.monitoring.statistics.portlet;
 
+import com.liferay.portal.monitoring.MonitoringException;
 import com.liferay.portal.monitoring.RequestStatus;
 import com.liferay.portal.monitoring.statistics.DataSampleProcessor;
 import com.liferay.portal.monitoring.statistics.RequestStatistics;
@@ -86,7 +87,8 @@ public class PortletStatistics
 	}
 
 	public void processDataSample(
-		PortletRequestDataSample portletRequestDataSample) {
+		PortletRequestDataSample portletRequestDataSample)
+		throws MonitoringException {
 
 		if (!portletRequestDataSample.getPortletId().equals(_portletId)) {
 			return;
@@ -95,27 +97,34 @@ public class PortletStatistics
 		PortletRequestType portletRequestType =
 			portletRequestDataSample.getRequestType();
 
-		RequestStatistics requestStatistics = _requestStatistics.get(
+		RequestStatistics requestStatistics =_requestStatistics.get(
 			portletRequestType);
 
 		if (requestStatistics == null) {
-			throw new IllegalArgumentException(
-				"No statistic found for " + portletRequestDataSample);
+			throw new MonitoringException(
+				"No statistic found for: " + portletRequestDataSample);
 		}
 
 		RequestStatus requestStatus =
 			portletRequestDataSample.getRequestStatus();
 
 		if (requestStatus.equals(RequestStatus.ERROR)) {
-			requestStatistics.getErrorStatistics().incrementCount();
+			requestStatistics.incrementError();
 		}
 		else if (requestStatus.equals(RequestStatus.SUCCESS)) {
-			requestStatistics.getSuccessStatistics().addDuration(
-				portletRequestDataSample.getDuration());
+			requestStatistics.incrementSuccessDuration(
+			portletRequestDataSample.getDuration());
 		}
 		else if (requestStatus.equals(RequestStatus.TIMEOUT)) {
-			requestStatistics.getTimeoutStatistics().incrementCount();
+			requestStatistics.incrementTimeout();
 		}
+	}
+
+	public void reset() {
+		_actionStatistics.reset();
+		_eventStatistics.reset();
+		_renderStatistics.reset();
+		_resourceStatistics.reset();
 	}
 
 	private RequestStatistics _actionStatistics;

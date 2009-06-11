@@ -36,4 +36,6 @@ public interface Statistics {
 
 	public void setDescription(String description);
 
+	public void reset();
+	
 }

@@ -47,6 +47,7 @@ public class CompanyStatistics
 			_companyId = company.getCompanyId();
 			_webId = webId;
 			_requestStatistics = new RequestStatistics(_webId);
+			_startTime = System.currentTimeMillis();
 		}
 		catch (Exception e) {
 			throw new IllegalStateException(
@@ -62,6 +63,18 @@ public class CompanyStatistics
 		return _webId;
 	}
 
+	public RequestStatistics getRequestStatistics() {
+		return _requestStatistics;
+	}
+
+	public long getStartTime() {
+		return _startTime;
+	}
+
+	public long getUptime() {
+		return System.currentTimeMillis() - _startTime;
+	}
+
 	public void processDataSample(
 		PortalRequestDataSample portalRequestDataSample) {
 
@@ -73,18 +86,23 @@ public class CompanyStatistics
 			portalRequestDataSample.getRequestStatus();
 
 		if (requestStatus.equals(RequestStatus.ERROR)) {
-			_requestStatistics.getErrorStatistics().incrementCount();
+			_requestStatistics.incrementError();
 		}
 		else if (requestStatus.equals(RequestStatus.SUCCESS)) {
-			_requestStatistics.getSuccessStatistics().addDuration(
-				portalRequestDataSample.getDuration());
+			_requestStatistics.incrementSuccessDuration(
+			portalRequestDataSample.getDuration());
 		}
 		else if (requestStatus.equals(RequestStatus.TIMEOUT)) {
-			_requestStatistics.getTimeoutStatistics().incrementCount();
+			_requestStatistics.incrementTimeout();
 		}
 	}
 
+	public void reset() {
+		_requestStatistics.reset();
+	}
+
 	private long _companyId;
+	private long _startTime;
 	private RequestStatistics _requestStatistics;
 	private String _webId;
 
