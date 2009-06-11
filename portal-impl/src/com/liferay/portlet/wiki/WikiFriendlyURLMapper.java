@@ -84,13 +84,6 @@ public class WikiFriendlyURLMapper extends BaseFriendlyURLMapper {
 						sb.append(HttpUtil.encodeURL(title));
 
 						portletURL.addParameterIncludedInPath("title");
-
-						WindowState windowState = portletURL.getWindowState();
-
-						if (!windowState.equals(WindowState.NORMAL)) {
-							sb.append(StringPool.SLASH);
-							sb.append(windowState);
-						}
 					}
 				}
 				else {
@@ -126,6 +119,12 @@ public class WikiFriendlyURLMapper extends BaseFriendlyURLMapper {
 			portletURL.addParameterIncludedInPath("p_p_id");
 
 			portletURL.addParameterIncludedInPath("struts_action");
+
+			WindowState windowState = portletURL.getWindowState();
+
+			if (!windowState.equals(WindowState.NORMAL)) {
+				friendlyURLPath += StringPool.SLASH + windowState;
+			}
 		}
 
 		return friendlyURLPath;
@@ -187,14 +186,14 @@ public class WikiFriendlyURLMapper extends BaseFriendlyURLMapper {
 					}
 					else {
 						addParam(params, "title", urlFragments1);
-
-						if (urlFragments.length >= 3) {
-							String windowState = urlFragments[2];
-
-							addParam(params, "p_p_state", windowState);
-						}
 					}
 				}
+			}
+
+			if (urlFragments.length >= 3) {
+				String windowState = urlFragments[2];
+
+				addParam(params, "p_p_state", windowState);
 			}
 		}
 	}
