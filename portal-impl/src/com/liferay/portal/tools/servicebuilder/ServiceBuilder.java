@@ -831,6 +831,7 @@ public class ServiceBuilder {
 						finderEl.attributeValue("return-type");
 					boolean finderUnique = GetterUtil.getBoolean(
 						finderEl.attributeValue("unique"), false);
+
 					String finderWhere = finderEl.attributeValue("where");
 
 					if (Validator.isNotNull(finderWhere)) {
@@ -843,7 +844,7 @@ public class ServiceBuilder {
 							}
 						}
 					}
-					
+
 					boolean finderDBIndex = GetterUtil.getBoolean(
 						finderEl.attributeValue("db-index"), true);
 
