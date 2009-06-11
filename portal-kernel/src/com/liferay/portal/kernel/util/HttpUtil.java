@@ -222,6 +222,12 @@ public class HttpUtil {
 		return getHttp().setParameter(url, name, value);
 	}
 
+	public static byte[] URLtoByteArray(Http.Options options)
+		throws IOException {
+
+		return getHttp().URLtoByteArray(options);
+	}
+
 	public static byte[] URLtoByteArray(String location) throws IOException {
 		return getHttp().URLtoByteArray(location);
 	}
@@ -232,6 +238,9 @@ public class HttpUtil {
 		return getHttp().URLtoByteArray(location, post);
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public static byte[] URLtoByteArray(
 			String location, Cookie[] cookies, Http.Auth auth, Http.Body body,
 			boolean post)
@@ -240,12 +249,19 @@ public class HttpUtil {
 		return getHttp().URLtoByteArray(location, cookies, auth, body, post);
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public static byte[] URLtoByteArray(
 			String location, Cookie[] cookies, Http.Auth auth,
 			Map<String, String> parts, boolean post)
 		throws IOException {
 
 		return getHttp().URLtoByteArray(location, cookies, auth, parts, post);
+	}
+
+	public static String URLtoString(Http.Options options) throws IOException {
+		return getHttp().URLtoString(options);
 	}
 
 	public static String URLtoString(String location) throws IOException {
@@ -258,6 +274,9 @@ public class HttpUtil {
 		return getHttp().URLtoString(location, post);
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public static String URLtoString(
 			String location, Cookie[] cookies, Http.Auth auth, Http.Body body,
 			boolean post)
@@ -266,6 +285,9 @@ public class HttpUtil {
 		return getHttp().URLtoString(location, cookies, auth, body, post);
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public static String URLtoString(
 			String location, Cookie[] cookies, Http.Auth auth,
 			Map<String, String> parts, boolean post)

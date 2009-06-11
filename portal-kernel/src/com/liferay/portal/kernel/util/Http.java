@@ -26,6 +26,7 @@ import java.io.IOException;
 
 import java.net.URL;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.portlet.ActionRequest;
@@ -141,30 +142,46 @@ public interface Http {
 
 	public String setParameter(String url, String name, String value);
 
+	public byte[] URLtoByteArray(Http.Options options) throws IOException;
+
 	public byte[] URLtoByteArray(String location) throws IOException;
 
 	public byte[] URLtoByteArray(String location, boolean post)
 		throws IOException;
 
+	/**
+	 * @deprecated
+	 */
 	public byte[] URLtoByteArray(
 			String location, Cookie[] cookies, Http.Auth auth, Http.Body body,
 			boolean post)
 		throws IOException;
 
+	/**
+	 * @deprecated
+	 */
 	public byte[] URLtoByteArray(
 			String location, Cookie[] cookies, Http.Auth auth,
 			Map<String, String> parts, boolean post)
 		throws IOException;
 
+	public String URLtoString(Http.Options options) throws IOException;
+
 	public String URLtoString(String location) throws IOException;
 
 	public String URLtoString(String location, boolean post) throws IOException;
 
+	/**
+	 * @deprecated
+	 */
 	public String URLtoString(
 			String location, Cookie[] cookies, Http.Auth auth, Http.Body body,
 			boolean post)
 		throws IOException;
 
+	/**
+	 * @deprecated
+	 */
 	public String URLtoString(
 			String location, Cookie[] cookies, Http.Auth auth,
 			Map<String, String> parts, boolean post)
@@ -247,6 +264,116 @@ public interface Http {
 		private String _charset;
 		private String _content;
 		private String _contentType;
+
+	}
+
+	public class Options {
+
+		public void addHeader(String name, String value) {
+			if (_headers == null) {
+				_headers = new HashMap<String, String>();
+			}
+
+			_headers.put(name, value);
+		}
+
+		public void addPart(String name, String value) {
+			if (_body != null) {
+				throw new IllegalArgumentException(
+					"Part cannot be added because a body has already been set");
+			}
+
+			if (_parts == null) {
+				_parts = new HashMap<String, String>();
+			}
+
+			_parts.put(name, value);
+		}
+
+		public Auth getAuth() {
+			return _auth;
+		}
+
+		public Body getBody() {
+			return _body;
+		}
+
+		public Cookie[] getCookies() {
+			return _cookies;
+		}
+
+		public Map<String, String> getHeaders() {
+			return _headers;
+		}
+
+		public String getLocation() {
+			return _location;
+		}
+
+		public Map<String, String> getParts() {
+			return _parts;
+		}
+
+		public boolean isPost() {
+			return _post;
+		}
+
+		public void setAuth(Http.Auth auth) {
+			setAuth(
+				auth.getHost(), auth.getPort(), auth.getRealm(),
+				auth.getUsername(), auth.getPassword());
+		}
+
+		public void setAuth(
+			String host, int port, String realm, String username,
+			String password) {
+
+			_auth = new Auth(host, port, realm, username, password);
+		}
+
+		public void setBody(Http.Body body) {
+			setBody(
+				body.getContent(), body.getContentType(), body.getCharset());
+		}
+
+		public void setBody(
+			String content, String contentType, String charset) {
+
+			if (_parts != null) {
+				throw new IllegalArgumentException(
+					"Body cannot be set because a part has already been added");
+			}
+
+			_body = new Body(content, contentType, charset);
+		}
+
+		public void setCookies(Cookie[] cookies) {
+			_cookies = cookies;
+		}
+
+		public void setHeaders(Map<String, String> headers) {
+			_headers = headers;
+		}
+
+		public void setLocation(String location) {
+			_location = location;
+		}
+
+		public void setParts(Map<String, String> parts) {
+			_parts = parts;
+		}
+
+		public void setPost(boolean post) {
+			_post = post;
+		}
+
+		private Auth _auth;
+		private Body _body;
+		private Cookie[] _cookies;
+		private Map<String, String> _headers;
+		private String _location;
+		private Map<String, String> _parts;
+		private boolean _post;
 
 	}
 

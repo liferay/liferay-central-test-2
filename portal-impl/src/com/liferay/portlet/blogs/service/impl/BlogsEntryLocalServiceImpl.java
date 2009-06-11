@@ -36,6 +36,7 @@ import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
+import com.liferay.portal.kernel.util.Http;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.SetUtil;
@@ -807,7 +808,13 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			_log.debug("Pinging trackback " + trackback);
 		}
 
-		String xml = HttpUtil.URLtoString(trackback, null, null, parts, true);
+		Http.Options options = new Http.Options();
+
+		options.setLocation(trackback);
+		options.setParts(parts);
+		options.setPost(true);
+
+		String xml = HttpUtil.URLtoString(options);
 
 		if (_log.isDebugEnabled()) {
 			_log.debug(xml);

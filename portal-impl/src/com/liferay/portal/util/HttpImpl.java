@@ -648,30 +648,70 @@ public class HttpImpl implements Http {
 		return addParameter(url, name, value);
 	}
 
+	public byte[] URLtoByteArray(Http.Options options) throws IOException {
+		return URLtoByteArray(options);
+	}
+
 	public byte[] URLtoByteArray(String location) throws IOException {
-		return URLtoByteArray(location, null, null, null, null, false);
+		Http.Options options = new Http.Options();
+
+		options.setLocation(location);
+
+		return URLtoByteArray(options);
 	}
 
 	public byte[] URLtoByteArray(String location, boolean post)
 		throws IOException {
 
-		return URLtoByteArray(location, null, null, null, null, post);
+		Http.Options options = new Http.Options();
+
+		options.setLocation(location);
+		options.setPost(post);
+
+		return URLtoByteArray(options);
+
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public byte[] URLtoByteArray(
 			String location, Cookie[] cookies, Http.Auth auth, Http.Body body,
 			boolean post)
 		throws IOException {
 
-		return URLtoByteArray(location, cookies, auth, body, null, post);
+		Http.Options options = new Http.Options();
+
+		options.setAuth(auth);
+		options.setBody(body);
+		options.setCookies(cookies);
+		options.setLocation(location);
+		options.setPost(post);
+
+		return URLtoByteArray(options);
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public byte[] URLtoByteArray(
 			String location, Cookie[] cookies, Http.Auth auth,
 			Map<String, String> parts, boolean post)
 		throws IOException {
 
-		return URLtoByteArray(location, cookies, auth, null, parts, post);
+		Http.Options options = new Http.Options();
+
+		options.setAuth(auth);
+		options.setCookies(cookies);
+		options.setLocation(location);
+		options.setParts(parts);
+		options.setPost(post);
+
+		return URLtoByteArray(options);
+	}
+
+	public String URLtoString(Http.Options options) throws IOException {
+		return URLtoString(options);
 	}
 
 	public String URLtoString(String location) throws IOException {
@@ -684,20 +724,42 @@ public class HttpImpl implements Http {
 		return new String(URLtoByteArray(location, post));
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public String URLtoString(
 			String location, Cookie[] cookies, Http.Auth auth, Http.Body body,
 			boolean post)
 		throws IOException {
 
-		return new String(URLtoByteArray(location, cookies, auth, body, post));
+		Http.Options options = new Http.Options();
+
+		options.setAuth(auth);
+		options.setBody(body);
+		options.setCookies(cookies);
+		options.setLocation(location);
+		options.setPost(post);
+
+		return new String(URLtoByteArray(options));
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public String URLtoString(
 			String location, Cookie[] cookies, Http.Auth auth,
 			Map<String, String> parts, boolean post)
 		throws IOException {
 
-		return new String(URLtoByteArray(location, cookies, auth, parts, post));
+		Http.Options options = new Http.Options();
+
+		options.setAuth(auth);
+		options.setCookies(cookies);
+		options.setLocation(location);
+		options.setParts(parts);
+		options.setPost(post);
+
+		return new String(URLtoByteArray(options));
 	}
 
 	/**
@@ -758,8 +820,9 @@ public class HttpImpl implements Http {
 	}
 
 	protected byte[] URLtoByteArray(
-			String location, Cookie[] cookies, Http.Auth auth, Http.Body body,
-			Map<String, String> parts, boolean post)
+			String location, Map<String, String> headers, Cookie[] cookies,
+			Http.Auth auth, Http.Body body, Map<String, String> parts,
+			boolean post)
 		throws IOException {
 
 		byte[] bytes = null;
@@ -824,6 +887,12 @@ public class HttpImpl implements Http {
 				"User-agent",
 				"Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)");
 
+			if (headers != null) {
+				for (Map.Entry<String, String> header : headers.entrySet()) {
+					method.addRequestHeader(header.getKey(), header.getValue());
+				}
+			}
+
 			//method.setFollowRedirects(true);
 
 			HttpState state = new HttpState();
@@ -866,8 +935,8 @@ public class HttpImpl implements Http {
 
 			if ((locationHeader != null) && !locationHeader.equals(location)) {
 				return URLtoByteArray(
-					locationHeader.getValue(), cookies, auth, body, parts,
-					post);
+					locationHeader.getValue(), headers, cookies, auth, body,
+					parts, post);
 			}
 
 			InputStream is = method.getResponseBodyAsStream();
