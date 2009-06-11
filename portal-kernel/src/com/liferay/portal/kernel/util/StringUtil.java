@@ -690,11 +690,17 @@ public class StringUtil {
 	}
 
 	public static String replace(String s, String oldSub, String newSub) {
+
+		return replace(s, oldSub, newSub, 0);
+	}
+
+	public static String replace(
+			String s, String oldSub, String newSub, int fromIndex) {
 		if ((s == null) || (oldSub == null) || (newSub == null)) {
 			return null;
 		}
 
-		int y = s.indexOf(oldSub);
+		int y = s.indexOf(oldSub, fromIndex);
 
 		if (y >= 0) {
 
