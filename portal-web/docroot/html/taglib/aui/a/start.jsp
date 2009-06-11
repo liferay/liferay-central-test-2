@@ -34,7 +34,7 @@ Map<String, String> dynamicAttributes = (Map<String,String>)request.getAttribute
 <a <%= Validator.isNotNull(cssClass) ? "class=\"" + cssClass + "\"" : StringPool.BLANK %> href="<%= HtmlUtil.escape (href) %>"
 
 	<%
-	for (Entry entry : dynamicAttributes.entrySet()) {
+	for (Map.Entry<String, String> entry : dynamicAttributes.entrySet()) {
 		if (!entry.getKey().equals("class")) {
 	%>
 
