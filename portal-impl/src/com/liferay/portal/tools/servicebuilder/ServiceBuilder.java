@@ -815,6 +815,12 @@ public class ServiceBuilder {
 					}
 				}
 
+				String alias = TextFormatter.format(ejbName, TextFormatter.I);
+
+				if (_badAliasNames.contains(alias.toLowerCase())) {
+					alias += StringPool.UNDERLINE;
+				}
+
 				itr2 = finders.iterator();
 
 				while (itr2.hasNext()) {
@@ -825,7 +831,20 @@ public class ServiceBuilder {
 						finderEl.attributeValue("return-type");
 					boolean finderUnique = GetterUtil.getBoolean(
 						finderEl.attributeValue("unique"), false);
+
 					String finderWhere = finderEl.attributeValue("where");
+
+					if (Validator.isNotNull(finderWhere)) {
+						for (EntityColumn column: columnList) {
+							String name = column.getName();
+
+							if (finderWhere.indexOf(name) != -1) {
+								finderWhere = finderWhere.replaceAll(
+									name, alias + "." + name);
+							}
+						}
+					}
+
 					boolean finderDBIndex = GetterUtil.getBoolean(
 						finderEl.attributeValue("db-index"), true);
 
@@ -902,12 +921,6 @@ public class ServiceBuilder {
 					String txRequired = txRequiredEl.getText();
 
 					txRequiredList.add(txRequired);
-				}
-
-				String alias = TextFormatter.format(ejbName, TextFormatter.I);
-
-				if (_badAliasNames.contains(alias.toLowerCase())) {
-					alias += StringPool.UNDERLINE;
 				}
 
 				_ejbList.add(
