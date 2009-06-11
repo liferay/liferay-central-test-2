@@ -29,6 +29,8 @@
 public class Test {
 
 	public static void main(String[] args) throws Exception {
+		//com.liferay.portal.util.InitUtil.initWithSpring();
+
 		System.out.println("Test");
 	}
 
