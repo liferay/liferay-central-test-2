@@ -34,10 +34,11 @@ public class AdminRequestMessage implements Serializable {
 
 	public static AdminRequestMessage add(
 		String domainName, RuleRetriever ruleRetriever) {
+
 		return new AdminRequestMessage(
 			AdminRequestType.ADD, domainName, ruleRetriever);
 	}
-	
+
 	public static AdminRequestMessage remove(String domainName) {
 		return new AdminRequestMessage(
 			AdminRequestType.REMOVE, domainName, null);
@@ -45,6 +46,7 @@ public class AdminRequestMessage implements Serializable {
 
 	public static AdminRequestMessage update(
 		String domainName, RuleRetriever ruleRetriever) {
+
 		return new AdminRequestMessage(
 			AdminRequestType.UPDATE, domainName, ruleRetriever);
 	}

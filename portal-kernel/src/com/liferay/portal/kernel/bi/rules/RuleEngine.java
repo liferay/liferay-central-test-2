@@ -33,33 +33,34 @@ import java.util.List;
  */
 public interface RuleEngine {
 
-	public void add(String domainName, RuleRetriever ruleRtriever)
+	public void add(String domainName, RuleRetriever ruleRetriever)
 		throws RuleEngineException;
 
-	public void execute(RuleRetriever ruleRtriever, List<?> facts)
-		throws RuleEngineException;
-
-	public List<?> execute(
-			RuleRetriever ruleRtriever, List<?> facts, String query)
+	public void execute(RuleRetriever ruleRetriever, List<?> facts)
 		throws RuleEngineException;
 
 	public List<?> execute(
-			RuleRetriever ruleRtriever, List<?> facts, String query,
+			RuleRetriever ruleRetriever, List<?> facts, String queryString)
+		throws RuleEngineException;
+
+	public List<?> execute(
+			RuleRetriever ruleRetriever, List<?> facts, String queryString,
 			Object[] queryArguments)
 		throws RuleEngineException;
 
 	public void execute(String domainName, List<?> facts)
 		throws RuleEngineException;
 
-	public List<?> execute(String domainName, List<?> facts, String query)
+	public List<?> execute(String domainName, List<?> facts, String queryString)
 		throws RuleEngineException;
 
 	public List<?> execute(
-			String domainName, List<?> facts, String query,
+			String domainName, List<?> facts, String queryString,
 			Object[] queryArguments)
 		throws RuleEngineException;
 
-	public List<?> executeWithResults(RuleRetriever ruleRtriever, List<?> facts)
+	public List<?> executeWithResults(
+			RuleRetriever ruleRetriever, List<?> facts)
 		throws RuleEngineException;
 
 	public List<?> executeWithResults(String domainName, List<?> facts)

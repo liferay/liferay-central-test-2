@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -43,7 +43,8 @@ public class ExecutionRequestMessage implements Serializable {
 	}
 
 	public ExecutionRequestMessage(
-		ExecutionRequestType executionRequestType, RuleRetriever ruleRetriever) {
+		ExecutionRequestType executionRequestType,
+		RuleRetriever ruleRetriever) {
 
 		_executionRequestType = executionRequestType;
 		_ruleRetriever = ruleRetriever;
@@ -83,8 +84,8 @@ public class ExecutionRequestMessage implements Serializable {
 
 	private String _domainName;
 	private ExecutionRequestType _executionRequestType;
-	private RuleRetriever _ruleRetriever;
 	private List<Object> _facts = new ArrayList<Object>();
-
 	private Query _query;
+	private RuleRetriever _ruleRetriever;
+
 }

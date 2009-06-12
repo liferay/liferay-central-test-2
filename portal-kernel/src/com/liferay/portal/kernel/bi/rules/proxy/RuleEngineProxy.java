@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -30,7 +30,6 @@ import com.liferay.portal.kernel.bi.rules.Query;
 import com.liferay.portal.kernel.bi.rules.RuleEngine;
 import com.liferay.portal.kernel.bi.rules.RuleEngineException;
 import com.liferay.portal.kernel.bi.rules.RuleRetriever;
-import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageBusException;
 import com.liferay.portal.kernel.messaging.sender.SingleDestinationMessageSender;
 import com.liferay.portal.kernel.messaging.sender.SingleDestinationSynchronousMessageSender;
@@ -41,6 +40,7 @@ import java.util.List;
  * <a href="RuleEngineProxy.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael C. Han
+ *
  */
 public class RuleEngineProxy implements RuleEngine {
 
@@ -49,214 +49,210 @@ public class RuleEngineProxy implements RuleEngine {
 		SingleDestinationMessageSender asyncExecutionSender,
 		SingleDestinationSynchronousMessageSender ruleEngineExecutionSender) {
 
-		_ruleEngineAdminMessageSender = ruleEngineAdminMessageSender;
-		_asyncExecutionSender = asyncExecutionSender;
-		_ruleEngineExecutionSender = ruleEngineExecutionSender;
+		_adminRequestMessageSender = ruleEngineAdminMessageSender;
+		_executionRequestMessageSender = asyncExecutionSender;
+		_synchronousExecutionRequestMessageSender = ruleEngineExecutionSender;
 	}
 
-	public void add(String domainName, RuleRetriever ruleRtriever)
-		throws RuleEngineException {
-
-		_sendAdminMessage(AdminRequestType.ADD, domainName, ruleRtriever);
+	public void add(String domainName, RuleRetriever ruleRetriever) {
+		_sendAdminMessage(AdminRequestType.ADD, domainName, ruleRetriever);
 	}
 
-	public void execute(RuleRetriever ruleRtriever, List<?> facts)
-		throws RuleEngineException {
-
-		ExecutionRequestMessage requestMessage =
+	public void execute(RuleRetriever ruleRetriever, List<?> facts) {
+		ExecutionRequestMessage executionRequestMessage =
 			new ExecutionRequestMessage(
-				ExecutionRequestType.EXECUTE, ruleRtriever);
+				ExecutionRequestType.EXECUTE, ruleRetriever);
 
-		requestMessage.addFact(facts);
+		executionRequestMessage.addFact(facts);
 
-		Message message = new Message();
-		message.setPayload(requestMessage);
-		_asyncExecutionSender.send(message);
+		_executionRequestMessageSender.send(executionRequestMessage);
 	}
 
 	public List<?> execute(
-		RuleRetriever ruleRtriever, List<?> facts, String query)
+			RuleRetriever ruleRetriever, List<?> facts, String queryString)
 		throws RuleEngineException {
 
 		return _sendExecutionMessage(
-			ExecutionRequestType.EXECUTE, ruleRtriever, facts, query);
+			ExecutionRequestType.EXECUTE, ruleRetriever, facts, queryString);
 	}
 
 	public List<?> execute(
-		RuleRetriever ruleRtriever, List<?> facts, String query,
-		Object[] queryArguments)
+			RuleRetriever ruleRetriever, List<?> facts, String queryString,
+			Object[] queryArguments)
 		throws RuleEngineException {
 
 		return _sendExecutionMessage(
-			ExecutionRequestType.EXECUTE, ruleRtriever, facts,
-			query, queryArguments);
+			ExecutionRequestType.EXECUTE, ruleRetriever, facts, queryString,
+			queryArguments);
 	}
 
-	public void execute(String domainName, List<?> facts)
-		throws RuleEngineException {
-
-		ExecutionRequestMessage requestMessage =
+	public void execute(String domainName, List<?> facts) {
+		ExecutionRequestMessage executionRequestMessage =
 			new ExecutionRequestMessage(
 				ExecutionRequestType.EXECUTE, domainName);
 
-		requestMessage.addFact(facts);
+		executionRequestMessage.addFact(facts);
 
-		Message message = new Message();
-		message.setPayload(requestMessage);
-		_asyncExecutionSender.send(message);
+		_executionRequestMessageSender.send(executionRequestMessage);
 	}
 
-	public List<?> execute(String domainName, List<?> facts, String query)
+	public List<?> execute(String domainName, List<?> facts, String queryString)
 		throws RuleEngineException {
+
 		return _sendExecutionMessage(
-			ExecutionRequestType.EXECUTE, domainName, facts, query);
+			ExecutionRequestType.EXECUTE, domainName, facts, queryString);
 	}
 
 	public List<?> execute(
-		String domainName, List<?> facts, String query, Object[] queryArguments)
+			String domainName, List<?> facts, String queryString,
+			Object[] queryArguments)
 		throws RuleEngineException {
 
 		return _sendExecutionMessage(
-			ExecutionRequestType.EXECUTE, domainName, facts,
-			query, queryArguments);
+			ExecutionRequestType.EXECUTE, domainName, facts, queryString,
+			queryArguments);
 	}
 
-	public List<?> executeWithResults(RuleRetriever ruleRtriever, List<?> facts)
+	public List<?> executeWithResults(
+			RuleRetriever ruleRetriever, List<?> facts)
 		throws RuleEngineException {
 
 		return _sendExecutionMessage(
-			ExecutionRequestType.EXECUTE_WITH_RESULTS, ruleRtriever, facts);
+			ExecutionRequestType.EXECUTE_WITH_RESULTS, ruleRetriever, facts);
 	}
 
 	public List<?> executeWithResults(String domainName, List<?> facts)
 		throws RuleEngineException {
-		
+
 		return _sendExecutionMessage(
 			ExecutionRequestType.EXECUTE_WITH_RESULTS, domainName, facts);
 	}
 
-	public void remove(String domainName) throws RuleEngineException {
+	public void remove(String domainName) {
 		_sendAdminMessage(AdminRequestType.REMOVE, domainName, null);
 	}
 
-	public void update(String domainName, RuleRetriever ruleRetriever)
-		throws RuleEngineException {
+	public void update(String domainName, RuleRetriever ruleRetriever) {
 		_sendAdminMessage(AdminRequestType.UPDATE, domainName, ruleRetriever);
 	}
 
-	private List<?> _sendExecutionMessage(
-		ExecutionRequestType requestType,
-		RuleRetriever ruleRtriever, List<?> facts)
-		throws RuleEngineException {
-
-		return _sendExecutionMessage(
-			requestType, ruleRtriever, facts, null, null);
-	}
-
-	private List<?> _sendExecutionMessage(
-		ExecutionRequestType requestType,
-		RuleRetriever ruleRtriever, List<?> facts, String query)
-		throws RuleEngineException {
-
-		return _sendExecutionMessage(
-			requestType, ruleRtriever, facts, query, null);
-	}
-
-	private List<?> _sendExecutionMessage(
-		ExecutionRequestType requestType, RuleRetriever ruleRtriever,
-		List<?> facts, String query, Object[] queryArguments)
-		throws RuleEngineException {
-
-		ExecutionRequestMessage requestMessage =
-			new ExecutionRequestMessage(requestType, ruleRtriever);
-
-		requestMessage.addFact(facts);
-
-		if (query != null) {
-			Query rulesQuery = new Query();
-			rulesQuery.setQueryString(query);
-			rulesQuery.addArguments(queryArguments);
-		}
-
-		Message message = new Message();
-		message.setPayload(requestMessage);
-		try {
-			return (List<?>) _ruleEngineExecutionSender.sendMessage(message);
-		}
-		catch (MessageBusException e) {
-			throw new RuleEngineException("Unable to execute rules", e);
-		}
-	}
-
-	private List<?> _sendExecutionMessage(
-		ExecutionRequestType requestType,
-		String ruleDomain, List<?> facts)
-		throws RuleEngineException {
-
-		return _sendExecutionMessage(
-			requestType, ruleDomain, facts, null, null);
-	}
-
-	private List<?> _sendExecutionMessage(
-		ExecutionRequestType requestType,
-		String ruleDomain, List<?> facts, String query)
-		throws RuleEngineException {
-
-		return _sendExecutionMessage(
-			requestType, ruleDomain, facts, query, null);
-	}
-
-	private List<?> _sendExecutionMessage(
-		ExecutionRequestType requestType, String ruleDomain, List<?> facts,
-		String query, Object[] queryArguments)
-		throws RuleEngineException {
-
-		ExecutionRequestMessage requestMessage =
-			new ExecutionRequestMessage(requestType, ruleDomain);
-		requestMessage.addFact(facts);
-
-		if (query != null) {
-			Query rulesQuery = new Query();
-			rulesQuery.setQueryString(query);
-			rulesQuery.addArguments(queryArguments);
-		}
-
-		Message message = new Message();
-		message.setPayload(requestMessage);
-		try {
-			return (List<?>) _ruleEngineExecutionSender.sendMessage(message);
-		}
-		catch (MessageBusException e) {
-			throw new RuleEngineException("Unable to execute rules", e);
-		}
-	}
-
 	private void _sendAdminMessage(
-		AdminRequestType requestType, String domainName,
-		RuleRetriever ruleRtriever) {
+		AdminRequestType adminRequestType, String domainName,
+		RuleRetriever ruleRetriever) {
 
 		AdminRequestMessage adminRequestMessage = null;
-		if (AdminRequestType.ADD.equals(requestType)) {
-			adminRequestMessage =
-				AdminRequestMessage.add(domainName, ruleRtriever);
+
+		if (AdminRequestType.ADD.equals(adminRequestType)) {
+			adminRequestMessage = AdminRequestMessage.add(
+				domainName, ruleRetriever);
 		}
-		else if (AdminRequestType.REMOVE.equals(requestType)) {
-			adminRequestMessage =
-				AdminRequestMessage.remove(domainName);
+		else if (AdminRequestType.REMOVE.equals(adminRequestType)) {
+			adminRequestMessage = AdminRequestMessage.remove(domainName);
 		}
-		else if (AdminRequestType.UPDATE.equals(requestType)) {
-			adminRequestMessage =
-				AdminRequestMessage.update(domainName, ruleRtriever);
+		else if (AdminRequestType.UPDATE.equals(adminRequestType)) {
+			adminRequestMessage = AdminRequestMessage.update(
+				domainName, ruleRetriever);
 		}
 
-		Message message = new Message();
-		message.setPayload(adminRequestMessage);
-
-		_ruleEngineAdminMessageSender.send(message);
+		_adminRequestMessageSender.send(adminRequestMessage);
 	}
 
-	private SingleDestinationMessageSender _ruleEngineAdminMessageSender;
+	private List<?> _sendExecutionMessage(
+			ExecutionRequestType executionRequestType,
+			RuleRetriever ruleRetriever, List<?> facts)
+		throws RuleEngineException {
+
+		return _sendExecutionMessage(
+			executionRequestType, ruleRetriever, facts, null, null);
+	}
+
+	private List<?> _sendExecutionMessage(
+			ExecutionRequestType executionRequestType,
+			RuleRetriever ruleRetriever, List<?> facts, String queryString)
+		throws RuleEngineException {
+
+		return _sendExecutionMessage(
+			executionRequestType, ruleRetriever, facts, queryString, null);
+	}
+
+	private List<?> _sendExecutionMessage(
+			ExecutionRequestType executionRequestType,
+			RuleRetriever ruleRetriever, List<?> facts, String queryString,
+			Object[] queryArguments)
+		throws RuleEngineException {
+
+		ExecutionRequestMessage executionRequestMessage =
+			new ExecutionRequestMessage(executionRequestType, ruleRetriever);
+
+		executionRequestMessage.addFact(facts);
+
+		if (queryString != null) {
+			Query query = new Query();
+
+			query.setQueryString(queryString);
+			query.addArguments(queryArguments);
+
+			executionRequestMessage.setQuery(query);
+		}
+
+		try {
+			return (List<?>)_synchronousExecutionRequestMessageSender.send(
+				executionRequestMessage);
+		}
+		catch (MessageBusException mbe) {
+			throw new RuleEngineException("Unable to execute rules", mbe);
+		}
+	}
+
+	private List<?> _sendExecutionMessage(
+			ExecutionRequestType executionRequestType,
+			String domainName, List<?> facts)
+		throws RuleEngineException {
+
+		return _sendExecutionMessage(
+			executionRequestType, domainName, facts, null, null);
+	}
+
+	private List<?> _sendExecutionMessage(
+			ExecutionRequestType executionRequestType,
+			String domainName, List<?> facts, String queryString)
+		throws RuleEngineException {
+
+		return _sendExecutionMessage(
+			executionRequestType, domainName, facts, queryString, null);
+	}
+
+	private List<?> _sendExecutionMessage(
+			ExecutionRequestType executionRequestType, String domainName,
+			List<?> facts, String queryString, Object[] queryArguments)
+		throws RuleEngineException {
+
+		ExecutionRequestMessage executionRequestMessage =
+			new ExecutionRequestMessage(executionRequestType, domainName);
+
+		executionRequestMessage.addFact(facts);
+
+		if (queryString != null) {
+			Query query = new Query();
+
+			query.setQueryString(queryString);
+			query.addArguments(queryArguments);
+
+			executionRequestMessage.setQuery(query);
+		}
+
+		try {
+			return (List<?>)_synchronousExecutionRequestMessageSender.send(
+				executionRequestMessage);
+		}
+		catch (MessageBusException mbe) {
+			throw new RuleEngineException("Unable to execute rules", mbe);
+		}
+	}
+
+	private SingleDestinationMessageSender _adminRequestMessageSender;
+	private SingleDestinationMessageSender _executionRequestMessageSender;
 	private SingleDestinationSynchronousMessageSender
-		_ruleEngineExecutionSender;
-	private SingleDestinationMessageSender _asyncExecutionSender;
+		_synchronousExecutionRequestMessageSender;
+
 }
