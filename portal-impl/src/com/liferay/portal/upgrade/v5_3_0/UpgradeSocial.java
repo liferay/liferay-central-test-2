@@ -111,7 +111,8 @@ public class UpgradeSocial extends UpgradeProcess {
 			con = DataAccess.getConnection();
 
 			ps = con.prepareStatement(
-				"select distinct(groupId) from SocialActivity");
+				"select distinct(groupId) from SocialActivity where" +
+					" groupId > 0");
 
 			rs = ps.executeQuery();
 
