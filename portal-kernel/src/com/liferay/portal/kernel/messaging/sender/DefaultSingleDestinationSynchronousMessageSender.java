@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -26,20 +26,20 @@ import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageBusException;
 
 /**
- * <a href="DefaultSingleDestinationSynchronousMessageSender.java.html"><b><i>View
- * Source</i></b></a>
+ * <a href="DefaultSingleDestinationSynchronousMessageSender.java.html"><b><i>
+ * View Source</i></b></a>
  *
  * @author Michael C. Han
+ *
  */
 public class DefaultSingleDestinationSynchronousMessageSender
 	implements SingleDestinationSynchronousMessageSender {
 
 	public DefaultSingleDestinationSynchronousMessageSender(
-		SynchronousMessageSender synchronousMessageSender,
-		String destination) {
+		String destination, SynchronousMessageSender synchronousMessageSender) {
 
-		_synchronousMessageSender = synchronousMessageSender;
 		_destination = destination;
+		_synchronousMessageSender = synchronousMessageSender;
 	}
 
 	public Object sendMessage(Message message) throws MessageBusException {
@@ -48,10 +48,12 @@ public class DefaultSingleDestinationSynchronousMessageSender
 
 	public Object sendMessage(Message message, long timeout)
 		throws MessageBusException {
+
 		return _synchronousMessageSender.sendMessage(
 			_destination, message, timeout);
 	}
 
-	private SynchronousMessageSender _synchronousMessageSender;
 	private String _destination;
+	private SynchronousMessageSender _synchronousMessageSender;
+
 }
