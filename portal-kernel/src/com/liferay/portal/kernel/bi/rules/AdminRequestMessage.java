@@ -32,13 +32,21 @@ import java.io.Serializable;
  */
 public class AdminRequestMessage implements Serializable {
 
-	public AdminRequestMessage(
-		AdminRequestType adminRequestType, String domainName,
-		RuleRetriever ruleRetriever) {
+	public static AdminRequestMessage add(
+		String domainName, RuleRetriever ruleRetriever) {
+		return new AdminRequestMessage(
+			AdminRequestType.ADD, domainName, ruleRetriever);
+	}
+	
+	public static AdminRequestMessage remove(String domainName) {
+		return new AdminRequestMessage(
+			AdminRequestType.REMOVE, domainName, null);
+	}
 
-		_adminRequestType = adminRequestType;
-		_domainName = domainName;
-		_ruleRetriever = ruleRetriever;
+	public static AdminRequestMessage update(
+		String domainName, RuleRetriever ruleRetriever) {
+		return new AdminRequestMessage(
+			AdminRequestType.UPDATE, domainName, ruleRetriever);
 	}
 
 	public String getDomainName() {
@@ -51,6 +59,15 @@ public class AdminRequestMessage implements Serializable {
 
 	public AdminRequestType getType() {
 		return _adminRequestType;
+	}
+
+	private AdminRequestMessage(
+		AdminRequestType adminRequestType, String domainName,
+		RuleRetriever ruleRetriever) {
+
+		_adminRequestType = adminRequestType;
+		_domainName = domainName;
+		_ruleRetriever = ruleRetriever;
 	}
 
 	private AdminRequestType _adminRequestType;

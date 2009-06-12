@@ -36,8 +36,6 @@ public interface RuleEngine {
 	public void add(String domainName, RuleRetriever ruleRtriever)
 		throws RuleEngineException;
 
-	public boolean contains(String domainName) throws RuleEngineException;
-
 	public void execute(RuleRetriever ruleRtriever, List<?> facts)
 		throws RuleEngineException;
 

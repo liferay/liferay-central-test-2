@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -42,6 +42,13 @@ public class ExecutionRequestMessage implements Serializable {
 		_domainName = domainName;
 	}
 
+	public ExecutionRequestMessage(
+		ExecutionRequestType executionRequestType, RuleRetriever ruleRetriever) {
+
+		_executionRequestType = executionRequestType;
+		_ruleRetriever = ruleRetriever;
+	}
+
 	public void addFact(Object fact) {
 		_facts.add(fact);
 	}
@@ -62,6 +69,10 @@ public class ExecutionRequestMessage implements Serializable {
 		return _query;
 	}
 
+	public RuleRetriever getRuleRetriever() {
+		return _ruleRetriever;
+	}
+
 	public ExecutionRequestType getType() {
 		return _executionRequestType;
 	}
@@ -72,7 +83,8 @@ public class ExecutionRequestMessage implements Serializable {
 
 	private String _domainName;
 	private ExecutionRequestType _executionRequestType;
+	private RuleRetriever _ruleRetriever;
 	private List<Object> _facts = new ArrayList<Object>();
-	private Query _query;
 
+	private Query _query;
 }

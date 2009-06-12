@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -23,6 +23,7 @@
 package com.liferay.portal.kernel.bi.rules;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -37,8 +38,14 @@ public class Query {
 		_arguments.add(object);
 	}
 
-	public void addArguments(List<?> object) {
-		_arguments.addAll(object);
+	public void addArguments(List<?> arguments) {
+		_arguments.addAll(arguments);
+	}
+
+	public void addArguments(Object[] arguments) {
+		if ((arguments != null) && (arguments.length > 0)) {
+			_arguments.addAll(Arrays.asList(arguments));
+		}
 	}
 
 	public Object[] getArguments() {
