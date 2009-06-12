@@ -37,8 +37,6 @@ if (layout != null) {
 		<li class="pin-dockbar">
 			<a href="javascript:;"><img src="<%= themeDisplay.getPathThemeImages() %>/spacer.png" /></a>
 		</li>
-			<a href="javascript:;"><img src="<%= themeDisplay.getPathThemeImages() %>/spacer.png" /></a>
-		</li>
 
 		<c:if test="<%= (group != null) && (!group.hasStagingGroup() || group.isStagingGroup()) && LayoutPermissionUtil.contains(permissionChecker, layout, ActionKeys.UPDATE) %>">
 			<li class="add-content has-submenu" id="<portlet:namespace />addContent">
