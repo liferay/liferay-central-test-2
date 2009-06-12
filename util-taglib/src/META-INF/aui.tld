@@ -6,6 +6,32 @@
 	<short-name>aui</short-name>
 	<uri>http://liferay.com/tld/aui</uri>
 	<tag>
+		<name>a</name>
+		<tag-class>com.liferay.taglib.aui.ATag</tag-class>
+		<body-content>JSP</body-content>
+		<attribute>
+			<name>cssClass</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>endPage</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>href</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>startPage</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<dynamic-attributes>true</dynamic-attributes>
+	</tag>
+	<tag>
 		<name>button</name>
 		<tag-class>com.liferay.taglib.aui.ButtonTag</tag-class>
 		<body-content>JSP</body-content>
