@@ -2982,10 +2982,8 @@ public class ServiceBuilder {
 				"<beans\n" +
 				"\tdefault-init-method=\"afterPropertiesSet\"\n" +
 				"\txmlns=\"http://www.springframework.org/schema/beans\"\n" +
-				"\txmlns:aop=\"http://www.springframework.org/schema/aop\"\n" +
-				"\txmlns:tx=\"http://www.springframework.org/schema/tx\"\n" +
 				"\txmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n" +
-				"\txsi:schemaLocation=\"http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd\"\n" +
+				"\txsi:schemaLocation=\"http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd\"\n" +
 				">\n" +
 				"</beans>";
 
