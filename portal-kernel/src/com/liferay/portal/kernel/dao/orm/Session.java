@@ -50,12 +50,12 @@ public interface Session {
 
 	public void flush() throws ORMException;
 
-	public Object get(Class clazz, Serializable id) throws ORMException;
+	public Object get(Class<?> clazz, Serializable id) throws ORMException;
 
-	public Object get(Class clazz, Serializable id, LockMode lockMode)
+	public Object get(Class<?> clazz, Serializable id, LockMode lockMode)
 		throws ORMException;
 
-	public Object load(Class clazz, Serializable id) throws ORMException;
+	public Object load(Class<?> clazz, Serializable id) throws ORMException;
 
 	public Object merge(Object object) throws ORMException;
 

@@ -50,7 +50,7 @@ public class SQLQueryImpl implements SQLQuery {
 		_sqlQuery = sqlQuery;
 	}
 
-	public SQLQuery addEntity(String alias, Class entityClass) {
+	public SQLQuery addEntity(String alias, Class<?> entityClass) {
 		_sqlQuery.addEntity(alias, entityClass);
 
 		return this;

@@ -40,37 +40,37 @@ import org.hibernate.criterion.DetachedCriteria;
  */
 public class DynamicQueryFactoryImpl implements DynamicQueryFactory {
 
-	public DynamicQuery forClass(Class clazz) {
+	public DynamicQuery forClass(Class<?> clazz) {
 		clazz = getImplClass(clazz);
 
 		return new DynamicQueryImpl(DetachedCriteria.forClass(clazz));
 	}
 
-	public DynamicQuery forClass(Class clazz, ClassLoader classLoader) {
+	public DynamicQuery forClass(Class<?> clazz, ClassLoader classLoader) {
 		clazz = getImplClass(clazz, classLoader);
 
 		return new DynamicQueryImpl(DetachedCriteria.forClass(clazz));
 	}
 
-	public DynamicQuery forClass(Class clazz, String alias) {
+	public DynamicQuery forClass(Class<?> clazz, String alias) {
 		clazz = getImplClass(clazz);
 
 		return new DynamicQueryImpl(DetachedCriteria.forClass(clazz, alias));
 	}
 
 	public DynamicQuery forClass(
-		Class clazz, String alias, ClassLoader classLoader) {
+		Class<?> clazz, String alias, ClassLoader classLoader) {
 
 		clazz = getImplClass(clazz, classLoader);
 
 		return new DynamicQueryImpl(DetachedCriteria.forClass(clazz, alias));
 	}
 
-	protected Class getImplClass(Class clazz) {
+	protected Class<?> getImplClass(Class<?> clazz) {
 		return getImplClass(clazz, null);
 	}
 
-	protected Class getImplClass(Class clazz, ClassLoader classLoader) {
+	protected Class<?> getImplClass(Class<?> clazz, ClassLoader classLoader) {
 		if (!clazz.getName().endsWith("Impl")) {
 			String implClassName =
 				clazz.getPackage().getName() + ".impl." +
@@ -102,6 +102,6 @@ public class DynamicQueryFactoryImpl implements DynamicQueryFactory {
 	private static Log _log =
 		LogFactoryUtil.getLog(DynamicQueryFactoryImpl.class);
 
-	private Map<String, Class> _classMap = new HashMap<String, Class>();
+	private Map<String, Class<?>> _classMap = new HashMap<String, Class<?>>();
 
 }

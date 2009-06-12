@@ -123,7 +123,7 @@ public class SessionImpl implements Session {
 		}
 	}
 
-	public Object get(Class clazz, Serializable id) throws ORMException {
+	public Object get(Class<?> clazz, Serializable id) throws ORMException {
 		try {
 			return _session.get(clazz, id);
 		}
@@ -132,7 +132,7 @@ public class SessionImpl implements Session {
 		}
 	}
 
-	public Object get(Class clazz, Serializable id, LockMode lockMode)
+	public Object get(Class<?> clazz, Serializable id, LockMode lockMode)
 		throws ORMException {
 
 		try {
@@ -148,7 +148,7 @@ public class SessionImpl implements Session {
 		return _session;
 	}
 
-	public Object load(Class clazz, Serializable id) throws ORMException {
+	public Object load(Class<?> clazz, Serializable id) throws ORMException {
 		try {
 			return _session.load(clazz, id);
 		}

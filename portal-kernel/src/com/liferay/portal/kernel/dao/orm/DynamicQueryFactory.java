@@ -30,13 +30,13 @@ package com.liferay.portal.kernel.dao.orm;
  */
 public interface DynamicQueryFactory {
 
-	public DynamicQuery forClass(Class clazz);
+	public DynamicQuery forClass(Class<?> clazz);
 
-	public DynamicQuery forClass(Class clazz, ClassLoader classLoader);
+	public DynamicQuery forClass(Class<?> clazz, ClassLoader classLoader);
 
-	public DynamicQuery forClass(Class clazz, String alias);
+	public DynamicQuery forClass(Class<?> clazz, String alias);
 
 	public DynamicQuery forClass(
-		Class clazz, String alias, ClassLoader classLoader);
+		Class<?> clazz, String alias, ClassLoader classLoader);
 
 }
