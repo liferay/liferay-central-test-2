@@ -664,9 +664,6 @@ public class PropsValues {
 		JOURNAL_TEMPLATE_VELOCITY_RESTRICTED_VARIABLES = PropsUtil.getArray(
 			PropsKeys.JOURNAL_TEMPLATE_VELOCITY_RESTRICTED_VARIABLES);
 
-	public static final String JPA_DATABASE_TYPE =
-		PropsUtil.get(PropsKeys.JPA_DATABASE_TYPE);
-
 	public static final String LAYOUT_CLONE_IMPL = PropsUtil.get(
 		PropsKeys.LAYOUT_CLONE_IMPL);
 
