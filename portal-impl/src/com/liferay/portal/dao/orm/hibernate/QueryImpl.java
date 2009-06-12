@@ -57,11 +57,11 @@ public class QueryImpl implements Query {
 		}
 	}
 
-	public Iterator iterate() throws ORMException {
+	public Iterator<?> iterate() throws ORMException {
 		return iterate(true);
 	}
 
-	public Iterator iterate(boolean unmodifiable) throws ORMException {
+	public Iterator<?> iterate(boolean unmodifiable) throws ORMException {
 		try {
 			return list(unmodifiable).iterator();
 		}
@@ -70,16 +70,16 @@ public class QueryImpl implements Query {
 		}
 	}
 
-	public List list() throws ORMException {
+	public List<?> list() throws ORMException {
 		return list(true);
 	}
 
-	public List list(boolean unmodifiable) throws ORMException {
+	public List<?> list(boolean unmodifiable) throws ORMException {
 		try {
-			List list = _query.list();
+			List<?> list = _query.list();
 
 			if (unmodifiable) {
-				return new UnmodifiableList(list);
+				return new UnmodifiableList<Object>(list);
 			}
 			else {
 				return ListUtil.copy(list);
