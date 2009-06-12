@@ -642,6 +642,17 @@
 		</licenses>
 	</library>
 	<library>
+		<file-name>development/persistence.jar</file-name>
+		<version>1.0</version>
+		<project-name>Java Persistence</project-name>
+		<project-url>http://java.sun.com/javaee/overview/faq/persistence.jsp</project-url>
+		<licenses>
+			<license>
+				<license-name>Sun Binary Code License Agreement</license-name>
+			</license>
+		</licenses>
+	</library>
+	<library>
 		<file-name>development/postgresql.jar</file-name>
 		<version>8.3-604 JDBC 3</version>
 		<project-name>PostgreSQL JDBC Driver</project-name>
