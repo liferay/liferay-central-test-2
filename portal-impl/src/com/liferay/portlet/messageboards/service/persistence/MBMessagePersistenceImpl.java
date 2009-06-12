@@ -1978,7 +1978,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl
 
 				query.append("mbMessage.threadId = ?");
 
-				query.append(" AND parentMessageId != 0 ");
+				query.append(" AND mbMessage.parentMessageId != 0 ");
 
 				query.append("ORDER BY ");
 
@@ -2041,7 +2041,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl
 
 				query.append("mbMessage.threadId = ?");
 
-				query.append(" AND parentMessageId != 0 ");
+				query.append(" AND mbMessage.parentMessageId != 0 ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
@@ -2162,7 +2162,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl
 
 			query.append("mbMessage.threadId = ?");
 
-			query.append(" AND parentMessageId != 0 ");
+			query.append(" AND mbMessage.parentMessageId != 0 ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
@@ -3883,7 +3883,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl
 
 				query.append("mbMessage.threadId = ?");
 
-				query.append(" AND parentMessageId != 0 ");
+				query.append(" AND mbMessage.parentMessageId != 0 ");
 
 				Query q = session.createQuery(query.toString());
 
