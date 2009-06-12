@@ -108,7 +108,7 @@ id = portletResponse.getNamespace() + id;
 
 				<input id="<%= id %>" name="<%= name %>" type="hidden" value="<%= value %>" />
 
-				<input <%= booleanValue ? "checked" : "" %> id="<%= id %>Checkbox" name="<%=name %>Checkbox" type="checkbox" onClick="jQuery(this).prev().val(this.checked); <%= _buildDynamicAttributes(dynamicAttributes) %> />
+				<input <%= booleanValue ? "checked" : "" %> id="<%= id %>Checkbox" name="<%=name %>Checkbox" type="checkbox" onClick="jQuery(this).prev().val(this.checked); <%= _buildDynamicAttributes(dynamicAttributes) %>" />
 			</span>
 		</c:when>
 		<c:otherwise>
