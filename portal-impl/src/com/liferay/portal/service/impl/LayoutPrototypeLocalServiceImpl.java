@@ -93,7 +93,7 @@ public class LayoutPrototypeLocalServiceImpl
 			userId, group.getGroupId(), true,
 			LayoutConstants.DEFAULT_PARENT_LAYOUT_ID,
 			String.valueOf(layoutPrototype.getLayoutPrototypeId()), null, null,
-			LayoutConstants.TYPE_PORTLET, false, "/page");
+			LayoutConstants.TYPE_PORTLET, false, "/layout");
 
 		return layoutPrototype;
 	}
