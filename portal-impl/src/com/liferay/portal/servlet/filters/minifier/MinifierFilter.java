@@ -266,33 +266,24 @@ public class MinifierFilter extends BasePortalFilter {
 		File file = new File(realPath);
 
 		if (!file.exists()) {
+			if (Validator.isNotNull(_servletContextName)) {
+				int lastIndex = realPath.lastIndexOf(
+					StringPool.SLASH + _servletContextName);
 
-				if (Validator.isNotNull(_servletContextName)) {
-
-				// JBoss
-				if (_servletContext.getServerInfo().startsWith("JBoss")) {
-
-					int lastIndex = realPath.lastIndexOf(
-						StringPool.SLASH + _servletContextName);
-
-					if (lastIndex > -1) {
-
+				if (lastIndex > -1) {
 					realPath = StringUtil.replace(
 						realPath, StringPool.SLASH + _servletContextName,
 						StringPool.BLANK, lastIndex);
-					}
 				}
-				else {
 
 				// Tomcat incorrectly returns the a real path to a resource that
 				// exists in another web application. For example, it returns
 				// ".../webapps/abc-theme/abc-theme/css/main.css" instead of
 				// ".../webapps/abc-theme/css/main.css".
 
-					realPath = StringUtil.replaceFirst(
-						realPath, StringPool.SLASH + _servletContextName,
-						StringPool.BLANK);
-				}
+				realPath = StringUtil.replaceFirst(
+					realPath, StringPool.SLASH + _servletContextName,
+					StringPool.BLANK);
 
 				file = new File(realPath);
 			}

@@ -695,7 +695,8 @@ public class StringUtil {
 	}
 
 	public static String replace(
-			String s, String oldSub, String newSub, int fromIndex) {
+		String s, String oldSub, String newSub, int fromIndex) {
+
 		if ((s == null) || (oldSub == null) || (newSub == null)) {
 			return null;
 		}
