@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:p="http://www.springframework.org/schema/p" xmlns:aop="http://www.springframework.org/schema/aop"
+		xmlns:context="http://www.springframework.org/schema/context" xmlns:jee="http://www.springframework.org/schema/jee"
+		xmlns:tx="http://www.springframework.org/schema/tx"
+		xsi:schemaLocation="
+			http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+			http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-2.5.xsd
+			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+
+	<context:load-time-weaver/>
+
+	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
+			p:dataSource-ref="liferayDataSource">
+		<property name="jpaVendorAdapter">
+			<bean class="org.springframework.orm.jpa.vendor.TopLinkJpaVendorAdapter"
+				p:databasePlatform="oracle.toplink.essentials.platform.database.MySQL4Platform"
+				p:showSql="false"/>
+
+			<!--
+			<bean class="org.springframework.orm.jpa.vendor.EclipseLinkJpaVendorAdapter"
+				p:databasePlatform="org.eclipse.persistence.platform.database.MySQLPlatform"
+				p:showSql="false"/>
+			-->
+			
+			<!--
+			<bean class="org.springframework.orm.jpa.vendor.OpenJpaVendorAdapter"
+				p:database="MYSQL" p:showSql="false"/>
+			-->
+
+			<!--
+			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"
+				p:database="MYSQL" p:showSql="false"/>
+			-->
+		</property>
+		<property name="loadTimeWeaver">
+			<bean class="org.springframework.instrument.classloading.ReflectiveLoadTimeWeaver"/>
+		</property>
+	</bean>
+
+	<!-- Transaction manager for a single JPA EntityManagerFactory (alternative to JTA) -->
+	<bean id="liferayTransactionManager" class="org.springframework.orm.jpa.JpaTransactionManager"
+			p:entityManagerFactory-ref="entityManagerFactory"/>
+
+	<context:annotation-config/>
+	
+	<bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
+
+	<bean id="jpaSessionImpl" class="com.liferay.portal.dao.orm.jpa.SessionImpl" lazy-init="true"/>
+
+	<bean id="liferaySessionFactory" class="com.liferay.portal.dao.orm.jpa.SessionFactoryImpl">
+		<property name="session" ref="jpaSessionImpl"/>
+	</bean>
+
+	<bean id="com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil" class="com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil">
+		<property name="dynamicQueryFactory">
+			<bean class="com.liferay.portal.dao.orm.jpa.DynamicQueryFactoryImpl" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.kernel.dao.orm.OrderFactoryUtil" class="com.liferay.portal.kernel.dao.orm.OrderFactoryUtil">
+		<property name="orderFactory">
+			<bean class="com.liferay.portal.dao.orm.jpa.OrderFactoryImpl" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil" class="com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil">
+		<property name="projectionFactory">
+			<bean class="com.liferay.portal.dao.orm.jpa.ProjectionFactoryImpl" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil" class="com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil">
+		<property name="propertyFactory">
+			<bean class="com.liferay.portal.dao.orm.jpa.PropertyFactoryImpl" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil" class="com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil">
+		<property name="restrictionsFactory">
+			<bean class="com.liferay.portal.dao.orm.jpa.RestrictionsFactoryImpl" />
+		</property>
+	</bean>
+
+</beans>

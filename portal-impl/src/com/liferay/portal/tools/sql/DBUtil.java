@@ -29,6 +29,8 @@ import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.velocity.VelocityUtil;
 import com.liferay.util.SimpleCounter;
@@ -115,14 +117,36 @@ public abstract class DBUtil {
 	public static DBUtil getInstance() {
 		if (_dbUtil == null) {
 			try {
-				if (_log.isInfoEnabled()) {
-					_log.info("Using dialect " + PropsValues.HIBERNATE_DIALECT);
+				if (Validator.isNotNull(PropsValues.HIBERNATE_DIALECT) &&
+					Validator.isNotNull(PropsValues.JPA_DATABASE_TYPE)) {
+
+					throw new Exception(
+						"Either set " + PropsKeys.HIBERNATE_DIALECT +
+						" or set " + PropsKeys.JPA_DATABASE_TYPE +
+						", but not both.");
 				}
 
-				Dialect dialect = (Dialect)Class.forName(
-					PropsValues.HIBERNATE_DIALECT).newInstance();
+				if (Validator.isNotNull(PropsValues.HIBERNATE_DIALECT)) {
+						Dialect dialect = (Dialect)Class.forName(
+							PropsValues.HIBERNATE_DIALECT).newInstance();
 
-				setInstance(dialect);
+						if (_log.isInfoEnabled()) {
+							_log.info(
+								"Using hibernate dialect " +
+								PropsValues.HIBERNATE_DIALECT);
+						}
+
+						setInstance(dialect);
+				}
+				else if (Validator.isNotNull(PropsValues.JPA_DATABASE_TYPE)) {
+					if (_log.isInfoEnabled()) {
+						_log.info(
+							"Using JPA database type " +
+							PropsValues.JPA_DATABASE_TYPE);
+					}
+
+					_dbUtil = getInstance(PropsValues.JPA_DATABASE_TYPE);
+				}
 			}
 			catch (Exception e) {
 				_log.error(e, e);

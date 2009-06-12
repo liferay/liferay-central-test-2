@@ -1,5 +1,11 @@
 <Context path="" crossContext="true">
 
+	<!--
+	Uncomment the following for JPA to enable load-time weaving
+	-->
+
+	<!--<Loader loaderClass="org.springframework.instrument.classloading.tomcat.TomcatInstrumentableClassLoader"/>-->
+
 	<!-- JAAS -->
 
 	<Realm

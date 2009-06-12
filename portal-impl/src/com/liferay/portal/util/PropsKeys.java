@@ -600,6 +600,8 @@ public interface PropsKeys {
 
 	public static final String JOURNAL_TRANSFORMER_LISTENER = "journal.transformer.listener";
 
+	public static final String JPA_DATABASE_TYPE = "jpa.database.type";
+
 	public static final String LAYOUT_CLONE_IMPL = "layout.clone.impl";
 
 	public static final String LAYOUT_COMMENTS_ENABLED = "layout.comments.enabled";
