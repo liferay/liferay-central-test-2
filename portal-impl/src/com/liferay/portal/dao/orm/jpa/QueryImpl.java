@@ -47,6 +47,7 @@ import com.liferay.portal.kernel.dao.orm.ORMException;
 import com.liferay.portal.kernel.dao.orm.Query;
 import com.liferay.portal.kernel.dao.orm.ScrollableResults;
 import com.liferay.portal.kernel.util.ListUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.UnmodifiableList;
 
 import java.io.Serializable;
@@ -71,29 +72,26 @@ import javax.persistence.FlushModeType;
 public class QueryImpl implements Query {
 
 	public QueryImpl(SessionImpl sessionImpl, String queryString) {
-		_sessionImpl = sessionImpl;
-
-		queryString = SQLTransformer.transform(queryString);
-
-		_queryString = _hqlTojpql(queryString);
+		this.sessionImpl = sessionImpl;
+		this.queryString = _hqlTojpql(SQLTransformer.transform(queryString));
 	}
 
 	public int executeUpdate() throws ORMException {
 		try {
-			return _sessionImpl.executeUpdate(
-				_queryString, _parameterMap, _firstResult,
-				_maxResults, _flushMode, _sqlQuery, _entityClass);
+			return sessionImpl.executeUpdate(
+				queryString, parameterMap, firstResult, maxResults,
+				flushModeType, sqlQuery, entityClass);
 		}
 		catch (Exception e) {
 			throw ExceptionTranslator.translate(e);
 		}
 	}
 
-	public Iterator iterate() throws ORMException {
+	public Iterator<?> iterate() throws ORMException {
 		return iterate(true);
 	}
 
-	public Iterator iterate(boolean unmodifiable) throws ORMException {
+	public Iterator<?> iterate(boolean unmodifiable) throws ORMException {
 		try {
 			return list(unmodifiable).iterator();
 		}
@@ -102,18 +100,18 @@ public class QueryImpl implements Query {
 		}
 	}
 
-	public List list() throws ORMException {
+	public List<?> list() throws ORMException {
 		return list(true);
 	}
 
-	public List list(boolean unmodifiable) throws ORMException {
+	public List<?> list(boolean unmodifiable) throws ORMException {
 		try {
-			List list = _sessionImpl.list(
-				_queryString, _parameterMap, _firstResult,
-				_maxResults, _flushMode, _sqlQuery, _entityClass);
+			List<?> list = sessionImpl.list(
+				queryString, parameterMap, firstResult, maxResults,
+				flushModeType, sqlQuery, entityClass);
 
 			if (unmodifiable) {
-				return new UnmodifiableList(list);
+				return new UnmodifiableList<Object>(list);
 			}
 			else {
 				return ListUtil.copy(list);
@@ -134,17 +132,12 @@ public class QueryImpl implements Query {
 	}
 
 	public Query setBoolean(int pos, boolean value) {
-		_parameterMap.put(pos, value);
+		parameterMap.put(pos, value);
 
 		return this;
 	}
 
 	public Query setCacheable(boolean cacheable) {
-
-		//TODO: use Query.setHint
-		//Hints are provider specific and will need to be configured and
-		//read from portal.properties
-
 		return this;
 	}
 
@@ -157,78 +150,82 @@ public class QueryImpl implements Query {
 	}
 
 	public Query setDouble(int pos, double value) {
-		_parameterMap.put(pos, Double.valueOf(value));
+		parameterMap.put(pos, Double.valueOf(value));
 
 		return this;
 	}
 
 	public Query setFirstResult(int firstResult) {
-		_firstResult = firstResult;
+		this.firstResult = firstResult;
 
 		return this;
 	}
 
 	public Query setFloat(int pos, float value) {
-		_parameterMap.put(pos, Float.valueOf(value));
+		parameterMap.put(pos, Float.valueOf(value));
 
 		return this;
 	}
 
-	public Query setFlushMode(FlushModeType flushMode) {
-		_flushMode = flushMode;
+	public Query setFlushMode(FlushModeType flushModeType) {
+		this.flushModeType = flushModeType;
 
 		return this;
 	}
 
 	public Query setInteger(int pos, int value) {
-		_parameterMap.put(pos, Integer.valueOf(value));
+		parameterMap.put(pos, Integer.valueOf(value));
 
 		return this;
 	}
 
 	public Query setLong(int pos, long value) {
-		_parameterMap.put(pos, Long.valueOf(value));
+		parameterMap.put(pos, Long.valueOf(value));
 
 		return this;
 	}
 
 	public Query setMaxResults(int maxResults) {
-		_maxResults = maxResults;
+		this.maxResults = maxResults;
 
 		return this;
 	}
 
 	public Query setSerializable(int pos, Serializable value) {
-		_parameterMap.put(pos, value);
+		parameterMap.put(pos, value);
 
 		return this;
 	}
 
 	public Query setShort(int pos, short value) {
-		_parameterMap.put(pos, Short.valueOf(value));
+		parameterMap.put(pos, Short.valueOf(value));
 
 		return this;
 	}
 
 	public Query setString(int pos, String value) {
-		_parameterMap.put(pos, value);
+		parameterMap.put(pos, value);
 
 		return this;
 	}
 
 	public Query setTimestamp(int pos, Timestamp value) {
-		Date date = (value == null) ? null : new Date(value.getTime());
+		Date date = null;
 
-		_parameterMap.put(pos, date);
+		if (value != null) {
+			date = new Date(value.getTime());
+		}
+
+		parameterMap.put(pos, date);
 
 		return this;
 	}
 
 	public Object uniqueResult() throws ORMException {
 		try {
-			return _sessionImpl.uniqueResult(
-				_queryString, _parameterMap, _firstResult,
-				_maxResults, _flushMode, _sqlQuery, _entityClass);
+			return sessionImpl.uniqueResult(
+				queryString, parameterMap, firstResult, maxResults,
+				flushModeType, sqlQuery, entityClass);
 		}
 		catch (Exception e) {
 			throw ExceptionTranslator.translate(e);
@@ -236,29 +233,30 @@ public class QueryImpl implements Query {
 	}
 
 	private String _hqlTojpql(String queryString) {
-		String modQuery = _transformPositionalParams(queryString);
+		queryString = _transformPositionalParams(queryString);
 
-		modQuery = modQuery.replaceAll(_HQL_NOT_EQUALS, _JPQL_NOT_EQUALS);
-
-		modQuery = modQuery.replaceAll(
+		queryString = queryString.replaceAll(_HQL_NOT_EQUALS, _JPQL_NOT_EQUALS);
+		queryString = queryString.replaceAll(
 			_HQL_COMPOSITE_ID_MARKER, _JPQL_DOT_SEPARTOR);
 
-		return modQuery;
+		return queryString;
 	}
 
 	private String _transformPositionalParams(String queryString) {
-		if (queryString.indexOf('?') == -1) {
+		if (queryString.indexOf(StringPool.QUESTION) == -1) {
 			return queryString;
 		}
 
 		StringBuilder sb = new StringBuilder();
 
-		int i = 1, from = 0, to;
+		int i = 1;
+		int from = 0;
+		int to = 0;
 
-		while ( (to = queryString.indexOf('?', from)) != -1 ) {
-			sb.append(queryString.substring(from, to))
-				.append("?")
-				.append(i++);
+		while ((to = queryString.indexOf(StringPool.QUESTION, from)) != -1) {
+			sb.append(queryString.substring(from, to));
+			sb.append(StringPool.QUESTION);
+			sb.append(i++);
 
 			from = to + 1;
 		}
@@ -268,19 +266,22 @@ public class QueryImpl implements Query {
 		return sb.toString();
 	}
 
-	protected static final String _HQL_COMPOSITE_ID_MARKER = "\\.id\\.";
-	protected static final String _HQL_NOT_EQUALS = "!=";
-	protected static final String _JPQL_DOT_SEPARTOR = ".";
-	protected static final String _JPQL_NOT_EQUALS = "<>";
-
-	protected int _firstResult = -1;
-	protected FlushModeType _flushMode = null;
-	protected Class _entityClass = null;
-	protected int _maxResults = -1;
-	protected Map<Integer, Object> _parameterMap =
+	protected Class<?> entityClass = null;
+	protected int firstResult = -1;
+	protected FlushModeType flushModeType = null;
+	protected int maxResults = -1;
+	protected Map<Integer, Object> parameterMap =
 		new HashMap<Integer, Object>();
-	protected String _queryString;
-	protected SessionImpl _sessionImpl;
-	protected boolean _sqlQuery = false;
+	protected String queryString;
+	protected SessionImpl sessionImpl;
+	protected boolean sqlQuery = false;
+
+	private static final String _HQL_COMPOSITE_ID_MARKER = "\\.id\\.";
+
+	private static final String _HQL_NOT_EQUALS = "!=";
+
+	private static final String _JPQL_DOT_SEPARTOR = ".";
+
+	private static final String _JPQL_NOT_EQUALS = "<>";
 
 }

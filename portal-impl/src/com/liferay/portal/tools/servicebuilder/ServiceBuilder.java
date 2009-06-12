@@ -63,6 +63,8 @@ import freemarker.ext.beans.BeansWrapper;
 import freemarker.template.TemplateHashModel;
 import freemarker.template.TemplateModelException;
 
+import java.beans.Introspector;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -85,8 +87,6 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
-
-import java.beans.Introspector;
 
 import org.dom4j.DocumentException;
 
@@ -113,9 +113,9 @@ public class ServiceBuilder {
 		if (args.length == 7) {
 			String fileName = args[0];
 			String hbmFileName = args[1];
-			String ormFileName = args[2];
-			String modelHintsFileName = args[3];
-			String springFileName = args[4];
+			String ormFileName = "src/META-INF/portal-orm.xml";
+			String modelHintsFileName = args[2];
+			String springFileName = args[3];
 			String springBaseFileName = "";
 			String springDynamicDataSourceFileName = "";
 			String springHibernateFileName = "";
@@ -405,12 +405,12 @@ public class ServiceBuilder {
 		String modelHintsFileName, String springFileName,
 		String springBaseFileName, String springDynamicDataSourceFileName,
 		String springHibernateFileName,	String springInfrastructureFileName,
-		String apiDir, String implDir,
-		String jsonFileName, String remotingFileName, String sqlDir,
-		String sqlFileName, String sqlIndexesFileName,
-		String sqlIndexesPropertiesFileName, String sqlSequencesFileName,
-		boolean autoNamespaceTables, String beanLocatorUtil, String propsUtil,
-		String pluginName, String testDir) {
+		String apiDir, String implDir, String jsonFileName,
+		String remotingFileName, String sqlDir, String sqlFileName,
+		String sqlIndexesFileName, String sqlIndexesPropertiesFileName,
+		String sqlSequencesFileName, boolean autoNamespaceTables,
+		String beanLocatorUtil, String propsUtil, String pluginName,
+		String testDir) {
 
 		new ServiceBuilder(
 			fileName, hbmFileName, ormFileName, modelHintsFileName,
@@ -427,12 +427,12 @@ public class ServiceBuilder {
 		String modelHintsFileName, String springFileName,
 		String springBaseFileName, String springDynamicDataSourceFileName,
 		String springHibernateFileName,	String springInfrastructureFileName,
-		String apiDir, String implDir,
-		String jsonFileName, String remotingFileName, String sqlDir,
-		String sqlFileName, String sqlIndexesFileName,
-		String sqlIndexesPropertiesFileName, String sqlSequencesFileName,
-		boolean autoNamespaceTables, String beanLocatorUtil, String propsUtil,
-		String pluginName, String testDir, boolean build) {
+		String apiDir, String implDir, String jsonFileName,
+		String remotingFileName, String sqlDir, String sqlFileName,
+		String sqlIndexesFileName, String sqlIndexesPropertiesFileName,
+		String sqlSequencesFileName, boolean autoNamespaceTables,
+		String beanLocatorUtil, String propsUtil, String pluginName,
+		String testDir, boolean build) {
 
 		_tplBadAliasNames = _getTplProperty(
 			"bad_alias_names", _tplBadAliasNames);
@@ -989,8 +989,8 @@ public class ServiceBuilder {
 							_createModelImpl(entity);
 							_createExtendedModelImpl(entity);
 
-							List transients = _extractTransients(entity);
-							
+							List<String> transients = _getTransients(entity);
+
 							entity.setTransients(transients);
 
 							_createModel(entity);
@@ -1193,9 +1193,8 @@ public class ServiceBuilder {
 				refFileName, _hbmFileName, _ormFileName, _modelHintsFileName,
 				_springFileName, _springBaseFileName,
 				_springDynamicDataSourceFileName, _springHibernateFileName,
-				_springInfrastructureFileName, _apiDir, _implDir,
-				_jsonFileName, _remotingFileName, _sqlDir,
-				_sqlFileName, _sqlIndexesFileName,
+				_springInfrastructureFileName, _apiDir, _implDir, _jsonFileName,
+				_remotingFileName, _sqlDir, _sqlFileName, _sqlIndexesFileName,
 				_sqlIndexesPropertiesFileName, _sqlSequencesFileName,
 				_autoNamespaceTables, _beanLocatorUtil, _propsUtil, _pluginName,
 				_testDir, false);
@@ -2264,15 +2263,15 @@ public class ServiceBuilder {
 			String xml =
 				"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
 				"<entity-mappings xmlns=\"http://java.sun.com/xml/ns/persistence/orm\"\n" +
-				"	xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n" +
-				"	xsi:schemaLocation=\"http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_1_0.xsd\"\n" +
-				"	version=\"1.0\">\n"+
-				"	<persistence-unit-metadata>\n" +
-				"		<xml-mapping-metadata-complete/>\n" +
-				"		<persistence-unit-defaults>\n" +
-				"			<access>PROPERTY</access>\n" +
-				"		</persistence-unit-defaults>\n" +
-				"	</persistence-unit-metadata>\n" +
+				"\txmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n" +
+				"\txsi:schemaLocation=\"http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_1_0.xsd\"\n" +
+				">\n" +
+				"<persistence-unit-metadata>\n" +
+				"\t<xml-mapping-metadata-complete />\n" +
+				"\t<persistence-unit-defaults>\n" +
+				"\t\t<access>PROPERTY</access>\n" +
+				"\t</persistence-unit-defaults>\n" +
+				"</persistence-unit-metadata>\n" +
 				"</entity-mappings>";
 
 			FileUtil.write(xmlFile, xml);
@@ -3473,67 +3472,6 @@ public class ServiceBuilder {
 		}
 	}
 
-	private List _extractTransients(Entity entity) throws Exception {
-		File modelFile = new File(
-			_outputPath + "/model/impl/" + entity.getName() + "Impl.java");
-
-		String source = FileUtil.read(modelFile);
-
-		CharSequence seq = source.subSequence(0, source.length());
-
-		Matcher matcher = _GETTER_PATTERN.matcher(seq);
-
-		Set getters = new HashSet();
-
-		while (!matcher.hitEnd()) {
-			boolean found = matcher.find();
-
-			if (found) {
-				String property = matcher.group();
-
-				if (property.indexOf("get") != -1) {
-					property = property.substring(
-						property.indexOf("get") + 3, property.length() - 1);					
-				}
-				else {
-					property = property.substring(
-						property.indexOf("is") + 2, property.length() - 1);
-				}
-
-				property = Introspector.decapitalize(property);
-
-				getters.add(property);
-			}
-		}
-
-		matcher = _SETTER_PATTERN.matcher(seq);
-
-		Set setters = new HashSet();
-
-		while (!matcher.hitEnd()) {
-			boolean found = matcher.find();
-			
-			if (found) {
-				String property = matcher.group();
-
-				property = property.substring(
-					property.indexOf("set") + 3, property.length() - 1);
-
-				property = Introspector.decapitalize(property);
-
-				setters.add(property);
-			}
-		}
-
-		getters.retainAll(setters);
-
-		List transients = new ArrayList(getters);
-
-		Collections.sort(transients);
-
-		return transients;
-	}
-	
 	private String _fixHbmXml(String content) throws IOException {
 		StringBuilder sb = new StringBuilder();
 
@@ -3976,6 +3914,65 @@ public class ServiceBuilder {
 		}
 	}
 
+	private List<String> _getTransients(Entity entity) throws Exception {
+		File modelFile = new File(
+			_outputPath + "/model/impl/" + entity.getName() + "Impl.java");
+
+		String content = FileUtil.read(modelFile);
+
+		Matcher matcher = _getterPattern.matcher(content);
+
+		Set<String> getters = new HashSet<String>();
+
+		while (!matcher.hitEnd()) {
+			boolean found = matcher.find();
+
+			if (found) {
+				String property = matcher.group();
+
+				if (property.indexOf("get") != -1) {
+					property = property.substring(
+						property.indexOf("get") + 3, property.length() - 1);
+				}
+				else {
+					property = property.substring(
+						property.indexOf("is") + 2, property.length() - 1);
+				}
+
+				property = Introspector.decapitalize(property);
+
+				getters.add(property);
+			}
+		}
+
+		matcher = _setterPattern.matcher(content);
+
+		Set<String> setters = new HashSet<String>();
+
+		while (!matcher.hitEnd()) {
+			boolean found = matcher.find();
+
+			if (found) {
+				String property = matcher.group();
+
+				property = property.substring(
+					property.indexOf("set") + 3, property.length() - 1);
+
+				property = Introspector.decapitalize(property);
+
+				setters.add(property);
+			}
+		}
+
+		getters.retainAll(setters);
+
+		List<String> transients = new ArrayList<String>(getters);
+
+		Collections.sort(transients);
+
+		return transients;
+	}
+
 	private String _getTplProperty(String key, String defaultValue) {
 		return System.getProperty("service.tpl." + key, defaultValue);
 	}
@@ -4018,13 +4015,6 @@ public class ServiceBuilder {
 
 	private static final String _AUTHOR = "Brian Wing Shun Chan";
 
-	private static final Pattern _GETTER_PATTERN = Pattern.compile(
-		"public .* get.*" + Pattern.quote("(") +
-		"|public boolean is.*" + Pattern.quote("("));
-
-	private static final Pattern _SETTER_PATTERN = Pattern.compile(
-		"public void set.*" + Pattern.quote("("));
-
 	private static final int _SESSION_TYPE_REMOTE = 0;
 
 	private static final int _SESSION_TYPE_LOCAL = 1;
@@ -4033,6 +4023,12 @@ public class ServiceBuilder {
 
 	private static final String _TPL_ROOT =
 		"com/liferay/portal/tools/servicebuilder/dependencies/";
+
+	private static Pattern _getterPattern = Pattern.compile(
+		"public .* get.*" + Pattern.quote("(") + "|public boolean is.*" +
+			Pattern.quote("("));
+	private static Pattern _setterPattern = Pattern.compile(
+		"public void set.*" + Pattern.quote("("));
 
 	private String _tplBadAliasNames =  _TPL_ROOT + "bad_alias_names.txt";
 	private String _tplBadColumnNames = _TPL_ROOT + "bad_column_names.txt";

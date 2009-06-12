@@ -43,6 +43,8 @@ package com.liferay.portal.dao.orm.jpa;
 
 import com.liferay.portal.kernel.dao.orm.LockMode;
 
+import javax.persistence.LockModeType;
+
 /**
  * <a href="LockModeTranslator.java.html"><b><i>View Source</i></b></a>
  *
@@ -52,12 +54,12 @@ import com.liferay.portal.kernel.dao.orm.LockMode;
  */
 public class LockModeTranslator {
 
-	public static javax.persistence.LockModeType translate(LockMode lockMode) {
+	public static LockModeType translate(LockMode lockMode) {
 		if (lockMode == LockMode.READ) {
-			return javax.persistence.LockModeType.READ;
+			return LockModeType.READ;
 		}
 		else if (lockMode == LockMode.WRITE) {
-			return javax.persistence.LockModeType.WRITE;
+			return LockModeType.WRITE;
 		}
 		else {
 			return null;

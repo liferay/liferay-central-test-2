@@ -54,7 +54,7 @@ import com.liferay.portal.kernel.dao.orm.PropertyFactory;
 public class PropertyFactoryImpl implements PropertyFactory {
 
 	public Property forName(String propertyName) {
-		throw new UnsupportedOperationException("Not supported yet.");
+		throw new UnsupportedOperationException();
 	}
 
 }

@@ -45,6 +45,7 @@ import com.liferay.portal.kernel.dao.orm.ORMException;
 import com.liferay.portal.kernel.dao.orm.SQLQuery;
 import com.liferay.portal.kernel.dao.orm.Type;
 import com.liferay.portal.kernel.util.ListUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.UnmodifiableList;
 
 import java.lang.reflect.Field;
@@ -66,15 +67,13 @@ import java.util.regex.Pattern;
  */
 public class SQLQueryImpl extends QueryImpl implements SQLQuery {
 
-	public SQLQueryImpl(
-		SessionImpl sessionImpl, String queryString) {
-
+	public SQLQueryImpl(SessionImpl sessionImpl, String queryString) {
 		super(sessionImpl, queryString);
 
-		_sqlQuery = true;
+		sqlQuery = true;
 	}
 
-	public SQLQuery addEntity(String alias, Class entityClass) {
+	public SQLQuery addEntity(String alias, Class<?> entityClass) {
 		String columnAliases = null;
 
 		try {
@@ -85,12 +84,12 @@ public class SQLQueryImpl extends QueryImpl implements SQLQuery {
 			int i = 0;
 
 			for (String column : columnNames) {
-				sb.append(alias)
-					.append(".")
-					.append(column);
+				sb.append(alias);
+				sb.append(StringPool.PERIOD);
+				sb.append(column);
 
 				if ((i + 1) < columnNames.length) {
-					sb.append(", ");
+					sb.append(StringPool.COMMA_AND_SPACE);
 				}
 
 				i++;
@@ -104,18 +103,17 @@ public class SQLQueryImpl extends QueryImpl implements SQLQuery {
 
 		String escapedAlias = Pattern.quote("{" + alias + ".*}");
 
-		_queryString = _queryString.replaceAll(escapedAlias, columnAliases);
+		queryString = queryString.replaceAll(escapedAlias, columnAliases);
 
-		_entityClass = entityClass;
+		this.entityClass = entityClass;
 
 		return this;
 	}
 
 	public SQLQuery addScalar(String columnAlias, Type type) {
-
 		columnAlias = columnAlias.toLowerCase();
 
-		String q = _queryString.toLowerCase();
+		String q = queryString.toLowerCase();
 
 		int fromIndex = q.indexOf("from");
 
@@ -125,7 +123,7 @@ public class SQLQueryImpl extends QueryImpl implements SQLQuery {
 
 		String selectExpression = q.substring(0, fromIndex);
 
-		String[] selectTokens = selectExpression.split(",");
+		String[] selectTokens = selectExpression.split(StringPool.COMMA);
 
 		for (int pos = 0; pos < selectTokens.length; pos++) {
 			String s = selectTokens[pos];
@@ -138,85 +136,18 @@ public class SQLQueryImpl extends QueryImpl implements SQLQuery {
 		return this;
 	}
 
-	public List list(boolean unmodifiable) throws ORMException {
+	public List<?> list(boolean unmodifiable) throws ORMException {
 		try {
+			List<?> list = sessionImpl.list(
+				queryString, parameterMap, firstResult, maxResults,
+				flushModeType, sqlQuery, entityClass);
 
-			List list = _sessionImpl.list(
-				_queryString, _parameterMap, _firstResult,
-				_maxResults, _flushMode, _sqlQuery, _entityClass);
-
-			if (_entityClass == null && !list.isEmpty()) {
-
-				if (!_scalars.isEmpty()) {
-
-					int nScalars = _scalars.size();
-
-					if (nScalars > 1) {
-						Collections.sort(_scalars);
-					}
-
-					if (list.get(0) instanceof Collection) {
-						List<Object> newList = new ArrayList<Object>();
-
-						for (Collection collection: (List<Collection>)list) {
-							Object[] listedValues = collection.toArray();
-
-							if (nScalars > 1) {
-								Object[] values = new Object[nScalars];
-
-								for (int i = 0; i < nScalars; i++) {
-									values[i] = listedValues[_scalars.get(i)];
-								}
-
-								newList.add(values);
-							}
-							else {
-								newList.add(listedValues[_scalars.get(0)]);
-							}
-						}
-
-						list = newList;
-					}
-					else if (list.get(0) instanceof Object[]) {
-						List<Object> newList = new ArrayList<Object>();
-
-						for (Object[] listedValues: (List<Object[]>)list) {
-							if (nScalars > 1) {
-								Object[] values = new Object[nScalars];
-
-								for (int i = 0; i < nScalars; i++) {
-									values[i] = listedValues[_scalars.get(i)];
-								}
-
-								newList.add(values);
-							}
-							else {
-								newList.add(listedValues[_scalars.get(0)]);
-							}
-						}
-
-						list = newList;
-					}
-				}
-				else if (list.get(0) instanceof Collection) {
-
-					List<Object> newList = new ArrayList<Object>();
-
-					for (Collection collection: (List<Collection>)list) {
-						if (collection.size() == 1) {
-							newList.add(collection.iterator().next());
-						}
-						else {
-							newList.add(collection.toArray());
-						}
-					}
-
-					list = newList;
-				}
+			if ((entityClass == null) && !list.isEmpty()) {
+				list = _transformList(list);
 			}
 
 			if (unmodifiable) {
-				return new UnmodifiableList(list);
+				return new UnmodifiableList<Object>(list);
 			}
 			else {
 				return ListUtil.copy(list);
@@ -229,14 +160,16 @@ public class SQLQueryImpl extends QueryImpl implements SQLQuery {
 
 	public Object uniqueResult() throws ORMException {
 		try {
-			Object object =  _sessionImpl.uniqueResult(
-				_queryString, _parameterMap, _firstResult,
-				_maxResults, _flushMode, _sqlQuery, _entityClass);
+			Object object =  sessionImpl.uniqueResult(
+				queryString, parameterMap, firstResult, maxResults,
+				flushModeType, sqlQuery, entityClass);
 
-			if (object instanceof Collection &&
-				(((Collection)object).size() == 1)) {
+			if (object instanceof Collection) {
+				Collection<Object> collection = (Collection<Object>)object;
 
-				object = ((Collection)object).iterator().next();
+				if (collection.size() == 1) {
+					object = collection.iterator().next();
+				}
 			}
 
 			return object;
@@ -246,32 +179,93 @@ public class SQLQueryImpl extends QueryImpl implements SQLQuery {
 		}
 	}
 
-	private String[] _getColumns(Class entityClass) throws Exception {
+	private String[] _getColumns(Class<?> entityClass) throws Exception {
 		String[] columns = _entityColumns.get(entityClass);
 
-		if (columns == null) {
-			Field field = entityClass.getField("TABLE_COLUMNS");
-
-			Object[][] tableColumns = (Object[][])field.get(null);
-
-			columns = new String[tableColumns.length];
-
-			int i = 0;
-
-			for (Object[] row : tableColumns) {
-				String name = (String)row[0];
-
-				columns[i++] = name.toUpperCase();
-			}
-
-			_entityColumns.put(entityClass, columns);
+		if (columns != null) {
+			return columns;
 		}
+
+		Field field = entityClass.getField("TABLE_COLUMNS");
+
+		Object[][] tableColumns = (Object[][])field.get(null);
+
+		columns = new String[tableColumns.length];
+
+		int i = 0;
+
+		for (Object[] row : tableColumns) {
+			String name = (String)row[0];
+
+			columns[i++] = name.toUpperCase();
+		}
+
+		_entityColumns.put(entityClass, columns);
 
 		return columns;
 	}
 
-	private static Map<Class, String[]> _entityColumns =
-		new ConcurrentHashMap<Class, String[]>();
+	private List<?> _transformList(List<?> list) throws Exception {
+		if (!_scalars.isEmpty()) {
+			Collections.sort(_scalars);
+
+			if (list.get(0) instanceof Collection) {
+				List<Object> newList = new ArrayList<Object>();
+
+				for (Collection<Object> collection :
+						(List<Collection<Object>>)list) {
+
+					Object[] array = collection.toArray();
+
+					Object[] values = new Object[_scalars.size()];
+
+					for (int i = 0; i < _scalars.size(); i++) {
+						values[i] = array[_scalars.get(i)];
+					}
+
+					newList.add(values);
+				}
+
+				list = newList;
+			}
+			else if (list.get(0) instanceof Object[]) {
+				List<Object> newList = new ArrayList<Object>();
+
+				for (Object[] array : (List<Object[]>)list) {
+					Object[] values = new Object[_scalars.size()];
+
+					for (int i = 0; i < _scalars.size(); i++) {
+						values[i] = array[_scalars.get(i)];
+					}
+
+					newList.add(values);
+				}
+
+				list = newList;
+			}
+		}
+		else if (list.get(0) instanceof Collection) {
+			List<Object> newList = new ArrayList<Object>();
+
+			for (Collection<Object> collection :
+					(List<Collection<Object>>)list) {
+
+				if (collection.size() == 1) {
+					newList.add(collection.iterator().next());
+				}
+				else {
+					newList.add(collection.toArray());
+				}
+			}
+
+			list = newList;
+		}
+
+		return list;
+	}
+
+	private static Map<Class<?>, String[]> _entityColumns =
+		new ConcurrentHashMap<Class<?>, String[]>();
 
 	private List<Integer> _scalars = new ArrayList<Integer>();
 

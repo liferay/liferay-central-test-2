@@ -269,7 +269,7 @@ public class Entity {
 		return _table;
 	}
 
-	public List getTransients() {
+	public List<String> getTransients() {
 		return _transients;
 	}
 
@@ -433,7 +433,7 @@ public class Entity {
 		_portalReference = portalReference;
 	}
 
-	public void setTransients(List transients) {
+	public void setTransients(List<String> transients) {
 		_transients = transients;
 	}
 
@@ -458,7 +458,7 @@ public class Entity {
 	private boolean _remoteService;
 	private String _sessionFactory;
 	private String _table;
-	private List _transients;
+	private List<String> _transients;
 	private String _txManager;
 	private List<String> _txRequiredList;
 	private boolean _uuid;

@@ -109,9 +109,6 @@ public class SessionImpl implements Session {
 	}
 
 	public void evict(Object object) throws ORMException {
-
-		//NOOP - JPA 1.0 does not have 2nd level cache (proposed for JPA 2.0)
-
 	}
 
 	public void flush() throws ORMException {
@@ -123,7 +120,7 @@ public class SessionImpl implements Session {
 		}
 	}
 
-	public Object get(Class clazz, Serializable id) throws ORMException {
+	public Object get(Class<?> clazz, Serializable id) throws ORMException {
 		try {
 			return _entityManager.find(clazz, id);
 		}
@@ -132,7 +129,7 @@ public class SessionImpl implements Session {
 		}
 	}
 
-	public Object get(Class clazz, Serializable id, LockMode lockMode)
+	public Object get(Class<?> clazz, Serializable id, LockMode lockMode)
 		throws ORMException {
 
 		try {
@@ -152,7 +149,7 @@ public class SessionImpl implements Session {
 		}
 	}
 
-	public Object load(Class clazz, Serializable id) throws ORMException {
+	public Object load(Class<?> clazz, Serializable id) throws ORMException {
 		try {
 			return _entityManager.getReference(clazz, id);
 		}
@@ -174,7 +171,8 @@ public class SessionImpl implements Session {
 		try {
 			_entityManager.persist(object);
 
-			//hibernate returns generated idenitfier which is not used anywhwere
+			// Hibernate returns generated idenitfier which is not used
+			// anywhere
 
 			return null;
 		}
@@ -192,10 +190,10 @@ public class SessionImpl implements Session {
 		}
 	}
 
-	int executeUpdate(
-		String queryString, Map parameterMap,
-		int firstResult, int maxResults,
-		FlushModeType flushMode, boolean sqlQuery, Class entityClass) {
+	protected int executeUpdate(
+		String queryString, Map<Integer, Object> parameterMap,
+		int firstResult, int maxResults, FlushModeType flushMode,
+		boolean sqlQuery, Class<?> entityClass) {
 
 		javax.persistence.Query query = _getExecutableQuery(
 			queryString, parameterMap, firstResult, maxResults,
@@ -204,10 +202,10 @@ public class SessionImpl implements Session {
 		return query.executeUpdate();
 	}
 
-	List list(
-		String queryString, Map parameterMap,
-		int firstResult, int maxResults,
-		FlushModeType flushMode, boolean sqlQuery, Class entityClass) {
+	protected List<?> list(
+		String queryString, Map<Integer, Object> parameterMap, int firstResult,
+		int maxResults, FlushModeType flushMode, boolean sqlQuery,
+		Class<?> entityClass) {
 
 		javax.persistence.Query query = _getExecutableQuery(
 			queryString, parameterMap, firstResult, maxResults,
@@ -216,10 +214,10 @@ public class SessionImpl implements Session {
 		return query.getResultList();
 	}
 
-	Object uniqueResult(
-		String queryString, Map parameterMap, int firstResult,
-		int maxResults, FlushModeType flushMode,
-		boolean sqlQuery, Class entityClass) {
+	protected Object uniqueResult(
+		String queryString, Map<Integer, Object> parameterMap, int firstResult,
+		int maxResults, FlushModeType flushMode, boolean sqlQuery,
+		Class<?> entityClass) {
 
 		javax.persistence.Query query = _getExecutableQuery(
 			queryString, parameterMap, firstResult, maxResults,
@@ -230,9 +228,9 @@ public class SessionImpl implements Session {
 	}
 
 	private javax.persistence.Query _getExecutableQuery(
-		String queryString, Map parameterMap, int firstResult,
-		int maxResults, FlushModeType flushMode,
-		boolean sqlQuery, Class entityClass) {
+		String queryString, Map<Integer, Object> parameterMap,
+		int firstResult, int maxResults, FlushModeType flushMode,
+		boolean sqlQuery, Class<?> entityClass) {
 
 		javax.persistence.Query query = null;
 
@@ -244,7 +242,6 @@ public class SessionImpl implements Session {
 			else {
 				query = _entityManager.createNativeQuery(queryString);
 			}
-
 		}
 		else {
 			query = _entityManager.createQuery(queryString);
@@ -267,11 +264,10 @@ public class SessionImpl implements Session {
 		return query;
 	}
 
-	private void _setParameters(javax.persistence.Query query,
-		Map<Integer, Object> parameterMap) {
+	private void _setParameters(
+		javax.persistence.Query query, Map<Integer, Object> parameterMap) {
 
 		for(Map.Entry<Integer, Object> entry : parameterMap.entrySet()) {
-
 			int position = entry.getKey() + 1;
 
 			Object value = entry.getValue();

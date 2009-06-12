@@ -44,6 +44,8 @@ package com.liferay.portal.dao.orm.jpa;
 import com.liferay.portal.kernel.dao.orm.ORMException;
 import com.liferay.portal.kernel.dao.orm.ObjectNotFoundException;
 
+import javax.persistence.EntityNotFoundException;
+
 /**
  * <a href="ExceptionTranslator.java.html"><b><i>View Source</i></b></a>
  *
@@ -54,20 +56,12 @@ import com.liferay.portal.kernel.dao.orm.ObjectNotFoundException;
 public class ExceptionTranslator {
 
 	public static ORMException translate(Exception e) {
-		if (e instanceof javax.persistence.EntityNotFoundException) {
+		if (e instanceof EntityNotFoundException) {
 			return new ObjectNotFoundException(e.getMessage());
 		}
 		else {
-			String message = null;
 
-			if (e.getCause() != null) {
-				message = e.getMessage() + " - " + e.getCause().getMessage();
-			}
-			else {
-				message = e.getMessage();
-			}
-			
-			return new ORMException(message);
+			return new ORMException(e.getMessage());
 		}
 	}
 

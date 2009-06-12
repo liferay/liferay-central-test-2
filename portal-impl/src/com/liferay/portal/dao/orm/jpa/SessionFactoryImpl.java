@@ -87,11 +87,7 @@ public class SessionFactoryImpl implements SessionFactory {
 		_entityManagerFactory = entityManagerFactory;
 	}
 
-	public void setSession(Session session) {
-		_session = session;
-	}
-
 	private EntityManagerFactory _entityManagerFactory;
-	private Session _session;
+	private Session _session = new SessionImpl();
 
 }

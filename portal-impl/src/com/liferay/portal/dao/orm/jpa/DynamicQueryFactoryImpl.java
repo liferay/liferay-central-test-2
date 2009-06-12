@@ -53,22 +53,22 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactory;
  */
 public class DynamicQueryFactoryImpl implements DynamicQueryFactory {
 
-	public DynamicQuery forClass(Class clazz) {
-		throw new UnsupportedOperationException("Not supported yet.");
+	public DynamicQuery forClass(Class<?> clazz) {
+		throw new UnsupportedOperationException();
 	}
 
-	public DynamicQuery forClass(Class clazz, ClassLoader classLoader) {
-		throw new UnsupportedOperationException("Not supported yet.");
+	public DynamicQuery forClass(Class<?> clazz, ClassLoader classLoader) {
+		throw new UnsupportedOperationException();
 	}
 
-	public DynamicQuery forClass(Class clazz, String alias) {
-		throw new UnsupportedOperationException("Not supported yet.");
+	public DynamicQuery forClass(Class<?> clazz, String alias) {
+		throw new UnsupportedOperationException();
 	}
 
 	public DynamicQuery forClass(
-		Class clazz, String alias, ClassLoader classLoader) {
+		Class<?> clazz, String alias, ClassLoader classLoader) {
 
-		throw new UnsupportedOperationException("Not supported yet.");
+		throw new UnsupportedOperationException();
 	}
 
 }

@@ -54,11 +54,11 @@ import com.liferay.portal.kernel.dao.orm.OrderFactory;
 public class OrderFactoryImpl implements OrderFactory {
 
 	public Order asc(String propertyName) {
-		throw new UnsupportedOperationException("Not supported yet.");
+		throw new UnsupportedOperationException();
 	}
 
 	public Order desc(String propertyName) {
-		throw new UnsupportedOperationException("Not supported yet.");
+		throw new UnsupportedOperationException();
 	}
 
 }

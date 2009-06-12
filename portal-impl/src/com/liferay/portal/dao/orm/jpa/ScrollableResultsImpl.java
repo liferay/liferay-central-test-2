@@ -55,13 +55,13 @@ import java.util.List;
  */
 public class ScrollableResultsImpl implements ScrollableResults {
 
-	public ScrollableResultsImpl(List resultsList) {
-		_resultsList = resultsList;
-		_last = _resultsList.size();
+	public ScrollableResultsImpl(List<?> results) {
+		_results = results;
+		_last = _results.size();
 	}
 
 	public boolean first() throws ORMException {
-		if (_resultsList.isEmpty()) {
+		if (_results.isEmpty()) {
 			return false;
 		}
 
@@ -73,7 +73,7 @@ public class ScrollableResultsImpl implements ScrollableResults {
 	public Object get(int i) throws ORMException {
 		Object result = null;
 
-		Object object = _resultsList.get(_current - 1);
+		Object object = _results.get(_current - 1);
 
 		if (object instanceof Object[]) {
 			result = ((Object[])object)[i];
@@ -86,7 +86,7 @@ public class ScrollableResultsImpl implements ScrollableResults {
 	}
 
 	public boolean last() throws ORMException {
-		if (_resultsList.isEmpty()) {
+		if (_results.isEmpty()) {
 			return false;
 		}
 
@@ -127,6 +127,6 @@ public class ScrollableResultsImpl implements ScrollableResults {
 
 	private int _current = 0;
 	private int _last = 0;
-	private List _resultsList;
+	private List<?> _results;
 
 }
