@@ -25,7 +25,6 @@ package com.liferay.portal.servlet.filters.strip;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
-import com.liferay.portal.kernel.util.ByteArrayMaker;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
@@ -38,6 +37,7 @@ import com.liferay.portal.servlet.filters.etag.ETagUtil;
 import com.liferay.portal.util.MinifierUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 import javax.servlet.FilterChain;
@@ -183,14 +183,15 @@ public class StripFilter extends BasePortalFilter {
 	}
 
 	protected Object[] strip(byte[] oldByteArray) throws IOException {
-		ByteArrayMaker newBytes = new ByteArrayMaker();
+		ByteArrayOutputStream newBytes = new ByteArrayOutputStream(
+			oldByteArray.length);
 
 		int state = _STATE_NORMAL;
 
 		boolean removeStartingWhitespace = true;
 
-		ByteArrayMaker scriptBytes = new ByteArrayMaker();
-		ByteArrayMaker styleBytes = new ByteArrayMaker();
+		ByteArrayOutputStream scriptBytes = new ByteArrayOutputStream();
+		ByteArrayOutputStream styleBytes = new ByteArrayOutputStream();
 
 		for (int i = 0; i < oldByteArray.length; i++) {
 			byte b = oldByteArray[i];
@@ -242,7 +243,7 @@ public class StripFilter extends BasePortalFilter {
 						String scriptContent = scriptBytes.toString(
 							StringPool.UTF8);
 
-						scriptBytes = new ByteArrayMaker();
+						scriptBytes = new ByteArrayOutputStream();
 
 						int pos = scriptContent.indexOf(CharPool.GREATER_THAN);
 
@@ -284,7 +285,7 @@ public class StripFilter extends BasePortalFilter {
 						String styleContent = styleBytes.toString(
 							StringPool.UTF8);
 
-						styleBytes = new ByteArrayMaker();
+						styleBytes = new ByteArrayOutputStream();
 
 						styleContent = styleContent.substring(
 							_STYLE_TYPE_CSS.length()).trim();
