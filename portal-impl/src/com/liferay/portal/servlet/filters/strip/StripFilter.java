@@ -183,8 +183,7 @@ public class StripFilter extends BasePortalFilter {
 	}
 
 	protected Object[] strip(byte[] oldByteArray) throws IOException {
-		byte[] newByteArray = new byte[oldByteArray.length];
-		int newByteArrayPos = 0;
+		ByteArrayMaker newBytes = new ByteArrayMaker();
 
 		int state = _STATE_NORMAL;
 
@@ -258,22 +257,21 @@ public class StripFilter extends BasePortalFilter {
 						scriptContent = MinifierUtil.minifyJavaScript(
 							scriptContent);
 
-						scriptContent =
-							_CDATA_OPEN + scriptContent + _CDATA_CLOSE;
-
 						if (Validator.isNull(scriptContent)) {
 							i += _MARKER_SCRIPT_CLOSE.length;
 
 							continue;
 						}
 
-						scriptContent = _SCRIPT_TYPE_JAVASCRIPT + scriptContent;
+						scriptContent =
+							_SCRIPT_TYPE_JAVASCRIPT + _CDATA_OPEN +
+								scriptContent + _CDATA_CLOSE;
 
 						byte[] scriptContentBytes = scriptContent.getBytes(
 							StringPool.UTF8);
 
 						for (byte curByte : scriptContentBytes) {
-							newByteArray[newByteArrayPos++] = curByte;
+							newBytes.write(curByte);
 						}
 
 						state = _STATE_FOUND_ELEMENT;
@@ -311,7 +309,7 @@ public class StripFilter extends BasePortalFilter {
 							StringPool.UTF8);
 
 						for (byte curByte : styleContentBytes) {
-							newByteArray[newByteArrayPos++] = curByte;
+							newBytes.write(curByte);
 						}
 
 						state = _STATE_FOUND_ELEMENT;
@@ -322,7 +320,7 @@ public class StripFilter extends BasePortalFilter {
 				if (state == _STATE_FOUND_ELEMENT) {
 					state = _STATE_NORMAL;
 
-					newByteArray[newByteArrayPos++] = b;
+					newBytes.write(b);
 
 					while ((i + 1) < oldByteArray.length) {
 						char nextChar = (char)oldByteArray[i + 1];
@@ -373,9 +371,12 @@ public class StripFilter extends BasePortalFilter {
 				styleBytes.write(b);
 			}
 			else {
-				newByteArray[newByteArrayPos++] = b;
+				newBytes.write(b);
 			}
 		}
+
+		byte[] newByteArray = newBytes.toByteArray();
+		int newByteArrayPos = newBytes.size();
 
 		if (newByteArrayPos > 1) {
 			for (int i = newByteArrayPos - 1; i > 0; i--) {
