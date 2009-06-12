@@ -32,6 +32,7 @@ LayoutPrototype layoutPrototype = (LayoutPrototype)request.getAttribute(WebKeys.
 if (layoutPrototype == null) {
 	layoutPrototype = new LayoutPrototypeImpl();
 
+	layoutPrototype.setNew(true);
 	layoutPrototype.setActive(true);
 }
 
