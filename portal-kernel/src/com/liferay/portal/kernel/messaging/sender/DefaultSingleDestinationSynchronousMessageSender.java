@@ -42,15 +42,32 @@ public class DefaultSingleDestinationSynchronousMessageSender
 		_synchronousMessageSender = synchronousMessageSender;
 	}
 
-	public Object sendMessage(Message message) throws MessageBusException {
-		return _synchronousMessageSender.sendMessage(_destination, message);
+	public Object send(Message message) throws MessageBusException {
+		return _synchronousMessageSender.send(_destination, message);
 	}
 
-	public Object sendMessage(Message message, long timeout)
+	public Object send(Message message, long timeout)
 		throws MessageBusException {
 
-		return _synchronousMessageSender.sendMessage(
-			_destination, message, timeout);
+		return _synchronousMessageSender.send(_destination, message, timeout);
+	}
+
+	public Object send(Object payload) throws MessageBusException {
+		Message message = new Message();
+
+		message.setPayload(payload);
+
+		return send(message);
+	}
+
+	public Object send(Object payload, long timeout)
+		throws MessageBusException {
+
+		Message message = new Message();
+
+		message.setPayload(payload);
+
+		return send(message, timeout);
 	}
 
 	private String _destination;

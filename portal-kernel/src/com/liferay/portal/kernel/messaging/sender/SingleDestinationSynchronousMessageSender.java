@@ -34,10 +34,13 @@ import com.liferay.portal.kernel.messaging.MessageBusException;
  */
 public interface SingleDestinationSynchronousMessageSender {
 
-	public Object sendMessage(Message message)
+	public Object send(Message message) throws MessageBusException;
+
+	public Object send(Message message, long timeout)
 		throws MessageBusException;
 
-	public Object sendMessage(Message message, long timeout)
-		throws MessageBusException;
+	public Object send(Object payload) throws MessageBusException;
+
+	public Object send(Object payload, long timeout) throws MessageBusException;
 
 }

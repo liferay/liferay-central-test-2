@@ -49,13 +49,13 @@ public class DefaultSynchronousMessageSender
 		_timeout = timeout;
 	}
 
-	public Object sendMessage(String destination, Message message)
+	public Object send(String destination, Message message)
 		throws MessageBusException {
 
-		return sendMessage(destination, message, _timeout);
+		return send(destination, message, _timeout);
 	}
 
-	public Object sendMessage(String destination, Message message, long timeout)
+	public Object send(String destination, Message message, long timeout)
 		throws MessageBusException {
 
 		if (!_messageBus.hasDestination(destination)) {
@@ -90,6 +90,24 @@ public class DefaultSynchronousMessageSender
 			new SynchronousMessageListener(_messageBus, message, timeout);
 
 		return synchronousMessageListener.send();
+	}
+
+	/**
+	 * @deprecated
+	 */
+	public Object sendMessage(String destination, Message message)
+		throws MessageBusException {
+
+		return send(destination, message);
+	}
+
+	/**
+	 * @deprecated
+	 */
+	public Object sendMessage(String destination, Message message, long timeout)
+		throws MessageBusException {
+
+		return send(destination, message, timeout);
 	}
 
 	private static Log _log =

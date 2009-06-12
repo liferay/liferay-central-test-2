@@ -33,9 +33,21 @@ import com.liferay.portal.kernel.messaging.MessageBusException;
  */
 public interface SynchronousMessageSender {
 
+	public Object send(String destination, Message message)
+		throws MessageBusException;
+
+	public Object send(String destination, Message message, long timeout)
+		throws MessageBusException;
+
+	/**
+	 * @deprecated
+	 */
 	public Object sendMessage(String destination, Message message)
 		throws MessageBusException;
 
+	/**
+	 * @deprecated
+	 */
 	public Object sendMessage(String destination, Message message, long timeout)
 		throws MessageBusException;
 

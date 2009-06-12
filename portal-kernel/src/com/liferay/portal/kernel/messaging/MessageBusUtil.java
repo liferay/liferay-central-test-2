@@ -189,15 +189,14 @@ public class MessageBusUtil {
 	private Object _sendSynchronousMessage(String destination, Message message)
 		throws MessageBusException {
 
-		return _synchronousMessageSender.sendMessage(destination, message);
+		return _synchronousMessageSender.send(destination, message);
 	}
 
 	private Object _sendSynchronousMessage(
 			String destination, Message message, long timeout)
 		throws MessageBusException {
 
-		return _synchronousMessageSender.sendMessage(
-			destination, message, timeout);
+		return _synchronousMessageSender.send(destination, message, timeout);
 	}
 
 	private Object _sendSynchronousMessage(
