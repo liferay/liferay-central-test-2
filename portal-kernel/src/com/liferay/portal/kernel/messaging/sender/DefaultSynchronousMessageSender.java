@@ -92,24 +92,6 @@ public class DefaultSynchronousMessageSender
 		return synchronousMessageListener.send();
 	}
 
-	/**
-	 * @deprecated
-	 */
-	public Object sendMessage(String destination, Message message)
-		throws MessageBusException {
-
-		return send(destination, message);
-	}
-
-	/**
-	 * @deprecated
-	 */
-	public Object sendMessage(String destination, Message message, long timeout)
-		throws MessageBusException {
-
-		return send(destination, message, timeout);
-	}
-
 	private static Log _log =
 		LogFactoryUtil.getLog(DefaultSynchronousMessageSender.class);
 
