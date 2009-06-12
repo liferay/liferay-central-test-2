@@ -27,8 +27,7 @@ import com.liferay.portal.monitoring.MonitoringException;
 import com.liferay.portal.monitoring.statistics.DataSampleProcessor;
 import com.liferay.portal.service.CompanyLocalService;
 
-import java.util.Collection;
-import java.util.Collections;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
@@ -37,6 +36,7 @@ import java.util.TreeMap;
  * <a href="ServerStatistics.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael C. Han
+ * @author Brian Wing Shun Chan
  *
  */
 public class ServerStatistics
@@ -44,50 +44,48 @@ public class ServerStatistics
 
 	public ServerStatistics(CompanyLocalService companyLocalService) {
 		_companyLocalService = companyLocalService;
-		_companyStatisticsByCompanyId =
-			new TreeMap<Long, CompanyStatistics>();
-		_companyStatisticsByWebId =
-			new TreeMap<String, CompanyStatistics>();
+		_companyStatisticsByCompanyId = new TreeMap<Long, CompanyStatistics>();
+		_companyStatisticsByWebId = new TreeMap<String, CompanyStatistics>();
 	}
 
 	public Set<Long> getCompanyIds() {
 		return _companyStatisticsByCompanyId.keySet();
 	}
 
-	public Collection<CompanyStatistics> getCompanyStatistics() {
-		return Collections.unmodifiableCollection(
-			_companyStatisticsByWebId.values());
-	}
-
 	public CompanyStatistics getCompanyStatistics(long companyId)
 		throws MonitoringException {
 
-		CompanyStatistics statistics =
-			_companyStatisticsByCompanyId.get(companyId);
+		CompanyStatistics companyStatistics = _companyStatisticsByCompanyId.get(
+			companyId);
 
-		if (statistics == null) {
+		if (companyStatistics == null) {
 			throw new MonitoringException(
-				"No statistics found for: " + companyId);
+				"No statistics found for company id " + companyId);
 		}
 
-		return statistics;
+		return companyStatistics;
 	}
 
 	public CompanyStatistics getCompanyStatistics(String webId)
 		throws MonitoringException {
 
-		CompanyStatistics statistics =
-			_companyStatisticsByWebId.get(webId);
+		CompanyStatistics companyStatistics = _companyStatisticsByWebId.get(
+			webId);
 
-		if (statistics == null) {
+		if (companyStatistics == null) {
 			throw new MonitoringException(
-				"No statistics found for : " + webId);
+				"No statistics found for web id " + webId);
 		}
 
-		return statistics;
+		return companyStatistics;
 	}
 
-	public Set<String> getCompanyWebIds() {
+	public Set<CompanyStatistics> getCompanyStatisticsSet() {
+		return new HashSet<CompanyStatistics>(
+			_companyStatisticsByWebId.values());
+	}
+
+	public Set<String> getWebIds() {
 		return _companyStatisticsByWebId.keySet();
 	}
 
@@ -125,6 +123,34 @@ public class ServerStatistics
 		return companyStatistics;
 	}
 
+	public void reset() {
+		for (long companyId : _companyStatisticsByCompanyId.keySet()) {
+			reset(companyId);
+		}
+	}
+
+	public void reset(long companyId) {
+		CompanyStatistics companyStatistics = _companyStatisticsByCompanyId.get(
+			companyId);
+
+		if (companyStatistics == null) {
+			return;
+		}
+
+		companyStatistics.reset();
+	}
+
+	public void reset(String webId) {
+		CompanyStatistics companyStatistics = _companyStatisticsByWebId.get(
+			webId);
+
+		if (companyStatistics == null) {
+			return;
+		}
+
+		companyStatistics.reset();
+	}
+
 	public synchronized void unregister(String webId) {
 		CompanyStatistics companyStatistics = _companyStatisticsByWebId.remove(
 			webId);
@@ -134,35 +160,6 @@ public class ServerStatistics
 				companyStatistics.getCompanyId());
 		}
 	}
-
-	public void reset() {
-		for (long companyId : _companyStatisticsByCompanyId.keySet()) {
-			reset(companyId);
-		}
-	}
-
-	public void reset(long companyId) {
-		CompanyStatistics companyStatistics =
-			_companyStatisticsByCompanyId.get(companyId);
-
-		if (companyStatistics == null) {
-			return;
-		}
-
-		companyStatistics.reset();
-	}
-
-	public void reset(String companyWebId) {
-		CompanyStatistics companyStatistics =
-			_companyStatisticsByWebId.get(companyWebId);
-
-		if (companyStatistics == null) {
-			return;
-		}
-
-		companyStatistics.reset();
-	}
-	
 
 	private CompanyLocalService _companyLocalService;
 	private Map<Long, CompanyStatistics> _companyStatisticsByCompanyId;

@@ -22,7 +22,7 @@
 
 package com.liferay.portal.monitoring.jmx;
 
-import com.liferay.portal.monitoring.MonitoringLevel;
+import com.liferay.portal.monitoring.Level;
 import com.liferay.portal.monitoring.MonitoringService;
 
 import java.util.Set;
@@ -31,6 +31,7 @@ import java.util.Set;
  * <a href="MonitoringServiceManager.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael C. Han
+ * @author Brian Wing Shun Chan
  *
  */
 public class MonitoringServiceManager implements MonitoringServiceManagerMBean {
@@ -39,27 +40,27 @@ public class MonitoringServiceManager implements MonitoringServiceManagerMBean {
 		_monitoringService = monitorService;
 	}
 
-	public String[] getMonitoredNamespaces() {
-		Set<String> namespaces = _monitoringService.getMonitoredNamespaces();
-
-		return namespaces.toArray(new String[namespaces.size()]);
-	}
-
-	public String getMonitoringLevel(String namespace) {
-		MonitoringLevel level = _monitoringService.getMonitoringLevel(
+	public String getLevel(String namespace) {
+		Level level = _monitoringService.getLevel(
 			namespace);
 
 		if (level == null) {
-			level = MonitoringLevel.OFF;
+			level = Level.OFF;
 		}
 
 		return level.toString();
 	}
 
-	public void setMonitoringLevel(String namespace, String level) {
-		MonitoringLevel monitoringLevel = MonitoringLevel.valueOf(level);
+	public String[] getNamespaces() {
+		Set<String> namespaces = _monitoringService.getNamespaces();
 
-		_monitoringService.setMonitoringLevel(namespace, monitoringLevel);
+		return namespaces.toArray(new String[namespaces.size()]);
+	}
+
+	public void setLevel(String namespace, String levelName) {
+		Level level = Level.valueOf(levelName);
+
+		_monitoringService.setLevel(namespace, level);
 	}
 
 	private MonitoringService _monitoringService;

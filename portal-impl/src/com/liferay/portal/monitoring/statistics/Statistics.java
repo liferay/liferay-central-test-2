@@ -26,6 +26,7 @@ package com.liferay.portal.monitoring.statistics;
  * <a href="Statistics.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael C. Han
+ * @author Brian Wing Shun Chan
  *
  */
 public interface Statistics {
@@ -34,8 +35,8 @@ public interface Statistics {
 
 	public String getName();
 
+	public void reset();
+
 	public void setDescription(String description);
 
-	public void reset();
-	
 }

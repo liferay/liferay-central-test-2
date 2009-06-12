@@ -23,12 +23,13 @@
 package com.liferay.portal.monitoring;
 
 /**
- * <a href="MonitoringLevel.java.html"><b><i>View Source</i></b></a>
+ * <a href="Level.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael C. Han
+ * @author Brian Wing Shun Chan
  *
  */
-public enum MonitoringLevel {
+public enum Level {
 
 	HIGH, LOW, MEDIUM, OFF
 

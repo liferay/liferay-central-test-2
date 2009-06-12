@@ -35,6 +35,7 @@ import java.util.Map;
  *
  * @author Karthik Sudarshan
  * @author Michael C. Han
+ * @author Brian Wing Shun Chan
  *
  */
 public class PortletStatistics
@@ -46,28 +47,31 @@ public class PortletStatistics
 		_portletId = portletId;
 		_portletName = portletName;
 		_displayName = displayName;
-		_actionStatistics = new RequestStatistics(portletId);
-		_eventStatistics = new RequestStatistics(portletId);
-		_renderStatistics = new RequestStatistics(portletId);
-		_resourceStatistics = new RequestStatistics(portletId);
+		_actionRequestStatistics = new RequestStatistics(portletId);
+		_eventRequestStatistics = new RequestStatistics(portletId);
+		_renderRequestStatistics = new RequestStatistics(portletId);
+		_resourceRequestStatistics = new RequestStatistics(portletId);
 
-		_requestStatistics.put(PortletRequestType.ACTION, _actionStatistics);
-		_requestStatistics.put(PortletRequestType.EVENT, _eventStatistics);
-		_requestStatistics.put(PortletRequestType.RENDER, _renderStatistics);
 		_requestStatistics.put(
-			PortletRequestType.RESOURCE, _resourceStatistics);
+			PortletRequestType.ACTION, _actionRequestStatistics);
+		_requestStatistics.put(
+			PortletRequestType.EVENT, _eventRequestStatistics);
+		_requestStatistics.put(
+			PortletRequestType.RENDER, _renderRequestStatistics);
+		_requestStatistics.put(
+			PortletRequestType.RESOURCE, _resourceRequestStatistics);
 	}
 
-	public RequestStatistics getActionStatistics() {
-		return _actionStatistics;
+	public RequestStatistics getActionRequestStatistics() {
+		return _actionRequestStatistics;
 	}
 
 	public String getDisplayName() {
 		return _displayName;
 	}
 
-	public RequestStatistics getEventStatistics() {
-		return _eventStatistics;
+	public RequestStatistics getEventRequestStatistics() {
+		return _eventRequestStatistics;
 	}
 
 	public String getPortletId() {
@@ -78,16 +82,16 @@ public class PortletStatistics
 		return _portletName;
 	}
 
-	public RequestStatistics getRenderStatistics() {
-		return _renderStatistics;
+	public RequestStatistics getRenderRequestStatistics() {
+		return _renderRequestStatistics;
 	}
 
-	public RequestStatistics getResourceStatistics() {
-		return _resourceStatistics;
+	public RequestStatistics getResourceRequestStatistics() {
+		return _resourceRequestStatistics;
 	}
 
 	public void processDataSample(
-		PortletRequestDataSample portletRequestDataSample)
+			PortletRequestDataSample portletRequestDataSample)
 		throws MonitoringException {
 
 		if (!portletRequestDataSample.getPortletId().equals(_portletId)) {
@@ -102,7 +106,7 @@ public class PortletStatistics
 
 		if (requestStatistics == null) {
 			throw new MonitoringException(
-				"No statistic found for: " + portletRequestDataSample);
+				"No statistics found for " + portletRequestDataSample);
 		}
 
 		RequestStatus requestStatus =
@@ -113,7 +117,7 @@ public class PortletStatistics
 		}
 		else if (requestStatus.equals(RequestStatus.SUCCESS)) {
 			requestStatistics.incrementSuccessDuration(
-			portletRequestDataSample.getDuration());
+				portletRequestDataSample.getDuration());
 		}
 		else if (requestStatus.equals(RequestStatus.TIMEOUT)) {
 			requestStatistics.incrementTimeout();
@@ -121,20 +125,20 @@ public class PortletStatistics
 	}
 
 	public void reset() {
-		_actionStatistics.reset();
-		_eventStatistics.reset();
-		_renderStatistics.reset();
-		_resourceStatistics.reset();
+		_actionRequestStatistics.reset();
+		_eventRequestStatistics.reset();
+		_renderRequestStatistics.reset();
+		_resourceRequestStatistics.reset();
 	}
 
-	private RequestStatistics _actionStatistics;
+	private RequestStatistics _actionRequestStatistics;
 	private String _displayName;
-	private RequestStatistics _eventStatistics;
+	private RequestStatistics _eventRequestStatistics;
 	private String _portletId;
 	private String _portletName;
-	private RequestStatistics _renderStatistics;
+	private RequestStatistics _renderRequestStatistics;
 	private Map<PortletRequestType, RequestStatistics> _requestStatistics =
 		new HashMap<PortletRequestType, RequestStatistics>();
-	private RequestStatistics _resourceStatistics;
+	private RequestStatistics _resourceRequestStatistics;
 
 }

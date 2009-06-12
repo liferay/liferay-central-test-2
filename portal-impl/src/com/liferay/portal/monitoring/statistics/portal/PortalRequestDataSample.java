@@ -30,6 +30,7 @@ import com.liferay.portal.monitoring.statistics.BaseDataSample;
  *
  * @author Rajesh Thiagarajan
  * @author Michael C. Han
+ * @author Brian Wing Shun Chan
  *
  */
 public class PortalRequestDataSample extends BaseDataSample {

@@ -35,6 +35,7 @@ import javax.portlet.PortletResponse;
  *
  * @author Karthik Sudarshan
  * @author Michael C. Han
+ * @author Brian Wing Shun Chan
  *
  */
 public class PortletRequestDataSample extends BaseDataSample {

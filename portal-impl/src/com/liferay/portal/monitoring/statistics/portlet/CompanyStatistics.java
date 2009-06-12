@@ -28,11 +28,10 @@ import com.liferay.portal.monitoring.statistics.DataSampleProcessor;
 import com.liferay.portal.monitoring.statistics.RequestStatistics;
 import com.liferay.portal.service.CompanyLocalService;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -40,6 +39,7 @@ import java.util.concurrent.ConcurrentHashMap;
  *
  * @author Karthik Sudarshan
  * @author Michael C. Han
+ * @author Brian Wing Shun Chan
  *
  */
 public class CompanyStatistics
@@ -62,77 +62,64 @@ public class CompanyStatistics
 		}
 	}
 
-	public Collection<RequestStatistics> getActionStatistics()
+	public RequestStatistics getActionRequestStatistics(String portletId)
 		throws MonitoringException {
 
-		Collection<PortletStatistics> portletsStats =
-			_portletStatisticsByPortletId.values();
+		PortletStatistics portletStatistics = _portletStatisticsByPortletId.get(
+			portletId);
 
-		if (portletsStats.isEmpty()) {
-			return Collections.EMPTY_LIST;
+		if (portletStatistics == null) {
+			throw new MonitoringException(
+				"No statistics for portlet id " + portletId);
 		}
 
-		List<RequestStatistics> actionStatistics =
-			new ArrayList<RequestStatistics>(portletsStats.size());
-
-		for (PortletStatistics portletStats : portletsStats) {
-			actionStatistics.add(portletStats.getActionStatistics());
-		}
-
-		return actionStatistics;
+		return portletStatistics.getActionRequestStatistics();
 	}
 
-	public RequestStatistics getActionStatistics(String portletId)
-		throws MonitoringException {
+	public Set<RequestStatistics> getActionRequestStatisticsSet() {
+		Set<RequestStatistics> actionStatisticsSet =
+			new HashSet<RequestStatistics>();
 
-		PortletStatistics portletStats =
-			_portletStatisticsByPortletId.get(portletId);
+		for (PortletStatistics portletStatistics :
+				_portletStatisticsByPortletId.values()) {
 
-		if (portletStats == null) {
-			throw new MonitoringException(
-				"No portlet found with id: " + portletId);
+			actionStatisticsSet.add(
+				portletStatistics.getActionRequestStatistics());
 		}
 
-		return portletStats.getActionStatistics();
+		return actionStatisticsSet;
 	}
 
 	public long getCompanyId() {
 		return _companyId;
 	}
 
-	public Collection<RequestStatistics> getEventStatistics()
+	public RequestStatistics getEventRequestStatistics(String portletId)
 		throws MonitoringException {
 
-		Collection<PortletStatistics> portletsStats =
-			_portletStatisticsByPortletId.values();
+		PortletStatistics portletStatistics = _portletStatisticsByPortletId.get(
+			portletId);
 
-		if (portletsStats.isEmpty()) {
-			return Collections.EMPTY_LIST;
+		if (portletStatistics == null) {
+			throw new MonitoringException(
+				"No statistics for portlet id " + portletId);
 		}
 
-		List<RequestStatistics> eventStatistics =
-			new ArrayList<RequestStatistics>(portletsStats.size());
-
-		for (PortletStatistics portletStats : portletsStats) {
-			eventStatistics.add(portletStats.getEventStatistics());
-		}
-
-		return eventStatistics;
+		return portletStatistics.getEventRequestStatistics();
 	}
 
-	public RequestStatistics getEventStatistics(String portletId)
-		throws MonitoringException {
+	public Set<RequestStatistics> getEventRequestStatisticsSet() {
+		Set<RequestStatistics> eventStatisticsSet =
+			new HashSet<RequestStatistics>();
 
-		PortletStatistics portletStats =
-			_portletStatisticsByPortletId.get(portletId);
+		for (PortletStatistics portletStatistics :
+				_portletStatisticsByPortletId.values()) {
 
-		if (portletStats == null) {
-			throw new MonitoringException(
-				"No portlet found with id: " + portletId);
+			eventStatisticsSet.add(
+				portletStatistics.getEventRequestStatistics());
 		}
 
-		return portletStats.getEventStatistics();
-
+		return eventStatisticsSet;
 	}
 
 	public long getMaxTime() {
@@ -147,74 +134,60 @@ public class CompanyStatistics
 		return _portletStatisticsByPortletId.keySet();
 	}
 
-	public Collection<RequestStatistics> getRenderStatistics()
+	public RequestStatistics getRenderRequestStatistics(String portletId)
 		throws MonitoringException {
 
-		Collection<PortletStatistics> portletsStats =
-			_portletStatisticsByPortletId.values();
+		PortletStatistics portletStatistics = _portletStatisticsByPortletId.get(
+			portletId);
 
-		if (portletsStats.isEmpty()) {
-			return Collections.EMPTY_LIST;
-		}
-
-		List<RequestStatistics> renderStatistics =
-			new ArrayList<RequestStatistics>(portletsStats.size());
-
-		for (PortletStatistics portletStats : portletsStats) {
-			renderStatistics.add(portletStats.getRenderStatistics());
-		}
-
-		return renderStatistics;
-	}
-
-	public RequestStatistics getRenderStatistics(String portletId)
-		throws MonitoringException {
-
-		PortletStatistics portletStats =
-			_portletStatisticsByPortletId.get(portletId);
-
-		if (portletStats == null) {
+		if (portletStatistics == null) {
 			throw new MonitoringException(
-				"No portlet found with id: " + portletId);
+				"No statistics for portlet id " + portletId);
 		}
 
-		return portletStats.getRenderStatistics();
-
+		return portletStatistics.getRenderRequestStatistics();
 	}
 
-	public Collection<RequestStatistics> getResourceStatistics()
-		throws MonitoringException {
+	public Set<RequestStatistics> getRenderRequestStatisticsSet() {
+		Set<RequestStatistics> renderStatisticsSet =
+			new HashSet<RequestStatistics>();
 
-		Collection<PortletStatistics> portletsStats =
-			_portletStatisticsByPortletId.values();
+		for (PortletStatistics portletStatistics :
+				_portletStatisticsByPortletId.values()) {
 
-		if (portletsStats.isEmpty()) {
-			return Collections.EMPTY_LIST;
+			renderStatisticsSet.add(
+				portletStatistics.getRenderRequestStatistics());
 		}
 
-		List<RequestStatistics> resourceStatistics =
-			new ArrayList<RequestStatistics>(portletsStats.size());
-
-		for (PortletStatistics portletStats : portletsStats) {
-			resourceStatistics.add(portletStats.getResourceStatistics());
-		}
-
-		return resourceStatistics;
+		return renderStatisticsSet;
 	}
-	
-	public RequestStatistics getResourceStatistics(String portletId)
+
+	public RequestStatistics getResourceRequestStatistics(String portletId)
 		throws MonitoringException {
 
-		PortletStatistics portletStats =
-			_portletStatisticsByPortletId.get(portletId);
+		PortletStatistics portletStatistics = _portletStatisticsByPortletId.get(
+			portletId);
 
-		if (portletStats == null) {
+		if (portletStatistics == null) {
 			throw new MonitoringException(
-				"No portlet found with id: " + portletId);
+				"No statistics for portlet id " + portletId);
 		}
 
-		return portletStats.getResourceStatistics();
+		return portletStatistics.getResourceRequestStatistics();
+	}
 
+	public Set<RequestStatistics> getResourceRequestStatisticsSet() {
+		Set<RequestStatistics> resourceStatisticsSet =
+			new HashSet<RequestStatistics>();
+
+		for (PortletStatistics portletStatistics :
+				_portletStatisticsByPortletId.values()) {
+
+			resourceStatisticsSet.add(
+				portletStatistics.getResourceRequestStatistics());
+		}
+
+		return resourceStatisticsSet;
 	}
 
 	public String getWebId() {
@@ -222,7 +195,7 @@ public class CompanyStatistics
 	}
 
 	public void processDataSample(
-		PortletRequestDataSample portletRequestDataSample)
+			PortletRequestDataSample portletRequestDataSample)
 		throws MonitoringException {
 
 		if (portletRequestDataSample.getCompanyId() != _companyId) {
@@ -244,20 +217,23 @@ public class CompanyStatistics
 
 		portletStatistics.processDataSample(portletRequestDataSample);
 
-		long currentDuration = portletRequestDataSample.getDuration();
+		long duration = portletRequestDataSample.getDuration();
 
-		if (_maxTime < currentDuration) {
-			_maxTime = currentDuration;
+		if (_maxTime < duration) {
+			_maxTime = duration;
 		}
-		else if (_minTime > currentDuration) {
-			_minTime = currentDuration;
+		else if (_minTime > duration) {
+			_minTime = duration;
 		}
 	}
 
 	public void reset() {
 		_maxTime = 0;
 		_minTime = 0;
-		for (PortletStatistics portletStatistics : _portletStatisticsByPortletId.values()) {
+
+		for (PortletStatistics portletStatistics :
+				_portletStatisticsByPortletId.values()) {
+
 			portletStatistics.reset();
 		}
 	}

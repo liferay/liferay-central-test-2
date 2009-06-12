@@ -33,6 +33,7 @@ import com.liferay.portal.service.CompanyLocalService;
  *
  * @author Rajesh Thiagarajan
  * @author Michael C. Han
+ * @author Brian Wing Shun Chan
  *
  */
 public class CompanyStatistics
@@ -59,8 +60,12 @@ public class CompanyStatistics
 		return _companyId;
 	}
 
-	public String getWebId() {
-		return _webId;
+	public long getMaxTime() {
+		return _maxTime;
+	}
+
+	public long getMinTime() {
+		return _minTime;
 	}
 
 	public RequestStatistics getRequestStatistics() {
@@ -73,6 +78,10 @@ public class CompanyStatistics
 
 	public long getUptime() {
 		return System.currentTimeMillis() - _startTime;
+	}
+
+	public String getWebId() {
+		return _webId;
 	}
 
 	public void processDataSample(
@@ -90,20 +99,34 @@ public class CompanyStatistics
 		}
 		else if (requestStatus.equals(RequestStatus.SUCCESS)) {
 			_requestStatistics.incrementSuccessDuration(
-			portalRequestDataSample.getDuration());
+				portalRequestDataSample.getDuration());
 		}
 		else if (requestStatus.equals(RequestStatus.TIMEOUT)) {
 			_requestStatistics.incrementTimeout();
 		}
+
+		long duration = portalRequestDataSample.getDuration();
+
+		if (_maxTime < duration) {
+			_maxTime = duration;
+		}
+		else if (_minTime > duration) {
+			_minTime = duration;
+		}
 	}
 
 	public void reset() {
+		_maxTime = 0;
+		_minTime = 0;
+
 		_requestStatistics.reset();
 	}
 
 	private long _companyId;
-	private long _startTime;
+	private long _maxTime;
+	private long _minTime;
 	private RequestStatistics _requestStatistics;
+	private long _startTime;
 	private String _webId;
 
 }

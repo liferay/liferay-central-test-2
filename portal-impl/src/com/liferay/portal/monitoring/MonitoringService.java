@@ -28,15 +28,15 @@ import java.util.Set;
  * <a href="MonitoringService.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael C. Han
+ * @author Brian Wing Shun Chan
  *
  */
 public interface MonitoringService {
 
-	public Set<String> getMonitoredNamespaces();
+	public Level getLevel(String namespace);
 
-	public MonitoringLevel getMonitoringLevel(String namespace);
+	public Set<String> getNamespaces();
 
-	public void setMonitoringLevel(
-		String namespace, MonitoringLevel monitoringLevel);
+	public void setLevel(String namespace, Level level);
 
 }

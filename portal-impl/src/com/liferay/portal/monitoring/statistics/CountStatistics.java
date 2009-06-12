@@ -26,6 +26,7 @@ package com.liferay.portal.monitoring.statistics;
  * <a href="CountStatistics.java.html"><b><i>View Source</i></b></a>
  *
  * @author Rajesh Thiagarajan
+ * @author Brian Wing Shun Chan
  *
  */
 public class CountStatistics extends BaseStatistics {

@@ -22,17 +22,31 @@
 
 package com.liferay.portal.monitoring;
 
+import com.liferay.portal.PortalException;
+
 /**
  * <a href="MonitoringException.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael C. Han
+ * @author Brian Wing Shun Chan
+ *
  */
-public class MonitoringException extends Exception {
-	public MonitoringException(String message) {
-		super(message);
+public class MonitoringException extends PortalException {
+
+	public MonitoringException() {
+		super();
 	}
 
-	public MonitoringException(String message, Throwable cause) {
-		super(message, cause);
+	public MonitoringException(String msg) {
+		super(msg);
 	}
+
+	public MonitoringException(String msg, Throwable cause) {
+		super(msg, cause);
+	}
+
+	public MonitoringException(Throwable cause) {
+		super(cause);
+	}
+
 }

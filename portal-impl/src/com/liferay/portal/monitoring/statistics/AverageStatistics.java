@@ -26,11 +26,12 @@ package com.liferay.portal.monitoring.statistics;
  * <a href="RollingAverageStatistics.java.html"><b><i>View Source</i></b></a>
  *
  * @author Rajesh Thiagarajan
+ * @author Brian Wing Shun Chan
  *
  */
-public class RollingAverageStatistics extends BaseStatistics {
+public class AverageStatistics extends BaseStatistics {
 
-	public RollingAverageStatistics(String name) {
+	public AverageStatistics(String name) {
 		super(name);
 
 		_countStatistics = new CountStatistics(name);
@@ -48,47 +49,43 @@ public class RollingAverageStatistics extends BaseStatistics {
 			setMinTime(duration);
 		}
 
-		if (_rollingAverageTime == 0) {
-			_rollingAverageTime = duration;
+		if (_averageTime == 0) {
+			_averageTime = duration;
 		}
 		else {
 			long span = 0;
 
-			long currentCount = _countStatistics.getCount();
-
-			// span should be at least LowerBound
-			if (currentCount < getLowerBound()) {
+			if (_countStatistics.getCount() < getLowerBound()) {
 				span = getLowerBound();
 			}
-			else if ((currentCount > getUpperBound())) {
+			else if ((_countStatistics.getCount() > getUpperBound())) {
 				span = getUpperBound();
 			}
 			else {
-				span = currentCount;
+				span = _countStatistics.getCount();
 			}
 
-			_rollingAverageTime =
-				(_rollingAverageTime * span + duration) / (span + 1);
+			_averageTime = (_averageTime * span + duration) / (span + 1);
 		}
 
 		setLastSampleTime(System.currentTimeMillis());
+	}
+
+	public long getAverageTime() {
+		return _averageTime;
 	}
 
 	public long getCount() {
 		return _countStatistics.getCount();
 	}
 
-	public long getRollingAverageTime() {
-		return _rollingAverageTime;
-	}
-
 	public void reset() {
 		super.reset();
 
-		_rollingAverageTime = 0;
+		_averageTime = 0;
 	}
 
+	private long _averageTime;
 	private CountStatistics _countStatistics;
-	private long _rollingAverageTime;
 
 }

@@ -20,19 +20,30 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.monitoring;
+package com.liferay.portal.monitoring.jmx;
+
+import com.liferay.portal.monitoring.MonitoringException;
+import com.liferay.portal.monitoring.statistics.portlet.PortletSummaryStatistics;
 
 /**
- * <a href="MonitorNames.java.html"><b><i>View Source</i></b></a>
+ * <a href="PortletManagerMBean.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael C. Han
  * @author Brian Wing Shun Chan
  *
  */
-public interface MonitorNames {
+public interface PortletManagerMBean extends PortletSummaryStatistics {
 
-	public static final String PORTAL = "com.liferay.monitoring.Portal";
+	public long[] getCompanyIds() throws MonitoringException;
 
-	public static final String PORTLET = "com.liferay.monitoring.Portlet";
+	public String[] getPortletIds() throws MonitoringException;
+
+	public String[] getWebIds() throws MonitoringException;
+
+	public void reset();
+
+	public void reset(long companyId);
+
+	public void reset(String webId);
 
 }

@@ -26,18 +26,28 @@ package com.liferay.portal.monitoring.statistics;
  * <a href="RequestStatistics.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael C. Han
+ * @author Brian Wing Shun Chan
+ *
  */
 public class RequestStatistics implements Statistics {
 
 	public RequestStatistics(String name) {
 		_name = name;
 		_errorStatistics = new CountStatistics(name);
-		_timeCountStatistics = new CountStatistics(name);
-		_successStatistics = new RollingAverageStatistics(name);
+		_successStatistics = new AverageStatistics(name);
+		_timeoutStatistics = new CountStatistics(name);
+	}
+
+	public long getAverageTime() {
+		return _successStatistics.getAverageTime();
 	}
 
 	public String getDescription() {
 		return _description;
+	}
+
+	public long getErrorCount() {
+		return _errorStatistics.getCount();
 	}
 
 	public long getMaxTime() {
@@ -52,22 +62,16 @@ public class RequestStatistics implements Statistics {
 		return _name;
 	}
 
-	public long getNumErrors() {
-		return _errorStatistics.getCount();
+	public long getRequestCount() {
+		return getErrorCount() + getSuccessCount() + getTimeoutCount();
 	}
 
-	public long getNumRequests() {
-		return getNumErrors() +
-			   getNumTimeouts() +
-			   getNumSuccesses();
+	public long getSuccessCount() {
+		return _successStatistics.getCount();
 	}
 
-	public long getNumTimeouts() {
-		return _timeCountStatistics.getCount();
-	}
-
-	public long getRollingAverageTime() {
-		return _successStatistics.getRollingAverageTime();
+	public long getTimeoutCount() {
+		return _timeoutStatistics.getCount();
 	}
 
 	public void incrementError() {
@@ -79,28 +83,23 @@ public class RequestStatistics implements Statistics {
 	}
 
 	public void incrementTimeout() {
-		_timeCountStatistics.incrementCount();
+		_timeoutStatistics.incrementCount();
+	}
+
+	public void reset() {
+		_errorStatistics.reset();
+		_successStatistics.reset();
+		_timeoutStatistics.reset();
 	}
 
 	public void setDescription(String description) {
 		_description = description;
 	}
 
-	public long getNumSuccesses() {
-		return _successStatistics.getCount();
-	}
-
-	public void reset() {
-		_errorStatistics.reset();
-
-		_timeCountStatistics.reset();
-
-		_successStatistics.reset();
-	}
-
-	private CountStatistics _errorStatistics;
-	private CountStatistics _timeCountStatistics;
-	private RollingAverageStatistics _successStatistics;
 	private String _description;
+	private CountStatistics _errorStatistics;
 	private String _name;
+	private AverageStatistics _successStatistics;
+	private CountStatistics _timeoutStatistics;
+
 }

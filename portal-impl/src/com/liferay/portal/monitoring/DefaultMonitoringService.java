@@ -35,34 +35,34 @@ import java.util.concurrent.ConcurrentHashMap;
  * <a href="DefaultMonitoringService.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael C. Han
+ * @author Brian Wing Shun Chan
  *
  */
 public class DefaultMonitoringService
 	implements DataSampleProcessor<DataSample>, MonitoringService {
 
-	public Set<String> getMonitoredNamespaces() {
-		return _monitoringLevels.keySet();
-	}
+	public Level getLevel(String namespace) {
+		Level level = _levels.get(namespace);
 
-	public MonitoringLevel getMonitoringLevel(String namespace) {
-		MonitoringLevel monitoringLevel = _monitoringLevels.get(namespace);
-
-		if (monitoringLevel == null) {
-			return MonitoringLevel.OFF;
+		if (level == null) {
+			return Level.OFF;
 		}
 
-		return monitoringLevel;
+		return level;
+	}
+
+	public Set<String> getNamespaces() {
+		return _levels.keySet();
 	}
 
 	public void processDataSample(DataSample dataSample)
 		throws MonitoringException {
+
 		String namespace = dataSample.getNamespace();
 
-		MonitoringLevel monitoringLevel = _monitoringLevels.get(namespace);
+		Level level = _levels.get(namespace);
 
-		if ((monitoringLevel != null) &&
-			(monitoringLevel.equals(MonitoringLevel.OFF))) {
-
+		if ((level != null) && (level.equals(Level.OFF))) {
 			return;
 		}
 
@@ -97,26 +97,24 @@ public class DefaultMonitoringService
 	}
 
 	public void setDataSampleProcessors(
-		Map<String,
-		List<DataSampleProcessor<DataSample>>> dataSampleProcessors) {
+		Map<String, List<DataSampleProcessor<DataSample>>>
+			dataSampleProcessors) {
 
 		_dataSampleProcessors.putAll(dataSampleProcessors);
 	}
 
-	public void setMonitoringLevel(
-		String namespace, MonitoringLevel monitoringLevel) {
-
-		_monitoringLevels.put(namespace, monitoringLevel);
+	public void setLevel(String namespace, Level level) {
+		_levels.put(namespace, level);
 	}
 
-	public void setMonitoringLevels(Map<String, String> monitoringLevels) {
-		for (Map.Entry<String, String> monitoringLevel :
-				monitoringLevels.entrySet()) {
+	public void setLevels(Map<String, String> levels) {
+		for (Map.Entry<String, String> entry : levels.entrySet()) {
+			String namespace = entry.getKey();
+			String levelName = entry.getValue();
 
-			String namespace = monitoringLevel.getKey();
-			String level = monitoringLevel.getValue();
+			Level level = Level.valueOf(levelName);
 
-			_monitoringLevels.put(namespace, MonitoringLevel.valueOf(level));
+			_levels.put(namespace, level);
 		}
 	}
 
@@ -134,7 +132,6 @@ public class DefaultMonitoringService
 	private Map<String, List<DataSampleProcessor<DataSample>>>
 		_dataSampleProcessors = new ConcurrentHashMap
 			<String, List<DataSampleProcessor<DataSample>>>();
-	private Map<String, MonitoringLevel> _monitoringLevels =
-		new ConcurrentHashMap<String, MonitoringLevel>();
+	private Map<String, Level> _levels = new ConcurrentHashMap<String, Level>();
 
 }

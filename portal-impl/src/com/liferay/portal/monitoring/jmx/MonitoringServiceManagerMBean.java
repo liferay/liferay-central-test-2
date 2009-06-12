@@ -27,14 +27,15 @@ package com.liferay.portal.monitoring.jmx;
  * </a>
  *
  * @author Michael C. Han
+ * @author Brian Wing Shun Chan
  *
  */
 public interface MonitoringServiceManagerMBean {
 
-	public String[] getMonitoredNamespaces();
+	public String[] getNamespaces();
 
-	public String getMonitoringLevel(String namespace);
+	public String getLevel(String namespace);
 
-	public void setMonitoringLevel(String namespace, String level);
+	public void setLevel(String namespace, String levelName);
 
 }

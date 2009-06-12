@@ -29,6 +29,7 @@ import com.liferay.portal.monitoring.statistics.DataSampleThreadLocal;
  * </a>
  *
  * @author Michael C. Han
+ * @author Brian Wing Shun Chan
  *
  */
 public class DataSampleThreadLocalManager

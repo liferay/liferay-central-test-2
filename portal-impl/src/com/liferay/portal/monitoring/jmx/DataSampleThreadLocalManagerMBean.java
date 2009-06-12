@@ -27,6 +27,7 @@ package com.liferay.portal.monitoring.jmx;
  * </b></a>
  *
  * @author Michael C. Han
+ * @author Brian Wing Shun Chan
  *
  */
 public interface DataSampleThreadLocalManagerMBean {
