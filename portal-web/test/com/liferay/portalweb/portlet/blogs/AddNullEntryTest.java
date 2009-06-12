@@ -82,7 +82,7 @@ public class AddNullEntryTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_33_saveButton")) {
+				if (selenium.isElementPresent("saveButton_33_name")) {
 					break;
 				}
 			}
@@ -92,7 +92,7 @@ public class AddNullEntryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("_33_saveButton"));
+		selenium.click(RuntimeVariables.replace("saveButton_33_name"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"You have entered invalid data. Please try again."));
@@ -103,7 +103,7 @@ public class AddNullEntryTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_33_cancelButton")) {
+				if (selenium.isElementPresent("cancelButton_33_name")) {
 					break;
 				}
 			}
@@ -113,7 +113,7 @@ public class AddNullEntryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("_33_cancelButton"));
+		selenium.click(RuntimeVariables.replace("cancelButton_33_name"));
 		selenium.waitForPageToLoad("30000");
 		assertFalse(selenium.isElementPresent("link=Test Null Entry"));
 	}
