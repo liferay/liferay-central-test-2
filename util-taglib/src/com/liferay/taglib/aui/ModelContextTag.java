@@ -49,11 +49,11 @@ public class ModelContextTag extends BodyTagSupport {
 		_bean = bean;
 	}
 
-	public void setModel(Class model) {
+	public void setModel(Class<?> model) {
 		_model = model;
 	}
 
 	private Object _bean;
-	private Class _model;
+	private Class<?> _model;
 
 }

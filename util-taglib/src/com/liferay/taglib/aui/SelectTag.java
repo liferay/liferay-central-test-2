@@ -41,40 +41,40 @@ import javax.servlet.jsp.tagext.DynamicAttributes;
  */
 public class SelectTag extends IncludeTag implements DynamicAttributes {
 
-	public int doStartTag() throws JspException {
-		HttpServletRequest request =
-			(HttpServletRequest)pageContext.getRequest();
-
-		request.setAttribute("aui:select:cssClass", _cssClass);
-		request.setAttribute(
-			"aui:select:dynamicAttributes", _dynamicAttributes);
-		request.setAttribute("aui:select:first", String.valueOf(_first));
-		request.setAttribute("aui:select:helpMessage", _helpMessage);
-		request.setAttribute(
-			"aui:select:inlineLabel", String.valueOf(_inlineLabel));
-		request.setAttribute("aui:select:label", _label);
-		request.setAttribute("aui:select:last", String.valueOf(_last));
-		request.setAttribute("aui:select:name", _name);
-
-		try{
-			PortalIncludeUtil.include(pageContext, getStartPage());
-		}
-		catch (Exception e) {
-			throw new JspException(e);
-		}
-
-		return EVAL_BODY_INCLUDE;
-	}
-
 	public int doEndTag() throws JspException {
 		try{
 			PortalIncludeUtil.include(pageContext, getEndPage());
+
+			return EVAL_PAGE;
 		}
 		catch (Exception e) {
 			throw new JspException(e);
 		}
+	}
 
-		return EVAL_PAGE;
+	public int doStartTag() throws JspException {
+		try{
+			HttpServletRequest request =
+				(HttpServletRequest)pageContext.getRequest();
+
+			request.setAttribute("aui:select:cssClass", _cssClass);
+			request.setAttribute(
+				"aui:select:dynamicAttributes", _dynamicAttributes);
+			request.setAttribute("aui:select:first", String.valueOf(_first));
+			request.setAttribute("aui:select:helpMessage", _helpMessage);
+			request.setAttribute(
+				"aui:select:inlineLabel", String.valueOf(_inlineLabel));
+			request.setAttribute("aui:select:label", _label);
+			request.setAttribute("aui:select:last", String.valueOf(_last));
+			request.setAttribute("aui:select:name", _name);
+
+			PortalIncludeUtil.include(pageContext, getStartPage());
+
+			return EVAL_BODY_INCLUDE;
+		}
+		catch (Exception e) {
+			throw new JspException(e);
+		}
 	}
 
 	public String getEndPage() {
@@ -99,8 +99,8 @@ public class SelectTag extends IncludeTag implements DynamicAttributes {
 		_cssClass = cssClass;
 	}
 
-	public void setDynamicAttribute(String uri, String localName, Object value)
-		throws JspException {
+	public void setDynamicAttribute(
+		String uri, String localName, Object value) {
 
 		_dynamicAttributes.put(localName, value);
 	}

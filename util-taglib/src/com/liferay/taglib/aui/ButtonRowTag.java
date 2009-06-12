@@ -41,34 +41,33 @@ import javax.servlet.jsp.tagext.DynamicAttributes;
  */
 public class ButtonRowTag extends IncludeTag implements DynamicAttributes {
 
-	public int doStartTag() throws JspException {
-		HttpServletRequest request =
-			(HttpServletRequest)pageContext.getRequest();
-
-		request.setAttribute("aui:button-row:cssClass", _cssClass);
-		request.setAttribute(
-			"aui:button-row:dynamicAttributes", _dynamicAttributes);
-
-		try{
-			PortalIncludeUtil.include(pageContext, getStartPage());
-		}
-		catch (Exception e) {
-			throw new JspException(e);
-		}
-
-		return EVAL_BODY_INCLUDE;
-	}
-
 	public int doEndTag() throws JspException {
-
 		try{
 			PortalIncludeUtil.include(pageContext, getEndPage());
+
+			return EVAL_PAGE;
 		}
 		catch (Exception e) {
 			throw new JspException(e);
 		}
+	}
 
-		return EVAL_PAGE;
+	public int doStartTag() throws JspException {
+		try{
+			HttpServletRequest request =
+				(HttpServletRequest)pageContext.getRequest();
+
+			request.setAttribute("aui:button-row:cssClass", _cssClass);
+			request.setAttribute(
+				"aui:button-row:dynamicAttributes", _dynamicAttributes);
+
+			PortalIncludeUtil.include(pageContext, getStartPage());
+
+			return EVAL_BODY_INCLUDE;
+		}
+		catch (Exception e) {
+			throw new JspException(e);
+		}
 	}
 
 	public String getEndPage() {
@@ -93,8 +92,8 @@ public class ButtonRowTag extends IncludeTag implements DynamicAttributes {
 		_cssClass = cssClass;
 	}
 
-	public void setDynamicAttribute(String uri, String localName, Object value)
-		throws JspException {
+	public void setDynamicAttribute(
+		String uri, String localName, Object value) {
 
 		_dynamicAttributes.put(localName, value);
 	}

@@ -41,41 +41,43 @@ import javax.servlet.jsp.tagext.DynamicAttributes;
  */
 public class FieldWrapperTag extends IncludeTag implements DynamicAttributes {
 
-	public int doStartTag() throws JspException {
-		HttpServletRequest request =
-			(HttpServletRequest)pageContext.getRequest();
-
-		request.setAttribute("aui:field-wrapper:name", _name);
-		request.setAttribute("aui:field-wrapper:label", _label);
-		request.setAttribute("aui:field-wrapper:cssClass", _cssClass);
-		request.setAttribute("aui:field-wrapper:first", String.valueOf(_first));
-		request.setAttribute("aui:field-wrapper:last", String.valueOf(_last));
-		request.setAttribute(
-			"aui:field-wrapper:inlineLabel", String.valueOf(_inlineLabel));
-		request.setAttribute("aui:field-wrapper:helpMessage", _helpMessage);
-
-		request.setAttribute(
-			"aui:field-wrapper:dynamicAttributes", _dynamicAttributes);
-
-		try{
-			PortalIncludeUtil.include(pageContext, getStartPage());
-		}
-		catch (Exception e) {
-			throw new JspException(e);
-		}
-
-		return EVAL_BODY_INCLUDE;
-	}
-
 	public int doEndTag() throws JspException {
 		try{
 			PortalIncludeUtil.include(pageContext, getEndPage());
+
+			return EVAL_PAGE;
 		}
 		catch (Exception e) {
 			throw new JspException(e);
 		}
+	}
 
-		return EVAL_PAGE;
+	public int doStartTag() throws JspException {
+		try{
+			HttpServletRequest request =
+				(HttpServletRequest)pageContext.getRequest();
+
+			request.setAttribute("aui:field-wrapper:cssClass", _cssClass);
+			request.setAttribute(
+				"aui:field-wrapper:dynamicAttributes", _dynamicAttributes);
+			request.setAttribute(
+				"aui:field-wrapper:first", String.valueOf(_first));
+			request.setAttribute(
+				"aui:field-wrapper:helpMessage", _helpMessage);
+			request.setAttribute(
+				"aui:field-wrapper:inlineLabel", String.valueOf(_inlineLabel));
+			request.setAttribute("aui:field-wrapper:label", _label);
+			request.setAttribute(
+				"aui:field-wrapper:last", String.valueOf(_last));
+			request.setAttribute("aui:field-wrapper:name", _name);
+
+			PortalIncludeUtil.include(pageContext, getStartPage());
+
+			return EVAL_BODY_INCLUDE;
+		}
+		catch (Exception e) {
+			throw new JspException(e);
+		}
 	}
 
 	public String getEndPage() {
@@ -100,8 +102,8 @@ public class FieldWrapperTag extends IncludeTag implements DynamicAttributes {
 		_cssClass = cssClass;
 	}
 
-	public void setDynamicAttribute(String uri, String localName, Object value)
-		throws JspException {
+	public void setDynamicAttribute(
+		String uri, String localName, Object value) {
 
 		_dynamicAttributes.put(localName, value);
 	}
@@ -138,19 +140,19 @@ public class FieldWrapperTag extends IncludeTag implements DynamicAttributes {
 		_startPage = startPage;
 	}
 
-	private static final String _START_PAGE =
-		"/html/taglib/aui/field_wrapper/start.jsp";
-
 	private static final String _END_PAGE =
 		"/html/taglib/aui/field_wrapper/end.jsp";
+
+	private static final String _START_PAGE =
+		"/html/taglib/aui/field_wrapper/start.jsp";
 
 	private String _cssClass;
 	private Map<String,Object> _dynamicAttributes =
 		new HashMap<String,Object>();
 	private String _endPage;
 	private boolean _first;
-	private boolean _inlineLabel;
 	private String _helpMessage;
+	private boolean _inlineLabel;
 	private String _label;
 	private boolean _last;
 	private String _name;

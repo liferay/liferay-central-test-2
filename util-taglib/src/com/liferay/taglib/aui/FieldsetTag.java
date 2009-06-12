@@ -41,34 +41,35 @@ import javax.servlet.jsp.tagext.DynamicAttributes;
  */
 public class FieldsetTag extends IncludeTag implements DynamicAttributes {
 
-	public int doStartTag() throws JspException {
-		HttpServletRequest request =
-			(HttpServletRequest)pageContext.getRequest();
-
-		request.setAttribute("aui:fieldset:cssClass", _cssClass);
-		request.setAttribute("aui:fieldset:column", String.valueOf(_column));
-		request.setAttribute(
-			"aui:fieldset:dynamicAttributes", _dynamicAttributes);
-
-		try{
-			PortalIncludeUtil.include(pageContext, getStartPage());
-		}
-		catch (Exception e) {
-			throw new JspException(e);
-		}
-
-		return EVAL_BODY_INCLUDE;
-	}
-
 	public int doEndTag() throws JspException {
 		try{
 			PortalIncludeUtil.include(pageContext, getEndPage());
+
+			return EVAL_PAGE;
 		}
 		catch (Exception e) {
 			throw new JspException(e);
 		}
+	}
 
-		return EVAL_PAGE;
+	public int doStartTag() throws JspException {
+		try{
+			HttpServletRequest request =
+				(HttpServletRequest)pageContext.getRequest();
+
+			request.setAttribute("aui:fieldset:cssClass", _cssClass);
+			request.setAttribute(
+				"aui:fieldset:column", String.valueOf(_column));
+			request.setAttribute(
+				"aui:fieldset:dynamicAttributes", _dynamicAttributes);
+
+			PortalIncludeUtil.include(pageContext, getStartPage());
+
+			return EVAL_BODY_INCLUDE;
+		}
+		catch (Exception e) {
+			throw new JspException(e);
+		}
 	}
 
 	public String getEndPage() {
@@ -89,16 +90,16 @@ public class FieldsetTag extends IncludeTag implements DynamicAttributes {
 		}
 	}
 
-	public void setCssClass(String cssClass) {
-		_cssClass = cssClass;
-	}
-
 	public void setColumn(boolean column) {
 		_column = column;
 	}
 
-	public void setDynamicAttribute(String uri, String localName, Object value)
-		throws JspException {
+	public void setCssClass(String cssClass) {
+		_cssClass = cssClass;
+	}
+
+	public void setDynamicAttribute(
+		String uri, String localName, Object value) {
 
 		_dynamicAttributes.put(localName, value);
 	}
@@ -117,8 +118,8 @@ public class FieldsetTag extends IncludeTag implements DynamicAttributes {
 	private static final String _START_PAGE =
 		"/html/taglib/aui/fieldset/start.jsp";
 
-	private String _cssClass;
 	private boolean _column;
+	private String _cssClass;
 	private Map<String, Object> _dynamicAttributes =
 		new HashMap<String, Object>();
 	private String _endPage;

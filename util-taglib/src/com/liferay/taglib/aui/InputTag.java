@@ -28,7 +28,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.DynamicAttributes;
 
 /**
@@ -48,7 +47,8 @@ public class InputTag extends IncludeTag implements DynamicAttributes {
 		}
 
 		if (_model == null) {
-			_model = (Class)pageContext.getAttribute("aui:model-context:model");
+			_model = (Class<?>)pageContext.getAttribute(
+				"aui:model-context:model");
 		}
 
 		request.setAttribute("aui:input:bean", _bean);
@@ -74,8 +74,10 @@ public class InputTag extends IncludeTag implements DynamicAttributes {
 		_cssClass = cssClass;
 	}
 
-	public void setId(String id) {
-		_id = id;
+	public void setDynamicAttribute(
+		String uri, String localName, Object value) {
+
+		_dynamicAttributes.put(localName, value);
 	}
 
 	public void setFirst(boolean first) {
@@ -84,6 +86,10 @@ public class InputTag extends IncludeTag implements DynamicAttributes {
 
 	public void setHelpMessage(String helpMessage) {
 		_helpMessage = helpMessage;
+	}
+
+	public void setId(String id) {
+		_id = id;
 	}
 
 	public void setInlineLabel(boolean inlineLabel) {
@@ -114,28 +120,21 @@ public class InputTag extends IncludeTag implements DynamicAttributes {
 		return _PAGE;
 	}
 
-	public void setDynamicAttribute(String uri, String localName, Object value)
-		throws JspException {
-
-		_dynamicAttributes.put(localName, value);
-	}
-
 	private static final String _PAGE = "/html/taglib/aui/input/page.jsp";
 
 	private Object _bean;
 	private String _cssClass;
+	private Map<String,Object> _dynamicAttributes =
+		new HashMap<String,Object>();
 	private boolean _first;
 	private String _helpMessage;
 	private String _id;
 	private boolean _inlineLabel;
 	private String _label;
 	private boolean _last;
-	private Class _model;
+	private Class<?> _model;
 	private String _name;
 	private String _type;
 	private Object _value;
-
-	private Map<String,Object> _dynamicAttributes =
-		new HashMap<String,Object>();
 
 }

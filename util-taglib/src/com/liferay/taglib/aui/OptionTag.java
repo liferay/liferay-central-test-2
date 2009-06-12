@@ -40,42 +40,43 @@ import javax.servlet.jsp.tagext.DynamicAttributes;
  */
 public class OptionTag extends IncludeTag  implements DynamicAttributes {
 
-	public int doStartTag() throws JspException {
-		HttpServletRequest request =
-			(HttpServletRequest)pageContext.getRequest();
-
-		request.setAttribute("aui:option:cssClass", _cssClass);
-		request.setAttribute(
-			"aui:option:dynamicAttributes", _dynamicAttributes);
-		request.setAttribute("aui:option:selected", String.valueOf(_selected));
-
-		try{
-			PortalIncludeUtil.include(pageContext, _START_PAGE);
-		}
-		catch (Exception e) {
-			throw new JspException(e);
-		}
-
-		return EVAL_BODY_INCLUDE;
-	}
-
 	public int doEndTag() throws JspException {
 		try{
 			PortalIncludeUtil.include(pageContext, _END_PAGE);
+
+			return EVAL_PAGE;
 		}
 		catch (Exception e) {
 			throw new JspException(e);
 		}
+	}
 
-		return EVAL_PAGE;
+	public int doStartTag() throws JspException {
+		try{
+			HttpServletRequest request =
+				(HttpServletRequest)pageContext.getRequest();
+
+			request.setAttribute("aui:option:cssClass", _cssClass);
+			request.setAttribute(
+				"aui:option:dynamicAttributes", _dynamicAttributes);
+			request.setAttribute(
+				"aui:option:selected", String.valueOf(_selected));
+
+			PortalIncludeUtil.include(pageContext, _START_PAGE);
+
+			return EVAL_BODY_INCLUDE;
+		}
+		catch (Exception e) {
+			throw new JspException(e);
+		}
 	}
 
 	public void setCssClass(String cssClass) {
 		_cssClass = cssClass;
 	}
 
-	public void setDynamicAttribute(String uri, String localName, Object value)
-		throws JspException {
+	public void setDynamicAttribute(
+		String uri, String localName, Object value) {
 
 		_dynamicAttributes.put(localName, value);
 	}

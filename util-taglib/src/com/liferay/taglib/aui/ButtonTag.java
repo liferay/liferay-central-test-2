@@ -28,7 +28,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.DynamicAttributes;
 
 /**
@@ -57,12 +56,8 @@ public class ButtonTag extends IncludeTag implements DynamicAttributes {
 		_cssClass = cssClass;
 	}
 
-	protected String getDefaultPage() {
-		return _PAGE;
-	}
-
-	public void setDynamicAttribute(String uri, String localName, Object value)
-		throws JspException {
+	public void setDynamicAttribute(
+		String uri, String localName, Object value) {
 
 		_dynamicAttributes.put(localName, value);
 	}
@@ -77,6 +72,10 @@ public class ButtonTag extends IncludeTag implements DynamicAttributes {
 
 	public void setValue(String value) {
 		_value = value;
+	}
+
+	protected String getDefaultPage() {
+		return _PAGE;
 	}
 
 	private static final String _PAGE = "/html/taglib/aui/button/page.jsp";

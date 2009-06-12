@@ -41,40 +41,40 @@ import javax.servlet.jsp.tagext.DynamicAttributes;
  */
 public class RadioTag extends IncludeTag implements DynamicAttributes {
 
-	public int doStartTag() throws JspException {
-		HttpServletRequest request =
-			(HttpServletRequest)pageContext.getRequest();
-
-		request.setAttribute("aui:radio:cssClass", _cssClass);
-		request.setAttribute("aui:input:dynamicAttributes", _dynamicAttributes);
-		request.setAttribute("aui:radio:first", String.valueOf(_first));
-		request.setAttribute("aui:radio:helpMessage", _helpMessage);
-		request.setAttribute(
-			"aui:radio:inlineLabel", String.valueOf(_inlineLabel));
-		request.setAttribute("aui:radio:label", _label);
-		request.setAttribute("aui:radio:last", String.valueOf(_last));
-		request.setAttribute("aui:radio:name", _name);
-
-		try{
-			PortalIncludeUtil.include(pageContext, getStartPage());
-		}
-		catch (Exception e) {
-			throw new JspException(e);
-		}
-
-		return EVAL_BODY_INCLUDE;
-
-	}
-
 	public int doEndTag() throws JspException {
 		try{
 			PortalIncludeUtil.include(pageContext, getEndPage());
+
+			return EVAL_PAGE;
 		}
 		catch (Exception e) {
 			throw new JspException(e);
 		}
+	}
 
-		return EVAL_PAGE;
+	public int doStartTag() throws JspException {
+		try{
+			HttpServletRequest request =
+				(HttpServletRequest)pageContext.getRequest();
+
+			request.setAttribute("aui:radio:cssClass", _cssClass);
+			request.setAttribute(
+				"aui:input:dynamicAttributes", _dynamicAttributes);
+			request.setAttribute("aui:radio:first", String.valueOf(_first));
+			request.setAttribute("aui:radio:helpMessage", _helpMessage);
+			request.setAttribute(
+				"aui:radio:inlineLabel", String.valueOf(_inlineLabel));
+			request.setAttribute("aui:radio:label", _label);
+			request.setAttribute("aui:radio:last", String.valueOf(_last));
+			request.setAttribute("aui:radio:name", _name);
+
+			PortalIncludeUtil.include(pageContext, getStartPage());
+
+			return EVAL_BODY_INCLUDE;
+		}
+		catch (Exception e) {
+			throw new JspException(e);
+		}
 	}
 
 	public String getEndPage() {
@@ -99,8 +99,8 @@ public class RadioTag extends IncludeTag implements DynamicAttributes {
 		_cssClass = cssClass;
 	}
 
-	public void setDynamicAttribute(String uri, String localName, Object value)
-		throws JspException {
+	public void setDynamicAttribute(
+		String uri, String localName, Object value) {
 
 		_dynamicAttributes.put(localName, value);
 	}

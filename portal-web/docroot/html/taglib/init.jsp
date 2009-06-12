@@ -49,13 +49,14 @@ private String _buildDynamicAttributes(Map<String, Object> dynamicAttributes) {
 	StringBuilder sb = new StringBuilder();
 
 	for (Map.Entry entry : dynamicAttributes.entrySet()) {
-		if (!entry.getKey().equals("class")) {
-			sb.append(entry.getKey());
-			sb.append(StringPool.EQUAL);
-			sb.append(StringPool.QUOTE);
-			sb.append(entry.getValue());
-			sb.append(StringPool.QUOTE);
-			sb.append(StringPool.SPACE);
+		String key = entry.getKey();
+		String value = entry.getValue();
+
+		if (!key.equals("class")) {
+			sb.append(key);
+			sb.append("=\"");
+			sb.append(value);
+			sb.append("\" ");
 		}
 	}
 
