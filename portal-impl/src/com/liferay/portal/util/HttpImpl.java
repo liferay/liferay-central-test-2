@@ -649,7 +649,10 @@ public class HttpImpl implements Http {
 	}
 
 	public byte[] URLtoByteArray(Http.Options options) throws IOException {
-		return URLtoByteArray(options);
+		return URLtoByteArray(
+			options.getLocation(), options.getHeaders(), options.getCookies(),
+			options.getAuth(), options.getBody(), options.getParts(),
+			options.isPost());
 	}
 
 	public byte[] URLtoByteArray(String location) throws IOException {
@@ -669,7 +672,6 @@ public class HttpImpl implements Http {
 		options.setPost(post);
 
 		return URLtoByteArray(options);
-
 	}
 
 	public String URLtoString(Http.Options options) throws IOException {
