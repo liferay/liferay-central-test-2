@@ -59,29 +59,21 @@ import org.aspectj.lang.ProceedingJoinPoint;
  */
 public class ShardAdvice {
 
-	public Object invokeAccountService(ProceedingJoinPoint proceedingJoinPoint)
+	public Object invokeByParameter(ProceedingJoinPoint proceedingJoinPoint)
 		throws Throwable {
 
-		String methodName = proceedingJoinPoint.getSignature().getName();
 		Object[] arguments = proceedingJoinPoint.getArgs();
 
-		String shardName = PropsValues.SHARD_DEFAULT_NAME;
+		long companyId = (Long)arguments[0];
 
-		if (methodName.equals("getAccount") && (arguments.length == 2)) {
-			long companyId = (Long)arguments[0];
+		Shard shard = ShardLocalServiceUtil.getShard(
+			Company.class.getName(), companyId);
 
-			Shard shard = ShardLocalServiceUtil.getShard(
-				Company.class.getName(), companyId);
-
-			shardName = shard.getName();
-		}
-		else {
-			return proceedingJoinPoint.proceed();
-		}
+		String shardName = shard.getName();
 
 		if (_log.isInfoEnabled()) {
 			_log.info(
-				"Company service being set to shard " + shardName + " for " +
+				"Service being set to shard " + shardName + " for " +
 					_getSignature(proceedingJoinPoint));
 		}
 
@@ -243,46 +235,6 @@ public class ShardAdvice {
 		else {
 			return proceedingJoinPoint.proceed();
 		}
-	}
-
-	public Object invokeUserService(ProceedingJoinPoint proceedingJoinPoint)
-		throws Throwable {
-
-		String methodName = proceedingJoinPoint.getSignature().getName();
-		Object[] arguments = proceedingJoinPoint.getArgs();
-
-		String shardName = PropsValues.SHARD_DEFAULT_NAME;
-
-		if (methodName.equals("searchCount")) {
-			long companyId = (Long)arguments[0];
-
-			Shard shard = ShardLocalServiceUtil.getShard(
-				Company.class.getName(), companyId);
-
-			shardName = shard.getName();
-		}
-		else {
-			return proceedingJoinPoint.proceed();
-		}
-
-		if (_log.isInfoEnabled()) {
-			_log.info(
-				"Company service being set to shard " + shardName + " for " +
-					_getSignature(proceedingJoinPoint));
-		}
-
-		Object returnValue = null;
-
-		pushCompanyService(shardName);
-
-		try {
-			returnValue = proceedingJoinPoint.proceed();
-		}
-		finally {
-			popCompanyService();
-		}
-
-		return returnValue;
 	}
 
 	public void setShardDataSourceTargetSource(
