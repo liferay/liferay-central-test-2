@@ -23,25 +23,25 @@
 %>
 
 <%
-boolean ldapAuthEnabled = ParamUtil.getBoolean(request, "settings(" + PropsKeys.LDAP_AUTH_ENABLED +")", PortalLDAPUtil.isAuthEnabled(company.getCompanyId()));
-boolean ldapAuthRequired = ParamUtil.getBoolean(request, "settings(" + PropsKeys.LDAP_AUTH_REQUIRED +")", PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.LDAP_AUTH_REQUIRED));
-String ldapBaseProviderUrl = ParamUtil.getString(request, "settings(" + PropsKeys.LDAP_BASE_PROVIDER_URL +")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.LDAP_BASE_PROVIDER_URL));
-String ldapBaseDN = ParamUtil.getString(request, "settings(" + PropsKeys.LDAP_BASE_DN +")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.LDAP_BASE_DN));
-String ldapSecurityPrincipal = ParamUtil.getString(request, "settings(" + PropsKeys.LDAP_SECURITY_PRINCIPAL +")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.LDAP_SECURITY_PRINCIPAL));
-String ldapSecurityCredentials = ParamUtil.getString(request, "settings(" + PropsKeys.LDAP_SECURITY_CREDENTIALS +")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.LDAP_SECURITY_CREDENTIALS));
-String ldapAuthSearchFilter = ParamUtil.getString(request, "settings(" + PropsKeys.LDAP_AUTH_SEARCH_FILTER +")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.LDAP_AUTH_SEARCH_FILTER));
-String ldapImportUserSearchFilter = ParamUtil.getString(request, "settings(" + PropsKeys.LDAP_IMPORT_USER_SEARCH_FILTER +")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.LDAP_IMPORT_USER_SEARCH_FILTER));
-String ldapImportGroupSearchFilter = ParamUtil.getString(request, "settings(" + PropsKeys.LDAP_IMPORT_GROUP_SEARCH_FILTER +")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.LDAP_IMPORT_GROUP_SEARCH_FILTER));
-boolean ldapImportEnabled = ParamUtil.getBoolean(request, "settings(" + PropsKeys.LDAP_IMPORT_ENABLED +")", PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.LDAP_IMPORT_ENABLED, PropsValues.LDAP_IMPORT_ENABLED));
-boolean ldapImportOnStartup = ParamUtil.getBoolean(request, "settings(" + PropsKeys.LDAP_IMPORT_ON_STARTUP +")", PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.LDAP_IMPORT_ON_STARTUP));
-long ldapImportInterval = ParamUtil.getLong(request, "settings(" + PropsKeys.LDAP_IMPORT_INTERVAL +")", PrefsPropsUtil.getLong(company.getCompanyId(), PropsKeys.LDAP_IMPORT_INTERVAL));
-boolean ldapExportEnabled = ParamUtil.getBoolean(request, "settings(" + PropsKeys.LDAP_EXPORT_ENABLED +")", PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.LDAP_EXPORT_ENABLED, PropsValues.LDAP_EXPORT_ENABLED));
-String ldapUsersDN = ParamUtil.getString(request, "settings(" + PropsKeys.LDAP_USERS_DN +")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.LDAP_USERS_DN));
-String ldapUserDefaultObjectClasses = ParamUtil.getString(request, "settings(" + PropsKeys.LDAP_USER_DEFAULT_OBJECT_CLASSES +")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.LDAP_USER_DEFAULT_OBJECT_CLASSES));
-String ldapGroupsDN = ParamUtil.getString(request, "settings(" + PropsKeys.LDAP_GROUPS_DN +")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.LDAP_GROUPS_DN));
-boolean ldapPasswordPolicyEnabled = ParamUtil.getBoolean(request, "settings(" + PropsKeys.LDAP_PASSWORD_POLICY_ENABLED +")", PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.LDAP_PASSWORD_POLICY_ENABLED));
+boolean ldapAuthEnabled = ParamUtil.getBoolean(request, "settings(" + PropsKeys.LDAP_AUTH_ENABLED + ")", PortalLDAPUtil.isAuthEnabled(company.getCompanyId()));
+boolean ldapAuthRequired = ParamUtil.getBoolean(request, "settings(" + PropsKeys.LDAP_AUTH_REQUIRED + ")", PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.LDAP_AUTH_REQUIRED));
+String ldapBaseProviderUrl = ParamUtil.getString(request, "settings(" + PropsKeys.LDAP_BASE_PROVIDER_URL + ")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.LDAP_BASE_PROVIDER_URL));
+String ldapBaseDN = ParamUtil.getString(request, "settings(" + PropsKeys.LDAP_BASE_DN + ")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.LDAP_BASE_DN));
+String ldapSecurityPrincipal = ParamUtil.getString(request, "settings(" + PropsKeys.LDAP_SECURITY_PRINCIPAL + ")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.LDAP_SECURITY_PRINCIPAL));
+String ldapSecurityCredentials = ParamUtil.getString(request, "settings(" + PropsKeys.LDAP_SECURITY_CREDENTIALS + ")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.LDAP_SECURITY_CREDENTIALS));
+String ldapAuthSearchFilter = ParamUtil.getString(request, "settings(" + PropsKeys.LDAP_AUTH_SEARCH_FILTER + ")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.LDAP_AUTH_SEARCH_FILTER));
+String ldapImportUserSearchFilter = ParamUtil.getString(request, "settings(" + PropsKeys.LDAP_IMPORT_USER_SEARCH_FILTER + ")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.LDAP_IMPORT_USER_SEARCH_FILTER));
+String ldapImportGroupSearchFilter = ParamUtil.getString(request, "settings(" + PropsKeys.LDAP_IMPORT_GROUP_SEARCH_FILTER + ")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.LDAP_IMPORT_GROUP_SEARCH_FILTER));
+boolean ldapImportEnabled = ParamUtil.getBoolean(request, "settings(" + PropsKeys.LDAP_IMPORT_ENABLED + ")", PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.LDAP_IMPORT_ENABLED, PropsValues.LDAP_IMPORT_ENABLED));
+boolean ldapImportOnStartup = ParamUtil.getBoolean(request, "settings(" + PropsKeys.LDAP_IMPORT_ON_STARTUP + ")", PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.LDAP_IMPORT_ON_STARTUP));
+long ldapImportInterval = ParamUtil.getLong(request, "settings(" + PropsKeys.LDAP_IMPORT_INTERVAL + ")", PrefsPropsUtil.getLong(company.getCompanyId(), PropsKeys.LDAP_IMPORT_INTERVAL));
+boolean ldapExportEnabled = ParamUtil.getBoolean(request, "settings(" + PropsKeys.LDAP_EXPORT_ENABLED + ")", PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.LDAP_EXPORT_ENABLED, PropsValues.LDAP_EXPORT_ENABLED));
+String ldapUsersDN = ParamUtil.getString(request, "settings(" + PropsKeys.LDAP_USERS_DN + ")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.LDAP_USERS_DN));
+String ldapUserDefaultObjectClasses = ParamUtil.getString(request, "settings(" + PropsKeys.LDAP_USER_DEFAULT_OBJECT_CLASSES + ")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.LDAP_USER_DEFAULT_OBJECT_CLASSES));
+String ldapGroupsDN = ParamUtil.getString(request, "settings(" + PropsKeys.LDAP_GROUPS_DN + ")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.LDAP_GROUPS_DN));
+boolean ldapPasswordPolicyEnabled = ParamUtil.getBoolean(request, "settings(" + PropsKeys.LDAP_PASSWORD_POLICY_ENABLED + ")", PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.LDAP_PASSWORD_POLICY_ENABLED));
 
-String ldapUserMappings = ParamUtil.getString(request, "settings(" + PropsKeys.LDAP_USER_MAPPINGS +")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.LDAP_USER_MAPPINGS));
+String ldapUserMappings = ParamUtil.getString(request, "settings(" + PropsKeys.LDAP_USER_MAPPINGS + ")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.LDAP_USER_MAPPINGS));
 
 String[] userMappingArray = ldapUserMappings.split("\n");
 
@@ -93,7 +93,7 @@ for (int i = 0 ; i < userMappingArray.length ; i++) {
 	mapping[1] = "";
 }
 
-String ldapGroupMappings = ParamUtil.getString(request, "settings(" + PropsKeys.LDAP_GROUP_MAPPINGS +")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.LDAP_GROUP_MAPPINGS));
+String ldapGroupMappings = ParamUtil.getString(request, "settings(" + PropsKeys.LDAP_GROUP_MAPPINGS + ")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.LDAP_GROUP_MAPPINGS));
 
 String[] groupMappingArray = ldapGroupMappings.split("\n");
 
@@ -334,7 +334,7 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 	<div class="exp-ctrl-holder">
 		<label class="inline-label" for="<portlet:namespace />settings(<%= PropsKeys.LDAP_AUTH_ENABLED %>)"><liferay-ui:message key="enabled" /></label>
 
-		<liferay-ui:input-checkbox param='<%= "settings(" + PropsKeys.LDAP_AUTH_ENABLED +")" %>' defaultValue="<%= ldapAuthEnabled %>" />
+		<liferay-ui:input-checkbox param='<%= "settings(" + PropsKeys.LDAP_AUTH_ENABLED + ")" %>' defaultValue="<%= ldapAuthEnabled %>" />
 	</div>
 
 	<div class="exp-ctrl-holder">

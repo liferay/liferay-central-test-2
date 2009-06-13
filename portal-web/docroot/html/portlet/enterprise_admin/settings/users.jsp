@@ -25,13 +25,13 @@
 <%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
 <%
-boolean termsOfUseRequired = ParamUtil.getBoolean(request, "settings(" + PropsKeys.TERMS_OF_USE_REQUIRED +")", PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.TERMS_OF_USE_REQUIRED, PropsValues.TERMS_OF_USE_REQUIRED));
-boolean usersScreenNameAlwaysAutogenerate = ParamUtil.getBoolean(request, "settings(" + PropsKeys.USERS_SCREEN_NAME_ALWAYS_AUTOGENERATE +")", PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.USERS_SCREEN_NAME_ALWAYS_AUTOGENERATE, PropsValues.USERS_SCREEN_NAME_ALWAYS_AUTOGENERATE));
-boolean fieldEnableMale = ParamUtil.getBoolean(request, "settings(" + PropsKeys.FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_CONTACT_MALE +")", PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_CONTACT_MALE, PropsValues.FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_CONTACT_MALE));
-boolean fieldEnableBirthday = ParamUtil.getBoolean(request, "settings(" + PropsKeys.FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_CONTACT_BIRTHDAY +")", PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_CONTACT_BIRTHDAY, PropsValues.FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_CONTACT_BIRTHDAY));
+boolean termsOfUseRequired = ParamUtil.getBoolean(request, "settings(" + PropsKeys.TERMS_OF_USE_REQUIRED + ")", PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.TERMS_OF_USE_REQUIRED, PropsValues.TERMS_OF_USE_REQUIRED));
+boolean usersScreenNameAlwaysAutogenerate = ParamUtil.getBoolean(request, "settings(" + PropsKeys.USERS_SCREEN_NAME_ALWAYS_AUTOGENERATE + ")", PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.USERS_SCREEN_NAME_ALWAYS_AUTOGENERATE, PropsValues.USERS_SCREEN_NAME_ALWAYS_AUTOGENERATE));
+boolean fieldEnableMale = ParamUtil.getBoolean(request, "settings(" + PropsKeys.FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_CONTACT_MALE + ")", PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_CONTACT_MALE, PropsValues.FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_CONTACT_MALE));
+boolean fieldEnableBirthday = ParamUtil.getBoolean(request, "settings(" + PropsKeys.FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_CONTACT_BIRTHDAY + ")", PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_CONTACT_BIRTHDAY, PropsValues.FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_CONTACT_BIRTHDAY));
 
-String adminReservedScreenNames = ParamUtil.getString(request, "settings(" + PropsKeys.ADMIN_RESERVED_SCREEN_NAMES +")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.ADMIN_RESERVED_SCREEN_NAMES));
-String adminReservedEmailAddresses = ParamUtil.getString(request, "settings(" + PropsKeys.ADMIN_RESERVED_EMAIL_ADDRESSES +")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.ADMIN_RESERVED_EMAIL_ADDRESSES));
+String adminReservedScreenNames = ParamUtil.getString(request, "settings(" + PropsKeys.ADMIN_RESERVED_SCREEN_NAMES + ")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.ADMIN_RESERVED_SCREEN_NAMES));
+String adminReservedEmailAddresses = ParamUtil.getString(request, "settings(" + PropsKeys.ADMIN_RESERVED_EMAIL_ADDRESSES + ")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.ADMIN_RESERVED_EMAIL_ADDRESSES));
 
 String adminDefaultGroupNames = ParamUtil.getString(request, "settings(" + PropsKeys.ADMIN_DEFAULT_GROUP_NAMES + ")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.ADMIN_DEFAULT_GROUP_NAMES));
 String adminDefaultRoleNames = ParamUtil.getString(request, "settings(" + PropsKeys.ADMIN_DEFAULT_ROLE_NAMES + ")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.ADMIN_DEFAULT_ROLE_NAMES));

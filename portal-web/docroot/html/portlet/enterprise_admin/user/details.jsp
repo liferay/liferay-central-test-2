@@ -202,7 +202,7 @@ boolean deletePortrait = ParamUtil.getBoolean(request, "deletePortrait");
 			<div class="portrait-icons">
 
 				<%
-				String taglibEditURL = "javascript:" + renderResponse.getNamespace() + "openEditUserPortraitWindow('" + editUserPortraitURL +"');";
+				String taglibEditURL = "javascript:" + renderResponse.getNamespace() + "openEditUserPortraitWindow('" + editUserPortraitURL + "');";
 				%>
 
 				<liferay-ui:icon image="edit" message="change" url="<%= taglibEditURL %>" label="<%= true %>" />

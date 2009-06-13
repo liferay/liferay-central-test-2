@@ -249,7 +249,7 @@ if (organization != null) {
 			<div class="portrait-icons">
 
 				<%
-				String taglibEditURL = "javascript:" + renderResponse.getNamespace() + "openEditOrganizationLogoWindow('" + editOrganizationLogoURL +"');";
+				String taglibEditURL = "javascript:" + renderResponse.getNamespace() + "openEditOrganizationLogoWindow('" + editOrganizationLogoURL + "');";
 				%>
 
 				<liferay-ui:icon image="edit" message="change" url="<%= taglibEditURL %>" label="<%= true %>" />

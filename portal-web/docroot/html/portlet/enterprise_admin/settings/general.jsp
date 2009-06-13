@@ -25,8 +25,8 @@
 <%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
 <%
-String defaultLandingPagePath = ParamUtil.getString(request, "settings(" + PropsKeys.DEFAULT_LANDING_PAGE_PATH +")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.DEFAULT_LANDING_PAGE_PATH, PropsValues.DEFAULT_LANDING_PAGE_PATH));
-String defaultLogoutPagePath = ParamUtil.getString(request, "settings(" + PropsKeys.DEFAULT_LOGOUT_PAGE_PATH +")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.DEFAULT_LOGOUT_PAGE_PATH, PropsValues.DEFAULT_LOGOUT_PAGE_PATH));
+String defaultLandingPagePath = ParamUtil.getString(request, "settings(" + PropsKeys.DEFAULT_LANDING_PAGE_PATH + ")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.DEFAULT_LANDING_PAGE_PATH, PropsValues.DEFAULT_LANDING_PAGE_PATH));
+String defaultLogoutPagePath = ParamUtil.getString(request, "settings(" + PropsKeys.DEFAULT_LOGOUT_PAGE_PATH + ")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.DEFAULT_LOGOUT_PAGE_PATH, PropsValues.DEFAULT_LOGOUT_PAGE_PATH));
 %>
 
 <liferay-ui:error-marker key="errorSection" value="general" />

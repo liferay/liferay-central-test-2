@@ -132,7 +132,7 @@ String defaultControlPanelThemeId = ParamUtil.getString(request, "settings(" + P
 	<div class="portrait-icons">
 
 		<%
-		String taglibEditURL = "javascript:" + renderResponse.getNamespace() + "openEditCompanyLogoWindow('" + editCompanyLogoURL +"');";
+		String taglibEditURL = "javascript:" + renderResponse.getNamespace() + "openEditCompanyLogoWindow('" + editCompanyLogoURL + "');";
 		%>
 
 		<liferay-ui:icon image="edit" message="change" url="<%= taglibEditURL %>" label="<%= true %>" />
