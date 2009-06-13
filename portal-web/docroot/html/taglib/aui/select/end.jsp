@@ -28,12 +28,10 @@
 boolean inlineLabel = GetterUtil.getBoolean((String)request.getAttribute("aui:select:inlineLabel"));
 %>
 
-</select>
+		</select>
+	</span>
 
-</span>
-
-<c:if test="<%= inlineLabel %>">
-	</label>
-</c:if>
-
+	<c:if test="<%= inlineLabel %>">
+		</label>
+	</c:if>
 </div>

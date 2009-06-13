@@ -25,8 +25,7 @@
 <%@ include file="/html/taglib/init.jsp" %>
 
 <%
-String cssClass = GetterUtil.getString((String)request.getAttribute("aui:button-row:cssClass"), StringPool.BLANK);
-
+String cssClass = GetterUtil.getString((String)request.getAttribute("aui:button-row:cssClass"));
 Map<String, Object> dynamicAttributes = (Map<String, Object>)request.getAttribute("aui:button-row:dynamicAttributes");
 %>
 

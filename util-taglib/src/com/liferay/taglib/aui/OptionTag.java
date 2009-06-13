@@ -23,6 +23,7 @@
 package com.liferay.taglib.aui;
 
 import com.liferay.portal.kernel.servlet.PortalIncludeUtil;
+import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.taglib.util.IncludeTag;
 
 import java.util.HashMap;
@@ -36,9 +37,11 @@ import javax.servlet.jsp.tagext.DynamicAttributes;
  * <a href="OptionTag.java.html"><b><i>View Source</i></b></a>
  *
  * @author Julio Camarero
+ * @author Jorge Ferrer
+ * @author Brian Wing Shun Chan
  *
  */
-public class OptionTag extends IncludeTag  implements DynamicAttributes {
+public class OptionTag extends IncludeTag implements DynamicAttributes {
 
 	public int doEndTag() throws JspException {
 		try{
@@ -48,6 +51,13 @@ public class OptionTag extends IncludeTag  implements DynamicAttributes {
 		}
 		catch (Exception e) {
 			throw new JspException(e);
+		}
+		finally {
+			if (!ServerDetector.isResin()) {
+				_cssClass = null;
+				_dynamicAttributes.clear();
+				_selected = false;
+			}
 		}
 	}
 
@@ -91,8 +101,8 @@ public class OptionTag extends IncludeTag  implements DynamicAttributes {
 		"/html/taglib/aui/option/start.jsp";
 
 	private String _cssClass;
-	private Map<String,Object> _dynamicAttributes =
-		new HashMap<String,Object>();
+	private Map<String, Object> _dynamicAttributes =
+		new HashMap<String, Object>();
 	private boolean _selected;
 
 }

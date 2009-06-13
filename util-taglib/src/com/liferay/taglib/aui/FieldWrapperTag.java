@@ -23,6 +23,7 @@
 package com.liferay.taglib.aui;
 
 import com.liferay.portal.kernel.servlet.PortalIncludeUtil;
+import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.taglib.util.IncludeTag;
 
@@ -37,6 +38,8 @@ import javax.servlet.jsp.tagext.DynamicAttributes;
  * <a href="FieldWrapperTag.java.html"><b><i>View Source</i></b></a>
  *
  * @author Julio Camarero
+ * @author Jorge Ferrer
+ * @author Brian Wing Shun Chan
  *
  */
 public class FieldWrapperTag extends IncludeTag implements DynamicAttributes {
@@ -50,12 +53,30 @@ public class FieldWrapperTag extends IncludeTag implements DynamicAttributes {
 		catch (Exception e) {
 			throw new JspException(e);
 		}
+		finally {
+			if (!ServerDetector.isResin()) {
+				_cssClass = null;
+				_dynamicAttributes.clear();
+				_endPage = null;
+				_first = false;
+				_helpMessage = null;
+				_inlineLabel = false;
+				_label = null;
+				_last = false;
+				_name = null;
+				_startPage = null;
+			}
+		}
 	}
 
 	public int doStartTag() throws JspException {
 		try{
 			HttpServletRequest request =
 				(HttpServletRequest)pageContext.getRequest();
+
+			if (Validator.isNull(_label)) {
+				_label = _name;
+			}
 
 			request.setAttribute("aui:field-wrapper:cssClass", _cssClass);
 			request.setAttribute(
@@ -147,8 +168,8 @@ public class FieldWrapperTag extends IncludeTag implements DynamicAttributes {
 		"/html/taglib/aui/field_wrapper/start.jsp";
 
 	private String _cssClass;
-	private Map<String,Object> _dynamicAttributes =
-		new HashMap<String,Object>();
+	private Map<String, Object> _dynamicAttributes =
+		new HashMap<String, Object>();
 	private String _endPage;
 	private boolean _first;
 	private String _helpMessage;

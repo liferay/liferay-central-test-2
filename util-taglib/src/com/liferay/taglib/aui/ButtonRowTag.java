@@ -23,6 +23,7 @@
 package com.liferay.taglib.aui;
 
 import com.liferay.portal.kernel.servlet.PortalIncludeUtil;
+import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.taglib.util.IncludeTag;
 
@@ -37,6 +38,8 @@ import javax.servlet.jsp.tagext.DynamicAttributes;
  * <a href="ButtonRowTag.java.html"><b><i>View Source</i></b></a>
  *
  * @author Julio Camarero
+ * @author Jorge Ferrer
+ * @author Brian Wing Shun Chan
  *
  */
 public class ButtonRowTag extends IncludeTag implements DynamicAttributes {
@@ -49,6 +52,14 @@ public class ButtonRowTag extends IncludeTag implements DynamicAttributes {
 		}
 		catch (Exception e) {
 			throw new JspException(e);
+		}
+		finally {
+			if (!ServerDetector.isResin()) {
+				_cssClass = null;
+				_dynamicAttributes.clear();
+				_endPage = null;
+				_startPage = null;
+			}
 		}
 	}
 

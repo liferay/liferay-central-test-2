@@ -25,21 +25,18 @@
 <%@ include file="/html/taglib/init.jsp" %>
 
 <%
-String name = (String)request.getAttribute("aui:field-wrapper:name");
-
-String cssClass = GetterUtil.getString((String)request.getAttribute("aui:field-wrapper:cssClass"), StringPool.BLANK);
+String cssClass = GetterUtil.getString((String)request.getAttribute("aui:field-wrapper:cssClass"));
 boolean first = GetterUtil.getBoolean((String)request.getAttribute("aui:field-wrapper:first"));
-String helpMessage = GetterUtil.getString((String)request.getAttribute("aui:field-wrapper:helpMessage"), StringPool.BLANK);
+String helpMessage = GetterUtil.getString((String)request.getAttribute("aui:field-wrapper:helpMessage"));
 boolean inlineLabel = GetterUtil.getBoolean((String)request.getAttribute("aui:field-wrapper:inlineLabel"));
-String label = GetterUtil.getString((String)request.getAttribute("aui:field-wrapper:label"), name);
+String label = GetterUtil.getString((String)request.getAttribute("aui:field-wrapper:label"));
+String name = GetterUtil.getString((String)request.getAttribute("aui:field-wrapper:name"));
 boolean last = GetterUtil.getBoolean((String)request.getAttribute("aui:field-wrapper:last"));
 %>
 
 <div class="exp-ctrl-holder <%= cssClass %> <%= first ? "exp-first" : StringPool.BLANK %> <%= last ? "exp-last" : StringPool.BLANK %> ">
-
 	<c:if test="<%= Validator.isNotNull(label) %>">
-		<label class="exp-form-label <%= inlineLabel ? "inline-label" : StringPool.BLANK  %> " <%= Validator.isNotNull (name) ? "for=\"" + name + "\"" : StringPool.BLANK %> for="<%= name %>">
-
+		<label class="exp-form-label <%= inlineLabel ? "inline-label" : StringPool.BLANK  %>" <%= Validator.isNotNull(name) ? "for=\"" + name + "\"" : StringPool.BLANK %>>
 			<liferay-ui:message key="<%= label %>" />
 
 			<c:if test="<%= Validator.isNotNull(helpMessage) %>">

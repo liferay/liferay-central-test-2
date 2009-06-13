@@ -25,23 +25,19 @@
 <%@ include file="/html/taglib/init.jsp" %>
 
 <%
-String name = (String)request.getAttribute("aui:select:name");
-
-String label = GetterUtil.getString((String)request.getAttribute("aui:select:label"), name);
-String cssClass = GetterUtil.getString((String)request.getAttribute("aui:select:cssClass"), StringPool.BLANK);
-boolean first = GetterUtil.getBoolean((String)request.getAttribute("aui:select:first"));
-boolean last = GetterUtil.getBoolean((String)request.getAttribute("aui:select:last"));
-boolean inlineLabel = GetterUtil.getBoolean((String)request.getAttribute("aui:select:inlineLabel"));
-String helpMessage = GetterUtil.getString((String)request.getAttribute("aui:select:helpMessage"), StringPool.BLANK);
-
+String cssClass = GetterUtil.getString((String)request.getAttribute("aui:select:cssClass"));
 Map<String, Object> dynamicAttributes = (Map<String, Object>)request.getAttribute("aui:select:dynamicAttributes");
+boolean first = GetterUtil.getBoolean((String)request.getAttribute("aui:select:first"));
+String helpMessage = GetterUtil.getString((String)request.getAttribute("aui:select:helpMessage"));
+boolean inlineLabel = GetterUtil.getBoolean((String)request.getAttribute("aui:select:inlineLabel"));
+String label = GetterUtil.getString((String)request.getAttribute("aui:select:label"));
+boolean last = GetterUtil.getBoolean((String)request.getAttribute("aui:select:last"));
+String name = GetterUtil.getString((String)request.getAttribute("aui:select:name"));
 %>
 
-<div class="exp-ctrl-holder <%= cssClass %> <%= first ? "exp-first" : StringPool.BLANK %> <%= last ? "exp-last" : StringPool.BLANK %> ">
-
+<div class="exp-ctrl-holder <%= cssClass %> <%= first ? "exp-first" : StringPool.BLANK %> <%= last ? "exp-last" : StringPool.BLANK %>">
 	<c:if test="<%= Validator.isNotNull(label) %>">
-		<label class="exp-form-label <%= inlineLabel ? "inline-label" : StringPool.BLANK  %> " for="<%= name %>">
-
+		<label class="exp-form-label <%= inlineLabel ? "inline-label" : StringPool.BLANK  %>" for="<%= name %>">
 			<liferay-ui:message key="<%= label %>" />
 
 			<c:if test="<%= Validator.isNotNull(helpMessage) %>">
@@ -54,5 +50,4 @@ Map<String, Object> dynamicAttributes = (Map<String, Object>)request.getAttribut
 	</c:if>
 
 	<span class="exp-form-field exp-form-select">
-
-	<select name="<%= name %>" <%= _buildDynamicAttributes(dynamicAttributes) %>>
+		<select name="<%= name %>" <%= _buildDynamicAttributes(dynamicAttributes) %>>

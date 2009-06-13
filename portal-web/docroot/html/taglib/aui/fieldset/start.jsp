@@ -25,9 +25,8 @@
 <%@ include file="/html/taglib/init.jsp" %>
 
 <%
-String cssClass = GetterUtil.getString((String)request.getAttribute("aui:fieldset:cssClass"), StringPool.BLANK);
 boolean column = GetterUtil.getBoolean((String)request.getAttribute("aui:fieldset:column"));
-
+String cssClass = GetterUtil.getString((String)request.getAttribute("aui:fieldset:cssClass"));
 Map<String, Object> dynamicAttributes = (Map<String, Object>)request.getAttribute("aui:fieldset:dynamicAttributes");
 %>
 

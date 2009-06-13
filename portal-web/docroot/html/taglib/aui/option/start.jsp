@@ -25,22 +25,9 @@
 <%@ include file="/html/taglib/init.jsp" %>
 
 <%
-String cssClass = GetterUtil.getString((String)request.getAttribute("aui:option:cssClass"), StringPool.BLANK);
-boolean selected = GetterUtil.getBoolean((String)request.getAttribute("aui:option:selected"));
-
+String cssClass = GetterUtil.getString((String)request.getAttribute("aui:option:cssClass"));
 Map<String, Object> dynamicAttributes = (Map<String, Object>)request.getAttribute("aui:option:dynamicAttributes");
+boolean selected = GetterUtil.getBoolean((String)request.getAttribute("aui:option:selected"));
 %>
 
-<option  <%= selected ? "selected" : StringPool.BLANK %> <%= _buildDynamicAttributes(dynamicAttributes) %>
-
-	<%
-	if (Validator.isNotNull(cssClass) || selected) {
-	%>
-
-		class="<%= cssClass %> <%= selected ? "selected" : StringPool.BLANK %>"
-
-	<%
-	}
-	%>
-
->
+<option <%= Validator.isNotNull(cssClass) ? "class=\"" + cssClass + "\"" : StringPool.BLANK %> <%= selected ? "selected" : StringPool.BLANK %> <%= _buildDynamicAttributes(dynamicAttributes) %>>

@@ -23,6 +23,7 @@
 package com.liferay.taglib.aui;
 
 import com.liferay.portal.kernel.servlet.PortalIncludeUtil;
+import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.taglib.util.IncludeTag;
 
@@ -37,6 +38,8 @@ import javax.servlet.jsp.tagext.DynamicAttributes;
  * <a href="RadioTag.java.html"><b><i>View Source</i></b></a>
  *
  * @author Julio Camarero
+ * @author Jorge Ferrer
+ * @author Brian Wing Shun Chan
  *
  */
 public class RadioTag extends IncludeTag implements DynamicAttributes {
@@ -49,6 +52,20 @@ public class RadioTag extends IncludeTag implements DynamicAttributes {
 		}
 		catch (Exception e) {
 			throw new JspException(e);
+		}
+		finally {
+			if (!ServerDetector.isResin()) {
+				_cssClass = null;
+				_dynamicAttributes.clear();
+				_endPage = null;
+				_first = false;
+				_helpMessage = null;
+				_inlineLabel = false;
+				_label = null;
+				_last = false;
+				_name = null;
+				_startPage = null;
+			}
 		}
 	}
 
@@ -143,8 +160,8 @@ public class RadioTag extends IncludeTag implements DynamicAttributes {
 		"/html/taglib/aui/radio/start.jsp";
 
 	private String _cssClass;
-	private Map<String,Object> _dynamicAttributes =
-		new HashMap<String,Object>();
+	private Map<String, Object> _dynamicAttributes =
+		new HashMap<String, Object>();
 	private String _endPage;
 	private boolean _first;
 	private String _helpMessage;

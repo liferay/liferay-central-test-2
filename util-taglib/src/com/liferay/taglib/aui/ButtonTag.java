@@ -34,6 +34,8 @@ import javax.servlet.jsp.tagext.DynamicAttributes;
  * <a href="ButtonTag.java.html"><b><i>View Source</i></b></a>
  *
  * @author Julio Camarero
+ * @author Jorge Ferrer
+ * @author Brian Wing Shun Chan
  *
  */
 public class ButtonTag extends IncludeTag implements DynamicAttributes {
@@ -84,7 +86,7 @@ public class ButtonTag extends IncludeTag implements DynamicAttributes {
 	private Map<String, Object> _dynamicAttributes =
 		new HashMap<String, Object>();
 	private String _name;
-	private String _type;
+	private String _type = "button";
 	private String _value;
 
 }

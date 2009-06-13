@@ -22,21 +22,54 @@
 
 package com.liferay.taglib.aui;
 
+import com.liferay.portal.kernel.util.ServerDetector;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.taglib.util.IncludeTag;
+import com.liferay.util.TextFormatter;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.DynamicAttributes;
 
 /**
  * <a href="InputTag.java.html"><b><i>View Source</i></b></a>
  *
  * @author Julio Camarero
+ * @author Jorge Ferrer
+ * @author Brian Wing Shun Chan
  *
  */
 public class InputTag extends IncludeTag implements DynamicAttributes {
+
+	public int doEndTag() throws JspException {
+		try {
+			return super.doEndTag();
+		}
+		catch (Exception e) {
+			throw new JspException(e);
+		}
+		finally {
+			if (!ServerDetector.isResin()) {
+				_bean = null;
+				_cssClass = null;
+				_dynamicAttributes.clear();
+				_field = null;
+				_first = false;
+				_helpMessage = null;
+				_id = null;
+				_inlineLabel = false;
+				_label = null;
+				_last = false;
+				_model = null;
+				_name = null;
+				_type = "text";
+				_value = null;
+			}
+		}
+	}
 
 	public int doStartTag() {
 		HttpServletRequest request =
@@ -46,6 +79,18 @@ public class InputTag extends IncludeTag implements DynamicAttributes {
 			_bean = pageContext.getAttribute("aui:model-context:bean");
 		}
 
+		if (Validator.isNull(_field)) {
+			_field = _name;
+		}
+
+		if (Validator.isNull(_id)) {
+			_id = _name;
+		}
+
+		if (Validator.isNull(_label)) {
+			_label = TextFormatter.format(_name, TextFormatter.K);
+		}
+
 		if (_model == null) {
 			_model = (Class<?>)pageContext.getAttribute(
 				"aui:model-context:model");
@@ -53,8 +98,9 @@ public class InputTag extends IncludeTag implements DynamicAttributes {
 
 		request.setAttribute("aui:input:bean", _bean);
 		request.setAttribute("aui:input:cssClass", _cssClass);
+		request.setAttribute("aui:input:field", _field);
 		request.setAttribute("aui:input:first", String.valueOf(_first));
-		request.setAttribute("aui:input:helpMessage",  _helpMessage);
+		request.setAttribute("aui:input:helpMessage", _helpMessage);
 		request.setAttribute("aui:input:id", _id);
 		request.setAttribute(
 			"aui:input:inlineLabel", String.valueOf(_inlineLabel));
@@ -63,7 +109,7 @@ public class InputTag extends IncludeTag implements DynamicAttributes {
 		request.setAttribute("aui:input:model", _model);
 		request.setAttribute("aui:input:name", _name);
 		request.setAttribute("aui:input:type", _type);
-		request.setAttribute("aui:input:value",  _value);
+		request.setAttribute("aui:input:value", _value);
 
 		request.setAttribute("aui:input:dynamicAttributes", _dynamicAttributes);
 
@@ -78,6 +124,10 @@ public class InputTag extends IncludeTag implements DynamicAttributes {
 		String uri, String localName, Object value) {
 
 		_dynamicAttributes.put(localName, value);
+	}
+
+	public void setField(String field) {
+		_field = field;
 	}
 
 	public void setFirst(boolean first) {
@@ -124,8 +174,9 @@ public class InputTag extends IncludeTag implements DynamicAttributes {
 
 	private Object _bean;
 	private String _cssClass;
-	private Map<String,Object> _dynamicAttributes =
-		new HashMap<String,Object>();
+	private Map<String, Object> _dynamicAttributes =
+		new HashMap<String, Object>();
+	private String _field;
 	private boolean _first;
 	private String _helpMessage;
 	private String _id;
@@ -134,7 +185,7 @@ public class InputTag extends IncludeTag implements DynamicAttributes {
 	private boolean _last;
 	private Class<?> _model;
 	private String _name;
-	private String _type;
+	private String _type = "text";
 	private Object _value;
 
 }

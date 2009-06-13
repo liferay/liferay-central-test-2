@@ -48,9 +48,9 @@ private String _buildDynamicAttributes(Map<String, Object> dynamicAttributes) {
 
 	StringBuilder sb = new StringBuilder();
 
-	for (Map.Entry entry : dynamicAttributes.entrySet()) {
+	for (Map.Entry<String, Object> entry : dynamicAttributes.entrySet()) {
 		String key = entry.getKey();
-		String value = entry.getValue();
+		String value = String.valueOf(entry.getValue());
 
 		if (!key.equals("class")) {
 			sb.append(key);

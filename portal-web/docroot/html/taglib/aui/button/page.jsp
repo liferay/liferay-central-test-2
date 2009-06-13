@@ -25,16 +25,13 @@
 <%@ include file="/html/taglib/init.jsp" %>
 
 <%
-String cssClass = GetterUtil.getString((String)request.getAttribute("aui:button:cssClass"), StringPool.BLANK);
-String name = (String)request.getAttribute("aui:button:name");
-String type = GetterUtil.getString((String)request.getAttribute("aui:button:type"), "button");
-String value = (String)request.getAttribute("aui:button:value");
-
+String cssClass = GetterUtil.getString((String)request.getAttribute("aui:button:cssClass"));
 Map<String, Object> dynamicAttributes = (Map<String, Object>)request.getAttribute("aui:button:dynamicAttributes");
-
-name += portletResponse.getNamespace() + "name";
+String name = namespace + GetterUtil.getString((String)request.getAttribute("aui:button:name"));
+String type = GetterUtil.getString((String)request.getAttribute("aui:button:type"));
+String value = (String)request.getAttribute("aui:button:value");
 %>
 
 <span class="exp-form-button <%= !type.equals("button") ? "exp-form-" + type : StringPool.BLANK %> <%= cssClass %>">
-	<input id="<%= name %>" id="<%= name %>" type="<%= type %>" value="<%= LanguageUtil.get(pageContext, value) %>" <%= _buildDynamicAttributes(dynamicAttributes) %>>
+	<input id="<%= name %>" type="<%= type %>" value="<%= LanguageUtil.get(pageContext, value) %>" <%= _buildDynamicAttributes(dynamicAttributes) %>>
 </span>

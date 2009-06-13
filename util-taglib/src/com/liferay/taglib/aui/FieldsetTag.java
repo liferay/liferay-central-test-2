@@ -23,6 +23,7 @@
 package com.liferay.taglib.aui;
 
 import com.liferay.portal.kernel.servlet.PortalIncludeUtil;
+import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.taglib.util.IncludeTag;
 
@@ -37,6 +38,8 @@ import javax.servlet.jsp.tagext.DynamicAttributes;
  * <a href="FieldsetTag.java.html"><b><i>View Source</i></b></a>
  *
  * @author Julio Camarero
+ * @author Jorge Ferrer
+ * @author Brian Wing Shun Chan
  *
  */
 public class FieldsetTag extends IncludeTag implements DynamicAttributes {
@@ -50,6 +53,15 @@ public class FieldsetTag extends IncludeTag implements DynamicAttributes {
 		catch (Exception e) {
 			throw new JspException(e);
 		}
+		finally {
+			if (!ServerDetector.isResin()) {
+				_column = false;
+				_cssClass = null;
+				_dynamicAttributes.clear();
+				_endPage = null;
+				_startPage = null;
+			}
+		}
 	}
 
 	public int doStartTag() throws JspException {
@@ -57,9 +69,9 @@ public class FieldsetTag extends IncludeTag implements DynamicAttributes {
 			HttpServletRequest request =
 				(HttpServletRequest)pageContext.getRequest();
 
-			request.setAttribute("aui:fieldset:cssClass", _cssClass);
 			request.setAttribute(
 				"aui:fieldset:column", String.valueOf(_column));
+			request.setAttribute("aui:fieldset:cssClass", _cssClass);
 			request.setAttribute(
 				"aui:fieldset:dynamicAttributes", _dynamicAttributes);
 

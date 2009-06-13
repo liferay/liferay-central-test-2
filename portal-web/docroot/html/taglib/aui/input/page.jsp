@@ -25,32 +25,27 @@
 <%@ include file="/html/taglib/init.jsp" %>
 
 <%@ page import="java.text.Format" %>
-<%@ page import="java.util.Map" %>
 
 <%
-String name = (String)request.getAttribute("aui:input:name");
-String type = GetterUtil.getString((String)request.getAttribute("aui:input:type"), "text");
-
 BaseModel bean = (BaseModel)request.getAttribute("aui:input:bean");
-String cssClass = GetterUtil.getString((String)request.getAttribute("aui:input:cssClass"), StringPool.BLANK);
-String field = GetterUtil.getString((String)request.getAttribute("field"), name);
+String cssClass = GetterUtil.getString((String)request.getAttribute("aui:input:cssClass"));
+Map<String, Object> dynamicAttributes = (Map<String, Object>)request.getAttribute("aui:input:dynamicAttributes");
+String field = GetterUtil.getString((String)request.getAttribute("field"));
 boolean first = GetterUtil.getBoolean((String)request.getAttribute("aui:input:first"));
-String helpMessage = GetterUtil.getString((String)request.getAttribute("aui:input:helpMessage"), StringPool.BLANK);
-String id = GetterUtil.getString((String)request.getAttribute("aui:input:id"), name);
-boolean inlineLabel = GetterUtil.getBoolean((String)request.getAttribute("aui:input:inlineLabel"), Validator.equals(type, "checkbox"));
-String label = GetterUtil.getString((String)request.getAttribute("aui:input:label"), TextFormatter.format(name, TextFormatter.K));
+String helpMessage = GetterUtil.getString((String)request.getAttribute("aui:input:helpMessage"));
+String id = namespace + GetterUtil.getString((String)request.getAttribute("aui:input:id"));
+boolean inlineLabel = GetterUtil.getBoolean((String)request.getAttribute("aui:input:inlineLabel"));
+String label = GetterUtil.getString((String)request.getAttribute("aui:input:label"));
 boolean last = GetterUtil.getBoolean((String)request.getAttribute("aui:input:last"));
-Class model = (Class)request.getAttribute("aui:input:model");
+Class<?> model = (Class<?>)request.getAttribute("aui:input:model");
+String name = GetterUtil.getString((String)request.getAttribute("aui:input:name"));
+String type = GetterUtil.getString((String)request.getAttribute("aui:input:type"));
 Object value = request.getAttribute("aui:input:value");
 
-Map<String, Object> dynamicAttributes = (Map<String, Object>)request.getAttribute("aui:input:dynamicAttributes");
-
-String param = portletResponse.getNamespace() + name;
-id = portletResponse.getNamespace() + id;
+String param = namespace + name;
 %>
 
-<div class="exp-ctrl-holder <%= cssClass %> <%= first ? "exp-first" : StringPool.BLANK %> <%= last ? "exp-last" : StringPool.BLANK %> ">
-
+<div class="exp-ctrl-holder <%= cssClass %> <%= first ? "exp-first" : StringPool.BLANK %> <%= last ? "exp-last" : StringPool.BLANK %>">
 	<c:if test="<%= Validator.isNotNull(label) %>">
 		<label class="exp-form-label <%= inlineLabel ? "inline-label" : StringPool.BLANK  %> " for="<%= name %>">
 
@@ -63,35 +58,44 @@ id = portletResponse.getNamespace() + id;
 		<c:if test="<%= !inlineLabel %>">
 			</label>
 		</c:if>
-
 	</c:if>
 
 	<c:choose>
 		<c:when test='<%= (model != null) && type.equals("assetTags") %>'>
-				<%
-				long classPK = 0;
 
-				if (bean != null) {
-					Serializable primaryKeyObj = bean.getPrimaryKeyObj();
+			<%
+			long classPK = 0;
 
-					if (primaryKeyObj instanceof Long) {
-						classPK = (Long)primaryKeyObj;
-					}
-					else {
-						classPK = GetterUtil.getLong(primaryKeyObj.toString());
-					}
+			if (bean != null) {
+				Serializable primaryKeyObj = bean.getPrimaryKeyObj();
+
+				if (primaryKeyObj instanceof Long) {
+					classPK = (Long)primaryKeyObj;
 				}
-				%>
+				else {
+					classPK = GetterUtil.getLong(primaryKeyObj.toString());
+				}
+			}
+			%>
 
-				<liferay-ui:asset-tags-selector
-					className="<%= model.getName() %>"
-					classPK="<%= classPK %>"
-					contentCallback='<%= portletResponse.getNamespace() + "getSuggestionsContent" %>'
-				/>
+			<liferay-ui:asset-tags-selector
+				className="<%= model.getName() %>"
+				classPK="<%= classPK %>"
+				contentCallback='<%= portletResponse.getNamespace() + "getSuggestionsContent" %>'
+			/>
 		</c:when>
-		<c:when test="<%= (model != null)  && (field != null) %>">
+		<c:when test="<%= (model != null) && (field != null) %>">
 			<span class="exp-form-field exp-form-<%= ModelHintsUtil.getType(model.toString(), field) %>">
-				<liferay-ui:input-field model="<%= model %>" field="<%= field %>" disabled='<%= GetterUtil.getBoolean((String)dynamicAttributes.get("disabled")) %>' bean="<%= bean %>" defaultValue='<%= value %>' fieldParam='<%= (String)dynamicAttributes.get("fieldParam") %>' format='<%= (Format)dynamicAttributes.get("format") %>' formName='<%= (String)dynamicAttributes.get("formName") %>'  />
+				<liferay-ui:input-field
+					bean="<%= bean %>"
+					defaultValue='<%= value %>'
+					disabled='<%= GetterUtil.getBoolean((String)dynamicAttributes.get("disabled")) %>'
+					field="<%= field %>"
+					fieldParam='<%= (String)dynamicAttributes.get("fieldParam") %>'
+					format='<%= (Format)dynamicAttributes.get("format") %>'
+					formName='<%= (String)dynamicAttributes.get("formName") %>'
+					model="<%= model %>"
+				/>
 			</span>
 		</c:when>
 		<c:when test='<%= type.equals("checkbox") %>'>
@@ -108,7 +112,7 @@ id = portletResponse.getNamespace() + id;
 
 				<input id="<%= id %>" name="<%= name %>" type="hidden" value="<%= value %>" />
 
-				<input <%= booleanValue ? "checked" : "" %> id="<%= id %>Checkbox" name="<%=name %>Checkbox" type="checkbox" onClick="jQuery(this).prev().val(this.checked); <%= _buildDynamicAttributes(dynamicAttributes) %>" />
+				<input <%= booleanValue ? "checked" : StringPool.BLANK %> id="<%= id %>Checkbox" name="<%=name %>Checkbox" onclick="jQuery(this).prev().val(this.checked);" type="checkbox" <%= _buildDynamicAttributes(dynamicAttributes) %> />
 			</span>
 		</c:when>
 		<c:otherwise>
@@ -121,12 +125,13 @@ id = portletResponse.getNamespace() + id;
 					valueString = valueString.toString();
 				}
 				%>
+
 				<input id="<%= id %>" name="<%= param %>" type="<%= type %> " value="<%= valueString %>" <%= _buildDynamicAttributes(dynamicAttributes) %> />
 			</span>
 		</c:otherwise>
 	</c:choose>
 
-	<c:if test="<%= Validator.isNotNull(label) && inlineLabel%>">
+	<c:if test="<%= Validator.isNotNull(label) && inlineLabel %>">
 		</label>
 	</c:if>
 </div>

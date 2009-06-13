@@ -22,15 +22,35 @@
 
 package com.liferay.taglib.aui;
 
+import com.liferay.portal.kernel.util.ServerDetector;
+
+import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.BodyTagSupport;
 
 /**
  * <a href="ModelContextTag.java.html"><b><i>View Source</i></b></a>
  *
  * @author Jorge Ferrer
+ * @author Jorge Ferrer
+ * @author Brian Wing Shun Chan
  *
  */
 public class ModelContextTag extends BodyTagSupport {
+
+	public int doEndTag() throws JspException {
+		try{
+			return super.doEndTag();
+		}
+		catch (Exception e) {
+			throw new JspException(e);
+		}
+		finally {
+			if (!ServerDetector.isResin()) {
+				_bean = null;
+				_model = null;
+			}
+		}
+	}
 
 	public int doStartTag() {
 		if (_model != null) {

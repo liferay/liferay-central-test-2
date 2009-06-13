@@ -23,6 +23,7 @@
 package com.liferay.taglib.aui;
 
 import com.liferay.portal.kernel.servlet.PortalIncludeUtil;
+import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.taglib.util.IncludeTag;
 
@@ -37,6 +38,8 @@ import javax.servlet.jsp.tagext.DynamicAttributes;
  * <a href="ATag.java.html"><b><i>View Source</i></b></a>
  *
  * @author Julio Camarero
+ * @author Jorge Ferrer
+ * @author Brian Wing Shun Chan
  *
  */
 public class ATag extends IncludeTag implements DynamicAttributes {
@@ -49,6 +52,15 @@ public class ATag extends IncludeTag implements DynamicAttributes {
 		}
 		catch (Exception e) {
 			throw new JspException(e);
+		}
+		finally {
+			if (!ServerDetector.isResin()) {
+				_cssClass = null;
+				_dynamicAttributes.clear();
+				_endPage = null;
+				_href = null;
+				_startPage = null;
+			}
 		}
 	}
 
@@ -117,8 +129,8 @@ public class ATag extends IncludeTag implements DynamicAttributes {
 		"/html/taglib/aui/a/start.jsp";
 
 	private String _cssClass;
-	private Map<String,Object> _dynamicAttributes =
-		new HashMap<String,Object>();
+	private Map<String, Object> _dynamicAttributes =
+		new HashMap<String, Object>();
 	private String _endPage;
 	private String _href;
 	private String _startPage;

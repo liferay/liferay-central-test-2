@@ -25,25 +25,9 @@
 <%@ include file="/html/taglib/init.jsp" %>
 
 <%
-String cssClass = GetterUtil.getString((String)request.getAttribute("aui:a:cssClass"), StringPool.BLANK);
-String href = GetterUtil.getString((String)request.getAttribute("aui:a:href"), StringPool.BLANK);
-
-Map<String, String> dynamicAttributes = (Map<String,String>)request.getAttribute("aui:a:dynamicAttributes");
+String cssClass = GetterUtil.getString((String)request.getAttribute("aui:a:cssClass"));
+Map<String, Object> dynamicAttributes = (Map<String, Object>)request.getAttribute("aui:a:dynamicAttributes");
+String href = GetterUtil.getString((String)request.getAttribute("aui:a:href"));
 %>
 
-<a <%= Validator.isNotNull(cssClass) ? "class=\"" + cssClass + "\"" : StringPool.BLANK %> href="<%= HtmlUtil.escape (href) %>"
-
-	<%
-	for (Map.Entry<String, String> entry : dynamicAttributes.entrySet()) {
-		if (!entry.getKey().equals("class")) {
-	%>
-
-			<%= entry.getKey() %>="<%= entry.getValue () %>"
-
-	<%
-		}
-
-	}
-	%>
-
->
+<a <%= Validator.isNotNull(cssClass) ? "class=\"" + cssClass + "\"" : StringPool.BLANK %> href="<%= HtmlUtil.escape(href) %>" <%= _buildDynamicAttributes(dynamicAttributes) %>>
