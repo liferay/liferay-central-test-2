@@ -25,7 +25,8 @@
 <%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
 <%
-String tabs2 = ParamUtil.getString(request, "tabs2", "current");
+String tabs2 = ParamUtil.getString(request, "tabs2", "users");
+String tabs3 = ParamUtil.getString(request, "tabs3", "current");
 
 String cur = ParamUtil.getString(request, "cur");
 
@@ -42,9 +43,28 @@ portletURL.setParameter("tabs1", tabs1);
 portletURL.setParameter("tabs2", tabs2);
 portletURL.setParameter("redirect", redirect);
 portletURL.setParameter("organizationId", String.valueOf(organization.getOrganizationId()));
+
+request.setAttribute("edit_organization_assignments.jsp-tabs2", tabs2);
+request.setAttribute("edit_organization_assignments.jsp-tabs3", tabs3);
+
+request.setAttribute("edit_organization_assignments.jsp-cur", cur);
+
+request.setAttribute("edit_organization_assignments.jsp-redirect", redirect);
+
+request.setAttribute("edit_organization_assignments.jsp-organization", organization);
+
+request.setAttribute("edit_organization_assignments.jsp-portletURL", portletURL);
 %>
 
 <script type="text/javascript">
+	function <portlet:namespace />updateOrganizationUserGroups(assignmentsRedirect) {
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "organization_user_groups";
+		document.<portlet:namespace />fm.<portlet:namespace />assignmentsRedirect.value = assignmentsRedirect;
+		document.<portlet:namespace />fm.<portlet:namespace />addUserGroupIds.value = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
+		document.<portlet:namespace />fm.<portlet:namespace />removeUserGroupIds.value = Liferay.Util.listUncheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
+		submitForm(document.<portlet:namespace />fm);
+	}
+
 	function <portlet:namespace />updateOrganizationUsers(assignmentsRedirect) {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "organization_users";
 		document.<portlet:namespace />fm.<portlet:namespace />assignmentsRedirect.value = assignmentsRedirect;
@@ -65,67 +85,28 @@ portletURL.setParameter("organizationId", String.valueOf(organization.getOrganiz
 
 <br /><br />
 
+<%
+String tabs2Names = "users";
+
+if (PropsValues.ORGANIZATIONS_USER_GROUP_MEMBERSHIP_ENABLED) {
+	tabs2Names += ",user-groups";
+}
+%>
+
 <liferay-ui:tabs
-	names="current,available"
+	names="<%= tabs2Names %>"
 	param="tabs2"
 	url="<%= portletURL.toString() %>"
 	backURL="<%= redirect %>"
 />
 
-<input name="<portlet:namespace />addUserIds" type="hidden" value="" />
-<input name="<portlet:namespace />removeUserIds" type="hidden" value="" />
-
-<liferay-ui:search-container
-	rowChecker="<%= new UserOrganizationChecker(renderResponse, organization) %>"
-	searchContainer="<%= new UserSearch(renderRequest, portletURL) %>"
->
-	<liferay-ui:search-form
-		page="/html/portlet/enterprise_admin/user_search.jsp"
-	/>
-
-	<%
-	UserSearchTerms searchTerms = (UserSearchTerms)searchContainer.getSearchTerms();
-
-	LinkedHashMap userParams = new LinkedHashMap();
-
-	if (tabs2.equals("current")) {
-		userParams.put("usersOrgs", new Long(organization.getOrganizationId()));
-	}
-	else if (PropsValues.ORGANIZATIONS_ASSIGNMENT_STRICT && !permissionChecker.isCompanyAdmin()) {
-		Long[][] leftAndRightOrganizationIds = EnterpriseAdminUtil.getLeftAndRightOrganizationIds(user.getOrganizations());
-
-		userParams.put("usersOrgsTree", leftAndRightOrganizationIds);
-	}
-	%>
-
-	<liferay-ui:search-container-results>
-		<%@ include file="/html/portlet/enterprise_admin/user_search_results.jspf" %>
-	</liferay-ui:search-container-results>
-
-	<liferay-ui:search-container-row
-		className="com.liferay.portal.model.User"
-		escapedModel="<%= true %>"
-		keyProperty="userId"
-		modelVar="user2"
-	>
-		<liferay-ui:search-container-column-text
-			name="name"
-			property="fullName"
-		/>
-
-		<liferay-ui:search-container-column-text
-			name="screen-name"
-			property="screenName"
-		/>
-	</liferay-ui:search-container-row>
-
-	<div class="separator"><!-- --></div>
-
-	<input type="button" value="<liferay-ui:message key="update-associations" />" onClick="<portlet:namespace />updateOrganizationUsers('<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>');" />
-
-	<br /><br />
-
-	<liferay-ui:search-iterator />
-</liferay-ui:search-container>
+<c:choose>
+	<c:when test='<%= tabs2.equals("users") %>'>
+		<liferay-util:include page="/html/portlet/enterprise_admin/edit_organization_assignments_users.jsp" />
+	</c:when>
+	<c:when test='<%= tabs2.equals("user-groups") %>'>
+		<liferay-util:include page="/html/portlet/enterprise_admin/edit_organization_assignments_user_groups.jsp" />
+	</c:when>
+</c:choose>
 
 </form>

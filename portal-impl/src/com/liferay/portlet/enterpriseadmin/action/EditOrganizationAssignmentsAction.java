@@ -28,7 +28,10 @@ import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.Organization;
 import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.service.OrganizationLocalServiceUtil;
+import com.liferay.portal.service.UserGroupServiceUtil;
 import com.liferay.portal.service.UserServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 
@@ -59,7 +62,10 @@ public class EditOrganizationAssignmentsAction extends PortletAction {
 		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		try {
-			if (cmd.equals("organization_users")) {
+			if (cmd.equals("organization_user_groups")) {
+				updateOrganizationUserGroups(actionRequest);
+			}
+			else if (cmd.equals("organization_users")) {
 				updateOrganizationUsers(actionRequest);
 			}
 
@@ -108,6 +114,26 @@ public class EditOrganizationAssignmentsAction extends PortletAction {
 		return mapping.findForward(getForward(
 			renderRequest,
 			"portlet.enterprise_admin.edit_organization_assignments"));
+	}
+
+	protected void updateOrganizationUserGroups(ActionRequest actionRequest)
+		throws Exception {
+
+		long organizationId = ParamUtil.getLong(
+			actionRequest, "organizationId");
+
+		Organization organization =
+			OrganizationLocalServiceUtil.getOrganization(organizationId);
+
+		long groupId = organization.getGroup().getGroupId();
+
+		long[] addUserGroupIds = StringUtil.split(
+			ParamUtil.getString(actionRequest, "addUserGroupIds"), 0L);
+		long[] removeUserGroupIds = StringUtil.split(
+			ParamUtil.getString(actionRequest, "removeUserGroupIds"), 0L);
+
+		UserGroupServiceUtil.addGroupUserGroups(groupId, addUserGroupIds);
+		UserGroupServiceUtil.unsetGroupUserGroups(groupId, removeUserGroupIds);
 	}
 
 	protected void updateOrganizationUsers(ActionRequest actionRequest)

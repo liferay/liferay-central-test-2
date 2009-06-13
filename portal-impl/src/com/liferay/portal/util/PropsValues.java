@@ -1075,6 +1075,11 @@ public class PropsValues {
 	public static String[] ORGANIZATIONS_TYPES =
 		PropsUtil.getArray(PropsKeys.ORGANIZATIONS_TYPES);
 
+	public static final boolean ORGANIZATIONS_USER_GROUP_MEMBERSHIP_ENABLED =
+		GetterUtil.getBoolean(
+			PropsUtil.get(
+				PropsKeys.ORGANIZATIONS_USER_GROUP_MEMBERSHIP_ENABLED));
+
 	public static final String PASSWORDS_DEFAULT_POLICY_NAME =
 		PropsUtil.get(PropsKeys.PASSWORDS_DEFAULT_POLICY_NAME);
 

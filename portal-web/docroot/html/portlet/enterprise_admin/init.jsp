@@ -107,6 +107,7 @@
 <%@ page import="com.liferay.portlet.enterpriseadmin.search.RoleUserChecker" %>
 <%@ page import="com.liferay.portlet.enterpriseadmin.search.UserDisplayTerms" %>
 <%@ page import="com.liferay.portlet.enterpriseadmin.search.UserGroupDisplayTerms" %>
+<%@ page import="com.liferay.portlet.enterpriseadmin.search.UserGroupGroupChecker" %>
 <%@ page import="com.liferay.portlet.enterpriseadmin.search.UserGroupRoleChecker" %>
 <%@ page import="com.liferay.portlet.enterpriseadmin.search.UserGroupSearch" %>
 <%@ page import="com.liferay.portlet.enterpriseadmin.search.UserGroupSearchTerms" %>

@@ -982,6 +982,8 @@ public interface PropsKeys {
 
 	public static final String ORGANIZATIONS_TYPES = "organizations.types";
 
+	public static final String ORGANIZATIONS_USER_GROUP_MEMBERSHIP_ENABLED = "organizations.user.group.membership.enabled";
+
 	public static final String PASSWORDS_DEFAULT_POLICY_NAME = "passwords.default.policy.name";
 
 	public static final String PASSWORDS_DIGEST_ENCODING = "passwords.digest.encoding";
