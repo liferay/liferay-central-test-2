@@ -675,7 +675,7 @@ public class HttpImpl implements Http {
 	}
 
 	public String URLtoString(Http.Options options) throws IOException {
-		return URLtoString(options);
+		return new String(URLtoByteArray(options));
 	}
 
 	public String URLtoString(String location) throws IOException {
