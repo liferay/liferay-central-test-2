@@ -196,7 +196,7 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 <liferay-ui:error exception="<%= EntryTitleException.class %>" message="please-enter-a-valid-title" />
 <liferay-ui:asset-tags-error />
 
-<aui:model-context model="<%= BlogsEntry.class %>" bean="<%= entry %>" />
+<aui:model-context bean="<%= entry %>" model="<%= BlogsEntry.class %>" />
 
 <div class="breadcrumbs">
 	<span class="first"><a href="<portlet:renderURL />"><liferay-ui:message key="entries" /></a></span> &raquo;
@@ -210,6 +210,7 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 	</c:if>
 
 	<aui:input name="title"  />
+
 	<aui:input name="displayDate" value="<%= displayDate %>" />
 
 	<aui:field-wrapper label="content">
@@ -250,6 +251,7 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 
 	<aui:button-row>
 		<aui:button name="saveButton" type="submit" value='<%= ((entry == null) || entry.isDraft()) ? "publish" : "save" %>' />
+
 		<aui:button name="cancelButton" type="button" value="cancel" />
 	</aui:button-row>
 </aui:fieldset>
