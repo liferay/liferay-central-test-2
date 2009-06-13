@@ -57,23 +57,23 @@ public class DestinationStatisticsManager
 			refresh();
 		}
 
-		return _statistics.getActiveThreadCount();
+		return _destinationStatistics.getActiveThreadCount();
 	}
 
 	public int getCurrentThreadCount() {
-		if (_autoRefresh || (_statistics == null)) {
+		if (_autoRefresh || (_destinationStatistics == null)) {
 			refresh();
 		}
 
-		return _statistics.getCurrentThreadCount();
+		return _destinationStatistics.getCurrentThreadCount();
 	}
 
 	public int getLargestThreadCount() {
-		if (_autoRefresh || (_statistics == null)) {
+		if (_autoRefresh || (_destinationStatistics == null)) {
 			refresh();
 		}
 
-		return _statistics.getLargestThreadCount();
+		return _destinationStatistics.getLargestThreadCount();
 	}
 
 	public String getLastRefresh() {
@@ -81,35 +81,35 @@ public class DestinationStatisticsManager
 	}
 
 	public int getMaxThreadPoolSize() {
-		if (_autoRefresh || (_statistics == null)) {
+		if (_autoRefresh || (_destinationStatistics == null)) {
 			refresh();
 		}
 
-		return _statistics.getMaxThreadPoolSize();
+		return _destinationStatistics.getMaxThreadPoolSize();
 	}
 
 	public int getMinThreadPoolSize() {
-		if (_autoRefresh || (_statistics == null)) {
+		if (_autoRefresh || (_destinationStatistics == null)) {
 			refresh();
 		}
 
-		return _statistics.getMinThreadPoolSize();
+		return _destinationStatistics.getMinThreadPoolSize();
 	}
 
 	public long getPendingMessageCount() {
-		if (_autoRefresh || (_statistics == null)) {
+		if (_autoRefresh || (_destinationStatistics == null)) {
 			refresh();
 		}
 
-		return _statistics.getPendingMessageCount();
+		return _destinationStatistics.getPendingMessageCount();
 	}
 
 	public long getSentMessageCount() {
-		if (_autoRefresh || (_statistics == null)) {
+		if (_autoRefresh || (_destinationStatistics == null)) {
 			refresh();
 		}
 
-		return _statistics.getSentMessageCount();
+		return _destinationStatistics.getSentMessageCount();
 	}
 
 	public boolean isAutoRefresh() {
@@ -119,7 +119,7 @@ public class DestinationStatisticsManager
 	public void refresh() {
 		if (System.currentTimeMillis() > _lastRefresh) {
 			_lastRefresh = System.currentTimeMillis();
-			_statistics = _destination.getStatistics();
+			_destinationStatistics = _destination.getDestinationStatistics();
 		}
 	}
 
@@ -133,6 +133,6 @@ public class DestinationStatisticsManager
 	private boolean _autoRefresh;
 	private Destination _destination;
 	private long _lastRefresh;
-	private DestinationStatistics _statistics;
+	private DestinationStatistics _destinationStatistics;
 
 }

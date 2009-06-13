@@ -50,7 +50,7 @@ public class DestinationManager implements DestinationManagerMBean {
 	}
 
 	public int getListenerCount() {
-		return _destination.getListenerCount();
+		return _destination.getMessageListenerCount();
 	}
 
 	private static final String _OBJECT_NAME_PREFIX =

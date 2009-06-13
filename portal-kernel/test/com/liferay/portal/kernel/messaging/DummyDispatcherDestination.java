@@ -25,20 +25,18 @@ package com.liferay.portal.kernel.messaging;
 import java.util.Set;
 
 /**
- * <a href="DummyArrayDispatcherDestination.java.html"><b><i>View Source</i></b>
- * </a>
+ * <a href="DummyDispatcherDestination.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class DummyArrayDispatcherDestination
-	extends BaseDestination {
+public class DummyDispatcherDestination extends BaseDestination {
 
-	public DummyArrayDispatcherDestination(String name) {
+	public DummyDispatcherDestination(String name) {
 		super(name);
 	}
 
-	public DummyArrayDispatcherDestination(
+	public DummyDispatcherDestination(
 		String name, int workersCoreSize, int workersMaxSize) {
 
 		super(name, workersCoreSize, workersMaxSize);

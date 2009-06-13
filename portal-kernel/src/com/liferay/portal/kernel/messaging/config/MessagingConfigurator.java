@@ -42,12 +42,12 @@ public interface MessagingConfigurator {
 	public void init();
 
 	public void setDestinationEventListeners(
-		List<DestinationEventListener> listeners);
+		List<DestinationEventListener> destinationEventListener);
 
 	public void setDestinations(List<Destination> destinations);
 
 	public void setMessageListeners(
-		Map<String, List<MessageListener>> listeners);
+		Map<String, List<MessageListener>> messageListeners);
 
 	public void setReplacementDestinations(List<Destination> destinations);
 

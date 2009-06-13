@@ -32,14 +32,13 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 /**
- * <a href="ArrayDispatcherDestinationTest.java.html"><b><i>View Source</i></b>
- * </a>
+ * <a href="DispatcherDestinationTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Shuyang Zhou
  * @author Brian Wing Shun Chan
  *
  */
-public class ArrayDispatcherDestinationTest extends TestCase {
+public class DispatcherDestinationTest extends TestCase {
 
 	public static int LISTENER_COUNT = 10000;
 
@@ -53,8 +52,8 @@ public class ArrayDispatcherDestinationTest extends TestCase {
 		_executorService = Executors.newFixedThreadPool(
 			REGISTER_TASK_COUNT + UNREGISTER_TASK_COUNT);
 
-		_destination = new DummyArrayDispatcherDestination(
-			ArrayDispatcherDestinationTest.class.getName());
+		_destination = new DummyDispatcherDestination(
+			DispatcherDestinationTest.class.getName());
 
 		_listeners = new MessageListener[LISTENER_COUNT];
 

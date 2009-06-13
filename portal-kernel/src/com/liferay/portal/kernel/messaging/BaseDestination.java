@@ -63,45 +63,49 @@ public abstract class BaseDestination implements Destination {
 		doClose(force);
 	}
 
-	public void copyListenersTo(Destination targetDestination) {
-		for (MessageListener listener : _listeners) {
-			InvokerMessageListener invokerListener =
-				(InvokerMessageListener)listener;
+	public void copyMessageListeners(Destination destination) {
+		for (MessageListener messageListener : _messageListeners) {
+			InvokerMessageListener invokerMessageListener =
+				(InvokerMessageListener)messageListener;
 
-			targetDestination.register(
-				invokerListener.getMessageListener(),
-				invokerListener.getClassLoader());
+			destination.register(
+				invokerMessageListener.getMessageListener(),
+				invokerMessageListener.getClassLoader());
 		}
 	}
 
-	public int getListenerCount() {
-		return _listeners.size();
+	public DestinationStatistics getDestinationStatistics() {
+		DestinationStatistics destinationStatistics =
+			new DestinationStatistics();
+
+		destinationStatistics.setActiveThreadCount(
+			_threadPoolExecutor.getActiveCount());
+		destinationStatistics.setCurrentThreadCount(
+			_threadPoolExecutor.getPoolSize());
+		destinationStatistics.setLargestThreadCount(
+			_threadPoolExecutor.getLargestPoolSize());
+		destinationStatistics.setMaxThreadPoolSize(
+			_threadPoolExecutor.getMaximumPoolSize());
+		destinationStatistics.setMinThreadPoolSize(
+			_threadPoolExecutor.getCorePoolSize());
+		destinationStatistics.setPendingMessageCount(
+			_threadPoolExecutor.getQueue().size());
+		destinationStatistics.setSentMessageCount(
+			_threadPoolExecutor.getCompletedTaskCount());
+
+		return destinationStatistics;
+	}
+
+	public int getMessageListenerCount() {
+		return _messageListeners.size();
 	}
 
 	public String getName() {
 		return _name;
 	}
 
-	public DestinationStatistics getStatistics() {
-		DestinationStatistics statistics = new DestinationStatistics();
-
-		statistics.setActiveThreadCount(_threadPoolExecutor.getActiveCount());
-		statistics.setCurrentThreadCount(_threadPoolExecutor.getPoolSize());
-		statistics.setLargestThreadCount(
-			_threadPoolExecutor.getLargestPoolSize());
-		statistics.setMaxThreadPoolSize(
-			_threadPoolExecutor.getMaximumPoolSize());
-		statistics.setMinThreadPoolSize(_threadPoolExecutor.getCorePoolSize());
-		statistics.setPendingMessageCount(
-			_threadPoolExecutor.getQueue().size());
-		statistics.setSentMessageCount(
-			_threadPoolExecutor.getCompletedTaskCount());
-
-		return statistics;
-	}
-
 	public boolean isRegistered() {
-		if (getListenerCount() > 0) {
+		if (getMessageListenerCount() > 0) {
 			return true;
 		}
 		else {
@@ -113,25 +117,26 @@ public abstract class BaseDestination implements Destination {
 		doOpen();
 	}
 
+	public void register(MessageListener messageListener) {
+		InvokerMessageListener invokerMessageListener =
+			new InvokerMessageListener(messageListener);
 
-	public void register(MessageListener listener) {
-		InvokerMessageListener invokerListener = new InvokerMessageListener(
-			listener);
-
-		_listeners.add(invokerListener);
+		_messageListeners.add(invokerMessageListener);
 	}
 
-	public void register(MessageListener listener, ClassLoader classloader) {
-		InvokerMessageListener invokerListener = new InvokerMessageListener(
-			listener, classloader);
+	public void register(
+		MessageListener messageListener, ClassLoader classloader) {
 
-		_listeners.add(invokerListener);
+		InvokerMessageListener invokerMessageListener =
+			new InvokerMessageListener(messageListener, classloader);
+
+		_messageListeners.add(invokerMessageListener);
 	}
 
 	public void send(Message message) {
-		if (_listeners.isEmpty()) {
+		if (_messageListeners.isEmpty()) {
 			if (_log.isDebugEnabled()) {
-				_log.debug("No listeners for destination " + getName());
+				_log.debug("No message listeners for destination " + getName());
 			}
 
 			return;
@@ -142,24 +147,30 @@ public abstract class BaseDestination implements Destination {
 		if (threadPoolExecutor.isShutdown()) {
 			throw new IllegalStateException(
 				"Destination " + getName() + " is shutdown and cannot " +
-				"receive more messages");
+					"receive more messages");
 		}
 
-		dispatch(_listeners, message);
+		dispatch(_messageListeners, message);
 	}
 
-	public boolean unregister(MessageListener listener) {
-		listener = new InvokerMessageListener(listener);
+	public boolean unregister(MessageListener messageListener) {
+		InvokerMessageListener invokerMessageListener =
+			new InvokerMessageListener(messageListener);
 
-		return _listeners.remove(listener);
+		return _messageListeners.remove(invokerMessageListener);
 	}
 
 	public boolean unregister(
-		MessageListener listener, ClassLoader classloader) {
-		listener = new InvokerMessageListener(listener, classloader);
+		MessageListener messageListener, ClassLoader classloader) {
 
-		return _listeners.remove(listener);
+		InvokerMessageListener invokerMessageListener =
+			new InvokerMessageListener(messageListener, classloader);
+
+		return _messageListeners.remove(invokerMessageListener);
 	}
+
+	protected abstract void dispatch(
+		Set<MessageListener> messageListeners, Message message);
 
 	protected void doClose(boolean force) {
 		if (!_threadPoolExecutor.isShutdown() &&
@@ -202,16 +213,13 @@ public abstract class BaseDestination implements Destination {
 		return _workersMaxSize;
 	}
 
-	protected abstract void dispatch(
-		Set<MessageListener> listeners, Message message);
-
 	private static final int _WORKERS_CORE_SIZE = 2;
 
 	private static final int _WORKERS_MAX_SIZE = 5;
 
 	private static Log _log = LogFactoryUtil.getLog(BaseDestination.class);
 
-	private Set<MessageListener> _listeners =
+	private Set<MessageListener> _messageListeners =
 		new ConcurrentHashSet<MessageListener>();
 	private String _name;
 	private ThreadPoolExecutor _threadPoolExecutor;

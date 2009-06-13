@@ -34,24 +34,25 @@ public interface Destination {
 
 	public void close(boolean force);
 
-	public void copyListenersTo(Destination targetDestination);
+	public void copyMessageListeners(Destination destination);
 
-	public int getListenerCount();
+	public DestinationStatistics getDestinationStatistics();
+
+	public int getMessageListenerCount();
 
 	public String getName();
-
-	public DestinationStatistics getStatistics();
 
 	public boolean isRegistered();
 
 	public void open();
 
-	public void register(MessageListener listener);
+	public void register(MessageListener messageListener);
 
-	public void register(MessageListener listener, ClassLoader classloader);
+	public void register(
+		MessageListener messageListener, ClassLoader classloader);
 
 	public void send(Message message);
 
-	public boolean unregister(MessageListener listener);
+	public boolean unregister(MessageListener messageListener);
 
 }

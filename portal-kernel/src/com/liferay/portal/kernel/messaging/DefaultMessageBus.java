@@ -41,11 +41,14 @@ public class DefaultMessageBus implements MessageBus {
 
 	public synchronized void addDestination(Destination destination) {
 		_destinations.put(destination.getName(), destination);
+
 		fireDestinationAddedEvent(destination);
 	}
 
-	public void addDestinationEventListener(DestinationEventListener listener) {
-		_destinationEventListeners.add(listener);
+	public void addDestinationEventListener(
+		DestinationEventListener destinationEventListener) {
+
+		_destinationEventListeners.add(destinationEventListener);
 	}
 
 	public void destroy() {
@@ -68,10 +71,10 @@ public class DefaultMessageBus implements MessageBus {
 		return _destinations.containsKey(destinationName);
 	}
 
-	public boolean hasMessageListener(String destination) {
-		Destination destinationModel = _destinations.get(destination);
+	public boolean hasMessageListener(String destinationName) {
+		Destination destination = _destinations.get(destinationName);
 
-		if ((destinationModel != null) && destinationModel.isRegistered()) {
+		if ((destination != null) && destination.isRegistered()) {
 			return true;
 		}
 		else {
@@ -80,16 +83,16 @@ public class DefaultMessageBus implements MessageBus {
 	}
 
 	public synchronized void registerMessageListener(
-		String destination, MessageListener listener) {
+		String destinationName, MessageListener messageListener) {
 
-		Destination destinationModel = _destinations.get(destination);
+		Destination destination = _destinations.get(destinationName);
 
-		if (destinationModel == null) {
+		if (destination == null) {
 			throw new IllegalStateException(
-				"Destination " + destination + " is not configured");
+				"Destination " + destinationName + " is not configured");
 		}
 
-		destinationModel.register(listener);
+		destination.register(messageListener);
 	}
 
 	public synchronized Destination removeDestination(String destinationName) {
@@ -101,34 +104,34 @@ public class DefaultMessageBus implements MessageBus {
 	}
 
 	public void removeDestinationEventListener(
-		DestinationEventListener listener) {
+		DestinationEventListener destinationEventListener) {
 
-		_destinationEventListeners.remove(listener);
+		_destinationEventListeners.remove(destinationEventListener);
 	}
 
 	public void replace(Destination destination) {
-		Destination destinationModel = removeDestination(
-			destination.getName());
+		Destination oldDestination = removeDestination(destination.getName());
 
-		destinationModel.copyListenersTo(destination);
+		oldDestination.copyMessageListeners(destination);
 
 		addDestination(destination);
 	}
 
-	public void sendMessage(String destination, Message message) {
-		Destination destinationModel = _destinations.get(destination);
+	public void sendMessage(String destinationName, Message message) {
+		Destination destination = _destinations.get(destinationName);
 
-		if (destinationModel == null) {
+		if (destination == null) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("Destination " + destination + " is not configured");
+				_log.warn(
+					"Destination " + destinationName + " is not configured");
 			}
 
 			return;
 		}
 
-		message.setDestination(destination);
+		message.setDestination(destinationName);
 
-		destinationModel.send(message);
+		destination.send(message);
 	}
 
 	public void shutdown() {
@@ -142,15 +145,15 @@ public class DefaultMessageBus implements MessageBus {
 	}
 
 	public synchronized boolean unregisterMessageListener(
-		String destination, MessageListener listener) {
+		String destinationName, MessageListener messageListener) {
 
-		Destination destinationModel = _destinations.get(destination);
+		Destination destination = _destinations.get(destinationName);
 
-		if (destinationModel == null) {
+		if (destination == null) {
 			return false;
 		}
 
-		return destinationModel.unregister(listener);
+		return destination.unregister(messageListener);
 	}
 
 	protected void fireDestinationAddedEvent(Destination destination) {
