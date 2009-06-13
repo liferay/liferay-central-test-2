@@ -36,7 +36,7 @@ import java.util.concurrent.ThreadPoolExecutor;
  * @author Michael C. Han
  *
  */
-public class SerialDestination extends ArrayDispatcherDestination {
+public class SerialDestination extends BaseDestination {
 
 	public SerialDestination(String name) {
 		super(name, _WORKERS_CORE_SIZE, _WORKERS_MAX_SIZE);

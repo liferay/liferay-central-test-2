@@ -36,7 +36,7 @@ import java.util.concurrent.ThreadPoolExecutor;
  * @author Michael C. Han
  *
  */
-public class ParallelDestination extends ArrayDispatcherDestination {
+public class ParallelDestination extends BaseDestination {
 
 	public ParallelDestination(String name) {
 		super(name);

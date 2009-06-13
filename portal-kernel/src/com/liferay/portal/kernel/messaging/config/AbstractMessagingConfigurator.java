@@ -75,6 +75,10 @@ public abstract class AbstractMessagingConfigurator
 			messageBus.addDestination(destination);
 		}
 
+		for (Destination replacementDestination : _replacementDestinations) {
+			messageBus.replace(replacementDestination);
+		}
+
 		ClassLoader contextClassLoader =
 			Thread.currentThread().getContextClassLoader();
 
@@ -114,6 +118,10 @@ public abstract class AbstractMessagingConfigurator
 		_messageListeners = messageListeners;
 	}
 
+	public void setReplacementDestinations(List<Destination> destinations) {
+		_replacementDestinations = destinations;
+	}
+
 	protected abstract MessageBus getMessageBus();
 
 	protected abstract ClassLoader getOperatingClassloader();
@@ -121,6 +129,8 @@ public abstract class AbstractMessagingConfigurator
 	private List<DestinationEventListener> _destinationEventListeners =
 		new ArrayList<DestinationEventListener>();
 	private List<Destination> _destinations = new ArrayList<Destination>();
+	private List<Destination> _replacementDestinations = 
+		new ArrayList<Destination>();
 	private Map<String, List<MessageListener>> _messageListeners  =
 		new HashMap<String, List<MessageListener>>();
 

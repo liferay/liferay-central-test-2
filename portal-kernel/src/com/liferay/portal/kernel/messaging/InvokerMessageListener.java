@@ -51,6 +51,10 @@ public class InvokerMessageListener implements MessageListener {
 			messageListenerInvoker.getMessageListener());
 	}
 
+	public ClassLoader getClassLoader() {
+		return _classLoader;
+	}
+
 	public MessageListener getMessageListener() {
 		return _messageListener;
 	}

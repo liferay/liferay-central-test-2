@@ -92,16 +92,27 @@ public class DefaultMessageBus implements MessageBus {
 		destinationModel.register(listener);
 	}
 
-	public synchronized void removeDestination(String destination) {
-		Destination destinationModel = _destinations.remove(destination);
+	public synchronized Destination removeDestination(String destinationName) {
+		Destination destinationModel = _destinations.remove(destinationName);
 
 		fireDestinationRemovedEvent(destinationModel);
+
+		return destinationModel;
 	}
 
 	public void removeDestinationEventListener(
 		DestinationEventListener listener) {
 
 		_destinationEventListeners.remove(listener);
+	}
+
+	public void replace(Destination destination) {
+		Destination destinationModel = removeDestination(
+			destination.getName());
+
+		destinationModel.copyListenersTo(destination);
+
+		addDestination(destination);
 	}
 
 	public void sendMessage(String destination, Message message) {

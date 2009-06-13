@@ -49,10 +49,12 @@ public interface MessageBus {
 	public void registerMessageListener(
 		String destination, MessageListener listener);
 
-	public void removeDestination(String destination);
+	public Destination removeDestination(String destinationName);
 
 	public void removeDestinationEventListener(
 		DestinationEventListener listener);
+
+	public void replace(Destination destination);
 
 	public void sendMessage(String destination, Message message);
 

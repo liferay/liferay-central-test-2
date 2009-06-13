@@ -34,6 +34,8 @@ public interface Destination {
 
 	public void close(boolean force);
 
+	public void copyListenersTo(Destination targetDestination);
+
 	public int getListenerCount();
 
 	public String getName();
@@ -45,6 +47,8 @@ public interface Destination {
 	public void open();
 
 	public void register(MessageListener listener);
+
+	public void register(MessageListener listener, ClassLoader classloader);
 
 	public void send(Message message);
 

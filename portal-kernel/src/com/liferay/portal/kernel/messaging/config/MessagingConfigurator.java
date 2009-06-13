@@ -49,4 +49,6 @@ public interface MessagingConfigurator {
 	public void setMessageListeners(
 		Map<String, List<MessageListener>> listeners);
 
+	public void setReplacementDestinations(List<Destination> destinations);
+
 }

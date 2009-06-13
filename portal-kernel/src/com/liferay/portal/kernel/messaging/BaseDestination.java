@@ -24,9 +24,11 @@ package com.liferay.portal.kernel.messaging;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.ConcurrentHashSet;
 import com.liferay.portal.kernel.util.NamedThreadFactory;
 
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -61,6 +63,25 @@ public abstract class BaseDestination implements Destination {
 		doClose(force);
 	}
 
+	public void copyListenersTo(Destination targetDestination) {
+		for (MessageListener listener : _listeners) {
+			InvokerMessageListener invokerListener =
+				(InvokerMessageListener)listener;
+
+			targetDestination.register(
+				invokerListener.getMessageListener(),
+				invokerListener.getClassLoader());
+		}
+	}
+
+	public int getListenerCount() {
+		return _listeners.size();
+	}
+
+	public String getName() {
+		return _name;
+	}
+
 	public DestinationStatistics getStatistics() {
 		DestinationStatistics statistics = new DestinationStatistics();
 
@@ -79,12 +100,6 @@ public abstract class BaseDestination implements Destination {
 		return statistics;
 	}
 
-	public abstract int getListenerCount();
-
-	public String getName() {
-		return _name;
-	}
-
 	public boolean isRegistered() {
 		if (getListenerCount() > 0) {
 			return true;
@@ -96,6 +111,54 @@ public abstract class BaseDestination implements Destination {
 
 	public synchronized void open() {
 		doOpen();
+	}
+
+
+	public void register(MessageListener listener) {
+		InvokerMessageListener invokerListener = new InvokerMessageListener(
+			listener);
+
+		_listeners.add(invokerListener);
+	}
+
+	public void register(MessageListener listener, ClassLoader classloader) {
+		InvokerMessageListener invokerListener = new InvokerMessageListener(
+			listener, classloader);
+
+		_listeners.add(invokerListener);
+	}
+
+	public void send(Message message) {
+		if (_listeners.isEmpty()) {
+			if (_log.isDebugEnabled()) {
+				_log.debug("No listeners for destination " + getName());
+			}
+
+			return;
+		}
+
+		ThreadPoolExecutor threadPoolExecutor = getThreadPoolExecutor();
+
+		if (threadPoolExecutor.isShutdown()) {
+			throw new IllegalStateException(
+				"Destination " + getName() + " is shutdown and cannot " +
+				"receive more messages");
+		}
+
+		dispatch(_listeners, message);
+	}
+
+	public boolean unregister(MessageListener listener) {
+		listener = new InvokerMessageListener(listener);
+
+		return _listeners.remove(listener);
+	}
+
+	public boolean unregister(
+		MessageListener listener, ClassLoader classloader) {
+		listener = new InvokerMessageListener(listener, classloader);
+
+		return _listeners.remove(listener);
 	}
 
 	protected void doClose(boolean force) {
@@ -139,12 +202,17 @@ public abstract class BaseDestination implements Destination {
 		return _workersMaxSize;
 	}
 
+	protected abstract void dispatch(
+		Set<MessageListener> listeners, Message message);
+
 	private static final int _WORKERS_CORE_SIZE = 2;
 
 	private static final int _WORKERS_MAX_SIZE = 5;
 
 	private static Log _log = LogFactoryUtil.getLog(BaseDestination.class);
 
+	private Set<MessageListener> _listeners =
+		new ConcurrentHashSet<MessageListener>();
 	private String _name;
 	private ThreadPoolExecutor _threadPoolExecutor;
 	private int _workersCoreSize;

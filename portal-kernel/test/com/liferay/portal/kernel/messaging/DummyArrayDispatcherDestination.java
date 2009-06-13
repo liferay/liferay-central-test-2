@@ -32,7 +32,7 @@ import java.util.Set;
  *
  */
 public class DummyArrayDispatcherDestination
-	extends ArrayDispatcherDestination {
+	extends BaseDestination {
 
 	public DummyArrayDispatcherDestination(String name) {
 		super(name);
