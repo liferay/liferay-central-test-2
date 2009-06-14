@@ -235,6 +235,11 @@ public interface Http {
 
 	}
 
+	public enum Method {
+
+		DELETE, GET, POST, PUT
+	}
+
 	public class Options {
 
 		public void addHeader(String name, String value) {
@@ -278,12 +283,48 @@ public interface Http {
 			return _location;
 		}
 
+		public Method getMethod() {
+			return _method;
+		}
+
 		public Map<String, String> getParts() {
 			return _parts;
 		}
 
+		public boolean isDelete() {
+			if (_method == Method.DELETE) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+
+		public boolean isGet() {
+			if (_method == Method.GET) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+
 		public boolean isPost() {
-			return _post;
+			if (_method == Method.POST) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+
+		public boolean isPut() {
+			if (_method == Method.PUT) {
+				return true;
+			}
+			else {
+				return false;
+			}
 		}
 
 		public void setAuth(Http.Auth auth) {
@@ -319,6 +360,15 @@ public interface Http {
 			_cookies = cookies;
 		}
 
+		public void setDelete(boolean delete) {
+			if (delete) {
+				_method = Method.DELETE;
+			}
+			else {
+				_method = Method.GET;
+			}
+		}
+
 		public void setHeaders(Map<String, String> headers) {
 			_headers = headers;
 		}
@@ -332,7 +382,21 @@ public interface Http {
 		}
 
 		public void setPost(boolean post) {
-			_post = post;
+			if (post) {
+				_method = Method.POST;
+			}
+			else {
+				_method = Method.GET;
+			}
+		}
+
+		public void setPut(boolean put) {
+			if (put) {
+				_method = Method.PUT;
+			}
+			else {
+				_method = Method.GET;
+			}
 		}
 
 		private Auth _auth;
@@ -341,7 +405,7 @@ public interface Http {
 		private Map<String, String> _headers;
 		private String _location;
 		private Map<String, String> _parts;
-		private boolean _post;
+		private Method _method = Method.GET;
 
 	}
 

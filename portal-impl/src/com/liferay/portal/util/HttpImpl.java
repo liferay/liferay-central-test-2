@@ -24,7 +24,9 @@ package com.liferay.portal.util;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.util.ByteArrayMaker;
+import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Http;
@@ -69,8 +71,11 @@ import org.apache.commons.httpclient.UsernamePasswordCredentials;
 import org.apache.commons.httpclient.auth.AuthPolicy;
 import org.apache.commons.httpclient.auth.AuthScope;
 import org.apache.commons.httpclient.cookie.CookiePolicy;
+import org.apache.commons.httpclient.methods.DeleteMethod;
+import org.apache.commons.httpclient.methods.EntityEnclosingMethod;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.methods.PostMethod;
+import org.apache.commons.httpclient.methods.PutMethod;
 import org.apache.commons.httpclient.methods.RequestEntity;
 import org.apache.commons.httpclient.methods.StringRequestEntity;
 import org.apache.commons.httpclient.params.HttpConnectionParams;
@@ -650,9 +655,9 @@ public class HttpImpl implements Http {
 
 	public byte[] URLtoByteArray(Http.Options options) throws IOException {
 		return URLtoByteArray(
-			options.getLocation(), options.getHeaders(), options.getCookies(),
-			options.getAuth(), options.getBody(), options.getParts(),
-			options.isPost());
+			options.getLocation(), options.getMethod(), options.getHeaders(),
+			options.getCookies(), options.getAuth(), options.getBody(),
+			options.getParts());
 	}
 
 	public byte[] URLtoByteArray(String location) throws IOException {
@@ -746,14 +751,14 @@ public class HttpImpl implements Http {
 	}
 
 	protected byte[] URLtoByteArray(
-			String location, Map<String, String> headers, Cookie[] cookies,
-			Http.Auth auth, Http.Body body, Map<String, String> parts,
-			boolean post)
+			String location, Http.Method method, Map<String, String> headers,
+			Cookie[] cookies, Http.Auth auth, Http.Body body, Map<String,
+			String> parts)
 		throws IOException {
 
 		byte[] bytes = null;
 
-		HttpMethod method = null;
+		HttpMethod httpMethod = null;
 
 		try {
 			if (location == null) {
@@ -769,19 +774,29 @@ public class HttpImpl implements Http {
 
 			HttpClient client = getClient(hostConfig);
 
-			if (post) {
-				method = new PostMethod(location);
+			if ((method == Http.Method.POST) ||
+				(method == Http.Method.PUT)) {
+
+				if (method == Http.Method.POST) {
+					httpMethod = new PostMethod(location);
+				}
+				else {
+					httpMethod = new PutMethod(location);
+				}
 
 				if (body != null) {
 					RequestEntity requestEntity = new StringRequestEntity(
 						body.getContent(), body.getContentType(),
 						body.getCharset());
 
-					PostMethod postMethod = (PostMethod)method;
+					EntityEnclosingMethod entityEnclosingMethod =
+						(EntityEnclosingMethod)httpMethod;
 
-					postMethod.setRequestEntity(requestEntity);
+					entityEnclosingMethod.setRequestEntity(requestEntity);
 				}
-				else if ((parts != null) && (parts.size() > 0)) {
+				else if ((parts != null) && (parts.size() > 0) &&
+						 (method == Http.Method.POST)) {
+
 					List<NameValuePair> nvpList =
 						new ArrayList<NameValuePair>();
 
@@ -797,29 +812,40 @@ public class HttpImpl implements Http {
 					NameValuePair[] nvpArray = nvpList.toArray(
 						new NameValuePair[nvpList.size()]);
 
-					PostMethod postMethod = (PostMethod)method;
+					PostMethod postMethod = (PostMethod)httpMethod;
 
 					postMethod.setRequestBody(nvpArray);
 				}
 			}
+			else if (method == Http.Method.DELETE) {
+				httpMethod = new DeleteMethod(location);
+			}
 			else {
-				method = new GetMethod(location);
+				httpMethod = new GetMethod(location);
 			}
 
-			method.addRequestHeader(
-				"Content-Type", "application/x-www-form-urlencoded");
+			if ((method == Http.Method.POST) || (method == Http.Method.PUT) &&
+				(body != null)) {
+			}
+			else if (!_hasRequestHeader(httpMethod, HttpHeaders.CONTENT_TYPE)) {
+				httpMethod.addRequestHeader(
+					HttpHeaders.CONTENT_TYPE,
+					ContentTypes.APPLICATION_X_WWW_FORM_URLENCODED);
+			}
 
-			method.addRequestHeader(
-				"User-agent",
-				"Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)");
+			if (!_hasRequestHeader(httpMethod, HttpHeaders.USER_AGENT)) {
+				httpMethod.addRequestHeader(
+					HttpHeaders.USER_AGENT, _DEFAULT_USER_AGENT);
+			}
 
 			if (headers != null) {
 				for (Map.Entry<String, String> header : headers.entrySet()) {
-					method.addRequestHeader(header.getKey(), header.getValue());
+					httpMethod.addRequestHeader(
+						header.getKey(), header.getValue());
 				}
 			}
 
-			//method.setFollowRedirects(true);
+			//httpMethod.setFollowRedirects(true);
 
 			HttpState state = new HttpState();
 
@@ -839,12 +865,12 @@ public class HttpImpl implements Http {
 
 				state.addCookies(commonsCookies);
 
-				method.getParams().setCookiePolicy(
+				httpMethod.getParams().setCookiePolicy(
 					CookiePolicy.BROWSER_COMPATIBILITY);
 			}
 
 			if (auth != null) {
-				method.setDoAuthentication(true);
+				httpMethod.setDoAuthentication(true);
 
 				state.setCredentials(
 					new AuthScope(
@@ -855,17 +881,17 @@ public class HttpImpl implements Http {
 
 			proxifyState(state, hostConfig);
 
-			client.executeMethod(hostConfig, method, state);
+			client.executeMethod(hostConfig, httpMethod, state);
 
-			Header locationHeader = method.getResponseHeader("location");
+			Header locationHeader = httpMethod.getResponseHeader("location");
 
 			if ((locationHeader != null) && !locationHeader.equals(location)) {
 				return URLtoByteArray(
-					locationHeader.getValue(), headers, cookies, auth, body,
-					parts, post);
+					locationHeader.getValue(), Http.Method.GET, headers,
+					cookies, auth, body, parts);
 			}
 
-			InputStream is = method.getResponseBodyAsStream();
+			InputStream is = httpMethod.getResponseBodyAsStream();
 
 			if (is != null) {
 				bytes = FileUtil.getBytes(is);
@@ -877,8 +903,8 @@ public class HttpImpl implements Http {
 		}
 		finally {
 			try {
-				if (method != null) {
-					method.releaseConnection();
+				if (httpMethod != null) {
+					httpMethod.releaseConnection();
 				}
 			}
 			catch (Exception e) {
@@ -886,6 +912,18 @@ public class HttpImpl implements Http {
 			}
 		}
 	}
+
+	private boolean _hasRequestHeader(HttpMethod httpMethod, String name) {
+		if (httpMethod.getRequestHeaders(name).length == 0) {
+			return false;
+		}
+		else {
+			return true;
+		}
+	}
+
+	private static final String _DEFAULT_USER_AGENT =
+		"Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)";
 
 	private static final int _MAX_CONNECTIONS_PER_HOST = GetterUtil.getInteger(
 		PropsUtil.get(HttpImpl.class.getName() + ".max.connections.per.host"),

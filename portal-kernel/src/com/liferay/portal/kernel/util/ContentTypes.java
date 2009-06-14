@@ -30,7 +30,12 @@ package com.liferay.portal.kernel.util;
  */
 public interface ContentTypes {
 
+	public static final String APPLICATION_ATOM_XML = "application/atom+xml";
+
 	public static final String APPLICATION_TEXT = "application/text";
+
+	public static final String APPLICATION_X_WWW_FORM_URLENCODED =
+		"application/x-www-form-urlencoded";
 
 	public static final String HTTPD_UNIX_DIRECTORY = "httpd/unix-directory";
 
