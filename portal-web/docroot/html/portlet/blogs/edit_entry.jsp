@@ -186,7 +186,7 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 	<portlet:param name="struts_action" value="/blogs/edit_entry" />
 </portlet:actionURL>
 
-<liferay-aui:form action="<%= editEntryURL %>" method="post" name="fm" onSubmit='<%= renderResponse.getNamespace() + "saveEntry(false); return false;" %>'>
+<aui:form action="<%= editEntryURL %>" method="post" name="fm" onSubmit='<%= renderResponse.getNamespace() + "saveEntry(false); return false;" %>'>
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(redirect) %>" />
 <input name="<portlet:namespace />referringPortletResource" type="hidden" value="<%= HtmlUtil.escapeAttribute(referringPortletResource) %>" />
@@ -196,7 +196,7 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 <liferay-ui:error exception="<%= EntryTitleException.class %>" message="please-enter-a-valid-title" />
 <liferay-ui:asset-tags-error />
 
-<liferay-aui:model-context bean="<%= entry %>" model="<%= BlogsEntry.class %>" />
+<aui:model-context bean="<%= entry %>" model="<%= BlogsEntry.class %>" />
 
 <div class="breadcrumbs">
 	<span class="first"><a href="<portlet:renderURL />"><liferay-ui:message key="entries" /></a></span> &raquo;
@@ -204,26 +204,26 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 	<span class="last"><liferay-ui:message key='<%= ((entry == null) ? Constants.ADD : Constants.UPDATE) + "-entry" %>' /></span>
 </div>
 
-<liferay-aui:fieldset>
+<aui:fieldset>
 	<c:if test="<%= (entry == null) || entry.isDraft() %>">
 		<div class="save-status" id="<portlet:namespace />saveStatus"></div>
 	</c:if>
 
-	<liferay-aui:input name="title"  />
+	<aui:input name="title"  />
 
-	<liferay-aui:input name="displayDate" value="<%= displayDate %>" />
+	<aui:input name="displayDate" value="<%= displayDate %>" />
 
-	<liferay-aui:field-wrapper label="content">
+	<aui:field-wrapper label="content">
 		<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" />
 
 		<input name="<portlet:namespace />content" type="hidden" value="" />
-	</liferay-aui:field-wrapper>
+	</aui:field-wrapper>
 
 	<c:if test="<%= PropsValues.BLOGS_TRACKBACK_ENABLED %>">
-		<liferay-aui:input defaultValue="<%= allowTrackbacks %>" inlineLabel="<%= true %>" label="allow-incoming-trackbacks" name="allowTrackbacks" />
+		<aui:input defaultValue="<%= allowTrackbacks %>" inlineLabel="<%= true %>" label="allow-incoming-trackbacks" name="allowTrackbacks" />
 
 		<c:if test="<%= (entry != null) && Validator.isNotNull(entry.getTrackbacks()) %>">
-			<liferay-aui:field-wrapper name="trackbacks-already-sent">
+			<aui:field-wrapper name="trackbacks-already-sent">
 
 				<%
 				for (String trackback : StringUtil.split(entry.getTrackbacks())) {
@@ -235,28 +235,28 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 				}
 				%>
 
-			</liferay-aui:field-wrapper>
+			</aui:field-wrapper>
 		</c:if>
 	</c:if>
 
-	<liferay-aui:input name="tags" type="assetTags" />
+	<aui:input name="tags" type="assetTags" />
 
 	<c:if test="<%= entry == null %>">
-		<liferay-aui:field-wrapper name="permissions">
+		<aui:field-wrapper name="permissions">
 			<liferay-ui:input-permissions
 				modelName="<%= BlogsEntry.class.getName() %>"
 			/>
-		</liferay-aui:field-wrapper>
+		</aui:field-wrapper>
 	</c:if>
 
-	<liferay-aui:button-row>
-		<liferay-aui:button name="saveButton" type="submit" value='<%= ((entry == null) || entry.isDraft()) ? "publish" : "save" %>' />
+	<aui:button-row>
+		<aui:button name="saveButton" type="submit" value='<%= ((entry == null) || entry.isDraft()) ? "publish" : "save" %>' />
 
-		<liferay-aui:button name="cancelButton" type="button" value="cancel" />
-	</liferay-aui:button-row>
-</liferay-aui:fieldset>
+		<aui:button name="cancelButton" type="button" value="cancel" />
+	</aui:button-row>
+</aui:fieldset>
 
-</liferay-aui:form>
+</aui:form>
 
 <c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 	<script type="text/javascript">
