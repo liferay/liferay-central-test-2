@@ -30,13 +30,13 @@ boolean first = GetterUtil.getBoolean((String)request.getAttribute("aui:field-wr
 String helpMessage = GetterUtil.getString((String)request.getAttribute("aui:field-wrapper:helpMessage"));
 boolean inlineLabel = GetterUtil.getBoolean((String)request.getAttribute("aui:field-wrapper:inlineLabel"));
 String label = GetterUtil.getString((String)request.getAttribute("aui:field-wrapper:label"));
-String name = GetterUtil.getString((String)request.getAttribute("aui:field-wrapper:name"));
+String name = namespace + GetterUtil.getString((String)request.getAttribute("aui:field-wrapper:name"));
 boolean last = GetterUtil.getBoolean((String)request.getAttribute("aui:field-wrapper:last"));
 %>
 
 <div class="exp-ctrl-holder <%= cssClass %> <%= first ? "exp-first" : StringPool.BLANK %> <%= last ? "exp-last" : StringPool.BLANK %> ">
 	<c:if test="<%= Validator.isNotNull(label) %>">
-		<label class="exp-form-label <%= inlineLabel ? "inline-label" : StringPool.BLANK  %>" <%= Validator.isNotNull(name) ? "for=\"" + name + "\"" : StringPool.BLANK %>>
+		<label class="exp-form-label <%= inlineLabel ? "inline-label" : StringPool.BLANK  %>" <%= !Validator.equals(name, namespace) ? "for=\"" + name + "\"" : StringPool.BLANK %>>
 			<liferay-ui:message key="<%= label %>" />
 
 			<c:if test="<%= Validator.isNotNull(helpMessage) %>">

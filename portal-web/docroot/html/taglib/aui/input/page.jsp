@@ -38,11 +38,9 @@ boolean inlineLabel = GetterUtil.getBoolean((String)request.getAttribute("aui:in
 String label = GetterUtil.getString((String)request.getAttribute("aui:input:label"));
 boolean last = GetterUtil.getBoolean((String)request.getAttribute("aui:input:last"));
 Class<?> model = (Class<?>)request.getAttribute("aui:input:model");
-String name = GetterUtil.getString((String)request.getAttribute("aui:input:name"));
+String name = namespace + GetterUtil.getString((String)request.getAttribute("aui:input:name"));
 String type = GetterUtil.getString((String)request.getAttribute("aui:input:type"));
 Object value = request.getAttribute("aui:input:value");
-
-String param = namespace + name;
 %>
 
 <div class="exp-ctrl-holder <%= cssClass %> <%= first ? "exp-first" : StringPool.BLANK %> <%= last ? "exp-last" : StringPool.BLANK %>">
@@ -102,11 +100,7 @@ String param = namespace + name;
 			<span class="exp-form-field exp-form-checkbox">
 
 				<%
-				boolean booleanValue = GetterUtil.getBoolean(value.toString());
-
-				if (Validator.isNotNull(param)) {
-					booleanValue = ParamUtil.getBoolean(request, param, booleanValue);
-				}
+				boolean booleanValue = ParamUtil.getBoolean(request, name, GetterUtil.getBoolean(value.toString()));
 				%>
 
 				<input id="<%= id %>" name="<%= name %>" type="hidden" value="<%= value %>" />
@@ -125,7 +119,7 @@ String param = namespace + name;
 				}
 				%>
 
-				<input id="<%= id %>" name="<%= param %>" type="<%= type %> " value="<%= valueString %>" <%= _buildDynamicAttributes(dynamicAttributes) %> />
+				<input id="<%= id %>" name="<%= name %>" type="<%= type %> " value="<%= valueString %>" <%= _buildDynamicAttributes(dynamicAttributes) %> />
 			</span>
 		</c:otherwise>
 	</c:choose>

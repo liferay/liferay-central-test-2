@@ -32,7 +32,7 @@ String helpMessage = GetterUtil.getString((String)request.getAttribute("aui:sele
 boolean inlineLabel = GetterUtil.getBoolean((String)request.getAttribute("aui:select:inlineLabel"));
 String label = GetterUtil.getString((String)request.getAttribute("aui:select:label"));
 boolean last = GetterUtil.getBoolean((String)request.getAttribute("aui:select:last"));
-String name = GetterUtil.getString((String)request.getAttribute("aui:select:name"));
+String name = namespace + GetterUtil.getString((String)request.getAttribute("aui:select:name"));
 %>
 
 <div class="exp-ctrl-holder <%= cssClass %> <%= first ? "exp-first" : StringPool.BLANK %> <%= last ? "exp-last" : StringPool.BLANK %>">
