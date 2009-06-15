@@ -60,8 +60,16 @@ public class ExceptionTranslator {
 			return new ObjectNotFoundException(e.getMessage());
 		}
 		else {
+			String message = null;
 
-			return new ORMException(e.getMessage());
+			if (e.getCause() != null) {
+				message = e.getMessage() + " - " + e.getCause().getMessage();
+			}
+			else {
+				message = e.getMessage();
+			}
+			
+			return new ORMException(message);
 		}
 	}
 
