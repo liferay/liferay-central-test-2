@@ -83,7 +83,7 @@ Object value = request.getAttribute("aui:input:value");
 			/>
 		</c:when>
 		<c:when test="<%= (model != null) && (field != null) %>">
-			<span class="exp-form-field exp-form-<%= ModelHintsUtil.getType(model.toString(), field) %>">
+			<span class="exp-form-field exp-form-<%= ModelHintsUtil.getType(model.getName(), field).toLowerCase()%>">
 				<liferay-ui:input-field
 					bean="<%= bean %>"
 					defaultValue='<%= value %>'
