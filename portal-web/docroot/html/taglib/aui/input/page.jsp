@@ -30,7 +30,7 @@
 BaseModel bean = (BaseModel)request.getAttribute("aui:input:bean");
 String cssClass = GetterUtil.getString((String)request.getAttribute("aui:input:cssClass"));
 Map<String, Object> dynamicAttributes = (Map<String, Object>)request.getAttribute("aui:input:dynamicAttributes");
-String field = GetterUtil.getString((String)request.getAttribute("field"));
+String field = GetterUtil.getString((String)request.getAttribute("aui:input:field"));
 boolean first = GetterUtil.getBoolean((String)request.getAttribute("aui:input:first"));
 String helpMessage = GetterUtil.getString((String)request.getAttribute("aui:input:helpMessage"));
 String id = namespace + GetterUtil.getString((String)request.getAttribute("aui:input:id"));
@@ -100,7 +100,6 @@ String param = namespace + name;
 		</c:when>
 		<c:when test='<%= type.equals("checkbox") %>'>
 			<span class="exp-form-field exp-form-checkbox">
-				<label><liferay-ui:message key="permissions" /></label>
 
 				<%
 				boolean booleanValue = GetterUtil.getBoolean(value.toString());
