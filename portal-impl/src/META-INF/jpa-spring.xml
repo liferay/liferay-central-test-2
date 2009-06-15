@@ -21,7 +21,10 @@
 			<bean class="org.springframework.instrument.classloading.ReflectiveLoadTimeWeaver" />
 		</property>
 	</bean>
-	<bean id="liferaySessionFactory" class="com.liferay.portal.dao.orm.jpa.SessionFactoryImpl" />
+	<bean id="liferaySession" class="com.liferay.portal.dao.orm.jpa.SessionImpl" />
+	<bean id="liferaySessionFactory" class="com.liferay.portal.dao.orm.jpa.SessionFactoryImpl">
+		<property name="session" ref="liferaySession" />
+	</bean>
 	<bean id="liferayTransactionManager" class="org.springframework.orm.jpa.JpaTransactionManager" p:entityManagerFactory-ref="entityManagerFactory" />
 	<bean id="com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil" class="com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil">
 		<property name="dynamicQueryFactory">
