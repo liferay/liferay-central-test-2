@@ -63,9 +63,9 @@ PortletURL portletURL = (PortletURL)request.getAttribute("view.jsp-portletURL");
 		>
 			<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="rowURL">
 				<portlet:param name="struts_action" value="/directory/view_organization" />
-				<portlet:param name="organizationId" value="<%= String.valueOf(organization.getOrganizationId()) %>" />
 				<portlet:param name="tabs1" value="<%= HtmlUtil.escape(tabs1) %>" />
 				<portlet:param name="redirect" value="<%= searchContainer.getIteratorURL().toString() %>" />
+				<portlet:param name="organizationId" value="<%= String.valueOf(organization.getOrganizationId()) %>" />
 			</portlet:renderURL>
 
 			<%@ include file="/html/portlet/directory/organization/search_columns.jspf" %>
