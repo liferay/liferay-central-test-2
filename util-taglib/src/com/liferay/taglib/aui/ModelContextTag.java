@@ -31,7 +31,6 @@ import javax.servlet.jsp.tagext.BodyTagSupport;
  * <a href="ModelContextTag.java.html"><b><i>View Source</i></b></a>
  *
  * @author Jorge Ferrer
- * @author Jorge Ferrer
  * @author Brian Wing Shun Chan
  *
  */
