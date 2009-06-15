@@ -37,7 +37,7 @@ String name = GetterUtil.getString((String)request.getAttribute("aui:select:name
 
 <div class="exp-ctrl-holder <%= cssClass %> <%= first ? "exp-first" : StringPool.BLANK %> <%= last ? "exp-last" : StringPool.BLANK %>">
 	<c:if test="<%= Validator.isNotNull(label) %>">
-		<label class="exp-form-label <%= inlineLabel ? "inline-label" : StringPool.BLANK  %>" for="<%= name %>">
+		<label class="exp-form-label <%= inlineLabel ? "inline-label" : StringPool.BLANK  %>" for="<%= namespace + name %>">
 			<liferay-ui:message key="<%= label %>" />
 
 			<c:if test="<%= Validator.isNotNull(helpMessage) %>">
@@ -50,4 +50,4 @@ String name = GetterUtil.getString((String)request.getAttribute("aui:select:name
 	</c:if>
 
 	<span class="exp-form-field exp-form-select">
-		<select name="<%= name %>" <%= _buildDynamicAttributes(dynamicAttributes) %>>
+		<select name="<%= namespace + name %>" <%= _buildDynamicAttributes(dynamicAttributes) %>>

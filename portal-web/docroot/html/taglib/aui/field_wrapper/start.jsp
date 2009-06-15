@@ -36,7 +36,7 @@ boolean last = GetterUtil.getBoolean((String)request.getAttribute("aui:field-wra
 
 <div class="exp-ctrl-holder <%= cssClass %> <%= first ? "exp-first" : StringPool.BLANK %> <%= last ? "exp-last" : StringPool.BLANK %> ">
 	<c:if test="<%= Validator.isNotNull(label) %>">
-		<label class="exp-form-label <%= inlineLabel ? "inline-label" : StringPool.BLANK  %>" <%= Validator.isNotNull(name) ? "for=\"" + name + "\"" : StringPool.BLANK %>>
+		<label class="exp-form-label <%= inlineLabel ? "inline-label" : StringPool.BLANK  %>" <%= Validator.isNotNull(name) ? "for=\"" + namespace + name + "\"" : StringPool.BLANK %>>
 			<liferay-ui:message key="<%= label %>" />
 
 			<c:if test="<%= Validator.isNotNull(helpMessage) %>">

@@ -31,4 +31,4 @@ boolean inlineLabels = GetterUtil.getBoolean((String)request.getAttribute("aui:f
 String name = namespace + GetterUtil.getString((String)request.getAttribute("aui:form:name"));
 %>
 
-<form class="exp-form <%= cssClass %> <%= inlineLabels ? "inline-labels" : StringPool.BLANK %>" id="<%= name %>" name="<%= name %>" <%= _buildDynamicAttributes(dynamicAttributes) %>>
+<form class="exp-form <%= cssClass %> <%= inlineLabels ? "inline-labels" : StringPool.BLANK %>" id="<%= namespace + name %>" name="<%= namespace + name %>" <%= _buildDynamicAttributes(dynamicAttributes) %>>
