@@ -47,7 +47,7 @@ String param = namespace + name;
 
 <div class="exp-ctrl-holder <%= cssClass %> <%= first ? "exp-first" : StringPool.BLANK %> <%= last ? "exp-last" : StringPool.BLANK %>">
 	<c:if test="<%= Validator.isNotNull(label) %>">
-		<label class="exp-form-label <%= inlineLabel ? "inline-label" : StringPool.BLANK  %> " for="<%= namespace + name %>">
+		<label class="exp-form-label <%= inlineLabel ? "inline-label" : StringPool.BLANK  %> " for="<%= name %>">
 
 		<liferay-ui:message key="<%= label %>" />
 
@@ -109,9 +109,9 @@ String param = namespace + name;
 				}
 				%>
 
-				<input id="<%= namespace + id %>" name="<%= namespace + name %>" type="hidden" value="<%= value %>" />
+				<input id="<%= id %>" name="<%= name %>" type="hidden" value="<%= value %>" />
 
-				<input <%= booleanValue ? "checked" : StringPool.BLANK %> id="<%= namespace + id %>Checkbox" name="<%= namespace + name %>Checkbox" onclick="jQuery(this).prev().val(this.checked);" type="checkbox" <%= _buildDynamicAttributes(dynamicAttributes) %> />
+				<input <%= booleanValue ? "checked" : StringPool.BLANK %> id="<%= id %>Checkbox" name="<%=name %>Checkbox" onclick="jQuery(this).prev().val(this.checked);" type="checkbox" <%= _buildDynamicAttributes(dynamicAttributes) %> />
 			</span>
 		</c:when>
 		<c:otherwise>
@@ -125,7 +125,7 @@ String param = namespace + name;
 				}
 				%>
 
-				<input id="<%= namespace + id %>" name="<%= param %>" type="<%= type %> " value="<%= valueString %>" <%= _buildDynamicAttributes(dynamicAttributes) %> />
+				<input id="<%= id %>" name="<%= param %>" type="<%= type %> " value="<%= valueString %>" <%= _buildDynamicAttributes(dynamicAttributes) %> />
 			</span>
 		</c:otherwise>
 	</c:choose>
