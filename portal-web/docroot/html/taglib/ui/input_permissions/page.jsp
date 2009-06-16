@@ -123,12 +123,16 @@ String modelName = (String)request.getAttribute("liferay-ui:input-permissions:mo
 
 				<c:if test="<%= group.isCommunity() || group.isOrganization() %>">
 					<td style="text-align: center;">
-						<input <%= communityChecked ? "checked" : "" %> name="<%= namespace %>communityPermissions" type="checkbox" value="<%= action %>">
+						<label class="hidden-label" for="<%= namespace %>communityPermissions"><%= LanguageUtil.format(pageContext, "give-x-permission-to-community-members", ResourceActionsUtil.getAction(pageContext, action)) %></label>
+
+						<input <%= communityChecked ? "checked" : "" %> id="<%= namespace %>communityPermissions" name="<%= namespace %>communityPermissions" type="checkbox" value="<%= action %>">
 					</td>
 				</c:if>
 
 				<td style="text-align: right;">
-					<input <%= guestChecked ? "checked" : "" %> <%= guestDisabled ? "disabled" : "" %> name="<%= namespace %>guestPermissions" type="checkbox" value="<%= action %>">
+					<label class="hidden-label" for="<%= namespace %>guestPermissions"><%= LanguageUtil.format(pageContext, "give-x-permission-to-guest-members", ResourceActionsUtil.getAction(pageContext, action)) %></label>
+
+					<input <%= guestChecked ? "checked" : "" %> <%= guestDisabled ? "disabled" : "" %> id="<%= namespace %>guestPermissions" name="<%= namespace %>guestPermissions" type="checkbox" value="<%= action %>">
 				</td>
 			</tr>
 
@@ -142,7 +146,7 @@ String modelName = (String)request.getAttribute("liferay-ui:input-permissions:mo
 		<input id="<%= randomNamespace %>inputPermissionsShowMore" name="<%= namespace %>inputPermissionsShowMore" type="hidden" value="<%= inputPermissionsShowMore %>" />
 
 		<div id="<%= randomNamespace %>inputPermissionsConfigureLink" style="display: <%= inputPermissionsShowConfigure ? "none" : "" %>;">
-			<input <%= inputPermissionsPublicChecked ? "checked" : "" %> name="<%= namespace %>inputPermissionsPublic" type="checkbox" /> <liferay-ui:message key="public" />
+			<label class="inline-label" for="<%= namespace %>inputPermissionsPublic"><input <%= inputPermissionsPublicChecked ? "checked" : "" %> id="<%= namespace %>inputPermissionsPublic" name="<%= namespace %>inputPermissionsPublic" type="checkbox" /> <liferay-ui:message key="public" /></label>
 
 			<a href="javascript:<%= randomNamespace %>inputPermissionsConfigure();" style="margin-left: 10px;"><liferay-ui:message key="configure" /> &raquo;</a>
 		</div>

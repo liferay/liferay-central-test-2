@@ -1939,6 +1939,11 @@ img.avatar {
 	border: 0px;
 }
 
+label.hidden-label {
+	float: left;
+	font-size: 0;
+}
+
 td.stretch {
 	width: 99%;
 }

@@ -49,6 +49,8 @@ if (timeFormatPattern.indexOf("a") == -1) {
 }
 %>
 
+<label class="hidden-label" for="<%= hourParam %>"><liferay-ui:message key="hour" /></label>
+
 <select <%= disabled ? "disabled" : "" %> name="<%= hourParam %>">
 	<c:if test="<%= hourNullable %>">
 		<option value=""></option>
@@ -71,6 +73,8 @@ if (timeFormatPattern.indexOf("a") == -1) {
 
 </select>
 
+<label class="hidden-label" for="<%= minuteParam %>"><liferay-ui:message key="minute" /></label>
+
 <select <%= disabled ? "disabled" : "" %> name="<%= minuteParam %>">
 	<c:if test="<%= minuteNullable %>">
 		<option value=""></option>
@@ -90,6 +94,8 @@ if (timeFormatPattern.indexOf("a") == -1) {
 	%>
 
 </select>
+
+<label class="hidden-label" for="<%= amPmParam %>"><liferay-ui:message key="am-pm" /></label>
 
 <c:choose>
 	<c:when test="<%= ! timeFormatAmPm %>">

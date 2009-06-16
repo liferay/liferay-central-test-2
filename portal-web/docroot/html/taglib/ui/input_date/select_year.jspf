@@ -22,6 +22,8 @@
  */
 %>
 
+<label class="hidden-label" for="<%= yearParam %>"><liferay-ui:message key="year" /></label>
+
 <select <%= disabled ? "disabled" : "" %> id="<%= yearParam %>" name="<%= yearParam %>">
 	<c:if test="<%= yearNullable %>">
 		<option value=""></option>

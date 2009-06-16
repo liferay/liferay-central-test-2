@@ -111,6 +111,11 @@
 	width: auto;
 }
 
+.exp-form .exp-block-labels label.hidden-label {
+	float: left;
+	font-size: 0;
+}
+
 .exp-block-labels label input {
 	vertical-align: middle;
 }
