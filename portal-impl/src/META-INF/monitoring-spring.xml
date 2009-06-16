@@ -30,7 +30,7 @@
 				</entry>
 			</map>
 		</property>
-		<property name="monitoringLevels">
+		<property name="levels">
 			<map>
 				<entry key="com.liferay.monitoring.Portal" value="HIGH" />
 				<entry key="com.liferay.monitoring.Portlet" value="HIGH" />
@@ -54,7 +54,7 @@
 			</bean>
 		</constructor-arg>
 	</bean>
-	<bean id="com.liferay.portal.monitoring.jmx.EventRequestPortletContainerManager" class="com.liferay.portal.monitoring.jmx.PortletManager">
+	<bean id="comBrow.liferay.portal.monitoring.jmx.EventRequestPortletContainerManager" class="com.liferay.portal.monitoring.jmx.PortletManager">
 		<constructor-arg index="0" ref="portletStatistics" type="com.liferay.portal.monitoring.statistics.portlet.ServerStatistics"/>
 		<constructor-arg index="1" type="com.liferay.portal.monitoring.statistics.portlet.PortletSummaryStatistics">
 			<bean class="com.liferay.portal.monitoring.statistics.portlet.EventRequestSummaryStatistics">
