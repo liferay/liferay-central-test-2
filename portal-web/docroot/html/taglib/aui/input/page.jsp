@@ -42,16 +42,18 @@ String name = namespace + GetterUtil.getString((String)request.getAttribute("aui
 String type = GetterUtil.getString((String)request.getAttribute("aui:input:type"));
 Object value = request.getAttribute("aui:input:value");
 
-boolean displayForLabel = true;
+boolean showForLabel = true;
 
-if (type.equals("assetTags") || (model != null && field != null && Validator.equals(ModelHintsUtil.getType(model.getName(), field), Date.class.getName()))) {
-	displayForLabel = false;
+if ((type.equals("assetTags")) ||
+	((model != null) && (field != null) && Validator.equals(ModelHintsUtil.getType(model.getName(), field), Date.class.getName()))) {
+
+	showForLabel = false;
 }
 %>
 
 <div class="exp-ctrl-holder <%= cssClass %> <%= first ? "exp-first" : StringPool.BLANK %> <%= last ? "exp-last" : StringPool.BLANK %>">
 	<c:if test="<%= Validator.isNotNull(label) %>">
-		<label class="exp-form-label <%= inlineLabel ? "inline-label" : StringPool.BLANK  %>" <%= displayForLabel ? "for=\"" + name + "\"" : StringPool.BLANK %>>
+		<label class="exp-form-label <%= inlineLabel ? "inline-label" : StringPool.BLANK  %>" <%= showForLabel ? "for=\"" + name + "\"" : StringPool.BLANK %>>
 
 		<liferay-ui:message key="<%= label %>" />
 
