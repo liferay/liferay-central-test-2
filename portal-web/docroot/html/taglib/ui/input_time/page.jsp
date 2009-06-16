@@ -107,8 +107,8 @@ if (timeFormatPattern.indexOf("a") == -1) {
 				<option value=""></option>
 			</c:if>
 
-			<option <%= (amPmValue == Calendar.AM) ? "selected" : "" %> value="<%= Calendar.AM %>">AM</option>
-			<option <%= (amPmValue == Calendar.PM) ? "selected" : "" %> value="<%= Calendar.PM %>">PM</option>
+			<option <%= (amPmValue == Calendar.AM) ? "selected" : "" %> value="<%= Calendar.AM %>"><liferay-ui:message key="am" /></option>
+			<option <%= (amPmValue == Calendar.PM) ? "selected" : "" %> value="<%= Calendar.PM %>"><liferay-ui:message key="pm" /></option>
 		</select>
 	</c:otherwise>
 </c:choose>
