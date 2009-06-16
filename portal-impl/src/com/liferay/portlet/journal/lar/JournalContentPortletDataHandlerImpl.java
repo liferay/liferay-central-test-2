@@ -145,7 +145,7 @@ public class JournalContentPortletDataHandlerImpl
 
 			try {
 				article = JournalArticleLocalServiceUtil.getLatestArticle(
-					articleGroupId, articleId);
+					articleGroupId, articleId, true);
 			}
 			catch (NoSuchArticleException nsae) {
 				if (_log.isWarnEnabled()) {
