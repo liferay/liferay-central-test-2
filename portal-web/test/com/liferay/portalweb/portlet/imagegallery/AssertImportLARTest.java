@@ -52,7 +52,7 @@ public class AssertImportLARTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace("link=Image Gallery Test Page"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("This is a test folder!"));
-		assertTrue(selenium.isTextPresent("This is a second test folder."));
+		assertTrue(selenium.isTextPresent("This is a test3 folder3."));
 		selenium.click(RuntimeVariables.replace("//b"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("This is a test subfolder!"));
@@ -60,7 +60,7 @@ public class AssertImportLARTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("//tr[4]/td[1]/a[1]/b"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("This is a second test subfolder."));
+		assertTrue(selenium.isTextPresent("This is a test3 subfolder3."));
 		selenium.click(RuntimeVariables.replace("//b"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("//img[@alt='Image']"));

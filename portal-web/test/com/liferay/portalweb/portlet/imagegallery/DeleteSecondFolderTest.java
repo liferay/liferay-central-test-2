@@ -26,13 +26,13 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="AddDuplicateImageNameTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="DeleteSecondFolderTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class AddDuplicateImageNameTest extends BaseTestCase {
-	public void testAddDuplicateImageName() throws Exception {
+public class DeleteSecondFolderTest extends BaseTestCase {
+	public void testDeleteSecondFolder() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -51,13 +51,7 @@ public class AddDuplicateImageNameTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Image Gallery Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//tr[4]/td[1]/a[1]/b"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//b"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//input[@value='Add Image']"));
-		selenium.waitForPageToLoad("30000");
-		Thread.sleep(5000);
+		selenium.click("//tr[4]/td[4]/ul/li/strong/span");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -65,7 +59,7 @@ public class AddDuplicateImageNameTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Use the classic uploader.")) {
+				if (selenium.isElementPresent("//div[5]/ul/li[3]/a")) {
 					break;
 				}
 			}
@@ -75,32 +69,15 @@ public class AddDuplicateImageNameTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Use the classic uploader.");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_31_file")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.type("_31_file",
-			RuntimeVariables.replace(
-				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\imagegallery\\test_image.jpg"));
-		selenium.typeKeys("_31_name", RuntimeVariables.replace("Test Image"));
-		selenium.type("_31_name", RuntimeVariables.replace("Test Image"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.click(RuntimeVariables.replace("//div[5]/ul/li[3]/a"));
 		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.getConfirmation()
+						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 		assertTrue(selenium.isTextPresent(
-				"You have entered invalid data. Please try again."));
+				"Your request processed successfully."));
+		assertFalse(selenium.isTextPresent("Test2 Folder2"));
+		assertFalse(selenium.isTextPresent("This is a test2 folder2!"));
+		assertFalse(selenium.isTextPresent("Test2 Folder2 Edit2"));
+		assertFalse(selenium.isTextPresent("This is a test2 folder2 edit2!"));
 	}
 }

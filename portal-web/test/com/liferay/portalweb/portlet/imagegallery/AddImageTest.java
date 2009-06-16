@@ -90,5 +90,6 @@ public class AddImageTest extends BaseTestCase {
 				"Your request processed successfully."));
 		assertTrue(selenium.isElementPresent("//img[@alt='Image']"));
 		assertTrue(selenium.isTextPresent("Test Image"));
+		assertTrue(selenium.isTextPresent("Showing 1 result."));
 	}
 }

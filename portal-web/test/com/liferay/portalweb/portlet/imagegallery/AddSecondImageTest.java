@@ -26,13 +26,13 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="MoveImageTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddSecondImageTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class MoveImageTest extends BaseTestCase {
-	public void testMoveImage() throws Exception {
+public class AddSecondImageTest extends BaseTestCase {
+	public void testAddSecondImage() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -51,9 +51,13 @@ public class MoveImageTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Image Gallery Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Test Subfolder"));
+		selenium.click(RuntimeVariables.replace("//tr[4]/td[1]/a/b"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//img[@alt='Image']");
+		selenium.click(RuntimeVariables.replace("//b"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("//input[@value='Add Image']"));
+		selenium.waitForPageToLoad("30000");
+		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -61,7 +65,7 @@ public class MoveImageTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Edit")) {
+				if (selenium.isElementPresent("link=Use the classic uploader.")) {
 					break;
 				}
 			}
@@ -71,78 +75,21 @@ public class MoveImageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Edit"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click("//input[@value='Select']");
-		selenium.waitForPopUp("folder", RuntimeVariables.replace("30000"));
-		selenium.selectWindow("folder");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Folders")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click(RuntimeVariables.replace("link=Folders"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Test3 Folder3"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click("//input[@value='Choose']");
-		selenium.selectWindow("null");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Test3 Subfolder3")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
+		selenium.click("link=Use the classic uploader.");
+		selenium.type("_31_file",
+			RuntimeVariables.replace(
+				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\imagegallery\\test_image_2.jpg"));
+		selenium.typeKeys("_31_name", RuntimeVariables.replace("Test2 Image2"));
+		selenium.type("_31_name", RuntimeVariables.replace("Test2 Image2"));
+		selenium.type("_31_description",
+			RuntimeVariables.replace("This is the Liferay2 logo2!"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
+		Thread.sleep(5000);
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
-		assertFalse(selenium.isElementPresent(
-				"//img[@alt='This is the Liferay logo!']"));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Image Gallery Test Page")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click(RuntimeVariables.replace("link=Image Gallery Test Page"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Test3 Subfolder3"));
-		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("//img[@alt='Image']"));
+		assertTrue(selenium.isTextPresent("Test2 Image2"));
+		assertTrue(selenium.isTextPresent("Showing 1 result."));
 	}
 }

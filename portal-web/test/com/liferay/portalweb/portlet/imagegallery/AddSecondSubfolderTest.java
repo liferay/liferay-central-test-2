@@ -26,13 +26,13 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="ImportLARTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddSecondSubfolderTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class ImportLARTest extends BaseTestCase {
-	public void testImportLAR() throws Exception {
+public class AddSecondSubfolderTest extends BaseTestCase {
+	public void testAddSecondSubfolder() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -51,52 +51,21 @@ public class ImportLARTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Image Gallery Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//strong/span");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Export / Import")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click(RuntimeVariables.replace("link=Export / Import"));
+		selenium.click(RuntimeVariables.replace("//tr[4]/td[1]/a/b"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Import"));
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Add Subfolder']"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_86_importFileName")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click("_86_DELETE_PORTLET_DATA");
-		selenium.type("_86_importFileName",
-			RuntimeVariables.replace(
-				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\imagegallery\\Image_Gallery-Selenium.portlet.lar"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Import']"));
+		selenium.typeKeys("_31_name",
+			RuntimeVariables.replace("Test2 Subfolder2"));
+		selenium.type("_31_name", RuntimeVariables.replace("Test2 Subfolder2"));
+		selenium.type("_31_description",
+			RuntimeVariables.replace("This is a test2 subfolder2!"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
+		assertTrue(selenium.isTextPresent("Test2 Subfolder2"));
+		assertTrue(selenium.isTextPresent("This is a test2 subfolder2!"));
 	}
 }

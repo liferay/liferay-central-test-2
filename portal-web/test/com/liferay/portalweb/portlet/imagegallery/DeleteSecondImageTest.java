@@ -26,13 +26,13 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="AddInvalidImageTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="DeleteSecondImageTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class AddInvalidImageTest extends BaseTestCase {
-	public void testAddInvalidImage() throws Exception {
+public class DeleteSecondImageTest extends BaseTestCase {
+	public void testDeleteSecondImage() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -51,13 +51,11 @@ public class AddInvalidImageTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Image Gallery Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//tr[4]/td[1]/a[1]/b"));
+		selenium.click(RuntimeVariables.replace("//tr[4]/td[1]/a/b"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("//b"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//input[@value='Add Image']"));
-		selenium.waitForPageToLoad("30000");
-		Thread.sleep(5000);
+		selenium.click("//img[@alt='Image']");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -65,7 +63,7 @@ public class AddInvalidImageTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Use the classic uploader.")) {
+				if (selenium.isElementPresent("link=Delete")) {
 					break;
 				}
 			}
@@ -75,33 +73,13 @@ public class AddInvalidImageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Use the classic uploader.");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_31_file")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.type("_31_file",
-			RuntimeVariables.replace(
-				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\imagegallery\\invalid_image.jpg"));
-		selenium.typeKeys("_31_name",
-			RuntimeVariables.replace("Invalid Image Test"));
-		selenium.type("_31_name", RuntimeVariables.replace("Invalid Image Test"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.click(RuntimeVariables.replace("link=Delete"));
 		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.getConfirmation()
+						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 		assertTrue(selenium.isTextPresent(
-				"You have entered invalid data. Please try again. "));
+				"Your request processed successfully."));
+		assertFalse(selenium.isTextPresent("Test2 Image2"));
+		assertFalse(selenium.isTextPresent("Test2 Image2 Edit2"));
 	}
 }

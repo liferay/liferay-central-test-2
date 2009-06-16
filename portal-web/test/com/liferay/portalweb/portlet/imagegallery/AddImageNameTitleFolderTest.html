@@ -1,12 +1,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>AddDuplicateImageNameTest</title>
+<title>AddImageNameTitleFolderTest</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">AddDuplicateImageNameTest</td></tr>
+<tr><td rowspan="1" colspan="3">AddImageNameTitleFolderTest</td></tr>
 </thead><tbody>
 <tr>
 	<td>waitForElementPresent</td>
@@ -30,43 +30,23 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//input[@value='Add Image']</td>
+	<td>//input[@value='Add Subfolder']</td>
 	<td></td>
-</tr>
-<tr>
-	<td>pause</td>
-	<td>5000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>link=Use the classic uploader.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>link=Use the classic uploader.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>_31_file</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>_31_file</td>
-	<td>L:\portal\build\portal-web\test\com\liferay\portalweb\portlet\imagegallery\test_image.jpg</td>
 </tr>
 <tr>
 	<td>typeKeys</td>
 	<td>_31_name</td>
-	<td>Test Image</td>
+	<td>Test Image.jpg</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>_31_name</td>
-	<td>Test Image</td>
+	<td>Test Image.jpg</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_31_description</td>
+	<td>Image Name Title Folder Test</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -76,6 +56,11 @@
 <tr>
 	<td>assertTextPresent</td>
 	<td>You have entered invalid data. Please try again.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Please enter a unique folder name.</td>
 	<td></td>
 </tr>
 

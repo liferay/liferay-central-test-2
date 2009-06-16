@@ -26,13 +26,13 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="AddImageNameFolderTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddSecondFolderTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class AddImageNameFolderTest extends BaseTestCase {
-	public void testAddImageNameFolder() throws Exception {
+public class AddSecondFolderTest extends BaseTestCase {
+	public void testAddSecondFolder() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -51,21 +51,17 @@ public class AddImageNameFolderTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Image Gallery Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//tr[4]/td[1]/a[1]/b"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Add Folder']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//b"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Add Subfolder']"));
-		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_31_name", RuntimeVariables.replace("Test Image.jpg"));
-		selenium.type("_31_name", RuntimeVariables.replace("Test Image.jpg"));
+		selenium.typeKeys("_31_name", RuntimeVariables.replace("Test2 Folder2"));
+		selenium.type("_31_name", RuntimeVariables.replace("Test2 Folder2"));
 		selenium.type("_31_description",
-			RuntimeVariables.replace("Duplicate Title Folder Test"));
+			RuntimeVariables.replace("This is a test2 folder2!"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
-				"You have entered invalid data. Please try again."));
-		assertTrue(selenium.isTextPresent("Please enter a unique folder name."));
+				"Your request processed successfully."));
+		assertTrue(selenium.isTextPresent("Test2 Folder2"));
+		assertTrue(selenium.isTextPresent("This is a test2 folder2!"));
 	}
 }

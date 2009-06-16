@@ -1,12 +1,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>AddImageTest</title>
+<title>AddSecondSubfolderTest</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">AddImageTest</td></tr>
+<tr><td rowspan="1" colspan="3">AddSecondSubfolderTest</td></tr>
 </thead><tbody>
 <tr>
 	<td>waitForElementPresent</td>
@@ -20,62 +20,32 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//b</td>
+	<td>//tr[4]/td[1]/a/b</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//b</td>
+	<td>//input[@value='Add Subfolder']</td>
 	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//input[@value='Add Image']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>pause</td>
-	<td>5000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>link=Use the classic uploader.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>link=Use the classic uploader.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>_31_file</td>
-	<td>L:\portal\build\portal-web\test\com\liferay\portalweb\portlet\imagegallery\test_image.jpg</td>
 </tr>
 <tr>
 	<td>typeKeys</td>
 	<td>_31_name</td>
-	<td>Test Image</td>
+	<td>Test2 Subfolder2</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>_31_name</td>
-	<td>Test Image</td>
+	<td>Test2 Subfolder2</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>_31_description</td>
-	<td>This is the Liferay logo!</td>
+	<td>This is a test2 subfolder2!</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
 	<td>//input[@value='Save']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>pause</td>
-	<td>5000</td>
 	<td></td>
 </tr>
 <tr>
@@ -84,18 +54,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
-	<td>//img[@alt='Image']</td>
+	<td>assertTextPresent</td>
+	<td>Test2 Subfolder2</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Test Image</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Showing 1 result.</td>
+	<td>This is a test2 subfolder2!</td>
 	<td></td>
 </tr>
 

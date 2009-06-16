@@ -1,12 +1,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>AddInvalidImageTest</title>
+<title>EditSecondImageTest</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">AddInvalidImageTest</td></tr>
+<tr><td rowspan="1" colspan="3">EditSecondImageTest</td></tr>
 </thead><tbody>
 <tr>
 	<td>waitForElementPresent</td>
@@ -20,7 +20,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//tr[4]/td[1]/a[1]/b</td>
+	<td>//tr[4]/td[1]/a/b</td>
 	<td></td>
 </tr>
 <tr>
@@ -29,8 +29,38 @@
 	<td></td>
 </tr>
 <tr>
+	<td>click</td>
+	<td>//img[@alt='Image']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Edit</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
-	<td>//input[@value='Add Image']</td>
+	<td>link=Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>typeKeys</td>
+	<td>_31_name</td>
+	<td>Test2 Image2 Edit2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_31_name</td>
+	<td>Test2 Image2 Edit2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_31_description</td>
+	<td>This is the Liferay2 logo2 Edit2!</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Save']</td>
 	<td></td>
 </tr>
 <tr>
@@ -39,43 +69,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>link=Use the classic uploader.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>link=Use the classic uploader.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>_31_file</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>_31_file</td>
-	<td>L:\portal\build\portal-web\test\com\liferay\portalweb\portlet\imagegallery\invalid_image.jpg</td>
-</tr>
-<tr>
-	<td>typeKeys</td>
-	<td>_31_name</td>
-	<td>Invalid Image Test</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>_31_name</td>
-	<td>Invalid Image Test</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//input[@value='Save']</td>
+	<td>assertTextPresent</td>
+	<td>Your request processed successfully.</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>You have entered invalid data. Please try again. </td>
+	<td>Test2 Image2 Edit2</td>
 	<td></td>
 </tr>
 

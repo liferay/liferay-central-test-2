@@ -26,13 +26,13 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="AddSecondTestFoldersTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="EditSecondFolderTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class AddSecondTestFoldersTest extends BaseTestCase {
-	public void testAddSecondTestFolders() throws Exception {
+public class EditSecondFolderTest extends BaseTestCase {
+	public void testEditSecondFolder() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -51,18 +51,7 @@ public class AddSecondTestFoldersTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Image Gallery Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//input[@value='Add Folder']"));
-		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_31_name", RuntimeVariables.replace("Test Folder 2"));
-		selenium.type("_31_name", RuntimeVariables.replace("Test Folder 2"));
-		selenium.type("_31_description",
-			RuntimeVariables.replace("This is a second test folder."));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
-		assertTrue(selenium.isTextPresent("Test Folder 2"));
-		assertTrue(selenium.isTextPresent("This is a second test folder."));
+		selenium.click("//tr[4]/td[4]/ul/li/strong/span");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -70,7 +59,7 @@ public class AddSecondTestFoldersTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//tr[4]/td[1]/a/b")) {
+				if (selenium.isElementPresent("//div[5]/ul/li[1]/a")) {
 					break;
 				}
 			}
@@ -80,21 +69,19 @@ public class AddSecondTestFoldersTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//tr[4]/td[1]/a/b"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Add Subfolder']"));
+		selenium.click(RuntimeVariables.replace("//div[5]/ul/li[1]/a"));
 		selenium.waitForPageToLoad("30000");
 		selenium.typeKeys("_31_name",
-			RuntimeVariables.replace("Test Subfolder 2"));
-		selenium.type("_31_name", RuntimeVariables.replace("Test Subfolder 2"));
+			RuntimeVariables.replace("Test2 Folder2 Edit2"));
+		selenium.type("_31_name",
+			RuntimeVariables.replace("Test2 Folder2 Edit2"));
 		selenium.type("_31_description",
-			RuntimeVariables.replace("This is a second test subfolder."));
+			RuntimeVariables.replace("This is a test2 folder2 edit2!"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
-		assertTrue(selenium.isTextPresent("Test Subfolder 2"));
-		assertTrue(selenium.isTextPresent("This is a second test subfolder."));
+		assertTrue(selenium.isTextPresent("Test2 Folder2 Edit2"));
+		assertTrue(selenium.isTextPresent("This is a test2 folder2 edit2!"));
 	}
 }
