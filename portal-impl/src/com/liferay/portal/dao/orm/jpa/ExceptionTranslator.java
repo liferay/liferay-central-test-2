@@ -68,7 +68,7 @@ public class ExceptionTranslator {
 			else {
 				message = e.getMessage();
 			}
-			
+
 			return new ORMException(message);
 		}
 	}
