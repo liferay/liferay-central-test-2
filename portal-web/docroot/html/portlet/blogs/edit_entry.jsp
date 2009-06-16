@@ -242,7 +242,7 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 	<aui:input name="tags" type="assetTags" />
 
 	<c:if test="<%= entry == null %>">
-		<aui:field-wrapper name="permissions">
+		<aui:field-wrapper label="permissions">
 			<liferay-ui:input-permissions
 				modelName="<%= BlogsEntry.class.getName() %>"
 			/>
