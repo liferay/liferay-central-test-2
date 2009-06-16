@@ -340,7 +340,7 @@ public class SAXReaderImpl implements SAXReader {
 			return new DocumentImpl(saxReader.read(file));
 		}
 		catch (org.dom4j.DocumentException de) {
-			throw new DocumentException(de.getMessage());
+			throw new DocumentException(de.getMessage(), de);
 		}
 	}
 
@@ -357,7 +357,7 @@ public class SAXReaderImpl implements SAXReader {
 			return new DocumentImpl(saxReader.read(is));
 		}
 		catch (org.dom4j.DocumentException de) {
-			throw new DocumentException(de.getMessage());
+			throw new DocumentException(de.getMessage(), de);
 		}
 	}
 
@@ -374,7 +374,7 @@ public class SAXReaderImpl implements SAXReader {
 			return new DocumentImpl(saxReader.read(reader));
 		}
 		catch (org.dom4j.DocumentException de) {
-			throw new DocumentException(de.getMessage());
+			throw new DocumentException(de.getMessage(), de);
 		}
 	}
 
@@ -399,7 +399,7 @@ public class SAXReaderImpl implements SAXReader {
 			return new DocumentImpl(saxReader.read(url));
 		}
 		catch (org.dom4j.DocumentException de) {
-			throw new DocumentException(de.getMessage());
+			throw new DocumentException(de.getMessage(), de);
 		}
 	}
 
