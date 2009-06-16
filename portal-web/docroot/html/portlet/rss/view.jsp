@@ -60,23 +60,23 @@ for (int i = 0; i < urls.length; i++) {
 <script type="text/javascript">
 	jQuery(
 		function() {
-			var minusImage = '01_minus.png';
-			var plusImage = '01_plus.png';
 			var minusAlt = '<liferay-ui:message key="collapse" />';
+			var minusImage = '01_minus.png';
 			var plusAlt = '<liferay-ui:message key="expande" />';
+			var plusImage = '01_plus.png';
 			jQuery(".<portlet:namespace />entry-expander").click(
 				function() {
 					if (this.src.indexOf('minus.png') > -1) {
 						jQuery(".feed-entry-content", this.parentNode).slideUp();
 
-						this.src = this.src.replace(minusImage, plusImage);// themeDisplay.getPathThemeImages() + "/arrows/01_plus.png";
 						this.alt = this.alt.replace(minusAlt, plusAlt);
+						this.src = this.src.replace(minusImage, plusImage);// themeDisplay.getPathThemeImages() + "/arrows/01_plus.png";
 					}
 					else {
 						jQuery(".feed-entry-content", this.parentNode).slideDown();
 
-						this.src = this.src.replace(plusImage, minusImage); //themeDisplay.getPathThemeImages() + "/arrows/01_minus.png";
 						this.alt = this.alt.replace(plusAlt, minusAlt);
+						this.src = this.src.replace(plusImage, minusImage); //themeDisplay.getPathThemeImages() + "/arrows/01_minus.png";
 					}
 				}
 			);
