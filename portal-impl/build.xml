@@ -481,6 +481,20 @@ ${exception.message}
 		<ant dir="../portal-web" target="build-selenium" />
 	</target>
 
+	<target name="build-selenium-server">
+		<tstamp>
+			<format property="tstamp.value" pattern="yyyyMMddkkmmssSSS" />
+		</tstamp>
+
+		<unzip src="${project.dir}/lib/development/selenium-server.jar" dest="${tstamp.value}" />
+
+		<copy file="${project.dir}/tools/selenium/user-extensions.js" todir="${tstamp.value}/core/scripts" />
+
+		<zip basedir="${tstamp.value}" destfile="${project.dir}/lib/development/selenium-server.jar.new" />
+
+		<delete dir="${tstamp.value}" />
+	</target>
+
 	<target name="build-service">
 		<java
 			classname="com.liferay.portal.tools.servicebuilder.ServiceBuilder"

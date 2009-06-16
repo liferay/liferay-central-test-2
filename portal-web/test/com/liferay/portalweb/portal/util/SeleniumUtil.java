@@ -25,9 +25,6 @@ package com.liferay.portalweb.portal.util;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portalweb.portal.util.TestPropsValues;
 
-import com.thoughtworks.selenium.DefaultSelenium;
-import com.thoughtworks.selenium.Selenium;
-
 /**
  * <a href="SeleniumUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -36,7 +33,7 @@ import com.thoughtworks.selenium.Selenium;
  */
 public class SeleniumUtil {
 
-	public static Selenium getSelenium() {
+	public static LiferaySelenium getSelenium() {
 		return _instance._getSelenium();
 	}
 
@@ -56,7 +53,7 @@ public class SeleniumUtil {
 		_timestamp = Time.getTimestamp();
 	}
 
-	private Selenium _getSelenium() {
+	private LiferaySelenium _getSelenium() {
 		if (_selenium == null) {
 			_startSelenium();
 		}
@@ -74,7 +71,7 @@ public class SeleniumUtil {
 		String browserType = TestPropsValues.BROWSER_TYPE;
 		String portalURL = TestPropsValues.PORTAL_URL;
 
-		_selenium = new DefaultSelenium(
+		_selenium = new LiferayDefaultSelenium(
 			seleniumHost, seleniumPort, browserType, portalURL);
 
 		_selenium.start();
@@ -93,6 +90,6 @@ public class SeleniumUtil {
 	private static SeleniumUtil _instance = new SeleniumUtil();
 
 	private String _timestamp;
-	private Selenium _selenium;
+	private LiferaySelenium _selenium;
 
 }

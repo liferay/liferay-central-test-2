@@ -246,9 +246,9 @@ public class SeleneseToJavaBuilder {
 			String param2 = fixParam(params[1]);
 			String param3 = fixParam(params[2]);
 
-			if (param1.equals("addSelection") || param1.equals("select") ||
-				param1.equals("type") || param1.equals("typeKeys") ||
-				param1.equals("waitForPopUp")) {
+			if (param1.equals("addSelection") || param1.equals("keyPress") ||
+				param1.equals("select") || param1.equals("type") ||
+				param1.equals("typeKeys") || param1.equals("waitForPopUp")) {
 
 				sb.append("selenium.");
 				sb.append(param1);
@@ -320,6 +320,36 @@ public class SeleneseToJavaBuilder {
 				sb.append("(selenium.isElementPresent(\"");
 				sb.append(param2);
 				sb.append("\"));");
+			}
+			else if (param1.equals("assertNotPartialText") ||
+					 param1.equals("assertPartialText")) {
+
+				if (param1.equals("assertNotPartialText")) {
+					sb.append("assertFalse");
+				}
+				else if (param1.equals("assertPartialText")) {
+					sb.append("assertTrue");
+				}
+
+				sb.append("(selenium.isPartialText(\"");
+				sb.append(param2);
+				sb.append("\", ");
+
+				if (param3.startsWith("${")) {
+					sb.append("RuntimeVariables.getValue(\"");
+
+					String text = param3.substring(2, param3.length() - 1);
+
+					sb.append(text);
+					sb.append("\")");
+				}
+				else {
+					sb.append("\"");
+					sb.append(param3);
+					sb.append("\"");
+				}
+
+				sb.append("));");
 			}
 			else if (param1.equals("assertNotText") ||
 					 param1.equals("assertText")) {
@@ -433,7 +463,7 @@ public class SeleneseToJavaBuilder {
 				sb.append("\"));");
 				sb.append("selenium.waitForPageToLoad(\"30000\");");
 			}
-			else if (param1.equals("close")) {
+			else if (param1.equals("close") || param1.equals("refresh")) {
 				sb.append("selenium.");
 				sb.append(param1);
 				sb.append("();");
@@ -444,6 +474,11 @@ public class SeleneseToJavaBuilder {
 				sb.append(param2);
 				sb.append("\", \"");
 				sb.append(param3);
+				sb.append("\");");
+			}
+			else if (param1.equals("echo")) {
+				sb.append("System.out.println(\"");
+				sb.append(param2);
 				sb.append("\");");
 			}
 			else if (param1.equals("gotoIf")) {
@@ -459,6 +494,14 @@ public class SeleneseToJavaBuilder {
 				sb.append("continue;");
 				sb.append("}");
 			}
+			else if (param1.equals("keyPressAndWait")) {
+				sb.append("selenium.keyPress(\"");
+				sb.append(param2);
+				sb.append("\", RuntimeVariables.replace(\"");
+				sb.append(param3);
+				sb.append("\"));");
+				sb.append("selenium.waitForPageToLoad(\"30000\");");
+			}
 			else if (param1.equals("label")) {
 				String label = labels.get(param2);
 
@@ -470,6 +513,10 @@ public class SeleneseToJavaBuilder {
 				sb.append("Thread.sleep(");
 				sb.append(param2);
 				sb.append(");");
+			}
+			else if (param1.equals("refreshAndWait")) {
+				sb.append("selenium.refresh();");
+				sb.append("selenium.waitForPageToLoad(\"30000\");");
 			}
 			else if (param1.equals("selectAndWait")) {
 				sb.append("selenium.select(\"");
@@ -493,6 +540,19 @@ public class SeleneseToJavaBuilder {
 				}
 
 				sb.append(";");
+			}
+			else if (param1.equals("storeIncrementedText")) {
+				sb.append("String ");
+				sb.append(param3);
+				sb.append(" = selenium.getIncrementedText(\"");
+				sb.append(param2);
+				sb.append("\");");
+
+				sb.append("RuntimeVariables.setValue(\"");
+				sb.append(param3);
+				sb.append("\", ");
+				sb.append(param3);
+				sb.append(");");
 			}
 			else if (param1.equals("storeText")) {
 				sb.append("String ");
@@ -542,6 +602,8 @@ public class SeleneseToJavaBuilder {
 			}
 			else if (param1.equals("waitForElementNotPresent") ||
 					 param1.equals("waitForElementPresent") ||
+					 param1.equals("waitForNotPartialText") ||
+					 param1.equals("waitForPartialText") ||
 					 param1.equals("waitForTextNotPresent") ||
 					 param1.equals("waitForTextPresent")) {
 
@@ -554,6 +616,7 @@ public class SeleneseToJavaBuilder {
 				sb.append("if (");
 
 				if (param1.equals("waitForElementNotPresent") ||
+					param1.equals("waitForNotPartialText") ||
 					param1.equals("waitForTextNotPresent")) {
 
 					sb.append("!");
@@ -565,16 +628,43 @@ public class SeleneseToJavaBuilder {
 					param1.equals("waitForElementPresent")) {
 
 					sb.append("isElementPresent");
+					sb.append("(\"");
+					sb.append(param2);
+					sb.append("\")");
 				}
 				else if (param1.equals("waitForTextNotPresent") ||
 						 param1.equals("waitForTextPresent")) {
 
 					sb.append("isTextPresent");
+					sb.append("(\"");
+					sb.append(param2);
+					sb.append("\")");
+				}
+				else if (param1.equals("waitForNotPartialText") ||
+						 param1.equals("waitForPartialText")) {
+
+					sb.append("isPartialText(\"");
+					sb.append(param2);
+					sb.append("\", ");
+
+					if (param3.startsWith("${")) {
+						sb.append("RuntimeVariables.getValue(\"");
+
+						String text = param3.substring(2, param3.length() - 1);
+
+						sb.append(text);
+						sb.append("\")");
+					}
+					else {
+						sb.append("\"");
+						sb.append(param3);
+						sb.append("\"");
+					}
+
+					sb.append(")");
 				}
 
-				sb.append("(\"");
-				sb.append(param2);
-				sb.append("\")) {");
+				sb.append(") {");
 				sb.append("break;");
 				sb.append("}");
 				sb.append("}");

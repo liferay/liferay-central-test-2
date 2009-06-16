@@ -20,29 +20,26 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portal;
+package com.liferay.portalweb.portal.util;
 
-import com.liferay.portal.util.InitUtil;
-import com.liferay.portalweb.portal.util.LiferaySeleneseTestCase;
-import com.liferay.portalweb.portal.util.SeleniumUtil;
+import com.thoughtworks.selenium.SeleneseTestCase;
 
 /**
- * <a href="BaseTestCase.java.html"><b><i>View Source</i></b></a>
+ * <a href="LiferaySeleneseTestCase.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class BaseTestCase extends LiferaySeleneseTestCase {
+public class LiferaySeleneseTestCase extends SeleneseTestCase {
 
-	public BaseTestCase() {
-		InitUtil.initWithSpring();
+	public LiferaySeleneseTestCase() {
+		super();
 	}
 
-	public void setUp() throws Exception {
-		selenium = SeleniumUtil.getSelenium();
+	public LiferaySeleneseTestCase(String name) {
+		super(name);
 	}
 
-	public void tearDown() throws Exception {
-	}
+	protected LiferaySelenium selenium;
 
 }

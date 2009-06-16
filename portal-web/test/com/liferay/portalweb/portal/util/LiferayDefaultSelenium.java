@@ -20,29 +20,39 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portal;
+package com.liferay.portalweb.portal.util;
 
-import com.liferay.portal.util.InitUtil;
-import com.liferay.portalweb.portal.util.LiferaySeleneseTestCase;
-import com.liferay.portalweb.portal.util.SeleniumUtil;
+import com.thoughtworks.selenium.CommandProcessor;
+import com.thoughtworks.selenium.DefaultSelenium;
 
 /**
- * <a href="BaseTestCase.java.html"><b><i>View Source</i></b></a>
+ * <a href="LiferayDefaultSelenium.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class BaseTestCase extends LiferaySeleneseTestCase {
+public class LiferayDefaultSelenium
+	extends DefaultSelenium implements LiferaySelenium {
 
-	public BaseTestCase() {
-		InitUtil.initWithSpring();
+	public LiferayDefaultSelenium(
+		String serverHost, int serverPort, String browserStartCommand,
+		String browserURL) {
+
+		super(serverHost, serverPort, browserStartCommand, browserURL);
 	}
 
-	public void setUp() throws Exception {
-		selenium = SeleniumUtil.getSelenium();
+	public LiferayDefaultSelenium(CommandProcessor processor) {
+		super(processor);
 	}
 
-	public void tearDown() throws Exception {
+	public String getIncrementedText(String locator) {
+		return commandProcessor.getString(
+			"getIncrementedText", new String[] {locator,});
+	}
+
+	public boolean isPartialText(String locator, String value) {
+		return commandProcessor.getBoolean(
+			"isPartialText", new String[] {locator, value,});
 	}
 
 }

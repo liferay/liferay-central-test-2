@@ -20,29 +20,20 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portal;
+package com.liferay.portalweb.portal.util;
 
-import com.liferay.portal.util.InitUtil;
-import com.liferay.portalweb.portal.util.LiferaySeleneseTestCase;
-import com.liferay.portalweb.portal.util.SeleniumUtil;
+import com.thoughtworks.selenium.Selenium;
 
 /**
- * <a href="BaseTestCase.java.html"><b><i>View Source</i></b></a>
+ * <a href="LiferaySelenium.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class BaseTestCase extends LiferaySeleneseTestCase {
+public interface LiferaySelenium extends Selenium {
 
-	public BaseTestCase() {
-		InitUtil.initWithSpring();
-	}
+	public String getIncrementedText(String locator);
 
-	public void setUp() throws Exception {
-		selenium = SeleniumUtil.getSelenium();
-	}
-
-	public void tearDown() throws Exception {
-	}
+	public boolean isPartialText(String locator, String value);
 
 }
