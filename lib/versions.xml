@@ -768,6 +768,10 @@
 				<license-name>Apache License 2.0</license-name>
 			</license>
 		</licenses>
+		<comments>
+			This includes custom user extensions. See the Ant target
+			"build-selenium-server" in portal-impl/build.xml.
+		</comments>
 	</library>
 	<library>
 		<file-name>development/servlet-api.jar</file-name>
