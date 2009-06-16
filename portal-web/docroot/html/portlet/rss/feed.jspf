@@ -138,7 +138,7 @@ catch (Exception e) {
 				%>
 
 					<div class="feed-entry">
-						<img class="<portlet:namespace />entry-expander feed-entry-expander" src='<%= themeDisplay.getPathThemeImage() %>/arrows/01_<%= (windowState.equals(WindowState.MAXIMIZED) || (j < expandedEntriesPerFeed)) ? "minus" : "plus" %>.png' />
+						<img alt="<%= (windowState.equals(WindowState.MAXIMIZED) || (j < expandedEntriesPerFeed)) ? LanguageUtil.get(pageContext, "collapse") : LanguageUtil.get(pageContext, "expande") %>" class="<portlet:namespace />entry-expander feed-entry-expander" src='<%= themeDisplay.getPathThemeImage() %>/arrows/01_<%= (windowState.equals(WindowState.MAXIMIZED) || (j < expandedEntriesPerFeed)) ? "minus" : "plus" %>.png' />
 
 						<span class="feed-entry-title"><a href="<%= entryLink %>" target="_new"><%= entry.getTitle() %></a></span>
 

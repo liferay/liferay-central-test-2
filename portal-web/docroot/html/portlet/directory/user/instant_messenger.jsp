@@ -55,7 +55,7 @@ String ym = selContact.getYmSn();
 			<dd>
 				<%= icq %>
 
-				<img class="instant-messenger-logo" src="http://web.icq.com/whitepages/online?icq=<%= icq %>&img=5" />
+				<img alt="" class="instant-messenger-logo" src="http://web.icq.com/whitepages/online?icq=<%= icq %>&img=5" />
 			</dd>
 		</c:if>
 
@@ -83,7 +83,7 @@ String ym = selContact.getYmSn();
 			</dt>
 			<dd>
 				<%= skype %>
-				<a href="callto://<%= skype %>"><img alt="<liferay-ui:message key="skype" />" class="instant-messenger-logo" src="http://mystatus.skype.com/smallicon/<%= skype %>" /></a>
+				<a href="callto://<%= skype %>"><img alt="<liferay-ui:message key="call-this-user" />" class="instant-messenger-logo" src="http://mystatus.skype.com/smallicon/<%= skype %>" /></a>
 			</dd>
 		</c:if>
 
@@ -93,7 +93,7 @@ String ym = selContact.getYmSn();
 			</dt>
 			<dd>
 				<%= ym %>
-				<img class="instant-messenger-logo" src="http://opi.yahoo.com/online?u=<%= ym %>&m=g&t=0" />
+				<img alt="" class="instant-messenger-logo" src="http://opi.yahoo.com/online?u=<%= ym %>&m=g&t=0" />
 			</dd>
 		</c:if>
 	</dl>

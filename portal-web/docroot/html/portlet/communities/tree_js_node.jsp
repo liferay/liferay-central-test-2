@@ -78,7 +78,7 @@ boolean nodeOpen = false;
 		%>
 
 			<li branchid="<%= treeLayout.getPlid() %>" class="<%= cssClass %>" layoutid="<%= treeLayout.getLayoutId() %>" nodeid="<%= nodeId %>" privateLayout="<%= treeLayout.getPrivateLayout() %>">
-				<img class="expand-image" src="<%= themeDisplay.getPathThemeImages() + "/trees/" + image %>" />
+				<img alt="" class="expand-image" src="<%= themeDisplay.getPathThemeImages() + "/trees/" + image %>" />
 
 				<%
 				if (selectableTree && Validator.isNotNull(selectedNodes)) {
@@ -89,14 +89,14 @@ boolean nodeOpen = false;
 					}
 				%>
 
-					<img class="select-state" src="<%= themeDisplay.getPathThemeImages() + selectableImagePath %>" />
+					<img alt="" class="select-state" src="<%= themeDisplay.getPathThemeImages() + selectableImagePath %>" />
 
 				<%
 				}
 				%>
 
 				<a href="<%= portletURL + StringPool.AMPERSAND + portletDisplay.getNamespace() + "selPlid=" + treeLayout.getPlid() %>">
-					<img src="<%= themeDisplay.getPathThemeImages() + "/trees/page.png" %>"  />
+					<img alt="" src="<%= themeDisplay.getPathThemeImages() + "/trees/page.png" %>"  />
 					<span><%= HtmlUtil.escape(treeLayout.getName(themeDisplay.getLocale())) %></span>
 				</a>
 

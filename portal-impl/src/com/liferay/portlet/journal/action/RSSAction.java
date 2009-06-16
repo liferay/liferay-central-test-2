@@ -329,7 +329,7 @@ public class RSSAction extends PortletAction {
 				url = processURL(feed, url, themeDisplay, syndEntry);
 
 				content =
-					content + "<br /><br /><img src='" +
+					content + "<br /><br /><img alt='' src='" +
 						themeDisplay.getURLPortal() + url + "' />";
 			}
 			else if (elType.equals("text_box")) {

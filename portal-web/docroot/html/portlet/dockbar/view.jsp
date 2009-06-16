@@ -35,7 +35,7 @@ if (layout != null) {
 <div class="dockbar" id="dockbar" rel="<portlet:namespace />">
 	<ul class="exp-toolbar">
 		<li class="pin-dockbar">
-			<a href="javascript:;"><img src="<%= themeDisplay.getPathThemeImages() %>/spacer.png" /></a>
+			<a href="javascript:;"><img alt="" src="<%= themeDisplay.getPathThemeImages() %>/spacer.png" /></a>
 		</li>
 
 		<c:if test="<%= (group != null) && (!group.hasStagingGroup() || group.isStagingGroup()) && LayoutPermissionUtil.contains(permissionChecker, layout, ActionKeys.UPDATE) %>">
