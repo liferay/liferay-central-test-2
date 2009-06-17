@@ -361,9 +361,9 @@ public class SeleneseToJavaBuilder {
 					sb.append("assertEquals");
 				}
 
-				sb.append("(\"");
+				sb.append("(RuntimeVariables.replace(\"");
 				sb.append(param3);
-				sb.append("\", selenium.getText(\"");
+				sb.append("\"), selenium.getText(\"");
 				sb.append(param2);
 				sb.append("\"));");
 			}
