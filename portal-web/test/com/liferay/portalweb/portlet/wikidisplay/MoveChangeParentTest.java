@@ -80,7 +80,7 @@ public class MoveChangeParentTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
-		assertEquals("Test Second Child Page",
+		assertEquals(RuntimeVariables.replace("Test Second Child Page"),
 			selenium.getText("//div[3]/div/h2"));
 		assertTrue(selenium.isElementPresent(
 				"link=Test Change Parent Child Page"));
@@ -88,7 +88,8 @@ public class MoveChangeParentTest extends BaseTestCase {
 				"link=Test Change Parent Child Page"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Test Change Parent Child Page"));
-		assertEquals("Test Second Child Page", selenium.getText("//div[1]/a[2]"));
+		assertEquals(RuntimeVariables.replace("Test Second Child Page"),
+			selenium.getText("//div[1]/a[2]"));
 		selenium.click(RuntimeVariables.replace("link=Wiki Display Test Page"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Test Second Child Page"));
@@ -110,7 +111,8 @@ public class MoveChangeParentTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
-		assertEquals("Test Child Page", selenium.getText("//div[2]/a[2]"));
+		assertEquals(RuntimeVariables.replace("Test Child Page"),
+			selenium.getText("//div[2]/a[2]"));
 		assertTrue(selenium.isTextPresent("Test Change Parent Child Page"));
 		assertFalse(selenium.isTextPresent("Test Second Child Page"));
 		selenium.click(RuntimeVariables.replace("link=Wiki Display Test Page"));

@@ -53,7 +53,8 @@ public class ViewInvoiceTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Orders"));
 		selenium.waitForPageToLoad("30000");
-		assertEquals("Joe Bloggs", selenium.getText("//tr[3]/td[5]"));
+		assertEquals(RuntimeVariables.replace("Joe Bloggs"),
+			selenium.getText("//tr[3]/td[5]"));
 		selenium.click(RuntimeVariables.replace("link=Checkout"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Please take care of my order."));

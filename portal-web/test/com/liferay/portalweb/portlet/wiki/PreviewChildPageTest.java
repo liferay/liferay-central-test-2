@@ -78,7 +78,7 @@ public class PreviewChildPageTest extends BaseTestCase {
 			RuntimeVariables.replace("This should be visible when I preview."));
 		selenium.click(RuntimeVariables.replace("//input[@value='Preview']"));
 		selenium.waitForPageToLoad("30000");
-		assertEquals("This is Preview test",
+		assertEquals(RuntimeVariables.replace("This is Preview test"),
 			selenium.getText("//div[2]/div/div/h1"));
 		assertTrue(selenium.isTextPresent(
 				"This should be visible when I preview."));

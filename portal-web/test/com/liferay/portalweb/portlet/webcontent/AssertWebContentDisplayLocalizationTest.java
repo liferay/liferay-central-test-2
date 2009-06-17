@@ -136,9 +136,10 @@ public class AssertWebContentDisplayLocalizationTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"link=Web Content Display Localization Test Page"));
 		selenium.waitForPageToLoad("30000");
-		assertEquals("Hello World Page Name",
+		assertEquals(RuntimeVariables.replace("Hello World Page Name"),
 			selenium.getText("//div/div[1]/div/table/tbody/tr/td[1]"));
-		assertEquals("Hello World Page Description", selenium.getText("//td[2]"));
+		assertEquals(RuntimeVariables.replace("Hello World Page Description"),
+			selenium.getText("//td[2]"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -161,15 +162,18 @@ public class AssertWebContentDisplayLocalizationTest extends BaseTestCase {
 				"//img[@alt='\u4e2d\u6587 (\u4e2d\u56fd)']"));
 		selenium.waitForPageToLoad("30000");
 		Thread.sleep(5000);
-		assertEquals("\u4e16\u754c\u60a8\u597d Page Name",
+		assertEquals(RuntimeVariables.replace(
+				"\u4e16\u754c\u60a8\u597d Page Name"),
 			selenium.getText("//div/div[1]/div/table/tbody/tr/td[1]"));
-		assertEquals("\u4e16\u754c\u60a8\u597d Page Description",
+		assertEquals(RuntimeVariables.replace(
+				"\u4e16\u754c\u60a8\u597d Page Description"),
 			selenium.getText("//td[2]"));
 		selenium.click(RuntimeVariables.replace(
 				"//img[@alt='English (United States)']"));
 		selenium.waitForPageToLoad("30000");
-		assertEquals("Hello World Page Name",
+		assertEquals(RuntimeVariables.replace("Hello World Page Name"),
 			selenium.getText("//div/div[1]/div/table/tbody/tr/td[1]"));
-		assertEquals("Hello World Page Description", selenium.getText("//td[2]"));
+		assertEquals(RuntimeVariables.replace("Hello World Page Description"),
+			selenium.getText("//td[2]"));
 	}
 }

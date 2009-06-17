@@ -51,14 +51,14 @@ public class AssertBreadCrumbPresentTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Breadcrumb Test Page"));
 		selenium.waitForPageToLoad("30000");
-		assertEquals("Breadcrumb Test Page",
+		assertEquals(RuntimeVariables.replace("Breadcrumb Test Page"),
 			selenium.getText("//div[2]/div/div/ul/li[4]/a"));
 		assertFalse(selenium.isElementPresent("//div[2]/div/div/ul/li[5]/a"));
 		selenium.click(RuntimeVariables.replace("link=Child Test Page"));
 		selenium.waitForPageToLoad("30000");
-		assertEquals("Breadcrumb Test Page",
+		assertEquals(RuntimeVariables.replace("Breadcrumb Test Page"),
 			selenium.getText("//div[2]/div/div/ul/li[4]/a"));
-		assertEquals("Child Test Page",
+		assertEquals(RuntimeVariables.replace("Child Test Page"),
 			selenium.getText("//div[2]/div/div/ul/li[5]/a"));
 	}
 }

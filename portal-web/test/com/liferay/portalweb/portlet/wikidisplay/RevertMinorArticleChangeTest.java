@@ -59,8 +59,10 @@ public class RevertMinorArticleChangeTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
-		assertEquals("Reverted to 1.2", selenium.getText("//tr[3]/td[6]"));
-		assertEquals("1.4", selenium.getText("//td[3]/a"));
+		assertEquals(RuntimeVariables.replace("Reverted to 1.2"),
+			selenium.getText("//tr[3]/td[6]"));
+		assertEquals(RuntimeVariables.replace("1.4"),
+			selenium.getText("//td[3]/a"));
 		selenium.click(RuntimeVariables.replace("link=1.4"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("WD Setup Edited Wiki Test Article"));

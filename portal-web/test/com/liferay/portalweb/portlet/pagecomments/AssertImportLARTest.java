@@ -51,9 +51,10 @@ public class AssertImportLARTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Page Comments Test Page"));
 		selenium.waitForPageToLoad("30000");
-		assertEquals("This is a edited test page comment!",
+		assertEquals(RuntimeVariables.replace(
+				"This is a edited test page comment!"),
 			selenium.getText("//td[2]/div[1]"));
-		assertEquals("This is a test page comment 2!",
+		assertEquals(RuntimeVariables.replace("This is a test page comment 2!"),
 			selenium.getText("//tr[5]/td[2]/div[1]"));
 	}
 }

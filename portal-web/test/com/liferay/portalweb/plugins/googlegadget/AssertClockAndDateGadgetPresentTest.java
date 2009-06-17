@@ -51,7 +51,8 @@ public class AssertClockAndDateGadgetPresentTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Google Gadget Test Page"));
 		selenium.waitForPageToLoad("30000");
-		assertEquals("Do you often need to convert currencies?\nTry the new Currency Converter Gadget here on iGoogle!",
+		assertEquals(RuntimeVariables.replace(
+				"Do you often need to convert currencies?\nTry the new Currency Converter Gadget here on iGoogle!"),
 			selenium.getText("message"));
 	}
 }

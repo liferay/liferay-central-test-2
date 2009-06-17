@@ -43,6 +43,7 @@ public class AssertBlogCommentsRatingsTest extends BaseTestCase {
 		assertTrue(selenium.isTextPresent("\u00b10"));
 		selenium.click("//td[1]/ul/li[2]/a[1]");
 		Thread.sleep(5000);
-		assertEquals("+1", selenium.getText("//td[1]/ul/li[1]/span"));
+		assertEquals(RuntimeVariables.replace("+1"),
+			selenium.getText("//td[1]/ul/li[1]/span"));
 	}
 }

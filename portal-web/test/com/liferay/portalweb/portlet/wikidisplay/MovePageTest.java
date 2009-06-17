@@ -114,7 +114,7 @@ public class MovePageTest extends BaseTestCase {
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
 		assertTrue(selenium.isTextPresent("Rename to Second"));
-		assertEquals("(Redirected from First)",
+		assertEquals(RuntimeVariables.replace("(Redirected from First)"),
 			selenium.getText("//div[2]/div/div/div[3]"));
 		assertFalse(selenium.isElementPresent("Link=First"));
 	}

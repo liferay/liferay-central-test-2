@@ -84,7 +84,7 @@ public class AddSecondChildPageTest extends BaseTestCase {
 		assertTrue(selenium.isElementPresent("link=Test Second Child Page"));
 		selenium.click(RuntimeVariables.replace("link=Test Second Child Page"));
 		selenium.waitForPageToLoad("30000");
-		assertEquals("Test Second Child Page",
+		assertEquals(RuntimeVariables.replace("Test Second Child Page"),
 			selenium.getText("//div[2]/div/h2"));
 	}
 }

@@ -91,6 +91,7 @@ public class AddVirtualHostingPrivatePageTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
-		assertEquals("Private Page", selenium.getText("//li[2]/ul/li/a/span"));
+		assertEquals(RuntimeVariables.replace("Private Page"),
+			selenium.getText("//li[2]/ul/li/a/span"));
 	}
 }

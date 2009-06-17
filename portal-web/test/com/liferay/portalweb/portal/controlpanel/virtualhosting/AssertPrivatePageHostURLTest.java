@@ -64,7 +64,8 @@ public class AssertPrivatePageHostURLTest extends BaseTestCase {
 			case 2:
 				assertEquals("http://www.baker.com:8080/",
 					selenium.getLocation());
-				assertEquals("Virtual Hosting Community",
+				assertEquals(RuntimeVariables.replace(
+						"Virtual Hosting Community"),
 					selenium.getText("//h1/span"));
 				assertTrue(selenium.isElementPresent("link=Private Page"));
 				selenium.click(RuntimeVariables.replace("link=Private Page"));

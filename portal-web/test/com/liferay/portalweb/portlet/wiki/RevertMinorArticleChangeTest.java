@@ -61,12 +61,14 @@ public class RevertMinorArticleChangeTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
-		assertEquals("1.4", selenium.getText("//td[3]/a"));
-		assertEquals("Reverted to 1.2", selenium.getText("//tr[3]/td[6]"));
+		assertEquals(RuntimeVariables.replace("1.4"),
+			selenium.getText("//td[3]/a"));
+		assertEquals(RuntimeVariables.replace("Reverted to 1.2"),
+			selenium.getText("//tr[3]/td[6]"));
 		assertTrue(selenium.isElementPresent("link=1.4"));
 		selenium.click(RuntimeVariables.replace("link=1.4"));
 		selenium.waitForPageToLoad("30000");
-		assertEquals("This is a second test article",
+		assertEquals(RuntimeVariables.replace("This is a second test article"),
 			selenium.getText("//div[2]/div/h2"));
 		assertTrue(selenium.isTextPresent(
 				"I love Liferay! This Wiki has been EDITED!"));

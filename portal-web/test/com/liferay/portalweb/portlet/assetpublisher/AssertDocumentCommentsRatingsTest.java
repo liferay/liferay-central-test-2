@@ -73,9 +73,11 @@ public class AssertDocumentCommentsRatingsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		assertEquals("\u00b10", selenium.getText("//td[1]/ul/li[1]/span"));
+		assertEquals(RuntimeVariables.replace("\u00b10"),
+			selenium.getText("//td[1]/ul/li[1]/span"));
 		selenium.click("//td[1]/ul/li[2]/a[1]");
 		Thread.sleep(5000);
-		assertEquals("+1", selenium.getText("//td[1]/ul/li[1]/span"));
+		assertEquals(RuntimeVariables.replace("+1"),
+			selenium.getText("//td[1]/ul/li[1]/span"));
 	}
 }

@@ -52,8 +52,11 @@ public class AssertGoogleMapTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace("link=Google Maps Test Page"));
 		selenium.waitForPageToLoad("30000");
 		Thread.sleep(5000);
-		assertEquals("Map", selenium.getText("//div[5]/div[1]/div"));
-		assertEquals("Satellite", selenium.getText("//div[5]/div[2]/div"));
-		assertEquals("Hybrid", selenium.getText("//div[5]/div[3]/div"));
+		assertEquals(RuntimeVariables.replace("Map"),
+			selenium.getText("//div[5]/div[1]/div"));
+		assertEquals(RuntimeVariables.replace("Satellite"),
+			selenium.getText("//div[5]/div[2]/div"));
+		assertEquals(RuntimeVariables.replace("Hybrid"),
+			selenium.getText("//div[5]/div[3]/div"));
 	}
 }

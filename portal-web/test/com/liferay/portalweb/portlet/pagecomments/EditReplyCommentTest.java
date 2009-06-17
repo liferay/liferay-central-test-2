@@ -75,7 +75,8 @@ public class EditReplyCommentTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
-		assertEquals("This is a edtied test reply comment!",
+		assertEquals(RuntimeVariables.replace(
+				"This is a edtied test reply comment!"),
 			selenium.getText("//tr[8]/td[2]/div[1]"));
 	}
 }

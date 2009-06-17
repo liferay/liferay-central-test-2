@@ -85,6 +85,7 @@ public class AddChildPageTest extends BaseTestCase {
 		assertTrue(selenium.isElementPresent("link=Test Child Page"));
 		selenium.click(RuntimeVariables.replace("link=Test Child Page"));
 		selenium.waitForPageToLoad("30000");
-		assertEquals("Test Child Page", selenium.getText("//div[3]/div/h2"));
+		assertEquals(RuntimeVariables.replace("Test Child Page"),
+			selenium.getText("//div[3]/div/h2"));
 	}
 }

@@ -54,9 +54,9 @@ public class AssertImportLARTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace("link=Child Test Page"));
 		selenium.waitForPageToLoad("30000");
 		assertFalse(selenium.isTextPresent("Breadcrumb Test Page \u00bb"));
-		assertEquals("Breadcrumb Test Page",
+		assertEquals(RuntimeVariables.replace("Breadcrumb Test Page"),
 			selenium.getText("//div[2]/div/div/ul/li[4]/a"));
-		assertEquals("Child Test Page",
+		assertEquals(RuntimeVariables.replace("Child Test Page"),
 			selenium.getText("//div[2]/div/div/ul/li[5]/a"));
 	}
 }

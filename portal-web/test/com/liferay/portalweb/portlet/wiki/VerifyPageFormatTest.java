@@ -114,6 +114,7 @@ public class VerifyPageFormatTest extends BaseTestCase {
 		assertTrue(selenium.isElementPresent("link=Welcome to LIFERAY"));
 		selenium.click(RuntimeVariables.replace("link=Details"));
 		selenium.waitForPageToLoad("30000");
-		assertEquals("HTML", selenium.getText("//tr[2]/td"));
+		assertEquals(RuntimeVariables.replace("HTML"),
+			selenium.getText("//tr[2]/td"));
 	}
 }

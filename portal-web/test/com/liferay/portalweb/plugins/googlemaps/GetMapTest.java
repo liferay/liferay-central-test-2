@@ -58,7 +58,8 @@ public class GetMapTest extends BaseTestCase {
 		selenium.type("//input[3]", RuntimeVariables.replace(""));
 		selenium.click("//input[@value='Get Map']");
 		Thread.sleep(5000);
-		assertEquals("17730 Antonio Ave, Cerritos, CA, 90703",
+		assertEquals(RuntimeVariables.replace(
+				"17730 Antonio Ave, Cerritos, CA, 90703"),
 			selenium.getText("//div[10]/div/div[1]/div/div"));
 	}
 }

@@ -55,6 +55,7 @@ public class VerifyPropertyHistoryTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=History"));
 		selenium.waitForPageToLoad("30000");
-		assertEquals("1.5", selenium.getText("//td[3]/a"));
+		assertEquals(RuntimeVariables.replace("1.5"),
+			selenium.getText("//td[3]/a"));
 	}
 }

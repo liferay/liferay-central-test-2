@@ -88,6 +88,7 @@ public class AddVirtualHostingPublicPageTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
-		assertEquals("Public Page", selenium.getText("//li[2]/ul/li/a/span"));
+		assertEquals(RuntimeVariables.replace("Public Page"),
+			selenium.getText("//li[2]/ul/li/a/span"));
 	}
 }

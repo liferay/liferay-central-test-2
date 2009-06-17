@@ -100,7 +100,8 @@ public class CompareVersionsTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Compare Versions']"));
 		selenium.waitForPageToLoad("30000");
-		assertEquals("Comparing Versions 1.0 (First Version) and 1.3 (Last Version)",
+		assertEquals(RuntimeVariables.replace(
+				"Comparing Versions 1.0 (First Version) and 1.3 (Last Version)"),
 			selenium.getText("//div[2]/div/span[1]"));
 		assertTrue(selenium.isTextPresent(
 				"I love Liferay! This Wiki has been EDITED!"));

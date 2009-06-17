@@ -54,23 +54,27 @@ public class AssertRatingsTest extends BaseTestCase {
 		selenium.click("//td[1]/ul/li[2]/a[1]");
 		selenium.click("//tr[5]/td[2]/table[1]/tbody/tr/td[1]/ul/li[2]/a[2]");
 		Thread.sleep(5000);
-		assertEquals("+1", selenium.getText("//td[1]/ul/li[1]/span"));
-		assertEquals("(1 Vote)", selenium.getText("//td[1]/ul/li[3]/span"));
-		assertEquals("-1",
+		assertEquals(RuntimeVariables.replace("+1"),
+			selenium.getText("//td[1]/ul/li[1]/span"));
+		assertEquals(RuntimeVariables.replace("(1 Vote)"),
+			selenium.getText("//td[1]/ul/li[3]/span"));
+		assertEquals(RuntimeVariables.replace("-1"),
 			selenium.getText(
 				"//tr[5]/td[2]/table[1]/tbody/tr/td[1]/ul/li[1]/span"));
-		assertEquals("(1 Vote)",
+		assertEquals(RuntimeVariables.replace("(1 Vote)"),
 			selenium.getText(
 				"//tr[5]/td[2]/table[1]/tbody/tr/td[1]/ul/li[3]/span"));
 		selenium.click("//td[1]/ul/li[2]/a[1]");
 		selenium.click("//tr[5]/td[2]/table[1]/tbody/tr/td[1]/ul/li[2]/a[2]");
 		Thread.sleep(5000);
-		assertEquals("\u00b10", selenium.getText("//td[1]/ul/li[1]/span"));
-		assertEquals("(0 Votes)", selenium.getText("//td[1]/ul/li[3]/span"));
-		assertEquals("\u00b10",
+		assertEquals(RuntimeVariables.replace("\u00b10"),
+			selenium.getText("//td[1]/ul/li[1]/span"));
+		assertEquals(RuntimeVariables.replace("(0 Votes)"),
+			selenium.getText("//td[1]/ul/li[3]/span"));
+		assertEquals(RuntimeVariables.replace("\u00b10"),
 			selenium.getText(
 				"//tr[5]/td[2]/table[1]/tbody/tr/td[1]/ul/li[1]/span"));
-		assertEquals("(0 Votes)",
+		assertEquals(RuntimeVariables.replace("(0 Votes)"),
 			selenium.getText(
 				"//tr[5]/td[2]/table[1]/tbody/tr/td[1]/ul/li[3]/span"));
 	}

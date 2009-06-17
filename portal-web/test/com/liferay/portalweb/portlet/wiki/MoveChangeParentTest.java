@@ -80,7 +80,7 @@ public class MoveChangeParentTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
-		assertEquals("Test Second Child Page",
+		assertEquals(RuntimeVariables.replace("Test Second Child Page"),
 			selenium.getText("//div[4]/div/h2"));
 		assertTrue(selenium.isElementPresent(
 				"link=Test Change Parent Child Page"));

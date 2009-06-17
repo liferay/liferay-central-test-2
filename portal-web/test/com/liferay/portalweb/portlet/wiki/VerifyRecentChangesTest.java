@@ -55,7 +55,8 @@ public class VerifyRecentChangesTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Recent Changes"));
 		selenium.waitForPageToLoad("30000");
-		assertEquals("Link Me 2", selenium.getText("//td[1]/a"));
+		assertEquals(RuntimeVariables.replace("Link Me 2"),
+			selenium.getText("//td[1]/a"));
 		selenium.click(RuntimeVariables.replace("link=Link Me 1"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("//img[@alt='Edit']"));
@@ -86,6 +87,7 @@ public class VerifyRecentChangesTest extends BaseTestCase {
 				"Your request processed successfully."));
 		selenium.click(RuntimeVariables.replace("link=Recent Changes"));
 		selenium.waitForPageToLoad("30000");
-		assertEquals("Link Me 1", selenium.getText("//td[1]/a"));
+		assertEquals(RuntimeVariables.replace("Link Me 1"),
+			selenium.getText("//td[1]/a"));
 	}
 }
