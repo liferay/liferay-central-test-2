@@ -607,6 +607,9 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			companyId);
 
 		try {
+			String oldLocales = preferences.getValue(
+				PropsKeys.LOCALES, StringPool.BLANK);
+
 			for (String key : properties.keySet()) {
 				String value = properties.getProperty(key);
 
@@ -615,8 +618,6 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
 			preferences.store();
 
-			String oldLocales = preferences.getValue(
-				PropsKeys.LOCALES, StringPool.BLANK);
 			String newLocales = properties.getProperty(PropsKeys.LOCALES);
 
 			if (!Validator.equals(oldLocales, newLocales)) {
