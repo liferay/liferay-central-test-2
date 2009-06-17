@@ -235,7 +235,7 @@ public class PortletAction extends Action {
 				actionRequest, "request_processed", successMessage);
 		}
 
-		if (redirect == null) {
+		if (Validator.isNull(redirect)) {
 			redirect = ParamUtil.getString(actionRequest, "redirect");
 		}
 
