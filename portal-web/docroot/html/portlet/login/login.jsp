@@ -68,7 +68,7 @@
 						<%= LanguageUtil.format(pageContext, "thank-you-for-creating-an-account-your-password-has-been-sent-to-x", userEmailAddress) %>
 					</c:when>
 					<c:otherwise>
-						<%= LanguageUtil.format(pageContext, "thank-you-for-creating-an-account-your-password-is-x", new Object[] {userPassword, userEmailAddress}) %>
+						<%= LanguageUtil.format(pageContext, "thank-you-for-creating-an-account-your-password-is-x", new Object[] {userPassword, userEmailAddress}, false) %>
 					</c:otherwise>
 				</c:choose>
 			</span>
