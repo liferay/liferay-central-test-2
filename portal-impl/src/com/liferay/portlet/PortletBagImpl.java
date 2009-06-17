@@ -95,6 +95,20 @@ public class PortletBagImpl implements PortletBag {
 		_resourceBundles = resourceBundles;
 	}
 
+	public Object clone() {
+		return new PortletBagImpl(
+			getPortletName(), getServletContext(), getPortletInstance(),
+			getConfigurationActionInstance(), getIndexerInstance(),
+			getOpenSearchInstance(), getSchedulerInstance(),
+			getFriendlyURLMapperInstance(), getURLEncoderInstance(),
+			getPortletDataHandlerInstance(), getPortletLayoutListenerInstance(),
+			getPollerProcessorInstance(), getPopMessageListenerInstance(),
+			getSocialActivityInterpreterInstance(),
+			getSocialRequestInterpreterInstance(), getWebDAVStorageInstance(),
+			getControlPanelEntryInstance(), getPreferencesValidatorInstance(),
+			getResourceBundles());
+	}
+
 	public ConfigurationAction getConfigurationActionInstance() {
 		return _configurationActionInstance;
 	}
@@ -159,6 +173,10 @@ public class PortletBagImpl implements PortletBag {
 		return resourceBundle;
 	}
 
+	public Map<String, ResourceBundle> getResourceBundles() {
+		return _resourceBundles;
+	}
+
 	public Scheduler getSchedulerInstance() {
 		return _schedulerInstance;
 	}
@@ -183,8 +201,12 @@ public class PortletBagImpl implements PortletBag {
 		return _webDAVStorageInstance;
 	}
 
-	public void removePortletInstance() {
-		_portletInstance = null;
+	public void setPortletInstance(Portlet portletInstance) {
+		_portletInstance = portletInstance;
+	}
+
+	public void setPortletName(String portletName) {
+		_portletName = portletName;
 	}
 
 	private ConfigurationAction _configurationActionInstance;

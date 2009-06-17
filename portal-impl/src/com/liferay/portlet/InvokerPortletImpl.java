@@ -210,6 +210,10 @@ public class InvokerPortletImpl implements InvokerPortlet {
 		_destroyable = false;
 	}
 
+	public Portlet getPortlet() {
+		return _portlet;
+	}
+
 	public ClassLoader getPortletClassLoader() {
 		return (ClassLoader)_portletContextImpl.getAttribute(
 			PortletServlet.PORTLET_CLASS_LOADER);
@@ -286,10 +290,6 @@ public class InvokerPortletImpl implements InvokerPortlet {
 			_log.debug(
 				"Create root cache wrapper for " +
 					_portletContextImpl.getPortlet().getPortletId());
-		}
-
-		if (portletModel.isRemote()) {
-			return;
 		}
 
 		if (ClassUtil.isSubclass(
@@ -587,9 +587,14 @@ public class InvokerPortletImpl implements InvokerPortlet {
 		FilterChain filterChain = new FilterChainImpl(_portlet, filters);
 
 		if (_portletConfigImpl.isWARFile()) {
-			String path =
-				StringPool.SLASH + _portletConfigImpl.getPortletName() +
-					"/invoke";
+			String invokerPortletName = _portletConfigImpl.getInitParameter(
+				INIT_INVOKER_PORTLET_NAME);
+
+			if (invokerPortletName == null) {
+				invokerPortletName = _portletConfigImpl.getPortletName();
+			}
+
+			String path = StringPool.SLASH + invokerPortletName + "/invoke";
 
 			RequestDispatcher requestDispatcher =
 				_portletContextImpl.getServletContext().getRequestDispatcher(

@@ -145,6 +145,10 @@ public class MonitoringPortlet implements InvokerPortlet {
 		return _invokerPortlet.getExpCache();
 	}
 
+	public Portlet getPortlet() {
+		return _invokerPortlet.getPortlet();
+	}
+
 	public ClassLoader getPortletClassLoader() {
 		return _invokerPortlet.getPortletClassLoader();
 	}

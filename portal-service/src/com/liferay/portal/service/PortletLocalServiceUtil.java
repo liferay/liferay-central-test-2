@@ -120,6 +120,11 @@ public class PortletLocalServiceUtil {
 		return getService().getEARDisplay(xml);
 	}
 
+	public static com.liferay.portal.model.PortletApp getPortletApp(
+		java.lang.String servletContextName) {
+		return getService().getPortletApp(servletContextName);
+	}
+
 	public static com.liferay.portal.model.PortletCategory getWARDisplay(
 		java.lang.String servletContextName, java.lang.String xml)
 		throws com.liferay.portal.SystemException {

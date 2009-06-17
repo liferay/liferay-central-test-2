@@ -106,6 +106,10 @@ public interface PortletLocalService {
 		java.lang.String xml) throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portal.model.PortletApp getPortletApp(
+		java.lang.String servletContextName);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.PortletCategory getWARDisplay(
 		java.lang.String servletContextName, java.lang.String xml)
 		throws com.liferay.portal.SystemException;

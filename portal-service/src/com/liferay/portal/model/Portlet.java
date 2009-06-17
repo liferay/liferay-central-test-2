@@ -477,27 +477,6 @@ public interface Portlet extends PortletModel {
 	public void setPublicRenderParameters(
 		java.util.Set<com.liferay.portal.model.PublicRenderParameter> publicRenderParameters);
 
-	public boolean isRemote();
-
-	public void setRemote(boolean remote);
-
-	public java.lang.String getRemoteConsumerId();
-
-	public void setRemoteConsumerId(java.lang.String remoteConsumerId);
-
-	public java.lang.String getRemoteProducerEntityId();
-
-	public void setRemoteProducerEntityId(
-		java.lang.String remoteProducerEntityId);
-
-	public java.lang.String getRemotePortletHandle();
-
-	public void setRemotePortletHandle(java.lang.String remotePortletHandle);
-
-	public java.lang.String getRemotePortletId();
-
-	public void setRemotePortletId(java.lang.String remotePortletId);
-
 	public java.lang.String getContextPath();
 
 	public com.liferay.portal.model.PortletApp getPortletApp();

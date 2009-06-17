@@ -83,7 +83,7 @@ public class PortletInstanceFactoryImpl implements PortletInstanceFactory {
 				portlet.getRootPortletId());
 
 			if (portletBag != null) {
-				portletBag.removePortletInstance();
+				portletBag.setPortletInstance(null);
 			}
 		}
 	}
@@ -208,7 +208,7 @@ public class PortletInstanceFactoryImpl implements PortletInstanceFactory {
 		InvokerPortlet invokerPortlet = null;
 
 		try {
-			if ((portletInstance == null) && !portlet.isRemote()) {
+			if (portletInstance == null) {
 				portletInstance =
 					(javax.portlet.Portlet)Class.forName(
 						portlet.getPortletClass()).newInstance();

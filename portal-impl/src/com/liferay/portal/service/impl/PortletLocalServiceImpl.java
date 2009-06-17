@@ -97,10 +97,6 @@ import javax.servlet.ServletContext;
 public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 	public Portlet deployRemotePortlet(Portlet portlet) {
-		PortletApp portletApp = _getPortletApp(StringPool.BLANK);
-
-		portlet.setPortletApp(portletApp);
-
 		Map<String, Portlet> portletsPool = _getPortletsPool();
 
 		portletsPool.put(portlet.getPortletId(), portlet);
@@ -155,6 +151,10 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		catch (Exception e) {
 			throw new SystemException(e);
 		}
+	}
+
+	public PortletApp getPortletApp(String servletContextName) {
+		return _getPortletApp(servletContextName);
 	}
 
 	public PortletCategory getWARDisplay(String servletContextName, String xml)
@@ -260,7 +260,9 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 				portlet.setTimestamp(System.currentTimeMillis());
 
-				portlet.setPortletApp(_getPortletApp(StringPool.BLANK));
+				PortletApp portletApp = _getPortletApp(StringPool.BLANK);
+
+				portlet.setPortletApp(portletApp);
 
 				portlet.setPortletName(portletId);
 				portlet.setDisplayName(portletId);
@@ -843,12 +845,6 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 		while (itr.hasNext()) {
 			Portlet portlet = itr.next();
-
-			if (portlet.isRemote()) {
-				_readRemoteDisplay(portlet, portletCategory);
-
-				continue;
-			}
 
 			String portletId = portlet.getPortletId();
 
@@ -1686,25 +1682,6 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		}
 
 		return portletIds;
-	}
-
-	private void _readRemoteDisplay(
-		Portlet remotePortlet, PortletCategory portletCategory) {
-
-		PortletCategory newPortletCategory = new PortletCategory();
-
-		PortletCategory wsrpCategory = portletCategory.getCategory(
-			_WSRP_CATEGORY);
-
-		if (wsrpCategory == null) {
-			wsrpCategory = new PortletCategory(_WSRP_CATEGORY);
-
-			newPortletCategory.addCategory(wsrpCategory);
-		}
-
-		wsrpCategory.getPortletIds().add(remotePortlet.getPortletId());
-
-		portletCategory.merge(newPortletCategory);
 	}
 
 	private List<String> _readWebXML(String xml) throws Exception {

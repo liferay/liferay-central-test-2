@@ -38,6 +38,9 @@ import javax.portlet.ResourceServingPortlet;
 public interface InvokerPortlet
 	extends Cloneable, EventPortlet, Portlet, ResourceServingPortlet {
 
+	public static final String INIT_INVOKER_PORTLET_NAME =
+		"com.liferay.portal.invokerPortletName";
+
 	public InvokerPortlet create(
 			com.liferay.portal.model.Portlet portletModel, Portlet portlet,
 			PortletContext portletContext)
@@ -51,6 +54,8 @@ public interface InvokerPortlet
 		throws PortletException;
 
 	public ClassLoader getPortletClassLoader();
+
+	public Portlet getPortlet();
 
 	public PortletConfig getPortletConfig();
 

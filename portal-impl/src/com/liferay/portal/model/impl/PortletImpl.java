@@ -158,9 +158,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		String resourceBundle, PortletInfo portletInfo,
 		Map<String, PortletFilter> portletFilters, Set<QName> processingEvents,
 		Set<QName> publishingEvents,
-		Set<PublicRenderParameter> publicRenderParameters, boolean remote,
-		String remoteConsumerId, String remoteProducerEntityId,
-		String remotePortletHandle, String remotePortletId,
+		Set<PublicRenderParameter> publicRenderParameters,
 		PortletApp portletApp) {
 
 		setPortletId(portletId);
@@ -241,11 +239,6 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		setProcessingEvents(processingEvents);
 		setPublishingEvents(publishingEvents);
 		setPublicRenderParameters(publicRenderParameters);
-		_remote = remote;
-		_remoteConsumerId = remoteConsumerId;
-		_remoteProducerEntityId = remoteProducerEntityId;
-		_remotePortletHandle = remotePortletHandle;
-		_remotePortletId = remotePortletId;
 		_portletApp = portletApp;
 
 		if (_instanceable) {
@@ -2553,97 +2546,6 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Returns true if the portlet is a remote portlet.
-	 *
-	 * @return		true if the portlet is a remote portlet
-	 */
-	public boolean isRemote() {
-		return _remote;
-	}
-
-	/**
-	 * Set to true if the portlet is a remote portlet.
-	 *
-	 * @param		remote boolean value for the portlet is a remote portlet
-	 */
-	public void setRemote(boolean remote) {
-		_remote = remote;
-	}
-
-	/**
-	 * Gets the remote consumer id of the portlet.
-	 *
-	 * @return		the remote consumer id of the portlet
-	 */
-	public String getRemoteConsumerId() {
-		return _remoteConsumerId;
-	}
-
-	/**
-	 * Sets the remote consumer id of the portlet.
-	 *
-	 * @param		remoteConsumerId the remote consumer id of the portlet
-	 */
-	public void setRemoteConsumerId(String remoteConsumerId) {
-		_remoteConsumerId = remoteConsumerId;
-	}
-
-	/**
-	 * Gets the remote producer entity id of the portlet.
-	 *
-	 * @return		the remote producer entity id of the portlet
-	 */
-	public String getRemoteProducerEntityId() {
-		return _remoteProducerEntityId;
-	}
-
-	/**
-	 * Sets the remote producer entity id of the portlet.
-	 *
-	 * @param		remoteProducerEntityId the remote producer entity id of the
-	 *				portlet
-	 */
-	public void setRemoteProducerEntityId(String remoteProducerEntityId) {
-		_remoteProducerEntityId = remoteProducerEntityId;
-	}
-
-	/**
-	 * Gets the remote portlet handle of the portlet.
-	 *
-	 * @return		the remote portlet handle of the portlet
-	 */
-	public String getRemotePortletHandle() {
-		return _remotePortletHandle;
-	}
-
-	/**
-	 * Sets the remote portlet handle of the portlet.
-	 *
-	 * @param		remotePortletHandle the remote portlet handle of the portlet
-	 */
-	public void setRemotePortletHandle(String remotePortletHandle) {
-		_remotePortletHandle = remotePortletHandle;
-	}
-
-	/**
-	 * Gets the remote portlet id of the portlet.
-	 *
-	 * @return		the remote portlet id of the portlet
-	 */
-	public String getRemotePortletId() {
-		return _remotePortletId;
-	}
-
-	/**
-	 * Sets the remote portlet id of the portlet.
-	 *
-	 * @param		remotePortletId the remote portlet id of the portlet
-	 */
-	public void setRemotePortletId(String remotePortletId) {
-		_remotePortletId = remotePortletId;
-	}
-
-	/**
 	 * Gets the servlet context path of the portlet.
 	 *
 	 * @return		the servlet context path of the portlet
@@ -2872,9 +2774,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 			isInclude(), getInitParams(), getExpCache(), getPortletModes(),
 			getSupportedLocales(), getResourceBundle(), getPortletInfo(),
 			getPortletFilters(), getProcessingEvents(), getPublishingEvents(),
-			getPublicRenderParameters(), isRemote(), getRemoteConsumerId(),
-			getRemoteProducerEntityId(), getRemotePortletHandle(),
-			getRemotePortletId(), getPortletApp());
+			getPublicRenderParameters(), getPortletApp());
 
 		portlet.setId(getId());
 
@@ -3326,31 +3226,6 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	private Map<String, PublicRenderParameter>
 		_publicRenderParametersByQName =
 			new HashMap<String, PublicRenderParameter>();
-
-	/**
-	 * True if the portlet is a remote portlet.
-	 */
-	private boolean _remote = false;
-
-	/**
-	 * The remote consumer id of the portlet.
-	 */
-	private String _remoteConsumerId;
-
-	/**
-	 * The remote producer entity id of the portlet.
-	 */
-	private String _remoteProducerEntityId;
-
-	/**
-	 * The remote portlet handle of the portlet.
-	 */
-	private String _remotePortletHandle;
-
-	/**
-	 * The remote portlet id of the portlet.
-	 */
-	private String _remotePortletId;
 
 	/**
 	 * The application this portlet belongs to.

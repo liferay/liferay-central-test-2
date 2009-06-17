@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.search.OpenSearch;
 import com.liferay.portal.kernel.servlet.URLEncoder;
 
 import java.util.Locale;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 import javax.portlet.Portlet;
@@ -43,7 +44,9 @@ import javax.servlet.ServletContext;
  * @author Brian Wing Shun Chan
  *
  */
-public interface PortletBag {
+public interface PortletBag extends Cloneable {
+
+	public Object clone();
 
 	public ConfigurationAction getConfigurationActionInstance();
 
@@ -67,12 +70,16 @@ public interface PortletBag {
 
 	public ResourceBundle getResourceBundle(Locale locale);
 
+	public Map<String, ResourceBundle> getResourceBundles();
+
 	public Scheduler getSchedulerInstance();
 
 	public ServletContext getServletContext();
 
 	public URLEncoder getURLEncoderInstance();
 
-	public void removePortletInstance();
+	public void setPortletInstance(Portlet portletInstance);
+
+	public void setPortletName(String portletName);
 
 }
