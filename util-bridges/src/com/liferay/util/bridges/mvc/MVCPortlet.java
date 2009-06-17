@@ -26,9 +26,12 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.LiferayPortlet;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.util.PortalUtil;
 
 import java.io.IOException;
 
+import javax.portlet.ActionRequest;
+import javax.portlet.ActionResponse;
 import javax.portlet.PortletException;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletRequestDispatcher;
@@ -59,6 +62,8 @@ public class MVCPortlet extends LiferayPortlet {
 
 		clearRequestParameters = GetterUtil.getBoolean(
 			getInitParameter("clear-request-parameters"));
+		copyRequestParameters = GetterUtil.getBoolean(
+			getInitParameter("copy-request-parameters"));
 	}
 
 	public void doAbout(
@@ -139,6 +144,17 @@ public class MVCPortlet extends LiferayPortlet {
 		include(viewJSP, renderRequest, renderResponse);
 	}
 
+	public void processAction(
+			ActionRequest actionRequest, ActionResponse actionResponse)
+		throws IOException, PortletException {
+
+		super.processAction(actionRequest, actionResponse);
+
+		if (copyRequestParameters) {
+			PortalUtil.copyRequestParameters(actionRequest, actionResponse);
+		}
+	}
+
 	public void serveResource(
 			ResourceRequest resourceRequest, ResourceResponse resourceResponse)
 		throws IOException, PortletException {
@@ -210,6 +226,7 @@ public class MVCPortlet extends LiferayPortlet {
 	protected String printJSP;
 	protected String viewJSP;
 	protected boolean clearRequestParameters;
+	protected boolean copyRequestParameters;
 
 	private static Log _log = LogFactoryUtil.getLog(MVCPortlet.class);
 
