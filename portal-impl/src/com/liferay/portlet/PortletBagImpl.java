@@ -56,7 +56,7 @@ import javax.servlet.ServletContext;
 public class PortletBagImpl implements PortletBag {
 
 	public PortletBagImpl(
-		String portletName, ServletContext	servletContext,
+		String portletName, ServletContext servletContext,
 		Portlet portletInstance,
 		ConfigurationAction configurationActionInstance,
 		Indexer indexerInstance, OpenSearch openSearchInstance,
