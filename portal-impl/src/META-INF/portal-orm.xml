@@ -573,11 +573,6 @@
 			<transient name="processingEvents" />
 			<transient name="publicRenderParameters" />
 			<transient name="publishingEvents" />
-			<transient name="remote" />
-			<transient name="remoteConsumerId" />
-			<transient name="remotePortletHandle" />
-			<transient name="remotePortletId" />
-			<transient name="remoteProducerEntityId" />
 			<transient name="renderWeight" />
 			<transient name="resourceBundle" />
 			<transient name="restoreCurrentView" />
