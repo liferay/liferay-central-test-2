@@ -53,9 +53,9 @@ public interface InvokerPortlet
 			boolean strutsBridgePortlet)
 		throws PortletException;
 
-	public ClassLoader getPortletClassLoader();
-
 	public Portlet getPortlet();
+
+	public ClassLoader getPortletClassLoader();
 
 	public PortletConfig getPortletConfig();
 
