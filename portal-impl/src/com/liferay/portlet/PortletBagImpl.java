@@ -95,24 +95,16 @@ public class PortletBagImpl implements PortletBag {
 		_resourceBundles = resourceBundles;
 	}
 
-	public String getPortletName() {
-		return _portletName;
-	}
-
-	public ServletContext getServletContext() {
-		return _servletContext;
-	}
-
-	public Portlet getPortletInstance() {
-		return _portletInstance;
-	}
-
-	public void removePortletInstance() {
-		_portletInstance = null;
-	}
-
 	public ConfigurationAction getConfigurationActionInstance() {
 		return _configurationActionInstance;
+	}
+
+	public ControlPanelEntry getControlPanelEntryInstance() {
+		return _controlPanelEntryInstance;
+	}
+
+	public FriendlyURLMapper getFriendlyURLMapperInstance() {
+		return _friendlyURLMapperInstance;
 	}
 
 	public Indexer getIndexerInstance() {
@@ -123,26 +115,6 @@ public class PortletBagImpl implements PortletBag {
 		return _openSearchInstance;
 	}
 
-	public Scheduler getSchedulerInstance() {
-		return _schedulerInstance;
-	}
-
-	public FriendlyURLMapper getFriendlyURLMapperInstance() {
-		return _friendlyURLMapperInstance;
-	}
-
-	public URLEncoder getURLEncoderInstance() {
-		return _urlEncoderInstance;
-	}
-
-	public PortletDataHandler getPortletDataHandlerInstance() {
-		return _portletDataHandlerInstance;
-	}
-
-	public PortletLayoutListener getPortletLayoutListenerInstance() {
-		return _portletLayoutListenerInstance;
-	}
-
 	public PollerProcessor getPollerProcessorInstance() {
 		return _pollerProcessorInstance;
 	}
@@ -151,20 +123,20 @@ public class PortletBagImpl implements PortletBag {
 		return _popMessageListenerInstance;
 	}
 
-	public SocialActivityInterpreter getSocialActivityInterpreterInstance() {
-		return _socialActivityInterpreterInstance;
+	public PortletDataHandler getPortletDataHandlerInstance() {
+		return _portletDataHandlerInstance;
 	}
 
-	public SocialRequestInterpreter getSocialRequestInterpreterInstance() {
-		return _socialRequestInterpreterInstance;
+	public Portlet getPortletInstance() {
+		return _portletInstance;
 	}
 
-	public WebDAVStorage getWebDAVStorageInstance() {
-		return _webDAVStorageInstance;
+	public PortletLayoutListener getPortletLayoutListenerInstance() {
+		return _portletLayoutListenerInstance;
 	}
 
-	public ControlPanelEntry getControlPanelEntryInstance() {
-		return _controlPanelEntryInstance;
+	public String getPortletName() {
+		return _portletName;
 	}
 
 	public PreferencesValidator getPreferencesValidatorInstance() {
@@ -187,24 +159,52 @@ public class PortletBagImpl implements PortletBag {
 		return resourceBundle;
 	}
 
-	private String _portletName;
-	private ServletContext _servletContext;
-	private Portlet _portletInstance;
+	public Scheduler getSchedulerInstance() {
+		return _schedulerInstance;
+	}
+
+	public ServletContext getServletContext() {
+		return _servletContext;
+	}
+
+	public SocialActivityInterpreter getSocialActivityInterpreterInstance() {
+		return _socialActivityInterpreterInstance;
+	}
+
+	public SocialRequestInterpreter getSocialRequestInterpreterInstance() {
+		return _socialRequestInterpreterInstance;
+	}
+
+	public URLEncoder getURLEncoderInstance() {
+		return _urlEncoderInstance;
+	}
+
+	public WebDAVStorage getWebDAVStorageInstance() {
+		return _webDAVStorageInstance;
+	}
+
+	public void removePortletInstance() {
+		_portletInstance = null;
+	}
+
 	private ConfigurationAction _configurationActionInstance;
+	private ControlPanelEntry _controlPanelEntryInstance;
+	private FriendlyURLMapper _friendlyURLMapperInstance;
 	private Indexer _indexerInstance;
 	private OpenSearch _openSearchInstance;
-	private Scheduler _schedulerInstance;
-	private FriendlyURLMapper _friendlyURLMapperInstance;
-	private URLEncoder _urlEncoderInstance;
-	private PortletDataHandler _portletDataHandlerInstance;
-	private PortletLayoutListener _portletLayoutListenerInstance;
 	private PollerProcessor _pollerProcessorInstance;
 	private MessageListener _popMessageListenerInstance;
-	private SocialActivityInterpreter _socialActivityInterpreterInstance;
-	private SocialRequestInterpreter _socialRequestInterpreterInstance;
-	private WebDAVStorage _webDAVStorageInstance;
-	private ControlPanelEntry _controlPanelEntryInstance;
+	private PortletDataHandler _portletDataHandlerInstance;
+	private Portlet _portletInstance;
+	private PortletLayoutListener _portletLayoutListenerInstance;
+	private String _portletName;
 	private PreferencesValidator _preferencesValidatorInstance;
 	private Map<String, ResourceBundle> _resourceBundles;
+	private Scheduler _schedulerInstance;
+	private ServletContext _servletContext;
+	private SocialActivityInterpreter _socialActivityInterpreterInstance;
+	private SocialRequestInterpreter _socialRequestInterpreterInstance;
+	private URLEncoder _urlEncoderInstance;
+	private WebDAVStorage _webDAVStorageInstance;
 
 }

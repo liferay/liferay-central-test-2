@@ -45,34 +45,34 @@ import javax.servlet.ServletContext;
  */
 public interface PortletBag {
 
-	public String getPortletName();
-
-	public ServletContext getServletContext();
-
-	public Portlet getPortletInstance();
-
-	public void removePortletInstance();
-
 	public ConfigurationAction getConfigurationActionInstance();
+
+	public FriendlyURLMapper getFriendlyURLMapperInstance();
 
 	public Indexer getIndexerInstance();
 
 	public OpenSearch getOpenSearchInstance();
 
-	public Scheduler getSchedulerInstance();
-
-	public FriendlyURLMapper getFriendlyURLMapperInstance();
-
-	public URLEncoder getURLEncoderInstance();
-
-	public PortletLayoutListener getPortletLayoutListenerInstance();
-
 	public PollerProcessor getPollerProcessorInstance();
 
 	public MessageListener getPopMessageListenerInstance();
 
+	public Portlet getPortletInstance();
+
+	public PortletLayoutListener getPortletLayoutListenerInstance();
+
+	public String getPortletName();
+
 	public PreferencesValidator getPreferencesValidatorInstance();
 
 	public ResourceBundle getResourceBundle(Locale locale);
+
+	public Scheduler getSchedulerInstance();
+
+	public ServletContext getServletContext();
+
+	public URLEncoder getURLEncoderInstance();
+
+	public void removePortletInstance();
 
 }
