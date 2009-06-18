@@ -1545,8 +1545,8 @@ fieldset:last-child, .exp-form fieldset:last-child {
 
 .taglib-input-localized .lfr-form-row:hover, .lfr-language-selector .lfr-form-row:hover {
 	background-color: #DFFCCB;
-	border-bottom: 1px solid #B2FF3A;
-	border-top: 1px solid #B2FF3A;
+	border: solid #B2FF3A;
+	border-width: 1px 0;
 	padding-top: 0;
 }
 
@@ -1557,11 +1557,6 @@ fieldset:last-child, .exp-form fieldset:last-child {
 
 .taglib-input-localized .exp-form fieldset.exp-form-column, .lfr-language-selector .exp-form .exp-form-column {
 	margin-right: 10px;
-	width: auto;
-}
-
-.taglib-input-localized #addresses .exp-ctrl-holder {
-	float: none;
 	width: auto;
 }
 
