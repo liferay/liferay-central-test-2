@@ -30,8 +30,7 @@ import com.liferay.portal.monitoring.statistics.portlet.ServerStatistics;
 import java.util.Set;
 
 /**
- * <a href="PortletManager.java.html"><b><i>View
- * Source</i></b></a>
+ * <a href="PortletManager.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael C. Han
  * @author Brian Wing Shun Chan
