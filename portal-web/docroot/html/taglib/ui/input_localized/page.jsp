@@ -25,17 +25,17 @@
 <%@ include file="/html/taglib/init.jsp" %>
 
 <%
+String randomNamespace = PwdGenerator.getPassword(PwdGenerator.KEY3, 4);
+
 String name = (String)request.getAttribute("liferay-ui:input-localized:name");
 String xml = (String)request.getAttribute("liferay-ui:input-localized:xml");
 String type = (String)request.getAttribute("liferay-ui:input-localized:type");
-
-String randomNamespace = PwdGenerator.getPassword(PwdGenerator.KEY3, 4);
 
 Locale defaultLocale = LocaleUtil.getDefault();
 String defaultLanguageId = LocaleUtil.toLanguageId(defaultLocale);
 Locale[] locales = LanguageUtil.getAvailableLocales();
 
-String defaultLanguageValue = ParamUtil.get(request, name + StringPool.UNDERLINE + defaultLanguageId, LocalizationUtil.getLocalization(xml, defaultLanguageId));
+String defaultLanguageValue = ParamUtil.getString(request, name + StringPool.UNDERLINE + defaultLanguageId, LocalizationUtil.getLocalization(xml, defaultLanguageId));
 
 if (Validator.isNull(defaultLanguageValue) && request.getParameter(name + StringPool.UNDERLINE + defaultLanguageId) == null) {
 	defaultLanguageValue = xml;
@@ -43,12 +43,11 @@ if (Validator.isNull(defaultLanguageValue) && request.getParameter(name + String
 %>
 
 <div class="taglib-input-localized">
-
 	<c:choose>
-		<c:when test='<%= type.equals ("input") %>'>
+		<c:when test='<%= type.equals("input") %>'>
 			<input id="<portlet:namespace /><%= name + StringPool.UNDERLINE + defaultLanguageId %>" name="<portlet:namespace /><%= name + StringPool.UNDERLINE + defaultLanguageId %>" type="text" value="<%= HtmlUtil.escape(defaultLanguageValue) %>" />
 		</c:when>
-		<c:when test='<%= type.equals ("textarea") %>'>
+		<c:when test='<%= type.equals("textarea") %>'>
 			<textarea id="<portlet:namespace /><%= name + StringPool.UNDERLINE + defaultLanguageId %>" name="<portlet:namespace /><%= name + StringPool.UNDERLINE + defaultLanguageId %>"><%= HtmlUtil.escape(defaultLanguageValue) %></textarea>
 		</c:when>
 	</c:choose>
@@ -133,7 +132,7 @@ if (Validator.isNull(defaultLanguageValue) && request.getParameter(name + String
 							<div class="exp-ctrl-holder exp-form-column">
 
 								<%
-								String languageValue = ParamUtil.get(request, name + StringPool.UNDERLINE + curLanguageId, StringPool.BLANK);
+								String languageValue = ParamUtil.getString(request, name + StringPool.UNDERLINE + curLanguageId);
 
 								if (Validator.isNotNull(xml) && Validator.isNull(languageValue)) {
 									languageValue = LocalizationUtil.getLocalization(xml, curLanguageId, false);
@@ -141,14 +140,13 @@ if (Validator.isNull(defaultLanguageValue) && request.getParameter(name + String
 								%>
 
 								<c:choose>
-									<c:when test='<%= type.equals ("input") %>'>
+									<c:when test='<%= type.equals("input") %>'>
 										<input class="language-value" name="<portlet:namespace /><%= name + StringPool.UNDERLINE + curLanguageId %>" type="text" value="<%= HtmlUtil.escape(languageValue) %>" />
 									</c:when>
-									<c:when test='<%= type.equals ("textarea") %>'>
+									<c:when test='<%= type.equals("textarea") %>'>
 										<textarea class="language-value" name="<portlet:namespace /><%= name + StringPool.UNDERLINE + curLanguageId %>"><%= HtmlUtil.escape(languageValue) %></textarea>
 									</c:when>
 								</c:choose>
-
 							</div>
 						</div>
 					</div>
@@ -163,61 +161,61 @@ if (Validator.isNull(defaultLanguageValue) && request.getParameter(name + String
 </div>
 
 <script type="text/javascript">
-jQuery(
-	function () {
-		new Liferay.AutoFields(
-			{
-				container: '#<%= randomNamespace %>languageSelector .lfr-panel-content',
-				baseRows: '#<%= randomNamespace %>languageSelector .lfr-form-row'
-			}
-		);
-
-		var panel = new Liferay.PanelFloating(
-			{
-				container: '#<%= randomNamespace %>languageSelector',
-				trigger: '#<%= randomNamespace %>languageSelectorTrigger',
-				width: 500,
-				isCollapsible: false
-			}
-		);
-
-		panel.bind(
-			'hide',
-			function(event) {
-				var instance = this;
-
-				var container = instance.get('container');
-
-				jQuery(document.<portlet:namespace />fm).append(container);
-			}
-		);
-
-		jQuery('#<%= randomNamespace %>languageSelector select').change(
-			function(event) {
-				var selectedOption = this[this.selectedIndex];
-				var selectedValue = selectedOption.value;
-
-				var newName = '<portlet:namespace /><%= name %>_';
-
-				var currentRow = jQuery(this).parents('.lfr-form-row:first');
-
-				var img = currentRow.find('img.language-flag');
-				var imgSrc = 'spacer';
-
-				if (selectedValue) {
-					newName ='<portlet:namespace /><%= name %>_' + selectedValue;
-
-					imgSrc = 'language/' + selectedValue;
+	jQuery(
+		function () {
+			new Liferay.AutoFields(
+				{
+					container: '#<%= randomNamespace %>languageSelector .lfr-panel-content',
+					baseRows: '#<%= randomNamespace %>languageSelector .lfr-form-row'
 				}
+			);
 
-				var inputField = currentRow.find('.language-value');
+			var panel = new Liferay.PanelFloating(
+				{
+					container: '#<%= randomNamespace %>languageSelector',
+					trigger: '#<%= randomNamespace %>languageSelectorTrigger',
+					width: 500,
+					isCollapsible: false
+				}
+			);
 
-				inputField.attr('name', newName);
-				inputField.attr('id', newName);
+			panel.bind(
+				'hide',
+				function(event) {
+					var instance = this;
 
-				img.attr('src', '<%= themeDisplay.getPathThemeImages() %>/' + imgSrc + '.png');
-			}
-		);
-	}
-);
+					var container = instance.get('container');
+
+					jQuery(document.<portlet:namespace />fm).append(container);
+				}
+			);
+
+			jQuery('#<%= randomNamespace %>languageSelector select').change(
+				function(event) {
+					var selectedOption = this[this.selectedIndex];
+					var selectedValue = selectedOption.value;
+
+					var newName = '<portlet:namespace /><%= name %>_';
+
+					var currentRow = jQuery(this).parents('.lfr-form-row:first');
+
+					var img = currentRow.find('img.language-flag');
+					var imgSrc = 'spacer';
+
+					if (selectedValue) {
+						newName ='<portlet:namespace /><%= name %>_' + selectedValue;
+
+						imgSrc = 'language/' + selectedValue;
+					}
+
+					var inputField = currentRow.find('.language-value');
+
+					inputField.attr('name', newName);
+					inputField.attr('id', newName);
+
+					img.attr('src', '<%= themeDisplay.getPathThemeImages() %>/' + imgSrc + '.png');
+				}
+			);
+		}
+	);
 </script>
