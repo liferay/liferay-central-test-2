@@ -58,7 +58,7 @@ public class MonitoringFilter extends BasePortalFilter {
 	}
 
 	protected boolean isFilterEnabled() {
-		DataSampleThreadLocal.clear();
+		DataSampleThreadLocal.clearDataSamples();
 
 		if (!super.isFilterEnabled()) {
 			return false;
@@ -108,7 +108,7 @@ public class MonitoringFilter extends BasePortalFilter {
 			MessageBusUtil.sendMessage(
 				DestinationNames.MONITORING, portalRequestDataSample);
 
-			DataSampleThreadLocal.add(portalRequestDataSample);
+			DataSampleThreadLocal.addDataSample(portalRequestDataSample);
 		}
 	}
 

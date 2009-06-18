@@ -36,26 +36,26 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  *
  */
-public class DataSampleThreadLocal {
+public class DataSampleThreadLocal implements Cloneable {
 
-	public static void add(DataSample dataSample) {
+	public static void addDataSample(DataSample dataSample) {
 		if (!_monitoringDataSampleThreadLocal) {
 			return;
 		}
 
-		_dataSampleThreadLocal.get()._add(dataSample);
+		_dataSampleThreadLocal.get()._addDataSample(dataSample);
 	}
 
-	public static void clear() {
+	public static void clearDataSamples() {
 		_dataSampleThreadLocal.remove();
 	}
 
-	public static List<DataSample> getDataSample() {
+	public static List<DataSample> getDataSamples() {
 		if (!_monitoringDataSampleThreadLocal) {
 			return Collections.EMPTY_LIST;
 		}
 
-		return _dataSampleThreadLocal.get()._getDataSample();
+		return _dataSampleThreadLocal.get()._getDataSamples();
 	}
 
 	public static boolean isMonitoringDataSampleThreadLocal() {
@@ -72,15 +72,19 @@ public class DataSampleThreadLocal {
 		return _monitorTime;
 	}
 
+	public Object clone() throws CloneNotSupportedException {
+		return new DataSampleThreadLocal();
+	}
+
 	private DataSampleThreadLocal() {
 		_monitorTime = System.currentTimeMillis();
 	}
 
-	private void _add(DataSample DataSample) {
-		_dataSamples.add(DataSample);
+	private void _addDataSample(DataSample dataSample) {
+		_dataSamples.add(dataSample);
 	}
 
-	private List<DataSample> _getDataSample() {
+	private List<DataSample> _getDataSamples() {
 		return _dataSamples;
 	}
 

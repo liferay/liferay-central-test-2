@@ -233,7 +233,7 @@ public class MonitoringPortlet implements InvokerPortlet {
 			if (portletRequestDataSample != null) {
 				_singleDestinationMessageSender.send(portletRequestDataSample);
 
-				DataSampleThreadLocal.add(portletRequestDataSample);
+				DataSampleThreadLocal.addDataSample(portletRequestDataSample);
 			}
 		}
 	}
@@ -266,7 +266,7 @@ public class MonitoringPortlet implements InvokerPortlet {
 			if (portletRequestDataSample != null) {
 				_singleDestinationMessageSender.send(portletRequestDataSample);
 
-				DataSampleThreadLocal.add(portletRequestDataSample);
+				DataSampleThreadLocal.addDataSample(portletRequestDataSample);
 			}
 		}
 	}
@@ -299,7 +299,7 @@ public class MonitoringPortlet implements InvokerPortlet {
 			if (portletRequestDataSample != null) {
 				_singleDestinationMessageSender.send(portletRequestDataSample);
 
-				DataSampleThreadLocal.add(portletRequestDataSample);
+				DataSampleThreadLocal.addDataSample(portletRequestDataSample);
 			}
 		}
 	}
@@ -333,7 +333,7 @@ public class MonitoringPortlet implements InvokerPortlet {
 			if (portletRequestDataSample != null) {
 				_singleDestinationMessageSender.send(portletRequestDataSample);
 
-				DataSampleThreadLocal.add(portletRequestDataSample);
+				DataSampleThreadLocal.addDataSample(portletRequestDataSample);
 			}
 		}
 	}
