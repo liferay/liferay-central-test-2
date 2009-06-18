@@ -68,12 +68,12 @@ public class DataSampleThreadLocal implements Cloneable {
 		_monitoringDataSampleThreadLocal = monitoringDataSampleThreadLocal;
 	}
 
-	public long getMonitorTime() {
-		return _monitorTime;
+	public Object clone() {
+		return new DataSampleThreadLocal();
 	}
 
-	public Object clone() throws CloneNotSupportedException {
-		return new DataSampleThreadLocal();
+	public long getMonitorTime() {
+		return _monitorTime;
 	}
 
 	private DataSampleThreadLocal() {
