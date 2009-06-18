@@ -1115,7 +1115,12 @@ public class ServicePreAction extends Action {
 					user, layout.getGroupId(), layout.isPrivateLayout(),
 					layout.getLayoutId(), permissionChecker);
 
-				if (!isViewableCommunity) {
+				if (!isViewableCommunity &&
+					layout.getGroup().isStagingGroup()) {
+
+					layout = null;
+				}
+				else if (!isViewableCommunity) {
 					StringBuilder sb = new StringBuilder();
 
 					sb.append("User ");
