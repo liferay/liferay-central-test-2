@@ -29,14 +29,14 @@ package com.liferay.portal.service.persistence;
  *
  */
 public interface OrganizationFinder {
-	public int countByO_U(long organizationId, long userId)
-		throws com.liferay.portal.SystemException;
-
 	public int countByKeywords(long companyId, long parentOrganizationId,
 		java.lang.String parentOrganizationIdComparator,
 		java.lang.String keywords, java.lang.String type,
 		java.lang.Long regionId, java.lang.Long countryId,
 		java.util.LinkedHashMap<String, Object> params)
+		throws com.liferay.portal.SystemException;
+
+	public int countByO_U(long organizationId, long userId)
 		throws com.liferay.portal.SystemException;
 
 	public int countByC_PO_N_T_S_C_Z_R_C(long companyId,

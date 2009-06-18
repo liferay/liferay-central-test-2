@@ -75,7 +75,7 @@ public class OrganizationFinderImpl
 	public static String JOIN_BY_ORGANIZATIONS_GROUPS =
 		OrganizationFinder.class.getName() + ".joinByOrganizationsGroups";
 
-	public static String JOIN_BY_ORGANIZATIONS_USERGROUPS =
+	public static String JOIN_BY_ORGANIZATIONS_USER_GROUPS =
 		OrganizationFinder.class.getName() + ".joinByOrganizationsUserGroups";
 
 	public static String JOIN_BY_ORGANIZATIONS_PASSWORD_POLICIES =
@@ -93,6 +93,35 @@ public class OrganizationFinderImpl
 
 	public static String JOIN_BY_USERS_ORGS =
 		OrganizationFinder.class.getName() + ".joinByUsersOrgs";
+
+	public int countByKeywords(
+			long companyId, long parentOrganizationId,
+			String parentOrganizationIdComparator, String keywords,
+			String type, Long regionId, Long countryId,
+			LinkedHashMap<String, Object> params)
+		throws SystemException {
+
+		String[] names = null;
+		String[] streets = null;
+		String[] cities = null;
+		String[] zips = null;
+		boolean andOperator = false;
+
+		if (Validator.isNotNull(keywords)) {
+			names = CustomSQLUtil.keywords(keywords);
+			streets = CustomSQLUtil.keywords(keywords);
+			cities = CustomSQLUtil.keywords(keywords);
+			zips = CustomSQLUtil.keywords(keywords);
+		}
+		else {
+			andOperator = true;
+		}
+
+		return countByC_PO_N_T_S_C_Z_R_C(
+			companyId, parentOrganizationId, parentOrganizationIdComparator,
+			names, type, streets, cities, zips, regionId, countryId, params,
+			andOperator);
+	}
 
 	public int countByO_U(long organizationId, long userId)
 		throws SystemException {
@@ -127,35 +156,6 @@ public class OrganizationFinderImpl
 		finally {
 			closeSession(session);
 		}
-	}
-
-	public int countByKeywords(
-			long companyId, long parentOrganizationId,
-			String parentOrganizationIdComparator, String keywords,
-			String type, Long regionId, Long countryId,
-			LinkedHashMap<String, Object> params)
-		throws SystemException {
-
-		String[] names = null;
-		String[] streets = null;
-		String[] cities = null;
-		String[] zips = null;
-		boolean andOperator = false;
-
-		if (Validator.isNotNull(keywords)) {
-			names = CustomSQLUtil.keywords(keywords);
-			streets = CustomSQLUtil.keywords(keywords);
-			cities = CustomSQLUtil.keywords(keywords);
-			zips = CustomSQLUtil.keywords(keywords);
-		}
-		else {
-			andOperator = true;
-		}
-
-		return countByC_PO_N_T_S_C_Z_R_C(
-			companyId, parentOrganizationId, parentOrganizationIdComparator,
-			names, type, streets, cities, zips, regionId, countryId, params,
-			andOperator);
 	}
 
 	public int countByC_PO_N_T_S_C_Z_R_C(
@@ -961,7 +961,7 @@ public class OrganizationFinderImpl
 			join = CustomSQLUtil.get(JOIN_BY_ORGANIZATIONS_ROLES);
 		}
 		else if (key.equals("organizationsUserGroups")) {
-			join = CustomSQLUtil.get(JOIN_BY_ORGANIZATIONS_USERGROUPS);
+			join = CustomSQLUtil.get(JOIN_BY_ORGANIZATIONS_USER_GROUPS);
 		}
 		else if (key.equals("organizationsUsers")) {
 			join = CustomSQLUtil.get(JOIN_BY_ORGANIZATIONS_USERS);
@@ -1074,7 +1074,7 @@ public class OrganizationFinderImpl
 			}
 		}
 		else if (key.equals("organizationsUserGroups")) {
-			join = CustomSQLUtil.get(JOIN_BY_ORGANIZATIONS_USERGROUPS);
+			join = CustomSQLUtil.get(JOIN_BY_ORGANIZATIONS_USER_GROUPS);
 		}
 		else if (key.equals("organizationsUsers")) {
 			join = CustomSQLUtil.get(JOIN_BY_ORGANIZATIONS_USERS);

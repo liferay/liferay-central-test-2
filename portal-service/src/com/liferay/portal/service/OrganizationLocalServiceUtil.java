@@ -222,8 +222,9 @@ public class OrganizationLocalServiceUtil {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
-				   .hasUserOrganization(userId, organizationId, inheritSuborganizations,
-			inheritUserGroups, includeSpecifiedOrganization);
+				   .hasUserOrganization(userId, organizationId,
+			inheritSuborganizations, inheritUserGroups,
+			includeSpecifiedOrganization);
 	}
 
 	public static boolean hasPasswordPolicyOrganization(long passwordPolicyId,
