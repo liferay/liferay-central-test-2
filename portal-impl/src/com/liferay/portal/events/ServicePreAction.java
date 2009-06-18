@@ -1107,6 +1107,8 @@ public class ServicePreAction extends Action {
 
 		if (layout != null) {
 			try {
+				Group group = layout.getGroup();
+
 				if (!signedIn && PropsValues.AUTH_FORWARD_BY_REDIRECT) {
 					request.setAttribute(WebKeys.REQUESTED_LAYOUT, layout);
 				}
@@ -1115,9 +1117,7 @@ public class ServicePreAction extends Action {
 					user, layout.getGroupId(), layout.isPrivateLayout(),
 					layout.getLayoutId(), permissionChecker);
 
-				if (!isViewableCommunity &&
-					layout.getGroup().isStagingGroup()) {
-
+				if (!isViewableCommunity && group.isStagingGroup()) {
 					layout = null;
 				}
 				else if (!isViewableCommunity) {
@@ -1142,7 +1142,7 @@ public class ServicePreAction extends Action {
 
 					layout = null;
 				}
-				else if (layout.getGroup().isLayoutPrototype()) {
+				else if (group.isLayoutPrototype()) {
 					layouts = new ArrayList<Layout>();
 				}
 				else {
@@ -1150,9 +1150,7 @@ public class ServicePreAction extends Action {
 						layout.getGroupId(), layout.isPrivateLayout(),
 						LayoutConstants.DEFAULT_PARENT_LAYOUT_ID);
 
-					if (!layout.getGroup().getName().equals(
-							GroupConstants.CONTROL_PANEL)) {
-
+					if (!group.getName().equals(GroupConstants.CONTROL_PANEL)) {
 						doAsGroupId = 0;
 					}
 				}
