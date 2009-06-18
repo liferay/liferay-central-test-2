@@ -1093,6 +1093,15 @@
 			<basic name="value" />
 		</attributes>
 	</entity>
+	<entity class="com.liferay.portlet.asset.model.impl.AssetTagStatsImpl" name="AssetTagStats">
+		<table name="AssetTagStats" />
+		<attributes>
+			<id name="tagStatsId" />
+			<basic name="tagId" />
+			<basic name="classNameId" />
+			<basic name="assetCount" />
+		</attributes>
+	</entity>
 	<entity class="com.liferay.portlet.asset.model.impl.AssetVocabularyImpl" name="AssetVocabulary">
 		<table name="AssetVocabulary" />
 		<attributes>

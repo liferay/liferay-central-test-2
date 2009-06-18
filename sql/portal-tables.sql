@@ -163,6 +163,13 @@ create table AssetTagProperty (
 	value VARCHAR(255) null
 );
 
+create table AssetTagStats (
+	tagStatsId LONG not null primary key,
+	tagId LONG,
+	classNameId LONG,
+	assetCount INTEGER
+);
+
 create table AssetVocabulary (
 	vocabularyId LONG not null primary key,
 	groupId LONG,

@@ -955,6 +955,17 @@
 	<bean id="com.liferay.portlet.asset.service.persistence.AssetTagPropertyKeyFinderUtil" class="com.liferay.portlet.asset.service.persistence.AssetTagPropertyKeyFinderUtil">
 		<property name="finder" ref="com.liferay.portlet.asset.service.persistence.AssetTagPropertyKeyFinder.impl" />
 	</bean>
+	<bean id="com.liferay.portlet.asset.service.AssetTagStatsLocalService.impl" class="com.liferay.portlet.asset.service.impl.AssetTagStatsLocalServiceImpl" />
+	<bean id="com.liferay.portlet.asset.service.AssetTagStatsLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService">
+		<property name="target" ref="com.liferay.portlet.asset.service.AssetTagStatsLocalService.impl" />
+	</bean>
+	<bean id="com.liferay.portlet.asset.service.AssetTagStatsLocalServiceUtil" class="com.liferay.portlet.asset.service.AssetTagStatsLocalServiceUtil">
+		<property name="service" ref="com.liferay.portlet.asset.service.AssetTagStatsLocalService.impl" />
+	</bean>
+	<bean id="com.liferay.portlet.asset.service.persistence.AssetTagStatsPersistence.impl" class="com.liferay.portlet.asset.service.persistence.AssetTagStatsPersistenceImpl" parent="basePersistence" />
+	<bean id="com.liferay.portlet.asset.service.persistence.AssetTagStatsUtil" class="com.liferay.portlet.asset.service.persistence.AssetTagStatsUtil">
+		<property name="persistence" ref="com.liferay.portlet.asset.service.persistence.AssetTagStatsPersistence.impl" />
+	</bean>
 	<bean id="com.liferay.portlet.asset.service.AssetVocabularyLocalService.impl" class="com.liferay.portlet.asset.service.impl.AssetVocabularyLocalServiceImpl" />
 	<bean id="com.liferay.portlet.asset.service.AssetVocabularyLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService">
 		<property name="target" ref="com.liferay.portlet.asset.service.AssetVocabularyLocalService.impl" />

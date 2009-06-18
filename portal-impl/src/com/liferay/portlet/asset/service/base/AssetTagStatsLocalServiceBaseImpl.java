@@ -25,15 +25,13 @@ package com.liferay.portlet.asset.service.base;
 import com.liferay.counter.service.CounterLocalService;
 import com.liferay.counter.service.CounterService;
 
+import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
-import com.liferay.portal.service.UserLocalService;
-import com.liferay.portal.service.UserService;
-import com.liferay.portal.service.base.PrincipalBean;
-import com.liferay.portal.service.persistence.UserFinder;
-import com.liferay.portal.service.persistence.UserPersistence;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.util.PortalUtil;
 
+import com.liferay.portlet.asset.model.AssetTagStats;
 import com.liferay.portlet.asset.service.AssetCategoryLocalService;
 import com.liferay.portlet.asset.service.AssetCategoryPropertyLocalService;
 import com.liferay.portlet.asset.service.AssetCategoryPropertyService;
@@ -61,14 +59,76 @@ import com.liferay.portlet.asset.service.persistence.AssetTagPropertyPersistence
 import com.liferay.portlet.asset.service.persistence.AssetTagStatsPersistence;
 import com.liferay.portlet.asset.service.persistence.AssetVocabularyPersistence;
 
+import java.util.List;
+
 /**
- * <a href="AssetTagPropertyServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="AssetTagStatsLocalServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public abstract class AssetTagPropertyServiceBaseImpl extends PrincipalBean
-	implements AssetTagPropertyService {
+public abstract class AssetTagStatsLocalServiceBaseImpl
+	implements AssetTagStatsLocalService {
+	public AssetTagStats addAssetTagStats(AssetTagStats assetTagStats)
+		throws SystemException {
+		assetTagStats.setNew(true);
+
+		return assetTagStatsPersistence.update(assetTagStats, false);
+	}
+
+	public AssetTagStats createAssetTagStats(long tagStatsId) {
+		return assetTagStatsPersistence.create(tagStatsId);
+	}
+
+	public void deleteAssetTagStats(long tagStatsId)
+		throws PortalException, SystemException {
+		assetTagStatsPersistence.remove(tagStatsId);
+	}
+
+	public void deleteAssetTagStats(AssetTagStats assetTagStats)
+		throws SystemException {
+		assetTagStatsPersistence.remove(assetTagStats);
+	}
+
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery)
+		throws SystemException {
+		return assetTagStatsPersistence.findWithDynamicQuery(dynamicQuery);
+	}
+
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
+		int end) throws SystemException {
+		return assetTagStatsPersistence.findWithDynamicQuery(dynamicQuery,
+			start, end);
+	}
+
+	public AssetTagStats getAssetTagStats(long tagStatsId)
+		throws PortalException, SystemException {
+		return assetTagStatsPersistence.findByPrimaryKey(tagStatsId);
+	}
+
+	public List<AssetTagStats> getAssetTagStatses(int start, int end)
+		throws SystemException {
+		return assetTagStatsPersistence.findAll(start, end);
+	}
+
+	public int getAssetTagStatsesCount() throws SystemException {
+		return assetTagStatsPersistence.countAll();
+	}
+
+	public AssetTagStats updateAssetTagStats(AssetTagStats assetTagStats)
+		throws SystemException {
+		assetTagStats.setNew(false);
+
+		return assetTagStatsPersistence.update(assetTagStats, true);
+	}
+
+	public AssetTagStats updateAssetTagStats(AssetTagStats assetTagStats,
+		boolean merge) throws SystemException {
+		assetTagStats.setNew(false);
+
+		return assetTagStatsPersistence.update(assetTagStats, merge);
+	}
+
 	public AssetCategoryLocalService getAssetCategoryLocalService() {
 		return assetCategoryLocalService;
 	}
@@ -313,38 +373,6 @@ public abstract class AssetTagPropertyServiceBaseImpl extends PrincipalBean
 		this.counterService = counterService;
 	}
 
-	public UserLocalService getUserLocalService() {
-		return userLocalService;
-	}
-
-	public void setUserLocalService(UserLocalService userLocalService) {
-		this.userLocalService = userLocalService;
-	}
-
-	public UserService getUserService() {
-		return userService;
-	}
-
-	public void setUserService(UserService userService) {
-		this.userService = userService;
-	}
-
-	public UserPersistence getUserPersistence() {
-		return userPersistence;
-	}
-
-	public void setUserPersistence(UserPersistence userPersistence) {
-		this.userPersistence = userPersistence;
-	}
-
-	public UserFinder getUserFinder() {
-		return userFinder;
-	}
-
-	public void setUserFinder(UserFinder userFinder) {
-		this.userFinder = userFinder;
-	}
-
 	protected void runSQL(String sql) throws SystemException {
 		try {
 			PortalUtil.runSQL(sql);
@@ -410,12 +438,4 @@ public abstract class AssetTagPropertyServiceBaseImpl extends PrincipalBean
 	protected CounterLocalService counterLocalService;
 	@BeanReference(name = "com.liferay.counter.service.CounterService.impl")
 	protected CounterService counterService;
-	@BeanReference(name = "com.liferay.portal.service.UserLocalService.impl")
-	protected UserLocalService userLocalService;
-	@BeanReference(name = "com.liferay.portal.service.UserService.impl")
-	protected UserService userService;
-	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence.impl")
-	protected UserPersistence userPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.UserFinder.impl")
-	protected UserFinder userFinder;
 }

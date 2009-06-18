@@ -50,6 +50,7 @@ import com.liferay.portlet.asset.service.AssetTagLocalService;
 import com.liferay.portlet.asset.service.AssetTagPropertyLocalService;
 import com.liferay.portlet.asset.service.AssetTagPropertyService;
 import com.liferay.portlet.asset.service.AssetTagService;
+import com.liferay.portlet.asset.service.AssetTagStatsLocalService;
 import com.liferay.portlet.asset.service.AssetVocabularyLocalService;
 import com.liferay.portlet.asset.service.AssetVocabularyService;
 import com.liferay.portlet.asset.service.persistence.AssetCategoryFinder;
@@ -63,6 +64,7 @@ import com.liferay.portlet.asset.service.persistence.AssetTagPersistence;
 import com.liferay.portlet.asset.service.persistence.AssetTagPropertyFinder;
 import com.liferay.portlet.asset.service.persistence.AssetTagPropertyKeyFinder;
 import com.liferay.portlet.asset.service.persistence.AssetTagPropertyPersistence;
+import com.liferay.portlet.asset.service.persistence.AssetTagStatsPersistence;
 import com.liferay.portlet.asset.service.persistence.AssetVocabularyPersistence;
 
 import java.util.List;
@@ -318,6 +320,24 @@ public abstract class AssetCategoryLocalServiceBaseImpl
 		this.assetTagPropertyKeyFinder = assetTagPropertyKeyFinder;
 	}
 
+	public AssetTagStatsLocalService getAssetTagStatsLocalService() {
+		return assetTagStatsLocalService;
+	}
+
+	public void setAssetTagStatsLocalService(
+		AssetTagStatsLocalService assetTagStatsLocalService) {
+		this.assetTagStatsLocalService = assetTagStatsLocalService;
+	}
+
+	public AssetTagStatsPersistence getAssetTagStatsPersistence() {
+		return assetTagStatsPersistence;
+	}
+
+	public void setAssetTagStatsPersistence(
+		AssetTagStatsPersistence assetTagStatsPersistence) {
+		this.assetTagStatsPersistence = assetTagStatsPersistence;
+	}
+
 	public AssetVocabularyLocalService getAssetVocabularyLocalService() {
 		return assetVocabularyLocalService;
 	}
@@ -477,6 +497,10 @@ public abstract class AssetCategoryLocalServiceBaseImpl
 	protected AssetTagPropertyFinder assetTagPropertyFinder;
 	@BeanReference(name = "com.liferay.portlet.asset.service.persistence.AssetTagPropertyKeyFinder.impl")
 	protected AssetTagPropertyKeyFinder assetTagPropertyKeyFinder;
+	@BeanReference(name = "com.liferay.portlet.asset.service.AssetTagStatsLocalService.impl")
+	protected AssetTagStatsLocalService assetTagStatsLocalService;
+	@BeanReference(name = "com.liferay.portlet.asset.service.persistence.AssetTagStatsPersistence.impl")
+	protected AssetTagStatsPersistence assetTagStatsPersistence;
 	@BeanReference(name = "com.liferay.portlet.asset.service.AssetVocabularyLocalService.impl")
 	protected AssetVocabularyLocalService assetVocabularyLocalService;
 	@BeanReference(name = "com.liferay.portlet.asset.service.AssetVocabularyService.impl")
