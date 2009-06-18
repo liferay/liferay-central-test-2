@@ -30,7 +30,6 @@ String defaultValue = (String)request.getAttribute("liferay-ui:input-textarea:de
 boolean disabled = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:input-textarea:disabled"));
 
 String value = ParamUtil.getString(request, param, defaultValue);
-String maxLength = ModelHintsConstants.TEXTAREA_MAX_LENGTH;
 %>
 
-<textarea class="lfr-textarea" <%= disabled ? "disabled" : "" %> id="<%= namespace %><%= param %>" name="<%= namespace %><%= param %>" wrap="soft" onChange="Liferay.Util.checkMaxLength(this, <%= maxLength %>);" onKeyDown="Liferay.Util.disableEsc();" onKeyPress="Liferay.Util.checkMaxLength(this, <%= maxLength %>);"><%= value %></textarea>
+<textarea class="lfr-textarea" <%= disabled ? "disabled" : "" %> id="<%= namespace %><%= param %>" name="<%= namespace %><%= param %>" wrap="soft" onChange="Liferay.Util.checkMaxLength(this, <%= ModelHintsConstants.TEXTAREA_MAX_LENGTH %>);" onKeyDown="Liferay.Util.disableEsc();" onKeyPress="Liferay.Util.checkMaxLength(this, <%= ModelHintsConstants.TEXTAREA_MAX_LENGTH %>);"><%= value %></textarea>
