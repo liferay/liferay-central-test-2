@@ -43,8 +43,8 @@ create index IX_3269E180 on AssetTagProperty (tagId);
 create unique index IX_2C944354 on AssetTagProperty (tagId, key_);
 
 create index IX_50702693 on AssetTagStats (classNameId);
-create unique index IX_D03A7DD2 on AssetTagStats (classNameId, tagId);
 create index IX_9464CA on AssetTagStats (tagId);
+create unique index IX_56682CC4 on AssetTagStats (tagId, classNameId);
 
 create index IX_B22D908C on AssetVocabulary (companyId);
 create index IX_B6B8CA0E on AssetVocabulary (groupId);

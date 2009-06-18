@@ -110,13 +110,8 @@ public class AssetTagStatsLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.asset.model.AssetTagStats addTagStats(
-		long classNameId, long tagId) throws com.liferay.portal.SystemException {
-		return getService().addTagStats(classNameId, tagId);
-	}
-
-	public static void deleteTagStatsByTagId(long tagId)
-		throws com.liferay.portal.SystemException {
-		getService().deleteTagStatsByTagId(tagId);
+		long tagId, long classNameId) throws com.liferay.portal.SystemException {
+		return getService().addTagStats(tagId, classNameId);
 	}
 
 	public static void deleteTagStatsByClassNameId(long classNameId)
@@ -124,16 +119,21 @@ public class AssetTagStatsLocalServiceUtil {
 		getService().deleteTagStatsByClassNameId(classNameId);
 	}
 
+	public static void deleteTagStatsByTagId(long tagId)
+		throws com.liferay.portal.SystemException {
+		getService().deleteTagStatsByTagId(tagId);
+	}
+
 	public static com.liferay.portlet.asset.model.AssetTagStats getTagStats(
-		long classNameId, long tagId) throws com.liferay.portal.SystemException {
-		return getService().getTagStats(classNameId, tagId);
+		long tagId, long classNameId) throws com.liferay.portal.SystemException {
+		return getService().getTagStats(tagId, classNameId);
 	}
 
 	public static com.liferay.portlet.asset.model.AssetTagStats updateTagStats(
-		long classNameId, long tagId)
+		long tagId, long classNameId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return getService().updateTagStats(classNameId, tagId);
+		return getService().updateTagStats(tagId, classNameId);
 	}
 
 	public static AssetTagStatsLocalService getService() {

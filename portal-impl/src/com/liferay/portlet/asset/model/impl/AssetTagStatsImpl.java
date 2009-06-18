@@ -30,8 +30,8 @@ import com.liferay.portlet.asset.model.AssetTagStats;
  * @author Jorge Ferrer
  *
  */
-public class AssetTagStatsImpl extends AssetTagStatsModelImpl
-	implements AssetTagStats {
+public class AssetTagStatsImpl
+	extends AssetTagStatsModelImpl implements AssetTagStats {
 
 	public AssetTagStatsImpl() {
 	}

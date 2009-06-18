@@ -107,6 +107,46 @@ public class AssetTagStatsUtil {
 		return getPersistence().fetchByPrimaryKey(tagStatsId);
 	}
 
+	public static java.util.List<com.liferay.portlet.asset.model.AssetTagStats> findByTagId(
+		long tagId) throws com.liferay.portal.SystemException {
+		return getPersistence().findByTagId(tagId);
+	}
+
+	public static java.util.List<com.liferay.portlet.asset.model.AssetTagStats> findByTagId(
+		long tagId, int start, int end)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByTagId(tagId, start, end);
+	}
+
+	public static java.util.List<com.liferay.portlet.asset.model.AssetTagStats> findByTagId(
+		long tagId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByTagId(tagId, start, end, obc);
+	}
+
+	public static com.liferay.portlet.asset.model.AssetTagStats findByTagId_First(
+		long tagId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.asset.NoSuchTagStatsException {
+		return getPersistence().findByTagId_First(tagId, obc);
+	}
+
+	public static com.liferay.portlet.asset.model.AssetTagStats findByTagId_Last(
+		long tagId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.asset.NoSuchTagStatsException {
+		return getPersistence().findByTagId_Last(tagId, obc);
+	}
+
+	public static com.liferay.portlet.asset.model.AssetTagStats[] findByTagId_PrevAndNext(
+		long tagStatsId, long tagId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.asset.NoSuchTagStatsException {
+		return getPersistence().findByTagId_PrevAndNext(tagStatsId, tagId, obc);
+	}
+
 	public static java.util.List<com.liferay.portlet.asset.model.AssetTagStats> findByClassNameId(
 		long classNameId) throws com.liferay.portal.SystemException {
 		return getPersistence().findByClassNameId(classNameId);
@@ -148,62 +188,22 @@ public class AssetTagStatsUtil {
 				   .findByClassNameId_PrevAndNext(tagStatsId, classNameId, obc);
 	}
 
-	public static java.util.List<com.liferay.portlet.asset.model.AssetTagStats> findByTagId(
-		long tagId) throws com.liferay.portal.SystemException {
-		return getPersistence().findByTagId(tagId);
+	public static com.liferay.portlet.asset.model.AssetTagStats findByT_C(
+		long tagId, long classNameId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.asset.NoSuchTagStatsException {
+		return getPersistence().findByT_C(tagId, classNameId);
 	}
 
-	public static java.util.List<com.liferay.portlet.asset.model.AssetTagStats> findByTagId(
-		long tagId, int start, int end)
+	public static com.liferay.portlet.asset.model.AssetTagStats fetchByT_C(
+		long tagId, long classNameId) throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByT_C(tagId, classNameId);
+	}
+
+	public static com.liferay.portlet.asset.model.AssetTagStats fetchByT_C(
+		long tagId, long classNameId, boolean retrieveFromCache)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByTagId(tagId, start, end);
-	}
-
-	public static java.util.List<com.liferay.portlet.asset.model.AssetTagStats> findByTagId(
-		long tagId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().findByTagId(tagId, start, end, obc);
-	}
-
-	public static com.liferay.portlet.asset.model.AssetTagStats findByTagId_First(
-		long tagId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.asset.NoSuchTagStatsException {
-		return getPersistence().findByTagId_First(tagId, obc);
-	}
-
-	public static com.liferay.portlet.asset.model.AssetTagStats findByTagId_Last(
-		long tagId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.asset.NoSuchTagStatsException {
-		return getPersistence().findByTagId_Last(tagId, obc);
-	}
-
-	public static com.liferay.portlet.asset.model.AssetTagStats[] findByTagId_PrevAndNext(
-		long tagStatsId, long tagId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.asset.NoSuchTagStatsException {
-		return getPersistence().findByTagId_PrevAndNext(tagStatsId, tagId, obc);
-	}
-
-	public static com.liferay.portlet.asset.model.AssetTagStats findByC_T(
-		long classNameId, long tagId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.asset.NoSuchTagStatsException {
-		return getPersistence().findByC_T(classNameId, tagId);
-	}
-
-	public static com.liferay.portlet.asset.model.AssetTagStats fetchByC_T(
-		long classNameId, long tagId) throws com.liferay.portal.SystemException {
-		return getPersistence().fetchByC_T(classNameId, tagId);
-	}
-
-	public static com.liferay.portlet.asset.model.AssetTagStats fetchByC_T(
-		long classNameId, long tagId, boolean retrieveFromCache)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().fetchByC_T(classNameId, tagId, retrieveFromCache);
+		return getPersistence().fetchByT_C(tagId, classNameId, retrieveFromCache);
 	}
 
 	public static java.util.List<Object> findWithDynamicQuery(
@@ -234,29 +234,24 @@ public class AssetTagStatsUtil {
 		return getPersistence().findAll(start, end, obc);
 	}
 
-	public static void removeByClassNameId(long classNameId)
-		throws com.liferay.portal.SystemException {
-		getPersistence().removeByClassNameId(classNameId);
-	}
-
 	public static void removeByTagId(long tagId)
 		throws com.liferay.portal.SystemException {
 		getPersistence().removeByTagId(tagId);
 	}
 
-	public static void removeByC_T(long classNameId, long tagId)
+	public static void removeByClassNameId(long classNameId)
+		throws com.liferay.portal.SystemException {
+		getPersistence().removeByClassNameId(classNameId);
+	}
+
+	public static void removeByT_C(long tagId, long classNameId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.asset.NoSuchTagStatsException {
-		getPersistence().removeByC_T(classNameId, tagId);
+		getPersistence().removeByT_C(tagId, classNameId);
 	}
 
 	public static void removeAll() throws com.liferay.portal.SystemException {
 		getPersistence().removeAll();
-	}
-
-	public static int countByClassNameId(long classNameId)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().countByClassNameId(classNameId);
 	}
 
 	public static int countByTagId(long tagId)
@@ -264,9 +259,14 @@ public class AssetTagStatsUtil {
 		return getPersistence().countByTagId(tagId);
 	}
 
-	public static int countByC_T(long classNameId, long tagId)
+	public static int countByClassNameId(long classNameId)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().countByC_T(classNameId, tagId);
+		return getPersistence().countByClassNameId(classNameId);
+	}
+
+	public static int countByT_C(long tagId, long classNameId)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByT_C(tagId, classNameId);
 	}
 
 	public static int countAll() throws com.liferay.portal.SystemException {

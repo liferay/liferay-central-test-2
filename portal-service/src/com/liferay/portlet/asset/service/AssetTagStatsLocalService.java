@@ -101,20 +101,20 @@ public interface AssetTagStatsLocalService {
 		boolean merge) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.asset.model.AssetTagStats addTagStats(
-		long classNameId, long tagId) throws com.liferay.portal.SystemException;
-
-	public void deleteTagStatsByTagId(long tagId)
-		throws com.liferay.portal.SystemException;
+		long tagId, long classNameId) throws com.liferay.portal.SystemException;
 
 	public void deleteTagStatsByClassNameId(long classNameId)
 		throws com.liferay.portal.SystemException;
 
+	public void deleteTagStatsByTagId(long tagId)
+		throws com.liferay.portal.SystemException;
+
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.asset.model.AssetTagStats getTagStats(
-		long classNameId, long tagId) throws com.liferay.portal.SystemException;
+		long tagId, long classNameId) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.asset.model.AssetTagStats updateTagStats(
-		long classNameId, long tagId)
+		long tagId, long classNameId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 }

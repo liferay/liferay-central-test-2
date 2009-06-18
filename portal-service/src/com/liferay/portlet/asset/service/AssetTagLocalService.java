@@ -119,7 +119,7 @@ public interface AssetTagLocalService {
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.asset.model.AssetTag decrementAssetCount(
-		long classNameId, long tagId)
+		long tagId, long classNameId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
@@ -201,7 +201,7 @@ public interface AssetTagLocalService {
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.asset.model.AssetTag incrementAssetCount(
-		long classNameId, long tagId)
+		long tagId, long classNameId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 

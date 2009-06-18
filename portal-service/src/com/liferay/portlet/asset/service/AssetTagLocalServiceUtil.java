@@ -143,10 +143,10 @@ public class AssetTagLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.asset.model.AssetTag decrementAssetCount(
-		long classNameId, long tagId)
+		long tagId, long classNameId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return getService().decrementAssetCount(classNameId, tagId);
+		return getService().decrementAssetCount(tagId, classNameId);
 	}
 
 	public static void deleteTag(com.liferay.portlet.asset.model.AssetTag tag)
@@ -246,10 +246,10 @@ public class AssetTagLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.asset.model.AssetTag incrementAssetCount(
-		long classNameId, long tagId)
+		long tagId, long classNameId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return getService().incrementAssetCount(classNameId, tagId);
+		return getService().incrementAssetCount(tagId, classNameId);
 	}
 
 	public static void mergeTags(long fromTagId, long toTagId)
