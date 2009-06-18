@@ -187,7 +187,7 @@ public class AssetTagLocalServiceImpl extends AssetTagLocalServiceBaseImpl {
 		}
 	}
 
-	public AssetTag decrementAssetCount(long tagId)
+	public AssetTag decrementAssetCount(long classNameId, long tagId)
 		throws PortalException, SystemException {
 
 		AssetTag assetTag = assetTagPersistence.findByPrimaryKey(tagId);
@@ -195,6 +195,8 @@ public class AssetTagLocalServiceImpl extends AssetTagLocalServiceBaseImpl {
 		assetTag.setAssetCount(Math.max(0, assetTag.getAssetCount() - 1));
 
 		assetTagPersistence.update(assetTag, false);
+
+		assetTagStatsLocalService.updateTagStats(classNameId, tagId);
 
 		return assetTag;
 	}
@@ -334,7 +336,7 @@ public class AssetTagLocalServiceImpl extends AssetTagLocalServiceBaseImpl {
 		}
 	}
 
-	public AssetTag incrementAssetCount(long tagId)
+	public AssetTag incrementAssetCount(long classNameId, long tagId)
 		throws PortalException, SystemException {
 
 		AssetTag assetTag = assetTagPersistence.findByPrimaryKey(tagId);
@@ -342,6 +344,8 @@ public class AssetTagLocalServiceImpl extends AssetTagLocalServiceBaseImpl {
 		assetTag.setAssetCount(assetTag.getAssetCount() + 1);
 
 		assetTagPersistence.update(assetTag, false);
+
+		assetTagStatsLocalService.updateTagStats(classNameId, tagId);
 
 		return assetTag;
 	}

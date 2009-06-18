@@ -545,7 +545,8 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 
 			if (entry.isNew()) {
 				for (AssetTag tag : tags) {
-					assetTagLocalService.incrementAssetCount(tag.getTagId());
+					assetTagLocalService.incrementAssetCount(
+						classNameId, tag.getTagId());
 				}
 			}
 			else {
@@ -555,14 +556,14 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 				for (AssetTag oldTag : oldTags) {
 					if (!tags.contains(oldTag)) {
 						assetTagLocalService.decrementAssetCount(
-							oldTag.getTagId());
+							classNameId, oldTag.getTagId());
 					}
 				}
 
 				for (AssetTag tag : tags) {
 					if (!oldTags.contains(tag)) {
 						assetTagLocalService.incrementAssetCount(
-							tag.getTagId());
+							classNameId, tag.getTagId());
 					}
 				}
 			}

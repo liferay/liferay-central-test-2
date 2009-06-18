@@ -54,6 +54,10 @@ private String _buildTagsNavigation(long groupId, String selectedTagName, Portle
 			sb.append("<b>");
 			sb.append(tagName);
 			sb.append("</b>");
+			sb.append(StringPool.SPACE);
+			sb.append(StringPool.OPEN_PARENTHESIS);
+			sb.append(tag.getAssetCount());
+			sb.append(StringPool.CLOSE_PARENTHESIS);
 		}
 		else {
 			portletURL.setParameter("tag", tag.getName());
@@ -62,6 +66,10 @@ private String _buildTagsNavigation(long groupId, String selectedTagName, Portle
 			sb.append(portletURL.toString());
 			sb.append("\">");
 			sb.append(tagName);
+			sb.append(StringPool.SPACE);
+			sb.append(StringPool.OPEN_PARENTHESIS);
+			sb.append(tag.getAssetCount());
+			sb.append(StringPool.CLOSE_PARENTHESIS);
 			sb.append("</a>");
 		}
 
