@@ -1528,6 +1528,51 @@ fieldset:last-child, .exp-form fieldset:last-child {
 	height: 1%;
 }
 
+/* ---------- Taglib input localized ---------- */
+
+.taglib-input-localized {
+	float: left;
+}
+
+.taglib-input-localized .lfr-form-row, .lfr-language-selector .lfr-form-row {
+	margin-top: 10px;
+	padding-top: 1px;
+}
+
+.taglib-input-localized .lfr-form-row, .ie .lfr-language-selector .lfr-form-row {
+	width: 100%;
+}
+
+.taglib-input-localized .lfr-form-row:hover, .lfr-language-selector .lfr-form-row:hover {
+	background-color: #DFFCCB;
+	border-bottom: 1px solid #B2FF3A;
+	border-top: 1px solid #B2FF3A;
+	padding-top: 0;
+}
+
+.taglib-input-localized .lfr-form-row .exp-ctrl-holder, .lfr-language-selector .lfr-form-row .exp-ctrl-holder {
+	clear: none;
+	float: left;
+}
+
+.taglib-input-localized .exp-form fieldset.exp-form-column, .lfr-language-selector .exp-form .exp-form-column {
+	margin-right: 10px;
+	width: auto;
+}
+
+.taglib-input-localized #addresses .exp-ctrl-holder {
+	float: none;
+	width: auto;
+}
+
+.ie6 .taglib-input-localized .exp-form fieldset.exp-form-column, .ie6 .lfr-language-selector .exp-form fieldset.exp-form-column {
+	width: 33%;
+}
+
+.taglib-input-localized .lfr-language-selector .exp-form label {
+	margin-right: 0.4em;
+}
+
 /* ---------- Taglib input move boxes ---------- */
 
 .taglib-move-boxes {
