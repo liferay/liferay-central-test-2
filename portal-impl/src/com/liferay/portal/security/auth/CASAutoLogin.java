@@ -117,13 +117,15 @@ public class CASAutoLogin implements AutoLogin {
 	}
 
 	protected User addUser(long companyId, String screenName)
-		throws SystemException {
+		throws Exception {
+
+		LdapContext ctx = null;
 
 		try {
 			String baseDN = PrefsPropsUtil.getString(
 				companyId, PropsKeys.LDAP_BASE_DN);
 
-			LdapContext ctx = PortalLDAPUtil.getContext(companyId);
+			ctx = PortalLDAPUtil.getContext(companyId);
 
 			if (ctx == null) {
 				throw new SystemException("Failed to bind to the LDAP server");
@@ -178,7 +180,12 @@ public class CASAutoLogin implements AutoLogin {
 			_log.error("Problem accessing LDAP server ", e);
 
 			throw new SystemException(
-				"Problem accessign LDAP server " + e.getMessage());
+				"Problem accessing LDAP server " + e.getMessage());
+		}
+		finally {
+			if (ctx != null) {
+				ctx.close();
+			}
 		}
 	}
 
