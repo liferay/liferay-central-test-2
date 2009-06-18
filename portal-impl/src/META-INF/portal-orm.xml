@@ -597,6 +597,7 @@
 			<transient name="virtualPath" />
 			<transient name="webDAVStorageClass" />
 			<transient name="webDAVStorageToken" />
+			<transient name="windowStates" />
 		</attributes>
 	</entity>
 	<entity class="com.liferay.portal.model.impl.PortletItemImpl" name="PortletItem">

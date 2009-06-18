@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
+import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.servlet.ServletContextUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -84,6 +85,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import javax.portlet.PortletMode;
 import javax.portlet.PreferencesValidator;
+import javax.portlet.WindowState;
 
 import javax.servlet.ServletContext;
 
@@ -273,12 +275,21 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 				initParams.put(
 					"view-jsp", "/html/portal/undeployed_portlet.jsp");
 
-				Set<String> mimeTypeModes = new HashSet<String>();
+				Set<String> mimeTypePortletModes = new HashSet<String>();
 
-				mimeTypeModes.add(PortletMode.VIEW.toString().toLowerCase());
+				mimeTypePortletModes.add(
+					PortletMode.VIEW.toString().toLowerCase());
 
 				portlet.getPortletModes().put(
-					ContentTypes.TEXT_HTML, mimeTypeModes);
+					ContentTypes.TEXT_HTML, mimeTypePortletModes);
+
+				Set<String> mimeTypeWindowStates = new HashSet<String>();
+
+				mimeTypeWindowStates.add(
+					WindowState.NORMAL.toString().toLowerCase());
+
+				portlet.getWindowStates().put(
+					ContentTypes.TEXT_HTML, mimeTypeWindowStates);
 
 				portlet.setPortletInfo(
 					new PortletInfo(portletId, portletId, portletId));
@@ -1432,16 +1443,18 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 				String mimeType = supports.elementText("mime-type");
 
-				Set<String> mimeTypeModes =
+				Set<String> mimeTypePortletModes =
 					portletModel.getPortletModes().get(mimeType);
 
-				if (mimeTypeModes == null) {
-					mimeTypeModes = new HashSet<String>();
+				if (mimeTypePortletModes == null) {
+					mimeTypePortletModes = new HashSet<String>();
 
-					portletModel.getPortletModes().put(mimeType, mimeTypeModes);
+					portletModel.getPortletModes().put(
+						mimeType, mimeTypePortletModes);
 				}
 
-				mimeTypeModes.add(PortletMode.VIEW.toString().toLowerCase());
+				mimeTypePortletModes.add(
+					PortletMode.VIEW.toString().toLowerCase());
 
 				Iterator<Element> itr3 = supports.elements(
 					"portlet-mode").iterator();
@@ -1449,7 +1462,41 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 				while (itr3.hasNext()) {
 					Element portletMode = itr3.next();
 
-					mimeTypeModes.add(portletMode.getTextTrim().toLowerCase());
+					mimeTypePortletModes.add(
+						portletMode.getTextTrim().toLowerCase());
+				}
+
+				Set<String> mimeTypeWindowStates =
+					portletModel.getWindowStates().get(mimeType);
+
+				if (mimeTypeWindowStates == null) {
+					mimeTypeWindowStates = new HashSet<String>();
+
+					portletModel.getWindowStates().put(
+						mimeType, mimeTypeWindowStates);
+				}
+
+				mimeTypeWindowStates.add(
+					WindowState.NORMAL.toString().toLowerCase());
+
+				itr3 = supports.elements("window-state").iterator();
+
+				if (!itr3.hasNext()) {
+					mimeTypeWindowStates.add(
+						WindowState.MAXIMIZED.toString().toLowerCase());
+					mimeTypeWindowStates.add(
+						WindowState.MINIMIZED.toString().toLowerCase());
+					mimeTypeWindowStates.add(
+						LiferayWindowState.EXCLUSIVE.toString().toLowerCase());
+					mimeTypeWindowStates.add(
+						LiferayWindowState.POP_UP.toString().toLowerCase());
+				}
+
+				while (itr3.hasNext()) {
+					Element windowState = itr3.next();
+
+					mimeTypeWindowStates.add(
+						windowState.getTextTrim().toLowerCase());
 				}
 			}
 

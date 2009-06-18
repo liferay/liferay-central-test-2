@@ -77,6 +77,7 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import javax.portlet.PortletMode;
+import javax.portlet.WindowState;
 
 /**
  * <a href="PortletImpl.java.html"><b><i>View Source</i></b></a>
@@ -112,6 +113,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		_roleMappers = new LinkedHashMap<String, String>();
 		_initParams = new HashMap<String, String>();
 		_portletModes = new HashMap<String, Set<String>>();
+		_windowStates = new HashMap<String, Set<String>>();
 		_supportedLocales = new HashSet<String>();
 		_portletFilters = new LinkedHashMap<String, PortletFilter>();
 		_processingEvents = new HashSet<QName>();
@@ -154,7 +156,8 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		Set<String> unlinkedRoles, Map<String, String> roleMappers,
 		boolean system, boolean active, boolean include,
 		Map<String, String> initParams, Integer expCache,
-		Map<String, Set<String>> portletModes, Set<String> supportedLocales,
+		Map<String, Set<String>> portletModes,
+		Map<String, Set<String>> windowStates, Set<String> supportedLocales,
 		String resourceBundle, PortletInfo portletInfo,
 		Map<String, PortletFilter> portletFilters, Set<QName> processingEvents,
 		Set<QName> publishingEvents,
@@ -232,6 +235,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		_initParams = initParams;
 		_expCache = expCache;
 		_portletModes = portletModes;
+		_windowStates = windowStates;
 		_supportedLocales = supportedLocales;
 		_resourceBundle = resourceBundle;
 		_portletInfo = portletInfo;
@@ -2279,13 +2283,13 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 			mimeType = ContentTypes.TEXT_HTML;
 		}
 
-		Set<String> mimeTypeModes = _portletModes.get(mimeType);
+		Set<String> mimeTypePortletModes = _portletModes.get(mimeType);
 
-		if (mimeTypeModes == null) {
+		if (mimeTypePortletModes == null) {
 			return false;
 		}
 
-		if (mimeTypeModes.contains(portletMode.toString())) {
+		if (mimeTypePortletModes.contains(portletMode.toString())) {
 			return true;
 		}
 		else {
@@ -2307,9 +2311,9 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		while (itr1.hasNext()) {
 			Map.Entry<String, Set<String>> entry = itr1.next();
 
-			Set<String> mimeTypeModes = entry.getValue();
+			Set<String> mimeTypePortletModes = entry.getValue();
 
-			Iterator<String> itr2 = mimeTypeModes.iterator();
+			Iterator<String> itr2 = mimeTypePortletModes.iterator();
 
 			while (itr2.hasNext()) {
 				String portletMode = itr2.next();
@@ -2333,6 +2337,78 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		else {
 			return false;
 		}
+	}
+
+	/**
+	 * Gets the window states of the portlet.
+	 *
+	 * @return		window states of the portlet
+	 */
+	public Map<String, Set<String>> getWindowStates() {
+		return _windowStates;
+	}
+
+	/**
+	 * Sets the window states of the portlet.
+	 *
+	 * @param		windowStates the window states of the portlet
+	 */
+	public void setWindowStates(Map<String, Set<String>> windowStates) {
+		_windowStates = windowStates;
+	}
+
+	/**
+	 * Returns true if the portlet supports the specified mime type and
+	 * window state.
+	 *
+	 * @return		true if the portlet supports the specified mime type and
+	 *				window state
+	 */
+	public boolean hasWindowState(String mimeType, WindowState windowState) {
+		if (mimeType == null) {
+			mimeType = ContentTypes.TEXT_HTML;
+		}
+
+		Set<String> mimeTypeWindowStates = _windowStates.get(mimeType);
+
+		if (mimeTypeWindowStates == null) {
+			return false;
+		}
+
+		if (mimeTypeWindowStates.contains(windowState.toString())) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	/**
+	 * Gets a list of all window states supported by the portlet.
+	 *
+	 * @return		a list of all window states supported by the portlet
+	 */
+	public Set<String> getAllWindowStates() {
+		Set<String> allWindowStates = new TreeSet<String>();
+
+		Iterator<Map.Entry <String, Set<String>>> itr1 =
+			_windowStates.entrySet().iterator();
+
+		while (itr1.hasNext()) {
+			Map.Entry<String, Set<String>> entry = itr1.next();
+
+			Set<String> mimeTypeWindowStates = entry.getValue();
+
+			Iterator<String> itr2 = mimeTypeWindowStates.iterator();
+
+			while (itr2.hasNext()) {
+				String windowState = itr2.next();
+
+				allWindowStates.add(windowState);
+			}
+		}
+
+		return allWindowStates;
 	}
 
 	/**
@@ -2772,9 +2848,10 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 			getFacebookIntegration(), isAddDefaultResource(), getRoles(),
 			getUnlinkedRoles(), getRoleMappers(), isSystem(), isActive(),
 			isInclude(), getInitParams(), getExpCache(), getPortletModes(),
-			getSupportedLocales(), getResourceBundle(), getPortletInfo(),
-			getPortletFilters(), getProcessingEvents(), getPublishingEvents(),
-			getPublicRenderParameters(), getPortletApp());
+			getWindowStates(), getSupportedLocales(), getResourceBundle(),
+			getPortletInfo(), getPortletFilters(), getProcessingEvents(),
+			getPublishingEvents(), getPublicRenderParameters(),
+			getPortletApp());
 
 		portlet.setId(getId());
 
@@ -3168,6 +3245,11 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * The portlet modes of the portlet.
 	 */
 	private Map<String, Set<String>> _portletModes;
+
+	/**
+	 * The window states of the portlet.
+	 */
+	private Map<String, Set<String>> _windowStates;
 
 	/**
 	 * The supported locales of the portlet.

@@ -427,6 +427,16 @@ public interface Portlet extends PortletModel {
 
 	public boolean hasMultipleMimeTypes();
 
+	public java.util.Map<String, java.util.Set<String>> getWindowStates();
+
+	public void setWindowStates(
+		java.util.Map<String, java.util.Set<String>> windowStates);
+
+	public boolean hasWindowState(java.lang.String mimeType,
+		javax.portlet.WindowState windowState);
+
+	public java.util.Set<String> getAllWindowStates();
+
 	public java.util.Set<String> getSupportedLocales();
 
 	public void setSupportedLocales(java.util.Set<String> supportedLocales);

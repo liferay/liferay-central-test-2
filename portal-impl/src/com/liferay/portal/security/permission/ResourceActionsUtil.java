@@ -26,6 +26,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -543,10 +544,11 @@ public class ResourceActionsUtil {
 					Map<String, Set<String>> portletModes =
 						portlet.getPortletModes();
 
-					Set<String> mimeTypeModes = portletModes.get("text/html");
+					Set<String> mimeTypePortletModes = portletModes.get(
+						ContentTypes.TEXT_HTML);
 
-					if (mimeTypeModes != null) {
-						for (String actionId : mimeTypeModes) {
+					if (mimeTypePortletModes != null) {
+						for (String actionId : mimeTypePortletModes) {
 							if (actionId.equalsIgnoreCase("edit")) {
 								actions.add(ActionKeys.PREFERENCES);
 							}
