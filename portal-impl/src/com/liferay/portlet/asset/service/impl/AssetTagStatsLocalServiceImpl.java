@@ -40,7 +40,7 @@ import com.liferay.portlet.asset.service.base.AssetTagStatsLocalServiceBaseImpl;
 public class AssetTagStatsLocalServiceImpl
 	extends AssetTagStatsLocalServiceBaseImpl {
 
-	public AssetTagStats addTagStats(long classNameId, long tagId)
+	public AssetTagStats addTagStats(long tagId, long classNameId)
 		throws SystemException {
 
 		long tagStatsId = counterLocalService.increment();
@@ -56,12 +56,12 @@ public class AssetTagStatsLocalServiceImpl
 		catch (SystemException se) {
 			if (_log.isWarnEnabled()) {
 				_log.warn(
-					"Add failed, fetch {classNameId=" + classNameId +
-						", tagId=" + tagId + "}");
+					"Add failed, fetch {tagId=" + tagId + ", classNameId=" +
+						classNameId + "}");
 			}
 
-			tagStats = assetTagStatsPersistence.fetchByC_T(
-				classNameId, tagId, false);
+			tagStats = assetTagStatsPersistence.fetchByT_C(
+				tagId, classNameId, false);
 
 			if (tagStats == null) {
 				throw se;
@@ -71,33 +71,33 @@ public class AssetTagStatsLocalServiceImpl
 		return tagStats;
 	}
 
-	public void deleteTagStatsByTagId(long tagId)
-		throws SystemException {
-
-		assetTagStatsPersistence.removeByTagId(tagId);
-	}
-
 	public void deleteTagStatsByClassNameId(long classNameId)
 		throws SystemException {
 
 		assetTagStatsPersistence.removeByClassNameId(classNameId);
 	}
 
-	public AssetTagStats getTagStats(long classNameId, long tagId)
+	public void deleteTagStatsByTagId(long tagId)
 		throws SystemException {
 
-		AssetTagStats tagStats = assetTagStatsPersistence.fetchByC_T(
-			classNameId, tagId);
+		assetTagStatsPersistence.removeByTagId(tagId);
+	}
+
+	public AssetTagStats getTagStats(long tagId, long classNameId)
+		throws SystemException {
+
+		AssetTagStats tagStats = assetTagStatsPersistence.fetchByT_C(
+			tagId, classNameId);
 
 		if (tagStats == null) {
 			tagStats = assetTagStatsLocalService.addTagStats(
-				classNameId, tagId);
+				tagId, classNameId);
 		}
 
 		return tagStats;
 	}
 
-	public AssetTagStats updateTagStats(long classNameId, long tagId)
+	public AssetTagStats updateTagStats(long tagId, long classNameId)
 		throws PortalException, SystemException {
 
 		AssetTag tag = assetTagPersistence.findByPrimaryKey(tagId);
@@ -105,7 +105,7 @@ public class AssetTagStatsLocalServiceImpl
 		int assetCount = assetTagFinder.countByG_C_N(
 			tag.getGroupId(), classNameId, tag.getName());
 
-		AssetTagStats tagStats = getTagStats(classNameId, tagId);
+		AssetTagStats tagStats = getTagStats(tagId, classNameId);
 
 		tagStats.setAssetCount(assetCount);
 

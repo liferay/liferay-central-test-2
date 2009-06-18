@@ -187,18 +187,18 @@ public class AssetTagLocalServiceImpl extends AssetTagLocalServiceBaseImpl {
 		}
 	}
 
-	public AssetTag decrementAssetCount(long classNameId, long tagId)
+	public AssetTag decrementAssetCount(long tagId, long classNameId)
 		throws PortalException, SystemException {
 
-		AssetTag assetTag = assetTagPersistence.findByPrimaryKey(tagId);
+		AssetTag tag = assetTagPersistence.findByPrimaryKey(tagId);
 
-		assetTag.setAssetCount(Math.max(0, assetTag.getAssetCount() - 1));
+		tag.setAssetCount(Math.max(0, tag.getAssetCount() - 1));
 
-		assetTagPersistence.update(assetTag, false);
+		assetTagPersistence.update(tag, false);
 
-		assetTagStatsLocalService.updateTagStats(classNameId, tagId);
+		assetTagStatsLocalService.updateTagStats(tagId, classNameId);
 
-		return assetTag;
+		return tag;
 	}
 
 	public void deleteTag(AssetTag tag)
@@ -336,18 +336,18 @@ public class AssetTagLocalServiceImpl extends AssetTagLocalServiceBaseImpl {
 		}
 	}
 
-	public AssetTag incrementAssetCount(long classNameId, long tagId)
+	public AssetTag incrementAssetCount(long tagId, long classNameId)
 		throws PortalException, SystemException {
 
-		AssetTag assetTag = assetTagPersistence.findByPrimaryKey(tagId);
+		AssetTag tag = assetTagPersistence.findByPrimaryKey(tagId);
 
-		assetTag.setAssetCount(assetTag.getAssetCount() + 1);
+		tag.setAssetCount(tag.getAssetCount() + 1);
 
-		assetTagPersistence.update(assetTag, false);
+		assetTagPersistence.update(tag, false);
 
-		assetTagStatsLocalService.updateTagStats(classNameId, tagId);
+		assetTagStatsLocalService.updateTagStats(tagId, classNameId);
 
-		return assetTag;
+		return tag;
 	}
 
 	public void mergeTags(long fromTagId, long toTagId)

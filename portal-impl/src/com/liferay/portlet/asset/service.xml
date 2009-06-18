@@ -289,15 +289,15 @@
 
 		<!-- Finder methods -->
 
-		<finder name="ClassNameId" return-type="Collection">
-			<finder-column name="classNameId" />
-		</finder>
 		<finder name="TagId" return-type="Collection">
 			<finder-column name="tagId" />
 		</finder>
-		<finder name="C_T" return-type="AssetTagStats" unique="true">
+		<finder name="ClassNameId" return-type="Collection">
 			<finder-column name="classNameId" />
+		</finder>
+		<finder name="T_C" return-type="AssetTagStats" unique="true">
 			<finder-column name="tagId" />
+			<finder-column name="classNameId" />
 		</finder>
 
 		<!-- References -->
