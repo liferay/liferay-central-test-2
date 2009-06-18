@@ -868,7 +868,7 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 
 				if (organizationLocalService.hasUserOrganization(
 						userId, organization.getOrganizationId(), inherited,
-						includeSpecifiedOrganization)) {
+						false, includeSpecifiedOrganization)) {
 
 					allowed = true;
 

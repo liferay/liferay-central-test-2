@@ -415,11 +415,15 @@ public class OrganizationLocalServiceImpl
 	}
 
 	public boolean hasUserOrganization(
-			long userId, long organizationId, boolean inherited,
-			boolean includeSpecifiedOrganization)
+			long userId, long organizationId, boolean inheritSuborganizations,
+			boolean inheritUserGroups, boolean includeSpecifiedOrganization)
 		throws PortalException, SystemException {
 
-		if (inherited) {
+		if (!inheritSuborganizations && !inheritUserGroups) {
+			return userPersistence.containsOrganization(userId, organizationId);
+		}
+
+		if (inheritSuborganizations) {
 			LinkedHashMap<String, Object> params =
 				new LinkedHashMap<String, Object>();
 
@@ -434,18 +438,18 @@ public class OrganizationLocalServiceImpl
 
 			params.put("usersOrgsTree", leftAndRightOrganizationIds);
 
-			int count = userFinder.countByUser(userId, params);
-
-			if (count > 0) {
+			if (userFinder.countByUser(userId, params) > 0) {
 				return true;
 			}
-			else {
-				return false;
+		}
+
+		if (inheritUserGroups) {
+			if (organizationFinder.countByO_U(organizationId, userId) > 0) {
+				return true;
 			}
 		}
-		else {
-			return userPersistence.containsOrganization(userId, organizationId);
-		}
+
+		return false;
 	}
 
 	public boolean hasPasswordPolicyOrganization(

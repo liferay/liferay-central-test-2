@@ -723,7 +723,7 @@ public class ServicePreAction extends Action {
 			long organizationId = group.getClassPK();
 
 			if (OrganizationLocalServiceUtil.hasUserOrganization(
-					user.getUserId(), organizationId)) {
+					user.getUserId(), organizationId, false, true, false)) {
 
 				return true;
 			}

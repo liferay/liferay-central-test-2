@@ -249,6 +249,18 @@
 				(PortletPreferences.preferences LIKE ?)
 		]]>
 	</sql>
+	<sql id="com.liferay.portal.service.persistence.OrganizationFinder.countByOrganizationId">
+		<![CDATA[
+			SELECT
+				COUNT(*) AS COUNT_VALUE
+			FROM
+				Organization_
+			[$JOIN$]
+			WHERE
+				[$WHERE$]
+				(Organization_.organizationId = ?)
+		]]>
+	</sql>
 	<sql id="com.liferay.portal.service.persistence.OrganizationFinder.countByC_PO_N_S_C_Z_R_C">
 		<![CDATA[
 			SELECT
@@ -415,6 +427,21 @@
 				(Groups_Roles.roleId = ?)
 		]]>
 	</sql>
+	<sql id="com.liferay.portal.service.persistence.OrganizationFinder.joinByOrganizationsUserGroups">
+		<![CDATA[
+			INNER JOIN
+				Group_ ON
+					(Group_.classPK = Organization_.organizationId)
+			INNER JOIN
+				Groups_UserGroups ON
+					(Groups_UserGroups.groupId = Group_.groupId)
+			INNER JOIN
+				Users_UserGroups ON
+					(Users_UserGroups.userGroupId = Groups_UserGroups.userGroupId)
+			WHERE
+				(Users_UserGroups.userId = ?)
+		]]>
+	</sql>
 	<sql id="com.liferay.portal.service.persistence.OrganizationFinder.joinByOrganizationsUsers">
 		<![CDATA[
 			INNER JOIN
@@ -435,6 +462,15 @@
 			WHERE
 				(Permission_.resourceId = ?) AND
 				(OrgGroupPermission.groupId = ?)
+		]]>
+	</sql>
+	<sql id="com.liferay.portal.service.persistence.OrganizationFinder.joinByUsersOrgs">
+		<![CDATA[
+			INNER JOIN
+				Users_Orgs ON
+					(Users_Orgs.userId = ?)
+			WHERE
+				(Users_Orgs.organizationId = Organization_.organizationId)
 		]]>
 	</sql>
 	<sql id="com.liferay.portal.service.persistence.OrgGroupPermissionFinder.findByO_G_R">
@@ -771,21 +807,21 @@
 	</sql>
 	<sql id="com.liferay.portal.service.persistence.RoleFinder.countByOrganizationCommunity">
 		<![CDATA[
-			SELECT 
+			SELECT
 				COUNT(Role_.roleId) AS COUNT_VALUE
-			FROM 
-				Role_ 
-			INNER JOIN 
-				Groups_Roles ON 
+			FROM
+				Role_
+			INNER JOIN
+				Groups_Roles ON
 					(Groups_Roles.roleId = Role_.roleId)
-			INNER JOIN 
-				Groups_Orgs ON 
+			INNER JOIN
+				Groups_Orgs ON
 					(Groups_Orgs.groupId = Groups_Roles.groupId)
 			INNER JOIN
-				Users_Orgs ON 
+				Users_Orgs ON
 					(Users_Orgs.organizationId = Groups_Orgs.organizationId)
-			WHERE 
-				(Role_.roleId = ?) AND 
+			WHERE
+				(Role_.roleId = ?) AND
 				(Users_Orgs.userId = ?)
 		]]>
 	</sql>
@@ -827,18 +863,18 @@
 		<![CDATA[
 			SELECT
 			 	COUNT(Role_.roleId) AS COUNT_VALUE
-			FROM 
-				Role_ 
-			INNER JOIN 
-				Groups_Roles ON 
+			FROM
+				Role_
+			INNER JOIN
+				Groups_Roles ON
 					(Groups_Roles.roleId = Role_.roleId)
-			INNER JOIN 
-				Groups_UserGroups ON 
+			INNER JOIN
+				Groups_UserGroups ON
 					(Groups_UserGroups.groupId = Groups_Roles.groupId)
-			INNER JOIN 
-				Users_UserGroups ON 
+			INNER JOIN
+				Users_UserGroups ON
 					(Users_UserGroups.userGroupId = Groups_UserGroups.userGroupId)
-			WHERE 
+			WHERE
 				(Role_.roleId = ?) AND
 				(Users_UserGroups.userId = ?)
 		]]>

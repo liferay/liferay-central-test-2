@@ -41,6 +41,7 @@ portletURL.setWindowState(WindowState.MAXIMIZED);
 portletURL.setParameter("struts_action", "/enterprise_admin/edit_organization_assignments");
 portletURL.setParameter("tabs1", tabs1);
 portletURL.setParameter("tabs2", tabs2);
+portletURL.setParameter("tabs3", tabs3);
 portletURL.setParameter("redirect", redirect);
 portletURL.setParameter("organizationId", String.valueOf(organization.getOrganizationId()));
 
@@ -78,6 +79,7 @@ request.setAttribute("edit_organization_assignments.jsp-portletURL", portletURL)
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
 <input name="<portlet:namespace />tabs1" type="hidden" value="<%= HtmlUtil.escapeAttribute(tabs1) %>" />
 <input name="<portlet:namespace />tabs2" type="hidden" value="<%= HtmlUtil.escapeAttribute(tabs2) %>" />
+<input name="<portlet:namespace />tabs3" type="hidden" value="<%= HtmlUtil.escapeAttribute(tabs3) %>" />
 <input name="<portlet:namespace />assignmentsRedirect" type="hidden" value="" />
 <input name="<portlet:namespace />organizationId" type="hidden" value="<%= organization.getOrganizationId() %>" />
 

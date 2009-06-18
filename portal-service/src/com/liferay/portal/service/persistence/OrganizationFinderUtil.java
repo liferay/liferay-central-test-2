@@ -29,6 +29,11 @@ package com.liferay.portal.service.persistence;
  *
  */
 public class OrganizationFinderUtil {
+	public static int countByO_U(long organizationId, long userId)
+		throws com.liferay.portal.SystemException {
+		return getFinder().countByO_U(organizationId, userId);
+	}
+
 	public static int countByKeywords(long companyId,
 		long parentOrganizationId,
 		java.lang.String parentOrganizationIdComparator,

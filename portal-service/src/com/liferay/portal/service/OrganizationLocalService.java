@@ -182,7 +182,8 @@ public interface OrganizationLocalService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public boolean hasUserOrganization(long userId, long organizationId,
-		boolean inherited, boolean includeSpecifiedOrganization)
+		boolean inheritSuborganizations, boolean inheritUserGroups,
+		boolean includeSpecifiedOrganization)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 

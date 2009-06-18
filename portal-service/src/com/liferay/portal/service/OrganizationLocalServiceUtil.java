@@ -217,12 +217,13 @@ public class OrganizationLocalServiceUtil {
 	}
 
 	public static boolean hasUserOrganization(long userId, long organizationId,
-		boolean inherited, boolean includeSpecifiedOrganization)
+		boolean inheritSuborganizations, boolean inheritUserGroups,
+		boolean includeSpecifiedOrganization)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
-				   .hasUserOrganization(userId, organizationId, inherited,
-			includeSpecifiedOrganization);
+				   .hasUserOrganization(userId, organizationId, inheritSuborganizations,
+			inheritUserGroups, includeSpecifiedOrganization);
 	}
 
 	public static boolean hasPasswordPolicyOrganization(long passwordPolicyId,

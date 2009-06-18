@@ -777,7 +777,8 @@ public class MBUtil {
 					companyId, entityValue);
 
 			if (OrganizationLocalServiceUtil.hasUserOrganization(
-					userId, organization.getOrganizationId())) {
+					userId, organization.getOrganizationId(), false, true,
+					false)) {
 
 				return true;
 			}

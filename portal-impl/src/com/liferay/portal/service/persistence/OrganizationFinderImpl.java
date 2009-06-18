@@ -34,6 +34,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.util.dao.orm.CustomSQLUtil;
 
 import java.util.ArrayList;
@@ -45,12 +46,16 @@ import java.util.Map;
 /**
  * <a href="OrganizationFinderImpl.java.html"><b><i>View Source</i></b></a>
  *
+ * @author Amos Fong
  * @author Brian Wing Shun Chan
  * @author Jorge Ferrer
  *
  */
 public class OrganizationFinderImpl
 	extends BasePersistenceImpl implements OrganizationFinder {
+
+	public static String COUNT_BY_ORGANIZATION_ID =
+		OrganizationFinder.class.getName() + ".countByOrganizationId";
 
 	public static String COUNT_BY_C_PO_N_S_C_Z_R_C =
 		OrganizationFinder.class.getName() + ".countByC_PO_N_S_C_Z_R_C";
@@ -70,6 +75,9 @@ public class OrganizationFinderImpl
 	public static String JOIN_BY_ORGANIZATIONS_GROUPS =
 		OrganizationFinder.class.getName() + ".joinByOrganizationsGroups";
 
+	public static String JOIN_BY_ORGANIZATIONS_USERGROUPS =
+		OrganizationFinder.class.getName() + ".joinByOrganizationsUserGroups";
+
 	public static String JOIN_BY_ORGANIZATIONS_PASSWORD_POLICIES =
 		OrganizationFinder.class.getName() +
 			".joinByOrganizationsPasswordPolicies";
@@ -82,6 +90,44 @@ public class OrganizationFinderImpl
 
 	public static String JOIN_BY_ORG_GROUP_PERMISSION =
 		OrganizationFinder.class.getName() + ".joinByOrgGroupPermission";
+
+	public static String JOIN_BY_USERS_ORGS =
+		OrganizationFinder.class.getName() + ".joinByUsersOrgs";
+
+	public int countByO_U(long organizationId, long userId)
+		throws SystemException {
+
+		LinkedHashMap<String, Object> params1 =
+			new LinkedHashMap<String, Object>();
+
+		params1.put("usersOrgs", userId);
+
+		LinkedHashMap<String, Object> params2 =
+			new LinkedHashMap<String, Object>();
+
+		params2.put("organizationsUserGroups", userId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			int count = countByOrganizationId(session, organizationId, params1);
+
+			if (PropsValues.ORGANIZATIONS_USER_GROUP_MEMBERSHIP_ENABLED) {
+				count += countByOrganizationId(
+					session, organizationId, params2);
+			}
+
+			return count;
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
 
 	public int countByKeywords(
 			long companyId, long parentOrganizationId,
@@ -325,55 +371,111 @@ public class OrganizationFinderImpl
 					groupId.longValue(), andOperator, start, end, obc);
 			}
 		}
+		else {
+			params = new LinkedHashMap<String, Object>();
+		}
+
+		Long userId = null;
+
+		if (PropsValues.ORGANIZATIONS_USER_GROUP_MEMBERSHIP_ENABLED) {
+			userId = (Long)params.get("usersOrgs");
+		}
+
+		LinkedHashMap<String, Object> params1 = params;
+
+		LinkedHashMap<String, Object> params2 =
+			new LinkedHashMap<String, Object>();
+
+		params2.putAll(params1);
+
+		if (userId != null) {
+			params2.remove("usersOrgs");
+			params2.put("organizationsUserGroups", userId);
+		}
+
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("(");
+
+		if (Validator.isNotNull(type)) {
+			sb.append(CustomSQLUtil.get(FIND_BY_C_PO_N_L_S_C_Z_R_C));
+		}
+		else {
+			sb.append(CustomSQLUtil.get(FIND_BY_C_PO_N_S_C_Z_R_C));
+		}
+
+		String sql = sb.toString();
+
+		sql = StringUtil.replace(sql, "[$JOIN$]", getJoin(params1));
+		sql = StringUtil.replace(sql, "[$WHERE$]", getWhere(params1));
+
+		sb = new StringBuilder();
+
+		sb.append(sql);
+
+		sb.append(")");
+
+		if (Validator.isNotNull(userId)) {
+			sb.append(" UNION (");
+
+			if (Validator.isNotNull(type)) {
+				sb.append(CustomSQLUtil.get(FIND_BY_C_PO_N_L_S_C_Z_R_C));
+			}
+			else {
+				sb.append(CustomSQLUtil.get(FIND_BY_C_PO_N_S_C_Z_R_C));
+			}
+
+			sql = sb.toString();
+
+			sql = StringUtil.replace(sql, "[$JOIN$]", getJoin(params2));
+			sql = StringUtil.replace(sql, "[$WHERE$]", getWhere(params2));
+
+			sb = new StringBuilder();
+
+			sb.append(sql);
+
+			sb.append(")");
+		}
+
+		sql = sb.toString();
+
+		sql = CustomSQLUtil.replaceKeywords(
+			sql, "lower(Organization_.name)", StringPool.LIKE, false,
+			names);
+		sql = CustomSQLUtil.replaceKeywords(
+			sql, "lower(Address.street1)", StringPool.LIKE, true,
+			streets);
+		sql = CustomSQLUtil.replaceKeywords(
+			sql, "lower(Address.street2)", StringPool.LIKE, true,
+			streets);
+		sql = CustomSQLUtil.replaceKeywords(
+			sql, "lower(Address.street3)", StringPool.LIKE, true,
+			streets);
+		sql = CustomSQLUtil.replaceKeywords(
+			sql, "lower(Address.city)", StringPool.LIKE, false,
+			cities);
+		sql = CustomSQLUtil.replaceKeywords(
+			sql, "lower(Address.zip)", StringPool.LIKE, true,
+			zips);
+		sql = StringUtil.replace(
+			sql, "[$PARENT_ORGANIZATION_ID_COMPARATOR$]",
+			parentOrganizationIdComparator);
+
+		if (regionId == null) {
+			sql = StringUtil.replace(sql, REGION_ID_SQL, StringPool.BLANK);
+		}
+
+		if (countryId == null) {
+			sql = StringUtil.replace(sql, COUNTRY_ID_SQL, StringPool.BLANK);
+		}
+
+		sql = CustomSQLUtil.replaceAndOperator(sql, andOperator);
+		sql = CustomSQLUtil.replaceOrderBy(sql, obc);
 
 		Session session = null;
 
 		try {
 			session = openSession();
-
-			String sql = null;
-
-			if (Validator.isNotNull(type)) {
-				sql = CustomSQLUtil.get(FIND_BY_C_PO_N_L_S_C_Z_R_C);
-			}
-			else {
-				sql = CustomSQLUtil.get(FIND_BY_C_PO_N_S_C_Z_R_C);
-			}
-
-			sql = CustomSQLUtil.replaceKeywords(
-				sql, "lower(Organization_.name)", StringPool.LIKE, false,
-				names);
-			sql = CustomSQLUtil.replaceKeywords(
-				sql, "lower(Address.street1)", StringPool.LIKE, true,
-				streets);
-			sql = CustomSQLUtil.replaceKeywords(
-				sql, "lower(Address.street2)", StringPool.LIKE, true,
-				streets);
-			sql = CustomSQLUtil.replaceKeywords(
-				sql, "lower(Address.street3)", StringPool.LIKE, true,
-				streets);
-			sql = CustomSQLUtil.replaceKeywords(
-				sql, "lower(Address.city)", StringPool.LIKE, false,
-				cities);
-			sql = CustomSQLUtil.replaceKeywords(
-				sql, "lower(Address.zip)", StringPool.LIKE, true,
-				zips);
-
-			if (regionId == null) {
-				sql = StringUtil.replace(sql, REGION_ID_SQL, StringPool.BLANK);
-			}
-
-			if (countryId == null) {
-				sql = StringUtil.replace(sql, COUNTRY_ID_SQL, StringPool.BLANK);
-			}
-
-			sql = StringUtil.replace(sql, "[$JOIN$]", getJoin(params));
-			sql = StringUtil.replace(sql, "[$WHERE$]", getWhere(params));
-			sql = StringUtil.replace(
-				sql, "[$PARENT_ORGANIZATION_ID_COMPARATOR$]",
-				parentOrganizationIdComparator);
-			sql = CustomSQLUtil.replaceAndOperator(sql, andOperator);
-			sql = CustomSQLUtil.replaceOrderBy(sql, obc);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -381,7 +483,7 @@ public class OrganizationFinderImpl
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
-			setJoin(qPos, params);
+			setJoin(qPos, params1);
 			qPos.add(companyId);
 			qPos.add(parentOrganizationId);
 
@@ -405,6 +507,32 @@ public class OrganizationFinderImpl
 			qPos.add(cities, 2);
 			qPos.add(zips, 2);
 
+			if (Validator.isNotNull(userId)) {
+				setJoin(qPos, params2);
+				qPos.add(companyId);
+				qPos.add(parentOrganizationId);
+
+				if (Validator.isNotNull(type)) {
+					qPos.add(type);
+				}
+
+				qPos.add(names, 2);
+				qPos.add(streets, 6);
+
+				if (regionId != null) {
+					qPos.add(regionId);
+					qPos.add(regionId);
+				}
+
+				if (countryId != null) {
+					qPos.add(countryId);
+					qPos.add(countryId);
+				}
+
+				qPos.add(cities, 2);
+				qPos.add(zips, 2);
+			}
+
 			List<Organization> organizations = new ArrayList<Organization>();
 
 			Iterator<Long> itr = (Iterator<Long>)QueryUtil.iterate(
@@ -427,6 +555,37 @@ public class OrganizationFinderImpl
 		finally {
 			closeSession(session);
 		}
+	}
+
+	protected int countByOrganizationId(
+		Session session, long organizationId,
+		LinkedHashMap<String, Object> params) {
+
+		String sql = CustomSQLUtil.get(COUNT_BY_ORGANIZATION_ID);
+
+		sql = StringUtil.replace(sql, "[$JOIN$]", getJoin(params));
+		sql = StringUtil.replace(sql, "[$WHERE$]", getWhere(params));
+
+		SQLQuery q = session.createSQLQuery(sql);
+
+		q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		setJoin(qPos, params);
+		qPos.add(organizationId);
+
+		Iterator<Long> itr = q.list().iterator();
+
+		if (itr.hasNext()) {
+			Long count = itr.next();
+
+			if (count != null) {
+				return count.intValue();
+			}
+		}
+
+		return 0;
 	}
 
 	protected int countByPermissions(
@@ -801,11 +960,17 @@ public class OrganizationFinderImpl
 		else if (key.equals("organizationsRoles")) {
 			join = CustomSQLUtil.get(JOIN_BY_ORGANIZATIONS_ROLES);
 		}
+		else if (key.equals("organizationsUserGroups")) {
+			join = CustomSQLUtil.get(JOIN_BY_ORGANIZATIONS_USERGROUPS);
+		}
 		else if (key.equals("organizationsUsers")) {
 			join = CustomSQLUtil.get(JOIN_BY_ORGANIZATIONS_USERS);
 		}
 		else if (key.equals("orgGroupPermission")) {
 			join = CustomSQLUtil.get(JOIN_BY_ORG_GROUP_PERMISSION);
+		}
+		else if (key.equals("usersOrgs")) {
+			join = CustomSQLUtil.get(JOIN_BY_USERS_ORGS);
 		}
 
 		if (Validator.isNotNull(join)) {
@@ -908,11 +1073,17 @@ public class OrganizationFinderImpl
 				join = sb.toString();
 			}
 		}
+		else if (key.equals("organizationsUserGroups")) {
+			join = CustomSQLUtil.get(JOIN_BY_ORGANIZATIONS_USERGROUPS);
+		}
 		else if (key.equals("organizationsUsers")) {
 			join = CustomSQLUtil.get(JOIN_BY_ORGANIZATIONS_USERS);
 		}
 		else if (key.equals("orgGroupPermission")) {
 			join = CustomSQLUtil.get(JOIN_BY_ORG_GROUP_PERMISSION);
+		}
+		else if (key.equals("usersOrgs")) {
+			join = CustomSQLUtil.get(JOIN_BY_USERS_ORGS);
 		}
 
 		if (Validator.isNotNull(join)) {

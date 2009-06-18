@@ -39,6 +39,7 @@ import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.ContactConstants;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Organization;
+import com.liferay.portal.model.OrganizationConstants;
 import com.liferay.portal.model.PasswordPolicy;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.User;
@@ -251,9 +252,15 @@ public class UserImpl extends UserModelImpl implements User {
 				GroupLocalServiceUtil.search(
 					getCompanyId(), null, null, groupParams, start, end));
 
-			List<Organization> userOrgs =
-				OrganizationLocalServiceUtil.getUserOrganizations(
-					getUserId(), start, end);
+			LinkedHashMap<String, Object> organizationParams =
+				new LinkedHashMap<String, Object>();
+
+			organizationParams.put("usersOrgs", new Long(getUserId()));
+
+			List<Organization> userOrgs = OrganizationLocalServiceUtil.search(
+				getCompanyId(),
+				OrganizationConstants.ANY_PARENT_ORGANIZATION_ID, null,	null,
+				null, null, organizationParams, start, end);
 
 			for (Organization organization : userOrgs) {
 				myPlaces.add(0, organization.getGroup());
