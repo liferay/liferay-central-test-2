@@ -565,8 +565,8 @@ public class UpgradeDuplicates extends UpgradeProcess {
 		deleteDuplicates(
 			"Subscription", "subscriptionId",
 			new Object[][] {
-				{"companyId", Types.BIGINT}, {"classNameId", Types.BIGINT},
-				{"classPK", Types.BIGINT}
+				{"companyId", Types.BIGINT}, {"userId", Types.BIGINT},
+				{"classNameId", Types.BIGINT}, {"classPK", Types.BIGINT}
 			});
 	}
 
