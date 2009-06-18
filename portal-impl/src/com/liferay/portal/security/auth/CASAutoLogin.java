@@ -116,9 +116,7 @@ public class CASAutoLogin implements AutoLogin {
 		return credentials;
 	}
 
-	protected User addUser(long companyId, String screenName)
-		throws Exception {
-
+	protected User addUser(long companyId, String screenName) throws Exception {
 		LdapContext ctx = null;
 
 		try {
