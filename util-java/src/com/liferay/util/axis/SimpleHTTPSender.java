@@ -111,7 +111,7 @@ public class SimpleHTTPSender extends HTTPSender {
 		String contentType = urlc.getContentType();
 		String contentLocation = urlc.getHeaderField("Content-Location");
 
-		InputStream is = ((HttpURLConnection) urlc).getErrorStream();
+		InputStream is = ((HttpURLConnection)urlc).getErrorStream();
 
 		if (is == null) {
 			is = urlc.getInputStream();
