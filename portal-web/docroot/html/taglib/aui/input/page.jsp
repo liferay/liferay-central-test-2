@@ -90,7 +90,7 @@ if ((type.equals("assetTags")) ||
 				contentCallback='<%= portletResponse.getNamespace() + "getSuggestionsContent" %>'
 			/>
 		</c:when>
-		<c:when test="<%= (model != null) && (field != null) %>">
+		<c:when test="<%= (model != null) && (Validator.isNull(type)) %>">
 			<span class="exp-form-field exp-form-<%= ModelHintsUtil.getType(model.getName(), field).toLowerCase() %>">
 				<liferay-ui:input-field
 					bean="<%= bean %>"
@@ -113,7 +113,7 @@ if ((type.equals("assetTags")) ||
 				if (value != null) {
 					booleanValue = GetterUtil.getBoolean(value.toString());
 				}
-					
+
 				booleanValue = ParamUtil.getBoolean(request, name, booleanValue);
 				%>
 
@@ -123,6 +123,13 @@ if ((type.equals("assetTags")) ||
 			</span>
 		</c:when>
 		<c:otherwise>
+
+			<%
+			if (Validator.isNull(type)) {
+				type = "text";
+			}
+			%>
+
 			<span class="exp-form-field exp-form-<%= type %>">
 
 				<%

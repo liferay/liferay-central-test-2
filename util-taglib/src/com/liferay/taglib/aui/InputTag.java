@@ -65,7 +65,7 @@ public class InputTag extends IncludeTag implements DynamicAttributes {
 				_last = false;
 				_model = null;
 				_name = null;
-				_type = "text";
+				_type = null;
 				_value = null;
 			}
 		}
@@ -185,7 +185,7 @@ public class InputTag extends IncludeTag implements DynamicAttributes {
 	private boolean _last;
 	private Class<?> _model;
 	private String _name;
-	private String _type = "text";
+	private String _type;
 	private Object _value;
 
 }
