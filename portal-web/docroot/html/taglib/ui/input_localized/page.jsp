@@ -27,6 +27,8 @@
 <%
 String randomNamespace = PwdGenerator.getPassword(PwdGenerator.KEY3, 4);
 
+boolean disabled = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:input-localized:disabled"));
+Map<String, Object> dynamicAttributes = (Map<String, Object>)request.getAttribute("liferay-ui:input-localized:dynamicAttributes");
 String name = (String)request.getAttribute("liferay-ui:input-localized:name");
 String xml = (String)request.getAttribute("liferay-ui:input-localized:xml");
 String type = (String)request.getAttribute("liferay-ui:input-localized:type");
@@ -45,10 +47,10 @@ if (Validator.isNull(defaultLanguageValue) && request.getParameter(name + String
 <div class="taglib-input-localized">
 	<c:choose>
 		<c:when test='<%= type.equals("input") %>'>
-			<input id="<portlet:namespace /><%= name + StringPool.UNDERLINE + defaultLanguageId %>" name="<portlet:namespace /><%= name + StringPool.UNDERLINE + defaultLanguageId %>" type="text" value="<%= HtmlUtil.escape(defaultLanguageValue) %>" />
+			<input <%= disabled ? "disabled" : "" %> id="<portlet:namespace /><%= name + StringPool.UNDERLINE + defaultLanguageId %>" name="<portlet:namespace /><%= name + StringPool.UNDERLINE + defaultLanguageId %>" type="text" value="<%= HtmlUtil.escape(defaultLanguageValue) %>" <%= _buildDynamicAttributes(dynamicAttributes) %> />
 		</c:when>
 		<c:when test='<%= type.equals("textarea") %>'>
-			<textarea id="<portlet:namespace /><%= name + StringPool.UNDERLINE + defaultLanguageId %>" name="<portlet:namespace /><%= name + StringPool.UNDERLINE + defaultLanguageId %>"><%= HtmlUtil.escape(defaultLanguageValue) %></textarea>
+			<textarea <%= disabled ? "disabled" : "" %> id="<portlet:namespace /><%= name + StringPool.UNDERLINE + defaultLanguageId %>" name="<portlet:namespace /><%= name + StringPool.UNDERLINE + defaultLanguageId %>" <%= _buildDynamicAttributes(dynamicAttributes) %>><%= HtmlUtil.escape(defaultLanguageValue) %></textarea>
 		</c:when>
 	</c:choose>
 
@@ -101,7 +103,7 @@ if (Validator.isNull(defaultLanguageValue) && request.getParameter(name + String
 							<div class="exp-ctrl-holder exp-form-column">
 								<img alt="<%=  Validator.isNotNull(curLanguageId) ? LocaleUtil.fromLanguageId(curLanguageId).getDisplayName() : StringPool.BLANK %>" class="language-flag" src="<%= themeDisplay.getPathThemeImages() %>/language/<%= Validator.isNotNull(curLanguageId) ? curLanguageId : "../spacer" %>.png" />
 
-								<select id="<portlet:namespace />languageId<%= i %>">
+								<select <%= disabled ? "disabled" : "" %> id="<portlet:namespace />languageId<%= i %>">
 									<option value="" />
 
 									<%
@@ -141,10 +143,10 @@ if (Validator.isNull(defaultLanguageValue) && request.getParameter(name + String
 
 								<c:choose>
 									<c:when test='<%= type.equals("input") %>'>
-										<input class="language-value" name="<portlet:namespace /><%= name + StringPool.UNDERLINE + curLanguageId %>" type="text" value="<%= HtmlUtil.escape(languageValue) %>" />
+										<input class="language-value" <%= disabled ? "disabled" : "" %> name="<portlet:namespace /><%= name + StringPool.UNDERLINE + curLanguageId %>" type="text" value="<%= HtmlUtil.escape(languageValue) %>" />
 									</c:when>
 									<c:when test='<%= type.equals("textarea") %>'>
-										<textarea class="language-value" name="<portlet:namespace /><%= name + StringPool.UNDERLINE + curLanguageId %>"><%= HtmlUtil.escape(languageValue) %></textarea>
+										<textarea class="language-value" <%= disabled ? "disabled" : "" %> name="<portlet:namespace /><%= name + StringPool.UNDERLINE + curLanguageId %>"><%= HtmlUtil.escape(languageValue) %></textarea>
 									</c:when>
 								</c:choose>
 							</div>
@@ -163,12 +165,14 @@ if (Validator.isNull(defaultLanguageValue) && request.getParameter(name + String
 <script type="text/javascript">
 	jQuery(
 		function () {
-			new Liferay.AutoFields(
-				{
-					container: '#<%= randomNamespace %>languageSelector .lfr-panel-content',
-					baseRows: '#<%= randomNamespace %>languageSelector .lfr-form-row'
-				}
-			);
+			<c:if test="<%= !disabled %>">
+				new Liferay.AutoFields(
+					{
+						container: '#<%= randomNamespace %>languageSelector .lfr-panel-content',
+						baseRows: '#<%= randomNamespace %>languageSelector .lfr-form-row'
+					}
+				);
+			</c:if>
 
 			var panel = new Liferay.PanelFloating(
 				{
