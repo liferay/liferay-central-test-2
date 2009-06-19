@@ -154,6 +154,7 @@ if (choiceName > 0) {
 			char c = (char)(96 + i);
 
 			PollsChoice choice = null;
+
 			String paramName = null;
 
 			if (deleteChoice && (i >= choiceName)) {
@@ -168,7 +169,7 @@ if (choiceName > 0) {
 			}
 		%>
 
-			<div class="choice <%= i == choicesCount ? "last-choice" : StringPool.BLANK %>">
+			<div class="choice <%= (i == choicesCount) ? "last-choice" : StringPool.BLANK %>">
 				<span class="choice-name-prefix"><%= c %>.</span>
 
 				<input name="<portlet:namespace /><%= EditQuestionAction.CHOICE_NAME_PREFIX %><%= c %>" type="hidden" value="<%= c %>" />
