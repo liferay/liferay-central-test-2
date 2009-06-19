@@ -73,6 +73,9 @@ public class LiferayPortlet extends GenericPortlet {
 		if (SessionErrors.isEmpty(actionRequest)) {
 			SessionMessages.add(actionRequest, "request_processed");
 		}
+		else {
+			return;
+		}
 
 		String redirect = ParamUtil.getString(actionRequest, "redirect");
 
