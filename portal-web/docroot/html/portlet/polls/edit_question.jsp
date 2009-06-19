@@ -129,7 +129,7 @@ if (choiceName > 0) {
 	</div>
 
 	<div class="exp-ctrl-holder">
-		<label class="inline-label" for="<portlet:namespace />expirationDate">
+		<label for="<portlet:namespace />expirationDate">
 			<liferay-ui:message key="expiration-date" />
 
 			<liferay-ui:input-field model="<%= PollsQuestion.class %>" bean="<%= question %>" field="expirationDate" defaultValue="<%= expirationDate %>" disabled="<%= neverExpire %>" />
