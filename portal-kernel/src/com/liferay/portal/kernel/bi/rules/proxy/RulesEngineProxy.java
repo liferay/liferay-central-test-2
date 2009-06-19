@@ -26,9 +26,9 @@ import com.liferay.portal.kernel.bi.rules.AdminRequestMessage;
 import com.liferay.portal.kernel.bi.rules.AdminRequestType;
 import com.liferay.portal.kernel.bi.rules.ExecutionRequestMessage;
 import com.liferay.portal.kernel.bi.rules.Query;
+import com.liferay.portal.kernel.bi.rules.RuleRetriever;
 import com.liferay.portal.kernel.bi.rules.RulesEngine;
 import com.liferay.portal.kernel.bi.rules.RulesEngineException;
-import com.liferay.portal.kernel.bi.rules.RuleRetriever;
 import com.liferay.portal.kernel.messaging.MessageBusException;
 import com.liferay.portal.kernel.messaging.sender.SingleDestinationMessageSender;
 import com.liferay.portal.kernel.messaging.sender.SingleDestinationSynchronousMessageSender;
@@ -36,7 +36,7 @@ import com.liferay.portal.kernel.messaging.sender.SingleDestinationSynchronousMe
 import java.util.List;
 
 /**
- * <a href="RuleEngineProxy.java.html"><b><i>View Source</i></b></a>
+ * <a href="RulesEngineProxy.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael C. Han
  *
@@ -90,7 +90,7 @@ public class RulesEngineProxy implements RulesEngine {
 
 		ExecutionRequestMessage executionRequestMessage =
 			new ExecutionRequestMessage(domainName);
-		
+
 		return _sendExecutionMessage(executionRequestMessage, facts, query);
 	}
 

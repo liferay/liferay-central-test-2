@@ -25,7 +25,7 @@ package com.liferay.portal.kernel.bi.rules;
 import com.liferay.portal.PortalException;
 
 /**
- * <a href="RuleEngineException.java.html"><b><i>View Source</i></b></a>
+ * <a href="RulesEngineException.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael C. Han
  *

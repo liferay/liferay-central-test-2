@@ -34,12 +34,12 @@ import java.util.List;
  */
 public class Query {
 
-	public static Query createStandardQuery() {
-		return new Query(QueryType.STANDARD);
-	}
-
 	public static Query createCustomQuery() {
 		return new Query(QueryType.CUSTOM);
+	}
+
+	public static Query createStandardQuery() {
+		return new Query(QueryType.STANDARD);
 	}
 
 	public void addArgument(Object object) {
@@ -88,6 +88,7 @@ public class Query {
 			throw new IllegalStateException(
 				"Standard queries cannot accept query strings");
 		}
+
 		_queryString = queryString;
 	}
 

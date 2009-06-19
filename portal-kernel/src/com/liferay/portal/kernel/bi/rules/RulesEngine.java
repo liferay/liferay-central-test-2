@@ -25,7 +25,7 @@ package com.liferay.portal.kernel.bi.rules;
 import java.util.List;
 
 /**
- * <a href="RuleEngine.java.html"><b><i>View Source</i></b></a>
+ * <a href="RulesEngine.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael C. Han
  * @author Vihang Pathak

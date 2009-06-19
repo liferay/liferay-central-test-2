@@ -47,13 +47,13 @@ public class ExecutionRequestMessage implements Serializable {
 		addClientClassLoader(Thread.currentThread().getContextClassLoader());
 	}
 
-	public void addClientClassLoader(ClassLoader newClassLoader) {
+	public void addClientClassLoader(ClassLoader clientClassLoader) {
 		if (_clientClassLoader == null) {
-			_clientClassLoader = newClassLoader;
+			_clientClassLoader = clientClassLoader;
 		}
 		else {
 			_clientClassLoader = new AggregateClassLoader(
-				newClassLoader, _clientClassLoader);
+				clientClassLoader, _clientClassLoader);
 		}
 	}
 

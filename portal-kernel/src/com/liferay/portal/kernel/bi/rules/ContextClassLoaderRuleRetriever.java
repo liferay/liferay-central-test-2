@@ -27,8 +27,8 @@ import com.liferay.portal.kernel.util.StringPool;
 import java.io.InputStream;
 
 /**
- * <a href="ContextClassLoaderRuleRetriever.java.html"><b><i>View
- * Source</i></b></a>
+ * <a href="ContextClassLoaderRuleRetriever.java.html"><b><i>View Source</i></b>
+ * </a>
  *
  * @author Vihang Pathak
  * @author Michael C. Han
@@ -36,12 +36,12 @@ import java.io.InputStream;
  */
 public class ContextClassLoaderRuleRetriever implements RuleRetriever {
 
-	public ContextClassLoaderRuleRetriever(String ruleFileName) {
+	public ContextClassLoaderRuleRetriever(String fileName) {
 		ClassLoader contextClassLoader =
 			Thread.currentThread().getContextClassLoader();
-		
+
 		_inputStream = contextClassLoader.getResourceAsStream(
-			StringPool.FORWARD_SLASH + ruleFileName);
+			StringPool.SLASH + fileName);
 	}
 
 	public InputStream getInputStream() {
@@ -49,4 +49,5 @@ public class ContextClassLoaderRuleRetriever implements RuleRetriever {
 	}
 
 	private InputStream _inputStream;
+
 }
