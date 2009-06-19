@@ -108,7 +108,13 @@ if ((type.equals("assetTags")) ||
 			<span class="exp-form-field exp-form-checkbox">
 
 				<%
-				boolean booleanValue = ParamUtil.getBoolean(request, name, GetterUtil.getBoolean(value.toString()));
+				boolean booleanValue = false;
+
+				if (value != null) {
+					booleanValue = GetterUtil.getBoolean(value.toString());
+				}
+					
+				booleanValue = ParamUtil.getBoolean(request, name, booleanValue);
 				%>
 
 				<input id="<%= id %>" name="<%= name %>" type="hidden" value="<%= value %>" />
