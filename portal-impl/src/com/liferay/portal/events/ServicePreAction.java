@@ -57,6 +57,7 @@ import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Organization;
+import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.model.Theme;
 import com.liferay.portal.model.User;
@@ -74,6 +75,7 @@ import com.liferay.portal.service.ImageLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.LayoutSetLocalServiceUtil;
 import com.liferay.portal.service.OrganizationLocalServiceUtil;
+import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.ThemeLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
@@ -1700,8 +1702,16 @@ public class ServicePreAction extends Action {
 		boolean parallelRenderEnable = true;
 
 		if (layout != null) {
-			if (layoutTypePortlet.getPortletIds().size() == 1) {
-				parallelRenderEnable = false;
+			List<String> portletIds = layoutTypePortlet.getPortletIds();
+
+			if (portletIds.size() == 1) {
+				String portletId = portletIds.get(0);
+				Portlet portlet =
+					PortletLocalServiceUtil.getPortletById(portletId);
+
+				if (Validator.isNotNull(portlet) && !portlet.isAjaxable()) {
+					parallelRenderEnable = false;
+				}
 			}
 		}
 
