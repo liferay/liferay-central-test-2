@@ -128,6 +128,13 @@ JkShmFile logs/jk-runtime-status</echo>
 
 		<antcall target="replace-remote-file">
 			<param name="remote.host" value="${cluster-node.host}" />
+			<param name="remote.file" value="/liferay-portal-${lp.version}/tomcat-6.0.18/bin/shutdown.bat" />
+			<param name="remote.replace.token" value="set CATALINA_HOME=%cd%" />
+			<param name="remote.replace.value" value="set CATALINA_HOME=C:\liferay-portal-${lp.version}\tomcat-6.0.18" />
+		</antcall>
+
+		<antcall target="replace-remote-file">
+			<param name="remote.host" value="${cluster-node.host}" />
 			<param name="remote.file" value="/liferay-portal-${lp.version}/tomcat-6.0.18/conf/server.xml" />
 			<param name="remote.replace.token" value="&lt;Engine name=&quot;Catalina&quot; defaultHost=&quot;localhost&quot;&gt;" />
 			<param name="remote.replace.value" value="&lt;Engine name=&quot;Catalina&quot; defaultHost=&quot;localhost&quot; jvmRoute=&quot;${cluster-node.value}&quot;&gt;" />
@@ -148,7 +155,7 @@ web.server.display.node=true</echo>
 		<exec executable="${pscp.executable}">
 			<arg line="-pw ${vm.password} portal-impl/src/portal-ext.properties ${vm.username}@${cluster-node.host}:/liferay-portal-${lp.version}/tomcat-6.0.18/webapps/ROOT/WEB-INF/classes" />
 		</exec>
-		
+
 		<delete file="portal-impl/src/portal-ext.properties" />
 	</target>
 
@@ -270,7 +277,49 @@ web.server.display.node=true</echo>
 		<antcall target="start-selenium" />
 
 		<antcall target="run-selenium-test">
-			<param name="test.class" value="ClusterTestSuite" />
+			<param name="test.class" value="Cluster1TestSuite" />
+		</antcall>
+
+		<antcall target="stop-selenium" />
+
+		<exec executable="${plink.executable}">
+			<arg line="-pw ${vm.password} ${vm.username}@${vm.host.cluster-node-2} cmd.exe /c C:\liferay-portal-${lp.version}\tomcat-6.0.18\bin\shutdown.bat" />
+		</exec>
+
+		<sleep seconds="30" />
+
+		<exec executable="${plink.executable}">
+			<arg line="-pw ${vm.password} ${vm.username}@${vm.host.cluster-node-2} TASKKILL /f /im java.exe" />
+		</exec>
+
+		<antcall target="start-selenium" />
+
+		<antcall target="run-selenium-test">
+			<param name="test.class" value="Cluster2TestSuite" />
+		</antcall>
+
+		<antcall target="stop-selenium" />
+
+		<exec executable="${plink.executable}">
+			<arg line="-pw ${vm.password} ${vm.username}@${vm.host.cluster-node-2} cmd.exe /c C:\liferay-portal-${lp.version}\tomcat-6.0.18\bin\startup.bat" />
+		</exec>
+
+		<exec executable="${plink.executable}">
+			<arg line="-pw ${vm.password} ${vm.username}@${vm.host.cluster-node-1} cmd.exe /c C:\liferay-portal-${lp.version}\tomcat-6.0.18\bin\shutdown.bat" />
+		</exec>
+
+		<sleep seconds="30" />
+
+		<exec executable="${plink.executable}">
+			<arg line="-pw ${vm.password} ${vm.username}@${vm.host.cluster-node-1} TASKKILL /f /im java.exe" />
+		</exec>
+
+		<sleep seconds="30" />
+
+		<antcall target="start-selenium" />
+
+		<antcall target="run-selenium-test">
+			<param name="test.class" value="Cluster3TestSuite" />
 		</antcall>
 
 		<antcall target="stop-selenium" />
