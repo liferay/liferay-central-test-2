@@ -323,8 +323,6 @@ Liferay.Portlet = {
 						jPortlet.find('.portlet-refresh:first a').click(
 							function(event) {
 								instance.refresh(portlet);
-
-								return false;
 							}
 						);
 
