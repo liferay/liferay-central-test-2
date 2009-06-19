@@ -90,7 +90,7 @@ if ((type.equals("assetTags")) ||
 				contentCallback='<%= portletResponse.getNamespace() + "getSuggestionsContent" %>'
 			/>
 		</c:when>
-		<c:when test="<%= (model != null) && (Validator.isNull(type)) %>">
+		<c:when test="<%= (model != null) && Validator.isNull(type) %>">
 			<span class="exp-form-field exp-form-<%= ModelHintsUtil.getType(model.getName(), field).toLowerCase() %>">
 				<liferay-ui:input-field
 					bean="<%= bean %>"
