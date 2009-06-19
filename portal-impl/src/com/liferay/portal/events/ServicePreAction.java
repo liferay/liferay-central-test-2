@@ -1706,10 +1706,11 @@ public class ServicePreAction extends Action {
 
 			if (portletIds.size() == 1) {
 				String portletId = portletIds.get(0);
-				Portlet portlet =
-					PortletLocalServiceUtil.getPortletById(portletId);
 
-				if (Validator.isNotNull(portlet) && !portlet.isAjaxable()) {
+				Portlet portlet = PortletLocalServiceUtil.getPortletById(
+					portletId);
+
+				if ((portlet != null) && !portlet.isAjaxable()) {
 					parallelRenderEnable = false;
 				}
 			}
