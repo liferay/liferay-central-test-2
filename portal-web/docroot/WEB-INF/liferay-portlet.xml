@@ -229,6 +229,7 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
+		<header-portlet-css>/html/portlet/polls/css.jsp</header-portlet-css>
 		<css-class-wrapper>portlet-polls</css-class-wrapper>
 	</portlet>
 	<portlet>

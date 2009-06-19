@@ -153,48 +153,36 @@ if (choiceName > 0) {
 		for (int i = 1; i <= choicesCount; i++) {
 			char c = (char)(96 + i);
 
-			String choiceDesc = null;
+			PollsChoice choice = null;
+			String paramName = null;
 
-			if (deleteChoice) {
-				if (i < choiceName) {
-					choiceDesc = ParamUtil.getString(request, EditQuestionAction.CHOICE_DESCRIPTION_PREFIX + c);
-				}
-				else {
-					choiceDesc = ParamUtil.getString(request, EditQuestionAction.CHOICE_DESCRIPTION_PREFIX + ((char)(96 + i + 1)));
-				}
+			if (deleteChoice && (i >= choiceName)) {
+				paramName = EditQuestionAction.CHOICE_DESCRIPTION_PREFIX + ((char)(96 + i + 1));
 			}
 			else {
-				choiceDesc = ParamUtil.getString(request, EditQuestionAction.CHOICE_DESCRIPTION_PREFIX + c);
+				paramName = EditQuestionAction.CHOICE_DESCRIPTION_PREFIX + c;
 			}
 
-			if (Validator.isNull(choiceDesc)) {
-				if (question != null) {
-					if (i - 1 < choices.size()) {
-						PollsChoice choice = (PollsChoice)choices.get(i - 1);
-
-						choiceDesc = choice.getDescription();
-					}
-				}
+			if (question != null && (i - 1 < choices.size())) {
+				choice = (PollsChoice)choices.get(i - 1);
 			}
 		%>
 
-			<%= c %>.
+			<div class="choice <%= i == choicesCount ? "last-choice" : StringPool.BLANK %>">
+				<span class="choice-name-prefix"><%= c %>.</span>
 
-			<input name="<portlet:namespace /><%= EditQuestionAction.CHOICE_NAME_PREFIX %><%= c %>" type="hidden" value="<%= c %>" />
+				<input name="<portlet:namespace /><%= EditQuestionAction.CHOICE_NAME_PREFIX %><%= c %>" type="hidden" value="<%= c %>" />
 
-			<input class="lfr-input-text" name="<%= EditQuestionAction.CHOICE_DESCRIPTION_PREFIX + c %>" type="text" value="<%= choiceDesc %>" />
+				<liferay-ui:input-field model="<%= PollsChoice.class %>" bean="<%= choice %>" field="description" fieldParam="<%= paramName %>" />
 
-			<c:if test="<%= ((question == null) && (i > 2)) || ((question != null) && (i > oldChoicesCount)) %>">
-				<input type="button" value="<liferay-ui:message key="delete" />" onClick="document.<portlet:namespace />fm.<portlet:namespace />choicesCount.value = '<%= choicesCount - 1 %>'; document.<portlet:namespace />fm.<portlet:namespace />choiceName.value = '<%= i %>'; submitForm(document.<portlet:namespace />fm);" />
-			</c:if>
-
-			<br />
+				<c:if test="<%= ((question == null) && (i > 2)) || ((question != null) && (i >= oldChoicesCount)) %>">
+					<input type="button" value="<liferay-ui:message key="delete" />" onClick="document.<portlet:namespace />fm.<portlet:namespace />choicesCount.value = '<%= choicesCount - 1 %>'; document.<portlet:namespace />fm.<portlet:namespace />choiceName.value = '<%= i %>'; submitForm(document.<portlet:namespace />fm);" />
+				</c:if>
+			</div>
 
 		<%
 		}
 		%>
-
-		<br />
 
 		<div class="exp-button-holder">
 			<input type="button" value="<liferay-ui:message key="add-choice" />" onClick="<portlet:namespace />addPollChoice();" />
