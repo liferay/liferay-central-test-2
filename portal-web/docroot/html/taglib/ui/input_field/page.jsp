@@ -333,7 +333,7 @@ Map<String, String> hints = ModelHintsUtil.getHints(model, field);
 
 					<c:choose>
 						<c:when test="<%= localized %>">
-							<liferay-ui:input-localized disabled="<%= disabled %>" name="<%= fieldParam %>" xml="<%= BeanPropertiesUtil.getString(bean, field) %>" style='<%= "width: " + displayWidth + (Validator.isDigit(displayWidth) ? "px" : "") + "; " + (upperCase ? "text-transform: uppercase;" : "" ) %>' onChange='<%= "Liferay.Util.checkMaxLength(this, " + maxLength + ");" %>' onKeyPress='<%= "Liferay.Util.checkMaxLength(this, " + maxLength + ");" %>' />
+							<liferay-ui:input-localized disabled="<%= disabled %>" name="<%= fieldParam %>" onChange='<%= "Liferay.Util.checkMaxLength(this, " + maxLength + ");" %>' onKeyPress='<%= "Liferay.Util.checkMaxLength(this, " + maxLength + ");" %>' style='<%= "width: " + displayWidth + (Validator.isDigit(displayWidth) ? "px" : "") + "; " + (upperCase ? "text-transform: uppercase;" : "" ) %>' xml="<%= BeanPropertiesUtil.getString(bean, field) %>" />
 						</c:when>
 						<c:otherwise>
 							<input <%= disabled ? "disabled" : "" %> id="<%= fieldParam %>" name="<%= fieldParam %>" style="width: <%= displayWidth %><%= Validator.isDigit(displayWidth) ? "px" : "" %>; <%= upperCase ? "text-transform: uppercase;" : "" %>" type="<%= secret ? "password" : "text" %>" value="<%= value %>" onChange="Liferay.Util.checkMaxLength(this, <%= maxLength %>);" onKeyPress="Liferay.Util.checkMaxLength(this, <%= maxLength %>);" />
@@ -343,7 +343,7 @@ Map<String, String> hints = ModelHintsUtil.getHints(model, field);
 				<c:otherwise>
 					<c:choose>
 						<c:when test="<%= localized %>">
-							<liferay-ui:input-localized disabled="<%= disabled %>" name="<%= fieldParam %>" type="textarea" xml="<%= BeanPropertiesUtil.getString(bean, field) %>" style='<%= "height: " + displayHeight + (Validator.isDigit(displayHeight) ? "px" : "" ) + "; " + "width: " + displayWidth + (Validator.isDigit(displayWidth) ? "px" : "") +";" %>' wrap="soft" onChange='<%= "Liferay.Util.checkMaxLength(this, " + maxLength + ");" %>' onKeyDown='<%= (checkTab ? "Liferay.Util.checkTab(this); " : "") + "Liferay.Util.disableEsc();" %>' onKeyPress='<%= "Liferay.Util.checkMaxLength(this," + maxLength +");" %>' />
+							<liferay-ui:input-localized disabled="<%= disabled %>" name="<%= fieldParam %>" onChange='<%= "Liferay.Util.checkMaxLength(this, " + maxLength + ");" %>' onKeyDown='<%= (checkTab ? "Liferay.Util.checkTab(this); " : "") + "Liferay.Util.disableEsc();" %>' onKeyPress='<%= "Liferay.Util.checkMaxLength(this," + maxLength +");" %>' style='<%= "height: " + displayHeight + (Validator.isDigit(displayHeight) ? "px" : "" ) + "; " + "width: " + displayWidth + (Validator.isDigit(displayWidth) ? "px" : "") +";" %>' type="textarea" wrap="soft" xml="<%= BeanPropertiesUtil.getString(bean, field) %>" />
 						</c:when>
 						<c:otherwise>
 							<textarea <%= disabled ? "disabled" : "" %> id="<%= fieldParam %>" name="<%= fieldParam %>" style="height: <%= displayHeight %><%= Validator.isDigit(displayHeight) ? "px" : "" %>; width: <%= displayWidth %><%= Validator.isDigit(displayWidth) ? "px" : "" %>;" wrap="soft" onChange="Liferay.Util.checkMaxLength(this, <%= maxLength %>);" onKeyDown="<%= checkTab ? "Liferay.Util.checkTab(this); " : "" %> Liferay.Util.disableEsc();" onKeyPress="Liferay.Util.checkMaxLength(this, <%= maxLength %>);"><%= value %></textarea>

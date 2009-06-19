@@ -44,12 +44,11 @@ public class InputLocalizedTag extends IncludeTag implements DynamicAttributes {
 
 		request.setAttribute(
 			"liferay-ui:input-localized:disabled", String.valueOf(_disabled));
+		request.setAttribute(
+			"liferay-ui:input-localized:dynamicAttributes", _dynamicAttributes);
 		request.setAttribute("liferay-ui:input-localized:name", _name);
 		request.setAttribute("liferay-ui:input-localized:type", _type);
 		request.setAttribute("liferay-ui:input-localized:xml", _xml);
-
-		request.setAttribute(
-			"liferay-ui:input-localized:dynamicAttributes", _dynamicAttributes);
 
 		return EVAL_BODY_BUFFERED;
 	}
@@ -85,7 +84,8 @@ public class InputLocalizedTag extends IncludeTag implements DynamicAttributes {
 
 	private boolean _disabled;
 	private Map<String, Object> _dynamicAttributes =
-		new HashMap<String, Object>();private String _name;
+		new HashMap<String, Object>();
+	private String _name;
 	private String _type = "input";
 	private String _xml;
 
