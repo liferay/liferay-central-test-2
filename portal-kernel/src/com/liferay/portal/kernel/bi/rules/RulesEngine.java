@@ -22,16 +22,36 @@
 
 package com.liferay.portal.kernel.bi.rules;
 
-import java.io.Serializable;
+import java.util.List;
 
 /**
- * <a href="ExecutionRequestType.java.html"><b><i>View Source</i></b></a>
+ * <a href="RuleEngine.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael C. Han
+ * @author Vihang Pathak
  *
  */
-public enum ExecutionRequestType implements Serializable {
+public interface RulesEngine {
 
-	EXECUTE, EXECUTE_WITH_RESULTS
+	public void add(String domainName, RuleRetriever ruleRetriever)
+		throws RulesEngineException;
+
+	public void execute(RuleRetriever ruleRetriever, List<?> facts)
+		throws RulesEngineException;
+
+	public void execute(String domainName, List<?> facts)
+	throws RulesEngineException;
+
+	public List<?> execute(
+			RuleRetriever ruleRetriever, List<?> facts, Query query)
+		throws RulesEngineException;
+
+	public List<?> execute(String domainName, List<?> facts, Query query)
+		throws RulesEngineException;
+
+	public void remove(String domainName) throws RulesEngineException;
+
+	public void update(String domainName, RuleRetriever ruleRetriever)
+		throws RulesEngineException;
 
 }

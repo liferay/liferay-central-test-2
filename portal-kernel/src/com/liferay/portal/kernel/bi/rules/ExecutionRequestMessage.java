@@ -22,6 +22,8 @@
 
 package com.liferay.portal.kernel.bi.rules;
 
+import com.liferay.portal.kernel.util.AggregateClassLoader;
+
 import java.io.Serializable;
 
 import java.util.ArrayList;
@@ -35,19 +37,24 @@ import java.util.List;
  */
 public class ExecutionRequestMessage implements Serializable {
 
-	public ExecutionRequestMessage(
-		ExecutionRequestType executionRequestType, String domainName) {
-
-		_executionRequestType = executionRequestType;
+	public ExecutionRequestMessage(String domainName) {
 		_domainName = domainName;
 	}
 
-	public ExecutionRequestMessage(
-		ExecutionRequestType executionRequestType,
-		RuleRetriever ruleRetriever) {
-
-		_executionRequestType = executionRequestType;
+	public ExecutionRequestMessage(RuleRetriever ruleRetriever) {
 		_ruleRetriever = ruleRetriever;
+
+		addClientClassLoader(Thread.currentThread().getContextClassLoader());
+	}
+
+	public void addClientClassLoader(ClassLoader newClassLoader) {
+		if (_clientClassLoader == null) {
+			_clientClassLoader = newClassLoader;
+		}
+		else {
+			_clientClassLoader = new AggregateClassLoader(
+				newClassLoader, _clientClassLoader);
+		}
 	}
 
 	public void addFact(Object fact) {
@@ -56,6 +63,10 @@ public class ExecutionRequestMessage implements Serializable {
 
 	public void addFacts(List<?> facts) {
 		_facts.addAll(facts);
+	}
+
+	public ClassLoader getClientClassLoader() {
+		return _clientClassLoader;
 	}
 
 	public String getDomainName() {
@@ -74,16 +85,12 @@ public class ExecutionRequestMessage implements Serializable {
 		return _ruleRetriever;
 	}
 
-	public ExecutionRequestType getType() {
-		return _executionRequestType;
-	}
-
 	public void setQuery(Query query) {
 		_query = query;
 	}
 
+	private ClassLoader _clientClassLoader;
 	private String _domainName;
-	private ExecutionRequestType _executionRequestType;
 	private List<Object> _facts = new ArrayList<Object>();
 	private Query _query;
 	private RuleRetriever _ruleRetriever;

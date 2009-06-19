@@ -34,15 +34,38 @@ import java.util.List;
  */
 public class Query {
 
+	public static Query createStandardQuery() {
+		return new Query(QueryType.STANDARD);
+	}
+
+	public static Query createCustomQuery() {
+		return new Query(QueryType.CUSTOM);
+	}
+
 	public void addArgument(Object object) {
+		if (_queryType.equals(QueryType.STANDARD)) {
+			throw new IllegalStateException(
+				"Standard queries cannot accept query arguments");
+		}
+
 		_arguments.add(object);
 	}
 
 	public void addArguments(List<?> arguments) {
+		if (_queryType.equals(QueryType.STANDARD)) {
+			throw new IllegalStateException(
+				"Standard queries cannot accept query arguments");
+		}
+
 		_arguments.addAll(arguments);
 	}
 
 	public void addArguments(Object[] arguments) {
+		if (_queryType.equals(QueryType.STANDARD)) {
+			throw new IllegalStateException(
+				"Standard queries cannot accept query arguments");
+		}
+
 		if ((arguments != null) && (arguments.length > 0)) {
 			_arguments.addAll(Arrays.asList(arguments));
 		}
@@ -56,11 +79,24 @@ public class Query {
 		return _queryString;
 	}
 
+	public QueryType getQueryType() {
+		return _queryType;
+	}
+
 	public void setQueryString(String queryString) {
+		if (_queryType.equals(QueryType.STANDARD)) {
+			throw new IllegalStateException(
+				"Standard queries cannot accept query strings");
+		}
 		_queryString = queryString;
+	}
+
+	private Query(QueryType queryType) {
+		_queryType = queryType;
 	}
 
 	private List<Object> _arguments = new ArrayList<Object>();
 	private String _queryString;
+	private QueryType _queryType;
 
 }

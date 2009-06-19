@@ -30,21 +30,17 @@ import com.liferay.portal.PortalException;
  * @author Michael C. Han
  *
  */
-public class RuleEngineException extends PortalException {
+public class RulesEngineException extends PortalException {
 
-	public RuleEngineException() {
-		super();
-	}
-
-	public RuleEngineException(String msg) {
+	public RulesEngineException(String msg) {
 		super(msg);
 	}
 
-	public RuleEngineException(Throwable cause) {
+	public RulesEngineException(Throwable cause) {
 		super(cause);
 	}
 
-	public RuleEngineException(String msg, Throwable cause) {
+	public RulesEngineException(String msg, Throwable cause) {
 		super(msg, cause);
 	}
 
