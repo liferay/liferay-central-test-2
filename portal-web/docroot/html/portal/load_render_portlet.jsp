@@ -49,16 +49,27 @@ String currentURL = PortalUtil.getCurrentURL(request);
 
 		<%
 		String doAsUserId = themeDisplay.getDoAsUserId();
+		String portletId = portlet.getPortletId();
+		String portletState = WindowState.NORMAL.toString();
 
 		StringBuilder url = new StringBuilder();
+
+		if (themeDisplay.getLayoutTypePortlet().hasStateMaxPortletId(portletId)) {
+			portletState = WindowState.MAXIMIZED.toString();
+		}
+		else if (themeDisplay.getLayoutTypePortlet().hasStateMinPortletId(portletId)) {
+			portletState = WindowState.MINIMIZED.toString();
+		}
 
 		url.append(themeDisplay.getPathMain());
 		url.append("/portal/render_portlet");
 		url.append("?p_l_id=");
 		url.append(plid);
 		url.append("&p_p_id=");
-		url.append(portlet.getPortletId());
-		url.append("&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&p_p_col_id=");
+		url.append(portletId);
+		url.append("&p_p_lifecycle=0&p_p_state=");
+		url.append(portletState);
+		url.append("&p_p_mode=view&p_p_col_id=");
 		url.append(columnId);
 		url.append("&p_p_col_pos=");
 		url.append(columnPos);
