@@ -27,6 +27,8 @@
 <%
 Portlet portlet = (Portlet)request.getAttribute(WebKeys.RENDER_PORTLET);
 
+String portletId = portlet.getPortletId();
+
 String columnId = (String)request.getAttribute(WebKeys.RENDER_PORTLET_COLUMN_ID);
 Integer columnPos = (Integer)request.getAttribute(WebKeys.RENDER_PORTLET_COLUMN_POS);
 Integer columnCount = (Integer)request.getAttribute(WebKeys.RENDER_PORTLET_COLUMN_COUNT);
@@ -36,30 +38,30 @@ String currentURL = PortalUtil.getCurrentURL(request);
 
 <c:choose>
 	<c:when test="<%= portlet.getRenderWeight() >= 1 %>">
-		[$TEMPLATE_PORTLET_<%= portlet.getPortletId() %>$]
+		[$TEMPLATE_PORTLET_<%= portletId %>$]
 	</c:when>
 	<c:otherwise>
 
 		<%
-		portletDisplay.setId(portlet.getPortletId());
-		portletDisplay.setNamespace(PortalUtil.getPortletNamespace(portlet.getPortletId()));
+		portletDisplay.setId(portletId);
+		portletDisplay.setNamespace(PortalUtil.getPortletNamespace(portletId));
 		%>
 
 		<div class="loading-animation" id="p_load<%= portletDisplay.getNamespace() %>"></div>
 
 		<%
-		String doAsUserId = themeDisplay.getDoAsUserId();
-		String portletId = portlet.getPortletId();
-		String portletState = WindowState.NORMAL.toString();
-
-		StringBuilder url = new StringBuilder();
+		WindowState windowState = WindowState.NORMAL;
 
 		if (themeDisplay.getLayoutTypePortlet().hasStateMaxPortletId(portletId)) {
-			portletState = WindowState.MAXIMIZED.toString();
+			windowState = WindowState.MAXIMIZED;
 		}
 		else if (themeDisplay.getLayoutTypePortlet().hasStateMinPortletId(portletId)) {
-			portletState = WindowState.MINIMIZED.toString();
+			windowState = WindowState.MINIMIZED;
 		}
+
+		String doAsUserId = themeDisplay.getDoAsUserId();
+
+		StringBuilder url = new StringBuilder();
 
 		url.append(themeDisplay.getPathMain());
 		url.append("/portal/render_portlet");
@@ -68,7 +70,7 @@ String currentURL = PortalUtil.getCurrentURL(request);
 		url.append("&p_p_id=");
 		url.append(portletId);
 		url.append("&p_p_lifecycle=0&p_p_state=");
-		url.append(portletState);
+		url.append(windowState);
 		url.append("&p_p_mode=view&p_p_col_id=");
 		url.append(columnId);
 		url.append("&p_p_col_pos=");
@@ -94,7 +96,7 @@ String currentURL = PortalUtil.getCurrentURL(request);
 
 		String ppid = ParamUtil.getString(request, "p_p_id");
 
-		if (ppid.equals(portlet.getPortletId())) {
+		if (ppid.equals(portletId)) {
 			Enumeration enu = request.getParameterNames();
 
 			while (enu.hasMoreElements()) {
