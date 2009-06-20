@@ -23,13 +23,8 @@
 package com.liferay.util.xml;
 
 import com.liferay.portal.kernel.util.ByteArrayMaker;
-import com.liferay.portal.kernel.util.FileUtil;
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.util.InitUtil;
 
 import java.io.IOException;
 import java.io.StringReader;
@@ -73,33 +68,6 @@ public class XMLFormatter {
 
 	public static String fromCompactSafe(String xml) {
 		return StringUtil.replace(xml, "[$NEW_LINE$]", StringPool.NEW_LINE);
-	}
-
-	public static void main(String[] args) {
-		InitUtil.initWithSpring();
-
-		String fileName = System.getProperty("xml.formatter.file");
-		boolean stripComments = GetterUtil.getBoolean(
-			System.getProperty("xml.formatter.strip.comments"));
-
-		if (Validator.isNull(fileName)) {
-			throw new IllegalArgumentException();
-		}
-
-		try {
-			String xml = FileUtil.read(fileName);
-
-			if (stripComments) {
-				xml = HtmlUtil.stripComments(xml);
-			}
-
-			xml = toString(xml);
-
-			FileUtil.write(fileName, xml);
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
 	}
 
 	public static String toCompactSafe(String xml) {
