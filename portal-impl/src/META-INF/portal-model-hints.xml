@@ -525,7 +525,6 @@
 			<hint name="display-width">150</hint>
 		</field>
 		<field name="title" type="String">
-			<hint name="localized">true</hint>
 			<hint name="max-length">4000</hint>
 		</field>
 		<field name="description" type="String">
