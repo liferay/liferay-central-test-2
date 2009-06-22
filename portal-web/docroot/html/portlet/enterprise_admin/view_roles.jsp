@@ -73,6 +73,8 @@ headerNames.add(StringPool.BLANK);
 	for (int i = 0; i < results.size(); i++) {
 		Role role = (Role)results.get(i);
 
+		role = role.toEscapedModel();
+
 		ResultRow row = new ResultRow(role, role.getRoleId(), i);
 
 		PortletURL rowURL = null;
@@ -89,7 +91,7 @@ headerNames.add(StringPool.BLANK);
 
 		// Name
 
-		row.addText(HtmlUtil.escape(role.getTitle(locale)), rowURL);
+		row.addText(role.getTitle(locale), rowURL);
 
 		// Type
 
@@ -106,7 +108,7 @@ headerNames.add(StringPool.BLANK);
 
 		// Description
 
-		row.addText(HtmlUtil.escape(role.getDescription()), rowURL);
+		row.addText(role.getDescription(), rowURL);
 
 		// Action
 
