@@ -145,7 +145,7 @@ if ((selLayout == null) && tabs2.equals("pages")) {
 	tabs3 = "children";
 }
 
-if (tabs2.equals("pages") && ((!tabs3.equals("children") && !tabs3.equals("look-and-feel")) || ((selLayout != null) && !PortalUtil.isLayoutParentable(selLayout)))) {
+if (tabs2.equals("pages") && !tabs3.equals("look-and-feel") && (!tabs3.equals("children") || ((selLayout != null) && !PortalUtil.isLayoutParentable(selLayout)))) {
 	tabs3 = "page";
 }
 
