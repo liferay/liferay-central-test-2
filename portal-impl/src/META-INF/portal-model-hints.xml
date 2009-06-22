@@ -231,7 +231,9 @@
 		<field name="layoutPrototypeId" type="long" />
 		<field name="companyId" type="long" />
 		<field name="name" type="String" />
-		<field name="title" type="String" />
+		<field name="title" type="String">
+			<hint name="localized">true</hint>
+		</field>
 		<field name="description" type="String">
 			<hint-collection name="TEXTAREA" />
 		</field>
