@@ -217,13 +217,18 @@ public class SQLQueryImpl extends QueryImpl implements SQLQuery {
 
 					Object[] array = collection.toArray();
 
-					Object[] values = new Object[_scalars.size()];
+					if (_scalars.size() > 1) {
+						Object[] values = new Object[_scalars.size()];
 
-					for (int i = 0; i < _scalars.size(); i++) {
-						values[i] = array[_scalars.get(i)];
+						for (int i = 0; i < _scalars.size(); i++) {
+							values[i] = array[_scalars.get(i)];
+						}
+
+						newList.add(values);
 					}
-
-					newList.add(values);
+					else {
+						newList.add(array[_scalars.get(0)]);
+					}
 				}
 
 				list = newList;
@@ -232,13 +237,18 @@ public class SQLQueryImpl extends QueryImpl implements SQLQuery {
 				List<Object> newList = new ArrayList<Object>();
 
 				for (Object[] array : (List<Object[]>)list) {
-					Object[] values = new Object[_scalars.size()];
+					if (_scalars.size() > 1) {
+						Object[] values = new Object[_scalars.size()];
 
-					for (int i = 0; i < _scalars.size(); i++) {
-						values[i] = array[_scalars.get(i)];
+						for (int i = 0; i < _scalars.size(); i++) {
+							values[i] = array[_scalars.get(i)];
+						}
+
+						newList.add(values);
 					}
-
-					newList.add(values);
+					else {
+						newList.add(array[_scalars.get(0)]);
+					}
 				}
 
 				list = newList;
