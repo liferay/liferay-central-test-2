@@ -28,10 +28,7 @@ import com.liferay.util.servlet.filters.CacheResponse;
 import com.liferay.util.servlet.filters.CacheResponseData;
 import com.liferay.util.servlet.filters.CacheResponseUtil;
 
-import java.io.IOException;
-
 import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -46,7 +43,7 @@ public class ETagFilter extends BasePortalFilter {
 	protected void processFilter(
 			HttpServletRequest request, HttpServletResponse response,
 			FilterChain filterChain)
-		throws IOException, ServletException {
+		throws Exception {
 
 		CacheResponse cacheResponse = new CacheResponse(
 			response, StringPool.UTF8);

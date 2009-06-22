@@ -24,10 +24,7 @@ package com.liferay.portal.servlet.filters.sessionid;
 
 import com.liferay.portal.servlet.filters.BasePortalFilter;
 
-import java.io.IOException;
-
 import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -47,7 +44,7 @@ public class SessionIdFilter extends BasePortalFilter {
 	protected void processFilter(
 			HttpServletRequest request, HttpServletResponse response,
 			FilterChain filterChain)
-		throws IOException, ServletException {
+		throws Exception {
 
 		SessionIdServletRequest sessionIdRequest = new SessionIdServletRequest(
 			request, response);

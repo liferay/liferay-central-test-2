@@ -24,8 +24,8 @@ package com.liferay.portal.servlet.filters.sso.cas;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.servlet.BaseFilter;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.servlet.filters.BasePortalFilter;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsKeys;
@@ -50,7 +50,7 @@ import javax.servlet.http.HttpSession;
  * @author Raymond Augé
  *
  */
-public class CASFilter extends BaseFilter {
+public class CASFilter extends BasePortalFilter {
 
 	public static void reload(long companyId) {
 		_casFilters.remove(companyId);
@@ -111,41 +111,37 @@ public class CASFilter extends BaseFilter {
 	}
 
 	protected void processFilter(
-		HttpServletRequest request, HttpServletResponse response,
-		FilterChain filterChain) {
+			HttpServletRequest request, HttpServletResponse response,
+			FilterChain filterChain)
+		throws Exception {
 
-		try {
-			long companyId = PortalUtil.getCompanyId(request);
+		long companyId = PortalUtil.getCompanyId(request);
 
-			if (PrefsPropsUtil.getBoolean(
-					companyId, PropsKeys.CAS_AUTH_ENABLED,
-					PropsValues.CAS_AUTH_ENABLED)) {
+		if (PrefsPropsUtil.getBoolean(
+				companyId, PropsKeys.CAS_AUTH_ENABLED,
+				PropsValues.CAS_AUTH_ENABLED)) {
 
-				String pathInfo = request.getPathInfo();
+			String pathInfo = request.getPathInfo();
 
-				if (pathInfo.indexOf("/portal/logout") != -1) {
-					HttpSession session = request.getSession();
+			if (pathInfo.indexOf("/portal/logout") != -1) {
+				HttpSession session = request.getSession();
 
-					session.invalidate();
+				session.invalidate();
 
-					String logoutUrl = PrefsPropsUtil.getString(
-						companyId, PropsKeys.CAS_LOGOUT_URL,
-						PropsValues.CAS_LOGOUT_URL);
+				String logoutUrl = PrefsPropsUtil.getString(
+					companyId, PropsKeys.CAS_LOGOUT_URL,
+					PropsValues.CAS_LOGOUT_URL);
 
-					response.sendRedirect(logoutUrl);
-				}
-				else {
-					Filter casFilter = getCASFilter(companyId);
-
-					casFilter.doFilter(request, response, filterChain);
-				}
+				response.sendRedirect(logoutUrl);
 			}
 			else {
-				processFilter(CASFilter.class, request, response, filterChain);
+				Filter casFilter = getCASFilter(companyId);
+
+				casFilter.doFilter(request, response, filterChain);
 			}
 		}
-		catch (Exception e) {
-			_log.error(e, e);
+		else {
+			processFilter(CASFilter.class, request, response, filterChain);
 		}
 	}
 

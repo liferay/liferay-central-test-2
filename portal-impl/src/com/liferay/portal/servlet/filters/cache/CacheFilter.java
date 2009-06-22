@@ -53,11 +53,8 @@ import com.liferay.util.servlet.filters.CacheResponse;
 import com.liferay.util.servlet.filters.CacheResponseData;
 import com.liferay.util.servlet.filters.CacheResponseUtil;
 
-import java.io.IOException;
-
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -74,7 +71,7 @@ public class CacheFilter extends BasePortalFilter {
 
 	public static final String SKIP_FILTER = CacheFilter.class + "SKIP_FILTER";
 
-	public void init(FilterConfig filterConfig) throws ServletException {
+	public void init(FilterConfig filterConfig) {
 		super.init(filterConfig);
 
 		_pattern = GetterUtil.getInteger(
@@ -345,7 +342,7 @@ public class CacheFilter extends BasePortalFilter {
 	protected void processFilter(
 			HttpServletRequest request, HttpServletResponse response,
 			FilterChain filterChain)
-		throws IOException, ServletException {
+		throws Exception {
 
 		if (isCacheableRequest(request) && !isInclude(request) &&
 			!isAlreadyFiltered(request)) {

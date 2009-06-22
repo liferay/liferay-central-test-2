@@ -24,10 +24,7 @@ package com.liferay.portal.servlet.filters.velocity;
 
 import com.liferay.portal.servlet.filters.BasePortalFilter;
 
-import java.io.IOException;
-
 import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -45,7 +42,7 @@ public class VelocityFilter extends BasePortalFilter {
 	protected void processFilter(
 			HttpServletRequest request, HttpServletResponse response,
 			FilterChain filterChain)
-		throws IOException, ServletException {
+		throws Exception {
 
 		processFilter(VelocityFilter.class, request, response, filterChain);
 	}

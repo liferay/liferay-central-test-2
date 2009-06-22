@@ -40,14 +40,11 @@ import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 
-import java.io.IOException;
-
 import java.util.HashSet;
 import java.util.Set;
 
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -62,7 +59,7 @@ import javax.servlet.http.HttpSession;
  */
 public class SecureFilter extends BasePortalFilter {
 
-	public void init(FilterConfig filterConfig) throws ServletException {
+	public void init(FilterConfig filterConfig) {
 		super.init(filterConfig);
 
 		_basicAuthEnabled = GetterUtil.getBoolean(
@@ -183,7 +180,7 @@ public class SecureFilter extends BasePortalFilter {
 	protected void processFilter(
 			HttpServletRequest request, HttpServletResponse response,
 			FilterChain filterChain)
-		throws IOException, ServletException {
+		throws Exception {
 
 		String remoteAddr = request.getRemoteAddr();
 

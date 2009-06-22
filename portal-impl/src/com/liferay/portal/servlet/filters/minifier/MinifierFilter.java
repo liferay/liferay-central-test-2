@@ -55,7 +55,6 @@ import java.util.regex.Pattern;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
 import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -67,7 +66,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class MinifierFilter extends BasePortalFilter {
 
-	public void init(FilterConfig filterConfig) throws ServletException {
+	public void init(FilterConfig filterConfig) {
 		super.init(filterConfig);
 
 		_servletContext = filterConfig.getServletContext();
@@ -236,7 +235,7 @@ public class MinifierFilter extends BasePortalFilter {
 	protected String getMinifiedContent(
 			HttpServletRequest request, HttpServletResponse response,
 			FilterChain filterChain)
-		throws IOException, ServletException {
+		throws Exception {
 
 		String minifierType = ParamUtil.getString(request, "minifierType");
 		String minifierBundleId = ParamUtil.getString(
@@ -416,7 +415,7 @@ public class MinifierFilter extends BasePortalFilter {
 	protected void processFilter(
 			HttpServletRequest request, HttpServletResponse response,
 			FilterChain filterChain)
-		throws IOException, ServletException {
+		throws Exception {
 
 		String minifiedContent = getMinifiedContent(
 			request, response, filterChain);

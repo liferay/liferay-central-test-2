@@ -49,13 +49,10 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.util.servlet.ServletResponseUtil;
 
-import java.io.IOException;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -100,7 +97,7 @@ public class ThemePreviewFilter extends BasePortalFilter {
 	protected void processFilter(
 			HttpServletRequest request, HttpServletResponse response,
 			FilterChain filterChain)
-		throws IOException, ServletException {
+		throws Exception {
 
 		if (isThemePreview(request)) {
 			request.setAttribute(StripFilter.SKIP_FILTER, Boolean.TRUE);

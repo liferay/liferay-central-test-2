@@ -24,12 +24,12 @@ package com.liferay.portal.servlet.filters.sso.ntlm;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.servlet.BaseFilter;
 import com.liferay.portal.kernel.servlet.BrowserSnifferUtil;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.servlet.HttpMethods;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.security.ldap.PortalLDAPUtil;
+import com.liferay.portal.servlet.filters.BasePortalFilter;
 import com.liferay.portal.util.PortalInstances;
 
 import javax.servlet.FilterChain;
@@ -47,54 +47,49 @@ import jcifs.util.Base64;
  * @author Brian Wing Shun Chan
  *
  */
-public class NtlmPostFilter extends BaseFilter {
+public class NtlmPostFilter extends BasePortalFilter {
 
 	protected Log getLog() {
 		return _log;
 	}
 
 	protected void processFilter(
-		HttpServletRequest request, HttpServletResponse response,
-		FilterChain filterChain) {
+			HttpServletRequest request, HttpServletResponse response,
+			FilterChain filterChain)
+		throws Exception {
 
-		try {
-			long companyId = PortalInstances.getCompanyId(request);
+		long companyId = PortalInstances.getCompanyId(request);
 
-			if (PortalLDAPUtil.isNtlmEnabled(companyId) &&
-				BrowserSnifferUtil.isIe(request) &&
-				request.getMethod().equals(HttpMethods.POST)) {
+		if (PortalLDAPUtil.isNtlmEnabled(companyId) &&
+			BrowserSnifferUtil.isIe(request) &&
+			request.getMethod().equals(HttpMethods.POST)) {
 
-				String authorization = GetterUtil.getString(
-					request.getHeader(HttpHeaders.AUTHORIZATION));
+			String authorization = GetterUtil.getString(
+				request.getHeader(HttpHeaders.AUTHORIZATION));
 
-				if (authorization.startsWith("NTLM ")) {
-					byte[] src = Base64.decode(authorization.substring(5));
+			if (authorization.startsWith("NTLM ")) {
+				byte[] src = Base64.decode(authorization.substring(5));
 
-					if (src[8] == 1) {
-						Type1Message type1 = new Type1Message(src);
-						Type2Message type2 = new Type2Message(
-							type1, new byte[8], null);
+				if (src[8] == 1) {
+					Type1Message type1 = new Type1Message(src);
+					Type2Message type2 = new Type2Message(
+						type1, new byte[8], null);
 
-						authorization = Base64.encode(type2.toByteArray());
+					authorization = Base64.encode(type2.toByteArray());
 
-						response.setHeader(
-							HttpHeaders.WWW_AUTHENTICATE,
-							"NTLM " + authorization);
-						response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-						response.setContentLength(0);
+					response.setHeader(
+						HttpHeaders.WWW_AUTHENTICATE, "NTLM " + authorization);
+					response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+					response.setContentLength(0);
 
-						response.flushBuffer();
+					response.flushBuffer();
 
-						return;
-					}
+					return;
 				}
 			}
+		}
 
-			filterChain.doFilter(request, response);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
+		processFilter(NtlmPostFilter.class, request, response, filterChain);
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(NtlmPostFilter.class);

@@ -41,7 +41,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -125,7 +124,7 @@ public class StripFilter extends BasePortalFilter {
 	protected void processFilter(
 			HttpServletRequest request, HttpServletResponse response,
 			FilterChain filterChain)
-		throws IOException, ServletException {
+		throws Exception {
 
 		String completeURL = HttpUtil.getCompleteURL(request);
 

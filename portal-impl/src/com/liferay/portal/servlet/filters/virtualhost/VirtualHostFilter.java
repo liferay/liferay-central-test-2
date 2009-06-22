@@ -41,17 +41,12 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 
-import java.io.IOException;
-
 import java.util.Set;
 
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -74,28 +69,74 @@ import javax.servlet.http.HttpSession;
  */
 public class VirtualHostFilter extends BasePortalFilter {
 
-	public void init(FilterConfig filterConfig) throws ServletException {
+	public void init(FilterConfig filterConfig) {
 		super.init(filterConfig);
 
 		_servletContext = filterConfig.getServletContext();
 	}
 
-	public void doFilter(
-			ServletRequest servletRequest, ServletResponse servletResponse,
-			FilterChain filterChain)
-		throws IOException, ServletException {
+	protected boolean isValidFriendlyURL(String friendlyURL) {
+		friendlyURL = friendlyURL.toLowerCase();
 
-		if (_log.isDebugEnabled()) {
-			if (isFilterEnabled()) {
-				_log.debug(VirtualHostFilter.class + " is enabled");
-			}
-			else {
-				_log.debug(VirtualHostFilter.class + " is disabled");
-			}
+		if (PortalInstances.isVirtualHostsIgnorePath(friendlyURL) ||
+			friendlyURL.startsWith(
+				PortalUtil.getPathFriendlyURLPrivateGroup() +
+					StringPool.SLASH) ||
+			friendlyURL.startsWith(
+				PortalUtil.getPathFriendlyURLPublic() + StringPool.SLASH) ||
+			friendlyURL.startsWith(
+				PortalUtil.getPathFriendlyURLPrivateUser() +
+					StringPool.SLASH) ||
+			friendlyURL.startsWith(_PATH_C) ||
+			friendlyURL.startsWith(_PATH_DELEGATE) ||
+			friendlyURL.startsWith(_PATH_HTML) ||
+			friendlyURL.startsWith(_PATH_IMAGE) ||
+			friendlyURL.startsWith(_PATH_LANGUAGE) ||
+			friendlyURL.startsWith(_PATH_SITEMAP_XML) ||
+			friendlyURL.startsWith(_PATH_SOFTWARE_CATALOG) ||
+			friendlyURL.startsWith(_PATH_WAP) ||
+			friendlyURL.startsWith(_PATH_WSRP)) {
+
+			return false;
 		}
 
-		HttpServletRequest request = (HttpServletRequest)servletRequest;
-		HttpServletResponse response = (HttpServletResponse)servletResponse;
+		int code = LayoutImpl.validateFriendlyURL(friendlyURL);
+
+		if ((code > -1) &&
+			(code != LayoutFriendlyURLException.ENDS_WITH_SLASH)) {
+
+			return false;
+		}
+
+		return true;
+	}
+
+	protected boolean isValidRequestURL(StringBuffer requestURL) {
+		if (requestURL == null) {
+			return false;
+		}
+
+		String url = requestURL.toString();
+
+		if (url.endsWith(_EXT_C) || url.endsWith(_EXT_CSS) ||
+			url.endsWith(_EXT_GIF) || url.endsWith(_EXT_IMAGE_COMPANY_LOGO) ||
+			url.endsWith(_EXT_ICO) || url.endsWith(_EXT_JS) ||
+			url.endsWith(_EXT_JPEG) || url.endsWith(_EXT_JSP) ||
+			url.endsWith(_EXT_PORTAL_LAYOUT) ||
+			url.endsWith(_EXT_PORTAL_LOGIN) ||
+			url.endsWith(_EXT_PORTAL_LOGOUT) || url.endsWith(_EXT_PNG)) {
+
+			return false;
+		}
+		else {
+			return true;
+		}
+	}
+
+	protected void processFilter(
+			HttpServletRequest request, HttpServletResponse response,
+			FilterChain filterChain)
+		throws Exception {
 
 		request.setCharacterEncoding(StringPool.UTF8);
 		//response.setContentType(ContentTypes.TEXT_HTML_UTF8);
@@ -198,7 +239,7 @@ public class VirtualHostFilter extends BasePortalFilter {
 			return;
 		}
 
-		LayoutSet layoutSet = (LayoutSet)servletRequest.getAttribute(
+		LayoutSet layoutSet = (LayoutSet)request.getAttribute(
 			WebKeys.VIRTUAL_HOST_LAYOUT_SET);
 
 		if (_log.isDebugEnabled()) {
@@ -208,9 +249,9 @@ public class VirtualHostFilter extends BasePortalFilter {
 		if (layoutSet != null) {
 			try {
 				LastPath lastPath = new LastPath(
-					contextPath, friendlyURL, servletRequest.getParameterMap());
+					contextPath, friendlyURL, request.getParameterMap());
 
-				servletRequest.setAttribute(WebKeys.LAST_PATH, lastPath);
+				request.setAttribute(WebKeys.LAST_PATH, lastPath);
 
 				StringBuilder prefix = new StringBuilder();
 
@@ -263,7 +304,7 @@ public class VirtualHostFilter extends BasePortalFilter {
 				RequestDispatcher requestDispatcher =
 					_servletContext.getRequestDispatcher(forwardURL.toString());
 
-				requestDispatcher.forward(servletRequest, response);
+				requestDispatcher.forward(request, response);
 
 				return;
 			}
@@ -273,69 +314,6 @@ public class VirtualHostFilter extends BasePortalFilter {
 		}
 
 		processFilter(VirtualHostFilter.class, request, response, filterChain);
-	}
-
-	protected boolean isValidFriendlyURL(String friendlyURL) {
-		friendlyURL = friendlyURL.toLowerCase();
-
-		if (PortalInstances.isVirtualHostsIgnorePath(friendlyURL) ||
-			friendlyURL.startsWith(
-				PortalUtil.getPathFriendlyURLPrivateGroup() +
-					StringPool.SLASH) ||
-			friendlyURL.startsWith(
-				PortalUtil.getPathFriendlyURLPublic() + StringPool.SLASH) ||
-			friendlyURL.startsWith(
-				PortalUtil.getPathFriendlyURLPrivateUser() +
-					StringPool.SLASH) ||
-			friendlyURL.startsWith(_PATH_C) ||
-			friendlyURL.startsWith(_PATH_DELEGATE) ||
-			friendlyURL.startsWith(_PATH_HTML) ||
-			friendlyURL.startsWith(_PATH_IMAGE) ||
-			friendlyURL.startsWith(_PATH_LANGUAGE) ||
-			friendlyURL.startsWith(_PATH_SITEMAP_XML) ||
-			friendlyURL.startsWith(_PATH_SOFTWARE_CATALOG) ||
-			friendlyURL.startsWith(_PATH_WAP) ||
-			friendlyURL.startsWith(_PATH_WSRP)) {
-
-			return false;
-		}
-
-		int code = LayoutImpl.validateFriendlyURL(friendlyURL);
-
-		if ((code > -1) &&
-			(code != LayoutFriendlyURLException.ENDS_WITH_SLASH)) {
-
-			return false;
-		}
-
-		return true;
-	}
-
-	protected boolean isValidRequestURL(StringBuffer requestURL) {
-		if (requestURL == null) {
-			return false;
-		}
-
-		String url = requestURL.toString();
-
-		if (url.endsWith(_EXT_C) || url.endsWith(_EXT_CSS) ||
-			url.endsWith(_EXT_GIF) || url.endsWith(_EXT_IMAGE_COMPANY_LOGO) ||
-			url.endsWith(_EXT_ICO) || url.endsWith(_EXT_JS) ||
-			url.endsWith(_EXT_JPEG) || url.endsWith(_EXT_JSP) ||
-			url.endsWith(_EXT_PORTAL_LAYOUT) ||
-			url.endsWith(_EXT_PORTAL_LOGIN) ||
-			url.endsWith(_EXT_PORTAL_LOGOUT) || url.endsWith(_EXT_PNG)) {
-
-			return false;
-		}
-		else {
-			return true;
-		}
-	}
-
-	protected void processFilter(
-		HttpServletRequest request, HttpServletResponse response,
-		FilterChain filterChain) {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(VirtualHostFilter.class);

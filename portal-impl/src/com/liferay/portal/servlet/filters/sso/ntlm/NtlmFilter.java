@@ -24,11 +24,11 @@ package com.liferay.portal.servlet.filters.sso.ntlm;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.servlet.BaseFilter;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.security.ldap.PortalLDAPUtil;
+import com.liferay.portal.servlet.filters.BasePortalFilter;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsKeys;
@@ -36,11 +36,8 @@ import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.util.servlet.filters.DynamicFilterConfig;
 
-import java.io.IOException;
-
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -67,12 +64,17 @@ import jcifs.util.Base64;
  * @author Brian Wing Shun Chan
  *
  */
-public class NtlmFilter extends BaseFilter {
+public class NtlmFilter extends BasePortalFilter {
 
-	public void init(FilterConfig filterConfig) throws ServletException {
-		NtlmHttpFilter ntlmFilter = new NtlmHttpFilter();
+	public void init(FilterConfig filterConfig) {
+		try {
+			NtlmHttpFilter ntlmFilter = new NtlmHttpFilter();
 
-		ntlmFilter.init(filterConfig);
+			ntlmFilter.init(filterConfig);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
 
 		_filterConfig = new DynamicFilterConfig(filterConfig);
 	}
@@ -82,115 +84,109 @@ public class NtlmFilter extends BaseFilter {
 	}
 
 	protected void processFilter(
-		HttpServletRequest request, HttpServletResponse response,
-		FilterChain filterChain) {
+			HttpServletRequest request, HttpServletResponse response,
+			FilterChain filterChain)
+		throws Exception {
 
-		try {
-			long companyId = PortalInstances.getCompanyId(request);
+		long companyId = PortalInstances.getCompanyId(request);
 
-			if (PortalLDAPUtil.isNtlmEnabled(companyId)) {
-				String domainController = _filterConfig.getInitParameter(
-					"jcifs.http.domainController");
-				String domain = _filterConfig.getInitParameter(
-					"jcifs.smb.client.domain");
+		if (PortalLDAPUtil.isNtlmEnabled(companyId)) {
+			String domainController = _filterConfig.getInitParameter(
+				"jcifs.http.domainController");
+			String domain = _filterConfig.getInitParameter(
+				"jcifs.smb.client.domain");
 
-				if ((domainController == null) && (domain == null)) {
-					domainController = PrefsPropsUtil.getString(
-						companyId, PropsKeys.NTLM_DOMAIN_CONTROLLER,
-						PropsValues.NTLM_DOMAIN_CONTROLLER);
-					domain = PrefsPropsUtil.getString(
-						companyId, PropsKeys.NTLM_DOMAIN,
-						PropsValues.NTLM_DOMAIN);
+			if ((domainController == null) && (domain == null)) {
+				domainController = PrefsPropsUtil.getString(
+					companyId, PropsKeys.NTLM_DOMAIN_CONTROLLER,
+					PropsValues.NTLM_DOMAIN_CONTROLLER);
+				domain = PrefsPropsUtil.getString(
+					companyId, PropsKeys.NTLM_DOMAIN, PropsValues.NTLM_DOMAIN);
 
-					_filterConfig.addInitParameter(
-						"jcifs.http.domainController", domainController);
-					_filterConfig.addInitParameter(
-						"jcifs.smb.client.domain", domain);
+				_filterConfig.addInitParameter(
+					"jcifs.http.domainController", domainController);
+				_filterConfig.addInitParameter(
+					"jcifs.smb.client.domain", domain);
 
-					super.init(_filterConfig);
+				super.init(_filterConfig);
 
-					if (_log.isDebugEnabled()) {
-						_log.debug("Host " + domainController);
-						_log.debug("Domain " + domain);
-					}
-				}
-
-				// Type 1 NTLM requests from browser can (and should) always
-				// immediately be replied to with an Type 2 NTLM response, no
-				// matter whether we're yet logging in or whether it is much
-				// later in the session.
-
-				String authorization = GetterUtil.getString(
-					request.getHeader(HttpHeaders.AUTHORIZATION));
-
-				if (authorization.startsWith("NTLM")) {
-					byte[] src = Base64.decode(authorization.substring(5));
-
-					if (src[8] == 1) {
-						UniAddress dc = UniAddress.getByName(
-							Config.getProperty("jcifs.http.domainController"),
-							true);
-
-						byte[] challenge = SmbSession.getChallenge(dc);
-
-						Type1Message type1 = new Type1Message(src);
-						Type2Message type2 = new Type2Message(
-							type1, challenge, null);
-
-						authorization = Base64.encode(type2.toByteArray());
-
-						response.setHeader(
-							HttpHeaders.WWW_AUTHENTICATE,
-							"NTLM " + authorization);
-						response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-						response.setContentLength(0);
-
-						response.flushBuffer();
-
-						// Interrupt filter chain, send response. Browser will
-						// immediately post a new request.
-
-						return;
-					}
-				}
-
-				String path = request.getPathInfo();
-
-				if (path != null && path.endsWith("/login")) {
-					NtlmPasswordAuthentication ntlm = negotiate(
-						request, response, false);
-
-					if (ntlm == null) {
-						return;
-					}
-
-					String remoteUser = ntlm.getName();
-
-					int pos = remoteUser.indexOf(StringPool.BACK_SLASH);
-
-					if (pos != -1) {
-						remoteUser = remoteUser.substring(pos + 1);
-					}
-
-					if (_log.isDebugEnabled()) {
-						_log.debug("NTLM remote user " + remoteUser);
-					}
-
-					request.setAttribute(WebKeys.NTLM_REMOTE_USER, remoteUser);
+				if (_log.isDebugEnabled()) {
+					_log.debug("Host " + domainController);
+					_log.debug("Domain " + domain);
 				}
 			}
 
-			filterChain.doFilter(request, response);
+			// Type 1 NTLM requests from browser can (and should) always
+			// immediately be replied to with an Type 2 NTLM response, no
+			// matter whether we're yet logging in or whether it is much
+			// later in the session.
+
+			String authorization = GetterUtil.getString(
+				request.getHeader(HttpHeaders.AUTHORIZATION));
+
+			if (authorization.startsWith("NTLM")) {
+				byte[] src = Base64.decode(authorization.substring(5));
+
+				if (src[8] == 1) {
+					UniAddress dc = UniAddress.getByName(
+						Config.getProperty("jcifs.http.domainController"),
+						true);
+
+					byte[] challenge = SmbSession.getChallenge(dc);
+
+					Type1Message type1 = new Type1Message(src);
+					Type2Message type2 = new Type2Message(
+						type1, challenge, null);
+
+					authorization = Base64.encode(type2.toByteArray());
+
+					response.setHeader(
+						HttpHeaders.WWW_AUTHENTICATE, "NTLM " + authorization);
+					response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+					response.setContentLength(0);
+
+					response.flushBuffer();
+
+					// Interrupt filter chain, send response. Browser will
+					// immediately post a new request.
+
+					return;
+				}
+			}
+
+			String path = request.getPathInfo();
+
+			if (path != null && path.endsWith("/login")) {
+				NtlmPasswordAuthentication ntlm = negotiate(
+					request, response, false);
+
+				if (ntlm == null) {
+					return;
+				}
+
+				String remoteUser = ntlm.getName();
+
+				int pos = remoteUser.indexOf(StringPool.BACK_SLASH);
+
+				if (pos != -1) {
+					remoteUser = remoteUser.substring(pos + 1);
+				}
+
+				if (_log.isDebugEnabled()) {
+					_log.debug("NTLM remote user " + remoteUser);
+				}
+
+				request.setAttribute(WebKeys.NTLM_REMOTE_USER, remoteUser);
+			}
 		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
+
+		processFilter(NtlmPostFilter.class, request, response, filterChain);
 	}
 
 	protected NtlmPasswordAuthentication negotiate(
 			HttpServletRequest request, HttpServletResponse response,
 			boolean skipAuthentication)
-		throws IOException, ServletException {
+		throws Exception {
 
 		NtlmPasswordAuthentication ntlm = null;
 

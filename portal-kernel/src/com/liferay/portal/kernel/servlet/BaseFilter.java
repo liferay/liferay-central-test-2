@@ -49,7 +49,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public abstract class BaseFilter implements Filter {
 
-	public void init(FilterConfig filterConfig) throws ServletException {
+	public void init(FilterConfig filterConfig) {
 		_filterConfig = filterConfig;
 
 		String urlRegexPattern = GetterUtil.getString(
@@ -87,11 +87,22 @@ public abstract class BaseFilter implements Filter {
 			filterEnabled = matcher.matches();
 		}
 
-		if (filterEnabled) {
-			processFilter(request, response, filterChain);
+		try {
+			if (filterEnabled) {
+				processFilter(request, response, filterChain);
+			}
+			else {
+				processFilter(_filterClass, request, response, filterChain);
+			}
 		}
-		else {
-			processFilter(_filterClass, request, response, filterChain);
+		catch (IOException ioe) {
+			throw ioe;
+		}
+		catch (ServletException se) {
+			throw se;
+		}
+		catch (Exception e) {
+			getLog().error(e, e);
 		}
 	}
 
@@ -111,12 +122,12 @@ public abstract class BaseFilter implements Filter {
 	protected abstract void processFilter(
 			HttpServletRequest request, HttpServletResponse response,
 			FilterChain filterChain)
-		throws IOException, ServletException;
+		throws Exception;
 
 	protected void processFilter(
 			Class<?> filterClass, HttpServletRequest request,
 			HttpServletResponse response, FilterChain filterChain)
-		throws IOException, ServletException {
+		throws Exception {
 
 		long startTime = 0;
 

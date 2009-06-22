@@ -48,27 +48,54 @@ import javax.servlet.http.HttpSession;
 public class OpenSSOFilter extends BasePortalFilter {
 
 	protected void processFilter(
-		HttpServletRequest request, HttpServletResponse response,
-		FilterChain filterChain) {
+			HttpServletRequest request, HttpServletResponse response,
+			FilterChain filterChain)
+		throws Exception {
 
-		try {
-			long companyId = PortalUtil.getCompanyId(request);
+		long companyId = PortalUtil.getCompanyId(request);
 
-			boolean enabled = PrefsPropsUtil.getBoolean(
-				companyId, PropsKeys.OPEN_SSO_AUTH_ENABLED,
-				PropsValues.OPEN_SSO_AUTH_ENABLED);
-			String loginUrl = PrefsPropsUtil.getString(
-				companyId, PropsKeys.OPEN_SSO_LOGIN_URL,
-				PropsValues.OPEN_SSO_LOGIN_URL);
-			String logoutUrl = PrefsPropsUtil.getString(
-				companyId, PropsKeys.OPEN_SSO_LOGOUT_URL,
-				PropsValues.OPEN_SSO_LOGOUT_URL);
-			String serviceUrl = PrefsPropsUtil.getString(
-				companyId, PropsKeys.OPEN_SSO_SERVICE_URL,
-				PropsValues.OPEN_SSO_SERVICE_URL);
+		boolean enabled = PrefsPropsUtil.getBoolean(
+			companyId, PropsKeys.OPEN_SSO_AUTH_ENABLED,
+			PropsValues.OPEN_SSO_AUTH_ENABLED);
+		String loginUrl = PrefsPropsUtil.getString(
+			companyId, PropsKeys.OPEN_SSO_LOGIN_URL,
+			PropsValues.OPEN_SSO_LOGIN_URL);
+		String logoutUrl = PrefsPropsUtil.getString(
+			companyId, PropsKeys.OPEN_SSO_LOGOUT_URL,
+			PropsValues.OPEN_SSO_LOGOUT_URL);
+		String serviceUrl = PrefsPropsUtil.getString(
+			companyId, PropsKeys.OPEN_SSO_SERVICE_URL,
+			PropsValues.OPEN_SSO_SERVICE_URL);
 
-			if (!enabled || Validator.isNull(loginUrl) ||
-				Validator.isNull(logoutUrl) || Validator.isNull(serviceUrl)) {
+		if (!enabled || Validator.isNull(loginUrl) ||
+			Validator.isNull(logoutUrl) || Validator.isNull(serviceUrl)) {
+
+			processFilter(OpenSSOFilter.class, request, response, filterChain);
+
+			return;
+		}
+
+		String requestURI = GetterUtil.getString(request.getRequestURI());
+
+		if (requestURI.endsWith("/portal/logout")) {
+			HttpSession session = request.getSession();
+
+			session.invalidate();
+
+			response.sendRedirect(logoutUrl);
+		}
+		else {
+			boolean authenticated = false;
+
+			try {
+
+				// LEP-5943
+
+				authenticated = OpenSSOUtil.isAuthenticated(
+					request, serviceUrl);
+			}
+			catch (Exception e) {
+				_log.error(e, e);
 
 				processFilter(
 					OpenSSOFilter.class, request, response, filterChain);
@@ -76,67 +103,35 @@ public class OpenSSOFilter extends BasePortalFilter {
 				return;
 			}
 
-			String requestURI = GetterUtil.getString(request.getRequestURI());
+			if (authenticated) {
 
-			if (requestURI.endsWith("/portal/logout")) {
-				HttpSession httpSes = request.getSession();
+				// LEP-5943
 
-				httpSes.invalidate();
+				String newSubjectId = OpenSSOUtil.getSubjectId(
+					request, serviceUrl);
 
-				response.sendRedirect(logoutUrl);
+				HttpSession session = request.getSession();
+
+				String oldSubjectId = (String)session.getAttribute(
+					_SUBJECT_ID_KEY);
+
+				if (oldSubjectId == null) {
+					session.setAttribute(_SUBJECT_ID_KEY, newSubjectId);
+				}
+				else if (!newSubjectId.equals(oldSubjectId)) {
+					session.invalidate();
+
+					session = request.getSession();
+
+					session.setAttribute(_SUBJECT_ID_KEY, newSubjectId);
+				}
+
+				processFilter(
+					OpenSSOFilter.class, request, response, filterChain);
 			}
 			else {
-				boolean authenticated = false;
-
-				try {
-
-					// LEP-5943
-
-					authenticated = OpenSSOUtil.isAuthenticated(
-						request, serviceUrl);
-				}
-				catch (Exception e) {
-					_log.error(e, e);
-
-					processFilter(
-						OpenSSOFilter.class, request, response, filterChain);
-
-					return;
-				}
-
-				if (authenticated) {
-
-					// LEP-5943
-
-					String newSubjectId = OpenSSOUtil.getSubjectId(
-						request, serviceUrl);
-
-					HttpSession httpSes = request.getSession();
-
-					String oldSubjectId = (String)httpSes.getAttribute(
-						_SUBJECT_ID_KEY);
-
-					if (oldSubjectId == null) {
-						httpSes.setAttribute(_SUBJECT_ID_KEY, newSubjectId);
-					}
-					else if (!newSubjectId.equals(oldSubjectId)) {
-						httpSes.invalidate();
-
-						httpSes = request.getSession();
-
-						httpSes.setAttribute(_SUBJECT_ID_KEY, newSubjectId);
-					}
-
-					processFilter(
-						OpenSSOFilter.class, request, response, filterChain);
-				}
-				else {
-					response.sendRedirect(loginUrl);
-				}
+				response.sendRedirect(loginUrl);
 			}
-		}
-		catch (Exception e) {
-			_log.error(e, e);
 		}
 	}
 
