@@ -80,6 +80,22 @@ import java.rmi.RemoteException;
  *
  */
 public class RoleServiceSoap {
+	public static com.liferay.portal.model.RoleSoap addRole(
+		java.lang.String name, java.lang.String description, int type)
+		throws RemoteException {
+		try {
+			com.liferay.portal.model.Role returnValue = RoleServiceUtil.addRole(name,
+					description, type);
+
+			return com.liferay.portal.model.RoleSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static void addUserRoles(long userId, long[] roleIds)
 		throws RemoteException {
 		try {
