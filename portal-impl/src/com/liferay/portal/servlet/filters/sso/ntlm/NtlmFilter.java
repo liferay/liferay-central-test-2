@@ -24,6 +24,9 @@ package com.liferay.portal.servlet.filters.sso.ntlm;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.servlet.BaseFilter;
+import com.liferay.portal.kernel.servlet.HttpHeaders;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.security.ldap.PortalLDAPUtil;
 import com.liferay.portal.util.PortalInstances;
@@ -38,8 +41,6 @@ import java.io.IOException;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -63,25 +64,28 @@ import jcifs.util.Base64;
  *
  * @author Bruno Farache
  * @author Marcus Schmidke
+ * @author Brian Wing Shun Chan
  *
  */
-public class NtlmFilter extends NtlmHttpFilter {
+public class NtlmFilter extends BaseFilter {
 
 	public void init(FilterConfig filterConfig) throws ServletException {
-		super.init(filterConfig);
+		NtlmHttpFilter ntlmFilter = new NtlmHttpFilter();
+
+		ntlmFilter.init(filterConfig);
 
 		_filterConfig = new DynamicFilterConfig(filterConfig);
 	}
 
-	public void doFilter(
-			ServletRequest servletRequest, ServletResponse servletResponse,
-			FilterChain filterChain)
-		throws IOException, ServletException {
+	protected Log getLog() {
+		return _log;
+	}
+
+	protected void processFilter(
+		HttpServletRequest request, HttpServletResponse response,
+		FilterChain filterChain) {
 
 		try {
-			HttpServletRequest request = (HttpServletRequest)servletRequest;
-			HttpServletResponse response = (HttpServletResponse)servletResponse;
-
 			long companyId = PortalInstances.getCompanyId(request);
 
 			if (PortalLDAPUtil.isNtlmEnabled(companyId)) {
@@ -116,10 +120,11 @@ public class NtlmFilter extends NtlmHttpFilter {
 				// matter whether we're yet logging in or whether it is much
 				// later in the session.
 
-				String msg = request.getHeader("Authorization");
+				String authorization = GetterUtil.getString(
+					request.getHeader(HttpHeaders.AUTHORIZATION));
 
-				if (msg != null && msg.startsWith("NTLM")) {
-					byte[] src = Base64.decode(msg.substring(5));
+				if (authorization.startsWith("NTLM")) {
+					byte[] src = Base64.decode(authorization.substring(5));
 
 					if (src[8] == 1) {
 						UniAddress dc = UniAddress.getByName(
@@ -132,9 +137,11 @@ public class NtlmFilter extends NtlmHttpFilter {
 						Type2Message type2 = new Type2Message(
 							type1, challenge, null);
 
-						msg = Base64.encode(type2.toByteArray());
+						authorization = Base64.encode(type2.toByteArray());
 
-						response.setHeader("WWW-Authenticate", "NTLM " + msg);
+						response.setHeader(
+							HttpHeaders.WWW_AUTHENTICATE,
+							"NTLM " + authorization);
 						response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 						response.setContentLength(0);
 
@@ -169,19 +176,18 @@ public class NtlmFilter extends NtlmHttpFilter {
 						_log.debug("NTLM remote user " + remoteUser);
 					}
 
-					servletRequest.setAttribute(
-						WebKeys.NTLM_REMOTE_USER, remoteUser);
+					request.setAttribute(WebKeys.NTLM_REMOTE_USER, remoteUser);
 				}
 			}
+
+			filterChain.doFilter(request, response);
 		}
 		catch (Exception e) {
-			_log.error(e);
+			_log.error(e, e);
 		}
-
-		filterChain.doFilter(servletRequest, servletResponse);
 	}
 
-	public NtlmPasswordAuthentication negotiate(
+	protected NtlmPasswordAuthentication negotiate(
 			HttpServletRequest request, HttpServletResponse response,
 			boolean skipAuthentication)
 		throws IOException, ServletException {
@@ -190,15 +196,14 @@ public class NtlmFilter extends NtlmHttpFilter {
 
 		HttpSession session = request.getSession(false);
 
-		String authorizationHeader = request.getHeader("Authorization");
+		String authorization = GetterUtil.getString(
+			request.getHeader(HttpHeaders.AUTHORIZATION));
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("Authorization header " + authorizationHeader);
+			_log.debug("Authorization header " + authorization);
 		}
 
-		if ((authorizationHeader != null) && (
-			(authorizationHeader.startsWith("NTLM ")))) {
-
+		if (authorization.startsWith("NTLM ")) {
 			String domainController = Config.getProperty(
 				"jcifs.http.domainController");
 
@@ -222,7 +227,7 @@ public class NtlmFilter extends NtlmHttpFilter {
 			}
 
 			if (ntlm == null) {
-				response.setHeader("WWW-Authenticate", "NTLM");
+				response.setHeader(HttpHeaders.WWW_AUTHENTICATE, "NTLM");
 				response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 				response.setContentLength(0);
 
