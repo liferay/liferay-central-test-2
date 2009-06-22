@@ -56,6 +56,7 @@ import com.liferay.portal.kernel.annotation.Transactional;
 	PortalException.class, SystemException.class})
 public interface RoleService {
 	public com.liferay.portal.model.Role addRole(java.lang.String name,
+		java.util.Map<java.util.Locale, String> localeTitlesMap,
 		java.lang.String description, int type)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;

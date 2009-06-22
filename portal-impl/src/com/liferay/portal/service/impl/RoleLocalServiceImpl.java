@@ -63,15 +63,18 @@ import java.util.Map;
 public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 
 	public Role addRole(
-			long userId, long companyId, String name, String description,
-			int type)
+			long userId, long companyId, String name,
+			Map<Locale, String> localeTitlesMap, String description, int type)
 		throws PortalException, SystemException {
 
-		return addRole(userId, companyId, name, description, type, null, 0);
+		return addRole(
+			userId, companyId, name, localeTitlesMap, description, type, null,
+			0);
 	}
 
 	public Role addRole(
-			long userId, long companyId, String name, String description,
+			long userId, long companyId, String name,
+			Map<Locale, String> localeTitlesMap, String description,
 			int type, String className, long classPK)
 		throws PortalException, SystemException {
 
@@ -97,6 +100,8 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		role.setName(name);
 		role.setDescription(description);
 		role.setType(type);
+
+		setLocalizedAttributes(role, localeTitlesMap);
 
 		rolePersistence.update(role, false);
 
@@ -459,7 +464,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		}
 		catch (NoSuchRoleException nsre) {
 			role = roleLocalService.addRole(
-				0, companyId, name, description, type);
+				0, companyId, name, null, description, type);
 		}
 
 		_systemRolesMap.put(companyId + name, role);

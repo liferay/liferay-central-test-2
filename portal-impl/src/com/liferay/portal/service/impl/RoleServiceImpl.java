@@ -44,7 +44,9 @@ import java.util.Map;
  */
 public class RoleServiceImpl extends RoleServiceBaseImpl {
 
-	public Role addRole(String name, String description, int type)
+	public Role addRole(
+			String name, Map<Locale, String> localeTitlesMap,
+			String description, int type)
 		throws PortalException, SystemException {
 
 		User user = getUser();
@@ -52,7 +54,8 @@ public class RoleServiceImpl extends RoleServiceBaseImpl {
 		PortalPermissionUtil.check(getPermissionChecker(), ActionKeys.ADD_ROLE);
 
 		return roleLocalService.addRole(
-			user.getUserId(), user.getCompanyId(), name, description, type);
+			user.getUserId(), user.getCompanyId(), name, localeTitlesMap,
+			description, type);
 	}
 
 	public void addUserRoles(long userId, long[] roleIds)
