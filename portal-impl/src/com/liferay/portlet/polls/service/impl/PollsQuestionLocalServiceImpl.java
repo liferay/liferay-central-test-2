@@ -24,9 +24,6 @@ package com.liferay.portlet.polls.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.language.LanguageUtil;
-import com.liferay.portal.kernel.util.LocaleUtil;
-import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
@@ -42,23 +39,19 @@ import com.liferay.portlet.polls.service.base.PollsQuestionLocalServiceBaseImpl;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
-import java.util.Map;
 
 /**
  * <a href="PollsQuestionLocalServiceImpl.java.html"><b><i>View Source</i></b>
  * </a>
  *
  * @author Brian Wing Shun Chan
- * @author Julio Camarero
  *
  */
 public class PollsQuestionLocalServiceImpl
 	extends PollsQuestionLocalServiceBaseImpl {
 
 	public PollsQuestion addQuestion(
-			long userId, Map<Locale, String> localeTitlesMap,
-			Map<Locale, String> localeDescriptionsMap,
+			long userId, String title, String description,
 			int expirationDateMonth, int expirationDateDay,
 			int expirationDateYear, int expirationDateHour,
 			int expirationDateMinute, boolean neverExpire,
@@ -66,15 +59,13 @@ public class PollsQuestionLocalServiceImpl
 		throws PortalException, SystemException {
 
 		return addQuestion(
-			null, userId, localeTitlesMap, localeDescriptionsMap,
-			expirationDateMonth, expirationDateDay, expirationDateYear,
-			expirationDateHour, expirationDateMinute, neverExpire, choices,
-			serviceContext);
+			null, userId, title, description, expirationDateMonth,
+			expirationDateDay, expirationDateYear, expirationDateHour,
+			expirationDateMinute, neverExpire, choices, serviceContext);
 	}
 
 	public PollsQuestion addQuestion(
-			String uuid, long userId, Map<Locale, String> localeTitlesMap,
-			Map<Locale, String> localeDescriptionsMap,
+			String uuid, long userId, String title, String description,
 			int expirationDateMonth, int expirationDateDay,
 			int expirationDateYear, int expirationDateHour,
 			int expirationDateMinute, boolean neverExpire,
@@ -97,11 +88,7 @@ public class PollsQuestionLocalServiceImpl
 
 		Date now = new Date();
 
-		Locale defaultLocale = LocaleUtil.getDefault();
-
-		validate(
-			localeTitlesMap.get(defaultLocale),
-			localeDescriptionsMap.get(defaultLocale), choices);
+		validate(title, description, choices);
 
 		long questionId = counterLocalService.increment();
 
@@ -114,8 +101,8 @@ public class PollsQuestionLocalServiceImpl
 		question.setUserName(user.getFullName());
 		question.setCreateDate(now);
 		question.setModifiedDate(now);
-		setLocalizedAttributes(
-			question, localeTitlesMap, localeDescriptionsMap);
+		question.setTitle(title);
+		question.setDescription(description);
 		question.setExpirationDate(expirationDate);
 
 		pollsQuestionPersistence.update(question, false);
@@ -257,22 +244,20 @@ public class PollsQuestionLocalServiceImpl
 	}
 
 	public PollsQuestion updateQuestion(
-			long userId, long questionId, Map<Locale, String> localeTitlesMap,
-			Map<Locale, String> localeDescriptionsMap,
+			long userId, long questionId, String title, String description,
 			int expirationDateMonth, int expirationDateDay,
 			int expirationDateYear, int expirationDateHour,
 			int expirationDateMinute, boolean neverExpire)
 		throws PortalException, SystemException {
 
 		return updateQuestion(
-			userId, questionId, localeTitlesMap, localeDescriptionsMap,
-			expirationDateMonth, expirationDateDay, expirationDateYear,
-			expirationDateHour, expirationDateMinute, neverExpire, null, null);
+			userId, questionId, title, description, expirationDateMonth,
+			expirationDateDay, expirationDateYear, expirationDateHour,
+			expirationDateMinute, neverExpire, null, null);
 	}
 
 	public PollsQuestion updateQuestion(
-			long userId, long questionId, Map<Locale, String> localeTitlesMap,
-			Map<Locale, String> localeDescriptionsMap,
+			long userId, long questionId, String title, String description,
 			int expirationDateMonth, int expirationDateDay,
 			int expirationDateYear, int expirationDateHour,
 			int expirationDateMinute, boolean neverExpire,
@@ -292,18 +277,14 @@ public class PollsQuestionLocalServiceImpl
 				new QuestionExpirationDateException());
 		}
 
-		Locale defaultLocale = LocaleUtil.getDefault();
-
-		validate(
-			localeTitlesMap.get(defaultLocale),
-			localeDescriptionsMap.get(defaultLocale), choices);
+		validate(title, description, choices);
 
 		PollsQuestion question = pollsQuestionPersistence.findByPrimaryKey(
 			questionId);
 
 		question.setModifiedDate(new Date());
-		setLocalizedAttributes(
-			question, localeTitlesMap, localeDescriptionsMap);
+		question.setTitle(title);
+		question.setDescription(description);
 		question.setExpirationDate(expirationDate);
 
 		pollsQuestionPersistence.update(question, false);
@@ -353,42 +334,6 @@ public class PollsQuestionLocalServiceImpl
 
 		if ((choices != null) && (choices.size() < 2)) {
 			throw new QuestionChoiceException();
-		}
-	}
-
-	protected void setLocalizedAttributes(
-		PollsQuestion question, Map<Locale, String> localeTitlesMap,
-		Map<Locale, String> localeDescriptionsMap) {
-
-		if (localeTitlesMap == null && localeDescriptionsMap == null) {
-			return;
-		}
-
-		ClassLoader portalClassLoader = PortalClassLoaderUtil.getClassLoader();
-
-		Thread currentThread = Thread.currentThread();
-
-		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
-
-		try {
-			if (contextClassLoader != portalClassLoader) {
-				currentThread.setContextClassLoader(portalClassLoader);
-			}
-
-			Locale[] locales = LanguageUtil.getAvailableLocales();
-
-			for (Locale locale : locales) {
-				String title = localeTitlesMap.get(locale);
-				String description = localeDescriptionsMap.get(locale);
-
-				question.setTitle(title, locale);
-				question.setDescription(description, locale);
-			}
-		}
-		finally {
-			if (contextClassLoader != portalClassLoader) {
-				currentThread.setContextClassLoader(contextClassLoader);
-			}
 		}
 	}
 

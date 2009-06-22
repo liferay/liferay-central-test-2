@@ -29,6 +29,8 @@ String redirect = StringPool.BLANK;
 
 PollsQuestion question = (PollsQuestion)request.getAttribute(WebKeys.POLLS_QUESTION);
 
+question = question.toEscapedModel();
+
 List<PollsChoice> choices = question.getChoices();
 
 boolean hasVoted = PollsUtil.hasVoted(request, question.getQuestionId());
@@ -69,7 +71,7 @@ if (!question.isExpired() && !hasVoted && PollsQuestionPermission.contains(permi
 <liferay-ui:error exception="<%= DuplicateVoteException.class %>" message="you-may-only-vote-once" />
 <liferay-ui:error exception="<%= NoSuchChoiceException.class %>" message="please-select-an-option" />
 
-<%= HtmlUtil.escape(question.getDescription(locale)) %>
+<%= question.getDescription() %>
 
 <br /><br />
 
@@ -79,6 +81,7 @@ if (!question.isExpired() && !hasVoted && PollsQuestionPermission.contains(permi
 
 		<%
 		for (PollsChoice choice : choices) {
+			choice = choice.toEscapedModel();
 		%>
 
 			<tr>
@@ -89,7 +92,7 @@ if (!question.isExpired() && !hasVoted && PollsQuestionPermission.contains(permi
 					<b><%= choice.getName() %>.</b>
 				</td>
 				<td>
-					<%= HtmlUtil.escape(choice.getDescription(locale)) %>
+					<%= choice.getDescription() %>
 				</td>
 			</tr>
 

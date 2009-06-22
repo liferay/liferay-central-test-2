@@ -23,19 +23,13 @@
 package com.liferay.portlet.polls.model.impl;
 
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.util.LocaleUtil;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portlet.polls.model.PollsChoice;
 import com.liferay.portlet.polls.service.PollsVoteLocalServiceUtil;
-import com.liferay.util.LocalizationUtil;
-
-import java.util.Locale;
 
 /**
  * <a href="PollsChoiceImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- * @author Julio Camarero
  *
  */
 public class PollsChoiceImpl
@@ -44,52 +38,8 @@ public class PollsChoiceImpl
 	public PollsChoiceImpl() {
 	}
 
-	public String getDescription(Locale locale) {
-		String localeLanguageId = LocaleUtil.toLanguageId(locale);
-
-		return getDescription(localeLanguageId);
-	}
-
-	public String getDescription(Locale locale, boolean useDefault) {
-		String localeLanguageId = LocaleUtil.toLanguageId(locale);
-
-		return getDescription(localeLanguageId, useDefault);
-	}
-
-	public String getDescription(String localeLanguageId) {
-		String description = LocalizationUtil.getLocalization(
-			getDescription(), localeLanguageId);
-
-		if (Validator.isNull(description)) {
-			description = getDescription();
-		}
-
-		return description;
-	}
-
-	public String getDescription(String localeLanguageId, boolean useDefault) {
-		return LocalizationUtil.getLocalization(
-			getDescription(), localeLanguageId, useDefault);
-	}
-
 	public int getVotesCount() throws SystemException {
 		return PollsVoteLocalServiceUtil.getChoiceVotesCount(getChoiceId());
-	}
-
-	public void setDescription(String description, Locale locale) {
-		String localeLanguageId = LocaleUtil.toLanguageId(locale);
-
-		if (Validator.isNotNull(description)) {
-			setDescription(
-				LocalizationUtil.updateLocalization(
-					getDescription(), "description", description,
-					localeLanguageId));
-		}
-		else {
-			setDescription(
-				LocalizationUtil.removeLocalization(
-					getDescription(), "description", localeLanguageId));
-		}
 	}
 
 }

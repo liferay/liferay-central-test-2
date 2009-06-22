@@ -372,22 +372,22 @@ public class PollsPortletDataHandlerImpl extends BasePortletDataHandler {
 
 			if (existingQuestion == null) {
 				existingQuestion = PollsQuestionLocalServiceUtil.addQuestion(
-					question.getUuid(), userId, question.getTitlesMap(),
-					question.getDescriptionsMap(), expirationMonth, 
-					expirationDay, expirationYear, expirationHour,
-					expirationMinute, neverExpire, null, serviceContext);
+					question.getUuid(), userId, question.getTitle(),
+					question.getDescription(), expirationMonth, expirationDay,
+					expirationYear, expirationHour, expirationMinute,
+					neverExpire, null, serviceContext);
 			}
 			else {
 				existingQuestion = PollsQuestionLocalServiceUtil.updateQuestion(
 					userId, existingQuestion.getQuestionId(),
-					question.getTitlesMap(), question.getDescriptionsMap(),
+					question.getTitle(), question.getDescription(),
 					expirationMonth, expirationDay, expirationYear,
 					expirationHour, expirationMinute, neverExpire);
 			}
 		}
 		else {
 			existingQuestion = PollsQuestionLocalServiceUtil.addQuestion(
-				userId, question.getTitlesMap(), question.getDescriptionsMap(),
+				userId, question.getTitle(), question.getDescription(),
 				expirationMonth, expirationDay, expirationYear, expirationHour,
 				expirationMinute, neverExpire, null, serviceContext);
 		}

@@ -49,18 +49,5 @@ package com.liferay.portlet.polls.model;
  *
  */
 public interface PollsChoice extends PollsChoiceModel {
-	public java.lang.String getDescription(java.util.Locale locale);
-
-	public java.lang.String getDescription(java.util.Locale locale,
-		boolean useDefault);
-
-	public java.lang.String getDescription(java.lang.String localeLanguageId);
-
-	public java.lang.String getDescription(java.lang.String localeLanguageId,
-		boolean useDefault);
-
 	public int getVotesCount() throws com.liferay.portal.SystemException;
-
-	public void setDescription(java.lang.String description,
-		java.util.Locale locale);
 }

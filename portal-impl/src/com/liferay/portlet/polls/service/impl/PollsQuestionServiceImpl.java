@@ -33,23 +33,19 @@ import com.liferay.portlet.polls.service.permission.PollsPermission;
 import com.liferay.portlet.polls.service.permission.PollsQuestionPermission;
 
 import java.util.List;
-import java.util.Locale;
-import java.util.Map;
 
 /**
  * <a href="PollsQuestionServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- * @author Julio Camarero
  *
  */
 public class PollsQuestionServiceImpl extends PollsQuestionServiceBaseImpl {
 
 	public PollsQuestion addQuestion(
-			Map<Locale, String> localeTitlesMap,
-			Map<Locale, String> localeDescriptionsMap, int expirationDateMonth,
+			String title, String description, int expirationDateMonth,
 			int expirationDateDay, int expirationDateYear,
-			int expirationDateHour, int expirationDateMinute,
+			int expirationDateHour,int expirationDateMinute,
 			boolean neverExpire, List<PollsChoice> choices,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
@@ -59,10 +55,9 @@ public class PollsQuestionServiceImpl extends PollsQuestionServiceBaseImpl {
 			ActionKeys.ADD_QUESTION);
 
 		return pollsQuestionLocalService.addQuestion(
-			getUserId(), localeTitlesMap, localeDescriptionsMap,
-			expirationDateMonth, expirationDateDay, expirationDateYear,
-			expirationDateHour, expirationDateMinute, neverExpire, choices,
-			serviceContext);
+			getUserId(), title, description, expirationDateMonth,
+			expirationDateDay, expirationDateYear, expirationDateHour,
+			expirationDateMinute, neverExpire, choices, serviceContext);
 	}
 
 	public void deleteQuestion(long questionId)
@@ -84,8 +79,7 @@ public class PollsQuestionServiceImpl extends PollsQuestionServiceBaseImpl {
 	}
 
 	public PollsQuestion updateQuestion(
-			long questionId, Map<Locale, String> localeTitlesMap,
-			Map<Locale, String> localeDescriptionsMap,
+			long questionId, String title, String description,
 			int expirationDateMonth, int expirationDateDay,
 			int expirationDateYear, int expirationDateHour,
 			int expirationDateMinute, boolean neverExpire,
@@ -96,10 +90,9 @@ public class PollsQuestionServiceImpl extends PollsQuestionServiceBaseImpl {
 			getPermissionChecker(), questionId, ActionKeys.UPDATE);
 
 		return pollsQuestionLocalService.updateQuestion(
-			getUserId(), questionId, localeTitlesMap, localeDescriptionsMap,
-			expirationDateMonth, expirationDateDay, expirationDateYear,
-			expirationDateHour, expirationDateMinute, neverExpire, choices,
-			serviceContext);
+			getUserId(), questionId, title, description, expirationDateMonth,
+			expirationDateDay, expirationDateYear, expirationDateHour,
+			expirationDateMinute, neverExpire, choices, serviceContext);
 	}
 
 }

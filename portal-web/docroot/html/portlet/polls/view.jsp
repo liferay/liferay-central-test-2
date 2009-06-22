@@ -56,6 +56,8 @@ List resultRows = searchContainer.getResultRows();
 for (int i = 0; i < results.size(); i++) {
 	PollsQuestion question = (PollsQuestion)results.get(i);
 
+	question = question.toEscapedModel();
+
 	ResultRow row = new ResultRow(question, question.getQuestionId(), i);
 
 	PortletURL rowURL = renderResponse.createRenderURL();
@@ -68,7 +70,7 @@ for (int i = 0; i < results.size(); i++) {
 
 	// Title
 
-	row.addText(HtmlUtil.escape(question.getTitle(locale)), rowURL);
+	row.addText(question.getTitle(), rowURL);
 
 	// Number of votes
 
