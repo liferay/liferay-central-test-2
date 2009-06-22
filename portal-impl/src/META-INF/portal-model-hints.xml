@@ -230,9 +230,9 @@
 	<model name="com.liferay.portal.model.LayoutPrototype">
 		<field name="layoutPrototypeId" type="long" />
 		<field name="companyId" type="long" />
-		<field name="name" type="String" />
-		<field name="title" type="String">
+		<field name="name" type="String">
 			<hint name="localized">true</hint>
+			<hint name="max-length">4000</hint>
 		</field>
 		<field name="description" type="String">
 			<hint-collection name="TEXTAREA" />
@@ -263,9 +263,9 @@
 	<model name="com.liferay.portal.model.LayoutSetPrototype">
 		<field name="layoutSetPrototypeId" type="long" />
 		<field name="companyId" type="long" />
-		<field name="name" type="String" />
-		<field name="title" type="String">
-			<hint-collection name="TEXTAREA" />
+		<field name="name" type="String">
+			<hint name="localized">true</hint>
+			<hint name="max-length">4000</hint>
 		</field>
 		<field name="description" type="String">
 			<hint-collection name="TEXTAREA" />

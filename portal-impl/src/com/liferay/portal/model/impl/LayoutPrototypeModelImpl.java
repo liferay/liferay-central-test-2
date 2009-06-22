@@ -72,9 +72,6 @@ public class LayoutPrototypeModelImpl extends BaseModelImpl<LayoutPrototype> {
 			{ "name", new Integer(Types.VARCHAR) },
 			
 
-			{ "title", new Integer(Types.VARCHAR) },
-			
-
 			{ "description", new Integer(Types.VARCHAR) },
 			
 
@@ -83,7 +80,7 @@ public class LayoutPrototypeModelImpl extends BaseModelImpl<LayoutPrototype> {
 
 			{ "active_", new Integer(Types.BOOLEAN) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table LayoutPrototype (layoutPrototypeId LONG not null primary key,companyId LONG,name VARCHAR(75) null,title STRING null,description STRING null,settings_ STRING null,active_ BOOLEAN)";
+	public static final String TABLE_SQL_CREATE = "create table LayoutPrototype (layoutPrototypeId LONG not null primary key,companyId LONG,name STRING null,description STRING null,settings_ STRING null,active_ BOOLEAN)";
 	public static final String TABLE_SQL_DROP = "drop table LayoutPrototype";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -101,7 +98,6 @@ public class LayoutPrototypeModelImpl extends BaseModelImpl<LayoutPrototype> {
 		model.setLayoutPrototypeId(soapModel.getLayoutPrototypeId());
 		model.setCompanyId(soapModel.getCompanyId());
 		model.setName(soapModel.getName());
-		model.setTitle(soapModel.getTitle());
 		model.setDescription(soapModel.getDescription());
 		model.setSettings(soapModel.getSettings());
 		model.setActive(soapModel.getActive());
@@ -162,14 +158,6 @@ public class LayoutPrototypeModelImpl extends BaseModelImpl<LayoutPrototype> {
 		_name = name;
 	}
 
-	public String getTitle() {
-		return GetterUtil.getString(_title);
-	}
-
-	public void setTitle(String title) {
-		_title = title;
-	}
-
 	public String getDescription() {
 		return GetterUtil.getString(_description);
 	}
@@ -211,7 +199,6 @@ public class LayoutPrototypeModelImpl extends BaseModelImpl<LayoutPrototype> {
 			model.setLayoutPrototypeId(getLayoutPrototypeId());
 			model.setCompanyId(getCompanyId());
 			model.setName(HtmlUtil.escape(getName()));
-			model.setTitle(HtmlUtil.escape(getTitle()));
 			model.setDescription(HtmlUtil.escape(getDescription()));
 			model.setSettings(HtmlUtil.escape(getSettings()));
 			model.setActive(getActive());
@@ -239,7 +226,6 @@ public class LayoutPrototypeModelImpl extends BaseModelImpl<LayoutPrototype> {
 		clone.setLayoutPrototypeId(getLayoutPrototypeId());
 		clone.setCompanyId(getCompanyId());
 		clone.setName(getName());
-		clone.setTitle(getTitle());
 		clone.setDescription(getDescription());
 		clone.setSettings(getSettings());
 		clone.setActive(getActive());
@@ -298,8 +284,6 @@ public class LayoutPrototypeModelImpl extends BaseModelImpl<LayoutPrototype> {
 		sb.append(getCompanyId());
 		sb.append(", name=");
 		sb.append(getName());
-		sb.append(", title=");
-		sb.append(getTitle());
 		sb.append(", description=");
 		sb.append(getDescription());
 		sb.append(", settings=");
@@ -331,10 +315,6 @@ public class LayoutPrototypeModelImpl extends BaseModelImpl<LayoutPrototype> {
 		sb.append(getName());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>title</column-name><column-value><![CDATA[");
-		sb.append(getTitle());
-		sb.append("]]></column-value></column>");
-		sb.append(
 			"<column><column-name>description</column-name><column-value><![CDATA[");
 		sb.append(getDescription());
 		sb.append("]]></column-value></column>");
@@ -355,7 +335,6 @@ public class LayoutPrototypeModelImpl extends BaseModelImpl<LayoutPrototype> {
 	private long _layoutPrototypeId;
 	private long _companyId;
 	private String _name;
-	private String _title;
 	private String _description;
 	private String _settings;
 	private boolean _active;

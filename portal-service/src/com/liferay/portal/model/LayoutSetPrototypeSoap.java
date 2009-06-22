@@ -52,7 +52,6 @@ public class LayoutSetPrototypeSoap implements Serializable {
 		soapModel.setLayoutSetPrototypeId(model.getLayoutSetPrototypeId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setName(model.getName());
-		soapModel.setTitle(model.getTitle());
 		soapModel.setDescription(model.getDescription());
 		soapModel.setSettings(model.getSettings());
 		soapModel.setActive(model.getActive());
@@ -135,14 +134,6 @@ public class LayoutSetPrototypeSoap implements Serializable {
 		_name = name;
 	}
 
-	public String getTitle() {
-		return _title;
-	}
-
-	public void setTitle(String title) {
-		_title = title;
-	}
-
 	public String getDescription() {
 		return _description;
 	}
@@ -174,7 +165,6 @@ public class LayoutSetPrototypeSoap implements Serializable {
 	private long _layoutSetPrototypeId;
 	private long _companyId;
 	private String _name;
-	private String _title;
 	private String _description;
 	private String _settings;
 	private boolean _active;

@@ -265,7 +265,6 @@
 			<id name="layoutPrototypeId" />
 			<basic name="companyId" />
 			<basic name="name" />
-			<basic name="title" />
 			<basic name="description" />
 			<basic name="settings">
 				<column name="SETTINGS_" />
@@ -273,7 +272,7 @@
 			<basic name="active">
 				<column name="ACTIVE_" />
 			</basic>
-			<transient name="title" />
+			<transient name="name" />
 		</attributes>
 	</entity>
 	<entity class="com.liferay.portal.model.impl.LayoutSetImpl" name="LayoutSet">
@@ -301,7 +300,6 @@
 			<id name="layoutSetPrototypeId" />
 			<basic name="companyId" />
 			<basic name="name" />
-			<basic name="title" />
 			<basic name="description" />
 			<basic name="settings">
 				<column name="SETTINGS_" />

@@ -25,6 +25,7 @@ package com.liferay.portal.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.model.Group;
@@ -50,9 +51,8 @@ public class LayoutPrototypeLocalServiceImpl
 	extends LayoutPrototypeLocalServiceBaseImpl {
 
 	public LayoutPrototype addLayoutPrototype(
-			long userId, long companyId, String name,
-			Map<Locale, String> localeTitlesMap, String description,
-			boolean active)
+			long userId, long companyId, Map<Locale, String> localeNamesMap,
+			String description, boolean active)
 		throws PortalException, SystemException {
 
 		// Layout prototype
@@ -63,11 +63,10 @@ public class LayoutPrototypeLocalServiceImpl
 			layoutPrototypeId);
 
 		layoutPrototype.setCompanyId(companyId);
-		layoutPrototype.setName(name);
 		layoutPrototype.setDescription(description);
 		layoutPrototype.setActive(active);
 
-		setLocalizedAttributes(layoutPrototype, localeTitlesMap);
+		setLocalizedAttributes(layoutPrototype, localeNamesMap);
 
 		layoutPrototypePersistence.update(layoutPrototype, false);
 
@@ -86,8 +85,9 @@ public class LayoutPrototypeLocalServiceImpl
 
 		Group group = groupLocalService.addGroup(
 			userId, LayoutPrototype.class.getName(),
-			layoutPrototype.getLayoutPrototypeId(), name, null, 0, friendlyURL,
-			true, null);
+			layoutPrototype.getLayoutPrototypeId(),
+			layoutPrototype.getName(LocaleUtil.getDefault()), null, 0,
+			friendlyURL, true, null);
 
 		layoutLocalService.addLayout(
 			userId, group.getGroupId(), true,
@@ -153,19 +153,19 @@ public class LayoutPrototypeLocalServiceImpl
 	}
 
 	public LayoutPrototype updateLayoutPrototype(
-			long layoutPrototypeId, String name,
-			Map<Locale, String> localeTitlesMap, String description,
-			boolean active)
+			long layoutPrototypeId, Map<Locale, String> localeNamesMap,
+			String description, boolean active)
 		throws PortalException, SystemException {
+
+		// Layout prototype
 
 		LayoutPrototype layoutPrototype =
 			layoutPrototypePersistence.findByPrimaryKey(layoutPrototypeId);
 
-		layoutPrototype.setName(name);
 		layoutPrototype.setDescription(description);
 		layoutPrototype.setActive(active);
 
-		setLocalizedAttributes(layoutPrototype, localeTitlesMap);
+		setLocalizedAttributes(layoutPrototype, localeNamesMap);
 
 		layoutPrototypePersistence.update(layoutPrototype, false);
 
@@ -174,7 +174,7 @@ public class LayoutPrototypeLocalServiceImpl
 		Group group = groupLocalService.getLayoutPrototypeGroup(
 			layoutPrototype.getCompanyId(), layoutPrototypeId);
 
-		group.setName(name);
+		group.setName(layoutPrototype.getName(LocaleUtil.getDefault()));
 
 		groupPersistence.update(group, false);
 
@@ -182,9 +182,9 @@ public class LayoutPrototypeLocalServiceImpl
 	}
 
 	protected void setLocalizedAttributes(
-		LayoutPrototype layoutPrototype, Map<Locale, String> localeTitlesMap) {
+		LayoutPrototype layoutPrototype, Map<Locale, String> localeNamesMap) {
 
-		if (localeTitlesMap == null) {
+		if (localeNamesMap == null) {
 			return;
 		}
 
@@ -202,9 +202,9 @@ public class LayoutPrototypeLocalServiceImpl
 			Locale[] locales = LanguageUtil.getAvailableLocales();
 
 			for (Locale locale : locales) {
-				String title = localeTitlesMap.get(locale);
+				String name = localeNamesMap.get(locale);
 
-				layoutPrototype.setTitle(title, locale);
+				layoutPrototype.setName(name, locale);
 			}
 		}
 		finally {

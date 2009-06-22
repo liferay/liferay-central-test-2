@@ -55,7 +55,6 @@ public class LayoutSetPrototypeJSONSerializer {
 		jsonObj.put("layoutSetPrototypeId", model.getLayoutSetPrototypeId());
 		jsonObj.put("companyId", model.getCompanyId());
 		jsonObj.put("name", model.getName());
-		jsonObj.put("title", model.getTitle());
 		jsonObj.put("description", model.getDescription());
 		jsonObj.put("settings", model.getSettings());
 		jsonObj.put("active", model.getActive());

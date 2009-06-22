@@ -110,14 +110,14 @@ public class LayoutPrototypeLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.model.LayoutPrototype addLayoutPrototype(
-		long userId, long companyId, java.lang.String name,
-		java.util.Map<java.util.Locale, String> localeTitlesMap,
+		long userId, long companyId,
+		java.util.Map<java.util.Locale, String> localeNamesMap,
 		java.lang.String description, boolean active)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
-				   .addLayoutPrototype(userId, companyId, name,
-			localeTitlesMap, description, active);
+				   .addLayoutPrototype(userId, companyId, localeNamesMap,
+			description, active);
 	}
 
 	public static java.util.List<com.liferay.portal.model.LayoutPrototype> search(
@@ -133,14 +133,14 @@ public class LayoutPrototypeLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.model.LayoutPrototype updateLayoutPrototype(
-		long layoutPrototypeId, java.lang.String name,
-		java.util.Map<java.util.Locale, String> localeTitlesMap,
+		long layoutPrototypeId,
+		java.util.Map<java.util.Locale, String> localeNamesMap,
 		java.lang.String description, boolean active)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
-				   .updateLayoutPrototype(layoutPrototypeId, name,
-			localeTitlesMap, description, active);
+				   .updateLayoutPrototype(layoutPrototypeId, localeNamesMap,
+			description, active);
 	}
 
 	public static LayoutPrototypeLocalService getService() {

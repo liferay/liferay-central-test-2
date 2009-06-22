@@ -101,8 +101,8 @@ public interface LayoutPrototypeLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.LayoutPrototype addLayoutPrototype(
-		long userId, long companyId, java.lang.String name,
-		java.util.Map<java.util.Locale, String> localeTitlesMap,
+		long userId, long companyId,
+		java.util.Map<java.util.Locale, String> localeNamesMap,
 		java.lang.String description, boolean active)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
@@ -118,8 +118,8 @@ public interface LayoutPrototypeLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.LayoutPrototype updateLayoutPrototype(
-		long layoutPrototypeId, java.lang.String name,
-		java.util.Map<java.util.Locale, String> localeTitlesMap,
+		long layoutPrototypeId,
+		java.util.Map<java.util.Locale, String> localeNamesMap,
 		java.lang.String description, boolean active)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;

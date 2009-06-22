@@ -72,35 +72,29 @@ import com.liferay.portal.service.LayoutPrototypeServiceUtil;
  */
 public class LayoutPrototypeServiceHttp {
 	public static com.liferay.portal.model.LayoutPrototype addLayoutPrototype(
-		HttpPrincipal httpPrincipal, java.lang.String name,
-		java.util.Map<java.util.Locale, String> localeTitlesMap,
+		HttpPrincipal httpPrincipal,
+		java.util.Map<java.util.Locale, String> localeNamesMap,
 		java.lang.String description, boolean active)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = name;
+			Object paramObj0 = localeNamesMap;
 
-			if (name == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
+			if (localeNamesMap == null) {
+				paramObj0 = new NullWrapper("java.util.Map");
 			}
 
-			Object paramObj1 = localeTitlesMap;
-
-			if (localeTitlesMap == null) {
-				paramObj1 = new NullWrapper("java.util.Map");
-			}
-
-			Object paramObj2 = description;
+			Object paramObj1 = description;
 
 			if (description == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
+				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj3 = new BooleanWrapper(active);
+			Object paramObj2 = new BooleanWrapper(active);
 
 			MethodWrapper methodWrapper = new MethodWrapper(LayoutPrototypeServiceUtil.class.getName(),
 					"addLayoutPrototype",
-					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
+					new Object[] { paramObj0, paramObj1, paramObj2 });
 
 			Object returnObj = null;
 
@@ -248,39 +242,30 @@ public class LayoutPrototypeServiceHttp {
 
 	public static com.liferay.portal.model.LayoutPrototype updateLayoutPrototype(
 		HttpPrincipal httpPrincipal, long layoutPrototypeId,
-		java.lang.String name,
-		java.util.Map<java.util.Locale, String> localeTitlesMap,
+		java.util.Map<java.util.Locale, String> localeNamesMap,
 		java.lang.String description, boolean active)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(layoutPrototypeId);
 
-			Object paramObj1 = name;
+			Object paramObj1 = localeNamesMap;
 
-			if (name == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
+			if (localeNamesMap == null) {
+				paramObj1 = new NullWrapper("java.util.Map");
 			}
 
-			Object paramObj2 = localeTitlesMap;
-
-			if (localeTitlesMap == null) {
-				paramObj2 = new NullWrapper("java.util.Map");
-			}
-
-			Object paramObj3 = description;
+			Object paramObj2 = description;
 
 			if (description == null) {
-				paramObj3 = new NullWrapper("java.lang.String");
+				paramObj2 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj4 = new BooleanWrapper(active);
+			Object paramObj3 = new BooleanWrapper(active);
 
 			MethodWrapper methodWrapper = new MethodWrapper(LayoutPrototypeServiceUtil.class.getName(),
 					"updateLayoutPrototype",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
-					});
+					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
 
 			Object returnObj = null;
 

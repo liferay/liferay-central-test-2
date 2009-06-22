@@ -48,8 +48,8 @@ import java.util.Map;
 public class LayoutPrototypeServiceImpl extends LayoutPrototypeServiceBaseImpl {
 
 	public LayoutPrototype addLayoutPrototype(
-			String name, Map<Locale, String> localeTitlesMap,
-			String description, boolean active)
+			Map<Locale, String> localeNamesMap, String description,
+			boolean active)
 		throws PortalException, SystemException {
 
 		User user = getUser();
@@ -58,8 +58,8 @@ public class LayoutPrototypeServiceImpl extends LayoutPrototypeServiceBaseImpl {
 			getPermissionChecker(), ActionKeys.ADD_LAYOUT_PROTOTYPE);
 
 		return layoutPrototypeLocalService.addLayoutPrototype(
-			user.getUserId(), user.getCompanyId(), name, localeTitlesMap,
-			description, active);
+			user.getUserId(), user.getCompanyId(), localeNamesMap, description,
+			active);
 	}
 
 	public void deleteLayoutPrototype(long layoutPrototypeId)
@@ -105,16 +105,15 @@ public class LayoutPrototypeServiceImpl extends LayoutPrototypeServiceBaseImpl {
 	}
 
 	public LayoutPrototype updateLayoutPrototype(
-			long layoutPrototypeId, String name,
-			Map<Locale, String> localeTitlesMap, String description,
-			boolean active)
+			long layoutPrototypeId, Map<Locale, String> localeNamesMap,
+			String description, boolean active)
 		throws PortalException, SystemException {
 
 		LayoutPrototypePermissionUtil.check(
 			getPermissionChecker(), layoutPrototypeId, ActionKeys.UPDATE);
 
 		return layoutPrototypeLocalService.updateLayoutPrototype(
-			layoutPrototypeId, name, localeTitlesMap, description, active);
+			layoutPrototypeId, localeNamesMap, description, active);
 	}
 
 }

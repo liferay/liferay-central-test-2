@@ -109,8 +109,7 @@ alter table Layout add layoutPrototypeId LONG;
 create table LayoutPrototype (
 	layoutPrototypeId LONG not null primary key,
 	companyId LONG,
-	name VARCHAR(75) null,
-	title STRING null,
+	name STRING null,
 	description STRING null,
 	settings_ STRING null,
 	active_ BOOLEAN
@@ -121,8 +120,7 @@ alter table LayoutSet add layoutSetPrototypeId LONG;
 create table LayoutSetPrototype (
 	layoutSetPrototypeId LONG not null primary key,
 	companyId LONG,
-	name VARCHAR(75) null,
-	title STRING null,
+	name STRING null,
 	description STRING null,
 	settings_ STRING null,
 	active_ BOOLEAN

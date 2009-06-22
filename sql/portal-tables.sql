@@ -701,8 +701,7 @@ create table Layout (
 create table LayoutPrototype (
 	layoutPrototypeId LONG not null primary key,
 	companyId LONG,
-	name VARCHAR(75) null,
-	title STRING null,
+	name STRING null,
 	description STRING null,
 	settings_ STRING null,
 	active_ BOOLEAN
@@ -728,8 +727,7 @@ create table LayoutSet (
 create table LayoutSetPrototype (
 	layoutSetPrototypeId LONG not null primary key,
 	companyId LONG,
-	name VARCHAR(75) null,
-	title STRING null,
+	name STRING null,
 	description STRING null,
 	settings_ STRING null,
 	active_ BOOLEAN

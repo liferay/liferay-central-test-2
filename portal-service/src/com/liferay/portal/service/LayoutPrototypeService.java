@@ -56,8 +56,7 @@ import com.liferay.portal.kernel.annotation.Transactional;
 	PortalException.class, SystemException.class})
 public interface LayoutPrototypeService {
 	public com.liferay.portal.model.LayoutPrototype addLayoutPrototype(
-		java.lang.String name,
-		java.util.Map<java.util.Locale, String> localeTitlesMap,
+		java.util.Map<java.util.Locale, String> localeNamesMap,
 		java.lang.String description, boolean active)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
@@ -80,8 +79,8 @@ public interface LayoutPrototypeService {
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.LayoutPrototype updateLayoutPrototype(
-		long layoutPrototypeId, java.lang.String name,
-		java.util.Map<java.util.Locale, String> localeTitlesMap,
+		long layoutPrototypeId,
+		java.util.Map<java.util.Locale, String> localeNamesMap,
 		java.lang.String description, boolean active)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;

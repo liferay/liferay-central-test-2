@@ -62,21 +62,21 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 
 <fieldset class="exp-block-labels">
 	<div class="exp-ctrl-holder">
-		<label><%= LanguageUtil.get(pageContext, "active") %></label>
+		<label><liferay-ui:message key="name" /></label>
 
-		<liferay-ui:input-field model="<%= LayoutPrototype.class %>" bean="<%= layoutPrototype %>" field="active" />
-	</div>
-
-	<div class="exp-ctrl-holder">
-		<label><liferay-ui:message key="title" /></label>
-
-		<liferay-ui:input-field model="<%= LayoutPrototype.class %>" bean="<%= layoutPrototype %>" field="title" />
+		<liferay-ui:input-field model="<%= LayoutPrototype.class %>" bean="<%= layoutPrototype %>" field="name" />
 	</div>
 
 	<div class="exp-ctrl-holder">
 		<label><liferay-ui:message key="description" /></label>
 
 		<liferay-ui:input-field model="<%= LayoutPrototype.class %>" bean="<%= layoutPrototype %>" field="description" />
+	</div>
+
+	<div class="exp-ctrl-holder">
+		<label><%= LanguageUtil.get(pageContext, "active") %></label>
+
+		<liferay-ui:input-field model="<%= LayoutPrototype.class %>" bean="<%= layoutPrototype %>" field="active" />
 	</div>
 
 	<c:if test="<%= !layoutPrototype.isNew() %>">

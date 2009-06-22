@@ -46,14 +46,12 @@ package com.liferay.portal.service;
  */
 public class LayoutPrototypeServiceUtil {
 	public static com.liferay.portal.model.LayoutPrototype addLayoutPrototype(
-		java.lang.String name,
-		java.util.Map<java.util.Locale, String> localeTitlesMap,
+		java.util.Map<java.util.Locale, String> localeNamesMap,
 		java.lang.String description, boolean active)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
-				   .addLayoutPrototype(name, localeTitlesMap, description,
-			active);
+				   .addLayoutPrototype(localeNamesMap, description, active);
 	}
 
 	public static void deleteLayoutPrototype(long layoutPrototypeId)
@@ -78,14 +76,14 @@ public class LayoutPrototypeServiceUtil {
 	}
 
 	public static com.liferay.portal.model.LayoutPrototype updateLayoutPrototype(
-		long layoutPrototypeId, java.lang.String name,
-		java.util.Map<java.util.Locale, String> localeTitlesMap,
+		long layoutPrototypeId,
+		java.util.Map<java.util.Locale, String> localeNamesMap,
 		java.lang.String description, boolean active)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
-				   .updateLayoutPrototype(layoutPrototypeId, name,
-			localeTitlesMap, description, active);
+				   .updateLayoutPrototype(layoutPrototypeId, localeNamesMap,
+			description, active);
 	}
 
 	public static LayoutPrototypeService getService() {
