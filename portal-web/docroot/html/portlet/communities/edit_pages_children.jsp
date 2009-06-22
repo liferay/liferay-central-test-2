@@ -113,7 +113,7 @@ if (!StringUtil.contains(tabs4Names, tabs4)) {
 						for (LayoutPrototype layoutPrototype : layoutPrototypes) {
 						%>
 
-							<option value="<%= layoutPrototype.getLayoutPrototypeId() %>"><%= layoutPrototype.getTitle(user.getLanguageId()) %></option>
+							<option value="<%= layoutPrototype.getLayoutPrototypeId() %>"><%= layoutPrototype.getName(user.getLanguageId()) %></option>
 
 						<%
 						}
