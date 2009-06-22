@@ -167,7 +167,7 @@ public class GroupImpl extends GroupModelImpl implements Group {
 					LayoutPrototypeLocalServiceUtil.getLayoutPrototype(
 						getClassPK());
 
-				name = layoutPrototype.getTitle(LocaleUtil.getDefault());
+				name = layoutPrototype.getName(LocaleUtil.getDefault());
 			}
 			else if (isOrganization()) {
 				long organizationId = getClassPK();
