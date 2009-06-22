@@ -264,7 +264,6 @@ Liferay.Service.registerClass(
 Liferay.Service.registerClass(
 	Liferay.Service.Portal, "Role",
 	{
-		addRole: true,
 		addUserRoles: true,
 		deleteRole: true,
 		getGroupRole: true,
@@ -742,10 +741,8 @@ Liferay.Service.register("Liferay.Service.Polls", "com.liferay.portlet.polls.ser
 Liferay.Service.registerClass(
 	Liferay.Service.Polls, "PollsQuestion",
 	{
-		addQuestion: true,
 		deleteQuestion: true,
-		getQuestion: true,
-		updateQuestion: true
+		getQuestion: true
 	}
 );
 

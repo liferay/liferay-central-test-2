@@ -110,7 +110,8 @@ public class PollsQuestionLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.polls.model.PollsQuestion addQuestion(
-		long userId, java.lang.String title, java.lang.String description,
+		long userId, java.util.Map<java.util.Locale, String> localeTitlesMap,
+		java.util.Map<java.util.Locale, String> localeDescriptionsMap,
 		int expirationDateMonth, int expirationDateDay, int expirationDateYear,
 		int expirationDateHour, int expirationDateMinute, boolean neverExpire,
 		java.util.List<com.liferay.portlet.polls.model.PollsChoice> choices,
@@ -118,26 +119,27 @@ public class PollsQuestionLocalServiceUtil {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
-				   .addQuestion(userId, title, description,
+				   .addQuestion(userId, localeTitlesMap, localeDescriptionsMap,
 			expirationDateMonth, expirationDateDay, expirationDateYear,
 			expirationDateHour, expirationDateMinute, neverExpire, choices,
 			serviceContext);
 	}
 
 	public static com.liferay.portlet.polls.model.PollsQuestion addQuestion(
-		java.lang.String uuid, long userId, java.lang.String title,
-		java.lang.String description, int expirationDateMonth,
-		int expirationDateDay, int expirationDateYear, int expirationDateHour,
-		int expirationDateMinute, boolean neverExpire,
+		java.lang.String uuid, long userId,
+		java.util.Map<java.util.Locale, String> localeTitlesMap,
+		java.util.Map<java.util.Locale, String> localeDescriptionsMap,
+		int expirationDateMonth, int expirationDateDay, int expirationDateYear,
+		int expirationDateHour, int expirationDateMinute, boolean neverExpire,
 		java.util.List<com.liferay.portlet.polls.model.PollsChoice> choices,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
-				   .addQuestion(uuid, userId, title, description,
-			expirationDateMonth, expirationDateDay, expirationDateYear,
-			expirationDateHour, expirationDateMinute, neverExpire, choices,
-			serviceContext);
+				   .addQuestion(uuid, userId, localeTitlesMap,
+			localeDescriptionsMap, expirationDateMonth, expirationDateDay,
+			expirationDateYear, expirationDateHour, expirationDateMinute,
+			neverExpire, choices, serviceContext);
 	}
 
 	public static void addQuestionResources(long questionId,
@@ -223,32 +225,35 @@ public class PollsQuestionLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.polls.model.PollsQuestion updateQuestion(
-		long userId, long questionId, java.lang.String title,
-		java.lang.String description, int expirationDateMonth,
-		int expirationDateDay, int expirationDateYear, int expirationDateHour,
-		int expirationDateMinute, boolean neverExpire)
+		long userId, long questionId,
+		java.util.Map<java.util.Locale, String> localeTitlesMap,
+		java.util.Map<java.util.Locale, String> localeDescriptionsMap,
+		int expirationDateMonth, int expirationDateDay, int expirationDateYear,
+		int expirationDateHour, int expirationDateMinute, boolean neverExpire)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
-				   .updateQuestion(userId, questionId, title, description,
-			expirationDateMonth, expirationDateDay, expirationDateYear,
-			expirationDateHour, expirationDateMinute, neverExpire);
+				   .updateQuestion(userId, questionId, localeTitlesMap,
+			localeDescriptionsMap, expirationDateMonth, expirationDateDay,
+			expirationDateYear, expirationDateHour, expirationDateMinute,
+			neverExpire);
 	}
 
 	public static com.liferay.portlet.polls.model.PollsQuestion updateQuestion(
-		long userId, long questionId, java.lang.String title,
-		java.lang.String description, int expirationDateMonth,
-		int expirationDateDay, int expirationDateYear, int expirationDateHour,
-		int expirationDateMinute, boolean neverExpire,
+		long userId, long questionId,
+		java.util.Map<java.util.Locale, String> localeTitlesMap,
+		java.util.Map<java.util.Locale, String> localeDescriptionsMap,
+		int expirationDateMonth, int expirationDateDay, int expirationDateYear,
+		int expirationDateHour, int expirationDateMinute, boolean neverExpire,
 		java.util.List<com.liferay.portlet.polls.model.PollsChoice> choices,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
-				   .updateQuestion(userId, questionId, title, description,
-			expirationDateMonth, expirationDateDay, expirationDateYear,
-			expirationDateHour, expirationDateMinute, neverExpire, choices,
-			serviceContext);
+				   .updateQuestion(userId, questionId, localeTitlesMap,
+			localeDescriptionsMap, expirationDateMonth, expirationDateDay,
+			expirationDateYear, expirationDateHour, expirationDateMinute,
+			neverExpire, choices, serviceContext);
 	}
 
 	public static PollsQuestionLocalService getService() {

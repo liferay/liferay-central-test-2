@@ -1354,6 +1354,7 @@
 		<field name="questionId" type="long" />
 		<field name="name" type="String" />
 		<field name="description" type="String">
+			<hint name="localized">true</hint>
 			<hint name="max-length">1000</hint>
 		</field>
 	</model>
@@ -1367,10 +1368,12 @@
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
 		<field name="title" type="String">
+			<hint name="localized">true</hint>
 			<hint name="max-length">500</hint>
 		</field>
 		<field name="description" type="String">
 			<hint-collection name="TEXTAREA" />
+			<hint name="localized">true</hint>
 		</field>
 		<field name="expirationDate" type="Date" />
 		<field name="lastVoteDate" type="Date" />

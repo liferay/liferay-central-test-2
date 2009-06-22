@@ -1855,6 +1855,7 @@
 			<basic name="questionId" />
 			<basic name="name" />
 			<basic name="description" />
+			<transient name="description" />
 		</attributes>
 	</entity>
 	<entity class="com.liferay.portlet.polls.model.impl.PollsQuestionImpl" name="PollsQuestion">
@@ -1882,6 +1883,8 @@
 			<basic name="lastVoteDate">
 				<temporal>TIMESTAMP</temporal>
 			</basic>
+			<transient name="description" />
+			<transient name="title" />
 			<transient name="userUuid" />
 		</attributes>
 	</entity>

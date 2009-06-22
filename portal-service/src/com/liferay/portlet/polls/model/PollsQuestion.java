@@ -49,6 +49,29 @@ package com.liferay.portlet.polls.model;
  *
  */
 public interface PollsQuestion extends PollsQuestionModel {
+	public java.lang.String getDescription(java.util.Locale locale);
+
+	public java.lang.String getDescription(java.util.Locale locale,
+		boolean useDefault);
+
+	public java.lang.String getDescription(java.lang.String localeLanguageId);
+
+	public java.lang.String getDescription(java.lang.String localeLanguageId,
+		boolean useDefault);
+
+	public java.util.Map<java.util.Locale, String> getDescriptionsMap();
+
+	public java.lang.String getTitle(java.util.Locale locale);
+
+	public java.lang.String getTitle(java.util.Locale locale, boolean useDefault);
+
+	public java.lang.String getTitle(java.lang.String localeLanguageId);
+
+	public java.lang.String getTitle(java.lang.String localeLanguageId,
+		boolean useDefault);
+
+	public java.util.Map<java.util.Locale, String> getTitlesMap();
+
 	public java.lang.String getUserUuid()
 		throws com.liferay.portal.SystemException;
 
@@ -60,4 +83,9 @@ public interface PollsQuestion extends PollsQuestionModel {
 		throws com.liferay.portal.SystemException;
 
 	public int getVotesCount() throws com.liferay.portal.SystemException;
+
+	public void setDescription(java.lang.String description,
+		java.util.Locale locale);
+
+	public void setTitle(java.lang.String title, java.util.Locale locale);
 }

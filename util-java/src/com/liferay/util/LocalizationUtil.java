@@ -209,6 +209,20 @@ public class LocalizationUtil {
 		return value;
 	}
 
+	public static Map<Locale, String> getLocalizedField(String xml) {
+		Locale[] locales = LanguageUtil.getAvailableLocales();
+
+		Map<Locale, String> map = new HashMap<Locale, String>();
+
+		for (Locale locale : locales) {
+			String languageId = LocaleUtil.toLanguageId(locale);
+
+			map.put(locale, getLocalization(xml, languageId));
+		}
+
+		return map;
+	}
+
 	public static Map<Locale, String> getLocalizedParameter(
 		PortletRequest portletRequest, String parameter) {
 

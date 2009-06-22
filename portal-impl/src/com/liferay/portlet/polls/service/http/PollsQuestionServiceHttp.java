@@ -75,25 +75,26 @@ import com.liferay.portlet.polls.service.PollsQuestionServiceUtil;
  */
 public class PollsQuestionServiceHttp {
 	public static com.liferay.portlet.polls.model.PollsQuestion addQuestion(
-		HttpPrincipal httpPrincipal, java.lang.String title,
-		java.lang.String description, int expirationDateMonth,
-		int expirationDateDay, int expirationDateYear, int expirationDateHour,
-		int expirationDateMinute, boolean neverExpire,
+		HttpPrincipal httpPrincipal,
+		java.util.Map<java.util.Locale, String> localeTitlesMap,
+		java.util.Map<java.util.Locale, String> localeDescriptionsMap,
+		int expirationDateMonth, int expirationDateDay, int expirationDateYear,
+		int expirationDateHour, int expirationDateMinute, boolean neverExpire,
 		java.util.List<com.liferay.portlet.polls.model.PollsChoice> choices,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = title;
+			Object paramObj0 = localeTitlesMap;
 
-			if (title == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
+			if (localeTitlesMap == null) {
+				paramObj0 = new NullWrapper("java.util.Map");
 			}
 
-			Object paramObj1 = description;
+			Object paramObj1 = localeDescriptionsMap;
 
-			if (description == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
+			if (localeDescriptionsMap == null) {
+				paramObj1 = new NullWrapper("java.util.Map");
 			}
 
 			Object paramObj2 = new IntegerWrapper(expirationDateMonth);
@@ -223,10 +224,11 @@ public class PollsQuestionServiceHttp {
 	}
 
 	public static com.liferay.portlet.polls.model.PollsQuestion updateQuestion(
-		HttpPrincipal httpPrincipal, long questionId, java.lang.String title,
-		java.lang.String description, int expirationDateMonth,
-		int expirationDateDay, int expirationDateYear, int expirationDateHour,
-		int expirationDateMinute, boolean neverExpire,
+		HttpPrincipal httpPrincipal, long questionId,
+		java.util.Map<java.util.Locale, String> localeTitlesMap,
+		java.util.Map<java.util.Locale, String> localeDescriptionsMap,
+		int expirationDateMonth, int expirationDateDay, int expirationDateYear,
+		int expirationDateHour, int expirationDateMinute, boolean neverExpire,
 		java.util.List<com.liferay.portlet.polls.model.PollsChoice> choices,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
@@ -234,16 +236,16 @@ public class PollsQuestionServiceHttp {
 		try {
 			Object paramObj0 = new LongWrapper(questionId);
 
-			Object paramObj1 = title;
+			Object paramObj1 = localeTitlesMap;
 
-			if (title == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
+			if (localeTitlesMap == null) {
+				paramObj1 = new NullWrapper("java.util.Map");
 			}
 
-			Object paramObj2 = description;
+			Object paramObj2 = localeDescriptionsMap;
 
-			if (description == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
+			if (localeDescriptionsMap == null) {
+				paramObj2 = new NullWrapper("java.util.Map");
 			}
 
 			Object paramObj3 = new IntegerWrapper(expirationDateMonth);

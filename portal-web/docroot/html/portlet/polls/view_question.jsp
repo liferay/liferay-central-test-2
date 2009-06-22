@@ -29,8 +29,6 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 PollsQuestion question = (PollsQuestion)request.getAttribute(WebKeys.POLLS_QUESTION);
 
-question = question.toEscapedModel();
-
 List choices = PollsChoiceLocalServiceUtil.getChoices(question.getQuestionId());
 
 boolean hasVoted = PollsUtil.hasVoted(request, question.getQuestionId());
@@ -51,11 +49,11 @@ if (viewResults && !PollsQuestionPermission.contains(permissionChecker, question
 <liferay-ui:error exception="<%= NoSuchChoiceException.class %>" message="please-select-an-option" />
 
 <span style="font-size: small;"><b>
-<%= question.getTitle() %>
+<%= HtmlUtil.escape(question.getTitle(locale)) %>
 </b></span><br />
 
 <span style="font-size: x-small;">
-<%= question.getDescription() %>
+<%= HtmlUtil.escape(question.getDescription(locale)) %>
 </span>
 
 <br /><br />
@@ -69,11 +67,9 @@ if (viewResults && !PollsQuestionPermission.contains(permissionChecker, question
 
 			while (itr.hasNext()) {
 				PollsChoice choice = (PollsChoice)itr.next();
-
-				choice = choice.toEscapedModel();
 			%>
 
-				<label><input name="<portlet:namespace />choiceId" type="radio" value="<%= choice.getChoiceId() %>" /><strong><%= choice.getName() %>.</strong> <%= choice.getDescription() %></label> <br />
+				<label><input name="<portlet:namespace />choiceId" type="radio" value="<%= choice.getChoiceId() %>" /><strong><%= choice.getName() %>.</strong> <%= HtmlUtil.escape(choice.getDescription(locale)) %></label> <br />
 
 			<%
 			}
