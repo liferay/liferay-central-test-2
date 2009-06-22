@@ -25,6 +25,7 @@ package com.liferay.portlet.layoutprototypes.action;
 import com.liferay.portal.NoSuchLayoutPrototypeException;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
+import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.security.auth.PrincipalException;
@@ -124,11 +125,14 @@ public class EditLayoutPrototypeAction extends PortletAction {
 		long layoutPrototypeId = ParamUtil.getLong(
 			actionRequest, "layoutPrototypeId");
 
-		String name = ParamUtil.getString(actionRequest, "name");
 		Map<Locale, String> localeTitlesMap =
 			LocalizationUtil.getLocalizedParameter(actionRequest, "title");
 		String description = ParamUtil.getString(actionRequest, "description");
 		boolean active = ParamUtil.getBoolean(actionRequest, "active");
+
+		Locale defaultLocale = LocaleUtil.getDefault();
+
+		String name = localeTitlesMap.get(defaultLocale);
 
 		if (layoutPrototypeId <= 0) {
 

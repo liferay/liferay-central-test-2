@@ -61,20 +61,6 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 <input name="<portlet:namespace />layoutPrototypeId" type="hidden" value="<%= layoutPrototypeId %>" />
 
 <fieldset class="exp-block-labels">
-	<c:if test="<%= !layoutPrototype.isNew() %>">
-		<div class="exp-ctrl-holder">
-			<label><%= LanguageUtil.get(pageContext, "old-name") %></label>
-
-			<%= HtmlUtil.escape(layoutPrototype.getName()) %>
-		</div>
-	</c:if>
-
-	<div class="exp-ctrl-holder">
-		<label><%= LanguageUtil.get(pageContext, (!layoutPrototype.isNew() ? "new-name" : "name")) %></label>
-
-		<liferay-ui:input-field model="<%= LayoutPrototype.class %>" bean="<%= layoutPrototype %>" field="name" />
-	</div>
-
 	<div class="exp-ctrl-holder">
 		<label><%= LanguageUtil.get(pageContext, "active") %></label>
 
