@@ -543,6 +543,11 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 				}
 			}
 
+			List<AssetTag> oldTags = assetEntryPersistence.getAssetTags(
+				entry.getEntryId());
+
+			assetEntryPersistence.setAssetTags(entry.getEntryId(), tags);
+
 			if (entry.isNew()) {
 				for (AssetTag tag : tags) {
 					assetTagLocalService.incrementAssetCount(
@@ -550,9 +555,6 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 				}
 			}
 			else {
-				List<AssetTag> oldTags = assetEntryPersistence.getAssetTags(
-					entry.getEntryId());
-
 				for (AssetTag oldTag : oldTags) {
 					if (!tags.contains(oldTag)) {
 						assetTagLocalService.decrementAssetCount(
@@ -567,8 +569,6 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 					}
 				}
 			}
-
-			assetEntryPersistence.setAssetTags(entry.getEntryId(), tags);
 		}
 
 		// Update entry after tags so that entry listeners have access to the
