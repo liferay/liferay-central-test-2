@@ -48,6 +48,7 @@ public class ButtonTag extends IncludeTag implements DynamicAttributes {
 		request.setAttribute(
 			"aui:button:dynamicAttributes", _dynamicAttributes);
 		request.setAttribute("aui:button:name", _name);
+		request.setAttribute("aui:button:onClick", _onClick);
 		request.setAttribute("aui:button:type", _type);
 		request.setAttribute("aui:button:value", _value);
 
@@ -68,6 +69,10 @@ public class ButtonTag extends IncludeTag implements DynamicAttributes {
 		_name = name;
 	}
 
+	public void setOnClick(String onClick) {
+		_onClick = onClick;
+	}
+
 	public void setType(String type) {
 		_type = type;
 	}
@@ -86,6 +91,7 @@ public class ButtonTag extends IncludeTag implements DynamicAttributes {
 	private Map<String, Object> _dynamicAttributes =
 		new HashMap<String, Object>();
 	private String _name;
+	private String _onClick;
 	private String _type = "button";
 	private String _value;
 
