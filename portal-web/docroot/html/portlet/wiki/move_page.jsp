@@ -60,129 +60,133 @@ String newTitle = ParamUtil.get(request, "newTitle", StringPool.BLANK);
 </portlet:actionURL>
 
 <aui:form action="<%= movePageURL %>" method="post" name="fm">
-<input type="hidden" name="<portlet:namespace />redirect" value="<%= HtmlUtil.escapeAttribute(redirect) %>" />
-<input type="hidden" name="<portlet:namespace />nodeId" value="<%= node.getNodeId() %>" />
-<input type="hidden" name="<portlet:namespace />title" value="<%= HtmlUtil.escapeAttribute(title) %>" />
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
+	<aui:input name="<%= Constants.CMD %>" type="hidden" />
+	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
+	<aui:input name="nodeId" type="hidden" value="<%= node.getNodeId() %>" />
+	<aui:input name="title" type="hidden" value="<%= title %>" />
 
-<liferay-ui:tabs
-	names="rename,change-parent"
-	refresh="<%= false %>"
->
-	<liferay-ui:section>
-		<div class="portlet-msg-info">
-			<liferay-ui:message key="use-the-form-below-to-rename-a-page,-moving-all-of-its-history-to-the-new-name" />
-		</div>
+	<liferay-ui:tabs
+		names="rename,change-parent"
+		refresh="<%= false %>"
+	>
+		<liferay-ui:section>
+			<div class="portlet-msg-info">
+				<liferay-ui:message key="use-the-form-below-to-rename-a-page,-moving-all-of-its-history-to-the-new-name" />
+			</div>
 
-		<aui:fieldset>
-			<aui:field-wrapper label="current-title">
-				<%= wikiPage.getTitle() %>
-			</aui:field-wrapper>
+			<aui:fieldset>
+				<aui:field-wrapper label="current-title">
+					<%= wikiPage.getTitle() %>
+				</aui:field-wrapper>
 
-			<aui:input name="newTitle" value="<%= newTitle %>" />
+				<aui:input name="newTitle" value="<%= newTitle %>" />
 
-			<aui:button-row>
-				<aui:button name="renameButton" onClick='<%= renderResponse.getNamespace() + "renamePage();" %>' type="button" value="rename" />
+				<aui:button-row>
+					<aui:button name="renameButton" onClick='<%= renderResponse.getNamespace() + "renamePage();" %>' type="button" value="rename" />
 
-				<aui:button name="cancelButton" onClick='<%= "location.href = \'" +  HtmlUtil.escape(redirect) + "\';" %>' type="button" value="cancel" />
-			</aui:button-row>
-		</aui:fieldset>
-	</liferay-ui:section>
+					<%
+					String taglibCancelURL = "location.href = '" +  HtmlUtil.escape(redirect) + "';"
+					%>
 
-	<liferay-ui:section>
-		<div class="portlet-msg-info">
-			<liferay-ui:message key="use-the-form-below-to-move-a-page-and-all-of-its-history-to-be-the-child-of-a-new-parent-page" />
-		</div>
+					<aui:button name="cancelButton" onClick="<%= taglibCancelURL %>" type="button" value="cancel" />
+				</aui:button-row>
+			</aui:fieldset>
+		</liferay-ui:section>
 
-		<%
-		String parentText = StringPool.BLANK;
-
-		WikiPage parentPage = wikiPage.getParentPage();
-
-		if (parentPage == null) {
-			parentText = StringPool.OPEN_PARENTHESIS + LanguageUtil.get(pageContext, "none") + StringPool.CLOSE_PARENTHESIS;
-		}
-		else {
-			parentText = parentPage.getTitle();
-
-			parentPage = parentPage.getParentPage();
-
-			while (parentPage != null) {
-				parentText = parentPage.getTitle() + " &raquo; " + parentText;
-
-				parentPage = parentPage.getParentPage();
-			}
-		}
-
-		List<WikiPage> childPages = WikiPageLocalServiceUtil.getChildren(node.getNodeId(), true, StringPool.BLANK);
-
-		childPages = ListUtil.sort(childPages);
-
-		childPages.remove(wikiPage);
-		%>
-
-		<aui:fieldset>
-
-			<aui:field-wrapper label="current-parent">
-				<%= parentText %>
-			</aui:field-wrapper>
+		<liferay-ui:section>
+			<div class="portlet-msg-info">
+				<liferay-ui:message key="use-the-form-below-to-move-a-page-and-all-of-its-history-to-be-the-child-of-a-new-parent-page" />
+			</div>
 
 			<%
-			boolean newParentAvailable = true;
+			String parentText = StringPool.BLANK;
 
-			if (childPages.isEmpty()) {
-				newParentAvailable = false;
-			%>
+			WikiPage parentPage = wikiPage.getParentPage();
 
-				<aui:select disabled="true" name="newParentTitle">
-					<aui:option><liferay-ui:message key="not-available" /></aui:option>
-				</aui:select>
-
-			<%
+			if (parentPage == null) {
+				parentText = StringPool.OPEN_PARENTHESIS + LanguageUtil.get(pageContext, "none") + StringPool.CLOSE_PARENTHESIS;
 			}
 			else {
-			%>
+				parentText = parentPage.getTitle();
 
-				<aui:select name="newParentTitle">
-					<aui:option selected='<%= Validator.isNull(wikiPage.getParentTitle()) %>' value="">(<liferay-ui:message key="none" />)</aui:option>
+				parentPage = parentPage.getParentPage();
 
-					<%
-					for (WikiPage childPage : childPages) {
-						request.setAttribute(WebKeys.WIKI_TREE_WALKER_PARENT, childPage);
-						request.setAttribute(WebKeys.WIKI_TREE_WALKER_PAGE, wikiPage);
-						request.setAttribute(WebKeys.WIKI_TREE_WALKER_DEPTH, 1);
-					%>
+				while (parentPage != null) {
+					parentText = parentPage.getTitle() + " &raquo; " + parentText;
 
-						<liferay-util:include page="/html/portlet/wiki/page_tree.jsp" />
-
-					<%
-					}
-					%>
-
-				</aui:select>
-
-			<%
+					parentPage = parentPage.getParentPage();
+				}
 			}
+
+			List<WikiPage> childPages = WikiPageLocalServiceUtil.getChildren(node.getNodeId(), true, StringPool.BLANK);
+
+			childPages = ListUtil.sort(childPages);
+
+			childPages.remove(wikiPage);
 			%>
 
-			<aui:button-row>
+			<aui:fieldset>
+				<aui:field-wrapper label="current-parent">
+					<%= parentText %>
+				</aui:field-wrapper>
 
 				<%
-				if (newParentAvailable) {
+				boolean newParentAvailable = true;
+
+				if (childPages.isEmpty()) {
+					newParentAvailable = false;
 				%>
 
-					<aui:button name="changeParentButton" onClick='<%= renderResponse.getNamespace() + "changeParent();" %>' type="button" value="change-parent" />
+					<aui:select disabled="<%= true %>" name="newParentTitle">
+						<aui:option><liferay-ui:message key="not-available" /></aui:option>
+					</aui:select>
+
+				<%
+				}
+				else {
+				%>
+
+					<aui:select name="newParentTitle">
+						<aui:option selected="<%= Validator.isNull(wikiPage.getParentTitle()) %>" value="">(<liferay-ui:message key="none" />)</aui:option>
+
+						<%
+						for (WikiPage childPage : childPages) {
+							request.setAttribute(WebKeys.WIKI_TREE_WALKER_PARENT, childPage);
+							request.setAttribute(WebKeys.WIKI_TREE_WALKER_PAGE, wikiPage);
+							request.setAttribute(WebKeys.WIKI_TREE_WALKER_DEPTH, 1);
+						%>
+
+							<liferay-util:include page="/html/portlet/wiki/page_tree.jsp" />
+
+						<%
+						}
+						%>
+
+					</aui:select>
 
 				<%
 				}
 				%>
 
-				<aui:button name="cancelButton" onClick='<%= "location.href = \'" +  HtmlUtil.escape(redirect) + "\';" %>' type="button" value="cancel" />
-			</aui:button-row>
+				<aui:button-row>
 
-		</aui:fieldset>
+					<%
+					if (newParentAvailable) {
+					%>
 
+						<aui:button name="changeParentButton" onClick='<%= renderResponse.getNamespace() + "changeParent();" %>' type="button" value="change-parent" />
+
+					<%
+					}
+					%>
+
+					<%
+					String taglibCancelURL = "location.href = '" +  HtmlUtil.escape(redirect) + "';"
+					%>
+
+					<aui:button name="cancelButton" onClick="<%= taglibCancelURL %>" type="button" value="cancel" />
+				</aui:button-row>
+			</aui:fieldset>
 		</liferay-ui:section>
-</liferay-ui:tabs>
-
+	</liferay-ui:tabs>
 </aui:form>

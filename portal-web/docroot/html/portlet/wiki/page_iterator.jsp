@@ -322,31 +322,33 @@ for (int i = 0; i < results.size(); i++) {
 	</portlet:renderURL>
 
 	<aui:form action="<%= compareVersionsURL %>" method="post" name="fm" onSubmit='<%= renderResponse.getNamespace() + "compare(); return false;" %>'>
-	<input name="<portlet:namespace />backURL" type="hidden" value="<%= HtmlUtil.escapeAttribute(currentURL) %>" />
-	<input name="<portlet:namespace />nodeId" type="hidden" value="<%= node.getNodeId() %>" />
-	<input name="<portlet:namespace />title" type="hidden" value="<%= HtmlUtil.escapeAttribute(wikiPage.getTitle()) %>" />
-	<input name="<portlet:namespace />sourceVersion" type="hidden" value="<%= latestWikiPage.getVersion() %>" />
-	<input name="<portlet:namespace />targetVersion" type="hidden" value="<%= wikiPage.getVersion() %>" />
-	<input name="<portlet:namespace />type" type="hidden" value="html" />
+		<aui:input name="backURL" type="hidden" value="<%= currentURL %>" />
+		<aui:input name="nodeId" type="hidden" value="<%= node.getNodeId() %>" />
+		<aui:input name="title" type="hidden" value="<%= wikiPage.getTitle() %>" />
+		<aui:input name="sourceVersion" type="hidden" value="<%= latestWikiPage.getVersion() %>" />
+		<aui:input name="targetVersion" type="hidden" value="<%= wikiPage.getVersion() %>" />
+		<aui:input name="type" type="hidden" value="html" />
 
-	<aui:button-row>
-		<aui:button name="submitButton" type="submit" value="compare-versions" />
-	</aui:button-row>
-
+		<aui:button-row>
+			<aui:button name="submitButton" type="submit" value="compare-versions" />
+		</aui:button-row>
 	</aui:form>
-
 </c:if>
 
 <c:if test='<%= type.equals("all_pages") && WikiNodePermission.contains(permissionChecker, node.getNodeId(), ActionKeys.ADD_PAGE) %>'>
-
-	<portlet:actionURL var="editPageURL">
+	<portlet:actionURL var="addPageURL">
 		<portlet:param name="struts_action" value="/wiki/edit_page" />
 		<portlet:param name="nodeId" value="<%= String.valueOf(node.getNodeId()) %>" />
 		<portlet:param name="editTitle" value="1" />
 	</portlet:actionURL>
 
 	<aui:button-row>
-		<aui:button name="addPageButton" onClick='<%= "location.href = \'" +  HtmlUtil.escape(editPageURL) + "\';" %>' type="button" value="add-page" />
+
+		<%
+		String taglibAddPageURL = "location.href = '" +  HtmlUtil.escape(addPageURL) + "';"
+		%>
+
+		<aui:button name="addPageButton" onClick="<%= taglibAddPageURL %>" type="button" value="add-page" />
 	</aui:button-row>
 </c:if>
 

@@ -54,34 +54,37 @@ portletURL.setParameter("nodeId", String.valueOf(nodeId));
 </portlet:actionURL>
 
 <aui:form action="<%= importPagesURL %>" enctype="multipart/form-data" method="post" name="fm">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
-<input name="<portlet:namespace />importProgressId" type="hidden" value="<%= importProgressId %>" />
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(redirect) %>" />
-<input name="<portlet:namespace />nodeId" type="hidden" value="<%= nodeId %>" />
-<input name="<portlet:namespace />importer" type="hidden" value="<%= HtmlUtil.escapeAttribute(tabs2) %>" />
+	<aui:input name="<%= Constants.CMD %>" type="hidden" />
+	<aui:input name="importProgressId" type="hidden" value="<%= importProgressId %>" />
+	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
+	<aui:input name="nodeId" type="hidden" value="<%= nodeId %>" />
+	<aui:input name="importer" type="hidden" value="<%= tabs2 %>" />
 
-<liferay-ui:tabs
-	names="import-pages"
-	backURL="<%= redirect %>"
-/>
+	<liferay-ui:tabs
+		names="import-pages"
+		backURL="<%= redirect %>"
+	/>
 
-<liferay-ui:tabs
-	names="<%= StringUtil.merge(importers) %>"
-	param="tabs2"
-	url="<%= portletURL.toString() %>"
-/>
+	<liferay-ui:tabs
+		names="<%= StringUtil.merge(importers) %>"
+		param="tabs2"
+		url="<%= portletURL.toString() %>"
+	/>
 
-<liferay-ui:error exception="<%= ImportFilesException.class %>" message="please-provide-all-mandatory-files-and-make-sure-the-file-types-are-valid" />
-<liferay-ui:error exception="<%= NoSuchNodeException.class %>" message="the-node-could-not-be-found" />
+	<liferay-ui:error exception="<%= ImportFilesException.class %>" message="please-provide-all-mandatory-files-and-make-sure-the-file-types-are-valid" />
+	<liferay-ui:error exception="<%= NoSuchNodeException.class %>" message="the-node-could-not-be-found" />
 
-<liferay-util:include page="<%= PropsUtil.get(PropsKeys.WIKI_IMPORTERS_PAGE, new Filter(tabs2)) %>" />
+	<liferay-util:include page="<%= PropsUtil.get(PropsKeys.WIKI_IMPORTERS_PAGE, new Filter(tabs2)) %>" />
 
-<aui:button-row>
-	<aui:button name="saveButton" onClick='<%= uploadProgressId + ".startProgress(); " +  importProgressId + ".startProgress(); return true;" %>' type="submit" value="import" />
+	<aui:button-row>
+		<aui:button name="saveButton" onClick='<%= uploadProgressId + ".startProgress(); " +  importProgressId + ".startProgress(); return true;" %>' type="submit" value="import" />
 
-	<aui:button name="cancelButton" onClick='<%= "location.href = \'" +  HtmlUtil.escape(redirect) + "\';" %>' type="button" value="cancel"  />
-</aui:button-row>
+		<%
+		String taglibCancelURL = "location.href = '" +  HtmlUtil.escape(redirect) + "';"
+		%>
 
+		<aui:button name="cancelButton" onClick="<%= taglibCancelURL %>" type="button" value="cancel" />
+	</aui:button-row>
 </aui:form>
 
 <liferay-ui:upload-progress

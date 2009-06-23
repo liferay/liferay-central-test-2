@@ -44,9 +44,9 @@ long nodeId = BeanParamUtil.getLong(node, request, "nodeId");
 </portlet:actionURL>
 
 <aui:form action="<%= editNodeURL %>" method="post" name="fm" onSubmit='<%= renderResponse.getNamespace() + "saveNode(); return false;" %>'>
-	<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
-	<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(redirect) %>" />
-	<input name="<portlet:namespace />nodeId" type="hidden" value="<%= nodeId %>" />
+	<aui:input name="<%= Constants.CMD %>" type="hidden" />
+	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
+	<aui:input name="nodeId" type="hidden" value="<%= nodeId %>" />
 
 	<liferay-ui:error exception="<%= DuplicateNodeNameException.class %>" message="please-enter-a-unique-node-name" />
 	<liferay-ui:error exception="<%= NodeNameException.class %>" message="please-enter-a-valid-name" />
@@ -75,7 +75,11 @@ long nodeId = BeanParamUtil.getLong(node, request, "nodeId");
 		<aui:button-row>
 			<aui:button name="saveButton" type="submit" value="save" />
 
-			<aui:button name="cancelButton" type="button" value="cancel" onClick='<%= "location.href = \'" +  HtmlUtil.escape(redirect) + "\';" %>' />
+			<%
+			String taglibCancelURL = "location.href = '" +  HtmlUtil.escape(redirect) + "';"
+			%>
+
+			<aui:button name="cancelButton" onClick="<%= taglibCancelURL %>" type="button" value="cancel" />
 		</aui:button-row>
 	</aui:fieldset>
 </aui:form>

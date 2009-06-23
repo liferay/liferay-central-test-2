@@ -47,89 +47,95 @@ List results = WikiNodeLocalServiceUtil.getNodes(scopeGroupId, searchContainer.g
 searchContainer.setResults(results);
 %>
 
-<liferay-portlet:renderURL varImpl="searchURL">
+<liferay-portlet:renderURL var="searchURL">
 	<portlet:param name="struts_action" value="/wiki/search" />
 </liferay-portlet:renderURL>
 
 <aui:form action="<%= searchURL %>" method="get" name="fm">
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(currentURL) %>" />
+	<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
 
-<%
-List resultRows = searchContainer.getResultRows();
+	<%
+	List resultRows = searchContainer.getResultRows();
 
-for (int i = 0; i < results.size(); i++) {
-	WikiNode node = (WikiNode)results.get(i);
+	for (int i = 0; i < results.size(); i++) {
+		WikiNode node = (WikiNode)results.get(i);
 
-	ResultRow row = new ResultRow(node, node.getNodeId(), i);
+		ResultRow row = new ResultRow(node, node.getNodeId(), i);
 
-	PortletURL rowURL = renderResponse.createRenderURL();
+		PortletURL rowURL = renderResponse.createRenderURL();
 
-	rowURL.setParameter("struts_action", "/wiki/view");
-	//rowURL.setParameter("redirect", currentURL);
-	rowURL.setParameter("nodeName", String.valueOf(node.getName()));
-	rowURL.setParameter("title", WikiPageImpl.FRONT_PAGE);
+		rowURL.setParameter("struts_action", "/wiki/view");
+		//rowURL.setParameter("redirect", currentURL);
+		rowURL.setParameter("nodeName", String.valueOf(node.getName()));
+		rowURL.setParameter("title", WikiPageImpl.FRONT_PAGE);
 
-	// Name
+		// Name
 
-	row.addText(node.getName(), rowURL);
+		row.addText(node.getName(), rowURL);
 
-	// Number of pages
+		// Number of pages
 
-	int pagesCount = WikiPageLocalServiceUtil.getPagesCount(node.getNodeId(), true);
+		int pagesCount = WikiPageLocalServiceUtil.getPagesCount(node.getNodeId(), true);
 
-	row.addText(String.valueOf(pagesCount), rowURL);
+		row.addText(String.valueOf(pagesCount), rowURL);
 
-	// Last post date
+		// Last post date
 
-	if (node.getLastPostDate() == null) {
-		row.addText(LanguageUtil.get(pageContext, "never"), rowURL);
+		if (node.getLastPostDate() == null) {
+			row.addText(LanguageUtil.get(pageContext, "never"), rowURL);
+		}
+		else {
+			row.addText(dateFormatDateTime.format(node.getLastPostDate()), rowURL);
+		}
+
+		// Action
+
+		row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/wiki/node_action.jsp");
+
+		// Add result row
+
+		resultRows.add(row);
 	}
-	else {
-		row.addText(dateFormatDateTime.format(node.getLastPostDate()), rowURL);
-	}
 
-	// Action
+	boolean showAddNodeButton = WikiPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_NODE);
+	boolean showPermissionsButton = GroupPermissionUtil.contains(permissionChecker, scopeGroupId, ActionKeys.PERMISSIONS);
+	%>
 
-	row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/wiki/node_action.jsp");
+	<aui:fieldset>
+		<c:if test="<%= showAddNodeButton || showPermissionsButton %>">
+			<aui:button-row>
+				<c:if test="<%= showAddNodeButton %>">
+					<portlet:renderURL var="addNodeURL">
+						<portlet:param name="struts_action" value="/wiki/edit_node" />
+						<portlet:param name="redirect" value="<%= currentURL %>" />
+					</portlet:renderURL>
 
-	// Add result row
+					<%
+					String taglibAddNodeURL = "location.href = '" +  HtmlUtil.escape(addNodeURL) + "';"
+					%>
 
-	resultRows.add(row);
-}
+					<aui:button name="addNodeButton" onClick="<%= taglibAddNodeURL %>" type="button" value="add-wiki" />
+				</c:if>
 
-boolean showAddNodeButton = WikiPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_NODE);
-boolean showPermissionsButton = GroupPermissionUtil.contains(permissionChecker, scopeGroupId, ActionKeys.PERMISSIONS);
-%>
+				<c:if test="<%= showPermissionsButton %>">
+					<liferay-security:permissionsURL
+						modelResource="com.liferay.portlet.wiki"
+						modelResourceDescription="<%= HtmlUtil.escape(themeDisplay.getScopeGroupName()) %>"
+						resourcePrimKey="<%= String.valueOf(scopeGroupId) %>"
+						var="permissionsURL"
+					/>
 
-<aui:fieldset>
-	<c:if test="<%= showAddNodeButton || showPermissionsButton %>">
-		<aui:button-row>
-			<c:if test="<%= showAddNodeButton %>">
+					<%
+					String taglibPermissionsURL = "location.href = '" +  HtmlUtil.escape(permissionsURL) + "';"
+					%>
 
-				<portlet:renderURL var="editNodeURL">
-					<portlet:param name="struts_action" value="/wiki/edit_node" />
-					<portlet:param name="redirect" value="<%= currentURL %>" />
-				</portlet:renderURL>
+					<aui:button name="permissionsButton" onClick="<%= taglibPermissionsURL %>" type="button" value="permissions" />
+				</c:if>
+			</aui:button-row>
+		</c:if>
 
-				<aui:button name="addWikiButton" onClick='<%= "location.href = " +  HtmlUtil.escape(editNodeURL) + ";" %>' type="button" value="add-wiki" />
-			</c:if>
-
-			<c:if test="<%= showPermissionsButton %>">
-				<liferay-security:permissionsURL
-					modelResource="com.liferay.portlet.wiki"
-					modelResourceDescription="<%= HtmlUtil.escape(themeDisplay.getScopeGroupName()) %>"
-					resourcePrimKey="<%= String.valueOf(scopeGroupId) %>"
-					var="permissionsURL"
-				/>
-
-				<aui:button name="permissionsButton" onClick='<%= "location.href = \'" +  HtmlUtil.escape(permissionsURL) + "\';" %>' type="button" value="permissions" />
-			</c:if>
-		</aui:button-row>
-
-	</c:if>
-
-	<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-</aui:fieldset>
+		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+	</aui:fieldset>
 </aui:form>
 
 <c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">

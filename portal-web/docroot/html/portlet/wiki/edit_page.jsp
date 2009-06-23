@@ -215,146 +215,138 @@ if (Validator.isNull(redirect)) {
 </portlet:actionURL>
 
 <aui:form action="<%= editPageActionURL %>" method="post" name="fm" onSubmit='<%= renderResponse.getNamespace() + "savePage(); return false;" %>'>
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(redirect) %>" />
-<input name="<portlet:namespace />originalRedirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(originalRedirect) %>" />
-<input name="<portlet:namespace />nodeId" type="hidden" value="<%= nodeId %>" />
+	<aui:input name="<%= Constants.CMD %>" type="hidden" />
+	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
+	<aui:input name="originalRedirect" type="hidden" value="<%= originalRedirect %>" />
+	<aui:input name="nodeId" type="hidden" value="<%= nodeId %>" />
 
-<c:if test="<%= !editTitle %>">
-	<input name="<portlet:namespace />title" type="hidden" value="<%= title %>" />
-</c:if>
+	<c:if test="<%= !editTitle %>">
+		<aui:input name="title" type="hidden" value="<%= title %>" />
+	</c:if>
 
-<input name="<portlet:namespace />parentTitle" type="hidden" value="<%= parentTitle %>" />
-<input name="<portlet:namespace />editTitle" type="hidden" value="<%= editTitle %>" />
+	<aui:input name="parentTitle" type="hidden" value="<%= parentTitle %>" />
+	<aui:input name="editTitle" type="hidden" value="<%= editTitle %>" />
 
-<c:if test="<%= wikiPage != null %>">
-	<input name="<portlet:namespace />version" type="hidden" value="<%= wikiPage.getVersion() %>" />
-</c:if>
+	<c:if test="<%= wikiPage != null %>">
+		<aui:input name="version" type="hidden" value="<%= wikiPage.getVersion() %>" />
+	</c:if>
 
-<input name="<portlet:namespace />preview" type="hidden" value="<%= preview %>" />
-<input name="<portlet:namespace />saveAndContinue" type="hidden" value="" />
+	<aui:input name="preview" type="hidden" value="<%= preview %>" />
+	<aui:input name="saveAndContinue" type="hidden" value="" />
 
-<liferay-ui:error exception="<%= DuplicatePageException.class %>" message="there-is-already-a-page-with-the-specified-title" />
-<liferay-ui:error exception="<%= PageContentException.class %>" message="the-content-is-not-valid" />
-<liferay-ui:error exception="<%= PageTitleException.class %>" message="please-enter-a-valid-title" />
-<liferay-ui:error exception="<%= PageVersionException.class %>" message="another-user-has-made-changes-since-you-started-editing-please-copy-your-changes-and-try-again" />
-<liferay-ui:asset-tags-error />
+	<liferay-ui:error exception="<%= DuplicatePageException.class %>" message="there-is-already-a-page-with-the-specified-title" />
+	<liferay-ui:error exception="<%= PageContentException.class %>" message="the-content-is-not-valid" />
+	<liferay-ui:error exception="<%= PageTitleException.class %>" message="please-enter-a-valid-title" />
+	<liferay-ui:error exception="<%= PageVersionException.class %>" message="another-user-has-made-changes-since-you-started-editing-please-copy-your-changes-and-try-again" />
+	<liferay-ui:asset-tags-error />
 
-<c:if test="<%= newPage %>">
-	<c:choose>
-		<c:when test="<%= editable %>">
-			<div class="portlet-msg-info">
-				<liferay-ui:message key="this-page-does-not-exist-yet-use-the-form-below-to-create-it" />
-			</div>
-		</c:when>
-		<c:otherwise>
-			<div class="portlet-msg-error">
-				<liferay-ui:message key="this-page-does-not-exist-yet-and-the-title-is-not-valid" />
-			</div>
-
-			<input type="button" value="<liferay-ui:message key="cancel" />" onClick="document.location = '<%= HtmlUtil.escape(redirect) %>'" />
-		</c:otherwise>
-	</c:choose>
-</c:if>
-
-<c:if test="<%= editable %>">
-	<aui:fieldset>
-		<c:if test="<%= editTitle %>">
-			<aui:input name="title" size="30" value="<%= title %>" />
-		</c:if>
-
-		<c:if test="<%= Validator.isNotNull(parentTitle) %>">
-			<aui:field-wrapper label="parent">
-				<%= parentTitle %>
-			</aui:field-wrapper>
-		</c:if>
-
+	<c:if test="<%= newPage %>">
 		<c:choose>
-			<c:when test="<%= (WikiPageImpl.FORMATS.length > 1) %>">
-				<aui:select name="format" onChange='<%= renderResponse.getNamespace() + "changeFormat(this);" %>'>
+			<c:when test="<%= editable %>">
+				<div class="portlet-msg-info">
+					<liferay-ui:message key="this-page-does-not-exist-yet-use-the-form-below-to-create-it" />
+				</div>
+			</c:when>
+			<c:otherwise>
+				<div class="portlet-msg-error">
+					<liferay-ui:message key="this-page-does-not-exist-yet-and-the-title-is-not-valid" />
+				</div>
+
+				<input type="button" value="<liferay-ui:message key="cancel" />" onClick="document.location = '<%= HtmlUtil.escape(redirect) %>'" />
+			</c:otherwise>
+		</c:choose>
+	</c:if>
+
+	<c:if test="<%= editable %>">
+		<aui:fieldset>
+			<c:if test="<%= editTitle %>">
+				<aui:input name="title" size="30" value="<%= title %>" />
+			</c:if>
+
+			<c:if test="<%= Validator.isNotNull(parentTitle) %>">
+				<aui:field-wrapper label="parent">
+					<%= parentTitle %>
+				</aui:field-wrapper>
+			</c:if>
+
+			<c:choose>
+				<c:when test="<%= (WikiPageImpl.FORMATS.length > 1) %>">
+					<aui:select name="format" onChange='<%= renderResponse.getNamespace() + "changeFormat(this);" %>'>
+
+						<%
+						for (int i = 0; i < WikiPageImpl.FORMATS.length; i++) {
+						%>
+
+							<aui:option selected="<%= format.equals(WikiPageImpl.FORMATS[i]) %>" value="<%= WikiPageImpl.FORMATS[i] %>"><%= LanguageUtil.get(pageContext, "wiki.formats." + WikiPageImpl.FORMATS[i]) %></aui:option>
+
+						<%
+						}
+						%>
+
+					</aui:select>
+
+				</c:when>
+				<c:otherwise>
+					<aui:input name="format" type="hidden" value="<%= format %>" />
+				</c:otherwise>
+			</c:choose>
+		</aui:fieldset>
+
+		<div>
+
+			<%
+			request.setAttribute("edit_page.jsp-wikiPage", wikiPage);
+			%>
+
+			<liferay-util:include page="<%= WikiUtil.getEditPage(format) %>" />
+		</div>
+
+		<aui:fieldset>
+			<c:if test="<%= attachments.length > 0 %>">
+				<aui:field-wrapper label="attachments">
 
 					<%
-					for (int i = 0; i < WikiPageImpl.FORMATS.length; i++) {
+					for (int i = 0; i < attachments.length; i++) {
+						String fileName = FileUtil.getShortFileName(attachments[i]);
+						long fileSize = DLServiceUtil.getFileSize(company.getCompanyId(), CompanyConstants.SYSTEM, attachments[i]);
 					%>
 
-						<aui:option selected="<%= format.equals(WikiPageImpl.FORMATS[i]) %>" value="<%= WikiPageImpl.FORMATS[i] %>"><%= LanguageUtil.get(pageContext, "wiki.formats." + WikiPageImpl.FORMATS[i]) %></aui:option>
+						<a href="<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/wiki/get_page_attachment" /><portlet:param name="nodeId" value="<%= String.valueOf(node.getNodeId()) %>" /><portlet:param name="title" value="<%= wikiPage.getTitle() %>" /><portlet:param name="fileName" value="<%= fileName %>" /></portlet:actionURL>"><%= fileName %></a> (<%= TextFormatter.formatKB(fileSize, locale) %>k)<%= (i < (attachments.length - 1)) ? ", " : "" %>
 
 					<%
 					}
 					%>
 
-				</aui:select>
+				</aui:field-wrapper>
+			</c:if>
 
-			</c:when>
-			<c:otherwise>
-				<aui:input name="format" value="<%= format %>" />
-			</c:otherwise>
-		</c:choose>
-	</aui:fieldset>
+			<aui:model-context bean="<%= !newPage ? wikiPage : templatePage %>" model="<%= WikiPage.class %>" />
 
-	<div>
+			<aui:input name="categories" type="assetCategories" />
 
-		<%
-		request.setAttribute("edit_page.jsp-wikiPage", wikiPage);
-		%>
+			<aui:input name="tags" type="assetTags" />
 
-		<liferay-util:include page="<%= WikiUtil.getEditPage(format) %>" />
-	</div>
+			<aui:model-context bean="<%= new WikiPageImpl() %>" model="<%= WikiPage.class %>" />
 
-	<aui:fieldset>
-		<c:if test="<%= attachments.length > 0 %>">
-			<aui:field-wrapper label="attachments">
+			<aui:input name="summary" />
 
-				<%
-				for (int i = 0; i < attachments.length; i++) {
-					String fileName = FileUtil.getShortFileName(attachments[i]);
-					long fileSize = DLServiceUtil.getFileSize(company.getCompanyId(), CompanyConstants.SYSTEM, attachments[i]);
-				%>
+			<aui:input inlineLabel="true" label="this-is-a-minor-edit" name="minorEdit" />
 
-					<a href="<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/wiki/get_page_attachment" /><portlet:param name="nodeId" value="<%= String.valueOf(node.getNodeId()) %>" /><portlet:param name="title" value="<%= wikiPage.getTitle() %>" /><portlet:param name="fileName" value="<%= fileName %>" /></portlet:actionURL>"><%= fileName %></a> (<%= TextFormatter.formatKB(fileSize, locale) %>k)<%= (i < (attachments.length - 1)) ? ", " : "" %>
+			<aui:button-row>
+				<aui:button name="saveButton" type="submit" value="save" />
+
+				<aui:button name="saveAndContinueButton" onClick='<%= renderResponse.getNamespace() + "saveAndContinuePage();" %>' type="button" value="save-and-continue" />
+
+				<aui:button name="previewButton" onClick='<%= renderResponse.getNamespace() + "previewPage();" %>' type="button" value="preview" />
 
 				<%
-				}
+				String taglibCancelURL = "location.href = '" +  HtmlUtil.escape(redirect) + "';"
 				%>
 
-			</aui:field-wrapper>
-		</c:if>
-
-		<%
-		WikiPage bean = null;
-
-		if (!newPage) {
-			bean = wikiPage;
-		}
-		else if (Validator.isNotNull(templatePage)) {
-			bean = templatePage;
-		}
-		%>
-
-		<aui:model-context bean="<%= bean %>" model="<%= WikiPage.class %>" />
-
-		<aui:input name="categories" type="assetCategories" />
-
-		<aui:input name="tags" type="assetTags" />
-
-		<aui:model-context bean="<%= new WikiPageImpl() %>" model="<%= WikiPage.class %>" />
-
-		<aui:input name="summary" />
-
-		<aui:input inlineLabel="true" label="this-is-a-minor-edit" name="minorEdit" />
-
-		<aui:button-row>
-			<aui:button name="saveButton" type="submit" value="save" />
-
-			<aui:button name="saveAndContinueButton" onClick='<%= renderResponse.getNamespace() + "saveAndContinuePage();" %>' type="button" value="save-and-continue" />
-
-			<aui:button name="previewButton" onClick='<%= renderResponse.getNamespace() + "previewPage();" %>' type="button" value="preview" />
-
-			<aui:button name="cancelButton" onClick='<%= "location.href = \'" + HtmlUtil.escape(redirect) + "\';" %>' type="button" value="cancel" />
-		</aui:button-row>
-	</aui:fieldset>
-</c:if>
-
+				<aui:button name="cancelButton" onClick="<%= taglibCancelURL %>" type="button" value="cancel" />
+			</aui:button-row>
+		</aui:fieldset>
+	</c:if>
 </aui:form>
 
 <c:if test="<%= editable && !preview %>">
