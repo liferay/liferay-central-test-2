@@ -87,16 +87,16 @@ public class EditPermissionsAction extends PortletAction {
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
 
-		return mapping.findForward(getForward(
-			renderRequest, "portlet.admin.edit_permissions"));
+		return mapping.findForward(
+			getForward(renderRequest, "portlet.admin.edit_permissions"));
 	}
 
 	protected void merge(
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		long[] roleIds =
-			StringUtil.split(ParamUtil.getString(actionRequest, "roleIds"), 0L);
+		long[] roleIds = StringUtil.split(
+			ParamUtil.getString(actionRequest, "roleIds"), 0L);
 
 		long toRoleId = roleIds[0];
 
@@ -112,9 +112,9 @@ public class EditPermissionsAction extends PortletAction {
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
+		long resourcePermissionId = ParamUtil.getLong(
+			actionRequest, "resourcePermissionId");
 		long toRoleId = ParamUtil.getLong(actionRequest, "toRoleId");
-		long resourcePermissionId =
-			ParamUtil.getLong(actionRequest, "resourcePermissionId");
 
 		ResourcePermissionLocalServiceUtil.reassignPermissions(
 			resourcePermissionId, toRoleId);

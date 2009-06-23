@@ -150,7 +150,11 @@ public interface RoleLocalService {
 		java.lang.String subtype) throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getRolesCount(java.lang.String subtype)
+	public java.util.List<com.liferay.portal.model.Role> getSubtypeRoles(
+		java.lang.String subtype) throws com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getSubtypeRolesCount(java.lang.String subtype)
 		throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)

@@ -144,22 +144,46 @@ public class RoleUtil {
 				   .findByCompanyId_PrevAndNext(roleId, companyId, obc);
 	}
 
-	public static com.liferay.portal.model.Role findBySubtype(
-		java.lang.String subtype)
-		throws com.liferay.portal.NoSuchRoleException,
-			com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portal.model.Role> findBySubtype(
+		java.lang.String subtype) throws com.liferay.portal.SystemException {
 		return getPersistence().findBySubtype(subtype);
 	}
 
-	public static com.liferay.portal.model.Role fetchBySubtype(
-		java.lang.String subtype) throws com.liferay.portal.SystemException {
-		return getPersistence().fetchBySubtype(subtype);
+	public static java.util.List<com.liferay.portal.model.Role> findBySubtype(
+		java.lang.String subtype, int start, int end)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findBySubtype(subtype, start, end);
 	}
 
-	public static com.liferay.portal.model.Role fetchBySubtype(
-		java.lang.String subtype, boolean retrieveFromCache)
+	public static java.util.List<com.liferay.portal.model.Role> findBySubtype(
+		java.lang.String subtype, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().fetchBySubtype(subtype, retrieveFromCache);
+		return getPersistence().findBySubtype(subtype, start, end, obc);
+	}
+
+	public static com.liferay.portal.model.Role findBySubtype_First(
+		java.lang.String subtype,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.NoSuchRoleException,
+			com.liferay.portal.SystemException {
+		return getPersistence().findBySubtype_First(subtype, obc);
+	}
+
+	public static com.liferay.portal.model.Role findBySubtype_Last(
+		java.lang.String subtype,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.NoSuchRoleException,
+			com.liferay.portal.SystemException {
+		return getPersistence().findBySubtype_Last(subtype, obc);
+	}
+
+	public static com.liferay.portal.model.Role[] findBySubtype_PrevAndNext(
+		long roleId, java.lang.String subtype,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.NoSuchRoleException,
+			com.liferay.portal.SystemException {
+		return getPersistence().findBySubtype_PrevAndNext(roleId, subtype, obc);
 	}
 
 	public static com.liferay.portal.model.Role findByC_N(long companyId,
@@ -278,8 +302,7 @@ public class RoleUtil {
 	}
 
 	public static void removeBySubtype(java.lang.String subtype)
-		throws com.liferay.portal.NoSuchRoleException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		getPersistence().removeBySubtype(subtype);
 	}
 

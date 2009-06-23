@@ -35,12 +35,12 @@ import com.liferay.portal.util.PropsValues;
  */
 public class ConvertPermissionTuner extends ConvertProcess {
 
-	public String getPath() {
-		return "/admin_server/edit_permissions";
-	}
-
 	public String getDescription() {
 		return "fine-tune-generated-roles";
+	}
+
+	public String getPath() {
+		return "/admin_server/edit_permissions";
 	}
 
 	public boolean isEnabled() {
@@ -48,8 +48,8 @@ public class ConvertPermissionTuner extends ConvertProcess {
 
 		try {
 			if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
-				int count = RoleLocalServiceUtil.
-					getRolesCount("lfr-permission-algorithm-5");
+				int count = RoleLocalServiceUtil.getSubtypeRolesCount(
+					"lfr-permission-algorithm-5");
 
 				if (count > 0) {
 					enabled = true;

@@ -218,38 +218,38 @@ public class ResourcePermissionLocalServiceImpl
 	public void reassignPermissions(long resourcePermissionId, long toRoleId)
 		throws PortalException, SystemException {
 
-		Role toRole = roleLocalService.getRole(toRoleId);
-		ResourcePermission resourcePermission =
-			getResourcePermission(resourcePermissionId);
-		long fromRoleId = resourcePermission.getRoleId();
+		ResourcePermission resourcePermission = getResourcePermission(
+			resourcePermissionId);
 
 		long companyId = resourcePermission.getCompanyId();
 		String name = resourcePermission.getName();
 		int scope = resourcePermission.getScope();
 		String primKey = resourcePermission.getPrimKey();
+		long fromRoleId = resourcePermission.getRoleId();
 
-		// Set new actions with new role
+		Role toRole = roleLocalService.getRole(toRoleId);
 
-		String[] actionIds;
+		List<String> actionIds = null;
 
 		if (toRole.getType() == RoleConstants.TYPE_REGULAR) {
-			actionIds = ResourceActionsUtil.
-				getModelResourceActions(name).toArray(new String[0]);
+			actionIds = ResourceActionsUtil.getModelResourceActions(name);
 		}
 		else {
-			actionIds = ResourceActionsUtil.
-				getModelResourceCommunityDefaultActions(name).toArray(
-					new String[0]);
+			actionIds =
+				ResourceActionsUtil.getModelResourceCommunityDefaultActions(
+					name);
 		}
 
 		setResourcePermissions(
-			companyId, name, scope, primKey, toRoleId, actionIds);
-
-		// Clean up
+			companyId, name, scope, primKey, toRoleId,
+			actionIds.toArray(new String[actionIds.size()]));
 
 		resourcePermissionPersistence.remove(resourcePermissionId);
 
-		if (getRoleResourcePermissions(fromRoleId).isEmpty()) {
+		List<ResourcePermission> resourcePermissions =
+			getRoleResourcePermissions(fromRoleId);
+
+		if (resourcePermissions.isEmpty()) {
 			roleLocalService.deleteRole(fromRoleId);
 		}
 	}

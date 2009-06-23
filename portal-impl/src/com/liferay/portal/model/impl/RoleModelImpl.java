@@ -267,14 +267,6 @@ public class RoleModelImpl extends BaseModelImpl<Role> {
 
 	public void setSubtype(String subtype) {
 		_subtype = subtype;
-
-		if (_originalSubtype == null) {
-			_originalSubtype = subtype;
-		}
-	}
-
-	public String getOriginalSubtype() {
-		return GetterUtil.getString(_originalSubtype);
 	}
 
 	public Role toEscapedModel() {
@@ -460,6 +452,5 @@ public class RoleModelImpl extends BaseModelImpl<Role> {
 	private String _description;
 	private int _type;
 	private String _subtype;
-	private String _originalSubtype;
 	private transient ExpandoBridge _expandoBridge;
 }

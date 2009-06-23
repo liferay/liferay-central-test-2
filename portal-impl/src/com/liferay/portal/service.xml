@@ -1441,7 +1441,7 @@
 		<finder name="CompanyId" return-type="Collection">
 			<finder-column name="companyId" />
 		</finder>
-		<finder name="Subtype" return-type="Subtype">
+		<finder name="Subtype" return-type="Collection">
 			<finder-column name="subtype" />
 		</finder>
 		<finder name="C_N" return-type="Role" unique="true">

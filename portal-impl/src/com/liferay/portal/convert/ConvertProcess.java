@@ -35,11 +35,11 @@ import com.liferay.portal.util.MaintenanceUtil;
 public abstract class ConvertProcess {
 
 	public void convert() throws ConvertException {
-		if (getPath() != null) {
-			return;
-		}
-
 		try {
+			if (getPath() != null) {
+				return;
+			}
+
 			_log.info("Converting");
 
 			doConvert();
@@ -54,11 +54,11 @@ public abstract class ConvertProcess {
 		}
 	}
 
+	public abstract String getDescription();
+
 	public String getPath() {
 		return null;
 	}
-
-	public abstract String getDescription();
 
 	public abstract boolean isEnabled();
 

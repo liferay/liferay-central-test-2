@@ -55,8 +55,7 @@ import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.ShutdownUtil;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.ActionRequestImpl;
-import com.liferay.portlet.PortletURLImpl;
+import com.liferay.portlet.ActionResponseImpl;
 import com.liferay.util.log4j.Log4JUtil;
 
 import java.util.Enumeration;
@@ -66,8 +65,8 @@ import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletPreferences;
-import javax.portlet.PortletRequest;
 import javax.portlet.PortletSession;
+import javax.portlet.PortletURL;
 import javax.portlet.WindowState;
 
 import org.apache.log4j.Level;
@@ -122,19 +121,7 @@ public class EditServerAction extends PortletAction {
 			cacheSingle();
 		}
 		else if (cmd.startsWith("convertProcess.")) {
-			String path = convertProcess(actionRequest, cmd);
-
-			if (path != null) {
-				PortletURLImpl portletURL = new PortletURLImpl(
-					(ActionRequestImpl)actionRequest,
-					portletConfig.getPortletName(), themeDisplay.getPlid(),
-					PortletRequest.RENDER_PHASE);
-
-				portletURL.setWindowState(WindowState.MAXIMIZED);
-				portletURL.setParameter("struts_action", path);
-
-				redirect = portletURL.toString();
-			}
+			redirect = convertProcess(actionRequest, actionResponse, cmd);
 		}
 		else if (cmd.equals("gc")) {
 			gc();
@@ -185,8 +172,13 @@ public class EditServerAction extends PortletAction {
 		WebCachePoolUtil.clear();
 	}
 
-	protected String convertProcess(ActionRequest actionRequest, String cmd)
+	protected String convertProcess(
+			ActionRequest actionRequest, ActionResponse actionResponse,
+			String cmd)
 		throws Exception {
+
+		ActionResponseImpl actionResponseImpl =
+			(ActionResponseImpl)actionResponse;
 
 		PortletSession portletSession = actionRequest.getPortletSession();
 
@@ -198,14 +190,23 @@ public class EditServerAction extends PortletAction {
 
 		String path = convertProcess.getPath();
 
-		if (path == null) {
+		if (path != null) {
+			PortletURL portletURL = actionResponseImpl.createRenderURL();
+
+			portletURL.setWindowState(WindowState.MAXIMIZED);
+
+			portletURL.setParameter("struts_action", path);
+
+			return portletURL.toString();
+		}
+		else {
 			MaintenanceUtil.maintain(portletSession.getId(), className);
 
 			MessageBusUtil.sendMessage(
 				DestinationNames.CONVERT_PROCESS, className);
-		}
 
-		return path;
+			return null;
+		}
 	}
 
 	protected void gc() throws Exception {

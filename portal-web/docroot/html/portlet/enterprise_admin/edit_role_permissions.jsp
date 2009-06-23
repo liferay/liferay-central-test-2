@@ -175,10 +175,13 @@ editPermissionsURL.setParameter("roleId", String.valueOf(role.getRoleId()));
 		</liferay-util:include>
 	</c:when>
 	<c:otherwise>
+
 		<%
 		request.setAttribute("edit_role_permissions.jsp-role", role);
+
 		request.setAttribute("edit_role_permissions.jsp-portletResource", portletResource);
 		%>
+
 	</c:otherwise>
 </c:choose>
 

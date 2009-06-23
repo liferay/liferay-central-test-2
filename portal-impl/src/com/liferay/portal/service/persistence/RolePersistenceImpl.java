@@ -86,9 +86,18 @@ public class RolePersistenceImpl extends BasePersistenceImpl
 	public static final FinderPath FINDER_PATH_COUNT_BY_COMPANYID = new FinderPath(RoleModelImpl.ENTITY_CACHE_ENABLED,
 			RoleModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"countByCompanyId", new String[] { Long.class.getName() });
-	public static final FinderPath FINDER_PATH_FETCH_BY_SUBTYPE = new FinderPath(RoleModelImpl.ENTITY_CACHE_ENABLED,
-			RoleModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_ENTITY,
-			"fetchBySubtype", new String[] { String.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_SUBTYPE = new FinderPath(RoleModelImpl.ENTITY_CACHE_ENABLED,
+			RoleModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findBySubtype", new String[] { String.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_SUBTYPE = new FinderPath(RoleModelImpl.ENTITY_CACHE_ENABLED,
+			RoleModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findBySubtype",
+			new String[] {
+				String.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
 	public static final FinderPath FINDER_PATH_COUNT_BY_SUBTYPE = new FinderPath(RoleModelImpl.ENTITY_CACHE_ENABLED,
 			RoleModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"countBySubtype", new String[] { String.class.getName() });
@@ -139,9 +148,6 @@ public class RolePersistenceImpl extends BasePersistenceImpl
 	public void cacheResult(Role role) {
 		EntityCacheUtil.putResult(RoleModelImpl.ENTITY_CACHE_ENABLED,
 			RoleImpl.class, role.getPrimaryKey(), role);
-
-		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_SUBTYPE,
-			new Object[] { role.getSubtype() }, role);
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_N,
 			new Object[] { new Long(role.getCompanyId()), role.getName() }, role);
@@ -282,9 +288,6 @@ public class RolePersistenceImpl extends BasePersistenceImpl
 
 		RoleModelImpl roleModelImpl = (RoleModelImpl)role;
 
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_SUBTYPE,
-			new Object[] { roleModelImpl.getOriginalSubtype() });
-
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_N,
 			new Object[] {
 				new Long(roleModelImpl.getOriginalCompanyId()),
@@ -382,20 +385,6 @@ public class RolePersistenceImpl extends BasePersistenceImpl
 
 		EntityCacheUtil.putResult(RoleModelImpl.ENTITY_CACHE_ENABLED,
 			RoleImpl.class, role.getPrimaryKey(), role);
-
-		if (!isNew &&
-				(!Validator.equals(role.getSubtype(),
-					roleModelImpl.getOriginalSubtype()))) {
-			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_SUBTYPE,
-				new Object[] { roleModelImpl.getOriginalSubtype() });
-		}
-
-		if (isNew ||
-				(!Validator.equals(role.getSubtype(),
-					roleModelImpl.getOriginalSubtype()))) {
-			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_SUBTYPE,
-				new Object[] { role.getSubtype() }, role);
-		}
 
 		if (!isNew &&
 				((role.getCompanyId() != roleModelImpl.getOriginalCompanyId()) ||
@@ -738,45 +727,13 @@ public class RolePersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public Role findBySubtype(String subtype)
-		throws NoSuchRoleException, SystemException {
-		Role role = fetchBySubtype(subtype);
-
-		if (role == null) {
-			StringBuilder msg = new StringBuilder();
-
-			msg.append("No Role exists with the key {");
-
-			msg.append("subtype=" + subtype);
-
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-			if (_log.isWarnEnabled()) {
-				_log.warn(msg.toString());
-			}
-
-			throw new NoSuchRoleException(msg.toString());
-		}
-
-		return role;
-	}
-
-	public Role fetchBySubtype(String subtype) throws SystemException {
-		return fetchBySubtype(subtype, true);
-	}
-
-	public Role fetchBySubtype(String subtype, boolean retrieveFromCache)
-		throws SystemException {
+	public List<Role> findBySubtype(String subtype) throws SystemException {
 		Object[] finderArgs = new Object[] { subtype };
 
-		Object result = null;
+		List<Role> list = (List<Role>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_SUBTYPE,
+				finderArgs, this);
 
-		if (retrieveFromCache) {
-			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_SUBTYPE,
-					finderArgs, this);
-		}
-
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -807,49 +764,238 @@ public class RolePersistenceImpl extends BasePersistenceImpl
 					qPos.add(subtype);
 				}
 
-				List<Role> list = q.list();
-
-				result = list;
-
-				Role role = null;
-
-				if (list.isEmpty()) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_SUBTYPE,
-						finderArgs, list);
-				}
-				else {
-					role = list.get(0);
-
-					cacheResult(role);
-
-					if ((role.getSubtype() == null) ||
-							!role.getSubtype().equals(subtype)) {
-						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_SUBTYPE,
-							finderArgs, role);
-					}
-				}
-
-				return role;
+				list = q.list();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
-				if (result == null) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_SUBTYPE,
-						finderArgs, new ArrayList<Role>());
+				if (list == null) {
+					list = new ArrayList<Role>();
 				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_SUBTYPE,
+					finderArgs, list);
 
 				closeSession(session);
 			}
 		}
+
+		return list;
+	}
+
+	public List<Role> findBySubtype(String subtype, int start, int end)
+		throws SystemException {
+		return findBySubtype(subtype, start, end, null);
+	}
+
+	public List<Role> findBySubtype(String subtype, int start, int end,
+		OrderByComparator obc) throws SystemException {
+		Object[] finderArgs = new Object[] {
+				subtype,
+				
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+			};
+
+		List<Role> list = (List<Role>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_SUBTYPE,
+				finderArgs, this);
+
+		if (list == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append("SELECT role FROM Role role WHERE ");
+
+				if (subtype == null) {
+					query.append("role.subtype IS NULL");
+				}
+				else {
+					query.append("role.subtype = ?");
+				}
+
+				query.append(" ");
+
+				if (obc != null) {
+					query.append("ORDER BY ");
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("role.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
+				}
+
+				else {
+					query.append("ORDER BY ");
+
+					query.append("role.name ASC");
+				}
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (subtype != null) {
+					qPos.add(subtype);
+				}
+
+				list = (List<Role>)QueryUtil.list(q, getDialect(), start, end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<Role>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_SUBTYPE,
+					finderArgs, list);
+
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	public Role findBySubtype_First(String subtype, OrderByComparator obc)
+		throws NoSuchRoleException, SystemException {
+		List<Role> list = findBySubtype(subtype, 0, 1, obc);
+
+		if (list.isEmpty()) {
+			StringBuilder msg = new StringBuilder();
+
+			msg.append("No Role exists with the key {");
+
+			msg.append("subtype=" + subtype);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchRoleException(msg.toString());
+		}
 		else {
-			if (result instanceof List) {
-				return null;
+			return list.get(0);
+		}
+	}
+
+	public Role findBySubtype_Last(String subtype, OrderByComparator obc)
+		throws NoSuchRoleException, SystemException {
+		int count = countBySubtype(subtype);
+
+		List<Role> list = findBySubtype(subtype, count - 1, count, obc);
+
+		if (list.isEmpty()) {
+			StringBuilder msg = new StringBuilder();
+
+			msg.append("No Role exists with the key {");
+
+			msg.append("subtype=" + subtype);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchRoleException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public Role[] findBySubtype_PrevAndNext(long roleId, String subtype,
+		OrderByComparator obc) throws NoSuchRoleException, SystemException {
+		Role role = findByPrimaryKey(roleId);
+
+		int count = countBySubtype(subtype);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuilder query = new StringBuilder();
+
+			query.append("SELECT role FROM Role role WHERE ");
+
+			if (subtype == null) {
+				query.append("role.subtype IS NULL");
 			}
 			else {
-				return (Role)result;
+				query.append("role.subtype = ?");
 			}
+
+			query.append(" ");
+
+			if (obc != null) {
+				query.append("ORDER BY ");
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("role.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
+			}
+
+			else {
+				query.append("ORDER BY ");
+
+				query.append("role.name ASC");
+			}
+
+			Query q = session.createQuery(query.toString());
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			if (subtype != null) {
+				qPos.add(subtype);
+			}
+
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, role);
+
+			Role[] array = new RoleImpl[3];
+
+			array[0] = (Role)objArray[0];
+			array[1] = (Role)objArray[1];
+			array[2] = (Role)objArray[2];
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
 		}
 	}
 
@@ -1541,11 +1687,10 @@ public class RolePersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public void removeBySubtype(String subtype)
-		throws NoSuchRoleException, SystemException {
-		Role role = findBySubtype(subtype);
-
-		remove(role);
+	public void removeBySubtype(String subtype) throws SystemException {
+		for (Role role : findBySubtype(subtype)) {
+			remove(role);
+		}
 	}
 
 	public void removeByC_N(long companyId, String name)

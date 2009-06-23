@@ -31,51 +31,41 @@ Object[] objArray = (Object[])row.getObject();
 
 ResourcePermission resourcePermission = (ResourcePermission)objArray[0];
 
-String modelString = "";
+String modelString = StringPool.BLANK;
 String resourceTitle = resourcePermission.getName();
 
 try {
-	BaseModel model = PortalUtil.getModel(resourcePermission);
-
 	StringBuilder sb = new StringBuilder();
 
 	sb.append("<table class=\"lfr-table\">\n");
 
-	try {
-		SAXReader reader = new SAXReader();
+	BaseModel model = PortalUtil.getModel(resourcePermission);
 
-		String xml = model.toXmlString();
+	Document doc = SAXReaderUtil.read(new StringReader(model.toXmlString()));
 
-		Document doc = reader.read(new StringReader(xml));
+	Element root = doc.getRootElement();
 
-		Element root = doc.getRootElement();
+	Iterator<Element> itr = root.elements("column").iterator();
 
-		Iterator<Element> itr = root.elements("column").iterator();
+	while (itr.hasNext()) {
+		Element column = itr.next();
 
-		while (itr.hasNext()) {
-			Element column = itr.next();
+		String name = column.elementText("column-name");
+		String value = column.elementText("column-value");
 
-			String name = column.element("column-name").getTextTrim();
-			String value = column.element("column-value").getTextTrim();
-
-			sb.append("<tr>");
-			sb.append("<td align=\"right\" valign=\"top\">");
-			sb.append("<b>" + name + "</b>");
-			sb.append("</td>");
-			sb.append("<td>");
-			sb.append(value);
-			sb.append("</td>");
-			sb.append("</tr>\n");
-		}
-	}
-	catch (Exception e) {
+		sb.append("<tr><td align=\"right\" valign=\"top\"><b>");
+		sb.append(name);
+		sb.append("</b></td><td>");
+		sb.append(value);
+		sb.append("</td></tr>");
 	}
 
 	sb.append("</table>");
 
 	modelString = sb.toString();
 
-	String[] parts = StringUtil.split(resourcePermission.getName(), ".");
+	String[] parts = StringUtil.split(resourcePermission.getName(), StringPool.PERIOD);
+
 	resourceTitle = parts[parts.length - 1] + ", " + resourcePermission.getPrimKey();
 }
 catch (Exception e) {
@@ -83,10 +73,10 @@ catch (Exception e) {
 }
 %>
 
-<div style="vertical-align: top; overflow: auto; ">
-	<liferay-ui:panel-container id='<%= "_resource_" + resourcePermission.getResourcePermissionId() %>' cssClass="model-details">
-		<liferay-ui:panel id='<%= "_resource_panel_" + resourcePermission.getResourcePermissionId() %>' title="<%= resourceTitle %>" defaultState="closed">
-			<div style="width: 350px; height: 100px; "><%= modelString %></div>
+<div style="overflow: auto; vertical-align: top;">
+	<liferay-ui:panel-container cssClass="model-details" id='<%= renderResponse.getNamespace() + "resource" + resourcePermission.getResourcePermissionId() %>'>
+		<liferay-ui:panel defaultState="closed" id='<%= renderResponse.getNamespace() + "resourcePanel" + resourcePermission.getResourcePermissionId() %>' title="<%= resourceTitle %>">
+			<div style="height: 100px; width: 350px;"><%= modelString %></div>
 		</liferay-ui:panel>
 	</liferay-ui:panel-container>
 </div>

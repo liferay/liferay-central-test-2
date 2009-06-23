@@ -136,6 +136,22 @@ public class ResourceActionsUtil {
 	}
 
 	public static List<String> getActionsNames(
+		PageContext pageContext, List<String> actions) {
+
+		List<String> uniqueList = new UniqueList<String>();
+
+		for (String action : actions) {
+			uniqueList.add(getAction(pageContext, action));
+		}
+
+		List<String> list = new ArrayList<String>();
+
+		list.addAll(uniqueList);
+
+		return list;
+	}
+
+	public static List<String> getActionsNames(
 		PageContext pageContext, String name, long actionIds) {
 
 		try {
@@ -159,22 +175,6 @@ public class ResourceActionsUtil {
 
 			return Collections.EMPTY_LIST;
 		}
-	}
-
-	public static List<String> getActionsNames(
-		PageContext pageContext, List<String> actions) {
-
-		List<String> uniqueList = new UniqueList<String>();
-
-		for (String action : actions) {
-			uniqueList.add(getAction(pageContext, action));
-		}
-
-		List<String> list = new ArrayList<String>();
-
-		list.addAll(uniqueList);
-
-		return list;
 	}
 
 	public static List<String> getModelNames() {
