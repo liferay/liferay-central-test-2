@@ -44,42 +44,40 @@ long nodeId = BeanParamUtil.getLong(node, request, "nodeId");
 </portlet:actionURL>
 
 <aui:form action="<%= editNodeURL %>" method="post" name="fm" onSubmit='<%= renderResponse.getNamespace() + "saveNode(); return false;" %>'>
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(redirect) %>" />
-<input name="<portlet:namespace />nodeId" type="hidden" value="<%= nodeId %>" />
+	<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
+	<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(redirect) %>" />
+	<input name="<portlet:namespace />nodeId" type="hidden" value="<%= nodeId %>" />
 
-<liferay-ui:error exception="<%= DuplicateNodeNameException.class %>" message="please-enter-a-unique-node-name" />
-<liferay-ui:error exception="<%= NodeNameException.class %>" message="please-enter-a-valid-name" />
+	<liferay-ui:error exception="<%= DuplicateNodeNameException.class %>" message="please-enter-a-unique-node-name" />
+	<liferay-ui:error exception="<%= NodeNameException.class %>" message="please-enter-a-valid-name" />
 
-<aui:model-context bean="<%= node %>" model="<%= WikiNode.class %>" />
+	<aui:model-context bean="<%= node %>" model="<%= WikiNode.class %>" />
 
-<div class="breadcrumbs">
-	<span class="first"><a href="<portlet:renderURL />"><liferay-ui:message key="nodes" /></a></span> &raquo;
+	<div class="breadcrumbs">
+		<span class="first"><a href="<portlet:renderURL />"><liferay-ui:message key="nodes" /></a></span> &raquo;
 
-	<span class="last"><liferay-ui:message key='<%= ((node == null) ? Constants.ADD : Constants.UPDATE) + "-wiki" %>' /></span>
-</div>
+		<span class="last"><liferay-ui:message key='<%= ((node == null) ? Constants.ADD : Constants.UPDATE) + "-wiki" %>' /></span>
+	</div>
 
-<aui:fieldset>
+	<aui:fieldset>
+		<aui:input name="name"  />
 
-	<aui:input name="name"  />
+		<aui:input name="description"  />
 
-	<aui:input name="description"  />
+		<c:if test="<%= node == null %>">
+			<aui:field-wrapper label="permissions">
+				<liferay-ui:input-permissions
+					modelName="<%= WikiNode.class.getName() %>"
+				/>
+			</aui:field-wrapper>
+		</c:if>
 
-	<c:if test="<%= node == null %>">
-		<aui:field-wrapper label="permissions">
-			<liferay-ui:input-permissions
-				modelName="<%= WikiNode.class.getName() %>"
-			/>
-		</aui:field-wrapper>
-	</c:if>
+		<aui:button-row>
+			<aui:button name="saveButton" type="submit" value="save" />
 
-	<aui:button-row>
-		<aui:button name="saveButton" type="submit" value="save" />
-
-		<aui:button name="cancelButton" type="button" value="cancel" onClick='<%= "location.href = \'" +  HtmlUtil.escape(redirect) + "\';" %>' />
-	</aui:button-row>
-
-</aui:fieldset>
+			<aui:button name="cancelButton" type="button" value="cancel" onClick='<%= "location.href = \'" +  HtmlUtil.escape(redirect) + "\';" %>' />
+		</aui:button-row>
+	</aui:fieldset>
 </aui:form>
 
 <c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
