@@ -692,17 +692,40 @@ li.exp-autocomplete-highlight strong {
 .tags-vocabulary-name span {
 }
 
-/* ---------- Tag cloud ---------- */
+/* ---------- Tag cloud and Tag list ---------- */
+
+.tag-cloud, .tag-list {
+}
 
 .tag-cloud {
 }
 
-.tag-cloud li {
+.tag-cloud li, .tag-list li {
 }
 
-.tag-cloud a {
+.tag-cloud a, .tag-list a {
 }
 
+.tag-cloud .tag-asset-count {
+}
+
+.tag-cloud .tag-popularity-1 {
+}
+
+.tag-cloud .tag-popularity-2 {
+}
+
+.tag-cloud .tag-popularity-3 {
+}
+
+.tag-cloud .tag-popularity-4 {
+}
+
+.tag-cloud .tag-popularity-5 {
+}
+
+.tag-cloud .tag-popularity-6 {
+}
 /* ---------- Treeview ---------- */
 
 .treeview {

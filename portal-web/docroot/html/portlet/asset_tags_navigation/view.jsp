@@ -24,4 +24,9 @@
 
 <%@ include file="/html/portlet/asset_tags_navigation/init.jsp" %>
 
-<liferay-ui:asset-tags-navigation />
+<liferay-ui:asset-tags-navigation
+	classNameId="<%= classNameId %>"
+	displayStyle="<%= displayStyle %>"
+	showAssetCount="<%= showAssetCount %>"
+	showZeroAssetCount="<%= showZeroAssetCount %>"
+/>

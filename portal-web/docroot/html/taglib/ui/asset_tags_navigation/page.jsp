@@ -25,6 +25,11 @@
 <%@ include file="/html/taglib/ui/asset_tags_navigation/init.jsp" %>
 
 <%
+long classNameId = GetterUtil.getLong((String)request.getAttribute("liferay-ui:asset-tags-navigation:classNameId"));
+String displayStyle = (String)request.getAttribute("liferay-ui:asset-tags-navigation:displayStyle");
+Boolean showAssetCount = (Boolean)request.getAttribute("liferay-ui:asset-tags-navigation:showAssetCount");
+Boolean showZeroAssetCount = (Boolean)request.getAttribute("liferay-ui:asset-tags-navigation:showZeroAssetCount");
+
 String tag = ParamUtil.getString(renderRequest, "tag");
 
 PortletURL portletURL = renderResponse.createRenderURL();
@@ -32,32 +37,85 @@ PortletURL portletURL = renderResponse.createRenderURL();
 
 <liferay-ui:panel-container id='<%= namespace + "taglibAssetTagsNavigation" %>' extended="<%= Boolean.TRUE %>" persistState="<%= true %>" cssClass="taglib-asset-tags-navigation">
 
-	<%= _buildTagsNavigation(scopeGroupId, tag, portletURL) %>
+	<%= _buildTagsNavigation(scopeGroupId, tag, portletURL, classNameId, displayStyle, showAssetCount, showZeroAssetCount) %>
 
 </liferay-ui:panel-container>
 
 <%!
-private String _buildTagsNavigation(long groupId, String selectedTagName, PortletURL portletURL) throws Exception {
+private String _buildTagsNavigation(long groupId, String selectedTagName, PortletURL portletURL, long classNameId, String displayStyle, Boolean showAssetCount, Boolean showZeroAssetCount) throws Exception {
 	StringBuilder sb = new StringBuilder();
 
-	sb.append("<ul class=\"tag-cloud\">");
+	sb.append("<ul class=\"");
+
+	if (showAssetCount && displayStyle.equals("cloud")) {
+		sb.append("tag-cloud");
+	}
+	else {
+		sb.append("tag-list");
+	}
+
+	sb.append("\">");
 
 	List<AssetTag> tags = AssetTagServiceUtil.getGroupTags(groupId);
 
+	int maxCount = 1;
+	int minCount = 1;
+
+	if (showAssetCount && displayStyle.equals("cloud")) {
+		for (AssetTag tag : tags) {
+			int count = tag.getAssetCount();
+
+			if (!showZeroAssetCount && (count == 0)) {
+				continue;
+			}
+
+			maxCount = Math.max(maxCount, count);
+			minCount = Math.min(minCount, count);
+		}
+	}
+
+	double multiplier = 1;
+
+	if (maxCount != minCount) {
+		multiplier = (double)5 / (maxCount - minCount);
+	}
+
 	for (AssetTag tag : tags) {
 		String tagName = tag.getName();
+		int count = tag.getAssetCount();
 
-		sb.append("<li>");
+		if (classNameId > 0) {
+			AssetTagStats ats = AssetTagStatsLocalServiceUtil.getTagStats(tag.getTagId(), classNameId);
+
+			count = ats.getAssetCount();
+		}
+
+		int tagPopularity = (int)(1 + ((maxCount - (maxCount - (count - minCount))) * multiplier)); 
+
+		if (!showZeroAssetCount && (count == 0)) {
+			continue;
+		}
+
+		sb.append("<li");
+		sb.append(" class=\"tag-popularity-");
+		sb.append(tagPopularity);
+		sb.append("\"");
+		sb.append(">");
 		sb.append("<span>");
 
 		if (tagName.equals(selectedTagName)) {
 			sb.append("<b>");
 			sb.append(tagName);
 			sb.append("</b>");
-			sb.append(StringPool.SPACE);
-			sb.append(StringPool.OPEN_PARENTHESIS);
-			sb.append(tag.getAssetCount());
-			sb.append(StringPool.CLOSE_PARENTHESIS);
+
+			if (showAssetCount) {
+				sb.append("<span class=\"tag-asset-count\">");
+				sb.append(StringPool.SPACE);
+				sb.append(StringPool.OPEN_PARENTHESIS);
+				sb.append(count);
+				sb.append(StringPool.CLOSE_PARENTHESIS);
+				sb.append("</span>");
+			}
 		}
 		else {
 			portletURL.setParameter("tag", tag.getName());
@@ -66,11 +124,18 @@ private String _buildTagsNavigation(long groupId, String selectedTagName, Portle
 			sb.append(portletURL.toString());
 			sb.append("\">");
 			sb.append(tagName);
-			sb.append(StringPool.SPACE);
-			sb.append(StringPool.OPEN_PARENTHESIS);
-			sb.append(tag.getAssetCount());
-			sb.append(StringPool.CLOSE_PARENTHESIS);
+
+			if (showAssetCount) {
+				sb.append("<span class=\"tag-asset-count\">");
+				sb.append(StringPool.SPACE);
+				sb.append(StringPool.OPEN_PARENTHESIS);
+				sb.append(count);
+				sb.append(StringPool.CLOSE_PARENTHESIS);
+				sb.append("</span>");
+			}
+
 			sb.append("</a>");
+			sb.append("</span>");
 		}
 
 		sb.append("</span>");

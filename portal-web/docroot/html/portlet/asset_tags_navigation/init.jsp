@@ -22,6 +22,9 @@
  */
 %>
 
+<%@ page import="com.liferay.portlet.asset.model.AssetEntryType" %>
+<%@ page import="com.liferay.portlet.asset.service.AssetEntryServiceUtil" %>
+
 <%@ include file="/html/portlet/init.jsp" %>
 
 <%
@@ -32,4 +35,9 @@ String portletResource = ParamUtil.getString(request, "portletResource");
 if (Validator.isNotNull(portletResource)) {
 	preferences = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource);
 }
+
+int classNameId = PrefsParamUtil.getInteger(preferences, request, "classNameId", 0);
+String displayStyle = PrefsParamUtil.getString(preferences, request, "displayStyle", "cloud");
+boolean showAssetCount = PrefsParamUtil.getBoolean(preferences, request, "showAssetCount", false);
+boolean showZeroAssetCount = PrefsParamUtil.getBoolean(preferences, request, "showZeroAssetCount", false);
 %>

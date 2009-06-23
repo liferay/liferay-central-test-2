@@ -80,6 +80,26 @@
 		<tag-class>com.liferay.taglib.ui.AssetTagsNavigationTag</tag-class>
 		<body-content>JSP</body-content>
 		<attribute>
+			<name>classNameId</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>displayStyle</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>showAssetCount</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>showZeroAssetCount</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
 			<name>page</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>

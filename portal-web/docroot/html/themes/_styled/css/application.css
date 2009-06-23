@@ -1303,24 +1303,59 @@ li.exp-autocomplete-highlight strong {
 	padding-bottom: 3px;
 }
 
-/* ---------- Tag cloud ---------- */
+/* ---------- Tag cloud and Tag list ---------- */
 
-.tag-cloud {
+.tag-cloud, .tag-list {
 	list-style: none;
 	margin: 0 1em 0 0;
 	padding: 0 1em 0.5em 1em;
 	white-space: normal;
 }
 
-.tag-cloud li {
+.tag-cloud {
+	line-height: 2.5em;
+}
+
+.tag-cloud li, .tag-list li {
 	display: inline;
 	float: left;
 	list-style: none;
 	margin: 0 1em 0 0;
 }
 
-.tag-cloud a {
+.tag-cloud a, .tag-list a {
 	white-space: nowrap;
+}
+
+.tag-cloud .tag-asset-count {
+	left: -999px;
+	position: absolute;
+	top: -990px;
+	z-index: 99999;
+}
+
+.tag-cloud .tag-popularity-1 {
+	font-size: 1em;
+}
+
+.tag-cloud .tag-popularity-2 {
+	font-size: 1.3em;
+}
+
+.tag-cloud .tag-popularity-3 {
+	font-size: 1.6em;
+}
+
+.tag-cloud .tag-popularity-4 {
+	font-size: 1.9em;
+}
+
+.tag-cloud .tag-popularity-5 {
+	font-size: 2.2em;
+}
+
+.tag-cloud .tag-popularity-6 {
+	font-size: 2.5em;
 }
 
 /* ---------- Treeview ---------- */

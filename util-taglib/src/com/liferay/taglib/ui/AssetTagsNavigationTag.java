@@ -24,6 +24,8 @@ package com.liferay.taglib.ui;
 
 import com.liferay.taglib.util.IncludeTag;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * <a href="AssetTagsNavigationTag.java.html"><b><i>View Source</i></b></a>
  *
@@ -34,11 +36,51 @@ import com.liferay.taglib.util.IncludeTag;
  */
 public class AssetTagsNavigationTag extends IncludeTag {
 
+	public int doStartTag() {
+		HttpServletRequest request =
+			(HttpServletRequest)pageContext.getRequest();
+
+		request.setAttribute(
+			"liferay-ui:asset-tags-navigation:classNameId",
+			String.valueOf(_classNameId));
+		request.setAttribute(
+			"liferay-ui:asset-tags-navigation:displayStyle", _displayStyle);
+		request.setAttribute(
+			"liferay-ui:asset-tags-navigation:showAssetCount",
+			_showAssetCount);
+		request.setAttribute(
+			"liferay-ui:asset-tags-navigation:showZeroAssetCount", 
+			_showZeroAssetCount);
+
+		return EVAL_BODY_BUFFERED;
+	}
+
+	public void setClassNameId(int classNameId) {
+		_classNameId = classNameId;
+	}
+
+	public void setDisplayStyle(String displayStyle) {
+		_displayStyle = displayStyle;
+	}
+
+	public void setShowAssetCount(boolean showAssetCount) {
+		_showAssetCount = showAssetCount;
+	}
+
+	public void setShowZeroAssetCount(boolean showZeroAssetCount) {
+		_showZeroAssetCount = showZeroAssetCount;
+	}
+
 	protected String getDefaultPage() {
 		return _PAGE;
 	}
 
 	private static final String _PAGE =
 		"/html/taglib/ui/asset_tags_navigation/page.jsp";
+
+	private int _classNameId = 0;
+	private String _displayStyle = "cloud";
+	private boolean _showAssetCount = false;
+	private boolean _showZeroAssetCount = false;
 
 }
