@@ -316,7 +316,7 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 				}
 			}
 
-			if (portletName.equals(PortletKeys.DOCUMENT_LIBRARY)) {
+			if (portletName.equals(PortletKeys.DOCUMENT_LIBRARY) && (folder.getParentFolderId() != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID)) {
 				PortalUtil.setPageSubtitle(folder.getName(), request);
 				PortalUtil.setPageDescription(folder.getDescription(), request);
 			}
