@@ -44,7 +44,7 @@ Object value = request.getAttribute("aui:input:value");
 
 boolean showForLabel = true;
 
-if ((type.equals("assetTags")) ||
+if ((type.equals("assetTags")) || (type.equals("assetCategories")) ||
 	((model != null) && (field != null) && Validator.equals(ModelHintsUtil.getType(model.getName(), field), Date.class.getName()))) {
 
 	showForLabel = false;
@@ -53,7 +53,7 @@ if ((type.equals("assetTags")) ||
 
 <div class="exp-ctrl-holder <%= cssClass %> <%= first ? "exp-first" : StringPool.BLANK %> <%= last ? "exp-last" : StringPool.BLANK %>">
 	<c:if test="<%= Validator.isNotNull(label) %>">
-		<label class="exp-form-label <%= inlineLabel ? "inline-label" : StringPool.BLANK  %>" <%= showForLabel ? "for=\"" + name + "\"" : StringPool.BLANK %>>
+		<label class="exp-form-label <%= inlineLabel ? "inline-label" : StringPool.BLANK %>" <%= showForLabel ? "for=\"" + name + "\"" : StringPool.BLANK %>>
 
 		<liferay-ui:message key="<%= label %>" />
 
@@ -68,25 +68,16 @@ if ((type.equals("assetTags")) ||
 
 	<c:choose>
 		<c:when test='<%= (model != null) && type.equals("assetTags") %>'>
-
-			<%
-			long classPK = 0;
-
-			if (bean != null) {
-				Serializable primaryKeyObj = bean.getPrimaryKeyObj();
-
-				if (primaryKeyObj instanceof Long) {
-					classPK = (Long)primaryKeyObj;
-				}
-				else {
-					classPK = GetterUtil.getLong(primaryKeyObj.toString());
-				}
-			}
-			%>
-
 			<liferay-ui:asset-tags-selector
 				className="<%= model.getName() %>"
-				classPK="<%= classPK %>"
+				classPK="<%= _getClassPK(bean) %>"
+				contentCallback='<%= portletResponse.getNamespace() + "getSuggestionsContent" %>'
+			/>
+		</c:when>
+		<c:when test='<%= (model != null) && type.equals("assetCategories") %>'>
+			<liferay-ui:asset-categories-selector
+				className="<%= model.getName() %>"
+				classPK="<%= _getClassPK(bean) %>"
 				contentCallback='<%= portletResponse.getNamespace() + "getSuggestionsContent" %>'
 			/>
 		</c:when>
@@ -149,3 +140,21 @@ if ((type.equals("assetTags")) ||
 		</label>
 	</c:if>
 </div>
+
+<%!
+private Long _getClassPK(BaseModel bean) {
+	long classPK = 0;
+		if (bean != null) {
+			Serializable primaryKeyObj = bean.getPrimaryKeyObj();
+
+			if (primaryKeyObj instanceof Long) {
+				classPK = (Long)primaryKeyObj;
+			}
+			else {
+				classPK = GetterUtil.getLong(primaryKeyObj.toString());
+			}
+		}
+
+	return classPK;
+}
+%>
