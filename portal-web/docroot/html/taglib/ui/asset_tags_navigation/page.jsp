@@ -27,8 +27,8 @@
 <%
 long classNameId = GetterUtil.getLong((String)request.getAttribute("liferay-ui:asset-tags-navigation:classNameId"));
 String displayStyle = (String)request.getAttribute("liferay-ui:asset-tags-navigation:displayStyle");
-Boolean showAssetCount = (Boolean)request.getAttribute("liferay-ui:asset-tags-navigation:showAssetCount");
-Boolean showZeroAssetCount = (Boolean)request.getAttribute("liferay-ui:asset-tags-navigation:showZeroAssetCount");
+boolean showAssetCount = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:asset-tags-navigation:showAssetCount"));
+boolean showZeroAssetCount = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:asset-tags-navigation:showZeroAssetCount"));
 
 String tag = ParamUtil.getString(renderRequest, "tag");
 
@@ -36,13 +36,11 @@ PortletURL portletURL = renderResponse.createRenderURL();
 %>
 
 <liferay-ui:panel-container id='<%= namespace + "taglibAssetTagsNavigation" %>' extended="<%= Boolean.TRUE %>" persistState="<%= true %>" cssClass="taglib-asset-tags-navigation">
-
 	<%= _buildTagsNavigation(scopeGroupId, tag, portletURL, classNameId, displayStyle, showAssetCount, showZeroAssetCount) %>
-
 </liferay-ui:panel-container>
 
 <%!
-private String _buildTagsNavigation(long groupId, String selectedTagName, PortletURL portletURL, long classNameId, String displayStyle, Boolean showAssetCount, Boolean showZeroAssetCount) throws Exception {
+private String _buildTagsNavigation(long groupId, String selectedTagName, PortletURL portletURL, long classNameId, String displayStyle, boolean showAssetCount, boolean showZeroAssetCount) throws Exception {
 	StringBuilder sb = new StringBuilder();
 
 	sb.append("<ul class=\"");
@@ -82,26 +80,24 @@ private String _buildTagsNavigation(long groupId, String selectedTagName, Portle
 
 	for (AssetTag tag : tags) {
 		String tagName = tag.getName();
+
 		int count = tag.getAssetCount();
 
 		if (classNameId > 0) {
-			AssetTagStats ats = AssetTagStatsLocalServiceUtil.getTagStats(tag.getTagId(), classNameId);
+			AssetTagStats tagStats = AssetTagStatsLocalServiceUtil.getTagStats(tag.getTagId(), classNameId);
 
-			count = ats.getAssetCount();
+			count = tagStats.getAssetCount();
 		}
 
-		int tagPopularity = (int)(1 + ((maxCount - (maxCount - (count - minCount))) * multiplier)); 
+		int popularity = (int)(1 + ((maxCount - (maxCount - (count - minCount))) * multiplier));
 
 		if (!showZeroAssetCount && (count == 0)) {
 			continue;
 		}
 
-		sb.append("<li");
-		sb.append(" class=\"tag-popularity-");
-		sb.append(tagPopularity);
-		sb.append("\"");
-		sb.append(">");
-		sb.append("<span>");
+		sb.append("<li class=\"tag-popularity-");
+		sb.append(popularity);
+		sb.append("\"><span>");
 
 		if (tagName.equals(selectedTagName)) {
 			sb.append("<b>");
@@ -134,17 +130,13 @@ private String _buildTagsNavigation(long groupId, String selectedTagName, Portle
 				sb.append("</span>");
 			}
 
-			sb.append("</a>");
-			sb.append("</span>");
+			sb.append("</a></span>");
 		}
 
-		sb.append("</span>");
-
-		sb.append("</li>");
+		sb.append("</span></li>");
 	}
 
-	sb.append("</ul>");
-	sb.append("<br style=\"clear: both;\" />");
+	sb.append("</ul><br style=\"clear: both;\" />");
 
 	return sb.toString();
 }

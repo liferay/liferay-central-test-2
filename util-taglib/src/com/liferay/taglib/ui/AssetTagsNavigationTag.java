@@ -47,15 +47,15 @@ public class AssetTagsNavigationTag extends IncludeTag {
 			"liferay-ui:asset-tags-navigation:displayStyle", _displayStyle);
 		request.setAttribute(
 			"liferay-ui:asset-tags-navigation:showAssetCount",
-			_showAssetCount);
+			String.valueOf(_showAssetCount));
 		request.setAttribute(
-			"liferay-ui:asset-tags-navigation:showZeroAssetCount", 
-			_showZeroAssetCount);
+			"liferay-ui:asset-tags-navigation:showZeroAssetCount",
+			String.valueOf(_showZeroAssetCount));
 
 		return EVAL_BODY_BUFFERED;
 	}
 
-	public void setClassNameId(int classNameId) {
+	public void setClassNameId(long classNameId) {
 		_classNameId = classNameId;
 	}
 
@@ -78,9 +78,9 @@ public class AssetTagsNavigationTag extends IncludeTag {
 	private static final String _PAGE =
 		"/html/taglib/ui/asset_tags_navigation/page.jsp";
 
-	private int _classNameId = 0;
+	private long _classNameId = 0;
 	private String _displayStyle = "cloud";
-	private boolean _showAssetCount = false;
-	private boolean _showZeroAssetCount = false;
+	private boolean _showAssetCount;
+	private boolean _showZeroAssetCount;
 
 }

@@ -54,7 +54,7 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 			return;
 		}
 
-		int classNameId = ParamUtil.getInteger(actionRequest, "classNameId");
+		long classNameId = ParamUtil.getLong(actionRequest, "classNameId");
 		String displayStyle = ParamUtil.getString(
 			actionRequest, "displayStyle");
 		boolean showAssetCount = ParamUtil.getBoolean(
