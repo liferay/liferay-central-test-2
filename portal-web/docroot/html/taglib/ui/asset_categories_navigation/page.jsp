@@ -86,8 +86,7 @@ private void _buildCategoriesNavigation(List<AssetCategory> categories, long cur
 
 		List<AssetCategory> categoriesChildren = AssetCategoryServiceUtil.getChildCategories(category.getCategoryId());
 
-		sb.append("<li>");
-		sb.append("<span>");
+		sb.append("<li><span>");
 
 		if (categoryId == curCategoryId) {
 			sb.append("<b>");
@@ -127,8 +126,7 @@ private String _buildVocabularyNavigation(AssetVocabulary vocabulary, long categ
 
 	_buildCategoriesNavigation(categories, categoryId, portletURL, sb);
 
-	sb.append("</ul>");
-	sb.append("<br style=\"clear: both;\" />");
+	sb.append("</ul><br style=\"clear: both;\" />");
 
 	return sb.toString();
 }
