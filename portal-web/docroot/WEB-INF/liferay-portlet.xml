@@ -1372,6 +1372,19 @@
 		<footer-portlet-javascript>/html/portlet/asset_category_admin/javascript.js</footer-portlet-javascript>
 		<css-class-wrapper>portlet-asset-category-admin</css-class-wrapper>
 	</portlet>
+	<portlet>
+		<portlet-name>148</portlet-name>
+		<icon>/html/icons/default.png</icon>
+		<struts-path>asset_tags_cloud</struts-path>
+		<use-default-template>false</use-default-template>
+		<restore-current-view>false</restore-current-view>
+		<layout-cacheable>true</layout-cacheable>
+		<instanceable>true</instanceable>
+		<private-request-attributes>false</private-request-attributes>
+		<private-session-attributes>false</private-session-attributes>
+		<render-weight>50</render-weight>
+		<css-class-wrapper>portlet-asset-tags-navigation</css-class-wrapper>
+	</portlet>
 	<role-mapper>
 		<role-name>administrator</role-name>
 		<role-link>Administrator</role-link>

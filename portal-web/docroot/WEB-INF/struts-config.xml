@@ -218,6 +218,10 @@
 
 		<action path="/asset_tags_admin/view" forward="portlet.asset_tags_admin.view" />
 
+		<!-- Asset Tags Cloud -->
+
+		<action path="/asset_tags_cloud/view" forward="portlet.asset_tags_navigation.view" />
+
 		<!-- Asset Tags Navigation -->
 
 		<action path="/asset_tags_navigation/view" forward="portlet.asset_tags_navigation.view" />
