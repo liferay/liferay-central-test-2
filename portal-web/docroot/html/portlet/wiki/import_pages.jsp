@@ -79,11 +79,7 @@ portletURL.setParameter("nodeId", String.valueOf(nodeId));
 	<aui:button-row>
 		<aui:button name="saveButton" onClick='<%= uploadProgressId + ".startProgress(); " +  importProgressId + ".startProgress(); return true;" %>' type="submit" value="import" />
 
-		<%
-		String taglibCancelURL = "location.href = '" +  HtmlUtil.escape(redirect) + "';"
-		%>
-
-		<aui:button name="cancelButton" onClick="<%= taglibCancelURL %>" type="button" value="cancel" />
+		<aui:button name="cancelButton" onClick="<%= redirect %>" type="button" value="cancel" />
 	</aui:button-row>
 </aui:form>
 

@@ -110,11 +110,7 @@ searchContainer.setResults(results);
 						<portlet:param name="redirect" value="<%= currentURL %>" />
 					</portlet:renderURL>
 
-					<%
-					String taglibAddNodeURL = "location.href = '" +  HtmlUtil.escape(addNodeURL) + "';"
-					%>
-
-					<aui:button name="addNodeButton" onClick="<%= taglibAddNodeURL %>" type="button" value="add-wiki" />
+					<aui:button name="addNodeButton" onClick="<%= addNodeURL %>" type="button" value="add-wiki" />
 				</c:if>
 
 				<c:if test="<%= showPermissionsButton %>">
@@ -125,11 +121,7 @@ searchContainer.setResults(results);
 						var="permissionsURL"
 					/>
 
-					<%
-					String taglibPermissionsURL = "location.href = '" +  HtmlUtil.escape(permissionsURL) + "';"
-					%>
-
-					<aui:button name="permissionsButton" onClick="<%= taglibPermissionsURL %>" type="button" value="permissions" />
+					<aui:button name="permissionsButton" onClick="<%= permissionsURL %>" type="button" value="permissions" />
 				</c:if>
 			</aui:button-row>
 		</c:if>

@@ -75,11 +75,7 @@ long nodeId = BeanParamUtil.getLong(node, request, "nodeId");
 		<aui:button-row>
 			<aui:button name="saveButton" type="submit" value="save" />
 
-			<%
-			String taglibCancelURL = "location.href = '" +  HtmlUtil.escape(redirect) + "';"
-			%>
-
-			<aui:button name="cancelButton" onClick="<%= taglibCancelURL %>" type="button" value="cancel" />
+			<aui:button name="cancelButton" onClick="<%= redirect %>" type="button" value="cancel" />
 		</aui:button-row>
 	</aui:fieldset>
 </aui:form>

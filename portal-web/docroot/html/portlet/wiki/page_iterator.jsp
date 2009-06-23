@@ -336,19 +336,14 @@ for (int i = 0; i < results.size(); i++) {
 </c:if>
 
 <c:if test='<%= type.equals("all_pages") && WikiNodePermission.contains(permissionChecker, node.getNodeId(), ActionKeys.ADD_PAGE) %>'>
-	<portlet:actionURL var="addPageURL">
-		<portlet:param name="struts_action" value="/wiki/edit_page" />
-		<portlet:param name="nodeId" value="<%= String.valueOf(node.getNodeId()) %>" />
-		<portlet:param name="editTitle" value="1" />
-	</portlet:actionURL>
-
 	<aui:button-row>
+		<portlet:actionURL var="addPageURL">
+			<portlet:param name="struts_action" value="/wiki/edit_page" />
+			<portlet:param name="nodeId" value="<%= String.valueOf(node.getNodeId()) %>" />
+			<portlet:param name="editTitle" value="1" />
+		</portlet:actionURL>
 
-		<%
-		String taglibAddPageURL = "location.href = '" +  HtmlUtil.escape(addPageURL) + "';"
-		%>
-
-		<aui:button name="addPageButton" onClick="<%= taglibAddPageURL %>" type="button" value="add-page" />
+		<aui:button name="addPageButton" onClick="<%= addPageURL %>" type="button" value="add-page" />
 	</aui:button-row>
 </c:if>
 

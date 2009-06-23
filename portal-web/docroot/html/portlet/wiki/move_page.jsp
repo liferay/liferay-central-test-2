@@ -84,11 +84,7 @@ String newTitle = ParamUtil.get(request, "newTitle", StringPool.BLANK);
 				<aui:button-row>
 					<aui:button name="renameButton" onClick='<%= renderResponse.getNamespace() + "renamePage();" %>' type="button" value="rename" />
 
-					<%
-					String taglibCancelURL = "location.href = '" +  HtmlUtil.escape(redirect) + "';"
-					%>
-
-					<aui:button name="cancelButton" onClick="<%= taglibCancelURL %>" type="button" value="cancel" />
+					<aui:button name="cancelButton" onClick="<%= redirect %>" type="button" value="cancel" />
 				</aui:button-row>
 			</aui:fieldset>
 		</liferay-ui:section>
@@ -180,11 +176,7 @@ String newTitle = ParamUtil.get(request, "newTitle", StringPool.BLANK);
 					}
 					%>
 
-					<%
-					String taglibCancelURL = "location.href = '" +  HtmlUtil.escape(redirect) + "';"
-					%>
-
-					<aui:button name="cancelButton" onClick="<%= taglibCancelURL %>" type="button" value="cancel" />
+					<aui:button name="cancelButton" onClick="<%= redirect %>" type="button" value="cancel" />
 				</aui:button-row>
 			</aui:fieldset>
 		</liferay-ui:section>
