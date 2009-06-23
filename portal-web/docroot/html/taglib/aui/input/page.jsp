@@ -68,88 +68,88 @@ if ((type.equals("assetCategories")) || (type.equals("assetTags")) ||
 		</c:if>
 </c:if>
 
-	<c:choose>
-		<c:when test='<%= (model != null) && type.equals("assetCategories") %>'>
-			<liferay-ui:asset-categories-selector
-				className="<%= model.getName() %>"
-				classPK="<%= _getClassPK(bean) %>"
-				contentCallback='<%= portletResponse.getNamespace() + "getSuggestionsContent" %>'
+<c:choose>
+	<c:when test='<%= (model != null) && type.equals("assetCategories") %>'>
+		<liferay-ui:asset-categories-selector
+			className="<%= model.getName() %>"
+			classPK="<%= _getClassPK(bean) %>"
+			contentCallback='<%= portletResponse.getNamespace() + "getSuggestionsContent" %>'
+		/>
+	</c:when>
+	<c:when test='<%= (model != null) && type.equals("assetTags") %>'>
+		<liferay-ui:asset-tags-selector
+			className="<%= model.getName() %>"
+			classPK="<%= _getClassPK(bean) %>"
+			contentCallback='<%= portletResponse.getNamespace() + "getSuggestionsContent" %>'
+		/>
+	</c:when>
+	<c:when test="<%= (model != null) && Validator.isNull(type) %>">
+		<span class="exp-form-field exp-form-<%= ModelHintsUtil.getType(model.getName(), field).toLowerCase() %>">
+			<liferay-ui:input-field
+				bean="<%= bean %>"
+				defaultValue='<%= value %>'
+				disabled='<%= GetterUtil.getBoolean((String)dynamicAttributes.get("disabled")) %>'
+				field="<%= field %>"
+				fieldParam='<%= (String)dynamicAttributes.get("fieldParam") %>'
+				format='<%= (Format)dynamicAttributes.get("format") %>'
+				formName='<%= (String)dynamicAttributes.get("formName") %>'
+				model="<%= model %>"
 			/>
-		</c:when>
-		<c:when test='<%= (model != null) && type.equals("assetTags") %>'>
-			<liferay-ui:asset-tags-selector
-				className="<%= model.getName() %>"
-				classPK="<%= _getClassPK(bean) %>"
-				contentCallback='<%= portletResponse.getNamespace() + "getSuggestionsContent" %>'
-			/>
-		</c:when>
-		<c:when test="<%= (model != null) && Validator.isNull(type) %>">
-			<span class="exp-form-field exp-form-<%= ModelHintsUtil.getType(model.getName(), field).toLowerCase() %>">
-				<liferay-ui:input-field
-					bean="<%= bean %>"
-					defaultValue='<%= value %>'
-					disabled='<%= GetterUtil.getBoolean((String)dynamicAttributes.get("disabled")) %>'
-					field="<%= field %>"
-					fieldParam='<%= (String)dynamicAttributes.get("fieldParam") %>'
-					format='<%= (Format)dynamicAttributes.get("format") %>'
-					formName='<%= (String)dynamicAttributes.get("formName") %>'
-					model="<%= model %>"
-				/>
-			</span>
-		</c:when>
-		<c:when test='<%= type.equals("checkbox") %>'>
-			<span class="exp-form-field exp-form-checkbox">
-
-				<%
-				boolean booleanValue = false;
-
-				if (value != null) {
-					booleanValue = GetterUtil.getBoolean(value.toString());
-				}
-
-				booleanValue = ParamUtil.getBoolean(request, name, booleanValue);
-				%>
-
-				<input id="<%= id %>" name="<%= name %>" type="hidden" value="<%= value %>" />
-
-				<input <%= booleanValue ? "checked" : StringPool.BLANK %> id="<%= id %>Checkbox" name="<%=name %>Checkbox" onclick="jQuery(this).prev().val(this.checked);" type="checkbox" <%= _buildDynamicAttributes(dynamicAttributes) %> />
-			</span>
-		</c:when>
-		<c:otherwise>
+		</span>
+	</c:when>
+	<c:when test='<%= type.equals("checkbox") %>'>
+		<span class="exp-form-field exp-form-checkbox">
 
 			<%
-			if (Validator.isNull(type)) {
-				type = "text";
+			boolean booleanValue = false;
+
+			if (value != null) {
+				booleanValue = GetterUtil.getBoolean(value.toString());
 			}
+
+			booleanValue = ParamUtil.getBoolean(request, name, booleanValue);
 			%>
 
-			<c:if test="<%= !type.equals("hidden") %>">
-				<span class="exp-form-field exp-form-<%= type %>">
-			</c:if>
+			<input id="<%= id %>" name="<%= name %>" type="hidden" value="<%= value %>" />
 
-				<%
-				String valueString = StringPool.BLANK;
+			<input <%= booleanValue ? "checked" : StringPool.BLANK %> id="<%= id %>Checkbox" name="<%=name %>Checkbox" onclick="jQuery(this).prev().val(this.checked);" type="checkbox" <%= _buildDynamicAttributes(dynamicAttributes) %> />
+		</span>
+	</c:when>
+	<c:otherwise>
 
-				if (value != null) {
-					valueString = valueString.toString();
+		<%
+		if (Validator.isNull(type)) {
+			type = "text";
+		}
+		%>
 
-					if (type.equals("hidden")){
-						valueString = HtmlUtil.escapeAttribute(valueString);
-					}
-				}
-				%>
+		<c:if test="<%= !type.equals("hidden") %>">
+			<span class="exp-form-field exp-form-<%= type %>">
+		</c:if>
 
-				<input id="<%= id %>" name="<%= name %>" type="<%= type %>" value="<%= valueString %>" <%= _buildDynamicAttributes(dynamicAttributes) %> />
+		<%
+		String valueString = StringPool.BLANK;
 
-			<c:if test="<%= !type.equals("hidden") %>">
-				</span>
-			</c:if>
-		</c:otherwise>
-	</c:choose>
+		if (value != null) {
+			valueString = valueString.toString();
 
-	<c:if test="<%= Validator.isNotNull(label) && inlineLabel %>">
-		</label>
-	</c:if>
+			if (type.equals("hidden")){
+				valueString = HtmlUtil.escapeAttribute(valueString);
+			}
+		}
+		%>
+
+		<input id="<%= id %>" name="<%= name %>" type="<%= type %>" value="<%= valueString %>" <%= _buildDynamicAttributes(dynamicAttributes) %> />
+
+		<c:if test="<%= !type.equals("hidden") %>">
+			</span>
+		</c:if>
+	</c:otherwise>
+</c:choose>
+
+<c:if test="<%= Validator.isNotNull(label) && inlineLabel %>">
+	</label>
+</c:if>
 
 <c:if test="<%= !type.equals("hidden") %>">
 	</div>
