@@ -51,20 +51,22 @@ if ((type.equals("assetCategories")) || (type.equals("assetTags")) ||
 }
 %>
 
-<div class="exp-ctrl-holder <%= cssClass %> <%= first ? "exp-first" : StringPool.BLANK %> <%= last ? "exp-last" : StringPool.BLANK %>">
-	<c:if test="<%= Validator.isNotNull(label) %>">
-		<label class="exp-form-label <%= inlineLabel ? "inline-label" : StringPool.BLANK %>" <%= showForLabel ? "for=\"" + name + "\"" : StringPool.BLANK %>>
+<c:if test="<%= !type.equals("hidden") %>">
+	<div class="exp-ctrl-holder <%= cssClass %> <%= first ? "exp-first" : StringPool.BLANK %> <%= last ? "exp-last" : StringPool.BLANK %>">
+		<c:if test="<%= Validator.isNotNull(label) %>">
+			<label class="exp-form-label <%= inlineLabel ? "inline-label" : StringPool.BLANK %>" <%= showForLabel ? "for=\"" + name + "\"" : StringPool.BLANK %>>
 
-		<liferay-ui:message key="<%= label %>" />
+			<liferay-ui:message key="<%= label %>" />
 
-		<c:if test="<%= Validator.isNotNull(helpMessage) %>">
-			<liferay-ui:icon-help message="<%= helpMessage %>" />
+			<c:if test="<%= Validator.isNotNull(helpMessage) %>">
+				<liferay-ui:icon-help message="<%= helpMessage %>" />
+			</c:if>
+
+			<c:if test="<%= !inlineLabel %>">
+				</label>
+			</c:if>
 		</c:if>
-
-		<c:if test="<%= !inlineLabel %>">
-			</label>
-		</c:if>
-	</c:if>
+</c:if>
 
 	<c:choose>
 		<c:when test='<%= (model != null) && type.equals("assetCategories") %>'>
@@ -121,25 +123,37 @@ if ((type.equals("assetCategories")) || (type.equals("assetTags")) ||
 			}
 			%>
 
-			<span class="exp-form-field exp-form-<%= type %>">
+			<c:if test="<%= !type.equals("hidden") %>">
+				<span class="exp-form-field exp-form-<%= type %>">
+			</c:if>
 
 				<%
 				String valueString = StringPool.BLANK;
 
 				if (value != null) {
 					valueString = valueString.toString();
+
+					if (type.equals("hidden")){
+						valueString = HtmlUtil.escapeAttribute(valueString);
+					}
 				}
 				%>
 
-				<input id="<%= id %>" name="<%= name %>" type="<%= type %> " value="<%= valueString %>" <%= _buildDynamicAttributes(dynamicAttributes) %> />
-			</span>
+				<input id="<%= id %>" name="<%= name %>" type="<%= type %>" value="<%= valueString %>" <%= _buildDynamicAttributes(dynamicAttributes) %> />
+
+			<c:if test="<%= !type.equals("hidden") %>">
+				</span>
+			</c:if>
 		</c:otherwise>
 	</c:choose>
 
 	<c:if test="<%= Validator.isNotNull(label) && inlineLabel %>">
 		</label>
 	</c:if>
-</div>
+
+<c:if test="<%= !type.equals("hidden") %>">
+	</div>
+</c:if>
 
 <%!
 private long _getClassPK(BaseModel bean) {
