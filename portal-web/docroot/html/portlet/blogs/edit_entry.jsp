@@ -187,11 +187,11 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 </portlet:actionURL>
 
 <aui:form action="<%= editEntryURL %>" method="post" name="fm" onSubmit='<%= renderResponse.getNamespace() + "saveEntry(false); return false;" %>'>
-	<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
-	<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(redirect) %>" />
-	<input name="<portlet:namespace />referringPortletResource" type="hidden" value="<%= HtmlUtil.escapeAttribute(referringPortletResource) %>" />
-	<input name="<portlet:namespace />entryId" type="hidden" value="<%= entryId %>" />
-	<input name="<portlet:namespace />draft" type="hidden" value="0" />
+	<aui:input name="<%= Constants.CMD %>" type="hidden" />
+	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
+	<aui:input name="referringPortletResource" type="hidden" value="<%= referringPortletResource %>" />
+	<aui:input name="entryId" type="hidden" value="<%= entryId %>" />
+	<aui:input name="draft" type="hidden" value="0" />
 
 	<liferay-ui:error exception="<%= EntryTitleException.class %>" message="please-enter-a-valid-title" />
 	<liferay-ui:asset-tags-error />
@@ -216,7 +216,7 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 		<aui:field-wrapper label="content">
 			<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" />
 
-			<input name="<portlet:namespace />content" type="hidden" value="" />
+			<aui:input name="content" type="hidden" />
 		</aui:field-wrapper>
 
 		<c:if test="<%= PropsValues.BLOGS_TRACKBACK_ENABLED %>">
@@ -252,7 +252,7 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 		<aui:button-row>
 			<aui:button name="saveButton" type="submit" value='<%= ((entry == null) || entry.isDraft()) ? "publish" : "save" %>' />
 
-			<aui:button name="cancelButton" type="button" value="cancel" />
+			<aui:button name="cancelButton" onClick="<%= redirect %>" type="button" value="cancel" />
 		</aui:button-row>
 	</aui:fieldset>
 </aui:form>
