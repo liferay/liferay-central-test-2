@@ -406,6 +406,7 @@ create unique index IX_67DE7856 on Resource_ (codeId, primKey);
 create index IX_449A10B9 on Role_ (companyId);
 create unique index IX_A88E424E on Role_ (companyId, classNameId, classPK);
 create unique index IX_EBC931B8 on Role_ (companyId, name);
+create index IX_5EB4E2FB on Role_ (subtype);
 create index IX_CBE204 on Role_ (type_, subtype);
 
 create index IX_7A3619C6 on Roles_Permissions (permissionId);

@@ -166,6 +166,19 @@ public class ResourcePermissionLocalServiceUtil {
 			actionId);
 	}
 
+	public static void mergePermissions(long fromRoleId, long toRoleId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		getService().mergePermissions(fromRoleId, toRoleId);
+	}
+
+	public static void reassignPermissions(long resourcePermissionId,
+		long toRoleId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		getService().reassignPermissions(resourcePermissionId, toRoleId);
+	}
+
 	public static void removeResourcePermission(long companyId,
 		java.lang.String name, int scope, java.lang.String primKey,
 		long roleId, java.lang.String actionId)

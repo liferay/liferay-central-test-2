@@ -40,11 +40,13 @@ import com.liferay.portal.model.PasswordPolicy;
 import com.liferay.portal.model.Permission;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletConstants;
+import com.liferay.portal.model.ResourceAction;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.service.PortletLocalServiceUtil;
+import com.liferay.portal.service.ResourceActionLocalServiceUtil;
 import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
@@ -131,6 +133,32 @@ public class ResourceActionsUtil {
 		}
 
 		return actions;
+	}
+
+	public static List<String> getActionsNames(
+		PageContext pageContext, String name, long actionIds) {
+
+		try {
+			List<ResourceAction> resourceActions =
+				ResourceActionLocalServiceUtil.getResourceActions(name);
+
+			List<String> actions = new ArrayList<String>();
+
+			for (ResourceAction resourceAction : resourceActions) {
+				long bitwiseValue = resourceAction.getBitwiseValue();
+
+				if ((actionIds & bitwiseValue) == bitwiseValue) {
+					actions.add(resourceAction.getActionId());
+				}
+			}
+
+			return getActionsNames(pageContext, actions);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			return Collections.EMPTY_LIST;
+		}
 	}
 
 	public static List<String> getActionsNames(

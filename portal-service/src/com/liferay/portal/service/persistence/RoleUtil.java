@@ -144,6 +144,24 @@ public class RoleUtil {
 				   .findByCompanyId_PrevAndNext(roleId, companyId, obc);
 	}
 
+	public static com.liferay.portal.model.Role findBySubtype(
+		java.lang.String subtype)
+		throws com.liferay.portal.NoSuchRoleException,
+			com.liferay.portal.SystemException {
+		return getPersistence().findBySubtype(subtype);
+	}
+
+	public static com.liferay.portal.model.Role fetchBySubtype(
+		java.lang.String subtype) throws com.liferay.portal.SystemException {
+		return getPersistence().fetchBySubtype(subtype);
+	}
+
+	public static com.liferay.portal.model.Role fetchBySubtype(
+		java.lang.String subtype, boolean retrieveFromCache)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().fetchBySubtype(subtype, retrieveFromCache);
+	}
+
 	public static com.liferay.portal.model.Role findByC_N(long companyId,
 		java.lang.String name)
 		throws com.liferay.portal.NoSuchRoleException,
@@ -259,6 +277,12 @@ public class RoleUtil {
 		getPersistence().removeByCompanyId(companyId);
 	}
 
+	public static void removeBySubtype(java.lang.String subtype)
+		throws com.liferay.portal.NoSuchRoleException,
+			com.liferay.portal.SystemException {
+		getPersistence().removeBySubtype(subtype);
+	}
+
 	public static void removeByC_N(long companyId, java.lang.String name)
 		throws com.liferay.portal.NoSuchRoleException,
 			com.liferay.portal.SystemException {
@@ -284,6 +308,11 @@ public class RoleUtil {
 	public static int countByCompanyId(long companyId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByCompanyId(companyId);
+	}
+
+	public static int countBySubtype(java.lang.String subtype)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countBySubtype(subtype);
 	}
 
 	public static int countByC_N(long companyId, java.lang.String name)

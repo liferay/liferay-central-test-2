@@ -163,14 +163,24 @@ editPermissionsURL.setParameter("roleId", String.valueOf(role.getRoleId()));
 	}
 </script>
 
-<liferay-util:include page="/html/portlet/enterprise_admin/role/toolbar.jsp">
-	<liferay-util:param name="toolbarItem" value='<%= (role == null) ? "add" : "view-all" %>' />
-	<liferay-util:param name="backURL" value="<%= backURL %>" />
-</liferay-util:include>
+<c:choose>
+	<c:when test="<%= !portletName.equals(PortletKeys.ADMIN_SERVER) %>">
+		<liferay-util:include page="/html/portlet/enterprise_admin/role/toolbar.jsp">
+			<liferay-util:param name="toolbarItem" value='<%= (role == null) ? "add" : "view-all" %>' />
+			<liferay-util:param name="backURL" value="<%= backURL %>" />
+		</liferay-util:include>
 
-<liferay-util:include page="/html/portlet/enterprise_admin/edit_role_tabs.jsp">
-	<liferay-util:param name="tabs1" value="define-permissions" />
-</liferay-util:include>
+		<liferay-util:include page="/html/portlet/enterprise_admin/edit_role_tabs.jsp">
+			<liferay-util:param name="tabs1" value="define-permissions" />
+		</liferay-util:include>
+	</c:when>
+	<c:otherwise>
+		<%
+		request.setAttribute("edit_role_permissions.jsp-role", role);
+		request.setAttribute("edit_role_permissions.jsp-portletResource", portletResource);
+		%>
+	</c:otherwise>
+</c:choose>
 
 <liferay-ui:success key="permissionDeleted" message="the-permission-was-deleted" />
 <liferay-ui:success key="permissionsUpdated" message="the-role-permissions-were-updated" />
@@ -180,6 +190,12 @@ editPermissionsURL.setParameter("roleId", String.valueOf(role.getRoleId()));
 <c:choose>
 	<c:when test="<%= cmd.equals(Constants.VIEW) %>">
 		<liferay-util:include page="/html/portlet/enterprise_admin/edit_role_permissions_summary.jsp" />
+
+		<c:if test="<%= portletName.equals(PortletKeys.ADMIN_SERVER) %>">
+			<br />
+
+			<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
+		</c:if>
 	</c:when>
 	<c:otherwise>
 		<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_role_permissions" /></portlet:actionURL>" id="<portlet:namespace />fm" method="post" name="<portlet:namespace />fm">

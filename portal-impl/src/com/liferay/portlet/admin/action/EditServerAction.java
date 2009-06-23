@@ -23,6 +23,7 @@
 package com.liferay.portlet.admin.action;
 
 import com.liferay.mail.service.MailServiceUtil;
+import com.liferay.portal.convert.ConvertProcess;
 import com.liferay.portal.kernel.cache.CacheRegistry;
 import com.liferay.portal.kernel.cache.MultiVMPoolUtil;
 import com.liferay.portal.kernel.log.Log;
@@ -34,6 +35,7 @@ import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
+import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -53,6 +55,8 @@ import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.ShutdownUtil;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.ActionRequestImpl;
+import com.liferay.portlet.PortletURLImpl;
 import com.liferay.util.log4j.Log4JUtil;
 
 import java.util.Enumeration;
@@ -62,7 +66,9 @@ import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletPreferences;
+import javax.portlet.PortletRequest;
 import javax.portlet.PortletSession;
+import javax.portlet.WindowState;
 
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
@@ -101,6 +107,8 @@ public class EditServerAction extends PortletAction {
 
 		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
+		String redirect = null;
+
 		if (cmd.equals("addLogLevel")) {
 			addLogLevel(actionRequest);
 		}
@@ -114,7 +122,19 @@ public class EditServerAction extends PortletAction {
 			cacheSingle();
 		}
 		else if (cmd.startsWith("convertProcess.")) {
-			convertProcess(actionRequest, cmd);
+			String path = convertProcess(actionRequest, cmd);
+
+			if (path != null) {
+				PortletURLImpl portletURL = new PortletURLImpl(
+					(ActionRequestImpl)actionRequest,
+					portletConfig.getPortletName(), themeDisplay.getPlid(),
+					PortletRequest.RENDER_PHASE);
+
+				portletURL.setWindowState(WindowState.MAXIMIZED);
+				portletURL.setParameter("struts_action", path);
+
+				redirect = portletURL.toString();
+			}
 		}
 		else if (cmd.equals("gc")) {
 			gc();
@@ -141,7 +161,7 @@ public class EditServerAction extends PortletAction {
 			updateOpenOffice(actionRequest, preferences);
 		}
 
-		sendRedirect(actionRequest, actionResponse);
+		sendRedirect(actionRequest, actionResponse, redirect);
 	}
 
 	protected void addLogLevel(ActionRequest actionRequest) throws Exception {
@@ -165,7 +185,7 @@ public class EditServerAction extends PortletAction {
 		WebCachePoolUtil.clear();
 	}
 
-	protected void convertProcess(ActionRequest actionRequest, String cmd)
+	protected String convertProcess(ActionRequest actionRequest, String cmd)
 		throws Exception {
 
 		PortletSession portletSession = actionRequest.getPortletSession();
@@ -173,9 +193,19 @@ public class EditServerAction extends PortletAction {
 		String className = StringUtil.replaceFirst(
 			cmd, "convertProcess.", StringPool.BLANK);
 
-		MaintenanceUtil.maintain(portletSession.getId(), className);
+		ConvertProcess convertProcess = (ConvertProcess)InstancePool.get(
+			className);
 
-		MessageBusUtil.sendMessage(DestinationNames.CONVERT_PROCESS, className);
+		String path = convertProcess.getPath();
+
+		if (path == null) {
+			MaintenanceUtil.maintain(portletSession.getId(), className);
+
+			MessageBusUtil.sendMessage(
+				DestinationNames.CONVERT_PROCESS, className);
+		}
+
+		return path;
 	}
 
 	protected void gc() throws Exception {
