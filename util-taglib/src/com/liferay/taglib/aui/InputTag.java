@@ -116,6 +116,10 @@ public class InputTag extends IncludeTag implements DynamicAttributes {
 		return EVAL_BODY_BUFFERED;
 	}
 
+	public void setBean(Object bean) {
+		_bean = bean;
+	}
+
 	public void setCssClass(String cssClass) {
 		_cssClass = cssClass;
 	}
@@ -152,6 +156,10 @@ public class InputTag extends IncludeTag implements DynamicAttributes {
 
 	public void setLast(boolean last) {
 		_last = last;
+	}
+
+	public void setModel(Class<?> model) {
+		_model = model;
 	}
 
 	public void setName(String name) {
