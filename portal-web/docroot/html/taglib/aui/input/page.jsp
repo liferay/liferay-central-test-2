@@ -44,7 +44,7 @@ Object value = request.getAttribute("aui:input:value");
 
 boolean showForLabel = true;
 
-if ((type.equals("assetTags")) || (type.equals("assetCategories")) ||
+if ((type.equals("assetCategories")) || (type.equals("assetTags")) ||
 	((model != null) && (field != null) && Validator.equals(ModelHintsUtil.getType(model.getName(), field), Date.class.getName()))) {
 
 	showForLabel = false;
@@ -67,15 +67,15 @@ if ((type.equals("assetTags")) || (type.equals("assetCategories")) ||
 	</c:if>
 
 	<c:choose>
-		<c:when test='<%= (model != null) && type.equals("assetTags") %>'>
-			<liferay-ui:asset-tags-selector
+		<c:when test='<%= (model != null) && type.equals("assetCategories") %>'>
+			<liferay-ui:asset-categories-selector
 				className="<%= model.getName() %>"
 				classPK="<%= _getClassPK(bean) %>"
 				contentCallback='<%= portletResponse.getNamespace() + "getSuggestionsContent" %>'
 			/>
 		</c:when>
-		<c:when test='<%= (model != null) && type.equals("assetCategories") %>'>
-			<liferay-ui:asset-categories-selector
+		<c:when test='<%= (model != null) && type.equals("assetTags") %>'>
+			<liferay-ui:asset-tags-selector
 				className="<%= model.getName() %>"
 				classPK="<%= _getClassPK(bean) %>"
 				contentCallback='<%= portletResponse.getNamespace() + "getSuggestionsContent" %>'
@@ -142,18 +142,19 @@ if ((type.equals("assetTags")) || (type.equals("assetCategories")) ||
 </div>
 
 <%!
-private Long _getClassPK(BaseModel bean) {
+private long _getClassPK(BaseModel bean) {
 	long classPK = 0;
-		if (bean != null) {
-			Serializable primaryKeyObj = bean.getPrimaryKeyObj();
 
-			if (primaryKeyObj instanceof Long) {
-				classPK = (Long)primaryKeyObj;
-			}
-			else {
-				classPK = GetterUtil.getLong(primaryKeyObj.toString());
-			}
+	if (bean != null) {
+		Serializable primaryKeyObj = bean.getPrimaryKeyObj();
+
+		if (primaryKeyObj instanceof Long) {
+			classPK = (Long)primaryKeyObj;
 		}
+		else {
+			classPK = GetterUtil.getLong(primaryKeyObj.toString());
+		}
+	}
 
 	return classPK;
 }
