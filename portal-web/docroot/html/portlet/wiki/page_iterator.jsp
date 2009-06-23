@@ -317,7 +317,11 @@ for (int i = 0; i < results.size(); i++) {
 	WikiPage latestWikiPage = (WikiPage)results.get(1);
 	%>
 
-	<form action="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/wiki/compare_versions" /></portlet:renderURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />compare(); return false;">
+	<portlet:renderURL var="compareVersionsURL">
+		<portlet:param name="struts_action" value="/wiki/compare_versions" />
+	</portlet:renderURL>
+
+	<aui:form action="<%= compareVersionsURL %>" method="post" name="fm" onSubmit='<%= renderResponse.getNamespace() + "compare(); return false;" %>'>
 	<input name="<portlet:namespace />backURL" type="hidden" value="<%= HtmlUtil.escapeAttribute(currentURL) %>" />
 	<input name="<portlet:namespace />nodeId" type="hidden" value="<%= node.getNodeId() %>" />
 	<input name="<portlet:namespace />title" type="hidden" value="<%= HtmlUtil.escapeAttribute(wikiPage.getTitle()) %>" />
@@ -325,19 +329,25 @@ for (int i = 0; i < results.size(); i++) {
 	<input name="<portlet:namespace />targetVersion" type="hidden" value="<%= wikiPage.getVersion() %>" />
 	<input name="<portlet:namespace />type" type="hidden" value="html" />
 
-	<input type="submit" value="<liferay-ui:message key="compare-versions" />" />
+	<aui:button-row>
+		<aui:button name="submitButton" type="submit" value="compare-versions" />
+	</aui:button-row>
 
-	</form>
+	</aui:form>
 
-	<br />
 </c:if>
 
 <c:if test='<%= type.equals("all_pages") && WikiNodePermission.contains(permissionChecker, node.getNodeId(), ActionKeys.ADD_PAGE) %>'>
-	<div>
-		<input type="button" value="<liferay-ui:message key="add-page" />" onClick="location.href = '<portlet:renderURL><portlet:param name="struts_action" value="/wiki/edit_page" /><portlet:param name="nodeId" value="<%= String.valueOf(node.getNodeId()) %>" /><portlet:param name="editTitle" value="1" /></portlet:renderURL>'" />
-	</div>
 
-	<br />
+	<portlet:actionURL var="editPageURL">
+		<portlet:param name="struts_action" value="/wiki/edit_page" />
+		<portlet:param name="nodeId" value="<%= String.valueOf(node.getNodeId()) %>" />
+		<portlet:param name="editTitle" value="1" />
+	</portlet:actionURL>
+
+	<aui:button-row>
+		<aui:button name="addPageButton" onClick='<%= "location.href = \'" +  HtmlUtil.escape(editPageURL) + "\';" %>' type="button" value="add-page" />
+	</aui:button-row>
 </c:if>
 
 <liferay-ui:search-iterator searchContainer="<%= searchContainer %>" paginate='<%= type.equals("history") ? false : true %>' />

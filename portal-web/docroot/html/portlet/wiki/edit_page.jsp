@@ -210,7 +210,11 @@ if (Validator.isNull(redirect)) {
 	}
 </script>
 
-<form action="<portlet:actionURL><portlet:param name="struts_action" value="/wiki/edit_page" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />savePage(); return false;">
+<portlet:actionURL var="editPageActionURL">
+	<portlet:param name="struts_action" value="/wiki/edit_page" />
+</portlet:actionURL>
+
+<aui:form action="<%= editPageActionURL %>" method="post" name="fm" onSubmit='<%= renderResponse.getNamespace() + "savePage(); return false;" %>'>
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(redirect) %>" />
 <input name="<portlet:namespace />originalRedirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(originalRedirect) %>" />
@@ -254,61 +258,39 @@ if (Validator.isNull(redirect)) {
 </c:if>
 
 <c:if test="<%= editable %>">
-	<table class="lfr-table">
+	<aui:fieldset>
+		<c:if test="<%= editTitle %>">
+			<aui:input name="title" size="30" value="<%= title %>" />
+		</c:if>
 
-	<c:if test="<%= editTitle %>">
-		<tr>
-			<td class="lfr-label">
-				<liferay-ui:message key="title" />
-			</td>
-			<td>
-				<input name="<portlet:namespace />title" size="30" type="text" value="<%= title %>" />
-			</td>
-		</tr>
-	</c:if>
-
-	<c:if test="<%= Validator.isNotNull(parentTitle) %>">
-		<tr>
-			<td>
-				<liferay-ui:message key="parent" />
-			</td>
-			<td>
+		<c:if test="<%= Validator.isNotNull(parentTitle) %>">
+			<aui:field-wrapper label="parent">
 				<%= parentTitle %>
-			</td>
-		</tr>
-	</c:if>
+			</aui:field-wrapper>
+		</c:if>
 
-	<c:choose>
-		<c:when test="<%= (WikiPageImpl.FORMATS.length > 1) %>">
-			<tr>
-				<td class="lfr-label">
-					<liferay-ui:message key="format" />
-				</td>
-				<td>
-					<select name="<portlet:namespace />format" onChange="<portlet:namespace />changeFormat(this);">
+		<c:choose>
+			<c:when test="<%= (WikiPageImpl.FORMATS.length > 1) %>">
+				<aui:select name="format" onChange='<%= renderResponse.getNamespace() + "changeFormat(this);" %>'>
 
-						<%
-						for (int i = 0; i < WikiPageImpl.FORMATS.length; i++) {
-						%>
+					<%
+					for (int i = 0; i < WikiPageImpl.FORMATS.length; i++) {
+					%>
 
-							<option <%= format.equals(WikiPageImpl.FORMATS[i]) ? "selected" : "" %> value="<%= WikiPageImpl.FORMATS[i] %>"><%= LanguageUtil.get(pageContext, "wiki.formats." + WikiPageImpl.FORMATS[i]) %></option>
+						<aui:option selected="<%= format.equals(WikiPageImpl.FORMATS[i]) %>" value="<%= WikiPageImpl.FORMATS[i] %>"><%= LanguageUtil.get(pageContext, "wiki.formats." + WikiPageImpl.FORMATS[i]) %></aui:option>
 
-						<%
-						}
-						%>
+					<%
+					}
+					%>
 
-					</select>
-				</td>
-			</tr>
-		</c:when>
-		<c:otherwise>
-			<input name="<portlet:namespace />format" type="hidden" value="<%= format %>" />
-		</c:otherwise>
-	</c:choose>
+				</aui:select>
 
-	</table>
-
-	<br />
+			</c:when>
+			<c:otherwise>
+				<aui:input name="format" value="<%= format %>" />
+			</c:otherwise>
+		</c:choose>
+	</aui:fieldset>
 
 	<div>
 
@@ -319,16 +301,9 @@ if (Validator.isNull(redirect)) {
 		<liferay-util:include page="<%= WikiUtil.getEditPage(format) %>" />
 	</div>
 
-	<br />
-
-	<table class="lfr-table">
-
-	<c:if test="<%= attachments.length > 0 %>">
-		<tr>
-			<td>
-				<liferay-ui:message key="attachments" />
-			</td>
-			<td>
+	<aui:fieldset>
+		<c:if test="<%= attachments.length > 0 %>">
+			<aui:field-wrapper label="attachments">
 
 				<%
 				for (int i = 0; i < attachments.length; i++) {
@@ -342,98 +317,50 @@ if (Validator.isNull(redirect)) {
 				}
 				%>
 
-			</td>
-		</tr>
-		<tr>
-			<td colspan="2">
-				<br />
-			</td>
-		</tr>
-	</c:if>
+			</aui:field-wrapper>
+		</c:if>
 
-	<%
-	long classPK = 0;
+		<%
+		WikiPage bean = null;
 
-	if (!newPage) {
-		classPK = wikiPage.getResourcePrimKey();
-	}
-	else if (Validator.isNotNull(templatePage)) {
-		classPK = templatePage.getResourcePrimKey();
-	}
-	%>
+		if (!newPage) {
+			bean = wikiPage;
+		}
+		else if (Validator.isNotNull(templatePage)) {
+			bean = templatePage;
+		}
+		%>
 
-	<tr>
-		<td>
-			<liferay-ui:message key="categories" />
-		</td>
-		<td>
-			<liferay-ui:asset-categories-selector
-				className="<%= WikiPage.class.getName() %>"
-				classPK="<%= classPK %>"
-			/>
-		</td>
-	</tr>
-	<tr>
-		<td colspan="2">
-			<br />
-		</td>
-	</tr>
-	<tr>
-		<td class="lfr-label">
-			<liferay-ui:message key="tags" />
-		</td>
-		<td>
-			<liferay-ui:asset-tags-selector
-				className="<%= WikiPage.class.getName() %>"
-				classPK="<%= classPK %>"
-				contentCallback='<%= renderResponse.getNamespace() + "getSuggestionsContent" %>'
-			/>
-		</td>
-	</tr>
-	<tr>
-		<td colspan="2">
-			<br />
-		</td>
-	</tr>
-	<tr>
-		<td class="lfr-label">
-			<liferay-ui:message key="summary" />
-		</td>
-		<td>
-			<liferay-ui:input-field model="<%= WikiPage.class %>" field="summary" />
-		</td>
-	</tr>
-	<tr>
-		<td colspan="2">
-			<br />
-		</td>
-	</tr>
-	<tr>
-		<td colspan="2">
-			<liferay-ui:input-field model="<%= WikiPage.class %>" field="minorEdit" />
+		<aui:model-context bean="<%= bean %>" model="<%= WikiPage.class %>" />
 
-			<liferay-ui:message key="this-is-a-minor-edit" />
-		</td>
-	</tr>
-	</table>
+		<aui:input name="categories" type="assetCategories" />
 
-	<br />
+		<aui:input name="tags" type="assetTags" />
 
-	<input type="submit" value="<liferay-ui:message key="save" />" />
+		<aui:model-context bean="<%= new WikiPageImpl() %>" model="<%= WikiPage.class %>" />
 
-	<input type="button" value="<liferay-ui:message key="save-and-continue" />" onClick="<portlet:namespace />saveAndContinuePage();" />
+		<aui:input name="summary" />
 
-	<input type="button" value="<liferay-ui:message key="preview" />" onClick="<portlet:namespace />previewPage();" />
+		<aui:input inlineLabel="true" label="this-is-a-minor-edit" name="minorEdit" />
 
-	<input type="button" value="<liferay-ui:message key="cancel" />" onClick="document.location = '<%= HtmlUtil.escape(redirect) %>'" />
+		<aui:button-row>
+			<aui:button name="saveButton" type="submit" value="save" />
 
-	</form>
+			<aui:button name="saveAndContinueButton" onClick='<%= renderResponse.getNamespace() + "saveAndContinuePage();" %>' type="button" value="save-and-continue" />
 
-	<c:if test="<%= !preview %>">
-		<script type="text/javascript">
-			if (!window.<portlet:namespace />editor) {
-				Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace /><%= editTitle ? "title" : "content" %>);
-			}
-		</script>
-	</c:if>
+			<aui:button name="previewButton" onClick='<%= renderResponse.getNamespace() + "previewPage();" %>' type="button" value="preview" />
+
+			<aui:button name="cancelButton" onClick='<%= "location.href = \'" + HtmlUtil.escape(redirect) + "\';" %>' type="button" value="cancel" />
+		</aui:button-row>
+	</aui:fieldset>
+</c:if>
+
+</aui:form>
+
+<c:if test="<%= editable && !preview %>">
+	<script type="text/javascript">
+		if (!window.<portlet:namespace />editor) {
+			Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace /><%= editTitle ? "title" : "content" %>);
+		}
+	</script>
 </c:if>

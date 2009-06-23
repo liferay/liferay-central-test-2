@@ -47,9 +47,11 @@ List results = WikiNodeLocalServiceUtil.getNodes(scopeGroupId, searchContainer.g
 searchContainer.setResults(results);
 %>
 
-<liferay-portlet:renderURL varImpl="searchURL"><portlet:param name="struts_action" value="/wiki/search" /></liferay-portlet:renderURL>
+<liferay-portlet:renderURL varImpl="searchURL">
+	<portlet:param name="struts_action" value="/wiki/search" />
+</liferay-portlet:renderURL>
 
-<form action="<%= searchURL %>" method="get" name="<portlet:namespace />fm">
+<aui:form action="<%= searchURL %>" method="get" name="fm">
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(currentURL) %>" />
 
 <%
@@ -99,30 +101,36 @@ boolean showAddNodeButton = WikiPermission.contains(permissionChecker, scopeGrou
 boolean showPermissionsButton = GroupPermissionUtil.contains(permissionChecker, scopeGroupId, ActionKeys.PERMISSIONS);
 %>
 
-<c:if test="<%= showAddNodeButton || showPermissionsButton %>">
-	<div>
-		<c:if test="<%= showAddNodeButton %>">
-			<input type="button" value="<liferay-ui:message key="add-wiki" />" onClick="location.href = '<portlet:renderURL><portlet:param name="struts_action" value="/wiki/edit_node" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';" />
-		</c:if>
+<aui:fieldset>
+	<c:if test="<%= showAddNodeButton || showPermissionsButton %>">
+		<aui:button-row>
+			<c:if test="<%= showAddNodeButton %>">
 
-		<c:if test="<%= showPermissionsButton %>">
-			<liferay-security:permissionsURL
-				modelResource="com.liferay.portlet.wiki"
-				modelResourceDescription="<%= HtmlUtil.escape(themeDisplay.getScopeGroupName()) %>"
-				resourcePrimKey="<%= String.valueOf(scopeGroupId) %>"
-				var="permissionsURL"
-			/>
+				<portlet:renderURL var="editNodeURL">
+					<portlet:param name="struts_action" value="/wiki/edit_node" />
+					<portlet:param name="redirect" value="<%= currentURL %>" />
+				</portlet:renderURL>
 
-			<input type="button" value="<liferay-ui:message key="permissions" />" onClick="location.href = '<%= permissionsURL %>';" />
-		</c:if>
-	</div>
+				<aui:button name="addWikiButton" onClick='<%= "location.href = " +  HtmlUtil.escape(editNodeURL) + ";" %>' type="button" value="add-wiki" />
+			</c:if>
 
-	<br />
-</c:if>
+			<c:if test="<%= showPermissionsButton %>">
+				<liferay-security:permissionsURL
+					modelResource="com.liferay.portlet.wiki"
+					modelResourceDescription="<%= HtmlUtil.escape(themeDisplay.getScopeGroupName()) %>"
+					resourcePrimKey="<%= String.valueOf(scopeGroupId) %>"
+					var="permissionsURL"
+				/>
 
-<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+				<aui:button name="permissionsButton" onClick='<%= "location.href = \'" +  HtmlUtil.escape(permissionsURL) + "\';" %>' type="button" value="permissions" />
+			</c:if>
+		</aui:button-row>
 
-</form>
+	</c:if>
+
+	<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+</aui:fieldset>
+</aui:form>
 
 <c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 	<script type="text/javascript">

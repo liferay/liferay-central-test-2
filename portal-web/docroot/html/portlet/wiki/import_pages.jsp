@@ -49,7 +49,11 @@ portletURL.setParameter("redirect", redirect);
 portletURL.setParameter("nodeId", String.valueOf(nodeId));
 %>
 
-<form action="<portlet:actionURL><portlet:param name="struts_action" value="/wiki/import_pages" /></portlet:actionURL>" enctype="multipart/form-data" method="post" name="<portlet:namespace />fm">
+<portlet:actionURL var="importPagesURL">
+	<portlet:param name="struts_action" value="/wiki/import_pages" />
+</portlet:actionURL>
+
+<aui:form action="<%= importPagesURL %>" enctype="multipart/form-data" method="post" name="fm">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
 <input name="<portlet:namespace />importProgressId" type="hidden" value="<%= importProgressId %>" />
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(redirect) %>" />
@@ -72,13 +76,13 @@ portletURL.setParameter("nodeId", String.valueOf(nodeId));
 
 <liferay-util:include page="<%= PropsUtil.get(PropsKeys.WIKI_IMPORTERS_PAGE, new Filter(tabs2)) %>" />
 
-<br />
+<aui:button-row>
+	<aui:button name="saveButton" onClick='<%= uploadProgressId + ".startProgress(); " +  importProgressId + ".startProgress(); return true;" %>' type="submit" value="import" />
 
-<input type="submit" value="<liferay-ui:message key="import" />" onClick="<%= uploadProgressId %>.startProgress(); <%= importProgressId %>.startProgress(); return true;" />
+	<aui:button name="cancelButton" onClick='<%= "location.href = \'" +  HtmlUtil.escape(redirect) + "\';" %>' type="button" value="cancel"  />
+</aui:button-row>
 
-<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
-
-</form>
+</aui:form>
 
 <liferay-ui:upload-progress
 	id="<%= uploadProgressId %>"
