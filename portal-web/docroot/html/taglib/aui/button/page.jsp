@@ -28,15 +28,15 @@
 String cssClass = GetterUtil.getString((String)request.getAttribute("aui:button:cssClass"));
 Map<String, Object> dynamicAttributes = (Map<String, Object>)request.getAttribute("aui:button:dynamicAttributes");
 String name = namespace + GetterUtil.getString((String)request.getAttribute("aui:button:name"));
-String onClick = (String)request.getAttribute("aui:button:onClick");
+String onClick = GetterUtil.getString((String)request.getAttribute("aui:button:onClick"));
 String type = GetterUtil.getString((String)request.getAttribute("aui:button:type"));
 String value = (String)request.getAttribute("aui:button:value");
 
-if (onClick != null && (onClick.startsWith("http://") || onClick.startsWith("https://"))) {
+if (onClick.startsWith(Http.HTTP_WITH_SLASH) || onClick.startsWith(Http.HTTPS_WITH_SLASH)) {
 	onClick = "location.href = '" +  HtmlUtil.escape(onClick) + "';";
 }
 %>
 
 <span class="exp-form-button <%= !type.equals("button") ? "exp-form-" + type : StringPool.BLANK %> <%= cssClass %>">
-	<input id="<%= name %>" <%= onClick != null ? "onClick=\"" + onClick + "\"" : StringPool.BLANK %> type="<%= type %>" value="<%= LanguageUtil.get(pageContext, value) %>" <%= _buildDynamicAttributes(dynamicAttributes) %>>
+	<input id="<%= name %>" <%= Validator.isNotNull(onClick) ? "onClick=\"" + onClick + "\"" : StringPool.BLANK %> type="<%= type %>" value="<%= LanguageUtil.get(pageContext, value) %>" <%= _buildDynamicAttributes(dynamicAttributes) %>>
 </span>
