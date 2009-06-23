@@ -86,7 +86,7 @@ if (curTagsParam != null) {
 				}
 			);
 
-			jQuery("#<%= randomNamespace %>tags").keyup(
+			jQuery("#<%= randomNamespace %>assetTagNames").keyup(
 				function() {
 					var addTagInput = jQuery("#<%= randomNamespace %>addTag");
 
