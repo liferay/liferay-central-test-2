@@ -43,7 +43,7 @@ AssetEntryType[] assetEntryTypes = AssetEntryServiceUtil.getEntryTypes(themeDisp
 </tr>
 <tr id="<portlet:namespace />classNameId">
 	<td>
-		<liferay-ui:message key="asset-type" /> <liferay-ui:icon-help message="the-count-of-assets-with-this-tag-will-only-consider-assets-of-the-selected-type" />
+		<liferay-ui:message key="asset-type" /> <liferay-ui:icon-help message="asset-type-asset-count-help" />
 	</td>
 	<td>
 		<select id="<portlet:namespace />classNameId" name="<portlet:namespace />classNameId">
