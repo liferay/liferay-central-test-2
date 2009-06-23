@@ -51,7 +51,7 @@ if ((type.equals("assetCategories")) || (type.equals("assetTags")) ||
 }
 %>
 
-<c:if test="<%= !type.equals("hidden") %>">
+<c:if test='<%= !type.equals("hidden") %>'>
 	<div class="exp-ctrl-holder <%= cssClass %> <%= first ? "exp-first" : StringPool.BLANK %> <%= last ? "exp-last" : StringPool.BLANK %>">
 		<c:if test="<%= Validator.isNotNull(label) %>">
 			<label class="exp-form-label <%= inlineLabel ? "inline-label" : StringPool.BLANK %>" <%= showForLabel ? "for=\"" + name + "\"" : StringPool.BLANK %>>
@@ -123,7 +123,7 @@ if ((type.equals("assetCategories")) || (type.equals("assetTags")) ||
 		}
 		%>
 
-		<c:if test="<%= !type.equals("hidden") %>">
+		<c:if test='<%= !type.equals("hidden") %>'>
 			<span class="exp-form-field exp-form-<%= type %>">
 		</c:if>
 
@@ -141,7 +141,7 @@ if ((type.equals("assetCategories")) || (type.equals("assetTags")) ||
 
 		<input id="<%= id %>" name="<%= name %>" type="<%= type %>" value="<%= valueString %>" <%= _buildDynamicAttributes(dynamicAttributes) %> />
 
-		<c:if test="<%= !type.equals("hidden") %>">
+		<c:if test='<%= !type.equals("hidden") %>'>
 			</span>
 		</c:if>
 	</c:otherwise>
@@ -151,7 +151,7 @@ if ((type.equals("assetCategories")) || (type.equals("assetTags")) ||
 	</label>
 </c:if>
 
-<c:if test="<%= !type.equals("hidden") %>">
+<c:if test='<%= !type.equals("hidden") %>'>
 	</div>
 </c:if>
 
