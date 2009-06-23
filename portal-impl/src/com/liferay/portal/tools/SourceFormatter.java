@@ -217,9 +217,15 @@ public class SourceFormatter {
 			String jspVariable = matcher.group(1);
 
 			String inputVulnerability =
-				" type=\"hidden\" value=\"<%= " + jspVariable + " %>";
+				"<input[^>]* value=\"<%= " + jspVariable + " %>";
 
-			if (jspContent.indexOf(inputVulnerability) != -1) {
+			Pattern inputVulnerabilityPattern =
+				Pattern.compile(inputVulnerability, Pattern.CASE_INSENSITIVE);
+
+			Matcher inputVulnerabilityMatcher =
+				inputVulnerabilityPattern.matcher(jspContent);
+
+			if (inputVulnerabilityMatcher.find()) {
 				xssVulnerable = true;
 			}
 
