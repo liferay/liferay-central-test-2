@@ -64,8 +64,7 @@ public class OpenIdAutoLogin implements AutoLogin {
 
 			session.removeAttribute(WebKeys.OPEN_ID_LOGIN);
 
-			User user = UserLocalServiceUtil.getUserById(
-				userId.longValue());
+			User user = UserLocalServiceUtil.getUserById(userId);
 
 			credentials = new String[3];
 
