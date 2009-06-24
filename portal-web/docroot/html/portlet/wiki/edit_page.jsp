@@ -322,9 +322,9 @@ if (Validator.isNull(redirect)) {
 
 			<aui:model-context bean="<%= !newPage ? wikiPage : templatePage %>" model="<%= WikiPage.class %>" />
 
-			<aui:input name="categories" type="assetCategories" />
+			<aui:input classPK="<%= !newPage ? wikiPage.getResourcePrimKey() : templatePage.getResourcePrimKey() %>" name="categories" type="assetCategories" />
 
-			<aui:input name="tags" type="assetTags" />
+			<aui:input classPK="<%= !newPage ? wikiPage.getResourcePrimKey() : templatePage.getResourcePrimKey() %>" name="tags" type="assetTags" />
 
 			<aui:model-context bean="<%= new WikiPageImpl() %>" model="<%= WikiPage.class %>" />
 
