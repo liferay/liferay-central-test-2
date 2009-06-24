@@ -8,6 +8,11 @@ import com.liferay.portal.model.BaseModel;
 
 import java.util.Date;
 
+<#if entity.hasLocalizedColumn()>
+	import java.util.Locale;
+	import java.util.Map;
+</#if>
+
 /**
  * <a href="${entity.name}Model.java.html"><b><i>View Source</i></b></a>
  *
@@ -35,17 +40,48 @@ public interface ${entity.name}Model extends BaseModel<${entity.name}> {
 	public void setPrimaryKey(${entity.PKClassName} pk);
 
 	<#list entity.regularColList as column>
+        <#assign localized = false>
+		<#assign modelName = packagePath + ".model." + entity.name>
+
+		<#if modelHintsUtil.getHints(modelName, column.name)??>
+			<#assign hints = modelHintsUtil.getHints(modelName, column.name)>
+
+			<#if hints.get("localized")??>
+				<#assign localizedHintValue = hints.get("localized")>
+
+				<#if localizedHintValue == "true">
+					<#assign localized = true>
+				</#if>
+			</#if>
+		</#if>
+
 		<#if column.name == "classNameId">
 			public String getClassName();
 		</#if>
 
 		public ${column.type} get${column.methodName}();
 
+        <#if localized>
+			public ${column.type} get${column.methodName}(Locale locale);
+
+			public ${column.type} get${column.methodName}(Locale locale, boolean useDefault);
+
+			public ${column.type} get${column.methodName}(String localeLanguageId);
+
+			public String get${column.methodName}(String localeLanguageId, boolean useDefault);
+
+			public Map<Locale, String> get${column.methodName}sMap() ;
+		</#if>
+
 		<#if column.type == "boolean">
 			public boolean is${column.methodName}();
 		</#if>
 
 		public void set${column.methodName}(${column.type} ${column.name});
+
+        <#if localized>
+			public void set${column.methodName}(String localizedValue, Locale locale);
+		</#if>
 	</#list>
 
 	public ${entity.name} toEscapedModel();

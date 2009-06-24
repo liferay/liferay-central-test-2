@@ -28,6 +28,14 @@ import com.liferay.portal.util.PortalUtil;
 	import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
 </#if>
 
+<#if entity.hasLocalizedColumn()>
+	import com.liferay.portal.kernel.util.LocaleUtil;
+	import com.liferay.portal.kernel.util.Validator;
+	import com.liferay.util.LocalizationUtil;
+	import java.util.Locale;
+	import java.util.Map;
+</#if>
+
 import java.io.Serializable;
 
 import java.lang.reflect.Proxy;
@@ -206,6 +214,21 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> {
 	}
 
 	<#list entity.regularColList as column>
+		<#assign localized = false>
+		<#assign modelName = packagePath + ".model." + entity.name>
+
+		<#if modelHintsUtil.getHints(modelName, column.name)??>
+			<#assign hints = modelHintsUtil.getHints(modelName, column.name)>
+
+			<#if hints.get("localized")??>
+				<#assign localizedHintValue = hints.get("localized")>
+
+				<#if localizedHintValue == "true">
+					<#assign localized = true>
+				</#if>
+			</#if>
+		</#if>
+
 		<#if column.name == "classNameId">
 			public String getClassName() {
 				if (getClassNameId() <= 0) {
@@ -223,6 +246,34 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> {
 				return _${column.name};
 			</#if>
 		}
+
+		<#if localized>
+			public ${column.type} get${column.methodName}(Locale locale) {
+				String localeLanguageId = LocaleUtil.toLanguageId(locale);
+
+				return get${column.methodName}(localeLanguageId);
+			}
+
+			public ${column.type} get${column.methodName}(Locale locale, boolean useDefault) {
+				String localeLanguageId = LocaleUtil.toLanguageId(locale);
+
+				return get${column.methodName}(localeLanguageId, useDefault);
+			}
+
+			public ${column.type} get${column.methodName}(String localeLanguageId) {
+				return HtmlUtil.escape(LocalizationUtil.getLocalization(
+					get${column.methodName}(), localeLanguageId));
+			}
+
+			public String get${column.methodName}(String localeLanguageId, boolean useDefault) {
+				return HtmlUtil.escape(LocalizationUtil.getLocalization(
+					get${column.methodName}(), localeLanguageId, useDefault));
+			}
+
+			public Map<Locale, String> get${column.methodName}sMap() {
+				return LocalizationUtil.getLocalizedField(get${column.methodName}());
+			}
+		</#if>
 
 		<#if column.type== "boolean">
 			public ${column.type} is${column.methodName}() {
@@ -256,6 +307,24 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> {
 			</#if>
 		}
 
+		<#if localized>
+			public void set${column.methodName}(String localizedValue, Locale locale) {
+				String localeLanguageId = LocaleUtil.toLanguageId(locale);
+
+				if (Validator.isNotNull(localizedValue)) {
+					set${column.methodName}(
+						LocalizationUtil.updateLocalization(
+							get${column.methodName}(), "${column.methodName}", localizedValue,
+							localeLanguageId));
+				}
+				else {
+					set${column.methodName}(
+						LocalizationUtil.removeLocalization(
+							get${column.methodName}(), "${column.methodName}", localeLanguageId));
+				}
+			}
+		</#if>
+
 		<#if column.isFetchFinderPath() || ((parentPKColumn != "") && (parentPKColumn.name == column.name))>
 			public ${column.type} getOriginal${column.methodName}() {
 				<#if column.type == "String" && column.isConvertNull()>
@@ -284,6 +353,7 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> {
 					(${column.EJBName})get${column.methodName}().clone()
 				<#else>
 					<#assign autoEscape = true>
+					<#assign localized = false>
 
 					<#assign modelName = packagePath + ".model." + entity.name>
 
@@ -297,15 +367,23 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> {
 								<#assign autoEscape = false>
 							</#if>
 						</#if>
+
+						<#if hints.get("localized")??>
+							<#assign localizedHintValue = hints.get("localized")>
+
+							<#if localizedHintValue == "true">
+								<#assign localized = true>
+							</#if>
+						</#if>
 					</#if>
 
-					<#if autoEscape && (column.type == "String")>
+					<#if autoEscape && (column.type == "String") && !localized >
 						HtmlUtil.escape(
 					</#if>
 
 					get${column.methodName}()
 
-					<#if autoEscape && (column.type == "String")>
+					<#if autoEscape && (column.type == "String") && !localized >
 						)
 					</#if>
 				</#if>
