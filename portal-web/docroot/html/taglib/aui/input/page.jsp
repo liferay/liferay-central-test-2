@@ -49,12 +49,6 @@ if ((type.equals("assetCategories")) || (type.equals("assetTags")) ||
 
 	showForLabel = false;
 }
-
-long classPK = 0;
-	
-if (dynamicAttributes.get("classPK") != null) {
-	classPK = (Long)dynamicAttributes.get("classPK");
-};
 %>
 
 <c:if test='<%= !type.equals("hidden") %>'>
@@ -78,14 +72,14 @@ if (dynamicAttributes.get("classPK") != null) {
 	<c:when test='<%= (model != null) && type.equals("assetCategories") %>'>
 		<liferay-ui:asset-categories-selector
 			className="<%= model.getName() %>"
-			classPK="<%= _getClassPK(bean, classPK) %>"
+			classPK="<%= _getClassPK(bean, dynamicAttributes) %>"
 			contentCallback='<%= portletResponse.getNamespace() + "getSuggestionsContent" %>'
 		/>
 	</c:when>
 	<c:when test='<%= (model != null) && type.equals("assetTags") %>'>
 		<liferay-ui:asset-tags-selector
 			className="<%= model.getName() %>"
-			classPK="<%= _getClassPK(bean, classPK) %>"
+			classPK="<%= _getClassPK(bean, dynamicAttributes) %>"
 			contentCallback='<%= portletResponse.getNamespace() + "getSuggestionsContent" %>'
 		/>
 	</c:when>
@@ -162,12 +156,13 @@ if (dynamicAttributes.get("classPK") != null) {
 </c:if>
 
 <%!
-private long _getClassPK(BaseModel bean, long classPK) {
-	if (classPK != 0) {
-		return classPK;
-	}
+private long _getClassPK(BaseModel bean, Map<String, Object> dynamicAttributes) {
+	long classPK = 0;
 
-	if (bean != null) {
+	if (dynamicAttributes.get("classPK") != null) {
+		classPK = (Long)dynamicAttributes.get("classPK");
+	}
+	else if (bean != null) {
 		Serializable primaryKeyObj = bean.getPrimaryKeyObj();
 
 		if (primaryKeyObj instanceof Long) {
