@@ -25,12 +25,10 @@ package com.liferay.portal.tools.servicebuilder;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ModelHintsUtil;
 import com.liferay.util.TextFormatter;
 
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 /**
  * <a href="Entity.java.html"><b><i>View Source</i></b></a>
@@ -336,24 +334,6 @@ public class Entity {
 		else {
 			return true;
 		}
-	}
-
-	public boolean hasLocalizedColumn() {
-		for (EntityColumn column: _columnList) {
-			Map<String, String> hints = ModelHintsUtil.getHints(
-				_packagePath + ".model." + _name, column.getName());
-
-			if (hints != null) {
-				boolean localized = GetterUtil.getBoolean(
-					hints.get("localized"));
-
-				if (localized) {
-					return true;
-				}
-			}
-		}
-
-		return false;
 	}
 
 	public boolean hasLocalService() {
