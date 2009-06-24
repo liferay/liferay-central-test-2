@@ -46,14 +46,14 @@ public class DynamicServletRequest extends HttpServletRequestWrapper {
 		this(request, new HashMap<String, String[]>(), true);
 	}
 
+	public DynamicServletRequest(HttpServletRequest request, boolean inherit) {
+		this(request, new HashMap<String, String[]>(), inherit);
+	}
+
 	public DynamicServletRequest(
 		HttpServletRequest request, Map<String, String[]> params) {
 
 		this(request, params, true);
-	}
-
-	public DynamicServletRequest(HttpServletRequest request, boolean inherit) {
-		this(request, new HashMap<String, String[]>(), inherit);
 	}
 
 	public DynamicServletRequest(
@@ -98,6 +98,10 @@ public class DynamicServletRequest extends HttpServletRequestWrapper {
 				}
 			}
 		}
+	}
+
+	public Map<String, String[]> getDynamicParameterMap() {
+		return _params;
 	}
 
 	public String getParameter(String name) {
@@ -167,11 +171,7 @@ public class DynamicServletRequest extends HttpServletRequestWrapper {
 		_params.put(name, values);
 	}
 
-	public Map<String, String[]> getDynamicParameterMap() {
-		return _params;
-	}
-
-	private Map<String, String[]> _params;
 	private boolean _inherit;
+	private Map<String, String[]> _params;
 
 }
