@@ -55,28 +55,27 @@ public class PollsQuestionLocalServiceImpl
 	extends PollsQuestionLocalServiceBaseImpl {
 
 	public PollsQuestion addQuestion(
-			long userId, Map<Locale, String> localeTitleMap,
-			Map<Locale, String> localeDescriptionMap,
-			int expirationDateMonth, int expirationDateDay,
-			int expirationDateYear, int expirationDateHour,
-			int expirationDateMinute, boolean neverExpire,
-			List<PollsChoice> choices, ServiceContext serviceContext)
+			long userId, Map<Locale, String> titleMap,
+			Map<Locale, String> descriptionMap, int expirationDateMonth,
+			int expirationDateDay, int expirationDateYear,
+			int expirationDateHour, int expirationDateMinute,
+			boolean neverExpire, List<PollsChoice> choices,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		return addQuestion(
-			null, userId, localeTitleMap, localeDescriptionMap,
-			expirationDateMonth, expirationDateDay, expirationDateYear,
-			expirationDateHour, expirationDateMinute, neverExpire, choices,
-			serviceContext);
+			null, userId, titleMap, descriptionMap, expirationDateMonth,
+			expirationDateDay, expirationDateYear, expirationDateHour,
+			expirationDateMinute, neverExpire, choices, serviceContext);
 	}
 
 	public PollsQuestion addQuestion(
-			String uuid, long userId, Map<Locale, String> localeTitleMap,
-			Map<Locale, String> localeDescriptionMap,
-			int expirationDateMonth, int expirationDateDay,
-			int expirationDateYear, int expirationDateHour,
-			int expirationDateMinute, boolean neverExpire,
-			List<PollsChoice> choices, ServiceContext serviceContext)
+			String uuid, long userId, Map<Locale, String> titleMap,
+			Map<Locale, String> descriptionMap, int expirationDateMonth,
+			int expirationDateDay, int expirationDateYear,
+			int expirationDateHour, int expirationDateMinute,
+			boolean neverExpire, List<PollsChoice> choices,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Question
@@ -95,11 +94,7 @@ public class PollsQuestionLocalServiceImpl
 
 		Date now = new Date();
 
-		Locale defaultLocale = LocaleUtil.getDefault();
-
-		validate(
-			localeTitleMap.get(defaultLocale),
-			localeDescriptionMap.get(defaultLocale), choices);
+		validate(titleMap, descriptionMap, choices);
 
 		long questionId = counterLocalService.increment();
 
@@ -112,8 +107,8 @@ public class PollsQuestionLocalServiceImpl
 		question.setUserName(user.getFullName());
 		question.setCreateDate(now);
 		question.setModifiedDate(now);
-		question.setTitleMap(localeTitleMap);
-		question.setDescriptionMap(localeDescriptionMap);
+		question.setTitleMap(titleMap);
+		question.setDescriptionMap(descriptionMap);
 		question.setExpirationDate(expirationDate);
 
 		pollsQuestionPersistence.update(question, false);
@@ -255,26 +250,26 @@ public class PollsQuestionLocalServiceImpl
 	}
 
 	public PollsQuestion updateQuestion(
-			long userId, long questionId, Map<Locale, String> localeTitlesMap,
-			Map<Locale, String> localeDescriptionsMap,
-			int expirationDateMonth, int expirationDateDay,
-			int expirationDateYear, int expirationDateHour,
-			int expirationDateMinute, boolean neverExpire)
+			long userId, long questionId, Map<Locale, String> titleMap,
+			Map<Locale, String> descriptionMap, int expirationDateMonth,
+			int expirationDateDay, int expirationDateYear,
+			int expirationDateHour, int expirationDateMinute,
+			boolean neverExpire)
 		throws PortalException, SystemException {
 
 		return updateQuestion(
-			userId, questionId, localeTitlesMap, localeDescriptionsMap,
-			expirationDateMonth, expirationDateDay, expirationDateYear,
-			expirationDateHour, expirationDateMinute, neverExpire, null, null);
+			userId, questionId, titleMap, descriptionMap, expirationDateMonth,
+			expirationDateDay, expirationDateYear, expirationDateHour,
+			expirationDateMinute, neverExpire, null, null);
 	}
 
 	public PollsQuestion updateQuestion(
-			long userId, long questionId, Map<Locale, String> localeTitlesMap,
-			Map<Locale, String> localeDescriptionsMap,
-			int expirationDateMonth, int expirationDateDay,
-			int expirationDateYear, int expirationDateHour,
-			int expirationDateMinute, boolean neverExpire,
-			List<PollsChoice> choices, ServiceContext serviceContext)
+			long userId, long questionId, Map<Locale, String> titleMap,
+			Map<Locale, String> descriptionMap, int expirationDateMonth,
+			int expirationDateDay, int expirationDateYear,
+			int expirationDateHour, int expirationDateMinute,
+			boolean neverExpire, List<PollsChoice> choices,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Question
@@ -290,18 +285,14 @@ public class PollsQuestionLocalServiceImpl
 				new QuestionExpirationDateException());
 		}
 
-		Locale defaultLocale = LocaleUtil.getDefault();
-
-		validate(
-			localeTitlesMap.get(defaultLocale),
-			localeDescriptionsMap.get(defaultLocale), choices);
+		validate(titleMap, descriptionMap, choices);
 
 		PollsQuestion question = pollsQuestionPersistence.findByPrimaryKey(
 			questionId);
 
 		question.setModifiedDate(new Date());
-		question.setTitleMap(localeTitlesMap);
-		question.setDescriptionMap(localeDescriptionsMap);
+		question.setTitleMap(titleMap);
+		question.setDescriptionMap(descriptionMap);
 		question.setExpirationDate(expirationDate);
 
 		pollsQuestionPersistence.update(question, false);
@@ -339,13 +330,21 @@ public class PollsQuestionLocalServiceImpl
 	}
 
 	protected void validate(
-			String title, String description, List<PollsChoice> choices)
+			Map<Locale, String> titleMap, Map<Locale, String> descriptionMap,
+			List<PollsChoice> choices)
 		throws PortalException {
+
+		Locale locale = LocaleUtil.getDefault();
+
+		String title = titleMap.get(locale);
 
 		if (Validator.isNull(title)) {
 			throw new QuestionTitleException();
 		}
-		else if (Validator.isNull(description)) {
+
+		String description = descriptionMap.get(locale);
+
+		if (Validator.isNull(description)) {
 			throw new QuestionDescriptionException();
 		}
 

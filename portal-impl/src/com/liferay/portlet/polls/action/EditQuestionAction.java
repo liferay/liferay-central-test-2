@@ -158,9 +158,9 @@ public class EditQuestionAction extends PortletAction {
 
 		long questionId = ParamUtil.getLong(actionRequest, "questionId");
 
-		Map<Locale, String> localeTitleMap =
-			LocalizationUtil.getLocalizedParameter(actionRequest, "title");
-		Map<Locale, String> localeDescriptionMap =
+		Map<Locale, String> titleMap = LocalizationUtil.getLocalizedParameter(
+			actionRequest, "title");
+		Map<Locale, String> descriptionMap =
 			LocalizationUtil.getLocalizedParameter(
 				actionRequest, "description");
 
@@ -185,9 +185,9 @@ public class EditQuestionAction extends PortletAction {
 
 		List<PollsChoice> choices = new ArrayList<PollsChoice>();
 
-		Enumeration<String> enu = actionRequest.getParameterNames();
+		Set<String> readParameters = new HashSet<String>();
 
-		List<String> parametersRead = new ArrayList<String>();
+		Enumeration<String> enu = actionRequest.getParameterNames();
 
 		while (enu.hasMoreElements()) {
 			String param = enu.nextElement();
@@ -196,9 +196,9 @@ public class EditQuestionAction extends PortletAction {
 				try {
 					String id = param.substring(
 						CHOICE_DESCRIPTION_PREFIX.length(),
-							param.indexOf(StringPool.UNDERLINE));
+						param.indexOf(StringPool.UNDERLINE));
 
-					if (parametersRead.contains(id)) {
+					if (readParameters.contains(id)) {
 						continue;
 					}
 
@@ -216,7 +216,7 @@ public class EditQuestionAction extends PortletAction {
 
 					choices.add(choice);
 
-					parametersRead.add(id);
+					readParameters.add(id);
 				}
 				catch (Exception e) {
 				}
@@ -231,7 +231,7 @@ public class EditQuestionAction extends PortletAction {
 			// Add question
 
 			PollsQuestionServiceUtil.addQuestion(
-				localeTitleMap, localeDescriptionMap, expirationDateMonth,
+				titleMap, descriptionMap, expirationDateMonth,
 				expirationDateDay, expirationDateYear, expirationDateHour,
 				expirationDateMinute, neverExpire, choices, serviceContext);
 		}
@@ -240,10 +240,9 @@ public class EditQuestionAction extends PortletAction {
 			// Update question
 
 			PollsQuestionServiceUtil.updateQuestion(
-				questionId, localeTitleMap, localeDescriptionMap,
-				expirationDateMonth, expirationDateDay, expirationDateYear,
-				expirationDateHour, expirationDateMinute, neverExpire, choices,
-				serviceContext);
+				questionId, titleMap, descriptionMap, expirationDateMonth,
+				expirationDateDay, expirationDateYear, expirationDateHour,
+				expirationDateMinute, neverExpire, choices, serviceContext);
 		}
 	}
 
