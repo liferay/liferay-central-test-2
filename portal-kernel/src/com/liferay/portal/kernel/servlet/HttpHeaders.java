@@ -40,6 +40,8 @@ public interface HttpHeaders {
 
 	public static final String CACHE_CONTROL = "Cache-Control";
 
+	public static final String COOKIE = "Cookie";
+
 	public static final String CONNECTION = "Connection";
 
 	public static final String CONTENT_DISPOSITION = "Content-Disposition";
@@ -61,6 +63,12 @@ public interface HttpHeaders {
 	public static final String KEEP_ALIVE = "Keep-Alive";
 
 	public static final String LAST_MODIFIED = "Last-Modified";
+
+	public static final String LIFERAY_EMAIL_ADDRESS = "LIFERAY_EMAIL_ADDRESS";
+
+	public static final String LIFERAY_SCREEN_NAME = "LIFERAY_SCREEN_NAME";
+
+	public static final String LIFERAY_USER_ID = "LIFERAY_USER_ID";
 
 	public static final String LOCATION = "Location";
 
