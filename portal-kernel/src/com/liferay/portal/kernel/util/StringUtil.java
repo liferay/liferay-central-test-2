@@ -339,14 +339,6 @@ public class StringUtil {
 		return sb.toString();
 	}
 
-	public static boolean isXml(String s) {
-		if (s.startsWith("<?xml")) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
 	public static String lowerCase(String s) {
 		if (s == null) {
 			return null;

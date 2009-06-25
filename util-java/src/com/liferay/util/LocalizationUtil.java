@@ -114,7 +114,7 @@ public class LocalizationUtil {
 
 		String defaultValue = StringPool.BLANK;
 
-		if (!StringUtil.isXml(xml)) {
+		if (!Validator.isXml(xml)) {
 			if (requestedLanguageId.equals(systemDefaultLanguageId)) {
 				value = xml;
 			}
@@ -222,21 +222,7 @@ public class LocalizationUtil {
 		return value;
 	}
 
-	public static Map<Locale, String> getLocalizedField(String xml) {
-		Locale[] locales = LanguageUtil.getAvailableLocales();
-
-		Map<Locale, String> map = new HashMap<Locale, String>();
-
-		for (Locale locale : locales) {
-			String languageId = LocaleUtil.toLanguageId(locale);
-
-			map.put(locale, getLocalization(xml, languageId));
-		}
-
-		return map;
-	}
-
-	public static Map<Locale, String> getLocalizedParameter(
+	public static Map<Locale, String> getLocalizationMap(
 		PortletRequest portletRequest, String parameter) {
 
 		Locale[] locales = LanguageUtil.getAvailableLocales();
@@ -254,6 +240,29 @@ public class LocalizationUtil {
 		}
 
 		return map;
+	}
+
+	public static Map<Locale, String> getLocalizationMap(String xml) {
+		Locale[] locales = LanguageUtil.getAvailableLocales();
+
+		Map<Locale, String> map = new HashMap<Locale, String>();
+
+		for (Locale locale : locales) {
+			String languageId = LocaleUtil.toLanguageId(locale);
+
+			map.put(locale, getLocalization(xml, languageId));
+		}
+
+		return map;
+	}
+
+	/**
+	 * @deprecated Use <code>getLocalizationMap</code>.
+	 */
+	public static Map<Locale, String> getLocalizedParameter(
+		PortletRequest portletRequest, String parameter) {
+
+		return getLocalizationMap(portletRequest, parameter);
 	}
 
 	public static String getPreferencesValue(

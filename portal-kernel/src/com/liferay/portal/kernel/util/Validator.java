@@ -514,6 +514,15 @@ public class Validator {
 		}
 	}
 
+	public static boolean isXml(String s) {
+		if (s.startsWith(_XML_BEGIN)) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 	private static final int _CHAR_BEGIN = 65;
 
 	private static final int _CHAR_END = 122;
@@ -530,6 +539,8 @@ public class Validator {
 	private static final String _VARIABLE_TERM_BEGIN = "[$";
 
 	private static final String _VARIABLE_TERM_END = "$]";
+
+	private static final String _XML_BEGIN = "<?xml";
 
 	private static Log _log = LogFactoryUtil.getLog(Validator.class);
 
