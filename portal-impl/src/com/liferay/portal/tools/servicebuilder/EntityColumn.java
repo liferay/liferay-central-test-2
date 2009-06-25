@@ -37,14 +37,14 @@ public class EntityColumn implements Cloneable {
 	public EntityColumn(String name) {
 		this(
 			name, null, null, false, null, null, null, true, true, null, null,
-			null, true);
+			null, true, false);
 	}
 
 	public EntityColumn(
 		String name, String dbName, String type, boolean primary,
 		String ejbName, String mappingKey, String mappingTable,
 		boolean caseSensitive, boolean orderByAscending, String comparator,
-		String idType, String idParam, boolean convertNull) {
+		String idType, String idParam, boolean convertNull, boolean localized) {
 
 		_name = name;
 		_dbName = dbName;
@@ -60,16 +60,17 @@ public class EntityColumn implements Cloneable {
 		_idType = idType;
 		_idParam = idParam;
 		_convertNull = convertNull;
+		_localized = localized;
 	}
 
 	public EntityColumn(
 		String name, String dbName, String type, boolean primary,
 		String ejbName, String mappingKey, String mappingTable, String idType,
-		String idParam, boolean convertNull) {
+		String idParam, boolean convertNull, boolean localized) {
 
 		this(
 			name, dbName, type, primary, ejbName, mappingKey, mappingTable,
-			true, true, null, idType, idParam, convertNull);
+			true, true, null, idType, idParam, convertNull, localized);
 	}
 
 	public Object clone() {
@@ -77,7 +78,7 @@ public class EntityColumn implements Cloneable {
 			getName(), getDBName(), getType(), isPrimary(), getEJBName(),
 			getMappingKey(), getMappingTable(), isCaseSensitive(),
 			isOrderByAscending(), getComparator(), getIdType(), getIdParam(),
-			isConvertNull());
+			isConvertNull(), isLocalized());
 	}
 
 	public boolean equals(Object obj) {
@@ -158,6 +159,10 @@ public class EntityColumn implements Cloneable {
 		return _fetchFinderPath;
 	}
 
+	public boolean isLocalized() {
+		return _localized;
+	}
+
 	public boolean isMappingManyToMany() {
 		return Validator.isNotNull(_mappingTable);
 	}
@@ -211,6 +216,10 @@ public class EntityColumn implements Cloneable {
 		_idType = idType;
 	}
 
+	public void setLocalized(boolean localized) {
+		_localized = localized;
+	}
+
 	public void setOrderByAscending(boolean orderByAscending) {
 		_orderByAscending = orderByAscending;
 	}
@@ -220,6 +229,7 @@ public class EntityColumn implements Cloneable {
 	private boolean _convertNull;
 	private String _dbName;
 	private String _ejbName;
+	private boolean _localized;
 	private boolean _fetchFinderPath;
 	private String _idParam;
 	private String _idType;

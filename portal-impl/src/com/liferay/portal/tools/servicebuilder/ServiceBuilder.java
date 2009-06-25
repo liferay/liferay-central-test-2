@@ -701,11 +701,13 @@ public class ServiceBuilder {
 					String idParam = column.attributeValue("id-param");
 					boolean convertNull = GetterUtil.getBoolean(
 						column.attributeValue("convert-null"), true);
+					boolean localized = GetterUtil.getBoolean(
+						column.attributeValue("localized"));
 
 					EntityColumn col = new EntityColumn(
 						columnName, columnDBName, columnType, primary,
 						collectionEntity, mappingKey, mappingTable, idType,
-						idParam, convertNull);
+						idParam, convertNull, localized);
 
 					if (primary) {
 						pkList.add(col);
@@ -3693,6 +3695,10 @@ public class ServiceBuilder {
 							hints.get("max-length"), maxLength);
 					}
 
+					if (col.isLocalized()) {
+						maxLength = 4000;
+					}
+
 					if (maxLength < 4000) {
 						sb.append("VARCHAR(" + maxLength + ")");
 					}
@@ -3792,6 +3798,10 @@ public class ServiceBuilder {
 				if (hints != null) {
 					maxLength = GetterUtil.getInteger(
 						hints.get("max-length"), maxLength);
+				}
+
+				if (col.isLocalized()) {
+					maxLength = 4000;
 				}
 
 				if (maxLength < 4000) {

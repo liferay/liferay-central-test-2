@@ -19,6 +19,10 @@
 				<#if !column.isCollection()>
 					<field name="${column.name}" type="${column.type}"
 
+					<#if column.localized == true>
+						localized="true"
+					</#if>
+						
 					<#if modelHintsUtil.getFieldsEl(modelName, column.name)??>
 						<#assign field = modelHintsUtil.getFieldsEl(modelName, column.name)>
 						<#assign hints = field.elements()>

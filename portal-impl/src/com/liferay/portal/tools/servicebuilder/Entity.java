@@ -336,6 +336,16 @@ public class Entity {
 		}
 	}
 
+	public boolean hasLocalizedColumn() {
+		for (EntityColumn column : _columnList) {
+			if (column.isLocalized()) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
 	public boolean hasLocalService() {
 		return _localService;
 	}
