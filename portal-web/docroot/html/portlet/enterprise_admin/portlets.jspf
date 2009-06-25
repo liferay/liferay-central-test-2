@@ -141,19 +141,21 @@ for (int i = 0; i < results.size(); i++) {
 
 	// Search index
 
-	sb = new StringBuilder();
+	if (showReindexButton) {
+		sb = new StringBuilder();
 
-	if (showReindexButton && Validator.isNotNull(portlet.getIndexerClass())) {
-		sb.append("<input onclick=\"");
-		sb.append(renderResponse.getNamespace());
-		sb.append("reindexPortlet('");
-		sb.append(portlet.getPortletId());
-		sb.append("');\" type=\"button\" value=\"");
-		sb.append(LanguageUtil.get(pageContext, "reindex"));
-		sb.append("\" />");
+		if (Validator.isNotNull(portlet.getIndexerClass())) {
+			sb.append("<input onclick=\"");
+			sb.append(renderResponse.getNamespace());
+			sb.append("reindexPortlet('");
+			sb.append(portlet.getPortletId());
+			sb.append("');\" type=\"button\" value=\"");
+			sb.append(LanguageUtil.get(pageContext, "reindex"));
+			sb.append("\" />");
+		}
+
+		row.addText(sb.toString());
 	}
-
-	row.addText(sb.toString());
 
 	// Add result row
 
