@@ -266,8 +266,8 @@ public class ModelHintsImpl implements ModelHints {
 				}
 
 				fields.put(fieldName + _ELEMENTS_SUFFIX, field);
-				fields.put(fieldName + _LOCALIZATION_SUFFIX, fieldLocalized);
 				fields.put(fieldName + _TYPE_SUFFIX, fieldType);
+				fields.put(fieldName + _LOCALIZATION_SUFFIX, fieldLocalized);
 				fields.put(fieldName + _HINTS_SUFFIX, fieldHints);
 			}
 		}
