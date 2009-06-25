@@ -629,9 +629,10 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 			return _PATH_PORTAL_ERROR;
 		}
 
-		// Authenticated users should agree to Terms of Use
-
 		if (!path.equals(_PATH_PORTAL_RENDER_PORTLET)) {
+
+			// Authenticated users should agree to Terms of Use
+
 			if ((user != null) && !user.isAgreedToTermsOfUse()) {
 				boolean termsOfUseRequired = false;
 
