@@ -48,9 +48,11 @@ import com.liferay.util.LocalizationUtil;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Enumeration;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -158,10 +160,10 @@ public class EditQuestionAction extends PortletAction {
 
 		long questionId = ParamUtil.getLong(actionRequest, "questionId");
 
-		Map<Locale, String> titleMap = LocalizationUtil.getLocalizedParameter(
+		Map<Locale, String> titleMap = LocalizationUtil.getLocalizationMap(
 			actionRequest, "title");
 		Map<Locale, String> descriptionMap =
-			LocalizationUtil.getLocalizedParameter(
+			LocalizationUtil.getLocalizationMap(
 				actionRequest, "description");
 
 		int expirationDateMonth = ParamUtil.getInteger(
@@ -206,7 +208,7 @@ public class EditQuestionAction extends PortletAction {
 						actionRequest, CHOICE_NAME_PREFIX + id);
 
 					Map<Locale, String> localeChoiceDescriptionMap =
-						LocalizationUtil.getLocalizedParameter(
+						LocalizationUtil.getLocalizationMap(
 							actionRequest, CHOICE_DESCRIPTION_PREFIX + id);
 
 					PollsChoice choice = PollsChoiceUtil.create(0);
