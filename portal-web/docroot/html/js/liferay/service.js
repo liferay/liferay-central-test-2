@@ -742,10 +742,8 @@ Liferay.Service.register("Liferay.Service.Polls", "com.liferay.portlet.polls.ser
 Liferay.Service.registerClass(
 	Liferay.Service.Polls, "PollsQuestion",
 	{
-		addQuestion: true,
 		deleteQuestion: true,
-		getQuestion: true,
-		updateQuestion: true
+		getQuestion: true
 	}
 );
 

@@ -1353,7 +1353,7 @@
 		<field name="choiceId" type="long" />
 		<field name="questionId" type="long" />
 		<field name="name" type="String" />
-		<field name="description" type="String">
+		<field name="description" type="String" localized="true">
 			<hint name="max-length">1000</hint>
 		</field>
 	</model>
@@ -1366,10 +1366,10 @@
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
-		<field name="title" type="String">
+		<field name="title" type="String" localized="true">
 			<hint name="max-length">500</hint>
 		</field>
-		<field name="description" type="String">
+		<field name="description" type="String" localized="true">
 			<hint-collection name="TEXTAREA" />
 		</field>
 		<field name="expirationDate" type="Date" />

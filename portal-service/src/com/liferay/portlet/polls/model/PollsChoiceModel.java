@@ -24,6 +24,9 @@ package com.liferay.portlet.polls.model;
 
 import com.liferay.portal.model.BaseModel;
 
+import java.util.Locale;
+import java.util.Map;
+
 /**
  * <a href="PollsChoiceModel.java.html"><b><i>View Source</i></b></a>
  *
@@ -67,7 +70,21 @@ public interface PollsChoiceModel extends BaseModel<PollsChoice> {
 
 	public String getDescription();
 
+	public String getDescription(Locale locale);
+
+	public String getDescription(Locale locale, boolean useDefault);
+
+	public String getDescription(String languageId);
+
+	public String getDescription(String languageId, boolean useDefault);
+
+	public Map<Locale, String> getDescriptionMap();
+
 	public void setDescription(String description);
+
+	public void setDescription(Locale locale, String description);
+
+	public void setDescriptionMap(Map<Locale, String> descriptionMap);
 
 	public PollsChoice toEscapedModel();
 }
