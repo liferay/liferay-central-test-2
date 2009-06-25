@@ -258,6 +258,9 @@ automatically converted to a non null value if it is null. This only applies if
 the type value is String. This is particularly useful if your entity is
 referencing a read only table or a database view so that Hibernate does not try
 to issue unnecessary updates. The default value is true.
+
+The localized value specifies whether or not the column of the value can have
+different values for different locales. The default value is false.
 -->
 <!ATTLIST column
 	name CDATA #REQUIRED
@@ -270,6 +273,7 @@ to issue unnecessary updates. The default value is true.
 	id-type CDATA #IMPLIED
 	id-param CDATA #IMPLIED
 	convert-null CDATA #IMPLIED
+	localized CDATA #IMPLIED
 >
 
 <!--

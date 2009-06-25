@@ -33,8 +33,8 @@ import com.liferay.portal.util.PortalUtil;
 	import com.liferay.portal.kernel.util.LocaleUtil;
 	import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 	import com.liferay.portal.kernel.util.Validator;
-
 	import com.liferay.util.LocalizationUtil;
+
 	import java.util.Locale;
 	import java.util.Map;
 </#if>
@@ -235,22 +235,21 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> {
 			</#if>
 		}
 
-		<#if column.localized == true>
+		<#if column.localized>
 			public String get${column.methodName}(Locale locale) {
-				String localeLanguageId = LocaleUtil.toLanguageId(locale);
+				String languageId = LocaleUtil.toLanguageId(locale);
 
-				return get${column.methodName}(localeLanguageId);
+				return get${column.methodName}(languageId);
 			}
 
 			public String get${column.methodName}(Locale locale, boolean useDefault) {
-				String localeLanguageId = LocaleUtil.toLanguageId(locale);
+				String languageId = LocaleUtil.toLanguageId(locale);
 
-				return get${column.methodName}(localeLanguageId, useDefault);
+				return get${column.methodName}(languageId, useDefault);
 			}
 
-			public String get${column.methodName}(String localeLanguageId) {
-				String value = LocalizationUtil.getLocalization(
-					get${column.methodName}(), localeLanguageId);
+			public String get${column.methodName}(String languageId) {
+				String value = LocalizationUtil.getLocalization(get${column.methodName}(), languageId);
 
 				if (isEscapedModel()) {
 					return HtmlUtil.escape(value);
@@ -260,9 +259,8 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> {
 				}
 			}
 
-			public String get${column.methodName}(String localeLanguageId, boolean useDefault) {
-				String value = LocalizationUtil.getLocalization(
-					get${column.methodName}(), localeLanguageId, useDefault);
+			public String get${column.methodName}(String languageId, boolean useDefault) {
+				String value = LocalizationUtil.getLocalization(get${column.methodName}(), languageId, useDefault);
 
 				if (isEscapedModel()) {
 					return HtmlUtil.escape(value);
@@ -272,7 +270,7 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> {
 				}
 			}
 
-			public Map<Locale, String> get${column.methodName}sMap() {
+			public Map<Locale, String> get${column.methodName}Map() {
 				return LocalizationUtil.getLocalizedField(get${column.methodName}());
 			}
 		</#if>
@@ -309,25 +307,20 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> {
 			</#if>
 		}
 
-		<#if column.localized == true>
-			public void set${column.methodName}(String localizedValue, Locale locale) {
-				String localeLanguageId = LocaleUtil.toLanguageId(locale);
+		<#if column.localized>
+			public void set${column.methodName}(Locale locale, String ${column.name}) {
+				String languageId = LocaleUtil.toLanguageId(locale);
 
-				if (Validator.isNotNull(localizedValue)) {
-					set${column.methodName}(
-						LocalizationUtil.updateLocalization(
-							get${column.methodName}(), "${column.methodName}", localizedValue,
-							localeLanguageId));
+				if (Validator.isNotNull(${column.name})) {
+					set${column.methodName}(LocalizationUtil.updateLocalization(get${column.methodName}(), "${column.methodName}", ${column.name}, languageId));
 				}
 				else {
-					set${column.methodName}(
-						LocalizationUtil.removeLocalization(
-							get${column.methodName}(), "${column.methodName}", localeLanguageId));
+					set${column.methodName}(LocalizationUtil.removeLocalization(get${column.methodName}(), "${column.methodName}", languageId));
 				}
 			}
 
-			public void set${column.methodName}(Map localizedValues) {
-				if (localizedValues == null) {
+			public void set${column.methodName}(Map<Locale, String> ${column.name}Map) {
+				if (${column.name}Map == null) {
 					return;
 				}
 
@@ -345,9 +338,9 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> {
 					Locale[] locales = LanguageUtil.getAvailableLocales();
 
 					for (Locale locale : locales) {
-						String value = (String)localizedValues.get(locale);
+						String ${column.name} = ${column.name}Map.get(locale);
 
-						this.set${column.methodName}(value, locale);
+						set${column.methodName}(locale, ${column.name});
 					}
 				}
 				finally {

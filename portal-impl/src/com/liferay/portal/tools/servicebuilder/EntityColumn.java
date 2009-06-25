@@ -126,6 +126,10 @@ public class EntityColumn implements Cloneable {
 		return _methodName;
 	}
 
+	public String getMethodNames() {
+		return TextFormatter.formatPlural(new String(_methodName));
+	}
+
 	public String getName() {
 		return _name;
 	}
@@ -229,10 +233,10 @@ public class EntityColumn implements Cloneable {
 	private boolean _convertNull;
 	private String _dbName;
 	private String _ejbName;
-	private boolean _localized;
 	private boolean _fetchFinderPath;
 	private String _idParam;
 	private String _idType;
+	private boolean _localized;
 	private String _mappingKey;
 	private String _mappingTable;
 	private String _methodName;

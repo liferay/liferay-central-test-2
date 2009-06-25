@@ -22,7 +22,7 @@
 					<#if column.localized == true>
 						localized="true"
 					</#if>
-						
+
 					<#if modelHintsUtil.getFieldsEl(modelName, column.name)??>
 						<#assign field = modelHintsUtil.getFieldsEl(modelName, column.name)>
 						<#assign hints = field.elements()>

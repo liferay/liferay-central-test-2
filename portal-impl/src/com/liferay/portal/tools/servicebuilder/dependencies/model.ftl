@@ -51,11 +51,11 @@ public interface ${entity.name}Model extends BaseModel<${entity.name}> {
 
 			public ${column.type} get${column.methodName}(Locale locale, boolean useDefault);
 
-			public ${column.type} get${column.methodName}(String localeLanguageId);
+			public ${column.type} get${column.methodName}(String languageId);
 
-			public String get${column.methodName}(String localeLanguageId, boolean useDefault);
+			public String get${column.methodName}(String languageId, boolean useDefault);
 
-			public Map<Locale, String> get${column.methodName}sMap() ;
+			public Map<Locale, String> get${column.methodName}Map();
 		</#if>
 
 		<#if column.type == "boolean">
@@ -65,9 +65,9 @@ public interface ${entity.name}Model extends BaseModel<${entity.name}> {
 		public void set${column.methodName}(${column.type} ${column.name});
 
         <#if column.localized == true>
-			public void set${column.methodName}(String localizedValue, Locale locale);
+			public void set${column.methodName}(Locale locale, String ${column.name});
 
-            public void set${column.methodName}(Map localizedValues);
+            public void set${column.methodName}Map(Map<Locale, String> ${column.name}Map);
 		</#if>
 	</#list>
 

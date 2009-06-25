@@ -337,8 +337,8 @@ public class Entity {
 	}
 
 	public boolean hasLocalizedColumn() {
-		for (EntityColumn column : _columnList) {
-			if (column.isLocalized()) {
+		for (EntityColumn col : _columnList) {
+			if (col.isLocalized()) {
 				return true;
 			}
 		}
