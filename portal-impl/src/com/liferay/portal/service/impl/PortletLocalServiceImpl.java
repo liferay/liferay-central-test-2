@@ -98,11 +98,9 @@ import javax.servlet.ServletContext;
 public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 	public Portlet deployRemotePortlet(Portlet portlet) throws SystemException {
-		long companyId = portlet.getCompanyId();
+		Map<String, Portlet> portletsPool = _getPortletsPool();
 
-		Map<String, Portlet> portletsPool = _getPortletsPool(companyId);
-
-		portletsPool.put(portlet.getRootPortletId(), portlet);
+		portletsPool.put(portlet.getPortletId(), portlet);
 
 		_clearCaches();
 
@@ -113,6 +111,8 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		newPortletCategory.addCategory(wsrpCategory);
 
 		wsrpCategory.getPortletIds().add(portlet.getPortletId());
+
+		long companyId = portlet.getCompanyId();
 
 		PortletCategory portletCategory = (PortletCategory)WebAppPool.get(
 			String.valueOf(companyId), WebKeys.PORTLET_CATEGORY);
@@ -130,9 +130,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 	}
 
 	public void destroyRemotePortlet(Portlet portlet) throws SystemException {
-		long companyId = portlet.getCompanyId();
-
-		Map<String, Portlet> portletsPool = _getPortletsPool(companyId);
+		Map<String, Portlet> portletsPool = _getPortletsPool();
 
 		portletsPool.remove(portlet.getRootPortletId());
 
