@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
 import com.liferay.portal.kernel.servlet.HttpMethods;
 import com.liferay.portal.kernel.servlet.SessionErrors;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -499,7 +500,8 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 			HttpServletRequest request, HttpServletResponse response)
 		throws IOException {
 
-		String path = super.processPath(request, response);
+		String path = GetterUtil.getString(
+			super.processPath(request, response));
 
 		HttpSession session = request.getSession();
 
@@ -511,8 +513,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 		UserTracker userTracker = LiveUsers.getUserTracker(
 			themeDisplay.getCompanyId(), session.getId());
 
-		if ((userTracker != null) && (path != null) &&
-			(!path.equals(_PATH_C)) &&
+		if ((userTracker != null) && (!path.equals(_PATH_C)) &&
 			(path.indexOf(_PATH_J_SECURITY_CHECK) == -1) &&
 			(path.indexOf(_PATH_PORTAL_PROTECTED) == -1) &&
 			(!_trackerIgnorePaths.contains(path))) {
@@ -557,9 +558,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 
 		// Last path
 
-		if ((path != null) && (_lastPaths.contains(path)) &&
-			(!_trackerIgnorePaths.contains(path))) {
-
+		if (_lastPaths.contains(path) && !_trackerIgnorePaths.contains(path)) {
 			boolean saveLastPath = ParamUtil.getBoolean(
 				request, "saveLastPath", true);
 
@@ -593,7 +592,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 
 		// Authenticated users can always log out
 
-		if (((remoteUser != null) || (user != null)) && (path != null) &&
+		if (((remoteUser != null) || (user != null)) &&
 			(path.equals(_PATH_PORTAL_LOGOUT))) {
 
 			return path;
@@ -601,7 +600,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 
 		// Authenticated users can always extend or confirm their session
 
-		if (((remoteUser != null) || (user != null)) && (path != null) &&
+		if (((remoteUser != null) || (user != null)) &&
 			(path.equals(_PATH_PORTAL_EXPIRE_SESSION) ||
 			 path.equals(_PATH_PORTAL_EXTEND_SESSION))) {
 
@@ -610,7 +609,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 
 		// Authenticated users can always agree to terms of use
 
-		if (((remoteUser != null) || (user != null)) && (path != null) &&
+		if (((remoteUser != null) || (user != null)) &&
 			(path.equals(_PATH_PORTAL_UPDATE_TERMS_OF_USE))) {
 
 			return path;
@@ -622,24 +621,6 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 			return _PATH_PORTAL_LOGOUT;
 		}
 
-		// Authenticated users should agree to Terms of Use
-
-		if ((user != null) && !user.isAgreedToTermsOfUse()) {
-			boolean termsOfUseRequired = false;
-
-			try {
-				termsOfUseRequired = PrefsPropsUtil.getBoolean(
-					user.getCompanyId(), PropsKeys.TERMS_OF_USE_REQUIRED);
-			}
-			catch (SystemException se) {
-				termsOfUseRequired = PropsValues.TERMS_OF_USE_REQUIRED;
-			}
-
-			if (termsOfUseRequired) {
-				return _PATH_PORTAL_TERMS_OF_USE;
-			}
-		}
-
 		// Authenticated users must be active
 
 		if ((user != null) && !user.isActive()) {
@@ -648,41 +629,48 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 			return _PATH_PORTAL_ERROR;
 		}
 
-		// Authenticated users must have a current password
+		// Authenticated users should agree to Terms of Use
 
-		if ((user != null) && user.isPasswordReset()) {
-			return _PATH_PORTAL_UPDATE_PASSWORD;
-		}
+		if (!path.equals(_PATH_PORTAL_RENDER_PORTLET)) {
+			if ((user != null) && !user.isAgreedToTermsOfUse()) {
+				boolean termsOfUseRequired = false;
 
-		// Authenticated users must have an email address
+				try {
+					termsOfUseRequired = PrefsPropsUtil.getBoolean(
+						user.getCompanyId(), PropsKeys.TERMS_OF_USE_REQUIRED);
+				}
+				catch (SystemException se) {
+					termsOfUseRequired = PropsValues.TERMS_OF_USE_REQUIRED;
+				}
 
-		if ((user != null) && Validator.isNull(user.getEmailAddress())) {
-			return _PATH_PORTAL_UPDATE_EMAIL_ADDRESS;
-		}
+				if (termsOfUseRequired) {
+					return _PATH_PORTAL_TERMS_OF_USE;
+				}
+			}
 
-		// Authenticated users should have a reminder query
+			// Authenticated users must have a current password
 
-		if ((user != null) &&
-			(Validator.isNull(user.getReminderQueryQuestion()) ||
-			 Validator.isNull(user.getReminderQueryAnswer()))) {
+			if ((user != null) && user.isPasswordReset()) {
+				return _PATH_PORTAL_UPDATE_PASSWORD;
+			}
 
-			if (PropsValues.USERS_REMINDER_QUERIES_ENABLED) {
-				return _PATH_PORTAL_UPDATE_REMINDER_QUERY;
+			// Authenticated users must have an email address
+
+			if ((user != null) && Validator.isNull(user.getEmailAddress())) {
+				return _PATH_PORTAL_UPDATE_EMAIL_ADDRESS;
+			}
+
+			// Authenticated users should have a reminder query
+
+			if ((user != null) &&
+				(Validator.isNull(user.getReminderQueryQuestion()) ||
+				 Validator.isNull(user.getReminderQueryAnswer()))) {
+
+				if (PropsValues.USERS_REMINDER_QUERIES_ENABLED) {
+					return _PATH_PORTAL_UPDATE_REMINDER_QUERY;
+				}
 			}
 		}
-
-		// Authenticated users must have at least one personalized page
-
-		/*if (user != null) {
-			List<Layout> layouts = themeDisplay.getLayouts();
-
-			if ((layouts == null) || (layouts.size() == 0)) {
-				SessionErrors.add(
-					request, RequiredLayoutException.class.getName());
-
-				return _PATH_PORTAL_ERROR;
-			}
-		}*/
 
 		// Users must sign in
 
