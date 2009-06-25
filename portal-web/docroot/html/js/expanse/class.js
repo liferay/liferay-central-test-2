@@ -58,7 +58,19 @@
 				}
 
 				if (firstArgument != 'noinit' && instance.initialize) {
-					return instance.initialize.apply(instance, formalArguments);
+					var returnVal;
+
+					if (instance._beforeconstructor_) {
+						formalArguments = instance._beforeconstructor_.apply(instance, formalArguments) || formalArguments;
+					}
+
+					returnVal = instance.initialize.apply(instance, formalArguments);
+
+					if (instance._afterconstructor_) {
+						returnVal = instance._afterconstructor_.apply(instance, formalArguments) || returnVal;
+					}
+
+					return returnVal;
 				}
 			}
 			else {
@@ -74,8 +86,10 @@
 		Class.prototype.superclass = superclass;
 		Class.superclass = superclass;
 
-		Class.prototype.constructor = Class.prototype.constructor || Class;
-		Class.constructor = Class.constructor || Class;
+		var currentConstructor = Class.prototype.constructor;
+
+		Class.prototype.constructor = (currentConstructor == Object.prototype.constructor) ? Class : currentConstructor;
+		Class.constructor = Class;
 
 		return Class;
 	};
@@ -99,11 +113,13 @@
 
 			var Class = new Expanse.Class(proto);
 
-			Class.prototype.superclass = instance;
-			Class.superclass = instance;
+			Class.prototype.superclass = instance.constructor;
+			Class.superclass = instance.constructor;
 
-			Class.prototype.constructor = Class.prototype.constructor || Class;
-			Class.constructor = Class.constructor || Class;
+			var currentConstructor = Class.prototype.constructor;
+
+			Class.prototype.constructor = Class;
+			Class.constructor = Class;
 
 			return Class;
 		},

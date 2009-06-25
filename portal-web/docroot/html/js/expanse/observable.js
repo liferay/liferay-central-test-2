@@ -1,9 +1,21 @@
 Expanse.Observable = new Expanse.Class(
 	{
+		_beforeconstructor_: function() {
+			var instance = this;
+
+			instance.cfg = new YAHOO.util.Config(instance);
+		},
+
 		initialize: function() {
 			var instance = this;
 
 			instance._events = {};
+		},
+
+		add: function(key, options) {
+			var instance = this;
+
+			instance._checkConfig(key, options);
 		},
 
 		bind: function(event, handler, scope) {
@@ -14,21 +26,28 @@ Expanse.Observable = new Expanse.Class(
 
 				customEvent.subscribe(handler, scope, !!scope);
 			}
-
 		},
 
-		get: function(key, defaultValue) {
+		get: function(key, defaultValue, setToDefault) {
 			var instance = this;
 
 			instance._checkConfig(key);
 
 			var value = instance.cfg.getProperty(key);
 
-			if (value == undefined && defaultValue != undefined) {
-				value = defaultValue;
+			if (YAHOO.lang.isFunction(value)) {
+				value = value.call(instance, key, defaultValue);
 			}
 
-			return value;
+			if (YAHOO.lang.isUndefined(value) && !YAHOO.lang.isUndefined(defaultValue)) {
+				value = defaultValue;
+
+				if (setToDefault) {
+					instance.set(key, value, true);
+				}
+			}
+
+			return instance.cfg.getProperty(key);
 		},
 
 		listen: function(key, handler) {
@@ -45,12 +64,25 @@ Expanse.Observable = new Expanse.Class(
 			instance._eventsSuspended = false;
 		},
 
-		set: function(key, value, silent) {
+		set: function(key, value, silent, options) {
 			var instance = this;
 
-			instance._checkConfig(key);
+			var propertySet = false;
 
-			instance.cfg.setProperty(key, value, silent);
+			if (YAHOO.lang.isObject(key) && arguments.length <= 2) {
+				silent = value;
+
+				for (var i in key) {
+					propertySet = arguments.callee.call(instance, i, key[i], silent);
+				}
+			}
+			else {
+				instance._checkConfig(key, options);
+
+				propertySet = instance.cfg.setProperty(key, value, silent);
+			}
+
+			return propertySet;
 		},
 
 		suspendEvents: function() {
@@ -62,12 +94,16 @@ Expanse.Observable = new Expanse.Class(
 		trigger: function(event, data) {
 			var instance = this;
 
+			var returnValue = false;
+
 			if (instance._eventsSuspended == false) {
 				var customEvent = instance._getEventObject(event);
 				var args = Array.prototype.slice.call(arguments, 1);
 
-				customEvent.fire.apply(customEvent, args);
+				returnValue = customEvent.fire.apply(customEvent, args);
 			}
+
+			return returnValue;
 		},
 
 		unbind: function(event, handler, scope) {
@@ -105,17 +141,24 @@ Expanse.Observable = new Expanse.Class(
 			}
 		},
 
-		_checkConfig: function(key) {
+		_checkConfig: function(key, options) {
 			var instance = this;
-
-			if (!instance.cfg) {
-				instance.cfg = new YAHOO.util.Config(instance);
-			}
 
 			var config = instance.cfg.getConfig();
 
-			if (!config[key.toLowerCase()]) {
-				instance.cfg.addProperty(key, {});
+			if (!(key.toLowerCase() in config)) {
+				if (!options) {
+					options = {};
+				}
+				else if(YAHOO.lang.isFunction(options)) {
+					var handler = options;
+
+					options = {
+						handler: handler
+					};
+				}
+
+				instance.cfg.addProperty(key, options);
 			}
 		},
 
