@@ -194,8 +194,8 @@ public class PortletLister {
 						portletConfig.getResourceBundle(_user.getLocale());
 
 					try {
-						externalPortletCategory =
-							resourceBundle.getString(portletCategory.getName());
+						externalPortletCategory = resourceBundle.getString(
+							portletCategory.getName());
 					}
 					catch (MissingResourceException mre) {
 					}
