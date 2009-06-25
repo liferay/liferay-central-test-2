@@ -319,7 +319,7 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> {
 				}
 			}
 
-			public void set${column.methodName}(Map<Locale, String> ${column.name}Map) {
+			public void set${column.methodName}Map(Map<Locale, String> ${column.name}Map) {
 				if (${column.name}Map == null) {
 					return;
 				}
