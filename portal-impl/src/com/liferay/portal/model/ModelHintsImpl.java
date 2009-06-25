@@ -123,6 +123,18 @@ public class ModelHintsImpl implements ModelHints {
 		}
 	}
 
+	public boolean isLocalized (String model, String field) {
+		Map<String, Object> fields = (Map<String, Object>)_modelFields.get(
+			model);
+
+		if (fields == null) {
+			return false;
+		}
+		else {
+			return (Boolean)fields.get(field + _LOCALIZATION_SUFFIX);
+		}
+	}
+
 	public void read(ClassLoader classLoader, String source) throws Exception {
 		String xml = null;
 
@@ -223,6 +235,8 @@ public class ModelHintsImpl implements ModelHints {
 
 				String fieldName = field.attributeValue("name");
 				String fieldType = field.attributeValue("type");
+				boolean fieldLocalized = GetterUtil.getBoolean(
+					field.attributeValue("localized"));
 
 				Map<String, String> fieldHints = new HashMap<String, String>();
 
@@ -252,6 +266,7 @@ public class ModelHintsImpl implements ModelHints {
 				}
 
 				fields.put(fieldName + _ELEMENTS_SUFFIX, field);
+				fields.put(fieldName + _LOCALIZATION_SUFFIX, fieldLocalized);
 				fields.put(fieldName + _TYPE_SUFFIX, fieldType);
 				fields.put(fieldName + _HINTS_SUFFIX, fieldHints);
 			}
@@ -287,6 +302,8 @@ public class ModelHintsImpl implements ModelHints {
 	}
 
 	private static final String _ELEMENTS_SUFFIX = "_ELEMENTS";
+
+	private static final String _LOCALIZATION_SUFFIX = "_LOCALIZATION";
 
 	private static final String _TYPE_SUFFIX = "_TYPE";
 

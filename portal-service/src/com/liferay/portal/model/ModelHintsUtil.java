@@ -59,6 +59,10 @@ public class ModelHintsUtil {
 		return getModelHints().getHints(model, field);
 	}
 
+	public static boolean isLocalized(String model, String field) {
+		return getModelHints().isLocalized(model, field);
+	}
+
 	public static void read(ClassLoader classLoader, String source)
 		throws Exception {
 

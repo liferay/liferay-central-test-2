@@ -45,6 +45,8 @@ public interface ModelHints {
 
 	public Map<String, String> getHints(String model, String field);
 
+	public boolean isLocalized(String model, String field);
+
 	public void read(ClassLoader classLoader, String source) throws Exception;
 
 	public String trimString(String model, String field, String value);

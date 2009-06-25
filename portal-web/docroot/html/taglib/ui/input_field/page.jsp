@@ -286,11 +286,9 @@ Map<String, String> hints = ModelHintsUtil.getHints(model, field);
 			}
 
 			boolean autoEscape = true;
-			boolean localized = false;
 
 			if (hints != null) {
 				autoEscape = GetterUtil.getBoolean(hints.get("auto-escape"), true);
-				localized = GetterUtil.getBoolean(hints.get("localized"));
 			}
 
 			if (autoEscape) {
@@ -312,6 +310,8 @@ Map<String, String> hints = ModelHintsUtil.getHints(model, field);
 				upperCase = GetterUtil.getBoolean(hints.get("upper-case"), upperCase);
 				checkTab = GetterUtil.getBoolean(hints.get("check-tab"), checkTab);
 			}
+
+			boolean localized = ModelHintsUtil.isLocalized(model, field);
 
 			if (!localized) {
 				fieldParam = namespace + fieldParam;
