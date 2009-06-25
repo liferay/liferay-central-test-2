@@ -271,7 +271,7 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> {
 			}
 
 			public Map<Locale, String> get${column.methodName}Map() {
-				return LocalizationUtil.getLocalizedField(get${column.methodName}());
+				return LocalizationUtil.getLocalizationMap(get${column.methodName}());
 			}
 		</#if>
 
