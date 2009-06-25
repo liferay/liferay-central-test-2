@@ -993,7 +993,7 @@ create table PollsChoice (
 	choiceId LONG not null primary key,
 	questionId LONG,
 	name VARCHAR(75) null,
-	description VARCHAR(1000) null
+	description STRING null
 );
 
 create table PollsQuestion (
@@ -1005,7 +1005,7 @@ create table PollsQuestion (
 	userName VARCHAR(75) null,
 	createDate DATE null,
 	modifiedDate DATE null,
-	title VARCHAR(500) null,
+	title STRING null,
 	description STRING null,
 	expirationDate DATE null,
 	lastVoteDate DATE null

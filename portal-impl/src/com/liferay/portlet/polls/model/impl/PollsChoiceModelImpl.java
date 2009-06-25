@@ -229,7 +229,7 @@ public class PollsChoiceModelImpl extends BaseModelImpl<PollsChoice> {
 	}
 
 	public Map<Locale, String> getDescriptionMap() {
-		return LocalizationUtil.getLocalizedField(getDescription());
+		return LocalizationUtil.getLocalizationMap(getDescription());
 	}
 
 	public void setDescription(String description) {

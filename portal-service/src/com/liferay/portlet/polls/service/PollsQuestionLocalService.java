@@ -101,8 +101,8 @@ public interface PollsQuestionLocalService {
 		boolean merge) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.polls.model.PollsQuestion addQuestion(
-		long userId, java.util.Map<java.util.Locale, String> localeTitlesMap,
-		java.util.Map<java.util.Locale, String> localeDescriptionsMap,
+		long userId, java.util.Map<java.util.Locale, String> titleMap,
+		java.util.Map<java.util.Locale, String> descriptionMap,
 		int expirationDateMonth, int expirationDateDay, int expirationDateYear,
 		int expirationDateHour, int expirationDateMinute, boolean neverExpire,
 		java.util.List<com.liferay.portlet.polls.model.PollsChoice> choices,
@@ -112,8 +112,8 @@ public interface PollsQuestionLocalService {
 
 	public com.liferay.portlet.polls.model.PollsQuestion addQuestion(
 		java.lang.String uuid, long userId,
-		java.util.Map<java.util.Locale, String> localeTitlesMap,
-		java.util.Map<java.util.Locale, String> localeDescriptionsMap,
+		java.util.Map<java.util.Locale, String> titleMap,
+		java.util.Map<java.util.Locale, String> descriptionMap,
 		int expirationDateMonth, int expirationDateDay, int expirationDateYear,
 		int expirationDateHour, int expirationDateMinute, boolean neverExpire,
 		java.util.List<com.liferay.portlet.polls.model.PollsChoice> choices,
@@ -179,8 +179,8 @@ public interface PollsQuestionLocalService {
 
 	public com.liferay.portlet.polls.model.PollsQuestion updateQuestion(
 		long userId, long questionId,
-		java.util.Map<java.util.Locale, String> localeTitlesMap,
-		java.util.Map<java.util.Locale, String> localeDescriptionsMap,
+		java.util.Map<java.util.Locale, String> titleMap,
+		java.util.Map<java.util.Locale, String> descriptionMap,
 		int expirationDateMonth, int expirationDateDay, int expirationDateYear,
 		int expirationDateHour, int expirationDateMinute, boolean neverExpire)
 		throws com.liferay.portal.PortalException,
@@ -188,8 +188,8 @@ public interface PollsQuestionLocalService {
 
 	public com.liferay.portlet.polls.model.PollsQuestion updateQuestion(
 		long userId, long questionId,
-		java.util.Map<java.util.Locale, String> localeTitlesMap,
-		java.util.Map<java.util.Locale, String> localeDescriptionsMap,
+		java.util.Map<java.util.Locale, String> titleMap,
+		java.util.Map<java.util.Locale, String> descriptionMap,
 		int expirationDateMonth, int expirationDateDay, int expirationDateYear,
 		int expirationDateHour, int expirationDateMinute, boolean neverExpire,
 		java.util.List<com.liferay.portlet.polls.model.PollsChoice> choices,

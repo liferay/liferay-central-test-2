@@ -46,8 +46,8 @@ package com.liferay.portlet.polls.service;
  */
 public class PollsQuestionServiceUtil {
 	public static com.liferay.portlet.polls.model.PollsQuestion addQuestion(
-		java.util.Map<java.util.Locale, String> localeTitlesMap,
-		java.util.Map<java.util.Locale, String> localeDescriptionsMap,
+		java.util.Map<java.util.Locale, String> titleMap,
+		java.util.Map<java.util.Locale, String> descriptionMap,
 		int expirationDateMonth, int expirationDateDay, int expirationDateYear,
 		int expirationDateHour, int expirationDateMinute, boolean neverExpire,
 		java.util.List<com.liferay.portlet.polls.model.PollsChoice> choices,
@@ -55,10 +55,9 @@ public class PollsQuestionServiceUtil {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
-				   .addQuestion(localeTitlesMap, localeDescriptionsMap,
-			expirationDateMonth, expirationDateDay, expirationDateYear,
-			expirationDateHour, expirationDateMinute, neverExpire, choices,
-			serviceContext);
+				   .addQuestion(titleMap, descriptionMap, expirationDateMonth,
+			expirationDateDay, expirationDateYear, expirationDateHour,
+			expirationDateMinute, neverExpire, choices, serviceContext);
 	}
 
 	public static void deleteQuestion(long questionId)
@@ -75,9 +74,8 @@ public class PollsQuestionServiceUtil {
 	}
 
 	public static com.liferay.portlet.polls.model.PollsQuestion updateQuestion(
-		long questionId,
-		java.util.Map<java.util.Locale, String> localeTitlesMap,
-		java.util.Map<java.util.Locale, String> localeDescriptionsMap,
+		long questionId, java.util.Map<java.util.Locale, String> titleMap,
+		java.util.Map<java.util.Locale, String> descriptionMap,
 		int expirationDateMonth, int expirationDateDay, int expirationDateYear,
 		int expirationDateHour, int expirationDateMinute, boolean neverExpire,
 		java.util.List<com.liferay.portlet.polls.model.PollsChoice> choices,
@@ -85,10 +83,10 @@ public class PollsQuestionServiceUtil {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
-				   .updateQuestion(questionId, localeTitlesMap,
-			localeDescriptionsMap, expirationDateMonth, expirationDateDay,
-			expirationDateYear, expirationDateHour, expirationDateMinute,
-			neverExpire, choices, serviceContext);
+				   .updateQuestion(questionId, titleMap, descriptionMap,
+			expirationDateMonth, expirationDateDay, expirationDateYear,
+			expirationDateHour, expirationDateMinute, neverExpire, choices,
+			serviceContext);
 	}
 
 	public static PollsQuestionService getService() {

@@ -290,7 +290,7 @@ public class PollsQuestionModelImpl extends BaseModelImpl<PollsQuestion> {
 	}
 
 	public Map<Locale, String> getTitleMap() {
-		return LocalizationUtil.getLocalizedField(getTitle());
+		return LocalizationUtil.getLocalizationMap(getTitle());
 	}
 
 	public void setTitle(String title) {
@@ -382,7 +382,7 @@ public class PollsQuestionModelImpl extends BaseModelImpl<PollsQuestion> {
 	}
 
 	public Map<Locale, String> getDescriptionMap() {
-		return LocalizationUtil.getLocalizedField(getDescription());
+		return LocalizationUtil.getLocalizationMap(getDescription());
 	}
 
 	public void setDescription(String description) {
