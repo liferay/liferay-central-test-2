@@ -97,7 +97,7 @@ public class LuceneIndexSearcherImpl implements IndexSearcher {
 
 				hits = subset(luceneHits, start, end);
 			}
-			catch (Exception e)  {
+			catch (Exception e) {
 				throw new SearchException(e);
 			}
 			finally {
