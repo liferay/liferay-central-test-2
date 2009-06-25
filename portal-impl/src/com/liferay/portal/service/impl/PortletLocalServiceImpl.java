@@ -129,9 +129,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		return portlet;
 	}
 
-	public Portlet destroyRemotePortlet(Portlet portlet)
-		throws SystemException {
-
+	public void destroyRemotePortlet(Portlet portlet) throws SystemException {
 		long companyId = portlet.getCompanyId();
 
 		Map<String, Portlet> portletsPool = _getPortletsPool(companyId);
