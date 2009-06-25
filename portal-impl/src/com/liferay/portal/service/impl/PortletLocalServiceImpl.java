@@ -58,7 +58,6 @@ import com.liferay.portal.model.impl.PortletURLListenerImpl;
 import com.liferay.portal.model.impl.PublicRenderParameterImpl;
 import com.liferay.portal.service.base.PortletLocalServiceBaseImpl;
 import com.liferay.portal.util.ContentUtil;
-import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsValues;
@@ -98,10 +97,12 @@ import javax.servlet.ServletContext;
  */
 public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
-	public Portlet deployRemotePortlet(Portlet portlet) {
-		Map<String, Portlet> portletsPool = _getPortletsPool();
+	public Portlet deployRemotePortlet(Portlet portlet) throws SystemException {
+		long companyId = portlet.getCompanyId();
 
-		portletsPool.put(portlet.getPortletId(), portlet);
+		Map<String, Portlet> portletsPool = _getPortletsPool(companyId);
+
+		portletsPool.put(portlet.getRootPortletId(), portlet);
 
 		_clearCaches();
 
@@ -113,23 +114,35 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 		wsrpCategory.getPortletIds().add(portlet.getPortletId());
 
-		long[] companyIds = PortalInstances.getCompanyIds();
+		PortletCategory portletCategory = (PortletCategory)WebAppPool.get(
+			String.valueOf(companyId), WebKeys.PORTLET_CATEGORY);
 
-		for (long companyId : companyIds) {
-			PortletCategory portletCategory = (PortletCategory)WebAppPool.get(
-				String.valueOf(companyId), WebKeys.PORTLET_CATEGORY);
-
-			if (portletCategory != null) {
-				portletCategory.merge(newPortletCategory);
-			}
-			else {
-				_log.error(
-					"Unable to register remote portlet for company " +
-						companyId + " because it does not exist");
-			}
+		if (portletCategory != null) {
+			portletCategory.merge(newPortletCategory);
+		}
+		else {
+			_log.error(
+				"Unable to register remote portlet for company " + companyId +
+					" because it does not exist");
 		}
 
 		return portlet;
+	}
+
+	public Portlet destroyRemotePortlet(Portlet portlet)
+		throws SystemException {
+
+		long companyId = portlet.getCompanyId();
+
+		Map<String, Portlet> portletsPool = _getPortletsPool(companyId);
+
+		portletsPool.remove(portlet.getRootPortletId());
+
+		PortletApp portletApp = portlet.getPortletApp();
+
+		_portletAppsPool.remove(portletApp.getServletContextName());
+
+		_clearCaches();
 	}
 
 	public void destroyPortlet(Portlet portlet) {
