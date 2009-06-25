@@ -317,7 +317,7 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 			if (Validator.isNotNull(keywords)) {
 				searchQuery.addTerm(Field.TITLE, keywords);
 				searchQuery.addTerm(Field.DESCRIPTION, keywords);
-				searchQuery.addTerm(Field.ASSET_TAG_NAMES, keywords);
+				searchQuery.addTerm(Field.ASSET_TAG_NAMES, keywords, true);
 			}
 
 			BooleanQuery fullQuery = BooleanQueryFactoryUtil.create();

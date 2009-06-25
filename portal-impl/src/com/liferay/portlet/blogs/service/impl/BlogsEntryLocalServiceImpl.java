@@ -586,7 +586,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 				searchQuery.addTerm(Field.USER_NAME, keywords);
 				searchQuery.addTerm(Field.TITLE, keywords);
 				searchQuery.addTerm(Field.CONTENT, keywords);
-				searchQuery.addTerm(Field.ASSET_TAG_NAMES, keywords);
+				searchQuery.addTerm(Field.ASSET_TAG_NAMES, keywords, true);
 			}
 
 			BooleanQuery fullQuery = BooleanQueryFactoryUtil.create();

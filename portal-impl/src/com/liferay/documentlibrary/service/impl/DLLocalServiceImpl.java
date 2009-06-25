@@ -169,7 +169,7 @@ public class DLLocalServiceImpl implements DLLocalService {
 			if (Validator.isNotNull(keywords)) {
 				searchQuery.addTerm(Field.CONTENT, keywords);
 				searchQuery.addTerm(Field.PROPERTIES, keywords);
-				searchQuery.addTerm(Field.ASSET_TAG_NAMES, keywords);
+				searchQuery.addTerm(Field.ASSET_TAG_NAMES, keywords, true);
 			}
 
 			BooleanQuery fullQuery = BooleanQueryFactoryUtil.create();
