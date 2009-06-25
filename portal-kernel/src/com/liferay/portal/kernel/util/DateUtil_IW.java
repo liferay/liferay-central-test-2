@@ -37,6 +37,15 @@ public class DateUtil_IW {
 		return DateUtil.compareTo(date1, date2);
 	}
 
+	public boolean equals(java.util.Date date1, java.util.Date date2) {
+		return DateUtil.equals(date1, date2);
+	}
+
+	public boolean equals(java.util.Date date1, java.util.Date date2,
+		boolean ignoreMilliseconds) {
+		return DateUtil.equals(date1, date2, ignoreMilliseconds);
+	}
+
 	public java.lang.String getCurrentDate(java.lang.String pattern,
 		java.util.Locale locale) {
 		return DateUtil.getCurrentDate(pattern, locale);

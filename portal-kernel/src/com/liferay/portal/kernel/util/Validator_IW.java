@@ -33,8 +33,8 @@ public class Validator_IW {
 		return _instance;
 	}
 
-	public boolean equals(java.lang.String s1, java.lang.String s2) {
-		return Validator.equals(s1, s2);
+	public boolean equals(java.lang.Object obj1, java.lang.Object obj2) {
+		return Validator.equals(obj1, obj2);
 	}
 
 	public boolean isAddress(java.lang.String address) {
@@ -155,6 +155,10 @@ public class Validator_IW {
 
 	public boolean isWhitespace(char c) {
 		return Validator.isWhitespace(c);
+	}
+
+	public boolean isXml(java.lang.String s) {
+		return Validator.isXml(s);
 	}
 
 	private Validator_IW() {

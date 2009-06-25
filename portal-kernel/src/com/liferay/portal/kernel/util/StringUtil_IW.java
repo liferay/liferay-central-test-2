@@ -223,6 +223,11 @@ public class StringUtil_IW {
 	}
 
 	public java.lang.String replace(java.lang.String s,
+		java.lang.String oldSub, java.lang.String newSub, int fromIndex) {
+		return StringUtil.replace(s, oldSub, newSub, fromIndex);
+	}
+
+	public java.lang.String replace(java.lang.String s,
 		java.lang.String[] oldSubs, java.lang.String[] newSubs) {
 		return StringUtil.replace(s, oldSubs, newSubs);
 	}
