@@ -25,6 +25,7 @@ package com.liferay.portlet.polls.action;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.ServiceContext;
@@ -42,11 +43,14 @@ import com.liferay.portlet.polls.QuestionTitleException;
 import com.liferay.portlet.polls.model.PollsChoice;
 import com.liferay.portlet.polls.service.PollsQuestionServiceUtil;
 import com.liferay.portlet.polls.service.persistence.PollsChoiceUtil;
+import com.liferay.util.LocalizationUtil;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Enumeration;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -154,8 +158,11 @@ public class EditQuestionAction extends PortletAction {
 
 		long questionId = ParamUtil.getLong(actionRequest, "questionId");
 
-		String title = ParamUtil.getString(actionRequest, "title");
-		String description = ParamUtil.getString(actionRequest, "description");
+		Map<Locale, String> localeTitleMap =
+			LocalizationUtil.getLocalizedParameter(actionRequest, "title");
+		Map<Locale, String> localeDescriptionMap =
+			LocalizationUtil.getLocalizedParameter(
+				actionRequest, "description");
 
 		int expirationDateMonth = ParamUtil.getInteger(
 			actionRequest, "expirationDateMonth");
@@ -180,25 +187,36 @@ public class EditQuestionAction extends PortletAction {
 
 		Enumeration<String> enu = actionRequest.getParameterNames();
 
+		List<String> parametersRead = new ArrayList<String>();
+
 		while (enu.hasMoreElements()) {
 			String param = enu.nextElement();
 
 			if (param.startsWith(CHOICE_DESCRIPTION_PREFIX)) {
 				try {
 					String id = param.substring(
-						CHOICE_DESCRIPTION_PREFIX.length(), param.length());
+						CHOICE_DESCRIPTION_PREFIX.length(),
+							param.indexOf(StringPool.UNDERLINE));
+
+					if (parametersRead.contains(id)) {
+						continue;
+					}
 
 					String choiceName = ParamUtil.getString(
 						actionRequest, CHOICE_NAME_PREFIX + id);
-					String choiceDescription = ParamUtil.getString(
-						actionRequest, param);
+
+					Map<Locale, String> localeChoiceDescriptionMap =
+						LocalizationUtil.getLocalizedParameter(
+							actionRequest, CHOICE_DESCRIPTION_PREFIX + id);
 
 					PollsChoice choice = PollsChoiceUtil.create(0);
 
 					choice.setName(choiceName);
-					choice.setDescription(choiceDescription);
+					choice.setDescriptionMap(localeChoiceDescriptionMap);
 
 					choices.add(choice);
+
+					parametersRead.add(id);
 				}
 				catch (Exception e) {
 				}
@@ -213,18 +231,19 @@ public class EditQuestionAction extends PortletAction {
 			// Add question
 
 			PollsQuestionServiceUtil.addQuestion(
-				title, description, expirationDateMonth, expirationDateDay,
-				expirationDateYear, expirationDateHour, expirationDateMinute,
-				neverExpire, choices, serviceContext);
+				localeTitleMap, localeDescriptionMap, expirationDateMonth,
+				expirationDateDay, expirationDateYear, expirationDateHour,
+				expirationDateMinute, neverExpire, choices, serviceContext);
 		}
 		else {
 
 			// Update question
 
 			PollsQuestionServiceUtil.updateQuestion(
-				questionId, title, description, expirationDateMonth,
-				expirationDateDay, expirationDateYear, expirationDateHour,
-				expirationDateMinute, neverExpire, choices, serviceContext);
+				questionId, localeTitleMap, localeDescriptionMap,
+				expirationDateMonth, expirationDateDay, expirationDateYear,
+				expirationDateHour, expirationDateMinute, neverExpire, choices,
+				serviceContext);
 		}
 	}
 

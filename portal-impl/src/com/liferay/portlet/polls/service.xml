@@ -13,7 +13,7 @@
 
 		<column name="questionId" type="long" />
 		<column name="name" type="String" />
-		<column name="description" type="String" />
+		<column name="description" type="String" localized="true"/>
 
 		<!-- Order -->
 
@@ -56,8 +56,8 @@
 
 		<!-- Other fields -->
 
-		<column name="title" type="String" />
-		<column name="description" type="String" />
+		<column name="title" type="String" localized="true"/>
+		<column name="description" type="String" localized="true" />
 		<column name="expirationDate" type="Date" />
 		<column name="lastVoteDate" type="Date" />
 
