@@ -185,7 +185,8 @@ public class PortletLister {
 				PortletApp portletApp = portlet.getPortletApp();
 
 				if (portletApp.isWARFile() &&
-						Validator.isNull(externalPortletCategory)) {
+					Validator.isNull(externalPortletCategory)) {
+
 					PortletConfig portletConfig = PortletConfigFactory.create(
 						portlet, _servletContext);
 
