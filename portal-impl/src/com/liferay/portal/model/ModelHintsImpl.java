@@ -303,9 +303,9 @@ public class ModelHintsImpl implements ModelHints {
 
 	private static final String _ELEMENTS_SUFFIX = "_ELEMENTS";
 
-	private static final String _LOCALIZATION_SUFFIX = "_LOCALIZATION";
-
 	private static final String _TYPE_SUFFIX = "_TYPE";
+
+	private static final String _LOCALIZATION_SUFFIX = "_LOCALIZATION";
 
 	private static final String _HINTS_SUFFIX = "_HINTS";
 
