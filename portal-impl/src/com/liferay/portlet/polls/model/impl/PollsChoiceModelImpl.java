@@ -249,7 +249,7 @@ public class PollsChoiceModelImpl extends BaseModelImpl<PollsChoice> {
 		}
 	}
 
-	public void setDescription(Map<Locale, String> descriptionMap) {
+	public void setDescriptionMap(Map<Locale, String> descriptionMap) {
 		if (descriptionMap == null) {
 			return;
 		}

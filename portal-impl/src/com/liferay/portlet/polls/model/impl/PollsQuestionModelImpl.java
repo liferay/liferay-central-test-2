@@ -310,7 +310,7 @@ public class PollsQuestionModelImpl extends BaseModelImpl<PollsQuestion> {
 		}
 	}
 
-	public void setTitle(Map<Locale, String> titleMap) {
+	public void setTitleMap(Map<Locale, String> titleMap) {
 		if (titleMap == null) {
 			return;
 		}
@@ -402,7 +402,7 @@ public class PollsQuestionModelImpl extends BaseModelImpl<PollsQuestion> {
 		}
 	}
 
-	public void setDescription(Map<Locale, String> descriptionMap) {
+	public void setDescriptionMap(Map<Locale, String> descriptionMap) {
 		if (descriptionMap == null) {
 			return;
 		}
