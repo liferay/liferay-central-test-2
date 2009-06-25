@@ -133,7 +133,7 @@ public class EditRoleAction extends PortletAction {
 
 		String name = ParamUtil.getString(actionRequest, "name");
 		Map<Locale, String> localeTitlesMap =
-			LocalizationUtil.getLocalizedParameter(actionRequest, "title");
+			LocalizationUtil.getLocalizationMap(actionRequest, "title");
 		String description = ParamUtil.getString(actionRequest, "description");
 		int type = ParamUtil.getInteger(
 			actionRequest, "type", RoleConstants.TYPE_REGULAR);

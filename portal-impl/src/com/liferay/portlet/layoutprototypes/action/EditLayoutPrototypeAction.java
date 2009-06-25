@@ -125,7 +125,7 @@ public class EditLayoutPrototypeAction extends PortletAction {
 			actionRequest, "layoutPrototypeId");
 
 		Map<Locale, String> localeTitlesMap =
-			LocalizationUtil.getLocalizedParameter(actionRequest, "title");
+			LocalizationUtil.getLocalizationMap(actionRequest, "title");
 		String description = ParamUtil.getString(actionRequest, "description");
 		boolean active = ParamUtil.getBoolean(actionRequest, "active");
 

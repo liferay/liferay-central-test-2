@@ -512,9 +512,9 @@ public class EditPagesAction extends PortletAction {
 		long copyLayoutId = ParamUtil.getLong(uploadRequest, "copyLayoutId");
 
 		Map<Locale, String> localeNamesMap =
-			LocalizationUtil.getLocalizedParameter(actionRequest, "name");
+			LocalizationUtil.getLocalizationMap(actionRequest, "name");
 		Map<Locale, String> localeTitlesMap =
-			LocalizationUtil.getLocalizedParameter(actionRequest, "title");
+			LocalizationUtil.getLocalizationMap(actionRequest, "title");
 
 		if (cmd.equals(Constants.ADD)) {
 
