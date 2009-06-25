@@ -63,11 +63,10 @@ public class LuceneIndexSearcherImpl implements IndexSearcher {
 		Hits hits = null;
 
 		org.apache.lucene.search.IndexSearcher searcher = null;
+		org.apache.lucene.search.Sort luceneSort = null;
 
 		try {
 			searcher = LuceneUtil.getSearcher(companyId);
-
-			org.apache.lucene.search.Sort luceneSort = null;
 
 			if (sorts != null) {
 				SortField[] sortFields = new SortField[sorts.length];
@@ -87,17 +86,31 @@ public class LuceneIndexSearcherImpl implements IndexSearcher {
 
 			hits = subset(luceneHits, start, end);
 		}
-		catch (Exception e) {
-			if (e instanceof BooleanQuery.TooManyClauses ||
-				e instanceof ParseException) {
+		catch (BooleanQuery.TooManyClauses tmc) {
+			int maxClauseCount = BooleanQuery.getMaxClauseCount();
 
-				_log.error("Query: " + query, e);
+			BooleanQuery.setMaxClauseCount(Integer.MAX_VALUE);
 
-				return new HitsImpl();
+			try {
+				org.apache.lucene.search.Hits luceneHits = searcher.search(
+					QueryTranslator.translate(query), luceneSort);
+
+				hits = subset(luceneHits, start, end);
 			}
-			else {
+			catch (Exception e)  {
 				throw new SearchException(e);
 			}
+			finally {
+				BooleanQuery.setMaxClauseCount(maxClauseCount);
+			}
+		}
+		catch (ParseException pe) {
+			_log.error("Query: " + query, pe);
+
+			return new HitsImpl();
+		}
+		catch (Exception e) {
+			throw new SearchException(e);
 		}
 		finally {
 			try {
