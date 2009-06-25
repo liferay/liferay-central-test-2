@@ -70,7 +70,7 @@ for (int i = 0; i < results.size(); i++) {
 
 	// Title
 
-	row.addText(question.getTitle(), rowURL);
+	row.addText(question.getTitle(locale), rowURL);
 
 	// Number of votes
 

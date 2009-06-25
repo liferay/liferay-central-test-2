@@ -51,11 +51,11 @@ if (viewResults && !PollsQuestionPermission.contains(permissionChecker, question
 <liferay-ui:error exception="<%= NoSuchChoiceException.class %>" message="please-select-an-option" />
 
 <span style="font-size: small;"><b>
-<%= question.getTitle() %>
+<%= question.getTitle(locale) %>
 </b></span><br />
 
 <span style="font-size: x-small;">
-<%= question.getDescription() %>
+<%= question.getDescription(locale) %>
 </span>
 
 <br /><br />
@@ -73,7 +73,7 @@ if (viewResults && !PollsQuestionPermission.contains(permissionChecker, question
 				choice = choice.toEscapedModel();
 			%>
 
-				<label><input name="<portlet:namespace />choiceId" type="radio" value="<%= choice.getChoiceId() %>" /><strong><%= choice.getName() %>.</strong> <%= choice.getDescription() %></label> <br />
+				<label><input name="<portlet:namespace />choiceId" type="radio" value="<%= choice.getChoiceId() %>" /><strong><%= choice.getName() %>.</strong> <%= choice.getDescription(locale) %></label> <br />
 
 			<%
 			}

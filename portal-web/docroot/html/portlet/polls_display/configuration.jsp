@@ -51,7 +51,7 @@ List questions = PollsQuestionLocalServiceUtil.getQuestions(scopeGroupId);
 				question = question.toEscapedModel();
 			%>
 
-				<option <%= (questionId == question.getQuestionId()) ? "selected" : "" %> value="<%= question.getQuestionId() %>"><%= question.getTitle() %></option>
+				<option <%= (questionId == question.getQuestionId()) ? "selected" : "" %> value="<%= question.getQuestionId() %>"><%= question.getTitle(locale) %></option>
 
 			<%
 			}
