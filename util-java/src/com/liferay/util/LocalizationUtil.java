@@ -114,6 +114,19 @@ public class LocalizationUtil {
 
 		String defaultValue = StringPool.BLANK;
 
+		if (!StringUtil.isXml(xml)) {
+			if (requestedLanguageId.equals(systemDefaultLanguageId)) {
+				value = xml;
+			}
+			else {
+				value = defaultValue;
+			}
+
+			_setCachedValue(xml, requestedLanguageId, useDefault, value);
+
+			return value;
+		}
+
 		XMLStreamReader reader = null;
 
 		try {
@@ -207,6 +220,20 @@ public class LocalizationUtil {
 		_setCachedValue(xml, requestedLanguageId, useDefault, value);
 
 		return value;
+	}
+
+	public static Map<Locale, String> getLocalizedField(String xml) {
+		Locale[] locales = LanguageUtil.getAvailableLocales();
+
+		Map<Locale, String> map = new HashMap<Locale, String>();
+
+		for (Locale locale : locales) {
+			String languageId = LocaleUtil.toLanguageId(locale);
+
+			map.put(locale, getLocalization(xml, languageId));
+		}
+
+		return map;
 	}
 
 	public static Map<Locale, String> getLocalizedParameter(

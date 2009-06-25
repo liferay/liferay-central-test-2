@@ -38,10 +38,6 @@ String defaultLanguageId = LocaleUtil.toLanguageId(defaultLocale);
 Locale[] locales = LanguageUtil.getAvailableLocales();
 
 String defaultLanguageValue = ParamUtil.getString(request, name + StringPool.UNDERLINE + defaultLanguageId, LocalizationUtil.getLocalization(xml, defaultLanguageId));
-
-if (Validator.isNull(defaultLanguageValue) && request.getParameter(name + StringPool.UNDERLINE + defaultLanguageId) == null) {
-	defaultLanguageValue = xml;
-}
 %>
 
 <div class="taglib-input-localized">
