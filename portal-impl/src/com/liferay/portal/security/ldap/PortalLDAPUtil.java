@@ -230,8 +230,7 @@ public class PortalLDAPUtil {
 			String jobTitleMapping = userMappings.getProperty("jobTitle");
 
 			if (Validator.isNotNull(jobTitleMapping)) {
-				mods.addItem(
-					jobTitleMapping, user.getJobTitle());
+				mods.addItem(jobTitleMapping, user.getJobTitle());
 			}
 
 			ModificationItem[] modItems = mods.getItems();

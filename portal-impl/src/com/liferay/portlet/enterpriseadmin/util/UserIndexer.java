@@ -130,9 +130,8 @@ public class UserIndexer implements Indexer {
 			Document doc = getUserDocument(
 				user.getCompanyId(), user.getUserId(), user.getScreenName(),
 				user.getEmailAddress(), user.getFirstName(),
-				user.getMiddleName(), user.getLastName(),
-				user.getJobTitle(), user.getActive(),
-				user.getGroupIds(), user.getOrganizationIds(),
+				user.getMiddleName(), user.getLastName(), user.getJobTitle(),
+				user.getActive(), user.getGroupIds(), user.getOrganizationIds(),
 				user.getRoleIds(), user.getUserGroupIds(), assetTagNames,
 				user.getExpandoBridge());
 
