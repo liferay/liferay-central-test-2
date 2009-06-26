@@ -557,7 +557,7 @@
 
 		<!-- Other fields -->
 
-		<column name="name" type="String" />
+		<column name="name" type="String" localized="true" />
 		<column name="description" type="String" />
 		<column name="settings" type="String" />
 		<column name="active" type="boolean" />

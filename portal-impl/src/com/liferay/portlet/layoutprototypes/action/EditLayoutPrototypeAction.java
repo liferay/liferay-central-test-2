@@ -124,8 +124,8 @@ public class EditLayoutPrototypeAction extends PortletAction {
 		long layoutPrototypeId = ParamUtil.getLong(
 			actionRequest, "layoutPrototypeId");
 
-		Map<Locale, String> localeTitlesMap =
-			LocalizationUtil.getLocalizationMap(actionRequest, "title");
+		Map<Locale, String> nameMap =
+			LocalizationUtil.getLocalizationMap(actionRequest, "name");
 		String description = ParamUtil.getString(actionRequest, "description");
 		boolean active = ParamUtil.getBoolean(actionRequest, "active");
 
@@ -134,14 +134,14 @@ public class EditLayoutPrototypeAction extends PortletAction {
 			// Add layout prototoype
 
 			LayoutPrototypeServiceUtil.addLayoutPrototype(
-				localeTitlesMap, description, active);
+				nameMap, description, active);
 		}
 		else {
 
 			// Update layout prototoype
 
 			LayoutPrototypeServiceUtil.updateLayoutPrototype(
-				layoutPrototypeId, localeTitlesMap, description, active);
+				layoutPrototypeId, nameMap, description, active);
 		}
 	}
 

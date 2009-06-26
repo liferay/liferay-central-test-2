@@ -24,10 +24,8 @@ package com.liferay.portal.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.LayoutPrototype;
@@ -51,7 +49,7 @@ public class LayoutPrototypeLocalServiceImpl
 	extends LayoutPrototypeLocalServiceBaseImpl {
 
 	public LayoutPrototype addLayoutPrototype(
-			long userId, long companyId, Map<Locale, String> localeNamesMap,
+			long userId, long companyId, Map<Locale, String> nameMap,
 			String description, boolean active)
 		throws PortalException, SystemException {
 
@@ -65,8 +63,7 @@ public class LayoutPrototypeLocalServiceImpl
 		layoutPrototype.setCompanyId(companyId);
 		layoutPrototype.setDescription(description);
 		layoutPrototype.setActive(active);
-
-		setLocalizedAttributes(layoutPrototype, localeNamesMap);
+		layoutPrototype.setNameMap(nameMap);
 
 		layoutPrototypePersistence.update(layoutPrototype, false);
 
@@ -153,7 +150,7 @@ public class LayoutPrototypeLocalServiceImpl
 	}
 
 	public LayoutPrototype updateLayoutPrototype(
-			long layoutPrototypeId, Map<Locale, String> localeNamesMap,
+			long layoutPrototypeId, Map<Locale, String> nameMap,
 			String description, boolean active)
 		throws PortalException, SystemException {
 
@@ -164,8 +161,7 @@ public class LayoutPrototypeLocalServiceImpl
 
 		layoutPrototype.setDescription(description);
 		layoutPrototype.setActive(active);
-
-		setLocalizedAttributes(layoutPrototype, localeNamesMap);
+		layoutPrototype.setNameMap(nameMap);
 
 		layoutPrototypePersistence.update(layoutPrototype, false);
 
@@ -179,39 +175,6 @@ public class LayoutPrototypeLocalServiceImpl
 		groupPersistence.update(group, false);
 
 		return layoutPrototype;
-	}
-
-	protected void setLocalizedAttributes(
-		LayoutPrototype layoutPrototype, Map<Locale, String> localeNamesMap) {
-
-		if (localeNamesMap == null) {
-			return;
-		}
-
-		ClassLoader portalClassLoader = PortalClassLoaderUtil.getClassLoader();
-
-		Thread currentThread = Thread.currentThread();
-
-		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
-
-		try {
-			if (contextClassLoader != portalClassLoader) {
-				currentThread.setContextClassLoader(portalClassLoader);
-			}
-
-			Locale[] locales = LanguageUtil.getAvailableLocales();
-
-			for (Locale locale : locales) {
-				String name = localeNamesMap.get(locale);
-
-				layoutPrototype.setName(name, locale);
-			}
-		}
-		finally {
-			if (contextClassLoader != portalClassLoader) {
-				currentThread.setContextClassLoader(contextClassLoader);
-			}
-		}
 	}
 
 }

@@ -22,17 +22,13 @@
 
 package com.liferay.portal.model.impl;
 
-import com.liferay.portal.kernel.util.LocaleUtil;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutPrototype;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
-import com.liferay.util.LocalizationUtil;
 
 import java.util.List;
-import java.util.Locale;
 
 /**
  * <a href="LayoutPrototypeImpl.java.html"><b><i>View Source</i></b></a>
@@ -76,49 +72,6 @@ public class LayoutPrototypeImpl
 		}
 
 		return layout;
-	}
-
-	public String getName(Locale locale) {
-		String localeLanguageId = LocaleUtil.toLanguageId(locale);
-
-		return getName(localeLanguageId);
-	}
-
-	public String getName(Locale locale, boolean useDefault) {
-		String localeLanguageId = LocaleUtil.toLanguageId(locale);
-
-		return getName(localeLanguageId, useDefault);
-	}
-
-	public String getName(String localeLanguageId) {
-		String name = LocalizationUtil.getLocalization(
-			getName(), localeLanguageId);
-
-		if (Validator.isNull(name)) {
-			name = getName();
-		}
-
-		return name;
-	}
-
-	public String getName(String localeLanguageId, boolean useDefault) {
-		return LocalizationUtil.getLocalization(
-			getName(), localeLanguageId, useDefault);
-	}
-
-	public void setName(String name, Locale locale) {
-		String localeLanguageId = LocaleUtil.toLanguageId(locale);
-
-		if (Validator.isNotNull(name)) {
-			setName(
-				LocalizationUtil.updateLocalization(
-					getName(), "name", name, localeLanguageId));
-		}
-		else {
-			setName(
-				LocalizationUtil.removeLocalization(
-					getName(), "name", localeLanguageId));
-		}
 	}
 
 }

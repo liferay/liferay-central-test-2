@@ -52,15 +52,4 @@ public interface LayoutPrototype extends LayoutPrototypeModel {
 	public com.liferay.portal.model.Group getGroup();
 
 	public com.liferay.portal.model.Layout getLayout();
-
-	public java.lang.String getName(java.util.Locale locale);
-
-	public java.lang.String getName(java.util.Locale locale, boolean useDefault);
-
-	public java.lang.String getName(java.lang.String localeLanguageId);
-
-	public java.lang.String getName(java.lang.String localeLanguageId,
-		boolean useDefault);
-
-	public void setName(java.lang.String name, java.util.Locale locale);
 }
