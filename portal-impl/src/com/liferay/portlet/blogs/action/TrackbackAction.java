@@ -39,6 +39,7 @@ import com.liferay.portal.util.Portal;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
+import com.liferay.portlet.blogs.NoSuchEntryException;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.util.TrackbackVerifierUtil;
 import com.liferay.portlet.messageboards.model.MBMessage;
@@ -73,10 +74,13 @@ public class TrackbackAction extends PortletAction {
 		try {
 			addTrackback(actionRequest, actionResponse);
 		}
+		catch (NoSuchEntryException nsee) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(nsee, nsee);
+			}
+		}
 		catch (Exception e) {
-			sendError(actionResponse, "An unknown error has occurred.");
-
-			_log.error(e);
+			_log.error(e, e);
 		}
 
 		setForward(actionRequest, ActionConstants.COMMON_NULL);
