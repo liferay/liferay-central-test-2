@@ -22,6 +22,8 @@
 
 package com.liferay.portal.model;
 
+import java.util.Locale;
+import java.util.Map;
 
 /**
  * <a href="LayoutPrototypeModel.java.html"><b><i>View Source</i></b></a>
@@ -58,7 +60,21 @@ public interface LayoutPrototypeModel extends BaseModel<LayoutPrototype> {
 
 	public String getName();
 
+	public String getName(Locale locale);
+
+	public String getName(Locale locale, boolean useDefault);
+
+	public String getName(String languageId);
+
+	public String getName(String languageId, boolean useDefault);
+
+	public Map<Locale, String> getNameMap();
+
 	public void setName(String name);
+
+	public void setName(Locale locale, String name);
+
+	public void setNameMap(Map<Locale, String> nameMap);
 
 	public String getDescription();
 

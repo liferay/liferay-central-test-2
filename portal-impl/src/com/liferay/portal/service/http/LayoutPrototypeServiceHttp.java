@@ -73,14 +73,14 @@ import com.liferay.portal.service.LayoutPrototypeServiceUtil;
 public class LayoutPrototypeServiceHttp {
 	public static com.liferay.portal.model.LayoutPrototype addLayoutPrototype(
 		HttpPrincipal httpPrincipal,
-		java.util.Map<java.util.Locale, String> localeNamesMap,
+		java.util.Map<java.util.Locale, String> nameMap,
 		java.lang.String description, boolean active)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = localeNamesMap;
+			Object paramObj0 = nameMap;
 
-			if (localeNamesMap == null) {
+			if (nameMap == null) {
 				paramObj0 = new NullWrapper("java.util.Map");
 			}
 
@@ -242,16 +242,16 @@ public class LayoutPrototypeServiceHttp {
 
 	public static com.liferay.portal.model.LayoutPrototype updateLayoutPrototype(
 		HttpPrincipal httpPrincipal, long layoutPrototypeId,
-		java.util.Map<java.util.Locale, String> localeNamesMap,
+		java.util.Map<java.util.Locale, String> nameMap,
 		java.lang.String description, boolean active)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(layoutPrototypeId);
 
-			Object paramObj1 = localeNamesMap;
+			Object paramObj1 = nameMap;
 
-			if (localeNamesMap == null) {
+			if (nameMap == null) {
 				paramObj1 = new NullWrapper("java.util.Map");
 			}
 

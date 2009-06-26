@@ -23,13 +23,19 @@
 package com.liferay.portal.model.impl;
 
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
+import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
+import com.liferay.portal.kernel.util.LocaleUtil;
+import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.LayoutPrototype;
 import com.liferay.portal.model.LayoutPrototypeSoap;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
+
+import com.liferay.util.LocalizationUtil;
 
 import java.io.Serializable;
 
@@ -39,6 +45,8 @@ import java.sql.Types;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
 /**
  * <a href="LayoutPrototypeModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -154,8 +162,91 @@ public class LayoutPrototypeModelImpl extends BaseModelImpl<LayoutPrototype> {
 		return GetterUtil.getString(_name);
 	}
 
+	public String getName(Locale locale) {
+		String languageId = LocaleUtil.toLanguageId(locale);
+
+		return getName(languageId);
+	}
+
+	public String getName(Locale locale, boolean useDefault) {
+		String languageId = LocaleUtil.toLanguageId(locale);
+
+		return getName(languageId, useDefault);
+	}
+
+	public String getName(String languageId) {
+		String value = LocalizationUtil.getLocalization(getName(), languageId);
+
+		if (isEscapedModel()) {
+			return HtmlUtil.escape(value);
+		}
+		else {
+			return value;
+		}
+	}
+
+	public String getName(String languageId, boolean useDefault) {
+		String value = LocalizationUtil.getLocalization(getName(), languageId,
+				useDefault);
+
+		if (isEscapedModel()) {
+			return HtmlUtil.escape(value);
+		}
+		else {
+			return value;
+		}
+	}
+
+	public Map<Locale, String> getNameMap() {
+		return LocalizationUtil.getLocalizationMap(getName());
+	}
+
 	public void setName(String name) {
 		_name = name;
+	}
+
+	public void setName(Locale locale, String name) {
+		String languageId = LocaleUtil.toLanguageId(locale);
+
+		if (Validator.isNotNull(name)) {
+			setName(LocalizationUtil.updateLocalization(getName(), "Name",
+					name, languageId));
+		}
+		else {
+			setName(LocalizationUtil.removeLocalization(getName(), "Name",
+					languageId));
+		}
+	}
+
+	public void setNameMap(Map<Locale, String> nameMap) {
+		if (nameMap == null) {
+			return;
+		}
+
+		ClassLoader portalClassLoader = PortalClassLoaderUtil.getClassLoader();
+
+		Thread currentThread = Thread.currentThread();
+
+		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
+
+		try {
+			if (contextClassLoader != portalClassLoader) {
+				currentThread.setContextClassLoader(portalClassLoader);
+			}
+
+			Locale[] locales = LanguageUtil.getAvailableLocales();
+
+			for (Locale locale : locales) {
+				String name = nameMap.get(locale);
+
+				setName(locale, name);
+			}
+		}
+		finally {
+			if (contextClassLoader != portalClassLoader) {
+				currentThread.setContextClassLoader(contextClassLoader);
+			}
+		}
 	}
 
 	public String getDescription() {
@@ -198,7 +289,7 @@ public class LayoutPrototypeModelImpl extends BaseModelImpl<LayoutPrototype> {
 
 			model.setLayoutPrototypeId(getLayoutPrototypeId());
 			model.setCompanyId(getCompanyId());
-			model.setName(HtmlUtil.escape(getName()));
+			model.setName(getName());
 			model.setDescription(HtmlUtil.escape(getDescription()));
 			model.setSettings(HtmlUtil.escape(getSettings()));
 			model.setActive(getActive());
