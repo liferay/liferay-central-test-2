@@ -42,6 +42,7 @@ int totalVotes = question.getVotesCount();
 
 for (int i = 0; i < choices.size(); i++) {
 	PollsChoice choice = (PollsChoice)choices.get(i);
+
 	choice = choice.toEscapedModel();
 
 	int choiceVotes = choice.getVotesCount();
