@@ -50,7 +50,7 @@ long layoutPrototypeId = layoutPrototype.getLayoutPrototypeId();
 	<c:if test="<%= LayoutPrototypePermissionUtil.contains(permissionChecker, layoutPrototypeId, ActionKeys.PERMISSIONS) %>">
 		<liferay-security:permissionsURL
 			modelResource="<%= LayoutPrototype.class.getName() %>"
-			modelResourceDescription="<%= layoutPrototype.getName() %>"
+			modelResourceDescription="<%= layoutPrototype.getName(locale) %>"
 			resourcePrimKey="<%= String.valueOf(layoutPrototypeId) %>"
 			var="permissionsURL"
 		/>
