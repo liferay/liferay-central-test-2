@@ -55,7 +55,7 @@ public class UpgradeUser extends UpgradeProcess {
 	}
 
 	protected void doUpgrade() throws Exception {
-		if (isSupportsAlterColumnName()) {
+		if (isSupportsAlterColumnType()) {
 			runSQL("alter_column_type User_ greeting VARCHAR(255) null");
 		}
 		else {

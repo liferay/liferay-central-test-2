@@ -50,7 +50,7 @@ public class UpgradeSoftwareCatalog extends UpgradeProcess {
 	}
 
 	protected void doUpgrade() throws Exception {
-		if (isSupportsAlterColumnName()) {
+		if (isSupportsAlterColumnType()) {
 			runSQL("alter_column_type SCProductEntry tags VARCHAR(255) null");
 		}
 		else {
