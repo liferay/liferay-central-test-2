@@ -41,7 +41,6 @@ import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.Node;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.kernel.xml.XPath;
-import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutSet;
@@ -231,12 +230,7 @@ public class JournalUtil {
 			userName = user.getFullName();
 			userEmailAddress = user.getEmailAddress();
 			userComments = user.getComments();
-
-			Contact contact = user.getContact();
-
-			if (contact != null) {
-				userJobTitle = contact.getJobTitle();
-			}
+			userJobTitle = user.getJobTitle();
 		}
 		catch (PortalException pe) {
 		}

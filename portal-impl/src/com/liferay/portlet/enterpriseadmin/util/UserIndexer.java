@@ -32,7 +32,6 @@ import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.InitialThreadLocal;
-import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.ContactConstants;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.User;
@@ -125,16 +124,14 @@ public class UserIndexer implements Indexer {
 				return;
 			}
 
-			Contact contact = user.getContact();
-
 			String[] assetTagNames = AssetTagLocalServiceUtil.getTagNames(
 				User.class.getName(), user.getUserId());
 
 			Document doc = getUserDocument(
 				user.getCompanyId(), user.getUserId(), user.getScreenName(),
-				user.getEmailAddress(), contact.getFirstName(),
-				contact.getMiddleName(), contact.getLastName(),
-				contact.getJobTitle(), user.getActive(),
+				user.getEmailAddress(), user.getFirstName(),
+				user.getMiddleName(), user.getLastName(),
+				user.getJobTitle(), user.getActive(),
 				user.getGroupIds(), user.getOrganizationIds(),
 				user.getRoleIds(), user.getUserGroupIds(), assetTagNames,
 				user.getExpandoBridge());

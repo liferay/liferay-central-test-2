@@ -3114,10 +3114,6 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			companyId, start, end);
 
 		for (User user : users) {
-			if (user.isDefaultUser()) {
-				continue;
-			}
-
 			try {
 				UserIndexer.updateUser(user);
 			}

@@ -231,7 +231,7 @@ public class PortalLDAPUtil {
 
 			if (Validator.isNotNull(jobTitleMapping)) {
 				mods.addItem(
-					jobTitleMapping, user.getContact().getJobTitle());
+					jobTitleMapping, user.getJobTitle());
 			}
 
 			ModificationItem[] modItems = mods.getItems();

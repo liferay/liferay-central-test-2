@@ -102,7 +102,7 @@ public class LDAPUser extends DummyDirContext {
 		String jobTitleMapping = userMappings.getProperty("jobTitle");
 
 		if (Validator.isNotNull(jobTitleMapping)) {
-			_attrs.put(jobTitleMapping, _user.getContact().getJobTitle());
+			_attrs.put(jobTitleMapping, _user.getJobTitle());
 		}
 	}
 
