@@ -579,13 +579,17 @@ Liferay.Tree = new Expanse.Class(
 
 					pageImg.attr('src', loadingGif);
 
-					jQuery.get(
-						url,
-						function(html) {
-							subBranch.html(html);
-							branchInteraction();
-							pageImg.attr('src', pageImgSrc);
-							sessionClick();
+					jQuery.ajax(
+						{
+							cache: false,
+							type: 'GET',
+							url: url,
+							success: function(html) {
+								subBranch.html(html);
+								branchInteraction();
+								pageImg.attr('src', pageImgSrc);
+								sessionClick();
+							}
 						}
 					);
 				}
