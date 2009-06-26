@@ -53,9 +53,11 @@ if (Validator.isNotNull(viewUsersRedirect)) {
 	<input name="<portlet:namespace />usersRedirect" type="hidden" value="<%= portletURL.toString() %>" />
 
 	<%
+	UserDisplayTerms displayTerms = (UserDisplayTerms)searchContainer.getDisplayTerms();
 	UserSearchTerms searchTerms = (UserSearchTerms)searchContainer.getSearchTerms();
 
 	if (!searchTerms.isAdvancedSearch() && !searchTerms.hasActive()) {
+		displayTerms.setActive(Boolean.TRUE);
 		searchTerms.setActive(Boolean.TRUE);
 	}
 
