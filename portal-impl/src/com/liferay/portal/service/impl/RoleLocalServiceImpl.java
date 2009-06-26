@@ -30,10 +30,8 @@ import com.liferay.portal.RoleNameException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.Propagation;
 import com.liferay.portal.kernel.annotation.Transactional;
-import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -63,15 +61,17 @@ import java.util.Map;
 public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 
 	public Role addRole(
-			long userId, long companyId, String name, String description,
-			int type)
+			long userId, long companyId, String name,
+			Map<Locale, String> titleMap, String description, int type)
 		throws PortalException, SystemException {
 
-		return addRole(userId, companyId, name, description, type, null, 0);
+		return addRole(
+			userId, companyId, name, titleMap, description, type, null, 0);
 	}
 
 	public Role addRole(
-			long userId, long companyId, String name, String description,
+			long userId, long companyId, String name,
+			Map<Locale, String> titleMap, String description,
 			int type, String className, long classPK)
 		throws PortalException, SystemException {
 
@@ -97,6 +97,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		role.setName(name);
 		role.setDescription(description);
 		role.setType(type);
+		role.setTitleMap(titleMap);
 
 		rolePersistence.update(role, false);
 
@@ -424,7 +425,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 	}
 
 	public Role updateRole(
-			long roleId, String name, Map<Locale, String> localeTitlesMap,
+			long roleId, String name, Map<Locale, String> titleMap,
 			String description, String subtype)
 		throws PortalException, SystemException {
 
@@ -440,8 +441,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		role.setName(name);
 		role.setDescription(description);
 		role.setSubtype(subtype);
-
-		setLocalizedAttributes(role, localeTitlesMap);
+		role.setTitleMap(titleMap);
 
 		rolePersistence.update(role, false);
 
@@ -467,43 +467,10 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		}
 		catch (NoSuchRoleException nsre) {
 			role = roleLocalService.addRole(
-				0, companyId, name, description, type);
+				0, companyId, name, null, description, type);
 		}
 
 		_systemRolesMap.put(companyId + name, role);
-	}
-
-	protected void setLocalizedAttributes(
-		Role role, Map<Locale, String> localeTitlesMap) {
-
-		if (localeTitlesMap == null) {
-			return;
-		}
-
-		ClassLoader portalClassLoader = PortalClassLoaderUtil.getClassLoader();
-
-		Thread currentThread = Thread.currentThread();
-
-		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
-
-		try {
-			if (contextClassLoader != portalClassLoader) {
-				currentThread.setContextClassLoader(portalClassLoader);
-			}
-
-			Locale[] locales = LanguageUtil.getAvailableLocales();
-
-			for (Locale locale : locales) {
-				String title = localeTitlesMap.get(locale);
-
-				role.setTitle(title, locale);
-			}
-		}
-		finally {
-			if (contextClassLoader != portalClassLoader) {
-				currentThread.setContextClassLoader(contextClassLoader);
-			}
-		}
 	}
 
 	protected void validate(long roleId, long companyId, String name)
