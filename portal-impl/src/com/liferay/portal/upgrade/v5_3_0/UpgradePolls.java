@@ -57,7 +57,7 @@ public class UpgradePolls extends UpgradeProcess {
 		}
 		else {
 
-			//PollsChoice
+			// PollsChoice
 
 			UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
 				PollsChoiceImpl.TABLE_NAME, PollsChoiceImpl.TABLE_COLUMNS);
@@ -66,7 +66,7 @@ public class UpgradePolls extends UpgradeProcess {
 
 			upgradeTable.updateTable();
 
-			//PollsQuestion
+			// PollsQuestion
 
 			upgradeTable = new DefaultUpgradeTableImpl(
 				PollsQuestionImpl.TABLE_NAME, PollsQuestionImpl.TABLE_COLUMNS);
