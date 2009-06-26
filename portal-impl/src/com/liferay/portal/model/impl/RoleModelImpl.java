@@ -23,15 +23,21 @@
 package com.liferay.portal.model.impl;
 
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
+import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
+import com.liferay.portal.kernel.util.LocaleUtil;
+import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.RoleSoap;
 import com.liferay.portal.util.PortalUtil;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
+
+import com.liferay.util.LocalizationUtil;
 
 import java.io.Serializable;
 
@@ -41,6 +47,8 @@ import java.sql.Types;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
 /**
  * <a href="RoleModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -241,8 +249,91 @@ public class RoleModelImpl extends BaseModelImpl<Role> {
 		return GetterUtil.getString(_title);
 	}
 
+	public String getTitle(Locale locale) {
+		String languageId = LocaleUtil.toLanguageId(locale);
+
+		return getTitle(languageId);
+	}
+
+	public String getTitle(Locale locale, boolean useDefault) {
+		String languageId = LocaleUtil.toLanguageId(locale);
+
+		return getTitle(languageId, useDefault);
+	}
+
+	public String getTitle(String languageId) {
+		String value = LocalizationUtil.getLocalization(getTitle(), languageId);
+
+		if (isEscapedModel()) {
+			return HtmlUtil.escape(value);
+		}
+		else {
+			return value;
+		}
+	}
+
+	public String getTitle(String languageId, boolean useDefault) {
+		String value = LocalizationUtil.getLocalization(getTitle(), languageId,
+				useDefault);
+
+		if (isEscapedModel()) {
+			return HtmlUtil.escape(value);
+		}
+		else {
+			return value;
+		}
+	}
+
+	public Map<Locale, String> getTitleMap() {
+		return LocalizationUtil.getLocalizationMap(getTitle());
+	}
+
 	public void setTitle(String title) {
 		_title = title;
+	}
+
+	public void setTitle(Locale locale, String title) {
+		String languageId = LocaleUtil.toLanguageId(locale);
+
+		if (Validator.isNotNull(title)) {
+			setTitle(LocalizationUtil.updateLocalization(getTitle(), "Title",
+					title, languageId));
+		}
+		else {
+			setTitle(LocalizationUtil.removeLocalization(getTitle(), "Title",
+					languageId));
+		}
+	}
+
+	public void setTitleMap(Map<Locale, String> titleMap) {
+		if (titleMap == null) {
+			return;
+		}
+
+		ClassLoader portalClassLoader = PortalClassLoaderUtil.getClassLoader();
+
+		Thread currentThread = Thread.currentThread();
+
+		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
+
+		try {
+			if (contextClassLoader != portalClassLoader) {
+				currentThread.setContextClassLoader(portalClassLoader);
+			}
+
+			Locale[] locales = LanguageUtil.getAvailableLocales();
+
+			for (Locale locale : locales) {
+				String title = titleMap.get(locale);
+
+				setTitle(locale, title);
+			}
+		}
+		finally {
+			if (contextClassLoader != portalClassLoader) {
+				currentThread.setContextClassLoader(contextClassLoader);
+			}
+		}
 	}
 
 	public String getDescription() {
@@ -284,7 +375,7 @@ public class RoleModelImpl extends BaseModelImpl<Role> {
 			model.setClassNameId(getClassNameId());
 			model.setClassPK(getClassPK());
 			model.setName(HtmlUtil.escape(getName()));
-			model.setTitle(HtmlUtil.escape(getTitle()));
+			model.setTitle(getTitle());
 			model.setDescription(HtmlUtil.escape(getDescription()));
 			model.setType(getType());
 			model.setSubtype(HtmlUtil.escape(getSubtype()));

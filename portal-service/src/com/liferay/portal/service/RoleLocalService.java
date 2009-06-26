@@ -97,13 +97,17 @@ public interface RoleLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Role addRole(long userId, long companyId,
-		java.lang.String name, java.lang.String description, int type)
+		java.lang.String name,
+		java.util.Map<java.util.Locale, String> titleMap,
+		java.lang.String description, int type)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Role addRole(long userId, long companyId,
-		java.lang.String name, java.lang.String description, int type,
-		java.lang.String className, long classPK)
+		java.lang.String name,
+		java.util.Map<java.util.Locale, String> titleMap,
+		java.lang.String description, int type, java.lang.String className,
+		long classPK)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
@@ -229,7 +233,7 @@ public interface RoleLocalService {
 
 	public com.liferay.portal.model.Role updateRole(long roleId,
 		java.lang.String name,
-		java.util.Map<java.util.Locale, String> localeTitlesMap,
+		java.util.Map<java.util.Locale, String> titleMap,
 		java.lang.String description, java.lang.String subtype)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;

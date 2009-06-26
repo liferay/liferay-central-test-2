@@ -49,16 +49,10 @@ package com.liferay.portal.model;
  *
  */
 public interface Role extends RoleModel {
-	public java.lang.String getTitle(java.util.Locale locale);
+	public java.lang.String getTitle(java.lang.String languageId);
 
-	public java.lang.String getTitle(java.util.Locale locale, boolean useDefault);
-
-	public java.lang.String getTitle(java.lang.String localeLanguageId);
-
-	public java.lang.String getTitle(java.lang.String localeLanguageId,
+	public java.lang.String getTitle(java.lang.String languageId,
 		boolean useDefault);
 
 	public java.lang.String getTypeLabel();
-
-	public void setTitle(java.lang.String title, java.util.Locale locale);
 }
