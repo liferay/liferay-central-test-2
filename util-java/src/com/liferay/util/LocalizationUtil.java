@@ -316,6 +316,10 @@ public class LocalizationUtil {
 	public static String removeLocalization(
 		String xml, String key, String requestedLanguageId, boolean cdata) {
 
+		if (Validator.isNull(xml)) {
+			return StringPool.BLANK;
+		}
+
 		xml = _sanitizeXML(xml);
 
 		String systemDefaultLanguageId = LocaleUtil.toLanguageId(
