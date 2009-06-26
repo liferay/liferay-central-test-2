@@ -131,7 +131,7 @@ if ((type.equals("assetCategories")) || (type.equals("assetTags")) ||
 		String valueString = StringPool.BLANK;
 
 		if (value != null) {
-			valueString = valueString.toString();
+			valueString = value.toString();
 
 			if (type.equals("hidden")){
 				valueString = HtmlUtil.escapeAttribute(valueString);
