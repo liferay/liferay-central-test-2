@@ -36,6 +36,7 @@ import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.Http;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.MapUtil;
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.QName;
@@ -112,6 +113,7 @@ public class PortletURLImpl
 		_parametersIncludedInPath = new LinkedHashSet<String>();
 		_params = new LinkedHashMap<String, String[]>();
 		_secure = request.isSecure();
+		_wsrp = ParamUtil.get(request, "wsrp", false);
 
 		Portlet portlet = getPortlet();
 
@@ -577,7 +579,12 @@ public class PortletURLImpl
 			return _toString;
 		}
 
-		_toString = generateToString();
+		if (_wsrp) {
+			_toString = generateWSRPToString();
+		}
+		else {
+			_toString = generateToString();
+		}
 
 		return _toString;
 	}
@@ -1017,6 +1024,196 @@ public class PortletURLImpl
 		return result;
 	}
 
+	protected String generateWSRPToString() {
+		StringBuilder sb = new StringBuilder("wsrp_rewrite?");
+
+		Portlet portlet = getPortlet();
+
+		Key key = null;
+
+		try {
+			if (_encrypt) {
+				Company company = PortalUtil.getCompany(_request);
+
+				key = company.getKeyObj();
+			}
+		}
+		catch (Exception e) {
+			_log.error(e);
+		}
+
+		sb.append("wsrp-urlType");
+		sb.append(StringPool.EQUAL);
+
+		if (_lifecycle.equals(PortletRequest.ACTION_PHASE)) {
+			sb.append(processValue(key, "blockingAction"));
+		}
+		else if (_lifecycle.equals(PortletRequest.RENDER_PHASE)) {
+			sb.append(processValue(key, "render"));
+		}
+		else if (_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
+			sb.append(processValue(key, "resource"));
+		}
+
+		sb.append(StringPool.AMPERSAND);
+
+		if (_windowState != null) {
+			sb.append("wsrp-windowState");
+			sb.append(StringPool.EQUAL);
+			sb.append(processValue(key, "wsrp:" + _windowState.toString()));
+			sb.append(StringPool.AMPERSAND);
+		}
+
+		if (_portletMode != null) {
+			sb.append("wsrp-mode");
+			sb.append(StringPool.EQUAL);
+			sb.append(processValue(key, "wsrp:" + _portletMode.toString()));
+			sb.append(StringPool.AMPERSAND);
+		}
+
+		if (_resourceID != null) {
+			sb.append("wsrp-resourceID");
+			sb.append(StringPool.EQUAL);
+			sb.append(processValue(key, _resourceID));
+			sb.append(StringPool.AMPERSAND);
+		}
+
+		if (_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
+			sb.append("wsrp-resourceCacheability");
+			sb.append(StringPool.EQUAL);
+			sb.append(processValue(key, _cacheability));
+			sb.append(StringPool.AMPERSAND);
+		}
+
+		if (PropsValues.PORTLET_URL_ANCHOR_ENABLE) {
+			if (_anchor && (_windowState != null) &&
+				(!_windowState.equals(WindowState.MAXIMIZED)) &&
+				(!_windowState.equals(LiferayWindowState.EXCLUSIVE)) &&
+				(!_windowState.equals(LiferayWindowState.POP_UP))) {
+
+				sb.append("wsrp-fragmentID");
+				sb.append(StringPool.EQUAL);
+				sb.append("#p_").append(_portletId);
+				sb.append(StringPool.AMPERSAND);
+			}
+		}
+
+		if (_copyCurrentRenderParameters) {
+			Enumeration<String> enu = _request.getParameterNames();
+
+			while (enu.hasMoreElements()) {
+				String name = enu.nextElement();
+
+				String[] oldValues = _request.getParameterValues(name);
+				String[] newValues = _params.get(name);
+
+				if (newValues == null) {
+					_params.put(name, oldValues);
+				}
+				else if (isBlankValue(newValues)) {
+					_params.remove(name);
+				}
+				else {
+					newValues = ArrayUtil.append(newValues, oldValues);
+
+					_params.put(name, newValues);
+				}
+			}
+		}
+
+		StringBuilder parameterSb = new StringBuilder();
+
+		Iterator<Map.Entry<String, String[]>> itr =
+			_params.entrySet().iterator();
+
+		while (itr.hasNext()) {
+			Map.Entry<String, String[]> entry = itr.next();
+
+			String name = entry.getKey();
+			String[] values = entry.getValue();
+
+			String identifier = null;
+
+			if (portlet != null) {
+				PublicRenderParameter publicRenderParameter =
+					portlet.getPublicRenderParameter(name);
+
+				if (publicRenderParameter != null) {
+					QName qName = publicRenderParameter.getQName();
+
+					if (_copyCurrentPublicRenderParameters) {
+						String[] oldValues = _request.getParameterValues(name);
+
+						if (oldValues != null) {
+							if (values == null) {
+								values = oldValues;
+							}
+							else {
+								values = ArrayUtil.append(values, oldValues);
+							}
+						}
+					}
+
+					identifier = name;
+
+					name = PortletQNameUtil.getPublicRenderParameterName(qName);
+
+					PortletQNameUtil.setPublicRenderParameterIdentifier(
+						name, identifier);
+				}
+			}
+
+			for (int i = 0; i < values.length; i++) {
+				String parameterName = name;
+
+				if (identifier != null) {
+					parameterName = identifier;
+				}
+
+				if (isParameterIncludedInPath(parameterName)) {
+					continue;
+				}
+
+				if (!PortalUtil.isReservedParameter(name) &&
+					!name.startsWith(
+						PortletQName.PUBLIC_RENDER_PARAMETER_NAMESPACE)) {
+
+					parameterSb.append(getNamespace());
+				}
+
+				parameterSb.append(name);
+				parameterSb.append(StringPool.EQUAL);
+				parameterSb.append(processValue(key, values[i]));
+
+				if ((i + 1 < values.length) || itr.hasNext()) {
+					parameterSb.append(StringPool.AMPERSAND);
+				}
+			}
+		}
+
+		if (_encrypt) {
+			parameterSb.append(StringPool.AMPERSAND + WebKeys.ENCRYPT + "=1");
+		}
+
+		String encodedParameters = HttpUtil.encodeURL(parameterSb.toString());
+
+		if (_lifecycle.equals(PortletRequest.ACTION_PHASE)) {
+			sb.append("wsrp-interactionState");
+		}
+		else {
+			sb.append("wsrp-navigationalState");
+		}
+
+		sb.append(StringPool.EQUAL);
+		sb.append(encodedParameters);
+
+		sb.append("/wsrp_rewrite");
+
+		String result = sb.toString();
+
+		return result;
+	}
+
 	protected boolean isBlankValue(String[] value) {
 		if ((value != null) && (value.length == 1) &&
 			(value[0].equals(StringPool.BLANK))) {
@@ -1078,5 +1275,6 @@ public class PortletURLImpl
 	private boolean _secure;
 	private WindowState _windowState;
 	private String _toString;
+	private boolean _wsrp;
 
 }
