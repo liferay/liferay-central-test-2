@@ -55,7 +55,7 @@ public class UpgradeWiki extends UpgradeProcess {
 	}
 
 	protected void doUpgrade() throws Exception {
-		if (isSupportsAlterColumnName()) {
+		if (isSupportsAlterColumnType()) {
 			runSQL("alter_column_type WikiPage title VARCHAR(255) null");
 		}
 		else {
