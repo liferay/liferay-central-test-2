@@ -1,11 +1,5 @@
 Expanse.Observable = new Expanse.Class(
 	{
-		_beforeconstructor_: function() {
-			var instance = this;
-
-			instance.cfg = new YAHOO.util.Config(instance);
-		},
-
 		initialize: function() {
 			var instance = this;
 
@@ -139,6 +133,12 @@ Expanse.Observable = new Expanse.Class(
 			else {
 				instance.cfg.unsubscribeFromConfigEvent.apply(instance.cfg, arguments);
 			}
+		},
+
+		_beforeconstructor_: function() {
+			var instance = this;
+
+			instance.cfg = new YAHOO.util.Config(instance);
 		},
 
 		_checkConfig: function(key, options) {
