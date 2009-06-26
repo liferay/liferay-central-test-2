@@ -61,9 +61,9 @@ public class LayoutPrototypeLocalServiceImpl
 			layoutPrototypeId);
 
 		layoutPrototype.setCompanyId(companyId);
+		layoutPrototype.setNameMap(nameMap);
 		layoutPrototype.setDescription(description);
 		layoutPrototype.setActive(active);
-		layoutPrototype.setNameMap(nameMap);
 
 		layoutPrototypePersistence.update(layoutPrototype, false);
 
@@ -159,9 +159,9 @@ public class LayoutPrototypeLocalServiceImpl
 		LayoutPrototype layoutPrototype =
 			layoutPrototypePersistence.findByPrimaryKey(layoutPrototypeId);
 
+		layoutPrototype.setNameMap(nameMap);
 		layoutPrototype.setDescription(description);
 		layoutPrototype.setActive(active);
-		layoutPrototype.setNameMap(nameMap);
 
 		layoutPrototypePersistence.update(layoutPrototype, false);
 
