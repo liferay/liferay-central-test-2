@@ -74,7 +74,6 @@ import com.liferay.portal.service.RoleServiceUtil;
 public class RoleServiceHttp {
 	public static com.liferay.portal.model.Role addRole(
 		HttpPrincipal httpPrincipal, java.lang.String name,
-		java.util.Map<java.util.Locale, String> titleMap,
 		java.lang.String description, int type)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
@@ -85,23 +84,16 @@ public class RoleServiceHttp {
 				paramObj0 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj1 = titleMap;
-
-			if (titleMap == null) {
-				paramObj1 = new NullWrapper("java.util.Map");
-			}
-
-			Object paramObj2 = description;
+			Object paramObj1 = description;
 
 			if (description == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
+				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj3 = new IntegerWrapper(type);
+			Object paramObj2 = new IntegerWrapper(type);
 
 			MethodWrapper methodWrapper = new MethodWrapper(RoleServiceUtil.class.getName(),
-					"addRole",
-					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
+					"addRole", new Object[] { paramObj0, paramObj1, paramObj2 });
 
 			Object returnObj = null;
 
@@ -581,7 +573,7 @@ public class RoleServiceHttp {
 
 	public static com.liferay.portal.model.Role updateRole(
 		HttpPrincipal httpPrincipal, long roleId, java.lang.String name,
-		java.util.Map<java.util.Locale, String> titleMap,
+		java.util.Map<java.util.Locale, String> localeTitlesMap,
 		java.lang.String description, java.lang.String subtype)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
@@ -594,9 +586,9 @@ public class RoleServiceHttp {
 				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj2 = titleMap;
+			Object paramObj2 = localeTitlesMap;
 
-			if (titleMap == null) {
+			if (localeTitlesMap == null) {
 				paramObj2 = new NullWrapper("java.util.Map");
 			}
 

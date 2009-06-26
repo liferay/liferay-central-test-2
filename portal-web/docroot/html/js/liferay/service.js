@@ -264,6 +264,7 @@ Liferay.Service.registerClass(
 Liferay.Service.registerClass(
 	Liferay.Service.Portal, "Role",
 	{
+		addRole: true,
 		addUserRoles: true,
 		deleteRole: true,
 		getGroupRole: true,

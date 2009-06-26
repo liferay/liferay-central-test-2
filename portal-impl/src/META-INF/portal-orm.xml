@@ -272,6 +272,7 @@
 			<basic name="active">
 				<column name="ACTIVE_" />
 			</basic>
+			<transient name="name" />
 		</attributes>
 	</entity>
 	<entity class="com.liferay.portal.model.impl.LayoutSetImpl" name="LayoutSet">
@@ -712,6 +713,7 @@
 				<column name="TYPE_" />
 			</basic>
 			<basic name="subtype" />
+			<transient name="title" />
 		</attributes>
 	</entity>
 	<entity class="com.liferay.portal.model.impl.ServiceComponentImpl" name="ServiceComponent">

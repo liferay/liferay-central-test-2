@@ -1098,7 +1098,7 @@ public class LayoutImporter {
 				int type = Integer.valueOf(roleEl.attributeValue("type"));
 
 				role = RoleLocalServiceUtil.addRole(
-					userId, companyId, name, null, description, type);
+					userId, companyId, name, description, type);
 			}
 
 			List<String> actions = getActions(roleEl);
@@ -1127,7 +1127,7 @@ public class LayoutImporter {
 				int type = Integer.valueOf(roleEl.attributeValue("type"));
 
 				role = RoleLocalServiceUtil.addRole(
-					userId, companyId, name, null, description, type);
+					userId, companyId, name, description, type);
 			}
 
 			List<String> actions = getActions(roleEl);

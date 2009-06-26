@@ -22,9 +22,13 @@
 
 package com.liferay.portal.model.impl;
 
+import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.RoleConstants;
+import com.liferay.util.LocalizationUtil;
+
+import java.util.Locale;
 
 /**
  * <a href="RoleImpl.java.html"><b><i>View Source</i></b></a>
@@ -38,28 +42,51 @@ public class RoleImpl extends RoleModelImpl implements Role {
 	public RoleImpl() {
 	}
 
-	public String getTitle(String languageId) {
-		String value = super.getTitle(languageId);
+	public String getTitle(Locale locale) {
+		String localeLanguageId = LocaleUtil.toLanguageId(locale);
 
-		if (Validator.isNull(value)) {
-			value = getName();
-		}
-
-		return value;
+		return getTitle(localeLanguageId);
 	}
 
-	public String getTitle(String languageId, boolean useDefault) {
-		String value = super.getTitle(languageId, useDefault);
+	public String getTitle(Locale locale, boolean useDefault) {
+		String localeLanguageId = LocaleUtil.toLanguageId(locale);
 
-		if (Validator.isNull(value)) {
-			value = getName();
+		return getTitle(localeLanguageId, useDefault);
+	}
+
+	public String getTitle(String localeLanguageId) {
+		String title = LocalizationUtil.getLocalization(
+			getTitle(), localeLanguageId);
+
+		if (Validator.isNull(title)) {
+			title = getName();
 		}
 
-		return value;
+		return title;
+	}
+
+	public String getTitle(String localeLanguageId, boolean useDefault) {
+		return LocalizationUtil.getLocalization(
+			getTitle(), localeLanguageId, useDefault);
 	}
 
 	public String getTypeLabel() {
 		return RoleConstants.getTypeLabel(getType());
+	}
+
+	public void setTitle(String title, Locale locale) {
+		String localeLanguageId = LocaleUtil.toLanguageId(locale);
+
+		if (Validator.isNotNull(title)) {
+			setTitle(
+				LocalizationUtil.updateLocalization(
+					getTitle(), "title", title, localeLanguageId));
+		}
+		else {
+			setTitle(
+				LocalizationUtil.removeLocalization(
+					getTitle(), "title", localeLanguageId));
+		}
 	}
 
 }
