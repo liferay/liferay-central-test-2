@@ -73,7 +73,7 @@ long organizationGroupId = organization.getGroup().getGroupId();
 	<c:if test="<%= permissionChecker.isCommunityOwner(organizationGroupId) %>">
 		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="assignUserRolesURL">
 			<portlet:param name="struts_action" value="/enterprise_admin/edit_user_roles" />
-			<portlet:param name="redirect" value="<%= currentURL %>" />
+			<portlet:param name="redirect" value="<%= redirect %>" />
 			<portlet:param name="groupId" value="<%= String.valueOf(organizationGroupId) %>" />
 		</portlet:renderURL>
 
@@ -83,7 +83,7 @@ long organizationGroupId = organization.getGroup().getGroupId();
 	<c:if test="<%= OrganizationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.ASSIGN_MEMBERS) %>">
 		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="assignMembersURL">
 			<portlet:param name="struts_action" value="/enterprise_admin/edit_organization_assignments" />
-			<portlet:param name="redirect" value="<%= currentURL %>" />
+			<portlet:param name="redirect" value="<%= redirect %>" />
 			<portlet:param name="organizationId" value="<%= String.valueOf(organizationId) %>" />
 		</portlet:renderURL>
 
@@ -103,7 +103,6 @@ long organizationGroupId = organization.getGroup().getGroupId();
 	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="viewUsersURL">
 		<portlet:param name="struts_action" value="/enterprise_admin/view" />
 		<portlet:param name="tabs1" value="users" />
-		<portlet:param name="viewUsersRedirect" value="<%= currentURL %>" />
 		<portlet:param name="organizationId" value="<%= String.valueOf(organizationId) %>" />
 	</portlet:renderURL>
 
@@ -135,7 +134,6 @@ long organizationGroupId = organization.getGroup().getGroupId();
 		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="viewSuborganizationsURL">
 			<portlet:param name="struts_action" value="/enterprise_admin/view" />
 			<portlet:param name="tabs1" value="organizations" />
-			<portlet:param name="viewOrganizationsRedirect" value="<%= currentURL %>" />
 			<portlet:param name="parentOrganizationId" value="<%= String.valueOf(organizationId) %>" />
 		</portlet:renderURL>
 
