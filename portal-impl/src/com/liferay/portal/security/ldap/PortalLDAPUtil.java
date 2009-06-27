@@ -200,50 +200,49 @@ public class PortalLDAPUtil {
 
 				// User is not exported until contact is updated
 
+				return;
 			}
-			else {
 
-				// Modify existing LDAP user record
+			// Modify existing LDAP user record
 
-				name = getNameInNamespace(companyId, binding);
+			name = getNameInNamespace(companyId, binding);
 
-				Modifications mods = Modifications.getInstance();
+			Modifications mods = Modifications.getInstance();
+
+			mods.addItem(
+				userMappings.getProperty("firstName"), user.getFirstName());
+			mods.addItem(
+				userMappings.getProperty("lastName"), user.getLastName());
+
+			String fullNameMapping = userMappings.getProperty("fullName");
+
+			if (Validator.isNotNull(fullNameMapping)) {
+				mods.addItem(fullNameMapping, user.getFullName());
+			}
+
+			if (user.isPasswordModified() &&
+				Validator.isNotNull(user.getPasswordUnencrypted())) {
 
 				mods.addItem(
-					userMappings.getProperty("firstName"), user.getFirstName());
-				mods.addItem(
-					userMappings.getProperty("lastName"), user.getLastName());
-
-				String fullNameMapping = userMappings.getProperty("fullName");
-
-				if (Validator.isNotNull(fullNameMapping)) {
-					mods.addItem(fullNameMapping, user.getFullName());
-				}
-
-				if (user.isPasswordModified() &&
-					Validator.isNotNull(user.getPasswordUnencrypted())) {
-
-					mods.addItem(
-						userMappings.getProperty("password"),
-						user.getPasswordUnencrypted());
-				}
-
-				if (Validator.isNotNull(user.getEmailAddress())) {
-					mods.addItem(
-						userMappings.getProperty("emailAddress"),
-						user.getEmailAddress());
-				}
-
-				String jobTitleMapping = userMappings.getProperty("jobTitle");
-
-				if (Validator.isNotNull(jobTitleMapping)) {
-					mods.addItem(jobTitleMapping, user.getJobTitle());
-				}
-
-				ModificationItem[] modItems = mods.getItems();
-
-				ctx.modifyAttributes(name, modItems);
+					userMappings.getProperty("password"),
+					user.getPasswordUnencrypted());
 			}
+
+			if (Validator.isNotNull(user.getEmailAddress())) {
+				mods.addItem(
+					userMappings.getProperty("emailAddress"),
+					user.getEmailAddress());
+			}
+
+			String jobTitleMapping = userMappings.getProperty("jobTitle");
+
+			if (Validator.isNotNull(jobTitleMapping)) {
+				mods.addItem(jobTitleMapping, user.getJobTitle());
+			}
+
+			ModificationItem[] modItems = mods.getItems();
+
+			ctx.modifyAttributes(name, modItems);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
