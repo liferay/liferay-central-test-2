@@ -113,7 +113,7 @@ public class PortletURLImpl
 		_parametersIncludedInPath = new LinkedHashSet<String>();
 		_params = new LinkedHashMap<String, String[]>();
 		_secure = request.isSecure();
-		_wsrp = ParamUtil.get(request, "wsrp", false);
+		_wsrp = ParamUtil.getBoolean(request, "wsrp");
 
 		Portlet portlet = getPortlet();
 
