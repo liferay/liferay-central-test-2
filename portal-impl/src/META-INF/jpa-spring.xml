@@ -13,9 +13,9 @@
 	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean" p:dataSource-ref="liferayDataSource">
 		<property name="jpaVendorAdapter">
 			<bean class="org.springframework.orm.jpa.vendor.EclipseLinkJpaVendorAdapter" p:databasePlatform="org.eclipse.persistence.platform.database.MySQLPlatform" p:showSql="false" />
-			<!--<bean class="org.springframework.orm.jpa.vendor.TopLinkJpaVendorAdapter" p:databasePlatform="oracle.toplink.essentials.platform.database.MySQL4Platform" p:showSql="false" />-->
-			<!--<bean class="org.springframework.orm.jpa.vendor.OpenJpaVendorAdapter" p:database="MYSQL" p:showSql="false" />-->
 			<!--<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" p:database="MYSQL" p:showSql="false" />-->
+			<!--<bean class="org.springframework.orm.jpa.vendor.OpenJpaVendorAdapter" p:database="MYSQL" p:showSql="false" />-->
+			<!--<bean class="org.springframework.orm.jpa.vendor.TopLinkJpaVendorAdapter" p:databasePlatform="oracle.toplink.essentials.platform.database.MySQL4Platform" p:showSql="false" />-->
 		</property>
 		<property name="loadTimeWeaver">
 			<bean class="org.springframework.instrument.classloading.ReflectiveLoadTimeWeaver" />
