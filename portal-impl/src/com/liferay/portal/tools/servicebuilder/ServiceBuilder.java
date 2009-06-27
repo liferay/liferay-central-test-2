@@ -3950,7 +3950,7 @@ public class ServiceBuilder {
 				}
 
 				if (!entity.hasColumn(property) &&
-					!entity.hasColumn(Introspector.decapitalize(property)) ) {
+					!entity.hasColumn(Introspector.decapitalize(property))) {
 
 					property = Introspector.decapitalize(property);
 
@@ -3973,7 +3973,7 @@ public class ServiceBuilder {
 					property.indexOf("set") + 3, property.length() - 1);
 
 				if (!entity.hasColumn(property) &&
-					!entity.hasColumn(Introspector.decapitalize(property)) ) {
+					!entity.hasColumn(Introspector.decapitalize(property))) {
 
 					property = Introspector.decapitalize(property);
 
