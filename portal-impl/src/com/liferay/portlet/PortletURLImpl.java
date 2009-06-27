@@ -92,17 +92,6 @@ public class PortletURLImpl
 	implements LiferayPortletURL, PortletURL, ResourceURL, Serializable {
 
 	public PortletURLImpl(
-		PortletRequestImpl portletRequestImpl, String portletId, long plid,
-		String lifecycle) {
-
-		this(
-			portletRequestImpl.getHttpServletRequest(), portletId, plid,
-			lifecycle);
-
-		_portletRequest = portletRequestImpl;
-	}
-
-	public PortletURLImpl(
 		HttpServletRequest request, String portletId, long plid,
 		String lifecycle) {
 
@@ -127,6 +116,17 @@ public class PortletURLImpl
 		}
 	}
 
+	public PortletURLImpl(
+		PortletRequestImpl portletRequestImpl, String portletId, long plid,
+		String lifecycle) {
+
+		this(
+			portletRequestImpl.getHttpServletRequest(), portletId, plid,
+			lifecycle);
+
+		_portletRequest = portletRequestImpl;
+	}
+
 	public void addParameterIncludedInPath(String name) {
 		_parametersIncludedInPath.add(name);
 	}
@@ -143,14 +143,6 @@ public class PortletURLImpl
 
 	public HttpServletRequest getHttpServletRequest() {
 		return _request;
-	}
-
-	public String getNamespace() {
-		if (_namespace == null) {
-			_namespace = PortalUtil.getPortletNamespace(_portletId);
-		}
-
-		return _namespace;
 	}
 
 	public Layout getLayout() {
@@ -176,6 +168,14 @@ public class PortletURLImpl
 
 	public String getLifecycle() {
 		return _lifecycle;
+	}
+
+	public String getNamespace() {
+		if (_namespace == null) {
+			_namespace = PortalUtil.getPortletNamespace(_portletId);
+		}
+
+		return _namespace;
 	}
 
 	public String getParameter(String name) {
@@ -358,6 +358,14 @@ public class PortletURLImpl
 		_copyCurrentRenderParameters = copyCurrentRenderParameters;
 	}
 
+	public void setDoAsGroupId(long doAsGroupId) {
+		_doAsGroupId = doAsGroupId;
+
+		// Clear cache
+
+		_toString = null;
+	}
+
 	public void setDoAsUserId(long doAsUserId) {
 		_doAsUserId = doAsUserId;
 
@@ -368,14 +376,6 @@ public class PortletURLImpl
 
 	public void setDoAsUserLanguageId(String doAsUserLanguageId) {
 		_doAsUserLanguageId = doAsUserLanguageId;
-
-		// Clear cache
-
-		_toString = null;
-	}
-
-	public void setDoAsGroupId(long doAsGroupId) {
-		_doAsGroupId = doAsGroupId;
 
 		// Clear cache
 
@@ -500,10 +500,6 @@ public class PortletURLImpl
 		_toString = null;
 	}
 
-	public void setPortletMode(String portletMode) throws PortletModeException {
-		setPortletMode(PortletModeFactory.getPortletMode(portletMode));
-	}
-
 	public void setPortletMode(PortletMode portletMode)
 		throws PortletModeException {
 
@@ -521,6 +517,10 @@ public class PortletURLImpl
 		// Clear cache
 
 		_toString = null;
+	}
+
+	public void setPortletMode(String portletMode) throws PortletModeException {
+		setPortletMode(PortletModeFactory.getPortletMode(portletMode));
 	}
 
 	public void setProperty(String key, String value) {
@@ -1249,32 +1249,32 @@ public class PortletURLImpl
 
 	private static Log _log = LogFactoryUtil.getLog(PortletURLImpl.class);
 
-	private HttpServletRequest _request;
-	private PortletRequest _portletRequest;
-	private String _portletId;
-	private Portlet _portlet;
-	private String _namespace;
-	private long _plid;
-	private Layout _layout;
-	private String _layoutFriendlyURL;
-	private String _lifecycle;
 	private boolean _anchor = true;
 	private String _cacheability = ResourceURL.PAGE;
 	private boolean _copyCurrentPublicRenderParameters;
 	private boolean _copyCurrentRenderParameters;
+	private long _doAsGroupId;
 	private long _doAsUserId;
 	private String _doAsUserLanguageId;
-	private long _doAsGroupId;
-	private long _refererPlid;
 	private boolean _encrypt;
 	private boolean _escapeXml = PropsValues.PORTLET_URL_ESCAPE_XML;
+	private Layout _layout;
+	private String _layoutFriendlyURL;
+	private String _lifecycle;
+	private String _namespace;
 	private Set<String> _parametersIncludedInPath;
 	private Map<String, String[]> _params;
+	private long _plid;
+	private Portlet _portlet;
+	private String _portletId;
 	private PortletMode _portletMode;
+	private PortletRequest _portletRequest;
+	private long _refererPlid;
+	private HttpServletRequest _request;
 	private String _resourceID;
 	private boolean _secure;
-	private WindowState _windowState;
 	private String _toString;
+	private WindowState _windowState;
 	private boolean _wsrp;
 
 }
