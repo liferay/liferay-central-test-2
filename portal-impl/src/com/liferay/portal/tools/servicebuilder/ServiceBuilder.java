@@ -3949,9 +3949,13 @@ public class ServiceBuilder {
 						property.indexOf("is") + 2, property.length() - 1);
 				}
 
-				property = Introspector.decapitalize(property);
+				if (!entity.hasColumn(property) &&
+					!entity.hasColumn(Introspector.decapitalize(property)) ) {
 
-				getters.add(property);
+					property = Introspector.decapitalize(property);
+
+					getters.add(property);
+				}
 			}
 		}
 
@@ -3968,9 +3972,13 @@ public class ServiceBuilder {
 				property = property.substring(
 					property.indexOf("set") + 3, property.length() - 1);
 
-				property = Introspector.decapitalize(property);
+				if (!entity.hasColumn(property) &&
+					!entity.hasColumn(Introspector.decapitalize(property)) ) {
 
-				setters.add(property);
+					property = Introspector.decapitalize(property);
+
+					setters.add(property);
+				}
 			}
 		}
 
