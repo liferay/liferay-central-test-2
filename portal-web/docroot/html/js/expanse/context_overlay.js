@@ -41,13 +41,13 @@
 				}
 
 				if (options.context) {
-					instance._super(options.el || Dom.generateId(), options);
+					instance._super(options);
 
 					if (!options.lazyload) {
-						instance._onRender();
+						instance._renderOverlay();
 					}
 					else {
-						Event.on(options.context[0], 'click', instance._onRender, instance, true);
+						Event.on(options.context[0], 'click', instance._renderOverlay, instance, true);
 					}
 
 					instance.options = options;
@@ -170,7 +170,7 @@
 				);
 			},
 
-			_onRender: function() {
+			_renderOverlay: function() {
 				var instance = this;
 
 				instance.render(instance.options.renderTo || document.body);
