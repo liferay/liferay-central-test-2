@@ -37,7 +37,7 @@ List<AssetTag> tags = AssetTagServiceUtil.getTags(className, classPK);
 %>
 
 <c:if test="<%= !tags.isEmpty() %>">
-	<div class="taglib-asset-tags-summary">
+	<span class="taglib-asset-tags-summary">
 		<%= Validator.isNotNull(message) ? (LanguageUtil.get(pageContext, message) + ": ") : "" %>
 
 		<c:choose>
@@ -61,9 +61,7 @@ List<AssetTag> tags = AssetTagServiceUtil.getTags(className, classPK);
 				for (AssetTag tag : tags) {
 				%>
 
-					<span class="tag">
-						<%= tag.getName() %>
-					</span>
+					<span class="tag"><%= tag.getName() %></span>
 
 				<%
 				}
@@ -71,5 +69,5 @@ List<AssetTag> tags = AssetTagServiceUtil.getTags(className, classPK);
 
 			</c:otherwise>
 		</c:choose>
-	</div>
+	</span>
 </c:if>

@@ -46,7 +46,7 @@ for (AssetVocabulary vocabulary : vocabularies) {
 %>
 
 	<c:if test="<%= curCategories.size() > 0 %>">
-		<div class="taglib-asset-categories-summary">
+		<span class="taglib-asset-categories-summary">
 			<%= vocabularyName %>:
 
 			<c:choose>
@@ -80,7 +80,7 @@ for (AssetVocabulary vocabulary : vocabularies) {
 
 				</c:otherwise>
 			</c:choose>
-		</div>
+		</span>
 	</c:if>
 <%
 }
