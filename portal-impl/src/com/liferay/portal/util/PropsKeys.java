@@ -284,8 +284,6 @@ public interface PropsKeys {
 
 	public static final String CONVERT_PROCESSES = "convert.processes";
 
-	public static final String COUNTER_CONNECTION_HEARTBEAT_JOB_INTERVAL = "counter.connection.heartbeat.job.interval";
-
 	public static final String COUNTER_INCREMENT = "counter.increment";
 
 	public static final String CUSTOM_SQL_FUNCTION_ISNOTNULL = "custom.sql.function.isnotnull";

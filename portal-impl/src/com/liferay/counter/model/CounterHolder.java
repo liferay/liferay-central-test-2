@@ -22,53 +22,41 @@
 
 package com.liferay.counter.model;
 
-import com.liferay.portal.kernel.concurrent.CompeteLatch;
+import java.util.concurrent.atomic.AtomicLong;
 
 /**
- * <a href="CounterRegister.java.html"><b><i>View Source</i></b></a>
+ * <a href="CounterHolder.java.html"><b><i>View Source</i></b></a>
  *
- * @author Harry Mark
+ * A quasi-immutable class for in-memory counter used by CounterRegister.<br>
+ * An instance of this class can only threadsafely generate unique "id" in range
+ * (initValue, rangeMax].<br>
+ * CounterRegister uses this class as an "one-value cache" for currentValue and
+ * rangeMax. <br>CounterRegister can update its currentValue and rangeMax
+ * threadsafely by creating a new CounterHolder to replace the old one.
+ * 
  * @author Shuyang Zhou
  *
  */
-public class CounterRegister {
+public class CounterHolder {
 
-	public CounterRegister(
-		String name, long rangeMin, long rangeMax, int rangeSize) {
-
-		_name = name;
-		_holder = new CounterHolder(rangeMin, rangeMax);
-		_rangeSize = rangeSize;
-		_latch = new CompeteLatch();
+	public CounterHolder(long initValue, long rangeMax) {
+		_counter = new AtomicLong(initValue);
+		_rangeMax = rangeMax;
 	}
 
-	public CounterHolder getCounterHolder() {
-		return _holder;
+	public long addAndGet(long delta) {
+		return _counter.addAndGet(delta);
 	}
 
-	public void setCounterHoler(CounterHolder holder) {
-		_holder = holder;
+	public long getCurrentValue() {
+		return _counter.get();
 	}
 
-	public CompeteLatch getCompeteLatch() {
-		return _latch;
+	public long getRangeMax() {
+		return _rangeMax;
 	}
 
-	public String getName() {
-		return _name;
-	}
-
-	public void setName(String name) {
-		_name = name;
-	}
-
-	public int getRangeSize() {
-		return _rangeSize;
-	}
-
-	private volatile CounterHolder _holder;
-	private final CompeteLatch _latch;
-	private String _name;
-	private final int _rangeSize;
+	private final AtomicLong _counter;
+	private final long _rangeMax;
 
 }

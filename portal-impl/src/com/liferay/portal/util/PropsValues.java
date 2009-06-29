@@ -319,9 +319,8 @@ public class PropsValues {
 	public static final String[] CONVERT_PROCESSES =
 		PropsUtil.getArray(PropsKeys.CONVERT_PROCESSES);
 
-	public static final long COUNTER_CONNECTION_HEARTBEAT_JOB_INTERVAL =
-		GetterUtil.getLong(
-			PropsUtil.get(PropsKeys.COUNTER_CONNECTION_HEARTBEAT_JOB_INTERVAL));
+	public static final int COUNTER_INCREMENT = GetterUtil.getInteger(
+		PropsUtil.get(PropsKeys.COUNTER_INCREMENT));
 
 	public static final String CUSTOM_SQL_FUNCTION_ISNOTNULL =
 		PropsUtil.get(PropsKeys.CUSTOM_SQL_FUNCTION_ISNOTNULL);
