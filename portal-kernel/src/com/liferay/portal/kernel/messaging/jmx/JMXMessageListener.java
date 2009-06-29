@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.messaging.MessageBus;
 
 import java.util.Collection;
 
+import javax.management.InstanceAlreadyExistsException;
 import javax.management.MBeanServer;
 
 /**
@@ -62,8 +63,30 @@ public class JMXMessageListener implements DestinationEventListener {
 	}
 
 	public void destroy() throws Exception {
-		_mBeanServer.unregisterMBean(
-			MessageBusManager.createObjectName());
+		Collection<Destination> destinations = _messageBus.getDestinations();
+
+		for (Destination destination : destinations) {
+			try {
+				unregisterDestination(destination);
+			}
+			catch (Exception e) {
+				if (log.isWarnEnabled()) {
+				    log.warn(
+						"Unable to unregister destination:" +
+						destination.getName(), e);
+				}
+			}
+		}
+
+		try {
+			_mBeanServer.unregisterMBean(
+				MessageBusManager.createObjectName());
+		}
+		catch (Exception e) {
+			if (log.isWarnEnabled()) {
+				log.warn("Unable to unregister message bus manager", e);
+			}
+		}
 	}
 
 	public void init() throws Exception {
@@ -72,14 +95,38 @@ public class JMXMessageListener implements DestinationEventListener {
 				"MBean server and message bus are not configured");
 		}
 
-		_mBeanServer.registerMBean(
-			new MessageBusManager(_messageBus),
-			MessageBusManager.createObjectName());
+		try {
+			_mBeanServer.registerMBean(
+				new MessageBusManager(_messageBus),
+				MessageBusManager.createObjectName());
+		}
+		catch (InstanceAlreadyExistsException e) {
+			//remove and attempt to rebind
+			_mBeanServer.unregisterMBean(MessageBusManager.createObjectName());
+
+			_mBeanServer.registerMBean(
+				new MessageBusManager(_messageBus),
+				MessageBusManager.createObjectName());
+		}
+		catch (Exception e) {
+			if (log.isWarnEnabled()) {
+					log.warn("Unable to register Message Bus Manager", e);
+				}
+		}
 
 		Collection<Destination> destinations = _messageBus.getDestinations();
 
 		for (Destination destination : destinations) {
-			registerDestination(destination);
+			try {
+				registerDestination(destination);
+			}
+			catch (Exception e) {
+				if (log.isWarnEnabled()) {
+					log.warn(
+						"Unable to register destination:" +
+						destination.getName(), e);
+				}
+			}
 		}
 	}
 
@@ -96,13 +143,35 @@ public class JMXMessageListener implements DestinationEventListener {
 
 		String destinationName = destination.getName();
 
-		_mBeanServer.registerMBean(
+		try {
+			_mBeanServer.registerMBean(
 			new DestinationManager(destination),
-			DestinationManager.createObjectName(destinationName));
+				DestinationManager.createObjectName(destinationName));
+		}
+		catch (InstanceAlreadyExistsException e) {
+			//remove and attempt to rebind
+			_mBeanServer.unregisterMBean(
+				DestinationManager.createObjectName(destinationName));
 
-		_mBeanServer.registerMBean(
+			_mBeanServer.registerMBean(
+			new DestinationManager(destination),
+				DestinationManager.createObjectName(destinationName));
+		}
+
+		try {
+			_mBeanServer.registerMBean(
 			new DestinationStatisticsManager(destination),
-			DestinationStatisticsManager.createObjectName(destinationName));
+				DestinationStatisticsManager.createObjectName(destinationName));
+		}
+		catch (InstanceAlreadyExistsException e) {
+			//remove and attempt to rebind
+			_mBeanServer.unregisterMBean(
+				DestinationStatisticsManager.createObjectName(destinationName));
+
+			_mBeanServer.registerMBean(
+			new DestinationStatisticsManager(destination),
+				DestinationStatisticsManager.createObjectName(destinationName));
+		}
 	}
 
 	protected void unregisterDestination(Destination destination)
