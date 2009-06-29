@@ -76,7 +76,7 @@ public class AssetCategoryLocalServiceImpl
 
 		Date now = new Date();
 
-		validate(0, parentCategoryId, name);
+		validate(0, parentCategoryId, name, vocabularyId);
 
 		if (parentCategoryId > 0) {
 			assetCategoryPersistence.findByPrimaryKey(parentCategoryId);
@@ -313,7 +313,7 @@ public class AssetCategoryLocalServiceImpl
 
 		name = name.trim();
 
-		validate(categoryId, parentCategoryId, name);
+		validate(categoryId, parentCategoryId, name, vocabularyId);
 
 		if (parentCategoryId > 0) {
 			assetCategoryPersistence.findByPrimaryKey(parentCategoryId);
@@ -371,11 +371,21 @@ public class AssetCategoryLocalServiceImpl
 			ListUtil.toString(categories, "categoryId"), 0L);
 	}
 
-	protected void validate(long categoryId, long parentCategoryId, String name)
+	protected void validate(
+		long categoryId, long parentCategoryId, String name, long vocabularyId
+	)
 		throws PortalException, SystemException {
 
-		List<AssetCategory> categories = assetCategoryPersistence.findByP_N(
-			parentCategoryId, name);
+		List<AssetCategory> categories = null;
+
+		if (parentCategoryId == 0) {
+			categories = assetCategoryPersistence.findByN_V(
+				name, vocabularyId);
+		}
+		else {
+			categories = assetCategoryPersistence.findByP_N(
+				parentCategoryId, name);
+		}
 
 		if ((categories.size() > 0) &&
 			(categories.get(0).getCategoryId() != categoryId)) {

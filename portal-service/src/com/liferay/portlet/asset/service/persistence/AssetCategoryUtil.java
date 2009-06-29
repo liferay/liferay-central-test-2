@@ -196,6 +196,50 @@ public class AssetCategoryUtil {
 				   .findByVocabularyId_PrevAndNext(categoryId, vocabularyId, obc);
 	}
 
+	public static java.util.List<com.liferay.portlet.asset.model.AssetCategory> findByN_V(
+		java.lang.String name, long vocabularyId)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByN_V(name, vocabularyId);
+	}
+
+	public static java.util.List<com.liferay.portlet.asset.model.AssetCategory> findByN_V(
+		java.lang.String name, long vocabularyId, int start, int end)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByN_V(name, vocabularyId, start, end);
+	}
+
+	public static java.util.List<com.liferay.portlet.asset.model.AssetCategory> findByN_V(
+		java.lang.String name, long vocabularyId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByN_V(name, vocabularyId, start, end, obc);
+	}
+
+	public static com.liferay.portlet.asset.model.AssetCategory findByN_V_First(
+		java.lang.String name, long vocabularyId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.asset.NoSuchCategoryException {
+		return getPersistence().findByN_V_First(name, vocabularyId, obc);
+	}
+
+	public static com.liferay.portlet.asset.model.AssetCategory findByN_V_Last(
+		java.lang.String name, long vocabularyId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.asset.NoSuchCategoryException {
+		return getPersistence().findByN_V_Last(name, vocabularyId, obc);
+	}
+
+	public static com.liferay.portlet.asset.model.AssetCategory[] findByN_V_PrevAndNext(
+		long categoryId, java.lang.String name, long vocabularyId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.asset.NoSuchCategoryException {
+		return getPersistence()
+				   .findByN_V_PrevAndNext(categoryId, name, vocabularyId, obc);
+	}
+
 	public static java.util.List<com.liferay.portlet.asset.model.AssetCategory> findByP_N(
 		long parentCategoryId, java.lang.String name)
 		throws com.liferay.portal.SystemException {
@@ -329,6 +373,11 @@ public class AssetCategoryUtil {
 		getPersistence().removeByVocabularyId(vocabularyId);
 	}
 
+	public static void removeByN_V(java.lang.String name, long vocabularyId)
+		throws com.liferay.portal.SystemException {
+		getPersistence().removeByN_V(name, vocabularyId);
+	}
+
 	public static void removeByP_N(long parentCategoryId, java.lang.String name)
 		throws com.liferay.portal.SystemException {
 		getPersistence().removeByP_N(parentCategoryId, name);
@@ -351,6 +400,11 @@ public class AssetCategoryUtil {
 	public static int countByVocabularyId(long vocabularyId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByVocabularyId(vocabularyId);
+	}
+
+	public static int countByN_V(java.lang.String name, long vocabularyId)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByN_V(name, vocabularyId);
 	}
 
 	public static int countByP_N(long parentCategoryId, java.lang.String name)
