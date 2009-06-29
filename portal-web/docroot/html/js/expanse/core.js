@@ -20,8 +20,6 @@
 
 		emptyFunction: function() {},
 
-		generateId: YAHOO.util.Dom.generateId,
-
 		get: function(el) {
 			var obj = el;
 
@@ -128,25 +126,28 @@
 		prefix: function(str, prefix) {
 			var instance = this;
 
-			if (typeof str != "string") {
+			if (typeof str != 'string') {
 				str = String(str);
 			}
 
-			prefix = prefix || "";
+			prefix = prefix || '';
 
 			if (str.indexOf(prefix) !== 0) {
 				str = prefix + str;
 			}
 
 			return str;
-		},
-
-		__generateId: YAHOO.util.Dom.generateId
+		}
 	};
 
-	YAHOO.util.Dom.generateId = function(el, prefix) {
-		return Expanse.__generateId(el, prefix || 'exp-gen-');
+	var _generateId = YAHOO.util.Dom.generateId;
+
+	var generateId = function(el, prefix) {
+		return _generateId(el, prefix || 'exp-gen-');
 	};
+
+	YAHOO.util.Dom.generateId = generateId;
+	Expanse.generateId = generateId;
 
 	Expanse.zIndex = {
 		COLOR_PICKER: 5000,
