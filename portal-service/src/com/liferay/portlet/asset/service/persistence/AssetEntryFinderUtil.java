@@ -110,12 +110,6 @@ public class AssetEntryFinderUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetEntry> findEntries(
-		com.liferay.portlet.asset.service.persistence.AssetEntryQuery entryQuery,
-		int start, int end) throws com.liferay.portal.SystemException {
-		return getFinder().findEntries(entryQuery, start, end);
-	}
-
-	public static java.util.List<com.liferay.portlet.asset.model.AssetEntry> findEntries(
 		long groupId, long[] classNameIds, java.lang.String orderByCol1,
 		java.lang.String orderByCol2, java.lang.String orderByType1,
 		java.lang.String orderByType2, boolean excludeZeroViewCount,

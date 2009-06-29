@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.asset.service.persistence;
 
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
+
 import java.util.Date;
 
 /**
@@ -38,11 +40,34 @@ public class AssetEntryQuery {
 		"priority", "viewCount"
 	};
 
-	public static String[] ORDER_BY_TYPE = new String[] {
-		"ASC", "DESC"
-	};
+	public static String checkOrderByCol(String orderByCol) {
+		if (orderByCol == null) {
+			return ORDER_BY_COLUMNS[2];
+		}
+
+		for (int i = 0; i < ORDER_BY_COLUMNS.length; i++) {
+			if (orderByCol.equals(ORDER_BY_COLUMNS[i])) {
+				return orderByCol;
+			}
+		}
+
+		return ORDER_BY_COLUMNS[2];
+	}
+
+	public static String checkOrderByType(String orderByType) {
+		if ((orderByType == null) || orderByType.equalsIgnoreCase("DESC")) {
+			return "DESC";
+		}
+		else {
+			return "ASC";
+		}
+	}
 
 	public AssetEntryQuery() {
+		Date now = new Date();
+
+		_expirationDate = now;
+		_publishDate = now;
 	}
 
 	public long[] getCategoryIds() {
@@ -51,6 +76,10 @@ public class AssetEntryQuery {
 
 	public long[] getClassNameIds() {
 		return _classNameIds;
+	}
+
+	public int getEnd() {
+		return _end;
 	}
 
 	public Date getExpirationDate() {
@@ -89,16 +118,20 @@ public class AssetEntryQuery {
 		return _publishDate;
 	}
 
+	public int getStart() {
+		return _start;
+	}
+
 	public long[] getTagIds() {
 		return _tagIds;
 	}
 
-	public Boolean getVisible() {
-		return _visible;
-	}
-
 	public boolean isCategoryIdsAndOperator() {
 		return _categoryIdsAndOperator;
+	}
+
+	public void setEnd(int end) {
+		_end = end;
 	}
 
 	public boolean isExcludeZeroViewCount() {
@@ -117,13 +150,17 @@ public class AssetEntryQuery {
 		return _tagIdsAndOperator;
 	}
 
-	public void setClassNameIds(long[] classNameIds) {
-		_classNameIds = classNameIds;
+	public Boolean isVisible() {
+		return _visible;
 	}
 
 	public void setCategoryIds(long[] categoryIds, boolean andOperator) {
 		_categoryIds = categoryIds;
 		_categoryIdsAndOperator = andOperator;
+	}
+
+	public void setClassNameIds(long[] classNameIds) {
+		_classNameIds = classNameIds;
 	}
 
 	public void setExcludeZeroViewCount(boolean excludeZeroViewCount) {
@@ -168,6 +205,10 @@ public class AssetEntryQuery {
 		_publishDate = publishDate;
 	}
 
+	public void setStart(int start) {
+		_start = start;
+	}
+
 	public void setTagIds(long[] tagIds, boolean andOperator) {
 		_tagIds = tagIds;
 		_tagIdsAndOperator = andOperator;
@@ -177,49 +218,23 @@ public class AssetEntryQuery {
 		_visible = visible;
 	}
 
-	protected String checkOrderByCol(String orderByCol) {
-		if (orderByCol == null) {
-			return "modifiedDate";
-		}
-
-		for (int i = 0; i < ORDER_BY_COLUMNS.length; i++) {
-			if (orderByCol.equals(ORDER_BY_COLUMNS[i])) {
-				return orderByCol;
-			}
-		}
-
-		return "modifiedDate";
-	}
-
-	protected String checkOrderByType(String orderByType) {
-		if (orderByType == null) {
-			return "DESC";
-		}
-
-		for (int i = 0; i < ORDER_BY_TYPE.length; i++) {
-			if (orderByType.equals(ORDER_BY_TYPE[i])) {
-				return orderByType;
-			}
-		}
-
-		return "DESC";
-	}
-
 	private long[] _categoryIds = new long[0];
 	private boolean _categoryIdsAndOperator = true;
 	private long[] _classNameIds = new long[0];
-	private boolean _excludeZeroViewCount = false;
-	private Date _expirationDate = null;
+	private int _end = QueryUtil.ALL_POS;
+	private boolean _excludeZeroViewCount;
+	private Date _expirationDate;
 	private long _groupId = 0;
 	private long[] _notCategoryIds = new long[0];
 	private boolean _notCategoryIdsAndOperator;
 	private long[] _notTagIds = new long[0];
 	private boolean _notTagIdsAndOperator = true;
-	private String _orderByCol1 = null;
-	private String _orderByCol2 = null;
-	private String _orderByType1 = null;
-	private String _orderByType2 = null;
-	private Date _publishDate = null;
+	private String _orderByCol1;
+	private String _orderByCol2;
+	private String _orderByType1;
+	private String _orderByType2;
+	private Date _publishDate;
+	private int _start = QueryUtil.ALL_POS;
 	private long[] _tagIds = new long[0];
 	private boolean _tagIdsAndOperator;
 	private Boolean _visible = Boolean.TRUE;

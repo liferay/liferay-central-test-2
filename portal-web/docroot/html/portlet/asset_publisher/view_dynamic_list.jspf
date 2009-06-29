@@ -30,23 +30,20 @@ if (allowEmptyResults && (assetTagIds.length == 0) && (notAssetTagIds.length == 
 	assetTagIds = new long[] {-1};
 }
 
-int total = 0;
-
-Date now = new Date();
-
 AssetEntryQuery entryQuery = new AssetEntryQuery();
 
-entryQuery.setExcludeZeroViewCount(excludeZeroViewCount);
 entryQuery.setGroupId(scopeGroupId);
-entryQuery.setTagIds(assetTagIds, andOperator);
+entryQuery.setEnd(searchContainer.getEnd());
+entryQuery.setExcludeZeroViewCount(excludeZeroViewCount);
 entryQuery.setNotTagIds(notAssetTagIds, andOperator);
-entryQuery.setPublishDate(now);
-entryQuery.setExpirationDate(now);
-
 entryQuery.setOrderByCol1(orderByColumn1);
 entryQuery.setOrderByCol2(orderByColumn2);
 entryQuery.setOrderByType1(orderByType1);
 entryQuery.setOrderByType2(orderByType2);
+entryQuery.setStart(searchContainer.getStart());
+entryQuery.setTagIds(assetTagIds, andOperator);
+
+int total = 0;
 
 if (!groupByClass) {
 	entryQuery.setClassNameIds(classNameIds);
@@ -55,7 +52,7 @@ if (!groupByClass) {
 
 	searchContainer.setTotal(total);
 
-	List results = AssetEntryLocalServiceUtil.getEntries(entryQuery, searchContainer.getStart(), searchContainer.getEnd());
+	List results = AssetEntryLocalServiceUtil.getEntries(entryQuery);
 
 	searchContainer.setResults(results);
 
@@ -78,7 +75,7 @@ else {
 
 		searchContainer.setTotal(groupTotal);
 
-		List results = AssetEntryLocalServiceUtil.getEntries(entryQuery, searchContainer.getStart(), searchContainer.getEnd());
+		List results = AssetEntryLocalServiceUtil.getEntries(entryQuery);
 
 		searchContainer.setResults(results);
 

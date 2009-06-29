@@ -30,22 +30,17 @@ if (allowEmptyResults && (assetTagIds.length == 0) && (notAssetTagIds.length == 
 	assetTagIds = new long[] {-1};
 }
 
-Date now = new Date();
-
 AssetEntryQuery entryQuery = new AssetEntryQuery();
 
 entryQuery.setClassNameIds(classNameIds);
 entryQuery.setExcludeZeroViewCount(excludeZeroViewCount);
 entryQuery.setGroupId(scopeGroupId);
-entryQuery.setTagIds(assetTagIds, andOperator);
 entryQuery.setNotTagIds(notAssetTagIds, andOperator);
-entryQuery.setPublishDate(now);
-entryQuery.setExpirationDate(now);
-
 entryQuery.setOrderByCol1(orderByColumn1);
 entryQuery.setOrderByCol2(orderByColumn2);
 entryQuery.setOrderByType1(orderByType1);
 entryQuery.setOrderByType2(orderByType2);
+entryQuery.setTagIds(assetTagIds, andOperator);
 
 int total = AssetEntryLocalServiceUtil.getEntriesCount(entryQuery);
 
@@ -53,7 +48,7 @@ searchContainer.setTotal(total);
 
 Map<String, List<AssetEntry>> assetEntriesByCategory = new TreeMap<String, List<AssetEntry>>();
 
-List<AssetEntry> assetEntries = AssetEntryLocalServiceUtil.getEntries(entryQuery, searchContainer.getStart(), total);
+List<AssetEntry> assetEntries = AssetEntryLocalServiceUtil.getEntries(entryQuery);
 
 for (AssetEntry assetEntry : assetEntries) {
 	List<AssetTag> assetTags = AssetTagLocalServiceUtil.getEntryTags(assetEntry.getEntryId());

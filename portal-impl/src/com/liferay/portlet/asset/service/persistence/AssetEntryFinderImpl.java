@@ -71,15 +71,6 @@ public class AssetEntryFinderImpl
 	public static String FIND_BY_VIEW_COUNT =
 		AssetEntryFinder.class.getName() + ".findByViewCount";
 
-	public static String[] ORDER_BY_COLUMNS = new String[] {
-		"title", "createDate", "modifiedDate", "publishDate", "expirationDate",
-		"priority", "viewCount"
-	};
-
-	public static String[] ORDER_BY_TYPE = new String[] {
-		"ASC", "DESC"
-	};
-
 	public int countByAndTagIds(
 			long groupId, long[] classNameIds, long[] tagIds,
 			long[] notTagIds, boolean excludeZeroViewCount, Date publishDate,
@@ -280,9 +271,7 @@ public class AssetEntryFinderImpl
 		}
 	}
 
-	public int countEntries(AssetEntryQuery entryQuery)
-		throws SystemException {
-
+	public int countEntries(AssetEntryQuery entryQuery) throws SystemException {
 		Session session = null;
 
 		try {
@@ -389,10 +378,10 @@ public class AssetEntryFinderImpl
 			int start, int end)
 		throws SystemException {
 
-		orderByCol1 = checkOrderByCol(orderByCol1);
-		orderByCol2 = checkOrderByCol(orderByCol2);
-		orderByType1 = checkOrderByType(orderByType1);
-		orderByType2 = checkOrderByType(orderByType2);
+		orderByCol1 = AssetEntryQuery.checkOrderByCol(orderByCol1);
+		orderByCol2 = AssetEntryQuery.checkOrderByCol(orderByCol2);
+		orderByType1 = AssetEntryQuery.checkOrderByType(orderByType1);
+		orderByType2 = AssetEntryQuery.checkOrderByType(orderByType2);
 
 		Session session = null;
 
@@ -519,10 +508,10 @@ public class AssetEntryFinderImpl
 			int start, int end)
 		throws SystemException {
 
-		orderByCol1 = checkOrderByCol(orderByCol1);
-		orderByCol2 = checkOrderByCol(orderByCol2);
-		orderByType1 = checkOrderByType(orderByType1);
-		orderByType2 = checkOrderByType(orderByType2);
+		orderByCol1 = AssetEntryQuery.checkOrderByCol(orderByCol1);
+		orderByCol2 = AssetEntryQuery.checkOrderByCol(orderByCol2);
+		orderByType1 = AssetEntryQuery.checkOrderByType(orderByType1);
+		orderByType2 = AssetEntryQuery.checkOrderByType(orderByType2);
 
 		Session session = null;
 
@@ -685,14 +674,6 @@ public class AssetEntryFinderImpl
 	public List<AssetEntry> findEntries(AssetEntryQuery entryQuery)
 		throws SystemException {
 
-		return findEntries(
-			entryQuery, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
-	}
-
-	public List<AssetEntry> findEntries(
-			AssetEntryQuery entryQuery, int start, int end)
-		throws SystemException {
-
 		Session session = null;
 
 		try {
@@ -704,7 +685,7 @@ public class AssetEntryFinderImpl
 				entryQuery, sqlPrefix, false, session);
 
 			return (List<AssetEntry>)QueryUtil.list(
-				q, getDialect(), start, end);
+				q, getDialect(), entryQuery.getStart(), entryQuery.getEnd());
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -721,10 +702,10 @@ public class AssetEntryFinderImpl
 			int start, int end)
 		throws SystemException {
 
-		orderByCol1 = checkOrderByCol(orderByCol1);
-		orderByCol2 = checkOrderByCol(orderByCol2);
-		orderByType1 = checkOrderByType(orderByType1);
-		orderByType2 = checkOrderByType(orderByType2);
+		orderByCol1 = AssetEntryQuery.checkOrderByCol(orderByCol1);
+		orderByCol2 = AssetEntryQuery.checkOrderByCol(orderByCol2);
+		orderByType1 = AssetEntryQuery.checkOrderByType(orderByType1);
+		orderByType2 = AssetEntryQuery.checkOrderByType(orderByType2);
 
 		Session session = null;
 
@@ -911,7 +892,7 @@ public class AssetEntryFinderImpl
 
 		sb.append("WHERE (1 = 1)");
 
-		if (entryQuery.getVisible() != null) {
+		if (entryQuery.isVisible() != null) {
 			sb.append(" AND (visible = ?)");
 		}
 
@@ -921,59 +902,59 @@ public class AssetEntryFinderImpl
 
 		// AND conditions
 
-		if (entryQuery.isCategoryIdsAndOperator() &&
-			entryQuery.getCategoryIds().length > 0) {
+		if ((entryQuery.isCategoryIdsAndOperator()) &&
+			(entryQuery.getCategoryIds().length > 0)) {
 
 			buildAndCategoriesSQL(entryQuery, sb);
 		}
 
 		if (entryQuery.isNotCategoryIdsAndOperator() &&
-			entryQuery.getNotCategoryIds().length > 0) {
+			(entryQuery.getNotCategoryIds().length > 0)) {
 
 			buildAndNotCategoriesSQL(entryQuery, sb);
 		}
 
-		if (entryQuery.isNotTagIdsAndOperator() &&
-			entryQuery.getNotTagIds().length > 0) {
+		if ((entryQuery.isNotTagIdsAndOperator()) &&
+			(entryQuery.getNotTagIds().length > 0)) {
 
 			buildAndNotTagsSQL(entryQuery, sb);
 		}
 
-		if (entryQuery.isTagIdsAndOperator() &&
-			entryQuery.getTagIds().length > 0) {
+		if ((entryQuery.isTagIdsAndOperator()) &&
+			(entryQuery.getTagIds().length > 0)) {
 
 			buildAndTagsSQL(entryQuery, sb);
 		}
 
 		// OR conditions
 
-		if (!entryQuery.isCategoryIdsAndOperator() &&
-			entryQuery.getCategoryIds().length > 0) {
+		if ((!entryQuery.isCategoryIdsAndOperator()) &&
+			(entryQuery.getCategoryIds().length > 0)) {
 
 			sb.append(" AND (");
-			sb.append(getCategoryIds(
-				entryQuery.getCategoryIds(), StringPool.EQUAL));
+			sb.append(
+				getCategoryIds(entryQuery.getCategoryIds(), StringPool.EQUAL));
 			sb.append(") ");
 		}
 
-		if (!entryQuery.isNotCategoryIdsAndOperator() &&
-			entryQuery.getNotCategoryIds().length > 0) {
+		if ((!entryQuery.isNotCategoryIdsAndOperator()) &&
+			(entryQuery.getNotCategoryIds().length > 0)) {
 
 			sb.append(" AND (");
 			sb.append(getNotCategoryIds(entryQuery.getNotCategoryIds()));
 			sb.append(") ");
 		}
 
-		if (!entryQuery.isTagIdsAndOperator() &&
-			entryQuery.getTagIds().length > 0) {
+		if ((!entryQuery.isTagIdsAndOperator()) &&
+			(entryQuery.getTagIds().length > 0)) {
 
 			sb.append(" AND (");
 			sb.append(getTagIds(entryQuery.getTagIds(), StringPool.EQUAL));
 			sb.append(") ");
 		}
 
-		if (!entryQuery.isNotTagIdsAndOperator() &&
-			entryQuery.getNotTagIds().length > 0) {
+		if ((!entryQuery.isNotTagIdsAndOperator()) &&
+			(entryQuery.getNotTagIds().length > 0)) {
 
 			sb.append(" AND (");
 			sb.append(getNotTagIds(entryQuery.getNotTagIds()));
@@ -1023,8 +1004,8 @@ public class AssetEntryFinderImpl
 
 		QueryPos qPos = QueryPos.getInstance(q);
 
-		if (entryQuery.getVisible() != null) {
-			qPos.add(entryQuery.getVisible().booleanValue());
+		if (entryQuery.isVisible() != null) {
+			qPos.add(entryQuery.isVisible().booleanValue());
 		}
 
 		setCategoryIds(qPos, entryQuery.getCategoryIds());
@@ -1044,34 +1025,6 @@ public class AssetEntryFinderImpl
 		setClassNamedIds(qPos, entryQuery.getClassNameIds());
 
 		return q;
-	}
-
-	protected String checkOrderByCol(String orderByCol) {
-		if (orderByCol == null) {
-			return "modifiedDate";
-		}
-
-		for (int i = 0; i < ORDER_BY_COLUMNS.length; i++) {
-			if (orderByCol.equals(ORDER_BY_COLUMNS[i])) {
-				return orderByCol;
-			}
-		}
-
-		return "modifiedDate";
-	}
-
-	protected String checkOrderByType(String orderByType) {
-		if (orderByType == null) {
-			return "DESC";
-		}
-
-		for (int i = 0; i < ORDER_BY_TYPE.length; i++) {
-			if (orderByType.equals(ORDER_BY_TYPE[i])) {
-				return orderByType;
-			}
-		}
-
-		return "DESC";
 	}
 
 	protected String getCategoryIds(long[] categoryIds, String operator) {

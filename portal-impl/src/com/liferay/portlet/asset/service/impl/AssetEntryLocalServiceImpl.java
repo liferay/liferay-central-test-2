@@ -123,11 +123,10 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 			getCompanyEntries(companyId, start, end), languageId);
 	}
 
-	public List<AssetEntry> getEntries(
-			AssetEntryQuery entryQuery, int start, int end)
+	public List<AssetEntry> getEntries(AssetEntryQuery entryQuery)
 		throws SystemException {
 
-		return assetEntryFinder.findEntries(entryQuery, start, end);
+		return assetEntryFinder.findEntries(entryQuery);
 	}
 
 	public List<AssetEntry> getEntries(
