@@ -24,6 +24,7 @@ package com.liferay.portlet.asset.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
@@ -171,6 +172,8 @@ public class AssetVocabularyLocalServiceImpl
 				assetVocabularyLocalService.addVocabulary(
 					userLocalService.getDefaultUserId(group.getCompanyId()),
 					PropsValues.ASSET_VOCABULARY_DEFAULT, serviceContext);
+
+			vocabularies = ListUtil.copy(vocabularies);
 
 			vocabularies.add(vocabulary);
 		}
