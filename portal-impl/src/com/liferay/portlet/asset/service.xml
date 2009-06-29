@@ -45,16 +45,16 @@
 		<finder name="VocabularyId" return-type="Collection">
 			<finder-column name="vocabularyId" />
 		</finder>
-		<finder name="N_V" return-type="Collection">
-			<finder-column name="name" />
-			<finder-column name="vocabularyId" />
-		</finder>
 		<finder name="P_N" return-type="Collection">
 			<finder-column name="parentCategoryId" />
 			<finder-column name="name" />
 		</finder>
 		<finder name="P_V" return-type="Collection">
 			<finder-column name="parentCategoryId" />
+			<finder-column name="vocabularyId" />
+		</finder>
+		<finder name="N_V" return-type="Collection">
+			<finder-column name="name" />
 			<finder-column name="vocabularyId" />
 		</finder>
 

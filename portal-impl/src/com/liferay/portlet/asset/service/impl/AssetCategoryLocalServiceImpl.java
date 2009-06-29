@@ -372,8 +372,8 @@ public class AssetCategoryLocalServiceImpl
 	}
 
 	protected void validate(
-		long categoryId, long parentCategoryId, String name, long vocabularyId
-	)
+			long categoryId, long parentCategoryId, String name,
+			long vocabularyId)
 		throws PortalException, SystemException {
 
 		List<AssetCategory> categories = null;

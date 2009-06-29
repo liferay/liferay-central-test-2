@@ -106,23 +106,6 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl
 			AssetCategoryModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "countByVocabularyId",
 			new String[] { Long.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_N_V = new FinderPath(AssetCategoryModelImpl.ENTITY_CACHE_ENABLED,
-			AssetCategoryModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "findByN_V",
-			new String[] { String.class.getName(), Long.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_N_V = new FinderPath(AssetCategoryModelImpl.ENTITY_CACHE_ENABLED,
-			AssetCategoryModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "findByN_V",
-			new String[] {
-				String.class.getName(), Long.class.getName(),
-				
-			"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			});
-	public static final FinderPath FINDER_PATH_COUNT_BY_N_V = new FinderPath(AssetCategoryModelImpl.ENTITY_CACHE_ENABLED,
-			AssetCategoryModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "countByN_V",
-			new String[] { String.class.getName(), Long.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_BY_P_N = new FinderPath(AssetCategoryModelImpl.ENTITY_CACHE_ENABLED,
 			AssetCategoryModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "findByP_N",
@@ -157,6 +140,23 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl
 			AssetCategoryModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "countByP_V",
 			new String[] { Long.class.getName(), Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_N_V = new FinderPath(AssetCategoryModelImpl.ENTITY_CACHE_ENABLED,
+			AssetCategoryModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByN_V",
+			new String[] { String.class.getName(), Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_N_V = new FinderPath(AssetCategoryModelImpl.ENTITY_CACHE_ENABLED,
+			AssetCategoryModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByN_V",
+			new String[] {
+				String.class.getName(), Long.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_N_V = new FinderPath(AssetCategoryModelImpl.ENTITY_CACHE_ENABLED,
+			AssetCategoryModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countByN_V",
+			new String[] { String.class.getName(), Long.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_ALL = new FinderPath(AssetCategoryModelImpl.ENTITY_CACHE_ENABLED,
 			AssetCategoryModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "findAll", new String[0]);
@@ -937,310 +937,6 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public List<AssetCategory> findByN_V(String name, long vocabularyId)
-		throws SystemException {
-		Object[] finderArgs = new Object[] { name, new Long(vocabularyId) };
-
-		List<AssetCategory> list = (List<AssetCategory>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_N_V,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBuilder query = new StringBuilder();
-
-				query.append(
-					"SELECT assetCategory FROM AssetCategory assetCategory WHERE ");
-
-				if (name == null) {
-					query.append("assetCategory.name IS NULL");
-				}
-				else {
-					query.append("assetCategory.name = ?");
-				}
-
-				query.append(" AND ");
-
-				query.append("assetCategory.vocabularyId = ?");
-
-				query.append(" ");
-
-				query.append("ORDER BY ");
-
-				query.append("assetCategory.name ASC");
-
-				Query q = session.createQuery(query.toString());
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				if (name != null) {
-					qPos.add(name);
-				}
-
-				qPos.add(vocabularyId);
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<AssetCategory>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_N_V, finderArgs,
-					list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
-	}
-
-	public List<AssetCategory> findByN_V(String name, long vocabularyId,
-		int start, int end) throws SystemException {
-		return findByN_V(name, vocabularyId, start, end, null);
-	}
-
-	public List<AssetCategory> findByN_V(String name, long vocabularyId,
-		int start, int end, OrderByComparator obc) throws SystemException {
-		Object[] finderArgs = new Object[] {
-				name, new Long(vocabularyId),
-				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
-			};
-
-		List<AssetCategory> list = (List<AssetCategory>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_N_V,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBuilder query = new StringBuilder();
-
-				query.append(
-					"SELECT assetCategory FROM AssetCategory assetCategory WHERE ");
-
-				if (name == null) {
-					query.append("assetCategory.name IS NULL");
-				}
-				else {
-					query.append("assetCategory.name = ?");
-				}
-
-				query.append(" AND ");
-
-				query.append("assetCategory.vocabularyId = ?");
-
-				query.append(" ");
-
-				if (obc != null) {
-					query.append("ORDER BY ");
-
-					String[] orderByFields = obc.getOrderByFields();
-
-					for (int i = 0; i < orderByFields.length; i++) {
-						query.append("assetCategory.");
-						query.append(orderByFields[i]);
-
-						if (obc.isAscending()) {
-							query.append(" ASC");
-						}
-						else {
-							query.append(" DESC");
-						}
-
-						if ((i + 1) < orderByFields.length) {
-							query.append(", ");
-						}
-					}
-				}
-
-				else {
-					query.append("ORDER BY ");
-
-					query.append("assetCategory.name ASC");
-				}
-
-				Query q = session.createQuery(query.toString());
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				if (name != null) {
-					qPos.add(name);
-				}
-
-				qPos.add(vocabularyId);
-
-				list = (List<AssetCategory>)QueryUtil.list(q, getDialect(),
-						start, end);
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<AssetCategory>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_N_V,
-					finderArgs, list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
-	}
-
-	public AssetCategory findByN_V_First(String name, long vocabularyId,
-		OrderByComparator obc) throws NoSuchCategoryException, SystemException {
-		List<AssetCategory> list = findByN_V(name, vocabularyId, 0, 1, obc);
-
-		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
-			msg.append("No AssetCategory exists with the key {");
-
-			msg.append("name=" + name);
-
-			msg.append(", ");
-			msg.append("vocabularyId=" + vocabularyId);
-
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-			throw new NoSuchCategoryException(msg.toString());
-		}
-		else {
-			return list.get(0);
-		}
-	}
-
-	public AssetCategory findByN_V_Last(String name, long vocabularyId,
-		OrderByComparator obc) throws NoSuchCategoryException, SystemException {
-		int count = countByN_V(name, vocabularyId);
-
-		List<AssetCategory> list = findByN_V(name, vocabularyId, count - 1,
-				count, obc);
-
-		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
-			msg.append("No AssetCategory exists with the key {");
-
-			msg.append("name=" + name);
-
-			msg.append(", ");
-			msg.append("vocabularyId=" + vocabularyId);
-
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-			throw new NoSuchCategoryException(msg.toString());
-		}
-		else {
-			return list.get(0);
-		}
-	}
-
-	public AssetCategory[] findByN_V_PrevAndNext(long categoryId, String name,
-		long vocabularyId, OrderByComparator obc)
-		throws NoSuchCategoryException, SystemException {
-		AssetCategory assetCategory = findByPrimaryKey(categoryId);
-
-		int count = countByN_V(name, vocabularyId);
-
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringBuilder query = new StringBuilder();
-
-			query.append(
-				"SELECT assetCategory FROM AssetCategory assetCategory WHERE ");
-
-			if (name == null) {
-				query.append("assetCategory.name IS NULL");
-			}
-			else {
-				query.append("assetCategory.name = ?");
-			}
-
-			query.append(" AND ");
-
-			query.append("assetCategory.vocabularyId = ?");
-
-			query.append(" ");
-
-			if (obc != null) {
-				query.append("ORDER BY ");
-
-				String[] orderByFields = obc.getOrderByFields();
-
-				for (int i = 0; i < orderByFields.length; i++) {
-					query.append("assetCategory.");
-					query.append(orderByFields[i]);
-
-					if (obc.isAscending()) {
-						query.append(" ASC");
-					}
-					else {
-						query.append(" DESC");
-					}
-
-					if ((i + 1) < orderByFields.length) {
-						query.append(", ");
-					}
-				}
-			}
-
-			else {
-				query.append("ORDER BY ");
-
-				query.append("assetCategory.name ASC");
-			}
-
-			Query q = session.createQuery(query.toString());
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			if (name != null) {
-				qPos.add(name);
-			}
-
-			qPos.add(vocabularyId);
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					assetCategory);
-
-			AssetCategory[] array = new AssetCategoryImpl[3];
-
-			array[0] = (AssetCategory)objArray[0];
-			array[1] = (AssetCategory)objArray[1];
-			array[2] = (AssetCategory)objArray[2];
-
-			return array;
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
 	public List<AssetCategory> findByP_N(long parentCategoryId, String name)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(parentCategoryId), name };
@@ -1836,6 +1532,310 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
+	public List<AssetCategory> findByN_V(String name, long vocabularyId)
+		throws SystemException {
+		Object[] finderArgs = new Object[] { name, new Long(vocabularyId) };
+
+		List<AssetCategory> list = (List<AssetCategory>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_N_V,
+				finderArgs, this);
+
+		if (list == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append(
+					"SELECT assetCategory FROM AssetCategory assetCategory WHERE ");
+
+				if (name == null) {
+					query.append("assetCategory.name IS NULL");
+				}
+				else {
+					query.append("assetCategory.name = ?");
+				}
+
+				query.append(" AND ");
+
+				query.append("assetCategory.vocabularyId = ?");
+
+				query.append(" ");
+
+				query.append("ORDER BY ");
+
+				query.append("assetCategory.name ASC");
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (name != null) {
+					qPos.add(name);
+				}
+
+				qPos.add(vocabularyId);
+
+				list = q.list();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<AssetCategory>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_N_V, finderArgs,
+					list);
+
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	public List<AssetCategory> findByN_V(String name, long vocabularyId,
+		int start, int end) throws SystemException {
+		return findByN_V(name, vocabularyId, start, end, null);
+	}
+
+	public List<AssetCategory> findByN_V(String name, long vocabularyId,
+		int start, int end, OrderByComparator obc) throws SystemException {
+		Object[] finderArgs = new Object[] {
+				name, new Long(vocabularyId),
+				
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+			};
+
+		List<AssetCategory> list = (List<AssetCategory>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_N_V,
+				finderArgs, this);
+
+		if (list == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append(
+					"SELECT assetCategory FROM AssetCategory assetCategory WHERE ");
+
+				if (name == null) {
+					query.append("assetCategory.name IS NULL");
+				}
+				else {
+					query.append("assetCategory.name = ?");
+				}
+
+				query.append(" AND ");
+
+				query.append("assetCategory.vocabularyId = ?");
+
+				query.append(" ");
+
+				if (obc != null) {
+					query.append("ORDER BY ");
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("assetCategory.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
+				}
+
+				else {
+					query.append("ORDER BY ");
+
+					query.append("assetCategory.name ASC");
+				}
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (name != null) {
+					qPos.add(name);
+				}
+
+				qPos.add(vocabularyId);
+
+				list = (List<AssetCategory>)QueryUtil.list(q, getDialect(),
+						start, end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<AssetCategory>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_N_V,
+					finderArgs, list);
+
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	public AssetCategory findByN_V_First(String name, long vocabularyId,
+		OrderByComparator obc) throws NoSuchCategoryException, SystemException {
+		List<AssetCategory> list = findByN_V(name, vocabularyId, 0, 1, obc);
+
+		if (list.isEmpty()) {
+			StringBuilder msg = new StringBuilder();
+
+			msg.append("No AssetCategory exists with the key {");
+
+			msg.append("name=" + name);
+
+			msg.append(", ");
+			msg.append("vocabularyId=" + vocabularyId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchCategoryException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public AssetCategory findByN_V_Last(String name, long vocabularyId,
+		OrderByComparator obc) throws NoSuchCategoryException, SystemException {
+		int count = countByN_V(name, vocabularyId);
+
+		List<AssetCategory> list = findByN_V(name, vocabularyId, count - 1,
+				count, obc);
+
+		if (list.isEmpty()) {
+			StringBuilder msg = new StringBuilder();
+
+			msg.append("No AssetCategory exists with the key {");
+
+			msg.append("name=" + name);
+
+			msg.append(", ");
+			msg.append("vocabularyId=" + vocabularyId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchCategoryException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public AssetCategory[] findByN_V_PrevAndNext(long categoryId, String name,
+		long vocabularyId, OrderByComparator obc)
+		throws NoSuchCategoryException, SystemException {
+		AssetCategory assetCategory = findByPrimaryKey(categoryId);
+
+		int count = countByN_V(name, vocabularyId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuilder query = new StringBuilder();
+
+			query.append(
+				"SELECT assetCategory FROM AssetCategory assetCategory WHERE ");
+
+			if (name == null) {
+				query.append("assetCategory.name IS NULL");
+			}
+			else {
+				query.append("assetCategory.name = ?");
+			}
+
+			query.append(" AND ");
+
+			query.append("assetCategory.vocabularyId = ?");
+
+			query.append(" ");
+
+			if (obc != null) {
+				query.append("ORDER BY ");
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("assetCategory.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
+			}
+
+			else {
+				query.append("ORDER BY ");
+
+				query.append("assetCategory.name ASC");
+			}
+
+			Query q = session.createQuery(query.toString());
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			if (name != null) {
+				qPos.add(name);
+			}
+
+			qPos.add(vocabularyId);
+
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
+					assetCategory);
+
+			AssetCategory[] array = new AssetCategoryImpl[3];
+
+			array[0] = (AssetCategory)objArray[0];
+			array[1] = (AssetCategory)objArray[1];
+			array[2] = (AssetCategory)objArray[2];
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		Session session = null;
@@ -1980,13 +1980,6 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public void removeByN_V(String name, long vocabularyId)
-		throws SystemException {
-		for (AssetCategory assetCategory : findByN_V(name, vocabularyId)) {
-			remove(assetCategory);
-		}
-	}
-
 	public void removeByP_N(long parentCategoryId, String name)
 		throws SystemException {
 		for (AssetCategory assetCategory : findByP_N(parentCategoryId, name)) {
@@ -1998,6 +1991,13 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		for (AssetCategory assetCategory : findByP_V(parentCategoryId,
 				vocabularyId)) {
+			remove(assetCategory);
+		}
+	}
+
+	public void removeByN_V(String name, long vocabularyId)
+		throws SystemException {
+		for (AssetCategory assetCategory : findByN_V(name, vocabularyId)) {
 			remove(assetCategory);
 		}
 	}
@@ -2095,67 +2095,6 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl
 
 				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_VOCABULARYID,
 					finderArgs, count);
-
-				closeSession(session);
-			}
-		}
-
-		return count.intValue();
-	}
-
-	public int countByN_V(String name, long vocabularyId)
-		throws SystemException {
-		Object[] finderArgs = new Object[] { name, new Long(vocabularyId) };
-
-		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_N_V,
-				finderArgs, this);
-
-		if (count == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBuilder query = new StringBuilder();
-
-				query.append("SELECT COUNT(assetCategory) ");
-				query.append("FROM AssetCategory assetCategory WHERE ");
-
-				if (name == null) {
-					query.append("assetCategory.name IS NULL");
-				}
-				else {
-					query.append("assetCategory.name = ?");
-				}
-
-				query.append(" AND ");
-
-				query.append("assetCategory.vocabularyId = ?");
-
-				query.append(" ");
-
-				Query q = session.createQuery(query.toString());
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				if (name != null) {
-					qPos.add(name);
-				}
-
-				qPos.add(vocabularyId);
-
-				count = (Long)q.uniqueResult();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (count == null) {
-					count = Long.valueOf(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_N_V, finderArgs,
-					count);
 
 				closeSession(session);
 			}
@@ -2272,6 +2211,67 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl
 				}
 
 				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_P_V, finderArgs,
+					count);
+
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	public int countByN_V(String name, long vocabularyId)
+		throws SystemException {
+		Object[] finderArgs = new Object[] { name, new Long(vocabularyId) };
+
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_N_V,
+				finderArgs, this);
+
+		if (count == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append("SELECT COUNT(assetCategory) ");
+				query.append("FROM AssetCategory assetCategory WHERE ");
+
+				if (name == null) {
+					query.append("assetCategory.name IS NULL");
+				}
+				else {
+					query.append("assetCategory.name = ?");
+				}
+
+				query.append(" AND ");
+
+				query.append("assetCategory.vocabularyId = ?");
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (name != null) {
+					qPos.add(name);
+				}
+
+				qPos.add(vocabularyId);
+
+				count = (Long)q.uniqueResult();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_N_V, finderArgs,
 					count);
 
 				closeSession(session);
