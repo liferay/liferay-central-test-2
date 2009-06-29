@@ -51,7 +51,7 @@
 		%>
 
 		<c:if test='<%= !displayStyle.endsWith("-without-title") %>'>
-			<div class="entry-info" style="line-height: 2em">
+			<div class="entry-info">
 				<span class="entry-title"><a href="<%= viewEntryURL %>"><%= entry.getTitle() %></a></span>
 
 				<span class="entry-author"><liferay-ui:message key="written-by" /> <a href="<%= viewAllEntriesURL %>"><%= HtmlUtil.escape(PortalUtil.getUserName(entry.getUserId(), entry.getUserName())) %></a>,</span>

@@ -34,6 +34,15 @@
 	margin-top: 1.5em;
 }
 
+.portlet-blogs-aggregator .entry-info {
+	line-height: 2em;
+	overflow: hidden;
+}
+
+.ie .portlet-blogs-aggregator .entry-info {
+	height: 1%;
+}
+
 .portlet-blogs-aggregator .entry-author {
 	background: url(<%= themeImagesPath %>/portlet/edit_guest.png) no-repeat 0 50%;
 	border-right: 1px solid #999;
