@@ -201,11 +201,11 @@ public class CounterPersistence extends BasePersistenceImpl {
 
 			rs = ps.executeQuery();
 
-			ps.close();
-
 			if (rs.next()) {
 				rangeMin = rs.getLong(1);
 				rangeMax = rangeMin + PropsValues.COUNTER_INCREMENT;
+
+				ps.close();
 
 				ps = con.prepareStatement(_SQL_UPDATE_ID_BY_NAME);
 
@@ -215,6 +215,8 @@ public class CounterPersistence extends BasePersistenceImpl {
 			else {
 				rangeMin = _DEFAULT_CURRENT_ID;
 				rangeMax = rangeMin + PropsValues.COUNTER_INCREMENT;
+
+				ps.close();
 
 				ps = con.prepareStatement(_SQL_INSERT);
 
@@ -327,12 +329,12 @@ public class CounterPersistence extends BasePersistenceImpl {
 
 				rs.next();
 
-				ps.close();
-
 				long currentId = rs.getLong(1);
 
 				newValue = currentId + 1;
 				long rangeMax = currentId + register.getRangeSize();
+
+				ps.close();
 
 				ps = con.prepareStatement(_SQL_UPDATE_ID_BY_NAME);
 
