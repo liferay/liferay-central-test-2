@@ -1195,16 +1195,11 @@ public class PortletURLImpl
 			parameterSb.append(StringPool.AMPERSAND + WebKeys.ENCRYPT + "=1");
 		}
 
+		sb.append("wsrp-navigationalState");
+		sb.append(StringPool.EQUAL);
+
 		String encodedParameters = HttpUtil.encodeURL(parameterSb.toString());
 
-		if (_lifecycle.equals(PortletRequest.ACTION_PHASE)) {
-			sb.append("wsrp-interactionState");
-		}
-		else {
-			sb.append("wsrp-navigationalState");
-		}
-
-		sb.append(StringPool.EQUAL);
 		sb.append(encodedParameters);
 
 		sb.append("/wsrp_rewrite");
