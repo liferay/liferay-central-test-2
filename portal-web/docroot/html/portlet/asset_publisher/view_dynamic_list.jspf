@@ -34,12 +34,28 @@ int total = 0;
 
 Date now = new Date();
 
+AssetEntryQuery entryQuery = new AssetEntryQuery();
+
+entryQuery.setExcludeZeroViewCount(excludeZeroViewCount);
+entryQuery.setGroupId(scopeGroupId);
+entryQuery.setTagIds(assetTagIds, andOperator);
+entryQuery.setNotTagIds(notAssetTagIds, andOperator);
+entryQuery.setPublishDate(now);
+entryQuery.setExpirationDate(now);
+
+entryQuery.setOrderByCol1(orderByColumn1);
+entryQuery.setOrderByCol2(orderByColumn2);
+entryQuery.setOrderByType1(orderByType1);
+entryQuery.setOrderByType2(orderByType2);
+
 if (!groupByClass) {
-	total = AssetEntryLocalServiceUtil.getEntriesCount(scopeGroupId, classNameIds, assetTagIds, notAssetTagIds, andOperator, excludeZeroViewCount, now, now);
+	entryQuery.setClassNameIds(classNameIds);
+
+	total = AssetEntryLocalServiceUtil.getEntriesCount(entryQuery);
 
 	searchContainer.setTotal(total);
 
-	List results = AssetEntryLocalServiceUtil.getEntries(scopeGroupId, classNameIds, assetTagIds, notAssetTagIds, andOperator, orderByColumn1, orderByColumn2, orderByType1, orderByType2, excludeZeroViewCount, now, now, searchContainer.getStart(), searchContainer.getEnd());
+	List results = AssetEntryLocalServiceUtil.getEntries(entryQuery, searchContainer.getStart(), searchContainer.getEnd());
 
 	searchContainer.setResults(results);
 
@@ -54,13 +70,15 @@ else {
 	for (int groupAssetEntryIndex = 0; groupAssetEntryIndex < _ASSET_ENTRY_TYPES.length; groupAssetEntryIndex++) {
 		long[] groupClassNameIds = {PortalUtil.getClassNameId(_ASSET_ENTRY_TYPES[groupAssetEntryIndex])};
 
-		int groupTotal = AssetEntryLocalServiceUtil.getEntriesCount(scopeGroupId, groupClassNameIds, assetTagIds, notAssetTagIds, andOperator, excludeZeroViewCount, now, now);
+		entryQuery.setClassNameIds(groupClassNameIds);
+
+		int groupTotal = AssetEntryLocalServiceUtil.getEntriesCount(entryQuery);
 
 		total += groupTotal;
 
 		searchContainer.setTotal(groupTotal);
 
-		List results = AssetEntryLocalServiceUtil.getEntries(scopeGroupId, groupClassNameIds, assetTagIds, notAssetTagIds, andOperator, orderByColumn1, orderByColumn2, orderByType1, orderByType2, excludeZeroViewCount, now, now, searchContainer.getStart(), searchContainer.getEnd());
+		List results = AssetEntryLocalServiceUtil.getEntries(entryQuery, searchContainer.getStart(), searchContainer.getEnd());
 
 		searchContainer.setResults(results);
 
