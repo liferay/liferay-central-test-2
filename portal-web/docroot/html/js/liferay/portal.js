@@ -186,7 +186,6 @@ Liferay.Portal.ThumbRating = new Expanse.Class(
 			if (!elementsCache[itemId]) {
 				if (!container) {
 					container = new Expanse.Tooltip(
-						Dom.generateId(),
 						{
 							autodismissdelay: 10000,
 							context: obj,
