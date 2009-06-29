@@ -58,7 +58,6 @@
 	background: url(<%= themeImagesPath %>/common/date.png) no-repeat 0 50%;
 	color: #999;
 	float: left;
-	margin-bottom: 1em;
 	overflow: auto;
 	padding-left: 25px;
 	padding-right: 10px;

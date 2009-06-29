@@ -51,32 +51,28 @@
 		%>
 
 		<c:if test='<%= !displayStyle.endsWith("-without-title") %>'>
-			<div class="entry-title">
-				<a href="<%= viewEntryURL %>"><%= entry.getTitle() %></a>
-			</div>
+			<div class="entry-info" style="line-height: 2em">
+				<span class="entry-title"><a href="<%= viewEntryURL %>"><%= entry.getTitle() %></a></span>
 
-			<div class="entry-author">
-				<liferay-ui:message key="written-by" /> <a href="<%= viewAllEntriesURL %>"><%= HtmlUtil.escape(PortalUtil.getUserName(entry.getUserId(), entry.getUserName())) %></a>,
-			</div>
+				<span class="entry-author"><liferay-ui:message key="written-by" /> <a href="<%= viewAllEntriesURL %>"><%= HtmlUtil.escape(PortalUtil.getUserName(entry.getUserId(), entry.getUserName())) %></a>,</span>
 
-			<div class="entry-date">
-				<liferay-ui:message key="on-date" /> <%= dateFormatDateTime.format(entry.getDisplayDate()) %>
+				<span class="entry-date"><liferay-ui:message key="on-date" /> <%= dateFormatDateTime.format(entry.getDisplayDate()) %></span>
+
+				<span class="entry-categories">
+					<liferay-ui:asset-categories-summary
+						className="<%= BlogsEntry.class.getName() %>"
+						classPK="<%= entry.getEntryId() %>"
+					/>
+				</span>
+
+				<span class="entry-tags">
+					<liferay-ui:asset-tags-summary
+						className="<%= BlogsEntry.class.getName() %>"
+						classPK="<%= entry.getEntryId() %>"
+					/>
+				</span>
 			</div>
 		</c:if>
-
-		<div class="entry-categories">
-			<liferay-ui:asset-categories-summary
-				className="<%= BlogsEntry.class.getName() %>"
-				classPK="<%= entry.getEntryId() %>"
-			/>
-		</div>
-
-		<div class="entry-tags">
-			<liferay-ui:asset-tags-summary
-				className="<%= BlogsEntry.class.getName() %>"
-				classPK="<%= entry.getEntryId() %>"
-			/>
-		</div>
 	</div>
 
 	<c:if test='<%= !displayStyle.equals("title") %>'>
