@@ -37,33 +37,33 @@ public class CounterRegister {
 		String name, long rangeMin, long rangeMax, int rangeSize) {
 
 		_name = name;
-		_holder = new CounterHolder(rangeMin, rangeMax);
 		_rangeSize = rangeSize;
+		_holder = new CounterHolder(rangeMin, rangeMax);
 		_latch = new CompeteLatch();
-	}
-
-	public CounterHolder getCounterHolder() {
-		return _holder;
-	}
-
-	public void setCounterHoler(CounterHolder holder) {
-		_holder = holder;
 	}
 
 	public CompeteLatch getCompeteLatch() {
 		return _latch;
 	}
 
+	public CounterHolder getCounterHolder() {
+		return _holder;
+	}
+
 	public String getName() {
 		return _name;
 	}
 
-	public void setName(String name) {
-		_name = name;
-	}
-
 	public int getRangeSize() {
 		return _rangeSize;
+	}
+
+	public void setCounterHolder(CounterHolder holder) {
+		_holder = holder;
+	}
+
+	public void setName(String name) {
+		_name = name;
 	}
 
 	private volatile CounterHolder _holder;

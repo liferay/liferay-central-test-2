@@ -20,7 +20,7 @@
 	<bean id="com.liferay.counter.service.CounterServiceUtil" class="com.liferay.counter.service.CounterServiceUtil">
 		<property name="service" ref="com.liferay.counter.service.CounterService.impl" />
 	</bean>
-	<bean id="com.liferay.counter.service.persistence.CounterPersistence" class="com.liferay.counter.service.persistence.CounterPersistence" parent="basePersistence" destroy-method="destroy"/>
+	<bean id="com.liferay.counter.service.persistence.CounterPersistence" class="com.liferay.counter.service.persistence.CounterPersistence" parent="basePersistence" destroy-method="destroy" />
 	<bean id="com.liferay.counter.service.persistence.CounterUtil" class="com.liferay.counter.service.persistence.CounterUtil">
 		<property name="persistence" ref="com.liferay.counter.service.persistence.CounterPersistence" />
 	</bean>

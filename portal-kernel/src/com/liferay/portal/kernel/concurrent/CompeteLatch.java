@@ -27,101 +27,116 @@ import java.util.concurrent.locks.AbstractQueuedSynchronizer;
  /**
   * <a href="CompeteLatch.java.html"><b><i>View Source</i></b></a>
   *
-  * See LPS-3744 for a demo usage.
+  * <p>
+  * A synchronizer based on the JDK's AQS framework to simulate a single winner
+  * competition. This synchronizer supports cyclical competition. In this
+  * situation, loser threads should try again. The single winner thread will
+  * lock the latch while other threads will block on the latch by calling
+  * <code>await</code>. After the winner thread finishes its job, it should call
+  * <code>done</code> which will open the latch. All blocking loser threads can
+  * pass the latch at the same time.
+  * </p>
   *
-  * A synchronizer base on JDK5+'s AQS framework to simulate a single winner
-  * competition.<br>
-  * This synchronizer supports cyclic competition.(Usually for the situation
-  * like losers want to try again)<br>
-  * The single winner thread will lock the latch, other threads will block on
-  * the latch by calling await.<br>
-  * After the winner thread finishs its job, it should call done which will open
-  * the latch, all blocking loser threads can pass the latch at the same
-  * time.<br>
-  * 
+  * <p>
+  * See LPS-3744 for a sample use case.
+  * </p>
+  *
   * @author Shuyang Zhou
   *
   */
 public class CompeteLatch {
 
-	private final Sync _sync = new Sync();
-
-	private static final class Sync extends AbstractQueuedSynchronizer {
-
-		// 0 for free, 1 for taken
-
-		final boolean tryInitAcquireShared() {
-			return compareAndSetState(0, 1);
-		}
-
-		@Override
-		protected int tryAcquireShared(int arg) {
-			return getState() == 0 ? 1 : -1;
-		}
-
-		@Override
-		protected boolean tryReleaseShared(int arg) {
-			return compareAndSetState(1, 0);
-		}
-
-		final boolean isLocked(){
-			return getState()==1;
-		}
-	}
-
 	/**
-	 * Current thread join the competition. Return immediately no matter current
-	 * thread is the winner or loser. No matter how many threads join this
-	 * competition, only one thread can become the winner.
-	 *
-	 * @return true if the current thread is the winner, otherwise false for
-	 * loser.
-	 */
-	public boolean compete() {
-		return _sync.tryInitAcquireShared();
-	}
-
-	/**
-	 * <b>Note:</b><i>This method should only be called by loser thread. <i><br>
-	 * If the latch has been locked which means the winner is doing its private
-	 * stuff, all loser threads call this method will be blocked.<br>
-	 * If the latch has been opened which means the winner has finished its job,
-	 * the loser threads calling this method will all return immediately.<br>
-	 * If the winner thread calls this method before he calls done, he will be
-	 * blocked for ever and all losers who call this method will also
-	 * be blocked, oops deadlock!
+	 * This method should only be called by a loser thread. If the latch is
+	 * locked, that means the winner is executing its job and all loser threads
+	 * that call this method will be blocked. If the latch is not locked, that
+	 * means the winner has finished its job and all the loser threads calling
+	 * this method will return immediately. If the winner thread calls this
+	 * method before his job completed, then all threads will deadlock.
 	 */
 	public void await() {
 		_sync.acquireShared(1);
 	}
 
 	/**
-	 * <b>Note:</b><i>This method should only be called by winner thread.<i><br>
-	 * Winner thread calls this method to indicate it has finished its job, and
-	 * open the latch to allow all loser threads return from the await
-	 * method.<br>
-	 * If a non-winner thread does call this method when a winner thread has
-	 * locked the latch, the latch will break, the winner thread may be put
-	 * into a non-threadsafe state, usually you should never do this, but this
-	 * can be used for deadlock protection.<br>
-	 * If no one has locked the latch, calling this method takes no effect.<br>
-	 * This method will return immediately.
+	 * Tells the current thread to join the competition. Return immediately
+	 * whether or not the current thread is the winner thread or a loser thread.
+	 * No matter how many threads join this competition, only one thread can be
+	 * the winner thread.
 	 *
-	 * @return true if this call do open the latch, false if the latch is
-	 * already open.
+	 * @return		true if the current thread is the winner thread
+	 */
+	public boolean compete() {
+		return _sync._tryInitAcquireShared();
+	}
+
+	/**
+	 * This method should only be called by the winner thread. The winner thread
+	 * calls this method to indicate that it has finished its job and unlocks
+	 * the latch to allow all loser threads return from the <code>await</code>
+	 * method. If a loser thread does call this method when a winner thread has
+	 * locked the latch, the latch will break and the winner thread may be put
+	 * into a non thread safe state. You should never have to do this except to
+	 * get out of a deadlock. If no one threads have locked the latch, then
+	 * calling this method has no effect. This method will return immediately.
+	 *
+	 * @return		true if this call opens the latch, false if the latch is
+	 *				already open
 	 */
 	public boolean done() {
 		return _sync.releaseShared(1);
 	}
 
 	/**
-	 * Indicate the latch is open or locked. This method should not be used to
-	 * test latch before join competition which is not threadsafe. The only
-	 * purpose for this method is giving external system a way to monitor the
-	 * latch which usually be used for deadlock detection.
-	 * @return
+	 * Returns true if the latch is locked. This method should not be used to
+	 * test the latch before joining a competition because it is not thread
+	 * safe. The only purpose for this method is to give external systems a way
+	 * to monitor the latch which is usually be used for deadlock detection.
 	 */
 	public boolean isLocked(){
-		return _sync.isLocked();
+		return _sync._isLocked();
 	}
+
+	private Sync _sync = new Sync();
+
+	private class Sync extends AbstractQueuedSynchronizer {
+
+		protected int tryAcquireShared(int arg) {
+			if (getState() == 0) {
+				return 1;
+			}
+			else {
+				return -1;
+			}
+		}
+
+		protected boolean tryReleaseShared(int arg) {
+			if (compareAndSetState(1, 0)) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+
+		private final boolean _isLocked(){
+			if (getState() == 1) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+
+		private final boolean _tryInitAcquireShared() {
+			if (compareAndSetState(0, 1)) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+
+	}
+
 }

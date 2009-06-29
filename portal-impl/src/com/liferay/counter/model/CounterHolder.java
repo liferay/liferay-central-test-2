@@ -27,13 +27,6 @@ import java.util.concurrent.atomic.AtomicLong;
 /**
  * <a href="CounterHolder.java.html"><b><i>View Source</i></b></a>
  *
- * A quasi-immutable class for in-memory counter used by CounterRegister.<br>
- * An instance of this class can only threadsafely generate unique "id" in range
- * (initValue, rangeMax].<br>
- * CounterRegister uses this class as an "one-value cache" for currentValue and
- * rangeMax. <br>CounterRegister can update its currentValue and rangeMax
- * threadsafely by creating a new CounterHolder to replace the old one.
- * 
  * @author Shuyang Zhou
  *
  */
