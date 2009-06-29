@@ -352,3 +352,9 @@
 	margin: 0 0 6px 0;
 	padding: 4px;
 }
+
+.exp-button-row {
+	padding: 5px;
+	border: 1px solid #ccc;
+	background: #eee;
+}
