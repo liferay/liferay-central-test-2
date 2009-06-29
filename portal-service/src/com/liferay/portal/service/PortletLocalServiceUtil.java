@@ -107,14 +107,12 @@ public class PortletLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.model.Portlet deployRemotePortlet(
-		com.liferay.portal.model.Portlet portlet)
-		throws com.liferay.portal.SystemException {
+		com.liferay.portal.model.Portlet portlet) {
 		return getService().deployRemotePortlet(portlet);
 	}
 
 	public static void destroyRemotePortlet(
-		com.liferay.portal.model.Portlet portlet)
-		throws com.liferay.portal.SystemException {
+		com.liferay.portal.model.Portlet portlet) {
 		getService().destroyRemotePortlet(portlet);
 	}
 

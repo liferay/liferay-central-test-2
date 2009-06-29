@@ -97,7 +97,7 @@ import javax.servlet.ServletContext;
  */
 public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
-	public Portlet deployRemotePortlet(Portlet portlet) throws SystemException {
+	public Portlet deployRemotePortlet(Portlet portlet) {
 		Map<String, Portlet> portletsPool = _getPortletsPool();
 
 		portletsPool.put(portlet.getPortletId(), portlet);
@@ -129,7 +129,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		return portlet;
 	}
 
-	public void destroyRemotePortlet(Portlet portlet) throws SystemException {
+	public void destroyRemotePortlet(Portlet portlet) {
 		Map<String, Portlet> portletsPool = _getPortletsPool();
 
 		portletsPool.remove(portlet.getRootPortletId());
