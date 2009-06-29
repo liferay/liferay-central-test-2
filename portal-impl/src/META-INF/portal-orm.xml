@@ -198,7 +198,6 @@
 			<basic name="active">
 				<column name="ACTIVE_" />
 			</basic>
-			<transient name="typeSettings" />
 			<transient name="typeSettingsProperties" />
 		</attributes>
 	</entity>
@@ -253,9 +252,6 @@
 			<basic name="priority" />
 			<basic name="layoutPrototypeId" />
 			<basic name="dlFolderId" />
-			<transient name="name" />
-			<transient name="title" />
-			<transient name="typeSettings" />
 			<transient name="typeSettingsProperties" />
 		</attributes>
 	</entity>
@@ -272,7 +268,6 @@
 			<basic name="active">
 				<column name="ACTIVE_" />
 			</basic>
-			<transient name="name" />
 		</attributes>
 	</entity>
 	<entity class="com.liferay.portal.model.impl.LayoutSetImpl" name="LayoutSet">
@@ -713,7 +708,6 @@
 				<column name="TYPE_" />
 			</basic>
 			<basic name="subtype" />
-			<transient name="title" />
 		</attributes>
 	</entity>
 	<entity class="com.liferay.portal.model.impl.ServiceComponentImpl" name="ServiceComponent">
