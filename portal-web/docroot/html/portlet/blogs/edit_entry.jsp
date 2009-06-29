@@ -239,6 +239,8 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 			</c:if>
 		</c:if>
 
+		<aui:input name="categories" type="assetCategories" />
+
 		<aui:input name="tags" type="assetTags" />
 
 		<c:if test="<%= entry == null %>">

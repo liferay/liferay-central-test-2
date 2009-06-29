@@ -189,6 +189,13 @@
 				/>
 			</c:if>
 
+			<div class="entry-categories">
+				<liferay-ui:asset-categories-summary
+					className="<%= BlogsEntry.class.getName() %>"
+					classPK="<%= entry.getEntryId() %>"
+				/>
+			</div>
+
 			<div class="entry-tags">
 				<liferay-ui:asset-tags-summary
 					className="<%= BlogsEntry.class.getName() %>"
