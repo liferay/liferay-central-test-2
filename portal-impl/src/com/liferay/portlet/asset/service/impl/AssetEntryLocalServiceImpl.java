@@ -55,6 +55,7 @@ import com.liferay.portlet.asset.model.AssetEntryDisplay;
 import com.liferay.portlet.asset.model.AssetEntryType;
 import com.liferay.portlet.asset.model.AssetTag;
 import com.liferay.portlet.asset.service.base.AssetEntryLocalServiceBaseImpl;
+import com.liferay.portlet.asset.service.persistence.AssetEntryQuery;
 import com.liferay.portlet.asset.util.AssetEntryValidator;
 import com.liferay.portlet.asset.util.AssetUtil;
 import com.liferay.portlet.blogs.model.BlogsEntry;
@@ -120,6 +121,13 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 
 		return getEntryDisplays(
 			getCompanyEntries(companyId, start, end), languageId);
+	}
+
+	public List<AssetEntry> getEntries(
+			AssetEntryQuery entryQuery, int start, int end)
+		throws SystemException {
+
+		return assetEntryFinder.findEntries(entryQuery, start, end);
 	}
 
 	public List<AssetEntry> getEntries(
@@ -218,6 +226,12 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 		return getEntries(
 			0, new long[0], tagIds, notTagIds, andOperator,
 			excludeZeroViewCount, publishDate, expirationDate, start, end);
+	}
+
+	public int getEntriesCount(AssetEntryQuery entryQuery)
+		throws SystemException {
+
+		return assetEntryFinder.countEntries(entryQuery);
 	}
 
 	public int getEntriesCount(

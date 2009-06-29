@@ -47,6 +47,12 @@ public class AssetEntryFinderUtil {
 			excludeZeroViewCount, publishDate, expirationDate);
 	}
 
+	public static int countEntries(
+		com.liferay.portlet.asset.service.persistence.AssetEntryQuery entryQuery)
+		throws com.liferay.portal.SystemException {
+		return getFinder().countEntries(entryQuery);
+	}
+
 	public static int countEntries(long groupId, long[] classNameIds,
 		boolean excludeZeroViewCount, java.util.Date publishDate,
 		java.util.Date expirationDate)
@@ -95,6 +101,18 @@ public class AssetEntryFinderUtil {
 		long[] classNameId, boolean asc, int start, int end)
 		throws com.liferay.portal.SystemException {
 		return getFinder().findByViewCount(classNameId, asc, start, end);
+	}
+
+	public static java.util.List<com.liferay.portlet.asset.model.AssetEntry> findEntries(
+		com.liferay.portlet.asset.service.persistence.AssetEntryQuery entryQuery)
+		throws com.liferay.portal.SystemException {
+		return getFinder().findEntries(entryQuery);
+	}
+
+	public static java.util.List<com.liferay.portlet.asset.model.AssetEntry> findEntries(
+		com.liferay.portlet.asset.service.persistence.AssetEntryQuery entryQuery,
+		int start, int end) throws com.liferay.portal.SystemException {
+		return getFinder().findEntries(entryQuery, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetEntry> findEntries(

@@ -128,6 +128,16 @@
 				([$TAG_ID$]) [$NOT_TAG_ID$] [$DATES$]
 		]]>
 	</sql>
+	<sql id="com.liferay.portlet.asset.service.persistence.AssetEntryFinder.findByAndCategoryIds">
+		<![CDATA[
+			SELECT
+				DISTINCT AssetEntries_AssetCategories.entryId
+			FROM
+				AssetEntries_AssetCategories
+			WHERE
+				categoryId = ?
+		]]>
+	</sql>
 	<sql id="com.liferay.portlet.asset.service.persistence.AssetEntryFinder.findByAndTagIds">
 		<![CDATA[
 			SELECT

@@ -145,6 +145,18 @@ public class AssetEntryLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetEntry> getEntries(
+		com.liferay.portlet.asset.service.persistence.AssetEntryQuery entryQuery,
+		int start, int end) throws com.liferay.portal.SystemException {
+		return getService().getEntries(entryQuery, start, end);
+	}
+
+	public static int getEntriesCount(
+		com.liferay.portlet.asset.service.persistence.AssetEntryQuery entryQuery)
+		throws com.liferay.portal.SystemException {
+		return getService().getEntriesCount(entryQuery);
+	}
+
+	public static java.util.List<com.liferay.portlet.asset.model.AssetEntry> getEntries(
 		long groupId, long[] classNameIds, long[] tagIds, long[] notTagIds,
 		boolean andOperator, boolean excludeZeroViewCount,
 		java.util.Date publishDate, java.util.Date expirationDate, int start,

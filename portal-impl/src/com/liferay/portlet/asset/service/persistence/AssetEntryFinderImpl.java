@@ -59,6 +59,9 @@ public class AssetEntryFinderImpl
 	public static String COUNT_BY_OR_TAG_IDS =
 		AssetEntryFinder.class.getName() + ".countByOrTagIds";
 
+	public static String FIND_BY_AND_CATEGORY_IDS =
+		AssetEntryFinder.class.getName() + ".findByAndCategoryIds";
+
 	public static String FIND_BY_AND_TAG_IDS =
 		AssetEntryFinder.class.getName() + ".findByAndTagIds";
 
@@ -256,6 +259,39 @@ public class AssetEntryFinderImpl
 			}
 
 			setClassNamedIds(qPos, classNameIds);
+
+			Iterator<Long> itr = q.list().iterator();
+
+			if (itr.hasNext()) {
+				Long count = itr.next();
+
+				if (count != null) {
+					return count.intValue();
+				}
+			}
+
+			return 0;
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public int countEntries(AssetEntryQuery entryQuery)
+		throws SystemException {
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			String sqlPrefix = "SELECT COUNT(entryId) AS COUNT_VALUE ";
+
+			SQLQuery q = buildAssetQuerySQL(
+				entryQuery, sqlPrefix, true, session);
 
 			Iterator<Long> itr = q.list().iterator();
 
@@ -646,6 +682,38 @@ public class AssetEntryFinderImpl
 		}
 	}
 
+	public List<AssetEntry> findEntries(AssetEntryQuery entryQuery)
+		throws SystemException {
+
+		return findEntries(
+			entryQuery, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+	}
+
+	public List<AssetEntry> findEntries(
+			AssetEntryQuery entryQuery, int start, int end)
+		throws SystemException {
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			String sqlPrefix = "SELECT DISTINCT {AssetEntry.*} ";
+
+			SQLQuery q = buildAssetQuerySQL(
+				entryQuery, sqlPrefix, false, session);
+
+			return (List<AssetEntry>)QueryUtil.list(
+				q, getDialect(), start, end);
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public List<AssetEntry> findEntries(
 			long groupId, long[] classNameIds, String orderByCol1,
 			String orderByCol2, String orderByType1, String orderByType2,
@@ -726,6 +794,258 @@ public class AssetEntryFinderImpl
 		}
 	}
 
+	protected void buildAndCategoriesSQL(
+		AssetEntryQuery entryQuery, StringBuilder sb) {
+
+		sb.append(" AND AssetEntry.entryId IN (");
+
+		for (int i = 0; i < entryQuery.getCategoryIds().length; i++) {
+			sb.append(CustomSQLUtil.get(FIND_BY_AND_CATEGORY_IDS));
+
+			if ((i + 1) < entryQuery.getCategoryIds().length) {
+				sb.append(" AND AssetEntry.entryId IN (");
+			}
+		}
+
+		for (int i = 0; i < entryQuery.getCategoryIds().length; i++) {
+			if ((i + 1) < entryQuery.getCategoryIds().length) {
+				sb.append(StringPool.CLOSE_PARENTHESIS);
+			}
+		}
+
+		sb.append(StringPool.CLOSE_PARENTHESIS);
+	}
+
+	protected void buildAndNotCategoriesSQL(
+		AssetEntryQuery entryQuery, StringBuilder sb) {
+
+		sb.append(" AND (");
+
+		for (int i = 0; i < entryQuery.getNotCategoryIds().length; i++) {
+			sb.append("AssetEntry.entryId NOT IN (");
+			sb.append(CustomSQLUtil.get(FIND_BY_AND_CATEGORY_IDS));
+			sb.append(StringPool.CLOSE_PARENTHESIS);
+
+			if ((i + 1) < entryQuery.getNotCategoryIds().length) {
+				sb.append(" OR ");
+			}
+		}
+
+		sb.append(StringPool.CLOSE_PARENTHESIS);
+	}
+
+	protected void buildAndNotTagsSQL(
+		AssetEntryQuery entryQuery, StringBuilder sb) {
+
+		sb.append(" AND (");
+
+		for (int i = 0; i < entryQuery.getNotTagIds().length; i++) {
+			sb.append("AssetEntry.entryId NOT IN (");
+			sb.append(CustomSQLUtil.get(FIND_BY_AND_TAG_IDS));
+			sb.append(StringPool.CLOSE_PARENTHESIS);
+
+			if ((i + 1) < entryQuery.getNotTagIds().length) {
+				sb.append(" OR ");
+			}
+		}
+
+		sb.append(StringPool.CLOSE_PARENTHESIS);
+	}
+
+	protected void buildAndTagsSQL(
+		AssetEntryQuery entryQuery, StringBuilder sb) {
+
+		sb.append(" AND AssetEntry.entryId IN (");
+
+		for (int i = 0; i < entryQuery.getTagIds().length; i++) {
+			sb.append(CustomSQLUtil.get(FIND_BY_AND_TAG_IDS));
+
+			if ((i + 1) < entryQuery.getTagIds().length) {
+				sb.append(" AND AssetEntry.entryId IN (");
+			}
+		}
+
+		for (int i = 0; i < entryQuery.getTagIds().length; i++) {
+			if ((i + 1) < entryQuery.getTagIds().length) {
+				sb.append(StringPool.CLOSE_PARENTHESIS);
+			}
+		}
+
+		sb.append(StringPool.CLOSE_PARENTHESIS);
+	}
+
+	protected SQLQuery buildAssetQuerySQL(
+		AssetEntryQuery entryQuery, String sqlPrefix, boolean count,
+		Session session) {
+
+		StringBuilder sb = new StringBuilder();
+
+		sb.append(sqlPrefix);
+
+		sb.append("FROM AssetEntry ");
+
+		if (!entryQuery.isTagIdsAndOperator() &&
+			entryQuery.getTagIds().length > 0) {
+
+			sb.append("INNER JOIN ");
+			sb.append("AssetEntries_AssetTags ON ");
+			sb.append("(AssetEntries_AssetTags.entryId = ");
+			sb.append("AssetEntry.entryId) ");
+			sb.append("INNER JOIN ");
+			sb.append("AssetTag ON ");
+			sb.append("(AssetTag.tagId = AssetEntries_AssetTags.tagId) ");
+		}
+
+		if (!entryQuery.isCategoryIdsAndOperator() &&
+			entryQuery.getCategoryIds().length > 0) {
+
+			sb.append("INNER JOIN ");
+			sb.append("AssetEntries_AssetCategories ON ");
+			sb.append("(AssetEntries_AssetCategories.entryId = ");
+			sb.append("AssetEntry.entryId) ");
+			sb.append("INNER JOIN ");
+			sb.append("AssetCategory ON ");
+			sb.append("(AssetCategory.categoryId = ");
+			sb.append("AssetEntries_AssetCategories.categoryId) ");
+		}
+
+		sb.append("WHERE (1 = 1)");
+
+		if (entryQuery.getVisible() != null) {
+			sb.append(" AND (visible = ?)");
+		}
+
+		if (entryQuery.isExcludeZeroViewCount()) {
+			sb.append(" AND (AssetEntry.viewCount > 0)");
+		}
+
+		// AND conditions
+
+		if (entryQuery.isCategoryIdsAndOperator() &&
+			entryQuery.getCategoryIds().length > 0) {
+
+			buildAndCategoriesSQL(entryQuery, sb);
+		}
+
+		if (entryQuery.isNotCategoryIdsAndOperator() &&
+			entryQuery.getNotCategoryIds().length > 0) {
+
+			buildAndNotCategoriesSQL(entryQuery, sb);
+		}
+
+		if (entryQuery.isNotTagIdsAndOperator() &&
+			entryQuery.getNotTagIds().length > 0) {
+
+			buildAndNotTagsSQL(entryQuery, sb);
+		}
+
+		if (entryQuery.isTagIdsAndOperator() &&
+			entryQuery.getTagIds().length > 0) {
+
+			buildAndTagsSQL(entryQuery, sb);
+		}
+
+		// OR conditions
+
+		if (!entryQuery.isCategoryIdsAndOperator() &&
+			entryQuery.getCategoryIds().length > 0) {
+
+			sb.append(" AND (");
+			sb.append(getCategoryIds(
+				entryQuery.getCategoryIds(), StringPool.EQUAL));
+			sb.append(") ");
+		}
+
+		if (!entryQuery.isNotCategoryIdsAndOperator() &&
+			entryQuery.getNotCategoryIds().length > 0) {
+
+			sb.append(" AND (");
+			sb.append(getNotCategoryIds(entryQuery.getNotCategoryIds()));
+			sb.append(") ");
+		}
+
+		if (!entryQuery.isTagIdsAndOperator() &&
+			entryQuery.getTagIds().length > 0) {
+
+			sb.append(" AND (");
+			sb.append(getTagIds(entryQuery.getTagIds(), StringPool.EQUAL));
+			sb.append(") ");
+		}
+
+		if (!entryQuery.isNotTagIdsAndOperator() &&
+			entryQuery.getNotTagIds().length > 0) {
+
+			sb.append(" AND (");
+			sb.append(getNotTagIds(entryQuery.getNotTagIds()));
+			sb.append(") ");
+		}
+
+		// Other conditions
+
+		sb.append("[$DATES$]");
+
+		if (entryQuery.getGroupId() > 0) {
+			sb.append(" AND (AssetEntry.groupId = ?)");
+		}
+
+		sb.append(getClassNameIds(entryQuery.getClassNameIds()));
+
+		if (!count) {
+			sb.append(" ORDER BY AssetEntry.");
+			sb.append(entryQuery.getOrderByCol1());
+			sb.append(StringPool.SPACE);
+			sb.append(entryQuery.getOrderByType1());
+
+			if (Validator.isNotNull(entryQuery.getOrderByCol2()) &&
+				!entryQuery.getOrderByCol1().equals(
+					entryQuery.getOrderByCol2())) {
+
+				sb.append(", AssetEntry.");
+				sb.append(entryQuery.getOrderByCol2());
+				sb.append(StringPool.SPACE);
+				sb.append(entryQuery.getOrderByType2());
+			}
+		}
+
+		String sql = sb.toString();
+
+		sql = getDates(
+			sql, entryQuery.getPublishDate(), entryQuery.getExpirationDate());
+
+		SQLQuery q = session.createSQLQuery(sql);
+
+		if (count) {
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
+		}
+		else {
+			q.addEntity("AssetEntry", AssetEntryImpl.class);
+		}
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		if (entryQuery.getVisible() != null) {
+			qPos.add(entryQuery.getVisible().booleanValue());
+		}
+
+		setCategoryIds(qPos, entryQuery.getCategoryIds());
+		setCategoryIds(qPos, entryQuery.getNotCategoryIds());
+
+		setTagIds(qPos, entryQuery.getNotTagIds());
+		setTagIds(qPos, entryQuery.getTagIds());
+
+		setDates(
+			qPos, entryQuery.getPublishDate(),
+			entryQuery.getExpirationDate());
+
+		if (entryQuery.getGroupId() > 0) {
+			setGroupId(qPos, entryQuery.getGroupId());
+		}
+
+		setClassNamedIds(qPos, entryQuery.getClassNameIds());
+
+		return q;
+	}
+
 	protected String checkOrderByCol(String orderByCol) {
 		if (orderByCol == null) {
 			return "modifiedDate";
@@ -752,6 +1072,26 @@ public class AssetEntryFinderImpl
 		}
 
 		return "DESC";
+	}
+
+	protected String getCategoryIds(long[] categoryIds, String operator) {
+		StringBuilder sb = new StringBuilder();
+
+		for (int i = 0; i < categoryIds.length; i++) {
+			sb.append("AssetCategory.categoryId ");
+			sb.append(operator);
+			sb.append(" ? ");
+
+			if ((i + 1) != categoryIds.length) {
+				sb.append("OR ");
+			}
+		}
+
+		if (sb.length() == 0) {
+			sb.append("(1 = 1)");
+		}
+
+		return sb.toString();
 	}
 
 	protected String getClassNameIds(long[] classNameIds) {
@@ -792,6 +1132,46 @@ public class AssetEntryFinderImpl
 		return sql;
 	}
 
+	protected String getNotCategoryIds(long[] notCategoryIds) {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append(" AND (");
+
+		for (int i = 0; i < notCategoryIds.length; i++) {
+			sb.append("AssetEntry.entryId NOT IN (");
+			sb.append(CustomSQLUtil.get(FIND_BY_AND_CATEGORY_IDS));
+			sb.append(StringPool.CLOSE_PARENTHESIS);
+
+			if ((i + 1) < notCategoryIds.length) {
+				sb.append(" AND ");
+			}
+		}
+
+		sb.append(StringPool.CLOSE_PARENTHESIS);
+
+		return sb.toString();
+	}
+
+	protected String getNotTagIds(long[] notTagIds) {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append(" AND (");
+
+		for (int i = 0; i < notTagIds.length; i++) {
+			sb.append("AssetEntry.entryId NOT IN (");
+			sb.append(CustomSQLUtil.get(FIND_BY_AND_TAG_IDS));
+			sb.append(StringPool.CLOSE_PARENTHESIS);
+
+			if ((i + 1) < notTagIds.length) {
+				sb.append(" AND ");
+			}
+		}
+
+		sb.append(StringPool.CLOSE_PARENTHESIS);
+
+		return sb.toString();
+	}
+
 	protected String getTagIds(long[] tagIds, String operator) {
 		StringBuilder sb = new StringBuilder();
 
@@ -810,6 +1190,12 @@ public class AssetEntryFinderImpl
 		}
 
 		return sb.toString();
+	}
+
+	protected void setCategoryIds(QueryPos qPos, long[] categoryIds) {
+		for (int i = 0; i < categoryIds.length; i++) {
+			qPos.add(categoryIds[i]);
+		}
 	}
 
 	protected void setClassNamedIds(QueryPos qPos, long[] classNameIds) {
