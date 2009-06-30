@@ -44,35 +44,24 @@ portletURL.setParameter("struts_action", "/blogs/view");
 <%
 SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, pageDelta, portletURL, null, null);
 
-long classNameId = PortalUtil.getClassNameId(BlogsEntry.class.getName());
+AssetEntryQuery assetEntryQuery = new AssetEntryQuery(BlogsEntry.class.getName(), searchContainer);
 
-long[] assetTagIds = AssetTagLocalServiceUtil.getTagIds(scopeGroupId, new String[] {tagName});
-long[] notAssetTagIds = new long[0];
-
-AssetEntryQuery entryQuery = new AssetEntryQuery();
-
-entryQuery.setClassNameIds(new long[] {classNameId});
-entryQuery.setGroupId(scopeGroupId);
-entryQuery.setEnd(searchContainer.getEnd());
-entryQuery.setExcludeZeroViewCount(false);
-entryQuery.setNotTagIds(notAssetTagIds, false);
-entryQuery.setStart(searchContainer.getStart());
-entryQuery.setTagIds(assetTagIds, false);
+assetEntryQuery.setExcludeZeroViewCount(false);
 
 if (BlogsPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_ENTRY)) {
-	entryQuery.setVisible(null);
+	assetEntryQuery.setVisible(null);
 }
 else {
-	entryQuery.setVisible(true);
+	assetEntryQuery.setVisible(true);
 }
 
-int total = AssetEntryLocalServiceUtil.getEntriesCount(entryQuery);
+int total = AssetEntryLocalServiceUtil.getEntriesCount(assetEntryQuery);
 
 searchContainer.setTotal(total);
 
-List<AssetEntry> assetEntries = AssetEntryLocalServiceUtil.getEntries(entryQuery);
+List<AssetEntry> results = AssetEntryLocalServiceUtil.getEntries(assetEntryQuery);
 
-searchContainer.setResults(assetEntries);
+searchContainer.setResults(results);
 %>
 
 <%@ include file="/html/portlet/blogs/view_entries.jspf" %>

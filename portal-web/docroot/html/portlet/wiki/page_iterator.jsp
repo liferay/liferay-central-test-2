@@ -194,21 +194,10 @@ else if (type.equals("recent_changes")) {
 	results = WikiPageLocalServiceUtil.getRecentChanges(node.getNodeId(), searchContainer.getStart(), searchContainer.getEnd());
 }
 else if (type.equals("tagged_pages")) {
-	long classNameId = PortalUtil.getClassNameId(WikiPage.class.getName());
-	long[] tagIds = AssetTagLocalServiceUtil.getTagIds(scopeGroupId, new String[] {tagName});
-	long[] notTagIds = new long[0];
+	AssetEntryQuery assetEntryQuery = new AssetEntryQuery(WikiPage.class.getName(), searchContainer);
 
-	AssetEntryQuery entryQuery = new AssetEntryQuery();
-
-	entryQuery.setClassNameIds(new long[] {classNameId});
-	entryQuery.setGroupId(scopeGroupId);
-	entryQuery.setEnd(searchContainer.getEnd());
-	entryQuery.setNotTagIds(notTagIds, false);
-	entryQuery.setStart(searchContainer.getStart());
-	entryQuery.setTagIds(tagIds, false);
-
-	total = AssetEntryLocalServiceUtil.getEntriesCount(entryQuery);
-	List<AssetEntry> assetEntries = AssetEntryLocalServiceUtil.getEntries(entryQuery);
+	total = AssetEntryLocalServiceUtil.getEntriesCount(assetEntryQuery);
+	List<AssetEntry> assetEntries = AssetEntryLocalServiceUtil.getEntries(assetEntryQuery);
 
 	results = new ArrayList();
 

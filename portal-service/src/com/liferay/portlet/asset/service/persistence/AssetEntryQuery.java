@@ -22,9 +22,19 @@
 
 package com.liferay.portlet.asset.service.persistence;
 
+import com.liferay.portal.PortalException;
+import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
+import com.liferay.portal.kernel.dao.search.SearchContainer;
+import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.WebKeys;
+import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
 
 import java.util.Date;
+
+import javax.portlet.PortletRequest;
 
 /**
  * <a href="AssetEntryQuery.java.html"><b><i>View Source</i></b></a>
@@ -68,6 +78,28 @@ public class AssetEntryQuery {
 
 		_expirationDate = now;
 		_publishDate = now;
+	}
+
+	public AssetEntryQuery(String className, SearchContainer searchContainer)
+		throws PortalException, SystemException {
+
+		this();
+
+		setClassName(className);
+		_start = searchContainer.getStart();
+		_end = searchContainer.getEnd();
+
+		PortletRequest portletRequest = searchContainer.getPortletRequest();
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		_groupId = themeDisplay.getScopeGroupId();
+
+		String tagName = ParamUtil.getString(portletRequest, "tag");
+
+		_tagIds = AssetTagLocalServiceUtil.getTagIds(
+			_groupId, new String[] {tagName});
 	}
 
 	public long[] getCategoryIds() {
@@ -159,6 +191,12 @@ public class AssetEntryQuery {
 		_categoryIdsAndOperator = andOperator;
 	}
 
+	public void setClassName(String className) {
+		long classNameId = PortalUtil.getClassNameId(className);
+
+		_classNameIds = new long[] {classNameId};
+	}
+
 	public void setClassNameIds(long[] classNameIds) {
 		_classNameIds = classNameIds;
 	}
@@ -219,7 +257,7 @@ public class AssetEntryQuery {
 	}
 
 	private long[] _categoryIds = new long[0];
-	private boolean _categoryIdsAndOperator = true;
+	private boolean _categoryIdsAndOperator;
 	private long[] _classNameIds = new long[0];
 	private int _end = QueryUtil.ALL_POS;
 	private boolean _excludeZeroViewCount;
@@ -228,7 +266,7 @@ public class AssetEntryQuery {
 	private long[] _notCategoryIds = new long[0];
 	private boolean _notCategoryIdsAndOperator;
 	private long[] _notTagIds = new long[0];
-	private boolean _notTagIdsAndOperator = true;
+	private boolean _notTagIdsAndOperator;
 	private String _orderByCol1;
 	private String _orderByCol2;
 	private String _orderByType1;

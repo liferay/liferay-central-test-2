@@ -144,11 +144,6 @@
 
 			<div class="stats">
 				<span class="view-count">
-
-					<%
-					AssetEntry assetEntry = AssetEntryLocalServiceUtil.getEntry(BlogsEntry.class.getName(), entry.getEntryId());
-					%>
-
 					<c:choose>
 						<c:when test="<%= assetEntry.getViewCount() == 1 %>">
 							<%= assetEntry.getViewCount() %> <liferay-ui:message key="view" />,
