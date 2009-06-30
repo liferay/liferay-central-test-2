@@ -143,6 +143,11 @@ public class AssetEntryServiceImpl extends AssetEntryServiceBaseImpl {
 			String feedURL, String tagURL)
 		throws PortalException, SystemException {
 
+		long[][] viewableTagIds = getViewableTagIds(tagIds, notTagIds);
+
+		tagIds = viewableTagIds[0];
+		notTagIds = viewableTagIds[1];
+
 		Group group = groupPersistence.findByPrimaryKey(groupId);
 
 		String name = group.getName();
