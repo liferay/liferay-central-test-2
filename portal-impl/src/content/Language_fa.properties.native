@@ -806,6 +806,7 @@ enter-the-friendly-url-that-will-be-used-by-both-public-and-private-pages=آدر
 enter-up-to-x-email-addresses-of-friends-you-would-like-to-invite=Enter up to {0} email addresses of friends you would like to invite. Enter one email address per line.
 enterprise-logo=نماد سازمانی
 enterprise=سازمان
+entries-with-tag-x=Entries with tag <i>{0}</i>.
 entries=ورودی ها
 entry-information=اطلاعات ورودی
 entry=ورودی

@@ -127,6 +127,7 @@ enter-the-default-community-names-per-line-that-are-associated-with-newly-create
 enter-the-default-role-names-per-line-that-are-associated-with-newly-created-users=Enter the default role names <b>per line</b> that are associated with newly created users.
 enter-the-default-user-group-names-per-line-that-are-associated-with-newly-created-users=Enter the default user group names <b>per line</b> that are associated with newly created users.
 enter-up-to-x-email-addresses-of-friends-you-would-like-to-invite=Enter up to {0} email addresses of friends you would like to invite. Enter one email address per line.
+entries-with-tag-x=Entries with tag <i>{0}</i>.
 fields-are-added-if-you-need-to-distinguish-items-based-on-criteria-chosen-by-the-user=Fields are added if you need to distinguish items based on criteria chosen by the user. For example, if you are selling t-shirts, you may want to add a field with the name <i>Size</i> and the values <i>S, M, L, XL</i>. Enter the values as a list of comma delimited options.
 file-size-is-larger-than-x-megabytes=File size is larger than ${0} megabytes.
 filter-web-content-list-by-structure-x=Filter web content list by structure {0}.

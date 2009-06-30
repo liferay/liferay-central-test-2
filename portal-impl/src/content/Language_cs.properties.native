@@ -553,6 +553,7 @@ enter-the-default-community-names-per-line-that-are-associated-with-newly-create
 enter-the-default-role-names-per-line-that-are-associated-with-newly-created-users=Zadejte jména rolí <b>jednu na každou řádku</b>, které budou automtaicky asociovány s nově vytvořenými uživateli.
 enter-the-default-user-group-names-per-line-that-are-associated-with-newly-created-users=Zadejte jména skupin uživatelů <b>jednu na každou řádku</b>, které budou automtaicky asociovány s nově vytvořenými uživateli.
 enter-up-to-x-email-addresses-of-friends-you-would-like-to-invite=Zadejte nejvýše {0} emailových adres přátel, které chcete pozvat (jeden email na každou řádku).
+entries-with-tag-x=Entries with tag <i>{0}</i>.
 entries=Záznamy
 entry-information=Informace o záznamu
 error=Chyba

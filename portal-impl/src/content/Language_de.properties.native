@@ -1490,6 +1490,7 @@ enter-your-custom-css=Bitte geben Sie Ihre eigenen CSS-Definitionen ein.
 enterprise-logo=Firmenlogo
 enterprise=Firma
 entire-message=Komplette Nachricht
+entries-with-tag-x=Entries with tag <i>{0}</i>.
 entries=Einträge
 entry-information=Eintrags-Information
 entry=Eintrag

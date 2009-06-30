@@ -1428,6 +1428,7 @@ enter-your-custom-css=Syötä oma CSS
 enterprise-logo=Yrityksen logo
 enterprise=Yritys
 entire-message=Koko viesti
+entries-with-tag-x=Entries with tag <i>{0}</i>.
 entries=Merkinnät
 entry-information=Merkinnän tiedot
 entry=Merkintä
