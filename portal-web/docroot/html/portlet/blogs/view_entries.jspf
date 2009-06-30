@@ -54,8 +54,8 @@ showSearch = showSearch && (assetEntries.size() > 0);
 </c:if>
 
 <c:if test="<%= Validator.isNotNull(tagName) %>">
-	<h1 class="page-title">
-		<%= LanguageUtil.format(pageContext, "blog-entries-with-tag-x", tagName) %>
+	<h1 class="entry-title">
+		<%= LanguageUtil.format(pageContext, "entries-with-tag-x", tagName) %>
 	</h1>
 </c:if>
 

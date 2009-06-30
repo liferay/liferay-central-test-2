@@ -27,7 +27,7 @@
 <%
 String redirect = currentURL;
 
-String tagName = ParamUtil.getString(renderRequest, "tag");
+String tagName = ParamUtil.getString(request, "tag");
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
@@ -51,8 +51,8 @@ long[] notAssetTagIds = new long[0];
 
 AssetEntryQuery entryQuery = new AssetEntryQuery();
 
+entryQuery.setClassNameIds(new long[] {classNameId});
 entryQuery.setGroupId(scopeGroupId);
-entryQuery.setClassNameIds(new long[]{classNameId});
 entryQuery.setEnd(searchContainer.getEnd());
 entryQuery.setExcludeZeroViewCount(false);
 entryQuery.setNotTagIds(notAssetTagIds, false);
