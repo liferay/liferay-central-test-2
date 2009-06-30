@@ -1197,16 +1197,11 @@ public class PortletURLImpl
 
 		sb.append("wsrp-navigationalState");
 		sb.append(StringPool.EQUAL);
-
-		String encodedParameters = HttpUtil.encodeURL(parameterSb.toString());
-
-		sb.append(encodedParameters);
+		sb.append(HttpUtil.encodeURL(parameterSb.toString()));
 
 		sb.append("/wsrp_rewrite");
 
-		String result = sb.toString();
-
-		return result;
+		return sb.toString();
 	}
 
 	protected boolean isBlankValue(String[] value) {
