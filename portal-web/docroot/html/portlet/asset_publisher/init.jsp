@@ -138,7 +138,6 @@ else {
 
 String category = GetterUtil.getString(preferences.getValue("category", StringPool.BLANK));
 
-
 long assetCategoryId = ParamUtil.getLong(request, "categoryId");
 
 long[] assetCategoryIds = null;

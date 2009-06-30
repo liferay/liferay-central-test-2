@@ -337,7 +337,7 @@ configurationActionURL.setParameter("portletResource", portletResource);
 							focus="<%= false %>"
 						/>
 
-						<br />
+						<br /><br />
 
 						<liferay-ui:message key="displayed-content-must-not-contain-the-following-tags" />
 
@@ -349,7 +349,7 @@ configurationActionURL.setParameter("portletResource", portletResource);
 							focus="<%= false %>"
 						/>
 
-						<br />
+						<br /><br />
 
 						<liferay-ui:message key="include-tags-specified-in-the-url" />
 
@@ -367,7 +367,7 @@ configurationActionURL.setParameter("portletResource", portletResource);
 							focus="<%= false %>"
 						/>
 
-						<br />
+						<br /><br />
 
 						<liferay-ui:message key="displayed-content-must-not-contain-the-following-categories" />
 
@@ -379,7 +379,7 @@ configurationActionURL.setParameter("portletResource", portletResource);
 							focus="<%= false %>"
 						/>
 
-						<br />
+						<br /><br />
 
 						<liferay-ui:message key="search-operator" />
 

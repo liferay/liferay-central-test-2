@@ -30,31 +30,31 @@ if (allowEmptyResults && (assetTagIds.length == 0) && (notAssetTagIds.length == 
 	assetTagIds = new long[] {-1};
 }
 
-AssetEntryQuery entryQuery = new AssetEntryQuery();
+AssetEntryQuery assetEntryQuery = new AssetEntryQuery();
 
-entryQuery.setGroupId(scopeGroupId);
-entryQuery.setCategoryIds(assetCategoryIds, andOperator);
-entryQuery.setEnd(searchContainer.getEnd());
-entryQuery.setExcludeZeroViewCount(excludeZeroViewCount);
-entryQuery.setNotCategoryIds(notAssetCategoryIds, andOperator);
-entryQuery.setNotTagIds(notAssetTagIds, andOperator);
-entryQuery.setOrderByCol1(orderByColumn1);
-entryQuery.setOrderByCol2(orderByColumn2);
-entryQuery.setOrderByType1(orderByType1);
-entryQuery.setOrderByType2(orderByType2);
-entryQuery.setStart(searchContainer.getStart());
-entryQuery.setTagIds(assetTagIds, andOperator);
+assetEntryQuery.setCategoryIds(assetCategoryIds, andOperator);
+assetEntryQuery.setGroupId(scopeGroupId);
+assetEntryQuery.setEnd(searchContainer.getEnd());
+assetEntryQuery.setExcludeZeroViewCount(excludeZeroViewCount);
+assetEntryQuery.setNotCategoryIds(notAssetCategoryIds, andOperator);
+assetEntryQuery.setNotTagIds(notAssetTagIds, andOperator);
+assetEntryQuery.setOrderByCol1(orderByColumn1);
+assetEntryQuery.setOrderByCol2(orderByColumn2);
+assetEntryQuery.setOrderByType1(orderByType1);
+assetEntryQuery.setOrderByType2(orderByType2);
+assetEntryQuery.setStart(searchContainer.getStart());
+assetEntryQuery.setTagIds(assetTagIds, andOperator);
 
 int total = 0;
 
 if (!groupByClass) {
-	entryQuery.setClassNameIds(classNameIds);
+	assetEntryQuery.setClassNameIds(classNameIds);
 
-	total = AssetEntryLocalServiceUtil.getEntriesCount(entryQuery);
+	total = AssetEntryLocalServiceUtil.getEntriesCount(assetEntryQuery);
 
 	searchContainer.setTotal(total);
 
-	List results = AssetEntryLocalServiceUtil.getEntries(entryQuery);
+	List results = AssetEntryLocalServiceUtil.getEntries(assetEntryQuery);
 
 	searchContainer.setResults(results);
 
@@ -69,15 +69,15 @@ else {
 	for (int groupAssetEntryIndex = 0; groupAssetEntryIndex < _ASSET_ENTRY_TYPES.length; groupAssetEntryIndex++) {
 		long[] groupClassNameIds = {PortalUtil.getClassNameId(_ASSET_ENTRY_TYPES[groupAssetEntryIndex])};
 
-		entryQuery.setClassNameIds(groupClassNameIds);
+		assetEntryQuery.setClassNameIds(groupClassNameIds);
 
-		int groupTotal = AssetEntryLocalServiceUtil.getEntriesCount(entryQuery);
+		int groupTotal = AssetEntryLocalServiceUtil.getEntriesCount(assetEntryQuery);
 
 		total += groupTotal;
 
 		searchContainer.setTotal(groupTotal);
 
-		List results = AssetEntryLocalServiceUtil.getEntries(entryQuery);
+		List results = AssetEntryLocalServiceUtil.getEntries(assetEntryQuery);
 
 		searchContainer.setResults(results);
 
