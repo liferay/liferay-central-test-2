@@ -110,22 +110,6 @@ public class SearchContainer<R> {
 		_emptyResultsMessage = emptyResultsMessage;
 	}
 
-	public String getId() {
-		return _id;
-	}
-
-	public void setId(String id) {
-		_id = id;
-	}
-
-	public DisplayTerms getDisplayTerms() {
-		return _displayTerms;
-	}
-
-	public DisplayTerms getSearchTerms() {
-		return _searchTerms;
-	}
-
 	public int getCur() {
 		return _cur;
 	}
@@ -145,6 +129,94 @@ public class SearchContainer<R> {
 		return _delta;
 	}
 
+	public String getDeltaParam() {
+		return _deltaParam;
+	}
+
+	public DisplayTerms getDisplayTerms() {
+		return _displayTerms;
+	}
+
+	public String getEmptyResultsMessage() {
+		return _emptyResultsMessage;
+	}
+
+	public int getEnd() {
+		return _end;
+	}
+
+	public List<String> getHeaderNames() {
+		return _headerNames;
+	}
+
+	public String getId() {
+		return _id;
+	}
+
+	public PortletURL getIteratorURL() {
+		return _iteratorURL;
+	}
+
+	public int getMaxPages() {
+		return _maxPages;
+	}
+
+	public Map<String, String> getOrderableHeaders() {
+		return _orderableHeaders;
+	}
+
+	public String getOrderByCol() {
+		return _orderByCol;
+	}
+
+	public String getOrderByColParam() {
+		return _orderByColParam;
+	}
+
+	public OrderByComparator getOrderByComparator() {
+		return _orderByComparator;
+	}
+
+	public String getOrderByType() {
+		return _orderByType;
+	}
+
+	public String getOrderByTypeParam() {
+		return _orderByTypeParam;
+	}
+
+	public int getResultEnd() {
+		return _resultEnd;
+	}
+
+	public List<ResultRow> getResultRows() {
+		return _resultRows;
+	}
+
+	public List<R> getResults() {
+		return _results;
+	}
+
+	public RowChecker getRowChecker() {
+		return _rowChecker;
+	}
+
+	public DisplayTerms getSearchTerms() {
+		return _searchTerms;
+	}
+
+	public int getStart() {
+		return _start;
+	}
+
+	public int getTotal() {
+		return _total;
+	}
+
+	public boolean isHover() {
+		return _hover;
+	}
+
 	public void setDelta(int delta) {
 		if (delta <= 0) {
 			_delta = DEFAULT_DELTA;
@@ -159,36 +231,68 @@ public class SearchContainer<R> {
 		_calculateStartAndEnd();
 	}
 
-	public String getDeltaParam() {
-		return _deltaParam;
-	}
-
 	public void setDeltaParam(String deltaParam) {
 		_deltaParam = deltaParam;
 	}
 
-	public int getMaxPages() {
-		return _maxPages;
+	public void setEmptyResultsMessage(String emptyResultsMessage) {
+		_emptyResultsMessage = emptyResultsMessage;
+	}
+
+	public void setHeaderNames(List<String> headerNames) {
+		_headerNames = headerNames;
+	}
+
+	public void setHover(boolean hover) {
+		_hover = hover;
+	}
+
+	public void setId(String id) {
+		_id = id;
+	}
+
+	public void setIteratorURL(PortletURL iteratorURL) {
+		_iteratorURL = iteratorURL;
 	}
 
 	public void setMaxPages(int maxPages) {
 		_maxPages = maxPages;
 	}
 
-	public int getStart() {
-		return _start;
+	public void setOrderableHeaders(Map<String, String> orderableHeaders) {
+		_orderableHeaders = orderableHeaders;
 	}
 
-	public int getEnd() {
-		return _end;
+	public void setOrderByCol(String orderByCol) {
+		_orderByCol = orderByCol;
+
+		_iteratorURL.setParameter(_orderByColParam, _orderByCol);
 	}
 
-	public int getResultEnd() {
-		return _resultEnd;
+	public void setOrderByColParam(String orderByColParam) {
+		_orderByColParam = orderByColParam;
 	}
 
-	public int getTotal() {
-		return _total;
+	public void setOrderByComparator(OrderByComparator orderByComparator) {
+		_orderByComparator = orderByComparator;
+	}
+
+	public void setOrderByType(String orderByType) {
+		_orderByType = orderByType;
+
+		_iteratorURL.setParameter(_orderByTypeParam, _orderByType);
+	}
+
+	public void setOrderByTypeParam(String orderByTypeParam) {
+		_orderByTypeParam = orderByTypeParam;
+	}
+
+	public void setResults(List<R> results) {
+		_results = results;
+	}
+
+	public void setRowChecker(RowChecker rowChecker) {
+		_rowChecker = rowChecker;
 	}
 
 	public void setTotal(int total) {
@@ -199,110 +303,6 @@ public class SearchContainer<R> {
 		}
 
 		_calculateStartAndEnd();
-	}
-
-	public List<R> getResults() {
-		return _results;
-	}
-
-	public void setResults(List<R> results) {
-		_results = results;
-	}
-
-	public List<ResultRow> getResultRows() {
-		return _resultRows;
-	}
-
-	public PortletURL getIteratorURL() {
-		return _iteratorURL;
-	}
-
-	public void setIteratorURL(PortletURL iteratorURL) {
-		_iteratorURL = iteratorURL;
-	}
-
-	public List<String> getHeaderNames() {
-		return _headerNames;
-	}
-
-	public void setHeaderNames(List<String> headerNames) {
-		_headerNames = headerNames;
-	}
-
-	public Map<String, String> getOrderableHeaders() {
-		return _orderableHeaders;
-	}
-
-	public void setOrderableHeaders(Map<String, String> orderableHeaders) {
-		_orderableHeaders = orderableHeaders;
-	}
-
-	public String getOrderByCol() {
-		return _orderByCol;
-	}
-
-	public void setOrderByCol(String orderByCol) {
-		_orderByCol = orderByCol;
-
-		_iteratorURL.setParameter(_orderByColParam, _orderByCol);
-	}
-
-	public String getOrderByColParam() {
-		return _orderByColParam;
-	}
-
-	public void setOrderByColParam(String orderByColParam) {
-		_orderByColParam = orderByColParam;
-	}
-
-	public String getOrderByType() {
-		return _orderByType;
-	}
-
-	public void setOrderByType(String orderByType) {
-		_orderByType = orderByType;
-
-		_iteratorURL.setParameter(_orderByTypeParam, _orderByType);
-	}
-
-	public String getOrderByTypeParam() {
-		return _orderByTypeParam;
-	}
-
-	public void setOrderByTypeParam(String orderByTypeParam) {
-		_orderByTypeParam = orderByTypeParam;
-	}
-
-	public OrderByComparator getOrderByComparator() {
-		return _orderByComparator;
-	}
-
-	public void setOrderByComparator(OrderByComparator orderByComparator) {
-		_orderByComparator = orderByComparator;
-	}
-
-	public String getEmptyResultsMessage() {
-		return _emptyResultsMessage;
-	}
-
-	public void setEmptyResultsMessage(String emptyResultsMessage) {
-		_emptyResultsMessage = emptyResultsMessage;
-	}
-
-	public RowChecker getRowChecker() {
-		return _rowChecker;
-	}
-
-	public void setRowChecker(RowChecker rowChecker) {
-		_rowChecker = rowChecker;
-	}
-
-	public boolean isHover() {
-		return _hover;
-	}
-
-	public void setHover(boolean hover) {
-		_hover = hover;
 	}
 
 	private void _calculateStartAndEnd() {
@@ -316,30 +316,30 @@ public class SearchContainer<R> {
 		}
 	}
 
-	private String _id;
-	private DisplayTerms _displayTerms;
-	private DisplayTerms _searchTerms;
 	private int _cur;
 	private String _curParam = DEFAULT_CUR_PARAM;
 	private int _delta = DEFAULT_DELTA;
 	private String _deltaParam = DEFAULT_DELTA_PARAM;
-	private int _maxPages = DEFAULT_MAX_PAGES;
-	private int _start;
+	private DisplayTerms _displayTerms;
+	private String _emptyResultsMessage;
 	private int _end;
-	private int _resultEnd;
-	private int _total;
-	private List<R> _results = new ArrayList<R>();
-	private List<ResultRow> _resultRows = new ArrayList<ResultRow>();
-	private PortletURL _iteratorURL;
 	private List<String> _headerNames;
+	private boolean _hover = true;
+	private String _id;
+	private PortletURL _iteratorURL;
+	private int _maxPages = DEFAULT_MAX_PAGES;
 	private Map<String, String> _orderableHeaders;
 	private String _orderByCol;
 	private String _orderByColParam = DEFAULT_ORDER_BY_COL_PARAM;
+	private OrderByComparator _orderByComparator;
 	private String _orderByType;
 	private String _orderByTypeParam = DEFAULT_ORDER_BY_TYPE_PARAM;
-	private OrderByComparator _orderByComparator;
-	private String _emptyResultsMessage;
+	private int _resultEnd;
+	private List<ResultRow> _resultRows = new ArrayList<ResultRow>();
+	private List<R> _results = new ArrayList<R>();
 	private RowChecker _rowChecker;
-	private boolean _hover = true;
+	private DisplayTerms _searchTerms;
+	private int _start;
+	private int _total;
 
 }
