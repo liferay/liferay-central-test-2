@@ -239,7 +239,7 @@ public class AssetEntryServiceImpl extends AssetEntryServiceBaseImpl {
 	protected void filterQuery(AssetEntryQuery entryQuery)
 		throws PortalException, SystemException {
 
-		List<Long> viewableTagsList = new ArrayList<Long>();
+		List<Long> viewableTagIds = new ArrayList<Long>();
 
 		long[] tagIds = entryQuery.getTagIds();
 		long[] notTagIds = entryQuery.getNotTagIds();
@@ -248,23 +248,20 @@ public class AssetEntryServiceImpl extends AssetEntryServiceBaseImpl {
 			if (AssetTagPermission.contains(
 					getPermissionChecker(), tagId, ActionKeys.VIEW)) {
 
-				viewableTagsList.add(tagId);
+				viewableTagIds.add(tagId);
 			}
 			else {
 				notTagIds = ArrayUtil.append(notTagIds, tagId);
 			}
 		}
 
-		tagIds = new long[viewableTagsList.size()];
-
-		for (int i = 0; i < viewableTagsList.size(); i++) {
-			tagIds[i] = viewableTagsList.get(i).longValue();
-		}
+		tagIds = ArrayUtil.toArray(
+			viewableTagIds.toArray(new Long[viewableTagIds.size()]));
 
 		entryQuery.setTagIds(tagIds, entryQuery.isTagIdsAndOperator());
 		entryQuery.setNotTagIds(notTagIds, entryQuery.isNotTagIdsAndOperator());
 
-		List<Long> viewableCategoriesList = new ArrayList<Long>();
+		List<Long> viewableCategoryIds = new ArrayList<Long>();
 
 		long[] categoryIds = entryQuery.getCategoryIds();
 		long[] notCategoryIds = entryQuery.getNotCategoryIds();
@@ -273,18 +270,15 @@ public class AssetEntryServiceImpl extends AssetEntryServiceBaseImpl {
 			if (AssetCategoryPermission.contains(
 					getPermissionChecker(), categoryId, ActionKeys.VIEW)) {
 
-				viewableCategoriesList.add(categoryId);
+				viewableCategoryIds.add(categoryId);
 			}
 			else {
 				notCategoryIds = ArrayUtil.append(notCategoryIds, categoryId);
 			}
 		}
 
-		categoryIds = new long[viewableCategoriesList.size()];
-
-		for (int i = 0; i < viewableCategoriesList.size(); i++) {
-			categoryIds[i] = viewableCategoriesList.get(i).longValue();
-		}
+		categoryIds = ArrayUtil.toArray(
+			viewableCategoryIds.toArray(new Long[viewableCategoryIds.size()]));
 
 		entryQuery.setCategoryIds(
 			categoryIds, entryQuery.isCategoryIdsAndOperator());
