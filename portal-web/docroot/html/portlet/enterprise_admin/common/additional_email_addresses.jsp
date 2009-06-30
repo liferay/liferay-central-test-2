@@ -32,7 +32,7 @@ List<EmailAddress> emailAddresses = Collections.EMPTY_LIST;
 
 int[] emailAddressesIndexes = null;
 
-String emailAddressesIndexesParam = ParamUtil.getString(renderRequest, "emailAddressesIndexes");
+String emailAddressesIndexesParam = ParamUtil.getString(request, "emailAddressesIndexes");
 
 if (Validator.isNotNull(emailAddressesIndexesParam)) {
 	emailAddresses = new ArrayList<EmailAddress>();

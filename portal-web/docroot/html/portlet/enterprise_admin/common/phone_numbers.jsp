@@ -32,7 +32,7 @@ List<Phone> phones = Collections.EMPTY_LIST;
 
 int[] phonesIndexes = null;
 
-String phonesIndexesParam = ParamUtil.getString(renderRequest, "phonesIndexes");
+String phonesIndexesParam = ParamUtil.getString(request, "phonesIndexes");
 
 if (Validator.isNotNull(phonesIndexesParam)) {
 	phones = new ArrayList<Phone>();

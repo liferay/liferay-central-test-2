@@ -33,7 +33,7 @@ List<OrgLabor> orgLabors = Collections.EMPTY_LIST;
 
 int[] orgLaborsIndexes = null;
 
-String orgLaborsIndexesParam = ParamUtil.getString(renderRequest, "orgLaborsIndexes");
+String orgLaborsIndexesParam = ParamUtil.getString(request, "orgLaborsIndexes");
 
 if (Validator.isNotNull(orgLaborsIndexesParam)) {
 	orgLabors = new ArrayList<OrgLabor>();

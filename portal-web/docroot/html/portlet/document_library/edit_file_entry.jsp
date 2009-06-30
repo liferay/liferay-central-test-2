@@ -48,7 +48,7 @@ if (Validator.isNotNull(name)) {
 
 String titleWithExtension = BeanParamUtil.getString(fileEntry, request, "titleWithExtension");
 
-String assetTagNames = ParamUtil.getString(renderRequest, "assetTagNames");
+String assetTagNames = ParamUtil.getString(request, "assetTagNames");
 
 String[] conversions = new String[0];
 

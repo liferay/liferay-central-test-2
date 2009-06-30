@@ -45,7 +45,7 @@ if (image != null) {
 	extension = StringPool.PERIOD + image.getImageType();
 }
 
-String assetTagNames = ParamUtil.getString(renderRequest, "assetTagNames");
+String assetTagNames = ParamUtil.getString(request, "assetTagNames");
 
 IGFolder folder = null;
 Image largeImage = null;

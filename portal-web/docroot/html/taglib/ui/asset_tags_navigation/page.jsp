@@ -30,7 +30,7 @@ String displayStyle = (String)request.getAttribute("liferay-ui:asset-tags-naviga
 boolean showAssetCount = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:asset-tags-navigation:showAssetCount"));
 boolean showZeroAssetCount = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:asset-tags-navigation:showZeroAssetCount"));
 
-String tag = ParamUtil.getString(renderRequest, "tag");
+String tag = ParamUtil.getString(request, "tag");
 
 PortletURL portletURL = renderResponse.createRenderURL();
 %>

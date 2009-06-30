@@ -32,7 +32,7 @@ List<Address> addresses = Collections.EMPTY_LIST;
 
 int[] addressesIndexes = null;
 
-String addressesIndexesParam = ParamUtil.getString(renderRequest, "addressesIndexes");
+String addressesIndexesParam = ParamUtil.getString(request, "addressesIndexes");
 
 if (Validator.isNotNull(addressesIndexesParam)) {
 	addresses = new ArrayList<Address>();

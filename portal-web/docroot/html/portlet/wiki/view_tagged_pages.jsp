@@ -25,7 +25,7 @@
 <%@ include file="/html/portlet/wiki/init.jsp" %>
 
 <%
-String tagName = ParamUtil.getString(renderRequest, "tag");
+String tagName = ParamUtil.getString(request, "tag");
 
 String title = "pages-with-tag-x";
 String description = null;

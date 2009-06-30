@@ -32,7 +32,7 @@ List<Website> websites = Collections.EMPTY_LIST;
 
 int[] websitesIndexes = null;
 
-String websitesIndexesParam = ParamUtil.getString(renderRequest, "websitesIndexes");
+String websitesIndexesParam = ParamUtil.getString(request, "websitesIndexes");
 
 if (Validator.isNotNull(websitesIndexesParam)) {
 	websites = new ArrayList<Website>();
