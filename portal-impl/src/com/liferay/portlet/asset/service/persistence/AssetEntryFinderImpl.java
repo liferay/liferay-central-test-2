@@ -194,7 +194,7 @@ public class AssetEntryFinderImpl
 		StringBuilder sb = new StringBuilder();
 
 		if (count) {
-			sb.append("SELECT COUNT(entryId) AS COUNT_VALUE ");
+			sb.append("SELECT COUNT(AssetEntry.entryId) AS COUNT_VALUE ");
 		}
 		else {
 			sb.append("SELECT DISTINCT {AssetEntry.*} ");
