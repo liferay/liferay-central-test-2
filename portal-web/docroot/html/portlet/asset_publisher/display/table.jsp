@@ -233,6 +233,18 @@ viewURL = _checkViewURL(viewURL, currentURL, themeDisplay);
 			else if (metadataFields[m].equals("view-count")) {
 				value = String.valueOf(assetEntry.getViewCount());
 			}
+			else if (metadataFields[m].equals("categories")) {
+			%>
+
+				<td>
+					<liferay-ui:asset-categories-summary
+						className="<%= assetEntry.getClassName() %>"
+						classPK="<%= assetEntry.getClassPK () %>"
+					/>
+				</td>
+
+			<%
+			}
 			else if (metadataFields[m].equals("tags")) {
 			%>
 

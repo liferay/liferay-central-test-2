@@ -198,7 +198,7 @@ boolean enableCommentRatings = GetterUtil.getBoolean(preferences.getValue("enabl
 boolean enableTagBasedNavigation = GetterUtil.getBoolean(preferences.getValue("enable-tag-based-navigation", null));
 
 String defaultMetadataFields = StringPool.BLANK;
-String allMetadataFields = "create-date,modified-date,publish-date,expiration-date,priority,author,view-count,tags";
+String allMetadataFields = "create-date,modified-date,publish-date,expiration-date,priority,author,view-count,categories,tags";
 
 String[] metadataFields = StringUtil.split(preferences.getValue("metadata-fields", defaultMetadataFields));
 

@@ -59,6 +59,10 @@
 	float: left;
 }
 
+.portlet-asset-publisher .asset-metadata .metadata-categories span {
+	float: none;
+}
+
 .portlet-asset-publisher .asset-metadata {
 	clear: both;
 	margin-left: 25px;

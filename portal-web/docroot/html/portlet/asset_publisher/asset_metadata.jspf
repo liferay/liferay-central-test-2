@@ -63,12 +63,15 @@ for (int j = 0; j < metadataFields.length; j++) {
 
 		value = viewCount + StringPool.SPACE + LanguageUtil.get(pageContext, (viewCount == 1) ? "view" : "views");
 	}
+	else if (metadataFields[j].equals("categories")) {
+		value = "categories";
+	}
 	else if (metadataFields[j].equals("tags")) {
 		value = "tags";
 	}
 
 	if (Validator.isNotNull(value)) {
-		if (previous && !(value.equals("tags") && assetEntry.getTags().isEmpty())) {
+		if (previous && !(value.equals("categories") && assetEntry.getCategories().isEmpty()) && !(value.equals("tags") && assetEntry.getTags().isEmpty())) {
 %>
 
 			<span class="vertical-separator"><!-- --></span>
@@ -81,6 +84,12 @@ for (int j = 0; j < metadataFields.length; j++) {
 
 		<span class="metadata-entry <%= "metadata-" + metadataFields[j] %>">
 			<c:choose>
+				<c:when test='<%= value.equals("categories") %>' >
+					<liferay-ui:asset-categories-summary
+						className="<%= assetEntry.getClassName() %>"
+						classPK="<%= assetEntry.getClassPK () %>"
+						/>
+				</c:when>
 				<c:when test='<%= value.equals("tags") %>' >
 					<liferay-ui:asset-tags-summary
 						className="<%= assetEntry.getClassName() %>"
