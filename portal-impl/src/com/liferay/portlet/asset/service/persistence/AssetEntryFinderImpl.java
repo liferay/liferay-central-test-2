@@ -277,10 +277,7 @@ public class AssetEntryFinderImpl
 		try {
 			session = openSession();
 
-			String sqlPrefix = "SELECT COUNT(entryId) AS COUNT_VALUE ";
-
-			SQLQuery q = buildAssetQuerySQL(
-				entryQuery, sqlPrefix, true, session);
+			SQLQuery q = buildAssetQuerySQL(entryQuery, true, session);
 
 			Iterator<Long> itr = q.list().iterator();
 
@@ -679,10 +676,7 @@ public class AssetEntryFinderImpl
 		try {
 			session = openSession();
 
-			String sqlPrefix = "SELECT DISTINCT {AssetEntry.*} ";
-
-			SQLQuery q = buildAssetQuerySQL(
-				entryQuery, sqlPrefix, false, session);
+			SQLQuery q = buildAssetQuerySQL(entryQuery, false, session);
 
 			return (List<AssetEntry>)QueryUtil.list(
 				q, getDialect(), entryQuery.getStart(), entryQuery.getEnd());
@@ -856,12 +850,16 @@ public class AssetEntryFinderImpl
 	}
 
 	protected SQLQuery buildAssetQuerySQL(
-		AssetEntryQuery entryQuery, String sqlPrefix, boolean count,
-		Session session) {
+		AssetEntryQuery entryQuery, boolean count, Session session) {
 
 		StringBuilder sb = new StringBuilder();
 
-		sb.append(sqlPrefix);
+		if (count) {
+			sb.append("SELECT COUNT(entryId) AS COUNT_VALUE ");
+		}
+		else {
+			sb.append("SELECT DISTINCT {AssetEntry.*} ");
+		}
 
 		sb.append("FROM AssetEntry ");
 
