@@ -77,11 +77,11 @@ if (Validator.isNotNull(curCategoryIds)) {
 		function() {
 			<%= randomNamespace %> = new Liferay.AssetCategoriesSelector(
 				{
-					instanceVar: "<%= randomNamespace %>",
-					hiddenInput: "<%= namespace + hiddenInput %>",
-					summarySpan: "<%= randomNamespace %>assetCategoriesSummary",
-					curCategoryIds: "<%= curCategoryIds %>",
-					curCategoryNames: "<%= curCategoryNames %>"
+					instanceVar: '<%= randomNamespace %>',
+					hiddenInput: '<%= namespace + hiddenInput %>',
+					summarySpan: '<%= randomNamespace %>assetCategoriesSummary',
+					curCategoryIds: '<%= curCategoryIds %>',
+					curCategoryNames: '<%= curCategoryNames %>'
 				}
 			);
 		}
