@@ -531,23 +531,7 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 				companyId, groupId, userId, resource.getName(),
 				resource.getPrimKey(), false, permissionsList);
 
-		List<String> defaultOwnerActions =
-			ResourceActionsUtil.getModelResourceOwnerDefaultActions(
-				resource.getName());
-
-		if (!defaultOwnerActions.isEmpty()) {
-			Iterator<Permission> itr = userPermissionsList.iterator();
-
-			while (itr.hasNext()) {
-				Permission permission = itr.next();
-
-				String action = permission.getActionId();
-
-				if (!defaultOwnerActions.contains(action)) {
-					itr.remove();
-				}
-			}
-		}
+		filterOwnerPermissions(resource.getName(), userPermissionsList);
 
 		if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 5) {
 
@@ -635,21 +619,7 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 		List<String> actionIds = ResourceActionsUtil.getModelResourceActions(
 			resource.getName());
 
-		List<String> defaultOwnerActions =
-			ResourceActionsUtil.getModelResourceOwnerDefaultActions(
-				resource.getName());
-
-		if (!defaultOwnerActions.isEmpty()) {
-			Iterator<String> itr = actionIds.iterator();
-
-			while (itr.hasNext()) {
-				String action = itr.next();
-
-				if (!defaultOwnerActions.contains(action)) {
-					itr.remove();
-				}
-			}
-		}
+		filterOwnerActions(resource.getName(), actionIds);
 
 		resourcePermissionLocalService.setResourcePermissions(
 			resource.getCompanyId(), resource.getName(), resource.getScope(),
@@ -758,23 +728,7 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 				companyId, groupId, userId, resource.getName(),
 				resource.getPrimKey(), portletActions, permissionsList);
 
-		List<String> defaultOwnerActions =
-			ResourceActionsUtil.getModelResourceOwnerDefaultActions(
-				resource.getName());
-
-		if (!defaultOwnerActions.isEmpty()) {
-			Iterator<Permission> itr = userPermissionsList.iterator();
-
-			while (itr.hasNext()) {
-				Permission permission = itr.next();
-
-				String action = permission.getActionId();
-
-				if (!defaultOwnerActions.contains(action)) {
-					itr.remove();
-				}
-			}
-		}
+		filterOwnerPermissions(resource.getName(), userPermissionsList);
 
 		if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 5) {
 
@@ -813,21 +767,7 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 			actionIds = ResourceActionsUtil.getModelResourceActions(
 				resource.getName());
 
-			List<String> defaultOwnerActions =
-				ResourceActionsUtil.getModelResourceOwnerDefaultActions(
-					resource.getName());
-
-			if (!defaultOwnerActions.isEmpty()) {
-				Iterator<String> itr = actionIds.iterator();
-
-				while (itr.hasNext()) {
-					String action = itr.next();
-
-					if (!defaultOwnerActions.contains(action)) {
-						itr.remove();
-					}
-				}
-			}
+			filterOwnerActions(resource.getName(), actionIds);
 		}
 
 		Role role = roleLocalService.getRole(companyId, RoleConstants.OWNER);
@@ -836,6 +776,48 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 			resource.getCompanyId(), resource.getName(), resource.getScope(),
 			resource.getPrimKey(), role.getRoleId(),
 			actionIds.toArray(new String[actionIds.size()]));
+	}
+
+	protected void filterOwnerActions(String name, List<String> actionIds) {
+		List<String> defaultOwnerActions =
+			ResourceActionsUtil.getModelResourceOwnerDefaultActions(name);
+
+		if (defaultOwnerActions.isEmpty()) {
+			return;
+		}
+
+		Iterator<String> itr = actionIds.iterator();
+
+		while (itr.hasNext()) {
+			String actionId = itr.next();
+
+			if (!defaultOwnerActions.contains(actionId)) {
+				itr.remove();
+			}
+		}
+	}
+
+	protected void filterOwnerPermissions(
+		String name, List<Permission> permissions) {
+
+		List<String> defaultOwnerActions =
+			ResourceActionsUtil.getModelResourceOwnerDefaultActions(name);
+
+		if (defaultOwnerActions.isEmpty()) {
+			return;
+		}
+
+		Iterator<Permission> itr = permissions.iterator();
+
+		while (itr.hasNext()) {
+			Permission permission = itr.next();
+
+			String actionId = permission.getActionId();
+
+			if (!defaultOwnerActions.contains(actionId)) {
+				itr.remove();
+			}
+		}
 	}
 
 	protected Resource getResource_1to5(

@@ -807,8 +807,8 @@ public class ResourceActionsUtil {
 
 			// Community default actions
 
-			List<String> communityDefaultActions =
-				_getActions(_portletResourceCommunityDefaultActions, name);
+			List<String> communityDefaultActions = _getActions(
+				_portletResourceCommunityDefaultActions, name);
 
 			Element communityDefaults = resource.element("community-defaults");
 
@@ -826,8 +826,8 @@ public class ResourceActionsUtil {
 
 			// Guest default actions
 
-			List<String> guestDefaultActions =
-				_getActions(_portletResourceGuestDefaultActions, name);
+			List<String> guestDefaultActions = _getActions(
+				_portletResourceGuestDefaultActions, name);
 
 			Element guestDefaults = resource.element("guest-defaults");
 
@@ -845,8 +845,8 @@ public class ResourceActionsUtil {
 
 			// Guest unsupported actions
 
-			List<String> guestUnsupportedActions =
-				_getActions(_portletResourceGuestUnsupportedActions, name);
+			List<String> guestUnsupportedActions = _getActions(
+				_portletResourceGuestUnsupportedActions, name);
 
 			Element guestUnsupported = resource.element("guest-unsupported");
 
@@ -967,8 +967,8 @@ public class ResourceActionsUtil {
 
 			// Community default actions
 
-			List<String> communityDefaultActions =
-				_getActions(_modelResourceCommunityDefaultActions, name);
+			List<String> communityDefaultActions = _getActions(
+				_modelResourceCommunityDefaultActions, name);
 
 			Element communityDefaults = resource.element("community-defaults");
 
@@ -986,8 +986,8 @@ public class ResourceActionsUtil {
 
 			// Guest default actions
 
-			List<String> guestDefaultActions =
-				_getActions(_modelResourceGuestDefaultActions, name);
+			List<String> guestDefaultActions = _getActions(
+				_modelResourceGuestDefaultActions, name);
 
 			Element guestDefaults = resource.element("guest-defaults");
 
@@ -1005,8 +1005,8 @@ public class ResourceActionsUtil {
 
 			// Guest unsupported actions
 
-			List<String> guestUnsupportedActions =
-				_getActions(_modelResourceGuestUnsupportedActions, name);
+			List<String> guestUnsupportedActions = _getActions(
+				_modelResourceGuestUnsupportedActions, name);
 
 			Element guestUnsupported = resource.element("guest-unsupported");
 
@@ -1027,8 +1027,8 @@ public class ResourceActionsUtil {
 
 			// Owner default actions
 
-			List<String> ownerDefaultActions =
-				_getActions(_modelResourceOwnerDefaultActions, name);
+			List<String> ownerDefaultActions = _getActions(
+				_modelResourceOwnerDefaultActions, name);
 
 			Element ownerDefaults = resource.element("owner-defaults");
 
