@@ -42,6 +42,7 @@
 <%@ page import="com.liferay.portlet.asset.service.AssetEntryLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.asset.service.AssetTagLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.asset.service.AssetTagPropertyLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.asset.service.persistence.AssetEntryQuery" %>
 <%@ page import="com.liferay.portlet.asset.util.AssetUtil" %>
 <%@ page import="com.liferay.portlet.documentlibrary.util.DLUtil" %>
 <%@ page import="com.liferay.portlet.documentlibrary.util.DocumentConversionUtil" %>
