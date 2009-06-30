@@ -32,7 +32,7 @@
 <%
 String className = (String)request.getAttribute("liferay-ui:asset-categories-summary:className");
 long classPK = GetterUtil.getLong((String)request.getAttribute("liferay-ui:asset-categories-summary:classPK"));
-LiferayPortletURL portletURL = (LiferayPortletURL)request.getAttribute("liferay-ui:asset-categories-summary:portletURL");
+PortletURL portletURL = (PortletURL)request.getAttribute("liferay-ui:asset-categories-summary:portletURL");
 
 List<AssetVocabulary> vocabularies = AssetVocabularyServiceUtil.getGroupVocabularies(scopeGroupId);
 List<AssetCategory> categories = AssetCategoryServiceUtil.getCategories(className, classPK);
@@ -53,6 +53,8 @@ for (AssetVocabulary vocabulary : vocabularies) {
 				<c:when test="<%= portletURL != null %>">
 
 					<%
+					portletURL = PortletURLUtil.clone(portletURL);
+
 					for (AssetCategory category : curCategories) {
 						portletURL.setParameter("categoryId", String.valueOf(category.getCategoryId()));
 					%>

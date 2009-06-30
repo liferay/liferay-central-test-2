@@ -31,7 +31,7 @@
 String className = (String)request.getAttribute("liferay-ui:asset-tags-summary:className");
 long classPK = GetterUtil.getLong((String)request.getAttribute("liferay-ui:asset-tags-summary:classPK"));
 String message = GetterUtil.getString((String)request.getAttribute("liferay-ui:asset-tags-summary:message"), StringPool.BLANK);
-LiferayPortletURL portletURL = (LiferayPortletURL)request.getAttribute("liferay-ui:asset-tags-summary:portletURL");
+PortletURL portletURL = (PortletURL)request.getAttribute("liferay-ui:asset-tags-summary:portletURL");
 
 List<AssetTag> tags = AssetTagServiceUtil.getTags(className, classPK);
 %>
@@ -44,6 +44,8 @@ List<AssetTag> tags = AssetTagServiceUtil.getTags(className, classPK);
 			<c:when test="<%= portletURL != null %>">
 
 				<%
+				portletURL = PortletURLUtil.clone(portletURL);
+
 				for (AssetTag tag : tags) {
 					portletURL.setParameter("tag", tag.getName());
 				%>
