@@ -82,31 +82,20 @@ public interface AssetEntryService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.asset.model.AssetEntry> getEntries(
-		long groupId, long[] classNameIds, long[] tagIds, long[] notTagIds,
-		boolean andOperator, java.lang.String orderByCol1,
-		java.lang.String orderByCol2, java.lang.String orderByType1,
-		java.lang.String orderByType2, boolean excludeZeroViewCount,
-		java.util.Date publishDate, java.util.Date expirationDate, int start,
-		int end)
+		com.liferay.portlet.asset.service.persistence.AssetEntryQuery entryQuery)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getEntriesCount(long groupId, long[] classNameIds,
-		long[] tagIds, long[] notTagIds, boolean andOperator,
-		boolean excludeZeroViewCount, java.util.Date publishDate,
-		java.util.Date expirationDate)
+	public int getEntriesCount(
+		com.liferay.portlet.asset.service.persistence.AssetEntryQuery entryQuery)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.lang.String getEntriesRSS(long groupId, long[] classNameIds,
-		long[] tagIds, long[] notTagIds, boolean andOperator,
-		java.lang.String orderByCol1, java.lang.String orderByCol2,
-		java.lang.String orderByType1, java.lang.String orderByType2,
-		boolean excludeZeroViewCount, java.util.Date publishDate,
-		java.util.Date expirationDate, int max, java.lang.String type,
-		double version, java.lang.String displayStyle,
+	public java.lang.String getEntriesRSS(
+		com.liferay.portlet.asset.service.persistence.AssetEntryQuery entryQuery,
+		java.lang.String type, double version, java.lang.String displayStyle,
 		java.lang.String feedURL, java.lang.String tagURL)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;

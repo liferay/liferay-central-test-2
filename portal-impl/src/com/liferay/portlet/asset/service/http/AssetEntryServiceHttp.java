@@ -285,86 +285,20 @@ public class AssetEntryServiceHttp {
 	}
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetEntry> getEntries(
-		HttpPrincipal httpPrincipal, long groupId, long[] classNameIds,
-		long[] tagIds, long[] notTagIds, boolean andOperator,
-		java.lang.String orderByCol1, java.lang.String orderByCol2,
-		java.lang.String orderByType1, java.lang.String orderByType2,
-		boolean excludeZeroViewCount, java.util.Date publishDate,
-		java.util.Date expirationDate, int start, int end)
+		HttpPrincipal httpPrincipal,
+		com.liferay.portlet.asset.service.persistence.AssetEntryQuery entryQuery)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
+			Object paramObj0 = entryQuery;
 
-			Object paramObj1 = classNameIds;
-
-			if (classNameIds == null) {
-				paramObj1 = new NullWrapper("[J");
+			if (entryQuery == null) {
+				paramObj0 = new NullWrapper(
+						"com.liferay.portlet.asset.service.persistence.AssetEntryQuery");
 			}
-
-			Object paramObj2 = tagIds;
-
-			if (tagIds == null) {
-				paramObj2 = new NullWrapper("[J");
-			}
-
-			Object paramObj3 = notTagIds;
-
-			if (notTagIds == null) {
-				paramObj3 = new NullWrapper("[J");
-			}
-
-			Object paramObj4 = new BooleanWrapper(andOperator);
-
-			Object paramObj5 = orderByCol1;
-
-			if (orderByCol1 == null) {
-				paramObj5 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj6 = orderByCol2;
-
-			if (orderByCol2 == null) {
-				paramObj6 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj7 = orderByType1;
-
-			if (orderByType1 == null) {
-				paramObj7 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj8 = orderByType2;
-
-			if (orderByType2 == null) {
-				paramObj8 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj9 = new BooleanWrapper(excludeZeroViewCount);
-
-			Object paramObj10 = publishDate;
-
-			if (publishDate == null) {
-				paramObj10 = new NullWrapper("java.util.Date");
-			}
-
-			Object paramObj11 = expirationDate;
-
-			if (expirationDate == null) {
-				paramObj11 = new NullWrapper("java.util.Date");
-			}
-
-			Object paramObj12 = new IntegerWrapper(start);
-
-			Object paramObj13 = new IntegerWrapper(end);
 
 			MethodWrapper methodWrapper = new MethodWrapper(AssetEntryServiceUtil.class.getName(),
-					"getEntries",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
-						paramObj10, paramObj11, paramObj12, paramObj13
-					});
+					"getEntries", new Object[] { paramObj0 });
 
 			Object returnObj = null;
 
@@ -393,54 +327,19 @@ public class AssetEntryServiceHttp {
 	}
 
 	public static int getEntriesCount(HttpPrincipal httpPrincipal,
-		long groupId, long[] classNameIds, long[] tagIds, long[] notTagIds,
-		boolean andOperator, boolean excludeZeroViewCount,
-		java.util.Date publishDate, java.util.Date expirationDate)
+		com.liferay.portlet.asset.service.persistence.AssetEntryQuery entryQuery)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
+			Object paramObj0 = entryQuery;
 
-			Object paramObj1 = classNameIds;
-
-			if (classNameIds == null) {
-				paramObj1 = new NullWrapper("[J");
-			}
-
-			Object paramObj2 = tagIds;
-
-			if (tagIds == null) {
-				paramObj2 = new NullWrapper("[J");
-			}
-
-			Object paramObj3 = notTagIds;
-
-			if (notTagIds == null) {
-				paramObj3 = new NullWrapper("[J");
-			}
-
-			Object paramObj4 = new BooleanWrapper(andOperator);
-
-			Object paramObj5 = new BooleanWrapper(excludeZeroViewCount);
-
-			Object paramObj6 = publishDate;
-
-			if (publishDate == null) {
-				paramObj6 = new NullWrapper("java.util.Date");
-			}
-
-			Object paramObj7 = expirationDate;
-
-			if (expirationDate == null) {
-				paramObj7 = new NullWrapper("java.util.Date");
+			if (entryQuery == null) {
+				paramObj0 = new NullWrapper(
+						"com.liferay.portlet.asset.service.persistence.AssetEntryQuery");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(AssetEntryServiceUtil.class.getName(),
-					"getEntriesCount",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6, paramObj7
-					});
+					"getEntriesCount", new Object[] { paramObj0 });
 
 			Object returnObj = null;
 
@@ -469,111 +368,50 @@ public class AssetEntryServiceHttp {
 	}
 
 	public static java.lang.String getEntriesRSS(HttpPrincipal httpPrincipal,
-		long groupId, long[] classNameIds, long[] tagIds, long[] notTagIds,
-		boolean andOperator, java.lang.String orderByCol1,
-		java.lang.String orderByCol2, java.lang.String orderByType1,
-		java.lang.String orderByType2, boolean excludeZeroViewCount,
-		java.util.Date publishDate, java.util.Date expirationDate, int max,
+		com.liferay.portlet.asset.service.persistence.AssetEntryQuery entryQuery,
 		java.lang.String type, double version, java.lang.String displayStyle,
 		java.lang.String feedURL, java.lang.String tagURL)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
+			Object paramObj0 = entryQuery;
 
-			Object paramObj1 = classNameIds;
-
-			if (classNameIds == null) {
-				paramObj1 = new NullWrapper("[J");
+			if (entryQuery == null) {
+				paramObj0 = new NullWrapper(
+						"com.liferay.portlet.asset.service.persistence.AssetEntryQuery");
 			}
 
-			Object paramObj2 = tagIds;
-
-			if (tagIds == null) {
-				paramObj2 = new NullWrapper("[J");
-			}
-
-			Object paramObj3 = notTagIds;
-
-			if (notTagIds == null) {
-				paramObj3 = new NullWrapper("[J");
-			}
-
-			Object paramObj4 = new BooleanWrapper(andOperator);
-
-			Object paramObj5 = orderByCol1;
-
-			if (orderByCol1 == null) {
-				paramObj5 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj6 = orderByCol2;
-
-			if (orderByCol2 == null) {
-				paramObj6 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj7 = orderByType1;
-
-			if (orderByType1 == null) {
-				paramObj7 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj8 = orderByType2;
-
-			if (orderByType2 == null) {
-				paramObj8 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj9 = new BooleanWrapper(excludeZeroViewCount);
-
-			Object paramObj10 = publishDate;
-
-			if (publishDate == null) {
-				paramObj10 = new NullWrapper("java.util.Date");
-			}
-
-			Object paramObj11 = expirationDate;
-
-			if (expirationDate == null) {
-				paramObj11 = new NullWrapper("java.util.Date");
-			}
-
-			Object paramObj12 = new IntegerWrapper(max);
-
-			Object paramObj13 = type;
+			Object paramObj1 = type;
 
 			if (type == null) {
-				paramObj13 = new NullWrapper("java.lang.String");
+				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj14 = new DoubleWrapper(version);
+			Object paramObj2 = new DoubleWrapper(version);
 
-			Object paramObj15 = displayStyle;
+			Object paramObj3 = displayStyle;
 
 			if (displayStyle == null) {
-				paramObj15 = new NullWrapper("java.lang.String");
+				paramObj3 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj16 = feedURL;
+			Object paramObj4 = feedURL;
 
 			if (feedURL == null) {
-				paramObj16 = new NullWrapper("java.lang.String");
+				paramObj4 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj17 = tagURL;
+			Object paramObj5 = tagURL;
 
 			if (tagURL == null) {
-				paramObj17 = new NullWrapper("java.lang.String");
+				paramObj5 = new NullWrapper("java.lang.String");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(AssetEntryServiceUtil.class.getName(),
 					"getEntriesRSS",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
-						paramObj10, paramObj11, paramObj12, paramObj13,
-						paramObj14, paramObj15, paramObj16, paramObj17
+						paramObj5
 					});
 
 			Object returnObj = null;

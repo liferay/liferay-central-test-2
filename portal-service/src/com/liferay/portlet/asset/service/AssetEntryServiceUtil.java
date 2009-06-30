@@ -81,46 +81,28 @@ public class AssetEntryServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetEntry> getEntries(
-		long groupId, long[] classNameIds, long[] tagIds, long[] notTagIds,
-		boolean andOperator, java.lang.String orderByCol1,
-		java.lang.String orderByCol2, java.lang.String orderByType1,
-		java.lang.String orderByType2, boolean excludeZeroViewCount,
-		java.util.Date publishDate, java.util.Date expirationDate, int start,
-		int end)
+		com.liferay.portlet.asset.service.persistence.AssetEntryQuery entryQuery)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return getService()
-				   .getEntries(groupId, classNameIds, tagIds, notTagIds,
-			andOperator, orderByCol1, orderByCol2, orderByType1, orderByType2,
-			excludeZeroViewCount, publishDate, expirationDate, start, end);
+		return getService().getEntries(entryQuery);
 	}
 
-	public static int getEntriesCount(long groupId, long[] classNameIds,
-		long[] tagIds, long[] notTagIds, boolean andOperator,
-		boolean excludeZeroViewCount, java.util.Date publishDate,
-		java.util.Date expirationDate)
+	public static int getEntriesCount(
+		com.liferay.portlet.asset.service.persistence.AssetEntryQuery entryQuery)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return getService()
-				   .getEntriesCount(groupId, classNameIds, tagIds, notTagIds,
-			andOperator, excludeZeroViewCount, publishDate, expirationDate);
+		return getService().getEntriesCount(entryQuery);
 	}
 
-	public static java.lang.String getEntriesRSS(long groupId,
-		long[] classNameIds, long[] tagIds, long[] notTagIds,
-		boolean andOperator, java.lang.String orderByCol1,
-		java.lang.String orderByCol2, java.lang.String orderByType1,
-		java.lang.String orderByType2, boolean excludeZeroViewCount,
-		java.util.Date publishDate, java.util.Date expirationDate, int max,
+	public static java.lang.String getEntriesRSS(
+		com.liferay.portlet.asset.service.persistence.AssetEntryQuery entryQuery,
 		java.lang.String type, double version, java.lang.String displayStyle,
 		java.lang.String feedURL, java.lang.String tagURL)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
-				   .getEntriesRSS(groupId, classNameIds, tagIds, notTagIds,
-			andOperator, orderByCol1, orderByCol2, orderByType1, orderByType2,
-			excludeZeroViewCount, publishDate, expirationDate, max, type,
-			version, displayStyle, feedURL, tagURL);
+				   .getEntriesRSS(entryQuery, type, version, displayStyle,
+			feedURL, tagURL);
 	}
 
 	public static com.liferay.portlet.asset.model.AssetEntry getEntry(

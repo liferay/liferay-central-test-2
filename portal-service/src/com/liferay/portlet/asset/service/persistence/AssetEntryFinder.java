@@ -29,58 +29,11 @@ package com.liferay.portlet.asset.service.persistence;
  *
  */
 public interface AssetEntryFinder {
-	public int countByAndTagIds(long groupId, long[] classNameIds,
-		long[] tagIds, long[] notTagIds, boolean excludeZeroViewCount,
-		java.util.Date publishDate, java.util.Date expirationDate)
-		throws com.liferay.portal.SystemException;
-
-	public int countByOrTagIds(long groupId, long[] classNameIds,
-		long[] tagIds, long[] notTagIds, boolean excludeZeroViewCount,
-		java.util.Date publishDate, java.util.Date expirationDate)
-		throws com.liferay.portal.SystemException;
-
 	public int countEntries(
 		com.liferay.portlet.asset.service.persistence.AssetEntryQuery entryQuery)
 		throws com.liferay.portal.SystemException;
 
-	public int countEntries(long groupId, long[] classNameIds,
-		boolean excludeZeroViewCount, java.util.Date publishDate,
-		java.util.Date expirationDate)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List<com.liferay.portlet.asset.model.AssetEntry> findByAndTagIds(
-		long groupId, long[] classNameIds, long[] tagIds, long[] notTagIds,
-		java.lang.String orderByCol1, java.lang.String orderByCol2,
-		java.lang.String orderByType1, java.lang.String orderByType2,
-		boolean excludeZeroViewCount, java.util.Date publishDate,
-		java.util.Date expirationDate, int start, int end)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List<com.liferay.portlet.asset.model.AssetEntry> findByOrTagIds(
-		long groupId, long[] classNameIds, long[] tagIds, long[] notTagIds,
-		java.util.Date publishDate, java.util.Date expirationDate)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List<com.liferay.portlet.asset.model.AssetEntry> findByOrTagIds(
-		long groupId, long[] classNameIds, long[] tagIds, long[] notTagIds,
-		java.lang.String orderByCol1, java.lang.String orderByCol2,
-		java.lang.String orderByType1, java.lang.String orderByType2,
-		boolean excludeZeroViewCount, java.util.Date publishDate,
-		java.util.Date expirationDate, int start, int end)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List<com.liferay.portlet.asset.model.AssetEntry> findByViewCount(
-		long[] classNameId, boolean asc, int start, int end)
-		throws com.liferay.portal.SystemException;
-
 	public java.util.List<com.liferay.portlet.asset.model.AssetEntry> findEntries(
 		com.liferay.portlet.asset.service.persistence.AssetEntryQuery entryQuery)
 		throws com.liferay.portal.SystemException;
-
-	public java.util.List<com.liferay.portlet.asset.model.AssetEntry> findEntries(
-		long groupId, long[] classNameIds, java.lang.String orderByCol1,
-		java.lang.String orderByCol2, java.lang.String orderByType1,
-		java.lang.String orderByType2, boolean excludeZeroViewCount,
-		java.util.Date publishDate, java.util.Date expirationDate, int start,
-		int end) throws com.liferay.portal.SystemException;
 }

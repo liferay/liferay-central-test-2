@@ -155,18 +155,11 @@ public class AssetEntryServiceSoap {
 	}
 
 	public static com.liferay.portlet.asset.model.AssetEntrySoap[] getEntries(
-		long groupId, long[] classNameIds, long[] tagIds, long[] notTagIds,
-		boolean andOperator, java.lang.String orderByCol1,
-		java.lang.String orderByCol2, java.lang.String orderByType1,
-		java.lang.String orderByType2, boolean excludeZeroViewCount,
-		java.util.Date publishDate, java.util.Date expirationDate, int start,
-		int end) throws RemoteException {
+		com.liferay.portlet.asset.service.persistence.AssetEntryQuery entryQuery)
+		throws RemoteException {
 		try {
 			java.util.List<com.liferay.portlet.asset.model.AssetEntry> returnValue =
-				AssetEntryServiceUtil.getEntries(groupId, classNameIds, tagIds,
-					notTagIds, andOperator, orderByCol1, orderByCol2,
-					orderByType1, orderByType2, excludeZeroViewCount,
-					publishDate, expirationDate, start, end);
+				AssetEntryServiceUtil.getEntries(entryQuery);
 
 			return com.liferay.portlet.asset.model.AssetEntrySoap.toSoapModels(returnValue);
 		}
@@ -177,14 +170,11 @@ public class AssetEntryServiceSoap {
 		}
 	}
 
-	public static int getEntriesCount(long groupId, long[] classNameIds,
-		long[] tagIds, long[] notTagIds, boolean andOperator,
-		boolean excludeZeroViewCount, java.util.Date publishDate,
-		java.util.Date expirationDate) throws RemoteException {
+	public static int getEntriesCount(
+		com.liferay.portlet.asset.service.persistence.AssetEntryQuery entryQuery)
+		throws RemoteException {
 		try {
-			int returnValue = AssetEntryServiceUtil.getEntriesCount(groupId,
-					classNameIds, tagIds, notTagIds, andOperator,
-					excludeZeroViewCount, publishDate, expirationDate);
+			int returnValue = AssetEntryServiceUtil.getEntriesCount(entryQuery);
 
 			return returnValue;
 		}
@@ -195,20 +185,13 @@ public class AssetEntryServiceSoap {
 		}
 	}
 
-	public static java.lang.String getEntriesRSS(long groupId,
-		long[] classNameIds, long[] tagIds, long[] notTagIds,
-		boolean andOperator, java.lang.String orderByCol1,
-		java.lang.String orderByCol2, java.lang.String orderByType1,
-		java.lang.String orderByType2, boolean excludeZeroViewCount,
-		java.util.Date publishDate, java.util.Date expirationDate, int max,
+	public static java.lang.String getEntriesRSS(
+		com.liferay.portlet.asset.service.persistence.AssetEntryQuery entryQuery,
 		java.lang.String type, double version, java.lang.String displayStyle,
 		java.lang.String feedURL, java.lang.String tagURL)
 		throws RemoteException {
 		try {
-			java.lang.String returnValue = AssetEntryServiceUtil.getEntriesRSS(groupId,
-					classNameIds, tagIds, notTagIds, andOperator, orderByCol1,
-					orderByCol2, orderByType1, orderByType2,
-					excludeZeroViewCount, publishDate, expirationDate, max,
+			java.lang.String returnValue = AssetEntryServiceUtil.getEntriesRSS(entryQuery,
 					type, version, displayStyle, feedURL, tagURL);
 
 			return returnValue;

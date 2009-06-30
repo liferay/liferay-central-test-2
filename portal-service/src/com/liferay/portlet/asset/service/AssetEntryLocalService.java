@@ -129,75 +129,8 @@ public interface AssetEntryLocalService {
 		throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.liferay.portlet.asset.model.AssetEntry> getEntries(
-		long groupId, long[] classNameIds, long[] tagIds, long[] notTagIds,
-		boolean andOperator, boolean excludeZeroViewCount,
-		java.util.Date publishDate, java.util.Date expirationDate, int start,
-		int end) throws com.liferay.portal.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.liferay.portlet.asset.model.AssetEntry> getEntries(
-		long groupId, long[] classNameIds, long[] tagIds, long[] notTagIds,
-		boolean andOperator, boolean excludeZeroViewCount, int start, int end)
-		throws com.liferay.portal.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.liferay.portlet.asset.model.AssetEntry> getEntries(
-		long groupId, long[] classNameIds, long[] tagIds, long[] notTagIds,
-		boolean andOperator, java.lang.String orderByCol1,
-		java.lang.String orderByCol2, java.lang.String orderByType1,
-		java.lang.String orderByType2, boolean excludeZeroViewCount,
-		java.util.Date publishDate, java.util.Date expirationDate, int start,
-		int end) throws com.liferay.portal.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.liferay.portlet.asset.model.AssetEntry> getEntries(
-		long[] tagIds, long[] notTagIds, boolean andOperator,
-		boolean excludeZeroViewCount, java.util.Date publishDate,
-		java.util.Date expirationDate, int start, int end)
-		throws com.liferay.portal.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.liferay.portlet.asset.model.AssetEntry> getEntries(
-		long[] tagIds, long[] notTagIds, boolean andOperator,
-		boolean excludeZeroViewCount, int start, int end)
-		throws com.liferay.portal.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.liferay.portlet.asset.model.AssetEntry> getEntries(
-		long[] tagIds, long[] notTagIds, boolean andOperator,
-		java.lang.String orderByCol1, java.lang.String orderByCol2,
-		java.lang.String orderByType1, java.lang.String orderByType2,
-		boolean excludeZeroViewCount, java.util.Date publishDate,
-		java.util.Date expirationDate, int start, int end)
-		throws com.liferay.portal.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getEntriesCount(
 		com.liferay.portlet.asset.service.persistence.AssetEntryQuery entryQuery)
-		throws com.liferay.portal.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getEntriesCount(long groupId, long[] tagIds, long[] notTagIds,
-		boolean andOperator, boolean excludeZeroViewCount)
-		throws com.liferay.portal.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getEntriesCount(long groupId, long[] classNameIds,
-		long[] tagIds, long[] notTagIds, boolean andOperator,
-		boolean excludeZeroViewCount, java.util.Date publishDate,
-		java.util.Date expirationDate)
-		throws com.liferay.portal.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getEntriesCount(long[] tagIds, long[] notTagIds,
-		boolean andOperator, boolean excludeZeroViewCount)
-		throws com.liferay.portal.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getEntriesCount(long[] tagIds, long[] notTagIds,
-		boolean andOperator, boolean excludeZeroViewCount,
-		java.util.Date publishDate, java.util.Date expirationDate)
 		throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
