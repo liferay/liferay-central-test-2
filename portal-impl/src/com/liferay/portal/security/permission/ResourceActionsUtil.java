@@ -56,6 +56,8 @@ import com.liferay.portlet.PortletResourceBundles;
 import com.liferay.portlet.expando.model.ExpandoColumn;
 import com.liferay.util.UniqueList;
 
+import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -732,8 +734,13 @@ public class ResourceActionsUtil {
 		try {
 			xml = StringUtil.read(classLoader, source);
 		}
+		catch (IOException ioe) {
+			if (!source.endsWith("-ext.xml")) {
+				_log.warn("Cannot load " + source);
+			}
+		}
 		catch (Exception e) {
-			_log.warn("Cannot load " + source);
+			_log.warn("Error reading " + source, e);
 		}
 
 		if (xml == null) {
@@ -756,6 +763,10 @@ public class ResourceActionsUtil {
 			String file = resource.attributeValue("file");
 
 			_read(servletContextName, classLoader, file);
+
+			String extFile = StringUtil.replace(file, ".xml", "-ext.xml");
+
+			_read(servletContextName, classLoader, extFile);
 		}
 
 		itr1 = root.elements("portlet-resource").iterator();
