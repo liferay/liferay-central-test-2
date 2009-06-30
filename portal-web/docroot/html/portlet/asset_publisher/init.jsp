@@ -32,11 +32,13 @@
 <%@ page import="com.liferay.portlet.asset.NoSuchEntryException" %>
 <%@ page import="com.liferay.portlet.asset.NoSuchTagException" %>
 <%@ page import="com.liferay.portlet.asset.NoSuchTagPropertyException" %>
+<%@ page import="com.liferay.portlet.asset.model.AssetCategory" %>
 <%@ page import="com.liferay.portlet.asset.model.AssetEntry" %>
 <%@ page import="com.liferay.portlet.asset.model.AssetEntryType" %>
 <%@ page import="com.liferay.portlet.asset.model.AssetTag" %>
 <%@ page import="com.liferay.portlet.asset.model.AssetTagProperty" %>
 <%@ page import="com.liferay.portlet.asset.model.AssetVocabulary" %>
+<%@ page import="com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.asset.service.AssetEntryLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.asset.service.AssetEntryServiceUtil" %>
 <%@ page import="com.liferay.portlet.asset.service.AssetTagLocalServiceUtil" %>
@@ -135,6 +137,24 @@ else {
 }
 
 String category = GetterUtil.getString(preferences.getValue("category", StringPool.BLANK));
+
+
+long assetCategoryId = ParamUtil.getLong(request, "categoryId");
+
+long[] assetCategoryIds = null;
+
+if (Validator.isNull(assetCategoryId)) {
+	assetCategoryIds = GetterUtil.getLongValues(preferences.getValues("asset-category-ids", new String[0]));
+}
+else {
+	assetCategoryIds = new long[] {assetCategoryId};
+
+	AssetCategory assetCategory = AssetCategoryLocalServiceUtil.getCategory(assetCategoryId);
+
+	PortalUtil.setPageKeywords(assetCategory.getName(), request);
+}
+
+long[] notAssetCategoryIds = GetterUtil.getLongValues(preferences.getValues("not-asset-category-ids", new String[0]));
 
 String assetTagName = ParamUtil.getString(request, "tag");
 

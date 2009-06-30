@@ -45,6 +45,11 @@ public class AssetCategoriesSelectorTag extends IncludeTag {
 			"liferay-ui:asset-categories-selector:classPK",
 			String.valueOf(_classPK));
 		request.setAttribute(
+			"liferay-ui:asset-categories-selector:hiddenInput", _hiddenInput);
+		request.setAttribute(
+			"liferay-ui:asset-categories-selector:curCategoryIds",
+			_curCategoryIds);
+		request.setAttribute(
 			"liferay-ui:asset-categories-selector:focus",
 			String.valueOf(_focus));
 		request.setAttribute(
@@ -60,6 +65,14 @@ public class AssetCategoriesSelectorTag extends IncludeTag {
 
 	public void setClassPK(long classPK) {
 		_classPK = classPK;
+	}
+
+	public void setHiddenInput(String hiddenInput) {
+		_hiddenInput = hiddenInput;
+	}
+
+	public void setCurCategoryIds(String curCategoryIds) {
+		_curCategoryIds= curCategoryIds;
 	}
 
 	public void setFocus(boolean focus) {
@@ -79,6 +92,8 @@ public class AssetCategoriesSelectorTag extends IncludeTag {
 
 	private String _className;
 	private long _classPK;
+	private String _hiddenInput = "assetCategoryIds";
+	private String _curCategoryIds;
 	private boolean _focus;
 	private String _contentCallback;
 

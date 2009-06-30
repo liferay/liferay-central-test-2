@@ -357,6 +357,30 @@ configurationActionURL.setParameter("portletResource", portletResource);
 
 						<br /><br />
 
+						<liferay-ui:message key="displayed-content-must-contain-the-following-categories" />
+
+						<br /><br />
+
+						<liferay-ui:asset-categories-selector
+							hiddenInput="assetCategoryIds"
+							curCategoryIds="<%= StringUtil.merge(assetCategoryIds) %>"
+							focus="<%= false %>"
+						/>
+
+						<br />
+
+						<liferay-ui:message key="displayed-content-must-not-contain-the-following-categories" />
+
+						<br /><br />
+
+						<liferay-ui:asset-categories-selector
+							hiddenInput="notAssetCategoryIds"
+							curCategoryIds="<%= StringUtil.merge(notAssetCategoryIds) %>"
+							focus="<%= false %>"
+						/>
+
+						<br />
+
 						<liferay-ui:message key="search-operator" />
 
 						<select name="<portlet:namespace />andOperator">

@@ -31,7 +31,8 @@ String randomNamespace = PwdGenerator.getPassword(PwdGenerator.KEY3, 4) + String
 
 String className = (String)request.getAttribute("liferay-ui:asset-categories-selector:className");
 long classPK = GetterUtil.getLong((String)request.getAttribute("liferay-ui:asset-categories-selector:classPK"));
-String curCategoryIds = StringPool.BLANK;
+String hiddenInput = (String)request.getAttribute("liferay-ui:asset-categories-selector:hiddenInput");
+String curCategoryIds = (String)request.getAttribute("liferay-ui:asset-categories-selector:curCategoryIds");
 String curCategoryNames = StringPool.BLANK;
 
 if (Validator.isNotNull(className) && (classPK > 0)) {
@@ -41,14 +42,29 @@ if (Validator.isNotNull(className) && (classPK > 0)) {
 	curCategoryNames = ListUtil.toString(categories, "name");
 }
 
-String curCategoryIdsParam = request.getParameter("assetCategoryIds");
+String curCategoryIdsParam = request.getParameter(hiddenInput);
 
 if (curCategoryIdsParam != null) {
 	curCategoryIds = curCategoryIdsParam;
 }
+
+if (Validator.isNotNull(curCategoryIds)) {
+	StringBuilder sb = new StringBuilder();
+
+	long[] curCategoryIdsArray = GetterUtil.getLongValues(StringUtil.split(curCategoryIds));
+
+	for (long curCategoryId : curCategoryIdsArray) {
+		AssetCategory category = AssetCategoryServiceUtil.getCategory(curCategoryId);
+
+		sb.append(category.getName());
+		sb.append(StringPool.COMMA);
+	}
+
+	curCategoryNames = sb.substring(0, Math.max(0, sb.length() - 1));
+}
 %>
 
-<input id="<%= namespace %>assetCategoryIds" type="hidden" />
+<input id="<%= namespace %><%= hiddenInput %>" type="hidden" />
 
 <span class="ui-asset-categories empty" id="<%= randomNamespace %>assetCategoriesSummary"></span>
 
@@ -62,7 +78,7 @@ if (curCategoryIdsParam != null) {
 			<%= randomNamespace %> = new Liferay.AssetCategoriesSelector(
 				{
 					instanceVar: "<%= randomNamespace %>",
-					hiddenInput: "<%= namespace %>assetCategoryIds",
+					hiddenInput: "<%= namespace + hiddenInput %>",
 					summarySpan: "<%= randomNamespace %>assetCategoriesSummary",
 					curCategoryIds: "<%= curCategoryIds %>",
 					curCategoryNames: "<%= curCategoryNames %>"

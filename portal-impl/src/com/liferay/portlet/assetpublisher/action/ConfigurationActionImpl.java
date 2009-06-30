@@ -228,6 +228,10 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 		long userId = themeDisplay.getUserId();
 		long groupId = themeDisplay.getScopeGroupId();
 
+		String[] assetCategoryIds = StringUtil.split(
+			ParamUtil.getString(actionRequest, "assetCategoryIds"));
+		String[] notAssetCategoryIds = StringUtil.split(
+			ParamUtil.getString(actionRequest, "notAssetCategoryIds"));
 		String[] assetTagNames = StringUtil.split(
 			ParamUtil.getString(actionRequest, "assetTagNames"));
 		String[] notAssetTagNames = StringUtil.split(
@@ -277,6 +281,8 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 
 		preferences.setValue("selection-style", "dynamic");
 
+		preferences.setValues("asset-category-ids", assetCategoryIds);
+		preferences.setValues("not-asset-category-ids", notAssetCategoryIds);
 		preferences.setValues("asset-tag-names", assetTagNames);
 		preferences.setValues("not-asset-tag-names", notAssetTagNames);
 		preferences.setValue("merge-url-tags", String.valueOf(mergeUrlTags));
