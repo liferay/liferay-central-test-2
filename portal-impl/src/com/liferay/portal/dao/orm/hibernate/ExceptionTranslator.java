@@ -35,10 +35,10 @@ public class ExceptionTranslator {
 
 	public static ORMException translate(Exception e) {
 		if (e instanceof org.hibernate.ObjectNotFoundException) {
-			return new ObjectNotFoundException(e.getMessage());
+			return new ObjectNotFoundException(e);
 		}
 		else {
-			return new ORMException(e.getMessage());
+			return new ORMException(e);
 		}
 	}
 
