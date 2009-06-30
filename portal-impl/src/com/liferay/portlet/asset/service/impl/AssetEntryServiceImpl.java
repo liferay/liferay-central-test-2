@@ -34,6 +34,7 @@ import com.liferay.portlet.asset.model.AssetEntry;
 import com.liferay.portlet.asset.model.AssetEntryDisplay;
 import com.liferay.portlet.asset.model.AssetEntryType;
 import com.liferay.portlet.asset.service.base.AssetEntryServiceBaseImpl;
+import com.liferay.portlet.asset.service.permission.AssetCategoryPermission;
 import com.liferay.portlet.asset.service.permission.AssetTagPermission;
 import com.liferay.portlet.asset.service.persistence.AssetEntryQuery;
 import com.liferay.util.RSSUtil;
@@ -103,13 +104,7 @@ public class AssetEntryServiceImpl extends AssetEntryServiceBaseImpl {
 	public List<AssetEntry> getEntries(AssetEntryQuery entryQuery)
 		throws PortalException, SystemException {
 
-		long[][] viewableTagIds = getViewableTagIds(
-			entryQuery.getTagIds(), entryQuery.getNotTagIds());
-
-		entryQuery.setTagIds(
-			viewableTagIds[0], entryQuery.isTagIdsAndOperator());
-		entryQuery.setNotTagIds(
-			viewableTagIds[1], entryQuery.isTagIdsAndOperator());
+		filterQuery(entryQuery);
 
 		return assetEntryLocalService.getEntries(entryQuery);
 	}
@@ -117,13 +112,7 @@ public class AssetEntryServiceImpl extends AssetEntryServiceBaseImpl {
 	public int getEntriesCount(AssetEntryQuery entryQuery)
 		throws PortalException, SystemException {
 
-		long[][] viewableTagIds = getViewableTagIds(
-			entryQuery.getTagIds(), entryQuery.getNotTagIds());
-
-		entryQuery.setTagIds(
-			viewableTagIds[0], entryQuery.isTagIdsAndOperator());
-		entryQuery.setNotTagIds(
-			viewableTagIds[1], entryQuery.isTagIdsAndOperator());
+		filterQuery(entryQuery);
 
 		return assetEntryLocalService.getEntriesCount(entryQuery);
 	}
@@ -133,13 +122,7 @@ public class AssetEntryServiceImpl extends AssetEntryServiceBaseImpl {
 			String displayStyle, String feedURL, String tagURL)
 		throws PortalException, SystemException {
 
-		long[][] viewableTagIds = getViewableTagIds(
-			entryQuery.getTagIds(), entryQuery.getNotTagIds());
-
-		entryQuery.setTagIds(
-			viewableTagIds[0], entryQuery.isTagIdsAndOperator());
-		entryQuery.setNotTagIds(
-			viewableTagIds[1], entryQuery.isTagIdsAndOperator());
+		filterQuery(entryQuery);
 
 		Group group = groupPersistence.findByPrimaryKey(
 			entryQuery.getGroupId());
@@ -253,29 +236,60 @@ public class AssetEntryServiceImpl extends AssetEntryServiceBaseImpl {
 		}
 	}
 
-	protected long[][] getViewableTagIds(long[] tagIds, long[] notTagIds)
+	protected void filterQuery(AssetEntryQuery entryQuery)
 		throws PortalException, SystemException {
 
-		List<Long> viewableList = new ArrayList<Long>();
+		List<Long> viewableTagsList = new ArrayList<Long>();
+
+		long[] tagIds = entryQuery.getTagIds();
+		long[] notTagIds = entryQuery.getNotTagIds();
 
 		for (long tagId : tagIds) {
 			if (AssetTagPermission.contains(
 					getPermissionChecker(), tagId, ActionKeys.VIEW)) {
 
-				viewableList.add(tagId);
+				viewableTagsList.add(tagId);
 			}
 			else {
 				notTagIds = ArrayUtil.append(notTagIds, tagId);
 			}
 		}
 
-		tagIds = new long[viewableList.size()];
+		tagIds = new long[viewableTagsList.size()];
 
-		for (int i = 0; i < viewableList.size(); i++) {
-			tagIds[i] = viewableList.get(i).longValue();
+		for (int i = 0; i < viewableTagsList.size(); i++) {
+			tagIds[i] = viewableTagsList.get(i).longValue();
 		}
 
-		return new long[][] {tagIds, notTagIds};
+		entryQuery.setTagIds(tagIds, entryQuery.isTagIdsAndOperator());
+		entryQuery.setNotTagIds(notTagIds, entryQuery.isNotTagIdsAndOperator());
+
+		List<Long> viewableCategoriesList = new ArrayList<Long>();
+
+		long[] categoryIds = entryQuery.getCategoryIds();
+		long[] notCategoryIds = entryQuery.getNotCategoryIds();
+
+		for (long categoryId : categoryIds) {
+			if (AssetCategoryPermission.contains(
+					getPermissionChecker(), categoryId, ActionKeys.VIEW)) {
+
+				viewableCategoriesList.add(categoryId);
+			}
+			else {
+				notCategoryIds = ArrayUtil.append(notCategoryIds, categoryId);
+			}
+		}
+
+		categoryIds = new long[viewableCategoriesList.size()];
+
+		for (int i = 0; i < viewableCategoriesList.size(); i++) {
+			categoryIds[i] = viewableCategoriesList.get(i).longValue();
+		}
+
+		entryQuery.setCategoryIds(
+			categoryIds, entryQuery.isCategoryIdsAndOperator());
+		entryQuery.setNotCategoryIds(
+			notCategoryIds, entryQuery.isNotCategoryIdsAndOperator());
 	}
 
 }
