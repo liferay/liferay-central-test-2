@@ -345,21 +345,21 @@ public class AssetEntryFinderImpl
 			qPos.add(entryQuery.isVisible().booleanValue());
 		}
 
-		setLongIds(qPos, entryQuery.getCategoryIds());
-		setLongIds(qPos, entryQuery.getNotCategoryIds());
+		qPos.add(entryQuery.getCategoryIds());
+		qPos.add(entryQuery.getNotCategoryIds());
 
-		setLongIds(qPos, entryQuery.getNotTagIds());
-		setLongIds(qPos, entryQuery.getTagIds());
+		qPos.add(entryQuery.getNotTagIds());
+		qPos.add(entryQuery.getTagIds());
 
 		setDates(
 			qPos, entryQuery.getPublishDate(),
 			entryQuery.getExpirationDate());
 
 		if (entryQuery.getGroupId() > 0) {
-			setGroupId(qPos, entryQuery.getGroupId());
+			qPos.add(entryQuery.getGroupId());
 		}
 
-		setLongIds(qPos, entryQuery.getClassNameIds());
+		qPos.add(entryQuery.getClassNameIds());
 
 		return q;
 	}
@@ -496,16 +496,6 @@ public class AssetEntryFinderImpl
 				CalendarUtil.getTimestamp(expirationDate);
 
 			qPos.add(expirationDate_TS);
-		}
-	}
-
-	protected void setGroupId(QueryPos qPos, long groupId) {
-		qPos.add(groupId);
-	}
-
-	protected void setLongIds(QueryPos qPos, long[] longIds) {
-		for (int i = 0; i < longIds.length; i++) {
-			qPos.add(longIds[i]);
 		}
 	}
 

@@ -186,7 +186,7 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 		entryQuery.setEnd(end);
 		entryQuery.setExcludeZeroViewCount(true);
 		entryQuery.setOrderByCol1("viewCount");
-		entryQuery.setOrderByType1(asc? "ASC" : "DESC");
+		entryQuery.setOrderByType1(asc ? "ASC" : "DESC");
 		entryQuery.setStart(start);
 
 		return assetEntryFinder.findEntries(entryQuery);
