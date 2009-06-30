@@ -243,6 +243,12 @@ public class ResourceActionsUtil {
 		return _instance._getModelResourceGuestUnsupportedActions(name);
 	}
 
+	public static List<String> getModelResourceOwnerDefaultActions(
+		String name) {
+
+		return _instance._getModelResourceOwnerDefaultActions(name);
+	}
+
 	public static List<String> getPortletModelResources(String portletName) {
 		return _instance._getPortletModelResources(portletName);
 	}
@@ -426,6 +432,8 @@ public class ResourceActionsUtil {
 			new HashMap<String, List<String>>();
 		_modelResourceGuestUnsupportedActions =
 			new HashMap<String, List<String>>();
+		_modelResourceOwnerDefaultActions =
+			new HashMap<String, List<String>>();
 
 		try {
 			ClassLoader classLoader = getClass().getClassLoader();
@@ -540,6 +548,10 @@ public class ResourceActionsUtil {
 
 	private List<String> _getModelResourceGuestUnsupportedActions(String name) {
 		return _getActions(_modelResourceGuestUnsupportedActions, name);
+	}
+
+	private List<String> _getModelResourceOwnerDefaultActions(String name) {
+		return _getActions(_modelResourceOwnerDefaultActions, name);
 	}
 
 	private List<String> _getPortletModelResources(String portletName) {
@@ -1001,6 +1013,27 @@ public class ResourceActionsUtil {
 
 			_checkGuestUnsupportedActions(
 				guestUnsupportedActions, guestDefaultActions);
+
+			// Owner default actions
+
+			List<String> ownerDefaultActions =
+				_getActions(_modelResourceOwnerDefaultActions, name);
+
+			Element ownerDefaults = resource.element("owner-defaults");
+
+			if (ownerDefaults != null) {
+				itr2 = ownerDefaults.elements("action-key").iterator();
+
+				while (itr2.hasNext()) {
+					Element actionKey = itr2.next();
+
+					String actionKeyText = actionKey.getText();
+
+					if (Validator.isNotNull(actionKeyText)) {
+						ownerDefaultActions.add(actionKeyText);
+					}
+				}
+			}
 		}
 	}
 
@@ -1021,5 +1054,6 @@ public class ResourceActionsUtil {
 	private Map<String, List<String>> _modelResourceCommunityDefaultActions;
 	private Map<String, List<String>> _modelResourceGuestDefaultActions;
 	private Map<String, List<String>> _modelResourceGuestUnsupportedActions;
+	private Map<String, List<String>> _modelResourceOwnerDefaultActions;
 
 }

@@ -46,6 +46,7 @@ import com.liferay.portal.service.base.ResourceLocalServiceBaseImpl;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.comparator.ResourceComparator;
 
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -54,6 +55,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  * @author Wilson S. Man
  * @author Raymond Augé
+ * @author Julio Camarero
  *
  */
 public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
@@ -529,6 +531,24 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 				companyId, groupId, userId, resource.getName(),
 				resource.getPrimKey(), false, permissionsList);
 
+		List<String> defaultOwnerActions =
+			ResourceActionsUtil.getModelResourceOwnerDefaultActions(
+				resource.getName());
+
+		if (!defaultOwnerActions.isEmpty()) {
+			Iterator<Permission> itr = userPermissionsList.iterator();
+
+			while (itr.hasNext()) {
+				Permission permission = itr.next();
+
+				String action = permission.getActionId();
+
+				if (!defaultOwnerActions.contains(action)) {
+					itr.remove();
+				}
+			}
+		}
+
 		if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 5) {
 
 			// Owner permissions
@@ -614,6 +634,22 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 
 		List<String> actionIds = ResourceActionsUtil.getModelResourceActions(
 			resource.getName());
+
+		List<String> defaultOwnerActions =
+			ResourceActionsUtil.getModelResourceOwnerDefaultActions(
+				resource.getName());
+
+		if (!defaultOwnerActions.isEmpty()) {
+			Iterator<String> itr = actionIds.iterator();
+
+			while (itr.hasNext()) {
+				String action = itr.next();
+
+				if (!defaultOwnerActions.contains(action)) {
+					itr.remove();
+				}
+			}
+		}
 
 		resourcePermissionLocalService.setResourcePermissions(
 			resource.getCompanyId(), resource.getName(), resource.getScope(),
@@ -722,6 +758,24 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 				companyId, groupId, userId, resource.getName(),
 				resource.getPrimKey(), portletActions, permissionsList);
 
+		List<String> defaultOwnerActions =
+			ResourceActionsUtil.getModelResourceOwnerDefaultActions(
+				resource.getName());
+
+		if (!defaultOwnerActions.isEmpty()) {
+			Iterator<Permission> itr = userPermissionsList.iterator();
+
+			while (itr.hasNext()) {
+				Permission permission = itr.next();
+
+				String action = permission.getActionId();
+
+				if (!defaultOwnerActions.contains(action)) {
+					itr.remove();
+				}
+			}
+		}
+
 		if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 5) {
 
 			// Owner permissions
@@ -758,6 +812,22 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 		else {
 			actionIds = ResourceActionsUtil.getModelResourceActions(
 				resource.getName());
+
+			List<String> defaultOwnerActions =
+				ResourceActionsUtil.getModelResourceOwnerDefaultActions(
+					resource.getName());
+
+			if (!defaultOwnerActions.isEmpty()) {
+				Iterator<String> itr = actionIds.iterator();
+
+				while (itr.hasNext()) {
+					String action = itr.next();
+
+					if (!defaultOwnerActions.contains(action)) {
+						itr.remove();
+					}
+				}
+			}
 		}
 
 		Role role = roleLocalService.getRole(companyId, RoleConstants.OWNER);
