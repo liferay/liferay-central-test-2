@@ -240,6 +240,7 @@ viewURL = _checkViewURL(viewURL, currentURL, themeDisplay);
 					<liferay-ui:asset-categories-summary
 						className="<%= assetEntry.getClassName() %>"
 						classPK="<%= assetEntry.getClassPK () %>"
+						portletURL="<%= renderResponse.createRenderURL() %>"
 					/>
 				</td>
 
