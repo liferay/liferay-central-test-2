@@ -44,8 +44,6 @@ List<AssetTag> tags = AssetTagServiceUtil.getTags(className, classPK);
 			<c:when test="<%= portletURL != null %>">
 
 				<%
-				portletURL = PortletURLUtil.clone(portletURL);
-
 				for (AssetTag tag : tags) {
 					portletURL.setParameter("tag", tag.getName());
 				%>

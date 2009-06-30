@@ -53,8 +53,6 @@ for (AssetVocabulary vocabulary : vocabularies) {
 				<c:when test="<%= portletURL != null %>">
 
 					<%
-					portletURL = PortletURLUtil.clone(portletURL);
-
 					for (AssetCategory category : curCategories) {
 						portletURL.setParameter("categoryId", String.valueOf(category.getCategoryId()));
 					%>
