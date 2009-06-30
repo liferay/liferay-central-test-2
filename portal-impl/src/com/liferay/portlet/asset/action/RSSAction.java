@@ -34,10 +34,9 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.asset.service.AssetEntryServiceUtil;
 import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
+import com.liferay.portlet.asset.service.persistence.AssetEntryQuery;
 import com.liferay.util.RSSUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
-
-import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -105,8 +104,6 @@ public class RSSAction extends Action {
 
 			companyId = group.getCompanyId();
 
-			long[] classNameIds = new long[0];
-
 			String[] allTagNames = StringUtil.split(
 				ParamUtil.getString(request, "tags"));
 
@@ -119,20 +116,19 @@ public class RSSAction extends Action {
 			long[] notTagIds = AssetTagLocalServiceUtil.getTagIds(
 				companyId, notTagNames);
 
-			boolean andOperator = false;
-			String orderByCol1 = null;
-			String orderByCol2 = null;
-			String orderByType1 = null;
-			String orderByType2 = null;
-			boolean excludeZeroViewCount = false;
-			Date publishDate = null;
-			Date expirationDate = null;
+			AssetEntryQuery entryQuery = new AssetEntryQuery();
+
+			entryQuery.setGroupId(groupId);
+			entryQuery.setEnd(max);
+			entryQuery.setExcludeZeroViewCount(false);
+			entryQuery.setExpirationDate(null);
+			entryQuery.setNotTagIds(notTagIds, false);
+			entryQuery.setPublishDate(null);
+			entryQuery.setStart(0);
+			entryQuery.setTagIds(tagIds, false);
 
 			rss = AssetEntryServiceUtil.getEntriesRSS(
-				groupId, classNameIds, tagIds, notTagIds, andOperator,
-				orderByCol1, orderByCol2, orderByType1, orderByType2,
-				excludeZeroViewCount, publishDate, expirationDate, max, type,
-				version, displayStyle, feedURL, entryURL);
+				entryQuery, type, version, displayStyle, feedURL, entryURL);
 		}
 
 		return rss.getBytes(StringPool.UTF8);

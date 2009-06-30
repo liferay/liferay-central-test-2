@@ -129,161 +129,10 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 		return assetEntryFinder.findEntries(entryQuery);
 	}
 
-	public List<AssetEntry> getEntries(
-			long groupId, long[] classNameIds, long[] tagIds,
-			long[] notTagIds, boolean andOperator,
-			boolean excludeZeroViewCount, Date publishDate, Date expirationDate,
-			int start, int end)
-		throws SystemException {
-
-		if ((tagIds.length == 0) && (notTagIds.length == 0)) {
-			return assetEntryFinder.findEntries(
-				groupId, classNameIds, null, null, null, null,
-				excludeZeroViewCount, publishDate, expirationDate, start, end);
-		}
-		else if (andOperator) {
-			return assetEntryFinder.findByAndTagIds(
-				groupId, classNameIds, tagIds, notTagIds, null, null, null,
-				null, excludeZeroViewCount, publishDate, expirationDate, start,
-				end);
-		}
-		else {
-			return assetEntryFinder.findByOrTagIds(
-				groupId, classNameIds, tagIds, notTagIds, null, null, null,
-				null, excludeZeroViewCount, publishDate, expirationDate, start,
-				end);
-		}
-	}
-
-	public List<AssetEntry> getEntries(
-			long groupId, long[] classNameIds, long[] tagIds,
-			long[] notTagIds, boolean andOperator,
-			boolean excludeZeroViewCount, int start, int end)
-		throws SystemException {
-
-		return getEntries(
-			groupId, classNameIds, tagIds, notTagIds, andOperator,
-			excludeZeroViewCount, null, null, start, end);
-	}
-
-	public List<AssetEntry> getEntries(
-			long groupId, long[] classNameIds, long[] tagIds,
-			long[] notTagIds, boolean andOperator, String orderByCol1,
-			String orderByCol2, String orderByType1, String orderByType2,
-			boolean excludeZeroViewCount, Date publishDate, Date expirationDate,
-			int start, int end)
-		throws SystemException {
-
-		if ((tagIds.length == 0) && (notTagIds.length == 0)) {
-			return assetEntryFinder.findEntries(
-				groupId, classNameIds, orderByCol1, orderByCol2, orderByType1,
-				orderByType2, excludeZeroViewCount, publishDate, expirationDate,
-				start, end);
-		}
-		else if (andOperator) {
-			return assetEntryFinder.findByAndTagIds(
-				groupId, classNameIds, tagIds, notTagIds, orderByCol1,
-				orderByCol2, orderByType1, orderByType2, excludeZeroViewCount,
-				publishDate, expirationDate, start, end);
-		}
-		else {
-			return assetEntryFinder.findByOrTagIds(
-				groupId, classNameIds, tagIds, notTagIds, orderByCol1,
-				orderByCol2, orderByType1, orderByType2, excludeZeroViewCount,
-				publishDate, expirationDate, start, end);
-		}
-	}
-
-	public List<AssetEntry> getEntries(
-			long[] tagIds, long[] notTagIds, boolean andOperator,
-			boolean excludeZeroViewCount, Date publishDate, Date expirationDate,
-			int start, int end)
-		throws SystemException {
-
-		return getEntries(
-			0, new long[0], tagIds, notTagIds, andOperator,
-			excludeZeroViewCount, publishDate, expirationDate, start, end);
-	}
-
-	public List<AssetEntry> getEntries(
-			long[] tagIds, long[] notTagIds, boolean andOperator,
-			boolean excludeZeroViewCount, int start, int end)
-		throws SystemException {
-
-		return getEntries(
-			0, new long[0], tagIds, notTagIds, andOperator,
-			excludeZeroViewCount, null, null, start, end);
-	}
-
-	public List<AssetEntry> getEntries(
-			long[] tagIds, long[] notTagIds, boolean andOperator,
-			String orderByCol1, String orderByCol2, String orderByType1,
-			String orderByType2, boolean excludeZeroViewCount, Date publishDate,
-			Date expirationDate, int start, int end)
-		throws SystemException {
-
-		return getEntries(
-			0, new long[0], tagIds, notTagIds, andOperator,
-			excludeZeroViewCount, publishDate, expirationDate, start, end);
-	}
-
 	public int getEntriesCount(AssetEntryQuery entryQuery)
 		throws SystemException {
 
 		return assetEntryFinder.countEntries(entryQuery);
-	}
-
-	public int getEntriesCount(
-			long groupId, long[] tagIds, long[] notTagIds,
-			boolean andOperator, boolean excludeZeroViewCount)
-		throws SystemException {
-
-		return getEntriesCount(
-			groupId, new long[0], tagIds, notTagIds, andOperator,
-			excludeZeroViewCount, null, null);
-	}
-
-	public int getEntriesCount(
-			long groupId, long[] classNameIds, long[] tagIds,
-			long[] notTagIds, boolean andOperator,
-			boolean excludeZeroViewCount, Date publishDate, Date expirationDate)
-		throws SystemException {
-
-		if ((tagIds.length == 0) && (notTagIds.length == 0)) {
-			return assetEntryFinder.countEntries(
-				groupId, classNameIds, excludeZeroViewCount, publishDate,
-				expirationDate);
-		}
-		else if (andOperator) {
-			return assetEntryFinder.countByAndTagIds(
-				groupId, classNameIds, tagIds, notTagIds,
-				excludeZeroViewCount, publishDate, expirationDate);
-		}
-		else {
-			return assetEntryFinder.countByOrTagIds(
-				groupId, classNameIds, tagIds, notTagIds,
-				excludeZeroViewCount, publishDate, expirationDate);
-		}
-	}
-
-	public int getEntriesCount(
-			long[] tagIds, long[] notTagIds, boolean andOperator,
-			boolean excludeZeroViewCount)
-		throws SystemException {
-
-		return getEntriesCount(
-			0, new long[0], tagIds, notTagIds, andOperator,
-			excludeZeroViewCount, null, null);
-	}
-
-	public int getEntriesCount(
-			long[] tagIds, long[] notTagIds, boolean andOperator,
-			boolean excludeZeroViewCount, Date publishDate, Date expirationDate)
-		throws SystemException {
-
-		return getEntriesCount(
-			0, new long[0], tagIds, notTagIds, andOperator,
-			excludeZeroViewCount, publishDate, expirationDate);
 	}
 
 	public AssetEntry getEntry(long entryId)
@@ -331,7 +180,16 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 			classNameIds[i] = PortalUtil.getClassNameId(className[i]);
 		}
 
-		return assetEntryFinder.findByViewCount(classNameIds, asc, start, end);
+		AssetEntryQuery entryQuery = new AssetEntryQuery();
+
+		entryQuery.setClassNameIds(classNameIds);
+		entryQuery.setEnd(end);
+		entryQuery.setExcludeZeroViewCount(true);
+		entryQuery.setOrderByCol1("viewCount");
+		entryQuery.setOrderByType1(asc? "ASC" : "DESC");
+		entryQuery.setStart(start);
+
+		return assetEntryFinder.findEntries(entryQuery);
 	}
 
 	public AssetEntry incrementViewCounter(String className, long classPK)

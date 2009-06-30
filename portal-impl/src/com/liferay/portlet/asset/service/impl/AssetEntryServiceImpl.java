@@ -35,6 +35,7 @@ import com.liferay.portlet.asset.model.AssetEntryDisplay;
 import com.liferay.portlet.asset.model.AssetEntryType;
 import com.liferay.portlet.asset.service.base.AssetEntryServiceBaseImpl;
 import com.liferay.portlet.asset.service.permission.AssetTagPermission;
+import com.liferay.portlet.asset.service.persistence.AssetEntryQuery;
 import com.liferay.util.RSSUtil;
 
 import com.sun.syndication.feed.synd.SyndContent;
@@ -99,63 +100,54 @@ public class AssetEntryServiceImpl extends AssetEntryServiceBaseImpl {
 			companyId, start, end, languageId);
 	}
 
-	public List<AssetEntry> getEntries(
-			long groupId, long[] classNameIds, long[] tagIds,
-			long[] notTagIds, boolean andOperator, String orderByCol1,
-			String orderByCol2, String orderByType1, String orderByType2,
-			boolean excludeZeroViewCount, Date publishDate, Date expirationDate,
-			int start, int end)
+	public List<AssetEntry> getEntries(AssetEntryQuery entryQuery)
 		throws PortalException, SystemException {
 
-		long[][] viewableTagIds = getViewableTagIds(tagIds, notTagIds);
+		long[][] viewableTagIds = getViewableTagIds(
+			entryQuery.getTagIds(), entryQuery.getNotTagIds());
 
-		tagIds = viewableTagIds[0];
-		notTagIds = viewableTagIds[1];
+		entryQuery.setTagIds(
+			viewableTagIds[0], entryQuery.isTagIdsAndOperator());
+		entryQuery.setNotTagIds(
+			viewableTagIds[1], entryQuery.isTagIdsAndOperator());
 
-		return assetEntryLocalService.getEntries(
-			groupId, classNameIds, tagIds, notTagIds, andOperator,
-			orderByCol1, orderByCol2, orderByType1, orderByType2,
-			excludeZeroViewCount, publishDate, expirationDate, start, end);
+		return assetEntryLocalService.getEntries(entryQuery);
 	}
 
-	public int getEntriesCount(
-			long groupId, long[] classNameIds, long[] tagIds,
-			long[] notTagIds, boolean andOperator,
-			boolean excludeZeroViewCount, Date publishDate, Date expirationDate)
+	public int getEntriesCount(AssetEntryQuery entryQuery)
 		throws PortalException, SystemException {
 
-		long[][] viewableTagIds = getViewableTagIds(tagIds, notTagIds);
+		long[][] viewableTagIds = getViewableTagIds(
+			entryQuery.getTagIds(), entryQuery.getNotTagIds());
 
-		tagIds = viewableTagIds[0];
-		notTagIds = viewableTagIds[1];
+		entryQuery.setTagIds(
+			viewableTagIds[0], entryQuery.isTagIdsAndOperator());
+		entryQuery.setNotTagIds(
+			viewableTagIds[1], entryQuery.isTagIdsAndOperator());
 
-		return assetEntryLocalService.getEntriesCount(
-			groupId, classNameIds, tagIds, notTagIds, andOperator,
-			excludeZeroViewCount, publishDate, expirationDate);
+		return assetEntryLocalService.getEntriesCount(entryQuery);
 	}
 
 	public String getEntriesRSS(
-			long groupId, long[] classNameIds, long[] tagIds,
-			long[] notTagIds, boolean andOperator, String orderByCol1,
-			String orderByCol2, String orderByType1, String orderByType2,
-			boolean excludeZeroViewCount, Date publishDate, Date expirationDate,
-			int max, String type, double version, String displayStyle,
-			String feedURL, String tagURL)
+			AssetEntryQuery entryQuery, String type, double version,
+			String displayStyle, String feedURL, String tagURL)
 		throws PortalException, SystemException {
 
-		long[][] viewableTagIds = getViewableTagIds(tagIds, notTagIds);
+		long[][] viewableTagIds = getViewableTagIds(
+			entryQuery.getTagIds(), entryQuery.getNotTagIds());
 
-		tagIds = viewableTagIds[0];
-		notTagIds = viewableTagIds[1];
+		entryQuery.setTagIds(
+			viewableTagIds[0], entryQuery.isTagIdsAndOperator());
+		entryQuery.setNotTagIds(
+			viewableTagIds[1], entryQuery.isTagIdsAndOperator());
 
-		Group group = groupPersistence.findByPrimaryKey(groupId);
+		Group group = groupPersistence.findByPrimaryKey(
+			entryQuery.getGroupId());
 
 		String name = group.getName();
 
 		List<AssetEntry> entries = assetEntryLocalService.getEntries(
-			groupId, classNameIds, tagIds, notTagIds, andOperator,
-			orderByCol1, orderByCol2, orderByType1, orderByType2,
-			excludeZeroViewCount, publishDate, expirationDate, 0, max);
+			entryQuery);
 
 		return exportToRSS(
 			name, null, type, version, displayStyle, feedURL, tagURL, entries);
