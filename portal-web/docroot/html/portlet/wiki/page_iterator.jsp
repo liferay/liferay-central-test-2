@@ -200,8 +200,8 @@ else if (type.equals("tagged_pages")) {
 
 	AssetEntryQuery entryQuery = new AssetEntryQuery();
 
-	entryQuery.setGroupId(scopeGroupId);
 	entryQuery.setClassNameIds(new long[] {classNameId});
+	entryQuery.setGroupId(scopeGroupId);
 	entryQuery.setEnd(searchContainer.getEnd());
 	entryQuery.setNotTagIds(notTagIds, false);
 	entryQuery.setStart(searchContainer.getStart());
