@@ -53,6 +53,23 @@ public class ConvertCurrencyTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"link=Currency Converter Test Page"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("_16_number")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.type("_16_number", RuntimeVariables.replace("2.5"));
 		selenium.select("_16_from", RuntimeVariables.replace("label=KRW"));
 		selenium.select("_16_to", RuntimeVariables.replace("label=BHD"));

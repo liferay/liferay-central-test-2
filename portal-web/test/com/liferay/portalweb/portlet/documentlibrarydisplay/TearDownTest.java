@@ -60,17 +60,6 @@ public class TearDownTest extends BaseTestCase {
 						"link=DLD Setup Test Page"));
 				selenium.waitForPageToLoad("30000");
 
-				boolean DLFolderPresent = selenium.isElementPresent("//b");
-
-				if (!DLFolderPresent) {
-					label = 3;
-
-					continue;
-				}
-
-				selenium.click(RuntimeVariables.replace("//b"));
-				selenium.waitForPageToLoad("30000");
-
 				boolean DocumentPresent = selenium.isElementPresent(
 						"//td[5]/ul/li/strong/span");
 
@@ -104,35 +93,6 @@ public class TearDownTest extends BaseTestCase {
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 
 			case 2:
-				selenium.click(RuntimeVariables.replace("//div[1]/span[1]/a"));
-				selenium.waitForPageToLoad("30000");
-				selenium.click("//strong/span");
-
-				for (int second = 0;; second++) {
-					if (second >= 60) {
-						fail("timeout");
-					}
-
-					try {
-						if (selenium.isElementPresent("link=Delete")) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
-
-					Thread.sleep(1000);
-				}
-
-				selenium.click(RuntimeVariables.replace("link=Delete"));
-				selenium.waitForPageToLoad("30000");
-				assertTrue(selenium.getConfirmation()
-								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
-				selenium.click(RuntimeVariables.replace(
-						"link=Return to Full Page"));
-				selenium.waitForPageToLoad("30000");
-
-			case 3:
 				selenium.click("//img[@alt='Remove']");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to remove this component[\\s\\S]$"));

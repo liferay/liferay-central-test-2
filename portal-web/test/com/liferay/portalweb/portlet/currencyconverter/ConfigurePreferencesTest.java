@@ -53,6 +53,23 @@ public class ConfigurePreferencesTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"link=Currency Converter Test Page"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//strong/span")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click("//strong/span");
 
 		for (int second = 0;; second++) {
@@ -73,6 +90,23 @@ public class ConfigurePreferencesTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Preferences"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("_16_available_actions")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.addSelection("_16_available_actions",
 			RuntimeVariables.replace("label=Korean Won"));
 		selenium.click("//div/table/tbody/tr/td[2]/a[2]/img");
@@ -95,6 +129,24 @@ public class ConfigurePreferencesTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isTextPresent(
+							"You have successfully updated your preferences.")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		assertTrue(selenium.isTextPresent(
 				"You have successfully updated your preferences."));
 	}

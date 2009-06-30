@@ -20,75 +20,69 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.currencyconverter;
+package com.liferay.portalweb.portlet.documentlibrarydisplay;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="VerifyReConfigurationTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="EnableSearchPortletTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class VerifyReConfigurationTest extends BaseTestCase {
-	public void testVerifyReConfiguration() throws Exception {
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
+public class EnableSearchPortletTest extends BaseTestCase {
+	public void testEnableSearchPortlet() throws Exception {
+		int label = 1;
 
-			try {
-				if (selenium.isElementPresent(
-							"link=Currency Converter Test Page")) {
-					break;
+		while (label >= 1) {
+			switch (label) {
+			case 1:
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isElementPresent(
+									"link=Document Library Display Test Page")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
 				}
-			}
-			catch (Exception e) {
-			}
 
-			Thread.sleep(1000);
-		}
+				selenium.click(RuntimeVariables.replace(
+						"link=Document Library Display Test Page"));
+				selenium.waitForPageToLoad("30000");
+				selenium.click(RuntimeVariables.replace("link=Configuration"));
+				selenium.waitForPageToLoad("30000");
 
-		selenium.click(RuntimeVariables.replace(
-				"link=Currency Converter Test Page"));
-		selenium.waitForPageToLoad("30000");
+				boolean IsChecked = selenium.isChecked(
+						"_86_showFileEntriesSearchCheckbox");
 
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
+				if (IsChecked) {
+					label = 2;
 
-			try {
-				if (selenium.isElementPresent("link=Return to Full Page")) {
-					break;
+					continue;
 				}
-			}
-			catch (Exception e) {
-			}
 
-			Thread.sleep(1000);
+				selenium.click("_86_showFileEntriesSearchCheckbox");
+
+			case 2:
+				selenium.click(RuntimeVariables.replace(
+						"//input[@value='Save']"));
+				selenium.waitForPageToLoad("30000");
+				assertTrue(selenium.isTextPresent(
+						"You have successfully updated the setup."));
+
+			case 100:
+				label = -1;
+			}
 		}
-
-		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
-		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (!selenium.isTextPresent("Korean Won")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		assertFalse(selenium.isTextPresent("Korean Won"));
 	}
 }

@@ -64,8 +64,6 @@ public class SetupTest extends BaseTestCase {
 			RuntimeVariables.replace("DLD Setup Test Page"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Add Page']"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
 		selenium.click(RuntimeVariables.replace("link=DLD Setup Test Page"));
 		selenium.waitForPageToLoad("30000");
 
@@ -105,57 +103,6 @@ public class SetupTest extends BaseTestCase {
 		}
 
 		selenium.click("//div[@id='ContentManagement-DocumentLibrary']/p/a");
-		Thread.sleep(2000);
-		selenium.click(RuntimeVariables.replace("link=DLD Setup Test Page"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//input[@value='Add Folder']"));
-		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_20_name")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.typeKeys("_20_name",
-			RuntimeVariables.replace("DLD Setup Test Folder"));
-		selenium.type("_20_name",
-			RuntimeVariables.replace("DLD Setup Test Folder"));
-		selenium.typeKeys("_20_description",
-			RuntimeVariables.replace("This is a DLD setup test folder."));
-		selenium.type("_20_description",
-			RuntimeVariables.replace("This is a DLD setup test folder."));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//input[@value='Save']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//b"));
-		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

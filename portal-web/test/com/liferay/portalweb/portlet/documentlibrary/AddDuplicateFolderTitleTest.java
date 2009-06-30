@@ -52,7 +52,8 @@ public class AddDuplicateFolderTitleTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"link=Document Library Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//input[@value='Add Folder']"));
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Add Subfolder']"));
 		selenium.waitForPageToLoad("30000");
 		selenium.typeKeys("_20_name",
 			RuntimeVariables.replace("Edited Second Folder Test"));

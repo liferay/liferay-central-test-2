@@ -98,6 +98,8 @@ public class MoveDocumentTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Folders"));
 		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("link=Document Home"));
+		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Second Test Folder"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click("//input[@value='Choose']");

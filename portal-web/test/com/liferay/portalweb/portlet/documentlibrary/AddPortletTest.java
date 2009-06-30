@@ -96,7 +96,7 @@ public class AddPortletTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//input[@value='Add Folder']")) {
+				if (selenium.isElementPresent("//input[@value='Add Subfolder']")) {
 					break;
 				}
 			}
