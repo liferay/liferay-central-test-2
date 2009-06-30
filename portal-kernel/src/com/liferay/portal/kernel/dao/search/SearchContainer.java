@@ -70,6 +70,7 @@ public class SearchContainer<R> {
 		PortletURL iteratorURL, List<String> headerNames,
 		String emptyResultsMessage) {
 
+		_portletRequest = portletRequest;
 		_displayTerms = displayTerms;
 		_searchTerms = searchTerms;
 
@@ -183,6 +184,10 @@ public class SearchContainer<R> {
 
 	public String getOrderByTypeParam() {
 		return _orderByTypeParam;
+	}
+
+	public PortletRequest getPortletRequest() {
+		return _portletRequest;
 	}
 
 	public int getResultEnd() {
@@ -334,6 +339,7 @@ public class SearchContainer<R> {
 	private OrderByComparator _orderByComparator;
 	private String _orderByType;
 	private String _orderByTypeParam = DEFAULT_ORDER_BY_TYPE_PARAM;
+	private PortletRequest _portletRequest;
 	private int _resultEnd;
 	private List<ResultRow> _resultRows = new ArrayList<ResultRow>();
 	private List<R> _results = new ArrayList<R>();
