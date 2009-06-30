@@ -27,9 +27,9 @@
 <%
 String redirect = ParamUtil.getString(request, "redirect");
 
-long assetEntryId = ParamUtil.getLong(renderRequest, "assetEntryId");
-String type = ParamUtil.getString (renderRequest, "type");
-String urlTitle = ParamUtil.getString (renderRequest, "urlTitle");
+long assetEntryId = ParamUtil.getLong(request, "assetEntryId");
+String type = ParamUtil.getString(request, "type");
+String urlTitle = ParamUtil.getString(request, "urlTitle");
 
 List results = new ArrayList();
 

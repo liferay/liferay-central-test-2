@@ -25,7 +25,7 @@
 <%@ include file="/html/taglib/ui/asset_categories_navigation/init.jsp" %>
 
 <%
-long categoryId = ParamUtil.getLong(renderRequest, "categoryId");
+long categoryId = ParamUtil.getLong(request, "categoryId");
 
 List<AssetVocabulary> vocabularies = null;
 
