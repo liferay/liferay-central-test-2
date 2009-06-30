@@ -37,28 +37,8 @@ public class ArrayUtil_IW {
 		return ArrayUtil.append(array, value);
 	}
 
-	public byte[] append(byte[] array, byte value) {
-		return ArrayUtil.append(array, value);
-	}
-
-	public double[] append(double[] array, double value) {
-		return ArrayUtil.append(array, value);
-	}
-
-	public float[] append(float[] array, float value) {
-		return ArrayUtil.append(array, value);
-	}
-
-	public int[] append(int[] array, int value) {
-		return ArrayUtil.append(array, value);
-	}
-
-	public long[] append(long[] array, long value) {
-		return ArrayUtil.append(array, value);
-	}
-
-	public short[] append(short[] array, short value) {
-		return ArrayUtil.append(array, value);
+	public boolean[] append(boolean[] array1, boolean[] array2) {
+		return ArrayUtil.append(array1, array2);
 	}
 
 	public java.lang.Boolean[] append(java.lang.Boolean[] array,
@@ -66,81 +46,30 @@ public class ArrayUtil_IW {
 		return ArrayUtil.append(array, value);
 	}
 
-	public java.lang.Double[] append(java.lang.Double[] array,
-		java.lang.Double value) {
-		return ArrayUtil.append(array, value);
-	}
-
-	public java.lang.Float[] append(java.lang.Float[] array,
-		java.lang.Float value) {
-		return ArrayUtil.append(array, value);
-	}
-
-	public java.lang.Integer[] append(java.lang.Integer[] array,
-		java.lang.Integer value) {
-		return ArrayUtil.append(array, value);
-	}
-
-	public java.lang.Long[] append(java.lang.Long[] array, java.lang.Long value) {
-		return ArrayUtil.append(array, value);
-	}
-
-	public java.lang.Object[] append(java.lang.Object[] array,
-		java.lang.Object value) {
-		return ArrayUtil.append(array, value);
-	}
-
-	public java.lang.Object[][] append(java.lang.Object[][] array,
-		java.lang.Object[] value) {
-		return ArrayUtil.append(array, value);
-	}
-
-	public java.lang.Short[] append(java.lang.Short[] array,
-		java.lang.Short value) {
-		return ArrayUtil.append(array, value);
-	}
-
-	public java.lang.String[] append(java.lang.String[] array,
-		java.lang.String value) {
-		return ArrayUtil.append(array, value);
-	}
-
-	public java.lang.String[][] append(java.lang.String[][] array,
-		java.lang.String[] value) {
-		return ArrayUtil.append(array, value);
-	}
-
-	public boolean[] append(boolean[] array1, boolean[] array2) {
+	public java.lang.Boolean[] append(java.lang.Boolean[] array1,
+		java.lang.Boolean[] array2) {
 		return ArrayUtil.append(array1, array2);
+	}
+
+	public byte[] append(byte[] array, byte value) {
+		return ArrayUtil.append(array, value);
 	}
 
 	public byte[] append(byte[] array1, byte[] array2) {
 		return ArrayUtil.append(array1, array2);
 	}
 
+	public double[] append(double[] array, double value) {
+		return ArrayUtil.append(array, value);
+	}
+
 	public double[] append(double[] array1, double[] array2) {
 		return ArrayUtil.append(array1, array2);
 	}
 
-	public float[] append(float[] array1, float[] array2) {
-		return ArrayUtil.append(array1, array2);
-	}
-
-	public int[] append(int[] array1, int[] array2) {
-		return ArrayUtil.append(array1, array2);
-	}
-
-	public long[] append(long[] array1, long[] array2) {
-		return ArrayUtil.append(array1, array2);
-	}
-
-	public short[] append(short[] array1, short[] array2) {
-		return ArrayUtil.append(array1, array2);
-	}
-
-	public java.lang.Boolean[] append(java.lang.Boolean[] array1,
-		java.lang.Boolean[] array2) {
-		return ArrayUtil.append(array1, array2);
+	public java.lang.Double[] append(java.lang.Double[] array,
+		java.lang.Double value) {
+		return ArrayUtil.append(array, value);
 	}
 
 	public java.lang.Double[] append(java.lang.Double[] array1,
@@ -148,9 +77,35 @@ public class ArrayUtil_IW {
 		return ArrayUtil.append(array1, array2);
 	}
 
+	public float[] append(float[] array, float value) {
+		return ArrayUtil.append(array, value);
+	}
+
+	public float[] append(float[] array1, float[] array2) {
+		return ArrayUtil.append(array1, array2);
+	}
+
+	public java.lang.Float[] append(java.lang.Float[] array,
+		java.lang.Float value) {
+		return ArrayUtil.append(array, value);
+	}
+
 	public java.lang.Float[] append(java.lang.Float[] array1,
 		java.lang.Float[] array2) {
 		return ArrayUtil.append(array1, array2);
+	}
+
+	public int[] append(int[] array, int value) {
+		return ArrayUtil.append(array, value);
+	}
+
+	public int[] append(int[] array1, int[] array2) {
+		return ArrayUtil.append(array1, array2);
+	}
+
+	public java.lang.Integer[] append(java.lang.Integer[] array,
+		java.lang.Integer value) {
+		return ArrayUtil.append(array, value);
 	}
 
 	public java.lang.Integer[] append(java.lang.Integer[] array1,
@@ -158,9 +113,26 @@ public class ArrayUtil_IW {
 		return ArrayUtil.append(array1, array2);
 	}
 
+	public long[] append(long[] array, long value) {
+		return ArrayUtil.append(array, value);
+	}
+
+	public long[] append(long[] array1, long[] array2) {
+		return ArrayUtil.append(array1, array2);
+	}
+
+	public java.lang.Long[] append(java.lang.Long[] array, java.lang.Long value) {
+		return ArrayUtil.append(array, value);
+	}
+
 	public java.lang.Long[] append(java.lang.Long[] array1,
 		java.lang.Long[] array2) {
 		return ArrayUtil.append(array1, array2);
+	}
+
+	public java.lang.Object[] append(java.lang.Object[] array,
+		java.lang.Object value) {
+		return ArrayUtil.append(array, value);
 	}
 
 	public java.lang.Object[] append(java.lang.Object[] array1,
@@ -168,9 +140,27 @@ public class ArrayUtil_IW {
 		return ArrayUtil.append(array1, array2);
 	}
 
+	public java.lang.Object[][] append(java.lang.Object[][] array,
+		java.lang.Object[] value) {
+		return ArrayUtil.append(array, value);
+	}
+
 	public java.lang.Object[][] append(java.lang.Object[][] array1,
 		java.lang.Object[][] array2) {
 		return ArrayUtil.append(array1, array2);
+	}
+
+	public short[] append(short[] array, short value) {
+		return ArrayUtil.append(array, value);
+	}
+
+	public short[] append(short[] array1, short[] array2) {
+		return ArrayUtil.append(array1, array2);
+	}
+
+	public java.lang.Short[] append(java.lang.Short[] array,
+		java.lang.Short value) {
+		return ArrayUtil.append(array, value);
 	}
 
 	public java.lang.Short[] append(java.lang.Short[] array1,
@@ -178,9 +168,19 @@ public class ArrayUtil_IW {
 		return ArrayUtil.append(array1, array2);
 	}
 
+	public java.lang.String[] append(java.lang.String[] array,
+		java.lang.String value) {
+		return ArrayUtil.append(array, value);
+	}
+
 	public java.lang.String[] append(java.lang.String[] array1,
 		java.lang.String[] array2) {
 		return ArrayUtil.append(array1, array2);
+	}
+
+	public java.lang.String[][] append(java.lang.String[][] array,
+		java.lang.String[] value) {
+		return ArrayUtil.append(array, value);
 	}
 
 	public java.lang.String[][] append(java.lang.String[][] array1,
@@ -217,11 +217,11 @@ public class ArrayUtil_IW {
 		return ArrayUtil.contains(array, value);
 	}
 
-	public boolean contains(short[] array, short value) {
+	public boolean contains(java.lang.Object[] array, java.lang.Object value) {
 		return ArrayUtil.contains(array, value);
 	}
 
-	public boolean contains(java.lang.Object[] array, java.lang.Object value) {
+	public boolean contains(short[] array, short value) {
 		return ArrayUtil.contains(array, value);
 	}
 
@@ -284,35 +284,11 @@ public class ArrayUtil_IW {
 		return ArrayUtil.toArray(array);
 	}
 
-	public java.lang.Byte[] toArray(byte[] array) {
-		return ArrayUtil.toArray(array);
-	}
-
-	public java.lang.Character[] toArray(char[] array) {
-		return ArrayUtil.toArray(array);
-	}
-
-	public java.lang.Double[] toArray(double[] array) {
-		return ArrayUtil.toArray(array);
-	}
-
-	public java.lang.Float[] toArray(float[] array) {
-		return ArrayUtil.toArray(array);
-	}
-
-	public java.lang.Integer[] toArray(int[] array) {
-		return ArrayUtil.toArray(array);
-	}
-
-	public java.lang.Long[] toArray(long[] array) {
-		return ArrayUtil.toArray(array);
-	}
-
-	public java.lang.Short[] toArray(short[] array) {
-		return ArrayUtil.toArray(array);
-	}
-
 	public boolean[] toArray(java.lang.Boolean[] array) {
+		return ArrayUtil.toArray(array);
+	}
+
+	public java.lang.Byte[] toArray(byte[] array) {
 		return ArrayUtil.toArray(array);
 	}
 
@@ -320,7 +296,15 @@ public class ArrayUtil_IW {
 		return ArrayUtil.toArray(array);
 	}
 
+	public java.lang.Character[] toArray(char[] array) {
+		return ArrayUtil.toArray(array);
+	}
+
 	public char[] toArray(java.lang.Character[] array) {
+		return ArrayUtil.toArray(array);
+	}
+
+	public java.lang.Double[] toArray(double[] array) {
 		return ArrayUtil.toArray(array);
 	}
 
@@ -328,7 +312,15 @@ public class ArrayUtil_IW {
 		return ArrayUtil.toArray(array);
 	}
 
+	public java.lang.Float[] toArray(float[] array) {
+		return ArrayUtil.toArray(array);
+	}
+
 	public float[] toArray(java.lang.Float[] array) {
+		return ArrayUtil.toArray(array);
+	}
+
+	public java.lang.Integer[] toArray(int[] array) {
 		return ArrayUtil.toArray(array);
 	}
 
@@ -336,7 +328,15 @@ public class ArrayUtil_IW {
 		return ArrayUtil.toArray(array);
 	}
 
+	public java.lang.Long[] toArray(long[] array) {
+		return ArrayUtil.toArray(array);
+	}
+
 	public long[] toArray(java.lang.Long[] array) {
+		return ArrayUtil.toArray(array);
+	}
+
+	public java.lang.Short[] toArray(short[] array) {
 		return ArrayUtil.toArray(array);
 	}
 
@@ -372,11 +372,11 @@ public class ArrayUtil_IW {
 		return ArrayUtil.toStringArray(array);
 	}
 
-	public java.lang.String[] toStringArray(short[] array) {
+	public java.lang.String[] toStringArray(java.lang.Object[] array) {
 		return ArrayUtil.toStringArray(array);
 	}
 
-	public java.lang.String[] toStringArray(java.lang.Object[] array) {
+	public java.lang.String[] toStringArray(short[] array) {
 		return ArrayUtil.toStringArray(array);
 	}
 
