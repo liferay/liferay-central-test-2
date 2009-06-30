@@ -121,6 +121,9 @@
 	background-position: 100% 100%;
 }
 
+.portlet-blogs .page-title {
+}
+
 .portlet-blogs .search-form {
 	float: right
 }

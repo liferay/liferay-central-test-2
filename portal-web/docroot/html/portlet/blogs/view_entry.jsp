@@ -32,6 +32,9 @@ if (Validator.isNull(redirect)) {
 }
 
 BlogsEntry entry = (BlogsEntry)request.getAttribute(WebKeys.BLOGS_ENTRY);
+AssetEntry assetEntry = AssetEntryLocalServiceUtil.getEntry(BlogsEntry.class.getName(), entry.getEntryId());
+
+long classNameId = PortalUtil.getClassNameId(BlogsEntry.class.getName());
 
 //entry = entry.toEscapedModel();
 

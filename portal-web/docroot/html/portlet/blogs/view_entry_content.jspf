@@ -144,11 +144,6 @@
 
 			<div class="stats">
 				<span class="view-count">
-
-					<%
-					AssetEntry assetEntry = AssetEntryLocalServiceUtil.getEntry(BlogsEntry.class.getName(), entry.getEntryId());
-					%>
-
 					<c:choose>
 						<c:when test="<%= assetEntry.getViewCount() == 1 %>">
 							<%= assetEntry.getViewCount() %> <liferay-ui:message key="view" />,
@@ -163,8 +158,6 @@
 					<span class="comments">
 
 						<%
-						long classNameId = PortalUtil.getClassNameId(BlogsEntry.class.getName());
-
 						int messagesCount = MBMessageLocalServiceUtil.getDiscussionMessagesCount(classNameId, entry.getEntryId());
 						%>
 
@@ -200,6 +193,7 @@
 				<liferay-ui:asset-tags-summary
 					className="<%= BlogsEntry.class.getName() %>"
 					classPK="<%= entry.getEntryId() %>"
+					portletURL="<%= renderResponse.createRenderURL() %>"
 				/>
 			</span>
 

@@ -27,6 +27,8 @@
 <%
 String redirect = currentURL;
 
+String tagName = ParamUtil.getString(renderRequest, "tag");
+
 PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setParameter("struts_action", "/blogs/view");
@@ -42,27 +44,35 @@ portletURL.setParameter("struts_action", "/blogs/view");
 <%
 SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, pageDelta, portletURL, null, null);
 
-int total = 0;
+long classNameId = PortalUtil.getClassNameId(BlogsEntry.class.getName());
+
+long[] assetTagIds = AssetTagLocalServiceUtil.getTagIds(scopeGroupId, new String[] {tagName});
+long[] notAssetTagIds = new long[0];
+
+AssetEntryQuery entryQuery = new AssetEntryQuery();
+
+entryQuery.setGroupId(scopeGroupId);
+entryQuery.setClassNameIds(new long[]{classNameId});
+entryQuery.setEnd(searchContainer.getEnd());
+entryQuery.setExcludeZeroViewCount(false);
+entryQuery.setNotTagIds(notAssetTagIds, false);
+entryQuery.setStart(searchContainer.getStart());
+entryQuery.setTagIds(assetTagIds, false);
 
 if (BlogsPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_ENTRY)) {
-	total = BlogsEntryLocalServiceUtil.getGroupEntriesCount(scopeGroupId);
+	entryQuery.setVisible(null);
 }
 else {
-	total = BlogsEntryLocalServiceUtil.getGroupEntriesCount(scopeGroupId, false);
+	entryQuery.setVisible(true);
 }
+
+int total = AssetEntryLocalServiceUtil.getEntriesCount(entryQuery);
 
 searchContainer.setTotal(total);
 
-List results = null;
+List<AssetEntry> assetEntries = AssetEntryLocalServiceUtil.getEntries(entryQuery);
 
-if (BlogsPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_ENTRY)) {
-	results = BlogsEntryLocalServiceUtil.getGroupEntries(scopeGroupId, searchContainer.getStart(), searchContainer.getEnd());
-}
-else {
-	results = BlogsEntryLocalServiceUtil.getGroupEntries(scopeGroupId, false, searchContainer.getStart(), searchContainer.getEnd());
-}
-
-searchContainer.setResults(results);
+searchContainer.setResults(assetEntries);
 %>
 
 <%@ include file="/html/portlet/blogs/view_entries.jspf" %>
