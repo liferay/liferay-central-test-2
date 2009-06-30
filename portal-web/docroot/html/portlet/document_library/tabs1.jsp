@@ -25,7 +25,7 @@
 <%@ include file="/html/portlet/document_library/init.jsp" %>
 
 <c:choose>
-	<c:when test="<%= showTabs && (rootFolder == null) %>">
+	<c:when test="<%= showTabs && portletName.equals(PortletKeys.DOCUMENT_LIBRARY) %>">
 
 		<%
 		String tabs1 = ParamUtil.getString(request, "tabs1", "folders");
