@@ -735,12 +735,14 @@ public class ResourceActionsUtil {
 			xml = StringUtil.read(classLoader, source);
 		}
 		catch (IOException ioe) {
-			if (!source.endsWith("-ext.xml")) {
+			if (_log.isWarnEnabled() && !source.endsWith("-ext.xml")) {
 				_log.warn("Cannot load " + source);
 			}
 		}
 		catch (Exception e) {
-			_log.warn("Error reading " + source, e);
+			if (_log.isWarnEnabled()) {
+				_log.warn("Error reading " + source, e);
+			}
 		}
 
 		if (xml == null) {
