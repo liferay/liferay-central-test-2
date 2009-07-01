@@ -20,30 +20,33 @@
  * SOFTWARE.
  */
 
-package com.liferay.util.bridges.groovy;
+package com.liferay.portal.scripting;
 
-import com.liferay.util.bridges.scripting.ScriptingPortlet;
-
-import javax.portlet.RenderRequest;
+import java.util.Map;
+import java.util.Set;
 
 /**
- * <a href="GroovyPortlet.java.html"><b><i>View Source</i></b></a>
+ * <a href="ScriptingWrapper.java.html"><b><i>View Source</i></b></a>
  *
- * @author Jorge Ferrer
  * @author Alberto Montero
- * @author Brian Wing Shun Chan
  *
  */
-public class GroovyPortlet extends ScriptingPortlet {
+public interface ScriptingWrapper {
 
-	public void init() {
-		super.init();
+	public Map<String, Object> eval(
+			Map<String, Object> inputObjects,
+			Map<String, Class> inputObjectTypes, Set<String> outputObjectNames,
+			String script, Set<String> accessibleClassesGroups,
+			Set<String> accessibleIndividualClasses)
+		throws ScriptExecutionException;
 
-		scriptingLanguage = "groovy";
-	}
+	public Map<String, Object> evalUnconstrained(
+			Map<String, Object> inputObjects,
+			Map<String, Class> inputObjectTypes, Set<String> outputObjectNames,
+			String script)
+		throws ScriptExecutionException;
 
-	protected String getFileName(RenderRequest renderRequest) {
-		return renderRequest.getParameter("groovyFile");
-	}
+	public String getLanguage();
 
+	public void clearCache();
 }

@@ -20,30 +20,32 @@
  * SOFTWARE.
  */
 
-package com.liferay.util.bridges.groovy;
+package com.liferay.portal.scripting;
 
-import com.liferay.util.bridges.scripting.ScriptingPortlet;
-
-import javax.portlet.RenderRequest;
+import com.liferay.portal.PortalException;
 
 /**
- * <a href="GroovyPortlet.java.html"><b><i>View Source</i></b></a>
+ * <a href="UnsupportedLanguageException.java.html"><b><i>
+ *  View Source</i></b></a>
  *
- * @author Jorge Ferrer
  * @author Alberto Montero
- * @author Brian Wing Shun Chan
- *
  */
-public class GroovyPortlet extends ScriptingPortlet {
+public class UnsupportedLanguageException extends PortalException {
 
-	public void init() {
-		super.init();
-
-		scriptingLanguage = "groovy";
+	public UnsupportedLanguageException() {
+		super();
 	}
 
-	protected String getFileName(RenderRequest renderRequest) {
-		return renderRequest.getParameter("groovyFile");
+	public UnsupportedLanguageException(String msg) {
+		super(msg);
+	}
+
+	public UnsupportedLanguageException(String msg, Throwable cause) {
+		super(msg, cause);
+	}
+
+	public UnsupportedLanguageException(Throwable cause) {
+		super(cause);
 	}
 
 }

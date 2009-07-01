@@ -20,30 +20,34 @@
  * SOFTWARE.
  */
 
-package com.liferay.util.bridges.groovy;
+package com.liferay.portal.scripting.javascript;
 
-import com.liferay.util.bridges.scripting.ScriptingPortlet;
+import com.liferay.mozilla.javascript.ClassShutter;
+import com.liferay.portal.util.PropsValues;
+import com.liferay.portal.scripting.ClassVisibilityChecker;
 
-import javax.portlet.RenderRequest;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
- * <a href="GroovyPortlet.java.html"><b><i>View Source</i></b></a>
- *
- * @author Jorge Ferrer
- * @author Alberto Montero
- * @author Brian Wing Shun Chan
- *
- */
-public class GroovyPortlet extends ScriptingPortlet {
+ * <a href="JavaScriptClassVisibilityChecker.java.html"><b><i>View Source</i>
+ * </b></a>
+*
+* @author Alberto Montero
+*/
+public class JavaScriptClassVisibilityChecker
+	extends ClassVisibilityChecker implements ClassShutter {
 
-	public void init() {
-		super.init();
+	public JavaScriptClassVisibilityChecker(
+		Set<String> visibleGroups, Set<String> visibleIndividualItems) {
 
-		scriptingLanguage = "groovy";
+		super(visibleGroups, visibleIndividualItems);
 	}
 
-	protected String getFileName(RenderRequest renderRequest) {
-		return renderRequest.getParameter("groovyFile");
+	public boolean visibleToScripts(String fullClassName) {
+		return isVisible(fullClassName);
 	}
-
 }

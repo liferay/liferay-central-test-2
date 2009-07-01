@@ -1376,6 +1376,14 @@ public class PropsValues {
 	public static int TRANSACTION_ISOLATION_PORTAL = GetterUtil.getInteger(
 		PropsUtil.get(PropsKeys.TRANSACTION_ISOLATION_PORTAL));
 
+	public static final String[]
+			USER_DEFINED_SERVER_SIDE_SCRIPT_PROHIBITED_CLASSES =
+		StringUtil.split(
+			PropsUtil.get(
+				PropsKeys.
+					USER_DEFINED_SERVER_SIDE_SCRIPT_PROHIBITED_CLASSES),
+			StringPool.COMMA);
+
 	public static final boolean USERS_DELETE = GetterUtil.getBoolean(
 		PropsUtil.get(PropsKeys.USERS_DELETE));
 
