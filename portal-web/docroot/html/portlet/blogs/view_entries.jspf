@@ -60,9 +60,7 @@ showSearch = showSearch && (results.size() > 0);
 </c:if>
 
 <%
-for (int i = 0; i < results.size(); i++) {
-	AssetEntry assetEntry = results.get(i);
-
+for (AssetEntry assetEntry : results) {
 	BlogsEntry entry = BlogsEntryLocalServiceUtil.getEntry(assetEntry.getClassPK());
 
 	AssetUtil.addLayoutTags(request, assetEntry.getTags());
