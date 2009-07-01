@@ -34,6 +34,7 @@ import java.util.regex.Pattern;
  * <a href="ClassVisibilityChecker.java.html"><b><i>View Source</i></b></a>
 *
 * @author Alberto Montero
+* @author Brian Wing Shun Chan
 *
 */
 public class ClassVisibilityChecker {

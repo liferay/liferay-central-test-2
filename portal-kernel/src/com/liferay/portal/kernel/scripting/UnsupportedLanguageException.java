@@ -27,6 +27,7 @@ package com.liferay.portal.kernel.scripting;
  * </a>
  *
  * @author Alberto Montero
+ * @author Brian Wing Shun Chan
  *
  */
 public class UnsupportedLanguageException extends ScriptingException {

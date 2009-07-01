@@ -20,33 +20,56 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.scripting;
+package com.liferay.portal.scripting;
 
-import com.liferay.portal.PortalException;
+import com.liferay.portal.kernel.scripting.Scripting;
+import com.liferay.portal.kernel.scripting.ScriptingException;
+
+import java.util.Map;
+import java.util.Set;
+
+import javax.portlet.PortletConfig;
+import javax.portlet.PortletContext;
+import javax.portlet.PortletRequest;
+import javax.portlet.PortletResponse;
 
 /**
- * <a href="ScriptingException.java.html"><b><i>View Source</i></b></a>
+ * <a href="ScriptingImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Alberto Montero
  * @author Brian Wing Shun Chan
  *
  */
-public class ScriptingException extends PortalException {
+public class ScriptingImpl implements Scripting {
 
-	public ScriptingException() {
-		super();
+	public void clearCache(String language) {
 	}
 
-	public ScriptingException(String msg) {
-		super(msg);
+	public Map<String, Object> eval(
+			Set<String> allowedClasses, Map<String, Object> inputObjects,
+			Set<String> outputNames, String language, String script)
+		throws ScriptingException {
+
+		return null;
 	}
 
-	public ScriptingException(String msg, Throwable cause) {
-		super(msg, cause);
+	public void exec(
+			Set<String> allowedClasses, Map<String, Object> inputObjects,
+			String language, String script)
+		throws ScriptingException {
+
+		eval(allowedClasses, inputObjects, null, language, script);
 	}
 
-	public ScriptingException(Throwable cause) {
-		super(cause);
+	public Map<String, Object> getPortletObjects(
+		PortletConfig portletConfig, PortletContext portletContext,
+		PortletRequest portletRequest, PortletResponse portletResponse) {
+
+		return null;
+	}
+
+	public Set<String> getSupportedLanguages() {
+		return null;
 	}
 
 }
