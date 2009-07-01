@@ -677,8 +677,9 @@ public class MediaWikiImporter implements WikiImporter {
 		return usersMap;
 	}
 
-	private static final String[] _SPECIAL_MEDIA_WIKI_DIRS = new String[]{
-		"thumb", "temp", "archive"};
+	private static final String[] _SPECIAL_MEDIA_WIKI_DIRS = {
+		"thumb", "temp", "archive"
+	};
 
 	private static final String _WORK_IN_PROGRESS = "{{Work in progress}}";
 

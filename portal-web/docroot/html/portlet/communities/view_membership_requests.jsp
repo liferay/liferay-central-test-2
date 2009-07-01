@@ -97,7 +97,7 @@ for (int i = 0; i < results.size(); i++) {
 
 	User user2 = UserLocalServiceUtil.getUserById(membershipRequest.getUserId());
 
-	ResultRow row = new ResultRow(new Object[]{user2, group, membershipRequest}, userId, i);
+	ResultRow row = new ResultRow(new Object[] {user2, group, membershipRequest}, userId, i);
 
 	// Date
 

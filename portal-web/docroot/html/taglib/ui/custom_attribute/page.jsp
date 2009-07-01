@@ -308,7 +308,7 @@ ExpandoBridge expandoBridge = new ExpandoBridgeImpl(className, classPK);
 									String paramValue = ParamUtil.getString(request, "ExpandoAttribute(" + name + ")");
 
 									if (Validator.isNotNull(paramValue)) {
-										curValue = new String[]{paramValue};
+										curValue = new String[] {paramValue};
 									}
 
 									for (String curDefaultValue : (String[])defaultValue) {

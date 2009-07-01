@@ -59,7 +59,7 @@ else {
 
 		addresses.add(new AddressImpl());
 
-		addressesIndexes = new int[]{0};
+		addressesIndexes = new int[] {0};
 	}
 
 	if (addressesIndexes == null) {

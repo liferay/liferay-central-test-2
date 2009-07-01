@@ -1580,7 +1580,7 @@ public class LayoutImporter {
 			}
 			else {
 				portletIds = ArrayUtil.append(
-					new String[]{portletId}, portletIds);
+					new String[] {portletId}, portletIds);
 			}
 		}
 

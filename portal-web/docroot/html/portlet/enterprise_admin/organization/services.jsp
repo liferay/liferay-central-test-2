@@ -94,7 +94,7 @@ else {
 
 		orgLabors.add(orgLabor);
 
-		orgLaborsIndexes = new int[]{0};
+		orgLaborsIndexes = new int[] {0};
 	}
 
 	if (orgLaborsIndexes == null) {

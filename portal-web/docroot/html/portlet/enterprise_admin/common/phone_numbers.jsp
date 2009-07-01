@@ -60,7 +60,7 @@ else {
 
 		phones.add(new PhoneImpl());
 
-		phonesIndexes = new int[]{0};
+		phonesIndexes = new int[] {0};
 	}
 
 	if (phonesIndexes == null) {

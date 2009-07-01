@@ -59,7 +59,7 @@ else {
 
 		emailAddresses.add(new EmailAddressImpl());
 
-		emailAddressesIndexes = new int[]{0};
+		emailAddressesIndexes = new int[] {0};
 	}
 
 	if (emailAddressesIndexes == null){
