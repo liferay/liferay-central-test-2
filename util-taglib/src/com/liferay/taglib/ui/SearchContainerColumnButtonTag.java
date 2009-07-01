@@ -87,7 +87,7 @@ public class SearchContainerColumnButtonTag extends SearchContainerColumnTag {
 		if (!parentRowTag.isHeaderNamesAssigned()) {
 			List<String> headerNames = parentRowTag.getHeaderNames();
 
-			headerNames.add(name);
+			headerNames.add(StringPool.BLANK);
 		}
 
 		return EVAL_BODY_INCLUDE;
