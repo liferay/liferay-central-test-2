@@ -68,6 +68,10 @@ public class SQLServerUtil extends DBUtil {
 		return _SUPPORTS_ALTER_COLUMN_NAME;
 	}
 
+	public boolean isSupportsAlterColumnType() {
+		return _SUPPORTS_ALTER_COLUMN_TYPE;
+	}
+
 	protected SQLServerUtil() {
 		super(TYPE_SQLSERVER);
 	}
@@ -152,6 +156,8 @@ public class SQLServerUtil extends DBUtil {
 	};
 
 	private static boolean _SUPPORTS_ALTER_COLUMN_NAME;
+
+	private static boolean _SUPPORTS_ALTER_COLUMN_TYPE;
 
 	private static SQLServerUtil _instance = new SQLServerUtil();
 
