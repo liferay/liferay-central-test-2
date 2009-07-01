@@ -46,9 +46,6 @@
 	margin-bottom: 10px;
 }
 
-.portlet-blogs .entry-content {
-}
-
 .portlet-blogs .entry-date {
 	background: url(<%= themeImagesPath %>/common/date.png) no-repeat 0 50%;
 	color: #999;
@@ -145,7 +142,4 @@
 
 .portlet-blogs .taglib-social-bookmarks ul {
 	padding: 1em;
-}
-
-.portlet-blogs .view-count {
 }
