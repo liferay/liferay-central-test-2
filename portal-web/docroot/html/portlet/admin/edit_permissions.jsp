@@ -23,3 +23,47 @@
 %>
 
 <%@ include file="/html/portlet/admin/init.jsp" %>
+
+<%
+String tabs1 = ParamUtil.getString(request, "tabs1", "merge-redundant-roles");
+String tabs2 = ParamUtil.getString(request, "tabs2", "organizations");
+
+PortletURL portletURL = renderResponse.createRenderURL();
+
+portletURL.setWindowState(WindowState.MAXIMIZED);
+
+portletURL.setParameter("struts_action", "/admin_server/edit_permissions");
+portletURL.setParameter("tabs1", tabs1);
+portletURL.setParameter("tabs2", tabs2);
+%>
+
+<script type="text/javascript">
+	function <portlet:namespace />invoke(link) {
+		submitForm(document.<portlet:namespace />fm, link);
+	}
+</script>
+
+<form method="post" name="<portlet:namespace />fm">
+
+<liferay-ui:tabs
+	names="merge-redundant-roles,reassign-to-system-role"
+	param="tabs1"
+	url="<%= portletURL.toString() %>"
+/>
+
+<liferay-ui:tabs
+	names="organizations,communities,users"
+	param="tabs2"
+	url="<%= portletURL.toString() %>"
+/>
+
+<c:choose>
+	<c:when test='<%= tabs1.equals("merge-redundant-roles") %>'>
+		<%@ include file="/html/portlet/admin/edit_permissions_merge.jsp" %>
+	</c:when>
+	<c:otherwise>
+		<%@ include file="/html/portlet/admin/edit_permissions_reassign.jsp" %>
+	</c:otherwise>
+</c:choose>
+
+</form>
