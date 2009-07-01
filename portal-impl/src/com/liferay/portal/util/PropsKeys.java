@@ -1270,8 +1270,6 @@ public interface PropsKeys {
 
 	public static final String UPLOAD_SERVLET_REQUEST_IMPL_TEMP_DIR = "com.liferay.portal.upload.UploadServletRequestImpl.temp.dir";
 
-	public static final String USER_DEFINED_SERVER_SIDE_SCRIPT_PROHIBITED_CLASSES = "user.defined.server.side.script.prohibited.classes";
-
 	public static final String USERS_DELETE = "users.delete";
 
 	public static final String USERS_EMAIL_ADDRESS_REQUIRED = "users.email.address.required";
