@@ -80,7 +80,7 @@ public class EditConfigurationTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_86_assetType")) {
+				if (selenium.isElementPresent("_86_assetEntryType")) {
 					break;
 				}
 			}
@@ -90,7 +90,7 @@ public class EditConfigurationTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.select("_86_assetType",
+		selenium.select("_86_assetEntryType",
 			RuntimeVariables.replace("label=Blogs Entry"));
 
 		for (int second = 0;; second++) {

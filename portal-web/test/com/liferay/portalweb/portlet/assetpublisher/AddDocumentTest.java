@@ -73,7 +73,7 @@ public class AddDocumentTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Folders"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=AP Setup DL Test Folder"));
+		selenium.click(RuntimeVariables.replace("link=Document Home"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Add Document']"));

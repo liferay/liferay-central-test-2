@@ -33,9 +33,37 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AssertBlogViewCountTest extends BaseTestCase {
 	public void testAssertBlogViewCount() throws Exception {
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Asset Publisher Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click(RuntimeVariables.replace(
 				"link=Asset Publisher Test Page"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("7 Views"));
+
+		String ViewCount = selenium.getIncrementedText("//div[2]/span");
+		RuntimeVariables.setValue("ViewCount", ViewCount);
+		selenium.click(RuntimeVariables.replace("link=AP Setup Test Entry"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("link=Back"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isPartialText("//div[2]/span",
+				RuntimeVariables.getValue("ViewCount")));
+		selenium.click(RuntimeVariables.replace("link=AP Setup Blogs Test Page"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isPartialText("//div[2]/span",
+				RuntimeVariables.getValue("ViewCount")));
 	}
 }

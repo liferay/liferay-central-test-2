@@ -78,7 +78,7 @@ public class SelectDocumentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_86_assetType")) {
+				if (selenium.isElementPresent("_86_assetEntryType")) {
 					break;
 				}
 			}
@@ -88,7 +88,7 @@ public class SelectDocumentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.select("_86_assetType", "label=Document Library Document");
+		selenium.select("_86_assetEntryType", "label=Document Library Document");
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -97,7 +97,7 @@ public class SelectDocumentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=AP Setup DL Test Folder")) {
+				if (selenium.isElementPresent("link=Document Home")) {
 					break;
 				}
 			}
@@ -107,25 +107,8 @@ public class SelectDocumentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=AP Setup DL Test Folder"));
+		selenium.click(RuntimeVariables.replace("link=Document Home"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=AP Setup Test Document")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.click(RuntimeVariables.replace("link=AP Setup Test Document"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=AP Setup Test Document"));

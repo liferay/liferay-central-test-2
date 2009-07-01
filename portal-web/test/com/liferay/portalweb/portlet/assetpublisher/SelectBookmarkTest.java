@@ -78,7 +78,7 @@ public class SelectBookmarkTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_86_assetType")) {
+				if (selenium.isElementPresent("_86_assetEntryType")) {
 					break;
 				}
 			}
@@ -88,7 +88,7 @@ public class SelectBookmarkTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.select("_86_assetType", "label=Bookmarks Entry");
+		selenium.select("_86_assetEntryType", "label=Bookmarks Entry");
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

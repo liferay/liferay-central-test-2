@@ -78,7 +78,7 @@ public class SelectImageTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_86_assetType")) {
+				if (selenium.isElementPresent("_86_assetEntryType")) {
 					break;
 				}
 			}
@@ -88,7 +88,7 @@ public class SelectImageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.select("_86_assetType", "label=Image Gallery Image");
+		selenium.select("_86_assetEntryType", "label=Image Gallery Image");
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -109,26 +109,8 @@ public class SelectImageTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=AP Setup IG Test Folder"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//td[1]/a/img")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.click(RuntimeVariables.replace("//td[1]/a/img"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent("link=Image Gallery Image"));
 		assertTrue(selenium.isTextPresent(
 				"You have successfully updated the setup."));
 		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));

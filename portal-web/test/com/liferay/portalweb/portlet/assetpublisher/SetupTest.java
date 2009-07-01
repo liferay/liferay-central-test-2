@@ -392,7 +392,7 @@ public class SetupTest extends BaseTestCase {
 
 					try {
 						if (selenium.isElementPresent(
-									"//input[@value='Add Folder']")) {
+									"//input[@value='Add Document']")) {
 							break;
 						}
 					}
@@ -402,54 +402,6 @@ public class SetupTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click(RuntimeVariables.replace(
-						"//input[@value='Add Folder']"));
-				selenium.waitForPageToLoad("30000");
-
-				for (int second = 0;; second++) {
-					if (second >= 60) {
-						fail("timeout");
-					}
-
-					try {
-						if (selenium.isElementPresent("_20_name")) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
-
-					Thread.sleep(1000);
-				}
-
-				selenium.typeKeys("_20_name",
-					RuntimeVariables.replace("AP Setup DL Test Folder"));
-				selenium.type("_20_name",
-					RuntimeVariables.replace("AP Setup DL Test Folder"));
-				selenium.click(RuntimeVariables.replace(
-						"//input[@value='Save']"));
-				selenium.waitForPageToLoad("30000");
-
-				for (int second = 0;; second++) {
-					if (second >= 60) {
-						fail("timeout");
-					}
-
-					try {
-						if (selenium.isElementPresent(
-									"link=AP Setup DL Test Folder")) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
-
-					Thread.sleep(1000);
-				}
-
-				selenium.click(RuntimeVariables.replace(
-						"link=AP Setup DL Test Folder"));
-				selenium.waitForPageToLoad("30000");
 				selenium.click(RuntimeVariables.replace(
 						"//input[@value='Add Document']"));
 				selenium.waitForPageToLoad("30000");

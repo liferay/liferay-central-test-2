@@ -26,13 +26,13 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="AssertWebContentRatingsTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="EnableCommentsTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class AssertWebContentRatingsTest extends BaseTestCase {
-	public void testAssertWebContentRatings() throws Exception {
+public class EnableCommentsTest extends BaseTestCase {
+	public void testEnableComments() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -52,11 +52,9 @@ public class AssertWebContentRatingsTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"link=Asset Publisher Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=AP Setup Test Article"));
+		selenium.click(RuntimeVariables.replace("link=Configuration"));
 		selenium.waitForPageToLoad("30000");
-
-		String Votes = selenium.getIncrementedText("//td[3]/div[1]");
-		RuntimeVariables.setValue("Votes", Votes);
+		selenium.click("link=Display Settings");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -64,7 +62,7 @@ public class AssertWebContentRatingsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//img[5]")) {
+				if (selenium.isElementPresent("_86_enableCommentsCheckbox")) {
 					break;
 				}
 			}
@@ -74,23 +72,11 @@ public class AssertWebContentRatingsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//img[5]");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isPartialText("//td[3]/div[1]",
-							RuntimeVariables.getValue("Votes"))) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
+		selenium.click("_86_enableCommentsCheckbox");
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent(
+				"You have successfully updated the setup."));
+		assertTrue(selenium.isChecked("_86_enableCommentsCheckbox"));
 	}
 }

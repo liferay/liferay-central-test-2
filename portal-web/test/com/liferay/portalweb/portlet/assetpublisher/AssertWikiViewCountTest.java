@@ -26,13 +26,13 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="AssertWebContentRatingsTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="AssertWikiViewCountTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class AssertWebContentRatingsTest extends BaseTestCase {
-	public void testAssertWebContentRatings() throws Exception {
+public class AssertWikiViewCountTest extends BaseTestCase {
+	public void testAssertWikiViewCount() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -52,11 +52,23 @@ public class AssertWebContentRatingsTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"link=Asset Publisher Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=AP Setup Test Article"));
+
+		String ViewCount = selenium.getIncrementedText("//div[2]/span");
+		RuntimeVariables.setValue("ViewCount", ViewCount);
+		selenium.click(RuntimeVariables.replace("link=AP Setup Test Wiki Page"));
 		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("link=Back"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isPartialText("//div[2]/span",
+				RuntimeVariables.getValue("ViewCount")));
 
-		String Votes = selenium.getIncrementedText("//td[3]/div[1]");
-		RuntimeVariables.setValue("Votes", Votes);
+		String ViewCount2 = selenium.getIncrementedText("//div[2]/span");
+		RuntimeVariables.setValue("ViewCount2", ViewCount2);
+		selenium.click(RuntimeVariables.replace("link=AP Setup Wiki Test Page"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("//a[3]/span"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click("//td[5]/ul/li/strong/span");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -64,7 +76,7 @@ public class AssertWebContentRatingsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//img[5]")) {
+				if (selenium.isElementPresent("//div[5]/ul/li[6]/a")) {
 					break;
 				}
 			}
@@ -74,23 +86,18 @@ public class AssertWebContentRatingsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//img[5]");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isPartialText("//td[3]/div[1]",
-							RuntimeVariables.getValue("Votes"))) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
+		selenium.click(RuntimeVariables.replace("//div[5]/ul/li[6]/a"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.getConfirmation()
+						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
+		selenium.click(RuntimeVariables.replace("link=AP Setup Test Wiki Page"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isPartialText("//div[3]/div[2]",
+				RuntimeVariables.getValue("ViewCount2")));
+		selenium.click(RuntimeVariables.replace(
+				"link=Asset Publisher Test Page"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isPartialText("//div[2]/span",
+				RuntimeVariables.getValue("ViewCount2")));
 	}
 }

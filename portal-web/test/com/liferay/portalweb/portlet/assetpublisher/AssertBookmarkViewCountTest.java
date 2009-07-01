@@ -26,28 +26,20 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="EnableBlogViewCountTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="AssertBookmarkViewCountTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class EnableBlogViewCountTest extends BaseTestCase {
-	public void testEnableBlogViewCount() throws Exception {
-		selenium.click(RuntimeVariables.replace(
-				"link=Asset Publisher Test Page"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Configuration"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Display Settings");
-
+public class AssertBookmarkViewCountTest extends BaseTestCase {
+	public void testAssertBookmarkViewCount() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent(
-							"//div/table/tbody/tr/td[2]/a[2]/img")) {
+				if (selenium.isElementPresent("link=Asset Publisher Test Page")) {
 					break;
 				}
 			}
@@ -57,11 +49,18 @@ public class EnableBlogViewCountTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.addSelection("_86_availableMetadataFields",
-			RuntimeVariables.replace("label=View Count"));
-		selenium.click("//div/table/tbody/tr/td[2]/a[2]/img");
-		Thread.sleep(5000);
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.click(RuntimeVariables.replace(
+				"link=Asset Publisher Test Page"));
 		selenium.waitForPageToLoad("30000");
+
+		String ViewCount = selenium.getIncrementedText("//div[2]/span");
+		RuntimeVariables.setValue("ViewCount", ViewCount);
+		selenium.click(RuntimeVariables.replace("link=AP Setup Test Bookmark"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click("link=exact:http://www.liferay.com");
+		selenium.click(RuntimeVariables.replace("link=Back"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isPartialText("//div[2]/span",
+				RuntimeVariables.getValue("ViewCount")));
 	}
 }

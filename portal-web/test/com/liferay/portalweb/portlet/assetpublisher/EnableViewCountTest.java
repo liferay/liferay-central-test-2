@@ -26,13 +26,29 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="EnableBlogCommentsTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="EnableViewCountTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class EnableBlogCommentsTest extends BaseTestCase {
-	public void testEnableBlogComments() throws Exception {
+public class EnableViewCountTest extends BaseTestCase {
+	public void testEnableViewCount() throws Exception {
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Asset Publisher Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click(RuntimeVariables.replace(
 				"link=Asset Publisher Test Page"));
 		selenium.waitForPageToLoad("30000");
@@ -46,7 +62,8 @@ public class EnableBlogCommentsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_86_enableCommentsCheckbox")) {
+				if (selenium.isElementPresent(
+							"//div/table/tbody/tr/td[2]/a[2]/img")) {
 					break;
 				}
 			}
@@ -56,11 +73,15 @@ public class EnableBlogCommentsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("_86_enableCommentsCheckbox");
+		selenium.addSelection("_86_availableMetadataFields",
+			RuntimeVariables.replace("label=View Count"));
+		selenium.click("//div/table/tbody/tr/td[2]/a[2]/img");
+		Thread.sleep(5000);
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"You have successfully updated the setup."));
-		assertTrue(selenium.isChecked("_86_enableCommentsCheckbox"));
+		assertEquals(RuntimeVariables.replace("View Count"),
+			selenium.getText("_86_currentMetadataFields"));
 	}
 }

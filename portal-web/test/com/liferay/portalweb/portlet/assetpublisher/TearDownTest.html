@@ -335,21 +335,6 @@
 </tr>
 <tr>
 	<td>store</td>
-	<td>eval(selenium.isElementPresent('link=AP Setup DL Test Folder'))</td>
-	<td>APDLFolderPresent</td>
-</tr>
-<tr>
-	<td>gotoIf</td>
-	<td>!${APDLFolderPresent}</td>
-	<td>No AP DL Folder Present</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=AP Setup DL Test Folder</td>
-	<td></td>
-</tr>
-<tr>
-	<td>store</td>
 	<td>eval(selenium.isElementPresent('//td[5]/ul/li/strong/span'))</td>
 	<td>APDocumentPresentA</td>
 </tr>
@@ -365,12 +350,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//body/div[4]/ul/li[4]/a</td>
+	<td>//div[5]/ul/li[4]/a</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//body/div[4]/ul/li[4]/a</td>
+	<td>//div[5]/ul/li[4]/a</td>
 	<td></td>
 </tr>
 <tr>
@@ -400,12 +385,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//body/div[4]/ul/li[4]/a</td>
+	<td>//div[5]/ul/li[4]/a</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//body/div[4]/ul/li[4]/a</td>
+	<td>//div[5]/ul/li[4]/a</td>
 	<td></td>
 </tr>
 <tr>
@@ -416,41 +401,6 @@
 <tr>
 	<td>label</td>
 	<td>No AP Document PresentB</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//div[1]/span[1]/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>//td[4]/ul/li/strong/span</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>link=Delete</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Delete</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertConfirmation</td>
-	<td>Are you sure you want to delete this?</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Return to Full Page</td>
-	<td></td>
-</tr>
-<tr>
-	<td>label</td>
-	<td>No AP DL Folder Present</td>
 	<td></td>
 </tr>
 <tr>

@@ -78,7 +78,7 @@ public class SelectBlogsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_86_assetType")) {
+				if (selenium.isElementPresent("_86_assetEntryType")) {
 					break;
 				}
 			}
@@ -88,7 +88,7 @@ public class SelectBlogsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.select("_86_assetType", "label=Blogs Entry");
+		selenium.select("_86_assetEntryType", "label=Blogs Entry");
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

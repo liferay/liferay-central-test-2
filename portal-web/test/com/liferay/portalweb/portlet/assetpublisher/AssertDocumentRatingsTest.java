@@ -54,8 +54,43 @@ public class AssertDocumentRatingsTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=AP Setup Test Document"));
 		selenium.waitForPageToLoad("30000");
+
+		String Votes = selenium.getIncrementedText("//td[3]/div[1]");
+		RuntimeVariables.setValue("Votes", Votes);
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//img[5]")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click("//img[5]");
-		Thread.sleep(5000);
-		assertTrue(selenium.isTextPresent("Average (1 Vote)"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isPartialText("//td[3]/div[1]",
+							RuntimeVariables.getValue("Votes"))) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
 	}
 }

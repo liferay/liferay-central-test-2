@@ -26,13 +26,29 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="EnableBlogCommentsRatingsTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="EnableCommentsRatingsTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class EnableBlogCommentsRatingsTest extends BaseTestCase {
-	public void testEnableBlogCommentsRatings() throws Exception {
+public class EnableCommentsRatingsTest extends BaseTestCase {
+	public void testEnableCommentsRatings() throws Exception {
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Asset Publisher Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click(RuntimeVariables.replace(
 				"link=Asset Publisher Test Page"));
 		selenium.waitForPageToLoad("30000");

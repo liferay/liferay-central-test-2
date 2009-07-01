@@ -26,13 +26,13 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="AssertWebContentRatingsTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="AssertDocumentViewCountTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class AssertWebContentRatingsTest extends BaseTestCase {
-	public void testAssertWebContentRatings() throws Exception {
+public class AssertDocumentViewCountTest extends BaseTestCase {
+	public void testAssertDocumentViewCount() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -52,11 +52,20 @@ public class AssertWebContentRatingsTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"link=Asset Publisher Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=AP Setup Test Article"));
+
+		String ViewCount = selenium.getIncrementedText("//div[2]/span");
+		RuntimeVariables.setValue("ViewCount", ViewCount);
+		selenium.click(RuntimeVariables.replace("link=AP Setup Test Document"));
 		selenium.waitForPageToLoad("30000");
-
-		String Votes = selenium.getIncrementedText("//td[3]/div[1]");
-		RuntimeVariables.setValue("Votes", Votes);
+		selenium.click("link=AP Setup Test Document");
+		Thread.sleep(5000);
+		selenium.click(RuntimeVariables.replace("link=Back"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isPartialText("//div[2]/span",
+				RuntimeVariables.getValue("ViewCount")));
+		selenium.click(RuntimeVariables.replace("link=AP Setup DL Test Page"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click("//strong/span");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -64,7 +73,7 @@ public class AssertWebContentRatingsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//img[5]")) {
+				if (selenium.isElementPresent("link=View")) {
 					break;
 				}
 			}
@@ -74,23 +83,9 @@ public class AssertWebContentRatingsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//img[5]");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isPartialText("//td[3]/div[1]",
-							RuntimeVariables.getValue("Votes"))) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
+		selenium.click(RuntimeVariables.replace("link=View"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isPartialText("//tr[4]/td[2]",
+				RuntimeVariables.getValue("ViewCount")));
 	}
 }

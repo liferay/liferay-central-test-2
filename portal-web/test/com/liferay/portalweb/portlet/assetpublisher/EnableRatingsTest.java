@@ -26,13 +26,32 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="EnableBlogRatingsTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="EnableRatingsTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class EnableBlogRatingsTest extends BaseTestCase {
-	public void testEnableBlogRatings() throws Exception {
+public class EnableRatingsTest extends BaseTestCase {
+	public void testEnableRatings() throws Exception {
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Asset Publisher Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace(
+				"link=Asset Publisher Test Page"));
+		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Configuration"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click("link=Display Settings");

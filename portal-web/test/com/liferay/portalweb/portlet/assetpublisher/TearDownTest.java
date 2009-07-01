@@ -347,7 +347,7 @@ public class TearDownTest extends BaseTestCase {
 						"link=AP Setup DL Test Page");
 
 				if (!APDLPagePresent) {
-					label = 15;
+					label = 14;
 
 					continue;
 				}
@@ -377,23 +377,10 @@ public class TearDownTest extends BaseTestCase {
 						"//span[3]/a/img");
 
 				if (!APDLPortletPresent) {
-					label = 14;
-
-					continue;
-				}
-
-				boolean APDLFolderPresent = selenium.isElementPresent(
-						"link=AP Setup DL Test Folder");
-
-				if (!APDLFolderPresent) {
 					label = 13;
 
 					continue;
 				}
-
-				selenium.click(RuntimeVariables.replace(
-						"link=AP Setup DL Test Folder"));
-				selenium.waitForPageToLoad("30000");
 
 				boolean APDocumentPresentA = selenium.isElementPresent(
 						"//td[5]/ul/li/strong/span");
@@ -412,8 +399,7 @@ public class TearDownTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isElementPresent(
-									"//body/div[4]/ul/li[4]/a")) {
+						if (selenium.isElementPresent("//div[5]/ul/li[4]/a")) {
 							break;
 						}
 					}
@@ -423,8 +409,7 @@ public class TearDownTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click(RuntimeVariables.replace(
-						"//body/div[4]/ul/li[4]/a"));
+				selenium.click(RuntimeVariables.replace("//div[5]/ul/li[4]/a"));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
@@ -448,8 +433,7 @@ public class TearDownTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isElementPresent(
-									"//body/div[4]/ul/li[4]/a")) {
+						if (selenium.isElementPresent("//div[5]/ul/li[4]/a")) {
 							break;
 						}
 					}
@@ -459,42 +443,12 @@ public class TearDownTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click(RuntimeVariables.replace(
-						"//body/div[4]/ul/li[4]/a"));
+				selenium.click(RuntimeVariables.replace("//div[5]/ul/li[4]/a"));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 
 			case 12:
-				selenium.click(RuntimeVariables.replace("//div[1]/span[1]/a"));
-				selenium.waitForPageToLoad("30000");
-				selenium.click("//td[4]/ul/li/strong/span");
-
-				for (int second = 0;; second++) {
-					if (second >= 60) {
-						fail("timeout");
-					}
-
-					try {
-						if (selenium.isElementPresent("link=Delete")) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
-
-					Thread.sleep(1000);
-				}
-
-				selenium.click(RuntimeVariables.replace("link=Delete"));
-				selenium.waitForPageToLoad("30000");
-				assertTrue(selenium.getConfirmation()
-								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
-				selenium.click(RuntimeVariables.replace(
-						"link=Return to Full Page"));
-				selenium.waitForPageToLoad("30000");
-
-			case 13:
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -516,14 +470,14 @@ public class TearDownTest extends BaseTestCase {
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to remove this component[\\s\\S]$"));
 
+			case 13:
 			case 14:
-			case 15:
 
 				boolean APIGPagePresent = selenium.isElementPresent(
 						"link=AP Setup IG Test Page");
 
 				if (!APIGPagePresent) {
-					label = 20;
+					label = 19;
 
 					continue;
 				}
@@ -553,7 +507,7 @@ public class TearDownTest extends BaseTestCase {
 						"//span[3]/a/img");
 
 				if (!APIGPortletPresent) {
-					label = 19;
+					label = 18;
 
 					continue;
 				}
@@ -561,7 +515,7 @@ public class TearDownTest extends BaseTestCase {
 				boolean APIGFolderPresent = selenium.isElementPresent("//b");
 
 				if (!APIGFolderPresent) {
-					label = 18;
+					label = 17;
 
 					continue;
 				}
@@ -574,6 +528,57 @@ public class TearDownTest extends BaseTestCase {
 						"//div[1]/a/img");
 
 				if (!APImagePresentA) {
+					label = 15;
+
+					continue;
+				}
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isElementPresent("//img[@alt='Image']")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
+				selenium.click("//img[@alt='Image']");
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isElementPresent("//div[3]/ul/li[3]/a[2]")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
+				selenium.click(RuntimeVariables.replace(
+						"//div[3]/ul/li[3]/a[2]"));
+				selenium.waitForPageToLoad("30000");
+				assertTrue(selenium.getConfirmation()
+								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
+
+			case 15:
+
+				boolean APImagePresentB = selenium.isElementPresent(
+						"//div[1]/a/img");
+
+				if (!APImagePresentB) {
 					label = 16;
 
 					continue;
@@ -620,57 +625,6 @@ public class TearDownTest extends BaseTestCase {
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 
 			case 16:
-
-				boolean APImagePresentB = selenium.isElementPresent(
-						"//div[1]/a/img");
-
-				if (!APImagePresentB) {
-					label = 17;
-
-					continue;
-				}
-
-				for (int second = 0;; second++) {
-					if (second >= 60) {
-						fail("timeout");
-					}
-
-					try {
-						if (selenium.isElementPresent("//img[@alt='Image']")) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
-
-					Thread.sleep(1000);
-				}
-
-				selenium.click("//img[@alt='Image']");
-
-				for (int second = 0;; second++) {
-					if (second >= 60) {
-						fail("timeout");
-					}
-
-					try {
-						if (selenium.isElementPresent("//div[3]/ul/li[3]/a[2]")) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
-
-					Thread.sleep(1000);
-				}
-
-				selenium.click(RuntimeVariables.replace(
-						"//div[3]/ul/li[3]/a[2]"));
-				selenium.waitForPageToLoad("30000");
-				assertTrue(selenium.getConfirmation()
-								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
-
-			case 17:
 				selenium.click(RuntimeVariables.replace(
 						"link=Return to Full Page"));
 				selenium.waitForPageToLoad("30000");
@@ -697,7 +651,7 @@ public class TearDownTest extends BaseTestCase {
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 
-			case 18:
+			case 17:
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -719,8 +673,8 @@ public class TearDownTest extends BaseTestCase {
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to remove this component[\\s\\S]$"));
 
+			case 18:
 			case 19:
-			case 20:
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -756,7 +710,7 @@ public class TearDownTest extends BaseTestCase {
 						"link=AP Setup MB Test Page");
 
 				if (!APMBPagePresent) {
-					label = 24;
+					label = 23;
 
 					continue;
 				}
@@ -786,7 +740,7 @@ public class TearDownTest extends BaseTestCase {
 						"//span[3]/a/img");
 
 				if (!APMBPortletPresent) {
-					label = 23;
+					label = 22;
 
 					continue;
 				}
@@ -794,7 +748,7 @@ public class TearDownTest extends BaseTestCase {
 				boolean APCategoryPresent = selenium.isElementPresent("//b");
 
 				if (!APCategoryPresent) {
-					label = 22;
+					label = 21;
 
 					continue;
 				}
@@ -807,7 +761,7 @@ public class TearDownTest extends BaseTestCase {
 						"//td[7]/ul/li/strong/span");
 
 				if (!APThreadPresent) {
-					label = 21;
+					label = 20;
 
 					continue;
 				}
@@ -835,7 +789,7 @@ public class TearDownTest extends BaseTestCase {
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 
-			case 21:
+			case 20:
 				selenium.click(RuntimeVariables.replace("link=Categories"));
 				selenium.waitForPageToLoad("30000");
 				selenium.click("//td[5]/ul/li/strong/span");
@@ -861,7 +815,7 @@ public class TearDownTest extends BaseTestCase {
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 
-			case 22:
+			case 21:
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -883,14 +837,14 @@ public class TearDownTest extends BaseTestCase {
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to remove this component[\\s\\S]$"));
 
+			case 22:
 			case 23:
-			case 24:
 
 				boolean APWikiPagePresent = selenium.isElementPresent(
 						"link=AP Setup Wiki Test Page");
 
 				if (!APWikiPagePresent) {
-					label = 28;
+					label = 27;
 
 					continue;
 				}
@@ -920,7 +874,7 @@ public class TearDownTest extends BaseTestCase {
 						"//span[3]/a/img");
 
 				if (!APWikiPortletPresent) {
-					label = 27;
+					label = 26;
 
 					continue;
 				}
@@ -932,6 +886,40 @@ public class TearDownTest extends BaseTestCase {
 						"//td[6]/ul/li/strong/span");
 
 				if (!APWikiPresentA) {
+					label = 24;
+
+					continue;
+				}
+
+				selenium.click("//td[6]/ul/li/strong/span");
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isElementPresent("//div[5]/ul/li[6]/a")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
+				selenium.click(RuntimeVariables.replace("//div[5]/ul/li[6]/a"));
+				selenium.waitForPageToLoad("30000");
+				assertTrue(selenium.getConfirmation()
+								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
+
+			case 24:
+
+				boolean APWikiPresentB = selenium.isElementPresent(
+						"//td[6]/ul/li/strong/span");
+
+				if (!APWikiPresentB) {
 					label = 25;
 
 					continue;
@@ -962,40 +950,6 @@ public class TearDownTest extends BaseTestCase {
 
 			case 25:
 
-				boolean APWikiPresentB = selenium.isElementPresent(
-						"//td[6]/ul/li/strong/span");
-
-				if (!APWikiPresentB) {
-					label = 26;
-
-					continue;
-				}
-
-				selenium.click("//td[6]/ul/li/strong/span");
-
-				for (int second = 0;; second++) {
-					if (second >= 60) {
-						fail("timeout");
-					}
-
-					try {
-						if (selenium.isElementPresent("//div[5]/ul/li[6]/a")) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
-
-					Thread.sleep(1000);
-				}
-
-				selenium.click(RuntimeVariables.replace("//div[5]/ul/li[6]/a"));
-				selenium.waitForPageToLoad("30000");
-				assertTrue(selenium.getConfirmation()
-								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
-
-			case 26:
-
 				for (int second = 0;; second++) {
 					if (second >= 60) {
 						fail("timeout");
@@ -1016,14 +970,14 @@ public class TearDownTest extends BaseTestCase {
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to remove this component[\\s\\S]$"));
 
+			case 26:
 			case 27:
-			case 28:
 
 				boolean APPagePresent = selenium.isElementPresent(
 						"link=Asset Publisher Test Page");
 
 				if (!APPagePresent) {
-					label = 30;
+					label = 29;
 
 					continue;
 				}
@@ -1053,7 +1007,7 @@ public class TearDownTest extends BaseTestCase {
 						"//span[3]/a/img");
 
 				if (!APPortletPresent) {
-					label = 29;
+					label = 28;
 
 					continue;
 				}
@@ -1168,8 +1122,8 @@ public class TearDownTest extends BaseTestCase {
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to remove this component[\\s\\S]$"));
 
+			case 28:
 			case 29:
-			case 30:
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -1197,6 +1151,29 @@ public class TearDownTest extends BaseTestCase {
 						"//li[2]/ul/li[3]/a/span");
 
 				if (!BlogsPagesPresent) {
+					label = 30;
+
+					continue;
+				}
+
+				selenium.click(RuntimeVariables.replace(
+						"//div[@id='_88_layoutsTreeOutput']/ul/li[2]/ul/li[3]/a/span"));
+				selenium.waitForPageToLoad("30000");
+				selenium.click(RuntimeVariables.replace(
+						"//li[@id='_88_tabs3pageTabsId']/a"));
+				selenium.waitForPageToLoad("30000");
+				selenium.click(RuntimeVariables.replace(
+						"//input[@value='Delete']"));
+				selenium.waitForPageToLoad("30000");
+				assertTrue(selenium.getConfirmation()
+								   .matches("^Are you sure you want to delete the selected page[\\s\\S]$"));
+
+			case 30:
+
+				boolean BookmarkPagesPresent = selenium.isElementPresent(
+						"//li[2]/ul/li[3]/a/span");
+
+				if (!BookmarkPagesPresent) {
 					label = 31;
 
 					continue;
@@ -1216,10 +1193,10 @@ public class TearDownTest extends BaseTestCase {
 
 			case 31:
 
-				boolean BookmarkPagesPresent = selenium.isElementPresent(
+				boolean DLPagesPresent = selenium.isElementPresent(
 						"//li[2]/ul/li[3]/a/span");
 
-				if (!BookmarkPagesPresent) {
+				if (!DLPagesPresent) {
 					label = 32;
 
 					continue;
@@ -1239,10 +1216,10 @@ public class TearDownTest extends BaseTestCase {
 
 			case 32:
 
-				boolean DLPagesPresent = selenium.isElementPresent(
+				boolean IGPagesPresent = selenium.isElementPresent(
 						"//li[2]/ul/li[3]/a/span");
 
-				if (!DLPagesPresent) {
+				if (!IGPagesPresent) {
 					label = 33;
 
 					continue;
@@ -1262,10 +1239,10 @@ public class TearDownTest extends BaseTestCase {
 
 			case 33:
 
-				boolean IGPagesPresent = selenium.isElementPresent(
+				boolean MBPagesPresent = selenium.isElementPresent(
 						"//li[2]/ul/li[3]/a/span");
 
-				if (!IGPagesPresent) {
+				if (!MBPagesPresent) {
 					label = 34;
 
 					continue;
@@ -1285,10 +1262,10 @@ public class TearDownTest extends BaseTestCase {
 
 			case 34:
 
-				boolean MBPagesPresent = selenium.isElementPresent(
+				boolean WikiPagesPresent = selenium.isElementPresent(
 						"//li[2]/ul/li[3]/a/span");
 
-				if (!MBPagesPresent) {
+				if (!WikiPagesPresent) {
 					label = 35;
 
 					continue;
@@ -1308,34 +1285,11 @@ public class TearDownTest extends BaseTestCase {
 
 			case 35:
 
-				boolean WikiPagesPresent = selenium.isElementPresent(
-						"//li[2]/ul/li[3]/a/span");
-
-				if (!WikiPagesPresent) {
-					label = 36;
-
-					continue;
-				}
-
-				selenium.click(RuntimeVariables.replace(
-						"//div[@id='_88_layoutsTreeOutput']/ul/li[2]/ul/li[3]/a/span"));
-				selenium.waitForPageToLoad("30000");
-				selenium.click(RuntimeVariables.replace(
-						"//li[@id='_88_tabs3pageTabsId']/a"));
-				selenium.waitForPageToLoad("30000");
-				selenium.click(RuntimeVariables.replace(
-						"//input[@value='Delete']"));
-				selenium.waitForPageToLoad("30000");
-				assertTrue(selenium.getConfirmation()
-								   .matches("^Are you sure you want to delete the selected page[\\s\\S]$"));
-
-			case 36:
-
 				boolean AssetPagesPresent = selenium.isElementPresent(
 						"//li[2]/ul/li[3]/a/span");
 
 				if (!AssetPagesPresent) {
-					label = 37;
+					label = 36;
 
 					continue;
 				}
@@ -1354,7 +1308,7 @@ public class TearDownTest extends BaseTestCase {
 				assertTrue(selenium.isTextPresent(
 						"Your request processed successfully."));
 
-			case 37:
+			case 36:
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {

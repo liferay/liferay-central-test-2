@@ -26,13 +26,13 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="AssertWebContentRatingsTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="AssertWebContentViewCountTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class AssertWebContentRatingsTest extends BaseTestCase {
-	public void testAssertWebContentRatings() throws Exception {
+public class AssertWebContentViewCountTest extends BaseTestCase {
+	public void testAssertWebContentViewCount() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -52,45 +52,14 @@ public class AssertWebContentRatingsTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"link=Asset Publisher Test Page"));
 		selenium.waitForPageToLoad("30000");
+
+		String ViewCount = selenium.getIncrementedText("//div[2]/span");
+		RuntimeVariables.setValue("ViewCount", ViewCount);
 		selenium.click(RuntimeVariables.replace("link=AP Setup Test Article"));
 		selenium.waitForPageToLoad("30000");
-
-		String Votes = selenium.getIncrementedText("//td[3]/div[1]");
-		RuntimeVariables.setValue("Votes", Votes);
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//img[5]")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click("//img[5]");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isPartialText("//td[3]/div[1]",
-							RuntimeVariables.getValue("Votes"))) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
+		selenium.click(RuntimeVariables.replace("link=Back"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isPartialText("//div[2]/span",
+				RuntimeVariables.getValue("ViewCount")));
 	}
 }

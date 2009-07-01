@@ -24,19 +24,24 @@
 	<td></td>
 </tr>
 <tr>
+	<td>storeIncrementedText</td>
+	<td>//td[3]/div[1]</td>
+	<td>Votes</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//img[5]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>click</td>
 	<td>//img[5]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>pause</td>
-	<td>5000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Average (1 Vote)</td>
-	<td></td>
+	<td>waitForPartialText</td>
+	<td>//td[3]/div[1]</td>
+	<td>${Votes}</td>
 </tr>
 
 </tbody></table>
