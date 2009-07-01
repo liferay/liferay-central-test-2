@@ -28,6 +28,7 @@
 WikiNode node = (WikiNode)request.getAttribute(WebKeys.WIKI_NODE);
 WikiPage wikiPage = (WikiPage)request.getAttribute(WebKeys.WIKI_PAGE);
 
+String categoryId = ParamUtil.getString(request, "categoryId");
 String type = ParamUtil.getString(request, "type");
 String tagName = ParamUtil.getString(request, "tag");
 
@@ -35,6 +36,10 @@ PortletURL portletURL = renderResponse.createRenderURL();
 
 if (type.equals("all_pages")) {
 	portletURL.setParameter("struts_action", "/wiki/view_all_pages");
+}
+else if (type.equals("categorized_pages")) {
+	portletURL.setParameter("struts_action", "/wiki/view_categorized_pages");
+	portletURL.setParameter("categoryId", categoryId);
 }
 else if (type.equals("history")) {
 	portletURL.setParameter("struts_action", "/wiki/view_page_history");
@@ -167,6 +172,22 @@ if (type.equals("all_pages")) {
 	total = WikiPageLocalServiceUtil.getPagesCount(node.getNodeId(), true);
 	results = WikiPageLocalServiceUtil.getPages(node.getNodeId(), true, searchContainer.getStart(), searchContainer.getEnd());
 }
+else if (type.equals("categorized_pages") || type.equals("tagged_pages")) {
+	AssetEntryQuery assetEntryQuery = new AssetEntryQuery(WikiPage.class.getName(), searchContainer);
+
+	total = AssetEntryLocalServiceUtil.getEntriesCount(assetEntryQuery);
+	List<AssetEntry> assetEntries = AssetEntryLocalServiceUtil.getEntries(assetEntryQuery);
+
+	results = new ArrayList();
+
+	for (AssetEntry assetEntry : assetEntries) {
+		WikiPageResource pageResource = WikiPageResourceLocalServiceUtil.getPageResource(assetEntry.getClassPK());
+
+		WikiPage assetPage = WikiPageLocalServiceUtil.getPage(pageResource.getNodeId(), pageResource.getTitle());
+
+		results.add(assetPage);
+	}
+}
 else if (type.equals("orphan_pages")) {
 	List orphans = WikiPageLocalServiceUtil.getOrphans(node.getNodeId());
 
@@ -192,22 +213,6 @@ else if (type.equals("outgoing_links")) {
 else if (type.equals("recent_changes")) {
 	total = WikiPageLocalServiceUtil.getRecentChangesCount(node.getNodeId());
 	results = WikiPageLocalServiceUtil.getRecentChanges(node.getNodeId(), searchContainer.getStart(), searchContainer.getEnd());
-}
-else if (type.equals("tagged_pages")) {
-	AssetEntryQuery assetEntryQuery = new AssetEntryQuery(WikiPage.class.getName(), searchContainer);
-
-	total = AssetEntryLocalServiceUtil.getEntriesCount(assetEntryQuery);
-	List<AssetEntry> assetEntries = AssetEntryLocalServiceUtil.getEntries(assetEntryQuery);
-
-	results = new ArrayList();
-
-	for (AssetEntry assetEntry : assetEntries) {
-		WikiPageResource pageResource = WikiPageResourceLocalServiceUtil.getPageResource(assetEntry.getClassPK());
-
-		WikiPage assetPage = WikiPageLocalServiceUtil.getPage(pageResource.getNodeId(), pageResource.getTitle());
-
-		results.add(assetPage);
-	}
 }
 
 searchContainer.setTotal(total);

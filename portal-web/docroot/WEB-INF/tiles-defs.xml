@@ -1212,6 +1212,10 @@
 		<put name="portlet_content" value="/portlet/wiki/view_all_pages.jsp" />
 	</definition>
 
+	<definition name="portlet.wiki.view_categorized_pages" extends="portlet.wiki">
+		<put name="portlet_content" value="/portlet/wiki/view_categorized_pages.jsp" />
+	</definition>
+
 	<definition name="portlet.wiki.view_orphan_pages" extends="portlet.wiki">
 		<put name="portlet_content" value="/portlet/wiki/view_orphan_pages.jsp" />
 	</definition>

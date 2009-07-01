@@ -81,6 +81,11 @@ printPageURL.setWindowState(LiferayWindowState.POP_UP);
 
 printPageURL.setParameter("print", "true");
 
+PortletURL categorizedPagesURL = renderResponse.createRenderURL();
+
+categorizedPagesURL.setParameter("struts_action", "/wiki/view_categorized_pages");
+categorizedPagesURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
+
 PortletURL taggedPagesURL = renderResponse.createRenderURL();
 
 taggedPagesURL.setParameter("struts_action", "/wiki/view_tagged_pages");
@@ -189,7 +194,7 @@ AssetUtil.addLayoutTags(request, AssetTagLocalServiceUtil.getTags(WikiPage.class
 	<liferay-ui:asset-categories-summary
 		className="<%= WikiPage.class.getName() %>"
 		classPK="<%= wikiPage.getResourcePrimKey() %>"
-		portletURL="<%= PortletURLUtil.clone(taggedPagesURL, renderResponse) %>"
+		portletURL="<%= PortletURLUtil.clone(categorizedPagesURL, renderResponse) %>"
 	/>
 </div>
 
