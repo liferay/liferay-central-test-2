@@ -28,8 +28,8 @@
 WikiNode node = (WikiNode)request.getAttribute(WebKeys.WIKI_NODE);
 WikiPage wikiPage = (WikiPage)request.getAttribute(WebKeys.WIKI_PAGE);
 
-String categoryId = ParamUtil.getString(request, "categoryId");
 String type = ParamUtil.getString(request, "type");
+String categoryId = ParamUtil.getString(request, "categoryId");
 String tagName = ParamUtil.getString(request, "tag");
 
 PortletURL portletURL = renderResponse.createRenderURL();
@@ -166,7 +166,7 @@ if (type.equals("history")) {
 }
 
 int total = 0;
-List results = null;
+List<WikiPage> results = null;
 
 if (type.equals("all_pages")) {
 	total = WikiPageLocalServiceUtil.getPagesCount(node.getNodeId(), true);
@@ -178,7 +178,7 @@ else if (type.equals("categorized_pages") || type.equals("tagged_pages")) {
 	total = AssetEntryLocalServiceUtil.getEntriesCount(assetEntryQuery);
 	List<AssetEntry> assetEntries = AssetEntryLocalServiceUtil.getEntries(assetEntryQuery);
 
-	results = new ArrayList();
+	results = new ArrayList<WikiPage>();
 
 	for (AssetEntry assetEntry : assetEntries) {
 		WikiPageResource pageResource = WikiPageResourceLocalServiceUtil.getPageResource(assetEntry.getClassPK());
@@ -189,7 +189,7 @@ else if (type.equals("categorized_pages") || type.equals("tagged_pages")) {
 	}
 }
 else if (type.equals("orphan_pages")) {
-	List orphans = WikiPageLocalServiceUtil.getOrphans(node.getNodeId());
+	List<WikiPage> orphans = WikiPageLocalServiceUtil.getOrphans(node.getNodeId());
 
 	total = orphans.size();
 	results = ListUtil.subList(orphans, searchContainer.getStart(), searchContainer.getEnd());
@@ -199,13 +199,13 @@ else if (type.equals("history")) {
 	results = WikiPageLocalServiceUtil.getPages(wikiPage.getNodeId(), wikiPage.getTitle(), QueryUtil.ALL_POS, QueryUtil.ALL_POS, new PageVersionComparator());
 }
 else if (type.equals("incoming_links")) {
-	List links = WikiPageLocalServiceUtil.getIncomingLinks(wikiPage.getNodeId(), wikiPage.getTitle());
+	List<WikiPage> links = WikiPageLocalServiceUtil.getIncomingLinks(wikiPage.getNodeId(), wikiPage.getTitle());
 
 	total = links.size();
 	results = ListUtil.subList(links, searchContainer.getStart(), searchContainer.getEnd());
 }
 else if (type.equals("outgoing_links")) {
-	List links = WikiPageLocalServiceUtil.getOutgoingLinks(wikiPage.getNodeId(), wikiPage.getTitle());
+	List<WikiPage> links = WikiPageLocalServiceUtil.getOutgoingLinks(wikiPage.getNodeId(), wikiPage.getTitle());
 
 	total = links.size();
 	results = ListUtil.subList(links, searchContainer.getStart(), searchContainer.getEnd());
@@ -221,7 +221,7 @@ searchContainer.setResults(results);
 List resultRows = searchContainer.getResultRows();
 
 for (int i = 0; i < results.size(); i++) {
-	WikiPage curWikiPage = (WikiPage)results.get(i);
+	WikiPage curWikiPage = results.get(i);
 
 	curWikiPage = curWikiPage.toEscapedModel();
 

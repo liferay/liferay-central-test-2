@@ -32,9 +32,11 @@ String vocabularyName = null;
 
 if (categoryId != 0) {
 	AssetCategory assetCategory = AssetCategoryLocalServiceUtil.getAssetCategory(categoryId);
-	AssetVocabulary assetVocabulary =  AssetVocabularyLocalServiceUtil.getAssetVocabulary(assetCategory.getVocabularyId());
 
 	categoryName = assetCategory.getName();
+
+	AssetVocabulary assetVocabulary =  AssetVocabularyLocalServiceUtil.getAssetVocabulary(assetCategory.getVocabularyId());
+
 	vocabularyName = assetVocabulary.getName();
 }
 %>
@@ -42,7 +44,7 @@ if (categoryId != 0) {
 <liferay-util:include page="/html/portlet/wiki/top_links.jsp" />
 
 <h1 class="page-title">
-	<%= LanguageUtil.format(pageContext, "pages-with-x-x", new String[]{vocabularyName, categoryName}) %>
+	<%= LanguageUtil.format(pageContext, "pages-with-x-x", new String[] {vocabularyName, categoryName}) %>
 </h1>
 
 <liferay-util:include page="/html/portlet/wiki/page_iterator.jsp">
