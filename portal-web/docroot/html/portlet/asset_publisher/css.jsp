@@ -66,6 +66,11 @@
 .portlet-asset-publisher .asset-metadata {
 	clear: both;
 	margin-left: 25px;
+	overflow: hidden;
+}
+
+.ie .portlet-asset-publisher .asset-metadata {
+	height: 1%;
 }
 
 .portlet-asset-publisher .asset-more {
