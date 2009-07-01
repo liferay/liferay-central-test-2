@@ -65,6 +65,15 @@ public class SearchContainer<R> {
 	}
 
 	public SearchContainer(
+			PortletRequest portletRequest, PortletURL iteratorURL,
+			List<String> headerNames, String emptyResultsMessage) {
+
+		this(
+			portletRequest, null, null, DEFAULT_CUR_PARAM, DEFAULT_DELTA,
+			iteratorURL, headerNames, emptyResultsMessage);
+	}
+
+	public SearchContainer(
 		PortletRequest portletRequest, DisplayTerms displayTerms,
 		DisplayTerms searchTerms, String curParam, int delta,
 		PortletURL iteratorURL, List<String> headerNames,
