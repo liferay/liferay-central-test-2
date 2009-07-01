@@ -138,7 +138,7 @@ public class AddEntryTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("saveButton_33_name")) {
+				if (selenium.isElementPresent("_33_saveButton")) {
 					break;
 				}
 			}
@@ -148,7 +148,7 @@ public class AddEntryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("saveButton_33_name"));
+		selenium.click(RuntimeVariables.replace("_33_saveButton"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=Test Entry"));
 		assertTrue(selenium.isTextPresent(

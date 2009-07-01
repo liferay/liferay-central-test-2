@@ -26,13 +26,13 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="AddNullTitleTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddRatingTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class AddNullTitleTest extends BaseTestCase {
-	public void testAddNullTitle() throws Exception {
+public class AddRatingTest extends BaseTestCase {
+	public void testAddRating() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -51,11 +51,9 @@ public class AddNullTitleTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Blogs Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Add Blog Entry']"));
-		selenium.waitForPageToLoad("30000");
-		selenium.type("_33_title", RuntimeVariables.replace(""));
-		Thread.sleep(5000);
+
+		String votes = selenium.getIncrementedText("//td[3]/div[1]");
+		RuntimeVariables.setValue("votes", votes);
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -63,7 +61,7 @@ public class AddNullTitleTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_33_editor")) {
+				if (selenium.isElementPresent("//img[5]")) {
 					break;
 				}
 			}
@@ -73,13 +71,16 @@ public class AddNullTitleTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.click("//img[5]");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("FCKeditor1___Frame")) {
+				if (selenium.isPartialText("//td[3]/div[1]",
+							RuntimeVariables.getValue("votes"))) {
 					break;
 				}
 			}
@@ -88,70 +89,5 @@ public class AddNullTitleTest extends BaseTestCase {
 
 			Thread.sleep(1000);
 		}
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//textarea")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.selectFrame("//iframe[@id='_33_editor']");
-		selenium.selectFrame("//iframe[@id='FCKeditor1___Frame']");
-		selenium.selectFrame("//iframe");
-		selenium.typeKeys("//body",
-			RuntimeVariables.replace("This is a test null entr"));
-		selenium.type("//body",
-			RuntimeVariables.replace("This is a test null entry!"));
-		selenium.selectFrame("relative=top");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_33_saveButton")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click(RuntimeVariables.replace("_33_saveButton"));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("Please enter a valid title."));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_33_cancelButton")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click(RuntimeVariables.replace("_33_cancelButton"));
-		selenium.waitForPageToLoad("30000");
-		assertFalse(selenium.isElementPresent("link=Test Null Entry"));
 	}
 }

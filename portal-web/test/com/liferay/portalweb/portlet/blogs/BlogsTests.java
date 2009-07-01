@@ -42,6 +42,8 @@ public class BlogsTests extends BaseTests {
 		testSuite.addTestSuite(AddPortletTest.class);
 		testSuite.addTestSuite(AddEntryTest.class);
 		testSuite.addTestSuite(AddEntryCommentTest.class);
+		testSuite.addTestSuite(AssertViewCountTest.class);
+		testSuite.addTestSuite(AddRatingTest.class);
 		testSuite.addTestSuite(AddSecondEntryTest.class);
 		testSuite.addTestSuite(AddSecondEntryCommentTest.class);
 		testSuite.addTestSuite(EditSecondCommentTest.class);
