@@ -188,6 +188,7 @@
 				<liferay-ui:asset-categories-summary
 					className="<%= BlogsEntry.class.getName() %>"
 					classPK="<%= entry.getEntryId() %>"
+					portletURL="<%= renderResponse.createRenderURL() %>"
 				/>
 			</span>
 

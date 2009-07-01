@@ -59,6 +59,12 @@ showSearch = showSearch && (results.size() > 0);
 	</h1>
 </c:if>
 
+<c:if test="<%= Validator.isNotNull(categoryName) %>">
+	<h1 class="entry-title">
+		<%= LanguageUtil.format(pageContext, "entries-with-x-x", new String[]{vocabularyName, categoryName}) %>
+	</h1>
+</c:if>
+
 <%
 for (AssetEntry assetEntry : results) {
 	BlogsEntry entry = BlogsEntryLocalServiceUtil.getEntry(assetEntry.getClassPK());

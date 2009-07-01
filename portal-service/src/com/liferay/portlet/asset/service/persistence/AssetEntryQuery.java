@@ -26,7 +26,9 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
@@ -96,10 +98,19 @@ public class AssetEntryQuery {
 
 		_groupId = themeDisplay.getScopeGroupId();
 
+		long categoryId = GetterUtil.getLong(
+			ParamUtil.getString(portletRequest, "categoryId"));
+
+		if (categoryId != 0) {
+			_categoryIds = new long[]{categoryId};
+		}
+
 		String tagName = ParamUtil.getString(portletRequest, "tag");
 
-		_tagIds = AssetTagLocalServiceUtil.getTagIds(
-			_groupId, new String[] {tagName});
+		if (Validator.isNotNull(tagName)) {
+			_tagIds = AssetTagLocalServiceUtil.getTagIds(
+				_groupId, new String[] {tagName});
+		}
 	}
 
 	public long[] getCategoryIds() {

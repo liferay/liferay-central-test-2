@@ -27,7 +27,19 @@
 <%
 String redirect = currentURL;
 
+long categoryId = GetterUtil.getLong(ParamUtil.getString(request, "categoryId"));
 String tagName = ParamUtil.getString(request, "tag");
+
+String categoryName = null;
+String vocabularyName = null;
+
+if (categoryId != 0) {
+	AssetCategory assetCategory = AssetCategoryLocalServiceUtil.getAssetCategory(categoryId);
+	AssetVocabulary assetVocabulary =  AssetVocabularyLocalServiceUtil.getAssetVocabulary(assetCategory.getVocabularyId());
+
+	categoryName = assetCategory.getName();
+	vocabularyName = assetVocabulary.getName();
+}
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
