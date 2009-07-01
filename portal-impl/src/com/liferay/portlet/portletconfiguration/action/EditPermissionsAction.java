@@ -23,6 +23,7 @@
 package com.liferay.portlet.portletconfiguration.action;
 
 import com.liferay.portal.kernel.servlet.SessionErrors;
+import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -97,10 +98,7 @@ public class EditPermissionsAction extends EditConfigurationAction {
 				updateUserPermissions(actionRequest);
 			}
 
-			String redirect = ParamUtil.getString(
-				actionRequest, "permissionsRedirect");
-
-			sendRedirect(actionRequest, actionResponse, redirect);
+			SessionMessages.add(actionRequest, "request_processed");
 		}
 		catch (Exception e) {
 			if (e instanceof PrincipalException) {
