@@ -116,6 +116,11 @@
 			</bean>
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.kernel.scripting.ScriptingUtil" class="com.liferay.portal.kernel.scripting.ScriptingUtil">
+		<property name="scripting">
+			<bean class="com.liferay.portal.scripting.ScriptingImpl" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.kernel.search.BooleanQueryFactoryUtil" class="com.liferay.portal.kernel.search.BooleanQueryFactoryUtil">
 		<property name="booleanQueryFactory">
 			<bean class="com.liferay.portal.search.lucene.BooleanQueryFactoryImpl" />

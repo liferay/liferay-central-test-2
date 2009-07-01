@@ -20,32 +20,40 @@
  * SOFTWARE.
  */
 
-package com.liferay.util.bridges.groovy;
+package com.liferay.portal.kernel.scripting;
 
-import com.liferay.util.bridges.scripting.ScriptingPortlet;
+import java.util.Map;
+import java.util.Set;
 
-import javax.portlet.RenderRequest;
+import javax.portlet.PortletConfig;
+import javax.portlet.PortletContext;
+import javax.portlet.PortletRequest;
+import javax.portlet.PortletResponse;
 
 /**
- * <a href="GroovyPortlet.java.html"><b><i>View Source</i></b></a>
+ * <a href="Scripting.java.html"><b><i>View Source</i></b></a>
  *
- * @author Jorge Ferrer
  * @author Alberto Montero
- * @author Brian Wing Shun Chan
  *
  */
-public class GroovyPortlet extends ScriptingPortlet {
+public interface Scripting {
 
-	public void init() {
-		super.init();
+	public void clearCache(String language);
 
-		language = _LANGUAGE;
-	}
+	public Map<String, Object> eval(
+			Set<String> allowedClasses, Map<String, Object> inputObjects,
+			Set<String> outputNames, String language, String script)
+		throws ScriptingException;
 
-	protected String getFileName(RenderRequest renderRequest) {
-		return renderRequest.getParameter("groovyFile");
-	}
+	public void exec(
+			Set<String> allowedClasses, Map<String, Object> inputObjects,
+			String language, String script)
+		throws ScriptingException;
 
-	private static final String _LANGUAGE = "groovy";
+	public Map<String, Object> getPortletObjects(
+		PortletConfig portletConfig, PortletContext portletContext,
+		PortletRequest portletRequest, PortletResponse portletResponse);
+
+	public Set<String> getSupportedLanguages();
 
 }

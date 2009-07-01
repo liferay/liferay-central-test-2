@@ -1217,6 +1217,9 @@ public class PropsValues {
 	public static final boolean SCHEDULER_ENABLED = GetterUtil.getBoolean(
 		PropsUtil.get(PropsKeys.SCHEDULER_ENABLED));
 
+	public static final String[] SCRIPTING_FORBIDDEN_CLASSES =
+		PropsUtil.getArray(PropsKeys.SCRIPTING_FORBIDDEN_CLASSES);
+
 	public static final int[] SEARCH_CONTAINER_PAGE_DELTA_VALUES =
 		GetterUtil.getIntegerValues(
 			PropsUtil.getArray(PropsKeys.SEARCH_CONTAINER_PAGE_DELTA_VALUES));
