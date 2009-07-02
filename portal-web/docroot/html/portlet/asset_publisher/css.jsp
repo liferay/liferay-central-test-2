@@ -77,7 +77,7 @@
 	clear: left;
 }
 
-.portlet-asset-publisher .asset-tag-label {
+.portlet-asset-publisher .asset-entries-group-label {
 	background-color: #EEE;
 	clear: both;
 	padding: 3px;

@@ -136,7 +136,7 @@ else {
 	classNameIds = new long[0];
 }
 
-String category = GetterUtil.getString(preferences.getValue("category", StringPool.BLANK));
+long groupByVocabularyId = GetterUtil.getLong(preferences.getValue("group-by-vocabulary-id", StringPool.BLANK));
 
 long assetCategoryId = ParamUtil.getLong(request, "categoryId");
 

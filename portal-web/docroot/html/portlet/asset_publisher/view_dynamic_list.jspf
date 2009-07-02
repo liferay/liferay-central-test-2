@@ -47,7 +47,42 @@ assetEntryQuery.setTagIds(assetTagIds, andOperator);
 
 int total = 0;
 
-if (!groupByClass) {
+if (groupByVocabularyId > 0) {
+	AssetVocabulary assetVocabulary = AssetVocabularyLocalServiceUtil.getVocabulary(groupByVocabularyId);
+
+	List<AssetCategory> assetCategories = AssetCategoryLocalServiceUtil.getVocabularyRootCategories(assetVocabulary.getVocabularyId());
+
+	long[] originalAssetCategoryIds = assetEntryQuery.getCategoryIds();
+
+	for (AssetCategory assetCategory : assetCategories) {
+		long[] newAssetCategoryIds = ArrayUtil.append(originalAssetCategoryIds, assetCategory.getCategoryId());
+
+		assetEntryQuery.setCategoryIds(newAssetCategoryIds, andOperator);
+
+		int groupTotal = AssetEntryLocalServiceUtil.getEntriesCount(assetEntryQuery);
+
+		total += groupTotal;
+
+		searchContainer.setTotal(groupTotal);
+
+		List results = AssetEntryLocalServiceUtil.getEntries(assetEntryQuery);
+
+		searchContainer.setResults(results);
+
+		request.setAttribute("view.jsp-results", results);
+
+		if (results.size() > 0) {
+%>
+
+			<h3 class="asset-entries-group-label"><%= assetCategory.getName() %></h3>
+
+			<%@ include file="/html/portlet/asset_publisher/view_dynamic_list_asset.jspf" %>
+
+<%
+		}
+	}
+}
+else if (!groupByClass) {
 	assetEntryQuery.setClassNameIds(classNameIds);
 
 	total = AssetEntryLocalServiceUtil.getEntriesCount(assetEntryQuery);
@@ -86,7 +121,7 @@ else {
 		if (results.size() > 0) {
 %>
 
-			<h3><liferay-ui:message key="<%= _ASSET_ENTRY_TITLES[groupAssetEntryIndex] %>" /></h3>
+			<h3 class="asset-entries-group-label"><liferay-ui:message key="<%= _ASSET_ENTRY_TITLES[groupAssetEntryIndex] %>" /></h3>
 
 			<%@ include file="/html/portlet/asset_publisher/view_dynamic_list_asset.jspf" %>
 

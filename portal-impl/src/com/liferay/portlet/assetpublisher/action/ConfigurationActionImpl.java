@@ -242,7 +242,8 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 			actionRequest, "andOperator");
 
 		long classNameId = ParamUtil.getLong(actionRequest, "classNameId");
-		String category = ParamUtil.getString(actionRequest, "category");
+		long groupByVocabularyId = ParamUtil.getLong(
+			actionRequest, "groupByVocabularyId");
 		String displayStyle = ParamUtil.getString(
 			actionRequest, "displayStyle");
 		boolean showAssetTitle = ParamUtil.getBoolean(
@@ -289,7 +290,8 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 		preferences.setValue("and-operator", String.valueOf(andOperator));
 
 		preferences.setValue("class-name-id", String.valueOf(classNameId));
-		preferences.setValue("category", category);
+		preferences.setValue(
+			"group-by-vocabulary-id", String.valueOf(groupByVocabularyId));
 		preferences.setValue("display-style", displayStyle);
 		preferences.setValue(
 			"show-asset-title", String.valueOf(showAssetTitle));

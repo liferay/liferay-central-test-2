@@ -306,10 +306,10 @@ configurationActionURL.setParameter("portletResource", portletResource);
 
 						<br /><br />
 
-						<liferay-ui:message key="group-by-tags-within-tags-set" />
+						<liferay-ui:message key="group-by" />
 
-						<select name="<portlet:namespace />category">
-							<option value=""><liferay-ui:message key="none" /></option>
+						<select name="<portlet:namespace />groupByVocabularyId">
+							<option value=""></option>
 
 							<%
 							List<AssetVocabulary> assetVocabularies = AssetVocabularyLocalServiceUtil.getGroupVocabularies(scopeGroupId);
@@ -317,7 +317,7 @@ configurationActionURL.setParameter("portletResource", portletResource);
 							for (AssetVocabulary assetVocabulary : assetVocabularies) {
 							%>
 
-								<option <%= category.equals(assetVocabulary.getName()) ? "selected" : "" %> value="<%= assetVocabulary.getName() %>"><%= assetVocabulary.getName() %></option>
+								<option <%= groupByVocabularyId == assetVocabulary.getVocabularyId() ? "selected" : "" %> value="<%= assetVocabulary.getVocabularyId() %>"><%= assetVocabulary.getName() %></option>
 
 							<%
 							}
