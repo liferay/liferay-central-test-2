@@ -99,7 +99,7 @@ else {
 					<input id="<portlet:namespace /><%= fieldParam %>" name="<portlet:namespace /><%= fieldParam %>" type="hidden" value="<%= address.getAddressId() %>" />
 
 					<%
-					fieldParam = "addressStreet1" + addressesIndex;
+					fieldParam = "addressStreetOne" + addressesIndex;
 					%>
 
 					<div class="exp-ctrl-holder">
@@ -109,7 +109,7 @@ else {
 					</div>
 
 					<%
-					fieldParam = "addressStreet2" + addressesIndex;
+					fieldParam = "addressStreetTwo" + addressesIndex;
 					%>
 
 					<div class="exp-ctrl-holder">
@@ -119,7 +119,7 @@ else {
 					</div>
 
 					<%
-					fieldParam = "addressStreet3" + addressesIndex;
+					fieldParam = "addressStreetThree" + addressesIndex;
 					%>
 
 					<div class="exp-ctrl-holder">
