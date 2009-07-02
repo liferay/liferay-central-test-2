@@ -718,6 +718,7 @@
 		<field name="value" type="int" />
 	</model>
 	<model name="com.liferay.portlet.asset.model.AssetCategory">
+		<field name="uuid" type="String" />
 		<field name="categoryId" type="long" />
 		<field name="groupId" type="long" />
 		<field name="companyId" type="long" />
@@ -804,6 +805,7 @@
 		<field name="assetCount" type="int" />
 	</model>
 	<model name="com.liferay.portlet.asset.model.AssetVocabulary">
+		<field name="uuid" type="String" />
 		<field name="vocabularyId" type="long" />
 		<field name="groupId" type="long" />
 		<field name="companyId" type="long" />

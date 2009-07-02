@@ -50,6 +50,7 @@ public class AssetCategorySoap implements Serializable {
 	public static AssetCategorySoap toSoapModel(AssetCategory model) {
 		AssetCategorySoap soapModel = new AssetCategorySoap();
 
+		soapModel.setUuid(model.getUuid());
 		soapModel.setCategoryId(model.getCategoryId());
 		soapModel.setGroupId(model.getGroupId());
 		soapModel.setCompanyId(model.getCompanyId());
@@ -110,6 +111,14 @@ public class AssetCategorySoap implements Serializable {
 
 	public void setPrimaryKey(long pk) {
 		setCategoryId(pk);
+	}
+
+	public String getUuid() {
+		return _uuid;
+	}
+
+	public void setUuid(String uuid) {
+		_uuid = uuid;
 	}
 
 	public long getCategoryId() {
@@ -192,6 +201,7 @@ public class AssetCategorySoap implements Serializable {
 		_vocabularyId = vocabularyId;
 	}
 
+	private String _uuid;
 	private long _categoryId;
 	private long _groupId;
 	private long _companyId;

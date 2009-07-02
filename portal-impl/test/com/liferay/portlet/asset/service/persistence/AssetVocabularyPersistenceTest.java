@@ -72,6 +72,7 @@ public class AssetVocabularyPersistenceTest extends BasePersistenceTestCase {
 
 		AssetVocabulary newAssetVocabulary = _persistence.create(pk);
 
+		newAssetVocabulary.setUuid(randomString());
 		newAssetVocabulary.setGroupId(nextLong());
 		newAssetVocabulary.setCompanyId(nextLong());
 		newAssetVocabulary.setUserId(nextLong());
@@ -85,6 +86,8 @@ public class AssetVocabularyPersistenceTest extends BasePersistenceTestCase {
 
 		AssetVocabulary existingAssetVocabulary = _persistence.findByPrimaryKey(newAssetVocabulary.getPrimaryKey());
 
+		assertEquals(existingAssetVocabulary.getUuid(),
+			newAssetVocabulary.getUuid());
 		assertEquals(existingAssetVocabulary.getVocabularyId(),
 			newAssetVocabulary.getVocabularyId());
 		assertEquals(existingAssetVocabulary.getGroupId(),
@@ -148,6 +151,7 @@ public class AssetVocabularyPersistenceTest extends BasePersistenceTestCase {
 
 		AssetVocabulary assetVocabulary = _persistence.create(pk);
 
+		assetVocabulary.setUuid(randomString());
 		assetVocabulary.setGroupId(nextLong());
 		assetVocabulary.setCompanyId(nextLong());
 		assetVocabulary.setUserId(nextLong());

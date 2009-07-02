@@ -77,6 +77,7 @@ create table AnnouncementsFlag (
 );
 
 create table AssetCategory (
+	uuid_ VARCHAR(75) null,
 	categoryId LONG not null primary key,
 	groupId LONG,
 	companyId LONG,
@@ -171,6 +172,7 @@ create table AssetTagStats (
 );
 
 create table AssetVocabulary (
+	uuid_ VARCHAR(75) null,
 	vocabularyId LONG not null primary key,
 	groupId LONG,
 	companyId LONG,

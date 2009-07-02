@@ -55,6 +55,7 @@ public class AssetVocabularyJSONSerializer {
 	public static JSONObject toJSONObject(AssetVocabulary model) {
 		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
 
+		jsonObj.put("uuid", model.getUuid());
 		jsonObj.put("vocabularyId", model.getVocabularyId());
 		jsonObj.put("groupId", model.getGroupId());
 		jsonObj.put("companyId", model.getCompanyId());

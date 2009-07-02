@@ -55,6 +55,7 @@ public class AssetCategoryJSONSerializer {
 	public static JSONObject toJSONObject(AssetCategory model) {
 		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
 
+		jsonObj.put("uuid", model.getUuid());
 		jsonObj.put("categoryId", model.getCategoryId());
 		jsonObj.put("groupId", model.getGroupId());
 		jsonObj.put("companyId", model.getCompanyId());

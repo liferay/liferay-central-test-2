@@ -20,6 +20,8 @@ create index IX_D61ABE08 on AssetCategory (name, vocabularyId);
 create index IX_7BB1826B on AssetCategory (parentCategoryId);
 create index IX_9DDD15EA on AssetCategory (parentCategoryId, name);
 create index IX_B185E980 on AssetCategory (parentCategoryId, vocabularyId);
+create index IX_4D37BB00 on AssetCategory (uuid_);
+create unique index IX_E8D019AA on AssetCategory (uuid_, groupId);
 create index IX_287B1F89 on AssetCategory (vocabularyId);
 
 create index IX_99DA856 on AssetCategoryProperty (categoryId);
@@ -50,6 +52,8 @@ create unique index IX_56682CC4 on AssetTagStats (tagId, classNameId);
 create index IX_B22D908C on AssetVocabulary (companyId);
 create index IX_B6B8CA0E on AssetVocabulary (groupId);
 create unique index IX_C0AAD74D on AssetVocabulary (groupId, name);
+create index IX_55F58818 on AssetVocabulary (uuid_);
+create unique index IX_1B2B8792 on AssetVocabulary (uuid_, groupId);
 
 create index IX_72EF6041 on BlogsEntry (companyId);
 create index IX_E0D90212 on BlogsEntry (companyId, displayDate, draft);

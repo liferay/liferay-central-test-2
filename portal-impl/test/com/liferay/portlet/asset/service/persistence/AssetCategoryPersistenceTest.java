@@ -72,6 +72,7 @@ public class AssetCategoryPersistenceTest extends BasePersistenceTestCase {
 
 		AssetCategory newAssetCategory = _persistence.create(pk);
 
+		newAssetCategory.setUuid(randomString());
 		newAssetCategory.setGroupId(nextLong());
 		newAssetCategory.setCompanyId(nextLong());
 		newAssetCategory.setUserId(nextLong());
@@ -86,6 +87,7 @@ public class AssetCategoryPersistenceTest extends BasePersistenceTestCase {
 
 		AssetCategory existingAssetCategory = _persistence.findByPrimaryKey(newAssetCategory.getPrimaryKey());
 
+		assertEquals(existingAssetCategory.getUuid(), newAssetCategory.getUuid());
 		assertEquals(existingAssetCategory.getCategoryId(),
 			newAssetCategory.getCategoryId());
 		assertEquals(existingAssetCategory.getGroupId(),
@@ -150,6 +152,7 @@ public class AssetCategoryPersistenceTest extends BasePersistenceTestCase {
 
 		AssetCategory assetCategory = _persistence.create(pk);
 
+		assetCategory.setUuid(randomString());
 		assetCategory.setGroupId(nextLong());
 		assetCategory.setCompanyId(nextLong());
 		assetCategory.setUserId(nextLong());

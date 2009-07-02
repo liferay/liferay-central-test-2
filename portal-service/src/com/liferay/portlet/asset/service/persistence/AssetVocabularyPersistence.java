@@ -87,6 +87,49 @@ public interface AssetVocabularyPersistence extends BasePersistence {
 	public com.liferay.portlet.asset.model.AssetVocabulary fetchByPrimaryKey(
 		long vocabularyId) throws com.liferay.portal.SystemException;
 
+	public java.util.List<com.liferay.portlet.asset.model.AssetVocabulary> findByUuid(
+		java.lang.String uuid) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.asset.model.AssetVocabulary> findByUuid(
+		java.lang.String uuid, int start, int end)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.asset.model.AssetVocabulary> findByUuid(
+		java.lang.String uuid, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.asset.model.AssetVocabulary findByUuid_First(
+		java.lang.String uuid,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.asset.NoSuchVocabularyException;
+
+	public com.liferay.portlet.asset.model.AssetVocabulary findByUuid_Last(
+		java.lang.String uuid,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.asset.NoSuchVocabularyException;
+
+	public com.liferay.portlet.asset.model.AssetVocabulary[] findByUuid_PrevAndNext(
+		long vocabularyId, java.lang.String uuid,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.asset.NoSuchVocabularyException;
+
+	public com.liferay.portlet.asset.model.AssetVocabulary findByUUID_G(
+		java.lang.String uuid, long groupId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.asset.NoSuchVocabularyException;
+
+	public com.liferay.portlet.asset.model.AssetVocabulary fetchByUUID_G(
+		java.lang.String uuid, long groupId)
+		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.asset.model.AssetVocabulary fetchByUUID_G(
+		java.lang.String uuid, long groupId, boolean retrieveFromCache)
+		throws com.liferay.portal.SystemException;
+
 	public java.util.List<com.liferay.portlet.asset.model.AssetVocabulary> findByGroupId(
 		long groupId) throws com.liferay.portal.SystemException;
 
@@ -174,6 +217,13 @@ public interface AssetVocabularyPersistence extends BasePersistence {
 		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
+	public void removeByUuid(java.lang.String uuid)
+		throws com.liferay.portal.SystemException;
+
+	public void removeByUUID_G(java.lang.String uuid, long groupId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.asset.NoSuchVocabularyException;
+
 	public void removeByGroupId(long groupId)
 		throws com.liferay.portal.SystemException;
 
@@ -185,6 +235,12 @@ public interface AssetVocabularyPersistence extends BasePersistence {
 			com.liferay.portlet.asset.NoSuchVocabularyException;
 
 	public void removeAll() throws com.liferay.portal.SystemException;
+
+	public int countByUuid(java.lang.String uuid)
+		throws com.liferay.portal.SystemException;
+
+	public int countByUUID_G(java.lang.String uuid, long groupId)
+		throws com.liferay.portal.SystemException;
 
 	public int countByGroupId(long groupId)
 		throws com.liferay.portal.SystemException;

@@ -107,6 +107,67 @@ public class AssetVocabularyUtil {
 		return getPersistence().fetchByPrimaryKey(vocabularyId);
 	}
 
+	public static java.util.List<com.liferay.portlet.asset.model.AssetVocabulary> findByUuid(
+		java.lang.String uuid) throws com.liferay.portal.SystemException {
+		return getPersistence().findByUuid(uuid);
+	}
+
+	public static java.util.List<com.liferay.portlet.asset.model.AssetVocabulary> findByUuid(
+		java.lang.String uuid, int start, int end)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByUuid(uuid, start, end);
+	}
+
+	public static java.util.List<com.liferay.portlet.asset.model.AssetVocabulary> findByUuid(
+		java.lang.String uuid, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByUuid(uuid, start, end, obc);
+	}
+
+	public static com.liferay.portlet.asset.model.AssetVocabulary findByUuid_First(
+		java.lang.String uuid,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.asset.NoSuchVocabularyException {
+		return getPersistence().findByUuid_First(uuid, obc);
+	}
+
+	public static com.liferay.portlet.asset.model.AssetVocabulary findByUuid_Last(
+		java.lang.String uuid,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.asset.NoSuchVocabularyException {
+		return getPersistence().findByUuid_Last(uuid, obc);
+	}
+
+	public static com.liferay.portlet.asset.model.AssetVocabulary[] findByUuid_PrevAndNext(
+		long vocabularyId, java.lang.String uuid,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.asset.NoSuchVocabularyException {
+		return getPersistence().findByUuid_PrevAndNext(vocabularyId, uuid, obc);
+	}
+
+	public static com.liferay.portlet.asset.model.AssetVocabulary findByUUID_G(
+		java.lang.String uuid, long groupId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.asset.NoSuchVocabularyException {
+		return getPersistence().findByUUID_G(uuid, groupId);
+	}
+
+	public static com.liferay.portlet.asset.model.AssetVocabulary fetchByUUID_G(
+		java.lang.String uuid, long groupId)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByUUID_G(uuid, groupId);
+	}
+
+	public static com.liferay.portlet.asset.model.AssetVocabulary fetchByUUID_G(
+		java.lang.String uuid, long groupId, boolean retrieveFromCache)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByUUID_G(uuid, groupId, retrieveFromCache);
+	}
+
 	public static java.util.List<com.liferay.portlet.asset.model.AssetVocabulary> findByGroupId(
 		long groupId) throws com.liferay.portal.SystemException {
 		return getPersistence().findByGroupId(groupId);
@@ -236,6 +297,17 @@ public class AssetVocabularyUtil {
 		return getPersistence().findAll(start, end, obc);
 	}
 
+	public static void removeByUuid(java.lang.String uuid)
+		throws com.liferay.portal.SystemException {
+		getPersistence().removeByUuid(uuid);
+	}
+
+	public static void removeByUUID_G(java.lang.String uuid, long groupId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.asset.NoSuchVocabularyException {
+		getPersistence().removeByUUID_G(uuid, groupId);
+	}
+
 	public static void removeByGroupId(long groupId)
 		throws com.liferay.portal.SystemException {
 		getPersistence().removeByGroupId(groupId);
@@ -254,6 +326,16 @@ public class AssetVocabularyUtil {
 
 	public static void removeAll() throws com.liferay.portal.SystemException {
 		getPersistence().removeAll();
+	}
+
+	public static int countByUuid(java.lang.String uuid)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByUuid(uuid);
+	}
+
+	public static int countByUUID_G(java.lang.String uuid, long groupId)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByUUID_G(uuid, groupId);
 	}
 
 	public static int countByGroupId(long groupId)

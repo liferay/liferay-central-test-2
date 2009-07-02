@@ -65,6 +65,9 @@ import java.util.List;
 public class AssetCategoryModelImpl extends BaseModelImpl<AssetCategory> {
 	public static final String TABLE_NAME = "AssetCategory";
 	public static final Object[][] TABLE_COLUMNS = {
+			{ "uuid_", new Integer(Types.VARCHAR) },
+			
+
 			{ "categoryId", new Integer(Types.BIGINT) },
 			
 
@@ -94,7 +97,7 @@ public class AssetCategoryModelImpl extends BaseModelImpl<AssetCategory> {
 
 			{ "vocabularyId", new Integer(Types.BIGINT) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table AssetCategory (categoryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,parentCategoryId LONG,name VARCHAR(75) null,vocabularyId LONG)";
+	public static final String TABLE_SQL_CREATE = "create table AssetCategory (uuid_ VARCHAR(75) null,categoryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,parentCategoryId LONG,name VARCHAR(75) null,vocabularyId LONG)";
 	public static final String TABLE_SQL_DROP = "drop table AssetCategory";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -109,6 +112,7 @@ public class AssetCategoryModelImpl extends BaseModelImpl<AssetCategory> {
 	public static AssetCategory toModel(AssetCategorySoap soapModel) {
 		AssetCategory model = new AssetCategoryImpl();
 
+		model.setUuid(soapModel.getUuid());
 		model.setCategoryId(soapModel.getCategoryId());
 		model.setGroupId(soapModel.getGroupId());
 		model.setCompanyId(soapModel.getCompanyId());
@@ -153,6 +157,22 @@ public class AssetCategoryModelImpl extends BaseModelImpl<AssetCategory> {
 		return new Long(_categoryId);
 	}
 
+	public String getUuid() {
+		return GetterUtil.getString(_uuid);
+	}
+
+	public void setUuid(String uuid) {
+		_uuid = uuid;
+
+		if (_originalUuid == null) {
+			_originalUuid = uuid;
+		}
+	}
+
+	public String getOriginalUuid() {
+		return GetterUtil.getString(_originalUuid);
+	}
+
 	public long getCategoryId() {
 		return _categoryId;
 	}
@@ -167,6 +187,16 @@ public class AssetCategoryModelImpl extends BaseModelImpl<AssetCategory> {
 
 	public void setGroupId(long groupId) {
 		_groupId = groupId;
+
+		if (!_setOriginalGroupId) {
+			_setOriginalGroupId = true;
+
+			_originalGroupId = groupId;
+		}
+	}
+
+	public long getOriginalGroupId() {
+		return _originalGroupId;
 	}
 
 	public long getCompanyId() {
@@ -243,6 +273,7 @@ public class AssetCategoryModelImpl extends BaseModelImpl<AssetCategory> {
 			model.setNew(isNew());
 			model.setEscapedModel(true);
 
+			model.setUuid(HtmlUtil.escape(getUuid()));
 			model.setCategoryId(getCategoryId());
 			model.setGroupId(getGroupId());
 			model.setCompanyId(getCompanyId());
@@ -274,6 +305,7 @@ public class AssetCategoryModelImpl extends BaseModelImpl<AssetCategory> {
 	public Object clone() {
 		AssetCategoryImpl clone = new AssetCategoryImpl();
 
+		clone.setUuid(getUuid());
 		clone.setCategoryId(getCategoryId());
 		clone.setGroupId(getGroupId());
 		clone.setCompanyId(getCompanyId());
@@ -331,7 +363,9 @@ public class AssetCategoryModelImpl extends BaseModelImpl<AssetCategory> {
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 
-		sb.append("{categoryId=");
+		sb.append("{uuid=");
+		sb.append(getUuid());
+		sb.append(", categoryId=");
 		sb.append(getCategoryId());
 		sb.append(", groupId=");
 		sb.append(getGroupId());
@@ -363,6 +397,10 @@ public class AssetCategoryModelImpl extends BaseModelImpl<AssetCategory> {
 		sb.append("com.liferay.portlet.asset.model.AssetCategory");
 		sb.append("</model-name>");
 
+		sb.append(
+			"<column><column-name>uuid</column-name><column-value><![CDATA[");
+		sb.append(getUuid());
+		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>categoryId</column-name><column-value><![CDATA[");
 		sb.append(getCategoryId());
@@ -409,8 +447,12 @@ public class AssetCategoryModelImpl extends BaseModelImpl<AssetCategory> {
 		return sb.toString();
 	}
 
+	private String _uuid;
+	private String _originalUuid;
 	private long _categoryId;
 	private long _groupId;
+	private long _originalGroupId;
+	private boolean _setOriginalGroupId;
 	private long _companyId;
 	private long _userId;
 	private String _userName;

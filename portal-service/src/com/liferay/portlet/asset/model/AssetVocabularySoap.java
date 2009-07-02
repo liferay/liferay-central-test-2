@@ -50,6 +50,7 @@ public class AssetVocabularySoap implements Serializable {
 	public static AssetVocabularySoap toSoapModel(AssetVocabulary model) {
 		AssetVocabularySoap soapModel = new AssetVocabularySoap();
 
+		soapModel.setUuid(model.getUuid());
 		soapModel.setVocabularyId(model.getVocabularyId());
 		soapModel.setGroupId(model.getGroupId());
 		soapModel.setCompanyId(model.getCompanyId());
@@ -111,6 +112,14 @@ public class AssetVocabularySoap implements Serializable {
 
 	public void setPrimaryKey(long pk) {
 		setVocabularyId(pk);
+	}
+
+	public String getUuid() {
+		return _uuid;
+	}
+
+	public void setUuid(String uuid) {
+		_uuid = uuid;
 	}
 
 	public long getVocabularyId() {
@@ -185,6 +194,7 @@ public class AssetVocabularySoap implements Serializable {
 		_description = description;
 	}
 
+	private String _uuid;
 	private long _vocabularyId;
 	private long _groupId;
 	private long _companyId;

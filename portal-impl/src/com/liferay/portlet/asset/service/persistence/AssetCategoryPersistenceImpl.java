@@ -46,6 +46,8 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.service.persistence.BatchSessionUtil;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
@@ -72,6 +74,31 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl
 	public static final String FINDER_CLASS_NAME_ENTITY = AssetCategoryImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";
+	public static final FinderPath FINDER_PATH_FIND_BY_UUID = new FinderPath(AssetCategoryModelImpl.ENTITY_CACHE_ENABLED,
+			AssetCategoryModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByUuid",
+			new String[] { String.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_UUID = new FinderPath(AssetCategoryModelImpl.ENTITY_CACHE_ENABLED,
+			AssetCategoryModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByUuid",
+			new String[] {
+				String.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_UUID = new FinderPath(AssetCategoryModelImpl.ENTITY_CACHE_ENABLED,
+			AssetCategoryModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countByUuid",
+			new String[] { String.class.getName() });
+	public static final FinderPath FINDER_PATH_FETCH_BY_UUID_G = new FinderPath(AssetCategoryModelImpl.ENTITY_CACHE_ENABLED,
+			AssetCategoryModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_ENTITY, "fetchByUUID_G",
+			new String[] { String.class.getName(), Long.class.getName() });
+	public static final FinderPath FINDER_PATH_COUNT_BY_UUID_G = new FinderPath(AssetCategoryModelImpl.ENTITY_CACHE_ENABLED,
+			AssetCategoryModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countByUUID_G",
+			new String[] { String.class.getName(), Long.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_BY_PARENTCATEGORYID = new FinderPath(AssetCategoryModelImpl.ENTITY_CACHE_ENABLED,
 			AssetCategoryModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "findByParentCategoryId",
@@ -168,6 +195,11 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl
 		EntityCacheUtil.putResult(AssetCategoryModelImpl.ENTITY_CACHE_ENABLED,
 			AssetCategoryImpl.class, assetCategory.getPrimaryKey(),
 			assetCategory);
+
+		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
+			new Object[] {
+				assetCategory.getUuid(), new Long(assetCategory.getGroupId())
+			}, assetCategory);
 	}
 
 	public void cacheResult(List<AssetCategory> assetCategories) {
@@ -193,6 +225,10 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl
 
 		assetCategory.setNew(true);
 		assetCategory.setPrimaryKey(categoryId);
+
+		String uuid = PortalUUIDUtil.generate();
+
+		assetCategory.setUuid(uuid);
 
 		return assetCategory;
 	}
@@ -285,6 +321,14 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
+		AssetCategoryModelImpl assetCategoryModelImpl = (AssetCategoryModelImpl)assetCategory;
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
+			new Object[] {
+				assetCategoryModelImpl.getOriginalUuid(),
+				new Long(assetCategoryModelImpl.getOriginalGroupId())
+			});
+
 		EntityCacheUtil.removeResult(AssetCategoryModelImpl.ENTITY_CACHE_ENABLED,
 			AssetCategoryImpl.class, assetCategory.getPrimaryKey());
 
@@ -347,6 +391,16 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl
 	public AssetCategory updateImpl(
 		com.liferay.portlet.asset.model.AssetCategory assetCategory,
 		boolean merge) throws SystemException {
+		boolean isNew = assetCategory.isNew();
+
+		AssetCategoryModelImpl assetCategoryModelImpl = (AssetCategoryModelImpl)assetCategory;
+
+		if (Validator.isNull(assetCategory.getUuid())) {
+			String uuid = PortalUUIDUtil.generate();
+
+			assetCategory.setUuid(uuid);
+		}
+
 		Session session = null;
 
 		try {
@@ -368,6 +422,28 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl
 		EntityCacheUtil.putResult(AssetCategoryModelImpl.ENTITY_CACHE_ENABLED,
 			AssetCategoryImpl.class, assetCategory.getPrimaryKey(),
 			assetCategory);
+
+		if (!isNew &&
+				(!Validator.equals(assetCategory.getUuid(),
+					assetCategoryModelImpl.getOriginalUuid()) ||
+				(assetCategory.getGroupId() != assetCategoryModelImpl.getOriginalGroupId()))) {
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
+				new Object[] {
+					assetCategoryModelImpl.getOriginalUuid(),
+					new Long(assetCategoryModelImpl.getOriginalGroupId())
+				});
+		}
+
+		if (isNew ||
+				(!Validator.equals(assetCategory.getUuid(),
+					assetCategoryModelImpl.getOriginalUuid()) ||
+				(assetCategory.getGroupId() != assetCategoryModelImpl.getOriginalGroupId()))) {
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
+				new Object[] {
+					assetCategory.getUuid(),
+					new Long(assetCategory.getGroupId())
+				}, assetCategory);
+		}
 
 		return assetCategory;
 	}
@@ -416,6 +492,411 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return assetCategory;
+	}
+
+	public List<AssetCategory> findByUuid(String uuid)
+		throws SystemException {
+		Object[] finderArgs = new Object[] { uuid };
+
+		List<AssetCategory> list = (List<AssetCategory>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_UUID,
+				finderArgs, this);
+
+		if (list == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append(
+					"SELECT assetCategory FROM AssetCategory assetCategory WHERE ");
+
+				if (uuid == null) {
+					query.append("assetCategory.uuid IS NULL");
+				}
+				else {
+					query.append("assetCategory.uuid = ?");
+				}
+
+				query.append(" ");
+
+				query.append("ORDER BY ");
+
+				query.append("assetCategory.name ASC");
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (uuid != null) {
+					qPos.add(uuid);
+				}
+
+				list = q.list();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<AssetCategory>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_UUID, finderArgs,
+					list);
+
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	public List<AssetCategory> findByUuid(String uuid, int start, int end)
+		throws SystemException {
+		return findByUuid(uuid, start, end, null);
+	}
+
+	public List<AssetCategory> findByUuid(String uuid, int start, int end,
+		OrderByComparator obc) throws SystemException {
+		Object[] finderArgs = new Object[] {
+				uuid,
+				
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+			};
+
+		List<AssetCategory> list = (List<AssetCategory>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_UUID,
+				finderArgs, this);
+
+		if (list == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append(
+					"SELECT assetCategory FROM AssetCategory assetCategory WHERE ");
+
+				if (uuid == null) {
+					query.append("assetCategory.uuid IS NULL");
+				}
+				else {
+					query.append("assetCategory.uuid = ?");
+				}
+
+				query.append(" ");
+
+				if (obc != null) {
+					query.append("ORDER BY ");
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("assetCategory.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
+				}
+
+				else {
+					query.append("ORDER BY ");
+
+					query.append("assetCategory.name ASC");
+				}
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (uuid != null) {
+					qPos.add(uuid);
+				}
+
+				list = (List<AssetCategory>)QueryUtil.list(q, getDialect(),
+						start, end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<AssetCategory>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_UUID,
+					finderArgs, list);
+
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	public AssetCategory findByUuid_First(String uuid, OrderByComparator obc)
+		throws NoSuchCategoryException, SystemException {
+		List<AssetCategory> list = findByUuid(uuid, 0, 1, obc);
+
+		if (list.isEmpty()) {
+			StringBuilder msg = new StringBuilder();
+
+			msg.append("No AssetCategory exists with the key {");
+
+			msg.append("uuid=" + uuid);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchCategoryException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public AssetCategory findByUuid_Last(String uuid, OrderByComparator obc)
+		throws NoSuchCategoryException, SystemException {
+		int count = countByUuid(uuid);
+
+		List<AssetCategory> list = findByUuid(uuid, count - 1, count, obc);
+
+		if (list.isEmpty()) {
+			StringBuilder msg = new StringBuilder();
+
+			msg.append("No AssetCategory exists with the key {");
+
+			msg.append("uuid=" + uuid);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchCategoryException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public AssetCategory[] findByUuid_PrevAndNext(long categoryId, String uuid,
+		OrderByComparator obc) throws NoSuchCategoryException, SystemException {
+		AssetCategory assetCategory = findByPrimaryKey(categoryId);
+
+		int count = countByUuid(uuid);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuilder query = new StringBuilder();
+
+			query.append(
+				"SELECT assetCategory FROM AssetCategory assetCategory WHERE ");
+
+			if (uuid == null) {
+				query.append("assetCategory.uuid IS NULL");
+			}
+			else {
+				query.append("assetCategory.uuid = ?");
+			}
+
+			query.append(" ");
+
+			if (obc != null) {
+				query.append("ORDER BY ");
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("assetCategory.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
+			}
+
+			else {
+				query.append("ORDER BY ");
+
+				query.append("assetCategory.name ASC");
+			}
+
+			Query q = session.createQuery(query.toString());
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			if (uuid != null) {
+				qPos.add(uuid);
+			}
+
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
+					assetCategory);
+
+			AssetCategory[] array = new AssetCategoryImpl[3];
+
+			array[0] = (AssetCategory)objArray[0];
+			array[1] = (AssetCategory)objArray[1];
+			array[2] = (AssetCategory)objArray[2];
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public AssetCategory findByUUID_G(String uuid, long groupId)
+		throws NoSuchCategoryException, SystemException {
+		AssetCategory assetCategory = fetchByUUID_G(uuid, groupId);
+
+		if (assetCategory == null) {
+			StringBuilder msg = new StringBuilder();
+
+			msg.append("No AssetCategory exists with the key {");
+
+			msg.append("uuid=" + uuid);
+
+			msg.append(", ");
+			msg.append("groupId=" + groupId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchCategoryException(msg.toString());
+		}
+
+		return assetCategory;
+	}
+
+	public AssetCategory fetchByUUID_G(String uuid, long groupId)
+		throws SystemException {
+		return fetchByUUID_G(uuid, groupId, true);
+	}
+
+	public AssetCategory fetchByUUID_G(String uuid, long groupId,
+		boolean retrieveFromCache) throws SystemException {
+		Object[] finderArgs = new Object[] { uuid, new Long(groupId) };
+
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_UUID_G,
+					finderArgs, this);
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append(
+					"SELECT assetCategory FROM AssetCategory assetCategory WHERE ");
+
+				if (uuid == null) {
+					query.append("assetCategory.uuid IS NULL");
+				}
+				else {
+					query.append("assetCategory.uuid = ?");
+				}
+
+				query.append(" AND ");
+
+				query.append("assetCategory.groupId = ?");
+
+				query.append(" ");
+
+				query.append("ORDER BY ");
+
+				query.append("assetCategory.name ASC");
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (uuid != null) {
+					qPos.add(uuid);
+				}
+
+				qPos.add(groupId);
+
+				List<AssetCategory> list = q.list();
+
+				result = list;
+
+				AssetCategory assetCategory = null;
+
+				if (list.isEmpty()) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
+						finderArgs, list);
+				}
+				else {
+					assetCategory = list.get(0);
+
+					cacheResult(assetCategory);
+
+					if ((assetCategory.getUuid() == null) ||
+							!assetCategory.getUuid().equals(uuid) ||
+							(assetCategory.getGroupId() != groupId)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
+							finderArgs, assetCategory);
+					}
+				}
+
+				return assetCategory;
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (result == null) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
+						finderArgs, new ArrayList<AssetCategory>());
+				}
+
+				closeSession(session);
+			}
+		}
+		else {
+			if (result instanceof List) {
+				return null;
+			}
+			else {
+				return (AssetCategory)result;
+			}
+		}
 	}
 
 	public List<AssetCategory> findByParentCategoryId(long parentCategoryId)
@@ -1965,6 +2446,19 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl
 		return list;
 	}
 
+	public void removeByUuid(String uuid) throws SystemException {
+		for (AssetCategory assetCategory : findByUuid(uuid)) {
+			remove(assetCategory);
+		}
+	}
+
+	public void removeByUUID_G(String uuid, long groupId)
+		throws NoSuchCategoryException, SystemException {
+		AssetCategory assetCategory = findByUUID_G(uuid, groupId);
+
+		remove(assetCategory);
+	}
+
 	public void removeByParentCategoryId(long parentCategoryId)
 		throws SystemException {
 		for (AssetCategory assetCategory : findByParentCategoryId(
@@ -2006,6 +2500,121 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl
 		for (AssetCategory assetCategory : findAll()) {
 			remove(assetCategory);
 		}
+	}
+
+	public int countByUuid(String uuid) throws SystemException {
+		Object[] finderArgs = new Object[] { uuid };
+
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_UUID,
+				finderArgs, this);
+
+		if (count == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append("SELECT COUNT(assetCategory) ");
+				query.append("FROM AssetCategory assetCategory WHERE ");
+
+				if (uuid == null) {
+					query.append("assetCategory.uuid IS NULL");
+				}
+				else {
+					query.append("assetCategory.uuid = ?");
+				}
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (uuid != null) {
+					qPos.add(uuid);
+				}
+
+				count = (Long)q.uniqueResult();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_UUID,
+					finderArgs, count);
+
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	public int countByUUID_G(String uuid, long groupId)
+		throws SystemException {
+		Object[] finderArgs = new Object[] { uuid, new Long(groupId) };
+
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_UUID_G,
+				finderArgs, this);
+
+		if (count == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append("SELECT COUNT(assetCategory) ");
+				query.append("FROM AssetCategory assetCategory WHERE ");
+
+				if (uuid == null) {
+					query.append("assetCategory.uuid IS NULL");
+				}
+				else {
+					query.append("assetCategory.uuid = ?");
+				}
+
+				query.append(" AND ");
+
+				query.append("assetCategory.groupId = ?");
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (uuid != null) {
+					qPos.add(uuid);
+				}
+
+				qPos.add(groupId);
+
+				count = (Long)q.uniqueResult();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_UUID_G,
+					finderArgs, count);
+
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
 	}
 
 	public int countByParentCategoryId(long parentCategoryId)

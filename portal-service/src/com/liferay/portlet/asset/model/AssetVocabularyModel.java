@@ -51,6 +51,10 @@ public interface AssetVocabularyModel extends BaseModel<AssetVocabulary> {
 
 	public void setPrimaryKey(long pk);
 
+	public String getUuid();
+
+	public void setUuid(String uuid);
+
 	public long getVocabularyId();
 
 	public void setVocabularyId(long vocabularyId);

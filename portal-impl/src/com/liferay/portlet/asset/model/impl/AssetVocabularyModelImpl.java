@@ -65,6 +65,9 @@ import java.util.List;
 public class AssetVocabularyModelImpl extends BaseModelImpl<AssetVocabulary> {
 	public static final String TABLE_NAME = "AssetVocabulary";
 	public static final Object[][] TABLE_COLUMNS = {
+			{ "uuid_", new Integer(Types.VARCHAR) },
+			
+
 			{ "vocabularyId", new Integer(Types.BIGINT) },
 			
 
@@ -91,7 +94,7 @@ public class AssetVocabularyModelImpl extends BaseModelImpl<AssetVocabulary> {
 
 			{ "description", new Integer(Types.VARCHAR) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table AssetVocabulary (vocabularyId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name VARCHAR(75) null,description VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table AssetVocabulary (uuid_ VARCHAR(75) null,vocabularyId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name VARCHAR(75) null,description VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table AssetVocabulary";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -106,6 +109,7 @@ public class AssetVocabularyModelImpl extends BaseModelImpl<AssetVocabulary> {
 	public static AssetVocabulary toModel(AssetVocabularySoap soapModel) {
 		AssetVocabulary model = new AssetVocabularyImpl();
 
+		model.setUuid(soapModel.getUuid());
 		model.setVocabularyId(soapModel.getVocabularyId());
 		model.setGroupId(soapModel.getGroupId());
 		model.setCompanyId(soapModel.getCompanyId());
@@ -146,6 +150,22 @@ public class AssetVocabularyModelImpl extends BaseModelImpl<AssetVocabulary> {
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_vocabularyId);
+	}
+
+	public String getUuid() {
+		return GetterUtil.getString(_uuid);
+	}
+
+	public void setUuid(String uuid) {
+		_uuid = uuid;
+
+		if (_originalUuid == null) {
+			_originalUuid = uuid;
+		}
+	}
+
+	public String getOriginalUuid() {
+		return GetterUtil.getString(_originalUuid);
 	}
 
 	public long getVocabularyId() {
@@ -248,6 +268,7 @@ public class AssetVocabularyModelImpl extends BaseModelImpl<AssetVocabulary> {
 			model.setNew(isNew());
 			model.setEscapedModel(true);
 
+			model.setUuid(HtmlUtil.escape(getUuid()));
 			model.setVocabularyId(getVocabularyId());
 			model.setGroupId(getGroupId());
 			model.setCompanyId(getCompanyId());
@@ -278,6 +299,7 @@ public class AssetVocabularyModelImpl extends BaseModelImpl<AssetVocabulary> {
 	public Object clone() {
 		AssetVocabularyImpl clone = new AssetVocabularyImpl();
 
+		clone.setUuid(getUuid());
 		clone.setVocabularyId(getVocabularyId());
 		clone.setGroupId(getGroupId());
 		clone.setCompanyId(getCompanyId());
@@ -334,7 +356,9 @@ public class AssetVocabularyModelImpl extends BaseModelImpl<AssetVocabulary> {
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 
-		sb.append("{vocabularyId=");
+		sb.append("{uuid=");
+		sb.append(getUuid());
+		sb.append(", vocabularyId=");
 		sb.append(getVocabularyId());
 		sb.append(", groupId=");
 		sb.append(getGroupId());
@@ -364,6 +388,10 @@ public class AssetVocabularyModelImpl extends BaseModelImpl<AssetVocabulary> {
 		sb.append("com.liferay.portlet.asset.model.AssetVocabulary");
 		sb.append("</model-name>");
 
+		sb.append(
+			"<column><column-name>uuid</column-name><column-value><![CDATA[");
+		sb.append(getUuid());
+		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>vocabularyId</column-name><column-value><![CDATA[");
 		sb.append(getVocabularyId());
@@ -406,6 +434,8 @@ public class AssetVocabularyModelImpl extends BaseModelImpl<AssetVocabulary> {
 		return sb.toString();
 	}
 
+	private String _uuid;
+	private String _originalUuid;
 	private long _vocabularyId;
 	private long _groupId;
 	private long _originalGroupId;

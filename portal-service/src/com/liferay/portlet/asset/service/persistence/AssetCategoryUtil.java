@@ -107,6 +107,67 @@ public class AssetCategoryUtil {
 		return getPersistence().fetchByPrimaryKey(categoryId);
 	}
 
+	public static java.util.List<com.liferay.portlet.asset.model.AssetCategory> findByUuid(
+		java.lang.String uuid) throws com.liferay.portal.SystemException {
+		return getPersistence().findByUuid(uuid);
+	}
+
+	public static java.util.List<com.liferay.portlet.asset.model.AssetCategory> findByUuid(
+		java.lang.String uuid, int start, int end)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByUuid(uuid, start, end);
+	}
+
+	public static java.util.List<com.liferay.portlet.asset.model.AssetCategory> findByUuid(
+		java.lang.String uuid, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByUuid(uuid, start, end, obc);
+	}
+
+	public static com.liferay.portlet.asset.model.AssetCategory findByUuid_First(
+		java.lang.String uuid,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.asset.NoSuchCategoryException {
+		return getPersistence().findByUuid_First(uuid, obc);
+	}
+
+	public static com.liferay.portlet.asset.model.AssetCategory findByUuid_Last(
+		java.lang.String uuid,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.asset.NoSuchCategoryException {
+		return getPersistence().findByUuid_Last(uuid, obc);
+	}
+
+	public static com.liferay.portlet.asset.model.AssetCategory[] findByUuid_PrevAndNext(
+		long categoryId, java.lang.String uuid,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.asset.NoSuchCategoryException {
+		return getPersistence().findByUuid_PrevAndNext(categoryId, uuid, obc);
+	}
+
+	public static com.liferay.portlet.asset.model.AssetCategory findByUUID_G(
+		java.lang.String uuid, long groupId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.asset.NoSuchCategoryException {
+		return getPersistence().findByUUID_G(uuid, groupId);
+	}
+
+	public static com.liferay.portlet.asset.model.AssetCategory fetchByUUID_G(
+		java.lang.String uuid, long groupId)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByUUID_G(uuid, groupId);
+	}
+
+	public static com.liferay.portlet.asset.model.AssetCategory fetchByUUID_G(
+		java.lang.String uuid, long groupId, boolean retrieveFromCache)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByUUID_G(uuid, groupId, retrieveFromCache);
+	}
+
 	public static java.util.List<com.liferay.portlet.asset.model.AssetCategory> findByParentCategoryId(
 		long parentCategoryId) throws com.liferay.portal.SystemException {
 		return getPersistence().findByParentCategoryId(parentCategoryId);
@@ -363,6 +424,17 @@ public class AssetCategoryUtil {
 		return getPersistence().findAll(start, end, obc);
 	}
 
+	public static void removeByUuid(java.lang.String uuid)
+		throws com.liferay.portal.SystemException {
+		getPersistence().removeByUuid(uuid);
+	}
+
+	public static void removeByUUID_G(java.lang.String uuid, long groupId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.asset.NoSuchCategoryException {
+		getPersistence().removeByUUID_G(uuid, groupId);
+	}
+
 	public static void removeByParentCategoryId(long parentCategoryId)
 		throws com.liferay.portal.SystemException {
 		getPersistence().removeByParentCategoryId(parentCategoryId);
@@ -390,6 +462,16 @@ public class AssetCategoryUtil {
 
 	public static void removeAll() throws com.liferay.portal.SystemException {
 		getPersistence().removeAll();
+	}
+
+	public static int countByUuid(java.lang.String uuid)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByUuid(uuid);
+	}
+
+	public static int countByUUID_G(java.lang.String uuid, long groupId)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByUUID_G(uuid, groupId);
 	}
 
 	public static int countByParentCategoryId(long parentCategoryId)
