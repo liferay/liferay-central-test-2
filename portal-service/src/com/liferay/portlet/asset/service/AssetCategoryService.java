@@ -57,7 +57,7 @@ import com.liferay.portal.kernel.annotation.Transactional;
 public interface AssetCategoryService {
 	public com.liferay.portlet.asset.model.AssetCategory addCategory(
 		long parentCategoryId, java.lang.String name, long vocabularyId,
-		java.lang.String[] properties,
+		java.lang.String[] categoryProperties,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
@@ -98,12 +98,12 @@ public interface AssetCategoryService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.kernel.json.JSONArray search(long groupId,
-		java.lang.String name, java.lang.String[] properties, int start, int end)
-		throws com.liferay.portal.SystemException;
+		java.lang.String name, java.lang.String[] categoryProperties,
+		int start, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.asset.model.AssetCategory updateCategory(
 		long categoryId, long parentCategoryId, java.lang.String name,
-		long vocabularyId, java.lang.String[] properties)
+		long vocabularyId, java.lang.String[] categoryProperties)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 }

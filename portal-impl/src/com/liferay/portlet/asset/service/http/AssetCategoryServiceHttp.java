@@ -76,7 +76,7 @@ public class AssetCategoryServiceHttp {
 	public static com.liferay.portlet.asset.model.AssetCategory addCategory(
 		HttpPrincipal httpPrincipal, long parentCategoryId,
 		java.lang.String name, long vocabularyId,
-		java.lang.String[] properties,
+		java.lang.String[] categoryProperties,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
@@ -91,9 +91,9 @@ public class AssetCategoryServiceHttp {
 
 			Object paramObj2 = new LongWrapper(vocabularyId);
 
-			Object paramObj3 = properties;
+			Object paramObj3 = categoryProperties;
 
-			if (properties == null) {
+			if (categoryProperties == null) {
 				paramObj3 = new NullWrapper("[Ljava.lang.String;");
 			}
 
@@ -356,7 +356,7 @@ public class AssetCategoryServiceHttp {
 
 	public static com.liferay.portal.kernel.json.JSONArray search(
 		HttpPrincipal httpPrincipal, long groupId, java.lang.String name,
-		java.lang.String[] properties, int start, int end)
+		java.lang.String[] categoryProperties, int start, int end)
 		throws com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(groupId);
@@ -367,9 +367,9 @@ public class AssetCategoryServiceHttp {
 				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj2 = properties;
+			Object paramObj2 = categoryProperties;
 
-			if (properties == null) {
+			if (categoryProperties == null) {
 				paramObj2 = new NullWrapper("[Ljava.lang.String;");
 			}
 
@@ -407,7 +407,8 @@ public class AssetCategoryServiceHttp {
 
 	public static com.liferay.portlet.asset.model.AssetCategory updateCategory(
 		HttpPrincipal httpPrincipal, long categoryId, long parentCategoryId,
-		java.lang.String name, long vocabularyId, java.lang.String[] properties)
+		java.lang.String name, long vocabularyId,
+		java.lang.String[] categoryProperties)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
@@ -423,9 +424,9 @@ public class AssetCategoryServiceHttp {
 
 			Object paramObj3 = new LongWrapper(vocabularyId);
 
-			Object paramObj4 = properties;
+			Object paramObj4 = categoryProperties;
 
-			if (properties == null) {
+			if (categoryProperties == null) {
 				paramObj4 = new NullWrapper("[Ljava.lang.String;");
 			}
 

@@ -35,9 +35,9 @@ public class AssetCategoryFinderUtil {
 	}
 
 	public static int countByG_N_P(long groupId, java.lang.String name,
-		java.lang.String[] properties)
+		java.lang.String[] categoryProperties)
 		throws com.liferay.portal.SystemException {
-		return getFinder().countByG_N_P(groupId, name, properties);
+		return getFinder().countByG_N_P(groupId, name, categoryProperties);
 	}
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetCategory> findByEntryId(

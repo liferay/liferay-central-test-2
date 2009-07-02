@@ -47,13 +47,13 @@ package com.liferay.portlet.asset.service;
 public class AssetCategoryServiceUtil {
 	public static com.liferay.portlet.asset.model.AssetCategory addCategory(
 		long parentCategoryId, java.lang.String name, long vocabularyId,
-		java.lang.String[] properties,
+		java.lang.String[] categoryProperties,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
 				   .addCategory(parentCategoryId, name, vocabularyId,
-			properties, serviceContext);
+			categoryProperties, serviceContext);
 	}
 
 	public static void deleteCategory(long categoryId)
@@ -98,19 +98,20 @@ public class AssetCategoryServiceUtil {
 	}
 
 	public static com.liferay.portal.kernel.json.JSONArray search(
-		long groupId, java.lang.String name, java.lang.String[] properties,
-		int start, int end) throws com.liferay.portal.SystemException {
-		return getService().search(groupId, name, properties, start, end);
+		long groupId, java.lang.String name,
+		java.lang.String[] categoryProperties, int start, int end)
+		throws com.liferay.portal.SystemException {
+		return getService().search(groupId, name, categoryProperties, start, end);
 	}
 
 	public static com.liferay.portlet.asset.model.AssetCategory updateCategory(
 		long categoryId, long parentCategoryId, java.lang.String name,
-		long vocabularyId, java.lang.String[] properties)
+		long vocabularyId, java.lang.String[] categoryProperties)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
 				   .updateCategory(categoryId, parentCategoryId, name,
-			vocabularyId, properties);
+			vocabularyId, categoryProperties);
 	}
 
 	public static AssetCategoryService getService() {

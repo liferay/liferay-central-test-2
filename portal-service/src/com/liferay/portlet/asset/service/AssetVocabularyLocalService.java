@@ -101,12 +101,6 @@ public interface AssetVocabularyLocalService {
 		boolean merge) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.asset.model.AssetVocabulary addVocabulary(
-		long userId, java.lang.String name,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
-	public com.liferay.portlet.asset.model.AssetVocabulary addVocabulary(
 		java.lang.String uuid, long userId, java.lang.String name,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,

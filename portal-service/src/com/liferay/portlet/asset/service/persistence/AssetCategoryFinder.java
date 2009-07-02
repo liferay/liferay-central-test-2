@@ -33,7 +33,7 @@ public interface AssetCategoryFinder {
 		java.lang.String name) throws com.liferay.portal.SystemException;
 
 	public int countByG_N_P(long groupId, java.lang.String name,
-		java.lang.String[] properties)
+		java.lang.String[] categoryProperties)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> findByEntryId(

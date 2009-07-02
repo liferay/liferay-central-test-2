@@ -83,12 +83,12 @@ import java.rmi.RemoteException;
 public class AssetCategoryServiceSoap {
 	public static com.liferay.portlet.asset.model.AssetCategorySoap addCategory(
 		long parentCategoryId, java.lang.String name, long vocabularyId,
-		java.lang.String[] properties,
+		java.lang.String[] categoryProperties,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
 			com.liferay.portlet.asset.model.AssetCategory returnValue = AssetCategoryServiceUtil.addCategory(parentCategoryId,
-					name, vocabularyId, properties, serviceContext);
+					name, vocabularyId, categoryProperties, serviceContext);
 
 			return com.liferay.portlet.asset.model.AssetCategorySoap.toSoapModel(returnValue);
 		}
@@ -186,11 +186,12 @@ public class AssetCategoryServiceSoap {
 	}
 
 	public static com.liferay.portal.kernel.json.JSONArray search(
-		long groupId, java.lang.String name, java.lang.String[] properties,
-		int start, int end) throws RemoteException {
+		long groupId, java.lang.String name,
+		java.lang.String[] categoryProperties, int start, int end)
+		throws RemoteException {
 		try {
 			com.liferay.portal.kernel.json.JSONArray returnValue = AssetCategoryServiceUtil.search(groupId,
-					name, properties, start, end);
+					name, categoryProperties, start, end);
 
 			return returnValue;
 		}
@@ -203,11 +204,11 @@ public class AssetCategoryServiceSoap {
 
 	public static com.liferay.portlet.asset.model.AssetCategorySoap updateCategory(
 		long categoryId, long parentCategoryId, java.lang.String name,
-		long vocabularyId, java.lang.String[] properties)
+		long vocabularyId, java.lang.String[] categoryProperties)
 		throws RemoteException {
 		try {
 			com.liferay.portlet.asset.model.AssetCategory returnValue = AssetCategoryServiceUtil.updateCategory(categoryId,
-					parentCategoryId, name, vocabularyId, properties);
+					parentCategoryId, name, vocabularyId, categoryProperties);
 
 			return com.liferay.portlet.asset.model.AssetCategorySoap.toSoapModel(returnValue);
 		}

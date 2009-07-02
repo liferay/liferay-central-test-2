@@ -110,26 +110,15 @@ public class AssetCategoryLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.asset.model.AssetCategory addCategory(
-		long userId, long parentCategoryId, java.lang.String name,
-		long vocabularyId, java.lang.String[] properties,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return getService()
-				   .addCategory(userId, parentCategoryId, name, vocabularyId,
-			properties, serviceContext);
-	}
-
-	public static com.liferay.portlet.asset.model.AssetCategory addCategory(
 		java.lang.String uuid, long userId, long parentCategoryId,
 		java.lang.String name, long vocabularyId,
-		java.lang.String[] properties,
+		java.lang.String[] categoryProperties,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
 				   .addCategory(uuid, userId, parentCategoryId, name,
-			vocabularyId, properties, serviceContext);
+			vocabularyId, categoryProperties, serviceContext);
 	}
 
 	public static void addCategoryResources(
@@ -228,19 +217,21 @@ public class AssetCategoryLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.kernel.json.JSONArray search(
-		long groupId, java.lang.String name, java.lang.String[] properties,
-		int start, int end) throws com.liferay.portal.SystemException {
-		return getService().search(groupId, name, properties, start, end);
+		long groupId, java.lang.String name,
+		java.lang.String[] categoryProperties, int start, int end)
+		throws com.liferay.portal.SystemException {
+		return getService().search(groupId, name, categoryProperties, start, end);
 	}
 
 	public static com.liferay.portlet.asset.model.AssetCategory updateCategory(
 		long userId, long categoryId, long parentCategoryId,
-		java.lang.String name, long vocabularyId, java.lang.String[] properties)
+		java.lang.String name, long vocabularyId,
+		java.lang.String[] categoryProperties)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
 				   .updateCategory(userId, categoryId, parentCategoryId, name,
-			vocabularyId, properties);
+			vocabularyId, categoryProperties);
 	}
 
 	public static AssetCategoryLocalService getService() {
