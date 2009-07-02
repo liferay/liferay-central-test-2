@@ -346,6 +346,18 @@ public class ThemeDisplay implements Serializable {
 		}
 	}
 
+	public String getI18nPath() {
+		return _i18nPath;
+	}
+
+	public void setI18nPath(String i18nPath) {
+		_i18nPath = i18nPath;
+
+		if (Validator.isNotNull(i18nPath)) {
+			_i18n = true;
+		}
+	}
+
 	public String translate(String key) {
 		return LanguageUtil.get(getCompanyId(), getLocale(), key);
 	}
@@ -1035,6 +1047,7 @@ public class ThemeDisplay implements Serializable {
 		_languageId = null;
 		_i18n = false;
 		_i18nLanguageId = null;
+		_i18nPath = null;
 		_timeZone = null;
 		_theme = null;
 		_colorScheme = null;
@@ -1138,6 +1151,7 @@ public class ThemeDisplay implements Serializable {
 	private String _languageId;
 	private boolean _i18n;
 	private String _i18nLanguageId;
+	private String _i18nPath;
 	private TimeZone _timeZone;
 	private Theme _theme;
 	private ColorScheme _colorScheme;

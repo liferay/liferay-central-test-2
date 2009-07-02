@@ -399,6 +399,7 @@ public class PortletRequestUtil {
 		DocUtil.add(
 			themeDisplayEl, "i18n-language-id",
 			themeDisplay.getI18nLanguageId());
+		DocUtil.add(themeDisplayEl, "i18n-path", themeDisplay.getI18nPath());
 		DocUtil.add(
 			themeDisplayEl, "language-id", themeDisplay.getLanguageId());
 		DocUtil.add(themeDisplayEl, "locale", themeDisplay.getLocale());

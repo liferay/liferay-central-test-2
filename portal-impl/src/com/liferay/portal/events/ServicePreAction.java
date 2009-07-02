@@ -922,17 +922,15 @@ public class ServicePreAction extends Action {
 		String imagePath = PortalUtil.getPathImage();
 		String mainPath = PortalUtil.getPathMain();
 
-		String i18nLanguageId = (String)request.getAttribute(
-			WebKeys.I18N_LANGUAGE_ID);
+		String i18nPath = (String)request.getAttribute(WebKeys.I18N_PATH);
 
-		if (Validator.isNotNull(i18nLanguageId)) {
+		if (Validator.isNotNull(i18nPath)) {
 			if (Validator.isNotNull(contextPath)) {
 				mainPath = StringUtil.replaceFirst(
-					mainPath, contextPath,
-					contextPath + StringPool.SLASH + i18nLanguageId);
+					mainPath, contextPath, contextPath + i18nPath);
 			}
 			else {
-				mainPath = StringPool.SLASH + i18nLanguageId + mainPath;
+				mainPath = i18nPath + mainPath;
 			}
 		}
 
@@ -1013,6 +1011,9 @@ public class ServicePreAction extends Action {
 		if (Validator.isNotNull(doAsUserLanguageId)) {
 			locale = LocaleUtil.fromLanguageId(doAsUserLanguageId);
 		}
+
+		String i18nLanguageId = (String)request.getAttribute(
+			WebKeys.I18N_LANGUAGE_ID);
 
 		if (Validator.isNotNull(i18nLanguageId)) {
 			locale = LocaleUtil.fromLanguageId(i18nLanguageId);
@@ -1409,6 +1410,7 @@ public class ServicePreAction extends Action {
 		themeDisplay.setLocale(locale);
 		themeDisplay.setLanguageId(LocaleUtil.toLanguageId(locale));
 		themeDisplay.setI18nLanguageId(i18nLanguageId);
+		themeDisplay.setI18nPath(i18nPath);
 		themeDisplay.setTimeZone(timeZone);
 		themeDisplay.setLookAndFeel(contextPath, theme, colorScheme);
 		themeDisplay.setThemeCssFastLoad(themeCssFastLoad);

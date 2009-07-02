@@ -1170,9 +1170,7 @@ public class PortalImpl implements Portal {
 
 					if (themeDisplay.isI18n()) {
 						layoutFriendlyURL =
-							StringPool.SLASH +
-								themeDisplay.getI18nLanguageId() +
-									layoutFriendlyURL;
+							themeDisplay.getI18nPath() + layoutFriendlyURL;
 					}
 
 					return virtualHost + _pathContext + layoutFriendlyURL;
@@ -1215,9 +1213,7 @@ public class PortalImpl implements Portal {
 		}
 
 		if (themeDisplay.isI18n()) {
-			friendlyURL =
-				StringPool.SLASH + themeDisplay.getI18nLanguageId() +
-					friendlyURL;
+			friendlyURL = themeDisplay.getI18nPath() + friendlyURL;
 		}
 
 		return portalURL + _pathContext + friendlyURL + group.getFriendlyURL() +
@@ -1247,8 +1243,7 @@ public class PortalImpl implements Portal {
 				String layoutSetFriendlyURL = StringPool.BLANK;
 
 				if (themeDisplay.isI18n()) {
-					layoutSetFriendlyURL =
-						StringPool.SLASH + themeDisplay.getI18nLanguageId();
+					layoutSetFriendlyURL = themeDisplay.getI18nPath();
 				}
 
 				return portalURL + _pathContext + layoutSetFriendlyURL;
@@ -1272,9 +1267,7 @@ public class PortalImpl implements Portal {
 		}
 
 		if (themeDisplay.isI18n()) {
-			friendlyURL =
-				StringPool.SLASH + themeDisplay.getI18nLanguageId() +
-					friendlyURL;
+			friendlyURL = themeDisplay.getI18nPath() + friendlyURL;
 		}
 
 		return _pathContext + friendlyURL + group.getFriendlyURL();
@@ -3610,8 +3603,7 @@ public class PortalImpl implements Portal {
 			}
 
 			if (themeDisplay.isI18n()) {
-				sb.append(StringPool.SLASH);
-				sb.append(themeDisplay.getI18nLanguageId());
+				sb.append(themeDisplay.getI18nPath());
 			}
 
 			sb.append(servletPath);
@@ -3625,8 +3617,7 @@ public class PortalImpl implements Portal {
 			}
 
 			if (themeDisplay.isI18n()) {
-				sb.append(StringPool.SLASH);
-				sb.append(themeDisplay.getI18nLanguageId());
+				sb.append(themeDisplay.getI18nPath());
 			}
 
 			sb.append(servletPath);
