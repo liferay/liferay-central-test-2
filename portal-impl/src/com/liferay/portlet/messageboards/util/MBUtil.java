@@ -766,7 +766,7 @@ public class MBUtil {
 			Role role = RoleLocalServiceUtil.getRole(companyId, entityValue);
 
 			if (UserGroupRoleLocalServiceUtil.hasUserGroupRole(
-					userId, groupId, role.getRoleId())) {
+					userId, groupId, role.getRoleId(), true)) {
 
 				return true;
 			}

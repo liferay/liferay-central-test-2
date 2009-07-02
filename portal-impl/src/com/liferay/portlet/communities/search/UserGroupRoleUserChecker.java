@@ -54,7 +54,8 @@ public class UserGroupRoleUserChecker extends RowChecker {
 
 		try {
 			return UserGroupRoleLocalServiceUtil.hasUserGroupRole(
-				user.getUserId(), _group.getGroupId(), _role.getRoleId());
+				user.getUserId(), _group.getGroupId(), _role.getRoleId(),
+				false);
 		}
 		catch (Exception e) {
 			_log.error(e);

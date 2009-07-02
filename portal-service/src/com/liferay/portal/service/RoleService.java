@@ -90,6 +90,10 @@ public interface RoleService {
 			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.liferay.portal.model.Role> getUserGroupGroupRoles(
+		long userId, long groupId) throws com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Role> getUserGroupRoles(
 		long userId, long groupId) throws com.liferay.portal.SystemException;
 

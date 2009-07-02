@@ -143,6 +143,7 @@ public class PersistenceTestSuite extends TestSuite {
 		testSuite.addTestSuite(ServiceComponentPersistenceTest.class);
 		testSuite.addTestSuite(ShardPersistenceTest.class);
 		testSuite.addTestSuite(SubscriptionPersistenceTest.class);
+		testSuite.addTestSuite(UserGroupGroupRolePersistenceTest.class);
 		testSuite.addTestSuite(UserGroupPersistenceTest.class);
 		testSuite.addTestSuite(UserGroupRolePersistenceTest.class);
 		testSuite.addTestSuite(UserIdMapperPersistenceTest.class);

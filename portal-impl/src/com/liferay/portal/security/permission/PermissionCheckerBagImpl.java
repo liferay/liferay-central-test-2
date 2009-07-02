@@ -125,10 +125,10 @@ public class PermissionCheckerBagImpl implements PermissionCheckerBag {
 		if (group.isCommunity()) {
 			if (UserGroupRoleLocalServiceUtil.hasUserGroupRole(
 					_userId, group.getGroupId(),
-					RoleConstants.COMMUNITY_ADMINISTRATOR) ||
+					RoleConstants.COMMUNITY_ADMINISTRATOR, true) ||
 				UserGroupRoleLocalServiceUtil.hasUserGroupRole(
 					_userId, group.getGroupId(),
-					RoleConstants.COMMUNITY_OWNER)) {
+					RoleConstants.COMMUNITY_OWNER, true)) {
 
 				return true;
 			}
@@ -159,10 +159,10 @@ public class PermissionCheckerBagImpl implements PermissionCheckerBag {
 
 				if (UserGroupRoleLocalServiceUtil.hasUserGroupRole(
 						_userId, organizationGroupId,
-						RoleConstants.ORGANIZATION_ADMINISTRATOR) ||
+						RoleConstants.ORGANIZATION_ADMINISTRATOR, true) ||
 					UserGroupRoleLocalServiceUtil.hasUserGroupRole(
 						_userId, organizationGroupId,
-						RoleConstants.ORGANIZATION_OWNER)) {
+						RoleConstants.ORGANIZATION_OWNER, true)) {
 
 					return true;
 				}
@@ -188,7 +188,7 @@ public class PermissionCheckerBagImpl implements PermissionCheckerBag {
 		if (group.isCommunity()) {
 			if (UserGroupRoleLocalServiceUtil.hasUserGroupRole(
 					_userId, group.getGroupId(),
-					RoleConstants.COMMUNITY_OWNER)) {
+					RoleConstants.COMMUNITY_OWNER, true)) {
 
 				return true;
 			}
@@ -219,7 +219,7 @@ public class PermissionCheckerBagImpl implements PermissionCheckerBag {
 
 				if (UserGroupRoleLocalServiceUtil.hasUserGroupRole(
 						_userId, organizationGroupId,
-						RoleConstants.ORGANIZATION_OWNER)) {
+						RoleConstants.ORGANIZATION_OWNER, true)) {
 
 					return true;
 				}

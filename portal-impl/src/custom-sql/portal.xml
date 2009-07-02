@@ -879,6 +879,24 @@
 				(Users_UserGroups.userId = ?)
 		]]>
 	</sql>
+	<sql id="com.liferay.portal.service.persistence.RoleFinder.countByU_G_R">
+		<![CDATA[
+			SELECT
+			 	COUNT(Role_.roleId) AS COUNT_VALUE
+			FROM
+				Role_
+			INNER JOIN
+				UserGroupGroupRole ON
+					(UserGroupGroupRole.roleId = Role_.roleId)
+			INNER JOIN
+				Users_UserGroups ON
+					(Users_UserGroups.userGroupId = UserGroupGroupRole.userGroupId)
+			WHERE
+				(Role_.roleId = ?) AND
+				(UserGroupGroupRole.groupId = ?) AND
+				(Users_UserGroups.userId = ?)
+		]]>
+	</sql>
 	<sql id="com.liferay.portal.service.persistence.RoleFinder.countByC_N_D_T">
 		<![CDATA[
 			SELECT
@@ -916,6 +934,24 @@
 						(Role_.name = 'Power User') OR
 						(Role_.name = 'User')
 					)
+			)
+		]]>
+	</sql>
+	<sql id="com.liferay.portal.service.persistence.RoleFinder.findByUserGroupGroupRole">
+		<![CDATA[
+			(
+				SELECT
+					{Role_.*}
+				FROM
+					Role_
+				INNER JOIN
+					UserGroupGroupRole ON
+						(UserGroupGroupRole.roleId = Role_.roleId)
+				INNER JOIN
+					Users_UserGroups ON
+						(Users_UserGroups.userGroupId = UserGroupGroupRole.userGroupId)
+				WHERE
+					(Users_UserGroups.userId = ? and UserGroupGroupRole.groupId = ?)
 			)
 		]]>
 	</sql>
@@ -1321,6 +1357,14 @@
 					(Groups_UserGroups.userGroupId = UserGroup.userGroupId)
 			WHERE
 				(Groups_UserGroups.groupId = ?)
+		]]>
+	</sql>
+	<sql id="com.liferay.portal.service.persistence.UserGroupFinder.joinByUserGroupGroupRole">
+		<![CDATA[
+			INNER JOIN
+				UserGroupGroupRole ON
+					(UserGroupGroupRole.groupId = ?) AND
+					(UserGroupGroupRole.roleId = ?)
 		]]>
 	</sql>
 	<sql id="com.liferay.portal.service.persistence.UserGroupFinder.joinByUserGroupsRoles">

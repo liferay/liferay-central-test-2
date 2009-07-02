@@ -25,37 +25,56 @@ package com.liferay.portlet.communities.search;
 import com.liferay.portal.kernel.dao.search.RowChecker;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Role;
-import com.liferay.portal.model.User;
-import com.liferay.portal.service.UserGroupRoleLocalServiceUtil;
+import com.liferay.portal.model.UserGroup;
+import com.liferay.portal.service.UserGroupGroupRoleLocalServiceUtil;
 
 import javax.portlet.RenderResponse;
 
 /**
- * <a href="UserGroupRoleRoleChecker.java.html"><b><i>View Source</i></b></a>
+ * <a href="UserGroupGroupRoleChecker.java.html"><b><i>View Source</i></b></a>
  *
- * @author Jorge Ferrer
+ * @author Brett Swaim
  *
  */
-public class UserGroupRoleRoleChecker extends RowChecker {
+public class UserGroupGroupRoleChecker extends RowChecker {
 
-	public UserGroupRoleRoleChecker(
-		RenderResponse renderResponse, User user, Group group) {
+	public UserGroupGroupRoleChecker(
+		RenderResponse renderResponse, UserGroup userGroup, Group group) {
 
 		super(renderResponse);
 
-		_user = user;
+		_userGroup = userGroup;
+		_group = group;
+	}
+
+	public UserGroupGroupRoleChecker(
+		RenderResponse renderResponse, Role role, Group group) {
+
+		super(renderResponse);
+
+		_role = role;
 		_group = group;
 	}
 
 	public boolean isChecked(Object obj) {
-		Role role = (Role)obj;
-
 		try {
-			return UserGroupRoleLocalServiceUtil.hasUserGroupRole(
-				_user.getUserId(), _group.getGroupId(), role.getRoleId(),
-				false);
+			if (Validator.isNull(_userGroup)) {
+				UserGroup userGroup = (UserGroup) obj;
+
+				return UserGroupGroupRoleLocalServiceUtil.hasUserGroupGroupRole(
+					userGroup.getUserGroupId(), _group.getGroupId(),
+					_role.getRoleId());
+			}
+			else {
+				Role role = (Role) obj;
+
+				return UserGroupGroupRoleLocalServiceUtil.hasUserGroupGroupRole(
+					_userGroup.getUserGroupId(), _group.getGroupId(),
+					role.getRoleId());
+			}
 		}
 		catch (Exception e) {
 			_log.error(e);
@@ -64,10 +83,11 @@ public class UserGroupRoleRoleChecker extends RowChecker {
 		}
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(UserGroupRoleRoleChecker.class);
-
-	private User _user;
 	private Group _group;
+	private Role _role;
+	private UserGroup _userGroup;
+
+	private static Log _log =
+		LogFactoryUtil.getLog(UserGroupGroupRoleChecker.class);
 
 }

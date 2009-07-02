@@ -275,6 +275,12 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		return rolePersistence.countBySubtype(subtype);
 	}
 
+	public List<Role> getUserGroupGroupRoles(long userId, long groupId)
+		throws SystemException {
+
+		return roleFinder.findByUserGroupGroupRole(userId, groupId);
+	}
+
 	public List<Role> getUserGroupRoles(long userId, long groupId)
 		throws SystemException {
 

@@ -66,6 +66,9 @@ public class RoleFinderImpl extends BasePersistenceImpl implements RoleFinder {
 	public static String COUNT_BY_ORGANIZATION_COMMUNITY =
 		RoleFinder.class.getName() + ".countByOrganizationCommunity";
 
+	public static String COUNT_BY_U_G_R =
+		RoleFinder.class.getName() + ".countByU_G_R";
+
 	public static String COUNT_BY_USER =
 		RoleFinder.class.getName() + ".countByUser";
 
@@ -77,6 +80,9 @@ public class RoleFinderImpl extends BasePersistenceImpl implements RoleFinder {
 
 	public static String FIND_BY_SYSTEM =
 		RoleFinder.class.getName() + ".findBySystem";
+
+	public static String FIND_BY_USER_GROUP_GROUP_ROLE =
+		RoleFinder.class.getName() + ".findByUserGroupGroupRole";
 
 	public static String FIND_BY_USER_GROUP_ROLE =
 		RoleFinder.class.getName() + ".findByUserGroupRole";
@@ -213,6 +219,46 @@ public class RoleFinderImpl extends BasePersistenceImpl implements RoleFinder {
 		}
 	}
 
+	public int countByU_G_R(long userId, long groupId, long roleId)
+		throws SystemException {
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			String sql = CustomSQLUtil.get(COUNT_BY_U_G_R);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(roleId);
+			qPos.add(groupId);
+			qPos.add(userId);
+
+			Iterator<Long> itr = q.list().iterator();
+
+			if (itr.hasNext()) {
+				Long count = itr.next();
+
+				if (count != null) {
+					return count.intValue();
+				}
+			}
+
+			return 0;
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public List<Role> findBySystem(long companyId) throws SystemException {
 		Session session = null;
 
@@ -228,6 +274,35 @@ public class RoleFinderImpl extends BasePersistenceImpl implements RoleFinder {
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			qPos.add(companyId);
+
+			return q.list();
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public List<Role> findByUserGroupGroupRole(long userId, long groupId)
+		throws SystemException {
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			String sql = CustomSQLUtil.get(FIND_BY_USER_GROUP_GROUP_ROLE);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity("Role_", RoleImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(userId);
+			qPos.add(groupId);
 
 			return q.list();
 		}

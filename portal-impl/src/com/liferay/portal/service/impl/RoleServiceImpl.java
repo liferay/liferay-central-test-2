@@ -94,6 +94,12 @@ public class RoleServiceImpl extends RoleServiceBaseImpl {
 		return roleLocalService.getRole(companyId, name);
 	}
 
+	public List<Role> getUserGroupGroupRoles(long userId, long groupId)
+		throws SystemException {
+
+		return roleLocalService.getUserGroupGroupRoles(userId, groupId);
+	}
+
 	public List<Role> getUserGroupRoles(long userId, long groupId)
 		throws SystemException {
 

@@ -64,6 +64,9 @@ public class UserGroupFinderImpl
 	public static String JOIN_BY_GROUPS_PERMISSIONS =
 		UserGroupFinder.class.getName() + ".joinByGroupsPermissions";
 
+	public static String JOIN_BY_USER_GROUP_GROUP_ROLE =
+		UserGroupFinder.class.getName() + ".joinByUserGroupGroupRole";
+
 	public static String JOIN_BY_USER_GROUPS_GROUPS =
 		UserGroupFinder.class.getName() + ".joinByUserGroupsGroups";
 
@@ -239,6 +242,9 @@ public class UserGroupFinderImpl
 		if (key.equals("permissionsResourceId")) {
 			join = CustomSQLUtil.get(JOIN_BY_GROUPS_PERMISSIONS);
 		}
+		else if (key.equals("userGroupGroupRole")) {
+			join = CustomSQLUtil.get(JOIN_BY_USER_GROUP_GROUP_ROLE);
+		}
 		else if (key.equals("userGroupsGroups")) {
 			join = CustomSQLUtil.get(JOIN_BY_USER_GROUPS_GROUPS);
 		}
@@ -286,6 +292,9 @@ public class UserGroupFinderImpl
 		if (key.equals("permissionsResourceId")) {
 			join = CustomSQLUtil.get(JOIN_BY_GROUPS_PERMISSIONS);
 		}
+		else if (key.equals("userGroupGroupRole")) {
+			join = CustomSQLUtil.get(JOIN_BY_USER_GROUP_GROUP_ROLE);
+		}
 		else if (key.equals("userGroupsGroups")) {
 			join = CustomSQLUtil.get(JOIN_BY_USER_GROUPS_GROUPS);
 		}
@@ -329,6 +338,15 @@ public class UserGroupFinderImpl
 
 					if (Validator.isNotNull(valueLong)) {
 						qPos.add(valueLong);
+					}
+				}
+				else if (value instanceof Long[]) {
+					Long[] values = (Long[]) value;
+
+					for (Long valueLong : values) {
+						if (Validator.isNotNull(valueLong)) {
+							qPos.add(valueLong);
+						}
 					}
 				}
 				else if (value instanceof String) {

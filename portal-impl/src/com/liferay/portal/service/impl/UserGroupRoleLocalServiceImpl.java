@@ -32,6 +32,7 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroupRole;
 import com.liferay.portal.security.permission.PermissionCacheUtil;
 import com.liferay.portal.service.base.UserGroupRoleLocalServiceBaseImpl;
+import com.liferay.portal.service.persistence.RoleFinderUtil;
 import com.liferay.portal.service.persistence.UserGroupRolePK;
 
 import java.util.List;
@@ -204,7 +205,8 @@ public class UserGroupRoleLocalServiceImpl
 		return userGroupRolePersistence.findByG_R(groupId, roleId);
 	}
 
-	public boolean hasUserGroupRole(long userId, long groupId, long roleId)
+	public boolean hasUserGroupRole(long userId, long groupId, long roleId,
+			boolean inherit)
 		throws SystemException {
 
 		UserGroupRolePK pk = new UserGroupRolePK(userId, groupId, roleId);
@@ -215,12 +217,18 @@ public class UserGroupRoleLocalServiceImpl
 		if (userGroupRole != null) {
 			return true;
 		}
-		else {
-			return false;
+
+		if (inherit) {
+			if (RoleFinderUtil.countByU_G_R(userId, groupId, roleId) > 0) {
+				return true;
+			}
 		}
+
+		return false;
 	}
 
-	public boolean hasUserGroupRole(long userId, long groupId, String roleName)
+	public boolean hasUserGroupRole(long userId, long groupId, String roleName,
+			boolean inherit)
 		throws PortalException, SystemException {
 
 		User user = userPersistence.findByPrimaryKey(userId);
@@ -231,7 +239,7 @@ public class UserGroupRoleLocalServiceImpl
 
 		long roleId = role.getRoleId();
 
-		return hasUserGroupRole(userId, groupId, roleId);
+		return hasUserGroupRole(userId, groupId, roleId, inherit);
 	}
 
 	protected void checkGroupResource(long groupId)

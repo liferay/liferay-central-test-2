@@ -20,54 +20,31 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.communities.search;
-
-import com.liferay.portal.kernel.dao.search.RowChecker;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.model.Group;
-import com.liferay.portal.model.Role;
-import com.liferay.portal.model.User;
-import com.liferay.portal.service.UserGroupRoleLocalServiceUtil;
-
-import javax.portlet.RenderResponse;
+package com.liferay.portal;
 
 /**
- * <a href="UserGroupRoleRoleChecker.java.html"><b><i>View Source</i></b></a>
+ * <a href="NoSuchUserGroupGroupRoleException.java.html"><b><i>View Source
+ * </i></b></a>
  *
- * @author Jorge Ferrer
+ * @author Brian Wing Shun Chan
  *
  */
-public class UserGroupRoleRoleChecker extends RowChecker {
+public class NoSuchUserGroupGroupRoleException extends PortalException {
 
-	public UserGroupRoleRoleChecker(
-		RenderResponse renderResponse, User user, Group group) {
-
-		super(renderResponse);
-
-		_user = user;
-		_group = group;
+	public NoSuchUserGroupGroupRoleException() {
+		super();
 	}
 
-	public boolean isChecked(Object obj) {
-		Role role = (Role)obj;
-
-		try {
-			return UserGroupRoleLocalServiceUtil.hasUserGroupRole(
-				_user.getUserId(), _group.getGroupId(), role.getRoleId(),
-				false);
-		}
-		catch (Exception e) {
-			_log.error(e);
-
-			return false;
-		}
+	public NoSuchUserGroupGroupRoleException(String msg) {
+		super(msg);
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(UserGroupRoleRoleChecker.class);
+	public NoSuchUserGroupGroupRoleException(String msg, Throwable cause) {
+		super(msg, cause);
+	}
 
-	private User _user;
-	private Group _group;
+	public NoSuchUserGroupGroupRoleException(Throwable cause) {
+		super(cause);
+	}
 
 }

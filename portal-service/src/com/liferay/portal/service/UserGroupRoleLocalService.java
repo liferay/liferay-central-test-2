@@ -143,12 +143,12 @@ public interface UserGroupRoleLocalService {
 		long groupId, long roleId) throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public boolean hasUserGroupRole(long userId, long groupId, long roleId)
-		throws com.liferay.portal.SystemException;
+	public boolean hasUserGroupRole(long userId, long groupId, long roleId,
+		boolean inherit) throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public boolean hasUserGroupRole(long userId, long groupId,
-		java.lang.String roleName)
+		java.lang.String roleName, boolean inherit)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 }
