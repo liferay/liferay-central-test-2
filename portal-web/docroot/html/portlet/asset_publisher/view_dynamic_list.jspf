@@ -47,15 +47,15 @@ assetEntryQuery.setTagIds(assetTagIds, andOperator);
 
 int total = 0;
 
-if (groupByVocabularyId > 0) {
-	AssetVocabulary assetVocabulary = AssetVocabularyLocalServiceUtil.getVocabulary(groupByVocabularyId);
+if (assetVocabularyId > 0) {
+	AssetVocabulary assetVocabulary = AssetVocabularyLocalServiceUtil.getVocabulary(assetVocabularyId);
 
 	List<AssetCategory> assetCategories = AssetCategoryLocalServiceUtil.getVocabularyRootCategories(assetVocabulary.getVocabularyId());
 
-	long[] originalAssetCategoryIds = assetEntryQuery.getCategoryIds();
+	long[] oldAssetCategoryIds = assetEntryQuery.getCategoryIds();
 
 	for (AssetCategory assetCategory : assetCategories) {
-		long[] newAssetCategoryIds = ArrayUtil.append(originalAssetCategoryIds, assetCategory.getCategoryId());
+		long[] newAssetCategoryIds = ArrayUtil.append(oldAssetCategoryIds, assetCategory.getCategoryId());
 
 		assetEntryQuery.setCategoryIds(newAssetCategoryIds, andOperator);
 
@@ -71,7 +71,7 @@ if (groupByVocabularyId > 0) {
 
 		request.setAttribute("view.jsp-results", results);
 
-		if (results.size() > 0) {
+		if (!results.isEmpty()) {
 %>
 
 			<h3 class="asset-entries-group-label"><%= assetCategory.getName() %></h3>
@@ -118,7 +118,7 @@ else {
 
 		request.setAttribute("view.jsp-results", results);
 
-		if (results.size() > 0) {
+		if (!results.isEmpty()) {
 %>
 
 			<h3 class="asset-entries-group-label"><liferay-ui:message key="<%= _ASSET_ENTRY_TITLES[groupAssetEntryIndex] %>" /></h3>

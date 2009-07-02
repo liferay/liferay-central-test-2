@@ -308,9 +308,9 @@ configurationActionURL.setParameter("portletResource", portletResource);
 
 						<liferay-ui:message key="group-by" />
 
-						<select name="<portlet:namespace />groupByVocabularyId">
+						<select name="<portlet:namespace />assetVocabularyId">
 							<option value=""></option>
-							<option <%= (groupByVocabularyId == -1) ? "selected" : "" %> value="-1"><liferay-ui:message key="asset-types" /></option>
+							<option <%= (assetVocabularyId == -1) ? "selected" : "" %> value="-1"><liferay-ui:message key="asset-types" /></option>
 
 							<%
 							List<AssetVocabulary> assetVocabularies = AssetVocabularyLocalServiceUtil.getGroupVocabularies(scopeGroupId);
@@ -318,7 +318,7 @@ configurationActionURL.setParameter("portletResource", portletResource);
 							for (AssetVocabulary assetVocabulary : assetVocabularies) {
 							%>
 
-								<option <%= groupByVocabularyId == assetVocabulary.getVocabularyId() ? "selected" : "" %> value="<%= assetVocabulary.getVocabularyId() %>"><%= assetVocabulary.getName() %></option>
+								<option <%= (assetVocabularyId == assetVocabulary.getVocabularyId()) ? "selected" : "" %> value="<%= assetVocabulary.getVocabularyId() %>"><%= assetVocabulary.getName() %></option>
 
 							<%
 							}

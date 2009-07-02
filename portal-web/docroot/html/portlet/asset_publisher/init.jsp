@@ -136,7 +136,7 @@ else {
 	classNameIds = new long[0];
 }
 
-long groupByVocabularyId = GetterUtil.getLong(preferences.getValue("group-by-vocabulary-id", StringPool.BLANK));
+long assetVocabularyId = GetterUtil.getLong(preferences.getValue("asset-vocabulary-id", StringPool.BLANK));
 
 long assetCategoryId = ParamUtil.getLong(request, "categoryId");
 
@@ -208,7 +208,7 @@ String[] assetEntryXmls = preferences.getValues("asset-entry-xml", new String[0]
 boolean viewInContext = assetLinkBehaviour.equals("viewInPortlet");
 
 boolean showPortletWithNoResults = false;
-boolean groupByClass = (groupByVocabularyId == -1);
+boolean groupByClass = (assetVocabularyId == -1);
 boolean allowEmptyResults = false;
 
 DateFormat dateFormatDate = DateFormats.getDate(locale, timeZone);
