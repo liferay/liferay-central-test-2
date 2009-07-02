@@ -320,6 +320,11 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 			_log.error("Deleting index " + image.getImageId(), se);
 		}
 
+		// Social
+
+		socialActivityLocalService.deleteActivities(
+			IGImage.class.getName(), image.getImageId());
+
 		// Expando
 
 		expandoValueLocalService.deleteValues(

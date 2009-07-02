@@ -95,9 +95,7 @@ public class FindFolderAction extends Action {
 				LayoutTypePortlet layoutTypePortlet =
 					(LayoutTypePortlet)layout.getLayoutType();
 
-				if (layoutTypePortlet.hasPortletId(
-						PortletKeys.IMAGE_GALLERY)) {
-
+				if (layoutTypePortlet.hasPortletId(PortletKeys.IMAGE_GALLERY)) {
 					return plid;
 				}
 			}
