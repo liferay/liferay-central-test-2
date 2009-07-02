@@ -25,6 +25,8 @@ package com.liferay.portal.kernel.portlet;
 import java.util.Map;
 
 import javax.portlet.PortletResponse;
+import javax.portlet.PortletURL;
+import javax.portlet.ResourceURL;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -41,6 +43,12 @@ public interface LiferayPortletResponse extends PortletResponse {
 	public void addHeader(String name, String value);
 
 	public void addIntHeader(String name, int value);
+
+	public PortletURL createActionURL();
+
+	public PortletURL createRenderURL();
+
+	public ResourceURL createResourceURL();
 
 	public HttpServletResponse getHttpServletResponse();
 

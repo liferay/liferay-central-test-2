@@ -851,7 +851,7 @@ public class HttpImpl implements Http {
 
 			if ((cookies != null) && (cookies.length > 0)) {
 				org.apache.commons.httpclient.Cookie[] commonsCookies =
-					new org.apache.commons.httpclient.Cookie[0];
+					new org.apache.commons.httpclient.Cookie[cookies.length];
 
 				for (int i = 0; i < cookies.length; i++) {
 					Cookie cookie = cookies[i];

@@ -31,6 +31,7 @@ import com.liferay.portal.kernel.portlet.LiferayPortletURL;
 import com.liferay.portal.kernel.servlet.URLEncoder;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutConstants;
@@ -389,6 +390,10 @@ public abstract class PortletResponseImpl implements LiferayPortletResponse {
 	public abstract String getLifecycle();
 
 	public String getNamespace() {
+		if (_wsrp) {
+			return "wsrp_rewrite_";
+		}
+
 		if (_namespace == null) {
 			_namespace = PortalUtil.getPortletNamespace(_portletName);
 		}
@@ -569,6 +574,8 @@ public abstract class PortletResponseImpl implements LiferayPortletResponse {
 		_response = response;
 		_portletName = portletName;
 		_companyId = companyId;
+		_wsrp = ParamUtil.getBoolean(getHttpServletRequest(), "wsrp");
+
 		setPlid(plid);
 	}
 
@@ -583,5 +590,6 @@ public abstract class PortletResponseImpl implements LiferayPortletResponse {
 	private long _plid;
 	private URLEncoder _urlEncoder;
 	private Map<String, Object> _headers = new LinkedHashMap<String, Object>();
+	private boolean _wsrp;
 
 }
