@@ -539,6 +539,7 @@ public class LayoutExporter {
 
 				long vocabularyId = assetVocabulary.getVocabularyId();
 
+				vocabularyEl.addAttribute("uuid", assetVocabulary.getUuid());
 				vocabularyEl.addAttribute("id", String.valueOf(vocabularyId));
 				vocabularyEl.addAttribute("name", assetVocabulary.getName());
 				vocabularyEl.addAttribute(
@@ -849,11 +850,19 @@ public class LayoutExporter {
 			if (assetCategory.getParentCategoryId() == parentCategoryId) {
 				Element categoryEl = parentEl.addElement("category");
 
-				categoryEl.addAttribute(
-					"parentCategoryId", String.valueOf(parentCategoryId));
+				categoryEl.addAttribute("uuid", assetCategory.getUuid());
 				categoryEl.addAttribute("name", assetCategory.getName());
 				categoryEl.addAttribute(
 					"userUuid", assetCategory.getUserUuid());
+
+				if (parentCategoryId > 0) {
+					AssetCategory parentCategory =
+						AssetCategoryLocalServiceUtil.getCategory(
+							parentCategoryId);
+
+					categoryEl.addAttribute(
+						"parentCategoryUuid", parentCategory.getUuid());
+				}
 
 				parentCategories.add(assetCategory);
 

@@ -103,6 +103,8 @@ public interface PortletDataContext extends Serializable {
 
 	public Map<String, long[]> getAssetCategoryIdsMap();
 
+	public Map<String, String[]> getAssetCategoryUuidsMap();
+
 	public String[] getAssetTagNames(Class<?> classObj, long classPK);
 
 	public String[] getAssetTagNames(String className, long classPK);

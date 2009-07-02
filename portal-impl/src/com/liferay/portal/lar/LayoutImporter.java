@@ -83,10 +83,13 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.asset.DuplicateCategoryException;
-import com.liferay.portlet.asset.NoSuchVocabularyException;
+import com.liferay.portlet.asset.NoSuchCategoryException;
+import com.liferay.portlet.asset.model.AssetCategory;
 import com.liferay.portlet.asset.model.AssetVocabulary;
 import com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil;
 import com.liferay.portlet.asset.service.AssetVocabularyLocalServiceUtil;
+import com.liferay.portlet.asset.service.persistence.AssetCategoryUtil;
+import com.liferay.portlet.asset.service.persistence.AssetVocabularyUtil;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.util.LocalizationUtil;
 
@@ -830,6 +833,8 @@ public class LayoutImporter {
 			List<Element> vocabularies = root.elements("vocabulary");
 
 			for (Element vocabularyEl : vocabularies) {
+				String vocabularyUuid = GetterUtil.getString(
+					vocabularyEl.attributeValue("uuid"));
 				String vocabularyName = GetterUtil.getString(
 					vocabularyEl.attributeValue("name"));
 				String userUuid = GetterUtil.getString(
@@ -842,13 +847,28 @@ public class LayoutImporter {
 				serviceContext.setScopeGroupId(context.getGroupId());
 
 				AssetVocabulary assetVocabulary = null;
+				AssetVocabulary existingAssetVocabulary = null;
 
-				try {
-					assetVocabulary =
-						AssetVocabularyLocalServiceUtil.getGroupVocabulary(
-							context.getScopeGroupId(), vocabularyName);
+				if (context.getDataStrategy().equals(
+						PortletDataHandlerKeys.DATA_STRATEGY_MIRROR)) {
+
+					existingAssetVocabulary = AssetVocabularyUtil.fetchByUUID_G(
+						vocabularyUuid, context.getGroupId());
+
+					if (existingAssetVocabulary == null) {
+						assetVocabulary =
+							AssetVocabularyLocalServiceUtil.addVocabulary(
+								vocabularyUuid, context.getUserId(userUuid),
+								vocabularyName, serviceContext);
+					}
+					else {
+						assetVocabulary =
+							AssetVocabularyLocalServiceUtil.updateVocabulary(
+								existingAssetVocabulary.getVocabularyId(),
+								vocabularyName);
+					}
 				}
-				catch (NoSuchVocabularyException nsve) {
+				else {
 					assetVocabulary =
 						AssetVocabularyLocalServiceUtil.addVocabulary(
 							context.getUserId(userUuid), vocabularyName,
@@ -858,25 +878,75 @@ public class LayoutImporter {
 				List<Element> categories = vocabularyEl.elements("category");
 
 				for (Element category : categories) {
-					long parentCategoryId = GetterUtil.getLong(
-						category.attributeValue("parentCategoryId"));
+					String categoryUuid = GetterUtil.getString(
+						category.attributeValue("uuid"));
+					String parentCategoryUuid = GetterUtil.getString(
+						category.attributeValue("parentCategoryUuid"));
 					String categoryName = GetterUtil.getString(
 						category.attributeValue("name"));
 					String[] properties = null;
 
 					try {
-						AssetCategoryLocalServiceUtil.addCategory(
-							context.getUserId(userUuid), parentCategoryId,
+						importCategory(
+							context, categoryUuid, userUuid, parentCategoryUuid,
 							categoryName, assetVocabulary.getVocabularyId(),
 							properties, serviceContext);
 					}
 					catch (DuplicateCategoryException dce) {
+					}
+					catch (NoSuchCategoryException nsce) {
 					}
 				}
 			}
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
+		}
+	}
+
+	private void importCategory(
+			PortletDataContext context, String categoryUuid, String userUuid,
+			String parentCategoryUuid, String categoryName, long vocabularyId,
+			String[] properties, ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		long parentCategoryId = 0;
+
+		if (Validator.isNotNull(parentCategoryUuid)) {
+			AssetCategory parentCategory =
+				AssetCategoryUtil.findByUUID_G(
+					parentCategoryUuid,context.getScopeGroupId());
+
+			parentCategoryId = parentCategory.getCategoryId();
+		}
+
+		AssetCategory existingAssetCategory = null;
+
+		if (context.getDataStrategy().equals(
+			PortletDataHandlerKeys.DATA_STRATEGY_MIRROR)) {
+
+			existingAssetCategory = AssetCategoryUtil.fetchByUUID_G(
+				categoryUuid, context.getGroupId());
+
+			if (existingAssetCategory == null) {
+				AssetCategoryLocalServiceUtil.addCategory(
+					categoryUuid, context.getUserId(userUuid),
+					parentCategoryId, categoryName,
+					vocabularyId, properties, serviceContext);
+			}
+			else {
+				AssetCategoryLocalServiceUtil.updateCategory(
+					context.getUserId(userUuid),
+					existingAssetCategory.getCategoryId(),
+					parentCategoryId, categoryName,
+					vocabularyId, properties);
+			}
+		}
+		else {
+			AssetCategoryLocalServiceUtil.addCategory(
+				context.getUserId(userUuid),
+				parentCategoryId, categoryName,
+				vocabularyId, properties, serviceContext);
 		}
 	}
 

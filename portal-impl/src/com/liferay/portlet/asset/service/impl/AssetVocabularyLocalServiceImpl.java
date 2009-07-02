@@ -53,6 +53,14 @@ public class AssetVocabularyLocalServiceImpl
 			long userId, String name, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
+		return addVocabulary(null, userId, name, serviceContext);
+	}
+
+	public AssetVocabulary addVocabulary(
+			String uuid, long userId, String name,
+			ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
 		// Vocabulary
 
 		User user = userPersistence.findByPrimaryKey(userId);
@@ -71,6 +79,7 @@ public class AssetVocabularyLocalServiceImpl
 		AssetVocabulary vocabulary = assetVocabularyPersistence.create(
 			vocabularyId);
 
+		vocabulary.setUuid(uuid);
 		vocabulary.setGroupId(groupId);
 		vocabulary.setCompanyId(user.getCompanyId());
 		vocabulary.setUserId(user.getUserId());

@@ -170,6 +170,10 @@ public class PortletDataContextImpl implements PortletDataContext {
 			getPrimaryKeyString(classObj, classPK),
 			StringUtil.split(
 				ListUtil.toString(assetCategories, "categoryId"), 0L));
+		_assetCategoryUuidsMap.put(
+			getPrimaryKeyString(classObj, classPK),
+			StringUtil.split(
+				ListUtil.toString(assetCategories, "uuid")));
 	}
 
 	public void addAssetCategories(
@@ -339,6 +343,10 @@ public class PortletDataContextImpl implements PortletDataContext {
 
 	public Map<String, long[]> getAssetCategoryIdsMap() {
 		return _assetCategoryIdsMap;
+	}
+
+	public Map<String, String[]> getAssetCategoryUuidsMap() {
+		return _assetCategoryUuidsMap;
 	}
 
 	public String[] getAssetTagNames(Class<?> classObj, long classPK) {
@@ -730,6 +738,8 @@ public class PortletDataContextImpl implements PortletDataContext {
 
 	private Map<String, long[]> _assetCategoryIdsMap =
 		new HashMap<String, long[]>();
+	private Map<String, String[]> _assetCategoryUuidsMap =
+		new HashMap<String, String[]>();
 	private Map<String, String[]> _assetTagNamesMap =
 		new HashMap<String, String[]>();
 	private Map<String, List<MBMessage>> _commentsMap =

@@ -64,6 +64,17 @@ public class AssetCategoryLocalServiceImpl
 			String[] properties, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
+		return addCategory(
+			null, userId, parentCategoryId, name, vocabularyId, properties,
+			serviceContext);
+	}
+
+	public AssetCategory addCategory(
+			String uuid, long userId, long parentCategoryId, String name,
+			long vocabularyId, String[] properties,
+			ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
 		// Category
 
 		User user = userPersistence.findByPrimaryKey(userId);
@@ -88,6 +99,7 @@ public class AssetCategoryLocalServiceImpl
 
 		AssetCategory category = assetCategoryPersistence.create(categoryId);
 
+		category.setUuid(uuid);
 		category.setGroupId(groupId);
 		category.setCompanyId(user.getCompanyId());
 		category.setUserId(user.getUserId());
@@ -312,6 +324,10 @@ public class AssetCategoryLocalServiceImpl
 		// Category
 
 		name = name.trim();
+
+		if (properties == null) {
+			properties = new String[0];
+		}
 
 		validate(categoryId, parentCategoryId, name, vocabularyId);
 

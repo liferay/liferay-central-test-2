@@ -30,6 +30,7 @@ import com.liferay.portal.PortletIdException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.ObjectValuePair;
@@ -59,6 +60,9 @@ import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.PortletPreferencesImpl;
 import com.liferay.portlet.PortletPreferencesSerializer;
+import com.liferay.portlet.asset.NoSuchCategoryException;
+import com.liferay.portlet.asset.model.AssetCategory;
+import com.liferay.portlet.asset.service.persistence.AssetCategoryUtil;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.ratings.model.RatingsEntry;
 import com.liferay.portlet.social.util.SocialActivityThreadLocal;
@@ -724,9 +728,25 @@ public class PortletImporter {
 					asset.attributeValue("class-name"));
 				long classPK = GetterUtil.getLong(
 					asset.attributeValue("class-pk"));
-				long[] assetCategoryIds = StringUtil.split(
-					GetterUtil.getString(asset.attributeValue("categoryIds")),
-					0L);
+				String[] assetCategoryUuids = StringUtil.split(
+					GetterUtil.getString(
+						asset.attributeValue("categoryUuids")));
+
+				long[] assetCategoryIds = new long[0];
+
+				for (String assetCategoryUuid : assetCategoryUuids) {
+					try {
+						AssetCategory assetCategory =
+							AssetCategoryUtil.findByUUID_G(
+								assetCategoryUuid, context.getScopeGroupId());
+
+						assetCategoryIds = ArrayUtil.append(
+							assetCategoryIds, assetCategory.getCategoryId());
+					}
+					catch (NoSuchCategoryException nsce) {
+					}
+
+				}
 
 				context.addAssetCategories(
 					className, new Long(classPK), assetCategoryIds);

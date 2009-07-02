@@ -288,10 +288,10 @@ public class PortletExporter {
 
 			Element root = doc.addElement("categories");
 
-			Map<String, long[]> assetCategoryIdsMap =
-				context.getAssetCategoryIdsMap();
+			Map<String, String[]> assetCategoryIdsMap =
+				context.getAssetCategoryUuidsMap();
 
-			for (Map.Entry<String, long[]> entry :
+			for (Map.Entry<String, String[]> entry :
 					assetCategoryIdsMap.entrySet()) {
 
 				String[] categoryEntry = entry.getKey().split(StringPool.POUND);
@@ -301,7 +301,7 @@ public class PortletExporter {
 				asset.addAttribute("class-name", categoryEntry[0]);
 				asset.addAttribute("class-pk", categoryEntry[1]);
 				asset.addAttribute(
-					"categoryIds", StringUtil.merge(entry.getValue()));
+					"categoryUuids", StringUtil.merge(entry.getValue()));
 			}
 
 			context.addZipEntry(

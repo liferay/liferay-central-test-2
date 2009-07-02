@@ -400,6 +400,10 @@ public class AssetTagLocalServiceImpl extends AssetTagLocalServiceBaseImpl {
 		name = name.trim();
 		name = name.toLowerCase();
 
+		if (tagProperties == null) {
+			tagProperties = new String[0];
+		}
+
 		if (!tag.getName().equals(name) &&
 			hasTag(tag.getGroupId(), name)) {
 
