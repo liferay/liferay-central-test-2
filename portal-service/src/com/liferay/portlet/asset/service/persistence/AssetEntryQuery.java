@@ -81,7 +81,7 @@ public class AssetEntryQuery {
 		_publishDate = now;
 	}
 
-	public AssetEntryQuery(String className, SearchContainer searchContainer)
+	public AssetEntryQuery(String className, SearchContainer<?> searchContainer)
 		throws PortalException, SystemException {
 
 		this();
