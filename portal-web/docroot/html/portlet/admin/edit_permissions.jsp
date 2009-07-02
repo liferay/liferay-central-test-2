@@ -59,10 +59,10 @@ portletURL.setParameter("tabs2", tabs2);
 
 <c:choose>
 	<c:when test='<%= tabs1.equals("merge-redundant-roles") %>'>
-		<%@ include file="/html/portlet/admin/edit_permissions_merge.jsp" %>
+		<%@ include file="/html/portlet/admin/edit_permissions_merge.jspf" %>
 	</c:when>
 	<c:otherwise>
-		<%@ include file="/html/portlet/admin/edit_permissions_reassign.jsp" %>
+		<%@ include file="/html/portlet/admin/edit_permissions_reassign.jspf" %>
 	</c:otherwise>
 </c:choose>
 
