@@ -98,7 +98,15 @@ public class EditPermissionsAction extends EditConfigurationAction {
 				updateUserPermissions(actionRequest);
 			}
 
-			SessionMessages.add(actionRequest, "request_processed");
+			if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM < 5) {
+				String redirect = ParamUtil.getString(
+					actionRequest, "permissionsRedirect");
+
+				sendRedirect(actionRequest, actionResponse, redirect);
+			}
+			else {
+				SessionMessages.add(actionRequest, "request_processed");
+			}
 		}
 		catch (Exception e) {
 			if (e instanceof PrincipalException) {
