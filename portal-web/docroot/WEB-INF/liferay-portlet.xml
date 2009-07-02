@@ -299,6 +299,7 @@
 		<indexer-class>com.liferay.portlet.imagegallery.util.Indexer</indexer-class>
 		<open-search-class>com.liferay.portlet.imagegallery.util.IGOpenSearchImpl</open-search-class>
 		<portlet-data-handler-class>com.liferay.portlet.imagegallery.lar.IGPortletDataHandlerImpl</portlet-data-handler-class>
+		<social-activity-interpreter-class>com.liferay.portlet.imagegallery.social.IGActivityInterpreter</social-activity-interpreter-class>
 		<webdav-storage-token>image_gallery</webdav-storage-token>
 		<webdav-storage-class>com.liferay.portlet.imagegallery.webdav.IGWebDAVStorageImpl</webdav-storage-class>
 		<control-panel-entry-category>content</control-panel-entry-category>

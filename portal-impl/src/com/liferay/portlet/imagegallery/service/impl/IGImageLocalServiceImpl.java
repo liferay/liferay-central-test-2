@@ -53,6 +53,7 @@ import com.liferay.portlet.imagegallery.model.IGFolder;
 import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.imagegallery.model.impl.IGImageImpl;
 import com.liferay.portlet.imagegallery.service.base.IGImageLocalServiceBaseImpl;
+import com.liferay.portlet.imagegallery.social.IGActivityKeys;
 import com.liferay.portlet.imagegallery.util.Indexer;
 import com.liferay.portlet.imagegallery.util.comparator.ImageModifiedDateComparator;
 
@@ -221,6 +222,12 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 			ExpandoBridge expandoBridge = image.getExpandoBridge();
 
 			expandoBridge.setAttributes(serviceContext);
+
+			// Social
+
+			socialActivityLocalService.addActivity(
+				userId, image.getGroupId(), IGImage.class.getName(), imageId,
+				IGActivityKeys.ADD_IMAGE, StringPool.BLANK, 0);
 
 			// Indexer
 
@@ -601,6 +608,12 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 			ExpandoBridge expandoBridge = image.getExpandoBridge();
 
 			expandoBridge.setAttributes(serviceContext);
+
+			// Social
+
+			socialActivityLocalService.addActivity(
+				userId, image.getGroupId(), IGImage.class.getName(), imageId,
+				IGActivityKeys.UPDATE_IMAGE, StringPool.BLANK, 0);
 
 			// Indexer
 
