@@ -67,7 +67,7 @@
 					</div>
 
 					<div class="panel-content">
-						<div class="ctrl-holder">
+						<div class="exp-ctrl-holder">
 							<label class="vocabulary-label" for="vocabulary-category-name">
 								<liferay-ui:message key="name" />
 							</label>
@@ -75,7 +75,7 @@
 							<input class="vocabulary-category-name" name="vocabulary-category-name" type="text" value="" />
 						</div>
 
-						<div class="ctrl-holder">
+						<div class="exp-ctrl-holder">
 							<label for="vocabulary-select-list">
 								<liferay-ui:message key="to-vocabulary" />
 							</label>
@@ -103,7 +103,7 @@
 					</div>
 
 					<div class="panel-content">
-						<div class="ctrl-holder">
+						<div class="exp-ctrl-holder">
 							<label for="vocabulary-name">
 								<liferay-ui:message key="add-vocabulary" />
 							</label>

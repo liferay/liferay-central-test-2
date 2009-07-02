@@ -227,7 +227,7 @@
 	text-align: left;
 }
 
-.portlet-asset-category-admin .panel-content .ctrl-holder {
+.portlet-asset-category-admin .panel-content .exp-ctrl-holder {
 	margin-bottom: 10px;
 }
 
@@ -236,15 +236,15 @@
 	font-weight: bold;
 }
 
-.portlet-asset-category-admin .panel-content .ctrl-holder input, .portlet-asset-category-admin .panel-content .ctrl-holder select {
+.portlet-asset-category-admin .panel-content .exp-ctrl-holder input, .portlet-asset-category-admin .panel-content .exp-ctrl-holder select {
 	min-width: 200px;
 }
 
-.ie6 .portlet-asset-category-admin .panel-content .ctrl-holder, .ie6 .portlet-asset-category-admin .panel-content .ctrl-holder {
+.ie6 .portlet-asset-category-admin .panel-content .exp-ctrl-holder, .ie6 .portlet-asset-category-admin .panel-content .exp-ctrl-holder {
 	width: 200px;
 }
 
-.ie6 .portlet-asset-category-admin .panel-content .ctrl-holder input, .ie6 .portlet-asset-category-admin .panel-content .ctrl-holder select {
+.ie6 .portlet-asset-category-admin .panel-content .exp-ctrl-holder input, .ie6 .portlet-asset-category-admin .panel-content .exp-ctrl-holder select {
 	width: 200px;
 }
 
