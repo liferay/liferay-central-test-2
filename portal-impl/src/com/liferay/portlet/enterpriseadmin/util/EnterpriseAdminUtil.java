@@ -328,11 +328,11 @@ public class EnterpriseAdminUtil {
 				actionRequest, "addressId" + addressesIndex);
 
 			String street1 = ParamUtil.getString(
-				actionRequest, "addressStreetOne" + addressesIndex);
+				actionRequest, "addressStreet1_" + addressesIndex);
 			String street2 = ParamUtil.getString(
-				actionRequest, "addressStreetTwo" + addressesIndex);
+				actionRequest, "addressStreet2_" + addressesIndex);
 			String street3 = ParamUtil.getString(
-				actionRequest, "addressStreetThree" + addressesIndex);
+				actionRequest, "addressStreet3_" + addressesIndex);
 			String city = ParamUtil.getString(
 				actionRequest, "addressCity" + addressesIndex);
 			String zip = ParamUtil.getString(
