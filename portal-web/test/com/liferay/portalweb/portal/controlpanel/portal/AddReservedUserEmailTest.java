@@ -56,7 +56,7 @@ public class AddReservedUserEmailTest extends BaseTestCase {
 		selenium.typeKeys("_125_screenName", RuntimeVariables.replace("testA"));
 		selenium.type("_125_screenName", RuntimeVariables.replace("testA"));
 		selenium.type("_125_emailAddress",
-			RuntimeVariables.replace("liferay@liferay.com"));
+			RuntimeVariables.replace("Liferay@liferay.com"));
 		selenium.type("_125_firstName", RuntimeVariables.replace("testA"));
 		selenium.type("_125_lastName", RuntimeVariables.replace("testA"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));

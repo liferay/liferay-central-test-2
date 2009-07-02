@@ -1,0 +1,109 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>AssertAuthenticationLDAPTest</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">AssertAuthenticationLDAPTest</td></tr>
+</thead><tbody>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>authenticationLink</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=LDAP</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=LDAP</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>_130_settings(ldap.auth.enabled)Checkbox</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>_130_settings(ldap.auth.required)Checkbox</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>_130_defaultLdap</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Reset Values']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>_130_settings(ldap.base.provider.url)</td>
+	<td>ldap://localhost:10389</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@name='_130_defaultLdap' and @value='microsoft']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Reset Values']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>_130_settings(ldap.base.provider.url)</td>
+	<td>ldap://localhost:389</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//input[@value='Test LDAP Connection']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//input[@value='Test LDAP Users']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//input[@value='Test LDAP Groups']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>_130_ldapImportEnabledCheckbox</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>_130_ldapExportEnabledCheckbox</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>_130_settings(ldap.password.policy.enabled)Checkbox</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>

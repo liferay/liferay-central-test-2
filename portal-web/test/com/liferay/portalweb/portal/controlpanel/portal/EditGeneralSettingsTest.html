@@ -1,0 +1,64 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>EditGeneralSettingsTest</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">EditGeneralSettingsTest</td></tr>
+</thead><tbody>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>typeKeys</td>
+	<td>_130_legalId</td>
+	<td>LIFE</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_130_legalId</td>
+	<td>LIFE</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_130_sicCode</td>
+	<td>1234</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_130_tickerSymbol</td>
+	<td>LFRY</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_130_industry</td>
+	<td>Web Portal</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_130_type</td>
+	<td>Open Source</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Save']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Your request processed successfully.</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>

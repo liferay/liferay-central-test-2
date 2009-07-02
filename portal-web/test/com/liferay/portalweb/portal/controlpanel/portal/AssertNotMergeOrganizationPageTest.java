@@ -55,11 +55,14 @@ public class AssertNotMergeOrganizationPageTest extends BaseTestCase {
 			case 2:
 				selenium.click(RuntimeVariables.replace("link=Guest"));
 				selenium.waitForPageToLoad("30000");
+				assertTrue(selenium.isElementPresent("link=Welcome"));
 				assertFalse(selenium.isElementPresent(
 						"link=Selenium Test Home Page"));
 				selenium.click(RuntimeVariables.replace(
 						"//div[@id='_145_myPlacesContainer']/ul/li[3]/a/span"));
 				selenium.waitForPageToLoad("30000");
+				assertTrue(selenium.isElementPresent(
+						"link=Selenium Test Home Page"));
 				assertFalse(selenium.isElementPresent("link=Welcome"));
 				selenium.click(RuntimeVariables.replace(
 						"//div[@id='_145_myPlacesContainer']/ul/li[2]/a/span[1]"));

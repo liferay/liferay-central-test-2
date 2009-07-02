@@ -34,36 +34,91 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 public class AssertCannotDeleteApplyOrganizationTest extends BaseTestCase {
 	public void testAssertCannotDeleteApplyOrganization()
 		throws Exception {
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
+		int label = 1;
 
-			try {
-				if (selenium.isElementPresent("link=Organizations")) {
-					break;
+		while (label >= 1) {
+			switch (label) {
+			case 1:
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isElementPresent("link=Organizations")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
 				}
-			}
-			catch (Exception e) {
-			}
 
-			Thread.sleep(1000);
+				selenium.click(RuntimeVariables.replace("link=Organizations"));
+				selenium.waitForPageToLoad("30000");
+				selenium.typeKeys("_126_keywords",
+					RuntimeVariables.replace("Selenium"));
+				selenium.type("_126_keywords",
+					RuntimeVariables.replace("Selenium"));
+				selenium.click(RuntimeVariables.replace(
+						"//input[@value='Search']"));
+				selenium.waitForPageToLoad("30000");
+				selenium.click("//strong/span");
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isElementPresent("link=View Users")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
+				selenium.click(RuntimeVariables.replace("link=View Users"));
+				selenium.waitForPageToLoad("30000");
+
+				boolean NoUsersAssigned = selenium.isTextPresent(
+						"No users were found.");
+
+				if (NoUsersAssigned) {
+					label = 2;
+
+					continue;
+				}
+
+				selenium.click(RuntimeVariables.replace("link=View All"));
+				selenium.waitForPageToLoad("30000");
+				selenium.typeKeys("_126_keywords",
+					RuntimeVariables.replace("Selenium"));
+				selenium.type("_126_keywords",
+					RuntimeVariables.replace("Selenium"));
+				selenium.click(RuntimeVariables.replace(
+						"//input[@value='Search']"));
+				selenium.waitForPageToLoad("30000");
+				selenium.click("_126_allRowIds");
+				selenium.click(RuntimeVariables.replace(
+						"//input[@value='Delete']"));
+				selenium.waitForPageToLoad("30000");
+				assertTrue(selenium.getConfirmation()
+								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
+				assertTrue(selenium.isTextPresent(
+						"You have entered invalid data. Please try again."));
+				assertTrue(selenium.isTextPresent(
+						"You cannot delete organizations that have suborganizations or users."));
+
+			case 2:
+			case 100:
+				label = -1;
+			}
 		}
-
-		selenium.click(RuntimeVariables.replace("link=Organizations"));
-		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_126_keywords", RuntimeVariables.replace("Selenium"));
-		selenium.type("_126_keywords", RuntimeVariables.replace("Selenium"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click("_126_allRowIds");
-		selenium.click(RuntimeVariables.replace("//input[@value='Delete']"));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.getConfirmation()
-						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
-		assertTrue(selenium.isTextPresent(
-				"You have entered invalid data. Please try again."));
-		assertTrue(selenium.isTextPresent(
-				"You cannot delete organizations that have suborganizations or users."));
 	}
 }

@@ -19,6 +19,66 @@
 	<td></td>
 </tr>
 <tr>
+	<td>typeKeys</td>
+	<td>_127_name</td>
+	<td>Selenium</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_127_name</td>
+	<td>Selenium</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Search']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//strong/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=View Users</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=View Users</td>
+	<td></td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>eval(selenium.isTextPresent('No users were found.'))</td>
+	<td>NoUsersAssigned</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>${NoUsersAssigned}</td>
+	<td>NoUsersPresent</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=View All</td>
+	<td></td>
+</tr>
+<tr>
+	<td>typeKeys</td>
+	<td>_127_name</td>
+	<td>Selenium</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_127_name</td>
+	<td>Selenium</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Search']</td>
+	<td></td>
+</tr>
+<tr>
 	<td>click</td>
 	<td>_127_allRowIds</td>
 	<td></td>
@@ -41,6 +101,11 @@
 <tr>
 	<td>assertTextPresent</td>
 	<td>You cannot delete user groups that have users.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>NoUsersPresent</td>
 	<td></td>
 </tr>
 

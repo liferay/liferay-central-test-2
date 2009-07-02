@@ -26,14 +26,13 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="SettingsMiscellaneousDisplaySettingsTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="EnterReservedUserSNTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class SettingsMiscellaneousDisplaySettingsTest extends BaseTestCase {
-	public void testSettingsMiscellaneousDisplaySettings()
-		throws Exception {
+public class EnterReservedUserSNTest extends BaseTestCase {
+	public void testEnterReservedUserSN() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -52,7 +51,7 @@ public class SettingsMiscellaneousDisplaySettingsTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Settings"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("displaySettingsLink");
+		selenium.click("usersLink");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -60,8 +59,7 @@ public class SettingsMiscellaneousDisplaySettingsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent(
-							"_130_settings(company.security.community.logo)Checkbox")) {
+				if (selenium.isElementPresent("link=Reserved Credentials")) {
 					break;
 				}
 			}
@@ -71,21 +69,32 @@ public class SettingsMiscellaneousDisplaySettingsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("_130_settings(company.security.community.logo)Checkbox");
+		selenium.click("link=Reserved Credentials");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent(
+							"_130_settings(admin.reserved.screen.names)")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.typeKeys("_130_settings(admin.reserved.screen.names)",
+			RuntimeVariables.replace("Lifera"));
+		selenium.type("_130_settings(admin.reserved.screen.names)",
+			RuntimeVariables.replace("Liferay"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
-		selenium.click("displaySettingsLink");
-		assertFalse(selenium.isChecked(
-				"_130_settings(company.security.community.logo)Checkbox"));
-		selenium.click("_130_settings(company.security.community.logo)Checkbox");
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
-		selenium.click("displaySettingsLink");
-		assertTrue(selenium.isChecked(
-				"_130_settings(company.security.community.logo)Checkbox"));
 	}
 }

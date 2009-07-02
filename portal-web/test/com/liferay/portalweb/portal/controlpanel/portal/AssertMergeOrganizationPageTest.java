@@ -53,14 +53,13 @@ public class AssertMergeOrganizationPageTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 
 			case 2:
-				assertTrue(selenium.isElementPresent("link=Selenium"));
-				selenium.click(RuntimeVariables.replace("link=Guest"));
+				selenium.click(RuntimeVariables.replace(
+						"//div[@id='_145_myPlacesContainer']/ul/li[3]/a/span"));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.isElementPresent("link=Welcome"));
 				assertTrue(selenium.isElementPresent(
 						"link=Selenium Test Home Page"));
-				selenium.click(RuntimeVariables.replace(
-						"//div[@id='_145_myPlacesContainer']/ul/li[3]/a/span"));
+				selenium.click(RuntimeVariables.replace("link=Guest"));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.isElementPresent("link=Welcome"));
 				assertTrue(selenium.isElementPresent(

@@ -1,0 +1,89 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>AddOrganizationEmailAddress2Test</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">AddOrganizationEmailAddress2Test</td></tr>
+</thead><tbody>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Organizations</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Organizations</td>
+	<td></td>
+</tr>
+<tr>
+	<td>typeKeys</td>
+	<td>_126_keywords</td>
+	<td>selenium</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_126_keywords</td>
+	<td>selenium</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Search']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Selenium</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>additionalEmailAddressesLink</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='additionalEmailAddresses']/fieldset/div[2]/div/span/a[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='additionalEmailAddresses']/fieldset/div[2]/div/span/a[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>_126_emailAddressAddress2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>typeKeys</td>
+	<td>_126_emailAddressAddress2</td>
+	<td>Lifera@Lifera.com</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_126_emailAddressAddress2</td>
+	<td>Liferay@Liferay.com</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>_126_emailAddressTypeId2</td>
+	<td>label=E-mail</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Save']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Your request processed successfully.</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>
