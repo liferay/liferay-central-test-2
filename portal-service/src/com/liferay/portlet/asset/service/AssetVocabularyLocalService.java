@@ -106,6 +106,12 @@ public interface AssetVocabularyLocalService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.asset.model.AssetVocabulary addVocabulary(
+		java.lang.String uuid, long userId, java.lang.String name,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
 	public void addVocabularyResources(
 		com.liferay.portlet.asset.model.AssetVocabulary vocabulary,
 		boolean addCommunityPermissions, boolean addGuestPermissions)

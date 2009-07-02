@@ -107,6 +107,14 @@ public interface AssetCategoryLocalService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.asset.model.AssetCategory addCategory(
+		java.lang.String uuid, long userId, long parentCategoryId,
+		java.lang.String name, long vocabularyId,
+		java.lang.String[] properties,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
 	public void addCategoryResources(
 		com.liferay.portlet.asset.model.AssetCategory category,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
