@@ -52,9 +52,7 @@ public class UserGroupRoleLocalServiceImpl
 
 		checkGroupResource(groupId);
 
-		for (int i = 0; i < roleIds.length; i++) {
-			long roleId = roleIds[i];
-
+		for (long roleId : roleIds) {
 			UserGroupRolePK pk = new UserGroupRolePK(userId, groupId, roleId);
 
 			UserGroupRole userGroupRole =
@@ -75,9 +73,7 @@ public class UserGroupRoleLocalServiceImpl
 
 		checkGroupResource(groupId);
 
-		for (int i = 0; i < userIds.length; i++) {
-			long userId = userIds[i];
-
+		for (long userId : userIds) {
 			UserGroupRolePK pk = new UserGroupRolePK(userId, groupId, roleId);
 
 			UserGroupRole userGroupRole =
@@ -104,9 +100,7 @@ public class UserGroupRoleLocalServiceImpl
 	public void deleteUserGroupRoles(long userId, long[] groupIds)
 		throws SystemException {
 
-		for (int i = 0; i < groupIds.length; i++) {
-			long groupId = groupIds[i];
-
+		for (long groupId : groupIds) {
 			userGroupRolePersistence.removeByU_G(userId, groupId);
 		}
 
@@ -116,9 +110,7 @@ public class UserGroupRoleLocalServiceImpl
 	public void deleteUserGroupRoles(long[] userIds, long groupId)
 		throws SystemException {
 
-		for (int i = 0; i < userIds.length; i++) {
-			long userId = userIds[i];
-
+		for (long userId : userIds) {
 			userGroupRolePersistence.removeByU_G(userId, groupId);
 		}
 
@@ -129,9 +121,7 @@ public class UserGroupRoleLocalServiceImpl
 			long userId, long groupId, long[] roleIds)
 		throws SystemException {
 
-		for (int i = 0; i < roleIds.length; i++) {
-			long roleId = roleIds[i];
-
+		for (long roleId : roleIds) {
 			UserGroupRolePK pk = new UserGroupRolePK(userId, groupId, roleId);
 
 			try {
@@ -147,9 +137,7 @@ public class UserGroupRoleLocalServiceImpl
 	public void deleteUserGroupRoles(long[] userIds, long groupId, long roleId)
 		throws SystemException {
 
-		for (int i = 0; i < userIds.length; i++) {
-			long userId = userIds[i];
-
+		for (long userId : userIds) {
 			UserGroupRolePK pk = new UserGroupRolePK(userId, groupId, roleId);
 
 			try {
