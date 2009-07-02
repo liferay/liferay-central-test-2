@@ -96,7 +96,7 @@ else {
 					String fieldParam = "addressId" + addressesIndex;
 					%>
 
-					<input id="<portlet:namespace /><%= fieldParam %>" name="<portlet:namespace /><%= fieldParam %>" type="hidden" value="" />
+					<input id="<portlet:namespace /><%= fieldParam %>" name="<portlet:namespace /><%= fieldParam %>" type="hidden" value="<%= address.getAddressId() %>" />
 
 					<%
 					fieldParam = "addressStreet1" + addressesIndex;
