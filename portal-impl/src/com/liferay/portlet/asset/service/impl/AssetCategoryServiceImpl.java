@@ -50,7 +50,7 @@ public class AssetCategoryServiceImpl extends AssetCategoryServiceBaseImpl {
 
 	public AssetCategory addCategory(
 			long parentCategoryId, String name, long vocabularyId,
-			String[] properties, ServiceContext serviceContext)
+			String[] categoryProperties, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		AssetCategoryPermission.check(
@@ -58,8 +58,8 @@ public class AssetCategoryServiceImpl extends AssetCategoryServiceBaseImpl {
 			parentCategoryId, ActionKeys.ADD_CATEGORY);
 
 		return assetCategoryLocalService.addCategory(
-			getUserId(), parentCategoryId, name, vocabularyId, properties,
-			serviceContext);
+			null, getUserId(), parentCategoryId, name, vocabularyId,
+			categoryProperties, serviceContext);
 	}
 
 	public void deleteCategory(long categoryId)
@@ -110,16 +110,17 @@ public class AssetCategoryServiceImpl extends AssetCategoryServiceBaseImpl {
 	}
 
 	public JSONArray search(
-			long groupId, String name, String[] properties, int start, int end)
+			long groupId, String name, String[] categoryProperties, int start,
+			int end)
 		throws SystemException {
 
 		return assetCategoryLocalService.search(
-			groupId, name, properties, start, end);
+			groupId, name, categoryProperties, start, end);
 	}
 
 	public AssetCategory updateCategory(
 			long categoryId, long parentCategoryId, String name,
-			long vocabularyId, String[] properties)
+			long vocabularyId, String[] categoryProperties)
 		throws PortalException, SystemException {
 
 		AssetCategoryPermission.check(
@@ -127,7 +128,7 @@ public class AssetCategoryServiceImpl extends AssetCategoryServiceBaseImpl {
 
 		return assetCategoryLocalService.updateCategory(
 			getUserId(), categoryId, parentCategoryId, name, vocabularyId,
-			properties);
+			categoryProperties);
 	}
 
 	protected List<AssetCategory> filterCategories(

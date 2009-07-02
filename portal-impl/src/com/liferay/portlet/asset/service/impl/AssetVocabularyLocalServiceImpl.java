@@ -50,13 +50,6 @@ public class AssetVocabularyLocalServiceImpl
 	extends AssetVocabularyLocalServiceBaseImpl {
 
 	public AssetVocabulary addVocabulary(
-			long userId, String name, ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		return addVocabulary(null, userId, name, serviceContext);
-	}
-
-	public AssetVocabulary addVocabulary(
 			String uuid, long userId, String name,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
@@ -173,14 +166,17 @@ public class AssetVocabularyLocalServiceImpl
 		if (vocabularies.isEmpty()) {
 			Group group = groupLocalService.getGroup(groupId);
 
+			long defaultUserId = userLocalService.getDefaultUserId(
+				group.getCompanyId());
+
 			ServiceContext serviceContext = new ServiceContext();
 
 			serviceContext.setScopeGroupId(groupId);
 
 			AssetVocabulary vocabulary =
 				assetVocabularyLocalService.addVocabulary(
-					userLocalService.getDefaultUserId(group.getCompanyId()),
-					PropsValues.ASSET_VOCABULARY_DEFAULT, serviceContext);
+					null, defaultUserId, PropsValues.ASSET_VOCABULARY_DEFAULT,
+					serviceContext);
 
 			vocabularies = ListUtil.copy(vocabularies);
 

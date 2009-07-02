@@ -847,13 +847,13 @@ public class LayoutImporter {
 				serviceContext.setScopeGroupId(context.getGroupId());
 
 				AssetVocabulary assetVocabulary = null;
-				AssetVocabulary existingAssetVocabulary = null;
 
 				if (context.getDataStrategy().equals(
 						PortletDataHandlerKeys.DATA_STRATEGY_MIRROR)) {
 
-					existingAssetVocabulary = AssetVocabularyUtil.fetchByUUID_G(
-						vocabularyUuid, context.getGroupId());
+					AssetVocabulary existingAssetVocabulary =
+						AssetVocabularyUtil.fetchByUUID_G(
+							vocabularyUuid, context.getGroupId());
 
 					if (existingAssetVocabulary == null) {
 						assetVocabulary =
@@ -871,7 +871,7 @@ public class LayoutImporter {
 				else {
 					assetVocabulary =
 						AssetVocabularyLocalServiceUtil.addVocabulary(
-							context.getUserId(userUuid), vocabularyName,
+							null, context.getUserId(userUuid), vocabularyName,
 							serviceContext);
 				}
 
@@ -913,40 +913,35 @@ public class LayoutImporter {
 		long parentCategoryId = 0;
 
 		if (Validator.isNotNull(parentCategoryUuid)) {
-			AssetCategory parentCategory =
-				AssetCategoryUtil.findByUUID_G(
-					parentCategoryUuid,context.getScopeGroupId());
+			AssetCategory parentCategory = AssetCategoryUtil.findByUUID_G(
+				parentCategoryUuid,context.getScopeGroupId());
 
 			parentCategoryId = parentCategory.getCategoryId();
 		}
 
-		AssetCategory existingAssetCategory = null;
-
 		if (context.getDataStrategy().equals(
-			PortletDataHandlerKeys.DATA_STRATEGY_MIRROR)) {
+				PortletDataHandlerKeys.DATA_STRATEGY_MIRROR)) {
 
-			existingAssetCategory = AssetCategoryUtil.fetchByUUID_G(
-				categoryUuid, context.getGroupId());
+			AssetCategory existingAssetCategory =
+				AssetCategoryUtil.fetchByUUID_G(
+					categoryUuid, context.getGroupId());
 
 			if (existingAssetCategory == null) {
 				AssetCategoryLocalServiceUtil.addCategory(
-					categoryUuid, context.getUserId(userUuid),
-					parentCategoryId, categoryName,
-					vocabularyId, properties, serviceContext);
+					categoryUuid, context.getUserId(userUuid), parentCategoryId,
+					categoryName, vocabularyId, properties, serviceContext);
 			}
 			else {
 				AssetCategoryLocalServiceUtil.updateCategory(
 					context.getUserId(userUuid),
-					existingAssetCategory.getCategoryId(),
-					parentCategoryId, categoryName,
-					vocabularyId, properties);
+					existingAssetCategory.getCategoryId(), parentCategoryId,
+					categoryName, vocabularyId, properties);
 			}
 		}
 		else {
 			AssetCategoryLocalServiceUtil.addCategory(
-				context.getUserId(userUuid),
-				parentCategoryId, categoryName,
-				vocabularyId, properties, serviceContext);
+				null, context.getUserId(userUuid), parentCategoryId,
+				categoryName, vocabularyId, properties, serviceContext);
 		}
 	}
 

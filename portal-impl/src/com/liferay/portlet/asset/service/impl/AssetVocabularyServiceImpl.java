@@ -56,7 +56,7 @@ public class AssetVocabularyServiceImpl
 			ActionKeys.ADD_VOCABULARY);
 
 		return assetVocabularyLocalService.addVocabulary(
-			getUserId(), name, serviceContext);
+			null, getUserId(), name, serviceContext);
 	}
 
 	public void deleteVocabulary(long vocabularyId)

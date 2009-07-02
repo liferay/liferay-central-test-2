@@ -730,7 +730,7 @@ public class PortletImporter {
 					asset.attributeValue("class-pk"));
 				String[] assetCategoryUuids = StringUtil.split(
 					GetterUtil.getString(
-						asset.attributeValue("categoryUuids")));
+						asset.attributeValue("category-uuids")));
 
 				long[] assetCategoryIds = new long[0];
 
@@ -745,7 +745,6 @@ public class PortletImporter {
 					}
 					catch (NoSuchCategoryException nsce) {
 					}
-
 				}
 
 				context.addAssetCategories(

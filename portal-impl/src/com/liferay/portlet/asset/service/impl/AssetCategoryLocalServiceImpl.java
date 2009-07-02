@@ -60,18 +60,8 @@ public class AssetCategoryLocalServiceImpl
 	extends AssetCategoryLocalServiceBaseImpl {
 
 	public AssetCategory addCategory(
-			long userId, long parentCategoryId, String name, long vocabularyId,
-			String[] properties, ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		return addCategory(
-			null, userId, parentCategoryId, name, vocabularyId, properties,
-			serviceContext);
-	}
-
-	public AssetCategory addCategory(
 			String uuid, long userId, long parentCategoryId, String name,
-			long vocabularyId, String[] properties,
+			long vocabularyId, String[] categoryProperties,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
@@ -81,8 +71,8 @@ public class AssetCategoryLocalServiceImpl
 		long groupId = serviceContext.getScopeGroupId();
 		name = name.trim();
 
-		if (properties == null) {
-			properties = new String[0];
+		if (categoryProperties == null) {
+			categoryProperties = new String[0];
 		}
 
 		Date now = new Date();
@@ -129,20 +119,20 @@ public class AssetCategoryLocalServiceImpl
 
 		// Properties
 
-		for (int i = 0; i < properties.length; i++) {
-			String[] property = StringUtil.split(
-				properties[i], StringPool.COLON);
+		for (int i = 0; i < categoryProperties.length; i++) {
+			String[] categoryProperty = StringUtil.split(
+				categoryProperties[i], StringPool.COLON);
 
 			String key = StringPool.BLANK;
 
-			if (property.length > 1) {
-				key = GetterUtil.getString(property[1]);
+			if (categoryProperty.length > 1) {
+				key = GetterUtil.getString(categoryProperty[1]);
 			}
 
 			String value = StringPool.BLANK;
 
-			if (property.length > 2) {
-				value = GetterUtil.getString(property[2]);
+			if (categoryProperty.length > 2) {
+				value = GetterUtil.getString(categoryProperty[2]);
 			}
 
 			if (Validator.isNotNull(key)) {
@@ -288,18 +278,19 @@ public class AssetCategoryLocalServiceImpl
 
 		assetCategoryPersistence.addAssetEntries(toCategoryId, entries);
 
-		List<AssetCategoryProperty> properties =
+		List<AssetCategoryProperty> categoryProperties =
 			assetCategoryPropertyPersistence.findByCategoryId(fromCategoryId);
 
-		for (AssetCategoryProperty fromProperty : properties) {
-			AssetCategoryProperty toProperty =
+		for (AssetCategoryProperty fromCategoryProperty : categoryProperties) {
+			AssetCategoryProperty toCategoryProperty =
 				assetCategoryPropertyPersistence.fetchByCA_K(
-					toCategoryId, fromProperty.getKey());
+					toCategoryId, fromCategoryProperty.getKey());
 
-			if (toProperty == null) {
-				fromProperty.setCategoryId(toCategoryId);
+			if (toCategoryProperty == null) {
+				fromCategoryProperty.setCategoryId(toCategoryId);
 
-				assetCategoryPropertyPersistence.update(fromProperty, false);
+				assetCategoryPropertyPersistence.update(
+					fromCategoryProperty, false);
 			}
 		}
 
@@ -307,26 +298,27 @@ public class AssetCategoryLocalServiceImpl
 	}
 
 	public JSONArray search(
-			long groupId, String name, String[] properties, int start, int end)
+			long groupId, String name, String[] categoryProperties, int start,
+			int end)
 		throws SystemException {
 
 		List<AssetCategory> list = assetCategoryFinder.findByG_N_P(
-			groupId, name, properties, start, end);
+			groupId, name, categoryProperties, start, end);
 
 		return Autocomplete.listToJson(list, "name", "name");
 	}
 
 	public AssetCategory updateCategory(
 			long userId, long categoryId, long parentCategoryId, String name,
-			long vocabularyId, String[] properties)
+			long vocabularyId, String[] categoryProperties)
 		throws PortalException, SystemException {
 
 		// Category
 
 		name = name.trim();
 
-		if (properties == null) {
-			properties = new String[0];
+		if (categoryProperties == null) {
+			categoryProperties = new String[0];
 		}
 
 		validate(categoryId, parentCategoryId, name, vocabularyId);
@@ -357,20 +349,20 @@ public class AssetCategoryLocalServiceImpl
 				categoryProperty);
 		}
 
-		for (int i = 0; i < properties.length; i++) {
-			String[] property = StringUtil.split(
-				properties[i], StringPool.COLON);
+		for (int i = 0; i < categoryProperties.length; i++) {
+			String[] categoryProperty = StringUtil.split(
+				categoryProperties[i], StringPool.COLON);
 
 			String key = StringPool.BLANK;
 
-			if (property.length > 0) {
-				key = GetterUtil.getString(property[0]);
+			if (categoryProperty.length > 0) {
+				key = GetterUtil.getString(categoryProperty[0]);
 			}
 
 			String value = StringPool.BLANK;
 
-			if (property.length > 1) {
-				value = GetterUtil.getString(property[1]);
+			if (categoryProperty.length > 1) {
+				value = GetterUtil.getString(categoryProperty[1]);
 			}
 
 			if (Validator.isNotNull(key)) {

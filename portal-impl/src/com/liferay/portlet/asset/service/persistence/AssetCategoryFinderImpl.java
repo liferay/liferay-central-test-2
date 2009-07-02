@@ -107,7 +107,8 @@ public class AssetCategoryFinderImpl
 		}
 	}
 
-	public int countByG_N_P(long groupId, String name, String[] properties)
+	public int countByG_N_P(
+			long groupId, String name, String[] categoryProperties)
 		throws SystemException {
 
 		Session session = null;
@@ -123,7 +124,7 @@ public class AssetCategoryFinderImpl
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
-			setJoin(qPos, properties);
+			setJoin(qPos, categoryProperties);
 			qPos.add(groupId);
 			qPos.add(name);
 			qPos.add(name);

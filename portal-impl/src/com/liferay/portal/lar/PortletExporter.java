@@ -301,7 +301,7 @@ public class PortletExporter {
 				asset.addAttribute("class-name", categoryEntry[0]);
 				asset.addAttribute("class-pk", categoryEntry[1]);
 				asset.addAttribute(
-					"categoryUuids", StringUtil.merge(entry.getValue()));
+					"category-uuids", StringUtil.merge(entry.getValue()));
 			}
 
 			context.addZipEntry(
