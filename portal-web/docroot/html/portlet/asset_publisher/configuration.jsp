@@ -310,6 +310,7 @@ configurationActionURL.setParameter("portletResource", portletResource);
 
 						<select name="<portlet:namespace />groupByVocabularyId">
 							<option value=""></option>
+							<option <%= (groupByVocabularyId == -1) ? "selected" : "" %> value="-1"><liferay-ui:message key="asset-types" /></option>
 
 							<%
 							List<AssetVocabulary> assetVocabularies = AssetVocabularyLocalServiceUtil.getGroupVocabularies(scopeGroupId);

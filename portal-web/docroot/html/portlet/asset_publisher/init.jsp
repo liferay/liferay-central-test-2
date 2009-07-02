@@ -208,7 +208,7 @@ String[] assetEntryXmls = preferences.getValues("asset-entry-xml", new String[0]
 boolean viewInContext = assetLinkBehaviour.equals("viewInPortlet");
 
 boolean showPortletWithNoResults = false;
-boolean groupByClass = false;
+boolean groupByClass = (groupByVocabularyId == -1);
 boolean allowEmptyResults = false;
 
 DateFormat dateFormatDate = DateFormats.getDate(locale, timeZone);
