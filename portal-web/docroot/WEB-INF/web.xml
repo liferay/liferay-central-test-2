@@ -422,6 +422,8 @@
 	<filter-mapping>
 		<filter-name>Secure Main Servlet Filter</filter-name>
 		<url-pattern>/c/*</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
 	</filter-mapping>
 	<filter-mapping>
 		<filter-name>Secure Main Servlet Filter</filter-name>
@@ -443,7 +445,9 @@
 	</filter-mapping>
 	<filter-mapping>
 		<filter-name>GZip Filter</filter-name>
-		<url-pattern>/c/portal/*</url-pattern>
+		<url-pattern>/c/*</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
 	</filter-mapping>
 	<filter-mapping>
 		<filter-name>GZip Filter</filter-name>
@@ -487,7 +491,9 @@
 	</filter-mapping>
 	<filter-mapping>
 		<filter-name>Theme Preview Filter</filter-name>
-		<url-pattern>/c/portal/*</url-pattern>
+		<url-pattern>/c/*</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
 	</filter-mapping>
 	<filter-mapping>
 		<filter-name>Theme Preview Filter</filter-name>
@@ -509,7 +515,9 @@
 	</filter-mapping>
 	<filter-mapping>
 		<filter-name>Strip Filter</filter-name>
-		<url-pattern>/c/portal/*</url-pattern>
+		<url-pattern>/c/*</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
 	</filter-mapping>
 	<filter-mapping>
 		<filter-name>Strip Filter</filter-name>
@@ -601,7 +609,9 @@
 	</filter-mapping>
 	<filter-mapping>
 		<filter-name>Monitoring Filter</filter-name>
-		<url-pattern>/c/portal/*</url-pattern>
+		<url-pattern>/c/*</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
 	</filter-mapping>
 	<filter-mapping>
 		<filter-name>Monitoring Filter</filter-name>
