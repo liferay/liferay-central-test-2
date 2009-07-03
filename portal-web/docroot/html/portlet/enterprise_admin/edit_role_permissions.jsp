@@ -188,7 +188,9 @@ editPermissionsURL.setParameter("roleId", String.valueOf(role.getRoleId()));
 <liferay-ui:success key="permissionDeleted" message="the-permission-was-deleted" />
 <liferay-ui:success key="permissionsUpdated" message="the-role-permissions-were-updated" />
 
-<%@ include file="/html/portlet/enterprise_admin/edit_role_permissions_navigation.jspf" %>
+<c:if test="<%= !portletName.equals(PortletKeys.ADMIN_SERVER) %>">
+	<%@ include file="/html/portlet/enterprise_admin/edit_role_permissions_navigation.jspf" %>
+</c:if>
 
 <c:choose>
 	<c:when test="<%= cmd.equals(Constants.VIEW) %>">

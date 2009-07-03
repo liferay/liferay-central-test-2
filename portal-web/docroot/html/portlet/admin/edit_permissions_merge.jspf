@@ -25,7 +25,7 @@
 <%
 MultiValueMap mvp = new MultiValueMap();
 
-List<Role> roles = RoleLocalServiceUtil.getRoles(RoleConstants.TYPE_REGULAR, "lfr-permission-algorithm-5");
+List<Role> roles = RoleLocalServiceUtil.getRoles(tabs2.equals("users") ? RoleConstants.TYPE_REGULAR : RoleConstants.TYPE_COMMUNITY, "lfr-permission-algorithm-5");
 
 Iterator<Role> rolesItr = roles.iterator();
 
@@ -161,7 +161,7 @@ List<Group> groups = new ArrayList<Group>(mvp.keySet());
 		<liferay-ui:search-container-column-button
 			align="right"
 			href="<%= taglibMergeURL %>"
-			name="merge"
+			name="<%= LanguageUtil.get(pageContext, "merge") %>"
 		/>
 	</liferay-ui:search-container-row>
 

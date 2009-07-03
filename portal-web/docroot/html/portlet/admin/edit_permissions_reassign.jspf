@@ -48,7 +48,7 @@ else if (tabs2.equals("organizations")) {
 <%
 List<ResourcePermission> resourcePermissions = new UniqueList<ResourcePermission>();
 
-List<Role> roles = RoleLocalServiceUtil.getRoles(RoleConstants.TYPE_COMMUNITY, "lfr-permission-algorithm-5");
+List<Role> roles = RoleLocalServiceUtil.getRoles(tabs2.equals("users") ? RoleConstants.TYPE_REGULAR : RoleConstants.TYPE_COMMUNITY, "lfr-permission-algorithm-5");
 
 Iterator<Role> rolesItr = roles.iterator();
 
@@ -128,15 +128,30 @@ while (rolesItr.hasNext()) {
 
 		Role systemRole = RoleLocalServiceUtil.getRole(role.getCompanyId(), systemRoleName);
 
-		Group group = GroupLocalServiceUtil.getRoleGroups(role.getRoleId()).get(0);
+		Group group = null;
+
+		List<String> systemActionLabels = null;
+
+		if (tabs2.equals("users")) {
+			User user2 = UserLocalServiceUtil.getRoleUsers(role.getRoleId()).get(0);
+
+			group = user2.getGroup();
+
+			systemActionLabels = ResourceActionsUtil.getActionsNames(pageContext, ResourceActionsUtil.getModelResourceActions(resourcePermission.getName()));
+
+			ListUtil.sort(systemActionLabels);
+		}
+		else {
+			group = GroupLocalServiceUtil.getRoleGroups(role.getRoleId()).get(0);
+
+			systemActionLabels = ResourceActionsUtil.getActionsNames(pageContext, ResourceActionsUtil.getModelResourceCommunityDefaultActions(resourcePermission.getName()));
+
+			ListUtil.sort(systemActionLabels);
+		}
 
 		List<String> actionLabels = ResourceActionsUtil.getActionsNames(pageContext, resourcePermission.getName(), resourcePermission.getActionIds());
 
 		ListUtil.sort(actionLabels);
-
-		List<String> systemActionLabels = ResourceActionsUtil.getActionsNames(pageContext, ResourceActionsUtil.getModelResourceCommunityDefaultActions(resourcePermission.getName()));
-
-		ListUtil.sort(systemActionLabels);
 		%>
 
 		<%
@@ -171,6 +186,7 @@ while (rolesItr.hasNext()) {
 		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editRoleURL">
 			<portlet:param name="struts_action" value="/admin_server/edit_role_permissions" />
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.VIEW %>" />
+			<portlet:param name="redirect" value="<%= currentURL %>" />
 			<portlet:param name="roleId" value="<%= String.valueOf(role.getRoleId()) %>" />
 		</portlet:renderURL>
 
@@ -210,7 +226,7 @@ while (rolesItr.hasNext()) {
 		<liferay-ui:search-container-column-button
 			align="right"
 			href="<%= taglibReassignURL %>"
-			name="reassign"
+			name="<%= LanguageUtil.get(pageContext, "reassign") %>"
 		/>
 	</liferay-ui:search-container-row>
 
