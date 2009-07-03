@@ -65,16 +65,9 @@ import java.util.concurrent.ConcurrentHashMap;
 public class CompanyStatistics
 	implements DataSampleProcessor<PortletRequestDataSample> {
 
-	/**
-	 * Used to support the system company id "0" and should never be
-	 * used by anything else
-	 * 
-	 */
-	CompanyStatistics() {
+	public CompanyStatistics() {
 		_companyId = CompanyConstants.SYSTEM;
 		_webId = CompanyConstants.SYSTEM_STRING;
-		_portletStatisticsByPortletId =
-			new ConcurrentHashMap<String, PortletStatistics>();
 	}
 
 	public CompanyStatistics(
@@ -85,8 +78,6 @@ public class CompanyStatistics
 
 			_companyId = company.getCompanyId();
 			_webId = webId;
-			_portletStatisticsByPortletId =
-				new ConcurrentHashMap<String, PortletStatistics>();
 		}
 		catch (Exception e) {
 			throw new IllegalStateException(
@@ -273,7 +264,8 @@ public class CompanyStatistics
 	private long _companyId;
 	private long _maxTime;
 	private long _minTime;
-	private Map<String, PortletStatistics> _portletStatisticsByPortletId;
+	private Map<String, PortletStatistics> _portletStatisticsByPortletId =
+		new ConcurrentHashMap<String, PortletStatistics>();
 	private String _webId;
 
 }

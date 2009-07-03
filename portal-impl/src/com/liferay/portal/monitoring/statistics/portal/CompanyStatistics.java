@@ -59,16 +59,10 @@ import com.liferay.portal.service.CompanyLocalService;
 public class CompanyStatistics
 	implements DataSampleProcessor<PortalRequestDataSample> {
 
-	/**
-	 * Used to support the system company id "0" and should never be
-	 * used by anything else
-	 *
-	 */
-	CompanyStatistics() {
+	public CompanyStatistics() {
 		_companyId = CompanyConstants.SYSTEM;
 		_webId = CompanyConstants.SYSTEM_STRING;
 		_requestStatistics = new RequestStatistics(_webId);
-		_startTime = System.currentTimeMillis();
 	}
 
 	public CompanyStatistics(
@@ -80,7 +74,6 @@ public class CompanyStatistics
 			_companyId = company.getCompanyId();
 			_webId = webId;
 			_requestStatistics = new RequestStatistics(_webId);
-			_startTime = System.currentTimeMillis();
 		}
 		catch (Exception e) {
 			throw new IllegalStateException(
@@ -158,7 +151,7 @@ public class CompanyStatistics
 	private long _maxTime;
 	private long _minTime;
 	private RequestStatistics _requestStatistics;
-	private long _startTime;
+	private long _startTime = System.currentTimeMillis();
 	private String _webId;
 
 }

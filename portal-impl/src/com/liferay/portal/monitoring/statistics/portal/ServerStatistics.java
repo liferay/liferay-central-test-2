@@ -44,10 +44,9 @@ public class ServerStatistics
 
 	public ServerStatistics(CompanyLocalService companyLocalService) {
 		_companyLocalService = companyLocalService;
-		_companyStatisticsByCompanyId = new TreeMap<Long, CompanyStatistics>();
-		_companyStatisticsByWebId = new TreeMap<String, CompanyStatistics>();
 
 		CompanyStatistics systemCompanyStatistics = new CompanyStatistics();
+
 		_companyStatisticsByCompanyId.put(
 			systemCompanyStatistics.getCompanyId(), systemCompanyStatistics);
 		_companyStatisticsByWebId.put(
@@ -168,7 +167,9 @@ public class ServerStatistics
 	}
 
 	private CompanyLocalService _companyLocalService;
-	private Map<Long, CompanyStatistics> _companyStatisticsByCompanyId;
-	private Map<String, CompanyStatistics> _companyStatisticsByWebId;
+	private Map<Long, CompanyStatistics> _companyStatisticsByCompanyId =
+		new TreeMap<Long, CompanyStatistics>();
+	private Map<String, CompanyStatistics> _companyStatisticsByWebId =
+		new TreeMap<String, CompanyStatistics>();
 
 }
