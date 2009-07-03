@@ -23,13 +23,13 @@
 		<tei-class>com.liferay.taglib.util.GetUrlTei</tei-class>
 		<body-content>JSP</body-content>
 		<attribute>
-			<name>url</name>
-			<required>true</required>
+			<name>expires</name>
+			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
-			<name>expires</name>
-			<required>false</required>
+			<name>url</name>
+			<required>true</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>

@@ -11,12 +11,12 @@
 		<tag-class>com.liferay.taglib.theme.BoxTag</tag-class>
 		<body-content>JSP</body-content>
 		<attribute>
-			<name>top</name>
+			<name>bottom</name>
 			<required>true</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
-			<name>bottom</name>
+			<name>top</name>
 			<required>true</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
@@ -42,13 +42,13 @@
 		<tag-class>com.liferay.taglib.theme.LayoutIconTag</tag-class>
 		<body-content>JSP</body-content>
 		<attribute>
-			<name>page</name>
-			<required>false</required>
+			<name>layout</name>
+			<required>true</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
-			<name>layout</name>
-			<required>true</required>
+			<name>page</name>
+			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 	</tag>
