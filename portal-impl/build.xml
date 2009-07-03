@@ -905,6 +905,20 @@ ${exception.message}
 		<delete file="ServiceBuilder.temp" />
 	</target>
 
+	<target name="format-tld">
+		<java
+			classname="com.liferay.portal.tools.TLDFormatter"
+			classpathref="project.classpath"
+			dir="${project.dir}"
+			fork="true"
+			newenvironment="true"
+		>
+			<jvmarg value="-Dexternal-properties=com/liferay/portal/tools/dependencies/portal-tools.properties" />
+		</java>
+
+		<delete file="ServiceBuilder.temp" />
+	</target>
+
 	<target name="rebuild-hypersonic">
 		<ant dir="../sql" target="rebuild-hypersonic" />
 	</target>
