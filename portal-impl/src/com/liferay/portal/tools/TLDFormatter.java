@@ -71,6 +71,7 @@ public class TLDFormatter {
 		DirectoryScanner ds = new DirectoryScanner();
 
 		ds.setBasedir(basedir);
+		ds.setExcludes(new String[] {"**\\liferay-portlet-ext.tld"});
 		ds.setIncludes(new String[] {"**\\*.tld"});
 
 		ds.scan();
