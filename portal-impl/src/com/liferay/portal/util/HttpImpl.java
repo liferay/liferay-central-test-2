@@ -78,6 +78,7 @@ import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.httpclient.methods.PutMethod;
 import org.apache.commons.httpclient.methods.RequestEntity;
 import org.apache.commons.httpclient.methods.StringRequestEntity;
+import org.apache.commons.httpclient.params.HttpClientParams;
 import org.apache.commons.httpclient.params.HttpConnectionParams;
 
 /**
@@ -844,6 +845,9 @@ public class HttpImpl implements Http {
 						header.getKey(), header.getValue());
 				}
 			}
+
+			httpMethod.getParams().setIntParameter(
+				HttpClientParams.SO_TIMEOUT, 0);
 
 			//httpMethod.setFollowRedirects(true);
 
