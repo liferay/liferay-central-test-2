@@ -25,6 +25,7 @@ package com.liferay.util.axis;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.axis.AxisEngine;
 import org.apache.axis.MessageContext;
@@ -54,6 +55,12 @@ public class ServletUtil {
 
 	public static ServletContext getServletContext() {
 		return getServlet().getServletContext();
+	}
+
+	public static HttpSession getSession() {
+		HttpServletRequest request = getRequest();
+
+		return request.getSession();
 	}
 
 }
