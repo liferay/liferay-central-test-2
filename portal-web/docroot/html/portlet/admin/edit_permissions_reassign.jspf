@@ -94,6 +94,10 @@ while (rolesItr.hasNext()) {
 			}
 
 			if (tabs2.equals("users")) {
+				if (model instanceof Group || model instanceof Layout || model instanceof Organization || model instanceof Role || model instanceof UserGroup) {
+					continue;
+				}
+
 				List<User> users = UserLocalServiceUtil.getRoleUsers(role.getRoleId());
 
 				long userId = BeanPropertiesUtil.getLong(model, "userId");
