@@ -120,13 +120,13 @@ public class GZipFilter extends BasePortalFilter {
 			FilterChain filterChain)
 		throws Exception {
 
-		String completeURL = HttpUtil.getCompleteURL(request);
-
 		if (isCompress(request) && !isInclude(request) &&
 			BrowserSnifferUtil.acceptsGzip(request) &&
 			!isAlreadyFiltered(request)) {
 
 			if (_log.isDebugEnabled()) {
+				String completeURL = HttpUtil.getCompleteURL(request);
+
 				_log.debug("Compressing " + completeURL);
 			}
 
@@ -140,6 +140,8 @@ public class GZipFilter extends BasePortalFilter {
 		}
 		else {
 			if (_log.isDebugEnabled()) {
+				String completeURL = HttpUtil.getCompleteURL(request);
+
 				_log.debug("Not compressing " + completeURL);
 			}
 

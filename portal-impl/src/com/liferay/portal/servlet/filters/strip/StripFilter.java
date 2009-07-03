@@ -126,12 +126,12 @@ public class StripFilter extends BasePortalFilter {
 			FilterChain filterChain)
 		throws Exception {
 
-		String completeURL = HttpUtil.getCompleteURL(request);
-
 		if (isStrip(request) && !isInclude(request) &&
 			!isAlreadyFiltered(request)) {
 
 			if (_log.isDebugEnabled()) {
+				String completeURL = HttpUtil.getCompleteURL(request);
+
 				_log.debug("Stripping " + completeURL);
 			}
 
@@ -174,6 +174,8 @@ public class StripFilter extends BasePortalFilter {
 		}
 		else {
 			if (_log.isDebugEnabled()) {
+				String completeURL = HttpUtil.getCompleteURL(request);
+
 				_log.debug("Not stripping " + completeURL);
 			}
 

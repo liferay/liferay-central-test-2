@@ -210,10 +210,10 @@ public class SecureFilter extends BasePortalFilter {
 			}
 		}
 
-		String completeURL = HttpUtil.getCompleteURL(request);
-
 		if (_httpsRequired && !request.isSecure()) {
 			if (_log.isDebugEnabled()) {
+				String completeURL = HttpUtil.getCompleteURL(request);
+
 				_log.debug("Securing " + completeURL);
 			}
 
@@ -238,6 +238,8 @@ public class SecureFilter extends BasePortalFilter {
 		}
 		else {
 			if (_log.isDebugEnabled()) {
+				String completeURL = HttpUtil.getCompleteURL(request);
+
 				_log.debug("Not securing " + completeURL);
 			}
 
