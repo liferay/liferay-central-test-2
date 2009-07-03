@@ -3711,7 +3711,6 @@ this-portlet-has-not-been-added-to-the-live-page-publish-the-page-first=Bu portl
 this-portlet-is-inactive=Bu portlet aktif değildir. 
 this-portlet-is-placed-in-a-page-that-does-not-exist-in-the-live-site-publish-the-page-first=Bu portlet canlı sitede yer almayan bir sayfaya yerleştirilmiştir. İlk önce sayfayı yayınlayın. 
 this-product-does-not-have-any-released-versions=Bu ürünün daha önce servis edilen versiyonu bulunmamaktadır. 
-this-role-does-have-any-permissions=Bu rolün izni bulunmamaktadır. 
 this-section-will-be-editable-after-creating-the-user=Kullanıcıyı oluşturduktan sonra bu bölüm düzenlenebilir olacak.
 this-site-has-no-members=Bu sitede kullanıcı yok.
 this-structure-is-already-within-the-inheritance-path-of-the-selected-parent-please-select-another-parent-structure=Bu yapı seçilen üst yapının zaten aktarım yolu içindendir. Lütfen başka bir üst yapı seçiniz.  
