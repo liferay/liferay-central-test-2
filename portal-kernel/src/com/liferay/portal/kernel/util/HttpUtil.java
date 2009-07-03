@@ -31,6 +31,7 @@ import java.util.Map;
 import javax.portlet.ActionRequest;
 import javax.portlet.RenderRequest;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -83,6 +84,10 @@ public class HttpUtil {
 
 	public static String getCompleteURL(HttpServletRequest request) {
 		return getHttp().getCompleteURL(request);
+	}
+
+	public static Cookie[] getCookies() {
+		return getHttp().getCookies();
 	}
 
 	public static String getDomain(String url) {

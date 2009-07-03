@@ -79,6 +79,8 @@ public interface Http {
 
 	public String getCompleteURL(HttpServletRequest request);
 
+	public Cookie[] getCookies();
+
 	public String getDomain(String url);
 
 	public String getParameter(String url, String name);

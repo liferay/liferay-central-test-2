@@ -45,6 +45,7 @@ import java.net.URLDecoder;
 import java.net.URLEncoder;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -273,6 +274,10 @@ public class HttpImpl implements Http {
 		}
 
 		return completeURL;
+	}
+
+	public Cookie[] getCookies() {
+		return _cookies.get();
 	}
 
 	public String getDomain(String url) {
@@ -751,6 +756,80 @@ public class HttpImpl implements Http {
 		}
 	}
 
+	protected org.apache.commons.httpclient.Cookie toCommonsCookie(
+		Cookie cookie) {
+
+		org.apache.commons.httpclient.Cookie commonsCookie =
+			new org.apache.commons.httpclient.Cookie(
+			cookie.getDomain(), cookie.getName(), cookie.getValue(),
+			cookie.getPath(), cookie.getMaxAge(), cookie.getSecure());
+
+		commonsCookie.setVersion(cookie.getVersion());
+
+		return commonsCookie;
+	}
+
+	protected org.apache.commons.httpclient.Cookie[] toCommonsCookies(
+		Cookie[] cookies) {
+
+		if (cookies == null) {
+			return null;
+		}
+
+		org.apache.commons.httpclient.Cookie[] commonCookies =
+			new org.apache.commons.httpclient.Cookie[cookies.length];
+
+		for (int i = 0; i < cookies.length; i++) {
+			commonCookies[i] = toCommonsCookie(cookies[i]);
+		}
+
+		return commonCookies;
+	}
+
+	protected Cookie toServletCookie(
+		org.apache.commons.httpclient.Cookie commonsCookie) {
+
+		Cookie cookie = new Cookie(
+			commonsCookie.getName(), commonsCookie.getValue());
+
+		cookie.setDomain(commonsCookie.getDomain());
+
+		Date expiryDate = commonsCookie.getExpiryDate();
+
+		if (expiryDate != null) {
+			int maxAge =
+				(int)(expiryDate.getTime() - System.currentTimeMillis());
+
+			maxAge = maxAge / 1000;
+
+			if (maxAge > -1) {
+				cookie.setMaxAge(maxAge);
+			}
+		}
+
+		cookie.setPath(commonsCookie.getPath());
+		cookie.setSecure(commonsCookie.getSecure());
+		cookie.setVersion(commonsCookie.getVersion());
+
+		return cookie;
+	}
+
+	protected Cookie[] toServletCookies(
+		org.apache.commons.httpclient.Cookie[] commonsCookies) {
+
+		if (commonsCookies == null) {
+			return null;
+		}
+
+		Cookie[] cookies = new Cookie[commonsCookies.length];
+
+		for (int i = 0; i < commonsCookies.length; i++) {
+			cookies[i] = toServletCookie(commonsCookies[i]);
+		}
+
+		return cookies;
+	}
+
 	protected byte[] URLtoByteArray(
 			String location, Http.Method method, Map<String, String> headers,
 			Cookie[] cookies, Http.Auth auth, Http.Body body, Map<String,
@@ -760,8 +839,11 @@ public class HttpImpl implements Http {
 		byte[] bytes = null;
 
 		HttpMethod httpMethod = null;
+		HttpState httpState = null;
 
 		try {
+			_cookies.set(null);
+
 			if (location == null) {
 				return bytes;
 			}
@@ -773,7 +855,7 @@ public class HttpImpl implements Http {
 
 			HostConfiguration hostConfig = getHostConfig(location);
 
-			HttpClient client = getClient(hostConfig);
+			HttpClient httpClient = getClient(hostConfig);
 
 			if ((method == Http.Method.POST) ||
 				(method == Http.Method.PUT)) {
@@ -851,23 +933,13 @@ public class HttpImpl implements Http {
 
 			//httpMethod.setFollowRedirects(true);
 
-			HttpState state = new HttpState();
+			httpState = new HttpState();
 
 			if ((cookies != null) && (cookies.length > 0)) {
 				org.apache.commons.httpclient.Cookie[] commonsCookies =
-					new org.apache.commons.httpclient.Cookie[cookies.length];
+					toCommonsCookies(cookies);
 
-				for (int i = 0; i < cookies.length; i++) {
-					Cookie cookie = cookies[i];
-
-					commonsCookies[i] =
-						new org.apache.commons.httpclient.Cookie(
-							cookie.getDomain(), cookie.getName(),
-							cookie.getValue(), cookie.getPath(),
-							cookie.getMaxAge(), cookie.getSecure());
-				}
-
-				state.addCookies(commonsCookies);
+				httpState.addCookies(commonsCookies);
 
 				httpMethod.getParams().setCookiePolicy(
 					CookiePolicy.BROWSER_COMPATIBILITY);
@@ -876,16 +948,16 @@ public class HttpImpl implements Http {
 			if (auth != null) {
 				httpMethod.setDoAuthentication(true);
 
-				state.setCredentials(
+				httpState.setCredentials(
 					new AuthScope(
 						auth.getHost(), auth.getPort(), auth.getRealm()),
 					new UsernamePasswordCredentials(
 						auth.getUsername(), auth.getPassword()));
 			}
 
-			proxifyState(state, hostConfig);
+			proxifyState(httpState, hostConfig);
 
-			client.executeMethod(hostConfig, httpMethod, state);
+			httpClient.executeMethod(hostConfig, httpMethod, httpState);
 
 			Header locationHeader = httpMethod.getResponseHeader("location");
 
@@ -906,6 +978,15 @@ public class HttpImpl implements Http {
 			return bytes;
 		}
 		finally {
+			try {
+				if (httpState != null) {
+					_cookies.set(toServletCookies(httpState.getCookies()));
+				}
+			}
+			catch (Exception e) {
+				_log.error(e, e);
+			}
+
 			try {
 				if (httpMethod != null) {
 					httpMethod.releaseConnection();
@@ -965,6 +1046,8 @@ public class HttpImpl implements Http {
 		PropsUtil.get(HttpImpl.class.getName() + ".timeout"), 5000);
 
 	private static Log _log = LogFactoryUtil.getLog(HttpImpl.class);
+
+	private static ThreadLocal<Cookie[]> _cookies = new ThreadLocal<Cookie[]>();
 
 	private HttpClient _client = new HttpClient();
 	private Pattern _nonProxyHostsPattern;
