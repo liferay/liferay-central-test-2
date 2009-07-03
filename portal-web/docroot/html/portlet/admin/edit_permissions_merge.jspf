@@ -28,10 +28,10 @@ MultiValueMap mvp = new MultiValueMap();
 int roleType = RoleConstants.TYPE_REGULAR;
 
 if (tabs2.equals("communities")) {
-	roleType = RoleConstants.TYPE_COMMUNITY
+	roleType = RoleConstants.TYPE_COMMUNITY;
 }
 else if (tabs2.equals("organizations")) {
-	roleType = RoleConstants.TYPE_ORGANIZATION
+	roleType = RoleConstants.TYPE_ORGANIZATION;
 }
 
 List<Role> roles = RoleLocalServiceUtil.getRoles(roleType, "lfr-permission-algorithm-5");

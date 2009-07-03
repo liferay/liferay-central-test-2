@@ -51,10 +51,10 @@ List<ResourcePermission> resourcePermissions = new UniqueList<ResourcePermission
 int roleType = RoleConstants.TYPE_REGULAR;
 
 if (tabs2.equals("communities")) {
-	roleType = RoleConstants.TYPE_COMMUNITY
+	roleType = RoleConstants.TYPE_COMMUNITY;
 }
 else if (tabs2.equals("organizations")) {
-	roleType = RoleConstants.TYPE_ORGANIZATION
+	roleType = RoleConstants.TYPE_ORGANIZATION;
 }
 
 List<Role> roles = RoleLocalServiceUtil.getRoles(roleType, "lfr-permission-algorithm-5");
@@ -95,14 +95,21 @@ while (rolesItr.hasNext()) {
 			continue;
 		}
 
-		BaseModel model = PortalUtil.getModel(resourcePermission);
+		BaseModel model = null;
 
-		if (model == null) {
+		try {
+			model = PortalUtil.getModel(resourcePermission);
+
+			if (model == null) {
+				continue;
+			}
+		}
+		catch (Exception e) {
 			continue;
 		}
 
 		if (tabs2.equals("users")) {
-			if (!(model instanceof User)) {
+			if (model instanceof Group || model instanceof Layout || model instanceof Organization || model instanceof Role || model instanceof UserGroup) {
 				continue;
 			}
 
