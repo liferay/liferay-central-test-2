@@ -29,7 +29,6 @@ import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.security.auth.PrincipalException;
-import com.liferay.portal.service.UserGroupGroupRoleServiceUtil;
 import com.liferay.portal.service.UserGroupRoleServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 
@@ -59,10 +58,7 @@ public class EditUserRolesAction extends PortletAction {
 		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		try {
-			if (cmd.equals("user_group_group_role_user_groups")) {
-				updateUserGroupGroupRoles(actionRequest);
-			}
-			else if (cmd.equals("user_group_role_users")) {
+			if (cmd.equals("user_group_role_users")) {
 				updateUserGroupRoleUsers(actionRequest);
 			}
 
@@ -105,23 +101,6 @@ public class EditUserRolesAction extends PortletAction {
 
 		return mapping.findForward(
 			getForward(renderRequest, "portlet.communities.edit_user_roles"));
-	}
-
-	protected void updateUserGroupGroupRoles(ActionRequest actionRequest)
-		throws Exception {
-
-		long groupId = ParamUtil.getLong(actionRequest, "groupId");
-		long roleId = ParamUtil.getLong(actionRequest, "roleId");
-
-		long[] addUserGroupIds = StringUtil.split(
-				ParamUtil.getString(actionRequest, "addUserGroupIds"), 0L);
-		long[] removeUserGroupIds = StringUtil.split(
-				ParamUtil.getString(actionRequest, "removeUserGroupIds"), 0L);
-
-		UserGroupGroupRoleServiceUtil.addUserGroupGroupRoles(
-			addUserGroupIds, groupId, roleId);
-		UserGroupGroupRoleServiceUtil.deleteUserGroupGroupRoles(
-			removeUserGroupIds, groupId, roleId);
 	}
 
 	protected void updateUserGroupRoleUsers(ActionRequest actionRequest)
