@@ -46,6 +46,12 @@ public class ServerStatistics
 		_companyLocalService = companyLocalService;
 		_companyStatisticsByCompanyId = new TreeMap<Long, CompanyStatistics>();
 		_companyStatisticsByWebId = new TreeMap<String, CompanyStatistics>();
+
+		CompanyStatistics systemCompanyStatistics = new CompanyStatistics();
+		_companyStatisticsByCompanyId.put(
+			systemCompanyStatistics.getCompanyId(), systemCompanyStatistics);
+		_companyStatisticsByWebId.put(
+			systemCompanyStatistics.getWebId(), systemCompanyStatistics);
 	}
 
 	public Set<Long> getCompanyIds() {

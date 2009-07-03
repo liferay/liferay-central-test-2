@@ -42,6 +42,7 @@
 package com.liferay.portal.monitoring.statistics.portal;
 
 import com.liferay.portal.model.Company;
+import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.monitoring.RequestStatus;
 import com.liferay.portal.monitoring.statistics.DataSampleProcessor;
 import com.liferay.portal.monitoring.statistics.RequestStatistics;
@@ -57,6 +58,18 @@ import com.liferay.portal.service.CompanyLocalService;
  */
 public class CompanyStatistics
 	implements DataSampleProcessor<PortalRequestDataSample> {
+
+	/**
+	 * Used to support the system company id "0" and should never be
+	 * used by anything else
+	 *
+	 */
+	CompanyStatistics() {
+		_companyId = CompanyConstants.SYSTEM;
+		_webId = CompanyConstants.SYSTEM_STRING;
+		_requestStatistics = new RequestStatistics(_webId);
+		_startTime = System.currentTimeMillis();
+	}
 
 	public CompanyStatistics(
 		CompanyLocalService companyLocalService, String webId) {

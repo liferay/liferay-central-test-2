@@ -42,6 +42,7 @@
 package com.liferay.portal.monitoring.statistics.portlet;
 
 import com.liferay.portal.model.Company;
+import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.monitoring.MonitoringException;
 import com.liferay.portal.monitoring.statistics.DataSampleProcessor;
 import com.liferay.portal.monitoring.statistics.RequestStatistics;
@@ -63,6 +64,18 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class CompanyStatistics
 	implements DataSampleProcessor<PortletRequestDataSample> {
+
+	/**
+	 * Used to support the system company id "0" and should never be
+	 * used by anything else
+	 * 
+	 */
+	CompanyStatistics() {
+		_companyId = CompanyConstants.SYSTEM;
+		_webId = CompanyConstants.SYSTEM_STRING;
+		_portletStatisticsByPortletId =
+			new ConcurrentHashMap<String, PortletStatistics>();
+	}
 
 	public CompanyStatistics(
 		CompanyLocalService companyLocalService, String webId) {
