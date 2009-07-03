@@ -270,6 +270,7 @@ Liferay.Service.registerClass(
 		getGroupRole: true,
 		getGroupRoles: true,
 		getRole: true,
+		getUserGroupGroupRoles: true,
 		getUserGroupRoles: true,
 		getUserRelatedRoles: true,
 		getUserRoles: true,
@@ -340,6 +341,14 @@ Liferay.Service.registerClass(
 		getUserUserGroups: true,
 		unsetGroupUserGroups: true,
 		updateUserGroup: true
+	}
+);
+
+Liferay.Service.registerClass(
+	Liferay.Service.Portal, "UserGroupGroupRole",
+	{
+		addUserGroupGroupRoles: true,
+		deleteUserGroupGroupRoles: true
 	}
 );
 

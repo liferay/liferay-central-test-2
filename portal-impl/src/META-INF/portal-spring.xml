@@ -703,6 +703,24 @@
 	<bean id="com.liferay.portal.service.persistence.UserGroupFinderUtil" class="com.liferay.portal.service.persistence.UserGroupFinderUtil">
 		<property name="finder" ref="com.liferay.portal.service.persistence.UserGroupFinder.impl" />
 	</bean>
+	<bean id="com.liferay.portal.service.UserGroupGroupRoleLocalService.impl" class="com.liferay.portal.service.impl.UserGroupGroupRoleLocalServiceImpl" />
+	<bean id="com.liferay.portal.service.UserGroupGroupRoleLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService">
+		<property name="target" ref="com.liferay.portal.service.UserGroupGroupRoleLocalService.impl" />
+	</bean>
+	<bean id="com.liferay.portal.service.UserGroupGroupRoleLocalServiceUtil" class="com.liferay.portal.service.UserGroupGroupRoleLocalServiceUtil">
+		<property name="service" ref="com.liferay.portal.service.UserGroupGroupRoleLocalService.impl" />
+	</bean>
+	<bean id="com.liferay.portal.service.UserGroupGroupRoleService.impl" class="com.liferay.portal.service.impl.UserGroupGroupRoleServiceImpl" />
+	<bean id="com.liferay.portal.service.UserGroupGroupRoleService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService">
+		<property name="target" ref="com.liferay.portal.service.UserGroupGroupRoleService.impl" />
+	</bean>
+	<bean id="com.liferay.portal.service.UserGroupGroupRoleServiceUtil" class="com.liferay.portal.service.UserGroupGroupRoleServiceUtil">
+		<property name="service" ref="com.liferay.portal.service.UserGroupGroupRoleService.impl" />
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.UserGroupGroupRolePersistence.impl" class="com.liferay.portal.service.persistence.UserGroupGroupRolePersistenceImpl" parent="basePersistence" />
+	<bean id="com.liferay.portal.service.persistence.UserGroupGroupRoleUtil" class="com.liferay.portal.service.persistence.UserGroupGroupRoleUtil">
+		<property name="persistence" ref="com.liferay.portal.service.persistence.UserGroupGroupRolePersistence.impl" />
+	</bean>
 	<bean id="com.liferay.portal.service.UserGroupRoleLocalService.impl" class="com.liferay.portal.service.impl.UserGroupRoleLocalServiceImpl" />
 	<bean id="com.liferay.portal.service.UserGroupRoleLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService">
 		<property name="target" ref="com.liferay.portal.service.UserGroupRoleLocalService.impl" />

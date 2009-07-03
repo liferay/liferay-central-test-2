@@ -48,6 +48,7 @@
 	<import class="com.liferay.portal.model.Theme" />
 	<import class="com.liferay.portal.model.User" />
 	<import class="com.liferay.portal.model.UserGroup" />
+	<import class="com.liferay.portal.model.UserGroupGroupRole" />
 	<import class="com.liferay.portal.model.UserGroupRole" />
 	<import class="com.liferay.portal.model.UserIdMapper" />
 	<import class="com.liferay.portal.model.UserTracker" />
@@ -717,6 +718,14 @@
 		<property name="parentUserGroupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="description" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="com.liferay.portal.model.impl.UserGroupGroupRoleImpl" table="UserGroupGroupRole">
+		<cache usage="read-write" />
+		<composite-id name="primaryKey" class="com.liferay.portal.service.persistence.UserGroupGroupRolePK">
+			<key-property name="userGroupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+			<key-property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+			<key-property name="roleId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		</composite-id>
 	</class>
 	<class name="com.liferay.portal.model.impl.UserGroupRoleImpl" table="UserGroupRole">
 		<cache usage="read-write" />

@@ -822,6 +822,15 @@
 			<basic name="description" />
 		</attributes>
 	</entity>
+	<entity class="com.liferay.portal.model.impl.UserGroupGroupRoleImpl" name="UserGroupGroupRole">
+		<table name="UserGroupGroupRole" />
+		<id-class class="com.liferay.portal.service.persistence.UserGroupGroupRolePK" />
+		<attributes>
+			<id name="userGroupId" />
+			<id name="groupId" />
+			<id name="roleId" />
+		</attributes>
+	</entity>
 	<entity class="com.liferay.portal.model.impl.UserGroupRoleImpl" name="UserGroupRole">
 		<table name="UserGroupRole" />
 		<id-class class="com.liferay.portal.service.persistence.UserGroupRolePK" />

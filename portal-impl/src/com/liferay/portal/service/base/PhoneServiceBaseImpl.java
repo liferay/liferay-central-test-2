@@ -93,6 +93,8 @@ import com.liferay.portal.service.ShardLocalService;
 import com.liferay.portal.service.SubscriptionLocalService;
 import com.liferay.portal.service.ThemeLocalService;
 import com.liferay.portal.service.ThemeService;
+import com.liferay.portal.service.UserGroupGroupRoleLocalService;
+import com.liferay.portal.service.UserGroupGroupRoleService;
 import com.liferay.portal.service.UserGroupLocalService;
 import com.liferay.portal.service.UserGroupRoleLocalService;
 import com.liferay.portal.service.UserGroupRoleService;
@@ -156,6 +158,7 @@ import com.liferay.portal.service.persistence.ShardPersistence;
 import com.liferay.portal.service.persistence.SubscriptionPersistence;
 import com.liferay.portal.service.persistence.UserFinder;
 import com.liferay.portal.service.persistence.UserGroupFinder;
+import com.liferay.portal.service.persistence.UserGroupGroupRolePersistence;
 import com.liferay.portal.service.persistence.UserGroupPersistence;
 import com.liferay.portal.service.persistence.UserGroupRolePersistence;
 import com.liferay.portal.service.persistence.UserIdMapperPersistence;
@@ -1216,6 +1219,33 @@ public abstract class PhoneServiceBaseImpl extends PrincipalBean
 		this.userGroupFinder = userGroupFinder;
 	}
 
+	public UserGroupGroupRoleLocalService getUserGroupGroupRoleLocalService() {
+		return userGroupGroupRoleLocalService;
+	}
+
+	public void setUserGroupGroupRoleLocalService(
+		UserGroupGroupRoleLocalService userGroupGroupRoleLocalService) {
+		this.userGroupGroupRoleLocalService = userGroupGroupRoleLocalService;
+	}
+
+	public UserGroupGroupRoleService getUserGroupGroupRoleService() {
+		return userGroupGroupRoleService;
+	}
+
+	public void setUserGroupGroupRoleService(
+		UserGroupGroupRoleService userGroupGroupRoleService) {
+		this.userGroupGroupRoleService = userGroupGroupRoleService;
+	}
+
+	public UserGroupGroupRolePersistence getUserGroupGroupRolePersistence() {
+		return userGroupGroupRolePersistence;
+	}
+
+	public void setUserGroupGroupRolePersistence(
+		UserGroupGroupRolePersistence userGroupGroupRolePersistence) {
+		this.userGroupGroupRolePersistence = userGroupGroupRolePersistence;
+	}
+
 	public UserGroupRoleLocalService getUserGroupRoleLocalService() {
 		return userGroupRoleLocalService;
 	}
@@ -1610,6 +1640,12 @@ public abstract class PhoneServiceBaseImpl extends PrincipalBean
 	protected UserGroupPersistence userGroupPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.UserGroupFinder.impl")
 	protected UserGroupFinder userGroupFinder;
+	@BeanReference(name = "com.liferay.portal.service.UserGroupGroupRoleLocalService.impl")
+	protected UserGroupGroupRoleLocalService userGroupGroupRoleLocalService;
+	@BeanReference(name = "com.liferay.portal.service.UserGroupGroupRoleService.impl")
+	protected UserGroupGroupRoleService userGroupGroupRoleService;
+	@BeanReference(name = "com.liferay.portal.service.persistence.UserGroupGroupRolePersistence.impl")
+	protected UserGroupGroupRolePersistence userGroupGroupRolePersistence;
 	@BeanReference(name = "com.liferay.portal.service.UserGroupRoleLocalService.impl")
 	protected UserGroupRoleLocalService userGroupRoleLocalService;
 	@BeanReference(name = "com.liferay.portal.service.UserGroupRoleService.impl")

@@ -34,17 +34,17 @@ public class RoleFinderUtil {
 		return getFinder().countByR_U(roleId, userId);
 	}
 
+	public static int countByU_G_R(long userId, long groupId, long roleId)
+		throws com.liferay.portal.SystemException {
+		return getFinder().countByU_G_R(userId, groupId, roleId);
+	}
+
 	public static int countByC_N_D_T(long companyId, java.lang.String name,
 		java.lang.String description, java.lang.Integer type,
 		java.util.LinkedHashMap<String, Object> params)
 		throws com.liferay.portal.SystemException {
 		return getFinder()
 				   .countByC_N_D_T(companyId, name, description, type, params);
-	}
-
-	public static int countByU_G_R(long userId, long groupId, long roleId)
-		throws com.liferay.portal.SystemException {
-		return getFinder().countByU_G_R(userId, groupId, roleId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Role> findBySystem(

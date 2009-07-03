@@ -527,6 +527,12 @@ create index IX_524FEFCE on UserGroup (companyId);
 create unique index IX_23EAD0D on UserGroup (companyId, name);
 create index IX_69771487 on UserGroup (companyId, parentUserGroupId);
 
+create index IX_CCBE4063 on UserGroupGroupRole (groupId);
+create index IX_CAB0CCC8 on UserGroupGroupRole (groupId, roleId);
+create index IX_1CDF88C on UserGroupGroupRole (roleId);
+create index IX_DCDED558 on UserGroupGroupRole (userGroupId);
+create index IX_73C52252 on UserGroupGroupRole (userGroupId, groupId);
+
 create index IX_1B988D7A on UserGroupRole (groupId);
 create index IX_871412DF on UserGroupRole (groupId, roleId);
 create index IX_887A2C95 on UserGroupRole (roleId);

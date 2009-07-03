@@ -617,6 +617,11 @@
 			<hint-collection name="TEXTAREA" />
 		</field>
 	</model>
+	<model name="com.liferay.portal.model.UserGroupGroupRole">
+		<field name="userGroupId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="roleId" type="long" />
+	</model>
 	<model name="com.liferay.portal.model.UserGroupRole">
 		<field name="userId" type="long" />
 		<field name="groupId" type="long" />

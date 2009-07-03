@@ -109,13 +109,13 @@ public interface UserGroupRoleLocalService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	public void deleteUserGroupRoles(long userId, long groupId, long[] roleIds)
+		throws com.liferay.portal.SystemException;
+
 	public void deleteUserGroupRoles(long userId, long[] groupIds)
 		throws com.liferay.portal.SystemException;
 
 	public void deleteUserGroupRoles(long[] userIds, long groupId)
-		throws com.liferay.portal.SystemException;
-
-	public void deleteUserGroupRoles(long userId, long groupId, long[] roleIds)
 		throws com.liferay.portal.SystemException;
 
 	public void deleteUserGroupRoles(long[] userIds, long groupId, long roleId)
@@ -143,8 +143,18 @@ public interface UserGroupRoleLocalService {
 		long groupId, long roleId) throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public boolean hasUserGroupRole(long userId, long groupId, long roleId)
+		throws com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public boolean hasUserGroupRole(long userId, long groupId, long roleId,
 		boolean inherit) throws com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public boolean hasUserGroupRole(long userId, long groupId,
+		java.lang.String roleName)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public boolean hasUserGroupRole(long userId, long groupId,

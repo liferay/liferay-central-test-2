@@ -32,12 +32,12 @@ public interface RoleFinder {
 	public int countByR_U(long roleId, long userId)
 		throws com.liferay.portal.SystemException;
 
+	public int countByU_G_R(long userId, long groupId, long roleId)
+		throws com.liferay.portal.SystemException;
+
 	public int countByC_N_D_T(long companyId, java.lang.String name,
 		java.lang.String description, java.lang.Integer type,
 		java.util.LinkedHashMap<String, Object> params)
-		throws com.liferay.portal.SystemException;
-
-	public int countByU_G_R(long userId, long groupId, long roleId)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Role> findBySystem(

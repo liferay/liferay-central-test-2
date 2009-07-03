@@ -361,6 +361,18 @@
 		<property name="service" ref="com.liferay.portal.service.UserGroupService.impl" />
 		<property name="serviceInterface" value="com.liferay.portal.service.UserGroupService" />
 	</bean>
+	<bean name="/com_liferay_portal_service_spring_UserGroupGroupRoleService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.UserGroupGroupRoleService.impl" />
+		<property name="serviceInterface" value="com.liferay.portal.service.UserGroupGroupRoleService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_UserGroupGroupRoleService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.UserGroupGroupRoleService.impl" />
+		<property name="serviceInterface" value="com.liferay.portal.service.UserGroupGroupRoleService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_UserGroupGroupRoleService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.UserGroupGroupRoleService.impl" />
+		<property name="serviceInterface" value="com.liferay.portal.service.UserGroupGroupRoleService" />
+	</bean>
 	<bean name="/com_liferay_portal_service_spring_UserGroupRoleService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
 		<property name="service" ref="com.liferay.portal.service.UserGroupRoleService.impl" />
 		<property name="serviceInterface" value="com.liferay.portal.service.UserGroupRoleService" />

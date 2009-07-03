@@ -124,6 +124,11 @@ public class UserGroupRoleLocalServiceUtil {
 		getService().addUserGroupRoles(userIds, groupId, roleId);
 	}
 
+	public static void deleteUserGroupRoles(long userId, long groupId,
+		long[] roleIds) throws com.liferay.portal.SystemException {
+		getService().deleteUserGroupRoles(userId, groupId, roleIds);
+	}
+
 	public static void deleteUserGroupRoles(long userId, long[] groupIds)
 		throws com.liferay.portal.SystemException {
 		getService().deleteUserGroupRoles(userId, groupIds);
@@ -132,11 +137,6 @@ public class UserGroupRoleLocalServiceUtil {
 	public static void deleteUserGroupRoles(long[] userIds, long groupId)
 		throws com.liferay.portal.SystemException {
 		getService().deleteUserGroupRoles(userIds, groupId);
-	}
-
-	public static void deleteUserGroupRoles(long userId, long groupId,
-		long[] roleIds) throws com.liferay.portal.SystemException {
-		getService().deleteUserGroupRoles(userId, groupId, roleIds);
 	}
 
 	public static void deleteUserGroupRoles(long[] userIds, long groupId,
@@ -175,16 +175,27 @@ public class UserGroupRoleLocalServiceUtil {
 	}
 
 	public static boolean hasUserGroupRole(long userId, long groupId,
+		long roleId) throws com.liferay.portal.SystemException {
+		return getService().hasUserGroupRole(userId, groupId, roleId);
+	}
+
+	public static boolean hasUserGroupRole(long userId, long groupId,
 		long roleId, boolean inherit) throws com.liferay.portal.SystemException {
 		return getService().hasUserGroupRole(userId, groupId, roleId, inherit);
+	}
+
+	public static boolean hasUserGroupRole(long userId, long groupId,
+		java.lang.String roleName)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService().hasUserGroupRole(userId, groupId, roleName);
 	}
 
 	public static boolean hasUserGroupRole(long userId, long groupId,
 		java.lang.String roleName, boolean inherit)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return getService()
-					.hasUserGroupRole(userId, groupId, roleName, inherit);
+		return getService().hasUserGroupRole(userId, groupId, roleName, inherit);
 	}
 
 	public static UserGroupRoleLocalService getService() {

@@ -1248,6 +1248,8 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl
 	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.UserGroupPersistence.impl")
 	protected com.liferay.portal.service.persistence.UserGroupPersistence userGroupPersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.UserGroupGroupRolePersistence.impl")
+	protected com.liferay.portal.service.persistence.UserGroupGroupRolePersistence userGroupGroupRolePersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.UserGroupRolePersistence.impl")
 	protected com.liferay.portal.service.persistence.UserGroupRolePersistence userGroupRolePersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.UserIdMapperPersistence.impl")
