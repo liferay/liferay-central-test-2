@@ -82,27 +82,31 @@ while (rolesItr.hasNext()) {
 	List<ResourcePermission> roleResourcePermissions = ResourcePermissionLocalServiceUtil.getRoleResourcePermissions(role.getRoleId());
 
 	for (ResourcePermission resourcePermission : roleResourcePermissions) {
-		if (resourcePermission.getScope() != ResourceConstants.SCOPE_INDIVIDUAL) {
-			continue;
-		}
+		try {
+			if (resourcePermission.getScope() != ResourceConstants.SCOPE_INDIVIDUAL) {
+				continue;
+			}
 
-		BaseModel model = PortalUtil.getModel(resourcePermission);
+			BaseModel model = PortalUtil.getModel(resourcePermission);
 
-		if (model == null) {
-			continue;
-		}
+			if (model == null) {
+				continue;
+			}
 
-		if (tabs2.equals("users")) {
-			List<User> users = UserLocalServiceUtil.getRoleUsers(role.getRoleId());
+			if (tabs2.equals("users")) {
+				List<User> users = UserLocalServiceUtil.getRoleUsers(role.getRoleId());
 
-			long userId = BeanPropertiesUtil.getLong(model, "userId");
+				long userId = BeanPropertiesUtil.getLong(model, "userId");
 
-			if (users.get(0).getUserId() == userId) {
+				if (users.get(0).getUserId() == userId) {
+					resourcePermissions.add(resourcePermission);
+				}
+			}
+			else {
 				resourcePermissions.add(resourcePermission);
 			}
 		}
-		else {
-			resourcePermissions.add(resourcePermission);
+		catch (Exception e) {
 		}
 	}
 }
