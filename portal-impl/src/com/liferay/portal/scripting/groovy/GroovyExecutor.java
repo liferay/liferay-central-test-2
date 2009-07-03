@@ -46,12 +46,14 @@ public class GroovyExecutor implements ScriptingExecutor {
 
 	public static final String CACHE_NAME = GroovyExecutor.class.getName();
 
+	public static final String LANGUAGE = "groovy";
+
 	public void clearCache() {
 		SingleVMPoolUtil.clear(CACHE_NAME);
 	}
 
 	public String getLanguage() {
-		return _LANGUAGE;
+		return LANGUAGE;
 	}
 
 	public Map<String, Object> eval(
@@ -76,9 +78,9 @@ public class GroovyExecutor implements ScriptingExecutor {
 			return null;
 		}
 
-		Map <String, Object> outputObjects = new HashMap<String, Object>();
+		Map<String, Object> outputObjects = new HashMap<String, Object>();
 
-		for (String outputName: outputNames) {
+		for (String outputName : outputNames) {
 			outputObjects.put(outputName, binding.getVariable(outputName));
 		}
 
@@ -86,6 +88,12 @@ public class GroovyExecutor implements ScriptingExecutor {
 	}
 
 	protected Script getCompiledScript(String script) {
+		if (_groovyShell == null) {
+			synchronized (this) {
+				_groovyShell = new GroovyShell();
+			}
+		}
+
 		String key = String.valueOf(script.hashCode());
 
 		Script compiledScript = (Script)SingleVMPoolUtil.get(CACHE_NAME, key);
@@ -99,8 +107,6 @@ public class GroovyExecutor implements ScriptingExecutor {
 		return compiledScript;
 	}
 
-	private static final String _LANGUAGE = "groovy";
-
-	private GroovyShell _groovyShell = new GroovyShell();
+	private GroovyShell _groovyShell;
 
 }

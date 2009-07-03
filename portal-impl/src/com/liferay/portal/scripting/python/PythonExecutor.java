@@ -31,6 +31,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+import org.python.core.CompileMode;
 import org.python.core.Py;
 import org.python.core.PyCode;
 import org.python.core.PySystemState;
@@ -46,16 +47,14 @@ public class PythonExecutor implements ScriptingExecutor {
 
 	public static final String CACHE_NAME = PythonExecutor.class.getName();
 
-	public PythonExecutor() {
-		PySystemState.initialize();
-	}
+	public static final String LANGUAGE = "python";
 
 	public void clearCache() {
 		SingleVMPoolUtil.clear(CACHE_NAME);
 	}
 
 	public String getLanguage() {
-		return _LANGUAGE;
+		return LANGUAGE;
 	}
 
 	public Map<String, Object> eval(
@@ -70,35 +69,45 @@ public class PythonExecutor implements ScriptingExecutor {
 
 		PyCode compiledScript = getCompiledScript(script);
 
-		InteractiveInterpreter interpreter = new InteractiveInterpreter();
+		InteractiveInterpreter interactiveInterpreter =
+			new InteractiveInterpreter();
 
 		for (String varName: inputObjects.keySet()) {
-			interpreter.set(varName, inputObjects.get(varName));
+			interactiveInterpreter.set(varName, inputObjects.get(varName));
 		}
 
-		interpreter.exec(compiledScript);
+		interactiveInterpreter.exec(compiledScript);
 
 		if (outputNames == null) {
 			return null;
 		}
 
-		Map <String, Object> outputObjects = new HashMap<String, Object>();
+		Map<String, Object> outputObjects = new HashMap<String, Object>();
 
-		for (String outputName: outputNames) {
-			outputObjects.put(outputName, interpreter.get(outputName));
+		for (String outputName : outputNames) {
+			outputObjects.put(
+				outputName, interactiveInterpreter.get(outputName));
 		}
 
 		return outputObjects;
 	}
 
 	protected PyCode getCompiledScript(String script) {
+		if (!_initialized) {
+			synchronized (this) {
+				PySystemState.initialize();
+
+				_initialized = true;
+			}
+		}
+
 		String key = String.valueOf(script.hashCode());
 
 		PyCode compiledScript = (PyCode)SingleVMPoolUtil.get(CACHE_NAME, key);
 
 		if (compiledScript == null) {
 			compiledScript = Py.compile_flags(
-				script, "<string>", "exec", Py.getCompilerFlags());
+				script, "<string>", CompileMode.exec, Py.getCompilerFlags());
 
 			SingleVMPoolUtil.put(CACHE_NAME, key, compiledScript);
 		}
@@ -106,6 +115,6 @@ public class PythonExecutor implements ScriptingExecutor {
 		return compiledScript;
 	}
 
-	private static final String _LANGUAGE = "python";
+	private boolean _initialized;
 
 }

@@ -25,6 +25,7 @@ package com.liferay.portal.scripting.ruby;
 import com.liferay.portal.kernel.scripting.ExecutionException;
 import com.liferay.portal.kernel.scripting.ScriptingException;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.scripting.ScriptingExecutor;
 
 import java.util.ArrayList;
@@ -46,21 +47,22 @@ import org.jruby.javasupport.JavaEmbedUtils;
  */
 public class RubyExecutor implements ScriptingExecutor {
 
-	public static final String CACHE_NAME = RubyExecutor.class.getName();
+	public static final String LANGUAGE = "ruby";
 
 	public RubyExecutor() {
-		RubyInstanceConfig config = new RubyInstanceConfig();
+		RubyInstanceConfig rubyInstanceConfig = new RubyInstanceConfig();
 
-		config.setLoader(PortalClassLoaderUtil.getClassLoader());
+		rubyInstanceConfig.setLoader(PortalClassLoaderUtil.getClassLoader());
 
-		_runtime = JavaEmbedUtils.initialize(new ArrayList(), config);
+		_ruby = JavaEmbedUtils.initialize(
+			new ArrayList<String>(), rubyInstanceConfig);
 	}
 
 	public void clearCache() {
 	}
 
 	public String getLanguage() {
-		return _LANGUAGE;
+		return LANGUAGE;
 	}
 
 	public Map<String, Object> eval(
@@ -74,51 +76,45 @@ public class RubyExecutor implements ScriptingExecutor {
 		}
 
 		try {
-			GlobalVariables globalVariables = _runtime.getGlobalVariables();
+			GlobalVariables globalVariables = _ruby.getGlobalVariables();
 
-			for (final String varName: inputObjects.keySet()) {
-				String rubyVarName = varName;
+			for (Map.Entry<String, Object> entry : inputObjects.entrySet()) {
+				String inputName = entry.getKey();
+				Object inputObject = entry.getValue();
 
-				if (!rubyVarName.startsWith("$")) {
-					rubyVarName = "$" + rubyVarName;
+				if (!inputName.startsWith(StringPool.DOLLAR)) {
+					inputName = StringPool.DOLLAR + inputName;
 				}
 
-				BeanGlobalVariable rubyVarValue = new BeanGlobalVariable(
-					_runtime, inputObjects.get(varName),
-					inputObjects.get(varName).getClass());
+				BeanGlobalVariable beanGlobalVariable = new BeanGlobalVariable(
+					_ruby, inputObject, inputObject.getClass());
 
-				globalVariables.define(rubyVarName, rubyVarValue);
+				globalVariables.define(inputName, beanGlobalVariable);
 			}
 
-			_runtime.evalScriptlet(script);
+			_ruby.evalScriptlet(script);
 
 			if (outputNames == null) {
 				return null;
 			}
 
-			Map <String, Object> outputObjects = new HashMap<String, Object>();
+			Map<String, Object> outputObjects = new HashMap<String, Object>();
 
-			for (String outputName: outputNames) {
+			for (String outputName : outputNames) {
 				outputObjects.put(outputName, globalVariables.get(outputName));
 			}
 
 			return outputObjects;
 		}
 		catch (RaiseException re) {
-			StringBuilder sb = new StringBuilder();
-
-			sb.append(re.getException().message.asJavaString());
-			sb.append("\n\n");
-
-			throw new ScriptingException(sb.toString(), re);
+			throw new ScriptingException(
+				re.getException().message.asJavaString() + "\n\n", re);
 		}
 		finally {
-			JavaEmbedUtils.terminate(_runtime);
+			JavaEmbedUtils.terminate(_ruby);
 		}
 	}
 
-	private static final String _LANGUAGE = "ruby";
-
-	private Ruby _runtime;
+	private Ruby _ruby;
 
 }

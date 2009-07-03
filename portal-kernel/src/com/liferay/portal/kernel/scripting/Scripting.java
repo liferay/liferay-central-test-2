@@ -39,7 +39,7 @@ import javax.portlet.PortletResponse;
  */
 public interface Scripting {
 
-	public void clearCache(String language);
+	public void clearCache(String language) throws ScriptingException;
 
 	public Map<String, Object> eval(
 			Set<String> allowedClasses, Map<String, Object> inputObjects,

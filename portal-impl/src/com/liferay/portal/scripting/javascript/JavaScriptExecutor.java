@@ -44,12 +44,14 @@ public class JavaScriptExecutor implements ScriptingExecutor {
 
 	public static final String CACHE_NAME = JavaScriptExecutor.class.getName();
 
+	public static final String LANGUAGE = "javascript";
+
 	public void clearCache() {
 		SingleVMPoolUtil.clear(CACHE_NAME);
 	}
 
 	public String getLanguage() {
-		return _LANGUAGE;
+		return LANGUAGE;
 	}
 
 	public Map<String, Object> eval(
@@ -62,12 +64,12 @@ public class JavaScriptExecutor implements ScriptingExecutor {
 		try {
 			Context context = Context.enter();
 
-			Scriptable scope = context.initStandardObjects();
+			Scriptable scriptable = context.initStandardObjects();
 
 			for (String varName: inputObjects.keySet()) {
 				ScriptableObject.putProperty(
-					scope, varName,
-					Context.javaToJS(inputObjects.get(varName), scope));
+					scriptable, varName,
+					Context.javaToJS(inputObjects.get(varName), scriptable));
 			}
 
 			if (allowedClasses != null) {
@@ -75,29 +77,24 @@ public class JavaScriptExecutor implements ScriptingExecutor {
 					new JavaScriptClassVisibilityChecker(allowedClasses));
 			}
 
-			compiledScript.exec(context, scope);
+			compiledScript.exec(context, scriptable);
 
 			if (outputNames == null) {
 				return null;
 			}
 
-			Map <String, Object> outputObjects = new HashMap<String, Object>();
+			Map<String, Object> outputObjects = new HashMap<String, Object>();
 
-			for (String outputName: outputNames) {
+			for (String outputName : outputNames) {
 				outputObjects.put(
 					outputName,
-					ScriptableObject.getProperty(scope, outputName));
+					ScriptableObject.getProperty(scriptable, outputName));
 			}
 
 			return outputObjects;
 		}
 		catch (Exception e) {
-			StringBuilder sb = new StringBuilder();
-
-			sb.append(e.getMessage());
-			sb.append("\n\n");
-
-			throw new ScriptingException(sb.toString(), e);
+			throw new ScriptingException(e.getMessage() + "\n\n", e);
 		}
 		finally {
 			Context.exit();
@@ -111,9 +108,10 @@ public class JavaScriptExecutor implements ScriptingExecutor {
 
 		if (compiledScript == null) {
 			try {
-				Context cx = Context.enter();
+				Context context = Context.enter();
 
-				compiledScript = cx.compileString(script, "script", 0, null);
+				compiledScript = context.compileString(
+					script, "script", 0, null);
 			}
 			finally {
 				Context.exit();
@@ -124,7 +122,5 @@ public class JavaScriptExecutor implements ScriptingExecutor {
 
 		return compiledScript;
 	}
-
-	private static final String _LANGUAGE = "JavaScript";
 
 }

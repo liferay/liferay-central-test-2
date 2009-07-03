@@ -39,7 +39,7 @@ import javax.portlet.PortletResponse;
  */
 public class ScriptingUtil {
 
-	public static void clearCache(String language) {
+	public static void clearCache(String language) throws ScriptingException {
 		getScripting().clearCache(language);
 	}
 

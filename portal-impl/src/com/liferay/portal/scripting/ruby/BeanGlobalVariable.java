@@ -38,29 +38,35 @@ import org.jruby.runtime.builtin.IRubyObject;
  */
 class BeanGlobalVariable implements IAccessor {
 
-	public BeanGlobalVariable(Ruby runtime, Object bean, Class type) {
-		this._runtime = runtime;
-		this._bean = bean;
-		this._type = type;
+	public BeanGlobalVariable(Ruby ruby, Object bean, Class<?> type) {
+		_ruby = ruby;
+		_bean = bean;
+		_type = type;
 	}
 
 	public IRubyObject getValue() {
-		IRubyObject result = JavaUtil.convertJavaToRuby(_runtime, _bean, _type);
+		IRubyObject value = JavaUtil.convertJavaToRuby(
+			_ruby, _bean, _type);
 
-		return result instanceof JavaObject ?
-			Java.wrap(_runtime, result) : result;
+		if (value instanceof JavaObject) {
+			return Java.wrap(_ruby, value);
+		}
+		else {
+			return value;
+		}
 	}
 
 	public IRubyObject setValue(IRubyObject value) {
-		this._bean = JavaUtil.convertArgument(
-			_runtime, Java.ruby_to_java(
-				_runtime.getObject(), value, Block.NULL_BLOCK),
-			_type);
+		Object bean = Java.ruby_to_java(
+			_ruby.getObject(), value, Block.NULL_BLOCK);
+
+		_bean = JavaUtil.convertArgument(_ruby, bean, _type);
+
 		return value;
 	}
 
-	private Ruby _runtime;
 	private Object _bean;
-	private Class _type;
+	private Ruby _ruby;
+	private Class<?> _type;
 
 }

@@ -48,7 +48,6 @@
 	<classpathentry kind="lib" path="lib/development/jms.jar"/>
 	<classpathentry kind="lib" path="lib/development/jndi.jar"/>
 	<classpathentry kind="lib" path="lib/development/jnet.jar"/>
-	<classpathentry kind="lib" path="lib/development/jruby.jar"/>
 	<classpathentry kind="lib" path="lib/development/jsf-api.jar"/>
 	<classpathentry kind="lib" path="lib/development/jsf-facelets.jar"/>
 	<classpathentry kind="lib" path="lib/development/jsf-impl.jar"/>
@@ -166,6 +165,7 @@
 	<classpathentry kind="lib" path="lib/portal/jgroups.jar"/>
 	<classpathentry kind="lib" path="lib/portal/jodconverter.jar"/>
 	<classpathentry kind="lib" path="lib/portal/jrcs-diff.jar"/>
+	<classpathentry kind="lib" path="lib/portal/jruby.jar"/>
 	<classpathentry kind="lib" path="lib/portal/jsonrpc.jar"/>
 	<classpathentry kind="lib" path="lib/portal/jspwiki.jar"/>
 	<classpathentry kind="lib" path="lib/portal/jsr107cache.jar"/>
@@ -173,6 +173,7 @@
 	<classpathentry kind="lib" path="lib/portal/jstl-impl.jar"/>
 	<classpathentry kind="lib" path="lib/portal/juh.jar"/>
 	<classpathentry kind="lib" path="lib/portal/jurt.jar"/>
+	<classpathentry kind="lib" path="lib/portal/jython.jar"/>
 	<classpathentry kind="lib" path="lib/portal/liferay-icu4j.jar"/>
 	<classpathentry kind="lib" path="lib/portal/liferay-rhino.jar"/>
 	<classpathentry kind="lib" path="lib/portal/liferay-yuicompressor.jar"/>

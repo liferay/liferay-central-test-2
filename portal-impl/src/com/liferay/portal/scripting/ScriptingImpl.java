@@ -22,35 +22,35 @@
 
 package com.liferay.portal.scripting;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.scripting.Scripting;
 import com.liferay.portal.kernel.scripting.ScriptingException;
 import com.liferay.portal.kernel.scripting.UnsupportedLanguageException;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.scripting.ruby.RubyExecutor;
-import com.liferay.portal.scripting.javascript.JavaScriptExecutor;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.scripting.groovy.GroovyExecutor;
+import com.liferay.portal.scripting.javascript.JavaScriptExecutor;
 import com.liferay.portal.scripting.python.PythonExecutor;
+import com.liferay.portal.scripting.ruby.RubyExecutor;
 
-import java.util.Map;
-import java.util.Set;
-import java.util.HashMap;
 import java.io.IOException;
 import java.io.LineNumberReader;
 import java.io.StringReader;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+
+import javax.portlet.ActionRequest;
+import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletContext;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
-import javax.portlet.PortletPreferences;
-import javax.portlet.ResourceResponse;
-import javax.portlet.RenderResponse;
-import javax.portlet.ActionResponse;
-import javax.portlet.ResourceRequest;
 import javax.portlet.RenderRequest;
-import javax.portlet.ActionRequest;
+import javax.portlet.RenderResponse;
+import javax.portlet.ResourceRequest;
+import javax.portlet.ResourceResponse;
 
 /**
  * <a href="ScriptingImpl.java.html"><b><i>View Source</i></b></a>
@@ -61,14 +61,22 @@ import javax.portlet.ActionRequest;
  */
 public class ScriptingImpl implements Scripting {
 
-	public ScriptingImpl() {
-		_scriptingExecutors.put("python", new PythonExecutor());
-		_scriptingExecutors.put("groovy", new GroovyExecutor());
-		_scriptingExecutors.put("javascript", new JavaScriptExecutor());
-		_scriptingExecutors.put("ruby", new RubyExecutor());
+	public void afterPropertiesSet() {
+		_scriptingExecutors.put(GroovyExecutor.LANGUAGE, new GroovyExecutor());
+		_scriptingExecutors.put(
+			JavaScriptExecutor.LANGUAGE, new JavaScriptExecutor());
+		_scriptingExecutors.put(PythonExecutor.LANGUAGE, new PythonExecutor());
+		_scriptingExecutors.put(RubyExecutor.LANGUAGE, new RubyExecutor());
 	}
 
-	public void clearCache(String language) {
+	public void clearCache(String language) throws ScriptingException {
+		ScriptingExecutor scriptingExecutor = _scriptingExecutors.get(language);
+
+		if (scriptingExecutor == null) {
+			throw new UnsupportedLanguageException(language);
+		}
+
+		scriptingExecutor.clearCache();
 	}
 
 	public Map<String, Object> eval(
@@ -76,30 +84,18 @@ public class ScriptingImpl implements Scripting {
 			Set<String> outputNames, String language, String script)
 		throws ScriptingException {
 
-		if (Validator.isNull(language)) {
-			throw new UnsupportedLanguageException(
-				"No scripting language specified");
+		ScriptingExecutor scriptingExecutor = _scriptingExecutors.get(language);
+
+		if (scriptingExecutor == null) {
+			throw new UnsupportedLanguageException(language);
 		}
 
 		try {
-			ScriptingExecutor executor = _scriptingExecutors.get(language);
-
-			if (executor == null) {
-				String msg =
-					"Scripting language '" + language + "' is not supported.";
-
-				if (_log.isWarnEnabled()) {
-					_log.warn(msg);
-				}
-
-				throw new UnsupportedLanguageException(msg);
-			}
-
-			return executor.eval(
+			return scriptingExecutor.eval(
 				allowedClasses, inputObjects, outputNames, script);
 		}
 		catch (Exception e) {
-			throw new ScriptingException(_getErrorInfo(script, e), e);
+			throw new ScriptingException(getErrorMessage(script, e), e);
 		}
 	}
 
@@ -115,21 +111,11 @@ public class ScriptingImpl implements Scripting {
 		PortletConfig portletConfig, PortletContext portletContext,
 		PortletRequest portletRequest, PortletResponse portletResponse) {
 
-		PortletPreferences preferences = portletRequest.getPreferences();
-
-		Map<String, String> userInfo =
-			(Map<String, String>)portletRequest.getAttribute(
-				PortletRequest.USER_INFO);
-
 		Map<String, Object> objects = new HashMap<String, Object>();
 
 		objects.put("portletConfig", portletConfig);
-
 		objects.put("portletContext", portletContext);
-
-		objects.put("preferences", preferences);
-
-		objects.put("userInfo", userInfo);
+		objects.put("portletPreferences", portletRequest.getPreferences());
 
 		if (portletRequest instanceof ActionRequest) {
 			objects.put("actionRequest", portletRequest);
@@ -157,6 +143,9 @@ public class ScriptingImpl implements Scripting {
 			objects.put("portletResponse", portletResponse);
 		}
 
+		objects.put(
+			"userInfo", portletRequest.getAttribute(PortletRequest.USER_INFO));
+
 		return objects;
 	}
 
@@ -164,32 +153,36 @@ public class ScriptingImpl implements Scripting {
 		return _scriptingExecutors.keySet();
 	}
 
-	private String _getErrorInfo(String code, Exception e) {
+	protected String getErrorMessage(String script, Exception e) {
 		StringBuilder sb = new StringBuilder();
 
 		sb.append(e.getMessage());
-		sb.append("\n");
+		sb.append(StringPool.NEW_LINE);
 
 		try{
-			StringReader buffer = new StringReader(code);
-			LineNumberReader lnReader = new LineNumberReader(buffer);
+			LineNumberReader lineNumberReader = new LineNumberReader(
+				new StringReader(script));
 
-			String line;
+			while (true) {
+				String line = lineNumberReader.readLine();
 
-			while ((line = lnReader.readLine()) != null){
+				if (line == null) {
+					break;
+				}
+
 				sb.append("Line ");
-				sb.append(lnReader.getLineNumber());
+				sb.append(lineNumberReader.getLineNumber());
 				sb.append(": ");
 				sb.append(line);
-				sb.append("\n");
+				sb.append(StringPool.NEW_LINE);
 			}
 		}
 		catch (IOException ioe) {
 			sb = new StringBuilder();
 
 			sb.append(e.getMessage());
-			sb.append("\n");
-			sb.append(code);
+			sb.append(StringPool.NEW_LINE);
+			sb.append(script);
 		}
 
 		return sb.toString();

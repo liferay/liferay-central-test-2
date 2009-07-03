@@ -29,9 +29,10 @@ import java.util.Set;
 
 /**
  * <a href="JavaScriptClassVisibilityChecker.java.html"><b><i>View Source</i>
- *  </b></a>
+ * </b></a>
  *
  * @author Alberto Montero
+ *
  */
 public class JavaScriptClassVisibilityChecker
 	extends ClassVisibilityChecker implements ClassShutter {
