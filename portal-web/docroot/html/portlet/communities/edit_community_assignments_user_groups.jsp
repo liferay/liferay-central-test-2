@@ -72,11 +72,6 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_community_assignm
 		keyProperty="userGroupId"
 		modelVar="userGroup"
 	>
-		<liferay-ui:search-container-row-parameter
-			name="group"
-			value="<%= group %>"
-		/>
-
 		<liferay-ui:search-container-column-text
 			name="name"
 			orderable="<%= true %>"
@@ -88,13 +83,6 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_community_assignm
 			orderable="<%= true %>"
 			property="description"
 		/>
-
-		<c:if test='<%= tabs2.equals("current") %>'>
-			<liferay-ui:search-container-column-jsp
-				align="right"
-				path="/html/portlet/communities/user_group_action.jsp"
-			/>
-		</c:if>
 	</liferay-ui:search-container-row>
 
 	<div class="separator"><!-- --></div>

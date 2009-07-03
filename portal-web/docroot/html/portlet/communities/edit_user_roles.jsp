@@ -25,8 +25,7 @@
 <%@ include file="/html/portlet/communities/init.jsp" %>
 
 <%
-String tabs1 = ParamUtil.getString(request, "tabs1", "users");
-String tabs2 = ParamUtil.getString(request, "tabs2", "current");
+String tabs1 = ParamUtil.getString(request, "tabs1", "current");
 
 String cur = ParamUtil.getString(request, "cur");
 
@@ -58,7 +57,6 @@ portletURL.setWindowState(WindowState.MAXIMIZED);
 
 portletURL.setParameter("struts_action", "/communities/edit_user_roles");
 portletURL.setParameter("tabs1", tabs1);
-portletURL.setParameter("tabs2", tabs2);
 portletURL.setParameter("redirect", redirect);
 portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 portletURL.setParameter("roleId", String.valueOf(roleId));
@@ -69,7 +67,6 @@ PortletURL breadcrumbsURL = renderResponse.createRenderURL();
 
 breadcrumbsURL.setParameter("struts_action", "/communities/edit_user_roles");
 breadcrumbsURL.setParameter("tabs1", tabs1);
-breadcrumbsURL.setParameter("tabs2", tabs2);
 breadcrumbsURL.setParameter("redirect", redirect);
 breadcrumbsURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 
@@ -84,7 +81,6 @@ if (role != null) {
 }
 
 request.setAttribute("edit_user_roles.jsp-tabs1", tabs1);
-request.setAttribute("edit_user_roles.jsp-tabs2", tabs2);
 
 request.setAttribute("edit_user_roles.jsp-cur", cur);
 
@@ -103,13 +99,6 @@ request.setAttribute("edit_user_roles.jsp-breadcrumbs", breadcrumbs);
 %>
 
 <script type="text/javascript">
-	function <portlet:namespace />updateRoleGroups(redirect) {
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "user_group_group_role_user_groups";
-		document.<portlet:namespace />fm.<portlet:namespace />redirect.value = redirect;
-		document.<portlet:namespace />fm.<portlet:namespace />addUserGroupIds.value = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
-		document.<portlet:namespace />fm.<portlet:namespace />removeUserGroupIds.value = Liferay.Util.listUncheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
-		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/communities/edit_user_roles" /></portlet:actionURL>");
-	}
 	function <portlet:namespace />updateUserGroupRoleUsers(redirect) {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "user_group_role_users";
 		document.<portlet:namespace />fm.<portlet:namespace />redirect.value = redirect;
@@ -122,7 +111,6 @@ request.setAttribute("edit_user_roles.jsp-breadcrumbs", breadcrumbs);
 <form action="<%= portletURL.toString() %>" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
 <input name="<portlet:namespace />tabs1" type="hidden" value="<%= HtmlUtil.escapeAttribute(tabs1) %>" />
-<input name="<portlet:namespace />tabs2" type="hidden" value="<%= HtmlUtil.escapeAttribute(tabs2) %>" />
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(redirect) %>" />
 <input name="<portlet:namespace />groupId" type="hidden" value="<%= String.valueOf(group.getGroupId()) %>" />
 <input name="<portlet:namespace />roleId" type="hidden" value="<%= roleId %>" />

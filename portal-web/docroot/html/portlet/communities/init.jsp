@@ -66,7 +66,6 @@
 <%@ page import="com.liferay.portal.service.permission.PortalPermissionUtil" %>
 <%@ page import="com.liferay.portlet.communities.action.ActionUtil" %>
 <%@ page import="com.liferay.portlet.communities.search.ExportPageChecker" %>
-<%@ page import="com.liferay.portlet.communities.search.UserGroupGroupRoleChecker" %>
 <%@ page import="com.liferay.portlet.communities.search.UserGroupRoleRoleChecker" %>
 <%@ page import="com.liferay.portlet.communities.search.UserGroupRoleUserChecker" %>
 <%@ page import="com.liferay.portlet.communities.util.StagingUtil" %>

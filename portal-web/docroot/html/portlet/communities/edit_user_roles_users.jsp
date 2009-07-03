@@ -26,7 +26,6 @@
 
 <%
 String tabs1 = (String)request.getAttribute("edit_user_roles.jsp-tabs1");
-String tabs2 = (String)request.getAttribute("edit_user_roles.jsp-tabs2");
 
 String cur = (String)request.getAttribute("edit_user_roles.jsp-cur");
 
@@ -43,8 +42,6 @@ String breadcrumbs = (String)request.getAttribute("edit_user_roles.jsp-breadcrum
 
 <input name="<portlet:namespace />addUserIds" type="hidden" value="" />
 <input name="<portlet:namespace />removeUserIds" type="hidden" value="" />
-<input name="<portlet:namespace />addUserGroupIds" type="hidden" value="" />
-<input name="<portlet:namespace />removeUserGroupIds" type="hidden" value="" />
 
 <div class="portlet-section-body results-row" style="border: 1px solid; padding: 5px;">
 	<%= LanguageUtil.format(pageContext, "step-x-of-x", new String[] {"2", "2"}) %>
@@ -61,126 +58,66 @@ String breadcrumbs = (String)request.getAttribute("edit_user_roles.jsp-breadcrum
 </div>
 
 <liferay-ui:tabs
-	names="users,user-groups"
-	param="tabs1"
-	url="<%= portletURL.toString() %>"
+	names="users"
 />
 
 <liferay-ui:tabs
 	names="current,available"
-	param="tabs2"
+	param="tabs1"
 	url="<%= portletURL.toString() %>"
 />
 
-<c:choose>
-<c:when test='<%= tabs1.equals("users") %>'>
-	<liferay-ui:search-container
-		rowChecker="<%= new UserGroupRoleUserChecker(renderResponse, group, role) %>"
-		searchContainer="<%= new UserSearch(renderRequest, portletURL) %>"
+<liferay-ui:search-container
+	rowChecker="<%= new UserGroupRoleUserChecker(renderResponse, group, role) %>"
+	searchContainer="<%= new UserSearch(renderRequest, portletURL) %>"
+>
+	<liferay-ui:search-form
+		page="/html/portlet/enterprise_admin/user_search.jsp"
+	/>
+
+	<%
+	UserSearchTerms searchTerms = (UserSearchTerms)searchContainer.getSearchTerms();
+
+	LinkedHashMap userParams = new LinkedHashMap();
+
+	if (group.isOrganization()) {
+		userParams.put("usersOrgs", new Long(organization.getOrganizationId()));
+	}
+	else {
+		userParams.put("usersGroups", new Long(group.getGroupId()));
+	}
+
+	if (tabs1.equals("current")) {
+		userParams.put("userGroupRole", new Long[] {new Long(group.getGroupId()), new Long(roleId)});
+	}
+	%>
+
+	<liferay-ui:search-container-results>
+		<%@ include file="/html/portlet/enterprise_admin/user_search_results.jspf" %>
+	</liferay-ui:search-container-results>
+
+	<liferay-ui:search-container-row
+		className="com.liferay.portal.model.User"
+		escapedModel="<%= true %>"
+		keyProperty="userId"
+		modelVar="user2"
 	>
-		<liferay-ui:search-form
-			page="/html/portlet/enterprise_admin/user_search.jsp"
+		<liferay-ui:search-container-column-text
+			name="name"
+			property="fullName"
 		/>
 
-		<%
-		UserSearchTerms searchTerms = (UserSearchTerms)searchContainer.getSearchTerms();
-
-		LinkedHashMap userParams = new LinkedHashMap();
-
-		if (group.isOrganization()) {
-			userParams.put("usersOrgs", new Long(organization.getOrganizationId()));
-		}
-		else {
-			userParams.put("usersGroups", new Long(group.getGroupId()));
-		}
-
-		if (tabs2.equals("current")) {
-			userParams.put("userGroupRole", new Long[] {new Long(group.getGroupId()), new Long(roleId)});
-		}
-		%>
-
-		<liferay-ui:search-container-results>
-			<%@ include file="/html/portlet/enterprise_admin/user_search_results.jspf" %>
-		</liferay-ui:search-container-results>
-
-		<liferay-ui:search-container-row
-			className="com.liferay.portal.model.User"
-			escapedModel="<%= true %>"
-			keyProperty="userId"
-			modelVar="user2"
-		>
-			<liferay-ui:search-container-column-text
-				name="name"
-				property="fullName"
-			/>
-
-			<liferay-ui:search-container-column-text
-				name="screen-name"
-				property="screenName"
-			/>
-		</liferay-ui:search-container-row>
-
-		<div class="separator"><!-- --></div>
-
-		<input type="button" value="<liferay-ui:message key="update-associations" />" onClick="<portlet:namespace />updateUserGroupRoleUsers('<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>');" />
-
-		<br /><br />
-
-		<liferay-ui:search-iterator />
-	</liferay-ui:search-container>
-</c:when>
-<c:when test='<%= tabs1.equals("user-groups") %>'>
-	<liferay-ui:search-container
-		rowChecker="<%= new UserGroupGroupRoleChecker(renderResponse, role, group) %>"
-		searchContainer="<%= new UserGroupSearch(renderRequest, portletURL) %>"
-	>
-		<liferay-ui:search-form
-			page="/html/portlet/enterprise_admin/user_group_search.jsp"
+		<liferay-ui:search-container-column-text
+			name="screen-name"
+			property="screenName"
 		/>
+	</liferay-ui:search-container-row>
 
-		<%
-		UserGroupSearchTerms searchTerms = (UserGroupSearchTerms)searchContainer.getSearchTerms();
+	<div class="separator"><!-- --></div>
 
-		LinkedHashMap userGroupParams = new LinkedHashMap();
+	<input type="button" value="<liferay-ui:message key="update-associations" />" onClick="<portlet:namespace />updateUserGroupRoleUsers('<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>');" />
 
-		if (tabs2.equals("current")) {
-			userGroupParams.put("userGroupGroupRole", new Long[] {new Long(group.getGroupId()), new Long(roleId)});
-		}
+	<br /><br />
 
-		userGroupParams.put("userGroupsGroups", new Long(group.getGroupId()));
-		%>
-
-		<liferay-ui:search-container-results
-			results="<%= UserGroupLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), userGroupParams, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator()) %>"
-			total="<%= UserGroupLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), userGroupParams) %>"
-		/>
-
-		<liferay-ui:search-container-row
-			className="com.liferay.portal.model.UserGroup"
-			escapedModel="<%= true %>"
-			keyProperty="userGroupId"
-			modelVar="userGroup"
-		>
-			<liferay-ui:search-container-column-text
-				name="name"
-				orderable="<%= true %>"
-				property="name"
-			/>
-
-			<liferay-ui:search-container-column-text
-				name="description"
-				orderable="<%= true %>"
-				property="description"
-			/>
-		</liferay-ui:search-container-row>
-
-		<div class="separator"><!-- --></div>
-
-		<input type="button" value="<liferay-ui:message key="update-associations" />" onClick="<portlet:namespace />updateRoleGroups('<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>');" />
-
-		<br /><br />
-
-		<liferay-ui:search-iterator />
-	</liferay-ui:search-container>
-</c:when>
-</c:choose>
+	<liferay-ui:search-iterator />
+</liferay-ui:search-container>

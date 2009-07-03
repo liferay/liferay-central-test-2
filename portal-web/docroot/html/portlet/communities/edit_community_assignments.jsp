@@ -35,7 +35,6 @@ String redirect = ParamUtil.getString(request, "redirect");
 Group group = (Group)request.getAttribute(WebKeys.GROUP);
 
 User selUser = PortalUtil.getSelectedUser(request, false);
-long selUserGroupId = ParamUtil.getLong(request, "edit_community_assignments.jsp-selUserGroupId", 0L);
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
@@ -56,7 +55,6 @@ request.setAttribute("edit_community_assignments.jsp-redirect", redirect);
 
 request.setAttribute("edit_community_assignments.jsp-group", group);
 request.setAttribute("edit_community_assignments.jsp-selUser", selUser);
-request.setAttribute("edit_community_assignments.jsp-selUserGroupId", selUserGroupId);
 
 request.setAttribute("edit_community_assignments.jsp-portletURL", portletURL);
 %>
@@ -88,22 +86,6 @@ request.setAttribute("edit_community_assignments.jsp-portletURL", portletURL);
 
 	function <portlet:namespace />updateUserGroupRole(assignmentsRedirect) {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "user_group_role";
-		document.<portlet:namespace />fm.<portlet:namespace />assignmentsRedirect.value = assignmentsRedirect;
-		document.<portlet:namespace />fm.<portlet:namespace />addRoleIds.value = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
-		document.<portlet:namespace />fm.<portlet:namespace />removeRoleIds.value = Liferay.Util.listUncheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
-		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/communities/edit_community_assignments" /></portlet:actionURL>");
-	}
-
-	function <portlet:namespace />updateUserGroupGroupRole(assignmentsRedirect) {
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "usergroup_group_role";
-		document.<portlet:namespace />fm.<portlet:namespace />assignmentsRedirect.value = assignmentsRedirect;
-		document.<portlet:namespace />fm.<portlet:namespace />addRoleIds.value = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
-		document.<portlet:namespace />fm.<portlet:namespace />removeRoleIds.value = Liferay.Util.listUncheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
-		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/communities/edit_community_assignments" /></portlet:actionURL>");
-	}
-
-	function <portlet:namespace />updateUserGroupGroupRole(assignmentsRedirect) {
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "usergroup_group_role";
 		document.<portlet:namespace />fm.<portlet:namespace />assignmentsRedirect.value = assignmentsRedirect;
 		document.<portlet:namespace />fm.<portlet:namespace />addRoleIds.value = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
 		document.<portlet:namespace />fm.<portlet:namespace />removeRoleIds.value = Liferay.Util.listUncheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
@@ -156,14 +138,7 @@ request.setAttribute("edit_community_assignments.jsp-portletURL", portletURL);
 		<liferay-util:include page="/html/portlet/communities/edit_community_assignments_organizations.jsp" />
 	</c:when>
 	<c:when test='<%= tabs1.equals("user-groups") %>'>
-		<c:choose>
-			<c:when test="<%= selUserGroupId == 0 %>">
-				<liferay-util:include page="/html/portlet/communities/edit_community_assignments_user_groups.jsp" />
-			</c:when>
-			<c:otherwise>
-				<liferay-util:include page="/html/portlet/communities/edit_community_assignments_user_groups_roles.jsp" />
-			</c:otherwise>
-		</c:choose>
+		<liferay-util:include page="/html/portlet/communities/edit_community_assignments_user_groups.jsp" />
 	</c:when>
 </c:choose>
 
