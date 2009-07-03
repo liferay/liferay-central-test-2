@@ -20,22 +20,45 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.bi.reporting;
+package com.liferay.portal.kernel.workflow;
 
 import com.liferay.portal.kernel.resource.ResourceRetriever;
 
-import java.util.Date;
+import java.io.Serializable;
 
 /**
- * <a href="ReportDesignRetriever.java.html"><b><i>View Source</i></b></a>
+ * <a href="WorkflowDefinitionInfo.java.html"><b><i>View Source</i></b></a>
  *
- * @author Michael C. Han
+ * @author Shuyang Zhou
  *
  */
-public interface ReportDesignRetriever extends ResourceRetriever {
+public class WorkflowDefinitionInfo implements Serializable {
 
-	public Date getModifiedDate();
+	public WorkflowDefinitionInfo(String workflowDefinitionName) {
+		_workflowDefinitionName = workflowDefinitionName;
+	}
 
-	public String getReportName();
+	public ResourceRetriever getResourceRetriever() {
+		return _resourceRetriever;
+	}
+
+	public String getWorkflowDefinitionName() {
+		return _workflowDefinitionName;
+	}
+
+	public void setResourceRetriever(ResourceRetriever resourceRetriever) {
+		_resourceRetriever = resourceRetriever;
+	}
+
+	@Override
+	public String toString() {
+		return "WorkflowDefinition[" +
+			"definitionName:" + _workflowDefinitionName +
+			", retriever:" + _resourceRetriever +
+			"]";
+	}
+
+	private ResourceRetriever _resourceRetriever;
+	private String _workflowDefinitionName;
 
 }

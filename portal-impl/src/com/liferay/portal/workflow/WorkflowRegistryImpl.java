@@ -20,22 +20,39 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.bi.reporting;
+package com.liferay.portal.workflow;
 
-import com.liferay.portal.kernel.resource.ResourceRetriever;
+import com.liferay.portal.kernel.workflow.WorkflowRegistry;
+import com.liferay.portal.util.PropsUtil;
 
-import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Properties;
 
 /**
- * <a href="ReportDesignRetriever.java.html"><b><i>View Source</i></b></a>
+ * <a href="WorkflowRegistryImpl.java.html"><b><i>View Source</i></b></a>
  *
- * @author Michael C. Han
+ * @author Shuyang Zhou
  *
  */
-public interface ReportDesignRetriever extends ResourceRetriever {
+public class WorkflowRegistryImpl implements WorkflowRegistry {
 
-	public Date getModifiedDate();
+	public void init() {
+		Properties props =
+			PropsUtil.getProperties("workflow.process.name", true);
+		if (props != null) {
+			for (Object key : props.keySet()) {
+				_workflowProcessNames.put(
+					(String)key, props.getProperty((String)key));
+			}
+		}
+	}
 
-	public String getReportName();
+	public String getWorkflowProcessName(Class modelClass) {
+		return _workflowProcessNames.get(modelClass.getName());
+	}
+
+	private Map<String, String> _workflowProcessNames =
+		new HashMap<String, String>();
 
 }

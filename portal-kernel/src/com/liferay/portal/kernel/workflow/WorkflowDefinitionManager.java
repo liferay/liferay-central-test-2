@@ -20,22 +20,26 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.bi.reporting;
-
-import com.liferay.portal.kernel.resource.ResourceRetriever;
-
-import java.util.Date;
+package com.liferay.portal.kernel.workflow;
 
 /**
- * <a href="ReportDesignRetriever.java.html"><b><i>View Source</i></b></a>
+ * <a href="WorkflowDefinitionManager.java.html"><b><i>View Source</i></b></a>
  *
- * @author Michael C. Han
+ * @author Shuyang Zhou
  *
  */
-public interface ReportDesignRetriever extends ResourceRetriever {
+public interface WorkflowDefinitionManager {
 
-	public Date getModifiedDate();
+	public void addWorkflowDefinition(
+			WorkflowDefinitionInfo workflowDefinition);
 
-	public String getReportName();
+	public void updateWorkflowDefinition(
+			WorkflowDefinitionInfo workflowDefinition);
+
+	/**
+	 * TBD: Not sure whether we need this or not, Jbpm needs a cleanup,
+	 * otherwise the definition table can grow to huge size.
+	 */
+	public void removeWorkflowDefinition(String workflowDefinitionName);
 
 }

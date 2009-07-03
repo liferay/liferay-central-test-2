@@ -20,22 +20,17 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.bi.reporting;
-
-import com.liferay.portal.kernel.resource.ResourceRetriever;
-
-import java.util.Date;
+package com.liferay.portal.kernel.workflow;
 
 /**
- * <a href="ReportDesignRetriever.java.html"><b><i>View Source</i></b></a>
+ * <a href="CommonContextInfoNames.java.html"><b><i>View Source</i></b></a>
  *
- * @author Michael C. Han
+ * @author Shuyang Zhou
  *
  */
-public interface ReportDesignRetriever extends ResourceRetriever {
+public interface CommonContextInfoNames {
 
-	public Date getModifiedDate();
-
-	public String getReportName();
+	public String GROUP_ID = "GROUP_ID";
+	public String JOURNAL_ARTICLEID = "JOURNAL_ARTICLEID";
 
 }

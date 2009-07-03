@@ -22,9 +22,17 @@
 
 package com.liferay.portlet.journal.model;
 
+import com.liferay.portal.ModelListenerException;
+import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.workflow.CommonContextInfoNames;
+import com.liferay.portal.kernel.workflow.WorkflowException;
+import com.liferay.portal.kernel.workflow.WorkflowUtil;
 import com.liferay.portal.model.BaseModelListener;
 import com.liferay.portal.servlet.filters.cache.CacheUtil;
 import com.liferay.portlet.journalcontent.util.JournalContentUtil;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * <a href="JournalArticleListener.java.html"><b><i>View Source</i></b></a>
@@ -32,9 +40,34 @@ import com.liferay.portlet.journalcontent.util.JournalContentUtil;
  * @author Brian Wing Shun Chan
  * @author Jon Steer
  * @author Raymond Augé
+ * @author Shuyang Zhou
  *
  */
 public class JournalArticleListener extends BaseModelListener<JournalArticle> {
+
+	public void onAfterCreate(JournalArticle article) throws
+		ModelListenerException {
+
+		String workflowDefinitionName =
+			WorkflowUtil.getWorkflowRegistry().getWorkflowProcessName(
+				JournalArticle.class);
+		if (Validator.isNotNull(workflowDefinitionName)){
+			Map<String, Object> contextInfo = new HashMap<String, Object>();
+			contextInfo.put(
+				CommonContextInfoNames.GROUP_ID, article.getGroupId());
+			contextInfo.put(
+				CommonContextInfoNames.JOURNAL_ARTICLEID,
+				article.getArticleId());
+			try {
+				WorkflowUtil.getProcessInstanceManager().startProcessInstance(
+					workflowDefinitionName, contextInfo, article.getUserId());
+			}
+			catch (WorkflowException ex) {
+				throw new ModelListenerException(
+					"Unable to start process instance.", ex);
+			}
+		}
+	}
 
 	public void onAfterRemove(JournalArticle article) {
 		clearCache(article);

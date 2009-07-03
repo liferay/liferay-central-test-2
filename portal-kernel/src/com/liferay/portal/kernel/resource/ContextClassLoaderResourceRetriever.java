@@ -20,22 +20,31 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.bi.reporting;
+package com.liferay.portal.kernel.resource;
 
-import com.liferay.portal.kernel.resource.ResourceRetriever;
-
-import java.util.Date;
+import java.io.InputStream;
 
 /**
- * <a href="ReportDesignRetriever.java.html"><b><i>View Source</i></b></a>
  *
- * @author Michael C. Han
+ * <a href="ContextClassLoaderResourceRetriever.java.html"><b><i>View Source
+ * </i></b></a>
+ *
+ * @author Shuyang Zhou
  *
  */
-public interface ReportDesignRetriever extends ResourceRetriever {
+public class ContextClassLoaderResourceRetriever implements ResourceRetriever {
 
-	public Date getModifiedDate();
+	public ContextClassLoaderResourceRetriever(String fileName) {
+		ClassLoader contextClassLoader =
+			Thread.currentThread().getContextClassLoader();
 
-	public String getReportName();
+		_inputStream = contextClassLoader.getResourceAsStream(fileName);
+	}
+
+	public InputStream getInputStream() {
+		return _inputStream;
+	}
+
+	private InputStream _inputStream;
 
 }

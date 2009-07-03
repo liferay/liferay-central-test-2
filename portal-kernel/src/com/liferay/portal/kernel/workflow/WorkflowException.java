@@ -20,22 +20,28 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.bi.reporting;
+package com.liferay.portal.kernel.workflow;
 
-import com.liferay.portal.kernel.resource.ResourceRetriever;
-
-import java.util.Date;
+import com.liferay.portal.PortalException;
 
 /**
- * <a href="ReportDesignRetriever.java.html"><b><i>View Source</i></b></a>
+ * <a href="WorkflowException.java.html"><b><i>View Source</i></b></a>
  *
- * @author Michael C. Han
+ * @author Shuyang Zhou
  *
  */
-public interface ReportDesignRetriever extends ResourceRetriever {
+public class WorkflowException extends PortalException {
 
-	public Date getModifiedDate();
+	public WorkflowException(Throwable cause) {
+		super(cause);
+	}
 
-	public String getReportName();
+	public WorkflowException(String msg, Throwable cause) {
+		super(msg, cause);
+	}
+
+	public WorkflowException(String msg) {
+		super(msg);
+	}
 
 }

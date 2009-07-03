@@ -20,52 +20,66 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.bi.reporting.servlet;
-
-import com.liferay.portal.kernel.bi.reporting.ReportDesignRetriever;
-
-import java.io.InputStream;
+package com.liferay.portal.kernel.workflow;
 
 import java.util.Date;
-
-import javax.servlet.ServletContext;
+import java.util.Map;
 
 /**
- * <a href="ServletContextReportDesignRetriever.java.html"><b><i>View Source</i>
- * </b></a>
+ * <a href="ProcessInstanceHistoryEntry.java.html"><b><i>View Source</i></b></a>
  *
- * @author Michael C. Han
+ * @author Shuyang Zhou
  *
  */
-public class ServletContextReportDesignRetriever
-	implements ReportDesignRetriever {
+public class ProcessInstanceHistoryEntry {
 
-	public ServletContextReportDesignRetriever(
-		ServletContext servletContext, String reportName, String prefix,
-		String postfix) {
-
-		_servletContext = servletContext;
-		_reportName = reportName;
-		_prefix = prefix;
-		_postfix = postfix;
+	public ProcessInstanceHistoryEntry(
+			Date date, long userId, int sequence, String description) {
+		_date = date;
+		_userId = userId;
+		_sequence = sequence;
+		_description = description;
 	}
 
-	public InputStream getInputStream() {
-		return _servletContext.getResourceAsStream(
-			_prefix + _reportName + _postfix);
+	public Map<String, Object> getAdditionalData() {
+		return _additionalData;
 	}
 
-	public Date getModifiedDate() {
-		return new Date();
+	public Date getDate() {
+		return _date;
 	}
 
-	public String getReportName() {
-		return _reportName;
+	public String getDescription() {
+		return _description;
 	}
 
-	private String _postfix;
-	private String _prefix;
-	private String _reportName;
-	private ServletContext _servletContext;
+	public int getSequence() {
+		return _sequence;
+	}
+
+	public long getUserId() {
+		return _userId;
+	}
+
+	public void setAdditionalData(Map<String, Object> additionalData) {
+		_additionalData = additionalData;
+	}
+
+	@Override
+	public String toString() {
+		return "ProcessInstanceHistoryEntry[" +
+			"date:" + _date +
+			", index:" + _sequence +
+			", userId:" + _userId +
+			", description:" + _description +
+			", additionalData:" + _additionalData +
+			"]";
+	}
+
+	private Date _date;
+	private int _sequence;
+	private long _userId;
+	private Map<String, Object> _additionalData;
+	private String _description;
 
 }

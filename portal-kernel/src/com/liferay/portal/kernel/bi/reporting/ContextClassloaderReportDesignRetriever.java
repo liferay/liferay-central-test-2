@@ -41,20 +41,20 @@ public class ContextClassloaderReportDesignRetriever
 		_reportName = reportName;
 	}
 
+	public InputStream getInputStream() {
+		Thread currentThread = Thread.currentThread();
+
+		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
+
+		return contextClassLoader.getResourceAsStream(_reportName);
+	}
+
 	public Date getModifiedDate() {
 		return new Date();
 	}
 
 	public String getReportName() {
 		return _reportName;
-	}
-
-	public InputStream retrieve() {
-		Thread currentThread = Thread.currentThread();
-
-		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
-
-		return contextClassLoader.getResourceAsStream(_reportName);
 	}
 
 	private String _reportName;
