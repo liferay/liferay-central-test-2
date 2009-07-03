@@ -48,7 +48,16 @@ else if (tabs2.equals("organizations")) {
 <%
 List<ResourcePermission> resourcePermissions = new UniqueList<ResourcePermission>();
 
-List<Role> roles = RoleLocalServiceUtil.getRoles(tabs2.equals("users") ? RoleConstants.TYPE_REGULAR : RoleConstants.TYPE_COMMUNITY, "lfr-permission-algorithm-5");
+int roleType = RoleConstants.TYPE_REGULAR;
+
+if (tabs2.equals("communities")) {
+	roleType = RoleConstants.TYPE_COMMUNITY
+}
+else if (tabs2.equals("organizations")) {
+	roleType = RoleConstants.TYPE_ORGANIZATION
+}
+
+List<Role> roles = RoleLocalServiceUtil.getRoles(roleType, "lfr-permission-algorithm-5");
 
 Iterator<Role> rolesItr = roles.iterator();
 
@@ -82,35 +91,31 @@ while (rolesItr.hasNext()) {
 	List<ResourcePermission> roleResourcePermissions = ResourcePermissionLocalServiceUtil.getRoleResourcePermissions(role.getRoleId());
 
 	for (ResourcePermission resourcePermission : roleResourcePermissions) {
-		try {
-			if (resourcePermission.getScope() != ResourceConstants.SCOPE_INDIVIDUAL) {
+		if (resourcePermission.getScope() != ResourceConstants.SCOPE_INDIVIDUAL) {
+			continue;
+		}
+
+		BaseModel model = PortalUtil.getModel(resourcePermission);
+
+		if (model == null) {
+			continue;
+		}
+
+		if (tabs2.equals("users")) {
+			if (!(model instanceof User)) {
 				continue;
 			}
 
-			BaseModel model = PortalUtil.getModel(resourcePermission);
+			List<User> users = UserLocalServiceUtil.getRoleUsers(role.getRoleId());
 
-			if (model == null) {
-				continue;
-			}
+			long userId = BeanPropertiesUtil.getLong(model, "userId");
 
-			if (tabs2.equals("users")) {
-				if (model instanceof Group || model instanceof Layout || model instanceof Organization || model instanceof Role || model instanceof UserGroup) {
-					continue;
-				}
-
-				List<User> users = UserLocalServiceUtil.getRoleUsers(role.getRoleId());
-
-				long userId = BeanPropertiesUtil.getLong(model, "userId");
-
-				if (users.get(0).getUserId() == userId) {
-					resourcePermissions.add(resourcePermission);
-				}
-			}
-			else {
+			if (users.get(0).getUserId() == userId) {
 				resourcePermissions.add(resourcePermission);
 			}
 		}
-		catch (Exception e) {
+		else {
+			resourcePermissions.add(resourcePermission);
 		}
 	}
 }
@@ -141,21 +146,17 @@ while (rolesItr.hasNext()) {
 		List<String> systemActionLabels = null;
 
 		if (tabs2.equals("users")) {
-			User user2 = UserLocalServiceUtil.getRoleUsers(role.getRoleId()).get(0);
-
-			group = user2.getGroup();
+			group = UserLocalServiceUtil.getRoleUsers(role.getRoleId()).get(0).getGroup();
 
 			systemActionLabels = ResourceActionsUtil.getActionsNames(pageContext, ResourceActionsUtil.getModelResourceActions(resourcePermission.getName()));
-
-			ListUtil.sort(systemActionLabels);
 		}
 		else {
 			group = GroupLocalServiceUtil.getRoleGroups(role.getRoleId()).get(0);
 
 			systemActionLabels = ResourceActionsUtil.getActionsNames(pageContext, ResourceActionsUtil.getModelResourceCommunityDefaultActions(resourcePermission.getName()));
-
-			ListUtil.sort(systemActionLabels);
 		}
+
+		ListUtil.sort(systemActionLabels);
 
 		List<String> actionLabels = ResourceActionsUtil.getActionsNames(pageContext, resourcePermission.getName(), resourcePermission.getActionIds());
 
@@ -234,7 +235,7 @@ while (rolesItr.hasNext()) {
 		<liferay-ui:search-container-column-button
 			align="right"
 			href="<%= taglibReassignURL %>"
-			name="<%= LanguageUtil.get(pageContext, "reassign") %>"
+			name='<%= LanguageUtil.get(pageContext, "reassign") %>'
 		/>
 	</liferay-ui:search-container-row>
 
