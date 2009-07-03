@@ -88,7 +88,7 @@ public class DataSampleThreadLocal implements Cloneable {
 		return _dataSamples;
 	}
 
-	private static ThreadLocal<DataSampleThreadLocal>_dataSampleThreadLocal =
+	private static ThreadLocal<DataSampleThreadLocal> _dataSampleThreadLocal =
 		new InitialThreadLocal<DataSampleThreadLocal>(
 			new DataSampleThreadLocal());
 	private static boolean _monitoringDataSampleThreadLocal =
