@@ -43,16 +43,16 @@ public class MemoryReportDesignRetriever implements ReportDesignRetriever {
 		_bytes = bytes;
 	}
 
-	public InputStream getInputStream() {
-		return new ByteArrayInputStream(_bytes);
-	}
-
 	public Date getModifiedDate() {
 		return _modifiedDate;
 	}
 
 	public String getReportName() {
 		return _reportName;
+	}
+
+	public InputStream retrieve() {
+		return new ByteArrayInputStream(_bytes);
 	}
 
 	private byte[] _bytes;

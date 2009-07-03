@@ -50,17 +50,17 @@ public class ServletContextReportDesignRetriever
 		_postfix = postfix;
 	}
 
-	public InputStream getInputStream() {
-		return _servletContext.getResourceAsStream(
-			_prefix + _reportName + _postfix);
-	}
-
 	public Date getModifiedDate() {
 		return new Date();
 	}
 
 	public String getReportName() {
 		return _reportName;
+	}
+
+	public InputStream retrieve() {
+		return _servletContext.getResourceAsStream(
+			_prefix + _reportName + _postfix);
 	}
 
 	private String _postfix;

@@ -26,12 +26,12 @@ import com.liferay.portal.kernel.bi.rules.AdminRequestMessage;
 import com.liferay.portal.kernel.bi.rules.AdminRequestType;
 import com.liferay.portal.kernel.bi.rules.ExecutionRequestMessage;
 import com.liferay.portal.kernel.bi.rules.Query;
+import com.liferay.portal.kernel.bi.rules.RuleRetriever;
 import com.liferay.portal.kernel.bi.rules.RulesEngine;
 import com.liferay.portal.kernel.bi.rules.RulesEngineException;
 import com.liferay.portal.kernel.messaging.MessageBusException;
 import com.liferay.portal.kernel.messaging.sender.SingleDestinationMessageSender;
 import com.liferay.portal.kernel.messaging.sender.SingleDestinationSynchronousMessageSender;
-import com.liferay.portal.kernel.resource.ResourceRetriever;
 
 import java.util.List;
 
@@ -53,13 +53,13 @@ public class RulesEngineProxy implements RulesEngine {
 		_synchronousExecutionRequestMessageSender = ruleEngineExecutionSender;
 	}
 
-	public void add(String domainName, ResourceRetriever resourceRetriever) {
-		_sendAdminMessage(AdminRequestType.ADD, domainName, resourceRetriever);
+	public void add(String domainName, RuleRetriever ruleRetriever) {
+		_sendAdminMessage(AdminRequestType.ADD, domainName, ruleRetriever);
 	}
 
-	public void execute(ResourceRetriever resourceRetriever, List<?> facts) {
+	public void execute(RuleRetriever ruleRetriever, List<?> facts) {
 		ExecutionRequestMessage executionRequestMessage =
-			new ExecutionRequestMessage(resourceRetriever);
+			new ExecutionRequestMessage(ruleRetriever);
 
 		executionRequestMessage.addFact(facts);
 
@@ -67,11 +67,11 @@ public class RulesEngineProxy implements RulesEngine {
 	}
 
 	public List<?> execute(
-			ResourceRetriever resourceRetriever, List<?> facts, Query query)
+			RuleRetriever ruleRetriever, List<?> facts, Query query)
 		throws RulesEngineException {
 
 		ExecutionRequestMessage executionRequestMessage =
-			new ExecutionRequestMessage(resourceRetriever);
+			new ExecutionRequestMessage(ruleRetriever);
 
 		return _sendExecutionMessage(executionRequestMessage, facts, query);
 	}
@@ -98,27 +98,26 @@ public class RulesEngineProxy implements RulesEngine {
 		_sendAdminMessage(AdminRequestType.REMOVE, domainName, null);
 	}
 
-	public void update(String domainName, ResourceRetriever resourceRetriever) {
-		_sendAdminMessage(
-			AdminRequestType.UPDATE, domainName, resourceRetriever);
+	public void update(String domainName, RuleRetriever ruleRetriever) {
+		_sendAdminMessage(AdminRequestType.UPDATE, domainName, ruleRetriever);
 	}
 
 	private void _sendAdminMessage(
 		AdminRequestType adminRequestType, String domainName,
-		ResourceRetriever resourceRetriever) {
+		RuleRetriever ruleRetriever) {
 
 		AdminRequestMessage adminRequestMessage = null;
 
 		if (AdminRequestType.ADD.equals(adminRequestType)) {
 			adminRequestMessage = AdminRequestMessage.add(
-				domainName, resourceRetriever);
+				domainName, ruleRetriever);
 		}
 		else if (AdminRequestType.REMOVE.equals(adminRequestType)) {
 			adminRequestMessage = AdminRequestMessage.remove(domainName);
 		}
 		else if (AdminRequestType.UPDATE.equals(adminRequestType)) {
 			adminRequestMessage = AdminRequestMessage.update(
-				domainName, resourceRetriever);
+				domainName, ruleRetriever);
 		}
 
 		_adminRequestMessageSender.send(adminRequestMessage);

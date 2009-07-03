@@ -22,7 +22,6 @@
 
 package com.liferay.portal.kernel.bi.rules;
 
-import com.liferay.portal.kernel.resource.ResourceRetriever;
 import com.liferay.portal.kernel.util.AggregateClassLoader;
 
 import java.io.Serializable;
@@ -42,8 +41,8 @@ public class ExecutionRequestMessage implements Serializable {
 		_domainName = domainName;
 	}
 
-	public ExecutionRequestMessage(ResourceRetriever resourceRetriever) {
-		_resourceRetriever = resourceRetriever;
+	public ExecutionRequestMessage(RuleRetriever ruleRetriever) {
+		_ruleRetriever = ruleRetriever;
 
 		addClientClassLoader(Thread.currentThread().getContextClassLoader());
 	}
@@ -82,8 +81,8 @@ public class ExecutionRequestMessage implements Serializable {
 		return _query;
 	}
 
-	public ResourceRetriever getResourceRetriever() {
-		return _resourceRetriever;
+	public RuleRetriever getRuleRetriever() {
+		return _ruleRetriever;
 	}
 
 	public void setQuery(Query query) {
@@ -94,6 +93,6 @@ public class ExecutionRequestMessage implements Serializable {
 	private String _domainName;
 	private List<Object> _facts = new ArrayList<Object>();
 	private Query _query;
-	private ResourceRetriever _resourceRetriever;
+	private RuleRetriever _ruleRetriever;
 
 }
