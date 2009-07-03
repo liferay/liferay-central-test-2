@@ -99,7 +99,6 @@ public class AnnouncementsUtil {
 				roles.addAll(
 					RoleLocalServiceUtil.getUserGroupRoles(
 						userId, group.getGroupId()));
-
 				roles.addAll(
 					RoleLocalServiceUtil.getUserGroupGroupRoles(
 						userId, group.getGroupId()));

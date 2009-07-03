@@ -37,10 +37,10 @@ import com.liferay.portal.service.persistence.UserGroupGroupRolePK;
 import java.util.List;
 
 /**
- * <a href="UserGroupGroupRoleLocalServiceImpl.java.html"><b><i>View Source
- * </i></b></a>
+ * <a href="UserGroupGroupRoleLocalServiceImpl.java.html"><b><i>View Source</i>
+ * </b></a>
  *
- * @author Brett R. Swaim
+ * @author Brett Swaim
  *
  */
 public class UserGroupGroupRoleLocalServiceImpl
@@ -52,19 +52,17 @@ public class UserGroupGroupRoleLocalServiceImpl
 
 		checkGroupResource(groupId);
 
-		for (int i = 0; i < roleIds.length; i++) {
-			long roleId = roleIds[i];
-
+		for (long roleId : roleIds) {
 			UserGroupGroupRolePK pk = new UserGroupGroupRolePK(
 				userGroupId, groupId, roleId);
 
-			UserGroupGroupRole UserGroupGroupRole =
+			UserGroupGroupRole userGroupGroupRole =
 				userGroupGroupRolePersistence.fetchByPrimaryKey(pk);
 
-			if (UserGroupGroupRole == null) {
-				UserGroupGroupRole = userGroupGroupRolePersistence.create(pk);
+			if (userGroupGroupRole == null) {
+				userGroupGroupRole = userGroupGroupRolePersistence.create(pk);
 
-				userGroupGroupRolePersistence.update(UserGroupGroupRole, false);
+				userGroupGroupRolePersistence.update(userGroupGroupRole, false);
 			}
 		}
 
@@ -77,53 +75,27 @@ public class UserGroupGroupRoleLocalServiceImpl
 
 		checkGroupResource(groupId);
 
-		for (int i = 0; i < userGroupIds.length; i++) {
-			long userGroupId = userGroupIds[i];
-
+		for (long userGroupId : userGroupIds) {
 			UserGroupGroupRolePK pk = new UserGroupGroupRolePK(
 				userGroupId, groupId, roleId);
 
-			UserGroupGroupRole UserGroupGroupRole =
+			UserGroupGroupRole userGroupGroupRole =
 				userGroupGroupRolePersistence.fetchByPrimaryKey(pk);
 
-			if (UserGroupGroupRole == null) {
-				UserGroupGroupRole = userGroupGroupRolePersistence.create(pk);
+			if (userGroupGroupRole == null) {
+				userGroupGroupRole = userGroupGroupRolePersistence.create(pk);
 
-				userGroupGroupRolePersistence.update(UserGroupGroupRole, false);
+				userGroupGroupRolePersistence.update(userGroupGroupRole, false);
 			}
 		}
 
 		PermissionCacheUtil.clearCache();
 	}
 
-	public void deleteUserGroupGroupRole(UserGroupGroupRole UserGroupGroupRole)
+	public void deleteUserGroupGroupRole(UserGroupGroupRole userGroupGroupRole)
 		throws SystemException {
 
-		userGroupGroupRolePersistence.remove(UserGroupGroupRole);
-
-		PermissionCacheUtil.clearCache();
-	}
-
-	public void deleteUserGroupGroupRoles(long userGroupId, long[] groupIds)
-		throws SystemException {
-
-		for (int i = 0; i < groupIds.length; i++) {
-			long groupId = groupIds[i];
-
-			userGroupGroupRolePersistence.removeByU_G(userGroupId, groupId);
-		}
-
-		PermissionCacheUtil.clearCache();
-	}
-
-	public void deleteUserGroupGroupRoles(long[] userGroupIds, long groupId)
-		throws SystemException {
-
-		for (int i = 0; i < userGroupIds.length; i++) {
-			long userGroupId = userGroupIds[i];
-
-			userGroupGroupRolePersistence.removeByU_G(userGroupId, groupId);
-		}
+		userGroupGroupRolePersistence.remove(userGroupGroupRole);
 
 		PermissionCacheUtil.clearCache();
 	}
@@ -132,9 +104,7 @@ public class UserGroupGroupRoleLocalServiceImpl
 			long userGroupId, long groupId, long[] roleIds)
 		throws SystemException {
 
-		for (int i = 0; i < roleIds.length; i++) {
-			long roleId = roleIds[i];
-
+		for (long roleId : roleIds) {
 			UserGroupGroupRolePK pk = new UserGroupGroupRolePK(
 				userGroupId, groupId, roleId);
 
@@ -148,13 +118,31 @@ public class UserGroupGroupRoleLocalServiceImpl
 		PermissionCacheUtil.clearCache();
 	}
 
+	public void deleteUserGroupGroupRoles(long userGroupId, long[] groupIds)
+		throws SystemException {
+
+		for (long groupId : groupIds) {
+			userGroupGroupRolePersistence.removeByU_G(userGroupId, groupId);
+		}
+
+		PermissionCacheUtil.clearCache();
+	}
+
+	public void deleteUserGroupGroupRoles(long[] userGroupIds, long groupId)
+		throws SystemException {
+
+		for (long userGroupId : userGroupIds) {
+			userGroupGroupRolePersistence.removeByU_G(userGroupId, groupId);
+		}
+
+		PermissionCacheUtil.clearCache();
+	}
+
 	public void deleteUserGroupGroupRoles(
 			long[] userGroupIds, long groupId, long roleId)
 		throws SystemException {
 
-		for (int i = 0; i < userGroupIds.length; i++) {
-			long userGroupId = userGroupIds[i];
-
+		for (long userGroupId : userGroupIds) {
 			UserGroupGroupRolePK pk = new UserGroupGroupRolePK(
 				userGroupId, groupId, roleId);
 
@@ -219,10 +207,10 @@ public class UserGroupGroupRoleLocalServiceImpl
 		UserGroupGroupRolePK pk = new UserGroupGroupRolePK(
 			userGroupId, groupId, roleId);
 
-		UserGroupGroupRole UserGroupGroupRole =
+		UserGroupGroupRole userGroupGroupRole =
 			userGroupGroupRolePersistence.fetchByPrimaryKey(pk);
 
-		if (UserGroupGroupRole != null) {
+		if (userGroupGroupRole != null) {
 			return true;
 		}
 		else {

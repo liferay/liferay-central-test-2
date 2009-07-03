@@ -560,7 +560,8 @@
 				UserGroupRole
 			INNER JOIN
 				Roles_Permissions ON
-					(Roles_Permissions.roleId = UserGroupRole.roleId and UserGroupRole.groupId = ?)
+					(Roles_Permissions.roleId = UserGroupRole.roleId) AND
+					(UserGroupRole.groupId = ?)
 			INNER JOIN
 				Permission_ ON
 					(Permission_.permissionId = Roles_Permissions.permissionId)
@@ -951,7 +952,8 @@
 					Users_UserGroups ON
 						(Users_UserGroups.userGroupId = UserGroupGroupRole.userGroupId)
 				WHERE
-					(Users_UserGroups.userId = ? and UserGroupGroupRole.groupId = ?)
+					(Users_UserGroups.userId = ?) AND
+					(UserGroupGroupRole.groupId = ?)
 			)
 		]]>
 	</sql>
@@ -966,7 +968,8 @@
 					UserGroupRole ON
 						(UserGroupRole.roleId = Role_.roleId)
 				WHERE
-					(UserGroupRole.userId = ? and UserGroupRole.groupId = ?)
+					(UserGroupRole.userId = ?) AND
+					(UserGroupRole.groupId = ?)
 			)
 		]]>
 	</sql>
@@ -1174,7 +1177,8 @@
 				UserGroupRole ON
 					(UserGroupRole.userId = User_.userId)
 			WHERE
-				(UserGroupRole.groupId = ? and UserGroupRole.roleId = ?)
+				(UserGroupRole.groupId = ?) AND
+				(UserGroupRole.roleId = ?)
 		]]>
 	</sql>
 	<sql id="com.liferay.portal.service.persistence.UserFinder.joinByUsersGroups">
@@ -1350,6 +1354,14 @@
 				(Permission_.resourceId = ?)
 		]]>
 	</sql>
+	<sql id="com.liferay.portal.service.persistence.UserGroupFinder.joinByUserGroupGroupRole">
+		<![CDATA[
+			INNER JOIN
+				UserGroupGroupRole ON
+					(UserGroupGroupRole.groupId = ?) AND
+					(UserGroupGroupRole.roleId = ?)
+		]]>
+	</sql>
 	<sql id="com.liferay.portal.service.persistence.UserGroupFinder.joinByUserGroupsGroups">
 		<![CDATA[
 			INNER JOIN
@@ -1357,14 +1369,6 @@
 					(Groups_UserGroups.userGroupId = UserGroup.userGroupId)
 			WHERE
 				(Groups_UserGroups.groupId = ?)
-		]]>
-	</sql>
-	<sql id="com.liferay.portal.service.persistence.UserGroupFinder.joinByUserGroupGroupRole">
-		<![CDATA[
-			INNER JOIN
-				UserGroupGroupRole ON
-					(UserGroupGroupRole.groupId = ?) AND
-					(UserGroupGroupRole.roleId = ?)
 		]]>
 	</sql>
 	<sql id="com.liferay.portal.service.persistence.UserGroupFinder.joinByUserGroupsRoles">

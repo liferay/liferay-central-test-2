@@ -29,11 +29,10 @@ import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.base.UserGroupGroupRoleServiceBaseImpl;
 
 /**
- * <a href="UserGroupGroupRoleServiceImpl.java.html"><b><i>View Source
- * </i></b></a>
+ * <a href="UserGroupGroupRoleServiceImpl.java.html"><b><i>View Source</i></b>
+ * </a>
  *
- * @author Brian Wing Shun Chan
- * @author Brett R. Swaim
+ * @author Brett Swaim
  *
  */
 public class UserGroupGroupRoleServiceImpl

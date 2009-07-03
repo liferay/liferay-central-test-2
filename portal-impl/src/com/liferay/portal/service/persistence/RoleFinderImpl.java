@@ -54,9 +54,6 @@ import java.util.Map;
  */
 public class RoleFinderImpl extends BasePersistenceImpl implements RoleFinder {
 
-	public static String COUNT_BY_C_N_D_T =
-		RoleFinder.class.getName() + ".countByC_N_D_T";
-
 	public static String COUNT_BY_COMMUNITY =
 		RoleFinder.class.getName() + ".countByCommunity";
 
@@ -66,9 +63,6 @@ public class RoleFinderImpl extends BasePersistenceImpl implements RoleFinder {
 	public static String COUNT_BY_ORGANIZATION_COMMUNITY =
 		RoleFinder.class.getName() + ".countByOrganizationCommunity";
 
-	public static String COUNT_BY_U_G_R =
-		RoleFinder.class.getName() + ".countByU_G_R";
-
 	public static String COUNT_BY_USER =
 		RoleFinder.class.getName() + ".countByUser";
 
@@ -77,6 +71,12 @@ public class RoleFinderImpl extends BasePersistenceImpl implements RoleFinder {
 
 	public static String COUNT_BY_USER_GROUP_COMMUNITY =
 		RoleFinder.class.getName() + ".countByUserGroupCommunity";
+
+	public static String COUNT_BY_U_G_R =
+		RoleFinder.class.getName() + ".countByU_G_R";
+
+	public static String COUNT_BY_C_N_D_T =
+		RoleFinder.class.getName() + ".countByC_N_D_T";
 
 	public static String FIND_BY_SYSTEM =
 		RoleFinder.class.getName() + ".findBySystem";
@@ -160,6 +160,46 @@ public class RoleFinderImpl extends BasePersistenceImpl implements RoleFinder {
 		}
 	}
 
+	public int countByU_G_R(long userId, long groupId, long roleId)
+		throws SystemException {
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			String sql = CustomSQLUtil.get(COUNT_BY_U_G_R);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(roleId);
+			qPos.add(groupId);
+			qPos.add(userId);
+
+			Iterator<Long> itr = q.list().iterator();
+
+			if (itr.hasNext()) {
+				Long count = itr.next();
+
+				if (count != null) {
+					return count.intValue();
+				}
+			}
+
+			return 0;
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public int countByC_N_D_T(
 			long companyId, String name, String description, Integer type,
 			LinkedHashMap<String, Object> params)
@@ -198,46 +238,6 @@ public class RoleFinderImpl extends BasePersistenceImpl implements RoleFinder {
 			if (type != null) {
 				qPos.add(type);
 			}
-
-			Iterator<Long> itr = q.list().iterator();
-
-			if (itr.hasNext()) {
-				Long count = itr.next();
-
-				if (count != null) {
-					return count.intValue();
-				}
-			}
-
-			return 0;
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public int countByU_G_R(long userId, long groupId, long roleId)
-		throws SystemException {
-
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			String sql = CustomSQLUtil.get(COUNT_BY_U_G_R);
-
-			SQLQuery q = session.createSQLQuery(sql);
-
-			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(roleId);
-			qPos.add(groupId);
-			qPos.add(userId);
 
 			Iterator<Long> itr = q.list().iterator();
 

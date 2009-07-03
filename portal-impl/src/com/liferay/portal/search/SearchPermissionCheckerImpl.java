@@ -205,7 +205,6 @@ public class SearchPermissionCheckerImpl implements SearchPermissionChecker {
 		roles = ListUtil.copy(roles);
 
 		roles.addAll(RoleLocalServiceUtil.getUserGroupRoles(userId, groupId));
-
 		roles.addAll(
 			RoleLocalServiceUtil.getUserGroupGroupRoles(userId, groupId));
 
@@ -276,7 +275,6 @@ public class SearchPermissionCheckerImpl implements SearchPermissionChecker {
 		roles = ListUtil.copy(roles);
 
 		roles.addAll(RoleLocalServiceUtil.getUserGroupRoles(userId, groupId));
-
 		roles.addAll(
 			RoleLocalServiceUtil.getUserGroupGroupRoles(userId, groupId));
 
