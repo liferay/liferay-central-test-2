@@ -48,6 +48,11 @@ public class BeanPropertiesImpl implements BeanProperties {
 			try {
 				beanValue = (Boolean)PropertyUtils.getProperty(bean, param);
 			}
+			catch (NoSuchMethodException nsme) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(nsme.getMessage());
+				}
+			}
 			catch (Exception e) {
 				_log.error(e);
 			}
@@ -71,6 +76,11 @@ public class BeanPropertiesImpl implements BeanProperties {
 		if (bean != null) {
 			try {
 				beanValue = (Double)PropertyUtils.getProperty(bean, param);
+			}
+			catch (NoSuchMethodException nsme) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(nsme.getMessage());
+				}
 			}
 			catch (Exception e) {
 				_log.error(e);
@@ -96,6 +106,11 @@ public class BeanPropertiesImpl implements BeanProperties {
 			try {
 				beanValue = (Integer)PropertyUtils.getProperty(bean, param);
 			}
+			catch (NoSuchMethodException nsme) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(nsme.getMessage());
+				}
+			}
 			catch (Exception e) {
 				_log.error(e);
 			}
@@ -119,6 +134,11 @@ public class BeanPropertiesImpl implements BeanProperties {
 		if (bean != null) {
 			try {
 				beanValue = (Long)PropertyUtils.getProperty(bean, param);
+			}
+			catch (NoSuchMethodException nsme) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(nsme.getMessage());
+				}
 			}
 			catch (Exception e) {
 				_log.error(e);
@@ -144,6 +164,11 @@ public class BeanPropertiesImpl implements BeanProperties {
 			try {
 				beanValue = PropertyUtils.getProperty(bean, param);
 			}
+			catch (NoSuchMethodException nsme) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(nsme.getMessage());
+				}
+			}
 			catch (Exception e) {
 				_log.error(e);
 			}
@@ -168,6 +193,11 @@ public class BeanPropertiesImpl implements BeanProperties {
 			try {
 				beanValue = (String)PropertyUtils.getProperty(bean, param);
 			}
+			catch (NoSuchMethodException nsme) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(nsme.getMessage());
+				}
+			}
 			catch (Exception e) {
 				_log.error(e);
 			}
@@ -184,6 +214,11 @@ public class BeanPropertiesImpl implements BeanProperties {
 	public void setProperty(Object bean, String param, Object value) {
 		try {
 			PropertyUtils.setProperty(bean, param, value);
+		}
+		catch (NoSuchMethodException nsme) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(nsme.getMessage());
+			}
 		}
 		catch (Exception e) {
 			_log.error(e);
