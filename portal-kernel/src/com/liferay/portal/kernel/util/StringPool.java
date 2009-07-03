@@ -62,6 +62,8 @@ public class StringPool {
 
 	public static final String DASH = "-";
 
+	public static final String DOLLAR = "$";
+
 	public static final String DOUBLE_APOSTROPHE = "''";
 
 	public static final String DOUBLE_CLOSE_BRACKET = "]]";
