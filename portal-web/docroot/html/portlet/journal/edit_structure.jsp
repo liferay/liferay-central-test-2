@@ -103,7 +103,6 @@ int tabIndex = 1;
 
 		for (i = 0; i >= 0; i++) {
 			var elDepth = document.getElementById("<portlet:namespace />structure_el" + i + "_depth");
-			var elMetadataXML = document.getElementById("<portlet:namespace />structure_el" + i + "_metadata_xml");
 			var elName = document.getElementById("<portlet:namespace />structure_el" + i + "_name");
 			var elType = document.getElementById("<portlet:namespace />structure_el" + i + "_type");
 			var elRepeatable = document.getElementById("<portlet:namespace />structure_el" + i + "_repeatable");
@@ -123,17 +122,6 @@ int tabIndex = 1;
 
 					if ((cmd == "add") && (elCount == i)) {
 						xsd += "<dynamic-element name='' type='' repeatable='false'></dynamic-element>\n";
-					}
-					else {
-
-						if (elMetadataXML.value) {
-							var metadataXML = decodeURIComponent(elMetadataXML.value).replace(/[+]/g, ' ');
-
-							xsd += "\n";
-							xsd += xmlIndent;
-							xsd += metadataXML;
-							xsd += "\n";
-						}
 					}
 
 					var nextElDepth = document.getElementById("<portlet:namespace />structure_el" + (i + 1) + "_depth");
@@ -523,18 +511,6 @@ private void _format(Element root, IntegerWrapper count, Integer depth, IntegerW
 	while (itr.hasNext()) {
 		Element el = (Element)itr.next();
 
-		String nodeName = el.getName();
-
-		if (Validator.isNotNull(nodeName) && nodeName.equals("meta-data")) {
-			continue;
-		}
-
-		Element metaData = el.element("meta-data");
-
-		if (Validator.isNotNull(metaData)) {
-			req.setAttribute(WebKeys.JOURNAL_STRUCTURE_EL_META_DATA_XML, metaData.asXML());
-		}
-
 		req.setAttribute(WebKeys.JOURNAL_STRUCTURE_EL, el);
 		req.setAttribute(WebKeys.JOURNAL_STRUCTURE_EL_COUNT, count);
 		req.setAttribute(WebKeys.JOURNAL_STRUCTURE_EL_DEPTH, depth);
@@ -554,12 +530,6 @@ private void _move(Element root, IntegerWrapper count, boolean up, int depth, Bo
 
 	for (int i = 0; i < children.size(); i++) {
 		Element el = (Element)children.get(i);
-
-		String nodeName = el.getName();
-
-		if (Validator.isNotNull(nodeName) && nodeName.equals("meta-data")) {
-			continue;
-		}
 
 		if (halt.getValue()) {
 			return;

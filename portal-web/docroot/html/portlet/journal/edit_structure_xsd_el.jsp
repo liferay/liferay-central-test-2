@@ -33,17 +33,12 @@ boolean repeatable = GetterUtil.getBoolean(el.attributeValue("repeatable"));
 
 String parentElType = java.net.URLDecoder.decode(el.getParent().attributeValue("type", StringPool.BLANK));
 
-String elMetadataXML = (String)request.getAttribute(WebKeys.JOURNAL_STRUCTURE_EL_META_DATA_XML);
 IntegerWrapper count = (IntegerWrapper)request.getAttribute(WebKeys.JOURNAL_STRUCTURE_EL_COUNT);
 Integer depth = (Integer)request.getAttribute(WebKeys.JOURNAL_STRUCTURE_EL_DEPTH);
 Boolean hasSiblings = (Boolean)request.getAttribute(WebKeys.JOURNAL_STRUCTURE_EL_SIBLINGS);
 IntegerWrapper tabIndex = (IntegerWrapper)request.getAttribute(WebKeys.TAB_INDEX);
 
 String className = "portlet-section-alternate results-row alt";
-
-if (Validator.isNull(elMetadataXML)) {
-	elMetadataXML = StringPool.BLANK;
-}
 
 if (MathUtil.isEven(count.getValue())) {
 	className = "portlet-section-body results-row";
@@ -53,7 +48,6 @@ if (MathUtil.isEven(count.getValue())) {
 <tr class="<%= className %>">
 	<td>
 		<input id="<portlet:namespace />structure_el<%= count.getValue() %>_depth" type="hidden" value="<%= depth %>" />
-		<input id="<portlet:namespace />structure_el<%= count.getValue() %>_metadata_xml" type="hidden" value="<%= HttpUtil.encodeURL(elMetadataXML) %>" />
 
 		<table class="lfr-table">
 		<tr>
