@@ -521,10 +521,17 @@ public class JournalStructureLocalServiceImpl
 		throws PortalException {
 
 		for (Element el : children) {
+
+			String nodeName = el.getName();
 			String elName = el.attributeValue("name", StringPool.BLANK);
 			String elType = el.attributeValue("type", StringPool.BLANK);
 
-			if (Validator.isNull(elName) ||
+			if (Validator.isNotNull(nodeName) &&
+				nodeName.equals("meta-data")) {
+
+				continue;
+			}
+			else if (Validator.isNull(elName) ||
 				elName.startsWith(JournalStructureImpl.RESERVED)) {
 
 				throw new StructureXsdException();
