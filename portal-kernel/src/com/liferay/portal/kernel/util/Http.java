@@ -105,6 +105,8 @@ public interface Http {
 
 	public boolean hasDomain(String url);
 
+	public boolean hasProtocol(String url);
+
 	public boolean hasProxyConfig();
 
 	public boolean isNonProxyHost(String host);

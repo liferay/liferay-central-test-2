@@ -987,17 +987,17 @@ public class ThemeDisplay implements Serializable {
 		String path = getPathJavaScript();
 
 		if (isIncludeCalendarJs() &&
-			js.equals(path + "/calendar/calendar_stripped.js")) {
+			js.startsWith(path + "/calendar/calendar_stripped.js")) {
 
 			return true;
 		}
 		else if (isIncludePortletCssJs() &&
-				 js.equals(path + "/liferay/portlet_css.js")) {
+				 js.startsWith(path + "/liferay/portlet_css.js")) {
 
 			return true;
 		}
 		else if (isIncludeServiceJs() &&
-				 js.equals(path + "/liferay/service.js")) {
+				 js.startsWith(path + "/liferay/service.js")) {
 
 			return true;
 		}

@@ -136,69 +136,61 @@ if ((categories.size() > 0) || (portlets.size() > 0)) {
 					<c:when test="<%= layout.getType().equals(LayoutConstants.TYPE_PORTLET) %>">
 
 						<%
-						Set<String> headerPortalCssPaths = new LinkedHashSet<String>();
+						Set<String> headerPortalCssSet = new LinkedHashSet<String>();
 
-						List<String> headerPortalCssList = portlet.getHeaderPortalCss();
+						for (String headerPortalCss : portlet.getHeaderPortalCss()) {
+							if (!HttpUtil.hasProtocol(headerPortalCss)) {
+								headerPortalCss = PortalUtil.getStaticResourceURL(request, portlet.getContextPath() + headerPortalCss, portlet.getTimestamp());
+							}
 
-						for (String headerPortalCss : headerPortalCssList) {
-							String headerPortalCssPath = request.getContextPath() + headerPortalCss;
-
-							if (!headerPortalCssPaths.contains(headerPortalCssPath)) {
-								headerPortalCssPaths.add(headerPortalCssPath);
-
-								headerPortalCssPath = PortalUtil.getStaticResourceURL(request, headerPortalCssPath, portlet.getTimestamp());
+							if (!headerPortalCssSet.contains(headerPortalCss)) {
+								headerPortalCssSet.add(headerPortalCss);
 							}
 						}
 
-						Set<String> headerPortletCssPaths = new LinkedHashSet<String>();
+						Set<String> headerPortletCssSet = new LinkedHashSet<String>();
 
-						List<String> headerPortletCssList = portlet.getHeaderPortletCss();
+						for (String headerPortletCss : portlet.getHeaderPortletCss()) {
+							if (!HttpUtil.hasProtocol(headerPortletCss)) {
+								headerPortletCss = PortalUtil.getStaticResourceURL(request, portlet.getContextPath() + headerPortletCss, portlet.getTimestamp());
+							}
 
-						for (String headerPortletCss : headerPortletCssList) {
-							String headerPortletCssPath = portlet.getContextPath() + headerPortletCss;
-
-							if (!headerPortletCssPaths.contains(headerPortletCssPath)) {
-								headerPortletCssPaths.add(headerPortletCssPath);
-
-								headerPortletCssPath = PortalUtil.getStaticResourceURL(request, headerPortletCssPath, portlet.getTimestamp());
+							if (!headerPortletCssSet.contains(headerPortletCss)) {
+								headerPortletCssSet.add(headerPortletCss);
 							}
 						}
 
-						Set<String> footerPortalCssPaths = new LinkedHashSet<String>();
+						Set<String> footerPortalCssSet = new LinkedHashSet<String>();
 
-						List<String> footerPortalCssList = portlet.getFooterPortalCss();
+						for (String footerPortalCss : portlet.getFooterPortalCss()) {
+							if (!HttpUtil.hasProtocol(footerPortalCss)) {
+								footerPortalCss = PortalUtil.getStaticResourceURL(request, portlet.getContextPath() + footerPortalCss, portlet.getTimestamp());
+							}
 
-						for (String footerPortalCss : footerPortalCssList) {
-							String footerPortalCssPath = request.getContextPath() + footerPortalCss;
-
-							if (!footerPortalCssPaths.contains(footerPortalCssPath)) {
-								footerPortalCssPaths.add(footerPortalCssPath);
-
-								footerPortalCssPath = PortalUtil.getStaticResourceURL(request, footerPortalCssPath, portlet.getTimestamp());
+							if (!footerPortalCssSet.contains(footerPortalCss)) {
+								footerPortalCssSet.add(footerPortalCss);
 							}
 						}
 
-						Set<String> footerPortletCssPaths = new LinkedHashSet<String>();
+						Set<String> footerPortletCssSet = new LinkedHashSet<String>();
 
-						List<String> footerPortletCssList = portlet.getFooterPortletCss();
+						for (String footerPortletCss : portlet.getFooterPortletCss()) {
+							if (!HttpUtil.hasProtocol(footerPortletCss)) {
+								footerPortletCss = PortalUtil.getStaticResourceURL(request, portlet.getContextPath() + footerPortletCss, portlet.getTimestamp());
+							}
 
-						for (String footerPortletCss : footerPortletCssList) {
-							String footerPortletCssPath = portlet.getContextPath() + footerPortletCss;
-
-							if (!footerPortletCssPaths.contains(footerPortletCssPath)) {
-								footerPortletCssPaths.add(footerPortletCssPath);
-
-								footerPortletCssPath = PortalUtil.getStaticResourceURL(request, footerPortletCssPath, portlet.getTimestamp());
+							if (!footerPortletCssSet.contains(footerPortletCss)) {
+								footerPortletCssSet.add(footerPortletCss);
 							}
 						}
 						%>
 
 						<div
 							class="lfr-portlet-item <c:if test="<%= portletLocked %>">lfr-portlet-used</c:if> <c:if test="<%= portletInstanceable %>">lfr-instanceable</c:if>"
-							footerPortalCssPaths="<%= StringUtil.merge(footerPortalCssPaths) %>"
-							footerPortletCssPaths="<%= StringUtil.merge(footerPortletCssPaths) %>"
-							headerPortalCssPaths="<%= StringUtil.merge(headerPortalCssPaths) %>"
-							headerPortletCssPaths="<%= StringUtil.merge(headerPortletCssPaths) %>"
+							footerPortalCssPaths="<%= StringUtil.merge(footerPortalCssSet) %>"
+							footerPortletCssPaths="<%= StringUtil.merge(footerPortletCssSet) %>"
+							headerPortalCssPaths="<%= StringUtil.merge(headerPortalCssSet) %>"
+							headerPortletCssPaths="<%= StringUtil.merge(headerPortletCssSet) %>"
 							id="<%= divId.toString().replace(':', '-') %>"
 							instanceable="<%= portletInstanceable %>"
 							plid="<%= plid %>"

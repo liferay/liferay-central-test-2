@@ -401,6 +401,17 @@ public class HttpImpl implements Http {
 		return Validator.isNotNull(getDomain(url));
 	}
 
+	public boolean hasProtocol(String url) {
+		int pos = url.indexOf(Http.PROTOCOL_DELIMITER);
+
+		if (pos != -1) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 	public boolean hasProxyConfig() {
 		if (Validator.isNotNull(_PROXY_HOST) && (_PROXY_PORT > 0)) {
 			return true;

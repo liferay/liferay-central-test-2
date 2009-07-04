@@ -77,42 +77,38 @@ if (layout != null) {
 <c:if test="<%= portlets != null %>">
 
 	<%
-	Set<String> headerPortalCssPaths = new LinkedHashSet<String>();
+	Set<String> headerPortalCssSet = new LinkedHashSet<String>();
 
 	for (Portlet portlet : portlets) {
-		List<String> headerPortalCssList = portlet.getHeaderPortalCss();
+		for (String headerPortalCss : portlet.getHeaderPortalCss()) {
+			if (!HttpUtil.hasProtocol(headerPortalCss)) {
+				headerPortalCss = PortalUtil.getStaticResourceURL(request, portlet.getContextPath() + headerPortalCss, portlet.getTimestamp());
+			}
 
-		for (String headerPortalCss : headerPortalCssList) {
-			String headerPortalCssPath = request.getContextPath() + headerPortalCss;
-
-			if (!headerPortalCssPaths.contains(headerPortalCssPath)) {
-				headerPortalCssPaths.add(headerPortalCssPath);
-
-				headerPortalCssPath = HtmlUtil.escape(PortalUtil.getStaticResourceURL(request, headerPortalCssPath, portlet.getTimestamp()));
+			if (!headerPortalCssSet.contains(headerPortalCss)) {
+				headerPortalCssSet.add(headerPortalCss);
 	%>
 
-				<link href="<%= headerPortalCssPath %>" rel="stylesheet" type="text/css" />
+				<link href="<%= HtmlUtil.escape(headerPortalCss) %>" rel="stylesheet" type="text/css" />
 
 	<%
 			}
 		}
 	}
 
-	Set<String> headerPortletCssPaths = new LinkedHashSet<String>();
+	Set<String> headerPortletCssSet = new LinkedHashSet<String>();
 
 	for (Portlet portlet : portlets) {
-		List<String> headerPortletCssList = portlet.getHeaderPortletCss();
+		for (String headerPortletCss : portlet.getHeaderPortletCss()) {
+			if (!HttpUtil.hasProtocol(headerPortletCss)) {
+				headerPortletCss = PortalUtil.getStaticResourceURL(request, portlet.getContextPath() + headerPortletCss, portlet.getTimestamp());
+			}
 
-		for (String headerPortletCss : headerPortletCssList) {
-			String headerPortletCssPath = portlet.getContextPath() + headerPortletCss;
-
-			if (!headerPortletCssPaths.contains(headerPortletCssPath)) {
-				headerPortletCssPaths.add(headerPortletCssPath);
-
-				headerPortletCssPath = HtmlUtil.escape(PortalUtil.getStaticResourceURL(request, headerPortletCssPath, portlet.getTimestamp()));
+			if (!headerPortletCssSet.contains(headerPortletCss)) {
+				headerPortletCssSet.add(headerPortletCss);
 	%>
 
-				<link href="<%= headerPortletCssPath %>" rel="stylesheet" type="text/css" />
+				<link href="<%= HtmlUtil.escape(headerPortletCss) %>" rel="stylesheet" type="text/css" />
 
 	<%
 			}
@@ -132,42 +128,38 @@ if (layout != null) {
 <c:if test="<%= portlets != null %>">
 
 	<%
-	Set<String> headerPortalJavaScriptPaths = new LinkedHashSet<String>();
+	Set<String> headerPortalJavaScriptSet = new LinkedHashSet<String>();
 
 	for (Portlet portlet : portlets) {
-		List<String> headerPortalJavaScriptList = portlet.getHeaderPortalJavaScript();
+		for (String headerPortalJavaScript : portlet.getHeaderPortalJavaScript()) {
+			if (!HttpUtil.hasProtocol(headerPortalJavaScript)) {
+				headerPortalJavaScript = PortalUtil.getStaticResourceURL(request, portlet.getContextPath() + headerPortalJavaScript, portlet.getTimestamp());
+			}
 
-		for (String headerPortalJavaScript : headerPortalJavaScriptList) {
-			String headerPortalJavaScriptPath = request.getContextPath() + headerPortalJavaScript;
-
-			if (!headerPortalJavaScriptPaths.contains(headerPortalJavaScriptPath) && !themeDisplay.isIncludedJs(headerPortalJavaScriptPath)) {
-				headerPortalJavaScriptPaths.add(headerPortalJavaScriptPath);
-
-				headerPortalJavaScriptPath = HtmlUtil.escape(PortalUtil.getStaticResourceURL(request, headerPortalJavaScriptPath, portlet.getTimestamp()));
+			if (!headerPortalJavaScriptSet.contains(headerPortalJavaScript) && !themeDisplay.isIncludedJs(headerPortalJavaScript)) {
+				headerPortalJavaScriptSet.add(headerPortalJavaScript);
 	%>
 
-				<script src="<%= headerPortalJavaScriptPath %>" type="text/javascript"></script>
+				<script src="<%= HtmlUtil.escape(headerPortalJavaScript) %>" type="text/javascript"></script>
 
 	<%
 			}
 		}
 	}
 
-	Set<String> headerPortletJavaScriptPaths = new LinkedHashSet<String>();
+	Set<String> headerPortletJavaScriptSet = new LinkedHashSet<String>();
 
 	for (Portlet portlet : portlets) {
-		List<String> headerPortletJavaScriptList = portlet.getHeaderPortletJavaScript();
+		for (String headerPortletJavaScript : portlet.getHeaderPortletJavaScript()) {
+			if (!HttpUtil.hasProtocol(headerPortletJavaScript)) {
+				headerPortletJavaScript = PortalUtil.getStaticResourceURL(request, portlet.getContextPath() + headerPortletJavaScript, portlet.getTimestamp());
+			}
 
-		for (String headerPortletJavaScript : headerPortletJavaScriptList) {
-			String headerPortletJavaScriptPath = portlet.getContextPath() + headerPortletJavaScript;
-
-			if (!headerPortletJavaScriptPaths.contains(headerPortletJavaScriptPath)) {
-				headerPortletJavaScriptPaths.add(headerPortletJavaScriptPath);
-
-				headerPortletJavaScriptPath = HtmlUtil.escape(PortalUtil.getStaticResourceURL(request, headerPortletJavaScriptPath, portlet.getTimestamp()));
+			if (!headerPortletJavaScriptSet.contains(headerPortletJavaScript)) {
+				headerPortletJavaScriptSet.add(headerPortletJavaScript);
 	%>
 
-				<script src="<%= headerPortletJavaScriptPath %>" type="text/javascript"></script>
+				<script src="<%= HtmlUtil.escape(headerPortletJavaScript) %>" type="text/javascript"></script>
 
 	<%
 			}

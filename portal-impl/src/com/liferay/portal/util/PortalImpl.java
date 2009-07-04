@@ -2262,6 +2262,10 @@ public class PortalImpl implements Portal {
 		HttpServletRequest request, String uri, String queryString,
 		long timestamp) {
 
+		if (uri.contains(StringPool.QUESTION)) {
+			return uri;
+		}
+
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
