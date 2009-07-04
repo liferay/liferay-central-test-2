@@ -140,7 +140,7 @@ if ((categories.size() > 0) || (portlets.size() > 0)) {
 
 						for (String headerPortalCss : portlet.getHeaderPortalCss()) {
 							if (!HttpUtil.hasProtocol(headerPortalCss)) {
-								headerPortalCss = PortalUtil.getStaticResourceURL(request, portlet.getContextPath() + headerPortalCss, portlet.getTimestamp());
+								headerPortalCss = PortalUtil.getStaticResourceURL(request, request.getContextPath() + headerPortalCss, portlet.getTimestamp());
 							}
 
 							if (!headerPortalCssSet.contains(headerPortalCss)) {
@@ -164,7 +164,7 @@ if ((categories.size() > 0) || (portlets.size() > 0)) {
 
 						for (String footerPortalCss : portlet.getFooterPortalCss()) {
 							if (!HttpUtil.hasProtocol(footerPortalCss)) {
-								footerPortalCss = PortalUtil.getStaticResourceURL(request, portlet.getContextPath() + footerPortalCss, portlet.getTimestamp());
+								footerPortalCss = PortalUtil.getStaticResourceURL(request, request.getContextPath() + footerPortalCss, portlet.getTimestamp());
 							}
 
 							if (!footerPortalCssSet.contains(footerPortalCss)) {

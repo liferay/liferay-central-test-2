@@ -82,7 +82,7 @@ if (layout != null) {
 	for (Portlet portlet : portlets) {
 		for (String headerPortalCss : portlet.getHeaderPortalCss()) {
 			if (!HttpUtil.hasProtocol(headerPortalCss)) {
-				headerPortalCss = PortalUtil.getStaticResourceURL(request, portlet.getContextPath() + headerPortalCss, portlet.getTimestamp());
+				headerPortalCss = PortalUtil.getStaticResourceURL(request, request.getContextPath() + headerPortalCss, portlet.getTimestamp());
 			}
 
 			if (!headerPortalCssSet.contains(headerPortalCss)) {
@@ -133,7 +133,7 @@ if (layout != null) {
 	for (Portlet portlet : portlets) {
 		for (String headerPortalJavaScript : portlet.getHeaderPortalJavaScript()) {
 			if (!HttpUtil.hasProtocol(headerPortalJavaScript)) {
-				headerPortalJavaScript = PortalUtil.getStaticResourceURL(request, portlet.getContextPath() + headerPortalJavaScript, portlet.getTimestamp());
+				headerPortalJavaScript = PortalUtil.getStaticResourceURL(request, request.getContextPath() + headerPortalJavaScript, portlet.getTimestamp());
 			}
 
 			if (!headerPortalJavaScriptSet.contains(headerPortalJavaScript) && !themeDisplay.isIncludedJs(headerPortalJavaScript)) {
