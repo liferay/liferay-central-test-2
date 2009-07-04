@@ -56,6 +56,8 @@ import com.liferay.portal.model.impl.PortletFilterImpl;
 import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.model.impl.PortletURLListenerImpl;
 import com.liferay.portal.model.impl.PublicRenderParameterImpl;
+import com.liferay.portal.security.permission.ResourceActionsUtil;
+import com.liferay.portal.service.ResourceActionLocalServiceUtil;
 import com.liferay.portal.service.base.PortletLocalServiceBaseImpl;
 import com.liferay.portal.util.ContentUtil;
 import com.liferay.portal.util.PortalUtil;
@@ -97,7 +99,9 @@ import javax.servlet.ServletContext;
  */
 public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
-	public Portlet deployRemotePortlet(Portlet portlet) {
+	public Portlet deployRemotePortlet(Portlet portlet)
+		throws SystemException {
+
 		Map<String, Portlet> portletsPool = _getPortletsPool();
 
 		portletsPool.put(portlet.getPortletId(), portlet);
@@ -125,6 +129,13 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 				"Unable to register remote portlet for company " + companyId +
 					" because it does not exist");
 		}
+
+		List<String> portletActions =
+			ResourceActionsUtil.getPortletResourceActions(
+				portlet.getPortletId());
+
+		ResourceActionLocalServiceUtil.checkResourceActions(
+			portlet.getPortletId(), portletActions);
 
 		return portlet;
 	}
