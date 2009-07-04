@@ -31,6 +31,8 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.journal.model.JournalStructure;
 import com.liferay.portlet.journal.service.JournalStructureLocalServiceUtil;
 
+import java.util.Iterator;
+
 /**
  * <a href="JournalStructureImpl.java.html"><b><i>View Source</i></b></a>
  *
@@ -39,6 +41,10 @@ import com.liferay.portlet.journal.service.JournalStructureLocalServiceUtil;
  */
 public class JournalStructureImpl
 	extends JournalStructureModelImpl implements JournalStructure {
+
+	private static final String DYNAMIC_ELEMENT = "dynamic-element";
+
+	private static final String PARENT_STRUCTURE_ID = "parent-structure-id";
 
 	public static final String RESERVED = "reserved";
 
@@ -92,6 +98,21 @@ public class JournalStructureImpl
 	public JournalStructureImpl() {
 	}
 
+	public void addParentStrucutreIdAttribute(
+		Element parentRoot, final String parentStructureId) {
+
+		Iterator<Element> itr =
+			parentRoot.elementIterator(DYNAMIC_ELEMENT);
+
+		while (itr.hasNext()) {
+			Element dynamicEl = itr.next();
+
+			dynamicEl.addAttribute(PARENT_STRUCTURE_ID, parentStructureId);
+
+			addParentStrucutreIdAttribute(dynamicEl, parentStructureId);
+		}
+	}
+
 	public String getUserUuid() throws SystemException {
 		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
 	}
@@ -122,6 +143,8 @@ public class JournalStructureImpl
 				parentStructure.getMergedXsd());
 
 			Element parentRoot = parentDoc.getRootElement();
+
+			addParentStrucutreIdAttribute(parentRoot, parentStructureId);
 
 			root.content().addAll(0, parentRoot.content());
 

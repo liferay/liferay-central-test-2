@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.journal.model;
 
+import com.liferay.portal.kernel.xml.Element;
+
 
 /**
  * <a href="JournalStructure.java.html"><b><i>View Source</i></b></a>
@@ -51,6 +53,9 @@ package com.liferay.portlet.journal.model;
 public interface JournalStructure extends JournalStructureModel {
 	public java.lang.String getUserUuid()
 		throws com.liferay.portal.SystemException;
+
+	public void addParentStrucutreIdAttribute(
+			Element parentRoot, final String parentStructureId);
 
 	public void setUserUuid(java.lang.String userUuid);
 
