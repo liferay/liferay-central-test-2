@@ -155,71 +155,39 @@ body {
 
 /* ---------- Add/remove page ---------- */
 
-.js #navigation .enter-page {
-	background-color: #1E2529;
-	padding: 2px;
+#navigation .selected .exp-form-trigger {
+	background-color: #c4c4c4;
 }
 
-.js #navigation .enter-page a {
-	background: none;
-	display: inline;
-	font-weight: bold;
-	padding: 0;
+#navigation .selected .exp-trigger-selected {
+	background-color: #ebebeb;
 }
 
-.js #navigation .enter-page .save-page {
-	background: url(../images/dock/my_place_current.png) no-repeat 0 50%;
-	margin: 0 10px;
-	padding-left: 20px;
+#navigation .exp-form-trigger:hover, #navigation .exp-form-trigger:focus {
+	background-color: #83b0ca;
 }
 
-.ie.js #navigation .enter-page .save-page {
-	display: inline-block;
-	padding-bottom: 5px;
-	padding-top: 5px;
-	vertical-align: top;
+#navigation .exp-trigger-selected:hover, #navigation .exp-trigger-selected:focus {
+	background-color: #b7def4;
 }
 
-.js #navigation .enter-page .cancel-page {
+#navigation .edit-page .exp-options-trigger {
 	display: none;
 }
 
-.ie.js #navigation .enter-page {
+.enter-page {
+	background-color: #1E2529;
+	border-width: 0;
+	padding: 2px;
+}
+
+#navigation .enter-page input {
+	border-width: 1px;
+	border-right-width: 0;
+}
+
+#navigation .enter-page a {
 	padding: 0;
-}
-
-.ie.js #navigation .enter-page input.text {
-	margin: 2px;
-	padding: 3px 1px;
-}
-
-.js #navigation {
-	position: relative;
-}
-
-.js #add-page {
-	background: #020509;
-	border: 1px solid #304049;
-	border-bottom: none;
-	bottom: 100%;
-	font-weight: bold;
-	position: absolute;
-	right: 5%;
-}
-
-.js #add-page a {
-	display: block;
-	text-decoration: none;
-}
-
-.js #add-page a span {
-	background: url(../images/common/add.png) no-repeat 0 50%;
-	display: block;
-	margin-left: 15px;
-	padding: 5px 20px 2px;
-}
-
-.js #add-page a:hover span {
 }
 
 /*------ Navigation portlet ------*/

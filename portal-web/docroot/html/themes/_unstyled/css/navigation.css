@@ -38,3 +38,35 @@
 
 .nav-menu ul {
 }
+
+/* ---------- Page template selector ---------- */
+
+.exp-form-options {
+}
+
+.exp-form-options input {
+}
+
+.exp-form-triggers {
+}
+
+.exp-form-trigger {
+}
+
+.exp-form-trigger img {
+}
+
+.exp-form-trigger:hover, .exp-form-trigger:focus {
+}
+
+.exp-trigger-selected {
+}
+
+.exp-trigger-selected:hover, .exp-trigger-selected:focus {
+}
+
+.exp-options-trigger img {
+}
+
+.exp-save-trigger img {
+}

@@ -194,4 +194,28 @@ if (layout != null) {
 
 		<div class="exp-footer"></div>
 	</div>
+
+	<%
+	List<LayoutPrototype> layoutPrototypes = LayoutPrototypeServiceUtil.search(company.getCompanyId(), Boolean.TRUE, null);
+	%>
+
+	<c:if test="<%= !layoutPrototypes.isEmpty() %>">
+		<div id="layoutPrototypeTemplate" class="exp-html-template">
+			<ul>
+				<%
+				for (LayoutPrototype layoutPrototype : layoutPrototypes) {
+				%>
+					<li>
+						<label>
+							<a href="javascript:;">
+								<input name="template" type="radio" value="<%= layoutPrototype.getLayoutPrototypeId() %>" /> <%= layoutPrototype.getName(user.getLanguageId()) %>
+							</a>
+						</label>
+					</li>
+				<%
+				}
+				%>
+			</ul>
+		</div>
+	</c:if>
 </div>

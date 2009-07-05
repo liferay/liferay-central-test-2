@@ -65,3 +65,59 @@
 .nav-menu ul {
 	padding-left: 10px;
 }
+
+/* ---------- Page template selector ---------- */
+
+.exp-form-options {
+	border: 1px solid #aaa;
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.exp-form-options input {
+	border-width: 0;
+	display: inline;
+	float: left;
+}
+
+.exp-form-triggers {
+	float: left;
+}
+
+.exp-form-trigger {
+	background: #c4c4c4 url(../images/application/button_bg.png) repeat-x 0 0;
+	border-left: 1px solid #bbb;
+	display: inline-block;
+	float: left;
+}
+
+.exp-form-trigger img {
+	background: url() no-repeat 50% 40%;
+	height: 25px;
+	padding: 0 3px;
+	vertical-align: middle;
+	width: 16px;
+}
+
+.exp-form-trigger:hover, .exp-form-trigger:focus {
+	background-color: #83b0ca;
+	background-image: url(../images/application/button_bg_over.png);
+}
+
+.exp-trigger-selected {
+	background-color: #ebebeb;
+	background-image: url(../images/application/button_bg_selected.png);
+}
+
+.exp-trigger-selected:hover, .exp-trigger-selected:focus {
+	background-color: #b7def4;
+	background-image: url(../images/application/button_bg_selected_over.png);
+}
+
+.exp-options-trigger img {
+	background-image: url(../images/common/configuration.png);
+}
+
+.exp-save-trigger img {
+	background-image: url(../images/dock/my_place_current.png);
+}

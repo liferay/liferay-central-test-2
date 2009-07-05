@@ -32,6 +32,11 @@ Liferay.Navigation = new Expanse.Class(
 				}
 			);
 
+			instance._addEvent = new Expanse.CustomEvent('add', instance);
+			instance._stopAddEvent = new Expanse.CustomEvent('stopAdd', instance);
+			instance._editEvent = new Expanse.CustomEvent('edit', instance);
+			instance._stopEditEvent = new Expanse.CustomEvent('stopEdit', instance);
+
 			instance._makeAddable();
 			instance._makeDeletable();
 			instance._makeSortable();
@@ -50,46 +55,93 @@ Liferay.Navigation = new Expanse.Class(
 
 			navItem.find('ul:first').append(addBlock);
 
-			var savePage = addBlock.find('.save-page');
-			var cancelPage = addBlock.find('.cancel-page');
+			var editComponent = addBlock.data('editComponent');
+
+			if (!editComponent) {
+				var prototypeTemplate = instance._prototypeMenuTemplate || '';
+
+				prototypeTemplate = prototypeTemplate.replace(/name=\"template\"/g, 'name="' + Expanse.generateId() + '_template"');
+
+				var editComponent = new Expanse.Overlay(
+					{
+						body: prototypeTemplate,
+						context: [addBlock[0], 'tl', 'bl', ['beforeShow', instance._addEvent, instance._stopAddEvent, instance._editEvent, instance._stopEditEvent]],
+						zIndex: 200
+					}
+				);
+
+				editComponent._trigger = addBlock.find('.exp-options-trigger');
+
+				editComponent._trigger.click(
+					function(event) {
+						var visible = editComponent.cfg.getProperty('visible');
+
+						editComponent.cfg.setProperty('visible', !visible);
+
+						jQuery(this).toggleClass('exp-trigger-selected');
+
+						instance._optionsOpen = !visible;
+					}
+				);
+
+				editComponent.render(document.body);
+
+				Expanse.Dom.addClass(editComponent.element, 'lfr-menu-list lfr-component lfr-page-templates');
+				Expanse.Dom.setStyle(editComponent.element, 'min-width', addBlock.outerWidth() + 'px');
+
+				addBlock.data('editComponent', editComponent);
+			}
+
+			if (instance._optionsOpen) {
+				editComponent.show();
+			}
+			else {
+				editComponent.hide();
+				editComponent._trigger.removeClass('exp-trigger-selected');
+			}
+
 			var currentInput = addBlock.find('.enter-page input');
 
+			var savePage = addBlock.find('.save-page');
+
 			var pageParents = jQuery(document);
+
+			var cancelPage = function() {
+				instance._cancelAddingPage(addBlock);
+
+				Expanse.getDocument().unbind('click.liferay', pageBlur);
+
+				editComponent.hide();
+			}
 
 			var pageBlur = function(internalEvent) {
 				var currentEl = jQuery(internalEvent.target);
 				var liParent = currentEl.parents('ul:eq(0)');
 
-				if ((liParent.length == 0) && !currentEl.is('li') && !currentEl.parents('#add-page').length) {
-					cancelPage.trigger('click');
+				if ((liParent.length == 0) && !currentEl.is('li') && !currentEl.parents('#add-page, #' + editComponent.id).length) {
+					cancelPage();
 				}
 			};
 
 			pageParents.bind('click.liferay', pageBlur);
 
-			cancelPage.click(
-				function(event) {
-					instance._cancelAddingPage(event, addBlock);
-
-					Expanse.getDocument().unbind('click.liferay', pageBlur);
-				}
-			);
-
 			savePage.click(
 				function(event) {
 					instance._savePage(event, this);
 
-					Expanse.getDocument().unbind('click.liferay', pageBlur);
+					if (currentInput.val().length) {
+						Expanse.getDocument().unbind('click.liferay', pageBlur);
+					}
 				}
 			);
 
-			currentInput.keyup(
+			currentInput.keypress(
 				function(event) {
 					if (event.keyCode == 13) {
 						savePage.trigger('click');
 					}
 					else if (event.keyCode == 27) {
-						cancelPage.trigger('click');
+						cancelPage();
 					}
 					else {
 						return;
@@ -106,15 +158,21 @@ Liferay.Navigation = new Expanse.Class(
 			if (previousName) {
 				previousName.show();
 			}
+
+			instance._stopEditEvent.fire();
 		},
 
-		_cancelAddingPage: function(event, obj) {
+		_cancelAddingPage: function(obj) {
 			var instance = this;
 
 			obj.remove();
+
+			instance._stopAddEvent.fire();
 		},
 
-		_cancelPage: function(event, obj, oldName) {
+		_cancelPage: function(obj, oldName) {
+			var instance = this;
+
 			var navItem = null;
 
 			if (oldName) {
@@ -129,7 +187,10 @@ Liferay.Navigation = new Expanse.Class(
 				navItem = jQuery(this).parents('li');
 
 				navItem.remove();
+
 			}
+
+			instance._stopAddEvent.fire();
 		},
 
 		_deleteButton: function(obj) {
@@ -163,12 +224,22 @@ Liferay.Navigation = new Expanse.Class(
 			if (instance._isModifiable) {
 				var navList = instance._navBlock.find('ul:first');
 
-				instance._enterPage =
-					'<div class="enter-page">' +
-					'<input class="lfr-auto-focus text" type="text" name="new_page" value="" class="text" />' +
-					'<a class="cancel-page" href="javascript:;"></a>' +
-					'<a class="save-page" href="javascript:;">' + Liferay.Language.get('save') + '</a>' +
-					'</div>';
+					var themeImages = themeDisplay.getPathThemeImages();
+
+					instance._prototypeMenuTemplate = Expanse.get('#layoutPrototypeTemplate').html();
+
+					instance._enterPage ='<span class="exp-form-field exp-form-text exp-form-options enter-page">' +
+						'<span><input class="lfr-auto-focus text" id="" name="" type="text" /></span>' +
+						'<span class="exp-form-triggers">' +
+							(instance._prototypeMenuTemplate ?
+								'<a class="exp-form-trigger exp-options-trigger ' + (instance._optionsOpen ? 'exp-trigger-selected' : '') + '" href="javascript:;">' +
+									'<img src="' + themeImages + '/spacer.png" />' +
+									'</a>' : '') +
+							'<a class="exp-form-trigger exp-save-trigger save-page" href="javascript:;">' +
+								'<img src="' + themeImages + '/spacer.png" />' +
+							'</a>' +
+						'</span>' +
+					'</span>';
 
 				if (instance._hasPermission) {
 					var addPageButton = jQuery('#addPage');
@@ -253,6 +324,8 @@ Liferay.Navigation = new Expanse.Class(
 
 						var enterPage = span.parent().next();
 
+						enterPage.addClass('edit-page');
+
 						var pageParents = enterPage.parents();
 
 						var enterPageInput = enterPage.find('input');
@@ -261,7 +334,7 @@ Liferay.Navigation = new Expanse.Class(
 							event.stopPropagation();
 
 							if (!jQuery(this).is('li')) {
-								cancelPage.trigger('click');
+								cancelPage();
 							}
 
 							return false;
@@ -276,24 +349,25 @@ Liferay.Navigation = new Expanse.Class(
 						savePage.click(
 							function(event) {
 								instance._savePage(event, this, text);
-								pageParents.unbind('blur.liferay', pageBlur);
-								pageParents.unbind('click.liferay', pageBlur);
+
+								if (enterPageInput.val().length) {
+									pageParents.unbind('blur.liferay', pageBlur);
+									pageParents.unbind('click.liferay', pageBlur);
+
+									instance._stopEditEvent.fire();
+								}
 							}
 						);
 
-						var cancelPage = enterPage.find('.cancel-page');
+						var cancelPage = function() {
+							instance._cancelPage(span, text);
+							pageParents.unbind('blur.liferay', pageBlur);
+							pageParents.unbind('click.liferay', pageBlur);
 
-						cancelPage.hide();
+							instance._stopEditEvent.fire();
+						};
 
-						cancelPage.click(
-							function(event) {
-								instance._cancelPage(event, this, text);
-								pageParents.unbind('blur.liferay', pageBlur);
-								pageParents.unbind('click.liferay', pageBlur);
-							}
-						);
-
-						enterPageInput.keyup(
+						enterPageInput.keypress(
 							function(event) {
 								if (event.keyCode == 13) {
 									savePage.trigger('click');
@@ -301,7 +375,7 @@ Liferay.Navigation = new Expanse.Class(
 									pageParents.unbind('click.liferay', pageBlur);
 								}
 								else if (event.keyCode == 27) {
-									cancelPage.trigger('click');
+									cancelPage();
 									pageParents.unbind('blur.liferay', pageBlur);
 									pageParents.unbind('click.liferay', pageBlur);
 								}
@@ -311,6 +385,8 @@ Liferay.Navigation = new Expanse.Class(
 						pageParents.bind('click.liferay', pageBlur);
 
 						resetCursor();
+
+						instance._editEvent.fire();
 
 						return false;
 					}
@@ -399,7 +475,7 @@ Liferay.Navigation = new Expanse.Class(
 		_savePage: function(event, obj, oldName) {
 			var instance = this;
 
-			if ((event.type == 'keyup') && (event.keyCode !== 13)) {
+			if ((event.type == 'keypress') && (event.keyCode !== 13)) {
 				return;
 			}
 
@@ -462,6 +538,10 @@ Liferay.Navigation = new Expanse.Class(
 
 					// Adding a new page
 
+					var editComponent = newNavItem.data('editComponent');
+
+					var layoutPrototypeId = jQuery('input:checked', editComponent.element).val() || null;
+
 					data = {
 						mainPath: themeDisplay.getPathMain(),
 						doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
@@ -469,7 +549,8 @@ Liferay.Navigation = new Expanse.Class(
 						groupId: themeDisplay.getScopeGroupId(),
 						privateLayout: themeDisplay.isPrivateLayout(),
 						parentLayoutId: themeDisplay.getParentLayoutId(),
-						name: name
+						name: name,
+						layoutPrototypeId: layoutPrototypeId
 					};
 
 					onSuccess = function(data) {
@@ -497,7 +578,9 @@ Liferay.Navigation = new Expanse.Class(
 								item: newNavItem,
 								type: 'add'
 							}
-						)
+						);
+
+						editComponent.hide();
 					}
 				}
 
@@ -602,6 +685,7 @@ Liferay.Navigation = new Expanse.Class(
 		},
 
 		_enterPage: '',
+		_optionsOpen: true,
 		_updateURL: ''
 	}
 );

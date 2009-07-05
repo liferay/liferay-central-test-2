@@ -26,6 +26,7 @@
 
 <%@ page import="com.liferay.portal.model.ModelHintsConstants" %>
 
+<%@ include file="/html/portal/expanse/base.css.jsp" %>
 <%@ include file="/html/portal/expanse/form.css.jsp" %>
 
 /* ---------- Modules ---------- */
