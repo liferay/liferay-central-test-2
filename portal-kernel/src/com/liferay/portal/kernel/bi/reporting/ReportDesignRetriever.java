@@ -22,7 +22,7 @@
 
 package com.liferay.portal.kernel.bi.reporting;
 
-import java.io.InputStream;
+import com.liferay.portal.kernel.resource.ResourceRetriever;
 
 import java.util.Date;
 
@@ -32,12 +32,10 @@ import java.util.Date;
  * @author Michael C. Han
  *
  */
-public interface ReportDesignRetriever {
+public interface ReportDesignRetriever extends ResourceRetriever {
 
 	public Date getModifiedDate();
 
 	public String getReportName();
-
-	public InputStream retrieve();
 
 }
