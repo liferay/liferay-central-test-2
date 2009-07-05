@@ -22,6 +22,8 @@
 
 package com.liferay.portal.kernel.bi.rules;
 
+import com.liferay.portal.kernel.resource.ResourceRetriever;
+
 import java.io.Serializable;
 
 /**
@@ -33,10 +35,10 @@ import java.io.Serializable;
 public class AdminRequestMessage implements Serializable {
 
 	public static AdminRequestMessage add(
-		String domainName, RuleRetriever ruleRetriever) {
+		String domainName, ResourceRetriever resourceRetriever) {
 
 		return new AdminRequestMessage(
-			AdminRequestType.ADD, domainName, ruleRetriever);
+			AdminRequestType.ADD, domainName, resourceRetriever);
 	}
 
 	public static AdminRequestMessage remove(String domainName) {
@@ -45,18 +47,18 @@ public class AdminRequestMessage implements Serializable {
 	}
 
 	public static AdminRequestMessage update(
-		String domainName, RuleRetriever ruleRetriever) {
+		String domainName, ResourceRetriever resourceRetriever) {
 
 		return new AdminRequestMessage(
-			AdminRequestType.UPDATE, domainName, ruleRetriever);
+			AdminRequestType.UPDATE, domainName, resourceRetriever);
 	}
 
 	public String getDomainName() {
 		return _domainName;
 	}
 
-	public RuleRetriever getRuleRetriever() {
-		return _ruleRetriever;
+	public ResourceRetriever getResourceRetriever() {
+		return _resourceRetriever;
 	}
 
 	public AdminRequestType getType() {
@@ -65,15 +67,15 @@ public class AdminRequestMessage implements Serializable {
 
 	private AdminRequestMessage(
 		AdminRequestType adminRequestType, String domainName,
-		RuleRetriever ruleRetriever) {
+		ResourceRetriever resourceRetriever) {
 
 		_adminRequestType = adminRequestType;
 		_domainName = domainName;
-		_ruleRetriever = ruleRetriever;
+		_resourceRetriever = resourceRetriever;
 	}
 
 	private AdminRequestType _adminRequestType;
 	private String _domainName;
-	private RuleRetriever _ruleRetriever;
+	private ResourceRetriever _resourceRetriever;
 
 }

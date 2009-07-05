@@ -22,6 +22,8 @@
 
 package com.liferay.portal.kernel.bi.rules;
 
+import com.liferay.portal.kernel.resource.ResourceRetriever;
+
 import java.util.List;
 
 /**
@@ -33,17 +35,17 @@ import java.util.List;
  */
 public interface RulesEngine {
 
-	public void add(String domainName, RuleRetriever ruleRetriever)
+	public void add(String domainName, ResourceRetriever resourceRetriever)
 		throws RulesEngineException;
 
-	public void execute(RuleRetriever ruleRetriever, List<?> facts)
+	public void execute(ResourceRetriever resourceRetriever, List<?> facts)
 		throws RulesEngineException;
 
 	public void execute(String domainName, List<?> facts)
 	throws RulesEngineException;
 
 	public List<?> execute(
-			RuleRetriever ruleRetriever, List<?> facts, Query query)
+			ResourceRetriever resourceRetriever, List<?> facts, Query query)
 		throws RulesEngineException;
 
 	public List<?> execute(String domainName, List<?> facts, Query query)
@@ -51,7 +53,7 @@ public interface RulesEngine {
 
 	public void remove(String domainName) throws RulesEngineException;
 
-	public void update(String domainName, RuleRetriever ruleRetriever)
+	public void update(String domainName, ResourceRetriever resourceRetriever)
 		throws RulesEngineException;
 
 }
