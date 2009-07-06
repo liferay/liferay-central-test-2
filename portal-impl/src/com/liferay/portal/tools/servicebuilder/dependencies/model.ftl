@@ -4,6 +4,7 @@ package ${packagePath}.model;
 	import ${packagePath}.service.persistence.${entity.name}PK;
 </#if>
 
+import com.liferay.portal.SystemException;
 import com.liferay.portal.model.BaseModel;
 
 import java.util.Date;
@@ -63,6 +64,12 @@ public interface ${entity.name}Model extends BaseModel<${entity.name}> {
 		</#if>
 
 		public void set${column.methodName}(${column.type} ${column.name});
+
+		<#if column.userUuid>
+			public String get${column.methodUserUuidName}() throws SystemException;
+
+			public void set${column.methodUserUuidName}(String ${column.userUuidName});
+		</#if>
 
         <#if column.localized == true>
 			public void set${column.methodName}(Locale locale, String ${column.name});

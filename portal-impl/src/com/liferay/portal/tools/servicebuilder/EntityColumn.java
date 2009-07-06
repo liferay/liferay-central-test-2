@@ -130,6 +130,10 @@ public class EntityColumn implements Cloneable {
 		return TextFormatter.formatPlural(new String(_methodName));
 	}
 
+	public String getMethodUserUuidName() {
+		return _methodName.substring(0, _methodName.length() - 2) + "Uuid";
+	}
+
 	public String getName() {
 		return _name;
 	}
@@ -140,6 +144,10 @@ public class EntityColumn implements Cloneable {
 
 	public String getType() {
 		return _type;
+	}
+
+	public String getUserUuidName() {
+		return _name.substring(0, _name.length() - 2) + "Uuid";
 	}
 
 	public boolean isCaseSensitive() {
@@ -185,6 +193,15 @@ public class EntityColumn implements Cloneable {
 
 	public boolean isPrimitiveType() {
 		if (Character.isLowerCase(_type.charAt(0))) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public boolean isUserUuid() {
+		if (_type.equals("long") && _methodName.endsWith("UserId")) {
 			return true;
 		}
 		else {

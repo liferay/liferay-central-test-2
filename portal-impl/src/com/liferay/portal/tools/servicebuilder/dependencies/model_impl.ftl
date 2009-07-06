@@ -15,6 +15,7 @@ package ${packagePath}.model.impl;
 import ${packagePath}.model.${entity.name};
 import ${packagePath}.model.${entity.name}Soap;
 
+import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -307,6 +308,16 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> {
 			</#if>
 		}
 
+		<#if column.userUuid>
+			public String get${column.methodUserUuidName}() throws SystemException {
+				return PortalUtil.getUserValue(get${column.methodName}(), "uuid", _${column.userUuidName});
+			}
+
+			public void set${column.methodUserUuidName}(String ${column.userUuidName}) {
+				_${column.userUuidName} = ${column.userUuidName};
+			}
+		</#if>
+
 		<#if column.localized>
 			public void set${column.methodName}(Locale locale, String ${column.name}) {
 				String languageId = LocaleUtil.toLanguageId(locale);
@@ -594,6 +605,10 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> {
 			<#if column.isPrimitiveType()>
 				private boolean _setOriginal${column.methodName};
 			</#if>
+		</#if>
+
+		<#if column.userUuid>
+			private String _${column.userUuidName};
 		</#if>
 	</#list>
 
