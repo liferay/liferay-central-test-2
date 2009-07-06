@@ -49,9 +49,5 @@ package com.liferay.portlet.journal.model;
  *
  */
 public interface JournalStructure extends JournalStructureModel {
-	public void addParentStrucutreIdAttribute(
-		com.liferay.portal.kernel.xml.Element parentRoot,
-		java.lang.String parentStructureId);
-
 	public java.lang.String getMergedXsd();
 }

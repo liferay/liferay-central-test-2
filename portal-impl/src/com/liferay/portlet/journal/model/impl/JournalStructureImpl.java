@@ -40,75 +40,56 @@ import java.util.Iterator;
 public class JournalStructureImpl
 	extends JournalStructureModelImpl implements JournalStructure {
 
-	private static final String DYNAMIC_ELEMENT = "dynamic-element";
-
-	private static final String PARENT_STRUCTURE_ID = "parent-structure-id";
-
 	public static final String RESERVED = "reserved";
-
-	public static final String RESERVED_ARTICLE_ID = "reserved-article-id";
-
-	public static final String RESERVED_ARTICLE_VERSION =
-		"reserved-article-version";
-
-	public static final String RESERVED_ARTICLE_TITLE =
-		"reserved-article-title";
-
-	public static final String RESERVED_ARTICLE_DESCRIPTION =
-		"reserved-article-description";
-
-	public static final String RESERVED_ARTICLE_TYPE =
-		"reserved-article-type";
-
-	public static final String RESERVED_ARTICLE_CREATE_DATE =
-		"reserved-article-create-date";
-
-	public static final String RESERVED_ARTICLE_MODIFIED_DATE =
-		"reserved-article-modified-date";
-
-	public static final String RESERVED_ARTICLE_DISPLAY_DATE =
-		"reserved-article-display-date";
-
-	public static final String RESERVED_ARTICLE_SMALL_IMAGE_URL =
-		"reserved-article-small-image-url";
-
-	public static final String RESERVED_ARTICLE_AUTHOR_ID =
-		"reserved-article-author-id";
-
-	public static final String RESERVED_ARTICLE_AUTHOR_NAME =
-		"reserved-article-author-name";
-
-	public static final String RESERVED_ARTICLE_AUTHOR_EMAIL_ADDRESS =
-		"reserved-article-author-email-address";
 
 	public static final String RESERVED_ARTICLE_AUTHOR_COMMENTS =
 		"reserved-article-author-comments";
 
-	public static final String RESERVED_ARTICLE_AUTHOR_ORGANIZATION =
-		"reserved-article-author-organization";
+	public static final String RESERVED_ARTICLE_AUTHOR_EMAIL_ADDRESS =
+		"reserved-article-author-email-address";
 
-	public static final String RESERVED_ARTICLE_AUTHOR_LOCATION =
-		"reserved-article-author-location";
+	public static final String RESERVED_ARTICLE_AUTHOR_ID =
+		"reserved-article-author-id";
 
 	public static final String RESERVED_ARTICLE_AUTHOR_JOB_TITLE =
 		"reserved-article-author-job-title";
 
+	public static final String RESERVED_ARTICLE_AUTHOR_LOCATION =
+		"reserved-article-author-location";
+
+	public static final String RESERVED_ARTICLE_AUTHOR_NAME =
+		"reserved-article-author-name";
+
+	public static final String RESERVED_ARTICLE_AUTHOR_ORGANIZATION =
+		"reserved-article-author-organization";
+
+	public static final String RESERVED_ARTICLE_CREATE_DATE =
+		"reserved-article-create-date";
+
+	public static final String RESERVED_ARTICLE_DESCRIPTION =
+		"reserved-article-description";
+
+	public static final String RESERVED_ARTICLE_DISPLAY_DATE =
+		"reserved-article-display-date";
+
+	public static final String RESERVED_ARTICLE_ID = "reserved-article-id";
+
+	public static final String RESERVED_ARTICLE_MODIFIED_DATE =
+		"reserved-article-modified-date";
+
+	public static final String RESERVED_ARTICLE_SMALL_IMAGE_URL =
+		"reserved-article-small-image-url";
+
+	public static final String RESERVED_ARTICLE_TITLE =
+		"reserved-article-title";
+
+	public static final String RESERVED_ARTICLE_TYPE =
+		"reserved-article-type";
+
+	public static final String RESERVED_ARTICLE_VERSION =
+		"reserved-article-version";
+
 	public JournalStructureImpl() {
-	}
-
-	public void addParentStrucutreIdAttribute(
-		Element parentRoot, final String parentStructureId) {
-
-		Iterator<Element> itr =
-			parentRoot.elementIterator(DYNAMIC_ELEMENT);
-
-		while (itr.hasNext()) {
-			Element dynamicEl = itr.next();
-
-			dynamicEl.addAttribute(PARENT_STRUCTURE_ID, parentStructureId);
-
-			addParentStrucutreIdAttribute(dynamicEl, parentStructureId);
-		}
 	}
 
 	public String getMergedXsd() {
@@ -134,7 +115,7 @@ public class JournalStructureImpl
 
 			Element parentRoot = parentDoc.getRootElement();
 
-			addParentStrucutreIdAttribute(parentRoot, parentStructureId);
+			addParentStructureId(parentRoot, parentStructureId);
 
 			root.content().addAll(0, parentRoot.content());
 
@@ -145,5 +126,23 @@ public class JournalStructureImpl
 
 		return xsd;
 	}
+
+	protected void addParentStructureId(
+		Element parentEl, String parentStructureId) {
+
+		Iterator<Element> itr = parentEl.elements(_DYNAMIC_ELEMENT).iterator();
+
+		while (itr.hasNext()) {
+			Element dynamicEl = itr.next();
+
+			dynamicEl.addAttribute(_PARENT_STRUCTURE_ID, parentStructureId);
+
+			addParentStructureId(dynamicEl, parentStructureId);
+		}
+	}
+
+	private static final String _DYNAMIC_ELEMENT = "dynamic-element";
+
+	private static final String _PARENT_STRUCTURE_ID = "parent-structure-id";
 
 }
