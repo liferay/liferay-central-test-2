@@ -1039,7 +1039,7 @@ Liferay.Util = {
 					url: url,
 					beforeSend: function() {
 						popupMessage.empty();
-						popupMessage.append('<div class="loading-animation"><div>');
+						popupMessage.append('<div class="loading-animation"></div>');
 					},
 				  	success: function(message) {
 						popupMessage.empty();
