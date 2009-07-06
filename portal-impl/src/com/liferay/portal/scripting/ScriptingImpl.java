@@ -27,6 +27,8 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.scripting.Scripting;
 import com.liferay.portal.kernel.scripting.ScriptingException;
 import com.liferay.portal.kernel.scripting.UnsupportedLanguageException;
+import com.liferay.portal.kernel.servlet.StringServletOutputStream;
+import com.liferay.portal.kernel.util.ByteArrayMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.scripting.groovy.GroovyExecutor;
 import com.liferay.portal.scripting.javascript.JavaScriptExecutor;
@@ -35,6 +37,7 @@ import com.liferay.portal.scripting.ruby.RubyExecutor;
 
 import java.io.IOException;
 import java.io.LineNumberReader;
+import java.io.PrintStream;
 import java.io.StringReader;
 
 import java.util.HashMap;
@@ -51,6 +54,10 @@ import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
+
+import org.python.core.Py;
+import org.python.core.PyFile;
+import org.python.core.PySyntaxError;
 
 /**
  * <a href="ScriptingImpl.java.html"><b><i>View Source</i></b></a>
@@ -153,10 +160,31 @@ public class ScriptingImpl implements Scripting {
 		return _scriptingExecutors.keySet();
 	}
 
+	protected String getErrorMessage(Exception e) {
+		String message = e.getMessage();
+
+		if (e instanceof PySyntaxError) {
+			PySyntaxError syntaxError = (PySyntaxError)e;
+
+			ByteArrayMaker bam = new ByteArrayMaker();
+
+			PrintStream ps = new PrintStream(
+				new StringServletOutputStream(bam));
+
+			Py.displayException(
+				syntaxError.type, syntaxError.value, syntaxError.traceback,
+				new PyFile(ps));
+
+			message = bam.toString();
+		}
+
+		return message;
+	}
+
 	protected String getErrorMessage(String script, Exception e) {
 		StringBuilder sb = new StringBuilder();
 
-		sb.append(e.getMessage());
+		sb.append(getErrorMessage(e));
 		sb.append(StringPool.NEW_LINE);
 
 		try{
@@ -180,7 +208,7 @@ public class ScriptingImpl implements Scripting {
 		catch (IOException ioe) {
 			sb = new StringBuilder();
 
-			sb.append(e.getMessage());
+			sb.append(getErrorMessage(e));
 			sb.append(StringPool.NEW_LINE);
 			sb.append(script);
 		}
