@@ -53,67 +53,6 @@ import javax.servlet.http.HttpServletRequest;
 public class ActionUtil
 	extends com.liferay.portlet.enterpriseadmin.action.ActionUtil {
 
-	public static void getGroup(ActionRequest actionRequest) throws Exception {
-		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			actionRequest);
-
-		getGroup(request);
-	}
-
-	public static void getGroup(RenderRequest renderRequest) throws Exception {
-		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			renderRequest);
-
-		getGroup(request);
-	}
-
-	public static void getGroup(HttpServletRequest request) throws Exception {
-		long groupId = ParamUtil.getLong(request, "groupId");
-
-		Group group = null;
-
-		if (groupId > 0) {
-			group = GroupLocalServiceUtil.getGroup(groupId);
-		}
-
-		request.setAttribute(WebKeys.GROUP, group);
-	}
-
-	public static void getMembershipRequest(ActionRequest actionRequest)
-		throws Exception {
-
-		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			actionRequest);
-
-		getMembershipRequest(request);
-	}
-
-	public static void getMembershipRequest(RenderRequest renderRequest)
-		throws Exception {
-
-		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			renderRequest);
-
-		getMembershipRequest(request);
-	}
-
-	public static void getMembershipRequest(HttpServletRequest request)
-		throws Exception {
-
-		long membershipRequestId =
-			ParamUtil.getLong(request, "membershipRequestId");
-
-		MembershipRequest membershipRequest = null;
-
-		if (membershipRequestId > 0) {
-			membershipRequest =
-				MembershipRequestLocalServiceUtil.getMembershipRequest(
-					membershipRequestId);
-		}
-
-		request.setAttribute(WebKeys.MEMBERSHIP_REQUEST, membershipRequest);
-	}
-
 	public static void copyPreferences(
 			ActionRequest actionRequest, Layout targetLayout,
 			Layout sourceLayout)
@@ -152,7 +91,7 @@ public class ActionUtil
 				PortletPreferencesFactoryUtil.getPortletPreferencesIds(
 					request, sourceLayout, sourcePortletId);
 
-			PortletPreferences sourcePrefs =
+			PortletPreferences sourcePreferences =
 				PortletPreferencesLocalServiceUtil.getPreferences(
 					sourcePortletPreferencesIds);
 
@@ -160,7 +99,7 @@ public class ActionUtil
 				portletPreferencesIds.getOwnerId(),
 				portletPreferencesIds.getOwnerType(),
 				portletPreferencesIds.getPlid(),
-				portletPreferencesIds.getPortletId(), sourcePrefs);
+				portletPreferencesIds.getPortletId(), sourcePreferences);
 
 			// Copy portlet setup
 
@@ -169,7 +108,7 @@ public class ActionUtil
 				PortletKeys.PREFS_OWNER_TYPE_LAYOUT, targetLayout.getPlid(),
 				sourcePortletId);
 
-			sourcePrefs =
+			sourcePreferences =
 				PortletPreferencesLocalServiceUtil.getPreferences(
 					companyId, PortletKeys.PREFS_OWNER_ID_DEFAULT,
 					PortletKeys.PREFS_OWNER_TYPE_LAYOUT, sourceLayout.getPlid(),
@@ -178,8 +117,69 @@ public class ActionUtil
 			PortletPreferencesLocalServiceUtil.updatePreferences(
 				PortletKeys.PREFS_OWNER_ID_DEFAULT,
 				PortletKeys.PREFS_OWNER_TYPE_LAYOUT, targetLayout.getPlid(),
-				sourcePortletId, sourcePrefs);
+				sourcePortletId, sourcePreferences);
 		}
+	}
+
+	public static void getGroup(ActionRequest actionRequest) throws Exception {
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			actionRequest);
+
+		getGroup(request);
+	}
+
+	public static void getGroup(HttpServletRequest request) throws Exception {
+		long groupId = ParamUtil.getLong(request, "groupId");
+
+		Group group = null;
+
+		if (groupId > 0) {
+			group = GroupLocalServiceUtil.getGroup(groupId);
+		}
+
+		request.setAttribute(WebKeys.GROUP, group);
+	}
+
+	public static void getGroup(RenderRequest renderRequest) throws Exception {
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			renderRequest);
+
+		getGroup(request);
+	}
+
+	public static void getMembershipRequest(ActionRequest actionRequest)
+		throws Exception {
+
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			actionRequest);
+
+		getMembershipRequest(request);
+	}
+
+	public static void getMembershipRequest(HttpServletRequest request)
+		throws Exception {
+
+		long membershipRequestId =
+			ParamUtil.getLong(request, "membershipRequestId");
+
+		MembershipRequest membershipRequest = null;
+
+		if (membershipRequestId > 0) {
+			membershipRequest =
+				MembershipRequestLocalServiceUtil.getMembershipRequest(
+					membershipRequestId);
+		}
+
+		request.setAttribute(WebKeys.MEMBERSHIP_REQUEST, membershipRequest);
+	}
+
+	public static void getMembershipRequest(RenderRequest renderRequest)
+		throws Exception {
+
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			renderRequest);
+
+		getMembershipRequest(request);
 	}
 
 }

@@ -145,9 +145,6 @@ public class UpdatePageAction extends JSONAction {
 			HttpServletResponse response)
 		throws Exception {
 
-		long layoutPrototypeId = ParamUtil.getLong(
-			request, "layoutPrototypeId");
-
 		String doAsUserId = ParamUtil.getString(request, "doAsUserId");
 		String doAsUserLanguageId = ParamUtil.getString(
 			request, "doAsUserLanguageId");
@@ -161,8 +158,10 @@ public class UpdatePageAction extends JSONAction {
 		String type = LayoutConstants.TYPE_PORTLET;
 		boolean hidden = false;
 		String friendlyURL = StringPool.BLANK;
+		long layoutPrototypeId = ParamUtil.getLong(
+			request, "layoutPrototypeId");
 
-		Layout layout;
+		Layout layout = null;
 
 		if (layoutPrototypeId > 0) {
 			LayoutPrototype layoutPrototype =
