@@ -36,6 +36,11 @@ if (url.startsWith(Http.HTTP_WITH_SLASH) || url.startsWith(Http.HTTPS_WITH_SLASH
 	url = "submitForm(document.hrefFm, '" + HttpUtil.encodeURL(url) + "');";
 }
 
+if (url.startsWith("wsrp_rewrite?")) {
+	url = StringUtil.replace(url, "/wsrp_rewrite", "&wsrp-extensions=encodeURL/wsrp_rewrite");
+	url = "submitForm(document.hrefFm, '" + url + "');";	
+}
+
 url = "javascript:if (confirm('" + UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-delete-this") + "')) { " + url + " } else { self.focus(); }";
 %>
 
