@@ -150,7 +150,7 @@ public class ConvertPermissionAlgorithm extends ConvertProcess {
 		Table table = new Table(
 			ResourceCodeModelImpl.TABLE_NAME,
 			new Object[][] {
-				{ "name", new Integer(Types.VARCHAR) }
+				{"name", new Integer(Types.VARCHAR)}
 			});
 
 		table.setSelectSQL(
