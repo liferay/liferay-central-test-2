@@ -22,7 +22,7 @@
 
 package com.liferay.portal.kernel.servlet;
 
-import com.liferay.portal.kernel.util.ByteArrayMaker;
+import java.io.ByteArrayOutputStream;
 
 import javax.servlet.ServletOutputStream;
 
@@ -34,14 +34,14 @@ import javax.servlet.ServletOutputStream;
  */
 public class StringServletOutputStream extends ServletOutputStream {
 
-	public StringServletOutputStream(ByteArrayMaker bam) {
-		_bam = bam;
+	public StringServletOutputStream(ByteArrayOutputStream baos) {
+		_baos = baos;
 	}
 
 	public void write(int b) {
-		_bam.write(b);
+		_baos.write(b);
 	}
 
-	private ByteArrayMaker _bam = null;
+	private ByteArrayOutputStream _baos = null;
 
 }
