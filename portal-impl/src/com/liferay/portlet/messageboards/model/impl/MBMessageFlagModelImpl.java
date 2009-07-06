@@ -22,9 +22,11 @@
 
 package com.liferay.portlet.messageboards.model.impl;
 
+import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
+import com.liferay.portal.util.PortalUtil;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
@@ -154,6 +156,14 @@ public class MBMessageFlagModelImpl extends BaseModelImpl<MBMessageFlag> {
 
 			_originalUserId = userId;
 		}
+	}
+
+	public String getUserUuid() throws SystemException {
+		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
+	}
+
+	public void setUserUuid(String userUuid) {
+		_userUuid = userUuid;
 	}
 
 	public long getOriginalUserId() {
@@ -362,6 +372,7 @@ public class MBMessageFlagModelImpl extends BaseModelImpl<MBMessageFlag> {
 	private long _userId;
 	private long _originalUserId;
 	private boolean _setOriginalUserId;
+	private String _userUuid;
 	private Date _modifiedDate;
 	private long _threadId;
 	private long _messageId;

@@ -22,6 +22,7 @@
 
 package com.liferay.portal.model.impl;
 
+import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
@@ -204,6 +205,15 @@ public class GroupModelImpl extends BaseModelImpl<Group> {
 
 	public void setCreatorUserId(long creatorUserId) {
 		_creatorUserId = creatorUserId;
+	}
+
+	public String getCreatorUserUuid() throws SystemException {
+		return PortalUtil.getUserValue(getCreatorUserId(), "uuid",
+			_creatorUserUuid);
+	}
+
+	public void setCreatorUserUuid(String creatorUserUuid) {
+		_creatorUserUuid = creatorUserUuid;
 	}
 
 	public String getClassName() {
@@ -548,6 +558,7 @@ public class GroupModelImpl extends BaseModelImpl<Group> {
 	private long _originalCompanyId;
 	private boolean _setOriginalCompanyId;
 	private long _creatorUserId;
+	private String _creatorUserUuid;
 	private long _classNameId;
 	private long _originalClassNameId;
 	private boolean _setOriginalClassNameId;

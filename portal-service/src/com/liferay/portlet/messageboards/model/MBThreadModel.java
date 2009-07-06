@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.messageboards.model;
 
+import com.liferay.portal.SystemException;
 import com.liferay.portal.model.BaseModel;
 
 import java.util.Date;
@@ -78,6 +79,10 @@ public interface MBThreadModel extends BaseModel<MBThread> {
 	public long getLastPostByUserId();
 
 	public void setLastPostByUserId(long lastPostByUserId);
+
+	public String getLastPostByUserUuid() throws SystemException;
+
+	public void setLastPostByUserUuid(String lastPostByUserUuid);
 
 	public Date getLastPostDate();
 

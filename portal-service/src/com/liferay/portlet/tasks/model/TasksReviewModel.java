@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.tasks.model;
 
+import com.liferay.portal.SystemException;
 import com.liferay.portal.model.BaseModel;
 
 import java.util.Date;
@@ -67,6 +68,10 @@ public interface TasksReviewModel extends BaseModel<TasksReview> {
 
 	public void setUserId(long userId);
 
+	public String getUserUuid() throws SystemException;
+
+	public void setUserUuid(String userUuid);
+
 	public String getUserName();
 
 	public void setUserName(String userName);
@@ -86,6 +91,10 @@ public interface TasksReviewModel extends BaseModel<TasksReview> {
 	public long getAssignedByUserId();
 
 	public void setAssignedByUserId(long assignedByUserId);
+
+	public String getAssignedByUserUuid() throws SystemException;
+
+	public void setAssignedByUserUuid(String assignedByUserUuid);
 
 	public String getAssignedByUserName();
 

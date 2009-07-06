@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.calendar.model;
 
+import com.liferay.portal.SystemException;
 import com.liferay.portal.model.BaseModel;
 
 import java.util.Date;
@@ -70,6 +71,10 @@ public interface CalEventModel extends BaseModel<CalEvent> {
 	public long getUserId();
 
 	public void setUserId(long userId);
+
+	public String getUserUuid() throws SystemException;
+
+	public void setUserUuid(String userUuid);
 
 	public String getUserName();
 

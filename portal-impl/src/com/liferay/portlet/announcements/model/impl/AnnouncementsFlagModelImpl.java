@@ -22,10 +22,12 @@
 
 package com.liferay.portlet.announcements.model.impl;
 
+import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
+import com.liferay.portal.util.PortalUtil;
 
 import com.liferay.portlet.announcements.model.AnnouncementsFlag;
 import com.liferay.portlet.announcements.model.AnnouncementsFlagSoap;
@@ -152,6 +154,14 @@ public class AnnouncementsFlagModelImpl extends BaseModelImpl<AnnouncementsFlag>
 
 			_originalUserId = userId;
 		}
+	}
+
+	public String getUserUuid() throws SystemException {
+		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
+	}
+
+	public void setUserUuid(String userUuid) {
+		_userUuid = userUuid;
 	}
 
 	public long getOriginalUserId() {
@@ -357,6 +367,7 @@ public class AnnouncementsFlagModelImpl extends BaseModelImpl<AnnouncementsFlag>
 	private long _userId;
 	private long _originalUserId;
 	private boolean _setOriginalUserId;
+	private String _userUuid;
 	private Date _createDate;
 	private long _entryId;
 	private long _originalEntryId;

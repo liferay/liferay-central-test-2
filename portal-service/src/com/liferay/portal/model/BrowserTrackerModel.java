@@ -22,6 +22,7 @@
 
 package com.liferay.portal.model;
 
+import com.liferay.portal.SystemException;
 
 /**
  * <a href="BrowserTrackerModel.java.html"><b><i>View Source</i></b></a>
@@ -55,6 +56,10 @@ public interface BrowserTrackerModel extends BaseModel<BrowserTracker> {
 	public long getUserId();
 
 	public void setUserId(long userId);
+
+	public String getUserUuid() throws SystemException;
+
+	public void setUserUuid(String userUuid);
 
 	public long getBrowserKey();
 

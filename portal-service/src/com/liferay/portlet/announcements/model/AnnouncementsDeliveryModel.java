@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.announcements.model;
 
+import com.liferay.portal.SystemException;
 import com.liferay.portal.model.BaseModel;
 
 /**
@@ -60,6 +61,10 @@ public interface AnnouncementsDeliveryModel extends BaseModel<AnnouncementsDeliv
 	public long getUserId();
 
 	public void setUserId(long userId);
+
+	public String getUserUuid() throws SystemException;
+
+	public void setUserUuid(String userUuid);
 
 	public String getType();
 

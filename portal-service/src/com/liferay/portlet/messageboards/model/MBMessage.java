@@ -49,11 +49,6 @@ package com.liferay.portlet.messageboards.model;
  *
  */
 public interface MBMessage extends MBMessageModel {
-	public java.lang.String getUserUuid()
-		throws com.liferay.portal.SystemException;
-
-	public void setUserUuid(java.lang.String userUuid);
-
 	public com.liferay.portlet.messageboards.model.MBCategory getCategory();
 
 	public com.liferay.portlet.messageboards.model.MBThread getThread()

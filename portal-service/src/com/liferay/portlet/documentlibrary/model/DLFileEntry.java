@@ -49,11 +49,6 @@ package com.liferay.portlet.documentlibrary.model;
  *
  */
 public interface DLFileEntry extends DLFileEntryModel {
-	public java.lang.String getUserUuid()
-		throws com.liferay.portal.SystemException;
-
-	public void setUserUuid(java.lang.String userUuid);
-
 	public com.liferay.portlet.documentlibrary.model.DLFolder getFolder();
 
 	public java.lang.String getTitleWithExtension();

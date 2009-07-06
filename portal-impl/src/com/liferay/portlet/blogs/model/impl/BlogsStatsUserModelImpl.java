@@ -22,9 +22,11 @@
 
 package com.liferay.portlet.blogs.model.impl;
 
+import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
+import com.liferay.portal.util.PortalUtil;
 
 import com.liferay.portlet.blogs.model.BlogsStatsUser;
 import com.liferay.portlet.blogs.model.BlogsStatsUserSoap;
@@ -154,6 +156,14 @@ public class BlogsStatsUserModelImpl extends BaseModelImpl<BlogsStatsUser> {
 		_statsUserId = statsUserId;
 	}
 
+	public String getStatsUserUuid() throws SystemException {
+		return PortalUtil.getUserValue(getStatsUserId(), "uuid", _statsUserUuid);
+	}
+
+	public void setStatsUserUuid(String statsUserUuid) {
+		_statsUserUuid = statsUserUuid;
+	}
+
 	public long getGroupId() {
 		return _groupId;
 	}
@@ -192,6 +202,14 @@ public class BlogsStatsUserModelImpl extends BaseModelImpl<BlogsStatsUser> {
 
 			_originalUserId = userId;
 		}
+	}
+
+	public String getUserUuid() throws SystemException {
+		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
+	}
+
+	public void setUserUuid(String userUuid) {
+		_userUuid = userUuid;
 	}
 
 	public long getOriginalUserId() {
@@ -417,6 +435,7 @@ public class BlogsStatsUserModelImpl extends BaseModelImpl<BlogsStatsUser> {
 	}
 
 	private long _statsUserId;
+	private String _statsUserUuid;
 	private long _groupId;
 	private long _originalGroupId;
 	private boolean _setOriginalGroupId;
@@ -424,6 +443,7 @@ public class BlogsStatsUserModelImpl extends BaseModelImpl<BlogsStatsUser> {
 	private long _userId;
 	private long _originalUserId;
 	private boolean _setOriginalUserId;
+	private String _userUuid;
 	private int _entryCount;
 	private Date _lastPostDate;
 	private int _ratingsTotalEntries;

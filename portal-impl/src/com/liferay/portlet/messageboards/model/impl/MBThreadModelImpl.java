@@ -22,10 +22,12 @@
 
 package com.liferay.portlet.messageboards.model.impl;
 
+import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
+import com.liferay.portal.util.PortalUtil;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
@@ -201,6 +203,15 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread> {
 
 	public void setLastPostByUserId(long lastPostByUserId) {
 		_lastPostByUserId = lastPostByUserId;
+	}
+
+	public String getLastPostByUserUuid() throws SystemException {
+		return PortalUtil.getUserValue(getLastPostByUserId(), "uuid",
+			_lastPostByUserUuid);
+	}
+
+	public void setLastPostByUserUuid(String lastPostByUserUuid) {
+		_lastPostByUserUuid = lastPostByUserUuid;
 	}
 
 	public Date getLastPostDate() {
@@ -412,6 +423,7 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread> {
 	private int _messageCount;
 	private int _viewCount;
 	private long _lastPostByUserId;
+	private String _lastPostByUserUuid;
 	private Date _lastPostDate;
 	private double _priority;
 	private transient ExpandoBridge _expandoBridge;

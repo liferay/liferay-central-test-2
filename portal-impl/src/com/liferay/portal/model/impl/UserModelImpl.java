@@ -22,11 +22,13 @@
 
 package com.liferay.portal.model.impl;
 
+import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserSoap;
+import com.liferay.portal.util.PortalUtil;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
@@ -284,6 +286,14 @@ public class UserModelImpl extends BaseModelImpl<User> {
 
 			_originalUserId = userId;
 		}
+	}
+
+	public String getUserUuid() throws SystemException {
+		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
+	}
+
+	public void setUserUuid(String userUuid) {
+		_userUuid = userUuid;
 	}
 
 	public long getOriginalUserId() {
@@ -1041,6 +1051,7 @@ public class UserModelImpl extends BaseModelImpl<User> {
 	private long _userId;
 	private long _originalUserId;
 	private boolean _setOriginalUserId;
+	private String _userUuid;
 	private long _companyId;
 	private long _originalCompanyId;
 	private boolean _setOriginalCompanyId;

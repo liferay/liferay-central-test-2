@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.shopping.model;
 
+import com.liferay.portal.SystemException;
 import com.liferay.portal.model.BaseModel;
 
 import java.util.Date;
@@ -66,6 +67,10 @@ public interface ShoppingCartModel extends BaseModel<ShoppingCart> {
 	public long getUserId();
 
 	public void setUserId(long userId);
+
+	public String getUserUuid() throws SystemException;
+
+	public void setUserUuid(String userUuid);
 
 	public String getUserName();
 

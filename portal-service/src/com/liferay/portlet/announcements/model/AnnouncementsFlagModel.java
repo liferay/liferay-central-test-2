@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.announcements.model;
 
+import com.liferay.portal.SystemException;
 import com.liferay.portal.model.BaseModel;
 
 import java.util.Date;
@@ -58,6 +59,10 @@ public interface AnnouncementsFlagModel extends BaseModel<AnnouncementsFlag> {
 	public long getUserId();
 
 	public void setUserId(long userId);
+
+	public String getUserUuid() throws SystemException;
+
+	public void setUserUuid(String userUuid);
 
 	public Date getCreateDate();
 

@@ -67,10 +67,5 @@ public interface WikiPage extends WikiPageModel {
 
 	public com.liferay.portlet.wiki.model.WikiPage getRedirectPage();
 
-	public java.lang.String getUserUuid()
-		throws com.liferay.portal.SystemException;
-
 	public void setAttachmentsDir(java.lang.String attachmentsDir);
-
-	public void setUserUuid(java.lang.String userUuid);
 }

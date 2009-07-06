@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.ratings.model.impl;
 
+import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
@@ -177,6 +178,14 @@ public class RatingsEntryModelImpl extends BaseModelImpl<RatingsEntry> {
 
 			_originalUserId = userId;
 		}
+	}
+
+	public String getUserUuid() throws SystemException {
+		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
+	}
+
+	public void setUserUuid(String userUuid) {
+		_userUuid = userUuid;
 	}
 
 	public long getOriginalUserId() {
@@ -434,6 +443,7 @@ public class RatingsEntryModelImpl extends BaseModelImpl<RatingsEntry> {
 	private long _userId;
 	private long _originalUserId;
 	private boolean _setOriginalUserId;
+	private String _userUuid;
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;

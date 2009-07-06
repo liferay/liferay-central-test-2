@@ -22,12 +22,14 @@
 
 package com.liferay.portal.model.impl;
 
+import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.MembershipRequest;
 import com.liferay.portal.model.MembershipRequestSoap;
+import com.liferay.portal.util.PortalUtil;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
@@ -176,6 +178,14 @@ public class MembershipRequestModelImpl extends BaseModelImpl<MembershipRequest>
 		_userId = userId;
 	}
 
+	public String getUserUuid() throws SystemException {
+		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
+	}
+
+	public void setUserUuid(String userUuid) {
+		_userUuid = userUuid;
+	}
+
 	public Date getCreateDate() {
 		return _createDate;
 	}
@@ -222,6 +232,15 @@ public class MembershipRequestModelImpl extends BaseModelImpl<MembershipRequest>
 
 	public void setReplierUserId(long replierUserId) {
 		_replierUserId = replierUserId;
+	}
+
+	public String getReplierUserUuid() throws SystemException {
+		return PortalUtil.getUserValue(getReplierUserId(), "uuid",
+			_replierUserUuid);
+	}
+
+	public void setReplierUserUuid(String replierUserUuid) {
+		_replierUserUuid = replierUserUuid;
 	}
 
 	public int getStatusId() {
@@ -414,12 +433,14 @@ public class MembershipRequestModelImpl extends BaseModelImpl<MembershipRequest>
 	private long _membershipRequestId;
 	private long _companyId;
 	private long _userId;
+	private String _userUuid;
 	private Date _createDate;
 	private long _groupId;
 	private String _comments;
 	private String _replyComments;
 	private Date _replyDate;
 	private long _replierUserId;
+	private String _replierUserUuid;
 	private int _statusId;
 	private transient ExpandoBridge _expandoBridge;
 }

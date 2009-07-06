@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.social.model.impl;
 
+import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
@@ -204,6 +205,14 @@ public class SocialActivityModelImpl extends BaseModelImpl<SocialActivity> {
 		}
 	}
 
+	public String getUserUuid() throws SystemException {
+		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
+	}
+
+	public void setUserUuid(String userUuid) {
+		_userUuid = userUuid;
+	}
+
 	public long getOriginalUserId() {
 		return _originalUserId;
 	}
@@ -326,6 +335,15 @@ public class SocialActivityModelImpl extends BaseModelImpl<SocialActivity> {
 
 			_originalReceiverUserId = receiverUserId;
 		}
+	}
+
+	public String getReceiverUserUuid() throws SystemException {
+		return PortalUtil.getUserValue(getReceiverUserId(), "uuid",
+			_receiverUserUuid);
+	}
+
+	public void setReceiverUserUuid(String receiverUserUuid) {
+		_receiverUserUuid = receiverUserUuid;
 	}
 
 	public long getOriginalReceiverUserId() {
@@ -534,6 +552,7 @@ public class SocialActivityModelImpl extends BaseModelImpl<SocialActivity> {
 	private long _userId;
 	private long _originalUserId;
 	private boolean _setOriginalUserId;
+	private String _userUuid;
 	private long _createDate;
 	private long _originalCreateDate;
 	private boolean _setOriginalCreateDate;
@@ -553,5 +572,6 @@ public class SocialActivityModelImpl extends BaseModelImpl<SocialActivity> {
 	private long _receiverUserId;
 	private long _originalReceiverUserId;
 	private boolean _setOriginalReceiverUserId;
+	private String _receiverUserUuid;
 	private transient ExpandoBridge _expandoBridge;
 }

@@ -49,11 +49,6 @@ package com.liferay.portlet.calendar.model;
  *
  */
 public interface CalEvent extends CalEventModel {
-	public java.lang.String getUserUuid()
-		throws com.liferay.portal.SystemException;
-
-	public void setUserUuid(java.lang.String userUuid);
-
 	public void setRecurrence(java.lang.String recurrence);
 
 	public com.liferay.portal.kernel.cal.TZSRecurrence getRecurrenceObj();

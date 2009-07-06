@@ -22,12 +22,14 @@
 
 package com.liferay.portal.model.impl;
 
+import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.PasswordTracker;
 import com.liferay.portal.model.PasswordTrackerSoap;
+import com.liferay.portal.util.PortalUtil;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
@@ -142,6 +144,14 @@ public class PasswordTrackerModelImpl extends BaseModelImpl<PasswordTracker> {
 
 	public void setUserId(long userId) {
 		_userId = userId;
+	}
+
+	public String getUserUuid() throws SystemException {
+		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
+	}
+
+	public void setUserUuid(String userUuid) {
+		_userUuid = userUuid;
 	}
 
 	public Date getCreateDate() {
@@ -309,6 +319,7 @@ public class PasswordTrackerModelImpl extends BaseModelImpl<PasswordTracker> {
 
 	private long _passwordTrackerId;
 	private long _userId;
+	private String _userUuid;
 	private Date _createDate;
 	private String _password;
 	private transient ExpandoBridge _expandoBridge;

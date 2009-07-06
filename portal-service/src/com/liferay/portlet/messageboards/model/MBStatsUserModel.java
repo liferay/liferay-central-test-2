@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.messageboards.model;
 
+import com.liferay.portal.SystemException;
 import com.liferay.portal.model.BaseModel;
 
 import java.util.Date;
@@ -55,6 +56,10 @@ public interface MBStatsUserModel extends BaseModel<MBStatsUser> {
 
 	public void setStatsUserId(long statsUserId);
 
+	public String getStatsUserUuid() throws SystemException;
+
+	public void setStatsUserUuid(String statsUserUuid);
+
 	public long getGroupId();
 
 	public void setGroupId(long groupId);
@@ -62,6 +67,10 @@ public interface MBStatsUserModel extends BaseModel<MBStatsUser> {
 	public long getUserId();
 
 	public void setUserId(long userId);
+
+	public String getUserUuid() throws SystemException;
+
+	public void setUserUuid(String userUuid);
 
 	public int getMessageCount();
 

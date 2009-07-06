@@ -49,13 +49,4 @@ package com.liferay.portlet.messageboards.model;
  *
  */
 public interface MBBan extends MBBanModel {
-	public java.lang.String getUserUuid()
-		throws com.liferay.portal.SystemException;
-
-	public void setUserUuid(java.lang.String userUuid);
-
-	public java.lang.String getBanUserUuid()
-		throws com.liferay.portal.SystemException;
-
-	public void setBanUserUuid(java.lang.String banUserUuid);
 }

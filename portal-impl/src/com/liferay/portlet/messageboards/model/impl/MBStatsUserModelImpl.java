@@ -22,9 +22,11 @@
 
 package com.liferay.portlet.messageboards.model.impl;
 
+import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
+import com.liferay.portal.util.PortalUtil;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
@@ -138,6 +140,14 @@ public class MBStatsUserModelImpl extends BaseModelImpl<MBStatsUser> {
 		_statsUserId = statsUserId;
 	}
 
+	public String getStatsUserUuid() throws SystemException {
+		return PortalUtil.getUserValue(getStatsUserId(), "uuid", _statsUserUuid);
+	}
+
+	public void setStatsUserUuid(String statsUserUuid) {
+		_statsUserUuid = statsUserUuid;
+	}
+
 	public long getGroupId() {
 		return _groupId;
 	}
@@ -168,6 +178,14 @@ public class MBStatsUserModelImpl extends BaseModelImpl<MBStatsUser> {
 
 			_originalUserId = userId;
 		}
+	}
+
+	public String getUserUuid() throws SystemException {
+		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
+	}
+
+	public void setUserUuid(String userUuid) {
+		_userUuid = userUuid;
 	}
 
 	public long getOriginalUserId() {
@@ -337,12 +355,14 @@ public class MBStatsUserModelImpl extends BaseModelImpl<MBStatsUser> {
 	}
 
 	private long _statsUserId;
+	private String _statsUserUuid;
 	private long _groupId;
 	private long _originalGroupId;
 	private boolean _setOriginalGroupId;
 	private long _userId;
 	private long _originalUserId;
 	private boolean _setOriginalUserId;
+	private String _userUuid;
 	private int _messageCount;
 	private Date _lastPostDate;
 	private transient ExpandoBridge _expandoBridge;

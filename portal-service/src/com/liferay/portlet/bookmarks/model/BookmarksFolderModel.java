@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.bookmarks.model;
 
+import com.liferay.portal.SystemException;
 import com.liferay.portal.model.BaseModel;
 
 import java.util.Date;
@@ -70,6 +71,10 @@ public interface BookmarksFolderModel extends BaseModel<BookmarksFolder> {
 	public long getUserId();
 
 	public void setUserId(long userId);
+
+	public String getUserUuid() throws SystemException;
+
+	public void setUserUuid(String userUuid);
 
 	public Date getCreateDate();
 

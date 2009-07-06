@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.journal.model;
 
+import com.liferay.portal.SystemException;
 import com.liferay.portal.model.BaseModel;
 
 import java.util.Date;
@@ -74,6 +75,10 @@ public interface JournalArticleModel extends BaseModel<JournalArticle> {
 	public long getUserId();
 
 	public void setUserId(long userId);
+
+	public String getUserUuid() throws SystemException;
+
+	public void setUserUuid(String userUuid);
 
 	public String getUserName();
 
@@ -136,6 +141,10 @@ public interface JournalArticleModel extends BaseModel<JournalArticle> {
 	public long getApprovedByUserId();
 
 	public void setApprovedByUserId(long approvedByUserId);
+
+	public String getApprovedByUserUuid() throws SystemException;
+
+	public void setApprovedByUserUuid(String approvedByUserUuid);
 
 	public String getApprovedByUserName();
 

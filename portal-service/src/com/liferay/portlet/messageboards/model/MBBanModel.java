@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.messageboards.model;
 
+import com.liferay.portal.SystemException;
 import com.liferay.portal.model.BaseModel;
 
 import java.util.Date;
@@ -67,6 +68,10 @@ public interface MBBanModel extends BaseModel<MBBan> {
 
 	public void setUserId(long userId);
 
+	public String getUserUuid() throws SystemException;
+
+	public void setUserUuid(String userUuid);
+
 	public String getUserName();
 
 	public void setUserName(String userName);
@@ -82,6 +87,10 @@ public interface MBBanModel extends BaseModel<MBBan> {
 	public long getBanUserId();
 
 	public void setBanUserId(long banUserId);
+
+	public String getBanUserUuid() throws SystemException;
+
+	public void setBanUserUuid(String banUserUuid);
 
 	public MBBan toEscapedModel();
 }

@@ -64,14 +64,9 @@ public interface JournalArticle extends JournalArticleModel {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public java.lang.String getUserUuid()
-		throws com.liferay.portal.SystemException;
-
 	public boolean isTemplateDriven();
 
 	public void setApprovedByUserUuid(java.lang.String approvedByUserUuid);
 
 	public void setSmallImageType(java.lang.String smallImageType);
-
-	public void setUserUuid(java.lang.String userUuid);
 }

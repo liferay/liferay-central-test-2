@@ -22,11 +22,13 @@
 
 package com.liferay.portlet.tasks.model.impl;
 
+import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
+import com.liferay.portal.util.PortalUtil;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
@@ -202,6 +204,14 @@ public class TasksReviewModelImpl extends BaseModelImpl<TasksReview> {
 		}
 	}
 
+	public String getUserUuid() throws SystemException {
+		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
+	}
+
+	public void setUserUuid(String userUuid) {
+		_userUuid = userUuid;
+	}
+
 	public long getOriginalUserId() {
 		return _originalUserId;
 	}
@@ -254,6 +264,15 @@ public class TasksReviewModelImpl extends BaseModelImpl<TasksReview> {
 
 	public void setAssignedByUserId(long assignedByUserId) {
 		_assignedByUserId = assignedByUserId;
+	}
+
+	public String getAssignedByUserUuid() throws SystemException {
+		return PortalUtil.getUserValue(getAssignedByUserId(), "uuid",
+			_assignedByUserUuid);
+	}
+
+	public void setAssignedByUserUuid(String assignedByUserUuid) {
+		_assignedByUserUuid = assignedByUserUuid;
 	}
 
 	public String getAssignedByUserName() {
@@ -502,6 +521,7 @@ public class TasksReviewModelImpl extends BaseModelImpl<TasksReview> {
 	private long _userId;
 	private long _originalUserId;
 	private boolean _setOriginalUserId;
+	private String _userUuid;
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
@@ -509,6 +529,7 @@ public class TasksReviewModelImpl extends BaseModelImpl<TasksReview> {
 	private long _originalProposalId;
 	private boolean _setOriginalProposalId;
 	private long _assignedByUserId;
+	private String _assignedByUserUuid;
 	private String _assignedByUserName;
 	private int _stage;
 	private boolean _completed;

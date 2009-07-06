@@ -22,6 +22,8 @@
 
 package com.liferay.portal.model;
 
+import com.liferay.portal.SystemException;
+
 import java.util.Date;
 
 /**
@@ -60,6 +62,10 @@ public interface ContactModel extends BaseModel<Contact> {
 	public long getUserId();
 
 	public void setUserId(long userId);
+
+	public String getUserUuid() throws SystemException;
+
+	public void setUserUuid(String userUuid);
 
 	public String getUserName();
 

@@ -1154,7 +1154,6 @@
 			<basic name="draft" />
 			<basic name="allowTrackbacks" />
 			<basic name="trackbacks" />
-			<transient name="userUuid" />
 		</attributes>
 	</entity>
 	<entity class="com.liferay.portlet.blogs.model.impl.BlogsStatsUserImpl" name="BlogsStatsUser">
@@ -1171,7 +1170,6 @@
 			<basic name="ratingsTotalEntries" />
 			<basic name="ratingsTotalScore" />
 			<basic name="ratingsAverageScore" />
-			<transient name="userUuid" />
 		</attributes>
 	</entity>
 	<entity class="com.liferay.portlet.bookmarks.model.impl.BookmarksEntryImpl" name="BookmarksEntry">
@@ -1196,7 +1194,6 @@
 			<basic name="comments" />
 			<basic name="visits" />
 			<basic name="priority" />
-			<transient name="userUuid" />
 		</attributes>
 	</entity>
 	<entity class="com.liferay.portlet.bookmarks.model.impl.BookmarksFolderImpl" name="BookmarksFolder">
@@ -1218,7 +1215,6 @@
 			<basic name="parentFolderId" />
 			<basic name="name" />
 			<basic name="description" />
-			<transient name="userUuid" />
 		</attributes>
 	</entity>
 	<entity class="com.liferay.portlet.calendar.model.impl.CalEventImpl" name="CalEvent">
@@ -1259,7 +1255,6 @@
 			<basic name="firstReminder" />
 			<basic name="secondReminder" />
 			<transient name="recurrenceObj" />
-			<transient name="userUuid" />
 		</attributes>
 	</entity>
 	<entity class="com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl" name="DLFileEntry">
@@ -1291,9 +1286,7 @@
 			</basic>
 			<basic name="readCount" />
 			<basic name="extraSettings" />
-			<transient name="extraSettings" />
 			<transient name="extraSettingsProperties" />
-			<transient name="userUuid" />
 		</attributes>
 	</entity>
 	<entity class="com.liferay.portlet.documentlibrary.model.impl.DLFileRankImpl" name="DLFileRank">
@@ -1308,7 +1301,6 @@
 			</basic>
 			<basic name="folderId" />
 			<basic name="name" />
-			<transient name="userUuid" />
 		</attributes>
 	</entity>
 	<entity class="com.liferay.portlet.documentlibrary.model.impl.DLFileShortcutImpl" name="DLFileShortcut">
@@ -1331,7 +1323,6 @@
 			<basic name="folderId" />
 			<basic name="toFolderId" />
 			<basic name="toName" />
-			<transient name="userUuid" />
 		</attributes>
 	</entity>
 	<entity class="com.liferay.portlet.documentlibrary.model.impl.DLFileVersionImpl" name="DLFileVersion">
@@ -1376,7 +1367,6 @@
 			<basic name="lastPostDate">
 				<temporal>TIMESTAMP</temporal>
 			</basic>
-			<transient name="userUuid" />
 		</attributes>
 	</entity>
 	<entity class="com.liferay.portlet.expando.model.impl.ExpandoColumnImpl" name="ExpandoColumn">
@@ -1391,7 +1381,6 @@
 			</basic>
 			<basic name="defaultData" />
 			<basic name="typeSettings" />
-			<transient name="typeSettings" />
 			<transient name="typeSettingsProperties" />
 		</attributes>
 	</entity>
@@ -1467,7 +1456,6 @@
 			<basic name="parentFolderId" />
 			<basic name="name" />
 			<basic name="description" />
-			<transient name="userUuid" />
 		</attributes>
 	</entity>
 	<entity class="com.liferay.portlet.imagegallery.model.impl.IGImageImpl" name="IGImage">
@@ -1494,7 +1482,6 @@
 			<basic name="custom1ImageId" />
 			<basic name="custom2ImageId" />
 			<transient name="imageType" />
-			<transient name="userUuid" />
 		</attributes>
 	</entity>
 	<entity class="com.liferay.portlet.journal.model.impl.JournalArticleImpl" name="JournalArticle">
@@ -1550,7 +1537,6 @@
 			<basic name="smallImageURL" />
 			<transient name="approvedByUserUuid" />
 			<transient name="smallImageType" />
-			<transient name="userUuid" />
 		</attributes>
 	</entity>
 	<entity class="com.liferay.portlet.journal.model.impl.JournalArticleImageImpl" name="JournalArticleImage">
@@ -1622,7 +1608,6 @@
 			<basic name="contentField" />
 			<basic name="feedType" />
 			<basic name="feedVersion" />
-			<transient name="userUuid" />
 		</attributes>
 	</entity>
 	<entity class="com.liferay.portlet.journal.model.impl.JournalStructureImpl" name="JournalStructure">
@@ -1649,7 +1634,6 @@
 			<basic name="name" />
 			<basic name="description" />
 			<basic name="xsd" />
-			<transient name="userUuid" />
 		</attributes>
 	</entity>
 	<entity class="com.liferay.portlet.journal.model.impl.JournalTemplateImpl" name="JournalTemplate">
@@ -1682,7 +1666,6 @@
 			<basic name="smallImageId" />
 			<basic name="smallImageURL" />
 			<transient name="smallImageType" />
-			<transient name="userUuid" />
 		</attributes>
 	</entity>
 	<entity class="com.liferay.portlet.messageboards.model.impl.MBBanImpl" name="MBBan">
@@ -1700,8 +1683,6 @@
 				<temporal>TIMESTAMP</temporal>
 			</basic>
 			<basic name="banUserId" />
-			<transient name="banUserUuid" />
-			<transient name="userUuid" />
 		</attributes>
 	</entity>
 	<entity class="com.liferay.portlet.messageboards.model.impl.MBCategoryImpl" name="MBCategory">
@@ -1729,7 +1710,6 @@
 			<basic name="lastPostDate">
 				<temporal>TIMESTAMP</temporal>
 			</basic>
-			<transient name="userUuid" />
 		</attributes>
 	</entity>
 	<entity class="com.liferay.portlet.messageboards.model.impl.MBDiscussionImpl" name="MBDiscussion">
@@ -1807,7 +1787,6 @@
 			<basic name="anonymous" />
 			<basic name="priority" />
 			<transient name="attachmentsDir" />
-			<transient name="userUuid" />
 		</attributes>
 	</entity>
 	<entity class="com.liferay.portlet.messageboards.model.impl.MBMessageFlagImpl" name="MBMessageFlag">
@@ -1821,7 +1800,6 @@
 			<basic name="threadId" />
 			<basic name="messageId" />
 			<basic name="flag" />
-			<transient name="userUuid" />
 		</attributes>
 	</entity>
 	<entity class="com.liferay.portlet.messageboards.model.impl.MBStatsUserImpl" name="MBStatsUser">
@@ -1889,7 +1867,6 @@
 			<basic name="lastVoteDate">
 				<temporal>TIMESTAMP</temporal>
 			</basic>
-			<transient name="userUuid" />
 		</attributes>
 	</entity>
 	<entity class="com.liferay.portlet.polls.model.impl.PollsVoteImpl" name="PollsVote">
@@ -1902,7 +1879,6 @@
 			<basic name="voteDate">
 				<temporal>TIMESTAMP</temporal>
 			</basic>
-			<transient name="userUuid" />
 		</attributes>
 	</entity>
 	<entity class="com.liferay.portlet.ratings.model.impl.RatingsEntryImpl" name="RatingsEntry">
@@ -1921,7 +1897,6 @@
 			<basic name="classNameId" />
 			<basic name="classPK" />
 			<basic name="score" />
-			<transient name="userUuid" />
 		</attributes>
 	</entity>
 	<entity class="com.liferay.portlet.ratings.model.impl.RatingsStatsImpl" name="RatingsStats">
@@ -2386,7 +2361,6 @@
 			<basic name="lastPostDate">
 				<temporal>TIMESTAMP</temporal>
 			</basic>
-			<transient name="userUuid" />
 		</attributes>
 	</entity>
 	<entity class="com.liferay.portlet.wiki.model.impl.WikiPageImpl" name="WikiPage">
@@ -2418,7 +2392,6 @@
 			<basic name="parentTitle" />
 			<basic name="redirectTitle" />
 			<transient name="attachmentsDir" />
-			<transient name="userUuid" />
 		</attributes>
 	</entity>
 	<entity class="com.liferay.portlet.wiki.model.impl.WikiPageResourceImpl" name="WikiPageResource">

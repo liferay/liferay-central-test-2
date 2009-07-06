@@ -22,10 +22,12 @@
 
 package com.liferay.portlet.journal.model.impl;
 
+import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
+import com.liferay.portal.util.PortalUtil;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
@@ -297,6 +299,14 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle> {
 		_userId = userId;
 	}
 
+	public String getUserUuid() throws SystemException {
+		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
+	}
+
+	public void setUserUuid(String userUuid) {
+		_userUuid = userUuid;
+	}
+
 	public String getUserName() {
 		return GetterUtil.getString(_userName);
 	}
@@ -437,6 +447,15 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle> {
 
 	public void setApprovedByUserId(long approvedByUserId) {
 		_approvedByUserId = approvedByUserId;
+	}
+
+	public String getApprovedByUserUuid() throws SystemException {
+		return PortalUtil.getUserValue(getApprovedByUserId(), "uuid",
+			_approvedByUserUuid);
+	}
+
+	public void setApprovedByUserUuid(String approvedByUserUuid) {
+		_approvedByUserUuid = approvedByUserUuid;
 	}
 
 	public String getApprovedByUserName() {
@@ -884,6 +903,7 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle> {
 	private boolean _setOriginalGroupId;
 	private long _companyId;
 	private long _userId;
+	private String _userUuid;
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
@@ -902,6 +922,7 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle> {
 	private Date _displayDate;
 	private boolean _approved;
 	private long _approvedByUserId;
+	private String _approvedByUserUuid;
 	private String _approvedByUserName;
 	private Date _approvedDate;
 	private boolean _expired;

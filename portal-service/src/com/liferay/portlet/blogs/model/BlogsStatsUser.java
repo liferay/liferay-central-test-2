@@ -49,8 +49,4 @@ package com.liferay.portlet.blogs.model;
  *
  */
 public interface BlogsStatsUser extends BlogsStatsUserModel {
-	public java.lang.String getUserUuid()
-		throws com.liferay.portal.SystemException;
-
-	public void setUserUuid(java.lang.String userUuid);
 }

@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.social.model;
 
+import com.liferay.portal.SystemException;
 import com.liferay.portal.model.BaseModel;
 
 /**
@@ -69,6 +70,10 @@ public interface SocialRequestModel extends BaseModel<SocialRequest> {
 
 	public void setUserId(long userId);
 
+	public String getUserUuid() throws SystemException;
+
+	public void setUserUuid(String userUuid);
+
 	public long getCreateDate();
 
 	public void setCreateDate(long createDate);
@@ -98,6 +103,10 @@ public interface SocialRequestModel extends BaseModel<SocialRequest> {
 	public long getReceiverUserId();
 
 	public void setReceiverUserId(long receiverUserId);
+
+	public String getReceiverUserUuid() throws SystemException;
+
+	public void setReceiverUserUuid(String receiverUserUuid);
 
 	public int getStatus();
 

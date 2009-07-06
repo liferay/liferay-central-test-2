@@ -22,10 +22,12 @@
 
 package com.liferay.portlet.asset.model.impl;
 
+import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
+import com.liferay.portal.util.PortalUtil;
 
 import com.liferay.portlet.asset.model.AssetCategory;
 import com.liferay.portlet.asset.model.AssetCategorySoap;
@@ -213,6 +215,14 @@ public class AssetCategoryModelImpl extends BaseModelImpl<AssetCategory> {
 
 	public void setUserId(long userId) {
 		_userId = userId;
+	}
+
+	public String getUserUuid() throws SystemException {
+		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
+	}
+
+	public void setUserUuid(String userUuid) {
+		_userUuid = userUuid;
 	}
 
 	public String getUserName() {
@@ -455,6 +465,7 @@ public class AssetCategoryModelImpl extends BaseModelImpl<AssetCategory> {
 	private boolean _setOriginalGroupId;
 	private long _companyId;
 	private long _userId;
+	private String _userUuid;
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;

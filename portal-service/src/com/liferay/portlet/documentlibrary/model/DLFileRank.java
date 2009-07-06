@@ -49,8 +49,4 @@ package com.liferay.portlet.documentlibrary.model;
  *
  */
 public interface DLFileRank extends DLFileRankModel {
-	public java.lang.String getUserUuid()
-		throws com.liferay.portal.SystemException;
-
-	public void setUserUuid(java.lang.String userUuid);
 }

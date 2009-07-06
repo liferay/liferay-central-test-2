@@ -49,11 +49,6 @@ package com.liferay.portlet.imagegallery.model;
  *
  */
 public interface IGImage extends IGImageModel {
-	public java.lang.String getUserUuid()
-		throws com.liferay.portal.SystemException;
-
-	public void setUserUuid(java.lang.String userUuid);
-
 	public com.liferay.portlet.imagegallery.model.IGFolder getFolder();
 
 	public java.lang.String getNameWithExtension();

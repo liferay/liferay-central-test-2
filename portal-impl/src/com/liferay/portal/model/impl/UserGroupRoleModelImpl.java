@@ -22,11 +22,13 @@
 
 package com.liferay.portal.model.impl;
 
+import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.UserGroupRole;
 import com.liferay.portal.model.UserGroupRoleSoap;
 import com.liferay.portal.service.persistence.UserGroupRolePK;
+import com.liferay.portal.util.PortalUtil;
 
 import java.io.Serializable;
 
@@ -126,6 +128,14 @@ public class UserGroupRoleModelImpl extends BaseModelImpl<UserGroupRole> {
 
 	public void setUserId(long userId) {
 		_userId = userId;
+	}
+
+	public String getUserUuid() throws SystemException {
+		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
+	}
+
+	public void setUserUuid(String userUuid) {
+		_userUuid = userUuid;
 	}
 
 	public long getGroupId() {
@@ -250,6 +260,7 @@ public class UserGroupRoleModelImpl extends BaseModelImpl<UserGroupRole> {
 	}
 
 	private long _userId;
+	private String _userUuid;
 	private long _groupId;
 	private long _roleId;
 }

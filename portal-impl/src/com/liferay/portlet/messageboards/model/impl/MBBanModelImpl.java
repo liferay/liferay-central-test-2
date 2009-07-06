@@ -22,10 +22,12 @@
 
 package com.liferay.portlet.messageboards.model.impl;
 
+import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
+import com.liferay.portal.util.PortalUtil;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
@@ -185,6 +187,14 @@ public class MBBanModelImpl extends BaseModelImpl<MBBan> {
 		_userId = userId;
 	}
 
+	public String getUserUuid() throws SystemException {
+		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
+	}
+
+	public void setUserUuid(String userUuid) {
+		_userUuid = userUuid;
+	}
+
 	public String getUserName() {
 		return GetterUtil.getString(_userName);
 	}
@@ -221,6 +231,14 @@ public class MBBanModelImpl extends BaseModelImpl<MBBan> {
 
 			_originalBanUserId = banUserId;
 		}
+	}
+
+	public String getBanUserUuid() throws SystemException {
+		return PortalUtil.getUserValue(getBanUserId(), "uuid", _banUserUuid);
+	}
+
+	public void setBanUserUuid(String banUserUuid) {
+		_banUserUuid = banUserUuid;
 	}
 
 	public long getOriginalBanUserId() {
@@ -394,11 +412,13 @@ public class MBBanModelImpl extends BaseModelImpl<MBBan> {
 	private boolean _setOriginalGroupId;
 	private long _companyId;
 	private long _userId;
+	private String _userUuid;
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
 	private long _banUserId;
 	private long _originalBanUserId;
 	private boolean _setOriginalBanUserId;
+	private String _banUserUuid;
 	private transient ExpandoBridge _expandoBridge;
 }

@@ -22,6 +22,8 @@
 
 package com.liferay.portal.model;
 
+import com.liferay.portal.SystemException;
+
 import java.util.Date;
 
 /**
@@ -64,6 +66,10 @@ public interface PortletItemModel extends BaseModel<PortletItem> {
 	public long getUserId();
 
 	public void setUserId(long userId);
+
+	public String getUserUuid() throws SystemException;
+
+	public void setUserUuid(String userUuid);
 
 	public String getUserName();
 

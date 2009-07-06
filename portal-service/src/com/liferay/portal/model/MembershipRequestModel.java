@@ -22,6 +22,8 @@
 
 package com.liferay.portal.model;
 
+import com.liferay.portal.SystemException;
+
 import java.util.Date;
 
 /**
@@ -61,6 +63,10 @@ public interface MembershipRequestModel extends BaseModel<MembershipRequest> {
 
 	public void setUserId(long userId);
 
+	public String getUserUuid() throws SystemException;
+
+	public void setUserUuid(String userUuid);
+
 	public Date getCreateDate();
 
 	public void setCreateDate(Date createDate);
@@ -84,6 +90,10 @@ public interface MembershipRequestModel extends BaseModel<MembershipRequest> {
 	public long getReplierUserId();
 
 	public void setReplierUserId(long replierUserId);
+
+	public String getReplierUserUuid() throws SystemException;
+
+	public void setReplierUserUuid(String replierUserUuid);
 
 	public int getStatusId();
 

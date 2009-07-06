@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.documentlibrary.model;
 
+import com.liferay.portal.SystemException;
 import com.liferay.portal.model.BaseModel;
 
 import java.util.Date;
@@ -71,6 +72,10 @@ public interface DLFileEntryModel extends BaseModel<DLFileEntry> {
 
 	public void setUserId(long userId);
 
+	public String getUserUuid() throws SystemException;
+
+	public void setUserUuid(String userUuid);
+
 	public String getUserName();
 
 	public void setUserName(String userName);
@@ -78,6 +83,10 @@ public interface DLFileEntryModel extends BaseModel<DLFileEntry> {
 	public long getVersionUserId();
 
 	public void setVersionUserId(long versionUserId);
+
+	public String getVersionUserUuid() throws SystemException;
+
+	public void setVersionUserUuid(String versionUserUuid);
 
 	public String getVersionUserName();
 

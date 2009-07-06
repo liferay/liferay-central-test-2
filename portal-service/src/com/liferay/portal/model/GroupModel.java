@@ -22,6 +22,7 @@
 
 package com.liferay.portal.model;
 
+import com.liferay.portal.SystemException;
 
 /**
  * <a href="GroupModel.java.html"><b><i>View Source</i></b></a>
@@ -59,6 +60,10 @@ public interface GroupModel extends BaseModel<Group> {
 	public long getCreatorUserId();
 
 	public void setCreatorUserId(long creatorUserId);
+
+	public String getCreatorUserUuid() throws SystemException;
+
+	public void setCreatorUserUuid(String creatorUserUuid);
 
 	public String getClassName();
 
