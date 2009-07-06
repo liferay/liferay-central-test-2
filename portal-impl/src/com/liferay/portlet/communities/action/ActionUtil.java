@@ -24,13 +24,22 @@ package com.liferay.portlet.communities.action;
 
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.model.Group;
+import com.liferay.portal.model.Layout;
+import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.MembershipRequest;
+import com.liferay.portal.model.PortletPreferencesIds;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.MembershipRequestLocalServiceUtil;
+import com.liferay.portal.service.PortletPreferencesLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.PortletPreferencesFactoryUtil;
+
+import java.util.List;
 
 import javax.portlet.ActionRequest;
+import javax.portlet.PortletPreferences;
 import javax.portlet.RenderRequest;
 
 import javax.servlet.http.HttpServletRequest;
@@ -103,6 +112,74 @@ public class ActionUtil
 		}
 
 		request.setAttribute(WebKeys.MEMBERSHIP_REQUEST, membershipRequest);
+	}
+
+	public static void copyPreferences(
+			ActionRequest actionRequest, Layout targetLayout,
+			Layout sourceLayout)
+		throws Exception {
+
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			actionRequest);
+
+		copyPreferences(request, targetLayout, sourceLayout);
+	}
+
+	public static void copyPreferences(
+			HttpServletRequest request, Layout targetLayout,
+			Layout sourceLayout)
+		throws Exception {
+
+		long companyId = targetLayout.getCompanyId();
+
+		LayoutTypePortlet sourceLayoutTypePortlet =
+			(LayoutTypePortlet)sourceLayout.getLayoutType();
+
+		List<String> sourcePortletIds = sourceLayoutTypePortlet.getPortletIds();
+
+		for (String sourcePortletId : sourcePortletIds) {
+
+			// Copy preference
+
+			PortletPreferencesIds portletPreferencesIds =
+				PortletPreferencesFactoryUtil.getPortletPreferencesIds(
+					request, targetLayout, sourcePortletId);
+
+			PortletPreferencesLocalServiceUtil.getPreferences(
+				portletPreferencesIds);
+
+			PortletPreferencesIds sourcePortletPreferencesIds =
+				PortletPreferencesFactoryUtil.getPortletPreferencesIds(
+					request, sourceLayout, sourcePortletId);
+
+			PortletPreferences sourcePrefs =
+				PortletPreferencesLocalServiceUtil.getPreferences(
+					sourcePortletPreferencesIds);
+
+			PortletPreferencesLocalServiceUtil.updatePreferences(
+				portletPreferencesIds.getOwnerId(),
+				portletPreferencesIds.getOwnerType(),
+				portletPreferencesIds.getPlid(),
+				portletPreferencesIds.getPortletId(), sourcePrefs);
+
+			// Copy portlet setup
+
+			PortletPreferencesLocalServiceUtil.getPreferences(
+				companyId, PortletKeys.PREFS_OWNER_ID_DEFAULT,
+				PortletKeys.PREFS_OWNER_TYPE_LAYOUT, targetLayout.getPlid(),
+				sourcePortletId);
+
+			sourcePrefs =
+				PortletPreferencesLocalServiceUtil.getPreferences(
+					companyId, PortletKeys.PREFS_OWNER_ID_DEFAULT,
+					PortletKeys.PREFS_OWNER_TYPE_LAYOUT, sourceLayout.getPlid(),
+					sourcePortletId);
+
+			PortletPreferencesLocalServiceUtil.updatePreferences(
+				PortletKeys.PREFS_OWNER_ID_DEFAULT,
+				PortletKeys.PREFS_OWNER_TYPE_LAYOUT, targetLayout.getPlid(),
+				sourcePortletId, sourcePrefs);
+		}
 	}
 
 }

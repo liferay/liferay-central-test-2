@@ -49,8 +49,6 @@ import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.LayoutPrototype;
-import com.liferay.portal.model.LayoutTypePortlet;
-import com.liferay.portal.model.PortletPreferencesIds;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
@@ -61,7 +59,6 @@ import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.LayoutPrototypeServiceUtil;
 import com.liferay.portal.service.LayoutServiceUtil;
 import com.liferay.portal.service.LayoutSetServiceUtil;
-import com.liferay.portal.service.PortletPreferencesLocalServiceUtil;
 import com.liferay.portal.service.ThemeLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.permission.GroupPermissionUtil;
@@ -72,12 +69,10 @@ import com.liferay.portal.service.permission.UserPermissionUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.communities.util.CommunitiesUtil;
 import com.liferay.portlet.communities.util.StagingUtil;
 import com.liferay.portlet.tasks.NoSuchProposalException;
@@ -86,14 +81,12 @@ import com.liferay.util.servlet.UploadException;
 
 import java.io.File;
 
-import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
-import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletRequestDispatcher;
 import javax.portlet.RenderRequest;
@@ -101,7 +94,6 @@ import javax.portlet.RenderResponse;
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts.action.ActionForm;
@@ -400,65 +392,6 @@ public class EditPagesAction extends PortletAction {
 		}
 	}
 
-	protected void copyPreferences(
-			ActionRequest actionRequest, Layout targetLayout,
-			Layout sourceLayout)
-		throws Exception {
-
-		long companyId = targetLayout.getCompanyId();
-
-		LayoutTypePortlet sourceLayoutTypePortlet =
-			(LayoutTypePortlet)sourceLayout.getLayoutType();
-
-		List<String> sourcePortletIds = sourceLayoutTypePortlet.getPortletIds();
-
-		for (String sourcePortletId : sourcePortletIds) {
-			HttpServletRequest request = PortalUtil.getHttpServletRequest(
-				actionRequest);
-
-			// Copy preference
-
-			PortletPreferencesIds portletPreferencesIds =
-				PortletPreferencesFactoryUtil.getPortletPreferencesIds(
-					request, targetLayout, sourcePortletId);
-
-			PortletPreferencesLocalServiceUtil.getPreferences(
-				portletPreferencesIds);
-
-			PortletPreferencesIds sourcePortletPreferencesIds =
-				PortletPreferencesFactoryUtil.getPortletPreferencesIds(
-					request, sourceLayout, sourcePortletId);
-
-			PortletPreferences sourcePrefs =
-				PortletPreferencesLocalServiceUtil.getPreferences(
-					sourcePortletPreferencesIds);
-
-			PortletPreferencesLocalServiceUtil.updatePreferences(
-				portletPreferencesIds.getOwnerId(),
-				portletPreferencesIds.getOwnerType(),
-				portletPreferencesIds.getPlid(),
-				portletPreferencesIds.getPortletId(), sourcePrefs);
-
-			// Copy portlet setup
-
-			PortletPreferencesLocalServiceUtil.getPreferences(
-				companyId, PortletKeys.PREFS_OWNER_ID_DEFAULT,
-				PortletKeys.PREFS_OWNER_TYPE_LAYOUT, targetLayout.getPlid(),
-				sourcePortletId);
-
-			sourcePrefs =
-				PortletPreferencesLocalServiceUtil.getPreferences(
-					companyId, PortletKeys.PREFS_OWNER_ID_DEFAULT,
-					PortletKeys.PREFS_OWNER_TYPE_LAYOUT, sourceLayout.getPlid(),
-					sourcePortletId);
-
-			PortletPreferencesLocalServiceUtil.updatePreferences(
-				PortletKeys.PREFS_OWNER_ID_DEFAULT,
-				PortletKeys.PREFS_OWNER_TYPE_LAYOUT, targetLayout.getPlid(),
-				sourcePortletId, sourcePrefs);
-		}
-	}
-
 	protected UnicodeProperties getTypeSettingsProperties(
 		ActionRequest actionRequest) {
 
@@ -536,7 +469,8 @@ public class EditPagesAction extends PortletAction {
 				if (parentLayout.getType().equals(
 						LayoutConstants.TYPE_PORTLET)) {
 
-					copyPreferences(actionRequest, layout, parentLayout);
+					ActionUtil.copyPreferences(
+						actionRequest, layout, parentLayout);
 				}
 			}
 			else if (layoutPrototypeId > 0) {
@@ -556,7 +490,7 @@ public class EditPagesAction extends PortletAction {
 					layout.getLayoutId(),
 					layoutPrototypeLayout.getTypeSettings());
 
-				copyPreferences(
+				ActionUtil.copyPreferences(
 					actionRequest, layout, layoutPrototypeLayout);
 			}
 			else {
@@ -595,7 +529,8 @@ public class EditPagesAction extends PortletAction {
 								groupId, privateLayout, layoutId,
 								copyLayout.getTypeSettings());
 
-							copyPreferences(actionRequest, layout, copyLayout);
+							ActionUtil.copyPreferences(
+								actionRequest, layout, copyLayout);
 						}
 					}
 					catch (NoSuchLayoutException nsle) {

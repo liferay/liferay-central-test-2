@@ -34,9 +34,11 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutConstants;
+import com.liferay.portal.model.LayoutPrototype;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
+import com.liferay.portal.service.LayoutPrototypeServiceUtil;
 import com.liferay.portal.service.LayoutServiceUtil;
 import com.liferay.portal.service.permission.GroupPermissionUtil;
 import com.liferay.portal.service.permission.LayoutPermissionUtil;
@@ -143,6 +145,9 @@ public class UpdatePageAction extends JSONAction {
 			HttpServletResponse response)
 		throws Exception {
 
+		long layoutPrototypeId = ParamUtil.getLong(
+			request, "layoutPrototypeId");
+
 		String doAsUserId = ParamUtil.getString(request, "doAsUserId");
 		String doAsUserLanguageId = ParamUtil.getString(
 			request, "doAsUserLanguageId");
@@ -157,9 +162,30 @@ public class UpdatePageAction extends JSONAction {
 		boolean hidden = false;
 		String friendlyURL = StringPool.BLANK;
 
-		Layout layout = LayoutServiceUtil.addLayout(
-			groupId, privateLayout, parentLayoutId, name, title, description,
-			type, hidden, friendlyURL);
+		Layout layout;
+
+		if (layoutPrototypeId > 0) {
+			LayoutPrototype layoutPrototype =
+				LayoutPrototypeServiceUtil.getLayoutPrototype(
+					layoutPrototypeId);
+
+			Layout layoutPrototypeLayout = layoutPrototype.getLayout();
+
+			layout = LayoutServiceUtil.addLayout(
+				groupId, privateLayout, parentLayoutId, name, title,
+				description, LayoutConstants.TYPE_PORTLET, false, friendlyURL);
+
+			LayoutServiceUtil.updateLayout(
+				layout.getGroupId(), layout.isPrivateLayout(),
+				layout.getLayoutId(), layoutPrototypeLayout.getTypeSettings());
+
+			ActionUtil.copyPreferences(request, layout, layoutPrototypeLayout);
+		}
+		else {
+			layout = LayoutServiceUtil.addLayout(
+				groupId, privateLayout, parentLayoutId, name, title,
+				description, type, hidden, friendlyURL);
+		}
 
 		String[] eventClasses = StringUtil.split(
 			PropsUtil.get(
