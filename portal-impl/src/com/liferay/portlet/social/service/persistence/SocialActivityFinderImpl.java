@@ -112,7 +112,7 @@ public class SocialActivityFinderImpl
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity("SocialActivity", SocialActivityImpl.class);
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -148,7 +148,7 @@ public class SocialActivityFinderImpl
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity("SocialActivity", SocialActivityImpl.class);
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -186,7 +186,7 @@ public class SocialActivityFinderImpl
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity("SocialActivity", SocialActivityImpl.class);
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -224,7 +224,7 @@ public class SocialActivityFinderImpl
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity("SocialActivity", SocialActivityImpl.class);
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -260,7 +260,7 @@ public class SocialActivityFinderImpl
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity("SocialActivity", SocialActivityImpl.class);
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -298,7 +298,7 @@ public class SocialActivityFinderImpl
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity("SocialActivity", SocialActivityImpl.class);
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -335,7 +335,7 @@ public class SocialActivityFinderImpl
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity("SocialActivity", SocialActivityImpl.class);
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -374,7 +374,7 @@ public class SocialActivityFinderImpl
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity("SocialActivity", SocialActivityImpl.class);
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -413,7 +413,7 @@ public class SocialActivityFinderImpl
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity("SocialActivity", SocialActivityImpl.class);
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
