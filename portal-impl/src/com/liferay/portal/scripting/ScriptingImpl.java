@@ -122,7 +122,7 @@ public class ScriptingImpl implements Scripting {
 
 		objects.put("portletConfig", portletConfig);
 		objects.put("portletContext", portletContext);
-		objects.put("preferences", portletRequest.getPreferences());
+		objects.put("portletPreferences", portletRequest.getPreferences());
 
 		if (portletRequest instanceof ActionRequest) {
 			objects.put("actionRequest", portletRequest);
@@ -152,6 +152,10 @@ public class ScriptingImpl implements Scripting {
 
 		objects.put(
 			"userInfo", portletRequest.getAttribute(PortletRequest.USER_INFO));
+
+		// Deprecated
+
+		objects.put("preferences", portletRequest.getPreferences());
 
 		return objects;
 	}
