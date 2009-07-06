@@ -470,6 +470,32 @@ insert into Region (regionId, countryId, regionCode, name, active_) values (3200
 insert into Region (regionId, countryId, regionCode, name, active_) values (32006, 32, 'TAS', 'Tasmania', TRUE);
 insert into Region (regionId, countryId, regionCode, name, active_) values (32007, 32, 'VIC', 'Victoria', TRUE);
 insert into Region (regionId, countryId, regionCode, name, active_) values (32008, 32, 'WA', 'Western Australia', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) values (202001, 202, 'AG', 'Aargau', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) values (202002, 202, 'AR', 'Appenzell Ausserrhoden', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) values (202003, 202, 'AI', 'Appenzell Innerrhoden', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) values (202004, 202, 'BL', 'Basel-Landschaft', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) values (202005, 202, 'BS', 'Basel-Stadt', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) values (202006, 202, 'BE', 'Bern', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) values (202007, 202, 'FR', 'Fribourg', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) values (202008, 202, 'GE', 'Geneva', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) values (202009, 202, 'GL', 'Glarus', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) values (202010, 202, 'GR', 'Graubünden', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) values (202011, 202, 'JU', 'Jura', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) values (202012, 202, 'LU', 'Lucerne', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) values (202013, 202, 'NE', 'Neuchâtel', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) values (202014, 202, 'NW', 'Nidwalden', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) values (202015, 202, 'OW', 'Obwalden', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) values (202016, 202, 'SH', 'Schaffhausen', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) values (202017, 202, 'SZ', 'Schwyz', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) values (202018, 202, 'SO', 'Solothurn', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) values (202019, 202, 'SG', 'St. Gallen', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) values (202020, 202, 'TG', 'Thurgau', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) values (202021, 202, 'TI', 'Ticino', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) values (202022, 202, 'UR', 'Uri', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) values (202023, 202, 'VS', 'Valais', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) values (202024, 202, 'VD', 'Vaud', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) values (202025, 202, 'ZG', 'Zug', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) values (202026, 202, 'ZH', 'Zürich', TRUE);
 
 ##
 ## List types for accounts
