@@ -57,7 +57,6 @@ import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.model.impl.PortletURLListenerImpl;
 import com.liferay.portal.model.impl.PublicRenderParameterImpl;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
-import com.liferay.portal.service.ResourceActionLocalServiceUtil;
 import com.liferay.portal.service.base.PortletLocalServiceBaseImpl;
 import com.liferay.portal.util.ContentUtil;
 import com.liferay.portal.util.PortalUtil;
@@ -134,7 +133,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			ResourceActionsUtil.getPortletResourceActions(
 				portlet.getPortletId());
 
-		ResourceActionLocalServiceUtil.checkResourceActions(
+		resourceActionLocalService.checkResourceActions(
 			portlet.getPortletId(), portletActions);
 
 		return portlet;
