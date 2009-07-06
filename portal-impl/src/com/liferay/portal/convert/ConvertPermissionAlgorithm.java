@@ -149,10 +149,12 @@ public class ConvertPermissionAlgorithm extends ConvertProcess {
 
 		Table table = new Table(
 			ResourceCodeModelImpl.TABLE_NAME,
-			ResourceCodeModelImpl.TABLE_COLUMNS);
+			new Object[][] {
+				{ "name", new Integer(Types.VARCHAR) }
+			});
 
 		table.setSelectSQL(
-			"SELECT * FROM " + ResourceCodeModelImpl.TABLE_NAME +
+			"SELECT name FROM " + ResourceCodeModelImpl.TABLE_NAME +
 				" GROUP BY name");
 
 		String tempFile = table.generateTempFile();
@@ -171,7 +173,7 @@ public class ConvertPermissionAlgorithm extends ConvertProcess {
 			while (Validator.isNotNull(line = resourceNameReader.readLine())) {
 				String[] values = StringUtil.split(line);
 
-				String name = values[2];
+				String name = values[0];
 
 				List<String> defaultActionIds =
 					ResourceActionsUtil.getResourceActions(name);
