@@ -111,6 +111,49 @@ jdbc.default.numHelperThreads=1]]></echo>
 		<antcall target="prepare-common" />
 	</target>
 
+	<target name="prepare-tck">
+		<antcall target="prepare-portal-ext-properties" />
+
+		<echo file="portal-impl/src/portal-ext.properties" append="true">
+
+tck.url=true</echo>
+
+		<exec executable="cmd.exe">
+			<arg line="/c svn revert portal-web/docroot/WEB-INF/web.xml" />
+		</exec>
+
+		<antcall target="clean" />
+		<antcall target="start" />
+
+		<ant antfile="build-dist.xml" target="build-dist-tomcat-6.0" />
+
+		<delete dir="tools/tck" />
+
+		<unzip src="tools/portlet-tck070508.zip" dest="tools/tck" />
+
+		<replace file="tools/tck/bin/ts.jte">
+			<replacefilter token="http://localhost:8080/pluto/tck" value="http://localhost:8080/c/portal/tck" />
+		</replace>
+
+		<echo file="tools/tck/bin/build.properties" append="true">
+
+work.dir=${basedir.unix}/tools/tck/work</echo>
+
+		<property name="liferay.home" value="${app.server.dir}/.." />
+
+		<delete dir="${liferay.home}/data" />
+		<delete dir="${liferay.home}/deploy" />
+
+		<copy todir="${liferay.home}/deploy" flatten="true">
+			<fileset
+				dir="tools/tck"
+				includes="**/*.war"
+			/>
+		</copy>
+
+		<antcall target="rebuild-database" inheritAll="false" />
+	</target>
+
 	<target name="prepare-tomcat-6.0-mysql-5.0">
 		<antcall target="prepare-mysql-5.0" />
 
@@ -522,46 +565,7 @@ file.
 	</target>
 
 	<target name="test-tck">
-		<antcall target="prepare-portal-ext-properties" />
-
-		<echo file="portal-impl/src/portal-ext.properties" append="true">
-
-tck.url=true</echo>
-
-		<exec executable="cmd.exe">
-			<arg line="/c svn revert portal-web/docroot/WEB-INF/web.xml" />
-		</exec>
-
-		<antcall target="clean" />
-		<antcall target="start" />
-
-		<ant antfile="build-dist.xml" target="build-dist-tomcat-6.0" />
-
-		<delete dir="tools/tck" />
-
-		<unzip src="tools/portlet-tck070508.zip" dest="tools/tck" />
-
-		<replace file="tools/tck/bin/ts.jte">
-			<replacefilter token="http://localhost:8080/pluto/tck" value="http://localhost:8080/c/portal/tck" />
-		</replace>
-
-		<echo file="tools/tck/bin/build.properties" append="true">
-
-work.dir=${basedir.unix}/tools/tck/work</echo>
-
-		<property name="liferay.home" value="${app.server.dir}/.." />
-
-		<delete dir="${liferay.home}/data" />
-		<delete dir="${liferay.home}/deploy" />
-
-		<copy todir="${liferay.home}/deploy" flatten="true">
-			<fileset
-				dir="tools/tck"
-				includes="**/*.war"
-			/>
-		</copy>
-
-		<antcall target="rebuild-database" inheritAll="false" />
+		<antcall target="prepare-tck" />
 
 		<parallel>
 			<exec dir="${app.server.tomcat.bin.dir}" executable="catalina${file.suffix.bat}" resolveexecutable="true">
