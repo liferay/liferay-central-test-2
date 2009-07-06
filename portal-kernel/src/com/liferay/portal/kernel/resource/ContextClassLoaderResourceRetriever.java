@@ -25,9 +25,8 @@ package com.liferay.portal.kernel.resource;
 import java.io.InputStream;
 
 /**
- *
- * <a href="ContextClassLoaderResourceRetriever.java.html"><b><i>View Source
- * </i></b></a>
+ * <a href="ContextClassLoaderResourceRetriever.java.html"><b><i>View Source</i>
+ * </b></a>
  *
  * @author Shuyang Zhou
  *
@@ -35,8 +34,9 @@ import java.io.InputStream;
 public class ContextClassLoaderResourceRetriever implements ResourceRetriever {
 
 	public ContextClassLoaderResourceRetriever(String fileName) {
-		ClassLoader contextClassLoader =
-			Thread.currentThread().getContextClassLoader();
+		Thread currentThread = Thread.currentThread();
+
+		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
 
 		_inputStream = contextClassLoader.getResourceAsStream(fileName);
 	}
