@@ -471,7 +471,7 @@
 					'long',
 					'[Ljava.lang.String;',
 					'com.liferay.portal.service.ServiceContext'
-				].join(',');
+				];
 
 				Liferay.Service.Asset.AssetCategory.addCategory(
 					{
@@ -486,7 +486,7 @@
 								scopeGroupId: themeDisplay.getScopeGroupId()
 							}
 						),
-						serviceParameterTypes: serviceParameterTypes
+						serviceParameterTypes: jQuery.toJSON(serviceParameterTypes)
 					},
 					function(message) {
 						var exception = message.exception;

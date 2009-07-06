@@ -156,7 +156,7 @@
 					'java.lang.String',
 					'[Ljava.lang.String;',
 					'com.liferay.portal.service.ServiceContext'
-				].join(',');
+				];
 
 				Liferay.Service.Asset.AssetTag.addTag(
 					{
@@ -169,7 +169,7 @@
 								scopeGroupId: themeDisplay.getScopeGroupId()
 							}
 						),
-						serviceParameterTypes: serviceParameterTypes
+						serviceParameterTypes: jQuery.toJSON(serviceParameterTypes)
 					},
 					function(message) {
 						var exception = message.exception;

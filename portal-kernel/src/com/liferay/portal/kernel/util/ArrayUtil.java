@@ -22,6 +22,8 @@
 
 package com.liferay.portal.kernel.util;
 
+import com.liferay.portal.kernel.json.JSONArray;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -860,6 +862,16 @@ public class ArrayUtil {
 
 		for (int i = 0; i < array.length; i++) {
 			newArray[i] = String.valueOf(array[i]);
+		}
+
+		return newArray;
+	}
+
+	public static String[] toStringArray(JSONArray array) {
+		String[] newArray = new String[array.length()];
+
+		for (int i = 0; i < array.length(); i++) {
+			newArray[i] = array.getString(i);
 		}
 
 		return newArray;

@@ -83,19 +83,15 @@ Liferay.Service = {
 	},
 
 	getParameters: function(options) {
-		var serviceParameters = '';
+		var serviceParameters = [];
 
 		for (var key in options) {
 			if ((key != 'serviceClassName') && (key != 'serviceMethodName') && (key != 'serviceParameterTypes')) {
-				serviceParameters += key + ',';
+				serviceParameters.push(key);
 			}
 		}
 
-		if (Liferay.Util.endsWith(serviceParameters, ',')) {
-			serviceParameters = serviceParameters.substring(0, serviceParameters.length - 1);
-		}
-
-		return serviceParameters;
+		return jQuery.toJSON(serviceParameters);
 	},
 
 	namespace: function(namespace) {

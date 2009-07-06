@@ -23,10 +23,12 @@
 package com.liferay.portal.action;
 
 import com.liferay.portal.kernel.json.JSONArray;
+import com.liferay.portal.kernel.json.JSONException;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.MethodInvoker;
 import com.liferay.portal.kernel.util.MethodWrapper;
@@ -116,10 +118,10 @@ public class JSONServiceAction extends JSONAction {
 
 		String className = ParamUtil.getString(request, "serviceClassName");
 		String methodName = ParamUtil.getString(request, "serviceMethodName");
-		String[] serviceParameters = StringUtil.split(
-			ParamUtil.getString(request, "serviceParameters"));
-		String[] serviceParameterTypes = StringUtil.split(
-			ParamUtil.getString(request, "serviceParameterTypes"));
+		String[] serviceParameters = getStringArrayFromJSON(
+			request, "serviceParameters");
+		String[] serviceParameterTypes = getStringArrayFromJSON(
+			request, "serviceParameterTypes");
 
 		if (!isValidRequest(request)) {
 			return null;
@@ -663,6 +665,17 @@ public class JSONServiceAction extends JSONAction {
 			new String[] {".service.http.", "JSONSerializer"});
 
 		return serlializerClassName;
+	}
+
+	protected String[] getStringArrayFromJSON(
+			HttpServletRequest request, String param)
+		throws JSONException {
+
+		String json = ParamUtil.getString(request, param, "[]");
+
+		JSONArray array = JSONFactoryUtil.createJSONArray(json);
+
+		return ArrayUtil.toStringArray(array);
 	}
 
 	protected boolean isValidRequest(HttpServletRequest request) {
