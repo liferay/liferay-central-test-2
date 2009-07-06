@@ -35,7 +35,7 @@ public class Member_BlogsRolesTest extends BaseTestCase {
 	public void testMember_BlogsRoles() throws Exception {
 		selenium.click(RuntimeVariables.replace("link=Define Permissions"));
 		selenium.waitForPageToLoad("30000");
-		selenium.select("add-content-permission", "label=Blogs");
+		selenium.select("add-permissions", "label=Blogs");
 		selenium.waitForPageToLoad("30000");
 		selenium.uncheck("_128_rowIds");
 		selenium.check(

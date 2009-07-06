@@ -35,7 +35,7 @@ public class CA_DocumentLibraryRolesTest extends BaseTestCase {
 	public void testCA_DocumentLibraryRoles() throws Exception {
 		selenium.click(RuntimeVariables.replace("link=Define Permissions"));
 		selenium.waitForPageToLoad("30000");
-		selenium.select("add-content-permission", "label=Document Library");
+		selenium.select("add-permissions", "label=Document Library");
 		selenium.waitForPageToLoad("30000");
 		selenium.check("_128_rowIds");
 		selenium.check(
