@@ -546,25 +546,18 @@ public class EditPagesAction extends PortletAction {
 
 				Layout layoutPrototypeLayout = layoutPrototype.getLayout();
 
-				Layout parentLayout = LayoutLocalServiceUtil.getLayout(
-					groupId, privateLayout, parentLayoutId);
-
 				Layout layout = LayoutServiceUtil.addLayout(
 					groupId, privateLayout, parentLayoutId, localeNamesMap,
-					localeTitlesMap, description, parentLayout.getType(),
-					parentLayout.isHidden(), friendlyURL);
+					localeTitlesMap, description, LayoutConstants.TYPE_PORTLET,
+					false, friendlyURL);
 
 				LayoutServiceUtil.updateLayout(
 					layout.getGroupId(), layout.isPrivateLayout(),
 					layout.getLayoutId(),
 					layoutPrototypeLayout.getTypeSettings());
 
-				if (parentLayout.getType().equals(
-						LayoutConstants.TYPE_PORTLET)) {
-
-					copyPreferences(
-						actionRequest, layout, layoutPrototypeLayout);
-				}
+				copyPreferences(
+					actionRequest, layout, layoutPrototypeLayout);
 			}
 			else {
 				LayoutServiceUtil.addLayout(
