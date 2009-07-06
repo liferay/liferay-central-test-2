@@ -583,10 +583,10 @@
 		<filter-name>ETag Filter</filter-name>
 		<url-pattern>*.gif</url-pattern>
 	</filter-mapping>
-	<filter-mapping>
+	<!--<filter-mapping>
 		<filter-name>ETag Filter</filter-name>
 		<url-pattern>*.html</url-pattern>
-	</filter-mapping>
+	</filter-mapping>-->
 	<filter-mapping>
 		<filter-name>ETag Filter</filter-name>
 		<url-pattern>*.ico</url-pattern>
