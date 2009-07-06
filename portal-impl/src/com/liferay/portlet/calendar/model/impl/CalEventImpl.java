@@ -22,12 +22,10 @@
 
 package com.liferay.portlet.calendar.model.impl;
 
-import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.cal.TZSRecurrence;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.calendar.model.CalEvent;
@@ -70,14 +68,6 @@ public class CalEventImpl extends CalEventModelImpl implements CalEvent {
 	public CalEventImpl() {
 	}
 
-	public String getUserUuid() throws SystemException {
-		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
-	}
-
-	public void setUserUuid(String userUuid) {
-		_userUuid = userUuid;
-	}
-
 	public void setRecurrence(String recurrence) {
 		_recurrenceObj = null;
 
@@ -103,7 +93,6 @@ public class CalEventImpl extends CalEventModelImpl implements CalEvent {
 		super.setRecurrence(JSONFactoryUtil.serialize(recurrenceObj));
 	}
 
-	private String _userUuid;
 	private TZSRecurrence _recurrenceObj = null;
 
 }

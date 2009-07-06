@@ -29,7 +29,6 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.model.CompanyConstants;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBMessage;
@@ -49,14 +48,6 @@ public class MBMessageImpl extends MBMessageModelImpl implements MBMessage {
 	public static final long DEFAULT_PARENT_MESSAGE_ID = 0;
 
 	public MBMessageImpl() {
-	}
-
-	public String getUserUuid() throws SystemException {
-		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
-	}
-
-	public void setUserUuid(String userUuid) {
-		_userUuid = userUuid;
 	}
 
 	public MBCategory getCategory() {
@@ -157,7 +148,6 @@ public class MBMessageImpl extends MBMessageModelImpl implements MBMessage {
 
 	private static Log _log = LogFactoryUtil.getLog(MBMessageImpl.class);
 
-	private String _userUuid;
 	private String _attachmentDirs;
 
 }

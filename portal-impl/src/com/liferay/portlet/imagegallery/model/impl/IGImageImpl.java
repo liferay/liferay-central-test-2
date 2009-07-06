@@ -22,14 +22,12 @@
 
 package com.liferay.portlet.imagegallery.model.impl;
 
-import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.service.ImageLocalServiceUtil;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.imagegallery.model.IGFolder;
 import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.imagegallery.service.IGFolderLocalServiceUtil;
@@ -51,14 +49,6 @@ public class IGImageImpl extends IGImageModelImpl implements IGImage {
 	}
 
 	public IGImageImpl() {
-	}
-
-	public String getUserUuid() throws SystemException {
-		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
-	}
-
-	public void setUserUuid(String userUuid) {
-		_userUuid = userUuid;
 	}
 
 	public IGFolder getFolder() {
@@ -130,7 +120,6 @@ public class IGImageImpl extends IGImageModelImpl implements IGImage {
 
 	private static Log _log = LogFactoryUtil.getLog(IGImageImpl.class);
 
-	private String _userUuid;
 	private String _imageType;
 	private Integer _imageSize;
 

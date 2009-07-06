@@ -22,8 +22,6 @@
 
 package com.liferay.portlet.bookmarks.model.impl;
 
-import com.liferay.portal.SystemException;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
 
 /**
@@ -40,14 +38,6 @@ public class BookmarksFolderImpl
 	public BookmarksFolderImpl() {
 	}
 
-	public String getUserUuid() throws SystemException {
-		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
-	}
-
-	public void setUserUuid(String userUuid) {
-		_userUuid = userUuid;
-	}
-
 	public boolean isRoot() {
 		if (getParentFolderId() == DEFAULT_PARENT_FOLDER_ID) {
 			return true;
@@ -56,7 +46,5 @@ public class BookmarksFolderImpl
 			return false;
 		}
 	}
-
-	private String _userUuid;
 
 }

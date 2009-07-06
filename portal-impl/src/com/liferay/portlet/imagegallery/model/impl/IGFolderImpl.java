@@ -22,8 +22,6 @@
 
 package com.liferay.portlet.imagegallery.model.impl;
 
-import com.liferay.portal.SystemException;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.imagegallery.model.IGFolder;
 
 /**
@@ -39,14 +37,6 @@ public class IGFolderImpl extends IGFolderModelImpl implements IGFolder {
 	public IGFolderImpl() {
 	}
 
-	public String getUserUuid() throws SystemException {
-		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
-	}
-
-	public void setUserUuid(String userUuid) {
-		_userUuid = userUuid;
-	}
-
 	public boolean isRoot() {
 		if (getParentFolderId() == DEFAULT_PARENT_FOLDER_ID) {
 			return true;
@@ -55,7 +45,5 @@ public class IGFolderImpl extends IGFolderModelImpl implements IGFolder {
 			return false;
 		}
 	}
-
-	private String _userUuid;
 
 }

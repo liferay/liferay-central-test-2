@@ -22,10 +22,8 @@
 
 package com.liferay.portlet.bookmarks.model.impl;
 
-import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
 import com.liferay.portlet.bookmarks.service.BookmarksFolderLocalServiceUtil;
@@ -40,14 +38,6 @@ public class BookmarksEntryImpl
 	extends BookmarksEntryModelImpl implements BookmarksEntry {
 
 	public BookmarksEntryImpl() {
-	}
-
-	public String getUserUuid() throws SystemException {
-		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
-	}
-
-	public void setUserUuid(String userUuid) {
-		_userUuid = userUuid;
 	}
 
 	public BookmarksFolder getFolder() {
@@ -66,7 +56,5 @@ public class BookmarksEntryImpl
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(BookmarksEntryImpl.class);
-
-	private String _userUuid;
 
 }

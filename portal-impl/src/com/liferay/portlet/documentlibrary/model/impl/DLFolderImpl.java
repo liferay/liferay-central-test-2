@@ -26,7 +26,6 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
@@ -40,14 +39,6 @@ import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
 public class DLFolderImpl extends DLFolderModelImpl implements DLFolder {
 
 	public DLFolderImpl() {
-	}
-
-	public String getUserUuid() throws SystemException {
-		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
-	}
-
-	public void setUserUuid(String userUuid) {
-		_userUuid = userUuid;
 	}
 
 	public boolean isRoot() {
@@ -91,7 +82,5 @@ public class DLFolderImpl extends DLFolderModelImpl implements DLFolder {
 
 		return StringUtil.split(path, StringPool.SLASH);
 	}
-
-	private String _userUuid;
 
 }

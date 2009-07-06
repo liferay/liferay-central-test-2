@@ -25,7 +25,6 @@ package com.liferay.portlet.messageboards.model.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.CompanyConstants;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.service.MBCategoryLocalServiceUtil;
 
@@ -89,14 +88,6 @@ public class MBCategoryImpl extends MBCategoryModelImpl implements MBCategory {
 		return ancestors;
 	}
 
-	public String getUserUuid() throws SystemException {
-		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
-	}
-
-	public void setUserUuid(String userUuid) {
-		_userUuid = userUuid;
-	}
-
 	public boolean isRoot() {
 		if (getParentCategoryId() == DEFAULT_PARENT_CATEGORY_ID) {
 			return true;
@@ -114,7 +105,5 @@ public class MBCategoryImpl extends MBCategoryModelImpl implements MBCategory {
 			return false;
 		}
 	}
-
-	private String _userUuid;
 
 }

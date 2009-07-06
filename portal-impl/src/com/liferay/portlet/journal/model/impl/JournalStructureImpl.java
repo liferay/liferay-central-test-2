@@ -22,12 +22,10 @@
 
 package com.liferay.portlet.journal.model.impl;
 
-import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.journal.model.JournalStructure;
 import com.liferay.portlet.journal.service.JournalStructureLocalServiceUtil;
 
@@ -113,14 +111,6 @@ public class JournalStructureImpl
 		}
 	}
 
-	public String getUserUuid() throws SystemException {
-		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
-	}
-
-	public void setUserUuid(String userUuid) {
-		_userUuid = userUuid;
-	}
-
 	public String getMergedXsd() {
 		String parentStructureId = getParentStructureId();
 
@@ -155,7 +145,5 @@ public class JournalStructureImpl
 
 		return xsd;
 	}
-
-	private String _userUuid;
 
 }

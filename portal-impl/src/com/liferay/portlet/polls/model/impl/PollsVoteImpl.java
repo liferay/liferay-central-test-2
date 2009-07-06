@@ -24,7 +24,6 @@ package com.liferay.portlet.polls.model.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.polls.model.PollsChoice;
 import com.liferay.portlet.polls.model.PollsVote;
 import com.liferay.portlet.polls.service.PollsChoiceLocalServiceUtil;
@@ -40,18 +39,8 @@ public class PollsVoteImpl extends PollsVoteModelImpl implements PollsVote {
 	public PollsVoteImpl() {
 	}
 
-	public String getUserUuid() throws SystemException {
-		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
-	}
-
-	public void setUserUuid(String userUuid) {
-		_userUuid = userUuid;
-	}
-
 	public PollsChoice getChoice() throws PortalException, SystemException {
 		return PollsChoiceLocalServiceUtil.getChoice(getChoiceId());
 	}
-
-	private String _userUuid;
 
 }

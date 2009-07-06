@@ -30,7 +30,6 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.CompanyConstants;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.expando.model.ExpandoBridge;
@@ -184,22 +183,13 @@ public class WikiPageImpl extends WikiPageModelImpl implements WikiPage {
 		return page;
 	}
 
-	public String getUserUuid() throws SystemException {
-		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
-	}
-
 	public void setAttachmentsDir(String attachmentsDir) {
 		_attachmentDirs = attachmentsDir;
-	}
-
-	public void setUserUuid(String userUuid) {
-		_userUuid = userUuid;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(WikiPageImpl.class);
 
 	private String _attachmentDirs;
 	private ExpandoBridge _expandoBridge;
-	private String _userUuid;
 
 }

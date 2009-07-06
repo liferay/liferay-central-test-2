@@ -121,10 +121,6 @@ public class JournalArticleImpl
 		return _smallImageType;
 	}
 
-	public String getUserUuid() throws SystemException {
-		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
-	}
-
 	public boolean isTemplateDriven() {
 		if (Validator.isNull(getStructureId())) {
 			return false;
@@ -142,13 +138,8 @@ public class JournalArticleImpl
 		_smallImageType = smallImageType;
 	}
 
-	public void setUserUuid(String userUuid) {
-		_userUuid = userUuid;
-	}
-
 	private String _approvedByUserUuid;
 	private ExpandoBridge _expandoBridge;
 	private String _smallImageType;
-	private String _userUuid;
 
 }

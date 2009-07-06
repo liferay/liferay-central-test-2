@@ -22,8 +22,6 @@
 
 package com.liferay.portlet.wiki.model.impl;
 
-import com.liferay.portal.SystemException;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.wiki.model.WikiNode;
 
 /**
@@ -36,15 +34,5 @@ public class WikiNodeImpl extends WikiNodeModelImpl implements WikiNode {
 
 	public WikiNodeImpl() {
 	}
-
-	public String getUserUuid() throws SystemException {
-		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
-	}
-
-	public void setUserUuid(String userUuid) {
-		_userUuid = userUuid;
-	}
-
-	private String _userUuid;
 
 }

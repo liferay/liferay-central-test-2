@@ -22,10 +22,8 @@
 
 package com.liferay.portlet.documentlibrary.model.impl;
 
-import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
@@ -40,14 +38,6 @@ public class DLFileShortcutImpl
 	extends DLFileShortcutModelImpl implements DLFileShortcut {
 
 	public DLFileShortcutImpl() {
-	}
-
-	public String getUserUuid() throws SystemException {
-		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
-	}
-
-	public void setUserUuid(String userUuid) {
-		_userUuid = userUuid;
 	}
 
 	public DLFolder getFolder() {
@@ -66,7 +56,5 @@ public class DLFileShortcutImpl
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(DLFileShortcutImpl.class);
-
-	private String _userUuid;
 
 }
