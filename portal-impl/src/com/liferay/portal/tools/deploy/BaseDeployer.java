@@ -366,6 +366,9 @@ public class BaseDeployer {
 		else if (appServerType.equals(ServerDetector.WEBLOGIC_ID)) {
 			copyDependencyXml("weblogic.xml", srcFile + "/WEB-INF");
 		}
+		else if (appServerType.equals(ServerDetector.WEBSPHERE_ID)) {
+			copyDependencyXml("ibm-web-ext.xmi", srcFile + "/WEB-INF");
+		}
 
 		copyDependencyXml("web.xml", srcFile + "/WEB-INF");
 	}
