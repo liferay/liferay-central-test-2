@@ -53,6 +53,6 @@ public class Member_AssertCannotAddFoldersTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"link=Document Library Permissions Test Page"));
 		selenium.waitForPageToLoad("30000");
-		assertFalse(selenium.isElementPresent("//input[@value='Add Folder']"));
+		assertFalse(selenium.isElementPresent("//input[@value='Add Subfolder']"));
 	}
 }

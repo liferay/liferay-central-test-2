@@ -53,7 +53,7 @@ public class CA_EditPermissionsTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"link=Document Library Permissions Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//td[4]/ul/li/strong/span");
+		selenium.click("//td[4]/ul/li/strong");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -73,7 +73,7 @@ public class CA_EditPermissionsTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("//div[5]/ul/li[2]/a"));
 		selenium.waitForPageToLoad("30000");
-		selenium.check("15_ACTION_VIEW");
+		selenium.uncheck("15_ACTION_VIEW");
 		selenium.click(RuntimeVariables.replace("//input[@value='Submit']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
@@ -104,7 +104,7 @@ public class CA_EditPermissionsTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Permissions"));
 		selenium.waitForPageToLoad("30000");
-		selenium.check("15_ACTION_VIEW");
+		selenium.uncheck("15_ACTION_VIEW");
 		selenium.click(RuntimeVariables.replace("//input[@value='Submit']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
@@ -117,6 +117,99 @@ public class CA_EditPermissionsTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace(
 				"link=Permissions Test Subfolder"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click("//strong/span");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Permissions")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace("link=Permissions"));
+		selenium.waitForPageToLoad("30000");
+		selenium.uncheck("15_ACTION_VIEW");
+		selenium.click(RuntimeVariables.replace("//input[@value='Submit']"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
+		selenium.click(RuntimeVariables.replace(
+				"link=Document Library Permissions Test Page"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click("//tr[4]/td[4]/ul/li/strong/span");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//div[5]/ul/li[2]/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace("//div[5]/ul/li[2]/a"));
+		selenium.waitForPageToLoad("30000");
+		selenium.check("15_ACTION_VIEW");
+		selenium.click(RuntimeVariables.replace("//input[@value='Submit']"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
+		selenium.click(RuntimeVariables.replace(
+				"link=Document Library Permissions Test Page"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace(
+				"link=Permissions2 Test2 Folder2"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click("//strong/span");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Permissions")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace("link=Permissions"));
+		selenium.waitForPageToLoad("30000");
+		selenium.check("15_ACTION_VIEW");
+		selenium.click(RuntimeVariables.replace("//input[@value='Submit']"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
+		selenium.click(RuntimeVariables.replace(
+				"link=Document Library Permissions Test Page"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace(
+				"link=Permissions2 Test2 Folder2"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace(
+				"link=Permissions2 Test2 Subfolder2"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click("//strong/span");
 

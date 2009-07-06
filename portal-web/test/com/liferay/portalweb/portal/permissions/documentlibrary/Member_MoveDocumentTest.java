@@ -98,6 +98,8 @@ public class Member_MoveDocumentTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Folders"));
 		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("link=Document Home"));
+		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace(
 				"link=Permissions2 Test2 Folder2"));
 		selenium.waitForPageToLoad("30000");

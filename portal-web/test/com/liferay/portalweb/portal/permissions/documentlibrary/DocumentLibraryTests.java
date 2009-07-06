@@ -56,7 +56,6 @@ public class DocumentLibraryTests extends BaseTests {
 		testSuite.addTestSuite(CA_EditConfigurationTest.class);
 		testSuite.addTestSuite(CA_SearchPortletTest.class);
 		testSuite.addTestSuite(CA_AssertRemovePortletTest.class);
-		testSuite.addTestSuite(CA_EditPermissionsTest.class);
 		testSuite.addTestSuite(CA_LogoutTest.class);
 		testSuite.addTestSuite(Member_LoginTest.class);
 		testSuite.addTestSuite(Member_AssertViewFoldersTest.class);
@@ -83,6 +82,9 @@ public class DocumentLibraryTests extends BaseTests {
 		testSuite.addTestSuite(Member_AssertCannotEditConfigurationTest.class);
 		testSuite.addTestSuite(Member_AssertCannotRemovePortletTest.class);
 		testSuite.addTestSuite(Member_LogoutTest.class);
+		testSuite.addTestSuite(CA_LoginTest.class);
+		testSuite.addTestSuite(CA_EditPermissionsTest.class);
+		testSuite.addTestSuite(CA_LogoutTest.class);
 		testSuite.addTestSuite(Guest_AssertNotSignedInTest.class);
 		testSuite.addTestSuite(Guest_AssertViewFoldersTest.class);
 		testSuite.addTestSuite(Guest_AssertViewDocumentsTest.class);
