@@ -41,7 +41,7 @@ birthday.set(Calendar.YEAR, 1970);
 boolean male = BeanParamUtil.getBoolean(contact2, request, "male", true);
 %>
 
-<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="saveLastPath" value="0" /><portlet:param name="struts_action" value="/login/create_account" /></portlet:actionURL>" class="exp-form" method="post" name="<portlet:namespace />fm">
+<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="saveLastPath" value="0" /><portlet:param name="struts_action" value="/login/create_account" /></portlet:actionURL>" class="aui-form" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.ADD %>" />
 <input name="<portlet:namespace />openId" type="hidden" value="<%= HtmlUtil.escapeAttribute(openId) %>" />
 
@@ -88,49 +88,49 @@ boolean male = BeanParamUtil.getBoolean(contact2, request, "male", true);
 	</span>
 </c:if>
 
-<fieldset class="exp-block-labels exp-form-column">
-	<div class="exp-ctrl-holder">
+<fieldset class="aui-block-labels aui-form-column">
+	<div class="aui-ctrl-holder">
 		<label for="<portlet:namespace />firstName"><liferay-ui:message key="first-name" /></label>
 
 		<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= contact2 %>" field="firstName" />
 	</div>
 
-	<div class="exp-ctrl-holder">
+	<div class="aui-ctrl-holder">
 		<label for="<portlet:namespace />middleName"><liferay-ui:message key="middle-name" /></label>
 
 		<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= contact2 %>" field="middleName" />
 	</div>
 
-	<div class="exp-ctrl-holder">
+	<div class="aui-ctrl-holder">
 		<label for="<portlet:namespace />lastName"><liferay-ui:message key="last-name" /></label>
 
 		<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= contact2 %>" field="lastName" />
 	</div>
 
 	<c:if test="<%= !PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.USERS_SCREEN_NAME_ALWAYS_AUTOGENERATE) %>">
-		<div class="exp-ctrl-holder">
+		<div class="aui-ctrl-holder">
 			<label for=""><liferay-ui:message key="screen-name" /></label>
 
 			<liferay-ui:input-field model="<%= User.class %>" bean="<%= user2 %>" field="screenName" />
 		</div>
 	</c:if>
 
-	<div class="exp-ctrl-holder">
+	<div class="aui-ctrl-holder">
 		<label for=""><liferay-ui:message key="email-address" /></label>
 
 		<liferay-ui:input-field model="<%= User.class %>" bean="<%= user2 %>" field="emailAddress" />
 	</div>
 </fieldset>
 
-<fieldset class="exp-block-labels exp-form-column">
+<fieldset class="aui-block-labels aui-form-column">
 	<c:if test="<%= PropsValues.LOGIN_CREATE_ACCOUNT_ALLOW_CUSTOM_PASSWORD %>">
-		<div class="exp-ctrl-holder">
+		<div class="aui-ctrl-holder">
 			<label for=""><liferay-ui:message key="password" /></label>
 
 			<input name="<portlet:namespace />password1" size="30" type="password" value="" />
 		</div>
 
-		<div class="exp-ctrl-holder">
+		<div class="aui-ctrl-holder">
 			<label for=""><liferay-ui:message key="enter-again" /></label>
 
 			<input name="<portlet:namespace />password2" size="30" type="password" value="" />
@@ -139,7 +139,7 @@ boolean male = BeanParamUtil.getBoolean(contact2, request, "male", true);
 
 	<c:choose>
 		<c:when test="<%= PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_CONTACT_BIRTHDAY) %>">
-			<div class="exp-ctrl-holder">
+			<div class="aui-ctrl-holder">
 				<label for=""><liferay-ui:message key="birthday" /></label>
 
 				<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= contact2 %>" field="birthday" defaultValue="<%= birthday %>" />
@@ -153,7 +153,7 @@ boolean male = BeanParamUtil.getBoolean(contact2, request, "male", true);
 	</c:choose>
 
 	<c:if test="<%= PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_CONTACT_MALE) %>">
-		<div class="exp-ctrl-holder">
+		<div class="aui-ctrl-holder">
 			<label for="<portlet:namespace />male"><liferay-ui:message key="gender" /></label>
 
 			<select name="<portlet:namespace />male">
@@ -172,7 +172,7 @@ boolean male = BeanParamUtil.getBoolean(contact2, request, "male", true);
 	</c:if>
 </fieldset>
 
-<div class="exp-button-holder">
+<div class="aui-button-holder">
 	<input type="submit" value="<liferay-ui:message key="save" />" />
 </div>
 

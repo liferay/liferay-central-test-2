@@ -69,7 +69,7 @@ if (dateFormatPattern.indexOf("y") == 0) {
 
 <script type="text/javascript">
 	if (!Liferay.DatePicker) {
-		Liferay.DatePicker = Expanse.DatePicker.extend(
+		Liferay.DatePicker = Alloy.DatePicker.extend(
 			{
 				initialize: function(options) {
 					var instance = this;
@@ -83,7 +83,7 @@ if (dateFormatPattern.indexOf("y") == 0) {
 					instance._yearRange = options.yearRange.join(':');
 					instance._firstDay = options.firstDay;
 
-					var button = jQuery('<img alt="<liferay-ui:message key="display-a-datapicker" />" class="exp-datepicker-button" src="<%= themeDisplay.getPathThemeImages() %>/common/calendar.png" />');
+					var button = jQuery('<img alt="<liferay-ui:message key="display-a-datapicker" />" class="aui-datepicker-button" src="<%= themeDisplay.getPathThemeImages() %>/common/calendar.png" />');
 
 					instance._input.after(button);
 

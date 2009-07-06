@@ -75,21 +75,21 @@ boolean passwordReset = BeanParamUtil.getBoolean(selUser, request, "passwordRese
 	</c:if>
 </liferay-ui:error>
 
-<fieldset class="exp-block-labels">
-	<div class="exp-ctrl-holder">
+<fieldset class="aui-block-labels">
+	<div class="aui-ctrl-holder">
 		<label for="<portlet:namespace />password1"><liferay-ui:message key="password" /></label>
 
 		<input name="<portlet:namespace />password1" size="30" type="password" value="" />
 	</div>
 
-	<div class="exp-ctrl-holder">
+	<div class="aui-ctrl-holder">
 		<label for="<portlet:namespace />password2"><liferay-ui:message key="enter-again" /></label>
 
 		<input name="<portlet:namespace />password2" size="30" type="password" value="" />
 	</div>
 
 	<c:if test="<%= (selUser != null) && (user.getUserId() != selUser.getUserId()) %>">
-		<div class="exp-ctrl-holder">
+		<div class="aui-ctrl-holder">
 			<liferay-ui:input-checkbox param="passwordReset" defaultValue="<%= passwordReset %>" />
 
 			<label class="inline-label" for="<portlet:namespace />passwordReset"><liferay-ui:message key="password-reset-required" /></label>
@@ -100,8 +100,8 @@ boolean passwordReset = BeanParamUtil.getBoolean(selUser, request, "passwordRese
 <c:if test="<%= PropsValues.USERS_REMINDER_QUERIES_ENABLED && portletName.equals(PortletKeys.MY_ACCOUNT) %>">
 	<h3><liferay-ui:message key="reminder" /></h3>
 
-	<fieldset class="exp-block-labels">
-		<div class="exp-ctrl-holder">
+	<fieldset class="aui-block-labels">
+		<div class="aui-ctrl-holder">
 			<label for="<portlet:namespace />reminderQueryQuestion"><liferay-ui:message key="question" /></label>
 
 			<select id="<portlet:namespace />reminderQueryQuestion" name="<portlet:namespace />reminderQueryQuestion">
@@ -146,7 +146,7 @@ boolean passwordReset = BeanParamUtil.getBoolean(selUser, request, "passwordRese
 			</c:if>
 		</div>
 
-		<div class="exp-ctrl-holder">
+		<div class="aui-ctrl-holder">
 			<label for="<portlet:namespace />reminderQueryAnswer"><liferay-ui:message key="answer" /></label>
 
 			<input id="<portlet:namespace />reminderQueryAnswer" name="<portlet:namespace />reminderQueryAnswer" size="50" type="text" value="<%= selUser.getReminderQueryAnswer() %>" />

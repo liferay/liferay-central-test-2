@@ -548,7 +548,7 @@ Liferay.Util = {
 					if (!clicked) {
 						var form = jQuery([]);
 
-						var popup = new Expanse.Popup(
+						var popup = new Alloy.Popup(
 							{
 								body: {
 									url: url + '&rt=' + Liferay.Util.randomInt(),
@@ -570,7 +570,7 @@ Liferay.Util = {
 								width: 680,
 								on: {
 									close: function() {
-										Expanse.getDocument().unbind('popupResize.liferay');
+										Alloy.getDocument().unbind('popupResize.liferay');
 										clicked = false;
 									},
 									resize: function(options) {
@@ -583,7 +583,7 @@ Liferay.Util = {
 
 										form.css(dimensions);
 
-										Expanse.getDocument().trigger('popupResize');
+										Alloy.getDocument().trigger('popupResize');
 									}
 								}
 							}
@@ -822,7 +822,7 @@ Liferay.Util = {
 				var pageBody;
 
 				if (resizeToInlinePopup) {
-					pageBody = el.parents('.exp-body:first');
+					pageBody = el.parents('.aui-body:first');
 				}
 				else {
 					pageBody = jQuery('body');

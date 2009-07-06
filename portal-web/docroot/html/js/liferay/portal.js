@@ -5,8 +5,8 @@ Liferay.Portal.Tabs = {
 		var tab = jQuery('#' + namespace + id + 'TabsId');
 		var panel = jQuery('#' + namespace + id + 'TabsSection');
 
-		tab.siblings().removeClass('exp-selected');
-		tab.addClass('exp-selected');
+		tab.siblings().removeClass('aui-selected');
+		tab.addClass('aui-selected');
 
 		panel.show();
 
@@ -20,7 +20,7 @@ Liferay.Portal.Tabs = {
 	}
 };
 
-Liferay.Portal.StarRating = new Expanse.Class(
+Liferay.Portal.StarRating = new Alloy.Class(
 	{
 
 		/**
@@ -115,7 +115,7 @@ Liferay.Portal.StarRating = new Expanse.Class(
 	}
 );
 
-Liferay.Portal.ThumbRating = new Expanse.Class(
+Liferay.Portal.ThumbRating = new Alloy.Class(
 	{
 
 		/**
@@ -170,8 +170,8 @@ Liferay.Portal.ThumbRating = new Expanse.Class(
 );
 
 (function() {
-	var Dom = Expanse.Dom;
-	var Event = Expanse.Event;
+	var Dom = Alloy.Dom;
+	var Event = Alloy.Event;
 
 	var elementsCache = {};
 
@@ -185,7 +185,7 @@ Liferay.Portal.ThumbRating = new Expanse.Class(
 
 			if (!elementsCache[itemId]) {
 				if (!container) {
-					container = new Expanse.Tooltip(
+					container = new Alloy.Tooltip(
 						{
 							autodismissdelay: 10000,
 							context: obj,

@@ -1,4 +1,4 @@
-Liferay.Navigation = new Expanse.Class(
+Liferay.Navigation = new Alloy.Class(
 	{
 
 		/**
@@ -32,10 +32,10 @@ Liferay.Navigation = new Expanse.Class(
 				}
 			);
 
-			instance._addEvent = new Expanse.CustomEvent('add', instance);
-			instance._stopAddEvent = new Expanse.CustomEvent('stopAdd', instance);
-			instance._editEvent = new Expanse.CustomEvent('edit', instance);
-			instance._stopEditEvent = new Expanse.CustomEvent('stopEdit', instance);
+			instance._addEvent = new Alloy.CustomEvent('add', instance);
+			instance._stopAddEvent = new Alloy.CustomEvent('stopAdd', instance);
+			instance._editEvent = new Alloy.CustomEvent('edit', instance);
+			instance._stopEditEvent = new Alloy.CustomEvent('stopEdit', instance);
 
 			instance._makeAddable();
 			instance._makeDeletable();
@@ -60,9 +60,9 @@ Liferay.Navigation = new Expanse.Class(
 			if (!editComponent) {
 				var prototypeTemplate = instance._prototypeMenuTemplate || '';
 
-				prototypeTemplate = prototypeTemplate.replace(/name=\"template\"/g, 'name="' + Expanse.generateId() + '_template"');
+				prototypeTemplate = prototypeTemplate.replace(/name=\"template\"/g, 'name="' + Alloy.generateId() + '_template"');
 
-				var editComponent = new Expanse.Overlay(
+				var editComponent = new Alloy.Overlay(
 					{
 						body: prototypeTemplate,
 						context: [addBlock[0], 'tl', 'bl', ['beforeShow', instance._addEvent, instance._stopAddEvent, instance._editEvent, instance._stopEditEvent]],
@@ -70,7 +70,7 @@ Liferay.Navigation = new Expanse.Class(
 					}
 				);
 
-				editComponent._trigger = addBlock.find('.exp-options-trigger');
+				editComponent._trigger = addBlock.find('.aui-options-trigger');
 
 				editComponent._trigger.click(
 					function(event) {
@@ -78,7 +78,7 @@ Liferay.Navigation = new Expanse.Class(
 
 						editComponent.cfg.setProperty('visible', !visible);
 
-						jQuery(this).toggleClass('exp-trigger-selected');
+						jQuery(this).toggleClass('aui-trigger-selected');
 
 						instance._optionsOpen = !visible;
 					}
@@ -86,8 +86,8 @@ Liferay.Navigation = new Expanse.Class(
 
 				editComponent.render(document.body);
 
-				Expanse.Dom.addClass(editComponent.element, 'lfr-menu-list lfr-component lfr-page-templates');
-				Expanse.Dom.setStyle(editComponent.element, 'min-width', addBlock.outerWidth() + 'px');
+				Alloy.Dom.addClass(editComponent.element, 'lfr-menu-list lfr-component lfr-page-templates');
+				Alloy.Dom.setStyle(editComponent.element, 'min-width', addBlock.outerWidth() + 'px');
 
 				addBlock.data('editComponent', editComponent);
 			}
@@ -97,7 +97,7 @@ Liferay.Navigation = new Expanse.Class(
 			}
 			else {
 				editComponent.hide();
-				editComponent._trigger.removeClass('exp-trigger-selected');
+				editComponent._trigger.removeClass('aui-trigger-selected');
 			}
 
 			var currentInput = addBlock.find('.enter-page input');
@@ -109,7 +109,7 @@ Liferay.Navigation = new Expanse.Class(
 			var cancelPage = function() {
 				instance._cancelAddingPage(addBlock);
 
-				Expanse.getDocument().unbind('click.liferay', pageBlur);
+				Alloy.getDocument().unbind('click.liferay', pageBlur);
 
 				editComponent.hide();
 			}
@@ -130,7 +130,7 @@ Liferay.Navigation = new Expanse.Class(
 					instance._savePage(event, this);
 
 					if (currentInput.val().length) {
-						Expanse.getDocument().unbind('click.liferay', pageBlur);
+						Alloy.getDocument().unbind('click.liferay', pageBlur);
 					}
 				}
 			);
@@ -226,16 +226,16 @@ Liferay.Navigation = new Expanse.Class(
 
 					var themeImages = themeDisplay.getPathThemeImages();
 
-					instance._prototypeMenuTemplate = Expanse.get('#layoutPrototypeTemplate').html();
+					instance._prototypeMenuTemplate = Alloy.get('#layoutPrototypeTemplate').html();
 
-					instance._enterPage ='<span class="exp-form-field exp-form-text exp-form-options enter-page">' +
+					instance._enterPage ='<span class="aui-form-field aui-form-text aui-form-options enter-page">' +
 						'<span><input class="lfr-auto-focus text" id="" name="" type="text" /></span>' +
-						'<span class="exp-form-triggers">' +
+						'<span class="aui-form-triggers">' +
 							(instance._prototypeMenuTemplate ?
-								'<a class="exp-form-trigger exp-options-trigger ' + (instance._optionsOpen ? 'exp-trigger-selected' : '') + '" href="javascript:;">' +
+								'<a class="aui-form-trigger aui-options-trigger ' + (instance._optionsOpen ? 'aui-trigger-selected' : '') + '" href="javascript:;">' +
 									'<img src="' + themeImages + '/spacer.png" />' +
 									'</a>' : '') +
-							'<a class="exp-form-trigger exp-save-trigger save-page" href="javascript:;">' +
+							'<a class="aui-form-trigger aui-save-trigger save-page" href="javascript:;">' +
 								'<img src="' + themeImages + '/spacer.png" />' +
 							'</a>' +
 						'</span>' +
@@ -414,7 +414,7 @@ Liferay.Navigation = new Expanse.Class(
 
 				items.addClass('sortable-item');
 
-				new Expanse.Sortable(
+				new Alloy.Sortable(
 					{
 						container: '#navigation ul',
 						items: 'li',

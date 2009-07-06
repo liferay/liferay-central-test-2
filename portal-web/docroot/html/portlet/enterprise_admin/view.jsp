@@ -209,7 +209,7 @@ request.setAttribute("view.jsp-portletURLString", portletURLString);
 	}
 </script>
 
-<form class="exp-form" action="<%= portletURLString %>" method="get" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
+<form class="aui-form" action="<%= portletURLString %>" method="get" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
 <liferay-portlet:renderURLParams varImpl="portletURL" />
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
 <input name="<portlet:namespace />tabs1" type="hidden" value="<%= HtmlUtil.escapeAttribute(tabs1) %>" />

@@ -24,7 +24,7 @@
 
 <%@ include file="/html/portal/init.jsp" %>
 
-<form action="<%= themeDisplay.getPathMain() %>/portal/update_reminder_query" class="exp-form" method="post" name="fm" onSubmit="submitForm(document.fm); return false;">
+<form action="<%= themeDisplay.getPathMain() %>/portal/update_reminder_query" class="aui-form" method="post" name="fm" onSubmit="submitForm(document.fm); return false;">
 <input name="doAsUserId" type="hidden" value="<%= HtmlUtil.escapeAttribute(themeDisplay.getDoAsUserId()) %>" />
 <input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
 <input name="<%= WebKeys.REFERER %>" type="hidden" value="<%= themeDisplay.getPathMain() %>?doAsUserId=<%= HtmlUtil.escapeAttribute(themeDisplay.getDoAsUserId()) %>" />
@@ -39,10 +39,10 @@
 	</span>
 </c:if>
 
-<fieldset class="exp-block-labels">
+<fieldset class="aui-block-labels">
 	<legend><liferay-ui:message key="password-reminder" /></legend>
 
-	<div class="exp-ctrl-holder">
+	<div class="aui-ctrl-holder">
 		<label for="reminderQueryQuestion"><liferay-ui:message key="question" /></label>
 
 		<select id="reminderQueryQuestion" name="reminderQueryQuestion">
@@ -69,7 +69,7 @@
 		</c:if>
 	</div>
 
-	<div class="exp-ctrl-holder">
+	<div class="aui-ctrl-holder">
 		<label for="reminderQueryAnswer"><liferay-ui:message key="answer" /></label>
 
 		<input id="reminderQueryAnswer" name="reminderQueryAnswer" size="50" type="text" value="<%= HtmlUtil.escapeAttribute(user.getReminderQueryAnswer()) %>" />

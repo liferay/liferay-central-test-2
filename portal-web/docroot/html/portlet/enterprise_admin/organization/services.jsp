@@ -111,7 +111,7 @@ DateFormat timeFormat = new SimpleDateFormat("HH:mm", locale);
 
 <liferay-ui:error key="<%= NoSuchListTypeException.class.getName() + Organization.class.getName() + ListTypeImpl.ORGANIZATION_SERVICE %>" message="please-select-a-type" />
 
-<fieldset class="exp-block-labels">
+<fieldset class="aui-block-labels">
 
 	<%
 	Calendar cal = CalendarFactoryUtil.getCalendar();
@@ -150,7 +150,7 @@ DateFormat timeFormat = new SimpleDateFormat("HH:mm", locale);
 				fieldParam = "orgLaborTypeId" + orgLaborsIndex;
 				%>
 
-				<div class="exp-ctrl-holder">
+				<div class="aui-ctrl-holder">
 					<label class="inline-label" for="<portlet:namespace /><%= fieldParam %>"><liferay-ui:message key="type" /></label>
 
 					<select id="<portlet:namespace /><%= fieldParam %>" name="<portlet:namespace /><%= fieldParam %>">

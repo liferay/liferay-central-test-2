@@ -26,7 +26,7 @@
 
 <form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm">
 
-<fieldset class="exp-block-labels">
+<fieldset class="aui-block-labels">
 	<legend><liferay-ui:message key="layout-template" /></legend>
 
 	<table border="0" cellpadding="0" cellspacing="10" style="margin-top: 10px;" width="100%">
@@ -83,10 +83,10 @@ boolean portletDecorateDefault = GetterUtil.getBoolean(theme.getSetting("portlet
 boolean portletSetupShowBorders = GetterUtil.getBoolean(preferences.getValue("portlet-setup-show-borders", String.valueOf(portletDecorateDefault)));
 %>
 
-<fieldset class="exp-block-labels">
+<fieldset class="aui-block-labels">
 	<legend><liferay-ui:message key="display-settings" /></legend>
 
-	<div class="exp-ctrl-holder">
+	<div class="aui-ctrl-holder">
 		<label><liferay-ui:message key="show-borders" /> <liferay-ui:input-checkbox param="portletSetupShowBorders" defaultValue="<%= portletSetupShowBorders %>" /></label>
 	</div>
 </fieldset>

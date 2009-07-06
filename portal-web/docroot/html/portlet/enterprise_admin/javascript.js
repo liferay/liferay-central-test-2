@@ -22,7 +22,7 @@ Liferay.EnterpriseAdmin.Addresses = {
 	}
 };
 
-Liferay.EnterpriseAdmin.FormNavigator = new Expanse.Class(
+Liferay.EnterpriseAdmin.FormNavigator = new Alloy.Class(
 	{
 		initialize: function(options) {
 			var instance = this;

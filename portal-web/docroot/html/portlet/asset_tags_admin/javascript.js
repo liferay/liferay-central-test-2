@@ -1,9 +1,9 @@
 (function() {
-	var Dom = Expanse.Dom;
-	var Event = Expanse.Event;
-	var DDM = Expanse.DragDrop;
+	var Dom = Alloy.Dom;
+	var Event = Alloy.Event;
+	var DDM = Alloy.DragDrop;
 
-	var AssetTagsAdmin = new Expanse.Class(
+	var AssetTagsAdmin = new Alloy.Class(
 		{
 			initialize: function(portletId) {
 				var instance = this;
@@ -41,7 +41,7 @@
 
 				var addTagButton = jQuery('.add-tag-button');
 
-				instance._addTagOverlay = new Expanse.Overlay(
+				instance._addTagOverlay = new Alloy.Overlay(
 					addTagLayer[0],
 					{
 						context: [addTagButton[0], 'tr', 'br'],
@@ -133,7 +133,7 @@
 					}
 				);
 
-				jQuery('.exp-overlay input:text').keyup(
+				jQuery('.aui-overlay input:text').keyup(
 					function(event) {
 						var ESC_KEY_CODE = 27;
 						var keyCode = event.keyCode;
@@ -745,11 +745,11 @@
 		}
 	);
 
-	var droppableTag = Expanse.Droppable;
+	var droppableTag = Alloy.Droppable;
 
 	var scrollParent = jQuery('.tags')[0];
 
-	var draggableTag = Expanse.DragProxy.extend(
+	var draggableTag = Alloy.DragProxy.extend(
 		{
 			initialize: function() {
 				var instance = this;

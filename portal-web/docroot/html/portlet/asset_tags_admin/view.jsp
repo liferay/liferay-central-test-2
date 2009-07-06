@@ -51,12 +51,12 @@
 
 					<input type="button" value="<liferay-ui:message key="permissions" />" onClick="location.href = '<%= permissionsURL %>';" />
 				</c:if>
-				<div class="exp-overlay add-tag-layer">
-					<div class="exp-header">
+				<div class="aui-overlay add-tag-layer">
+					<div class="aui-header">
 						<span class="knob"></span>
 					</div>
 					<div class="panel-content">
-						<div class="exp-ctrl-holder">
+						<div class="aui-ctrl-holder">
 							<label class="tag-label" for="new-tag-name">
 								<liferay-ui:message key="name" />
 							</label>
@@ -70,7 +70,7 @@
 							/>
 						</div>
 
-						<div class="exp-button-holder">
+						<div class="aui-button-holder">
 							<input class="tag-save-button" type="button" value="<liferay-ui:message key="save" />" />
 
 							<input class="close-panel" type="button" value="<liferay-ui:message key="close" />" />

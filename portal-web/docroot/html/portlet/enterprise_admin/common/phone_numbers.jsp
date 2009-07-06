@@ -77,7 +77,7 @@ else {
 <liferay-ui:error key="<%= NoSuchListTypeException.class.getName() + className + ListTypeImpl.PHONE %>" message="please-select-a-type" />
 <liferay-ui:error exception="<%= PhoneNumberException.class %>" message="please-enter-a-valid-phone-number" />
 
-<fieldset class="exp-block-labels">
+<fieldset class="aui-block-labels">
 
    <%
 	for (int i = 0; i < phonesIndexes.length; i++) {
@@ -99,7 +99,7 @@ else {
 				fieldParam = "phoneNumber" + phonesIndex;
 				%>
 
-				<div class="exp-ctrl-holder">
+				<div class="aui-ctrl-holder">
 					<label for="<portlet:namespace /><%= fieldParam %>"><liferay-ui:message key="number" /></label>
 
 					<liferay-ui:input-field model="<%= Phone.class %>" bean="<%= phone %>" field="number" fieldParam="<%= fieldParam %>" />
@@ -109,7 +109,7 @@ else {
 				fieldParam = "phoneExtension" + phonesIndex;
 				%>
 
-				<div class="exp-ctrl-holder">
+				<div class="aui-ctrl-holder">
 					<label for="<portlet:namespace /><%= fieldParam %>"><liferay-ui:message key="extension" /></label>
 
 					<liferay-ui:input-field model="<%= Phone.class %>" bean="<%= phone %>" field="extension" fieldParam="<%= fieldParam %>" />
@@ -119,7 +119,7 @@ else {
 				fieldParam = "phoneTypeId" + phonesIndex;
 				%>
 
-				<div class="exp-ctrl-holder">
+				<div class="aui-ctrl-holder">
 					<label for="<portlet:namespace /><%= fieldParam %>"><liferay-ui:message key="type" /></label>
 
 					<select name="<portlet:namespace /><%= fieldParam %>">
@@ -143,7 +143,7 @@ else {
 				fieldParam = "phonePrimary" + phonesIndex;
 				%>
 
-				<div class="exp-ctrl-holder primary-ctrl">
+				<div class="aui-ctrl-holder primary-ctrl">
 					<label class="inline-label" for="<portlet:namespace /><%= fieldParam %>">
 						<liferay-ui:message key="primary" />
 

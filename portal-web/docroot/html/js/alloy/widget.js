@@ -1,9 +1,9 @@
 (function() {
-	Expanse.Widget = function(properties) {
+	Alloy.Widget = function(properties) {
 		var Class = properties;
 
-		if (!(properties instanceof Expanse.Class)) {
-			Class = new Expanse.Class(properties);
+		if (!(properties instanceof Alloy.Class)) {
+			Class = new Alloy.Class(properties);
 		}
 
 		var widgetConstructor = function(el, options) {
@@ -19,7 +19,7 @@
 		};
 
 		if (Class.prototype.initialize) {
-			widgetConstructor = Expanse.Class.createSuper(Class.prototype.initialize, widgetConstructor);
+			widgetConstructor = Alloy.Class.createSuper(Class.prototype.initialize, widgetConstructor);
 		}
 
 		Class.prototype.initialize = widgetConstructor;
@@ -45,5 +45,5 @@
 		return Class;
 	};
 
-	Expanse.Widget.prototype = new Expanse.Class({});
+	Alloy.Widget.prototype = new Alloy.Class({});
 })();

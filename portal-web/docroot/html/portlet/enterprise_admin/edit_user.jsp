@@ -192,7 +192,7 @@ String curSection = mainSections[0];
 	</liferay-util:include>
 </c:if>
 
-<form class="exp-form" method="post" name="<portlet:namespace />fm">
+<form class="aui-form" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
 <input name="<portlet:namespace />redirect" type="hidden" value="" />
 <input name="<portlet:namespace />backURL" type="hidden" value="<%= HtmlUtil.escapeAttribute(backURL) %>" />
@@ -262,14 +262,14 @@ String curSection = mainSections[0];
 
 				<%@ include file="/html/portlet/enterprise_admin/categories_navigation.jspf" %>
 
-				<div class="exp-button-holder">
+				<div class="aui-button-holder">
 					<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveUser('<%= (selUser == null) ? Constants.ADD : Constants.UPDATE %>');" />
 
 					<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(backURL) %>';" />
 				</div>
 
 				<c:if test="<%= (selUser != null) && (passwordPolicy != null) && selUser.getLockout() %>">
-					<div class="exp-button-holder">
+					<div class="aui-button-holder">
 						<div class="portlet-msg-alert"><liferay-ui:message key="this-user-account-has-been-locked-due-to-excessive-failed-login-attempts" /></div>
 
 						<input type="button" value="<liferay-ui:message key="unlock" />" onClick="<portlet:namespace />saveUser('unlock');" />

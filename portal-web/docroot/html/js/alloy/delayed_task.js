@@ -3,9 +3,9 @@
 * It's useful for buffering tasks that need to only be executed after some condition has been met.
 * 
 * Example:
-* <br /><a href="delayed_task.html">Using the Expanse.DelayedTask class</a>.
+* <br /><a href="delayed_task.html">Using the Alloy.DelayedTask class</a>.
 * 
-* @namespace Expanse
+* @namespace Alloy
 * @class DelayedTask
 * @constructor
 * @param {Function} fn The function to run
@@ -13,7 +13,7 @@
 * @param {Array} args An array of arguments that will be passed to the function
 */
 
-Expanse.DelayedTask = new Expanse.Class(
+Alloy.DelayedTask = new Alloy.Class(
 	{
 		initialize: function(fn, scope, args) {
 			var instance = this;

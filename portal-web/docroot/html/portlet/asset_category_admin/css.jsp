@@ -227,7 +227,7 @@
 	text-align: left;
 }
 
-.portlet-asset-category-admin .panel-content .exp-ctrl-holder {
+.portlet-asset-category-admin .panel-content .aui-ctrl-holder {
 	margin-bottom: 10px;
 }
 
@@ -236,15 +236,15 @@
 	font-weight: bold;
 }
 
-.portlet-asset-category-admin .panel-content .exp-ctrl-holder input, .portlet-asset-category-admin .panel-content .exp-ctrl-holder select {
+.portlet-asset-category-admin .panel-content .aui-ctrl-holder input, .portlet-asset-category-admin .panel-content .aui-ctrl-holder select {
 	min-width: 200px;
 }
 
-.ie6 .portlet-asset-category-admin .panel-content .exp-ctrl-holder, .ie6 .portlet-asset-category-admin .panel-content .exp-ctrl-holder {
+.ie6 .portlet-asset-category-admin .panel-content .aui-ctrl-holder, .ie6 .portlet-asset-category-admin .panel-content .aui-ctrl-holder {
 	width: 200px;
 }
 
-.ie6 .portlet-asset-category-admin .panel-content .exp-ctrl-holder input, .ie6 .portlet-asset-category-admin .panel-content .exp-ctrl-holder select {
+.ie6 .portlet-asset-category-admin .panel-content .aui-ctrl-holder input, .ie6 .portlet-asset-category-admin .panel-content .aui-ctrl-holder select {
 	width: 200px;
 }
 
@@ -252,17 +252,17 @@
 	margin-top: 5px;
 }
 
-.portlet-asset-category-admin .exp-overlay {
+.portlet-asset-category-admin .aui-overlay {
 	overflow: visible;
 	width: 230px;
 }
 
-.portlet-asset-category-admin .exp-overlay .exp-header {
+.portlet-asset-category-admin .aui-overlay .aui-header {
 	margin-top: 18px;
 	position: relative;
 }
 
-.portlet-asset-category-admin .exp-overlay .exp-header .knob {
+.portlet-asset-category-admin .aui-overlay .aui-header .knob {
 	background: url(<%= themeImagesPath %>/application/panel_direction_indicator.png) no-repeat scroll;
 	height: 18px;
 	right: 10px;

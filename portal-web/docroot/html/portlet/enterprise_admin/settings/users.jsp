@@ -45,26 +45,26 @@ String adminDefaultUserGroupNames = ParamUtil.getString(request, "settings(" + P
 	refresh="<%= false %>"
 >
 	<liferay-ui:section>
-		<fieldset class="exp-block-labels">
-			<div class="exp-ctrl-holder">
+		<fieldset class="aui-block-labels">
+			<div class="aui-ctrl-holder">
 				<label class="inline-label" for="<portlet:namespace />settings(<%= PropsKeys.TERMS_OF_USE_REQUIRED %>)"><liferay-ui:message key="terms-of-use-required" /></label>
 
 				<liferay-ui:input-checkbox param='<%= "settings(" + PropsKeys.TERMS_OF_USE_REQUIRED + ")" %>' defaultValue="<%= termsOfUseRequired %>" />
 			</div>
 
-			<div class="exp-ctrl-holder">
+			<div class="aui-ctrl-holder">
 				<label class="inline-label" for="<portlet:namespace />settings(<%= PropsKeys.USERS_SCREEN_NAME_ALWAYS_AUTOGENERATE %>)"><liferay-ui:message key="autogenerate-user-screen-names" /></label>
 
 				<liferay-ui:input-checkbox param='<%= "settings(" + PropsKeys.USERS_SCREEN_NAME_ALWAYS_AUTOGENERATE + ")" %>' defaultValue="<%= usersScreenNameAlwaysAutogenerate %>" />
 			</div>
 
-			<div class="exp-ctrl-holder">
+			<div class="aui-ctrl-holder">
 				<label class="inline-label" for="<portlet:namespace />settings(<%= PropsKeys.FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_CONTACT_BIRTHDAY %>)"><liferay-ui:message key="enable-birthday" /></label>
 
 				<liferay-ui:input-checkbox param='<%= "settings(" + PropsKeys.FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_CONTACT_BIRTHDAY + ")" %>' defaultValue="<%= fieldEnableBirthday %>" />
 			</div>
 
-			<div class="exp-ctrl-holder">
+			<div class="aui-ctrl-holder">
 				<label class="inline-label" for="<portlet:namespace />settings(<%= PropsKeys.FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_CONTACT_MALE %>)"><liferay-ui:message key="enable-gender" /></label>
 
 				<liferay-ui:input-checkbox param='<%= "settings(" + PropsKeys.FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_CONTACT_MALE + ")" %>' defaultValue="<%= fieldEnableMale %>" />
@@ -72,14 +72,14 @@ String adminDefaultUserGroupNames = ParamUtil.getString(request, "settings(" + P
 		</fieldset>
 	</liferay-ui:section>
 	<liferay-ui:section>
-		<fieldset class="exp-block-labels">
-			<div class="exp-ctrl-holder">
+		<fieldset class="aui-block-labels">
+			<div class="aui-ctrl-holder">
 				<label for="<portlet:namespace />settings(<%= PropsKeys.ADMIN_RESERVED_SCREEN_NAMES %>)"><liferay-ui:message key="screen-names" /> <liferay-ui:icon-help message="enter-one-screen-name-per-line-to-reserve-the-screen-name" /></label>
 
 				<textarea class="lfr-textarea" name="<portlet:namespace />settings(<%= PropsKeys.ADMIN_RESERVED_SCREEN_NAMES %>)"><%= HtmlUtil.escape(adminReservedScreenNames) %></textarea>
 			</div>
 
-			<div class="exp-ctrl-holder">
+			<div class="aui-ctrl-holder">
 				<label for="<portlet:namespace />settings(<%= PropsKeys.ADMIN_RESERVED_EMAIL_ADDRESSES %>)"><liferay-ui:message key="email-addresses" /> <liferay-ui:icon-help message="enter-one-screen-name-per-line-to-reserve-the-screen-name" /></label>
 
 				<textarea class="lfr-textarea" name="<portlet:namespace />settings(<%= PropsKeys.ADMIN_RESERVED_EMAIL_ADDRESSES %>)"><%= HtmlUtil.escape(adminReservedEmailAddresses) %></textarea>
@@ -87,20 +87,20 @@ String adminDefaultUserGroupNames = ParamUtil.getString(request, "settings(" + P
 		</fieldset>
 	</liferay-ui:section>
 	<liferay-ui:section>
-		<fieldset class="exp-block-labels">
-			<div class="exp-ctrl-holder">
+		<fieldset class="aui-block-labels">
+			<div class="aui-ctrl-holder">
 				<label for="<portlet:namespace />settings(<%= PropsKeys.ADMIN_DEFAULT_GROUP_NAMES %>)"><liferay-ui:message key="communities" /> <liferay-ui:icon-help message="enter-the-default-community-names-per-line-that-are-associated-with-newly-created-users" /></label>
 
 				<textarea class="lfr-textarea" name="<portlet:namespace />settings(<%= PropsKeys.ADMIN_DEFAULT_GROUP_NAMES %>)"><%= HtmlUtil.escape(adminDefaultGroupNames) %></textarea>
 			</div>
 
-			<div class="exp-ctrl-holder">
+			<div class="aui-ctrl-holder">
 				<label for="<portlet:namespace />settings(<%= PropsKeys.ADMIN_DEFAULT_ROLE_NAMES %>)"><liferay-ui:message key="roles" /> <liferay-ui:icon-help message="enter-the-default-role-names-per-line-that-are-associated-with-newly-created-users" /></label>
 
 				<textarea class="lfr-textarea" name="<portlet:namespace />settings(<%= PropsKeys.ADMIN_DEFAULT_ROLE_NAMES %>)"><%= HtmlUtil.escape(adminDefaultRoleNames) %></textarea>
 			</div>
 
-			<div class="exp-ctrl-holder">
+			<div class="aui-ctrl-holder">
 				<label for="<portlet:namespace />settings(<%= PropsKeys.ADMIN_DEFAULT_USER_GROUP_NAMES %>)"><liferay-ui:message key="user-groups" /> <liferay-ui:icon-help message="enter-the-default-user-group-names-per-line-that-are-associated-with-newly-created-users" /></label>
 
 				<textarea class="lfr-textarea" name="<portlet:namespace />settings(<%= PropsKeys.ADMIN_DEFAULT_USER_GROUP_NAMES %>)"><%= HtmlUtil.escape(adminDefaultUserGroupNames) %></textarea>

@@ -34,9 +34,9 @@ String name = namespace + GetterUtil.getString((String)request.getAttribute("aui
 boolean last = GetterUtil.getBoolean((String)request.getAttribute("aui:field-wrapper:last"));
 %>
 
-<div class="exp-ctrl-holder <%= cssClass %> <%= first ? "exp-first" : StringPool.BLANK %> <%= last ? "exp-last" : StringPool.BLANK %> ">
+<div class="aui-ctrl-holder <%= cssClass %> <%= first ? "aui-first" : StringPool.BLANK %> <%= last ? "aui-last" : StringPool.BLANK %> ">
 	<c:if test="<%= Validator.isNotNull(label) %>">
-		<label class="exp-form-label <%= inlineLabel ? "inline-label" : StringPool.BLANK  %>" <%= !Validator.equals(name, namespace) ? "for=\"" + name + "\"" : StringPool.BLANK %>>
+		<label class="aui-form-label <%= inlineLabel ? "inline-label" : StringPool.BLANK  %>" <%= !Validator.equals(name, namespace) ? "for=\"" + name + "\"" : StringPool.BLANK %>>
 			<liferay-ui:message key="<%= label %>" />
 
 			<c:if test="<%= Validator.isNotNull(helpMessage) %>">
@@ -48,4 +48,4 @@ boolean last = GetterUtil.getBoolean((String)request.getAttribute("aui:field-wra
 			</c:if>
 	</c:if>
 
-	<span class="exp-form-field">
+	<span class="aui-form-field">

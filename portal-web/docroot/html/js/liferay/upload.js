@@ -1,4 +1,4 @@
-Liferay.Upload = new Expanse.Class(
+Liferay.Upload = new Alloy.Class(
 	{
 
 		/**

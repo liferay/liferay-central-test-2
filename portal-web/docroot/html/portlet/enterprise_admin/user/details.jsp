@@ -82,8 +82,8 @@ boolean deletePortrait = ParamUtil.getBoolean(request, "deletePortrait");
 
 <h3><liferay-ui:message key="details" /></h3>
 
-<fieldset class="exp-block-labels exp-form-column">
-	<div class="exp-ctrl-holder">
+<fieldset class="aui-block-labels aui-form-column">
+	<div class="aui-ctrl-holder">
 		<label for="title"><liferay-ui:message key="title" /></label>
 
 		<select name="<portlet:namespace />prefixId">
@@ -109,7 +109,7 @@ boolean deletePortrait = ParamUtil.getBoolean(request, "deletePortrait");
 	<liferay-ui:error exception="<%= UserScreenNameException.class %>" message="please-enter-a-valid-screen-name" />
 
 	<c:if test="<%= !PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.USERS_SCREEN_NAME_ALWAYS_AUTOGENERATE) || (selUser != null) %>">
-		<div class="exp-ctrl-holder">
+		<div class="aui-ctrl-holder">
 			<label for="<portlet:namespace />screenName"><liferay-ui:message key="screen-name" /></label>
 
 			<c:choose>
@@ -129,7 +129,7 @@ boolean deletePortrait = ParamUtil.getBoolean(request, "deletePortrait");
 	<liferay-ui:error exception="<%= ReservedUserEmailAddressException.class %>" message="the-email-address-you-requested-is-reserved" />
 	<liferay-ui:error exception="<%= UserEmailAddressException.class %>" message="please-enter-a-valid-email-address" />
 
-	<div class="exp-ctrl-holder">
+	<div class="aui-ctrl-holder">
 		<label for="<portlet:namespace />emailAddress"><liferay-ui:message key="email-address" /></label>
 
 		<c:choose>
@@ -146,13 +146,13 @@ boolean deletePortrait = ParamUtil.getBoolean(request, "deletePortrait");
 
 	<liferay-ui:error exception="<%= ContactFirstNameException.class %>" message="please-enter-a-valid-first-name" />
 
-	<div class="exp-ctrl-holder">
+	<div class="aui-ctrl-holder">
 		<label for="<portlet:namespace />firstName"><liferay-ui:message key="first-name" /></label>
 
 		<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= selContact %>" field="firstName" />
 	</div>
 
-	<div class="exp-ctrl-holder">
+	<div class="aui-ctrl-holder">
 		<label for="<portlet:namespace />middleName"><liferay-ui:message key="middle-name" /></label>
 
 		<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= selContact %>" field="middleName" />
@@ -160,13 +160,13 @@ boolean deletePortrait = ParamUtil.getBoolean(request, "deletePortrait");
 
 	<liferay-ui:error exception="<%= ContactLastNameException.class %>" message="please-enter-a-valid-last-name" />
 
-	<div class="exp-ctrl-holder">
+	<div class="aui-ctrl-holder">
 		<label for="<portlet:namespace />lastName"><liferay-ui:message key="last-name" /></label>
 
 		<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= selContact %>" field="lastName" />
 	</div>
 
-	<div class="exp-ctrl-holder">
+	<div class="aui-ctrl-holder">
 		<label for="<portlet:namespace />suffixId"><liferay-ui:message key="suffix" /></label>
 
 		<select name="<portlet:namespace />suffixId">
@@ -187,7 +187,7 @@ boolean deletePortrait = ParamUtil.getBoolean(request, "deletePortrait");
 	</div>
 </fieldset>
 
-<fieldset class="exp-block-labels exp-form-column">
+<fieldset class="aui-block-labels aui-form-column">
 	<div>
 		<c:if test="<%= selUser != null %>">
 			<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" var="editUserPortraitURL">
@@ -226,7 +226,7 @@ boolean deletePortrait = ParamUtil.getBoolean(request, "deletePortrait");
 		<liferay-ui:error exception="<%= ReservedUserIdException.class %>" message="the-user-id-you-requested-is-reserved" />
 		<liferay-ui:error exception="<%= UserIdException.class %>" message="please-enter-a-valid-user-id" />
 
-		<div class="exp-ctrl-holder">
+		<div class="aui-ctrl-holder">
 			<label for="<portlet:namespace />userId"><liferay-ui:message key="user-id" /></label>
 
 			<%= selUser.getUserId() %>
@@ -235,7 +235,7 @@ boolean deletePortrait = ParamUtil.getBoolean(request, "deletePortrait");
 		</div>
 	</c:if>
 
-	<div class="exp-ctrl-holder">
+	<div class="aui-ctrl-holder">
 		<c:choose>
 			<c:when test="<%= PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_CONTACT_BIRTHDAY) %>">
 				<label for="<portlet:namespace />birthday"><liferay-ui:message key="birthday" /></label>
@@ -251,7 +251,7 @@ boolean deletePortrait = ParamUtil.getBoolean(request, "deletePortrait");
 	</div>
 
 	<c:if test="<%= PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_CONTACT_MALE) %>">
-		<div class="exp-ctrl-holder">
+		<div class="aui-ctrl-holder">
 			<label for="<portlet:namespace />male"><liferay-ui:message key="gender" /></label>
 
 			<select name="<portlet:namespace />male">
@@ -261,7 +261,7 @@ boolean deletePortrait = ParamUtil.getBoolean(request, "deletePortrait");
 		</div>
 	</c:if>
 
-	<div class="exp-ctrl-holder">
+	<div class="aui-ctrl-holder">
 		<label for="<portlet:namespace />jobTitle"><liferay-ui:message key="job-title" /></label>
 
 		<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= selContact %>" field="jobTitle" />

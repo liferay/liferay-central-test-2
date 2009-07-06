@@ -28,10 +28,10 @@ List<Portlet> portlets = PortletLocalServiceUtil.getPortlets(company.getCompanyI
 portlets = ListUtil.sort(portlets, new PortletTitleComparator(application, locale));
 %>
 
-<form action="#" class="exp-form" name="<portlet:namespace />resourceSelection">
+<form action="#" class="aui-form" name="<portlet:namespace />resourceSelection">
 
-<fieldset class="exp-block-labels exp-form-column">
-	<div class="exp-ctrl-holder">
+<fieldset class="aui-block-labels aui-form-column">
+	<div class="aui-ctrl-holder">
 		<label for="add-permissions"><liferay-ui:message key="add-permissions" /></label>
 
 		<select id="add-permissions" onchange="<portlet:namespace />addPermissions(this);">

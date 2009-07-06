@@ -6,7 +6,7 @@ Liferay.PortletSharing = {
 
 		portletURL.setParameter("netvibesURL", netvibesURL);
 
-		new Expanse.Popup(
+		new Alloy.Popup(
 			{
 				body: {
 					url: portletURL.toString()
@@ -25,7 +25,7 @@ Liferay.PortletSharing = {
 
 		portletURL.setParameter("widgetURL", widgetURL);
 
-		new Expanse.Popup(
+		new Alloy.Popup(
 			{
 				body: {
 					url: portletURL.toString()

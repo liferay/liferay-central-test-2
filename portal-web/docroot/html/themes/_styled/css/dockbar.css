@@ -82,7 +82,7 @@ html > .lfr-dockbar-pinned {
 	width: auto;
 }
 
-.dockbar .exp-toolbar {
+.dockbar .aui-toolbar {
 	float: left;
 }
 
@@ -90,22 +90,22 @@ html > .lfr-dockbar-pinned {
 	float: right;
 }
 
-.exp-toolbar li {
+.aui-toolbar li {
 	display: inline-block;
 	margin: 0;
 	margin-left: 10px;
 	padding: 0;
 }
 
-.ie6 .exp-toolbar li, .ie7 .exp-toolbar li {
+.ie6 .aui-toolbar li, .ie7 .aui-toolbar li {
 	display: inline;
 }
 
-.exp-toolbar .has-submenu.selected {
+.aui-toolbar .has-submenu.selected {
 	background-color: #fff;
 }
 
-.exp-toolbar-separator {
+.aui-toolbar-separator {
 	background: url(../images/dockbar/separator.png) no-repeat 100% 50%;
 	border-width: 0;
 	cursor: default;
@@ -117,12 +117,12 @@ html > .lfr-dockbar-pinned {
 	width:4px;
 }
 
-.exp-underlay-container {
+.aui-underlay-container {
 	clear: both;
 	top: 100%;
 }
 
-.exp-underlay {
+.aui-underlay {
 	background: #eee url(../images/common/message_panel_shadow.png) repeat-x 0 0;
 	border-width: 0 1px 1px;
 	margin-top: 1px;
@@ -130,7 +130,7 @@ html > .lfr-dockbar-pinned {
 	position: static;
 }
 
-.exp-underlay .exp-header {
+.aui-underlay .aui-header {
 	background: none;
 	color: #333;
 	cursor: default;
@@ -140,29 +140,29 @@ html > .lfr-dockbar-pinned {
 	padding: 0;
 }
 
-.exp-underlay .container-close {
+.aui-underlay .container-close {
 	right: 5px;
 	top: 5px;
 }
 
-.exp-underlay .exp-body {
+.aui-underlay .aui-body {
 	padding: 0;
 }
 
-.exp-underlay .portal-add-content {
+.aui-underlay .portal-add-content {
 	background-color: transparent;
 	font-size: 11px;
 }
 
-.exp-underlay .lfr-portlet-item {
+.aui-underlay .lfr-portlet-item {
 	border-width: 0;
 }
 
-.add-application .exp-underlay {
+.add-application .aui-underlay {
 	padding: 10px;
 }
 
-.manage-layouts .exp-underlay {
+.manage-layouts .aui-underlay {
 	margin-left: 50px;
 }
 

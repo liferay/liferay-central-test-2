@@ -1,4 +1,4 @@
-Liferay.PortletURL = new Expanse.Class(
+Liferay.PortletURL = new Alloy.Class(
 	{
 		initialize: function(lifecycle, params) {
 			var instance = this;

@@ -29,7 +29,7 @@ String emailAddress1 = ParamUtil.getString(request, "emailAddress1");
 String emailAddress2 = ParamUtil.getString(request, "emailAddress2");
 %>
 
-<form action="<%= themeDisplay.getPathMain() %>/portal/update_email_address" class="exp-form" method="post" name="fm" onSubmit="submitForm(document.fm); return false;">
+<form action="<%= themeDisplay.getPathMain() %>/portal/update_email_address" class="aui-form" method="post" name="fm" onSubmit="submitForm(document.fm); return false;">
 <input name="doAsUserId" type="hidden" value="<%= HtmlUtil.escapeAttribute(themeDisplay.getDoAsUserId()) %>" />
 <input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
 <input name="<%= WebKeys.REFERER %>" type="hidden" value="<%= themeDisplay.getPathMain() %>?doAsUserId=<%= HtmlUtil.escapeAttribute(themeDisplay.getDoAsUserId()) %>" />
@@ -57,16 +57,16 @@ String emailAddress2 = ParamUtil.getString(request, "emailAddress2");
 	</c:otherwise>
 </c:choose>
 
-<fieldset class="exp-block-labels">
+<fieldset class="aui-block-labels">
 	<legend><liferay-ui:message key="email-address" /></legend>
 
-	<div class="exp-ctrl-holder">
+	<div class="aui-ctrl-holder">
 		<label for="emailAddress1"><liferay-ui:message key="email-address" /></label>
 
 		<input class="lfr-input-text" name="emailAddress1" type="text" value="<%= HtmlUtil.escapeAttribute(emailAddress1) %>" />
 	</div>
 
-	<div class="exp-ctrl-holder">
+	<div class="aui-ctrl-holder">
 		<label for="emailAddress2"><liferay-ui:message key="enter-again" /></label>
 
 		<input class="lfr-input-text" name="emailAddress2" type="text" value="<%= HtmlUtil.escapeAttribute(emailAddress2) %>" />

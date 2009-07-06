@@ -1,6 +1,6 @@
 (function() {
-	var Dom = Expanse.Dom;
-	var Event = Expanse.Event;
+	var Dom = Alloy.Dom;
+	var Event = Alloy.Event;
 
 	Liferay.Dockbar = {
 		init: function() {
@@ -11,13 +11,13 @@
 			if (dockBar.length) {
 				dockBar.find('.pin-dockbar').click(
 					function(event) {
-						Expanse.getBody().toggleClass('lfr-dockbar-pinned');
+						Alloy.getBody().toggleClass('lfr-dockbar-pinned');
 
 						jQuery.ajax(
 							{
 								url: themeDisplay.getPathMain() + '/portal/session_click',
 								data: {
-									'liferay_dockbar_pinned': Expanse.getBody().hasClass('lfr-dockbar-pinned')
+									'liferay_dockbar_pinned': Alloy.getBody().hasClass('lfr-dockbar-pinned')
 								}
 							}
 						);
@@ -30,8 +30,8 @@
 
 				instance._namespace = dockBar.attr('rel');
 
-				instance.MenuManager = new Expanse.OverlayManager();
-				instance.UnderlayManager = new Expanse.OverlayManager();
+				instance.MenuManager = new Alloy.OverlayManager();
+				instance.UnderlayManager = new Alloy.OverlayManager();
 
 				instance._toolbarItems = {};
 
@@ -51,7 +51,7 @@
 
 				instance.messages.beforeShowEvent.subscribe(
 					function(event) {
-						Expanse.getBody().addClass('showing-messages');
+						Alloy.getBody().addClass('showing-messages');
 
 						Liferay.Dockbar.MenuManager.hideAll();
 					}
@@ -59,7 +59,7 @@
 
 				instance.messages.hideEvent.subscribe(
 					function(event) {
-						Expanse.getBody().removeClass('showing-messages');
+						Alloy.getBody().removeClass('showing-messages');
 					}
 				);
 
@@ -119,10 +119,10 @@
 									},
 									on: {
 										show: function() {
-											Expanse.getBody().addClass('lfr-has-sidebar');
+											Alloy.getBody().addClass('lfr-has-sidebar');
 										},
 										hide: function() {
-											Expanse.getBody().removeClass('lfr-has-sidebar');
+											Alloy.getBody().removeClass('lfr-has-sidebar');
 										}
 									}
 								}
@@ -167,7 +167,7 @@
 					}
 				);
 
-				var body = Expanse.getBody();
+				var body = Alloy.getBody();
 
 				var isStaging = body.hasClass('staging');
 				var isLiveView = body.hasClass('live-view');
@@ -280,7 +280,7 @@
 
 					instance[name] = new instance.Underlay(options);
 				}
-				else if (instance[name] && instance[name] instanceof Expanse.Overlay) {
+				else if (instance[name] && instance[name] instanceof Alloy.Overlay) {
 					instance[name].show();
 				}
 
@@ -331,7 +331,7 @@
 		}
 	};
 
-	Liferay.Dockbar.Menu = Expanse.ContextOverlay.extend(
+	Liferay.Dockbar.Menu = Alloy.ContextOverlay.extend(
 		{
 			initialize: function(options) {
 				var instance = this;
@@ -364,7 +364,7 @@
 		}
 	);
 
-	Liferay.Dockbar.Underlay = Expanse.Panel.extend(
+	Liferay.Dockbar.Underlay = Alloy.Panel.extend(
 		{
 			initialize: function(options) {
 				var instance = this;
@@ -394,8 +394,8 @@
 
 				Liferay.Dockbar.UnderlayManager.bringToTop(instance);
 
-				Dom.addClass(instance.element, 'exp-underlay-container');
-				Dom.addClass(instance.innerElement, 'exp-underlay');
+				Dom.addClass(instance.element, 'aui-underlay-container');
+				Dom.addClass(instance.innerElement, 'aui-underlay');
 
 				if (options.className) {
 					Dom.addClass(instance.element, options.className);

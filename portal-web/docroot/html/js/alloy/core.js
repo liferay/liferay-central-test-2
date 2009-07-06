@@ -1,5 +1,5 @@
-;window.Expanse || (function() {
-	window.Expanse = {
+;window.Alloy || (function() {
+	window.Alloy = {
 		version: '0.1',
 
 		extend: jQuery.extend,
@@ -9,7 +9,7 @@
 
 			if (dest) {
 				for (var prop in src) {
-					if (Expanse.isEmpty(src[prop])) {
+					if (Alloy.isEmpty(src[prop])) {
 						dest[prop] = src[prop];
 					}
 				}
@@ -35,8 +35,8 @@
 
 			if(el) {
 				if (typeof el == 'string') {
-					el = Expanse.prefix(el, "#");
-					el = Expanse.get(el)[0];
+					el = Alloy.prefix(el, "#");
+					el = Alloy.get(el)[0];
 				}
 
 				if (el && el.jquery && el.length) {
@@ -55,7 +55,7 @@
 			var instance = this;
 
 			if (!instance._document) {
-				instance._document = Expanse.get(document);
+				instance._document = Alloy.get(document);
 			}
 
 			return instance._document;
@@ -65,7 +65,7 @@
 			var instance = this;
 
 			if (!instance._body) {
-				instance._body = Expanse.get(document.body || document.documentElement);
+				instance._body = Alloy.get(document.body || document.documentElement);
 			}
 
 			return instance._body;
@@ -75,7 +75,7 @@
 			var instance = this;
 
 			if (!instance._window) {
-				instance._window = Expanse.get(window);
+				instance._window = Alloy.get(window);
 			}
 
 			return instance._window;
@@ -87,7 +87,7 @@
 
 		namespace: function() {
 			var args = arguments;
-			var baseObject = Expanse;
+			var baseObject = Alloy;
 
 			var i, j, objPieces;
 
@@ -116,7 +116,7 @@
 
 		onReady: function(fn, obj, scope) {
 			if (obj || scope) {
-				Expanse.Event.onDOMReady(fn, obj, scope);
+				Alloy.Event.onDOMReady(fn, obj, scope);
 			}
 			else {
 				jQuery(fn);
@@ -143,13 +143,13 @@
 	var _generateId = YAHOO.util.Dom.generateId;
 
 	var generateId = function(el, prefix) {
-		return _generateId(el, prefix || 'exp-gen-');
+		return _generateId(el, prefix || 'aui-gen-');
 	};
 
 	YAHOO.util.Dom.generateId = generateId;
-	Expanse.generateId = generateId;
+	Alloy.generateId = generateId;
 
-	Expanse.zIndex = {
+	Alloy.zIndex = {
 		COLOR_PICKER: 5000,
 		CONTAINER: 500,
 		DATE_PICKER: 550,

@@ -30,4 +30,4 @@ String cssClass = GetterUtil.getString((String)request.getAttribute("aui:fieldse
 Map<String, Object> dynamicAttributes = (Map<String, Object>)request.getAttribute("aui:fieldset:dynamicAttributes");
 %>
 
-<fieldset class="exp-block-labels <%= cssClass %> <%= column ? "exp-form-column" : StringPool.BLANK %>" <%= _buildDynamicAttributes(dynamicAttributes) %>>
+<fieldset class="aui-block-labels <%= cssClass %> <%= column ? "aui-form-column" : StringPool.BLANK %>" <%= _buildDynamicAttributes(dynamicAttributes) %>>

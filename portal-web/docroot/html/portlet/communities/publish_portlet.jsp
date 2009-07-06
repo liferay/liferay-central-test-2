@@ -77,7 +77,7 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 
 <input id="publishBtn" type="button" value='<liferay-ui:message key="publish" />' onClick='if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-publish-this-portlet") %>')) { submitForm(document.<portlet:namespace />fm); }' />
 
-<input type="button" value="<liferay-ui:message key="cancel" />" onClick="Expanse.Popup.close(this);" />
+<input type="button" value="<liferay-ui:message key="cancel" />" onClick="Alloy.Popup.close(this);" />
 
 </form>
 

@@ -1,4 +1,4 @@
-Liferay.DynamicSelect = new Expanse.Class(
+Liferay.DynamicSelect = new Alloy.Class(
 	{
 
 		/**

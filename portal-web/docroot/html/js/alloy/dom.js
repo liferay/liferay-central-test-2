@@ -1,5 +1,5 @@
 (function() {
-	Expanse.Dom = Expanse.extend(
+	Alloy.Dom = Alloy.extend(
 		{},
 		YAHOO.util.Dom,
 		{

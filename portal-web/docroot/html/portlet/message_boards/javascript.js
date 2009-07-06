@@ -1,5 +1,5 @@
 if (!Liferay.Editor.bbCode) {
-	Liferay.Editor.bbCode = new Expanse.Class(
+	Liferay.Editor.bbCode = new Alloy.Class(
 		{
 			initialize: function(options) {
 				var instance = this;
@@ -427,7 +427,7 @@ if (!Liferay.Editor.bbCode) {
 
 				instance._location.find('.use-colorpicker').before(instance._fontColorInput);
 
-				var colorPicker = new Expanse.ColorPickerPanel(
+				var colorPicker = new Alloy.ColorPickerPanel(
 					{
 						hasImage: true,
 						on: {

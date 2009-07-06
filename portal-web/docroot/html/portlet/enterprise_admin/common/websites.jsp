@@ -75,7 +75,7 @@ else {
 <liferay-ui:error key="<%= NoSuchListTypeException.class.getName() + className + ListTypeImpl.WEBSITE %>" message="please-select-a-type" />
 <liferay-ui:error exception="<%= WebsiteURLException.class %>" message="please-enter-a-valid-url" />
 
-<fieldset class="exp-block-labels">
+<fieldset class="aui-block-labels">
 
 	<%
 	for (int i = 0; i < websitesIndexes.length; i++) {
@@ -97,7 +97,7 @@ else {
 				fieldParam = "websiteUrl" + websitesIndex;
 				%>
 
-				<div class="exp-ctrl-holder">
+				<div class="aui-ctrl-holder">
 					<label for="<portlet:namespace /><%= fieldParam %>"><liferay-ui:message key="url" /></label>
 
 					<liferay-ui:input-field model="<%= Website.class %>" bean="<%= website %>" field="url" fieldParam="<%= fieldParam %>" />
@@ -107,7 +107,7 @@ else {
 				fieldParam = "websiteTypeId" + websitesIndex;
 				%>
 
-				<div class="exp-ctrl-holder">
+				<div class="aui-ctrl-holder">
 					<label for="<portlet:namespace /><%= fieldParam %>"><liferay-ui:message key="type" /></label>
 
 					<select id="<portlet:namespace /><%= fieldParam %>" name="<portlet:namespace /><%= fieldParam %>">
@@ -131,7 +131,7 @@ else {
 				fieldParam = "websitePrimary" + websitesIndex;
 				%>
 
-				<div class="exp-ctrl-holder primary-ctrl">
+				<div class="aui-ctrl-holder primary-ctrl">
 					<label class="inline-label" for="<portlet:namespace /><%= fieldParam %>">
 						<liferay-ui:message key="primary" />
 

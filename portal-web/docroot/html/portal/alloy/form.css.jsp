@@ -23,10 +23,10 @@
 %>
 
 /*
- ---------- Expanse form controls ----------
+ ---------- Alloy form controls ----------
 */
 
-.exp-form {
+.aui-form {
 	margin: 0;
 	overflow: hidden;
 	padding: 0;
@@ -34,41 +34,41 @@
 	width: 100%;
 }
 
-.exp-form .exp-ctrl-holder {
+.aui-form .aui-ctrl-holder {
 	overflow: hidden;
 	clear: both;
 	margin: 0;
 	padding: 0;
 }
 
-.exp-form .exp-button-holder {
+.aui-form .aui-button-holder {
 	clear: both;
 	overflow: hidden;
 }
 
-.exp-form .reset-button {
+.aui-form .reset-button {
 }
 
-.exp-form .submit-button {
+.aui-form .submit-button {
 }
 
-.exp-form .inline-label, .exp-form .exp-inline-labels .inline-label, .exp-form .exp-block-labels .inline-label {
+.aui-form .inline-label, .aui-form .aui-inline-labels .inline-label, .aui-form .aui-block-labels .inline-label {
 	display: inline;
 	float: none;
 	margin: 0 1em 0 0;
 	width: auto;
 }
 
-.exp-form .inline-label input {
+.aui-form .inline-label input {
 }
 
-.exp-form .focused {
+.aui-form .focused {
 }
 
-.exp-form .exp-inline-labels .exp-ctrl-holder {
+.aui-form .aui-inline-labels .aui-ctrl-holder {
 }
 
-.exp-form .exp-inline-labels label, .exp-form .exp-inline-labels .label {
+.aui-form .aui-inline-labels label, .aui-form .aui-inline-labels .label {
 	float: left;
 	line-height: 100%;
 	margin: .3em 2% 0 0;
@@ -76,32 +76,32 @@
 	position: relative;
 }
 
-.exp-form .exp-inline-labels .text-input, .exp-form .exp-inline-labels .file-upload {
+.aui-form .aui-inline-labels .text-input, .aui-form .aui-inline-labels .file-upload {
 	float: left;
 }
 
-.exp-form .exp-inline-labels .file-upload {
+.aui-form .aui-inline-labels .file-upload {
 }
 
-.exp-form .exp-inline-labels .select-input {
+.aui-form .aui-inline-labels .select-input {
 	float: left;
 }
 
-.exp-form .exp-inline-labels textarea {
+.aui-form .aui-inline-labels textarea {
 	float: left;
 }
 
-.exp-form .exp-inline-labels .form-hint {
+.aui-form .aui-inline-labels .form-hint {
 	clear: both;
 }
 
-.exp-form .exp-inline-labels .form-hint strong {
+.aui-form .aui-inline-labels .form-hint strong {
 }
 
-.exp-form .exp-block-labels .exp-ctrl-holder {
+.aui-form .aui-block-labels .aui-ctrl-holder {
 }
 
-.exp-form .exp-block-labels label, .exp-form .exp-block-labels .label {
+.aui-form .aui-block-labels label, .aui-form .aui-block-labels .label {
 	display: block;
 	float: none;
 	font-weight: bold;
@@ -111,63 +111,63 @@
 	width: auto;
 }
 
-.exp-form .exp-block-labels label.hidden-label {
+.aui-form .aui-block-labels label.hidden-label {
 	float: left;
 	font-size: 0;
 }
 
-.exp-block-labels label input {
+.aui-block-labels label input {
 	vertical-align: middle;
 }
 
-.exp-form .exp-block-labels .label {
+.aui-form .aui-block-labels .label {
 	float: left;
 	margin-right: 3em;
 }
 
-.exp-form .exp-block-labels .inline-label {
+.aui-form .aui-block-labels .inline-label {
 	position: relative;
 	top: .15em;
 }
 
-.exp-form .exp-block-labels .text-input, .exp-form .exp-block-labels .file-upload {
+.aui-form .aui-block-labels .text-input, .aui-form .aui-block-labels .file-upload {
 	float: left;
 }
 
-.exp-form .exp-block-labels .file-upload {
+.aui-form .aui-block-labels .file-upload {
 }
 
-.exp-form .exp-block-labels .select-input {
+.aui-form .aui-block-labels .select-input {
 	display: block;
 }
 
-.exp-form .exp-block-labels textarea {
+.aui-form .aui-block-labels textarea {
 	display: block;
 	float: left;
 }
 
-.exp-form .exp-block-labels .form-hint {
+.aui-form .aui-block-labels .form-hint {
 	clear: none;
 	float: right;
 	margin: 0;
 }
 
-.exp-form .exp-block-labels .exp-ctrl-holder {
+.aui-form .aui-block-labels .aui-ctrl-holder {
 }
 
-.exp-form .exp-block-labels .focused {
+.aui-form .aui-block-labels .focused {
 }
 
-.exp-form .exp-ctrl-holder .text-input:focus {
+.aui-form .aui-ctrl-holder .text-input:focus {
 }
 
-.exp-form div.focused .text-input:focus {
+.aui-form div.focused .text-input:focus {
 }
 
-.exp-form div.focused .form-hint {
+.aui-form div.focused .form-hint {
 }
 
-.exp-form label em, .exp-form .label em {
+.aui-form label em, .aui-form .label em {
 	display: block;
 	font-style: normal;
 	font-weight: bold;
@@ -175,139 +175,139 @@
 	position: absolute;
 }
 
-.exp-form .exp-block-labels label em, .exp-form .exp-block-labels .label em {
+.aui-form .aui-block-labels label em, .aui-form .aui-block-labels .label em {
 	display: inline;
 	position: static;
 }
 
-.exp-form #error-msg, .exp-form .error {
+.aui-form #error-msg, .aui-form .error {
 }
 
-.exp-form #error-msg dt, .exp-form #error-msg h3 {
+.aui-form #error-msg dt, .aui-form #error-msg h3 {
 }
 
-.exp-form #error-msg dd {
+.aui-form #error-msg dd {
 }
 
-.exp-form #error-msg ol {
+.aui-form #error-msg ol {
 }
 
-.exp-form #error-msg ol li {
+.aui-form #error-msg ol li {
 }
 
-.exp-form .error-field {
+.aui-form .error-field {
 }
 
-.exp-form .exp-form-column {
+.aui-form .aui-form-column {
 	float: left;
 }
 
-.exp-form .column-left {
+.aui-form .column-left {
 	float: left;
 }
 
-.exp-form .column-right {
+.aui-form .column-right {
 	float: right;
 }
 
-.ie6 .exp-form, .ie6 .exp-form fieldset, .ie6 .exp-ctrl-holder, .ie6 .exp-ctrl-holder span, .ie6 .form-hint {
+.ie6 .aui-form, .ie6 .aui-form fieldset, .ie6 .aui-ctrl-holder, .ie6 .aui-ctrl-holder span, .ie6 .form-hint {
 	zoom: 1;
 }
 
-.ie6 .exp-block-labels .form-hint {
+.ie6 .aui-block-labels .form-hint {
 	margin-top: 0;
 }
 
-.exp-form fieldset {
+.aui-form fieldset {
 	border: none;
 	margin: 0;
 }
 
-.exp-form fieldset legend {
+.aui-form fieldset legend {
 	font-weight: bold;
 	color: #000;
 	font-size: 120%;
 }
 
-.exp-form .exp-ctrl-holder {
+.aui-form .aui-ctrl-holder {
 	padding: 3px;
 }
 
-.exp-form .exp-button-holder {
+.aui-form .aui-button-holder {
 	text-align: left;
 	margin-top: 15px;
 }
 
-.exp-form .exp-ctrl-holder .exp-button-holder {
+.aui-form .aui-ctrl-holder .aui-button-holder {
 	clear: none;
 	margin-left: 5px;
 	margin-right: 5px;
 	margin-top: 0;
 }
 
-.exp-form .focused {
+.aui-form .focused {
 	background: #FFFCDF;
 }
 
-.exp-form .exp-ctrl-holder.inline-label label {
+.aui-form .aui-ctrl-holder.inline-label label {
 	display: inline;
 }
 
 
-.exp-form .exp-inline-labels label,  .exp-form .exp-inline-labels .label {
+.aui-form .aui-inline-labels label,  .aui-form .aui-inline-labels .label {
 	width: 45%;
 }
 
-.exp-form .exp-inline-labels .text-input,  .exp-form .exp-inline-labels .file-upload {
+.aui-form .aui-inline-labels .text-input,  .aui-form .aui-inline-labels .file-upload {
 	width: 45%;
 }
 
-.exp-form .exp-inline-labels .select-input {
+.aui-form .aui-inline-labels .select-input {
 	width: 45%;
 }
 
-.exp-form .exp-inline-labels textarea {
+.aui-form .aui-inline-labels textarea {
 	height: 12em;
 	width: 45%;
 }
 
-.exp-form .exp-inline-labels .form-hint {
+.aui-form .aui-inline-labels .form-hint {
 	margin-left: 47%;
 	margin-top: 0;
 }
 
-.exp-form .exp-block-labels .text-input,  .exp-form .exp-block-labels .file-upload {
+.aui-form .aui-block-labels .text-input,  .aui-form .aui-block-labels .file-upload {
 	width: 53%;
 }
 
-.exp-form .exp-block-labels .select-input {
+.aui-form .aui-block-labels .select-input {
 	display: block;
 	width: 53.5%;
 }
 
-.exp-form .exp-block-labels textarea {
+.aui-form .aui-block-labels textarea {
 	height: 12em;
 	width: 53%;
 }
 
-.exp-form .exp-block-labels .form-hint {
+.aui-form .aui-block-labels .form-hint {
 	width: 45%;
 }
 
-.exp-form .exp-form-column {
+.aui-form .aui-form-column {
 	margin: 0 2% 0 0;
 	width: 47.9%;
 }
 
-.exp-form .column-left {
+.aui-form .column-left {
 	width: 49%;
 }
 
-.exp-form .column-right {
+.aui-form .column-right {
 	width: 49%;
 }
 
-.exp-form #error-msg {
+.aui-form #error-msg {
 	background: #FFDFDF;
 	border: 1px solid #DF7D7D;
 	border-width: 1px 0;
@@ -315,30 +315,30 @@
 	padding: 1em;
 }
 
-.exp-form .error {
+.aui-form .error {
 	background: #FFDFDF;
 	border: 1px solid #DF7D7D;
 	border-width: 1px 0;
 }
 
-.exp-form #error-msg dt,  .exp-form #error-msg h3 {
+.aui-form #error-msg dt,  .aui-form #error-msg h3 {
 	font-size: 110%;
 	font-weight: bold;
 	line-height: 100%;
 	margin: 0 0 .5em 0;
 }
 
-.exp-form #error-msg dd {
+.aui-form #error-msg dd {
 	margin: 0;
 	padding: 0;
 }
 
-.exp-form #error-msg ol {
+.aui-form #error-msg ol {
 	margin: 0;
 	padding: 0;
 }
 
-.exp-form #error-msg ol li {
+.aui-form #error-msg ol li {
 	border-bottom: 1px dotted #DF7D7D;
 	list-style-position: inside;
 	margin: 0;
@@ -346,14 +346,14 @@
 	position: relative;
 }
 
-.exp-form .error-field {
+.aui-form .error-field {
 	background: #FFBFBF;
 	color: #AF4C4C;
 	margin: 0 0 6px 0;
 	padding: 4px;
 }
 
-.exp-button-row {
+.aui-button-row {
 	padding: 5px;
 	border: 1px solid #ccc;
 	background: #eee;

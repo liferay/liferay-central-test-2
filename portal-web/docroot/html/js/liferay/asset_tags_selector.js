@@ -1,4 +1,4 @@
-Liferay.AssetTagsSelector = new Expanse.Class(
+Liferay.AssetTagsSelector = new Alloy.Class(
 	{
 
 		/**
@@ -35,7 +35,7 @@ Liferay.AssetTagsSelector = new Expanse.Class(
 
 			var textInput = jQuery('#' + options.textInput);
 
-			var autoComplete = new Expanse.AutoComplete(
+			var autoComplete = new Alloy.AutoComplete(
 				{
 					dataSource: {
 						source: instance._searchTags,
@@ -190,7 +190,7 @@ Liferay.AssetTagsSelector = new Expanse.Class(
 			mainContainer.append(searchContainer).append(container).append(saveBtn);
 
 			if (!instance.selectTagPopup) {
-				var popup = new Expanse.Popup(
+				var popup = new Alloy.Popup(
 					{
 						body: mainContainer[0],
 						className: 'lfr-tag-selector',

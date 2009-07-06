@@ -1,7 +1,7 @@
 (function() {
-	var Dom = Expanse.Dom;
-	var Event = Expanse.Event;
-	var DDM = Expanse.DragDrop;
+	var Dom = Alloy.Dom;
+	var Event = Alloy.Event;
+	var DDM = Alloy.DragDrop;
 
 	var LayoutConfiguration = {
 		categories: [],
@@ -90,7 +90,7 @@
 
 				body.addClass('lfr-has-sidebar');
 
-				instance._dialog = new Expanse.Popup(
+				instance._dialog = new Alloy.Popup(
 					{
 						body: {
 							url: url,
@@ -231,7 +231,7 @@
 			var zIndex = instance._dialogBody.parents('.ui-dialog').css('z-index');
 
 			instance._helper = jQuery(Liferay.Template.PORTLET).css('z-index', zIndex + 10);
-			instance._helper.addClass('exp-proxy generic-portlet not-intersecting');
+			instance._helper.addClass('aui-proxy generic-portlet not-intersecting');
 
 			var portletItem = columnPortletItem;
 
@@ -408,7 +408,7 @@
 				var proxyStyle = proxy.style;
 
 				portlet = jQuery(portlet);
-				proxy = jQuery('.exp-proxy', proxy);
+				proxy = jQuery('.aui-proxy', proxy);
 
 				var proxyHeight = proxy.height();
 				var proxyWidth = proxy.width();

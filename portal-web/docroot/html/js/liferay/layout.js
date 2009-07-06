@@ -1,7 +1,7 @@
 (function() {
-	var Dom = Expanse.Dom;
-	var Event = Expanse.Event;
-	var DDM = Expanse.DragDrop;
+	var Dom = Alloy.Dom;
+	var Event = Alloy.Event;
+	var DDM = Alloy.DragDrop;
 
 	var Layout = {
 		init: function(options) {
@@ -53,7 +53,7 @@
 
 			var url = themeDisplay.getPathMain() + '/layout_configuration/templates';
 
-			new Expanse.Popup(
+			new Alloy.Popup(
 				{
 					body: {
 						url: url,
@@ -132,7 +132,7 @@
 			instance.dropZones = [];
 
 			for (var i = columns.length - 1; i >= 0; i--) {
-				new Expanse.Droppable(columns[i], 'portlets');
+				new Alloy.Droppable(columns[i], 'portlets');
 
 				instance.dropZones[i] = columns[i];
 			}
@@ -150,7 +150,7 @@
 			var draggable = new columnPortlet(portlet, 'portlets');
 			var handle = jQuery(instance._handleSelector, portlet);
 
-			var id = Expanse.generateId(handle[0]);
+			var id = Alloy.generateId(handle[0]);
 
 			draggable.setHandleElId(id);
 
@@ -174,7 +174,7 @@
 				var columns = jPortlet.find(instance._gridColumns);
 
 				for (var i = columns.length - 1; i >= 0; i--){
-					new Expanse.Droppable(columns[i], 'portlets');
+					new Alloy.Droppable(columns[i], 'portlets');
 
 					instance.dropZones.push(columns[i]);
 				}
@@ -245,7 +245,7 @@
 				}
 			);
 
-			var resize = new Expanse.Resize(portlet, {
+			var resize = new Alloy.Resize(portlet, {
 					proxy: true,
 					setSize: false
 				}
@@ -360,7 +360,7 @@
 		_maxZIndex: 99
 	};
 
-	var draggablePortlet = Expanse.DragProxy.extend(
+	var draggablePortlet = Alloy.DragProxy.extend(
 		{
 			initialize: function() {
 				var instance = this;
@@ -397,7 +397,7 @@
 
 				var proxy = jQuery(Liferay.Template.PORTLET);
 
-				proxy.addClass('exp-proxy');
+				proxy.addClass('aui-proxy');
 
 				return proxy;
 			},
@@ -414,7 +414,7 @@
 				if (!instance._proxy) {
 					var proxy = instance.getDragEl();
 
-					var proxyDisplay = jQuery('.exp-proxy', proxy);
+					var proxyDisplay = jQuery('.aui-proxy', proxy);
 
 					instance._proxy = proxyDisplay;
 				}
@@ -436,7 +436,7 @@
 
 				proxy = jQuery(proxy);
 
-				var proxyDisplay = proxy.find('.exp-proxy');
+				var proxyDisplay = proxy.find('.aui-proxy');
 
 				if (!proxyDisplay.length) {
 					proxyDisplay = instance._createProxy();

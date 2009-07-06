@@ -37,11 +37,11 @@ name = portletResponse.getNamespace() + name;
 		function() {
 			jQuery('#<%= name %> :input').focus(
 				function(event) {
-					jQuery(this).parents('.exp-ctrl-holder:first').addClass('exp-row-focused');
+					jQuery(this).parents('.aui-ctrl-holder:first').addClass('aui-row-focused');
 				}
 			).blur(
 				function(event) {
-					jQuery(this).parents('.exp-ctrl-holder:first').removeClass('exp-row-focused');
+					jQuery(this).parents('.aui-ctrl-holder:first').removeClass('aui-row-focused');
 				}
 			);
 		}

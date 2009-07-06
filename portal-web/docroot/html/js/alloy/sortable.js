@@ -1,11 +1,11 @@
 (function() {
-	var Dom = Expanse.Dom;
-	var Event = Expanse.Event;
-	var DDM = Expanse.DragDrop;
+	var Dom = Alloy.Dom;
+	var Event = Alloy.Event;
+	var DDM = Alloy.DragDrop;
 
 	var counter = 0;
 
-	Expanse.Sortable = new Expanse.Class(
+	Alloy.Sortable = new Alloy.Class(
 		{
 			initialize: function(options) {
 				var instance = this;
@@ -98,7 +98,7 @@
 				if (options.handle) {
 					handle = jQuery(options.handle, item);
 
-					id = Expanse.generateId(handle[0]);
+					id = Alloy.generateId(handle[0]);
 
 					draggable.setHandleElId(id);
 				}
@@ -115,13 +115,13 @@
 			getSortableItem: function() {
 				var instance = this;
 
-				return Expanse.SortableItem;
+				return Alloy.SortableItem;
 			},
 
 			getSortableTarget: function() {
 				var instance = this;
 
-				return Expanse.SortableTarget;
+				return Alloy.SortableTarget;
 			},
 
 			_flushCache: function() {
@@ -134,7 +134,7 @@
 		}
 	);
 
-	Expanse.SortableItem = Expanse.DragProxy.extend(
+	Alloy.SortableItem = Alloy.DragProxy.extend(
 		{
 			initialize: function(el, group, options) {
 				var instance = this;
@@ -145,7 +145,7 @@
 					forcePlaceholderSize: true
 				};
 
-				instance.options = Expanse.extend({}, defaults, options);
+				instance.options = Alloy.extend({}, defaults, options);
 
 				instance.goingUp = false;
 				var el = instance.getEl();
@@ -304,14 +304,14 @@
 			},
 
 			_insert: function(srcEl, destEl, checkContains) {
-				if (!checkContains || !Expanse.Dom.contains(srcEl, destEl)) {
+				if (!checkContains || !Alloy.Dom.contains(srcEl, destEl)) {
 					destEl.parentNode.insertBefore(srcEl, this.goingUp ? destEl : destEl.nextSibling);
 	            	DDM.refreshCache();
 				}
 			},
 
 			_isDroppable: function(target) {
-				return (target instanceof Expanse.Droppable);
+				return (target instanceof Alloy.Droppable);
 			},
 
 			_updateProxy: function() {
@@ -376,9 +376,9 @@
 		}
 	);
 
-	Expanse.SortableTarget = Expanse.Droppable;
+	Alloy.SortableTarget = Alloy.Droppable;
 
-	Expanse.NestedList = Expanse.SortableItem.extend(
+	Alloy.NestedList = Alloy.SortableItem.extend(
 		{
 			initialize: function(el, group, options) {
 				var instance = this;
@@ -388,7 +388,7 @@
 					centerFrame: true
 				};
 
-				instance.options = Expanse.extend({}, defaults, options);
+				instance.options = Alloy.extend({}, defaults, options);
 
 				instance._super.apply(instance, [el, group, instance.options]);
 
@@ -398,14 +398,14 @@
 					var handleEl = jQuery(el).find(handleOption)[0];
 
 					if (handleEl) {
-						var handleId = Expanse.Dom.generateId(handleEl);
+						var handleId = Alloy.Dom.generateId(handleEl);
 
 						instance.setHandleElId(handleId);
 					}
 				}
 			},
 
-			onDragDrop: Expanse.emptyFunction,
+			onDragDrop: Alloy.emptyFunction,
 
 			onDragOver: function(event, id) {
 				var instance = this;
@@ -425,8 +425,8 @@
 							return false;
 						}
 
-						if (!Expanse.Dom.contains(container, srcEl) &&
-							!Expanse.Dom.contains(srcEl, container)) {
+						if (!Alloy.Dom.contains(container, srcEl) &&
+							!Alloy.Dom.contains(srcEl, container)) {
 
 							container.appendChild(srcEl);
 
@@ -467,7 +467,7 @@
 				if (sortOnOption) {
 					var sortContainer = jQuery(sortOnOption);
 
-					if (sortContainer.length && (Expanse.Dom.contains(sortContainer[0], destEl) == false)) {
+					if (sortContainer.length && (Alloy.Dom.contains(sortContainer[0], destEl) == false)) {
 						return false;
 					}
 				}

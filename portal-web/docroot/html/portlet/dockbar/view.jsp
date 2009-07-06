@@ -33,7 +33,7 @@ if (layout != null) {
 %>
 
 <div class="dockbar" id="dockbar" rel="<portlet:namespace />">
-	<ul class="exp-toolbar">
+	<ul class="aui-toolbar">
 		<li class="pin-dockbar">
 			<a href="javascript:;"><img alt="" src="<%= themeDisplay.getPathThemeImages() %>/spacer.png" /></a>
 		</li>
@@ -146,7 +146,7 @@ if (layout != null) {
 			</li>
 		</c:if>
 
-		<li class="exp-toolbar-separator">
+		<li class="aui-toolbar-separator">
 			<span></span>
 		</li>
 
@@ -159,7 +159,7 @@ if (layout != null) {
 		</c:if>
 	</ul>
 
-	<ul class="exp-toolbar user-toolbar">
+	<ul class="aui-toolbar user-toolbar">
 		<c:if test="<%= user.hasMyPlaces() %>">
 			<li class="my-places has-submenu" id="<portlet:namespace />myPlaces">
 				<a class="menu-button" href="javascript:;">
@@ -174,7 +174,7 @@ if (layout != null) {
 			</li>
 		</c:if>
 
-		<li class="exp-toolbar-separator">
+		<li class="aui-toolbar-separator">
 			<span></span>
 		</li>
 
@@ -188,11 +188,11 @@ if (layout != null) {
 	</ul>
 
 	<div class="dockbar-messages" id="<portlet:namespace />dockbarMessages">
-		<div class="exp-header"></div>
+		<div class="aui-header"></div>
 
-		<div class="exp-body"></div>
+		<div class="aui-body"></div>
 
-		<div class="exp-footer"></div>
+		<div class="aui-footer"></div>
 	</div>
 
 	<%
@@ -200,7 +200,7 @@ if (layout != null) {
 	%>
 
 	<c:if test="<%= !layoutPrototypes.isEmpty() %>">
-		<div id="layoutPrototypeTemplate" class="exp-html-template">
+		<div id="layoutPrototypeTemplate" class="aui-html-template">
 			<ul>
 				<%
 				for (LayoutPrototype layoutPrototype : layoutPrototypes) {

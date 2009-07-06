@@ -116,25 +116,25 @@
 .active-area {
 }
 
-.exp-proxy {
+.aui-proxy {
 }
 
-.ie .exp-proxy {
+.ie .aui-proxy {
 }
 
-.exp-proxy.generic-portlet {
+.aui-proxy.generic-portlet {
 }
 
-.exp-proxy.generic-portlet .portlet-title {
+.aui-proxy.generic-portlet .portlet-title {
 }
 
-.exp-proxy.not-intersecting .forbidden-action {
+.aui-proxy.not-intersecting .forbidden-action {
 }
 
-.ie .exp-proxy.not-intersecting .forbidden-action {
+.ie .aui-proxy.not-intersecting .forbidden-action {
 }
 
-.exp-resizable-proxy {
+.aui-resizable-proxy {
 }
 
 .navigation-sort-helper {
@@ -145,109 +145,109 @@
 
 /* ---------- Resizables ---------- */
 
-.exp-resizable {
+.aui-resizable {
 }
 
-.ie6 .exp-resizable {
+.ie6 .aui-resizable {
 }
 
-.ie6 .exp-resizable-wrap {
+.ie6 .aui-resizable-wrap {
 }
 
-.exp-resizable-handle {
+.aui-resizable-handle {
 }
 
-.exp-resizable .exp-resizable-handle {
+.aui-resizable .aui-resizable-handle {
 }
 
-.exp-resizable-handle-t, .exp-resizable-handle-b {
+.aui-resizable-handle-t, .aui-resizable-handle-b {
 }
 
-.exp-resizable-handle-t {
+.aui-resizable-handle-t {
 }
 
-.exp-resizable-handle-b {
+.aui-resizable-handle-b {
 }
 
-.ie6 .exp-resizable-handle-t, .ie6 .exp-resizable-handle-b {
+.ie6 .aui-resizable-handle-t, .ie6 .aui-resizable-handle-b {
 }
 
-.exp-resizable-handle-l, .exp-resizable-handle-r {
+.aui-resizable-handle-l, .aui-resizable-handle-r {
 }
 
-.exp-resizable-handle-r {
+.aui-resizable-handle-r {
 }
 
-.exp-resizable-handle-l {
+.aui-resizable-handle-l {
 }
 
-.exp-resizable-handle-tr, .exp-resizable-handle-tr {
+.aui-resizable-handle-tr, .aui-resizable-handle-tr {
 }
 
-.exp-resizable-handle-tr {
+.aui-resizable-handle-tr {
 }
 
-.exp-resizable-handle-tl {
+.aui-resizable-handle-tl {
 }
 
-.exp-resizable-handle-bl, .exp-resizable-handle-br {
+.aui-resizable-handle-bl, .aui-resizable-handle-br {
 }
 
-.exp-resizable-handle-br {
+.aui-resizable-handle-br {
 }
 
-.exp-resizable-handle-bl {
+.aui-resizable-handle-bl {
 }
 
-.exp-resizable-hover .exp-resizable-handle, .exp-resizable-hidden .exp-resizable-handle {
+.aui-resizable-hover .aui-resizable-handle, .aui-resizable-hidden .aui-resizable-handle {
 }
 
-.ie .exp-resizable-hover .exp-resizable-handle, .ie .exp-resizable-hidden .exp-resizable-handle {
+.ie .aui-resizable-hover .aui-resizable-handle, .ie .aui-resizable-hidden .aui-resizable-handle {
 }
 
-.exp-resizable-ghost {
+.aui-resizable-ghost {
 }
 
-.ie .exp-resizable-ghost {
+.ie .aui-resizable-ghost {
 }
 
-.exp-resizable-knob .exp-resizable-handle {
+.aui-resizable-knob .aui-resizable-handle {
 }
 
-.exp-resizable-knob .exp-resizable-handle-t {
+.aui-resizable-knob .aui-resizable-handle-t {
 }
 
-.exp-resizable-knob .exp-resizable-handle-r {
+.aui-resizable-knob .aui-resizable-handle-r {
 }
 
-.exp-resizable-knob .exp-resizable-handle-b {
+.aui-resizable-knob .aui-resizable-handle-b {
 }
 
-.exp-resizable-knob .exp-resizable-handle-l {
+.aui-resizable-knob .aui-resizable-handle-l {
 }
 
-.exp-resizable-knob .exp-resizable-handle-tr {
+.aui-resizable-knob .aui-resizable-handle-tr {
 }
 
-.exp-resizable-knob .exp-resizable-handle-tl {
+.aui-resizable-knob .aui-resizable-handle-tl {
 }
 
-.exp-resizable-knob .exp-resizable-handle-bl {
+.aui-resizable-knob .aui-resizable-handle-bl {
 }
 
-.exp-resizable-knob .exp-resizable-handle-br {
+.aui-resizable-knob .aui-resizable-handle-br {
 }
 
-.exp-resizable-status {
+.aui-resizable-status {
 }
 
-.exp-resizable-status strong, .exp-resizable-status em {
+.aui-resizable-status strong, .aui-resizable-status em {
 }
 
-.ie6 .exp-resizable-status, .ie6 .exp-resizable-status strong, .ie6 .exp-resizable-status em {
+.ie6 .aui-resizable-status, .ie6 .aui-resizable-status strong, .ie6 .aui-resizable-status em {
 }
 
-.freeform .portlet-boundary .exp-resizable-handle {
+.freeform .portlet-boundary .aui-resizable-handle {
 }
 
 /* ---------- Slider ---------- */
@@ -272,93 +272,93 @@
 
 /* ---------- Tabs ---------- */
 
-.exp-tabs {
+.aui-tabs {
 }
 
-.exp-tabs:after {
+.aui-tabs:after {
 }
 
-.ie .exp-tabs {
+.ie .aui-tabs {
 }
 
-.ie6 .exp-tabs {
+.ie6 .aui-tabs {
 }
 
-.exp-tabs li {
+.aui-tabs li {
 }
 
-.exp-tabs li.last {
+.aui-tabs li.last {
 }
 
-.exp-tabs li a, .exp-tabs li span {
+.aui-tabs li a, .aui-tabs li span {
 }
 
-.ie6 .exp-tabs li a, .ie6 .exp-tabs li span {
+.ie6 .aui-tabs li a, .ie6 .aui-tabs li span {
 }
 
-.exp-tabs li a:hover {
+.aui-tabs li a:hover {
 }
 
-.exp-tabs li a:hover, .exp-tabs li span:hover {
+.aui-tabs li a:hover, .aui-tabs li span:hover {
 }
 
-.exp-tabs li.exp-selected {
+.aui-tabs li.aui-selected {
 }
 
-.exp-tabs li.exp-selected a, .exp-tabs li.exp-selected span {
+.aui-tabs li.aui-selected a, .aui-tabs li.aui-selected span {
 }
 
-.ie6 .exp-tabs li.exp-selected a, .ie6 .exp-tabs li.exp-selected span {
+.ie6 .aui-tabs li.aui-selected a, .ie6 .aui-tabs li.aui-selected span {
 }
 
-.exp-tabs li.exp-selected:hover, .exp-tabs li.exp-selected a:hover {
+.aui-tabs li.aui-selected:hover, .aui-tabs li.aui-selected a:hover {
 }
 
-.exp-tabs .exp-disabled a {
+.aui-tabs .aui-disabled a {
 }
 
-.exp-tabs .exp-disabled {
+.aui-tabs .aui-disabled {
 }
 
-.ie .exp-tabs .exp-disabled {
+.ie .aui-tabs .aui-disabled {
 }
 
-.exp-tabs .exp-disabled a:link, .exp-tabs .exp-disabled a:visited {
+.aui-tabs .aui-disabled a:link, .aui-tabs .aui-disabled a:visited {
 }
 
-.exp-hidden {
+.aui-hidden {
 }
 
-.exp-tabs .last.toggle {
+.aui-tabs .last.toggle {
 }
 
 /* ---------- Container ---------- */
 
-.exp-overlay, .exp-panel-container {
+.aui-overlay, .aui-panel-container {
 }
 
-.exp-panel {
+.aui-panel {
 }
 
-.exp-panel .exp-header {
+.aui-panel .aui-header {
 }
 
-.ie6 .exp-panel .exp-header {
+.ie6 .aui-panel .aui-header {
 }
 
-.exp-panel .container-close {
+.aui-panel .container-close {
 }
 
-.exp-panel .exp-body {
+.aui-panel .aui-body {
 }
 
-.exp-panel.exp-resizable .exp-body {
+.aui-panel.aui-resizable .aui-body {
 }
 
 .ie6 body.masked select {
 }
 
-.ie6 div.exp-panel-container select {
+.ie6 div.aui-panel-container select {
 }
 
 .ie6 div.drag select {
@@ -367,10 +367,10 @@
 .ie6 div.hide-select select {
 }
 
-.exp-mask {
+.aui-mask {
 }
 
-.ie .exp-mask {
+.ie .aui-mask {
 }
 
 .hide-scrollbars, .hide-scrollbars * {
@@ -382,190 +382,190 @@
 .show-scrollbars {
 }
 
-.exp-panel-container.show-scrollbars {
+.aui-panel-container.show-scrollbars {
 }
 
-.exp-panel-container.show-scrollbars .underlay {
+.aui-panel-container.show-scrollbars .underlay {
 }
 
 /* ---------- Portal tool tips ---------- */
 
-.exp-tooltip {
+.aui-tooltip {
 }
 
 /* ---------- Date picker ---------- */
 
-.exp-calendar-container {
+.aui-calendar-container {
 }
 
-.ie6 .exp-calendar-container {
+.ie6 .aui-calendar-container {
 }
 
-.exp-calendar-container iframe {
+.aui-calendar-container iframe {
 }
 
-.ie6 .exp-calendar-container iframe.fixedsize {
+.ie6 .aui-calendar-container iframe.fixedsize {
 }
 
-.exp-calendar-container.exp-calendar-multiple {
+.aui-calendar-container.aui-calendar-multiple {
 }
 
-.exp-calendar-container.exp-calendar-multiple .groupcal {
+.aui-calendar-container.aui-calendar-multiple .groupcal {
 }
 
-.exp-calendar-container .exp-calendar-title {
+.aui-calendar-container .aui-calendar-title {
 }
 
-.exp-calendar-container.exp-calendar-multiple .exp-calendar-title {
+.aui-calendar-container.aui-calendar-multiple .aui-calendar-title {
 }
 
-.exp-calendar-container .exp-calendar-close {
+.aui-calendar-container .aui-calendar-close {
 }
 
-.exp-calendar-container .exp-calendar-close {
+.aui-calendar-container .aui-calendar-close {
 }
 
-img.exp-datepicker-button {
+img.aui-datepicker-button {
 }
 
-.exp-calendar {
+.aui-calendar {
 }
 
-.exp-calendar.withtitle {
+.aui-calendar.withtitle {
 }
 
-.exp-calendar .exp-calendar-nav-left, .exp-calendar .exp-calendar-nav-right {
+.aui-calendar .aui-calendar-nav-left, .aui-calendar .aui-calendar-nav-right {
 }
 
-.exp-calendar .exp-calendar-nav-left {
+.aui-calendar .aui-calendar-nav-left {
 }
 
-.exp-calendar .exp-calendar-nav-right {
+.aui-calendar .aui-calendar-nav-right {
 }
 
-.exp-calendar td.exp-calendar-cell {
+.aui-calendar td.aui-calendar-cell {
 }
 
-.exp-calendar td.exp-calendar-cell a {
+.aui-calendar td.aui-calendar-cell a {
 }
 
-.exp-calendar td.exp-calendar-today a {
+.aui-calendar td.aui-calendar-today a {
 }
 
-.exp-calendar td.exp-calendar-oom {
+.aui-calendar td.aui-calendar-oom {
 }
 
-.exp-calendar td.exp-calendar-selected a {
+.aui-calendar td.aui-calendar-selected a {
 }
 
-.exp-calendar td.exp-calendar-cell-hover a {
+.aui-calendar td.aui-calendar-cell-hover a {
 }
 
-.exp-calendar td.exp-calendar-restricted {
+.aui-calendar td.aui-calendar-restricted {
 }
 
-.exp-calendar td.exp-calendar-previous {
+.aui-calendar td.aui-calendar-previous {
 }
 
-.exp-calendar td.exp-calendar-highlight1 {
+.aui-calendar td.aui-calendar-highlight1 {
 }
 
-.exp-calendar td.exp-calendar-highlight2 {
+.aui-calendar td.aui-calendar-highlight2 {
 }
 
-.exp-calendar td.exp-calendar-highlight3 {
+.aui-calendar td.aui-calendar-highlight3 {
 }
 
-.exp-calendar td.exp-calendar-highlight4 {
+.aui-calendar td.aui-calendar-highlight4 {
 }
 
-.exp-calendar .exp-calendar-head {
+.aui-calendar .aui-calendar-head {
 }
 
-.exp-calendar .exp-calendar-header {
+.aui-calendar .aui-calendar-header {
 }
 
-.exp-calendar .exp-calendar-header img {
+.aui-calendar .aui-calendar-header img {
 }
 
-.exp-calendar .exp-calendar-weekday-row {
+.aui-calendar .aui-calendar-weekday-row {
 }
 
-.exp-calendar .exp-calendar-weekday-row th {
+.aui-calendar .aui-calendar-weekday-row th {
 }
 
-.exp-calendar .exp-calendar-foot {
+.aui-calendar .aui-calendar-foot {
 }
 
-.exp-calendar .exp-calendar-rowhead, .exp-calendar .exp-calendar-rowfoot {
+.aui-calendar .aui-calendar-rowhead, .aui-calendar .aui-calendar-rowfoot {
 }
 
-.exp-calendar .exp-calendar-rowhead, .exp-calendar .exp-calendar-rowfoot {
+.aui-calendar .aui-calendar-rowhead, .aui-calendar .aui-calendar-rowfoot {
 }
 
-.exp-calendar .exp-calendar-rowhead {
+.aui-calendar .aui-calendar-rowhead {
 }
 
-.exp-calendar .exp-calendar-rowfoot {
+.aui-calendar .aui-calendar-rowfoot {
 }
 
-.exp-calendar a.exp-calendar-nav {
+.aui-calendar a.aui-calendar-nav {
 }
 
-.ie .exp-calendar a.exp-calendar-nav {
+.ie .aui-calendar a.aui-calendar-nav {
 }
 
-.ie .exp-calendar a.exp-calendar-nav {
+.ie .aui-calendar a.aui-calendar-nav {
 }
 
-.exp-calendar-container .exp-calendar-navigator-mask {
+.aui-calendar-container .aui-calendar-navigator-mask {
 }
 
-.ie .exp-calendar-container .exp-calendar-navigator-mask {
+.ie .aui-calendar-container .aui-calendar-navigator-mask {
 }
 
-.ie6 .exp-calendar-container .exp-calendar-navigator-mask {
+.ie6 .aui-calendar-container .aui-calendar-navigator-mask {
 }
 
-.exp-calendar-container .exp-calendar-navigator {
+.aui-calendar-container .aui-calendar-navigator {
 }
 
-.exp-calendar-container.withtitle .exp-calendar-navigator {
+.aui-calendar-container.withtitle .aui-calendar-navigator {
 }
 
-.exp-calendar-container.exp-calendar-multiple .exp-calendar-navigator {
+.aui-calendar-container.aui-calendar-multiple .aui-calendar-navigator {
 }
 
-.exp-calendar-container .exp-calendar-navigator-year, .exp-calendar-container .exp-calendar-navigator-month, .exp-calendar-container .exp-calendar-navigator-buttons {
+.aui-calendar-container .aui-calendar-navigator-year, .aui-calendar-container .aui-calendar-navigator-month, .aui-calendar-container .aui-calendar-navigator-buttons {
 }
 
-.exp-calendar-container .exp-calendar-navigator-buttons {
+.aui-calendar-container .aui-calendar-navigator-buttons {
 }
 
-.exp-calendar-container .exp-calendar-navigator-error {
+.aui-calendar-container .aui-calendar-navigator-error {
 }
 
-.exp-calendar-container .exp-calendar-navigator label {
+.aui-calendar-container .aui-calendar-navigator label {
 }
 
-.exp-calendar-container .exp-calendar-navigator-month-control {
+.aui-calendar-container .aui-calendar-navigator-month-control {
 }
 
-.ie6 .exp-calendar-container .exp-calendar-navigator-month-control {
+.ie6 .aui-calendar-container .aui-calendar-navigator-month-control {
 }
 
 /* ---------- Color picker ---------- */
 
-.exp-picker-panel .exp-panel {
+.aui-picker-panel .aui-panel {
 }
 
-.exp-picker-panel .exp-header, .exp-picker-panel .exp-footer {
+.aui-picker-panel .aui-header, .aui-picker-panel .aui-footer {
 }
 
-.exp-picker-panel .exp-body {
+.aui-picker-panel .aui-body {
 }
 
-.exp-picker-panel .container-close {
+.aui-picker-panel .container-close {
 }
 
 .yui-picker {
@@ -592,7 +592,7 @@ img.exp-datepicker-button {
 .yui-picker-controls li {
 }
 
-.exp-picker-panel .yui-picker-controls input {
+.aui-picker-panel .yui-picker-controls input {
 }
 
 .yui-picker-hex-controls {
@@ -615,46 +615,46 @@ img.exp-datepicker-button {
 
 /* ---------- Autocomplete ---------- */
 
-.exp-autocomplete-input {
+.aui-autocomplete-input {
 }
 
-.exp-autocomplete-container {
+.aui-autocomplete-container {
 }
 
-.exp-autocomplete-content {
+.aui-autocomplete-content {
 }
 
-.exp-autocomplete-shadow {
+.aui-autocomplete-shadow {
 }
 
-.ie .exp-autocomplete-shadow{
+.ie .aui-autocomplete-shadow{
 }
 
-.exp-autocomplete-iframe {
+.aui-autocomplete-iframe {
 }
 
-.ie6 .exp-autocomplete-iframe {
+.ie6 .aui-autocomplete-iframe {
 }
 
-.exp-autocomplete-content ul {
+.aui-autocomplete-content ul {
 }
 
-.exp-autocomplete-content li {
+.aui-autocomplete-content li {
 }
 
-.ie .exp-autocomplete-content li {
+.ie .aui-autocomplete-content li {
 }
 
-.exp-autocomplete-content li strong {
+.aui-autocomplete-content li strong {
 }
 
-.exp-autocomplete-highlight {
+.aui-autocomplete-highlight {
 }
 
-li.exp-autocomplete-highlight strong {
+li.aui-autocomplete-highlight strong {
 }
 
-.exp-autocomplete-loading, .exp-autocomplete-loading.focus {
+.aui-autocomplete-loading, .aui-autocomplete-loading.focus {
 }
 
 /* ---------- Tags ---------- */

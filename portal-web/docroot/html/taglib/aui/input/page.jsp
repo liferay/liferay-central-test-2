@@ -52,9 +52,9 @@ if ((type.equals("assetCategories")) || (type.equals("assetTags")) ||
 %>
 
 <c:if test='<%= !type.equals("hidden") %>'>
-	<div class="exp-ctrl-holder <%= cssClass %> <%= first ? "exp-first" : StringPool.BLANK %> <%= last ? "exp-last" : StringPool.BLANK %>">
+	<div class="aui-ctrl-holder <%= cssClass %> <%= first ? "aui-first" : StringPool.BLANK %> <%= last ? "aui-last" : StringPool.BLANK %>">
 		<c:if test="<%= Validator.isNotNull(label) %>">
-			<label class="exp-form-label <%= inlineLabel ? "inline-label" : StringPool.BLANK %>" <%= showForLabel ? "for=\"" + name + "\"" : StringPool.BLANK %>>
+			<label class="aui-form-label <%= inlineLabel ? "inline-label" : StringPool.BLANK %>" <%= showForLabel ? "for=\"" + name + "\"" : StringPool.BLANK %>>
 
 			<liferay-ui:message key="<%= label %>" />
 
@@ -84,7 +84,7 @@ if ((type.equals("assetCategories")) || (type.equals("assetTags")) ||
 		/>
 	</c:when>
 	<c:when test="<%= (model != null) && Validator.isNull(type) %>">
-		<span class="exp-form-field exp-form-<%= ModelHintsUtil.getType(model.getName(), field).toLowerCase() %>">
+		<span class="aui-form-field aui-form-<%= ModelHintsUtil.getType(model.getName(), field).toLowerCase() %>">
 			<liferay-ui:input-field
 				bean="<%= bean %>"
 				defaultValue='<%= value %>'
@@ -98,7 +98,7 @@ if ((type.equals("assetCategories")) || (type.equals("assetTags")) ||
 		</span>
 	</c:when>
 	<c:when test='<%= type.equals("checkbox") %>'>
-		<span class="exp-form-field exp-form-checkbox">
+		<span class="aui-form-field aui-form-checkbox">
 
 			<%
 			boolean booleanValue = false;
@@ -124,7 +124,7 @@ if ((type.equals("assetCategories")) || (type.equals("assetTags")) ||
 		%>
 
 		<c:if test='<%= !type.equals("hidden") %>'>
-			<span class="exp-form-field exp-form-<%= type %>">
+			<span class="aui-form-field aui-form-<%= type %>">
 		</c:if>
 
 		<%

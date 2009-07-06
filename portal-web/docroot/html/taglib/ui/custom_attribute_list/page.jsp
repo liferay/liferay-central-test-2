@@ -48,7 +48,7 @@ List<String> attributeNames = Collections.list(expandoBridge.getAttributeNames()
 for (String attributeName : attributeNames) {
 %>
 
-	<div class="exp-ctrl-holder">
+	<div class="aui-ctrl-holder">
 		<liferay-ui:custom-attribute
 			 className="<%= className %>"
 			 classPK="<%= classPK %>"
@@ -63,7 +63,7 @@ for (String attributeName : attributeNames) {
 %>
 
 <c:if test="<%= attributeNames.isEmpty() %>">
-	<div class="exp-ctrl-holder">
+	<div class="aui-ctrl-holder">
 		<label><%= LanguageUtil.format(pageContext, "no-custom-attributes-are-defined-for-x", modelResourceName) %></label>
 	</div>
 </c:if>

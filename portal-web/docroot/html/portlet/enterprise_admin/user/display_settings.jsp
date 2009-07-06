@@ -33,8 +33,8 @@ String timeZoneId = BeanParamUtil.getString(selUser, request, "timeZoneId", user
 
 <h3><liferay-ui:message key="display-settings" /></h3>
 
-<fieldset class="exp-block-labels">
-	<div class="exp-ctrl-holder">
+<fieldset class="aui-block-labels">
+	<div class="aui-ctrl-holder">
 		<label for="<portlet:namespace />languageId"><liferay-ui:message key="language" /></label>
 
 		<select name="<portlet:namespace />languageId">
@@ -61,13 +61,13 @@ String timeZoneId = BeanParamUtil.getString(selUser, request, "timeZoneId", user
 		</select>
 	</div>
 
-	<div class="exp-ctrl-holder">
+	<div class="aui-ctrl-holder">
 		<label for="<portlet:namespace />timeZoneId"><liferay-ui:message key="time-zone" /></label>
 
 		<liferay-ui:input-time-zone name="timeZoneId" value="<%= timeZoneId %>" />
 	</div>
 
-	<div class="exp-ctrl-holder">
+	<div class="aui-ctrl-holder">
 		<label for="<portlet:namespace />greeting"><liferay-ui:message key="greeting" /></label>
 
 		<liferay-ui:input-field  model="<%= User.class %>" bean="<%= selUser %>" field="greeting" />

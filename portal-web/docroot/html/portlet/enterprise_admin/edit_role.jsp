@@ -61,7 +61,7 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 	}
 </script>
 
-<form class="exp-form" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveRole(); return false;">
+<form class="aui-form" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveRole(); return false;">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(redirect) %>" />
 <input name="<portlet:namespace />roleId" type="hidden" value="<%= roleId %>" />
@@ -70,9 +70,9 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 <liferay-ui:error exception="<%= RequiredRoleException.class %>" message="old-role-name-is-a-required-system-role" />
 <liferay-ui:error exception="<%= RoleNameException.class %>" message="please-enter-a-valid-name" />
 
-<fieldset class="exp-block-labels">
+<fieldset class="aui-block-labels">
 	<c:if test="<%= role != null %>">
-		<div class="exp-ctrl-holder">
+		<div class="aui-ctrl-holder">
 			<label><%= LanguageUtil.get(pageContext, PortalUtil.isSystemRole(role.getName()) ? "name" : "old-name") %></label>
 
 			<%= HtmlUtil.escape(role.getName()) %>
@@ -84,7 +84,7 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 			<input type="hidden" name="name" value="<%= HtmlUtil.escape(role.getName()) %>" />
 		</c:when>
 		<c:otherwise>
-			<div class="exp-ctrl-holder">
+			<div class="aui-ctrl-holder">
 				<label><%= LanguageUtil.get(pageContext, ((role != null) ? "new-name" : "name")) %></label>
 
 				<liferay-ui:input-field model="<%= Role.class %>" bean="<%= role %>" field="name" />
@@ -93,7 +93,7 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 	</c:choose>
 
 	<c:if test="<%= role != null %>">
-		<div class="exp-ctrl-holder">
+		<div class="aui-ctrl-holder">
 			<label><liferay-ui:message key="title" /></label>
 
 			<input id="<portlet:namespace />title_<%= defaultLanguageId %>" name="<portlet:namespace />title_<%= defaultLanguageId %>" size="30" type="text" value="<%= HtmlUtil.escape(role.getTitle(defaultLocale)) %>" />
@@ -125,7 +125,7 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 			%>
 
 			<div class="lfr-floating-container lfr-role-selector" id="<portlet:namespace />languageSelector">
-				<div class="lfr-panel exp-form">
+				<div class="lfr-panel aui-form">
 					<div class="lfr-panel-titlebar">
 						<h3 class="lfr-panel-title"><span><liferay-ui:message key="other-languages" /></span></h3>
 					</div>
@@ -139,7 +139,7 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 
 							<div class="lfr-form-row">
 								<div class="row-fields">
-									<div class="exp-ctrl-holder exp-form-column">
+									<div class="aui-ctrl-holder aui-form-column">
 										<img class="language-flag" src="<%= themeDisplay.getPathThemeImages() %>/language/<%= Validator.isNotNull(languageId) ? languageId : "../spacer" %>.png" />
 
 										<select id="<portlet:namespace />languageId<%= i %>">
@@ -167,7 +167,7 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 										</select>
 									</div>
 
-									<div class="exp-ctrl-holder exp-form-column">
+									<div class="aui-ctrl-holder aui-form-column">
 										<label><liferay-ui:message key="title" /></label>
 
 										<input class="language-value" name="<portlet:namespace />title_<%= languageId %>" type="text" value="<%= HtmlUtil.escape(role.getTitle(languageId, false)) %>" />
@@ -186,13 +186,13 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 		</div>
 	</c:if>
 
-	<div class="exp-ctrl-holder">
+	<div class="aui-ctrl-holder">
 		<label><liferay-ui:message key="description" /></label>
 
 		<liferay-ui:input-field model="<%= Role.class %>" bean="<%= role %>" field="description" />
 	</div>
 
-	<div class="exp-ctrl-holder">
+	<div class="aui-ctrl-holder">
 		<label><liferay-ui:message key="type" /></label>
 
 		<c:choose>
@@ -234,7 +234,7 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 		%>
 
 		<c:if test="<%= subtypes.length > 0 %>">
-			<div class="exp-ctrl-holder">
+			<div class="aui-ctrl-holder">
 				<label><liferay-ui:message key="subtype" /></label>
 
 				<select name="<portlet:namespace/>subtype">
@@ -255,7 +255,7 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 		</c:if>
 	</c:if>
 
-	<div class="exp-button-holder">
+	<div class="aui-button-holder">
 		<input type="submit" value="<liferay-ui:message key="save" />" />
 
 		<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />

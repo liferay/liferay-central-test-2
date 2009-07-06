@@ -29,4 +29,4 @@ String cssClass = GetterUtil.getString((String)request.getAttribute("aui:button-
 Map<String, Object> dynamicAttributes = (Map<String, Object>)request.getAttribute("aui:button-row:dynamicAttributes");
 %>
 
-<div class="exp-button-holder <%= cssClass %>" <%= _buildDynamicAttributes(dynamicAttributes) %>>
+<div class="aui-button-holder <%= cssClass %>" <%= _buildDynamicAttributes(dynamicAttributes) %>>

@@ -79,7 +79,7 @@ else {
 <liferay-ui:error key="<%= NoSuchListTypeException.class.getName() + className + ListTypeImpl.ADDRESS %>" message="please-select-a-type" />
 <liferay-ui:error exception="<%= NoSuchRegionException.class %>" message="please-select-a-region" />
 
-<fieldset class="exp-block-labels">
+<fieldset class="aui-block-labels">
 
 	<%
 	for (int i = 0; i < addressesIndexes.length; i++) {
@@ -90,7 +90,7 @@ else {
 
 		<div class="lfr-form-row">
 			<div class="row-fields">
-				<div class="exp-form-column">
+				<div class="aui-form-column">
 
 					<%
 					String fieldParam = "addressId" + addressesIndex;
@@ -102,7 +102,7 @@ else {
 					fieldParam = "addressStreet1_" + addressesIndex;
 					%>
 
-					<div class="exp-ctrl-holder">
+					<div class="aui-ctrl-holder">
 						<label for="<portlet:namespace /><%= fieldParam %>"><liferay-ui:message key="street1" /></label>
 
 						<liferay-ui:input-field model="<%= Address.class %>" bean="<%= address %>" field="street1" fieldParam="<%= fieldParam %>" />
@@ -112,7 +112,7 @@ else {
 					fieldParam = "addressStreet2_" + addressesIndex;
 					%>
 
-					<div class="exp-ctrl-holder">
+					<div class="aui-ctrl-holder">
 						<label for="<portlet:namespace /><%= fieldParam %>"><liferay-ui:message key="street2" /></label>
 
 						<liferay-ui:input-field model="<%= Address.class %>" bean="<%= address %>" field="street2" fieldParam="<%= fieldParam %>" />
@@ -122,7 +122,7 @@ else {
 					fieldParam = "addressStreet3_" + addressesIndex;
 					%>
 
-					<div class="exp-ctrl-holder">
+					<div class="aui-ctrl-holder">
 						<label for="<portlet:namespace /><%= fieldParam %>"><liferay-ui:message key="street3" /></label>
 
 						<liferay-ui:input-field model="<%= Address.class %>" bean="<%= address %>" field="street3" fieldParam="<%= fieldParam %>" />
@@ -132,7 +132,7 @@ else {
 					fieldParam = "addressCountryId" + addressesIndex;
 					%>
 
-					<div class="exp-ctrl-holder">
+					<div class="aui-ctrl-holder">
 						<label for="<portlet:namespace /><%= fieldParam %>"><liferay-ui:message key="country" /></label>
 
 						<select id="<portlet:namespace /><%= fieldParam %>" name="<portlet:namespace /><%= fieldParam %>"></select>
@@ -142,20 +142,20 @@ else {
 					fieldParam = "addressRegionId" + addressesIndex;
 					%>
 
-					<div class="exp-ctrl-holder">
+					<div class="aui-ctrl-holder">
 						<label for="<portlet:namespace /><%= fieldParam %>"><liferay-ui:message key="region" /></label>
 
 						<select id="<portlet:namespace /><%= fieldParam %>" name="<portlet:namespace /><%= fieldParam %>"></select>
 					</div>
 				</div>
 
-				<div class="exp-form-column">
+				<div class="aui-form-column">
 
 					<%
 					fieldParam = "addressTypeId" + addressesIndex;
 					%>
 
-					<div class="exp-ctrl-holder">
+					<div class="aui-ctrl-holder">
 						<label for="<portlet:namespace /><%= fieldParam %>"><liferay-ui:message key="type" /></label>
 
 						<select name="<portlet:namespace /><%= fieldParam %>">
@@ -179,7 +179,7 @@ else {
 					fieldParam = "addressZip" + addressesIndex;
 					%>
 
-					<div class="exp-ctrl-holder">
+					<div class="aui-ctrl-holder">
 						<label for="<portlet:namespace /><%= fieldParam %>"><liferay-ui:message key="zip" /></label>
 
 						<liferay-ui:input-field model="<%= Address.class %>" bean="<%= address %>" field="zip" fieldParam="<%= fieldParam %>" />
@@ -189,7 +189,7 @@ else {
 					fieldParam = "addressCity" + addressesIndex;
 					%>
 
-					<div class="exp-ctrl-holder">
+					<div class="aui-ctrl-holder">
 						<label for="<portlet:namespace /><%= fieldParam %>"><liferay-ui:message key="city" /></label>
 
 						<liferay-ui:input-field model="<%= Address.class %>" bean="<%= address %>" field="city" fieldParam="<%= fieldParam %>" />
@@ -199,7 +199,7 @@ else {
 					fieldParam = "addressPrimary" + addressesIndex;
 					%>
 
-					<div class="exp-ctrl-holder primary-ctrl">
+					<div class="aui-ctrl-holder primary-ctrl">
 						<label class="inline-label" for="<portlet:namespace /><%= fieldParam %>">
 							<liferay-ui:message key="primary" />
 
@@ -211,7 +211,7 @@ else {
 					fieldParam = "addressMailing" + addressesIndex;
 					%>
 
-					<div class="exp-ctrl-holder mailing-ctrl">
+					<div class="aui-ctrl-holder mailing-ctrl">
 						<label class="inline-label" for="<portlet:namespace /><%= fieldParam %>">
 							<liferay-ui:message key="mailing" />
 

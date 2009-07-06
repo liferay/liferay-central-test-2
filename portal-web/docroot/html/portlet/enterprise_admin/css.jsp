@@ -24,7 +24,7 @@
 
 <%@ include file="/html/portlet/css_init.jsp" %>
 
-.portlet-enterprise-admin .exp-form .exp-block-labels textarea {
+.portlet-enterprise-admin .aui-form .aui-block-labels textarea {
 	width: 90%;
 }
 
@@ -82,7 +82,7 @@
 	border:none;
 	width: 100px;
 }
-.portlet-enterprise-admin .exp-ctrl-holder.action-ctrl, .portlet-enterprise-admin .exp-ctrl-holder.mailing-ctrl, .portlet-enterprise-admin .exp-ctrl-holder.primary-ctrl {
+.portlet-enterprise-admin .aui-ctrl-holder.action-ctrl, .portlet-enterprise-admin .aui-ctrl-holder.mailing-ctrl, .portlet-enterprise-admin .aui-ctrl-holder.primary-ctrl {
 	margin: 1.8em 0;
 }
 
@@ -208,7 +208,7 @@
 	width: 35px;
 }
 
-.portlet-enterprise-admin .form-navigation .exp-button-holder {
+.portlet-enterprise-admin .form-navigation .aui-button-holder {
 	margin-top: 20px;
 }
 
@@ -228,7 +228,7 @@
 	padding-top: 0;
 }
 
-.portlet-enterprise-admin .lfr-form-row .exp-ctrl-holder, .lfr-role-selector .lfr-form-row .exp-ctrl-holder {
+.portlet-enterprise-admin .lfr-form-row .aui-ctrl-holder, .lfr-role-selector .lfr-form-row .aui-ctrl-holder {
 	clear: none;
 	float: left;
 }
@@ -269,43 +269,43 @@
 	padding: 2px;
 }
 
-.portlet-enterprise-admin .exp-form .exp-block-labels label, .portlet-enterprise-admin .exp-form .exp-block-labels .label {
+.portlet-enterprise-admin .aui-form .aui-block-labels label, .portlet-enterprise-admin .aui-form .aui-block-labels .label {
 	font-weight: bold;
 }
 
-.portlet-enterprise-admin .exp-form .exp-block-labels label input {
+.portlet-enterprise-admin .aui-form .aui-block-labels label input {
 	vertical-align: middle;
 }
 
-.portlet-enterprise-admin .exp-form .exp-block-labels .exp-ctrl-holder {
+.portlet-enterprise-admin .aui-form .aui-block-labels .aui-ctrl-holder {
 	margin-bottom: 10px;
 }
 
-.portlet-enterprise-admin .exp-form .exp-block-labels .exp-ctrl-holder.mailing-ctrl {
+.portlet-enterprise-admin .aui-form .aui-block-labels .aui-ctrl-holder.mailing-ctrl {
 	clear: both;
 }
 
-.portlet-enterprise-admin .exp-form fieldset {
+.portlet-enterprise-admin .aui-form fieldset {
 	border: none;
 	padding: 0;
 	width: 100%;
 }
 
-.portlet-enterprise-admin .exp-form fieldset.exp-form-column, .lfr-role-selector .exp-form .exp-form-column {
+.portlet-enterprise-admin .aui-form fieldset.aui-form-column, .lfr-role-selector .aui-form .aui-form-column {
 	margin-right: 10px;
 	width: auto;
 }
 
-.portlet-enterprise-admin #addresses .exp-ctrl-holder {
+.portlet-enterprise-admin #addresses .aui-ctrl-holder {
 	float: none;
 	width: auto;
 }
 
-.ie6 .portlet-enterprise-admin .exp-form fieldset.exp-form-column, .ie6 .lfr-role-selector .exp-form fieldset.exp-form-column {
+.ie6 .portlet-enterprise-admin .aui-form fieldset.aui-form-column, .ie6 .lfr-role-selector .aui-form fieldset.aui-form-column {
 	width: 33%;
 }
 
-.portlet-enterprise-admin .exp-form .row-container {
+.portlet-enterprise-admin .aui-form .row-container {
 }
 
 .portlet-enterprise-admin .user-table, .portlet-enterprise-admin .organization-table {
@@ -374,7 +374,7 @@
 	background-position: 0 100%;
 }
 
-.lfr-floating-container .exp-ctrl-holder input, .lfr-floating-container .exp-ctrl-holder img {
+.lfr-floating-container .aui-ctrl-holder input, .lfr-floating-container .aui-ctrl-holder img {
 	vertical-align: top;
 }
 
@@ -446,6 +446,6 @@
 	padding: 4px 14px;
 }
 
-.lfr-role-selector .exp-form label {
+.lfr-role-selector .aui-form label {
 	margin-right: 0.4em;
 }

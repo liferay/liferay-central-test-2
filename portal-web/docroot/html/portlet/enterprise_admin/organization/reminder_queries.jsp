@@ -48,14 +48,14 @@ Map<Locale, String> reminderQueriesMap = LocalizationUtil.getLocalizedParameter(
 	<liferay-ui:message key="specify-custom-reminder-queries-for-the-users-of-this-organization" />
 </span>
 
-<fieldset class="exp-block-labels">
-	<div class="exp-ctrl-holder">
+<fieldset class="aui-block-labels">
+	<div class="aui-ctrl-holder">
 		<label for="<portlet:namespace />reminderQueries"><liferay-ui:message key="default-language" />: <%= defaultLocale.getDisplayName(defaultLocale) %></label>
 
 		<textarea class="lfr-textarea" name="<portlet:namespace />reminderQueries"><%= reminderQueries %></textarea>
 	</div>
 
-	<div class="exp-ctrl-holder">
+	<div class="aui-ctrl-holder">
 		<label for="<portlet:namespace />reminderQueryLanguageId"><liferay-ui:message key="localized-language" />:</label>
 
 		<select id="<portlet:namespace />reminderQueryLanguageId" name="<portlet:namespace />reminderQueryLanguageId" onChange="<portlet:namespace />updateReminderQueriesLanguage();">

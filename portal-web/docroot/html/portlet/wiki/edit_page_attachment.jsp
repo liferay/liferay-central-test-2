@@ -55,7 +55,7 @@ WikiPage wikiPage = (WikiPage)request.getAttribute(WebKeys.WIKI_PAGE);
 	<liferay-util:param name="tabs1" value="attachments" />
 </liferay-util:include>
 
-<form action="<portlet:actionURL><portlet:param name="struts_action" value="/wiki/edit_page_attachment" /></portlet:actionURL>" class="exp-form" enctype="multipart/form-data" method="post" name="<portlet:namespace />fm">
+<form action="<portlet:actionURL><portlet:param name="struts_action" value="/wiki/edit_page_attachment" /></portlet:actionURL>" class="aui-form" enctype="multipart/form-data" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.ADD %>" />
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(redirect) %>" />
 <input name="<portlet:namespace />nodeId" type="hidden" value="<%= String.valueOf(node.getNodeId()) %>" />
@@ -67,29 +67,29 @@ WikiPage wikiPage = (WikiPage)request.getAttribute(WebKeys.WIKI_PAGE);
 </div>
 
 <div class="lfr-fallback" id="<portlet:namespace />fallback">
-	<fieldset class="exp-block-labels">
+	<fieldset class="aui-block-labels">
 		<legend><liferay-ui:message key="upload-files" /></legend>
 
-		<div class="exp-ctrl-holder">
+		<div class="aui-ctrl-holder">
 			<label for="<portlet:namespace />file1"><liferay-ui:message key="file" /> 1</label>
 
 			<input id="<portlet:namespace />file1" name="<portlet:namespace />file1" type="file" />
 		</div>
 
-		<div class="exp-ctrl-holder">
+		<div class="aui-ctrl-holder">
 			<label for="<portlet:namespace />file2"><liferay-ui:message key="file" /> 2</label>
 
 			<input id="<portlet:namespace />file2" name="<portlet:namespace />file2" type="file" />
 		</div>
 
-		<div class="exp-ctrl-holder">
+		<div class="aui-ctrl-holder">
 			<label for="<portlet:namespace />file3"><liferay-ui:message key="file" /> 3</label>
 
 			<input id="<portlet:namespace />file3" name="<portlet:namespace />file3" type="file" />
 		</div>
 	</fieldset>
 
-	<div class="exp-button-holder">
+	<div class="aui-button-holder">
 		<input type="submit" value="<liferay-ui:message key="save" />" />
 
 		<input type="button" value="<liferay-ui:message key="cancel" />" onClick="parent.location = '<%= HtmlUtil.escape(redirect) %>';" />

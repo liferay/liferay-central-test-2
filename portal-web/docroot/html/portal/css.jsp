@@ -26,8 +26,8 @@
 
 <%@ page import="com.liferay.portal.model.ModelHintsConstants" %>
 
-<%@ include file="/html/portal/expanse/base.css.jsp" %>
-<%@ include file="/html/portal/expanse/form.css.jsp" %>
+<%@ include file="/html/portal/alloy/base.css.jsp" %>
+<%@ include file="/html/portal/alloy/form.css.jsp" %>
 
 /* ---------- Modules ---------- */
 
@@ -438,7 +438,7 @@
 	padding-left: 20px;
 }
 
-.exp-form .lfr-form-row fieldset {
+.aui-form .lfr-form-row fieldset {
 	border: none;
 	margin: 0;
 	padding: 0;
@@ -578,7 +578,7 @@
 	display: none;
 }
 
-#portlet-set-properties .exp-form {
+#portlet-set-properties .aui-form {
 	clear: both;
 }
 
@@ -594,12 +594,12 @@
 	font-size: 1.1em;
 }
 
-#portlet-set-properties .exp-form .text-input {
+#portlet-set-properties .aui-form .text-input {
 	margin-right: 5px;
 	width: 80px;
 }
 
-#portlet-set-properties .exp-form fieldset.col {
+#portlet-set-properties .aui-form fieldset.col {
 	width: 29%;
 }
 
@@ -631,7 +631,7 @@
 	width: 25%;
 }
 
-#portlet-set-properties .exp-form #custom-css {
+#portlet-set-properties .aui-form #custom-css {
 	height: 300px;
 	width: 400px;
 }
@@ -649,7 +649,7 @@
 	margin-top: 10px;
 }
 
-#portlet-set-properties .exp-form {
+#portlet-set-properties .aui-form {
 	clear: both;
 }
 
@@ -1216,11 +1216,11 @@ li.toggle-expand a {
 	width: <%= ModelHintsConstants.TEXTAREA_DISPLAY_WIDTH %>px;
 }
 
-fieldset, .exp-form fieldset {
+fieldset, .aui-form fieldset {
 	margin-bottom: 2em;
 }
 
-fieldset:last-child, .exp-form fieldset:last-child {
+fieldset:last-child, .aui-form fieldset:last-child {
 	margin-bottom: 0;
 }
 
@@ -1551,21 +1551,21 @@ fieldset:last-child, .exp-form fieldset:last-child {
 	padding-top: 0;
 }
 
-.taglib-input-localized .lfr-form-row .exp-ctrl-holder, .lfr-language-selector .lfr-form-row .exp-ctrl-holder {
+.taglib-input-localized .lfr-form-row .aui-ctrl-holder, .lfr-language-selector .lfr-form-row .aui-ctrl-holder {
 	clear: none;
 	float: left;
 }
 
-.taglib-input-localized .exp-form fieldset.exp-form-column, .lfr-language-selector .exp-form .exp-form-column {
+.taglib-input-localized .aui-form fieldset.aui-form-column, .lfr-language-selector .aui-form .aui-form-column {
 	margin-right: 10px;
 	width: auto;
 }
 
-.ie6 .taglib-input-localized .exp-form fieldset.exp-form-column, .ie6 .lfr-language-selector .exp-form fieldset.exp-form-column {
+.ie6 .taglib-input-localized .aui-form fieldset.aui-form-column, .ie6 .lfr-language-selector .aui-form fieldset.aui-form-column {
 	width: 33%;
 }
 
-.taglib-input-localized .lfr-language-selector .exp-form label {
+.taglib-input-localized .lfr-language-selector .aui-form label {
 	margin-right: 0.4em;
 }
 

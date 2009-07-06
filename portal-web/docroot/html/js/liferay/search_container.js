@@ -1,4 +1,4 @@
-Liferay.SearchContainer = new Expanse.Class(
+Liferay.SearchContainer = new Alloy.Class(
 	{
 		initialize: function(options) {
 			var instance = this;

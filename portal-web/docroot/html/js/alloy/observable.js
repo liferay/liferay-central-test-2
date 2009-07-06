@@ -1,4 +1,4 @@
-Expanse.Observable = new Expanse.Class(
+Alloy.Observable = new Alloy.Class(
 	{
 		initialize: function() {
 			var instance = this;
@@ -176,7 +176,7 @@ Expanse.Observable = new Expanse.Class(
 			instance._createEventObj();
 
 			if (!instance._events[event]) {
-				instance._events[event] = new Expanse.CustomEvent(event, instance, true);
+				instance._events[event] = new Alloy.CustomEvent(event, instance, true);
 			}
 
 			return instance._events[event];
@@ -186,5 +186,5 @@ Expanse.Observable = new Expanse.Class(
 	}
 );
 
-Expanse.Observable.prototype.on = Expanse.Observable.prototype.bind;
-Expanse.Observable.prototype.un = Expanse.Observable.prototype.unbind;
+Alloy.Observable.prototype.on = Alloy.Observable.prototype.bind;
+Alloy.Observable.prototype.un = Alloy.Observable.prototype.unbind;

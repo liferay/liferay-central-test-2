@@ -25,7 +25,7 @@ Liferay.PortletCSS = {
 			}
 
 			if (!instance._currentPopup) {
-				instance._currentPopup = new Expanse.Popup(
+				instance._currentPopup = new Alloy.Popup(
 					{
 						body: content[0],
 						height: 'auto',
@@ -79,7 +79,7 @@ Liferay.PortletCSS = {
 
 		instance._newPanel.find('.use-colorpicker').each(
 			function() {
-				new Expanse.ColorPickerPanel(
+				new Alloy.ColorPickerPanel(
 					{
 						buttonbuttonContext: jQuery('#portlet-set-properties')[0],
 						item: this
@@ -114,7 +114,7 @@ Liferay.PortletCSS = {
 			bgData.backgroundColor = color;
 		};
 
-		var colorPicker = new Expanse.ColorPickerPanel(
+		var colorPicker = new Alloy.ColorPickerPanel(
 			{
 				buttonContext: instance._newPanel[0],
 				item: backgroundColor[0],
@@ -376,7 +376,7 @@ Liferay.PortletCSS = {
 			portlet.css(styling);
 		};
 
-		var colorPickerTop = new Expanse.ColorPickerPanel(
+		var colorPickerTop = new Alloy.ColorPickerPanel(
 			{
 				buttonContext: jQuery('#portlet-set-properties')[0],
 				item: cTopColor[0],
@@ -386,7 +386,7 @@ Liferay.PortletCSS = {
 			}
 		);
 
-		var colorPickerRight = new Expanse.ColorPickerPanel(
+		var colorPickerRight = new Alloy.ColorPickerPanel(
 			{
 				buttonContext: jQuery('#portlet-set-properties')[0],
 				item: cRightColor[0],
@@ -396,7 +396,7 @@ Liferay.PortletCSS = {
 			}
 		);
 
-		var colorPickerBottom = new Expanse.ColorPickerPanel(
+		var colorPickerBottom = new Alloy.ColorPickerPanel(
 			{
 				buttonContext: jQuery('#portlet-set-properties')[0],
 				item: cBottomColor[0],
@@ -406,7 +406,7 @@ Liferay.PortletCSS = {
 			}
 		);
 
-		var colorPickerLeft = new Expanse.ColorPickerPanel(
+		var colorPickerLeft = new Alloy.ColorPickerPanel(
 			{
 				buttonContext: jQuery('#portlet-set-properties')[0],
 				item: cLeftColor[0],
@@ -436,7 +436,7 @@ Liferay.PortletCSS = {
 		var portlet = instance._curPortlet;
 
 		var customCSS = jQuery('#lfr-custom-css');
-		var customCSSContainer = customCSS.parents('.exp-ctrl-holder');
+		var customCSSContainer = customCSS.parents('.aui-ctrl-holder');
 		var customPortletNoteHTML = '<p class="portlet-msg-info form-hint"></p>';
 		var customPortletNote = jQuery('#lfr-portlet-info');
 		var refreshText = '';
@@ -541,7 +541,7 @@ Liferay.PortletCSS = {
 			addIdLink = jQuery('<a href="javascript:;" id="lfr-add-id">' + Liferay.Language.get('add-a-css-rule-for-just-this-portlet') + '</a>');
 			addClassLink = jQuery('<a href="javascript:;" id="lfr-add-class">' + Liferay.Language.get('add-a-css-rule-for-all-portlets-like-this-one') + '</a>');
 
-			var updateOnTypeHolder = jQuery('<div class="exp-ctrl-holder"></div>');
+			var updateOnTypeHolder = jQuery('<div class="aui-ctrl-holder"></div>');
 			var updateOnTypeLabel = jQuery('<label>' + Liferay.Language.get('update-my-styles-as-i-type') + ' </label>');
 
 			updateOnType = jQuery('<input id="lfr-update-on-type" type="checkbox" />');
@@ -737,7 +737,7 @@ Liferay.PortletCSS = {
 
 		newPanel.show();
 
-		var tabs = new Expanse.TabView(newPanel[0]);
+		var tabs = new Alloy.TabView(newPanel[0]);
 
 		tabs.selectTab(tabTrigger);
 
@@ -916,7 +916,7 @@ Liferay.PortletCSS = {
 
 		var handleForms = function() {
 			var checkBox = jQuery(this);
-			var otherHolders = checkBox.parents('fieldset:first').find('.exp-ctrl-holder:gt(1)');
+			var otherHolders = checkBox.parents('fieldset:first').find('.aui-ctrl-holder:gt(1)');
 			var otherForms = otherHolders.find('input, select');
 			var colorPickerImages = otherHolders.find('.lfr-colorpicker-img');
 
@@ -1528,7 +1528,7 @@ Liferay.PortletCSS = {
 			}
 		};
 
-		var colorPicker = new Expanse.ColorPickerPanel(
+		var colorPicker = new Alloy.ColorPickerPanel(
 			{
 				buttonContext: jQuery('#portlet-set-properties')[0],
 				item: fontColor[0],

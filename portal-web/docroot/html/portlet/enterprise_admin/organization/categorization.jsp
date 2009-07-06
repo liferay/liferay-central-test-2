@@ -28,8 +28,8 @@
 Organization organization = (Organization)request.getAttribute(WebKeys.ORGANIZATION);
 %>
 
-<fieldset class="exp-block-labels">
-	<div class="exp-ctrl-holder">
+<fieldset class="aui-block-labels">
+	<div class="aui-ctrl-holder">
 		<label for="<portlet:namespace />assetTagNames"><liferay-ui:message key="tags" /></label>
 
 		<%

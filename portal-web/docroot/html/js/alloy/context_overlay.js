@@ -1,6 +1,6 @@
 (function() {
-	var Dom = Expanse.Dom;
-	var Event = Expanse.Event;
+	var Dom = Alloy.Dom;
+	var Event = Alloy.Event;
 
 	/**
 	* ContextOverlay is a subclass of Overlay that is automatically configured to display
@@ -9,12 +9,12 @@
 	* 
 	* @class ContextOverlay
 	* @module container
-	* @extends Expanse.Overlay
+	* @extends Alloy.Overlay
 	* @constructor
 	* @param {Object} options The options that configure the instance of the ContextOverlay
 	*/
 
-	Expanse.ContextOverlay = Expanse.Overlay.extend(
+	Alloy.ContextOverlay = Alloy.Overlay.extend(
 		{
 			initialize: function(options) {
 				var instance = this;
@@ -32,7 +32,7 @@
 				}
 
 				if (options.trigger && !YAHOO.lang.isArray(options.context)) {
-					var contextEl = Expanse.getEl(options.trigger);
+					var contextEl = Alloy.getEl(options.trigger);
 
 					var overlayCorner = options.overlayCorner || 'tl';
 					var contextCorner = options.contextCorner || 'bl';
@@ -52,7 +52,7 @@
 
 					instance.options = options;
 
-					instance.hideTask = new Expanse.DelayedTask(this.hide, instance);
+					instance.hideTask = new Alloy.DelayedTask(this.hide, instance);
 
 					instance._createInteraction();
 

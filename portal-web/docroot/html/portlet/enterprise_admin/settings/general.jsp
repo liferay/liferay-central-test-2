@@ -33,10 +33,10 @@ String defaultLogoutPagePath = ParamUtil.getString(request, "settings(" + PropsK
 
 <h3><liferay-ui:message key="main-configuration" /></h3>
 
-<fieldset class="exp-block-labels exp-form-column">
+<fieldset class="aui-block-labels aui-form-column">
 	<liferay-ui:error exception="<%= AccountNameException.class %>" message="please-enter-a-valid-name" />
 
-	<div class="exp-ctrl-holder">
+	<div class="aui-ctrl-holder">
 		<label for="<portlet:namespace />name"><liferay-ui:message key="name" /></label>
 
 		<liferay-ui:input-field model="<%= Account.class %>" bean="<%= account %>" field="name" />
@@ -44,17 +44,17 @@ String defaultLogoutPagePath = ParamUtil.getString(request, "settings(" + PropsK
 
 	<liferay-ui:error exception="<%= CompanyMxException.class %>" message="please-enter-a-valid-mail-domain" />
 
-	<div class="exp-ctrl-holder">
+	<div class="aui-ctrl-holder">
 		<label for="<portlet:namespace />mailDomain"><liferay-ui:message key="mail-domain" /></label>
 
 		<liferay-ui:input-field model="<%= Company.class %>" bean="<%= company %>" field="mx" disabled="<%= !PropsValues.MAIL_MX_UPDATE %>" />
 	</div>
 </fieldset>
 
-<fieldset class="exp-block-labels exp-form-column">
+<fieldset class="aui-block-labels aui-form-column">
 	<liferay-ui:error exception="<%= CompanyVirtualHostException.class %>" message="please-enter-a-valid-virtual-host" />
 
-	<div class="exp-ctrl-holder">
+	<div class="aui-ctrl-holder">
 		<label for="<portlet:namespace />virtualHost"><liferay-ui:message key="virtual-host" /></label>
 
 		<liferay-ui:input-field model="<%= Company.class %>" bean="<%= company %>" field="virtualHost" />
@@ -63,22 +63,22 @@ String defaultLogoutPagePath = ParamUtil.getString(request, "settings(" + PropsK
 
 <h3><liferay-ui:message key="navigation" /></h3>
 
-<fieldset class="exp-block-labels exp-form-column">
-	<div class="exp-ctrl-holder">
+<fieldset class="aui-block-labels aui-form-column">
+	<div class="aui-ctrl-holder">
 		<label for="<portlet:namespace />homeURL"><liferay-ui:message key="home-url" /><liferay-ui:icon-help message="home-url-help" /></label>
 
 		<liferay-ui:input-field model="<%= Company.class %>" bean="<%= company %>" field="homeURL" />
 	</div>
 </fieldset>
 
-<fieldset class="exp-block-labels exp-form-column">
-	<div class="exp-ctrl-holder">
+<fieldset class="aui-block-labels aui-form-column">
+	<div class="aui-ctrl-holder">
 		<label for="<portlet:namespace />settings(<%= PropsKeys.DEFAULT_LANDING_PAGE_PATH %>)"><liferay-ui:message key="default-landing-page" /><liferay-ui:icon-help message="default-landing-page-help" /></label>
 
 		<input name="<portlet:namespace />settings(<%= PropsKeys.DEFAULT_LANDING_PAGE_PATH %>)" type="text" value="<%= defaultLandingPagePath %>" />
 	</div>
 
-	<div class="exp-ctrl-holder">
+	<div class="aui-ctrl-holder">
 		<label for="<portlet:namespace />settings(<%= PropsKeys.DEFAULT_LOGOUT_PAGE_PATH %>)"><liferay-ui:message key="default-logout-page" /><liferay-ui:icon-help message="default-logout-page-help" /></label>
 
 		<input name="<portlet:namespace />settings(<%= PropsKeys.DEFAULT_LOGOUT_PAGE_PATH %>)" type="text" value="<%= defaultLogoutPagePath %>" />
@@ -87,46 +87,46 @@ String defaultLogoutPagePath = ParamUtil.getString(request, "settings(" + PropsK
 
 <h3><liferay-ui:message key="additional-information" /></h3>
 
-<fieldset class="exp-block-labels exp-form-column">
-	<div class="exp-ctrl-holder">
+<fieldset class="aui-block-labels aui-form-column">
+	<div class="aui-ctrl-holder">
 		<label for="<portlet:namespace />legalName"><liferay-ui:message key="legal-name" /></label>
 
 		<liferay-ui:input-field model="<%= Account.class %>" bean="<%= account %>" field="legalName" />
 	</div>
 
-	<div class="exp-ctrl-holder">
+	<div class="aui-ctrl-holder">
 		<label for="<portlet:namespace />legalId"><liferay-ui:message key="legal-id" /></label>
 
 		<liferay-ui:input-field model="<%= Account.class %>" bean="<%= account %>" field="legalId" />
 	</div>
 
-	<div class="exp-ctrl-holder">
+	<div class="aui-ctrl-holder">
 		<label for="<portlet:namespace />legalType"><liferay-ui:message key="legal-type" /></label>
 
 		<liferay-ui:input-field model="<%= Account.class %>" bean="<%= account %>" field="legalType" />
 	</div>
 </fieldset>
 
-<fieldset class="exp-block-labels exp-form-column">
-	<div class="exp-ctrl-holder">
+<fieldset class="aui-block-labels aui-form-column">
+	<div class="aui-ctrl-holder">
 		<label for="<portlet:namespace />sicCode"><liferay-ui:message key="sic-code" /></label>
 
 		<liferay-ui:input-field model="<%= Account.class %>" bean="<%= account %>" field="sicCode" />
 	</div>
 
-	<div class="exp-ctrl-holder">
+	<div class="aui-ctrl-holder">
 		<label for="<portlet:namespace />tickerSymbol"><liferay-ui:message key="ticker-symbol" /></label>
 
 		<liferay-ui:input-field model="<%= Account.class %>" bean="<%= account %>" field="tickerSymbol" />
 	</div>
 
-	<div class="exp-ctrl-holder">
+	<div class="aui-ctrl-holder">
 		<label for="<portlet:namespace />indsutry"><liferay-ui:message key="industry" /></label>
 
 		<liferay-ui:input-field model="<%= Account.class %>" bean="<%= account %>" field="industry" />
 	</div>
 
-	<div class="exp-ctrl-holder">
+	<div class="aui-ctrl-holder">
 		<label for="<portlet:namespace />type"><liferay-ui:message key="type" /></label>
 
 		<liferay-ui:input-field model="<%= Account.class %>" bean="<%= account %>" field="type" />

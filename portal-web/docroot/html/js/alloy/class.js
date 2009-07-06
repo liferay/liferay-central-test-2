@@ -1,5 +1,5 @@
 (function() {
-	Expanse.Class = function(properties) {
+	Alloy.Class = function(properties) {
 		var instance = this;
 
 		var superclass = instance;
@@ -21,7 +21,7 @@
 				var args = Array.prototype.slice.call(arguments, 0);
 
 				args.unshift(instance);
-				Expanse.extend.apply(instance, args);
+				Alloy.extend.apply(instance, args);
 
 				return instance;
 			};
@@ -94,7 +94,7 @@
 		return Class;
 	};
 
-	Expanse.Class.prototype = {
+	Alloy.Class.prototype = {
 		extend: function(properties) {
 			var instance = this;
 
@@ -105,13 +105,13 @@
 				var current = properties[property];
 
 				if (previous && typeof previous == 'function' && previous != current) {
-					current = Expanse.Class.createSuper(previous, current) || current;
+					current = Alloy.Class.createSuper(previous, current) || current;
 				}
 
 				proto[property] = current;
 			}
 
-			var Class = new Expanse.Class(proto);
+			var Class = new Alloy.Class(proto);
 
 			Class.prototype.superclass = instance.constructor;
 			Class.superclass = instance.constructor;
@@ -137,7 +137,7 @@
 		}
 	};
 
-	Expanse.Class.createSuper = function(previous, current) {
+	Alloy.Class.createSuper = function(previous, current) {
 		return function() {
 			this._super = previous;
 

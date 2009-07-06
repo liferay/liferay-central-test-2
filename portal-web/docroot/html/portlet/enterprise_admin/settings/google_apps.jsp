@@ -31,14 +31,14 @@ String googleAppsPassword = ParamUtil.getString(request, "settings(" + PropsKeys
 
 <h3><liferay-ui:message key="google-apps" /></h3>
 
-<fieldset class="exp-block-labels">
-	<div class="exp-ctrl-holder">
+<fieldset class="aui-block-labels">
+	<div class="aui-ctrl-holder">
 		<label for="<portlet:namespace />settings(<%= PropsKeys.GOOGLE_APPS_USERNAME%>)"><liferay-ui:message key="user-name" /></label>
 
 		<input class="lfr-input-text" name="<portlet:namespace />settings(<%= PropsKeys.GOOGLE_APPS_USERNAME %>)" type="text" value="<%= HtmlUtil.escape(googleAppsUsername) %>" />
 	</div>
 
-	<div class="exp-ctrl-holder">
+	<div class="aui-ctrl-holder">
 		<label for="<portlet:namespace />settings(<%= PropsKeys.GOOGLE_APPS_PASSWORD %>)"><liferay-ui:message key="password" /></label>
 
 		<input class="lfr-input-text" name="<portlet:namespace />settings(<%= PropsKeys.GOOGLE_APPS_PASSWORD %>)" type="password" value="<%= HtmlUtil.escape(googleAppsPassword) %>" />

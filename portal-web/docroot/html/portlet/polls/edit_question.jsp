@@ -98,7 +98,7 @@ if (choiceName > 0) {
 	}
 </script>
 
-<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/polls/edit_question" /></portlet:actionURL>" class="exp-form" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveQuestion(); return false;">
+<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/polls/edit_question" /></portlet:actionURL>" class="aui-form" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveQuestion(); return false;">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(redirect) %>" />
 <input name="<portlet:namespace />questionId" type="hidden" value="<%= questionId %>" />
@@ -115,20 +115,20 @@ if (choiceName > 0) {
 <liferay-ui:error exception="<%= QuestionExpirationDateException.class %>" message="please-enter-a-valid-expiration-date" />
 <liferay-ui:error exception="<%= QuestionTitleException.class %>" message="please-enter-a-valid-title" />
 
-<fieldset class="exp-block-labels">
-	<div class="exp-ctrl-holder">
+<fieldset class="aui-block-labels">
+	<div class="aui-ctrl-holder">
 		<label for="<portlet:namespace />title"><liferay-ui:message key="title" /></label>
 
 		<liferay-ui:input-field model="<%= PollsQuestion.class %>" bean="<%= question %>" field="title" />
 	</div>
 
-	<div class="exp-ctrl-holder">
+	<div class="aui-ctrl-holder">
 		<label for="<portlet:namespace />description"><liferay-ui:message key="description" /></label>
 
 		<liferay-ui:input-field model="<%= PollsQuestion.class %>" bean="<%= question %>" field="description" />
 	</div>
 
-	<div class="exp-ctrl-holder">
+	<div class="aui-ctrl-holder">
 		<label for="<portlet:namespace />expirationDate">
 			<liferay-ui:message key="expiration-date" />
 
@@ -146,7 +146,7 @@ if (choiceName > 0) {
 		</label>
 	</div>
 
-	<div class="exp-ctrl-holder">
+	<div class="aui-ctrl-holder">
 		<label for="<portlet:namespace />choices"><liferay-ui:message key="choices" /></label>
 
 		<%
@@ -185,13 +185,13 @@ if (choiceName > 0) {
 		}
 		%>
 
-		<div class="exp-button-holder">
+		<div class="aui-button-holder">
 			<input type="button" value="<liferay-ui:message key="add-choice" />" onClick="<portlet:namespace />addPollChoice();" />
 		</div>
 	</div>
 
 	<c:if test="<%= question == null %>">
-		<div class="exp-ctrl-holder">
+		<div class="aui-ctrl-holder">
 			<label for="<portlet:namespace />permissions"><liferay-ui:message key="permissions" /></label>
 
 			<liferay-ui:input-permissions
@@ -200,7 +200,7 @@ if (choiceName > 0) {
 		</div>
 	</c:if>
 
-	<div class="exp-button-holder">
+	<div class="aui-button-holder">
 		<input type="submit" value="<liferay-ui:message key="save" />" />
 
 		<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />

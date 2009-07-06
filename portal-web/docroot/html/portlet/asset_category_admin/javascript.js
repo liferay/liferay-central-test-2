@@ -1,9 +1,9 @@
 (function() {
-	var Dom = Expanse.Dom;
-	var Event = Expanse.Event;
-	var DDM = Expanse.DragDrop;
+	var Dom = Alloy.Dom;
+	var Event = Alloy.Event;
+	var DDM = Alloy.DragDrop;
 
-	var AssetCategoryAdmin = new Expanse.Class(
+	var AssetCategoryAdmin = new Alloy.Class(
 		{
 			initialize: function(portletId) {
 				var instance = this;
@@ -44,7 +44,7 @@
 				var addCategoryButton = jQuery('.add-category-button');
 				var addVocabularyButton = jQuery('.add-vocabulary-button');
 
-				instance._toolbarCategoryPanel = new Expanse.Overlay(
+				instance._toolbarCategoryPanel = new Alloy.Overlay(
 					addCategoryLayer[0],
 					{
 						context: [addCategoryButton[0], 'tr', 'br'],
@@ -53,7 +53,7 @@
 					}
 				);
 
-				instance._vocabularyCategoryPanel = new Expanse.Overlay(
+				instance._vocabularyCategoryPanel = new Alloy.Overlay(
 					addVocabularyLayer[0],
 					{
 						context: [addVocabularyButton[0], 'tr', 'br'],
@@ -215,7 +215,7 @@
 					}
 				);
 
-				jQuery('.exp-overlay input:text').keyup(
+				jQuery('.aui-overlay input:text').keyup(
 					function(event) {
 						var ESC_KEY_CODE = 27;
 						var keyCode = event.keyCode;
@@ -1244,11 +1244,11 @@
 		}
 	);
 
-	var droppableCategory = Expanse.Droppable;
+	var droppableCategory = Alloy.Droppable;
 
 	var scrollParent = jQuery('.vocabulary-categories')[0];
 
-	var draggableCategory = Expanse.DragProxy.extend(
+	var draggableCategory = Alloy.DragProxy.extend(
 		{
 			initialize: function() {
 				var instance = this;

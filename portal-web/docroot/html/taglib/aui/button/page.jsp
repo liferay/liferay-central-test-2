@@ -37,6 +37,6 @@ if (onClick.startsWith(Http.HTTP_WITH_SLASH) || onClick.startsWith(Http.HTTPS_WI
 }
 %>
 
-<span class="exp-form-button <%= !type.equals("button") ? "exp-form-" + type : StringPool.BLANK %> <%= cssClass %>">
+<span class="aui-form-button <%= !type.equals("button") ? "aui-form-" + type : StringPool.BLANK %> <%= cssClass %>">
 	<input id="<%= name %>" <%= Validator.isNotNull(onClick) ? "onClick=\"" + onClick + "\"" : StringPool.BLANK %> type="<%= type %>" value="<%= LanguageUtil.get(pageContext, value) %>" <%= _buildDynamicAttributes(dynamicAttributes) %>>
 </span>

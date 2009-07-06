@@ -74,11 +74,11 @@ Liferay.LayoutExporter = {
 		}
 
 		contents +=
-					"<input type='button' value='" + Liferay.Language.get('cancel') + "' onClick='Expanse.Popup.close(this);' />" +
+					"<input type='button' value='" + Liferay.Language.get('cancel') + "' onClick='Alloy.Popup.close(this);' />" +
 				"</form>" +
 			"</div>";
 
-		new Expanse.Popup(
+		new Alloy.Popup(
 			{
 				body: contents,
 				fixedcenter: true,
@@ -100,7 +100,7 @@ Liferay.LayoutExporter = {
 			title = Liferay.Language.get(messageId);
 		}
 
-		var exportLayoutsPopup = new Expanse.Popup(
+		var exportLayoutsPopup = new Alloy.Popup(
 			{
 				body: {
 					url: url

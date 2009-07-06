@@ -1,6 +1,6 @@
 (function() {
-	Expanse.extend(
-		Expanse,
+	Alloy.extend(
+		Alloy,
 		{
 			destroy: function() {
 				var args = arguments;
@@ -14,7 +14,7 @@
 							arg.unbind();
 							arg.remove();
 						}
-						else if (arg.destroy && Expanse.lang.isFunction(arg)) {
+						else if (arg.destroy && Alloy.lang.isFunction(arg)) {
 							arg.destroy();
 						}
 					}
@@ -28,7 +28,7 @@
 					buffer.push(encodeURIComponent(key) + '=' + encodeURIComponent(value));
 				};
 
-				if (Expanse.lang.isArray(obj) || obj.expanse) {
+				if (Alloy.lang.isArray(obj) || obj.Alloy) {
 					var length = obj.length;
 
 					for (var i = 0; i < length; i++) {
@@ -41,7 +41,7 @@
 					for (var i in obj) {
 						var item = obj[i];
 
-						if (Expanse.lang.isArray(item)) {
+						if (Alloy.lang.isArray(item)) {
 							var length = item.length;
 
 							for (var j = 0; j < length; j++) {
@@ -53,7 +53,7 @@
 						else {
 							var val = obj[j];
 
-							if (Expanse.lang.isFunction(val)) {
+							if (Alloy.lang.isFunction(val)) {
 								val = val();
 							}
 

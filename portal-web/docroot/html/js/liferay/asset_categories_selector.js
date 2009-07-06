@@ -1,4 +1,4 @@
-Liferay.AssetCategoriesSelector = new Expanse.Class(
+Liferay.AssetCategoriesSelector = new Alloy.Class(
 	{
 
 		/**
@@ -145,7 +145,7 @@ Liferay.AssetCategoriesSelector = new Expanse.Class(
 			mainContainer.append(searchContainer).append(container).append(saveBtn);
 
 			if (!instance.selectCategoryPopup) {
-				var popup = new Expanse.Popup(
+				var popup = new Alloy.Popup(
 					{
 						body: mainContainer[0],
 						className: 'lfr-asset-category-selector',

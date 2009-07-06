@@ -1,8 +1,8 @@
 (function() {
-	var Dom = Expanse.Dom;
-	var Event = Expanse.Event;
+	var Dom = Alloy.Dom;
+	var Event = Alloy.Event;
 
-	Liferay.ColorPicker = Expanse.ColorPickerPanel.extend(
+	Liferay.ColorPicker = Alloy.ColorPickerPanel.extend(
 		{
 
 			/**

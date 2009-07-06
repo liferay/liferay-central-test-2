@@ -83,7 +83,7 @@ String defaultLanguageValue = ParamUtil.getString(request, name + StringPool.UND
 	%>
 
 	<div class="lfr-floating-container lfr-language-selector" id="<%= randomNamespace %>languageSelector">
-		<div class="lfr-panel exp-form">
+		<div class="lfr-panel aui-form">
 			<div class="lfr-panel-titlebar">
 				<h3 class="lfr-panel-title"><span><liferay-ui:message key="other-languages" /></span></h3>
 			</div>
@@ -97,7 +97,7 @@ String defaultLanguageValue = ParamUtil.getString(request, name + StringPool.UND
 
 					<div class="lfr-form-row">
 						<div class="row-names">
-							<div class="exp-ctrl-holder exp-form-column">
+							<div class="aui-ctrl-holder aui-form-column">
 								<img alt="<%=  Validator.isNotNull(curLanguageId) ? LocaleUtil.fromLanguageId(curLanguageId).getDisplayName() : StringPool.BLANK %>" class="language-flag" src="<%= themeDisplay.getPathThemeImages() %>/language/<%= Validator.isNotNull(curLanguageId) ? curLanguageId : "../spacer" %>.png" />
 
 								<select <%= disabled ? "disabled" : "" %> id="<portlet:namespace />languageId<%= i %>">
@@ -128,7 +128,7 @@ String defaultLanguageValue = ParamUtil.getString(request, name + StringPool.UND
 								</select>
 							</div>
 
-							<div class="exp-ctrl-holder exp-form-column">
+							<div class="aui-ctrl-holder aui-form-column">
 
 								<%
 								String languageValue = ParamUtil.getString(request, name + StringPool.UNDERLINE + curLanguageId);

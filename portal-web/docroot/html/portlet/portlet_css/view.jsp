@@ -25,8 +25,8 @@
 <%@ include file="/html/portlet/portlet_css/init.jsp" %>
 
 <div id="lfr-look-and-feel">
-	<div class="exp-tabview" id="portlet-set-properties">
-		<ul class="ui-tabs exp-tabs">
+	<div class="aui-tabview" id="portlet-set-properties">
+		<ul class="ui-tabs aui-tabs">
 			<li>
 				<a href="#portlet-config"><liferay-ui:message key="portlet-configuration" /></a>
 			</li>
@@ -50,15 +50,15 @@
 			</li>
 		</ul>
 
-		<form class="exp-form" method="post">
+		<form class="aui-form" method="post">
 		<input type="hidden" name="portlet-area" id="portlet-area" />
 		<input type="hidden" name="portlet-boundary-id" id="portlet-boundary-id" />
 
-		<div class="exp-tab-content">
-			<fieldset class="exp-block-labels" id="portlet-config">
+		<div class="aui-tab-content">
+			<fieldset class="aui-block-labels" id="portlet-config">
 				<legend><liferay-ui:message key="portlet-configuration" /></legend>
 
-				<div class="exp-ctrl-holder">
+				<div class="aui-ctrl-holder">
 					<label for="custom-title"><liferay-ui:message key="portlet-title" /></label>
 
 					<input class="text-input" id="custom-title" type="text" name="custom-title" value="" />
@@ -80,7 +80,7 @@
 					</select>
 				</div>
 
-				<div class="exp-ctrl-holder">
+				<div class="aui-ctrl-holder">
 					<label for="lfr-point-links"><liferay-ui:message key="link-portlet-urls-to-page" /></label>
 
 					<select id="lfr-point-links">
@@ -140,7 +140,7 @@
 					</select>
 				</div>
 
-				<div class="exp-ctrl-holder">
+				<div class="aui-ctrl-holder">
 					<label class="inline-label">
 						<liferay-ui:message key="use-custom-title" /> <input type="checkbox" name="use-custom-title-checkbox" id="use-custom-title-checkbox" />
 					</label>
@@ -155,11 +155,11 @@
 				</div>
 			</fieldset>
 
-			<fieldset class="exp-block-labels" id="text-styles">
+			<fieldset class="aui-block-labels" id="text-styles">
 				<legend><liferay-ui:message key="text-styles" /></legend>
 
-				<div class="common exp-form-column">
-					<div class="exp-ctrl-holder">
+				<div class="common aui-form-column">
+					<div class="aui-ctrl-holder">
 						<label for="lfr-font-family"><liferay-ui:message key="font" /></label>
 
 						<select id="lfr-font-family">
@@ -173,7 +173,7 @@
 						</select>
 					</div>
 
-					<div class="exp-ctrl-holder">
+					<div class="aui-ctrl-holder">
 						<p class="label">
 							<liferay-ui:message key="font-style" />
 						</p>
@@ -187,7 +187,7 @@
 						<input type="checkbox" name="lfr-font-italic" id="lfr-font-italic" />
 					</div>
 
-					<div class="exp-ctrl-holder">
+					<div class="aui-ctrl-holder">
 						<label for="lfr-font-size"><liferay-ui:message key="size" /></label>
 
 						<select id="lfr-font-size" name="lfr-font-size">
@@ -315,13 +315,13 @@
 						</select>
 					</div>
 
-					<div class="exp-ctrl-holder">
+					<div class="aui-ctrl-holder">
 						<label for="lfr-font-color"><liferay-ui:message key="color" /></label>
 
 						<input id="lfr-font-color" name="lfr-font-color" class="text-input" type="text" size="9" value="" />
 					</div>
 
-					<div class="exp-ctrl-holder">
+					<div class="aui-ctrl-holder">
 						<label for="lfr-font-align"><liferay-ui:message key="alignment" /></label>
 
 						<select id="lfr-font-align" name="lfr-font-align">
@@ -333,7 +333,7 @@
 						</select>
 					</div>
 
-					<div class="exp-ctrl-holder">
+					<div class="aui-ctrl-holder">
 						<label for="lfr-font-decoration"><liferay-ui:message key="text-decoration" /></label>
 
 						<select id="lfr-font-decoration" name="lfr-font-decoration">
@@ -346,8 +346,8 @@
 					</div>
 				</div>
 
-				<div class="extra exp-form-column">
-					<div class="exp-ctrl-holder">
+				<div class="extra aui-form-column">
+					<div class="aui-ctrl-holder">
 						<label for="lfr-font-space"><liferay-ui:message key="word-spacing" /></label>
 
 						<select id="lfr-font-space" name="lfr-font-space">
@@ -396,7 +396,7 @@
 						</select>
 					</div>
 
-					<div class="exp-ctrl-holder">
+					<div class="aui-ctrl-holder">
 						<label for="lfr-font-leading"><liferay-ui:message key="line-height" /></label>
 
 						<select id="lfr-font-leading" name="lfr-font-leading">
@@ -524,7 +524,7 @@
 						</select>
 					</div>
 
-					<div class="exp-ctrl-holder">
+					<div class="aui-ctrl-holder">
 						<label for="lfr-font-tracking"><liferay-ui:message key="letter-spacing" /></label>
 
 						<select id="lfr-font-tracking" name="lfr-font-tracking">
@@ -595,23 +595,23 @@
 				</div>
 			</fieldset>
 
-			<fieldset class="exp-block-labels" id="background-styles">
+			<fieldset class="aui-block-labels" id="background-styles">
 				<legend><liferay-ui:message key="background-styles" /></legend>
 
-				<div class="exp-ctrl-holder">
+				<div class="aui-ctrl-holder">
 					<label for="lfr-bg-color"><liferay-ui:message key="background-color" /></label>
 
 					<input class="text-input" id="lfr-bg-color" name="lfr-bg-color" size="9" type="text" value="#f00" />
 				</div>
 
-				<%--<div class="exp-ctrl-holder">
+				<%--<div class="aui-ctrl-holder">
 					<label class="inline-label">
 						<liferay-ui:message key="use-a-background-image" /> <input checked="checked" id="lfr-use-bg-image" type="checkbox" />
 					</label>
 				</div>
 
 				<div class="lfr-bg-image-properties">
-					<div class="exp-ctrl-holder">
+					<div class="aui-ctrl-holder">
 						<label for="lfr-upload-bg"><liferay-ui:message key="upload-a-background-image" /></label>
 
 						<input id="lfr-upload-bg" type="file" />
@@ -621,7 +621,7 @@
 						<liferay-ui:message key="set-background-image-properties" />
 					</p>
 
-					<div class="exp-ctrl-holder">
+					<div class="aui-ctrl-holder">
 						<label for="lfr-bg-repeat"><liferay-ui:message key="background-repeating" /></label>
 
 						<select id="lfr-bg-repeat">
@@ -632,7 +632,7 @@
 						</select>
 					</div>
 
-					<div class="exp-ctrl-holder">
+					<div class="aui-ctrl-holder">
 						<label for="lfr-bg-top-int"><liferay-ui:message key="image-position-from-the-top" /></label>
 
 						<input class="text-input" id="lfr-bg-top-int" name="lfr-bg-top-int" type="text" />
@@ -644,7 +644,7 @@
 						</select>
 					</div>
 
-					<div class="exp-ctrl-holder">
+					<div class="aui-ctrl-holder">
 						<label for="lfr-bg-left-int"><liferay-ui:message key="image-position-from-the-left" /></label>
 
 						<input class="text-input" id="lfr-bg-left-int" name="lfr-bg-left-int" type="text" />
@@ -658,13 +658,13 @@
 				</div>--%>
 			</fieldset>
 
-			<fieldset class="exp-block-labels" id="border-styles">
+			<fieldset class="aui-block-labels" id="border-styles">
 				<legend><liferay-ui:message key="border-styling" /></legend>
 
-				<fieldset class="exp-form-column" id="lfr-border-width">
+				<fieldset class="aui-form-column" id="lfr-border-width">
 					<legend><liferay-ui:message key="border-width" /></legend>
 
-					<div class="exp-ctrl-holder">
+					<div class="aui-ctrl-holder">
 						<label for="lfr-use-for-all-width">
 							<liferay-ui:message key="same-for-all" />
 
@@ -672,7 +672,7 @@
 						</label>
 					</div>
 
-					<div class="exp-ctrl-holder">
+					<div class="aui-ctrl-holder">
 						<label for="lfr-border-width-top"><liferay-ui:message key="top" /></label>
 
 						<input class="text-input" id="lfr-border-width-top" type="text" />
@@ -684,7 +684,7 @@
 						</select>
 					</div>
 
-					<div class="exp-ctrl-holder">
+					<div class="aui-ctrl-holder">
 						<label for="lfr-border-width-right"><liferay-ui:message key="right" /></label>
 
 						<input id="lfr-border-width-right" class="text-input" type="text" />
@@ -696,7 +696,7 @@
 						</select>
 					</div>
 
-					<div class="exp-ctrl-holder">
+					<div class="aui-ctrl-holder">
 						<label for="lfr-border-width-bottom"><liferay-ui:message key="bottom" /></label>
 
 						<input id="lfr-border-width-bottom" class="text-input" type="text" />
@@ -708,7 +708,7 @@
 						</select>
 					</div>
 
-					<div class="exp-ctrl-holder">
+					<div class="aui-ctrl-holder">
 						<label for="lfr-border-width-width"><liferay-ui:message key="left" /></label>
 
 						<input id="lfr-border-width-left" class="text-input" type="text" />
@@ -721,10 +721,10 @@
 					</div>
 				</fieldset>
 
-				<fieldset class="exp-form-column" id="lfr-border-style">
+				<fieldset class="aui-form-column" id="lfr-border-style">
 					<legend><liferay-ui:message key="border-style" /></legend>
 
-					<div class="exp-ctrl-holder">
+					<div class="aui-ctrl-holder">
 						<label for="lfr-use-for-all-style">
 							<liferay-ui:message key="same-for-all" />
 
@@ -732,7 +732,7 @@
 						</label>
 					</div>
 
-					<div class="exp-ctrl-holder">
+					<div class="aui-ctrl-holder">
 						<label for="lfr-border-style-top"><liferay-ui:message key="top" /></label>
 
 						<select id="lfr-border-style-top">
@@ -749,7 +749,7 @@
 						</select>
 					</div>
 
-					<div class="exp-ctrl-holder">
+					<div class="aui-ctrl-holder">
 						<label for="lfr-border-style-right"><liferay-ui:message key="right" /></label>
 
 						<select id="lfr-border-style-right">
@@ -766,7 +766,7 @@
 						</select>
 					</div>
 
-					<div class="exp-ctrl-holder">
+					<div class="aui-ctrl-holder">
 						<label for="lfr-border-style-bottom"><liferay-ui:message key="bottom" /></label>
 
 						<select id="lfr-border-style-bottom">
@@ -783,7 +783,7 @@
 						</select>
 					</div>
 
-					<div class="exp-ctrl-holder">
+					<div class="aui-ctrl-holder">
 						<label for="lfr-border-style-left"><liferay-ui:message key="left" /></label>
 
 						<select id="lfr-border-style-left">
@@ -801,10 +801,10 @@
 					</div>
 				</fieldset>
 
-				<fieldset class="exp-form-column" id="lfr-border-color">
+				<fieldset class="aui-form-column" id="lfr-border-color">
 					<legend><liferay-ui:message key="border-color" /></legend>
 
-					<div class="exp-ctrl-holder">
+					<div class="aui-ctrl-holder">
 						<label for="lfr-use-for-all-color">
 							<liferay-ui:message key="same-for-all" />
 
@@ -812,25 +812,25 @@
 						</label>
 					</div>
 
-					<div class="exp-ctrl-holder">
+					<div class="aui-ctrl-holder">
 						<label for="lfr-border-color-top"><liferay-ui:message key="top" /></label>
 
 						<input class="text-input" id="lfr-border-color-top" type="text" />
 					</div>
 
-					<div class="exp-ctrl-holder">
+					<div class="aui-ctrl-holder">
 						<label for="lfr-border-color-right"><liferay-ui:message key="right" /></label>
 
 						<input class="text-input" id="lfr-border-color-right" type="text" />
 					</div>
 
-					<div class="exp-ctrl-holder">
+					<div class="aui-ctrl-holder">
 						<label for="lfr-border-color-bottom"><liferay-ui:message key="bottom" /></label>
 
 						<input class="text-input" id="lfr-border-color-bottom" type="text" />
 					</div>
 
-					<div class="exp-ctrl-holder">
+					<div class="aui-ctrl-holder">
 						<label for="lfr-border-color-left"><liferay-ui:message key="left" /></label>
 
 						<input class="text-input" id="lfr-border-color-left" type="text" />
@@ -838,13 +838,13 @@
 				</fieldset>
 			</fieldset>
 
-			<fieldset class="spacing exp-block-labels" id="spacing-styles">
+			<fieldset class="spacing aui-block-labels" id="spacing-styles">
 				<legend><liferay-ui:message key="spacing" /></legend>
 
-				<fieldset class="exp-form-column" id="lfr-padding">
+				<fieldset class="aui-form-column" id="lfr-padding">
 					<legend><liferay-ui:message key="padding" /></legend>
 
-					<div class="exp-ctrl-holder">
+					<div class="aui-ctrl-holder">
 						<label for="lfr-use-for-all-padding">
 							<liferay-ui:message key="same-for-all" />
 
@@ -852,7 +852,7 @@
 						</label>
 					</div>
 
-					<div class="exp-ctrl-holder">
+					<div class="aui-ctrl-holder">
 						<label for="lfr-padding-top"><liferay-ui:message key="top" /></label>
 
 						<input class="text-input" id="lfr-padding-top" type="text" />
@@ -864,7 +864,7 @@
 						</select>
 					</div>
 
-					<div class="exp-ctrl-holder">
+					<div class="aui-ctrl-holder">
 						<label for="lfr-padding-right"><liferay-ui:message key="right" /></label>
 
 						<input class="text-input" id="lfr-padding-right" type="text" />
@@ -876,7 +876,7 @@
 						</select>
 					</div>
 
-					<div class="exp-ctrl-holder">
+					<div class="aui-ctrl-holder">
 						<label for="lfr-padding-bottom"><liferay-ui:message key="bottom" /></label>
 
 						<input class="text-input" id="lfr-padding-bottom" type="text" />
@@ -888,7 +888,7 @@
 						</select>
 					</div>
 
-					<div class="exp-ctrl-holder">
+					<div class="aui-ctrl-holder">
 						<label for="lfr-padding-left"><liferay-ui:message key="left" /></label>
 
 						<input class="text-input" id="lfr-padding-left" type="text" />
@@ -901,10 +901,10 @@
 					</div>
 				</fieldset>
 
-				<fieldset class="exp-form-column" id="lfr-margin">
+				<fieldset class="aui-form-column" id="lfr-margin">
 					<legend><liferay-ui:message key="margin" /></legend>
 
-					<div class="exp-ctrl-holder">
+					<div class="aui-ctrl-holder">
 						<label for="lfr-use-for-all-margin">
 							<liferay-ui:message key="same-for-all" />
 
@@ -912,7 +912,7 @@
 						</label>
 					</div>
 
-					<div class="exp-ctrl-holder">
+					<div class="aui-ctrl-holder">
 						<label for="lfr-margin-top"><liferay-ui:message key="top" /></label>
 
 						<input class="text-input" id="lfr-margin-top" type="text" />
@@ -924,7 +924,7 @@
 						</select>
 					</div>
 
-					<div class="exp-ctrl-holder">
+					<div class="aui-ctrl-holder">
 						<label for="lfr-margin-right"><liferay-ui:message key="right" /></label>
 
 						<input class="text-input" id="lfr-margin-right" type="text" />
@@ -936,7 +936,7 @@
 						</select>
 					</div>
 
-					<div class="exp-ctrl-holder">
+					<div class="aui-ctrl-holder">
 						<label for="lfr-margin-bottom"><liferay-ui:message key="bottom" /></label>
 
 						<input class="text-input" id="lfr-margin-bottom" type="text" />
@@ -948,7 +948,7 @@
 						</select>
 					</div>
 
-					<div class="exp-ctrl-holder">
+					<div class="aui-ctrl-holder">
 						<label for="lfr-margin-left"><liferay-ui:message key="left" /></label>
 
 						<input class="text-input" id="lfr-margin-left" type="text" />
@@ -962,26 +962,26 @@
 				</fieldset>
 			</fieldset>
 
-			<fieldset class="exp-block-labels" id="css-styling">
+			<fieldset class="aui-block-labels" id="css-styling">
 				<legend><liferay-ui:message key="advanced-css-styling" /></legend>
 
-				<div class="exp-ctrl-holder">
+				<div class="aui-ctrl-holder">
 					<label for="lfr-custom-css"><liferay-ui:message key="enter-your-custom-css" /></label>
 
 					<textarea id="lfr-custom-css"></textarea>
 				</div>
 			</fieldset>
 
-			<fieldset class="exp-block-labels" id="wap-styling">
+			<fieldset class="aui-block-labels" id="wap-styling">
 				<legend><liferay-ui:message key="wap-styling" /></legend>
 
-				<div class="exp-ctrl-holder">
+				<div class="aui-ctrl-holder">
 					<label for="lfr-wap-title"><liferay-ui:message key="title" /></label>
 
 					<input class="text-input" id="lfr-wap-title" type="text" />
 				</div>
 
-				<div class="exp-ctrl-holder">
+				<div class="aui-ctrl-holder">
 					<label for="lfr-wap-initial-window-state"><liferay-ui:message key="initial-window-state" /></label>
 
 					<select id="lfr-wap-initial-window-state">
@@ -991,7 +991,7 @@
 				</div>
 			</fieldset>
 
-			<div class="exp-button-holder">
+			<div class="aui-button-holder">
 				<input id="lfr-lookfeel-save" type="button" value="<liferay-ui:message key="save" />" />
 				<input id="lfr-lookfeel-reset" type="button" value="<liferay-ui:message key="reset" />" />
 			</div>

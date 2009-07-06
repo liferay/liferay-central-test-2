@@ -55,32 +55,32 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 	<liferay-util:param name="toolbarItem" value='<%= layoutPrototype.isNew() ? "add" : "view-all" %>' />
 </liferay-util:include>
 
-<form class="exp-form" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveLayoutPrototype(); return false;">
+<form class="aui-form" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveLayoutPrototype(); return false;">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(redirect) %>" />
 <input name="<portlet:namespace />layoutPrototypeId" type="hidden" value="<%= layoutPrototypeId %>" />
 
-<fieldset class="exp-block-labels">
-	<div class="exp-ctrl-holder">
+<fieldset class="aui-block-labels">
+	<div class="aui-ctrl-holder">
 		<label><liferay-ui:message key="name" /></label>
 
 		<liferay-ui:input-field model="<%= LayoutPrototype.class %>" bean="<%= layoutPrototype %>" field="name" />
 	</div>
 
-	<div class="exp-ctrl-holder">
+	<div class="aui-ctrl-holder">
 		<label><liferay-ui:message key="description" /></label>
 
 		<liferay-ui:input-field model="<%= LayoutPrototype.class %>" bean="<%= layoutPrototype %>" field="description" />
 	</div>
 
-	<div class="exp-ctrl-holder">
+	<div class="aui-ctrl-holder">
 		<label><%= LanguageUtil.get(pageContext, "active") %></label>
 
 		<liferay-ui:input-field model="<%= LayoutPrototype.class %>" bean="<%= layoutPrototype %>" field="active" />
 	</div>
 
 	<c:if test="<%= !layoutPrototype.isNew() %>">
-		<div class="exp-ctrl-holder">
+		<div class="aui-ctrl-holder">
 			<label><liferay-ui:message key="configuration" /></label>
 
 			<liferay-portlet:actionURL var="viewURL"  portletName="<%= PortletKeys.MY_PLACES %>">
@@ -93,7 +93,7 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 		</div>
 	</c:if>
 
-	<div class="exp-button-holder">
+	<div class="aui-button-holder">
 		<input type="submit" value="<liferay-ui:message key="save" />" />
 
 		<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />

@@ -1,34 +1,34 @@
 (function() {
-	var Dom = Expanse.Dom;
-	var Event = Expanse.Event;
+	var Dom = Alloy.Dom;
+	var Event = Alloy.Event;
 
-	Expanse.ColorPicker = new Expanse.Class(YAHOO.widget.ColorPicker);
+	Alloy.ColorPicker = new Alloy.Class(YAHOO.widget.ColorPicker);
 
-	Expanse.ColorPicker.implement(
+	Alloy.ColorPicker.implement(
 		{
 			ID: {
-				R: 'exp-picker-r',
-				R_HEX: 'exp-picker-rhex',
-				G: 'exp-picker-g',
-				G_HEX: 'exp-picker-ghex',
-				B: 'exp-picker-b',
-				B_HEX: 'exp-picker-bhex',
-				H: 'exp-picker-h',
-				S: 'exp-picker-s',
-				V: 'exp-picker-v',
-				PICKER_BG: 'exp-picker-bg',
-				PICKER_THUMB: 'exp-picker-thumb',
-				HUE_BG: 'exp-picker-hue-bg',
-				HUE_THUMB: 'exp-picker-hue-thumb',
-				HEX: 'exp-picker-hex',
-				SWATCH: 'exp-picker-swatch',
-				WEBSAFE_SWATCH: 'exp-picker-websafe-swatch',
-				CONTROLS: 'exp-picker-controls',
-				RGB_CONTROLS: 'exp-picker-rgb-controls',
-				HSV_CONTROLS: 'exp-picker-hsv-controls',
-				HEX_CONTROLS: 'exp-picker-hex-controls',
-				HEX_SUMMARY: 'exp-picker-hex-summary',
-				CONTROLS_LABEL: 'exp-picker-controls-label'
+				R: 'aui-picker-r',
+				R_HEX: 'aui-picker-rhex',
+				G: 'aui-picker-g',
+				G_HEX: 'aui-picker-ghex',
+				B: 'aui-picker-b',
+				B_HEX: 'aui-picker-bhex',
+				H: 'aui-picker-h',
+				S: 'aui-picker-s',
+				V: 'aui-picker-v',
+				PICKER_BG: 'aui-picker-bg',
+				PICKER_THUMB: 'aui-picker-thumb',
+				HUE_BG: 'aui-picker-hue-bg',
+				HUE_THUMB: 'aui-picker-hue-thumb',
+				HEX: 'aui-picker-hex',
+				SWATCH: 'aui-picker-swatch',
+				WEBSAFE_SWATCH: 'aui-picker-websafe-swatch',
+				CONTROLS: 'aui-picker-controls',
+				RGB_CONTROLS: 'aui-picker-rgb-controls',
+				HSV_CONTROLS: 'aui-picker-hsv-controls',
+				HEX_CONTROLS: 'aui-picker-hex-controls',
+				HEX_SUMMARY: 'aui-picker-hex-summary',
+				CONTROLS_LABEL: 'aui-picker-controls-label'
 			},
 
 			IMAGE: {
@@ -38,7 +38,7 @@
 		}
 	);
 
-	Expanse.ColorPickerPanel = Expanse.Panel.extend(
+	Alloy.ColorPickerPanel = Alloy.Panel.extend(
 		{
 			initialize: function(options) {
 				var instance = this;
@@ -50,7 +50,7 @@
 					visible: false
 				};
 
-				options = Expanse.extend(defaults, options);
+				options = Alloy.extend(defaults, options);
 
 				instance.options = options;
 
@@ -62,18 +62,18 @@
 				instance._hasImage =  options.hasImage || false;
 				instance._item = jQuery(options.item || '.use-colorpicker', instance._buttonContext);
 
-				instance.changeEvent = new Expanse.CustomEvent('change', instance);
+				instance.changeEvent = new Alloy.CustomEvent('change', instance);
 
 				instance._insertImages();
 
 				options.button = instance._button;
 
-				options.zIndex = Expanse.zIndex.COLOR_PICKER;
+				options.zIndex = Alloy.zIndex.COLOR_PICKER;
 
 				options.container = instance.panel;
 
 				if (options.button && !options.context) {
-					options.button = Expanse.getEl(options.button);
+					options.button = Alloy.getEl(options.button);
 
 					options.context = [options.button, 'tl', 'bl', ['show']];
 				}
@@ -87,7 +87,7 @@
 				instance._pickerId = pickerId;
 				instance.renderEvent.subscribe(instance.createPicker);
 
-				Dom.addClass(instance.element, 'exp-picker-panel');
+				Dom.addClass(instance.element, 'aui-picker-panel');
 
 				instance.render(document.body);
 
@@ -124,7 +124,7 @@
 
 				var options = instance.options;
 
-				instance.picker = new Expanse.ColorPicker(instance._pickerId,
+				instance.picker = new Alloy.ColorPicker(instance._pickerId,
 					{
 						container: instance,
 						showhexsummary: false,

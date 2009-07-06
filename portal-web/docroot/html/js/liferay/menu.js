@@ -1,4 +1,4 @@
-Liferay.Menu = new Expanse.Class(
+Liferay.Menu = new Alloy.Class(
 	{
 		initialize: function() {
 			var instance = this;

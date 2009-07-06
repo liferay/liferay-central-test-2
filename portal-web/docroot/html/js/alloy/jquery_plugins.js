@@ -2,7 +2,7 @@
 	jQuery.fn.extend(
 		{
 			generateId: function(prefix) {
-				return Expanse.generateId(this, prefix);
+				return Alloy.generateId(this, prefix);
 			},
 
 			resetId: function() {
@@ -12,7 +12,7 @@
 					instance[--length].id = '';
 				}
 
-				return Expanse.generateId(instance);
+				return Alloy.generateId(instance);
 			}
 		}
 	);

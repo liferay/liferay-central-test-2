@@ -1,13 +1,13 @@
 (function() {
-	var Dom = Expanse.Dom;
-	var Event = Expanse.Event;
+	var Dom = Alloy.Dom;
+	var Event = Alloy.Event;
 	var Widget = YAHOO.widget;
 
-	Expanse.AutoComplete = new Expanse.Class(Widget.AutoComplete);
+	Alloy.AutoComplete = new Alloy.Class(Widget.AutoComplete);
 
-	Expanse.AutoComplete = Expanse.AutoComplete.extend(
+	Alloy.AutoComplete = Alloy.AutoComplete.extend(
 		{
-			highlightClassName: 'exp-autocomplete-highlight',
+			highlightClassName: 'aui-autocomplete-highlight',
 
 			initialize: function(options) {
 				var instance = this;
@@ -19,7 +19,7 @@
 				if (!resultContainer) {
 					resultContainer = Dom.generateId();
 
-					Expanse.getBody().append('<div class="exp-autocomplete-container" id="' + resultContainer + '"></div>');
+					Alloy.getBody().append('<div class="aui-autocomplete-container" id="' + resultContainer + '"></div>');
 				}
 
 				if (options.useShadow !== false) {
@@ -42,8 +42,8 @@
 				var container = instance.getContainerEl();
 				var contentEl = Dom.getFirstChild(container);
 
-				Dom.addClass(contentEl, 'exp-autocomplete-content');
-				input.addClass('exp-autocomplete-input');
+				Dom.addClass(contentEl, 'aui-autocomplete-content');
+				input.addClass('aui-autocomplete-input');
 			},
 
 			createDataSource: function() {
@@ -56,7 +56,7 @@
 
 				delete options.dataSource.source;
 
-				instance._dataSource = new Expanse.DataSource(source, options.dataSource);
+				instance._dataSource = new Alloy.DataSource(source, options.dataSource);
 
 				delete options.dataSource;
 
@@ -111,11 +111,11 @@
 				instance._super.apply(instance, arguments);
 
 				if (instance.useIFrame) {
-					Dom.addClass(instance._elIFrame, 'exp-autocomplete-iframe');
+					Dom.addClass(instance._elIFrame, 'aui-autocomplete-iframe');
 				}
 
 				if (instance.useShadow) {
-					Dom.addClass(instance._elShadow, 'exp-autocomplete-shadow');
+					Dom.addClass(instance._elShadow, 'aui-autocomplete-shadow');
 				}
 			},
 
@@ -124,7 +124,7 @@
 
 				var el = instance.getInputEl();
 
-				Dom.addClass(el, 'exp-autocomplete-loading');
+				Dom.addClass(el, 'aui-autocomplete-loading');
 			},
 
 			_onDataReturn: function() {
@@ -132,7 +132,7 @@
 
 				var el = instance.getInputEl();
 
-				Dom.removeClass(el, 'exp-autocomplete-loading');
+				Dom.removeClass(el, 'aui-autocomplete-loading');
 			}
 		}
 	);

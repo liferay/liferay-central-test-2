@@ -4,11 +4,11 @@
 
 // LPS-2135
 
-window.Class = Expanse.Class;
+window.Class = Alloy.Class;
 
 // LPS-2135
 
-/*Expanse.Class.createSuper = function(previous, current) {
+/*Alloy.Class.createSuper = function(previous, current) {
 	return function() {
 		this.parent = previous;
 		this._super = previous;
@@ -24,8 +24,8 @@ window.Class = Expanse.Class;
 // This should have little to no effect for most users.
 
 (function() {
-	var Dom = Expanse.Dom;
-	var Event = Expanse.Event;
+	var Dom = Alloy.Dom;
+	var Event = Alloy.Event;
 
 	var handlesMap = {
 		e: 'r',
@@ -80,7 +80,7 @@ window.Class = Expanse.Class;
 			}
 		}
 
-		var dialog = new Expanse.Popup(options);
+		var dialog = new Alloy.Popup(options);
 
 		Dom.addClass(dialog.innerElement, options.className || 'generic-dialog');
 
@@ -126,14 +126,14 @@ window.Class = Expanse.Class;
 		return jQuery(dialog.body);
 	};
 
-	Liferay.Popup.close = Expanse.Popup.close;
-	Liferay.Popup.update = Expanse.Popup.update;
+	Liferay.Popup.close = Alloy.Popup.close;
+	Liferay.Popup.update = Alloy.Popup.update;
 })();
 
 // LPS-2166
 
 (function() {
-	var Resize = Expanse.Resize.prototype;
+	var Resize = Alloy.Resize.prototype;
 
 	Resize.CSS_RESIZE += ' ui-resizable';
 	Resize.CSS_DRAG += ' ui-draggable';
@@ -151,7 +151,7 @@ window.Class = Expanse.Class;
 
 // LPS-2267
 
-Liferay.ColorPicker = Expanse.ColorPickerPanel.extend({
+Liferay.ColorPicker = Alloy.ColorPickerPanel.extend({
 	initialize: function(options) {
 		var instance = this;
 
@@ -167,9 +167,9 @@ Liferay.ColorPicker = Expanse.ColorPickerPanel.extend({
 
 // LPS-2296
 
-Expanse.Tab.prototype.DISABLED_CLASSNAME += ' ui-tabs-disabled';
+Alloy.Tab.prototype.DISABLED_CLASSNAME += ' ui-tabs-disabled';
 
-Expanse.TabView = Expanse.TabView.extend(
+Alloy.TabView = Alloy.TabView.extend(
 	{
 		initialize: function() {
 			var instance = this;
@@ -214,4 +214,4 @@ Expanse.TabView = Expanse.TabView.extend(
 
 // LPS-3059
 
-Liferay.Observable = Expanse.Observable;
+Liferay.Observable = Alloy.Observable;

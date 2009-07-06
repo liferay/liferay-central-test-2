@@ -35,9 +35,9 @@ boolean last = GetterUtil.getBoolean((String)request.getAttribute("aui:select:la
 String name = namespace + GetterUtil.getString((String)request.getAttribute("aui:select:name"));
 %>
 
-<div class="exp-ctrl-holder <%= cssClass %> <%= first ? "exp-first" : StringPool.BLANK %> <%= last ? "exp-last" : StringPool.BLANK %>">
+<div class="aui-ctrl-holder <%= cssClass %> <%= first ? "aui-first" : StringPool.BLANK %> <%= last ? "aui-last" : StringPool.BLANK %>">
 	<c:if test="<%= Validator.isNotNull(label) %>">
-		<label class="exp-form-label <%= inlineLabel ? "inline-label" : StringPool.BLANK  %>" for="<%= name %>">
+		<label class="aui-form-label <%= inlineLabel ? "inline-label" : StringPool.BLANK  %>" for="<%= name %>">
 			<liferay-ui:message key="<%= label %>" />
 
 			<c:if test="<%= Validator.isNotNull(helpMessage) %>">
@@ -49,5 +49,5 @@ String name = namespace + GetterUtil.getString((String)request.getAttribute("aui
 			</c:if>
 	</c:if>
 
-	<span class="exp-form-field exp-form-select">
+	<span class="aui-form-field aui-form-select">
 		<select name="<%= name %>" <%= _buildDynamicAttributes(dynamicAttributes) %>>

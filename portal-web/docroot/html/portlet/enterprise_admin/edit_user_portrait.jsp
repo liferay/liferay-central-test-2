@@ -40,13 +40,13 @@ User selUser = PortalUtil.getSelectedUser(request);
 		</script>
 	</c:when>
 	<c:otherwise>
-		<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_user_portrait" /></portlet:actionURL>" class="exp-form" enctype="multipart/form-data" method="post" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
+		<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_user_portrait" /></portlet:actionURL>" class="aui-form" enctype="multipart/form-data" method="post" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
 		<input name="<portlet:namespace />p_u_i_d" type="hidden" value="<%= selUser.getUserId() %>" />
 
 		<liferay-ui:error exception="<%= UploadException.class %>" message="an-unexpected-error-occurred-while-uploading-your-file" />
 		<liferay-ui:error exception="<%= UserPortraitException.class %>" message="please-enter-a-file-with-a-valid-file-size" />
 
-		<div class="exp-ctrl-holder">
+		<div class="aui-ctrl-holder">
 			<label for="<portlet:namespace />fileName"><%= LanguageUtil.format(pageContext, "upload-a-gif-or-jpeg-that-is-x-pixels-tall-and-x-pixels-wide", new Object[] {"120", "100"}, false) %></label><br />
 
 			<input name="<portlet:namespace />fileName" size="50" type="file" />
@@ -54,7 +54,7 @@ User selUser = PortalUtil.getSelectedUser(request);
 
 		<br />
 
-		<div class="exp-button-holder">
+		<div class="aui-button-holder">
 			<input type="submit" value="<liferay-ui:message key="save" />" />
 
 			<input type="button" value="<liferay-ui:message key="close" />" onClick="window.close();" />

@@ -129,11 +129,11 @@ if (organization != null) {
 
 <h3><liferay-ui:message key="details" /></h3>
 
-<fieldset class="exp-block-labels exp-form-column">
+<fieldset class="aui-block-labels aui-form-column">
 	<liferay-ui:error exception="<%= DuplicateOrganizationException.class %>" message="the-organization-name-is-already-taken" />
 	<liferay-ui:error exception="<%= OrganizationNameException.class %>" message="please-enter-a-valid-name" />
 
-	<div class="exp-ctrl-holder">
+	<div class="aui-ctrl-holder">
 		<label for="<portlet:namespace />name"><liferay-ui:message key="name" /></label>
 
 		<liferay-ui:input-field model="<%= Organization.class %>" bean="<%= organization %>" field="name" />
@@ -143,7 +143,7 @@ if (organization != null) {
 		<c:when test="<%= PropsValues.FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_ORGANIZATION_STATUS %>">
 			<liferay-ui:error key="<%= NoSuchListTypeException.class.getName() + Organization.class.getName() + ListTypeImpl.ORGANIZATION_STATUS %>" message="please-select-a-type" />
 
-			<div class="exp-ctrl-holder">
+			<div class="aui-ctrl-holder">
 				<label for="<portlet:namespace />statusId"><liferay-ui:message key="status" /></label>
 
 				<select name="<portlet:namespace />statusId">
@@ -169,7 +169,7 @@ if (organization != null) {
 		</c:otherwise>
 	</c:choose>
 
-	<div class="exp-ctrl-holder">
+	<div class="aui-ctrl-holder">
 		<label for="<portlet:namespace />type"><liferay-ui:message key="type" /></label>
 
 		<c:choose>
@@ -199,13 +199,13 @@ if (organization != null) {
 	<liferay-ui:error exception="<%= NoSuchCountryException.class %>" message="please-select-a-country" />
 
 	<div id="<portlet:namespace />countryDiv" <%= GetterUtil.getBoolean(PropsUtil.get(PropsKeys.ORGANIZATIONS_COUNTRY_ENABLED, new Filter(String.valueOf(type))))? StringPool.BLANK : "style=\"display: none;\"" %>>
-		<div class="exp-ctrl-holder">
+		<div class="aui-ctrl-holder">
 			<label for="<portlet:namespace />countryId"><liferay-ui:message key="country" /> </label>
 
 			<select id="<portlet:namespace />countryId" name="<portlet:namespace />countryId"></select>
 		</div>
 
-		<div class="exp-ctrl-holder">
+		<div class="aui-ctrl-holder">
 			<label for="<portlet:namespace />regionId"><liferay-ui:message key="region" /></label>
 
 			<select id="<portlet:namespace />regionId" name="<portlet:namespace />regionId"></select>
@@ -213,7 +213,7 @@ if (organization != null) {
 	</div>
 
 	<c:if test="<%= organization != null %>">
-		<div class="exp-ctrl-holder">
+		<div class="aui-ctrl-holder">
 			<label for="<portlet:namespace />groupId"><liferay-ui:message key="group-id" /></label>
 
 			<%= groupId %>
@@ -221,7 +221,7 @@ if (organization != null) {
 	</c:if>
 </fieldset>
 
-<fieldset class="exp-block-labels exp-form-column">
+<fieldset class="aui-block-labels aui-form-column">
 	<div>
 		<c:if test="<%= organization != null %>">
 

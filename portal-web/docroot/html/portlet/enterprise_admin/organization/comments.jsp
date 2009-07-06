@@ -30,8 +30,8 @@ Organization organization = (Organization)request.getAttribute(WebKeys.ORGANIZAT
 
 <h3><liferay-ui:message key="comments" /></h3>
 
-<fieldset class="exp-block-labels">
-	<div class="exp-ctrl-holder">
+<fieldset class="aui-block-labels">
+	<div class="aui-ctrl-holder">
 		<liferay-ui:input-field model="<%= Organization.class %>" bean="<%= organization %>" field="comments" />
 	</div>
 </fieldset>

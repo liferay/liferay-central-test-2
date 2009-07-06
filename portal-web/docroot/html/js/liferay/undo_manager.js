@@ -1,4 +1,4 @@
-Liferay.UndoManager = Expanse.Observable.extend(
+Liferay.UndoManager = Alloy.Observable.extend(
 	{
 
 		/**

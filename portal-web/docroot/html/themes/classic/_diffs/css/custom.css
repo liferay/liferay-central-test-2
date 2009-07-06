@@ -155,23 +155,23 @@ body {
 
 /* ---------- Add/remove page ---------- */
 
-#navigation .selected .exp-form-trigger {
+#navigation .selected .aui-form-trigger {
 	background-color: #c4c4c4;
 }
 
-#navigation .selected .exp-trigger-selected {
+#navigation .selected .aui-trigger-selected {
 	background-color: #ebebeb;
 }
 
-#navigation .exp-form-trigger:hover, #navigation .exp-form-trigger:focus {
+#navigation .aui-form-trigger:hover, #navigation .aui-form-trigger:focus {
 	background-color: #83b0ca;
 }
 
-#navigation .exp-trigger-selected:hover, #navigation .exp-trigger-selected:focus {
+#navigation .aui-trigger-selected:hover, #navigation .aui-trigger-selected:focus {
 	background-color: #b7def4;
 }
 
-#navigation .edit-page .exp-options-trigger {
+#navigation .edit-page .aui-options-trigger {
 	display: none;
 }
 

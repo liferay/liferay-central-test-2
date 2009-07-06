@@ -1,16 +1,16 @@
 (function() {
-	var Dom = Expanse.Dom;
-	var Event = Expanse.Event;
+	var Dom = Alloy.Dom;
+	var Event = Alloy.Event;
 	var Widget = YAHOO.widget;
 
-	Expanse.OverlayManager = new Expanse.Class(Widget.OverlayManager);
+	Alloy.OverlayManager = new Alloy.Class(Widget.OverlayManager);
 
-	Expanse.Module = new Expanse.Widget(Widget.Module);
-	Expanse.Overlay = new Expanse.Widget(Widget.Overlay);
-	Expanse.Dialog = new Expanse.Widget(Widget.Dialog);
-	Expanse.SimpleDialog = new Expanse.Widget(Widget.SimpleDialog);
-	Expanse.Tooltip = new Expanse.Widget(Widget.Tooltip);
-	Expanse.Panel = new Expanse.Widget(Widget.Panel);
+	Alloy.Module = new Alloy.Widget(Widget.Module);
+	Alloy.Overlay = new Alloy.Widget(Widget.Overlay);
+	Alloy.Dialog = new Alloy.Widget(Widget.Dialog);
+	Alloy.SimpleDialog = new Alloy.Widget(Widget.SimpleDialog);
+	Alloy.Tooltip = new Alloy.Widget(Widget.Tooltip);
+	Alloy.Panel = new Alloy.Widget(Widget.Panel);
 
 	var normalizeArguments = function(el, options) {
 		if (!options) {
@@ -90,85 +90,85 @@
 		}
 	};
 
-	Expanse.Module = Expanse.Module.extend(baseContainerImpl);
-	Expanse.Overlay = Expanse.Overlay.extend(baseContainerImpl);
-	Expanse.Dialog = Expanse.Dialog.extend(baseContainerImpl);
-	Expanse.SimpleDialog = Expanse.SimpleDialog.extend(baseContainerImpl);
-	Expanse.Tooltip = Expanse.Tooltip.extend(baseContainerImpl);
-	Expanse.Panel = Expanse.Panel.extend(baseContainerImpl);
+	Alloy.Module = Alloy.Module.extend(baseContainerImpl);
+	Alloy.Overlay = Alloy.Overlay.extend(baseContainerImpl);
+	Alloy.Dialog = Alloy.Dialog.extend(baseContainerImpl);
+	Alloy.SimpleDialog = Alloy.SimpleDialog.extend(baseContainerImpl);
+	Alloy.Tooltip = Alloy.Tooltip.extend(baseContainerImpl);
+	Alloy.Panel = Alloy.Panel.extend(baseContainerImpl);
 
-	Expanse.Overlay = Expanse.Overlay.extend(
+	Alloy.Overlay = Alloy.Overlay.extend(
 		{
 			_defaults: {
-				zIndex: Expanse.zIndex.CONTAINER
+				zIndex: Alloy.zIndex.CONTAINER
 			}
 		}
 	);
 
-	Expanse.Tooltip = Expanse.Tooltip.extend(
+	Alloy.Tooltip = Alloy.Tooltip.extend(
 		{
 			_defaults: {
-				zIndex: Expanse.zIndex.TOOLTIP
+				zIndex: Alloy.zIndex.TOOLTIP
 			}
 		}
 	);
 
-	Expanse.Panel = Expanse.Panel.extend(
+	Alloy.Panel = Alloy.Panel.extend(
 		{
 			buildMask: function() {
 				var instance = this;
 
 				instance._super.apply(instance, arguments);
 
-				Dom.addClass(instance.mask, 'exp-mask');
+				Dom.addClass(instance.mask, 'aui-mask');
 			}
 		}
 	);
 
-	Expanse.extend(
+	Alloy.extend(
 		Widget.Module,
 		{
-			CSS_BODY: 'exp-body',
-			CSS_FOOTER: 'exp-footer',
-			CSS_HEADER: 'exp-header',
-			CSS_MODULE: 'exp-module'
+			CSS_BODY: 'aui-body',
+			CSS_FOOTER: 'aui-footer',
+			CSS_HEADER: 'aui-header',
+			CSS_MODULE: 'aui-module'
 		}
 	);
 
-	Expanse.extend(
+	Alloy.extend(
 		Widget.Overlay,
 		{
-			CSS_OVERLAY: 'exp-overlay'
+			CSS_OVERLAY: 'aui-overlay'
 		}
 	);
 
-	Expanse.extend(
+	Alloy.extend(
 		Widget.Tooltip,
 		{
-			CSS_TOOLTIP: 'exp-tooltip'
+			CSS_TOOLTIP: 'aui-tooltip'
 		}
 	);
 
-	Expanse.extend(
+	Alloy.extend(
 		Widget.Panel,
 		{
-			CSS_PANEL: 'exp-panel',
-			CSS_PANEL_CONTAINER: 'exp-panel-container'
+			CSS_PANEL: 'aui-panel',
+			CSS_PANEL_CONTAINER: 'aui-panel-container'
 		}
 	);
 
-	Expanse.extend(
+	Alloy.extend(
 		Widget.Dialog,
 		{
-			CSS_DIALOG: 'exp-dialog'
+			CSS_DIALOG: 'aui-dialog'
 		}
 	);
 
-	Expanse.extend(
+	Alloy.extend(
 		Widget.SimpleDialog,
 		{
-			CSS_SIMPLEDIALOG: 'exp-simple-dialog',
-			ICON_CSS_CLASSNAME: 'exp-icon'
+			CSS_SIMPLEDIALOG: 'aui-simple-dialog',
+			ICON_CSS_CLASSNAME: 'aui-icon'
 		}
 	);
 
@@ -177,20 +177,20 @@
 	/**
 	* Popup is a subclass of Panel that behaves similarly, except that it has a richer
 	* set of options. It automatically renders itself into the page (though this is configurable),
-	* automatically registers itself with Expanse.Popup.Manager, and allows itself to be automatically
+	* automatically registers itself with Alloy.Popup.Manager, and allows itself to be automatically
 	* destroyed when it is closed.
 	* 
 	* Example:
-	* <br /><a href="panel_example.html">Using the Expanse.Popup class</a>.
+	* <br /><a href="panel_example.html">Using the Alloy.Popup class</a>.
 	* 
-	* @namespace Expanse
+	* @namespace Alloy
 	* @class Popup
-	* @extends Expanse.Panel
+	* @extends Alloy.Panel
 	* @constructor
 	* @param {Object} options The options that configure the instance of the Popup
 	*/
 
-	Expanse.Popup = Expanse.Panel.extend(
+	Alloy.Popup = Alloy.Panel.extend(
 		{
 			initialize: function(options) {
 				var instance = this;
@@ -217,7 +217,7 @@
 					options.height = (parseInt(options.height, 10) || 300) + 'px';
 				}
 
-				options.zIndex = options.zIndex || Expanse.zIndex.CONTAINER;
+				options.zIndex = options.zIndex || Alloy.zIndex.CONTAINER;
 
 				if (options.xy) {
 					var position = options.xy;
@@ -227,7 +227,7 @@
 
 					var centerValue = 'center';
 
-					var win = Expanse.getWindow();
+					var win = Alloy.getWindow();
 
 					if (x == centerValue || y == centerValue) {
 						var width = parseInt(options.width, 10) || 0;
@@ -252,7 +252,7 @@
 					options.xy = [x, y];
 				}
 
-				var el = options.el || Expanse.generateId();
+				var el = options.el || Alloy.generateId();
 
 				instance._super(el, options);
 
@@ -281,7 +281,7 @@
 					instance.renderEvent.subscribe(instance._onRender, instance, true);
 				}
 
-				Expanse.Popup.Manager.register(instance);
+				Alloy.Popup.Manager.register(instance);
 
 				return instance;
 			},
@@ -322,8 +322,8 @@
 					instance.body.id = options.messageId;
 				}
 
-				if (options.resizable !== false && Expanse.Resize) {
-					var resize = new Expanse.Resize(
+				if (options.resizable !== false && Alloy.Resize) {
+					var resize = new Alloy.Resize(
 						el,
 						{
 							handles: options.handles || ['r', 'b', 'br'],
@@ -388,22 +388,22 @@
 	/**
 	* The OverlayManager that keeps track of the Popups added to the page
 	* 
-	* @property Expanse.Popup.Manager
+	* @property Alloy.Popup.Manager
 	* @static
 	* @final
 	* @type Object
 	*/
 
-	Expanse.Popup.Manager = new Expanse.OverlayManager();
+	Alloy.Popup.Manager = new Alloy.OverlayManager();
 
-	Expanse.extend(
-		Expanse.Popup,
+	Alloy.extend(
+		Alloy.Popup,
 		{
 
 			/**
 			* Closes any instance of a popup
 			* 
-			* @method Expanse.Popup.close
+			* @method Alloy.Popup.close
 			* @static
 			* @param {HTMLElement} el The representing the Popup
 			*/
@@ -417,13 +417,13 @@
 					obj = jQuery(el);
 				}
 
-				if (!obj.is('.exp-panel')) {
-					obj = obj.parents('.exp-panel:first');
+				if (!obj.is('.aui-panel')) {
+					obj = obj.parents('.aui-panel:first');
 				}
 
 				if (obj.length) {
 					var id = obj[0].id;
-					var popup = Expanse.Popup.Manager.find(id);
+					var popup = Alloy.Popup.Manager.find(id);
 
 					if (popup) {
 						popup.destroy();
@@ -435,7 +435,7 @@
 			* Updates the body of any Popup with the
 			* result of an ajax request.
 			* 
-			* @method Expanse.Popup.update
+			* @method Alloy.Popup.update
 			* @static
 			* @param {String} id The id of the popup
 			* @param {String} url The url to load via ajax

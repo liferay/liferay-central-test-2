@@ -43,49 +43,49 @@ html > .lfr-dockbar-pinned {
 .dockbar .menu-container {
 }
 
-.dockbar .exp-toolbar {
+.dockbar .aui-toolbar {
 }
 
 .dockbar .user-toolbar {
 }
 
-.exp-toolbar li {
+.aui-toolbar li {
 }
 
-.ie6 .exp-toolbar li, .ie7 .exp-toolbar li {
+.ie6 .aui-toolbar li, .ie7 .aui-toolbar li {
 }
 
-.exp-toolbar .has-submenu.selected {
+.aui-toolbar .has-submenu.selected {
 }
 
-.exp-toolbar-separator {
+.aui-toolbar-separator {
 }
 
-.exp-underlay-container {
+.aui-underlay-container {
 }
 
-.exp-underlay {
+.aui-underlay {
 }
 
-.exp-underlay .exp-header {
+.aui-underlay .aui-header {
 }
 
-.exp-underlay .container-close {
+.aui-underlay .container-close {
 }
 
-.exp-underlay .exp-body {
+.aui-underlay .aui-body {
 }
 
-.exp-underlay .portal-add-content {
+.aui-underlay .portal-add-content {
 }
 
-.exp-underlay .lfr-portlet-item {
+.aui-underlay .lfr-portlet-item {
 }
 
-.add-application .exp-underlay {
+.add-application .aui-underlay {
 }
 
-.manage-layouts .exp-underlay {
+.manage-layouts .aui-underlay {
 }
 
 .dockbar .menu-container {

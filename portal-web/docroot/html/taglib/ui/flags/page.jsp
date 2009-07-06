@@ -51,7 +51,7 @@ long reportedUserId = GetterUtil.getLong((String)request.getAttribute("liferay-u
 		<script type="text/javascript">
 			jQuery('.<%= randomNamespace %>').click(
 				function() {
-					var popup = new Expanse.Popup(
+					var popup = new Alloy.Popup(
 						{
 							body: {
 								url:  '<liferay-portlet:renderURL portletName="<%= PortletKeys.FLAGS %>" windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><liferay-portlet:param name="struts_action" value="/flags/edit_entry" /></liferay-portlet:renderURL> ',
@@ -85,7 +85,7 @@ long reportedUserId = GetterUtil.getLong((String)request.getAttribute("liferay-u
 		<script type="text/javascript">
 			jQuery('.<%= randomNamespace %>').click(
 				function(){
-					var popup = new Expanse.Popup(
+					var popup = new Alloy.Popup(
 						{
 							body: jQuery('#<portlet:namespace />signIn').html(),
 							constraintoviewport: true,

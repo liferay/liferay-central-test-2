@@ -1,4 +1,4 @@
-Liferay.AutoFields = Expanse.Observable.extend(
+Liferay.AutoFields = Alloy.Observable.extend(
 	{
 
 		/**
@@ -260,7 +260,7 @@ Liferay.AutoFields = Expanse.Observable.extend(
 				rows.find(sortableHandle).addClass('handle-sort-vertical');
 			}
 
-			instance._sortable = new Expanse.Sortable(
+			instance._sortable = new Alloy.Sortable(
 				{
 					axis: 'y',
 					container: instance._rowContainer,

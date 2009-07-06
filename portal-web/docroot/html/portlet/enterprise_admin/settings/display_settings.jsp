@@ -77,8 +77,8 @@ String defaultControlPanelThemeId = ParamUtil.getString(request, "settings(" + P
 
 <h3><liferay-ui:message key="language-and-time-zone" /></h3>
 
-<fieldset class="exp-block-labels exp-form-column">
-	<div class="exp-ctrl-holder">
+<fieldset class="aui-block-labels aui-form-column">
+	<div class="aui-ctrl-holder">
 		<label for="<portlet:namespace />languageId"><liferay-ui:message key="default-language" /></label>
 
 		<select name="<portlet:namespace />languageId">
@@ -98,13 +98,13 @@ String defaultControlPanelThemeId = ParamUtil.getString(request, "settings(" + P
 		</select>
 	</div>
 
-	<div class="exp-ctrl-holder">
+	<div class="aui-ctrl-holder">
 		<label for="<portlet:namespace />settings(<%= PropsKeys.LOCALES %>)"><liferay-ui:message key="available-languages" /></label>
 
 		<input class="lfr-input-text" name="<portlet:namespace />settings(<%= PropsKeys.LOCALES %>)" type="text" value="<%= availableLocales %>" />
 	</div>
 
-	<div class="exp-ctrl-holder">
+	<div class="aui-ctrl-holder">
 		<label for="<portlet:namespace />timeZoneId"><liferay-ui:message key="time-zone" /></label>
 
 		<liferay-ui:input-time-zone name="timeZoneId" value="<%= timeZoneId %>" />
@@ -113,8 +113,8 @@ String defaultControlPanelThemeId = ParamUtil.getString(request, "settings(" + P
 
 <h3><liferay-ui:message key="logo" /></h3>
 
-<fieldset class="exp-block-labels exp-form-column">
-	<div class="exp-ctrl-holder">
+<fieldset class="aui-block-labels aui-form-column">
+	<div class="aui-ctrl-holder">
 		<label class="inline-label" for="<portlet:namespace />settings(<%= PropsKeys.COMPANY_SECURITY_COMMUNITY_LOGO %>)"><liferay-ui:message key="allow-community-administrators-to-use-their-own-logo" /></label>
 
 		<liferay-ui:input-checkbox param='<%= "settings(" + PropsKeys.COMPANY_SECURITY_COMMUNITY_LOGO + ")" %>' defaultValue="<%= companySecurityCommunityLogo %>" />
@@ -152,8 +152,8 @@ String defaultControlPanelThemeId = ParamUtil.getString(request, "settings(" + P
 
 <h3><liferay-ui:message key="look-and-feel" /></h3>
 
-<fieldset class="exp-block-labels exp-form-column">
-	<div class="exp-ctrl-holder">
+<fieldset class="aui-block-labels aui-form-column">
+	<div class="aui-ctrl-holder">
 		<label for="<portlet:namespace />settings(<%= PropsKeys.DEFAULT_REGULAR_THEME_ID %>)"><liferay-ui:message key="default-regular-theme" /></label>
 
 		<select name="<portlet:namespace />settings(<%= PropsKeys.DEFAULT_REGULAR_THEME_ID %>)">
@@ -186,7 +186,7 @@ String defaultControlPanelThemeId = ParamUtil.getString(request, "settings(" + P
 		</select>
 	</div>
 
-	<div class="exp-ctrl-holder">
+	<div class="aui-ctrl-holder">
 		<label for="<portlet:namespace />settings(<%= PropsKeys.DEFAULT_REGULAR_THEME_ID %>)"><liferay-ui:message key="default-mobile-theme" /></label>
 
 		<select name="<portlet:namespace />settings(<%= PropsKeys.DEFAULT_REGULAR_THEME_ID %>)">
@@ -219,7 +219,7 @@ String defaultControlPanelThemeId = ParamUtil.getString(request, "settings(" + P
 		</select>
 	</div>
 
-	<div class="exp-ctrl-holder">
+	<div class="aui-ctrl-holder">
 		<label for="<portlet:namespace />settings(<%= PropsKeys.CONTROL_PANEL_LAYOUT_REGULAR_THEME_ID %>)"><liferay-ui:message key="default-control-panel-theme" /></label>
 
 		<select name="<portlet:namespace />settings(<%= PropsKeys.CONTROL_PANEL_LAYOUT_REGULAR_THEME_ID %>)">

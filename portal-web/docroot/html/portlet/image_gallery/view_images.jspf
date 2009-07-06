@@ -63,7 +63,7 @@
 		var messageId = "<portlet:namespace />popup_" + id;
 		var buttonsId = "<portlet:namespace />buttons_" + id;
 
-		var popup = new Expanse.Popup(
+		var popup = new Alloy.Popup(
 			{
 				body: html,
 				draggable: false,
