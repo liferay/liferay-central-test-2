@@ -368,6 +368,11 @@ public class ArrayUtil_IW {
 		return ArrayUtil.toStringArray(array);
 	}
 
+	public java.lang.String[] toStringArray(
+		com.liferay.portal.kernel.json.JSONArray array) {
+		return ArrayUtil.toStringArray(array);
+	}
+
 	public java.lang.String[] toStringArray(long[] array) {
 		return ArrayUtil.toStringArray(array);
 	}

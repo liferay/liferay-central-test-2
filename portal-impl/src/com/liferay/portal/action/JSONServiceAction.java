@@ -673,9 +673,9 @@ public class JSONServiceAction extends JSONAction {
 
 		String json = ParamUtil.getString(request, param, "[]");
 
-		JSONArray array = JSONFactoryUtil.createJSONArray(json);
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray(json);
 
-		return ArrayUtil.toStringArray(array);
+		return ArrayUtil.toStringArray(jsonArray);
 	}
 
 	protected boolean isValidRequest(HttpServletRequest request) {
