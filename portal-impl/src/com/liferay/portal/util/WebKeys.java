@@ -145,10 +145,6 @@ public class WebKeys implements com.liferay.portal.kernel.util.WebKeys {
 
 	public static final String JOURNAL_STRUCTURE_EL_LANGUAGE_ID = "JOURNAL_STRUCTURE_EL_LANGUAGE_ID";
 
-	public static final String JOURNAL_STRUCTURE_EL_META_DATA = "JOURNAL_STRUCTURE_EL_META_DATA";
-
-	public static final String JOURNAL_STRUCTURE_EL_META_DATA_XML = "JOURNAL_STRUCTURE_EL_META_DATA_XML";
-
 	public static final String JOURNAL_STRUCTURE_EL_NAME = "JOURNAL_STRUCTURE_EL_NAME";
 
 	public static final String JOURNAL_STRUCTURE_EL_REPEATABLE = "JOURNAL_STRUCTURE_EL_REPEATABLE";

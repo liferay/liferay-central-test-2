@@ -125,7 +125,6 @@ int tabIndex = 1;
 						xsd += "<dynamic-element name='' type='' repeatable='false'></dynamic-element>\n";
 					}
 					else {
-
 						if (elMetadataXML.value) {
 							var metadataXML = decodeURIComponent(elMetadataXML.value).replace(/[+]/g, ' ');
 
@@ -504,7 +503,7 @@ tabIndex = tabIndexWrapper.getValue();
 </script>
 
 <%!
-private void _format(Element root, IntegerWrapper count, Integer depth, IntegerWrapper tabIndex, PageContext pageContext, HttpServletRequest req) throws Exception {
+private void _format(Element root, IntegerWrapper count, Integer depth, IntegerWrapper tabIndex, PageContext pageContext, HttpServletRequest request) throws Exception {
 	depth = new Integer(depth.intValue() + 1);
 
 	List children = root.elements();
@@ -523,29 +522,21 @@ private void _format(Element root, IntegerWrapper count, Integer depth, IntegerW
 	while (itr.hasNext()) {
 		Element el = (Element)itr.next();
 
-		String nodeName = el.getName();
-
-		if (Validator.isNotNull(nodeName) && nodeName.equals("meta-data")) {
+		if (el.getName().equals("meta-data")) {
 			continue;
 		}
 
-		Element metaData = el.element("meta-data");
-
-		if (Validator.isNotNull(metaData)) {
-			req.setAttribute(WebKeys.JOURNAL_STRUCTURE_EL_META_DATA_XML, metaData.asXML());
-		}
-
-		req.setAttribute(WebKeys.JOURNAL_STRUCTURE_EL, el);
-		req.setAttribute(WebKeys.JOURNAL_STRUCTURE_EL_COUNT, count);
-		req.setAttribute(WebKeys.JOURNAL_STRUCTURE_EL_DEPTH, depth);
-		req.setAttribute(WebKeys.JOURNAL_STRUCTURE_EL_SIBLINGS, hasSiblings);
-		req.setAttribute(WebKeys.TAB_INDEX, tabIndex);
+		request.setAttribute(WebKeys.JOURNAL_STRUCTURE_EL, el);
+		request.setAttribute(WebKeys.JOURNAL_STRUCTURE_EL_COUNT, count);
+		request.setAttribute(WebKeys.JOURNAL_STRUCTURE_EL_DEPTH, depth);
+		request.setAttribute(WebKeys.JOURNAL_STRUCTURE_EL_SIBLINGS, hasSiblings);
+		request.setAttribute(WebKeys.TAB_INDEX, tabIndex);
 
 		pageContext.include("/html/portlet/journal/edit_structure_xsd_el.jsp");
 
 		count.increment();
 
-		_format(el, count, depth, tabIndex, pageContext, req);
+		_format(el, count, depth, tabIndex, pageContext, request);
 	}
 }
 
