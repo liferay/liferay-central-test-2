@@ -115,7 +115,7 @@ public class ScriptingImpl implements Scripting {
 
 		objects.put("portletConfig", portletConfig);
 		objects.put("portletContext", portletContext);
-		objects.put("portletPreferences", portletRequest.getPreferences());
+		objects.put("preferences", portletRequest.getPreferences());
 
 		if (portletRequest instanceof ActionRequest) {
 			objects.put("actionRequest", portletRequest);
