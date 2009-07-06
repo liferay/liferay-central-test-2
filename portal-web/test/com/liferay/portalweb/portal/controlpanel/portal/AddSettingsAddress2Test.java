@@ -60,7 +60,7 @@ public class AddSettingsAddress2Test extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_130_addressStreet2")) {
+				if (selenium.isElementPresent("_130_addressStreet1_2")) {
 					break;
 				}
 			}
@@ -70,9 +70,9 @@ public class AddSettingsAddress2Test extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("_130_addressStreet2",
+		selenium.typeKeys("_130_addressStreet1_2",
 			RuntimeVariables.replace("321 Selenium St."));
-		selenium.type("_130_addressStreet2",
+		selenium.type("_130_addressStreet1_2",
 			RuntimeVariables.replace("321 Selenium St."));
 		selenium.type("_130_addressCity2",
 			RuntimeVariables.replace("Selenium Sity"));

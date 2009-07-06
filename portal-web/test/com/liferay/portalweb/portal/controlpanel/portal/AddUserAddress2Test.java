@@ -83,7 +83,7 @@ public class AddUserAddress2Test extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_125_addressStreet2")) {
+				if (selenium.isElementPresent("_125_addressStreet1_2")) {
 					break;
 				}
 			}
@@ -93,9 +93,9 @@ public class AddUserAddress2Test extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("_125_addressStreet2",
+		selenium.typeKeys("_125_addressStreet1_2",
 			RuntimeVariables.replace("17730 Antonio Ave"));
-		selenium.type("_125_addressStreet2",
+		selenium.type("_125_addressStreet1_2",
 			RuntimeVariables.replace("17730 Antonio Ave"));
 		selenium.select("_125_addressCountryId2",
 			RuntimeVariables.replace("label=United States"));

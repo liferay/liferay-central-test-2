@@ -51,7 +51,7 @@ public class AddOrganizationAddressTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_126_addressStreet10")) {
+				if (selenium.isElementPresent("_126_addressStreet1_0")) {
 					break;
 				}
 			}
@@ -61,11 +61,9 @@ public class AddOrganizationAddressTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("_126_addressStreet10",
+		selenium.typeKeys("_126_addressStreet1_0",
 			RuntimeVariables.replace("12345 Selenium St"));
-		selenium.type("_126_addressStreet10",
-			RuntimeVariables.replace("12345 Selenium St"));
-		selenium.type("_126_addressStreet10",
+		selenium.type("_126_addressStreet1_0",
 			RuntimeVariables.replace("12345 Selenium St"));
 		selenium.select("_126_addressCountryId0",
 			RuntimeVariables.replace("label=United States"));

@@ -58,9 +58,26 @@ public class AddUserAddressTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace("link=selen01"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click("addressesLink");
-		selenium.typeKeys("_125_addressStreet10",
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("_125_addressStreet1_0")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.typeKeys("_125_addressStreet1_0",
 			RuntimeVariables.replace("123 Lifera Ln."));
-		selenium.type("_125_addressStreet10",
+		selenium.type("_125_addressStreet1_0",
 			RuntimeVariables.replace("123 Liferay Ln."));
 		selenium.select("_125_addressCountryId0",
 			RuntimeVariables.replace("label=United States"));

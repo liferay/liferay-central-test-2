@@ -59,7 +59,7 @@ public class AddSettingsAddressTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_130_addressStreet10")) {
+				if (selenium.isElementPresent("_130_addressStreet1_0")) {
 					break;
 				}
 			}
@@ -69,9 +69,9 @@ public class AddSettingsAddressTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("_130_addressStreet10",
+		selenium.typeKeys("_130_addressStreet1_0",
 			RuntimeVariables.replace("123. Lifera Ln."));
-		selenium.type("_130_addressStreet10",
+		selenium.type("_130_addressStreet1_0",
 			RuntimeVariables.replace("123. Liferay Ln."));
 		selenium.type("_130_addressCity0",
 			RuntimeVariables.replace("Rays of Light"));

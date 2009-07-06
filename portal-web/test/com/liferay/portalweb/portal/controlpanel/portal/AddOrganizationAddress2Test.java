@@ -69,7 +69,7 @@ public class AddOrganizationAddress2Test extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_126_addressStreet2")) {
+				if (selenium.isElementPresent("_126_addressStreet1_2")) {
 					break;
 				}
 			}
@@ -79,9 +79,9 @@ public class AddOrganizationAddress2Test extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("_126_addressStreet2",
+		selenium.typeKeys("_126_addressStreet1_2",
 			RuntimeVariables.replace("54321 Lifera Rd"));
-		selenium.type("_126_addressStreet2",
+		selenium.type("_126_addressStreet1_2",
 			RuntimeVariables.replace("54321 Liferay Rd"));
 		selenium.select("_126_addressCountryId2",
 			RuntimeVariables.replace("label=United States"));
