@@ -194,6 +194,14 @@ Liferay.Portlet = {
 		}
 	},
 
+	isStatic: function(portletId) {
+		var instance = this;
+
+		var id = Liferay.Util.getPortletId(portletId.id || portletId);
+
+		return (id in instance._staticPortlets);
+	},
+
 	minimize: function(portlet, el, options) {
 		var instance = this;
 
@@ -262,6 +270,10 @@ Liferay.Portlet = {
 		var isStatic = (options.isStatic == 'no') ? null : options.isStatic;
 		var namespacedId = options.namespacedId;
 		var portletId = options.portletId;
+
+		if (isStatic) {
+			instance.registerStatic(portletId);
+		}
 
 		jQuery(
 			function () {
@@ -386,7 +398,17 @@ Liferay.Portlet = {
 	},
 
 	refreshLayout: function(portletBound) {
-	}
+	},
+
+	registerStatic: function(portletId) {
+		var instance = this;
+
+		var id = Liferay.Util.getPortletId(portletId.id || portletId);
+
+		instance._staticPortlets[id] = true;
+	},
+
+	_staticPortlets: {}
 };
 
 jQuery.fn.last = function(fn) {

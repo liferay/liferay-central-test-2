@@ -154,9 +154,14 @@
 
 			draggable.setHandleElId(id);
 
-			handle.css('cursor', 'move');
-
 			Layout._draggables[portlet.id] = draggable;
+
+			if (Liferay.Portlet.isStatic(portlet)) {
+				draggable.lock();
+			}
+			else {
+				handle.css('cursor', 'move');
+			}
 		},
 
 		getGrid: function() {
@@ -576,7 +581,13 @@
 					if (divColumn != instance._originalParent || (portlet.parentNode == divColumn)) {
 
 						try {
-							divColumn.appendChild(instance._getPlaceholder());
+							var placeHolder = instance._getPlaceholder();
+
+							divColumn.appendChild(placeHolder);
+
+							while (placeHolder.previousSibling && Liferay.Portlet.isStatic(placeHolder.previousSibling.id)) {
+								divColumn.insertBefore(placeHolder, placeHolder.previousSibling);
+							}
 						}
 						catch (e) {}
 					}
@@ -618,11 +629,13 @@
 
 					if (!instance.insideNested) {
 						try {
-							if (instance.goingUp) {
-								parent.insertBefore(portlet, target)
-							} else {
-								parent.insertBefore(portlet, target.nextSibling);
-				            }
+							if (!Liferay.Portlet.isStatic(target.id)) {
+								if (instance.goingUp) {
+									parent.insertBefore(portlet, target)
+								} else {
+									parent.insertBefore(portlet, target.nextSibling);
+					            }
+							}
 						}
 						catch (e) {}
 					}
