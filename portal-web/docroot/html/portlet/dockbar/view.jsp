@@ -202,6 +202,7 @@ if (layout != null) {
 	<c:if test="<%= !layoutPrototypes.isEmpty() %>">
 		<div id="layoutPrototypeTemplate" class="aui-html-template">
 			<ul>
+
 				<%
 				for (LayoutPrototype layoutPrototype : layoutPrototypes) {
 				%>
@@ -215,6 +216,7 @@ if (layout != null) {
 				<%
 				}
 				%>
+
 			</ul>
 		</div>
 	</c:if>
