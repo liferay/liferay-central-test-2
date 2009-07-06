@@ -28,13 +28,13 @@ import com.liferay.portal.kernel.scripting.Scripting;
 import com.liferay.portal.kernel.scripting.ScriptingException;
 import com.liferay.portal.kernel.scripting.UnsupportedLanguageException;
 import com.liferay.portal.kernel.servlet.StringServletOutputStream;
-import com.liferay.portal.kernel.util.ByteArrayMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.scripting.groovy.GroovyExecutor;
 import com.liferay.portal.scripting.javascript.JavaScriptExecutor;
 import com.liferay.portal.scripting.python.PythonExecutor;
 import com.liferay.portal.scripting.ruby.RubyExecutor;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.LineNumberReader;
 import java.io.PrintStream;
@@ -164,18 +164,18 @@ public class ScriptingImpl implements Scripting {
 		String message = e.getMessage();
 
 		if (e instanceof PySyntaxError) {
-			PySyntaxError syntaxError = (PySyntaxError)e;
+			PySyntaxError pySyntaxError = (PySyntaxError)e;
 
-			ByteArrayMaker bam = new ByteArrayMaker();
+			ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
 			PrintStream ps = new PrintStream(
-				new StringServletOutputStream(bam));
+				new StringServletOutputStream(baos));
 
 			Py.displayException(
-				syntaxError.type, syntaxError.value, syntaxError.traceback,
-				new PyFile(ps));
+				pySyntaxError.type, pySyntaxError.value,
+				pySyntaxError.traceback, new PyFile(ps));
 
-			message = bam.toString();
+			message = baos.toString();
 		}
 
 		return message;
