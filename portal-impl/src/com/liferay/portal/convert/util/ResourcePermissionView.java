@@ -75,7 +75,14 @@ public class ResourcePermissionView extends Table {
 	}
 
 	public String getSelectSQL() throws Exception {
-		return _SELECT_SQL + StringPool.QUOTE + _name + StringPool.QUOTE;
+		StringBuilder sb = new StringBuilder();
+
+		sb.append(_SELECT_SQL);
+		sb.append(StringPool.APOSTROPHE);
+		sb.append(_name);
+		sb.append(StringPool.APOSTROPHE);
+
+		return sb.toString();
 	}
 
 	private String _name = StringPool.BLANK;
