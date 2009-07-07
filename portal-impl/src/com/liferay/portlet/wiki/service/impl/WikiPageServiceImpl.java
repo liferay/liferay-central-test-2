@@ -355,7 +355,8 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 			if (diff) {
 				if (latestPage != null) {
 					link.append("?");
-					link.append(PortalUtil.getPortletNamespace(PortletKeys.WIKI));
+					link.append(
+						PortalUtil.getPortletNamespace(PortletKeys.WIKI));
 					link.append("version=");
 					link.append(page.getVersion());
 
