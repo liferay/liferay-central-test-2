@@ -133,8 +133,8 @@ public class StringServletResponse extends HttpServletResponseWrapper {
 		}
 	}
 
-	public void setBufferSize(int size) {
-		_bufferSize = size;
+	public void setBufferSize(int bufferSize) {
+		_bufferSize = bufferSize;
 	}
 
 	public void setContentType(String contentType) {

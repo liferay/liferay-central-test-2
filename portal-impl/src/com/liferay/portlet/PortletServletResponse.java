@@ -232,11 +232,11 @@ public class PortletServletResponse extends HttpServletResponseWrapper {
 		}
 	}
 
-	public void setBufferSize(int size) {
+	public void setBufferSize(int bufferSize) {
 		if (_lifecycle.equals(PortletRequest.RENDER_PHASE) ||
 			_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
 
-			_response.setBufferSize(size);
+			_response.setBufferSize(bufferSize);
 		}
 	}
 
