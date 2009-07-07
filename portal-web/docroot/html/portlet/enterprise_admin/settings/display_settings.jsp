@@ -58,7 +58,7 @@ String defaultControlPanelThemeId = ParamUtil.getString(request, "settings(" + P
 	}
 
 	function <portlet:namespace />openEditCompanyLogoWindow(editCompanyLogoURL) {
-		var editCompanyLogoWindow = window.open(editCompanyLogoURL, '<liferay-ui:message key="change" />', 'directories=no,height=400,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=500');
+		var editCompanyLogoWindow = window.open(editCompanyLogoURL, 'ChangeLogo', 'directories=no,height=400,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=500');
 
 		editCompanyLogoWindow.focus();
 	}
