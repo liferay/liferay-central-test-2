@@ -28,6 +28,7 @@ Liferay.AssetTagsSelector = new Alloy.Class(
 			instance._mainContainer = jQuery('<div class="lfr-tag-select-container"></div>');
 			instance._container = jQuery('<div class="lfr-tag-container"></div>');
 			instance._searchContainer = jQuery('<div class="lfr-tag-search-container"><input class="lfr-tag-search-input" type="text"/></div>');
+			instance._summarySpan = jQuery('#' + options.summarySpan);
 
 			var hiddenInput = jQuery('#' + options.hiddenInput);
 
@@ -130,6 +131,22 @@ Liferay.AssetTagsSelector = new Alloy.Class(
 
 					if (val.length) {
 						addTagButton.trigger('click');
+					}
+				}
+			);
+
+			instance._summarySpan.click(
+				function(event) {
+					var target = jQuery(event.target);
+
+					if (!target.hasClass('ui-tag-delete')) {
+						target = target.parent();
+					}
+
+					if (target.hasClass('ui-tag-delete')) {
+						var id = target.attr('data-tagIndex');
+
+						instance.deleteTag(id);
 					}
 				}
 			);
@@ -478,12 +495,12 @@ Liferay.AssetTagsSelector = new Alloy.Class(
 				function(i, curTag) {
 					html += '<span class="ui-tag" id="' + instance._ns + 'CurTags' + i + '">';
 					html += curTag;
-					html += '<a class="ui-tag-delete" href="javascript:' + instance._ns + '.deleteTag(' + i + ');"><span>x</span></a>';
+					html += '<a class="ui-tag-delete" href="javascript:;" data-tagIndex="' + i + '"><span>x</span></a>';
 					html += '</span>';
 				}
 			);
 
-			var tagsSummary = jQuery('#' + options.summarySpan);
+			var tagsSummary = instance._summarySpan;
 
 			if (curTags.length) {
 				tagsSummary.removeClass('empty');

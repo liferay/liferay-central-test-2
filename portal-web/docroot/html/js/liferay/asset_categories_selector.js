@@ -22,6 +22,7 @@ Liferay.AssetCategoriesSelector = new Alloy.Class(
 			instance._mainContainer = jQuery('<div class="lfr-asset-category-select-container"></div>');
 			instance._container = jQuery('<div class="lfr-asset-category-container"></div>');
 			instance._searchContainer = jQuery('<div class="lfr-asset-category-search-container"><input class="lfr-asset-category-search-input" type="text"/></div>');
+			instance._summarySpan = jQuery('#' + options.summarySpan);
 
 			var hiddenInput = jQuery('#' + options.hiddenInput);
 
@@ -41,6 +42,22 @@ Liferay.AssetCategoriesSelector = new Alloy.Class(
 				instance._curCategoryIds = [];
 				instance._curCategoryNames = [];
 			}
+
+			instance._summarySpan.click(
+				function(event) {
+					var target = jQuery(event.target);
+
+					if (!target.hasClass('ui-asset-category-delete')) {
+						target = target.parent();
+					}
+
+					if (target.hasClass('ui-asset-category-delete')) {
+						var id = target.attr('data-tagIndex');
+
+						instance.deleteCategory(id);
+					}
+				}
+			);
 		},
 
 		deleteCategory: function(id) {
@@ -328,12 +345,12 @@ Liferay.AssetCategoriesSelector = new Alloy.Class(
 				function(i, curCategoryId) {
 					html += '<span class="ui-asset-category" id="' + instance._ns + 'CurCategoryIds' + i + '">';
 					html += curCategoryNames[i];
-					html += '<a class="ui-asset-category-delete" href="javascript:' + instance._ns + '.deleteCategory(' + i + ');"><span>x</span></a>';
+					html += '<a class="ui-asset-category-delete" href="javascript:;" data-tagIndex="' + i + '"><span>x</span></a>';
 					html += '</span>';
 				}
 			);
 
-			var assetCategoriesSummary = jQuery('#' + options.summarySpan);
+			var assetCategoriesSummary = instance._summarySpan;
 
 			if (curCategoryIds.length) {
 				assetCategoriesSummary.removeClass('empty');

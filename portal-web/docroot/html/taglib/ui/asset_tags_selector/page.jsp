@@ -68,11 +68,9 @@ if (curTagsParam != null) {
 </c:if>
 
 <script type="text/javascript">
-	var <%= randomNamespace %> = null;
-
 	jQuery(
 		function() {
-			<%= randomNamespace %> = new Liferay.AssetTagsSelector(
+			new Liferay.AssetTagsSelector(
 				{
 					instanceVar: "<%= randomNamespace %>",
 					hiddenInput: "<%= namespace + hiddenInput %>",
