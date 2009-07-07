@@ -25,6 +25,8 @@
 <%@ include file="/html/taglib/ui/asset_categories_navigation/init.jsp" %>
 
 <%
+boolean hidePortletWhenEmpty = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:asset-tags-navigation:hidePortletWhenEmpty"));
+
 long categoryId = ParamUtil.getLong(request, "categoryId");
 
 List<AssetVocabulary> vocabularies = null;
@@ -32,6 +34,8 @@ List<AssetVocabulary> vocabularies = null;
 vocabularies = AssetVocabularyServiceUtil.getGroupVocabularies(scopeGroupId);
 
 PortletURL portletURL = renderResponse.createRenderURL();
+
+boolean hidePortlet = hidePortletWhenEmpty;
 %>
 
 <liferay-ui:panel-container id='<%= namespace + "taglibAssetCategoriesNavigation" %>' extended="<%= Boolean.TRUE %>" persistState="<%= true %>" cssClass="taglib-asset-categories-navigation">
@@ -41,24 +45,35 @@ PortletURL portletURL = renderResponse.createRenderURL();
 		AssetVocabulary vocabulary = vocabularies.get(i);
 
 		String vocabularyName = vocabulary.getName();
+		String vocabularyNavigation = _buildVocabularyNavigation(vocabulary, categoryId, portletURL);
+
+		if (Validator.isNotNull(vocabularyNavigation)) {
+			hidePortlet = false;
 	%>
 
-		<liferay-ui:panel id='<%= namespace + "taglibAssetCategoriesNavigation" + i %>' title="<%= vocabularyName %>" collapsible="<%= false %>" persistState="<%= true %>" extended="<%= true %>">
-			<c:choose>
-				<c:when test="<%= vocabularies.size() == 1 %>">
-					<%= _buildVocabularyNavigation(vocabulary, categoryId, portletURL) %>
-				</c:when>
-				<c:otherwise>
-					<%= _buildVocabularyNavigation(vocabulary, categoryId, portletURL) %>
-				</c:otherwise>
-			</c:choose>
-		</liferay-ui:panel>
+			<liferay-ui:panel id='<%= namespace + "taglibAssetCategoriesNavigation" + i %>' title="<%= vocabularyName %>" collapsible="<%= false %>" persistState="<%= true %>" extended="<%= true %>">
+				<%= vocabularyNavigation %>
+			</liferay-ui:panel>
 
 	<%
+		}
 	}
 	%>
 
 </liferay-ui:panel-container>
+
+<%
+if (hidePortlet) {
+	renderRequest.setAttribute(WebKeys.PORTLET_CONFIGURATOR_VISIBILITY, Boolean.TRUE);
+%>
+
+	<div class="portlet-msg-info">
+		<liferay-ui:message key="there-are-no-categories" />
+	</div>
+
+<%
+}
+%>
 
 <script type="text/javascript">
 	jQuery(document).ready(
@@ -120,13 +135,15 @@ private void _buildCategoriesNavigation(List<AssetCategory> categories, long cur
 private String _buildVocabularyNavigation(AssetVocabulary vocabulary, long categoryId, PortletURL portletURL) throws Exception {
 	StringBuilder sb = new StringBuilder();
 
-	sb.append("<ul class=\"treeview\">");
-
 	List<AssetCategory> categories = AssetCategoryServiceUtil.getVocabularyRootCategories(vocabulary.getVocabularyId());
 
-	_buildCategoriesNavigation(categories, categoryId, portletURL, sb);
+	if (!categories.isEmpty()) {
+		sb.append("<ul class=\"treeview\">");
 
-	sb.append("</ul><br style=\"clear: both;\" />");
+		_buildCategoriesNavigation(categories, categoryId, portletURL, sb);
+
+		sb.append("</ul><br style=\"clear: both;\" />");
+	}
 
 	return sb.toString();
 }

@@ -24,4 +24,6 @@
 
 <%@ include file="/html/portlet/asset_categories_navigation/init.jsp" %>
 
-<liferay-ui:asset-categories-navigation />
+<liferay-ui:asset-categories-navigation
+	hidePortletWhenEmpty="<%= true %>"
+/>

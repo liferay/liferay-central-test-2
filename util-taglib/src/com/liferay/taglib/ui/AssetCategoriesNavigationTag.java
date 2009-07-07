@@ -24,6 +24,8 @@ package com.liferay.taglib.ui;
 
 import com.liferay.taglib.util.IncludeTag;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * <a href="AssetCategoriesNavigationTag.java.html"><b><i>View Source</i></b>
  * </a>
@@ -35,11 +37,28 @@ import com.liferay.taglib.util.IncludeTag;
  */
 public class AssetCategoriesNavigationTag extends IncludeTag {
 
+	public int doStartTag() {
+		HttpServletRequest request =
+			(HttpServletRequest)pageContext.getRequest();
+
+		request.setAttribute(
+			"liferay-ui:asset-tags-navigation:hidePortletWhenEmpty",
+			String.valueOf(_hidePortletWhenEmpty));
+
+		return EVAL_BODY_BUFFERED;
+	}
+
 	protected String getDefaultPage() {
 		return _PAGE;
 	}
 
+	public void setHidePortletWhenEmpty(boolean hidePortletWhenEmpty) {
+		_hidePortletWhenEmpty = hidePortletWhenEmpty;
+	}
+
 	private static final String _PAGE =
 		"/html/taglib/ui/asset_categories_navigation/page.jsp";
+
+	private boolean _hidePortletWhenEmpty = false;
 
 }
