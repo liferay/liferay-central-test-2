@@ -334,7 +334,12 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 							StringPool.CLOSE_PARENTHESIS;
 			}
 
-			String link = entryURL + HttpUtil.encodeURL(page.getTitle());
+			//	LPS-3998
+
+			StringBuilder link = new StringBuilder(entryURL);
+			
+			link.append("&");
+			link.append(HttpUtil.encodeURL(page.getTitle()));
 
 			SyndEntry syndEntry = new SyndEntryImpl();
 
@@ -349,9 +354,10 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 
 			if (diff) {
 				if (latestPage != null) {
-					link +=
-						"?" + PortalUtil.getPortletNamespace(PortletKeys.WIKI) +
-							"version=" + page.getVersion();
+					link.append("?");
+					link.append(PortalUtil.getPortletNamespace(PortletKeys.WIKI));
+					link.append("version=");
+					link.append(page.getVersion());
 
 					String value = getPageDiff(
 						companyId, latestPage, page, locale);
@@ -385,7 +391,7 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 				entries.add(syndEntry);
 			}
 
-			syndEntry.setLink(link);
+			syndEntry.setLink(link.toString());
 			syndEntry.setUri(syndEntry.getLink());
 
 			latestPage = page;
