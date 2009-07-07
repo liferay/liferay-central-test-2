@@ -34,8 +34,6 @@ List<AssetVocabulary> vocabularies = null;
 vocabularies = AssetVocabularyServiceUtil.getGroupVocabularies(scopeGroupId);
 
 PortletURL portletURL = renderResponse.createRenderURL();
-
-boolean hidePortlet = hidePortletWhenEmpty;
 %>
 
 <liferay-ui:panel-container id='<%= namespace + "taglibAssetCategoriesNavigation" %>' extended="<%= Boolean.TRUE %>" persistState="<%= true %>" cssClass="taglib-asset-categories-navigation">
@@ -48,7 +46,7 @@ boolean hidePortlet = hidePortletWhenEmpty;
 		String vocabularyNavigation = _buildVocabularyNavigation(vocabulary, categoryId, portletURL);
 
 		if (Validator.isNotNull(vocabularyNavigation)) {
-			hidePortlet = false;
+			hidePortletWhenEmpty = false;
 	%>
 
 			<liferay-ui:panel id='<%= namespace + "taglibAssetCategoriesNavigation" + i %>' title="<%= vocabularyName %>" collapsible="<%= false %>" persistState="<%= true %>" extended="<%= true %>">
@@ -63,7 +61,7 @@ boolean hidePortlet = hidePortletWhenEmpty;
 </liferay-ui:panel-container>
 
 <%
-if (hidePortlet) {
+if (hidePortletWhenEmpty) {
 	renderRequest.setAttribute(WebKeys.PORTLET_CONFIGURATOR_VISIBILITY, Boolean.TRUE);
 %>
 
@@ -133,17 +131,19 @@ private void _buildCategoriesNavigation(List<AssetCategory> categories, long cur
 }
 
 private String _buildVocabularyNavigation(AssetVocabulary vocabulary, long categoryId, PortletURL portletURL) throws Exception {
-	StringBuilder sb = new StringBuilder();
-
 	List<AssetCategory> categories = AssetCategoryServiceUtil.getVocabularyRootCategories(vocabulary.getVocabularyId());
 
-	if (!categories.isEmpty()) {
-		sb.append("<ul class=\"treeview\">");
-
-		_buildCategoriesNavigation(categories, categoryId, portletURL, sb);
-
-		sb.append("</ul><br style=\"clear: both;\" />");
+	if (categories.isEmpty()) {
+		return null;
 	}
+
+	StringBuilder sb = new StringBuilder();
+
+	sb.append("<ul class=\"treeview\">");
+
+	_buildCategoriesNavigation(categories, categoryId, portletURL, sb);
+
+	sb.append("</ul><br style=\"clear: both;\" />");
 
 	return sb.toString();
 }

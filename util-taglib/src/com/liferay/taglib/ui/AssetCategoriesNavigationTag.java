@@ -48,17 +48,17 @@ public class AssetCategoriesNavigationTag extends IncludeTag {
 		return EVAL_BODY_BUFFERED;
 	}
 
-	protected String getDefaultPage() {
-		return _PAGE;
-	}
-
 	public void setHidePortletWhenEmpty(boolean hidePortletWhenEmpty) {
 		_hidePortletWhenEmpty = hidePortletWhenEmpty;
+	}
+
+	protected String getDefaultPage() {
+		return _PAGE;
 	}
 
 	private static final String _PAGE =
 		"/html/taglib/ui/asset_categories_navigation/page.jsp";
 
-	private boolean _hidePortletWhenEmpty = false;
+	private boolean _hidePortletWhenEmpty;
 
 }
