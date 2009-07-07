@@ -48,10 +48,13 @@ Liferay.AssetCategoriesSelector = new Alloy.Class(
 
 			var options = instance.options;
 			var curCategoryIds = instance._curCategoryIds;
+			var curCategoryNames = instance._curCategoryNames;
 
 			jQuery('#' + instance._ns + 'CurCategoryIds' + id).remove();
 
 			var value = curCategoryIds.splice(id, 1);
+
+			curCategoryNames.splice(id, 1);
 
 			if (instance._popupVisible) {
 				jQuery('input[type=checkbox][value$=' + value + ']', instance.selectCategoryPopup.body).attr('checked', false);
