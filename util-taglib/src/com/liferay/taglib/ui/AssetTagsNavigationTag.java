@@ -87,7 +87,7 @@ public class AssetTagsNavigationTag extends IncludeTag {
 
 	private long _classNameId = 0;
 	private String _displayStyle = "cloud";
-	private boolean _hidePortletWhenEmpty = false;
+	private boolean _hidePortletWhenEmpty;
 	private boolean _showAssetCount;
 	private boolean _showZeroAssetCount;
 
