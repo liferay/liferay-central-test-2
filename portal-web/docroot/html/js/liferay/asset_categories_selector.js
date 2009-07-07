@@ -31,7 +31,7 @@ Liferay.AssetCategoriesSelector = new Alloy.Class(
 
 			instance._setupSelectAssetCategories();
 
-			if (options.curCategoryIds != '') {
+			if (options.curCategoryIds) {
 				instance._curCategoryIds = options.curCategoryIds.split(',');
 				instance._curCategoryNames = options.curCategoryNames.split(',');
 
