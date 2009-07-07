@@ -69,7 +69,7 @@ for (int i = 1; i<organizations.size(); i++) {
 				<liferay-ui:message key="job-title" />
 			</dt>
 			<dd>
-				<%= selContact.getJobTitle() %>
+				<%= HtmlUtil.escape(selContact.getJobTitle()) %>
 			</dd>
 		</c:if>
 
