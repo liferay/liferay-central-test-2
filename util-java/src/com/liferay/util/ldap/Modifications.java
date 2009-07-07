@@ -22,6 +22,8 @@
 
 package com.liferay.util.ldap;
 
+import com.liferay.portal.kernel.util.Validator;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,6 +34,7 @@ import javax.naming.directory.ModificationItem;
 /**
  * <a href="Modifications.java.html"><b><i>View Source</i></b></a>
  *
+ * @author Amos Fong
  * @author Brian Wing Shun Chan
  *
  */
@@ -48,8 +51,14 @@ public class Modifications {
 	public ModificationItem addItem(
 		int modificationOp, String id, String value) {
 
+		BasicAttribute basicAttribute = new BasicAttribute(id);
+
+		if (Validator.isNotNull(value)) {
+			basicAttribute.add(value);
+		}
+
 		ModificationItem item = new ModificationItem(
-			DirContext.REPLACE_ATTRIBUTE, new BasicAttribute(id, value));
+			modificationOp, basicAttribute);
 
 		_items.add(item);
 
