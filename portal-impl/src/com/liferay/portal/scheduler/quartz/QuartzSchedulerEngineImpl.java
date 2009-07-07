@@ -64,21 +64,10 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 				return;
 			}
 
-			Properties props = new Properties();
-
-			Enumeration<Object> enu = PropsUtil.getProperties().keys();
-
-			while (enu.hasMoreElements()) {
-				String key = (String)enu.nextElement();
-
-				if (key.startsWith("org.quartz.")) {
-					props.setProperty(key, PropsUtil.get(key));
-				}
-			}
-
 			StdSchedulerFactory schedulerFactory = new StdSchedulerFactory();
 
-			schedulerFactory.initialize(props);
+			schedulerFactory.initialize(
+				PropsUtil.getProperties("org.quartz.", false));
 
 			quartzLocalService.checkQuartzTables();
 
