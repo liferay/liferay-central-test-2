@@ -37,7 +37,7 @@ PortletURL portletURL = renderResponse.createRenderURL();
 
 String tagsNavigation = _buildTagsNavigation(scopeGroupId, tag, portletURL, classNameId, displayStyle, showAssetCount, showZeroAssetCount);
 
-if (tagsNavigation != null) {
+if (Validator.isNotNull(tagsNavigation)) {
 %>
 
 	<liferay-ui:panel-container cssClass="taglib-asset-tags-navigation" extended="<%= Boolean.TRUE %>" id='<%= namespace + "taglibAssetTagsNavigation" %>' persistState="<%= true %>">
@@ -62,6 +62,12 @@ else {
 
 <%!
 private String _buildTagsNavigation(long groupId, String selectedTagName, PortletURL portletURL, long classNameId, String displayStyle, boolean showAssetCount, boolean showZeroAssetCount) throws Exception {
+	List<AssetTag> tags = AssetTagServiceUtil.getGroupTags(groupId);
+
+	if (tags.isEmpty()) {
+		return null;
+	}
+
 	StringBuilder sb = new StringBuilder();
 
 	sb.append("<ul class=\"");
@@ -74,12 +80,6 @@ private String _buildTagsNavigation(long groupId, String selectedTagName, Portle
 	}
 
 	sb.append("\">");
-
-	List<AssetTag> tags = AssetTagServiceUtil.getGroupTags(groupId);
-
-	if (tags.isEmpty()) {
-		return null;
-	}
 
 	int maxCount = 1;
 	int minCount = 1;
