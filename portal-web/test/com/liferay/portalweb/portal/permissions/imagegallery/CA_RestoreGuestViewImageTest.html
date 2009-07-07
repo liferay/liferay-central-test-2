@@ -1,12 +1,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>CA_RemoveGuestViewPortletPermissionsTest</title>
+<title>CA_RestoreGuestViewImageTest</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">CA_RemoveGuestViewPortletPermissionsTest</td></tr>
+<tr><td rowspan="1" colspan="3">CA_RestoreGuestViewImageTest</td></tr>
 </thead><tbody>
 <tr>
 	<td>waitForElementPresent</td>
@@ -20,12 +20,32 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Configuration</td>
+	<td>//tr[4]/td[1]/a[1]/b</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//b</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//img[@alt='Image']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Permissions</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Permissions</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Edit Permissions for Image Gallery Image:</td>
 	<td></td>
 </tr>
 <tr>
@@ -36,12 +56,12 @@
 <tr>
 	<td>store</td>
 	<td>eval(selenium.isChecked('15_ACTION_VIEW'))</td>
-	<td>AbleToView</td>
+	<td>GuestCanViewA</td>
 </tr>
 <tr>
 	<td>gotoIf</td>
-	<td>!${AbleToView}</td>
-	<td>Able To View</td>
+	<td>${GuestCanViewA}</td>
+	<td>Guest Can ViewA</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -50,7 +70,7 @@
 </tr>
 <tr>
 	<td>label</td>
-	<td>Able To View</td>
+	<td>Guest Can ViewA</td>
 	<td></td>
 </tr>
 <tr>

@@ -26,14 +26,13 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="CA_RemoveGuestViewFolderPermissionsTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="CA_RestoreGuestViewFolderTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class CA_RemoveGuestViewFolderPermissionsTest extends BaseTestCase {
-	public void testCA_RemoveGuestViewFolderPermissions()
-		throws Exception {
+public class CA_RestoreGuestViewFolderTest extends BaseTestCase {
+	public void testCA_RestoreGuestViewFolder() throws Exception {
 		int label = 1;
 
 		while (label >= 1) {
@@ -99,9 +98,9 @@ public class CA_RemoveGuestViewFolderPermissionsTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				boolean AbleToView = selenium.isChecked("15_ACTION_VIEW");
+				boolean GuestCanViewB = selenium.isChecked("15_ACTION_VIEW");
 
-				if (!AbleToView) {
+				if (GuestCanViewB) {
 					label = 2;
 
 					continue;

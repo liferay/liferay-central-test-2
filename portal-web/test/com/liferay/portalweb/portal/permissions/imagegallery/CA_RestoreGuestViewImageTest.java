@@ -26,13 +26,13 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="CA_RestoreGuestPermissionsTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="CA_RestoreGuestViewImageTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class CA_RestoreGuestPermissionsTest extends BaseTestCase {
-	public void testCA_RestoreGuestPermissions() throws Exception {
+public class CA_RestoreGuestViewImageTest extends BaseTestCase {
+	public void testCA_RestoreGuestViewImage() throws Exception {
 		int label = 1;
 
 		while (label >= 1) {
@@ -81,7 +81,10 @@ public class CA_RestoreGuestPermissionsTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click("link=Permissions");
+				selenium.click(RuntimeVariables.replace("link=Permissions"));
+				selenium.waitForPageToLoad("30000");
+				assertTrue(selenium.isTextPresent(
+						"Edit Permissions for Image Gallery Image:"));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -110,110 +113,6 @@ public class CA_RestoreGuestPermissionsTest extends BaseTestCase {
 				selenium.click("15_ACTION_VIEW");
 
 			case 2:
-				assertTrue(selenium.isTextPresent(
-						"Edit Permissions for Image Gallery Image:"));
-				selenium.click(RuntimeVariables.replace(
-						"//input[@value='Submit']"));
-				selenium.waitForPageToLoad("30000");
-				assertTrue(selenium.isTextPresent(
-						"Your request processed successfully."));
-
-				for (int second = 0;; second++) {
-					if (second >= 60) {
-						fail("timeout");
-					}
-
-					try {
-						if (selenium.isElementPresent(
-									"link=Image Gallery Permissions Test Page")) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
-
-					Thread.sleep(1000);
-				}
-
-				selenium.click(RuntimeVariables.replace(
-						"link=Image Gallery Permissions Test Page"));
-				selenium.waitForPageToLoad("30000");
-				selenium.click("//td[4]/ul/li/strong/span");
-
-				for (int second = 0;; second++) {
-					if (second >= 60) {
-						fail("timeout");
-					}
-
-					try {
-						if (selenium.isElementPresent("//div[5]/ul/li[2]/a")) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
-
-					Thread.sleep(1000);
-				}
-
-				selenium.click(RuntimeVariables.replace("//div[5]/ul/li[2]/a"));
-				selenium.waitForPageToLoad("30000");
-				assertTrue(selenium.isTextPresent(
-						"Edit Permissions for Image Gallery Folder: Image Permissions Test Folder"));
-
-				boolean GuestCanViewB = selenium.isChecked("15_ACTION_VIEW");
-
-				if (GuestCanViewB) {
-					label = 3;
-
-					continue;
-				}
-
-				selenium.click("15_ACTION_VIEW");
-
-			case 3:
-				selenium.click(RuntimeVariables.replace(
-						"//input[@value='Submit']"));
-				selenium.waitForPageToLoad("30000");
-				assertTrue(selenium.isTextPresent(
-						"Your request processed successfully."));
-
-				for (int second = 0;; second++) {
-					if (second >= 60) {
-						fail("timeout");
-					}
-
-					try {
-						if (selenium.isElementPresent(
-									"link=Image Gallery Permissions Test Page")) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
-
-					Thread.sleep(1000);
-				}
-
-				selenium.click(RuntimeVariables.replace(
-						"link=Image Gallery Permissions Test Page"));
-				selenium.waitForPageToLoad("30000");
-				selenium.click(RuntimeVariables.replace("link=Configuration"));
-				selenium.waitForPageToLoad("30000");
-				selenium.click(RuntimeVariables.replace("link=Permissions"));
-				selenium.waitForPageToLoad("30000");
-
-				boolean GuestCanViewC = selenium.isChecked("15_ACTION_VIEW");
-
-				if (GuestCanViewC) {
-					label = 4;
-
-					continue;
-				}
-
-				selenium.click("15_ACTION_VIEW");
-
-			case 4:
 				selenium.click(RuntimeVariables.replace(
 						"//input[@value='Submit']"));
 				selenium.waitForPageToLoad("30000");

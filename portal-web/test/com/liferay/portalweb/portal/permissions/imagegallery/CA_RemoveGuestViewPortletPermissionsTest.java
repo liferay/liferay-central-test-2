@@ -65,6 +65,22 @@ public class CA_RemoveGuestViewPortletPermissionsTest extends BaseTestCase {
 				selenium.click(RuntimeVariables.replace("link=Permissions"));
 				selenium.waitForPageToLoad("30000");
 
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isElementPresent("15_ACTION_VIEW")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
 				boolean AbleToView = selenium.isChecked("15_ACTION_VIEW");
 
 				if (!AbleToView) {

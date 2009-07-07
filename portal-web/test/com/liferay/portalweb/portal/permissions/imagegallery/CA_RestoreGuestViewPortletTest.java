@@ -26,14 +26,13 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="CA_RemoveGuestViewFolderPermissionsTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="CA_RestoreGuestViewPortletTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class CA_RemoveGuestViewFolderPermissionsTest extends BaseTestCase {
-	public void testCA_RemoveGuestViewFolderPermissions()
-		throws Exception {
+public class CA_RestoreGuestViewPortletTest extends BaseTestCase {
+	public void testCA_RestoreGuestViewPortlet() throws Exception {
 		int label = 1;
 
 		while (label >= 1) {
@@ -60,28 +59,10 @@ public class CA_RemoveGuestViewFolderPermissionsTest extends BaseTestCase {
 				selenium.click(RuntimeVariables.replace(
 						"link=Image Gallery Permissions Test Page"));
 				selenium.waitForPageToLoad("30000");
-				selenium.click("//td[4]/ul/li/strong/span");
-
-				for (int second = 0;; second++) {
-					if (second >= 60) {
-						fail("timeout");
-					}
-
-					try {
-						if (selenium.isElementPresent("//div[5]/ul/li[2]/a")) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
-
-					Thread.sleep(1000);
-				}
-
-				selenium.click(RuntimeVariables.replace("//div[5]/ul/li[2]/a"));
+				selenium.click(RuntimeVariables.replace("link=Configuration"));
 				selenium.waitForPageToLoad("30000");
-				assertTrue(selenium.isTextPresent(
-						"Edit Permissions for Image Gallery Folder: Image Permissions Test Folder"));
+				selenium.click(RuntimeVariables.replace("link=Permissions"));
+				selenium.waitForPageToLoad("30000");
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -99,9 +80,9 @@ public class CA_RemoveGuestViewFolderPermissionsTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				boolean AbleToView = selenium.isChecked("15_ACTION_VIEW");
+				boolean GuestCanViewC = selenium.isChecked("15_ACTION_VIEW");
 
-				if (!AbleToView) {
+				if (GuestCanViewC) {
 					label = 2;
 
 					continue;

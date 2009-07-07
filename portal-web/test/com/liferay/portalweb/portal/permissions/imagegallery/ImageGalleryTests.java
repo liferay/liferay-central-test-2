@@ -59,7 +59,9 @@ public class ImageGalleryTests extends BaseTests {
 		testSuite.addTestSuite(CA_LogoutTest.class);
 		testSuite.addTestSuite(Guest_AssertCannotViewPortletTest.class);
 		testSuite.addTestSuite(CA_LoginTest.class);
-		testSuite.addTestSuite(CA_RestoreGuestPermissionsTest.class);
+		testSuite.addTestSuite(CA_RestoreGuestViewImageTest.class);
+		testSuite.addTestSuite(CA_RestoreGuestViewFolderTest.class);
+		testSuite.addTestSuite(CA_RestoreGuestViewPortletTest.class);
 		testSuite.addTestSuite(CA_AssertActionTest.class);
 		testSuite.addTestSuite(CA_DeleteImageTest.class);
 		testSuite.addTestSuite(CA_DeleteFolderTest.class);

@@ -1,12 +1,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>CA_RemoveGuestViewPortletPermissionsTest</title>
+<title>CA_RestoreGuestViewFolderTest</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">CA_RemoveGuestViewPortletPermissionsTest</td></tr>
+<tr><td rowspan="1" colspan="3">CA_RestoreGuestViewFolderTest</td></tr>
 </thead><tbody>
 <tr>
 	<td>waitForElementPresent</td>
@@ -19,13 +19,23 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>link=Configuration</td>
+	<td>click</td>
+	<td>//td[4]/ul/li/strong/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[5]/ul/li[2]/a</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Permissions</td>
+	<td>//div[5]/ul/li[2]/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Edit Permissions for Image Gallery Folder: Image Permissions Test Folder</td>
 	<td></td>
 </tr>
 <tr>
@@ -36,12 +46,12 @@
 <tr>
 	<td>store</td>
 	<td>eval(selenium.isChecked('15_ACTION_VIEW'))</td>
-	<td>AbleToView</td>
+	<td>GuestCanViewB</td>
 </tr>
 <tr>
 	<td>gotoIf</td>
-	<td>!${AbleToView}</td>
-	<td>Able To View</td>
+	<td>${GuestCanViewB}</td>
+	<td>Guest Can ViewB</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -50,7 +60,7 @@
 </tr>
 <tr>
 	<td>label</td>
-	<td>Able To View</td>
+	<td>Guest Can ViewB</td>
 	<td></td>
 </tr>
 <tr>
