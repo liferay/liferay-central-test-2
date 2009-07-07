@@ -42,7 +42,7 @@ public class BrowserLauncher implements Runnable {
 
 		for (int i = 0; i < 5; i++) {
 			try {
-				Thread.sleep(2500);
+				Thread.sleep(3000);
 			}
 			catch (InterruptedException ie) {
 			}
