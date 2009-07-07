@@ -22,7 +22,6 @@
 
 package com.liferay.portal.util;
 
-import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.util.Validator;
 
 import java.net.HttpURLConnection;
@@ -41,9 +40,9 @@ public class BrowserLauncher implements Runnable {
 			return;
 		}
 
-		for (int i = 0; i < 300; i++) {
+		for (int i = 0; i < 5; i++) {
 			try {
-				Thread.sleep(Time.SECOND * 1);
+				Thread.sleep(2500);
 			}
 			catch (InterruptedException ie) {
 			}
