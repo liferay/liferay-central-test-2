@@ -124,11 +124,15 @@ public abstract class MimeResponseImpl
 	}
 
 	public void resetBuffer() {
+		if (_calledFlushBuffer) {
+			throw new IllegalStateException();
+		}
+
 		_response.resetBuffer();
 	}
 
-	public void setBufferSize(int size) {
-		_response.setBufferSize(size);
+	public void setBufferSize(int bufferSize) {
+		_response.setBufferSize(bufferSize);
 	}
 
 	public void setContentType(String contentType) {

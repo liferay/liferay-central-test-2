@@ -108,6 +108,10 @@ public class CacheResponse extends HttpServletResponseWrapper {
 		values.add(header);
 	}
 
+	public int getBufferSize() {
+		return _bufferSize;
+	}
+
 	public String getHeader(String name) {
 		List<Header> values = _headers.get(name);
 
@@ -195,6 +199,10 @@ public class CacheResponse extends HttpServletResponseWrapper {
 		return super.isCommitted();
 	}
 
+	public void setBufferSize(int bufferSize) {
+		_bufferSize = bufferSize;
+	}
+
 	public void setContentType(String contentType) {
 		_contentType = contentType;
 
@@ -248,6 +256,7 @@ public class CacheResponse extends HttpServletResponseWrapper {
 	private ByteArrayMaker _bam = new ByteArrayMaker();
 	private CacheResponseStream _stream;
 	private PrintWriter _writer;
+	private int _bufferSize;
 	private String _contentType;
 	private Map<String, List<Header>> _headers =
 		new HashMap<String, List<Header>>();
