@@ -28,7 +28,8 @@ package com.liferay.portal.kernel.util;
  * @author Brian Wing Shun Chan
  *
  */
-public class BooleanWrapper extends PrimitiveWrapper {
+public class BooleanWrapper
+	extends PrimitiveWrapper implements Comparable<BooleanWrapper> {
 
 	public static final Class<?> TYPE = Boolean.TYPE;
 
@@ -38,6 +39,22 @@ public class BooleanWrapper extends PrimitiveWrapper {
 
 	public BooleanWrapper(boolean value) {
 		_value = value;
+	}
+
+	public int compareTo(BooleanWrapper booleanWrapper) {
+		if (booleanWrapper == null) {
+			return 1;
+		}
+
+		if (getValue() && !booleanWrapper.getValue()) {
+			return 1;
+		}
+		else if (!getValue() && booleanWrapper.getValue()) {
+			return -1;
+		}
+		else {
+			return 0;
+		}
 	}
 
 	public boolean getValue() {

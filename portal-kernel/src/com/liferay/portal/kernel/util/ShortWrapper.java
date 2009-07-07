@@ -28,7 +28,8 @@ package com.liferay.portal.kernel.util;
  * @author Brian Wing Shun Chan
  *
  */
-public class ShortWrapper extends PrimitiveWrapper {
+public class ShortWrapper
+	extends PrimitiveWrapper implements Comparable<ShortWrapper> {
 
 	public static final Class<?> TYPE = Short.TYPE;
 
@@ -38,6 +39,22 @@ public class ShortWrapper extends PrimitiveWrapper {
 
 	public ShortWrapper(short value) {
 		_value = value;
+	}
+
+	public int compareTo(ShortWrapper shortWrapper) {
+		if (shortWrapper == null) {
+			return 1;
+		}
+
+		if (getValue() > shortWrapper.getValue()) {
+			return 1;
+		}
+		else if (getValue() < shortWrapper.getValue()) {
+			return -1;
+		}
+		else {
+			return 0;
+		}
 	}
 
 	public short getValue() {

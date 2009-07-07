@@ -28,7 +28,8 @@ package com.liferay.portal.kernel.util;
  * @author Brian Wing Shun Chan
  *
  */
-public class DoubleWrapper extends PrimitiveWrapper {
+public class DoubleWrapper
+	extends PrimitiveWrapper implements Comparable<DoubleWrapper> {
 
 	public static final Class<?> TYPE = Double.TYPE;
 
@@ -38,6 +39,22 @@ public class DoubleWrapper extends PrimitiveWrapper {
 
 	public DoubleWrapper(double value) {
 		_value = value;
+	}
+
+	public int compareTo(DoubleWrapper doubleWrapper) {
+		if (doubleWrapper == null) {
+			return 1;
+		}
+
+		if (getValue() > doubleWrapper.getValue()) {
+			return 1;
+		}
+		else if (getValue() < doubleWrapper.getValue()) {
+			return -1;
+		}
+		else {
+			return 0;
+		}
 	}
 
 	public double getValue() {

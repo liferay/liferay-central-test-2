@@ -28,7 +28,8 @@ package com.liferay.portal.kernel.util;
  * @author Brian Wing Shun Chan
  *
  */
-public class FloatWrapper extends PrimitiveWrapper {
+public class FloatWrapper
+	extends PrimitiveWrapper implements Comparable<FloatWrapper> {
 
 	public static final Class<?> TYPE = Float.TYPE;
 
@@ -38,6 +39,22 @@ public class FloatWrapper extends PrimitiveWrapper {
 
 	public FloatWrapper(float value) {
 		_value = value;
+	}
+
+	public int compareTo(FloatWrapper floatWrapper) {
+		if (floatWrapper == null) {
+			return 1;
+		}
+
+		if (getValue() > floatWrapper.getValue()) {
+			return 1;
+		}
+		else if (getValue() < floatWrapper.getValue()) {
+			return -1;
+		}
+		else {
+			return 0;
+		}
 	}
 
 	public float getValue() {
