@@ -42,14 +42,13 @@ PortletURL portletURL = renderResponse.createRenderURL();
 	for (int i = 0; i < vocabularies.size(); i++) {
 		AssetVocabulary vocabulary = vocabularies.get(i);
 
-		String vocabularyName = vocabulary.getName();
 		String vocabularyNavigation = _buildVocabularyNavigation(vocabulary, categoryId, portletURL);
 
 		if (Validator.isNotNull(vocabularyNavigation)) {
 			hidePortletWhenEmpty = false;
 	%>
 
-			<liferay-ui:panel id='<%= namespace + "taglibAssetCategoriesNavigation" + i %>' title="<%= vocabularyName %>" collapsible="<%= false %>" persistState="<%= true %>" extended="<%= true %>">
+			<liferay-ui:panel id='<%= namespace + "taglibAssetCategoriesNavigation" + i %>' title="<%= vocabulary.getName() %>" collapsible="<%= false %>" persistState="<%= true %>" extended="<%= true %>">
 				<%= vocabularyNavigation %>
 			</liferay-ui:panel>
 
