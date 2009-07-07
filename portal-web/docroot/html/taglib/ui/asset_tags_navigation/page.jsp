@@ -27,17 +27,38 @@
 <%
 long classNameId = GetterUtil.getLong((String)request.getAttribute("liferay-ui:asset-tags-navigation:classNameId"));
 String displayStyle = (String)request.getAttribute("liferay-ui:asset-tags-navigation:displayStyle");
+boolean hidePortletWhenEmpty = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:asset-tags-navigation:hidePortletWhenEmpty"));
 boolean showAssetCount = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:asset-tags-navigation:showAssetCount"));
 boolean showZeroAssetCount = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:asset-tags-navigation:showZeroAssetCount"));
 
 String tag = ParamUtil.getString(request, "tag");
 
 PortletURL portletURL = renderResponse.createRenderURL();
+
+String tagsNavigation = _buildTagsNavigation(scopeGroupId, tag, portletURL, classNameId, displayStyle, showAssetCount, showZeroAssetCount);
+
+if (tagsNavigation != null) {
 %>
 
-<liferay-ui:panel-container id='<%= namespace + "taglibAssetTagsNavigation" %>' extended="<%= Boolean.TRUE %>" persistState="<%= true %>" cssClass="taglib-asset-tags-navigation">
-	<%= _buildTagsNavigation(scopeGroupId, tag, portletURL, classNameId, displayStyle, showAssetCount, showZeroAssetCount) %>
-</liferay-ui:panel-container>
+	<liferay-ui:panel-container id='<%= namespace + "taglibAssetTagsNavigation" %>' extended="<%= Boolean.TRUE %>" persistState="<%= true %>" cssClass="taglib-asset-tags-navigation">
+		<%= tagsNavigation %>
+	</liferay-ui:panel-container>
+
+<%
+}
+else {
+	if (hidePortletWhenEmpty) {
+		renderRequest.setAttribute(WebKeys.PORTLET_CONFIGURATOR_VISIBILITY, Boolean.TRUE);
+	}
+%>
+
+	<div class="portlet-msg-info">
+		<liferay-ui:message key="there-are-no-tags" />
+	</div>
+
+<%
+}
+%>
 
 <%!
 private String _buildTagsNavigation(long groupId, String selectedTagName, PortletURL portletURL, long classNameId, String displayStyle, boolean showAssetCount, boolean showZeroAssetCount) throws Exception {
@@ -55,6 +76,10 @@ private String _buildTagsNavigation(long groupId, String selectedTagName, Portle
 	sb.append("\">");
 
 	List<AssetTag> tags = AssetTagServiceUtil.getGroupTags(groupId);
+
+	if (tags.isEmpty()) {
+		return null;
+	}
 
 	int maxCount = 1;
 	int minCount = 1;

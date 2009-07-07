@@ -46,6 +46,9 @@ public class AssetTagsNavigationTag extends IncludeTag {
 		request.setAttribute(
 			"liferay-ui:asset-tags-navigation:displayStyle", _displayStyle);
 		request.setAttribute(
+			"liferay-ui:asset-tags-navigation:hidePortletWhenEmpty",
+			String.valueOf(_hidePortletWhenEmpty));
+		request.setAttribute(
 			"liferay-ui:asset-tags-navigation:showAssetCount",
 			String.valueOf(_showAssetCount));
 		request.setAttribute(
@@ -61,6 +64,10 @@ public class AssetTagsNavigationTag extends IncludeTag {
 
 	public void setDisplayStyle(String displayStyle) {
 		_displayStyle = displayStyle;
+	}
+
+	public void setHidePortletWhenEmpty(boolean hidePortletWhenEmpty) {
+		_hidePortletWhenEmpty = hidePortletWhenEmpty;
 	}
 
 	public void setShowAssetCount(boolean showAssetCount) {
@@ -80,6 +87,7 @@ public class AssetTagsNavigationTag extends IncludeTag {
 
 	private long _classNameId = 0;
 	private String _displayStyle = "cloud";
+	private boolean _hidePortletWhenEmpty = false;
 	private boolean _showAssetCount;
 	private boolean _showZeroAssetCount;
 

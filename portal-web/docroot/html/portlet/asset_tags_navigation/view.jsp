@@ -27,6 +27,7 @@
 <liferay-ui:asset-tags-navigation
 	classNameId="<%= classNameId %>"
 	displayStyle="<%= displayStyle %>"
+	hidePortletWhenEmpty="<%= true %>"
 	showAssetCount="<%= showAssetCount %>"
 	showZeroAssetCount="<%= showZeroAssetCount %>"
 />

@@ -110,6 +110,11 @@
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
+			<name>hidePortletWhenEmpty</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
 			<name>page</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
