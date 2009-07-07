@@ -97,14 +97,28 @@ public class PortletRequestDispatcherImpl implements PortletRequestDispatcher {
 			throw new IllegalStateException("Response is already committed");
 		}
 
-		dispatch(portletRequest, portletResponse, false, false);
+		try {
+			dispatch(portletRequest, portletResponse, false, false);
+		}
+		catch (ServletException se) {
+			_log.error(se, se);
+
+			throw new PortletException(se);
+		}
 	}
 
 	public void include(
 			PortletRequest portletRequest, PortletResponse portletResponse)
 		throws IOException, PortletException {
 
-		dispatch(portletRequest, portletResponse, false, true);
+		try {
+			dispatch(portletRequest, portletResponse, false, true);
+		}
+		catch (ServletException se) {
+			_log.error(se, se);
+
+			throw new PortletException(se);
+		}
 	}
 
 	public void include(
@@ -112,20 +126,34 @@ public class PortletRequestDispatcherImpl implements PortletRequestDispatcher {
 			boolean strutsURLEncoder)
 		throws IOException, PortletException {
 
-		dispatch(portletRequest, portletResponse, strutsURLEncoder, true);
+		try {
+			dispatch(portletRequest, portletResponse, strutsURLEncoder, true);
+		}
+		catch (ServletException se) {
+			_log.error(se, se);
+
+			throw new PortletException(se);
+		}
 	}
 
 	public void include(
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
 
-		dispatch(renderRequest, renderResponse, false, true);
+		try {
+			dispatch(renderRequest, renderResponse, false, true);
+		}
+		catch (ServletException se) {
+			_log.error(se, se);
+
+			throw new PortletException(se);
+		}
 	}
 
 	protected void dispatch(
 			PortletRequest portletRequest, PortletResponse portletResponse,
 			boolean strutsURLEncoder, boolean include)
-		throws IOException, PortletException {
+		throws IOException, ServletException {
 
 		if (!include) {
 			if (portletResponse instanceof MimeResponseImpl) {
@@ -138,184 +166,172 @@ public class PortletRequestDispatcherImpl implements PortletRequestDispatcher {
 			}
 		}
 
-		try {
-			PortletRequestImpl portletRequestImpl =
-				(PortletRequestImpl)portletRequest;
-			PortletResponseImpl portletResponseImpl =
-				PortletResponseImpl.getPortletResponseImpl(portletResponse);
+		PortletRequestImpl portletRequestImpl =
+			(PortletRequestImpl)portletRequest;
+		PortletResponseImpl portletResponseImpl =
+			PortletResponseImpl.getPortletResponseImpl(portletResponse);
 
-			HttpServletRequest request = PortalUtil.getHttpServletRequest(
-				portletRequest);
-			HttpServletResponse response = PortalUtil.getHttpServletResponse(
-				portletResponse);
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			portletRequest);
+		HttpServletResponse response = PortalUtil.getHttpServletResponse(
+			portletResponse);
 
-			String pathInfo = null;
-			String queryString = null;
-			String requestURI = null;
-			String servletPath = null;
+		String pathInfo = null;
+		String queryString = null;
+		String requestURI = null;
+		String servletPath = null;
 
-			if (_path != null) {
-				/*if (ServerDetector.isJetty()) {
-					int pos = _path.indexOf(StringPool.QUESTION);
-
-					if (pos != -1) {
-						_path = _path.substring(0, pos);
-					}
-				}*/
-
-				String pathNoQueryString = _path;
-
+		if (_path != null) {
+			/*if (ServerDetector.isJetty()) {
 				int pos = _path.indexOf(StringPool.QUESTION);
 
 				if (pos != -1) {
-					pathNoQueryString = _path.substring(0, pos);
-					queryString = _path.substring(pos + 1, _path.length());
+					_path = _path.substring(0, pos);
+				}
+			}*/
 
-					Map<String, String[]> queryParams =
-						new HashMap<String, String[]>();
+			String pathNoQueryString = _path;
 
-					String[] queryParamsArray =
-						StringUtil.split(queryString, StringPool.AMPERSAND);
+			int pos = _path.indexOf(StringPool.QUESTION);
 
-					for (int i = 0; i < queryParamsArray.length; i++) {
-						String[] nameValuePair = StringUtil.split(
-							queryParamsArray[i], StringPool.EQUAL);
+			if (pos != -1) {
+				pathNoQueryString = _path.substring(0, pos);
+				queryString = _path.substring(pos + 1, _path.length());
 
-						String name = nameValuePair[0];
-						String value = StringPool.BLANK;
+				Map<String, String[]> queryParams =
+					new HashMap<String, String[]>();
 
-						if (nameValuePair.length == 2) {
-							value = nameValuePair[1];
-						}
+				String[] queryParamsArray = StringUtil.split(
+					queryString, StringPool.AMPERSAND);
 
-						String[] values = queryParams.get(name);
+				for (int i = 0; i < queryParamsArray.length; i++) {
+					String[] nameValuePair = StringUtil.split(
+						queryParamsArray[i], StringPool.EQUAL);
 
-						if (values == null) {
-							queryParams.put(name, new String[] {value});
-						}
-						else {
-							String[] newValues = new String[values.length + 1];
+					String name = nameValuePair[0];
+					String value = StringPool.BLANK;
 
-							System.arraycopy(
-								values, 0, newValues, 0, values.length);
-
-							newValues[newValues.length - 1] = value;
-
-							queryParams.put(name, newValues);
-						}
+					if (nameValuePair.length == 2) {
+						value = nameValuePair[1];
 					}
 
-					DynamicServletRequest dynamicRequest = null;
+					String[] values = queryParams.get(name);
 
-					if (portletRequestImpl.isPrivateRequestAttributes()) {
-						String portletNamespace =
-							PortalUtil.getPortletNamespace(
-								portletRequestImpl.getPortletName());
-
-						dynamicRequest = new NamespaceServletRequest(
-							request, portletNamespace, portletNamespace);
+					if (values == null) {
+						queryParams.put(name, new String[] {value});
 					}
 					else {
-						dynamicRequest = new DynamicServletRequest(request);
-					}
+						String[] newValues = new String[values.length + 1];
 
-					for (Map.Entry<String, String[]> entry :
-							queryParams.entrySet()) {
+						System.arraycopy(
+							values, 0, newValues, 0, values.length);
 
-						String name = entry.getKey();
-						String[] values = entry.getValue();
+						newValues[newValues.length - 1] = value;
 
-						String[] oldValues =
-							dynamicRequest.getParameterValues(name);
-
-						if (oldValues == null) {
-							dynamicRequest.setParameterValues(name, values);
-						}
-						else {
-							String[] newValues = ArrayUtil.append(
-								values, oldValues);
-
-							dynamicRequest.setParameterValues(name, newValues);
-						}
-					}
-
-					request = dynamicRequest;
-				}
-
-				Portlet portlet = portletRequestImpl.getPortlet();
-
-				PortletApp portletApp = portlet.getPortletApp();
-
-				Set<String> servletURLPatterns =
-					portletApp.getServletURLPatterns();
-
-				for (String urlPattern : servletURLPatterns) {
-					if (urlPattern.endsWith("/*")) {
-						pos = urlPattern.indexOf("/*");
-
-						urlPattern = urlPattern.substring(0, pos);
-
-						if (pathNoQueryString.startsWith(urlPattern)) {
-							pathInfo = pathNoQueryString.substring(
-								urlPattern.length());
-							servletPath = urlPattern;
-
-							break;
-						}
+						queryParams.put(name, newValues);
 					}
 				}
 
-				if ((pathInfo == null) && (servletPath == null)) {
-					pathInfo = pathNoQueryString;
-					servletPath = pathNoQueryString;
+				DynamicServletRequest dynamicRequest = null;
+
+				if (portletRequestImpl.isPrivateRequestAttributes()) {
+					String portletNamespace = PortalUtil.getPortletNamespace(
+						portletRequestImpl.getPortletName());
+
+					dynamicRequest = new NamespaceServletRequest(
+						request, portletNamespace, portletNamespace);
+				}
+				else {
+					dynamicRequest = new DynamicServletRequest(request);
 				}
 
-				requestURI =
-					portletRequest.getContextPath() + pathNoQueryString;
+				for (Map.Entry<String, String[]> entry :
+						queryParams.entrySet()) {
+
+					String name = entry.getKey();
+					String[] values = entry.getValue();
+
+					String[] oldValues = dynamicRequest.getParameterValues(
+						name);
+
+					if (oldValues == null) {
+						dynamicRequest.setParameterValues(name, values);
+					}
+					else {
+						String[] newValues = ArrayUtil.append(
+							values, oldValues);
+
+						dynamicRequest.setParameterValues(name, newValues);
+					}
+				}
+
+				request = dynamicRequest;
 			}
 
-			PortletServletRequest portletServletRequest =
-				new PortletServletRequest(
-					request, portletRequestImpl, pathInfo, queryString,
-					requestURI, servletPath, _named, include);
+			Portlet portlet = portletRequestImpl.getPortlet();
 
-			PortletServletResponse portletServletResponse =
-				new PortletServletResponse(
-					response, portletResponseImpl, include);
+			PortletApp portletApp = portlet.getPortletApp();
 
-			URLEncoder urlEncoder = _portlet.getURLEncoderInstance();
+			Set<String> servletURLPatterns = portletApp.getServletURLPatterns();
 
-			if (urlEncoder != null) {
-				portletResponseImpl.setURLEncoder(urlEncoder);
-			}
-			else if (strutsURLEncoder) {
-				ThemeDisplay themeDisplay =
-					(ThemeDisplay)portletRequest.getAttribute(
-						WebKeys.THEME_DISPLAY);
+			for (String urlPattern : servletURLPatterns) {
+				if (urlPattern.endsWith("/*")) {
+					pos = urlPattern.indexOf("/*");
 
-				URLEncoder strutsURLEncoderObj = new StrutsURLEncoder(
-					portletServletRequest.getContextPath(),
-					themeDisplay.getPathMain(),
-					(String)_portletContextImpl.getAttribute(
-						Globals.SERVLET_KEY),
-					(LiferayPortletURL)portletResponseImpl.createRenderURL());
+					urlPattern = urlPattern.substring(0, pos);
 
-				portletResponseImpl.setURLEncoder(strutsURLEncoderObj);
+					if (pathNoQueryString.startsWith(urlPattern)) {
+						pathInfo = pathNoQueryString.substring(
+							urlPattern.length());
+						servletPath = urlPattern;
+
+						break;
+					}
+				}
 			}
 
-			if (include) {
-				_requestDispatcher.include(
-					portletServletRequest, portletServletResponse);
+			if ((pathInfo == null) && (servletPath == null)) {
+				pathInfo = pathNoQueryString;
+				servletPath = pathNoQueryString;
 			}
-			else {
-				_requestDispatcher.forward(
-					portletServletRequest, portletServletResponse);
-			}
+
+			requestURI = portletRequest.getContextPath() + pathNoQueryString;
 		}
-		catch (ServletException se) {
-			_log.error(se, se);
 
-			throw new PortletException(se);
+		PortletServletRequest portletServletRequest = new PortletServletRequest(
+			request, portletRequestImpl, pathInfo, queryString, requestURI,
+			servletPath, _named, include);
+
+		PortletServletResponse portletServletResponse =
+			new PortletServletResponse(response, portletResponseImpl, include);
+
+		URLEncoder urlEncoder = _portlet.getURLEncoderInstance();
+
+		if (urlEncoder != null) {
+			portletResponseImpl.setURLEncoder(urlEncoder);
+		}
+		else if (strutsURLEncoder) {
+			ThemeDisplay themeDisplay =
+				(ThemeDisplay)portletRequest.getAttribute(
+					WebKeys.THEME_DISPLAY);
+
+			URLEncoder strutsURLEncoderObj = new StrutsURLEncoder(
+				portletServletRequest.getContextPath(),
+				themeDisplay.getPathMain(),
+				(String)_portletContextImpl.getAttribute(
+					Globals.SERVLET_KEY),
+				(LiferayPortletURL)portletResponseImpl.createRenderURL());
+
+			portletResponseImpl.setURLEncoder(strutsURLEncoderObj);
+		}
+
+		if (include) {
+			_requestDispatcher.include(
+				portletServletRequest, portletServletResponse);
+		}
+		else {
+			_requestDispatcher.forward(
+				portletServletRequest, portletServletResponse);
 		}
 	}
 

@@ -576,7 +576,8 @@ public class SourceFormatter {
 		DirectoryScanner ds = new DirectoryScanner();
 
 		ds.setBasedir(basedir);
-		ds.setExcludes(new String[] {"**\\null.jsp", "**\\tmp\\**"});
+		ds.setExcludes(
+			new String[] {"**\\null.jsp", "**\\tmp\\**", "**\\tools\\tck\\**"});
 		ds.setIncludes(new String[] {"**\\*.jsp", "**\\*.jspf", "**\\*.vm"});
 
 		ds.scan();
@@ -829,7 +830,7 @@ public class SourceFormatter {
 				"**\\portal-web\\classes\\**\\*.java",
 				"**\\portal-web\\test\\**\\*Test.java",
 				"**\\portlet\\**\\service\\**", "**\\tools\\ext_tmpl\\**",
-				"**\\wsrp\\service\\**"
+				"**\\tools\\tck\\**", "**\\wsrp\\service\\**"
 			});
 		ds.setIncludes(new String[] {"**\\*.java"});
 
