@@ -334,11 +334,10 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 							StringPool.CLOSE_PARENTHESIS;
 			}
 
-			//	LPS-3998
+			StringBuilder link = new StringBuilder();
 
-			StringBuilder link = new StringBuilder(entryURL);
-			
-			link.append("&");
+			link.append(entryURL);
+			link.append(StringPool.AMPERSAND);
 			link.append(HttpUtil.encodeURL(page.getTitle()));
 
 			SyndEntry syndEntry = new SyndEntryImpl();
@@ -354,7 +353,7 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 
 			if (diff) {
 				if (latestPage != null) {
-					link.append("?");
+					link.append(StringPool.QUESTION);
 					link.append(
 						PortalUtil.getPortletNamespace(PortletKeys.WIKI));
 					link.append("version=");
