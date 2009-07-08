@@ -35,6 +35,10 @@
 		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="urn:http.service.portal.liferay.com" xmlns:tns2="http://model.portal.liferay.com" name="getGroupRoles" qname="operNS:getGroupRoles" returnQName="getGroupRolesReturn" returnType="rtns:ArrayOf_tns2_RoleSoap" returnItemType="tns2:RoleSoap" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="groupId" type="tns:long"></parameter>
 		</operation>
+		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="urn:http.service.portal.liferay.com" xmlns:tns2="http://model.portal.liferay.com" name="getUserGroupGroupRoles" qname="operNS:getUserGroupGroupRoles" returnQName="getUserGroupGroupRolesReturn" returnType="rtns:ArrayOf_tns2_RoleSoap" returnItemType="tns2:RoleSoap" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="userId" type="tns:long"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="groupId" type="tns:long"></parameter>
+		</operation>
 		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="urn:http.service.portal.liferay.com" xmlns:tns2="http://model.portal.liferay.com" name="getUserGroupRoles" qname="operNS:getUserGroupRoles" returnQName="getUserGroupRolesReturn" returnType="rtns:ArrayOf_tns2_RoleSoap" returnItemType="tns2:RoleSoap" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="userId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="groupId" type="tns:long"></parameter>
@@ -62,7 +66,7 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="userId" type="tns:long"></parameter>
 			<parameter xmlns:tns="urn:http.service.portal.liferay.com" qname="roleIds" type="tns:ArrayOf_xsd_long"></parameter>
 		</operation>
-		<parameter name="allowedMethods" value="hasUserRole getUserGroupRoles hasUserRoles getGroupRole unsetUserRoles addRole addUserRoles getRole getUserRelatedRoles deleteRole getUserRoles getGroupRoles"/>
+		<parameter name="allowedMethods" value="hasUserRole getUserGroupRoles addRole getUserGroupGroupRoles unsetUserRoles getRole addUserRoles deleteRole getUserRelatedRoles getUserRoles getGroupRoles getGroupRole hasUserRoles"/>
 		<arrayMapping xmlns:ns="urn:http.service.portal.liferay.com" xmlns:cmp-ns="http://www.w3.org/2001/XMLSchema" qname="ns:ArrayOf_xsd_string" type="java:java.lang.String[]" innerType="cmp-ns:string" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>
 		<typeMapping xmlns:ns="http://model.portal.liferay.com" qname="ns:RoleSoap" type="java:com.liferay.portal.model.RoleSoap" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
 		<arrayMapping xmlns:ns="urn:http.service.portal.liferay.com" xmlns:cmp-ns="http://model.portal.liferay.com" qname="ns:ArrayOf_tns2_GroupSoap" type="java:com.liferay.portal.model.GroupSoap[]" innerType="cmp-ns:GroupSoap" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>
