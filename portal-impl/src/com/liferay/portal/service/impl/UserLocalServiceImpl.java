@@ -29,6 +29,7 @@ import com.liferay.portal.DuplicateUserEmailAddressException;
 import com.liferay.portal.DuplicateUserScreenNameException;
 import com.liferay.portal.GroupFriendlyURLException;
 import com.liferay.portal.ModelListenerException;
+import com.liferay.portal.NoSuchContactException;
 import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.NoSuchRoleException;
 import com.liferay.portal.NoSuchUserException;
@@ -908,7 +909,9 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		Group group = user.getGroup();
 
-		groupLocalService.deleteGroup(group.getGroupId());
+		if (group != null) {
+			groupLocalService.deleteGroup(group.getGroupId());
+		}
 
 		// Portrait
 
@@ -973,7 +976,11 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		// Contact
 
-		contactLocalService.deleteContact(user.getContactId());
+		try {
+			contactLocalService.deleteContact(user.getContactId());
+		}
+		catch (NoSuchContactException nsce) {
+		}
 
 		// Resources
 
@@ -1063,6 +1070,14 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		throws SystemException {
 
 		return userFinder.findByNoAnnouncementsDeliveries(type);
+	}
+
+	public List<User> getNoContacts() throws SystemException {
+		return userFinder.findByNoContacts();
+	}
+
+	public List<User> getNoGroups() throws SystemException {
+		return userFinder.findByNoGroups();
 	}
 
 	public long[] getOrganizationUserIds(long organizationId)

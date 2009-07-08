@@ -62,6 +62,12 @@ public class UserFinderImpl extends BasePersistenceImpl implements UserFinder {
 	public static String FIND_BY_NO_ANNOUNCEMENTS_DELIVERIES =
 		UserFinder.class.getName() + ".findByNoAnnouncementsDeliveries";
 
+	public static String FIND_BY_NO_CONTACTS =
+		UserFinder.class.getName() + ".findByNoContacts";
+
+	public static String FIND_BY_NO_GROUPS =
+		UserFinder.class.getName() + ".findByNoGroups";
+
 	public static String FIND_BY_C_FN_MN_LN_SN_EA_A =
 		UserFinder.class.getName() + ".findByC_FN_MN_LN_SN_EA_A";
 
@@ -319,6 +325,50 @@ public class UserFinderImpl extends BasePersistenceImpl implements UserFinder {
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			qPos.add(type);
+
+			return q.list();
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public List<User> findByNoContacts() throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			String sql = CustomSQLUtil.get(FIND_BY_NO_CONTACTS);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity("User_", UserImpl.class);
+
+			return q.list();
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public List<User> findByNoGroups() throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			String sql = CustomSQLUtil.get(FIND_BY_NO_GROUPS);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity("User_", UserImpl.class);
 
 			return q.list();
 		}

@@ -314,6 +314,16 @@ public class UserLocalServiceUtil {
 		return getService().getNoAnnouncementsDeliveries(type);
 	}
 
+	public static java.util.List<com.liferay.portal.model.User> getNoContacts()
+		throws com.liferay.portal.SystemException {
+		return getService().getNoContacts();
+	}
+
+	public static java.util.List<com.liferay.portal.model.User> getNoGroups()
+		throws com.liferay.portal.SystemException {
+		return getService().getNoGroups();
+	}
+
 	public static long[] getOrganizationUserIds(long organizationId)
 		throws com.liferay.portal.SystemException {
 		return getService().getOrganizationUserIds(organizationId);

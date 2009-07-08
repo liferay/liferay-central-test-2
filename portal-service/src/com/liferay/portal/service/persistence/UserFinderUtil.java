@@ -80,6 +80,16 @@ public class UserFinderUtil {
 		return getFinder().findByNoAnnouncementsDeliveries(type);
 	}
 
+	public static java.util.List<com.liferay.portal.model.User> findByNoContacts()
+		throws com.liferay.portal.SystemException {
+		return getFinder().findByNoContacts();
+	}
+
+	public static java.util.List<com.liferay.portal.model.User> findByNoGroups()
+		throws com.liferay.portal.SystemException {
+		return getFinder().findByNoGroups();
+	}
+
 	public static java.util.List<com.liferay.portal.model.User> findByC_FN_MN_LN_SN_EA_A(
 		long companyId, java.lang.String firstName,
 		java.lang.String middleName, java.lang.String lastName,
