@@ -1158,7 +1158,7 @@
 						User_
 					INNER JOIN
 						Group_ ON
-							(Group_.classNameId = [$CLASS_NAME_ID_COM.LIFERAY.PORTAL.MODEL.USER$])
+							(Group_.classNameId = [$CLASS_NAME_ID_COM.LIFERAY.PORTAL.MODEL.USER$]) AND
 							(Group_.classPK = User_.userId)
 				))
 		]]>
