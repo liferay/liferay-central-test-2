@@ -22,10 +22,15 @@
 
 package com.liferay.portal.verify;
 
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBMessage;
+import com.liferay.portlet.messageboards.model.MBThread;
+import com.liferay.portlet.messageboards.service.MBCategoryLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
+import com.liferay.portlet.messageboards.service.MBThreadLocalServiceUtil;
 
 import java.util.List;
 
@@ -49,6 +54,61 @@ public class VerifyMessageBoards extends VerifyProcess {
 	}
 
 	protected void verifyMessageBoards() throws Exception {
+		List<MBCategory> categories =
+			MBCategoryLocalServiceUtil.getMBCategories(
+				QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+
+		if (_log.isDebugEnabled()) {
+			_log.debug(
+				"Processing " + categories.size() +
+					" categories for statistics accuracy");
+		}
+
+		for (MBCategory category : categories) {
+			int threadCount = MBThreadLocalServiceUtil.getCategoryThreadsCount(
+				category.getCategoryId());
+			int messageCount =
+				MBMessageLocalServiceUtil.getCategoryMessagesCount(
+					category.getCategoryId());
+
+			if ((category.getThreadCount() != threadCount) ||
+				(category.getMessageCount() != messageCount)) {
+
+				category.setThreadCount(threadCount);
+				category.setMessageCount(messageCount);
+
+				MBCategoryLocalServiceUtil.updateMBCategory(category);
+			}
+		}
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Statistics verified for categories");
+		}
+
+		List<MBThread> threads = MBThreadLocalServiceUtil.getMBThreads(
+			QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+
+		if (_log.isDebugEnabled()) {
+			_log.debug(
+				"Processing " + threads.size() +
+					" threads for statistics accuracy");
+		}
+
+		for (MBThread thread : threads) {
+			int messageCount = MBMessageLocalServiceUtil.getThreadMessagesCount(
+				thread.getThreadId());
+
+			if (thread.getMessageCount() != messageCount) {
+				thread.setMessageCount(messageCount);
+
+				MBThreadLocalServiceUtil.updateMBThread(thread);
+			}
+		}
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Statistics verified for threads");
+		}
+
 		List<MBMessage> messages =
 			MBMessageLocalServiceUtil.getNoAssetMessages();
 
