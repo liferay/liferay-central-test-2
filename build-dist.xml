@@ -551,6 +551,57 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-5.5-$${downloads.version}.zip</
 		</antcall>
 	</target>
 
+	<target name="prepare-generated-files">
+		<ant dir="portal-impl" target="build-services" inheritAll="false" />
+		<ant dir="portal-impl" target="build-wsdds" inheritAll="false" />
+
+		<delete dir="${lp.ext.dir}" />
+
+		<antcall target="build-ext" />
+
+		<ant dir="${lp.ext.dir}/ext-impl" target="build-service-portlet-reports" inheritAll="false" />
+
+		<antcall target="sync-ext" inheritAll="false" />
+
+		<antcall target="all" />
+
+		<parallel>
+			<exec dir="${app.server.tomcat.bin.dir}" executable="startup.bat" resolveexecutable="true" />
+
+			<sequential>
+				<waitfor>
+					<http url="http://localhost:8080" />
+				</waitfor>
+
+				<ant dir="portal-client" target="build-client" inheritAll="false" />
+
+				<exec dir="${app.server.tomcat.bin.dir}" executable="shutdown.bat" resolveexecutable="true" />
+			</sequential>
+		</parallel>
+	</target>
+
+	<target name="sync-ext">
+		<copy todir="tools/ext_tmpl/ext-impl/src" overwrite="yes">
+			<fileset
+				dir="${lp.ext.dir}/ext-impl/src"
+			/>
+		</copy>
+
+		<copy todir="tools/ext_tmpl/ext-service" overwrite="yes">
+			<fileset
+				dir="${lp.ext.dir}/ext-service"
+				includes="**/*.java"
+			/>
+		</copy>
+
+		<copy todir="tools/ext_tmpl/ext-web/docroot/WEB-INF" overwrite="yes">
+			<fileset
+				dir="${lp.ext.dir}/ext-web/docroot/WEB-INF"
+				includes="*.xml,*.wsdd"
+			/>
+		</copy>
+	</target>
+
 	<target name="zip-api">
 		<delete file="dist/liferay-portal-doc-${lp.version}.zip" failonerror="false" />
 

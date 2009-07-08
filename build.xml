@@ -601,28 +601,6 @@
 		<ant antfile="build-dist.xml" target="dist" inheritAll="false" />
 	</target>
 
-	<target name="sync-ext">
-		<copy todir="tools/ext_tmpl/ext-impl/src" overwrite="yes">
-			<fileset
-				dir="${lp.ext.dir}/ext-impl/src"
-			/>
-		</copy>
-
-		<copy todir="tools/ext_tmpl/ext-service" overwrite="yes">
-			<fileset
-				dir="${lp.ext.dir}/ext-service"
-				includes="**/*.java"
-			/>
-		</copy>
-
-		<copy todir="tools/ext_tmpl/ext-web/docroot/WEB-INF" overwrite="yes">
-			<fileset
-				dir="${lp.ext.dir}/ext-web/docroot/WEB-INF"
-				includes="*.xml,*.wsdd"
-			/>
-		</copy>
-	</target>
-
 	<target name="test">
 		<ant antfile="build-test.xml" target="test" inheritAll="false" />
 	</target>
