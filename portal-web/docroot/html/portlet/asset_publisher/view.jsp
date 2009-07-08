@@ -137,6 +137,18 @@ PortletURL portletURL = renderResponse.createRenderURL();
 SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, delta, portletURL, null, null);
 %>
 
+<c:if test="<%= Validator.isNotNull(assetCategoryId) %>">
+	<h1 class="asset-categorization-title">
+		<%= LanguageUtil.format(pageContext, "content-with-x-x", new String[] {assetVocabularyName, assetCategoryName}) %>
+	</h1>
+</c:if>
+
+<c:if test="<%= Validator.isNotNull(assetTagName) %>">
+	<h1 class="asset-categorization-title">
+		<%= LanguageUtil.format(pageContext, "content-with-tag-x", assetTagName) %>
+	</h1>
+</c:if>
+
 <c:choose>
 	<c:when test='<%= selectionStyle.equals("dynamic") %>'>
 		<%@ include file="/html/portlet/asset_publisher/view_dynamic_list.jspf" %>

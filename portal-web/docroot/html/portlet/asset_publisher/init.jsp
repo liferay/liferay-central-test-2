@@ -140,6 +140,9 @@ long assetVocabularyId = GetterUtil.getLong(preferences.getValue("asset-vocabula
 
 long assetCategoryId = ParamUtil.getLong(request, "categoryId");
 
+String assetCategoryName = null;
+String assetVocabularyName = null;
+
 long[] assetCategoryIds = null;
 
 if (Validator.isNull(assetCategoryId)) {
@@ -149,6 +152,12 @@ else {
 	assetCategoryIds = new long[] {assetCategoryId};
 
 	AssetCategory assetCategory = AssetCategoryLocalServiceUtil.getCategory(assetCategoryId);
+
+	assetCategoryName = assetCategory.getName();
+
+	AssetVocabulary assetVocabulary =  AssetVocabularyLocalServiceUtil.getAssetVocabulary(assetCategory.getVocabularyId());
+
+	assetVocabularyName = assetVocabulary.getName();
 
 	PortalUtil.setPageKeywords(assetCategory.getName(), request);
 }
