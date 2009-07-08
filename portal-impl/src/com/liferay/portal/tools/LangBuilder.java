@@ -180,6 +180,14 @@ public class LangBuilder {
 				}
 
 				if (Validator.isNotNull(translatedText)) {
+					if ((translatedText.indexOf("Babel Fish") != -1) ||
+						(translatedText.indexOf("Yahoo! - 999") != -1)) {
+
+						throw new IOException(
+							"IP was blocked because of over usage. Please " +
+								"use another IP.");
+					}
+
 					if (translatedText.indexOf("&#39;") != -1) {
 						translatedText = StringUtil.replace(
 							translatedText, "&#39;", "\'");
