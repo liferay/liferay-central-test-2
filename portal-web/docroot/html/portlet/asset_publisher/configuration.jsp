@@ -315,10 +315,22 @@ configurationActionURL.setParameter("portletResource", portletResource);
 							<%
 							List<AssetVocabulary> assetVocabularies = AssetVocabularyLocalServiceUtil.getGroupVocabularies(scopeGroupId);
 
-							for (AssetVocabulary assetVocabulary : assetVocabularies) {
+							if (!assetVocabularies.isEmpty()) {
 							%>
 
-								<option <%= (assetVocabularyId == assetVocabulary.getVocabularyId()) ? "selected" : "" %> value="<%= assetVocabulary.getVocabularyId() %>"><%= assetVocabulary.getName() %></option>
+								<optgroup label="<liferay-ui:message key="vocabularies" />">
+
+									<%
+									for (AssetVocabulary assetVocabulary : assetVocabularies) {
+									%>
+
+										<option <%= (assetVocabularyId == assetVocabulary.getVocabularyId()) ? "selected" : "" %> value="<%= assetVocabulary.getVocabularyId() %>"><%= assetVocabulary.getName() %></option>
+
+									<%
+									}
+									%>
+
+								</optgroup>
 
 							<%
 							}
