@@ -601,6 +601,10 @@
 		<ant antfile="build-dist.xml" target="dist" inheritAll="false" />
 	</target>
 
+	<target name="prepare-generated-files">
+		<ant antfile="build-dist.xml" target="prepare-generated-files" inheritAll="false" />
+	</target>
+
 	<target name="test">
 		<ant antfile="build-test.xml" target="test" inheritAll="false" />
 	</target>
