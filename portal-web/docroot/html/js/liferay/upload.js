@@ -126,29 +126,10 @@ Liferay.Upload = new Alloy.Class(
 		fileAdded: function(file) {
 			var instance = this;
 
-			var listingFiles = instance._fileList;
-			var listingUl = listingFiles.find('ul');
-
-			if (!listingUl.length) {
-				instance._listInfo.append('<h4>' + instance._fileListText + '</h4>');
-
-				listingFiles.append('<ul class="lfr-component"></ul>');
-
-				instance._uploadTarget.append(instance._clearUploadsButton);
-				instance._clearUploadsButton.hide();
-
-				instance._cancelButton.click(
-					function() {
-						instance.cancelUploads();
-						instance._clearUploadsButton.hide();
-					}
-				);
-			}
+			var listingFiles = instance.getFileListUl();
 
 			instance._cancelButton.show();
 			instance._uploadButton.show();
-
-			listingFiles = listingFiles.find('ul');
 
 			var fileId = instance._namespace(file.id);
 			var fileName = file.name;
@@ -189,7 +170,7 @@ Liferay.Upload = new Alloy.Class(
 			var instance = this;
 
 			if (error_code == -110) {
-				var ul = instance._fileList.find('ul');
+				var ul = instance.getFileListUl();
 
 				ul.append('<li class="upload-file upload-error"><span class="file-title">' + file.name + '</span> <span class="error-message">' + instance._invalidFileSizeText + '</span></li>');
 			}
@@ -248,6 +229,35 @@ Liferay.Upload = new Alloy.Class(
 			var instance = this;
 
 			instance._setupControls();
+		},
+
+		getFileListUl: function() {
+			var instance = this;
+
+			var listingFiles = instance._fileList;
+			var listingUl = listingFiles.find('ul');
+
+			if (!listingUl.length) {
+				instance._listInfo.append('<h4>' + instance._fileListText + '</h4>');
+
+				listingUl = jQuery('<ul class="lfr-component"></ul>');
+
+				listingFiles.append(listingUl);
+
+				instance._uploadTarget.append(instance._clearUploadsButton);
+				instance._clearUploadsButton.hide();
+
+				instance._cancelButton.click(
+					function() {
+						instance.cancelUploads();
+						instance._clearUploadsButton.hide();
+					}
+				);
+
+				instance._fileListUl = listingUl;
+			}
+
+			return instance._fileListUl;
 		},
 
 		uploadError: function(file, error_code, msg) {
@@ -336,7 +346,7 @@ Liferay.Upload = new Alloy.Class(
 		_clearUploads: function() {
 			var instance = this;
 
-			var completeUploads = instance._fileList.find('.upload-complete, .upload-error');
+			var completeUploads = instance.getFileListUl().find('.upload-complete, .upload-error');
 
 			completeUploads.fadeOut(
 				'slow',
