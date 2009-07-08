@@ -22,6 +22,7 @@
 
 package com.liferay.util.format;
 
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 
 /**
@@ -34,23 +35,43 @@ public class USAPhoneNumberFormat implements PhoneNumberFormat {
 
 	public String format(String phoneNumber) {
 		if (phoneNumber == null) {
-			return "";
+			return StringPool.BLANK;
 		}
 
 		if (phoneNumber.length() > 10) {
-			return "(" + phoneNumber.substring(0,3) + ") " +
-					phoneNumber.substring(3,6) + "-" +
-					phoneNumber.substring(6,10) +
-					" x" + phoneNumber.substring(10, phoneNumber.length());
+			StringBuilder sb = new StringBuilder();
+
+			sb.append(StringPool.OPEN_PARENTHESIS);
+			sb.append(phoneNumber.substring(0, 3));
+			sb.append(") ");
+			sb.append(phoneNumber.substring(3, 6));
+			sb.append(StringPool.DASH);
+			sb.append(phoneNumber.substring(6, 10));
+			sb.append(" x");
+			sb.append(phoneNumber.substring(10));
+
+			return sb.toString();
 		}
 		else if (phoneNumber.length() == 10) {
-			return "(" + phoneNumber.substring(0,3) + ") " +
-					phoneNumber.substring(3,6) + "-" +
-					phoneNumber.substring(6,10);
+			StringBuilder sb = new StringBuilder();
+
+			sb.append(StringPool.OPEN_PARENTHESIS);
+			sb.append(phoneNumber.substring(0, 3));
+			sb.append(") ");
+			sb.append(phoneNumber.substring(3, 6));
+			sb.append(StringPool.DASH);
+			sb.append(phoneNumber.substring(6));
+
+			return sb.toString();
 		}
 		else if (phoneNumber.length() == 7) {
-			return phoneNumber.substring(0,3) + "-" +
-				   phoneNumber.substring(3,7);
+			StringBuilder sb = new StringBuilder();
+
+			sb.append(phoneNumber.substring(0, 3));
+			sb.append(StringPool.DASH);
+			sb.append(phoneNumber.substring(3));
+
+			return sb.toString();
 		}
 		else {
 			return phoneNumber;
