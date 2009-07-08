@@ -80,6 +80,7 @@ Liferay.Upload = new Alloy.Class(
 			instance._fileListPendingText = Liferay.Language.get('x-files-ready-to-be-uploaded', '0');
 			instance._fileListText = Liferay.Language.get('file-list');
 			instance._fileTypesDescriptionText = options.fileDescription || instance._allowedFileTypes;
+			instance._invalidFileSizeText = Liferay.Language.get('please-enter-a-file-with-a-valid-file-size');
 			instance._uploadsCompleteText = Liferay.Language.get('all-uploads-complete');
 			instance._uploadStatusText = Liferay.Language.get('uploading-file-x-of-x', ['[$POS$]','[$TOTAL$]']);
 			instance._uploadFilesText = Liferay.Language.get('upload-files');
@@ -111,6 +112,8 @@ Liferay.Upload = new Alloy.Class(
 
 				stats = instance._getStats();
 			}
+
+			instance._fileList.find('.upload-error').remove();
 
 			if (stats.in_progress === 0) {
 				instance._queueCancelled = false;
@@ -180,6 +183,16 @@ Liferay.Upload = new Alloy.Class(
 			var listLength = stats.files_queued;
 
 			instance._updateList(listLength);
+		},
+
+		fileAddError: function(file, error_code, msg) {
+			var instance = this;
+
+			if (error_code == -110) {
+				var ul = instance._fileList.find('ul');
+
+				ul.append('<li class="upload-file upload-error"><span class="file-title">' + file.name + '</span> <span class="error-message">' + instance._invalidFileSizeText + '</span></li>');
+			}
 		},
 
 		fileCancelled: function(file, error_code, msg) {
@@ -323,7 +336,7 @@ Liferay.Upload = new Alloy.Class(
 		_clearUploads: function() {
 			var instance = this;
 
-			var completeUploads = instance._fileList.find('.upload-complete');
+			var completeUploads = instance._fileList.find('.upload-complete, .upload-error');
 
 			completeUploads.fadeOut(
 				'slow',
@@ -357,6 +370,7 @@ Liferay.Upload = new Alloy.Class(
 
 			instance._cancelUploads = instance._namespace('cancelUploads');
 			instance._fileAdded = instance._namespace('fileAdded');
+			instance._fileAddError = instance._namespace('fileAddError');
 			instance._fileCancelled = instance._namespace('fileCancelled');
 			instance._flashLoaded = instance._namespace('flashLoaded');
 			instance._uploadStart = instance._namespace('uploadStart');
@@ -377,6 +391,10 @@ Liferay.Upload = new Alloy.Class(
 
 			window[instance._fileAdded] = function() {
 				instance.fileAdded.apply(instance, arguments);
+			};
+
+			window[instance._fileAddError] = function() {
+				instance.fileAddError.apply(instance, arguments);
 			};
 
 			window[instance._fileCancelled] = function() {
@@ -573,6 +591,7 @@ Liferay.Upload = new Alloy.Class(
 					upload_link_class: 'upload-button liferay-button',
 					swfupload_loaded_handler: window[instance._flashLoaded],
 					file_queued_handler: window[instance._fileAdded],
+					file_queue_error_handler: window[instance._fileAddError],
 					upload_start_handler: window[instance._uploadStart],
 					upload_progress_handler: window[instance._uploadProgress],
 					upload_complete_handler: window[instance._fileUploadComplete],

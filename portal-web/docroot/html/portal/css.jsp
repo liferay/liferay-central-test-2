@@ -867,6 +867,18 @@ li.toggle-expand a {
 	opacity: 0.6;
 }
 
+.lfr-upload-container .upload-error {
+	background-color: #FDD;
+	background-image: url(<%= themeImagesPath %>/messages/error.png);
+	font-weight: normal;
+	opacity: 0.6;
+}
+
+.lfr-upload-container .upload-error .error-message {
+	position: absolute;
+	right: 5px;
+}
+
 .lfr-upload-container .upload-complete .cancel-button {
 	display: none;
 }
