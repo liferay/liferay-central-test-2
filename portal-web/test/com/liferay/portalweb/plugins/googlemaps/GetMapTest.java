@@ -51,8 +51,6 @@ public class GetMapTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Google Maps Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("//input[1]",
-			RuntimeVariables.replace("17730 Antonio Ave, Cerritos, CA, 90703"));
 		selenium.type("//input[1]",
 			RuntimeVariables.replace("17730 Antonio Ave, Cerritos, CA, 90703"));
 		selenium.type("//input[3]", RuntimeVariables.replace(""));

@@ -51,18 +51,19 @@ public class GetDirectionsTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Google Maps Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("//input[1]",
-			RuntimeVariables.replace("17730 Antonio Ave, Cerritos, CA, 90703"));
 		selenium.type("//input[1]",
 			RuntimeVariables.replace("17730 Antonio Ave, Cerritos, CA, 90703"));
-		selenium.typeKeys("//input[3]",
-			RuntimeVariables.replace("11947 Del Amo Blvd, Cerritos, CA, 90703"));
 		selenium.type("//input[3]",
 			RuntimeVariables.replace("11947 Del Amo Blvd, Cerritos, CA, 90703"));
 		selenium.click("//input[@value='Get Directions']");
 		Thread.sleep(5000);
-		assertEquals(RuntimeVariables.replace(
-				"11947 Del Amo Blvd, Cerritos, CA, 90703"),
-			selenium.getText("//div[10]/div/div[1]/div/div"));
+		selenium.selectWindow("name=undefined");
+		assertEquals("11947 Del Amo Blvd, Cerritos, CA, 90703",
+			selenium.getValue("d_d"));
+		assertEquals("17730 Antonio Ave, Cerritos, CA, 90703",
+			selenium.getValue("d_daddr"));
+		selenium.close();
+		selenium.selectWindow("null");
+		Thread.sleep(5000);
 	}
 }

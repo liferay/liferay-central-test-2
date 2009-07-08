@@ -33,34 +33,69 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class EnableInputTest extends BaseTestCase {
 	public void testEnableInput() throws Exception {
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
+		int label = 1;
 
-			try {
-				if (selenium.isElementPresent("link=Google Maps Test Page")) {
-					break;
+		while (label >= 1) {
+			switch (label) {
+			case 1:
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isElementPresent(
+									"link=Google Maps Test Page")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
 				}
-			}
-			catch (Exception e) {
-			}
 
-			Thread.sleep(1000);
+				selenium.click(RuntimeVariables.replace(
+						"link=Google Maps Test Page"));
+				selenium.waitForPageToLoad("30000");
+				selenium.click(RuntimeVariables.replace("link=Configuration"));
+				selenium.waitForPageToLoad("30000");
+
+				boolean MapChecked = selenium.isChecked(
+						"_86_mapInputEnabledCheckbox");
+
+				if (MapChecked) {
+					label = 2;
+
+					continue;
+				}
+
+				selenium.click("_86_mapInputEnabledCheckbox");
+
+			case 2:
+
+				boolean DirectionChecked = selenium.isChecked(
+						"_86_directionsInputEnabledCheckbox");
+
+				if (DirectionChecked) {
+					label = 3;
+
+					continue;
+				}
+
+				selenium.click("_86_directionsInputEnabledCheckbox");
+
+			case 3:
+				selenium.click(RuntimeVariables.replace(
+						"//input[@value='Save']"));
+				selenium.waitForPageToLoad("30000");
+				assertTrue(selenium.isTextPresent(
+						"You have successfully updated the setup."));
+
+			case 100:
+				label = -1;
+			}
 		}
-
-		selenium.click(RuntimeVariables.replace("link=Google Maps Test Page"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Configuration"));
-		selenium.waitForPageToLoad("30000");
-		Thread.sleep(5000);
-		assertFalse(selenium.isChecked("_86_mapInputEnabledCheckbox"));
-		selenium.click("_86_mapInputEnabledCheckbox");
-		assertFalse(selenium.isChecked("_86_directionsInputEnabledCheckbox"));
-		selenium.click("_86_directionsInputEnabledCheckbox");
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"You have successfully updated the setup."));
 	}
 }

@@ -52,8 +52,10 @@ public class AssertGoogleMapWithDirectionsTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace("link=Google Maps Test Page"));
 		selenium.waitForPageToLoad("30000");
 		Thread.sleep(5000);
+		assertEquals("11947 Del Amo Blvd, Cerritos, CA, 90703",
+			selenium.getValue("//input[1]"));
 		assertEquals(RuntimeVariables.replace(
-				"11947 Del Amo Blvd, Cerritos, CA, 90703"),
+				"17730 Antonio Ave, Cerritos, CA, 90703"),
 			selenium.getText("//div[10]/div/div[1]/div/div"));
 	}
 }

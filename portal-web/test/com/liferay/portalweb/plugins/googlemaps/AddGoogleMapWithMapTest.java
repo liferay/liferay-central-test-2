@@ -56,8 +56,6 @@ public class AddGoogleMapWithMapTest extends BaseTestCase {
 		selenium.type("_86_license",
 			RuntimeVariables.replace(
 				"ABQIAAAA3nrHjKy73DtxJL8D67iR6hSqd3WNkXftHeaSLroSolGIoU-u5BTriDnzHVQc9TudabxQnFqk-gNe8A"));
-		selenium.typeKeys("_86_mapAddress",
-			RuntimeVariables.replace("17730 Antonio Ave, Cerritos, CA, 90703"));
 		selenium.type("_86_mapAddress",
 			RuntimeVariables.replace("17730 Antonio Ave, Cerritos, CA, 90703"));
 		selenium.type("_86_directionsAddress", RuntimeVariables.replace(""));

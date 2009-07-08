@@ -24,28 +24,43 @@
 	<td></td>
 </tr>
 <tr>
-	<td>pause</td>
-	<td>5000</td>
-	<td></td>
+	<td>store</td>
+	<td>eval(selenium.isChecked('_86_mapInputEnabledCheckbox'))</td>
+	<td>MapChecked</td>
 </tr>
 <tr>
-	<td>assertChecked</td>
+	<td>gotoIf</td>
+	<td>!${MapChecked}</td>
+	<td>MapNotChecked</td>
+</tr>
+<tr>
+	<td>click</td>
 	<td>_86_mapInputEnabledCheckbox</td>
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>_86_mapInputEnabledCheckbox</td>
+	<td>label</td>
+	<td>MapNotChecked</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertChecked</td>
+	<td>store</td>
+	<td>eval(selenium.isChecked('_86_directionsInputEnabledCheckbox'))</td>
+	<td>DirectionChecked</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>!${DirectionChecked}</td>
+	<td>DirectionNotChecked</td>
+</tr>
+<tr>
+	<td>click</td>
 	<td>_86_directionsInputEnabledCheckbox</td>
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>_86_directionsInputEnabledCheckbox</td>
+	<td>label</td>
+	<td>DirectionNotChecked</td>
 	<td></td>
 </tr>
 <tr>

@@ -29,24 +29,34 @@
 	<td>ABQIAAAA3nrHjKy73DtxJL8D67iR6hSqd3WNkXftHeaSLroSolGIoU-u5BTriDnzHVQc9TudabxQnFqk-gNe8A</td>
 </tr>
 <tr>
-	<td>typeKeys</td>
-	<td>_86_mapAddress</td>
-	<td>17730 Antonio Ave, Cerritos, CA, 90703</td>
-</tr>
-<tr>
 	<td>type</td>
 	<td>_86_mapAddress</td>
 	<td>17730 Antonio Ave, Cerritos, CA, 90703</td>
 </tr>
 <tr>
-	<td>typeKeys</td>
+	<td>type</td>
 	<td>_86_directionsAddress</td>
 	<td>11947 Del Amo Blvd, Cerritos, CA, 90703</td>
 </tr>
 <tr>
-	<td>type</td>
-	<td>_86_directionsAddress</td>
-	<td>11947 Del Amo Blvd, Cerritos, CA, 90703</td>
+	<td>store</td>
+	<td>eval(selenium.isChecked('_86_directionsInputEnabledCheckbox'))</td>
+	<td>DirectionChecked</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>${DirectionChecked}</td>
+	<td>DirectionIsChecked</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>_86_directionsInputEnabledCheckbox</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>DirectionIsChecked</td>
+	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>

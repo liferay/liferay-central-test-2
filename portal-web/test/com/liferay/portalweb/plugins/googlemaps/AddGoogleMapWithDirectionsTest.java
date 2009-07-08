@@ -33,40 +33,65 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddGoogleMapWithDirectionsTest extends BaseTestCase {
 	public void testAddGoogleMapWithDirections() throws Exception {
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
+		int label = 1;
 
-			try {
-				if (selenium.isElementPresent("link=Google Maps Test Page")) {
-					break;
+		while (label >= 1) {
+			switch (label) {
+			case 1:
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isElementPresent(
+									"link=Google Maps Test Page")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
 				}
-			}
-			catch (Exception e) {
-			}
 
-			Thread.sleep(1000);
+				selenium.click(RuntimeVariables.replace(
+						"link=Google Maps Test Page"));
+				selenium.waitForPageToLoad("30000");
+				selenium.click(RuntimeVariables.replace("link=Configuration"));
+				selenium.waitForPageToLoad("30000");
+				selenium.type("_86_license",
+					RuntimeVariables.replace(
+						"ABQIAAAA3nrHjKy73DtxJL8D67iR6hSqd3WNkXftHeaSLroSolGIoU-u5BTriDnzHVQc9TudabxQnFqk-gNe8A"));
+				selenium.type("_86_mapAddress",
+					RuntimeVariables.replace(
+						"17730 Antonio Ave, Cerritos, CA, 90703"));
+				selenium.type("_86_directionsAddress",
+					RuntimeVariables.replace(
+						"11947 Del Amo Blvd, Cerritos, CA, 90703"));
+
+				boolean DirectionChecked = selenium.isChecked(
+						"_86_directionsInputEnabledCheckbox");
+
+				if (DirectionChecked) {
+					label = 2;
+
+					continue;
+				}
+
+				selenium.click("_86_directionsInputEnabledCheckbox");
+
+			case 2:
+				selenium.click(RuntimeVariables.replace(
+						"//input[@value='Save']"));
+				selenium.waitForPageToLoad("30000");
+				assertTrue(selenium.isTextPresent(
+						"You have successfully updated the setup."));
+
+			case 100:
+				label = -1;
+			}
 		}
-
-		selenium.click(RuntimeVariables.replace("link=Google Maps Test Page"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Configuration"));
-		selenium.waitForPageToLoad("30000");
-		selenium.type("_86_license",
-			RuntimeVariables.replace(
-				"ABQIAAAA3nrHjKy73DtxJL8D67iR6hSqd3WNkXftHeaSLroSolGIoU-u5BTriDnzHVQc9TudabxQnFqk-gNe8A"));
-		selenium.typeKeys("_86_mapAddress",
-			RuntimeVariables.replace("17730 Antonio Ave, Cerritos, CA, 90703"));
-		selenium.type("_86_mapAddress",
-			RuntimeVariables.replace("17730 Antonio Ave, Cerritos, CA, 90703"));
-		selenium.typeKeys("_86_directionsAddress",
-			RuntimeVariables.replace("11947 Del Amo Blvd, Cerritos, CA, 90703"));
-		selenium.type("_86_directionsAddress",
-			RuntimeVariables.replace("11947 Del Amo Blvd, Cerritos, CA, 90703"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"You have successfully updated the setup."));
 	}
 }
