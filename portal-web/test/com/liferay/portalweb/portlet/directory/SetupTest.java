@@ -106,9 +106,9 @@ public class SetupTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click("addressesLink");
-		selenium.typeKeys("_126_addressStreet10",
+		selenium.typeKeys("_126_addressStreet1_0",
 			RuntimeVariables.replace("12345 Test Street"));
-		selenium.type("_126_addressStreet10",
+		selenium.type("_126_addressStreet1_0",
 			RuntimeVariables.replace("12345 Test Street"));
 		selenium.select("_126_addressCountryId0",
 			RuntimeVariables.replace("label=United States"));
@@ -195,9 +195,9 @@ public class SetupTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click("addressesLink");
-		selenium.typeKeys("_126_addressStreet10",
+		selenium.typeKeys("_126_addressStreet1_0",
 			RuntimeVariables.replace("11111 Main Street USA"));
-		selenium.type("_126_addressStreet10",
+		selenium.type("_126_addressStreet1_0",
 			RuntimeVariables.replace("11111 Main Street USA"));
 		selenium.select("_126_addressCountryId0",
 			RuntimeVariables.replace("label=United States"));
