@@ -26,13 +26,13 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="AddClockAndDateGadgetTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="AssertGadgetPresentTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class AddClockAndDateGadgetTest extends BaseTestCase {
-	public void testAddClockAndDateGadget() throws Exception {
+public class AssertGadgetPresentTest extends BaseTestCase {
+	public void testAssertGadgetPresent() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -51,18 +51,9 @@ public class AddClockAndDateGadgetTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Google Gadget Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Configuration"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Tools"));
-		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_86_q", RuntimeVariables.replace("Date"));
-		selenium.type("_86_q", RuntimeVariables.replace("Date"));
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Search Gadgets']"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//input[@value='Choose']"));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"You have successfully updated the setup."));
+		assertTrue(selenium.isElementPresent("a"));
+		assertTrue(selenium.isElementPresent("f"));
+		assertTrue(selenium.isElementPresent("t"));
+		assertTrue(selenium.isElementPresent("submit"));
 	}
 }

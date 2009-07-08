@@ -26,13 +26,13 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="AssertClockAndDateGadgetPresentTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddGadgetTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class AssertClockAndDateGadgetPresentTest extends BaseTestCase {
-	public void testAssertClockAndDateGadgetPresent() throws Exception {
+public class AddGadgetTest extends BaseTestCase {
+	public void testAddGadget() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -51,8 +51,18 @@ public class AssertClockAndDateGadgetPresentTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Google Gadget Test Page"));
 		selenium.waitForPageToLoad("30000");
-		assertEquals(RuntimeVariables.replace(
-				"Do you often need to convert currencies?\nTry the new Currency Converter Gadget here on iGoogle!"),
-			selenium.getText("message"));
+		selenium.click(RuntimeVariables.replace("link=Configuration"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("link=Finance"));
+		selenium.waitForPageToLoad("30000");
+		selenium.typeKeys("_86_q", RuntimeVariables.replace("Currenc Converter"));
+		selenium.type("_86_q", RuntimeVariables.replace("Currency Converter"));
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Search Gadgets']"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("//input[@value='Choose']"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent(
+				"You have successfully updated the setup."));
 	}
 }

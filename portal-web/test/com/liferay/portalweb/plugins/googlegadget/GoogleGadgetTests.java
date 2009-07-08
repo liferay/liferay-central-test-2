@@ -40,8 +40,8 @@ public class GoogleGadgetTests extends BaseTests {
 
 		testSuite.addTestSuite(AddPageTest.class);
 		testSuite.addTestSuite(AddPortletTest.class);
-		testSuite.addTestSuite(AddClockAndDateGadgetTest.class);
-		testSuite.addTestSuite(AssertClockAndDateGadgetPresentTest.class);
+		testSuite.addTestSuite(AddGadgetTest.class);
+		testSuite.addTestSuite(AssertGadgetPresentTest.class);
 		testSuite.addTestSuite(TearDownTest.class);
 
 		return testSuite;
