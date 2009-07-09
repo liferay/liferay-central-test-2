@@ -383,12 +383,12 @@
 
 .lfr-form-row {
 	border-bottom: 1px solid #CCC;
+	margin-bottom: 10px;
+	margin-top: 10px;
 	overflow: hidden;
 	padding: 5px;
 	padding-top: 1px;
 	position: relative;
-	margin-bottom: 10px;
-	margin-top: 10px;
 }
 
 .ie .lfr-form-row {
