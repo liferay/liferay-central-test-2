@@ -134,24 +134,32 @@ Liferay.AutoFields = Alloy.Observable.extend(
 
 			var newSeed = (++instance._idSeed);
 
-			clone.find('input, select, textarea').each(
+			clone.find('input, select, textarea, span').each(
 				function() {
 					var el = jQuery(this);
-					var oldName = el.attr('name');
+					var oldName = el.attr('name') || el.attr('id');
 					var originalName = oldName.replace(/([0-9]+)$/, '');
 					var newName = originalName + newSeed;
 
-					if (!el.is(':radio')) {
-						el.attr('name', newName);
-					}
-					else {
+					if (el.is(':radio')) {
 						oldName = el.attr('id');
 
 						el.attr('checked', '');
 						el.attr('value', newSeed);
+						el.attr('name', newName);
+						el.attr('id', newName);
+
+					}
+					if (el.is(':button') || el.is('span')) {
+						if (oldName) {
+							el.attr('id', newName);
+						}
+					}
+					else {
+						el.attr('name', newName);
+						el.attr('id', newName);
 					}
 
-					el.attr('id', newName);
 					clone.find('label[for=' + oldName + ']').attr('for', newName);
 				}
 			);
@@ -174,7 +182,11 @@ Liferay.AutoFields = Alloy.Observable.extend(
 				instance._sortable.add(clone[0]);
 			}
 
-			clone.find('input:text:first').trigger('focus');
+			try {
+				clone.find('input:text:first').trigger('focus');
+			}
+			catch (err) {
+			}
 
 			instance.trigger('addRow', {row: clone, originalRow: currentRow, idSeed: newSeed});
 		},
