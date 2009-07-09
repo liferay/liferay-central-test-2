@@ -19,7 +19,7 @@
 				<#if !column.isCollection()>
 					<field name="${column.name}" type="${column.type}"
 
-					<#if column.localized == true>
+					<#if column.localized>
 						localized="true"
 					</#if>
 

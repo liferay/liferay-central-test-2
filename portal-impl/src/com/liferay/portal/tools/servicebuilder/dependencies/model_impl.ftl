@@ -24,6 +24,16 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PortalUtil;
 
+import java.io.Serializable;
+
+import java.lang.reflect.Proxy;
+
+import java.sql.Types;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 <#if (entity.PKClassName == "long") && !stringUtil.startsWith(entity.name, "Expando")>
 	import com.liferay.portlet.expando.model.ExpandoBridge;
 	import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
@@ -39,16 +49,6 @@ import com.liferay.portal.util.PortalUtil;
 	import java.util.Locale;
 	import java.util.Map;
 </#if>
-
-import java.io.Serializable;
-
-import java.lang.reflect.Proxy;
-
-import java.sql.Types;
-
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 /**
  * <a href="${entity.name}ModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -308,16 +308,6 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> {
 			</#if>
 		}
 
-		<#if column.userUuid>
-			public String get${column.methodUserUuidName}() throws SystemException {
-				return PortalUtil.getUserValue(get${column.methodName}(), "uuid", _${column.userUuidName});
-			}
-
-			public void set${column.methodUserUuidName}(String ${column.userUuidName}) {
-				_${column.userUuidName} = ${column.userUuidName};
-			}
-		</#if>
-
 		<#if column.localized>
 			public void set${column.methodName}(Locale locale, String ${column.name}) {
 				String languageId = LocaleUtil.toLanguageId(locale);
@@ -359,6 +349,16 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> {
 						currentThread.setContextClassLoader(contextClassLoader);
 					}
 				}
+			}
+		</#if>
+
+		<#if column.userUuid>
+			public String get${column.methodUserUuidName}() throws SystemException {
+				return PortalUtil.getUserValue(get${column.methodName}(), "uuid", _${column.userUuidName});
+			}
+
+			public void set${column.methodUserUuidName}(String ${column.userUuidName}) {
+				_${column.userUuidName} = ${column.userUuidName};
 			}
 		</#if>
 
@@ -599,16 +599,16 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> {
 	<#list entity.regularColList as column>
 		private ${column.type} _${column.name};
 
+		<#if column.userUuid>
+			private String _${column.userUuidName};
+		</#if>
+
 		<#if column.isFetchFinderPath() || ((parentPKColumn != "") && (parentPKColumn.name == column.name))>
 			private ${column.type} _original${column.methodName};
 
 			<#if column.isPrimitiveType()>
 				private boolean _setOriginal${column.methodName};
 			</#if>
-		</#if>
-
-		<#if column.userUuid>
-			private String _${column.userUuidName};
 		</#if>
 	</#list>
 

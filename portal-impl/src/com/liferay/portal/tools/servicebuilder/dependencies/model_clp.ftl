@@ -4,6 +4,7 @@ package ${packagePath}.model;
 	import ${packagePath}.service.persistence.${entity.name}PK;
 </#if>
 
+import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
@@ -16,6 +17,17 @@ import java.io.Serializable;
 import java.lang.reflect.Proxy;
 
 import java.util.Date;
+
+<#if entity.hasLocalizedColumn()>
+	import com.liferay.portal.kernel.language.LanguageUtil;
+	import com.liferay.portal.kernel.util.LocaleUtil;
+	import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
+	import com.liferay.portal.kernel.util.Validator;
+	import com.liferay.util.LocalizationUtil;
+
+	import java.util.Locale;
+	import java.util.Map;
+</#if>
 
 public class ${entity.name}Clp extends BaseModelImpl<${entity.name}> implements ${entity.name} {
 
@@ -95,6 +107,46 @@ public class ${entity.name}Clp extends BaseModelImpl<${entity.name}> implements 
 			return _${column.name};
 		}
 
+		<#if column.localized>
+			public String get${column.methodName}(Locale locale) {
+				String languageId = LocaleUtil.toLanguageId(locale);
+
+				return get${column.methodName}(languageId);
+			}
+
+			public String get${column.methodName}(Locale locale, boolean useDefault) {
+				String languageId = LocaleUtil.toLanguageId(locale);
+
+				return get${column.methodName}(languageId, useDefault);
+			}
+
+			public String get${column.methodName}(String languageId) {
+				String value = LocalizationUtil.getLocalization(get${column.methodName}(), languageId);
+
+				if (isEscapedModel()) {
+					return HtmlUtil.escape(value);
+				}
+				else {
+					return value;
+				}
+			}
+
+			public String get${column.methodName}(String languageId, boolean useDefault) {
+				String value = LocalizationUtil.getLocalization(get${column.methodName}(), languageId, useDefault);
+
+				if (isEscapedModel()) {
+					return HtmlUtil.escape(value);
+				}
+				else {
+					return value;
+				}
+			}
+
+			public Map<Locale, String> get${column.methodName}Map() {
+				return LocalizationUtil.getLocalizationMap(get${column.methodName}());
+			}
+		</#if>
+
 		<#if column.type== "boolean">
 			public ${column.type} is${column.methodName}() {
 				return _${column.name};
@@ -104,6 +156,60 @@ public class ${entity.name}Clp extends BaseModelImpl<${entity.name}> implements 
 		public void set${column.methodName}(${column.type} ${column.name}) {
 			_${column.name} = ${column.name};
 		}
+
+		<#if column.localized>
+			public void set${column.methodName}(Locale locale, String ${column.name}) {
+				String languageId = LocaleUtil.toLanguageId(locale);
+
+				if (Validator.isNotNull(${column.name})) {
+					set${column.methodName}(LocalizationUtil.updateLocalization(get${column.methodName}(), "${column.methodName}", ${column.name}, languageId));
+				}
+				else {
+					set${column.methodName}(LocalizationUtil.removeLocalization(get${column.methodName}(), "${column.methodName}", languageId));
+				}
+			}
+
+			public void set${column.methodName}Map(Map<Locale, String> ${column.name}Map) {
+				if (${column.name}Map == null) {
+					return;
+				}
+
+				ClassLoader portalClassLoader = PortalClassLoaderUtil.getClassLoader();
+
+				Thread currentThread = Thread.currentThread();
+
+				ClassLoader contextClassLoader = currentThread.getContextClassLoader();
+
+				try {
+					if (contextClassLoader != portalClassLoader) {
+						currentThread.setContextClassLoader(portalClassLoader);
+					}
+
+					Locale[] locales = LanguageUtil.getAvailableLocales();
+
+					for (Locale locale : locales) {
+						String ${column.name} = ${column.name}Map.get(locale);
+
+						set${column.methodName}(locale, ${column.name});
+					}
+				}
+				finally {
+					if (contextClassLoader != portalClassLoader) {
+						currentThread.setContextClassLoader(contextClassLoader);
+					}
+				}
+			}
+		</#if>
+
+		<#if column.userUuid>
+			public String get${column.methodUserUuidName}() throws SystemException {
+				return PortalUtil.getUserValue(get${column.methodName}(), "uuid", _${column.userUuidName});
+			}
+
+			public void set${column.methodUserUuidName}(String ${column.userUuidName}) {
+				_${column.userUuidName} = ${column.userUuidName};
+			}
+		</#if>
 	</#list>
 
 	<#list methods as method>
@@ -350,6 +456,10 @@ public class ${entity.name}Clp extends BaseModelImpl<${entity.name}> implements 
 
 	<#list entity.regularColList as column>
 		private ${column.type} _${column.name};
+
+		<#if column.userUuid>
+			private String _${column.userUuidName};
+		</#if>
 	</#list>
 
 }

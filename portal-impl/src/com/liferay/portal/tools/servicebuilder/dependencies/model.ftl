@@ -47,7 +47,7 @@ public interface ${entity.name}Model extends BaseModel<${entity.name}> {
 
 		public ${column.type} get${column.methodName}();
 
-        <#if column.localized == true>
+        <#if column.localized>
 			public ${column.type} get${column.methodName}(Locale locale);
 
 			public ${column.type} get${column.methodName}(Locale locale, boolean useDefault);
@@ -65,16 +65,16 @@ public interface ${entity.name}Model extends BaseModel<${entity.name}> {
 
 		public void set${column.methodName}(${column.type} ${column.name});
 
+        <#if column.localized>
+			public void set${column.methodName}(Locale locale, String ${column.name});
+
+            public void set${column.methodName}Map(Map<Locale, String> ${column.name}Map);
+		</#if>
+
 		<#if column.userUuid>
 			public String get${column.methodUserUuidName}() throws SystemException;
 
 			public void set${column.methodUserUuidName}(String ${column.userUuidName});
-		</#if>
-
-        <#if column.localized == true>
-			public void set${column.methodName}(Locale locale, String ${column.name});
-
-            public void set${column.methodName}Map(Map<Locale, String> ${column.name}Map);
 		</#if>
 	</#list>
 
