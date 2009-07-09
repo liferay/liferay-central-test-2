@@ -91,6 +91,13 @@ configurationActionURL.setParameter("portletResource", portletResource);
 	}
 </script>
 
+<style type="text/css">
+	.lfr-panel-content {
+		padding: 10px;
+		background-color: #eee;
+	}
+</style>
+
 <form action="<%= configurationActionURL.toString() %>" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
 <input name="<portlet:namespace />tabs2" type="hidden" value="<%= HtmlUtil.escapeAttribute(tabs2) %>" />
@@ -113,13 +120,8 @@ configurationActionURL.setParameter("portletResource", portletResource);
 
 		<c:choose>
 			<c:when test='<%= selectionStyle.equals("manual") %>'>
-				<liferay-ui:tabs
-					names="selection,display-settings"
-					formName="fm"
-					param="tabs2"
-					refresh="<%= false %>"
-				>
-					<liferay-ui:section>
+				<liferay-ui:panel-container id='assetPublisherConfiguration' extended="<%= Boolean.TRUE %>" persistState="<%= true %>">
+					<liferay-ui:panel id='assetPublisherSelection' title='<%= LanguageUtil.get(pageContext, "selection") %>' collapsible="<%= true %>" persistState="<%= true %>" extended="<%= true %>">
 
 						<%
 						String portletId = portletResource;
@@ -259,30 +261,21 @@ configurationActionURL.setParameter("portletResource", portletResource);
 						%>
 
 						<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-
-						<br />
-
-						<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
-					</liferay-ui:section>
-					<liferay-ui:section>
+					</liferay-ui:panel>
+					<liferay-ui:panel id='assetPublisherDisplaySettings' title='<%= LanguageUtil.get(pageContext, "display-settings") %>' collapsible="<%= true %>" persistState="<%= true %>" extended="<%= true %>">
 						<%@ include file="/html/portlet/asset_publisher/display_settings.jspf" %>
+					</liferay-ui:panel>
+				</liferay-ui:panel-container>
 
-						<br />
+				<br />
 
-						<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveMetadataFields();" />
+				<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveMetadataFields();" />
 
-						<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
-					</liferay-ui:section>
-				</liferay-ui:tabs>
+				<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
 			</c:when>
 			<c:when test='<%= selectionStyle.equals("dynamic") %>'>
-				<liferay-ui:tabs
-					names="query-logic,display-settings"
-					formName="fm"
-					param="tabs2"
-					refresh="<%= false %>"
-				>
-					<liferay-ui:section>
+				<liferay-ui:panel-container id='assetPublisherConfiguration' extended="<%= Boolean.TRUE %>" persistState="<%= true %>">
+					<liferay-ui:panel id='assetPublisherQueryLogic' title='<%= LanguageUtil.get(pageContext, "query-logic") %>' collapsible="<%= true %>" persistState="<%= true %>" extended="<%= true %>">
 						<liferay-ui:asset-tags-error />
 
 						<liferay-ui:message key="asset-entry-type" />
@@ -297,40 +290,6 @@ configurationActionURL.setParameter("portletResource", portletResource);
 							%>
 
 								<option <%= (classNameId == assetEntryTypes[i].getClassNameId()) ? "selected" : "" %> value="<%= assetEntryTypes[i].getClassNameId() %>"><liferay-ui:message key='<%= "model.resource." + assetEntryTypes[i].getClassName() %>' /></option>
-
-							<%
-							}
-							%>
-
-						</select>
-
-						<br /><br />
-
-						<liferay-ui:message key="group-by" />
-
-						<select name="<portlet:namespace />assetVocabularyId">
-							<option value=""></option>
-							<option <%= (assetVocabularyId == -1) ? "selected" : "" %> value="-1"><liferay-ui:message key="asset-types" /></option>
-
-							<%
-							List<AssetVocabulary> assetVocabularies = AssetVocabularyLocalServiceUtil.getGroupVocabularies(scopeGroupId);
-
-							if (!assetVocabularies.isEmpty()) {
-							%>
-
-								<optgroup label="<liferay-ui:message key="vocabularies" />">
-
-									<%
-									for (AssetVocabulary assetVocabulary : assetVocabularies) {
-									%>
-
-										<option <%= (assetVocabularyId == assetVocabulary.getVocabularyId()) ? "selected" : "" %> value="<%= assetVocabulary.getVocabularyId() %>"><%= assetVocabulary.getName() %></option>
-
-									<%
-									}
-									%>
-
-								</optgroup>
 
 							<%
 							}
@@ -364,12 +323,6 @@ configurationActionURL.setParameter("portletResource", portletResource);
 
 						<br /><br />
 
-						<liferay-ui:message key="include-tags-specified-in-the-url" />
-
-						<liferay-ui:input-checkbox param="mergeUrlTags" defaultValue="<%= mergeUrlTags %>" />
-
-						<br /><br />
-
 						<liferay-ui:message key="displayed-content-must-contain-the-following-categories" />
 
 						<br /><br />
@@ -400,11 +353,51 @@ configurationActionURL.setParameter("portletResource", portletResource);
 							<option <%= andOperator ? "selected" : "" %> value="1"><liferay-ui:message key="and" /></option>
 							<option <%= !andOperator ? "selected" : "" %> value="0"><liferay-ui:message key="or" /></option>
 						</select>
-					</liferay-ui:section>
-					<liferay-ui:section>
+
+						<br /><br />
+
+						<liferay-ui:message key="include-tags-specified-in-the-url" />
+
+						<liferay-ui:input-checkbox param="mergeUrlTags" defaultValue="<%= mergeUrlTags %>" />
+					</liferay-ui:panel>
+					<liferay-ui:panel id='assetPublisherGroupBy' title='<%= LanguageUtil.get(pageContext, "group-by") %>' collapsible="<%= true %>" persistState="<%= true %>" extended="<%= true %>">
+						<liferay-ui:message key="group-by" />
+
+						<select name="<portlet:namespace />assetVocabularyId">
+							<option value=""></option>
+							<option <%= (assetVocabularyId == -1) ? "selected" : "" %> value="-1"><liferay-ui:message key="asset-types" /></option>
+
+							<%
+							List<AssetVocabulary> assetVocabularies = AssetVocabularyLocalServiceUtil.getGroupVocabularies(scopeGroupId);
+
+							if (!assetVocabularies.isEmpty()) {
+							%>
+
+								<optgroup label="<liferay-ui:message key="vocabularies" />">
+
+									<%
+									for (AssetVocabulary assetVocabulary : assetVocabularies) {
+									%>
+
+										<option <%= (assetVocabularyId == assetVocabulary.getVocabularyId()) ? "selected" : "" %> value="<%= assetVocabulary.getVocabularyId() %>"><%= assetVocabulary.getName() %></option>
+
+									<%
+									}
+									%>
+
+								</optgroup>
+
+							<%
+							}
+							%>
+
+						</select>
+
+					</liferay-ui:panel>
+					<liferay-ui:panel id='assetPublisherDisplaySettings' title='<%= LanguageUtil.get(pageContext, "display-settings") %>' collapsible="<%= true %>" persistState="<%= true %>" extended="<%= true %>">
 						<%@ include file="/html/portlet/asset_publisher/display_settings.jspf" %>
-					</liferay-ui:section>
-				</liferay-ui:tabs>
+					</liferay-ui:panel>
+				</liferay-ui:panel-container>
 
 				<br />
 
