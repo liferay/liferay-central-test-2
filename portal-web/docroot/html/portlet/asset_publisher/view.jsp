@@ -81,55 +81,6 @@ String portletId = portletDisplay.getId();
 <%@ include file="/html/portlet/asset_publisher/add_asset.jspf" %>
 
 <%
-if (showQueryLogic) {
-	StringBuilder tagsText = new StringBuilder();
-
-	if (assetTagNames.length > 0) {
-		tagsText.append("( ");
-	}
-
-	for (int i = 0; i < assetTagNames.length; i++) {
-		if ((i + 1) == assetTagNames.length) {
-			tagsText.append(assetTagNames[i]);
-			tagsText.append(" )");
-		}
-		else {
-			tagsText.append(assetTagNames[i]);
-
-			if (andOperator) {
-				tagsText.append(" AND ");
-			}
-			else {
-				tagsText.append(" OR ");
-			}
-		}
-	}
-
-	if ((assetTagNames.length > 0) && (notAssetTagNames.length > 0)) {
-		tagsText.append(" AND NOT ( ");
-	}
-
-	for (int i = 0; i < notAssetTagNames.length; i++) {
-		if ((i + 1) == notAssetTagNames.length) {
-			tagsText.append(notAssetTagNames[i]);
-			tagsText.append(" )");
-		}
-		else {
-			tagsText.append(notAssetTagNames[i]);
-			tagsText.append(" OR ");
-		}
-	}
-%>
-
-	<liferay-ui:message key="tags" />:
-
-	<%= tagsText %>
-
-	<div class="separator"><!-- --></div>
-
-<%
-}
-
 // Display content
 
 PortletURL portletURL = renderResponse.createRenderURL();

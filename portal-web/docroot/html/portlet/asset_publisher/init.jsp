@@ -198,7 +198,6 @@ String orderByType2 = GetterUtil.getString(preferences.getValue("order-by-type-2
 boolean excludeZeroViewCount = GetterUtil.getBoolean(preferences.getValue("exclude-zero-view-count", "0"));
 int delta = GetterUtil.getInteger(preferences.getValue("delta", StringPool.BLANK), SearchContainer.DEFAULT_DELTA);
 String paginationType = GetterUtil.getString(preferences.getValue("pagination-type", "none"));
-boolean showQueryLogic = GetterUtil.getBoolean(preferences.getValue("show-query-logic", StringPool.BLANK));
 boolean showAvailableLocales = GetterUtil.getBoolean(preferences.getValue("show-available-locales", StringPool.BLANK));
 boolean enableRatings = GetterUtil.getBoolean(preferences.getValue("enable-ratings", null));
 boolean enableComments = GetterUtil.getBoolean(preferences.getValue("enable-comments", null));
