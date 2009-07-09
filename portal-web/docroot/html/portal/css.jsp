@@ -397,8 +397,8 @@
 
 .lfr-form-row:hover {
 	background-color: #DFFCCB;
-	border-bottom: 1px solid #B2FF3A;
-	border-top: 1px solid #B2FF3A;
+	border: solid #B2FF3A;
+	border-width: 1px 0;
 	padding-top: 0;
 }
 
