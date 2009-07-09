@@ -122,8 +122,17 @@ public class OrganizationServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portal.model.Organization> getUserOrganizations(
-		long userId) throws com.liferay.portal.SystemException {
+		long userId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		return getService().getUserOrganizations(userId);
+	}
+
+	public static java.util.List<com.liferay.portal.model.Organization> getUserOrganizations(
+		long userId, boolean inheritUserGroups)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService().getUserOrganizations(userId, inheritUserGroups);
 	}
 
 	public static void setGroupOrganizations(long groupId,

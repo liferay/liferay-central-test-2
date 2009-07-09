@@ -191,14 +191,31 @@ public class OrganizationLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portal.model.Organization> getUserOrganizations(
-		long userId) throws com.liferay.portal.SystemException {
+		long userId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		return getService().getUserOrganizations(userId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Organization> getUserOrganizations(
+		long userId, boolean inherit)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService().getUserOrganizations(userId, inherit);
+	}
+
+	public static java.util.List<com.liferay.portal.model.Organization> getUserOrganizations(
 		long userId, int start, int end)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		return getService().getUserOrganizations(userId, start, end);
+	}
+
+	public static java.util.List<com.liferay.portal.model.Organization> getUserOrganizations(
+		long userId, boolean inherit, int start, int end)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService().getUserOrganizations(userId, inherit, start, end);
 	}
 
 	public static int getUserOrganizationsCount(long userId)

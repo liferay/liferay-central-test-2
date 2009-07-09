@@ -521,7 +521,8 @@ public class OrganizationServiceHttp {
 
 	public static java.util.List<com.liferay.portal.model.Organization> getUserOrganizations(
 		HttpPrincipal httpPrincipal, long userId)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(userId);
 
@@ -534,6 +535,48 @@ public class OrganizationServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (java.util.List<com.liferay.portal.model.Organization>)returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static java.util.List<com.liferay.portal.model.Organization> getUserOrganizations(
+		HttpPrincipal httpPrincipal, long userId, boolean inheritUserGroups)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		try {
+			Object paramObj0 = new LongWrapper(userId);
+
+			Object paramObj1 = new BooleanWrapper(inheritUserGroups);
+
+			MethodWrapper methodWrapper = new MethodWrapper(OrganizationServiceUtil.class.getName(),
+				"getUserOrganizations", new Object[] { paramObj0, paramObj1 });
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
 				if (e instanceof com.liferay.portal.SystemException) {
 					throw (com.liferay.portal.SystemException)e;
 				}

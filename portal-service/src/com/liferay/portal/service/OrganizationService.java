@@ -111,7 +111,15 @@ public interface OrganizationService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Organization> getUserOrganizations(
-		long userId) throws com.liferay.portal.SystemException;
+		long userId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.liferay.portal.model.Organization> getUserOrganizations(
+		long userId, boolean inheritUserGroups)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void setGroupOrganizations(long groupId, long[] organizationIds)
 		throws com.liferay.portal.PortalException,

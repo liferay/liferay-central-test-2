@@ -161,12 +161,27 @@ public interface OrganizationLocalService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Organization> getUserOrganizations(
-		long userId) throws com.liferay.portal.SystemException;
+		long userId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.liferay.portal.model.Organization> getUserOrganizations(
+		long userId, boolean inherit)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Organization> getUserOrganizations(
 		long userId, int start, int end)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.liferay.portal.model.Organization> getUserOrganizations(
+		long userId, boolean inherit, int start, int end)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getUserOrganizationsCount(long userId)

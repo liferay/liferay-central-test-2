@@ -29,6 +29,7 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.RequiredOrganizationException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.configuration.Filter;
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
@@ -386,16 +387,48 @@ public class OrganizationLocalServiceImpl
 	}
 
 	public List<Organization> getUserOrganizations(long userId)
-		throws SystemException {
+		throws PortalException, SystemException {
 
-		return userPersistence.getOrganizations(userId);
+		return getUserOrganizations(userId, false);
+	}
+
+	public List<Organization> getUserOrganizations(
+			long userId, boolean inheritUserGroups)
+		throws PortalException, SystemException {
+
+		return getUserOrganizations(
+			userId, inheritUserGroups, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 	}
 
 	public List<Organization> getUserOrganizations(
 			long userId, int start, int end)
-		throws SystemException {
+		throws PortalException, SystemException {
 
-		return userPersistence.getOrganizations(userId, start, end);
+		return getUserOrganizations(userId, false, start, end);
+	}
+
+	public List<Organization> getUserOrganizations(
+			long userId, boolean inheritUserGroups, int start, int end)
+		throws PortalException, SystemException {
+
+		if (inheritUserGroups &&
+			PropsValues.ORGANIZATIONS_USER_GROUP_MEMBERSHIP_ENABLED) {
+
+			User user = userPersistence.findByPrimaryKey(userId);
+
+			LinkedHashMap<String, Object> organizationParams =
+				new LinkedHashMap<String, Object>();
+
+			organizationParams.put("usersOrgs", new Long(userId));
+
+			return search(
+				user.getCompanyId(),
+				OrganizationConstants.ANY_PARENT_ORGANIZATION_ID, null,	null,
+				null, null, organizationParams, start, end);
+		}
+		else {
+			return userPersistence.getOrganizations(userId, start, end);
+		}
 	}
 
 	public int getUserOrganizationsCount(long userId) throws SystemException {

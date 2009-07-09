@@ -218,9 +218,17 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 	}
 
 	public List<Organization> getUserOrganizations(long userId)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		return organizationLocalService.getUserOrganizations(userId);
+	}
+
+	public List<Organization> getUserOrganizations(
+			long userId, boolean inheritUserGroups)
+		throws PortalException, SystemException {
+
+		return organizationLocalService.getUserOrganizations(
+			userId, inheritUserGroups);
 	}
 
 	public void setGroupOrganizations(long groupId, long[] organizationIds)
