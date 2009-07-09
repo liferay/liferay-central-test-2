@@ -23,6 +23,10 @@
 package com.liferay.portlet.messageboards.model.impl;
 
 import com.liferay.portlet.messageboards.model.MBMessageFlag;
+import com.liferay.portlet.messageboards.model.MBMessage;
+import com.liferay.portal.kernel.util.DateUtil;
+
+import java.util.Calendar;
 
 /**
  * <a href="MBMessageFlagImpl.java.html"><b><i>View Source</i></b></a>
@@ -41,5 +45,21 @@ public class MBMessageFlagImpl
 
 	public MBMessageFlagImpl() {
 	}
+
+	public boolean isRead(MBMessage message) {
+		Calendar lastRead = Calendar.getInstance();
+
+		lastRead.setTime(getModifiedDate());
+		lastRead.add(Calendar.SECOND, _MARGIN_SECONDS);
+
+		if ((DateUtil.compareTo(
+				lastRead.getTime(), message.getModifiedDate()) == -1)) {
+			return false;
+		}
+
+		return true;
+	}
+
+	private static final int _MARGIN_SECONDS = 2;
 
 }

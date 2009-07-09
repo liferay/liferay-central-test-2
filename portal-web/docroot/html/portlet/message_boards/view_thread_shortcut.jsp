@@ -30,6 +30,7 @@ boolean editable = true;
 MBTreeWalker treeWalker = (MBTreeWalker)request.getAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER);
 MBMessage selMessage = (MBMessage)request.getAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_SEL_MESSAGE);
 MBMessage message = (MBMessage)request.getAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_CUR_MESSAGE);
+MBMessageFlag messageFlag = (MBMessageFlag)request.getAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_MESSAGE_FLAG);
 MBCategory category = (MBCategory)request.getAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_CATEGORY);
 MBThread thread = (MBThread)request.getAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_THREAD);
 boolean lastNode = ((Boolean)request.getAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_LAST_NODE)).booleanValue();
@@ -76,22 +77,44 @@ if (treeWalker.isOdd()) {
 		if (!themeDisplay.isFacebook()) {
 			rowHREF = messageURL + rowHREF;
 		}
+
+		boolean readFlag = true;
+
+		if (themeDisplay.isSignedIn() && (messageFlag != null)) {
+			readFlag = messageFlag.isRead(message);
+		}
 		%>
 
-		<a href="<%= rowHREF %>"><%= HtmlUtil.escape(message.getSubject()) %></a>
+		<a href="<%= rowHREF %>">
+			<c:if test="<%= !readFlag %>">
+				<b>
+			</c:if>
+
+			<%= HtmlUtil.escape(message.getSubject()) %>
+
+			<c:if test="<%= !readFlag %>">
+				</b>
+			</c:if>
+		</a>
 	</td>
 	<td nowrap>
 		<a href="<%= rowHREF %>">
+			<c:if test="<%= !readFlag %>">
+				<b>
+			</c:if>
+	
+			<c:choose>
+				<c:when test="<%= message.isAnonymous() %>">
+					<liferay-ui:message key="anonymous" />
+				</c:when>
+				<c:otherwise>
+					<%= PortalUtil.getUserName(message.getUserId(), message.getUserName()) %>
+				</c:otherwise>
+			</c:choose>
 
-		<c:choose>
-			<c:when test="<%= message.isAnonymous() %>">
-				<liferay-ui:message key="anonymous" />
-			</c:when>
-			<c:otherwise>
-				<%= PortalUtil.getUserName(message.getUserId(), message.getUserName()) %>
-			</c:otherwise>
-		</c:choose>
-
+			<c:if test="<%= !readFlag %>">
+				</b>
+			</c:if>
 		</a>
 	</td>
 	<td nowrap>
@@ -117,6 +140,7 @@ for (int i = range[0]; i < range[1]; i++) {
 	request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER, treeWalker);
 	request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_SEL_MESSAGE, selMessage);
 	request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_CUR_MESSAGE, curMessage);
+	request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_MESSAGE_FLAG, messageFlag);
 	request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_CATEGORY, category);
 	request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_THREAD, thread);
 	request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_LAST_NODE, Boolean.valueOf(lastChildNode));
