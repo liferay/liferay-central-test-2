@@ -1168,6 +1168,7 @@ public class ServiceBuilder {
 					"Cannot find " + name + " in " +
 						ListUtil.toString(_ejbList, "name"));
 			}
+
 			entity = _ejbList.get(pos);
 
 			_entityPool.put(name, entity);
