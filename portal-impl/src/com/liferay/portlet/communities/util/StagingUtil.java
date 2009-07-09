@@ -142,9 +142,14 @@ public class StagingUtil {
 			LayoutLocalServiceUtil.exportPortletInfoAsStream(
 				sourcePlid, sourceGroupId, portletId, parameterMap, null, null);
 
-		LayoutServiceUtil.importPortletInfo(
-			targetPlid, targetGroupId, portletId, parameterMap,
-			fileCacheOutputStream.getFileInputStream());
+		try {
+			LayoutServiceUtil.importPortletInfo(
+				targetPlid, targetGroupId, portletId, parameterMap,
+				fileCacheOutputStream.getFileInputStream());
+		}
+		finally {
+			fileCacheOutputStream.close();
+		}
 	}
 
 	public static void copyRemoteLayouts(
@@ -504,9 +509,14 @@ public class StagingUtil {
 				sourceGroupId, privateLayout, layoutIds, parameterMap,
 				startDate, endDate);
 
-		LayoutServiceUtil.importLayouts(
-			targetGroupId, privateLayout, parameterMap,
-			fileCacheOutputStream.getFileInputStream());
+		try {
+			LayoutServiceUtil.importLayouts(
+				targetGroupId, privateLayout, parameterMap,
+				fileCacheOutputStream.getFileInputStream());
+		}
+		finally {
+			fileCacheOutputStream.close();
+		}
 	}
 
 	public static void publishLayouts(
