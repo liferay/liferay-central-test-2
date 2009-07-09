@@ -45,6 +45,7 @@ import java.io.BufferedReader;
 import java.io.StringReader;
 
 import java.sql.Connection;
+import java.sql.DatabaseMetaData;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
@@ -505,6 +506,12 @@ public class StartupHelper {
 		try {
 			con = DataAccess.getConnection();
 
+			DatabaseMetaData metaData = con.getMetaData();
+
+			if (metaData.getDatabaseMajorVersion() <= _SQL_SERVER_2000) {
+				return null;
+			}
+
 			StringBuilder sb = new StringBuilder();
 
 			sb.append("select sys.tables.name as table_name, ");
@@ -587,6 +594,8 @@ public class StartupHelper {
 
 	private static final String _DELETE_TEMP_IMAGES_2 =
 		"delete from JournalArticleImage where tempImage = TRUE";
+
+	private static final int _SQL_SERVER_2000 = 8;
 
 	private static Log _log = LogFactoryUtil.getLog(StartupHelper.class);
 
