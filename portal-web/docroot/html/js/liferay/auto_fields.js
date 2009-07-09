@@ -150,6 +150,7 @@ Liferay.AutoFields = Alloy.Observable.extend(
 						el.attr('id', newName);
 
 					}
+
 					if (el.is(':button') || el.is('span')) {
 						if (oldName) {
 							el.attr('id', newName);
@@ -182,11 +183,7 @@ Liferay.AutoFields = Alloy.Observable.extend(
 				instance._sortable.add(clone[0]);
 			}
 
-			try {
-				clone.find('input:text:first').trigger('focus');
-			}
-			catch (err) {
-			}
+			Liferay.Util.focusFormField(clone.find('input:text:first')[0]);
 
 			instance.trigger('addRow', {row: clone, originalRow: currentRow, idSeed: newSeed});
 		},
