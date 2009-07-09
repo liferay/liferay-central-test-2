@@ -82,9 +82,18 @@ public abstract class BaseFilter implements Filter {
 		boolean filterEnabled = isFilterEnabled();
 
 		if (filterEnabled && (_urlRegexPattern != null)) {
-			Matcher matcher = _urlRegexPattern.matcher(request.getRequestURL());
+			StringBuilder sb = new StringBuilder();
 
-			filterEnabled = matcher.matches();
+			sb.append(request.getRequestURL());
+
+			if (Validator.isNotNull(request.getQueryString())) {
+				sb.append(StringPool.QUESTION);
+				sb.append(request.getQueryString());
+			}
+
+			Matcher matcher = _urlRegexPattern.matcher(sb.toString());
+
+			filterEnabled = matcher.find();
 		}
 
 		try {
