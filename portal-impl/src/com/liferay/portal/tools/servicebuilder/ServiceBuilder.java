@@ -1075,6 +1075,9 @@ public class ServiceBuilder {
 				_createSpringInfrastructureXml();
 			}
 		}
+		catch (FileNotFoundException fnfe) {
+			System.out.println(fnfe.getMessage());
+		}
 		catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -1160,6 +1163,11 @@ public class ServiceBuilder {
 		if (pos == -1) {
 			pos = _ejbList.indexOf(new Entity(name));
 
+			if (pos == -1) {
+				throw new RuntimeException(
+					"Cannot find " + name + " in " +
+						ListUtil.toString(_ejbList, "name"));
+			}
 			entity = _ejbList.get(pos);
 
 			_entityPool.put(name, entity);
