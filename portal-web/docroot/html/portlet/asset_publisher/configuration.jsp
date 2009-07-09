@@ -92,6 +92,10 @@ configurationActionURL.setParameter("portletResource", portletResource);
 </script>
 
 <style type="text/css">
+	.lfr-panel .lfr-panel-titlebar {
+		margin-bottom: 0;
+	}
+
 	.lfr-panel-content {
 		padding: 10px;
 		background-color: #eee;
