@@ -200,14 +200,19 @@
 
 .aui-form .aui-form-column {
 	float: left;
+	margin-right: 10px;
+	width: auto;
 }
 
 .aui-form .column-left {
 	float: left;
+	margin-right: 10px;
+	width: auto;
 }
 
 .aui-form .column-right {
 	float: right;
+	width: 33%;
 }
 
 .ie6 .aui-form, .ie6 .aui-form fieldset, .ie6 .aui-ctrl-holder, .ie6 .aui-ctrl-holder span, .ie6 .form-hint {

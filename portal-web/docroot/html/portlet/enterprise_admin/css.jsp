@@ -212,27 +212,6 @@
 	margin-top: 20px;
 }
 
-.portlet-enterprise-admin .lfr-form-row, .lfr-role-selector .lfr-form-row {
-	margin-top: 10px;
-	padding-top: 1px;
-}
-
-.ie .portlet-enterprise-admin .lfr-form-row, .ie .lfr-role-selector .lfr-form-row {
-	width: 100%;
-}
-
-.portlet-enterprise-admin .lfr-form-row:hover, .lfr-role-selector .lfr-form-row:hover {
-	background-color: #DFFCCB;
-	border-bottom: 1px solid #B2FF3A;
-	border-top: 1px solid #B2FF3A;
-	padding-top: 0;
-}
-
-.portlet-enterprise-admin .lfr-form-row .aui-ctrl-holder, .lfr-role-selector .lfr-form-row .aui-ctrl-holder {
-	clear: none;
-	float: left;
-}
-
 .portlet-enterprise-admin .form-section {
 	display: none;
 	float: left;
@@ -291,18 +270,9 @@
 	width: 100%;
 }
 
-.portlet-enterprise-admin .aui-form fieldset.aui-form-column, .lfr-role-selector .aui-form .aui-form-column {
-	margin-right: 10px;
-	width: auto;
-}
-
 .portlet-enterprise-admin #addresses .aui-ctrl-holder {
 	float: none;
 	width: auto;
-}
-
-.ie6 .portlet-enterprise-admin .aui-form fieldset.aui-form-column, .ie6 .lfr-role-selector .aui-form fieldset.aui-form-column {
-	width: 33%;
 }
 
 .portlet-enterprise-admin .aui-form .row-container {
@@ -444,8 +414,4 @@
 
 .lfr-portlet-toolbar .lfr-toolbar-button.back-button a {
 	padding: 4px 14px;
-}
-
-.lfr-role-selector .aui-form label {
-	margin-right: 0.4em;
 }

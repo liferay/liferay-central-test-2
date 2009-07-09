@@ -385,8 +385,26 @@
 	border-bottom: 1px solid #CCC;
 	overflow: hidden;
 	padding: 5px;
+	padding-top: 1px;
 	position: relative;
 	margin-bottom: 10px;
+	margin-top: 10px;
+}
+
+.ie .lfr-form-row {
+	width: 100%;
+}
+
+.lfr-form-row:hover {
+	background-color: #DFFCCB;
+	border-bottom: 1px solid #B2FF3A;
+	border-top: 1px solid #B2FF3A;
+	padding-top: 0;
+}
+
+.lfr-form-row .aui-ctrl-holder {
+	clear: none;
+	float: left;
 }
 
 .lfr-form-row .row-controls {
@@ -438,7 +456,7 @@
 	padding-left: 20px;
 }
 
-.aui-form .lfr-form-row fieldset {
+.lfr-form-row fieldset {
 	border: none;
 	margin: 0;
 	padding: 0;
@@ -1545,40 +1563,6 @@ fieldset:last-child, .aui-form fieldset:last-child {
 
 .taglib-input-localized {
 	float: left;
-}
-
-.taglib-input-localized .lfr-form-row, .lfr-language-selector .lfr-form-row {
-	margin-top: 10px;
-	padding-top: 1px;
-}
-
-.taglib-input-localized .lfr-form-row, .ie .lfr-language-selector .lfr-form-row {
-	width: 100%;
-}
-
-.taglib-input-localized .lfr-form-row:hover, .lfr-language-selector .lfr-form-row:hover {
-	background-color: #DFFCCB;
-	border: solid #B2FF3A;
-	border-width: 1px 0;
-	padding-top: 0;
-}
-
-.taglib-input-localized .lfr-form-row .aui-ctrl-holder, .lfr-language-selector .lfr-form-row .aui-ctrl-holder {
-	clear: none;
-	float: left;
-}
-
-.taglib-input-localized .aui-form fieldset.aui-form-column, .lfr-language-selector .aui-form .aui-form-column {
-	margin-right: 10px;
-	width: auto;
-}
-
-.ie6 .taglib-input-localized .aui-form fieldset.aui-form-column, .ie6 .lfr-language-selector .aui-form fieldset.aui-form-column {
-	width: 33%;
-}
-
-.taglib-input-localized .lfr-language-selector .aui-form label {
-	margin-right: 0.4em;
 }
 
 /* ---------- Taglib input move boxes ---------- */

@@ -30,10 +30,6 @@
 	padding: 0;
 }
 
-.portlet-login .aui-form .aui-form-column {
-	width: auto;
-}
-
 .portlet-login .aui-form .aui-button-holder {
 	margin-bottom: 10px;
 }
@@ -46,5 +42,4 @@
 
 .portlet-login .aui-form .aui-form-column {
 	margin-bottom: 10px;
-	margin-right: 10px;
 }
