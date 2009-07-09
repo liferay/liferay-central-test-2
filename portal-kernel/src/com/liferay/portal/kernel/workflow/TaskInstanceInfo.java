@@ -173,16 +173,24 @@ public interface TaskInstanceInfo {
      * @return the id of the user being assigned to this task or
      *         <code>null</code> if not assigned yet
      */
-    Long getAssigneeId();
+    Long getAssignedUserId();
 
     /**
-     * If this task has been assigned to a group or role, it is returned by this
-     * method. The interpretation of the returned id is dependent on the usage
-     * of the workflow assignment system and is the same as being provided while
+     * If this task has been assigned to a role, it is returned by this method.
+     * 
+     * @return the role id this task has been assigned to or <code>null</code>,
+     *         if not assigned yet
+     */
+    Long getAssignedRoleId();
+
+    /**
+     * If this task has been assigned to a group, it is returned by this method.
+     * The interpretation of the returned id is dependent on the usage of the
+     * workflow assignment system and is the same as being provided while
      * assigning a task to a group through the {@link TaskInstanceManager}.
      * 
      * @return the group this task has been assigned to or <code>null</code>, if
      *         not assigned yet
      */
-    String getAssignedGroup();
+    String getAssignedGroupId();
 }
