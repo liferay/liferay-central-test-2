@@ -144,26 +144,30 @@
 				var contextObj = jQuery(instance.contextEl);
 				var elementObj = jQuery(instance.element);
 
-				contextObj.bind('mouseenter',
+				contextObj.bind(
+					'mouseenter',
 					function(event) {
 						instance.hideTask.cancel();
 						instance.show();
 					}
 				);
 
-				contextObj.bind('mouseleave',
+				contextObj.bind(
+					'mouseleave',
 					function(event) {
 						instance.hideTask.delay(500);
 					}
 				);
 
-				elementObj.bind('mouseenter',
+				elementObj.bind(
+					'mouseenter',
 					function(event) {
 						instance.hideTask.cancel();
 					}
 				);
 
-				elementObj.bind('mouseleave',
+				elementObj.bind(
+					'mouseleave',
 					function(event) {
 						instance.hideTask.delay(1000);
 					}
