@@ -125,6 +125,16 @@ public interface TaskInstanceInfo {
     boolean isCompleted();
 
     /**
+     * Returns <code>true</code>, if this task is asynchronous, meaning it
+     * didn't break the workflow execution, it was just created and the engine
+     * continued with the next activity, so completing this task will not
+     * further change the workflow execution and has no impact on it.
+     * 
+     * @return <code>true</code>, if this is an asynchronous task
+     */
+    boolean isAsynchronous();
+
+    /**
      * Returns the workflow instance id to which this task belongs. As soon as
      * this task will be completed, the execution of the workflow continues with
      * exactly that workflow instance.
