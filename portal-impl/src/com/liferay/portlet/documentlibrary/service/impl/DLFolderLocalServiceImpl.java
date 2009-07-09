@@ -501,7 +501,19 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 			if ((parentFolder == null) ||
 				(groupId != parentFolder.getGroupId())) {
 
-				parentFolderId = DLFolderConstants.DEFAULT_PARENT_FOLDER_ID;
+				int count = getFoldersCount(
+					groupId, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID);
+
+				if (count == 1) {
+					List<DLFolder> folders = getFolders(
+						groupId, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID);
+
+					parentFolderId = folders.get(0).getFolderId();
+				}
+				else {
+					parentFolderId = DLFolderConstants.DEFAULT_PARENT_FOLDER_ID;
+				}
+
 			}
 		}
 
