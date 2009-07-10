@@ -115,8 +115,16 @@ public class AssetEntryQuery {
 		return _allCategoryIds;
 	}
 
+	public long[] getAllTagIds() {
+		return _allTagIds;
+	}
+
 	public long[] getAnyCategoryIds() {
 		return _anyCategoryIds;
+	}
+
+	public long[] getAnyTagIds() {
+		return _anyTagIds;
 	}
 
 	public long[] getClassNameIds() {
@@ -143,6 +151,14 @@ public class AssetEntryQuery {
 		return _notAllTagIds;
 	}
 
+	public long[] getNotAnyCategoryIds() {
+		return _notAnyCategoryIds;
+	}
+
+	public long[] getNotAnyTagIds() {
+		return _notAnyTagIds;
+	}
+
 	public String getOrderByCol1() {
 		return checkOrderByCol(_orderByCol1);
 	}
@@ -167,26 +183,6 @@ public class AssetEntryQuery {
 		return _start;
 	}
 
-	public long[] getAllTagIds() {
-		return _allTagIds;
-	}
-
-	public long[] getAnyTagIds() {
-		return _anyTagIds;
-	}
-
-	public long[] getNotAnyCategoryIds() {
-		return _notAnyCategoryIds;
-	}
-
-	public long[] getNotAnyTagIds() {
-		return _notAnyTagIds;
-	}
-
-	public void setEnd(int end) {
-		_end = end;
-	}
-
 	public boolean isExcludeZeroViewCount() {
 		return _excludeZeroViewCount;
 	}
@@ -199,8 +195,16 @@ public class AssetEntryQuery {
 		_allCategoryIds = allCategoryIds;
 	}
 
+	public void setAllTagIds(long[] allTagIds) {
+		_allTagIds = allTagIds;
+	}
+
 	public void setAnyCategoryIds(long[] anyCategoryIds) {
 		_anyCategoryIds = anyCategoryIds;
+	}
+
+	public void setAnyTagIds(long[] anyTagIds) {
+		_anyTagIds = anyTagIds;
 	}
 
 	public void setClassName(String className) {
@@ -211,6 +215,10 @@ public class AssetEntryQuery {
 
 	public void setClassNameIds(long[] classNameIds) {
 		_classNameIds = classNameIds;
+	}
+
+	public void setEnd(int end) {
+		_end = end;
 	}
 
 	public void setExcludeZeroViewCount(boolean excludeZeroViewCount) {
@@ -229,12 +237,12 @@ public class AssetEntryQuery {
 		_notAllCategoryIds = notAllCategoryIds;
 	}
 
-	public void setNotAnyCategoryIds(long[] notAnyCategoryIds) {
-		_notAnyCategoryIds = notAnyCategoryIds;
-	}
-
 	public void setNotAllTagIds(long[] notAllTagIds) {
 		_notAllTagIds = notAllTagIds;
+	}
+
+	public void setNotAnyCategoryIds(long[] notAnyCategoryIds) {
+		_notAnyCategoryIds = notAnyCategoryIds;
 	}
 
 	public void setNotAnyTagIds(long[] notAnyTagIds) {
@@ -265,28 +273,22 @@ public class AssetEntryQuery {
 		_start = start;
 	}
 
-	public void setAllTagIds(long[] allTagIds) {
-		_allTagIds = allTagIds;
-	}
-
-	public void setAnyTagIds(long[] anyTagIds) {
-		_anyTagIds = anyTagIds;
-	}
-
 	public void setVisible(Boolean visible) {
 		_visible = visible;
 	}
 
 	private long[] _allCategoryIds = new long[0];
+	private long[] _allTagIds = new long[0];
 	private long[] _anyCategoryIds = new long[0];
+	private long[] _anyTagIds = new long[0];
 	private long[] _classNameIds = new long[0];
 	private int _end = QueryUtil.ALL_POS;
 	private boolean _excludeZeroViewCount;
 	private Date _expirationDate;
 	private long _groupId = 0;
 	private long[] _notAllCategoryIds = new long[0];
-	private long[] _notAnyCategoryIds = new long[0];
 	private long[] _notAllTagIds = new long[0];
+	private long[] _notAnyCategoryIds = new long[0];
 	private long[] _notAnyTagIds = new long[0];
 	private String _orderByCol1;
 	private String _orderByCol2;
@@ -294,8 +296,6 @@ public class AssetEntryQuery {
 	private String _orderByType2;
 	private Date _publishDate;
 	private int _start = QueryUtil.ALL_POS;
-	private long[] _allTagIds = new long[0];
-	private long[] _anyTagIds = new long[0];
 	private Boolean _visible = Boolean.TRUE;
 
 }

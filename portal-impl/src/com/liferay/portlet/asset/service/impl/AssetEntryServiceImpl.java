@@ -240,14 +240,14 @@ public class AssetEntryServiceImpl extends AssetEntryServiceBaseImpl {
 		}
 	}
 
-	private long[] filterCategoryIds(long[] categoryIds)
+	protected long[] filterCategoryIds(long[] categoryIds)
 		throws PortalException, SystemException {
 
 		List<Long> viewableCategoryIds = new ArrayList<Long>();
 
 		for (long categoryId : categoryIds) {
 			if (AssetCategoryPermission.contains(
-				getPermissionChecker(), categoryId, ActionKeys.VIEW)) {
+					getPermissionChecker(), categoryId, ActionKeys.VIEW)) {
 
 				viewableCategoryIds.add(categoryId);
 			}
@@ -265,11 +265,11 @@ public class AssetEntryServiceImpl extends AssetEntryServiceBaseImpl {
 		entryQuery.setAnyCategoryIds(filterCategoryIds(
 			entryQuery.getAnyCategoryIds()));
 
-		entryQuery.setAllTagIds(filterTags(entryQuery.getAllTagIds()));
-		entryQuery.setAnyTagIds(filterTags(entryQuery.getAnyTagIds()));
+		entryQuery.setAllTagIds(filterTagIds(entryQuery.getAllTagIds()));
+		entryQuery.setAnyTagIds(filterTagIds(entryQuery.getAnyTagIds()));
 	}
 
-	protected long[] filterTags(long[] tagIds)
+	protected long[] filterTagIds(long[] tagIds)
 		throws PortalException, SystemException {
 
 		List<Long> viewableTagIds = new ArrayList<Long>();

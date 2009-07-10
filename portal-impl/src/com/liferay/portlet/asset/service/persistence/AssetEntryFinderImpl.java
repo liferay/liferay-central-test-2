@@ -109,7 +109,6 @@ public class AssetEntryFinderImpl
 	}
 
 	protected void buildAllCategoriesSQL(long[] categoryIds, StringBuilder sb) {
-
 		sb.append(" AND AssetEntry.entryId IN (");
 
 		for (int i = 0; i < categoryIds.length; i++) {
@@ -130,7 +129,6 @@ public class AssetEntryFinderImpl
 	}
 
 	protected void buildAllTagsSQL(long[] tagIds, StringBuilder sb) {
-
 		sb.append(" AND AssetEntry.entryId IN (");
 
 		for (int i = 0; i < tagIds.length; i++) {
@@ -144,41 +142,6 @@ public class AssetEntryFinderImpl
 		for (int i = 0; i < tagIds.length; i++) {
 			if ((i + 1) < tagIds.length) {
 				sb.append(StringPool.CLOSE_PARENTHESIS);
-			}
-		}
-
-		sb.append(StringPool.CLOSE_PARENTHESIS);
-	}
-
-	protected void buildNotAnyCategoriesSQL(
-		long[] categoryIds, StringBuilder sb) {
-
-		sb.append(" AND (");
-
-		for (int i = 0; i < categoryIds.length; i++) {
-			sb.append("AssetEntry.entryId NOT IN (");
-			sb.append(CustomSQLUtil.get(FIND_BY_AND_CATEGORY_IDS));
-			sb.append(StringPool.CLOSE_PARENTHESIS);
-
-			if ((i + 1) < categoryIds.length) {
-				sb.append(" OR ");
-			}
-		}
-
-		sb.append(StringPool.CLOSE_PARENTHESIS);
-	}
-
-	protected void buildNotAnyTagsSQL(long[] tagIds, StringBuilder sb) {
-
-		sb.append(" AND (");
-
-		for (int i = 0; i < tagIds.length; i++) {
-			sb.append("AssetEntry.entryId NOT IN (");
-			sb.append(CustomSQLUtil.get(FIND_BY_AND_TAG_IDS));
-			sb.append(StringPool.CLOSE_PARENTHESIS);
-
-			if ((i + 1) < tagIds.length) {
-				sb.append(" OR ");
 			}
 		}
 
@@ -200,7 +163,6 @@ public class AssetEntryFinderImpl
 		sb.append("FROM AssetEntry ");
 
 		if (entryQuery.getAnyTagIds().length > 0) {
-
 			sb.append("INNER JOIN ");
 			sb.append("AssetEntries_AssetTags ON ");
 			sb.append("(AssetEntries_AssetTags.entryId = ");
@@ -211,7 +173,6 @@ public class AssetEntryFinderImpl
 		}
 
 		if (entryQuery.getAnyCategoryIds().length > 0) {
-
 			sb.append("INNER JOIN ");
 			sb.append("AssetEntries_AssetCategories ON ");
 			sb.append("(AssetEntries_AssetCategories.entryId = ");
@@ -345,6 +306,40 @@ public class AssetEntryFinderImpl
 		qPos.add(entryQuery.getClassNameIds());
 
 		return q;
+	}
+
+	protected void buildNotAnyCategoriesSQL(
+		long[] categoryIds, StringBuilder sb) {
+
+		sb.append(" AND (");
+
+		for (int i = 0; i < categoryIds.length; i++) {
+			sb.append("AssetEntry.entryId NOT IN (");
+			sb.append(CustomSQLUtil.get(FIND_BY_AND_CATEGORY_IDS));
+			sb.append(StringPool.CLOSE_PARENTHESIS);
+
+			if ((i + 1) < categoryIds.length) {
+				sb.append(" OR ");
+			}
+		}
+
+		sb.append(StringPool.CLOSE_PARENTHESIS);
+	}
+
+	protected void buildNotAnyTagsSQL(long[] tagIds, StringBuilder sb) {
+		sb.append(" AND (");
+
+		for (int i = 0; i < tagIds.length; i++) {
+			sb.append("AssetEntry.entryId NOT IN (");
+			sb.append(CustomSQLUtil.get(FIND_BY_AND_TAG_IDS));
+			sb.append(StringPool.CLOSE_PARENTHESIS);
+
+			if ((i + 1) < tagIds.length) {
+				sb.append(" OR ");
+			}
+		}
+
+		sb.append(StringPool.CLOSE_PARENTHESIS);
 	}
 
 	protected String getCategoryIds(long[] categoryIds, String operator) {

@@ -118,6 +118,7 @@ public class RSSAction extends Action {
 
 			AssetEntryQuery entryQuery = new AssetEntryQuery();
 
+			entryQuery.setAnyTagIds(tagIds);
 			entryQuery.setGroupId(groupId);
 			entryQuery.setEnd(max);
 			entryQuery.setExcludeZeroViewCount(false);
@@ -125,7 +126,6 @@ public class RSSAction extends Action {
 			entryQuery.setNotAnyTagIds(notTagIds);
 			entryQuery.setPublishDate(null);
 			entryQuery.setStart(0);
-			entryQuery.setAnyTagIds(tagIds);
 
 			rss = AssetEntryServiceUtil.getEntriesRSS(
 				entryQuery, type, version, displayStyle, feedURL, entryURL);
