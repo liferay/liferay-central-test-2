@@ -97,13 +97,13 @@ configurationActionURL.setParameter("portletResource", portletResource);
 	}
 
 	.aui-form fieldset legend {
-		padding: 0;
-		font-size: 100%;
+		font-size: 1em;
 		font-weight: normal;
+		padding: 0;
 	}
 
 	.aui-form .lfr-form-row {
-		background-color: #F3f3f3;
+		background-color: #F3F3F3;
 	}
 
 	.aui-form .lfr-form-row:hover {
@@ -111,12 +111,12 @@ configurationActionURL.setParameter("portletResource", portletResource);
 	}
 
 	.aui-form .lfr-form-row .aui-ctrl-holder {
-		line-height: 2em;
+		line-height: 2;
 	}
 
 	.aui-form .lfr-form-row .aui-ctrl-holder.tags-selector, .aui-form .lfr-form-row .aui-ctrl-holder.categories-selector{
 		clear: both;
-		line-height: 1.5em;
+		line-height: 1.5;
 	}
 
 	.lfr-panel .lfr-panel-titlebar {
@@ -124,7 +124,7 @@ configurationActionURL.setParameter("portletResource", portletResource);
 	}
 
 	.lfr-panel-content {
-		background-color: #f8f8f8;
+		background-color: #F8F8F8;
 		padding: 10px;
 	}
 </style>
@@ -161,7 +161,7 @@ configurationActionURL.setParameter("portletResource", portletResource);
 						<%@ include file="/html/portlet/asset_publisher/add_asset.jspf" %>
 
 						<select name="<portlet:namespace/>assetEntryType" onchange="<portlet:namespace />selectionForType(this.options[this.selectedIndex].value);">
-							<option value=""><liferay-ui:message key="select-existing" />...</option>
+							<option value=""><liferay-ui:message key="select-existing" /></option>
 
 							<%
 							for (int i = 0; i < AssetUtil.ASSET_ENTRY_TYPE_CLASS_NAMES.length; i++) {
@@ -330,7 +330,7 @@ configurationActionURL.setParameter("portletResource", portletResource);
 
 						<br /><br />
 
-						<div id="query-rules">
+						<div id="<portlet:namespace />queryRules">
 							<fieldset class="aui-block-labels">
 								<legend><liferay-ui:message key="displayed-assets-must-match-these-rules" /></legend>
 
@@ -437,13 +437,44 @@ configurationActionURL.setParameter("portletResource", portletResource);
 						<script type="text/javascript">
 							jQuery(
 								function () {
+									var queryRules = jQuery('#<portlet:namespace />queryRules');
+									var queryRulesContainer = queryRules.find('> fieldset');
+									var queryRulesRows = queryRulesContainer.find('.lfr-form-row');
+
 									var autoFields = new Liferay.AutoFields(
 										{
-											container: '#query-rules > fieldset',
-											baseRows: '#query-rules > fieldset .lfr-form-row',
+											container: queryRulesContainer,
+											baseRows: queryRulesRows,
 											fieldIndexes: '<portlet:namespace />queryLogicIndexes'
 										}
 									);
+
+									var initQueryNameFields = function(selectFields) {
+										selectFields = selectFields || jQuery('.asset-query-name');
+
+										selectFields.each(
+											function() {
+												var select = jQuery(this);
+												var row = jQuery(this.parentNode.parentNode);
+
+												select.change(
+													function(event) {
+														var tagsSelector = row.find('.tags-selector');
+														var categoriesSelector = row.find('.categories-selector');
+
+														if (select.val() == 'assetTags') {
+															tagsSelector.show();
+															categoriesSelector.hide();
+														}
+														else {
+															tagsSelector.hide();
+															categoriesSelector.show();
+														}
+													}
+												);
+											}
+										);
+									};
 
 									autoFields.bind(
 										'addRow',
@@ -453,7 +484,7 @@ configurationActionURL.setParameter("portletResource", portletResource);
 											var row = jQuery(data.row);
 											var index = data.idSeed;
 
-											_initQueryNameFields(row.find('.asset-query-name'));
+											initQueryNameFields(row.find('.asset-query-name'));
 
 											var firstCategoriesInput = row.find('.categories-selector > input:visible:first');
 											var categoriesRandomNamespace = (firstCategoriesInput.attr('name') || firstCategoriesInput.attr('id')).substring(0,5);
@@ -468,46 +499,24 @@ configurationActionURL.setParameter("portletResource", portletResource);
 											);
 
 											var firstTagsInput = row.find('.tags-selector > input:visible:first');
-											var tagsRandomNamespace = (firstTagsInput.attr('name') || firstTagsInput.attr('id')).substring(0,5);
+											var tagsRandomNamespace = (firstTagsInput.attr('name') || firstTagsInput.attr('id')).substring(0, 5);
 
 											new Liferay.AssetTagsSelector(
 												{
 													instanceVar: tagsRandomNamespace,
 													seed: index,
 													hiddenInput:  '<portlet:namespace/>queryTagNames',
-													textInput: tagsRandomNamespace + "assetTagNames",
-													summarySpan: tagsRandomNamespace + "assetTagsSummary",
+													summarySpan: tagsRandomNamespace + 'assetTagsSummary',
+													textInput: tagsRandomNamespace + 'assetTagNames',
 													focus: false
 												}
 											);
 										}
 									);
 
-									_initQueryNameFields(jQuery('.asset-query-name'));
+									initQueryNameFields();
 								}
 							);
-
-							function _initQueryNameFields(selectFields) {
-								selectFields.each(
-									function(){
-										var select = jQuery(this);
-										var row = select.parent().parent();
-
-										select.change(
-											function(event) {
-												if (select.val() == 'assetTags') {
-													row.find('.tags-selector').show();
-													row.find('.categories-selector').hide();
-												}
-												else {
-													row.find('.tags-selector').hide();
-													row.find('.categories-selector').show();
-												}
-											}
-										);
-									}
-								);
-							}
 						</script>
 
 						<br /><br />
