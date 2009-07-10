@@ -27,10 +27,16 @@ package com.liferay.portal.kernel.workflow;
  *
  * <p>
  * The workflow definition mapper is a manager used to map domain classes to
- * workflow definitions.<br/>
+ * workflow definitions.
+ * </p>
+ *
+ * <p>
  * It might be used to map a domain or model class to be used in conjunction
- * with a certain workflow definition.<br/>
- * The mapper works independently of the underlying engine, its just a mapping
+ * with a certain workflow definition.
+ * </p>
+ *
+ * <p>
+ * The mapper works independently of the underlying engine, it is just a mapping
  * between domain classes as workflow definitions.
  * </p>
  *
@@ -38,14 +44,15 @@ package com.liferay.portal.kernel.workflow;
  *
  */
 public interface WorkflowDefinitionMapper {
+
 	/**
 	 * Returns the workflow definition name mapped to the given domain class, if
 	 * any, <code>null</code> otherwise.
 	 *
 	 * @param domainClass the domain class to return its mapped workflow
-	 *			definition
+	 * definition
 	 * @return the name of the workflow definition mapped to the given domain
-	 *		 class or <code>null</code> if no such mapping available
+	 * class or <code>null</code> if no such mapping available
 	 */
 	public String getWorkflowDefinitionName(Class<?> domainClass);
 
@@ -54,9 +61,9 @@ public interface WorkflowDefinitionMapper {
 	 * class, <code>false</code>, if no mapping was made.
 	 *
 	 * @param domainClass the domain class to check for having a mapping to a
-	 *			workflow definition name
+	 * workflow definition name
 	 * @return <code>true</code>, if there is a mapping between the given domain
-	 *		 class and a workflow definition
+	 * class and a workflow definition
 	 */
 	public boolean hasWorkflowDefinitionMapping(Class<?> domainClass);
 
@@ -66,9 +73,9 @@ public interface WorkflowDefinitionMapper {
 	 *
 	 * @param domainClass the domain class to be mapped
 	 * @param workflowDefinitionId the workflow definition name as the mapping
-	 *			to the given domain class
+	 * to the given domain class
 	 * @return the old workflow definition name, if any previously set,
-	 *		 <code>null</code> otherwise
+	 * <code>null</code> otherwise
 	 */
 	public String setWorkflowDefinitionMapping(
 		Class<?> domainClass, String workflowDefinitionId);

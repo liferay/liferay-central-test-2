@@ -31,7 +31,10 @@ import java.util.Map;
  * <p>
  * A single workflow history entry as being retrieved through the
  * {@link WorkflowInstanceManager} for a certain workflow instance, optionally
- * including its children as well.<br/>
+ * including its children as well.
+ * </p>
+ *
+ * <p>
  * How history entries are being created and what kind of type they represent is
  * totally engine specific and might even be configured.
  * </p>
@@ -48,7 +51,7 @@ public interface WorkflowInstanceHistory {
 	 * the type it represents.
 	 *
 	 * @return the optional, additional attributes, if any, an empty map or even
-	 *		 <code>null</code> otherwise, depending on the underlying engine
+	 * <code>null</code> otherwise, depending on the underlying engine
 	 */
 	public Map<String, Object> getAttributes();
 
@@ -84,7 +87,7 @@ public interface WorkflowInstanceHistory {
 	 * system user id, depending on the underlying engine.
 	 *
 	 * @return the user id creating this entry or <code>null</code>, if none
-	 *		 available
+	 * available
 	 */
 	public Long getUserId();
 

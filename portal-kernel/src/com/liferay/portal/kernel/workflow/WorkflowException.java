@@ -29,7 +29,10 @@ import com.liferay.portal.PortalException;
  *
  * <p>
  * The workflow exception is the main exception to be thrown by any of the
- * workflow system API methods.<br/>
+ * workflow system API methods.
+ * </p>
+ *
+ * <p>
  * A workflow exception might contain a native exception being thrown by the
  * underlying workflow engine, if the transport layer allows it otherwise it
  * will just contain its message.

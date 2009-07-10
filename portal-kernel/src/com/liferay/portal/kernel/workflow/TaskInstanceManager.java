@@ -35,7 +35,6 @@ import java.util.Map;
  * </p>
  *
  * <p>
- * <i>Here is an example:</i><br/>
  * The next step in a workflow definition is a decision to be made by a user, so
  * this could be modeled by adding a task activity to the workflow definition,
  * stopping the workflow execution and creating a task instance. The task would
@@ -44,7 +43,10 @@ import java.util.Map;
  * After the task is completed, the workflow execution automatically continues
  * by executing the decision element using the information entered while
  * completing the task and taking that decision to continue with the execution
- * of the workflow.<br/>
+ * of the workflow.
+ * </p>
+ *
+ * <p>
  * This is just one scenario where tasks come into play, but basically, a task
  * is just an element preventing the execution of the workflow by delegating it
  * to a user through a task instance.
@@ -54,6 +56,7 @@ import java.util.Map;
  *
  */
 public interface TaskInstanceManager {
+
 	/**
 	 * Assign the task instance with the given id to the specified role with an
 	 * optional comment. The task instance information being returned will
@@ -63,13 +66,14 @@ public interface TaskInstanceManager {
 	 * @param roleId the role id to assign the task to
 	 * @param comment the optional comment for the assignment
 	 * @param attributes the optional attributes to be passed on to the context
-	 *			information of the workflow instance (they can be empty or
-	 *			even <code>null</code>)
+	 * information of the workflow instance (they can be empty or even
+	 * <code>null</code>)
 	 * @return the task information reflecting the changes made to it
 	 * @throws WorkflowException is thrown, if the user could not be assigned
 	 */
-	public TaskInstanceInfo assignTaskInstanceToRole(long taskInstanceId,
-			long roleId, String comment, Map<String, Object> attributes)
+	public TaskInstanceInfo assignTaskInstanceToRole(
+			long taskInstanceId, long roleId, String comment,
+			Map<String, Object> attributes)
 		throws WorkflowException;
 
 	/**
@@ -81,17 +85,18 @@ public interface TaskInstanceManager {
 	 * @param userId the user id to assign the task to
 	 * @param comment the optional comment for the user being the new assignee
 	 * @param attributes the optional attributes to be passed on to the context
-	 *			information of the workflow instance (they can be empty or
-	 *			even <code>null</code>)
+	 * information of the workflow instance (they can be empty or even
+	 * <code>null</code>)
 	 * @return the task information reflecting the changes made to it
 	 * @throws WorkflowException is thrown, if the user could not be assigned
 	 */
 	public TaskInstanceInfo assignTaskInstanceToUser(
-			long taskInstanceId,
-			long userId, String comment, Map<String, Object> attributes)
+			long taskInstanceId, long userId, String comment,
+			Map<String, Object> attributes)
 		throws WorkflowException;
 
 	/**
+	 * <p>
 	 * Completes the task instance with the specified id by the given user id
 	 * (which should usually be the same as the current assignee, but it's not a
 	 * must). Optionally there might be a comment to be left for the completion
@@ -99,28 +104,38 @@ public interface TaskInstanceManager {
 	 * instance this task belongs to. If any attributes are provided, they will
 	 * be made part of the context information of the workflow instance this
 	 * task belongs to and hence available by the workflow actions later through
-	 * the context information map.<br/>
+	 * the context information map.
+	 * </p>
+	 *
+	 * <p>
 	 * If the workflow engine supports EL expressions and a special process
 	 * scope and Spring is used as the IoC container, the attributes are not
 	 * necessary but instead, the information to be provided by task completion
 	 * could directly be made to beans having process scope as they would be
 	 * stored within the context information of the process instance anyway. As
-	 * an alternative, the attribute map might be used for the same effect.<br/>
+	 * an alternative, the attribute map might be used for the same effect.
+	 * </p>
+	 *
+	 * <p>
 	 * Make sure that all attribute objects are serializable as they will be
-	 * persisted along with the process instance.<br/>
+	 * persisted along with the process instance.
+	 * </p>
+	 *
+	 * <p>
 	 * After the task has been completed, the workflow engine will continue with
 	 * the next default activity, if it was not an asynchronous task.
+	 * </p>
 	 *
 	 * @param taskInstanceId the id of the task instance to be completed
 	 * @param userId the id of the user completing the task
 	 * @param comment an optional comment made by completing the task (just as a
-	 *			comment, not a structured information)
+	 * comment, not a structured information)
 	 * @param attributes the optional attributes to be passed on to the context
-	 *			information of the workflow instance (they can be empty or
-	 *			even <code>null</code>)
+	 * information of the workflow instance (they can be empty or even
+	 * <code>null</code>)
 	 * @return the task information reflecting the changes
 	 * @throws WorkflowException is thrown, if completing the task failed or the
-	 *			 workflow could not be continued
+	 * workflow could not be continued
 	 */
 	public TaskInstanceInfo completeTaskInstance(
 			long taskInstanceId, long userId, String comment,
@@ -144,7 +159,7 @@ public interface TaskInstanceManager {
 	 *
 	 * @param roleId the id of the role to return tasks for
 	 * @param completed <code>true</code>, if only completed tasks should be
-	 *			returned, <code>false</code> for all open tasks
+	 * returned, <code>false</code> for all open tasks
 	 * @return all open or completed tasks assigned to the given role
 	 * @throws WorkflowException is thrown if querying failed
 	 */
@@ -169,7 +184,7 @@ public interface TaskInstanceManager {
 	 *
 	 * @param userId the id of the user to return tasks for
 	 * @param completed <code>true</code>, if only completed tasks should be
-	 *			returned, <code>false</code> for all open tasks
+	 * returned, <code>false</code> for all open tasks
 	 * @return all open or completed tasks assigned to the given user
 	 * @throws WorkflowException is thrown if querying failed
 	 */
@@ -183,7 +198,7 @@ public interface TaskInstanceManager {
 	 * {@link #getTaskInstanceInfosByWorkflowInstance(long, boolean)} instead.
 	 *
 	 * @param workflowInstanceId the id of the workflow instance to return tasks
-	 *			for
+	 * for
 	 * @return all tasks related to the specified workflow instance
 	 * @throws WorkflowException is thrown if querying failed
 	 */
@@ -195,11 +210,11 @@ public interface TaskInstanceManager {
 	 * Queries for open or completed tasks for the specified workflow instance.
 	 *
 	 * @param workflowInstanceId the id of the workflow instance to return tasks
-	 *			for
+	 * for
 	 * @param completed <code>true</code>, if only completed tasks should be
-	 *			returned, <code>false</code> for all open tasks
+	 * returned, <code>false</code> for all open tasks
 	 * @return all completed or open tasks related to the specified workflow
-	 *		 instance
+	 * instance
 	 * @throws WorkflowException is thrown if querying failed
 	 */
 	public List<TaskInstanceInfo> getTaskInstanceInfosByWorkflowInstance(

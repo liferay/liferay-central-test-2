@@ -33,11 +33,17 @@ import java.util.Map;
  * This interface represents the information for a single workflow instance
  * created and loaded through the {@link WorkflowInstanceManager} where you can
  * find further descriptions about how to start and work with workflow
- * instances.<br/>
+ * instances.
+ * </p>
+ *
+ * <p>
  * A workflow instance is always created in connection with a workflow
  * definition and optionally related to a domain object instance. The workflow
  * instance is the element used to track the current state of a workflow and its
- * history and any other related entities like tasks, timers and jobs.<br/>
+ * history and any other related entities like tasks, timers and jobs.
+ * </p>
+ *
+ * <p>
  * Usually this interface is not implemented by the native process instance
  * depending on the underlying workflow engine but is rather returned as a proxy
  * information object just holding the necessary information to represent the
@@ -48,6 +54,7 @@ import java.util.Map;
  *
  */
 public interface WorkflowInstanceInfo {
+
 	/**
 	 * If this is a parent workflow instance, its children are being returned
 	 * using this method. A child workflow instance is usually being created
@@ -56,43 +63,58 @@ public interface WorkflowInstanceInfo {
 	 * activities and information related to it.
 	 *
 	 * @return the list of children, if any, an empty list otherwise (never
-	 *		 <code>null</code>)
+	 * <code>null</code>)
 	 */
 	public List<WorkflowInstanceInfo> getChildren();
 
 	/**
+	 * <p>
 	 * Returns the map with context information as being provided while creating
 	 * this workflow instance. Depending on the underlying engine, this map is
 	 * usually being persisted along with the workflow instance for later
-	 * retrieval and referencing within the workflow definition.<br/>
+	 * retrieval and referencing within the workflow definition.
+	 * </p>
+	 *
+	 * <p>
 	 * If the engine also supports EL functionality within the workflow
 	 * definition, this map could even be extended during the execution of the
 	 * workflow as new, process scoped beans could be created and stored within
-	 * this context map.<br/>
+	 * this context map.
+	 * </p>
+	 *
+	 * <p>
 	 * The context map is a good place to store information needed during the
 	 * execution plan of the workflow, usually used to trigger actions or to
 	 * relate to for conditions of decisions and so on. If the context
 	 * information is persisted (which is usually the case), make sure that all
-	 * objects stored within the map are serializable.<br/>
-	 * <br/>
+	 * objects stored within the map are serializable.
+	 * </p>
+	 *
+	 * <p>
 	 * <b>NEVER</b> use the map returned by this information object to
 	 * additionally store information in it as it is read only and would not
 	 * affect the native map used by the engine. To add any additional
 	 * information to the context, use
 	 * {@link WorkflowInstanceManager#addContextInformation(long, Map)} instead.
+	 * </p>
 	 *
 	 * @return the map with context information for this workflow instance
 	 */
 	public Map<String, Object> getContext();
 
 	/**
+	 * <p>
 	 * Returns the name of the current node this process instance is waiting in
 	 * which is most likely a state, a task or a fork preventing the engine from
-	 * proceeding with the workflow graph execution.<br/>
+	 * proceeding with the workflow graph execution.
+	 * </p>
+	 *
+	 * <p>
 	 * If the name returned is a fork, every branch of the fork is represented
 	 * as own process instances related to this one as children. If the current
 	 * node is a task, there must be a workflow task to be completed (fulfilled)
 	 * in order to advance the workflow.
+	 * </p>
 	 *
 	 * @return the name of the current node this process instance is waiting in
 	 */
@@ -112,40 +134,50 @@ public interface WorkflowInstanceInfo {
 	 * about parent - child relationship.
 	 *
 	 * @return the parent instance of this child instance or <code>null</code>
-	 *		 if this is the root instance
+	 * if this is the root instance
 	 */
 	public WorkflowInstanceInfo getParent();
 
 	/**
+	 * <p>
 	 * If this workflow instance was created in relation of a domain object
-	 * instance, its identifier is returned by this method.<br/>
+	 * instance, its identifier is returned by this method.
+	 * </p>
+	 *
+	 * <p>
 	 * <b><i>Note</i></b> The support of a related domain object however is
 	 * optional and might not be supported by the underlying engine.
+	 * </p>
 	 *
 	 * @return the domain object identifier, if related to one,
-	 *		 <code>null</code> otherwise
+	 * <code>null</code> otherwise
 	 * @see WorkflowInstanceManager#getWorkflowInstanceInfo(String, long) for
-	 *	  more details about related domain objects
+	 * more details about related domain objects
 	 */
 	public long getRelationId();
 
 	/**
+	 * <p>
 	 * If this workflow instance was created in relation of a domain object
-	 * instance, its type identifier is returned by this method.<br/>
+	 * instance, its type identifier is returned by this method.
+	 * </p>
+	 *
+	 * <p>
 	 * <b><i>Note</i></b> The support of a related domain object however is
 	 * optional and might not be supported by the underlying engine.
+	 * </p>
 	 *
 	 * @return the domain object type identifier, if related to one,
-	 *		 <code>null</code> otherwise
+	 * <code>null</code> otherwise
 	 * @see WorkflowInstanceManager#getWorkflowInstanceInfo(String, long) for
-	 *	  more details about related domain objects
+	 * more details about related domain objects
 	 */
 	public String getRelationType();
 
 	/**
 	 * Returns the date and time of the creation time of this workflow instance.
 	 *
-	 * @return the starting time
+	 * @return the start date
 	 */
 	public Date getStartDate();
 

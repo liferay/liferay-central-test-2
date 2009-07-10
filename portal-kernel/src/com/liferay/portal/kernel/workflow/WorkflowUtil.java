@@ -83,7 +83,7 @@ public class WorkflowUtil {
 
 	/**
 	 * @param taskInstanceManager the task manager to be made available through
-	 *			this utility
+	 * this utility
 	 */
 	public static void setTaskInstanceManager(
 		TaskInstanceManager taskInstanceManager) {
@@ -93,7 +93,7 @@ public class WorkflowUtil {
 
 	/**
 	 * @param workflowDefinitionManager the definition manager to be made
-	 *			available through this utility
+	 * available through this utility
 	 */
 	public static void setWorkflowDefinitionManager(
 		WorkflowDefinitionManager workflowDefinitionManager) {
@@ -103,7 +103,7 @@ public class WorkflowUtil {
 
 	/**
 	 * @param workflowDefinitionMapper the definition mapper to be made
-	 *			available through this utility
+	 * available through this utility
 	 */
 	public static void setWorkflowDefinitionMapper(
 			WorkflowDefinitionMapper workflowDefinitionMapper) {
@@ -113,7 +113,7 @@ public class WorkflowUtil {
 
 	/**
 	 * @param workflowInstanceManager the instance manager to be made available
-	 *			through this utility
+	 * through this utility
 	 */
 	public static void setWorkflowInstanceManager(
 		WorkflowInstanceManager workflowInstanceManager) {

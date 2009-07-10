@@ -31,14 +31,20 @@ import java.util.Map;
  * <p>
  * This interface represents the information of a workflow task which is
  * requested through the {@link TaskInstanceManager} where you will find
- * additional information about tasks and how to handle them.<br/>
+ * additional information about tasks and how to handle them.
+ * </p>
+ *
+ * <p>
  * A task is always related to a workflow instance (represented through a
  * {@link WorkflowInstanceInfo}) and breaks the execution of the workflow
  * execution plan until the task has been completed. Consequently a task is an
  * element within a workflow definition to break the execution and let the user
  * do some work like making a decision or providing additional information to be
  * used by the continuation of the workflow execution after the task has been
- * completed.<br/>
+ * completed.
+ * </p>
+ *
+ * <p>
  * A task can have several meta information usually being presented to the user
  * in order to be completed. The type of meta information is somewhat dependent
  * on the underlying workflow definition language and designer.
@@ -48,11 +54,12 @@ import java.util.Map;
  *
  */
 public interface TaskInstanceInfo {
+
 	/**
 	 * If this task has been assigned to a role, it is returned by this method.
 	 *
 	 * @return the role id this task has been assigned to or <code>null</code>,
-	 *		 if not assigned yet
+	 * if not assigned yet
 	 */
 	public Long getAssignedRoleId();
 
@@ -61,7 +68,7 @@ public interface TaskInstanceInfo {
 	 * being returned by this method, otherwise <code>null</code> is returned.
 	 *
 	 * @return the id of the user being assigned to this task or
-	 *		 <code>null</code> if not assigned yet
+	 * <code>null</code> if not assigned yet
 	 */
 	public Long getAssignedUserId();
 
@@ -72,7 +79,7 @@ public interface TaskInstanceInfo {
 	 * {@link WorkflowInstanceInfo#getContext()}.
 	 *
 	 * @return the optional map of attributes related to this task, might be
-	 *		 empty or even <code>null</code>
+	 * empty or even <code>null</code>
 	 */
 	public Map<String, Object> getAttributes();
 
@@ -81,7 +88,7 @@ public interface TaskInstanceInfo {
 	 * returns <code>true</code>), this method returns the date of completion.
 	 *
 	 * @return the date and time when this task has been completed or
-	 *		 <code>null</code> if not yet completed
+	 * <code>null</code> if not yet completed
 	 */
 	public Date getCompletionDate();
 

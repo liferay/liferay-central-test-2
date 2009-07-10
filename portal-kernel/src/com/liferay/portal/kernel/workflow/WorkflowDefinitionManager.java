@@ -31,9 +31,11 @@ import java.util.List;
  * The workflow definition manager is used to deploy workflow definitions. A
  * workflow definition is the process model of a workflow to be executed by
  * creating a workflow instance attached to it, reflecting the current state and
- * history as well as any related objects like tasks, jobs and timers.<br/>
+ * history as well as any related objects like tasks, jobs and timers.
+ * </p>
+ *
+ * <p>
  * Depending on the underlying workflow engine, even hot deployment is possible.
- * It can be requested through
  * </p>
  *
  * @author Micha Kiener
@@ -42,14 +44,19 @@ import java.util.List;
 public interface WorkflowDefinitionManager {
 
 	/**
-	 * Deploys the given workflow definition within the engine.<br/>
+	 * <p>
+	 * Deploys the given workflow definition within the engine.
+	 * </p>
+	 *
+	 * <p>
 	 * If the workflow definition already exists and versioning is not supported
 	 * or it is the same version as already existing, the definition is
 	 * exchanged with the given one, otherwise the definition is added as a
 	 * complete new definition or as a new version of an already existing
-	 * definition.<br/>
-	 * <br/>
-	 * <b><i>NOTES</i></b><br/>
+	 * definition.
+	 * </p>
+	 *
+	 * <p>
 	 * If you deploy a workflow definition by overwriting an existing one, make
 	 * sure it is compatible with already existing workflow instances to not
 	 * compromise their execution plan or current state, tasks or timers. It is
@@ -57,12 +64,13 @@ public interface WorkflowDefinitionManager {
 	 * versions, so that existing workflow instances are being finished with the
 	 * old definition, and newly created workflow instances are created by using
 	 * the new version.
+	 * </p>
 	 *
 	 * @param workflowDefinition the workflow definition to be deployed
 	 * @return <code>true</code>, if deployment was successful,
-	 *		 <code>false</code> otherwise
+	 * <code>false</code> otherwise
 	 * @throws WorkflowException is thrown, if deployment of the definition
-	 *			 failed
+	 * failed
 	 */
 	public boolean deployWorkflowDefinition(
 			WorkflowDefinition workflowDefinition)
@@ -79,7 +87,7 @@ public interface WorkflowDefinitionManager {
 	 * specific workflow definition are being returned.
 	 *
 	 * @return the list of available workflow definitions, never
-	 *		 <code>null</code>
+	 * <code>null</code>
 	 */
 	public List<WorkflowDefinition> getWorkflowDefinitions();
 
@@ -90,13 +98,12 @@ public interface WorkflowDefinitionManager {
 	 * by the underlying workflow engine.
 	 *
 	 * @param workflowDefinitionName the name of the workflow definition to
-	 *			retrieve all versions for
+	 * retrieve all versions for
 	 * @return the list of all versions, if any found, an empty list otherwise
-	 *		 or a list containing just one element, must never be
-	 *		 <code>null</code>
+	 * or a list containing just one element, must never be <code>null</code>
 	 */
 	public List<WorkflowDefinition> getWorkflowDefinitions(
-			String workflowDefinitionName);
+		String workflowDefinitionName);
 
 	/**
 	 * Returns <code>true</code>, if the underlying workflow system supports

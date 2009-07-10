@@ -29,7 +29,10 @@ import com.liferay.portal.kernel.resource.ResourceRetriever;
  *
  * <p>
  * The workflow definition information holds attributes of a workflow definition
- * acting as the model for a workflow.<br/>
+ * acting as the model for a workflow.
+ * </p>
+ *
+ * <p>
  * If the engine supports versioning, the workflow definition is identified by
  * its definition id and version, otherwise its id is the only unique
  * identification.
@@ -39,17 +42,23 @@ import com.liferay.portal.kernel.resource.ResourceRetriever;
  *
  */
 public interface WorkflowDefinition {
+
 	/**
+	 * <p>
 	 * A workflow definition is being deployed as an archive, having the
 	 * definition file (usually an XML file) within a folder called META-INF and
 	 * any optional classes the workflow engine would need in order to execute
 	 * any actions and activities. The jar being returned as the resource will
-	 * be deployed within the lib folder of the workflow plugin.<br/>
+	 * be deployed within the lib folder of the workflow plugin.
+	 * </p>
+	 *
+	 * <p>
 	 * This method returns <code>null</code>, if this definition has been
 	 * queried through the {@link WorkflowDefinitionManager}.
+	 * </p>
 	 *
 	 * @return the resource representing the workflow definition jar to be
-	 *		 deployed
+	 * deployed
 	 */
 	public ResourceRetriever getJar();
 
