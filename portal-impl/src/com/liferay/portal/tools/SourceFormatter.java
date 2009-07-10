@@ -843,8 +843,8 @@ public class SourceFormatter {
 		ds.setBasedir(basedir);
 		ds.setExcludes(
 			new String[] {
-				"**\\tools\\ext_tmpl\\**", "**\\*_IW.java",
-				"**\\test\\**\\*PersistenceTest.java"
+				 "**\\portal-client\\**", "**\\tools\\ext_tmpl\\**",
+				"**\\*_IW.java", "**\\test\\**\\*PersistenceTest.java"
 			});
 		ds.setIncludes(
 			new String[] {
