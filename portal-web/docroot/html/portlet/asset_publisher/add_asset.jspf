@@ -144,7 +144,7 @@ public PortletURL getAddURL(RenderRequest req, String[] assetTagNames, String as
 			addURL.setParameter("referringPortletResource", referringPortletResource);
 		}
 		else {
-			addURL.setParameter("tagsEntries", StringUtil.merge(assetTagNames));
+			addURL.setParameter("assetTagNames", StringUtil.merge(assetTagNames));
 		}
 	}
 
