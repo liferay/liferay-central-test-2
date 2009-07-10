@@ -240,13 +240,39 @@ public class AssetEntryServiceImpl extends AssetEntryServiceBaseImpl {
 		}
 	}
 
+	private long[] filterCategoryIds(long[] categoryIds)
+		throws PortalException, SystemException {
+
+		List<Long> viewableCategoryIds = new ArrayList<Long>();
+
+		for (long categoryId : categoryIds) {
+			if (AssetCategoryPermission.contains(
+				getPermissionChecker(), categoryId, ActionKeys.VIEW)) {
+
+				viewableCategoryIds.add(categoryId);
+			}
+		}
+
+		return ArrayUtil.toArray(
+			viewableCategoryIds.toArray(new Long[viewableCategoryIds.size()]));
+	}
+
 	protected void filterQuery(AssetEntryQuery entryQuery)
 		throws PortalException, SystemException {
 
-		List<Long> viewableTagIds = new ArrayList<Long>();
+		entryQuery.setAllCategoryIds(filterCategoryIds(
+			entryQuery.getAllCategoryIds()));
+		entryQuery.setAnyCategoryIds(filterCategoryIds(
+			entryQuery.getAnyCategoryIds()));
 
-		long[] tagIds = entryQuery.getTagIds();
-		long[] notTagIds = entryQuery.getNotTagIds();
+		entryQuery.setAllTagIds(filterTags(entryQuery.getAllTagIds()));
+		entryQuery.setAnyTagIds(filterTags(entryQuery.getAnyTagIds()));
+	}
+
+	protected long[] filterTags(long[] tagIds)
+		throws PortalException, SystemException {
+
+		List<Long> viewableTagIds = new ArrayList<Long>();
 
 		for (long tagId : tagIds) {
 			if (AssetTagPermission.contains(
@@ -254,40 +280,10 @@ public class AssetEntryServiceImpl extends AssetEntryServiceBaseImpl {
 
 				viewableTagIds.add(tagId);
 			}
-			else {
-				notTagIds = ArrayUtil.append(notTagIds, tagId);
-			}
 		}
 
-		tagIds = ArrayUtil.toArray(
+		return ArrayUtil.toArray(
 			viewableTagIds.toArray(new Long[viewableTagIds.size()]));
-
-		entryQuery.setTagIds(tagIds, entryQuery.isTagIdsAndOperator());
-		entryQuery.setNotTagIds(notTagIds, entryQuery.isNotTagIdsAndOperator());
-
-		List<Long> viewableCategoryIds = new ArrayList<Long>();
-
-		long[] categoryIds = entryQuery.getCategoryIds();
-		long[] notCategoryIds = entryQuery.getNotCategoryIds();
-
-		for (long categoryId : categoryIds) {
-			if (AssetCategoryPermission.contains(
-					getPermissionChecker(), categoryId, ActionKeys.VIEW)) {
-
-				viewableCategoryIds.add(categoryId);
-			}
-			else {
-				notCategoryIds = ArrayUtil.append(notCategoryIds, categoryId);
-			}
-		}
-
-		categoryIds = ArrayUtil.toArray(
-			viewableCategoryIds.toArray(new Long[viewableCategoryIds.size()]));
-
-		entryQuery.setCategoryIds(
-			categoryIds, entryQuery.isCategoryIdsAndOperator());
-		entryQuery.setNotCategoryIds(
-			notCategoryIds, entryQuery.isNotCategoryIdsAndOperator());
 	}
 
 }

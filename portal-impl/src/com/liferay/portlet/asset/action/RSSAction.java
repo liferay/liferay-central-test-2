@@ -122,10 +122,10 @@ public class RSSAction extends Action {
 			entryQuery.setEnd(max);
 			entryQuery.setExcludeZeroViewCount(false);
 			entryQuery.setExpirationDate(null);
-			entryQuery.setNotTagIds(notTagIds, false);
+			entryQuery.setNotAnyTagIds(notTagIds);
 			entryQuery.setPublishDate(null);
 			entryQuery.setStart(0);
-			entryQuery.setTagIds(tagIds, false);
+			entryQuery.setAnyTagIds(tagIds);
 
 			rss = AssetEntryServiceUtil.getEntriesRSS(
 				entryQuery, type, version, displayStyle, feedURL, entryURL);

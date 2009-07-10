@@ -100,19 +100,23 @@ public class AssetEntryQuery {
 		long categoryId = ParamUtil.getLong(portletRequest, "categoryId");
 
 		if (categoryId > 0) {
-			_categoryIds = new long[] {categoryId};
+			_allCategoryIds = new long[] {categoryId};
 		}
 
 		String tagName = ParamUtil.getString(portletRequest, "tag");
 
 		if (Validator.isNotNull(tagName)) {
-			_tagIds = AssetTagLocalServiceUtil.getTagIds(
+			_allTagIds = AssetTagLocalServiceUtil.getTagIds(
 				_groupId, new String[] {tagName});
 		}
 	}
 
-	public long[] getCategoryIds() {
-		return _categoryIds;
+	public long[] getAllCategoryIds() {
+		return _allCategoryIds;
+	}
+
+	public long[] getAnyCategoryIds() {
+		return _anyCategoryIds;
 	}
 
 	public long[] getClassNameIds() {
@@ -131,12 +135,12 @@ public class AssetEntryQuery {
 		return _groupId;
 	}
 
-	public long[] getNotCategoryIds() {
-		return _notCategoryIds;
+	public long[] getNotAllCategoryIds() {
+		return _notAllCategoryIds;
 	}
 
-	public long[] getNotTagIds() {
-		return _notTagIds;
+	public long[] getNotAllTagIds() {
+		return _notAllTagIds;
 	}
 
 	public String getOrderByCol1() {
@@ -163,12 +167,20 @@ public class AssetEntryQuery {
 		return _start;
 	}
 
-	public long[] getTagIds() {
-		return _tagIds;
+	public long[] getAllTagIds() {
+		return _allTagIds;
 	}
 
-	public boolean isCategoryIdsAndOperator() {
-		return _categoryIdsAndOperator;
+	public long[] getAnyTagIds() {
+		return _anyTagIds;
+	}
+
+	public long[] getNotAnyCategoryIds() {
+		return _notAnyCategoryIds;
+	}
+
+	public long[] getNotAnyTagIds() {
+		return _notAnyTagIds;
 	}
 
 	public void setEnd(int end) {
@@ -179,25 +191,16 @@ public class AssetEntryQuery {
 		return _excludeZeroViewCount;
 	}
 
-	public boolean isNotCategoryIdsAndOperator() {
-		return _notCategoryIdsAndOperator;
-	}
-
-	public boolean isNotTagIdsAndOperator() {
-		return _notTagIdsAndOperator;
-	}
-
-	public boolean isTagIdsAndOperator() {
-		return _tagIdsAndOperator;
-	}
-
 	public Boolean isVisible() {
 		return _visible;
 	}
 
-	public void setCategoryIds(long[] categoryIds, boolean andOperator) {
-		_categoryIds = categoryIds;
-		_categoryIdsAndOperator = andOperator;
+	public void setAllCategoryIds(long[] allCategoryIds) {
+		_allCategoryIds = allCategoryIds;
+	}
+
+	public void setAnyCategoryIds(long[] anyCategoryIds) {
+		_anyCategoryIds = anyCategoryIds;
 	}
 
 	public void setClassName(String className) {
@@ -222,14 +225,20 @@ public class AssetEntryQuery {
 		_groupId = groupId;
 	}
 
-	public void setNotCategoryIds(long[] notCategoryIds, boolean andOperator) {
-		_notCategoryIds = notCategoryIds;
-		_notCategoryIdsAndOperator = andOperator;
+	public void setNotAllCategoryIds(long[] notAllCategoryIds) {
+		_notAllCategoryIds = notAllCategoryIds;
 	}
 
-	public void setNotTagIds(long[] notTagIds, boolean andOperator) {
-		_notTagIds = notTagIds;
-		_notTagIdsAndOperator = andOperator;
+	public void setNotAnyCategoryIds(long[] notAnyCategoryIds) {
+		_notAnyCategoryIds = notAnyCategoryIds;
+	}
+
+	public void setNotAllTagIds(long[] notAllTagIds) {
+		_notAllTagIds = notAllTagIds;
+	}
+
+	public void setNotAnyTagIds(long[] notAnyTagIds) {
+		_notAnyTagIds = notAnyTagIds;
 	}
 
 	public void setOrderByCol1(String orderByCol1) {
@@ -256,34 +265,37 @@ public class AssetEntryQuery {
 		_start = start;
 	}
 
-	public void setTagIds(long[] tagIds, boolean andOperator) {
-		_tagIds = tagIds;
-		_tagIdsAndOperator = andOperator;
+	public void setAllTagIds(long[] allTagIds) {
+		_allTagIds = allTagIds;
+	}
+
+	public void setAnyTagIds(long[] anyTagIds) {
+		_anyTagIds = anyTagIds;
 	}
 
 	public void setVisible(Boolean visible) {
 		_visible = visible;
 	}
 
-	private long[] _categoryIds = new long[0];
-	private boolean _categoryIdsAndOperator;
+	private long[] _allCategoryIds = new long[0];
+	private long[] _anyCategoryIds = new long[0];
 	private long[] _classNameIds = new long[0];
 	private int _end = QueryUtil.ALL_POS;
 	private boolean _excludeZeroViewCount;
 	private Date _expirationDate;
 	private long _groupId = 0;
-	private long[] _notCategoryIds = new long[0];
-	private boolean _notCategoryIdsAndOperator;
-	private long[] _notTagIds = new long[0];
-	private boolean _notTagIdsAndOperator;
+	private long[] _notAllCategoryIds = new long[0];
+	private long[] _notAnyCategoryIds = new long[0];
+	private long[] _notAllTagIds = new long[0];
+	private long[] _notAnyTagIds = new long[0];
 	private String _orderByCol1;
 	private String _orderByCol2;
 	private String _orderByType1;
 	private String _orderByType2;
 	private Date _publishDate;
 	private int _start = QueryUtil.ALL_POS;
-	private long[] _tagIds = new long[0];
-	private boolean _tagIdsAndOperator;
+	private long[] _allTagIds = new long[0];
+	private long[] _anyTagIds = new long[0];
 	private Boolean _visible = Boolean.TRUE;
 
 }

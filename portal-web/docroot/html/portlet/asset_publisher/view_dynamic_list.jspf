@@ -39,14 +39,14 @@ assetEntryQuery.setOrderByType1(orderByType1);
 assetEntryQuery.setOrderByType2(orderByType2);
 assetEntryQuery.setStart(searchContainer.getStart());
 
-assetEntryQuery.setCategoryIds(allAssetCategoryIds, true);
-assetEntryQuery.setCategoryIds(anyAssetCategoryIds, false);
-assetEntryQuery.setNotCategoryIds(notAllAssetCategoryIds, true);
-assetEntryQuery.setNotCategoryIds(notAnyAssetCategoryIds, false);
-assetEntryQuery.setTagIds(allAssetTagIds, true);
-assetEntryQuery.setTagIds(anyAssetTagIds, false);
-assetEntryQuery.setNotTagIds(notAllAssetTagIds, true);
-assetEntryQuery.setNotTagIds(notAnyAssetTagIds, false);
+assetEntryQuery.setAllCategoryIds(allAssetCategoryIds);
+assetEntryQuery.setAnyCategoryIds(anyAssetCategoryIds);
+assetEntryQuery.setNotAllCategoryIds(notAllAssetCategoryIds);
+assetEntryQuery.setNotAnyCategoryIds(notAnyAssetCategoryIds);
+assetEntryQuery.setAllTagIds(allAssetTagIds);
+assetEntryQuery.setAnyTagIds(anyAssetTagIds);
+assetEntryQuery.setNotAllTagIds(notAllAssetTagIds);
+assetEntryQuery.setNotAnyTagIds(notAnyAssetTagIds);
 
 int total = 0;
 
@@ -58,7 +58,7 @@ if (assetVocabularyId > 0) {
 	for (AssetCategory assetCategory : assetCategories) {
 		long[] newAllAssetCategoryIds = ArrayUtil.append(allAssetCategoryIds, assetCategory.getCategoryId());
 
-		assetEntryQuery.setCategoryIds(newAllAssetCategoryIds, true);
+		assetEntryQuery.setAllCategoryIds(newAllAssetCategoryIds);
 
 		int groupTotal = AssetEntryLocalServiceUtil.getEntriesCount(assetEntryQuery);
 
