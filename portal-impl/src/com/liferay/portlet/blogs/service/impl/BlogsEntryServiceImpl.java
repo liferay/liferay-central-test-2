@@ -300,18 +300,21 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 			String author = PortalUtil.getUserName(
 				entry.getUserId(), entry.getUserName());
 
-			String link = entryURL;
-
-			if (link.endsWith("/blogs/rss")) {
-				link =
-					link.substring(0, link.length() - 3) + entry.getUrlTitle();
+			StringBuilder link = new StringBuilder();
+			
+			link.append(entryURL);
+	
+			if (entryURL.endsWith("/blogs/rss")) {
+				link.delete(link.length() - 3, link.length());
+				link.append(entry.getUrlTitle());
 			}
 			else {
-				if (!link.endsWith("?")) {
-					link += "&";
+				if (!entryURL.endsWith(StringPool.QUESTION)) {
+					link.append(StringPool.AMPERSAND);
 				}
 
-				link += "entryId=" + entry.getEntryId();
+				link.append("entryId="); 
+				link.append(entry.getEntryId());
 			}
 
 			String value = null;
@@ -342,7 +345,7 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 
 			syndEntry.setAuthor(author);
 			syndEntry.setTitle(entry.getTitle());
-			syndEntry.setLink(link);
+			syndEntry.setLink(link.toString());
 			syndEntry.setUri(syndEntry.getLink());
 			syndEntry.setPublishedDate(entry.getCreateDate());
 			syndEntry.setUpdatedDate(entry.getModifiedDate());

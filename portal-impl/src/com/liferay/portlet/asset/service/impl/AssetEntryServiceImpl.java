@@ -205,7 +205,11 @@ public class AssetEntryServiceImpl extends AssetEntryServiceBaseImpl {
 			String author = PortalUtil.getUserName(
 				entry.getUserId(), entry.getUserName());
 
-			String link = tagURL + "entryId=" + entry.getEntryId();
+			StringBuilder link = new StringBuilder();
+			
+			link.append(tagURL);
+			link.append("entryId="); 
+			link.append(entry.getEntryId());
 
 			String value = entry.getSummary();
 
@@ -213,7 +217,7 @@ public class AssetEntryServiceImpl extends AssetEntryServiceBaseImpl {
 
 			syndEntry.setAuthor(author);
 			syndEntry.setTitle(entry.getTitle());
-			syndEntry.setLink(link);
+			syndEntry.setLink(link.toString());
 			syndEntry.setUri(syndEntry.getLink());
 			syndEntry.setPublishedDate(entry.getCreateDate());
 			syndEntry.setUpdatedDate(entry.getModifiedDate());
