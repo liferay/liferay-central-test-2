@@ -86,7 +86,7 @@ Liferay.AutoFields = Alloy.Observable.extend(
 					}
 
 					formRow.append(controls);
-					fullContainer.append(formRow);
+					fullContainer[0].appendChild(formRow[0]);
 
 					if (i == 0) {
 						instance._rowTemplate = formRow.clone();

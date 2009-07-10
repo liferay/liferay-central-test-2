@@ -32,7 +32,6 @@ Liferay.AssetTagsSelector = new Alloy.Class(
 			instance._summarySpan = jQuery('#' + options.summarySpan + instance._seed);
 
 			instance._summarySpan.html('');
-			instance._summarySpan.unbind('click');
 
 			var hiddenInput = jQuery('#' + options.hiddenInput + instance._seed);
 
@@ -49,7 +48,7 @@ Liferay.AssetTagsSelector = new Alloy.Class(
 						}
 					},
 					delimChar: ',',
-					input: options.textInput + instance._seed
+					input: textInput[0]
 				}
 			);
 
@@ -102,6 +101,12 @@ Liferay.AssetTagsSelector = new Alloy.Class(
 					}
 			);
 
+			textInput.keyup(
+				function() {
+					addTagButton.attr('disabled', !this.value.length);
+				}
+			);
+
 			textInput.keypress(
 				function(event) {
 					if (event.keyCode == 13) {
@@ -112,17 +117,6 @@ Liferay.AssetTagsSelector = new Alloy.Class(
 						autoComplete._LFR_listShowing = null;
 
 						return false;
-					}
-				}
-			);
-
-			textInput.keyup(
-				function() {
-					if (this.value != "") {
-						addTagButton.attr("disabled", false);
-					}
-					else {
-						addTagButton.attr("disabled", true);
 					}
 				}
 			);
@@ -149,6 +143,8 @@ Liferay.AssetTagsSelector = new Alloy.Class(
 					}
 				}
 			);
+
+			instance._summarySpan.unbind('click');
 
 			instance._summarySpan.click(
 				function(event) {
@@ -316,8 +312,8 @@ Liferay.AssetTagsSelector = new Alloy.Class(
 			return Liferay.Service.Asset.AssetTag.search(
 				{
 					groupId: themeDisplay.getScopeGroupId(),
-					name: "%" + term + "%",
-					properties: "",
+					name: '%' + term + '%',
+					properties: '',
 					begin: beginning,
 					end: end
 				}
@@ -379,6 +375,7 @@ Liferay.AssetTagsSelector = new Alloy.Class(
 							var tagName = tag.name;
 							var tagId = tag.tagId;
 							var checked = (instance._curTags.indexOf(tagName) > -1) ? ' checked="checked" ' : '';
+
 							buffer.push('<label title="');
 							buffer.push(tagName);
 							buffer.push('">');
@@ -430,13 +427,13 @@ Liferay.AssetTagsSelector = new Alloy.Class(
 				context = options.contentCallback();
 			}
 
-			var url =  "http://search.yahooapis.com/ContentAnalysisService/V1/termExtraction?appid=YahooDemo&output=json&context=" + escape(context);
+			var url = 'http://search.yahooapis.com/ContentAnalysisService/V1/termExtraction?appid=YahooDemo&output=json&context=' + escape(context);
 
 			var buffer = [];
 
 			jQuery.ajax(
 				{
-					url: themeDisplay.getPathMain() + "/portal/rest_proxy",
+					url: themeDisplay.getPathMain() + '/portal/rest_proxy',
 					data: {
 						url: url
 					},

@@ -26,7 +26,6 @@ Liferay.AssetCategoriesSelector = new Alloy.Class(
 			instance._summarySpan = jQuery('#' + options.summarySpan + instance._seed);
 
 			instance._summarySpan.html('');
-			instance._summarySpan.unbind('click');
 
 			var hiddenInput = jQuery('#' + options.hiddenInput + instance._seed);
 
@@ -46,6 +45,8 @@ Liferay.AssetCategoriesSelector = new Alloy.Class(
 				instance._curCategoryIds = [];
 				instance._curCategoryNames = [];
 			}
+
+			instance._summarySpan.unbind('click');
 
 			instance._summarySpan.click(
 				function(event) {
