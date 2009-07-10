@@ -98,6 +98,17 @@ Liferay.AssetTagsSelector = new Alloy.Class(
 					}
 			);
 
+			textInput.keyup(
+				function() {
+					if (this.value != "") {
+						addTagButton.attr("disabled", false);
+					}
+					else {
+						addTagButton.attr("disabled", true);
+					}
+				}
+			);
+
 			textInput.keypress(
 				function(event) {
 					if (event.keyCode == 13) {

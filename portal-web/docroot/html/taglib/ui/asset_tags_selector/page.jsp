@@ -53,7 +53,7 @@ if (curTagsParam != null) {
 
 <input id="<%= namespace %><%= hiddenInput %>" type="hidden" />
 
-<span class="ui-tags empty" id="<%= randomNamespace %>tagsSummary"></span>
+<span class="ui-tags empty" id="<%= randomNamespace %>assetTagsSummary"></span>
 	<input class="ui-tags-input" id="<%= randomNamespace %>assetTagNames" size="15" type="text" />
 
 	<input disabled id="<%= randomNamespace %>addTag" type="button" value="<liferay-ui:message key="add-tags" />" />
@@ -75,24 +75,11 @@ if (curTagsParam != null) {
 					instanceVar: "<%= randomNamespace %>",
 					hiddenInput: "<%= namespace + hiddenInput %>",
 					textInput: "<%= randomNamespace %>assetTagNames",
-					summarySpan: "<%= randomNamespace %>tagsSummary",
+					summarySpan: "<%= randomNamespace %>assetTagsSummary",
 					curTags: "<%= HtmlUtil.escapeJS(curTags) %>",
 					focus: <%= focus %>,
 					contentCallback: function() {
 						return <%= contentCallback %>();
-					}
-				}
-			);
-
-			jQuery("#<%= randomNamespace %>assetTagNames").keyup(
-				function() {
-					var addTagInput = jQuery("#<%= randomNamespace %>addTag");
-
-					if (this.value != "") {
-						addTagInput.attr("disabled", false);
-					}
-					else {
-						addTagInput.attr("disabled", true);
 					}
 				}
 			);
