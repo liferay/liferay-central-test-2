@@ -30,23 +30,22 @@ long[] notAnyAssetTagIds = AssetTagLocalServiceUtil.getTagIds(scopeGroupId, notA
 
 AssetEntryQuery assetEntryQuery = new AssetEntryQuery();
 
+assetEntryQuery.setAllCategoryIds(allAssetCategoryIds);
+assetEntryQuery.setAllTagIds(allAssetTagIds);
+assetEntryQuery.setAnyCategoryIds(anyAssetCategoryIds);
+assetEntryQuery.setAnyTagIds(anyAssetTagIds);
 assetEntryQuery.setGroupId(scopeGroupId);
 assetEntryQuery.setEnd(searchContainer.getEnd());
 assetEntryQuery.setExcludeZeroViewCount(excludeZeroViewCount);
+assetEntryQuery.setNotAllCategoryIds(notAllAssetCategoryIds);
+assetEntryQuery.setNotAllTagIds(notAllAssetTagIds);
+assetEntryQuery.setNotAnyCategoryIds(notAnyAssetCategoryIds);
+assetEntryQuery.setNotAnyTagIds(notAnyAssetTagIds);
 assetEntryQuery.setOrderByCol1(orderByColumn1);
 assetEntryQuery.setOrderByCol2(orderByColumn2);
 assetEntryQuery.setOrderByType1(orderByType1);
 assetEntryQuery.setOrderByType2(orderByType2);
 assetEntryQuery.setStart(searchContainer.getStart());
-
-assetEntryQuery.setAllCategoryIds(allAssetCategoryIds);
-assetEntryQuery.setAnyCategoryIds(anyAssetCategoryIds);
-assetEntryQuery.setNotAllCategoryIds(notAllAssetCategoryIds);
-assetEntryQuery.setNotAnyCategoryIds(notAnyAssetCategoryIds);
-assetEntryQuery.setAllTagIds(allAssetTagIds);
-assetEntryQuery.setAnyTagIds(anyAssetTagIds);
-assetEntryQuery.setNotAllTagIds(notAllAssetTagIds);
-assetEntryQuery.setNotAnyTagIds(notAnyAssetTagIds);
 
 int total = 0;
 

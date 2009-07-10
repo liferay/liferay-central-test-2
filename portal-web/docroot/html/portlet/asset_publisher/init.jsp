@@ -148,9 +148,9 @@ String[] notAnyAssetTagNames = new String[0];
 
 if (selectionStyle.equals("dynamic")) {
 	for (int i = 0; true; i++) {
-		String[] queryValues = preferences.getValues("queryValues" + i, new String[0]);
+		String[] queryValues = preferences.getValues("queryValues" + i, null);
 
-		if (queryValues.length == 0) {
+		if ((queryValues == null) || (queryValues.length == 0)) {
 			break;
 		}
 
