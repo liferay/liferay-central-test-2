@@ -189,4 +189,5 @@ public interface TaskInstanceInfo {
 	 * @return <code>true</code>, if this task has been completed
 	 */
 	public boolean isCompleted();
+
 }

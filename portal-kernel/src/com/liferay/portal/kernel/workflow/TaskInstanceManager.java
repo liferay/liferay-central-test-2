@@ -31,8 +31,10 @@ import java.util.Map;
  * <p>
  * The task instance manager handles all tasks related to a workflow system. A
  * task might be part of the workflow definition in order to stop the execution
- * plan as any user needs to complete the task before the execution continues.<br/>
- * <br/>
+ * plan as any user needs to complete the task before the execution continues.
+ * </p>
+ *
+ * <p>
  * <i>Here is an example:</i><br/>
  * The next step in a workflow definition is a decision to be made by a user, so
  * this could be modeled by adding a task activity to the workflow definition,
