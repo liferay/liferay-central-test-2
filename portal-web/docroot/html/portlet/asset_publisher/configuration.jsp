@@ -97,8 +97,8 @@ configurationActionURL.setParameter("portletResource", portletResource);
 	}
 
 	.lfr-panel-content {
-		padding: 10px;
 		background-color: #eee;
+		padding: 10px;
 	}
 </style>
 
