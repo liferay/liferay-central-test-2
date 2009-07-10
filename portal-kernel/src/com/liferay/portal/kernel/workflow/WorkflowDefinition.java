@@ -22,6 +22,7 @@
 
 package com.liferay.portal.kernel.workflow;
 
+
 import com.liferay.portal.kernel.resource.ResourceRetriever;
 
 
@@ -45,7 +46,9 @@ public interface WorkflowDefinition {
      * definition file (usually an XML file) within a folder called META-INF and
      * any optional classes the workflow engine would need in order to execute
      * any actions and activities. The jar being returned as the resource will
-     * be deployed within the lib folder of the workflow plugin.
+     * be deployed within the lib folder of the workflow plugin.<br/>
+     * This method returns <code>null</code>, if this definition has been
+     * queried through the {@link WorkflowDefinitionManager}.
      * 
      * @return the resource representing the workflow definition jar to be
      *         deployed

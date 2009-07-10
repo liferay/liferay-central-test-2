@@ -30,7 +30,9 @@ package com.liferay.portal.kernel.workflow;
  * The workflow definition mapper is a manager used to map domain classes to
  * workflow definitions.<br/>
  * It might be used to map a domain or model class to be used in conjunction
- * with a certain workflow definition.
+ * with a certain workflow definition.<br/>
+ * The mapper works independently of the underlying engine, its just a mapping
+ * between domain classes as workflow definitions.
  * </p>
  * 
  * @author Micha Kiener

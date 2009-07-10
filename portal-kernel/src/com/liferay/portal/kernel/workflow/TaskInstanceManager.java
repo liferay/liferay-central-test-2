@@ -62,7 +62,8 @@ public interface TaskInstanceManager {
      * @param roleId the role id to assign the task to
      * @param comment the optional comment for the assignment
      * @param attributes the optional attributes to be passed on to the context
-     *            information of the workflow instance
+     *            information of the workflow instance (they can be empty or
+     *            even <code>null</code>)
      * @return the task information reflecting the changes made to it
      * @throws WorkflowException is thrown, if the user could not be assigned
      */
@@ -79,7 +80,8 @@ public interface TaskInstanceManager {
      * @param userId the user id to assign the task to
      * @param comment the optional comment for the user being the new assignee
      * @param attributes the optional attributes to be passed on to the context
-     *            information of the workflow instance
+     *            information of the workflow instance (they can be empty or
+     *            even <code>null</code>)
      * @return the task information reflecting the changes made to it
      * @throws WorkflowException is thrown, if the user could not be assigned
      */
@@ -113,7 +115,8 @@ public interface TaskInstanceManager {
      * @param comment an optional comment made by completing the task (just as a
      *            comment, not a structured information)
      * @param attributes the optional attributes to be passed on to the context
-     *            information of the workflow instance
+     *            information of the workflow instance (they can be empty or
+     *            even <code>null</code>)
      * @return the task information reflecting the changes
      * @throws WorkflowException is thrown, if completing the task failed or the
      *             workflow could not be continued
