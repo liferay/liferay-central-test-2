@@ -25,9 +25,13 @@ package com.liferay.portlet.documentlibrary.service.permission;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
+import com.liferay.portlet.documentlibrary.model.DLFolder;
+import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
 
 /**
  * <a href="DLFileEntryPermission.java.html"><b><i>View Source</i></b></a>
@@ -51,7 +55,7 @@ public class DLFileEntryPermission {
 	public static void check(
 			PermissionChecker permissionChecker, DLFileEntry fileEntry,
 			String actionId)
-		throws PortalException {
+		throws PortalException, SystemException {
 
 		if (!contains(permissionChecker, fileEntry, actionId)) {
 			throw new PrincipalException();
@@ -70,8 +74,23 @@ public class DLFileEntryPermission {
 	}
 
 	public static boolean contains(
-		PermissionChecker permissionChecker, DLFileEntry fileEntry,
-		String actionId) {
+			PermissionChecker permissionChecker, DLFileEntry fileEntry,
+			String actionId)
+		throws PortalException, SystemException {
+
+		long folderId = fileEntry.getFolderId();
+
+		while (folderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
+			DLFolder folder = DLFolderLocalServiceUtil.getFolder(folderId);
+
+			if (!DLFolderPermission.contains(
+					permissionChecker, folder, ActionKeys.VIEW)) {
+
+				return false;
+			}
+
+			folderId = folder.getParentFolderId();
+		}
 
 		if (permissionChecker.hasOwnerPermission(
 				fileEntry.getCompanyId(), DLFileEntry.class.getName(),

@@ -25,9 +25,12 @@ package com.liferay.portlet.imagegallery.service.permission;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portlet.imagegallery.model.IGFolder;
 import com.liferay.portlet.imagegallery.model.IGImage;
+import com.liferay.portlet.imagegallery.model.impl.IGFolderImpl;
+import com.liferay.portlet.imagegallery.service.IGFolderLocalServiceUtil;
 import com.liferay.portlet.imagegallery.service.IGImageLocalServiceUtil;
 
 /**
@@ -49,7 +52,7 @@ public class IGImagePermission {
 
 	public static void check(
 			PermissionChecker permissionChecker, IGImage image, String actionId)
-		throws PortalException {
+		throws PortalException, SystemException {
 
 		if (!contains(permissionChecker, image, actionId)) {
 			throw new PrincipalException();
@@ -66,7 +69,22 @@ public class IGImagePermission {
 	}
 
 	public static boolean contains(
-		PermissionChecker permissionChecker, IGImage image, String actionId) {
+			PermissionChecker permissionChecker, IGImage image, String actionId)
+		throws PortalException, SystemException {
+
+		long folderId = image.getFolderId();
+
+		while (folderId != IGFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
+			IGFolder folder = IGFolderLocalServiceUtil.getFolder(folderId);
+
+			if (!IGFolderPermission.contains(
+					permissionChecker, folder, ActionKeys.VIEW)) {
+
+				return false;
+			}
+
+			folderId = folder.getParentFolderId();
+		}
 
 		if (permissionChecker.hasOwnerPermission(
 				image.getCompanyId(), IGImage.class.getName(),
