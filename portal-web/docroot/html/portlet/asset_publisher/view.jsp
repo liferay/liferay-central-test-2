@@ -81,8 +81,6 @@ String portletId = portletDisplay.getId();
 <%@ include file="/html/portlet/asset_publisher/add_asset.jspf" %>
 
 <%
-// Display content
-
 PortletURL portletURL = renderResponse.createRenderURL();
 
 SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, delta, portletURL, null, null);
