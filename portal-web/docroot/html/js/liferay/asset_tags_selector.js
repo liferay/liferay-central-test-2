@@ -102,17 +102,6 @@ Liferay.AssetTagsSelector = new Alloy.Class(
 					}
 			);
 
-			textInput.keyup(
-				function() {
-					if (this.value != "") {
-						addTagButton.attr("disabled", false);
-					}
-					else {
-						addTagButton.attr("disabled", true);
-					}
-				}
-			);
-
 			textInput.keypress(
 				function(event) {
 					if (event.keyCode == 13) {
@@ -123,6 +112,17 @@ Liferay.AssetTagsSelector = new Alloy.Class(
 						autoComplete._LFR_listShowing = null;
 
 						return false;
+					}
+				}
+			);
+
+			textInput.keyup(
+				function() {
+					if (this.value != "") {
+						addTagButton.attr("disabled", false);
+					}
+					else {
+						addTagButton.attr("disabled", true);
 					}
 				}
 			);
