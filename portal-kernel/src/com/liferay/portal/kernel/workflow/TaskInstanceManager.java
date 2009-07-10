@@ -61,11 +61,13 @@ public interface TaskInstanceManager {
      * @param taskInstanceId the id of the task instance to be assigned
      * @param roleId the role id to assign the task to
      * @param comment the optional comment for the assignment
+     * @param attributes the optional attributes to be passed on to the context
+     *            information of the workflow instance
      * @return the task information reflecting the changes made to it
      * @throws WorkflowException is thrown, if the user could not be assigned
      */
 	public TaskInstanceInfo assignTaskInstanceToRole(long taskInstanceId,
-            long roleId, String comment)
+            long roleId, String comment, Map<String, Object> attributes)
 		throws WorkflowException;
 
     /**
@@ -76,11 +78,14 @@ public interface TaskInstanceManager {
      * @param taskInstanceId the id of the task instance to be assigned
      * @param userId the user id to assign the task to
      * @param comment the optional comment for the user being the new assignee
+     * @param attributes the optional attributes to be passed on to the context
+     *            information of the workflow instance
      * @return the task information reflecting the changes made to it
      * @throws WorkflowException is thrown, if the user could not be assigned
      */
 	public TaskInstanceInfo assignTaskInstanceToUser(
-			long taskInstanceId, long userId, String comment)
+			long taskInstanceId,
+            long userId, String comment, Map<String, Object> attributes)
 		throws WorkflowException;
 
     /**
