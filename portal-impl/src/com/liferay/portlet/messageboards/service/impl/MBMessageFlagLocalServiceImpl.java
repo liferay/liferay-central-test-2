@@ -169,19 +169,6 @@ public class MBMessageFlagLocalServiceImpl
 		mbMessageFlagPersistence.removeByThreadId(threadId);
 	}
 
-	public MBMessageFlag getReadFlag(long userId, MBThread thread)
-		throws PortalException, SystemException {
-
-		User user = userPersistence.findByPrimaryKey(userId);
-
-		if (user.isDefaultUser()) {
-			return null;
-		}
-
-		return mbMessageFlagPersistence.fetchByU_M_F(
-			userId, thread.getRootMessageId(), MBMessageFlagImpl.READ_FLAG);
-	}
-
 	public boolean hasAnswerFlag(long messageId) throws SystemException {
 		int count = mbMessageFlagPersistence.countByM_F(
 			messageId, MBMessageFlagImpl.ANSWER_FLAG);

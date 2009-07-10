@@ -122,12 +122,6 @@ public interface MBMessageFlagLocalService {
 		throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public com.liferay.portlet.messageboards.model.MBMessageFlag getReadFlag(
-		long userId, com.liferay.portlet.messageboards.model.MBThread thread)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public boolean hasAnswerFlag(long messageId)
 		throws com.liferay.portal.SystemException;
 

@@ -49,6 +49,4 @@ package com.liferay.portlet.messageboards.model;
  *
  */
 public interface MBMessageFlag extends MBMessageFlagModel {
-	public boolean isRead(
-		com.liferay.portlet.messageboards.model.MBMessage message);
 }

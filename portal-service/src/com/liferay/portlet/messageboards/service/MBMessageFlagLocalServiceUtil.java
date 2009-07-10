@@ -142,13 +142,6 @@ public class MBMessageFlagLocalServiceUtil {
 		getService().deleteThreadFlags(threadId);
 	}
 
-	public static com.liferay.portlet.messageboards.model.MBMessageFlag getReadFlag(
-		long userId, com.liferay.portlet.messageboards.model.MBThread thread)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return getService().getReadFlag(userId, thread);
-	}
-
 	public static boolean hasAnswerFlag(long messageId)
 		throws com.liferay.portal.SystemException {
 		return getService().hasAnswerFlag(messageId);
