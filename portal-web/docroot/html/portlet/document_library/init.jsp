@@ -71,11 +71,9 @@ if (Validator.isNotNull(portletResource)) {
 	preferences = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource);
 }
 
-PortletPreferences rootPortletProferences = PortletPreferencesLocalServiceUtil.getPreferences(layout.getCompanyId(), scopeGroupId, PortletKeys.PREFS_OWNER_TYPE_GROUP, 0, PortletKeys.DOCUMENT_LIBRARY, null);
-
 DLFolder rootFolder = null;
 
-long rootFolderId = PrefsParamUtil.getLong(rootPortletProferences, request, "rootFolderId", DLFolderConstants.DEFAULT_PARENT_FOLDER_ID);
+long rootFolderId = PrefsParamUtil.getLong(preferences, request, "rootFolderId", DLFolderConstants.DEFAULT_PARENT_FOLDER_ID);
 String rootFolderName = StringPool.BLANK;
 
 if (rootFolderId == DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
