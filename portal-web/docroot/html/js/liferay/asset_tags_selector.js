@@ -24,17 +24,21 @@ Liferay.AssetTagsSelector = new Alloy.Class(
 			instance._curTags = [];
 
 			instance.options = options;
+			instance._seed = instance.options.seed || '';
 			instance._ns = instance.options.instanceVar || '';
 			instance._mainContainer = jQuery('<div class="lfr-tag-select-container"></div>');
 			instance._container = jQuery('<div class="lfr-tag-container"></div>');
 			instance._searchContainer = jQuery('<div class="lfr-tag-search-container"><input class="lfr-tag-search-input" type="text"/></div>');
-			instance._summarySpan = jQuery('#' + options.summarySpan);
+			instance._summarySpan = jQuery('#' + options.summarySpan + instance._seed);
 
-			var hiddenInput = jQuery('#' + options.hiddenInput);
+			instance._summarySpan.html('');
+			instance._summarySpan.unbind('click');
+
+			var hiddenInput = jQuery('#' + options.hiddenInput + instance._seed);
 
 			hiddenInput.attr('name', hiddenInput.attr('id'));
 
-			var textInput = jQuery('#' + options.textInput);
+			var textInput = jQuery('#' + options.textInput + instance._seed);
 
 			var autoComplete = new Alloy.AutoComplete(
 				{
@@ -45,7 +49,7 @@ Liferay.AssetTagsSelector = new Alloy.Class(
 						}
 					},
 					delimChar: ',',
-					input: options.textInput
+					input: options.textInput + instance._seed
 				}
 			);
 
@@ -67,7 +71,7 @@ Liferay.AssetTagsSelector = new Alloy.Class(
 			instance._setupSelectTags();
 			instance._setupSuggestions();
 
-			var addTagButton = jQuery('#' + options.instanceVar + 'addTag');
+			var addTagButton = jQuery('#' + instance._namespace('addTag'));
 
 			addTagButton.click(
 				function() {
@@ -169,8 +173,7 @@ Liferay.AssetTagsSelector = new Alloy.Class(
 			var options = instance.options;
 			var curTags = instance._curTags;
 
-			jQuery('#' + instance._ns + 'CurTags' + id).remove();
-
+			jQuery('#' + instance._namespace('CurTags' + id + '_')).remove();
 			var value = curTags.splice(id, 1);
 
 			if (instance._popupVisible) {
@@ -183,12 +186,11 @@ Liferay.AssetTagsSelector = new Alloy.Class(
 		_createPopup: function() {
 			var instance = this;
 
-			var ns = instance._ns;
 			var container = instance._container;
 			var mainContainer = instance._mainContainer;
 			var searchContainer = instance._searchContainer;
 
-			var saveBtn = jQuery('<input class="submit lfr-save-button" id="' + ns + 'saveButton" type="submit" value="' + Liferay.Language.get('save') + '" />');
+			var saveBtn = jQuery('<input class="submit lfr-save-button" id="' + instance._namespace('saveButton') + '" type="submit" value="' + Liferay.Language.get('save') + '" />');
 
 			saveBtn.click(
 				function() {
@@ -301,6 +303,12 @@ Liferay.AssetTagsSelector = new Alloy.Class(
 			inputSearch.liveSearch(options);
 		},
 
+		_namespace: function(name) {
+			var instance = this;
+
+			return instance._ns + name + instance._seed;
+		},
+
 		_searchTags: function(term) {
 			var beginning = 0;
 			var end = 20;
@@ -320,9 +328,10 @@ Liferay.AssetTagsSelector = new Alloy.Class(
 			var instance = this;
 
 			var options = instance.options;
-			var ns = instance._ns;
 
-			var input = jQuery('#' + ns + 'selectTag');
+			var input = jQuery('#' + instance._namespace('selectTag'));
+
+			input.unbind('click');
 
 			input.click(
 				function() {
@@ -335,9 +344,8 @@ Liferay.AssetTagsSelector = new Alloy.Class(
 			var instance = this;
 
 			var options = instance.options;
-			var ns = instance._ns;
 
-			var input = jQuery('#' + ns + 'suggestions');
+			var input = jQuery('#' + instance._namespace('suggestions'));
 
 			input.click(
 				function() {
@@ -350,7 +358,6 @@ Liferay.AssetTagsSelector = new Alloy.Class(
 			var instance = this;
 
 			var options = instance.options;
-			var ns = instance._ns;
 			var mainContainer = instance._mainContainer;
 			var container = instance._container;
 			var searchMessage = Liferay.Language.get('no-tags-found');
@@ -489,7 +496,7 @@ Liferay.AssetTagsSelector = new Alloy.Class(
 			var options = instance.options;
 			var curTags = instance._curTags;
 
-			var hiddenInput = jQuery('#' + options.hiddenInput);
+			var hiddenInput = jQuery('#' + options.hiddenInput + instance._seed);
 
 			hiddenInput.val(curTags.join(','));
 		},
@@ -504,7 +511,7 @@ Liferay.AssetTagsSelector = new Alloy.Class(
 
 			jQuery(curTags).each(
 				function(i, curTag) {
-					html += '<span class="ui-tag" id="' + instance._ns + 'CurTags' + i + '">';
+					html += '<span class="ui-tag" id="' + instance._namespace('CurTags' + i + '_') + '">';
 					html += curTag;
 					html += '<a class="ui-tag-delete" href="javascript:;" data-tagIndex="' + i + '"><span>x</span></a>';
 					html += '</span>';

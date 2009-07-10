@@ -18,13 +18,17 @@ Liferay.AssetCategoriesSelector = new Alloy.Class(
 			instance._curCategoryIds = [];
 
 			instance.options = options;
+			instance._seed = instance.options.seed || '';
 			instance._ns = instance.options.instanceVar || '';
 			instance._mainContainer = jQuery('<div class="lfr-asset-category-select-container"></div>');
 			instance._container = jQuery('<div class="lfr-asset-category-container"></div>');
 			instance._searchContainer = jQuery('<div class="lfr-asset-category-search-container"><input class="lfr-asset-category-search-input" type="text"/></div>');
-			instance._summarySpan = jQuery('#' + options.summarySpan);
+			instance._summarySpan = jQuery('#' + options.summarySpan + instance._seed);
 
-			var hiddenInput = jQuery('#' + options.hiddenInput);
+			instance._summarySpan.html('');
+			instance._summarySpan.unbind('click');
+
+			var hiddenInput = jQuery('#' + options.hiddenInput + instance._seed);
 
 			hiddenInput.attr('name', hiddenInput.attr('id'));
 
@@ -67,7 +71,7 @@ Liferay.AssetCategoriesSelector = new Alloy.Class(
 			var curCategoryIds = instance._curCategoryIds;
 			var curCategoryNames = instance._curCategoryNames;
 
-			jQuery('#' + instance._ns + 'CurCategoryIds' + id).remove();
+			jQuery('#' + instance._namespace('CurCategoryIds' + id + '_')).remove();
 
 			var value = curCategoryIds.splice(id, 1);
 
@@ -128,12 +132,11 @@ Liferay.AssetCategoriesSelector = new Alloy.Class(
 		_createPopup: function() {
 			var instance = this;
 
-			var ns = instance._ns;
 			var container = instance._container;
 			var mainContainer = instance._mainContainer;
 			var searchContainer = instance._searchContainer;
 
-			var saveBtn = jQuery('<input class="submit lfr-save-button" id="' + ns + 'saveButton" type="submit" value="' + Liferay.Language.get('save') + '" />');
+			var saveBtn = jQuery('<input class="submit lfr-save-button" id="' + instance._namespace('saveButton') + '" type="submit" value="' + Liferay.Language.get('save') + '" />');
 
 			saveBtn.click(
 				function() {
@@ -237,13 +240,20 @@ Liferay.AssetCategoriesSelector = new Alloy.Class(
 			inputSearch.liveSearch(options);
 		},
 
+		_namespace: function(name) {
+			var instance = this;
+
+			return instance._ns + name + instance._seed;
+		},
+
 		_setupSelectAssetCategories: function() {
 			var instance = this;
 
 			var options = instance.options;
-			var ns = instance._ns;
 
-			var input = jQuery('#' + ns + 'selectAssetCategories');
+			var input = jQuery('#' + instance._namespace('selectAssetCategories'));
+
+			input.unbind('click');
 
 			input.click(
 				function() {
@@ -256,7 +266,6 @@ Liferay.AssetCategoriesSelector = new Alloy.Class(
 			var instance = this;
 
 			var options = instance.options;
-			var ns = instance._ns;
 			var mainContainer = instance._mainContainer;
 			var container = instance._container;
 			var searchMessage = Liferay.Language.get('no-categories-found');
@@ -327,7 +336,7 @@ Liferay.AssetCategoriesSelector = new Alloy.Class(
 			var options = instance.options;
 			var curCategoryIds = instance._curCategoryIds;
 
-			var hiddenInput = jQuery('#' + options.hiddenInput);
+			var hiddenInput = jQuery('#' + options.hiddenInput + instance._seed);
 
 			hiddenInput.val(curCategoryIds.join(','));
 		},
@@ -343,7 +352,7 @@ Liferay.AssetCategoriesSelector = new Alloy.Class(
 
 			jQuery(curCategoryIds).each(
 				function(i, curCategoryId) {
-					html += '<span class="ui-asset-category" id="' + instance._ns + 'CurCategoryIds' + i + '">';
+					html += '<span class="ui-asset-category" id="' + instance._namespace('CurCategoryIds' + i + '_') + '">';
 					html += curCategoryNames[i];
 					html += '<a class="ui-asset-category-delete" href="javascript:;" data-tagIndex="' + i + '"><span>x</span></a>';
 					html += '</span>';
