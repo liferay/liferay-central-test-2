@@ -27,7 +27,9 @@ import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
@@ -222,24 +224,10 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 			ActionRequest actionRequest, PortletPreferences preferences)
 		throws Exception {
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
+		updateQueryLogic(actionRequest, preferences);
 
-		long userId = themeDisplay.getUserId();
-		long groupId = themeDisplay.getScopeGroupId();
-
-		String[] assetCategoryIds = StringUtil.split(
-			ParamUtil.getString(actionRequest, "assetCategoryIds"));
-		String[] notAssetCategoryIds = StringUtil.split(
-			ParamUtil.getString(actionRequest, "notAssetCategoryIds"));
-		String[] assetTagNames = StringUtil.split(
-			ParamUtil.getString(actionRequest, "assetTagNames"));
-		String[] notAssetTagNames = StringUtil.split(
-			ParamUtil.getString(actionRequest, "notAssetTagNames"));
 		boolean mergeUrlTags = ParamUtil.getBoolean(
 			actionRequest, "mergeUrlTags");
-		boolean andOperator = ParamUtil.getBoolean(
-			actionRequest, "andOperator");
 
 		long classNameId = ParamUtil.getLong(actionRequest, "classNameId");
 		long assetVocabularyId = ParamUtil.getLong(
@@ -282,12 +270,7 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 
 		preferences.setValue("selection-style", "dynamic");
 
-		preferences.setValues("asset-category-ids", assetCategoryIds);
-		preferences.setValues("not-asset-category-ids", notAssetCategoryIds);
-		preferences.setValues("asset-tag-names", assetTagNames);
-		preferences.setValues("not-asset-tag-names", notAssetTagNames);
 		preferences.setValue("merge-url-tags", String.valueOf(mergeUrlTags));
-		preferences.setValue("and-operator", String.valueOf(andOperator));
 
 		preferences.setValue("class-name-id", String.valueOf(classNameId));
 		preferences.setValue(
@@ -317,8 +300,70 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 			"enable-comment-ratings", String.valueOf(enableCommentRatings));
 		preferences.setValue("metadata-fields", medatadaFields);
 
-		AssetTagLocalServiceUtil.checkTags(userId, groupId, assetTagNames);
-		AssetTagLocalServiceUtil.checkTags(userId, groupId, notAssetTagNames);
+	}
+
+	protected void updateQueryLogic(
+			ActionRequest actionRequest, PortletPreferences preferences)
+		throws Exception {
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		long userId = themeDisplay.getUserId();
+		long groupId = themeDisplay.getScopeGroupId();
+
+		int[] queryRulesIndexes = StringUtil.split(
+			ParamUtil.getString(actionRequest, "queryLogicIndexes"), 0);
+
+		int i = 0;
+
+		for (int queryRulesIndex : queryRulesIndexes) {
+			boolean contains = ParamUtil.getBoolean(
+				actionRequest, "queryContains" + queryRulesIndex);
+
+			boolean andOperator = ParamUtil.getBoolean(
+				actionRequest, "queryAndOperator" + queryRulesIndex);
+
+			String name = ParamUtil.getString(
+				actionRequest, "queryName" + queryRulesIndex);
+
+			String[] values;
+
+			if (Validator.equals(name, "assetTags")) {
+				values = StringUtil.split(ParamUtil.getString(
+					actionRequest, "queryTagNames" + queryRulesIndex));
+
+				AssetTagLocalServiceUtil.checkTags(userId, groupId, values);
+			}
+			else {
+				values = StringUtil.split(ParamUtil.getString(
+					actionRequest, "queryCategoryIds" + queryRulesIndex));
+			}
+
+			preferences.setValue("queryContains" + i, String.valueOf(contains));
+			preferences.setValue(
+				"queryAndOperator" + i, String.valueOf(andOperator));
+			preferences.setValue("queryName" + i, name);
+			preferences.setValues("queryValues" + i, values);
+
+			i++;
+		}
+
+		// Clear previous preferences that are now blank
+
+		String[] values = preferences.getValues(
+			"queryValues" + i, new String[0]);
+
+		while (values.length > 0) {
+			preferences.setValue("queryContains" + i, StringPool.BLANK);
+			preferences.setValue("queryAndOperator" + i, StringPool.BLANK);
+			preferences.setValue("queryName" + i, StringPool.BLANK);
+			preferences.setValues("queryValues" + i, new String[0]);
+
+			i++;
+
+			values = preferences.getValues("queryValues" + i, new String[0]);
+		}
 	}
 
 	protected void updateManualSettings(

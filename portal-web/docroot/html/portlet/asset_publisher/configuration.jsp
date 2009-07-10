@@ -92,17 +92,44 @@ configurationActionURL.setParameter("portletResource", portletResource);
 </script>
 
 <style type="text/css">
+	.aui-form fieldset {
+		padding: 0;
+	}
+
+	.aui-form fieldset legend {
+		padding: 0;
+		font-size: 100%;
+		font-weight: normal;
+	}
+
+	.aui-form .lfr-form-row {
+		background-color: #F3f3f3;
+	}
+
+	.aui-form .lfr-form-row:hover {
+		background-color: #DFFCCB;
+	}
+
+	.aui-form .lfr-form-row .aui-ctrl-holder {
+		line-height: 2em;
+	}
+
+	.aui-form .lfr-form-row .aui-ctrl-holder.tags-selector, .aui-form .lfr-form-row .aui-ctrl-holder.categories-selector{
+		clear: both;
+		line-height: 1.5em;
+	}
+
 	.lfr-panel .lfr-panel-titlebar {
 		margin-bottom: 0;
 	}
 
 	.lfr-panel-content {
-		background-color: #eee;
+		background-color: #f8f8f8;
 		padding: 10px;
 	}
 </style>
 
-<form action="<%= configurationActionURL.toString() %>" method="post" name="<portlet:namespace />fm">
+<form action="<%= configurationActionURL.toString() %>" class="aui-form" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
 <input name="<portlet:namespace />tabs2" type="hidden" value="<%= HtmlUtil.escapeAttribute(tabs2) %>" />
 <input name="<portlet:namespace />typeSelection" type="hidden" value="" />
@@ -303,60 +330,185 @@ configurationActionURL.setParameter("portletResource", portletResource);
 
 						<br /><br />
 
-						<liferay-ui:message key="displayed-content-must-contain-the-following-tags" />
+						<div id="query-rules">
+							<fieldset class="aui-block-labels">
+								<legend><liferay-ui:message key="displayed-assets-must-match-these-rules" /></legend>
 
-						<br /><br />
+								<%
+								String queryLogicIndexesParam = ParamUtil.getString(request, "queryLogicIndexes") ;
 
-						<liferay-ui:asset-tags-selector
-							hiddenInput="assetTagNames"
-							curTags="<%= StringUtil.merge(assetTagNames) %>"
-							focus="<%= false %>"
-						/>
+								int[] queryLogicIndexes = null;
 
-						<br /><br />
+								if (Validator.isNotNull(queryLogicIndexesParam)){
+									queryLogicIndexes = StringUtil.split(queryLogicIndexesParam, 0);
+								}
+								else {
+									queryLogicIndexes = new int[0];
 
-						<liferay-ui:message key="displayed-content-must-not-contain-the-following-tags" />
+									for (int i = 0; true; i++) {
+										String queryValues = PrefsParamUtil.getString(preferences, request, "queryValues" + i);
 
-						<br /><br />
+										if (Validator.isNull(queryValues)) {
+											break;
+										}
 
-						<liferay-ui:asset-tags-selector
-							hiddenInput="notAssetTagNames"
-							curTags="<%= StringUtil.merge(notAssetTagNames) %>"
-							focus="<%= false %>"
-						/>
+										queryLogicIndexes = ArrayUtil.append(queryLogicIndexes, i);
+									}
 
-						<br /><br />
+									if (queryLogicIndexes.length == 0) {
+										queryLogicIndexes = ArrayUtil.append(queryLogicIndexes, 0);
+									}
+								}
 
-						<liferay-ui:message key="displayed-content-must-contain-the-following-categories" />
+								int index = 0;
 
-						<br /><br />
+								for (int queryLogicIndex : queryLogicIndexes) {
+									boolean queryContains = PrefsParamUtil.getBoolean(preferences, request, "queryContains" + queryLogicIndex, true);
+									boolean queryAndOperator = PrefsParamUtil.getBoolean(preferences, request, "queryAndOperator" + queryLogicIndex);
+									String queryName = PrefsParamUtil.getString(preferences, request, "queryName" + queryLogicIndex, "assetTags");
+									String queryValues = StringUtil.merge(preferences.getValues("queryValues" + queryLogicIndex , new String[0]));
 
-						<liferay-ui:asset-categories-selector
-							hiddenInput="assetCategoryIds"
-							curCategoryIds="<%= StringUtil.merge(assetCategoryIds) %>"
-							focus="<%= false %>"
-						/>
+									if (Validator.equals(queryName, "assetTags")) {
+										queryValues = ParamUtil.getString(request, "queryTagNames" + queryLogicIndex, queryValues);
+									}
+									else {
+										queryValues = ParamUtil.getString(request, "queryCategoryIds" + queryLogicIndex, queryValues);
+									}
 
-						<br /><br />
+									if (Validator.isNotNull(queryValues) || queryLogicIndexes.length == 1) {
+								%>
 
-						<liferay-ui:message key="displayed-content-must-not-contain-the-following-categories" />
+										<div class="lfr-form-row">
+											<div class="row-fields">
+												<div class="aui-ctrl-holder">
+													<select name="<portlet:namespace />queryContains<%= index %>">
+														<option <%= queryContains ? "selected" : StringPool.BLANK %> value="true"><liferay-ui:message key="contains" /></option>
+														<option <%= !queryContains ? "selected" : StringPool.BLANK %> value="false"><liferay-ui:message key="does-not-contain" /></option>
+													</select>
+												</div>
 
-						<br /><br />
+												<div class="aui-ctrl-holder">
+													<select name="<portlet:namespace />queryAndOperator<%= index %>">
+														<option <%= queryAndOperator ? "selected" : StringPool.BLANK %> value="true"><liferay-ui:message key="all" /></option>
+														<option <%= !queryAndOperator ? "selected" : StringPool.BLANK %> value="false"><liferay-ui:message key="any" /></option>
+													</select>
+												</div>
 
-						<liferay-ui:asset-categories-selector
-							hiddenInput="notAssetCategoryIds"
-							curCategoryIds="<%= StringUtil.merge(notAssetCategoryIds) %>"
-							focus="<%= false %>"
-						/>
+												<div class="aui-ctrl-holder">
+													<liferay-ui:message key="of-the-following" />
+												</div>
 
-						<br /><br />
+												<div class="aui-ctrl-holder">
+													<select class="asset-query-name" id="<portlet:namespace />queryName<%= index %>" name="<portlet:namespace />queryName<%= index %>">
+														<option <%= Validator.equals(queryName, "assetTags") ? "selected" : StringPool.BLANK %> value="assetTags"><liferay-ui:message key="tags" /></option>
+														<option <%= Validator.equals(queryName, "assetCategories") ? "selected" : StringPool.BLANK %> value="assetCategories"><liferay-ui:message key="categories" /></option>
+													</select>
+												</div>
 
-						<liferay-ui:message key="search-operator" />
+												<div class="aui-ctrl-holder tags-selector" style="display:<%= Validator.equals(queryName, "assetTags") ? "block;" : "none;" %>">
+													<liferay-ui:asset-tags-selector
+														hiddenInput='<%= "queryTagNames" + index %>'
+														curTags='<%=  Validator.equals(queryName, "assetTags") ? queryValues : null %>'
+														focus="<%= false %>"
+													/>
+												</div>
 
-						<select name="<portlet:namespace />andOperator">
-							<option <%= andOperator ? "selected" : "" %> value="1"><liferay-ui:message key="and" /></option>
-							<option <%= !andOperator ? "selected" : "" %> value="0"><liferay-ui:message key="or" /></option>
-						</select>
+												<div class="aui-ctrl-holder categories-selector" style="display:<%= Validator.equals(queryName, "assetCategories") ? "block;" : "none;" %>">
+													<liferay-ui:asset-categories-selector
+														hiddenInput='<%= "queryCategoryIds" + index %>'
+														curCategoryIds='<%= Validator.equals(queryName, "assetCategories") ? queryValues : null %>'
+														focus="<%= false %>"
+													/>
+												</div>
+
+											</div>
+										</div>
+
+								<%
+										}
+
+										index++;
+								}
+								%>
+
+							</fieldset>
+						</div>
+
+						<script type="text/javascript">
+							jQuery(
+								function () {
+									var autoFields = new Liferay.AutoFields(
+										{
+											container: '#query-rules > fieldset',
+											baseRows: '#query-rules > fieldset .lfr-form-row',
+											fieldIndexes: '<portlet:namespace />queryLogicIndexes'
+										}
+									);
+
+									autoFields.bind(
+										'addRow',
+										function(event, data) {
+											data = data[0];
+
+											var row = jQuery(data.row);
+											var index = data.idSeed;
+
+											_initQueryNameFields(row.find('.asset-query-name'));
+
+											var firstCategoriesInput = row.find('.categories-selector > input:visible:first');
+											var categoriesRandomNamespace = (firstCategoriesInput.attr('name') || firstCategoriesInput.attr('id')).substring(0,5);
+
+											new Liferay.AssetCategoriesSelector(
+												{
+													instanceVar: categoriesRandomNamespace,
+													seed: index,
+													hiddenInput: '<portlet:namespace/>queryCategoryIds',
+													summarySpan: categoriesRandomNamespace + 'assetCategoriesSummary'
+												}
+											);
+
+											var firstTagsInput = row.find('.tags-selector > input:visible:first');
+											var tagsRandomNamespace = (firstTagsInput.attr('name') || firstTagsInput.attr('id')).substring(0,5);
+
+											new Liferay.AssetTagsSelector(
+												{
+													instanceVar: tagsRandomNamespace,
+													seed: index,
+													hiddenInput:  '<portlet:namespace/>queryTagNames',
+													textInput: tagsRandomNamespace + "assetTagNames",
+													summarySpan: tagsRandomNamespace + "assetTagsSummary",
+													focus: false
+												}
+											);
+										}
+									);
+
+									_initQueryNameFields(jQuery('.asset-query-name'));
+								}
+							);
+
+							function _initQueryNameFields(selectFields) {
+								selectFields.each(
+									function(){
+										var select = jQuery(this);
+										var row = select.parent().parent();
+
+										select.change(
+											function(event) {
+												if (select.val() == 'assetTags') {
+													row.find('.tags-selector').show();
+													row.find('.categories-selector').hide();
+												}
+												else {
+													row.find('.tags-selector').hide();
+													row.find('.categories-selector').show();
+												}
+											}
+										);
+									}
+								);
+							}
+						</script>
 
 						<br /><br />
 

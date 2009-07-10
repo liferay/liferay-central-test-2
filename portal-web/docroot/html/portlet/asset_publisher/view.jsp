@@ -37,9 +37,9 @@ if (mergeUrlTags) {
 	String titleEntry = null;
 
 	if ((compilerTagNames != null) && (compilerTagNames.length > 0)) {
-		String[] newAssetTagNames = ArrayUtil.append(assetTagNames, compilerTagNames);
+		String[] newAssetTagNames = ArrayUtil.append(allAssetTagNames, compilerTagNames);
 
-		assetTagNames = newAssetTagNames;
+		allAssetTagNames = newAssetTagNames;
 
 		titleEntry = compilerTagNames[compilerTagNames.length - 1];
 	}
@@ -51,9 +51,9 @@ if (mergeUrlTags) {
 	renderResponse.setTitle(portletTitle);
 }
 
-assetTagNames = ArrayUtil.distinct(assetTagNames, new StringComparator());
+allAssetTagNames = ArrayUtil.distinct(allAssetTagNames, new StringComparator());
 
-for (String curAssetTagName : assetTagNames) {
+for (String curAssetTagName : allAssetTagNames) {
 	try {
 		AssetTag assetTag = AssetTagLocalServiceUtil.getTag(scopeGroupId, curAssetTagName);
 
@@ -71,7 +71,7 @@ for (String curAssetTagName : assetTagNames) {
 	}
 }
 
-if (enableTagBasedNavigation && selectionStyle.equals("manual") && (assetTagNames.length > 0)) {
+if (enableTagBasedNavigation && selectionStyle.equals("manual") && (allAssetTagNames.length > 0)) {
 	selectionStyle = "dynamic";
 }
 

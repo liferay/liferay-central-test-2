@@ -136,6 +136,61 @@ else {
 	classNameIds = new long[0];
 }
 
+long[] allAssetCategoryIds = new long[0];
+long[] anyAssetCategoryIds = new long[0];
+long[] notAllAssetCategoryIds = new long[0];
+long[] notAnyAssetCategoryIds = new long[0];
+
+String[] allAssetTagNames = new String[0];
+String[] anyAssetTagNames = new String[0];
+String[] notAllAssetTagNames = new String[0];
+String[] notAnyAssetTagNames = new String[0];
+
+if (selectionStyle.equals("dynamic")) {
+	for (int i = 0; true; i++) {
+		String[] queryValues = preferences.getValues("queryValues" + i, new String[0]);
+
+		if (queryValues.length == 0) {
+			break;
+		}
+
+		boolean queryContains = GetterUtil.getBoolean(preferences.getValue("queryContains" + i, StringPool.BLANK));
+		boolean queryAndOperator = GetterUtil.getBoolean(preferences.getValue("queryAndOperator" + i, StringPool.BLANK));
+		String queryName = preferences.getValue("queryName" + i, StringPool.BLANK);
+
+		if (Validator.equals(queryName, "assetCategories")) {
+			long[] assetCategoryIds = GetterUtil.getLongValues(queryValues);
+
+			if (queryContains  && queryAndOperator) {
+				allAssetCategoryIds = assetCategoryIds;
+			}
+			else if (queryContains  && !queryAndOperator) {
+				anyAssetCategoryIds = assetCategoryIds;
+			}
+			else if (!queryContains  && queryAndOperator) {
+				notAllAssetCategoryIds = assetCategoryIds;
+			}
+			else {
+				notAnyAssetCategoryIds = assetCategoryIds;
+			}
+		}
+		else {
+			if (queryContains && queryAndOperator) {
+				allAssetTagNames = queryValues;
+			}
+			else if (queryContains && !queryAndOperator) {
+				anyAssetTagNames = queryValues;
+			}
+			else if (!queryContains && queryAndOperator) {
+				notAllAssetTagNames = queryValues;
+			}
+			else {
+				notAnyAssetTagNames = queryValues;
+			}
+		}
+	}
+}
+
 long assetVocabularyId = GetterUtil.getLong(preferences.getValue("asset-vocabulary-id", StringPool.BLANK));
 
 long assetCategoryId = ParamUtil.getLong(request, "categoryId");
@@ -143,13 +198,8 @@ long assetCategoryId = ParamUtil.getLong(request, "categoryId");
 String assetCategoryName = null;
 String assetVocabularyName = null;
 
-long[] assetCategoryIds = null;
-
-if (Validator.isNull(assetCategoryId)) {
-	assetCategoryIds = GetterUtil.getLongValues(preferences.getValues("asset-category-ids", new String[0]));
-}
-else {
-	assetCategoryIds = new long[] {assetCategoryId};
+if (assetCategoryId > 0) {
+	allAssetCategoryIds = new long[] {assetCategoryId};
 
 	AssetCategory assetCategory = AssetCategoryLocalServiceUtil.getCategory(assetCategoryId);
 
@@ -162,24 +212,15 @@ else {
 	PortalUtil.setPageKeywords(assetCategory.getName(), request);
 }
 
-long[] notAssetCategoryIds = GetterUtil.getLongValues(preferences.getValues("not-asset-category-ids", new String[0]));
-
 String assetTagName = ParamUtil.getString(request, "tag");
 
-String[] assetTagNames = null;
-
-if (Validator.isNull(assetTagName)) {
-	assetTagNames = preferences.getValues("asset-tag-names", new String[0]);
-}
-else {
-	assetTagNames = new String[] {assetTagName};
+if (Validator.isNotNull(assetTagName)) {
+	allAssetTagNames = new String[] {assetTagName};
 
 	PortalUtil.setPageKeywords(assetTagName, request);
 }
 
-String[] notAssetTagNames = preferences.getValues("not-asset-tag-names", new String[0]);
 boolean mergeUrlTags = GetterUtil.getBoolean(preferences.getValue("merge-url-tags", null), true);
-boolean andOperator = GetterUtil.getBoolean(preferences.getValue("and-operator", null), false);
 
 String displayStyle = GetterUtil.getString(preferences.getValue("display-style", "abstracts"));
 
@@ -208,8 +249,6 @@ String defaultMetadataFields = StringPool.BLANK;
 String allMetadataFields = "create-date,modified-date,publish-date,expiration-date,priority,author,view-count,categories,tags";
 
 String[] metadataFields = StringUtil.split(preferences.getValue("metadata-fields", defaultMetadataFields));
-
-Arrays.sort(assetTagNames);
 
 String[] assetEntryXmls = preferences.getValues("asset-entry-xml", new String[0]);
 

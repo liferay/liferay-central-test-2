@@ -33,7 +33,7 @@ for (int i = 0; i < allAssetEntryTypes.length; i++) {
 	}
 }
 
-PortletURL[] urls = getAddURLs(renderRequest, assetTagNames, assetEntryTypes);
+PortletURL[] urls = getAddURLs(renderRequest, allAssetTagNames, assetEntryTypes);
 %>
 
 <c:if test="<%= urls.length > 0 %>">
@@ -59,7 +59,7 @@ PortletURL[] urls = getAddURLs(renderRequest, assetTagNames, assetEntryTypes);
 			while (itr.hasNext()) {
 				AssetEntryType assetEntryType = (AssetEntryType)itr.next();
 
-				PortletURL url = getAddURL(renderRequest, assetTagNames, assetEntryType.getClassName());
+				PortletURL url = getAddURL(renderRequest, allAssetTagNames, assetEntryType.getClassName());
 
 				if (url != null) {
 			%>
@@ -78,7 +78,7 @@ PortletURL[] urls = getAddURLs(renderRequest, assetTagNames, assetEntryTypes);
 </c:if>
 
 <%!
-public PortletURL getAddURL(RenderRequest req, String[] assetTagNames, String assetEntryType) throws Exception {
+public PortletURL getAddURL(RenderRequest req, String[] allAssetTagNames, String assetEntryType) throws Exception {
 	RenderRequestImpl renderRequestImpl = (RenderRequestImpl)req;
 
 	ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
@@ -144,14 +144,14 @@ public PortletURL getAddURL(RenderRequest req, String[] assetTagNames, String as
 			addURL.setParameter("referringPortletResource", referringPortletResource);
 		}
 		else {
-			addURL.setParameter("assetTagNames", StringUtil.merge(assetTagNames));
+			addURL.setParameter("assetTagNames", StringUtil.merge(allAssetTagNames));
 		}
 	}
 
 	return addURL;
 }
 
-public PortletURL[] getAddURLs(RenderRequest req, String[] assetTagNames, List assetEntryTypes) throws Exception {
+public PortletURL[] getAddURLs(RenderRequest req, String[] allAssetTagNames, List assetEntryTypes) throws Exception {
 	List urls = new ArrayList();
 
 	Iterator itr = assetEntryTypes.iterator();
@@ -159,7 +159,7 @@ public PortletURL[] getAddURLs(RenderRequest req, String[] assetTagNames, List a
 	while (itr.hasNext()) {
 		AssetEntryType assetEntryType = (AssetEntryType)itr.next();
 
-		PortletURL url = getAddURL(req, assetTagNames, assetEntryType.getClassName());
+		PortletURL url = getAddURL(req, allAssetTagNames, assetEntryType.getClassName());
 
 		if (url != null) {
 			urls.add(url);
