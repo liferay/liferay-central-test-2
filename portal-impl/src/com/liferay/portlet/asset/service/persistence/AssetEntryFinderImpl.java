@@ -425,8 +425,6 @@ public class AssetEntryFinderImpl
 	protected String getNotCategoryIds(long[] notCategoryIds) {
 		StringBuilder sb = new StringBuilder();
 
-		sb.append(" AND (");
-
 		for (int i = 0; i < notCategoryIds.length; i++) {
 			sb.append("AssetEntry.entryId NOT IN (");
 			sb.append(CustomSQLUtil.get(FIND_BY_AND_CATEGORY_IDS));
@@ -437,15 +435,11 @@ public class AssetEntryFinderImpl
 			}
 		}
 
-		sb.append(StringPool.CLOSE_PARENTHESIS);
-
 		return sb.toString();
 	}
 
 	protected String getNotTagIds(long[] notTagIds) {
 		StringBuilder sb = new StringBuilder();
-
-		sb.append(" AND (");
 
 		for (int i = 0; i < notTagIds.length; i++) {
 			sb.append("AssetEntry.entryId NOT IN (");
@@ -456,8 +450,6 @@ public class AssetEntryFinderImpl
 				sb.append(" AND ");
 			}
 		}
-
-		sb.append(StringPool.CLOSE_PARENTHESIS);
 
 		return sb.toString();
 	}
