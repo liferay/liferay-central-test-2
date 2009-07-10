@@ -35,6 +35,14 @@ MBThread thread = (MBThread)request.getAttribute(WebKeys.MESSAGE_BOARDS_TREE_WAL
 boolean lastNode = ((Boolean)request.getAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_LAST_NODE)).booleanValue();
 int depth = ((Integer)request.getAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_DEPTH)).intValue();
 
+MBMessageFlag messageFlag = MBMessageFlagLocalServiceUtil.getReadFlag(themeDisplay.getUserId(), thread);
+
+long lastReadTime = 0;
+
+if (messageFlag != null) {
+	lastReadTime = messageFlag.getModifiedDate().getTime();
+}
+
 String className = "portlet-section-alternate results-row alt";
 String classHoverName = "portlet-section-alternate-hover results-row alt hover";
 
@@ -76,22 +84,44 @@ if (treeWalker.isOdd()) {
 		if (!themeDisplay.isFacebook()) {
 			rowHREF = messageURL + rowHREF;
 		}
+
+		boolean readFlag = true;
+
+		if (themeDisplay.isSignedIn() && (lastReadTime < message.getModifiedDate().getTime())) {
+			readFlag = false;
+		}
 		%>
 
-		<a href="<%= rowHREF %>"><%= HtmlUtil.escape(message.getSubject()) %></a>
+		<a href="<%= rowHREF %>">
+			<c:if test="<%= !readFlag %>">
+				<b>
+			</c:if>
+
+			<%= HtmlUtil.escape(message.getSubject()) %>
+
+			<c:if test="<%= !readFlag %>">
+				</b>
+			</c:if>
+		</a>
 	</td>
 	<td nowrap>
 		<a href="<%= rowHREF %>">
+			<c:if test="<%= !readFlag %>">
+				<b>
+			</c:if>
 
-		<c:choose>
-			<c:when test="<%= message.isAnonymous() %>">
-				<liferay-ui:message key="anonymous" />
-			</c:when>
-			<c:otherwise>
-				<%= PortalUtil.getUserName(message.getUserId(), message.getUserName()) %>
-			</c:otherwise>
-		</c:choose>
+			<c:choose>
+				<c:when test="<%= message.isAnonymous() %>">
+					<liferay-ui:message key="anonymous" />
+				</c:when>
+				<c:otherwise>
+					<%= PortalUtil.getUserName(message.getUserId(), message.getUserName()) %>
+				</c:otherwise>
+			</c:choose>
 
+			<c:if test="<%= !readFlag %>">
+				</b>
+			</c:if>
 		</a>
 	</td>
 	<td nowrap>
