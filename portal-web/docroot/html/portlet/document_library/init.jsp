@@ -86,6 +86,9 @@ if (rootFolderId == DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
 
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(DLFolder.class.getName(), renderRequest);
 
+		serviceContext.setAddCommunityPermissions(true);
+		serviceContext.setAddGuestPermissions(true);
+
 		dynamicRootFolder = DLFolderLocalServiceUtil.addFolder(themeDisplay.getUserId(), scopeGroupId, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, LanguageUtil.get(pageContext, "document-home"), "", serviceContext);
 
 		long dynamicRootFolderId = dynamicRootFolder.getFolderId();
@@ -101,6 +104,9 @@ if (rootFolderId == DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
 	}
 	else {
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(DLFolder.class.getName(), renderRequest);
+
+		serviceContext.setAddCommunityPermissions(true);
+		serviceContext.setAddGuestPermissions(true);
 
 		dynamicRootFolder = DLFolderLocalServiceUtil.addFolder(themeDisplay.getUserId(), scopeGroupId, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, LanguageUtil.get(pageContext, "document-home"), "", serviceContext);
 	}
