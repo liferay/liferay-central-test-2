@@ -206,9 +206,9 @@ public class AssetEntryServiceImpl extends AssetEntryServiceBaseImpl {
 				entry.getUserId(), entry.getUserName());
 
 			StringBuilder link = new StringBuilder();
-			
+
 			link.append(tagURL);
-			link.append("entryId="); 
+			link.append("entryId=");
 			link.append(entry.getEntryId());
 
 			String value = entry.getSummary();

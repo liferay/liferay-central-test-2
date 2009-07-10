@@ -301,9 +301,9 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 				entry.getUserId(), entry.getUserName());
 
 			StringBuilder link = new StringBuilder();
-			
+
 			link.append(entryURL);
-	
+
 			if (entryURL.endsWith("/blogs/rss")) {
 				link.delete(link.length() - 3, link.length());
 				link.append(entry.getUrlTitle());
@@ -313,7 +313,7 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 					link.append(StringPool.AMPERSAND);
 				}
 
-				link.append("entryId="); 
+				link.append("entryId=");
 				link.append(entry.getEntryId());
 			}
 
