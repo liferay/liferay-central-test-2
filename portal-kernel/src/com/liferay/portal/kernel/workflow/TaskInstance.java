@@ -22,19 +22,47 @@
 
 package com.liferay.portal.kernel.workflow;
 
+import java.util.Date;
+import java.util.Map;
+
 /**
- * <a href="WorkflowDefinitionRegistry.java.html"><b><i>View Source</i></b></a>
+ * <a href="TaskInstance.java.html"><b><i>View Source</i></b></a>
  *
  * @author Micha Kiener
  *
  */
-public interface WorkflowDefinitionRegistry {
+public interface TaskInstance {
 
-	public String getWorkflowDefinitionId(Class<?> domainClass);
+	public long getAssignedGroupId();
 
-	public boolean hasWorkflowDefinitionMapping(Class<?> domainClass);
+	public long getAssignedRoleId();
 
-	public String setWorkflowDefinitionMapping(
-		Class<?> domainClass, String workflowDefinitionId);
+	public long getAssignedUserId();
+
+	public Map<String, Object> getAttributes();
+
+	public Date getCompletionDate();
+
+	public Date getCreateDate();
+
+	public String getDescription();
+
+	public Date getDueDate();
+
+	public long getTaskInstanceId();
+
+	public String getTaskMetaId();
+
+	public String getTaskName();
+
+	public String getWorkflowDefinitionId();
+
+	public int getWorkflowDefinitionVersion();
+
+	public long getWorkflowInstanceId();
+
+	public boolean isAsynchronous();
+
+	public boolean isCompleted();
 
 }

@@ -22,19 +22,20 @@
 
 package com.liferay.portal.kernel.workflow;
 
+import com.liferay.portal.kernel.resource.ResourceRetriever;
+
 /**
- * <a href="WorkflowDefinitionRegistry.java.html"><b><i>View Source</i></b></a>
+ * <a href="WorkflowDefinition.java.html"><b><i>View Source</i></b></a>
  *
  * @author Micha Kiener
  *
  */
-public interface WorkflowDefinitionRegistry {
+public interface WorkflowDefinition {
 
-	public String getWorkflowDefinitionId(Class<?> domainClass);
+	public ResourceRetriever getJar();
 
-	public boolean hasWorkflowDefinitionMapping(Class<?> domainClass);
+	public String getWorkflowDefinitionId();
 
-	public String setWorkflowDefinitionMapping(
-		Class<?> domainClass, String workflowDefinitionId);
+	public int getWorkflowDefinitionVersion();
 
 }

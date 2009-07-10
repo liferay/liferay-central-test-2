@@ -22,19 +22,38 @@
 
 package com.liferay.portal.kernel.workflow;
 
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+
 /**
- * <a href="WorkflowDefinitionRegistry.java.html"><b><i>View Source</i></b></a>
+ * <a href="WorkflowInstance.java.html"><b><i>View Source</i></b></a>
  *
  * @author Micha Kiener
  *
  */
-public interface WorkflowDefinitionRegistry {
+public interface WorkflowInstance {
 
-	public String getWorkflowDefinitionId(Class<?> domainClass);
+	public List<WorkflowInstance> getChildren();
 
-	public boolean hasWorkflowDefinitionMapping(Class<?> domainClass);
+	public Map<String, Object> getContext();
 
-	public String setWorkflowDefinitionMapping(
-		Class<?> domainClass, String workflowDefinitionId);
+	public String getCurrentNodeName();
+
+	public Date getEndDate();
+
+	public WorkflowInstance getParent();
+
+	public long getRelationId();
+
+	public String getRelationType();
+
+	public Date getStartDate();
+
+	public String getWorkflowDefinitionId();
+
+	public int getWorkflowDefinitionVersion();
+
+	public long getWorkflowInstanceId();
 
 }

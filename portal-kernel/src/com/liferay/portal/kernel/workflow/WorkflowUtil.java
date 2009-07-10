@@ -22,89 +22,57 @@
 
 package com.liferay.portal.kernel.workflow;
 
-
-
-
 /**
  * <a href="WorkflowUtil.java.html"><b><i>View Source</i></b></a>
- * 
- * <p>
- * This utility class defines the main entry point to the workflow system in
- * Liferay as it provides static access to different manager of the workflow
- * system. A more detailed description can be found on the manager interfaces
- * being returned by the static accessory methods in this utility class.
- * </p>
- * 
+ *
  * @author Micha Kiener
+ *
  */
 public class WorkflowUtil {
 
-    /**
-     * The workflow instance manager is the entry point to deal with existing
-     * workflow instances and how to retrieve them. More details about a
-     * workflow instance and how to start them and retrieve them can be read
-     * within the javadoc of {@link WorkflowInstanceManager}.
-     * 
-     * @return the workflow instance manager
-     */
-    public static WorkflowInstanceManager getWorkflowInstanceManager() {
-        return _workflowInstanceManager;
-    }
+	public static TaskInstanceManager getTaskInstanceManager() {
+		return _taskInstanceManager;
+	}
 
-    /**
-     * The task instance manager is the entry point to deal with tasks created
-     * out of a workflow definition, always attached to a workflow instance. The
-     * manager supports method to retrieve, assign and approve tasks.
-     * 
-     * @return the task instance manager
-     */
-    public static TaskInstanceManager getTaskInstanceManager() {
-        return _taskInstanceManager;
-    }
+	public static WorkflowDefinitionManager getWorkflowDefinitionManager() {
+		return _workflowDefinitionManager;
+	}
 
-    /**
-     * The workflow definition manager is the entry point to deploy workflow
-     * definitions. A workflow definition is the model used to describe the
-     * workflow.
-     * 
-     * @return the workflow definition manager
-     */
-    public static WorkflowDefinitionManager getWorkflowDefinitionManager() {
-        return _workflowDefinitionManager;
-    }
+	public static WorkflowDefinitionRegistry getWorkflowDefinitionRegistry() {
+		return _workflowDefinitionRegistry;
+	}
 
-    /**
-     * The workflow definition registry can be used for mapping a domain class
-     * to a certain workflow definition id.
-     * 
-     * @return the workflow registry
-     */
-    public static WorkflowDefinitionRegistry getWorkflowDefinitionRegistry() {
-        return _workflowDefinitionRegistry;
-    }
+	public static WorkflowInstanceManager getWorkflowInstanceManager() {
+		return _workflowInstanceManager;
+	}
 
-    /**
-     * Accessor method to set the managers to make them available through the
-     * static methods provided by this utility.
-     * 
-     * @param workflowDefinitionManager
-     * @param workflowInstanceManager
-     * @param taskInstanceManager
-     * @param workflowRegistry
-     */
-    public static void setManagers(
-            WorkflowDefinitionManager workflowDefinitionManager,
-            WorkflowInstanceManager workflowInstanceManager,
-            TaskInstanceManager taskInstanceManager,
-            WorkflowDefinitionRegistry workflowRegistry) {
-        _workflowDefinitionManager = workflowDefinitionManager;
-        _workflowInstanceManager = workflowInstanceManager;
-        _taskInstanceManager = taskInstanceManager;
-        _workflowDefinitionRegistry = workflowRegistry;
-    }
+	public static void setTaskInstanceManager(
+		TaskInstanceManager taskInstanceManager) {
 
-    private static WorkflowInstanceManager _workflowInstanceManager;
-    private static TaskInstanceManager _taskInstanceManager;
-    private static WorkflowDefinitionManager _workflowDefinitionManager;
-    private static WorkflowDefinitionRegistry _workflowDefinitionRegistry;
+		_taskInstanceManager = taskInstanceManager;
+	}
+
+	public static void setWorkflowDefinitionManager(
+		WorkflowDefinitionManager workflowDefinitionManager) {
+
+		_workflowDefinitionManager = workflowDefinitionManager;
+	}
+
+	public static void setWorkflowDefinitionRegistry(
+		WorkflowDefinitionRegistry workflowDefinitionRegistry) {
+
+		_workflowDefinitionRegistry = workflowDefinitionRegistry;
+	}
+
+	public static void setWorkflowInstanceManager(
+		WorkflowInstanceManager workflowInstanceManager) {
+
+		_workflowInstanceManager = workflowInstanceManager;
+	}
+
+	private static TaskInstanceManager _taskInstanceManager;
+	private static WorkflowDefinitionManager _workflowDefinitionManager;
+	private static WorkflowDefinitionRegistry _workflowDefinitionRegistry;
+	private static WorkflowInstanceManager _workflowInstanceManager;
+
 }
