@@ -365,9 +365,9 @@ public class AnnouncementsFlagModelImpl extends BaseModelImpl<AnnouncementsFlag>
 
 	private long _flagId;
 	private long _userId;
+	private String _userUuid;
 	private long _originalUserId;
 	private boolean _setOriginalUserId;
-	private String _userUuid;
 	private Date _createDate;
 	private long _entryId;
 	private long _originalEntryId;

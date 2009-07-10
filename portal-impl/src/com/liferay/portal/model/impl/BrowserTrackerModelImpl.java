@@ -288,9 +288,9 @@ public class BrowserTrackerModelImpl extends BaseModelImpl<BrowserTracker> {
 
 	private long _browserTrackerId;
 	private long _userId;
+	private String _userUuid;
 	private long _originalUserId;
 	private boolean _setOriginalUserId;
-	private String _userUuid;
 	private long _browserKey;
 	private transient ExpandoBridge _expandoBridge;
 }

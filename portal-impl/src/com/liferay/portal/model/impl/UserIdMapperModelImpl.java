@@ -345,9 +345,9 @@ public class UserIdMapperModelImpl extends BaseModelImpl<UserIdMapper> {
 
 	private long _userIdMapperId;
 	private long _userId;
+	private String _userUuid;
 	private long _originalUserId;
 	private boolean _setOriginalUserId;
-	private String _userUuid;
 	private String _type;
 	private String _originalType;
 	private String _description;

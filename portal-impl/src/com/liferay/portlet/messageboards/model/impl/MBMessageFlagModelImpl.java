@@ -370,9 +370,9 @@ public class MBMessageFlagModelImpl extends BaseModelImpl<MBMessageFlag> {
 
 	private long _messageFlagId;
 	private long _userId;
+	private String _userUuid;
 	private long _originalUserId;
 	private boolean _setOriginalUserId;
-	private String _userUuid;
 	private Date _modifiedDate;
 	private long _threadId;
 	private long _messageId;

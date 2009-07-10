@@ -404,9 +404,9 @@ public class DLFileRankModelImpl extends BaseModelImpl<DLFileRank> {
 	private long _originalCompanyId;
 	private boolean _setOriginalCompanyId;
 	private long _userId;
+	private String _userUuid;
 	private long _originalUserId;
 	private boolean _setOriginalUserId;
-	private String _userUuid;
 	private Date _createDate;
 	private long _folderId;
 	private long _originalFolderId;

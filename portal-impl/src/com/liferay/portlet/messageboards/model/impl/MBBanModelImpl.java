@@ -417,8 +417,8 @@ public class MBBanModelImpl extends BaseModelImpl<MBBan> {
 	private Date _createDate;
 	private Date _modifiedDate;
 	private long _banUserId;
+	private String _banUserUuid;
 	private long _originalBanUserId;
 	private boolean _setOriginalBanUserId;
-	private String _banUserUuid;
 	private transient ExpandoBridge _expandoBridge;
 }

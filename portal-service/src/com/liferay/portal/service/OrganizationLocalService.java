@@ -167,7 +167,7 @@ public interface OrganizationLocalService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Organization> getUserOrganizations(
-		long userId, boolean inherit)
+		long userId, boolean inheritUserGroups)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
@@ -179,7 +179,7 @@ public interface OrganizationLocalService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Organization> getUserOrganizations(
-		long userId, boolean inherit, int start, int end)
+		long userId, boolean inheritUserGroups, int start, int end)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 

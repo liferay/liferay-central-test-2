@@ -441,9 +441,9 @@ public class RatingsEntryModelImpl extends BaseModelImpl<RatingsEntry> {
 	private long _entryId;
 	private long _companyId;
 	private long _userId;
+	private String _userUuid;
 	private long _originalUserId;
 	private boolean _setOriginalUserId;
-	private String _userUuid;
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;

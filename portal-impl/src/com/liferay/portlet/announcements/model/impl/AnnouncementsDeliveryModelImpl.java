@@ -394,9 +394,9 @@ public class AnnouncementsDeliveryModelImpl extends BaseModelImpl<AnnouncementsD
 	private long _deliveryId;
 	private long _companyId;
 	private long _userId;
+	private String _userUuid;
 	private long _originalUserId;
 	private boolean _setOriginalUserId;
-	private String _userUuid;
 	private String _type;
 	private String _originalType;
 	private boolean _email;

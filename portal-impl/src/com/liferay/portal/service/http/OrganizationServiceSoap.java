@@ -247,7 +247,7 @@ public class OrganizationServiceSoap {
 		long userId, boolean inheritUserGroups) throws RemoteException {
 		try {
 			java.util.List<com.liferay.portal.model.Organization> returnValue = OrganizationServiceUtil.getUserOrganizations(userId,
-				inheritUserGroups);
+					inheritUserGroups);
 
 			return com.liferay.portal.model.OrganizationSoap.toSoapModels(returnValue);
 		}

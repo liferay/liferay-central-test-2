@@ -565,7 +565,8 @@ public class OrganizationServiceHttp {
 			Object paramObj1 = new BooleanWrapper(inheritUserGroups);
 
 			MethodWrapper methodWrapper = new MethodWrapper(OrganizationServiceUtil.class.getName(),
-				"getUserOrganizations", new Object[] { paramObj0, paramObj1 });
+					"getUserOrganizations",
+					new Object[] { paramObj0, paramObj1 });
 
 			Object returnObj = null;
 

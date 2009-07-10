@@ -1049,9 +1049,9 @@ public class UserModelImpl extends BaseModelImpl<User> {
 
 	private String _uuid;
 	private long _userId;
+	private String _userUuid;
 	private long _originalUserId;
 	private boolean _setOriginalUserId;
-	private String _userUuid;
 	private long _companyId;
 	private long _originalCompanyId;
 	private boolean _setOriginalCompanyId;

@@ -550,9 +550,9 @@ public class SocialActivityModelImpl extends BaseModelImpl<SocialActivity> {
 	private boolean _setOriginalGroupId;
 	private long _companyId;
 	private long _userId;
+	private String _userUuid;
 	private long _originalUserId;
 	private boolean _setOriginalUserId;
-	private String _userUuid;
 	private long _createDate;
 	private long _originalCreateDate;
 	private boolean _setOriginalCreateDate;
@@ -570,8 +570,8 @@ public class SocialActivityModelImpl extends BaseModelImpl<SocialActivity> {
 	private boolean _setOriginalType;
 	private String _extraData;
 	private long _receiverUserId;
+	private String _receiverUserUuid;
 	private long _originalReceiverUserId;
 	private boolean _setOriginalReceiverUserId;
-	private String _receiverUserUuid;
 	private transient ExpandoBridge _expandoBridge;
 }

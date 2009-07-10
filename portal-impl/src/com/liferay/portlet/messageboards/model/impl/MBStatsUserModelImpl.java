@@ -360,9 +360,9 @@ public class MBStatsUserModelImpl extends BaseModelImpl<MBStatsUser> {
 	private long _originalGroupId;
 	private boolean _setOriginalGroupId;
 	private long _userId;
+	private String _userUuid;
 	private long _originalUserId;
 	private boolean _setOriginalUserId;
-	private String _userUuid;
 	private int _messageCount;
 	private Date _lastPostDate;
 	private transient ExpandoBridge _expandoBridge;
