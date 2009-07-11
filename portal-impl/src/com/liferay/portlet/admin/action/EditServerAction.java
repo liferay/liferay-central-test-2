@@ -337,8 +337,8 @@ public class EditServerAction extends PortletAction {
 			actionRequest, "igImageExtensions");
 		long igImageMaxSize = ParamUtil.getLong(
 			actionRequest, "igImageMaxSize");
-		String igThumbnailMaxDimension = getFileExtensions(
-			actionRequest, "igThumbnailMaxDimension");
+		long igThumbnailMaxDimension = ParamUtil.getLong(
+			actionRequest, "igImageThumbnailMaxDimensions");
 		String journalImageExtensions = getFileExtensions(
 			actionRequest, "journalImageExtensions");
 		long journalImageSmallMaxSize = ParamUtil.getLong(
@@ -374,7 +374,7 @@ public class EditServerAction extends PortletAction {
 			PropsKeys.IG_IMAGE_MAX_SIZE, String.valueOf(igImageMaxSize));
 		preferences.setValue(
 			PropsKeys.IG_IMAGE_THUMBNAIL_MAX_DIMENSION,
-			igThumbnailMaxDimension);
+			String.valueOf(igThumbnailMaxDimension));
 		preferences.setValue(
 			PropsKeys.JOURNAL_IMAGE_EXTENSIONS, journalImageExtensions);
 		preferences.setValue(
