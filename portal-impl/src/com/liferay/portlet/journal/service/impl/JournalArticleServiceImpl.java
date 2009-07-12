@@ -24,7 +24,6 @@ package com.liferay.portlet.journal.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.model.User;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -107,13 +106,11 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		User user = getUser();
-
 		JournalPermission.check(
 			getPermissionChecker(), groupId, ActionKeys.APPROVE_ARTICLE);
 
 		return journalArticleLocalService.approveArticle(
-			user.getUserId(), groupId, articleId, version, articleURL,
+			getUserId(), groupId, articleId, version, articleURL,
 			serviceContext);
 	}
 
