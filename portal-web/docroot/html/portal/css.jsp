@@ -1569,6 +1569,10 @@ fieldset:last-child, .aui-form fieldset:last-child {
 	float: left;
 }
 
+.lfr-language-selector input, .lfr-language-selector textarea {
+	width: 200px;
+}
+
 /* ---------- Taglib input move boxes ---------- */
 
 .taglib-move-boxes {
