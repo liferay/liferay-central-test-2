@@ -22,6 +22,8 @@
 
 package com.liferay.portal.model;
 
+import java.util.Locale;
+import java.util.Map;
 
 /**
  * <a href="RoleModel.java.html"><b><i>View Source</i></b></a>
@@ -72,7 +74,21 @@ public interface RoleModel extends BaseModel<Role> {
 
 	public String getTitle();
 
+	public String getTitle(Locale locale);
+
+	public String getTitle(Locale locale, boolean useDefault);
+
+	public String getTitle(String languageId);
+
+	public String getTitle(String languageId, boolean useDefault);
+
+	public Map<Locale, String> getTitleMap();
+
 	public void setTitle(String title);
+
+	public void setTitle(Locale locale, String title);
+
+	public void setTitleMap(Map<Locale, String> titleMap);
 
 	public String getDescription();
 

@@ -46,10 +46,11 @@ package com.liferay.portal.service;
  */
 public class RoleServiceUtil {
 	public static com.liferay.portal.model.Role addRole(java.lang.String name,
+		java.util.Map<java.util.Locale, String> titleMap,
 		java.lang.String description, int type)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return getService().addRole(name, description, type);
+		return getService().addRole(name, titleMap, description, type);
 	}
 
 	public static void addUserRoles(long userId, long[] roleIds)
@@ -132,13 +133,12 @@ public class RoleServiceUtil {
 
 	public static com.liferay.portal.model.Role updateRole(long roleId,
 		java.lang.String name,
-		java.util.Map<java.util.Locale, String> localeTitlesMap,
+		java.util.Map<java.util.Locale, String> titleMap,
 		java.lang.String description, java.lang.String subtype)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
-				   .updateRole(roleId, name, localeTitlesMap, description,
-			subtype);
+				   .updateRole(roleId, name, titleMap, description, subtype);
 	}
 
 	public static RoleService getService() {
