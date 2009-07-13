@@ -95,8 +95,8 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		role.setClassNameId(classNameId);
 		role.setClassPK(classPK);
 		role.setName(name);
-		role.setDescription(description);
 		role.setTitleMap(titleMap);
+		role.setDescription(description);
 		role.setType(type);
 
 		rolePersistence.update(role, false);
@@ -445,9 +445,9 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		}
 
 		role.setName(name);
+		role.setTitleMap(titleMap);
 		role.setDescription(description);
 		role.setSubtype(subtype);
-		role.setTitleMap(titleMap);
 
 		rolePersistence.update(role, false);
 
