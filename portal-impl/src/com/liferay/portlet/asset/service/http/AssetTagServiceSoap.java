@@ -198,11 +198,12 @@ public class AssetTagServiceSoap {
 	}
 
 	public static com.liferay.portlet.asset.model.AssetTagSoap updateTag(
-		long tagId, java.lang.String name, java.lang.String[] tagProperties)
+		long tagId, java.lang.String name, java.lang.String[] tagProperties,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
 			com.liferay.portlet.asset.model.AssetTag returnValue = AssetTagServiceUtil.updateTag(tagId,
-					name, tagProperties);
+					name, tagProperties, serviceContext);
 
 			return com.liferay.portlet.asset.model.AssetTagSoap.toSoapModel(returnValue);
 		}

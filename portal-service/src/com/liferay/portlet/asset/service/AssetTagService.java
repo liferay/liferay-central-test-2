@@ -98,7 +98,8 @@ public interface AssetTagService {
 		int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.asset.model.AssetTag updateTag(long tagId,
-		java.lang.String name, java.lang.String[] tagProperties)
+		java.lang.String name, java.lang.String[] tagProperties,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 }

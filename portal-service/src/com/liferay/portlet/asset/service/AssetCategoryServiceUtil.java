@@ -106,12 +106,13 @@ public class AssetCategoryServiceUtil {
 
 	public static com.liferay.portlet.asset.model.AssetCategory updateCategory(
 		long categoryId, long parentCategoryId, java.lang.String name,
-		long vocabularyId, java.lang.String[] categoryProperties)
+		long vocabularyId, java.lang.String[] categoryProperties,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
 				   .updateCategory(categoryId, parentCategoryId, name,
-			vocabularyId, categoryProperties);
+			vocabularyId, categoryProperties, serviceContext);
 	}
 
 	public static AssetCategoryService getService() {

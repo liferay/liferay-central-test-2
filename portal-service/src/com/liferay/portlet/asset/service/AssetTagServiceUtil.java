@@ -99,10 +99,11 @@ public class AssetTagServiceUtil {
 	}
 
 	public static com.liferay.portlet.asset.model.AssetTag updateTag(
-		long tagId, java.lang.String name, java.lang.String[] tagProperties)
+		long tagId, java.lang.String name, java.lang.String[] tagProperties,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return getService().updateTag(tagId, name, tagProperties);
+		return getService().updateTag(tagId, name, tagProperties, serviceContext);
 	}
 
 	public static AssetTagService getService() {

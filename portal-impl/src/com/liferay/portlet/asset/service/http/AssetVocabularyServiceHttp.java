@@ -261,7 +261,8 @@ public class AssetVocabularyServiceHttp {
 	}
 
 	public static com.liferay.portlet.asset.model.AssetVocabulary updateVocabulary(
-		HttpPrincipal httpPrincipal, long vocabularyId, java.lang.String name)
+		HttpPrincipal httpPrincipal, long vocabularyId, java.lang.String name,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
@@ -273,8 +274,16 @@ public class AssetVocabularyServiceHttp {
 				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
+			Object paramObj2 = serviceContext;
+
+			if (serviceContext == null) {
+				paramObj2 = new NullWrapper(
+						"com.liferay.portal.service.ServiceContext");
+			}
+
 			MethodWrapper methodWrapper = new MethodWrapper(AssetVocabularyServiceUtil.class.getName(),
-					"updateVocabulary", new Object[] { paramObj0, paramObj1 });
+					"updateVocabulary",
+					new Object[] { paramObj0, paramObj1, paramObj2 });
 
 			Object returnObj = null;
 

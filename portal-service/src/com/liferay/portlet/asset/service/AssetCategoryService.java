@@ -103,7 +103,8 @@ public interface AssetCategoryService {
 
 	public com.liferay.portlet.asset.model.AssetCategory updateCategory(
 		long categoryId, long parentCategoryId, java.lang.String name,
-		long vocabularyId, java.lang.String[] categoryProperties)
+		long vocabularyId, java.lang.String[] categoryProperties,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 }

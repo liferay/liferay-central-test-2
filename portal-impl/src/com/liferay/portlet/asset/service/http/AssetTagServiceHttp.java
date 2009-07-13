@@ -405,7 +405,8 @@ public class AssetTagServiceHttp {
 
 	public static com.liferay.portlet.asset.model.AssetTag updateTag(
 		HttpPrincipal httpPrincipal, long tagId, java.lang.String name,
-		java.lang.String[] tagProperties)
+		java.lang.String[] tagProperties,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
@@ -423,9 +424,16 @@ public class AssetTagServiceHttp {
 				paramObj2 = new NullWrapper("[Ljava.lang.String;");
 			}
 
+			Object paramObj3 = serviceContext;
+
+			if (serviceContext == null) {
+				paramObj3 = new NullWrapper(
+						"com.liferay.portal.service.ServiceContext");
+			}
+
 			MethodWrapper methodWrapper = new MethodWrapper(AssetTagServiceUtil.class.getName(),
 					"updateTag",
-					new Object[] { paramObj0, paramObj1, paramObj2 });
+					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
 
 			Object returnObj = null;
 

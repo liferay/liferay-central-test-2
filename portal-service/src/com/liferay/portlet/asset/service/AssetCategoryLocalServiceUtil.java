@@ -226,12 +226,13 @@ public class AssetCategoryLocalServiceUtil {
 	public static com.liferay.portlet.asset.model.AssetCategory updateCategory(
 		long userId, long categoryId, long parentCategoryId,
 		java.lang.String name, long vocabularyId,
-		java.lang.String[] categoryProperties)
+		java.lang.String[] categoryProperties,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
 				   .updateCategory(userId, categoryId, parentCategoryId, name,
-			vocabularyId, categoryProperties);
+			vocabularyId, categoryProperties, serviceContext);
 	}
 
 	public static AssetCategoryLocalService getService() {

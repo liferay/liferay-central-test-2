@@ -408,7 +408,8 @@ public class AssetCategoryServiceHttp {
 	public static com.liferay.portlet.asset.model.AssetCategory updateCategory(
 		HttpPrincipal httpPrincipal, long categoryId, long parentCategoryId,
 		java.lang.String name, long vocabularyId,
-		java.lang.String[] categoryProperties)
+		java.lang.String[] categoryProperties,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
@@ -430,10 +431,18 @@ public class AssetCategoryServiceHttp {
 				paramObj4 = new NullWrapper("[Ljava.lang.String;");
 			}
 
+			Object paramObj5 = serviceContext;
+
+			if (serviceContext == null) {
+				paramObj5 = new NullWrapper(
+						"com.liferay.portal.service.ServiceContext");
+			}
+
 			MethodWrapper methodWrapper = new MethodWrapper(AssetCategoryServiceUtil.class.getName(),
 					"updateCategory",
 					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
+						paramObj5
 					});
 
 			Object returnObj = null;

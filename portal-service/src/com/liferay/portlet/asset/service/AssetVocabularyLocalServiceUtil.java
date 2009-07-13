@@ -178,10 +178,11 @@ public class AssetVocabularyLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.asset.model.AssetVocabulary updateVocabulary(
-		long vocabularyId, java.lang.String name)
+		long vocabularyId, java.lang.String name,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return getService().updateVocabulary(vocabularyId, name);
+		return getService().updateVocabulary(vocabularyId, name, serviceContext);
 	}
 
 	public static AssetVocabularyLocalService getService() {
