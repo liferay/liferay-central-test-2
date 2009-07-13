@@ -420,8 +420,8 @@ public interface WorkflowInstanceManager {
 	 * initialized with the given map of context information, if provided
 	 * (optional). The newly created instance is related to the specified domain
 	 * object instance and hence can be retrieved later using the
-	 * {@link #getWorkflowInstanceInfo(String, long)} (see its comment for more
-	 * information about relations to domain objects).
+	 * {@link #getWorkflowInstanceInfo(String, long, boolean)} (see its comment
+	 * for more information about relations to domain objects).
 	 * </p>
 	 *
 	 * <p>
