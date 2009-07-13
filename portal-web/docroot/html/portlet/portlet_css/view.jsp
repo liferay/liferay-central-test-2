@@ -81,6 +81,12 @@
 				</div>
 
 				<div class="aui-ctrl-holder">
+					<label class="inline-label">
+						<liferay-ui:message key="use-custom-title" /> <input type="checkbox" name="use-custom-title-checkbox" id="use-custom-title-checkbox" />
+					</label>
+				</div>
+
+				<div class="aui-ctrl-holder">
 					<label for="lfr-point-links"><liferay-ui:message key="link-portlet-urls-to-page" /></label>
 
 					<select id="lfr-point-links">
@@ -142,10 +148,6 @@
 
 				<div class="aui-ctrl-holder">
 					<label class="inline-label">
-						<liferay-ui:message key="use-custom-title" /> <input type="checkbox" name="use-custom-title-checkbox" id="use-custom-title-checkbox" />
-					</label>
-
-					<label class="inline-label">
 						<liferay-ui:message key="show-borders" /> <input id="show-borders" name="show-borders" type="checkbox" />
 					</label>
 
@@ -174,17 +176,15 @@
 					</div>
 
 					<div class="aui-ctrl-holder">
-						<p class="label">
-							<liferay-ui:message key="font-style" />
-						</p>
+						<label class="inline-label" for="lfr-font-bold"><liferay-ui:message key="bold" />
+							<input type="checkbox" name="lfr-font-bold" id="lfr-font-bold" />
+						</label>
+					</div>
 
-						<label class="inline-label" for="lfr-font-bold"><liferay-ui:message key="bold" /></label>
-
-						<input type="checkbox" name="lfr-font-bold" id="lfr-font-bold" />
-
-						<label class="inline-label" for="lfr-font-italic"><liferay-ui:message key="italic" /></label>
-
-						<input type="checkbox" name="lfr-font-italic" id="lfr-font-italic" />
+					<div class="aui-ctrl-holder">
+						<label class="inline-label" for="lfr-font-italic"><liferay-ui:message key="italic" />
+							<input type="checkbox" name="lfr-font-italic" id="lfr-font-italic" />
+						</label>
 					</div>
 
 					<div class="aui-ctrl-holder">

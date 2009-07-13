@@ -1140,6 +1140,10 @@ li.toggle-expand a {
 
 /* ---------- Portlets ---------- */
 
+#lfr-look-and-feel fieldset {
+	border:1px solid #BFBFBF;
+}
+
 /* ---------- Generic styling ---------- */
 
 .breadcrumbs {
