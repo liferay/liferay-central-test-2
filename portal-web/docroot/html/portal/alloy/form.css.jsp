@@ -198,23 +198,6 @@
 .aui-form .error-field {
 }
 
-.aui-form .aui-form-column {
-	float: left;
-	margin-right: 10px;
-	width: auto;
-}
-
-.aui-form .column-left {
-	float: left;
-	margin-right: 10px;
-	width: auto;
-}
-
-.aui-form .column-right {
-	float: right;
-	width: 33%;
-}
-
 .ie6 .aui-form, .ie6 .aui-form fieldset, .ie6 .aui-ctrl-holder, .ie6 .aui-ctrl-holder span, .ie6 .form-hint {
 	zoom: 1;
 }
@@ -300,16 +283,19 @@
 }
 
 .aui-form .aui-form-column {
+	float: left;
 	margin: 0 2% 0 0;
-	width: 47.9%;
+	width: auto;
 }
 
 .aui-form .column-left {
-	width: 49%;
+	float: left;
+	width: auto;
 }
 
 .aui-form .column-right {
-	width: 49%;
+	float: right;
+	width: auto;
 }
 
 .aui-form #error-msg {
