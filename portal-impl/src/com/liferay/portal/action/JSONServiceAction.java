@@ -41,9 +41,11 @@ import com.liferay.portal.service.ServiceContextUtil;
 import com.liferay.portal.struts.JSONAction;
 import com.liferay.portlet.asset.model.AssetEntryDisplay;
 import com.liferay.portlet.asset.model.AssetEntryType;
+import com.liferay.util.LocalizationUtil;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.lang.reflect.Type;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -61,6 +63,7 @@ import org.apache.struts.action.ActionMapping;
  *
  * @author Brian Wing Shun Chan
  * @author Karthik Sudarshan
+ * @author Julio Camarero
  *
  */
 public class JSONServiceAction extends JSONAction {
@@ -134,7 +137,7 @@ public class JSONServiceAction extends JSONAction {
 
 		if (methodAndParameterTypes != null) {
 			Method method = (Method)methodAndParameterTypes[0];
-			Class<?>[] parameterTypes = (Class[])methodAndParameterTypes[1];
+			Type[] parameterTypes = (Type[])methodAndParameterTypes[1];
 			Object[] args = new Object[serviceParameters.length];
 
 			for (int i = 0; i < serviceParameters.length; i++) {
@@ -182,10 +185,10 @@ public class JSONServiceAction extends JSONAction {
 
 	protected Object getArgValue(
 			HttpServletRequest request, Class<?> classObj, String methodName,
-			String parameter, Class<?> parameterType)
+			String parameter, Type parameterType)
 		throws Exception {
 
-		String parameterTypeName = parameterType.getName();
+		String parameterTypeName = getTypeName(parameterType);
 
 		String value = ParamUtil.getString(request, parameter);
 
@@ -410,6 +413,13 @@ public class JSONServiceAction extends JSONAction {
 				return new String[0][0];
 			}
 		}
+		else if (parameterTypeName.equals(
+			"java.util.Map<java.util.Locale, java.lang.String>")) {
+
+			JSONObject jsonObject = JSONFactoryUtil.createJSONObject(value);
+
+			return LocalizationUtil.deserialize(jsonObject);
+		}
 		else {
 			_log.error(
 				"Unsupported parameter type for class " + classObj +
@@ -438,7 +448,7 @@ public class JSONServiceAction extends JSONAction {
 		}
 
 		Method method = null;
-		Class<?>[] methodParameterTypes = null;
+		Type[] methodParameterTypes = null;
 
 		Method[] methods = classObj.getMethods();
 
@@ -446,7 +456,7 @@ public class JSONServiceAction extends JSONAction {
 			Method curMethod = methods[i];
 
 			if (curMethod.getName().equals(methodName)) {
-				Class<?>[] curParameterTypes = curMethod.getParameterTypes();
+				Type[] curParameterTypes = curMethod.getGenericParameterTypes();
 
 				if (curParameterTypes.length == parameters.length) {
 					if ((parameterTypes.length > 0) &&
@@ -456,7 +466,7 @@ public class JSONServiceAction extends JSONAction {
 
 						for (int j = 0; j < parameterTypes.length; j++) {
 							String t1 = parameterTypes[j];
-							String t2 = curParameterTypes[j].getName();
+							String t2 = getTypeName(curParameterTypes[j]);
 
 							if (!t1.equals(t2)) {
 								match = false;
@@ -676,6 +686,18 @@ public class JSONServiceAction extends JSONAction {
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray(json);
 
 		return ArrayUtil.toStringArray(jsonArray);
+	}
+
+	protected String getTypeName(Type type) {
+		String name = type.toString();
+
+		int pos = name.indexOf("class ");
+
+		if (pos != -1) {
+			name = name.substring("class ".length());
+		}
+
+		return name;
 	}
 
 	protected boolean isValidRequest(HttpServletRequest request) {

@@ -7,5 +7,4 @@ java.io.InputStream
 java.io.OutputStream
 java.util.Map<Long, Boolean>
 java.util.Map<String, byte[]>
-java.util.Map<java.util.Locale, String>
 javax.portlet.PortletPreferences

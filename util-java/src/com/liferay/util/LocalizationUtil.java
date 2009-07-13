@@ -22,6 +22,7 @@
 
 package com.liferay.util;
 
+import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -73,9 +74,28 @@ import org.apache.commons.collections.map.ReferenceMap;
  * @author Alexander Chow
  * @author Jorge Ferrer
  * @author Mauro Mariuzzo
+ * @author Julio Camarero
  *
  */
 public class LocalizationUtil {
+
+	public static Object deserialize(JSONObject jsonObject) {
+		Locale[] locales = LanguageUtil.getAvailableLocales();
+
+		Map<Locale, String> map = new HashMap<Locale, String>();
+
+		for (Locale locale : locales) {
+			String languageId = LocaleUtil.toLanguageId(locale);
+
+			String value = jsonObject.getString(languageId);
+
+			if (Validator.isNotNull(value)) {
+				map.put(locale, value);
+			}
+		}
+
+		return map;
+	}
 
 	public static String[] getAvailableLocales(String xml) {
 		String attributeValue = _getRootAttribute(
