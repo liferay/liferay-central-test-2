@@ -1,0 +1,7 @@
+.v-popupview {
+	cursor: pointer;
+	background: #aaa;
+}
+.v-popupview-popup {
+	overflow: auto;
+}
