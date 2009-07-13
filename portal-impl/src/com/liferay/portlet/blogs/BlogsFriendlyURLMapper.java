@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.portlet.BaseFriendlyURLMapper;
 import com.liferay.portal.kernel.portlet.LiferayPortletURL;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PortletKeys;
@@ -63,7 +64,7 @@ public class BlogsFriendlyURLMapper extends BaseFriendlyURLMapper {
 				portletURL.addParameterIncludedInPath("entryId");
 			}
 			else if (Validator.isNotNull(urlTitle)) {
-				friendlyURLPath = "/blogs/" + urlTitle;
+				friendlyURLPath = "/blogs/" + HttpUtil.encodeURL(urlTitle);
 
 				portletURL.addParameterIncludedInPath("urlTitle");
 			}
