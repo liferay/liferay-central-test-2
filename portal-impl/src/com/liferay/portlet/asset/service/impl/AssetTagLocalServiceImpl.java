@@ -388,7 +388,8 @@ public class AssetTagLocalServiceImpl extends AssetTagLocalServiceBaseImpl {
 	}
 
 	public AssetTag updateTag(
-			long userId, long tagId, String name, String[] tagProperties)
+			long userId, long tagId, String name, String[] tagProperties,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Tag

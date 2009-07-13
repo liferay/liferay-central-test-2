@@ -1180,7 +1180,8 @@
 						parentCategoryId: parentCategoryId,
 						name: name,
 						vocabularyId: vocabularyId,
-						properties: categoryProperties
+						properties: categoryProperties,
+						serviceContext: null
 					},
 					function(message) {
 						var exception = message.exception;
@@ -1226,7 +1227,8 @@
 				Liferay.Service.Asset.AssetVocabulary.updateVocabulary(
 					{
 						vocabularyId: vocabularyId,
-						name: vocabularyName
+						name: vocabularyName,
+						serviceContext: null
 					},
 					callback
 				);

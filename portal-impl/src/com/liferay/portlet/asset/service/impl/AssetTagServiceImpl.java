@@ -116,14 +116,16 @@ public class AssetTagServiceImpl extends AssetTagServiceBaseImpl {
 			groupId, name, tagProperties, start, end);
 	}
 
-	public AssetTag updateTag(long tagId, String name, String[] tagProperties)
+	public AssetTag updateTag(
+			long tagId, String name, String[] tagProperties,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		AssetTagPermission.check(
 			getPermissionChecker(), tagId, ActionKeys.UPDATE);
 
 		return assetTagLocalService.updateTag(
-			getUserId(), tagId, name, tagProperties);
+			getUserId(), tagId, name, tagProperties, serviceContext);
 	}
 
 	protected List<AssetTag> filterTags(List<AssetTag> tags)

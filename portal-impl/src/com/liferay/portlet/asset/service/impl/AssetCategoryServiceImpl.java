@@ -120,7 +120,8 @@ public class AssetCategoryServiceImpl extends AssetCategoryServiceBaseImpl {
 
 	public AssetCategory updateCategory(
 			long categoryId, long parentCategoryId, String name,
-			long vocabularyId, String[] categoryProperties)
+			long vocabularyId, String[] categoryProperties,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		AssetCategoryPermission.check(
@@ -128,7 +129,7 @@ public class AssetCategoryServiceImpl extends AssetCategoryServiceBaseImpl {
 
 		return assetCategoryLocalService.updateCategory(
 			getUserId(), categoryId, parentCategoryId, name, vocabularyId,
-			categoryProperties);
+			categoryProperties, serviceContext);
 	}
 
 	protected List<AssetCategory> filterCategories(

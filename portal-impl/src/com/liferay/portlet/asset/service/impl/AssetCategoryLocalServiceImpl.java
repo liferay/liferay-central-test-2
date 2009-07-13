@@ -310,7 +310,8 @@ public class AssetCategoryLocalServiceImpl
 
 	public AssetCategory updateCategory(
 			long userId, long categoryId, long parentCategoryId, String name,
-			long vocabularyId, String[] categoryProperties)
+			long vocabularyId, String[] categoryProperties,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Category

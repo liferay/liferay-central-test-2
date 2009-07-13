@@ -198,7 +198,8 @@ public class AssetVocabularyLocalServiceImpl
 		return assetVocabularyPersistence.findByPrimaryKey(vocabularyId);
 	}
 
-	public AssetVocabulary updateVocabulary(long vocabularyId, String name)
+	public AssetVocabulary updateVocabulary(
+			long vocabularyId, String name, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		name = name.trim();

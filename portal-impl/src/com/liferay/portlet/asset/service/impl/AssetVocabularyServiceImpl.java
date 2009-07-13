@@ -91,13 +91,15 @@ public class AssetVocabularyServiceImpl
 		return assetVocabularyLocalService.getVocabulary(vocabularyId);
 	}
 
-	public AssetVocabulary updateVocabulary(long vocabularyId, String name)
+	public AssetVocabulary updateVocabulary(
+			long vocabularyId, String name, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		AssetVocabularyPermission.check(
 			getPermissionChecker(), vocabularyId, ActionKeys.UPDATE);
 
-		return assetVocabularyLocalService.updateVocabulary(vocabularyId, name);
+		return assetVocabularyLocalService.updateVocabulary(
+			vocabularyId, name, serviceContext);
 	}
 
 	protected List<AssetVocabulary> getVocabularies(

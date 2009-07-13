@@ -704,7 +704,8 @@
 					{
 						tagId: tagId,
 						name: name,
-						properties: properties
+						properties: properties,
+						serviceContext: null
 					},
 					function(message) {
 						var exception = message.exception;
