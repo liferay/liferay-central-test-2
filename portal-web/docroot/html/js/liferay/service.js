@@ -102,9 +102,11 @@ Liferay.Service.registerClass(
 Liferay.Service.registerClass(
 	Liferay.Service.Portal, "LayoutPrototype",
 	{
+		addLayoutPrototype: true,
 		deleteLayoutPrototype: true,
 		getLayoutPrototype: true,
-		search: true
+		search: true,
+		updateLayoutPrototype: true
 	}
 );
 
@@ -264,6 +266,7 @@ Liferay.Service.registerClass(
 Liferay.Service.registerClass(
 	Liferay.Service.Portal, "Role",
 	{
+		addRole: true,
 		addUserRoles: true,
 		deleteRole: true,
 		getGroupRole: true,
@@ -275,7 +278,8 @@ Liferay.Service.registerClass(
 		getUserRoles: true,
 		hasUserRole: true,
 		hasUserRoles: true,
-		unsetUserRoles: true
+		unsetUserRoles: true,
+		updateRole: true
 	}
 );
 
@@ -750,8 +754,10 @@ Liferay.Service.register("Liferay.Service.Polls", "com.liferay.portlet.polls.ser
 Liferay.Service.registerClass(
 	Liferay.Service.Polls, "PollsQuestion",
 	{
+		addQuestion: true,
 		deleteQuestion: true,
-		getQuestion: true
+		getQuestion: true,
+		updateQuestion: true
 	}
 );
 
