@@ -865,7 +865,7 @@ public class LayoutImporter {
 						assetVocabulary =
 							AssetVocabularyLocalServiceUtil.updateVocabulary(
 								existingAssetVocabulary.getVocabularyId(),
-								vocabularyName);
+								vocabularyName, serviceContext);
 					}
 				}
 				else {
@@ -935,7 +935,7 @@ public class LayoutImporter {
 				AssetCategoryLocalServiceUtil.updateCategory(
 					context.getUserId(userUuid),
 					existingAssetCategory.getCategoryId(), parentCategoryId,
-					categoryName, vocabularyId, properties);
+					categoryName, vocabularyId, properties, serviceContext);
 			}
 		}
 		else {
