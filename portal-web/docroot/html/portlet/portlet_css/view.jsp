@@ -82,7 +82,7 @@
 
 				<div class="aui-ctrl-holder">
 					<label class="inline-label">
-						<liferay-ui:message key="use-custom-title" /> <input type="checkbox" name="use-custom-title-checkbox" id="use-custom-title-checkbox" />
+						<liferay-ui:message key="use-custom-title" /> <input id="use-custom-title-checkbox" name="use-custom-title-checkbox" type="checkbox" />
 					</label>
 				</div>
 
