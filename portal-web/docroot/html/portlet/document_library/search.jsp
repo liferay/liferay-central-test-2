@@ -137,16 +137,10 @@ try {
 			continue;
 		}
 
-		PortletURL rowURL = renderResponse.createActionURL();
+		String rowHREF = themeDisplay.getPathMain() + "/document_library/get_file?p_l_id=" + themeDisplay.getPlid() + "&folderId=" + fileEntry.getFolderId() + "&name=" + HttpUtil.encodeURL(HtmlUtil.unescape(fileEntry.getName()));
 
-		rowURL.setWindowState(LiferayWindowState.EXCLUSIVE);
-
-		rowURL.setParameter("struts_action", "/document_library/get_file");
-		rowURL.setParameter("folderId", String.valueOf(folderId));
-		rowURL.setParameter("name", fileName);
-
-		row.addText(folder.getName(), rowURL);
-		row.addText(fileEntry.getTitle(), rowURL);
+		row.addText(folder.getName(), rowHREF);
+		row.addText(fileEntry.getTitle(), rowHREF);
 
 		// Score
 

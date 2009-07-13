@@ -184,6 +184,7 @@ for (int i = 0; i < portlets.size(); i++) {
 				DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(folderId, name);
 
 				entryTitle = fileEntry.getTitle();
+				entryHref = themeDisplay.getPathMain() + "/document_library/get_file?p_l_id=" + themeDisplay.getPlid() + "&folderId=" + fileEntry.getFolderId() + "&name=" + HttpUtil.encodeURL(HtmlUtil.unescape(fileEntry.getName()));
 			}
 
 			StringBuilder rowSB = new StringBuilder();
