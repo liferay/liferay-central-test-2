@@ -329,7 +329,7 @@ if (Validator.isNull(redirect)) {
 				resourcePrimKey = wikiPage.getResourcePrimKey();
 			}
 			else if (templatePage != null) {
-				templatePage.getResourcePrimKey();
+				resourcePrimKey = templatePage.getResourcePrimKey();
 			}
 			%>
 
