@@ -2382,6 +2382,18 @@
 		</comments>
 	</library>
 	<library>
+		<file-name>portal/vaadin.jar</file-name>
+		<version>6.0.1</version>
+		<project-name>Vaadin</project-name>
+		<project-url>http://vaadin.com</project-url>
+		<licenses>
+			<license>
+				<license-name>Apache License 2.0</license-name>
+				<copyright-notice>Copyright (c) 2009 IT Mill Ltd</copyright-notice>
+			</license>
+		</licenses>
+	</library>
+	<library>
 		<file-name>portal/velocity.jar</file-name>
 		<version>1.6.1</version>
 		<project-name>Velocity</project-name>
