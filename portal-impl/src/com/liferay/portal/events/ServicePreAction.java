@@ -739,7 +739,11 @@ public class ServicePreAction extends Action {
 			}
 
 			if (!PropsValues.ORGANIZATIONS_MEMBERSHIP_STRICT) {
-				for (Organization organization : user.getOrganizations()) {
+				List<Organization> userOrgs =
+					OrganizationLocalServiceUtil.getUserOrganizations(
+						user.getUserId(), true);
+
+				for (Organization organization : userOrgs) {
 					for (Organization ancestorOrganization :
 							organization.getAncestors()) {
 

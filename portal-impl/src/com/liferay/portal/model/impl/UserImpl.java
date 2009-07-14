@@ -383,7 +383,9 @@ public class UserImpl extends UserModelImpl implements User {
 
 		Set<String> questions = new TreeSet<String>();
 
-		List<Organization> organizations = getOrganizations();
+		List<Organization> organizations =
+			OrganizationLocalServiceUtil.getUserOrganizations(
+				getUserId(), true);
 
 		for (Organization organization : organizations) {
 			Set<String> organizationQuestions =

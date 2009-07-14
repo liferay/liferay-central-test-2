@@ -33,9 +33,8 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Organization;
-import com.liferay.portal.model.User;
 import com.liferay.portal.service.GroupLocalServiceUtil;
-import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.portal.service.OrganizationLocalServiceUtil;
 import com.liferay.portal.upload.LiferayFileItemFactory;
 import com.liferay.portal.upload.UploadServletRequestImpl;
 import com.liferay.portal.util.PropsValues;
@@ -252,9 +251,9 @@ public abstract class BaseCommandReceiver implements CommandReceiver {
 			argument.getCompanyId(), null, null, groupParams, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS);
 
-		User user = UserLocalServiceUtil.getUserById(argument.getUserId());
-
-		List<Organization> userOrgs = user.getOrganizations();
+		List<Organization> userOrgs =
+			OrganizationLocalServiceUtil.getUserOrganizations(
+				argument.getUserId(), true);
 
 		for (Organization organization : userOrgs) {
 			groups.add(0, organization.getGroup());
@@ -263,7 +262,8 @@ public abstract class BaseCommandReceiver implements CommandReceiver {
 		if (PropsValues.LAYOUT_USER_PRIVATE_LAYOUTS_ENABLED ||
 			PropsValues.LAYOUT_USER_PUBLIC_LAYOUTS_ENABLED) {
 
-			Group userGroup = user.getGroup();
+			Group userGroup = GroupLocalServiceUtil.getUserGroup(
+				argument.getCompanyId(), argument.getUserId());
 
 			groups.add(0, userGroup);
 		}

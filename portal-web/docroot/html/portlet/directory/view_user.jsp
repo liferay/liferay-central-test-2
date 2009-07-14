@@ -29,7 +29,7 @@ User selUser = PortalUtil.getSelectedUser(request);
 
 Contact selContact = selUser.getContact();
 
-List<Organization> organizations = selUser.getOrganizations();
+List<Organization> organizations = OrganizationLocalServiceUtil.getUserOrganizations(selUser.getUserId(), true);
 
 request.setAttribute("user.selUser", selUser);
 request.setAttribute("user.selContact", selContact);

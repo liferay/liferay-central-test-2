@@ -87,7 +87,7 @@ private void _buildParentGroupsBreadcrumb(LayoutSet layoutSet, PortletURL portle
 	else if (group.isUser()) {
 		User groupUser = UserLocalServiceUtil.getUser(group.getClassPK());
 
-		List<Organization> organizations = groupUser.getOrganizations();
+		List<Organization> organizations = OrganizationLocalServiceUtil.getUserOrganizations(groupUser.getUserId(), true);
 
 		if (!organizations.isEmpty()) {
 			Organization organization = organizations.get(0);
