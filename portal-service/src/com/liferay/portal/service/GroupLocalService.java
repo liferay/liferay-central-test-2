@@ -118,7 +118,16 @@ public interface GroupLocalService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	public void checkCompanyGroup(long companyId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
 	public void checkSystemGroups(long companyId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portal.model.Group getCompanyGroup(long companyId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 

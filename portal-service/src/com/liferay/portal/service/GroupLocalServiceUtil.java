@@ -140,10 +140,22 @@ public class GroupLocalServiceUtil {
 		getService().addUserGroups(userId, groupIds);
 	}
 
+	public static void checkCompanyGroup(long companyId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		getService().checkCompanyGroup(companyId);
+	}
+
 	public static void checkSystemGroups(long companyId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		getService().checkSystemGroups(companyId);
+	}
+
+	public static com.liferay.portal.model.Group getCompanyGroup(long companyId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService().getCompanyGroup(companyId);
 	}
 
 	public static com.liferay.portal.model.Group getFriendlyURLGroup(

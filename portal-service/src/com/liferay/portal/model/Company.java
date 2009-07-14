@@ -64,6 +64,8 @@ public interface Company extends CompanyModel {
 
 	public java.lang.String getEmailAddress();
 
+	public com.liferay.portal.model.Group getGroup();
+
 	public java.security.Key getKeyObj();
 
 	public java.util.Locale getLocale();
