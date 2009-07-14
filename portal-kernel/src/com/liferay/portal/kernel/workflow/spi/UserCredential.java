@@ -20,8 +20,9 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.workflow;
+package com.liferay.portal.kernel.workflow.spi;
 
+import java.io.Serializable;
 import java.util.Set;
 
 /**
@@ -29,21 +30,53 @@ import java.util.Set;
  * 
  * <p>
  * The user credential is a container for a user's id and its roles and is used
- * as the credential towards the workflow engine.
+ * as the credential towards the workflow engine. For convenience, it is just
+ * used within the SPI as the API just takes the user id, the role set is being
+ * added by the proxy in order to avoid the implementation or adapter having to
+ * call back the portal for the set of roles of a user's id.
  * </p>
  * 
  * @author Micha Kiener
  * 
  */
-public interface UserCredential {
+public class UserCredential implements Serializable {
+
+	/**
+	 * Default constructor, just used for de-serialization, never for
+	 * construction.
+	 */
+	public UserCredential() {
+
+	}
+
+	/**
+	 * The constructor for the user credential object representing the given
+	 * user id and its role set.
+	 * 
+	 * @param set the set of role ids the user is assigned to
+	 * @param id the id of the user
+	 */
+	public UserCredential(Set<Long> set, long id) {
+		super();
+		_roleSet = set;
+		_userId = id;
+	}
+
 
 	/**
 	 * @return the id of the user reflected by this credential
 	 */
-	public long getUserId();
+	public long getUserId() {
+		return _userId;
+	}
 
 	/**
 	 * @return the set of the role ids the user reflected by this credential has
 	 */
-	public Set<Long> getRoleIds();
+	public Set<Long> getRoleIds() {
+		return _roleSet;
+	}
+
+	private Set<Long> _roleSet;
+	private long _userId;
 }

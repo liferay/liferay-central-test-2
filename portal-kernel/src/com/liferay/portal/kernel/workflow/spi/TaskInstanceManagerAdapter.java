@@ -20,42 +20,32 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.workflow;
+package com.liferay.portal.kernel.workflow.spi;
 
 import java.util.List;
 import java.util.Map;
 
+import com.liferay.portal.kernel.workflow.TaskInstanceInfo;
+import com.liferay.portal.kernel.workflow.WorkflowDefinitionManager;
+import com.liferay.portal.kernel.workflow.WorkflowException;
+
 /**
- * <a href="TaskInstanceManager.java.html"><b><i>View Source</i></b></a>
+ * <a href="TaskInstanceManagerAdapter.java.html"><b><i>View Source</i></b></a>
  * 
  * <p>
- * The task instance manager handles all tasks related to a workflow system. A
- * task might be part of the workflow definition in order to stop the execution
- * plan as any user needs to complete the task before the execution continues.
+ * This is the SPI for the {@link WorkflowDefinitionManager}. Inspect it for the
+ * details about the interface as they are not being documented here again.
  * </p>
  * 
  * <p>
- * The next step in a workflow definition is a decision to be made by a user, so
- * this could be modeled by adding a task activity to the workflow definition,
- * stopping the workflow execution and creating a task instance. The task would
- * ask the user for a decision and adds it to the context information available
- * trough the workflow instance and hence any node would have access to it.
- * After the task is completed, the workflow execution automatically continues
- * by executing the decision element using the information entered while
- * completing the task and taking that decision to continue with the execution
- * of the workflow.
- * </p>
- * 
- * <p>
- * This is just one scenario where tasks come into play, but basically, a task
- * is just an element preventing the execution of the workflow by delegating it
- * to a user through a task instance.
+ * See {@link WorkflowInstanceManagerAdapter} for more details about the
+ * mechanism to invoke a workflow API method.
  * </p>
  * 
  * @author Micha Kiener
  * 
  */
-public interface TaskInstanceManager {
+public interface TaskInstanceManagerAdapter {
 
 	/**
 	 * Assign the task instance with the given id to the specified role with an
@@ -82,7 +72,7 @@ public interface TaskInstanceManager {
 	 * reflect those changes made to the task instance.
 	 * 
 	 * @param taskInstanceId the id of the task instance to be assigned
-	 * @param userId the id of the user to assign the task to
+	 * @param userCredential the credential of the user to assign the task to
 	 * @param comment the optional comment for the user being the new assignee
 	 * @param attributes the optional attributes to be passed on to the context
 	 *            information of the workflow instance (they can be empty or
@@ -91,7 +81,7 @@ public interface TaskInstanceManager {
 	 * @throws WorkflowException is thrown, if the user could not be assigned
 	 */
 	public TaskInstanceInfo assignTaskInstanceToUser(
-			long taskInstanceId, long userId, String comment,
+			long taskInstanceId, UserCredential userCredential, String comment,
 			Map<String, Object> attributes)
 		throws WorkflowException;
 
@@ -127,7 +117,8 @@ public interface TaskInstanceManager {
 	 * </p>
 	 * 
 	 * @param taskInstanceId the id of the task instance to be completed
-	 * @param userId the id of the user completing the task
+	 * @param userCredential the id of the user and its role set completing the
+	 *            task
 	 * @param comment an optional comment made by completing the task (just as a
 	 *            comment, not a structured information)
 	 * @param attributes the optional attributes to be passed on to the context
@@ -138,7 +129,7 @@ public interface TaskInstanceManager {
 	 *             workflow could not be continued
 	 */
 	public TaskInstanceInfo completeTaskInstance(
-			long taskInstanceId, long userId, String comment,
+			long taskInstanceId, UserCredential userCredential, String comment,
 			Map<String, Object> attributes)
 		throws WorkflowException;
 
