@@ -27,8 +27,6 @@ import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.upgrade.UpgradeException;
@@ -146,15 +144,10 @@ public class UpgradeAssetPublisher extends UpgradeProcess {
 			PortletPreferencesSerializer.fromXML(
 				companyId, ownerId, ownerType, plid, portletId, xml);
 
-		String andOperatorPreference = preferences.getValue(
-			"and-operator", StringPool.BLANK);
-		boolean andOperator = false;
+		boolean andOperator = GetterUtil.getBoolean(
+			preferences.getValue("and-operator", null));
 
-		if (Validator.isNotNull(andOperatorPreference)) {
-			//preferences.reset("and-operator");
-
-			andOperator = GetterUtil.getBoolean(andOperatorPreference);
-		}
+		preferences.reset("and-operator");
 
 		String[] assetTagNames = preferences.getValues("entries", null);
 		String[] notAssetTagNames = preferences.getValues("not-entries", null);
@@ -162,11 +155,11 @@ public class UpgradeAssetPublisher extends UpgradeProcess {
 		int i = 0;
 
 		if (assetTagNames != null) {
-			//preferences.reset("entries");
+			preferences.reset("entries");
 
-			preferences.setValue("queryContains" + i, String.valueOf(true));
-			preferences.setValue("queryAndOperator" + i, String.valueOf(
-				andOperator));
+			preferences.setValue("queryContains" + i, Boolean.TRUE.toString());
+			preferences.setValue(
+				"queryAndOperator" + i, String.valueOf(andOperator));
 			preferences.setValue("queryName" + i, "assetTags");
 			preferences.setValues("queryValues" + i, assetTagNames);
 
@@ -174,11 +167,11 @@ public class UpgradeAssetPublisher extends UpgradeProcess {
 		}
 
 		if (notAssetTagNames != null) {
-			//preferences.reset("not-entries");
+			preferences.reset("not-entries");
 
-			preferences.setValue("queryContains" + i, String.valueOf(false));
-			preferences.setValue("queryAndOperator" + i, String.valueOf(
-				andOperator));
+			preferences.setValue("queryContains" + i, Boolean.FALSE.toString());
+			preferences.setValue(
+				"queryAndOperator" + i, String.valueOf(andOperator));
 			preferences.setValue("queryName" + i, "assetTags");
 			preferences.setValues("queryValues" + i, notAssetTagNames);
 
