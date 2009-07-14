@@ -26,21 +26,31 @@
 
 <%
 Organization organization = (Organization)request.getAttribute(WebKeys.ORGANIZATION);
+
+long classPK = 0;
+
+if (organization != null) {
+	classPK = organization.getOrganizationId();
+}
 %>
+
+<h3><liferay-ui:message key="categories" /></h3>
 
 <fieldset class="aui-block-labels">
 	<div class="aui-ctrl-holder">
-		<label for="<portlet:namespace />assetTagNames"><liferay-ui:message key="tags" /></label>
+		<liferay-ui:asset-categories-selector
+			className="<%= Organization.class.getName() %>"
+			classPK="<%= classPK %>"
+			/>
+	</div>
+</fieldset>
 
-		<%
-		long classPK = 0;
+<h3><liferay-ui:message key="tags" /></h3>
 
-		if (organization != null) {
-			classPK = organization.getOrganizationId();
-		}
-		%>
+<fieldset class="aui-block-labels">
 
-		<liferay-ui:asset-tags-selector
+	<div class="aui-ctrl-holder">
+			<liferay-ui:asset-tags-selector
 			className="<%= Organization.class.getName() %>"
 			classPK="<%= classPK %>"
 		/>

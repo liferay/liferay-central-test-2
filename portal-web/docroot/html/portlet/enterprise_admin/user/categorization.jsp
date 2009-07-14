@@ -26,21 +26,31 @@
 
 <%
 User selUser = (User)request.getAttribute("user.selUser");
+
+long classPK = 0;
+
+if (selUser != null) {
+	classPK = selUser.getUserId();
+}
 %>
+
+<h3><liferay-ui:message key="categories" /></h3>
 
 <fieldset class="aui-block-labels">
 	<div class="aui-ctrl-holder">
-		<label for="<portlet:namespace />assetTagNames"><liferay-ui:message key="tags" /></label>
+		<liferay-ui:asset-categories-selector
+			className="<%= User.class.getName() %>"
+			classPK="<%= classPK %>"
+			/>
+	</div>
+</fieldset>
 
-		<%
-		long classPK = 0;
+<h3><liferay-ui:message key="tags" /></h3>
 
-		if (selUser != null) {
-			classPK = selUser.getUserId();
-		}
-		%>
+<fieldset class="aui-block-labels">
 
-		<liferay-ui:asset-tags-selector
+	<div class="aui-ctrl-holder">
+			<liferay-ui:asset-tags-selector
 			className="<%= User.class.getName() %>"
 			classPK="<%= classPK %>"
 		/>
