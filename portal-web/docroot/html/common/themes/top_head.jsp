@@ -219,8 +219,11 @@ StringBuilder pageTopSB = (StringBuilder)request.getAttribute(WebKeys.PAGE_TOP);
 								(
 									this.nodeName == "IMG" &&
 									(
-										(this.src.toLowerCase().indexOf('.png') > -1) ||
-										(this.className && ([''].concat(this.className.split(' ')).concat(['']).join('|').indexOf('|png|')) > -1)
+										(
+											(this.src.toLowerCase().indexOf('.png') > -1) ||
+											(this.className && ([''].concat(this.className.split(' ')).concat(['']).join('|').indexOf('|png|')) > -1)
+										) &&
+										(this.className.indexOf('no-png-fix') == -1)
 									) ?
 										(
 											this.runtimeStyle.backgroundImage = "none",

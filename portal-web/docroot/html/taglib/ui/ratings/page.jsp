@@ -67,7 +67,7 @@ RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 						</div>
 
 						<div id="<%= randomNamespace %>yourRating">
-							<img alt="1" src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img alt="2" src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img alt="3" src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img alt="4" src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img alt="5" src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" />
+							<img alt="1" class="no-png-fix" src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img alt="2" class="no-png-fix" src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img alt="3" class="no-png-fix" src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img alt="4" class="no-png-fix" src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img alt="5" class="no-png-fix" src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" />
 						</div>
 					</td>
 					<td style="padding-left: 30px;"></td>
@@ -79,7 +79,7 @@ RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 					</div>
 
 					<div id="<%= randomNamespace %>averageRating" onmouseover="Liferay.Portal.ToolTip.show(event, this, '<%= MathUtil.format(stats.getAverageScore(), 1, 1) %> <%= UnicodeLanguageUtil.get(pageContext, "stars") %>')">
-						<img alt="1" src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img alt="2" src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img alt="3" src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img alt="4" src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img alt="5" src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" />
+						<img alt="1" class="no-png-fix" src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img alt="2" class="no-png-fix" src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img alt="3" class="no-png-fix" src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img alt="4" class="no-png-fix" src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img alt="5" class="no-png-fix" src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" />
 					</div>
 				</td>
 			</tr>

@@ -43,7 +43,7 @@ String scoreString = numberFormat.format(score);
 	</c:when>
 	<c:otherwise>
 		<div class="taglib-ratings score" id="<%= randomNamespace %>averageRating" onmouseover="Liferay.Portal.ToolTip.show(event, this, '<%= scoreString %> Stars')">
-			<img alt="<liferay-ui:message key="star-off" />" src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img alt="<liferay-ui:message key="star-off" />" src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img alt="<liferay-ui:message key="star-off" />" src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img alt="<liferay-ui:message key="star-off" />" src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img alt="<liferay-ui:message key="star-off" />" src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" />
+			<img alt="<liferay-ui:message key="star-off" />" class="no-png-fix" src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img alt="<liferay-ui:message key="star-off" />" class="no-png-fix" src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img alt="<liferay-ui:message key="star-off" />" class="no-png-fix" src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img alt="<liferay-ui:message key="star-off" />" class="no-png-fix" src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img alt="<liferay-ui:message key="star-off" />" class="no-png-fix" src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" />
 		</div>
 
 		<script type="text/javascript">
