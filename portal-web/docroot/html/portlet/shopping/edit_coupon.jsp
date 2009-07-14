@@ -231,7 +231,7 @@ String discountType = BeanParamUtil.getString(coupon, request, "discountType");
 		<liferay-ui:message key="minimum-order" />
 	</td>
 	<td>
-		<input name="<portlet:namespace />minOrder" size="4" type="text" value="<%= currencyFormat.format(minOrder) %>" />
+		<input name="<portlet:namespace />minOrder" size="4" type="text" value="<%= doubleFormat.format(minOrder) %>" />
 	</td>
 	<td>
 		<liferay-ui:message key="discount" />

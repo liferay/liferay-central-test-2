@@ -223,7 +223,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 				<liferay-ui:message key="minimum-order" />
 			</td>
 			<td>
-				<input maxlength="7" name="<portlet:namespace />minOrder" type="text" size="7" value="<%= currencyFormat.format(shoppingPrefs.getMinOrder()) %>" />
+				<input maxlength="7" name="<portlet:namespace />minOrder" type="text" size="7" value="<%= doubleFormat.format(shoppingPrefs.getMinOrder()) %>" />
 			</td>
 		</tr>
 		</table>

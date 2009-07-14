@@ -520,7 +520,7 @@ for (int i = 0; i < pricesCount; i++) {
 					<liferay-ui:message key="price" />
 				</td>
 				<td>
-					<liferay-ui:input-field model="<%= ShoppingItemPrice.class %>" field="price" fieldParam='<%= "price" + i %>' defaultValue="<%= currencyFormat.format(price) %>" />
+					<liferay-ui:input-field model="<%= ShoppingItemPrice.class %>" field="price" fieldParam='<%= "price" + i %>' format="<%= doubleFormat %>" defaultValue="<%= String.valueOf(price) %>" />
 				</td>
 				<td>
 					<liferay-ui:message key="discount" />
@@ -543,7 +543,7 @@ for (int i = 0; i < pricesCount; i++) {
 					<liferay-ui:message key="shipping" />
 				</td>
 				<td>
-					<liferay-ui:input-field model="<%= ShoppingItemPrice.class %>" field="shipping" fieldParam='<%= "shipping" + i %>' defaultValue="<%= currencyFormat.format(shipping) %>" />
+					<liferay-ui:input-field model="<%= ShoppingItemPrice.class %>" field="shipping" fieldParam='<%= "shipping" + i %>' format="<%= doubleFormat %>" defaultValue="<%= String.valueOf(shipping) %>" />
 				</td>
 				<td>
 					<liferay-ui:message key="use-shipping-formula" />

@@ -333,7 +333,7 @@ long orderId = BeanParamUtil.getLong(order, request, "orderId");
 				<liferay-ui:message key="payment-gross" />:
 			</td>
 			<td>
-				<liferay-ui:input-field model="<%= ShoppingOrder.class %>" bean="<%= order %>" field="ppPaymentGross" defaultValue="<%= currencyFormat.format(order.getPpPaymentGross()) %>" />
+				<liferay-ui:input-field model="<%= ShoppingOrder.class %>" bean="<%= order %>" field="ppPaymentGross" defaultValue="<%= doubleFormat.format(order.getPpPaymentGross()) %>" />
 			</td>
 		</tr>
 		<tr>
