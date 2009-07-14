@@ -35,6 +35,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.Organization;
@@ -637,8 +638,15 @@ public class OrganizationLocalServiceImpl
 			String[] assetTagNames)
 		throws PortalException, SystemException {
 
+		User user = userPersistence.findByPrimaryKey(userId);
+
+		Company company = companyPersistence.findByPrimaryKey(
+			user.getCompanyId());
+
+		Group global = company.getGroup();
+
 		assetEntryLocalService.updateEntry(
-			userId, 0, Organization.class.getName(),
+			userId, global.getGroupId(), Organization.class.getName(),
 			organization.getOrganizationId(), assetCategoryIds, assetTagNames,
 			true, null, null, null, null, null, organization.getName(),
 			StringPool.BLANK, null, null, 0, 0, null, false);

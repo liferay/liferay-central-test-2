@@ -729,8 +729,15 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			String[] assetTagNames)
 		throws PortalException, SystemException {
 
+		User user = userPersistence.findByPrimaryKey(userId);
+
+		Company company = companyPersistence.findByPrimaryKey(
+			user.getCompanyId());
+
+		Group global = company.getGroup();
+
 		assetEntryLocalService.updateEntry(
-			userId, group.getGroupId(), Group.class.getName(),
+			userId, global.getGroupId(), Group.class.getName(),
 			group.getGroupId(), assetCategoryIds, assetTagNames, true, null,
 			null, null, null, null, group.getDescriptiveName(),
 			group.getDescription(), null, null, 0, 0, null, false);

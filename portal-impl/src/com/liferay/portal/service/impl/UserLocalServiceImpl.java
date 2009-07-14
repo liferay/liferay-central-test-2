@@ -1892,9 +1892,16 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			String[] assetTagNames)
 		throws PortalException, SystemException {
 
+		User owner = userPersistence.findByPrimaryKey(userId);
+
+		Company company = companyPersistence.findByPrimaryKey(
+			owner.getCompanyId());
+
+		Group global = company.getGroup();
+
 		assetEntryLocalService.updateEntry(
-			userId, 0, User.class.getName(), user.getUserId(), assetCategoryIds,
-			assetTagNames, true, null, null, null, null, null,
+			userId, global.getGroupId(), User.class.getName(), user.getUserId(),
+			assetCategoryIds, assetTagNames, true, null, null, null, null, null,
 			user.getFullName(), null, null, null, 0, 0, null, false);
 	}
 
