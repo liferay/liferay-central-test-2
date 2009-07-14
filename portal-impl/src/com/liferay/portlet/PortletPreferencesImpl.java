@@ -183,7 +183,7 @@ public class PortletPreferencesImpl
 
 		Preference preference = _preferences.get(key);
 
-		if (preference != null && preference.isReadOnly()) {
+		if ((preference != null) && preference.isReadOnly()) {
 			return true;
 		}
 		else {
