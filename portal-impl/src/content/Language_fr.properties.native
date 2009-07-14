@@ -949,6 +949,7 @@ change-layout=Changer l'affichage
 change-log=Changer la journalisation
 change-parent=Changez le parent
 change-password=Changez le mot de passe
+change-picture=Changez la situation
 change-required-help=Si ceci est activé, alors un utilisateur doit changer son mot de passe lors de sa premiere connexion.
 change-required=Modification nécessaire
 change-selection=Changer la sélection
