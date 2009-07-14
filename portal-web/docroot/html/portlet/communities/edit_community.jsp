@@ -109,10 +109,10 @@ String friendlyURL = BeanParamUtil.getString(group, request, "friendlyURL");
 </tr>
 <tr>
 	<td class="lfr-label">
-		<liferay-ui:message key="tags" />
+		<liferay-ui:message key="categories" />
 	</td>
 	<td>
-		<liferay-ui:asset-tags-selector
+		<liferay-ui:asset-categories-selector
 			className="<%= Group.class.getName() %>"
 			classPK="<%= groupId %>"
 		/>
@@ -120,10 +120,10 @@ String friendlyURL = BeanParamUtil.getString(group, request, "friendlyURL");
 </tr>
 <tr>
 	<td class="lfr-label">
-		<liferay-ui:message key="categories" />
+		<liferay-ui:message key="tags" />
 	</td>
 	<td>
-		<liferay-ui:asset-categories-selector
+		<liferay-ui:asset-tags-selector
 			className="<%= Group.class.getName() %>"
 			classPK="<%= groupId %>"
 		/>

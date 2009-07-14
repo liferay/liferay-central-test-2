@@ -41,16 +41,15 @@ if (organization != null) {
 		<liferay-ui:asset-categories-selector
 			className="<%= Organization.class.getName() %>"
 			classPK="<%= classPK %>"
-			/>
+		/>
 	</div>
 </fieldset>
 
 <h3><liferay-ui:message key="tags" /></h3>
 
 <fieldset class="aui-block-labels">
-
 	<div class="aui-ctrl-holder">
-			<liferay-ui:asset-tags-selector
+		<liferay-ui:asset-tags-selector
 			className="<%= Organization.class.getName() %>"
 			classPK="<%= classPK %>"
 		/>
