@@ -353,6 +353,11 @@ public class EditPagesAction extends PortletAction {
 				throw new PrincipalException();
 			}
 		}
+		if (group.isCommunity()) {
+			if (!permissionChecker.isCompanyAdmin()) {
+				throw new PrincipalException();
+			}
+		}
 		else if (group.isLayoutPrototype()) {
 			LayoutPrototypePermissionUtil.check(
 				permissionChecker, group.getClassPK(), ActionKeys.UPDATE);

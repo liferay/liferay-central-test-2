@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
+import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.Layout;
@@ -64,6 +65,10 @@ public class GroupImpl extends GroupModelImpl implements Group {
 
 	public boolean isCommunity() {
 		return hasClassName(Group.class);
+	}
+
+	public boolean isCompany() {
+		return hasClassName(Company.class);
 	}
 
 	public boolean isLayout() {
@@ -156,7 +161,10 @@ public class GroupImpl extends GroupModelImpl implements Group {
 		String name = getName();
 
 		try {
-			if (isLayout()) {
+			if (isCompany()) {
+				name = "global";
+			}
+			else if (isLayout()) {
 				Layout layout = LayoutLocalServiceUtil.getLayout(
 					getClassPK());
 

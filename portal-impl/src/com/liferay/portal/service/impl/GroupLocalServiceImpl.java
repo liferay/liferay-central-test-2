@@ -243,6 +243,23 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 	}
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public void checkCompanyGroup(long companyId)
+		throws PortalException, SystemException {
+		long classNameId = PortalUtil.getClassNameId(Company.class);
+
+		int count = groupPersistence.countByC_C_C(
+			companyId, classNameId, companyId);
+
+		if (count == 0) {
+			long defaultUserId = userLocalService.getDefaultUserId(companyId);
+
+			groupLocalService.addGroup(
+				defaultUserId, Company.class.getName(),
+				companyId, null, null, 0, null, true, null);
+		}
+	}
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public void checkSystemGroups(long companyId)
 		throws PortalException, SystemException {
 
@@ -433,6 +450,15 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		// Permission cache
 
 		PermissionCacheUtil.clearCache();
+	}
+
+	public Group getCompanyGroup(long companyId)
+		throws PortalException, SystemException {
+
+		long classNameId = PortalUtil.getClassNameId(Company.class);
+
+		return groupPersistence.findByC_C_C(
+			companyId, classNameId, companyId);
 	}
 
 	public Group getFriendlyURLGroup(long companyId, String friendlyURL)

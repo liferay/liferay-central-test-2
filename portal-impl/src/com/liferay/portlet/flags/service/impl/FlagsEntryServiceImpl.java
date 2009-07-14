@@ -172,6 +172,9 @@ public class FlagsEntryServiceImpl extends FlagsEntryServiceBaseImpl {
 			roleNames.add(RoleConstants.COMMUNITY_ADMINISTRATOR);
 			roleNames.add(RoleConstants.COMMUNITY_OWNER);
 		}
+		if (group.isCompany()) {
+			roleNames.add(RoleConstants.ADMINISTRATOR);
+		}
 		else if (group.isOrganization()){
 			roleNames.add(RoleConstants.ORGANIZATION_ADMINISTRATOR);
 			roleNames.add(RoleConstants.ORGANIZATION_OWNER);

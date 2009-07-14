@@ -711,6 +711,9 @@ public class ServicePreAction extends Action {
 				return true;
 			}
 		}
+		else if (group.isCompany()) {
+			return false;
+		}
 		else if (group.isLayoutPrototype()) {
 			if (LayoutPrototypePermissionUtil.contains(
 					permissionChecker, group.getClassPK(), ActionKeys.VIEW)) {

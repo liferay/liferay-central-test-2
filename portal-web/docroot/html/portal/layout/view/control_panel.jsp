@@ -130,7 +130,7 @@ if (Validator.isNotNull(ppid)) {
 								%>
 
 								<h2>
-									<liferay-ui:message key="content-for" /> <a href="javascript:;" class="lfr-group-selector"><%= curGroup.isUser() ? LanguageUtil.get(pageContext, "my-community") : HtmlUtil.escape(curGroup.getDescriptiveName()) %></a>
+									<liferay-ui:message key="content-for" /> <a href="javascript:;" class="lfr-group-selector"><%= curGroup.isUser() ? LanguageUtil.get(pageContext, "my-community") : (curGroup.isCompany() ? "shared" : HtmlUtil.escape(curGroup.getDescriptiveName())) %></a>
 
 									<c:if test="<%= !scopeLayouts.isEmpty() %>">
 										<span class="nobr lfr-title-scope-selector">
@@ -140,6 +140,15 @@ if (Validator.isNotNull(ppid)) {
 								</h2>
 
 								<liferay-ui:panel-floating-container id="groupSelectorPanel" trigger=".lfr-group-selector" paging="<%= true %>">
+									<c:if test="<%= permissionChecker.isCompanyAdmin() %>">
+										<liferay-ui:panel id="globalPanel" title='<%= LanguageUtil.get(pageContext, "shared") %>' collapsible="<%= true %>" persistState="<%= true %>" extended="<%= true %>">
+											<ul>
+												<li>
+													<a href="<%= HttpUtil.setParameter(PortalUtil.getCurrentURL(request), "doAsGroupId", company.getGroup().getGroupId()) %>"><liferay-ui:message key="global" /></a>
+												</li>
+											</ul>
+										</liferay-ui:panel>
+									</c:if>
 
 									<%
 									List<Group> manageableGroups = GroupServiceUtil.getManageableGroups(ActionKeys.MANAGE_LAYOUTS, PropsValues.CONTROL_PANEL_NAVIGATION_MAX_COMMUNITIES);

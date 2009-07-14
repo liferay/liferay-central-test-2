@@ -861,6 +861,10 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 			role = roleLocalService.getRole(
 				group.getCompanyId(), RoleConstants.COMMUNITY_MEMBER);
 		}
+		else if (group.isCompany()) {
+			role = roleLocalService.getRole(
+				group.getCompanyId(), RoleConstants.ADMINISTRATOR);
+		}
 		else if (group.isOrganization()) {
 			role = roleLocalService.getRole(
 				group.getCompanyId(), RoleConstants.ORGANIZATION_MEMBER);

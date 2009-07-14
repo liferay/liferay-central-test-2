@@ -133,6 +133,14 @@ public class PermissionCheckerBagImpl implements PermissionCheckerBag {
 				return true;
 			}
 		}
+		else if (group.isCompany()) {
+			if (permissionChecker.isCompanyAdmin()) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
 		else if (group.isLayoutPrototype()) {
 			if (LayoutPrototypePermissionUtil.contains(
 					permissionChecker, group.getClassPK(), ActionKeys.UPDATE)) {
