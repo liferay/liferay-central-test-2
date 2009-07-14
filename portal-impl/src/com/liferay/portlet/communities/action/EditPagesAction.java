@@ -353,7 +353,7 @@ public class EditPagesAction extends PortletAction {
 				throw new PrincipalException();
 			}
 		}
-		if (group.isCommunity()) {
+		if (group.isCompany()) {
 			if (!permissionChecker.isCompanyAdmin()) {
 				throw new PrincipalException();
 			}
