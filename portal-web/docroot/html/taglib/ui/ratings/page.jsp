@@ -143,7 +143,7 @@ RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 				</li>
 				<c:if test="<%= themeDisplay.isSignedIn() %>">
 					<li id="<%= randomNamespace %>yourRating">
-						<a class="rating rate-up <%= (yourScore > 0) ? "rated" : "" %>" href="javascript:;"></a><a class="rating rate-down <%= (yourScore < 0) ? "rated" : "" %>" href="javascript:;"></a>
+						<a class="rating rate-up <%= (yourScore > 0) ? "rated rate-up-rated" : "" %>" href="javascript:;"></a><a class="rating rate-down <%= (yourScore < 0) ? "rated rate-down-rated" : "" %>" href="javascript:;"></a>
 					</li>
 				</c:if>
 				<li

@@ -1671,7 +1671,7 @@ fieldset:last-child, .aui-form fieldset:last-child {
 	background-image: url(<%= themeImagesPath %>/ratings/thumbs_up_icon.png);
 }
 
-.taglib-ratings.thumbs .rate-up:hover, .taglib-ratings.thumbs .rate-up.rated {
+.taglib-ratings.thumbs .rate-up:hover, .taglib-ratings.thumbs .rate-up-rated {
 	background-image: url(<%= themeImagesPath %>/ratings/thumbs_up_icon_hover.png);
 }
 
@@ -1679,11 +1679,11 @@ fieldset:last-child, .aui-form fieldset:last-child {
 	background-image: url(<%= themeImagesPath %>/ratings/thumbs_down_icon.png);
 }
 
-.taglib-ratings.thumbs .rate-down:hover, .taglib-ratings.thumbs .rate-down.rated {
+.taglib-ratings.thumbs .rate-down:hover, .taglib-ratings.thumbs .rate-down-rated {
 	background-image: url(<%= themeImagesPath %>/ratings/thumbs_down_icon_hover.png);
 }
 
-.taglib-ratings.thumbs .rate-up.rated:hover, .taglib-ratings.thumbs .rate-down.rated:hover {
+.taglib-ratings.thumbs .rate-up.rated:hover, .taglib-ratings.thumbs .rate-down-rated:hover {
 	background-image: url(<%= themeImagesPath %>/ratings/thumbs_cancel_icon.png);
 }
 
