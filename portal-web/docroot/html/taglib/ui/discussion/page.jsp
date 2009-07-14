@@ -110,6 +110,24 @@ DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
 				document.<%= formName %>.<%= namespace %>body.value = body;
 				submitForm(document.<%= formName %>);
 			}
+
+			jQuery(
+				function() {
+					var form = jQuery(document.<%= formName %>);
+
+					form.find('textarea').bind(
+						'blur change click focus input keyup',
+						function(event) {
+							var id = this.id;
+
+							var buttonId = id.replace(/Body/, 'Button');
+							var currentValue = jQuery.trim(this.value);
+
+							jQuery('#' + buttonId).attr('disabled', !currentValue.length);
+						}
+					);
+				}
+			);
 		</script>
 
 		<form action="<%= formAction %>" method="post" name="<%= formName %>">
@@ -151,7 +169,7 @@ DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
 					<br />
 
 					<div>
-						<textarea id="<%= namespace %>postReplyBody<%= i %>" name="<%= namespace %>postReplyBody<%= i %>" style="height: <%= ModelHintsConstants.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsConstants.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft" onKeyUp="document.<%= formName %>.<%= namespace %>postReplyButton<%= i %>.disabled = (this.value == '');"></textarea>
+						<textarea id="<%= namespace %>postReplyBody<%= i %>" name="<%= namespace %>postReplyBody<%= i %>" style="height: <%= ModelHintsConstants.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsConstants.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft"></textarea>
 					</div>
 
 					<br />
@@ -372,7 +390,7 @@ DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
 								<br />
 
 								<div>
-									<textarea id="<%= namespace %>postReplyBody<%= i %>" name="<%= namespace %>postReplyBody<%= i %>" style="height: <%= ModelHintsConstants.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsConstants.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft" onKeyUp="document.<%= formName %>.<%= namespace %>postReplyButton<%= i %>.disabled = (this.value == '');"></textarea>
+									<textarea id="<%= namespace %>postReplyBody<%= i %>" name="<%= namespace %>postReplyBody<%= i %>" style="height: <%= ModelHintsConstants.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsConstants.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft"></textarea>
 								</div>
 
 								<br />
@@ -389,12 +407,12 @@ DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
 									<br />
 
 									<div>
-										<textarea id="<%= namespace %>editBody<%= i %>" name="<%= namespace %>editBody<%= i %>" style="height: <%= ModelHintsConstants.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsConstants.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft" onKeyUp="document.<%= formName %>.<%= namespace %>updateReplyButton<%= i %>.disabled = (this.value == '');"><%= HtmlUtil.escape(message.getBody()) %></textarea>
+										<textarea id="<%= namespace %>editReplyBody<%= i %>" name="<%= namespace %>editReplyBody<%= i %>" style="height: <%= ModelHintsConstants.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsConstants.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft"><%= HtmlUtil.escape(message.getBody()) %></textarea>
 									</div>
 
 									<br />
 
-									<input id="<%= namespace %>updateReplyButton<%= i %>" type="button" value="<liferay-ui:message key="update" />" onClick="<%= namespace %>updateMessage(<%= i %>);" />
+									<input id="<%= namespace %>editReplyButton<%= i %>" type="button" value="<liferay-ui:message key="update" />" onClick="<%= namespace %>updateMessage(<%= i %>);" />
 
 									<input type="button" value="<liferay-ui:message key="cancel" />" onClick="document.getElementById('<%= namespace %>editForm<%= i %>').style.display = 'none'; void('');" />
 								</td>
