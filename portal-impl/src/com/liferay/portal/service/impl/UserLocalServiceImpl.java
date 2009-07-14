@@ -1897,12 +1897,13 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		Company company = companyPersistence.findByPrimaryKey(
 			owner.getCompanyId());
 
-		Group global = company.getGroup();
+		Group companyGroup = company.getGroup();
 
 		assetEntryLocalService.updateEntry(
-			userId, global.getGroupId(), User.class.getName(), user.getUserId(),
-			assetCategoryIds, assetTagNames, true, null, null, null, null, null,
-			user.getFullName(), null, null, null, 0, 0, null, false);
+			userId, companyGroup.getGroupId(), User.class.getName(),
+			user.getUserId(), assetCategoryIds, assetTagNames, true, null, null,
+			null, null, null, user.getFullName(), null, null, null, 0, 0, null,
+			false);
 	}
 
 	public User updateCreateDate(long userId, Date createDate)

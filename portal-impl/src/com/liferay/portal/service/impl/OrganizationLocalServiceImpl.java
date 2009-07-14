@@ -643,10 +643,10 @@ public class OrganizationLocalServiceImpl
 		Company company = companyPersistence.findByPrimaryKey(
 			user.getCompanyId());
 
-		Group global = company.getGroup();
+		Group companyGroup = company.getGroup();
 
 		assetEntryLocalService.updateEntry(
-			userId, global.getGroupId(), Organization.class.getName(),
+			userId, companyGroup.getGroupId(), Organization.class.getName(),
 			organization.getOrganizationId(), assetCategoryIds, assetTagNames,
 			true, null, null, null, null, null, organization.getName(),
 			StringPool.BLANK, null, null, 0, 0, null, false);
