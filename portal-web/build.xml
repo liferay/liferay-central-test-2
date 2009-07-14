@@ -14,6 +14,8 @@
 	<property name="fckeditor.file" value="FCKeditor_2.6.3.zip" />
 	<property name="tinymce.file" value="tinymce_3_2_1.zip" />
 
+	<property name="vaadin.file" value="Vaadin_6.0.1.zip" />
+
 	<target name="clean" depends="build-common-web.clean">
 		<delete dir="classes" />
 		<delete dir="docroot/dtd" />
@@ -22,6 +24,7 @@
 		<delete dir="docroot/html/js/editor/tinymce" />
 		<delete dir="docroot/html/skin/color" />
 		<delete dir="docroot/html/themes/classic/color_schemes" />
+		<delete dir="docroot/html/VAADIN" />
 		<delete dir="docroot/WEB-INF/classes" />
 		<delete dir="docroot/WEB-INF/lib" />
 		<delete dir="test-classes" />
@@ -305,6 +308,7 @@
 		<antcall target="build-dtd" />
 		<antcall target="build-fckeditor" />
 		<antcall target="build-tinymce" />
+		<antcall target="build-vaadin" />
 
 		<war
 			basedir="docroot"
@@ -319,6 +323,7 @@
 		<antcall target="build-dtd" />
 		<antcall target="build-fckeditor" />
 		<antcall target="build-tinymce" />
+		<antcall target="build-vaadin" />
 
 		<copy todir="docroot/WEB-INF/lib" file="${project.dir}/portal-client/portal-client.jar" failonerror="false" />
 
@@ -578,6 +583,41 @@
 					<fileset dir="docroot/html/js/editor/_fckeditor" />
 				</copy>
 			</else>
+		</if>
+	</target>
+
+	<target name="build-vaadin">
+		<if>
+			<not>
+				<uptodate
+					srcfile="third-party/${vaadin.file}"
+					targetfile="docroot/html/VAADIN"
+				/>
+			</not>
+			<then>
+				<delete dir="docroot/html/VAADIN_ZIP" />
+				<delete dir="docroot/html/VAADIN" />
+
+				<unzip src="third-party/${vaadin.file}" dest="docroot/html/VAADIN_ZIP" />
+
+				<copy todir="docroot/html/VAADIN/themes">
+					<fileset dir="docroot/html/VAADIN_ZIP/VAADIN/themes">
+						<include name="default/**" />
+						<include name="base/**" />
+						<include name="runo/**" />
+						<include name="reindeer/**" />
+						<include name="liferay/**" />
+					</fileset>
+				</copy>
+
+				<copy todir="docroot/html/VAADIN/widgetsets">
+					<fileset dir="docroot/html/VAADIN_ZIP/VAADIN/widgetsets">
+						<include name="com.vaadin.portal.gwt.PortalDefaultWidgetSet/**" />
+					</fileset>
+				</copy>
+
+				<delete dir="docroot/html/VAADIN_ZIP" />
+			</then>
 		</if>
 	</target>
 
