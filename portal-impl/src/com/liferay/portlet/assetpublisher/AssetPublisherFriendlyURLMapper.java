@@ -87,6 +87,7 @@ public class AssetPublisherFriendlyURLMapper extends BaseFriendlyURLMapper {
 
 				if (Validator.isNotNull(urlTitle)){
 					friendlyURLPath += urlTitle;
+
 					portletURL.addParameterIncludedInPath("urlTitle");
 				}
 				else {
