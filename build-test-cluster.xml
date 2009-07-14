@@ -6,26 +6,27 @@
 	<target name="prepare-cluster-apache-node-1">
 		<if>
 			<or>
-				<equals arg1="${apache.win32.dir}" arg2="$${apache.win32.dir}" />
-				<equals arg1="${apache.win32.install}" arg2="$${apache.win32.install}" />
-				<equals arg1="${apache.win32.modjk}" arg2="$${apache.win32.modjk}" />
+				<equals arg1="${apache.http.win32.dir}" arg2="$${apache.http.win32.dir}" />
+				<equals arg1="${apache.http.win32.install}" arg2="$${apache.http.win32.install}" />
+				<equals arg1="${apache.http.win32.modjk}" arg2="$${apache.http.win32.modjk}" />
 			</or>
 			<then>
 				<fail>
 .
 
-Please set "apache.win32.dir", "apache.win32.install", and "apache.win32.modjk"
-in test.properties to point to an Apache installation file.
+Please set "apache.http.win32.dir", "apache.http.win32.install", and
+"apache.http.win32.modjk" in test.properties to point to an Apache installation
+file.
 				</fail>
 			</then>
 		</if>
 
 		<exec executable="${pscp.executable}">
-			<arg line="-pw ${vm.password} ${apache.win32.dir}${apache.win32.install} ${vm.username}@${vm.host.cluster-node-1}:/" />
+			<arg line="-pw ${vm.password} ${apache.http.win32.dir}${apache.http.win32.install} ${vm.username}@${vm.host.cluster-node-1}:/" />
 		</exec>
 
 		<exec executable="${plink.executable}">
-			<arg line="-pw ${vm.password} ${vm.username}@${vm.host.cluster-node-1} cmd.exe /c msiexec /i C:\${apache.win32.install} /quiet" />
+			<arg line="-pw ${vm.password} ${vm.username}@${vm.host.cluster-node-1} cmd.exe /c msiexec /i C:\${apache.http.win32.install} /quiet" />
 		</exec>
 
 		<property name="remote.host" value="${vm.host.cluster-node-1}" />
@@ -55,7 +56,7 @@ in test.properties to point to an Apache installation file.
 		<delete file="${tstamp.value}" />
 
 		<exec executable="${pscp.executable}">
-			<arg line="-pw ${vm.password} ${apache.win32.dir}${apache.win32.modjk} ${vm.username}@${vm.host.cluster-node-1}:/Progra~1/Apache~1/Apache2.2/modules" />
+			<arg line="-pw ${vm.password} ${apache.http.win32.dir}${apache.http.win32.modjk} ${vm.username}@${vm.host.cluster-node-1}:/Progra~1/Apache~1/Apache2.2/modules" />
 		</exec>
 
 		<tstamp>
@@ -81,7 +82,7 @@ worker.loadbalancer.type=lb
 worker.loadbalancer.balance_workers=node-1,node-2
 worker.loadbalancer.sticky_session=1</echo>
 
-		<echo file="${tstamp.value}/conf.d/mod_jk.conf">LoadModule jk_module modules/${apache.win32.modjk}
+		<echo file="${tstamp.value}/conf.d/mod_jk.conf">LoadModule jk_module modules/${apache.http.win32.modjk}
 
 JkWorkersFile conf/workers.properties
 JkLogFile logs/mod_jk.log

@@ -6,26 +6,27 @@
 	<target name="prepare-ldap-apache">
 		<if>
 			<or>
-				<equals arg1="${apacheds.win32.dir}" arg2="$${apacheds.win32.dir}" />
-				<equals arg1="${apacheds.win32.install}" arg2="$${apacheds.win32.install}" />
-				<equals arg1="${apacheds.win32.users}" arg2="$${apacheds.win32.users}" />
+				<equals arg1="${apache.directory.win32.dir}" arg2="$${apache.directory.win32.dir}" />
+				<equals arg1="${apache.directory.win32.install}" arg2="$${apache.directory.win32.install}" />
+				<equals arg1="${apache.directory.win32.users}" arg2="$${apache.directory.win32.users}" />
 			</or>
 			<then>
 				<fail>
 .
 
-Please set "apacheds.win32.dir", "apacheds.win32.install", and "apacheds.win32.users"
-in test.properties to point to an ApacheDS installation file.
+Please set "apache.directory.win32.dir", "apache.directory.win32.install", and
+"apache.directory.win32.users" in test.properties to point to an ApacheDS
+installation file.
 				</fail>
 			</then>
 		</if>
 
 		<exec executable="${pscp.executable}">
-			<arg line="-pw ${vm.password} ${apacheds.win32.dir}${apacheds.win32.install} ${vm.username}@${vm.host}:/" />
+			<arg line="-pw ${vm.password} ${apache.directory.win32.dir}${apache.directory.win32.install} ${vm.username}@${vm.host}:/" />
 		</exec>
 
 		<exec executable="${plink.executable}">
-			<arg line="-pw ${vm.password} ${vm.username}@${vm.host} C:\${apacheds.win32.install} /silent" />
+			<arg line="-pw ${vm.password} ${vm.username}@${vm.host} C:\${apache.directory.win32.install} /silent" />
 		</exec>
 
 		<exec executable="${plink.executable}">
@@ -33,12 +34,29 @@ in test.properties to point to an ApacheDS installation file.
 		</exec>
 
 		<exec executable="${pscp.executable}">
-			<arg line="-pw ${vm.password} ${apacheds.win32.dir}${apacheds.win32.users} ${vm.username}@${vm.host}:/" />
+			<arg line="-pw ${vm.password} ${apache.directory.win32.dir}${apache.directory.win32.users} ${vm.username}@${vm.host}:/" />
 		</exec>
 
 		<exec executable="${plink.executable}">
-			<arg line="-pw ${vm.password} ${vm.username}@${vm.host} C:\Java\jdk1.6.0_14\bin\java.exe -jar C:\Progra~1\apacheds-1.0.2\bin\apacheds-tools.jar import -e -f C:/${apacheds.win32.users}" />
+			<arg line="-pw ${vm.password} ${vm.username}@${vm.host} C:\Java\jdk1.6.0_14\bin\java.exe -jar C:\Progra~1\apacheds-1.0.2\bin\apacheds-tools.jar import -e -f C:/${apache.directory.win32.users}" />
 		</exec>
+	</target>
+
+	<target name="prepare-ldap-tomcat">
+		<exec executable="${pscp.executable}">
+			<arg line="-pw ${vm.password} dist/liferay-portal-tomcat-6.0-${lp.version}.zip ${vm.username}@${vm.host}:/" />
+		</exec>
+
+		<exec executable="${plink.executable}">
+			<arg line="-pw ${vm.password} ${vm.username}@${vm.host} cmd.exe /c C:\Progra~1\7-Zip\7z.exe x C:\liferay-portal-tomcat-6.0-${lp.version}.zip -oC:\" />
+		</exec>
+
+		<antcall target="replace-remote-file">
+			<param name="remote.host" value="${vm.host}" />
+			<param name="remote.file" value="/liferay-portal-${lp.version}/tomcat-6.0.18/bin/startup.bat" />
+			<param name="remote.replace.token" value="set CATALINA_HOME=%cd%" />
+			<param name="remote.replace.value" value="set CATALINA_HOME=C:\liferay-portal-${lp.version}\tomcat-6.0.18" />
+		</antcall>
 	</target>
 
 	<target name="prepare-ldap-vm">
@@ -53,23 +71,6 @@ in test.properties to point to an ApacheDS installation file.
 		</exec>
 
 		<sleep seconds="60" />
-	</target>
-
-	<target name="prepare-ldap-tomcat">
-		<exec executable="${pscp.executable}">
-			<arg line="-pw ${vm.password} dist/liferay-portal-tomcat-6.0-${lp.version}.zip ${vm.username}@${vm.host}:/" />
-		</exec>
-
-		<exec executable="${plink.executable}">
-			<arg line="-pw ${vm.password} ${vm.username}@${vm.host} cmd.exe /c C:\Progra~1\7-Zip\7z.exe x C:\liferay-portal-tomcat-6.0-5.3.0.zip -oC:\" />
-		</exec>
-
-		<antcall target="replace-remote-file">
-			<param name="remote.host" value="${vm.host}" />
-			<param name="remote.file" value="/liferay-portal-${lp.version}/tomcat-6.0.18/bin/startup.bat" />
-			<param name="remote.replace.token" value="set CATALINA_HOME=%cd%" />
-			<param name="remote.replace.value" value="set CATALINA_HOME=C:\liferay-portal-${lp.version}\tomcat-6.0.18" />
-		</antcall>
 	</target>
 
 	<target name="test-ldap">
