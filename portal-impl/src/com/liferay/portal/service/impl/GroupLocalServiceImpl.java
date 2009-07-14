@@ -245,6 +245,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public void checkCompanyGroup(long companyId)
 		throws PortalException, SystemException {
+
 		long classNameId = PortalUtil.getClassNameId(Company.class);
 
 		int count = groupPersistence.countByC_C_C(
@@ -254,8 +255,8 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			long defaultUserId = userLocalService.getDefaultUserId(companyId);
 
 			groupLocalService.addGroup(
-				defaultUserId, Company.class.getName(),
-				companyId, null, null, 0, null, true, null);
+				defaultUserId, Company.class.getName(), companyId, null, null,
+				0, null, true, null);
 		}
 	}
 
@@ -457,8 +458,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 		long classNameId = PortalUtil.getClassNameId(Company.class);
 
-		return groupPersistence.findByC_C_C(
-			companyId, classNameId, companyId);
+		return groupPersistence.findByC_C_C(companyId, classNameId, companyId);
 	}
 
 	public Group getFriendlyURLGroup(long companyId, String friendlyURL)

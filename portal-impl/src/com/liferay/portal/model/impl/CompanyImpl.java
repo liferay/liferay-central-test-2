@@ -123,7 +123,7 @@ public class CompanyImpl extends CompanyModelImpl implements Company {
 	}
 
 	public Group getGroup() {
-		if (getCompanyId() > 0) {
+		if (getCompanyId() > CompanyConstants.SYSTEM) {
 			try {
 				return GroupLocalServiceUtil.getCompanyGroup(getCompanyId());
 			}

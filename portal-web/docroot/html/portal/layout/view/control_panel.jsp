@@ -130,7 +130,21 @@ if (Validator.isNotNull(ppid)) {
 								%>
 
 								<h2>
-									<liferay-ui:message key="content-for" /> <a href="javascript:;" class="lfr-group-selector"><%= curGroup.isUser() ? LanguageUtil.get(pageContext, "my-community") : (curGroup.isCompany() ? "shared" : HtmlUtil.escape(curGroup.getDescriptiveName())) %></a>
+									<liferay-ui:message key="content-for" />
+
+									<a href="javascript:;" class="lfr-group-selector">
+										<c:choose>
+											<c:when test="<%= curGroup.isCompany() %>">
+												<liferay-ui:message key="shared" />
+											</c:when>
+											<c:when test="<%= curGroup.isUser() %>">
+												<liferay-ui:message key="my-community" />
+											</c:when>
+											<c:otherwise>
+												<%= HtmlUtil.escape(curGroup.getDescriptiveName()) %>
+											</c:otherwise>
+										</c:choose>
+									</a>
 
 									<c:if test="<%= !scopeLayouts.isEmpty() %>">
 										<span class="nobr lfr-title-scope-selector">
