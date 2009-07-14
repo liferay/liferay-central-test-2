@@ -67,12 +67,10 @@ public interface WorkflowDefinitionManager {
 	 * </p>
 	 *
 	 * @param workflowDefinition the workflow definition to be deployed
-	 * @return <code>true</code>, if deployment was successful,
-	 * <code>false</code> otherwise
 	 * @throws WorkflowException is thrown, if deployment of the definition
 	 * failed
 	 */
-	public boolean deployWorkflowDefinition(
+	public void deployWorkflowDefinition(
 			WorkflowDefinition workflowDefinition)
 		throws WorkflowException;
 
