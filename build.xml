@@ -524,11 +524,7 @@
 		<copy todir="${lp.ext.dir}" preservelastmodified="true">
 			<fileset
 				dir="."
-				includes="app.server.properties"
-			/>
-			<fileset
-				dir="."
-				includes="release.properties"
+				includes="app.server.properties,release.properties"
 			/>
 			<fileset
 				dir="tools/ext_tmpl"
