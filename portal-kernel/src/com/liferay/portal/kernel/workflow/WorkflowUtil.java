@@ -22,6 +22,10 @@
 
 package com.liferay.portal.kernel.workflow;
 
+import com.liferay.portal.model.User;
+import com.liferay.portal.service.UserService;
+import com.liferay.portal.service.UserServiceUtil;
+
 /**
  * <a href="WorkflowUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -36,6 +40,31 @@ package com.liferay.portal.kernel.workflow;
  *
  */
 public class WorkflowUtil {
+
+	/**
+	 * Creates a user credential representing the user with the specified id,
+	 * its set of assigned roles and additional information requested through
+	 * the {@link UserService}.
+	 * 
+	 * @param userId the id of the user to create a credential object for
+	 * @return the user credential object acting as the container representing
+	 *         the set of roles and additional information for the given user
+	 * @throws WorkflowException if requesting the user information through the
+	 *             service failed
+	 */
+	public static UserCredential createUserCredential(long userId)
+		throws WorkflowException {
+		 User user;
+		try {
+			user = UserServiceUtil.getUserById(userId);
+			return new UserCredential(user);
+		}
+		catch (Exception e) {
+			throw new WorkflowException(
+				"Could not request user information through UserService for user id [" +
+					userId + "]");
+		}
+	}
 
 	/**
 	 * The task instance manager is the entry point to deal with tasks created
