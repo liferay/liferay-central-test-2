@@ -527,6 +527,10 @@
 				includes="app.server.properties"
 			/>
 			<fileset
+				dir="."
+				includes="release.properties"
+			/>
+			<fileset
 				dir="tools/ext_tmpl"
 				includes=".classpath,.project,readme.txt,build.properties,**/build-common*.xml,**/build-parent.xml"
 			/>
