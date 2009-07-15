@@ -87,7 +87,7 @@ public interface WorkflowInstanceManager {
 	 *			 failed
 	 */
 	public WorkflowInstanceInfo addContextInformation(
-		long workflowInstanceId, Map<String, Object> context)
+			long workflowInstanceId, Map<String, Object> context)
 		throws WorkflowException;
 
 	/**
@@ -105,7 +105,7 @@ public interface WorkflowInstanceManager {
 	 *			 other error occurred
 	 */
 	public WorkflowInstanceInfo getWorkflowInstanceInfo(
-		long workflowInstanceId, boolean retrieveChildrenInfo)
+			long workflowInstanceId, boolean retrieveChildrenInfo)
 		throws WorkflowException;
 
 	/**
@@ -154,7 +154,7 @@ public interface WorkflowInstanceManager {
 	 * @throws WorkflowException is thrown, if querying failed
 	 */
 	public WorkflowInstanceInfo getWorkflowInstanceInfo(
-		String relationType, long relationId, boolean retrieveChildrenInfo)
+			String relationType, long relationId, boolean retrieveChildrenInfo)
 		throws WorkflowException;
 
 	/**
@@ -179,7 +179,7 @@ public interface WorkflowInstanceManager {
 	 * @throws WorkflowException is thrown, if querying failed
 	 */
 	public List<WorkflowInstanceHistory> getWorkflowInstanceHistory(
-		long workflowInstanceId, boolean includeChildren)
+			long workflowInstanceId, boolean includeChildren)
 		throws WorkflowException;
 
 	/**
@@ -205,8 +205,8 @@ public interface WorkflowInstanceManager {
 	 * @throws WorkflowException is thrown, if querying failed
 	 */
 	public List<WorkflowInstanceInfo> getWorkflowInstanceInfos(
-		String workflowDefinitionName, Integer workflowDefinitionVersion,
-		boolean retrieveChildrenInfo)
+			String workflowDefinitionName, Integer workflowDefinitionVersion,
+			boolean retrieveChildrenInfo)
 		throws WorkflowException;
 
 	/**
@@ -233,8 +233,8 @@ public interface WorkflowInstanceManager {
 	 * @throws WorkflowException is thrown, if querying failed
 	 */
 	public List<WorkflowInstanceInfo> getWorkflowInstanceInfos(
-		String workflowDefinitionName, Integer workflowDefinitionVersion,
-		boolean finished, boolean retrieveChildrenInfo)
+			String workflowDefinitionName, Integer workflowDefinitionVersion,
+			boolean finished, boolean retrieveChildrenInfo)
 		throws WorkflowException;
 
 	/**
@@ -271,7 +271,7 @@ public interface WorkflowInstanceManager {
 	 * @throws WorkflowException is thrown, if querying failed
 	 */
 	public List<WorkflowInstanceInfo> getWorkflowInstanceInfos(
-		String relationType, long relationId, boolean retrieveChildrenInfo)
+			String relationType, long relationId, boolean retrieveChildrenInfo)
 		throws WorkflowException;
 
 	/**
@@ -280,11 +280,13 @@ public interface WorkflowInstanceManager {
 	 * means the same as if the instance was never started. It also removes the
 	 * attached, persisted context information, but it does not rollback
 	 * anything that happened during the execution of the workflow.
-	 *
+	 * 
 	 * @param workflowInstanceId the identifier of the workflow instance to be
-	 *			removed
+	 *            removed
+	 * @throws WorkflowException is thrown, if removing failed
 	 */
-	public void removeWorkflowInstance(long workflowInstanceId);
+	public void removeWorkflowInstance(long workflowInstanceId)
+		throws WorkflowException;
 
 	/**
 	 * <p>
@@ -314,7 +316,7 @@ public interface WorkflowInstanceManager {
 	 *			 failed
 	 */
 	public WorkflowInstanceInfo signalWorkflowInstance(
-		long workflowInstanceId, Map<String, Object> attributes)
+			long workflowInstanceId, Map<String, Object> attributes)
 		throws WorkflowException;
 
 	/**
@@ -351,8 +353,8 @@ public interface WorkflowInstanceManager {
 	 *			 current state of the instance
 	 */
 	public WorkflowInstanceInfo signalWorkflowInstance(
-		long workflowInstanceId, String activityName,
-		Map<String, Object> attributes)
+			long workflowInstanceId, String activityName,
+			Map<String, Object> attributes)
 		throws WorkflowException;
 
 	/**
@@ -378,8 +380,8 @@ public interface WorkflowInstanceManager {
 	 *			 created or the workflow could not be started
 	 */
 	public WorkflowInstanceInfo startWorkflowInstance(
-		String workflowDefinitionName, Integer workflowDefinitionVersion,
-		Map<String, Object> context, long userId)
+			String workflowDefinitionName, Integer workflowDefinitionVersion,
+			Map<String, Object> context, long userId)
 		throws WorkflowException;
 
 	/**
@@ -408,8 +410,8 @@ public interface WorkflowInstanceManager {
 	 *			 created or the workflow could not be started
 	 */
 	public WorkflowInstanceInfo startWorkflowInstance(
-		String workflowDefinitionName, Integer workflowDefinitionVersion,
-		Map<String, Object> context, long userId, String activityName)
+			String workflowDefinitionName, Integer workflowDefinitionVersion,
+			Map<String, Object> context, long userId, String activityName)
 		throws WorkflowException;
 
 	/**
@@ -449,9 +451,9 @@ public interface WorkflowInstanceManager {
 	 *			 created or the workflow could not be started
 	 */
 	public WorkflowInstanceInfo startWorkflowInstance(
-		String workflowDefinitionName, Integer workflowDefinitionVersion,
-		String relationType, long relationId, Map<String, Object> context,
-		long userId)
+			String workflowDefinitionName, Integer workflowDefinitionVersion,
+			String relationType, long relationId, Map<String, Object> context,
+			long userId)
 		throws WorkflowException;
 
 	/**
@@ -492,9 +494,9 @@ public interface WorkflowInstanceManager {
 	 *			 created or the workflow could not be started
 	 */
 	public WorkflowInstanceInfo startWorkflowInstance(
-		String workflowDefinitionName, Integer workflowDefinitionVersion,
-		String relationType, long relationId, Map<String, Object> context,
-		long userId, String activityName)
+			String workflowDefinitionName, Integer workflowDefinitionVersion,
+			String relationType, long relationId, Map<String, Object> context,
+			long userId, String activityName)
 		throws WorkflowException;
 
 }
