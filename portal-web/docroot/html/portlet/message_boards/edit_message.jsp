@@ -31,7 +31,7 @@ MBMessage message = (MBMessage)request.getAttribute(WebKeys.MESSAGE_BOARDS_MESSA
 
 long messageId = BeanParamUtil.getLong(message, request, "messageId");
 
-long categoryId = BeanParamUtil.getLong(message, request, "categoryId");
+long categoryId = BeanParamUtil.getLong(message, request, "mbCategoryId");
 long threadId = BeanParamUtil.getLong(message, request, "threadId");
 long parentMessageId = BeanParamUtil.getLong(message, request, "parentMessageId", MBMessageImpl.DEFAULT_PARENT_MESSAGE_ID);
 
@@ -90,11 +90,11 @@ if ((message != null) && message.isAttachments()) {
 	}
 
 	function <portlet:namespace />selectCategory(categoryId, categoryName) {
-		document.<portlet:namespace />fm.<portlet:namespace />categoryId.value = categoryId;
+		document.<portlet:namespace />fm.<portlet:namespace />mbCategoryId.value = categoryId;
 
 		var nameEl = document.getElementById("<portlet:namespace />categoryName");
 
-		nameEl.href = "<portlet:renderURL><portlet:param name="struts_action" value="/message_boards/view" /></portlet:renderURL>&<portlet:namespace />categoryId=" + categoryId;
+		nameEl.href = "<portlet:renderURL><portlet:param name="struts_action" value="/message_boards/view" /></portlet:renderURL>&<portlet:namespace />mbCategoryId=" + categoryId;
 		nameEl.innerHTML = categoryName + "&nbsp;";
 	}
 </script>
@@ -155,7 +155,7 @@ if ((message != null) && message.isAttachments()) {
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(redirect) %>" />
 <input name="<portlet:namespace />messageId" type="hidden" value="<%= messageId %>" />
-<input name="<portlet:namespace />categoryId" type="hidden" value="<%= categoryId %>" />
+<input name="<portlet:namespace />mbCategoryId" type="hidden" value="<%= categoryId %>" />
 <input name="<portlet:namespace />threadId" type="hidden" value="<%= threadId %>" />
 <input name="<portlet:namespace />parentMessageId" type="hidden" value="<%= parentMessageId %>" />
 <input name="<portlet:namespace />attachments" type="hidden" value="<%= attachments %>" />
