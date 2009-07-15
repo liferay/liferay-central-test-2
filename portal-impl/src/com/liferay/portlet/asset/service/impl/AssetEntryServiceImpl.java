@@ -132,7 +132,7 @@ public class AssetEntryServiceImpl extends AssetEntryServiceBaseImpl {
 		for (long groupId : groupIds) {
 			Group group = groupPersistence.findByPrimaryKey(groupId);
 
-			if (!group.isCompany() || groupIds.length == 1) {
+			if ((groupIds.length == 1) || !group.isCompany()) {
 				name = group.getDescriptiveName();
 
 				break;
