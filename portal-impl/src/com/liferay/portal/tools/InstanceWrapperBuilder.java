@@ -105,7 +105,7 @@ public class InstanceWrapperBuilder {
 
 		// Package
 
-		sb.append("package " + javaClass.getPackage() + ";");
+		sb.append("package " + javaClass.getPackage().getName() + ";");
 
 		// Class declaration
 
@@ -205,7 +205,7 @@ public class InstanceWrapperBuilder {
 
 		// Write file
 
-		File file = new File(parentDir + "/" + StringUtil.replace(javaClass.getPackage(), ".", "/") + "/" + javaClass.getName() + "_IW.java");
+		File file = new File(parentDir + "/" + StringUtil.replace(javaClass.getPackage().getName(), ".", "/") + "/" + javaClass.getName() + "_IW.java");
 
 		ServiceBuilder.writeFile(file, sb.toString());
 	}

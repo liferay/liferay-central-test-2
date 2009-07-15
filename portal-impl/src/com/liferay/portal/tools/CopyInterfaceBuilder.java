@@ -84,7 +84,7 @@ public class CopyInterfaceBuilder {
 
 		// Package
 
-		sb.append("package " + javaClass.getPackage() + ";");
+		sb.append("package " + javaClass.getPackage().getName() + ";");
 
 		// Imports
 
@@ -205,7 +205,7 @@ public class CopyInterfaceBuilder {
 
 		// Write file
 
-		File file = new File(parentDir + "/" + StringUtil.replace(javaClass.getPackage(), ".", "/") + "/Copy" + javaClass.getName() + ".java");
+		File file = new File(parentDir + "/" + StringUtil.replace(javaClass.getPackage().getName(), ".", "/") + "/Copy" + javaClass.getName() + ".java");
 
 		ServiceBuilder.writeFile(file, content);
 	}
