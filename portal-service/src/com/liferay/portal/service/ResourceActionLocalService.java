@@ -63,8 +63,8 @@ public interface ResourceActionLocalService {
 		long resourceActionId);
 
 	public void deleteResourceAction(long resourceActionId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void deleteResourceAction(
 		com.liferay.portal.model.ResourceAction resourceAction)
@@ -81,8 +81,8 @@ public interface ResourceActionLocalService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.ResourceAction getResourceAction(
 		long resourceActionId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.ResourceAction> getResourceActions(

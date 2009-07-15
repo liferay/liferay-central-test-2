@@ -63,8 +63,8 @@ public interface JournalTemplateLocalService {
 		long id);
 
 	public void deleteJournalTemplate(long id)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void deleteJournalTemplate(
 		com.liferay.portlet.journal.model.JournalTemplate journalTemplate)
@@ -81,8 +81,8 @@ public interface JournalTemplateLocalService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.journal.model.JournalTemplate getJournalTemplate(
 		long id)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.journal.model.JournalTemplate> getJournalTemplates(

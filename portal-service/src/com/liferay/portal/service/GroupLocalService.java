@@ -62,8 +62,8 @@ public interface GroupLocalService {
 	public com.liferay.portal.model.Group createGroup(long groupId);
 
 	public void deleteGroup(long groupId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void deleteGroup(com.liferay.portal.model.Group group)
 		throws com.liferay.portal.SystemException;
@@ -78,8 +78,8 @@ public interface GroupLocalService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.Group getGroup(long groupId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Group> getGroups(int start,

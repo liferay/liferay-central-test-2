@@ -63,8 +63,8 @@ public interface BrowserTrackerLocalService {
 		long browserTrackerId);
 
 	public void deleteBrowserTracker(long browserTrackerId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void deleteBrowserTracker(
 		com.liferay.portal.model.BrowserTracker browserTracker)
@@ -81,8 +81,8 @@ public interface BrowserTrackerLocalService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.BrowserTracker getBrowserTracker(
 		long browserTrackerId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.BrowserTracker> getBrowserTrackers(

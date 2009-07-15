@@ -63,8 +63,8 @@ public interface JournalArticleResourceLocalService {
 		long resourcePrimKey);
 
 	public void deleteJournalArticleResource(long resourcePrimKey)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void deleteJournalArticleResource(
 		com.liferay.portlet.journal.model.JournalArticleResource journalArticleResource)
@@ -81,8 +81,8 @@ public interface JournalArticleResourceLocalService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.journal.model.JournalArticleResource getJournalArticleResource(
 		long resourcePrimKey)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.journal.model.JournalArticleResource> getJournalArticleResources(

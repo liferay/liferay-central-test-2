@@ -63,8 +63,8 @@ public interface DLFileRankLocalService {
 		long fileRankId);
 
 	public void deleteDLFileRank(long fileRankId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void deleteDLFileRank(
 		com.liferay.portlet.documentlibrary.model.DLFileRank dlFileRank)
@@ -81,8 +81,8 @@ public interface DLFileRankLocalService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.documentlibrary.model.DLFileRank getDLFileRank(
 		long fileRankId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileRank> getDLFileRanks(

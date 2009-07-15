@@ -63,8 +63,8 @@ public interface ExpandoRowLocalService {
 		long rowId);
 
 	public void deleteExpandoRow(long rowId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void deleteExpandoRow(
 		com.liferay.portlet.expando.model.ExpandoRow expandoRow)
@@ -81,8 +81,8 @@ public interface ExpandoRowLocalService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.expando.model.ExpandoRow getExpandoRow(
 		long rowId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.expando.model.ExpandoRow> getExpandoRows(

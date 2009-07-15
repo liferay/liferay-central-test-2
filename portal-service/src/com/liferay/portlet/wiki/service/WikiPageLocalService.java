@@ -62,8 +62,8 @@ public interface WikiPageLocalService {
 	public com.liferay.portlet.wiki.model.WikiPage createWikiPage(long pageId);
 
 	public void deleteWikiPage(long pageId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void deleteWikiPage(com.liferay.portlet.wiki.model.WikiPage wikiPage)
 		throws com.liferay.portal.SystemException;
@@ -78,8 +78,8 @@ public interface WikiPageLocalService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.wiki.model.WikiPage getWikiPage(long pageId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.wiki.model.WikiPage> getWikiPages(

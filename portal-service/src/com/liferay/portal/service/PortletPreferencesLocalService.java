@@ -63,8 +63,8 @@ public interface PortletPreferencesLocalService {
 		long portletPreferencesId);
 
 	public void deletePortletPreferences(long portletPreferencesId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void deletePortletPreferences(
 		com.liferay.portal.model.PortletPreferences portletPreferences)
@@ -81,8 +81,8 @@ public interface PortletPreferencesLocalService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.PortletPreferences getPortletPreferences(
 		long portletPreferencesId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.PortletPreferences> getPortletPreferenceses(

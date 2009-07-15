@@ -63,8 +63,8 @@ public interface DLFileVersionLocalService {
 		long fileVersionId);
 
 	public void deleteDLFileVersion(long fileVersionId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void deleteDLFileVersion(
 		com.liferay.portlet.documentlibrary.model.DLFileVersion dlFileVersion)
@@ -81,8 +81,8 @@ public interface DLFileVersionLocalService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.documentlibrary.model.DLFileVersion getDLFileVersion(
 		long fileVersionId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileVersion> getDLFileVersions(

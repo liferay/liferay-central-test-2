@@ -63,8 +63,8 @@ public interface AssetCategoryPropertyLocalService {
 		long categoryPropertyId);
 
 	public void deleteAssetCategoryProperty(long categoryPropertyId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void deleteAssetCategoryProperty(
 		com.liferay.portlet.asset.model.AssetCategoryProperty assetCategoryProperty)
@@ -81,8 +81,8 @@ public interface AssetCategoryPropertyLocalService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.asset.model.AssetCategoryProperty getAssetCategoryProperty(
 		long categoryPropertyId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.asset.model.AssetCategoryProperty> getAssetCategoryProperties(

@@ -63,8 +63,8 @@ public interface LayoutSetPrototypeLocalService {
 		long layoutSetPrototypeId);
 
 	public void deleteLayoutSetPrototype(long layoutSetPrototypeId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void deleteLayoutSetPrototype(
 		com.liferay.portal.model.LayoutSetPrototype layoutSetPrototype)
@@ -81,8 +81,8 @@ public interface LayoutSetPrototypeLocalService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.LayoutSetPrototype getLayoutSetPrototype(
 		long layoutSetPrototypeId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.LayoutSetPrototype> getLayoutSetPrototypes(

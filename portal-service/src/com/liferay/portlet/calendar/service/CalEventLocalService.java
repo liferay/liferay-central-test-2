@@ -63,8 +63,8 @@ public interface CalEventLocalService {
 		long eventId);
 
 	public void deleteCalEvent(long eventId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void deleteCalEvent(
 		com.liferay.portlet.calendar.model.CalEvent calEvent)
@@ -80,8 +80,8 @@ public interface CalEventLocalService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.calendar.model.CalEvent getCalEvent(long eventId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> getCalEvents(

@@ -63,8 +63,8 @@ public interface AssetVocabularyLocalService {
 		long vocabularyId);
 
 	public void deleteAssetVocabulary(long vocabularyId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void deleteAssetVocabulary(
 		com.liferay.portlet.asset.model.AssetVocabulary assetVocabulary)
@@ -81,8 +81,8 @@ public interface AssetVocabularyLocalService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.asset.model.AssetVocabulary getAssetVocabulary(
 		long vocabularyId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.asset.model.AssetVocabulary> getAssetVocabularies(

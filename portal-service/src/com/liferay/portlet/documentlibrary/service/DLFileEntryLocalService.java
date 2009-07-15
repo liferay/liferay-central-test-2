@@ -63,8 +63,8 @@ public interface DLFileEntryLocalService {
 		long fileEntryId);
 
 	public void deleteDLFileEntry(long fileEntryId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void deleteDLFileEntry(
 		com.liferay.portlet.documentlibrary.model.DLFileEntry dlFileEntry)
@@ -81,8 +81,8 @@ public interface DLFileEntryLocalService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry getDLFileEntry(
 		long fileEntryId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> getDLFileEntries(

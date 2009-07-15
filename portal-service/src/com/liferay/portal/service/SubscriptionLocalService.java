@@ -63,8 +63,8 @@ public interface SubscriptionLocalService {
 		long subscriptionId);
 
 	public void deleteSubscription(long subscriptionId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void deleteSubscription(
 		com.liferay.portal.model.Subscription subscription)
@@ -81,8 +81,8 @@ public interface SubscriptionLocalService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.Subscription getSubscription(
 		long subscriptionId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Subscription> getSubscriptions(

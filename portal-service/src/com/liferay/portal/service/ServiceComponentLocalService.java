@@ -63,8 +63,8 @@ public interface ServiceComponentLocalService {
 		long serviceComponentId);
 
 	public void deleteServiceComponent(long serviceComponentId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void deleteServiceComponent(
 		com.liferay.portal.model.ServiceComponent serviceComponent)
@@ -81,8 +81,8 @@ public interface ServiceComponentLocalService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.ServiceComponent getServiceComponent(
 		long serviceComponentId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.ServiceComponent> getServiceComponents(

@@ -62,8 +62,8 @@ public interface ReleaseLocalService {
 	public com.liferay.portal.model.Release createRelease(long releaseId);
 
 	public void deleteRelease(long releaseId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void deleteRelease(com.liferay.portal.model.Release release)
 		throws com.liferay.portal.SystemException;
@@ -78,8 +78,8 @@ public interface ReleaseLocalService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.Release getRelease(long releaseId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Release> getReleases(

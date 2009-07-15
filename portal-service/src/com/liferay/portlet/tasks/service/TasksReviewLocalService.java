@@ -63,8 +63,8 @@ public interface TasksReviewLocalService {
 		long reviewId);
 
 	public void deleteTasksReview(long reviewId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void deleteTasksReview(
 		com.liferay.portlet.tasks.model.TasksReview tasksReview)
@@ -81,8 +81,8 @@ public interface TasksReviewLocalService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.tasks.model.TasksReview getTasksReview(
 		long reviewId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.tasks.model.TasksReview> getTasksReviews(

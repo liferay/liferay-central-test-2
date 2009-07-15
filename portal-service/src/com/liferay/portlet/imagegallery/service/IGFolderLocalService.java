@@ -63,8 +63,8 @@ public interface IGFolderLocalService {
 		long folderId);
 
 	public void deleteIGFolder(long folderId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void deleteIGFolder(
 		com.liferay.portlet.imagegallery.model.IGFolder igFolder)
@@ -81,8 +81,8 @@ public interface IGFolderLocalService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.imagegallery.model.IGFolder getIGFolder(
 		long folderId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.imagegallery.model.IGFolder> getIGFolders(

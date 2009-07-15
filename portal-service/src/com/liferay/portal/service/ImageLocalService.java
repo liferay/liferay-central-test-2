@@ -62,8 +62,8 @@ public interface ImageLocalService {
 	public com.liferay.portal.model.Image createImage(long imageId);
 
 	public void deleteImage(long imageId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void deleteImage(com.liferay.portal.model.Image image)
 		throws com.liferay.portal.SystemException;
@@ -78,8 +78,8 @@ public interface ImageLocalService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.Image getImage(long imageId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Image> getImages(int start,

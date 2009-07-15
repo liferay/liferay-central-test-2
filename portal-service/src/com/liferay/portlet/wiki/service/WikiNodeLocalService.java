@@ -62,8 +62,8 @@ public interface WikiNodeLocalService {
 	public com.liferay.portlet.wiki.model.WikiNode createWikiNode(long nodeId);
 
 	public void deleteWikiNode(long nodeId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void deleteWikiNode(com.liferay.portlet.wiki.model.WikiNode wikiNode)
 		throws com.liferay.portal.SystemException;
@@ -78,8 +78,8 @@ public interface WikiNodeLocalService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.wiki.model.WikiNode getWikiNode(long nodeId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.wiki.model.WikiNode> getWikiNodes(

@@ -62,8 +62,8 @@ public interface RoleLocalService {
 	public com.liferay.portal.model.Role createRole(long roleId);
 
 	public void deleteRole(long roleId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void deleteRole(com.liferay.portal.model.Role role)
 		throws com.liferay.portal.SystemException;
@@ -78,8 +78,8 @@ public interface RoleLocalService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.Role getRole(long roleId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Role> getRoles(int start,

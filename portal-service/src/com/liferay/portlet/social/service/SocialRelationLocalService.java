@@ -63,8 +63,8 @@ public interface SocialRelationLocalService {
 		long relationId);
 
 	public void deleteSocialRelation(long relationId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void deleteSocialRelation(
 		com.liferay.portlet.social.model.SocialRelation socialRelation)
@@ -81,8 +81,8 @@ public interface SocialRelationLocalService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.social.model.SocialRelation getSocialRelation(
 		long relationId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.social.model.SocialRelation> getSocialRelations(

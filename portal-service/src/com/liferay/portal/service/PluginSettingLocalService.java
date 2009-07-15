@@ -63,8 +63,8 @@ public interface PluginSettingLocalService {
 		long pluginSettingId);
 
 	public void deletePluginSetting(long pluginSettingId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void deletePluginSetting(
 		com.liferay.portal.model.PluginSetting pluginSetting)
@@ -81,8 +81,8 @@ public interface PluginSettingLocalService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.PluginSetting getPluginSetting(
 		long pluginSettingId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.PluginSetting> getPluginSettings(

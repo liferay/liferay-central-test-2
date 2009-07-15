@@ -63,8 +63,8 @@ public interface SocialRequestLocalService {
 		long requestId);
 
 	public void deleteSocialRequest(long requestId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void deleteSocialRequest(
 		com.liferay.portlet.social.model.SocialRequest socialRequest)
@@ -81,8 +81,8 @@ public interface SocialRequestLocalService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.social.model.SocialRequest getSocialRequest(
 		long requestId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.social.model.SocialRequest> getSocialRequests(

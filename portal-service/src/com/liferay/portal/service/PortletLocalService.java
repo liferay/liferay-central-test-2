@@ -62,8 +62,8 @@ public interface PortletLocalService {
 	public com.liferay.portal.model.Portlet createPortlet(long id);
 
 	public void deletePortlet(long id)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void deletePortlet(com.liferay.portal.model.Portlet portlet)
 		throws com.liferay.portal.SystemException;
@@ -78,8 +78,8 @@ public interface PortletLocalService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.Portlet getPortlet(long id)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Portlet> getPortlets(

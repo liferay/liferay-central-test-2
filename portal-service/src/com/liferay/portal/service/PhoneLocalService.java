@@ -62,8 +62,8 @@ public interface PhoneLocalService {
 	public com.liferay.portal.model.Phone createPhone(long phoneId);
 
 	public void deletePhone(long phoneId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void deletePhone(com.liferay.portal.model.Phone phone)
 		throws com.liferay.portal.SystemException;
@@ -78,8 +78,8 @@ public interface PhoneLocalService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.Phone getPhone(long phoneId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Phone> getPhones(int start,

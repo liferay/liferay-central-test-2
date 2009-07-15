@@ -63,8 +63,8 @@ public interface DLFolderLocalService {
 		long folderId);
 
 	public void deleteDLFolder(long folderId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void deleteDLFolder(
 		com.liferay.portlet.documentlibrary.model.DLFolder dlFolder)
@@ -81,8 +81,8 @@ public interface DLFolderLocalService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.documentlibrary.model.DLFolder getDLFolder(
 		long folderId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFolder> getDLFolders(

@@ -62,8 +62,8 @@ public interface ShardLocalService {
 	public com.liferay.portal.model.Shard createShard(long shardId);
 
 	public void deleteShard(long shardId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void deleteShard(com.liferay.portal.model.Shard shard)
 		throws com.liferay.portal.SystemException;
@@ -78,8 +78,8 @@ public interface ShardLocalService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.Shard getShard(long shardId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Shard> getShards(int start,

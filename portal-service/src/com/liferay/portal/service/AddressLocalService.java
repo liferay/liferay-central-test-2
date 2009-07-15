@@ -62,8 +62,8 @@ public interface AddressLocalService {
 	public com.liferay.portal.model.Address createAddress(long addressId);
 
 	public void deleteAddress(long addressId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void deleteAddress(com.liferay.portal.model.Address address)
 		throws com.liferay.portal.SystemException;
@@ -78,8 +78,8 @@ public interface AddressLocalService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.Address getAddress(long addressId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Address> getAddresses(

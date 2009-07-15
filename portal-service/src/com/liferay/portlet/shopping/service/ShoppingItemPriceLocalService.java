@@ -63,8 +63,8 @@ public interface ShoppingItemPriceLocalService {
 		long itemPriceId);
 
 	public void deleteShoppingItemPrice(long itemPriceId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void deleteShoppingItemPrice(
 		com.liferay.portlet.shopping.model.ShoppingItemPrice shoppingItemPrice)
@@ -81,8 +81,8 @@ public interface ShoppingItemPriceLocalService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.shopping.model.ShoppingItemPrice getShoppingItemPrice(
 		long itemPriceId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.shopping.model.ShoppingItemPrice> getShoppingItemPrices(

@@ -63,8 +63,8 @@ public interface RatingsStatsLocalService {
 		long statsId);
 
 	public void deleteRatingsStats(long statsId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void deleteRatingsStats(
 		com.liferay.portlet.ratings.model.RatingsStats ratingsStats)
@@ -81,8 +81,8 @@ public interface RatingsStatsLocalService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.ratings.model.RatingsStats getRatingsStats(
 		long statsId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.ratings.model.RatingsStats> getRatingsStatses(

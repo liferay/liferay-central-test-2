@@ -63,8 +63,8 @@ public interface ExpandoValueLocalService {
 		long valueId);
 
 	public void deleteExpandoValue(long valueId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void deleteExpandoValue(
 		com.liferay.portlet.expando.model.ExpandoValue expandoValue)
@@ -81,8 +81,8 @@ public interface ExpandoValueLocalService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.expando.model.ExpandoValue getExpandoValue(
 		long valueId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.expando.model.ExpandoValue> getExpandoValues(

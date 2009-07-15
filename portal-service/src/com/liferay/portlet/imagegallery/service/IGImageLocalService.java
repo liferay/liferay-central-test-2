@@ -63,8 +63,8 @@ public interface IGImageLocalService {
 		long imageId);
 
 	public void deleteIGImage(long imageId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void deleteIGImage(
 		com.liferay.portlet.imagegallery.model.IGImage igImage)
@@ -81,8 +81,8 @@ public interface IGImageLocalService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.imagegallery.model.IGImage getIGImage(
 		long imageId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.imagegallery.model.IGImage> getIGImages(

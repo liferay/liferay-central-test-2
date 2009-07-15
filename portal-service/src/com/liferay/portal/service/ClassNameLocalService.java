@@ -62,8 +62,8 @@ public interface ClassNameLocalService {
 	public com.liferay.portal.model.ClassName createClassName(long classNameId);
 
 	public void deleteClassName(long classNameId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void deleteClassName(com.liferay.portal.model.ClassName className)
 		throws com.liferay.portal.SystemException;
@@ -78,8 +78,8 @@ public interface ClassNameLocalService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.ClassName getClassName(long classNameId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.ClassName> getClassNames(

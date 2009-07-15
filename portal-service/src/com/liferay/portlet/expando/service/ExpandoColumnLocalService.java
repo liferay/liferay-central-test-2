@@ -63,8 +63,8 @@ public interface ExpandoColumnLocalService {
 		long columnId);
 
 	public void deleteExpandoColumn(long columnId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void deleteExpandoColumn(
 		com.liferay.portlet.expando.model.ExpandoColumn expandoColumn)
@@ -81,8 +81,8 @@ public interface ExpandoColumnLocalService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.expando.model.ExpandoColumn getExpandoColumn(
 		long columnId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.expando.model.ExpandoColumn> getExpandoColumns(

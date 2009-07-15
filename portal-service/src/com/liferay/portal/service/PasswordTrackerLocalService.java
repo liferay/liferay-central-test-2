@@ -63,8 +63,8 @@ public interface PasswordTrackerLocalService {
 		long passwordTrackerId);
 
 	public void deletePasswordTracker(long passwordTrackerId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void deletePasswordTracker(
 		com.liferay.portal.model.PasswordTracker passwordTracker)
@@ -81,8 +81,8 @@ public interface PasswordTrackerLocalService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.PasswordTracker getPasswordTracker(
 		long passwordTrackerId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.PasswordTracker> getPasswordTrackers(

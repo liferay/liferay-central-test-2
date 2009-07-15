@@ -63,8 +63,8 @@ public interface AnnouncementsDeliveryLocalService {
 		long deliveryId);
 
 	public void deleteAnnouncementsDelivery(long deliveryId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void deleteAnnouncementsDelivery(
 		com.liferay.portlet.announcements.model.AnnouncementsDelivery announcementsDelivery)
@@ -81,8 +81,8 @@ public interface AnnouncementsDeliveryLocalService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.announcements.model.AnnouncementsDelivery getAnnouncementsDelivery(
 		long deliveryId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.announcements.model.AnnouncementsDelivery> getAnnouncementsDeliveries(

@@ -62,8 +62,8 @@ public interface MBBanLocalService {
 	public com.liferay.portlet.messageboards.model.MBBan createMBBan(long banId);
 
 	public void deleteMBBan(long banId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void deleteMBBan(com.liferay.portlet.messageboards.model.MBBan mbBan)
 		throws com.liferay.portal.SystemException;
@@ -78,8 +78,8 @@ public interface MBBanLocalService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.messageboards.model.MBBan getMBBan(long banId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.messageboards.model.MBBan> getMBBans(

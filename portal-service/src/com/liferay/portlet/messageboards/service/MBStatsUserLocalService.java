@@ -63,8 +63,8 @@ public interface MBStatsUserLocalService {
 		long statsUserId);
 
 	public void deleteMBStatsUser(long statsUserId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void deleteMBStatsUser(
 		com.liferay.portlet.messageboards.model.MBStatsUser mbStatsUser)
@@ -81,8 +81,8 @@ public interface MBStatsUserLocalService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.messageboards.model.MBStatsUser getMBStatsUser(
 		long statsUserId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.messageboards.model.MBStatsUser> getMBStatsUsers(

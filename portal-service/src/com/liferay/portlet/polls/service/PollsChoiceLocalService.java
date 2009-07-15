@@ -63,8 +63,8 @@ public interface PollsChoiceLocalService {
 		long choiceId);
 
 	public void deletePollsChoice(long choiceId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void deletePollsChoice(
 		com.liferay.portlet.polls.model.PollsChoice pollsChoice)
@@ -81,8 +81,8 @@ public interface PollsChoiceLocalService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.polls.model.PollsChoice getPollsChoice(
 		long choiceId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.polls.model.PollsChoice> getPollsChoices(

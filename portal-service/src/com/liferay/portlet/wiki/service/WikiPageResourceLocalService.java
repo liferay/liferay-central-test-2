@@ -63,8 +63,8 @@ public interface WikiPageResourceLocalService {
 		long resourcePrimKey);
 
 	public void deleteWikiPageResource(long resourcePrimKey)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void deleteWikiPageResource(
 		com.liferay.portlet.wiki.model.WikiPageResource wikiPageResource)
@@ -81,8 +81,8 @@ public interface WikiPageResourceLocalService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.wiki.model.WikiPageResource getWikiPageResource(
 		long resourcePrimKey)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.wiki.model.WikiPageResource> getWikiPageResources(

@@ -63,8 +63,8 @@ public interface UserIdMapperLocalService {
 		long userIdMapperId);
 
 	public void deleteUserIdMapper(long userIdMapperId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void deleteUserIdMapper(
 		com.liferay.portal.model.UserIdMapper userIdMapper)
@@ -81,8 +81,8 @@ public interface UserIdMapperLocalService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.UserIdMapper getUserIdMapper(
 		long userIdMapperId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.UserIdMapper> getUserIdMappers(

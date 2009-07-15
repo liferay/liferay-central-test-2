@@ -63,8 +63,8 @@ public interface AnnouncementsFlagLocalService {
 		long flagId);
 
 	public void deleteAnnouncementsFlag(long flagId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void deleteAnnouncementsFlag(
 		com.liferay.portlet.announcements.model.AnnouncementsFlag announcementsFlag)
@@ -81,8 +81,8 @@ public interface AnnouncementsFlagLocalService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.announcements.model.AnnouncementsFlag getAnnouncementsFlag(
 		long flagId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.announcements.model.AnnouncementsFlag> getAnnouncementsFlags(

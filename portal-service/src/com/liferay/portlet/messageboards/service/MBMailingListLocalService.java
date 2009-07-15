@@ -63,8 +63,8 @@ public interface MBMailingListLocalService {
 		long mailingListId);
 
 	public void deleteMBMailingList(long mailingListId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void deleteMBMailingList(
 		com.liferay.portlet.messageboards.model.MBMailingList mbMailingList)
@@ -81,8 +81,8 @@ public interface MBMailingListLocalService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.messageboards.model.MBMailingList getMBMailingList(
 		long mailingListId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.messageboards.model.MBMailingList> getMBMailingLists(

@@ -63,8 +63,8 @@ public interface SocialActivityLocalService {
 		long activityId);
 
 	public void deleteSocialActivity(long activityId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void deleteSocialActivity(
 		com.liferay.portlet.social.model.SocialActivity socialActivity)
@@ -81,8 +81,8 @@ public interface SocialActivityLocalService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.social.model.SocialActivity getSocialActivity(
 		long activityId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.social.model.SocialActivity> getSocialActivities(

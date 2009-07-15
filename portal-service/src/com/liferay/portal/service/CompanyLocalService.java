@@ -62,8 +62,8 @@ public interface CompanyLocalService {
 	public com.liferay.portal.model.Company createCompany(long companyId);
 
 	public void deleteCompany(long companyId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void deleteCompany(com.liferay.portal.model.Company company)
 		throws com.liferay.portal.SystemException;
@@ -78,8 +78,8 @@ public interface CompanyLocalService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.Company getCompany(long companyId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Company> getCompanies(

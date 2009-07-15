@@ -63,8 +63,8 @@ public interface UserTrackerPathLocalService {
 		long userTrackerPathId);
 
 	public void deleteUserTrackerPath(long userTrackerPathId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void deleteUserTrackerPath(
 		com.liferay.portal.model.UserTrackerPath userTrackerPath)
@@ -81,8 +81,8 @@ public interface UserTrackerPathLocalService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.UserTrackerPath getUserTrackerPath(
 		long userTrackerPathId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.UserTrackerPath> getUserTrackerPaths(

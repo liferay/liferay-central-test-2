@@ -63,8 +63,8 @@ public interface RatingsEntryLocalService {
 		long entryId);
 
 	public void deleteRatingsEntry(long entryId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void deleteRatingsEntry(
 		com.liferay.portlet.ratings.model.RatingsEntry ratingsEntry)
@@ -81,8 +81,8 @@ public interface RatingsEntryLocalService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.ratings.model.RatingsEntry getRatingsEntry(
 		long entryId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.ratings.model.RatingsEntry> getRatingsEntries(

@@ -63,8 +63,8 @@ public interface EmailAddressLocalService {
 		long emailAddressId);
 
 	public void deleteEmailAddress(long emailAddressId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void deleteEmailAddress(
 		com.liferay.portal.model.EmailAddress emailAddress)
@@ -81,8 +81,8 @@ public interface EmailAddressLocalService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.EmailAddress getEmailAddress(
 		long emailAddressId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.EmailAddress> getEmailAddresses(

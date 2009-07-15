@@ -62,8 +62,8 @@ public interface LayoutSetLocalService {
 	public com.liferay.portal.model.LayoutSet createLayoutSet(long layoutSetId);
 
 	public void deleteLayoutSet(long layoutSetId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void deleteLayoutSet(com.liferay.portal.model.LayoutSet layoutSet)
 		throws com.liferay.portal.SystemException;
@@ -78,8 +78,8 @@ public interface LayoutSetLocalService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.LayoutSet getLayoutSet(long layoutSetId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.LayoutSet> getLayoutSets(

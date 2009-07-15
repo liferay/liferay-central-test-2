@@ -63,8 +63,8 @@ public interface PasswordPolicyRelLocalService {
 		long passwordPolicyRelId);
 
 	public void deletePasswordPolicyRel(long passwordPolicyRelId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void deletePasswordPolicyRel(
 		com.liferay.portal.model.PasswordPolicyRel passwordPolicyRel)
@@ -81,8 +81,8 @@ public interface PasswordPolicyRelLocalService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.PasswordPolicyRel getPasswordPolicyRel(
 		long passwordPolicyRelId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.PasswordPolicyRel> getPasswordPolicyRels(

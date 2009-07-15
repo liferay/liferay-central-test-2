@@ -63,8 +63,8 @@ public interface PasswordPolicyLocalService {
 		long passwordPolicyId);
 
 	public void deletePasswordPolicy(long passwordPolicyId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void deletePasswordPolicy(
 		com.liferay.portal.model.PasswordPolicy passwordPolicy)
@@ -81,8 +81,8 @@ public interface PasswordPolicyLocalService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.PasswordPolicy getPasswordPolicy(
 		long passwordPolicyId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.PasswordPolicy> getPasswordPolicies(

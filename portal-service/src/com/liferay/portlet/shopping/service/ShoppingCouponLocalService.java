@@ -63,8 +63,8 @@ public interface ShoppingCouponLocalService {
 		long couponId);
 
 	public void deleteShoppingCoupon(long couponId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void deleteShoppingCoupon(
 		com.liferay.portlet.shopping.model.ShoppingCoupon shoppingCoupon)
@@ -81,8 +81,8 @@ public interface ShoppingCouponLocalService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.shopping.model.ShoppingCoupon getShoppingCoupon(
 		long couponId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.shopping.model.ShoppingCoupon> getShoppingCoupons(

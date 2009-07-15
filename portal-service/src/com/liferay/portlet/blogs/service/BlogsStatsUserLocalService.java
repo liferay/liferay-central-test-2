@@ -63,8 +63,8 @@ public interface BlogsStatsUserLocalService {
 		long statsUserId);
 
 	public void deleteBlogsStatsUser(long statsUserId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void deleteBlogsStatsUser(
 		com.liferay.portlet.blogs.model.BlogsStatsUser blogsStatsUser)
@@ -81,8 +81,8 @@ public interface BlogsStatsUserLocalService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.blogs.model.BlogsStatsUser getBlogsStatsUser(
 		long statsUserId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.blogs.model.BlogsStatsUser> getBlogsStatsUsers(

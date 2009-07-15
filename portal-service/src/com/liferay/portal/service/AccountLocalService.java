@@ -62,8 +62,8 @@ public interface AccountLocalService {
 	public com.liferay.portal.model.Account createAccount(long accountId);
 
 	public void deleteAccount(long accountId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void deleteAccount(com.liferay.portal.model.Account account)
 		throws com.liferay.portal.SystemException;
@@ -78,8 +78,8 @@ public interface AccountLocalService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.Account getAccount(long accountId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Account> getAccounts(

@@ -62,8 +62,8 @@ public interface ResourceLocalService {
 	public com.liferay.portal.model.Resource createResource(long resourceId);
 
 	public void deleteResource(long resourceId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void deleteResource(com.liferay.portal.model.Resource resource)
 		throws com.liferay.portal.SystemException;
@@ -78,8 +78,8 @@ public interface ResourceLocalService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.Resource getResource(long resourceId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Resource> getResources(

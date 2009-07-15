@@ -63,8 +63,8 @@ public interface JournalContentSearchLocalService {
 		long contentSearchId);
 
 	public void deleteJournalContentSearch(long contentSearchId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void deleteJournalContentSearch(
 		com.liferay.portlet.journal.model.JournalContentSearch journalContentSearch)
@@ -81,8 +81,8 @@ public interface JournalContentSearchLocalService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.journal.model.JournalContentSearch getJournalContentSearch(
 		long contentSearchId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.journal.model.JournalContentSearch> getJournalContentSearchs(

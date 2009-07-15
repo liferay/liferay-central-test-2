@@ -62,8 +62,8 @@ public interface UserLocalService {
 	public com.liferay.portal.model.User createUser(long userId);
 
 	public void deleteUser(long userId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void deleteUser(com.liferay.portal.model.User user)
 		throws com.liferay.portal.SystemException;
@@ -78,8 +78,8 @@ public interface UserLocalService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.User getUser(long userId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.User> getUsers(int start,

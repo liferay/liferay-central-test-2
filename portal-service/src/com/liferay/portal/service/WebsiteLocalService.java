@@ -62,8 +62,8 @@ public interface WebsiteLocalService {
 	public com.liferay.portal.model.Website createWebsite(long websiteId);
 
 	public void deleteWebsite(long websiteId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void deleteWebsite(com.liferay.portal.model.Website website)
 		throws com.liferay.portal.SystemException;
@@ -78,8 +78,8 @@ public interface WebsiteLocalService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.Website getWebsite(long websiteId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Website> getWebsites(

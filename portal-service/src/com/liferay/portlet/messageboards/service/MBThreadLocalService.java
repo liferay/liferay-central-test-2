@@ -63,8 +63,8 @@ public interface MBThreadLocalService {
 		long threadId);
 
 	public void deleteMBThread(long threadId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void deleteMBThread(
 		com.liferay.portlet.messageboards.model.MBThread mbThread)
@@ -81,8 +81,8 @@ public interface MBThreadLocalService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.messageboards.model.MBThread getMBThread(
 		long threadId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.messageboards.model.MBThread> getMBThreads(

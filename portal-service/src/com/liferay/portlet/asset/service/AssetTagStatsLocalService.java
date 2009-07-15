@@ -63,8 +63,8 @@ public interface AssetTagStatsLocalService {
 		long tagStatsId);
 
 	public void deleteAssetTagStats(long tagStatsId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void deleteAssetTagStats(
 		com.liferay.portlet.asset.model.AssetTagStats assetTagStats)
@@ -81,8 +81,8 @@ public interface AssetTagStatsLocalService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.asset.model.AssetTagStats getAssetTagStats(
 		long tagStatsId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.asset.model.AssetTagStats> getAssetTagStatses(

@@ -63,8 +63,8 @@ public interface AnnouncementsEntryLocalService {
 		long entryId);
 
 	public void deleteAnnouncementsEntry(long entryId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void deleteAnnouncementsEntry(
 		com.liferay.portlet.announcements.model.AnnouncementsEntry announcementsEntry)
@@ -81,8 +81,8 @@ public interface AnnouncementsEntryLocalService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.announcements.model.AnnouncementsEntry getAnnouncementsEntry(
 		long entryId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.announcements.model.AnnouncementsEntry> getAnnouncementsEntries(

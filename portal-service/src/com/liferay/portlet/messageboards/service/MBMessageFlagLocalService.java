@@ -63,8 +63,8 @@ public interface MBMessageFlagLocalService {
 		long messageFlagId);
 
 	public void deleteMBMessageFlag(long messageFlagId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void deleteMBMessageFlag(
 		com.liferay.portlet.messageboards.model.MBMessageFlag mbMessageFlag)
@@ -81,8 +81,8 @@ public interface MBMessageFlagLocalService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.messageboards.model.MBMessageFlag getMBMessageFlag(
 		long messageFlagId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.messageboards.model.MBMessageFlag> getMBMessageFlags(

@@ -63,8 +63,8 @@ public interface SCFrameworkVersionLocalService {
 		long frameworkVersionId);
 
 	public void deleteSCFrameworkVersion(long frameworkVersionId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void deleteSCFrameworkVersion(
 		com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion scFrameworkVersion)
@@ -81,8 +81,8 @@ public interface SCFrameworkVersionLocalService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion getSCFrameworkVersion(
 		long frameworkVersionId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion> getSCFrameworkVersions(

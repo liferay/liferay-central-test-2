@@ -63,8 +63,8 @@ public interface MBCategoryLocalService {
 		long categoryId);
 
 	public void deleteMBCategory(long categoryId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void deleteMBCategory(
 		com.liferay.portlet.messageboards.model.MBCategory mbCategory)
@@ -81,8 +81,8 @@ public interface MBCategoryLocalService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.messageboards.model.MBCategory getMBCategory(
 		long categoryId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.messageboards.model.MBCategory> getMBCategories(

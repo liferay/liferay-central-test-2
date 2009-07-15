@@ -63,8 +63,8 @@ public interface ResourcePermissionLocalService {
 		long resourcePermissionId);
 
 	public void deleteResourcePermission(long resourcePermissionId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void deleteResourcePermission(
 		com.liferay.portal.model.ResourcePermission resourcePermission)
@@ -81,8 +81,8 @@ public interface ResourcePermissionLocalService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.ResourcePermission getResourcePermission(
 		long resourcePermissionId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.ResourcePermission> getResourcePermissions(

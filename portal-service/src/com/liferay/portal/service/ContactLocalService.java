@@ -62,8 +62,8 @@ public interface ContactLocalService {
 	public com.liferay.portal.model.Contact createContact(long contactId);
 
 	public void deleteContact(long contactId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void deleteContact(com.liferay.portal.model.Contact contact)
 		throws com.liferay.portal.SystemException;
@@ -78,8 +78,8 @@ public interface ContactLocalService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.Contact getContact(long contactId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Contact> getContacts(

@@ -63,8 +63,8 @@ public interface BookmarksFolderLocalService {
 		long folderId);
 
 	public void deleteBookmarksFolder(long folderId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void deleteBookmarksFolder(
 		com.liferay.portlet.bookmarks.model.BookmarksFolder bookmarksFolder)
@@ -81,8 +81,8 @@ public interface BookmarksFolderLocalService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.bookmarks.model.BookmarksFolder getBookmarksFolder(
 		long folderId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.bookmarks.model.BookmarksFolder> getBookmarksFolders(

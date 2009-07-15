@@ -63,8 +63,8 @@ public interface SCProductScreenshotLocalService {
 		long productScreenshotId);
 
 	public void deleteSCProductScreenshot(long productScreenshotId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void deleteSCProductScreenshot(
 		com.liferay.portlet.softwarecatalog.model.SCProductScreenshot scProductScreenshot)
@@ -81,8 +81,8 @@ public interface SCProductScreenshotLocalService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.softwarecatalog.model.SCProductScreenshot getSCProductScreenshot(
 		long productScreenshotId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductScreenshot> getSCProductScreenshots(

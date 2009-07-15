@@ -63,8 +63,8 @@ public interface PermissionLocalService {
 		long permissionId);
 
 	public void deletePermission(long permissionId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void deletePermission(com.liferay.portal.model.Permission permission)
 		throws com.liferay.portal.SystemException;
@@ -79,8 +79,8 @@ public interface PermissionLocalService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.Permission getPermission(long permissionId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Permission> getPermissions(
