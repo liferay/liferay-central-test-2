@@ -386,7 +386,7 @@ public class ServiceBuilder {
 				newContent, "@version $Rev: $", "@version $Revision: 1.183 $");
 		}
 
-		if (oldContent == null || !oldContent.equals(newContent)) {
+		if ((oldContent == null) || !oldContent.equals(newContent)) {
 			FileUtil.write(file, newContent);
 
 			System.out.println("Writing " + file);
