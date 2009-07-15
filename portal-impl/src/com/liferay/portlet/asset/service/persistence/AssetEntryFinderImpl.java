@@ -254,7 +254,9 @@ public class AssetEntryFinderImpl
 			sb.append(")");
 		}
 
-		sb.append(getClassNameIds(entryQuery.getClassNameIds()));
+		long[] classNameIds = entryQuery.getClassNameIds();
+
+		sb.append(getClassNameIds(classNameIds));
 
 		if (!count) {
 			sb.append(" ORDER BY AssetEntry.");
@@ -311,7 +313,9 @@ public class AssetEntryFinderImpl
 			qPos.add(groupId);
 		}
 
-		qPos.add(entryQuery.getClassNameIds());
+		for (long classNameId : classNameIds) {
+			qPos.add(classNameId);
+		}
 
 		return q;
 	}
@@ -374,14 +378,10 @@ public class AssetEntryFinderImpl
 		StringBuilder sb = new StringBuilder();
 
 		if (classNameIds.length > 0) {
-			sb.append(" AND (");
+			sb.append(" AND (classNameId = ?");
 
-			for (int i = 0; i < classNameIds.length; i++) {
-				sb.append("classNameId = ?");
-
-				if (i > 0) {
-					sb.append(" AND ");
-				}
+			for (int i = 1; i < classNameIds.length; i++) {
+				sb.append(" OR classNameId = ? ");
 			}
 
 			sb.append(") ");
