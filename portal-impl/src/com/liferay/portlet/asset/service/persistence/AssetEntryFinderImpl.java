@@ -242,13 +242,9 @@ public class AssetEntryFinderImpl
 
 		sb.append("[$DATES$]");
 
-		long[] groupIds = entryQuery.getGroupIds();
+		sb.append(getGroupIds(entryQuery.getGroupIds()));
 
-		sb.append(getGroupIds(groupIds));
-
-		long[] classNameIds = entryQuery.getClassNameIds();
-
-		sb.append(getClassNameIds(classNameIds));
+		sb.append(getClassNameIds(entryQuery.getClassNameIds()));
 
 		if (!count) {
 			sb.append(" ORDER BY AssetEntry.");
@@ -301,13 +297,9 @@ public class AssetEntryFinderImpl
 			qPos, entryQuery.getPublishDate(),
 			entryQuery.getExpirationDate());
 
-		for (long groupId : groupIds) {
-			qPos.add(groupId);
-		}
+		qPos.add(entryQuery.getGroupIds());
 
-		for (long classNameId : classNameIds) {
-			qPos.add(classNameId);
-		}
+		qPos.add(entryQuery.getClassNameIds());
 
 		return q;
 	}
