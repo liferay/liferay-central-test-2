@@ -1,0 +1,104 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>CA_AddWCDArticleTest</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">CA_AddWCDArticleTest</td></tr>
+</thead><tbody>
+<tr>
+	<td>store</td>
+	<td>eval(selenium.isElementPresent('link=Back to Guest'))</td>
+	<td>InControlPanel</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>!${InControlPanel}</td>
+	<td>NotInControlPanel</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Back to Guest</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>NotInControlPanel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Web Content Display Permissions Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Add Web Content']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_15_title</td>
+	<td>CA Permissions WCD Article</td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>_15_editor</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>FCKeditor1___Frame</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//textarea</td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectFrame</td>
+	<td>//iframe[@id="_15_editor"]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectFrame</td>
+	<td>//iframe[@id="FCKeditor1___Frame"]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectFrame</td>
+	<td>//iframe</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//body</td>
+	<td>This is a ca permissions wcd article!</td>
+</tr>
+<tr>
+	<td>selectFrame</td>
+	<td>relative=top</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Save and Approve']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>This is a ca permissions wcd article!</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>

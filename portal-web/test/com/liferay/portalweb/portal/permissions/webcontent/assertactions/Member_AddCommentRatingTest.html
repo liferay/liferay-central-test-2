@@ -1,0 +1,69 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Member_AddCommentRatingTest</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">Member_AddCommentRatingTest</td></tr>
+</thead><tbody>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Web Content Display Permissions Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Web Content Display Permissions Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//td[1]/ul/li[2]/a[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>+1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//td[1]/ul/li[2]/a[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>-1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//td[1]/ul/li[2]/a[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>±0</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>CA_RestoreMemberWCSViewPermissionsTest</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">CA_RestoreMemberWCSViewPermissionsTest</td></tr>
+</thead><tbody>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Web Content Search Permissions Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Web Content Search Permissions Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Configuration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Permissions</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>15_ACTION_VIEW</td>
+	<td></td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>eval(selenium.isChecked('15_ACTION_VIEW'))</td>
+	<td>Checked1</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>${Checked1}</td>
+	<td>IsChecked1</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>15_ACTION_VIEW</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>IsChecked1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>eval(selenium.isChecked('//tr[11]/td[2]/input'))</td>
+	<td>Checked2</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>${Checked2}</td>
+	<td>IsChecked2</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//tr[11]/td[2]/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>IsChecked2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Submit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Your request processed successfully.</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>
