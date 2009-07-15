@@ -241,9 +241,7 @@ public class AssetEntryFinderImpl
 		// Other conditions
 
 		sb.append("[$DATES$]");
-
 		sb.append(getGroupIds(entryQuery.getGroupIds()));
-
 		sb.append(getClassNameIds(entryQuery.getClassNameIds()));
 
 		if (!count) {
@@ -298,7 +296,6 @@ public class AssetEntryFinderImpl
 			entryQuery.getExpirationDate());
 
 		qPos.add(entryQuery.getGroupIds());
-
 		qPos.add(entryQuery.getClassNameIds());
 
 		return q;
