@@ -29,6 +29,7 @@ import com.liferay.portalweb.portal.permissions.controlpanel.ControlPanelTests;
 import com.liferay.portalweb.portal.permissions.documentlibrary.DocumentLibraryTests;
 import com.liferay.portalweb.portal.permissions.imagegallery.ImageGalleryTests;
 import com.liferay.portalweb.portal.permissions.messageboards.MessageBoardsTests;
+import com.liferay.portalweb.portal.permissions.webcontent.WebContentTests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -51,6 +52,7 @@ public class PermissionsTestSuite extends BaseTests {
 		testSuite.addTest(DocumentLibraryTests.suite());
 		testSuite.addTest(ImageGalleryTests.suite());
 		testSuite.addTest(MessageBoardsTests.suite());
+		testSuite.addTest(WebContentTests.suite());
 
 		testSuite.addTestSuite(StopSeleniumTest.class);
 
