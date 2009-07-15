@@ -68,12 +68,15 @@ public interface TaskInstanceManager {
 	 * @param attributes the optional attributes to be passed on to the context
 	 *            information of the workflow instance (they can be empty or
 	 *            even <code>null</code>)
+	 * @param callingUserId the id of the calling user (see
+	 *            {@link WorkflowUtil#createUserCredential(long)} for more
+	 *            information)
 	 * @return the task information reflecting the changes made to it
 	 * @throws WorkflowException is thrown, if the user could not be assigned
 	 */
 	public TaskInstanceInfo assignTaskInstanceToRole(
 			long taskInstanceId, long roleId, String comment,
-			Map<String, Object> attributes)
+			Map<String, Object> attributes, long callingUserId)
 		throws WorkflowException;
 
 	/**
@@ -82,17 +85,23 @@ public interface TaskInstanceManager {
 	 * reflect those changes made to the task instance.
 	 * 
 	 * @param taskInstanceId the id of the task instance to be assigned
-	 * @param userId the id of the user to assign the task to
+	 * @param userCredential the credential of the user to assign the task to,
+	 *            representing the user's attributes and its role set, a
+	 *            credential can be created using the id of the user through
+	 *            {@link WorkflowUtil#createUserCredential(long)}
 	 * @param comment the optional comment for the user being the new assignee
 	 * @param attributes the optional attributes to be passed on to the context
 	 *            information of the workflow instance (they can be empty or
 	 *            even <code>null</code>)
+	 * @param callingUserId the id of the calling user (see
+	 *            {@link WorkflowUtil#createUserCredential(long)} for more
+	 *            information)
 	 * @return the task information reflecting the changes made to it
 	 * @throws WorkflowException is thrown, if the user could not be assigned
 	 */
 	public TaskInstanceInfo assignTaskInstanceToUser(
-			long taskInstanceId, long userId, String comment,
-			Map<String, Object> attributes)
+			long taskInstanceId, UserCredential userCredential, String comment,
+			Map<String, Object> attributes, long callingUserId)
 		throws WorkflowException;
 
 	/**

@@ -47,7 +47,7 @@ public interface WorkflowDefinitionManager {
 	 * <p>
 	 * Deploys the given workflow definition within the engine.
 	 * </p>
-	 *
+	 * 
 	 * <p>
 	 * If the workflow definition already exists and versioning is not supported
 	 * or it is the same version as already existing, the definition is
@@ -55,7 +55,7 @@ public interface WorkflowDefinitionManager {
 	 * complete new definition or as a new version of an already existing
 	 * definition.
 	 * </p>
-	 *
+	 * 
 	 * <p>
 	 * If you deploy a workflow definition by overwriting an existing one, make
 	 * sure it is compatible with already existing workflow instances to not
@@ -65,13 +65,16 @@ public interface WorkflowDefinitionManager {
 	 * old definition, and newly created workflow instances are created by using
 	 * the new version.
 	 * </p>
-	 *
+	 * 
 	 * @param workflowDefinition the workflow definition to be deployed
+	 * @param callingUserId the id of the user deploying the workflow definition
+	 *            (see {@link WorkflowUtil#createUserCredential(long)} for more
+	 *            information)
 	 * @throws WorkflowException is thrown, if deployment of the definition
-	 * failed
+	 *             failed
 	 */
 	public void deployWorkflowDefinition(
-			WorkflowDefinition workflowDefinition)
+			WorkflowDefinition workflowDefinition, long callingUserId)
 		throws WorkflowException;
 
 	/**

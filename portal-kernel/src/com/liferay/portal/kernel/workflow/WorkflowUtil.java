@@ -42,9 +42,21 @@ import com.liferay.portal.service.UserServiceUtil;
 public class WorkflowUtil {
 
 	/**
+	 * <p>
 	 * Creates a user credential representing the user with the specified id,
 	 * its set of assigned roles and additional information requested through
 	 * the {@link UserService}.
+	 * </p>
+	 * 
+	 * <p>
+	 * The user credential is most likely be used to represent the
+	 * <code>callingUserId</code> on a workflow API invocation to be passed on
+	 * to the underlying workflow engine. Some engines want to track users
+	 * invoking methods and thus executing activities, creating history entries
+	 * or starting new workflows. Thats why most methods of the workflow API are
+	 * taking the caller's user id to pass it on to the engine through a
+	 * {@link UserCredential}.
+	 * </p>
 	 * 
 	 * @param userId the id of the user to create a credential object for
 	 * @return the user credential object acting as the container representing
@@ -54,9 +66,13 @@ public class WorkflowUtil {
 	 */
 	public static UserCredential createUserCredential(long userId)
 		throws WorkflowException {
-		 User user;
+		// check for a valid user id
+		if (userId <= 0) {
+			return null;
+		}
+		
 		try {
-			user = UserServiceUtil.getUserById(userId);
+			User user = UserServiceUtil.getUserById(userId);
 			return new UserCredential(user);
 		}
 		catch (Exception e) {
