@@ -103,7 +103,7 @@ DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
 
 			function <%= namespace %>updateMessage(i) {
 				eval("var messageId = document.<%= formName %>.<%= namespace %>messageId" + i + ".value;");
-				eval("var body = document.<%= formName %>.<%= namespace %>editBody" + i + ".value;");
+				eval("var body = document.<%= formName %>.<%= namespace %>editReplyBody" + i + ".value;");
 
 				document.<%= formName %>.<%= namespace %><%= Constants.CMD %>.value = "<%= Constants.UPDATE %>";
 				document.<%= formName %>.<%= namespace %>messageId.value = messageId;
@@ -362,7 +362,7 @@ DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
 								<c:if test="<%= MBDiscussionPermission.contains(permissionChecker, company.getCompanyId(), scopeGroupId, className, classPK, userId, ActionKeys.UPDATE_DISCUSSION) %>">
 
 									<%
-									String taglibEditURL = "javascript:" + namespace + "showForm('" + namespace + "editForm" + i + "', '" + namespace + "editBody" + i + "');";
+									String taglibEditURL = "javascript:" + namespace + "showForm('" + namespace + "editForm" + i + "', '" + namespace + "editReplyBody" + i + "');";
 									%>
 
 									<td>
