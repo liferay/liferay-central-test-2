@@ -25,11 +25,9 @@ package com.liferay.portal.servlet.taglib.security;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Company;
-import com.liferay.portal.model.Layout;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.WebKeys;
 import com.liferay.portal.util.PropsValues;
+import com.liferay.portal.util.WebKeys;
 import com.liferay.util.Encryptor;
 
 import javax.servlet.http.HttpServletRequest;
@@ -64,7 +62,6 @@ public class DoAsURLTagUtil extends TagSupport {
 			if (Validator.isNull(doAsURL)) {
 				doAsURL = PropsValues.COMPANY_DEFAULT_HOME_URL;
 			}
-
 
 			if (doAsUserId <= 0) {
 				doAsUserId = company.getDefaultUser().getUserId();
