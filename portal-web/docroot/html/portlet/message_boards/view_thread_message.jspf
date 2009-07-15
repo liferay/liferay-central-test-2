@@ -200,7 +200,7 @@
 							<portlet:renderURL var="replyURL">
 								<portlet:param name="struts_action" value="/message_boards/edit_message" />
 								<portlet:param name="redirect" value="<%= currentURL %>" />
-								<portlet:param name="categoryId" value="<%= String.valueOf(message.getCategoryId()) %>" />
+								<portlet:param name="mbCategoryId" value="<%= String.valueOf(message.getCategoryId()) %>" />
 								<portlet:param name="threadId" value="<%= String.valueOf(message.getThreadId()) %>" />
 								<portlet:param name="parentMessageId" value="<%= String.valueOf(message.getMessageId()) %>" />
 							</portlet:renderURL>
@@ -211,7 +211,7 @@
 							<portlet:renderURL var="quoteURL">
 								<portlet:param name="struts_action" value="/message_boards/edit_message" />
 								<portlet:param name="redirect" value="<%= currentURL %>" />
-								<portlet:param name="categoryId" value="<%= String.valueOf(message.getCategoryId()) %>" />
+								<portlet:param name="mbCategoryId" value="<%= String.valueOf(message.getCategoryId()) %>" />
 								<portlet:param name="threadId" value="<%= String.valueOf(message.getThreadId()) %>" />
 								<portlet:param name="parentMessageId" value="<%= String.valueOf(message.getMessageId()) %>" />
 								<portlet:param name="quote" value="true" />
@@ -491,7 +491,7 @@
 							PortletURL categoryURL = renderResponse.createRenderURL();
 
 							categoryURL.setParameter("struts_action", "/message_boards/view");
-							categoryURL.setParameter("categoryId", String.valueOf(message.getCategoryId()));
+							categoryURL.setParameter("mbCategoryId", String.valueOf(message.getCategoryId()));
 							%>
 
 							<portlet:actionURL var="deleteURL">

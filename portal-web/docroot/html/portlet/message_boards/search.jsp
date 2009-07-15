@@ -139,7 +139,7 @@ try {
 
 		categoryUrl.setParameter("struts_action", "/message_boards/view");
 		categoryUrl.setParameter("redirect", currentURL);
-		categoryUrl.setParameter("categoryId", String.valueOf(categoryId));
+		categoryUrl.setParameter("mbCategoryId", String.valueOf(categoryId));
 
 		row.addText(category.getName(), categoryUrl);
 

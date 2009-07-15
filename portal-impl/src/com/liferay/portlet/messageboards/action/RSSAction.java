@@ -75,7 +75,7 @@ public class RSSAction extends Action {
 		long companyId = ParamUtil.getLong(request, "companyId");
 		long groupId = ParamUtil.getLong(request, "groupId");
 		long userId = ParamUtil.getLong(request, "userId");
-		long categoryId = ParamUtil.getLong(request, "categoryId");
+		long categoryId = ParamUtil.getLong(request, "mbCategoryId");
 		long threadId = ParamUtil.getLong(request, "threadId");
 		int max = ParamUtil.getInteger(
 			request, "max", SearchContainer.DEFAULT_DELTA);
@@ -119,7 +119,7 @@ public class RSSAction extends Action {
 			String feedURL =
 				themeDisplay.getURLPortal() + themeDisplay.getPathMain() +
 					"/message_boards/find_category?p_l_id=" + plid +
-						"&categoryId=" + categoryId;
+						"&mbCategoryId=" + categoryId;
 
 			rss = MBMessageServiceUtil.getCategoryMessagesRSS(
 				categoryId, max, type, version, displayStyle, feedURL, entryURL,

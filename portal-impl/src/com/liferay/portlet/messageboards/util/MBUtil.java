@@ -197,7 +197,7 @@ public class MBUtil {
 
 			categoriesURL.setParameter("struts_action", "/message_boards/view");
 			categoriesURL.setParameter(
-				"categoryId",
+				"mbCategoryId",
 				String.valueOf(MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID));
 		}
 
@@ -222,7 +222,7 @@ public class MBUtil {
 				portletURL.setParameter(
 					"struts_action", "/message_boards/select_category");
 				portletURL.setParameter(
-					"categoryId", String.valueOf(category.getCategoryId()));
+					"mbCategoryId", String.valueOf(category.getCategoryId()));
 			}
 			else {
 				//portletURL.setWindowState(WindowState.MAXIMIZED);
@@ -230,7 +230,7 @@ public class MBUtil {
 				portletURL.setParameter(
 					"struts_action", "/message_boards/view");
 				portletURL.setParameter(
-					"categoryId", String.valueOf(category.getCategoryId()));
+					"mbCategoryId", String.valueOf(category.getCategoryId()));
 			}
 
 			String categoryLink =

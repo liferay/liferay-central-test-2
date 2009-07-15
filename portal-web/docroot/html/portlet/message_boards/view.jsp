@@ -32,7 +32,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 MBCategory category = (MBCategory)request.getAttribute(WebKeys.MESSAGE_BOARDS_CATEGORY);
 
-long categoryId = BeanParamUtil.getLong(category, request, "categoryId", MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID);
+long categoryId = BeanParamUtil.getLong(category, request, "mbCategoryId", MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID);
 
 MBCategoryDisplay categoryDisplay = new MBCategoryDisplayImpl(scopeGroupId, categoryId);
 
@@ -64,7 +64,7 @@ PortletURL portletURL = renderResponse.createRenderURL();
 portletURL.setParameter("struts_action", "/message_boards/view");
 portletURL.setParameter("tabs1", tabs1);
 portletURL.setParameter("tabs2", tabs2);
-portletURL.setParameter("categoryId", String.valueOf(categoryId));
+portletURL.setParameter("mbCategoryId", String.valueOf(categoryId));
 %>
 
 <liferay-util:include page="/html/portlet/message_boards/tabs1.jsp" />
@@ -122,7 +122,7 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 			PortletURL rowURL = renderResponse.createRenderURL();
 
 			rowURL.setParameter("struts_action", "/message_boards/view");
-			rowURL.setParameter("categoryId", String.valueOf(curCategory.getCategoryId()));
+			rowURL.setParameter("mbCategoryId", String.valueOf(curCategory.getCategoryId()));
 
 			// Name and description
 
@@ -160,7 +160,7 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 					for (int j = 0; j < subcategories.size(); j++) {
 						MBCategory subcategory = (MBCategory)subcategories.get(j);
 
-						rowURL.setParameter("categoryId", String.valueOf(subcategory.getCategoryId()));
+						rowURL.setParameter("mbCategoryId", String.valueOf(subcategory.getCategoryId()));
 
 						sb.append("<a href=\"");
 						sb.append(rowURL);
@@ -174,7 +174,7 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 					}
 
 					if (subcategoriesCount > subcategories.size()) {
-						rowURL.setParameter("categoryId", String.valueOf(curCategory.getCategoryId()));
+						rowURL.setParameter("mbCategoryId", String.valueOf(curCategory.getCategoryId()));
 
 						sb.append(", <a href=\"");
 						sb.append(rowURL);
@@ -184,7 +184,7 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 						sb.append("</a>");
 					}
 
-					rowURL.setParameter("categoryId", String.valueOf(curCategory.getCategoryId()));
+					rowURL.setParameter("mbCategoryId", String.valueOf(curCategory.getCategoryId()));
 				}
 			}
 
@@ -451,7 +451,7 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 
 			<script type="text/javascript">
 				function <portlet:namespace />addMessage() {
-					var url = '<portlet:renderURL><portlet:param name="struts_action" value="/message_boards/edit_message" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="categoryId" value="<%= String.valueOf(categoryId) %>" /></portlet:renderURL>';
+					var url = '<portlet:renderURL><portlet:param name="struts_action" value="/message_boards/edit_message" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="mbCategoryId" value="<%= String.valueOf(categoryId) %>" /></portlet:renderURL>';
 
 					if (document.<portlet:namespace />fm2.<portlet:namespace />keywords) {
 						url += '&<portlet:namespace />subject=' + document.<portlet:namespace />fm2.<portlet:namespace />keywords.value;
@@ -536,7 +536,7 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 				PortletURL rowURL = renderResponse.createRenderURL();
 
 				rowURL.setParameter("struts_action", "/message_boards/view");
-				rowURL.setParameter("categoryId", String.valueOf(curCategory.getCategoryId()));
+				rowURL.setParameter("mbCategoryId", String.valueOf(curCategory.getCategoryId()));
 
 				// Name and description
 

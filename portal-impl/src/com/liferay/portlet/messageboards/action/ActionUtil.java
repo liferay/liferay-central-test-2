@@ -78,7 +78,7 @@ public class ActionUtil {
 		MBBanLocalServiceUtil.checkBan(
 			themeDisplay.getScopeGroupId(), themeDisplay.getUserId());
 
-		long categoryId = ParamUtil.getLong(request, "categoryId");
+		long categoryId = ParamUtil.getLong(request, "mbCategoryId");
 
 		MBCategory category = null;
 

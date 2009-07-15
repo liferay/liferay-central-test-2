@@ -38,7 +38,7 @@ Set<Long> categorySubscriptionClassPKs = (Set<Long>)objArray[1];
 		<portlet:renderURL var="editURL">
 			<portlet:param name="struts_action" value="/message_boards/edit_category" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
-			<portlet:param name="categoryId" value="<%= String.valueOf(category.getCategoryId()) %>" />
+			<portlet:param name="mbCategoryId" value="<%= String.valueOf(category.getCategoryId()) %>" />
 		</portlet:renderURL>
 
 		<liferay-ui:icon image="edit" url="<%= editURL %>" />
@@ -55,7 +55,7 @@ Set<Long> categorySubscriptionClassPKs = (Set<Long>)objArray[1];
 		<liferay-ui:icon image="permissions" url="<%= permissionsURL %>" />
 	</c:if>
 
-	<liferay-ui:icon image="rss" url='<%= themeDisplay.getPortalURL() + themeDisplay.getPathMain() + "/message_boards/rss?p_l_id=" + plid + "&categoryId=" + category.getCategoryId() + rssURLParams %>' method="get" target="_blank" />
+	<liferay-ui:icon image="rss" url='<%= themeDisplay.getPortalURL() + themeDisplay.getPathMain() + "/message_boards/rss?p_l_id=" + plid + "&mbCategoryId=" + category.getCategoryId() + rssURLParams %>' method="get" target="_blank" />
 
 	<c:if test="<%= MBCategoryPermission.contains(permissionChecker, category, ActionKeys.SUBSCRIBE) %>">
 		<c:choose>
@@ -64,7 +64,7 @@ Set<Long> categorySubscriptionClassPKs = (Set<Long>)objArray[1];
 					<portlet:param name="struts_action" value="/message_boards/edit_category" />
 					<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.UNSUBSCRIBE %>" />
 					<portlet:param name="redirect" value="<%= currentURL %>" />
-					<portlet:param name="categoryId" value="<%= String.valueOf(category.getCategoryId()) %>" />
+					<portlet:param name="mbCategoryId" value="<%= String.valueOf(category.getCategoryId()) %>" />
 				</portlet:actionURL>
 
 				<liferay-ui:icon image="unsubscribe" url="<%= unsubscribeURL %>" />
@@ -74,7 +74,7 @@ Set<Long> categorySubscriptionClassPKs = (Set<Long>)objArray[1];
 					<portlet:param name="struts_action" value="/message_boards/edit_category" />
 					<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.SUBSCRIBE %>" />
 					<portlet:param name="redirect" value="<%= currentURL %>" />
-					<portlet:param name="categoryId" value="<%= String.valueOf(category.getCategoryId()) %>" />
+					<portlet:param name="mbCategoryId" value="<%= String.valueOf(category.getCategoryId()) %>" />
 				</portlet:actionURL>
 
 				<liferay-ui:icon image="subscribe" url="<%= subscribeURL %>" />
@@ -87,7 +87,7 @@ Set<Long> categorySubscriptionClassPKs = (Set<Long>)objArray[1];
 			<portlet:param name="struts_action" value="/message_boards/edit_category" />
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
-			<portlet:param name="categoryId" value="<%= String.valueOf(category.getCategoryId()) %>" />
+			<portlet:param name="mbCategoryId" value="<%= String.valueOf(category.getCategoryId()) %>" />
 		</portlet:actionURL>
 
 		<liferay-ui:icon-delete url="<%= deleteURL %>" />

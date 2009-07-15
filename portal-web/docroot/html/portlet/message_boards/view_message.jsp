@@ -225,7 +225,7 @@ String threadView = messageDisplay.getThreadView();
 					<portlet:renderURL var="addMessageURL">
 						<portlet:param name="struts_action" value="/message_boards/edit_message" />
 						<portlet:param name="redirect" value="<%= currentURL %>" />
-						<portlet:param name="categoryId" value="<%= String.valueOf(category.getCategoryId()) %>" />
+						<portlet:param name="mbCategoryId" value="<%= String.valueOf(category.getCategoryId()) %>" />
 					</portlet:renderURL>
 
 					<liferay-ui:icon image="post" message="post-new-thread" url="<%= addMessageURL %>" label="<%= true %>" />

@@ -64,12 +64,12 @@ public class MBFriendlyURLMapper extends BaseFriendlyURLMapper {
 		}
 		else if (strutsAction.equals("/message_boards/view")) {
 			String categoryId = GetterUtil.getString(
-				portletURL.getParameter("categoryId"));
+				portletURL.getParameter("mbCategoryId"));
 
 			if (Validator.isNotNull(categoryId) && !categoryId.equals("0")) {
 				friendlyURLPath = "/message_boards/category/" + categoryId;
 
-				portletURL.addParameterIncludedInPath("categoryId");
+				portletURL.addParameterIncludedInPath("mbCategoryId");
 			}
 			else {
 				friendlyURLPath = "/message_boards";
@@ -81,7 +81,7 @@ public class MBFriendlyURLMapper extends BaseFriendlyURLMapper {
 				portletURL.addParameterIncludedInPath("tabs1");
 
 				if (categoryId.equals("0")) {
-					portletURL.addParameterIncludedInPath("categoryId");
+					portletURL.addParameterIncludedInPath("mbCategoryId");
 				}
 			}
 		}
@@ -137,7 +137,7 @@ public class MBFriendlyURLMapper extends BaseFriendlyURLMapper {
 		if ((x + 1) == friendlyURLPath.length()) {
 			addParam(params, "struts_action", "/message_boards/view");
 			addParam(
-				params, "categoryId",
+				params, "mbCategoryId",
 				MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID);
 
 			return;
@@ -162,7 +162,7 @@ public class MBFriendlyURLMapper extends BaseFriendlyURLMapper {
 				friendlyURLPath.substring(y + 1, z);
 
 			addParam(params, "struts_action", "/message_boards/view");
-			addParam(params, "categoryId", categoryId);
+			addParam(params, "mbCategoryId", categoryId);
 		}
 		else if (type.equals("message")) {
 			String messageId =

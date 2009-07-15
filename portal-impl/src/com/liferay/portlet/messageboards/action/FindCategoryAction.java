@@ -62,7 +62,7 @@ public class FindCategoryAction extends Action {
 
 		try {
 			long plid = ParamUtil.getLong(request, "p_l_id");
-			long categoryId = ParamUtil.getLong(request, "categoryId");
+			long categoryId = ParamUtil.getLong(request, "mbCategoryId");
 
 			plid = getPlid(plid, categoryId);
 
@@ -75,7 +75,7 @@ public class FindCategoryAction extends Action {
 
 			portletURL.setParameter(
 				"struts_action", "/message_boards/view");
-			portletURL.setParameter("categoryId", String.valueOf(categoryId));
+			portletURL.setParameter("mbCategoryId", String.valueOf(categoryId));
 
 			response.sendRedirect(portletURL.toString());
 

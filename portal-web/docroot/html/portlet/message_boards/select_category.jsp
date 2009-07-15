@@ -27,7 +27,7 @@
 <%
 MBCategory category = (MBCategory)request.getAttribute(WebKeys.MESSAGE_BOARDS_CATEGORY);
 
-long categoryId = BeanParamUtil.getLong(category, request, "categoryId", MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID);
+long categoryId = BeanParamUtil.getLong(category, request, "mbCategoryId", MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID);
 
 MBCategoryDisplay categoryDisplay = new MBCategoryDisplayImpl(scopeGroupId, categoryId);
 %>
@@ -46,7 +46,7 @@ MBCategoryDisplay categoryDisplay = new MBCategoryDisplayImpl(scopeGroupId, cate
 PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setParameter("struts_action", "/message_boards/select_category");
-portletURL.setParameter("categoryId", String.valueOf(categoryId));
+portletURL.setParameter("mbCategoryId", String.valueOf(categoryId));
 
 List<String> headerNames = new ArrayList<String>();
 
@@ -78,7 +78,7 @@ for (int i = 0; i < results.size(); i++) {
 	PortletURL rowURL = renderResponse.createRenderURL();
 
 	rowURL.setParameter("struts_action", "/message_boards/select_category");
-	rowURL.setParameter("categoryId", String.valueOf(curCategory.getCategoryId()));
+	rowURL.setParameter("mbCategoryId", String.valueOf(curCategory.getCategoryId()));
 
 	// Name and description
 

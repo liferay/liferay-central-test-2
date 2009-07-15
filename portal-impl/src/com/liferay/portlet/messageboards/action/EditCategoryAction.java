@@ -137,7 +137,7 @@ public class EditCategoryAction extends PortletAction {
 	protected void deleteCategory(ActionRequest actionRequest)
 		throws Exception {
 
-		long categoryId = ParamUtil.getLong(actionRequest, "categoryId");
+		long categoryId = ParamUtil.getLong(actionRequest, "mbCategoryId");
 
 		MBCategoryServiceUtil.deleteCategory(categoryId);
 	}
@@ -145,7 +145,7 @@ public class EditCategoryAction extends PortletAction {
 	protected void subscribeCategory(ActionRequest actionRequest)
 		throws Exception {
 
-		long categoryId = ParamUtil.getLong(actionRequest, "categoryId");
+		long categoryId = ParamUtil.getLong(actionRequest, "mbCategoryId");
 
 		MBCategoryServiceUtil.subscribeCategory(categoryId);
 	}
@@ -153,7 +153,7 @@ public class EditCategoryAction extends PortletAction {
 	protected void unsubscribeCategory(ActionRequest actionRequest)
 		throws Exception {
 
-		long categoryId = ParamUtil.getLong(actionRequest, "categoryId");
+		long categoryId = ParamUtil.getLong(actionRequest, "mbCategoryId");
 
 		MBCategoryServiceUtil.unsubscribeCategory(categoryId);
 	}
@@ -161,7 +161,7 @@ public class EditCategoryAction extends PortletAction {
 	protected void updateCategory(ActionRequest actionRequest)
 		throws Exception {
 
-		long categoryId = ParamUtil.getLong(actionRequest, "categoryId");
+		long categoryId = ParamUtil.getLong(actionRequest, "mbCategoryId");
 
 		long parentCategoryId = ParamUtil.getLong(
 			actionRequest, "parentCategoryId");

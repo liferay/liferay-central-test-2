@@ -180,7 +180,7 @@ public class EditMessageAction extends PortletAction {
 
 		long messageId = ParamUtil.getLong(actionRequest, "messageId");
 
-		long categoryId = ParamUtil.getLong(actionRequest, "categoryId");
+		long categoryId = ParamUtil.getLong(actionRequest, "mbCategoryId");
 		long threadId = ParamUtil.getLong(actionRequest, "threadId");
 		long parentMessageId = ParamUtil.getLong(
 			actionRequest, "parentMessageId");

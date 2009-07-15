@@ -120,7 +120,7 @@ public class MoveThreadAction extends PortletAction {
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		long categoryId = ParamUtil.getLong(actionRequest, "categoryId");
+		long categoryId = ParamUtil.getLong(actionRequest, "mbCategoryId");
 		long threadId = ParamUtil.getLong(actionRequest, "threadId");
 
 		MBThread thread = MBThreadLocalServiceUtil.getThread(threadId);
