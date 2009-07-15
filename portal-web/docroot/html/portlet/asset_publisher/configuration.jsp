@@ -67,7 +67,11 @@ configurationActionURL.setParameter("portletResource", portletResource);
 		submitForm(document.<portlet:namespace />fm);
 	}
 
-	function <portlet:namespace />saveMetadataFields() {
+	function <portlet:namespace />saveSelectBoxes() {
+		if (document.<portlet:namespace />fm.<portlet:namespace />groupIds) {
+			document.<portlet:namespace />fm.<portlet:namespace />groupIds.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />currentGroupIds);
+		}
+
 		document.<portlet:namespace />fm.<portlet:namespace />metadataFields.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />currentMetadataFields);
 
 		submitForm(document.<portlet:namespace />fm);
@@ -300,12 +304,70 @@ configurationActionURL.setParameter("portletResource", portletResource);
 
 				<br />
 
-				<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveMetadataFields();" />
+				<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveSelectBoxes();" />
 
 				<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
 			</c:when>
 			<c:when test='<%= selectionStyle.equals("dynamic") %>'>
 				<liferay-ui:panel-container id='assetPublisherConfiguration' extended="<%= Boolean.TRUE %>" persistState="<%= true %>">
+					<liferay-ui:panel id='assetPublisherSources' title='<%= LanguageUtil.get(pageContext, "source") %>' collapsible="<%= true %>" persistState="<%= true %>" extended="<%= true %>">
+						<liferay-ui:message key="scope" />
+
+						<input name="<portlet:namespace />groupIds" type="hidden" value="" />
+
+						<%
+						Set availableGroups = new HashSet<Group>();
+
+						availableGroups.add(company.getGroup());
+						availableGroups.add(themeDisplay.getScopeGroup());
+
+						for (Layout curLayout : LayoutLocalServiceUtil.getLayouts(layout.getGroupId(), layout.isPrivateLayout())) {
+							if (curLayout.hasScopeGroup()) {
+								availableGroups.add(curLayout.getScopeGroup());
+							}
+						}
+
+						// Left list
+
+						List groupsLeftList = new ArrayList();
+
+						for (long groupId : groupIds) {
+							Group group = GroupLocalServiceUtil.getGroup(groupId);
+
+							groupsLeftList.add(new KeyValuePair(String.valueOf(groupId), group.getDescriptiveName()));
+						}
+
+						// Right list
+
+						List groupsRightList = new ArrayList();
+
+						Arrays.sort(groupIds);
+
+						Iterator groupItr = availableGroups.iterator();
+
+						while (groupItr.hasNext()) {
+							Group group = (Group)groupItr.next();
+
+							if (Arrays.binarySearch(groupIds, group.getGroupId()) < 0) {
+								groupsRightList.add(new KeyValuePair(String.valueOf(group.getGroupId()), group.getDescriptiveName()));
+							}
+						}
+
+						groupsRightList = ListUtil.sort(groupsRightList, new KeyValuePairComparator(false, true));
+						%>
+
+						<liferay-ui:input-move-boxes
+							formName="fm"
+							leftTitle="current"
+							rightTitle="available"
+							leftBoxName="currentGroupIds"
+							rightBoxName="availableGroupIds"
+							leftReorder="true"
+							leftList="<%= groupsLeftList %>"
+							rightList="<%= groupsRightList %>"
+						/>
+
+					</liferay-ui:panel>
 					<liferay-ui:panel id='assetPublisherQueryLogic' title='<%= LanguageUtil.get(pageContext, "query-logic") %>' collapsible="<%= true %>" persistState="<%= true %>" extended="<%= true %>">
 						<liferay-ui:asset-tags-error />
 
@@ -566,7 +628,7 @@ configurationActionURL.setParameter("portletResource", portletResource);
 
 				<br />
 
-				<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveMetadataFields();" />
+				<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveSelectBoxes();" />
 
 				<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
 			</c:when>

@@ -25,6 +25,7 @@ package com.liferay.portlet.assetpublisher.action;
 import com.liferay.portal.kernel.portlet.BaseConfigurationAction;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.SessionMessages;
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -228,6 +229,8 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 		boolean mergeUrlTags = ParamUtil.getBoolean(
 			actionRequest, "mergeUrlTags");
 
+		long[] groupIds = StringUtil.split(
+			ParamUtil.getString(actionRequest, "groupIds"), 0L);
 		long classNameId = ParamUtil.getLong(actionRequest, "classNameId");
 		long assetVocabularyId = ParamUtil.getLong(
 			actionRequest, "assetVocabularyId");
@@ -271,6 +274,7 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 
 		preferences.setValue("merge-url-tags", String.valueOf(mergeUrlTags));
 
+		preferences.setValues("groupIds", ArrayUtil.toStringArray(groupIds));
 		preferences.setValue("class-name-id", String.valueOf(classNameId));
 		preferences.setValue(
 			"asset-vocabulary-id", String.valueOf(assetVocabularyId));
