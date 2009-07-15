@@ -29,6 +29,7 @@ import com.liferay.portal.model.Layout;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.util.Encryptor;
 
 import javax.servlet.http.HttpServletRequest;
@@ -57,10 +58,13 @@ public class DoAsURLTagUtil extends TagSupport {
 				WebKeys.THEME_DISPLAY);
 
 			Company company = themeDisplay.getCompany();
-			Layout layout = themeDisplay.getLayout();
 
-			String doAsURL = PortalUtil.getLayoutURL(
-				layout, themeDisplay, false);
+			String doAsURL = company.getHomeURL();
+
+			if (Validator.isNull(doAsURL)) {
+				doAsURL = PropsValues.COMPANY_DEFAULT_HOME_URL;
+			}
+
 
 			if (doAsUserId <= 0) {
 				doAsUserId = company.getDefaultUser().getUserId();
