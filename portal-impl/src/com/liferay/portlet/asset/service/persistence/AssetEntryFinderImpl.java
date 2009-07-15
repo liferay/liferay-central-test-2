@@ -244,15 +244,7 @@ public class AssetEntryFinderImpl
 
 		long[] groupIds = entryQuery.getGroupIds();
 
-		if (groupIds.length > 0) {
-			sb.append(" AND (AssetEntry.groupId = ? ");
-
-			for (int i = 1; i < groupIds.length; i ++) {
-				sb.append(" OR AssetEntry.groupId = ? ");
-			}
-
-			sb.append(")");
-		}
+		sb.append(getGroupIds(groupIds));
 
 		long[] classNameIds = entryQuery.getClassNameIds();
 
@@ -406,6 +398,22 @@ public class AssetEntryFinderImpl
 		sql = StringUtil.replace(sql, "[$DATES$]", sb.toString());
 
 		return sql;
+	}
+
+	protected String getGroupIds(long[] groupIds) {
+		StringBuilder sb = new StringBuilder();
+
+		if (groupIds.length > 0) {
+			sb.append(" AND (AssetEntry.groupId = ? ");
+
+			for (int i = 1; i < groupIds.length; i ++) {
+				sb.append(" OR AssetEntry.groupId = ? ");
+			}
+
+			sb.append(")");
+		}
+
+		return sb.toString();
 	}
 
 	protected String getNotCategoryIds(long[] notCategoryIds) {
