@@ -406,7 +406,7 @@ public class AssetEntryFinderImpl
 		if (groupIds.length > 0) {
 			sb.append(" AND (AssetEntry.groupId = ? ");
 
-			for (int i = 1; i < groupIds.length; i ++) {
+			for (int i = 1; i < groupIds.length; i++) {
 				sb.append(" OR AssetEntry.groupId = ? ");
 			}
 
