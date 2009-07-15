@@ -1,0 +1,87 @@
+/**
+ * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
+package com.liferay.portal.kernel.workflow.proxy;
+
+import com.liferay.portal.kernel.workflow.WorkflowException;
+import com.liferay.portal.kernel.workflow.request.BaseRequest;
+
+/**
+ * <a href="WorkflowResultContainer.java.html"><b><i>View Source</i></b></a>
+ * 
+ * <p>
+ * The workflow result container is used to return an argument or an exception
+ * which was the result of the workflow engine invocation through a
+ * {@link BaseRequest} or any of its subclasses.
+ * </p>
+ * 
+ * @author Shuyang Zhou
+ * @author Micha Kiener
+ * 
+ * @param <T> the type of result this container will return
+ * 
+ */
+public class WorkflowResultContainer<T> {
+
+	public WorkflowResultContainer() {
+	}
+
+	public WorkflowResultContainer(T result) {
+		_result = result;
+	}
+
+	/**
+	 * @return the exception which was thrown by invoking the method, if
+	 *         {@link #hasError()} returns <code>true</code>, otherwise this
+	 *         method just returns <code>null</code>
+	 */
+	public WorkflowException getException() {
+		return _exception;
+	}
+
+	/**
+	 * @return the result of the method invocation
+	 */
+	public T getResult() {
+		return _result;
+	}
+
+	/**
+	 * @return <code>true</code>, if the method invocation produced an exception
+	 *         rather than returning a value
+	 */
+	public boolean hasError() {
+		return _exception != null;
+	}
+
+	public void setException(WorkflowException exception) {
+		_exception = exception;
+	}
+
+	public void setResult(T result) {
+		_result = result;
+	}
+
+	private WorkflowException _exception;
+	private T _result;
+
+}
