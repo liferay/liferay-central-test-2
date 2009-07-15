@@ -135,7 +135,7 @@ if (Validator.isNotNull(ppid)) {
 									<a href="javascript:;" class="lfr-group-selector">
 										<c:choose>
 											<c:when test="<%= curGroup.isCompany() %>">
-												<liferay-ui:message key="shared" />
+												<liferay-ui:message key="global" />
 											</c:when>
 											<c:when test="<%= curGroup.isUser() %>">
 												<liferay-ui:message key="my-community" />
