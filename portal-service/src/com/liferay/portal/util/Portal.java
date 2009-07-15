@@ -88,8 +88,6 @@ public interface Portal {
 
 	public static final String PORTLET_XML_FILE_NAME_STANDARD = "portlet.xml";
 
-	public static final Date UP_TIME = new Date();
-
 	/**
 	 * Adds the description for a page. This appends to the existing page
 	 * description.

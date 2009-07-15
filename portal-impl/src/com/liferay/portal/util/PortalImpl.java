@@ -2473,7 +2473,7 @@ public class PortalImpl implements Portal {
 	}
 
 	public Date getUptime() {
-		return UP_TIME;
+		return _upTime;
 	}
 
 	public String getURLWithSessionId(String url, String sessionId) {
@@ -3740,5 +3740,6 @@ public class PortalImpl implements Portal {
 	private String[] _sortedSystemGroups;
 	private String[] _sortedSystemOrganizationRoles;
 	private String[] _sortedSystemRoles;
+	private Date _upTime = new Date();
 
 }
