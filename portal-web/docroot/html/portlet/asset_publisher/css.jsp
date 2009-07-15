@@ -32,11 +32,6 @@
 	font-style: italic;
 }
 
-.portlet-asset-publisher .asset-content img {
-	float: left;
-	margin: 3px 10px 0 0;
-}
-
 .portlet-asset-publisher .asset-content {
 	margin-bottom: 10px;
 	margin-left: 25px;
