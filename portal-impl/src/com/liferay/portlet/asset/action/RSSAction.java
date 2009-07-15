@@ -119,7 +119,7 @@ public class RSSAction extends Action {
 			AssetEntryQuery entryQuery = new AssetEntryQuery();
 
 			entryQuery.setAnyTagIds(tagIds);
-			entryQuery.setGroupId(groupId);
+			entryQuery.setGroupIds(new long[] {groupId});
 			entryQuery.setEnd(max);
 			entryQuery.setExcludeZeroViewCount(false);
 			entryQuery.setExpirationDate(null);

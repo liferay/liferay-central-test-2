@@ -95,7 +95,7 @@ public class AssetEntryQuery {
 		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		_groupId = themeDisplay.getScopeGroupId();
+		_groupIds = new long[] {themeDisplay.getScopeGroupId()};
 
 		long categoryId = ParamUtil.getLong(portletRequest, "categoryId");
 
@@ -107,7 +107,7 @@ public class AssetEntryQuery {
 
 		if (Validator.isNotNull(tagName)) {
 			_allTagIds = AssetTagLocalServiceUtil.getTagIds(
-				_groupId, new String[] {tagName});
+				_groupIds[0], new String[] {tagName});
 		}
 	}
 
@@ -139,8 +139,8 @@ public class AssetEntryQuery {
 		return _expirationDate;
 	}
 
-	public Long getGroupId() {
-		return _groupId;
+	public long[] getGroupIds() {
+		return _groupIds;
 	}
 
 	public long[] getNotAllCategoryIds() {
@@ -229,8 +229,8 @@ public class AssetEntryQuery {
 		_expirationDate = expirationDate;
 	}
 
-	public void setGroupId(long groupId) {
-		_groupId = groupId;
+	public void setGroupIds(long[] groupIds) {
+		_groupIds = groupIds;
 	}
 
 	public void setNotAllCategoryIds(long[] notAllCategoryIds) {
@@ -285,7 +285,7 @@ public class AssetEntryQuery {
 	private int _end = QueryUtil.ALL_POS;
 	private boolean _excludeZeroViewCount;
 	private Date _expirationDate;
-	private long _groupId = 0;
+	private long[] _groupIds = new long[0];
 	private long[] _notAllCategoryIds = new long[0];
 	private long[] _notAllTagIds = new long[0];
 	private long[] _notAnyCategoryIds = new long[0];

@@ -34,7 +34,7 @@ assetEntryQuery.setAllCategoryIds(allAssetCategoryIds);
 assetEntryQuery.setAllTagIds(allAssetTagIds);
 assetEntryQuery.setAnyCategoryIds(anyAssetCategoryIds);
 assetEntryQuery.setAnyTagIds(anyAssetTagIds);
-assetEntryQuery.setGroupId(scopeGroupId);
+assetEntryQuery.setGroupIds(new long[] {scopeGroupId});
 assetEntryQuery.setEnd(searchContainer.getEnd());
 assetEntryQuery.setExcludeZeroViewCount(excludeZeroViewCount);
 assetEntryQuery.setNotAllCategoryIds(notAllAssetCategoryIds);
