@@ -274,7 +274,7 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 
 		preferences.setValue("merge-url-tags", String.valueOf(mergeUrlTags));
 
-		preferences.setValues("groupIds", ArrayUtil.toStringArray(groupIds));
+		preferences.setValues("group-ids", ArrayUtil.toStringArray(groupIds));
 		preferences.setValue("class-name-id", String.valueOf(classNameId));
 		preferences.setValue(
 			"asset-vocabulary-id", String.valueOf(assetVocabularyId));

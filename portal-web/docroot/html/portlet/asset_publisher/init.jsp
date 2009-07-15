@@ -126,9 +126,10 @@ if (Validator.isNull(selectionStyle)) {
 	selectionStyle = "dynamic";
 }
 
-long[] groupIds = GetterUtil.getLongValues(preferences.getValues("groupIds", new String[] {String.valueOf(scopeGroupId)}));
+long[] groupIds = GetterUtil.getLongValues(preferences.getValues("group-ids", new String[] {String.valueOf(scopeGroupId)}));
 
 long classNameId = GetterUtil.getLong(preferences.getValue("class-name-id", StringPool.BLANK));
+
 long[] classNameIds = null;
 
 if (classNameId > 0) {

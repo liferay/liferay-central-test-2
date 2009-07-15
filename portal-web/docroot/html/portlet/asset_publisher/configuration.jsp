@@ -316,20 +316,20 @@ configurationActionURL.setParameter("portletResource", portletResource);
 						<input name="<portlet:namespace />groupIds" type="hidden" value="" />
 
 						<%
-						Set availableGroups = new HashSet<Group>();
+						Set<Group> groups = new HashSet<Group>();
 
-						availableGroups.add(company.getGroup());
-						availableGroups.add(themeDisplay.getScopeGroup());
+						groups.add(company.getGroup());
+						groups.add(themeDisplay.getScopeGroup());
 
 						for (Layout curLayout : LayoutLocalServiceUtil.getLayouts(layout.getGroupId(), layout.isPrivateLayout())) {
 							if (curLayout.hasScopeGroup()) {
-								availableGroups.add(curLayout.getScopeGroup());
+								groups.add(curLayout.getScopeGroup());
 							}
 						}
 
 						// Left list
 
-						List groupsLeftList = new ArrayList();
+						List<KeyValuePair> groupsLeftList = new ArrayList<KeyValuePair>();
 
 						for (long groupId : groupIds) {
 							Group group = GroupLocalServiceUtil.getGroup(groupId);
@@ -339,15 +339,11 @@ configurationActionURL.setParameter("portletResource", portletResource);
 
 						// Right list
 
-						List groupsRightList = new ArrayList();
+						List<KeyValuePair> groupsRightList = new ArrayList<KeyValuePair>();
 
 						Arrays.sort(groupIds);
 
-						Iterator groupItr = availableGroups.iterator();
-
-						while (groupItr.hasNext()) {
-							Group group = (Group)groupItr.next();
-
+						for (Group group : groups) {
 							if (Arrays.binarySearch(groupIds, group.getGroupId()) < 0) {
 								groupsRightList.add(new KeyValuePair(String.valueOf(group.getGroupId()), group.getDescriptiveName()));
 							}
@@ -366,7 +362,6 @@ configurationActionURL.setParameter("portletResource", portletResource);
 							leftList="<%= groupsLeftList %>"
 							rightList="<%= groupsRightList %>"
 						/>
-
 					</liferay-ui:panel>
 					<liferay-ui:panel id='assetPublisherQueryLogic' title='<%= LanguageUtil.get(pageContext, "query-logic") %>' collapsible="<%= true %>" persistState="<%= true %>" extended="<%= true %>">
 						<liferay-ui:asset-tags-error />
