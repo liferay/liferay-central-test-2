@@ -2473,7 +2473,7 @@ public class PortalImpl implements Portal {
 	}
 
 	public Date getUptime() {
-		return _upTime;
+		return _UP_TIME;
 	}
 
 	public String getURLWithSessionId(String url, String sessionId) {
@@ -3713,6 +3713,8 @@ public class PortalImpl implements Portal {
 	private static final String _PUBLIC_GROUP_SERVLET_MAPPING =
 		PropsValues.LAYOUT_FRIENDLY_URL_PUBLIC_SERVLET_MAPPING;
 
+	private static final Date _UP_TIME = new Date();
+
 	private static Log _log = LogFactoryUtil.getLog(PortalImpl.class);
 
 	private String[] _allSystemCommunityRoles;
@@ -3740,6 +3742,5 @@ public class PortalImpl implements Portal {
 	private String[] _sortedSystemGroups;
 	private String[] _sortedSystemOrganizationRoles;
 	private String[] _sortedSystemRoles;
-	private Date _upTime = new Date();
 
 }
