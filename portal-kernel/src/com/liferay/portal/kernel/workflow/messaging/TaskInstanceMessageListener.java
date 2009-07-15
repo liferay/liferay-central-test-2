@@ -62,22 +62,23 @@ public class TaskInstanceMessageListener implements MessageListener {
 		else {
 			TaskInstanceRequest request = (TaskInstanceRequest) payload;
 			String responseDestination = message.getResponseDestination();
-			Object result = null;
+			WorkflowResultContainer resultContainer =
+				new WorkflowResultContainer();
 			try {
-				result = request.execute(_taskInstanceManager);
+				Object result = request.execute(_taskInstanceManager);
 				if (request.hasReturnValue()==false){
-					//setup dummy result to satisfy MessageBus
-					result=new Object();
+					resultContainer.setResult(result);
 				}
 			}
 			catch (WorkflowException ex) {
+				resultContainer.setException(ex);
 				_log.error("Unable to execute request.", ex);
 			}
 			finally {
 				if (Validator.isNotNull(responseDestination)) {
 					Message responseMessage =
 						MessageBusUtil.createResponseMessage(message);
-					responseMessage.setPayload(new WorkflowResultContainer(result));
+					responseMessage.setPayload(resultContainer);
 					MessageBusUtil.sendMessage(
 						responseDestination, responseMessage);
 				}

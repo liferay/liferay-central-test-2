@@ -63,23 +63,23 @@ public class WorkflowDefinitionMessageListener implements MessageListener {
 			WorkflowDefinitionRequest request =
 				(WorkflowDefinitionRequest) payload;
 			String responseDestination = message.getResponseDestination();
-			Object result = null;
+			WorkflowResultContainer resultContainer =
+				new WorkflowResultContainer();
 			try {
-				result = request.execute(_workflowDefinitionManager);
+				Object result = request.execute(_workflowDefinitionManager);
 				if (request.hasReturnValue()==false){
-					//setup dummy result to satisfy MessageBus
-					result=new Object();
+					resultContainer.setResult(result);
 				}
 			}
 			catch (WorkflowException ex) {
+				resultContainer.setException(ex);
 				_log.error("Unable to execute request.", ex);
 			}
 			finally {
 				if (Validator.isNotNull(responseDestination)) {
 					Message responseMessage =
 						MessageBusUtil.createResponseMessage(message);
-					responseMessage.setPayload(
-						new WorkflowResultContainer(result));
+					responseMessage.setPayload(resultContainer);
 					MessageBusUtil.sendMessage(
 						responseDestination, responseMessage);
 				}
