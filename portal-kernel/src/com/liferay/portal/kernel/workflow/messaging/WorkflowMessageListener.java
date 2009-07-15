@@ -42,6 +42,7 @@ import com.liferay.portal.kernel.workflow.request.BaseRequest;
  * </p>
  * 
  * @author Micha Kiener
+ * @author Shuyang Zhou
  * 
  */
 public class WorkflowMessageListener implements MessageListener {
