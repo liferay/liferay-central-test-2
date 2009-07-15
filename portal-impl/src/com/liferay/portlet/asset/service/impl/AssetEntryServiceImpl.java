@@ -127,7 +127,7 @@ public class AssetEntryServiceImpl extends AssetEntryServiceBaseImpl {
 		Group group = groupPersistence.findByPrimaryKey(
 			entryQuery.getGroupId());
 
-		String name = group.getName();
+		String name = group.getDescriptiveName();
 
 		List<AssetEntry> entries = assetEntryLocalService.getEntries(
 			entryQuery);
