@@ -28,24 +28,17 @@
 		}
 
 		var Class = function(args) {
-			var instance = this;
-
-			if (typeof properties == 'function') {
-				var initialize = properties;
-
-				properties = properties.prototype;
-
-				properties.initialize = initialize;
-
-			}
-
-			for (var p in instance) {
-				if (instance[p] && typeof instance[p] == 'function') {
-					instance[p]._proto_ = instance;
-				}
-			}
-
 			if (this instanceof arguments.callee) {
+				var instance = this;
+
+				if (typeof properties == 'function') {
+					var initialize = properties;
+
+					properties = properties.prototype;
+
+					properties.initialize = initialize;
+				}
+
 				var formalArguments = arguments;
 				var firstArgument = arguments[0];
 
