@@ -138,8 +138,8 @@ for (int i = 0; i < assetEntryTypes.length; i++) {
 
 long[] classNameIds = availableClassNameIds;
 
-if (Validator.equals(selectionStyle, "dynamic")) {
-	classNameIds = GetterUtil.getLongValues(preferences.getValues("class-name-ids", ArrayUtil.toStringArray(availableClassNameIds)));
+if ((Validator.equals(selectionStyle, "dynamic")) && (preferences.getValues("class-name-ids", null) != null)) {
+	classNameIds = GetterUtil.getLongValues(preferences.getValues("class-name-ids", null));
 }
 
 long[] allAssetCategoryIds = new long[0];
