@@ -144,6 +144,20 @@ public class UpgradeAssetPublisher extends UpgradeProcess {
 			PortletPreferencesSerializer.fromXML(
 				companyId, ownerId, ownerType, plid, portletId, xml);
 
+		// Asset Types
+
+		long classNameId = GetterUtil.getLong(
+			preferences.getValue("class-name-id", null));
+
+		preferences.reset("class-name-id");
+
+		if (classNameId != 0) {
+			preferences.setValues(
+				"class-name-ids", new String[] {String.valueOf(classNameId)});
+		}
+
+		// Tags Filters
+
 		boolean andOperator = GetterUtil.getBoolean(
 			preferences.getValue("and-operator", null));
 
