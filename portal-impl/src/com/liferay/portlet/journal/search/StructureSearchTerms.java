@@ -50,4 +50,8 @@ public class StructureSearchTerms extends StructureDisplayTerms {
 		description = DAOParamUtil.getLike(portletRequest, DESCRIPTION);
 	}
 
+	public void setGroupId(long groupId) {
+		this.groupId = groupId;
+	}
+
 }

@@ -26,17 +26,29 @@
 
 <form method="post" name="<portlet:namespace />fm">
 
-<liferay-ui:tabs names="templates" />
-
 <%
+String tabs2 = ParamUtil.getString(request, "tabs2", "templates");
+
 PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setParameter("struts_action", "/journal/select_template");
+portletURL.setParameter("tabs2", tabs2);
 
 TemplateSearch searchContainer = new TemplateSearch(renderRequest, portletURL);
 
 searchContainer.setDelta(10);
+
+String names = "shared-templates";
+if (scopeGroupId != company.getGroup().getGroupId()) {
+	names = "templates," + names;
+}
 %>
+
+<liferay-ui:tabs
+	names="<%= names %>"
+	param="tabs2"
+	url="<%= portletURL.toString() %>"
+/>
 
 <liferay-ui:search-form
 	page="/html/portlet/journal/template_search.jsp"
@@ -48,6 +60,12 @@ TemplateSearchTerms searchTerms = (TemplateSearchTerms)searchContainer.getSearch
 
 searchTerms.setStructureId(StringPool.BLANK);
 searchTerms.setStructureIdComparator(StringPool.NOT_EQUAL);
+
+if (Validator.equals(tabs2, "shared-templates")) {
+	long companyGroupId = company.getGroup().getGroupId();
+
+	searchTerms.setGroupId(companyGroupId);
+}
 %>
 
 <%@ include file="/html/portlet/journal/template_search_results.jspf" %>

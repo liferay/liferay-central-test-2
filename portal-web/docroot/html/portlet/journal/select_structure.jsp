@@ -26,17 +26,29 @@
 
 <form method="post" name="<portlet:namespace />fm">
 
-<liferay-ui:tabs names="structures" />
-
 <%
+String tabs2 = ParamUtil.getString(request, "tabs2", "structures");
+
 PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setParameter("struts_action", "/journal/select_structure");
+portletURL.setParameter("tabs2", tabs2);
 
 StructureSearch searchContainer = new StructureSearch(renderRequest, portletURL);
 
 searchContainer.setDelta(10);
+
+String names = "shared-structures";
+if (scopeGroupId != company.getGroup().getGroupId()) {
+	names = "structures," + names;
+}
 %>
+
+<liferay-ui:tabs
+	names="<%= names %>"
+	param="tabs2"
+	url="<%= portletURL.toString() %>"
+/>
 
 <liferay-ui:search-form
 	page="/html/portlet/journal/structure_search.jsp"
@@ -45,6 +57,12 @@ searchContainer.setDelta(10);
 
 <%
 StructureSearchTerms searchTerms = (StructureSearchTerms)searchContainer.getSearchTerms();
+
+if (Validator.equals(tabs2, "shared-structures")) {
+	long companyGroupId = company.getGroup().getGroupId();
+
+	searchTerms.setGroupId(companyGroupId);
+}
 %>
 
 <%@ include file="/html/portlet/journal/structure_search_results.jspf" %>
