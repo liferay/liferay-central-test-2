@@ -273,7 +273,9 @@
 				if (!options.deferRender) {
 					instance.render(options.renderTo || document.body);
 
-					instance.show();
+					if (options.visible !== false) {
+						instance.show();
+					}
 
 					instance._onRender();
 				}
