@@ -20,19 +20,19 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.polls;
+package com.liferay.portalweb.portal.controlpanel.polls;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="ViewQuestionGraphsTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="ExpireQuestionTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class ViewQuestionGraphsTest extends BaseTestCase {
-	public void testViewQuestionGraphs() throws Exception {
+public class ExpireQuestionTest extends BaseTestCase {
+	public void testExpireQuestion() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -51,13 +51,15 @@ public class ViewQuestionGraphsTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Polls"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Test Poll Question"));
+		selenium.click(RuntimeVariables.replace("link=Edited Test Question 2"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Area");
-		selenium.waitForPopUp("viewChart", RuntimeVariables.replace("30000"));
-		selenium.selectWindow("viewChart");
-		selenium.close();
-		selenium.selectWindow("null");
+		assertTrue(selenium.isElementPresent("//label[1]/input"));
+		assertTrue(selenium.isElementPresent("//label[2]/input"));
+		assertTrue(selenium.isElementPresent("//label[3]/input"));
+		assertTrue(selenium.isElementPresent("//label[4]/input"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Cancel']"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click("//td[5]/ul/li/strong/span");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -65,7 +67,7 @@ public class ViewQuestionGraphsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Horizontal Bar")) {
+				if (selenium.isElementPresent("//body/div[2]/ul/li[1]/a")) {
 					break;
 				}
 			}
@@ -75,11 +77,9 @@ public class ViewQuestionGraphsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Horizontal Bar");
-		selenium.waitForPopUp("viewChart", RuntimeVariables.replace("30000"));
-		selenium.selectWindow("viewChart");
-		selenium.close();
-		selenium.selectWindow("null");
+		selenium.click(RuntimeVariables.replace("//body/div[2]/ul/li[1]/a"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click("_25_neverExpireCheckbox");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -87,7 +87,7 @@ public class ViewQuestionGraphsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Line")) {
+				if (selenium.isElementPresent("_25_expirationDateMonth")) {
 					break;
 				}
 			}
@@ -97,54 +97,21 @@ public class ViewQuestionGraphsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Line");
-		selenium.waitForPopUp("viewChart", RuntimeVariables.replace("30000"));
-		selenium.selectWindow("viewChart");
-		selenium.close();
-		selenium.selectWindow("null");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Pie")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click("link=Pie");
-		selenium.waitForPopUp("viewChart", RuntimeVariables.replace("30000"));
-		selenium.selectWindow("viewChart");
-		selenium.close();
-		selenium.selectWindow("null");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Vertical Bar")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click("link=Vertical Bar");
-		selenium.waitForPopUp("viewChart", RuntimeVariables.replace("30000"));
-		selenium.selectWindow("viewChart");
-		selenium.close();
-		selenium.selectWindow("null");
+		selenium.select("_25_expirationDateMonth",
+			RuntimeVariables.replace("label=January"));
+		selenium.select("_25_expirationDateDay",
+			RuntimeVariables.replace("label=1"));
+		selenium.select("_25_expirationDateYear",
+			RuntimeVariables.replace("label=2008"));
+		selenium.select("_25_expirationDateHour",
+			RuntimeVariables.replace("label=12"));
+		selenium.select("_25_expirationDateMinute",
+			RuntimeVariables.replace("label=:00"));
+		selenium.select("_25_expirationDateAmPm",
+			RuntimeVariables.replace("label=AM"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
 	}
 }

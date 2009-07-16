@@ -20,19 +20,19 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.polls;
+package com.liferay.portalweb.portal.controlpanel.polls;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="AddQuestionTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="EditQuestionTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class AddQuestionTest extends BaseTestCase {
-	public void testAddQuestion() throws Exception {
+public class EditQuestionTest extends BaseTestCase {
+	public void testEditQuestion() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -51,21 +51,7 @@ public class AddQuestionTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Polls"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Add Question']"));
-		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_25_title",
-			RuntimeVariables.replace("Test Poll Question"));
-		selenium.type("_25_title",
-			RuntimeVariables.replace("Test Poll Question"));
-		selenium.type("_25_description",
-			RuntimeVariables.replace("This is a test poll description!"));
-		selenium.type("choiceDescriptiona",
-			RuntimeVariables.replace("Test Choice A"));
-		selenium.type("choiceDescriptionb",
-			RuntimeVariables.replace("Test Choice B"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Add Choice']"));
-		selenium.waitForPageToLoad("30000");
+		selenium.click("//td[5]/ul/li/strong/span");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -73,7 +59,7 @@ public class AddQuestionTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("choiceDescriptionc")) {
+				if (selenium.isElementPresent("//body/div[2]/ul/li[1]/a")) {
 					break;
 				}
 			}
@@ -83,14 +69,44 @@ public class AddQuestionTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("choiceDescriptionc",
-			RuntimeVariables.replace("Test Choice C"));
-		selenium.type("choiceDescriptionc",
-			RuntimeVariables.replace("Test Choice C"));
+		selenium.click(RuntimeVariables.replace("//body/div[2]/ul/li[1]/a"));
+		selenium.waitForPageToLoad("30000");
+		selenium.typeKeys("_25_title_en_US",
+			RuntimeVariables.replace("Edited Test Question 2"));
+		selenium.type("_25_title_en_US",
+			RuntimeVariables.replace("Edited Test Question 2"));
+		selenium.type("_25_description_en_US",
+			RuntimeVariables.replace(
+				"This is an edited test poll 2 description!"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Add Choice']"));
+		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("_25_choiceDescriptiond_en_US")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.typeKeys("_25_choiceDescriptiond_en_US",
+			RuntimeVariables.replace("NEW Test Choice D"));
+		selenium.type("_25_choiceDescriptiond_en_US",
+			RuntimeVariables.replace("NEW Test Choice D"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
-		assertTrue(selenium.isElementPresent("link=Test Poll Question"));
+		selenium.click(RuntimeVariables.replace("link=Edited Test Question 2"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent("NEW Test Choice D"));
 	}
 }

@@ -20,26 +20,26 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.polls;
+package com.liferay.portalweb.portal.controlpanel.polls;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="AddNullTitlePollTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="EndControlPanelTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class AddNullTitlePollTest extends BaseTestCase {
-	public void testAddNullTitlePoll() throws Exception {
+public class EndControlPanelTest extends BaseTestCase {
+	public void testEndControlPanel() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Polls")) {
+				if (selenium.isElementPresent("link=Back to My Community")) {
 					break;
 				}
 			}
@@ -49,24 +49,7 @@ public class AddNullTitlePollTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Polls"));
+		selenium.click(RuntimeVariables.replace("link=Back to My Community"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Add Question']"));
-		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_25_description",
-			RuntimeVariables.replace("Null Title Poll Test Description"));
-		selenium.type("_25_description",
-			RuntimeVariables.replace("Null Title Poll Test Description"));
-		selenium.type("_25_title", RuntimeVariables.replace(""));
-		selenium.type("choiceDescriptiona",
-			RuntimeVariables.replace("Null Title Poll Test Choice A"));
-		selenium.type("choiceDescriptionb",
-			RuntimeVariables.replace("Null Title Poll Test Choice B"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"You have entered invalid data. Please try again"));
-		assertTrue(selenium.isTextPresent("Please enter a valid title."));
 	}
 }

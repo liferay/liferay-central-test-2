@@ -20,19 +20,19 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.polls;
+package com.liferay.portalweb.portal.controlpanel.polls;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="AssertExpiredQuestionTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddNullChoicePollTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class AssertExpiredQuestionTest extends BaseTestCase {
-	public void testAssertExpiredQuestion() throws Exception {
+public class AddNullChoicePollTest extends BaseTestCase {
+	public void testAddNullChoicePoll() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -51,13 +51,27 @@ public class AssertExpiredQuestionTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Polls"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Edited Test Question 2"));
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Add Question']"));
 		selenium.waitForPageToLoad("30000");
-		assertFalse(selenium.isElementPresent("//label[1]/input"));
-		assertFalse(selenium.isElementPresent("//label[2]/input"));
-		assertFalse(selenium.isElementPresent("//label[3]/input"));
-		assertFalse(selenium.isElementPresent("//label[4]/input"));
+		selenium.typeKeys("_25_title_en_US",
+			RuntimeVariables.replace("Null Choice Poll Test Title"));
+		selenium.type("_25_title_en_US",
+			RuntimeVariables.replace("Null Choice Poll Test Title"));
+		selenium.type("_25_description_en_US",
+			RuntimeVariables.replace("Null Choice Poll Test Description"));
+		selenium.type("_25_choiceDescriptiona_en_US",
+			RuntimeVariables.replace("Null Choice Poll Test Choice A"));
+		selenium.type("_25_choiceDescriptionb_en_US",
+			RuntimeVariables.replace("Null Choice Poll Test Choice B"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Add Choice']"));
+		selenium.waitForPageToLoad("30000");
+		selenium.type("_25_choiceDescriptionc_en_US",
+			RuntimeVariables.replace(""));
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
-				"Voting is disabled because this poll expired on 1/1/08 12:00 AM"));
+				"You have entered invalid data. Please try again"));
+		assertTrue(selenium.isTextPresent("Please enter valid choices."));
 	}
 }

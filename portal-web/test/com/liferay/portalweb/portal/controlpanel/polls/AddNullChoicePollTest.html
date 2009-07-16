@@ -1,12 +1,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>AddQuestion2Test</title>
+<title>AddNullChoicePollTest</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">AddQuestion2Test</td></tr>
+<tr><td rowspan="1" colspan="3">AddNullChoicePollTest</td></tr>
 </thead><tbody>
 <tr>
 	<td>waitForElementPresent</td>
@@ -25,28 +25,28 @@
 </tr>
 <tr>
 	<td>typeKeys</td>
-	<td>_25_title</td>
-	<td>Test Poll Question 2</td>
+	<td>_25_title_en_US</td>
+	<td>Null Choice Poll Test Title</td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>_25_title</td>
-	<td>Test Poll Question 2</td>
+	<td>_25_title_en_US</td>
+	<td>Null Choice Poll Test Title</td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>_25_description</td>
-	<td>This is a test poll 2 description!</td>
+	<td>_25_description_en_US</td>
+	<td>Null Choice Poll Test Description</td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>choiceDescriptiona</td>
-	<td>Test Choice A</td>
+	<td>_25_choiceDescriptiona_en_US</td>
+	<td>Null Choice Poll Test Choice A</td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>choiceDescriptionb</td>
-	<td>Test Choice B</td>
+	<td>_25_choiceDescriptionb_en_US</td>
+	<td>Null Choice Poll Test Choice B</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -54,19 +54,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>choiceDescriptionc</td>
-	<td></td>
-</tr>
-<tr>
-	<td>typeKeys</td>
-	<td>choiceDescriptionc</td>
-	<td>Test Choice C</td>
-</tr>
-<tr>
 	<td>type</td>
-	<td>choiceDescriptionc</td>
-	<td>Test Choice C</td>
+	<td>_25_choiceDescriptionc_en_US</td>
+	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -75,12 +65,12 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Your request processed successfully.</td>
+	<td>You have entered invalid data. Please try again</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
-	<td>link=Test Poll Question 2</td>
+	<td>assertTextPresent</td>
+	<td>Please enter valid choices.</td>
 	<td></td>
 </tr>
 

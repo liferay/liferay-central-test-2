@@ -50,7 +50,6 @@ import com.liferay.portalweb.portlet.networkutilities.NetworkUtilitiesTests;
 import com.liferay.portalweb.portlet.pagecomments.PageCommentsTests;
 import com.liferay.portalweb.portlet.pageratings.PageRatingsTests;
 import com.liferay.portalweb.portlet.passwordgenerator.PasswordGeneratorTests;
-import com.liferay.portalweb.portlet.polls.PollsTests;
 import com.liferay.portalweb.portlet.pollsdisplay.PollsDisplayTests;
 import com.liferay.portalweb.portlet.quicknote.QuickNoteTests;
 import com.liferay.portalweb.portlet.recentbloggers.RecentBloggersTests;
@@ -118,7 +117,6 @@ public class PortalWebTestSuite extends BaseTests {
 		testSuite.addTest(PageRatingsTests.suite());
 		testSuite.addTest(PasswordGeneratorTests.suite());
 		//testSuite.addTest(PluginInstallerTests.suite());
-		testSuite.addTest(PollsTests.suite());
 		testSuite.addTest(PollsDisplayTests.suite());
 		testSuite.addTest(QuickNoteTests.suite());
 		testSuite.addTest(RecentBloggersTests.suite());

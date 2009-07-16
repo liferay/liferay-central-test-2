@@ -20,51 +20,24 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.polls;
+package com.liferay.portalweb.portal.controlpanel.polls;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="AddQuestion2Test.java.html"><b><i>View Source</i></b></a>
+ * <a href="ControlPanelTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class AddQuestion2Test extends BaseTestCase {
-	public void testAddQuestion2() throws Exception {
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Polls")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click(RuntimeVariables.replace("link=Polls"));
+public class ControlPanelTest extends BaseTestCase {
+	public void testControlPanel() throws Exception {
+		selenium.click(RuntimeVariables.replace(
+				"//div[@id='_145_myPlacesContainer']/ul/li[2]/a/span[1]"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Add Question']"));
-		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_25_title",
-			RuntimeVariables.replace("Test Poll Question 2"));
-		selenium.type("_25_title",
-			RuntimeVariables.replace("Test Poll Question 2"));
-		selenium.type("_25_description",
-			RuntimeVariables.replace("This is a test poll 2 description!"));
-		selenium.type("choiceDescriptiona",
-			RuntimeVariables.replace("Test Choice A"));
-		selenium.type("choiceDescriptionb",
-			RuntimeVariables.replace("Test Choice B"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Add Choice']"));
+				"//div[@id='_145_myPlacesContainer']/ul/li[2]/a/span[1]"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -73,7 +46,7 @@ public class AddQuestion2Test extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("choiceDescriptionc")) {
+				if (selenium.isElementPresent("link=Control Panel")) {
 					break;
 				}
 			}
@@ -83,14 +56,7 @@ public class AddQuestion2Test extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("choiceDescriptionc",
-			RuntimeVariables.replace("Test Choice C"));
-		selenium.type("choiceDescriptionc",
-			RuntimeVariables.replace("Test Choice C"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.click(RuntimeVariables.replace("link=Control Panel"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
-		assertTrue(selenium.isElementPresent("link=Test Poll Question 2"));
 	}
 }

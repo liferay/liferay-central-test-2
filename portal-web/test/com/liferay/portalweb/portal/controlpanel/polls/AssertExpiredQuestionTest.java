@@ -20,19 +20,19 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.polls;
+package com.liferay.portalweb.portal.controlpanel.polls;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="AddVoteTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="AssertExpiredQuestionTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class AddVoteTest extends BaseTestCase {
-	public void testAddVote() throws Exception {
+public class AssertExpiredQuestionTest extends BaseTestCase {
+	public void testAssertExpiredQuestion() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -51,16 +51,13 @@ public class AddVoteTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Polls"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Test Poll Question"));
+		selenium.click(RuntimeVariables.replace("link=Edited Test Question 2"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("_25_choiceId");
-		selenium.click(RuntimeVariables.replace("//input[@value='Vote']"));
-		selenium.waitForPageToLoad("30000");
+		assertFalse(selenium.isElementPresent("//label[1]/input"));
+		assertFalse(selenium.isElementPresent("//label[2]/input"));
+		assertFalse(selenium.isElementPresent("//label[3]/input"));
+		assertFalse(selenium.isElementPresent("//label[4]/input"));
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
-		assertTrue(selenium.isTextPresent("100%"));
-		selenium.click(RuntimeVariables.replace("link=Polls"));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent("link=1"));
+				"Voting is disabled because this poll expired on 1/1/08 12:00 AM"));
 	}
 }

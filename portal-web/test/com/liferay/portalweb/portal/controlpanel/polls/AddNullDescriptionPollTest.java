@@ -20,33 +20,26 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.polls;
+package com.liferay.portalweb.portal.controlpanel.polls;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="ControlPanelTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddNullDescriptionPollTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class ControlPanelTest extends BaseTestCase {
-	public void testControlPanel() throws Exception {
-		selenium.click(RuntimeVariables.replace(
-				"//div[@id='_145_myPlacesContainer']/ul/li[2]/a/span[1]"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"//div[@id='_145_myPlacesContainer']/ul/li[2]/a/span[1]"));
-		selenium.waitForPageToLoad("30000");
-
+public class AddNullDescriptionPollTest extends BaseTestCase {
+	public void testAddNullDescriptionPoll() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Control Panel")) {
+				if (selenium.isElementPresent("link=Polls")) {
 					break;
 				}
 			}
@@ -56,7 +49,24 @@ public class ControlPanelTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Control Panel"));
+		selenium.click(RuntimeVariables.replace("link=Polls"));
 		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Add Question']"));
+		selenium.waitForPageToLoad("30000");
+		selenium.typeKeys("_25_title_en_US",
+			RuntimeVariables.replace("Null Description Poll Test Title"));
+		selenium.type("_25_title_en_US",
+			RuntimeVariables.replace("Null Description Poll Test Title"));
+		selenium.type("_25_description_en_US", RuntimeVariables.replace(""));
+		selenium.type("_25_choiceDescriptiona_en_US",
+			RuntimeVariables.replace("Null Description Poll Test Choice A"));
+		selenium.type("_25_choiceDescriptionb_en_US",
+			RuntimeVariables.replace("Null Description Poll Test Choice B"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent(
+				"You have entered invalid data. Please try again"));
+		assertTrue(selenium.isTextPresent("Please enter a valid description."));
 	}
 }

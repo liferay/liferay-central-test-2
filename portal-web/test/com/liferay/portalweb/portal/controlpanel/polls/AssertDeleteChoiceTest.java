@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.polls;
+package com.liferay.portalweb.portal.controlpanel.polls;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
@@ -54,40 +54,46 @@ public class AssertDeleteChoiceTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Add Question']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_25_title",
+		selenium.typeKeys("_25_title_en_US",
 			RuntimeVariables.replace("Delete Choice Title Test"));
-		selenium.type("_25_title",
+		selenium.type("_25_title_en_US",
 			RuntimeVariables.replace("Delete Choice Title Test"));
-		selenium.type("_25_description",
+		selenium.type("_25_description_en_US",
 			RuntimeVariables.replace("Delete Choice Description Test"));
-		selenium.type("choiceDescriptiona",
+		selenium.type("_25_choiceDescriptiona_en_US",
 			RuntimeVariables.replace("Delete Choice A"));
-		selenium.type("choiceDescriptionb",
+		selenium.type("_25_choiceDescriptionb_en_US",
 			RuntimeVariables.replace("Delete Choice B"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Add Choice']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("choiceDescriptionc",
+		selenium.typeKeys("_25_choiceDescriptionc_en_US",
 			RuntimeVariables.replace("Delete Choice C"));
-		selenium.type("choiceDescriptionc",
+		selenium.type("_25_choiceDescriptionc_en_US",
 			RuntimeVariables.replace("Delete Choice C"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Add Choice']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("choiceDescriptiond",
+		selenium.typeKeys("_25_choiceDescriptiond_en_US",
 			RuntimeVariables.replace("Delete Choice D"));
-		selenium.type("choiceDescriptiond",
+		selenium.type("_25_choiceDescriptiond_en_US",
 			RuntimeVariables.replace("Delete Choice D"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Add Choice']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("choiceDescriptione",
+		selenium.typeKeys("_25_choiceDescriptione_en_US",
 			RuntimeVariables.replace("Delete Choice E"));
-		selenium.type("choiceDescriptione",
+		selenium.type("_25_choiceDescriptione_en_US",
 			RuntimeVariables.replace("Delete Choice E"));
-		assertEquals("Delete Choice C", selenium.getValue("choiceDescriptionc"));
-		assertEquals("Delete Choice D", selenium.getValue("choiceDescriptiond"));
-		assertEquals("Delete Choice E", selenium.getValue("choiceDescriptione"));
+		assertEquals("Delete Choice C",
+			selenium.getValue("_25_choiceDescriptionc_en_US"));
+		assertEquals("Delete Choice D",
+			selenium.getValue("_25_choiceDescriptiond_en_US"));
+		assertEquals("Delete Choice E",
+			selenium.getValue("_25_choiceDescriptione_en_US"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Delete']"));
 		selenium.waitForPageToLoad("30000");
-		assertEquals("Delete Choice D", selenium.getValue("choiceDescriptionc"));
-		assertEquals("Delete Choice E", selenium.getValue("choiceDescriptiond"));
+		assertFalse(selenium.isElementPresent("_25_choiceDescriptionc_en_US"));
+		assertEquals("Delete Choice D",
+			selenium.getValue("_25_choiceDescriptiond_en_US"));
+		assertEquals("Delete Choice E",
+			selenium.getValue("_25_choiceDescriptione_en_US"));
 	}
 }

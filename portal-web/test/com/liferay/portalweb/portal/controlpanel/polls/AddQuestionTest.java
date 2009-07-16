@@ -20,19 +20,19 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.polls;
+package com.liferay.portalweb.portal.controlpanel.polls;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="ExpireQuestionTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddQuestionTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class ExpireQuestionTest extends BaseTestCase {
-	public void testExpireQuestion() throws Exception {
+public class AddQuestionTest extends BaseTestCase {
+	public void testAddQuestion() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -51,15 +51,21 @@ public class ExpireQuestionTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Polls"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Edited Test Question 2"));
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Add Question']"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent("//label[1]/input"));
-		assertTrue(selenium.isElementPresent("//label[2]/input"));
-		assertTrue(selenium.isElementPresent("//label[3]/input"));
-		assertTrue(selenium.isElementPresent("//label[4]/input"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Cancel']"));
+		selenium.typeKeys("_25_title_en_US",
+			RuntimeVariables.replace("Test Poll Question"));
+		selenium.type("_25_title_en_US",
+			RuntimeVariables.replace("Test Poll Question"));
+		selenium.type("_25_description_en_US",
+			RuntimeVariables.replace("This is a test poll description!"));
+		selenium.type("_25_choiceDescriptiona_en_US",
+			RuntimeVariables.replace("Test Choice A"));
+		selenium.type("_25_choiceDescriptionb_en_US",
+			RuntimeVariables.replace("Test Choice B"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Add Choice']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//td[5]/ul/li/strong/span");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -67,7 +73,7 @@ public class ExpireQuestionTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//body/div[2]/ul/li[1]/a")) {
+				if (selenium.isElementPresent("_25_choiceDescriptionc_en_US")) {
 					break;
 				}
 			}
@@ -77,41 +83,14 @@ public class ExpireQuestionTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//body/div[2]/ul/li[1]/a"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click("_25_neverExpireCheckbox");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_25_expirationDateMonth")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.select("_25_expirationDateMonth",
-			RuntimeVariables.replace("label=January"));
-		selenium.select("_25_expirationDateDay",
-			RuntimeVariables.replace("label=1"));
-		selenium.select("_25_expirationDateYear",
-			RuntimeVariables.replace("label=2008"));
-		selenium.select("_25_expirationDateHour",
-			RuntimeVariables.replace("label=12"));
-		selenium.select("_25_expirationDateMinute",
-			RuntimeVariables.replace("label=:00"));
-		selenium.select("_25_expirationDateAmPm",
-			RuntimeVariables.replace("label=AM"));
+		selenium.typeKeys("_25_choiceDescriptionc_en_US",
+			RuntimeVariables.replace("Test Choice C"));
+		selenium.type("_25_choiceDescriptionc_en_US",
+			RuntimeVariables.replace("Test Choice C"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
+		assertTrue(selenium.isElementPresent("link=Test Poll Question"));
 	}
 }
