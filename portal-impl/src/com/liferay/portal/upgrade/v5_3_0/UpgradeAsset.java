@@ -249,7 +249,9 @@ public class UpgradeAsset extends UpgradeProcess {
 			con = DataAccess.getConnection();
 
 			ps = con.prepareStatement(
-				"select * from TagsVocabulary where folksonomy = false");
+				"select * from TagsVocabulary where folksonomy = ?");
+
+			ps.setBoolean(1, false);
 
 			rs = ps.executeQuery();
 
@@ -395,7 +397,9 @@ public class UpgradeAsset extends UpgradeProcess {
 			ps = con.prepareStatement(
 				"select TE.* from TagsEntry TE inner join TagsVocabulary TV " +
 					"on TE.vocabularyId = TV.vocabularyId where " +
-						"TV.folksonomy = true");
+						"TV.folksonomy = ?");
+
+			ps.setBoolean(1, true);
 
 			rs = ps.executeQuery();
 
