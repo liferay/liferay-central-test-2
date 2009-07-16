@@ -27,26 +27,26 @@
 <form method="post" name="<portlet:namespace />fm">
 
 <%
-String tabs2 = ParamUtil.getString(request, "tabs2", "templates");
+String tabs1 = ParamUtil.getString(request, "tabs1", "templates");
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setParameter("struts_action", "/journal/select_template");
-portletURL.setParameter("tabs2", tabs2);
+portletURL.setParameter("tabs1", tabs1);
 
 TemplateSearch searchContainer = new TemplateSearch(renderRequest, portletURL);
 
 searchContainer.setDelta(10);
 
-String names = "shared-templates";
+String tabs1Names = "shared-templates";
+
 if (scopeGroupId != company.getGroup().getGroupId()) {
-	names = "templates," + names;
+	tabs1Names = "templates," + tabs1Names;
 }
 %>
 
 <liferay-ui:tabs
-	names="<%= names %>"
-	param="tabs2"
+	names="<%= tabs1Names %>"
 	url="<%= portletURL.toString() %>"
 />
 
@@ -58,14 +58,14 @@ if (scopeGroupId != company.getGroup().getGroupId()) {
 <%
 TemplateSearchTerms searchTerms = (TemplateSearchTerms)searchContainer.getSearchTerms();
 
-searchTerms.setStructureId(StringPool.BLANK);
-searchTerms.setStructureIdComparator(StringPool.NOT_EQUAL);
-
-if (Validator.equals(tabs2, "shared-templates")) {
+if (tabs1.equals("shared-templates")) {
 	long companyGroupId = company.getGroup().getGroupId();
 
 	searchTerms.setGroupId(companyGroupId);
 }
+
+searchTerms.setStructureId(StringPool.BLANK);
+searchTerms.setStructureIdComparator(StringPool.NOT_EQUAL);
 %>
 
 <%@ include file="/html/portlet/journal/template_search_results.jspf" %>
