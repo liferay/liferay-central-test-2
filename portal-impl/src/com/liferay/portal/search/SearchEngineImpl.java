@@ -22,12 +22,9 @@
 
 package com.liferay.portal.search;
 
-import com.liferay.portal.kernel.messaging.DestinationNames;
-import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.search.IndexSearcher;
 import com.liferay.portal.kernel.search.IndexWriter;
 import com.liferay.portal.kernel.search.SearchEngine;
-import com.liferay.portal.kernel.search.messaging.SearchRequest;
 
 /**
  * <a href="SearchEngineImpl.java.html"><b><i>View Source</i></b></a>
@@ -38,7 +35,7 @@ import com.liferay.portal.kernel.search.messaging.SearchRequest;
 public class SearchEngineImpl implements SearchEngine {
 
 	public String getName() {
-		throw new UnsupportedOperationException();
+		return _SEARCH_ENGINE_NAME;
 	}
 
 	public IndexSearcher getSearcher() {
@@ -49,20 +46,6 @@ public class SearchEngineImpl implements SearchEngine {
 		return _writer;
 	}
 
-	public boolean isRegistered() {
-		throw new UnsupportedOperationException();
-	}
-
-	public void register(String name) {
-		SearchRequest searchRequest = new SearchRequest();
-
-		searchRequest.setCommand(SearchRequest.COMMAND_REGISTER);
-		searchRequest.setId(name);
-
-		MessageBusUtil.sendMessage(
-			DestinationNames.SEARCH_WRITER, searchRequest);
-	}
-
 	public void setSearcher(IndexSearcher searcher) {
 		_searcher = searcher;
 	}
@@ -71,17 +54,7 @@ public class SearchEngineImpl implements SearchEngine {
 		_writer = writer;
 	}
 
-	public void unregister(String fromName) {
-		SearchRequest searchRequest = new SearchRequest();
-
-		searchRequest.setCommand(SearchRequest.COMMAND_UNREGISTER);
-		searchRequest.setId(fromName);
-
-		MessageBusUtil.sendMessage(
-			DestinationNames.SEARCH_WRITER, searchRequest);
-	}
-
+	private static final String _SEARCH_ENGINE_NAME = "DEFAULT";
 	private IndexSearcher _searcher;
 	private IndexWriter _writer;
-
 }

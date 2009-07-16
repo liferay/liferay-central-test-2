@@ -33,31 +33,63 @@ import com.liferay.portal.kernel.search.Sort;
  *
  */
 public class SearchRequest {
+	public static SearchRequest add(long companyId, Document doc) {
+		SearchRequest searchRequest = new SearchRequest(SearchEngineCommand.ADD);
 
-	public static final String COMMAND_ADD = "ADD";
+		searchRequest.setCompanyId(companyId);
+		searchRequest.setDocument(doc);
 
-	public static final String COMMAND_DELETE = "DELETE";
-
-	public static final String COMMAND_DELETE_PORTLET_DOCS =
-		"DELETE_PORTLET_DOCS";
-
-	public static final String COMMAND_REGISTER = "REGISTER";
-
-	public static final String COMMAND_SEARCH = "SEARCH";
-
-	public static final String COMMAND_UNREGISTER = "UNREGISTER";
-
-	public static final String COMMAND_UPDATE = "UPDATE";
-
-	public SearchRequest() {
+		return searchRequest;
 	}
 
-	public String getCommand() {
-		return _command;
+	public static SearchRequest delete(long companyId, String uid) {
+		SearchRequest searchRequest = new SearchRequest(
+			SearchEngineCommand.DELETE);
+
+		searchRequest.setCompanyId(companyId);
+		searchRequest.setId(uid);
+
+		return searchRequest;
 	}
 
-	public void setCommand(String command) {
-		_command = command;
+	public static SearchRequest deletePortletDocs(
+		long companyId, String portletId) {
+		SearchRequest searchRequest = new SearchRequest(
+			SearchEngineCommand.DELETE_PORTLET_DOCS);
+
+		searchRequest.setCompanyId(companyId);
+		searchRequest.setId(portletId);
+
+		return searchRequest;
+	}
+
+	public static SearchRequest search(
+		long companyId, Query query, Sort[] sorts, int start, int end) {
+		SearchRequest searchRequest =
+			new SearchRequest(SearchEngineCommand.SEARCH);
+
+		searchRequest.setCompanyId(companyId);
+		searchRequest.setQuery(query);
+		searchRequest.setSorts(sorts);
+		searchRequest.setStart(start);
+		searchRequest.setEnd(end);
+
+		return searchRequest;
+	}
+
+	public static SearchRequest update(long companyId, String uid, Document doc) {
+		SearchRequest searchRequest = new SearchRequest(
+			SearchEngineCommand.UPDATE);
+
+		searchRequest.setCompanyId(companyId);
+		searchRequest.setId(uid);
+		searchRequest.setDocument(doc);
+
+		return searchRequest;
+	}
+
+	public SearchEngineCommand getSearchEngineCommand() {
+		return _searchEngineCommand;
 	}
 
 	public long getCompanyId() {
@@ -119,8 +151,8 @@ public class SearchRequest {
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 
-		sb.append("{command=");
-		sb.append(_command);
+		sb.append("{searchEngineCommand=");
+		sb.append(_searchEngineCommand);
 		sb.append(", companyId=");
 		sb.append(_companyId);
 		sb.append(", id=");
@@ -139,13 +171,17 @@ public class SearchRequest {
 
 		return sb.toString();
 	}
-	private String _command;
+
+	private SearchRequest(SearchEngineCommand searchEngineCommand) {
+		_searchEngineCommand = searchEngineCommand;
+	}
+
 	private long _companyId;
-	private String _id;
 	private Document _doc;
+	private int _end;
+	private String _id;
 	private Query _query;
+	private SearchEngineCommand _searchEngineCommand;
 	private Sort[] _sorts;
 	private int _start;
-	private int _end;
-
 }

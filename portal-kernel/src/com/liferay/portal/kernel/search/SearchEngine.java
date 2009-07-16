@@ -36,10 +36,4 @@ public interface SearchEngine {
 
 	public IndexWriter getWriter();
 
-	public boolean isRegistered();
-
-	public void register(String name);
-
-	public void unregister(String fromName);
-
 }

@@ -37,45 +37,29 @@ import com.liferay.portal.kernel.search.messaging.SearchRequest;
 public class IndexWriterImpl implements IndexWriter {
 
 	public void addDocument(long companyId, Document doc) {
-		SearchRequest searchRequest = new SearchRequest();
-
-		searchRequest.setCommand(SearchRequest.COMMAND_ADD);
-		searchRequest.setCompanyId(companyId);
-		searchRequest.setDocument(doc);
+		SearchRequest searchRequest = SearchRequest.add(companyId, doc);
 
 		MessageBusUtil.sendMessage(
 			DestinationNames.SEARCH_WRITER, searchRequest);
 	}
 
 	public void deleteDocument(long companyId, String uid) {
-		SearchRequest searchRequest = new SearchRequest();
-
-		searchRequest.setCommand(SearchRequest.COMMAND_DELETE);
-		searchRequest.setCompanyId(companyId);
-		searchRequest.setId(uid);
+		SearchRequest searchRequest = SearchRequest.delete(companyId, uid);
 
 		MessageBusUtil.sendMessage(
 			DestinationNames.SEARCH_WRITER, searchRequest);
 	}
 
 	public void deletePortletDocuments(long companyId, String portletId) {
-		SearchRequest searchRequest = new SearchRequest();
-
-		searchRequest.setCommand(SearchRequest.COMMAND_DELETE_PORTLET_DOCS);
-		searchRequest.setCompanyId(companyId);
-		searchRequest.setId(portletId);
+		SearchRequest searchRequest = SearchRequest.deletePortletDocs(
+			companyId, portletId);
 
 		MessageBusUtil.sendMessage(
 			DestinationNames.SEARCH_WRITER, searchRequest);
 	}
 
 	public void updateDocument(long companyId, String uid, Document doc) {
-		SearchRequest searchRequest = new SearchRequest();
-
-		searchRequest.setCommand(SearchRequest.COMMAND_UPDATE);
-		searchRequest.setCompanyId(companyId);
-		searchRequest.setId(uid);
-		searchRequest.setDocument(doc);
+		SearchRequest searchRequest = SearchRequest.update(companyId, uid, doc);
 
 		MessageBusUtil.sendMessage(
 			DestinationNames.SEARCH_WRITER, searchRequest);

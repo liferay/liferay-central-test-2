@@ -6,15 +6,11 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd"
 >
 
-	<!-- Portal search engine -->
+	<!-- Portal search interfaces -->
 
-	<bean id="defaultSearchEngineName" class="java.lang.String">
-		<constructor-arg index="0" type="java.lang.String" value="Lucene" />
-	</bean>
 	<bean id="indexSearcher.portal" class="com.liferay.portal.search.IndexSearcherImpl" />
 	<bean id="indexWriter.portal" class="com.liferay.portal.search.IndexWriterImpl" />
 	<bean id="com.liferay.portal.kernel.search.SearchEngineUtil" class="com.liferay.portal.kernel.search.SearchEngineUtil">
-		<property name="defaultSearchEngineName" ref="defaultSearchEngineName" />
 		<property name="portalSearchEngine">
 			<bean class="com.liferay.portal.search.PortalSearchEngineImpl" />
 		</property>
@@ -34,10 +30,21 @@
 	<bean id="indexSearcher.lucene" class="com.liferay.portal.search.lucene.LuceneIndexSearcherImpl" />
 	<bean id="indexWriter.lucene" class="com.liferay.portal.search.lucene.LuceneIndexWriterImpl" />
 	<bean id="searchEngine.lucene" class="com.liferay.portal.search.lucene.LuceneSearchEngineImpl">
-		<property name="name" ref="defaultSearchEngineName" />
 		<property name="searcher" ref="indexSearcher.lucene" />
 		<property name="writer" ref="indexWriter.lucene" />
 	</bean>
+
+	<bean id="com.liferay.portal.kernel.search.BooleanQueryFactoryUtil" class="com.liferay.portal.kernel.search.BooleanQueryFactoryUtil">
+		<property name="booleanQueryFactory">
+			<bean class="com.liferay.portal.search.lucene.BooleanQueryFactoryImpl" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.kernel.search.TermQueryFactoryUtil" class="com.liferay.portal.kernel.search.TermQueryFactoryUtil">
+		<property name="termQueryFactory">
+			<bean class="com.liferay.portal.search.lucene.TermQueryFactoryImpl" />
+		</property>
+	</bean>
+	
 
 	<!-- Messaging -->
 
@@ -50,14 +57,25 @@
 	<bean id="destination.search_writer" class="com.liferay.portal.kernel.messaging.SerialDestination">
 		<constructor-arg index="0" type="java.lang.String" value="liferay/search_writer" />
 	</bean>
-	<bean id="messageListener.search_reader" class="com.liferay.portal.search.lucene.messaging.LuceneReaderMessageListener">
-		<constructor-arg index="0" type="com.liferay.portal.kernel.messaging.sender.MessageSender" ref="com.liferay.portal.kernel.messaging.sender.MessageSender" />
+	<bean id="messageListener.search_reader" class="com.liferay.portal.kernel.search.messaging.SearchReaderMessageListener">
 		<property name="searchEngine" ref="searchEngine.lucene" />
 	</bean>
-	<bean id="messageListener.search_writer" class="com.liferay.portal.search.lucene.messaging.LuceneWriterMessageListener">
+	<bean id="messageListener.search_writer" class="com.liferay.portal.kernel.search.messaging.SearchWriterMessageListener">
 		<property name="searchEngine" ref="searchEngine.lucene" />
 	</bean>
 	<bean id="messagingConfigurator.search" class="com.liferay.portal.kernel.messaging.config.DefaultMessagingConfigurator" init-method="init" destroy-method="destroy">
+		<property name="destinationSpecificDestinationEventListener">
+			<map>
+				<entry key="liferay/search_reader">
+					<list>
+						<bean class="com.liferay.portal.search.lucene.messaging.SearchEngineDestinationEventListener">
+							<constructor-arg index="0" type="com.liferay.portal.kernel.search.messaging.SearchReaderMessageListener" ref="messageListener.search_reader"/>
+							<constructor-arg index="1" type="com.liferay.portal.kernel.search.messaging.SearchWriterMessageListener" ref="messageListener.search_writer"/>
+						</bean>
+					</list>
+				</entry>
+			</map>
+		</property>
 		<property name="destinations">
 			<list>
 				<ref bean="destination.search_reader" />

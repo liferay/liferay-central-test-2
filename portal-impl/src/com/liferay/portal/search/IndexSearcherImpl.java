@@ -44,14 +44,8 @@ public class IndexSearcherImpl implements IndexSearcher {
 		throws SearchException {
 
 		try {
-			SearchRequest searchRequest = new SearchRequest();
-
-			searchRequest.setCommand(SearchRequest.COMMAND_SEARCH);
-			searchRequest.setCompanyId(companyId);
-			searchRequest.setQuery(query);
-			searchRequest.setSorts(sorts);
-			searchRequest.setStart(start);
-			searchRequest.setEnd(end);
+			SearchRequest searchRequest = SearchRequest.search(
+				companyId, query, sorts, start, end);
 
 			Hits hits = (Hits)MessageBusUtil.sendSynchronousMessage(
 				DestinationNames.SEARCH_READER, searchRequest,

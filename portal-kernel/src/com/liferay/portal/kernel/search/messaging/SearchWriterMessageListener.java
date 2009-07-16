@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -20,29 +20,21 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.search.lucene.messaging;
+package com.liferay.portal.kernel.search.messaging;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.messaging.Message;
-import com.liferay.portal.kernel.messaging.MessageBusUtil;
-import com.liferay.portal.kernel.messaging.MessageListener;
-import com.liferay.portal.kernel.messaging.sender.MessageSender;
-import com.liferay.portal.kernel.search.Hits;
-import com.liferay.portal.kernel.search.SearchEngine;
-import com.liferay.portal.kernel.search.messaging.SearchRequest;
+import com.liferay.portal.kernel.search.Document;
 
 /**
- * <a href="LuceneReaderMessageListener.java.html"><b><i>View Source</i></b></a>
+ * <a href="LuceneWriterMessageListener.java.html"><b><i>View Source</i></b></a>
  *
  * @author Bruno Farache
  *
  */
-public class LuceneReaderMessageListener implements MessageListener {
-
-	public LuceneReaderMessageListener(MessageSender messageSender) {
-		_messageSender = messageSender;
-	}
+public class SearchWriterMessageListener
+	extends BaseSearchEngineMessageListener {
 
 	public void receive(Message message) {
 		try {
@@ -53,46 +45,37 @@ public class LuceneReaderMessageListener implements MessageListener {
 		}
 	}
 
-	public void setSearchEngine(SearchEngine searchEngine) {
-		_searchEngine = searchEngine;
-	}
-
-	protected void doCommandSearch(Message message, SearchRequest searchRequest)
-		throws Exception {
-
-		Hits hits = _searchEngine.getSearcher().search(
-			searchRequest.getCompanyId(), searchRequest.getQuery(),
-			searchRequest.getSorts(), searchRequest.getStart(),
-			searchRequest.getEnd());
-
-		Message responseMessage = MessageBusUtil.createResponseMessage(
-			message, hits);
-
-		_messageSender.send(responseMessage.getDestination(), responseMessage);
-	}
-
 	protected void doReceive(Message message) throws Exception {
 		Object payload = message.getPayload();
 
-		if (!_searchEngine.isRegistered() ||
-			!(payload instanceof SearchRequest)) {
-
+		if (!(payload instanceof SearchRequest)) {
 			return;
 		}
 
 		SearchRequest searchRequest = (SearchRequest)payload;
 
-		String command = searchRequest.getCommand();
+		SearchEngineCommand searchEngineCommand =
+			searchRequest.getSearchEngineCommand();
 
-		if (command.equals(SearchRequest.COMMAND_SEARCH)) {
-			doCommandSearch(message, searchRequest);
+		long companyId = searchRequest.getCompanyId();
+		String id = searchRequest.getId();
+		Document doc = searchRequest.getDocument();
+
+		if (searchEngineCommand.equals(SearchEngineCommand.ADD)) {
+			_searchEngine.getWriter().addDocument(companyId, doc);
+		}
+		else if (searchEngineCommand.equals(SearchEngineCommand.DELETE)) {
+			_searchEngine.getWriter().deleteDocument(companyId, id);
+		}
+		else if (searchEngineCommand.equals(
+			SearchEngineCommand.DELETE_PORTLET_DOCS)) {
+			_searchEngine.getWriter().deletePortletDocuments(companyId, id);
+		}
+		else if (searchEngineCommand.equals(SearchEngineCommand.UPDATE)) {
+			_searchEngine.getWriter().updateDocument(companyId, id, doc);
 		}
 	}
 
 	private static Log _log =
-		LogFactoryUtil.getLog(LuceneReaderMessageListener.class);
-
-	private MessageSender _messageSender;
-	private SearchEngine _searchEngine;
-
+		LogFactoryUtil.getLog(SearchWriterMessageListener.class);
 }
