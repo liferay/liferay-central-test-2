@@ -194,6 +194,8 @@ public class GetFileAction extends PortletAction {
 
 			String fileName = fileEntry.getTitleWithExtension();
 
+			boolean converted = false;
+
 			if (Validator.isNotNull(targetExtension)) {
 				String id = DocumentConversionUtil.getTempFileId(
 					fileEntry.getFileEntryId(), version);
@@ -213,17 +215,23 @@ public class GetFileAction extends PortletAction {
 					fileName = sb.toString();
 
 					is = convertedIS;
+					converted = true;
 				}
 			}
 
-			int contentLength = fileEntry.getSize();
+			int contentLength = 0;
 
-			if (version < fileEntry.getVersion()) {
-				DLFileVersion fileVersion =
-					DLFileVersionLocalServiceUtil.getFileVersion(
-						folderId, name, version);
+			if (!converted) {
+				if (version >= fileEntry.getVersion()) {
+					contentLength = fileEntry.getSize();
+				}
+				else {
+					DLFileVersion fileVersion =
+						DLFileVersionLocalServiceUtil.getFileVersion(
+							folderId, name, version);
 
-				contentLength = fileVersion.getSize();
+					contentLength = fileVersion.getSize();
+				}
 			}
 
 			String contentType = MimeTypesUtil.getContentType(fileName);
