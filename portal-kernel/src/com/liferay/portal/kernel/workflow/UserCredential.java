@@ -2,13 +2,8 @@
 package com.liferay.portal.kernel.workflow;
 
 import java.io.Serializable;
-import java.util.HashSet;
 import java.util.Locale;
 import java.util.Set;
-
-import com.liferay.portal.PortalException;
-import com.liferay.portal.SystemException;
-import com.liferay.portal.model.User;
 
 /**
  * <a href="UserCredential.java.html"><b><i>View Source</i></b></a>
@@ -18,9 +13,10 @@ import com.liferay.portal.model.User;
  * as the credential towards the workflow engine. For convenience, it is just
  * added automatically through the request by creating it using the
  * {@link WorkflowUtil#createUserCredential(long)} as the API just takes the
- * user id, the role set is being added by the proxy in order to avoid the
- * implementation or adapter having to call back the portal for the set of roles
- * of a user's id.
+ * user id, the role set and additional information is being added by the
+ * {@link UserCredentialFactory} invoked by the proxy (most likely the request
+ * builder) in order to avoid the implementation or adapter having to call back
+ * the portal for the set of roles of a user's id.
  * </p>
  * 
  * @author Micha Kiener
@@ -36,33 +32,6 @@ public class UserCredential implements Serializable {
 	 */
 	public UserCredential() {
 
-	}
-
-	/**
-	 * Creates a new user credential out of the given user object.
-	 * 
-	 * @param user the user to be represented by this credential
-	 * 
-	 * @throws SystemException is thrown if requesting attributes through the
-	 *             user object failed
-	 * @throws PortalException is thrown if requesting attributes through the
-	 *             user object failed
-	 */
-	public UserCredential(User user)
-		throws PortalException, SystemException {
-		_companyId = user.getCompanyId();
-		_emailAddress = user.getEmailAddress();
-		_locale = user.getLocale();
-		_login = user.getLogin();
-		_screenName = user.getScreenName();
-		_userId = user.getUserId();
-		
-		// create the role set
-		long[] roleIds = user.getRoleIds();
-		_roleSet = new HashSet<Long>(roleIds.length);
-		for (long roleId : roleIds) {
-			_roleSet.add(Long.valueOf(roleId));
-		}
 	}
 	
 	/**
@@ -113,6 +82,59 @@ public class UserCredential implements Serializable {
 	 */
 	public long getUserId() {
 		return _userId;
+	}
+
+	/**
+	 * @param companyId the id of the company the user reflected by this
+	 *            credential should be assigned to
+	 */
+	public void setCompanyId(long companyId) {
+		_companyId = companyId;
+	}
+
+	/**
+	 * @param emailAddress the email address of the user reflected by this
+	 *            credential
+	 */
+	public void setEmailAddress(String emailAddress) {
+		_emailAddress = emailAddress;
+	}
+
+	/**
+	 * @param locale the locale of the user reflected by this credential
+	 */
+	public void setLocale(Locale locale) {
+		this._locale = locale;
+	}
+
+	/**
+	 * @param login the login name of the user reflected by this credential
+	 */
+	public void setLogin(String login) {
+		this._login = login;
+	}
+
+	/**
+	 * @param roleSet the set of roles the user of this credential is assigned
+	 *            to
+	 */
+	public void setRoleSet(Set<Long> roleSet) {
+		_roleSet = roleSet;
+	}
+
+	/**
+	 * @param screenName the screen name of the user reflected by this
+	 *            credential
+	 */
+	public void setScreenName(String screenName) {
+		_screenName = screenName;
+	}
+
+	/**
+	 * @param userId the id of the user reflected by this credential
+	 */
+	public void setUserId(long userId) {
+		_userId = userId;
 	}
 
 	private long _companyId;

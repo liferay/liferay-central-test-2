@@ -22,9 +22,7 @@
 
 package com.liferay.portal.kernel.workflow;
 
-import com.liferay.portal.model.User;
-import com.liferay.portal.service.UserService;
-import com.liferay.portal.service.UserServiceUtil;
+
 
 /**
  * <a href="WorkflowUtil.java.html"><b><i>View Source</i></b></a>
@@ -45,7 +43,7 @@ public class WorkflowUtil {
 	 * <p>
 	 * Creates a user credential representing the user with the specified id,
 	 * its set of assigned roles and additional information requested through
-	 * the {@link UserService}.
+	 * the {@link UserCredentialFactory#createCredential(long)}.
 	 * </p>
 	 * 
 	 * <p>
@@ -66,20 +64,7 @@ public class WorkflowUtil {
 	 */
 	public static UserCredential createUserCredential(long userId)
 		throws WorkflowException {
-		// check for a valid user id
-		if (userId <= 0) {
-			return null;
-		}
-		
-		try {
-			User user = UserServiceUtil.getUserById(userId);
-			return new UserCredential(user);
-		}
-		catch (Exception e) {
-			throw new WorkflowException(
-				"Could not request user information through UserService for user id [" +
-					userId + "]");
-		}
+		return _userCredentialFactory.createCredential(userId);
 	}
 
 	/**
@@ -132,8 +117,15 @@ public class WorkflowUtil {
 	 */
 	public static void setTaskInstanceManager(
 		TaskInstanceManager taskInstanceManager) {
-
 		_taskInstanceManager = taskInstanceManager;
+	}
+	
+	/**
+	 * @param factory the factory this utility will use to produce user
+	 *            credential objects based on a users id
+	 */
+	public static void setUserCredentialFactory(UserCredentialFactory factory) {
+		_userCredentialFactory = factory;
 	}
 
 	/**
@@ -142,7 +134,6 @@ public class WorkflowUtil {
 	 */
 	public static void setWorkflowDefinitionManager(
 		WorkflowDefinitionManager workflowDefinitionManager) {
-
 		_workflowDefinitionManager = workflowDefinitionManager;
 	}
 
@@ -152,7 +143,6 @@ public class WorkflowUtil {
 	 */
 	public static void setWorkflowDefinitionMapper(
 			WorkflowDefinitionMapper workflowDefinitionMapper) {
-
 		_workflowDefinitionMapper = workflowDefinitionMapper;
 	}
 
@@ -162,11 +152,11 @@ public class WorkflowUtil {
 	 */
 	public static void setWorkflowInstanceManager(
 		WorkflowInstanceManager workflowInstanceManager) {
-
 		_workflowInstanceManager = workflowInstanceManager;
 	}
 
 	private static TaskInstanceManager _taskInstanceManager;
+	private static UserCredentialFactory _userCredentialFactory;
 	private static WorkflowDefinitionManager _workflowDefinitionManager;
 	private static WorkflowDefinitionMapper _workflowDefinitionMapper;
 	private static WorkflowInstanceManager _workflowInstanceManager;
