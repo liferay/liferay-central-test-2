@@ -23,7 +23,6 @@
 package com.liferay.portal.upgrade.v5_3_0;
 
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
-import com.liferay.portal.kernel.dao.jdbc.SmartResultSet;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
@@ -63,60 +62,6 @@ public class UpgradeAsset extends UpgradeProcess {
 		}
 		catch (Exception e) {
 			throw new UpgradeException(e);
-		}
-	}
-
-	protected void copyProperties(
-			long categoryId, String tableName, String pkName)
-		throws Exception {
-
-		Connection con = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-
-		try {
-			con = DataAccess.getConnection();
-
-			ps = con.prepareStatement(
-				"select * from TagsProperty where entryId = ?");
-
-			ps.setLong(1, categoryId);
-
-			rs = ps.executeQuery();
-
-			while (rs.next()) {
-				long propertyId = rs.getLong("propertyId");
-				long companyId = rs.getLong("companyId");
-				long userId = rs.getLong("userId");
-				String userName = rs.getString("userName");
-				Timestamp createDate = rs.getTimestamp("createDate");
-				Timestamp modifiedDate = rs.getTimestamp("modifiedDate");
-				String key = rs.getString("key_");
-				String value = rs.getString("value");
-
-				ps = con.prepareStatement(
-					"insert into " + tableName + " (" + pkName + "," +
-						" companyId, userId, userName, createDate, " +
-							"modifiedDate, entryId, key_, value) values (?, " +
-								"?, ?, ?, ?, ?, ?, ?, ?)");
-
-				ps.setLong(1, propertyId);
-				ps.setLong(2, companyId);
-				ps.setLong(3, userId);
-				ps.setString(4, userName);
-				ps.setTimestamp(5, createDate);
-				ps.setTimestamp(6, modifiedDate);
-				ps.setLong(7, categoryId);
-				ps.setString(8, key);
-				ps.setString(9, value);
-
-				ps.executeUpdate();
-
-				ps.close();
-			}
-		}
-		finally {
-			DataAccess.cleanUp(con, ps, rs);
 		}
 	}
 
@@ -173,10 +118,8 @@ public class UpgradeAsset extends UpgradeProcess {
 
 			rs = ps.executeQuery();
 
-			SmartResultSet srs = new SmartResultSet(rs);
-
-			while (srs.next()) {
-				long entryId = srs.getLong("entryId");
+			while (rs.next()) {
+				long entryId = rs.getLong("entryId");
 				long groupId = rs.getLong("groupId");
 				long companyId = rs.getLong("companyId");
 				long userId = rs.getLong("userId");
@@ -186,16 +129,19 @@ public class UpgradeAsset extends UpgradeProcess {
 				long parentCategoryId = rs.getLong("parentEntryId");
 				String name = rs.getString("name");
 
-				String uuid = PortalUUIDUtil.generate();
+				StringBuilder sb = new StringBuilder();
 
-				ps = con.prepareStatement(
-					"insert into AssetCategory " +
-						"(uuid_, categoryId, groupId, companyId, userId, " +
-							"userName, createDate, modifiedDate, " +
-								"parentCategoryId, name, vocabularyId) " +
-									"values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+				sb.append("insert into AssetCategory (uuid_, categoryId, ");
+				sb.append("groupId, companyId, userId, userName, createDate, ");
+				sb.append("modifiedDate, parentCategoryId, name, ");
+				sb.append("vocabularyId) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ");
+				sb.append("?, ?)");
 
-				ps.setString(1, uuid);
+				String sql = sb.toString();
+
+				ps = con.prepareStatement(sql);
+
+				ps.setString(1, PortalUUIDUtil.generate());
 				ps.setLong(2, entryId);
 				ps.setLong(3, groupId);
 				ps.setLong(4, companyId);
@@ -208,6 +154,8 @@ public class UpgradeAsset extends UpgradeProcess {
 				ps.setLong(11, vocabularyId);
 
 				ps.executeUpdate();
+
+				ps.close();
 
 				copyAssociations(
 					entryId, "AssetEntries_AssetCategories", "categoryId");
@@ -224,7 +172,126 @@ public class UpgradeAsset extends UpgradeProcess {
 
 				updateCategoryResource(companyId, entryId);
 			}
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
+		}
+	}
 
+	protected void copyProperties(
+			long categoryId, String tableName, String pkName)
+		throws Exception {
+
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = DataAccess.getConnection();
+
+			ps = con.prepareStatement(
+				"select * from TagsProperty where entryId = ?");
+
+			ps.setLong(1, categoryId);
+
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				long propertyId = rs.getLong("propertyId");
+				long companyId = rs.getLong("companyId");
+				long userId = rs.getLong("userId");
+				String userName = rs.getString("userName");
+				Timestamp createDate = rs.getTimestamp("createDate");
+				Timestamp modifiedDate = rs.getTimestamp("modifiedDate");
+				String key = rs.getString("key_");
+				String value = rs.getString("value");
+
+				StringBuilder sb = new StringBuilder();
+
+				sb.append("insert into ");
+				sb.append(tableName);
+				sb.append(" (");
+				sb.append(pkName);
+				sb.append(", companyId, userId, userName, createDate, ");
+				sb.append("modifiedDate, entryId, key_, value) values (?, ?, ");
+				sb.append("?, ?, ?, ?, ?, ?, ?)");
+
+				String sql = sb.toString();
+
+				ps = con.prepareStatement(sql);
+
+				ps.setLong(1, propertyId);
+				ps.setLong(2, companyId);
+				ps.setLong(3, userId);
+				ps.setString(4, userName);
+				ps.setTimestamp(5, createDate);
+				ps.setTimestamp(6, modifiedDate);
+				ps.setLong(7, categoryId);
+				ps.setString(8, key);
+				ps.setString(9, value);
+
+				ps.executeUpdate();
+
+				ps.close();
+			}
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
+		}
+	}
+
+	protected void updateAssetCategories() throws Exception {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = DataAccess.getConnection();
+
+			ps = con.prepareStatement(
+				"select * from TagsVocabulary where folksonomy = false");
+
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				long vocabularyId = rs.getLong("vocabularyId");
+				long groupId = rs.getLong("groupId");
+				long companyId = rs.getLong("companyId");
+				long userId = rs.getLong("userId");
+				String userName = rs.getString("userName");
+				Timestamp createDate = rs.getTimestamp("createDate");
+				Timestamp modifiedDate = rs.getTimestamp("modifiedDate");
+				String name = rs.getString("name");
+				String description = rs.getString("description");
+
+				StringBuilder sb = new StringBuilder();
+
+				sb.append("insert into AssetVocabulary (uuid_, vocabularyId, ");
+				sb.append("groupId, companyId, userId, userName, createDate, ");
+				sb.append("modifiedDate, name, description) values (?, ?, ?, ");
+				sb.append("?, ?, ?, ?, ?, ?, ?)");
+
+				String sql = sb.toString();
+
+				ps = con.prepareStatement(sql);
+
+				ps.setString(1, PortalUUIDUtil.generate());
+				ps.setLong(2, vocabularyId);
+				ps.setLong(3, groupId);
+				ps.setLong(4, companyId);
+				ps.setLong(5, userId);
+				ps.setString(6, userName);
+				ps.setTimestamp(7, createDate);
+				ps.setTimestamp(8, modifiedDate);
+				ps.setString(9, name);
+				ps.setString(10, description);
+
+				ps.executeUpdate();
+
+				ps.close();
+
+				copyEntriesToCategories(vocabularyId);
+			}
 		}
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
@@ -243,10 +310,8 @@ public class UpgradeAsset extends UpgradeProcess {
 
 			rs = ps.executeQuery();
 
-			SmartResultSet srs = new SmartResultSet(rs);
-
-			while (srs.next()) {
-				long assetId = srs.getLong("assetId");
+			while (rs.next()) {
+				long assetId = rs.getLong("assetId");
 				long groupId = rs.getLong("groupId");
 				long companyId = rs.getLong("companyId");
 				long userId = rs.getLong("userId");
@@ -270,18 +335,20 @@ public class UpgradeAsset extends UpgradeProcess {
 				double priority = rs.getDouble("priority");
 				int viewCount = rs.getInt("viewCount");
 
-				ps = con.prepareStatement(
-					"insert into AssetEntry " +
-						"(entryId, groupId, companyId, userId, userName, " +
-							"createDate, modifiedDate, classNameId, classPK, " +
-								"visible, startDate, endDate, publishDate, " +
-									"expirationDate, mimeType, title, " +
-										"description, summary, url, height, " +
-											"width, priority, viewCount) " +
-												"values (?, ?, ?, ?, ?, ?, " +
-													"?, ?, ?, ?, ?, ?, ?, ?, " +
-														"?, ?, ?, ?, ?, ?, " +
-															"?, ?, ?)");
+				StringBuilder sb = new StringBuilder();
+
+				sb.append("insert into AssetEntry (entryId, groupId, ");
+				sb.append("companyId, userId, userName, createDate, ");
+				sb.append("modifiedDate, classNameId, classPK, visible, ");
+				sb.append("startDate, endDate, publishDate, expirationDate, ");
+				sb.append("mimeType, title, description, summary, url, ");
+				sb.append("height, width, priority, viewCount) values (?, ?, ");
+				sb.append("?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ");
+				sb.append("?, ?, ?, ?, ?)");
+
+				String sql = sb.toString();
+
+				ps = con.prepareStatement(sql);
 
 				ps.setLong(1, assetId);
 				ps.setLong(2, groupId);
@@ -308,62 +375,8 @@ public class UpgradeAsset extends UpgradeProcess {
 				ps.setInt(23, viewCount);
 
 				ps.executeUpdate();
-			}
-		}
-		finally {
-			DataAccess.cleanUp(con, ps, rs);
-		}
-	}
 
-	protected void updateAssetCategories() throws Exception {
-		Connection con = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-
-		try {
-			con = DataAccess.getConnection();
-
-			ps = con.prepareStatement(
-				"select * from TagsVocabulary where folksonomy = false");
-
-			rs = ps.executeQuery();
-
-			SmartResultSet srs = new SmartResultSet(rs);
-
-			while (srs.next()) {
-				long vocabularyId = srs.getLong("vocabularyId");
-				long groupId = rs.getLong("groupId");
-				long companyId = rs.getLong("companyId");
-				long userId = rs.getLong("userId");
-				String userName = rs.getString("userName");
-				Timestamp createDate = rs.getTimestamp("createDate");
-				Timestamp modifiedDate = rs.getTimestamp("modifiedDate");
-				String name = rs.getString("name");
-				String description = rs.getString("description");
-
-				String uuid = PortalUUIDUtil.generate();
-
-				ps = con.prepareStatement(
-					"insert into AssetVocabulary " +
-						"(uuid_, vocabularyId, groupId, companyId, userId, " +
-							"userName, createDate, modifiedDate, name, " +
-								"description) values (?, ?, ?, ?, ?, ?, ?," +
-									" ?, ?, ?)");
-
-				ps.setString(1, uuid);
-				ps.setLong(2, vocabularyId);
-				ps.setLong(3, groupId);
-				ps.setLong(4, companyId);
-				ps.setLong(5, userId);
-				ps.setString(6, userName);
-				ps.setTimestamp(7, createDate);
-				ps.setTimestamp(8, modifiedDate);
-				ps.setString(9, name);
-				ps.setString(10, description);
-
-				ps.executeUpdate();
-
-				copyEntriesToCategories(vocabularyId);
+				ps.close();
 			}
 		}
 		finally {
@@ -386,10 +399,8 @@ public class UpgradeAsset extends UpgradeProcess {
 
 			rs = ps.executeQuery();
 
-			SmartResultSet srs = new SmartResultSet(rs);
-
-			while (srs.next()) {
-				long entryId = srs.getLong("entryId");
+			while (rs.next()) {
+				long entryId = rs.getLong("entryId");
 				long groupId = rs.getLong("groupId");
 				long companyId = rs.getLong("companyId");
 				long userId = rs.getLong("userId");
@@ -398,10 +409,15 @@ public class UpgradeAsset extends UpgradeProcess {
 				Timestamp modifiedDate = rs.getTimestamp("modifiedDate");
 				String name = rs.getString("name");
 
-				ps = con.prepareStatement(
-					"insert into AssetTag (tagId, groupId, companyId, " +
-						"userId, userName, createDate, modifiedDate, name) " +
-							"values (?, ?, ?, ?, ?, ?, ?, ?)");
+				StringBuilder sb = new StringBuilder();
+
+				sb.append("insert into AssetTag (tagId, groupId, companyId, ");
+				sb.append("userId, userName, createDate, modifiedDate, name) ");
+				sb.append("values (?, ?, ?, ?, ?, ?, ?, ?)");
+
+				String sql = sb.toString();
+
+				ps = con.prepareStatement(sql);
 
 				ps.setLong(1, entryId);
 				ps.setLong(2, groupId);
@@ -414,11 +430,11 @@ public class UpgradeAsset extends UpgradeProcess {
 
 				ps.executeUpdate();
 
-				copyAssociations(
-					entryId, "AssetEntries_AssetTags", "tagId");
+				ps.close();
 
-				copyProperties(
-					entryId, "AssetTagProperty", "tagPropertyId");
+				copyAssociations(entryId, "AssetEntries_AssetTags", "tagId");
+
+				copyProperties(entryId, "AssetTagProperty", "tagPropertyId");
 			}
 		}
 		finally {
@@ -429,27 +445,30 @@ public class UpgradeAsset extends UpgradeProcess {
 	protected void updateCategoryResource(long companyId, long categoryId)
 		throws Exception{
 
-		String newName = AssetCategory.class.getName();
 		String oldName = "com.liferay.tags.model.TagsEntry";
 
-		ResourceCode newResourceCode =
-			ResourceCodeLocalServiceUtil.getResourceCode(
-				companyId, newName, ResourceConstants.SCOPE_INDIVIDUAL);
 		ResourceCode oldResourceCode =
 			ResourceCodeLocalServiceUtil.getResourceCode(
 				companyId, oldName, ResourceConstants.SCOPE_INDIVIDUAL);
 
-		long newCodeId = newResourceCode.getCodeId();
 		long oldCodeId = oldResourceCode.getCodeId();
 
-		// Alg. 1-5
+		String newName = AssetCategory.class.getName();
+
+		ResourceCode newResourceCode =
+			ResourceCodeLocalServiceUtil.getResourceCode(
+				companyId, newName, ResourceConstants.SCOPE_INDIVIDUAL);
+
+		long newCodeId = newResourceCode.getCodeId();
+
+		// Algorithm 1-5
 
 		runSQL(
 			"update Resource_ set codeId = '" + newCodeId + "' where " +
-				"codeId = '" + oldCodeId +
-					"' and primKey = '" + categoryId + "';");
+				"codeId = '" + oldCodeId + "' and primKey = '" + categoryId +
+					"';");
 
-		// Alg. 6
+		// Algorithm 6
 
 		runSQL(
 			"update ResourcePermission set name = '" + newName + "' where " +
@@ -462,14 +481,17 @@ public class UpgradeAsset extends UpgradeProcess {
 		updateResourceCodes(
 			"com.liferay.portlet.tags", "com.liferay.portlet.asset"
 		);
+
 		updateResourceCodes(
 			"com.liferay.portlet.tags.model.TagsEntry",
 			AssetTag.class.getName()
 		);
+
 		updateResourceCodes(
 			"com.liferay.portlet.tags.model.TagsAsset",
 			AssetEntry.class.getName()
 		);
+
 		updateResourceCodes(
 			"com.liferay.portlet.tags.model.TagsVocabulary",
 			AssetVocabulary.class.getName()
@@ -479,13 +501,13 @@ public class UpgradeAsset extends UpgradeProcess {
 	protected void updateResourceCodes(String oldCodeName, String newCodeName)
 		throws Exception {
 
-		// Alg. 1-5
+		// Algorithm 1-5
 
 		runSQL(
 			"update ResourceCode set name = '" + newCodeName + "' where" +
 				" name = '" + oldCodeName + "';");
 
-		// Alg. 6
+		// Algorithm 6
 
 		runSQL(
 			"update ResourceAction set name = '" + newCodeName + "' where" +
