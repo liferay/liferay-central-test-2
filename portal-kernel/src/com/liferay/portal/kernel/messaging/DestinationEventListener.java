@@ -35,4 +35,9 @@ public interface DestinationEventListener {
 
 	public void destinationRemoved(Destination destination);
 
+	public void messageListenerRegistered(
+		String destinationName, MessageListener listener);
+
+	public void messageListenerUnregistered(
+		String destinationName, MessageListener listener);
 }

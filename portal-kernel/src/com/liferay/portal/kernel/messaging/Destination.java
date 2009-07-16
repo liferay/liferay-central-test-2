@@ -30,9 +30,14 @@ package com.liferay.portal.kernel.messaging;
  */
 public interface Destination {
 
+	public void addDestinationEventListener(
+		DestinationEventListener destinationEventListener);
+
 	public void close();
 
 	public void close(boolean force);
+
+	public void copyDestinationEventListeners(Destination destination);
 
 	public void copyMessageListeners(Destination destination);
 
@@ -46,13 +51,20 @@ public interface Destination {
 
 	public void open();
 
-	public void register(MessageListener messageListener);
+	public boolean register(MessageListener messageListener);
 
-	public void register(
+	public boolean register(
 		MessageListener messageListener, ClassLoader classloader);
+
+	public void removeDestinationEventListener(
+		DestinationEventListener destinationEventListener);
+
+	public void removeDestinationEventListeners();
 
 	public void send(Message message);
 
 	public boolean unregister(MessageListener messageListener);
+
+	public void unregisterMessageListeners();
 
 }

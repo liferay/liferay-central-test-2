@@ -58,7 +58,7 @@
 	<!-- Configurator -->
 
 	<bean id="messagingConfigurator.core" class="com.liferay.portal.kernel.messaging.config.DefaultMessagingConfigurator" init-method="init" destroy-method="destroy">
-		<property name="destinationEventListeners">
+		<property name="globalDestinationEventListeners">
 			<list>
 				<ref bean="com.liferay.portal.kernel.messaging.jmx.JMXMessageListener" />
 				<!--<bean class="com.liferay.portal.kernel.messaging.GlobalDestinationEventListener">

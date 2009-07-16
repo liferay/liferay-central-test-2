@@ -24,8 +24,8 @@ package com.liferay.portal.kernel.messaging.jmx;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.messaging.BaseDestinationEventListener;
 import com.liferay.portal.kernel.messaging.Destination;
-import com.liferay.portal.kernel.messaging.DestinationEventListener;
 import com.liferay.portal.kernel.messaging.MessageBus;
 
 import java.util.Collection;
@@ -41,7 +41,7 @@ import javax.management.ObjectName;
  * @author Brian Wing Shun Chan
  *
  */
-public class JMXMessageListener implements DestinationEventListener {
+public class JMXMessageListener extends BaseDestinationEventListener {
 
 	public void destinationAdded(Destination destination) {
 		try {

@@ -34,7 +34,7 @@ import java.util.Map;
  *
  */
 public class GlobalDestinationEventListener
-	implements DestinationEventListener {
+	extends BaseDestinationEventListener {
 
 	public GlobalDestinationEventListener(
 		MessageListener listener, List<String> ignoredDestinations) {

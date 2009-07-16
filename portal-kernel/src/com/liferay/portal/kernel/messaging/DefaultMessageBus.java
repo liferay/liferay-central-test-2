@@ -24,12 +24,12 @@ package com.liferay.portal.kernel.messaging;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.ConcurrentHashSet;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * <a href="DefaultMessageBus.java.html"><b><i>View Source</i></b></a>
@@ -49,6 +49,18 @@ public class DefaultMessageBus implements MessageBus {
 		DestinationEventListener destinationEventListener) {
 
 		_destinationEventListeners.add(destinationEventListener);
+	}
+
+	public void addDestinationEventListener(
+		String destinationName,
+		DestinationEventListener destinationEventListener) {
+
+		Destination destinationModel = _destinations.get(destinationName);
+
+		if (destinationModel != null) {
+			destinationModel.addDestinationEventListener(
+				destinationEventListener);
+		}
 	}
 
 	public void destroy() {
@@ -82,7 +94,7 @@ public class DefaultMessageBus implements MessageBus {
 		}
 	}
 
-	public synchronized void registerMessageListener(
+	public synchronized boolean registerMessageListener(
 		String destinationName, MessageListener messageListener) {
 
 		Destination destination = _destinations.get(destinationName);
@@ -92,11 +104,18 @@ public class DefaultMessageBus implements MessageBus {
 				"Destination " + destinationName + " is not configured");
 		}
 
-		destination.register(messageListener);
+		boolean registered = destination.register(messageListener);
+		if (registered) {
+			fireMessageListenerRegisteredEvent(destination, messageListener);
+		}
+		return registered;
 	}
 
 	public synchronized Destination removeDestination(String destinationName) {
 		Destination destinationModel = _destinations.remove(destinationName);
+
+		destinationModel.removeDestinationEventListeners();
+		destinationModel.unregisterMessageListeners();
 
 		fireDestinationRemovedEvent(destinationModel);
 
@@ -109,11 +128,26 @@ public class DefaultMessageBus implements MessageBus {
 		_destinationEventListeners.remove(destinationEventListener);
 	}
 
-	public void replace(Destination destination) {
-		Destination oldDestination = removeDestination(destination.getName());
+	public void removeDestinationEventListener(
+		String destinationName,
+		DestinationEventListener destinationEventListener) {
 
+		Destination destinationModel = _destinations.get(destinationName);
+		
+		if (destinationModel != null) {
+			destinationModel.removeDestinationEventListener(
+				destinationEventListener);
+		}
+	}
+
+	public void replace(Destination destination) {
+		Destination oldDestination = _destinations.get(destination.getName());
+
+		oldDestination.copyDestinationEventListeners(destination);
 		oldDestination.copyMessageListeners(destination);
 
+		removeDestination(oldDestination.getName());
+		
 		addDestination(destination);
 	}
 
@@ -153,7 +187,11 @@ public class DefaultMessageBus implements MessageBus {
 			return false;
 		}
 
-		return destination.unregister(messageListener);
+		boolean unregistered = destination.unregister(messageListener);
+		if (unregistered) {
+			fireMessageListenerUnregisteredEvent(destination, messageListener);
+		}
+		return unregistered;
 	}
 
 	protected void fireDestinationAddedEvent(Destination destination) {
@@ -168,11 +206,27 @@ public class DefaultMessageBus implements MessageBus {
 		}
 	}
 
+	protected void fireMessageListenerRegisteredEvent(
+		Destination destination, MessageListener messageListener) {
+		for (DestinationEventListener listener : _destinationEventListeners) {
+			listener.messageListenerRegistered(
+				destination.getName(), messageListener);
+		}
+	}
+
+	protected void fireMessageListenerUnregisteredEvent(
+		Destination destination, MessageListener messageListener) {
+		for (DestinationEventListener listener : _destinationEventListeners) {
+			listener.messageListenerUnregistered(
+				destination.getName(), messageListener);
+		}
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(DefaultMessageBus.class);
 
-	private List<DestinationEventListener> _destinationEventListeners =
-		new ArrayList<DestinationEventListener>();
 	private Map<String, Destination> _destinations =
 		new HashMap<String, Destination>();
+	private Set<DestinationEventListener> _destinationEventListeners =
+		new ConcurrentHashSet<DestinationEventListener>();
 
 }

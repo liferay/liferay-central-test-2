@@ -51,7 +51,7 @@
 
 	<!-- Configurator -->
 
-	<bean id="com.liferay.portal.kernel.messaging.config.MessagingConfigurator" class="com.liferay.portal.kernel.messaging.config.DefaultMessagingConfigurator" init-method="init" destroy-method="destroy">
+	<bean id="messagingConfigurator.misc" class="com.liferay.portal.kernel.messaging.config.DefaultMessagingConfigurator" init-method="init" destroy-method="destroy">
 		<property name="destinations">
 			<list>
 				<ref bean="destination.convert_process" />

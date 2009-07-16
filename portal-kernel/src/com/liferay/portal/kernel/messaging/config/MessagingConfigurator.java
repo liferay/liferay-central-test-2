@@ -41,10 +41,13 @@ public interface MessagingConfigurator {
 
 	public void init();
 
-	public void setDestinationEventListeners(
-		List<DestinationEventListener> destinationEventListener);
-
 	public void setDestinations(List<Destination> destinations);
+
+	public void setDestinationSpecificDestinationEventListener(
+		Map<String, List<DestinationEventListener>> destinationEventListeners);
+
+	public void setGlobalDestinationEventListeners(
+		List<DestinationEventListener> destinationEventListeners);
 
 	public void setMessageListeners(
 		Map<String, List<MessageListener>> messageListeners);

@@ -59,7 +59,9 @@ public abstract class AbstractMessagingConfigurator
 			messageBus.removeDestination(destination.getName());
 		}
 
-		for (DestinationEventListener listener : _destinationEventListeners) {
+		for (DestinationEventListener listener :
+				_globalDestinationEventListeners) {
+
 			messageBus.removeDestinationEventListener(listener);
 		}
 	}
@@ -68,13 +70,27 @@ public abstract class AbstractMessagingConfigurator
 		MessageBus messageBus = getMessageBus();
 
 		for (DestinationEventListener destinationEventListener :
-				_destinationEventListeners) {
+				_globalDestinationEventListeners) {
 
 			messageBus.addDestinationEventListener(destinationEventListener);
 		}
 
 		for (Destination destination : _destinations) {
 			messageBus.addDestination(destination);
+		}
+
+		for (Map.Entry<String, List<DestinationEventListener>>
+				destinationSpecificEventListeners :
+				_destinationSpecificEventListeners.entrySet()) {
+
+			String destinationName = destinationSpecificEventListeners.getKey();
+
+			for (DestinationEventListener destinationEventListener :
+					destinationSpecificEventListeners.getValue()) {
+
+				messageBus.addDestinationEventListener(
+					destinationName, destinationEventListener);				
+			}
 		}
 
 		for (Destination destination : _replacementDestinations) {
@@ -104,14 +120,21 @@ public abstract class AbstractMessagingConfigurator
 		}
 	}
 
-	public void setDestinationEventListeners(
-		List<DestinationEventListener> destinationEventListeners) {
+	public void setDestinationSpecificDestinationEventListener(
+		Map<String, List<DestinationEventListener>> destinationEventListeners) {
 
-		_destinationEventListeners = destinationEventListeners;
+		_destinationSpecificEventListeners = destinationEventListeners;
 	}
 
 	public void setDestinations(List<Destination> destinations) {
 		_destinations = destinations;
+	}
+
+
+	public void setGlobalDestinationEventListeners(
+		List<DestinationEventListener> destinationEventListeners) {
+
+		_globalDestinationEventListeners = destinationEventListeners;
 	}
 
 	public void setMessageListeners(
@@ -127,9 +150,12 @@ public abstract class AbstractMessagingConfigurator
 	protected abstract MessageBus getMessageBus();
 	protected abstract ClassLoader getOperatingClassloader();
 
-	private List<DestinationEventListener> _destinationEventListeners =
-		new ArrayList<DestinationEventListener>();
 	private List<Destination> _destinations = new ArrayList<Destination>();
+	private Map<String, List<DestinationEventListener>>
+		_destinationSpecificEventListeners =
+		new HashMap<String, List<DestinationEventListener>>();
+	private List<DestinationEventListener> _globalDestinationEventListeners =
+		new ArrayList<DestinationEventListener>();
 	private Map<String, List<MessageListener>> _messageListeners  =
 		new HashMap<String, List<MessageListener>>();
 	private List<Destination> _replacementDestinations =

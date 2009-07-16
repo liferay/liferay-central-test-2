@@ -55,12 +55,23 @@ public abstract class BaseDestination implements Destination {
 		open();
 	}
 
+	public void addDestinationEventListener(
+		DestinationEventListener destinationEventListener) {
+		_destinationEventListeners.add(destinationEventListener);
+	}
+
 	public synchronized void close() {
 		close(false);
 	}
 
 	public synchronized void close(boolean force) {
 		doClose(force);
+	}
+
+	public void copyDestinationEventListeners(Destination destination) {
+		for (DestinationEventListener eventListener : _destinationEventListeners) {
+			destination.addDestinationEventListener(eventListener);
+		}
 	}
 
 	public void copyMessageListeners(Destination destination) {
@@ -117,20 +128,29 @@ public abstract class BaseDestination implements Destination {
 		doOpen();
 	}
 
-	public void register(MessageListener messageListener) {
+	public boolean register(MessageListener messageListener) {
 		InvokerMessageListener invokerMessageListener =
 			new InvokerMessageListener(messageListener);
 
-		_messageListeners.add(invokerMessageListener);
+		return _registerMessageListener(invokerMessageListener);
 	}
 
-	public void register(
+	public boolean register(
 		MessageListener messageListener, ClassLoader classloader) {
 
 		InvokerMessageListener invokerMessageListener =
 			new InvokerMessageListener(messageListener, classloader);
 
-		_messageListeners.add(invokerMessageListener);
+		return _registerMessageListener(invokerMessageListener);
+	}
+
+	public void removeDestinationEventListener(
+		DestinationEventListener destinationEventListener) {
+		_destinationEventListeners.remove(destinationEventListener);
+	}
+
+	public void removeDestinationEventListeners() {
+		_destinationEventListeners.clear();
 	}
 
 	public void send(Message message) {
@@ -157,7 +177,7 @@ public abstract class BaseDestination implements Destination {
 		InvokerMessageListener invokerMessageListener =
 			new InvokerMessageListener(messageListener);
 
-		return _messageListeners.remove(invokerMessageListener);
+		return _unregisterMessageListener(invokerMessageListener);
 	}
 
 	public boolean unregister(
@@ -166,7 +186,13 @@ public abstract class BaseDestination implements Destination {
 		InvokerMessageListener invokerMessageListener =
 			new InvokerMessageListener(messageListener, classloader);
 
-		return _messageListeners.remove(invokerMessageListener);
+		return _unregisterMessageListener(invokerMessageListener);
+	}
+
+	public void unregisterMessageListeners() {
+		for (MessageListener messageListener : _messageListeners) {
+			_unregisterMessageListener((InvokerMessageListener)messageListener);
+		}
 	}
 
 	protected abstract void dispatch(
@@ -201,6 +227,21 @@ public abstract class BaseDestination implements Destination {
 		}
 	}
 
+	protected void fireMessageListenerRegisteredEvent(
+		MessageListener messageListener) {
+		for (DestinationEventListener listener : _destinationEventListeners) {
+			listener.messageListenerRegistered(getName(), messageListener);
+		}
+	}
+
+	protected void fireMessageListenerUnregisteredEvent(
+		MessageListener messageListener) {
+		for (DestinationEventListener listener : _destinationEventListeners) {
+			listener.messageListenerUnregistered(
+				getName(), messageListener);
+		}
+	}
+
 	protected ThreadPoolExecutor getThreadPoolExecutor() {
 		return _threadPoolExecutor;
 	}
@@ -211,6 +252,26 @@ public abstract class BaseDestination implements Destination {
 
 	protected int getWorkersMaxSize() {
 		return _workersMaxSize;
+	}
+
+	private boolean _registerMessageListener(
+		InvokerMessageListener invokerMessageListener) {
+		boolean registered = _messageListeners.add(invokerMessageListener);
+		if (registered) {
+			fireMessageListenerRegisteredEvent(
+				invokerMessageListener.getMessageListener());
+		}
+		return registered;
+	}
+
+	private boolean _unregisterMessageListener(
+		InvokerMessageListener invokerMessageListener) {
+		boolean unregistered = _messageListeners.remove(invokerMessageListener);
+		if (unregistered) {
+			fireMessageListenerUnregisteredEvent(
+				invokerMessageListener.getMessageListener());
+		}
+		return unregistered;
 	}
 
 	private static final int _WORKERS_CORE_SIZE = 2;
@@ -226,4 +287,6 @@ public abstract class BaseDestination implements Destination {
 	private int _workersCoreSize;
 	private int _workersMaxSize;
 
+	private Set<DestinationEventListener> _destinationEventListeners =
+		new ConcurrentHashSet<DestinationEventListener>();
 }

@@ -37,6 +37,10 @@ public interface MessageBus {
 	public void addDestinationEventListener(
 		DestinationEventListener destinationEventListener);
 
+	public void addDestinationEventListener(
+		String destinationName,
+		DestinationEventListener destinationEventListener);
+
 	public int getDestinationCount();
 
 	public Collection<String> getDestinationNames();
@@ -47,12 +51,16 @@ public interface MessageBus {
 
 	public boolean hasMessageListener(String destinationName);
 
-	public void registerMessageListener(
+	public boolean registerMessageListener(
 		String destinationName, MessageListener messageListener);
 
 	public Destination removeDestination(String destinationName);
 
 	public void removeDestinationEventListener(
+		DestinationEventListener destinationEventListener);
+
+	public void removeDestinationEventListener(
+		String destinationName,
 		DestinationEventListener destinationEventListener);
 
 	public void replace(Destination destination);
