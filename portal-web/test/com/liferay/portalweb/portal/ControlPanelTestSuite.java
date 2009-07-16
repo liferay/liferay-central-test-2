@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portal;
 
 import com.liferay.portalweb.portal.controlpanel.admin.AdminTests;
+import com.liferay.portalweb.portal.controlpanel.bookmarks.BookmarksTests;
 import com.liferay.portalweb.portal.controlpanel.communities.CommunitiesTests;
 import com.liferay.portalweb.portal.controlpanel.polls.PollsTests;
 import com.liferay.portalweb.portal.controlpanel.portal.PortalTests;
@@ -46,6 +47,7 @@ public class ControlPanelTestSuite extends BaseTests {
 
 		testSuite.addTest(LoginTests.suite());
 		testSuite.addTest(AdminTests.suite());
+		testSuite.addTest(BookmarksTests.suite());
 		testSuite.addTest(CommunitiesTests.suite());
 		testSuite.addTest(PollsTests.suite());
 		testSuite.addTest(PortalTests.suite());
