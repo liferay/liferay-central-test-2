@@ -56,6 +56,8 @@ scheduledPublishEventsURL.setParameter("destinationName", localPublishing ? Dest
 
 <script type="text/javascript">
 	function <portlet:namespace />schedulePublishEvent() {
+		var oldCMD = document.<portlet:namespace />exportPagesFm.<portlet:namespace /><%= Constants.CMD %>.value;
+
 		document.<portlet:namespace />exportPagesFm.<portlet:namespace /><%= Constants.CMD %>.value = '<%= scheduleCMD %>';
 
 		var addButton = jQuery('#<portlet:namespace />addButton');
@@ -69,10 +71,14 @@ scheduledPublishEventsURL.setParameter("destinationName", localPublishing ? Dest
 				}
 			}
 		);
+
+		document.<portlet:namespace />exportPagesFm.<portlet:namespace /><%= Constants.CMD %>.value = oldCMD;
 	}
 
 	function <portlet:namespace />unschedulePublishEvent(jobName) {
 		if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-delete-the-scheduled-event") %>')) {
+			var oldCMD = document.<portlet:namespace />exportPagesFm.<portlet:namespace /><%= Constants.CMD %>.value;
+
 			document.<portlet:namespace />exportPagesFm.<portlet:namespace /><%= Constants.CMD %>.value = '<%= unscheduleCMD %>';
 			document.<portlet:namespace />exportPagesFm.<portlet:namespace />jobName.value = jobName;
 
@@ -83,6 +89,8 @@ scheduledPublishEventsURL.setParameter("destinationName", localPublishing ? Dest
 					}
 				}
 			);
+
+			document.<portlet:namespace />exportPagesFm.<portlet:namespace /><%= Constants.CMD %>.value = oldCMD;
 		}
 	}
 
