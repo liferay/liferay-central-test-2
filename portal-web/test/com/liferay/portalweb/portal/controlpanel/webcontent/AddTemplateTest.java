@@ -64,7 +64,7 @@ public class AddTemplateTest extends BaseTestCase {
 			RuntimeVariables.replace("This is a test web content template!"));
 		selenium.type("_15_xsl",
 			RuntimeVariables.replace(
-				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\webcontent\\Template.htm"));
+				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portal\\controlpanel\\webcontent\\Template.htm"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
