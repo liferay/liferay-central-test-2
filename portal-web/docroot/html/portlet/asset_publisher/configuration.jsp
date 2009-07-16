@@ -71,6 +71,9 @@ configurationActionURL.setParameter("portletResource", portletResource);
 		if (document.<portlet:namespace />fm.<portlet:namespace />groupIds) {
 			document.<portlet:namespace />fm.<portlet:namespace />groupIds.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />currentGroupIds);
 		}
+		if (document.<portlet:namespace />fm.<portlet:namespace />classNameIds) {
+			document.<portlet:namespace />fm.<portlet:namespace />classNameIds.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />currentClassNameIds);
+		}
 
 		document.<portlet:namespace />fm.<portlet:namespace />metadataFields.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />currentMetadataFields);
 
@@ -362,31 +365,57 @@ configurationActionURL.setParameter("portletResource", portletResource);
 							leftList="<%= groupsLeftList %>"
 							rightList="<%= groupsRightList %>"
 						/>
-					</liferay-ui:panel>
-					<liferay-ui:panel id='assetPublisherQueryLogic' title='<%= LanguageUtil.get(pageContext, "query-logic") %>' collapsible="<%= true %>" persistState="<%= true %>" extended="<%= true %>">
-						<liferay-ui:asset-tags-error />
-
-						<liferay-ui:message key="asset-entry-type" />
-
-						<select name="<portlet:namespace/>classNameId">
-							<option value=""><liferay-ui:message key="all" /></option>
-
-							<%
-							AssetEntryType[] assetEntryTypes = AssetEntryServiceUtil.getEntryTypes(themeDisplay.getLocale().toString());
-
-							for (int i = 0; i < assetEntryTypes.length; i++) {
-							%>
-
-								<option <%= (classNameId == assetEntryTypes[i].getClassNameId()) ? "selected" : "" %> value="<%= assetEntryTypes[i].getClassNameId() %>"><liferay-ui:message key='<%= "model.resource." + assetEntryTypes[i].getClassName() %>' /></option>
-
-							<%
-							}
-							%>
-
-						</select>
 
 						<br /><br />
 
+						<liferay-ui:message key="asset-entry-type" />
+
+						<input name="<portlet:namespace />classNameIds" type="hidden" value="" />
+
+						<%
+						Set<Long> availableClassNameIdsSet = SetUtil.fromArray(availableClassNameIds);
+
+						// Left list
+
+						List<KeyValuePair> typesLeftList = new ArrayList<KeyValuePair>();
+
+						for (long classNameId : classNameIds) {
+							ClassName className = ClassNameServiceUtil.getClassName(classNameId);
+
+							typesLeftList.add(new KeyValuePair(String.valueOf(classNameId), LanguageUtil.get(pageContext, "model.resource." + className.getValue())));
+						}
+
+						// Right list
+
+						List<KeyValuePair> typesRightList = new ArrayList<KeyValuePair>();
+
+						Arrays.sort(classNameIds);
+
+						for(long classNameId : availableClassNameIdsSet) {
+							if (Arrays.binarySearch(classNameIds, classNameId) < 0) {
+								ClassName className = ClassNameServiceUtil.getClassName(classNameId);
+
+								typesRightList.add(new KeyValuePair(String.valueOf(classNameId), LanguageUtil.get(pageContext, "model.resource." + className.getValue())));
+							}
+						}
+
+						typesRightList = ListUtil.sort(typesRightList, new KeyValuePairComparator(false, true));
+						%>
+
+						<liferay-ui:input-move-boxes
+							formName="fm"
+							leftTitle="current"
+							rightTitle="available"
+							leftBoxName="currentClassNameIds"
+							rightBoxName="availableClassNameIds"
+							leftReorder="true"
+							leftList="<%= typesLeftList %>"
+							rightList="<%= typesRightList %>"
+						/>
+
+					</liferay-ui:panel>
+					<liferay-ui:panel id='assetPublisherQueryLogic' title='<%= LanguageUtil.get(pageContext, "query-logic") %>' collapsible="<%= true %>" persistState="<%= true %>" extended="<%= true %>">
+						<liferay-ui:asset-tags-error />
 						<div id="<portlet:namespace />queryRules">
 							<fieldset class="aui-block-labels">
 								<legend><liferay-ui:message key="displayed-assets-must-match-these-rules" /></legend>

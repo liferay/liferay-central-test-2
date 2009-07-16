@@ -231,7 +231,8 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 
 		long[] groupIds = StringUtil.split(
 			ParamUtil.getString(actionRequest, "groupIds"), 0L);
-		long classNameId = ParamUtil.getLong(actionRequest, "classNameId");
+		long[] classNameIds = StringUtil.split(
+			ParamUtil.getString(actionRequest, "classNameIds"), 0L);
 		long assetVocabularyId = ParamUtil.getLong(
 			actionRequest, "assetVocabularyId");
 		String displayStyle = ParamUtil.getString(
@@ -275,7 +276,8 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 		preferences.setValue("merge-url-tags", String.valueOf(mergeUrlTags));
 
 		preferences.setValues("group-ids", ArrayUtil.toStringArray(groupIds));
-		preferences.setValue("class-name-id", String.valueOf(classNameId));
+		preferences.setValues(
+			"class-name-ids", ArrayUtil.toStringArray(classNameIds));
 		preferences.setValue(
 			"asset-vocabulary-id", String.valueOf(assetVocabularyId));
 		preferences.setValue("display-style", displayStyle);
