@@ -71,6 +71,7 @@ configurationActionURL.setParameter("portletResource", portletResource);
 		if (document.<portlet:namespace />fm.<portlet:namespace />groupIds) {
 			document.<portlet:namespace />fm.<portlet:namespace />groupIds.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />currentGroupIds);
 		}
+
 		if (document.<portlet:namespace />fm.<portlet:namespace />classNameIds) {
 			document.<portlet:namespace />fm.<portlet:namespace />classNameIds.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />currentClassNameIds);
 		}
@@ -391,7 +392,7 @@ configurationActionURL.setParameter("portletResource", portletResource);
 
 						Arrays.sort(classNameIds);
 
-						for(long classNameId : availableClassNameIdsSet) {
+						for (long classNameId : availableClassNameIdsSet) {
 							if (Arrays.binarySearch(classNameIds, classNameId) < 0) {
 								ClassName className = ClassNameServiceUtil.getClassName(classNameId);
 
@@ -412,10 +413,10 @@ configurationActionURL.setParameter("portletResource", portletResource);
 							leftList="<%= typesLeftList %>"
 							rightList="<%= typesRightList %>"
 						/>
-
 					</liferay-ui:panel>
 					<liferay-ui:panel id='assetPublisherQueryLogic' title='<%= LanguageUtil.get(pageContext, "query-logic") %>' collapsible="<%= true %>" persistState="<%= true %>" extended="<%= true %>">
 						<liferay-ui:asset-tags-error />
+
 						<div id="<portlet:namespace />queryRules">
 							<fieldset class="aui-block-labels">
 								<legend><liferay-ui:message key="displayed-assets-must-match-these-rules" /></legend>

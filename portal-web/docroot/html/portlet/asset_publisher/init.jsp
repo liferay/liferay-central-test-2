@@ -128,9 +128,9 @@ if (Validator.isNull(selectionStyle)) {
 
 long[] groupIds = GetterUtil.getLongValues(preferences.getValues("group-ids", new String[] {String.valueOf(scopeGroupId)}));
 
-AssetEntryType[] assetEntryTypes = AssetEntryServiceUtil.getEntryTypes(themeDisplay.getLocale().toString());
+AssetEntryType[] assetEntryTypes = AssetEntryServiceUtil.getEntryTypes(themeDisplay.getLanguageId());
 
-long [] availableClassNameIds = new long[assetEntryTypes.length];
+long[] availableClassNameIds = new long[assetEntryTypes.length];
 
 for (int i = 0; i < assetEntryTypes.length; i++) {
 	availableClassNameIds[i] = assetEntryTypes[i].getClassNameId();
@@ -138,7 +138,7 @@ for (int i = 0; i < assetEntryTypes.length; i++) {
 
 long[] classNameIds = availableClassNameIds;
 
-if ((Validator.equals(selectionStyle, "dynamic")) && (preferences.getValues("class-name-ids", null) != null)) {
+if (Validator.equals(selectionStyle, "dynamic") && (preferences.getValues("class-name-ids", null) != null)) {
 	classNameIds = GetterUtil.getLongValues(preferences.getValues("class-name-ids", null));
 }
 
