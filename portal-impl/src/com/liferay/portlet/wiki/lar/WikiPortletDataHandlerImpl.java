@@ -451,7 +451,9 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 				}
 			}
 
-			if (context.getBooleanParameter(_NAMESPACE, "comments")) {
+			if (context.getBooleanParameter(_NAMESPACE, "comments") &&
+				page.isHead()) {
+
 				context.importComments(
 					WikiPage.class, page.getResourcePrimKey(),
 					existingPage.getResourcePrimKey(), context.getGroupId());
