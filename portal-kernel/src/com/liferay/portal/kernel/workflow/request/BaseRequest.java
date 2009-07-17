@@ -22,22 +22,24 @@
 
 package com.liferay.portal.kernel.workflow.request;
 
-import java.io.Serializable;
-import java.lang.reflect.Method;
-import java.util.Arrays;
-
 import com.liferay.portal.kernel.workflow.UserCredential;
 import com.liferay.portal.kernel.workflow.WorkflowException;
 
+import java.io.Serializable;
+
+import java.lang.reflect.Method;
+
+import java.util.Arrays;
+
 /**
  * <a href="BaseRequest.java.html"><b><i>View Source</i></b></a>
- * 
+ *
  * <p>
  * The base request acts as the basic implementation of a workflow API request
  * transported through the message bus. It contains the {@link Method} to be
  * invoked on its target as well as the arguments needed for the invocation.
  * </p>
- * 
+ *
  * <p>
  * Additionally, most methods provide a {@link UserCredential} representing the
  * calling user, some of its attributes as well as its role set to avoid the
@@ -45,13 +47,13 @@ import com.liferay.portal.kernel.workflow.WorkflowException;
  * information. Every method most likely being transitional (not read only)
  * should provide its calling user.
  * </p>
- * 
+ *
  * <p>
  * The calling user (if it was passed on) will be made available through
  * {@link WorkflowCallingUser#getCallingUserCredential()} before the method is
  * invoked and is immediately removed, if the method was finished.
  * </p>
- * 
+ *
  * @author Shuyang Zhou
  * @author Micha Kiener
  */
@@ -60,12 +62,12 @@ public class BaseRequest implements Serializable {
 	/**
 	 * Creates a new base request object by providing a method and its arguments
 	 * needed as well as an optional credential of the calling user.
-	 * 
+	 *
 	 * @param method the method to be invoked through this request
 	 * @param callingUserCredential the optional credential of the calling user,
-	 *            if any, <code>null</code>, if not available
+	 *			if any, <code>null</code>, if not available
 	 * @param args the arguments to be used for the method being invoked in the
-	 *            same order as the signature of the method
+	 *			same order as the signature of the method
 	 */
 	protected BaseRequest(
 		Method method, UserCredential callingUserCredential, Object... args) {
@@ -79,17 +81,18 @@ public class BaseRequest implements Serializable {
 	 * returns its value. Before the method is being invoked, the calling user
 	 * credential is attached, if available, and after the invocation removed
 	 * again through a thread local.
-	 * 
+	 *
 	 * @param implObject the object to invoke the method on
 	 * @return the return value as being provided by the method invocation
 	 * @throws WorkflowException is thrown, if any exception occured within the
-	 *             invocation
+	 *			 invocation
 	 */
 	public Object execute(Object implObject)
 		throws WorkflowException {
 		try {
 			// attach the calling user credential, if available
-			WorkflowCallingUser.setCallingUserCredential(_callingUserCredential);
+			WorkflowCallingUser.setCallingUserCredential(
+				_callingUserCredential);
 			return _method.invoke(implObject, _args);
 		}
 		catch (Exception ex) {
@@ -101,10 +104,10 @@ public class BaseRequest implements Serializable {
 			WorkflowCallingUser.setCallingUserCredential(null);
 		}
 	}
-	
+
 	/**
 	 * @return the credential of the calling user, if any provided by the
-	 *         request, <code>null</code> otherwise
+	 *		 request, <code>null</code> otherwise
 	 */
 	public UserCredential getCallingUserCredential() {
 		return _callingUserCredential;
@@ -151,4 +154,5 @@ public class BaseRequest implements Serializable {
 	private Object[] _args;
 	private UserCredential _callingUserCredential;
 	private Method _method;
+
 }

@@ -22,9 +22,6 @@
 
 package com.liferay.portal.kernel.workflow.proxy;
 
-import java.util.List;
-import java.util.Map;
-
 import com.liferay.portal.kernel.messaging.MessageBusException;
 import com.liferay.portal.kernel.messaging.sender.SingleDestinationSynchronousMessageSender;
 import com.liferay.portal.kernel.workflow.WorkflowException;
@@ -32,6 +29,9 @@ import com.liferay.portal.kernel.workflow.WorkflowInstanceHistory;
 import com.liferay.portal.kernel.workflow.WorkflowInstanceInfo;
 import com.liferay.portal.kernel.workflow.WorkflowInstanceManager;
 import com.liferay.portal.kernel.workflow.request.WorkflowInstanceRequest;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * <a href="WorkflowInstanceManagerProxy.java.html"><b><i>View Source</i></b>
@@ -269,7 +269,8 @@ public class WorkflowInstanceManagerProxy implements WorkflowInstanceManager {
 					_synchronousMessageSender.send(
 						WorkflowInstanceRequest.
 							createSignalWorkflowInstanceRequest(
-								workflowInstanceId, activityName, attributes, callingUserId));
+								workflowInstanceId, activityName, attributes,
+								callingUserId));
 			if (response.hasError()) {
 				throw response.getException();
 			}
@@ -285,7 +286,8 @@ public class WorkflowInstanceManagerProxy implements WorkflowInstanceManager {
 
 	public WorkflowInstanceInfo startWorkflowInstance(
 			String workflowDefinitionName, Integer workflowDefinitionVersion,
-			Map<String, Object> context, long callingUserId) throws WorkflowException {
+			Map<String, Object> context, long callingUserId)
+		throws WorkflowException {
 		try {
 			WorkflowResultContainer<WorkflowInstanceInfo> response =
 				(WorkflowResultContainer<WorkflowInstanceInfo>)
@@ -293,7 +295,8 @@ public class WorkflowInstanceManagerProxy implements WorkflowInstanceManager {
 						WorkflowInstanceRequest.
 							createStartWorkflowInstanceRequest(
 								workflowDefinitionName,
-								workflowDefinitionVersion, context, callingUserId));
+								workflowDefinitionVersion, context,
+								callingUserId));
 			if (response.hasError()) {
 				throw response.getException();
 			}
@@ -309,7 +312,8 @@ public class WorkflowInstanceManagerProxy implements WorkflowInstanceManager {
 
 	public WorkflowInstanceInfo startWorkflowInstance(
 			String workflowDefinitionName, Integer workflowDefinitionVersion,
-			Map<String, Object> context, long callingUserId, String activityName)
+			Map<String, Object> context, long callingUserId,
+			String activityName)
 		throws WorkflowException {
 		try {
 			WorkflowResultContainer<WorkflowInstanceInfo> response =
@@ -318,8 +322,8 @@ public class WorkflowInstanceManagerProxy implements WorkflowInstanceManager {
 						WorkflowInstanceRequest.
 							createStartWorkflowInstanceRequest(
 								workflowDefinitionName,
-								workflowDefinitionVersion, context, callingUserId,
-								activityName));
+								workflowDefinitionVersion, context,
+								callingUserId, activityName));
 			if (response.hasError()) {
 				throw response.getException();
 			}
@@ -371,7 +375,8 @@ public class WorkflowInstanceManagerProxy implements WorkflowInstanceManager {
 							createStartWorkflowInstanceRequest(
 								workflowDefinitionName,
 								workflowDefinitionVersion, relationType,
-								relationId, context, callingUserId, activityName));
+								relationId, context, callingUserId,
+								activityName));
 			if (response.hasError()) {
 				throw response.getException();
 			}

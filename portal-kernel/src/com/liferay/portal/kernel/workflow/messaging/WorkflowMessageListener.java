@@ -25,6 +25,7 @@ package com.liferay.portal.kernel.workflow.messaging;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.messaging.Message;
+import com.liferay.portal.kernel.messaging.MessageBus;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.messaging.MessageListener;
 import com.liferay.portal.kernel.util.Validator;
@@ -32,82 +33,101 @@ import com.liferay.portal.kernel.workflow.WorkflowException;
 import com.liferay.portal.kernel.workflow.proxy.WorkflowResultContainer;
 import com.liferay.portal.kernel.workflow.request.BaseRequest;
 
+import java.util.Formatter;
+
 /**
  * <a href="WorkflowMessageListener.java.html"><b><i>View Source</i></b></a>
- * 
+ *
  * <p>
  * The generic message listener for workflow messages. The object (manager) to
  * invoke the method on has to be injected using constructor injection as well
  * as the expected request class to be handled by this listener.
  * </p>
- * 
+ *
  * @author Micha Kiener
  * @author Shuyang Zhou
- * 
+ *
  */
 public class WorkflowMessageListener implements MessageListener {
 
 	/**
 	 * Constructor using the manager to invoke methods on and the expected
 	 * request class this listener will be able to handle.
-	 * 
+	 *
 	 * @param manager the manager instance to invoke methods on given by the
-	 *            payload of the message
+	 *			payload of the message
 	 * @param requestClazz the expected request class as the payload of the
-	 *            message being handled by this listener
+	 *			message being handled by this listener
 	 */
 	public WorkflowMessageListener(
-		Object manager, Class<? extends BaseRequest> requestClazz) {
+		Object manager, Class<? extends BaseRequest> requestClazz,
+		MessageBus messageBus) {
 		_manager = manager;
 		_requestClazz = requestClazz;
+		_messageBus=messageBus;
 	}
 
 	/**
-	 * @see com.liferay.portal.kernel.messaging.MessageListener#receive(com.liferay.portal.kernel.messaging.Message)
+	 * @see com.liferay.portal.kernel.messaging.MessageListener#
+	 * receive(com.liferay.portal.kernel.messaging.Message)
 	 */
 	public void receive(Message message) {
+
 		Object payload = message.getPayload();
-		
-		// there must always be a payload having the request
-		if (payload == null) {
-			_log.error("Missing TaskInstanceRequest.");
+		String responseDestination = message.getResponseDestinationName();
+
+		WorkflowResultContainer resultContainer = new WorkflowResultContainer();
+		WorkflowException workflowException = null;
+		try {
+			// there must always be a payload having the request
+			if (payload == null) {
+				workflowException =
+					new WorkflowException(MISSING_REQUEST_ERROR);
+				_log.error(MISSING_REQUEST_ERROR);
+			}
+			// check for being the right request type
+			else if (!_requestClazz.isAssignableFrom(payload.getClass())) {
+				String errorMessage =
+					new Formatter().format(
+						WRONG_REQUEST_ERROR, _requestClazz.getName(),
+						payload.getClass().getName()).
+					toString();
+
+				workflowException = new WorkflowException(errorMessage);
+				_log.error(errorMessage);
+			}
+			else {
+
+				BaseRequest request = (BaseRequest) payload;
+				resultContainer.setResult(request.execute(_manager));
+			}
 		}
-		
-		// check for being the right request type
-		else if (!_requestClazz.isAssignableFrom(payload.getClass())) {
-			_log.error("Payload type is not from expected type [" +
-				_requestClazz.getName() + "], but was [" +
-				payload.getClass().getName() + "]");
+		catch (WorkflowException ex) {
+			workflowException = new WorkflowException(EXECUTE_ERROR);
+			_log.error(EXECUTE_ERROR, ex);
+
 		}
-		else {
-			BaseRequest request = (BaseRequest) payload;
-			String responseDestination = message.getResponseDestinationName();
-			Object result = null;
-			try {
-				result = request.execute(_manager);
-				if (request.hasReturnValue() == false) {
-					// setup dummy result to satisfy MessageBus
-					result = new Object();
-				}
+		finally {
+			if (Validator.isNotNull(responseDestination)) {
+				Message responseMessage =
+					MessageBusUtil.createResponseMessage(message);
+				resultContainer.setException(workflowException);
+				responseMessage.setPayload(resultContainer);
+				_messageBus.sendMessage(
+					responseDestination, responseMessage);
 			}
-			catch (WorkflowException ex) {
-				_log.error("Unable to execute request.", ex);
-			}
-			finally {
-				if (Validator.isNotNull(responseDestination)) {
-					Message responseMessage =
-						MessageBusUtil.createResponseMessage(message);
-					responseMessage.setPayload(new WorkflowResultContainer<Object>(
-						result));
-					MessageBusUtil.sendMessage(
-						responseDestination, responseMessage);
-				}
-			}
+
 		}
 	}
 
 	private static Log _log =
 		LogFactoryUtil.getLog(WorkflowMessageListener.class);
+	private static String MISSING_REQUEST_ERROR = "Missing workflow request.";
+	private static String WRONG_REQUEST_ERROR =
+		"Payload type is not from expected type [%s], but was [%s]";
+	private static String EXECUTE_ERROR = "Unable to execute request.";
 	private final Object _manager;
 	private final Class<? extends BaseRequest> _requestClazz;
+	private final MessageBus _messageBus;
+
 }

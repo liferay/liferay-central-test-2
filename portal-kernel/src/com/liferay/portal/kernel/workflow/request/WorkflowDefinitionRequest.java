@@ -22,12 +22,12 @@
 
 package com.liferay.portal.kernel.workflow.request;
 
-import java.lang.reflect.Method;
-
 import com.liferay.portal.kernel.workflow.WorkflowDefinition;
 import com.liferay.portal.kernel.workflow.WorkflowDefinitionManager;
 import com.liferay.portal.kernel.workflow.WorkflowException;
 import com.liferay.portal.kernel.workflow.WorkflowUtil;
+
+import java.lang.reflect.Method;
 
 /**
  * <a href="WorkflowDefinitionRequest.java.html"><b><i>View Source</i></b></a>

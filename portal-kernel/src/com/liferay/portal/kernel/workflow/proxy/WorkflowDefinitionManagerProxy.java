@@ -22,9 +22,6 @@
 
 package com.liferay.portal.kernel.workflow.proxy;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.messaging.MessageBusException;
@@ -33,6 +30,9 @@ import com.liferay.portal.kernel.workflow.WorkflowDefinition;
 import com.liferay.portal.kernel.workflow.WorkflowDefinitionManager;
 import com.liferay.portal.kernel.workflow.WorkflowException;
 import com.liferay.portal.kernel.workflow.request.WorkflowDefinitionRequest;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <a href="WorkflowDefinitionManagerProxy.java.html"><b><i>View Source</i></b>

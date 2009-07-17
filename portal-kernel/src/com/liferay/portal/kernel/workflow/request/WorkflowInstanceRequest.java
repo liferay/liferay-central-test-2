@@ -22,12 +22,13 @@
 
 package com.liferay.portal.kernel.workflow.request;
 
-import java.lang.reflect.Method;
-import java.util.Map;
-
 import com.liferay.portal.kernel.workflow.WorkflowException;
 import com.liferay.portal.kernel.workflow.WorkflowInstanceManager;
 import com.liferay.portal.kernel.workflow.WorkflowUtil;
+
+import java.lang.reflect.Method;
+
+import java.util.Map;
 
 /**
  * <a href="WorkflowInstanceRequest.java.html"><b><i>View Source</i></b></a>
@@ -137,7 +138,8 @@ public class WorkflowInstanceRequest extends BaseRequest {
 
 	public static WorkflowInstanceRequest createStartWorkflowInstanceRequest(
 			String workflowDefinitionName, Integer workflowDefinitionVersion,
-			Map<String, Object> context, long callingUserId, String activityName)
+			Map<String, Object> context, long callingUserId,
+			String activityName)
 		throws WorkflowException {
 		return new WorkflowInstanceRequest(
 			startWorkflowInstance_String_Integer_Map_long_String,
@@ -226,7 +228,8 @@ public class WorkflowInstanceRequest extends BaseRequest {
 				clazz.getMethod("removeWorkflowInstance", long.class);
 			signalWorkflowInstance_long_Map_long =
 				clazz.getMethod(
-					"signalWorkflowInstance", long.class, Map.class, long.class);
+					"signalWorkflowInstance", long.class, Map.class,
+					long.class);
 			signalWorkflowInstance_long_String_Map_long =
 				clazz.getMethod(
 					"signalWorkflowInstance", long.class, String.class,

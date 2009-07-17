@@ -22,9 +22,6 @@
 
 package com.liferay.portal.kernel.workflow.proxy;
 
-import java.util.List;
-import java.util.Map;
-
 import com.liferay.portal.kernel.messaging.MessageBusException;
 import com.liferay.portal.kernel.messaging.sender.SingleDestinationSynchronousMessageSender;
 import com.liferay.portal.kernel.workflow.TaskInstanceInfo;
@@ -32,6 +29,9 @@ import com.liferay.portal.kernel.workflow.TaskInstanceManager;
 import com.liferay.portal.kernel.workflow.UserCredential;
 import com.liferay.portal.kernel.workflow.WorkflowException;
 import com.liferay.portal.kernel.workflow.request.TaskInstanceRequest;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * <a href="TaskInstanceManagerProxy.java.html"><b><i>View Source</i></b></a>
@@ -57,7 +57,8 @@ public class TaskInstanceManagerProxy implements TaskInstanceManager {
 					_synchronousMessageSender.send(
 						TaskInstanceRequest.
 							createAssignTaskInstanceToRoleRequest(
-								taskInstanceId, roleId, comment, attributes, callingUserId));
+								taskInstanceId, roleId, comment, attributes,
+								callingUserId));
 			if (response.hasError()) {
 				throw response.getException();
 			}
@@ -81,7 +82,7 @@ public class TaskInstanceManagerProxy implements TaskInstanceManager {
 					_synchronousMessageSender.send(
 						TaskInstanceRequest.
 							createAssignTaskInstanceToUserRequest(
-								taskInstanceId, userCredential, comment,
+								taskInstanceId, userCredential ,comment,
 								attributes, callingUserId));
 			if (response.hasError()) {
 				throw response.getException();
@@ -104,7 +105,8 @@ public class TaskInstanceManagerProxy implements TaskInstanceManager {
 				(WorkflowResultContainer<TaskInstanceInfo>)
 					_synchronousMessageSender.send(
 						TaskInstanceRequest.createCompleteTaskInstanceRequest(
-							taskInstanceId, callingUserId, comment, attributes));
+							taskInstanceId, callingUserId, comment,
+							attributes));
 			if (response.hasError()) {
 				throw response.getException();
 			}
