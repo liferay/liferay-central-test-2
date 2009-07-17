@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -28,11 +28,18 @@ import com.liferay.portal.kernel.search.TermQuery;
  * <a href="TermQueryImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael C. Han
+ *
  */
 public class TermQueryImpl implements TermQuery {
+
 	public TermQueryImpl(QueryTerm queryTerm) {
 		_queryTerm = queryTerm;
 	}
 
+	public QueryTerm getQueryTerm() {
+		return _queryTerm;
+	}
+
 	private QueryTerm _queryTerm;
+
 }

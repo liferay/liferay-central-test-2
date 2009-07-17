@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -29,38 +29,40 @@ import com.liferay.portal.kernel.search.Query;
 /**
  * <a href="BooleanClauseImpl.java.html"><b><i>View Source</i></b></a>
  *
- *
  * @author Michael C. Han
+ *
  */
 public class BooleanClauseImpl implements BooleanClause {
 
 	public BooleanClauseImpl(
-		 Query query, BooleanClauseOccur occur,
-		 boolean prohibited, boolean required) {
-		 _query = query;
-		 _occur = occur;
-		 _prohibited = prohibited;
-		 _required = required;
+		Query query, BooleanClauseOccur occur, boolean prohibited,
+		boolean required) {
+
+		_query = query;
+		_occur = occur;
+		_prohibited = prohibited;
+		_required = required;
 	 }
 
 	public BooleanClauseOccur getOccur() {
 		return _occur;
 	}
 
-	public boolean isProhibited() {
-		return _prohibited;
-	}
-
 	public Query getQuery() {
 		return _query;
+	}
+
+	public boolean isProhibited() {
+		return _prohibited;
 	}
 
 	public boolean isRequired() {
 		return _required;
 	}
 
-	private boolean _prohibited;
-	private boolean _required;
 	private BooleanClauseOccur _occur;
+	private boolean _prohibited;
 	private Query _query;
+	private boolean _required;
+
 }

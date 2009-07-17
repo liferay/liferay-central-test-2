@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -22,14 +22,14 @@
 
 package com.liferay.portal.search.generic;
 
-import com.liferay.portal.kernel.search.TermQueryFactory;
 import com.liferay.portal.kernel.search.TermQuery;
+import com.liferay.portal.kernel.search.TermQueryFactory;
 
 /**
- * <a href="TermQueryFactoryImpl.java.html"><b><i>View
- * Source</i></b></a>
+ * <a href="TermQueryFactoryImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael C. Han
+ *
  */
 public class TermQueryFactoryImpl implements TermQueryFactory {
 
@@ -40,5 +40,5 @@ public class TermQueryFactoryImpl implements TermQueryFactory {
 	public TermQuery create(String field, String value) {
 		return new TermQueryImpl(new QueryTerm(field, value));
 	}
-}
 
+}

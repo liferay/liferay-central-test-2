@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -36,10 +36,13 @@ import java.util.List;
  * <a href="BooleanQueryImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael C. Han
+ *
  */
 public class BooleanQueryImpl implements BooleanQuery {
+
 	public void add(Query query, BooleanClauseOccur occur)
 		throws ParseException {
+
 		if (occur.equals(BooleanClauseOccur.MUST)) {
 			_clauses.add(new BooleanClauseImpl(query, occur, false, true));
 		}
@@ -49,7 +52,8 @@ public class BooleanQueryImpl implements BooleanQuery {
 		else if (occur.equals(BooleanClauseOccur.MUST_NOT)) {
 			_clauses.add(new BooleanClauseImpl(query, occur, true, true));
 		}
-		throw new ParseException("Invalid occur clause: " + occur);
+
+		throw new ParseException("Invalid occur clause " + occur);
 	}
 
 	public void addExactTerm(String field, boolean value) {
@@ -95,12 +99,12 @@ public class BooleanQueryImpl implements BooleanQuery {
 	public void addExactTerm(String field, String value) {
 		TermQueryImpl termQuery = new TermQueryImpl(
 			new QueryTerm(field, String.valueOf(value)));
-		
+
 		try {
 			add(termQuery, BooleanClauseOccur.SHOULD);
 		}
-		catch (ParseException e) {
-			throw new IllegalStateException("Bad query implementation", e);
+		catch (ParseException pe) {
+			throw new IllegalStateException("Bad query implementation", pe);
 		}
 	}
 
@@ -150,20 +154,21 @@ public class BooleanQueryImpl implements BooleanQuery {
 
 	public void addRequiredTerm(String field, String value, boolean like) {
 		Query query = null;
-		
+
 		if (like) {
 			query = new WildCardQueryImpl(
 				new QueryTerm(field, String.valueOf(value)));
 		}
 		else {
-			query = new TermQueryImpl(new QueryTerm(field, String.valueOf(value)));
+			query = new TermQueryImpl(
+				new QueryTerm(field, String.valueOf(value)));
 		}
 
 		try {
 			add(query , BooleanClauseOccur.MUST);
 		}
-		catch (ParseException e) {
-			throw new IllegalStateException("Bad query implementation", e);
+		catch (ParseException pe) {
+			throw new IllegalStateException("Bad query implementation", pe);
 		}
 	}
 
@@ -177,6 +182,7 @@ public class BooleanQueryImpl implements BooleanQuery {
 
 	public void addTerm(String field, String value, boolean like)
 		throws ParseException {
+
 		Query query = null;
 
 		if (like) {
@@ -184,15 +190,11 @@ public class BooleanQueryImpl implements BooleanQuery {
 				new QueryTerm(field, String.valueOf(value)));
 		}
 		else {
-			query = new TermQueryImpl(new QueryTerm(field, String.valueOf(value)));
+			query = new TermQueryImpl(
+				new QueryTerm(field, String.valueOf(value)));
 		}
-		
-		try {
-			add(query , BooleanClauseOccur.SHOULD);
-		}
-		catch (ParseException e) {
-			throw new IllegalStateException("Bad query implementation", e);
-		}
+
+		add(query , BooleanClauseOccur.SHOULD);
 	}
 
 	public List<BooleanClause> clauses() {
@@ -200,4 +202,5 @@ public class BooleanQueryImpl implements BooleanQuery {
 	}
 
 	private List<BooleanClause> _clauses = new ArrayList<BooleanClause>();
+
 }

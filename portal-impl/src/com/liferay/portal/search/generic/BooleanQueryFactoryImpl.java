@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -26,10 +26,10 @@ import com.liferay.portal.kernel.search.BooleanQuery;
 import com.liferay.portal.kernel.search.BooleanQueryFactory;
 
 /**
- * <a href="BooleanQueryFactoryImpl.java.html"><b><i>View
- * Source</i></b></a>
+ * <a href="BooleanQueryFactoryImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael C. Han
+ *
  */
 public class BooleanQueryFactoryImpl implements BooleanQueryFactory {
 

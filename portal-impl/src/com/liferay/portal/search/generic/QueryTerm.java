@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -26,8 +26,10 @@ package com.liferay.portal.search.generic;
  * <a href="QueryTerm.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael C. Han
+ *
  */
 public class QueryTerm {
+
 	public QueryTerm(String field, String value) {
 		_field = field;
 		_value = value;
@@ -43,4 +45,5 @@ public class QueryTerm {
 
 	private String _field;
 	private String _value;
+
 }
