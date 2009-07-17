@@ -30,6 +30,7 @@ StringBuilder sb = new StringBuilder();
 _buildGuestGroupBreadcrumb(themeDisplay, sb);
 _buildParentGroupsBreadcrumb(selLayout.getLayoutSet(), portletURL, themeDisplay, sb);
 _buildBreadcrumb(selLayout, selLayoutParam, portletURL, themeDisplay, true, sb);
+_buildPortletBreadcrumb(request, sb);
 %>
 
 <%= sb.toString() %>

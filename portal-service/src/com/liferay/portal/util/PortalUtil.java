@@ -123,6 +123,12 @@ public class PortalUtil {
 		getPortal().addPageTitle(title, request);
 	}
 
+	public static void addPortletBreadcrumbEntry(
+		HttpServletRequest request, String title, String url) {
+
+		getPortal().addPortletBreadcrumbEntry(request, title, url);
+	}
+
 	public static void clearRequestParameters(RenderRequest renderRequest) {
 		getPortal().clearRequestParameters(renderRequest);
 	}
@@ -518,6 +524,11 @@ public class PortalUtil {
 
 	public static String getPortalWebDir() {
 		return getPortal().getPortalWebDir();
+	}
+
+	public static Map<String, String> getPortletBreadcrumbMap(
+		HttpServletRequest request) {
+		return getPortal().getPortletBreadcrumbMap(request);
 	}
 
 	public static Object[] getPortletFriendlyURLMapper(

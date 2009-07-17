@@ -123,6 +123,9 @@ public interface Portal {
 	 */
 	public void addPageTitle(String title, HttpServletRequest request);
 
+	public void addPortletBreadcrumbEntry(
+		HttpServletRequest request, String title, String url);
+
 	public void clearRequestParameters(RenderRequest renderRequest);
 
 	public void copyRequestParameters(
@@ -316,6 +319,9 @@ public interface Portal {
 	public String getPortalURL(ThemeDisplay themeDisplay);
 
 	public String getPortalWebDir();
+
+	public Map<String, String> getPortletBreadcrumbMap(
+		HttpServletRequest request);
 
 	public Object[] getPortletFriendlyURLMapper(
 			long groupId, boolean privateLayout, String url)
@@ -583,7 +589,7 @@ public interface Portal {
 	/**
 	 * Sets the port obtained on the first request to the portal.
 	 *
-	 * @param		req the HTTP servlet request
+	 * @param		request the HTTP servlet request
 	 */
 	public void setPortalPort(HttpServletRequest request);
 

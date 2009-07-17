@@ -121,4 +121,25 @@ private void _buildParentGroupsBreadcrumb(LayoutSet layoutSet, PortletURL portle
 		sb.append("</li>");
 	}
 }
+
+private void _buildPortletBreadcrumb(HttpServletRequest request, StringBuilder sb) throws Exception {
+	Map<String, String> portletBreadcrumbMap = PortalUtil.getPortletBreadcrumbMap(request);
+
+	if (portletBreadcrumbMap != null) {
+		for (String breadcrumbText : portletBreadcrumbMap.keySet()) {
+			String breadcrumbURL = portletBreadcrumbMap.get(breadcrumbText);
+
+			sb.append("<li>");
+			sb.append("<a href=\"");
+			sb.append(breadcrumbURL);
+			sb.append("\" ");
+			sb.append(">");
+
+			sb.append(breadcrumbText);
+
+			sb.append("</a>");
+			sb.append("</li>");
+		}
+	}
+}
 %>

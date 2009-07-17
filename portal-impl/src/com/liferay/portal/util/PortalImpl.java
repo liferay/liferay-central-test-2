@@ -153,6 +153,7 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -1733,6 +1734,29 @@ public class PortalImpl implements Portal {
 
 	public String getPortalWebDir() {
 		return _portalWebDir;
+	}
+
+	public void addPortletBreadcrumbEntry(
+		HttpServletRequest request, String title, String url) {
+
+		LinkedHashMap<String, String> portletBreadcrumbMap =
+			(LinkedHashMap<String, String>)request.getAttribute(
+				WebKeys.PORTLET_BREADCRUMB_MAP);
+
+		if (portletBreadcrumbMap == null) {
+			portletBreadcrumbMap = new LinkedHashMap<String, String>();
+
+			request.setAttribute(WebKeys.PORTLET_BREADCRUMB_MAP, portletBreadcrumbMap);
+		}
+
+		portletBreadcrumbMap.put(title, url);
+	}
+
+	public LinkedHashMap<String, String> getPortletBreadcrumbMap(
+		HttpServletRequest request) {
+
+		return (LinkedHashMap<String, String>)request.getAttribute(
+			WebKeys.PORTLET_BREADCRUMB_MAP);
 	}
 
 	public Object[] getPortletFriendlyURLMapper(
