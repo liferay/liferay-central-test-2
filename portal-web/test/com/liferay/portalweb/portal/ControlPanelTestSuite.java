@@ -26,6 +26,7 @@ import com.liferay.portalweb.portal.controlpanel.admin.AdminTests;
 import com.liferay.portalweb.portal.controlpanel.bookmarks.BookmarksTests;
 import com.liferay.portalweb.portal.controlpanel.calendar.CalendarTests;
 import com.liferay.portalweb.portal.controlpanel.communities.CommunitiesTests;
+import com.liferay.portalweb.portal.controlpanel.messageboards.MessageBoardsTests;
 import com.liferay.portalweb.portal.controlpanel.polls.PollsTests;
 import com.liferay.portalweb.portal.controlpanel.portal.PortalTests;
 import com.liferay.portalweb.portal.controlpanel.virtualhosting.VirtualHostingTests;
@@ -51,6 +52,7 @@ public class ControlPanelTestSuite extends BaseTests {
 		testSuite.addTest(BookmarksTests.suite());
 		testSuite.addTest(CalendarTests.suite());
 		testSuite.addTest(CommunitiesTests.suite());
+		testSuite.addTest(MessageBoardsTests.suite());
 		testSuite.addTest(PollsTests.suite());
 		testSuite.addTest(PortalTests.suite());
 		testSuite.addTest(VirtualHostingTests.suite());
