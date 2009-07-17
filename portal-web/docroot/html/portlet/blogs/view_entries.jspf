@@ -57,12 +57,20 @@ showSearch = showSearch && (results.size() > 0);
 	<h1 class="entry-title">
 		<%= LanguageUtil.format(pageContext, "entries-with-x-x", new String[] {vocabularyName, categoryName}) %>
 	</h1>
+
+	<%
+	PortalUtil.addPortletBreadcrumbEntry(request, categoryName, currentURL);
+	%>
 </c:if>
 
 <c:if test="<%= Validator.isNotNull(tagName) %>">
 	<h1 class="entry-title">
 		<%= LanguageUtil.format(pageContext, "entries-with-tag-x", tagName) %>
 	</h1>
+
+	<%
+	PortalUtil.addPortletBreadcrumbEntry(request, tagName, currentURL);
+	%>
 </c:if>
 
 <%
