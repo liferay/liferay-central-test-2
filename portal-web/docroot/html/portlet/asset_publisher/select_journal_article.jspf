@@ -23,6 +23,8 @@
 %>
 
 <%
+String tabs1 = ParamUtil.getString(request, "tabs1", "web-content");
+
 PortalPreferences portalPrefs = PortletPreferencesFactoryUtil.getPortalPreferences(request);
 
 int assetEntryOrder = ParamUtil.getInteger(request, "assetEntryOrder", -1);
@@ -34,9 +36,15 @@ portletURL.setParameter("redirect", redirect);
 portletURL.setParameter("backURL", redirect);
 portletURL.setParameter("portletResource", portletResource);
 portletURL.setParameter("typeSelection", JournalArticle.class.getName());
+
+String tabs1Names = "web-content,shared-web-content";
 %>
 
-<liferay-ui:tabs names="web-content" url="<%= portletURL.toString() %>" backURL="<%= configurationRenderURL.toString() %>" />
+<liferay-ui:tabs
+	backURL="<%= configurationRenderURL.toString() %>"
+	names="<%= tabs1Names %>"
+	url="<%= portletURL.toString() %>"
+/>
 
 <%
 ArticleSearch searchContainer = new ArticleSearch(renderRequest, portletURL);
@@ -49,6 +57,12 @@ ArticleSearch searchContainer = new ArticleSearch(renderRequest, portletURL);
 
 <%
 ArticleSearchTerms searchTerms = (ArticleSearchTerms)searchContainer.getSearchTerms();
+
+if (tabs1.equals("shared-web-content")) {
+	long companyGroupId = company.getGroup().getGroupId();
+
+	searchTerms.setGroupId(companyGroupId);
+}
 %>
 
 <%@ include file="/html/portlet/journal/article_search_results.jspf" %>

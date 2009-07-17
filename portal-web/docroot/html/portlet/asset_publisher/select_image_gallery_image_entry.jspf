@@ -23,8 +23,12 @@
 %>
 
 <%
+String tabs1 = ParamUtil.getString(request, "tabs1", "folders");
+
 int assetEntryOrder = ParamUtil.getInteger(request, "assetEntryOrder", -1);
 long folderId = ParamUtil.getLong(request, "assetParentId", IGFolderImpl.DEFAULT_PARENT_FOLDER_ID);
+
+long groupId = tabs1.equals("folders") ? scopeGroupId : company.getGroup().getGroupId();
 
 IGFolder folder = null;
 
@@ -43,10 +47,15 @@ portletURL.setParameter("redirect", redirect);
 portletURL.setParameter("backURL", redirect);
 portletURL.setParameter("portletResource", portletResource);
 portletURL.setParameter("typeSelection", IGImage.class.getName());
-portletURL.setParameter("assetParentId", String.valueOf(folderId));
+
+String tabs1Names = "folders,shared-folders";
 %>
 
-<liferay-ui:tabs names="folders" url="<%= portletURL.toString() %>" backURL="<%= configurationRenderURL.toString() %>" />
+<liferay-ui:tabs
+	backURL="<%= configurationRenderURL.toString() %>"
+	names="<%= tabs1Names %>"
+	url="<%= portletURL.toString() %>"
+/>
 
 <c:if test="<%= folder != null %>">
 	<div class="breadcrumbs">
@@ -63,11 +72,11 @@ headerNames.add("num-of-images");
 
 SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, "cur1", SearchContainer.DEFAULT_DELTA, portletURL, headerNames, "there-are-no-folders");
 
-int total = IGFolderLocalServiceUtil.getFoldersCount(scopeGroupId, folderId);
+int total = IGFolderLocalServiceUtil.getFoldersCount(groupId, folderId);
 
 searchContainer.setTotal(total);
 
-List results = IGFolderLocalServiceUtil.getFolders(scopeGroupId, folderId, searchContainer.getStart(), searchContainer.getEnd());
+List results = IGFolderLocalServiceUtil.getFolders(groupId, folderId, searchContainer.getStart(), searchContainer.getEnd());
 
 searchContainer.setResults(results);
 
@@ -86,6 +95,7 @@ for (int i = 0; i < results.size(); i++) {
 	rowURL.setParameter("portletResource", portletResource);
 	rowURL.setParameter("typeSelection", IGImage.class.getName());
 	rowURL.setParameter("assetParentId", String.valueOf(curFolder.getFolderId()));
+	rowURL.setParameter("tabs1", tabs1);
 
 	// Name and description
 
@@ -111,7 +121,7 @@ for (int i = 0; i < results.size(); i++) {
 
 	subfolderIds.add(new Long(curFolder.getFolderId()));
 
-	IGFolderLocalServiceUtil.getSubfolderIds(subfolderIds, scopeGroupId, curFolder.getFolderId());
+	IGFolderLocalServiceUtil.getSubfolderIds(subfolderIds, groupId, curFolder.getFolderId());
 
 	int foldersCount = subfolderIds.size() - 1;
 	int imagesCount = IGImageLocalServiceUtil.getFoldersImagesCount(subfolderIds);

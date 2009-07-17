@@ -23,8 +23,12 @@
 %>
 
 <%
+String tabs1 = ParamUtil.getString(request, "tabs1", "folders");
+
 int assetEntryOrder = ParamUtil.getInteger(request, "assetEntryOrder", -1);
 long folderId = ParamUtil.getLong(request, "assetParentId", DLFolderConstants.DEFAULT_PARENT_FOLDER_ID);
+
+long groupId = tabs1.equals("folders") ? scopeGroupId : company.getGroup().getGroupId();
 
 DLFolder folder = null;
 
@@ -40,7 +44,7 @@ List folderIdLists = new ArrayList();
 
 folderIdLists.add(new Long(folderId));
 
-DLFolderLocalServiceUtil.getSubfolderIds(folderIdLists, scopeGroupId, folderId);
+DLFolderLocalServiceUtil.getSubfolderIds(folderIdLists, groupId, folderId);
 
 String folderIds = ParamUtil.getString(request, "folderIds");
 long[] folderIdsArray = StringUtil.split(folderIds, 0L);
@@ -54,13 +58,18 @@ portletURL.setParameter("redirect", redirect);
 portletURL.setParameter("backURL", redirect);
 portletURL.setParameter("portletResource", portletResource);
 portletURL.setParameter("typeSelection", DLFileEntry.class.getName());
-portletURL.setParameter("assetParentId", String.valueOf(folderId));
+
+String tabs1Names = "folders,shared-folders";
 %>
 
 <input name="<portlet:namespace />breadcrumbsFolderId" type="hidden" value="<%= String.valueOf(folderId) %>" />
 <input name="<portlet:namespace />folderIds" type="hidden" value="<%= StringUtil.merge(folderIdLists) %>" />
 
-<liferay-ui:tabs names="folders" url="<%= portletURL.toString() %>" backURL="<%= configurationRenderURL.toString() %>" />
+<liferay-ui:tabs
+	backURL="<%= configurationRenderURL.toString() %>"
+	names="<%= tabs1Names %>"
+	url="<%= portletURL.toString() %>"
+/>
 
 <c:if test="<%= folder != null %>">
 	<div class="breadcrumbs">
@@ -97,7 +106,7 @@ portletURL.setParameter("assetParentId", String.valueOf(folderId));
 		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, LanguageUtil.format(pageContext, "no-documents-were-found-that-matched-the-keywords-x", "<b>" + HtmlUtil.escape(keywords) + "</b>"));
 
 		try {
-			Hits results = DLFolderLocalServiceUtil.search(company.getCompanyId(), scopeGroupId, themeDisplay.getUserId(), folderIdsArray, keywords, searchContainer.getStart(), searchContainer.getEnd());
+			Hits results = DLFolderLocalServiceUtil.search(company.getCompanyId(), groupId, themeDisplay.getUserId(), folderIdsArray, keywords, searchContainer.getStart(), searchContainer.getEnd());
 
 			int total = results.getLength();
 
@@ -172,11 +181,11 @@ portletURL.setParameter("assetParentId", String.valueOf(folderId));
 
 		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, "there-are-no-folders");
 
-		int total = DLFolderLocalServiceUtil.getFoldersCount(scopeGroupId, folderId);
+		int total = DLFolderLocalServiceUtil.getFoldersCount(groupId, folderId);
 
 		searchContainer.setTotal(total);
 
-		List results = DLFolderLocalServiceUtil.getFolders(scopeGroupId, folderId, searchContainer.getStart(), searchContainer.getEnd());
+		List results = DLFolderLocalServiceUtil.getFolders(groupId, folderId, searchContainer.getStart(), searchContainer.getEnd());
 
 		searchContainer.setResults(results);
 
@@ -195,6 +204,7 @@ portletURL.setParameter("assetParentId", String.valueOf(folderId));
 			rowURL.setParameter("portletResource", portletResource);
 			rowURL.setParameter("typeSelection", DLFileEntry.class.getName());
 			rowURL.setParameter("assetParentId", String.valueOf(curFolder.getFolderId()));
+			rowURL.setParameter("tabs1", tabs1);
 
 			// Name
 
@@ -220,7 +230,7 @@ portletURL.setParameter("assetParentId", String.valueOf(folderId));
 
 			subfolderIds.add(new Long(curFolder.getFolderId()));
 
-			DLFolderLocalServiceUtil.getSubfolderIds(subfolderIds, scopeGroupId, curFolder.getFolderId());
+			DLFolderLocalServiceUtil.getSubfolderIds(subfolderIds, groupId, curFolder.getFolderId());
 
 			int foldersCount = subfolderIds.size() - 1;
 			int fileEntriesCount = DLFileEntryLocalServiceUtil.getFoldersFileEntriesCount(subfolderIds);

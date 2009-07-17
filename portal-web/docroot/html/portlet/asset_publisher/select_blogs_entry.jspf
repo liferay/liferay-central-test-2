@@ -23,12 +23,15 @@
 %>
 
 <%
-int assetEntryOrder = ParamUtil.getInteger(request, "assetEntryOrder", -1);
+String tabs1 = ParamUtil.getString(request, "tabs1", "entries");
 
-long userId = 0;
+int assetEntryOrder = ParamUtil.getInteger(request, "assetEntryOrder", -1);
 
 String keywords = ParamUtil.getString(request, "keywords");
 
+long groupId = tabs1.equals("entries") ? scopeGroupId : company.getGroup().getGroupId();
+
+long userId = 0;
 PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setParameter("struts_action", "/portlet_configuration/edit_configuration");
@@ -36,9 +39,15 @@ portletURL.setParameter("redirect", redirect);
 portletURL.setParameter("backURL", redirect);
 portletURL.setParameter("portletResource", portletResource);
 portletURL.setParameter("typeSelection", BlogsEntry.class.getName());
+
+String tabs1Names = "entries,shared-entries";
 %>
 
-<liferay-ui:tabs names="entries" url="<%= portletURL.toString() %>" backURL="<%= configurationRenderURL.toString() %>" />
+<liferay-ui:tabs
+	backURL="<%= configurationRenderURL.toString() %>"
+	names="<%= tabs1Names %>"
+	url="<%= portletURL.toString() %>"
+/>
 
 <div>
 	<label for="<portlet:namespace />keywords"><liferay-ui:message key="search" /></label>
@@ -70,7 +79,7 @@ portletURL.setParameter("typeSelection", BlogsEntry.class.getName());
 		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, LanguageUtil.format(pageContext, "no-entries-were-found-that-matched-the-keywords-x", "<b>" + HtmlUtil.escape(keywords) + "</b>"));
 
 		try {
-			Hits results = BlogsEntryLocalServiceUtil.search(company.getCompanyId(), scopeGroupId, themeDisplay.getUserId(), userId, keywords, searchContainer.getStart(), searchContainer.getEnd());
+			Hits results = BlogsEntryLocalServiceUtil.search(company.getCompanyId(), groupId, themeDisplay.getUserId(), userId, keywords, searchContainer.getStart(), searchContainer.getEnd());
 			int total = results.getLength();
 
 			searchContainer.setTotal(total);
@@ -144,11 +153,11 @@ portletURL.setParameter("typeSelection", BlogsEntry.class.getName());
 
 		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, "there-are-no-entries");
 
-		int total = BlogsEntryLocalServiceUtil.getGroupEntriesCount(scopeGroupId);
+		int total = BlogsEntryLocalServiceUtil.getGroupEntriesCount(groupId);
 
 		searchContainer.setTotal(total);
 
-		List results = BlogsEntryLocalServiceUtil.getGroupEntries(scopeGroupId, searchContainer.getStart(), searchContainer.getEnd());
+		List results = BlogsEntryLocalServiceUtil.getGroupEntries(groupId, searchContainer.getStart(), searchContainer.getEnd());
 
 		searchContainer.setResults(results);
 
