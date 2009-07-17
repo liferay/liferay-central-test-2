@@ -462,6 +462,10 @@ public class LayoutAction extends Action {
 				return null;
 			}
 			else {
+				if (response.isCommitted()) {
+					return null;
+				}
+
 				if (layout != null) {
 
 					// Include layout content before the page loads because
