@@ -34,29 +34,14 @@ import com.liferay.portal.kernel.search.TermQueryFactoryUtil;
 import com.liferay.portal.kernel.search.messaging.BaseSearchEngineMessageListener;
 import com.liferay.portal.kernel.search.messaging.SearchReaderMessageListener;
 import com.liferay.portal.kernel.search.messaging.SearchWriterMessageListener;
+import com.liferay.portal.search.lucene.LuceneSearchEngineImpl;
 
 /**
- * <a href="SearchEngineDestinationEventListener.java.html"><b><i>View
- * Source</i></b></a>
- *
- * This destination event listener listens for when other search engines
- * register to receive events.  If another search engine registers to the
- * search reader destination, we will unregister the default engine (Lucene).
- * If the replacement search engine unregisters, we will re-register the
- * default engine (Lucene).
- *
- * The naming convention for search engines should look something like:
- * SOLR_LUCENE, COMPASS_LUCENE, GOOGLE_SEARCH_APPLICANCE, FAST, etc.
- *
- * For search engines that have Lucene as their base, specifying LUCENE in the
- * name will ensure the portal utilizes the appropriate query factories.
- *
- * WARNING: This assumes that the replacing search engine registers both
- * to the DestinationNames.SEACH_READER destination in addition to the
- * DestinationNames.SEARCH_WRITER destination.  This is a safe assumption since
- * you should never have one search engine write and another read. 
+ * <a href="SearchEngineDestinationEventListener.java.html"><b><i>View Source
+ * </i></b></a>
  *
  * @author Michael C. Han
+ *
  */
 public class SearchEngineDestinationEventListener
 	extends BaseDestinationEventListener {
@@ -65,101 +50,94 @@ public class SearchEngineDestinationEventListener
 		SearchReaderMessageListener searchReaderMessageListener,
 		SearchWriterMessageListener searchWriterMessageListener) {
 
-		_defaultSearchReaderMessageListener = searchReaderMessageListener;
-		_defaultSearchWriterMessageListener = searchWriterMessageListener;
+		_searchReaderMessageListener = searchReaderMessageListener;
+		_searchWriterMessageListener = searchWriterMessageListener;
 	}
 
-	@Override
 	public void messageListenerRegistered(
 		String destinationName, MessageListener messageListener) {
-		if (!_shouldProceed(destinationName, messageListener)) {
+
+		if (!isProceed(destinationName, messageListener)) {
 			return;
 		}
 
-		//we have another search engine registering, go ahead and unregister the default
 		MessageBusUtil.unregisterMessageListener(
-			DestinationNames.SEARCH_READER, _defaultSearchReaderMessageListener);
+			DestinationNames.SEARCH_READER, _searchReaderMessageListener);
 		MessageBusUtil.unregisterMessageListener(
-			DestinationNames.SEARCH_WRITER, _defaultSearchWriterMessageListener);
+			DestinationNames.SEARCH_WRITER, _searchWriterMessageListener);
 
-		//if the registering search engine is not Lucene based, then replace
-		// the query factories
-		BaseSearchEngineMessageListener searchEngineMessageListener =
-			(BaseSearchEngineMessageListener) messageListener;
+		BaseSearchEngineMessageListener baseSearchEngineMessageListener =
+			(BaseSearchEngineMessageListener)messageListener;
 
-		if (!searchEngineMessageListener.getSearchEngineName().
-				contains(_LUCENE_SEARCH_ENGINE_STRING)) {
+		if (!baseSearchEngineMessageListener.getSearchEngineName().contains(
+				LuceneSearchEngineImpl.NAME)) {
 
-			_setBooleanQueryFactory(
-				new com.liferay.portal.search.generic.BooleanQueryFactoryImpl());
-
-			_setTermQueryFactory(
-				new com.liferay.portal.search.lucene.TermQueryFactoryImpl());
+			setBooleanQueryFactory(
+				new com.liferay.portal.search.generic.
+					BooleanQueryFactoryImpl());
+			setTermQueryFactory(
+				new com.liferay.portal.search.generic.TermQueryFactoryImpl());
 		}
 	}
 
-	@Override
 	public void messageListenerUnregistered(
 		String destinationName, MessageListener messageListener) {
-		if (!_shouldProceed(destinationName, messageListener)) {
+
+		if (!isProceed(destinationName, messageListener)) {
 			return;
 		}
-		//we have anothe search engine unregistering, go ahead and register the default
+
 		MessageBusUtil.registerMessageListener(
-			DestinationNames.SEARCH_READER, _defaultSearchReaderMessageListener);
+			DestinationNames.SEARCH_READER, _searchReaderMessageListener);
 		MessageBusUtil.registerMessageListener(
-			DestinationNames.SEARCH_WRITER, _defaultSearchWriterMessageListener);
+			DestinationNames.SEARCH_WRITER, _searchWriterMessageListener);
 
-		//if the unregistered search engine is not Lucene based, then replace
-		// the query factories
-		BaseSearchEngineMessageListener searchEngineMessageListener =
-			(BaseSearchEngineMessageListener) messageListener;
+		BaseSearchEngineMessageListener baseSearchEngineMessageListener =
+			(BaseSearchEngineMessageListener)messageListener;
 
-		if (!searchEngineMessageListener.getSearchEngineName().
-				contains(_LUCENE_SEARCH_ENGINE_STRING)) {
+		if (!baseSearchEngineMessageListener.getSearchEngineName().contains(
+				LuceneSearchEngineImpl.NAME)) {
 
-			_setBooleanQueryFactory(
+			setBooleanQueryFactory(
 				new com.liferay.portal.search.lucene.BooleanQueryFactoryImpl());
-
-			_setTermQueryFactory(
+			setTermQueryFactory(
 				new com.liferay.portal.search.lucene.TermQueryFactoryImpl());
 		}
 	}
 
-	private void _setBooleanQueryFactory(BooleanQueryFactory booleanQueryFactory) {
+	protected boolean isProceed(
+		String destinationName, MessageListener messageListener) {
+
+		if ((!destinationName.equals(DestinationNames.SEARCH_READER)) ||
+			(messageListener == _searchReaderMessageListener) ||
+			!(messageListener instanceof SearchReaderMessageListener)) {
+
+			return false;
+		}
+		else {
+			return true;
+		}
+	}
+
+	protected void setBooleanQueryFactory(
+		BooleanQueryFactory booleanQueryFactory) {
+
 		BooleanQueryFactoryUtil booleanQueryFactoryUtil =
 			(BooleanQueryFactoryUtil)PortalBeanLocatorUtil.locate(
-				_BOOLEAN_QUERY_FACTORY_BEAN_NAME);
+				BooleanQueryFactoryUtil.class.getName());
 
 		booleanQueryFactoryUtil.setBooleanQueryFactory(booleanQueryFactory);
 	}
 
-	private void _setTermQueryFactory(TermQueryFactory termQueryFactory) {
+	protected void setTermQueryFactory(TermQueryFactory termQueryFactory) {
 		TermQueryFactoryUtil termQueryFactoryUtil =
 			(TermQueryFactoryUtil)PortalBeanLocatorUtil.locate(
-				_TERM_QUERY_FACTORY_BEAN_NAME);
+				TermQueryFactoryUtil.class.getName());
 
 		termQueryFactoryUtil.setTermQueryFactory(termQueryFactory);
 	}
 
+	private SearchReaderMessageListener _searchReaderMessageListener;
+	private SearchWriterMessageListener _searchWriterMessageListener;
 
-	private boolean _shouldProceed(
-		String destinationName, MessageListener messageListener) {
-
-		if (!destinationName.equals(DestinationNames.SEARCH_READER) ||
-			(messageListener == _defaultSearchReaderMessageListener) ||
-			!(messageListener instanceof SearchReaderMessageListener)) {
-			return false;
-		}
-		return true;
-	}
-
-	private static final String _BOOLEAN_QUERY_FACTORY_BEAN_NAME =
-		"com.liferay.portal.kernel.search.BooleanQueryFactoryUtil";
-	private static final String _LUCENE_SEARCH_ENGINE_STRING = "LUCENE";
-	private static final String _TERM_QUERY_FACTORY_BEAN_NAME =
-		"com.liferay.portal.kernel.search.TermQueryFactoryUtil";
-
-	private SearchReaderMessageListener _defaultSearchReaderMessageListener;
-	private SearchWriterMessageListener _defaultSearchWriterMessageListener;
 }

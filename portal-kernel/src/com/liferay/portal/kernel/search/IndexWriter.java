@@ -30,7 +30,7 @@ package com.liferay.portal.kernel.search;
  */
 public interface IndexWriter {
 
-	public void addDocument(long companyId, Document doc)
+	public void addDocument(long companyId, Document document)
 		throws SearchException;
 
 	public void deleteDocument(long companyId, String uid)
@@ -39,7 +39,7 @@ public interface IndexWriter {
 	public void deletePortletDocuments(long companyId, String portletId)
 		throws SearchException;
 
-	public void updateDocument(long companyId, String uid, Document doc)
+	public void updateDocument(long companyId, String uid, Document document)
 		throws SearchException;
 
 }

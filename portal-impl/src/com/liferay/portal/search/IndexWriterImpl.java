@@ -36,8 +36,8 @@ import com.liferay.portal.kernel.search.messaging.SearchRequest;
  */
 public class IndexWriterImpl implements IndexWriter {
 
-	public void addDocument(long companyId, Document doc) {
-		SearchRequest searchRequest = SearchRequest.add(companyId, doc);
+	public void addDocument(long companyId, Document document) {
+		SearchRequest searchRequest = SearchRequest.add(companyId, document);
 
 		MessageBusUtil.sendMessage(
 			DestinationNames.SEARCH_WRITER, searchRequest);
@@ -51,15 +51,16 @@ public class IndexWriterImpl implements IndexWriter {
 	}
 
 	public void deletePortletDocuments(long companyId, String portletId) {
-		SearchRequest searchRequest = SearchRequest.deletePortletDocs(
+		SearchRequest searchRequest = SearchRequest.deletePortletDocuments(
 			companyId, portletId);
 
 		MessageBusUtil.sendMessage(
 			DestinationNames.SEARCH_WRITER, searchRequest);
 	}
 
-	public void updateDocument(long companyId, String uid, Document doc) {
-		SearchRequest searchRequest = SearchRequest.update(companyId, uid, doc);
+	public void updateDocument(long companyId, String uid, Document document) {
+		SearchRequest searchRequest = SearchRequest.update(
+			companyId, uid, document);
 
 		MessageBusUtil.sendMessage(
 			DestinationNames.SEARCH_WRITER, searchRequest);

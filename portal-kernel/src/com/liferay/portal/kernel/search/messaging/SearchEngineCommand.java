@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -28,5 +28,7 @@ package com.liferay.portal.kernel.search.messaging;
  * @author Michael C. Han
  */
 public enum SearchEngineCommand {
-	ADD, DELETE, DELETE_PORTLET_DOCS, SEARCH, UPDATE
+
+	ADD, DELETE, DELETE_PORTLET_DOCUMENTS, SEARCH, UPDATE
+
 }

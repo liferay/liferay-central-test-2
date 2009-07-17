@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -26,22 +26,23 @@ import com.liferay.portal.kernel.messaging.MessageListener;
 import com.liferay.portal.kernel.search.SearchEngine;
 
 /**
- * <a href="BaseSearchEngineMessageListener.java.html"><b><i>View
- * Source</i></b></a>
+ * <a href="BaseSearchEngineMessageListener.java.html"><b><i>View Source</i></b>
+ * </a>
  *
  * @author Michael C. Han
+ *
  */
 public abstract class BaseSearchEngineMessageListener
 	implements MessageListener {
 
 	public String getSearchEngineName() {
-		return _searchEngine.getName();
+		return searchEngine.getName();
 	}
 
 	public void setSearchEngine(SearchEngine searchEngine) {
-		_searchEngine = searchEngine;
+		this.searchEngine = searchEngine;
 	}
 
-	protected SearchEngine _searchEngine;
+	protected SearchEngine searchEngine;
 
 }

@@ -197,4 +197,5 @@ public class SearchEngineUtil {
 	private static PortalSearchEngine _portalSearchEngine;
 	private static SearchEngine _searchEngine;
 	private static SearchPermissionChecker _searchPermissionChecker;
+
 }

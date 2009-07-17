@@ -34,8 +34,10 @@ import com.liferay.portal.kernel.search.SearchEngine;
  */
 public class SearchEngineImpl implements SearchEngine {
 
+	public static final String NAME = "DEFAULT";
+
 	public String getName() {
-		return _SEARCH_ENGINE_NAME;
+		return NAME;
 	}
 
 	public IndexSearcher getSearcher() {
@@ -54,7 +56,7 @@ public class SearchEngineImpl implements SearchEngine {
 		_writer = writer;
 	}
 
-	private static final String _SEARCH_ENGINE_NAME = "DEFAULT";
 	private IndexSearcher _searcher;
 	private IndexWriter _writer;
+
 }

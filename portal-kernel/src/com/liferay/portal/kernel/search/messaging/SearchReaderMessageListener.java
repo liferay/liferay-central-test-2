@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -29,7 +29,7 @@ import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.search.Hits;
 
 /**
- * <a href="LuceneReaderMessageListener.java.html"><b><i>View Source</i></b></a>
+ * <a href="SearchReaderMessageListener.java.html"><b><i>View Source</i></b></a>
  *
  * @author Bruno Farache
  *
@@ -49,7 +49,7 @@ public class SearchReaderMessageListener
 	protected void doCommandSearch(Message message, SearchRequest searchRequest)
 		throws Exception {
 
-		Hits hits = _searchEngine.getSearcher().search(
+		Hits hits = searchEngine.getSearcher().search(
 			searchRequest.getCompanyId(), searchRequest.getQuery(),
 			searchRequest.getSorts(), searchRequest.getStart(),
 			searchRequest.getEnd());
@@ -65,7 +65,6 @@ public class SearchReaderMessageListener
 		Object payload = message.getPayload();
 
 		if (!(payload instanceof SearchRequest)) {
-
 			return;
 		}
 

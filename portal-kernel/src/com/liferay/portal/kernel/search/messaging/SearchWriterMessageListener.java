@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -28,7 +28,7 @@ import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.search.Document;
 
 /**
- * <a href="LuceneWriterMessageListener.java.html"><b><i>View Source</i></b></a>
+ * <a href="SearchWriterMessageListener.java.html"><b><i>View Source</i></b></a>
  *
  * @author Bruno Farache
  *
@@ -62,20 +62,22 @@ public class SearchWriterMessageListener
 		Document doc = searchRequest.getDocument();
 
 		if (searchEngineCommand.equals(SearchEngineCommand.ADD)) {
-			_searchEngine.getWriter().addDocument(companyId, doc);
+			searchEngine.getWriter().addDocument(companyId, doc);
 		}
 		else if (searchEngineCommand.equals(SearchEngineCommand.DELETE)) {
-			_searchEngine.getWriter().deleteDocument(companyId, id);
+			searchEngine.getWriter().deleteDocument(companyId, id);
 		}
 		else if (searchEngineCommand.equals(
-			SearchEngineCommand.DELETE_PORTLET_DOCS)) {
-			_searchEngine.getWriter().deletePortletDocuments(companyId, id);
+					SearchEngineCommand.DELETE_PORTLET_DOCUMENTS)) {
+
+			searchEngine.getWriter().deletePortletDocuments(companyId, id);
 		}
 		else if (searchEngineCommand.equals(SearchEngineCommand.UPDATE)) {
-			_searchEngine.getWriter().updateDocument(companyId, id, doc);
+			searchEngine.getWriter().updateDocument(companyId, id, doc);
 		}
 	}
 
 	private static Log _log =
 		LogFactoryUtil.getLog(SearchWriterMessageListener.class);
+
 }

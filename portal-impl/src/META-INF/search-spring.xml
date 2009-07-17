@@ -6,7 +6,7 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd"
 >
 
-	<!-- Portal search interfaces -->
+	<!-- Portal search engine -->
 
 	<bean id="indexSearcher.portal" class="com.liferay.portal.search.IndexSearcherImpl" />
 	<bean id="indexWriter.portal" class="com.liferay.portal.search.IndexWriterImpl" />
@@ -33,7 +33,6 @@
 		<property name="searcher" ref="indexSearcher.lucene" />
 		<property name="writer" ref="indexWriter.lucene" />
 	</bean>
-
 	<bean id="com.liferay.portal.kernel.search.BooleanQueryFactoryUtil" class="com.liferay.portal.kernel.search.BooleanQueryFactoryUtil">
 		<property name="booleanQueryFactory">
 			<bean class="com.liferay.portal.search.lucene.BooleanQueryFactoryImpl" />
@@ -44,7 +43,6 @@
 			<bean class="com.liferay.portal.search.lucene.TermQueryFactoryImpl" />
 		</property>
 	</bean>
-	
 
 	<!-- Messaging -->
 
@@ -64,13 +62,13 @@
 		<property name="searchEngine" ref="searchEngine.lucene" />
 	</bean>
 	<bean id="messagingConfigurator.search" class="com.liferay.portal.kernel.messaging.config.DefaultMessagingConfigurator" init-method="init" destroy-method="destroy">
-		<property name="destinationSpecificDestinationEventListener">
+		<property name="specificDestinationEventListener">
 			<map>
 				<entry key="liferay/search_reader">
 					<list>
 						<bean class="com.liferay.portal.search.lucene.messaging.SearchEngineDestinationEventListener">
-							<constructor-arg index="0" type="com.liferay.portal.kernel.search.messaging.SearchReaderMessageListener" ref="messageListener.search_reader"/>
-							<constructor-arg index="1" type="com.liferay.portal.kernel.search.messaging.SearchWriterMessageListener" ref="messageListener.search_writer"/>
+							<constructor-arg index="0" type="com.liferay.portal.kernel.search.messaging.SearchReaderMessageListener" ref="messageListener.search_reader" />
+							<constructor-arg index="1" type="com.liferay.portal.kernel.search.messaging.SearchWriterMessageListener" ref="messageListener.search_writer" />
 						</bean>
 					</list>
 				</entry>

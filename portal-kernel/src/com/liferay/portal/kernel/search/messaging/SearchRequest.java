@@ -33,11 +33,13 @@ import com.liferay.portal.kernel.search.Sort;
  *
  */
 public class SearchRequest {
-	public static SearchRequest add(long companyId, Document doc) {
-		SearchRequest searchRequest = new SearchRequest(SearchEngineCommand.ADD);
+
+	public static SearchRequest add(long companyId, Document document) {
+		SearchRequest searchRequest = new SearchRequest(
+			SearchEngineCommand.ADD);
 
 		searchRequest.setCompanyId(companyId);
-		searchRequest.setDocument(doc);
+		searchRequest.setDocument(document);
 
 		return searchRequest;
 	}
@@ -52,10 +54,11 @@ public class SearchRequest {
 		return searchRequest;
 	}
 
-	public static SearchRequest deletePortletDocs(
+	public static SearchRequest deletePortletDocuments(
 		long companyId, String portletId) {
+
 		SearchRequest searchRequest = new SearchRequest(
-			SearchEngineCommand.DELETE_PORTLET_DOCS);
+			SearchEngineCommand.DELETE_PORTLET_DOCUMENTS);
 
 		searchRequest.setCompanyId(companyId);
 		searchRequest.setId(portletId);
@@ -65,8 +68,9 @@ public class SearchRequest {
 
 	public static SearchRequest search(
 		long companyId, Query query, Sort[] sorts, int start, int end) {
-		SearchRequest searchRequest =
-			new SearchRequest(SearchEngineCommand.SEARCH);
+
+		SearchRequest searchRequest = new SearchRequest(
+			SearchEngineCommand.SEARCH);
 
 		searchRequest.setCompanyId(companyId);
 		searchRequest.setQuery(query);
@@ -77,75 +81,77 @@ public class SearchRequest {
 		return searchRequest;
 	}
 
-	public static SearchRequest update(long companyId, String uid, Document doc) {
+	public static SearchRequest update(
+		long companyId, String uid, Document document) {
+
 		SearchRequest searchRequest = new SearchRequest(
 			SearchEngineCommand.UPDATE);
 
 		searchRequest.setCompanyId(companyId);
 		searchRequest.setId(uid);
-		searchRequest.setDocument(doc);
+		searchRequest.setDocument(document);
 
 		return searchRequest;
-	}
-
-	public SearchEngineCommand getSearchEngineCommand() {
-		return _searchEngineCommand;
 	}
 
 	public long getCompanyId() {
 		return _companyId;
 	}
 
-	public void setCompanyId(long companyId) {
-		_companyId = companyId;
-	}
-
-	public String getId() {
-		return _id;
-	}
-
-	public void setId(String id) {
-		_id = id;
-	}
-
 	public Document getDocument() {
-		return _doc;
-	}
-
-	public void setDocument(Document doc) {
-		_doc = doc;
-	}
-
-	public Query getQuery() {
-		return _query;
-	}
-
-	public void setQuery(Query query) {
-		_query = query;
-	}
-
-	public Sort[] getSorts() {
-		return _sorts;
-	}
-
-	public void setSorts(Sort[] sorts) {
-		_sorts = sorts;
-	}
-
-	public int getStart() {
-		return _start;
-	}
-
-	public void setStart(int start) {
-		_start = start;
+		return _document;
 	}
 
 	public int getEnd() {
 		return _end;
 	}
 
+	public String getId() {
+		return _id;
+	}
+
+	public Query getQuery() {
+		return _query;
+	}
+
+	public SearchEngineCommand getSearchEngineCommand() {
+		return _searchEngineCommand;
+	}
+
+	public Sort[] getSorts() {
+		return _sorts;
+	}
+
+	public int getStart() {
+		return _start;
+	}
+
+	public void setCompanyId(long companyId) {
+		_companyId = companyId;
+	}
+
+	public void setDocument(Document document) {
+		_document = document;
+	}
+
 	public void setEnd(int end) {
 		_end = end;
+	}
+
+	public void setId(String id) {
+		_id = id;
+	}
+
+	public void setQuery(Query query) {
+		_query = query;
+	}
+
+	public void setSorts(Sort[] sorts) {
+		_sorts = sorts;
+	}
+
+	public void setStart(int start) {
+		_start = start;
 	}
 
 	public String toString() {
@@ -157,8 +163,8 @@ public class SearchRequest {
 		sb.append(_companyId);
 		sb.append(", id=");
 		sb.append(_id);
-		sb.append(", doc=");
-		sb.append(_doc);
+		sb.append(", document=");
+		sb.append(_document);
 		sb.append(", query=");
 		sb.append(_query);
 		sb.append(", sorts=");
@@ -177,11 +183,12 @@ public class SearchRequest {
 	}
 
 	private long _companyId;
-	private Document _doc;
+	private Document _document;
 	private int _end;
 	private String _id;
 	private Query _query;
 	private SearchEngineCommand _searchEngineCommand;
 	private Sort[] _sorts;
 	private int _start;
+
 }

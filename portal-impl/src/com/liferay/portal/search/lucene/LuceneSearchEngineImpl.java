@@ -34,8 +34,10 @@ import com.liferay.portal.kernel.search.SearchEngine;
  */
 public class LuceneSearchEngineImpl implements SearchEngine {
 
+	public static final String NAME = "LUCENE";
+
 	public String getName() {
-		return _SEARCH_ENGINE_NAME;
+		return NAME;
 	}
 
 	public IndexSearcher getSearcher() {
@@ -54,8 +56,7 @@ public class LuceneSearchEngineImpl implements SearchEngine {
 		_writer = writer;
 	}
 
-	private static final String _SEARCH_ENGINE_NAME = "LUCENE";
-
 	private IndexSearcher _searcher;
 	private IndexWriter _writer;
+
 }
