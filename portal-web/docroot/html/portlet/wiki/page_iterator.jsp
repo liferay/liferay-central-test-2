@@ -53,10 +53,8 @@ else if (type.equals("categorized_pages")) {
 
 	List<AssetCategory> parentCategories = assetCategory.getParentCategories();
 
-	for (int i = 0; i < parentCategories.size(); i++) {
+	for (AssetCategory curParentCategory : parentCategories) {
 		PortletURL curPortletURL = PortletURLUtil.clone(portletURL, renderResponse);
-
-		AssetCategory curParentCategory = parentCategories.get(i);
 
 		curPortletURL.setParameter("categoryId", String.valueOf(curParentCategory.getCategoryId()));
 

@@ -305,11 +305,9 @@ if ((wikiPage != null) && !wikiPage.getTitle().equals(WikiPageImpl.FRONT_PAGE)) 
 	PortalUtil.setPageDescription(description, request);
 	PortalUtil.setPageKeywords(AssetUtil.getAssetKeywords(WikiPage.class.getName(), wikiPage.getResourcePrimKey()), request);
 
-	List parentPages = wikiPage.getParentPages();
+	List<WikiPage> parentPages = wikiPage.getParentPages();
 
-	for (int i = 0; i < parentPages.size(); i++) {
-		WikiPage curParentPage = (WikiPage)parentPages.get(i);
-
+	for (WikiPage curParentPage : parentPages) {
 		viewPageURL.setParameter("title", curParentPage.getTitle());
 
 		PortalUtil.addPortletBreadcrumbEntry(request, curParentPage.getTitle(), viewPageURL.toString());

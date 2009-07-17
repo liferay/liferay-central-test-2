@@ -72,6 +72,7 @@ public class AssetCategoryImpl
 	public AssetCategory getParentCategory() {
 		if (getParentCategoryId() ==
 				AssetCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) {
+
 			return null;
 		}
 
