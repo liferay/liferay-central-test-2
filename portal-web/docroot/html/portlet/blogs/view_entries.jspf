@@ -61,6 +61,7 @@ showSearch = showSearch && (results.size() > 0);
 	<%
 	PortalUtil.addPortletBreadcrumbEntry(request, categoryName, currentURL);
 	%>
+
 </c:if>
 
 <c:if test="<%= Validator.isNotNull(tagName) %>">
@@ -71,6 +72,7 @@ showSearch = showSearch && (results.size() > 0);
 	<%
 	PortalUtil.addPortletBreadcrumbEntry(request, tagName, currentURL);
 	%>
+
 </c:if>
 
 <%
