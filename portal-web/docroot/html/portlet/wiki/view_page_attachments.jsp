@@ -32,9 +32,16 @@ String[] attachments = wikiPage.getAttachmentsFiles();
 
 PortletURL portletURL = renderResponse.createActionURL();
 
-portletURL.setParameter("struts_action", "/wiki/view_page_attachments");
 portletURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
 portletURL.setParameter("title", wikiPage.getTitle());
+
+portletURL.setParameter("struts_action", "/wiki/view");
+
+PortalUtil.addPortletBreadcrumbEntry(request, wikiPage.getTitle(), portletURL.toString());
+
+portletURL.setParameter("struts_action", "/wiki/view_page_attachments");
+
+PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "attachments"), portletURL.toString());
 %>
 
 <liferay-util:include page="/html/portlet/wiki/top_links.jsp" />

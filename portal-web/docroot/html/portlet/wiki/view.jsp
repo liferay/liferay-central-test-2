@@ -121,29 +121,6 @@ AssetUtil.addLayoutTags(request, AssetTagLocalServiceUtil.getTags(WikiPage.class
 
 <liferay-util:include page="/html/portlet/wiki/top_links.jsp" />
 
-<c:if test="<%= Validator.isNotNull(wikiPage.getParentTitle()) %>">
-	<div class="breadcrumbs">
-
-		<%
-		PortletURL viewParentPageURL = PortletURLUtil.clone(viewPageURL, renderResponse);
-
-		List parentPages = wikiPage.getParentPages();
-
-		for (int i = 0; i < parentPages.size(); i++) {
-			WikiPage curParentPage = (WikiPage)parentPages.get(i);
-
-			viewParentPageURL.setParameter("title", curParentPage.getTitle());
-		%>
-
-			<a href="<%= viewParentPageURL %>"><%= curParentPage.getTitle() %></a> &raquo;
-
-		<%
-		}
-		%>
-
-	</div>
-</c:if>
-
 <h1 class="page-title">
 	<c:if test="<%= !print %>">
 		<div class="page-actions">
@@ -327,5 +304,19 @@ if ((wikiPage != null) && !wikiPage.getTitle().equals(WikiPageImpl.FRONT_PAGE)) 
 
 	PortalUtil.setPageDescription(description, request);
 	PortalUtil.setPageKeywords(AssetUtil.getAssetKeywords(WikiPage.class.getName(), wikiPage.getResourcePrimKey()), request);
+
+	List parentPages = wikiPage.getParentPages();
+
+	for (int i = 0; i < parentPages.size(); i++) {
+		WikiPage curParentPage = (WikiPage)parentPages.get(i);
+
+		viewPageURL.setParameter("title", curParentPage.getTitle());
+
+		PortalUtil.addPortletBreadcrumbEntry(request, curParentPage.getTitle(), viewPageURL.toString());
+	}
+
+	viewPageURL.setParameter("title", wikiPage.getTitle());
+
+	PortalUtil.addPortletBreadcrumbEntry(request, wikiPage.getTitle(), viewPageURL.toString());
 }
 %>

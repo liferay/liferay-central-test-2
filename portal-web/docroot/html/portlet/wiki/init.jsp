@@ -40,6 +40,7 @@
 <%@ page import="com.liferay.portlet.asset.model.AssetVocabulary" %>
 <%@ page import="com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.asset.service.AssetCategoryPropertyLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.asset.service.AssetCategoryServiceUtil" %>
 <%@ page import="com.liferay.portlet.asset.service.AssetEntryLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.asset.service.AssetTagLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.asset.service.AssetTagPropertyLocalServiceUtil" %>

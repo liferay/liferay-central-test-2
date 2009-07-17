@@ -53,6 +53,10 @@ public interface AssetCategory extends AssetCategoryModel {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.asset.model.AssetCategory getParentCategory();
+
+	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> getParentCategories();
+
 	public java.lang.String getUserUuid()
 		throws com.liferay.portal.SystemException;
 

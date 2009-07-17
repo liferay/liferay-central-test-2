@@ -34,37 +34,85 @@ String tagName = ParamUtil.getString(request, "tag");
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
-if (type.equals("all_pages")) {
-	portletURL.setParameter("struts_action", "/wiki/view_all_pages");
-}
-else if (type.equals("categorized_pages")) {
-	portletURL.setParameter("struts_action", "/wiki/view_categorized_pages");
-	portletURL.setParameter("categoryId", categoryId);
-}
-else if (type.equals("history")) {
-	portletURL.setParameter("struts_action", "/wiki/view_page_history");
-}
-else if (type.equals("incoming_links")) {
-	portletURL.setParameter("struts_action", "/wiki/view_page_incoming_links");
-}
-else if (type.equals("orphan_pages")) {
-	portletURL.setParameter("struts_action", "/wiki/view_orphan_pages");
-}
-else if (type.equals("outgoing_links")) {
-	portletURL.setParameter("struts_action", "/wiki/view_page_outgoing_links");
-}
-else if (type.equals("recent_changes")) {
-	portletURL.setParameter("struts_action", "/wiki/view_recent_changes");
-}
-else if (type.equals("tagged_pages")) {
-	portletURL.setParameter("struts_action", "/wiki/view_tagged_pages");
-	portletURL.setParameter("tag", tagName);
-}
-
 portletURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
 
 if (wikiPage != null) {
 	portletURL.setParameter("title", wikiPage.getTitle());
+}
+
+if (type.equals("all_pages")) {
+	portletURL.setParameter("struts_action", "/wiki/view_all_pages");
+
+	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "all-pages"), portletURL.toString());
+}
+else if (type.equals("categorized_pages")) {
+	portletURL.setParameter("struts_action", "/wiki/view_categorized_pages");
+	portletURL.setParameter("categoryId", categoryId);
+
+	AssetCategory assetCategory = AssetCategoryServiceUtil.getCategory(GetterUtil.getLong(categoryId));
+
+	List<AssetCategory> parentCategories = assetCategory.getParentCategories();
+
+	for (int i = 0; i < parentCategories.size(); i++) {
+		PortletURL curPortletURL = PortletURLUtil.clone(portletURL, renderResponse);
+
+		AssetCategory curParentCategory = parentCategories.get(i);
+
+		curPortletURL.setParameter("categoryId", String.valueOf(curParentCategory.getCategoryId()));
+
+		PortalUtil.addPortletBreadcrumbEntry(request, curParentCategory.getName(), curPortletURL.toString());
+	}
+
+	PortalUtil.addPortletBreadcrumbEntry(request, assetCategory.getName(), portletURL.toString());
+}
+else if (type.equals("history")) {
+	if (wikiPage != null) {
+		portletURL.setParameter("struts_action", "/wiki/view");
+
+		PortalUtil.addPortletBreadcrumbEntry(request, wikiPage.getTitle(), portletURL.toString());
+	}
+
+	portletURL.setParameter("struts_action", "/wiki/view_page_history");
+
+	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "history"), portletURL.toString());
+}
+else if (type.equals("incoming_links")) {
+	if (wikiPage != null) {
+		portletURL.setParameter("struts_action", "/wiki/view");
+
+		PortalUtil.addPortletBreadcrumbEntry(request, wikiPage.getTitle(), portletURL.toString());
+	}
+
+	portletURL.setParameter("struts_action", "/wiki/view_page_incoming_links");
+
+	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "incoming-links"), portletURL.toString());
+}
+else if (type.equals("orphan_pages")) {
+	portletURL.setParameter("struts_action", "/wiki/view_orphan_pages");
+
+	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "orphan-pages"), portletURL.toString());
+}
+else if (type.equals("outgoing_links")) {
+	if (wikiPage != null) {
+		portletURL.setParameter("struts_action", "/wiki/view");
+
+		PortalUtil.addPortletBreadcrumbEntry(request, wikiPage.getTitle(), portletURL.toString());
+	}
+
+	portletURL.setParameter("struts_action", "/wiki/view_page_outgoing_links");
+
+	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "outgoing-links"), portletURL.toString());
+}
+else if (type.equals("recent_changes")) {
+	portletURL.setParameter("struts_action", "/wiki/view_recent_changes");
+
+	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "recent-changes"), portletURL.toString());
+}
+else if (type.equals("tagged_pages")) {
+	portletURL.setParameter("struts_action", "/wiki/view_tagged_pages");
+	portletURL.setParameter("tag", tagName);
+
+	PortalUtil.addPortletBreadcrumbEntry(request, tagName, portletURL.toString());
 }
 %>
 
