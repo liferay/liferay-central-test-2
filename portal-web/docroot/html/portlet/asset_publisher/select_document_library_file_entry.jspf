@@ -25,10 +25,10 @@
 <%
 String tabs1 = ParamUtil.getString(request, "tabs1", "folders");
 
+long groupId = tabs1.equals("folders") ? scopeGroupId : company.getGroup().getGroupId();
+
 int assetEntryOrder = ParamUtil.getInteger(request, "assetEntryOrder", -1);
 long folderId = ParamUtil.getLong(request, "assetParentId", DLFolderConstants.DEFAULT_PARENT_FOLDER_ID);
-
-long groupId = tabs1.equals("folders") ? scopeGroupId : company.getGroup().getGroupId();
 
 DLFolder folder = null;
 
@@ -58,8 +58,6 @@ portletURL.setParameter("redirect", redirect);
 portletURL.setParameter("backURL", redirect);
 portletURL.setParameter("portletResource", portletResource);
 portletURL.setParameter("typeSelection", DLFileEntry.class.getName());
-
-String tabs1Names = "folders,shared-folders";
 %>
 
 <input name="<portlet:namespace />breadcrumbsFolderId" type="hidden" value="<%= String.valueOf(folderId) %>" />
@@ -67,7 +65,7 @@ String tabs1Names = "folders,shared-folders";
 
 <liferay-ui:tabs
 	backURL="<%= configurationRenderURL.toString() %>"
-	names="<%= tabs1Names %>"
+	names="folders,shared-folders"
 	url="<%= portletURL.toString() %>"
 />
 
@@ -199,12 +197,12 @@ String tabs1Names = "folders,shared-folders";
 			PortletURL rowURL = renderResponse.createRenderURL();
 
 			rowURL.setParameter("struts_action", "/portlet_configuration/edit_configuration");
+			rowURL.setParameter("tabs1", tabs1);
 			rowURL.setParameter("redirect", redirect);
 			rowURL.setParameter("backURL", redirect);
 			rowURL.setParameter("portletResource", portletResource);
 			rowURL.setParameter("typeSelection", DLFileEntry.class.getName());
 			rowURL.setParameter("assetParentId", String.valueOf(curFolder.getFolderId()));
-			rowURL.setParameter("tabs1", tabs1);
 
 			// Name
 

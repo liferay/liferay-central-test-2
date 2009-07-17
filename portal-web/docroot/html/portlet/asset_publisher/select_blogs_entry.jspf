@@ -25,13 +25,13 @@
 <%
 String tabs1 = ParamUtil.getString(request, "tabs1", "entries");
 
+long groupId = tabs1.equals("entries") ? scopeGroupId : company.getGroup().getGroupId();
+long userId = 0;
+
 int assetEntryOrder = ParamUtil.getInteger(request, "assetEntryOrder", -1);
 
 String keywords = ParamUtil.getString(request, "keywords");
 
-long groupId = tabs1.equals("entries") ? scopeGroupId : company.getGroup().getGroupId();
-
-long userId = 0;
 PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setParameter("struts_action", "/portlet_configuration/edit_configuration");
@@ -39,13 +39,11 @@ portletURL.setParameter("redirect", redirect);
 portletURL.setParameter("backURL", redirect);
 portletURL.setParameter("portletResource", portletResource);
 portletURL.setParameter("typeSelection", BlogsEntry.class.getName());
-
-String tabs1Names = "entries,shared-entries";
 %>
 
 <liferay-ui:tabs
 	backURL="<%= configurationRenderURL.toString() %>"
-	names="<%= tabs1Names %>"
+	names="entries,shared-entries"
 	url="<%= portletURL.toString() %>"
 />
 
