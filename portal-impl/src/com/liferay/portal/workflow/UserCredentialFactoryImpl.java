@@ -22,30 +22,31 @@
 
 package com.liferay.portal.workflow;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import com.liferay.portal.kernel.workflow.UserCredential;
 import com.liferay.portal.kernel.workflow.UserCredentialFactory;
 import com.liferay.portal.kernel.workflow.WorkflowException;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.UserServiceUtil;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * <a href="UserCredentialFactoryImpl.java.html"><b><i>View Source</i></b></a>
- * 
+ *
  * <p>
  * The implementation of the factory creating {@link UserCredential} used by the
  * workflow proxy.
  * </p>
- * 
+ *
  * @author Micha Kiener
- * 
+ *
  */
 public class UserCredentialFactoryImpl implements UserCredentialFactory {
 
 	/**
-	 * @see com.liferay.portal.kernel.workflow.UserCredentialFactory#createCredential(long)
+	 * @see com.liferay.portal.kernel.workflow.UserCredentialFactory#
+	 * createCredential(long)
 	 */
 	public UserCredential createCredential(long userId)
 		throws WorkflowException {
@@ -64,7 +65,7 @@ public class UserCredentialFactoryImpl implements UserCredentialFactory {
 			userCredential.setLogin(user.getLogin());
 			userCredential.setScreenName(user.getScreenName());
 			userCredential.setUserId(user.getUserId());
- 
+
 			// create the role set
 			long[] roleIds = user.getRoleIds();
 			Set<Long> roleSet = new HashSet<Long>(roleIds.length);
@@ -72,7 +73,7 @@ public class UserCredentialFactoryImpl implements UserCredentialFactory {
 				roleSet.add(Long.valueOf(roleId));
 			}
 			userCredential.setRoleSet(roleSet);
-			
+
 			return userCredential;
 		}
 		catch (Exception e) {
