@@ -192,9 +192,9 @@ public class GetFileAction extends PortletAction {
 			is = DLFileEntryLocalServiceUtil.getFileAsStream(
 				companyId, userId, folderId, name, version);
 
-			String fileName = fileEntry.getTitleWithExtension();
-
 			boolean converted = false;
+
+			String fileName = fileEntry.getTitleWithExtension();
 
 			if (Validator.isNotNull(targetExtension)) {
 				String id = DocumentConversionUtil.getTempFileId(
@@ -215,6 +215,7 @@ public class GetFileAction extends PortletAction {
 					fileName = sb.toString();
 
 					is = convertedIS;
+
 					converted = true;
 				}
 			}
