@@ -88,7 +88,7 @@ public interface WorkflowDefinitionManager {
 	 * specific workflow definition are being returned.
 	 *
 	 * @return the list of available workflow definitions, never
-	 * <code>null</code>
+	 *         <code>null</code>
 	 */
 	public List<WorkflowDefinition> getWorkflowDefinitions();
 
@@ -99,9 +99,10 @@ public interface WorkflowDefinitionManager {
 	 * by the underlying workflow engine.
 	 *
 	 * @param workflowDefinitionName the name of the workflow definition to
-	 * retrieve all versions for
+	 *            retrieve all versions for
 	 * @return the list of all versions, if any found, an empty list otherwise
-	 * or a list containing just one element, must never be <code>null</code>
+	 *         or a list containing just one element, must never be
+	 *         <code>null</code>
 	 */
 	public List<WorkflowDefinition> getWorkflowDefinitions(
 		String workflowDefinitionName);
