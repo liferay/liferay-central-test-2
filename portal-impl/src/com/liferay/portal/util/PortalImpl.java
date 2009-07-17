@@ -475,6 +475,23 @@ public class PortalImpl implements Portal {
 		request.setAttribute(WebKeys.PAGE_TITLE, title);
 	}
 
+	public void addPortletBreadcrumbEntry(
+		HttpServletRequest request, String title, String url) {
+
+		Map<String, String> portletBreadcrumbMap =
+			(Map<String, String>)request.getAttribute(
+				WebKeys.PORTLET_BREADCRUMB_MAP);
+
+		if (portletBreadcrumbMap == null) {
+			portletBreadcrumbMap = new LinkedHashMap<String, String>();
+
+			request.setAttribute(
+				WebKeys.PORTLET_BREADCRUMB_MAP, portletBreadcrumbMap);
+		}
+
+		portletBreadcrumbMap.put(title, url);
+	}
+
 	public void clearRequestParameters(RenderRequest renderRequest) {
 
 		// Clear the render parameters if they were set during processAction
@@ -1736,26 +1753,10 @@ public class PortalImpl implements Portal {
 		return _portalWebDir;
 	}
 
-	public void addPortletBreadcrumbEntry(
-		HttpServletRequest request, String title, String url) {
-
-		LinkedHashMap<String, String> portletBreadcrumbMap =
-			(LinkedHashMap<String, String>)request.getAttribute(
-				WebKeys.PORTLET_BREADCRUMB_MAP);
-
-		if (portletBreadcrumbMap == null) {
-			portletBreadcrumbMap = new LinkedHashMap<String, String>();
-
-			request.setAttribute(WebKeys.PORTLET_BREADCRUMB_MAP, portletBreadcrumbMap);
-		}
-
-		portletBreadcrumbMap.put(title, url);
-	}
-
-	public LinkedHashMap<String, String> getPortletBreadcrumbMap(
+	public Map<String, String> getPortletBreadcrumbMap(
 		HttpServletRequest request) {
 
-		return (LinkedHashMap<String, String>)request.getAttribute(
+		return (Map<String, String>)request.getAttribute(
 			WebKeys.PORTLET_BREADCRUMB_MAP);
 	}
 

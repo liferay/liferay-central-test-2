@@ -528,6 +528,7 @@ public class PortalUtil {
 
 	public static Map<String, String> getPortletBreadcrumbMap(
 		HttpServletRequest request) {
+
 		return getPortal().getPortletBreadcrumbMap(request);
 	}
 
