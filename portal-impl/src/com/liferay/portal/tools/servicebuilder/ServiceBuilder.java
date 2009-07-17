@@ -55,9 +55,6 @@ import com.thoughtworks.qdox.model.Type;
 
 import de.hunsicker.io.FileFormat;
 import de.hunsicker.jalopy.Jalopy;
-import de.hunsicker.jalopy.storage.Convention;
-import de.hunsicker.jalopy.storage.ConventionKeys;
-import de.hunsicker.jalopy.storage.Environment;
 
 import freemarker.ext.beans.BeansWrapper;
 import freemarker.template.TemplateHashModel;
@@ -258,14 +255,6 @@ public class ServiceBuilder {
 	public static void writeFile(File file, String content, String author)
 		throws IOException {
 
-		writeFile(file, content, author, null);
-	}
-
-	public static void writeFile(
-			File file, String content, String author,
-			Map<String, Object> jalopySettings)
-		throws IOException {
-
 		String packagePath = _getPackagePath(file);
 
 		String className = file.getName();
@@ -300,41 +289,6 @@ public class ServiceBuilder {
 		catch (FileNotFoundException fnne) {
 		}
 
-		if (jalopySettings == null) {
-			jalopySettings = new HashMap<String, Object>();
-		}
-
-		Environment env = Environment.getInstance();
-
-		// Author
-
-		author = GetterUtil.getString(
-			(String)jalopySettings.get("author"), author);
-
-		env.set("author", author);
-
-		// File name
-
-		env.set("fileName", file.getName());
-
-		Convention convention = Convention.getInstance();
-
-		String classMask =
-			"/**\n" +
-			" * <a href=\"$fileName$.html\"><b><i>View Source</i></b></a>\n" +
-			" *\n" +
-			" * @author $author$\n" +
-			" *\n" +
-			"*/";
-
-		convention.put(
-			ConventionKeys.COMMENT_JAVADOC_TEMPLATE_CLASS,
-			env.interpolate(classMask));
-
-		convention.put(
-			ConventionKeys.COMMENT_JAVADOC_TEMPLATE_INTERFACE,
-			env.interpolate(classMask));
-
 		jalopy.format();
 
 		String newContent = sb.toString();
@@ -362,39 +316,13 @@ public class ServiceBuilder {
 		String oldContent = null;
 
 		if (file.exists()) {
-
-			// Read file
-
 			oldContent = FileUtil.read(file);
-
-			// Keep old version number
-
-			int x = oldContent.indexOf("@version $Revision:");
-
-			if (x != -1) {
-				int y = oldContent.indexOf("$", x);
-				y = oldContent.indexOf("$", y + 1);
-
-				String oldVersion = oldContent.substring(x, y + 1);
-
-				newContent = StringUtil.replace(
-					newContent, "@version $Rev: $", oldVersion);
-			}
-		}
-		else {
-			newContent = StringUtil.replace(
-				newContent, "@version $Rev: $", "@version $Revision: 1.183 $");
 		}
 
 		if ((oldContent == null) || !oldContent.equals(newContent)) {
 			FileUtil.write(file, newContent);
 
 			System.out.println("Writing " + file);
-
-			// Workaround for bug with XJavaDoc
-
-			file.setLastModified(
-				System.currentTimeMillis() - (Time.SECOND * 5));
 		}
 
 		tempFile.deleteOnExit();
@@ -447,10 +375,13 @@ public class ServiceBuilder {
 			"extended_model", _tplExtendedModel);
 		_tplExtendedModelImpl = _getTplProperty(
 			"extended_model_impl", _tplExtendedModelImpl);
+		_tplExtendedModelJavadoc = _getTplProperty(
+			"extended_model_javadoc", _tplExtendedModelJavadoc);
 		_tplFinder = _getTplProperty("finder", _tplFinder);
 		_tplFinderUtil = _getTplProperty("finder_util", _tplFinderUtil);
 		_tplHbmXml = _getTplProperty("hbm_xml", _tplHbmXml);
 		_tplOrmXml = _getTplProperty("orm_xml", _tplOrmXml);
+		_tplJavadoc = _getTplProperty("javadoc", _tplJavadoc);
 		_tplJsonJs = _getTplProperty("json_js", _tplJsonJs);
 		_tplJsonJsMethod = _getTplProperty("json_js_method", _tplJsonJsMethod);
 		_tplModel = _getTplProperty("model", _tplModel);
@@ -458,7 +389,12 @@ public class ServiceBuilder {
 		_tplModelHintsXml = _getTplProperty(
 			"model_hints_xml", _tplModelHintsXml);
 		_tplModelImpl = _getTplProperty("model_impl", _tplModelImpl);
+		_tplModelImplJavadoc = _getTplProperty(
+			"model_impl_javadoc", _tplModelImplJavadoc);
+		_tplModelJavadoc = _getTplProperty("model_javadoc", _tplModelJavadoc);
 		_tplModelSoap = _getTplProperty("model_soap", _tplModelSoap);
+		_tplModelSoapJavadoc = _getTplProperty(
+			"model_soap_javadoc", _tplModelSoapJavadoc);
 		_tplPersistence = _getTplProperty("persistence", _tplPersistence);
 		_tplPersistenceImpl = _getTplProperty(
 			"persistence_impl", _tplPersistenceImpl);
@@ -477,11 +413,22 @@ public class ServiceBuilder {
 		_tplServiceFactory = _getTplProperty(
 			"service_factory", _tplServiceFactory);
 		_tplServiceHttp = _getTplProperty("service_http", _tplServiceHttp);
+		_tplServiceHttpJavadoc = _getTplProperty(
+			"service_http_javadoc", _tplServiceHttpJavadoc);
 		_tplServiceImpl = _getTplProperty("service_impl", _tplServiceImpl);
+		_tplServiceJavadoc = _getTplProperty(
+			"service_javadoc", _tplServiceJavadoc);
 		_tplServiceJsonSerializer = _getTplProperty(
 			"service_json_serializer", _tplServiceJsonSerializer);
+		_tplServiceJsonSerializerJavadoc = _getTplProperty(
+			"service_json_serializer_javadoc",
+			_tplServiceJsonSerializerJavadoc);
 		_tplServiceSoap = _getTplProperty("service_soap", _tplServiceSoap);
+		_tplServiceSoapJavadoc = _getTplProperty(
+			"service_soap_javadoc", _tplServiceSoapJavadoc);
 		_tplServiceUtil = _getTplProperty("service_util", _tplServiceUtil);
+		_tplServiceUtilJavadoc = _getTplProperty(
+			"service_util_javadoc", _tplServiceUtilJavadoc);
 		_tplSpringBaseXml = _getTplProperty(
 			"spring_base_xml", _tplSpringBaseXml);
 		_tplSpringDynamicDataSourceXml = _getTplProperty(
@@ -1719,6 +1666,8 @@ public class ServiceBuilder {
 				entity.getPKClassName() + ".java");
 
 		writeFile(ejbFile, content, _author);
+
+		_writeJavadoc(ejbFile);
 	}
 
 	private void _createExceptions(List<String> exceptions) throws Exception {
@@ -1777,11 +1726,11 @@ public class ServiceBuilder {
 		File modelFile = new File(
 			_serviceOutputPath + "/model/" + entity.getName() + ".java");
 
-		Map<String, Object> jalopySettings = new HashMap<String, Object>();
+		writeFile(modelFile, content, _author);
 
-		jalopySettings.put("keepJavadoc", Boolean.TRUE);
-
-		writeFile(modelFile, content, _author, jalopySettings);
+		FileUtil.write(
+			modelFile.toString() + "doc",
+			_processTemplate(_tplExtendedModelJavadoc, context));
 
 		if (!_serviceOutputPath.equals(_outputPath)) {
 			modelFile = new File(
@@ -1811,6 +1760,8 @@ public class ServiceBuilder {
 
 		if (!modelFile.exists()) {
 			writeFile(modelFile, content, _author);
+
+			_writeJavadoc(modelFile);
 		}
 	}
 
@@ -1839,6 +1790,8 @@ public class ServiceBuilder {
 				"Finder.java");
 
 		writeFile(ejbFile, content, _author);
+
+		_writeJavadoc(ejbFile);
 
 		if (!_serviceOutputPath.equals(_outputPath)) {
 			ejbFile = new File(
@@ -1878,6 +1831,8 @@ public class ServiceBuilder {
 				"FinderUtil.java");
 
 		writeFile(ejbFile, content, _author);
+
+		_writeJavadoc(ejbFile);
 
 		if (!_serviceOutputPath.equals(_outputPath)) {
 			ejbFile = new File(
@@ -2111,11 +2066,11 @@ public class ServiceBuilder {
 		File modelFile = new File(
 			_serviceOutputPath + "/model/" + entity.getName() + "Model.java");
 
-		Map<String, Object> jalopySettings = new HashMap<String, Object>();
+		writeFile(modelFile, content, _author);
 
-		jalopySettings.put("keepJavadoc", Boolean.TRUE);
-
-		writeFile(modelFile, content, _author, jalopySettings);
+		FileUtil.write(
+			modelFile.toString() + "doc",
+			_processTemplate(_tplModelJavadoc, context));
 
 		if (!_serviceOutputPath.equals(_outputPath)) {
 			modelFile = new File(
@@ -2152,6 +2107,8 @@ public class ServiceBuilder {
 			_serviceOutputPath + "/model/" + entity.getName() + "Clp.java");
 
 		writeFile(modelFile, content, _author);
+
+		_writeJavadoc(modelFile);
 	}
 
 	private void _createModelHintsXml() throws Exception {
@@ -2220,11 +2177,11 @@ public class ServiceBuilder {
 		File modelFile = new File(
 			_outputPath + "/model/impl/" + entity.getName() + "ModelImpl.java");
 
-		Map<String, Object> jalopySettings = new HashMap<String, Object>();
+		writeFile(modelFile, content, _author);
 
-		jalopySettings.put("keepJavadoc", Boolean.TRUE);
-
-		writeFile(modelFile, content, _author, jalopySettings);
+		FileUtil.write(
+			modelFile.toString() + "doc",
+			_processTemplate(_tplModelImplJavadoc, context));
 	}
 
 	private void _createModelSoap(Entity entity) throws Exception {
@@ -2241,11 +2198,11 @@ public class ServiceBuilder {
 		File modelFile = new File(
 			_serviceOutputPath + "/model/" + entity.getName() + "Soap.java");
 
-		Map<String, Object> jalopySettings = new HashMap<String, Object>();
+		writeFile(modelFile, content, _author);
 
-		jalopySettings.put("keepJavadoc", Boolean.TRUE);
-
-		writeFile(modelFile, content, _author, jalopySettings);
+		FileUtil.write(
+			modelFile.toString() + "doc",
+			_processTemplate(_tplModelSoapJavadoc, context));
 
 		if (!_serviceOutputPath.equals(_outputPath)) {
 			modelFile = new File(
@@ -2343,6 +2300,8 @@ public class ServiceBuilder {
 
 		writeFile(ejbFile, content, _author);
 
+		_writeJavadoc(ejbFile);
+
 		if (!_serviceOutputPath.equals(_outputPath)) {
 			ejbFile = new File(
 				_outputPath + "/service/persistence/" + entity.getName() +
@@ -2374,6 +2333,8 @@ public class ServiceBuilder {
 				"PersistenceImpl.java");
 
 		writeFile(ejbFile, content, _author);
+
+		_writeJavadoc(ejbFile);
 	}
 
 	private void _createPersistenceTest(Entity entity) throws Exception {
@@ -2392,6 +2353,8 @@ public class ServiceBuilder {
 				"PersistenceTest.java");
 
 		writeFile(ejbFile, content, _author);
+
+		_writeJavadoc(ejbFile);
 	}
 
 	private void _createPersistenceUtil(Entity entity) throws Exception {
@@ -2415,6 +2378,8 @@ public class ServiceBuilder {
 				"Util.java");
 
 		writeFile(ejbFile, content, _author);
+
+		_writeJavadoc(ejbFile);
 
 		if (!_serviceOutputPath.equals(_outputPath)) {
 			ejbFile = new File(
@@ -2606,11 +2571,11 @@ public class ServiceBuilder {
 			_serviceOutputPath + "/service/" + entity.getName() +
 				_getSessionTypeName(sessionType) + "Service.java");
 
-		Map<String, Object> jalopySettings = new HashMap<String, Object>();
+		writeFile(ejbFile, content, _author);
 
-		jalopySettings.put("keepJavadoc", Boolean.TRUE);
-
-		writeFile(ejbFile, content, _author, jalopySettings);
+		FileUtil.write(
+			ejbFile.toString() + "doc",
+			_processTemplate(_tplServiceJavadoc, context));
 
 		if (!_serviceOutputPath.equals(_outputPath)) {
 			ejbFile = new File(
@@ -2651,6 +2616,8 @@ public class ServiceBuilder {
 				_getSessionTypeName(sessionType) + "ServiceBaseImpl.java");
 
 		writeFile(ejbFile, content, _author);
+
+		_writeJavadoc(ejbFile);
 	}
 
 	private void _createServiceClp(Entity entity, int sessionType)
@@ -2681,6 +2648,8 @@ public class ServiceBuilder {
 				_getSessionTypeName(sessionType) + "ServiceClp.java");
 
 		writeFile(ejbFile, content, _author);
+
+		_writeJavadoc(ejbFile);
 	}
 
 	private void _createServiceClpMessageListener() throws Exception {
@@ -2703,6 +2672,8 @@ public class ServiceBuilder {
 			_serviceOutputPath + "/service/messaging/ClpMessageListener.java");
 
 		writeFile(ejbFile, content);
+
+		_writeJavadoc(ejbFile);
 	}
 
 	private void _createServiceClpSerializer() throws Exception {
@@ -2724,6 +2695,8 @@ public class ServiceBuilder {
 			_serviceOutputPath + "/service/ClpSerializer.java");
 
 		writeFile(ejbFile, content);
+
+		_writeJavadoc(ejbFile);
 	}
 
 	private void _createServiceFactory(Entity entity, int sessionType)
@@ -2771,11 +2744,11 @@ public class ServiceBuilder {
 			_outputPath + "/service/http/" + entity.getName() +
 				"ServiceHttp.java");
 
-		Map<String, Object> jalopySettings = new HashMap<String, Object>();
+		writeFile(ejbFile, content, _author);
 
-		jalopySettings.put("keepJavadoc", Boolean.TRUE);
-
-		writeFile(ejbFile, content, _author, jalopySettings);
+		FileUtil.write(
+			ejbFile.toString() + "doc",
+			_processTemplate(_tplServiceHttpJavadoc, context));
 	}
 
 	private void _createServiceImpl(Entity entity, int sessionType)
@@ -2798,6 +2771,8 @@ public class ServiceBuilder {
 
 		if (!ejbFile.exists()) {
 			writeFile(ejbFile, content, _author);
+
+			_writeJavadoc(ejbFile);
 		}
 	}
 
@@ -2828,11 +2803,11 @@ public class ServiceBuilder {
 			_outputPath + "/service/http/" + entity.getName() +
 				"JSONSerializer.java");
 
-		Map<String, Object> jalopySettings = new HashMap<String, Object>();
+		writeFile(ejbFile, content, _author);
 
-		jalopySettings.put("keepJavadoc", Boolean.TRUE);
-
-		writeFile(ejbFile, content, _author, jalopySettings);
+		FileUtil.write(
+			ejbFile.toString() + "doc",
+			_processTemplate(_tplServiceJsonSerializerJavadoc, context));
 	}
 
 	private void _createServiceSoap(Entity entity) throws Exception {
@@ -2855,11 +2830,11 @@ public class ServiceBuilder {
 			_outputPath + "/service/http/" + entity.getName() +
 				"ServiceSoap.java");
 
-		Map<String, Object> jalopySettings = new HashMap<String, Object>();
+		writeFile(ejbFile, content, _author);
 
-		jalopySettings.put("keepJavadoc", Boolean.TRUE);
-
-		writeFile(ejbFile, content, _author, jalopySettings);
+		FileUtil.write(
+			ejbFile.toString() + "doc",
+			_processTemplate(_tplServiceSoapJavadoc, context));
 	}
 
 	private void _createServiceUtil(Entity entity, int sessionType)
@@ -2885,11 +2860,11 @@ public class ServiceBuilder {
 			_serviceOutputPath + "/service/" + entity.getName() +
 				_getSessionTypeName(sessionType) + "ServiceUtil.java");
 
-		Map<String, Object> jalopySettings = new HashMap<String, Object>();
+		writeFile(ejbFile, content, _author);
 
-		jalopySettings.put("keepJavadoc", Boolean.TRUE);
-
-		writeFile(ejbFile, content, _author, jalopySettings);
+		FileUtil.write(
+			ejbFile.toString() + "doc",
+			_processTemplate(_tplServiceUtilJavadoc, context));
 
 		if (!_serviceOutputPath.equals(_outputPath)) {
 			ejbFile = new File(
@@ -3583,6 +3558,7 @@ public class ServiceBuilder {
 		context.put("serviceOutputPath", _serviceOutputPath);
 		context.put("packagePath", _packagePath);
 		context.put("pluginName", _pluginName);
+		context.put("author", _author);
 		context.put("serviceBuilder", this);
 
 		context.put("arrayUtil", ArrayUtil_IW.getInstance());
@@ -4040,6 +4016,39 @@ public class ServiceBuilder {
 		return FreeMarkerUtil.process(name, context);
 	}
 
+	private void _writeJavadoc(File file) throws Exception {
+		String fileName = StringUtil.replace(file.toString(), "\\", "/");
+
+		int pos = fileName.indexOf(_implDir + "/");
+
+		if (pos != -1) {
+			pos += _implDir.length();
+		}
+		else {
+			pos = fileName.indexOf(_apiDir + "/") + _apiDir.length();
+		}
+
+		String srcFile = fileName.substring(pos + 1, fileName.length());
+		String fullClassName = StringUtil.replace(
+			srcFile.substring(0, srcFile.length() - 5), "/", ".");
+		String className = fullClassName.substring(
+			fullClassName.lastIndexOf(".") + 1);
+
+		Map<String, Object> context = _getContext();
+
+		context.put("className", className);
+		context.put("comment", "");
+		context.put("fullClassName", fullClassName);
+
+		// Content
+
+		String content = _processTemplate(_tplJavadoc, context);
+
+		// Write file
+
+		FileUtil.write(file.toString() + "doc", content);
+	}
+
 	private static final String _AUTHOR = "Brian Wing Shun Chan";
 
 	private static final int _SESSION_TYPE_REMOTE = 0;
@@ -4066,16 +4075,22 @@ public class ServiceBuilder {
 	private String _tplExtendedModel = _TPL_ROOT + "extended_model.ftl";
 	private String _tplExtendedModelImpl =
 		_TPL_ROOT + "extended_model_impl.ftl";
+	private String _tplExtendedModelJavadoc =
+		_TPL_ROOT + "extended_model_javadoc.ftl";
 	private String _tplFinder = _TPL_ROOT + "finder.ftl";
 	private String _tplFinderUtil = _TPL_ROOT + "finder_util.ftl";
 	private String _tplHbmXml = _TPL_ROOT + "hbm_xml.ftl";
+	private String _tplJavadoc = _TPL_ROOT + "javadoc.ftl";
 	private String _tplJsonJs = _TPL_ROOT + "json_js.ftl";
 	private String _tplJsonJsMethod = _TPL_ROOT + "json_js_method.ftl";
 	private String _tplModel = _TPL_ROOT + "model.ftl";
 	private String _tplModelClp = _TPL_ROOT + "model_clp.ftl";
 	private String _tplModelHintsXml = _TPL_ROOT + "model_hints_xml.ftl";
 	private String _tplModelImpl = _TPL_ROOT + "model_impl.ftl";
+	private String _tplModelImplJavadoc = _TPL_ROOT + "model_impl_javadoc.ftl";
+	private String _tplModelJavadoc = _TPL_ROOT + "model_javadoc.ftl";
 	private String _tplModelSoap = _TPL_ROOT + "model_soap.ftl";
+	private String _tplModelSoapJavadoc = _TPL_ROOT + "model_soap_javadoc.ftl";
 	private String _tplOrmXml = _TPL_ROOT + "orm_xml.ftl";
 	private String _tplPersistence = _TPL_ROOT + "persistence.ftl";
 	private String _tplPersistenceImpl = _TPL_ROOT + "persistence_impl.ftl";
@@ -4092,11 +4107,20 @@ public class ServiceBuilder {
 		_TPL_ROOT + "service_clp_serializer.ftl";
 	private String _tplServiceFactory = _TPL_ROOT + "service_factory.ftl";
 	private String _tplServiceHttp = _TPL_ROOT + "service_http.ftl";
+	private String _tplServiceHttpJavadoc =
+		_TPL_ROOT + "service_http_javadoc.ftl";
 	private String _tplServiceImpl = _TPL_ROOT + "service_impl.ftl";
+	private String _tplServiceJavadoc = _TPL_ROOT + "service_javadoc.ftl";
 	private String _tplServiceJsonSerializer =
 		_TPL_ROOT + "service_json_serializer.ftl";
+	private String _tplServiceJsonSerializerJavadoc =
+		_TPL_ROOT + "service_json_serializer_javadoc.ftl";
 	private String _tplServiceSoap = _TPL_ROOT + "service_soap.ftl";
+	private String _tplServiceSoapJavadoc =
+		_TPL_ROOT + "service_soap_javadoc.ftl";
 	private String _tplServiceUtil = _TPL_ROOT + "service_util.ftl";
+	private String _tplServiceUtilJavadoc =
+		_TPL_ROOT + "service_util_javadoc.ftl";
 	private String _tplSpringBaseXml = _TPL_ROOT + "spring_base_xml.ftl";
 	private String _tplSpringDynamicDataSourceXml =
 		_TPL_ROOT + "spring_dynamic_data_source_xml.ftl";

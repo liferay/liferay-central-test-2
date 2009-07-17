@@ -10,24 +10,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-/**
- * <a href="${entity.name}Soap.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
- * This class is used by
- * <code>${packagePath}.service.http.${entity.name}ServiceSoap</code>.
- * </p>
- *
- * @author Brian Wing Shun Chan
- *
- * @see ${packagePath}.service.http.${entity.name}ServiceSoap
- *
- */
 public class ${entity.name}Soap implements Serializable {
 
 	public static ${entity.name}Soap toSoapModel(${entity.name} model) {

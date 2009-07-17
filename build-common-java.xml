@@ -111,6 +111,42 @@
 		/>
 	</target>
 
+	<target name="javadoc-delete">
+		<java
+			classname="com.liferay.portal.tools.JavadocBuilder"
+			classpathref="project.classpath"
+			fork="true"
+			newenvironment="true"
+		>
+			<jvmarg value="-Dexternal-properties=com/liferay/portal/tools/dependencies/portal-tools.properties" />
+			<jvmarg value="-Djavadoc.command=delete" />
+		</java>
+	</target>
+
+	<target name="javadoc-get">
+		<java
+			classname="com.liferay.portal.tools.JavadocBuilder"
+			classpathref="project.classpath"
+			fork="true"
+			newenvironment="true"
+		>
+			<jvmarg value="-Dexternal-properties=com/liferay/portal/tools/dependencies/portal-tools.properties" />
+			<jvmarg value="-Djavadoc.command=get" />
+		</java>
+	</target>
+
+	<target name="javadoc-save">
+		<java
+			classname="com.liferay.portal.tools.JavadocBuilder"
+			classpathref="project.classpath"
+			fork="true"
+			newenvironment="true"
+		>
+			<jvmarg value="-Dexternal-properties=com/liferay/portal/tools/dependencies/portal-tools.properties" />
+			<jvmarg value="-Djavadoc.command=save" />
+		</java>
+	</target>
+
 	<target name="deploy" depends="jar">
 		<copy file="${jar.file}.jar" todir="${deploy.dir}" />
 	</target>

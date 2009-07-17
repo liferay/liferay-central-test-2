@@ -50,26 +50,6 @@ import java.util.List;
 	import java.util.Map;
 </#if>
 
-/**
- * <a href="${entity.name}ModelImpl.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
- * This class is a model that represents the <code>${entity.name}</code> table
- * in the database.
- * </p>
- *
- * @author Brian Wing Shun Chan
- *
- * @see ${packagePath}.model.${entity.name}
- * @see ${packagePath}.model.${entity.name}Model
- * @see ${packagePath}.model.impl.${entity.name}Impl
- *
- */
 public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> {
 
 	public static final String TABLE_NAME = "${entity.table}";
