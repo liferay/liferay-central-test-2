@@ -81,7 +81,7 @@ public class WorkflowMessageListener implements MessageListener {
 		}
 		else {
 			BaseRequest request = (BaseRequest) payload;
-			String responseDestination = message.getResponseDestination();
+			String responseDestination = message.getResponseDestinationName();
 			Object result = null;
 			try {
 				result = request.execute(_manager);
