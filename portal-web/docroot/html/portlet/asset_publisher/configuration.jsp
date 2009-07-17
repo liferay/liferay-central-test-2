@@ -414,7 +414,7 @@ configurationActionURL.setParameter("portletResource", portletResource);
 							rightList="<%= typesRightList %>"
 						/>
 					</liferay-ui:panel>
-					<liferay-ui:panel id='assetPublisherQueryLogic' title='<%= LanguageUtil.get(pageContext, "query-logic") %>' collapsible="<%= true %>" persistState="<%= true %>" extended="<%= true %>">
+					<liferay-ui:panel id='assetPublisherQueryLogic' title='<%= LanguageUtil.get(pageContext, "filter") %>' collapsible="<%= true %>" persistState="<%= true %>" extended="<%= true %>">
 						<liferay-ui:asset-tags-error />
 
 						<div id="<portlet:namespace />queryRules">
@@ -612,7 +612,45 @@ configurationActionURL.setParameter("portletResource", portletResource);
 
 						<liferay-ui:input-checkbox param="mergeUrlTags" defaultValue="<%= mergeUrlTags %>" />
 					</liferay-ui:panel>
-					<liferay-ui:panel id='assetPublisherGroupBy' title='<%= LanguageUtil.get(pageContext, "group-by") %>' collapsible="<%= true %>" persistState="<%= true %>" extended="<%= true %>">
+					<liferay-ui:panel id='assetPublisherGroupBy' title='<%= LanguageUtil.get(pageContext, "ordering-and-grouping") %>' collapsible="<%= true %>" persistState="<%= true %>" extended="<%= true %>">
+						<liferay-ui:message key="order-by-column" /> 1
+
+						<select name="<portlet:namespace />orderByColumn1">
+							<option <%= orderByColumn1.equals("title") ? "selected" : "" %> value="title"><liferay-ui:message key="title" /></option>
+							<option <%= orderByColumn1.equals("createDate") ? "selected" : "" %> value="createDate"><liferay-ui:message key="create-date" /></option>
+							<option <%= orderByColumn1.equals("modifiedDate") ? "selected" : "" %> value="modifiedDate"><liferay-ui:message key="modified-date" /></option>
+							<option <%= orderByColumn1.equals("publishDate") ? "selected" : "" %> value="publishDate"><liferay-ui:message key="publish-date" /></option>
+							<option <%= orderByColumn1.equals("expirationDate") ? "selected" : "" %> value="expirationDate"><liferay-ui:message key="expiration-date" /></option>
+							<option <%= orderByColumn1.equals("priority") ? "selected" : "" %> value="priority"><liferay-ui:message key="priority" /></option>
+							<option <%= orderByColumn1.equals("viewCount") ? "selected" : "" %> value="viewCount"><liferay-ui:message key="view-count" /></option>
+						</select>
+
+						<select name="<portlet:namespace />orderByType1">
+							<option <%= orderByType1.equals("ASC") ? "selected" : "" %> value="ASC"><liferay-ui:message key="ascending" /></option>
+							<option <%= orderByType1.equals("DESC") ? "selected" : "" %> value="DESC"><liferay-ui:message key="descending" /></option>
+						</select>
+
+						<br />
+
+						<liferay-ui:message key="order-by-column" /> 2
+
+						<select name="<portlet:namespace />orderByColumn2">
+							<option <%= orderByColumn2.equals("title") ? "selected" : "" %> value="title"><liferay-ui:message key="title" /></option>
+							<option <%= orderByColumn2.equals("createDate") ? "selected" : "" %> value="createDate"><liferay-ui:message key="create-date" /></option>
+							<option <%= orderByColumn2.equals("modifiedDate") ? "selected" : "" %> value="modifiedDate"><liferay-ui:message key="modified-date" /></option>
+							<option <%= orderByColumn2.equals("publishDate") ? "selected" : "" %> value="publishDate"><liferay-ui:message key="publish-date" /></option>
+							<option <%= orderByColumn2.equals("expirationDate") ? "selected" : "" %> value="expirationDate"><liferay-ui:message key="expiration-date" /></option>
+							<option <%= orderByColumn2.equals("priority") ? "selected" : "" %> value="priority"><liferay-ui:message key="priority" /></option>
+							<option <%= orderByColumn2.equals("viewCount") ? "selected" : "" %> value="viewCount"><liferay-ui:message key="view-count" /></option>
+						</select>
+
+						<select name="<portlet:namespace />orderByType2">
+							<option <%= orderByType2.equals("ASC") ? "selected" : "" %> value="ASC"><liferay-ui:message key="ascending" /></option>
+							<option <%= orderByType2.equals("DESC") ? "selected" : "" %> value="DESC"><liferay-ui:message key="descending" /></option>
+						</select>
+
+						<br /><br />
+
 						<liferay-ui:message key="group-by" />
 
 						<select name="<portlet:namespace />assetVocabularyId">
