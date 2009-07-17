@@ -81,14 +81,6 @@ public class SearchEngineUtil {
 		return _portalSearchEngine.isIndexReadOnly();
 	}
 
-	public static void register(String name) {
-		_searchEngine.register(name);
-	}
-
-	public static void registerDefaultSearchEngine() {
-		SearchEngineUtil.register(_defaultSearchEngineName);
-	}
-
 	public static Hits search(long companyId, Query query, int start, int end)
 		throws SearchException {
 
@@ -155,10 +147,6 @@ public class SearchEngineUtil {
 		_portalSearchEngine.setIndexReadOnly(indexReadOnly);
 	}
 
-	public static void unregister(String fromName) {
-		_searchEngine.unregister(fromName);
-	}
-
 	public static void updateDocument(long companyId, String uid, Document doc)
 		throws SearchException {
 
@@ -187,10 +175,6 @@ public class SearchEngineUtil {
 		_searchPermissionChecker.updatePermissionFields(name, primKey);
 	}
 
-	public void setDefaultSearchEngineName(String defaultSearchEngineName) {
-		_defaultSearchEngineName = defaultSearchEngineName;
-	}
-
 	public void setPortalSearchEngine(PortalSearchEngine portalSearchEngine) {
 		_portalSearchEngine = portalSearchEngine;
 	}
@@ -210,9 +194,7 @@ public class SearchEngineUtil {
 		new Sort(Field.MODIFIED, Sort.LONG_TYPE, true)
 	};
 
-	private static String _defaultSearchEngineName;
 	private static PortalSearchEngine _portalSearchEngine;
 	private static SearchEngine _searchEngine;
 	private static SearchPermissionChecker _searchPermissionChecker;
-
 }
