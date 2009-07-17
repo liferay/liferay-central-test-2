@@ -97,7 +97,8 @@ public class SchedulerMessageListener implements MessageListener {
 		Message responseMessage = MessageBusUtil.createResponseMessage(
 			message, schedulerRequests);
 
-		_messageSender.send(responseMessage.getDestination(), responseMessage);
+		_messageSender.send(
+			responseMessage.getDestinationName(), responseMessage);
 	}
 
 	private static Log _log =

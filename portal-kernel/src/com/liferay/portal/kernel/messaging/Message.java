@@ -62,8 +62,8 @@ public class Message implements Serializable {
 		return value;
 	}
 
-	public String getDestination() {
-		return _destination;
+	public String getDestinationName() {
+		return _destinationName;
 	}
 
 	public double getDouble(String key) {
@@ -115,8 +115,8 @@ public class Message implements Serializable {
 		return _payload;
 	}
 
-	public String getResponseDestination() {
-		return _responseDestination;
+	public String getResponseDestinationName() {
+		return _responseDestinationName;
 	}
 
 	public String getResponseId() {
@@ -135,16 +135,16 @@ public class Message implements Serializable {
 		_values.put(key, value);
 	}
 
-	public void setDestination(String destination) {
-		_destination = destination;
+	public void setDestinationName(String destinationName) {
+		_destinationName = destinationName;
 	}
 
 	public void setPayload(Object payload) {
 		_payload = payload;
 	}
 
-	public void setResponseDestination(String responseDestination) {
-		_responseDestination = responseDestination;
+	public void setResponseDestinationName(String responseDestinationName) {
+		_responseDestinationName = responseDestinationName;
 	}
 
 	public void setResponseId(String responseId) {
@@ -154,10 +154,10 @@ public class Message implements Serializable {
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 
-		sb.append("{destination=");
-		sb.append(_destination);
-		sb.append(", responseDestination=");
-		sb.append(_responseDestination);
+		sb.append("{destinationName=");
+		sb.append(_destinationName);
+		sb.append(", responseDestinationName=");
+		sb.append(_responseDestinationName);
 		sb.append(", responseId=");
 		sb.append(_responseId);
 		sb.append(", payload=");
@@ -169,9 +169,9 @@ public class Message implements Serializable {
 		return sb.toString();
 	}
 
-	private String _destination;
+	private String _destinationName;
 	private Object _payload;
-	private String _responseDestination;
+	private String _responseDestinationName;
 	private String _responseId;
 	private Map<String, Object> _values;
 

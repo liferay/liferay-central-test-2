@@ -57,7 +57,8 @@ public class SearchReaderMessageListener
 		Message responseMessage = MessageBusUtil.createResponseMessage(
 			message, hits);
 
-		MessageBusUtil.sendMessage(responseMessage.getDestination(), responseMessage);
+		MessageBusUtil.sendMessage(
+			responseMessage.getDestinationName(), responseMessage);
 	}
 
 	protected void doReceive(Message message) throws Exception {

@@ -55,11 +55,10 @@ public class DefaultMessageBus implements MessageBus {
 		String destinationName,
 		DestinationEventListener destinationEventListener) {
 
-		Destination destinationModel = _destinations.get(destinationName);
+		Destination destination = _destinations.get(destinationName);
 
-		if (destinationModel != null) {
-			destinationModel.addDestinationEventListener(
-				destinationEventListener);
+		if (destination != null) {
+			destination.addDestinationEventListener(destinationEventListener);
 		}
 	}
 
@@ -105,9 +104,11 @@ public class DefaultMessageBus implements MessageBus {
 		}
 
 		boolean registered = destination.register(messageListener);
+
 		if (registered) {
 			fireMessageListenerRegisteredEvent(destination, messageListener);
 		}
+
 		return registered;
 	}
 
@@ -132,10 +133,10 @@ public class DefaultMessageBus implements MessageBus {
 		String destinationName,
 		DestinationEventListener destinationEventListener) {
 
-		Destination destinationModel = _destinations.get(destinationName);
-		
-		if (destinationModel != null) {
-			destinationModel.removeDestinationEventListener(
+		Destination destination = _destinations.get(destinationName);
+
+		if (destination != null) {
+			destination.removeDestinationEventListener(
 				destinationEventListener);
 		}
 	}
@@ -147,7 +148,7 @@ public class DefaultMessageBus implements MessageBus {
 		oldDestination.copyMessageListeners(destination);
 
 		removeDestination(oldDestination.getName());
-		
+
 		addDestination(destination);
 	}
 
@@ -163,7 +164,7 @@ public class DefaultMessageBus implements MessageBus {
 			return;
 		}
 
-		message.setDestination(destinationName);
+		message.setDestinationName(destinationName);
 
 		destination.send(message);
 	}
@@ -188,9 +189,11 @@ public class DefaultMessageBus implements MessageBus {
 		}
 
 		boolean unregistered = destination.unregister(messageListener);
+
 		if (unregistered) {
 			fireMessageListenerUnregisteredEvent(destination, messageListener);
 		}
+
 		return unregistered;
 	}
 
@@ -208,25 +211,31 @@ public class DefaultMessageBus implements MessageBus {
 
 	protected void fireMessageListenerRegisteredEvent(
 		Destination destination, MessageListener messageListener) {
-		for (DestinationEventListener listener : _destinationEventListeners) {
-			listener.messageListenerRegistered(
+
+		for (DestinationEventListener destinationEventListener :
+				_destinationEventListeners) {
+
+			destinationEventListener.messageListenerRegistered(
 				destination.getName(), messageListener);
 		}
 	}
 
 	protected void fireMessageListenerUnregisteredEvent(
 		Destination destination, MessageListener messageListener) {
-		for (DestinationEventListener listener : _destinationEventListeners) {
-			listener.messageListenerUnregistered(
+
+		for (DestinationEventListener destinationEventListener :
+				_destinationEventListeners) {
+
+			destinationEventListener.messageListenerUnregistered(
 				destination.getName(), messageListener);
 		}
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(DefaultMessageBus.class);
 
-	private Map<String, Destination> _destinations =
-		new HashMap<String, Destination>();
 	private Set<DestinationEventListener> _destinationEventListeners =
 		new ConcurrentHashSet<DestinationEventListener>();
+	private Map<String, Destination> _destinations =
+		new HashMap<String, Destination>();
 
 }

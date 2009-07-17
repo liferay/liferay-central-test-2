@@ -33,8 +33,8 @@ import com.liferay.portal.kernel.messaging.MessageBus;
  */
 public class DefaultMessageSender implements MessageSender {
 
-	public void send(String destination, Message message) {
-		_messageBus.sendMessage(destination, message);
+	public void send(String destinationName, Message message) {
+		_messageBus.sendMessage(destinationName, message);
 	}
 
 	public void setMessageBus(MessageBus messageBus) {

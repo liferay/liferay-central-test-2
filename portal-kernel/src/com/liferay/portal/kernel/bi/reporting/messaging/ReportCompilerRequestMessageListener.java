@@ -70,7 +70,7 @@ public class ReportCompilerRequestMessageListener implements MessageListener {
 			responseMessage.setPayload(reportResultContainer);
 
 			MessageBusUtil.sendMessage(
-				responseMessage.getDestination(), responseMessage);
+				responseMessage.getDestinationName(), responseMessage);
 		}
 	}
 

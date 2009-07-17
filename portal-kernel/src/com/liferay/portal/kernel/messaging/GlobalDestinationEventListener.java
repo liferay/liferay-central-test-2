@@ -22,9 +22,10 @@
 
 package com.liferay.portal.kernel.messaging;
 
-import java.util.HashMap;
+import com.liferay.portal.kernel.util.SetUtil;
+
 import java.util.List;
-import java.util.Map;
+import java.util.Set;
 
 /**
  * <a href="GlobalDestinationEventListener.java.html"><b><i>View Source</i></b>
@@ -37,29 +38,25 @@ public class GlobalDestinationEventListener
 	extends BaseDestinationEventListener {
 
 	public GlobalDestinationEventListener(
-		MessageListener listener, List<String> ignoredDestinations) {
+		MessageListener messageListener, List<String> ignoredDestinations) {
 
-		_listener = listener;
-		_ignoredDestinations = new HashMap<String, String>();
-
-		for (String destination : ignoredDestinations) {
-			_ignoredDestinations.put(destination, destination);
-		}
+		_messageListener = messageListener;
+		_ignoredDestinations = SetUtil.fromList(ignoredDestinations);
 	}
 
 	public void destinationAdded(Destination destination) {
-		if (!_ignoredDestinations.containsKey(destination.getName())) {
-			destination.register(_listener);
+		if (!_ignoredDestinations.contains(destination.getName())) {
+			destination.register(_messageListener);
 		}
 	}
 
 	public void destinationRemoved(Destination destination) {
-		if (!_ignoredDestinations.containsKey(destination.getName())) {
-			destination.unregister(_listener);
+		if (!_ignoredDestinations.contains(destination.getName())) {
+			destination.unregister(_messageListener);
 		}
 	}
 
-	private MessageListener _listener;
-	private Map<String, String> _ignoredDestinations;
+	private Set<String> _ignoredDestinations;
+	private MessageListener _messageListener;
 
 }

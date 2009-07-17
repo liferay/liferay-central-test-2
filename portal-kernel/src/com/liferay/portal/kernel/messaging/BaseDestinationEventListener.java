@@ -23,12 +23,14 @@
 package com.liferay.portal.kernel.messaging;
 
 /**
- * <a href="BaseDestinationEventListener.java.html"><b><i>View
- * Source</i></b></a>
+ * <a href="BaseDestinationEventListener.java.html"><b><i>View Source</i></b>
+ * </a>
  *
  * @author Michael C. Han
+ *
  */
 public class BaseDestinationEventListener implements DestinationEventListener {
+
 	public void destinationAdded(Destination destination) {
 	}
 
@@ -36,10 +38,11 @@ public class BaseDestinationEventListener implements DestinationEventListener {
 	}
 
 	public void messageListenerRegistered(
-		String destinationName, MessageListener listener) {
+		String destinationName, MessageListener messageListener) {
 	}
 
 	public void messageListenerUnregistered(
-		String destinationName, MessageListener listener) {
+		String destinationName, MessageListener messageListener) {
 	}
+
 }

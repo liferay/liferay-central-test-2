@@ -49,36 +49,36 @@ public class DefaultSynchronousMessageSender
 		_timeout = timeout;
 	}
 
-	public Object send(String destination, Message message)
+	public Object send(String destinationName, Message message)
 		throws MessageBusException {
 
-		return send(destination, message, _timeout);
+		return send(destinationName, message, _timeout);
 	}
 
-	public Object send(String destination, Message message, long timeout)
+	public Object send(String destinationName, Message message, long timeout)
 		throws MessageBusException {
 
-		if (!_messageBus.hasDestination(destination)) {
+		if (!_messageBus.hasDestination(destinationName)) {
 			return null;
 		}
 
-		message.setDestination(destination);
+		message.setDestinationName(destinationName);
 
-		String responseDestination = message.getResponseDestination();
+		String responseDestinationName = message.getResponseDestinationName();
 
 		// Create a temporary destination if no response destination is
 		// configured
 
-		if (Validator.isNull(responseDestination) ||
-			!_messageBus.hasDestination(responseDestination)) {
+		if (Validator.isNull(responseDestinationName) ||
+			!_messageBus.hasDestination(responseDestinationName)) {
 
 			if (_log.isDebugEnabled()) {
 				_log.debug(
-					"Response destination " + responseDestination +
+					"Response destination " + responseDestinationName +
 						" is not configured");
 			}
 
-			message.setResponseDestination(
+			message.setResponseDestinationName(
 				DestinationNames.MESSAGE_BUS_DEFAULT_RESPONSE);
 		}
 

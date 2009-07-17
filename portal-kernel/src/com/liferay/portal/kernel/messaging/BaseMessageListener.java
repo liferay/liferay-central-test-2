@@ -53,7 +53,7 @@ public abstract class BaseMessageListener implements MessageListener {
 		}
 		catch (Exception e) {
 			_log.error(
-				"Unable to process request " + message.getDestination(), e);
+				"Unable to process request " + message.getDestinationName(), e);
 
 			messageStatus.setException(e);
 		}

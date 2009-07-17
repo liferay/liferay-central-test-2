@@ -35,14 +35,14 @@ public class DefaultSingleDestinationMessageSender
 	implements SingleDestinationMessageSender {
 
 	public DefaultSingleDestinationMessageSender(
-		String destination, MessageSender messageSender) {
+		String destinationName, MessageSender messageSender) {
 
-		_destination = destination;
+		_destinationName = destinationName;
 		_messageSender = messageSender;
 	}
 
 	public void send(Message message) {
-		_messageSender.send(_destination, message);
+		_messageSender.send(_destinationName, message);
 	}
 
 	public void send(Object payload) {
@@ -53,7 +53,7 @@ public class DefaultSingleDestinationMessageSender
 		send(message);
 	}
 
-	private String _destination;
+	private String _destinationName;
 	private MessageSender _messageSender;
 
 }

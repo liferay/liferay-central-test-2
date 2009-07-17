@@ -57,6 +57,7 @@ public abstract class BaseDestination implements Destination {
 
 	public void addDestinationEventListener(
 		DestinationEventListener destinationEventListener) {
+
 		_destinationEventListeners.add(destinationEventListener);
 	}
 
@@ -69,8 +70,11 @@ public abstract class BaseDestination implements Destination {
 	}
 
 	public void copyDestinationEventListeners(Destination destination) {
-		for (DestinationEventListener eventListener : _destinationEventListeners) {
-			destination.addDestinationEventListener(eventListener);
+		for (DestinationEventListener destinationEventListener :
+				_destinationEventListeners) {
+
+			destination.addDestinationEventListener(
+				destinationEventListener);
 		}
 	}
 
@@ -132,7 +136,7 @@ public abstract class BaseDestination implements Destination {
 		InvokerMessageListener invokerMessageListener =
 			new InvokerMessageListener(messageListener);
 
-		return _registerMessageListener(invokerMessageListener);
+		return registerMessageListener(invokerMessageListener);
 	}
 
 	public boolean register(
@@ -141,11 +145,12 @@ public abstract class BaseDestination implements Destination {
 		InvokerMessageListener invokerMessageListener =
 			new InvokerMessageListener(messageListener, classloader);
 
-		return _registerMessageListener(invokerMessageListener);
+		return registerMessageListener(invokerMessageListener);
 	}
 
 	public void removeDestinationEventListener(
 		DestinationEventListener destinationEventListener) {
+
 		_destinationEventListeners.remove(destinationEventListener);
 	}
 
@@ -177,7 +182,7 @@ public abstract class BaseDestination implements Destination {
 		InvokerMessageListener invokerMessageListener =
 			new InvokerMessageListener(messageListener);
 
-		return _unregisterMessageListener(invokerMessageListener);
+		return unregisterMessageListener(invokerMessageListener);
 	}
 
 	public boolean unregister(
@@ -186,12 +191,12 @@ public abstract class BaseDestination implements Destination {
 		InvokerMessageListener invokerMessageListener =
 			new InvokerMessageListener(messageListener, classloader);
 
-		return _unregisterMessageListener(invokerMessageListener);
+		return unregisterMessageListener(invokerMessageListener);
 	}
 
 	public void unregisterMessageListeners() {
 		for (MessageListener messageListener : _messageListeners) {
-			_unregisterMessageListener((InvokerMessageListener)messageListener);
+			unregisterMessageListener((InvokerMessageListener)messageListener);
 		}
 	}
 
@@ -229,16 +234,20 @@ public abstract class BaseDestination implements Destination {
 
 	protected void fireMessageListenerRegisteredEvent(
 		MessageListener messageListener) {
-		for (DestinationEventListener listener : _destinationEventListeners) {
-			listener.messageListenerRegistered(getName(), messageListener);
+
+		for (DestinationEventListener destinationEventListener :
+				_destinationEventListeners) {
+
+			destinationEventListener.messageListenerRegistered(
+				getName(), messageListener);
 		}
 	}
 
 	protected void fireMessageListenerUnregisteredEvent(
 		MessageListener messageListener) {
+
 		for (DestinationEventListener listener : _destinationEventListeners) {
-			listener.messageListenerUnregistered(
-				getName(), messageListener);
+			listener.messageListenerUnregistered(getName(), messageListener);
 		}
 	}
 
@@ -254,23 +263,29 @@ public abstract class BaseDestination implements Destination {
 		return _workersMaxSize;
 	}
 
-	private boolean _registerMessageListener(
+	protected boolean registerMessageListener(
 		InvokerMessageListener invokerMessageListener) {
+
 		boolean registered = _messageListeners.add(invokerMessageListener);
+
 		if (registered) {
 			fireMessageListenerRegisteredEvent(
 				invokerMessageListener.getMessageListener());
 		}
+
 		return registered;
 	}
 
-	private boolean _unregisterMessageListener(
+	protected boolean unregisterMessageListener(
 		InvokerMessageListener invokerMessageListener) {
+
 		boolean unregistered = _messageListeners.remove(invokerMessageListener);
+
 		if (unregistered) {
 			fireMessageListenerUnregisteredEvent(
 				invokerMessageListener.getMessageListener());
 		}
+
 		return unregistered;
 	}
 
@@ -280,6 +295,8 @@ public abstract class BaseDestination implements Destination {
 
 	private static Log _log = LogFactoryUtil.getLog(BaseDestination.class);
 
+	private Set<DestinationEventListener> _destinationEventListeners =
+		new ConcurrentHashSet<DestinationEventListener>();
 	private Set<MessageListener> _messageListeners =
 		new ConcurrentHashSet<MessageListener>();
 	private String _name;
@@ -287,6 +304,4 @@ public abstract class BaseDestination implements Destination {
 	private int _workersCoreSize;
 	private int _workersMaxSize;
 
-	private Set<DestinationEventListener> _destinationEventListeners =
-		new ConcurrentHashSet<DestinationEventListener>();
 }

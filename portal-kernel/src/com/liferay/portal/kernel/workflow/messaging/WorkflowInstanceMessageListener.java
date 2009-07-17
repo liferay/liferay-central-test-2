@@ -59,7 +59,7 @@ public class WorkflowInstanceMessageListener implements MessageListener {
 		}
 		else {
 			WorkflowInstanceRequest request = (WorkflowInstanceRequest) payload;
-			String responseDestination = message.getResponseDestination();
+			String responseDestinationName = message.getResponseDestinationName();
 			Object result = null;
 			try {
 				result = request.execute(_workflowInstanceManager);
@@ -72,13 +72,13 @@ public class WorkflowInstanceMessageListener implements MessageListener {
 				_log.error("Unable to execute request.", ex);
 			}
 			finally {
-				if (Validator.isNotNull(responseDestination)) {
+				if (Validator.isNotNull(responseDestinationName)) {
 					Message responseMessage =
 						MessageBusUtil.createResponseMessage(message);
 					responseMessage.setPayload(
 						new WorkflowResultContainer(result));
 					MessageBusUtil.sendMessage(
-						responseDestination, responseMessage);
+						responseDestinationName, responseMessage);
 				}
 			}
 		}

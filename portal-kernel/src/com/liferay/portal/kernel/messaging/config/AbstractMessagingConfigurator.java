@@ -45,13 +45,16 @@ public abstract class AbstractMessagingConfigurator
 	public void destroy() {
 		MessageBus messageBus = getMessageBus();
 
-		for (Map.Entry<String, List<MessageListener>> listeners :
+		for (Map.Entry<String, List<MessageListener>> messageListeners :
 				_messageListeners.entrySet()) {
 
-			String destination = listeners.getKey();
+			String destinationName = messageListeners.getKey();
 
-			for (MessageListener listener : listeners.getValue()) {
-				messageBus.unregisterMessageListener(destination, listener);
+			for (MessageListener messageListener :
+					messageListeners.getValue()) {
+
+				messageBus.unregisterMessageListener(
+					destinationName, messageListener);
 			}
 		}
 
@@ -59,10 +62,10 @@ public abstract class AbstractMessagingConfigurator
 			messageBus.removeDestination(destination.getName());
 		}
 
-		for (DestinationEventListener listener :
+		for (DestinationEventListener destinationEventListener :
 				_globalDestinationEventListeners) {
 
-			messageBus.removeDestinationEventListener(listener);
+			messageBus.removeDestinationEventListener(destinationEventListener);
 		}
 	}
 
@@ -80,16 +83,16 @@ public abstract class AbstractMessagingConfigurator
 		}
 
 		for (Map.Entry<String, List<DestinationEventListener>>
-				destinationSpecificEventListeners :
-				_destinationSpecificEventListeners.entrySet()) {
+				destinationEventListeners :
+					_specificDestinationEventListeners.entrySet()) {
 
-			String destinationName = destinationSpecificEventListeners.getKey();
+			String destinationName = destinationEventListeners.getKey();
 
 			for (DestinationEventListener destinationEventListener :
-					destinationSpecificEventListeners.getValue()) {
+					destinationEventListeners.getValue()) {
 
 				messageBus.addDestinationEventListener(
-					destinationName, destinationEventListener);				
+					destinationName, destinationEventListener);
 			}
 		}
 
@@ -105,13 +108,16 @@ public abstract class AbstractMessagingConfigurator
 
 			Thread.currentThread().setContextClassLoader(operatingClassLoader);
 
-			for (Map.Entry<String, List<MessageListener>> listeners :
+			for (Map.Entry<String, List<MessageListener>> messageListeners :
 					_messageListeners.entrySet()) {
 
-				String destination = listeners.getKey();
+				String destinationName = messageListeners.getKey();
 
-				for (MessageListener listener : listeners.getValue()) {
-					messageBus.registerMessageListener(destination, listener);
+				for (MessageListener messageListener :
+						messageListeners.getValue()) {
+
+					messageBus.registerMessageListener(
+						destinationName, messageListener);
 				}
 			}
 		}
@@ -120,21 +126,14 @@ public abstract class AbstractMessagingConfigurator
 		}
 	}
 
-	public void setDestinationSpecificDestinationEventListener(
-		Map<String, List<DestinationEventListener>> destinationEventListeners) {
-
-		_destinationSpecificEventListeners = destinationEventListeners;
-	}
-
 	public void setDestinations(List<Destination> destinations) {
 		_destinations = destinations;
 	}
 
-
 	public void setGlobalDestinationEventListeners(
-		List<DestinationEventListener> destinationEventListeners) {
+		List<DestinationEventListener> globalDestinationEventListeners) {
 
-		_globalDestinationEventListeners = destinationEventListeners;
+		_globalDestinationEventListeners = globalDestinationEventListeners;
 	}
 
 	public void setMessageListeners(
@@ -143,22 +142,32 @@ public abstract class AbstractMessagingConfigurator
 		_messageListeners = messageListeners;
 	}
 
-	public void setReplacementDestinations(List<Destination> destinations) {
-		_replacementDestinations = destinations;
+	public void setReplacementDestinations(
+		List<Destination> replacementDestinations) {
+
+		_replacementDestinations = replacementDestinations;
+	}
+
+	public void setSpecificDestinationEventListener(
+		Map<String, List<DestinationEventListener>>
+			specificDestinationEventListeners) {
+
+		_specificDestinationEventListeners = specificDestinationEventListeners;
 	}
 
 	protected abstract MessageBus getMessageBus();
+
 	protected abstract ClassLoader getOperatingClassloader();
 
 	private List<Destination> _destinations = new ArrayList<Destination>();
-	private Map<String, List<DestinationEventListener>>
-		_destinationSpecificEventListeners =
-		new HashMap<String, List<DestinationEventListener>>();
 	private List<DestinationEventListener> _globalDestinationEventListeners =
 		new ArrayList<DestinationEventListener>();
 	private Map<String, List<MessageListener>> _messageListeners  =
 		new HashMap<String, List<MessageListener>>();
 	private List<Destination> _replacementDestinations =
 		new ArrayList<Destination>();
+	private Map<String, List<DestinationEventListener>>
+		_specificDestinationEventListeners =
+			new HashMap<String, List<DestinationEventListener>>();
 
 }

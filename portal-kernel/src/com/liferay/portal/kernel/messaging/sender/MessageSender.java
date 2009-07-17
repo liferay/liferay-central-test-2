@@ -32,6 +32,6 @@ import com.liferay.portal.kernel.messaging.Message;
  */
 public interface MessageSender {
 
-	public void send(String destination, Message message);
+	public void send(String destinationName, Message message);
 
 }

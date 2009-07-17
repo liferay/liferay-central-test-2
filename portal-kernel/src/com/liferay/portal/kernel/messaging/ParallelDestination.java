@@ -49,15 +49,15 @@ public class ParallelDestination extends BaseDestination {
 	}
 
 	protected void dispatch(
-		Set<MessageListener> listeners, final Message message) {
+		Set<MessageListener> messageListeners, final Message message) {
 
 		ThreadPoolExecutor threadPoolExecutor = getThreadPoolExecutor();
 
-		for (final MessageListener listener : listeners) {
+		for (final MessageListener messageListener : messageListeners) {
 			Runnable runnable = new Runnable() {
 
 				public void run() {
-					listener.receive(message);
+					messageListener.receive(message);
 				}
 
 			};

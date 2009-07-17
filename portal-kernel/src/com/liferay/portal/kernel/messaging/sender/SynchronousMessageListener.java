@@ -61,14 +61,14 @@ public class SynchronousMessageListener implements MessageListener {
 	}
 
 	public Object send() throws MessageBusException {
-		String destination = _message.getDestination();
-		String responseDestination = _message.getResponseDestination();
+		String destinationName = _message.getDestinationName();
+		String responseDestinationName = _message.getResponseDestinationName();
 
-		_messageBus.registerMessageListener(responseDestination, this);
+		_messageBus.registerMessageListener(responseDestinationName, this);
 
 		try {
 			synchronized (this) {
-				_messageBus.sendMessage(destination, _message);
+				_messageBus.sendMessage(destinationName, _message);
 
 				wait(_timeout);
 
@@ -85,7 +85,8 @@ public class SynchronousMessageListener implements MessageListener {
 				"Message sending interrupted for: " + _message, ie);
 		}
 		finally {
-			_messageBus.unregisterMessageListener(responseDestination, this);
+			_messageBus.unregisterMessageListener(
+				responseDestinationName, this);
 		}
 	}
 
