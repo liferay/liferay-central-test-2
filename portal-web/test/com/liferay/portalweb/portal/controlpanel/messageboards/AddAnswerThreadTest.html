@@ -1,0 +1,74 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>AddAnswerThreadTest</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">AddAnswerThreadTest</td></tr>
+</thead><tbody>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Message Boards</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Message Boards</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//tr[4]/td[1]/a/b</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Waiting for an Answer</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Reply</td>
+	<td></td>
+</tr>
+<tr>
+	<td>typeKeys</td>
+	<td>_19_textArea</td>
+	<td>I like green because it is so natural.&nbsp;&nbsp;Obviousl.</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_19_textArea</td>
+	<td>I like green because it is so natural.&nbsp;&nbsp;Obviously.</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Save']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[5]/table/tbody/tr[1]/td[2]/div[1]/ul/li[1]/span/a[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Tést Catégory Editéd</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>link=Resolved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>link=Waiting for an Answer</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>
