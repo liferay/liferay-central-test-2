@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd"
+>
+
+	<!-- Messaging -->
+
+	<bean id="destination.workflow_definition" class="com.liferay.portal.kernel.messaging.ParallelDestination">
+		<constructor-arg index="0" type="java.lang.String" value="liferay/workflow_definition" />
+	</bean>
+	<bean id="destination.workflow_instance" class="com.liferay.portal.kernel.messaging.ParallelDestination">
+		<constructor-arg index="0" type="java.lang.String" value="liferay/workflow_instance" />
+	</bean>
+	<bean id="destination.workflow_task" class="com.liferay.portal.kernel.messaging.ParallelDestination">
+		<constructor-arg index="0" type="java.lang.String" value="liferay/workflow_task" />
+	</bean>
+	<bean id="messageListener.workflow_definition" class="com.liferay.portal.kernel.workflow.messaging.WorkflowMessageListener">
+		<constructor-arg index="0" ref="com.liferay.portal.kernel.workflow.proxy.WorkflowDefinitionManagerProxy" />
+		<constructor-arg index="1" type="java.lang.Class" value="com.liferay.portal.kernel.workflow.request.WorkflowDefinitionRequest" />
+		<constructor-arg index="2" ref="com.liferay.portal.kernel.messaging.MessageBus"/>
+	</bean>
+	<bean id="messageListener.workflow_instance" class="com.liferay.portal.kernel.workflow.messaging.WorkflowMessageListener">
+		<constructor-arg index="0" ref="com.liferay.portal.kernel.workflow.proxy.WorkflowInstanceManagerProxy" />
+		<constructor-arg index="1" type="java.lang.Class" value="com.liferay.portal.kernel.workflow.request.WorkflowInstanceRequest" />
+		<constructor-arg index="2" ref="com.liferay.portal.kernel.messaging.MessageBus"/>
+	</bean>
+	<bean id="messageListener.workflow_task" class="com.liferay.portal.kernel.workflow.messaging.WorkflowMessageListener">
+		<constructor-arg index="0" ref="com.liferay.portal.kernel.workflow.proxy.TaskInstanceManagerProxy" />
+		<constructor-arg index="1" type="java.lang.Class" value="com.liferay.portal.kernel.workflow.request.TaskInstanceRequest" />
+		<constructor-arg index="2" ref="com.liferay.portal.kernel.messaging.MessageBus"/>
+	</bean>
+	<bean id="com.liferay.portal.kernel.messaging.config.MessagingConfigurator" class="com.liferay.portal.kernel.messaging.config.DefaultMessagingConfigurator" init-method="init" destroy-method="destroy">
+		<property name="destinations">
+			<list>
+				<ref bean="destination.workflow_definition" />
+				<ref bean="destination.workflow_instance" />
+				<ref bean="destination.workflow_task" />
+			</list>
+		</property>
+		<property name="messageBus">
+			<ref bean="com.liferay.portal.kernel.messaging.MessageBus" />
+		</property>
+		<property name="messageListeners">
+			<map key-type="java.lang.String" value-type="java.util.List">
+				<entry key="liferay/workflow_definition">
+					<list value-type="com.liferay.portal.kernel.workflow.messaging.WorkflowMessageListener">
+						<ref bean="messageListener.workflow_definition" />
+					</list>
+				</entry>
+				<entry key="liferay/workflow_instance">
+					<list value-type="com.liferay.portal.kernel.workflow.messaging.WorkflowMessageListener">
+						<ref bean="messageListener.workflow_instance" />
+					</list>
+				</entry>
+				<entry key="liferay/workflow_task">
+					<list value-type="com.liferay.portal.kernel.workflow.messaging.WorkflowMessageListener">
+						<ref bean="messageListener.workflow_task" />
+					</list>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	
+	<!-- Workflow Proxy-->
+
+	<bean id="com.liferay.portal.kernel.workflow.proxy.WorkflowDefinitionManagerProxy" class="com.liferay.portal.kernel.workflow.proxy.WorkflowDefinitionManagerProxy">
+		<constructor-arg index="0">
+			<bean class="com.liferay.portal.kernel.messaging.sender.DefaultSingleDestinationSynchronousMessageSender">
+				<constructor-arg index="0" value="liferay/workflow_definition"/>
+				<constructor-arg index="1" ref="com.liferay.portal.kernel.messaging.sender.SynchronousMessageSender"/>
+			</bean>
+		</constructor-arg>
+	</bean>
+	<bean id="com.liferay.portal.kernel.workflow.proxy.WorkflowInstanceManagerProxy" class="com.liferay.portal.kernel.workflow.proxy.WorkflowInstanceManagerProxy">
+		<constructor-arg index="0">
+			<bean class="com.liferay.portal.kernel.messaging.sender.DefaultSingleDestinationSynchronousMessageSender">
+				<constructor-arg index="0" value="liferay/workflow_instance"/>
+				<constructor-arg index="1" ref="com.liferay.portal.kernel.messaging.sender.SynchronousMessageSender"/>
+			</bean>
+		</constructor-arg>
+	</bean>
+	<bean id="com.liferay.portal.kernel.workflow.proxy.TaskInstanceManagerProxy" class="com.liferay.portal.kernel.workflow.proxy.TaskInstanceManagerProxy">
+		<constructor-arg index="0">
+			<bean class="com.liferay.portal.kernel.messaging.sender.DefaultSingleDestinationSynchronousMessageSender">
+				<constructor-arg index="0" value="liferay/workflow_task"/>
+				<constructor-arg index="1" ref="com.liferay.portal.kernel.messaging.sender.SynchronousMessageSender"/>
+			</bean>
+		</constructor-arg>
+	</bean>
+
+	<!-- Workflow Mapper-->
+	<bean id="com.liferay.portal.workflow.WorkflowDefinitionMapperImpl" class="com.liferay.portal.workflow.WorkflowDefinitionMapperImpl" init-method="init"/>
+
+	<!-- User Credential -->
+	<bean id="com.liferay.portal.workflow.UserCredentialFactoryImpl" class="com.liferay.portal.workflow.UserCredentialFactoryImpl"/>
+
+	<!-- Workflow Util -->
+	<bean class="com.liferay.portal.kernel.workflow.WorkflowUtil">
+		<constructor-arg index="0" ref="com.liferay.portal.kernel.workflow.proxy.WorkflowDefinitionManagerProxy"/>
+		<constructor-arg index="1" ref="com.liferay.portal.kernel.workflow.proxy.WorkflowInstanceManagerProxy"/>
+		<constructor-arg index="2" ref="com.liferay.portal.kernel.workflow.proxy.TaskInstanceManagerProxy"/>
+		<constructor-arg index="3" ref="com.liferay.portal.workflow.WorkflowDefinitionMapperImpl"/>
+		<constructor-arg index="4" ref="com.liferay.portal.workflow.UserCredentialFactoryImpl"/>
+	</bean>
+
+</beans>
