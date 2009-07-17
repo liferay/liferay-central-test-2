@@ -156,7 +156,7 @@ public class BooleanQueryImpl implements BooleanQuery {
 		Query query = null;
 
 		if (like) {
-			query = new WildCardQueryImpl(
+			query = new WildcardQueryImpl(
 				new QueryTerm(field, String.valueOf(value)));
 		}
 		else {
@@ -186,7 +186,7 @@ public class BooleanQueryImpl implements BooleanQuery {
 		Query query = null;
 
 		if (like) {
-			query = new WildCardQueryImpl(
+			query = new WildcardQueryImpl(
 				new QueryTerm(field, String.valueOf(value)));
 		}
 		else {
