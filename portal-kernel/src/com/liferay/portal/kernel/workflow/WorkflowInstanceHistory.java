@@ -50,7 +50,7 @@ public interface WorkflowInstanceHistory {
 	 * order than the id (saving time). It will most likely be the same but if
 	 * parallel processing is done, the creation date and the saving id could
 	 * slightly be different.
-	 * 
+	 *
 	 * @return the id of the history entry
 	 */
 	public long getHistoryEntryId();

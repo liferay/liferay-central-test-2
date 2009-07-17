@@ -280,9 +280,9 @@ public interface WorkflowInstanceManager {
 	 * means the same as if the instance was never started. It also removes the
 	 * attached, persisted context information, but it does not rollback
 	 * anything that happened during the execution of the workflow.
-	 * 
+	 *
 	 * @param workflowInstanceId the identifier of the workflow instance to be
-	 *            removed
+	 *			removed
 	 * @throws WorkflowException is thrown, if removing failed
 	 */
 	public void removeWorkflowInstance(long workflowInstanceId)
@@ -296,7 +296,7 @@ public interface WorkflowInstanceManager {
 	 * engines do not allow to attach context information to the instance itself
 	 * but rather use them on a per method basis.
 	 * </p>
-	 * 
+	 *
 	 * <p>
 	 * Triggering the next activity could eventually execute some following
 	 * activities as well, if they are to be executed automatically (depending
@@ -304,20 +304,20 @@ public interface WorkflowInstanceManager {
 	 * next node or state which is not executable without user interaction or
 	 * any other signaling invocation.
 	 * </p>
-	 * 
+	 *
 	 * @param workflowInstanceId the id of the workflow instance being triggered
 	 * @param attributes the optional context information to be passed on to the
-	 *            engine in order to execute the next default activity, they
-	 *            will be merged into the existing context information map
+	 *			engine in order to execute the next default activity, they
+	 *			will be merged into the existing context information map
 	 * @param callingUserId the id of the calling user (see
-	 *            {@link WorkflowUtil#createUserCredential(long)} for more
-	 *            information)
+	 *			{@link WorkflowUtil#createUserCredential(long)} for more
+	 *			information)
 	 * @return the updated workflow instance information reflecting the current
-	 *         node (state) of the process after the next default activity has
-	 *         been executed
-	 * 
+	 *		 node (state) of the process after the next default activity has
+	 *		 been executed
+	 *
 	 * @throws WorkflowException is thrown, if triggering the next activity
-	 *             failed
+	 *			 failed
 	 */
 	public WorkflowInstanceInfo signalWorkflowInstance(
 			long workflowInstanceId, Map<String, Object> attributes,
@@ -332,7 +332,7 @@ public interface WorkflowInstanceManager {
 	 * info map. Some engines do not allow to attach context information to the
 	 * instance itself but rather use them on a per method basis.
 	 * </p>
-	 * 
+	 *
 	 * <p>
 	 * Triggering this activity could eventually execute some following
 	 * activities as well, if they are to be executed automatically (depending
@@ -340,25 +340,25 @@ public interface WorkflowInstanceManager {
 	 * next node or state which is not executable without user interaction or
 	 * any other signaling invocation.
 	 * </p>
-	 * 
+	 *
 	 * <p>
 	 * This method is usually used to execute a global activity which does not
 	 * depend on the current state nor does the activity change it afterwards.
 	 * </p>
-	 * 
+	 *
 	 * @param workflowInstanceId the id of the workflow instance being triggered
 	 * @param activityName the name of the activity to be triggered
 	 * @param attributes the optional context information to be passed on to the
-	 *            engine in order to execute the next default activity, they
-	 *            will be merged into the existing context information map
+	 *			engine in order to execute the next default activity, they
+	 *			will be merged into the existing context information map
 	 * @param callingUserId the id of the calling user (see
-	 *            {@link WorkflowUtil#createUserCredential(long)} for more
-	 *            information)
+	 *			{@link WorkflowUtil#createUserCredential(long)} for more
+	 *			information)
 	 * @return the updated workflow instance information reflecting the current
-	 *         node (state) of the process after the activity has been executed
+	 *		 node (state) of the process after the activity has been executed
 	 * @throws WorkflowException is thrown, if triggering the activity failed or
-	 *             the activity was not found or is not executable due to the
-	 *             current state of the instance
+	 *			 the activity was not found or is not executable due to the
+	 *			 current state of the instance
 	 */
 	public WorkflowInstanceInfo signalWorkflowInstance(
 			long workflowInstanceId, String activityName,
@@ -419,7 +419,8 @@ public interface WorkflowInstanceManager {
 	 */
 	public WorkflowInstanceInfo startWorkflowInstance(
 			String workflowDefinitionName, Integer workflowDefinitionVersion,
-			Map<String, Object> context, long callingUserId, String activityName)
+			Map<String, Object> context, long callingUserId,
+			String activityName)
 		throws WorkflowException;
 
 	/**

@@ -23,35 +23,14 @@
 package com.liferay.portal.kernel.workflow;
 
 /**
- * <a href="UserCredentialFactory.java.html"><b><i>View Source</i></b></a>
+ * <a href="CommonContextInfoNames.java.html"><b><i>View Source</i></b></a>
  *
- * <p>
- * This service provider interface is going to be injected into the
- * {@link WorkflowUtil} to create {@link UserCredential} objects based on the id
- * of the user to be represented.
- * </p>
- *
- * <p>
- * The portal kernel is not able to invoke the service layer, so the
- * implementation of the factory goes into the portal impl.
- * </p>
- *
- * @author Micha Kiener
+ * @author Shuyang Zhou
  *
  */
-public interface UserCredentialFactory {
+public interface CommonContextInfoNames {
 
-	/**
-	 * Creates a new user credential object based on the user given by its id.
-	 * The credential will represent that user, some attributes and its role
-	 * set.
-	 *
-	 * @param userId the id of the user to create a credential for
-	 * @return the credential representing the specified user
-	 * @throws WorkflowException is thrown, if creating the credential failed
-	 *			 due to a failure to load the user's information
-	 */
-	public UserCredential createCredential(long userId)
-		throws WorkflowException;
+	public String GROUP_ID = "GROUP_ID";
+	public String JOURNAL_ARTICLEID = "JOURNAL_ARTICLEID";
 
 }

@@ -22,8 +22,6 @@
 
 package com.liferay.portal.kernel.workflow;
 
-
-
 /**
  * <a href="WorkflowUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -45,7 +43,7 @@ public class WorkflowUtil {
 	 * its set of assigned roles and additional information requested through
 	 * the {@link UserCredentialFactory#createCredential(long)}.
 	 * </p>
-	 * 
+	 *
 	 * <p>
 	 * The user credential is most likely be used to represent the
 	 * <code>callingUserId</code> on a workflow API invocation to be passed on
@@ -55,12 +53,12 @@ public class WorkflowUtil {
 	 * taking the caller's user id to pass it on to the engine through a
 	 * {@link UserCredential}.
 	 * </p>
-	 * 
+	 *
 	 * @param userId the id of the user to create a credential object for
 	 * @return the user credential object acting as the container representing
-	 *         the set of roles and additional information for the given user
+	 *		 the set of roles and additional information for the given user
 	 * @throws WorkflowException if requesting the user information through the
-	 *             service failed
+	 *			 service failed
 	 */
 	public static UserCredential createUserCredential(long userId)
 		throws WorkflowException {
@@ -111,6 +109,19 @@ public class WorkflowUtil {
 		return _workflowInstanceManager;
 	}
 
+	public WorkflowUtil(
+		WorkflowDefinitionManager workflowDefinitionManager,
+		WorkflowInstanceManager workflowInstanceManager,
+		TaskInstanceManager taskInstanceManager,
+		WorkflowDefinitionMapper workflowDefinitionMapper,
+		UserCredentialFactory userCredentialFactory){
+
+		_workflowDefinitionManager=workflowDefinitionManager;
+		_workflowInstanceManager=workflowInstanceManager;
+		_taskInstanceManager=taskInstanceManager;
+		_workflowDefinitionMapper=workflowDefinitionMapper;
+		_userCredentialFactory=userCredentialFactory;
+	}
 	/**
 	 * @param taskInstanceManager the task manager to be made available through
 	 * this utility
@@ -119,10 +130,10 @@ public class WorkflowUtil {
 		TaskInstanceManager taskInstanceManager) {
 		_taskInstanceManager = taskInstanceManager;
 	}
-	
+
 	/**
 	 * @param factory the factory this utility will use to produce user
-	 *            credential objects based on a users id
+	 *			credential objects based on a users id
 	 */
 	public static void setUserCredentialFactory(UserCredentialFactory factory) {
 		_userCredentialFactory = factory;

@@ -78,6 +78,6 @@ public interface WorkflowDefinitionMapper {
 	 * <code>null</code> otherwise
 	 */
 	public String setWorkflowDefinitionMapping(
-		Class<?> domainClass, String workflowDefinitionId);
+		Class<?> domainClass, String workflowDefinitionName);
 
 }

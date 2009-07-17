@@ -1,13 +1,35 @@
+/**
+ * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
 
 package com.liferay.portal.kernel.workflow;
 
 import java.io.Serializable;
+
 import java.util.Locale;
 import java.util.Set;
 
 /**
  * <a href="UserCredential.java.html"><b><i>View Source</i></b></a>
- * 
+ *
  * <p>
  * The user credential is a container for a user's id and its roles and is used
  * as the credential towards the workflow engine. For convenience, it is just
@@ -18,14 +40,14 @@ import java.util.Set;
  * builder) in order to avoid the implementation or adapter having to call back
  * the portal for the set of roles of a user's id.
  * </p>
- * 
+ *
  * @author Micha Kiener
- * 
+ *
  */
 public class UserCredential implements Serializable {
 	/** The serialization id. */
 	private static final long serialVersionUID = -2223408262504608474L;
-	
+
 	/**
 	 * Default constructor, just used for de-serialization, never for
 	 * construction.
@@ -33,15 +55,15 @@ public class UserCredential implements Serializable {
 	public UserCredential() {
 
 	}
-	
+
 	/**
 	 * @return the id of the company the user represented by this credential
-	 *         belongs to
+	 *		 belongs to
 	 */
 	public long getCompanyId() {
 		return _companyId;
 	}
-	
+
 	/**
 	 * @return the email address of the user represented by this credential
 	 */
@@ -55,7 +77,7 @@ public class UserCredential implements Serializable {
 	public Locale getLocale() {
 		return _locale;
 	}
-	
+
 	/**
 	 * @return the login name of the user represented by this credential
 	 */
@@ -86,7 +108,7 @@ public class UserCredential implements Serializable {
 
 	/**
 	 * @param companyId the id of the company the user reflected by this
-	 *            credential should be assigned to
+	 *			credential should be assigned to
 	 */
 	public void setCompanyId(long companyId) {
 		_companyId = companyId;
@@ -94,7 +116,7 @@ public class UserCredential implements Serializable {
 
 	/**
 	 * @param emailAddress the email address of the user reflected by this
-	 *            credential
+	 *			credential
 	 */
 	public void setEmailAddress(String emailAddress) {
 		_emailAddress = emailAddress;
@@ -116,7 +138,7 @@ public class UserCredential implements Serializable {
 
 	/**
 	 * @param roleSet the set of roles the user of this credential is assigned
-	 *            to
+	 *			to
 	 */
 	public void setRoleSet(Set<Long> roleSet) {
 		_roleSet = roleSet;
@@ -124,7 +146,7 @@ public class UserCredential implements Serializable {
 
 	/**
 	 * @param screenName the screen name of the user reflected by this
-	 *            credential
+	 *			credential
 	 */
 	public void setScreenName(String screenName) {
 		_screenName = screenName;
@@ -144,4 +166,5 @@ public class UserCredential implements Serializable {
 	private Set<Long> _roleSet;
 	private String _screenName;
 	private long _userId;
+
 }
