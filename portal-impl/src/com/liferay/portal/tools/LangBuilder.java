@@ -54,14 +54,17 @@ public class LangBuilder {
 		InitUtil.initWithSpring();
 
 		if (args.length == 2) {
-			new LangBuilder(args[0], args[1]);
+			new LangBuilder(args[0], args[1], null);
+		}
+		else if (args.length == 3) {
+			new LangBuilder(args[0], args[1], args[2]);
 		}
 		else {
 			throw new IllegalArgumentException();
 		}
 	}
 
-	public LangBuilder(String langDir, String langFile) {
+	public LangBuilder(String langDir, String langFile, String langCode) {
 		try {
 			_langDir = langDir;
 			_langFile = langFile;
@@ -69,33 +72,38 @@ public class LangBuilder {
 			String content = _orderProps(
 				new File(_langDir + "/" + _langFile + ".properties"));
 
-			_createProps(content, "ar"); // Arabic
-			_createProps(content, "eu"); // Basque
-			_createProps(content, "bg"); // Bulgarian
-			_createProps(content, "ca"); // Catalan
-			_createProps(content, "zh_CN"); // Chinese (China)
-			_createProps(content, "zh_TW"); // Chinese (Taiwan)
-			_createProps(content, "cs"); // Czech
-			_createProps(content, "nl"); // Dutch
-			_createProps(content, "fi"); // Finnish
-			_createProps(content, "fr"); // French
-			_createProps(content, "de"); // German
-			_createProps(content, "el"); // Greek
-			_createProps(content, "hu"); // Hungarian
-			_createProps(content, "it"); // Italian
-			_createProps(content, "ja"); // Japanese
-			_createProps(content, "ko"); // Korean
-			_createProps(content, "nb"); // Norwegian Bokmål
-			_createProps(content, "fa"); // Persian
-			_createProps(content, "pl"); // Polish
-			_createProps(content, "pt_BR"); // Brazilian Portuguese
-			_createProps(content, "pt_PT"); // Portuguese
-			_createProps(content, "ru"); // Russian
-			_createProps(content, "sk"); // Slovak
-			_createProps(content, "es"); // Spanish
-			_createProps(content, "sv"); // Swedish
-			_createProps(content, "tr"); // Turkish
-			_createProps(content, "vi"); // Vietnamese
+			if (Validator.isNotNull(langCode) && !langCode.startsWith("$")) {
+				_createProps(content, langCode);
+			}
+			else {
+				_createProps(content, "ar"); // Arabic
+				_createProps(content, "eu"); // Basque
+				_createProps(content, "bg"); // Bulgarian
+				_createProps(content, "ca"); // Catalan
+				_createProps(content, "zh_CN"); // Chinese (China)
+				_createProps(content, "zh_TW"); // Chinese (Taiwan)
+				_createProps(content, "cs"); // Czech
+				_createProps(content, "nl"); // Dutch
+				_createProps(content, "fi"); // Finnish
+				_createProps(content, "fr"); // French
+				_createProps(content, "de"); // German
+				_createProps(content, "el"); // Greek
+				_createProps(content, "hu"); // Hungarian
+				_createProps(content, "it"); // Italian
+				_createProps(content, "ja"); // Japanese
+				_createProps(content, "ko"); // Korean
+				_createProps(content, "nb"); // Norwegian Bokmål
+				_createProps(content, "fa"); // Persian
+				_createProps(content, "pl"); // Polish
+				_createProps(content, "pt_BR"); // Brazilian Portuguese
+				_createProps(content, "pt_PT"); // Portuguese
+				_createProps(content, "ru"); // Russian
+				_createProps(content, "sk"); // Slovak
+				_createProps(content, "es"); // Spanish
+				_createProps(content, "sv"); // Swedish
+				_createProps(content, "tr"); // Turkish
+				_createProps(content, "vi"); // Vietnamese
+			}
 		}
 		catch (Exception e) {
 			e.printStackTrace();

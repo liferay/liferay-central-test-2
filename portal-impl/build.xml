@@ -297,7 +297,15 @@ ${exception.message}
 	</target>
 
 	<target name="build-lang-cmd">
-		<antcall target="build-lang-native2ascii-all" />
+		<if>
+			<isset property="lang.code" />
+			<then>
+				<antcall target="build-lang-native2ascii" />
+			</then>
+			<else>
+				<antcall target="build-lang-native2ascii-all" />
+			</else>
+		</if>
 
 		<java
 			classname="com.liferay.portal.tools.LangBuilder"
@@ -311,11 +319,20 @@ ${exception.message}
 			<jvmarg value="-Duser.language=en" />
 			<arg value="${lang.dir}" />
 			<arg value="${lang.file}" />
+			<arg value="${lang.code}" />
 		</java>
 
-		<antcall target="build-lang-native2ascii-all" />
+		<if>
+			<isset property="lang.code" />
+			<then>
+				<antcall target="build-lang-native2ascii" />
+			</then>
+			<else>
+				<antcall target="build-lang-native2ascii-all" />
 
-		<copy file="${lang.dir}/${lang.file}.properties" tofile="${lang.dir}/${lang.file}_en.properties" />
+				<copy file="${lang.dir}/${lang.file}.properties" tofile="${lang.dir}/${lang.file}_en.properties" />
+			</else>
+		</if>
 	</target>
 
 	<target name="build-lang-native2ascii">
